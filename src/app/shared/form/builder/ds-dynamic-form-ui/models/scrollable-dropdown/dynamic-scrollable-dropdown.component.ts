@@ -10,7 +10,7 @@ import {
   DynamicFormValidationService
 } from '@ng-dynamic-forms/core';
 
-import { AuthorityValue } from '../../../../../../core/integration/models/authority.value';
+import { AuthorityEntry } from '../../../../../../core/integration/models/authority-entry.model';
 import { DynamicScrollableDropdownModel } from './dynamic-scrollable-dropdown.model';
 import { PageInfo } from '../../../../../../core/shared/page-info.model';
 import { isNull, isUndefined } from '../../../../../empty.util';
@@ -74,7 +74,7 @@ export class DsDynamicScrollableDropdownComponent extends DynamicFormControlComp
       })
   }
 
-  inputFormatter = (x: AuthorityValue): string => x.display || x.value;
+  inputFormatter = (x: AuthorityEntry): string => x.display || x.value;
 
   openDropdown(sdRef: NgbDropdown) {
     if (!this.model.readOnly) {
@@ -83,7 +83,7 @@ export class DsDynamicScrollableDropdownComponent extends DynamicFormControlComp
   }
 
   onScroll() {
-    if (!this.loading && this.pageInfo.currentPage <= this.pageInfo.totalPages) {
+    if (!this.loading && this.pageInfo.currentPage < this.pageInfo.totalPages) {
       this.loading = true;
       this.searchOptions.currentPage++;
       this.authorityService.getEntriesByName(this.searchOptions).pipe(
@@ -116,14 +116,6 @@ export class DsDynamicScrollableDropdownComponent extends DynamicFormControlComp
     this.model.valueUpdates.next(event);
     this.change.emit(event);
     this.setCurrentValue(event);
-  }
-
-  onToggle(sdRef: NgbDropdown) {
-    if (sdRef.isOpen()) {
-      this.focus.emit(event);
-    } else {
-      this.blur.emit(event);
-    }
   }
 
   setCurrentValue(value): void {
