@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } fro
 import { FormGroup } from '@angular/forms';
 
 import { Observable, of as observableOf } from 'rxjs';
-import { catchError, first, tap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, first, tap } from 'rxjs/operators';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import {
   DynamicFormControlComponent,
@@ -71,13 +71,20 @@ export class DsDynamicScrollableDropdownComponent extends DynamicFormControlComp
         }
         this.pageInfo = object.pageInfo;
         this.cdr.detectChanges();
-      })
+      });
+
+    this.group.get(this.model.id).valueChanges.pipe(distinctUntilChanged())
+      .subscribe((value) => {
+        this.setCurrentValue(value);
+      });
+
   }
 
   inputFormatter = (x: AuthorityEntry): string => x.display || x.value;
 
   openDropdown(sdRef: NgbDropdown) {
     if (!this.model.readOnly) {
+      this.group.markAsUntouched();
       sdRef.open();
     }
   }
