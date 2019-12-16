@@ -907,6 +907,11 @@
 
   "item.page.collections": "Collections",
 
+  "item.page.context-menu.options": "Options",
+
+  "item.page.context-menu.options.edit-impact-pathway.btn": "Edit impact pathway",
+
+
   "item.page.date": "Date",
 
   "item.page.files": "Files",

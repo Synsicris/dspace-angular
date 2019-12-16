@@ -180,6 +180,8 @@ import { DsDynamicRelationInlineGroupComponent } from './form/builder/ds-dynamic
 import { MetadataRepresentationListComponent } from '../+item-page/simple/metadata-representation-list/metadata-representation-list.component';
 import { SelectableListItemControlComponent } from './object-collection/shared/selectable-list-item-control/selectable-list-item-control.component';
 import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
+import { ContextMenuComponent } from '../+item-page/context-menu/context-menu.component';
+import { ContextMenuEditImpactPathwayComponent } from '../+item-page/context-menu/edit-impact-pathway/edit-impact-pathway.component';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -342,7 +344,9 @@ const COMPONENTS = [
   AuthorityTreeviewComponent,
   MetadataRepresentationLoaderComponent,
   SelectableListItemControlComponent,
-  CreateImpactPathwayComponent
+  CreateImpactPathwayComponent,
+  ContextMenuComponent,
+  ContextMenuEditImpactPathwayComponent
 ];
 
 const ENTRY_COMPONENTS = [
