@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { filter, map, take } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
@@ -16,15 +16,21 @@ import { HttpClient } from '@angular/common/http';
 import { NormalizedObjectBuildService } from '../cache/builders/normalized-object-build.service';
 import { DSOChangeAnalyzer } from './dso-change-analyzer.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { FindAllOptions } from './request.models';
+import {FindListOptions, FindListRequest, GetRequest} from './request.models';
 import { RemoteData } from './remote-data';
 import { PaginatedList } from './paginated-list';
+import { configureRequest } from '../shared/operators';
+import { DSOResponseParsingService } from './dso-response-parsing.service';
+import { ResponseParsingService } from './parsing.service';
+import { GenericConstructor } from '../shared/generic-constructor';
+import { hasValue, isNotEmptyOperator } from '../../shared/empty.util';
+import { DSpaceObject } from '../shared/dspace-object.model';
+import { PaginatedSearchOptions } from '../../+search-page/paginated-search-options.model';
 import { SearchParam } from '../cache/models/search-param.model';
 
 @Injectable()
 export class CollectionDataService extends ComColDataService<Collection> {
   protected linkPath = 'collections';
-  protected forceBypassCache = false;
 
   constructor(
     protected requestService: RequestService,
@@ -44,11 +50,11 @@ export class CollectionDataService extends ComColDataService<Collection> {
   /**
    * Get all collections the user is authorized to submit to
    *
-   * @param options The [[FindAllOptions]] object
+   * @param options The [[FindListOptions]] object
    * @return Observable<RemoteData<PaginatedList<Collection>>>
    *    collection list
    */
-  getAuthorizedCollection(options: FindAllOptions = {}): Observable<RemoteData<PaginatedList<Collection>>> {
+  getAuthorizedCollection(options: FindListOptions = {}): Observable<RemoteData<PaginatedList<Collection>>> {
     const searchHref = 'findAuthorized';
 
     return this.searchBy(searchHref, options).pipe(
@@ -59,13 +65,13 @@ export class CollectionDataService extends ComColDataService<Collection> {
    * Get all collections the user is authorized to submit to, by community
    *
    * @param communityId The community id
-   * @param options The [[FindAllOptions]] object
+   * @param options The [[FindListOptions]] object
    * @return Observable<RemoteData<PaginatedList<Collection>>>
    *    collection list
    */
-  getAuthorizedCollectionByCommunity(communityId: string, options: FindAllOptions = {}): Observable<RemoteData<PaginatedList<Collection>>> {
+  getAuthorizedCollectionByCommunity(communityId: string, options: FindListOptions = {}): Observable<RemoteData<PaginatedList<Collection>>> {
     const searchHref = 'findAuthorizedByCommunity';
-    const newOptions = new FindAllOptions();
+    const newOptions = new FindListOptions();
     newOptions.searchParams = [new SearchParam('uuid', communityId)];
 
     return this.searchBy(searchHref, newOptions).pipe(
@@ -80,13 +86,61 @@ export class CollectionDataService extends ComColDataService<Collection> {
    */
   hasAuthorizedCollection(): Observable<boolean> {
     const searchHref = 'findAuthorized';
-    const options = new FindAllOptions();
+    const options = new FindListOptions();
     options.elementsPerPage = 1;
 
     return this.searchBy(searchHref, options).pipe(
       filter((collections: RemoteData<PaginatedList<Collection>>) => !collections.isResponsePending),
       take(1),
       map((collections: RemoteData<PaginatedList<Collection>>) => collections.payload.totalElements > 0)
+    );
+  }
+
+  /**
+   * Fetches the endpoint used for mapping items to a collection
+   * @param collectionId   The id of the collection to map items to
+   */
+  getMappedItemsEndpoint(collectionId): Observable<string> {
+    return this.halService.getEndpoint(this.linkPath).pipe(
+      map((endpoint: string) => this.getIDHref(endpoint, collectionId)),
+      map((endpoint: string) => `${endpoint}/mappedItems`)
+    );
+  }
+
+  /**
+   * Fetches a list of items that are mapped to a collection
+   * @param collectionId    The id of the collection
+   * @param searchOptions   Search options to sort or filter out items
+   */
+  getMappedItems(collectionId: string, searchOptions?: PaginatedSearchOptions): Observable<RemoteData<PaginatedList<DSpaceObject>>> {
+    const requestUuid = this.requestService.generateRequestId();
+
+    const href$ = this.getMappedItemsEndpoint(collectionId).pipe(
+      isNotEmptyOperator(),
+      distinctUntilChanged(),
+      map((endpoint: string) => hasValue(searchOptions) ? searchOptions.toRestUrl(endpoint) : endpoint)
+    );
+
+    href$.pipe(
+      map((endpoint: string) => {
+        const request = new GetRequest(requestUuid, endpoint);
+        return Object.assign(request, {
+          responseMsToLive: 0,
+          getResponseParser(): GenericConstructor<ResponseParsingService> {
+            return DSOResponseParsingService;
+          }
+        });
+      }),
+      configureRequest(this.requestService)
+    ).subscribe();
+
+    return this.rdbService.buildList(href$);
+  }
+
+  protected getFindByParentHref(parentUUID: string): Observable<string> {
+    return this.halService.getEndpoint('communities').pipe(
+      switchMap((communityEndpointHref: string) =>
+        this.halService.getEndpoint('collections', `${communityEndpointHref}/${parentUUID}`)),
     );
   }
 }

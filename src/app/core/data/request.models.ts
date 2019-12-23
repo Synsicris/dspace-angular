@@ -18,11 +18,19 @@ import { MetadataschemaParsingService } from './metadataschema-parsing.service';
 import { MetadatafieldParsingService } from './metadatafield-parsing.service';
 import { URLCombiner } from '../url-combiner/url-combiner';
 import { TaskResponseParsingService } from '../tasks/task-response-parsing.service';
+import { MappedCollectionsReponseParsingService } from './mapped-collections-reponse-parsing.service';
 
 /* tslint:disable:max-classes-per-file */
 
+// uuid and handle requests have separate endpoints
+export enum IdentifierType {
+  UUID ='uuid',
+  HANDLE = 'handle'
+}
+
 export abstract class RestRequest {
-  public responseMsToLive = 0;
+  public responseMsToLive = 10 * 1000;
+  public forceBypassCache = false;
   constructor(
     public uuid: string,
     public href: string,
@@ -48,7 +56,7 @@ export class GetRequest extends RestRequest {
     public uuid: string,
     public href: string,
     public body?: any,
-    public options?: HttpOptions,
+    public options?: HttpOptions
   )  {
     super(uuid, href, RestRequestMethod.GET, body, options)
   }
@@ -130,7 +138,7 @@ export class FindByIDRequest extends GetRequest {
   }
 }
 
-export class FindAllOptions {
+export class FindListOptions {
   scopeID?: string;
   elementsPerPage?: number;
   currentPage?: number;
@@ -139,11 +147,11 @@ export class FindAllOptions {
   startsWith?: string;
 }
 
-export class FindAllRequest extends GetRequest {
+export class FindListRequest extends GetRequest {
   constructor(
     uuid: string,
     href: string,
-    public body?: FindAllOptions,
+    public body?: FindListOptions,
   ) {
     super(uuid, href);
   }
@@ -182,6 +190,17 @@ export class BrowseEntriesRequest extends GetRequest {
 export class BrowseItemsRequest extends GetRequest {
   getResponseParser(): GenericConstructor<ResponseParsingService> {
     return BrowseItemsResponseParsingService;
+  }
+}
+
+/**
+ * Request to fetch the mapped collections of an item
+ */
+export class MappedCollectionsRequest extends GetRequest {
+  public responseMsToLive = 10000;
+
+  getResponseParser(): GenericConstructor<ResponseParsingService> {
+    return MappedCollectionsReponseParsingService;
   }
 }
 
@@ -281,6 +300,7 @@ export class UpdateMetadataFieldRequest extends PutRequest {
  * Class representing a submission HTTP GET request object
  */
 export class SubmissionRequest extends GetRequest {
+  forceBypassCache = true;
   constructor(uuid: string, href: string) {
     super(uuid, href);
   }
@@ -392,7 +412,7 @@ export class TaskDeleteRequest extends DeleteRequest {
 }
 
 export class MyDSpaceRequest extends GetRequest {
-  public responseMsToLive = 0;
+  public responseMsToLive = 10 * 1000;
 }
 
 export class RequestError extends Error {
