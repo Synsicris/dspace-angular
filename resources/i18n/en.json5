@@ -1592,6 +1592,10 @@
 
   "submission.sections.submit.progressbar.describe.patent_references": "Patent references",
 
+  "submission.sections.submit.progressbar.describe.patents": "Patente und Gebrauchsmuster",
+
+  "submission.sections.submit.progressbar.describe.patents.info": "Dokumentieren Sie hier geplante oder angemeldete Schutzrechte sowie deren geplante Verwertung. Die Angaben können während der Projektdurchführung jederzeit angepaßt werden.",
+
   "submission.sections.submit.progressbar.describe.patents_result": "Patent results",
 
   "submission.sections.submit.progressbar.describe.product": "Product basic information",
