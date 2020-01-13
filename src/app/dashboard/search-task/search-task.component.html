@@ -1,0 +1,32 @@
+<ng-template #rt let-r="result" let-t="term">
+  <ngb-highlight [result]="r.item.title" [term]="t"></ngb-highlight>
+</ng-template>
+
+<ipw-search-box [availableTaskList]="availableTaskList$"
+                [filteredTaskList]="filteredTaskList$"
+                [step]="step"></ipw-search-box>
+
+<div id="sidebar-object-list"
+     class="task-list d-flex flex-wrap p-3">
+  <ipw-impact-path-way-task *ngFor="let task of (filteredTaskList$ | async)"
+                            class="mb-sm-1 mb-lg-4 mr-sm-1 mr-lg-4"
+                            [data]="task"
+                            [multiSelectEnabled]="selectable"
+                            [selectable]="selectable"
+                            [targetStep]="step"
+                            (deselected)="onTaskDeselected($event)"
+                            (selected)="onTaskSelected($event)">
+  </ipw-impact-path-way-task>
+
+</div>
+
+<hr>
+
+<div class="form-group row">
+
+  <div class="col text-right">
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()"
+            [disabled]="!(selectedTasks.length > 0)">Add
+    </button>
+  </div>
+</div>

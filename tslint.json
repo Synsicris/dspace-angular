@@ -134,14 +134,14 @@
     "component-selector": [
       true,
       "element",
-      "ds",
+      ["ds", "ipw"],
       "kebab-case"
     ],
     "directive-class-suffix": true,
     "directive-selector": [
       true,
       "attribute",
-      "ds",
+      ["ds", "ipw"],
       "camelCase"
     ],
     "no-input-rename": true,

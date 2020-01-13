@@ -1,0 +1,12 @@
+<div class="sidebar-content ml-3">
+  <ipw-sidebar-panel #panelRef class="d-block mb-3" [sidebarPanelTitle]="'View Panel'" [startOpen]="false">
+    <ng-container ngProjectAs="panelContent">
+      <ipw-sidebar-panel-view [task$]="selectedTask$" [panel]="panelRef"></ipw-sidebar-panel-view>
+    </ng-container>
+  </ipw-sidebar-panel>
+  <ipw-sidebar-panel class="d-block" [sidebarPanelTitle]="'Object list'" [startOpen]="true">
+    <ng-container ngProjectAs="panelContent">
+      <ipw-sidebar-panel-list [availableTaskList]="availableTaskList$"></ipw-sidebar-panel-list>
+    </ng-container>
+  </ipw-sidebar-panel>
+</div>

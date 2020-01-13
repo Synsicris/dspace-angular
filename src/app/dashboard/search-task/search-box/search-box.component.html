@@ -1,0 +1,28 @@
+<ng-template #rt let-r="result" let-t="term">
+  <ngb-highlight [result]="r.item.title" [term]="t"></ngb-highlight>
+</ng-template>
+
+<div class="d-flex">
+
+
+  <div class="position-relative right-addon w-100 mr-3">
+    <i *ngIf="searching | async" class="fas fa-circle-notch fa-spin fa-2x fa-fw text-primary position-absolute mt-1 p-0" aria-hidden="true"></i>
+
+    <input id="search-task-input"
+           type="text"
+           class="form-control"
+           placeholder="Search for a task"
+           [(ngModel)]="searchModel"
+           [ngbTypeahead]="search"
+           [resultTemplate]="rt"
+           [inputFormatter]="formatter"
+           (selectItem)="onSelectItem($event)"/>
+  </div>
+
+  <ipw-search-filter-box [appliedFilters]="appliedFilters"
+                         [filterType]="'type'"
+                         [filterBoxEntries]="getAvailableEntriesByProperty('type')"
+                         (submitForm)="onFilterChange($event)"></ipw-search-filter-box>
+</div>
+
+<ipw-search-labels [appliedFilters]="appliedFilters" (removeFilter)="onFilterChange($event)"></ipw-search-labels>

@@ -1,0 +1,18 @@
+<div>
+  <div (click)="toggle()" class="sidebar-panel-name p-3 bg-light">
+    <h5 class="d-inline-block mb-0">{{sidebarPanelTitle}}</h5>
+    <div class="d-inline-block float-right">
+      <ng-content select="panelIconStatus"></ng-content>
+      <span class="sidebar-panel-toggle fas" [ngClass]="(isCollapsed() | async) ? 'fa-chevron-down' : 'fa-chevron-up'"></span>
+    </div>
+  </div>
+  <div [@slide]="(isCollapsed() | async) ? 'collapsed' : 'expanded'"
+       (@slide.start)="startSlide($event)"
+       (@slide.done)="finishSlide($event)"
+       class="sidebar-panel-wrapper"
+       [ngClass]="{'closed' : collapsed}">
+    <div class="sidebar-panel-content">
+      <ng-content select="panelContent"></ng-content>
+    </div>
+  </div>
+</div>
