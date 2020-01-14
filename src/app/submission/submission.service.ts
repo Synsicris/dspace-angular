@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { Observable, of as observableOf, Subscription, timer as observableTimer } from 'rxjs';
@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 
 import { submissionSelector, SubmissionState } from './submission.reducers';
-import { hasValue, isEmpty, isNotUndefined } from '../shared/empty.util';
+import { hasValue, isEmpty, isNotEmpty, isNotUndefined } from '../shared/empty.util';
 import {
   CancelSubmissionFormAction,
   ChangeSubmissionCollectionAction,
@@ -44,8 +44,8 @@ import { RemoteData } from '../core/data/remote-data';
 import { ErrorResponse } from '../core/cache/response.models';
 import { RemoteDataError } from '../core/data/remote-data-error';
 import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject } from '../shared/testing/utils';
-import { SearchService } from '../+search-page/search-service/search.service';
 import { RequestService } from '../core/data/request.service';
+import { SearchService } from '../core/shared/search/search.service';
 
 /**
  * A service that provides methods used in submission process.
@@ -63,6 +63,8 @@ export class SubmissionService {
    */
   protected timer$: Observable<any>;
 
+  private workspaceLinkPath = 'workspaceitems';
+  private workflowLinkPath = 'workflowitems';
   /**
    * Initialize service variables
    * @param {GlobalConfig} EnvConfig
@@ -105,7 +107,31 @@ export class SubmissionService {
    *    observable of SubmissionObject
    */
   createSubmission(): Observable<SubmissionObject> {
-    return this.restService.postToEndpoint('workspaceitems', {}).pipe(
+    return this.restService.postToEndpoint(this.workspaceLinkPath, {}).pipe(
+      map((workspaceitem: SubmissionObject[]) => workspaceitem[0] as SubmissionObject),
+      catchError(() => observableOf({} as SubmissionObject)))
+  }
+
+  /**
+   * Perform a REST call to create a new workspaceitem for a specified collection and return response
+   *
+   * @param collectionId
+   *    The collection id
+   * @return Observable<SubmissionObject>
+   *    observable of SubmissionObject
+   */
+  createSubmissionForCollection(collectionId: string): Observable<SubmissionObject> {
+    const paramsObj = Object.create({});
+
+    if (isNotEmpty(collectionId)) {
+      paramsObj.collection = collectionId;
+    }
+
+    const params = new HttpParams({fromObject: paramsObj});
+    const options: HttpOptions = Object.create({});
+    options.params = params;
+
+    return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, options).pipe(
       map((workspaceitem: SubmissionObject[]) => workspaceitem[0] as SubmissionObject),
       catchError(() => observableOf({} as SubmissionObject)))
   }
@@ -123,7 +149,7 @@ export class SubmissionService {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'text/uri-list');
     options.headers = headers;
-    return this.restService.postToEndpoint('workflowitems', selfUrl, null, options) as Observable<SubmissionObject[]>;
+    return this.restService.postToEndpoint(this.workflowLinkPath, selfUrl, null, options) as Observable<SubmissionObject[]>;
   }
 
   /**
@@ -317,9 +343,9 @@ export class SubmissionService {
   getSubmissionObjectLinkName(): string {
     const url = this.router.routerState.snapshot.url;
     if (url.startsWith('/workspaceitems') || url.startsWith('/submit')) {
-      return 'workspaceitems';
+      return this.workspaceLinkPath;
     } else if (url.startsWith('/workflowitems')) {
-      return 'workflowitems';
+      return this.workflowLinkPath;
     } else {
       return 'edititems';
     }
@@ -334,10 +360,10 @@ export class SubmissionService {
   getSubmissionScope(): SubmissionScopeType {
     let scope: SubmissionScopeType;
     switch (this.getSubmissionObjectLinkName()) {
-      case 'workspaceitems':
+      case this.workspaceLinkPath:
         scope = SubmissionScopeType.WorkspaceItem;
         break;
-      case 'workflowitems':
+      case this.workflowLinkPath:
         scope = SubmissionScopeType.WorkflowItem;
         break;
     }
