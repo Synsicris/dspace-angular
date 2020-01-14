@@ -42,7 +42,7 @@ export function getAdminModulePath() {
       { path: 'submit', loadChildren: './+submit-page/submit-page.module#SubmitPageModule' },
       { path: 'workspaceitems', loadChildren: './+workspaceitems-edit-page/workspaceitems-edit-page.module#WorkspaceitemsEditPageModule' },
       { path: 'workflowitems', loadChildren: './+workflowitems-edit-page/workflowitems-edit-page.module#WorkflowItemsEditPageModule' },
-      { path: 'impactpathway', loadChildren: './+dashboard-page/dashboard-page.module#DashboardPageModule' },
+      { path: 'impactpathway', loadChildren: './+impact-pathway-page/impact-pathway-page.module#ImpactPathwayPageModule' },
       { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
     ])
   ],
