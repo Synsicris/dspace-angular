@@ -195,5 +195,13 @@ module.exports = {
   },
   theme: {
     name: 'default',
+  },
+  impactPathway: {
+    impactPathwaysCollection: '2dc09d3e-d1ec-4f13-9ffc-fcac7b10b52d',
+    impactPathwayStepsCollection: 'c0ee6a8a-5dac-42bb-8a5c-c24239cc46a4',
+    impactPathwayTasksCollection: '23ab6982-b88e-43ac-ab2d-5bbd7225b104',
+    impactPathwaysFormSection: 'impact_pathway_form',
+    impactPathwayStepsFormSection: 'impact_pathway_step_form',
+    impactPathwayTasksFormSection: 'impact_pathway_task_form'
   }
 };
