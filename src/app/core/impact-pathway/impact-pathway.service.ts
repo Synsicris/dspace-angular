@@ -1,77 +1,89 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 
+import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
+import { catchError, combineLatest, flatMap, map, switchMap, take } from 'rxjs/operators';
 import { findIndex, uniqueId } from 'lodash';
 
-import { ImpactPathWay } from './models/impact-path-way.model';
-import { ImpactPathWayStep } from './models/impact-path-way-step.model';
-import { ImpactPathWayStepType } from './models/impact-path-way-step-type';
-import { ImpactPathWayTask } from './models/impact-path-way-task.model';
-import { ImpactPathWayTaskType } from './models/impact-path-way-task-type';
-import { ImpactPathWayTaskItem } from './models/impact-path-way-task-item.model';
-import { isEmpty, isUndefined } from '../../shared/empty.util';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { Observable } from 'rxjs/internal/Observable';
+import { ImpactPathway } from './models/impact-pathway.model';
+import { ImpactPathwayStep } from './models/impact-pathway-step.model';
+import { ImpactPathwayStepType } from './models/impact-pathway-step-type';
+import { ImpactPathwayTask } from './models/impact-pathway-task.model';
+import { ImpactPathwayTaskType } from './models/impact-pathway-task-type';
+import { ImpactPathwayTaskItem } from './models/impact-pathway-task-item.model';
+import { isEmpty, isNotNull, isUndefined } from '../../shared/empty.util';
 import { ExploitationPlanType } from './models/exploitation-plan-type';
-import { map } from 'rxjs/operators';
+import { ItemDataService } from '../data/item-data.service';
+import { SubmissionService } from '../../submission/submission.service';
+import { GLOBAL_CONFIG, GlobalConfig } from '../../../config';
+import { SubmissionObject } from '../submission/models/submission-object.model';
+import { SubmissionJsonPatchOperationsService } from '../submission/submission-json-patch-operations.service';
+import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
+import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 
 @Injectable()
 export class ImpactPathwayService {
 
   private _stepIds: string[] = ['sidebar-object-list'];
-  private _impactPathWays: ImpactPathWay[] = [];
-  private _impactPathWayTasks: ImpactPathWayTask[] = [];
-  private _impactPathWayTasks$: BehaviorSubject<ImpactPathWayTask[]> = new BehaviorSubject<ImpactPathWayTask[]>(null);
-  private _currentSelectedTask: BehaviorSubject<ImpactPathWayTask> = new BehaviorSubject<ImpactPathWayTask>(null);
-  private _stepTaskTypeMap: Map<ImpactPathWayStepType, ImpactPathWayTaskType[]> = new Map(
+  private _impactPathways: ImpactPathway[] = [];
+  private _impactPathwayTasks: ImpactPathwayTask[] = [];
+  private _impactPathwayTasks$: BehaviorSubject<ImpactPathwayTask[]> = new BehaviorSubject<ImpactPathwayTask[]>(null);
+  private _currentSelectedTask: BehaviorSubject<ImpactPathwayTask> = new BehaviorSubject<ImpactPathwayTask>(null);
+  private _stepTaskTypeMap: Map<ImpactPathwayStepType, ImpactPathwayTaskType[]> = new Map(
     [
-      [ImpactPathWayStepType.Type1, [ImpactPathWayTaskType.Type1]],
-      [ImpactPathWayStepType.Type2, [ImpactPathWayTaskType.Type2, ImpactPathWayTaskType.Type3]],
-      [ImpactPathWayStepType.Type3, [ImpactPathWayTaskType.Type2, ImpactPathWayTaskType.Type3]],
-      [ImpactPathWayStepType.Type4, [ImpactPathWayTaskType.Type4, ImpactPathWayTaskType.Type5]],
-      [ImpactPathWayStepType.Type5, [ImpactPathWayTaskType.Type4, ImpactPathWayTaskType.Type5]],
-      [ImpactPathWayStepType.Type6, [
-        ImpactPathWayTaskType.Type1,
-        ImpactPathWayTaskType.Type2,
-        ImpactPathWayTaskType.Type3,
-        ImpactPathWayTaskType.Type4,
-        ImpactPathWayTaskType.Type5,
-        ImpactPathWayTaskType.Type6]
+      [ImpactPathwayStepType.Type1, [ImpactPathwayTaskType.Type1]],
+      [ImpactPathwayStepType.Type2, [ImpactPathwayTaskType.Type2, ImpactPathwayTaskType.Type3]],
+      [ImpactPathwayStepType.Type3, [ImpactPathwayTaskType.Type2, ImpactPathwayTaskType.Type3]],
+      [ImpactPathwayStepType.Type4, [ImpactPathwayTaskType.Type4, ImpactPathwayTaskType.Type5]],
+      [ImpactPathwayStepType.Type5, [ImpactPathwayTaskType.Type4, ImpactPathwayTaskType.Type5]],
+      [ImpactPathwayStepType.Type6, [
+        ImpactPathwayTaskType.Type1,
+        ImpactPathwayTaskType.Type2,
+        ImpactPathwayTaskType.Type3,
+        ImpactPathwayTaskType.Type4,
+        ImpactPathwayTaskType.Type5,
+        ImpactPathwayTaskType.Type6]
       ],
     ]
   );
-  private _allStepType: ImpactPathWayTaskType[] = [
-    ImpactPathWayTaskType.Type1,
-    ImpactPathWayTaskType.Type2,
-    ImpactPathWayTaskType.Type3,
-    ImpactPathWayTaskType.Type4,
-    ImpactPathWayTaskType.Type5,
-    ImpactPathWayTaskType.Type6
+  private _allStepType: ImpactPathwayTaskType[] = [
+    ImpactPathwayTaskType.Type1,
+    ImpactPathwayTaskType.Type2,
+    ImpactPathwayTaskType.Type3,
+    ImpactPathwayTaskType.Type4,
+    ImpactPathwayTaskType.Type5,
+    ImpactPathwayTaskType.Type6
   ];
 
-  constructor() {
-    if (isEmpty(this._impactPathWays)) {
+  constructor(
+    @Inject(GLOBAL_CONFIG) protected config: GlobalConfig,
+    private itemService: ItemDataService,
+    private operationsBuilder: JsonPatchOperationsBuilder,
+    private operationsService: SubmissionJsonPatchOperationsService,
+    private submissionService: SubmissionService
+  ) {
+    if (isEmpty(this._impactPathways)) {
       /*      const count: number = Math.floor(Math.random() * 5);
 
             for (let i = 0; i <= count; i++) {
-              this._impactPathWays.push(this.initImpactPathWay(`impact-path-way-${i + 1}`));
+              this._impactPathways.push(this.initImpactPathway(`impact-path-way-${i + 1}`));
             }*/
-      this._impactPathWays.push(this.initImpactPathWay(`impact-path-way-1`));
+      this._impactPathways.push(this.initImpactPathway(`impact-path-way-1`));
     }
-    if (isEmpty(this._impactPathWayTasks)) {
+    if (isEmpty(this._impactPathwayTasks)) {
       const count: number = Math.floor(Math.random() * 15);
 
       for (let i = 0; i < 6; i++) {
         for (let j = 1; j < 4; j++) {
-          this._impactPathWayTasks.push(this.instantiateImpactPathWayTask(i, j));
+          this._impactPathwayTasks.push(this.instantiateImpactPathwayTask(i, j));
         }
       }
-      this._impactPathWayTasks$.next(this._impactPathWayTasks);
+      this._impactPathwayTasks$.next(this._impactPathwayTasks);
     }
 
     if (this._stepIds.length === 1) {
-      this._impactPathWays.forEach((impactPathWay: ImpactPathWay) => {
-        // this._stepIds.push(impactPathWay.mainStep.id);
-        impactPathWay.steps.forEach((step: ImpactPathWayStep) => {
+      this._impactPathways.forEach((impactPathway: ImpactPathway) => {
+        // this._stepIds.push(impactPathway.mainStep.id);
+        impactPathway.steps.forEach((step: ImpactPathwayStep) => {
           this._stepIds.push(step.id);
         });
       });
@@ -82,68 +94,68 @@ export class ImpactPathwayService {
     return this._impactPathWays;
   }
 
-  getImpactPathWayById(id: string): ImpactPathWay {
-    const index = findIndex(this._impactPathWays, { id });
-    return this._impactPathWays[index];
+  getImpactPathwayById(id: string): ImpactPathway {
+    const index = findIndex(this._impactPathways, { id });
+    return this._impactPathways[index];
   }
 
-  getAvailableImpactPathWayTasks(): Observable<ImpactPathWayTask[]> {
-    return this._impactPathWayTasks$;
+  getAvailableImpactPathwayTasks(): Observable<ImpactPathwayTask[]> {
+    return this._impactPathwayTasks$;
   }
 
-  getAvailableImpactPathWayTasksByStepType(stepType: ImpactPathWayStepType): Observable<ImpactPathWayTask[]> {
+  getAvailableImpactPathwayTasksByStepType(stepType: ImpactPathwayStepType): Observable<ImpactPathwayTask[]> {
     const typeList = this.getAvailableTaskTypeByStep(stepType);
-    return this._impactPathWayTasks$.pipe(
-      map((taskList: ImpactPathWayTask[]) => {
+    return this._impactPathwayTasks$.pipe(
+      map((taskList: ImpactPathwayTask[]) => {
         return taskList.filter(
-          (task: ImpactPathWayTask) => isEmpty(typeList) || typeList.includes(task.type)
+          (task: ImpactPathwayTask) => isEmpty(typeList) || typeList.includes(task.type)
         )
       })
     );
   }
 
-  getImpactPathWayStepById(id: string): ImpactPathWayStep {
-    const impactPathWays = this._impactPathWays
-      .filter((impactPathWay) => impactPathWay.hasStep(id));
+  getImpactPathwayStepById(id: string): ImpactPathwayStep {
+    const impactPathways = this._impactPathways
+      .filter((impactPathway) => impactPathway.hasStep(id));
 
-    const index = findIndex(impactPathWays[0].steps, { id });
+    const index = findIndex(impactPathways[0].steps, { id });
     if (index === -1) {
-      return impactPathWays[0].mainStep;
+      return impactPathways[0].mainStep;
     } else {
-      return impactPathWays[0].steps[index];
+      return impactPathways[0].steps[index];
     }
   }
 
-  getAvailableImpactPathWayStepIds(): string[] {
+  getAvailableImpactPathwayStepIds(): string[] {
     return this._stepIds;
   }
 
-  getAvailableTaskTypeByStep(stepType: ImpactPathWayStepType): ImpactPathWayTaskType[] {
+  getAvailableTaskTypeByStep(stepType: ImpactPathwayStepType): ImpactPathwayTaskType[] {
     return (isUndefined(stepType)) ? this._allStepType : this._stepTaskTypeMap.get(stepType);
   }
 
-  initImpactPathWay(title: string, steps: ImpactPathWayStep[] = []): ImpactPathWay {
-    const impacPathWayId = uniqueId();
-    return new ImpactPathWay(impacPathWayId, title, this.initImpactPathWaySteps(impacPathWayId))
+  initImpactPathway(title: string, steps: ImpactPathwayStep[] = []): ImpactPathway {
+    const impacPathwayId = uniqueId();
+    return new ImpactPathway(impacPathwayId, title, this.initImpactPathwaySteps(impacPathwayId))
   }
 
-  initImpactPathWaySteps(impacPathWayId: string): ImpactPathWayStep[] {
-    const steps: ImpactPathWayStep[] = [
-      new ImpactPathWayStep(impacPathWayId, ImpactPathWayStepType.Type1),
-      new ImpactPathWayStep(impacPathWayId, ImpactPathWayStepType.Type2),
-      new ImpactPathWayStep(impacPathWayId, ImpactPathWayStepType.Type3),
-      new ImpactPathWayStep(impacPathWayId, ImpactPathWayStepType.Type4),
-      new ImpactPathWayStep(impacPathWayId, ImpactPathWayStepType.Type5),
-      new ImpactPathWayStep(impacPathWayId, ImpactPathWayStepType.Type6),
+  initImpactPathwaySteps(impacPathwayId: string): ImpactPathwayStep[] {
+    const steps: ImpactPathwayStep[] = [
+      new ImpactPathwayStep(impacPathwayId, ImpactPathwayStepType.Type1),
+      new ImpactPathwayStep(impacPathwayId, ImpactPathwayStepType.Type2),
+      new ImpactPathwayStep(impacPathwayId, ImpactPathwayStepType.Type3),
+      new ImpactPathwayStep(impacPathwayId, ImpactPathwayStepType.Type4),
+      new ImpactPathwayStep(impacPathwayId, ImpactPathwayStepType.Type5),
+      new ImpactPathwayStep(impacPathwayId, ImpactPathwayStepType.Type6),
     ];
 
-    /*    steps.forEach((step: ImpactPathWayStep) => {
+    /*    steps.forEach((step: ImpactPathwayStep) => {
           const count: number = Math.floor(Math.random() * 4);
-          const tasks: ImpactPathWayTask[] = [];
+          const tasks: ImpactPathwayTask[] = [];
 
           this._stepIds.push(step.id);
           for (let i = 0; i < count; i++) {
-            tasks.push(this.instantiateImpactPathWayTask(step.id));
+            tasks.push(this.instantiateImpactPathwayTask(step.id));
           }
           step.tasks = tasks;
         });*/
@@ -151,95 +163,95 @@ export class ImpactPathwayService {
     return steps;
   }
 
-  instantiateImpactPathWayTask(index: number, innerIndex: number, parentId?: string): ImpactPathWayTask {
-    const type: ImpactPathWayTaskType = this.generateRandomTaskType(index);
-    const task = new ImpactPathWayTask(type, parentId);
+  instantiateImpactPathwayTask(index: number, innerIndex: number, parentId?: string): ImpactPathwayTask {
+    const type: ImpactPathwayTaskType = this.generateRandomTaskType(index);
+    const task = new ImpactPathwayTask(type, parentId);
     task.item.title = `${type.toString()} ${innerIndex}`;
 
     return task;
   }
 
-  generateRandomTaskType(index: number): ImpactPathWayTaskType {
-    let type: ImpactPathWayTaskType;
+  generateRandomTaskType(index: number): ImpactPathwayTaskType {
+    let type: ImpactPathwayTaskType;
 
     switch (index) {
       case 0:
-        type = ImpactPathWayTaskType.Type1;
+        type = ImpactPathwayTaskType.Type1;
         break;
       case 1:
-        type = ImpactPathWayTaskType.Type2;
+        type = ImpactPathwayTaskType.Type2;
         break;
       case 2:
-        type = ImpactPathWayTaskType.Type3;
+        type = ImpactPathwayTaskType.Type3;
         break;
       case 3:
-        type = ImpactPathWayTaskType.Type4;
+        type = ImpactPathwayTaskType.Type4;
         break;
       case 4:
-        type = ImpactPathWayTaskType.Type5;
+        type = ImpactPathwayTaskType.Type5;
         break;
       case 5:
-        type = ImpactPathWayTaskType.Type6;
+        type = ImpactPathwayTaskType.Type6;
         break;
     }
 
     return type;
   }
 
-  setSelectedTask(task: ImpactPathWayTask): void {
+  setSelectedTask(task: ImpactPathwayTask): void {
     this._currentSelectedTask.next(task);
   }
 
-  getSelectedTask(): Observable<ImpactPathWayTask> {
+  getSelectedTask(): Observable<ImpactPathwayTask> {
     return this._currentSelectedTask;
   }
 
-  removeTaskFromStep(task: ImpactPathWayTask): void {
-    const step = this.getImpactPathWayStepById(task.parentId);
+  removeTaskFromStep(task: ImpactPathwayTask): void {
+    const step = this.getImpactPathwayStepById(task.parentId);
     step.removeTask(task);
   }
 
-  createNewImpactPathWay() {
-    const index = this._impactPathWays.length + 1;
-    const impactPathWay = this.initImpactPathWay(`impact-path-way-${index}`);
-    this._impactPathWays.push(impactPathWay);
-    // this._stepIds.push(impactPathWay.mainStep.id);
-    impactPathWay.steps.forEach((step: ImpactPathWayStep) => {
+  createNewImpactPathway() {
+    const index = this._impactPathways.length + 1;
+    const impactPathway = this.initImpactPathway(`impact-path-way-${index}`);
+    this._impactPathways.push(impactPathway);
+    // this._stepIds.push(impactPathway.mainStep.id);
+    impactPathway.steps.forEach((step: ImpactPathwayStep) => {
       this._stepIds.push(step.id);
     });
   }
 
   createNewTask(
     stepId: string,
-    type: ImpactPathWayTaskType,
+    type: ImpactPathwayTaskType,
     title: string,
     description: string,
     exploitationPlans: ExploitationPlanType[],
     note: string): void {
 
-    const task: ImpactPathWayTask = new ImpactPathWayTask(type, null, null, description, title, exploitationPlans);
-    this._impactPathWayTasks.push(task);
-    this._impactPathWayTasks$.next(this._impactPathWayTasks);
-    const cloneItem: any = Object.assign(new ImpactPathWayTask(), task, {
-      item: new ImpactPathWayTaskItem(task.id, type, title, note)
+    const task: ImpactPathwayTask = new ImpactPathwayTask(type, null, null, description, title, exploitationPlans);
+    this._impactPathwayTasks.push(task);
+    this._impactPathwayTasks$.next(this._impactPathwayTasks);
+    const cloneItem: any = Object.assign(new ImpactPathwayTask(), task, {
+      item: new ImpactPathwayTaskItem(task.id, type, title, note)
     });
 
-    const step = this.getImpactPathWayStepById(stepId);
+    const step = this.getImpactPathwayStepById(stepId);
     step.addTask(cloneItem);
   }
 
-  cloneTask(task: ImpactPathWayTask, parentId: string): ImpactPathWayTask {
-    const cloneTask: ImpactPathWayTask = Object.assign(new ImpactPathWayTask(), task, {
-      item: new ImpactPathWayTaskItem(task.id, task.item.type, task.item.title)
+  cloneTask(task: ImpactPathwayTask, parentId: string): ImpactPathwayTask {
+    const cloneTask: ImpactPathwayTask = Object.assign(new ImpactPathwayTask(), task, {
+      item: new ImpactPathwayTaskItem(task.id, task.item.type, task.item.title)
     });
     cloneTask.parentId = parentId;
 
     return cloneTask
   }
 
-  addTaskToStep(task: ImpactPathWayTask) {
-    const cloneItem: any = Object.assign(new ImpactPathWayTask(), task, {
-      item: new ImpactPathWayTaskItem(task.id, task.item.type, task.item.title)
+  addTaskToStep(task: ImpactPathwayTask) {
+    const cloneItem: any = Object.assign(new ImpactPathwayTask(), task, {
+      item: new ImpactPathwayTaskItem(task.id, task.item.type, task.item.title)
     });
 
   }

@@ -15,10 +15,10 @@ import {
 } from 'rxjs/operators';
 import { NgbDropdownConfig, NgbTypeaheadConfig, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 
-import { ImpactPathWayStep } from '../../../core/impact-pathway/models/impact-path-way-step.model';
+import { ImpactPathwayStep } from '../../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayService } from '../../../core/impact-pathway/impact-pathway.service';
-import { ImpactPathWayTask } from '../../../core/impact-pathway/models/impact-path-way-task.model';
-import { ImpactPathWayTaskType } from '../../../core/impact-pathway/models/impact-path-way-task-type';
+import { ImpactPathwayTask } from '../../../core/impact-pathway/models/impact-pathway-task.model';
+import { ImpactPathwayTaskType } from '../../../core/impact-pathway/models/impact-pathway-task-type';
 import { FilterBoxEntry } from '../filter-box/filter-box.component';
 import { hasValue, isEmpty, isUndefined } from '../../../shared/empty.util';
 import { SearchTaskService } from '../search-task.service';
@@ -33,9 +33,9 @@ export class SearchBoxComponent implements OnDestroy {
   /**
    * Emits the currently active filters
    */
-  @Input() availableTaskList: Observable<ImpactPathWayTask[]>;
-  @Input() filteredTaskList: BehaviorSubject<ImpactPathWayTask[]> = new BehaviorSubject<ImpactPathWayTask[]>([]);
-  @Input() step: ImpactPathWayStep;
+  @Input() availableTaskList: Observable<ImpactPathwayTask[]>;
+  @Input() filteredTaskList: BehaviorSubject<ImpactPathwayTask[]> = new BehaviorSubject<ImpactPathwayTask[]>([]);
+  @Input() step: ImpactPathwayStep;
 
   public appliedFilters: BehaviorSubject<Map<string, any[]>> = new BehaviorSubject<Map<string, any[]>>(new Map());
   public searchModel: string;
@@ -57,7 +57,7 @@ export class SearchBoxComponent implements OnDestroy {
     dropdownConfig.autoClose = false;
   }
 
-  formatter = (x: ImpactPathWayTask) => {
+  formatter = (x: ImpactPathwayTask) => {
     return (typeof x === 'object') ? x.item.title : x
   };
 
@@ -69,7 +69,7 @@ export class SearchBoxComponent implements OnDestroy {
         if (term.length < 3) {
           if (isEmpty(this.searchModel)) {
             this.subs.push(this.searchTaskService.filterByTaskTitle(this.availableTaskList, '').pipe(first())
-              .subscribe((updatedList: ImpactPathWayTask[]) => {
+              .subscribe((updatedList: ImpactPathwayTask[]) => {
                 this.filteredTaskList.next(updatedList);
               })
             );
@@ -78,8 +78,8 @@ export class SearchBoxComponent implements OnDestroy {
         } else {
           this.searching.next(true);
           return this.filteredTaskList.pipe(
-            flatMap((tasks: ImpactPathWayTask[]) => tasks),
-            filter((task: ImpactPathWayTask) => task.item.title.toLowerCase().startsWith(term.toLocaleLowerCase())),
+            flatMap((tasks: ImpactPathwayTask[]) => tasks),
+            filter((task: ImpactPathwayTask) => task.item.title.toLowerCase().startsWith(term.toLocaleLowerCase())),
             scan((acc: any, value: any) => [...acc, ...value], []),
             startWith([])
           )
@@ -91,8 +91,8 @@ export class SearchBoxComponent implements OnDestroy {
 
   getAvailableEntriesByProperty(property?: string): FilterBoxEntry[] {
     const type = (isUndefined(this.step)) ? undefined : this.step.type;
-    const entries: ImpactPathWayTaskType[] = this.service.getAvailableTaskTypeByStep(type);
-    return entries.map((entry: ImpactPathWayTaskType) => (
+    const entries: ImpactPathwayTaskType[] = this.service.getAvailableTaskTypeByStep(type);
+    return entries.map((entry: ImpactPathwayTaskType) => (
       {
         value: entry,
         label: entry
@@ -103,7 +103,7 @@ export class SearchBoxComponent implements OnDestroy {
   onFilterChange(filterType: string) {
     this.searchModel = '';
     this.subs.push(this.searchTaskService.filterByTaskType(this.appliedFilters, this.availableTaskList, filterType).pipe(first())
-      .subscribe((updatedList: ImpactPathWayTask[]) => {
+      .subscribe((updatedList: ImpactPathwayTask[]) => {
         this.filteredTaskList.next(updatedList);
       })
     );
@@ -111,7 +111,7 @@ export class SearchBoxComponent implements OnDestroy {
 
   onSelectItem(event: NgbTypeaheadSelectItemEvent) {
     this.subs.push(this.searchTaskService.filterByTaskTitle(this.availableTaskList, event.item.item.title).pipe(first())
-      .subscribe((updatedList: ImpactPathWayTask[]) => {
+      .subscribe((updatedList: ImpactPathwayTask[]) => {
         this.filteredTaskList.next(updatedList);
       })
     );

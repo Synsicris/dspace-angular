@@ -5,8 +5,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-container.component';
-import { ImpactPathWayTask } from '../../../../core/impact-pathway/models/impact-path-way-task.model';
-import { ImpactPathWayStep } from '../../../../core/impact-pathway/models/impact-path-way-step.model';
+import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
+import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { cloneArrayItem } from '../../../utils/drag-utils';
 import { PaginationComponentOptions } from '../../../../shared/pagination/pagination-component-options.model';
 import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
@@ -22,9 +22,9 @@ import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-o
  */
 export class SidebarPanelListComponent extends DragAndDropContainerComponent implements OnInit {
 
-  @Input() availableTaskList: Observable<ImpactPathWayTask[]>;
+  @Input() availableTaskList: Observable<ImpactPathwayTask[]>;
 
-  public filteredTaskList$: BehaviorSubject<ImpactPathWayTask[]> = new BehaviorSubject<ImpactPathWayTask[]>([]);
+  public filteredTaskList$: BehaviorSubject<ImpactPathwayTask[]> = new BehaviorSubject<ImpactPathwayTask[]>([]);
   public hidePagerWhenSinglePage = true;
   public page = 1;
   public pageSize = 8;
@@ -37,7 +37,7 @@ export class SidebarPanelListComponent extends DragAndDropContainerComponent imp
 
     this.subs.push(this.availableTaskList.pipe(
       first()
-    ).subscribe((taskList: ImpactPathWayTask[]) => {
+    ).subscribe((taskList: ImpactPathwayTask[]) => {
       this.filteredTaskList$.next(taskList);
     }));
 
@@ -47,7 +47,7 @@ export class SidebarPanelListComponent extends DragAndDropContainerComponent imp
     this.sortOptions = new SortOptions('type', this.sortDirection);
   }
 
-  drop(event: CdkDragDrop<ImpactPathWayStep>) {
+  drop(event: CdkDragDrop<ImpactPathwayStep>) {
     if (event.previousContainer !== event.container) {
       const task: any = event.previousContainer.data[event.previousIndex];
       if (this.canDrop(event.container.data, task)) {
@@ -66,7 +66,7 @@ export class SidebarPanelListComponent extends DragAndDropContainerComponent imp
     return false;
   };
 
-  getSortList(tasks: ImpactPathWayTask[]) {
+  getSortList(tasks: ImpactPathwayTask[]) {
     return (this.sortDirection === SortDirection.DESC) ? tasks.reverse() : tasks
   }
 

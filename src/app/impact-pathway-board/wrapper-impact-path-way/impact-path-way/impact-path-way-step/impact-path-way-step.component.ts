@@ -3,11 +3,11 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ImpactPathWayStep } from '../../../../core/impact-pathway/models/impact-path-way-step.model';
+import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
 import { fadeInOut } from '../../../../shared/animations/fade';
 import { ImpactPathWayTaskModalComponent } from '../impact-path-way-task/impact-path-way-task-modal/impact-path-way-task-modal.component';
-import { ImpactPathWayTask } from '../../../../core/impact-pathway/models/impact-path-way-task.model';
+import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
 import { SearchTaskService } from '../../../search-task/search-task.service';
 import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-container.component';
 
@@ -21,7 +21,7 @@ import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-con
 })
 export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
 
-  @Input() public data: ImpactPathWayStep;
+  @Input() public data: ImpactPathwayStep;
   @Input() public isVertical = true;
 
   constructor(
@@ -33,7 +33,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
     super(service);
   }
 
-  drop(event: CdkDragDrop<ImpactPathWayStep>) {
+  drop(event: CdkDragDrop<ImpactPathwayStep>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data.tasks, event.previousIndex, event.currentIndex);
     } else {
@@ -60,7 +60,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
     modalRef.componentInstance.step = this.data;
   }
 
-  onTaskSelected($event: ImpactPathWayTask) {
+  onTaskSelected($event: ImpactPathwayTask) {
     this.service.setSelectedTask($event)
   }
 }

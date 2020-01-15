@@ -1,4 +1,4 @@
-export enum ImpactPathWayStepType {
+export enum ImpactPathwayStepType {
   Type1 = 'Input',
   Type2 = 'Processes of developing results',
   Type3 = 'Processes/Outputs for transfer and use',

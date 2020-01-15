@@ -3,10 +3,10 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 
-import { ImpactPathWayTask } from '../../../../core/impact-pathway/models/impact-path-way-task.model';
+import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
 import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
 import { hasValue, isNotEmpty, isNotUndefined } from '../../../../shared/empty.util';
-import { ImpactPathWayStep } from '../../../../core/impact-pathway/models/impact-path-way-step.model';
+import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
 
 @Component({
   selector: 'ipw-impact-path-way-task',
@@ -15,26 +15,26 @@ import { ImpactPathWayStep } from '../../../../core/impact-pathway/models/impact
 })
 export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
-  @Input() public data: ImpactPathWayTask;
+  @Input() public data: ImpactPathwayTask;
   @Input() public selectable: boolean;
   @Input() public multiSelectEnabled = false;
-  @Input() public targetStep: ImpactPathWayStep;
+  @Input() public targetStep: ImpactPathwayStep;
 
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private subs: Subscription[] = [];
 
-  @Output() public selected: EventEmitter<ImpactPathWayTask> = new EventEmitter();
-  @Output() public deselected: EventEmitter<ImpactPathWayTask> = new EventEmitter();
+  @Output() public selected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
+  @Output() public deselected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
 
   constructor(private service: ImpactPathwayService) {
   }
 
   ngOnInit(): void {
     this.service.getSelectedTask().pipe(
-      filter((task: ImpactPathWayTask) => !this.multiSelectEnabled && isNotEmpty(task) && this.isSelectable()),
-      map((task: ImpactPathWayTask) => task.item.id === this.data.item.id),
+      filter((task: ImpactPathwayTask) => !this.multiSelectEnabled && isNotEmpty(task) && this.isSelectable()),
+      map((task: ImpactPathwayTask) => task.item.id === this.data.item.id),
     ).subscribe((hasFocus) => this.selectStatus.next(hasFocus));
 
     this.subs.push(this.selectStatus.pipe(

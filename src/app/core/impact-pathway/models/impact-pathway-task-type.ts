@@ -1,4 +1,4 @@
-export enum ImpactPathWayTaskType {
+export enum ImpactPathwayTaskType {
   Type1 = 'Input',
   Type2 = 'Process',
   Type3 = 'Output',

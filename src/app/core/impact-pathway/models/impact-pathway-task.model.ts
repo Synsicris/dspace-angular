@@ -1,17 +1,17 @@
 import { uniqueId } from 'lodash';
 
-import { ImpactPathWayTaskItem } from './impact-path-way-task-item.model';
+import { ImpactPathwayTaskItem } from './impact-pathway-task-item.model';
 import { isEmpty, isNotEmpty } from '../../../shared/empty.util';
-import { ImpactPathWayTaskType } from './impact-path-way-task-type';
+import { ImpactPathwayTaskType } from './impact-pathway-task-type';
 import { ExploitationPlanType } from './exploitation-plan-type';
 
-export class ImpactPathWayTask {
+export class ImpactPathwayTask {
   public id: string;
 
   constructor(
-    public type: ImpactPathWayTaskType = null,
+    public type: ImpactPathwayTaskType = null,
     public parentId: string = null,
-    public item: ImpactPathWayTaskItem = null,
+    public item: ImpactPathwayTaskItem = null,
     public description = '',
     public title = '',
     private _exploitationPlans: ExploitationPlanType[] = []) {
@@ -22,7 +22,7 @@ export class ImpactPathWayTask {
     }
 
     if (isEmpty(this.item)) {
-      this.item = new ImpactPathWayTaskItem(this.id, this.type, title);
+      this.item = new ImpactPathwayTaskItem(this.id, this.type, title);
     }
   };
 

@@ -1,12 +1,12 @@
 import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
-import { ImpactPathWayStepType } from '../../../../core/impact-pathway/models/impact-path-way-step-type';
+import { ImpactPathwayStepType } from '../../../../core/impact-pathway/models/impact-pathway-step-type';
 
 @Directive({
   selector: '[ipwStepColor]'
 })
 export class StepColorDirective {
 
-  @Input() stepType: ImpactPathWayStepType;
+  @Input() stepType: ImpactPathwayStepType;
 
   constructor(
     private elem: ElementRef,
@@ -21,16 +21,16 @@ export class StepColorDirective {
   private getColorByType(): string {
     let color: string;
     switch (this.stepType) {
-      case ImpactPathWayStepType.Type1:
-      case ImpactPathWayStepType.Type6:
+      case ImpactPathwayStepType.Type1:
+      case ImpactPathwayStepType.Type6:
         color = 'bg-step-grey';
         break;
-      case ImpactPathWayStepType.Type2:
-      case ImpactPathWayStepType.Type3:
+      case ImpactPathwayStepType.Type2:
+      case ImpactPathwayStepType.Type3:
         color = 'bg-step-green';
         break;
-      case ImpactPathWayStepType.Type4:
-      case ImpactPathWayStepType.Type5:
+      case ImpactPathwayStepType.Type4:
+      case ImpactPathwayStepType.Type5:
         color = 'bg-step-orange';
         break;
 

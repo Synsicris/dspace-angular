@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ImpactPathWayTask } from '../../core/impact-pathway/models/impact-path-way-task.model';
+import { ImpactPathwayTask } from '../../core/impact-pathway/models/impact-pathway-task.model';
 import { isEmpty } from '../../shared/empty.util';
 
 @Injectable()
@@ -11,22 +11,22 @@ export class SearchTaskService {
 
   private _appliedFilters: BehaviorSubject<Map<string, any[]>> = new BehaviorSubject<Map<string, any[]>>(new Map());
 
-  filterByTaskTitle(availableTaskList: Observable<ImpactPathWayTask[]>, title: string) {
+  filterByTaskTitle(availableTaskList: Observable<ImpactPathwayTask[]>, title: string) {
     return availableTaskList.pipe(
-      map((taskList: ImpactPathWayTask[]) => {
+      map((taskList: ImpactPathwayTask[]) => {
         return taskList.filter(
-          (task: ImpactPathWayTask) => isEmpty(title) || task.item.title === title
+          (task: ImpactPathwayTask) => isEmpty(title) || task.item.title === title
         )
       })
     )
   }
 
-  filterByTaskType(appliedFilters: BehaviorSubject<Map<string, any[]>>, availableTaskList: Observable<ImpactPathWayTask[]>, filterType: string) {
+  filterByTaskType(appliedFilters: BehaviorSubject<Map<string, any[]>>, availableTaskList: Observable<ImpactPathwayTask[]>, filterType: string) {
     const typeList = appliedFilters.value.get(filterType);
     return availableTaskList.pipe(
-      map((taskList: ImpactPathWayTask[]) => {
+      map((taskList: ImpactPathwayTask[]) => {
         return taskList.filter(
-          (task: ImpactPathWayTask) => isEmpty(typeList) || typeList.includes(task.type)
+          (task: ImpactPathwayTask) => isEmpty(typeList) || typeList.includes(task.type)
         )
       })
     )

@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { ImpactPathWay } from '../../core/impact-pathway/models/impact-path-way.model';
-import { ImpactPathWayTask } from '../../core/impact-pathway/models/impact-path-way-task.model';
+import { ImpactPathway } from '../../core/impact-pathway/models/impact-pathway.model';
+import { ImpactPathwayTask } from '../../core/impact-pathway/models/impact-pathway-task.model';
 
 @Component({
   selector: 'ipw-sidebar-impact-path-way',
@@ -12,9 +12,9 @@ import { ImpactPathWayTask } from '../../core/impact-pathway/models/impact-path-
 })
 export class SidebarImpactPathWayComponent {
 
-  @Input() public impactPathWays: ImpactPathWay[];
-  @Input() public availableTaskList$: Observable<ImpactPathWayTask[]>;
-  @Input() public selectedTask$: Observable<ImpactPathWayTask>;
+  @Input() public impactPathWays: ImpactPathway[];
+  @Input() public availableTaskList$: Observable<ImpactPathwayTask[]>;
+  @Input() public selectedTask$: Observable<ImpactPathwayTask>;
 
   public activeIds: string[];
 

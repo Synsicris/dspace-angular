@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ImpactPathWayStep } from '../../../../../core/impact-pathway/models/impact-path-way-step.model';
-import { ImpactPathWayStepType } from '../../../../../core/impact-pathway/models/impact-path-way-step-type';
+import { ImpactPathwayStep } from '../../../../../core/impact-pathway/models/impact-pathway-step.model';
+import { ImpactPathwayStepType } from '../../../../../core/impact-pathway/models/impact-pathway-step-type';
 import { SearchTaskService } from '../../../../search-task/search-task.service';
 
 @Component({
@@ -13,9 +13,9 @@ import { SearchTaskService } from '../../../../search-task/search-task.service';
 })
 export class ImpactPathWayTaskModalComponent {
 
-  @Input() step: ImpactPathWayStep;
+  @Input() step: ImpactPathwayStep;
 
-  public impactPathWayStepType = ImpactPathWayStepType;
+  public impactPathWayStepType = ImpactPathwayStepType;
 
   constructor(public activeModal: NgbActiveModal, private searchTaskService: SearchTaskService) {
   }

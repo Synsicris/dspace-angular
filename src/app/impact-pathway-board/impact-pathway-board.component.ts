@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { ImpactPathWay } from '../core/impact-pathway/models/impact-path-way.model';
+import { ImpactPathway } from '../core/impact-pathway/models/impact-pathway.model';
 import { ImpactPathwayService } from '../core/impact-pathway/impact-pathway.service';
-import { ImpactPathWayTask } from '../core/impact-pathway/models/impact-path-way-task.model';
+import { ImpactPathwayTask } from '../core/impact-pathway/models/impact-pathway-task.model';
 
 @Component({
   selector: 'ipw-dashboard',
@@ -13,8 +13,8 @@ import { ImpactPathWayTask } from '../core/impact-pathway/models/impact-path-way
 })
 export class ImpactPathwayBoardComponent implements OnInit {
 
-  public impactPathWays: ImpactPathWay[];
-  public availableTaskList$: Observable<ImpactPathWayTask[]>;
+  public impactPathWays: ImpactPathway[];
+  public availableTaskList$: Observable<ImpactPathwayTask[]>;
 
   constructor(private dashboardService: ImpactPathwayService) {
   }
@@ -53,7 +53,7 @@ export class ImpactPathwayBoardComponent implements OnInit {
       new ImpactPathWay('impact-path-way-3', 'Impact path way 3', this.steps)
     ]*/
 
-  public getSelectedTask(): Observable<ImpactPathWayTask> {
+  public getSelectedTask(): Observable<ImpactPathwayTask> {
     return this.dashboardService.getSelectedTask();
   }
 }

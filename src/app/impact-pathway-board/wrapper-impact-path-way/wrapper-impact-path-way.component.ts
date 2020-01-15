@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ImpactPathWay } from '../../core/impact-pathway/models/impact-path-way.model';
+import { ImpactPathway } from '../../core/impact-pathway/models/impact-pathway.model';
 import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.s
 })
 export class WrapperImpactPathWayComponent {
 
-  @Input() public impactPathWays: ImpactPathWay[];
+  @Input() public impactPathWays: ImpactPathway[];
 
   public activeIds: string[];
 

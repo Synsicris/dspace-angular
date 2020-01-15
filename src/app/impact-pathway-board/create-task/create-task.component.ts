@@ -5,7 +5,7 @@ import { first } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicFormControlModel, DynamicSelectModel, DynamicSelectModelConfig } from '@ng-dynamic-forms/core';
 
-import { ImpactPathWayStep } from '../../core/impact-pathway/models/impact-path-way-step.model';
+import { ImpactPathwayStep } from '../../core/impact-pathway/models/impact-pathway-step.model';
 import {
   TASK_DESCRIPTION_CONFIG,
   TASK_TITLE_INPUT_CONFIG,
@@ -57,7 +57,7 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
   private exploitationPlanModel: DynamicRowArrayModel;
   private noteModel;
 
-  @Input() step: ImpactPathWayStep;
+  @Input() step: ImpactPathwayStep;
 
   constructor(public activeModal: NgbActiveModal, private cdr: ChangeDetectorRef, private service: ImpactPathwayService) {
   }

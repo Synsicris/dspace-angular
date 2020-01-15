@@ -4,9 +4,9 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { NgbActiveModal, NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 
-import { ImpactPathWayStep } from '../../core/impact-pathway/models/impact-path-way-step.model';
+import { ImpactPathwayStep } from '../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
-import { ImpactPathWayTask } from '../../core/impact-pathway/models/impact-path-way-task.model';
+import { ImpactPathwayTask } from '../../core/impact-pathway/models/impact-pathway-task.model';
 import { hasValue, isEmpty } from '../../shared/empty.util';
 
 @Component({
@@ -16,12 +16,12 @@ import { hasValue, isEmpty } from '../../shared/empty.util';
 })
 export class SearchTaskComponent implements OnInit, OnDestroy {
 
-  @Input() step: ImpactPathWayStep;
+  @Input() step: ImpactPathwayStep;
 
-  public availableTaskList$: Observable<ImpactPathWayTask[]>;
-  public filteredTaskList$: BehaviorSubject<ImpactPathWayTask[]> = new BehaviorSubject<ImpactPathWayTask[]>([]);
+  public availableTaskList$: Observable<ImpactPathwayTask[]>;
+  public filteredTaskList$: BehaviorSubject<ImpactPathwayTask[]> = new BehaviorSubject<ImpactPathwayTask[]>([]);
   public selectable = true;
-  public selectedTasks: ImpactPathWayTask[] = [];
+  public selectedTasks: ImpactPathwayTask[] = [];
 
   private subs: Subscription[] = [];
 
@@ -48,7 +48,7 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
 
     this.subs.push(this.availableTaskList$.pipe(
       first()
-    ).subscribe((taskList: ImpactPathWayTask[]) => {
+    ).subscribe((taskList: ImpactPathwayTask[]) => {
       this.filteredTaskList$.next(taskList);
     }));
   }
@@ -61,14 +61,14 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
     this.activeModal.close(true)
   }
 
-  onTaskDeselected(task: ImpactPathWayTask) {
+  onTaskDeselected(task: ImpactPathwayTask) {
     const index: number = this.selectedTasks.indexOf(task);
     if (index !== -1) {
       this.selectedTasks.splice(index, 1);
     }
   }
 
-  onTaskSelected(task: ImpactPathWayTask) {
+  onTaskSelected(task: ImpactPathwayTask) {
     this.selectedTasks.push(task)
   }
 

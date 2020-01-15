@@ -2,7 +2,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 
 import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 
-import { ImpactPathWay } from '../../../core/impact-pathway/models/impact-path-way.model';
+import { ImpactPathway } from '../../../core/impact-pathway/models/impact-pathway.model';
 
 @Component({
   selector: 'ipw-impact-path-way',
@@ -11,7 +11,7 @@ import { ImpactPathWay } from '../../../core/impact-pathway/models/impact-path-w
 })
 export class ImpactPathWayComponent {
 
-  @Input() public data: ImpactPathWay;
+  @Input() public data: ImpactPathway;
 
   @ViewChild('accordionRef') wrapper: NgbAccordion;
 

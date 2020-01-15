@@ -10,7 +10,7 @@ import {
 } from '@ng-dynamic-forms/core';
 import { remove } from 'lodash';
 
-import { ImpactPathWayTask } from '../../../../core/impact-pathway/models/impact-path-way-task.model';
+import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
 import {
   DynamicRowArrayModel,
   DynamicRowArrayModelConfig
@@ -119,9 +119,9 @@ export class SidebarPanelViewComponent implements OnInit {
 
   public displaySubmit = false;
 
-  private task: ImpactPathWayTask;
+  private task: ImpactPathwayTask;
 
-  @Input() task$: Observable<ImpactPathWayTask>;
+  @Input() task$: Observable<ImpactPathwayTask>;
   @Input() panel: SidebarPanelComponent;
 
   constructor(private formService: FormService) {
@@ -130,8 +130,8 @@ export class SidebarPanelViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.formId$ = this.task$.pipe(
-      filter((task: ImpactPathWayTask) => isNotEmpty(task)),
-      map((task: ImpactPathWayTask) => `form-${task.id}`)
+      filter((task: ImpactPathwayTask) => isNotEmpty(task)),
+      map((task: ImpactPathwayTask) => `form-${task.id}`)
     );
 
     this.formModel$ = this.initModel();
@@ -156,7 +156,7 @@ export class SidebarPanelViewComponent implements OnInit {
 
   private initModel(): Observable<any[]> {
     return this.task$.pipe(
-      map((task: ImpactPathWayTask) => {
+      map((task: ImpactPathwayTask) => {
         this.task = task;
         let arrayCounter = 0;
         const arrayConfig = Object.assign({} as DynamicRowArrayModelConfig, EXPLOITATION_PLAN_ARRAY_CONFIG);

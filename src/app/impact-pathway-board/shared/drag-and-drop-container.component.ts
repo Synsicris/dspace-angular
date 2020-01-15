@@ -3,10 +3,10 @@ import { CdkDragDrop, CdkDragEnter, CdkDragExit } from '@angular/cdk/drag-drop';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 
-import { ImpactPathWayTask } from '../../core/impact-pathway/models/impact-path-way-task.model';
+import { ImpactPathwayTask } from '../../core/impact-pathway/models/impact-pathway-task.model';
 import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
 import { hasValue } from '../../shared/empty.util';
-import { ImpactPathWayStep } from '../../core/impact-pathway/models/impact-path-way-step.model';
+import { ImpactPathwayStep } from '../../core/impact-pathway/models/impact-pathway-step.model';
 
 @Component({
   selector: 'ipw-drag-and-drop-container',
@@ -31,7 +31,7 @@ export class DragAndDropContainerComponent implements OnInit, OnDestroy {
     this.connectedToList = this.service.getAvailableImpactPathWayStepIds();
   }
 
-  canDrop(step: ImpactPathWayStep, task: ImpactPathWayTask) {
+  canDrop(step: ImpactPathwayStep, task: ImpactPathwayTask) {
     /*return !step.hasTask(task) && (this.service.getAvailableTaskTypeByStep(step.type).includes(task.type)) &&
       ((task.parentId && task.parentId !== step.id) || !task.parentId);*/
     return !step.hasTask(task) && (this.service.getAvailableTaskTypeByStep(step.type).includes(task.type));
@@ -44,7 +44,7 @@ export class DragAndDropContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  dragExited(task: CdkDragExit<ImpactPathWayTask>) {
+  dragExited(task: CdkDragExit<ImpactPathwayTask>) {
     this.isDragging.next(false);
     this.isDropAllowed.next(false);
   }
@@ -61,7 +61,7 @@ export class DragAndDropContainerComponent implements OnInit, OnDestroy {
     this.isDropAllowed.next(false);
   }
 
-  listDropped(task: CdkDragDrop<ImpactPathWayTask>) {
+  listDropped(task: CdkDragDrop<ImpactPathwayTask>) {
     this.isDragging.next(false);
     this.isDropAllowed.next(false);
   }
