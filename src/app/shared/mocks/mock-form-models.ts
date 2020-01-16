@@ -76,10 +76,13 @@ const rowArrayQualdropConfig = {
   id: 'row_QUALDROP_GROUP',
   initialCount: 1,
   notRepeatable: true,
+  required: false,
   showButtons: true,
   groupFactory: () => {
     return [MockQualdropModel];
-  }
+  },
+  submissionId: '1234',
+  metadataFields: []
 } as DynamicRowArrayModelConfig;
 
 export const MockRowArrayQualdropModel: DynamicRowArrayModel = new DynamicRowArrayModel(rowArrayQualdropConfig);

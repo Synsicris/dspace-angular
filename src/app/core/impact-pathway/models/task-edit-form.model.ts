@@ -54,5 +54,9 @@ export const TASK_NOTE_TEXTAREA_CONFIG: DsDynamicTextAreaModelConfig = {
   id: 'note',
   label: 'Note',
   placeholder: 'Note',
-  rows: 5
+  metadataFields: [],
+  repeatable: false,
+  required: true,
+  rows: 5,
+  submissionId: null,
 };

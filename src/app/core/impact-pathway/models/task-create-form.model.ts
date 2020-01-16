@@ -53,7 +53,10 @@ export const TASK_TYPE_DEFAULT_SELECT_OPTIONS = [
 export const TASK_TITLE_INPUT_CONFIG: DsDynamicInputModelConfig = {
   id: 'title',
   label: 'Title',
+  metadataFields: [],
+  repeatable: false,
   required: true,
+  submissionId: null,
   value: null,
   validators: {
     required: null
@@ -66,8 +69,11 @@ export const TASK_TITLE_INPUT_CONFIG: DsDynamicInputModelConfig = {
 export const TASK_DESCRIPTION_CONFIG: DsDynamicTextAreaModelConfig = {
   id: 'description',
   label: 'Description',
+  metadataFields: [],
+  repeatable: false,
   rows: 5,
   required: true,
+  submissionId: null,
   value: null,
   validators: {
     required: null
