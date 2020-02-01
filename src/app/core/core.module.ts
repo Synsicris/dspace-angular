@@ -75,6 +75,7 @@ import { MetadataschemaParsingService } from './data/metadataschema-parsing.serv
 import { FilteredDiscoveryPageResponseParsingService } from './data/filtered-discovery-page-response-parsing.service';
 import { CSSVariableService } from '../shared/sass-helper/sass-helper.service';
 import { MenuService } from '../shared/menu/menu.service';
+import { ItemJsonPatchOperationsService } from './data/item-json-patch-operations.service';
 import { SubmissionJsonPatchOperationsService } from './submission/submission-json-patch-operations.service';
 import { NormalizedObjectBuildService } from './cache/builders/normalized-object-build.service';
 import { DSOChangeAnalyzer } from './data/dso-change-analyzer.service';
@@ -217,6 +218,7 @@ const PROVIDERS = [
   SubmissionSectionsConfigService,
   SubmissionResponseParsingService,
   SubmissionJsonPatchOperationsService,
+  ItemJsonPatchOperationsService,
   JsonPatchOperationsBuilder,
   AuthorityService,
   IntegrationResponseParsingService,

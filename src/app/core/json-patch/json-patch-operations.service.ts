@@ -41,7 +41,7 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
    * @return Observable<ResponseDefinitionDomain>
    *    observable of response
    */
-  protected submitJsonPatchOperations(hrefObs: Observable<string>, resourceType: string, resourceId?: string): Observable<ResponseDefinitionDomain> {
+  protected submitJsonPatchOperations(hrefObs: Observable<string>, resourceType: string, resourceId?: string): Observable<RestResponse> {
     const requestId = this.requestService.generateRequestId();
     let startTransactionTime = null;
     const [patchRequest$, emptyRequest$] = partition((request: PatchRequestDefinition) => isNotEmpty(request.body))(hrefObs.pipe(
@@ -97,7 +97,6 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
             successResponse$.pipe(
               filter((response: PostPatchSuccessResponse) => isNotEmpty(response)),
               tap(() => this.store.dispatch(new CommitPatchOperationsAction(resourceType, resourceId))),
-              map((response: PostPatchSuccessResponse) => response.dataDefinition),
               distinctUntilChanged()));
         }))
     );
@@ -141,7 +140,9 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
       distinctUntilChanged(),
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId)));
 
-    return this.submitJsonPatchOperations(href$, resourceType);
+    return this.submitJsonPatchOperations(href$, resourceType).pipe(
+      map((response: PostPatchSuccessResponse) => response.dataDefinition)
+    );
   }
 
   /**
@@ -164,6 +165,8 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
       distinctUntilChanged(),
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId)));
 
-    return this.submitJsonPatchOperations(hrefObs, resourceType, resourceId);
+    return this.submitJsonPatchOperations(hrefObs, resourceType, resourceId).pipe(
+      map((response: PostPatchSuccessResponse) => response.dataDefinition)
+    );
   }
 }
