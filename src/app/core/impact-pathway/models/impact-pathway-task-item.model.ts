@@ -1,6 +1,4 @@
 import { uniqueId } from 'lodash';
-
-import { ImpactPathwayTaskType } from './impact-pathway-task-type';
 import { ExploitationPlanType } from './exploitation-plan-type';
 import { isEmpty } from '../../../shared/empty.util';
 
@@ -10,7 +8,7 @@ export class ImpactPathwayTaskItem {
 
   constructor(
     private _taskId: string,
-    private _type: ImpactPathwayTaskType,
+    private _type: string,
     private _title = '',
     private _note = '') {
 
@@ -42,11 +40,11 @@ export class ImpactPathwayTaskItem {
     this._taskId = value;
   }
 
-  get type(): ImpactPathwayTaskType {
+  get type(): string {
     return this._type;
   }
 
-  set type(value: ImpactPathwayTaskType) {
+  set type(value: string) {
     this._type = value;
   }
 

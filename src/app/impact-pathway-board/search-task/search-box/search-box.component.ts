@@ -58,7 +58,7 @@ export class SearchBoxComponent implements OnDestroy {
   }
 
   formatter = (x: ImpactPathwayTask) => {
-    return (typeof x === 'object') ? x.item.title : x
+    return (typeof x === 'object') ? x.title : x
   };
 
   search = (text$: Observable<string>) =>
@@ -79,7 +79,7 @@ export class SearchBoxComponent implements OnDestroy {
           this.searching.next(true);
           return this.filteredTaskList.pipe(
             flatMap((tasks: ImpactPathwayTask[]) => tasks),
-            filter((task: ImpactPathwayTask) => task.item.title.toLowerCase().startsWith(term.toLocaleLowerCase())),
+            filter((task: ImpactPathwayTask) => task.title.toLowerCase().startsWith(term.toLocaleLowerCase())),
             scan((acc: any, value: any) => [...acc, ...value], []),
             startWith([])
           )
@@ -91,7 +91,7 @@ export class SearchBoxComponent implements OnDestroy {
 
   getAvailableEntriesByProperty(property?: string): FilterBoxEntry[] {
     const type = (isUndefined(this.step)) ? undefined : this.step.type;
-    const entries: ImpactPathwayTaskType[] = this.service.getAvailableTaskTypeByStep(type);
+    const entries: string[] = this.service.getAvailableTaskTypeByStep(type);
     return entries.map((entry: ImpactPathwayTaskType) => (
       {
         value: entry,

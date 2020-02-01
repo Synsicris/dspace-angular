@@ -27,6 +27,18 @@ import {
 } from '../../core/impact-pathway/models/task-edit-form.model';
 import { ExploitationPlanType } from '../../core/impact-pathway/models/exploitation-plan-type';
 import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
+import { ImpactPathwayStepType } from '../../core/impact-pathway/models/impact-pathway-step-type';
+import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
+import { FormBuilderService } from '../../shared/form/builder/form-builder.service';
+import { FormService } from '../../shared/form/form.service';
+import { AppState } from '../../app.reducer';
+import { select, Store } from '@ngrx/store';
+import {
+  GenerateImpactPathwayTaskAction,
+  InitImpactPathwayAction
+} from '../../core/impact-pathway/impact-pathway.actions';
+import { of as observableOf } from 'rxjs/internal/observable/of';
+import { isImpactPathwayProcessingSelector } from '../../core/impact-pathway/selectors';
 
 @Component({
   selector: 'ipw-create-task',
@@ -34,6 +46,9 @@ import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.s
   templateUrl: './create-task.component.html'
 })
 export class CreateTaskComponent implements OnInit, OnDestroy {
+
+  @Input() step: ImpactPathwayStep;
+
   /**
    * The form id
    */
@@ -51,25 +66,44 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
 
   public displaySubmit = true;
 
+  public processing$: Observable<boolean> = observableOf(false);
+
   private typeModel: DynamicSelectModel<any>;
   private titleModel: DsDynamicInputModel;
   private descriptionModel: DsDynamicTextAreaModel;
   private exploitationPlanModel: DynamicRowArrayModel;
   private noteModel;
 
-  @Input() step: ImpactPathwayStep;
-
-  constructor(public activeModal: NgbActiveModal, private cdr: ChangeDetectorRef, private service: ImpactPathwayService) {
+  constructor(
+    public activeModal: NgbActiveModal,
+    private cdr: ChangeDetectorRef,
+    private formBuilderService: FormBuilderService,
+    private formService: FormService,
+    private impactPathwayService: ImpactPathwayService,
+    private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
-    this.formId = 'create-task';
+    this.processing$ = this.store.pipe(
+      select(isImpactPathwayProcessingSelector)
+    );
+
+    this.formId = this.formService.getUniqueId('create-task');
     this.initFormModel();
 
   }
 
   private initFormModel() {
-    this.initTypeModel();
+    this.impactPathwayService.getImpactPathwayStepTaskFormConfig(this.step.type)
+      .subscribe((formConfig: SubmissionFormModel) => {
+        this.formModel = this.formBuilderService.modelFromConfiguration(
+          null,
+          formConfig,
+          ''
+        )
+      });
+
+/*    this.initTypeModel();
     this.initTitleModel();
     this.initDescriptionModel();
     this.initExploitationPlanModel();
@@ -81,12 +115,12 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
       this.descriptionModel,
       this.exploitationPlanModel,
       this.noteModel
-    ];
+    ];*/
   }
 
   private initTypeModel(): void {
     const selectConfig = Object.assign({} as DynamicSelectModelConfig<any>, TASK_TYPE_SELECT_CONFIG);
-    const taskList = this.service.getAvailableTaskTypeByStep(this.step.type)
+    const taskList = this.impactPathwayService.getAvailableTaskTypeByStep(this.step.type)
       .map((taskType) => {
         return {
           label: taskType,
@@ -145,29 +179,29 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
 
   public createTask(data: Observable<any>) {
     data.pipe(first()).subscribe((formData) => {
+      console.log(formData);
+      const type = (formData['relationship.type']) ? formData['relationship.type'][0].value : null;
+      const title = (formData['dc.title']) ? formData['dc.title'][0].value : null;
+      const description = (formData['dc.description']) ? formData['dc.description'][0].value : null;
 
-      const type = (formData.type) ? formData.type[0].value : null;
-      const title = (formData.title) ? formData.title[0].value : null;
-      const description = (formData.description) ? formData.description[0].value : null;
+      // let exploitationPlans = [];
+      // if (formData.exploitationPlans) {
+      //   exploitationPlans = formData.exploitationPlans
+      //     .map((exploitationPlan) => exploitationPlan.value as ExploitationPlanType);
+      // }
+      //
+      // const note = (formData.note) ? formData.note[0].value : null;
+      //
 
-      let exploitationPlans = [];
-      if (formData.exploitationPlans) {
-        exploitationPlans = formData.exploitationPlans
-          .map((exploitationPlan) => exploitationPlan.value as ExploitationPlanType);
-      }
-
-      const note = (formData.note) ? formData.note[0].value : null;
-
-      this.service.createNewTask(
-        this.step.id,
-        type,
-        title,
-        description,
-        exploitationPlans,
-        note);
-
-      this.cdr.detectChanges();
-      this.activeModal.close(true);
+      this.store.dispatch(new GenerateImpactPathwayTaskAction(
+          this.step.parentId,
+          this.step.id,
+          type,
+          title,
+          description,
+          this.activeModal));
+      // this.cdr.detectChanges();
+      // this.activeModal.close(true);
     })
   }
 

@@ -11,12 +11,12 @@ import { ImpactPathway } from '../../../core/impact-pathway/models/impact-pathwa
 })
 export class ImpactPathWayComponent {
 
-  @Input() public data: ImpactPathway;
+  @Input() public impactPathway: ImpactPathway;
 
   @ViewChild('accordionRef') wrapper: NgbAccordion;
 
   isOpen() {
-    return this.wrapper && this.wrapper.activeIds.includes(this.data.id);
+    return this.wrapper && this.wrapper.activeIds.includes(this.impactPathway.id);
   }
 
 }

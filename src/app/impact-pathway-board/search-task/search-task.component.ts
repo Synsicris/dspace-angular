@@ -41,9 +41,9 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (isEmpty(this.step)) {
-      this.availableTaskList$ = this.service.getAvailableImpactPathWayTasks();
+      this.availableTaskList$ = this.service.getAvailableImpactPathwayTasks();
     } else {
-      this.availableTaskList$ = this.service.getAvailableImpactPathWayTasksByStepType(this.step.type);
+      this.availableTaskList$ = this.service.getAvailableImpactPathwayTasksByStepType(this.step.type);
     }
 
     this.subs.push(this.availableTaskList$.pipe(
@@ -55,7 +55,7 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.selectedTasks.forEach((task) => {
-      this.step.addTask(this.service.cloneTask(task, this.step.id));
+      // this.step.addTask(this.service.cloneTask(task, this.step.id));
     });
 
     this.activeModal.close(true)

@@ -8,7 +8,6 @@ import {
   DynamicSelectModelConfig,
   DynamicTextAreaModel
 } from '@ng-dynamic-forms/core';
-import { remove } from 'lodash';
 
 import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
 import {
@@ -23,7 +22,7 @@ import {
   EXPLOITATION_PLAN_SELECT_LAYOUT,
   TASK_NOTE_TEXTAREA_CONFIG
 } from '../../../../core/impact-pathway/models/task-edit-form.model';
-import { isEmpty, isNotEmpty, isNotUndefined } from '../../../../shared/empty.util';
+import { isNotEmpty, isNotUndefined } from '../../../../shared/empty.util';
 import {
   DsDynamicTextAreaModel,
   DsDynamicTextAreaModelConfig
@@ -31,7 +30,6 @@ import {
 import { FormService } from '../../../../shared/form/form.service';
 import { SidebarPanelComponent } from '../sidebar-panel.component';
 import { MetadataMap } from '../../../../core/shared/metadata.models';
-import { ExploitationPlanType } from '../../../../core/impact-pathway/models/exploitation-plan-type';
 
 @Component({
   selector: 'ipw-sidebar-panel-view',
@@ -140,17 +138,17 @@ export class SidebarPanelViewComponent implements OnInit {
       filter((formId) => isNotUndefined(formId)),
       flatMap((formId) => this.formService.getFormData(formId)))
       .subscribe((formData: MetadataMap) => {
-        let changes = false;
-        if (formData.exploitationPlans) {
-          this.task.exploitationPlans = formData.exploitationPlans
-            .map((exploitationPlan) => exploitationPlan.value as ExploitationPlanType);
-          changes = true;
-        }
-
-        if (formData.note) {
-          this.task.item.note = formData.note[0].value;
-          changes = true;
-        }
+        // let changes = false;
+        // if (formData.exploitationPlans) {
+        //   this.task.exploitationPlans = formData.exploitationPlans
+        //     .map((exploitationPlan) => exploitationPlan.value as ExploitationPlanType);
+        //   changes = true;
+        // }
+        //
+        // if (formData.note) {
+        //   this.task.item.note = formData.note[0].value;
+        //   changes = true;
+        // }
       })
   }
 
@@ -160,7 +158,7 @@ export class SidebarPanelViewComponent implements OnInit {
         this.task = task;
         let arrayCounter = 0;
         const arrayConfig = Object.assign({} as DynamicRowArrayModelConfig, EXPLOITATION_PLAN_ARRAY_CONFIG);
-        arrayConfig.initialCount = isEmpty(task.exploitationPlans) ? 1 : task.exploitationPlans.length;
+        // arrayConfig.initialCount = isEmpty(task.exploitationPlans) ? 1 : task.exploitationPlans.length;
         arrayConfig.groupFactory = () => {
           let model;
           const selectConfig = Object.assign({} as DynamicSelectModelConfig<any>, EXPLOITATION_PLAN_SELECT_CONFIG);
@@ -169,17 +167,17 @@ export class SidebarPanelViewComponent implements OnInit {
             model = new DynamicSelectModel(selectConfig, EXPLOITATION_PLAN_SELECT_LAYOUT);
             arrayCounter++;
           } else {
-            selectConfig.value = task.exploitationPlans[arrayCounter - 1] || null;
-            if (task.exploitationPlans.length > 0) {
-              let options = Array.from(EXPLOITATION_PLAN_DEFAULT_SELECT_OPTIONS);
-              task.exploitationPlans.forEach((value) => {
-                // removed already selected value from the list, expect itself
-                options = remove(options, (option) => {
-                  return option.value !== value || option.value === selectConfig.value;
-                });
-              });
-              selectConfig.options = options;
-            }
+            // selectConfig.value = task.exploitationPlans[arrayCounter - 1] || null;
+            // if (task.exploitationPlans.length > 0) {
+            //   let options = Array.from(EXPLOITATION_PLAN_DEFAULT_SELECT_OPTIONS);
+            //   task.exploitationPlans.forEach((value) => {
+            //     // removed already selected value from the list, expect itself
+            //     options = remove(options, (option) => {
+            //       return option.value !== value || option.value === selectConfig.value;
+            //     });
+            //   });
+            //   selectConfig.options = options;
+            // }
             model = new DynamicSelectModel(selectConfig, EXPLOITATION_PLAN_SELECT_LAYOUT);
             arrayCounter++;
           }
@@ -189,7 +187,7 @@ export class SidebarPanelViewComponent implements OnInit {
         const arrayModel = new DynamicRowArrayModel(arrayConfig, EXPLOITATION_PLAN_ARRAY_LAYOUT);
 
         const noteConfig = Object.assign({} as DsDynamicTextAreaModelConfig, TASK_NOTE_TEXTAREA_CONFIG);
-        noteConfig.value = task.item.note || null;
+        // noteConfig.value = task.item.note || null;
         const noteModel = new DsDynamicTextAreaModel(noteConfig);
 
         return [arrayModel, noteModel];

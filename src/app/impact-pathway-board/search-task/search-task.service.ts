@@ -15,7 +15,7 @@ export class SearchTaskService {
     return availableTaskList.pipe(
       map((taskList: ImpactPathwayTask[]) => {
         return taskList.filter(
-          (task: ImpactPathwayTask) => isEmpty(title) || task.item.title === title
+          (task: ImpactPathwayTask) => isEmpty(title) || task.title === title
         )
       })
     )

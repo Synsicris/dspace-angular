@@ -1,17 +1,36 @@
 import { Inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
-import { catchError, combineLatest, flatMap, map, switchMap, take } from 'rxjs/operators';
-import { findIndex, uniqueId } from 'lodash';
+import {
+  BehaviorSubject,
+  combineLatest as combineLatestObservable,
+  from as observableFrom,
+  Observable,
+  of as observableOf,
+  throwError as observableThrowError
+} from 'rxjs';
+import {
+  catchError,
+  concatMap,
+  delay,
+  distinctUntilChanged,
+  filter,
+  flatMap,
+  map,
+  reduce,
+  switchMap,
+  take,
+  tap
+} from 'rxjs/operators';
+import { select, Store } from '@ngrx/store';
+import { cloneDeep, findIndex } from 'lodash';
 
 import { ImpactPathway } from './models/impact-pathway.model';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
 import { ImpactPathwayStepType } from './models/impact-pathway-step-type';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
 import { ImpactPathwayTaskType } from './models/impact-pathway-task-type';
-import { ImpactPathwayTaskItem } from './models/impact-pathway-task-item.model';
-import { isEmpty, isNotNull, isUndefined } from '../../shared/empty.util';
-import { ExploitationPlanType } from './models/exploitation-plan-type';
+import { isEmpty, isNotEmpty, isUndefined } from '../../shared/empty.util';
 import { ItemDataService } from '../data/item-data.service';
 import { SubmissionService } from '../../submission/submission.service';
 import { GLOBAL_CONFIG, GlobalConfig } from '../../../config';
@@ -19,6 +38,22 @@ import { SubmissionObject } from '../submission/models/submission-object.model';
 import { SubmissionJsonPatchOperationsService } from '../submission/submission-json-patch-operations.service';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
+import { Item } from '../shared/item.model';
+import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
+import { RemoteData } from '../data/remote-data';
+import { AuthorityService } from '../integration/authority.service';
+import { IntegrationSearchOptions } from '../integration/models/integration-options.model';
+import { AuthorityEntry } from '../integration/models/authority-entry.model';
+import { MetadataValue, MetadatumViewModel } from '../shared/metadata.models';
+import { Metadata } from '../shared/metadata.utils';
+import { impactPathwayByIDSelector, impactPathwayObjectsSelector, isImpactPathwayLoadedSelector } from './selectors';
+import { AppState } from '../../app.reducer';
+import { ImpactPathwayEntries } from './impact-pathway.reducer';
+import { IntegrationData } from '../integration/integration-data';
+import { SubmissionFormsConfigService } from '../config/submission-forms-config.service';
+import { ConfigData } from '../config/config-data';
+import { SubmissionFormModel } from '../config/models/config-submission-form.model';
+import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
 
 @Injectable()
 export class ImpactPathwayService {
@@ -28,7 +63,7 @@ export class ImpactPathwayService {
   private _impactPathwayTasks: ImpactPathwayTask[] = [];
   private _impactPathwayTasks$: BehaviorSubject<ImpactPathwayTask[]> = new BehaviorSubject<ImpactPathwayTask[]>(null);
   private _currentSelectedTask: BehaviorSubject<ImpactPathwayTask> = new BehaviorSubject<ImpactPathwayTask>(null);
-  private _stepTaskTypeMap: Map<ImpactPathwayStepType, ImpactPathwayTaskType[]> = new Map(
+  private _stepTaskTypeMap: Map<string, ImpactPathwayTaskType[]> = new Map(
     [
       [ImpactPathwayStepType.Type1, [ImpactPathwayTaskType.Type1]],
       [ImpactPathwayStepType.Type2, [ImpactPathwayTaskType.Type2, ImpactPathwayTaskType.Type3]],
@@ -56,59 +91,272 @@ export class ImpactPathwayService {
 
   constructor(
     @Inject(GLOBAL_CONFIG) protected config: GlobalConfig,
+    private authorityService: AuthorityService,
+    private formConfigService: SubmissionFormsConfigService,
     private itemService: ItemDataService,
     private operationsBuilder: JsonPatchOperationsBuilder,
-    private operationsService: SubmissionJsonPatchOperationsService,
-    private submissionService: SubmissionService
+    private itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
+    private submissionJsonPatchOperationsService: SubmissionJsonPatchOperationsService,
+    private rdbService: RemoteDataBuildService,
+    private router: Router,
+    private submissionService: SubmissionService,
+    private store: Store<AppState>
   ) {
-    if (isEmpty(this._impactPathways)) {
-      /*      const count: number = Math.floor(Math.random() * 5);
+  }
 
-            for (let i = 0; i <= count; i++) {
-              this._impactPathways.push(this.initImpactPathway(`impact-path-way-${i + 1}`));
-            }*/
-      this._impactPathways.push(this.initImpactPathway(`impact-path-way-1`));
-    }
-    if (isEmpty(this._impactPathwayTasks)) {
-      const count: number = Math.floor(Math.random() * 15);
+  private createImpactPathwaySteps(): Observable<Item[]> {
+    return this.getImpactPathwayStepsCollection().pipe(
+      flatMap((collectionId) => {
+        const searchOptions = new IntegrationSearchOptions(
+          collectionId,
+          'impactpathway_step_type',
+          'impactpathway.step.type');
 
-      for (let i = 0; i < 6; i++) {
-        for (let j = 1; j < 4; j++) {
-          this._impactPathwayTasks.push(this.instantiateImpactPathwayTask(i, j));
+        return this.authorityService.getEntriesByName(searchOptions).pipe(
+          take(1),
+          flatMap((result: any) => observableFrom(result.payload)),
+          concatMap((stepType: any) => this.createImpactPathwayStepItem(collectionId, stepType.id, stepType.display)),
+          reduce((acc: any, value: any) => [...acc, ...value], []),
+        )
+      })
+    )
+  }
+
+  private createImpactPathwayStepWorkspaceItem(collectionId: string, impactPathwayStepType: string, impactPathwayStepName: string): Observable<SubmissionObject> {
+    return this.submissionService.createSubmissionForCollection(collectionId).pipe(
+      flatMap((submission: SubmissionObject) =>
+        (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
+      ),
+      (submission$) => combineLatestObservable(submission$, this.getImpactPathwayStepsFormSection()),
+      tap(([submission, sectionName]) => this.addPatchOperationForImpactPathwayStep(sectionName, impactPathwayStepType, impactPathwayStepName)),
+      delay(100),
+      flatMap(([submission, sectionName]) => this.executeSubmissionPatch(submission.uuid, sectionName))
+    )
+  }
+
+  private createImpactPathwayStepItem(collectionId: string, impactPathwayStepType: string, impactPathwayStepName: string): Observable<Item> {
+    return this.createImpactPathwayStepWorkspaceItem(collectionId, impactPathwayStepType, impactPathwayStepName).pipe(
+      flatMap((submission: SubmissionObject) => this.depositWorkspaceItem(submission)),
+      filter((rd: RemoteData<Item>) => rd.hasSucceeded && isNotEmpty(rd.payload)),
+      take(1),
+      map((rd: RemoteData<Item>) => rd.payload)
+    )
+  }
+
+  generateImpactPathwayItem(impactPathwayName: string): Observable<Item> {
+    return this.createImpactPathwayWorkspaceItem(impactPathwayName).pipe(
+      flatMap((submission: SubmissionObject) => {
+        console.log(submission);
+        return this.depositWorkspaceItem(submission)
+      }),
+      filter((rd: RemoteData<Item>) => rd.hasSucceeded && isNotEmpty(rd.payload)),
+      take(1),
+      map((rd: RemoteData<Item>) => rd.payload),
+      tap((item: Item) => console.log(item))
+    )
+  }
+
+  private createImpactPathwayWorkspaceItem(impactPathwayName: string): Observable<SubmissionObject> {
+    return this.getImpactPathwaysCollection().pipe(
+      flatMap((collectionId) => this.submissionService.createSubmissionForCollection(collectionId)),
+      flatMap((submission: SubmissionObject) =>
+        (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
+      ),
+      (submission$) => combineLatestObservable(submission$, this.getImpactPathwaysFormSection(), this.createImpactPathwaySteps()),
+      tap(([submission, sectionName, steps]) => this.addPatchOperationForImpactPathway(sectionName, impactPathwayName, steps)),
+      delay(100),
+      flatMap(([submission, sectionName]) => this.executeSubmissionPatch(submission.uuid, sectionName))
+    )
+  }
+
+  generateImpactPathwayTaskItem(parentStepId: string, taskType: string, title: string, description: string): Observable<Item> {
+    return this.createImpactPathwayTaskWorkspaceItem(taskType).pipe(
+      tap((submission) => console.log(submission)),
+      map((submission: SubmissionObject) => submission.item),
+      tap((taskItem: Item) => this.addPatchOperationForImpactPathwayTask(taskItem, parentStepId, taskType, title, description)),
+      delay(100),
+      flatMap((taskItem) => this.executeItemPatch(taskItem.uuid, 'metadata')),
+    )
+  }
+
+  private createImpactPathwayTaskWorkspaceItem(taskType: string): Observable<SubmissionObject> {
+    return this.getCollectionByEntity(taskType).pipe(
+      flatMap((collectionId) => this.submissionService.createSubmissionForCollection(collectionId)),
+      flatMap((submission: SubmissionObject) =>
+        (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
+      )
+    )
+  }
+
+  getImpactPathwayStepTaskFormConfig(stepType: string): Observable<SubmissionFormModel> {
+    const formName = `impact_pathway_${stepType}_task_form`;
+    return this.formConfigService.getConfigByName(formName).pipe(
+      map((configData: ConfigData) => configData.payload as SubmissionFormModel)
+    )
+  }
+
+  private addPatchOperationForImpactPathway(sectionName: string, impactPathwayName: string, steps: Item[]) {
+    const pathCombiner = new JsonPatchOperationPathCombiner('sections', sectionName);
+    this.operationsBuilder.add(pathCombiner.getPath('dc.title'), impactPathwayName, true, true);
+    this.operationsBuilder.add(pathCombiner.getPath('relationship.type'), 'impactpathway', true, true);
+    const stepValueList = steps.map((step: Item, index: number) => Object.assign(new AuthorityEntry(), {
+      id: step.id,
+      display: step.name,
+      value: step.id,
+    }));
+    this.operationsBuilder.add(pathCombiner.getPath('impactpathway.relation.step'), stepValueList, true, false);
+  }
+
+  private addPatchOperationForImpactPathwayStep(
+    sectionName: string,
+    impactPathwayStepType: string,
+    impactPathwayStepName: string
+  ) {
+    const pathCombiner = new JsonPatchOperationPathCombiner('sections', sectionName);
+    this.operationsBuilder.add(
+      pathCombiner.getPath('dc.title'),
+      impactPathwayStepName,
+      true,
+      true
+    );
+
+    this.operationsBuilder.add(
+      pathCombiner.getPath('impactpathway.step.type'),
+      impactPathwayStepType,
+      true,
+      true
+    );
+
+    this.operationsBuilder.add(
+      pathCombiner.getPath('relationship.type'),
+      'impactpathwaystep',
+      true,
+      true
+    );
+  }
+
+  private addPatchOperationForImpactPathwayTask(
+    taskItem: Item,
+    parentStepId: string,
+    taskType: string,
+    title: string,
+    description: string): void {
+
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    this.operationsBuilder.add(pathCombiner.getPath('dc.title'), title, true, true);
+    this.operationsBuilder.add(pathCombiner.getPath('dc.description'), description, true, true);
+    this.operationsBuilder.add(pathCombiner.getPath('relationship.type'), taskType, true, true);
+    const parentStep = {
+      value: parentStepId,
+      authority: parentStepId,
+      place: 0,
+      confidence: 600
+    };
+    this.operationsBuilder.add(pathCombiner.getPath('impactpathway.relation.step'), parentStep, true, true);
+  }
+
+  private executeSubmissionPatch(objectId: string, pathName: string): Observable<SubmissionObject> {
+    return this.submissionJsonPatchOperationsService.jsonPatchByResourceID(
+      'workspaceitems',
+      objectId,
+      'sections',
+      pathName).pipe(
+        take(1),
+        map((result: SubmissionObject[]) => (result[0] && isEmpty(result[0].errors)) ? result[0] : null),
+        catchError(() => observableOf(null))
+      )
+  }
+
+  private executeItemPatch(objectId: string, pathName: string): Observable<Item> {
+    return this.itemJsonPatchOperationsService.jsonPatchByResourceType(
+      'items',
+      objectId,
+      pathName).pipe(
+        tap((response) => console.log('resposnse executeItemPatch', response)),
+        filter((rd: RemoteData<Item>) => rd.hasSucceeded && isNotEmpty(rd.payload)),
+        take(1),
+        map((rd: RemoteData<Item>) => rd.payload),
+        tap((item: Item) => this.itemService.update(item)),
+        catchError(() => observableOf(null))
+      )
+  }
+
+  private depositWorkspaceItem(submission: SubmissionObject): Observable<RemoteData<Item>> {
+    return this.submissionService.depositSubmission(submission.self).pipe(
+      flatMap((submissions: SubmissionObject[]) => this.itemService.findById((submission.item as Item).id))
+    )
+  }
+
+  private getImpactPathwaysCollection(): Observable<string> {
+    return this.getCollectionByEntity('impactpathway');
+  }
+
+  private getImpactPathwaysFormSection(): Observable<string> {
+    return observableOf(this.config.impactPathway.impactPathwaysFormSection);
+  }
+
+  private getImpactPathwayStepsFormSection(): Observable<string> {
+    return observableOf(this.config.impactPathway.impactPathwayStepsFormSection);
+  }
+
+  private getImpactPathwayStepsCollection(): Observable<string> {
+    return this.getCollectionByEntity('impactpathwaystep');
+  }
+
+  private getCollectionByEntity(entityType: string): Observable<string> {
+    const searchOptions: IntegrationSearchOptions = new IntegrationSearchOptions(
+      '',
+      'impactpathway_entity_to_collection_map',
+      'impactpathway.entity.map',
+      entityType,
+      1,
+      1);
+    return this.authorityService.getEntryByValue(searchOptions).pipe(
+      map((result: IntegrationData) => {
+        if (result.pageInfo.totalElements !== 1) {
+          throw new Error(`No collection found for ${entityType}`);
         }
-      }
-      this._impactPathwayTasks$.next(this._impactPathwayTasks);
-    }
 
-    if (this._stepIds.length === 1) {
-      this._impactPathways.forEach((impactPathway: ImpactPathway) => {
-        // this._stepIds.push(impactPathway.mainStep.id);
-        impactPathway.steps.forEach((step: ImpactPathwayStep) => {
-          this._stepIds.push(step.id);
-        });
-      });
-    }
+        return (result.payload[0] as AuthorityEntry).display;
+      }),
+      tap((c) => console.log(c))
+    )
   }
 
-  getImpactPathWays(): ImpactPathWay[] {
-    return this._impactPathWays;
+  getImpactPathwayStepTitle(stepId: string): Observable<string> {
+    return this.itemService.findById(stepId).pipe(
+      filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
+      take(1),
+      map((itemRD: RemoteData<Item>) => itemRD.payload.name)
+    );
   }
 
-  getImpactPathwayById(id: string): ImpactPathway {
-    const index = findIndex(this._impactPathways, { id });
-    return this._impactPathways[index];
+  getImpactPathwayById(impactPathwayId: string): Observable<ImpactPathway> {
+    return this.store.pipe(
+      select(impactPathwayObjectsSelector),
+      map((entries: ImpactPathwayEntries) => entries[impactPathwayId]),
+      take(1)
+    );
+  }
+
+  getImpactPathways(): Observable<ImpactPathway[]> {
+    return this.store.pipe(
+      select(impactPathwayObjectsSelector),
+      map((entries: ImpactPathwayEntries) => Object.keys(entries).map((key) => entries[key])),
+      take(1)
+    );
   }
 
   getAvailableImpactPathwayTasks(): Observable<ImpactPathwayTask[]> {
     return this._impactPathwayTasks$;
   }
 
-  getAvailableImpactPathwayTasksByStepType(stepType: ImpactPathwayStepType): Observable<ImpactPathwayTask[]> {
+  getAvailableImpactPathwayTasksByStepType(stepType: string): Observable<ImpactPathwayTask[]> {
     const typeList = this.getAvailableTaskTypeByStep(stepType);
     return this._impactPathwayTasks$.pipe(
       map((taskList: ImpactPathwayTask[]) => {
         return taskList.filter(
-          (task: ImpactPathwayTask) => isEmpty(typeList) || typeList.includes(task.type)
+          (task: ImpactPathwayTask) => isEmpty(typeList) || typeList.includes(task.type as any)
         )
       })
     );
@@ -119,84 +367,72 @@ export class ImpactPathwayService {
       .filter((impactPathway) => impactPathway.hasStep(id));
 
     const index = findIndex(impactPathways[0].steps, { id });
-    if (index === -1) {
-      return impactPathways[0].mainStep;
-    } else {
-      return impactPathways[0].steps[index];
-    }
+    return impactPathways[0].steps[index]
+  }
+
+  getImpactPathwayTasksByStepId(impactPathwayId: string, impactPathwayStepId: string): Observable<ImpactPathwayTask[]> {
+    return this.store.pipe(
+      select(impactPathwayByIDSelector(impactPathwayId)),
+      map((impactPathway: ImpactPathway) => impactPathway.getStep(impactPathwayStepId).tasks)
+    );
   }
 
   getAvailableImpactPathwayStepIds(): string[] {
     return this._stepIds;
   }
 
-  getAvailableTaskTypeByStep(stepType: ImpactPathwayStepType): ImpactPathwayTaskType[] {
+  getAvailableTaskTypeByStep(stepType: string): string[] {
     return (isUndefined(stepType)) ? this._allStepType : this._stepTaskTypeMap.get(stepType);
   }
 
-  initImpactPathway(title: string, steps: ImpactPathwayStep[] = []): ImpactPathway {
-    const impacPathwayId = uniqueId();
-    return new ImpactPathway(impacPathwayId, title, this.initImpactPathwaySteps(impacPathwayId))
+  initImpactPathway(item: Item): Observable<ImpactPathway> {
+    return this.initImpactPathwaySteps(item.uuid, item).pipe(
+      map((steps: ImpactPathwayStep[]) => {
+        console.log(steps);
+        return new ImpactPathway(item.uuid, item.name, steps)
+      })
+    );
   }
 
-  initImpactPathwaySteps(impacPathwayId: string): ImpactPathwayStep[] {
-    const steps: ImpactPathwayStep[] = [
-      new ImpactPathwayStep(impacPathwayId, ImpactPathwayStepType.Type1),
-      new ImpactPathwayStep(impacPathwayId, ImpactPathwayStepType.Type2),
-      new ImpactPathwayStep(impacPathwayId, ImpactPathwayStepType.Type3),
-      new ImpactPathwayStep(impacPathwayId, ImpactPathwayStepType.Type4),
-      new ImpactPathwayStep(impacPathwayId, ImpactPathwayStepType.Type5),
-      new ImpactPathwayStep(impacPathwayId, ImpactPathwayStepType.Type6),
-    ];
-
-    /*    steps.forEach((step: ImpactPathwayStep) => {
-          const count: number = Math.floor(Math.random() * 4);
-          const tasks: ImpactPathwayTask[] = [];
-
-          this._stepIds.push(step.id);
-          for (let i = 0; i < count; i++) {
-            tasks.push(this.instantiateImpactPathwayTask(step.id));
-          }
-          step.tasks = tasks;
-        });*/
-
-    return steps;
+  initImpactPathwaySteps(impacPathwayId: string, parentItem: Item): Observable<ImpactPathwayStep[]> {
+    return observableFrom(Metadata.all(parentItem.metadata, 'impactpathway.relation.step')).pipe(
+      concatMap((step: MetadataValue) => this.itemService.findById(step.value).pipe(
+        filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
+        take(1),
+        map((rd: RemoteData<Item>) => rd.payload),
+        flatMap((stepItem: Item) => this.initImpactPathwayTasksFromStepItem(stepItem).pipe(
+          map((tasks: ImpactPathwayTask[]) => this.initImpactPathwayStep(impacPathwayId, stepItem, tasks))
+        )),
+        tap((m) => console.log('initImpactPathwayStep', m)),
+      )),
+      reduce((acc: any, value: any) => [...acc, ...value], []),
+      tap((m) => console.log('total$$$$$$$$$$$$$$$$$$$$$', m))
+    );
   }
 
-  instantiateImpactPathwayTask(index: number, innerIndex: number, parentId?: string): ImpactPathwayTask {
-    const type: ImpactPathwayTaskType = this.generateRandomTaskType(index);
-    const task = new ImpactPathwayTask(type, parentId);
-    task.item.title = `${type.toString()} ${innerIndex}`;
-
-    return task;
-  }
-
-  generateRandomTaskType(index: number): ImpactPathwayTaskType {
-    let type: ImpactPathwayTaskType;
-
-    switch (index) {
-      case 0:
-        type = ImpactPathwayTaskType.Type1;
-        break;
-      case 1:
-        type = ImpactPathwayTaskType.Type2;
-        break;
-      case 2:
-        type = ImpactPathwayTaskType.Type3;
-        break;
-      case 3:
-        type = ImpactPathwayTaskType.Type4;
-        break;
-      case 4:
-        type = ImpactPathwayTaskType.Type5;
-        break;
-      case 5:
-        type = ImpactPathwayTaskType.Type6;
-        break;
+  initImpactPathwayTasksFromStepItem(impacPathwayStepItem: Item): Observable<ImpactPathwayTask[]> {
+    const relatedTaskMetadata = Metadata.all(impacPathwayStepItem.metadata, 'impactpathway.relation.task');
+    if (isEmpty(relatedTaskMetadata)) {
+      return observableOf([])
+    } else {
+      return observableFrom(Metadata.all(impacPathwayStepItem.metadata, 'impactpathway.relation.task')).pipe(
+        concatMap((task: MetadataValue) => this.itemService.findById(task.value).pipe(
+          filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
+          take(1),
+          map((rd: RemoteData<Item>) => rd.payload),
+          map((item: Item) => this.initImpactPathwayTask(impacPathwayStepItem.id, item)),
+        )),
+        reduce((acc: any, value: any) => [...acc, ...value], [])
+      )
     }
-
-    return type;
   }
+  // instantiateImpactPathwayTask(index: number, innerIndex: number, parentId?: string): ImpactPathwayTask {
+  //   const type: ImpactPathwayTaskType = this.generateRandomTaskType(index);
+  //   const task = new ImpactPathwayTask(type, parentId);
+  //   task.item.title = `${type.toString()} ${innerIndex}`;
+  //
+  //   return task;
+  // }
 
   setSelectedTask(task: ImpactPathwayTask): void {
     this._currentSelectedTask.next(task);
@@ -211,36 +447,20 @@ export class ImpactPathwayService {
     step.removeTask(task);
   }
 
-  createNewImpactPathway() {
-    const index = this._impactPathways.length + 1;
-    const impactPathway = this.initImpactPathway(`impact-path-way-${index}`);
-    this._impactPathways.push(impactPathway);
-    // this._stepIds.push(impactPathway.mainStep.id);
-    impactPathway.steps.forEach((step: ImpactPathwayStep) => {
-      this._stepIds.push(step.id);
-    });
+  initImpactPathwayTask(stepId: string, taskItem: Item): ImpactPathwayTask {
+    const type = taskItem.firstMetadataValue('relationship.type');
+    const description = taskItem.firstMetadataValue('dc.description');
+
+    return new ImpactPathwayTask(taskItem.id, type, stepId, taskItem.name, description);
   }
 
-  createNewTask(
-    stepId: string,
-    type: ImpactPathwayTaskType,
-    title: string,
-    description: string,
-    exploitationPlans: ExploitationPlanType[],
-    note: string): void {
+  initImpactPathwayStep(parentId: string, stepItem: Item, tasks: ImpactPathwayTask[]): ImpactPathwayStep {
+    const type = stepItem.firstMetadataValue('impactpathway.step.type');
 
-    const task: ImpactPathwayTask = new ImpactPathwayTask(type, null, null, description, title, exploitationPlans);
-    this._impactPathwayTasks.push(task);
-    this._impactPathwayTasks$.next(this._impactPathwayTasks);
-    const cloneItem: any = Object.assign(new ImpactPathwayTask(), task, {
-      item: new ImpactPathwayTaskItem(task.id, type, title, note)
-    });
-
-    const step = this.getImpactPathwayStepById(stepId);
-    step.addTask(cloneItem);
+    return new ImpactPathwayStep(parentId, stepItem.id, type, stepItem.name, tasks);
   }
 
-  cloneTask(task: ImpactPathwayTask, parentId: string): ImpactPathwayTask {
+/*  cloneTask(task: ImpactPathwayTask, parentId: string): ImpactPathwayTask {
     const cloneTask: ImpactPathwayTask = Object.assign(new ImpactPathwayTask(), task, {
       item: new ImpactPathwayTaskItem(task.id, task.item.type, task.item.title)
     });
@@ -248,11 +468,62 @@ export class ImpactPathwayService {
 
     return cloneTask
   }
+*/
 
-  addTaskToStep(task: ImpactPathwayTask) {
-    const cloneItem: any = Object.assign(new ImpactPathwayTask(), task, {
-      item: new ImpactPathwayTaskItem(task.id, task.item.type, task.item.title)
-    });
+  addTaskToStep(stepId: string, taskItem: Item): Observable<Item> {
+    console.log('addTaskToStep ', stepId, taskItem);
+    return this.itemService.findById(stepId).pipe(
+      tap((i) => console.log('addTaskToStep findById', i)),
+      filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
+      take(1),
+      map((itemRD: RemoteData<Item>) => itemRD.payload),
+      tap((stepItem: Item) => {
+        console.log('addTaskToStep stepItem', stepItem);
+        const stepTasks: MetadataValue[] = stepItem.findMetadataSortedByPlace('impactpathway.relation.task');
+        const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+        const taskToAdd = {
+          value: taskItem.uuid,
+          authority: taskItem.uuid,
+          place: stepTasks.length,
+          confidence: 600
+        };
+        const path = isEmpty(stepTasks) ? pathCombiner.getPath('impactpathway.relation.task')
+          : pathCombiner.getPath(['impactpathway.relation.task', stepTasks.length.toString()]);
+        this.operationsBuilder.add(
+          path,
+          taskToAdd,
+          isEmpty(stepTasks),
+          true);
+      }),
+      delay(100),
+      flatMap((stepItem: Item) => this.executeItemPatch(stepItem.uuid, 'metadata'))
+    )
 
+  }
+
+  isImpactPathwayLoaded(): Observable<boolean> {
+    return this.store.pipe(
+      select(isImpactPathwayLoadedSelector),
+      distinctUntilChanged()
+    );
+  }
+
+  isImpactPathwayLoadedById(impacPathwayId: string): Observable<boolean> {
+    const isLoaded$: Observable<boolean> = this.store.pipe(
+      select(isImpactPathwayLoadedSelector)
+    );
+
+    const impactPathWay$: Observable<ImpactPathway> = this.store.pipe(
+      select(impactPathwayByIDSelector(impacPathwayId))
+    );
+
+    return combineLatestObservable(isLoaded$, impactPathWay$).pipe(
+      map(([isLoaded, impactPathway]) => isLoaded && isNotEmpty(impactPathway)),
+      take(1)
+    )
+  }
+
+  redirectToEditPage(impacPathwayId: string) {
+    this.router.navigate(['/impactpathway', impacPathwayId, 'edit']);
   }
 }

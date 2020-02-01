@@ -10,7 +10,6 @@ import { WrapperImpactPathWayComponent } from './wrapper-impact-path-way/wrapper
 import { ImpactPathWayStepComponent } from './wrapper-impact-path-way/impact-path-way/impact-path-way-step/impact-path-way-step.component';
 import { ImpactPathWayTaskComponent } from './wrapper-impact-path-way/impact-path-way/impact-path-way-task/impact-path-way-task.component';
 import { TaskColorDirective } from './wrapper-impact-path-way/impact-path-way/impact-path-way-task/task.directive';
-import { ImpactPathwayService } from '../core/impact-pathway/impact-pathway.service';
 import { SidebarImpactPathWayComponent } from './sidebar-impact-path-way/sidebar-impact-path-way.component';
 import { SidebarPanelComponent } from './sidebar-impact-path-way/sidebar-panel/sidebar-panel.component';
 import { SidebarPanelListComponent } from './sidebar-impact-path-way/sidebar-panel/sidebar-panel-list/sidebar-panel-list.component';
@@ -62,7 +61,6 @@ const ENTRY_COMPONENTS = [
 ];
 
 const PROVIDERS = [
-  ImpactPathwayService,
   SearchTaskService
 ];
 

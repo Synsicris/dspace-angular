@@ -10,6 +10,7 @@ import { ImpactPathWayTaskModalComponent } from '../impact-path-way-task/impact-
 import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
 import { SearchTaskService } from '../../../search-task/search-task.service';
 import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-container.component';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'ipw-impact-path-way-step',
@@ -22,7 +23,6 @@ import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-con
 export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
 
   @Input() public data: ImpactPathwayStep;
-  @Input() public isVertical = true;
 
   constructor(
     protected cdr: ChangeDetectorRef,
@@ -62,5 +62,13 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
 
   onTaskSelected($event: ImpactPathwayTask) {
     this.service.setSelectedTask($event)
+  }
+
+  getStepTitle(): Observable<string> {
+    return this.service.getImpactPathwayStepTitle(this.data.id)
+  }
+
+  getTasks(): Observable<ImpactPathwayTask[]> {
+    return this.service.getImpactPathwayTasksByStepId(this.data.parentId, this.data.id);
   }
 }

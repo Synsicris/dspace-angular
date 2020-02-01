@@ -179,6 +179,7 @@ import { MaterialModule } from './material/material.module';
 import { DsDynamicRelationInlineGroupComponent } from './form/builder/ds-dynamic-form-ui/models/relation-inline-group/dynamic-relation-inline-group.components';
 import { MetadataRepresentationListComponent } from '../+item-page/simple/metadata-representation-list/metadata-representation-list.component';
 import { SelectableListItemControlComponent } from './object-collection/shared/selectable-list-item-control/selectable-list-item-control.component';
+import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -340,7 +341,8 @@ const COMPONENTS = [
   CollectionSelectComponent,
   AuthorityTreeviewComponent,
   MetadataRepresentationLoaderComponent,
-  SelectableListItemControlComponent
+  SelectableListItemControlComponent,
+  CreateImpactPathwayComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -403,7 +405,8 @@ const ENTRY_COMPONENTS = [
   SearchFacetRangeOptionComponent,
   SearchAuthorityFilterComponent,
   DsDynamicLookupRelationSearchTabComponent,
-  DsDynamicLookupRelationSelectionTabComponent
+  DsDynamicLookupRelationSelectionTabComponent,
+  CreateImpactPathwayComponent
 ];
 
 const SHARED_ITEM_PAGE_COMPONENTS = [

@@ -34,7 +34,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.service.getSelectedTask().pipe(
       filter((task: ImpactPathwayTask) => !this.multiSelectEnabled && isNotEmpty(task) && this.isSelectable()),
-      map((task: ImpactPathwayTask) => task.item.id === this.data.item.id),
+      map((task: ImpactPathwayTask) => task.id === this.data.id),
     ).subscribe((hasFocus) => this.selectStatus.next(hasFocus));
 
     this.subs.push(this.selectStatus.pipe(

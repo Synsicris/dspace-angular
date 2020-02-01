@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 
 import { ImpactPathway } from '../../core/impact-pathway/models/impact-pathway.model';
-import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
 
 @Component({
   selector: 'ipw-wrapper-impact-path-way',
@@ -10,11 +9,9 @@ import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.s
 })
 export class WrapperImpactPathWayComponent {
 
-  @Input() public impactPathWays: ImpactPathway[];
+  @Input() public impactPathWay: ImpactPathway;
+  @Input() public impactPathWayId: string;
 
   public activeIds: string[];
-
-  constructor(private service: ImpactPathwayService) {
-  }
 
 }

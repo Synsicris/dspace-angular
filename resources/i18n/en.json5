@@ -603,7 +603,21 @@
 
 
 
-  "impact-path-way.wrapper.info": "<b>Develop your Impact Pathway</b><br>  What are your objectives so that your project can have an impact? Sort objectives into categories. Select and describe funder objectives. How are your project objectives related (Draw arrows between your objectives)? Add further explanations. Specify each objectives and add items and tasks.",
+  "impact-pathway.wrapper.info": "<b>Develop your Impact Pathway</b><br>  What are your objectives so that your project can have an impact? Sort objectives into categories. Select and describe funder objectives. How are your project objectives related (Draw arrows between your objectives)? Add further explanations. Specify each objectives and add items and tasks.",
+
+  "impact-pathway.create.btn": "Create",
+
+  "impact-pathway.create.head": "New impact pathway",
+
+  "impact-pathway.create.error": "There was an issue when generating the impact pathway, please try again later.",
+
+  "impact-pathway.create.success": "The impact pathway has been generated successfully.",
+
+  "impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
+
+  "impact-pathway.edit.page.title": "Edit impact pathway",
+
+
 
 
   "item.edit.delete.cancel": "Cancel",
@@ -1022,6 +1036,7 @@
 
   "loading.top-level-communities": "Loading top-level communities...",
 
+  "loading.processing": "Processing...",
 
 
   "login.form.email": "Email address",
@@ -1167,6 +1182,8 @@
   "menu.section.new_item": "Item",
 
   "menu.section.new_item_version": "Item Version",
+
+  "menu.section.new_impact_pathway": "Impact pathway",
 
 
 

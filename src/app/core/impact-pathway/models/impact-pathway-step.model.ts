@@ -1,18 +1,16 @@
-import { findIndex, remove, uniqueId } from 'lodash';
-
-import { ImpactPathwayStepType } from './impact-pathway-step-type';
+import { findIndex, remove } from 'lodash';
 import { ImpactPathwayTask } from './impact-pathway-task.model';
 
 export class ImpactPathwayStep {
-  public id: string;
 
   constructor(
-    public parentId: string,
-    public type: ImpactPathwayStepType,
+    public parentId?: string,
+    public id?: string,
+    public type?: string,
+    public title?: string,
     public tasks: ImpactPathwayTask[] = [],
     public connectedSteps: string[] = []) {
 
-    this.id = uniqueId(this.parentId);
   };
 
   hasTask(task: ImpactPathwayTask) {
@@ -20,7 +18,7 @@ export class ImpactPathwayStep {
   }
 
   addTask(task: ImpactPathwayTask) {
-    task.parentId = this.id;
+    // task.parentId = this.id;
     this.tasks.push(task);
   }
 

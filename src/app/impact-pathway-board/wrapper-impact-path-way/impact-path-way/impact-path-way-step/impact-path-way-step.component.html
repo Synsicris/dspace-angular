@@ -1,26 +1,20 @@
-<div class="h-100 d-flex flex-column"
-     [class.vertical-step]="isVertical"
+<div class="h-100 d-flex flex-column vertical-step"
      [class.drop-allowed]="(isDragging | async) && (isDropAllowed | async)"
      [class.drop-denied]="(isDragging | async) && !(isDropAllowed | async)">
-  <div class="text-center text-truncate p-1 m-2 font-weight-bold">
-    <span>{{data.type}}</span>
+  <div class="text-center text-truncate p-1 m-2 font-weight-bold" title="{{getStepTitle() | async}}">
+    <span>{{getStepTitle() | async}}</span>
   </div>
   <div id="{{data.id}}"
-       class="d-flex p-2 h-100"
-       [class.flex-column]="isVertical"
-       [ngClass]="{'flex-wrap task-list-horizontal':!isVertical}"
+       class="d-flex p-2 h-100 flex-column"
        cdkDropList
-       cdkDropListOrientation="{{isVertical ? 'vertical' : 'horizontal'}}"
+       cdkDropListOrientation="'vertical'"
        [cdkDropListData]="data"
        [cdkDropListConnectedTo]="connectedToList"
        (cdkDropListEntered)="listEntered($event)"
        (cdkDropListExited)="listExited($event)"
        (cdkDropListDropped)="listDropped($event)">
-    <ipw-impact-path-way-task *ngFor="let task of data.tasks" cdkDrag
+    <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async)" cdkDrag
                               class="mb-sm-1 mb-lg-4"
-                              [ngClass]="{
-                                'mb-5 mr-sm-1 mr-lg-4 task-horizontal':!isVertical
-                              }"
                               [data]="task"
                               [cdkDragData]="task"
                               (cdkDragDropped)="drop($event)"
@@ -28,10 +22,8 @@
                               (cdkDragExited)="dragExited($event)"
                               (selected)="onTaskSelected($event)">
       <div *cdkDragPlaceholder
-           class="task-placeholder d-flex justify-content-center align-items-center"
+           class="task-placeholder d-flex justify-content-center align-items-center mb-sm-1 mb-lg-4"
            [ngClass]="{
-                'mb-sm-1 mb-lg-4':isVertical,
-                'mr-sm-1 mr-lg-4':!isVertical,
                 'task-preview-allowed': (isDragging | async) && (isDropAllowed | async),
                 'task-preview-denied': (isDragging | async) && !(isDropAllowed | async)
               }" >

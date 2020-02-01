@@ -28,7 +28,7 @@ export class DragAndDropContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.connectedToList = this.service.getAvailableImpactPathWayStepIds();
+    this.connectedToList = this.service.getAvailableImpactPathwayStepIds();
   }
 
   canDrop(step: ImpactPathwayStep, task: ImpactPathwayTask) {

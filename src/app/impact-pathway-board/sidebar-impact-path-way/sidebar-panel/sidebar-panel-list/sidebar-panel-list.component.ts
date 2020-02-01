@@ -51,7 +51,7 @@ export class SidebarPanelListComponent extends DragAndDropContainerComponent imp
     if (event.previousContainer !== event.container) {
       const task: any = event.previousContainer.data[event.previousIndex];
       if (this.canDrop(event.container.data, task)) {
-        const cloneItem: any = this.service.cloneTask(task, event.container.id);
+        const cloneItem: any = task;
         cloneArrayItem(cloneItem,
           event.container.data.tasks,
           event.previousIndex,

@@ -140,6 +140,7 @@ import { SearchConfigurationService } from './shared/search/search-configuration
 import { SelectableListService } from '../shared/object-list/selectable-list/selectable-list.service';
 import { RelationshipTypeService } from './data/relationship-type.service';
 import { SidebarService } from '../shared/sidebar/sidebar.service';
+import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -262,7 +263,8 @@ const PROVIDERS = [
   NotificationsService,
   FilteredDiscoveryPageResponseParsingService,
   { provide: NativeWindowService, useFactory: NativeWindowFactory },
-  AuthorityTreeviewService
+  AuthorityTreeviewService,
+  ImpactPathwayService
 ];
 
 /**

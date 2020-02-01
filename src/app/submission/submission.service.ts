@@ -124,7 +124,7 @@ export class SubmissionService {
     const paramsObj = Object.create({});
 
     if (isNotEmpty(collectionId)) {
-      paramsObj.collection = collectionId;
+      paramsObj.owningCollection = collectionId;
     }
 
     const params = new HttpParams({fromObject: paramsObj});

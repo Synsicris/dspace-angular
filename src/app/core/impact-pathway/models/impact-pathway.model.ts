@@ -4,15 +4,25 @@ import { ImpactPathwayStep } from './impact-pathway-step.model';
 
 export class ImpactPathway {
 
-  public mainStep: ImpactPathwayStep;
-  public steps: ImpactPathwayStep[];
-
-  constructor(public id: string, public title: string, steps: ImpactPathwayStep[]) {
-    // this.mainStep = steps[steps.length - 1];
-    this.steps = steps;
+  constructor(public id?: string, public title?: string, public steps?: ImpactPathwayStep[]) {
   }
 
-  hasStep(stepId: string) {
+  hasStep(stepId: string): boolean {
     return (findIndex(this.steps, { id: stepId }) !== -1);
   }
+
+  getStep(stepId: string): ImpactPathwayStep {
+    let step = null;
+    const index = this.getStepIndex(stepId);
+    if (index !== -1) {
+      step = this.steps[index];
+    }
+
+    return step
+  }
+
+  getStepIndex(stepId: string): number {
+    return findIndex(this.steps, { id: stepId });
+  }
+
 }

@@ -1,8 +1,8 @@
 export enum ImpactPathwayStepType {
-  Type1 = 'Input',
-  Type2 = 'Processes of developing results',
-  Type3 = 'Processes/Outputs for transfer and use',
-  Type4 = 'Intended application-possibilities/application',
-  Type5 = 'Intended impacts',
-  Type6 = 'Funder objective',
+  Type1 = 'step_type_1',
+  Type2 = 'step_type_2',
+  Type3 = 'step_type_3',
+  Type4 = 'step_type_4',
+  Type5 = 'step_type_5',
+  Type6 = 'step_type_6',
 }
