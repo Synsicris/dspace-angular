@@ -1,24 +1,37 @@
 <ng-template #rt let-r="result" let-t="term">
-  <ngb-highlight [result]="r.item.title" [term]="t"></ngb-highlight>
+  <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
 </ng-template>
 
 <ipw-search-box [availableTaskList]="availableTaskList$"
                 [filteredTaskList]="filteredTaskList$"
                 [step]="step"></ipw-search-box>
 
-<div id="sidebar-object-list"
-     class="task-list d-flex flex-wrap p-3">
-  <ipw-impact-path-way-task *ngFor="let task of (filteredTaskList$ | async)"
-                            class="mb-sm-1 mb-lg-4 mr-sm-1 mr-lg-4"
-                            [data]="task"
-                            [multiSelectEnabled]="selectable"
-                            [selectable]="selectable"
-                            [targetStep]="step"
-                            (deselected)="onTaskDeselected($event)"
-                            (selected)="onTaskSelected($event)">
-  </ipw-impact-path-way-task>
+  <ds-loading *ngIf="(isSearching() | async)"></ds-loading>
+  <ds-pagination *ngIf="!(isSearching() | async)"
+                 [pageInfoState]="pageInfoState"
+                 [paginationOptions]="paginationOptions"
+                 [collectionSize]="pageInfoState?.totalElements"
+                 [sortOptions]="sortOptions"
+                 [hidePagerWhenSinglePage]="hidePagerWhenSinglePage"
+                 (pageChange)="onPageChange($event)"
+                 (pageSizeChange)="onPageSizeChange($event)"
+                 (sortDirectionChange)="onSortDirectionChange($event)">
+    <div id="sidebar-object-list"
+         class="task-list d-flex flex-wrap p-3">
+      <ipw-impact-path-way-task *ngFor="let task of (filteredTaskList$ | async)"
+                                class="mb-sm-1 mb-lg-4 mr-sm-1 mr-lg-4"
+                                [data]="task"
+                                [multiSelectEnabled]="selectable"
+                                [selectable]="selectable"
+                                [targetStep]="step"
+                                (deselected)="onTaskDeselected($event)"
+                                (selected)="onTaskSelected($event)">
+      </ipw-impact-path-way-task>
 
-</div>
+    </div>
+  </ds-pagination>
+
+
 
 <hr>
 

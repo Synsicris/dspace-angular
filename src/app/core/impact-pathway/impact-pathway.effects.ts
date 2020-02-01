@@ -141,7 +141,7 @@ export class ImpactPathwayEffects {
         action.payload.stepId,
         action.payload.item).pipe(
           map(() => {
-            return this.impactPathwayService.initImpactPathwayTask(action.payload.stepId, action.payload.item);
+            return this.impactPathwayService.initImpactPathwayTask(action.payload.item, action.payload.stepId);
           }),
           map((task: ImpactPathwayTask) => {
             return new AddImpactPathwayTaskSuccessAction(action.payload.impactPathwayId, action.payload.stepId, task);
