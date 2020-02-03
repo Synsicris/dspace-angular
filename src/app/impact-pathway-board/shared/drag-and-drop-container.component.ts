@@ -34,7 +34,7 @@ export class DragAndDropContainerComponent implements OnInit, OnDestroy {
   canDrop(step: ImpactPathwayStep, task: ImpactPathwayTask) {
     /*return !step.hasTask(task) && (this.service.getAvailableTaskTypeByStep(step.type).includes(task.type)) &&
       ((task.parentId && task.parentId !== step.id) || !task.parentId);*/
-    return !step.hasTask(task) && (this.service.getAvailableTaskTypeByStep(step.type).includes(task.type));
+    return !step.hasTask(task.id) && (this.service.getAvailableTaskTypeByStep(step.type).includes(task.type));
   }
 
   dragEntered(event: CdkDragEnter<any>) {

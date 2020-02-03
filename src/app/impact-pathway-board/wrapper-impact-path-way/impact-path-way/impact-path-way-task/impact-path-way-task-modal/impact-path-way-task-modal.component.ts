@@ -5,6 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImpactPathwayStep } from '../../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayStepType } from '../../../../../core/impact-pathway/models/impact-pathway-step-type';
 import { SearchTaskService } from '../../../../search-task/search-task.service';
+import { ImpactPathwayTask } from '../../../../../core/impact-pathway/models/impact-pathway-task.model';
 
 @Component({
   selector: 'ipw-impact-path-way-task-modal',
@@ -14,6 +15,8 @@ import { SearchTaskService } from '../../../../search-task/search-task.service';
 export class ImpactPathWayTaskModalComponent {
 
   @Input() step: ImpactPathwayStep;
+  @Input() parentTask: ImpactPathwayTask;
+  @Input() isObjectivePage = false;
 
   public impactPathWayStepType = ImpactPathwayStepType;
 

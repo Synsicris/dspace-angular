@@ -7,6 +7,7 @@ import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact
 import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
 import { hasValue, isNotEmpty, isNotUndefined } from '../../../../shared/empty.util';
 import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ipw-impact-path-way-task',
@@ -19,6 +20,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   @Input() public selectable: boolean;
   @Input() public multiSelectEnabled = false;
   @Input() public targetStep: ImpactPathwayStep;
+  @Input() public stepHasDetail: boolean;
 
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -28,7 +30,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   @Output() public selected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
   @Output() public deselected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
 
-  constructor(private service: ImpactPathwayService) {
+  constructor(private service: ImpactPathwayService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -52,8 +54,12 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
     );
   }
 
+  public hasDetail() {
+    return this.stepHasDetail && this.data.hasDetail();
+  }
+
   public isDisabled() {
-    return isNotUndefined(this.targetStep) && this.targetStep.hasTask(this.data);
+    return isNotUndefined(this.targetStep) && this.targetStep.hasTask(this.data.id);
   }
 
   private isSelectable() {
@@ -72,6 +78,10 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
   removeTask() {
     this.service.removeTaskFromStep(this.data);
+  }
+
+  showObjectives() {
+    this.router.navigate(['objectives', this.data.parentId, 'edit'], { queryParams: {target: this.data.id}})
   }
 
   ngOnDestroy(): void {

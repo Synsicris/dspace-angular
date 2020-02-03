@@ -1,15 +1,26 @@
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map, take, tap } from 'rxjs/operators';
 
 import { ImpactPathwayTask } from '../../core/impact-pathway/models/impact-pathway-task.model';
-import { isEmpty } from '../../shared/empty.util';
+import { isEmpty, isNotEmpty } from '../../shared/empty.util';
+import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
+import { SortOptions } from '../../core/cache/models/sort-options.model';
+import { PaginatedList } from '../../core/data/paginated-list';
+import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
+import { toDSpaceObjectListRD } from '../../core/shared/operators';
+import { RemoteData } from '../../core/data/remote-data';
+import { SearchService } from '../../core/shared/search/search.service';
 
 @Injectable()
 export class SearchTaskService {
 
   private _appliedFilters: BehaviorSubject<Map<string, any[]>> = new BehaviorSubject<Map<string, any[]>>(new Map());
+
+  constructor(private searchService: SearchService) {
+
+  }
 
   filterByTaskTitle(availableTaskList: Observable<ImpactPathwayTask[]>, title: string) {
     return availableTaskList.pipe(
@@ -60,5 +71,26 @@ export class SearchTaskService {
 
   resetAppliedFilters(): void {
     this._appliedFilters.next(new Map());
+  }
+
+  searchAvailableImpactPathwayTasksByStepType(
+    stepType: string,
+    pagination?: PaginationComponentOptions,
+    sort?: SortOptions): Observable<PaginatedList<any>> {
+
+    const confName = `impactpathway_${stepType}_task_type`;
+
+    return this.searchService.search(
+      new PaginatedSearchOptions({
+        configuration: confName,
+        pagination: pagination,
+        sort: sort
+      })).pipe(
+      toDSpaceObjectListRD(),
+      tap((r) => console.log('getAvailableImpactPathwayTasksByStepType search', r)),
+      filter((rd: RemoteData<PaginatedList<any>>) => rd.hasSucceeded && isNotEmpty(rd.payload)),
+      take(1),
+      tap((r) => console.log('getAvailableImpactPathwayTasksByStepType take', r)),
+      map((rd: RemoteData<PaginatedList<any>>) => rd.payload));
   }
 }

@@ -43,6 +43,7 @@ export function getAdminModulePath() {
       { path: 'workspaceitems', loadChildren: './+workspaceitems-edit-page/workspaceitems-edit-page.module#WorkspaceitemsEditPageModule' },
       { path: 'workflowitems', loadChildren: './+workflowitems-edit-page/workflowitems-edit-page.module#WorkflowItemsEditPageModule' },
       { path: 'impactpathway', loadChildren: './+impact-pathway-page/impact-pathway-page.module#ImpactPathwayPageModule' },
+      { path: 'objectives', loadChildren: './+objectives-page/objectives-page.module#ObjectivesPageModule' },
       { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
     ])
   ],

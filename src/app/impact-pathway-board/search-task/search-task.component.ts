@@ -14,6 +14,14 @@ import { PaginationComponentOptions } from '../../shared/pagination/pagination-c
 import { PageInfo } from '../../core/shared/page-info.model';
 import { Item } from '../../core/shared/item.model';
 import { RemoteData } from '../../core/data/remote-data';
+import { SearchTaskService } from './search-task.service';
+import {
+  GenerateImpactPathwaySubTaskAction,
+  GenerateImpactPathwayTaskAction
+} from '../../core/impact-pathway/impact-pathway.actions';
+import { select, Store } from '@ngrx/store';
+import { AppState } from '../../app.reducer';
+import { isImpactPathwayProcessingSelector } from '../../core/impact-pathway/selectors';
 
 @Component({
   selector: 'ipw-search-task',
@@ -23,6 +31,8 @@ import { RemoteData } from '../../core/data/remote-data';
 export class SearchTaskComponent implements OnInit, OnDestroy {
 
   @Input() step: ImpactPathwayStep;
+  @Input() parentTask: ImpactPathwayTask;
+  @Input() isObjectivePage: boolean;
 
   public availableTaskList$: Observable<ImpactPathwayTask[]>;
   public filteredTaskList$: BehaviorSubject<ImpactPathwayTask[]> = new BehaviorSubject<ImpactPathwayTask[]>([]);
@@ -35,6 +45,7 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
   public selectedTasks: ImpactPathwayTask[] = [];
   public sortOptions: SortOptions;
 
+  private processing$: Observable<boolean> = observableOf(false);
   private resultList$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   private searching$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   private subs: Subscription[] = [];
@@ -44,7 +55,9 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private service: ImpactPathwayService,
     private typeaheadConfig: NgbTypeaheadConfig,
-    private dropdownConfig: NgbDropdownConfig
+    private dropdownConfig: NgbDropdownConfig,
+    private searchTaskService: SearchTaskService,
+    private store: Store<AppState>
   ) {
 
     // customize default values of typeaheads used by this component tree
@@ -79,6 +92,10 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
       tap((list) => console.log('reduce!!!!!!!!!!!!!!!!!!!!!!!!!!!!', list)),
     );
 
+    this.processing$ = this.store.pipe(
+      select(isImpactPathwayProcessingSelector)
+    );
+
     this.subs.push(this.availableTaskList$.pipe(
       // first()
     ).subscribe((taskList: ImpactPathwayTask[]) => {
@@ -90,8 +107,21 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
 
   }
 
+  isProcessing(): Observable<boolean> {
+    return this.processing$;
+  }
+
   isSearching(): Observable<boolean> {
     return this.searching$.asObservable();
+  }
+
+  onPaginationChange(event) {
+    this.search(Object.assign(new PaginationComponentOptions(), this.paginationOptions, {
+      currentPage: event.page,
+      pageSize: event.pageSize,
+      field: event.sortFiel,
+      direction: event.sortDirection
+    }), this.sortOptions);
   }
 
   onPageChange(page) {
@@ -108,10 +138,29 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.selectedTasks.forEach((task) => {
-      // this.step.addTask(this.service.cloneTask(task, this.step.id));
+      this.addTask(task);
     });
+  }
 
-    this.activeModal.close(true)
+  private addTask(task: ImpactPathwayTask) {
+    if (this.isObjectivePage) {
+      this.store.dispatch(new GenerateImpactPathwaySubTaskAction(
+        this.step.parentId,
+        this.step.id,
+        this.parentTask.id,
+        task.type,
+        task.title,
+        task.description,
+        this.activeModal));
+    } else {
+      this.store.dispatch(new GenerateImpactPathwayTaskAction(
+        this.step.parentId,
+        this.step.id,
+        task.type,
+        task.title,
+        task.description,
+        this.activeModal));
+    }
   }
 
   onTaskDeselected(task: ImpactPathwayTask) {
@@ -127,7 +176,7 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
 
   private search(paginationOptions: PaginationComponentOptions, sortOptions: SortOptions) {
     this.searching$.next(true);
-    this.service.searchAvailableImpactPathwayTasksByStepType(this.step.type, paginationOptions, sortOptions).pipe(
+    this.searchTaskService.searchAvailableImpactPathwayTasksByStepType(this.step.type, paginationOptions, sortOptions).pipe(
       take(1)
     ).subscribe((resultPaginatedList: PaginatedList<any>) => {
       this.pageInfoState = resultPaginatedList.pageInfo;

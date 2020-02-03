@@ -13,13 +13,26 @@ export class ImpactPathwayStep {
 
   };
 
-  hasTask(task: ImpactPathwayTask) {
-    return (findIndex(this.tasks, { id: task.id }) !== -1);
+  hasDetail() {
+    return this.type === 'step_type_2' || this.type === 'step_type_3';
   }
 
-  addTask(task: ImpactPathwayTask) {
-    // task.parentId = this.id;
-    this.tasks.push(task);
+  hasTask(taskId: string) {
+    return (findIndex(this.tasks, { id: taskId }) !== -1);
+  }
+
+  getTask(taskId: string): ImpactPathwayTask {
+    let step = null;
+    const index = this.getTaskIndex(taskId);
+    if (index !== -1) {
+      step = this.tasks[index];
+    }
+
+    return step
+  }
+
+  getTaskIndex(taskId: string): number {
+    return findIndex(this.tasks, { id: taskId });
   }
 
   removeTask(task: ImpactPathwayTask) {

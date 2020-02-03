@@ -141,6 +141,7 @@ import { SelectableListService } from '../shared/object-list/selectable-list/sel
 import { RelationshipTypeService } from './data/relationship-type.service';
 import { SidebarService } from '../shared/sidebar/sidebar.service';
 import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
+import { ObjectiveService } from './impact-pathway/objective.service';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -264,7 +265,8 @@ const PROVIDERS = [
   FilteredDiscoveryPageResponseParsingService,
   { provide: NativeWindowService, useFactory: NativeWindowFactory },
   AuthorityTreeviewService,
-  ImpactPathwayService
+  ImpactPathwayService,
+  ObjectiveService
 ];
 
 /**

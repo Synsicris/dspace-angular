@@ -1,0 +1,35 @@
+@import '../../../../styles/variables';
+
+:host /deep/ .card {
+  margin-bottom: $submission-sections-margin-bottom;
+}
+
+.section-focus {
+  border-radius: $border-radius;
+  box-shadow: $btn-focus-box-shadow;
+}
+
+:host /deep/ .card:first-of-type {
+  border-bottom: $card-border-width solid  $card-border-color !important;
+  border-bottom-left-radius: $card-border-radius !important;
+  border-bottom-right-radius: $card-border-radius !important;
+}
+
+:host /deep/ .card-header button {
+  box-shadow: none !important;
+  width: 100%;
+}
+
+:host /deep/ .card-body {
+  margin: 0;
+  padding: 0;
+}
+
+.horizontal-content {
+  min-height: 250px;
+}
+
+.horizontal-step {
+  border-bottom: 4px solid map-get($theme-colors, dark);
+  width: 100%;
+}

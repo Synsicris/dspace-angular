@@ -6,6 +6,7 @@
                 [filteredTaskList]="filteredTaskList$"
                 [step]="step"></ipw-search-box>
 
+  <ds-loading *ngIf="(isProcessing() | async)" [message]="'loading.processing' | translate"></ds-loading>
   <ds-loading *ngIf="(isSearching() | async)"></ds-loading>
   <ds-pagination *ngIf="!(isSearching() | async)"
                  [pageInfoState]="pageInfoState"
@@ -13,9 +14,10 @@
                  [collectionSize]="pageInfoState?.totalElements"
                  [sortOptions]="sortOptions"
                  [hidePagerWhenSinglePage]="hidePagerWhenSinglePage"
-                 (pageChange)="onPageChange($event)"
-                 (pageSizeChange)="onPageSizeChange($event)"
-                 (sortDirectionChange)="onSortDirectionChange($event)">
+                 (paginationChange)="onPaginationChange($event)">
+                 <!--(pageChange)="onPageChange($event)"-->
+                 <!--(pageSizeChange)="onPageSizeChange($event)"-->
+                 <!--(sortDirectionChange)="onSortDirectionChange($event)">-->
     <div id="sidebar-object-list"
          class="task-list d-flex flex-wrap p-3">
       <ipw-impact-path-way-task *ngFor="let task of (filteredTaskList$ | async)"

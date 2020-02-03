@@ -1,5 +1,6 @@
 import { ImpactPathway } from './models/impact-pathway.model';
 import {
+  AddImpactPathwaySubTaskSuccessAction,
   AddImpactPathwayTaskSuccessAction,
   ImpactPathwayActions,
   ImpactPathwayActionTypes,
@@ -45,13 +46,15 @@ export function impactPathwayReducer(state = initialState, action: ImpactPathway
   switch (action.type) {
 
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY:
-    case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK: {
+    case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK:
+    case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUB_TASK: {
       return Object.assign({}, state, {
         processing: true
       });
     }
 
     case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_ERROR:
+    case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK_ERROR:
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_ERROR:
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUCCESS:
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK_ERROR:
@@ -73,6 +76,10 @@ export function impactPathwayReducer(state = initialState, action: ImpactPathway
 
     case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_SUCCESS: {
       return addImpactPathwayTaskToImpactPathwayStep(state, action as AddImpactPathwayTaskSuccessAction);
+    }
+
+    case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS: {
+      return addImpactPathwaySubTaskToImpactPathwayTask(state, action as AddImpactPathwaySubTaskSuccessAction);
     }
 
     case ImpactPathwayActionTypes.NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE: {
@@ -145,7 +152,12 @@ function normalizeImpactPathwayObjectsOnRehydrate(state: ImpactPathwayState) {
       normImpactPathways[key].steps = state.objects[key].steps
         .map((step) => {
           const normStep: ImpactPathwayStep = Object.assign(new ImpactPathwayStep(), {}, step);
-          normStep.tasks = normStep.tasks.map((task) => Object.assign(new ImpactPathwayTask(), {}, task));
+          normStep.tasks = normStep.tasks
+            .map((task) => {
+              const normTask: ImpactPathwayTask = Object.assign(new ImpactPathwayTask(), {}, task);
+              normTask.tasks = normStep.tasks.map((subTask) => Object.assign(new ImpactPathwayTask(), {}, subTask))
+              return normTask;
+            });
           return normStep;
         });
     });
@@ -156,4 +168,42 @@ function normalizeImpactPathwayObjectsOnRehydrate(state: ImpactPathwayState) {
   } else {
     return state;
   }
+}
+
+/**
+ * Init a impact pathway sub-task to parent.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitImpactPathwaySuccessAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function addImpactPathwaySubTaskToImpactPathwayTask(state: ImpactPathwayState, action: AddImpactPathwaySubTaskSuccessAction): ImpactPathwayState {
+  const newState = Object.assign({}, state);
+  const step: ImpactPathwayStep = newState.objects[action.payload.impactPathwayId].getStep(action.payload.stepId);
+  const stepIndex: number = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.stepId);
+  const parentTask: ImpactPathwayTask = step.getTask(action.payload.parentTaskId);
+  const parentTaskIndex: number = step.getTaskIndex(action.payload.parentTaskId);
+  const newTask = Object.assign(new ImpactPathwayTask(), parentTask, {
+    tasks: [...parentTask.tasks, action.payload.task]
+  });
+  const newTaskList = step.tasks.slice(0);
+  newTaskList[parentTaskIndex] = newTask;
+
+  const newStep = Object.assign(new ImpactPathwayStep(), step, {
+    tasks: newTaskList
+  });
+  const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[action.payload.impactPathwayId], {
+    steps: newState.objects[action.payload.impactPathwayId].steps.map((stepEntry, index) => {
+      return (index === stepIndex) ? newStep : stepEntry;
+    })
+  });
+  return Object.assign({}, state, {
+    objects: Object.assign({}, state.objects, {
+      [action.payload.impactPathwayId]: newImpactPathway
+    }),
+    processing: false
+  });
 }

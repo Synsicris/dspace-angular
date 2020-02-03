@@ -24,6 +24,10 @@ import { SearchTaskService } from './search-task/search-task.service';
 import { SearchBoxComponent } from './search-task/search-box/search-box.component';
 import { SearchLabelsComponent } from './search-task/search-labels/search-labels.component';
 import { DragAndDropContainerComponent } from './shared/drag-and-drop-container.component';
+import { ObjectivesBoardComponent } from './objectives-board.component';
+import { WrapperObjectivesComponent } from './wrapper-objectives/wrapper-objectives.component';
+import { ObjectiveContainerComponent } from './wrapper-objectives/objective/container/objective-container.component';
+import { ObjectiveComponent } from './wrapper-objectives/objective/objective.component';
 
 const MODULES = [
   CommonModule,
@@ -47,7 +51,11 @@ const COMPONENTS = [
   SidebarImpactPathWayComponent,
   SidebarPanelComponent,
   SidebarPanelListComponent,
-  SidebarPanelViewComponent
+  SidebarPanelViewComponent,
+  ObjectivesBoardComponent,
+  WrapperObjectivesComponent,
+  ObjectiveComponent,
+  ObjectiveContainerComponent
 ];
 
 const DIRECTIVES = [

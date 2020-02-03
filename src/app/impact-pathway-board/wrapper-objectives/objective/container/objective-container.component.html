@@ -1,29 +1,25 @@
-<div class="h-100 d-flex flex-column vertical-step"
+<div class="h-100 d-flex flex-column"
      [class.drop-allowed]="(isDragging | async) && (isDropAllowed | async)"
      [class.drop-denied]="(isDragging | async) && !(isDropAllowed | async)">
-  <div class="text-center text-truncate p-1 m-2 font-weight-bold" title="{{getStepTitle() | async}}">
-    <span>{{getStepTitle() | async}}</span>
-  </div>
-  <div id="{{data.id}}"
-       class="d-flex p-2 h-100 flex-column"
+  <div id="{{impactPathwayTask.id}}"
+       class="d-flex p-2 h-100 flex-wrap task-list-horizontal"
        cdkDropList
-       cdkDropListOrientation="'vertical'"
-       [cdkDropListData]="data"
+       cdkDropListOrientation="'horizontal'"
+       [cdkDropListData]="impactPathwayTask"
        [cdkDropListConnectedTo]="connectedToList"
        (cdkDropListEntered)="listEntered($event)"
        (cdkDropListExited)="listExited($event)"
        (cdkDropListDropped)="listDropped($event)">
-    <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async)" cdkDrag
-                              class="mb-sm-1 mb-lg-4"
+    <ipw-impact-path-way-task *ngFor="let task of impactPathwayTask.tasks" cdkDrag
+                              class="mb-sm-1 mb-lg-4 mb-5 mr-sm-1 mr-lg-4 task-horizontal"
                               [data]="task"
                               [cdkDragData]="task"
-                              [stepHasDetail]="data.hasDetail()"
                               (cdkDragDropped)="drop($event)"
                               (cdkDragEntered)="dragEntered($event)"
                               (cdkDragExited)="dragExited($event)"
                               (selected)="onTaskSelected($event)">
       <div *cdkDragPlaceholder
-           class="task-placeholder d-flex justify-content-center align-items-center mb-sm-1 mb-lg-4"
+           class="task-placeholder d-flex justify-content-center align-items-center mr-sm-1 mr-lg-4"
            [ngClass]="{
                 'task-preview-allowed': (isDragging | async) && (isDropAllowed | async),
                 'task-preview-denied': (isDragging | async) && !(isDropAllowed | async)

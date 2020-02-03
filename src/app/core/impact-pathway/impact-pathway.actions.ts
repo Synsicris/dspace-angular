@@ -24,9 +24,14 @@ export const ImpactPathwayActionTypes = {
   GENERATE_IMPACT_PATHWAY_TASK: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_TASK'),
   GENERATE_IMPACT_PATHWAY_TASK_SUCCESS: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_TASK_SUCCESS'),
   GENERATE_IMPACT_PATHWAY_TASK_ERROR: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_TASK_ERROR'),
+  GENERATE_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_SUB_TASK'),
+  GENERATE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
   ADD_IMPACT_PATHWAY_TASK: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_TASK'),
   ADD_IMPACT_PATHWAY_TASK_SUCCESS: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_TASK_SUCCESS'),
   ADD_IMPACT_PATHWAY_TASK_ERROR: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_TASK_ERROR'),
+  ADD_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK'),
+  ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
+  ADD_IMPACT_PATHWAY_SUB_TASK_ERROR: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK_ERROR'),
   NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE: type('dspace/core/impactpathway/NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE'),
 };
 
@@ -177,6 +182,7 @@ export class GenerateImpactPathwayTaskSuccessAction implements Action {
     impactPathwayId: string;
     stepId: string;
     item: Item;
+    modal?: NgbActiveModal;
   };
 
   /**
@@ -188,9 +194,11 @@ export class GenerateImpactPathwayTaskSuccessAction implements Action {
    *    the impact pathway step's id
    * @param item
    *    the Item of the impact pathway task generated
+   * @param modal
+   *    the active modal
    */
-  constructor(impactPathwayId: string, stepId: string, item: Item) {
-    this.payload = { impactPathwayId, stepId, item };
+  constructor(impactPathwayId: string, stepId: string, item: Item, modal?: NgbActiveModal) {
+    this.payload = { impactPathwayId, stepId, item, modal };
   }
 }
 
@@ -199,7 +207,98 @@ export class GenerateImpactPathwayTaskSuccessAction implements Action {
  */
 export class GenerateImpactPathwayTaskErrorAction implements Action {
   type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK_ERROR;
+  payload: {
+    modal?: NgbActiveModal;
+  };
 
+  /**
+   * Create a new GenerateImpactPathwayTaskErrorAction
+   *
+   * @param modal
+   *    the active modal
+   */
+  constructor(modal?: NgbActiveModal) {
+    this.payload = { modal };
+  }
+
+}
+
+/**
+ * An ngrx action to generate a impact pathway objects
+ */
+export class GenerateImpactPathwaySubTaskAction implements Action {
+  type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUB_TASK;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    parentTaskId: string;
+    taskType: string;
+    title: string;
+    description: string;
+    modal?: NgbActiveModal;
+  };
+
+  /**
+   * Create a new GenerateImpactPathwaySubTaskAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   * @param parentTaskId
+   *    the impact pathway parent task's id
+   * @param taskType
+   *    the impact pathway task's type
+   * @param title
+   *    the impact pathway task's title
+   * @param description
+   *    the impact pathway task's description
+   * @param modal
+   *    the active modal
+   */
+  constructor(
+    impactPathwayId: string,
+    stepId: string,
+    parentTaskId: string,
+    taskType: string,
+    title: string,
+    description: string,
+    modal?: NgbActiveModal
+  ) {
+    this.payload = { impactPathwayId, stepId, parentTaskId, taskType, title, description, modal };
+  }
+}
+
+/**
+ * An ngrx action for generate success
+ */
+export class GenerateImpactPathwaySubTaskSuccessAction implements Action {
+  type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUB_TASK_SUCCESS;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    parentTaskId: string;
+    item: Item;
+    modal?: NgbActiveModal
+  };
+
+  /**
+   * Create a new GenerateImpactPathwaySubTaskSuccessAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   * @param parentTaskId
+   *    the impact pathway parent task's id
+   * @param item
+   *    the Item of the impact pathway task generated
+   * @param modal
+   *    the active modal
+   */
+  constructor(impactPathwayId: string, stepId: string, parentTaskId: string, item: Item, modal?: NgbActiveModal) {
+    this.payload = { impactPathwayId, stepId, parentTaskId, item, modal };
+  }
 }
 
 /**
@@ -211,6 +310,7 @@ export class AddImpactPathwayTaskAction implements Action {
     impactPathwayId: string;
     stepId: string;
     item: Item;
+    modal?: NgbActiveModal
   };
 
   /**
@@ -222,9 +322,11 @@ export class AddImpactPathwayTaskAction implements Action {
    *    the impact pathway step's id to whom to add task
    * @param item
    *    the Item of the impact pathway task to add
+   * @param modal
+   *    the active modal
    */
-  constructor(impactPathwayId: string, stepId: string, item: Item) {
-    this.payload = { impactPathwayId, stepId, item };
+  constructor(impactPathwayId: string, stepId: string, item: Item, modal?: NgbActiveModal) {
+    this.payload = { impactPathwayId, stepId, item, modal };
   }
 }
 
@@ -237,6 +339,7 @@ export class AddImpactPathwayTaskSuccessAction implements Action {
     impactPathwayId: string;
     stepId: string;
     task: ImpactPathwayTask;
+    modal?: NgbActiveModal
   };
 
   /**
@@ -248,9 +351,11 @@ export class AddImpactPathwayTaskSuccessAction implements Action {
    *    the impact pathway step's id to whom to add task
    * @param task
    *    the ImpactPathwayTask object to add
+   * @param modal
+   *    the active modal
    */
-  constructor(impactPathwayId: string, stepId: string, task: ImpactPathwayTask) {
-    this.payload = { impactPathwayId, stepId, task };
+  constructor(impactPathwayId: string, stepId: string, task: ImpactPathwayTask, modal?: NgbActiveModal) {
+    this.payload = { impactPathwayId, stepId, task, modal };
   }
 }
 
@@ -259,6 +364,103 @@ export class AddImpactPathwayTaskSuccessAction implements Action {
  */
 export class AddImpactPathwayTaskErrorAction implements Action {
   type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_ERROR;
+  payload: {
+    modal?: NgbActiveModal;
+  };
+
+  /**
+   * Create a new AddImpactPathwayTaskErrorAction
+   *
+   * @param modal
+   *    the active modal
+   */
+  constructor(modal?: NgbActiveModal) {
+    this.payload = { modal };
+  }
+}
+
+/**
+ * An ngrx action for generate success
+ */
+export class AddImpactPathwaySubTaskAction implements Action {
+  type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    parentTaskId: string;
+    item: Item;
+    modal?: NgbActiveModal
+  };
+
+  /**
+   * Create a new AddImpactPathwaySubTaskAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id to whom to add task
+   * @param parentTaskId
+   *    the impact pathway parent task's id
+   * @param item
+   *    the Item of the impact pathway task to add
+   * @param modal
+   *    the active modal
+   */
+  constructor(impactPathwayId: string, stepId: string, parentTaskId: string, item: Item, modal?: NgbActiveModal) {
+    this.payload = { impactPathwayId, stepId, parentTaskId, item, modal};
+  }
+}
+
+/**
+ * An ngrx action for generate success
+ */
+export class AddImpactPathwaySubTaskSuccessAction implements Action {
+  type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    parentTaskId: string;
+    task: ImpactPathwayTask;
+    modal?: NgbActiveModal
+  };
+
+  /**
+   * Create a new AddImpactPathwaySubTaskSuccessAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id to whom to add task
+   * @param parentTaskId
+   *    the impact pathway parent task's id
+   * @param task
+   *    the ImpactPathwayTask object to add
+   * @param modal
+   *    the active modal
+   */
+  constructor(impactPathwayId: string, stepId: string, parentTaskId: string, task: ImpactPathwayTask, modal?: NgbActiveModal) {
+    this.payload = { impactPathwayId, stepId, parentTaskId, task, modal };
+  }
+}
+
+/**
+ * An ngrx action for generate error
+ */
+export class AddImpactPathwaySubTaskErrorAction implements Action {
+  type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK_ERROR;
+  payload: {
+    modal?: NgbActiveModal;
+  };
+
+  /**
+   * Create a new AddImpactPathwaySubTaskErrorAction
+   *
+   * @param modal
+   *    the active modal
+   */
+  constructor(modal?: NgbActiveModal) {
+    this.payload = { modal };
+  }
 }
 
 /**
@@ -278,12 +480,17 @@ export type ImpactPathwayActions
   = AddImpactPathwayTaskAction
   | AddImpactPathwayTaskErrorAction
   | AddImpactPathwayTaskSuccessAction
+  | AddImpactPathwaySubTaskAction
+  | AddImpactPathwaySubTaskErrorAction
+  | AddImpactPathwaySubTaskSuccessAction
   | GenerateImpactPathwayAction
   | GenerateImpactPathwayErrorAction
   | GenerateImpactPathwaySuccessAction
   | GenerateImpactPathwayTaskAction
   | GenerateImpactPathwayTaskErrorAction
   | GenerateImpactPathwayTaskSuccessAction
+  | GenerateImpactPathwaySubTaskAction
+  | GenerateImpactPathwaySubTaskSuccessAction
   | InitImpactPathwayAction
   | InitImpactPathwaySuccessAction
   | InitImpactPathwayErrorAction
