@@ -155,7 +155,7 @@ function normalizeImpactPathwayObjectsOnRehydrate(state: ImpactPathwayState) {
           normStep.tasks = normStep.tasks
             .map((task) => {
               const normTask: ImpactPathwayTask = Object.assign(new ImpactPathwayTask(), {}, task);
-              normTask.tasks = normStep.tasks.map((subTask) => Object.assign(new ImpactPathwayTask(), {}, subTask))
+              normTask.tasks = task.tasks.map((subTask) => Object.assign(new ImpactPathwayTask(), {}, subTask))
               return normTask;
             });
           return normStep;

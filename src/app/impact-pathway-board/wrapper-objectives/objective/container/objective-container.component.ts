@@ -6,13 +6,14 @@ import { ImpactPathWayTaskModalComponent } from '../../../wrapper-impact-path-wa
 import { SearchTaskService } from '../../../search-task/search-task.service';
 import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-container.component';
 
 @Component({
   selector: 'ipw-objective-container',
   styleUrls: ['./objective-container.component.scss'],
   templateUrl: './objective-container.component.html'
 })
-export class ObjectiveContainerComponent {
+export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
   @Input() public impactPathwayStep: ImpactPathwayStep;
   @Input() public impactPathwayTask: ImpactPathwayTask;
@@ -22,6 +23,8 @@ export class ObjectiveContainerComponent {
     protected searchTaskService: SearchTaskService,
     protected service: ImpactPathwayService,
     protected modalService: NgbModal) {
+
+    super(service);
   }
 
   createTask() {

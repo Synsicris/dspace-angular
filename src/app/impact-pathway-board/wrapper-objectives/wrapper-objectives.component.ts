@@ -19,7 +19,11 @@ export class WrapperObjectivesComponent {
   constructor(private objectivesService: ObjectiveService, private router: Router) {
   }
 
+  getObjectivesTasks() {
+    return this.impactPathwayStep.tasks.filter((task) => task.type === 'proj_objectives')
+  }
+
   back() {
-    this.router.navigate(['impactPathway', this.impactPathwayStep.parentId, 'edit']);
+    this.router.navigate(['impactpathway', this.impactPathwayStep.parentId, 'edit']);
   }
 }

@@ -1,5 +1,5 @@
   <ds-loading *ngIf="(isProcessing() | async)" [message]="'loading.processing' | translate"></ds-loading>
-  <ds-form *ngIf="!(processing$ | async) && formId && formModel?.length > 0" #formRef="formComponent"
+  <ds-form *ngIf="!(isProcessing() | async) && formId && formModel?.length > 0" #formRef="formComponent"
            [formId]="formId"
            [formModel]="formModel"
            [formLayout]="formLayout"
