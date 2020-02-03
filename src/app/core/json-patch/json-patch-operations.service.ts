@@ -2,7 +2,7 @@ import { merge as observableMerge, Observable, throwError as observableThrowErro
 import { distinctUntilChanged, filter, find, flatMap, map, partition, take, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { hasValue, isEmpty, isNotEmpty, isNotUndefined, isUndefined } from '../../shared/empty.util';
+import { hasValue, isEmpty, isNotEmpty, isNotNull, isNotUndefined, isUndefined } from '../../shared/empty.util';
 import { ErrorResponse, PostPatchSuccessResponse, RestResponse } from '../cache/response.models';
 import { PatchRequest } from '../data/request.models';
 import { RequestService } from '../data/request.service';
@@ -141,7 +141,7 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId)));
 
     return this.submitJsonPatchOperations(href$, resourceType).pipe(
-      map((response: PostPatchSuccessResponse) => response.dataDefinition)
+      map((response: PostPatchSuccessResponse) => isNotNull(response) ? response.dataDefinition : null)
     );
   }
 
@@ -166,7 +166,7 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId)));
 
     return this.submitJsonPatchOperations(hrefObs, resourceType, resourceId).pipe(
-      map((response: PostPatchSuccessResponse) => response.dataDefinition)
+      map((response: PostPatchSuccessResponse) => isNotNull(response) ? response.dataDefinition : null)
     );
   }
 }
