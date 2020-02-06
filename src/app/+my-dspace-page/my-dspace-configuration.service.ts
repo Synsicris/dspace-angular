@@ -29,7 +29,7 @@ export class MyDSpaceConfigurationService extends SearchConfigurationService {
   /**
    * Default sort settings
    */
-  protected defaultSort = new SortOptions('dc.date.issued', SortDirection.DESC);
+  protected defaultSort = new SortOptions('lastModified', SortDirection.DESC);
 
   /**
    * Default configuration parameter setting
