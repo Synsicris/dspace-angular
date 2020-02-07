@@ -103,11 +103,7 @@ export class ImpactPathwayEffects {
       return this.impactPathwayService.generateImpactPathwayTaskItem(
         action.payload.stepId,
         action.payload.taskType,
-        action.payload.title,
-        action.payload.description).pipe(
-        tap((i) => {
-          console.log('task!!!!!!!!!!!!!1', i);
-        }),
+        action.payload.metadata).pipe(
         map((item: Item) => new GenerateImpactPathwayTaskSuccessAction(
           action.payload.impactPathwayId,
           action.payload.stepId,
@@ -128,7 +124,7 @@ export class ImpactPathwayEffects {
       return new AddImpactPathwayTaskAction(
         action.payload.impactPathwayId,
         action.payload.stepId,
-        action.payload.item,
+        action.payload.item.id,
         action.payload.modal)
     }));
 
@@ -141,7 +137,7 @@ export class ImpactPathwayEffects {
       ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK_ERROR,
       ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK_ERROR),
     tap(() => {
-      this.notificationsService.error(null, this.translate.get('impact-pathway.create.error'))
+      this.notificationsService.error(null, this.translate.get('impact-pathway.task.create.error'))
     }),
     tap((action: AddImpactPathwaySubTaskAction) => {
       if (action.payload.modal) {
@@ -157,9 +153,9 @@ export class ImpactPathwayEffects {
     switchMap((action: AddImpactPathwayTaskAction) => {
       return this.impactPathwayService.linkTaskToParent(
         action.payload.stepId,
-        action.payload.item).pipe(
-        map(() => {
-          return this.impactPathwayService.initImpactPathwayTask(action.payload.item, action.payload.stepId);
+        action.payload.taskId).pipe(
+        map((taskItem: Item) => {
+          return this.impactPathwayService.initImpactPathwayTask(taskItem, action.payload.stepId);
         }),
         map((task: ImpactPathwayTask) => {
           return new AddImpactPathwayTaskSuccessAction(
@@ -197,11 +193,7 @@ export class ImpactPathwayEffects {
       return this.impactPathwayService.generateImpactPathwayTaskItem(
         action.payload.parentTaskId,
         action.payload.taskType,
-        action.payload.title,
-        action.payload.description).pipe(
-        tap((i) => {
-          console.log('sub task created!!!!!!!!!!!!!1', i);
-        }),
+        action.payload.metadata).pipe(
         map((item: Item) => new GenerateImpactPathwaySubTaskSuccessAction(
           action.payload.impactPathwayId,
           action.payload.stepId,
@@ -225,7 +217,7 @@ export class ImpactPathwayEffects {
         action.payload.impactPathwayId,
         action.payload.stepId,
         action.payload.parentTaskId,
-        action.payload.item,
+        action.payload.item.id,
         action.payload.modal)
     }));
 
@@ -237,9 +229,9 @@ export class ImpactPathwayEffects {
     switchMap((action: AddImpactPathwaySubTaskAction) => {
       return this.impactPathwayService.linkTaskToParent(
         action.payload.parentTaskId,
-        action.payload.item).pipe(
-        map(() => {
-          return this.impactPathwayService.initImpactPathwayTask(action.payload.item, action.payload.parentTaskId);
+        action.payload.taskId).pipe(
+        map((taskItem: Item) => {
+          return this.impactPathwayService.initImpactPathwayTask(taskItem, action.payload.parentTaskId);
         }),
         map((task: ImpactPathwayTask) => {
           return new AddImpactPathwaySubTaskSuccessAction(

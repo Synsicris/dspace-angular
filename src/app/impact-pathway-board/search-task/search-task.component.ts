@@ -1,25 +1,24 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
-import { BehaviorSubject, from as observableFrom, Observable, of as observableOf, Subscription } from 'rxjs';
-import { filter, flatMap, map, scan, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
+import { flatMap, map, scan, take } from 'rxjs/operators';
+import { select, Store } from '@ngrx/store';
 import { NgbActiveModal, NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathwayStep } from '../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
 import { ImpactPathwayTask } from '../../core/impact-pathway/models/impact-pathway-task.model';
-import { hasValue, isNotEmpty } from '../../shared/empty.util';
+import { hasValue } from '../../shared/empty.util';
 import { PaginatedList } from '../../core/data/paginated-list';
 import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { PageInfo } from '../../core/shared/page-info.model';
 import { Item } from '../../core/shared/item.model';
-import { RemoteData } from '../../core/data/remote-data';
 import { SearchTaskService } from './search-task.service';
 import {
-  GenerateImpactPathwaySubTaskAction,
-  GenerateImpactPathwayTaskAction
+  AddImpactPathwaySubTaskAction,
+  AddImpactPathwayTaskAction
 } from '../../core/impact-pathway/impact-pathway.actions';
-import { select, Store } from '@ngrx/store';
 import { AppState } from '../../app.reducer';
 import { isImpactPathwayProcessingSelector } from '../../core/impact-pathway/selectors';
 
@@ -73,35 +72,21 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
     this.sortOptions = new SortOptions('dc.title', this.sortDirection);
 
     this.availableTaskList$ = this.resultList$.asObservable().pipe(
-      flatMap((entries: any[]) => entries),
-      flatMap((entry: any) => {
-        if (entry.type === 'item') {
-          return observableOf(entry);
-        } else {
-          return entry.item.pipe(
-            filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
-            take(1),
-            map((itemRD: RemoteData<Item>) => itemRD.payload)
-          )
-        }
-      }),
-      tap((item: Item) => console.log('item: ', item.id, item)),
+      flatMap((entries: Array<Observable<Item>>) => entries),
+      flatMap((entry: Observable<Item>) => entry),
       map((item: Item) => this.service.initImpactPathwayTask(item)),
-      tap((item: ImpactPathwayTask) => console.log('ImpactPathwayTask: ', item)),
-      scan((acc: any, value: any) => [...acc, ...value], []),
-      tap((list) => console.log('reduce!!!!!!!!!!!!!!!!!!!!!!!!!!!!', list)),
+      scan((acc: any, value: any) => [...acc, ...value], [])
     );
 
     this.processing$ = this.store.pipe(
       select(isImpactPathwayProcessingSelector)
     );
 
-    this.subs.push(this.availableTaskList$.pipe(
-      // first()
-    ).subscribe((taskList: ImpactPathwayTask[]) => {
-      console.log('filteredTaskList$!!!!!!!!!!!!!!!!!!!!!!!!!!!!', taskList);
-      this.filteredTaskList$.next(taskList);
-    }));
+    this.subs.push(this.availableTaskList$
+      .subscribe((taskList: ImpactPathwayTask[]) => {
+        this.filteredTaskList$.next(taskList);
+      })
+    );
 
     this.search(this.paginationOptions, this.sortOptions)
 
@@ -144,21 +129,17 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
 
   private addTask(task: ImpactPathwayTask) {
     if (this.isObjectivePage) {
-      this.store.dispatch(new GenerateImpactPathwaySubTaskAction(
+      this.store.dispatch(new AddImpactPathwaySubTaskAction(
         this.step.parentId,
         this.step.id,
         this.parentTask.id,
-        task.type,
-        task.title,
-        task.description,
+        task.id,
         this.activeModal));
     } else {
-      this.store.dispatch(new GenerateImpactPathwayTaskAction(
+      this.store.dispatch(new AddImpactPathwayTaskAction(
         this.step.parentId,
         this.step.id,
-        task.type,
-        task.title,
-        task.description,
+        task.id,
         this.activeModal));
     }
   }
@@ -176,7 +157,12 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
 
   private search(paginationOptions: PaginationComponentOptions, sortOptions: SortOptions) {
     this.searching$.next(true);
-    this.searchTaskService.searchAvailableImpactPathwayTasksByStepType(this.step.type, paginationOptions, sortOptions).pipe(
+    this.searchTaskService.searchAvailableImpactPathwayTasksByStepType(
+      this.step.type,
+      (this.isObjectivePage) ? this.parentTask.id : this.step.id,
+      this.isObjectivePage,
+      paginationOptions,
+      sortOptions).pipe(
       take(1)
     ).subscribe((resultPaginatedList: PaginatedList<any>) => {
       this.pageInfoState = resultPaginatedList.pageInfo;

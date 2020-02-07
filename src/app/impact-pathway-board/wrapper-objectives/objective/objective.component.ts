@@ -19,7 +19,6 @@ export class ObjectiveComponent {
   @ViewChild('accordionRef') wrapper: NgbAccordion;
 
   isOpen() {
-    console.log(this.impactPathwayTask.id, this.targetImpactPathwayStepId);
     return this.impactPathwayTask.id === this.targetImpactPathwayStepId;
   }
 

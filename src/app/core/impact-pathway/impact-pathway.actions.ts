@@ -5,6 +5,7 @@ import { Item } from '../shared/item.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImpactPathway } from './models/impact-pathway.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
+import { MetadataMap } from '../shared/metadata.models';
 
 /**
  * For each action type in an action group, make a simple
@@ -147,8 +148,7 @@ export class GenerateImpactPathwayTaskAction implements Action {
     impactPathwayId: string;
     stepId: string;
     taskType: string;
-    title: string;
-    description: string;
+    metadata: MetadataMap
     modal?: NgbActiveModal;
   };
 
@@ -161,15 +161,13 @@ export class GenerateImpactPathwayTaskAction implements Action {
    *    the impact pathway step's id
    * @param taskType
    *    the impact pathway task's type
-   * @param title
-   *    the impact pathway task's title
-   * @param description
-   *    the impact pathway task's description
+   * @param metadata: Metadata
+   *    the impact pathway task's Metadata
    * @param modal
    *    the active modal
    */
-  constructor(impactPathwayId: string, stepId: string, taskType: string, title: string, description: string, modal?: NgbActiveModal) {
-    this.payload = { impactPathwayId, stepId, taskType, title, description, modal };
+  constructor(impactPathwayId: string, stepId: string, taskType: string, metadata: MetadataMap, modal?: NgbActiveModal) {
+    this.payload = { impactPathwayId, stepId, taskType, metadata, modal };
   }
 }
 
@@ -233,8 +231,7 @@ export class GenerateImpactPathwaySubTaskAction implements Action {
     stepId: string;
     parentTaskId: string;
     taskType: string;
-    title: string;
-    description: string;
+    metadata: MetadataMap
     modal?: NgbActiveModal;
   };
 
@@ -249,10 +246,8 @@ export class GenerateImpactPathwaySubTaskAction implements Action {
    *    the impact pathway parent task's id
    * @param taskType
    *    the impact pathway task's type
-   * @param title
-   *    the impact pathway task's title
-   * @param description
-   *    the impact pathway task's description
+   * @param metadata: Metadata
+   *    the impact pathway task's Metadata
    * @param modal
    *    the active modal
    */
@@ -261,11 +256,10 @@ export class GenerateImpactPathwaySubTaskAction implements Action {
     stepId: string,
     parentTaskId: string,
     taskType: string,
-    title: string,
-    description: string,
+    metadata: MetadataMap,
     modal?: NgbActiveModal
   ) {
-    this.payload = { impactPathwayId, stepId, parentTaskId, taskType, title, description, modal };
+    this.payload = { impactPathwayId, stepId, parentTaskId, taskType, metadata, modal };
   }
 }
 
@@ -309,7 +303,7 @@ export class AddImpactPathwayTaskAction implements Action {
   payload: {
     impactPathwayId: string;
     stepId: string;
-    item: Item;
+    taskId: string;
     modal?: NgbActiveModal
   };
 
@@ -320,13 +314,13 @@ export class AddImpactPathwayTaskAction implements Action {
    *    the impact pathway's id
    * @param stepId
    *    the impact pathway step's id to whom to add task
-   * @param item
-   *    the Item of the impact pathway task to add
+   * @param taskId
+   *    the Item id of the impact pathway task to add
    * @param modal
    *    the active modal
    */
-  constructor(impactPathwayId: string, stepId: string, item: Item, modal?: NgbActiveModal) {
-    this.payload = { impactPathwayId, stepId, item, modal };
+  constructor(impactPathwayId: string, stepId: string, taskId: string, modal?: NgbActiveModal) {
+    this.payload = { impactPathwayId, stepId, taskId, modal };
   }
 }
 
@@ -388,7 +382,7 @@ export class AddImpactPathwaySubTaskAction implements Action {
     impactPathwayId: string;
     stepId: string;
     parentTaskId: string;
-    item: Item;
+    taskId: string;
     modal?: NgbActiveModal
   };
 
@@ -401,13 +395,13 @@ export class AddImpactPathwaySubTaskAction implements Action {
    *    the impact pathway step's id to whom to add task
    * @param parentTaskId
    *    the impact pathway parent task's id
-   * @param item
-   *    the Item of the impact pathway task to add
+   * @param taskId
+   *    the Item id of the impact pathway task to add
    * @param modal
    *    the active modal
    */
-  constructor(impactPathwayId: string, stepId: string, parentTaskId: string, item: Item, modal?: NgbActiveModal) {
-    this.payload = { impactPathwayId, stepId, parentTaskId, item, modal};
+  constructor(impactPathwayId: string, stepId: string, parentTaskId: string, taskId: string, modal?: NgbActiveModal) {
+    this.payload = { impactPathwayId, stepId, parentTaskId, taskId, modal};
   }
 }
 

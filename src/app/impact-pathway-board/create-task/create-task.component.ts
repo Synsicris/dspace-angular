@@ -18,6 +18,7 @@ import {
 } from '../../core/impact-pathway/impact-pathway.actions';
 import { isImpactPathwayProcessingSelector } from '../../core/impact-pathway/selectors';
 import { ImpactPathwayTask } from '../../core/impact-pathway/models/impact-pathway-task.model';
+import { FormFieldMetadataValueObject } from '../../shared/form/builder/models/form-field-metadata-value.model';
 
 @Component({
   selector: 'ipw-create-task',
@@ -85,10 +86,20 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
 
   public createTask(data: Observable<any>) {
     data.pipe(first()).subscribe((formData) => {
-      console.log(formData);
+
       const type = (formData['relationship.type']) ? formData['relationship.type'][0].value : null;
       const title = (formData['dc.title']) ? formData['dc.title'][0].value : null;
       const description = (formData['dc.description']) ? formData['dc.description'][0].value : null;
+      const metadataMap = {};
+      Object.keys(formData).forEach((metadataName) => {
+        metadataMap[metadataName] = formData[metadataName].map((formValue: FormFieldMetadataValueObject) => ({
+          language: formValue.language,
+          value: formValue.value,
+          place: formValue.place,
+          authority: formValue.authority,
+          confidence: formValue.confidence
+        }))
+      });
 
       if (this.isObjectivePage) {
         this.store.dispatch(new GenerateImpactPathwaySubTaskAction(
@@ -96,16 +107,14 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
           this.step.id,
           this.parentTask.id,
           type,
-          title,
-          description,
+          metadataMap,
           this.activeModal));
       } else {
         this.store.dispatch(new GenerateImpactPathwayTaskAction(
           this.step.parentId,
           this.step.id,
           type,
-          title,
-          description,
+          metadataMap,
           this.activeModal));
       }
     })
