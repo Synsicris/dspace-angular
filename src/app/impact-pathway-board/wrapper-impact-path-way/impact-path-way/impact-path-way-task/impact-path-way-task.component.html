@@ -11,7 +11,10 @@
       <span>{{data.title}}</span>
     </div>
     <button *ngIf="data.hasDetail()" class="btn btn-link p-0 flex-shrink-1" (click)="showObjectives(); $event.stopPropagation()"><i class="fas fa-info-circle"></i></button>
-    <button *ngIf="data.hasParent()" class="btn btn-link p-0 flex-shrink-1" (click)="removeTask(); $event.stopPropagation()"><i class="far fa-trash-alt"></i></button>
+    <button *ngIf="data.hasParent()" class="btn btn-link p-0 flex-shrink-1" (click)="removeTask(); $event.stopPropagation()">
+      <span *ngIf="!(isProcessingRemove() | async)"><i class='far fa-trash-alt'></i></span>
+      <span *ngIf="(isProcessingRemove() | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
+    </button>
   </div>
   <div class="task-content p-1 d-flex align-items-stretch justify-content-between flex-column flex-grow-1">
     <span>{{data.description}}</span>

@@ -8,6 +8,7 @@ import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pat
 import { hasValue, isNotEmpty, isNotUndefined } from '../../../../shared/empty.util';
 import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'ipw-impact-path-way-task',
@@ -16,14 +17,19 @@ import { Router } from '@angular/router';
 })
 export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
+  @Input() public impactPathwayId: string;
+  @Input() public impactPathwayStepId: string;
   @Input() public data: ImpactPathwayTask;
   @Input() public selectable: boolean;
   @Input() public multiSelectEnabled = false;
   @Input() public targetStep: ImpactPathwayStep;
   @Input() public stepHasDetail: boolean;
+  @Input() public taskPosition: number;
+  @Input() public isObjectivePage: boolean;
 
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  private removing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private subs: Subscription[] = [];
 
@@ -62,6 +68,10 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
     return isNotUndefined(this.targetStep) && this.targetStep.hasTask(this.data.id);
   }
 
+  public isProcessingRemove(): Observable<boolean> {
+    return this.removing$.asObservable();
+  }
+
   private isSelectable() {
     return isNotUndefined(this.selectable) ? (!this.isDisabled() && this.selectable) : this.data.hasParent();
   }
@@ -77,11 +87,16 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   }
 
   removeTask() {
-    this.service.removeTaskFromStep(this.data);
+    this.removing$.next(true);
+    if (this.isObjectivePage) {
+      this.service.removeSubTaskFromTask(this.impactPathwayId, this.impactPathwayStepId, this.data.parentId, this.data.id, this.taskPosition);
+    } else {
+      this.service.removeTaskFromStep(this.impactPathwayId, this.impactPathwayStepId, this.data.id, this.taskPosition);
+    }
   }
 
   showObjectives() {
-    this.router.navigate(['objectives', this.data.parentId, 'edit'], { queryParams: {target: this.data.id}})
+    this.router.navigate(['objectives', this.data.parentId, 'edit'], { queryParams: { target: this.data.id } })
   }
 
   ngOnDestroy(): void {

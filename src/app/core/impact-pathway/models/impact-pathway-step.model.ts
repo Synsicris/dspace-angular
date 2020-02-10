@@ -35,9 +35,9 @@ export class ImpactPathwayStep {
     return findIndex(this.tasks, { id: taskId });
   }
 
-  removeTask(task: ImpactPathwayTask) {
+  removeTask(taskId: string) {
     this.tasks = remove(this.tasks, (innerTask) => {
-      return innerTask.id !== task.id;
+      return innerTask.id !== taskId;
     });
   }
 }

@@ -13,11 +13,15 @@
        (cdkDropListEntered)="listEntered($event)"
        (cdkDropListExited)="listExited($event)"
        (cdkDropListDropped)="listDropped($event)">
-    <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async)" cdkDrag
+    <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
                               class="mb-sm-1 mb-lg-4"
+                              [impactPathwayId]="data.parentId"
+                              [impactPathwayStepId]="data.id"
                               [data]="task"
                               [cdkDragData]="task"
                               [stepHasDetail]="data.hasDetail()"
+                              [taskPosition]="i"
+                              [isObjectivePage]="false"
                               (cdkDragDropped)="drop($event)"
                               (cdkDragEntered)="dragEntered($event)"
                               (cdkDragExited)="dragExited($event)"

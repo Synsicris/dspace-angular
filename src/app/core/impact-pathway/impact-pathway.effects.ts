@@ -6,7 +6,8 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
-  AddImpactPathwaySubTaskAction, AddImpactPathwaySubTaskSuccessAction,
+  AddImpactPathwaySubTaskAction,
+  AddImpactPathwaySubTaskSuccessAction,
   AddImpactPathwayTaskAction,
   AddImpactPathwayTaskErrorAction,
   AddImpactPathwayTaskSuccessAction,
@@ -22,7 +23,12 @@ import {
   InitImpactPathwayAction,
   InitImpactPathwayErrorAction,
   InitImpactPathwaySuccessAction,
-  NormalizeImpactPathwayObjectsOnRehydrateAction
+  NormalizeImpactPathwayObjectsOnRehydrateAction,
+  RemoveImpactPathwaySubTaskAction,
+  RemoveImpactPathwaySubTaskSuccessAction,
+  RemoveImpactPathwayTaskAction,
+  RemoveImpactPathwayTaskErrorAction,
+  RemoveImpactPathwayTaskSuccessAction
 } from './impact-pathway.actions';
 import { ImpactPathwayService } from './impact-pathway.service';
 import { Item } from '../shared/item.model';
@@ -259,6 +265,47 @@ export class ImpactPathwayEffects {
       if (action.payload.modal) {
         action.payload.modal.close();
       }
+    }));
+
+  /**
+   * Generate an impactPathway task and dispatches
+   */
+  @Effect() removeTask$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK),
+    switchMap((action: RemoveImpactPathwayTaskAction) => {
+      return this.impactPathwayService.unlinkTaskFromParent(
+        action.payload.parentId,
+        action.payload.taskId,
+        action.payload.taskPosition).pipe(
+        map((item: Item) => new RemoveImpactPathwayTaskSuccessAction(
+          action.payload.impactPathwayId,
+          action.payload.parentId,
+          action.payload.taskId)),
+        catchError((error: Error) => {
+          console.error(error.message);
+          return observableOf(new RemoveImpactPathwayTaskErrorAction())
+        }));
+    }));
+
+  /**
+   * Generate an impactPathway task and dispatches
+   */
+  @Effect() removeSubTask$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUB_TASK),
+    switchMap((action: RemoveImpactPathwaySubTaskAction) => {
+      return this.impactPathwayService.unlinkTaskFromParent(
+        action.payload.parentTaskId,
+        action.payload.taskId,
+        action.payload.taskPosition).pipe(
+        map((item: Item) => new RemoveImpactPathwaySubTaskSuccessAction(
+          action.payload.impactPathwayId,
+          action.payload.stepId,
+          action.payload.parentTaskId,
+          action.payload.taskId)),
+        catchError((error: Error) => {
+          console.error(error.message);
+          return observableOf(new RemoveImpactPathwayTaskErrorAction())
+        }));
     }));
 
   /**

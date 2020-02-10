@@ -7,6 +7,7 @@ import { SearchTaskService } from '../../../search-task/search-task.service';
 import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-container.component';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'ipw-objective-container',
@@ -39,6 +40,13 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
     modalRef.componentInstance.step = this.impactPathwayStep;
     modalRef.componentInstance.parentTask = this.impactPathwayTask;
     modalRef.componentInstance.isObjectivePage = true;
+  }
+
+  getTasks(): Observable<ImpactPathwayTask[]> {
+    return this.service.getImpactPathwaySubTasksByParentId(
+      this.impactPathwayStep.parentId,
+      this.impactPathwayStep.id,
+      this.impactPathwayTask.id);
   }
 
 }

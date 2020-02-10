@@ -52,6 +52,7 @@ import { SubmissionFormsConfigService } from '../config/submission-forms-config.
 import { ConfigData } from '../config/config-data';
 import { SubmissionFormModel } from '../config/models/config-submission-form.model';
 import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
+import { RemoveImpactPathwaySubTaskAction, RemoveImpactPathwayTaskAction } from './impact-pathway.actions';
 
 @Injectable()
 export class ImpactPathwayService {
@@ -365,10 +366,6 @@ export class ImpactPathwayService {
     );
   }
 
-  getAvailableImpactPathwayTasks(): Observable<ImpactPathwayTask[]> {
-    return this._impactPathwayTasks$;
-  }
-
   getImpactPathwayStepById(impactPathwayStepId: string): Observable<ImpactPathwayStep> {
     return this.store.pipe(
       select(impactPathwayObjectsSelector),
@@ -384,6 +381,18 @@ export class ImpactPathwayService {
     return this.store.pipe(
       select(impactPathwayByIDSelector(impactPathwayId)),
       map((impactPathway: ImpactPathway) => impactPathway.getStep(impactPathwayStepId).tasks)
+    );
+  }
+
+  getImpactPathwaySubTasksByParentId(
+    impactPathwayId: string,
+    impactPathwayStepId: string,
+    impactPathwayTaskId): Observable<ImpactPathwayTask[]> {
+    return this.store.pipe(
+      select(impactPathwayByIDSelector(impactPathwayId)),
+      map((impactPathway: ImpactPathway) => {
+        return impactPathway.getStep(impactPathwayStepId).getTask(impactPathwayTaskId).tasks;
+      })
     );
   }
 
@@ -444,9 +453,12 @@ export class ImpactPathwayService {
     return this._currentSelectedTask;
   }
 
-  removeTaskFromStep(task: ImpactPathwayTask): void {
-    // const step = this.getImpactPathwayStepById(task.parentId);
-    // step.removeTask(task);
+  removeTaskFromStep(impactPathwayId: string, parentId: string, taskId: string, taskPosition: number): void {
+    this.store.dispatch(new RemoveImpactPathwayTaskAction(impactPathwayId, parentId, taskId, taskPosition));
+  }
+
+  removeSubTaskFromTask(impactPathwayId: string, stepId: string, parentId: string, taskId: string, taskPosition: number): void {
+    this.store.dispatch(new RemoveImpactPathwaySubTaskAction(impactPathwayId, stepId, parentId, taskId, taskPosition));
   }
 
   initImpactPathwayTask(taskItem: Item, parentId?: string, tasks: ImpactPathwayTask[] = []): ImpactPathwayTask {
@@ -481,6 +493,25 @@ export class ImpactPathwayService {
     );
   }
 
+  unlinkTaskFromParent(parentId: string, taskId: string, taskPosition: number): Observable<Item> {
+    return this.itemService.findById(parentId).pipe(
+      filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
+      take(1),
+      map((itemRD: RemoteData<Item>) => itemRD.payload),
+      tap((stepItem: Item) => this.removeRelationPatch(stepItem, taskPosition, 'impactpathway.relation.task')),
+      delay(100),
+      flatMap((stepItem: Item) => this.executeItemPatch(stepItem.id, 'metadata').pipe(
+        flatMap(() => this.itemService.findById(taskId)),
+        filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
+        map((itemRD: RemoteData<Item>) => itemRD.payload),
+        take(1),
+        tap((taskItem: Item) => this.removeRelationPatch(taskItem, 0, 'impactpathway.relation.parent')),
+        delay(100),
+        flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
+      ))
+    )
+  }
+
   addRelationPatch(targetItem: Item, relatedItemId: string, relation: string): void {
     const stepTasks: MetadataValue[] = targetItem.findMetadataSortedByPlace(relation);
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
@@ -497,6 +528,12 @@ export class ImpactPathwayService {
       taskToAdd,
       isEmpty(stepTasks),
       true);
+  }
+
+  removeRelationPatch(targetItem: Item, position: number, relation: string): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    const path = pathCombiner.getPath([relation, position.toString()]);
+    this.operationsBuilder.remove(path)
   }
 
   isImpactPathwayLoaded(): Observable<boolean> {

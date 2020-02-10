@@ -34,6 +34,11 @@ export const ImpactPathwayActionTypes = {
   ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
   ADD_IMPACT_PATHWAY_SUB_TASK_ERROR: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK_ERROR'),
   NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE: type('dspace/core/impactpathway/NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE'),
+  REMOVE_IMPACT_PATHWAY_TASK: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_TASK'),
+  REMOVE_IMPACT_PATHWAY_TASK_SUCCESS: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_SUCCESS'),
+  REMOVE_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_SUB_TASK'),
+  REMOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
+  REMOVE_IMPACT_PATHWAY_TASK_ERROR: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_ERROR'),
 };
 
 /* tslint:disable:max-classes-per-file */
@@ -458,6 +463,129 @@ export class AddImpactPathwaySubTaskErrorAction implements Action {
 }
 
 /**
+ * An ngrx action for removing task
+ */
+export class RemoveImpactPathwayTaskAction implements Action {
+  type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK;
+  payload: {
+    impactPathwayId: string;
+    parentId: string;
+    taskId: string;
+    taskPosition: number;
+  };
+
+  /**
+   * Create a new RemoveImpactPathwayTaskAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param parentId
+   *    the impact pathway task's parent id from where to remove task
+   * @param taskId
+   *    the Item id of the impact pathway task to remove
+   * @param taskPosition
+   *    the array position of the impact pathway task
+   */
+  constructor(impactPathwayId: string, parentId: string, taskId: string, taskPosition: number) {
+    this.payload = { impactPathwayId, parentId, taskId, taskPosition };
+  }
+}
+
+/**
+ * An ngrx action for remove success
+ */
+export class RemoveImpactPathwayTaskSuccessAction implements Action {
+  type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_SUCCESS;
+  payload: {
+    impactPathwayId: string;
+    parentId: string;
+    taskId: string;
+  };
+
+  /**
+   * Create a new RemoveImpactPathwayTaskSuccessAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param parentId
+   *    the impact pathway task's parent id from where to remove task
+   * @param taskId
+   *    the Item id of the impact pathway task to remove
+   */
+  constructor(impactPathwayId: string, parentId: string, taskId: string) {
+    this.payload = { impactPathwayId, parentId, taskId };
+  }
+}
+
+/**
+ * An ngrx action for remove error
+ */
+export class RemoveImpactPathwayTaskErrorAction implements Action {
+  type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_ERROR;
+}
+
+/**
+ * An ngrx action for removing task
+ */
+export class RemoveImpactPathwaySubTaskAction implements Action {
+  type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUB_TASK;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    parentTaskId: string;
+    taskId: string;
+    taskPosition: number;
+  };
+
+  /**
+   * Create a new RemoveImpactPathwaySubTaskAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   * @param parentTaskId
+   *    the impact pathway task's parent id from where to remove task
+   * @param taskId
+   *    the Item id of the impact pathway task to remove
+   * @param taskPosition
+   *    the array position of the impact pathway task
+   */
+  constructor(impactPathwayId: string, stepId: string, parentTaskId: string, taskId: string, taskPosition: number) {
+    this.payload = { impactPathwayId, stepId, parentTaskId, taskId, taskPosition };
+  }
+}
+
+/**
+ * An ngrx action for remove success
+ */
+export class RemoveImpactPathwaySubTaskSuccessAction implements Action {
+  type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    parentTaskId: string;
+    taskId: string;
+  };
+
+  /**
+   * Create a new RemoveImpactPathwaySubTaskSuccessAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   * @param parentTaskId
+   *    the impact pathway task's parent id from where to remove task
+   * @param taskId
+   *    the Item id of the impact pathway task to remove
+   */
+  constructor(impactPathwayId: string, stepId: string, parentTaskId: string, taskId: string) {
+    this.payload = { impactPathwayId, stepId, parentTaskId, taskId };
+  }
+}
+
+/**
  * An ngrx action for normalize state objects
  */
 export class NormalizeImpactPathwayObjectsOnRehydrateAction implements Action {
@@ -488,4 +616,9 @@ export type ImpactPathwayActions
   | InitImpactPathwayAction
   | InitImpactPathwaySuccessAction
   | InitImpactPathwayErrorAction
-  | NormalizeImpactPathwayObjectsOnRehydrateAction;
+  | NormalizeImpactPathwayObjectsOnRehydrateAction
+  | RemoveImpactPathwayTaskAction
+  | RemoveImpactPathwayTaskErrorAction
+  | RemoveImpactPathwayTaskSuccessAction
+  | RemoveImpactPathwaySubTaskAction
+  | RemoveImpactPathwaySubTaskSuccessAction;
