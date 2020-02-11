@@ -4,10 +4,8 @@ import { ImpactPathwayStep } from './impact-pathway-step.model';
 
 export class ImpactPathway {
 
-  public description;
+  constructor(public id?: string, public title?: string, public description?: string, public steps?: ImpactPathwayStep[]) {
 
-  constructor(public id?: string, public title?: string, public steps?: ImpactPathwayStep[]) {
-    this.description = `Description ${title}`
   }
 
   hasStep(stepId: string): boolean {

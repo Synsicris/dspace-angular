@@ -14,8 +14,9 @@
                                 [data]="step"
                                 [stepType]="step.type"></ipw-impact-path-way-step>
     </div>
-    <div class="d-flex align-items-stretch border-bottom">
-      <textarea class="form-control" title="Description" placeholder="{{impactPathway.description}}"></textarea>
-    </div>
+    <ipw-editable-textarea *ngIf="impactPathway"
+                           [placeholder]="impactPathway.description"
+                           [initContent]="impactPathway.description"
+                           (contentChange)="updateDescription($event)"></ipw-editable-textarea>
   </ng-container>
 </ipw-sidebar-panel>

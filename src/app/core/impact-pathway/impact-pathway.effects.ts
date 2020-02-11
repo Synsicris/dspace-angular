@@ -24,11 +24,20 @@ import {
   InitImpactPathwayErrorAction,
   InitImpactPathwaySuccessAction,
   NormalizeImpactPathwayObjectsOnRehydrateAction,
+  PatchImpactPathwayMetadataAction,
+  PatchImpactPathwayMetadataErrorAction,
+  PatchImpactPathwayMetadataSuccessAction,
+  PatchImpactPathwayTaskMetadataAction,
+  PatchImpactPathwayTaskMetadataErrorAction,
+  PatchImpactPathwayTaskMetadataSuccessAction,
   RemoveImpactPathwaySubTaskAction,
   RemoveImpactPathwaySubTaskSuccessAction,
   RemoveImpactPathwayTaskAction,
   RemoveImpactPathwayTaskErrorAction,
-  RemoveImpactPathwayTaskSuccessAction
+  RemoveImpactPathwayTaskSuccessAction,
+  UpdateImpactPathwayAction,
+  UpdateImpactPathwaySubTaskAction,
+  UpdateImpactPathwayTaskAction
 } from './impact-pathway.actions';
 import { ImpactPathwayService } from './impact-pathway.service';
 import { Item } from '../shared/item.model';
@@ -50,7 +59,7 @@ export class ImpactPathwayEffects {
   @Effect() generate$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY),
     switchMap((action: GenerateImpactPathwayAction) => {
-      return this.impactPathwayService.generateImpactPathwayItem(action.payload.name).pipe(
+      return this.impactPathwayService.generateImpactPathwayItem(action.payload.name, '').pipe(
         tap(() => {
           if (action.payload.modal) {
             action.payload.modal.close();
@@ -182,7 +191,7 @@ export class ImpactPathwayEffects {
   @Effect({ dispatch: false }) addTaskSuccess$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_SUCCESS),
     tap(() => {
-      this.notificationsService.success(null, this.translate.get('impact-pathway.create.success'))
+      this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'))
     }),
     tap((action: AddImpactPathwaySubTaskAction) => {
       if (action.payload.modal) {
@@ -259,7 +268,7 @@ export class ImpactPathwayEffects {
   @Effect({ dispatch: false }) addSubTaskSuccess$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS),
     tap(() => {
-      this.notificationsService.success(null, this.translate.get('impact-pathway.create.success'))
+      this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'))
     }),
     tap((action: AddImpactPathwaySubTaskSuccessAction) => {
       if (action.payload.modal) {
@@ -306,6 +315,104 @@ export class ImpactPathwayEffects {
           console.error(error.message);
           return observableOf(new RemoveImpactPathwayTaskErrorAction())
         }));
+    }));
+
+  /**
+   * Patch an impactPathway task and dispatch PatchImpactPathwayMetadataSuccessAction
+   */
+  @Effect() patchMetadataImpactPathway$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_METADATA),
+    switchMap((action: PatchImpactPathwayMetadataAction) => {
+      return this.impactPathwayService.updateMetadataItem(
+        action.payload.impactPathwayId,
+        action.payload.metadata,
+        action.payload.metadataIndex,
+        action.payload.value
+      ).pipe(
+        map((item: Item) => new PatchImpactPathwayMetadataSuccessAction(
+          action.payload.impactPathwayId,
+          action.payload.oldImpactPathway,
+          item
+        )),
+        catchError((error: Error) => {
+          console.error(error.message);
+          return observableOf(new PatchImpactPathwayMetadataErrorAction())
+        }));
+    }));
+
+  /**
+   * Update an impactPathway object
+   */
+  @Effect() patchMetadataImpactPathwaySuccess$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_METADATA_SUCCESS),
+    map((action: PatchImpactPathwayMetadataSuccessAction) => {
+      return new UpdateImpactPathwayAction(
+        action.payload.impactPathwayId,
+        this.impactPathwayService.updateImpactPathway(action.payload.item, action.payload.oldImpactPathway)
+      )
+    })
+  );
+
+  /**
+   * Patch an impactPathway task and dispatch PatchImpactPathwayTaskMetadataSuccessAction
+   */
+  @Effect() patchMetadataTask$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_TASK_METADATA),
+    switchMap((action: PatchImpactPathwayTaskMetadataAction) => {
+      return this.impactPathwayService.updateMetadataItem(
+        action.payload.taskId,
+        action.payload.metadata,
+        action.payload.metadataIndex,
+        action.payload.value
+      ).pipe(
+        map((item: Item) => new PatchImpactPathwayTaskMetadataSuccessAction(
+          action.payload.impactPathwayId,
+          action.payload.stepId,
+          action.payload.taskId,
+          action.payload.oldTask,
+          item,
+          action.payload.parentTaskId
+        )),
+        catchError((error: Error) => {
+          console.error(error.message);
+          return observableOf(new PatchImpactPathwayTaskMetadataErrorAction())
+        }));
+    }));
+
+  /**
+   * update an impactPathway task object
+   */
+  @Effect() patchMetadataSuccessTask$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_TASK_METADATA_SUCCESS),
+    map((action: PatchImpactPathwayTaskMetadataSuccessAction) => {
+      if (isNotEmpty(action.payload.parentTaskId)) {
+        return new UpdateImpactPathwaySubTaskAction(
+          action.payload.impactPathwayId,
+          action.payload.stepId,
+          action.payload.parentTaskId,
+          action.payload.taskId,
+          this.impactPathwayService.updateImpactPathwayTask(action.payload.item, action.payload.oldTask)
+        )
+      } else {
+        return new UpdateImpactPathwayTaskAction(
+          action.payload.impactPathwayId,
+          action.payload.stepId,
+          action.payload.taskId,
+          this.impactPathwayService.updateImpactPathwayTask(action.payload.item, action.payload.oldTask)
+        )
+      }
+    })
+  );
+
+  /**
+   * Show a notification on success
+   */
+  @Effect({ dispatch: false }) patchMetadataError$ = this.actions$.pipe(
+    ofType(
+      ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_TASK_METADATA_ERROR,
+      ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_METADATA_ERROR),
+    tap(() => {
+      this.notificationsService.error(null, this.translate.get('impact-pathway.patch.metadata.error'))
     }));
 
   /**

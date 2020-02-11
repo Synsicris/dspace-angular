@@ -40,4 +40,9 @@ export class ImpactPathwayStep {
       return innerTask.id !== taskId;
     });
   }
+
+  replaceTask(taskId: string, newTask: ImpactPathwayTask) {
+    const index = this.getTaskIndex(taskId);
+    this.tasks[index] = newTask;
+  }
 }

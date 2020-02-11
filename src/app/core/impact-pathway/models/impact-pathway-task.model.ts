@@ -46,4 +46,9 @@ export class ImpactPathwayTask {
     });
   }
 
+  replaceSubTask(taskId: string, newTask: ImpactPathwayTask) {
+    const index = this.getSubTaskIndex(taskId);
+    this.tasks[index] = newTask;
+  }
+
 }

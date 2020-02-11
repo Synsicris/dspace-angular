@@ -53,6 +53,7 @@ import { ConfigData } from '../config/config-data';
 import { SubmissionFormModel } from '../config/models/config-submission-form.model';
 import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
 import { RemoveImpactPathwaySubTaskAction, RemoveImpactPathwayTaskAction } from './impact-pathway.actions';
+import { ErrorResponse } from '../cache/response.models';
 
 @Injectable()
 export class ImpactPathwayService {
@@ -148,8 +149,8 @@ export class ImpactPathwayService {
     )
   }
 
-  generateImpactPathwayItem(impactPathwayName: string): Observable<Item> {
-    return this.createImpactPathwayWorkspaceItem(impactPathwayName).pipe(
+  generateImpactPathwayItem(impactPathwayName: string, impactPathwayDescription: string): Observable<Item> {
+    return this.createImpactPathwayWorkspaceItem(impactPathwayName, impactPathwayDescription).pipe(
       flatMap((submission: SubmissionObject) => this.depositWorkspaceItem(submission)),
       filter((rd: RemoteData<Item>) => rd.hasSucceeded && isNotEmpty(rd.payload)),
       take(1),
@@ -157,7 +158,7 @@ export class ImpactPathwayService {
     )
   }
 
-  private createImpactPathwayWorkspaceItem(impactPathwayName: string): Observable<SubmissionObject> {
+  private createImpactPathwayWorkspaceItem(impactPathwayName: string, impactPathwayDescription: string): Observable<SubmissionObject> {
     const submission$ = this.getImpactPathwaysCollection().pipe(
       flatMap((collectionId) => this.submissionService.createSubmissionForCollection(collectionId)),
       flatMap((submission: SubmissionObject) =>
@@ -174,7 +175,9 @@ export class ImpactPathwayService {
       ))),
       this.getImpactPathwaysFormSection()
     ).pipe(
-      tap(([objects, sectionName]: [any[], string]) => this.addPatchOperationForImpactPathway(sectionName, impactPathwayName, objects[1])),
+      tap(([objects, sectionName]: [any[], string]) => {
+        this.addPatchOperationForImpactPathway(sectionName, impactPathwayName, impactPathwayDescription, objects[1])
+      }),
       delay(100),
       flatMap(([objects, sectionName]: [any[], string]) => this.executeSubmissionPatch(objects[0].uuid, sectionName))
     )
@@ -205,9 +208,10 @@ export class ImpactPathwayService {
     )
   }
 
-  private addPatchOperationForImpactPathway(sectionName: string, impactPathwayName: string, steps: Item[]) {
+  private addPatchOperationForImpactPathway(sectionName: string, impactPathwayName: string, impactPathwayDescription: string, steps: Item[]) {
     const pathCombiner = new JsonPatchOperationPathCombiner('sections', sectionName);
     this.operationsBuilder.add(pathCombiner.getPath('dc.title'), impactPathwayName, true, true);
+    this.operationsBuilder.add(pathCombiner.getPath('dc.description'), impactPathwayDescription, true, true);
     this.operationsBuilder.add(pathCombiner.getPath('relationship.type'), 'impactpathway', true, true);
     const stepValueList = steps.map((step: Item, index: number) => Object.assign(new AuthorityEntry(), {
       id: step.id,
@@ -297,7 +301,7 @@ export class ImpactPathwayService {
       take(1),
       map((rd: RemoteData<Item>) => rd.payload),
       tap((item: Item) => this.itemService.update(item)),
-      catchError(() => observableOf(null))
+      catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
     )
   }
 
@@ -405,9 +409,10 @@ export class ImpactPathwayService {
   }
 
   initImpactPathway(item: Item): Observable<ImpactPathway> {
+    const description = item.firstMetadataValue('dc.description');
     return this.initImpactPathwaySteps(item.uuid, item).pipe(
       map((steps: ImpactPathwayStep[]) => {
-        return new ImpactPathway(item.uuid, item.name, steps)
+        return new ImpactPathway(item.uuid, item.name, description, steps)
       })
     );
   }
@@ -468,6 +473,18 @@ export class ImpactPathwayService {
     return new ImpactPathwayTask(taskItem.id, type, parentId, taskItem.name, description, tasks);
   }
 
+  updateImpactPathwayTask(newTaskItem: Item, oldTask: ImpactPathwayTask): ImpactPathwayTask {
+    const description = newTaskItem.firstMetadataValue('dc.description');
+
+    return new ImpactPathwayTask(oldTask.id, oldTask.type, oldTask.parentId, newTaskItem.name, description, oldTask.tasks);
+  }
+
+  updateImpactPathway(newImpactPathwayItem: Item, oldImpactPathway: ImpactPathway): ImpactPathway {
+    const description = newImpactPathwayItem.firstMetadataValue('dc.description');
+
+    return new ImpactPathway(oldImpactPathway.id, newImpactPathwayItem.name, description, oldImpactPathway.steps);
+  }
+
   initImpactPathwayStep(parentId: string, stepItem: Item, tasks: ImpactPathwayTask[]): ImpactPathwayStep {
     const type = stepItem.firstMetadataValue('impactpathway.step.type');
 
@@ -512,6 +529,17 @@ export class ImpactPathwayService {
     )
   }
 
+  updateMetadataItem(itemId: string, metadataName: string, position: number, value: string): Observable<Item> {
+    return this.itemService.findById(itemId).pipe(
+      filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
+      take(1),
+      map((itemRD: RemoteData<Item>) => itemRD.payload),
+      tap(() => this.replaceMetadataPatch(metadataName, position, value)),
+      delay(100),
+      flatMap(() => this.executeItemPatch(itemId, 'metadata'))
+    )
+  }
+
   addRelationPatch(targetItem: Item, relatedItemId: string, relation: string): void {
     const stepTasks: MetadataValue[] = targetItem.findMetadataSortedByPlace(relation);
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
@@ -534,6 +562,12 @@ export class ImpactPathwayService {
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
     const path = pathCombiner.getPath([relation, position.toString()]);
     this.operationsBuilder.remove(path)
+  }
+
+  replaceMetadataPatch(metadataName: string, position: number, value: string): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    const path = pathCombiner.getPath([metadataName, position.toString()]);
+    this.operationsBuilder.replace(path, value, true);
   }
 
   isImpactPathwayLoaded(): Observable<boolean> {

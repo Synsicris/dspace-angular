@@ -39,6 +39,15 @@ export const ImpactPathwayActionTypes = {
   REMOVE_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_SUB_TASK'),
   REMOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
   REMOVE_IMPACT_PATHWAY_TASK_ERROR: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_ERROR'),
+  PATCH_IMPACT_PATHWAY_METADATA: type('dspace/core/impactpathway/PATCH_IMPACT_PATHWAY_METADATA'),
+  PATCH_IMPACT_PATHWAY_METADATA_SUCCESS: type('dspace/core/impactpathway/PATCH_IMPACT_PATHWAY_METADATA_SUCCESS'),
+  PATCH_IMPACT_PATHWAY_METADATA_ERROR: type('dspace/core/impactpathway/PATCH_IMPACT_PATHWAY_METADATA_ERROR'),
+  PATCH_IMPACT_PATHWAY_TASK_METADATA: type('dspace/core/impactpathway/PATCH_IMPACT_PATHWAY_TASK_METADATA'),
+  PATCH_IMPACT_PATHWAY_TASK_METADATA_SUCCESS: type('dspace/core/impactpathway/PATCH_IMPACT_PATHWAY_TASK_METADATA_SUCCESS'),
+  PATCH_IMPACT_PATHWAY_TASK_METADATA_ERROR: type('dspace/core/impactpathway/PATCH_IMPACT_PATHWAY_TASK_METADATA_ERROR'),
+  UPDATE_IMPACT_PATHWAY: type('dspace/core/impactpathway/UPDATE_IMPACT_PATHWAY'),
+  UPDATE_IMPACT_PATHWAY_TASK: type('dspace/core/impactpathway/UPDATE_IMPACT_PATHWAY_TASK'),
+  UPDATE_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/UPDATE_IMPACT_PATHWAY_SUB_TASK'),
 };
 
 /* tslint:disable:max-classes-per-file */
@@ -586,6 +595,260 @@ export class RemoveImpactPathwaySubTaskSuccessAction implements Action {
 }
 
 /**
+ * An ngrx action to patch a ImpactPathway's metadata
+ */
+export class PatchImpactPathwayMetadataAction implements Action {
+  type = ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_METADATA;
+  payload: {
+    impactPathwayId: string,
+    oldImpactPathway: ImpactPathway;
+    metadata: string;
+    metadataIndex: number;
+    value: string;
+  };
+
+  /**
+   * Create a new PatchImpactPathwayMetadataAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param oldImpactPathway
+   *    the previous impact pathway version
+   * @param metadata
+   *    the Item metadata to patch
+   * @param metadataIndex
+   *    the index of the Item metadata to patch
+   * @param value
+   *    the new value of the Item metadata to patch
+   */
+  constructor(
+    impactPathwayId: string,
+    oldImpactPathway: ImpactPathway,
+    metadata: string,
+    metadataIndex: number,
+    value: string) {
+    this.payload = { impactPathwayId, oldImpactPathway, metadata, metadataIndex, value};
+  }
+}
+
+/**
+ * An ngrx action to patch a ImpactPathway's metadata
+ */
+export class PatchImpactPathwayMetadataSuccessAction implements Action {
+  type = ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_METADATA_SUCCESS;
+  payload: {
+    impactPathwayId: string,
+    oldImpactPathway: ImpactPathway;
+    item: Item;
+  };
+
+  /**
+   * Create a new PatchImpactPathwayMetadataSuccessAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param oldImpactPathway
+   *    the previous impact pathway version
+   * @param item
+   *    the patched item
+   */
+  constructor(
+    impactPathwayId: string,
+    oldImpactPathway: ImpactPathway,
+    item: Item) {
+    this.payload = { impactPathwayId, oldImpactPathway, item};
+  }
+}
+
+/**
+ * An ngrx action for patch error
+ */
+export class PatchImpactPathwayMetadataErrorAction implements Action {
+  type = ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_METADATA_ERROR;
+}
+
+/**
+ * An ngrx action to patch a task's metadata
+ */
+export class PatchImpactPathwayTaskMetadataAction implements Action {
+  type = ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_TASK_METADATA;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    taskId: string;
+    oldTask: ImpactPathwayTask;
+    metadata: string;
+    metadataIndex: number;
+    value: string;
+    parentTaskId?: string;
+  };
+
+  /**
+   * Create a new PatchImpactPathwayTaskMetadataAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   * @param taskId
+   *    the Item id of the impact pathway task to patch
+   * @param oldTask
+   *    the previous impact pathway task version
+   * @param metadata
+   *    the Item metadata to patch
+   * @param metadataIndex
+   *    the index of the Item metadata to patch
+   * @param value
+   *    the new value of the Item metadata to patch
+   * @param parentTaskId
+   *    the impact pathway task's parent id from where to patch task
+   */
+  constructor(
+    impactPathwayId: string,
+    stepId: string,
+    taskId: string,
+    oldTask: ImpactPathwayTask,
+    metadata: string,
+    metadataIndex: number,
+    value: string,
+    parentTaskId?: string) {
+    this.payload = { impactPathwayId, stepId, taskId, oldTask, metadata, metadataIndex, value, parentTaskId};
+  }
+}
+
+/**
+ * An ngrx action to patch a task's metadata
+ */
+export class PatchImpactPathwayTaskMetadataSuccessAction implements Action {
+  type = ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_TASK_METADATA_SUCCESS;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    taskId: string;
+    oldTask: ImpactPathwayTask;
+    item: Item;
+    parentTaskId?: string;
+  };
+
+  /**
+   * Create a new PatchImpactPathwayTaskMetadataSuccessAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   * @param taskId
+   *    the Item id of the impact pathway task to patch
+   * @param oldTask
+   *    the previous impact pathway task version
+   * @param item
+   *    the patched item
+   * @param parentTaskId
+   *    the impact pathway task's parent id from where to patch task
+   */
+  constructor(
+    impactPathwayId: string,
+    stepId: string,
+    taskId: string,
+    oldTask: ImpactPathwayTask,
+    item: Item,
+    parentTaskId?: string) {
+    this.payload = { impactPathwayId, stepId, taskId, oldTask, item, parentTaskId};
+  }
+}
+
+/**
+ * An ngrx action for patch error
+ */
+export class PatchImpactPathwayTaskMetadataErrorAction implements Action {
+  type = ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_TASK_METADATA_ERROR;
+}
+
+/**
+ * An ngrx action to update a task
+ */
+export class UpdateImpactPathwayAction implements Action {
+  type = ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY;
+  payload: {
+    impactPathwayId: string;
+    impactPathway: ImpactPathway;
+  };
+
+  /**
+   * Create a new UpdateImpactPathwayAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param impactPathway
+   *    the updated impact pathway
+   */
+  constructor(impactPathwayId: string, impactPathway: ImpactPathway) {
+    this.payload = { impactPathwayId, impactPathway };
+  }
+}
+
+/**
+ * An ngrx action to update a task
+ */
+export class UpdateImpactPathwayTaskAction implements Action {
+  type = ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY_TASK;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    taskId: string;
+    task: ImpactPathwayTask;
+  };
+
+  /**
+   * Create a new UpdateImpactPathwayTaskAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id where to update task
+   * @param taskId
+   *    the Item id of the impact pathway task to add
+   * @param task
+   *    the updated impact pathway task
+   */
+  constructor(impactPathwayId: string, stepId: string, taskId: string, task: ImpactPathwayTask) {
+    this.payload = { impactPathwayId, stepId, taskId, task };
+  }
+}
+
+/**
+ * An ngrx action to update a task
+ */
+export class UpdateImpactPathwaySubTaskAction implements Action {
+  type = ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY_SUB_TASK;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    parentTaskId: string;
+    taskId: string;
+    task: ImpactPathwayTask;
+  };
+
+  /**
+   * Create a new UpdateImpactPathwaySubTaskAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   * @param parentTaskId
+   *    the impact pathway task's parent id where to update task
+   * @param taskId
+   *    the Item id of the impact pathway task to add
+   * @param task
+   *    the updated impact pathway task
+   */
+  constructor(impactPathwayId: string, stepId: string, parentTaskId: string, taskId: string, task: ImpactPathwayTask) {
+    this.payload = { impactPathwayId, stepId, parentTaskId, taskId, task };
+  }
+}
+
+/**
  * An ngrx action for normalize state objects
  */
 export class NormalizeImpactPathwayObjectsOnRehydrateAction implements Action {
@@ -621,4 +884,13 @@ export type ImpactPathwayActions
   | RemoveImpactPathwayTaskErrorAction
   | RemoveImpactPathwayTaskSuccessAction
   | RemoveImpactPathwaySubTaskAction
-  | RemoveImpactPathwaySubTaskSuccessAction;
+  | RemoveImpactPathwaySubTaskSuccessAction
+  | PatchImpactPathwayMetadataAction
+  | PatchImpactPathwayMetadataErrorAction
+  | PatchImpactPathwayMetadataSuccessAction
+  | PatchImpactPathwayTaskMetadataAction
+  | PatchImpactPathwayTaskMetadataErrorAction
+  | PatchImpactPathwayTaskMetadataSuccessAction
+  | UpdateImpactPathwayAction
+  | UpdateImpactPathwayTaskAction
+  | UpdateImpactPathwaySubTaskAction;

@@ -6,7 +6,9 @@ import {
   ImpactPathwayActionTypes,
   InitImpactPathwaySuccessAction,
   RemoveImpactPathwaySubTaskSuccessAction,
-  RemoveImpactPathwayTaskSuccessAction
+  RemoveImpactPathwayTaskSuccessAction,
+  UpdateImpactPathwaySubTaskAction,
+  UpdateImpactPathwayTaskAction
 } from './impact-pathway.actions';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
@@ -94,6 +96,14 @@ export function impactPathwayReducer(state = initialState, action: ImpactPathway
       return RemoveImpactPathwaySubTaskFromImpactPathwayTask(state, action as RemoveImpactPathwaySubTaskSuccessAction);
     }
 
+    case ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY_TASK: {
+      return replaceImpactPathwayTask(state, action as UpdateImpactPathwayTaskAction);
+    }
+
+    case ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY_SUB_TASK: {
+      return replaceImpactPathwaySubTask(state, action as UpdateImpactPathwaySubTaskAction);
+    }
+
     case ImpactPathwayActionTypes.NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE: {
       return normalizeImpactPathwayObjectsOnRehydrate(state);
     }
@@ -156,7 +166,6 @@ function addImpactPathwayTaskToImpactPathwayStep(state: ImpactPathwayState, acti
 
 function normalizeImpactPathwayObjectsOnRehydrate(state: ImpactPathwayState) {
   if (isNotEmpty(state)) {
-    const impactPathwayKeys: string[] = Object.keys(state.objects);
     const normImpactPathways: ImpactPathwayEntries = {};
 
     Object.keys(state.objects).forEach((key) => {
@@ -167,7 +176,7 @@ function normalizeImpactPathwayObjectsOnRehydrate(state: ImpactPathwayState) {
           normStep.tasks = normStep.tasks
             .map((task) => {
               const normTask: ImpactPathwayTask = Object.assign(new ImpactPathwayTask(), {}, task);
-              normTask.tasks = task.tasks.map((subTask) => Object.assign(new ImpactPathwayTask(), {}, subTask))
+              normTask.tasks = task.tasks.map((subTask) => Object.assign(new ImpactPathwayTask(), {}, subTask));
               return normTask;
             });
           return normStep;
@@ -271,6 +280,76 @@ function RemoveImpactPathwaySubTaskFromImpactPathwayTask(state: ImpactPathwaySta
     tasks: [...parentTask.tasks]
   });
   newTask.removeSubTask(action.payload.taskId);
+  const newTaskList = step.tasks.slice(0);
+  newTaskList[parentTaskIndex] = newTask;
+
+  const newStep = Object.assign(new ImpactPathwayStep(), step, {
+    tasks: newTaskList
+  });
+  const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[action.payload.impactPathwayId], {
+    steps: newState.objects[action.payload.impactPathwayId].steps.map((stepEntry, index) => {
+      return (index === stepIndex) ? newStep : stepEntry;
+    })
+  });
+  return Object.assign({}, state, {
+    objects: Object.assign({}, state.objects, {
+      [action.payload.impactPathwayId]: newImpactPathway
+    }),
+    processing: false
+  });
+}
+
+/**
+ * Init a impact pathway object.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitImpactPathwaySuccessAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function replaceImpactPathwayTask(state: ImpactPathwayState, action: UpdateImpactPathwayTaskAction): ImpactPathwayState {
+  const newState = Object.assign({}, state);
+  const step: ImpactPathwayStep = newState.objects[action.payload.impactPathwayId].getStep(action.payload.stepId);
+  const stepIndex: number = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.stepId);
+  const newStep = Object.assign(new ImpactPathwayStep(), step, {
+    tasks: [...step.tasks]
+  });
+  newStep.replaceTask(action.payload.taskId, action.payload.task);
+  const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[action.payload.impactPathwayId], {
+    steps: newState.objects[action.payload.impactPathwayId].steps.map((stepEntry, index) => {
+      return (index === stepIndex) ? newStep : stepEntry;
+    })
+  });
+  return Object.assign({}, state, {
+    objects: Object.assign({}, state.objects, {
+      [action.payload.impactPathwayId]: newImpactPathway
+    }),
+    processing: false
+  });
+}
+
+/**
+ * Replace a task's sub-task.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitImpactPathwaySuccessAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function replaceImpactPathwaySubTask(state: ImpactPathwayState, action: UpdateImpactPathwaySubTaskAction): ImpactPathwayState {
+  const newState = Object.assign({}, state);
+  const step: ImpactPathwayStep = newState.objects[action.payload.impactPathwayId].getStep(action.payload.stepId);
+  const stepIndex: number = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.stepId);
+  const parentTask: ImpactPathwayTask = step.getTask(action.payload.parentTaskId);
+  const parentTaskIndex: number = step.getTaskIndex(action.payload.parentTaskId);
+  const newTask = Object.assign(new ImpactPathwayTask(), parentTask, {
+    tasks: [...parentTask.tasks]
+  });
+  newTask.replaceSubTask(action.payload.taskId, action.payload.task);
   const newTaskList = step.tasks.slice(0);
   newTaskList[parentTaskIndex] = newTask;
 

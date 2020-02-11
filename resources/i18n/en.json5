@@ -619,6 +619,8 @@
 
   "impact-pathway.objectives.edit.page.title": "Edit objectives",
 
+  "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
+
   "impact-pathway.task.create.head": "New item",
 
   "impact-pathway.task.create.error": "There was an issue when creating the new item, please try again later.",

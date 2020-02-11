@@ -28,6 +28,7 @@ import { ObjectivesBoardComponent } from './objectives-board.component';
 import { WrapperObjectivesComponent } from './wrapper-objectives/wrapper-objectives.component';
 import { ObjectiveContainerComponent } from './wrapper-objectives/objective/container/objective-container.component';
 import { ObjectiveComponent } from './wrapper-objectives/objective/objective.component';
+import { EditableTextareaComponent } from './shared/editable-textarea/editable-textarea.component';
 
 const MODULES = [
   CommonModule,
@@ -55,7 +56,8 @@ const COMPONENTS = [
   ObjectivesBoardComponent,
   WrapperObjectivesComponent,
   ObjectiveComponent,
-  ObjectiveContainerComponent
+  ObjectiveContainerComponent,
+  EditableTextareaComponent
 ];
 
 const DIRECTIVES = [
