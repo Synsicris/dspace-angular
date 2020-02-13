@@ -1,4 +1,8 @@
-@import '../../../../styles/variables';
+@import '../../../../../styles/variables';
+
+:host /deep/ .dropdown-menu {
+  width: 100% !important;
+}
 
 /* style fa-spin */
 .fa-spin {

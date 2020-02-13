@@ -19,16 +19,17 @@ import { ExploitationPlanDirective } from './wrapper-impact-path-way/impact-path
 import { ImpactPathWayTaskModalComponent } from './wrapper-impact-path-way/impact-path-way/impact-path-way-task/impact-path-way-task-modal/impact-path-way-task-modal.component';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { SearchTaskComponent } from './search-task/search-task.component';
-import { FilterBoxComponent } from './search-task/filter-box/filter-box.component';
+import { FilterBoxComponent } from './search-task/search-header/filter-box/filter-box.component';
 import { SearchTaskService } from './search-task/search-task.service';
-import { SearchBoxComponent } from './search-task/search-box/search-box.component';
-import { SearchLabelsComponent } from './search-task/search-labels/search-labels.component';
+import { SearchBoxComponent } from './search-task/search-header/search-box/search-box.component';
+import { SearchLabelsComponent } from './search-task/search-header/search-labels/search-labels.component';
 import { DragAndDropContainerComponent } from './shared/drag-and-drop-container.component';
 import { ObjectivesBoardComponent } from './objectives-board.component';
 import { WrapperObjectivesComponent } from './wrapper-objectives/wrapper-objectives.component';
 import { ObjectiveContainerComponent } from './wrapper-objectives/objective/container/objective-container.component';
 import { ObjectiveComponent } from './wrapper-objectives/objective/objective.component';
 import { EditableTextareaComponent } from './shared/editable-textarea/editable-textarea.component';
+import { SearchHeaderComponent } from './search-task/search-header/search-header.component';
 
 const MODULES = [
   CommonModule,
@@ -46,6 +47,7 @@ const COMPONENTS = [
   ImpactPathWayStepComponent,
   ImpactPathWayTaskComponent,
   WrapperImpactPathWayComponent,
+  SearchHeaderComponent,
   SearchBoxComponent,
   SearchLabelsComponent,
   SearchTaskComponent,

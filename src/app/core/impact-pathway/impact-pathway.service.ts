@@ -59,9 +59,6 @@ import { ErrorResponse } from '../cache/response.models';
 export class ImpactPathwayService {
 
   private _stepIds: string[] = ['sidebar-object-list'];
-  private _impactPathways: ImpactPathway[] = [];
-  private _impactPathwayTasks: ImpactPathwayTask[] = [];
-  private _impactPathwayTasks$: BehaviorSubject<ImpactPathwayTask[]> = new BehaviorSubject<ImpactPathwayTask[]>(null);
   private _currentSelectedTask: BehaviorSubject<ImpactPathwayTask> = new BehaviorSubject<ImpactPathwayTask>(null);
   private _stepTaskTypeMap: Map<string, ImpactPathwayTaskType[]> = new Map(
     [
@@ -186,9 +183,9 @@ export class ImpactPathwayService {
   generateImpactPathwayTaskItem(parentId: string, taskType: string, metadata: MetadataMap): Observable<Item> {
     return this.createImpactPathwayTaskWorkspaceItem(taskType).pipe(
       map((submission: SubmissionObject) => submission.item),
-      tap((taskItem: Item) => this.addPatchOperationForImpactPathwayTask(taskItem, parentId, metadata)),
+      tap(() => this.addPatchOperationForImpactPathwayTask(metadata)),
       delay(100),
-      flatMap((taskItem) => this.executeItemPatch(taskItem.uuid, 'metadata')),
+      flatMap((taskItem: Item) => this.executeItemPatch(taskItem.uuid, 'metadata')),
     )
   }
 
@@ -213,7 +210,7 @@ export class ImpactPathwayService {
     this.operationsBuilder.add(pathCombiner.getPath('dc.title'), impactPathwayName, true, true);
     this.operationsBuilder.add(pathCombiner.getPath('dc.description'), impactPathwayDescription, true, true);
     this.operationsBuilder.add(pathCombiner.getPath('relationship.type'), 'impactpathway', true, true);
-    const stepValueList = steps.map((step: Item, index: number) => Object.assign(new AuthorityEntry(), {
+    const stepValueList = steps.map((step: Item) => Object.assign(new AuthorityEntry(), {
       id: step.id,
       display: step.name,
       value: step.id,
@@ -259,25 +256,12 @@ export class ImpactPathwayService {
 
   }
 
-  private addPatchOperationForImpactPathwayTask(
-    taskItem: Item,
-    parentStepId: string,
-    metadata: MetadataMap): void {
+  private addPatchOperationForImpactPathwayTask(metadata: MetadataMap): void {
 
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
     Object.keys(metadata).forEach((metadataName) => {
       this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
     });
-    // this.operationsBuilder.add(pathCombiner.getPath('dc.title'), title, true, true);
-    // this.operationsBuilder.add(pathCombiner.getPath('dc.description'), description, true, true);
-    // this.operationsBuilder.add(pathCombiner.getPath('relationship.type'), taskType, true, true);
-    // const parentStep = {
-    //   value: parentStepId,
-    //   authority: parentStepId,
-    //   place: 0,
-    //   confidence: 600
-    // };
-    // this.operationsBuilder.add(pathCombiner.getPath('impactpathway.relation.parent'), parentStep, true, true);
   }
 
   private executeSubmissionPatch(objectId: string, pathName: string): Observable<SubmissionObject> {
@@ -307,7 +291,7 @@ export class ImpactPathwayService {
 
   private depositWorkspaceItem(submission: SubmissionObject): Observable<RemoteData<Item>> {
     return this.submissionService.depositSubmission(submission.self).pipe(
-      flatMap((submissions: SubmissionObject[]) => this.itemService.findById((submission.item as Item).id))
+      flatMap(() => this.itemService.findById((submission.item as Item).id))
     )
   }
 
@@ -376,8 +360,7 @@ export class ImpactPathwayService {
       map((entries: ImpactPathwayEntries) => Object.keys(entries)
         .filter((key) => entries[key].hasStep(impactPathwayStepId))
         .map((key) => entries[key]).pop()),
-      map((impactPathway: ImpactPathway) => impactPathway.getStep(impactPathwayStepId)),
-      take(1)
+      map((impactPathway: ImpactPathway) => impactPathway.getStep(impactPathwayStepId))
     );
   }
 

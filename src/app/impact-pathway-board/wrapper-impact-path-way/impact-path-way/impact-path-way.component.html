@@ -11,7 +11,8 @@
       <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps"
                                 ipwStepColor
                                 class="vertical-step"
-                                [data]="step"
+                                [impactPathwayId]="impactPathway.id"
+                                [impactPathwayStepId]="step.id"
                                 [stepType]="step.type"></ipw-impact-path-way-step>
     </div>
     <ipw-editable-textarea *ngIf="impactPathway"

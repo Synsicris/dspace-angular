@@ -29,14 +29,13 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
   }
 
   createTask() {
-    this.searchTaskService.resetAppliedFilters();
     const modalRef = this.modalService.open(ImpactPathWayTaskModalComponent, { size: 'lg' });
 
     modalRef.result.then((result) => {
       if (result) {
         this.cdr.detectChanges();
       }
-    }, (reject) => null);
+    }, () => null);
     modalRef.componentInstance.step = this.impactPathwayStep;
     modalRef.componentInstance.parentTask = this.impactPathwayTask;
     modalRef.componentInstance.isObjectivePage = true;

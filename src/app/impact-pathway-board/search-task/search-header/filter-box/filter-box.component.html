@@ -1,0 +1,27 @@
+<div ngbDropdown class="d-inline-block" #myDrop="ngbDropdown">
+  <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Filter by {{filterName | titlecase}}</button>
+
+      <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <li *ngFor="let facetValue of innerFilterFacetValues" ngbDropdownItem>
+          <div class="custom-control custom-checkbox d-flex justify-content-between"
+               *ngVar="getFacetValue(facetValue) as value">
+            <input type="checkbox"
+                   class="custom-control-input"
+                   [checked]="isChecked(value)"
+                   [name]="filterId + value"
+                   [id]="filterId + value"
+                   [value]="value"
+                   (change)="onChecked($event, facetValue)">
+            <label class="custom-control-label" [for]="filterId + value">{{facetValue.label}}</label>
+            <span class="badge badge-pill badge-light ml-1">{{facetValue.count}}</span>
+          </div>
+        </li>
+        <li *ngIf="innerFilterFacetValues?.length > 0" class="d-flex justify-content-center mt-1 border-top pt-2">
+          <button class="btn btn-outline-primary" id="{{filterId + filterType}}_submit" (click)="onSubmit(myDrop)">Submit</button>
+        </li>
+        <li *ngIf="innerFilterFacetValues?.length == 0" class="d-flex justify-content-center mt-1 border-top pt-2">
+          <a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">No filter available</a>
+        </li>
+      </ul>
+
+</div>

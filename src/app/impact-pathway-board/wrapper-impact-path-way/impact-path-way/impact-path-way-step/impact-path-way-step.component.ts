@@ -11,6 +11,7 @@ import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact
 import { SearchTaskService } from '../../../search-task/search-task.service';
 import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-container.component';
 import { Observable } from 'rxjs/internal/Observable';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'ipw-impact-path-way-step',
@@ -20,9 +21,12 @@ import { Observable } from 'rxjs/internal/Observable';
     fadeInOut
   ]
 })
-export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
+export class ImpactPathWayStepComponent extends DragAndDropContainerComponent  {
 
-  @Input() public data: ImpactPathwayStep;
+  @Input() public impactPathwayId: string;
+  @Input() public impactPathwayStepId: string;
+
+  public impactPathwayStep$: Observable<ImpactPathwayStep>;
 
   constructor(
     protected cdr: ChangeDetectorRef,
@@ -31,6 +35,11 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
     protected modalService: NgbModal) {
 
     super(service);
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
+    this.impactPathwayStep$ = this.service.getImpactPathwayStepById(this.impactPathwayStepId);
   }
 
   drop(event: CdkDragDrop<ImpactPathwayStep>) {
@@ -49,15 +58,19 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
   }
 
   createTask() {
-    this.searchTaskService.resetAppliedFilters();
-    const modalRef = this.modalService.open(ImpactPathWayTaskModalComponent, { size: 'lg' });
+    this.impactPathwayStep$.pipe(
+      take(1)
+    ).subscribe((impactPathwayStep: ImpactPathwayStep) => {
+      const modalRef = this.modalService.open(ImpactPathWayTaskModalComponent, { size: 'lg' });
 
-    modalRef.result.then((result) => {
-      if (result) {
-        this.cdr.detectChanges();
-      }
-    }, (reject) => null);
-    modalRef.componentInstance.step = this.data;
+      modalRef.result.then((result) => {
+        if (result) {
+          this.cdr.detectChanges();
+        }
+      }, () => null);
+      modalRef.componentInstance.step = impactPathwayStep;
+    })
+
   }
 
   onTaskSelected($event: ImpactPathwayTask) {
@@ -65,10 +78,10 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
   }
 
   getStepTitle(): Observable<string> {
-    return this.service.getImpactPathwayStepTitle(this.data.id)
+    return this.service.getImpactPathwayStepTitle(this.impactPathwayStepId)
   }
 
   getTasks(): Observable<ImpactPathwayTask[]> {
-    return this.service.getImpactPathwayTasksByStepId(this.data.parentId, this.data.id);
+    return this.service.getImpactPathwayTasksByStepId(this.impactPathwayId, this.impactPathwayStepId);
   }
 }

@@ -4,7 +4,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathwayStep } from '../../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayStepType } from '../../../../../core/impact-pathway/models/impact-pathway-step-type';
-import { SearchTaskService } from '../../../../search-task/search-task.service';
 import { ImpactPathwayTask } from '../../../../../core/impact-pathway/models/impact-pathway-task.model';
 
 @Component({
@@ -20,11 +19,10 @@ export class ImpactPathWayTaskModalComponent {
 
   public impactPathWayStepType = ImpactPathwayStepType;
 
-  constructor(public activeModal: NgbActiveModal, private searchTaskService: SearchTaskService) {
+  constructor(public activeModal: NgbActiveModal) {
   }
 
   closeModal() {
-    this.searchTaskService.resetAppliedFilters();
     this.activeModal.dismiss(false);
   }
 }

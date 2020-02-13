@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { of as observableOf } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, concatMap, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -165,7 +165,7 @@ export class ImpactPathwayEffects {
    */
   @Effect() addTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK),
-    switchMap((action: AddImpactPathwayTaskAction) => {
+    concatMap((action: AddImpactPathwayTaskAction) => {
       return this.impactPathwayService.linkTaskToParent(
         action.payload.stepId,
         action.payload.taskId).pipe(
@@ -241,7 +241,7 @@ export class ImpactPathwayEffects {
    */
   @Effect() addSubTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK),
-    switchMap((action: AddImpactPathwaySubTaskAction) => {
+    mergeMap((action: AddImpactPathwaySubTaskAction) => {
       return this.impactPathwayService.linkTaskToParent(
         action.payload.parentTaskId,
         action.payload.taskId).pipe(
@@ -286,7 +286,7 @@ export class ImpactPathwayEffects {
         action.payload.parentId,
         action.payload.taskId,
         action.payload.taskPosition).pipe(
-        map((item: Item) => new RemoveImpactPathwayTaskSuccessAction(
+        map(() => new RemoveImpactPathwayTaskSuccessAction(
           action.payload.impactPathwayId,
           action.payload.parentId,
           action.payload.taskId)),
@@ -306,7 +306,7 @@ export class ImpactPathwayEffects {
         action.payload.parentTaskId,
         action.payload.taskId,
         action.payload.taskPosition).pipe(
-        map((item: Item) => new RemoveImpactPathwaySubTaskSuccessAction(
+        map(() => new RemoveImpactPathwaySubTaskSuccessAction(
           action.payload.impactPathwayId,
           action.payload.stepId,
           action.payload.parentTaskId,

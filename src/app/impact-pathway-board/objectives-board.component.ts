@@ -1,12 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 
 import { ImpactPathwayService } from '../core/impact-pathway/impact-pathway.service';
-import { NotificationsService } from '../shared/notifications/notifications.service';
 import { ImpactPathwayStep } from '../core/impact-pathway/models/impact-pathway-step.model';
-import { ObjectiveService } from '../core/impact-pathway/objective.service';
 import { isNotEmpty } from '../shared/empty.util';
 
 @Component({
@@ -21,10 +19,7 @@ export class ObjectivesBoardComponent implements OnInit {
 
   private impactPathWayStep$: Observable<ImpactPathwayStep>;
 
-  constructor(
-    private impactPathwayService: ImpactPathwayService,
-    private notificationService: NotificationsService,
-    private objectiveService: ObjectiveService) {
+  constructor(private impactPathwayService: ImpactPathwayService) {
   }
 
   ngOnInit(): void {
@@ -34,7 +29,7 @@ export class ObjectivesBoardComponent implements OnInit {
   getImpactPathwayStep(): Observable<ImpactPathwayStep> {
     return this.impactPathWayStep$.pipe(
       filter((step) => isNotEmpty(step)),
-      take(1)
+      distinctUntilChanged()
     );
   }
 

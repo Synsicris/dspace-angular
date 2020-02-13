@@ -1,0 +1,18 @@
+<ng-template #rt let-r="result" let-t="term">
+  <ngb-highlight class="w-100" [result]="r.title" [term]="t"></ngb-highlight>
+</ng-template>
+
+<div class="position-relative right-addon">
+  <i *ngIf="(searching | async)" class="fas fa-circle-notch fa-spin fa-2x fa-fw text-primary position-absolute mt-1 p-0" aria-hidden="true"></i>
+
+  <input id="search-task-input"
+         type="text"
+         class="form-control"
+         placeholder="Search for an item"
+         [(ngModel)]="searchModel"
+         [ngbTypeahead]="search"
+         [resultTemplate]="rt"
+         [inputFormatter]="formatter"
+         (keyup.enter)="onSearchChange($event)"/>
+</div>
+

@@ -4,22 +4,22 @@
   <div class="text-center text-truncate p-1 m-2 font-weight-bold" title="{{getStepTitle() | async}}">
     <span>{{getStepTitle() | async}}</span>
   </div>
-  <div id="{{data.id}}"
+  <div id="{{(impactPathwayStep$ | async)?.id}}"
        class="d-flex p-2 h-100 flex-column"
        cdkDropList
        cdkDropListOrientation="'vertical'"
-       [cdkDropListData]="data"
+       [cdkDropListData]="(impactPathwayStep$ | async)"
        [cdkDropListConnectedTo]="connectedToList"
        (cdkDropListEntered)="listEntered($event)"
        (cdkDropListExited)="listExited($event)"
        (cdkDropListDropped)="listDropped($event)">
     <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
                               class="mb-sm-1 mb-lg-4"
-                              [impactPathwayId]="data.parentId"
-                              [impactPathwayStepId]="data.id"
+                              [impactPathwayId]="(impactPathwayStep$ | async)?.parentId"
+                              [impactPathwayStepId]="(impactPathwayStep$ | async)?.id"
                               [data]="task"
                               [cdkDragData]="task"
-                              [stepHasDetail]="data.hasDetail()"
+                              [stepHasDetail]="(impactPathwayStep$ | async)?.hasDetail()"
                               [taskPosition]="i"
                               [isObjectivePage]="false"
                               (cdkDragDropped)="drop($event)"
