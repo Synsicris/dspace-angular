@@ -100,6 +100,11 @@ export class PaginationComponent implements OnDestroy, OnInit {
   @Input() public hidePagerWhenSinglePage = true;
 
   /**
+   * Option for disabling route update
+   */
+  @Input() public doUpdateRoute = true;
+
+  /**
    * Current page.
    */
   public currentPage;
@@ -247,7 +252,11 @@ export class PaginationComponent implements OnDestroy, OnInit {
    *    The page being navigated to.
    */
   public doPageChange(page: number) {
-    this.updateRoute({ pageId: this.id, page: page.toString() });
+    if (this.doUpdateRoute) {
+      this.updateRoute({ pageId: this.id, page: page.toString() });
+    } else {
+      this.setPage(page);
+    }
   }
 
   /**
@@ -257,7 +266,11 @@ export class PaginationComponent implements OnDestroy, OnInit {
    *    The page size being navigated to.
    */
   public doPageSizeChange(pageSize: number) {
-    this.updateRoute({ pageId: this.id, page: 1, pageSize: pageSize });
+    if (this.doUpdateRoute) {
+      this.updateRoute({ pageId: this.id, page: 1, pageSize: pageSize });
+    } else {
+      this.setPageSize(pageSize);
+    }
   }
 
   /**
@@ -267,7 +280,11 @@ export class PaginationComponent implements OnDestroy, OnInit {
    *    The sort direction being navigated to.
    */
   public doSortDirectionChange(sortDirection: SortDirection) {
-    this.updateRoute({ pageId: this.id, page: 1, sortDirection: sortDirection });
+    if (this.doUpdateRoute) {
+      this.updateRoute({ pageId: this.id, page: 1, sortDirection: sortDirection });
+    } else {
+      this.setSortDirection(sortDirection);
+    }
   }
 
   /**
@@ -276,8 +293,12 @@ export class PaginationComponent implements OnDestroy, OnInit {
    * @param sortField
    *    The sort field being navigated to.
    */
-  public doSortFieldChange(field: string) {
-    this.updateRoute({ pageId: this.id, page: 1, sortField: field });
+  public doSortFieldChange(sortField: string) {
+    if (this.doUpdateRoute) {
+      this.updateRoute({ pageId: this.id, page: 1, sortField: sortField });
+    } else {
+      this.setSortField(sortField);
+    }
   }
 
   /**
@@ -322,9 +343,9 @@ export class PaginationComponent implements OnDestroy, OnInit {
    * @param sortField
    *    The new sort field.
    */
-  public setSortField(field: string) {
-    this.sortField = field;
-    this.sortFieldChange.emit(field);
+  public setSortField(sortField: string) {
+    this.sortField = sortField;
+    this.sortFieldChange.emit(sortField);
     this.emitPaginationChange();
   }
 
@@ -394,10 +415,8 @@ export class PaginationComponent implements OnDestroy, OnInit {
   /**
    * Method to validate query params
    *
-   * @param page
-   *    The page number to validate
-   * @param pageSize
-   *    The page size to validate
+   * @param params
+   *   An object with paginations params
    * @returns valid parameters if initial parameters were invalid
    */
   private validateParams(params: any): any {
@@ -461,7 +480,7 @@ export class PaginationComponent implements OnDestroy, OnInit {
   /**
    * Method to validate the current page size value
    *
-   * @param page size
+   * @param pageSize
    *    The page size to validate
    * @returns returns valid page size value
    */
