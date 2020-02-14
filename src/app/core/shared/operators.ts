@@ -9,8 +9,7 @@ import { RequestService } from '../data/request.service';
 import { BrowseDefinition } from './browse-definition.model';
 import { DSpaceObject } from './dspace-object.model';
 import { PaginatedList } from '../data/paginated-list';
-import { SearchResult } from '../../+search-page/search-result.model';
-import { Item } from './item.model';
+import { SearchResult } from '../../shared/search/search-result.model';
 import { Router } from '@angular/router';
 
 /**
@@ -52,9 +51,9 @@ export const getResourceLinksFromResponse = () =>
       map((response: DSOSuccessResponse) => response.resourceSelfLinks),
     );
 
-export const configureRequest = (requestService: RequestService, forceBypassCache?: boolean) =>
+export const configureRequest = (requestService: RequestService) =>
   (source: Observable<RestRequest>): Observable<RestRequest> =>
-    source.pipe(tap((request: RestRequest) => requestService.configure(request, forceBypassCache)));
+    source.pipe(tap((request: RestRequest) => requestService.configure(request)));
 
 export const getRemoteDataPayload = () =>
   <T>(source: Observable<RemoteData<T>>): Observable<T> =>
@@ -91,7 +90,7 @@ export const toDSpaceObjectListRD = () =>
     source.pipe(
       filter((rd: RemoteData<PaginatedList<SearchResult<T>>>) => rd.hasSucceeded),
       map((rd: RemoteData<PaginatedList<SearchResult<T>>>) => {
-        const dsoPage: T[] = rd.payload.page.map((searchResult: SearchResult<T>) => searchResult.indexableObject);
+        const dsoPage: T[] = rd.payload.page.filter((result) => hasValue(result)).map((searchResult: SearchResult<T>) => searchResult.indexableObject);
         const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<T>;
         return Object.assign(rd, { payload: payload });
       })

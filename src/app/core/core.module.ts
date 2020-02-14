@@ -3,18 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import {
-  DynamicFormLayoutService,
-  DynamicFormService,
-  DynamicFormValidationService
-} from '@ng-dynamic-forms/core';
+import { DynamicFormLayoutService, DynamicFormService, DynamicFormValidationService } from '@ng-dynamic-forms/core';
 
 import { coreEffects } from './core.effects';
 import { coreReducers } from './core.reducers';
 
 import { isNotEmpty } from '../shared/empty.util';
 
-import { ApiService } from '../shared/services/api.service';
+import { ApiService } from './services/api.service';
 import { BrowseEntriesResponseParsingService } from './data/browse-entries-response-parsing.service';
 import { CollectionDataService } from './data/collection-data.service';
 import { CommunityDataService } from './data/community-data.service';
@@ -34,12 +30,11 @@ import { PaginationComponentOptions } from '../shared/pagination/pagination-comp
 import { RemoteDataBuildService } from './cache/builders/remote-data-build.service';
 import { RequestService } from './data/request.service';
 import { EndpointMapResponseParsingService } from './data/endpoint-map-response-parsing.service';
-import { ServerResponseService } from '../shared/services/server-response.service';
-import { NativeWindowFactory, NativeWindowService } from '../shared/services/window.service';
+import { ServerResponseService } from './services/server-response.service';
+import { NativeWindowFactory, NativeWindowService } from './services/window.service';
 import { BrowseService } from './browse/browse.service';
 import { BrowseResponseParsingService } from './data/browse-response-parsing.service';
 import { ConfigResponseParsingService } from './config/config-response-parsing.service';
-import { RouteService } from '../shared/services/route.service';
 import { SubmissionDefinitionsConfigService } from './config/submission-definitions-config.service';
 import { SubmissionFormsConfigService } from './config/submission-forms-config.service';
 import { SubmissionSectionsConfigService } from './config/submission-sections-config.service';
@@ -53,7 +48,7 @@ import { UUIDService } from './shared/uuid.service';
 import { AuthenticatedGuard } from './auth/authenticated.guard';
 import { AuthRequestService } from './auth/auth-request.service';
 import { AuthResponseParsingService } from './auth/auth-response-parsing.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HALEndpointService } from './shared/hal-endpoint.service';
 import { FacetValueResponseParsingService } from './data/facet-value-response-parsing.service';
@@ -75,12 +70,14 @@ import { MetadataschemaParsingService } from './data/metadataschema-parsing.serv
 import { FilteredDiscoveryPageResponseParsingService } from './data/filtered-discovery-page-response-parsing.service';
 import { CSSVariableService } from '../shared/sass-helper/sass-helper.service';
 import { MenuService } from '../shared/menu/menu.service';
+import { ItemJsonPatchOperationsService } from './data/item-json-patch-operations.service';
 import { SubmissionJsonPatchOperationsService } from './submission/submission-json-patch-operations.service';
 import { NormalizedObjectBuildService } from './cache/builders/normalized-object-build.service';
 import { DSOChangeAnalyzer } from './data/dso-change-analyzer.service';
 import { ObjectUpdatesService } from './data/object-updates/object-updates.service';
 import { DefaultChangeAnalyzer } from './data/default-change-analyzer.service';
-import { SearchService } from '../+search-page/search-service/search.service';
+import { SearchService } from './shared/search/search.service';
+import { RelationshipService } from './data/relationship.service';
 import { NormalizedCollection } from './cache/models/normalized-collection.model';
 import { NormalizedCommunity } from './cache/models/normalized-community.model';
 import { NormalizedDSpaceObject } from './cache/models/normalized-dspace-object.model';
@@ -100,13 +97,14 @@ import { NormalizedSubmissionDefinitionsModel } from './config/models/normalized
 import { NormalizedSubmissionFormsModel } from './config/models/normalized-config-submission-forms.model';
 import { NormalizedSubmissionSectionModel } from './config/models/normalized-config-submission-section.model';
 import { NormalizedAuthStatus } from './auth/models/normalized-auth-status.model';
-import { NormalizedAuthorityValue } from './integration/models/normalized-authority-value.model';
+import { NormalizedAuthorityEntry } from './integration/models/normalized-authority-entry.model';
 import { RoleService } from './roles/role.service';
 import { MyDSpaceGuard } from '../+my-dspace-page/my-dspace.guard';
 import { MyDSpaceResponseParsingService } from './data/mydspace-response-parsing.service';
 import { ClaimedTaskDataService } from './tasks/claimed-task-data.service';
 import { PoolTaskDataService } from './tasks/pool-task-data.service';
 import { TaskResponseParsingService } from './tasks/task-response-parsing.service';
+import { BitstreamFormatDataService } from './data/bitstream-format-data.service';
 import { NormalizedClaimedTask } from './tasks/models/normalized-claimed-task-object.model';
 import { NormalizedTaskObject } from './tasks/models/normalized-task-object.model';
 import { NormalizedPoolTask } from './tasks/models/normalized-pool-task-object.model';
@@ -117,6 +115,46 @@ import { MetadatafieldParsingService } from './data/metadatafield-parsing.servic
 import { NormalizedSubmissionUploadsModel } from './config/models/normalized-config-submission-uploads.model';
 import { NormalizedBrowseEntry } from './shared/normalized-browse-entry.model';
 import { BrowseDefinition } from './shared/browse-definition.model';
+import { ContentSourceResponseParsingService } from './data/content-source-response-parsing.service';
+import { MappedCollectionsReponseParsingService } from './data/mapped-collections-reponse-parsing.service';
+import { ObjectSelectService } from '../shared/object-select/object-select.service';
+import { NormalizedAuthority } from './integration/models/normalized-authority.model';
+import { AuthorityTreeviewService } from '../shared/authority-treeview/authority-treeview.service';
+import { DsDynamicTypeBindRelationService } from '../shared/form/builder/ds-dynamic-form-ui/ds-dynamic-type-bind-relation.service';
+import {EntityTypeService} from './data/entity-type.service';
+import { SiteDataService } from './data/site-data.service';
+import { NormalizedSite } from './cache/models/normalized-site.model';
+
+import {
+  MOCK_RESPONSE_MAP,
+  MockResponseMap,
+  mockResponseMap
+} from '../shared/mocks/dspace-rest-v2/mocks/mock-response-map';
+import { EndpointMockingRestService } from '../shared/mocks/dspace-rest-v2/endpoint-mocking-rest.service';
+import { ENV_CONFIG, GLOBAL_CONFIG, GlobalConfig } from '../../config';
+import { SearchFilterService } from './shared/search/search-filter.service';
+import { SearchConfigurationService } from './shared/search/search-configuration.service';
+import { SelectableListService } from '../shared/object-list/selectable-list/selectable-list.service';
+import { RelationshipTypeService } from './data/relationship-type.service';
+import { SidebarService } from '../shared/sidebar/sidebar.service';
+import { NormalizedExternalSource } from './cache/models/normalized-external-source.model';
+import { NormalizedExternalSourceEntry } from './cache/models/normalized-external-source-entry.model';
+import { ExternalSourceService } from './data/external-source.service';
+import { LookupRelationService } from './data/lookup-relation.service';
+import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
+import { ObjectiveService } from './impact-pathway/objective.service';
+
+/**
+ * When not in production, endpoint responses can be mocked for testing purposes
+ * If there is no mock version available for the endpoint, the actual REST response will be used just like in production mode
+ */
+export const restServiceFactory = (cfg: GlobalConfig, mocks: MockResponseMap, http: HttpClient) => {
+  if (ENV_CONFIG.production) {
+    return new DSpaceRESTv2Service(http);
+  } else {
+    return new EndpointMockingRestService(cfg, mocks, http);
+  }
+};
 
 const IMPORTS = [
   CommonModule,
@@ -135,8 +173,10 @@ const PROVIDERS = [
   AuthResponseParsingService,
   CommunityDataService,
   CollectionDataService,
+  SiteDataService,
   DSOResponseParsingService,
-  DSpaceRESTv2Service,
+  { provide: MOCK_RESPONSE_MAP, useValue: mockResponseMap },
+  { provide: DSpaceRESTv2Service, useFactory: restServiceFactory, deps: [GLOBAL_CONFIG, MOCK_RESPONSE_MAP, HttpClient]},
   DynamicFormLayoutService,
   DynamicFormService,
   DynamicFormValidationService,
@@ -153,6 +193,7 @@ const PROVIDERS = [
   PaginationComponentOptions,
   ResourcePolicyService,
   RegistryService,
+  BitstreamFormatDataService,
   NormalizedObjectBuildService,
   RemoteDataBuildService,
   RequestService,
@@ -163,6 +204,7 @@ const PROVIDERS = [
   RegistryMetadataschemasResponseParsingService,
   RegistryMetadatafieldsResponseParsingService,
   RegistryBitstreamformatsResponseParsingService,
+  MappedCollectionsReponseParsingService,
   DebugResponseParsingService,
   SearchResponseParsingService,
   MyDSpaceResponseParsingService,
@@ -172,13 +214,13 @@ const PROVIDERS = [
   BrowseItemsResponseParsingService,
   BrowseService,
   ConfigResponseParsingService,
-  RouteService,
   SubmissionDefinitionsConfigService,
   SubmissionFormsConfigService,
   SubmissionRestService,
   SubmissionSectionsConfigService,
   SubmissionResponseParsingService,
   SubmissionJsonPatchOperationsService,
+  ItemJsonPatchOperationsService,
   JsonPatchOperationsBuilder,
   AuthorityService,
   IntegrationResponseParsingService,
@@ -194,15 +236,29 @@ const PROVIDERS = [
   DSpaceObjectDataService,
   DSOChangeAnalyzer,
   DefaultChangeAnalyzer,
+  ObjectSelectService,
   CSSVariableService,
   MenuService,
   ObjectUpdatesService,
   SearchService,
+  RelationshipService,
   MyDSpaceGuard,
   RoleService,
   TaskResponseParsingService,
   ClaimedTaskDataService,
   PoolTaskDataService,
+  DsDynamicTypeBindRelationService,
+  EntityTypeService,
+  ContentSourceResponseParsingService,
+  SearchService,
+  SidebarService,
+  SearchFilterService,
+  SearchFilterService,
+  SearchConfigurationService,
+  SelectableListService,
+  RelationshipTypeService,
+  ExternalSourceService,
+  LookupRelationService,
   // register AuthInterceptor as HttpInterceptor
   {
     provide: HTTP_INTERCEPTORS,
@@ -211,7 +267,10 @@ const PROVIDERS = [
   },
   NotificationsService,
   FilteredDiscoveryPageResponseParsingService,
-  { provide: NativeWindowService, useFactory: NativeWindowFactory }
+  { provide: NativeWindowService, useFactory: NativeWindowFactory },
+  AuthorityTreeviewService,
+  ImpactPathwayService,
+  ObjectiveService
 ];
 
 /**
@@ -224,6 +283,7 @@ export const normalizedModels =
     NormalizedBitstream,
     NormalizedBitstreamFormat,
     NormalizedItem,
+    NormalizedSite,
     NormalizedCollection,
     NormalizedCommunity,
     NormalizedEPerson,
@@ -239,7 +299,8 @@ export const normalizedModels =
     NormalizedSubmissionSectionModel,
     NormalizedSubmissionUploadsModel,
     NormalizedAuthStatus,
-    NormalizedAuthorityValue,
+    NormalizedAuthority,
+    NormalizedAuthorityEntry,
     NormalizedBrowseEntry,
     BrowseDefinition,
     NormalizedClaimedTask,
@@ -247,7 +308,9 @@ export const normalizedModels =
     NormalizedPoolTask,
     NormalizedRelationship,
     NormalizedRelationshipType,
-    NormalizedItemType
+    NormalizedItemType,
+    NormalizedExternalSource,
+    NormalizedExternalSourceEntry
   ];
 
 @NgModule({

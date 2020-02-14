@@ -20,13 +20,15 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
 import { By } from '@angular/platform-browser';
-import { AuthorityValue } from '../../../../../../core/integration/models/authority.value';
+import { AuthorityEntry } from '../../../../../../core/integration/models/authority-entry.model';
 import { createTestComponent } from '../../../../../testing/utils';
 import { DynamicLookupNameModel } from './dynamic-lookup-name.model';
 import { AuthorityConfidenceStateDirective } from '../../../../../authority-confidence/authority-confidence-state.directive';
 import { ObjNgFor } from '../../../../../utils/object-ngfor.pipe';
 import { GLOBAL_CONFIG, GlobalConfig } from '../../../../../../../config';
 import { MOCK_SUBMISSION_CONFIG } from '../../../../../testing/mock-submission-config';
+import { WorkspaceitemsEditPageModule } from '../../../../../../+workspaceitems-edit-page/workspaceitems-edit-page.module';
+import { WorkspaceItem } from '../../../../../../core/submission/models/workspaceitem.model';
 
 let LOOKUP_TEST_MODEL_CONFIG = {
   authorityOptions: {
@@ -47,7 +49,9 @@ let LOOKUP_TEST_MODEL_CONFIG = {
   repeatable: true,
   separator: ',',
   validators: { required: null },
-  value: undefined
+  value: undefined,
+  metadataFields: [],
+  submissionId: '1234'
 };
 
 let LOOKUP_NAME_TEST_MODEL_CONFIG = {
@@ -69,7 +73,9 @@ let LOOKUP_NAME_TEST_MODEL_CONFIG = {
   repeatable: true,
   separator: ',',
   validators: { required: null },
-  value: undefined
+  value: undefined,
+  metadataFields: [],
+  submissionId: '1234'
 };
 
 let LOOKUP_TEST_GROUP = new FormGroup({
@@ -100,7 +106,9 @@ describe('Dynamic Lookup component', () => {
       repeatable: true,
       separator: ',',
       validators: { required: null },
-      value: undefined
+      value: undefined,
+      metadataFields: [],
+      submissionId: '1234'
     };
 
     LOOKUP_NAME_TEST_MODEL_CONFIG = {
@@ -122,7 +130,9 @@ describe('Dynamic Lookup component', () => {
       repeatable: true,
       separator: ',',
       validators: { required: null },
-      value: undefined
+      value: undefined,
+      metadataFields: [],
+      submissionId: '1234'
     };
 
     LOOKUP_TEST_GROUP = new FormGroup({
@@ -265,7 +275,7 @@ describe('Dynamic Lookup component', () => {
         it('should select a results entry properly', fakeAsync(() => {
           let de = lookupFixture.debugElement.queryAll(By.css('button'));
           const btnEl = de[0].nativeElement;
-          const selectedValue = Object.assign(new AuthorityValue(), {
+          const selectedValue = Object.assign(new AuthorityEntry(), {
             id: 1,
             display: 'one',
             value: 1
@@ -289,7 +299,7 @@ describe('Dynamic Lookup component', () => {
           lookupComp.firstInputValue = 'test';
           lookupFixture.detectChanges();
 
-          lookupComp.onInput(new Event('input'));
+          lookupComp.onChange(new Event('change'));
           expect(lookupComp.model.value).toEqual(new FormFieldMetadataValueObject('test'))
 
         }));
@@ -299,7 +309,7 @@ describe('Dynamic Lookup component', () => {
           lookupComp.firstInputValue = 'test';
           lookupFixture.detectChanges();
 
-          lookupComp.onInput(new Event('input'));
+          lookupComp.onChange(new Event('change'));
           expect(lookupComp.model.value).not.toBeDefined();
 
         });
@@ -390,12 +400,12 @@ describe('Dynamic Lookup component', () => {
 
         it('should select a results entry properly', fakeAsync(() => {
           const payload = [
-            Object.assign(new AuthorityValue(), {
+            Object.assign(new AuthorityEntry(), {
               id: 1,
               display: 'Name, Lastname',
               value: 1
             }),
-            Object.assign(new AuthorityValue(), {
+            Object.assign(new AuthorityEntry(), {
               id: 2,
               display: 'NameTwo, LastnameTwo',
               value: 2
@@ -403,7 +413,7 @@ describe('Dynamic Lookup component', () => {
           ];
           let de = lookupFixture.debugElement.queryAll(By.css('button'));
           const btnEl = de[0].nativeElement;
-          const selectedValue = Object.assign(new AuthorityValue(), {
+          const selectedValue = Object.assign(new AuthorityEntry(), {
             id: 1,
             display: 'Name, Lastname',
             value: 1

@@ -2,26 +2,26 @@ import { Store } from '@ngrx/store';
 import { cold, getTestScheduler } from 'jasmine-marbles';
 import { TestScheduler } from 'rxjs/testing';
 import { BrowseService } from '../browse/browse.service';
-import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { CoreState } from '../core.reducers';
 import { ItemDataService } from './item-data.service';
 import { RequestService } from './request.service';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
-import { FindAllOptions, RestRequest } from './request.models';
+import { DeleteRequest, FindListOptions, PostRequest, RestRequest } from './request.models';
 import { ObjectCacheService } from '../cache/object-cache.service';
-import { Observable } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 import { RestResponse } from '../cache/response.models';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { NormalizedObjectBuildService } from '../cache/builders/normalized-object-build.service';
 import { HttpClient } from '@angular/common/http';
 import { RequestEntry } from './request.reducer';
-import { of as observableOf } from 'rxjs';
+import { getMockRequestService } from '../../shared/mocks/mock-request.service';
+import { ExternalSourceEntry } from '../shared/external-source-entry.model';
 
 describe('ItemDataService', () => {
   let scheduler: TestScheduler;
   let service: ItemDataService;
   let bs: BrowseService;
-  const requestService = {
+  const requestService = Object.assign(getMockRequestService(), {
     generateRequestId(): string {
       return scopeID;
     },
@@ -32,9 +32,14 @@ describe('ItemDataService', () => {
       const responseCacheEntry = new RequestEntry();
       responseCacheEntry.response = new RestResponse(true, 200, 'OK');
       return observableOf(responseCacheEntry);
+    },
+    removeByHrefSubstring(href: string) {
+      // Do nothing
     }
-  } as RequestService;
-  const rdbService = {} as RemoteDataBuildService;
+  }) as RequestService;
+  const rdbService = jasmine.createSpyObj('rdbService', {
+    toRemoteDataObservable: observableOf({})
+  });
 
   const store = {} as Store<CoreState>;
   const objectCache = {} as ObjectCacheService;
@@ -45,7 +50,7 @@ describe('ItemDataService', () => {
   } as HALEndpointService;
 
   const scopeID = '4af28e99-6a9c-4036-a199-e1b587046d39';
-  const options = Object.assign(new FindAllOptions(), {
+  const options = Object.assign(new FindListOptions(), {
     scopeID: scopeID,
     sort: {
       field: '',
@@ -159,6 +164,54 @@ describe('ItemDataService', () => {
       const result = service.setDiscoverable(scopeID, false);
       result.subscribe((v) => expect(v).toEqual(expected));
 
+    });
+  });
+
+  describe('removeMappingFromCollection', () => {
+    let result;
+
+    beforeEach(() => {
+      service = initTestService();
+      spyOn(requestService, 'configure');
+      result = service.removeMappingFromCollection('item-id', 'collection-id');
+    });
+
+    it('should configure a DELETE request', () => {
+      result.subscribe(() => expect(requestService.configure).toHaveBeenCalledWith(jasmine.any(DeleteRequest)));
+    });
+  });
+
+  describe('mapToCollection', () => {
+    let result;
+
+    beforeEach(() => {
+      service = initTestService();
+      spyOn(requestService, 'configure');
+      result = service.mapToCollection('item-id', 'collection-href');
+    });
+
+    it('should configure a POST request', () => {
+      result.subscribe(() => expect(requestService.configure).toHaveBeenCalledWith(jasmine.any(PostRequest)));
+    });
+  });
+
+  describe('importExternalSourceEntry', () => {
+    let result;
+
+    const externalSourceEntry = Object.assign(new ExternalSourceEntry(), {
+      display: 'John, Doe',
+      value: 'John, Doe',
+      self: 'http://test-rest.com/server/api/integration/externalSources/orcidV2/entryValues/0000-0003-4851-8004'
+    });
+
+    beforeEach(() => {
+      service = initTestService();
+      spyOn(requestService, 'configure');
+      result = service.importExternalSourceEntry(externalSourceEntry, 'collection-id');
+    });
+
+    it('should configure a POST request', () => {
+      result.subscribe(() => expect(requestService.configure).toHaveBeenCalledWith(jasmine.any(PostRequest)));
     });
   });
 

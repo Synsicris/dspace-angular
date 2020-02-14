@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } fro
 import { FormGroup } from '@angular/forms';
 
 import { Observable, of as observableOf } from 'rxjs';
-import { catchError, first, tap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, first, tap } from 'rxjs/operators';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import {
   DynamicFormControlComponent,
@@ -10,7 +10,7 @@ import {
   DynamicFormValidationService
 } from '@ng-dynamic-forms/core';
 
-import { AuthorityValue } from '../../../../../../core/integration/models/authority.value';
+import { AuthorityEntry } from '../../../../../../core/integration/models/authority-entry.model';
 import { DynamicScrollableDropdownModel } from './dynamic-scrollable-dropdown.model';
 import { PageInfo } from '../../../../../../core/shared/page-info.model';
 import { isNull, isUndefined } from '../../../../../empty.util';
@@ -71,19 +71,26 @@ export class DsDynamicScrollableDropdownComponent extends DynamicFormControlComp
         }
         this.pageInfo = object.pageInfo;
         this.cdr.detectChanges();
-      })
+      });
+
+    this.group.get(this.model.id).valueChanges.pipe(distinctUntilChanged())
+      .subscribe((value) => {
+        this.setCurrentValue(value);
+      });
+
   }
 
-  inputFormatter = (x: AuthorityValue): string => x.display || x.value;
+  inputFormatter = (x: AuthorityEntry): string => x.display || x.value;
 
   openDropdown(sdRef: NgbDropdown) {
     if (!this.model.readOnly) {
+      this.group.markAsUntouched();
       sdRef.open();
     }
   }
 
   onScroll() {
-    if (!this.loading && this.pageInfo.currentPage <= this.pageInfo.totalPages) {
+    if (!this.loading && this.pageInfo.currentPage < this.pageInfo.totalPages) {
       this.loading = true;
       this.searchOptions.currentPage++;
       this.authorityService.getEntriesByName(this.searchOptions).pipe(
@@ -116,14 +123,6 @@ export class DsDynamicScrollableDropdownComponent extends DynamicFormControlComp
     this.model.valueUpdates.next(event);
     this.change.emit(event);
     this.setCurrentValue(event);
-  }
-
-  onToggle(sdRef: NgbDropdown) {
-    if (sdRef.isOpen()) {
-      this.focus.emit(event);
-    } else {
-      this.blur.emit(event);
-    }
   }
 
   setCurrentValue(value): void {

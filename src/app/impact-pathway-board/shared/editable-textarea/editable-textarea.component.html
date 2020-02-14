@@ -1,0 +1,27 @@
+<div class="d-flex">
+  <div class="d-inline-block position-relative w-100 h-100">
+    <textarea class="form-control rounded-0"
+              placeholder="{{placeholder}}"
+              title="{{placeholder}}"
+              [disabled]="!(isEditable() | async)"
+              [(ngModel)]="editContent"></textarea>
+
+      <div class="input-group-prepend edit-field">
+        <button [disabled]="!(canSetEditable() | async)" *ngIf="!(isEditable() | async)"
+                (click)="setEditable(true)" class="btn btn-outline-primary btn-sm rounded-0"
+                title="{{'item.edit.metadata.edit.buttons.edit' | translate}}">
+          <i class="fas fa-edit fa-fw"></i>
+        </button>
+        <button [disabled]="(canSetEditable() | async)" *ngIf="(isEditable() | async)"
+                (click)="save()" class="btn btn-outline-success btn-sm rounded-0"
+                title="{{'item.edit.metadata.edit.buttons.unedit' | translate}}">
+          <i class="fas fa-check fa-fw"></i>
+        </button>
+        <button [disabled]="!(canUndo() | async)" (click)="removeChangesFromField()"
+                class="btn btn-outline-warning btn-sm rounded-0"
+                title="{{'item.edit.metadata.edit.buttons.undo' | translate}}">
+          <i class="fas fa-undo-alt fa-fw"></i>
+        </button>
+      </div>
+  </div>
+</div>

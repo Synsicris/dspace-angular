@@ -1,0 +1,46 @@
+<div class="p-2">
+<!--  <ipw-search-box [availableTaskList]="availableTaskList"
+                  [filteredTaskList]="filteredTaskList$"></ipw-search-box>-->
+  <ds-pagination
+    [paginationOptions]="paginationOptions"
+    [collectionSize]="(filteredTaskList$ | async)?.length"
+    [sortOptions]="sortOptions"
+    [hidePagerWhenSinglePage]="hidePagerWhenSinglePage"
+    (pageChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)"
+    (sortDirectionChange)="onSortDirectionChange($event)">
+    <div id="sidebar-object-list"
+         class="task-list d-flex flex-wrap p-3"
+         cdkDropList
+         [cdkDropListData]="(filteredTaskList$ | async)"
+         [cdkDropListConnectedTo]="connectedToList"
+         [cdkDropListEnterPredicate]="enterPredicate">
+
+
+        <ipw-impact-path-way-task *ngFor="let task of ((filteredTaskList$ | async) | slice: ((page-1) * pageSize) : (page-1) * pageSize + pageSize)" cdkDrag
+                                  class="mb-sm-1 mb-lg-4 mr-sm-1 mr-lg-4"
+                                  [data]="task"
+                                  [cdkDragData]="task"
+                                  (cdkDragDropped)="drop($event)"
+                                  (cdkDragEntered)="dragEntered($event)"
+                                  (cdkDragExited)="dragExited($event)">
+          <div *cdkDragPlaceholder
+               class="task-placeholder d-flex justify-content-center align-items-center"
+               [ngClass]="{
+                'mb-sm-1 mb-lg-4':isVertical,
+                'mr-sm-1 mr-lg-4':!isVertical,
+                'task-preview-allowed': (isDragging | async) && (isDropAllowed | async),
+                'task-preview-denied': (isDragging | async) && !(isDropAllowed | async)
+              }" >
+            <i *ngIf="(isDragging | async) && (isDropAllowed | async)" class="fas fa-check fa-5x"></i>
+            <i *ngIf="(isDragging | async) && !(isDropAllowed | async)" class="fas fa-exclamation fa-5x"></i>
+          </div>
+          <!--<div class="task-placeholder mb-sm-1 mb-lg-4 mr-sm-1 mr-lg-4" *cdkDragPlaceholder></div>-->
+        </ipw-impact-path-way-task>
+
+
+
+
+    </div>
+  </ds-pagination>
+</div>

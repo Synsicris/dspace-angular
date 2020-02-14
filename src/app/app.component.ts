@@ -1,13 +1,5 @@
-import { filter, map, take } from 'rxjs/operators';
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  HostListener,
-  Inject,
-  OnInit,
-  ViewEncapsulation
-} from '@angular/core';
+import { delay, filter, map, take } from 'rxjs/operators';
+import { AfterViewInit, ChangeDetectionStrategy, Component, HostListener, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
@@ -18,12 +10,11 @@ import { GLOBAL_CONFIG, GlobalConfig } from '../config';
 
 import { MetadataService } from './core/metadata/metadata.service';
 import { HostWindowResizeAction } from './shared/host-window.actions';
-import { HostWindowState } from './shared/host-window.reducer';
-import { NativeWindowRef, NativeWindowService } from './shared/services/window.service';
+import { HostWindowState } from './shared/search/host-window.reducer';
+import { NativeWindowRef, NativeWindowService } from './core/services/window.service';
 import { isAuthenticated } from './core/auth/selectors';
 import { AuthService } from './core/auth/auth.service';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
-import { RouteService } from './shared/services/route.service';
 import variables from '../styles/_exposed_variables.scss';
 import { CSSVariableService } from './shared/sass-helper/sass-helper.service';
 import { MenuService } from './shared/menu/menu.service';
@@ -32,6 +23,11 @@ import { combineLatest as combineLatestObservable, Observable, of } from 'rxjs';
 import { slideSidebarPadding } from './shared/animations/slide';
 import { HostWindowService } from './shared/host-window.service';
 import { Theme } from '../config/theme.inferface';
+import { isNotEmpty } from './shared/empty.util';
+import { CookieService } from './core/services/cookie.service';
+import { Angulartics2DSpace } from './statistics/angulartics/dspace-provider';
+
+export const LANG_COOKIE = 'language_cookie';
 
 @Component({
   selector: 'ds-app',
@@ -56,11 +52,13 @@ export class AppComponent implements OnInit, AfterViewInit {
     private store: Store<HostWindowState>,
     private metadata: MetadataService,
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private angulartics2DSpace: Angulartics2DSpace,
     private authService: AuthService,
     private router: Router,
     private cssService: CSSVariableService,
     private menuService: MenuService,
     private windowService: HostWindowService,
+    private cookie: CookieService
   ) {
     // Load all the languages that are defined as active from the config file
     translate.addLangs(config.languages.filter((LangConfig) => LangConfig.active === true).map((a) => a.code));
@@ -68,12 +66,24 @@ export class AppComponent implements OnInit, AfterViewInit {
     // Load the default language from the config file
     translate.setDefaultLang(config.defaultLanguage);
 
-    // Attempt to get the browser language from the user
-    if (translate.getLangs().includes(translate.getBrowserLang())) {
-      translate.use(translate.getBrowserLang());
+    // Attempt to get the language from a cookie
+    const lang = cookie.get(LANG_COOKIE);
+    if (isNotEmpty(lang)) {
+      // Cookie found
+      // Use the language from the cookie
+      translate.use(lang);
     } else {
-      translate.use(config.defaultLanguage);
+      // Cookie not found
+      // Attempt to get the browser language from the user
+      if (translate.getLangs().includes(translate.getBrowserLang())) {
+        translate.use(translate.getBrowserLang());
+      } else {
+        translate.use(config.defaultLanguage);
+      }
     }
+
+    angulartics2GoogleAnalytics.startTracking();
+    angulartics2DSpace.startTracking();
 
     metadata.listenForRouteChange();
 
@@ -115,8 +125,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.router.events
-      .subscribe((event) => {
+    this.router.events.pipe(
+      // This fixes an ExpressionChangedAfterItHasBeenCheckedError from being thrown while loading the component
+      // More information on this bug-fix: https://blog.angular-university.io/angular-debugging/
+      delay(0)
+    ).subscribe((event) => {
         if (event instanceof NavigationStart) {
           this.isLoading = true;
         } else if (

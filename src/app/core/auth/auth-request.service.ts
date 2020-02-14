@@ -10,6 +10,7 @@ import { AuthGetRequest, AuthPostRequest, GetRequest, PostRequest, RestRequest }
 import { AuthStatusResponse, ErrorResponse } from '../cache/response.models';
 import { HttpOptions } from '../dspace-rest-v2/dspace-rest-v2.service';
 import { getResponseFromEntry } from '../shared/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AuthRequestService {
@@ -18,7 +19,8 @@ export class AuthRequestService {
 
   constructor(@Inject(GLOBAL_CONFIG) protected EnvConfig: GlobalConfig,
               protected halService: HALEndpointService,
-              protected requestService: RequestService) {
+              protected requestService: RequestService,
+              private http: HttpClient) {
   }
 
   protected fetchRequest(request: RestRequest): Observable<any> {
@@ -38,13 +40,17 @@ export class AuthRequestService {
     return isNotEmpty(method) ? `${endpoint}/${method}` : `${endpoint}`;
   }
 
-  public postToEndpoint(method: string, body: any, options?: HttpOptions): Observable<any> {
+  public postToEndpoint(method: string, body?: any, options?: HttpOptions): Observable<any> {
     return this.halService.getEndpoint(this.linkName).pipe(
       filter((href: string) => isNotEmpty(href)),
       map((endpointURL) => this.getEndpointByMethod(endpointURL, method)),
       distinctUntilChanged(),
       map((endpointURL: string) => new AuthPostRequest(this.requestService.generateRequestId(), endpointURL, body, options)),
-      tap((request: PostRequest) => this.requestService.configure(request, true)),
+      map ((request: PostRequest) => {
+        request.responseMsToLive = 10 * 1000;
+        return request;
+      }),
+      tap((request: PostRequest) => this.requestService.configure(request)),
       mergeMap((request: PostRequest) => this.fetchRequest(request)),
       distinctUntilChanged());
   }
@@ -55,8 +61,13 @@ export class AuthRequestService {
       map((endpointURL) => this.getEndpointByMethod(endpointURL, method)),
       distinctUntilChanged(),
       map((endpointURL: string) => new AuthGetRequest(this.requestService.generateRequestId(), endpointURL, options)),
-      tap((request: GetRequest) => this.requestService.configure(request, true)),
+      map ((request: GetRequest) => {
+        request.responseMsToLive = 10 * 1000;
+        return request;
+      }),
+      tap((request: GetRequest) => this.requestService.configure(request)),
       mergeMap((request: GetRequest) => this.fetchRequest(request)),
       distinctUntilChanged());
   }
+
 }

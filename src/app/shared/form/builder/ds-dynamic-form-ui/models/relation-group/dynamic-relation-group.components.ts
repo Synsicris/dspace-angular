@@ -39,7 +39,7 @@ import { IntegrationSearchOptions } from '../../../../../../core/integration/mod
 import { AuthorityService } from '../../../../../../core/integration/authority.service';
 import { IntegrationData } from '../../../../../../core/integration/integration-data';
 import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
-import { AuthorityValue } from '../../../../../../core/integration/models/authority.value';
+import { AuthorityEntry } from '../../../../../../core/integration/models/authority-entry.model';
 
 @Component({
   selector: 'ds-dynamic-relation-group',
@@ -93,11 +93,13 @@ export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent
 
     this.formId = this.formService.getUniqueId(this.model.id);
     this.formModel = this.formBuilderService.modelFromConfiguration(
+      this.model.submissionId,
       config,
       this.model.scopeUUID,
       {},
       this.model.submissionScope,
-      this.model.readOnly);
+      this.model.readOnly,
+      this.formBuilderService.getTypeBindModel());
     this.initChipsFromModelValue();
   }
 
@@ -129,11 +131,11 @@ export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent
           || this.selectedChipItem.item[model.name].value === PLACEHOLDER_PARENT_METADATA)
           ? null
           : this.selectedChipItem.item[model.name];
-        if (isNotNull(value)) {
-          const nextValue = (this.formBuilderService.isInputModel(model) && (typeof value !== 'string')) ?
-            value.value : value;
-          model.valueUpdates.next(nextValue);
-        }
+
+        const nextValue = (this.formBuilderService.isInputModel(model) && isNotNull(value) && (typeof value !== 'string')) ?
+          value.value : value;
+        model.valueUpdates.next(nextValue);
+
       });
     });
 
@@ -231,7 +233,7 @@ export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent
         flatMap((valueModel) => {
           const returnList: Array<Observable<any>> = [];
           valueModel.forEach((valueObj) => {
-            const returnObj =  Object.keys(valueObj).map((fieldName) => {
+            const returnObj = Object.keys(valueObj).map((fieldName) => {
               let return$: Observable<any>;
               if (isObject(valueObj[fieldName]) && valueObj[fieldName].hasAuthority() && isNotEmpty(valueObj[fieldName].authority)) {
                 const fieldId = fieldName.replace(/\./g, '_');
@@ -249,13 +251,13 @@ export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent
                     new FormFieldMetadataValueObject(),
                     valueObj[fieldName],
                     {
-                      otherInformation: (result.payload[0] as AuthorityValue).otherInformation
+                      otherInformation: (result.payload[0] as AuthorityEntry).otherInformation
                     })
                   ));
               } else {
                 return$ = observableOf(valueObj[fieldName]);
               }
-              return return$.pipe(map((entry) => ({[fieldName]: entry})));
+              return return$.pipe(map((entry) => ({ [fieldName]: entry })));
             });
 
             returnList.push(combineLatest(returnObj));

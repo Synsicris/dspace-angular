@@ -3,10 +3,8 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { createSelector, MemoizedSelector, select, Store } from '@ngrx/store';
 import { Observable, race as observableRace } from 'rxjs';
-import { filter, find, map, mergeMap, take } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { cloneDeep, remove } from 'lodash';
-
-import { AppState } from '../../app.reducer';
 import { hasValue, isEmpty, isNotEmpty } from '../../shared/empty.util';
 import { CacheableObject } from '../cache/object-cache.reducer';
 import { ObjectCacheService } from '../cache/object-cache.service';
@@ -52,7 +50,7 @@ const entryFromUUIDSelector = (uuid: string): MemoizedSelector<CoreState, Reques
  * @param href        Substring that the request's href should contain
  */
 const uuidsFromHrefSubstringSelector =
-  (selector: MemoizedSelector<AppState, IndexState>, href: string): MemoizedSelector<AppState, string[]> => createSelector(
+  (selector: MemoizedSelector<CoreState, IndexState>, href: string): MemoizedSelector<CoreState, string[]> => createSelector(
     selector,
     (state: IndexState) => getUuidsFromHrefSubstring(state, href)
   );
@@ -65,8 +63,7 @@ const uuidsFromHrefSubstringSelector =
 const getUuidsFromHrefSubstring = (state: IndexState, href: string): string[] => {
   let result = [];
   if (isNotEmpty(state)) {
-    result = Object.values(state)
-      .filter((value: string) => value.startsWith(href));
+    result = Object.keys(state).filter((key) => key.startsWith(href)).map((key) => state[key]);
   }
   return result;
 };
@@ -146,14 +143,10 @@ export class RequestService {
    * Configure a certain request
    * Used to make sure a request is in the cache
    * @param {RestRequest} request The request to send out
-   * @param {boolean} forceBypassCache When true, a new request is always dispatched
    */
-  configure<T extends CacheableObject>(request: RestRequest, forceBypassCache: boolean = false): void {
+  configure<T extends CacheableObject>(request: RestRequest): void {
     const isGetRequest = request.method === RestRequestMethod.GET;
-    if (forceBypassCache) {
-      this.clearRequestsOnTheirWayToTheStore(request);
-    }
-    if (!isGetRequest || (forceBypassCache && !this.isPending(request)) || !this.isCachedOrPending(request)) {
+    if (!isGetRequest || request.forceBypassCache || !this.isCachedOrPending(request)) {
       this.dispatchRequest(request);
       if (isGetRequest) {
         this.trackRequestsOnTheirWayToTheStore(request);
@@ -227,7 +220,6 @@ export class RequestService {
     const inReqCache = this.hasByHref(request.href);
     const inObjCache = this.objectCache.hasBySelfLink(request.href);
     const isCached = inReqCache || inObjCache;
-
     const isPending = this.isPending(request);
     return isCached || isPending;
   }
@@ -263,12 +255,13 @@ export class RequestService {
    */
   private clearRequestsOnTheirWayToTheStore(request: GetRequest) {
     this.getByHref(request.href).pipe(
-      find((re: RequestEntry) => hasValue(re)))
-      .subscribe((re: RequestEntry) => {
-        if (!re.responsePending) {
-          remove(this.requestsOnTheirWayToTheStore, (item) => item === request.href);
-        }
-      });
+      filter((re: RequestEntry) => hasValue(re)),
+      take(1)
+    ).subscribe((re: RequestEntry) => {
+      if (!re.responsePending) {
+        remove(this.requestsOnTheirWayToTheStore, (item) => item === request.href);
+      }
+    });
   }
 
   /**
@@ -309,10 +302,22 @@ export class RequestService {
    */
   hasByHref(href: string): boolean {
     let result = false;
+    /* NB: that this is only a solution because the select method is synchronous, see: https://github.com/ngrx/store/issues/296#issuecomment-269032571*/
     this.getByHref(href).pipe(
       take(1)
     ).subscribe((requestEntry: RequestEntry) => result = this.isValid(requestEntry));
     return result;
+  }
+
+  /**
+   * Create an observable that emits a new value whenever the availability of the cached request changes.
+   * The value it emits is a boolean stating if the request exists in cache or not.
+   * @param href  The href of the request to observe
+   */
+  hasByHrefObservable(href: string): Observable<boolean> {
+    return this.getByHref(href).pipe(
+      map((requestEntry: RequestEntry) => this.isValid(requestEntry))
+    );
   }
 
 }

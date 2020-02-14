@@ -6,7 +6,7 @@ import { CoreState } from '../core.reducers';
 import { Store } from '@ngrx/store';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { Observable, of as observableOf } from 'rxjs';
-import { FindAllOptions } from './request.models';
+import { FindListOptions } from './request.models';
 import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { compare, Operation } from 'fast-json-patch';
@@ -16,15 +16,16 @@ import { HttpClient } from '@angular/common/http';
 import { NormalizedObjectBuildService } from '../cache/builders/normalized-object-build.service';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { Item } from '../shared/item.model';
+import * as uuidv4 from 'uuid/v4';
+import { createSuccessfulRemoteDataObject$ } from '../../shared/testing/utils';
 
 const endpoint = 'https://rest.api/core';
 
 // tslint:disable:max-classes-per-file
-class NormalizedTestObject extends NormalizedObject<Item> {
+export class NormalizedTestObject extends NormalizedObject<Item> {
 }
 
 class TestService extends DataService<any> {
-  protected forceBypassCache = false;
 
   constructor(
     protected requestService: RequestService,
@@ -41,21 +42,22 @@ class TestService extends DataService<any> {
     super();
   }
 
-  public getBrowseEndpoint(options: FindAllOptions = {}, linkPath: string = this.linkPath): Observable<string> {
+  public getBrowseEndpoint(options: FindListOptions = {}, linkPath: string = this.linkPath): Observable<string> {
     return observableOf(endpoint);
   }
 }
 
-class DummyChangeAnalyzer implements ChangeAnalyzer<NormalizedTestObject> {
+export class DummyChangeAnalyzer implements ChangeAnalyzer<NormalizedTestObject> {
   diff(object1: NormalizedTestObject, object2: NormalizedTestObject): Operation[] {
     return compare((object1 as any).metadata, (object2 as any).metadata);
   }
 
 }
+
 describe('DataService', () => {
   let service: TestService;
-  let options: FindAllOptions;
-  const requestService = {} as RequestService;
+  let options: FindListOptions;
+  const requestService = {generateRequestId: () => uuidv4()} as RequestService;
   const halService = {} as HALEndpointService;
   const rdbService = {} as RemoteDataBuildService;
   const notificationsService = {} as NotificationsService;
@@ -88,6 +90,7 @@ describe('DataService', () => {
       comparator,
     );
   }
+
   service = initTestService();
 
   describe('getFindAllHref', () => {
@@ -139,7 +142,7 @@ describe('DataService', () => {
     });
 
     it('should include all provided options in href', () => {
-      const sortOptions = new SortOptions('field1', SortDirection.DESC)
+      const sortOptions = new SortOptions('field1', SortDirection.DESC);
       options = {
         currentPage: 6,
         elementsPerPage: 10,
@@ -189,8 +192,7 @@ describe('DataService', () => {
       dso2.self = selfLink;
       dso2.metadata = [{ key: 'dc.title', value: name2 }];
 
-      spyOn(service, 'findById').and.returnValues(observableOf(dso));
-      spyOn(objectCache, 'getObjectBySelfLink').and.returnValues(observableOf(dso));
+      spyOn(service, 'findByHref').and.returnValue(createSuccessfulRemoteDataObject$(dso));
       spyOn(objectCache, 'addPatch');
     });
 

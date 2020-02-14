@@ -1,0 +1,39 @@
+<div class="h-100 d-flex flex-column"
+     [class.drop-allowed]="(isDragging | async) && (isDropAllowed | async)"
+     [class.drop-denied]="(isDragging | async) && !(isDropAllowed | async)">
+  <div id="{{impactPathwayTask.id}}"
+       class="d-flex p-2 h-100 flex-wrap task-list-horizontal"
+       cdkDropList
+       cdkDropListOrientation="'horizontal'"
+       [cdkDropListData]="impactPathwayTask"
+       [cdkDropListConnectedTo]="connectedToList"
+       (cdkDropListEntered)="listEntered($event)"
+       (cdkDropListExited)="listExited($event)"
+       (cdkDropListDropped)="listDropped($event)">
+    <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
+                              class="mb-sm-1 mb-lg-4 mb-5 mr-sm-1 mr-lg-4 task-horizontal"
+                              [impactPathwayId]="impactPathwayStep.parentId"
+                              [impactPathwayStepId]="impactPathwayStep.id"
+                              [data]="task"
+                              [cdkDragData]="task"
+                              [taskPosition]="i"
+                              [isObjectivePage]="true"
+                              (cdkDragDropped)="drop($event)"
+                              (cdkDragEntered)="dragEntered($event)"
+                              (cdkDragExited)="dragExited($event)"
+                              (selected)="onTaskSelected($event)">
+      <div *cdkDragPlaceholder
+           class="task-placeholder d-flex justify-content-center align-items-center mr-sm-1 mr-lg-4"
+           [ngClass]="{
+                'task-preview-allowed': (isDragging | async) && (isDropAllowed | async),
+                'task-preview-denied': (isDragging | async) && !(isDropAllowed | async)
+              }" >
+        <i *ngIf="(isDragging | async) && (isDropAllowed | async)" class="fas fa-check fa-5x"></i>
+        <i *ngIf="(isDragging | async) && !(isDropAllowed | async)" class="fas fa-exclamation fa-5x"></i>
+      </div>
+    </ipw-impact-path-way-task>
+  </div>
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-link pr-0" (click)="createTask(); $event.stopPropagation()"><i class="fas fa-plus-circle fa-2x"></i></button>
+  </div>
+</div>

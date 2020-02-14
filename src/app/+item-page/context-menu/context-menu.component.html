@@ -1,0 +1,7 @@
+<div *ngIf="(isAuthenticated | async)" ngbDropdown #itemOptions="ngbDropdown" placement="bottom-right" class="d-inline-block float-right">
+  <button class="btn btn-outline-primary" id="itemOptions" ngbDropdownToggle><i class="fas fa-cog" aria-hidden="true"></i></button>
+  <div id="itemOptionsDropdownMenu" aria-labelledby="itemOptions" ngbDropdownMenu>
+    <h6 class="dropdown-header">Options</h6>
+    <ds-item-page-context-menu-edit-impact-pathway [item]="item"></ds-item-page-context-menu-edit-impact-pathway>
+  </div>
+</div>

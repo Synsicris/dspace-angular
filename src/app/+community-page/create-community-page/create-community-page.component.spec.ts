@@ -4,12 +4,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { RouteService } from '../../shared/services/route.service';
+import { RouteService } from '../../core/services/route.service';
 import { SharedModule } from '../../shared/shared.module';
 import { CollectionDataService } from '../../core/data/collection-data.service';
 import { of as observableOf } from 'rxjs';
 import { CommunityDataService } from '../../core/data/community-data.service';
 import { CreateCommunityPageComponent } from './create-community-page.component';
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { NotificationsServiceStub } from '../../shared/testing/notifications-service-stub';
 
 describe('CreateCommunityPageComponent', () => {
   let comp: CreateCommunityPageComponent;
@@ -23,6 +25,7 @@ describe('CreateCommunityPageComponent', () => {
         { provide: CommunityDataService, useValue: { findById: () => observableOf({}) } },
         { provide: RouteService, useValue: { getQueryParameterValue: () => observableOf('1234') } },
         { provide: Router, useValue: {} },
+        { provide: NotificationsService, useValue: new NotificationsServiceStub() }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

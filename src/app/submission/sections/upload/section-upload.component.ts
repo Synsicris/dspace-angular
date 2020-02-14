@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 
-import { combineLatest, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, Subscription} from 'rxjs';
 import { distinctUntilChanged, filter, find, flatMap, map, reduce, take, tap } from 'rxjs/operators';
 
 import { SectionModelComponent } from '../models/section.model';
@@ -105,6 +105,12 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
   protected availableGroups: Map<string, Group[]>; // Groups for any policy
 
   /**
+   * Is the upload required
+   * @type {boolean}
+   */
+  public required$ = new BehaviorSubject<boolean>(true);
+
+  /**
    * Array to track all subscriptions and unsubscribe them onDestroy
    * @type {Array}
    */
@@ -155,14 +161,14 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
         filter((submissionObject: SubmissionObjectEntry) => isUndefined(this.collectionId) || this.collectionId !== submissionObject.collection),
         tap((submissionObject: SubmissionObjectEntry) => this.collectionId = submissionObject.collection),
         flatMap((submissionObject: SubmissionObjectEntry) => this.collectionDataService.findById(submissionObject.collection)),
-        find((rd: RemoteData<Collection>) => isNotUndefined((rd.payload))),
+        filter((rd: RemoteData<Collection>) => isNotUndefined((rd.payload))),
         tap((collectionRemoteData: RemoteData<Collection>) => this.collectionName = collectionRemoteData.payload.name),
         flatMap((collectionRemoteData: RemoteData<Collection>) => {
           return this.resourcePolicyService.findByHref(
             (collectionRemoteData.payload as any)._links.defaultAccessConditions
           );
         }),
-        find((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) =>
+        filter((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) =>
           defaultAccessConditionsRemoteData.hasSucceeded),
         tap((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) => {
           if (isNotEmpty(defaultAccessConditionsRemoteData.payload)) {
@@ -171,8 +177,8 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
           }
         }),
         flatMap(() => config$),
-        take(1),
         flatMap((config: SubmissionUploadsModel) => {
+          this.required$.next(config.required);
           this.availableAccessConditionOptions = isNotEmpty(config.accessConditionOptions) ? config.accessConditionOptions : [];
 
           this.collectionPolicyType = this.availableAccessConditionOptions.length > 0
@@ -222,7 +228,7 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
       }),
 
       // retrieve submission's bitstreams from state
-      combineLatest(this.configMetadataForm$,
+      observableCombineLatest(this.configMetadataForm$,
         this.bitstreamService.getUploadedFileList(this.submissionId, this.sectionData.id)).pipe(
         filter(([configMetadataForm, fileList]: [SubmissionFormsModel, any[]]) => {
           return isNotEmpty(configMetadataForm) && isNotUndefined(fileList)
@@ -274,8 +280,13 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
    *     the section status
    */
   protected getSectionStatus(): Observable<boolean> {
-    return this.bitstreamService.getUploadedFileList(this.submissionId, this.sectionData.id).pipe(
-      map((fileList: any[]) => (isNotUndefined(fileList) && fileList.length > 0)));
+    // if not mandatory, always true
+    // if mandatory, at least one file is required
+    return observableCombineLatest(this.required$,
+      this.bitstreamService.getUploadedFileList(this.submissionId, this.sectionData.id),
+      (required,fileList: any[]) => {
+        return (!required || (isNotUndefined(fileList) && fileList.length > 0));
+      });
   }
 
   /**

@@ -26,7 +26,7 @@ export interface HttpOptions {
 @Injectable()
 export class DSpaceRESTv2Service {
 
-  constructor(private http: HttpClient) {
+  constructor(protected http: HttpClient) {
 
   }
 
@@ -89,6 +89,14 @@ export class DSpaceRESTv2Service {
       requestOptions.headers = new HttpHeaders();
     } else {
       requestOptions.headers = options.headers;
+    }
+
+    if (options && options.params) {
+      requestOptions.params = options.params;
+    }
+
+    if (options && options.withCredentials) {
+      requestOptions.withCredentials = options.withCredentials;
     }
 
     if (!requestOptions.headers.has('Content-Type')) {

@@ -1,0 +1,20 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
+
+:host {
+  border: 1px solid map-get($theme-colors, dark);
+  .sidebar-panel-wrapper.closed {
+    overflow: hidden;
+  }
+  .sidebar-panel-name {
+    cursor: pointer;
+    border-bottom: 1px solid map-get($theme-colors, dark);
+  }
+  .sidebar-panel-toggle {
+    line-height: $line-height-base;
+  }
+  .sidebar-panel-content {
+    min-height: 300px;
+    min-width: 200px;
+  }
+}

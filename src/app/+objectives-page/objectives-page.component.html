@@ -1,0 +1,3 @@
+<ipw-objectives-board *ngIf="(itemId$ | async) && (targetItemId$ | async)"
+                      [impactPathwayStepId]="(itemId$ | async)"
+                      [targetImpactPathwayStepId]="(targetItemId$ | async)"></ipw-objectives-board>

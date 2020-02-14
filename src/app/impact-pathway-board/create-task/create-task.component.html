@@ -1,0 +1,8 @@
+  <ds-loading *ngIf="(isProcessing() | async)" [message]="'loading.processing' | translate"></ds-loading>
+  <ds-form *ngIf="!(isProcessing() | async) && formId && formModel?.length > 0" #formRef="formComponent"
+           [formId]="formId"
+           [formModel]="formModel"
+           [formLayout]="formLayout"
+           [displaySubmit]="displaySubmit"
+           (submitForm)="createTask($event)"
+           (cancel)="activeModal.dismiss(false)"></ds-form>

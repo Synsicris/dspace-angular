@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { Router } from '@angular/router';
 import { hasValue, isNotEmpty } from '../empty.util';
 import { QueryParamsHandling } from '@angular/router/src/config';
 import { MYDSPACE_ROUTE } from '../../+my-dspace-page/my-dspace-page.component';
-import { SearchService } from '../../+search-page/search-service/search.service';
+import { SearchService } from '../../core/shared/search/search.service';
+import { currentPath } from '../utils/route.utils';
 
 /**
  * This component renders a simple item page.
@@ -56,6 +57,11 @@ export class SearchFormComponent {
    */
   @Input() brandColor = 'primary';
 
+  /**
+   * Output the search data on submit
+   */
+  @Output() submitSearch = new EventEmitter<any>();
+
   constructor(private router: Router, private searchService: SearchService) {
   }
 
@@ -65,6 +71,7 @@ export class SearchFormComponent {
    */
   onSubmit(data: any) {
     this.updateSearch(data);
+    this.submitSearch.emit(data);
   }
 
   /**
@@ -98,7 +105,7 @@ export class SearchFormComponent {
    */
   public getSearchLink(): string {
     if (this.inPlaceSearch) {
-      return './';
+      return currentPath(this.router);
     }
     return this.searchService.getSearchLink();
   }

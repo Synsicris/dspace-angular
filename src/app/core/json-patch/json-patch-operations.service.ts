@@ -2,7 +2,7 @@ import { merge as observableMerge, Observable, throwError as observableThrowErro
 import { distinctUntilChanged, filter, find, flatMap, map, partition, take, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { hasValue, isEmpty, isNotEmpty, isNotUndefined, isUndefined } from '../../shared/empty.util';
+import { hasValue, isEmpty, isNotEmpty, isNotNull, isNotUndefined, isUndefined } from '../../shared/empty.util';
 import { ErrorResponse, PostPatchSuccessResponse, RestResponse } from '../cache/response.models';
 import { PatchRequest } from '../data/request.models';
 import { RequestService } from '../data/request.service';
@@ -17,7 +17,6 @@ import {
 } from './json-patch-operations.actions';
 import { JsonPatchOperationModel } from './json-patch.model';
 import { getResponseFromEntry } from '../shared/operators';
-import { ObjectCacheEntry } from '../cache/object-cache.reducer';
 
 /**
  * An abstract class that provides methods to make JSON Patch requests.
@@ -42,7 +41,7 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
    * @return Observable<ResponseDefinitionDomain>
    *    observable of response
    */
-  protected submitJsonPatchOperations(hrefObs: Observable<string>, resourceType: string, resourceId?: string): Observable<ResponseDefinitionDomain> {
+  protected submitJsonPatchOperations(hrefObs: Observable<string>, resourceType: string, resourceId?: string): Observable<RestResponse> {
     const requestId = this.requestService.generateRequestId();
     let startTransactionTime = null;
     const [patchRequest$, emptyRequest$] = partition((request: PatchRequestDefinition) => isNotEmpty(request.body))(hrefObs.pipe(
@@ -88,8 +87,8 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
         flatMap(() => {
           const [successResponse$, errorResponse$] = partition((response: RestResponse) => response.isSuccessful)(this.requestService.getByUUID(requestId).pipe(
             getResponseFromEntry(),
-            find((entry: ObjectCacheEntry) => startTransactionTime < entry.timeAdded),
-            map((entry: ObjectCacheEntry) => entry),
+            find((entry: RestResponse) => startTransactionTime < entry.timeAdded),
+            map((entry: RestResponse) => entry),
           ));
           return observableMerge(
             errorResponse$.pipe(
@@ -98,7 +97,6 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
             successResponse$.pipe(
               filter((response: PostPatchSuccessResponse) => isNotEmpty(response)),
               tap(() => this.store.dispatch(new CommitPatchOperationsAction(resourceType, resourceId))),
-              map((response: PostPatchSuccessResponse) => response.dataDefinition),
               distinctUntilChanged()));
         }))
     );
@@ -142,7 +140,9 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
       distinctUntilChanged(),
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId)));
 
-    return this.submitJsonPatchOperations(href$, resourceType);
+    return this.submitJsonPatchOperations(href$, resourceType).pipe(
+      map((response: PostPatchSuccessResponse) => isNotNull(response) ? response.dataDefinition : null)
+    );
   }
 
   /**
@@ -165,6 +165,8 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
       distinctUntilChanged(),
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId)));
 
-    return this.submitJsonPatchOperations(hrefObs, resourceType, resourceId);
+    return this.submitJsonPatchOperations(hrefObs, resourceType, resourceId).pipe(
+      map((response: PostPatchSuccessResponse) => isNotNull(response) ? response.dataDefinition : null)
+    );
   }
 }

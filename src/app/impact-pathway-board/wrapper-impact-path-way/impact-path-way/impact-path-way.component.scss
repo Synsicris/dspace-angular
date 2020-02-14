@@ -1,0 +1,64 @@
+@import '../../../../styles/variables';
+
+:host /deep/ .card {
+  margin-bottom: $submission-sections-margin-bottom;
+}
+
+.section-focus {
+  border-radius: $border-radius;
+  box-shadow: $btn-focus-box-shadow;
+}
+
+:host /deep/ .card:first-of-type {
+  border-bottom: $card-border-width solid  $card-border-color !important;
+  border-bottom-left-radius: $card-border-radius !important;
+  border-bottom-right-radius: $card-border-radius !important;
+}
+
+:host /deep/ .card-header button {
+  box-shadow: none !important;
+  width: 100%;
+}
+
+:host /deep/ .card-body {
+  margin: 0;
+  padding: 0;
+}
+
+.horizontal-content {
+  min-height: 200px;
+}
+
+.vertical-content {
+  min-height: 600px;
+}
+
+.horizontal-step {
+  border-bottom: 4px solid map-get($theme-colors, dark);
+  width: 100%;
+  min-height: 150px;
+}
+
+.vertical-step:not(:first-child){
+  border-left: 4px solid map-get($theme-colors, dark);
+}
+
+.vertical-step {
+  //border: 1px solid map-get($theme-colors, light);
+  min-height: 200px;
+  min-width: 200px;
+  flex-grow: 1 !important;
+  flex-basis: 0 !important;
+}
+
+.bg-step-green {
+  background-color: rgba(38, 153, 0, 0.2);
+}
+
+.bg-step-orange {
+  background-color: rgba(255, 153, 51, 0.2);
+}
+
+.bg-step-grey {
+  background-color: rgba(191, 191, 191, 0.2);
+}

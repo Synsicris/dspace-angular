@@ -68,8 +68,8 @@ export class ObjectCacheService {
    * @param href
    *    The unique href of the object to be removed
    */
-  remove(uuid: string): void {
-    this.store.dispatch(new RemoveFromObjectCacheAction(uuid));
+  remove(href: string): void {
+    this.store.dispatch(new RemoveFromObjectCacheAction(href));
   }
 
   /**
@@ -80,7 +80,8 @@ export class ObjectCacheService {
    * @return Observable<NormalizedObject<T>>
    *    An observable of the requested object in normalized form
    */
-  getObjectByUUID<T extends CacheableObject>(uuid: string): Observable<NormalizedObject<T>> {
+  getObjectByUUID<T extends CacheableObject>(uuid: string):
+    Observable<NormalizedObject<T>> {
     return this.store.pipe(
       select(selfLinkFromUuidSelector(uuid)),
       mergeMap((selfLink: string) => this.getObjectBySelfLink(selfLink)
@@ -195,8 +196,9 @@ export class ObjectCacheService {
    *    false otherwise
    */
   hasByUUID(uuid: string): boolean {
-    let result: boolean;
+    let result = false;
 
+    /* NB: that this is only a solution because the select method is synchronous, see: https://github.com/ngrx/store/issues/296#issuecomment-269032571*/
     this.store.pipe(
       select(selfLinkFromUuidSelector(uuid)),
       take(1)
@@ -222,6 +224,18 @@ export class ObjectCacheService {
     ).subscribe((entry: ObjectCacheEntry) => result = this.isValid(entry));
 
     return result;
+  }
+
+  /**
+   * Create an observable that emits a new value whenever the availability of the cached object changes.
+   * The value it emits is a boolean stating if the object exists in cache or not.
+   * @param selfLink  The self link of the object to observe
+   */
+  hasBySelfLinkObservable(selfLink: string): Observable<boolean> {
+    return this.store.pipe(
+      select(entryFromSelfLinkSelector(selfLink)),
+      map((entry: ObjectCacheEntry) => this.isValid(entry))
+    );
   }
 
   /**

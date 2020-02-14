@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { CommunityDataService } from '../../core/data/community-data.service';
-import { RouteService } from '../../shared/services/route.service';
+import { RouteService } from '../../core/services/route.service';
 import { Router } from '@angular/router';
 import { CreateComColPageComponent } from '../../shared/comcol-forms/create-comcol-page/create-comcol-page.component';
 import { Collection } from '../../core/shared/collection.model';
 import { CollectionDataService } from '../../core/data/collection-data.service';
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * Component that represents the page where a user can create a new Collection
@@ -16,13 +18,16 @@ import { CollectionDataService } from '../../core/data/collection-data.service';
 })
 export class CreateCollectionPageComponent extends CreateComColPageComponent<Collection> {
   protected frontendURL = '/collections/';
+  protected type = Collection.type;
 
   public constructor(
     protected communityDataService: CommunityDataService,
     protected collectionDataService: CollectionDataService,
     protected routeService: RouteService,
-    protected router: Router
+    protected router: Router,
+    protected notificationsService: NotificationsService,
+    protected translate: TranslateService
   ) {
-    super(collectionDataService, communityDataService, routeService, router);
+    super(collectionDataService, communityDataService, routeService, router, notificationsService, translate);
   }
 }

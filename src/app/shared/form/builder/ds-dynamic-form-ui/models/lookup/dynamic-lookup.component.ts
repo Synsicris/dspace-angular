@@ -18,7 +18,7 @@ import { hasValue, isEmpty, isNotEmpty, isNull, isUndefined } from '../../../../
 import { IntegrationData } from '../../../../../../core/integration/integration-data';
 import { PageInfo } from '../../../../../../core/shared/page-info.model';
 import { FormFieldMetadataValueObject } from '../../../models/form-field-metadata-value.model';
-import { AuthorityValue } from '../../../../../../core/integration/models/authority.value';
+import { AuthorityEntry } from '../../../../../../core/integration/models/authority-entry.model';
 import { DynamicLookupNameModel } from './dynamic-lookup-name.model';
 import { ConfidenceType } from '../../../../../../core/integration/models/confidence-type';
 
@@ -106,7 +106,7 @@ export class DsDynamicLookupComponent extends DynamicFormControlComponent implem
   protected setInputsValue(value) {
     if (hasValue(value)) {
       let displayValue = value;
-      if (value instanceof FormFieldMetadataValueObject || value instanceof AuthorityValue) {
+      if (value instanceof FormFieldMetadataValueObject || value instanceof AuthorityEntry) {
         displayValue = value.display;
       }
 
@@ -121,6 +121,15 @@ export class DsDynamicLookupComponent extends DynamicFormControlComponent implem
         }
       }
     }
+  }
+
+  protected updateModel(value) {
+    this.group.markAsDirty();
+    this.model.valueUpdates.next(value);
+    this.setInputsValue(value);
+    this.change.emit(value);
+    this.optionsList = null;
+    this.pageInfo = null;
   }
 
   public formatItemForInput(item: any, field: number): string {
@@ -170,12 +179,13 @@ export class DsDynamicLookupComponent extends DynamicFormControlComponent implem
     this.focus.emit(event);
   }
 
-  public onInput(event) {
+  public onChange(event) {
+    event.preventDefault();
     if (!this.model.authorityOptions.closed) {
       if (isNotEmpty(this.getCurrentValue())) {
         const currentValue = new FormFieldMetadataValueObject(this.getCurrentValue());
         if (!this.editMode) {
-          this.onSelect(currentValue);
+          this.updateModel(currentValue);
         }
       } else {
         this.remove();
@@ -191,12 +201,7 @@ export class DsDynamicLookupComponent extends DynamicFormControlComponent implem
   }
 
   public onSelect(event) {
-    this.group.markAsDirty();
-    this.model.valueUpdates.next(event);
-    this.setInputsValue(event);
-    this.change.emit(event);
-    this.optionsList = null;
-    this.pageInfo = null;
+    this.updateModel(event);
   }
 
   public openChange(isOpened: boolean) {
@@ -215,11 +220,11 @@ export class DsDynamicLookupComponent extends DynamicFormControlComponent implem
 
   public saveChanges() {
     if (isNotEmpty(this.getCurrentValue())) {
-      const newValue = Object.assign(new AuthorityValue(), this.model.value, {
+      const newValue = Object.assign(new AuthorityEntry(), this.model.value, {
         display: this.getCurrentValue(),
         value: this.getCurrentValue()
       });
-      this.onSelect(newValue);
+      this.updateModel(newValue);
     } else {
       this.remove();
     }

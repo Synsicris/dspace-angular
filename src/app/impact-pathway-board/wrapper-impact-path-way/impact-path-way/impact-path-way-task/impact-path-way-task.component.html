@@ -1,0 +1,22 @@
+<ng-content></ng-content>
+<div class="task-wrap d-flex flex-column"
+     [class.bg-gradient-light]="isDisabled()"
+     [class.task-disabled]="isDisabled()"
+     [class.task-focus]="(hasFocus$ | async)"
+     ipwTaskColor
+     [taskType]="data.type"
+     (click)="setFocus($event)">
+  <div class="task-header d-flex p-1 justify-content-between">
+    <div class="text-truncate font-weight-bold w-100 pr-2">
+      <span>{{data.title}}</span>
+    </div>
+    <button *ngIf="data.hasDetail()" class="btn btn-link p-0 flex-shrink-1" (click)="showObjectives(); $event.stopPropagation()"><i class="fas fa-info-circle"></i></button>
+    <button *ngIf="data.hasParent()" class="btn btn-link p-0 flex-shrink-1" (click)="removeTask(); $event.stopPropagation()">
+      <span *ngIf="!(isProcessingRemove() | async)"><i class='far fa-trash-alt'></i></span>
+      <span *ngIf="(isProcessingRemove() | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
+    </button>
+  </div>
+  <div class="task-content p-1 d-flex align-items-stretch justify-content-between flex-column flex-grow-1">
+    <span>{{data.description}}</span>
+  </div>
+</div>

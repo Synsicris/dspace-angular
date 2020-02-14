@@ -1,0 +1,13 @@
+@import '../../../styles/variables';
+
+:host {
+  min-height: 600px;
+  min-width: 400px;
+
+  .sidebar-content {
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+

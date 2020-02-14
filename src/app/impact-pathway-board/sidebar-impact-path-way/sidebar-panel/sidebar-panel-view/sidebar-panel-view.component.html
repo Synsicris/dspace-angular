@@ -1,0 +1,28 @@
+<div *ngIf="!(task$ | async)" class="p-3">
+  <h3 class="text-muted">No item selected</h3>
+</div>
+
+<div *ngIf="(task$ | async)" class="pt-3">
+  <form *ngVar="(task$ | async) as task" class="container-fluid">
+    <div class="form-group">
+      <label for="formGroupTitle" class="font-weight-bold">Title</label>
+      <input type="text" readonly class="form-control-plaintext" id="formGroupTitle" value="{{task.item.title}}">
+    </div>
+    <div class="form-group">
+      <label for="formGroupDescription" class="font-weight-bold">Description</label>
+      <input type="text" readonly class="form-control-plaintext" id="formGroupDescription" value="{{task.description}}">
+    </div>
+    <div class="form-group">
+      <label for="formGroupType" class="font-weight-bold">Type</label>
+      <input type="text" readonly class="form-control-plaintext" id="formGroupType" value="{{task.item.type}}">
+    </div>
+  </form>
+
+  <ng-container *ngVar="{formId: (formId$ | async), formModel: (formModel$ | async) } as variables">
+    <ds-form *ngIf="variables.formId && variables.formModel?.length > 0" #formRef="formComponent"
+             [formId]="variables.formId"
+             [formModel]="variables.formModel"
+             [formLayout]="formLayout"
+             [displaySubmit]="displaySubmit"></ds-form>
+  </ng-container>
+</div>

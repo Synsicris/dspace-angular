@@ -14,7 +14,7 @@ import { AuthorityService } from '../../../../../../core/integration/authority.s
 import { AuthorityServiceStub } from '../../../../../testing/authority-service-stub';
 import { DsDynamicScrollableDropdownComponent } from './dynamic-scrollable-dropdown.component';
 import { DynamicScrollableDropdownModel } from './dynamic-scrollable-dropdown.model';
-import { AuthorityValue } from '../../../../../../core/integration/models/authority.value';
+import { AuthorityEntry } from '../../../../../../core/integration/models/authority-entry.model';
 import { createTestComponent, hasClass } from '../../../../../testing/utils';
 
 export const SD_TEST_GROUP = new FormGroup({
@@ -38,7 +38,9 @@ export const SD_TEST_MODEL_CONFIG = {
   readOnly: false,
   required: false,
   repeatable: false,
-  value: undefined
+  value: undefined,
+  metadataFields: [],
+  submissionId: '1234'
 };
 
 describe('Dynamic Dynamic Scrollable Dropdown component', () => {
@@ -127,7 +129,7 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
       });
 
       it('should display dropdown menu entries', () => {
-        const de = scrollableDropdownFixture.debugElement.query(By.css('button.ds-form-input-btn'));
+        const de = scrollableDropdownFixture.debugElement.query(By.css('input.custom-select'));
         const btnEl = de.nativeElement;
 
         const deMenu = scrollableDropdownFixture.debugElement.query(By.css('div.scrollable-dropdown-menu'));
@@ -152,9 +154,9 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
       }));
 
       it('should select a results entry properly', fakeAsync(() => {
-        const selectedValue = Object.assign(new AuthorityValue(), {id: 1, display: 'one', value: 1});
+        const selectedValue = Object.assign(new AuthorityEntry(), {id: 1, display: 'one', value: 1});
 
-        let de: any = scrollableDropdownFixture.debugElement.query(By.css('button.ds-form-input-btn'));
+        let de: any = scrollableDropdownFixture.debugElement.query(By.css('input.custom-select'));
         let btnEl = de.nativeElement;
 
         btnEl.click();
@@ -190,7 +192,7 @@ describe('Dynamic Dynamic Scrollable Dropdown component', () => {
         scrollableDropdownFixture = TestBed.createComponent(DsDynamicScrollableDropdownComponent);
         scrollableDropdownComp = scrollableDropdownFixture.componentInstance; // FormComponent test instance
         scrollableDropdownComp.group = SD_TEST_GROUP;
-        modelValue = Object.assign(new AuthorityValue(), {id: 1, display: 'one', value: 1});
+        modelValue = Object.assign(new AuthorityEntry(), {id: 1, display: 'one', value: 1});
         scrollableDropdownComp.model = new DynamicScrollableDropdownModel(SD_TEST_MODEL_CONFIG);
         scrollableDropdownComp.model.value = modelValue;
         scrollableDropdownFixture.detectChanges();

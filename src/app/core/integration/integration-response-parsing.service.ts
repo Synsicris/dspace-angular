@@ -10,7 +10,7 @@ import { GLOBAL_CONFIG } from '../../../config';
 import { GlobalConfig } from '../../../config/global-config.interface';
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { IntegrationModel } from './models/integration.model';
-import { AuthorityValue } from './models/authority.value';
+import { AuthorityEntry } from './models/authority-entry.model';
 import { PaginatedList } from '../data/paginated-list';
 
 @Injectable()
@@ -26,8 +26,8 @@ export class IntegrationResponseParsingService extends BaseResponseParsingServic
   }
 
   parse(request: RestRequest, data: DSpaceRESTV2Response): RestResponse {
-    if (isNotEmpty(data.payload) && isNotEmpty(data.payload._links)) {
-      const dataDefinition = this.process<IntegrationModel>(data.payload, request.uuid);
+    if (this.isSuccessStatus(data.statusCode)) {
+      const dataDefinition = this.process<IntegrationModel>(data.payload, request);
       return new IntegrationSuccessResponse(this.processResponse(dataDefinition), data.statusCode, data.statusText, this.processPageInfo(data.payload));
     } else {
       return new ErrorResponse(
@@ -40,12 +40,13 @@ export class IntegrationResponseParsingService extends BaseResponseParsingServic
   }
 
   protected processResponse(data: PaginatedList<IntegrationModel>): any {
-    const returnList = Array.of();
-    data.page.forEach((item, index) => {
-      if (item.type === AuthorityValue.type.value) {
-        data.page[index] = Object.assign(new AuthorityValue(), item);
-      }
-    });
+    if (isNotEmpty(data)) {
+      data.page.forEach((item, index) => {
+        if (item.type === AuthorityEntry.type.value) {
+          data.page[index] = Object.assign(new AuthorityEntry(), item);
+        }
+      });
+    }
 
     return data;
   }

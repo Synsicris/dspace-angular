@@ -3,13 +3,19 @@ import { AuthStatus } from '../../core/auth/models/auth-status.model';
 import { AuthTokenInfo } from '../../core/auth/models/auth-token-info.model';
 import { EPersonMock } from './eperson-mock';
 import { EPerson } from '../../core/eperson/models/eperson.model';
-import { RemoteData } from '../../core/data/remote-data';
 import { createSuccessfulRemoteDataObject$ } from './utils';
+import { AuthMethod } from '../../core/auth/models/auth.method';
+
+export const authMethodsMock = [
+  new AuthMethod('password'),
+  new AuthMethod('shibboleth', 'dspace.test/shibboleth')
+];
 
 export class AuthServiceStub {
 
   token: AuthTokenInfo = new AuthTokenInfo('token_test');
   private _tokenExpired = false;
+  private redirectUrl;
 
   constructor() {
     this.token.expires = Date.now() + (1000 * 60 * 60);
@@ -88,7 +94,11 @@ export class AuthServiceStub {
   }
 
   setRedirectUrl(url: string) {
-    return;
+    this.redirectUrl = url;
+  }
+
+  getRedirectUrl() {
+    return observableOf(this.redirectUrl);
   }
 
   public storeToken(token: AuthTokenInfo) {
@@ -97,5 +107,13 @@ export class AuthServiceStub {
 
   isAuthenticated() {
     return observableOf(true);
+  }
+
+  checkAuthenticationCookie() {
+    return;
+  }
+
+  retrieveAuthMethodsFromAuthStatus(status: AuthStatus) {
+    return observableOf(authMethodsMock);
   }
 }

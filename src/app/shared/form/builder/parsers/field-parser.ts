@@ -1,4 +1,5 @@
-import { hasValue, isNotEmpty, isNotNull, isNotUndefined } from '../../../empty.util';
+import { Inject, InjectionToken } from '@angular/core';
+import { hasValue, isNotEmpty, isNotNull, isNotUndefined, isEmpty } from '../../../empty.util';
 import { FormFieldModel } from '../models/form-field.model';
 
 import { uniqueId } from 'lodash';
@@ -12,21 +13,35 @@ import { DynamicFormControlLayout } from '@ng-dynamic-forms/core';
 import { setLayout } from './parser.utils';
 import { AuthorityOptions } from '../../../../core/integration/models/authority-options.model';
 import { ParserOptions } from './parser-options';
+import { ParserType } from './parser-type';
+import { RelationshipOptions } from '../models/relationship-options.model';
+
+export const SUBMISSION_ID: InjectionToken<string> = new InjectionToken<string>('submissionId');
+export const CONFIG_DATA: InjectionToken<FormFieldModel> = new InjectionToken<FormFieldModel>('configData');
+export const INIT_FORM_VALUES: InjectionToken<any> = new InjectionToken<any>('initFormValues');
+export const PARSER_OPTIONS: InjectionToken<ParserOptions> = new InjectionToken<ParserOptions>('parserOptions');
 
 export abstract class FieldParser {
 
   protected fieldId: string;
 
-  constructor(protected configData: FormFieldModel, protected initFormValues, protected parserOptions: ParserOptions) {
+  constructor(
+    @Inject(SUBMISSION_ID) protected submissionId: string,
+    @Inject(CONFIG_DATA) protected configData: FormFieldModel,
+    @Inject(INIT_FORM_VALUES) protected initFormValues: any,
+    @Inject(PARSER_OPTIONS) protected parserOptions: ParserOptions
+  ) {
   }
 
   public abstract modelFactory(fieldValue?: FormFieldMetadataValueObject, label?: boolean): any;
 
   public parse() {
     if (((this.getInitValueCount() > 1 && !this.configData.repeatable) || (this.configData.repeatable))
-      && (this.configData.input.type !== 'list')
-      && (this.configData.input.type !== 'tag')
-      && (this.configData.input.type !== 'group')
+      && (this.configData.input.type !== ParserType.List)
+      && (this.configData.input.type !== ParserType.Tag)
+      && (this.configData.input.type !== ParserType.RelationGroup)
+      && (this.configData.input.type !== ParserType.InlineGroup)
+      && isEmpty(this.configData.selectableRelationship)
     ) {
       let arrayCounter = 0;
       let fieldArrayCounter = 0;
@@ -36,6 +51,7 @@ export abstract class FieldParser {
         label: this.configData.label,
         initialCount: this.getInitArrayIndex(),
         notRepeatable: !this.configData.repeatable,
+        required: JSON.parse( this.configData.mandatory),
         groupFactory: () => {
           let model;
           if ((arrayCounter === 0)) {
@@ -71,7 +87,7 @@ export abstract class FieldParser {
 
     } else {
       const model = this.modelFactory(this.getInitFieldValue());
-      if (model.hasLanguages) {
+      if (model.hasLanguages || isNotEmpty(model.relationship)) {
         setLayout(model, 'grid', 'control', 'col');
       }
       return model;
@@ -164,7 +180,7 @@ export abstract class FieldParser {
         return ids;
       }
     } else {
-      return null;
+      return [this.configData.selectableRelationship.relationshipType];
     }
   }
 
@@ -184,9 +200,15 @@ export abstract class FieldParser {
     // Set read only option
     controlModel.readOnly = this.parserOptions.readOnly;
     controlModel.disabled = this.parserOptions.readOnly;
+    if (hasValue(this.configData.selectableRelationship)) {
+      controlModel.relationship = Object.assign(new RelationshipOptions(), this.configData.selectableRelationship);
+    }
+    controlModel.repeatable = this.configData.repeatable;
+    controlModel.metadataFields = isNotEmpty(this.configData.selectableMetadata) ? this.configData.selectableMetadata.map((metadataObject) => metadataObject.metadata) : [];
+    controlModel.submissionId = this.submissionId;
 
     // Set label
-    this.setLabel(controlModel, label, labelEmpty);
+    this.setLabel(controlModel, label);
 
     controlModel.placeholder = this.configData.label;
 
@@ -204,14 +226,21 @@ export abstract class FieldParser {
     if (this.configData.languageCodes && this.configData.languageCodes.length > 0) {
       (controlModel as DsDynamicInputModel).languageCodes = this.configData.languageCodes;
     }
-/*    (controlModel as DsDynamicInputModel).languageCodes = [{
-        display: 'English',
-        code: 'en_US'
-      },
-      {
-        display: 'Italian',
-        code: 'it_IT'
-      }];*/
+
+    if (isNotEmpty(this.configData.typeBind)) {
+      const bindValues = [];
+      this.configData.typeBind.forEach((value) => {
+        bindValues.push({
+          id: 'dc_type',
+          value: value
+        })
+      });
+      (controlModel as DsDynamicInputModel).typeBind = [{
+        action: 'ENABLE',
+        connective: 'OR',
+        when: bindValues
+      }];
+    }
 
     return controlModel;
   }
@@ -222,21 +251,21 @@ export abstract class FieldParser {
 
   protected addPatternValidator(controlModel) {
     const regex = new RegExp(this.configData.input.regex);
-    controlModel.validators = Object.assign({}, controlModel.validators, {pattern: regex});
+    controlModel.validators = Object.assign({}, controlModel.validators, { pattern: regex });
     controlModel.errorMessages = Object.assign(
       {},
       controlModel.errorMessages,
-      {pattern: 'error.validation.pattern'});
+      { pattern: 'error.validation.pattern' });
 
   }
 
   protected markAsRequired(controlModel) {
     controlModel.required = true;
-    controlModel.validators = Object.assign({}, controlModel.validators, {required: null});
+    controlModel.validators = Object.assign({}, controlModel.validators, { required: null });
     controlModel.errorMessages = Object.assign(
       {},
       controlModel.errorMessages,
-      {required: this.configData.mandatoryMessage});
+      { required: this.configData.mandatoryMessage });
   }
 
   protected setLabel(controlModel, label = true, labelEmpty = false) {
@@ -253,13 +282,13 @@ export abstract class FieldParser {
         if (key === 0) {
           controlModel.value = option.metadata;
         }
-        controlModel.options.push({label: option.label, value: option.metadata});
+        controlModel.options.push({ label: option.label, value: option.metadata });
       });
     }
   }
 
   public setAuthorityOptions(controlModel, authorityUuid) {
-    if (isNotEmpty(this.configData.selectableMetadata[0].authority)) {
+    if (isNotEmpty(this.configData.selectableMetadata) && isNotEmpty(this.configData.selectableMetadata[0].authority)) {
       controlModel.authorityOptions = new AuthorityOptions(
         this.configData.selectableMetadata[0].authority,
         this.configData.selectableMetadata[0].metadata,

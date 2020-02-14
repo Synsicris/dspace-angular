@@ -19,7 +19,7 @@
           <ds-search-labels [inPlaceSearch]="inPlaceSearch"></ds-search-labels>
           <div class="row">
               <div id="search-body"
-                   class="row-offcanvas row-offcanvas-left"
+                   class="row-offcanvas row-offcanvas-left w-100"
                    [@pushInOut]="(isSidebarCollapsed() | async) ? 'collapsed' : 'expanded'">
                   <ds-search-sidebar *ngIf="(isXsOrSm$ | async)" class="col-12"
                                      id="search-sidebar-sm"
@@ -39,7 +39,8 @@
                           </button>
                       </div>
                       <ds-my-dspace-results [searchResults]="resultsRD$ | async"
-                                            [searchConfig]="searchOptions$ | async"></ds-my-dspace-results>
+                                            [searchConfig]="searchOptions$ | async"
+                                            [context]="context$ | async"></ds-my-dspace-results>
                   </div>
               </div>
           </div>

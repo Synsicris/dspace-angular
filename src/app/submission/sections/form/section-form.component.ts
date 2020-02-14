@@ -15,7 +15,10 @@ import { hasValue, isNotEmpty, isUndefined } from '../../../shared/empty.util';
 import { ConfigData } from '../../../core/config/config-data';
 import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { SubmissionFormsModel } from '../../../core/config/models/config-submission-forms.model';
-import { SubmissionSectionError, SubmissionSectionObject } from '../../objects/submission-objects.reducer';
+import {
+  SubmissionSectionError,
+  SubmissionSectionObject
+} from '../../objects/submission-objects.reducer';
 import { FormFieldPreviousValueObject } from '../../../shared/form/builder/models/form-field-previous-value-object';
 import { GLOBAL_CONFIG } from '../../../../config';
 import { GlobalConfig } from '../../../../config/global-config.interface';
@@ -28,6 +31,11 @@ import { NotificationsService } from '../../../shared/notifications/notification
 import { SectionsService } from '../sections.service';
 import { difference } from '../../../shared/object.util';
 import { WorkspaceitemSectionFormObject } from '../../../core/submission/models/workspaceitem-section-form.model';
+import { WorkspaceItem } from '../../../core/submission/models/workspaceitem.model';
+import { WorkspaceitemDataService } from '../../../core/submission/workspaceitem-data.service';
+import { combineLatest as combineLatestObservable } from 'rxjs';
+import { getSucceededRemoteData } from '../../../core/shared/operators';
+import { RemoteData } from '../../../core/data/remote-data';
 
 /**
  * This component represents a section that contains a Form.
@@ -65,6 +73,12 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
   public isLoading = true;
 
   /**
+   * A map representing all field on their way to be removed
+   * @type {Map}
+   */
+  protected fieldsOnTheirWayToBeRemoved: Map<string, number[]> = new Map();
+
+  /**
    * The form config
    * @type {SubmissionFormsModel}
    */
@@ -94,6 +108,7 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
    */
   protected subs: Subscription[] = [];
 
+  protected workspaceItem: WorkspaceItem;
   /**
    * The FormComponent reference
    */
@@ -125,6 +140,7 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
               protected sectionService: SectionsService,
               protected submissionService: SubmissionService,
               protected translate: TranslateService,
+              protected workspaceItemDataService: WorkspaceitemDataService,
               @Inject(GLOBAL_CONFIG) protected EnvConfig: GlobalConfig,
               @Inject('collectionIdProvider') public injectedCollectionId: string,
               @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
@@ -138,15 +154,19 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
   onSectionInit() {
     this.pathCombiner = new JsonPatchOperationPathCombiner('sections', this.sectionData.id);
     this.formId = this.formService.getUniqueId(this.sectionData.id);
-
     this.formConfigService.getConfigByHref(this.sectionData.config).pipe(
       map((configData: ConfigData) => configData.payload),
       tap((config: SubmissionFormsModel) => this.formConfig = config),
-      flatMap(() => this.sectionService.getSectionData(this.submissionId, this.sectionData.id)),
+      flatMap(() =>
+        combineLatestObservable(
+          this.sectionService.getSectionData(this.submissionId, this.sectionData.id),
+          this.workspaceItemDataService.findById(this.submissionId).pipe(getSucceededRemoteData(), map((wsiRD: RemoteData<WorkspaceItem>) => wsiRD.payload))
+        )),
       take(1))
-      .subscribe((sectionData: WorkspaceitemSectionFormObject) => {
+      .subscribe(([sectionData, workspaceItem]: [WorkspaceitemSectionFormObject, WorkspaceItem]) => {
         if (isUndefined(this.formModel)) {
           this.sectionData.errors = [];
+          this.workspaceItem = workspaceItem;
           // Is the first loading so init form
           this.initForm(sectionData);
           this.sectionData.data = sectionData;
@@ -209,16 +229,19 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
   initForm(sectionData: WorkspaceitemSectionFormObject): void {
     try {
       this.formModel = this.formBuilderService.modelFromConfiguration(
+        this.submissionId,
         this.formConfig,
         this.collectionId,
         sectionData,
-        this.submissionService.getSubmissionScope());
+        this.submissionService.getSubmissionScope()
+      );
     } catch (e) {
       const msg: string = this.translate.instant('error.submission.sections.init-form-error') + e.toString();
       const sectionError: SubmissionSectionError = {
         message: msg,
         path: '/sections/' + this.sectionData.id
       };
+      console.error(e.stack);
       this.sectionService.setSectionError(this.submissionId, this.sectionData.id, sectionError);
     }
   }
@@ -295,6 +318,7 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
         }),
         distinctUntilChanged())
         .subscribe((sectionState: SubmissionSectionObject) => {
+          this.fieldsOnTheirWayToBeRemoved = new Map();
           this.updateForm(sectionState.data as WorkspaceitemSectionFormObject, sectionState.errors);
         })
     )
@@ -348,11 +372,24 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
    *    the [[DynamicFormControlEvent]] emitted
    */
   onRemove(event: DynamicFormControlEvent): void {
+    const fieldId = this.formBuilderService.getId(event.model);
+    const fieldIndex = this.formOperationsService.getArrayIndexFromEvent(event);
+
+    // Keep track that this field will be removed
+    if (this.fieldsOnTheirWayToBeRemoved.has(fieldId)) {
+      const indexes = this.fieldsOnTheirWayToBeRemoved.get(fieldId);
+      indexes.push(fieldIndex);
+      this.fieldsOnTheirWayToBeRemoved.set(fieldId, indexes);
+    } else {
+      this.fieldsOnTheirWayToBeRemoved.set(fieldId, [fieldIndex]);
+    }
+
     this.formOperationsService.dispatchOperationsFromEvent(
       this.pathCombiner,
       event,
       this.previousValue,
-      this.hasStoredValue(this.formBuilderService.getId(event.model), this.formOperationsService.getArrayIndexFromEvent(event)));
+      this.hasStoredValue(fieldId, fieldIndex));
+
   }
 
   /**
@@ -365,9 +402,23 @@ export class SubmissionSectionformComponent extends SectionModelComponent {
    */
   hasStoredValue(fieldId, index): boolean {
     if (isNotEmpty(this.sectionData.data)) {
-      return this.sectionData.data.hasOwnProperty(fieldId) && isNotEmpty(this.sectionData.data[fieldId][index]);
+      return this.sectionData.data.hasOwnProperty(fieldId) &&
+        isNotEmpty(this.sectionData.data[fieldId][index]) &&
+        !this.isFieldToRemove(fieldId, index);
     } else {
       return false;
     }
+  }
+
+  /**
+   * Check if the specified field is on the way to be removed
+   *
+   * @param fieldId
+   *    the section data retrieved from the serverù
+   * @param index
+   *    the section data retrieved from the server
+   */
+  isFieldToRemove(fieldId, index) {
+    return this.fieldsOnTheirWayToBeRemoved.has(fieldId) && this.fieldsOnTheirWayToBeRemoved.get(fieldId).includes(index);
   }
 }

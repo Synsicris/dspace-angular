@@ -1,21 +1,30 @@
 import {
   DynamicFormControlLayout,
+  DynamicFormControlModel,
+  DynamicFormControlRelationGroup,
   DynamicInputModel,
   DynamicInputModelConfig,
   serializable
 } from '@ng-dynamic-forms/core';
-import { Subject } from 'rxjs';
+
+import { BehaviorSubject, Subject } from 'rxjs';
 
 import { LanguageCode } from '../../models/form-field-language-value.model';
 import { AuthorityOptions } from '../../../../../core/integration/models/authority-options.model';
-import { hasValue } from '../../../../empty.util';
+import { hasValue, isEmpty, isNotUndefined } from '../../../../empty.util';
 import { FormFieldMetadataValueObject } from '../../models/form-field-metadata-value.model';
+import { RelationshipOptions } from '../../models/relationship-options.model';
 
 export interface DsDynamicInputModelConfig extends DynamicInputModelConfig {
   authorityOptions?: AuthorityOptions;
   languageCodes?: LanguageCode[];
   language?: string;
   value?: any;
+  typeBind?: DynamicFormControlRelationGroup[];
+  relationship?: RelationshipOptions;
+  repeatable: boolean;
+  metadataFields: string[];
+  submissionId: string;
 }
 
 export class DsDynamicInputModel extends DynamicInputModel {
@@ -24,13 +33,24 @@ export class DsDynamicInputModel extends DynamicInputModel {
   @serializable() private _languageCodes: LanguageCode[];
   @serializable() private _language: string;
   @serializable() languageUpdates: Subject<string>;
+  @serializable() hiddenUpdates: Subject<boolean>;
+  @serializable() typeBind: DynamicFormControlRelationGroup[];
+  @serializable() typeBindHidden = false;
+  @serializable() relationship?: RelationshipOptions;
+  @serializable() repeatable?: boolean;
+  @serializable() metadataFields: string[];
+  @serializable() submissionId: string;
 
   constructor(config: DsDynamicInputModelConfig, layout?: DynamicFormControlLayout) {
     super(config, layout);
-
+    this.repeatable = config.repeatable;
+    this.metadataFields = config.metadataFields;
     this.hint = config.hint;
     this.readOnly = config.readOnly;
     this.value = config.value;
+    this.relationship = config.relationship;
+    this.submissionId = config.submissionId;
+
     this.language = config.language;
     if (!this.language) {
       // TypeAhead
@@ -50,6 +70,15 @@ export class DsDynamicInputModel extends DynamicInputModel {
       this.language = lang;
     });
 
+    this.typeBind = config.typeBind ? config.typeBind : [];
+    this.hiddenUpdates = new BehaviorSubject<boolean>(this.hidden);
+    this.hiddenUpdates.subscribe((hidden: boolean) => {
+      this.hidden = hidden;
+      const parentModel = this.getRootParent(this);
+      if (parentModel && isNotUndefined(parentModel.hidden)) {
+        parentModel.hidden = hidden;
+      }
+    });
     this.authorityOptions = config.authorityOptions;
   }
 
@@ -80,4 +109,11 @@ export class DsDynamicInputModel extends DynamicInputModel {
     }
   }
 
+  private getRootParent(model: any): DynamicFormControlModel {
+    if (isEmpty(model) || isEmpty(model.parent)) {
+      return model;
+    } else {
+      return this.getRootParent(model.parent);
+    }
+  }
 }

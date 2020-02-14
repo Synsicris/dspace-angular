@@ -1,9 +1,9 @@
 <div *ngIf="currentPageState == undefined || currentPageState == currentPage">
-  <div  class="pagination-masked clearfix top">
+  <div *ngIf="(!hidePaginationDetail && collectionSize > 0) || !hideGear" class="pagination-masked clearfix top">
     <div class="row">
-      <div *ngIf="!hidePaginationDetail" class="col-auto pagination-info">
-        <span class="align-middle hidden-xs-down">{{ 'pagination.showing.label' | translate }}</span>
-        <span class="align-middle" *ngIf="collectionSize">{{ 'pagination.showing.detail' | translate:getShowingDetails(collectionSize)}}</span>
+      <div *ngIf="!hidePaginationDetail && collectionSize > 0" class="col-auto pagination-info">
+          <span class="align-middle hidden-xs-down">{{ 'pagination.showing.label' | translate }}</span>
+          <span class="align-middle">{{ 'pagination.showing.detail' | translate:getShowingDetails(collectionSize)}}</span>
       </div>
       <div class="col">
         <div *ngIf="!hideGear" ngbDropdown #paginationControls="ngbDropdown" placement="bottom-right" class="d-inline-block float-right">
@@ -12,7 +12,10 @@
             <h6 class="dropdown-header">{{ 'pagination.results-per-page' | translate}}</h6>
             <button class="dropdown-item" *ngFor="let item of pageSizeOptions" (click)="doPageSizeChange(item)"><i [ngClass]="{'invisible': item != pageSize}" class="fas fa-check" aria-hidden="true"></i> {{item}} </button>
             <h6 class="dropdown-header">{{ 'pagination.sort-direction' | translate}}</h6>
-            <button class="dropdown-item" *ngFor="let direction of (sortDirections | dsKeys)" (click)="doSortDirectionChange(direction.value)"><i [ngClass]="{'invisible': direction.value !== sortDirection}" class="fas fa-check" aria-hidden="true"></i> {{'sorting.' + direction.key | translate}} </button>
+            <button class="dropdown-item" *ngFor="let direction of (sortDirections | dsKeys)" (click)="doSortDirectionChange(direction.value)">
+              <i [ngClass]="{'invisible': direction.value !== sortDirection}" class="fas fa-check" aria-hidden="true"></i>
+              {{(sortOptions && sortOptions.field) ? ('sorting.' + sortOptions?.field + '.' + direction.key | translate) : ('sorting.' + direction.key | translate)}}
+            </button>
           </div>
         </div>
       </div>

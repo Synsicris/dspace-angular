@@ -1,0 +1,23 @@
+<ipw-sidebar-panel class="d-block mb-3" [sidebarPanelTitle]="impactPathway.title" [startOpen]="true">
+  <ng-container ngProjectAs="panelIconStatus">
+      <i class="fas fa-check-circle text-success mr-3"
+         aria-hidden="true"></i>
+  </ng-container>
+  <ng-container ngProjectAs="panelContent">
+    <div class="d-flex align-items-stretch border-bottom">
+      <ds-alert class="bg-light" [dismissible]="true" [content]="'impact-pathway.wrapper.info'"></ds-alert>
+    </div>
+    <div class="d-flex align-items-stretch p-0 m-0 vertical-content">
+      <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps"
+                                ipwStepColor
+                                class="vertical-step"
+                                [impactPathwayId]="impactPathway.id"
+                                [impactPathwayStepId]="step.id"
+                                [stepType]="step.type"></ipw-impact-path-way-step>
+    </div>
+    <ipw-editable-textarea *ngIf="impactPathway"
+                           [placeholder]="impactPathway.description"
+                           [initContent]="impactPathway.description"
+                           (contentChange)="updateDescription($event)"></ipw-editable-textarea>
+  </ng-container>
+</ipw-sidebar-panel>

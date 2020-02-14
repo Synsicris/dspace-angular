@@ -1,0 +1,14 @@
+<div>
+  <h1>
+    <span>{{impactPathwayStep.title}}</span>
+    <button class='btn btn-primary float-right' (click)="back()">Back to impact pathway</button>
+  </h1>
+  <hr/>
+  <ng-container *ngFor="let task of getObjectivesTasks()">
+    <ipw-objective [impactPathwayStep]="impactPathwayStep"
+                   [impactPathwayTask]="task"
+                   [targetImpactPathwayStepId]="targetImpactPathwayStepId"
+    ></ipw-objective>
+  </ng-container>
+
+</div>

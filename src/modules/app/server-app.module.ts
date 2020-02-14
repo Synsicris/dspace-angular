@@ -12,9 +12,9 @@ import { AppModule } from '../../app/app.module';
 import { DSpaceServerTransferStateModule } from '../transfer-state/dspace-server-transfer-state.module';
 import { DSpaceTransferState } from '../transfer-state/dspace-transfer-state.service';
 
-import { TranslateUniversalLoader } from '../translate-universal-loader';
-import { CookieService } from '../../app/shared/services/cookie.service';
-import { ServerCookieService } from '../../app/shared/services/server-cookie.service';
+import { TranslateJson5UniversalLoader } from '../../ngx-translate-loaders/translate-json5-universal.loader';
+import { CookieService } from '../../app/core/services/cookie.service';
+import { ServerCookieService } from '../../app/core/services/server-cookie.service';
 import { AuthService } from '../../app/core/auth/auth.service';
 import { ServerAuthService } from '../../app/core/auth/server-auth.service';
 
@@ -22,9 +22,11 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { AngularticsMock } from '../../app/shared/mocks/mock-angulartics.service';
 import { SubmissionService } from '../../app/submission/submission.service';
 import { ServerSubmissionService } from '../../app/submission/server-submission.service';
+import { Angulartics2DSpace } from '../../app/statistics/angulartics/dspace-provider';
+import { Angulartics2Module } from 'angulartics2';
 
 export function createTranslateLoader() {
-  return new TranslateUniversalLoader('dist/assets/i18n/', '.json');
+  return new TranslateJson5UniversalLoader('dist/assets/i18n/', '.json5');
 }
 
 @NgModule({
@@ -45,12 +47,17 @@ export function createTranslateLoader() {
         deps: []
       }
     }),
+    Angulartics2Module.forRoot(),
     ServerModule,
     AppModule
   ],
   providers: [
     {
       provide: Angulartics2GoogleAnalytics,
+      useClass: AngularticsMock
+    },
+    {
+      provide: Angulartics2DSpace,
       useClass: AngularticsMock
     },
     {
@@ -64,7 +71,7 @@ export function createTranslateLoader() {
     {
       provide: SubmissionService,
       useClass: ServerSubmissionService
-    },
+    }
   ]
 })
 export class ServerAppModule {

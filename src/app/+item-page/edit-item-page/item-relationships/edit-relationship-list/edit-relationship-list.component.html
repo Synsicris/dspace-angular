@@ -1,0 +1,15 @@
+<h5>{{getRelationshipMessageKey() | async | translate}}</h5>
+<ng-container *ngVar="updates$ | async as updates">
+    <ng-container *ngIf="updates">
+        <ng-container *ngVar="updates | dsObjectValues as updateValues">
+            <ds-edit-relationship *ngFor="let updateValue of updateValues; trackBy: trackUpdate"
+                                  class="relationship-row d-block"
+                                  [fieldUpdate]="updateValue"
+                                  [url]="url"
+                                  [editItem]="item"
+                                  [ngClass]="{'alert alert-danger': updateValue?.changeType === 2}">
+            </ds-edit-relationship>
+        </ng-container>
+    </ng-container>
+    <div *ngIf="!updates">no relationships</div>
+</ng-container>

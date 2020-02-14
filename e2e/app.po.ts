@@ -2,7 +2,8 @@ import { browser, element, by } from 'protractor';
 
 export class ProtractorPage {
   navigateTo() {
-    return browser.get('/');
+    return browser.get('/')
+      .then(() => browser.waitForAngular());
   }
 
   getPageTitleText() {
@@ -10,6 +11,6 @@ export class ProtractorPage {
   }
 
   getHomePageNewsText() {
-    return element(by.xpath('//ds-home-news')).getText();
+    return element(by.css('ds-home-news')).getText();
   }
 }
