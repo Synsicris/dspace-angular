@@ -1675,6 +1675,9 @@
   "search.view-switch.show-list": "Show as list",
 
 
+  "sorting.ASC": "Ascending",
+
+  "sorting.DESC": "Descending",
 
   "sorting.dc.title.ASC": "Title Ascending",
 
