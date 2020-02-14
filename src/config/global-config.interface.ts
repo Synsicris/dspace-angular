@@ -8,7 +8,9 @@ import { FormConfig } from './form-config.interfaces';
 import {LangConfig} from './lang-config.interface';
 import { BrowseByConfig } from './browse-by-config.interface';
 import { ItemPageConfig } from './item-page-config.interface';
+import { CollectionPageConfig } from './collection-page-config.interface';
 import { Theme } from './theme.inferface';
+import {AuthConfig} from './auth-config.interfaces';
 import { ImpactPathwayConfig } from './impact-pathway-config.interface';
 
 export interface GlobalConfig extends Config {
@@ -16,6 +18,7 @@ export interface GlobalConfig extends Config {
   rest: ServerConfig;
   production: boolean;
   cache: CacheConfig;
+  auth: AuthConfig;
   form: FormConfig;
   notifications: INotificationBoardOptions;
   submission: SubmissionConfig;
@@ -27,6 +30,7 @@ export interface GlobalConfig extends Config {
   languages: LangConfig[];
   browseBy: BrowseByConfig;
   item: ItemPageConfig;
+  collection: CollectionPageConfig;
   themes: Theme[];
   impactPathway: ImpactPathwayConfig;
 }

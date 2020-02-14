@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ReorderableRelationship } from '../../shared/form/builder/ds-dynamic-form-ui/existing-metadata-list-element/existing-metadata-list-element.component';
 import { RequestService } from './request.service';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
@@ -16,7 +17,7 @@ import { RestResponse } from '../cache/response.models';
 import { Item } from '../shared/item.model';
 import { Relationship } from '../shared/item-relationships/relationship.model';
 import { RelationshipType } from '../shared/item-relationships/relationship-type.model';
-import { RemoteData } from './remote-data';
+import { RemoteData, RemoteDataState } from './remote-data';
 import { combineLatest, combineLatest as observableCombineLatest } from 'rxjs';
 import { PaginatedList } from './paginated-list';
 import { ItemDataService } from './item-data.service';
@@ -92,15 +93,22 @@ export class RelationshipService extends DataService<Relationship> {
    * Send a delete request for a relationship by ID
    * @param id
    */
-  deleteRelationship(id: string): Observable<RestResponse> {
+  deleteRelationship(id: string, copyVirtualMetadata: string): Observable<RestResponse> {
     return this.getRelationshipEndpoint(id).pipe(
       isNotEmptyOperator(),
       take(1),
-      map((endpointURL: string) => new DeleteRequest(this.requestService.generateRequestId(), endpointURL)),
+      distinctUntilChanged(),
+      map((endpointURL: string) =>
+        new DeleteRequest(this.requestService.generateRequestId(), endpointURL + '?copyVirtualMetadata=' + copyVirtualMetadata)
+      ),
       configureRequest(this.requestService),
       switchMap((restRequest: RestRequest) => this.requestService.getByUUID(restRequest.uuid)),
       getResponseFromEntry(),
-      tap(() => this.removeRelationshipItemsFromCacheByRelationship(id))
+      switchMap((response) =>
+        this.clearRelatedCache(id).pipe(
+          map(() => response),
+        )
+      ),
     );
   }
 
@@ -140,9 +148,9 @@ export class RelationshipService extends DataService<Relationship> {
     this.findById(relationshipId).pipe(
       getSucceededRemoteData(),
       getRemoteDataPayload(),
-      switchMap((relationship: Relationship) => combineLatest(
-        relationship.leftItem.pipe(getSucceededRemoteData(), getRemoteDataPayload()),
-        relationship.rightItem.pipe(getSucceededRemoteData(), getRemoteDataPayload())
+      switchMap((rel: Relationship) => combineLatest(
+        rel.leftItem.pipe(getSucceededRemoteData(), getRemoteDataPayload()),
+        rel.rightItem.pipe(getSucceededRemoteData(), getRemoteDataPayload())
         )
       ),
       take(1)
@@ -158,10 +166,10 @@ export class RelationshipService extends DataService<Relationship> {
    */
   private removeRelationshipItemsFromCache(item) {
     this.objectCache.remove(item.self);
-    this.requestService.removeByHrefSubstring(item.self);
+    this.requestService.removeByHrefSubstring(item.uuid);
     combineLatest(
       this.objectCache.hasBySelfLinkObservable(item.self),
-      this.requestService.hasByHrefObservable(item.self)
+      this.requestService.hasByHrefObservable(item.uuid)
     ).pipe(
       filter(([existsInOC, existsInRC]) => !existsInOC && !existsInRC),
       take(1),
@@ -367,7 +375,7 @@ export class RelationshipService extends DataService<Relationship> {
    * @param nameVariant The name variant to set for the matching relationship
    */
   public updateNameVariant(item1: Item, item2: Item, relationshipLabel: string, nameVariant: string): Observable<RemoteData<Relationship>> {
-    return this.getRelationshipByItemsAndLabel(item1, item2, relationshipLabel)
+    const update$: Observable<RemoteData<Relationship>> = this.getRelationshipByItemsAndLabel(item1, item2, relationshipLabel)
       .pipe(
         switchMap((relation: Relationship) =>
           relation.relationshipType.pipe(
@@ -388,14 +396,66 @@ export class RelationshipService extends DataService<Relationship> {
           }
           return this.update(updatedRelationship);
         }),
-        // skipWhile((relationshipRD: RemoteData<Relationship>) => !relationshipRD.isSuccessful)
-        tap((relationshipRD: RemoteData<Relationship>) => {
-          if (relationshipRD.hasSucceeded) {
-            this.removeRelationshipItemsFromCache(item1);
-            this.removeRelationshipItemsFromCache(item2);
-          }
-        }),
-      )
+      );
+
+    update$.pipe(
+      filter((relationshipRD: RemoteData<Relationship>) => relationshipRD.state === RemoteDataState.RequestPending),
+      take(1),
+    ).subscribe(() => {
+      this.removeRelationshipItemsFromCache(item1);
+      this.removeRelationshipItemsFromCache(item2);
+    });
+
+    return update$
   }
 
+  /**
+   * Method to update the the right or left place of a relationship
+   * The useLeftItem field in the reorderable relationship determines which place should be updated
+   * @param reoRel
+   */
+  public updatePlace(reoRel: ReorderableRelationship): Observable<RemoteData<Relationship>> {
+    let updatedRelationship;
+    if (reoRel.useLeftItem) {
+      updatedRelationship = Object.assign(new Relationship(), reoRel.relationship, { rightPlace: reoRel.newIndex });
+    } else {
+      updatedRelationship = Object.assign(new Relationship(), reoRel.relationship, { leftPlace: reoRel.newIndex });
+    }
+
+    const update$ = this.update(updatedRelationship);
+
+    update$.pipe(
+      filter((relationshipRD: RemoteData<Relationship>) => relationshipRD.state === RemoteDataState.ResponsePending),
+      take(1),
+    ).subscribe((relationshipRD: RemoteData<Relationship>) => {
+      if (relationshipRD.state === RemoteDataState.ResponsePending) {
+        this.removeRelationshipItemsFromCacheByRelationship(reoRel.relationship.id);
+      }
+    });
+
+    return update$;
+  }
+
+  /**
+   * Clear object and request caches of the items related to a relationship (left and right items)
+   * @param uuid  The uuid of the relationship for which to clear the related items from the cache
+   */
+  clearRelatedCache(uuid: string): Observable<void> {
+    return this.findById(uuid).pipe(
+      getSucceededRemoteData(),
+      switchMap((rd: RemoteData<Relationship>) =>
+        observableCombineLatest(
+          rd.payload.leftItem.pipe(getSucceededRemoteData()),
+          rd.payload.rightItem.pipe(getSucceededRemoteData())
+        )
+      ),
+      take(1),
+      map(([leftItem, rightItem]) => {
+        this.objectCache.remove(leftItem.payload.self);
+        this.objectCache.remove(rightItem.payload.self);
+        this.requestService.removeByHrefSubstring(leftItem.payload.self);
+        this.requestService.removeByHrefSubstring(rightItem.payload.self);
+      }),
+    );
+  }
 }

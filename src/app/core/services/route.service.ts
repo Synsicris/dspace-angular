@@ -59,7 +59,9 @@ export function parameterSelector(key: string, paramsSelector: (state: CoreState
 /**
  * Service to keep track of the current query parameters
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RouteService {
   constructor(private route: ActivatedRoute, private router: Router, private store: Store<CoreState>) {
     this.saveRouting();
@@ -176,10 +178,20 @@ export class RouteService {
     );
   }
 
+  /**
+   * Add a parameter to the current route
+   * @param key   The parameter name
+   * @param value The parameter value
+   */
   public addParameter(key, value) {
     this.store.dispatch(new AddParameterAction(key, value));
   }
 
+  /**
+   * Set a parameter in the current route (overriding the previous value)
+   * @param key   The parameter name
+   * @param value The parameter value
+   */
   public setParameter(key, value) {
     this.store.dispatch(new SetParameterAction(key, value));
   }

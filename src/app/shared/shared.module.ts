@@ -42,7 +42,6 @@ import { SearchResultGridElementComponent } from './object-grid/search-result-gr
 import { ViewModeSwitchComponent } from './view-mode-switch/view-mode-switch.component';
 import { GridThumbnailComponent } from './object-grid/grid-thumbnail/grid-thumbnail.component';
 import { VarDirective } from './utils/var.directive';
-import { LogInComponent } from './log-in/log-in.component';
 import { AuthNavMenuComponent } from './auth-nav-menu/auth-nav-menu.component';
 import { LogOutComponent } from './log-out/log-out.component';
 import { FormComponent } from './form/form.component';
@@ -179,6 +178,15 @@ import { MaterialModule } from './material/material.module';
 import { DsDynamicRelationInlineGroupComponent } from './form/builder/ds-dynamic-form-ui/models/relation-inline-group/dynamic-relation-inline-group.components';
 import { MetadataRepresentationListComponent } from '../+item-page/simple/metadata-representation-list/metadata-representation-list.component';
 import { SelectableListItemControlComponent } from './object-collection/shared/selectable-list-item-control/selectable-list-item-control.component';
+import { DsDynamicLookupRelationExternalSourceTabComponent } from './form/builder/ds-dynamic-form-ui/relation-lookup-modal/external-source-tab/dynamic-lookup-relation-external-source-tab.component';
+import { ExternalSourceEntryImportModalComponent } from './form/builder/ds-dynamic-form-ui/relation-lookup-modal/external-source-tab/external-source-entry-import-modal/external-source-entry-import-modal.component';
+import { ImportableListItemControlComponent } from './object-collection/shared/importable-list-item-control/importable-list-item-control.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ExistingMetadataListElementComponent } from './form/builder/ds-dynamic-form-ui/existing-metadata-list-element/existing-metadata-list-element.component';
+import { LogInContainerComponent } from './log-in/container/log-in-container.component';
+import { LogInShibbolethComponent } from './log-in/methods/shibboleth/log-in-shibboleth.component';
+import { LogInPasswordComponent } from './log-in/methods/password/log-in-password.component';
+import { LogInComponent } from './log-in/log-in.component';
 import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { ContextMenuComponent } from '../+item-page/context-menu/context-menu.component';
 import { ContextMenuEditImpactPathwayComponent } from '../+item-page/context-menu/edit-impact-pathway/edit-impact-pathway.component';
@@ -204,6 +212,7 @@ const MODULES = [
   MomentModule,
   TextMaskModule,
   MenuModule,
+  DragDropModule,
   MaterialModule
 ];
 
@@ -344,6 +353,12 @@ const COMPONENTS = [
   AuthorityTreeviewComponent,
   MetadataRepresentationLoaderComponent,
   SelectableListItemControlComponent,
+  ExternalSourceEntryImportModalComponent,
+  ImportableListItemControlComponent,
+  ExistingMetadataListElementComponent,
+  LogInShibbolethComponent,
+  LogInPasswordComponent,
+  LogInContainerComponent,
   CreateImpactPathwayComponent,
   ContextMenuComponent,
   ContextMenuEditImpactPathwayComponent
@@ -410,6 +425,10 @@ const ENTRY_COMPONENTS = [
   SearchAuthorityFilterComponent,
   DsDynamicLookupRelationSearchTabComponent,
   DsDynamicLookupRelationSelectionTabComponent,
+  DsDynamicLookupRelationExternalSourceTabComponent,
+  ExternalSourceEntryImportModalComponent,
+  LogInPasswordComponent,
+  LogInShibbolethComponent,
   CreateImpactPathwayComponent
 ];
 
@@ -452,7 +471,8 @@ const DIRECTIVES = [
     ...DIRECTIVES,
     ...ENTRY_COMPONENTS,
     ...SHARED_ITEM_PAGE_COMPONENTS,
-    PublicationSearchResultListElementComponent
+    PublicationSearchResultListElementComponent,
+    ExistingMetadataListElementComponent
   ],
   providers: [
     ...PROVIDERS

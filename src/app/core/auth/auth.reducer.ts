@@ -9,11 +9,14 @@ import {
   RedirectWhenAuthenticationIsRequiredAction,
   RedirectWhenTokenExpiredAction,
   RefreshTokenSuccessAction,
+  RetrieveAuthMethodsSuccessAction,
   SetRedirectUrlAction
 } from './auth.actions';
 // import models
 import { EPerson } from '../eperson/models/eperson.model';
 import { AuthTokenInfo } from './models/auth-token-info.model';
+import { AuthMethod } from './models/auth.method';
+import { AuthMethodType } from './models/auth.method-type';
 
 /**
  * The auth state.
@@ -47,6 +50,10 @@ export interface AuthState {
 
   // the authenticated user
   user?: EPerson;
+
+  // all authentication Methods enabled at the backend
+  authMethods?: AuthMethod[];
+
 }
 
 /**
@@ -56,6 +63,7 @@ const initialState: AuthState = {
   authenticated: false,
   loaded: false,
   loading: false,
+  authMethods: []
 };
 
 /**
@@ -75,6 +83,8 @@ export function authReducer(state: any = initialState, action: AuthActions): Aut
       });
 
     case AuthActionTypes.AUTHENTICATED:
+    case AuthActionTypes.CHECK_AUTHENTICATION_TOKEN:
+    case AuthActionTypes.CHECK_AUTHENTICATION_TOKEN_COOKIE:
       return Object.assign({}, state, {
         loading: true
       });
@@ -108,20 +118,9 @@ export function authReducer(state: any = initialState, action: AuthActions): Aut
         loading: false
       });
 
-    case AuthActionTypes.AUTHENTICATED:
     case AuthActionTypes.AUTHENTICATE_SUCCESS:
     case AuthActionTypes.LOG_OUT:
       return state;
-
-    case AuthActionTypes.CHECK_AUTHENTICATION_TOKEN:
-      return Object.assign({}, state, {
-        loading: true
-      });
-
-    case AuthActionTypes.CHECK_AUTHENTICATION_TOKEN_ERROR:
-      return Object.assign({}, state, {
-        loading: false
-      });
 
     case AuthActionTypes.LOG_OUT_ERROR:
       return Object.assign({}, state, {
@@ -185,6 +184,24 @@ export function authReducer(state: any = initialState, action: AuthActions): Aut
       return Object.assign({}, state, {
         error: undefined,
         info: undefined,
+      });
+
+    // next three cases are used by dynamic rendering of login methods
+    case AuthActionTypes.RETRIEVE_AUTH_METHODS:
+      return Object.assign({}, state, {
+        loading: true
+      });
+
+    case AuthActionTypes.RETRIEVE_AUTH_METHODS_SUCCESS:
+      return Object.assign({}, state, {
+        loading: false,
+        authMethods: (action as RetrieveAuthMethodsSuccessAction).payload
+      });
+
+    case AuthActionTypes.RETRIEVE_AUTH_METHODS_ERROR:
+      return Object.assign({}, state, {
+        loading: false,
+        authMethods: [new AuthMethod(AuthMethodType.Password)]
       });
 
     case AuthActionTypes.SET_REDIRECT_URL:

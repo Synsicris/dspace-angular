@@ -1,6 +1,9 @@
 import { DsDynamicInputModel } from '../form/builder/ds-dynamic-form-ui/models/ds-dynamic-input.model';
 import { DynamicQualdropModel } from '../form/builder/ds-dynamic-form-ui/models/ds-dynamic-qualdrop.model';
-import { DynamicRowArrayModel, DynamicRowArrayModelConfig } from '../form/builder/ds-dynamic-form-ui/models/ds-dynamic-row-array-model';
+import {
+  DynamicRowArrayModel,
+  DynamicRowArrayModelConfig
+} from '../form/builder/ds-dynamic-form-ui/models/ds-dynamic-row-array-model';
 import { DynamicSelectModel } from '@ng-dynamic-forms/core';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
 import { DynamicRelationGroupModel } from '../form/builder/ds-dynamic-form-ui/models/relation-group/dynamic-relation-group.model';
@@ -10,7 +13,6 @@ import { AuthorityEntry } from '../../core/integration/models/authority-entry.mo
 import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-metadata-value.model';
 import { DynamicRowGroupModel } from '../form/builder/ds-dynamic-form-ui/models/ds-dynamic-row-group-model';
 import { FormRowModel } from '../../core/config/models/config-submission-form.model';
-import { WorkspaceItem } from '../../core/submission/models/workspaceitem.model';
 
 export const qualdropSelectConfig = {
   name: 'dc.identifier_QUALDROP_METADATA',
@@ -76,11 +78,11 @@ const rowArrayQualdropConfig = {
   id: 'row_QUALDROP_GROUP',
   initialCount: 1,
   notRepeatable: true,
-  required: false,
   showButtons: true,
   groupFactory: () => {
     return [MockQualdropModel];
   },
+  required: false,
   submissionId: '1234',
   metadataFields: []
 } as DynamicRowArrayModelConfig;

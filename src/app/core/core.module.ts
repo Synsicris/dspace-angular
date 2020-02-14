@@ -3,11 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import {
-  DynamicFormLayoutService,
-  DynamicFormService,
-  DynamicFormValidationService
-} from '@ng-dynamic-forms/core';
+import { DynamicFormLayoutService, DynamicFormService, DynamicFormValidationService } from '@ng-dynamic-forms/core';
 
 import { coreEffects } from './core.effects';
 import { coreReducers } from './core.reducers';
@@ -39,7 +35,6 @@ import { NativeWindowFactory, NativeWindowService } from './services/window.serv
 import { BrowseService } from './browse/browse.service';
 import { BrowseResponseParsingService } from './data/browse-response-parsing.service';
 import { ConfigResponseParsingService } from './config/config-response-parsing.service';
-import { RouteService } from './services/route.service';
 import { SubmissionDefinitionsConfigService } from './config/submission-definitions-config.service';
 import { SubmissionFormsConfigService } from './config/submission-forms-config.service';
 import { SubmissionSectionsConfigService } from './config/submission-sections-config.service';
@@ -120,11 +115,13 @@ import { MetadatafieldParsingService } from './data/metadatafield-parsing.servic
 import { NormalizedSubmissionUploadsModel } from './config/models/normalized-config-submission-uploads.model';
 import { NormalizedBrowseEntry } from './shared/normalized-browse-entry.model';
 import { BrowseDefinition } from './shared/browse-definition.model';
+import { ContentSourceResponseParsingService } from './data/content-source-response-parsing.service';
 import { MappedCollectionsReponseParsingService } from './data/mapped-collections-reponse-parsing.service';
 import { ObjectSelectService } from '../shared/object-select/object-select.service';
 import { NormalizedAuthority } from './integration/models/normalized-authority.model';
 import { AuthorityTreeviewService } from '../shared/authority-treeview/authority-treeview.service';
 import { DsDynamicTypeBindRelationService } from '../shared/form/builder/ds-dynamic-form-ui/ds-dynamic-type-bind-relation.service';
+import {EntityTypeService} from './data/entity-type.service';
 import { SiteDataService } from './data/site-data.service';
 import { NormalizedSite } from './cache/models/normalized-site.model';
 
@@ -140,6 +137,10 @@ import { SearchConfigurationService } from './shared/search/search-configuration
 import { SelectableListService } from '../shared/object-list/selectable-list/selectable-list.service';
 import { RelationshipTypeService } from './data/relationship-type.service';
 import { SidebarService } from '../shared/sidebar/sidebar.service';
+import { NormalizedExternalSource } from './cache/models/normalized-external-source.model';
+import { NormalizedExternalSourceEntry } from './cache/models/normalized-external-source-entry.model';
+import { ExternalSourceService } from './data/external-source.service';
+import { LookupRelationService } from './data/lookup-relation.service';
 import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
 import { ObjectiveService } from './impact-pathway/objective.service';
 
@@ -213,7 +214,6 @@ const PROVIDERS = [
   BrowseItemsResponseParsingService,
   BrowseService,
   ConfigResponseParsingService,
-  RouteService,
   SubmissionDefinitionsConfigService,
   SubmissionFormsConfigService,
   SubmissionRestService,
@@ -248,6 +248,8 @@ const PROVIDERS = [
   ClaimedTaskDataService,
   PoolTaskDataService,
   DsDynamicTypeBindRelationService,
+  EntityTypeService,
+  ContentSourceResponseParsingService,
   SearchService,
   SidebarService,
   SearchFilterService,
@@ -255,6 +257,8 @@ const PROVIDERS = [
   SearchConfigurationService,
   SelectableListService,
   RelationshipTypeService,
+  ExternalSourceService,
+  LookupRelationService,
   // register AuthInterceptor as HttpInterceptor
   {
     provide: HTTP_INTERCEPTORS,
@@ -304,7 +308,9 @@ export const normalizedModels =
     NormalizedPoolTask,
     NormalizedRelationship,
     NormalizedRelationshipType,
-    NormalizedItemType
+    NormalizedItemType,
+    NormalizedExternalSource,
+    NormalizedExternalSourceEntry
   ];
 
 @NgModule({

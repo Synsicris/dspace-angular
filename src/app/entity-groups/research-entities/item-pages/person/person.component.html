@@ -1,7 +1,7 @@
 <h2 class="item-page-title-field">
   {{'person.page.titleprefix' | translate}}
   <div class="d-flex justify-content-between">
-    <ds-metadata-values [mdValues]="[object?.firstMetadata('person.familyName'), object?.firstMetadata('person.givenName')]" [separator]="', '"></ds-metadata-values>
+    <ds-metadata-values [mdValues]="getPersonName()" [separator]="', '"></ds-metadata-values>
     <ds-item-page-context-menu [item]="object"></ds-item-page-context-menu>
   </div>
 </h2>

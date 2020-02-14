@@ -37,7 +37,7 @@ import { Operation } from 'fast-json-patch';
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { DSpaceObject } from '../shared/dspace-object.model';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { configureRequest, getResponseFromEntry } from '../shared/operators';
+import { configureRequest, getRemoteDataPayload, getResponseFromEntry, getSucceededRemoteData } from '../shared/operators';
 import { ErrorResponse, RestResponse } from '../cache/response.models';
 import { NotificationOptions } from '../../shared/notifications/models/notification-options.model';
 import { DSpaceRESTv2Serializer } from '../dspace-rest-v2/dspace-rest-v2.serializer';
@@ -248,8 +248,11 @@ export abstract class DataService<T extends CacheableObject> {
    * @param {DSpaceObject} object The given object
    */
   update(object: T): Observable<RemoteData<T>> {
-    const oldVersion$ = this.objectCache.getObjectBySelfLink(object.self);
-    return oldVersion$.pipe(take(1), mergeMap((oldVersion: NormalizedObject<T>) => {
+    const oldVersion$ = this.findByHref(object.self);
+    return oldVersion$.pipe(
+      getSucceededRemoteData(),
+      getRemoteDataPayload(),
+      mergeMap((oldVersion: T) => {
         const operations = this.comparator.diff(oldVersion, object);
         if (isNotEmpty(operations)) {
           this.objectCache.addPatch(object.self, operations);
@@ -257,7 +260,6 @@ export abstract class DataService<T extends CacheableObject> {
         return this.findByHref(object.self);
       }
     ));
-
   }
 
   /**
@@ -316,9 +318,11 @@ export abstract class DataService<T extends CacheableObject> {
   /**
    * Delete an existing DSpace Object on the server
    * @param dso The DSpace Object to be removed
-   * Return an observable that emits true when the deletion was successful, false when it failed
+   * @param copyVirtualMetadata (optional parameter) the identifiers of the relationship types for which the virtual
+   *                            metadata should be saved as real metadata
+   * @return an observable that emits true when the deletion was successful, false when it failed
    */
-  delete(dso: T): Observable<boolean> {
+  delete(dso: T, copyVirtualMetadata?: string[]): Observable<boolean> {
     const requestId = this.requestService.generateRequestId();
 
     const hrefObs = this.halService.getEndpoint(this.linkPath).pipe(
@@ -327,6 +331,13 @@ export abstract class DataService<T extends CacheableObject> {
     hrefObs.pipe(
       find((href: string) => hasValue(href)),
       map((href: string) => {
+        if (copyVirtualMetadata) {
+          copyVirtualMetadata.forEach((id) =>
+            href += (href.includes('?') ? '&' : '?')
+              + 'copyVirtualMetadata='
+              + id
+          );
+        }
         const request = new DeleteByIDRequest(requestId, href, dso.uuid);
         this.requestService.configure(request);
       })
