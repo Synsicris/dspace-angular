@@ -9,13 +9,13 @@ import { fadeInOut } from '../../../../shared/animations/fade';
 import { ImpactPathWayTaskModalComponent } from '../impact-path-way-task/impact-path-way-task-modal/impact-path-way-task-modal.component';
 import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
 import { SearchTaskService } from '../../../search-task/search-task.service';
-import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-container.component';
+import { DragAndDropContainerComponent } from '../../drag-and-drop-container.component';
 import { Observable } from 'rxjs/internal/Observable';
 import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'ipw-impact-path-way-step',
-  styleUrls: ['../../../shared/drag-and-drop-container.component.scss'],
+  styleUrls: ['../../drag-and-drop-container.component.scss'],
   templateUrl: './impact-path-way-step.component.html',
   animations: [
     fadeInOut

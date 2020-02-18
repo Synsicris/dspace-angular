@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Input } from '@angular/core';
 
 import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
 import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
-import { ImpactPathWayTaskModalComponent } from '../../../wrapper-impact-path-way/impact-path-way/impact-path-way-task/impact-path-way-task-modal/impact-path-way-task-modal.component';
+import { ImpactPathWayTaskModalComponent } from '../../../shared/impact-path-way/impact-path-way-task/impact-path-way-task-modal/impact-path-way-task-modal.component';
 import { SearchTaskService } from '../../../search-task/search-task.service';
 import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
