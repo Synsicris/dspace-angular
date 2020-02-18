@@ -26,6 +26,7 @@ import { Theme } from '../config/theme.inferface';
 import { isNotEmpty } from './shared/empty.util';
 import { CookieService } from './core/services/cookie.service';
 import { Angulartics2DSpace } from './statistics/angulartics/dspace-provider';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 export const LANG_COOKIE = 'language_cookie';
 
@@ -38,7 +39,7 @@ export const LANG_COOKIE = 'language_cookie';
   animations: [slideSidebarPadding]
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  isLoading = true;
+  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   sidebarVisible: Observable<boolean>;
   slideSidebarOver: Observable<boolean>;
   collapsedSidebarWidth: Observable<string>;
@@ -104,7 +105,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.store.pipe(select(isAuthenticated),
       take(1),
       filter((authenticated) => !authenticated)
-    ).subscribe((authenticated) => this.authService.checkAuthenticationToken());
+    ).subscribe(() => this.authService.checkAuthenticationToken());
     this.sidebarVisible = this.menuService.isMenuVisible(MenuID.ADMIN);
 
     this.collapsedSidebarWidth = this.cssService.getVariable('collapsedSidebarWidth');
@@ -131,12 +132,12 @@ export class AppComponent implements OnInit, AfterViewInit {
       delay(0)
     ).subscribe((event) => {
         if (event instanceof NavigationStart) {
-          this.isLoading = true;
+          this.isLoading.next(true);
         } else if (
           event instanceof NavigationEnd ||
           event instanceof NavigationCancel
         ) {
-          this.isLoading = false;
+          this.isLoading.next(false);
         }
       });
   }
