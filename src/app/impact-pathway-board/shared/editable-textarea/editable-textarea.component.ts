@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -14,8 +23,6 @@ export class EditableTextareaComponent implements OnInit {
   @Input() public placeholder: string;
   @Input() public initContent: string;
 
-  editContent: string;
-
   savedContent: string;
 
   /**
@@ -25,8 +32,9 @@ export class EditableTextareaComponent implements OnInit {
 
   @Output() contentChange: EventEmitter<string> = new EventEmitter<string>();
 
+  @ViewChild('textarea') textarea: ElementRef;
+
   ngOnInit(): void {
-    this.editContent = this.initContent;
     this.savedContent = this.initContent;
   }
 
@@ -46,7 +54,7 @@ export class EditableTextareaComponent implements OnInit {
    */
   canUndo(): Observable<boolean> {
     return this.isEditable().pipe(
-      map((editable: boolean) => this.editContent !== this.savedContent || editable)
+      map((editable: boolean) => this.textarea.nativeElement.value !== this.savedContent || editable)
     );
   }
 
@@ -58,12 +66,12 @@ export class EditableTextareaComponent implements OnInit {
    * Revert changes
    */
   removeChangesFromField() {
-    this.editContent = this.savedContent;
+    this.textarea.nativeElement.value = this.savedContent;
   }
 
-  save(): void {
+  save(content): void {
     this.setEditable(false);
-    this.savedContent = this.editContent;
+    this.savedContent = content;
     this.contentChange.emit(this.savedContent);
   }
 

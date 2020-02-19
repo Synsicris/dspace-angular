@@ -1,10 +1,10 @@
 <div class="d-flex">
   <div class="d-inline-block position-relative w-100 h-100">
-    <textarea class="form-control rounded-0"
+    <textarea #textarea class="form-control rounded-0"
               placeholder="{{placeholder}}"
               title="{{placeholder}}"
               [disabled]="!(isEditable() | async)"
-              [(ngModel)]="editContent"></textarea>
+              [value]="initContent"></textarea>
 
       <div class="input-group-prepend edit-field">
         <button [disabled]="!(canSetEditable() | async)" *ngIf="!(isEditable() | async)"
@@ -13,7 +13,7 @@
           <i class="fas fa-edit fa-fw"></i>
         </button>
         <button [disabled]="(canSetEditable() | async)" *ngIf="(isEditable() | async)"
-                (click)="save()" class="btn btn-outline-success btn-sm rounded-0"
+                (click)="save(textarea.value)" class="btn btn-outline-success btn-sm rounded-0"
                 title="{{'item.edit.metadata.edit.buttons.unedit' | translate}}">
           <i class="fas fa-check fa-fw"></i>
         </button>
