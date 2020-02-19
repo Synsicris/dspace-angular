@@ -8282,6 +8282,13 @@ ngx-bootstrap@^3.2.0:
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-3.2.0.tgz#ece7c48af0bc260462c3f77de14f22d4b3dde149"
   integrity sha512-oLSLIWZgRiIfcuxyXLMZUOhX3wZtg6lpuMbdo/0UzMDg2bSOe1XPskcKZ/iuOa3FOlU9rjuYMzswHYYV5f/QCA==
 
+ngx-domarrow@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/ngx-domarrow/-/ngx-domarrow-0.6.0.tgz#163beb758c7010e4fa72e795d11d1cbc29233b02"
+  integrity sha512-/szP0nZWhTP4OOgpwYth1VAqhV9jWaeqgM+U1BrbO4FgnG8KK0HF1cCwUgH4pxc3E6J0rfbnxNyTD+ZDM7hJFw==
+  dependencies:
+    tslib "^1.9.0"
+
 ngx-infinite-scroll@6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/ngx-infinite-scroll/-/ngx-infinite-scroll-6.0.1.tgz#571e54860ce32839451569bcf6e7a63cfae327bd"

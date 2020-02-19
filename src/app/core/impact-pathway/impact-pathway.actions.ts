@@ -48,6 +48,11 @@ export const ImpactPathwayActionTypes = {
   UPDATE_IMPACT_PATHWAY: type('dspace/core/impactpathway/UPDATE_IMPACT_PATHWAY'),
   UPDATE_IMPACT_PATHWAY_TASK: type('dspace/core/impactpathway/UPDATE_IMPACT_PATHWAY_TASK'),
   UPDATE_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/UPDATE_IMPACT_PATHWAY_SUB_TASK'),
+  ADD_IMPACT_PATHWAY_TASK_RELATION: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_TASK_RELATION'),
+  REMOVE_IMPACT_PATHWAY_TASK_RELATION: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_RELATION'),
+  EDIT_IMPACT_PATHWAY_TASK_RELATIONS: type('dspace/core/impactpathway/EDIT_IMPACT_PATHWAY_TASK_RELATIONS'),
+  SAVE_IMPACT_PATHWAY_TASK_RELATIONS: type('dspace/core/impactpathway/SAVE_IMPACT_PATHWAY_TASK_RELATIONS'),
+  TOGGLE_IMPACT_PATHWAY_TASK_RELATIONS_VIEW: type('dspace/core/impactpathway/TOGGLE_IMPACT_PATHWAY_TASK_RELATIONS_VIEW'),
 };
 
 /* tslint:disable:max-classes-per-file */
@@ -849,6 +854,88 @@ export class UpdateImpactPathwaySubTaskAction implements Action {
 }
 
 /**
+ * An ngrx action to enable editing of relation between task
+ */
+export class AddImpactPathwayTaskRelationAction implements Action {
+  type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_RELATION;
+  payload: {
+    targetImpactPathwayTaskId: string
+  };
+
+  /**
+   * Create a new AddImpactPathwayTaskRelationAction
+   *
+   * @param targetImpactPathwayTaskId
+   *    the impact pathway task's id
+   */
+  constructor(targetImpactPathwayTaskId: string) {
+    this.payload = { targetImpactPathwayTaskId };
+  }
+}
+
+/**
+ * An ngrx action to enable editing of relation between task
+ */
+export class RemoveImpactPathwayTaskRelationAction implements Action {
+  type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_RELATION;
+  payload: {
+    targetImpactPathwayTaskId: string;
+  };
+
+  /**
+   * Create a new RemoveImpactPathwayTaskRelationAction
+   *
+   * @param targetImpactPathwayTaskId
+   *    the impact pathway task's id
+   */
+  constructor(targetImpactPathwayTaskId: string) {
+    this.payload = { targetImpactPathwayTaskId };
+  }
+}
+
+/**
+ * An ngrx action to enable editing of relation between task
+ */
+export class EditImpactPathwayTaskRelationsAction implements Action {
+  type = ImpactPathwayActionTypes.EDIT_IMPACT_PATHWAY_TASK_RELATIONS;
+  payload: {
+    impactPathwayStepId: string;
+    selectedTwoWay: boolean;
+    impactPathwayTaskId: string;
+  };
+
+  /**
+   * Create a new EditImpactPathwayTaskRelationsAction
+   *
+   * @param impactPathwayStepId
+   *    the impact pathway step's id
+   * @param selectedTwoWay
+   *    if is two way relation or not
+   * @param impactPathwayTaskId
+   *    the impact pathway task's id
+   */
+  constructor(impactPathwayStepId: string, selectedTwoWay: boolean, impactPathwayTaskId: string) {
+    this.payload = { impactPathwayStepId, selectedTwoWay, impactPathwayTaskId };
+  }
+}
+
+/**
+ * An ngrx action to save relation between task
+ */
+export class SaveImpactPathwayTaskRelationsAction implements Action {
+  type = ImpactPathwayActionTypes.SAVE_IMPACT_PATHWAY_TASK_RELATIONS;
+
+}
+
+/**
+ * An ngrx action to change the state of the visualization of relations
+ */
+export class ToogleImpactPathwayTaskRelationsViewAction implements Action {
+  type = ImpactPathwayActionTypes.TOGGLE_IMPACT_PATHWAY_TASK_RELATIONS_VIEW;
+
+}
+
+/**
  * An ngrx action for normalize state objects
  */
 export class NormalizeImpactPathwayObjectsOnRehydrateAction implements Action {
@@ -868,6 +955,10 @@ export type ImpactPathwayActions
   | AddImpactPathwaySubTaskAction
   | AddImpactPathwaySubTaskErrorAction
   | AddImpactPathwaySubTaskSuccessAction
+  | AddImpactPathwayTaskRelationAction
+  | EditImpactPathwayTaskRelationsAction
+  | RemoveImpactPathwayTaskRelationAction
+  | SaveImpactPathwayTaskRelationsAction
   | GenerateImpactPathwayAction
   | GenerateImpactPathwayErrorAction
   | GenerateImpactPathwaySuccessAction

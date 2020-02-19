@@ -1,11 +1,16 @@
+import { findIndex } from 'lodash';
+
 import { ImpactPathway } from './models/impact-pathway.model';
 import {
   AddImpactPathwaySubTaskSuccessAction,
+  AddImpactPathwayTaskRelationAction,
   AddImpactPathwayTaskSuccessAction,
+  EditImpactPathwayTaskRelationsAction,
   ImpactPathwayActions,
   ImpactPathwayActionTypes,
   InitImpactPathwaySuccessAction,
   RemoveImpactPathwaySubTaskSuccessAction,
+  RemoveImpactPathwayTaskRelationAction,
   RemoveImpactPathwayTaskSuccessAction,
   UpdateImpactPathwaySubTaskAction,
   UpdateImpactPathwayTaskAction
@@ -21,6 +26,23 @@ export interface ImpactPathwayEntries {
   [impactPathwayId: string]: ImpactPathway;
 }
 
+export interface ImpactPathwayRelation {
+  from: string;
+  to: string;
+  twoWay: boolean
+}
+
+export interface ImpactPathwayRelations {
+  showRelation: boolean;
+  editing: boolean;
+  selectedTaskId: string;
+  selectedTwoWay: boolean;
+  relatedStepId: string
+  stored: ImpactPathwayRelation[];
+  toSave: ImpactPathwayRelation[];
+  toDelete: ImpactPathwayRelation[];
+}
+
 /**
  * The Impact Pathways State
  */
@@ -28,13 +50,24 @@ export interface ImpactPathwayState {
   objects: ImpactPathwayEntries;
   loaded: boolean;
   processing: boolean;
+  relations: ImpactPathwayRelations;
 }
 
-const initialState: ImpactPathwayState = Object.create({
+const impactPathwayInitialState: ImpactPathwayState = {
   objects: {},
   loaded: false,
-  processing: true
-});
+  processing: true,
+  relations: {
+    showRelation: true,
+    editing: false,
+    selectedTaskId: '',
+    selectedTwoWay: false,
+    relatedStepId: '',
+    stored: [],
+    toSave: [],
+    toDelete: []
+  }
+};
 
 /**
  * The Impact Pathways Reducer
@@ -46,10 +79,16 @@ const initialState: ImpactPathwayState = Object.create({
  * @return ImpactPathwayState
  *    the new state
  */
-export function impactPathwayReducer(state = initialState, action: ImpactPathwayActions): ImpactPathwayState {
+export function impactPathwayReducer(state = impactPathwayInitialState, action: ImpactPathwayActions): ImpactPathwayState {
   switch (action.type) {
 
-    case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY:
+    case ImpactPathwayActionTypes.INIT_IMPACT_PATHWAY:
+    case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY: {
+      return Object.assign({}, impactPathwayInitialState, {
+        processing: true
+      });
+    }
+
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK:
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUB_TASK:
     case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK: {
@@ -70,12 +109,6 @@ export function impactPathwayReducer(state = initialState, action: ImpactPathway
       });
     }
 
-    case ImpactPathwayActionTypes.INIT_IMPACT_PATHWAY: {
-      return Object.assign({}, state, {
-        processing: true
-      });
-    }
-
     case ImpactPathwayActionTypes.INIT_IMPACT_PATHWAY_SUCCESS: {
       return initImpactPathway(state, action as InitImpactPathwaySuccessAction);
     }
@@ -86,6 +119,47 @@ export function impactPathwayReducer(state = initialState, action: ImpactPathway
 
     case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS: {
       return addImpactPathwaySubTaskToImpactPathwayTask(state, action as AddImpactPathwaySubTaskSuccessAction);
+    }
+
+    case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_RELATION: {
+      return addImpactPathwayTaskRelation(state, action as AddImpactPathwayTaskRelationAction);
+    }
+
+    case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_RELATION: {
+      return removeImpactPathwayTaskRelation(state, action as RemoveImpactPathwayTaskRelationAction);
+    }
+
+    case ImpactPathwayActionTypes.EDIT_IMPACT_PATHWAY_TASK_RELATIONS: {
+      return Object.assign({}, state, {
+        relations: Object.assign({}, state.relations, {
+          showRelation: true,
+          editing: true,
+          selectedTaskId: (action as EditImpactPathwayTaskRelationsAction).payload.impactPathwayTaskId,
+          selectedTwoWay: (action as EditImpactPathwayTaskRelationsAction).payload.selectedTwoWay,
+          relatedStepId: (action as EditImpactPathwayTaskRelationsAction).payload.impactPathwayStepId,
+          toSave: state.relations.stored
+        }),
+      });
+    }
+
+    case ImpactPathwayActionTypes.SAVE_IMPACT_PATHWAY_TASK_RELATIONS: {
+      return Object.assign({}, state, {
+        relations: Object.assign({}, state.relations, {
+          editing: false,
+          selectedTaskId: '',
+          relatedStepId: '',
+          stored: state.relations.toSave,
+          toSave: []
+        }),
+      });
+    }
+
+    case ImpactPathwayActionTypes.TOGGLE_IMPACT_PATHWAY_TASK_RELATIONS_VIEW: {
+      return Object.assign({}, state, {
+        relations: Object.assign({}, state.relations, {
+          showRelation: !state.relations.showRelation
+        }),
+      });
     }
 
     case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_SUCCESS: {
@@ -165,6 +239,7 @@ function addImpactPathwayTaskToImpactPathwayStep(state: ImpactPathwayState, acti
 }
 
 function normalizeImpactPathwayObjectsOnRehydrate(state: ImpactPathwayState) {
+  console.log('normalizeImpactPathwayObjectsOnRehydrate', state)
   if (isNotEmpty(state)) {
     const normImpactPathways: ImpactPathwayEntries = {};
 
@@ -366,5 +441,56 @@ function replaceImpactPathwaySubTask(state: ImpactPathwayState, action: UpdateIm
       [action.payload.impactPathwayId]: newImpactPathway
     }),
     processing: false
+  });
+}
+
+/**
+ * Add a new task relation
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an AddImpactPathwayTaskRelationAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function addImpactPathwayTaskRelation(state: ImpactPathwayState, action: AddImpactPathwayTaskRelationAction): ImpactPathwayState {
+  return Object.assign({}, state, {
+    relations: Object.assign({}, state.relations, {
+      toSave: [...state.relations.toSave, {
+        from: state.relations.selectedTaskId,
+        to: action.payload.targetImpactPathwayTaskId,
+        twoWay: state.relations.selectedTwoWay
+      }]
+    }),
+  });
+}
+
+/**
+ * Remove task relation
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an RemoveImpactPathwayTaskRelationAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function removeImpactPathwayTaskRelation(state: ImpactPathwayState, action: RemoveImpactPathwayTaskRelationAction): ImpactPathwayState {
+  const newToDeleteList = [...state.relations.toDelete];
+  const newToSaveList = state.relations.toSave.filter((relation) => {
+    return !(relation.from === state.relations.selectedTaskId && relation.to === action.payload.targetImpactPathwayTaskId);
+  });
+
+  const relationIndex = findIndex(state.relations.stored, { to: action.payload.targetImpactPathwayTaskId });
+  if (relationIndex !== -1) {
+    newToDeleteList.push(state.relations.stored[relationIndex]);
+  }
+
+  return Object.assign({}, state, {
+    relations: Object.assign({}, state.relations, {
+      toSave: newToSaveList,
+      toDelete: newToDeleteList
+    }),
   });
 }

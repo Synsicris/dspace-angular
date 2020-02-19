@@ -6,8 +6,6 @@
   z-index: 1;
 
   .task-wrap {
-    max-width: 300px;
-    min-width: 200px;
     min-height: 100px;
     border-left-width: ($border-width*5) !important;
     border: $border-width solid map-get($theme-colors, dark);

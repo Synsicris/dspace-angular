@@ -68,3 +68,12 @@ export const isImpactPathwayProcessingSelector = createSelector(_getImpactPathwa
 export function impactPathwayByIDSelector(impactPathwayId: string): MemoizedSelector<AppState, ImpactPathway> {
   return impactPathwayKeySelector<ImpactPathway>(impactPathwayId, impactPathwayStateSelector);
 }
+
+/**
+ * Returns the impact pathway relations object.
+ * @function impactPathwayRelationsSelector
+ * @return {ImpactPathwayRelations}
+ */
+export const impactPathwayRelationsSelector = createSelector(_getImpactPathwayState,
+  (state: ImpactPathwayState) => state.relations
+);

@@ -30,12 +30,14 @@ import { ObjectiveContainerComponent } from './wrapper-objectives/objective/cont
 import { ObjectiveComponent } from './wrapper-objectives/objective/objective.component';
 import { EditableTextareaComponent } from './shared/editable-textarea/editable-textarea.component';
 import { SearchHeaderComponent } from './search-task/search-header/search-header.component';
+import { NgxDomarrowModule } from 'ngx-domarrow';
 
 const MODULES = [
   CommonModule,
   SharedModule,
   CoreModule.forRoot(),
-  DragDropModule
+  DragDropModule,
+  NgxDomarrowModule
 ];
 
 const COMPONENTS = [

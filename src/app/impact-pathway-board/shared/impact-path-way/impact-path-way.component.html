@@ -21,3 +21,13 @@
                            (contentChange)="updateDescription($event)"></ipw-editable-textarea>
   </ng-container>
 </ipw-sidebar-panel>
+
+<div *ngIf="(loaded | async)">
+  <ngx-domarrow *ngFor="let relation of (getRelations() | async)"
+                [from]="'#' + relation.from"
+                [to]="'#' + relation.to"
+                [head]="relation.twoWay"
+                [tail]="true"
+                [onlyVisible]="true"
+                color="red"></ngx-domarrow>
+</div>
