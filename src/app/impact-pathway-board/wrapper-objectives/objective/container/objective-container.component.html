@@ -1,8 +1,8 @@
-<div class="h-100 d-flex flex-column"
+<div id="{{impactPathwayTask.id}}"
+     class="h-100 d-flex flex-column"
      [class.drop-allowed]="(isDragging | async) && (isDropAllowed | async)"
      [class.drop-denied]="(isDragging | async) && !(isDropAllowed | async)">
-  <div id="{{impactPathwayTask.id}}"
-       class="d-flex p-2 h-100 flex-wrap task-list-horizontal"
+  <div class="d-flex p-2 h-100 flex-wrap task-list-horizontal"
        cdkDropList
        cdkDropListOrientation="'horizontal'"
        [cdkDropListData]="impactPathwayTask"

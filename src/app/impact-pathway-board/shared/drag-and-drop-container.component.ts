@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CdkDragDrop, CdkDragEnter, CdkDragExit } from '@angular/cdk/drag-drop';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ import { ImpactPathwayStep } from '../../core/impact-pathway/models/impact-pathw
 /**
  * Represents a part of the filter section for a single type of filter
  */
-export class DragAndDropContainerComponent implements OnInit, OnDestroy {
+export class DragAndDropContainerComponent implements OnDestroy {
 
   public connectedToList: string[] = [];
   public isDragging: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -25,10 +25,6 @@ export class DragAndDropContainerComponent implements OnInit, OnDestroy {
   protected subs: Subscription[] = [];
 
   constructor(protected service: ImpactPathwayService) {
-  }
-
-  ngOnInit(): void {
-    this.connectedToList = this.service.getAvailableImpactPathwayStepIds();
   }
 
   canDrop(step: ImpactPathwayStep, task: ImpactPathwayTask) {

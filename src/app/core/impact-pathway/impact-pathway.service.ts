@@ -11,6 +11,7 @@ import {
 } from 'rxjs';
 import { catchError, concatMap, delay, distinctUntilChanged, flatMap, map, reduce, take, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
+import { findIndex } from 'lodash';
 
 import { ImpactPathway } from './models/impact-pathway.model';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
@@ -480,12 +481,12 @@ export class ImpactPathwayService {
   unlinkTaskFromParent(parentId: string, taskId: string, taskPosition: number): Observable<Item> {
     return this.itemService.findById(parentId).pipe(
       getFirstSucceededRemoteDataPayload(),
-      tap((stepItem: Item) => this.removeRelationPatch(stepItem, taskPosition, 'impactpathway.relation.task')),
+      tap((stepItem: Item) => this.removeRelationPatch(stepItem, taskId, 'impactpathway.relation.task')),
       delay(100),
       flatMap((stepItem: Item) => this.executeItemPatch(stepItem.id, 'metadata').pipe(
         flatMap(() => this.itemService.findById(taskId)),
         getFirstSucceededRemoteDataPayload(),
-        tap((taskItem: Item) => this.removeRelationPatch(taskItem, 0, 'impactpathway.relation.parent')),
+        tap((taskItem: Item) => this.removeRelationPatch(taskItem, parentId, 'impactpathway.relation.parent')),
         delay(100),
         flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
       ))
@@ -519,9 +520,11 @@ export class ImpactPathwayService {
       true);
   }
 
-  removeRelationPatch(targetItem: Item, position: number, relation: string): void {
+  removeRelationPatch(targetItem: Item, relationIdToRemove: string, relation: string): void {
+    const relationMetadataList: MetadataValue[] = targetItem.findMetadataSortedByPlace(relation);
+    const relationPlace: number = findIndex(relationMetadataList, { value: relationIdToRemove });
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
-    const path = pathCombiner.getPath([relation, position.toString()]);
+    const path = pathCombiner.getPath([relation, relationPlace.toString()]);
     this.operationsBuilder.remove(path)
   }
 

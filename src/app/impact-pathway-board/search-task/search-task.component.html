@@ -25,7 +25,7 @@
     <div id="sidebar-object-list"
          class="task-list d-flex flex-wrap p-3">
       <ipw-impact-path-way-task *ngFor="let task of (availableTaskList$ | async)"
-                                class="mb-sm-1 mb-lg-4 mr-sm-1 mr-lg-4"
+                                class="mb-sm-1 mb-lg-4 mr-sm-1 mr-lg-4 task-horizontal"
                                 [data]="task"
                                 [multiSelectEnabled]="selectable"
                                 [selectable]="selectable"
@@ -47,8 +47,11 @@
 <div class="form-group row">
 
   <div class="col text-right">
-    <button type="submit" class="btn btn-primary" (click)="onSubmit()"
-            [disabled]="!(selectedTasks.length > 0)">Add
+    <button type="submit"
+            class="btn btn-primary"
+            [disabled]="selectedTasks.length == 0 || (isProcessing() | async)"
+            (click)="onSubmit()">
+      {{'impact-pathway.add.btn' | translate}}
     </button>
   </div>
 </div>

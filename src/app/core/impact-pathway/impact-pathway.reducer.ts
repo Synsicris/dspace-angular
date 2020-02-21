@@ -62,7 +62,7 @@ export interface ImpactPathwayState {
 const impactPathwayInitialState: ImpactPathwayState = {
   objects: {},
   loaded: false,
-  processing: true,
+  processing: false,
   links: {
     showLinks: true,
     editing: false,
@@ -97,6 +97,8 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
       });
     }
 
+    case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK:
+    case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK:
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK:
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUB_TASK:
     case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK: {

@@ -30,7 +30,7 @@
         <label class="custom-control-label" for="taskConnect{{taskHTMLDivId}}"></label>
       </div>
     </div>
-    <div *ngIf="data.hasParent()" class="d-flex justify-content-end">
+    <div *ngIf="data.hasParent() && !isObjectivePage" class="d-flex justify-content-end">
       <button *ngIf="(canShowRelationButton(true) | async)"
               class="btn btn-lg btn-link p-0 flex-shrink-1"
               [disabled]="(canHideRelationButtons(true) | async)"

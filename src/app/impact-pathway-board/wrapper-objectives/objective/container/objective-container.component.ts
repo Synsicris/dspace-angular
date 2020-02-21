@@ -28,6 +28,16 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
     super(service);
   }
 
+  ngOnInit(): void {
+    this.connectedToList = this.getObjectivesTaskIds();
+  }
+
+  getObjectivesTaskIds(): string[] {
+    return this.impactPathwayStep.tasks
+      .filter((task) => task.type === 'proj_objectives')
+      .map((task) => task.id)
+  }
+
   createTask() {
     const modalRef = this.modalService.open(ImpactPathWayTaskModalComponent, { size: 'lg' });
 
