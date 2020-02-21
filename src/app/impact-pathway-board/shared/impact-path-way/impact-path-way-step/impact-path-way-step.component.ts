@@ -38,7 +38,6 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent  {
   }
 
   ngOnInit(): void {
-    super.ngOnInit();
     this.impactPathwayStep$ = this.service.getImpactPathwayStepById(this.impactPathwayStepId);
   }
 
