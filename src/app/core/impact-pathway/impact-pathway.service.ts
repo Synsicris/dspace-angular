@@ -54,6 +54,7 @@ import { SubmissionFormModel } from '../config/models/config-submission-form.mod
 import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
 import { RemoveImpactPathwaySubTaskAction, RemoveImpactPathwayTaskAction } from './impact-pathway.actions';
 import { ErrorResponse } from '../cache/response.models';
+import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
 
 @Injectable()
 export class ImpactPathwayService {
@@ -140,18 +141,14 @@ export class ImpactPathwayService {
 
     return this.createImpactPathwayStepWorkspaceItem(impactPathwayId, collectionId, impactPathwayStepType, impactPathwayStepName).pipe(
       flatMap((submission: SubmissionObject) => this.depositWorkspaceItem(submission)),
-      filter((rd: RemoteData<Item>) => rd.hasSucceeded && isNotEmpty(rd.payload)),
-      take(1),
-      map((rd: RemoteData<Item>) => rd.payload)
+      getFirstSucceededRemoteDataPayload()
     )
   }
 
   generateImpactPathwayItem(impactPathwayName: string, impactPathwayDescription: string): Observable<Item> {
     return this.createImpactPathwayWorkspaceItem(impactPathwayName, impactPathwayDescription).pipe(
       flatMap((submission: SubmissionObject) => this.depositWorkspaceItem(submission)),
-      filter((rd: RemoteData<Item>) => rd.hasSucceeded && isNotEmpty(rd.payload)),
-      take(1),
-      map((rd: RemoteData<Item>) => rd.payload)
+      getFirstSucceededRemoteDataPayload()
     )
   }
 
@@ -281,9 +278,7 @@ export class ImpactPathwayService {
       'items',
       objectId,
       pathName).pipe(
-      filter((rd: RemoteData<Item>) => rd.hasSucceeded && isNotEmpty(rd.payload)),
-      take(1),
-      map((rd: RemoteData<Item>) => rd.payload),
+      getFirstSucceededRemoteDataPayload(),
       tap((item: Item) => this.itemService.update(item)),
       catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
     )
@@ -332,9 +327,8 @@ export class ImpactPathwayService {
 
   getImpactPathwayStepTitle(stepId: string): Observable<string> {
     return this.itemService.findById(stepId).pipe(
-      filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
-      take(1),
-      map((itemRD: RemoteData<Item>) => itemRD.payload.name)
+      getFirstSucceededRemoteDataPayload(),
+      map((item: Item) => item.name)
     );
   }
 
@@ -403,9 +397,7 @@ export class ImpactPathwayService {
   initImpactPathwaySteps(impacPathwayId: string, parentItem: Item): Observable<ImpactPathwayStep[]> {
     return observableFrom(Metadata.all(parentItem.metadata, 'impactpathway.relation.step')).pipe(
       concatMap((step: MetadataValue) => this.itemService.findById(step.value).pipe(
-        filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
-        take(1),
-        map((rd: RemoteData<Item>) => rd.payload),
+        getFirstSucceededRemoteDataPayload(),
         flatMap((stepItem: Item) => this.initImpactPathwayTasksFromParentItem(stepItem).pipe(
           map((tasks: ImpactPathwayTask[]) => this.initImpactPathwayStep(impacPathwayId, stepItem, tasks))
         )),
@@ -421,9 +413,7 @@ export class ImpactPathwayService {
     } else {
       return observableFrom(Metadata.all(parentItem.metadata, 'impactpathway.relation.task')).pipe(
         concatMap((task: MetadataValue) => this.itemService.findById(task.value).pipe(
-          filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
-          take(1),
-          map((rd: RemoteData<Item>) => rd.payload),
+          getFirstSucceededRemoteDataPayload(),
           flatMap((taskItem: Item) => this.initImpactPathwayTasksFromParentItem(taskItem).pipe(
             map((tasks: ImpactPathwayTask[]) => this.initImpactPathwayTask(taskItem, parentItem.id, tasks))
           )),
@@ -476,16 +466,12 @@ export class ImpactPathwayService {
 
   linkTaskToParent(parentId: string, taskId: string): Observable<Item> {
     return this.itemService.findById(parentId).pipe(
-      filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
-      take(1),
-      map((itemRD: RemoteData<Item>) => itemRD.payload),
+      getFirstSucceededRemoteDataPayload(),
       tap((stepItem: Item) => this.addRelationPatch(stepItem, taskId, 'impactpathway.relation.task')),
       delay(100),
       flatMap((stepItem: Item) => this.executeItemPatch(stepItem.id, 'metadata').pipe(
         flatMap(() => this.itemService.findById(taskId)),
-        filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
-        map((itemRD: RemoteData<Item>) => itemRD.payload),
-        take(1),
+        getFirstSucceededRemoteDataPayload(),
         tap((taskItem: Item) => this.addRelationPatch(taskItem, parentId, 'impactpathway.relation.parent')),
         delay(100),
         flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
@@ -495,16 +481,12 @@ export class ImpactPathwayService {
 
   unlinkTaskFromParent(parentId: string, taskId: string, taskPosition: number): Observable<Item> {
     return this.itemService.findById(parentId).pipe(
-      filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
-      take(1),
-      map((itemRD: RemoteData<Item>) => itemRD.payload),
+      getFirstSucceededRemoteDataPayload(),
       tap((stepItem: Item) => this.removeRelationPatch(stepItem, taskPosition, 'impactpathway.relation.task')),
       delay(100),
       flatMap((stepItem: Item) => this.executeItemPatch(stepItem.id, 'metadata').pipe(
         flatMap(() => this.itemService.findById(taskId)),
-        filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
-        map((itemRD: RemoteData<Item>) => itemRD.payload),
-        take(1),
+        getFirstSucceededRemoteDataPayload(),
         tap((taskItem: Item) => this.removeRelationPatch(taskItem, 0, 'impactpathway.relation.parent')),
         delay(100),
         flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
@@ -514,9 +496,7 @@ export class ImpactPathwayService {
 
   updateMetadataItem(itemId: string, metadataName: string, position: number, value: string): Observable<Item> {
     return this.itemService.findById(itemId).pipe(
-      filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
-      take(1),
-      map((itemRD: RemoteData<Item>) => itemRD.payload),
+      getFirstSucceededRemoteDataPayload(),
       tap(() => this.replaceMetadataPatch(metadataName, position, value)),
       delay(100),
       flatMap(() => this.executeItemPatch(itemId, 'metadata'))

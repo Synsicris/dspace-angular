@@ -55,6 +55,13 @@ export const configureRequest = (requestService: RequestService) =>
   (source: Observable<RestRequest>): Observable<RestRequest> =>
     source.pipe(tap((request: RestRequest) => requestService.configure(request)));
 
+export const getFirstSucceededRemoteDataPayload = () =>
+  <T>(source: Observable<RemoteData<T>>): Observable<T> =>
+    source.pipe(
+      filter((rd: RemoteData<T>) => rd.hasSucceeded && isNotEmpty(rd.payload)),
+      take(1),
+      map((remoteData: RemoteData<T>) => remoteData.payload));
+
 export const getRemoteDataPayload = () =>
   <T>(source: Observable<RemoteData<T>>): Observable<T> =>
     source.pipe(map((remoteData: RemoteData<T>) => remoteData.payload));
