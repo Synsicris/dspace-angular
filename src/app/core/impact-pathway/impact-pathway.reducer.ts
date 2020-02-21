@@ -1,16 +1,16 @@
-import { findIndex } from 'lodash';
+import { difference, findIndex } from 'lodash';
 
 import { ImpactPathway } from './models/impact-pathway.model';
 import {
-  AddImpactPathwaySubTaskSuccessAction,
-  AddImpactPathwayTaskRelationAction,
+  AddImpactPathwaySubTaskSuccessAction, AddImpactPathwayTaskLinksAction,
+  AddImpactPathwayTaskLinkAction,
   AddImpactPathwayTaskSuccessAction,
-  EditImpactPathwayTaskRelationsAction,
+  EditImpactPathwayTaskLinksAction,
   ImpactPathwayActions,
   ImpactPathwayActionTypes,
   InitImpactPathwaySuccessAction,
   RemoveImpactPathwaySubTaskSuccessAction,
-  RemoveImpactPathwayTaskRelationAction,
+  RemoveImpactPathwayTaskLinkAction,
   RemoveImpactPathwayTaskSuccessAction,
   UpdateImpactPathwaySubTaskAction,
   UpdateImpactPathwayTaskAction
@@ -26,21 +26,27 @@ export interface ImpactPathwayEntries {
   [impactPathwayId: string]: ImpactPathway;
 }
 
-export interface ImpactPathwayRelation {
+export interface ImpactPathwayLink {
   from: string;
+  fromTaskId: string;
   to: string;
+  toTaskId: string;
+  toTaskUniqueId: string;
+  toTaskTitle?: string;
   twoWay: boolean
 }
 
-export interface ImpactPathwayRelations {
-  showRelation: boolean;
+export interface ImpactPathwayLinks {
+  showLinks: boolean;
   editing: boolean;
+  selectedTaskHTMLId: string;
   selectedTaskId: string;
   selectedTwoWay: boolean;
+  relatedImpactPathwayId: string
   relatedStepId: string
-  stored: ImpactPathwayRelation[];
-  toSave: ImpactPathwayRelation[];
-  toDelete: ImpactPathwayRelation[];
+  stored: ImpactPathwayLink[];
+  toSave: ImpactPathwayLink[];
+  toDelete: ImpactPathwayLink[];
 }
 
 /**
@@ -50,18 +56,20 @@ export interface ImpactPathwayState {
   objects: ImpactPathwayEntries;
   loaded: boolean;
   processing: boolean;
-  relations: ImpactPathwayRelations;
+  links: ImpactPathwayLinks;
 }
 
 const impactPathwayInitialState: ImpactPathwayState = {
   objects: {},
   loaded: false,
   processing: true,
-  relations: {
-    showRelation: true,
+  links: {
+    showLinks: true,
     editing: false,
+    selectedTaskHTMLId: '',
     selectedTaskId: '',
     selectedTwoWay: false,
+    relatedImpactPathwayId: '',
     relatedStepId: '',
     stored: [],
     toSave: [],
@@ -121,43 +129,61 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
       return addImpactPathwaySubTaskToImpactPathwayTask(state, action as AddImpactPathwaySubTaskSuccessAction);
     }
 
-    case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_RELATION: {
-      return addImpactPathwayTaskRelation(state, action as AddImpactPathwayTaskRelationAction);
+    case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_LINK: {
+      return addImpactPathwayTaskRelation(state, action as AddImpactPathwayTaskLinkAction);
     }
 
-    case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_RELATION: {
-      return removeImpactPathwayTaskRelation(state, action as RemoveImpactPathwayTaskRelationAction);
+    case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_LINK: {
+      return removeImpactPathwayTaskRelation(state, action as RemoveImpactPathwayTaskLinkAction);
     }
 
-    case ImpactPathwayActionTypes.EDIT_IMPACT_PATHWAY_TASK_RELATIONS: {
+    case ImpactPathwayActionTypes.EDIT_IMPACT_PATHWAY_TASK_LINKS: {
       return Object.assign({}, state, {
-        relations: Object.assign({}, state.relations, {
-          showRelation: true,
+        links: Object.assign({}, state.links, {
+          showLinks: true,
           editing: true,
-          selectedTaskId: (action as EditImpactPathwayTaskRelationsAction).payload.impactPathwayTaskId,
-          selectedTwoWay: (action as EditImpactPathwayTaskRelationsAction).payload.selectedTwoWay,
-          relatedStepId: (action as EditImpactPathwayTaskRelationsAction).payload.impactPathwayStepId,
-          toSave: state.relations.stored
+          selectedTaskHTMLId: (action as EditImpactPathwayTaskLinksAction).payload.impactPathwayTaskHTMLId,
+          selectedTaskId: (action as EditImpactPathwayTaskLinksAction).payload.impactPathwayTaskId,
+          selectedTwoWay: (action as EditImpactPathwayTaskLinksAction).payload.selectedTwoWay,
+          relatedStepId: (action as EditImpactPathwayTaskLinksAction).payload.impactPathwayStepId
         }),
       });
     }
 
-    case ImpactPathwayActionTypes.SAVE_IMPACT_PATHWAY_TASK_RELATIONS: {
+    case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_LINKS: {
       return Object.assign({}, state, {
-        relations: Object.assign({}, state.relations, {
+        links: Object.assign({}, state.links, {
+          stored: [...state.links.stored, ...(action as AddImpactPathwayTaskLinksAction).payload.links]
+        }),
+      });
+    }
+
+    case ImpactPathwayActionTypes.COMPLETE_EDITING_IMPACT_PATHWAY_TASK_LINKS: {
+      return Object.assign({}, state, {
+        links: Object.assign({}, state.links, {
+          editing: false
+        }),
+      });
+    }
+
+    case ImpactPathwayActionTypes.SAVE_IMPACT_PATHWAY_TASK_LINKS_SUCCESS: {
+      return Object.assign({}, state, {
+        links: Object.assign({}, state.links, {
           editing: false,
+          selectedTaskHTMLId: '',
           selectedTaskId: '',
           relatedStepId: '',
-          stored: state.relations.toSave,
-          toSave: []
+          stored: difference([...state.links.stored, ...state.links.toSave], state.links.toDelete),
+          toSave: [],
+          toDelete: []
         }),
       });
     }
 
-    case ImpactPathwayActionTypes.TOGGLE_IMPACT_PATHWAY_TASK_RELATIONS_VIEW: {
+    case ImpactPathwayActionTypes.TOGGLE_IMPACT_PATHWAY_TASK_LINKS_VIEW: {
       return Object.assign({}, state, {
-        relations: Object.assign({}, state.relations, {
-          showRelation: !state.relations.showRelation
+        links: Object.assign({}, state.links, {
+          showLinks: !state.links.showLinks
         }),
       });
     }
@@ -239,7 +265,6 @@ function addImpactPathwayTaskToImpactPathwayStep(state: ImpactPathwayState, acti
 }
 
 function normalizeImpactPathwayObjectsOnRehydrate(state: ImpactPathwayState) {
-  console.log('normalizeImpactPathwayObjectsOnRehydrate', state)
   if (isNotEmpty(state)) {
     const normImpactPathways: ImpactPathwayEntries = {};
 
@@ -450,17 +475,21 @@ function replaceImpactPathwaySubTask(state: ImpactPathwayState, action: UpdateIm
  * @param state
  *    the current state
  * @param action
- *    an AddImpactPathwayTaskRelationAction
+ *    an AddImpactPathwayTaskLinkAction
  * @return ImpactPathwayState
  *    the new state.
  */
-function addImpactPathwayTaskRelation(state: ImpactPathwayState, action: AddImpactPathwayTaskRelationAction): ImpactPathwayState {
+function addImpactPathwayTaskRelation(state: ImpactPathwayState, action: AddImpactPathwayTaskLinkAction): ImpactPathwayState {
   return Object.assign({}, state, {
-    relations: Object.assign({}, state.relations, {
-      toSave: [...state.relations.toSave, {
-        from: state.relations.selectedTaskId,
-        to: action.payload.targetImpactPathwayTaskId,
-        twoWay: state.relations.selectedTwoWay
+    links: Object.assign({}, state.links, {
+      toSave: [...state.links.toSave, {
+        from: state.links.selectedTaskHTMLId,
+        fromTaskId: state.links.selectedTaskId,
+        to: action.payload.targetImpactPathwayTaskHTMLId,
+        toTaskId: action.payload.targetImpactPathwayTaskId,
+        toTaskUniqueId: `${action.payload.targetImpactPathwayId}:${action.payload.targetImpactPathwayStepId}`,
+        toTaskTitle: action.payload.targetImpactPathwayTaskTitle,
+        twoWay: state.links.selectedTwoWay
       }]
     }),
   });
@@ -472,23 +501,23 @@ function addImpactPathwayTaskRelation(state: ImpactPathwayState, action: AddImpa
  * @param state
  *    the current state
  * @param action
- *    an RemoveImpactPathwayTaskRelationAction
+ *    an RemoveImpactPathwayTaskLinkAction
  * @return ImpactPathwayState
  *    the new state.
  */
-function removeImpactPathwayTaskRelation(state: ImpactPathwayState, action: RemoveImpactPathwayTaskRelationAction): ImpactPathwayState {
-  const newToDeleteList = [...state.relations.toDelete];
-  const newToSaveList = state.relations.toSave.filter((relation) => {
-    return !(relation.from === state.relations.selectedTaskId && relation.to === action.payload.targetImpactPathwayTaskId);
+function removeImpactPathwayTaskRelation(state: ImpactPathwayState, action: RemoveImpactPathwayTaskLinkAction): ImpactPathwayState {
+  const newToDeleteList = [...state.links.toDelete];
+  const newToSaveList = state.links.toSave.filter((relation) => {
+    return !(relation.from === state.links.selectedTaskHTMLId && relation.to === action.payload.targetImpactPathwayTaskHTMLId);
   });
 
-  const relationIndex = findIndex(state.relations.stored, { to: action.payload.targetImpactPathwayTaskId });
+  const relationIndex = findIndex(state.links.stored, { to: action.payload.targetImpactPathwayTaskHTMLId });
   if (relationIndex !== -1) {
-    newToDeleteList.push(state.relations.stored[relationIndex]);
+    newToDeleteList.push(state.links.stored[relationIndex]);
   }
 
   return Object.assign({}, state, {
-    relations: Object.assign({}, state.relations, {
+    links: Object.assign({}, state.links, {
       toSave: newToSaveList,
       toDelete: newToDeleteList
     }),

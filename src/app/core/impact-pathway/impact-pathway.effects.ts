@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { of as observableOf } from 'rxjs';
-import { catchError, concatMap, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { catchError, concatMap, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -11,6 +12,7 @@ import {
   AddImpactPathwayTaskAction,
   AddImpactPathwayTaskErrorAction,
   AddImpactPathwayTaskSuccessAction,
+  CompleteEditingImpactPathwayTaskLinksAction,
   GenerateImpactPathwayAction,
   GenerateImpactPathwayErrorAction,
   GenerateImpactPathwaySubTaskAction,
@@ -35,6 +37,9 @@ import {
   RemoveImpactPathwayTaskAction,
   RemoveImpactPathwayTaskErrorAction,
   RemoveImpactPathwayTaskSuccessAction,
+  SaveImpactPathwayTaskLinksAction,
+  SaveImpactPathwayTaskLinksErrorAction,
+  SaveImpactPathwayTaskLinksSuccessAction,
   UpdateImpactPathwayAction,
   UpdateImpactPathwaySubTaskAction,
   UpdateImpactPathwayTaskAction
@@ -46,6 +51,8 @@ import { ImpactPathway } from './models/impact-pathway.model';
 import { isNotEmpty } from '../../shared/empty.util';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
 import { StoreActionTypes } from '../../store.actions';
+import { ImpactPathwayState } from './impact-pathway.reducer';
+import { ImpactPathwayLinksService } from './impact-pathway-links.service';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -405,6 +412,25 @@ export class ImpactPathwayEffects {
   );
 
   /**
+   * Patch an impactPathway task and dispatch PatchImpactPathwayTaskMetadataSuccessAction
+   */
+  @Effect() patchTaskRelations$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.SAVE_IMPACT_PATHWAY_TASK_LINKS),
+    switchMap((action: SaveImpactPathwayTaskLinksAction) => {
+      return this.impactPathwayLinksService.saveLinks(
+        action.payload.impactPathwayTaskId,
+        action.payload.toSave,
+        action.payload.toDelete
+      ).pipe(
+        map(() => new SaveImpactPathwayTaskLinksSuccessAction()),
+        catchError((error: Error) => {
+          console.error(error.message);
+          return observableOf(new SaveImpactPathwayTaskLinksErrorAction())
+        }));
+    })
+  );
+
+  /**
    * Show a notification on success
    */
   @Effect({ dispatch: false }) patchMetadataError$ = this.actions$.pipe(
@@ -414,6 +440,22 @@ export class ImpactPathwayEffects {
     tap(() => {
       this.notificationsService.error(null, this.translate.get('impact-pathway.patch.metadata.error'))
     }));
+
+  /**
+   * update impactPathway task relations
+   */
+  @Effect() completeEditingTaskRelations$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.COMPLETE_EDITING_IMPACT_PATHWAY_TASK_LINKS),
+    withLatestFrom(this.store$),
+    map(([action, currentState]: [CompleteEditingImpactPathwayTaskLinksAction, any]) => {
+      const impactPathwayState: ImpactPathwayState = currentState.core.impactPathway;
+      return new SaveImpactPathwayTaskLinksAction(
+        impactPathwayState.links.selectedTaskId,
+        impactPathwayState.links.toSave,
+        impactPathwayState.links.toDelete
+      )
+    })
+  );
 
   /**
    * When the store is rehydrated objects in the state lose the prototypes,
@@ -427,7 +469,9 @@ export class ImpactPathwayEffects {
   constructor(
     private actions$: Actions,
     private impactPathwayService: ImpactPathwayService,
+    private impactPathwayLinksService: ImpactPathwayLinksService,
     private notificationsService: NotificationsService,
+    private store$: Store<any>,
     private translate: TranslateService
   ) {
   }

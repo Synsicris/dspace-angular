@@ -24,10 +24,10 @@
       <div *ngIf="(canShowRelationCheckBox() | async)" class="custom-control custom-checkbox position-static">
         <input type="checkbox"
                class="custom-control-input"
-               id="taskConnect{{data?.id}}"
+               id="taskConnect{{taskHTMLDivId}}"
                [checked]="isTaskPartOfRelation() | async"
                (change)="onCheckBoxChange($event)">
-        <label class="custom-control-label" for="taskConnect{{data?.id}}"></label>
+        <label class="custom-control-label" for="taskConnect{{taskHTMLDivId}}"></label>
       </div>
     </div>
     <div *ngIf="data.hasParent()" class="d-flex justify-content-end">

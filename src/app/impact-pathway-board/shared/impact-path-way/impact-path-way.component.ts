@@ -1,17 +1,16 @@
 import { ChangeDetectorRef, Component, Inject, Input, ViewChild } from '@angular/core';
 
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../../core/impact-pathway/models/impact-pathway.model';
 import { PatchImpactPathwayMetadataAction } from '../../../core/impact-pathway/impact-pathway.actions';
 import { AppState } from '../../../app.reducer';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
-import { ImpactPathwayRelationsService } from '../../../core/impact-pathway/impact-pathway-relations.service';
-import { Observable } from 'rxjs/internal/Observable';
-import { ImpactPathwayRelation } from '../../../core/impact-pathway/impact-pathway.reducer';
-import { tap } from 'rxjs/operators';
+import { ImpactPathwayLink } from '../../../core/impact-pathway/impact-pathway.reducer';
+import { ImpactPathwayLinksService } from '../../../core/impact-pathway/impact-pathway-links.service';
 
 @Component({
   selector: 'ipw-impact-path-way',
@@ -29,7 +28,7 @@ export class ImpactPathWayComponent {
 
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
               private cdr: ChangeDetectorRef,
-              private relationService: ImpactPathwayRelationsService,
+              private impactPathwayLinksService: ImpactPathwayLinksService,
               private store: Store<AppState>) {
   }
 
@@ -41,8 +40,8 @@ export class ImpactPathWayComponent {
 
   }
 
-  getRelations(): Observable<ImpactPathwayRelation[]> {
-    return this.relationService.getAllRelations().pipe(
+  getRelations(): Observable<ImpactPathwayLink[]> {
+    return this.impactPathwayLinksService.getAllLinks().pipe(
       tap((relations) => console.log(relations))
     )
   }

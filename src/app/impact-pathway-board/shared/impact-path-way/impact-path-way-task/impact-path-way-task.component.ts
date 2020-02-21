@@ -9,7 +9,7 @@ import { hasValue, isNotEmpty, isNotUndefined } from '../../../../shared/empty.u
 import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import { ImpactPathwayRelationsService } from '../../../../core/impact-pathway/impact-pathway-relations.service';
+import { ImpactPathwayLinksService } from '../../../../core/impact-pathway/impact-pathway-links.service';
 
 @Component({
   selector: 'ipw-impact-path-way-task',
@@ -40,7 +40,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   @Output() public deselected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
 
   constructor(
-    private relationsService: ImpactPathwayRelationsService,
+    private impactPathwayLinksService: ImpactPathwayLinksService,
     private service: ImpactPathwayService,
     private router: Router
   ) {
@@ -73,38 +73,38 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   }
 
   public canShowRelationButton(isTwoWayRelation: boolean): Observable<boolean> {
-    return combineLatestObservable(this.relationsService.isEditingRelation(),
-      this.relationsService.isEditingRelationOnOtherTask(this.taskHTMLDivId),
-      this.relationsService.isEditingRelationOnTask(this.taskHTMLDivId)).pipe(
+    return combineLatestObservable(this.impactPathwayLinksService.isEditingLink(),
+      this.impactPathwayLinksService.isEditingLinkOnOtherTask(this.taskHTMLDivId),
+      this.impactPathwayLinksService.isEditingLinkOnTask(this.taskHTMLDivId)).pipe(
       map(([isEditing, isEditingOnOtherTask, isEditingOnTask]) => !isEditing ||
         isEditingOnOtherTask || (isEditingOnTask && this.isTwoWayRelationSelected.value !== isTwoWayRelation))
     );
   }
 
   public canHideRelationButtons(isTwoWayRelation: boolean): Observable<boolean> {
-    return combineLatestObservable(this.relationsService.isEditingRelationOnOtherTask(this.taskHTMLDivId),
-      this.relationsService.isEditingRelationOnTask(this.taskHTMLDivId)).pipe(
+    return combineLatestObservable(this.impactPathwayLinksService.isEditingLinkOnOtherTask(this.taskHTMLDivId),
+      this.impactPathwayLinksService.isEditingLinkOnTask(this.taskHTMLDivId)).pipe(
       map(([isEditingOnOtherTask, isEditingOnTask]) => isEditingOnOtherTask ||
         (isEditingOnTask && this.isTwoWayRelationSelected.value !== isTwoWayRelation))
     );
   }
 
   public canShowRelationCheckBox(): Observable<boolean> {
-    return this.relationsService.isEditingRelationOnOtherStepAndTask(this.impactPathwayStepId, this.taskHTMLDivId);
+    return this.impactPathwayLinksService.isEditingLinkOnOtherStepAndTask(this.impactPathwayStepId, this.taskHTMLDivId);
   }
 
   public isEditingRelationOnTask(isTwoWayRelation: boolean): Observable<boolean> {
-    return this.relationsService.isEditingRelationOnTask(this.taskHTMLDivId).pipe((
+    return this.impactPathwayLinksService.isEditingLinkOnTask(this.taskHTMLDivId).pipe((
       map((isEditing) => isEditing && this.isTwoWayRelationSelected.value === isTwoWayRelation)
     ))
   }
 
   public isEditingRelation(): Observable<boolean> {
-    return this.relationsService.isEditingRelation();
+    return this.impactPathwayLinksService.isEditingLink();
   }
 
   public isTaskPartOfRelation(): Observable<boolean> {
-    return this.relationsService.isTaskPartOfRelation(this.taskHTMLDivId);
+    return this.impactPathwayLinksService.isTaskPartOfLink(this.taskHTMLDivId);
   }
 
   public hasDetail() {
@@ -122,19 +122,30 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   public onCheckBoxChange(event: Event) {
     const target = event.target as any;
     if (target.checked) {
-      this.relationsService.dispatchAddRelation(this.taskHTMLDivId)
+      this.impactPathwayLinksService.dispatchAddRelation(
+        this.taskHTMLDivId,
+        this.impactPathwayId,
+        this.impactPathwayStepId,
+        this.data.id,
+        this.data.title)
     } else {
-      this.relationsService.dispatchRemoveRelation(this.taskHTMLDivId)
+      this.impactPathwayLinksService.dispatchRemoveRelation(this.taskHTMLDivId, this.data.id)
     }
   }
 
   public setEditRelations(isTwoWayRelation: boolean): void {
     this.isTwoWayRelationSelected.next(isTwoWayRelation);
-    this.relationsService.setEditRelations(this.impactPathwayStepId, this.isTwoWayRelationSelected.value, this.taskHTMLDivId);
+    this.impactPathwayLinksService.setEditLinks(
+      this.impactPathwayId,
+      this.impactPathwayStepId,
+      this.isTwoWayRelationSelected.value,
+      this.taskHTMLDivId,
+      this.data.id
+    );
   }
 
-  public saveRelations(isTwoWayRelation: boolean): void {
-    this.relationsService.saveRelations();
+  public saveRelations(): void {
+    this.impactPathwayLinksService.completeEditingLinks();
   }
 
   public setFocus(event): void {

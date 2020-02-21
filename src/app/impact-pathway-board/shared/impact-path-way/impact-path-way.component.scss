@@ -62,3 +62,7 @@
 .bg-step-grey {
   background-color: rgba(191, 191, 191, 0.2);
 }
+
+:host /deep/ div.line {
+  z-index: 1;
+}

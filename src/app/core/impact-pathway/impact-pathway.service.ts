@@ -9,18 +9,7 @@ import {
   of as observableOf,
   throwError as observableThrowError
 } from 'rxjs';
-import {
-  catchError,
-  concatMap,
-  delay,
-  distinctUntilChanged,
-  filter,
-  flatMap,
-  map,
-  reduce,
-  take,
-  tap
-} from 'rxjs/operators';
+import { catchError, concatMap, delay, distinctUntilChanged, flatMap, map, reduce, take, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
 import { ImpactPathway } from './models/impact-pathway.model';
@@ -46,13 +35,17 @@ import { MetadataMap, MetadataValue } from '../shared/metadata.models';
 import { Metadata } from '../shared/metadata.utils';
 import { impactPathwayByIDSelector, impactPathwayObjectsSelector, isImpactPathwayLoadedSelector } from './selectors';
 import { AppState } from '../../app.reducer';
-import { ImpactPathwayEntries } from './impact-pathway.reducer';
+import { ImpactPathwayEntries, ImpactPathwayLink } from './impact-pathway.reducer';
 import { IntegrationData } from '../integration/integration-data';
 import { SubmissionFormsConfigService } from '../config/submission-forms-config.service';
 import { ConfigData } from '../config/config-data';
 import { SubmissionFormModel } from '../config/models/config-submission-form.model';
 import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
-import { RemoveImpactPathwaySubTaskAction, RemoveImpactPathwayTaskAction } from './impact-pathway.actions';
+import {
+  AddImpactPathwayTaskLinksAction,
+  RemoveImpactPathwaySubTaskAction,
+  RemoveImpactPathwayTaskAction
+} from './impact-pathway.actions';
 import { ErrorResponse } from '../cache/response.models';
 import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
 
@@ -398,7 +391,7 @@ export class ImpactPathwayService {
     return observableFrom(Metadata.all(parentItem.metadata, 'impactpathway.relation.step')).pipe(
       concatMap((step: MetadataValue) => this.itemService.findById(step.value).pipe(
         getFirstSucceededRemoteDataPayload(),
-        flatMap((stepItem: Item) => this.initImpactPathwayTasksFromParentItem(stepItem).pipe(
+        flatMap((stepItem: Item) => this.initImpactPathwayTasksFromParentItem(impacPathwayId, stepItem).pipe(
           map((tasks: ImpactPathwayTask[]) => this.initImpactPathwayStep(impacPathwayId, stepItem, tasks))
         )),
       )),
@@ -406,7 +399,7 @@ export class ImpactPathwayService {
     );
   }
 
-  initImpactPathwayTasksFromParentItem(parentItem: Item): Observable<ImpactPathwayTask[]> {
+  initImpactPathwayTasksFromParentItem(impacPathwayId: string, parentItem: Item, buildLinks = true): Observable<ImpactPathwayTask[]> {
     const relatedTaskMetadata = Metadata.all(parentItem.metadata, 'impactpathway.relation.task');
     if (isEmpty(relatedTaskMetadata)) {
       return observableOf([])
@@ -414,7 +407,12 @@ export class ImpactPathwayService {
       return observableFrom(Metadata.all(parentItem.metadata, 'impactpathway.relation.task')).pipe(
         concatMap((task: MetadataValue) => this.itemService.findById(task.value).pipe(
           getFirstSucceededRemoteDataPayload(),
-          flatMap((taskItem: Item) => this.initImpactPathwayTasksFromParentItem(taskItem).pipe(
+          flatMap((taskItem: Item) => this.initImpactPathwayTasksFromParentItem(impacPathwayId, taskItem, false).pipe(
+            tap(() => {
+              if (buildLinks) {
+                this.addImpactPathwayLinksFromTaskItem(taskItem, impacPathwayId, parentItem.id);
+              }
+            }),
             map((tasks: ImpactPathwayTask[]) => this.initImpactPathwayTask(taskItem, parentItem.id, tasks))
           )),
         )),
@@ -557,5 +555,50 @@ export class ImpactPathwayService {
 
   redirectToEditPage(impacPathwayId: string) {
     this.router.navigate(['/impactpathway', impacPathwayId, 'edit']);
+  }
+
+  private addImpactPathwayLinksFromTaskItem(taskItem: Item, impactPathwayId: string, impactPathwayStepId: string): void {
+    const taskOutcomeLinkList: MetadataValue[] = taskItem
+      .findMetadataSortedByPlace('impactpathway.outcome.link');
+    const taskBidirectionalLinkList: MetadataValue[] = taskItem
+      .findMetadataSortedByPlace('impactpathway.bidirectional.link');
+
+    const linksList: ImpactPathwayLink[] = [];
+
+    taskOutcomeLinkList
+      .filter((metadataValue: MetadataValue) => metadataValue.value.startsWith(`${impactPathwayId}:`))
+      .forEach((metadataValue: MetadataValue) => {
+        const [targetImpactPathwayId, targetImpactPathwayStepId] = metadataValue.value.split(':');
+        if (isNotEmpty(targetImpactPathwayId) && isNotEmpty(targetImpactPathwayStepId)) {
+          linksList.push({
+            from: `task-${impactPathwayStepId}-${taskItem.id}`,
+            fromTaskId: taskItem.id,
+            to: `task-${targetImpactPathwayStepId}-${metadataValue.authority}`,
+            toTaskId: metadataValue.authority,
+            toTaskUniqueId: `${targetImpactPathwayId}:${targetImpactPathwayStepId}`,
+            twoWay: false
+          });
+        }
+      });
+
+    taskBidirectionalLinkList
+      .filter((metadataValue: MetadataValue) => metadataValue.value.startsWith(`${impactPathwayId}:`))
+      .forEach((metadataValue: MetadataValue) => {
+        const [targetImpactPathwayId, targetImpactPathwayStepId] = metadataValue.value.split(':');
+        if (isNotEmpty(targetImpactPathwayId) && isNotEmpty(targetImpactPathwayStepId)) {
+          linksList.push({
+            from: `task-${impactPathwayStepId}-${taskItem.id}`,
+            fromTaskId: taskItem.id,
+            to: `task-${targetImpactPathwayStepId}-${metadataValue.authority}`,
+            toTaskId: metadataValue.authority,
+            toTaskUniqueId: `${targetImpactPathwayId}:${targetImpactPathwayStepId}`,
+            twoWay: true
+          });
+        }
+      });
+
+    if (isNotEmpty(linksList)) {
+      this.store.dispatch(new AddImpactPathwayTaskLinksAction(linksList));
+    }
   }
 }

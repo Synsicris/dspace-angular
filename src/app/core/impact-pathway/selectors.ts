@@ -72,8 +72,8 @@ export function impactPathwayByIDSelector(impactPathwayId: string): MemoizedSele
 /**
  * Returns the impact pathway relations object.
  * @function impactPathwayRelationsSelector
- * @return {ImpactPathwayRelations}
+ * @return {ImpactPathwayLinks}
  */
 export const impactPathwayRelationsSelector = createSelector(_getImpactPathwayState,
-  (state: ImpactPathwayState) => state.relations
+  (state: ImpactPathwayState) => state.links
 );

@@ -143,7 +143,7 @@ import { ExternalSourceService } from './data/external-source.service';
 import { LookupRelationService } from './data/lookup-relation.service';
 import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
 import { ObjectiveService } from './impact-pathway/objective.service';
-import { ImpactPathwayRelationsService } from './impact-pathway/impact-pathway-relations.service';
+import { ImpactPathwayLinksService } from './impact-pathway/impact-pathway-links.service';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -272,7 +272,7 @@ const PROVIDERS = [
   AuthorityTreeviewService,
   ImpactPathwayService,
   ObjectiveService,
-  ImpactPathwayRelationsService
+  ImpactPathwayLinksService
 ];
 
 /**
