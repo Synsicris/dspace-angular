@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { BehaviorSubject, combineLatest as combineLatestObservable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest as combineLatestObservable, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 
 import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
 import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
 import { hasValue, isNotEmpty, isNotUndefined } from '../../../../shared/empty.util';
 import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs/internal/Observable';
 import { ImpactPathwayLinksService } from '../../../../core/impact-pathway/impact-pathway-links.service';
 
 @Component({
@@ -20,16 +19,19 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
   @Input() public impactPathwayId: string;
   @Input() public impactPathwayStepId: string;
+  @Input() public impactPathwayStepType: string;
   @Input() public data: ImpactPathwayTask;
-  @Input() public selectable: boolean;
+  @Input() public selectable = true;
   @Input() public multiSelectEnabled = false;
-  @Input() public targetStep: ImpactPathwayStep;
+  @Input() public parentStep: ImpactPathwayStep;
+  @Input() public parentTask: ImpactPathwayTask;
   @Input() public stepHasDetail: boolean;
   @Input() public taskPosition: number;
   @Input() public isObjectivePage: boolean;
 
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public taskHTMLDivId: string;
+  public taskType$: Observable<string>;
 
   private removing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -40,15 +42,19 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   @Output() public deselected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
 
   constructor(
+    private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
-    private service: ImpactPathwayService,
     private router: Router
   ) {
   }
 
   ngOnInit(): void {
     this.taskHTMLDivId = this.buildHTMLDivId();
-    this.service.getSelectedTask().pipe(
+    this.taskType$ = this.impactPathwayService.getImpactPathwayTaskType(
+      this.impactPathwayStepType,
+      this.data.type,
+      this.isObjectivePage);
+    this.impactPathwayService.getSelectedTask().pipe(
       filter((task: ImpactPathwayTask) => !this.multiSelectEnabled && isNotEmpty(task) && this.isTaskSelectable()),
       map((task: ImpactPathwayTask) => task.id === this.data.id),
     ).subscribe((hasFocus) => this.selectStatus.next(hasFocus));
@@ -112,7 +118,8 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   }
 
   public isDisabled() {
-    return isNotUndefined(this.targetStep) && this.targetStep.hasTask(this.data.id);
+    return ((!this.isObjectivePage && isNotUndefined(this.parentStep) && this.parentStep.hasTask(this.data.id)) ||
+      (this.isObjectivePage && isNotUndefined(this.parentTask) && this.parentTask.hasSubTask(this.data.id)))
   }
 
   public isProcessingRemove(): Observable<boolean> {
@@ -161,9 +168,9 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   public removeTask() {
     this.removing$.next(true);
     if (this.isObjectivePage) {
-      this.service.removeSubTaskFromTask(this.impactPathwayId, this.impactPathwayStepId, this.data.parentId, this.data.id, this.taskPosition);
+      this.impactPathwayService.removeSubTaskFromTask(this.impactPathwayId, this.impactPathwayStepId, this.data.parentId, this.data.id, this.taskPosition);
     } else {
-      this.service.removeTaskFromStep(this.impactPathwayId, this.impactPathwayStepId, this.data.id, this.taskPosition);
+      this.impactPathwayService.removeTaskFromStep(this.impactPathwayId, this.impactPathwayStepId, this.data.id, this.taskPosition);
     }
   }
 

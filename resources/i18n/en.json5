@@ -659,6 +659,8 @@
 
   "impact-pathway.edit.page.title": "Edit impact pathway",
 
+  "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
+
   "impact-pathway.objectives.edit.page.title": "Edit objectives",
 
   "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",

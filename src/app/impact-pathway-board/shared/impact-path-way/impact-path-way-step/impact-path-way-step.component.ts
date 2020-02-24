@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
@@ -8,10 +9,6 @@ import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pat
 import { fadeInOut } from '../../../../shared/animations/fade';
 import { ImpactPathWayTaskModalComponent } from '../impact-path-way-task/impact-path-way-task-modal/impact-path-way-task-modal.component';
 import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
-import { SearchTaskService } from '../../../search-task/search-task.service';
-import { DragAndDropContainerComponent } from '../../drag-and-drop-container.component';
-import { Observable } from 'rxjs/internal/Observable';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'ipw-impact-path-way-step',
@@ -21,7 +18,7 @@ import { take } from 'rxjs/operators';
     fadeInOut
   ]
 })
-export class ImpactPathWayStepComponent extends DragAndDropContainerComponent  {
+export class ImpactPathWayStepComponent {
 
   @Input() public impactPathwayId: string;
   @Input() public impactPathwayStepId: string;
@@ -30,30 +27,12 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent  {
 
   constructor(
     protected cdr: ChangeDetectorRef,
-    protected searchTaskService: SearchTaskService,
-    protected service: ImpactPathwayService,
+    protected impactPathwayService: ImpactPathwayService,
     protected modalService: NgbModal) {
-
-    super(service);
   }
 
   ngOnInit(): void {
-    this.impactPathwayStep$ = this.service.getImpactPathwayStepById(this.impactPathwayStepId);
-  }
-
-  drop(event: CdkDragDrop<ImpactPathwayStep>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data.tasks, event.previousIndex, event.currentIndex);
-    } else {
-      if (this.canDrop(event.container.data, event.item.data)) {
-        transferArrayItem(event.previousContainer.data.tasks,
-          event.container.data.tasks,
-          event.previousIndex,
-          event.currentIndex);
-      }
-    }
-    this.isDragging.next(false);
-    this.isDropAllowed.next(false);
+    this.impactPathwayStep$ = this.impactPathwayService.getImpactPathwayStepById(this.impactPathwayStepId);
   }
 
   createTask() {
@@ -73,14 +52,14 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent  {
   }
 
   onTaskSelected($event: ImpactPathwayTask) {
-    this.service.setSelectedTask($event)
+    this.impactPathwayService.setSelectedTask($event)
   }
 
   getStepTitle(): Observable<string> {
-    return this.service.getImpactPathwayStepTitle(this.impactPathwayStepId)
+    return this.impactPathwayService.getImpactPathwayStepTitle(this.impactPathwayStepId)
   }
 
   getTasks(): Observable<ImpactPathwayTask[]> {
-    return this.service.getImpactPathwayTasksByStepId(this.impactPathwayId, this.impactPathwayStepId);
+    return this.impactPathwayService.getImpactPathwayTasksByStepId(this.impactPathwayId, this.impactPathwayStepId);
   }
 }

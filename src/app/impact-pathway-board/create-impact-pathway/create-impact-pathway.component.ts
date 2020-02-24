@@ -3,7 +3,6 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Observable, of as observableOf } from 'rxjs';
-import { select, Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import {
@@ -13,9 +12,6 @@ import {
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { CoreState } from '../../core/core.reducers';
-import { GenerateImpactPathwayAction } from '../../core/impact-pathway/impact-pathway.actions';
-import { isImpactPathwayProcessingSelector } from '../../core/impact-pathway/selectors';
 
 /**
  * Component to wrap a list of existing communities inside a modal
@@ -41,14 +37,12 @@ export class CreateImpactPathwayComponent implements OnInit {
     private impactPathwayService: ImpactPathwayService,
     private notificationService: NotificationsService,
     private route: ActivatedRoute,
-    private router: Router,
-    private store: Store<CoreState>) {
+    private router: Router) {
   }
 
   ngOnInit(): void {
-    this.processing$ = this.store.pipe(
-      select(isImpactPathwayProcessingSelector)
-    );
+    this.processing$ = this.impactPathwayService.isProcessing();
+
     this.createForm = this.formBuilder.group({
       name: ['', Validators.required]
     });
@@ -64,7 +58,7 @@ export class CreateImpactPathwayComponent implements OnInit {
 
   create() {
     const impactPathwayName = this.createForm.get('name').value;
-    this.store.dispatch(new GenerateImpactPathwayAction(impactPathwayName, this.activeModal));
+    this.impactPathwayService.dispatchGenerateImpactPathway(impactPathwayName, this.activeModal);
   }
 
   /**

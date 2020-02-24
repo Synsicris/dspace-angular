@@ -15,7 +15,8 @@ import { isNotEmpty } from '../shared/empty.util';
 export class ObjectivesBoardComponent implements OnInit {
 
   @Input() public impactPathwayStepId: string;
-  @Input() public targetImpactPathwayStepId: string;
+
+  public targetImpactPathwayTaskId$: Observable<string>;
 
   private impactPathWayStep$: Observable<ImpactPathwayStep>;
 
@@ -24,6 +25,7 @@ export class ObjectivesBoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.impactPathWayStep$ = this.impactPathwayService.getImpactPathwayStepById(this.impactPathwayStepId);
+    this.targetImpactPathwayTaskId$ = this.impactPathwayService.getImpactPathwayTargetTask();
   }
 
   getImpactPathwayStep(): Observable<ImpactPathwayStep> {

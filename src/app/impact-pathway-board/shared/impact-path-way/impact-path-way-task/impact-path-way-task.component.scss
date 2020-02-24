@@ -1,7 +1,6 @@
 @import '../../../../../styles/variables';
 
 :host {
-  cursor: move;
   background-color: white;
   z-index: 1;
 
@@ -11,10 +10,11 @@
     border: $border-width solid map-get($theme-colors, dark);
   }
 
-  .task-focus {
-    border-radius: $border-radius;
-    box-shadow: 0 0 0 .2rem rgba(19, 35, 51, 0.3);
-  }
+}
+
+.task-focus {
+  border-radius: $border-radius;
+  box-shadow: 0 0 0 .2rem rgba(19, 35, 51, 0.3);
 }
 
 .task-disabled {

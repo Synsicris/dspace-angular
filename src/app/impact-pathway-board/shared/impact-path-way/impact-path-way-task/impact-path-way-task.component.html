@@ -1,4 +1,5 @@
-<div id="{{taskHTMLDivId}}" >
+<div id="{{taskHTMLDivId}}"
+     [class.task-focus]="selectable && selectStatus.value">
   <ng-content></ng-content>
   <div class="task-wrap d-flex flex-column"
        [class.bg-gradient-light]="isDisabled()"
@@ -20,7 +21,7 @@
       </button>
     </div>
     <div class="task-content text-truncate p-1 d-flex justify-content-between">
-      <span>{{data.description}}</span>
+      <span>{{taskType$ | async}}</span>
       <div *ngIf="(canShowRelationCheckBox() | async)" class="custom-control custom-checkbox position-static">
         <input type="checkbox"
                class="custom-control-input"

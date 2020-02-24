@@ -2,5 +2,5 @@
 <div *ngIf="!(isLoading() | async)" class="container-fluid d-flex align-items-stretch mt-3 mb-3">
   <ipw-wrapper-objectives class="wrapper"
                           [impactPathwayStep]="(getImpactPathwayStep() | async)"
-                          [targetImpactPathwayStepId]="targetImpactPathwayStepId"></ipw-wrapper-objectives>
+                          [targetImpactPathwayTaskId]="(targetImpactPathwayTaskId$ | async)"></ipw-wrapper-objectives>
 </div>

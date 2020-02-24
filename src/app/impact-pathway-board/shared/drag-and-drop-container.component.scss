@@ -16,9 +16,17 @@
   opacity: 0.5;
 }
 
+.cdk-drop-list-dragging {
+  cursor: move;
+}
+
 .cdk-drop-list-disabled {
   background-color: #CF4444;
   opacity: 0.5;
+}
+
+.draggable-task {
+  cursor: grab;
 }
 
 .task-preview-allowed {
@@ -50,11 +58,12 @@
 }
 
 .task-list-horizontal {
-  min-height: 150px;
+  min-height: 250px;
 }
 
 .task-horizontal {
   height: 100px;
+  min-width: 200px;
 }
 
 .drop-allowed {

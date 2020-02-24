@@ -11,14 +11,13 @@ import {
 } from 'rxjs';
 import { catchError, concatMap, delay, distinctUntilChanged, flatMap, map, reduce, take, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { findIndex } from 'lodash';
 
 import { ImpactPathway } from './models/impact-pathway.model';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
-import { ImpactPathwayStepType } from './models/impact-pathway-step-type';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
-import { ImpactPathwayTaskType } from './models/impact-pathway-task-type';
-import { isEmpty, isNotEmpty, isUndefined } from '../../shared/empty.util';
+import { isEmpty, isNotEmpty } from '../../shared/empty.util';
 import { ItemDataService } from '../data/item-data.service';
 import { SubmissionService } from '../../submission/submission.service';
 import { GLOBAL_CONFIG, GlobalConfig } from '../../../config';
@@ -34,18 +33,33 @@ import { IntegrationSearchOptions } from '../integration/models/integration-opti
 import { AuthorityEntry } from '../integration/models/authority-entry.model';
 import { MetadataMap, MetadataValue } from '../shared/metadata.models';
 import { Metadata } from '../shared/metadata.utils';
-import { impactPathwayByIDSelector, impactPathwayObjectsSelector, isImpactPathwayLoadedSelector } from './selectors';
+import {
+  impactPathwayByIDSelector,
+  impactPathwayObjectsSelector,
+  impactPathwayStateSelector,
+  isImpactPathwayLoadedSelector,
+  isImpactPathwayProcessingSelector
+} from './selectors';
 import { AppState } from '../../app.reducer';
-import { ImpactPathwayEntries, ImpactPathwayLink } from './impact-pathway.reducer';
+import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
 import { IntegrationData } from '../integration/integration-data';
 import { SubmissionFormsConfigService } from '../config/submission-forms-config.service';
 import { ConfigData } from '../config/config-data';
 import { SubmissionFormModel } from '../config/models/config-submission-form.model';
 import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
 import {
+  AddImpactPathwaySubTaskAction,
+  AddImpactPathwayTaskAction,
   AddImpactPathwayTaskLinksAction,
+  GenerateImpactPathwayAction,
+  GenerateImpactPathwaySubTaskAction,
+  GenerateImpactPathwayTaskAction,
+  MoveImpactPathwaySubTaskAction,
+  PatchImpactPathwayMetadataAction,
+  PatchImpactPathwayTaskMetadataAction,
   RemoveImpactPathwaySubTaskAction,
-  RemoveImpactPathwayTaskAction
+  RemoveImpactPathwayTaskAction,
+  SetImpactPathwayTargetTaskAction
 } from './impact-pathway.actions';
 import { ErrorResponse } from '../cache/response.models';
 import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
@@ -53,33 +67,7 @@ import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
 @Injectable()
 export class ImpactPathwayService {
 
-  private _stepIds: string[] = ['sidebar-object-list'];
   private _currentSelectedTask: BehaviorSubject<ImpactPathwayTask> = new BehaviorSubject<ImpactPathwayTask>(null);
-  private _stepTaskTypeMap: Map<string, ImpactPathwayTaskType[]> = new Map(
-    [
-      [ImpactPathwayStepType.Type1, [ImpactPathwayTaskType.Type1]],
-      [ImpactPathwayStepType.Type2, [ImpactPathwayTaskType.Type2, ImpactPathwayTaskType.Type3]],
-      [ImpactPathwayStepType.Type3, [ImpactPathwayTaskType.Type2, ImpactPathwayTaskType.Type3]],
-      [ImpactPathwayStepType.Type4, [ImpactPathwayTaskType.Type4, ImpactPathwayTaskType.Type5]],
-      [ImpactPathwayStepType.Type5, [ImpactPathwayTaskType.Type4, ImpactPathwayTaskType.Type5]],
-      [ImpactPathwayStepType.Type6, [
-        ImpactPathwayTaskType.Type1,
-        ImpactPathwayTaskType.Type2,
-        ImpactPathwayTaskType.Type3,
-        ImpactPathwayTaskType.Type4,
-        ImpactPathwayTaskType.Type5,
-        ImpactPathwayTaskType.Type6]
-      ],
-    ]
-  );
-  private _allStepType: ImpactPathwayTaskType[] = [
-    ImpactPathwayTaskType.Type1,
-    ImpactPathwayTaskType.Type2,
-    ImpactPathwayTaskType.Type3,
-    ImpactPathwayTaskType.Type4,
-    ImpactPathwayTaskType.Type5,
-    ImpactPathwayTaskType.Type6
-  ];
 
   constructor(
     @Inject(GLOBAL_CONFIG) protected config: GlobalConfig,
@@ -94,6 +82,125 @@ export class ImpactPathwayService {
     private submissionService: SubmissionService,
     private store: Store<AppState>
   ) {
+  }
+
+  dispatchAddImpactPathwaySubTaskAction(
+    impactPathwayId: string,
+    stepId: string,
+    parentTaskId: string,
+    taskId: string,
+    modal?: NgbActiveModal
+  ) {
+    this.store.dispatch(new AddImpactPathwaySubTaskAction(
+      impactPathwayId,
+      stepId,
+      parentTaskId,
+      taskId,
+      modal));
+  }
+
+  dispatchAddImpactPathwayTaskAction(
+    impactPathwayId: string,
+    stepId: string,
+    taskId: string,
+    modal?: NgbActiveModal
+  ) {
+    this.store.dispatch(new AddImpactPathwayTaskAction(
+      impactPathwayId,
+      stepId,
+      taskId,
+      modal));
+  }
+
+  dispatchGenerateImpactPathway(impactPathwayName: string, modal?: NgbActiveModal) {
+    this.store.dispatch(new GenerateImpactPathwayAction(impactPathwayName, modal));
+  }
+
+  dispatchGenerateImpactPathwaySubTask(
+    impactPathwayId: string,
+    stepId: string,
+    parentTaskId: string,
+    type: string,
+    metadataMap: MetadataMap,
+    modal?: NgbActiveModal
+  ) {
+    this.store.dispatch(new GenerateImpactPathwaySubTaskAction(
+      impactPathwayId,
+      stepId,
+      parentTaskId,
+      type,
+      metadataMap,
+      modal));
+  }
+
+  dispatchGenerateImpactPathwayTask(
+    impactPathwayId: string,
+    stepId: string,
+    type: string,
+    metadataMap: MetadataMap,
+    modal?: NgbActiveModal
+  ) {
+    this.store.dispatch(new GenerateImpactPathwayTaskAction(
+      impactPathwayId,
+      stepId,
+      type,
+      metadataMap,
+      modal));
+  }
+
+  dispatchMoveSubTask(
+    impactPathwayId: string,
+    stepId: string,
+    parentTaskId: string,
+    newParentTaskId: string,
+    taskId: string) {
+    this.store.dispatch(new MoveImpactPathwaySubTaskAction(
+      impactPathwayId,
+      stepId,
+      parentTaskId,
+      newParentTaskId,
+      taskId
+    ))
+  }
+
+  dispatchPatchImpactPathwayMetadata(
+    impactPathwayId: string,
+    impactPathway: ImpactPathway,
+    metadata: string,
+    metadataIndex: number,
+    value: any
+  ) {
+    this.store.dispatch(new PatchImpactPathwayMetadataAction(
+      impactPathwayId,
+      impactPathway,
+      metadata,
+      metadataIndex,
+      value
+    ));
+  }
+
+  dispatchPatchImpactPathwayTaskMetadata(
+    impactPathwayId: string,
+    stepId: string,
+    taskId: string,
+    task: ImpactPathwayTask,
+    metadata: string,
+    metadataIndex: number,
+    value: any
+  ) {
+    this.store.dispatch(new PatchImpactPathwayTaskMetadataAction(
+      impactPathwayId,
+      stepId,
+      taskId,
+      task,
+      metadata,
+      metadataIndex,
+      value
+    ));
+  }
+
+  dispatchSetTargetTask(taskId: string) {
+    this.store.dispatch(new SetImpactPathwayTargetTaskAction(taskId))
   }
 
   private createImpactPathwaySteps(impactPathwayId: string): Observable<Item[]> {
@@ -352,11 +459,41 @@ export class ImpactPathwayService {
     );
   }
 
+  getImpactPathwayTargetTask(): Observable<string> {
+    return this.store.pipe(
+      select(impactPathwayStateSelector),
+      map((state: ImpactPathwayState) => state.targetTaskId),
+      distinctUntilChanged()
+    );
+  }
+
   getImpactPathwayTasksByStepId(impactPathwayId: string, impactPathwayStepId: string): Observable<ImpactPathwayTask[]> {
     return this.store.pipe(
       select(impactPathwayByIDSelector(impactPathwayId)),
       map((impactPathway: ImpactPathway) => impactPathway.getStep(impactPathwayStepId).tasks)
     );
+  }
+
+  getImpactPathwayTaskType(stepType: string, taskType: string, isObjective: boolean): Observable<string> {
+    const name = isObjective ? `impactpathway_${stepType}_task_objective_type` : `impactpathway_${stepType}_task_type`;
+    const searchOptions: IntegrationSearchOptions = new IntegrationSearchOptions(
+      '',
+      name,
+      'relationship.type',
+      taskType,
+      1,
+      1);
+
+    return this.authorityService.getEntryByValue(searchOptions).pipe(
+      map((result: IntegrationData) => {
+        if (result.pageInfo.totalElements !== 1) {
+          throw new Error(`No task type found for ${taskType}`);
+        }
+
+        return (result.payload[0] as AuthorityEntry).display;
+      }),
+      catchError((error: Error) => observableOf(''))
+    )
   }
 
   getImpactPathwaySubTasksByParentId(
@@ -369,14 +506,6 @@ export class ImpactPathwayService {
         return impactPathway.getStep(impactPathwayStepId).getTask(impactPathwayTaskId).tasks;
       })
     );
-  }
-
-  getAvailableImpactPathwayStepIds(): string[] {
-    return this._stepIds;
-  }
-
-  getAvailableTaskTypeByStep(stepType: string): string[] {
-    return (isUndefined(stepType)) ? this._allStepType : this._stepTaskTypeMap.get(stepType);
   }
 
   initImpactPathway(item: Item): Observable<ImpactPathway> {
@@ -422,6 +551,12 @@ export class ImpactPathwayService {
     }
   }
 
+  moveSubTask(previousParentTaskId: string, newParentTaskId: string, taskId: string): Observable<Item> {
+    return this.unlinkTaskFromParent(previousParentTaskId, taskId).pipe(
+      flatMap(() => this.linkTaskToParent(newParentTaskId, taskId))
+    )
+  }
+
   setSelectedTask(task: ImpactPathwayTask): void {
     this._currentSelectedTask.next(task);
   }
@@ -457,6 +592,10 @@ export class ImpactPathwayService {
     return new ImpactPathway(oldImpactPathway.id, newImpactPathwayItem.name, description, oldImpactPathway.steps);
   }
 
+  isProcessing(): Observable<boolean> {
+    return this.store.pipe(select(isImpactPathwayProcessingSelector));
+  }
+
   initImpactPathwayStep(parentId: string, stepItem: Item, tasks: ImpactPathwayTask[]): ImpactPathwayStep {
     const type = stepItem.firstMetadataValue('impactpathway.step.type');
 
@@ -478,7 +617,7 @@ export class ImpactPathwayService {
     );
   }
 
-  unlinkTaskFromParent(parentId: string, taskId: string, taskPosition: number): Observable<Item> {
+  unlinkTaskFromParent(parentId: string, taskId: string): Observable<Item> {
     return this.itemService.findById(parentId).pipe(
       getFirstSucceededRemoteDataPayload(),
       tap((stepItem: Item) => this.removeRelationPatch(stepItem, taskId, 'impactpathway.relation.task')),

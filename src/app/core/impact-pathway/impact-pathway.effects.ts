@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { of as observableOf } from 'rxjs';
-import { catchError, concatMap, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
@@ -25,6 +25,9 @@ import {
   InitImpactPathwayAction,
   InitImpactPathwayErrorAction,
   InitImpactPathwaySuccessAction,
+  MoveImpactPathwaySubTaskAction,
+  MoveImpactPathwaySubTaskErrorAction,
+  MoveImpactPathwaySubTaskSuccessAction,
   NormalizeImpactPathwayObjectsOnRehydrateAction,
   PatchImpactPathwayMetadataAction,
   PatchImpactPathwayMetadataErrorAction,
@@ -248,7 +251,7 @@ export class ImpactPathwayEffects {
    */
   @Effect() addSubTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK),
-    mergeMap((action: AddImpactPathwaySubTaskAction) => {
+    concatMap((action: AddImpactPathwaySubTaskAction) => {
       return this.impactPathwayService.linkTaskToParent(
         action.payload.parentTaskId,
         action.payload.taskId).pipe(
@@ -291,8 +294,7 @@ export class ImpactPathwayEffects {
     switchMap((action: RemoveImpactPathwayTaskAction) => {
       return this.impactPathwayService.unlinkTaskFromParent(
         action.payload.parentId,
-        action.payload.taskId,
-        action.payload.taskPosition).pipe(
+        action.payload.taskId).pipe(
         map(() => new RemoveImpactPathwayTaskSuccessAction(
           action.payload.impactPathwayId,
           action.payload.parentId,
@@ -311,8 +313,7 @@ export class ImpactPathwayEffects {
     switchMap((action: RemoveImpactPathwaySubTaskAction) => {
       return this.impactPathwayService.unlinkTaskFromParent(
         action.payload.parentTaskId,
-        action.payload.taskId,
-        action.payload.taskPosition).pipe(
+        action.payload.taskId).pipe(
         map(() => new RemoveImpactPathwaySubTaskSuccessAction(
           action.payload.impactPathwayId,
           action.payload.stepId,
@@ -322,6 +323,38 @@ export class ImpactPathwayEffects {
           console.error(error.message);
           return observableOf(new RemoveImpactPathwayTaskErrorAction())
         }));
+    }));
+
+  /**
+   * Generate an impactPathway task and dispatches
+   */
+  @Effect() moveSubTask$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.MOVE_IMPACT_PATHWAY_SUB_TASK),
+    switchMap((action: MoveImpactPathwaySubTaskAction) => {
+      return this.impactPathwayService.moveSubTask(
+        action.payload.parentTaskId,
+        action.payload.newParentTaskId,
+        action.payload.taskId).pipe(
+        map(() => new MoveImpactPathwaySubTaskSuccessAction()),
+        catchError((error: Error) => {
+          console.error(error.message);
+          return observableOf(new MoveImpactPathwaySubTaskErrorAction(
+            action.payload.impactPathwayId,
+            action.payload.stepId,
+            action.payload.parentTaskId,
+            action.payload.newParentTaskId,
+            action.payload.taskId
+          ))
+        }));
+    }));
+
+  /**
+   * Show a notification on error
+   */
+  @Effect({ dispatch: false }) moveSubTaskError$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR),
+    tap(() => {
+      this.notificationsService.error(null, this.translate.get('impact-pathway.move.task.error'))
     }));
 
   /**

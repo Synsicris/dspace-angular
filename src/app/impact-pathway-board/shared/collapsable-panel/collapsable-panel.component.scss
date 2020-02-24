@@ -1,5 +1,5 @@
-@import '../../../../styles/variables.scss';
-@import '../../../../styles/mixins.scss';
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
 
 :host {
   border: 1px solid map-get($theme-colors, dark);

@@ -12,9 +12,7 @@ import { Router } from '@angular/router';
 export class WrapperObjectivesComponent {
 
   @Input() public impactPathwayStep: ImpactPathwayStep;
-  @Input() public targetImpactPathwayStepId: string;
-
-  public activeIds: string[];
+  @Input() public targetImpactPathwayTaskId: string;
 
   constructor(private objectivesService: ObjectiveService, private router: Router) {
   }

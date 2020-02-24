@@ -1,4 +1,4 @@
-<ipw-sidebar-panel class="d-block mb-3" [sidebarPanelTitle]="impactPathwayTask.title" [startOpen]="isOpen()">
+<ipw-collapsable-panel class="d-block mb-3" [sidebarPanelTitle]="impactPathwayTask.title" [startOpen]="isOpen()">
   <ng-container ngProjectAs="panelContent">
     <div class="d-flex align-items-stretch p-0 m-0">
       <ipw-objective-container class="horizontal-step h-100 horizontal-content"
@@ -10,4 +10,4 @@
                            [initContent]="impactPathwayTask.description"
                            (contentChange)="updateDescription($event)"></ipw-editable-textarea>
   </ng-container>
-</ipw-sidebar-panel>
+</ipw-collapsable-panel>

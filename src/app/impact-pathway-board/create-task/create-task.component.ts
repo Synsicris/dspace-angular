@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular
 
 import { Observable, of as observableOf } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { select, Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicFormControlModel } from '@ng-dynamic-forms/core';
 
@@ -11,12 +10,6 @@ import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.s
 import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
 import { FormBuilderService } from '../../shared/form/builder/form-builder.service';
 import { FormService } from '../../shared/form/form.service';
-import { AppState } from '../../app.reducer';
-import {
-  GenerateImpactPathwaySubTaskAction,
-  GenerateImpactPathwayTaskAction
-} from '../../core/impact-pathway/impact-pathway.actions';
-import { isImpactPathwayProcessingSelector } from '../../core/impact-pathway/selectors';
 import { ImpactPathwayTask } from '../../core/impact-pathway/models/impact-pathway-task.model';
 import { FormFieldMetadataValueObject } from '../../shared/form/builder/models/form-field-metadata-value.model';
 
@@ -55,14 +48,11 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private formBuilderService: FormBuilderService,
     private formService: FormService,
-    private impactPathwayService: ImpactPathwayService,
-    private store: Store<AppState>) {
+    private impactPathwayService: ImpactPathwayService) {
   }
 
   ngOnInit(): void {
-    this.processing$ = this.store.pipe(
-      select(isImpactPathwayProcessingSelector)
-    );
+    this.processing$ = this.impactPathwayService.isProcessing();
 
     this.formId = this.formService.getUniqueId('create-task');
     this.initFormModel();
@@ -88,8 +78,6 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
     data.pipe(first()).subscribe((formData) => {
 
       const type = (formData['relationship.type']) ? formData['relationship.type'][0].value : null;
-      const title = (formData['dc.title']) ? formData['dc.title'][0].value : null;
-      const description = (formData['dc.description']) ? formData['dc.description'][0].value : null;
       const metadataMap = {};
       Object.keys(formData).forEach((metadataName) => {
         metadataMap[metadataName] = formData[metadataName].map((formValue: FormFieldMetadataValueObject) => ({
@@ -102,20 +90,20 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
       });
 
       if (this.isObjectivePage) {
-        this.store.dispatch(new GenerateImpactPathwaySubTaskAction(
+        this.impactPathwayService.dispatchGenerateImpactPathwaySubTask(
           this.step.parentId,
           this.step.id,
           this.parentTask.id,
           type,
           metadataMap,
-          this.activeModal));
+          this.activeModal);
       } else {
-        this.store.dispatch(new GenerateImpactPathwayTaskAction(
+        this.impactPathwayService.dispatchGenerateImpactPathwayTask(
           this.step.parentId,
           this.step.id,
           type,
           metadataMap,
-          this.activeModal));
+          this.activeModal);
       }
     })
   }

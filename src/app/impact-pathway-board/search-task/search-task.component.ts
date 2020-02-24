@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular
 
 import { BehaviorSubject, from as observableFrom, Observable, of as observableOf, Subscription } from 'rxjs';
 import { concatMap, scan, take } from 'rxjs/operators';
-import { select, Store } from '@ngrx/store';
 import { NgbActiveModal, NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { findIndex } from 'lodash';
 
@@ -15,12 +14,6 @@ import { SortDirection, SortOptions } from '../../core/cache/models/sort-options
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { PageInfo } from '../../core/shared/page-info.model';
 import { SearchTaskService } from './search-task.service';
-import {
-  AddImpactPathwaySubTaskAction,
-  AddImpactPathwayTaskAction
-} from '../../core/impact-pathway/impact-pathway.actions';
-import { AppState } from '../../app.reducer';
-import { isImpactPathwayProcessingSelector } from '../../core/impact-pathway/selectors';
 import { SearchFilterConfig } from '../../shared/search/search-filter-config.model';
 import { FilterBox, FilterBoxEntry, FilterBoxType } from './search-header/filter-box/filter-box.component';
 import { FacetValue } from '../../shared/search/facet-value.model';
@@ -67,8 +60,7 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
     private service: ImpactPathwayService,
     private typeaheadConfig: NgbTypeaheadConfig,
     private dropdownConfig: NgbDropdownConfig,
-    private searchTaskService: SearchTaskService,
-    private store: Store<AppState>
+    private searchTaskService: SearchTaskService
   ) {
 
     // customize default values of typeaheads used by this component tree
@@ -113,9 +105,7 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
     this.paginationOptions.pageSize = this.pageSize;
     this.sortOptions = new SortOptions('dc.title', this.sortDirection);
 
-    this.processing$ = this.store.pipe(
-      select(isImpactPathwayProcessingSelector)
-    );
+    this.processing$ = this.service.isProcessing();
 
     this.search(this.paginationOptions, this.sortOptions);
 
@@ -186,18 +176,18 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
 
   private addTask(task: ImpactPathwayTask) {
     if (this.isObjectivePage) {
-      this.store.dispatch(new AddImpactPathwaySubTaskAction(
+      this.service.dispatchAddImpactPathwaySubTaskAction(
         this.step.parentId,
         this.step.id,
         this.parentTask.id,
         task.id,
-        this.activeModal));
+        this.activeModal);
     } else {
-      this.store.dispatch(new AddImpactPathwayTaskAction(
+      this.service.dispatchAddImpactPathwayTaskAction(
         this.step.parentId,
         this.step.id,
         task.id,
-        this.activeModal));
+        this.activeModal);
     }
   }
 

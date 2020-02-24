@@ -1,4 +1,4 @@
-<ipw-sidebar-panel class="d-block mb-3" [sidebarPanelTitle]="impactPathway.title" [startOpen]="true">
+<ipw-collapsable-panel class="d-block mb-3" [sidebarPanelTitle]="impactPathway.title" [startOpen]="true">
   <ng-container ngProjectAs="panelIconStatus">
       <i class="fas fa-check-circle text-success mr-3"
          aria-hidden="true"></i>
@@ -20,7 +20,7 @@
                            [initContent]="impactPathway.description"
                            (contentChange)="updateDescription($event)"></ipw-editable-textarea>
   </ng-container>
-</ipw-sidebar-panel>
+</ipw-collapsable-panel>
 
 <div *ngIf="(loaded | async)">
   <ngx-domarrow *ngFor="let relation of (getRelations() | async)"

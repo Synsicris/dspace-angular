@@ -95,7 +95,6 @@ export class FilterBoxComponent implements OnChanges, OnInit {
 
   onSubmit(dropdown: NgbDropdown) {
     dropdown.close();
-    console.log(this.selectedFilterBoxEntries);
     const filterBox = Object.assign(this.filterBox, {
       appliedFilterBoxEntries: this.selectedFilterBoxEntries
     });

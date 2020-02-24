@@ -34,6 +34,9 @@ export const ImpactPathwayActionTypes = {
   ADD_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK'),
   ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
   ADD_IMPACT_PATHWAY_SUB_TASK_ERROR: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK_ERROR'),
+  MOVE_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/MOVE_IMPACT_PATHWAY_SUB_TASK'),
+  MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/core/impactpathway/MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
+  MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR: type('dspace/core/impactpathway/MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR'),
   NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE: type('dspace/core/impactpathway/NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE'),
   REMOVE_IMPACT_PATHWAY_TASK: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_TASK'),
   REMOVE_IMPACT_PATHWAY_TASK_SUCCESS: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_SUCCESS'),
@@ -58,6 +61,7 @@ export const ImpactPathwayActionTypes = {
   SAVE_IMPACT_PATHWAY_TASK_LINKS_SUCCESS: type('dspace/core/impactpathway/SAVE_IMPACT_PATHWAY_TASK_LINKS_SUCCESS'),
   SAVE_IMPACT_PATHWAY_TASK_LINKS_ERROR: type('dspace/core/impactpathway/SAVE_IMPACT_PATHWAY_TASK_LINKS_ERROR'),
   TOGGLE_IMPACT_PATHWAY_TASK_LINKS_VIEW: type('dspace/core/impactpathway/TOGGLE_IMPACT_PATHWAY_TASK_LINKS_VIEW'),
+  SET_IMPACT_PATHWAY_TARGET_TASK: type('dspace/core/impactpathway/SET_IMPACT_PATHWAY_TARGET_TASK'),
 };
 
 /* tslint:disable:max-classes-per-file */
@@ -478,6 +482,89 @@ export class AddImpactPathwaySubTaskErrorAction implements Action {
    */
   constructor(modal?: NgbActiveModal) {
     this.payload = { modal };
+  }
+}
+
+/**
+ * An ngrx action for moving task
+ */
+export class MoveImpactPathwaySubTaskAction implements Action {
+  type = ImpactPathwayActionTypes.MOVE_IMPACT_PATHWAY_SUB_TASK;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    parentTaskId: string;
+    newParentTaskId: string;
+    taskId: string;
+  };
+
+  /**
+   * Create a new MoveImpactPathwaySubTaskAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   * @param parentTaskId
+   *    the impact pathway parent task's id from to delete task
+   * @param newParentTaskId
+   *    the impact pathway parent task's id where to add task
+   * @param taskId
+   *    the Item id of the impact pathway task to move
+   */
+  constructor(
+    impactPathwayId: string,
+    stepId: string,
+    parentTaskId: string,
+    newParentTaskId: string,
+    taskId: string
+  ) {
+    this.payload = { impactPathwayId, stepId, parentTaskId, newParentTaskId, taskId};
+  }
+}
+
+/**
+ * An ngrx action for move success
+ */
+export class MoveImpactPathwaySubTaskSuccessAction implements Action {
+  type = ImpactPathwayActionTypes.MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS;
+}
+
+/**
+ * An ngrx action to restore task moving
+ */
+export class MoveImpactPathwaySubTaskErrorAction implements Action {
+  type = ImpactPathwayActionTypes.MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    previousParentTaskId: string;
+    currentParentTaskId: string;
+    taskId: string;
+  };
+
+  /**
+   * Create a new MoveImpactPathwaySubTaskErrorAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   * @param previousParentTaskId
+   *    the impact pathway parent task's id where to restore task
+   * @param currentParentTaskId
+   *    the impact pathway parent task's id from where to remove task
+   * @param taskId
+   *    the Item id of the impact pathway task to restore
+   */
+  constructor(
+    impactPathwayId: string,
+    stepId: string,
+    previousParentTaskId: string,
+    currentParentTaskId: string,
+    taskId: string
+  ) {
+    this.payload = { impactPathwayId, stepId, previousParentTaskId, currentParentTaskId, taskId};
   }
 }
 
@@ -1042,6 +1129,26 @@ export class SaveImpactPathwayTaskLinksErrorAction implements Action {
 }
 
 /**
+ * An ngrx action to set target task id
+ */
+export class SetImpactPathwayTargetTaskAction implements Action {
+  type = ImpactPathwayActionTypes.SET_IMPACT_PATHWAY_TARGET_TASK;
+  payload: {
+    targetTaskId: string;
+  };
+
+  /**
+   * Create a new GenerateImpactPathwayAction
+   *
+   * @param targetTaskId
+   *    the impact pathway's title
+   */
+  constructor(targetTaskId: string) {
+    this.payload = { targetTaskId };
+  }
+}
+
+/**
  * An ngrx action to normalize state object on rehydrate
  */
 export class NormalizeImpactPathwayObjectsOnRehydrateAction implements Action {
@@ -1076,6 +1183,9 @@ export type ImpactPathwayActions
   | InitImpactPathwayAction
   | InitImpactPathwaySuccessAction
   | InitImpactPathwayErrorAction
+  | MoveImpactPathwaySubTaskAction
+  | MoveImpactPathwaySubTaskErrorAction
+  | MoveImpactPathwaySubTaskSuccessAction
   | NormalizeImpactPathwayObjectsOnRehydrateAction
   | PatchImpactPathwayMetadataAction
   | PatchImpactPathwayMetadataErrorAction
@@ -1092,6 +1202,7 @@ export type ImpactPathwayActions
   | SaveImpactPathwayTaskLinksAction
   | SaveImpactPathwayTaskLinksErrorAction
   | SaveImpactPathwayTaskLinksSuccessAction
+  | SetImpactPathwayTargetTaskAction
   | ToggleImpactPathwayTaskLinksViewAction
   | UpdateImpactPathwayAction
   | UpdateImpactPathwayTaskAction

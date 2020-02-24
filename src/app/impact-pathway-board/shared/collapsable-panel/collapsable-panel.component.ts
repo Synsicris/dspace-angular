@@ -6,9 +6,9 @@ import { slide } from '../../../shared/animations/slide';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Component({
-  selector: 'ipw-sidebar-panel',
-  styleUrls: ['./sidebar-panel.component.scss'],
-  templateUrl: './sidebar-panel.component.html',
+  selector: 'ipw-collapsable-panel',
+  styleUrls: ['./collapsable-panel.component.scss'],
+  templateUrl: './collapsable-panel.component.html',
   changeDetection: ChangeDetectionStrategy.Default,
   animations: [slide],
 })
@@ -16,7 +16,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 /**
  * Represents a part of the filter section for a single type of filter
  */
-export class SidebarPanelComponent implements OnInit {
+export class CollapsablePanelComponent implements OnInit {
 
   @Input() sidebarPanelTitle: string;
 

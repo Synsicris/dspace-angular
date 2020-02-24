@@ -10,10 +10,7 @@ import { WrapperImpactPathWayComponent } from './wrapper-impact-path-way/wrapper
 import { ImpactPathWayStepComponent } from './shared/impact-path-way/impact-path-way-step/impact-path-way-step.component';
 import { ImpactPathWayTaskComponent } from './shared/impact-path-way/impact-path-way-task/impact-path-way-task.component';
 import { TaskColorDirective } from './shared/impact-path-way/impact-path-way-task/task.directive';
-import { SidebarImpactPathWayComponent } from './sidebar-impact-path-way/sidebar-impact-path-way.component';
-import { SidebarPanelComponent } from './sidebar-impact-path-way/sidebar-panel/sidebar-panel.component';
-import { SidebarPanelListComponent } from './sidebar-impact-path-way/sidebar-panel/sidebar-panel-list/sidebar-panel-list.component';
-import { SidebarPanelViewComponent } from './sidebar-impact-path-way/sidebar-panel/sidebar-panel-view/sidebar-panel-view.component';
+import { CollapsablePanelComponent } from './shared/collapsable-panel/collapsable-panel.component';
 import { StepColorDirective } from './shared/impact-path-way/impact-path-way-step/step.directive';
 import { ExploitationPlanDirective } from './shared/impact-path-way/impact-path-way-task/exploitation-plan.directive';
 import { ImpactPathWayTaskModalComponent } from './shared/impact-path-way/impact-path-way-task/impact-path-way-task-modal/impact-path-way-task-modal.component';
@@ -53,10 +50,7 @@ const COMPONENTS = [
   SearchBoxComponent,
   SearchLabelsComponent,
   SearchTaskComponent,
-  SidebarImpactPathWayComponent,
-  SidebarPanelComponent,
-  SidebarPanelListComponent,
-  SidebarPanelViewComponent,
+  CollapsablePanelComponent,
   ObjectivesBoardComponent,
   WrapperObjectivesComponent,
   ObjectiveComponent,

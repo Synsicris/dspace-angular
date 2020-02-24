@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
@@ -12,14 +12,15 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import { InitImpactPathwayAction } from '../core/impact-pathway/impact-pathway.actions';
 import { ItemDataService } from '../core/data/item-data.service';
-import { isNotEmpty } from '../shared/empty.util';
+import { hasValue, isNotEmpty } from '../shared/empty.util';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'ipw-objectives-page',
   styleUrls: ['./objectives-page.component.scss'],
   templateUrl: './objectives-page.component.html'
 })
-export class ObjectivesPageComponent implements OnInit {
+export class ObjectivesPageComponent implements OnInit, OnDestroy {
 
   /**
    * The item's id
@@ -32,9 +33,9 @@ export class ObjectivesPageComponent implements OnInit {
   itemId$: Observable<string>;
 
   /**
-   * The target item's id
+   * Subscription to unsubscribe
    */
-  targetItemId$: Observable<string>;
+  private sub: Subscription;
 
   constructor(
     private impactPathwayService: ImpactPathwayService,
@@ -42,16 +43,19 @@ export class ObjectivesPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private store: Store<AppState>
-  ) { }
+  ) {
+  }
 
   /**
    * Initialize instance variables
    */
   ngOnInit(): void {
-    this.targetItemId$ = this.route.queryParams.pipe(
+    this.sub = this.route.queryParams.pipe(
       take(1),
       map((params) => params.target)
-    );
+    ).subscribe((targetId) => {
+      this.impactPathwayService.dispatchSetTargetTask(targetId);
+    });
 
     this.itemId$ = this.route.data.pipe(
       map((data) => data.item as RemoteData<Item>),
@@ -66,7 +70,7 @@ export class ObjectivesPageComponent implements OnInit {
           map((parentItemRD: RemoteData<Item>) => [itemRD, parentItemRD])
         )
       }),
-      flatMap(([itemRD, parentItemRD]: [RemoteData<Item>, RemoteData<Item>] ) => this.impactPathwayService.isImpactPathwayLoadedById(parentItemRD.payload.id).pipe(
+      flatMap(([itemRD, parentItemRD]: [RemoteData<Item>, RemoteData<Item>]) => this.impactPathwayService.isImpactPathwayLoadedById(parentItemRD.payload.id).pipe(
         map((loaded) => [itemRD, parentItemRD, loaded])
       )),
       tap(([itemRD, parentItemRD, loaded]: [RemoteData<Item>, RemoteData<Item>, boolean]) => {
@@ -77,4 +81,11 @@ export class ObjectivesPageComponent implements OnInit {
       map(([itemRD, parentItemRD, loaded]: [RemoteData<Item>, RemoteData<Item>, boolean]) => itemRD.payload.id)
     );
   }
+
+  ngOnDestroy(): void {
+    if (hasValue(this.sub)) {
+      this.sub.unsubscribe();
+    }
+  }
+
 }

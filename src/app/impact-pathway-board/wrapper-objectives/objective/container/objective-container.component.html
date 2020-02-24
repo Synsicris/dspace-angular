@@ -1,8 +1,10 @@
-<div id="{{impactPathwayTask.id}}"
-     class="h-100 d-flex flex-column"
+<div class="h-100 d-flex flex-column"
      [class.drop-allowed]="(isDragging | async) && (isDropAllowed | async)"
-     [class.drop-denied]="(isDragging | async) && !(isDropAllowed | async)">
-  <div class="d-flex p-2 h-100 flex-wrap task-list-horizontal"
+     [class.drop-denied]="(isDragging | async) && !(isDropAllowed | async)"
+     [class.overlay]="(isProcessing() | async)">
+  <div id="{{impactPathwayTask.id}}"
+       class="d-flex p-2 h-100 flex-wrap task-list-horizontal .overlay-hide"
+       [class.overlay-hide]="(isProcessing() | async)"
        cdkDropList
        cdkDropListOrientation="'horizontal'"
        [cdkDropListData]="impactPathwayTask"
@@ -11,9 +13,10 @@
        (cdkDropListExited)="listExited($event)"
        (cdkDropListDropped)="listDropped($event)">
     <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
-                              class="mb-sm-1 mb-lg-4 mb-5 mr-sm-1 mr-lg-4 task-horizontal"
+                              class="mb-sm-1 mb-lg-4 mb-5 mr-sm-1 mr-lg-4 task-horizontal draggable-task"
                               [impactPathwayId]="impactPathwayStep.parentId"
                               [impactPathwayStepId]="impactPathwayStep.id"
+                              [impactPathwayStepType]="impactPathwayStep.type"
                               [data]="task"
                               [cdkDragData]="task"
                               [taskPosition]="i"
@@ -33,7 +36,8 @@
       </div>
     </ipw-impact-path-way-task>
   </div>
-  <div class="d-flex justify-content-end">
-    <button class="btn btn-link pr-0" (click)="createTask(); $event.stopPropagation()"><i class="fas fa-plus-circle fa-2x"></i></button>
+  <div class="d-flex justify-content-end"
+       [class.overlay-hide]="(isProcessing() | async)">
+    <button class="btn btn-link pr-0" (click)="openModal(); $event.stopPropagation()"><i class="fas fa-plus-circle fa-2x"></i></button>
   </div>
 </div>

@@ -6,7 +6,6 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { ImpactPathwayTask } from '../../core/impact-pathway/models/impact-pathway-task.model';
 import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
 import { hasValue } from '../../shared/empty.util';
-import { ImpactPathwayStep } from '../../core/impact-pathway/models/impact-pathway-step.model';
 
 @Component({
   selector: 'ipw-drag-and-drop-container',
@@ -27,10 +26,8 @@ export class DragAndDropContainerComponent implements OnDestroy {
   constructor(protected service: ImpactPathwayService) {
   }
 
-  canDrop(step: ImpactPathwayStep, task: ImpactPathwayTask) {
-    /*return !step.hasTask(task) && (this.service.getAvailableTaskTypeByStep(step.type).includes(task.type)) &&
-      ((task.parentId && task.parentId !== step.id) || !task.parentId);*/
-    return !step.hasTask(task.id) && (this.service.getAvailableTaskTypeByStep(step.type).includes(task.type));
+  canDrop(parent: ImpactPathwayTask, task: ImpactPathwayTask) {
+    return !parent.hasSubTask(task.id) || task.parentId === parent.id;
   }
 
   dragEntered(event: CdkDragEnter<any>) {

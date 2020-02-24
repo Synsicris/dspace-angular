@@ -1,7 +1,6 @@
 import { findIndex, remove } from 'lodash';
 
 import { isNotEmpty } from '../../../shared/empty.util';
-import { ImpactPathwayStep } from './impact-pathway-step.model';
 
 export class ImpactPathwayTask {
 
@@ -26,7 +25,7 @@ export class ImpactPathwayTask {
     return (findIndex(this.tasks, { id: taskId }) !== -1);
   }
 
-  getSubTask(taskId: string): ImpactPathwayStep {
+  getSubTask(taskId: string): ImpactPathwayTask {
     let step = null;
     const index = this.getSubTaskIndex(taskId);
     if (index !== -1) {
