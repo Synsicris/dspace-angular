@@ -30,11 +30,11 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   @Input() public isObjectivePage: boolean;
 
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public taskHTMLDivId: string;
   public taskType$: Observable<string>;
 
   private removing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private subs: Subscription[] = [];
   private isTwoWayRelationSelected: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
