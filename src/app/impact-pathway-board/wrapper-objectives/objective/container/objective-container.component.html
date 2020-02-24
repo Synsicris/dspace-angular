@@ -38,6 +38,6 @@
   </div>
   <div class="d-flex justify-content-end"
        [class.overlay-hide]="(isProcessing() | async)">
-    <button class="btn btn-link pr-0" (click)="openModal(); $event.stopPropagation()"><i class="fas fa-plus-circle fa-2x"></i></button>
+    <button class="btn btn-link pr-0 open-modal" (click)="openModal(); $event.stopPropagation()"><i class="fas fa-plus-circle fa-2x"></i></button>
   </div>
 </div>
