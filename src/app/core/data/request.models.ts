@@ -161,6 +161,8 @@ export class FindListRequest extends GetRequest {
 }
 
 export class EndpointMapRequest extends GetRequest {
+  public responseMsToLive = Number.MAX_SAFE_INTEGER;
+
   constructor(
     uuid: string,
     href: string,
