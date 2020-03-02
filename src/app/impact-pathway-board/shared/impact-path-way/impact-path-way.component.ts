@@ -18,7 +18,7 @@ export class ImpactPathWayComponent {
 
   @Input() public impactPathway: ImpactPathway;
 
-  @ViewChild('accordionRef') wrapper: NgbAccordion;
+  @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
 
   canShowRelations: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   loaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

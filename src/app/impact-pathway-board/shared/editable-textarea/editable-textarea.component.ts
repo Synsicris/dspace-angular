@@ -32,7 +32,7 @@ export class EditableTextareaComponent implements OnInit {
 
   @Output() contentChange: EventEmitter<string> = new EventEmitter<string>();
 
-  @ViewChild('textarea') textarea: ElementRef;
+  @ViewChild('textarea', { static: false }) textarea: ElementRef;
 
   ngOnInit(): void {
     this.savedContent = this.initContent;

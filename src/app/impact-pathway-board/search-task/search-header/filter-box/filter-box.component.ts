@@ -103,7 +103,7 @@ export class FilterBoxComponent implements OnChanges, OnInit {
   }
 
   protected getFacetValue(facet: FacetValue): string {
-    const search = facet.search;
+    const search = facet._links.search.href;
     const hashes = search.slice(search.indexOf('?') + 1).split('&');
     const params = {};
     hashes.map((hash) => {

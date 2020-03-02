@@ -23,7 +23,7 @@ import { RequestService } from './request.service';
  */
 @Injectable()
 @dataService(SITE)
-export class SiteDataService extends DataService<Site> {​
+export class SiteDataService extends DataService<Site> {
   protected linkPath = 'sites';
 
   constructor(

@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, find, flatMap, map, tap } from 'rxjs/operators';
+import { filter, find, flatMap, map, take, tap } from 'rxjs/operators';
 import { hasValue, hasValueOperator, isNotEmpty } from '../../shared/empty.util';
 import { SearchResult } from '../../shared/search/search-result.model';
 import { DSOSuccessResponse, RestResponse } from '../cache/response.models';
@@ -55,13 +55,6 @@ export const configureRequest = (requestService: RequestService) =>
   (source: Observable<RestRequest>): Observable<RestRequest> =>
     source.pipe(tap((request: RestRequest) => requestService.configure(request)));
 
-export const getFirstSucceededRemoteDataPayload = () =>
-  <T>(source: Observable<RemoteData<T>>): Observable<T> =>
-    source.pipe(
-      filter((rd: RemoteData<T>) => rd.hasSucceeded && isNotEmpty(rd.payload)),
-      take(1),
-      map((remoteData: RemoteData<T>) => remoteData.payload));
-
 export const getRemoteDataPayload = () =>
   <T>(source: Observable<RemoteData<T>>): Observable<T> =>
     source.pipe(map((remoteData: RemoteData<T>) => remoteData.payload));
@@ -87,9 +80,9 @@ export const getSucceededRemoteData = () =>
 export const getFirstSucceededRemoteDataPayload = () =>
   <T>(source: Observable<RemoteData<T>>): Observable<T> =>
     source.pipe(
-      getSucceededRemoteData(),
-      getRemoteDataPayload()
-    );
+      filter((rd: RemoteData<T>) => rd.hasSucceeded && isNotEmpty(rd.payload)),
+      take(1),
+      map((remoteData: RemoteData<T>) => remoteData.payload));
 
 /**
  * Get the all successful remotely retrieved objects

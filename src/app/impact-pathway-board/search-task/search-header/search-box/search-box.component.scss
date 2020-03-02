@@ -1,6 +1,6 @@
 @import '../../../../../styles/variables';
 
-:host /deep/ .dropdown-menu {
+:host ::ng-deep .dropdown-menu {
   width: 100% !important;
 }
 

@@ -17,7 +17,7 @@ export class ObjectiveComponent {
   @Input() public impactPathwayTask: ImpactPathwayTask;
   @Input() public targetImpactPathwayTaskId: string;
 
-  @ViewChild('accordionRef') wrapper: NgbAccordion;
+  @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
 
   constructor(private impactPathwayService: ImpactPathwayService) {
   }
