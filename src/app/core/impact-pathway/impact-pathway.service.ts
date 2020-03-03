@@ -203,6 +203,18 @@ export class ImpactPathwayService {
     this.store.dispatch(new SetImpactPathwayTargetTaskAction(taskId))
   }
 
+  getCreateTaskFormConfigName(stepType: string, isObjectivePage: boolean): string {
+    return isObjectivePage ? `impact_pathway_${stepType}_task_objective_form` : `impact_pathway_${stepType}_task_form`;
+  }
+
+  getSearchTaskConfigName(stepType: string, isObjectivePage: boolean): string {
+    return isObjectivePage ? `impactpathway_${stepType}_objective_task_type` : `impactpathway_${stepType}_task_type`;
+  }
+
+  getTaskTypeAuthorityName(stepType: string, isObjectivePage: boolean): string {
+    return isObjectivePage ? `impactpathway_${stepType}_task_objective_type` : `impactpathway_${stepType}_task_type`;
+  }
+
   private createImpactPathwaySteps(impactPathwayId: string): Observable<Item[]> {
     return this.getImpactPathwayStepsCollection().pipe(
       flatMap((collectionId) => {

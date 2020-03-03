@@ -1,14 +1,15 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
+import { Observable, of as observableOf } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
 import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
-import { ImpactPathWayTaskModalComponent } from '../../../shared/impact-path-way/impact-path-way-task/impact-path-way-task-modal/impact-path-way-task-modal.component';
 import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-container.component';
-import { Observable } from 'rxjs/internal/Observable';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { of as observableOf } from 'rxjs/internal/observable/of';
+import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
+import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';
 
 @Component({
   selector: 'ipw-objective-container',
@@ -62,16 +63,46 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
   openModal() {
     this.impactPathwayService.dispatchSetTargetTask(this.impactPathwayTask.id);
-    const modalRef = this.modalService.open(ImpactPathWayTaskModalComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg' });
 
     modalRef.result.then((result) => {
       if (result) {
         this.cdr.detectChanges();
       }
     }, () => null);
-    modalRef.componentInstance.step = this.impactPathwayStep;
-    modalRef.componentInstance.parentTask = this.impactPathwayTask;
-    modalRef.componentInstance.isObjectivePage = true;
+    modalRef.componentInstance.formConfig = this.impactPathwayService.getImpactPathwayStepTaskFormConfig(
+      this.impactPathwayStep.type,
+      true
+    );
+    modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
+    modalRef.componentInstance.excludeListId = [this.impactPathwayTask.id];
+    modalRef.componentInstance.authorityName = this.impactPathwayService.getTaskTypeAuthorityName(
+      this.impactPathwayStep.type,
+      true
+    );
+    modalRef.componentInstance.searchConfiguration = this.impactPathwayService.getSearchTaskConfigName(
+      this.impactPathwayStep.type,
+      true
+    );
+    modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
+      this.impactPathwayService.dispatchGenerateImpactPathwaySubTask(
+        this.impactPathwayStep.parentId,
+        this.impactPathwayStep.id,
+        this.impactPathwayTask.id,
+        item.type.value,
+        item.metadata,
+        modalRef);
+    });
+    modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
+      items.forEach((item) => {
+        this.service.dispatchAddImpactPathwaySubTaskAction(
+          this.impactPathwayStep.parentId,
+          this.impactPathwayStep.id,
+          this.impactPathwayTask.id,
+          item.id,
+          modalRef);
+      })
+    });
   }
 
   getTasks(): Observable<ImpactPathwayTask[]> {

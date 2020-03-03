@@ -1,14 +1,29 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatButtonToggleModule, MatIconModule, MatTreeModule } from '@angular/material';
 import { CdkTreeModule } from '@angular/cdk/tree';
+import {
+  MatButtonModule,
+  MatButtonToggleModule, MatCardModule,
+  MatDatepickerModule,
+  MatIconModule, MatInputModule, MatProgressBarModule, MatSelectModule, MatSliderModule, MatToolbarModule,
+  MatTreeModule
+} from '@angular/material';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
   exports: [
     CdkTreeModule,
     MatButtonModule,
     MatButtonToggleModule,
+    MatDatepickerModule,
     MatIconModule,
-    MatTreeModule
+    MatInputModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatToolbarModule,
+    MatTreeModule,
+    MatMomentDateModule,
+    MatCardModule,
+    MatProgressBarModule
   ]
 })
 export class MaterialModule {

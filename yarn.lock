@@ -208,12 +208,26 @@
   dependencies:
     tslib "^1.9.0"
 
+"@angular/flex-layout@8.0.0-beta.27":
+  version "8.0.0-beta.27"
+  resolved "https://registry.yarnpkg.com/@angular/flex-layout/-/flex-layout-8.0.0-beta.27.tgz#a697d5a90e6d04c06b02ee872f88f384d1723f7c"
+  integrity sha512-qmpvQPesU4ZQ56IscwgmVRpK2UnyV+gwvXUql7TMv0QV215hLcHczjGsrKkLfW2By5E7XEyDat9br72uVXcPMw==
+  dependencies:
+    tslib "^1.7.1"
+
 "@angular/forms@^8.2.14":
   version "8.2.14"
   resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-8.2.14.tgz#7d357c346a3884881beb044c50ec4a09d3d7ee8e"
   integrity sha512-zhyKL3CFIqcyHJ/TQF/h1OZztK611a6rxuPHCrt/5Sn1SuBTJJQ1pPTkOYIDy6IrCrtyANc8qB6P17Mao71DNQ==
   dependencies:
     tslib "^1.9.0"
+
+"@angular/material-moment-adapter@8.2.3":
+  version "8.2.3"
+  resolved "https://registry.yarnpkg.com/@angular/material-moment-adapter/-/material-moment-adapter-8.2.3.tgz#099fce64a3ffb3cfe30141700b195f5058cb360d"
+  integrity sha512-x0WE9MyQajqzGPYKm8eHcDmWWlwiobOX9rZ+V5uqY80fsvm2czk6TYnc1drFYcPAHIaIcx7je7NYOULPF1rTpw==
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/material@8.2.3":
   version "8.2.3"
@@ -1782,6 +1796,13 @@ angular-idle-preload@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/angular-idle-preload/-/angular-idle-preload-3.0.0.tgz#decace34d9fac1cb00000727a6dc5caafdb84e4d"
   integrity sha512-W3P2m2B6MHdt1DVunH6H3VWkAZrG3ZwxGcPjedVvIyRhg/LmMtILoizHSxTXw3fsKIEdAPwGObXGpML9WD1jJA==
+
+angular-resizable-element@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/angular-resizable-element/-/angular-resizable-element-3.3.0.tgz#7927f72ed2b782961e1837b9a5a9566924ad2013"
+  integrity sha512-rnyeT2/kdJcDzkSAYCecjiBtP75WMI8TF2a63pRSIFWbE3x3kTZmnhIDxW+RFqIlg+MyHfRFXYiGBhjzgkvb+Q==
+  dependencies:
+    tslib "^1.9.0"
 
 angular2-template-loader@0.6.2:
   version "0.6.2"

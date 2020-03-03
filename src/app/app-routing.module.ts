@@ -80,6 +80,7 @@ export function getDSOPath(dso: DSpaceObject): string {
       },
       { path: 'impactpathway', loadChildren: './+impact-pathway-page/impact-pathway-page.module#ImpactPathwayPageModule' },
       { path: 'objectives', loadChildren: './+objectives-page/objectives-page.module#ObjectivesPageModule' },
+      { path: 'workpackages', loadChildren: './+workpackage-page/workpackage-page.module#WorkpackagePageModule' },
       { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
     ])
   ],

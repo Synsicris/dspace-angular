@@ -4,6 +4,7 @@ import { BrowserModule, makeStateKey, TransferState } from '@angular/platform-br
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateJson5HttpLoader } from '../../ngx-translate-loaders/translate-json5-http.loader';
@@ -58,6 +59,7 @@ export function getRequest(transferState: TransferState): any {
         deps: [HttpClient]
       }
     }),
+    FlexLayoutModule,
     AppModule
   ],
   providers: [
@@ -78,6 +80,9 @@ export function getRequest(transferState: TransferState): any {
       provide: SubmissionService,
       useClass: SubmissionService
     }
+  ],
+  exports: [
+    FlexLayoutModule
   ]
 })
 export class BrowserAppModule {

@@ -54,7 +54,7 @@ export class EditableTextareaComponent implements OnInit {
    */
   canUndo(): Observable<boolean> {
     return this.isEditable().pipe(
-      map((editable: boolean) => this.textarea.nativeElement.value !== this.savedContent || editable)
+      map((editable: boolean) => (this.textarea && this.textarea.nativeElement.value !== this.savedContent) || editable)
     );
   }
 

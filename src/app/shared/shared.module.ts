@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { NouisliderModule } from 'ng2-nouislider';
 
 import { NgbDatepickerModule, NgbModule, NgbTimepickerModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
@@ -190,6 +192,16 @@ import { LogInComponent } from './log-in/log-in.component';
 import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { ContextMenuComponent } from '../+item-page/context-menu/context-menu.component';
 import { ContextMenuEditImpactPathwayComponent } from '../+item-page/context-menu/edit-impact-pathway/edit-impact-pathway.component';
+import { CreateSimpleItemModalComponent } from './create-simple-item-modal/create-simple-item-modal.component';
+import { CreateSimpleItemComponent } from './create-simple-item-modal/create-simple-item/create-simple.item.component';
+import { SimpleItemBoxComponent } from './create-simple-item-modal/simple-item-box/simple-item-box.component';
+import { SearchSimpleItemComponent } from './create-simple-item-modal/search-simple-item/search-simple-item.component';
+import { SearchSimpleItemBoxComponent } from './create-simple-item-modal/search-simple-item/search-header/search-box/search-simple-item-box.component';
+import { SearchSimpleItemHeaderComponent } from './create-simple-item-modal/search-simple-item/search-header/search-simple-item-header.component';
+import { SearchSimpleItemLabelsComponent } from './create-simple-item-modal/search-simple-item/search-header/search-labels/search-simple-item-labels.component';
+import { SearchSimpleItemFilterBoxComponent } from './create-simple-item-modal/search-simple-item/search-header/filter-box/search-simple-item-filter-box.component';
+import { TaskColorDirective } from '../impact-pathway-board/shared/impact-path-way/impact-path-way-task/task.directive';
+import { SearchSimpleItemService } from './create-simple-item-modal/search-simple-item/search-simple-item.service';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -213,7 +225,8 @@ const MODULES = [
   TextMaskModule,
   MenuModule,
   DragDropModule,
-  MaterialModule
+  MaterialModule,
+  FlexLayoutModule
 ];
 
 const ROOT_MODULES = [
@@ -361,7 +374,15 @@ const COMPONENTS = [
   LogInContainerComponent,
   CreateImpactPathwayComponent,
   ContextMenuComponent,
-  ContextMenuEditImpactPathwayComponent
+  ContextMenuEditImpactPathwayComponent,
+  CreateSimpleItemModalComponent,
+  CreateSimpleItemComponent,
+  SearchSimpleItemComponent,
+  SearchSimpleItemHeaderComponent,
+  SearchSimpleItemLabelsComponent,
+  SearchSimpleItemBoxComponent,
+  SearchSimpleItemFilterBoxComponent,
+  SimpleItemBoxComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -429,7 +450,8 @@ const ENTRY_COMPONENTS = [
   ExternalSourceEntryImportModalComponent,
   LogInPasswordComponent,
   LogInShibbolethComponent,
-  CreateImpactPathwayComponent
+  CreateImpactPathwayComponent,
+  CreateSimpleItemModalComponent
 ];
 
 const SHARED_ITEM_PAGE_COMPONENTS = [
@@ -444,7 +466,8 @@ const PROVIDERS = [
   {
     provide: DYNAMIC_FORM_CONTROL_MAP_FN,
     useValue: dsDynamicFormControlMapFn
-  }
+  },
+  SearchSimpleItemService
 ];
 
 const DIRECTIVES = [
@@ -457,7 +480,8 @@ const DIRECTIVES = [
   AutoFocusDirective,
   RoleDirective,
   MetadataRepresentationDirective,
-  ListableObjectDirective
+  ListableObjectDirective,
+  TaskColorDirective
 ];
 
 @NgModule({

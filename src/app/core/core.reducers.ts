@@ -14,6 +14,7 @@ import {
 } from '../+admin/admin-registries/bitstream-formats/bitstream-format.reducers';
 import { historyReducer, HistoryState } from './history/history.reducer';
 import { impactPathwayReducer, ImpactPathwayState } from './impact-pathway/impact-pathway.reducer';
+import { workpackageReducer, WorkpackageState } from './workpackage/workpackage.reducer';
 
 export interface CoreState {
   'bitstreamFormats': BitstreamFormatRegistryState;
@@ -26,7 +27,9 @@ export interface CoreState {
   'auth': AuthState,
   'json/patch': JsonPatchOperationsState,
   'route': RouteState,
-  'impactPathway': ImpactPathwayState
+  'impactPathway': ImpactPathwayState,
+  'workpackage': WorkpackageState
+
 }
 
 export const coreReducers: ActionReducerMap<CoreState> = {
@@ -40,5 +43,6 @@ export const coreReducers: ActionReducerMap<CoreState> = {
   'auth': authReducer,
   'json/patch': jsonPatchOperationsReducer,
   'route': routeReducer,
-  'impactPathway': impactPathwayReducer
+  'impactPathway': impactPathwayReducer,
+  'workpackage': workpackageReducer
 };

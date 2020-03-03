@@ -1,0 +1,18 @@
+<div class="d-flex">
+
+
+  <ds-search-simple-item-box *ngFor="let filterBox of (getFilterBoxListByType('search') | async)" class="w-100 mr-3"
+                             [filterBox]="filterBox"
+                             [availableTaskList]="availableTaskList"
+                             [step]="step"
+                             (searchChange)="onSearchChange($event)"></ds-search-simple-item-box>
+
+  <ds-search-simple-item-filter-box *ngFor="let filterBox of (getFilterBoxListByType('filter') | async)"
+                                    [filterBox]="filterBox"
+                                    [filterFacetValues]="filterBox.filterFacetValues"
+                                    [appliedFilterBoxEntries]="filterBox.appliedFilterBoxEntries"
+                                    (filterChange)="onFilterChange($event)"></ds-search-simple-item-filter-box>
+</div>
+
+<ds-search-simple-item-labels [filterBoxList]="filterBoxList"
+                              (removeFilter)="onRemoveFilter($event)"></ds-search-simple-item-labels>

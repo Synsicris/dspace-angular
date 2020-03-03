@@ -141,6 +141,7 @@ import { AuthorityEntry } from './integration/models/authority-entry.model';
 import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
 import { ObjectiveService } from './impact-pathway/objective.service';
 import { ImpactPathwayLinksService } from './impact-pathway/impact-pathway-links.service';
+import { WorkpackageService } from './workpackage/workpackage.service';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -273,7 +274,8 @@ const PROVIDERS = [
   AuthorityTreeviewService,
   ImpactPathwayService,
   ObjectiveService,
-  ImpactPathwayLinksService
+  ImpactPathwayLinksService,
+  WorkpackageService
 ];
 
 /**

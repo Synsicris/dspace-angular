@@ -9,24 +9,15 @@ import { ImpactPathWayComponent } from './shared/impact-path-way/impact-path-way
 import { WrapperImpactPathWayComponent } from './wrapper-impact-path-way/wrapper-impact-path-way.component';
 import { ImpactPathWayStepComponent } from './shared/impact-path-way/impact-path-way-step/impact-path-way-step.component';
 import { ImpactPathWayTaskComponent } from './shared/impact-path-way/impact-path-way-task/impact-path-way-task.component';
-import { TaskColorDirective } from './shared/impact-path-way/impact-path-way-task/task.directive';
 import { CollapsablePanelComponent } from './shared/collapsable-panel/collapsable-panel.component';
 import { StepColorDirective } from './shared/impact-path-way/impact-path-way-step/step.directive';
 import { ExploitationPlanDirective } from './shared/impact-path-way/impact-path-way-task/exploitation-plan.directive';
-import { ImpactPathWayTaskModalComponent } from './shared/impact-path-way/impact-path-way-task/impact-path-way-task-modal/impact-path-way-task-modal.component';
-import { CreateTaskComponent } from './create-task/create-task.component';
-import { SearchTaskComponent } from './search-task/search-task.component';
-import { FilterBoxComponent } from './search-task/search-header/filter-box/filter-box.component';
-import { SearchTaskService } from './search-task/search-task.service';
-import { SearchBoxComponent } from './search-task/search-header/search-box/search-box.component';
-import { SearchLabelsComponent } from './search-task/search-header/search-labels/search-labels.component';
 import { DragAndDropContainerComponent } from './shared/drag-and-drop-container.component';
 import { ObjectivesBoardComponent } from './objectives-board.component';
 import { WrapperObjectivesComponent } from './wrapper-objectives/wrapper-objectives.component';
 import { ObjectiveContainerComponent } from './wrapper-objectives/objective/container/objective-container.component';
 import { ObjectiveComponent } from './wrapper-objectives/objective/objective.component';
 import { EditableTextareaComponent } from './shared/editable-textarea/editable-textarea.component';
-import { SearchHeaderComponent } from './search-task/search-header/search-header.component';
 import { NgxDomarrowModule } from 'ngx-domarrow';
 
 const MODULES = [
@@ -38,18 +29,12 @@ const MODULES = [
 ];
 
 const COMPONENTS = [
-  CreateTaskComponent,
   ImpactPathwayBoardComponent,
   DragAndDropContainerComponent,
-  FilterBoxComponent,
   ImpactPathWayComponent,
   ImpactPathWayStepComponent,
   ImpactPathWayTaskComponent,
   WrapperImpactPathWayComponent,
-  SearchHeaderComponent,
-  SearchBoxComponent,
-  SearchLabelsComponent,
-  SearchTaskComponent,
   CollapsablePanelComponent,
   ObjectivesBoardComponent,
   WrapperObjectivesComponent,
@@ -60,16 +45,13 @@ const COMPONENTS = [
 
 const DIRECTIVES = [
   ExploitationPlanDirective,
-  StepColorDirective,
-  TaskColorDirective
+  StepColorDirective
 ];
 
 const ENTRY_COMPONENTS = [
-  ImpactPathWayTaskModalComponent
 ];
 
 const PROVIDERS = [
-  SearchTaskService
 ];
 
 @NgModule({

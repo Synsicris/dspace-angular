@@ -7,8 +7,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
 import { fadeInOut } from '../../../../shared/animations/fade';
-import { ImpactPathWayTaskModalComponent } from '../impact-path-way-task/impact-path-way-task-modal/impact-path-way-task-modal.component';
 import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
+import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
+import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';
 
 @Component({
   selector: 'ipw-impact-path-way-step',
@@ -39,16 +40,45 @@ export class ImpactPathWayStepComponent {
     this.impactPathwayStep$.pipe(
       take(1)
     ).subscribe((impactPathwayStep: ImpactPathwayStep) => {
-      const modalRef = this.modalService.open(ImpactPathWayTaskModalComponent, { size: 'lg' });
+      const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg' });
 
       modalRef.result.then((result) => {
         if (result) {
           this.cdr.detectChanges();
         }
       }, () => null);
-      modalRef.componentInstance.step = impactPathwayStep;
+      modalRef.componentInstance.formConfig = this.impactPathwayService.getImpactPathwayStepTaskFormConfig(
+        impactPathwayStep.type,
+        false
+      );
+      modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
+      modalRef.componentInstance.excludeListId = [this.impactPathwayStepId];
+      modalRef.componentInstance.authorityName = this.impactPathwayService.getTaskTypeAuthorityName(
+        impactPathwayStep.type,
+        false
+      );
+      modalRef.componentInstance.searchConfiguration = this.impactPathwayService.getSearchTaskConfigName(
+        impactPathwayStep.type,
+        false
+      );
+      modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
+        this.impactPathwayService.dispatchGenerateImpactPathwayTask(
+          impactPathwayStep.parentId,
+          impactPathwayStep.id,
+          item.type.value,
+          item.metadata,
+          modalRef);
+      });
+      modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
+        items.forEach((item) => {
+          this.impactPathwayService.dispatchAddImpactPathwayTaskAction(
+            impactPathwayStep.parentId,
+            impactPathwayStep.id,
+            item.id,
+            modalRef);
+        })
+      });
     })
-
   }
 
   onTaskSelected($event: ImpactPathwayTask) {

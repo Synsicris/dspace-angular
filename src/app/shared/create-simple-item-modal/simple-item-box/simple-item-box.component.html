@@ -1,0 +1,19 @@
+<div [class.simple-item-focus]="selectStatus.value">
+  <ng-content></ng-content>
+  <div class="simple-item-wrap d-flex flex-column"
+       [class.simple-item-focus]="(hasFocus$ | async)"
+       ipwTaskColor
+       [taskType]="data.type"
+       (click)="setFocus($event)">
+    <div class="simple-item-header d-flex p-1 justify-content-between">
+      <div class="text-break flex-shrink-1 font-weight-bold w-100 pr-2">
+        <span>{{title}}</span>
+      </div>
+    </div>
+    <div class="simple-item-content text-truncate p-1 d-flex justify-content-between">
+      <div class="text-break flex-shrink-1 font-weight-bold w-100 pr-2">
+        <span>{{type$ | async}}</span>
+      </div>
+    </div>
+  </div>
+</div>

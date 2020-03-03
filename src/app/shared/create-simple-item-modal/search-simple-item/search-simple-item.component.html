@@ -1,0 +1,52 @@
+<ng-template #rt let-r="result" let-t="term">
+  <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
+</ng-template>
+
+<ds-search-simple-item-header [filterBoxList]="filterBoxList$.asObservable()"
+                              [availableTaskList]="availableTaskList$"
+                              [step]="step"
+                              (filterChange)="onFilterChange($event)"
+                              (removeFilter)="onRemoveFilter($event)"
+                              (searchChange)="onSearchChange($event)"></ds-search-simple-item-header>
+
+  <ds-loading *ngIf="(isProcessing() | async)" [message]="'loading.processing' | translate"></ds-loading>
+  <ds-loading *ngIf="(isSearching() | async)"></ds-loading>
+  <ds-pagination *ngIf="!(isSearching() | async) && !(isProcessing() | async) && ((availableTaskList$ | async)?.length > 0)"
+                 [pageInfoState]="pageInfoState"
+                 [paginationOptions]="paginationOptions"
+                 [collectionSize]="pageInfoState?.totalElements"
+                 [sortOptions]="sortOptions"
+                 [hidePagerWhenSinglePage]="hidePagerWhenSinglePage"
+                 [doUpdateRoute]="false"
+                 (paginationChange)="onPaginationChange($event)">
+    <div id="sidebar-object-list"
+         class="task-list d-flex flex-wrap p-3">
+      <ds-simple-item-box *ngFor="let task of (availableTaskList$ | async)"
+                          class="mb-sm-1 mb-lg-4 mr-sm-1 mr-lg-4 task-horizontal selectable-task"
+                          [authorityName]="authorityName"
+                          [data]="task"
+                          (deselected)="onTaskDeselected($event)"
+                          (selected)="onTaskSelected($event)">
+      </ds-simple-item-box>
+
+    </div>
+  </ds-pagination>
+  <h3 *ngIf="!(isSearching() | async) && !(isProcessing() | async) && ((availableTaskList$ | async)?.length == 0)"
+      class="text-center text-muted">
+    <span>{{'mydspace.results.no-results' | translate}}</span>
+  </h3>
+
+
+<hr>
+
+<div class="form-group row">
+
+  <div class="col text-right">
+    <button type="submit"
+            class="btn btn-primary"
+            [disabled]="selectedTasks.length == 0 || (isProcessing() | async)"
+            (click)="onSubmit()">
+      {{'impact-pathway.add.btn' | translate}}
+    </button>
+  </div>
+</div>
