@@ -8,6 +8,7 @@ import { ObjectUpdatesEffects } from './data/object-updates/object-updates.effec
 import { RouteEffects } from './services/route.effects';
 import { RouterEffects } from './router/router.effects';
 import { ImpactPathwayEffects } from './impact-pathway/impact-pathway.effects';
+import { WorkingPlanEffects } from './working-plan/working-plan.effects';
 
 export const coreEffects = [
   RequestEffects,
@@ -19,5 +20,6 @@ export const coreEffects = [
   ObjectUpdatesEffects,
   RouteEffects,
   RouterEffects,
-  ImpactPathwayEffects
+  ImpactPathwayEffects,
+  WorkingPlanEffects
 ];

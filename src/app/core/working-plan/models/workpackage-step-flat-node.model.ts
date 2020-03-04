@@ -1,7 +1,9 @@
 import { ChartStepDate } from './workpackage-step.model';
 
+/* tslint:disable:max-classes-per-file */
+
 /** Flat node with expandable and level information */
-export class ChartStepFlatNode {
+export class WorkpacakgeFlatNode {
   constructor(
     public expandable: boolean,
     public level: number,
@@ -18,3 +20,5 @@ export class ChartStepFlatNode {
     public taskTypeListValues: string[][]
   ) { }
 }
+
+/* tslint:enable:max-classes-per-file */

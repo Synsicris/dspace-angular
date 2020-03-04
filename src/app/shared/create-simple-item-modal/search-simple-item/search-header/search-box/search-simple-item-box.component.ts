@@ -3,8 +3,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, merge, switchMap, tap } from 'rxjs/operators';
 import { NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
-
-import { ImpactPathwayStep } from '../../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayService } from '../../../../../core/impact-pathway/impact-pathway.service';
 import { ImpactPathwayTask } from '../../../../../core/impact-pathway/models/impact-pathway-task.model';
 import { isNotNull } from '../../../../empty.util';
@@ -23,11 +21,6 @@ export class SearchSimpleItemBoxComponent {
   @Input() availableTaskList: Observable<ImpactPathwayTask[]>;
 
   @Input() filterBox: FilterBox;
-
-  /**
-   * The related impact pathway step
-   */
-  @Input() step: ImpactPathwayStep;
 
   public searchModel: string;
   public searching: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

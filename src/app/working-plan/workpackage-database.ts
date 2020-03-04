@@ -2,22 +2,22 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 import { BehaviorSubject } from 'rxjs';
+import { uniqueId } from 'lodash';
 import { extendMoment } from 'moment-range';
 import * as Moment from 'moment';
-import { uniqueId } from 'lodash';
 
-import { WorkpackageStep } from '../core/workpackage/models/workpackage-step.model';
+import { Workpackage, WorkpackageStep } from '../core/working-plan/models/workpackage-step.model';
 import { isNotEmpty } from '../shared/empty.util';
 
-export const moment = extendMoment(Moment);
+const moment = extendMoment(Moment);
 
 @Injectable()
 export class WorkpackageDatabase {
   moment = moment;
-  dataChange = new BehaviorSubject<WorkpackageStep[]>(null);
+  dataChange = new BehaviorSubject<Workpackage[]>(null);
   storageKey = 'charts';
 
-  get data(): WorkpackageStep[] {
+  get data(): Workpackage[] {
     return this.dataChange.value;
   }
 
@@ -58,9 +58,10 @@ export class WorkpackageDatabase {
     }
   }
 
-  buildTree(steps: any[], level: number): WorkpackageStep[] {
-    return steps.map((step: WorkpackageStep) => {
-      const newStep: WorkpackageStep = {
+  buildTree(steps: any[], level: number): Workpackage[] {
+    return steps.map((step: Workpackage) => {
+      const newStep: Workpackage = {
+        id: name,
         name: step.name,
         responsible: step.responsible,
         progress: step.progress,
@@ -68,6 +69,7 @@ export class WorkpackageDatabase {
         // build progress dates
         progressDates: this.setProgressDates(step),
         expanded: step.expanded !== undefined ? step.expanded : true,
+        status: '',
         steps: (step.steps.length) ? this.buildTree(step.steps, level + 1) : [],
         taskTypeListIndexes: Array.from(step.taskTypeListIndexes),
         taskTypeListValues: Array.from(step.taskTypeListValues)
@@ -77,7 +79,7 @@ export class WorkpackageDatabase {
     });
   }
 
-  buildStep(name: string): WorkpackageStep {
+  buildStep(name: string): Workpackage {
     const start = moment().format('YYYY-MM-DD');
     const startMonth = moment().format('YYYY-MM');
     const startYear = moment().format('YYYY');
@@ -86,6 +88,7 @@ export class WorkpackageDatabase {
     const endyear = moment().add(7, 'days').format('YYYY');
 
     return {
+      id: name,
       name: name,
       responsible: '',
       progress: 0,
@@ -104,7 +107,7 @@ export class WorkpackageDatabase {
       steps: [],
       taskTypeListIndexes: [],
       taskTypeListValues: [],
-    } as WorkpackageStep;
+    } as Workpackage;
   }
 
   // update progress dates
@@ -134,9 +137,10 @@ export class WorkpackageDatabase {
   }
 
   // add child step
-  addChildStep(parent: WorkpackageStep) {
+  addChildStep(parent: Workpackage) {
     parent.expanded = true; // set parent node expanded to show children
     const child: WorkpackageStep = {
+      id: name,
       name: '',
       responsible: '',
       progress: 0,
@@ -145,7 +149,7 @@ export class WorkpackageDatabase {
         start: Object.assign({}, parent.dates.start),
         end: Object.assign({}, parent.dates.end),
       },
-      steps: [],
+      status: '',
       taskTypeListIndexes: [],
       taskTypeListValues: [],
       expanded: false
@@ -163,7 +167,7 @@ export class WorkpackageDatabase {
   }
 
   // delete step
-  deleteStep(parent: WorkpackageStep, child: WorkpackageStep) {
+  deleteStep(parent: Workpackage, child: WorkpackageStep) {
     const childIndex = parent.steps.indexOf(child);
     parent.steps.splice(childIndex, 1);
     this.dataChange.next(this.data);

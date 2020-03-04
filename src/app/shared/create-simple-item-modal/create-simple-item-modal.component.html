@@ -16,7 +16,7 @@
         </div>
       </ng-template>
     </ngb-tab>
-    <ngb-tab title="Search">
+    <ngb-tab *ngIf="hasSearch" title="Search">
       <ng-template ngbTabContent>
         <div  class="mt-3">
           <ds-search-simple-item [authorityName]="authorityName"

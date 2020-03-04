@@ -4,7 +4,15 @@ export interface ChartStepDate {
   year: string;
 }
 
-export interface WorkpackageStep {
+export interface Workpackage extends WorkpackageTreeObject {
+  steps: WorkpackageStep[];
+}
+
+export interface WorkpackageStep extends WorkpackageTreeObject {
+}
+
+export interface WorkpackageTreeObject {
+  id: string;
   name: string;
   responsible: string;
   progress: number;
@@ -13,7 +21,7 @@ export interface WorkpackageStep {
     start: ChartStepDate;
     end: ChartStepDate;
   };
-  steps: WorkpackageStep[];
+  status: string;
   taskTypeListIndexes: string[];
   taskTypeListValues: string[][];
   expanded: boolean; // status of expanded

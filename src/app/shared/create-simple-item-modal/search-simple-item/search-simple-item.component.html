@@ -4,7 +4,6 @@
 
 <ds-search-simple-item-header [filterBoxList]="filterBoxList$.asObservable()"
                               [availableTaskList]="availableTaskList$"
-                              [step]="step"
                               (filterChange)="onFilterChange($event)"
                               (removeFilter)="onRemoveFilter($event)"
                               (searchChange)="onSearchChange($event)"></ds-search-simple-item-header>

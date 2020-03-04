@@ -2,8 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
 import { SearchFilterConfig } from '../../../search/search-filter-config.model';
 import { FacetValue } from '../../../search/facet-value.model';
@@ -27,7 +25,6 @@ export class SearchSimpleItemHeaderComponent {
   @Input() availableTaskList: Observable<ImpactPathwayTask[]>;
   @Input() filterBoxEntries: FacetValue[];
   @Input() filterConfig: SearchFilterConfig;
-  @Input() step: ImpactPathwayStep;
 
   /**
    * Emits FilterBoxValue when the form is submitted

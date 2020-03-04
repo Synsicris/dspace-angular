@@ -9,6 +9,7 @@ import { FormService } from '../../form/form.service';
 import { FormBuilderService } from '../../form/builder/form-builder.service';
 import { FormFieldMetadataValueObject } from '../../form/builder/models/form-field-metadata-value.model';
 import { SimpleItem } from '../models/simple-item.model';
+import { dateToISOFormat, isNgbDateStruct } from '../../date.util';
 
 @Component({
   selector: 'ds-create-simple-item',
@@ -76,7 +77,7 @@ export class CreateSimpleItemComponent implements OnInit, OnDestroy {
       Object.keys(formData).forEach((metadataName) => {
         metadataMap[metadataName] = formData[metadataName].map((formValue: FormFieldMetadataValueObject) => ({
           language: formValue.language,
-          value: formValue.value,
+          value: (isNgbDateStruct(formValue.value)) ? dateToISOFormat(formValue.value) : formValue.value,
           place: formValue.place,
           authority: formValue.authority,
           confidence: formValue.confidence

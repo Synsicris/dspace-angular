@@ -1,0 +1,30 @@
+<mat-toolbar color="primary" class="bg-white">
+  <mat-toolbar-row>
+    <span>
+      <button class="btn btn-primary" (click)="createWorkpackage()">
+        <i class="fas fa-plus"></i> Workpackage
+      </button>
+    </span>
+    <span fxFlex></span>
+    <div class="btn-group">
+      <div
+        class="btn btn-light"
+        (click)="onChartDateViewChange(ChartDateViewType.day)"
+        [class.active]="chartDateView === ChartDateViewType.day">
+        Day
+      </div>
+      <div
+        class="btn btn-light"
+        (click)="onChartDateViewChange(ChartDateViewType.month)"
+        [class.active]="chartDateView === ChartDateViewType.month">
+        Month
+      </div>
+      <div
+        class="btn btn-light"
+        (click)="onChartDateViewChange(ChartDateViewType.year)"
+        [class.active]="chartDateView === ChartDateViewType.year">
+        Year
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

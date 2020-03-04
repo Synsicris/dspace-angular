@@ -1,36 +1,37 @@
 import { SharedModule } from '../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { ResizableModule } from 'angular-resizable-element';
 
 import { CoreModule } from '../core/core.module';
-import { WorkpackageComponent } from './workpackage.component';
+import { WorkingPlanComponent } from './working-plan.component';
+import { WorkingPlanChartComponent } from './working-plan-chart/working-plan-chart.component';
+import { WorkingPlanChartToolbarComponent } from './working-plan-chart/toolbar/working-plan-chart-toolbar.component';
+import { WorkingPlanChartContainerComponent } from './working-plan-chart/container/working-plan-chart-container.component';
+import { MyDSpacePageModule } from '../+my-dspace-page/my-dspace-page.module';
 
 const MODULES = [
   CommonModule,
   SharedModule,
   CoreModule.forRoot(),
-  DragDropModule,
-  ResizableModule,
+  MyDSpacePageModule,
+  ResizableModule
 ];
 
 const COMPONENTS = [
-  WorkpackageComponent
+  WorkingPlanComponent,
+  WorkingPlanChartComponent,
+  WorkingPlanChartContainerComponent,
+  WorkingPlanChartToolbarComponent
 ];
 
-const DIRECTIVES = [
-
-];
+const DIRECTIVES = [];
 
 const ENTRY_COMPONENTS = [
-
 ];
 
-const PROVIDERS = [
-
-];
+const PROVIDERS = [];
 
 @NgModule({
   imports: [
@@ -56,5 +57,5 @@ const PROVIDERS = [
 /**
  * This module handles all components and pipes that are necessary for the horizontal navigation bar
  */
-export class WorkpackageModule {
+export class WorkingPlanModule {
 }

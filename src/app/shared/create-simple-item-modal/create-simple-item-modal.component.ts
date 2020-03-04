@@ -17,6 +17,7 @@ export class CreateSimpleItemModalComponent {
   @Input() formConfig: Observable<SubmissionFormModel>;
   @Input() processing: Observable<boolean>;
   @Input() searchConfiguration: string;
+  @Input() hasSearch = true;
 
   @Output() createItem: EventEmitter<SimpleItem> = new EventEmitter<SimpleItem>();
   @Output() addItems: EventEmitter<SimpleItem[]> = new EventEmitter<SimpleItem[]>();

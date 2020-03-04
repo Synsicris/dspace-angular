@@ -1,20 +1,24 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { MAT_DATE_FORMATS, MatSelectChange } from '@angular/material';
 
 import { Observable, of as observableOf } from 'rxjs';
 import { ResizeEvent } from 'angular-resizable-element';
-
-import { WorkpackageStep } from '../core/workpackage/models/workpackage-step.model';
-import { ChartStepFlatNode } from '../core/workpackage/models/workpackage-step-flat-node.model';
-import { moment, WorkpackageDatabase } from './workpackage-database';
-import { MAT_DATE_FORMATS, MatSelectChange } from '@angular/material';
-import { range } from '../shared/array.util';
-import { ChartStepTaskTypeList } from '../core/workpackage/models/workpackage-step-task-type';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CreateSimpleItemModalComponent } from '../shared/create-simple-item-modal/create-simple-item-modal.component';
-import { WorkpackageService } from '../core/workpackage/workpackage.service';
-import { SimpleItem } from '../shared/create-simple-item-modal/models/simple-item.model';
+
+import { WorkpackageDatabase } from '../../workpackage-database';
+import { range } from '../../../shared/array.util';
+import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
+import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
+import { ChartStepTaskTypeList } from '../../../core/working-plan/models/workpackage-step-task-type';
+import { WorkpacakgeFlatNode } from '../../../core/working-plan/models/workpackage-step-flat-node.model';
+import {
+  Workpackage,
+  WorkpackageStep,
+  WorkpackageTreeObject
+} from '../../../core/working-plan/models/workpackage-step.model';
+import { moment, WorkingPlanService } from '../../../core/working-plan/working-plan.service';
 
 export const MY_FORMATS = {
   parse: {
@@ -38,15 +42,17 @@ export enum ChartDateViewType {
  * @title Tree with nested nodes
  */
 @Component({
-  selector: 'ipw-chart',
-  templateUrl: './workpackage.component.html',
-  styleUrls: ['./workpackage.component.scss'],
+  selector: 'ipw-working-plan-chart-container',
+  templateUrl: './working-plan-chart-container.component.html',
+  styleUrls: ['./working-plan-chart-container.component.scss'],
   providers: [
     WorkpackageDatabase,
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ]
 })
-export class WorkpackageComponent {
+export class WorkingPlanChartContainerComponent implements OnInit {
+  @Input() workpackages: Observable<Workpackage[]>;
+
   dateFormat = 'YYYY-MM-DD';
   dateMonthFormat = 'YYYY-MM';
   dateYearFormat = 'YYYY';
@@ -62,14 +68,14 @@ export class WorkpackageComponent {
   ChartDateViewType = ChartDateViewType;
 
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
-  flatNodeMap: Map<ChartStepFlatNode, WorkpackageStep> = new Map<ChartStepFlatNode, WorkpackageStep>();
+  flatNodeMap: Map<WorkpacakgeFlatNode, WorkpackageTreeObject> = new Map<WorkpacakgeFlatNode, WorkpackageTreeObject>();
 
   /** Map from nested node to flattened node. This helps us to keep the same object for selection */
-  nestedNodeMap: Map<WorkpackageStep, ChartStepFlatNode> = new Map<WorkpackageStep, ChartStepFlatNode>();
+  nestedNodeMap: Map<WorkpackageTreeObject, WorkpacakgeFlatNode> = new Map<WorkpackageTreeObject, WorkpacakgeFlatNode>();
 
-  treeControl: FlatTreeControl<ChartStepFlatNode>;
-  treeFlattener: MatTreeFlattener<WorkpackageStep, ChartStepFlatNode>;
-  dataSource: MatTreeFlatDataSource<WorkpackageStep, ChartStepFlatNode>;
+  treeControl: FlatTreeControl<WorkpacakgeFlatNode>;
+  treeFlattener: MatTreeFlattener<WorkpackageTreeObject, WorkpacakgeFlatNode>;
+  dataSource: MatTreeFlatDataSource<WorkpackageTreeObject, WorkpacakgeFlatNode>;
 
   chartData;
 
@@ -79,14 +85,16 @@ export class WorkpackageComponent {
     protected cdr: ChangeDetectorRef,
     private database: WorkpackageDatabase,
     protected modalService: NgbModal,
-    private workpackageService: WorkpackageService
+    private workingPlanService: WorkingPlanService
   ) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
       this._isExpandable, this._getChildren);
-    this.treeControl = new FlatTreeControl<ChartStepFlatNode>(this._getLevel, this._isExpandable);
+    this.treeControl = new FlatTreeControl<WorkpacakgeFlatNode>(this._getLevel, this._isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  }
 
-    database.dataChange.subscribe((tree: WorkpackageStep[]) => {
+  ngOnInit(): void {
+    this.workpackages.subscribe((tree: Workpackage[]) => {
       if (tree) {
         this.chartData = tree;
         const steps = [];
@@ -112,8 +120,8 @@ export class WorkpackageComponent {
   }
 
   /** utils of building tree */
-  transformer = (node: WorkpackageStep, level: number) => {
-    const flatNode = new ChartStepFlatNode(
+  transformer = (node: Workpackage, level: number) => {
+    const flatNode = new WorkpacakgeFlatNode(
       !!node.steps.length,
       level,
       node.name,
@@ -130,13 +138,13 @@ export class WorkpackageComponent {
     return flatNode;
   };
 
-  private _getLevel = (node: ChartStepFlatNode) => node.level;
+  private _getLevel = (node: WorkpacakgeFlatNode) => node.level;
 
-  private _isExpandable = (node: ChartStepFlatNode) => node.expandable;
+  private _isExpandable = (node: WorkpacakgeFlatNode) => node.expandable;
 
-  private _getChildren = (node: WorkpackageStep): Observable<WorkpackageStep[]> => observableOf(node.steps);
+  private _getChildren = (node: Workpackage): Observable<WorkpackageStep[]> => observableOf(node.steps);
 
-  hasChild = (_: number, _nodeData: ChartStepFlatNode) => _nodeData.expandable;
+  hasChild = (_: number, _nodeData: WorkpacakgeFlatNode) => _nodeData.expandable;
 
   /** end of utils of building tree */
 
@@ -146,7 +154,7 @@ export class WorkpackageComponent {
     this.database.addFlatStep();
   }
 
-  createTask() {
+  createWorkpackageStep() {
     const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg' });
 
     modalRef.result.then((result) => {
@@ -154,11 +162,10 @@ export class WorkpackageComponent {
         this.cdr.detectChanges();
       }
     }, () => null);
-    modalRef.componentInstance.formConfig = this.workpackageService.getWorkpackageFormConfig();
+    modalRef.componentInstance.formConfig = this.workingPlanService.getWorkpackageFormConfig();
     modalRef.componentInstance.processing = observableOf(false);
     modalRef.componentInstance.excludeListId = [];
-    modalRef.componentInstance.authorityName = 'impactpathway_step_type_2_task_type';
-    modalRef.componentInstance.searchConfiguration = 'impactpathway_step_type_2_task_type';
+    modalRef.componentInstance.hasSearch = false;
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       console.log(item)
     });
@@ -168,22 +175,22 @@ export class WorkpackageComponent {
 
   }
 
-  updateStepName(node: ChartStepFlatNode, name: string) {
+  updateStepName(node: WorkpacakgeFlatNode, name: string) {
     const nestedNode = this.flatNodeMap.get(node);
     this.database.updateStepName(nestedNode, name);
   }
 
-  updateStepResponsible(node: ChartStepFlatNode, responsible: string) {
+  updateStepResponsible(node: WorkpacakgeFlatNode, responsible: string) {
     const nestedNode = this.flatNodeMap.get(node);
     this.database.updateStepResponsible(nestedNode, responsible);
   }
 
-  addChildStep(node: ChartStepFlatNode) {
-    const nestedNode = this.flatNodeMap.get(node);
+  addChildStep(node: WorkpacakgeFlatNode) {
+    const nestedNode: Workpackage = this.flatNodeMap.get(node) as Workpackage;
     this.database.addChildStep(nestedNode);
   }
 
-  deleteStep(node: ChartStepFlatNode) {
+  deleteStep(node: WorkpacakgeFlatNode) {
     // if root, ignore
     if (this.treeControl.getLevel(node) < 1) {
       const parentNode = this.flatNodeMap.get(node);
@@ -191,13 +198,13 @@ export class WorkpackageComponent {
     } else {
 
       const parentFlatNode = this.getParentStep(node);
-      const parentNode = this.flatNodeMap.get(parentFlatNode);
-      const childNode = this.flatNodeMap.get(node);
+      const parentNode = this.flatNodeMap.get(parentFlatNode) as Workpackage;
+      const childNode = this.flatNodeMap.get(node) as WorkpackageStep;
       this.database.deleteStep(parentNode, childNode);
     }
   }
 
-  getParentStep(node: ChartStepFlatNode) {
+  getParentStep(node: WorkpacakgeFlatNode) {
     const { treeControl } = this;
     const currentLevel = treeControl.getLevel(node);
     // if root, ignore
@@ -214,17 +221,17 @@ export class WorkpackageComponent {
     }
   }
 
-  toggleExpanded(node: ChartStepFlatNode) {
+  toggleExpanded(node: WorkpacakgeFlatNode) {
     const nestedNode = this.flatNodeMap.get(node);
     this.database.toggleExpaned(nestedNode);
   }
 
-  updateProgress(node: ChartStepFlatNode, progress: number) {
+  updateProgress(node: WorkpacakgeFlatNode, progress: number) {
     const nestedNode = this.flatNodeMap.get(node);
     node.progressDates = this.database.updateProgress(nestedNode, progress);
   }
 
-  updateDateRange(node: ChartStepFlatNode) {
+  updateDateRange(node: WorkpacakgeFlatNode) {
     const startMoment = this.moment(node.dates.start.full); // create start moment
     node.dates.start.full = startMoment.format(this.dateFormat); // convert moment to string
     node.dates.start.month = startMoment.format(this.dateMonthFormat); // convert moment to string
@@ -261,7 +268,7 @@ export class WorkpackageComponent {
     this.datesMonth = [];
     this.datesYear = [];
 
-    this.dataSource.data.forEach((step: WorkpackageStep) => {
+    this.dataSource.data.forEach((step: Workpackage) => {
       const start = this.moment(step.dates.start.full);
       const end = this.moment(step.dates.end.full);
       // Moment range sometimes does not include all the month, so use the end of the month to get the correct range
@@ -311,11 +318,11 @@ export class WorkpackageComponent {
     }
   }
 
-  isDateInsidePogressRange(date: string, node: WorkpackageStep): boolean {
+  isDateInsidePogressRange(date: string, node: Workpackage): boolean {
     return (node.progressDates.indexOf(date) > -1)
   }
 
-  isDateInsideRange(date: string, node: WorkpackageStep): boolean {
+  isDateInsideRange(date: string, node: Workpackage): boolean {
     return date >= node.dates.start.full && date <= node.dates.end.full
   }
 
@@ -329,18 +336,19 @@ export class WorkpackageComponent {
       .map((entry: number) => entry.toString().padStart(2, '0'));
   }
 
-  onTaskTypeSelection($event: MatSelectChange, date: string, node: ChartStepFlatNode) {
+  onTaskTypeSelection($event: MatSelectChange, date: string, node: WorkpacakgeFlatNode) {
     const nestedNode = this.flatNodeMap.get(node);
     node.taskTypeListValues = this.database.updateStepTaskListValues(nestedNode, date, $event.value);
     node.taskTypeListIndexes = this.database.updateStepTaskListIndexes(nestedNode, date, $event.value);
   }
 
-  getTaskIndex(date: string, node: WorkpackageStep) {
+  getTaskIndex(date: string, node: Workpackage) {
     return node.taskTypeListIndexes.indexOf(date);
   }
 
-  getTaskValues(date: string, node: WorkpackageStep) {
+  getTaskValues(date: string, node: Workpackage) {
     const index = node.taskTypeListIndexes.indexOf(date);
     return (index > -1) ? node.taskTypeListValues[index] : [];
   }
+
 }
