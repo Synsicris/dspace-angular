@@ -20,7 +20,9 @@
       <ng-template ngbTabContent>
         <div  class="mt-3">
           <ds-search-simple-item [authorityName]="authorityName"
+                                 [processing]="processing"
                                  [excludeListId]="excludeListId"
+                                 [excludeFilterName]="excludeFilterName"
                                  [searchConfiguration]="searchConfiguration"
                                  (addItems)="addItems.emit($event)"></ds-search-simple-item>
         </div>

@@ -56,6 +56,7 @@ import { ImpactPathwayTask } from './models/impact-pathway-task.model';
 import { StoreActionTypes } from '../../store.actions';
 import { ImpactPathwayState } from './impact-pathway.reducer';
 import { ImpactPathwayLinksService } from './impact-pathway-links.service';
+import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -176,9 +177,11 @@ export class ImpactPathwayEffects {
   @Effect() addTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK),
     concatMap((action: AddImpactPathwayTaskAction) => {
-      return this.impactPathwayService.linkTaskToParent(
+      return this.itemAuthorityRelationService.linkItemToParent(
         action.payload.stepId,
-        action.payload.taskId).pipe(
+        action.payload.taskId,
+        'impactpathway.relation.parent',
+        'impactpathway.relation.task').pipe(
         map((taskItem: Item) => {
           return this.impactPathwayService.initImpactPathwayTask(taskItem, action.payload.stepId);
         }),
@@ -252,9 +255,11 @@ export class ImpactPathwayEffects {
   @Effect() addSubTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK),
     concatMap((action: AddImpactPathwaySubTaskAction) => {
-      return this.impactPathwayService.linkTaskToParent(
+      return this.itemAuthorityRelationService.linkItemToParent(
         action.payload.parentTaskId,
-        action.payload.taskId).pipe(
+        action.payload.taskId,
+        'impactpathway.relation.parent',
+        'impactpathway.relation.task').pipe(
         map((taskItem: Item) => {
           return this.impactPathwayService.initImpactPathwayTask(taskItem, action.payload.parentTaskId);
         }),
@@ -292,9 +297,11 @@ export class ImpactPathwayEffects {
   @Effect() removeTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK),
     switchMap((action: RemoveImpactPathwayTaskAction) => {
-      return this.impactPathwayService.unlinkTaskFromParent(
+      return this.itemAuthorityRelationService.unlinkItemFromParent(
         action.payload.parentId,
-        action.payload.taskId).pipe(
+        action.payload.taskId,
+        'impactpathway.relation.parent',
+        'impactpathway.relation.task').pipe(
         map(() => new RemoveImpactPathwayTaskSuccessAction(
           action.payload.impactPathwayId,
           action.payload.parentId,
@@ -311,9 +318,11 @@ export class ImpactPathwayEffects {
   @Effect() removeSubTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUB_TASK),
     switchMap((action: RemoveImpactPathwaySubTaskAction) => {
-      return this.impactPathwayService.unlinkTaskFromParent(
+      return this.itemAuthorityRelationService.unlinkItemFromParent(
         action.payload.parentTaskId,
-        action.payload.taskId).pipe(
+        action.payload.taskId,
+        'impactpathway.relation.parent',
+        'impactpathway.relation.task').pipe(
         map(() => new RemoveImpactPathwaySubTaskSuccessAction(
           action.payload.impactPathwayId,
           action.payload.stepId,
@@ -503,6 +512,7 @@ export class ImpactPathwayEffects {
     private actions$: Actions,
     private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
+    private itemAuthorityRelationService: ItemAuthorityRelationService,
     private notificationsService: NotificationsService,
     private store$: Store<any>,
     private translate: TranslateService

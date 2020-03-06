@@ -14,6 +14,7 @@ export class CreateSimpleItemModalComponent {
 
   @Input() authorityName: string;
   @Input() excludeListId: string[];
+  @Input() excludeFilterName: string;
   @Input() formConfig: Observable<SubmissionFormModel>;
   @Input() processing: Observable<boolean>;
   @Input() searchConfiguration: string;

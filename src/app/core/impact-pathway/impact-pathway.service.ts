@@ -12,7 +12,6 @@ import {
 import { catchError, concatMap, delay, distinctUntilChanged, flatMap, map, reduce, take, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { findIndex } from 'lodash';
 
 import { ImpactPathway } from './models/impact-pathway.model';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
@@ -63,6 +62,7 @@ import {
 } from './impact-pathway.actions';
 import { ErrorResponse } from '../cache/response.models';
 import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
+import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
 
 @Injectable()
 export class ImpactPathwayService {
@@ -76,6 +76,7 @@ export class ImpactPathwayService {
     private itemService: ItemDataService,
     private operationsBuilder: JsonPatchOperationsBuilder,
     private itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
+    private itemAuthorityRelationService: ItemAuthorityRelationService,
     private submissionJsonPatchOperationsService: SubmissionJsonPatchOperationsService,
     private rdbService: RemoteDataBuildService,
     private router: Router,
@@ -564,8 +565,16 @@ export class ImpactPathwayService {
   }
 
   moveSubTask(previousParentTaskId: string, newParentTaskId: string, taskId: string): Observable<Item> {
-    return this.unlinkTaskFromParent(previousParentTaskId, taskId).pipe(
-      flatMap(() => this.linkTaskToParent(newParentTaskId, taskId))
+    return this.itemAuthorityRelationService.unlinkItemFromParent(
+      previousParentTaskId,
+      taskId,
+      'impactpathway.relation.parent',
+      'impactpathway.relation.task').pipe(
+      flatMap(() => this.itemAuthorityRelationService.linkItemToParent(
+        newParentTaskId,
+        taskId,
+        'impactpathway.relation.parent',
+        'impactpathway.relation.task'))
     )
   }
 
@@ -614,36 +623,6 @@ export class ImpactPathwayService {
     return new ImpactPathwayStep(parentId, stepItem.id, type, stepItem.name, tasks);
   }
 
-  linkTaskToParent(parentId: string, taskId: string): Observable<Item> {
-    return this.itemService.findById(parentId).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      tap((stepItem: Item) => this.addRelationPatch(stepItem, taskId, 'impactpathway.relation.task')),
-      delay(100),
-      flatMap((stepItem: Item) => this.executeItemPatch(stepItem.id, 'metadata').pipe(
-        flatMap(() => this.itemService.findById(taskId)),
-        getFirstSucceededRemoteDataPayload(),
-        tap((taskItem: Item) => this.addRelationPatch(taskItem, parentId, 'impactpathway.relation.parent')),
-        delay(100),
-        flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
-      ))
-    );
-  }
-
-  unlinkTaskFromParent(parentId: string, taskId: string): Observable<Item> {
-    return this.itemService.findById(parentId).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      tap((stepItem: Item) => this.removeRelationPatch(stepItem, taskId, 'impactpathway.relation.task')),
-      delay(100),
-      flatMap((stepItem: Item) => this.executeItemPatch(stepItem.id, 'metadata').pipe(
-        flatMap(() => this.itemService.findById(taskId)),
-        getFirstSucceededRemoteDataPayload(),
-        tap((taskItem: Item) => this.removeRelationPatch(taskItem, parentId, 'impactpathway.relation.parent')),
-        delay(100),
-        flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
-      ))
-    )
-  }
-
   updateMetadataItem(itemId: string, metadataName: string, position: number, value: string): Observable<Item> {
     return this.itemService.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload(),
@@ -651,32 +630,6 @@ export class ImpactPathwayService {
       delay(100),
       flatMap(() => this.executeItemPatch(itemId, 'metadata'))
     )
-  }
-
-  addRelationPatch(targetItem: Item, relatedItemId: string, relation: string): void {
-    const stepTasks: MetadataValue[] = targetItem.findMetadataSortedByPlace(relation);
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
-    const taskToAdd = {
-      value: relatedItemId,
-      authority: relatedItemId,
-      place: stepTasks.length,
-      confidence: 600
-    };
-    const path = isEmpty(stepTasks) ? pathCombiner.getPath(relation)
-      : pathCombiner.getPath([relation, stepTasks.length.toString()]);
-    this.operationsBuilder.add(
-      path,
-      taskToAdd,
-      isEmpty(stepTasks),
-      true);
-  }
-
-  removeRelationPatch(targetItem: Item, relationIdToRemove: string, relation: string): void {
-    const relationMetadataList: MetadataValue[] = targetItem.findMetadataSortedByPlace(relation);
-    const relationPlace: number = findIndex(relationMetadataList, { value: relationIdToRemove });
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
-    const path = pathCombiner.getPath([relation, relationPlace.toString()]);
-    this.operationsBuilder.remove(path)
   }
 
   replaceMetadataPatch(metadataName: string, position: number, value: string): void {

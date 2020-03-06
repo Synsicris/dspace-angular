@@ -1,10 +1,9 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
-import { BehaviorSubject, from as observableFrom, Observable, of as observableOf, Subscription } from 'rxjs';
+import { BehaviorSubject, from as observableFrom, Observable, Subscription } from 'rxjs';
 import { concatMap, scan, take } from 'rxjs/operators';
 import { NgbActiveModal, NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { findIndex } from 'lodash';
-import { ImpactPathwayService } from '../../../core/impact-pathway/impact-pathway.service';
 import { hasValue, isNotEmpty } from '../../empty.util';
 import { PaginatedList } from '../../../core/data/paginated-list';
 import { SortDirection, SortOptions } from '../../../core/cache/models/sort-options.model';
@@ -31,6 +30,8 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
 
   @Input() authorityName: string;
   @Input() excludeListId: string[] = [];
+  @Input() excludeFilterName: string;
+  @Input() processing: Observable<boolean>;
   @Input() searchConfiguration: string;
 
   @Output() addItems: EventEmitter<SimpleItem[]> = new EventEmitter<SimpleItem[]>();
@@ -53,7 +54,6 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   private defaultSearchQuery = '';
   private entityTypeSearchFilter: SearchFilterConfig;
   private titleSearchFilter: SearchFilterConfig;
-  private processing$: Observable<boolean> = observableOf(false);
 
   private searching$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   private subs: Subscription[] = [];
@@ -61,7 +61,6 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   constructor(
     private activeModal: NgbActiveModal,
     private cdr: ChangeDetectorRef,
-    private service: ImpactPathwayService,
     private typeaheadConfig: NgbTypeaheadConfig,
     private dropdownConfig: NgbDropdownConfig,
     private searchTaskService: SearchSimpleItemService
@@ -75,7 +74,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.defaultSearchFilters = this.excludeListId.map((excludeId) => {
-      return new SearchFilter('f.parentStepId', [excludeId], 'not');
+      return new SearchFilter(`f.${this.excludeFilterName}`, [excludeId], 'not');
     });
     this.entityTypeSearchFilter = Object.assign(new SearchFilterConfig(), {
       name: 'entityTaskType',
@@ -110,14 +109,12 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     this.paginationOptions.pageSize = this.pageSize;
     this.sortOptions = new SortOptions('dc.title', this.sortDirection);
 
-    this.processing$ = this.service.isProcessing();
-
     this.search(this.paginationOptions, this.sortOptions);
 
   }
 
   isProcessing(): Observable<boolean> {
-    return this.processing$;
+    return this.processing;
   }
 
   isSearching(): Observable<boolean> {
@@ -243,7 +240,6 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     ).subscribe((resultPaginatedList: PaginatedList<Observable<SimpleItem>>) => {
       this.pageInfoState = resultPaginatedList.pageInfo;
       this.updateResultList(resultPaginatedList.page);
-      this.searching$.next(false);
     });
 
   }
@@ -267,6 +263,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     ).subscribe((itemList: SimpleItem[]) => {
       if (itemList.length === resultList.length) {
         this.availableTaskList$.next(itemList);
+        this.searching$.next(false);
       }
     }));
   }

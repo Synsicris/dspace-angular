@@ -60,6 +60,24 @@ export const isWorkingPlanProcessingSelector = createSelector(_getWorkingPlanSta
 );
 
 /**
+ * Returns workpackage id to remove.
+ * @function workpackageToRemoveSelector
+ * @return {boolean}
+ */
+export const workpackageToRemoveSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.workpackageToRemove
+);
+
+/**
+ * Returns chart date view.
+ * @function chartDateViewSelector
+ * @return {boolean}
+ */
+export const chartDateViewSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.chartDateView
+);
+
+/**
  * Returns the Workpackage object.
  * @function workpackageByIDSelector
  * @param {string} workpackageId

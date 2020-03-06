@@ -76,6 +76,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
     );
     modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
     modalRef.componentInstance.excludeListId = [this.impactPathwayTask.id];
+    modalRef.componentInstance.excludeFilterName = 'parentStepId';
     modalRef.componentInstance.authorityName = this.impactPathwayService.getTaskTypeAuthorityName(
       this.impactPathwayStep.type,
       true

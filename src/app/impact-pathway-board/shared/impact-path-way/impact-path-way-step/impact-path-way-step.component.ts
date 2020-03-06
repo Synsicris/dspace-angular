@@ -53,6 +53,7 @@ export class ImpactPathWayStepComponent {
       );
       modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
       modalRef.componentInstance.excludeListId = [this.impactPathwayStepId];
+      modalRef.componentInstance.excludeFilterName = 'parentStepId';
       modalRef.componentInstance.authorityName = this.impactPathwayService.getTaskTypeAuthorityName(
         impactPathwayStep.type,
         false

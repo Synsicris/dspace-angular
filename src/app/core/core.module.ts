@@ -143,6 +143,7 @@ import { ObjectiveService } from './impact-pathway/objective.service';
 import { ImpactPathwayLinksService } from './impact-pathway/impact-pathway-links.service';
 import { WorkingPlanService } from './working-plan/working-plan.service';
 import { WorkingPlanStateService } from './working-plan/working-plan-state.service';
+import { ItemAuthorityRelationService } from './shared/item-authority-relation.service';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -272,6 +273,7 @@ const PROVIDERS = [
   FilteredDiscoveryPageResponseParsingService,
   { provide: NativeWindowService, useFactory: NativeWindowFactory },
   AuthorityTreeviewService,
+  ItemAuthorityRelationService,
   ImpactPathwayService,
   ObjectiveService,
   ImpactPathwayLinksService,

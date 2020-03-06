@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -6,6 +6,7 @@ import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-it
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
 import { WorkingPlanService } from '../../../core/working-plan/working-plan.service';
 import { WorkingPlanStateService } from '../../../core/working-plan/working-plan-state.service';
+import { Observable } from 'rxjs/internal/Observable';
 
 export enum ChartDateViewType {
   day = 'day',
@@ -21,9 +22,9 @@ export enum ChartDateViewType {
   templateUrl: './working-plan-chart-toolbar.component.html',
   styleUrls: ['./working-plan-chart-toolbar.component.scss']
 })
-export class WorkingPlanChartToolbarComponent {
+export class WorkingPlanChartToolbarComponent implements OnInit {
 
-  chartDateView: ChartDateViewType = ChartDateViewType.day;
+  chartDateView: Observable<ChartDateViewType>;
   ChartDateViewType = ChartDateViewType;
 
   constructor(
@@ -32,6 +33,10 @@ export class WorkingPlanChartToolbarComponent {
     private workingPlanService: WorkingPlanService,
     private workingPlanStateService: WorkingPlanStateService,
   ) {
+  }
+
+  ngOnInit(): void {
+    this.chartDateView = this.workingPlanStateService.getChartDateViewSelector();
   }
 
   createWorkpackage() {
@@ -54,7 +59,7 @@ export class WorkingPlanChartToolbarComponent {
   }
 
   onChartDateViewChange(view: ChartDateViewType) {
-    this.chartDateView = view;
+    this.workingPlanStateService.dispatchChangeChartDateView(view);
   }
 
 }

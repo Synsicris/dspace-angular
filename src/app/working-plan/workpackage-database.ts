@@ -6,7 +6,11 @@ import { uniqueId } from 'lodash';
 import { extendMoment } from 'moment-range';
 import * as Moment from 'moment';
 
-import { Workpackage, WorkpackageStep } from '../core/working-plan/models/workpackage-step.model';
+import {
+  Workpackage,
+  WorkpackageStep,
+  WorkpackageTreeObject
+} from '../core/working-plan/models/workpackage-step.model';
 import { isNotEmpty } from '../shared/empty.util';
 
 const moment = extendMoment(Moment);
@@ -14,10 +18,10 @@ const moment = extendMoment(Moment);
 @Injectable()
 export class WorkpackageDatabase {
   moment = moment;
-  dataChange = new BehaviorSubject<Workpackage[]>(null);
+  dataChange = new BehaviorSubject<WorkpackageTreeObject[]>(null);
   storageKey = 'charts';
 
-  get data(): Workpackage[] {
+  get data(): WorkpackageTreeObject[] {
     return this.dataChange.value;
   }
 
@@ -58,10 +62,11 @@ export class WorkpackageDatabase {
     }
   }
 
-  buildTree(steps: any[], level: number): Workpackage[] {
-    return steps.map((step: Workpackage) => {
-      const newStep: Workpackage = {
-        id: name,
+  buildTree(steps: any[], level: number, parentId?: string): WorkpackageTreeObject[] {
+    return steps.map((step: WorkpackageTreeObject) => {
+      const newStep: WorkpackageTreeObject = {
+        id: step.id,
+        parentId: parentId,
         name: step.name,
         responsible: step.responsible,
         progress: step.progress,
@@ -70,16 +75,16 @@ export class WorkpackageDatabase {
         progressDates: this.setProgressDates(step),
         expanded: step.expanded !== undefined ? step.expanded : true,
         status: '',
-        steps: (step.steps.length) ? this.buildTree(step.steps, level + 1) : [],
+        steps: (step.steps.length) ? this.buildTree(step.steps, level + 1, step.id) : [],
         taskTypeListIndexes: Array.from(step.taskTypeListIndexes),
         taskTypeListValues: Array.from(step.taskTypeListValues)
-      };
+      } as WorkpackageTreeObject;
 
       return newStep;
     });
   }
 
-  buildStep(name: string): Workpackage {
+  buildStep(name: string): WorkpackageTreeObject {
     const start = moment().format('YYYY-MM-DD');
     const startMonth = moment().format('YYYY-MM');
     const startYear = moment().format('YYYY');
@@ -111,7 +116,7 @@ export class WorkpackageDatabase {
   }
 
   // update progress dates
-  setProgressDates(step: WorkpackageStep) {
+  setProgressDates(step: WorkpackageTreeObject) {
     const start = this.moment(step.dates.start.full);
     const end = this.moment(step.dates.end.full);
     const range = moment.range(start, end);
@@ -141,6 +146,7 @@ export class WorkpackageDatabase {
     parent.expanded = true; // set parent node expanded to show children
     const child: WorkpackageStep = {
       id: name,
+      parentId: parent.id,
       name: '',
       responsible: '',
       progress: 0,
@@ -167,7 +173,7 @@ export class WorkpackageDatabase {
   }
 
   // delete step
-  deleteStep(parent: Workpackage, child: WorkpackageStep) {
+  deleteStep(parent: WorkpackageTreeObject, child: WorkpackageStep) {
     const childIndex = parent.steps.indexOf(child);
     parent.steps.splice(childIndex, 1);
     this.dataChange.next(this.data);

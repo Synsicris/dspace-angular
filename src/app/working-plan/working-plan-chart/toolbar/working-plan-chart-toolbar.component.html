@@ -10,19 +10,19 @@
       <div
         class="btn btn-light"
         (click)="onChartDateViewChange(ChartDateViewType.day)"
-        [class.active]="chartDateView === ChartDateViewType.day">
+        [class.active]="(chartDateView | async) === ChartDateViewType.day">
         Day
       </div>
       <div
         class="btn btn-light"
         (click)="onChartDateViewChange(ChartDateViewType.month)"
-        [class.active]="chartDateView === ChartDateViewType.month">
+        [class.active]="(chartDateView | async) === ChartDateViewType.month">
         Month
       </div>
       <div
         class="btn btn-light"
         (click)="onChartDateViewChange(ChartDateViewType.year)"
-        [class.active]="chartDateView === ChartDateViewType.year">
+        [class.active]="(chartDateView | async) === ChartDateViewType.year">
         Year
       </div>
     </div>

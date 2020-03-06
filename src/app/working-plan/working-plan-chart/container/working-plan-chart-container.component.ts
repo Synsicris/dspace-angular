@@ -19,6 +19,8 @@ import {
   WorkpackageTreeObject
 } from '../../../core/working-plan/models/workpackage-step.model';
 import { moment, WorkingPlanService } from '../../../core/working-plan/working-plan.service';
+import { WorkingPlanStateService } from '../../../core/working-plan/working-plan-state.service';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 export const MY_FORMATS = {
   parse: {
@@ -62,7 +64,7 @@ export class WorkingPlanChartContainerComponent implements OnInit {
   datesMonth: string[] = []; // all months in chart
   datesYear: string[] = []; // all years in chart
   today = moment().format(this.dateFormat);
-  chartDateView: ChartDateViewType = ChartDateViewType.day;
+  chartDateView: BehaviorSubject<ChartDateViewType> = new BehaviorSubject<ChartDateViewType>(null);
   chartStepTaskTypeList = ChartStepTaskTypeList;
 
   ChartDateViewType = ChartDateViewType;
@@ -84,8 +86,9 @@ export class WorkingPlanChartContainerComponent implements OnInit {
   constructor(
     protected cdr: ChangeDetectorRef,
     private database: WorkpackageDatabase,
-    protected modalService: NgbModal,
-    private workingPlanService: WorkingPlanService
+    private modalService: NgbModal,
+    private workingPlanService: WorkingPlanService,
+    private workingPlanStateService: WorkingPlanStateService
   ) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
       this._isExpandable, this._getChildren);
@@ -94,6 +97,9 @@ export class WorkingPlanChartContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.workingPlanStateService.getChartDateViewSelector()
+      .subscribe((view) => this.chartDateView.next(view));
+
     this.workpackages.subscribe((tree: Workpackage[]) => {
       if (tree) {
         this.chartData = tree;
@@ -122,7 +128,8 @@ export class WorkingPlanChartContainerComponent implements OnInit {
   /** utils of building tree */
   transformer = (node: Workpackage, level: number) => {
     const flatNode = new WorkpacakgeFlatNode(
-      !!node.steps.length,
+      node.id,
+      (node.steps && node.steps.length !== 0),
       level,
       node.name,
       node.responsible,
@@ -131,7 +138,9 @@ export class WorkingPlanChartContainerComponent implements OnInit {
       node.dates,
       node.expanded,
       node.taskTypeListIndexes,
-      node.taskTypeListValues
+      node.taskTypeListValues,
+      node.steps,
+      node.parentId
     );
     this.flatNodeMap.set(flatNode, node);
     this.nestedNodeMap.set(node, flatNode);
@@ -154,27 +163,6 @@ export class WorkingPlanChartContainerComponent implements OnInit {
     this.database.addFlatStep();
   }
 
-  createWorkpackageStep() {
-    const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg' });
-
-    modalRef.result.then((result) => {
-      if (result) {
-        this.cdr.detectChanges();
-      }
-    }, () => null);
-    modalRef.componentInstance.formConfig = this.workingPlanService.getWorkpackageFormConfig();
-    modalRef.componentInstance.processing = observableOf(false);
-    modalRef.componentInstance.excludeListId = [];
-    modalRef.componentInstance.hasSearch = false;
-    modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
-      console.log(item)
-    });
-    modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
-      console.log(items)
-    });
-
-  }
-
   updateStepName(node: WorkpacakgeFlatNode, name: string) {
     const nestedNode = this.flatNodeMap.get(node);
     this.database.updateStepName(nestedNode, name);
@@ -185,22 +173,54 @@ export class WorkingPlanChartContainerComponent implements OnInit {
     this.database.updateStepResponsible(nestedNode, responsible);
   }
 
+/*
   addChildStep(node: WorkpacakgeFlatNode) {
     const nestedNode: Workpackage = this.flatNodeMap.get(node) as Workpackage;
     this.database.addChildStep(nestedNode);
+  }
+*/
+
+  addChildStep(node: WorkpacakgeFlatNode) {
+    const nestedNode: Workpackage = this.flatNodeMap.get(node) as Workpackage;
+    const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg' });
+
+    modalRef.result.then((result) => {
+      if (result) {
+        this.cdr.detectChanges();
+      }
+    }, () => null);
+    modalRef.componentInstance.formConfig = this.workingPlanService.getWorkpackageStepFormConfig();
+    modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
+    modalRef.componentInstance.excludeListId = [nestedNode.id];
+    modalRef.componentInstance.excludeFilterName = 'parentWorkpackageId';
+    modalRef.componentInstance.authorityName = this.workingPlanService.getWorkpackageStepTypeAuthorityName();
+    modalRef.componentInstance.searchConfiguration = this.workingPlanService.getWorkpackageStepSearchConfigName();
+    modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
+      console.log(item);
+      this.workingPlanStateService.dispatchGenerateWorkpackageStep(node.id, item.type.value, item.metadata, modalRef)
+    });
+    modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
+      items.forEach((item) => {
+        this.workingPlanStateService.dispatchAddWorkpackageStep(
+          node.id,
+          item.id,
+          modalRef);
+      })
+    });
   }
 
   deleteStep(node: WorkpacakgeFlatNode) {
     // if root, ignore
     if (this.treeControl.getLevel(node) < 1) {
       const parentNode = this.flatNodeMap.get(node);
-      this.database.deleteFlatStep(parentNode);
+      this.workingPlanStateService.dispatchRemoveWorkpackage(parentNode.id);
+      // this.database.deleteFlatStep(parentNode);
     } else {
-
       const parentFlatNode = this.getParentStep(node);
       const parentNode = this.flatNodeMap.get(parentFlatNode) as Workpackage;
       const childNode = this.flatNodeMap.get(node) as WorkpackageStep;
-      this.database.deleteStep(parentNode, childNode);
+      this.workingPlanStateService.dispatchRemoveWorkpackageStep(parentNode.id, childNode.id);
+      // this.database.deleteStep(parentNode, childNode);
     }
   }
 
@@ -294,14 +314,10 @@ export class WorkingPlanChartContainerComponent implements OnInit {
     })
   }
 
-  onChartDateViewCahnge(view: ChartDateViewType) {
-    this.chartDateView = view;
-  }
-
   formatDate(date: string): string {
-    if (this.chartDateView === ChartDateViewType.day) {
+    if (this.chartDateView.value === ChartDateViewType.day) {
       return moment(date).format('DD MMM')
-    } else if (this.chartDateView === ChartDateViewType.month) {
+    } else if (this.chartDateView.value === ChartDateViewType.month) {
       return moment(date).format('MMM YYYY');
     } else {
       return moment(date).format('YYYY');
@@ -309,9 +325,9 @@ export class WorkingPlanChartContainerComponent implements OnInit {
   }
 
   isToday(date): boolean {
-    if (this.chartDateView === ChartDateViewType.day) {
+    if (this.chartDateView.value === ChartDateViewType.day) {
       return date === this.today
-    } else if (this.chartDateView === ChartDateViewType.month) {
+    } else if (this.chartDateView.value === ChartDateViewType.month) {
       return moment(date).format(this.dateMonthFormat) === moment(this.today).format(this.dateMonthFormat);
     } else {
       return moment(date).format(this.dateYearFormat) === moment(this.today).format(this.dateYearFormat);
@@ -351,4 +367,8 @@ export class WorkingPlanChartContainerComponent implements OnInit {
     return (index > -1) ? node.taskTypeListValues[index] : [];
   }
 
+  isProcessingWorkpackageRemove(node: WorkpacakgeFlatNode): Observable<boolean> {
+    const flatNode = this.flatNodeMap.get(node);
+    return this.workingPlanService.isProcessingWorkpackageRemove(flatNode.id);
+  }
 }
