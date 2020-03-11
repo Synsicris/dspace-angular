@@ -202,6 +202,7 @@ import { SearchSimpleItemLabelsComponent } from './create-simple-item-modal/sear
 import { SearchSimpleItemFilterBoxComponent } from './create-simple-item-modal/search-simple-item/search-header/filter-box/search-simple-item-filter-box.component';
 import { TaskColorDirective } from '../impact-pathway-board/shared/impact-path-way/impact-path-way-task/task.directive';
 import { SearchSimpleItemService } from './create-simple-item-modal/search-simple-item/search-simple-item.service';
+import { AuthorityTypeaheadComponent } from './authority-typeahead/authority-typeahead.component';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -382,7 +383,8 @@ const COMPONENTS = [
   SearchSimpleItemLabelsComponent,
   SearchSimpleItemBoxComponent,
   SearchSimpleItemFilterBoxComponent,
-  SimpleItemBoxComponent
+  SimpleItemBoxComponent,
+  AuthorityTypeaheadComponent
 ];
 
 const ENTRY_COMPONENTS = [
