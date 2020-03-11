@@ -1,17 +1,17 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { MAT_DATE_FORMATS, MatSelectChange } from '@angular/material';
 
-import { Observable, of as observableOf } from 'rxjs';
+import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
 import { ResizeEvent } from 'angular-resizable-element';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { findIndex } from 'lodash';
 
 import { WorkpackageDatabase } from '../../workpackage-database';
 import { range } from '../../../shared/array.util';
 import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
-import { ChartStepTaskTypeList } from '../../../core/working-plan/models/workpackage-step-task-type';
 import { WorkpacakgeFlatNode } from '../../../core/working-plan/models/workpackage-step-flat-node.model';
 import {
   Workpackage,
@@ -20,7 +20,10 @@ import {
 } from '../../../core/working-plan/models/workpackage-step.model';
 import { moment, WorkingPlanService } from '../../../core/working-plan/working-plan.service';
 import { WorkingPlanStateService } from '../../../core/working-plan/working-plan-state.service';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { AuthorityEntry } from '../../../core/integration/models/authority-entry.model';
+import { hasValue } from '../../../shared/empty.util';
+import { FormGroup } from '@angular/forms';
+import { AuthorityOptions } from '../../../core/integration/models/authority-options.model';
 
 export const MY_FORMATS = {
   parse: {
@@ -37,6 +40,7 @@ export const MY_FORMATS = {
 export enum ChartDateViewType {
   day = 'day',
   month = 'month',
+  quarter = 'quarter',
   year = 'year'
 }
 
@@ -52,7 +56,7 @@ export enum ChartDateViewType {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ]
 })
-export class WorkingPlanChartContainerComponent implements OnInit {
+export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   @Input() workpackages: Observable<Workpackage[]>;
 
   dateFormat = 'YYYY-MM-DD';
@@ -65,10 +69,8 @@ export class WorkingPlanChartContainerComponent implements OnInit {
   datesYear: string[] = []; // all years in chart
   today = moment().format(this.dateFormat);
   chartDateView: BehaviorSubject<ChartDateViewType> = new BehaviorSubject<ChartDateViewType>(null);
-  chartStepTaskTypeList = ChartStepTaskTypeList;
-
   ChartDateViewType = ChartDateViewType;
-
+  responsibleAuthorityOptions: AuthorityOptions;
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap: Map<WorkpacakgeFlatNode, WorkpackageTreeObject> = new Map<WorkpacakgeFlatNode, WorkpackageTreeObject>();
 
@@ -83,6 +85,9 @@ export class WorkingPlanChartContainerComponent implements OnInit {
 
   sidebarStyle = {};
 
+  private chartStatusTypeList$: BehaviorSubject<AuthorityEntry[]> = new BehaviorSubject<AuthorityEntry[]>([]);
+  private subs: Subscription[] = [];
+
   constructor(
     protected cdr: ChangeDetectorRef,
     private database: WorkpackageDatabase,
@@ -94,11 +99,21 @@ export class WorkingPlanChartContainerComponent implements OnInit {
       this._isExpandable, this._getChildren);
     this.treeControl = new FlatTreeControl<WorkpacakgeFlatNode>(this._getLevel, this._isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+    this.responsibleAuthorityOptions = new AuthorityOptions(
+      'WorkingplanOrgUnitAuthority',
+      'workingplan.responsible',
+      null,
+      true
+    );
   }
 
   ngOnInit(): void {
     this.workingPlanStateService.getChartDateViewSelector()
       .subscribe((view) => this.chartDateView.next(view));
+
+    this.subs.push(
+      this.workingPlanService.getWorkpackageStatusTypes()
+        .subscribe((statusList: AuthorityEntry[]) => this.chartStatusTypeList$.next(statusList)));
 
     this.workpackages.subscribe((tree: Workpackage[]) => {
       if (tree) {
@@ -133,12 +148,11 @@ export class WorkingPlanChartContainerComponent implements OnInit {
       level,
       node.name,
       node.responsible,
+      node.status,
       node.progress,
       node.progressDates,
       node.dates,
       node.expanded,
-      node.taskTypeListIndexes,
-      node.taskTypeListValues,
       node.steps,
       node.parentId
     );
@@ -158,27 +172,6 @@ export class WorkingPlanChartContainerComponent implements OnInit {
   /** end of utils of building tree */
 
   /** tree nodes manipulations */
-
-  createChart() {
-    this.database.addFlatStep();
-  }
-
-  updateStepName(node: WorkpacakgeFlatNode, name: string) {
-    const nestedNode = this.flatNodeMap.get(node);
-    this.database.updateStepName(nestedNode, name);
-  }
-
-  updateStepResponsible(node: WorkpacakgeFlatNode, responsible: string) {
-    const nestedNode = this.flatNodeMap.get(node);
-    this.database.updateStepResponsible(nestedNode, responsible);
-  }
-
-/*
-  addChildStep(node: WorkpacakgeFlatNode) {
-    const nestedNode: Workpackage = this.flatNodeMap.get(node) as Workpackage;
-    this.database.addChildStep(nestedNode);
-  }
-*/
 
   addChildStep(node: WorkpacakgeFlatNode) {
     const nestedNode: Workpackage = this.flatNodeMap.get(node) as Workpackage;
@@ -241,17 +234,18 @@ export class WorkingPlanChartContainerComponent implements OnInit {
     }
   }
 
+  getStatusTypeLabel(statusType: string) {
+    const index = findIndex(this.chartStatusTypeList$.value, (entry) => entry.value === statusType);
+    return (index !== -1) ? this.chartStatusTypeList$.value[index].display : statusType;
+  }
+
   toggleExpanded(node: WorkpacakgeFlatNode) {
     const nestedNode = this.flatNodeMap.get(node);
     this.database.toggleExpaned(nestedNode);
   }
 
-  updateProgress(node: WorkpacakgeFlatNode, progress: number) {
-    const nestedNode = this.flatNodeMap.get(node);
-    node.progressDates = this.database.updateProgress(nestedNode, progress);
-  }
-
   updateDateRange(node: WorkpacakgeFlatNode) {
+
     const startMoment = this.moment(node.dates.start.full); // create start moment
     node.dates.start.full = startMoment.format(this.dateFormat); // convert moment to string
     node.dates.start.month = startMoment.format(this.dateMonthFormat); // convert moment to string
@@ -263,19 +257,58 @@ export class WorkingPlanChartContainerComponent implements OnInit {
     node.dates.end.year = endMoment.format(this.dateYearFormat); // convert moment to string
 
     const nestedNode = this.flatNodeMap.get(node);
+    nestedNode.dates = node.dates;
+    console.log('date update ', nestedNode);
     /** rebuild calendar if the root is updated */
     if (node.level === 0) {
       this.buildCalendar();
     }
     node.progressDates = this.database.updateDateRange(nestedNode);
+    this.workingPlanService.updateWorkpackageMetadata(
+      nestedNode.id,
+      nestedNode,
+      ['dc.date.start', 'dc.date.end'],
+      [nestedNode.dates.start.full, nestedNode.dates.end.full]
+    );
+  }
+
+  updateStepName(node: WorkpacakgeFlatNode, name: string) {
+    const nestedNode = this.flatNodeMap.get(node);
+    nestedNode.name = name;
+    console.log('updateStepName ', node.name, nestedNode);
+    this.workingPlanService.updateWorkpackageMetadata(
+      nestedNode.id,
+      nestedNode,
+      ['dc.title'],
+      [name]
+    );
+  }
+
+  updateStepResponsible(node: WorkpacakgeFlatNode, responsible: string) {
+    console.log('updateStepResponsible ', node.responsible);
+    const nestedNode = this.flatNodeMap.get(node);
+    nestedNode.responsible = responsible;
+    this.workingPlanService.updateWorkpackageMetadata(
+      nestedNode.id,
+      nestedNode,
+      ['workingplan.responsible'],
+      [responsible]
+    );
+  }
+
+  updateStepStatus(node: WorkpacakgeFlatNode, $event: MatSelectChange,) {
+    const nestedNode = this.flatNodeMap.get(node);
+    nestedNode.status = $event.value;
+    console.log('updateStepStatus ', node.status, nestedNode);
+    this.workingPlanService.updateWorkpackageMetadata(
+      nestedNode.id,
+      nestedNode,
+      ['workingplan.step.status'],
+      [$event.value]
+    );
   }
 
   /** resize and validate */
-  validate(event: ResizeEvent): boolean {
-    const MIN_DIMENSIONS_PX = 200;
-    return !(event.rectangle.width &&
-      (event.rectangle.width < MIN_DIMENSIONS_PX));
-  }
 
   onResizeEnd(event: ResizeEvent): void {
     this.sidebarStyle = {
@@ -334,6 +367,8 @@ export class WorkingPlanChartContainerComponent implements OnInit {
     }
   }
 
+  /** other methods */
+
   isDateInsidePogressRange(date: string, node: Workpackage): boolean {
     return (node.progressDates.indexOf(date) > -1)
   }
@@ -352,23 +387,18 @@ export class WorkingPlanChartContainerComponent implements OnInit {
       .map((entry: number) => entry.toString().padStart(2, '0'));
   }
 
-  onTaskTypeSelection($event: MatSelectChange, date: string, node: WorkpacakgeFlatNode) {
-    const nestedNode = this.flatNodeMap.get(node);
-    node.taskTypeListValues = this.database.updateStepTaskListValues(nestedNode, date, $event.value);
-    node.taskTypeListIndexes = this.database.updateStepTaskListIndexes(nestedNode, date, $event.value);
-  }
-
-  getTaskIndex(date: string, node: Workpackage) {
-    return node.taskTypeListIndexes.indexOf(date);
-  }
-
-  getTaskValues(date: string, node: Workpackage) {
-    const index = node.taskTypeListIndexes.indexOf(date);
-    return (index > -1) ? node.taskTypeListValues[index] : [];
+  getStatusValues(): Observable<AuthorityEntry[]> {
+    return this.chartStatusTypeList$;
   }
 
   isProcessingWorkpackageRemove(node: WorkpacakgeFlatNode): Observable<boolean> {
     const flatNode = this.flatNodeMap.get(node);
     return this.workingPlanService.isProcessingWorkpackageRemove(flatNode.id);
+  }
+
+  ngOnDestroy(): void {
+    this.subs
+      .filter((subscription) => hasValue(subscription))
+      .forEach((subscription) => subscription.unsubscribe());
   }
 }

@@ -10,6 +10,7 @@ import { WorkingPlanChartComponent } from './working-plan-chart/working-plan-cha
 import { WorkingPlanChartToolbarComponent } from './working-plan-chart/toolbar/working-plan-chart-toolbar.component';
 import { WorkingPlanChartContainerComponent } from './working-plan-chart/container/working-plan-chart-container.component';
 import { MyDSpacePageModule } from '../+my-dspace-page/my-dspace-page.module';
+import { WorkpackageStatusDirective } from './working-plan-chart/container/workpackage-status.directive';
 
 const MODULES = [
   CommonModule,
@@ -26,7 +27,9 @@ const COMPONENTS = [
   WorkingPlanChartToolbarComponent
 ];
 
-const DIRECTIVES = [];
+const DIRECTIVES = [
+  WorkpackageStatusDirective
+];
 
 const ENTRY_COMPONENTS = [
 ];

@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { type } from '../../shared/ngrx/type';
 import { Workpackage, WorkpackageStep } from './models/workpackage-step.model';
-import { MetadataMap } from '../shared/metadata.models';
+import { MetadataMap, MetadataValue, MetadatumViewModel } from '../shared/metadata.models';
 import { Item } from '../shared/item.model';
 import { ChartDateViewType } from './working-plan.reducer';
 
@@ -40,6 +40,9 @@ export const WorkpackageActionTypes = {
   REMOVE_WORKPACKAGE_STEP_SUCCESS: type('dspace/core/workingplan/REMOVE_WORKPACKAGE_STEP_SUCCESS'),
   RETRIEVE_ALL_WORKPACKAGES: type('dspace/core/workingplan/RETRIEVE_ALL_WORKPACKAGES'),
   RETRIEVE_ALL_WORKPACKAGES_ERROR: type('dspace/core/workingplan/RETRIEVE_ALL_WORKPACKAGES_ERROR'),
+  UPDATE_WORKPACKAGE: type('dspace/core/workingplan/UPDATE_WORKPACKAGE'),
+  UPDATE_WORKPACKAGE_SUCCESS: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_SUCCESS'),
+  UPDATE_WORKPACKAGE_ERROR: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_ERROR'),
   NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE: type('dspace/core/workingplan/NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE'),
 };
 
@@ -519,6 +522,59 @@ export class RetrieveAllWorkpackagesErrorAction implements Action {
 }
 
 /**
+ * An ngrx action to update a workpackage's object
+ */
+export class UpdateWorkpackageAction implements Action {
+  type = WorkpackageActionTypes.UPDATE_WORKPACKAGE;
+  payload: {
+    workpackageId: string;
+    workpackage: Workpackage;
+    metadatumViewList: MetadatumViewModel[];
+  };
+
+  /**
+   * Create a new UpdateWorkpackageAction
+   *
+   * @param workpackageId
+   *    the workpackage's id
+   * @param workpackage
+   *    the workpackage's object
+   * @param metadatumViewList
+   *    the list of metadata to patch
+   */
+  constructor(workpackageId: string, workpackage: Workpackage, metadatumViewList: MetadatumViewModel[]) {
+    this.payload = { workpackageId, workpackage, metadatumViewList };
+  }
+}
+
+/**
+ * An ngrx action to retrieve all working plan's workpackages
+ */
+export class UpdateWorkpackageSuccessAction implements Action {
+  type = WorkpackageActionTypes.UPDATE_WORKPACKAGE_SUCCESS;
+}
+
+/**
+ * An ngrx action to retrieve all working plan's workpackages
+ */
+export class UpdateWorkpackageErrorAction implements Action {
+  type = WorkpackageActionTypes.UPDATE_WORKPACKAGE_ERROR;
+  payload: {
+    workpackageId: string;
+  };
+
+  /**
+   * Create a new UpdateWorkpackageErrorAction
+   *
+   * @param workpackageId
+   *    the workpackage's id
+   */
+  constructor(workpackageId: string) {
+    this.payload = { workpackageId };
+  }
+}
+
+/**
  * An ngrx action to normalize state object on rehydrate
  */
 export class NormalizeWorkpackageObjectsOnRehydrateAction implements Action {
@@ -556,4 +612,7 @@ export type WorkingPlanActions
   | RemoveWorkpackageStepErrorAction
   | RemoveWorkpackageStepSuccessAction
   | RetrieveAllWorkpackagesAction
-  | RetrieveAllWorkpackagesErrorAction;
+  | RetrieveAllWorkpackagesErrorAction
+  | UpdateWorkpackageAction
+  | UpdateWorkpackageErrorAction
+  | UpdateWorkpackageSuccessAction;

@@ -11,7 +11,6 @@ import {
   WorkpackageStep,
   WorkpackageTreeObject
 } from '../core/working-plan/models/workpackage-step.model';
-import { isNotEmpty } from '../shared/empty.util';
 
 const moment = extendMoment(Moment);
 
@@ -75,9 +74,7 @@ export class WorkpackageDatabase {
         progressDates: this.setProgressDates(step),
         expanded: step.expanded !== undefined ? step.expanded : true,
         status: '',
-        steps: (step.steps.length) ? this.buildTree(step.steps, level + 1, step.id) : [],
-        taskTypeListIndexes: Array.from(step.taskTypeListIndexes),
-        taskTypeListValues: Array.from(step.taskTypeListValues)
+        steps: (step.steps.length) ? this.buildTree(step.steps, level + 1, step.id) : []
       } as WorkpackageTreeObject;
 
       return newStep;
@@ -109,9 +106,7 @@ export class WorkpackageDatabase {
           year: endyear
         },
       },
-      steps: [],
-      taskTypeListIndexes: [],
-      taskTypeListValues: [],
+      steps: []
     } as Workpackage;
   }
 
@@ -129,6 +124,7 @@ export class WorkpackageDatabase {
   /** step manipulations */
   // update step name
   updateStepName(node: WorkpackageStep, name: string) {
+    console.log(name);
     node.name = name;
     // do not update tree, otherwise will interupt the typing
     this.saveStorage(this.data);
@@ -156,8 +152,6 @@ export class WorkpackageDatabase {
         end: Object.assign({}, parent.dates.end),
       },
       status: '',
-      taskTypeListIndexes: [],
-      taskTypeListValues: [],
       expanded: false
     };
     parent.steps.push(child);
@@ -207,40 +201,6 @@ export class WorkpackageDatabase {
     this.saveStorage(this.data);
     // instead of refreshing whole tree, return progress dates and update the step only
     return step.progressDates;
-  }
-
-  updateStepTaskListIndexes(step: WorkpackageStep, date: string, taskList: string[]): string[] {
-    const taskIndex = step.taskTypeListIndexes.lastIndexOf(date);
-    if (isNotEmpty(taskList)) {
-      if (taskIndex === -1) {
-        step.taskTypeListIndexes.push(date);
-      }
-    } else {
-      if (taskIndex !== -1) {
-        step.taskTypeListIndexes.splice(taskIndex, 1)
-      }
-    }
-    this.saveStorage(this.data);
-    // instead of refreshing whole tree, return progress dates and update the step only
-    return step.taskTypeListIndexes;
-  }
-
-  updateStepTaskListValues(step: WorkpackageStep, date: string, taskList: string[]): string[][] {
-    const taskIndex = step.taskTypeListIndexes.lastIndexOf(date);
-    if (isNotEmpty(taskList)) {
-      if (taskIndex === -1) {
-        step.taskTypeListValues.push(taskList);
-      } else {
-        step.taskTypeListValues[taskIndex] = taskList;
-      }
-    } else {
-      if (taskIndex !== -1) {
-        step.taskTypeListValues.splice(taskIndex, 1)
-      }
-    }
-    this.saveStorage(this.data);
-    // instead of refreshing whole tree, return progress dates and update the step only
-    return step.taskTypeListValues;
   }
 
 }

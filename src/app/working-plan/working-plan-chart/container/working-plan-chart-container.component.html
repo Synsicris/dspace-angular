@@ -8,7 +8,7 @@
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
           <button mat-icon-button disabled></button>
           <mat-form-field fxFlex floatLabel="never">
-            <input matInput placeholder="Step Name" name="node" class="text-truncate" [(ngModel)]="node.name" (ngModelChange)="updateStepName(node, $event)"
+            <input matInput placeholder="Step Name" name="node" class="text-truncate" [(ngModel)]="node.name" (change)="updateStepName(node, $event?.target?.value)"
               required>
           </mat-form-field>
           <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level===0">
@@ -29,7 +29,7 @@
             </mat-icon>
           </button>
           <mat-form-field fxFlex floatLabel="never">
-            <input matInput placeholder="Step Name" name="node" class="text-truncate" [(ngModel)]="node.name" (ngModelChange)="updateStepName(node, $event)"
+            <input matInput placeholder="Step Name" name="node" class="text-truncate" [(ngModel)]="node.name" (change)="updateStepName(node, $event?.target?.value)"
               required>
           </mat-form-field>
           <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level<3">
@@ -74,20 +74,31 @@
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarStyle"
                 mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event)">
         <mat-tree-node *matTreeNodeDef="let node">
-          <mat-form-field fxFlex floatLabel="never" class="pr-3 pl-3">
-            <input matInput placeholder="Responsible" name="responsible" [(ngModel)]="node.responsible" (ngModelChange)="updateStepResponsible(node, $event)"
-                   required>
-          </mat-form-field>
+<!--            <input matInput placeholder="Responsible" name="responsible" [(ngModel)]="node.responsible" (change)="updateStepResponsible(node, $event?.target?.value)"
+                   required>-->
+            <ds-authority-typeahead fxFlex floatLabel="never" class="pr-3 pl-3"
+                                    [fieldId]="'responsible'"
+                                    [fieldName]="'responsible'"
+                                    [authorityOptions]="responsibleAuthorityOptions"
+                                    [initValue]="node.responsible"
+                                    (change)="updateStepResponsible(node, $event.value)"></ds-authority-typeahead>
         </mat-tree-node>
       </mat-tree>
     </div>
-    <!-- progress -->
-    <div *ngIf="!disableProgress" class="sidenav progress-bars" fxLayout="column">
-      <div class="sidenav-header text-center">Progress</div>
-      <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
-        <mat-tree-node *matTreeNodeDef="let node" class="progress-row">
-          <mat-slider class="progress" [max]="100" [min]="0" [step]="5" [thumbLabel]="true" [tickInterval]="2"
-            [(ngModel)]="node.progress" (ngModelChange)="updateProgress(node, $event)"></mat-slider>
+    <!-- status -->
+    <div class="sidenav names" [ngStyle]="sidebarStyle" fxLayout="column">
+      <div class="sidenav-header text-center">Status</div>
+      <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarStyle"
+                mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event)">
+        <mat-tree-node *matTreeNodeDef="let node">
+          <mat-form-field fxFlex floatLabel="never" class="pr-3 pl-3">
+            <mat-select class="text-center" (selectionChange)="updateStepStatus(node, $event)" [(value)]="node.status">
+              <mat-select-trigger>
+                <span><i ipwWorkpackageStatusIcon [status]="node?.status"></i> {{getStatusTypeLabel(node?.status)}}</span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let statusType of (getStatusValues() | async)" [value]="statusType.value">{{statusType.display}}</mat-option>
+            </mat-select>
+          </mat-form-field>
         </mat-tree-node>
       </mat-tree>
     </div>
@@ -103,14 +114,6 @@
                [ngClass]="{today:isToday(date)}"
                [attr.date-filled]="isDateInsidePogressRange(date, node)"
                [attr.date-inside]="isDateInsideRange(date, node)">
-            <mat-form-field *ngIf="isDateInsideRange(date, node)">
-              <mat-select class="text-center" multiple (selectionChange)="onTaskTypeSelection($event, date, node)" [value]="getTaskValues(date, node)">
-                <mat-select-trigger>
-                  {{getTaskIndex(date, node) > -1 ? getTaskValues(date, node) : ''}}
-                </mat-select-trigger>
-                <mat-option *ngFor="let taskType of chartStepTaskTypeList" [value]="taskType.value">{{taskType.label}}</mat-option>
-              </mat-select>
-            </mat-form-field>
           </div>
         </mat-tree-node>
       </mat-tree>

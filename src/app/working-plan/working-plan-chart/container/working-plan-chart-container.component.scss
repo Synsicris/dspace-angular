@@ -143,3 +143,7 @@ $highlightBorderColor: #FF9800;
 .calendar-inner-cell[date-filled=false][date-inside=true] {
   background-color: $incompleteColor;
 }
+
+.status-remove {
+  color: yellow !important;
+}

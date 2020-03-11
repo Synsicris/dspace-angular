@@ -24,8 +24,6 @@ export interface WorkpackageTreeObject {
   progressDates: string[];
   dates: WorkpackageChartDates;
   status: string;
-  taskTypeListIndexes: string[];
-  taskTypeListValues: string[][];
   expanded: boolean; // status of expanded
   steps?: WorkpackageTreeObject[]
 }

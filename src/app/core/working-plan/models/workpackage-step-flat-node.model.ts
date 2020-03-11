@@ -10,6 +10,7 @@ export class WorkpacakgeFlatNode {
     public level: number,
     public name: string,
     public responsible: string,
+    public status: string,
     public progress: number,
     public progressDates: string[],
     public dates: {
@@ -17,8 +18,6 @@ export class WorkpacakgeFlatNode {
       end: WorkpackageChartDate;
     },
     public expanded: boolean,
-    public taskTypeListIndexes: string[],
-    public taskTypeListValues: string[][],
     public steps: any[] = [],
     public parentId: string = ''
   ) { }

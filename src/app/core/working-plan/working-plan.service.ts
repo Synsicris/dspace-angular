@@ -28,7 +28,7 @@ import { select, Store } from '@ngrx/store';
 import { AppState } from '../../app.reducer';
 import { workpackagesSelector } from './selectors';
 import { WorkpackageEntries } from './working-plan.reducer';
-import { MetadataMap, MetadataValue } from '../shared/metadata.models';
+import { MetadataMap, MetadataValue, MetadatumViewModel } from '../shared/metadata.models';
 import { SubmissionObject } from '../submission/models/submission-object.model';
 import { throwError as observableThrowError } from 'rxjs/internal/observable/throwError';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
@@ -45,6 +45,8 @@ import { AuthorityService } from '../integration/authority.service';
 import { Metadata } from '../shared/metadata.utils';
 import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
 import { WorkingPlanStateService } from './working-plan-state.service';
+import { PageInfo } from '../shared/page-info.model';
+import { dateToISOFormat, isNgbDateStruct } from '../../shared/date.util';
 
 export const moment = extendMoment(Moment);
 
@@ -113,6 +115,24 @@ export class WorkingPlanService {
     )
   }
 
+  getWorkpackageStatusTypes(): Observable<AuthorityEntry[]> {
+    const searchOptions: IntegrationSearchOptions = new IntegrationSearchOptions(
+      '',
+      'working_plan_workpackage_status_type',
+      'workingplan.step.status');
+    return this.authorityService.getEntriesByName(searchOptions).pipe(
+      catchError(() => {
+        const emptyResult = new IntegrationData(
+          new PageInfo(),
+          []
+        );
+        return observableOf(emptyResult);
+      }),
+      map((result: IntegrationData) => result.payload as AuthorityEntry[]),
+      take(1)
+    )
+  }
+
   getWorkpackageStepTypeAuthorityName(): string {
     return 'working_plan_workpackage_step_type';
   }
@@ -170,37 +190,37 @@ export class WorkingPlanService {
   public initWorkpackageFromItem(item: Item, steps: WorkpackageStep[] = []): Workpackage {
 
     const dates = this.initWorkpackageDatesFromItem(item);
+    const responsible = item.firstMetadataValue('workingplan.responsible');
+    const status = item.firstMetadataValue('workingplan.step.status');
 
     return {
       id: item.id,
       name: item.name,
-      responsible: '',
+      responsible: responsible,
       progress: 0,
       progressDates: [],
       dates: dates,
-      status: '',
+      status: status,
       steps: steps,
-      taskTypeListIndexes: [],
-      taskTypeListValues: [],
-      expanded: false
+      expanded: (steps && steps.length > 0)
     };
   }
 
   public initWorkpackageStepFromItem(item: Item, parentId: string): WorkpackageStep {
 
     const dates = this.initWorkpackageDatesFromItem(item);
+    const responsible = item.firstMetadataValue('workingplan.responsible');
+    const status = item.firstMetadataValue('workingplan.step.status');
 
     return {
       id: item.id,
       parentId: parentId,
       name: item.name,
-      responsible: '',
+      responsible: responsible,
       progress: 0,
       progressDates: [],
       dates: dates,
-      status: '',
-      taskTypeListIndexes: [],
-      taskTypeListValues: [],
+      status: status,
       expanded: false
     };
   }
@@ -325,5 +345,69 @@ export class WorkingPlanService {
     return this.workingPlanStateService.getWorkpackageToRemoveId().pipe(
       map((workpackageToRemoveId) => workpackageId === workpackageToRemoveId)
     )
+  }
+
+  createAddMetadataPatchOp(metadataName: string, value: any): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    this.operationsBuilder.add(pathCombiner.getPath(metadataName), value, true, true);
+  }
+
+  createReplaceMetadataPatchOp(metadataName: string, position: number, value: any): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    const path = pathCombiner.getPath([metadataName, position.toString()]);
+    this.operationsBuilder.replace(path, value, true);
+  }
+
+  updateMetadataItem(
+    itemId: string,
+    metadatumViewList: MetadatumViewModel[]
+  ): Observable<Item> {
+    return this.itemService.findById(itemId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      tap((item: Item) => {
+        metadatumViewList.forEach((metadatumView) => {
+          const value = {
+            language: metadatumView.language,
+            value: metadatumView.value,
+            place: 0,
+            authority: metadatumView.authority,
+            confidence: metadatumView.confidence
+          };
+          const storedValue = item.firstMetadataValue(metadatumView.key);
+          if (isEmpty(storedValue)) {
+            this.createAddMetadataPatchOp(metadatumView.key, value);
+          } else {
+            this.createReplaceMetadataPatchOp(metadatumView.key, metadatumView.place, value)
+          }
+        });
+      }),
+      delay(100),
+      flatMap(() => this.executeItemPatch(itemId, 'metadata'))
+    )
+  }
+
+  updateWorkpackageMetadata(
+    workpackageId: string,
+    workpackage: Workpackage,
+    metadataList: string[],
+    valueList: any[],
+    hasAuthority = false
+  ) {
+    const metadatumViewList = [];
+    metadataList.forEach((metadata, index) => {
+      const value = valueList[index];
+      metadatumViewList.push(
+        {
+          key: metadata,
+          language: '',
+          value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
+          place: 0,
+          authority: hasAuthority ? value : '',
+          confidence: hasAuthority ? 600 : -1
+        } as MetadatumViewModel
+      )
+    });
+
+    this.workingPlanStateService.dispatchUpdateWorkpackageAction(workpackageId, workpackage, metadatumViewList);
   }
 }

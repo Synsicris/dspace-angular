@@ -9,9 +9,9 @@ import {
   GenerateWorkpackageStepAction,
   RemoveWorkpackageAction,
   RemoveWorkpackageStepAction,
-  RetrieveAllWorkpackagesAction
+  RetrieveAllWorkpackagesAction, UpdateWorkpackageAction
 } from './working-plan.actions';
-import { MetadataMap } from '../shared/metadata.models';
+import { MetadataMap, MetadataValue, MetadatumViewModel } from '../shared/metadata.models';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/internal/Observable';
 import {
@@ -22,6 +22,7 @@ import {
 } from './selectors';
 import { map } from 'rxjs/operators';
 import { ChartDateViewType } from './working-plan.reducer';
+import { Workpackage } from './models/workpackage-step.model';
 
 @Injectable()
 export class WorkingPlanStateService {
@@ -61,6 +62,14 @@ export class WorkingPlanStateService {
 
   public dispatchRetrieveAllWorkpackages(): void {
     this.store.dispatch(new RetrieveAllWorkpackagesAction(null))
+  }
+
+  public dispatchUpdateWorkpackageAction(
+    workpackageId: string,
+    workpackage: Workpackage,
+    metadatumViewList: MetadatumViewModel[]
+  ) {
+    this.store.dispatch((new UpdateWorkpackageAction(workpackageId, workpackage, metadatumViewList)))
   }
 
   public getChartDateViewSelector() {

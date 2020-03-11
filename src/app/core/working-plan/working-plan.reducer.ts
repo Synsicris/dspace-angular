@@ -8,7 +8,7 @@ import {
   RemoveWorkpackageAction,
   RemoveWorkpackageStepAction,
   RemoveWorkpackageStepSuccessAction,
-  RemoveWorkpackageSuccessAction,
+  RemoveWorkpackageSuccessAction, UpdateWorkpackageAction,
   WorkingPlanActions,
   WorkpackageActionTypes
 } from './working-plan.actions';
@@ -127,6 +127,10 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
 
     case WorkpackageActionTypes.INIT_WORKINGPLAN_SUCCESS: {
       return initWorkpackages(state, action as InitWorkingplanSuccessAction);
+    }
+
+    case WorkpackageActionTypes.UPDATE_WORKPACKAGE: {
+      return updateWorkpackage(state, action as UpdateWorkpackageAction);
     }
 
     case WorkpackageActionTypes.NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE: {
@@ -250,6 +254,25 @@ function removeWorkpackageStep(state: WorkingPlanState, action: RemoveWorkpackag
       [action.payload.workpackageId]: newWorpackage
     }),
     workpackageToRemove: '',
+    processing: false
+  })
+}
+
+/**
+ * Update a workpackage object.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an UpdateWorkpackageAction
+ * @return WorkingPlanState
+ *    the new state.
+ */
+function updateWorkpackage(state: WorkingPlanState, action: UpdateWorkpackageAction): WorkingPlanState {
+  return Object.assign({}, state, {
+    workpackages: Object.assign({}, state.workpackages, {
+      [action.payload.workpackage.id]: action.payload.workpackage
+    }),
     processing: false
   })
 }
