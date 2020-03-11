@@ -26,6 +26,9 @@ import { PageInfo } from '../../../core/shared/page-info.model';
 import { Collection } from '../../../core/shared/collection.model';
 import { createTestComponent } from '../../../shared/testing/utils';
 import { CollectionDataService } from '../../../core/data/collection-data.service';
+import { getMockRequestService } from '../../../shared/mocks/mock-request.service';
+import { RequestService } from '../../../core/data/request.service';
+import { SubmissionDefinitionsConfigService } from '../../../core/config/submission-definitions-config.service';
 
 const subcommunities = [Object.assign(new Community(), {
   name: 'SubCommunity 1',
@@ -198,13 +201,16 @@ describe('SubmissionFormCollectionComponent Component', () => {
   const collectionId = '1234567890-1';
   const definition = 'traditional';
   const submissionRestResponse = mockSubmissionRestResponse;
+  const submissionDefinitionRestResponse = { payload: mockSubmissionRestResponse[0].submissionDefinition };
   const searchedCollection = 'Community 2-Collection 2';
+  const requestServce = getMockRequestService();
 
   const communityDataService: any = jasmine.createSpyObj('communityDataService', {
     findAll: jasmine.createSpy('findAll')
   });
 
   const collectionDataService: any = jasmine.createSpyObj('collectionDataService', {
+    findByHref: jasmine.createSpy('findByHref'),
     findById: jasmine.createSpy('findById'),
     getAuthorizedCollectionByCommunity: jasmine.createSpy('getAuthorizedCollectionByCommunity')
   });
@@ -215,6 +221,10 @@ describe('SubmissionFormCollectionComponent Component', () => {
   });
   const jsonPatchOpBuilder: any = jasmine.createSpyObj('jsonPatchOpBuilder', {
     replace: jasmine.createSpy('replace')
+  });
+
+  const submissionDefinitionsConfigService: any = jasmine.createSpyObj('submissionDefinitionsConfigService', {
+    getConfigByHref: jasmine.createSpy('getConfigByHref')
   });
 
   beforeEach(async(() => {
@@ -236,6 +246,8 @@ describe('SubmissionFormCollectionComponent Component', () => {
         { provide: CommunityDataService, useValue: communityDataService },
         { provide: JsonPatchOperationsBuilder, useValue: jsonPatchOpBuilder },
         { provide: Store, useValue: store },
+        { provide: RequestService, useValue: requestServce },
+        { provide: SubmissionDefinitionsConfigService, useValue: submissionDefinitionsConfigService },
         ChangeDetectorRef,
         SubmissionFormCollectionComponent
       ],
@@ -336,6 +348,8 @@ describe('SubmissionFormCollectionComponent Component', () => {
     it('should emit collectionChange event when selecting a new collection', () => {
       spyOn(comp.searchField, 'reset').and.callThrough();
       spyOn(comp.collectionChange, 'emit').and.callThrough();
+      collectionDataService.findByHref.and.returnValue(mockCommunity1Collection1Rd);
+      submissionDefinitionsConfigService.getConfigByHref.and.returnValue(observableOf(submissionDefinitionRestResponse));
       jsonPatchOpServiceStub.jsonPatchByResourceID.and.returnValue(observableOf(submissionRestResponse));
       comp.ngOnInit();
       comp.onSelect(mockCollectionList[1]);
@@ -446,6 +460,8 @@ class TestComponent {
   definitionId = 'traditional';
   submissionId = mockSubmissionId;
 
-  onCollectionChange = () => { return; }
+  onCollectionChange = () => {
+    return;
+  }
 
 }

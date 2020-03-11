@@ -37,6 +37,9 @@ import { SubmissionObject } from '../../../core/submission/models/submission-obj
 import { SubmissionJsonPatchOperationsService } from '../../../core/submission/submission-json-patch-operations.service';
 import { CollectionDataService } from '../../../core/data/collection-data.service';
 import { FindListOptions } from '../../../core/data/request.models';
+import { SubmissionDefinitionsModel } from '../../../core/config/models/config-submission-definitions.model';
+import { SubmissionDefinitionsConfigService } from '../../../core/config/submission-definitions-config.service';
+import { RequestService } from '../../../core/data/request.service';
 
 /**
  * An interface to represent a collection entry
@@ -156,14 +159,18 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
    * @param {CollectionDataService} collectionDataService
    * @param {JsonPatchOperationsBuilder} operationsBuilder
    * @param {SubmissionJsonPatchOperationsService} operationsService
+   * @param {RequestService} requestService
    * @param {SubmissionService} submissionService
+   * @param {SubmissionDefinitionsConfigService} submissionDefinitionsService
    */
   constructor(protected cdr: ChangeDetectorRef,
               private communityDataService: CommunityDataService,
               private collectionDataService: CollectionDataService,
               private operationsBuilder: JsonPatchOperationsBuilder,
               private operationsService: SubmissionJsonPatchOperationsService,
-              private submissionService: SubmissionService) {
+              private requestService: RequestService,
+              private submissionService: SubmissionService,
+              private submissionDefinitionsService: SubmissionDefinitionsConfigService) {
   }
 
   /**
@@ -280,11 +287,26 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
       this.submissionService.getSubmissionObjectLinkName(),
       this.submissionId,
       'sections',
-      'collection')
-      .subscribe((submissionObject: SubmissionObject[]) => {
+      'collection').pipe(
+      map((submissionObjects: SubmissionObject[]) => submissionObjects[0]),
+      flatMap((submissionObject: SubmissionObject) => {
+        const collection$ = this.collectionDataService.findByHref(submissionObject._links.collection.href);
+        const submissionDefinition$ = this.submissionDefinitionsService
+          .getConfigByHref(submissionObject._links.submissionDefinition.href + '?projection=full');
+        return combineLatest(collection$, submissionDefinition$).pipe(
+          map(([collection, submissionDefinition]) => {
+            this.requestService.removeByHrefSubstring(submissionObject._links.submissionDefinition.href);
+            return Object.assign(submissionObject, {
+              collection: collection.payload,
+              submissionDefinition: submissionDefinition.payload
+            })
+          })
+        )
+      })
+      ).subscribe((submissionObject: SubmissionObject) => {
         this.selectedCollectionId = event.collection.id;
         this.selectedCollectionName$ = observableOf(event.collection.name);
-        this.collectionChange.emit(submissionObject[0]);
+        this.collectionChange.emit(submissionObject);
         this.submissionService.changeSubmissionCollection(this.submissionId, event.collection.id);
         this.processingChange$.next(false);
         this.cdr.detectChanges();

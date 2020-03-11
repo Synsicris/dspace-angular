@@ -136,7 +136,6 @@ export class SubmissionResponseParsingService extends BaseResponseParsingService
 
     processedList.forEach((item) => {
 
-      item = Object.assign({}, item);
       // In case data is an Instance of WorkspaceItem normalize field value of all the section of type form
       if (item instanceof WorkspaceItem
         || item instanceof WorkflowItem) {
@@ -171,7 +170,9 @@ export class SubmissionResponseParsingService extends BaseResponseParsingService
                 precessedSection[sectionId] = sectiondata;
               }
             });
-          item = Object.assign({}, item, { sections: precessedSection });
+
+          item = Object.assign(((item instanceof WorkspaceItem) ? new WorkspaceItem() : new WorkflowItem()), item,
+            { sections: precessedSection });
         }
       }
       definition.push(item);
