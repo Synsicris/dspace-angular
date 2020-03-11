@@ -29,7 +29,7 @@ import {
   RemoveWorkpackageSuccessAction,
   RetrieveAllWorkpackagesErrorAction,
   UpdateWorkpackageAction,
-  UpdateWorkpackageErrorAction,
+  UpdateWorkpackageErrorAction, UpdateWorkpackageStepAction, UpdateWorkpackageStepErrorAction,
   UpdateWorkpackageSuccessAction,
   WorkpackageActionTypes
 } from './working-plan.actions';
@@ -282,6 +282,26 @@ export class WorkingPlanEffects {
         catchError((error: Error) => {
           console.error(error.message);
           return observableOf(new UpdateWorkpackageErrorAction(action.payload.workpackageId))
+        }));
+    }));
+
+  /**
+   * Update a workpackage into the state
+   */
+  @Effect() updateWorkpackageStep$ = this.actions$.pipe(
+    ofType(WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP),
+    switchMap((action: UpdateWorkpackageStepAction) => {
+      return this.workingPlanService.updateMetadataItem(
+        action.payload.workpackageStepId,
+        action.payload.metadatumViewList
+      ).pipe(
+        map((items: Item) => new UpdateWorkpackageSuccessAction()),
+        catchError((error: Error) => {
+          console.error(error.message);
+          return observableOf(new UpdateWorkpackageStepErrorAction(
+            action.payload.workpackageId,
+            action.payload.workpackageStepId
+          ))
         }));
     }));
 

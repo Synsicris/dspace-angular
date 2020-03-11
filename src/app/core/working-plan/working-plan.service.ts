@@ -410,4 +410,35 @@ export class WorkingPlanService {
 
     this.workingPlanStateService.dispatchUpdateWorkpackageAction(workpackageId, workpackage, metadatumViewList);
   }
+
+  updateWorkpackageStepMetadata(
+    workpackageId: string,
+    workpackageStepId: string,
+    workpackageStep: WorkpackageStep,
+    metadataList: string[],
+    valueList: any[],
+    hasAuthority = false
+  ) {
+    const metadatumViewList = [];
+    metadataList.forEach((metadata, index) => {
+      const value = valueList[index];
+      metadatumViewList.push(
+        {
+          key: metadata,
+          language: '',
+          value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
+          place: 0,
+          authority: hasAuthority ? value : '',
+          confidence: hasAuthority ? 600 : -1
+        } as MetadatumViewModel
+      )
+    });
+
+    this.workingPlanStateService.dispatchUpdateWorkpackageStepAction(
+      workpackageId,
+      workpackageStepId,
+      workpackageStep,
+      metadatumViewList
+    );
+  }
 }

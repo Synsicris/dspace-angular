@@ -264,9 +264,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this.buildCalendar();
     }
     node.progressDates = this.database.updateDateRange(nestedNode);
-    this.workingPlanService.updateWorkpackageMetadata(
-      nestedNode.id,
-      nestedNode,
+    this.updateField(
+      node,
       ['dc.date.start', 'dc.date.end'],
       [nestedNode.dates.start.full, nestedNode.dates.end.full]
     );
@@ -275,39 +274,45 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   updateStepName(node: WorkpacakgeFlatNode, name: string) {
     const nestedNode = this.flatNodeMap.get(node);
     nestedNode.name = name;
-    console.log('updateStepName ', node.name, nestedNode);
-    this.workingPlanService.updateWorkpackageMetadata(
-      nestedNode.id,
-      nestedNode,
-      ['dc.title'],
-      [name]
-    );
+    this.updateField(node, ['dc.title'], [name]);
   }
 
   updateStepResponsible(node: WorkpacakgeFlatNode, responsible: string) {
     console.log('updateStepResponsible ', node.responsible);
     const nestedNode = this.flatNodeMap.get(node);
     nestedNode.responsible = responsible;
-    this.workingPlanService.updateWorkpackageMetadata(
-      nestedNode.id,
-      nestedNode,
-      ['workingplan.responsible'],
-      [responsible]
-    );
+    this.updateField(node, ['workingplan.responsible'], [responsible]);
   }
 
   updateStepStatus(node: WorkpacakgeFlatNode, $event: MatSelectChange,) {
     const nestedNode = this.flatNodeMap.get(node);
     nestedNode.status = $event.value;
     console.log('updateStepStatus ', node.status, nestedNode);
-    this.workingPlanService.updateWorkpackageMetadata(
-      nestedNode.id,
-      nestedNode,
-      ['workingplan.step.status'],
-      [$event.value]
-    );
+    this.updateField(node, ['workingplan.step.status'], [$event.value]);
   }
 
+  private updateField(node: WorkpacakgeFlatNode, metadata: string[], value: any[]) {
+    if (this.treeControl.getLevel(node) < 1) {
+      const nestedNode = this.flatNodeMap.get(node);
+      this.workingPlanService.updateWorkpackageMetadata(
+        nestedNode.id,
+        nestedNode,
+        [...metadata],
+        [...value]
+      );
+    } else {
+      const parentFlatNode = this.getParentStep(node);
+      const parentNode = this.flatNodeMap.get(parentFlatNode) as Workpackage;
+      const childNode = this.flatNodeMap.get(node) as WorkpackageStep;
+      this.workingPlanService.updateWorkpackageStepMetadata(
+        parentNode.id,
+        childNode.id,
+        childNode,
+        [...metadata],
+        [...value]
+      );
+    }
+  }
   /** resize and validate */
 
   onResizeEnd(event: ResizeEvent): void {

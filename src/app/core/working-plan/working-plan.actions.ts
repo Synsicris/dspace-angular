@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { type } from '../../shared/ngrx/type';
 import { Workpackage, WorkpackageStep } from './models/workpackage-step.model';
-import { MetadataMap, MetadataValue, MetadatumViewModel } from '../shared/metadata.models';
+import { MetadataMap, MetadatumViewModel } from '../shared/metadata.models';
 import { Item } from '../shared/item.model';
 import { ChartDateViewType } from './working-plan.reducer';
 
@@ -43,6 +43,8 @@ export const WorkpackageActionTypes = {
   UPDATE_WORKPACKAGE: type('dspace/core/workingplan/UPDATE_WORKPACKAGE'),
   UPDATE_WORKPACKAGE_SUCCESS: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_SUCCESS'),
   UPDATE_WORKPACKAGE_ERROR: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_ERROR'),
+  UPDATE_WORKPACKAGE_STEP: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_STEP'),
+  UPDATE_WORKPACKAGE_STEP_ERROR: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_STEP_ERROR'),
   NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE: type('dspace/core/workingplan/NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE'),
 };
 
@@ -575,6 +577,58 @@ export class UpdateWorkpackageErrorAction implements Action {
 }
 
 /**
+ * An ngrx action to update a workpackage's object
+ */
+export class UpdateWorkpackageStepAction implements Action {
+  type = WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP;
+  payload: {
+    workpackageId: string;
+    workpackageStepId: string;
+    workpackageStep: WorkpackageStep;
+    metadatumViewList: MetadatumViewModel[];
+  };
+
+  /**
+   * Create a new UpdateWorkpackageStepAction
+   *
+   * @param workpackageId
+   *    the workpackage's id
+   * @param workpackageStepId
+   *    the workpackage step's id
+   * @param workpackageStep
+   *    the workpackage step's object
+   * @param metadatumViewList
+   *    the list of metadata to patch
+   */
+  constructor(workpackageId: string, workpackageStepId: string, workpackageStep: WorkpackageStep, metadatumViewList: MetadatumViewModel[]) {
+    this.payload = { workpackageId, workpackageStepId, workpackageStep, metadatumViewList };
+  }
+}
+
+/**
+ * An ngrx action to retrieve all working plan's workpackages
+ */
+export class UpdateWorkpackageStepErrorAction implements Action {
+  type = WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP_ERROR;
+  payload: {
+    workpackageId: string;
+    workpackageStepId: string;
+  };
+
+  /**
+   * Create a new UpdateWorkpackageErrorAction
+   *
+   * @param workpackageId
+   *    the workpackage's id
+   * @param workpackageStepId
+   *    the workpackage step's id
+   */
+  constructor(workpackageId: string, workpackageStepId: string) {
+    this.payload = { workpackageId, workpackageStepId };
+  }
+}
+
+/**
  * An ngrx action to normalize state object on rehydrate
  */
 export class NormalizeWorkpackageObjectsOnRehydrateAction implements Action {
@@ -615,4 +669,6 @@ export type WorkingPlanActions
   | RetrieveAllWorkpackagesErrorAction
   | UpdateWorkpackageAction
   | UpdateWorkpackageErrorAction
-  | UpdateWorkpackageSuccessAction;
+  | UpdateWorkpackageSuccessAction
+  | UpdateWorkpackageStepAction
+  | UpdateWorkpackageStepErrorAction;

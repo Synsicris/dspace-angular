@@ -1,4 +1,4 @@
-import { remove } from 'lodash';
+import { findIndex, remove } from 'lodash';
 
 import { Workpackage } from './models/workpackage-step.model';
 import {
@@ -8,7 +8,9 @@ import {
   RemoveWorkpackageAction,
   RemoveWorkpackageStepAction,
   RemoveWorkpackageStepSuccessAction,
-  RemoveWorkpackageSuccessAction, UpdateWorkpackageAction,
+  RemoveWorkpackageSuccessAction,
+  UpdateWorkpackageAction,
+  UpdateWorkpackageStepAction,
   WorkingPlanActions,
   WorkpackageActionTypes
 } from './working-plan.actions';
@@ -131,6 +133,10 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
 
     case WorkpackageActionTypes.UPDATE_WORKPACKAGE: {
       return updateWorkpackage(state, action as UpdateWorkpackageAction);
+    }
+
+    case WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP: {
+      return updateWorkpackageStep(state, action as UpdateWorkpackageStepAction);
     }
 
     case WorkpackageActionTypes.NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE: {
@@ -271,7 +277,32 @@ function removeWorkpackageStep(state: WorkingPlanState, action: RemoveWorkpackag
 function updateWorkpackage(state: WorkingPlanState, action: UpdateWorkpackageAction): WorkingPlanState {
   return Object.assign({}, state, {
     workpackages: Object.assign({}, state.workpackages, {
-      [action.payload.workpackage.id]: action.payload.workpackage
+      [action.payload.workpackageId]: action.payload.workpackage
+    }),
+    processing: false
+  })
+}
+
+/**
+ * Update a workpackage step object.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an UpdateWorkpackageAction
+ * @return WorkingPlanState
+ *    the new state.
+ */
+function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackageStepAction): WorkingPlanState {
+
+  const steps = [...state.workpackages[action.payload.workpackageId].steps];
+  const stepIndex = findIndex(steps, { id: action.payload.workpackageStepId });
+  steps[stepIndex] = action.payload.workpackageStep;
+  return Object.assign({}, state, {
+    workpackages: Object.assign({}, state.workpackages, {
+      [action.payload.workpackageId]: Object.assign({}, state.workpackages[action.payload.workpackageId], {
+        steps: steps
+      })
     }),
     processing: false
   })
