@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { from as observableFrom, Observable } from 'rxjs';
-import { catchError, concatMap, delay, flatMap, reduce, tap } from 'rxjs/operators';
+import { catchError, concatMap, delay, flatMap, map, reduce, tap } from 'rxjs/operators';
 import { findIndex } from 'lodash';
 
 import { Item } from './item.model';
@@ -100,18 +100,20 @@ export class ItemAuthorityRelationService {
     parentId: string,
     relationParentMetadataName: string,
     relationMetadataName: string
-  ): Observable<Item[]> {
+  ): Observable<Item> {
     return this.itemService.findById(parentId).pipe(
       getFirstSucceededRemoteDataPayload(),
-      flatMap((parentItem) => observableFrom(parentItem.findMetadataSortedByPlace(relationMetadataName))),
-      tap((relationMetadata: MetadataValue) => console.log(`retrieving ${relationMetadata.value}`)),
-      concatMap((relationMetadata: MetadataValue) => this.unlinkItemFromParent(
-        parentId,
-        relationMetadata.value,
-        relationParentMetadataName,
-        relationMetadataName
+      flatMap((parentItem) => observableFrom(parentItem.findMetadataSortedByPlace(relationMetadataName)).pipe(
+        tap((relationMetadata: MetadataValue) => console.log(`retrieving ${relationMetadata.value}`)),
+        concatMap((relationMetadata: MetadataValue) => this.unlinkItemFromParent(
+          parentId,
+          relationMetadata.value,
+          relationParentMetadataName,
+          relationMetadataName
+        )),
+        reduce((acc: any, value: any) => [...acc, ...value], []),
+        map(() => parentItem)
       )),
-      reduce((acc: any, value: any) => [...acc, ...value], [])
     );
   }
 

@@ -1,14 +1,13 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { MAT_DATE_FORMATS, MatSelectChange } from '@angular/material';
+import { MatSelectChange } from '@angular/material';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
 import { ResizeEvent } from 'angular-resizable-element';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { findIndex } from 'lodash';
 
-import { WorkpackageDatabase } from '../../workpackage-database';
 import { range } from '../../../shared/array.util';
 import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
@@ -22,8 +21,9 @@ import { moment, WorkingPlanService } from '../../../core/working-plan/working-p
 import { WorkingPlanStateService } from '../../../core/working-plan/working-plan-state.service';
 import { AuthorityEntry } from '../../../core/integration/models/authority-entry.model';
 import { hasValue } from '../../../shared/empty.util';
-import { FormGroup } from '@angular/forms';
 import { AuthorityOptions } from '../../../core/integration/models/authority-options.model';
+import { ChartDateViewType } from '../../../core/working-plan/working-plan.reducer';
+import { TranslateService } from '@ngx-translate/core';
 
 export const MY_FORMATS = {
   parse: {
@@ -37,24 +37,13 @@ export const MY_FORMATS = {
   },
 };
 
-export enum ChartDateViewType {
-  day = 'day',
-  month = 'month',
-  quarter = 'quarter',
-  year = 'year'
-}
-
 /**
  * @title Tree with nested nodes
  */
 @Component({
   selector: 'ipw-working-plan-chart-container',
   templateUrl: './working-plan-chart-container.component.html',
-  styleUrls: ['./working-plan-chart-container.component.scss'],
-  providers: [
-    WorkpackageDatabase,
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
-  ]
+  styleUrls: ['./working-plan-chart-container.component.scss']
 })
 export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   @Input() workpackages: Observable<Workpackage[]>;
@@ -66,6 +55,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   moment = moment;
   dates: string[] = []; // all days in chart
   datesMonth: string[] = []; // all months in chart
+  datesQuarter: string[] = []; // all quarters in chart
   datesYear: string[] = []; // all years in chart
   today = moment().format(this.dateFormat);
   chartDateView: BehaviorSubject<ChartDateViewType> = new BehaviorSubject<ChartDateViewType>(null);
@@ -90,8 +80,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   constructor(
     protected cdr: ChangeDetectorRef,
-    private database: WorkpackageDatabase,
     private modalService: NgbModal,
+    private translate: TranslateService,
     private workingPlanService: WorkingPlanService,
     private workingPlanStateService: WorkingPlanStateService
   ) {
@@ -122,11 +112,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
         tree.forEach((step) => {
           steps.push(step);
-          console.log(step);
         });
 
         this.dataSource.data = steps;
-        console.log(this.dataSource.data.length);
         this.buildCalendar();
         /** expand tree based on status */
         this.treeControl.dataNodes.forEach((node) => {
@@ -189,7 +177,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.authorityName = this.workingPlanService.getWorkpackageStepTypeAuthorityName();
     modalRef.componentInstance.searchConfiguration = this.workingPlanService.getWorkpackageStepSearchConfigName();
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
-      console.log(item);
       this.workingPlanStateService.dispatchGenerateWorkpackageStep(node.id, item.type.value, item.metadata, modalRef)
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
@@ -239,11 +226,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return (index !== -1) ? this.chartStatusTypeList$.value[index].display : statusType;
   }
 
-  toggleExpanded(node: WorkpacakgeFlatNode) {
-    const nestedNode = this.flatNodeMap.get(node);
-    this.database.toggleExpaned(nestedNode);
-  }
-
   updateDateRange(node: WorkpacakgeFlatNode) {
 
     const startMoment = this.moment(node.dates.start.full); // create start moment
@@ -258,12 +240,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
     const nestedNode = this.flatNodeMap.get(node);
     nestedNode.dates = node.dates;
-    console.log('date update ', nestedNode);
+
     /** rebuild calendar if the root is updated */
     if (node.level === 0) {
       this.buildCalendar();
     }
-    node.progressDates = this.database.updateDateRange(nestedNode);
+
     this.updateField(
       node,
       ['dc.date.start', 'dc.date.end'],
@@ -278,7 +260,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   updateStepResponsible(node: WorkpacakgeFlatNode, responsible: string) {
-    console.log('updateStepResponsible ', node.responsible);
     const nestedNode = this.flatNodeMap.get(node);
     nestedNode.responsible = responsible;
     this.updateField(node, ['workingplan.responsible'], [responsible]);
@@ -287,7 +268,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   updateStepStatus(node: WorkpacakgeFlatNode, $event: MatSelectChange,) {
     const nestedNode = this.flatNodeMap.get(node);
     nestedNode.status = $event.value;
-    console.log('updateStepStatus ', node.status, nestedNode);
     this.updateField(node, ['workingplan.step.status'], [$event.value]);
   }
 
@@ -313,11 +293,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       );
     }
   }
+
   /** resize and validate */
 
   onResizeEnd(event: ResizeEvent): void {
     this.sidebarStyle = {
-      width: `${event.rectangle.width}px`
+      width: event.rectangle.width + 'px'
     };
   }
 
@@ -334,8 +315,11 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       const dateRange = this.moment.range(start, end);
       const dateRangeForMonth = this.moment.range(start, endForMonth);
 
+      const dateRangeForQuarter = this.moment.range(start, end);
+
       const days = Array.from(dateRange.by('days'));
       const months = Array.from(dateRangeForMonth.by('months'));
+      const quarters = Array.from(dateRangeForQuarter.by('quarters'));
       const years = Array.from(dateRange.by('years'));
 
       this.dates = this.dates.concat(days
@@ -345,6 +329,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this.datesMonth = this.datesMonth.concat(months
         .map((d) => d.format(this.dateMonthFormat))
         .filter((d) => !this.datesMonth.includes(d))).sort();
+
+      this.datesQuarter = this.datesQuarter.concat(quarters
+        .map((d) => d.format(this.dateYearFormat) + '-' + d.quarter().toString())
+        .filter((d) => !this.datesQuarter.includes(d))).sort();
 
       this.datesYear = this.datesYear.concat(years
         .map((d) => d.format(this.dateYearFormat))
@@ -356,10 +344,32 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     if (this.chartDateView.value === ChartDateViewType.day) {
       return moment(date).format('DD MMM')
     } else if (this.chartDateView.value === ChartDateViewType.month) {
-      return moment(date).format('MMM YYYY');
+      return moment(date).format('MMM');
+    } else if (this.chartDateView.value === ChartDateViewType.quarter) {
+      const parts = date.split('-');
+      return this.getQuarterLabel(parts[1]);
     } else {
       return moment(date).format('YYYY');
     }
+  }
+
+  getQuarterLabel(quarter: string) {
+    let label;
+    switch (quarter) {
+      case '1':
+        label = 'working-plan.chart.toolbar.date-view.quarter.first';
+        break;
+      case '2':
+        label = 'working-plan.chart.toolbar.date-view.quarter.second';
+        break;
+      case '3':
+        label = 'working-plan.chart.toolbar.date-view.quarter.third';
+        break;
+      case '4':
+        label = 'working-plan.chart.toolbar.date-view.quarter.fourth';
+        break;
+    }
+    return this.translate.instant(label);
   }
 
   isToday(date): boolean {
@@ -367,6 +377,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       return date === this.today
     } else if (this.chartDateView.value === ChartDateViewType.month) {
       return moment(date).format(this.dateMonthFormat) === moment(this.today).format(this.dateMonthFormat);
+    } else if (this.chartDateView.value === ChartDateViewType.quarter) {
+      return moment(date).quarter() === moment(this.today).quarter();
     } else {
       return moment(date).format(this.dateYearFormat) === moment(this.today).format(this.dateYearFormat);
     }
@@ -387,9 +399,39 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       .map((entry: number) => entry.toString().padStart(2, '0'));
   }
 
-  getDaysInMonth(date: string) {
-    return range(1, moment(date, this.dateMonthFormat).daysInMonth())
+  getMonthInQuarter(date: string) {
+    const [year, quarter] = date.split('-');
+    const start: number = (1 + (3 * (parseInt(quarter, 10) - 1)));
+    const end: number = (3 * parseInt(quarter, 10));
+    return range(start, end)
       .map((entry: number) => entry.toString().padStart(2, '0'));
+
+  }
+
+  getQaurterYear(date: string) {
+    const [year, quarter] = date.split('-');
+    return year;
+  }
+
+  getQaurterInYear() {
+    return range(1, 4)
+      .map((entry: number) => entry.toString());
+  }
+
+  getDaysInMonth(date: string) {
+    return range(1, moment(date, this.dateMonthFormat).daysInMonth(), 1)
+      .map((entry: number) => entry.toString().padStart(2, '0'));
+  }
+
+  getDaysInQuarter(date: string) {
+    const days: string[] = [];
+    const [year, quarter] = date.split('-');
+    const months = this.getMonthInQuarter(date);
+    months.forEach((month) => {
+      days.push(...this.getDaysInMonth(`${year}-${month}`))
+    });
+
+    return days;
   }
 
   getStatusValues(): Observable<AuthorityEntry[]> {

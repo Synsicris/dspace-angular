@@ -47,7 +47,7 @@ $highlightBorderColor: #FF9800;
 
 /** names */
 
-.sidenav.names {
+.sidenav.chart-column {
   mat-tree.tree {
     padding-top: 14px; // align the lines of input and table
   }
@@ -89,7 +89,15 @@ $highlightBorderColor: #FF9800;
   height: unset;
 }
 
-/** calendar */
+/** responsible */
+
+.sidenav.responsible {
+  min-width: 20rem;
+}
+
+.responsible-field {
+  overflow: inherit !important;
+}
 
 // header
 ::ng-deep .calendar-header {
@@ -142,8 +150,4 @@ $highlightBorderColor: #FF9800;
 // incompleted inner cell
 .calendar-inner-cell[date-filled=false][date-inside=true] {
   background-color: $incompleteColor;
-}
-
-.status-remove {
-  color: yellow !important;
 }

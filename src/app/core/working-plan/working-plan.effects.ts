@@ -20,6 +20,7 @@ import {
   GenerateWorkpackageStepSuccessAction,
   GenerateWorkpackageSuccessAction,
   InitWorkingplanAction,
+  InitWorkingplanErrorAction,
   InitWorkingplanSuccessAction,
   RemoveWorkpackageAction,
   RemoveWorkpackageErrorAction,
@@ -29,7 +30,9 @@ import {
   RemoveWorkpackageSuccessAction,
   RetrieveAllWorkpackagesErrorAction,
   UpdateWorkpackageAction,
-  UpdateWorkpackageErrorAction, UpdateWorkpackageStepAction, UpdateWorkpackageStepErrorAction,
+  UpdateWorkpackageErrorAction,
+  UpdateWorkpackageStepAction,
+  UpdateWorkpackageStepErrorAction,
   UpdateWorkpackageSuccessAction,
   WorkpackageActionTypes
 } from './working-plan.actions';
@@ -37,11 +40,9 @@ import { WorkingPlanService } from './working-plan.service';
 import { Workpackage, WorkpackageStep } from './models/workpackage-step.model';
 import {
   AddImpactPathwaySubTaskAction,
-  GenerateImpactPathwayTaskAction,
-  InitImpactPathwayErrorAction
+  GenerateImpactPathwayTaskAction
 } from '../impact-pathway/impact-pathway.actions';
 import { Item } from '../shared/item.model';
-import { isNotEmpty } from '../../shared/empty.util';
 import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
 
 /**
@@ -210,6 +211,7 @@ export class WorkingPlanEffects {
         action.payload.workpackageId,
         'workingplan.relation.parent',
         'workingplan.relation.step').pipe(
+        map((item: Item) => this.workingPlanService.removeWorkpackageItem(item.id)),
         map(() => new RemoveWorkpackageSuccessAction(
           action.payload.workpackageId)),
         catchError((error: Error) => {
@@ -259,13 +261,11 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.INIT_WORKINGPLAN),
     switchMap((action: InitWorkingplanAction) => {
       return this.workingPlanService.initWorkingPlan(action.payload.items).pipe(
-        map((workpackages: Workpackage[]) => {
-          if (isNotEmpty(workpackages)) {
-            return new InitWorkingplanSuccessAction(workpackages)
-          } else {
-            return new InitImpactPathwayErrorAction()
-          }
-        }));
+        map((workpackages: Workpackage[]) => new InitWorkingplanSuccessAction(workpackages)),
+        catchError((error: Error) => {
+          console.error(error.message);
+          return observableOf(new InitWorkingplanErrorAction())
+        }))
     }));
 
   /**

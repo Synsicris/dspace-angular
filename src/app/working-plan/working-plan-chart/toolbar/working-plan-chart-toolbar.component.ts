@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -7,12 +7,8 @@ import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simp
 import { WorkingPlanService } from '../../../core/working-plan/working-plan.service';
 import { WorkingPlanStateService } from '../../../core/working-plan/working-plan-state.service';
 import { Observable } from 'rxjs/internal/Observable';
-
-export enum ChartDateViewType {
-  day = 'day',
-  month = 'month',
-  year = 'year'
-}
+import { ChartDateViewType } from '../../../core/working-plan/working-plan.reducer';
+import { Workpackage } from '../../../core/working-plan/models/workpackage-step.model';
 
 /**
  * @title Tree with nested nodes
@@ -23,6 +19,7 @@ export enum ChartDateViewType {
   styleUrls: ['./working-plan-chart-toolbar.component.scss']
 })
 export class WorkingPlanChartToolbarComponent implements OnInit {
+  @Input() workpackages: Observable<Workpackage[]>;
 
   chartDateView: Observable<ChartDateViewType>;
   ChartDateViewType = ChartDateViewType;
@@ -52,7 +49,6 @@ export class WorkingPlanChartToolbarComponent implements OnInit {
     modalRef.componentInstance.excludeListId = [];
     modalRef.componentInstance.hasSearch = false;
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
-      console.log(item);
       this.workingPlanStateService.dispatchGenerateWorkpackage(item.metadata, modalRef)
     });
 

@@ -2,28 +2,28 @@
   <mat-toolbar-row>
     <span>
       <button class="btn btn-primary" (click)="createWorkpackage()">
-        <i class="fas fa-plus"></i> Workpackage
+        <i class="fas fa-plus"></i> {{'working-plan.chart.toolbar.workpackage-btn' | translate}}
       </button>
     </span>
     <span fxFlex></span>
-    <div class="btn-group">
-      <div
-        class="btn btn-light"
-        (click)="onChartDateViewChange(ChartDateViewType.day)"
-        [class.active]="(chartDateView | async) === ChartDateViewType.day">
-        Day
-      </div>
+    <div *ngIf="(workpackages | async)?.length > 0" class="btn-group">
       <div
         class="btn btn-light"
         (click)="onChartDateViewChange(ChartDateViewType.month)"
         [class.active]="(chartDateView | async) === ChartDateViewType.month">
-        Month
+        {{'working-plan.chart.toolbar.date-view.month' | translate}}
+      </div>
+      <div
+        class="btn btn-light"
+        (click)="onChartDateViewChange(ChartDateViewType.quarter)"
+        [class.active]="(chartDateView | async) === ChartDateViewType.quarter">
+        {{'working-plan.chart.toolbar.date-view.quarter' | translate}}
       </div>
       <div
         class="btn btn-light"
         (click)="onChartDateViewChange(ChartDateViewType.year)"
         [class.active]="(chartDateView | async) === ChartDateViewType.year">
-        Year
+        {{'working-plan.chart.toolbar.date-view.year' | translate}}
       </div>
     </div>
   </mat-toolbar-row>

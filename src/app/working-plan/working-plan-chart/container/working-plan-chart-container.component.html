@@ -1,8 +1,8 @@
-<div class="container-fluid p-0" fxLayout="column">
+<div *ngIf="(workpackages | async)?.length > 0" class="container-fluid p-0" fxLayout="column">
   <div class="sidenav-container" fxFlex fxLayout="row">
-    <!-- names -->
-    <div class="sidenav names" [ngStyle]="sidebarStyle" fxLayout="column">
-      <div class="sidenav-header text-center">Steps</div>
+    <!-- steps -->
+    <div class="sidenav chart-column" [ngStyle]="sidebarStyle" fxLayout="column">
+      <div class="sidenav-header text-center">{{'working-plan.chart.column.steps' | translate}}</div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarStyle"
         mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event)">
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
@@ -12,7 +12,7 @@
               required>
           </mat-form-field>
           <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level===0">
-            <mat-icon>add</mat-icon>
+            <mat-icon>{{'working-plan.chart.button.add' | translate}}</mat-icon>
           </button>
           <button *ngIf="dataSource.data.length > 1"
                   class="btn btn-lg btn-link p-0 text-danger mr-1"
@@ -24,7 +24,7 @@
         </mat-tree-node>
         <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
           <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
-            <mat-icon class="mat-icon-rtl-mirror" (click)="toggleExpanded(node)">
+            <mat-icon class="mat-icon-rtl-mirror">
               {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>
           </button>
@@ -33,7 +33,7 @@
               required>
           </mat-form-field>
           <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level<3">
-            <mat-icon>add</mat-icon>
+            <mat-icon>{{'working-plan.chart.button.add' | translate}}</mat-icon>
           </button>
           <button *ngIf="dataSource.data.length > 1"
                   class="btn btn-lg btn-link p-0 text-danger mr-1"
@@ -47,7 +47,7 @@
     </div>
     <!-- date pickers -->
     <div class="sidenav date-pickers" fxLayout="column">
-      <div class="sidenav-header text-center">Dates</div>
+      <div class="sidenav-header text-center">{{'working-plan.chart.column.dates' | translate}}</div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
         <mat-tree-node *matTreeNodeDef="let node">
           <mat-form-field class="date-picker" floatLabel="never">
@@ -69,11 +69,11 @@
       </mat-tree>
     </div>
     <!-- responsibles -->
-    <div class="sidenav names" [ngStyle]="sidebarStyle" fxLayout="column">
-      <div class="sidenav-header text-center">Responsible</div>
+    <div class="sidenav chart-column responsible" [ngStyle]="sidebarStyle" fxLayout="column">
+      <div class="sidenav-header text-center">{{'working-plan.chart.column.responsible' | translate}}</div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarStyle"
                 mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event)">
-        <mat-tree-node *matTreeNodeDef="let node">
+        <mat-tree-node *matTreeNodeDef="let node" class="responsible-field">
 <!--            <input matInput placeholder="Responsible" name="responsible" [(ngModel)]="node.responsible" (change)="updateStepResponsible(node, $event?.target?.value)"
                    required>-->
             <ds-authority-typeahead fxFlex floatLabel="never" class="pr-3 pl-3"
@@ -86,8 +86,8 @@
       </mat-tree>
     </div>
     <!-- status -->
-    <div class="sidenav names" [ngStyle]="sidebarStyle" fxLayout="column">
-      <div class="sidenav-header text-center">Status</div>
+    <div class="sidenav chart-column" [ngStyle]="sidebarStyle" fxLayout="column">
+      <div class="sidenav-header text-center">{{'working-plan.chart.column.status' | translate}}</div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarStyle"
                 mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event)">
         <mat-tree-node *matTreeNodeDef="let node">
@@ -134,6 +134,26 @@
         </mat-tree-node>
       </mat-tree>
     </div>
+    <!-- calendar for quarters -->
+    <div *ngIf="chartDateView.value === ChartDateViewType.quarter" class="sidenav-content calendar w-100" fxLayout="column">
+      <div fxLayout="row">
+        <div *ngFor="let date of datesQuarter" class="calendar-cell w-100">{{formatDate(date)}}</div>
+      </div>
+      <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
+        <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100">
+          <div *ngFor="let quarter of datesQuarter; let i=index;" class="calendar-cell w-100 d-flex flex-wrap">
+            <div *ngFor="let month of getMonthInQuarter(quarter);"
+                 class="h-100 d-flex flex-fill flex-wrap"
+                 [attr.date-filled]="false">
+              <div *ngFor="let day of getDaysInMonth(getQaurterYear(quarter) + '-' + month);"
+                   class="calendar-inner-cell h-100 flex-fill"
+                   [attr.date-filled]="isDateInsidePogressRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"
+                   [attr.date-inside]="isDateInsideRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"></div>
+            </div>
+          </div>
+        </mat-tree-node>
+      </mat-tree>
+    </div>
     <!-- calendar for years -->
     <div *ngIf="chartDateView.value === ChartDateViewType.year" class="sidenav-content calendar w-100" fxLayout="column">
       <div fxLayout="row">
@@ -155,5 +175,9 @@
       </mat-tree>
     </div>
   </div>
+</div>
+<div *ngIf="(workpackages | async)?.length == 0">
+  <hr>
+  <h3 class="text-center text-muted" ><span>{{'working-plan.chart.toolbar.no-workpackages' | translate}}</span></h3>
 </div>
 

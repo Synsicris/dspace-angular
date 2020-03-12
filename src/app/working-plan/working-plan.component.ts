@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 import { WorkingPlanService } from '../core/working-plan/working-plan.service';
 import { Workpackage } from '../core/working-plan/models/workpackage-step.model';
@@ -28,9 +28,7 @@ export class WorkingPlanComponent {
   }
 
   public getWorkpackages(): Observable<Workpackage[]> {
-    return this.workingPlanService.getWorkpackages().pipe(
-      tap((list) => console.log(list))
-    );
+    return this.workingPlanService.getWorkpackages();
   }
 
   public isLoading(): Observable<boolean> {

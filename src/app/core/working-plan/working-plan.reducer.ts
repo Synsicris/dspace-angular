@@ -19,6 +19,7 @@ import { ImpactPathwayState } from '../impact-pathway/impact-pathway.reducer';
 export enum ChartDateViewType {
   day = 'day',
   month = 'month',
+  quarter = 'quarter',
   year = 'year'
 }
 
@@ -45,7 +46,7 @@ const workpackageInitialState: WorkingPlanState = {
   workpackageToRemove: '',
   loaded: false,
   processing: false,
-  chartDateView: ChartDateViewType.day
+  chartDateView: ChartDateViewType.month
 };
 
 /**
@@ -91,7 +92,8 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
 
     case WorkpackageActionTypes.ADD_WORKPACKAGE_ERROR:
     case WorkpackageActionTypes.ADD_WORKPACKAGE_STEP_ERROR:
-    case WorkpackageActionTypes.GENERATE_WORKPACKAGE_ERROR: {
+    case WorkpackageActionTypes.GENERATE_WORKPACKAGE_ERROR:
+    case WorkpackageActionTypes.INIT_WORKINGPLAN_ERROR: {
       return Object.assign({}, state, {
         processing: false
       });

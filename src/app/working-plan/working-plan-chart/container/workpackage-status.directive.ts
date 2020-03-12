@@ -40,7 +40,7 @@ export class WorkpackageStatusDirective implements OnChanges {
           iconClasses = ['fas', 'fa-redo-alt', 'text-warning'];
           break;
         case WorkpackageStatusType.removed:
-          iconClasses = ['fas', 'fa-trash-alt', 'status-remove'];
+          iconClasses = ['fas', 'fa-trash-alt', 'text-black-50'];
           break;
       }
     }

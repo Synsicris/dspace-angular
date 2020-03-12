@@ -1,14 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild,
-  ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { AUTOCOMPLETE_OFF } from '@ng-dynamic-forms/core';
@@ -43,8 +33,7 @@ import { isObject } from 'util';
 @Component({
   selector: 'ds-authority-typeahead',
   styleUrls: ['./authority-typeahead.component.scss'],
-  templateUrl: './authority-typeahead.component.html',
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './authority-typeahead.component.html'
 })
 export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
   @Input() bindId = true;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
 import { catchError, concatMap, delay, filter, flatMap, map, reduce, scan, startWith, take, tap } from 'rxjs/operators';
 import { extendMoment } from 'moment-range';
 import * as Moment from 'moment';
@@ -15,7 +15,6 @@ import { PaginatedSearchOptions } from '../../shared/search/paginated-search-opt
 import { RemoteData } from '../data/remote-data';
 import { SearchResult } from '../../shared/search/search-result.model';
 import { hasValue, isEmpty, isNotEmpty } from '../../shared/empty.util';
-import { of as observableOf } from 'rxjs/internal/observable/of';
 import { followLink } from '../../shared/utils/follow-link-config.model';
 import { Item } from '../shared/item.model';
 import { SearchService } from '../shared/search/search.service';
@@ -23,7 +22,6 @@ import { LinkService } from '../cache/builders/link.service';
 import { MyDSpaceResponseParsingService } from '../data/mydspace-response-parsing.service';
 import { MyDSpaceRequest } from '../data/request.models';
 import { Workpackage, WorkpackageChartDates, WorkpackageStep } from './models/workpackage-step.model';
-import { from as observableFrom } from 'rxjs/internal/observable/from';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../app.reducer';
 import { workpackagesSelector } from './selectors';
@@ -155,7 +153,6 @@ export class WorkingPlanService {
     });
 
     return this.searchService.search(searchOptions).pipe(
-      tap((list) => console.log('searchService', list)),
       filter((rd: RemoteData<PaginatedList<SearchResult<any>>>) => rd.hasSucceeded),
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
@@ -174,16 +171,17 @@ export class WorkingPlanService {
         return Object.assign(rd, { payload: payload });
       }),
       flatMap((rd: RemoteData<PaginatedList<Observable<Item>>>) => {
-        console.log('page', rd.payload.page);
-        return observableFrom(rd.payload.page).pipe(
-          concatMap((list: Observable<Item>) => list),
-          tap((list) => console.log('concatMap', list)),
-          scan((acc: any, value: any) => [...acc, ...value], []),
-          filter((list: Item[]) => list.length === rd.payload.page.length),
-          tap((list) => console.log('filter', list))
-        )
+        if (rd.payload.page.length === 0) {
+          return observableOf([]);
+        } else {
+          return observableFrom(rd.payload.page).pipe(
+            concatMap((list: Observable<Item>) => list),
+            scan((acc: any, value: any) => [...acc, ...value], []),
+            filter((list: Item[]) => list.length === rd.payload.page.length),
+          )
+        }
       }),
-      take(1)
+      take(1),
     );
   }
 
@@ -356,6 +354,10 @@ export class WorkingPlanService {
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
     const path = pathCombiner.getPath([metadataName, position.toString()]);
     this.operationsBuilder.replace(path, value, true);
+  }
+
+  removeWorkpackageItem(itemId: string): Observable<boolean> {
+    return this.itemService.delete(itemId);
   }
 
   updateMetadataItem(
