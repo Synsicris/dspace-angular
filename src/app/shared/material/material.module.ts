@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import {
   MatButtonModule,
-  MatButtonToggleModule, MatCardModule,
+  MatButtonToggleModule, MatCardModule, MatCheckboxModule,
   MatDatepickerModule,
   MatIconModule, MatInputModule, MatProgressBarModule, MatSelectModule, MatSliderModule, MatToolbarModule,
   MatTreeModule
@@ -23,7 +23,8 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatTreeModule,
     MatMomentDateModule,
     MatCardModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatCheckboxModule
   ]
 })
 export class MaterialModule {

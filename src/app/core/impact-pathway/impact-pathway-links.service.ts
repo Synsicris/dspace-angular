@@ -1,7 +1,16 @@
 import { Inject, Injectable } from '@angular/core';
 
-import { Observable, throwError as observableThrowError } from 'rxjs';
-import { catchError, delay, distinctUntilChanged, filter, flatMap, map, startWith, tap } from 'rxjs/operators';
+import { combineLatest as observableCombineLatest, Observable, throwError as observableThrowError } from 'rxjs';
+import {
+  catchError,
+  delay,
+  distinctUntilChanged,
+  filter,
+  flatMap,
+  map,
+  startWith,
+  tap
+} from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { difference, findIndex, union } from 'lodash';
 
@@ -21,13 +30,14 @@ import {
   AddImpactPathwayTaskLinkAction,
   CompleteEditingImpactPathwayTaskLinksAction,
   EditImpactPathwayTaskLinksAction,
-  RemoveImpactPathwayTaskLinkAction
+  RemoveImpactPathwayTaskLinkAction, SaveImpactPathwayTaskLinksAction
 } from './impact-pathway.actions';
 import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
 import { Item } from '../shared/item.model';
 import { MetadataValue } from '../shared/metadata.models';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 import { ErrorResponse } from '../cache/response.models';
+import { ImpactPathwayLinksMap } from './models/impact-pathway-task-links-map';
 
 @Injectable()
 export class ImpactPathwayLinksService {
@@ -64,6 +74,18 @@ export class ImpactPathwayLinksService {
 
   dispatchRemoveRelation(targetImpactPathwayTaskHTMLId: string, targetImpactPathwayTaskId: string) {
     this.store.dispatch(new RemoveImpactPathwayTaskLinkAction(targetImpactPathwayTaskHTMLId, targetImpactPathwayTaskId))
+  }
+
+  dispatchSaveImpactPathwayTaskLinksAction(
+    impactPathwayTaskId: string,
+    toSave: ImpactPathwayLink[],
+    toDelete: ImpactPathwayLink[]
+  ) {
+    this.store.dispatch(new SaveImpactPathwayTaskLinksAction(
+      impactPathwayTaskId,
+      toSave,
+      toDelete
+    ))
   }
 
   getAllLinks(): Observable<ImpactPathwayLink[]> {
@@ -120,7 +142,16 @@ export class ImpactPathwayLinksService {
     )
   }
 
-  isTaskPartOfLink(impactPathwayTaskHTMLId): Observable<boolean> {
+  getActiveEditingTaskHTMLId(): Observable<string> {
+    return this.store.pipe(
+      select(impactPathwayRelationsSelector),
+      filter((relationsState: ImpactPathwayLinks) => isNotEmpty(relationsState)),
+      map((relationsState: ImpactPathwayLinks) => relationsState.selectedTaskHTMLId),
+      distinctUntilChanged()
+    )
+  }
+
+  isTaskPartOfLink(impactPathwayTaskHTMLId: string): Observable<boolean> {
     return this.store.pipe(
       select(impactPathwayRelationsSelector),
       filter((relationsState: ImpactPathwayLinks) => isNotEmpty(relationsState)),
@@ -133,8 +164,35 @@ export class ImpactPathwayLinksService {
           }
         }) !== -1
       }),
+      startWith(false),
       distinctUntilChanged()
     )
+  }
+
+  isLinkedWithActiveEditingTask(impactPathwayTaskHTMLId: string): Observable<boolean> {
+    const relationsState$ = this.store.pipe(
+      select(impactPathwayRelationsSelector),
+      filter((relationsState: ImpactPathwayLinks) => isNotEmpty(relationsState)),
+      distinctUntilChanged()
+    );
+
+    return observableCombineLatest(this.getActiveEditingTaskHTMLId(), relationsState$).pipe(
+      filter(([activeImpactPathwayTaskHTMLId, relationsState]: [string, ImpactPathwayLinks]) => {
+        return isNotEmpty(activeImpactPathwayTaskHTMLId);
+      }),
+      map(([activeImpactPathwayTaskHTMLId, relationsState]: [string, ImpactPathwayLinks]) => {
+        return findIndex([...relationsState.stored, ...relationsState.toSave], (relation) => {
+          if (relation.twoWay) {
+            return (relation.from === activeImpactPathwayTaskHTMLId && relation.to === impactPathwayTaskHTMLId)
+              || (relation.from === impactPathwayTaskHTMLId && relation.to === activeImpactPathwayTaskHTMLId);
+          } else {
+            return (relation.from === activeImpactPathwayTaskHTMLId && relation.to === impactPathwayTaskHTMLId)
+          }
+        }) !== -1
+      }),
+      startWith(false),
+      distinctUntilChanged()
+    );
   }
 
   completeEditingLinks() {
@@ -166,6 +224,33 @@ export class ImpactPathwayLinksService {
         impactPathwayTaskId
       )
     )
+  }
+
+  createMapOfLinksToFetch(toSave: ImpactPathwayLink[], toDelete: ImpactPathwayLink[]): ImpactPathwayLinksMap {
+    const linksMap: ImpactPathwayLinksMap = {};
+    toSave.forEach((link) => {
+      if (linksMap[link.fromTaskId]) {
+        linksMap[link.fromTaskId].toSave.push(link);
+      } else {
+        linksMap[link.fromTaskId] = {
+          toSave: [link],
+          toDelete: []
+        }
+      }
+    });
+
+    toDelete.forEach((link) => {
+      if (linksMap[link.fromTaskId]) {
+        linksMap[link.fromTaskId].toDelete.push(link);
+      } else {
+        linksMap[link.fromTaskId] = {
+          toSave: [],
+          toDelete: [link]
+        }
+      }
+    });
+
+    return linksMap;
   }
 
   private buildPatchOperations(targetItem: Item, toSave: ImpactPathwayLink[], toDelete: ImpactPathwayLink[]): void {

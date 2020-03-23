@@ -20,3 +20,27 @@
 .task-disabled {
   cursor: not-allowed;
 }
+
+.task-overlay-hide {
+  opacity: 0.1;
+}
+
+.task-overlay {
+  z-index: 2;
+  background: rgba(39, 42, 43, 0.8);
+  transition: opacity 200ms ease-in-out;
+}
+
+.task-checkbox {
+  z-index: 3;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: white;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
+
+::ng-deep .mat-checkbox-frame {
+  border-color: white;
+}
