@@ -63,7 +63,9 @@ export class WorkingPlanEffects {
           item,
           action.payload.modal)),
         catchError((error: Error) => {
-          console.error(error.message);
+          if (error) {
+            console.error(error.message);
+          }
           return observableOf(new GenerateWorkpackageErrorAction(action.payload.modal))
         }));
     }));
@@ -144,7 +146,9 @@ export class WorkingPlanEffects {
           item,
           action.payload.modal)),
         catchError((error: Error) => {
-          console.error(error.message);
+          if (error) {
+            console.error(error.message);
+          }
           return observableOf(new GenerateWorkpackageStepErrorAction(action.payload.modal))
         }));
     }));
@@ -182,7 +186,9 @@ export class WorkingPlanEffects {
             action.payload.modal);
         }),
         catchError((error: Error) => {
-          console.error(error.message);
+          if (error) {
+            console.error(error.message);
+          }
           return observableOf(new AddWorkpackageStepErrorAction(action.payload.modal))
         }));
     }));
@@ -215,7 +221,9 @@ export class WorkingPlanEffects {
         map(() => new RemoveWorkpackageSuccessAction(
           action.payload.workpackageId)),
         catchError((error: Error) => {
-          console.error(error.message);
+          if (error) {
+            console.error(error.message);
+          }
           return observableOf(new RemoveWorkpackageErrorAction())
         }));
     }));
@@ -235,7 +243,9 @@ export class WorkingPlanEffects {
           action.payload.workpackageId,
           action.payload.workpackageStepId)),
         catchError((error: Error) => {
-          console.error(error.message);
+          if (error) {
+            console.error(error.message);
+          }
           return observableOf(new RemoveWorkpackageStepErrorAction())
         }));
     }));
@@ -249,7 +259,9 @@ export class WorkingPlanEffects {
       return this.workingPlanService.searchForAvailableWorpackages().pipe(
         map((items: Item[]) => new InitWorkingplanAction(items)),
         catchError((error: Error) => {
-          console.error(error.message);
+          if (error) {
+            console.error(error.message);
+          }
           return observableOf(new RetrieveAllWorkpackagesErrorAction())
         }));
     }));
@@ -263,7 +275,9 @@ export class WorkingPlanEffects {
       return this.workingPlanService.initWorkingPlan(action.payload.items).pipe(
         map((workpackages: Workpackage[]) => new InitWorkingplanSuccessAction(workpackages)),
         catchError((error: Error) => {
-          console.error(error.message);
+          if (error) {
+            console.error(error.message);
+          }
           return observableOf(new InitWorkingplanErrorAction())
         }))
     }));
@@ -280,7 +294,9 @@ export class WorkingPlanEffects {
       ).pipe(
         map((items: Item) => new UpdateWorkpackageSuccessAction()),
         catchError((error: Error) => {
-          console.error(error.message);
+          if (error) {
+            console.error(error.message);
+          }
           return observableOf(new UpdateWorkpackageErrorAction(action.payload.workpackageId))
         }));
     }));
@@ -297,7 +313,9 @@ export class WorkingPlanEffects {
       ).pipe(
         map((items: Item) => new UpdateWorkpackageSuccessAction()),
         catchError((error: Error) => {
-          console.error(error.message);
+          if (error) {
+            console.error(error.message);
+          }
           return observableOf(new UpdateWorkpackageStepErrorAction(
             action.payload.workpackageId,
             action.payload.workpackageStepId

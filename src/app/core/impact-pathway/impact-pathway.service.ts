@@ -243,7 +243,7 @@ export class ImpactPathwayService {
     return combineLatestObservable(submission$, this.getImpactPathwayStepsFormSection()).pipe(
       tap(([submission, sectionName]) => this.addPatchOperationForImpactPathwayStep(impactPathwayId, sectionName, impactPathwayStepType, impactPathwayStepName)),
       delay(100),
-      flatMap(([submission, sectionName]) => this.executeSubmissionPatch(submission.uuid, sectionName))
+      flatMap(([submission, sectionName]) => this.executeSubmissionPatch(submission.id, sectionName))
     )
   }
 
@@ -287,7 +287,7 @@ export class ImpactPathwayService {
         this.addPatchOperationForImpactPathway(sectionName, impactPathwayName, impactPathwayDescription, objects[1])
       }),
       delay(100),
-      flatMap(([objects, sectionName]: [any[], string]) => this.executeSubmissionPatch(objects[0].uuid, sectionName))
+      flatMap(([objects, sectionName]: [any[], string]) => this.executeSubmissionPatch(objects[0].id, sectionName))
     )
   }
 
@@ -296,7 +296,7 @@ export class ImpactPathwayService {
       map((submission: SubmissionObject) => submission.item),
       tap(() => this.addPatchOperationForImpactPathwayTask(metadata)),
       delay(100),
-      flatMap((taskItem: Item) => this.executeItemPatch(taskItem.uuid, 'metadata')),
+      flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata')),
     )
   }
 
@@ -523,9 +523,9 @@ export class ImpactPathwayService {
 
   initImpactPathway(item: Item): Observable<ImpactPathway> {
     const description = item.firstMetadataValue('dc.description');
-    return this.initImpactPathwaySteps(item.uuid, item).pipe(
+    return this.initImpactPathwaySteps(item.id, item).pipe(
       map((steps: ImpactPathwayStep[]) => {
-        return new ImpactPathway(item.uuid, item.name, description, steps)
+        return new ImpactPathway(item.id, item.name, description, steps)
       })
     );
   }

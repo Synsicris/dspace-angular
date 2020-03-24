@@ -9,6 +9,7 @@ import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pat
 import { hasValue, isNotEmpty, isNotUndefined } from '../../../../shared/empty.util';
 import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayLinksService } from '../../../../core/impact-pathway/impact-pathway-links.service';
+import { MatCheckboxChange } from '@angular/material';
 
 @Component({
   selector: 'ipw-impact-path-way-task',
@@ -110,7 +111,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   }
 
   public isTaskPartOfRelation(): Observable<boolean> {
-    return this.impactPathwayLinksService.isTaskPartOfLink(this.taskHTMLDivId);
+    return this.impactPathwayLinksService.isLinkedWithActiveEditingTask(this.taskHTMLDivId);
   }
 
   public hasDetail() {
@@ -126,9 +127,9 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
     return this.removing$.asObservable();
   }
 
-  public onCheckBoxChange(event: Event) {
-    const target = event.target as any;
-    if (target.checked) {
+  public onCheckBoxChange(event: MatCheckboxChange) {
+    // const target = event.target as any;
+    if (event.checked) {
       this.impactPathwayLinksService.dispatchAddRelation(
         this.taskHTMLDivId,
         this.impactPathwayId,

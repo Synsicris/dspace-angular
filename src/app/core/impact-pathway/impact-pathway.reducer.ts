@@ -616,7 +616,15 @@ function removeImpactPathwayTaskRelation(state: ImpactPathwayState, action: Remo
     return !(relation.from === state.links.selectedTaskHTMLId && relation.to === action.payload.targetImpactPathwayTaskHTMLId);
   });
 
-  const relationIndex = findIndex(state.links.stored, { to: action.payload.targetImpactPathwayTaskHTMLId });
+  const relationIndex = findIndex(state.links.stored, (link) => {
+    if (!link.twoWay) {
+      return link.to === action.payload.targetImpactPathwayTaskHTMLId
+    } else {
+      return (link.from === action.payload.targetImpactPathwayTaskHTMLId
+        || link.to === action.payload.targetImpactPathwayTaskHTMLId)
+    }
+  });
+
   if (relationIndex !== -1) {
     newToDeleteList.push(state.links.stored[relationIndex]);
   }
