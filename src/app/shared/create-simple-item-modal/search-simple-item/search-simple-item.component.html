@@ -16,7 +16,7 @@
                  [collectionSize]="pageInfoState?.totalElements"
                  [sortOptions]="sortOptions"
                  [hidePagerWhenSinglePage]="hidePagerWhenSinglePage"
-                 [doUpdateRoute]="false"
+                 [disableRouteParameterUpdate]="true"
                  (paginationChange)="onPaginationChange($event)">
     <div id="sidebar-object-list"
          class="task-list d-flex flex-wrap p-3">
