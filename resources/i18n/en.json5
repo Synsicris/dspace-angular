@@ -1,2164 +1,2135 @@
 {
+"404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page. ",
 
-  "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page. ",
+"404.link.home-page": "Take me to the home page",
 
-  "404.link.home-page": "Take me to the home page",
+"404.page-not-found": "page not found",
 
-  "404.page-not-found": "page not found",
+"admin.registries.bitstream-formats.create.failure.content": "An error occurred while creating the new bitstream format.",
 
+"admin.registries.bitstream-formats.create.failure.head": "Failure",
 
+"admin.registries.bitstream-formats.create.head": "Create Bitstream format",
 
-  "admin.registries.bitstream-formats.create.failure.content": "An error occurred while creating the new bitstream format.",
+"admin.registries.bitstream-formats.create.new": "Add a new bitstream format",
 
-  "admin.registries.bitstream-formats.create.failure.head": "Failure",
+"admin.registries.bitstream-formats.create.success.content": "The new bitstream format was successfully created.",
 
-  "admin.registries.bitstream-formats.create.head": "Create Bitstream format",
+"admin.registries.bitstream-formats.create.success.head": "Success",
 
-  "admin.registries.bitstream-formats.create.new": "Add a new bitstream format",
+"admin.registries.bitstream-formats.delete.failure.amount": "Failed to remove {{ amount }} format(s)",
 
-  "admin.registries.bitstream-formats.create.success.content": "The new bitstream format was successfully created.",
+"admin.registries.bitstream-formats.delete.failure.head": "Failure",
 
-  "admin.registries.bitstream-formats.create.success.head": "Success",
+"admin.registries.bitstream-formats.delete.success.amount": "Successfully removed {{ amount }} format(s)",
 
-  "admin.registries.bitstream-formats.delete.failure.amount": "Failed to remove {{ amount }} format(s)",
+"admin.registries.bitstream-formats.delete.success.head": "Success",
 
-  "admin.registries.bitstream-formats.delete.failure.head": "Failure",
+"admin.registries.bitstream-formats.description": "This list of bitstream formats provides information about known formats and their support level.",
 
-  "admin.registries.bitstream-formats.delete.success.amount": "Successfully removed {{ amount }} format(s)",
+"admin.registries.bitstream-formats.edit.description.hint": "",
 
-  "admin.registries.bitstream-formats.delete.success.head": "Success",
+"admin.registries.bitstream-formats.edit.description.label": "Description",
 
-  "admin.registries.bitstream-formats.description": "This list of bitstream formats provides information about known formats and their support level.",
+"admin.registries.bitstream-formats.edit.extensions.hint": "Extensions are file extensions that are used to automatically identify the format of uploaded files. You can enter several extensions for each format.",
 
-  "admin.registries.bitstream-formats.edit.description.hint": "",
+"admin.registries.bitstream-formats.edit.extensions.label": "File extensions",
 
-  "admin.registries.bitstream-formats.edit.description.label": "Description",
+"admin.registries.bitstream-formats.edit.extensions.placeholder": "Enter a file extenstion without the dot",
 
-  "admin.registries.bitstream-formats.edit.extensions.hint": "Extensions are file extensions that are used to automatically identify the format of uploaded files. You can enter several extensions for each format.",
+"admin.registries.bitstream-formats.edit.failure.content": "An error occurred while editing the bitstream format.",
 
-  "admin.registries.bitstream-formats.edit.extensions.label": "File extensions",
+"admin.registries.bitstream-formats.edit.failure.head": "Failure",
 
-  "admin.registries.bitstream-formats.edit.extensions.placeholder": "Enter a file extenstion without the dot",
+"admin.registries.bitstream-formats.edit.head": "Bitstream format: {{ format }}",
 
-  "admin.registries.bitstream-formats.edit.failure.content": "An error occurred while editing the bitstream format.",
+"admin.registries.bitstream-formats.edit.internal.hint": "Formats marked as internal are hidden from the user, and used for administrative purposes.",
 
-  "admin.registries.bitstream-formats.edit.failure.head": "Failure",
+"admin.registries.bitstream-formats.edit.internal.label": "Internal",
 
-  "admin.registries.bitstream-formats.edit.head": "Bitstream format: {{ format }}",
+"admin.registries.bitstream-formats.edit.mimetype.hint": "The MIME type associated with this format, does not have to be unique.",
 
-  "admin.registries.bitstream-formats.edit.internal.hint": "Formats marked as internal are hidden from the user, and used for administrative purposes.",
+"admin.registries.bitstream-formats.edit.mimetype.label": "MIME Type",
 
-  "admin.registries.bitstream-formats.edit.internal.label": "Internal",
+"admin.registries.bitstream-formats.edit.shortDescription.hint": "A unique name for this format, (e.g. Microsoft Word XP or Microsoft Word 2000)",
 
-  "admin.registries.bitstream-formats.edit.mimetype.hint": "The MIME type associated with this format, does not have to be unique.",
+"admin.registries.bitstream-formats.edit.shortDescription.label": "Name",
 
-  "admin.registries.bitstream-formats.edit.mimetype.label": "MIME Type",
+"admin.registries.bitstream-formats.edit.success.content": "The bitstream format was successfully edited.",
 
-  "admin.registries.bitstream-formats.edit.shortDescription.hint": "A unique name for this format, (e.g. Microsoft Word XP or Microsoft Word 2000)",
+"admin.registries.bitstream-formats.edit.success.head": "Success",
 
-  "admin.registries.bitstream-formats.edit.shortDescription.label": "Name",
+"admin.registries.bitstream-formats.edit.supportLevel.hint": "The level of support your institution pledges for this format.",
 
-  "admin.registries.bitstream-formats.edit.success.content": "The bitstream format was successfully edited.",
+"admin.registries.bitstream-formats.edit.supportLevel.label": "Support level",
 
-  "admin.registries.bitstream-formats.edit.success.head": "Success",
+"admin.registries.bitstream-formats.head": "Bitstream Format Registry",
 
-  "admin.registries.bitstream-formats.edit.supportLevel.hint": "The level of support your institution pledges for this format.",
+"admin.registries.bitstream-formats.no-items": "No bitstream formats to show.",
 
-  "admin.registries.bitstream-formats.edit.supportLevel.label": "Support level",
+"admin.registries.bitstream-formats.table.delete": "Delete selected",
 
-  "admin.registries.bitstream-formats.head": "Bitstream Format Registry",
+"admin.registries.bitstream-formats.table.deselect-all": "Deselect all",
 
-  "admin.registries.bitstream-formats.no-items": "No bitstream formats to show.",
+"admin.registries.bitstream-formats.table.internal": "internal",
 
-  "admin.registries.bitstream-formats.table.delete": "Delete selected",
+"admin.registries.bitstream-formats.table.mimetype": "MIME Type",
 
-  "admin.registries.bitstream-formats.table.deselect-all": "Deselect all",
+"admin.registries.bitstream-formats.table.name": "Name",
 
-  "admin.registries.bitstream-formats.table.internal": "internal",
+"admin.registries.bitstream-formats.table.return": "Return",
 
-  "admin.registries.bitstream-formats.table.mimetype": "MIME Type",
+"admin.registries.bitstream-formats.table.supportLevel.KNOWN": "Known",
 
-  "admin.registries.bitstream-formats.table.name": "Name",
+"admin.registries.bitstream-formats.table.supportLevel.SUPPORTED": "Supported",
 
-  "admin.registries.bitstream-formats.table.return": "Return",
+"admin.registries.bitstream-formats.table.supportLevel.UNKNOWN": "Unknown",
 
-  "admin.registries.bitstream-formats.table.supportLevel.KNOWN": "Known",
+"admin.registries.bitstream-formats.table.supportLevel.head": "Support Level",
 
-  "admin.registries.bitstream-formats.table.supportLevel.SUPPORTED": "Supported",
+"admin.registries.bitstream-formats.title": "DSpace Cris Angular :: Bitstream Format Registry",
 
-  "admin.registries.bitstream-formats.table.supportLevel.UNKNOWN": "Unknown",
+"admin.registries.metadata.description": "The metadata registry maintains a list of all metadata fields available in the repository. These fields may be divided amongst multiple schemas. However, DSpace requires the qualified Dublin Core schema.",
 
-  "admin.registries.bitstream-formats.table.supportLevel.head": "Support Level",
+"admin.registries.metadata.form.create": "Create metadata schema",
 
-  "admin.registries.bitstream-formats.title": "DSpace Cris Angular :: Bitstream Format Registry",
+"admin.registries.metadata.form.edit": "Edit metadata schema",
 
+"admin.registries.metadata.form.name": "Name",
 
+"admin.registries.metadata.form.namespace": "Namespace",
 
-  "admin.registries.metadata.description": "The metadata registry maintains a list of all metadata fields available in the repository. These fields may be divided amongst multiple schemas. However, DSpace requires the qualified Dublin Core schema.",
+"admin.registries.metadata.head": "Metadata Registry",
 
-  "admin.registries.metadata.form.create": "Create metadata schema",
+"admin.registries.metadata.schemas.no-items": "No metadata schemas to show.",
 
-  "admin.registries.metadata.form.edit": "Edit metadata schema",
+"admin.registries.metadata.schemas.table.delete": "Delete selected",
 
-  "admin.registries.metadata.form.name": "Name",
+"admin.registries.metadata.schemas.table.id": "ID",
 
-  "admin.registries.metadata.form.namespace": "Namespace",
+"admin.registries.metadata.schemas.table.name": "Name",
 
-  "admin.registries.metadata.head": "Metadata Registry",
+"admin.registries.metadata.schemas.table.namespace": "Namespace",
 
-  "admin.registries.metadata.schemas.no-items": "No metadata schemas to show.",
+"admin.registries.metadata.title": "DSpace Cris Angular :: Metadata Registry",
 
-  "admin.registries.metadata.schemas.table.delete": "Delete selected",
+"admin.registries.schema.description": "This is the metadata schema for \"{{namespace}}\".",
 
-  "admin.registries.metadata.schemas.table.id": "ID",
+"admin.registries.schema.fields.head": "Schema metadata fields",
 
-  "admin.registries.metadata.schemas.table.name": "Name",
+"admin.registries.schema.fields.no-items": "No metadata fields to show.",
 
-  "admin.registries.metadata.schemas.table.namespace": "Namespace",
+"admin.registries.schema.fields.table.delete": "Delete selected",
 
-  "admin.registries.metadata.title": "DSpace Cris Angular :: Metadata Registry",
+"admin.registries.schema.fields.table.field": "Field",
 
+"admin.registries.schema.fields.table.scopenote": "Scope Note",
 
+"admin.registries.schema.form.create": "Create metadata field",
 
-  "admin.registries.schema.description": "This is the metadata schema for \"{{namespace}}\".",
+"admin.registries.schema.form.edit": "Edit metadata field",
 
-  "admin.registries.schema.fields.head": "Schema metadata fields",
+"admin.registries.schema.form.element": "Element",
 
-  "admin.registries.schema.fields.no-items": "No metadata fields to show.",
+"admin.registries.schema.form.qualifier": "Qualifier",
 
-  "admin.registries.schema.fields.table.delete": "Delete selected",
+"admin.registries.schema.form.scopenote": "Scope Note",
 
-  "admin.registries.schema.fields.table.field": "Field",
+"admin.registries.schema.head": "Metadata Schema",
 
-  "admin.registries.schema.fields.table.scopenote": "Scope Note",
+"admin.registries.schema.notification.created": "Successfully created metadata schema \"{{prefix}}\"",
 
-  "admin.registries.schema.form.create": "Create metadata field",
+"admin.registries.schema.notification.deleted.failure": "Failed to delete {{amount}} metadata schemas",
 
-  "admin.registries.schema.form.edit": "Edit metadata field",
+"admin.registries.schema.notification.deleted.success": "Successfully deleted {{amount}} metadata schemas",
 
-  "admin.registries.schema.form.element": "Element",
+"admin.registries.schema.notification.edited": "Successfully edited metadata schema \"{{prefix}}\"",
 
-  "admin.registries.schema.form.qualifier": "Qualifier",
+"admin.registries.schema.notification.failure": "Error",
 
-  "admin.registries.schema.form.scopenote": "Scope Note",
+"admin.registries.schema.notification.field.created": "Successfully created metadata field \"{{field}}\"",
 
-  "admin.registries.schema.head": "Metadata Schema",
+"admin.registries.schema.notification.field.deleted.failure": "Failed to delete {{amount}} metadata fields",
 
-  "admin.registries.schema.notification.created": "Successfully created metadata schema \"{{prefix}}\"",
+"admin.registries.schema.notification.field.deleted.success": "Successfully deleted {{amount}} metadata fields",
 
-  "admin.registries.schema.notification.deleted.failure": "Failed to delete {{amount}} metadata schemas",
+"admin.registries.schema.notification.field.edited": "Successfully edited metadata field \"{{field}}\"",
 
-  "admin.registries.schema.notification.deleted.success": "Successfully deleted {{amount}} metadata schemas",
+"admin.registries.schema.notification.success": "Success",
 
-  "admin.registries.schema.notification.edited": "Successfully edited metadata schema \"{{prefix}}\"",
+"admin.registries.schema.return": "Return",
 
-  "admin.registries.schema.notification.failure": "Error",
+"admin.registries.schema.title": "DSpace Cris Angular :: Metadata Schema Registry",
 
-  "admin.registries.schema.notification.field.created": "Successfully created metadata field \"{{field}}\"",
+"auth.errors.invalid-user": "Invalid email address or password.",
 
-  "admin.registries.schema.notification.field.deleted.failure": "Failed to delete {{amount}} metadata fields",
+"auth.messages.expired": "Your session has expired. Please log in again.",
 
-  "admin.registries.schema.notification.field.deleted.success": "Successfully deleted {{amount}} metadata fields",
+"browse.comcol.by.author": "By Author",
 
-  "admin.registries.schema.notification.field.edited": "Successfully edited metadata field \"{{field}}\"",
+"browse.comcol.by.dateissued": "By Issue Date",
 
-  "admin.registries.schema.notification.success": "Success",
+"browse.comcol.by.subject": "By Subject",
 
-  "admin.registries.schema.return": "Return",
+"browse.comcol.by.title": "By Title",
 
-  "admin.registries.schema.title": "DSpace Cris Angular :: Metadata Schema Registry",
+"browse.comcol.head": "Browse",
 
+"browse.empty": "No items to show.",
 
+"browse.metadata.author": "Author",
 
-  "auth.errors.invalid-user": "Invalid email address or password.",
+"browse.metadata.dateissued": "Issue Date",
 
-  "auth.messages.expired": "Your session has expired. Please log in again.",
+"browse.metadata.subject": "Subject",
 
+"browse.metadata.title": "Title",
 
+"browse.startsWith.choose_start": "(Choose start)",
 
-  "browse.comcol.by.author": "By Author",
+"browse.startsWith.choose_year": "(Choose year)",
 
-  "browse.comcol.by.dateissued": "By Issue Date",
+"browse.startsWith.jump": "Jump to a point in the index:",
 
-  "browse.comcol.by.subject": "By Subject",
+"browse.startsWith.months.april": "April",
 
-  "browse.comcol.by.title": "By Title",
+"browse.startsWith.months.august": "August",
 
-  "browse.comcol.head": "Browse",
+"browse.startsWith.months.december": "December",
 
-  "browse.empty": "No items to show.",
+"browse.startsWith.months.february": "February",
 
-  "browse.metadata.author": "Author",
+"browse.startsWith.months.january": "January",
 
-  "browse.metadata.dateissued": "Issue Date",
+"browse.startsWith.months.july": "July",
 
-  "browse.metadata.subject": "Subject",
+"browse.startsWith.months.june": "June",
 
-  "browse.metadata.title": "Title",
+"browse.startsWith.months.march": "March",
 
-  "browse.metadata.author.breadcrumbs": "Browse by Author",
+"browse.startsWith.months.may": "May",
 
-  "browse.metadata.dateissued.breadcrumbs": "Browse by Date",
+"browse.startsWith.months.none": "(Choose month)",
 
-  "browse.metadata.subject.breadcrumbs": "Browse by Subject",
+"browse.startsWith.months.november": "November",
 
-  "browse.metadata.title.breadcrumbs": "Browse by Title",
+"browse.startsWith.months.october": "October",
 
-  "browse.startsWith.choose_start": "(Choose start)",
+"browse.startsWith.months.september": "September",
 
-  "browse.startsWith.choose_year": "(Choose year)",
+"browse.startsWith.submit": "Go",
 
-  "browse.startsWith.jump": "Jump to a point in the index:",
+"browse.startsWith.type_date": "Or type in a date (year-month):",
 
-  "browse.startsWith.months.april": "April",
+"browse.startsWith.type_text": "Or enter first few letters:",
 
-  "browse.startsWith.months.august": "August",
+"browse.title": "Browsing {{ collection }} by {{ field }} {{ value }}",
 
-  "browse.startsWith.months.december": "December",
+"chips.remove": "Remove chip",
 
-  "browse.startsWith.months.february": "February",
+"collection.create.head": "Create a Collection",
 
-  "browse.startsWith.months.january": "January",
+"collection.create.notifications.success": "Successfully created the Collection",
 
-  "browse.startsWith.months.july": "July",
+"collection.create.sub-head": "Create a Collection for Community {{ parent }}",
 
-  "browse.startsWith.months.june": "June",
+"collection.delete.cancel": "Cancel",
 
-  "browse.startsWith.months.march": "March",
+"collection.delete.confirm": "Confirm",
 
-  "browse.startsWith.months.may": "May",
+"collection.delete.head": "Delete Collection",
 
-  "browse.startsWith.months.none": "(Choose month)",
+"collection.delete.notification.fail": "Collection could not be deleted",
 
-  "browse.startsWith.months.november": "November",
+"collection.delete.notification.success": "Successfully deleted collection",
 
-  "browse.startsWith.months.october": "October",
+"collection.delete.text": "Are you sure you want to delete collection \"{{ dso }}\"",
 
-  "browse.startsWith.months.september": "September",
+"collection.edit.delete": "Delete this collection",
 
-  "browse.startsWith.submit": "Go",
+"collection.edit.head": "Edit Collection",
 
-  "browse.startsWith.type_date": "Or type in a date (year-month):",
+"collection.edit.item-mapper.cancel": "Cancel",
 
-  "browse.startsWith.type_text": "Or enter first few letters:",
+"collection.edit.item-mapper.collection": "Collection: \"<b>{{name}}</b>\"",
 
-  "browse.title": "Browsing {{ collection }} by {{ field }} {{ value }}",
+"collection.edit.item-mapper.confirm": "Map selected items",
 
+"collection.edit.item-mapper.description": "This is the item mapper tool that allows collection administrators to map items from other collections into this collection. You can search for items from other collections and map them, or browse the list of currently mapped items.",
 
-  "chips.remove": "Remove chip",
+"collection.edit.item-mapper.head": "Item Mapper - Map Items from Other Collections",
 
+"collection.edit.item-mapper.no-search": "Please enter a query to search",
 
+"collection.edit.item-mapper.notifications.map.error.content": "Errors occurred for mapping of {{amount}} items.",
 
-  "collection.create.head": "Create a Collection",
+"collection.edit.item-mapper.notifications.map.error.head": "Mapping errors",
 
-  "collection.create.notifications.success": "Successfully created the Collection",
+"collection.edit.item-mapper.notifications.map.success.content": "Successfully mapped {{amount}} items.",
 
-  "collection.create.sub-head": "Create a Collection for Community {{ parent }}",
+"collection.edit.item-mapper.notifications.map.success.head": "Mapping completed",
 
-  "collection.delete.cancel": "Cancel",
+"collection.edit.item-mapper.notifications.unmap.error.content": "Errors occurred for removing the mappings of {{amount}} items.",
 
-  "collection.delete.confirm": "Confirm",
+"collection.edit.item-mapper.notifications.unmap.error.head": "Remove mapping errors",
 
-  "collection.delete.head": "Delete Collection",
+"collection.edit.item-mapper.notifications.unmap.success.content": "Successfully removed the mappings of {{amount}} items.",
 
-  "collection.delete.notification.fail": "Collection could not be deleted",
+"collection.edit.item-mapper.notifications.unmap.success.head": "Remove mapping completed",
 
-  "collection.delete.notification.success": "Successfully deleted collection",
+"collection.edit.item-mapper.remove": "Remove selected item mappings",
 
-  "collection.delete.text": "Are you sure you want to delete collection \"{{ dso }}\"",
+"collection.edit.item-mapper.tabs.browse": "Browse mapped items",
 
+"collection.edit.item-mapper.tabs.map": "Map new items",
 
+"collection.edit.logo.label": "Collection logo",
 
-  "collection.edit.delete": "Delete this collection",
+"collection.edit.logo.notifications.add.error": "Uploading Collection logo failed. Please verify the content before retrying.",
 
-  "collection.edit.head": "Edit Collection",
+"collection.edit.logo.notifications.add.success": "Upload Collection logo successful.",
 
-  "collection.edit.breadcrumbs": "Edit Collection",
+"collection.edit.logo.notifications.delete.error.title": "Error deleting logo",
 
+"collection.edit.logo.notifications.delete.success.content": "Successfully deleted the collection's logo",
 
+"collection.edit.logo.notifications.delete.success.title": "Logo deleted",
 
-  "collection.edit.item-mapper.cancel": "Cancel",
+"collection.edit.logo.upload": "Drop a Collection Logo to upload",
 
-  "collection.edit.item-mapper.collection": "Collection: \"<b>{{name}}</b>\"",
+"collection.edit.notifications.success": "Successfully edited the Collection",
 
-  "collection.edit.item-mapper.confirm": "Map selected items",
+"collection.edit.return": "Return",
 
-  "collection.edit.item-mapper.description": "This is the item mapper tool that allows collection administrators to map items from other collections into this collection. You can search for items from other collections and map them, or browse the list of currently mapped items.",
+"collection.edit.tabs.curate.head": "Curate",
 
-  "collection.edit.item-mapper.head": "Item Mapper - Map Items from Other Collections",
+"collection.edit.tabs.curate.title": "Collection Edit - Curate",
 
-  "collection.edit.item-mapper.no-search": "Please enter a query to search",
+"collection.edit.tabs.metadata.head": "Edit Metadata",
 
-  "collection.edit.item-mapper.notifications.map.error.content": "Errors occurred for mapping of {{amount}} items.",
+"collection.edit.tabs.metadata.title": "Collection Edit - Metadata",
 
-  "collection.edit.item-mapper.notifications.map.error.head": "Mapping errors",
+"collection.edit.tabs.roles.head": "Assign Roles",
 
-  "collection.edit.item-mapper.notifications.map.success.content": "Successfully mapped {{amount}} items.",
+"collection.edit.tabs.roles.title": "Collection Edit - Roles",
 
-  "collection.edit.item-mapper.notifications.map.success.head": "Mapping completed",
+"collection.edit.tabs.source.external": "This collection harvests its content from an external source",
 
-  "collection.edit.item-mapper.notifications.unmap.error.content": "Errors occurred for removing the mappings of {{amount}} items.",
+"collection.edit.tabs.source.form.errors.oaiSource.required": "You must provide a set id of the target collection.",
 
-  "collection.edit.item-mapper.notifications.unmap.error.head": "Remove mapping errors",
+"collection.edit.tabs.source.form.harvestType": "Content being harvested",
 
-  "collection.edit.item-mapper.notifications.unmap.success.content": "Successfully removed the mappings of {{amount}} items.",
+"collection.edit.tabs.source.form.head": "Configure an external source",
 
-  "collection.edit.item-mapper.notifications.unmap.success.head": "Remove mapping completed",
+"collection.edit.tabs.source.form.metadataConfigId": "Metadata Format",
 
-  "collection.edit.item-mapper.remove": "Remove selected item mappings",
+"collection.edit.tabs.source.form.oaiSetId": "OAI specific set id",
 
-  "collection.edit.item-mapper.tabs.browse": "Browse mapped items",
+"collection.edit.tabs.source.form.oaiSource": "OAI Provider",
 
-  "collection.edit.item-mapper.tabs.map": "Map new items",
+"collection.edit.tabs.source.form.options.harvestType.METADATA_AND_BITSTREAMS": "Harvest metadata and bitstreams (requires ORE support)",
 
+"collection.edit.tabs.source.form.options.harvestType.METADATA_AND_REF": "Harvest metadata and references to bitstreams (requires ORE support)",
 
+"collection.edit.tabs.source.form.options.harvestType.METADATA_ONLY": "Harvest metadata only",
 
-  "collection.edit.logo.label": "Collection logo",
+"collection.edit.tabs.source.head": "Content Source",
 
-  "collection.edit.logo.notifications.add.error": "Uploading Collection logo failed. Please verify the content before retrying.",
+"collection.edit.tabs.source.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
 
-  "collection.edit.logo.notifications.add.success": "Upload Collection logo successful.",
+"collection.edit.tabs.source.notifications.discarded.title": "Changed discarded",
 
-  "collection.edit.logo.notifications.delete.success.title": "Logo deleted",
+"collection.edit.tabs.source.notifications.invalid.content": "Your changes were not saved. Please make sure all fields are valid before you save.",
 
-  "collection.edit.logo.notifications.delete.success.content": "Successfully deleted the collection's logo",
+"collection.edit.tabs.source.notifications.invalid.title": "Metadata invalid",
 
-  "collection.edit.logo.notifications.delete.error.title": "Error deleting logo",
+"collection.edit.tabs.source.notifications.saved.content": "Your changes to this collection's content source were saved.",
 
-  "collection.edit.logo.upload": "Drop a Collection Logo to upload",
+"collection.edit.tabs.source.notifications.saved.title": "Content Source saved",
 
+"collection.edit.tabs.source.title": "Collection Edit - Content Source",
 
+"collection.form.abstract": "Short Description",
 
-  "collection.edit.notifications.success": "Successfully edited the Collection",
+"collection.form.description": "Introductory text (HTML)",
 
-  "collection.edit.return": "Return",
+"collection.form.errors.title.required": "Please enter a collection name",
 
+"collection.form.license": "License",
 
+"collection.form.provenance": "Provenance",
 
-  "collection.edit.tabs.curate.head": "Curate",
+"collection.form.rights": "Copyright text (HTML)",
 
-  "collection.edit.tabs.curate.title": "Collection Edit - Curate",
+"collection.form.tableofcontents": "News (HTML)",
 
-  "collection.edit.tabs.metadata.head": "Edit Metadata",
+"collection.form.title": "Name",
 
-  "collection.edit.tabs.metadata.title": "Collection Edit - Metadata",
+"collection.page.browse.recent.empty": "No items to show",
 
-  "collection.edit.tabs.roles.head": "Assign Roles",
+"collection.page.browse.recent.head": "Recent Submissions",
 
-  "collection.edit.tabs.roles.title": "Collection Edit - Roles",
+"collection.page.handle": "Permanent URI for this collection",
 
-  "collection.edit.tabs.source.external": "This collection harvests its content from an external source",
+"collection.page.license": "License",
 
-  "collection.edit.tabs.source.form.errors.oaiSource.required": "You must provide a set id of the target collection.",
+"collection.page.news": "News",
 
-  "collection.edit.tabs.source.form.harvestType": "Content being harvested",
+"collection.select.confirm": "Confirm selected",
 
-  "collection.edit.tabs.source.form.head": "Configure an external source",
+"collection.select.empty": "No collections to show",
 
-  "collection.edit.tabs.source.form.metadataConfigId": "Metadata Format",
+"collection.select.table.title": "Title",
 
-  "collection.edit.tabs.source.form.oaiSetId": "OAI specific set id",
+"collection.source.update.notifications.error.content": "The provided settings have been tested and didn't work.",
 
-  "collection.edit.tabs.source.form.oaiSource": "OAI Provider",
+"collection.source.update.notifications.error.title": "Server Error",
 
-  "collection.edit.tabs.source.form.options.harvestType.METADATA_AND_BITSTREAMS": "Harvest metadata and bitstreams (requires ORE support)",
+"community.all-lists.head": "Subcommunities and Collections",
 
-  "collection.edit.tabs.source.form.options.harvestType.METADATA_AND_REF": "Harvest metadata and references to bitstreams (requires ORE support)",
+"community.create.head": "Create a Community",
 
-  "collection.edit.tabs.source.form.options.harvestType.METADATA_ONLY": "Harvest metadata only",
+"community.create.notifications.success": "Successfully created the Community",
 
-  "collection.edit.tabs.source.head": "Content Source",
+"community.create.sub-head": "Create a Sub-Community for Community {{ parent }}",
 
-  "collection.edit.tabs.source.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
+"community.delete.cancel": "Cancel",
 
-  "collection.edit.tabs.source.notifications.discarded.title": "Changed discarded",
+"community.delete.confirm": "Confirm",
 
-  "collection.edit.tabs.source.notifications.invalid.content": "Your changes were not saved. Please make sure all fields are valid before you save.",
+"community.delete.head": "Delete Community",
 
-  "collection.edit.tabs.source.notifications.invalid.title": "Metadata invalid",
+"community.delete.notification.fail": "Community could not be deleted",
 
-  "collection.edit.tabs.source.notifications.saved.content": "Your changes to this collection's content source were saved.",
+"community.delete.notification.success": "Successfully deleted community",
 
-  "collection.edit.tabs.source.notifications.saved.title": "Content Source saved",
+"community.delete.text": "Are you sure you want to delete community \"{{ dso }}\"",
 
-  "collection.edit.tabs.source.title": "Collection Edit - Content Source",
+"community.edit.delete": "Delete this community",
 
+"community.edit.head": "Edit Community",
 
+"community.edit.logo.label": "Community logo",
 
-  "collection.form.abstract": "Short Description",
+"community.edit.logo.notifications.add.error": "Uploading Community logo failed. Please verify the content before retrying.",
 
-  "collection.form.description": "Introductory text (HTML)",
+"community.edit.logo.notifications.add.success": "Upload Community logo successful.",
 
-  "collection.form.errors.title.required": "Please enter a collection name",
+"community.edit.logo.notifications.delete.error.title": "Error deleting logo",
 
-  "collection.form.license": "License",
+"community.edit.logo.notifications.delete.success.content": "Successfully deleted the community's logo",
 
-  "collection.form.provenance": "Provenance",
+"community.edit.logo.notifications.delete.success.title": "Logo deleted",
 
-  "collection.form.rights": "Copyright text (HTML)",
+"community.edit.logo.upload": "Drop a Community Logo to upload",
 
-  "collection.form.tableofcontents": "News (HTML)",
+"community.edit.notifications.success": "Successfully edited the Community",
 
-  "collection.form.title": "Name",
+"community.edit.return": "Return",
 
+"community.edit.tabs.curate.head": "Curate",
 
+"community.edit.tabs.curate.title": "Community Edit - Curate",
 
-  "collection.page.browse.recent.head": "Recent Submissions",
+"community.edit.tabs.metadata.head": "Edit Metadata",
 
-  "collection.page.browse.recent.empty": "No items to show",
+"community.edit.tabs.metadata.title": "Community Edit - Metadata",
 
-  "collection.page.handle": "Permanent URI for this collection",
+"community.edit.tabs.roles.head": "Assign Roles",
 
-  "collection.page.license": "License",
+"community.edit.tabs.roles.title": "Community Edit - Roles",
 
-  "collection.page.news": "News",
+"community.form.abstract": "Short Description",
 
+"community.form.description": "Introductory text (HTML)",
 
+"community.form.errors.title.required": "Please enter a community name",
 
-  "collection.select.confirm": "Confirm selected",
+"community.form.rights": "Copyright text (HTML)",
 
-  "collection.select.empty": "No collections to show",
+"community.form.tableofcontents": "News (HTML)",
 
-  "collection.select.table.title": "Title",
+"community.form.title": "Name",
 
+"community.page.handle": "Permanent URI for this community",
 
+"community.page.license": "License",
 
-  "collection.source.update.notifications.error.content": "The provided settings have been tested and didn't work.",
+"community.page.news": "News",
 
-  "collection.source.update.notifications.error.title": "Server Error",
+"community.sub-collection-list.head": "Collections of this Community",
 
+"community.sub-community-list.head": "Communities of this Community",
 
+"communityList.showMore": "Show More",
 
-  "communityList.tabTitle": "DSpace - Community List",
+"communityList.tabTitle": "DSpace - Community List",
 
-  "communityList.title": "List of Communities",
+"communityList.title": "List of Communities",
 
-  "communityList.showMore": "Show More",
+"dso-selector.create.collection.head": "New collection",
 
+"dso-selector.create.community.head": "New community",
 
+"dso-selector.create.community.sub-level": "Create a new community in",
 
-  "community.create.head": "Create a Community",
+"dso-selector.create.community.top-level": "Create a new top-level community",
 
-  "community.create.notifications.success": "Successfully created the Community",
+"dso-selector.create.item.head": "New item",
 
-  "community.create.sub-head": "Create a Sub-Community for Community {{ parent }}",
+"dso-selector.edit.collection.head": "Edit collection",
 
-  "community.delete.cancel": "Cancel",
+"dso-selector.edit.community.head": "Edit community",
 
-  "community.delete.confirm": "Confirm",
+"dso-selector.edit.item.head": "Edit item",
 
-  "community.delete.head": "Delete Community",
+"dso-selector.no-results": "No {{ type }} found",
 
-  "community.delete.notification.fail": "Community could not be deleted",
+"dso-selector.placeholder": "Search for a {{ type }}",
 
-  "community.delete.notification.success": "Successfully deleted community",
+"error.browse-by": "Error fetching items",
 
-  "community.delete.text": "Are you sure you want to delete community \"{{ dso }}\"",
+"error.collection": "Error fetching collection",
 
-  "community.edit.delete": "Delete this community",
+"error.collections": "Error fetching collections",
 
-  "community.edit.head": "Edit Community",
+"error.community": "Error fetching community",
 
-  "community.edit.breadcrumbs": "Edit Community",
+"error.default": "Error",
 
+"error.identifier": "No item found for the identifier",
 
-  "community.edit.logo.label": "Community logo",
+"error.item": "Error fetching item",
 
-  "community.edit.logo.notifications.add.error": "Uploading Community logo failed. Please verify the content before retrying.",
+"error.items": "Error fetching items",
 
-  "community.edit.logo.notifications.add.success": "Upload Community logo successful.",
+"error.objects": "Error fetching objects",
 
-  "community.edit.logo.notifications.delete.success.title": "Logo deleted",
+"error.recent-submissions": "Error fetching recent submissions",
 
-  "community.edit.logo.notifications.delete.success.content": "Successfully deleted the community's logo",
+"error.search-results": "Error fetching search results",
 
-  "community.edit.logo.notifications.delete.error.title": "Error deleting logo",
+"error.sub-collections": "Error fetching sub-collections",
 
-  "community.edit.logo.upload": "Drop a Community Logo to upload",
+"error.sub-communities": "Error fetching sub-communities",
 
+"error.submission.sections.init-form-error": "An error occurred during section initialize, please check your input-form configuration. Details are below : <br> <br>",
 
+"error.top-level-communities": "Error fetching top-level communities",
 
-  "community.edit.notifications.success": "Successfully edited the Community",
+"error.validation.filerequired": "The file upload is mandatory",
 
-  "community.edit.return": "Return",
+"error.validation.license.notgranted": "You must grant this license to complete your submission. If you are unable to grant this license at this time you may save your work and return later or remove the submission.",
 
+"error.validation.pattern": "This input is restricted by the current pattern: {{ pattern }}.",
 
+"footer.copyright": "copyright © 2002-{{ year }}",
 
-  "community.edit.tabs.curate.head": "Curate",
+"footer.link.dspace": "DSpace software",
 
-  "community.edit.tabs.curate.title": "Community Edit - Curate",
+"footer.link.duraspace": "DuraSpace",
 
-  "community.edit.tabs.metadata.head": "Edit Metadata",
+"form.add": "Add",
 
-  "community.edit.tabs.metadata.title": "Community Edit - Metadata",
+"form.add-help": "Click here to add the current entry and to add another one",
 
-  "community.edit.tabs.roles.head": "Assign Roles",
+"form.cancel": "Cancel",
 
-  "community.edit.tabs.roles.title": "Community Edit - Roles",
+"form.clear": "Clear",
 
+"form.clear-help": "Click here to remove the selected value",
 
+"form.edit": "Edit",
 
-  "community.form.abstract": "Short Description",
+"form.edit-help": "Click here to edit the selected value",
 
-  "community.form.description": "Introductory text (HTML)",
+"form.first-name": "First name",
 
-  "community.form.errors.title.required": "Please enter a community name",
+"form.group-collapse": "Collapse",
 
-  "community.form.rights": "Copyright text (HTML)",
+"form.group-collapse-help": "Click here to collapse",
 
-  "community.form.tableofcontents": "News (HTML)",
+"form.group-expand": "Expand",
 
-  "community.form.title": "Name",
+"form.group-expand-help": "Click here to expand and add more elements",
 
-  "community.page.handle": "Permanent URI for this community",
+"form.last-name": "Last name",
 
-  "community.page.license": "License",
+"form.loading": "Loading...",
 
-  "community.page.news": "News",
+"form.lookup": "Lookup",
 
-  "community.all-lists.head": "Subcommunities and Collections",
+"form.lookup-help": "Click here to look up an existing relation",
 
-  "community.sub-collection-list.head": "Collections of this Community",
+"form.no-results": "No results found",
 
-  "community.sub-community-list.head": "Communities of this Community",
+"form.no-value": "No value entered",
 
+"form.other-information": "Dict{String,Any}()",
 
+"form.remove": "Remove",
 
-  "dso-selector.create.collection.head": "New collection",
+"form.save": "Save",
 
-  "dso-selector.create.community.head": "New community",
+"form.save-help": "Save changes",
 
-  "dso-selector.create.community.sub-level": "Create a new community in",
+"form.search": "Search",
 
-  "dso-selector.create.community.top-level": "Create a new top-level community",
+"form.search-help": "Click here to looking for an existing correspondence",
 
-  "dso-selector.create.item.head": "New item",
+"form.submit": "Submit",
 
-  "dso-selector.edit.collection.head": "Edit collection",
+"home.description": "",
 
-  "dso-selector.edit.community.head": "Edit community",
+"home.title": "DSpace Cris Angular :: Home",
 
-  "dso-selector.edit.item.head": "Edit item",
+"home.top-level-communities.head": "Communities in DSpace Cris",
 
-  "dso-selector.no-results": "No {{ type }} found",
+"home.top-level-communities.help": "Select a community to browse its collections.",
 
-  "dso-selector.placeholder": "Search for a {{ type }}",
+"impact-pathway.add.btn": "Add item",
 
+"impact-pathway.create.btn": "Create item",
 
+"impact-pathway.create.error": "There was an issue when generating the impact pathway, please try again later.",
 
-  "error.browse-by": "Error fetching items",
+"impact-pathway.create.head": "New impact pathway",
 
-  "error.collection": "Error fetching collection",
+"impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
 
-  "error.collections": "Error fetching collections",
+"impact-pathway.create.success": "The impact pathway has been generated successfully.",
 
-  "error.community": "Error fetching community",
+"impact-pathway.edit.page.title": "Edit impact pathway",
 
-  "error.identifier": "No item found for the identifier",
+"impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
 
-  "error.default": "Error",
+"impact-pathway.objectives.edit.page.title": "Edit objectives",
 
-  "error.item": "Error fetching item",
+"impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
 
-  "error.items": "Error fetching items",
+"impact-pathway.task.create.error": "There was an issue when creating the new item, please try again later.",
 
-  "error.objects": "Error fetching objects",
+"impact-pathway.task.create.head": "New item",
 
-  "error.recent-submissions": "Error fetching recent submissions",
+"impact-pathway.task.create.success": "New item has been created successfully.",
 
-  "error.search-results": "Error fetching search results",
+"impact-pathway.wrapper.info": "<b>Develop your Impact Pathway</b><br>  What are your objectives so that your project can have an impact? Sort objectives into categories. Select and describe funder objectives. How are your project objectives related (Draw arrows between your objectives)? Add further explanations. Specify each objectives and add items and tasks.",
 
-  "error.sub-collections": "Error fetching sub-collections",
+"impactpathway.listelement.badge": "Impact pathway",
 
-  "error.sub-communities": "Error fetching sub-communities",
+"impactpathwaystep.listelement.badge": "Impact pathway step",
 
-  "error.submission.sections.init-form-error": "An error occurred during section initialize, please check your input-form configuration. Details are below : <br> <br>",
+"item.edit.delete.cancel": "Cancel",
 
-  "error.top-level-communities": "Error fetching top-level communities",
+"item.edit.delete.confirm": "Delete",
 
-  "error.validation.license.notgranted": "You must grant this license to complete your submission. If you are unable to grant this license at this time you may save your work and return later or remove the submission.",
+"item.edit.delete.description": "Are you sure this item should be completely deleted? Caution: At present, no tombstone would be left.",
 
-  "error.validation.pattern": "This input is restricted by the current pattern: {{ pattern }}.",
+"item.edit.delete.error": "An error occurred while deleting the item",
 
-  "error.validation.filerequired": "The file upload is mandatory",
+"item.edit.delete.header": "Delete item: {{ id }}",
 
+"item.edit.delete.success": "The item has been deleted",
 
+"item.edit.head": "Edit Item",
 
-  "footer.copyright": "copyright © 2002-{{ year }}",
+"item.edit.item-mapper.buttons.add": "Map item to selected collections",
 
-  "footer.link.dspace": "DSpace software",
+"item.edit.item-mapper.buttons.remove": "Remove item's mapping for selected collections",
 
-  "footer.link.duraspace": "DuraSpace",
+"item.edit.item-mapper.cancel": "Cancel",
 
+"item.edit.item-mapper.description": "This is the item mapper tool that allows administrators to map this item to other collections. You can search for collections and map them, or browse the list of collections the item is currently mapped to.",
 
-  "form.add": "Add",
+"item.edit.item-mapper.head": "Item Mapper - Map Item to Collections",
 
-  "form.add-help": "Click here to add the current entry and to add another one",
+"item.edit.item-mapper.item": "Item: \"<b>{{name}}</b>\"",
 
-  "form.cancel": "Cancel",
+"item.edit.item-mapper.no-search": "Please enter a query to search",
 
-  "form.clear": "Clear",
+"item.edit.item-mapper.notifications.add.error.content": "Errors occurred for mapping of item to {{amount}} collections.",
 
-  "form.clear-help": "Click here to remove the selected value",
+"item.edit.item-mapper.notifications.add.error.head": "Mapping errors",
 
-  "form.edit": "Edit",
+"item.edit.item-mapper.notifications.add.success.content": "Successfully mapped item to {{amount}} collections.",
 
-  "form.edit-help": "Click here to edit the selected value",
+"item.edit.item-mapper.notifications.add.success.head": "Mapping completed",
 
-  "form.first-name": "First name",
+"item.edit.item-mapper.notifications.remove.error.content": "Errors occurred for the removal of the mapping to {{amount}} collections.",
 
-  "form.group-collapse": "Collapse",
+"item.edit.item-mapper.notifications.remove.error.head": "Removal of mapping errors",
 
-  "form.group-collapse-help": "Click here to collapse",
+"item.edit.item-mapper.notifications.remove.success.content": "Successfully removed mapping of item to {{amount}} collections.",
 
-  "form.group-expand": "Expand",
+"item.edit.item-mapper.notifications.remove.success.head": "Removal of mapping completed",
 
-  "form.group-expand-help": "Click here to expand and add more elements",
+"item.edit.item-mapper.tabs.browse": "Browse mapped collections",
 
-  "form.last-name": "Last name",
+"item.edit.item-mapper.tabs.map": "Map new collections",
 
-  "form.loading": "Loading...",
+"item.edit.metadata.add-button": "Add",
 
-  "form.lookup": "Lookup",
+"item.edit.metadata.discard-button": "Discard",
 
-  "form.lookup-help": "Click here to look up an existing relation",
+"item.edit.metadata.edit.buttons.edit": "Edit",
 
-  "form.no-results": "No results found",
+"item.edit.metadata.edit.buttons.remove": "Remove",
 
-  "form.no-value": "No value entered",
+"item.edit.metadata.edit.buttons.undo": "Undo changes",
 
-  "form.other-information": {},
+"item.edit.metadata.edit.buttons.unedit": "Stop editing",
 
-  "form.remove": "Remove",
+"item.edit.metadata.headers.edit": "Edit",
 
-  "form.save": "Save",
+"item.edit.metadata.headers.field": "Field",
 
-  "form.save-help": "Save changes",
+"item.edit.metadata.headers.language": "Lang",
 
-  "form.search": "Search",
+"item.edit.metadata.headers.value": "Value",
 
-  "form.search-help": "Click here to looking for an existing correspondence",
+"item.edit.metadata.metadatafield.invalid": "Please choose a valid metadata field",
 
-  "form.submit": "Submit",
+"item.edit.metadata.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
 
+"item.edit.metadata.notifications.discarded.title": "Changed discarded",
 
+"item.edit.metadata.notifications.invalid.content": "Your changes were not saved. Please make sure all fields are valid before you save.",
 
-  "home.description": "",
+"item.edit.metadata.notifications.invalid.title": "Metadata invalid",
 
-  "home.title": "DSpace Cris Angular :: Home",
+"item.edit.metadata.notifications.outdated.content": "The item you're currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
 
-  "home.top-level-communities.head": "Communities in DSpace Cris",
+"item.edit.metadata.notifications.outdated.title": "Changed outdated",
 
-  "home.top-level-communities.help": "Select a community to browse its collections.",
+"item.edit.metadata.notifications.saved.content": "Your changes to this item's metadata were saved.",
 
+"item.edit.metadata.notifications.saved.title": "Metadata saved",
 
+"item.edit.metadata.reinstate-button": "Undo",
 
-  "impact-pathway.wrapper.info": "<b>Develop your Impact Pathway</b><br>  What are your objectives so that your project can have an impact? Sort objectives into categories. Select and describe funder objectives. How are your project objectives related (Draw arrows between your objectives)? Add further explanations. Specify each objectives and add items and tasks.",
+"item.edit.metadata.save-button": "Save",
 
-  "impact-pathway.add.btn": "Add item",
+"item.edit.modify.overview.field": "Field",
 
-  "impact-pathway.create.btn": "Create item",
+"item.edit.modify.overview.language": "Language",
 
-  "impact-pathway.create.head": "New impact pathway",
+"item.edit.modify.overview.value": "Value",
 
-  "impact-pathway.create.error": "There was an issue when generating the impact pathway, please try again later.",
+"item.edit.move.cancel": "Cancel",
 
-  "impact-pathway.create.success": "The impact pathway has been generated successfully.",
+"item.edit.move.description": "Select the collection you wish to move this item to. To narrow down the list of displayed collections, you can enter a search query in the box.",
 
-  "impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
+"item.edit.move.error": "An error occurred when attempting to move the item",
 
-  "impact-pathway.edit.page.title": "Edit impact pathway",
+"item.edit.move.head": "Move item: {{id}}",
 
-  "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
+"item.edit.move.inheritpolicies.checkbox": "Inherit policies",
 
-  "impact-pathway.objectives.edit.page.title": "Edit objectives",
+"item.edit.move.inheritpolicies.description": "Inherit the default policies of the destination collection",
 
-  "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
+"item.edit.move.move": "Move",
 
-  "impact-pathway.task.create.head": "New item",
+"item.edit.move.processing": "Moving...",
 
-  "impact-pathway.task.create.error": "There was an issue when creating the new item, please try again later.",
+"item.edit.move.search.placeholder": "Enter a search query to look for collections",
 
-  "impact-pathway.task.create.success": "New item has been created successfully.",
+"item.edit.move.success": "The item has been moved successfully",
 
-  "impactpathway.listelement.badge": "Impact pathway",
+"item.edit.move.title": "Move item",
 
-  "impactpathwaystep.listelement.badge":  "Impact pathway step",
+"item.edit.private.cancel": "Cancel",
 
+"item.edit.private.confirm": "Make it Private",
 
+"item.edit.private.description": "Are you sure this item should be made private in the archive?",
 
-  "item.edit.delete.cancel": "Cancel",
+"item.edit.private.error": "An error occurred while making the item private",
 
-  "item.edit.delete.confirm": "Delete",
+"item.edit.private.header": "Make item private: {{ id }}",
 
-  "item.edit.delete.description": "Are you sure this item should be completely deleted? Caution: At present, no tombstone would be left.",
+"item.edit.private.success": "The item is now private",
 
-  "item.edit.delete.error": "An error occurred while deleting the item",
+"item.edit.public.cancel": "Cancel",
 
-  "item.edit.delete.header": "Delete item: {{ id }}",
+"item.edit.public.confirm": "Make it Public",
 
-  "item.edit.delete.success": "The item has been deleted",
+"item.edit.public.description": "Are you sure this item should be made public in the archive?",
 
-  "item.edit.head": "Edit Item",
+"item.edit.public.error": "An error occurred while making the item public",
 
-  "item.edit.breadcrumbs": "Edit Item",
+"item.edit.public.header": "Make item public: {{ id }}",
 
+"item.edit.public.success": "The item is now public",
 
+"item.edit.reinstate.cancel": "Cancel",
 
-  "item.edit.item-mapper.buttons.add": "Map item to selected collections",
+"item.edit.reinstate.confirm": "Reinstate",
 
-  "item.edit.item-mapper.buttons.remove": "Remove item's mapping for selected collections",
+"item.edit.reinstate.description": "Are you sure this item should be reinstated to the archive?",
 
-  "item.edit.item-mapper.cancel": "Cancel",
+"item.edit.reinstate.error": "An error occurred while reinstating the item",
 
-  "item.edit.item-mapper.description": "This is the item mapper tool that allows administrators to map this item to other collections. You can search for collections and map them, or browse the list of collections the item is currently mapped to.",
+"item.edit.reinstate.header": "Reinstate item: {{ id }}",
 
-  "item.edit.item-mapper.head": "Item Mapper - Map Item to Collections",
+"item.edit.reinstate.success": "The item was reinstated successfully",
 
-  "item.edit.item-mapper.item": "Item: \"<b>{{name}}</b>\"",
+"item.edit.relationships.discard-button": "Discard",
 
-  "item.edit.item-mapper.no-search": "Please enter a query to search",
+"item.edit.relationships.edit.buttons.remove": "Remove",
 
-  "item.edit.item-mapper.notifications.add.error.content": "Errors occurred for mapping of item to {{amount}} collections.",
+"item.edit.relationships.edit.buttons.undo": "Undo changes",
 
-  "item.edit.item-mapper.notifications.add.error.head": "Mapping errors",
+"item.edit.relationships.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
 
-  "item.edit.item-mapper.notifications.add.success.content": "Successfully mapped item to {{amount}} collections.",
+"item.edit.relationships.notifications.discarded.title": "Changes discarded",
 
-  "item.edit.item-mapper.notifications.add.success.head": "Mapping completed",
+"item.edit.relationships.notifications.failed.title": "Error deleting relationship",
 
-  "item.edit.item-mapper.notifications.remove.error.content": "Errors occurred for the removal of the mapping to {{amount}} collections.",
+"item.edit.relationships.notifications.outdated.content": "The item you're currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
 
-  "item.edit.item-mapper.notifications.remove.error.head": "Removal of mapping errors",
+"item.edit.relationships.notifications.outdated.title": "Changes outdated",
 
-  "item.edit.item-mapper.notifications.remove.success.content": "Successfully removed mapping of item to {{amount}} collections.",
+"item.edit.relationships.notifications.saved.content": "Your changes to this item's relationships were saved.",
 
-  "item.edit.item-mapper.notifications.remove.success.head": "Removal of mapping completed",
+"item.edit.relationships.notifications.saved.title": "Relationships saved",
 
-  "item.edit.item-mapper.tabs.browse": "Browse mapped collections",
+"item.edit.relationships.reinstate-button": "Undo",
 
-  "item.edit.item-mapper.tabs.map": "Map new collections",
+"item.edit.relationships.save-button": "Save",
 
+"item.edit.tabs.bitstreams.head": "Item Bitstreams",
 
+"item.edit.tabs.bitstreams.title": "Item Edit - Bitstreams",
 
-  "item.edit.metadata.add-button": "Add",
+"item.edit.tabs.curate.head": "Curate",
 
-  "item.edit.metadata.discard-button": "Discard",
+"item.edit.tabs.curate.title": "Item Edit - Curate",
 
-  "item.edit.metadata.edit.buttons.edit": "Edit",
+"item.edit.tabs.metadata.head": "Item Metadata",
 
-  "item.edit.metadata.edit.buttons.remove": "Remove",
+"item.edit.tabs.metadata.title": "Item Edit -  Metadata",
 
-  "item.edit.metadata.edit.buttons.undo": "Undo changes",
+"item.edit.tabs.relationships.head": "Item Relationships",
 
-  "item.edit.metadata.edit.buttons.unedit": "Stop editing",
+"item.edit.tabs.relationships.title": "Item Edit - Relationships",
 
-  "item.edit.metadata.headers.edit": "Edit",
+"item.edit.tabs.status.buttons.authorizations.button": "Authorizations...",
 
-  "item.edit.metadata.headers.field": "Field",
+"item.edit.tabs.status.buttons.authorizations.label": "Edit item's authorization policies",
 
-  "item.edit.metadata.headers.language": "Lang",
+"item.edit.tabs.status.buttons.delete.button": "Permanently delete",
 
-  "item.edit.metadata.headers.value": "Value",
+"item.edit.tabs.status.buttons.delete.label": "Completely expunge item",
 
-  "item.edit.metadata.metadatafield.invalid": "Please choose a valid metadata field",
+"item.edit.tabs.status.buttons.mappedCollections.button": "Mapped collections",
 
-  "item.edit.metadata.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
+"item.edit.tabs.status.buttons.mappedCollections.label": "Manage mapped collections",
 
-  "item.edit.metadata.notifications.discarded.title": "Changed discarded",
+"item.edit.tabs.status.buttons.move.button": "Move...",
 
-  "item.edit.metadata.notifications.invalid.content": "Your changes were not saved. Please make sure all fields are valid before you save.",
+"item.edit.tabs.status.buttons.move.label": "Move item to another collection",
 
-  "item.edit.metadata.notifications.invalid.title": "Metadata invalid",
+"item.edit.tabs.status.buttons.private.button": "Make it private...",
 
-  "item.edit.metadata.notifications.outdated.content": "The item you're currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
+"item.edit.tabs.status.buttons.private.label": "Make item private",
 
-  "item.edit.metadata.notifications.outdated.title": "Changed outdated",
+"item.edit.tabs.status.buttons.public.button": "Make it public...",
 
-  "item.edit.metadata.notifications.saved.content": "Your changes to this item's metadata were saved.",
+"item.edit.tabs.status.buttons.public.label": "Make item public",
 
-  "item.edit.metadata.notifications.saved.title": "Metadata saved",
+"item.edit.tabs.status.buttons.reinstate.button": "Reinstate...",
 
-  "item.edit.metadata.reinstate-button": "Undo",
+"item.edit.tabs.status.buttons.reinstate.label": "Reinstate item into the repository",
 
-  "item.edit.metadata.save-button": "Save",
+"item.edit.tabs.status.buttons.withdraw.button": "Withdraw...",
 
+"item.edit.tabs.status.buttons.withdraw.label": "Withdraw item from the repository",
 
+"item.edit.tabs.status.description": "Welcome to the item management page. From here you can withdraw, reinstate, move or delete the item. You may also update or add new metadata / bitstreams on the other tabs.",
 
-  "item.edit.modify.overview.field": "Field",
+"item.edit.tabs.status.head": "Item Status",
 
-  "item.edit.modify.overview.language": "Language",
+"item.edit.tabs.status.labels.handle": "Handle",
 
-  "item.edit.modify.overview.value": "Value",
+"item.edit.tabs.status.labels.id": "Item Internal ID",
 
+"item.edit.tabs.status.labels.itemPage": "Item Page",
 
+"item.edit.tabs.status.labels.lastModified": "Last Modified",
 
-  "item.edit.move.cancel": "Cancel",
+"item.edit.tabs.status.title": "Item Edit -  Status",
 
-  "item.edit.move.description": "Select the collection you wish to move this item to. To narrow down the list of displayed collections, you can enter a search query in the box.",
+"item.edit.tabs.view.head": "View Item",
 
-  "item.edit.move.error": "An error occurred when attempting to move the item",
+"item.edit.tabs.view.title": "Item Edit -  View",
 
-  "item.edit.move.head": "Move item: {{id}}",
+"item.edit.withdraw.cancel": "Cancel",
 
-  "item.edit.move.inheritpolicies.checkbox": "Inherit policies",
+"item.edit.withdraw.confirm": "Withdraw",
 
-  "item.edit.move.inheritpolicies.description": "Inherit the default policies of the destination collection",
+"item.edit.withdraw.description": "Are you sure this item should be withdrawn from the archive?",
 
-  "item.edit.move.move": "Move",
+"item.edit.withdraw.error": "An error occurred while withdrawing the item",
 
-  "item.edit.move.processing": "Moving...",
+"item.edit.withdraw.header": "Withdraw item: {{ id }}",
 
-  "item.edit.move.search.placeholder": "Enter a search query to look for collections",
+"item.edit.withdraw.success": "The item was withdrawn successfully",
 
-  "item.edit.move.success": "The item has been moved successfully",
+"item.page.abstract": "Abstract",
 
-  "item.edit.move.title": "Move item",
+"item.page.author": "Authors",
 
+"item.page.citation": "Citation",
 
+"item.page.collections": "Collections",
 
-  "item.edit.private.cancel": "Cancel",
+"item.page.context-menu.options": "Options",
 
-  "item.edit.private.confirm": "Make it Private",
+"item.page.context-menu.options.edit-impact-pathway.btn": "Edit impact pathway",
 
-  "item.edit.private.description": "Are you sure this item should be made private in the archive?",
+"item.page.date": "Date",
 
-  "item.edit.private.error": "An error occurred while making the item private",
+"item.page.files": "Files",
 
-  "item.edit.private.header": "Make item private: {{ id }}",
+"item.page.filesection.description": "Description:",
 
-  "item.edit.private.success": "The item is now private",
+"item.page.filesection.download": "Download",
 
+"item.page.filesection.format": "Format:",
 
+"item.page.filesection.name": "Name:",
 
-  "item.edit.public.cancel": "Cancel",
+"item.page.filesection.size": "Size:",
 
-  "item.edit.public.confirm": "Make it Public",
+"item.page.journal.search.title": "Articles in this journal",
 
-  "item.edit.public.description": "Are you sure this item should be made public in the archive?",
+"item.page.link.full": "Full item page",
 
-  "item.edit.public.error": "An error occurred while making the item public",
+"item.page.link.simple": "Simple item page",
 
-  "item.edit.public.header": "Make item public: {{ id }}",
+"item.page.person.search.title": "Articles by this author",
 
-  "item.edit.public.success": "The item is now public",
+"item.page.related-items.view-less": "Hide last {{ amount }}",
 
+"item.page.related-items.view-more": "Show {{ amount }} more",
 
+"item.page.relationships.isAuthorOfPublication": "Publications",
 
-  "item.edit.reinstate.cancel": "Cancel",
+"item.page.relationships.isJournalOfPublication": "Publications",
 
-  "item.edit.reinstate.confirm": "Reinstate",
+"item.page.relationships.isOrgUnitOfPerson": "Authors",
 
-  "item.edit.reinstate.description": "Are you sure this item should be reinstated to the archive?",
+"item.page.relationships.isOrgUnitOfProject": "Research Projects",
 
-  "item.edit.reinstate.error": "An error occurred while reinstating the item",
+"item.page.subject": "Keywords",
 
-  "item.edit.reinstate.header": "Reinstate item: {{ id }}",
+"item.page.uri": "URI",
 
-  "item.edit.reinstate.success": "The item was reinstated successfully",
+"item.select.confirm": "Confirm selected",
 
+"item.select.empty": "No items to show",
 
+"item.select.table.author": "Author",
 
-  "item.edit.relationships.discard-button": "Discard",
+"item.select.table.collection": "Collection",
 
-  "item.edit.relationships.edit.buttons.remove": "Remove",
+"item.select.table.title": "Title",
 
-  "item.edit.relationships.edit.buttons.undo": "Undo changes",
+"journal.listelement.badge": "Journal",
 
-  "item.edit.relationships.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
+"journal.page.description": "Description",
 
-  "item.edit.relationships.notifications.discarded.title": "Changes discarded",
+"journal.page.editor": "Editor-in-Chief",
 
-  "item.edit.relationships.notifications.failed.title": "Error deleting relationship",
+"journal.page.issn": "ISSN",
 
-  "item.edit.relationships.notifications.outdated.content": "The item you're currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
+"journal.page.publisher": "Publisher",
 
-  "item.edit.relationships.notifications.outdated.title": "Changes outdated",
+"journal.page.titleprefix": "Journal: ",
 
-  "item.edit.relationships.notifications.saved.content": "Your changes to this item's relationships were saved.",
+"journal.search.results.head": "Journal Search Results",
 
-  "item.edit.relationships.notifications.saved.title": "Relationships saved",
+"journal.search.title": "DSpace Cris Angular :: Journal Search",
 
-  "item.edit.relationships.reinstate-button": "Undo",
+"journalissue.listelement.badge": "Journal Issue",
 
-  "item.edit.relationships.save-button": "Save",
+"journalissue.page.description": "Description",
 
+"journalissue.page.issuedate": "Issue Date",
 
+"journalissue.page.journal-issn": "Journal ISSN",
 
-  "item.edit.tabs.bitstreams.head": "Item Bitstreams",
+"journalissue.page.journal-title": "Journal Title",
 
-  "item.edit.tabs.bitstreams.title": "Item Edit - Bitstreams",
+"journalissue.page.keyword": "Keywords",
 
-  "item.edit.tabs.curate.head": "Curate",
+"journalissue.page.number": "Number",
 
-  "item.edit.tabs.curate.title": "Item Edit - Curate",
+"journalissue.page.titleprefix": "Journal Issue: ",
 
-  "item.edit.tabs.metadata.head": "Item Metadata",
+"journalvolume.listelement.badge": "Journal Volume",
 
-  "item.edit.tabs.metadata.title": "Item Edit -  Metadata",
+"journalvolume.page.description": "Description",
 
-  "item.edit.tabs.relationships.head": "Item Relationships",
+"journalvolume.page.issuedate": "Issue Date",
 
-  "item.edit.tabs.relationships.title": "Item Edit - Relationships",
+"journalvolume.page.titleprefix": "Journal Volume: ",
 
-  "item.edit.tabs.status.buttons.authorizations.button": "Authorizations...",
+"journalvolume.page.volume": "Volume",
 
-  "item.edit.tabs.status.buttons.authorizations.label": "Edit item's authorization policies",
+"loading.browse-by": "Loading items...",
 
-  "item.edit.tabs.status.buttons.delete.button": "Permanently delete",
+"loading.browse-by-page": "Loading page...",
 
-  "item.edit.tabs.status.buttons.delete.label": "Completely expunge item",
+"loading.collection": "Loading collection...",
 
-  "item.edit.tabs.status.buttons.mappedCollections.button": "Mapped collections",
+"loading.collections": "Loading collections...",
 
-  "item.edit.tabs.status.buttons.mappedCollections.label": "Manage mapped collections",
+"loading.community": "Loading community...",
 
-  "item.edit.tabs.status.buttons.move.button": "Move...",
+"loading.content-source": "Loading content source...",
 
-  "item.edit.tabs.status.buttons.move.label": "Move item to another collection",
+"loading.default": "Loading...",
 
-  "item.edit.tabs.status.buttons.private.button": "Make it private...",
+"loading.item": "Loading item...",
 
-  "item.edit.tabs.status.buttons.private.label": "Make item private",
+"loading.items": "Loading items...",
 
-  "item.edit.tabs.status.buttons.public.button": "Make it public...",
+"loading.mydspace-results": "Loading items...",
 
-  "item.edit.tabs.status.buttons.public.label": "Make item public",
+"loading.objects": "Loading...",
 
-  "item.edit.tabs.status.buttons.reinstate.button": "Reinstate...",
+"loading.processing": "Processing...",
 
-  "item.edit.tabs.status.buttons.reinstate.label": "Reinstate item into the repository",
+"loading.recent-submissions": "Loading recent submissions...",
 
-  "item.edit.tabs.status.buttons.withdraw.button": "Withdraw...",
+"loading.search-results": "Loading search results...",
 
-  "item.edit.tabs.status.buttons.withdraw.label": "Withdraw item from the repository",
+"loading.sub-collections": "Loading sub-collections...",
 
-  "item.edit.tabs.status.description": "Welcome to the item management page. From here you can withdraw, reinstate, move or delete the item. You may also update or add new metadata / bitstreams on the other tabs.",
+"loading.sub-communities": "Loading sub-communities...",
 
-  "item.edit.tabs.status.head": "Item Status",
+"loading.top-level-communities": "Loading top-level communities...",
 
-  "item.edit.tabs.status.labels.handle": "Handle",
+"login.form.email": "Email address",
 
-  "item.edit.tabs.status.labels.id": "Item Internal ID",
+"login.form.forgot-password": "Have you forgotten your password?",
 
-  "item.edit.tabs.status.labels.itemPage": "Item Page",
+"login.form.header": "Please log in to DSpace",
 
-  "item.edit.tabs.status.labels.lastModified": "Last Modified",
+"login.form.new-user": "New user? Click here to register.",
 
-  "item.edit.tabs.status.title": "Item Edit -  Status",
+"login.form.or-divider": "or",
 
-  "item.edit.tabs.view.head": "View Item",
+"login.form.password": "Password",
 
-  "item.edit.tabs.view.title": "Item Edit -  View",
+"login.form.shibboleth": "Log in with Shibboleth",
 
+"login.form.submit": "Log in",
 
+"login.title": "Login",
 
-  "item.edit.withdraw.cancel": "Cancel",
+"logout.form.header": "Log out from DSpace",
 
-  "item.edit.withdraw.confirm": "Withdraw",
+"logout.form.submit": "Log out",
 
-  "item.edit.withdraw.description": "Are you sure this item should be withdrawn from the archive?",
+"logout.title": "Logout",
 
-  "item.edit.withdraw.error": "An error occurred while withdrawing the item",
+"menu.header.admin": "Admin",
 
-  "item.edit.withdraw.header": "Withdraw item: {{ id }}",
+"menu.header.image.logo": "Repository logo",
 
-  "item.edit.withdraw.success": "The item was withdrawn successfully",
+"menu.section.access_control": "Access Control",
 
+"menu.section.access_control_authorizations": "Authorizations",
 
+"menu.section.access_control_groups": "Groups",
 
-  "item.page.abstract": "Abstract",
+"menu.section.access_control_people": "People",
 
-  "item.page.author": "Authors",
+"menu.section.browse_community": "This Community",
 
-  "item.page.citation": "Citation",
+"menu.section.browse_community_by_author": "By Author",
 
-  "item.page.collections": "Collections",
+"menu.section.browse_community_by_issue_date": "By Issue Date",
 
-  "item.page.context-menu.options": "Options",
+"menu.section.browse_community_by_title": "By Title",
 
-  "item.page.context-menu.options.edit-impact-pathway.btn": "Edit impact pathway",
+"menu.section.browse_global": "All of DSpace",
 
+"menu.section.browse_global_by_author": "By Author",
 
-  "item.page.date": "Date",
+"menu.section.browse_global_by_dateissued": "By Issue Date",
 
-  "item.page.files": "Files",
+"menu.section.browse_global_by_subject": "By Subject",
 
-  "item.page.filesection.description": "Description:",
+"menu.section.browse_global_by_title": "By Title",
 
-  "item.page.filesection.download": "Download",
+"menu.section.browse_global_communities_and_collections": "Communities & Collections",
 
-  "item.page.filesection.format": "Format:",
+"menu.section.control_panel": "Control Panel",
 
-  "item.page.filesection.name": "Name:",
+"menu.section.curation_task": "Curation Task",
 
-  "item.page.filesection.size": "Size:",
+"menu.section.edit": "Edit",
 
-  "item.page.journal.search.title": "Articles in this journal",
+"menu.section.edit_collection": "Collection",
 
-  "item.page.link.full": "Full item page",
+"menu.section.edit_community": "Community",
 
-  "item.page.link.simple": "Simple item page",
+"menu.section.edit_item": "Item",
 
-  "item.page.person.search.title": "Articles by this author",
+"menu.section.export": "Export",
 
-  "item.page.related-items.view-more": "Show {{ amount }} more",
+"menu.section.export_collection": "Collection",
 
-  "item.page.related-items.view-less": "Hide last {{ amount }}",
+"menu.section.export_community": "Community",
 
-  "item.page.relationships.isAuthorOfPublication": "Publications",
+"menu.section.export_item": "Item",
 
-  "item.page.relationships.isJournalOfPublication": "Publications",
+"menu.section.export_metadata": "Metadata",
 
-  "item.page.relationships.isOrgUnitOfPerson": "Authors",
+"menu.section.find": "Find",
 
-  "item.page.relationships.isOrgUnitOfProject": "Research Projects",
+"menu.section.find_items": "Items",
 
-  "item.page.subject": "Keywords",
+"menu.section.find_private_items": "Private Items",
 
-  "item.page.uri": "URI",
+"menu.section.find_withdrawn_items": "Withdrawn Items",
 
+"menu.section.icon.access_control": "Access Control menu section",
 
+"menu.section.icon.control_panel": "Control Panel menu section",
 
-  "item.select.confirm": "Confirm selected",
+"menu.section.icon.curation_task": "Curation Task menu section",
 
-  "item.select.empty": "No items to show",
+"menu.section.icon.edit": "Edit menu section",
 
-  "item.select.table.author": "Author",
+"menu.section.icon.export": "Export menu section",
 
-  "item.select.table.collection": "Collection",
+"menu.section.icon.find": "Find menu section",
 
-  "item.select.table.title": "Title",
+"menu.section.icon.import": "Import menu section",
 
+"menu.section.icon.new": "New menu section",
 
+"menu.section.icon.pin": "Pin sidebar",
 
-  "journal.listelement.badge": "Journal",
+"menu.section.icon.registries": "Registries menu section",
 
-  "journal.page.description": "Description",
+"menu.section.icon.statistics_task": "Statistics Task menu section",
 
-  "journal.page.editor": "Editor-in-Chief",
+"menu.section.icon.unpin": "Unpin sidebar",
 
-  "journal.page.issn": "ISSN",
+"menu.section.import": "Import",
 
-  "journal.page.publisher": "Publisher",
+"menu.section.import_batch": "Batch Import (ZIP)",
 
-  "journal.page.titleprefix": "Journal: ",
+"menu.section.import_metadata": "Metadata",
 
-  "journal.search.results.head": "Journal Search Results",
+"menu.section.new": "New",
 
-  "journal.search.title": "DSpace Cris Angular :: Journal Search",
+"menu.section.new_collection": "Collection",
 
+"menu.section.new_community": "Community",
 
+"menu.section.new_impact_pathway": "Impact pathway",
 
-  "journalissue.listelement.badge": "Journal Issue",
+"menu.section.new_item": "Item",
 
-  "journalissue.page.description": "Description",
+"menu.section.new_item_version": "Item Version",
 
-  "journalissue.page.issuedate": "Issue Date",
+"menu.section.pin": "Pin sidebar",
 
-  "journalissue.page.journal-issn": "Journal ISSN",
+"menu.section.registries": "Registries",
 
-  "journalissue.page.journal-title": "Journal Title",
+"menu.section.registries_format": "Format",
 
-  "journalissue.page.keyword": "Keywords",
+"menu.section.registries_metadata": "Metadata",
 
-  "journalissue.page.number": "Number",
+"menu.section.statistics": "Statistics",
 
-  "journalissue.page.titleprefix": "Journal Issue: ",
+"menu.section.statistics_task": "Statistics Task",
 
+"menu.section.toggle.access_control": "Toggle Access Control section",
 
+"menu.section.toggle.control_panel": "Toggle Control Panel section",
 
-  "journalvolume.listelement.badge": "Journal Volume",
+"menu.section.toggle.curation_task": "Toggle Curation Task section",
 
-  "journalvolume.page.description": "Description",
+"menu.section.toggle.edit": "Toggle Edit section",
 
-  "journalvolume.page.issuedate": "Issue Date",
+"menu.section.toggle.export": "Toggle Export section",
 
-  "journalvolume.page.titleprefix": "Journal Volume: ",
+"menu.section.toggle.find": "Toggle Find section",
 
-  "journalvolume.page.volume": "Volume",
+"menu.section.toggle.import": "Toggle Import section",
 
+"menu.section.toggle.new": "Toggle New section",
 
+"menu.section.toggle.registries": "Toggle Registries section",
 
-  "loading.browse-by": "Loading items...",
+"menu.section.toggle.statistics_task": "Toggle Statistics Task section",
 
-  "loading.browse-by-page": "Loading page...",
+"menu.section.unpin": "Unpin sidebar",
 
-  "loading.collection": "Loading collection...",
+"mydspace.description": "",
 
-  "loading.collections": "Loading collections...",
+"mydspace.general.text-here": "HERE",
 
-  "loading.content-source": "Loading content source...",
+"mydspace.messages.controller-help": "Select this option to send a message to item's submitter.",
 
-  "loading.community": "Loading community...",
+"mydspace.messages.description-placeholder": "Insert your message here...",
 
-  "loading.default": "Loading...",
+"mydspace.messages.hide-msg": "Hide message",
 
-  "loading.item": "Loading item...",
+"mydspace.messages.mark-as-read": "Mark as read",
 
-  "loading.items": "Loading items...",
+"mydspace.messages.mark-as-unread": "Mark as unread",
 
-  "loading.mydspace-results": "Loading items...",
+"mydspace.messages.no-content": "No content.",
 
-  "loading.objects": "Loading...",
+"mydspace.messages.no-messages": "No messages yet.",
 
-  "loading.recent-submissions": "Loading recent submissions...",
+"mydspace.messages.send-btn": "Send",
 
-  "loading.search-results": "Loading search results...",
+"mydspace.messages.show-msg": "Show message",
 
-  "loading.sub-collections": "Loading sub-collections...",
+"mydspace.messages.subject-placeholder": "Subject...",
 
-  "loading.sub-communities": "Loading sub-communities...",
+"mydspace.messages.submitter-help": "Select this option to send a message to controller.",
 
-  "loading.top-level-communities": "Loading top-level communities...",
+"mydspace.messages.title": "Messages",
 
-  "loading.processing": "Processing...",
+"mydspace.messages.to": "To",
 
+"mydspace.new-submission": "New submission",
 
-  "login.form.email": "Email address",
+"mydspace.results.head": "Your submissions",
 
-  "login.form.forgot-password": "Have you forgotten your password?",
+"mydspace.results.no-abstract": "No Abstract",
 
-  "login.form.header": "Please log in to DSpace",
+"mydspace.results.no-authors": "No Authors",
 
-  "login.form.new-user": "New user? Click here to register.",
+"mydspace.results.no-collections": "No Collections",
 
-  "login.form.or-divider": "or",
+"mydspace.results.no-date": "No Date",
 
-  "login.form.password": "Password",
+"mydspace.results.no-files": "No Files",
 
-  "login.form.shibboleth": "Log in with Shibboleth",
+"mydspace.results.no-results": "There were no items to show",
 
-  "login.form.submit": "Log in",
+"mydspace.results.no-title": "No title",
 
-  "login.title": "Login",
+"mydspace.results.no-uri": "No Uri",
 
-  "login.breadcrumbs": "Login",
+"mydspace.show.workflow": "All tasks",
 
+"mydspace.show.workspace": "Your Submissions",
 
+"mydspace.status.archived": "Archived",
 
-  "logout.form.header": "Log out from DSpace",
+"mydspace.status.validation": "Validation",
 
-  "logout.form.submit": "Log out",
+"mydspace.status.waiting-for-controller": "Waiting for controller",
 
-  "logout.title": "Logout",
+"mydspace.status.workflow": "Workflow",
 
+"mydspace.status.workspace": "Workspace",
 
+"mydspace.title": "MyDSpace",
 
-  "menu.header.admin": "Admin",
+"mydspace.upload.upload-failed": "Error creating new workspace. Please verify the content uploaded before retry.",
 
-  "menu.header.image.logo": "Repository logo",
+"mydspace.upload.upload-multiple-successful": "{{qty}} new workspace items created.",
 
+"mydspace.upload.upload-successful": "New workspace item created. Click {{here}} for edit it.",
 
+"mydspace.view-btn": "View",
 
-  "menu.section.access_control": "Access Control",
+"nav.browse.header": "All of DSpace",
 
-  "menu.section.access_control_authorizations": "Authorizations",
+"nav.community-browse.header": "By Community",
 
-  "menu.section.access_control_groups": "Groups",
+"nav.language": "Language switch",
 
-  "menu.section.access_control_people": "People",
+"nav.login": "Log In",
 
+"nav.logout": "Log Out",
 
+"nav.mydspace": "MyDSpace",
 
-  "menu.section.browse_community": "This Community",
+"nav.search": "Search",
 
-  "menu.section.browse_community_by_author": "By Author",
+"nav.statistics.header": "Statistics",
 
-  "menu.section.browse_community_by_issue_date": "By Issue Date",
+"orgunit.listelement.badge": "Organizational Unit",
 
-  "menu.section.browse_community_by_title": "By Title",
+"orgunit.page.city": "City",
 
-  "menu.section.browse_global": "All of DSpace",
+"orgunit.page.country": "Country",
 
-  "menu.section.browse_global_by_author": "By Author",
+"orgunit.page.dateestablished": "Date established",
 
-  "menu.section.browse_global_by_dateissued": "By Issue Date",
+"orgunit.page.description": "Description",
 
-  "menu.section.browse_global_by_subject": "By Subject",
+"orgunit.page.id": "ID",
 
-  "menu.section.browse_global_by_title": "By Title",
+"orgunit.page.titleprefix": "Organizational Unit: ",
 
-  "menu.section.browse_global_communities_and_collections": "Communities & Collections",
+"pagination.results-per-page": "Results Per Page",
 
+"pagination.showing.detail": "{{ range }} of {{ total }}",
 
+"pagination.showing.label": "Now showing ",
 
-  "menu.section.control_panel": "Control Panel",
+"pagination.sort-direction": "Sort Options",
 
-  "menu.section.curation_task": "Curation Task",
+"person.listelement.badge": "Person",
 
+"person.page.birthdate": "Birth Date",
 
+"person.page.email": "Email Address",
 
-  "menu.section.edit": "Edit",
+"person.page.firstname": "First Name",
 
-  "menu.section.edit_collection": "Collection",
+"person.page.jobtitle": "Job Title",
 
-  "menu.section.edit_community": "Community",
+"person.page.lastname": "Last Name",
 
-  "menu.section.edit_item": "Item",
+"person.page.link.full": "Show all metadata",
 
+"person.page.orcid": "ORCID",
 
+"person.page.staffid": "Staff ID",
 
-  "menu.section.export": "Export",
+"person.page.titleprefix": "Person: ",
 
-  "menu.section.export_collection": "Collection",
+"person.search.results.head": "Person Search Results",
 
-  "menu.section.export_community": "Community",
+"person.search.title": "DSpace Cris Angular :: Person Search",
 
-  "menu.section.export_item": "Item",
+"project.listelement.badge": "Research Project",
 
-  "menu.section.export_metadata": "Metadata",
+"project.page.contributor": "Contributors",
 
+"project.page.description": "Description",
 
+"project.page.expectedcompletion": "Expected Completion",
 
-  "menu.section.find": "Find",
+"project.page.funder": "Funders",
 
-  "menu.section.find_items": "Items",
+"project.page.id": "ID",
 
-  "menu.section.find_private_items": "Private Items",
+"project.page.keyword": "Keywords",
 
-  "menu.section.find_withdrawn_items": "Withdrawn Items",
+"project.page.status": "Status",
 
+"project.page.titleprefix": "Research Project: ",
 
+"project.search.results.head": "Project Search Results",
 
-  "menu.section.icon.access_control": "Access Control menu section",
+"publication.listelement.badge": "Publication",
 
-  "menu.section.icon.control_panel": "Control Panel menu section",
+"publication.page.description": "Description",
 
-  "menu.section.icon.curation_task": "Curation Task menu section",
+"publication.page.journal-issn": "Journal ISSN",
 
-  "menu.section.icon.edit": "Edit menu section",
+"publication.page.journal-title": "Journal Title",
 
-  "menu.section.icon.export": "Export menu section",
+"publication.page.publisher": "Publisher",
 
-  "menu.section.icon.find": "Find menu section",
+"publication.page.titleprefix": "Publication: ",
 
-  "menu.section.icon.import": "Import menu section",
+"publication.page.volume-title": "Volume Title",
 
-  "menu.section.icon.new": "New menu section",
+"publication.search.results.head": "Publication Search Results",
 
-  "menu.section.icon.pin": "Pin sidebar",
+"publication.search.title": "DSpace Cris Angular :: Publication Search",
 
-  "menu.section.icon.registries": "Registries menu section",
+"relationships.isAuthorOf": "Authors",
 
-  "menu.section.icon.statistics_task": "Statistics Task menu section",
+"relationships.isContributorOf": "Contributors",
 
-  "menu.section.icon.unpin": "Unpin sidebar",
+"relationships.isIssueOf": "Journal Issues",
 
+"relationships.isJournalIssueOf": "Journal Issue",
 
+"relationships.isJournalOf": "Journals",
 
-  "menu.section.import": "Import",
+"relationships.isOrgUnitOf": "Organizational Units",
 
-  "menu.section.import_batch": "Batch Import (ZIP)",
+"relationships.isPersonOf": "Authors",
 
-  "menu.section.import_metadata": "Metadata",
+"relationships.isProjectOf": "Research Projects",
 
+"relationships.isPublicationOf": "Publications",
 
+"relationships.isPublicationOfJournalIssue": "Articles",
 
-  "menu.section.new": "New",
+"relationships.isSingleJournalOf": "Journal",
 
-  "menu.section.new_collection": "Collection",
+"relationships.isSingleVolumeOf": "Journal Volume",
 
-  "menu.section.new_community": "Community",
+"relationships.isVolumeOf": "Journal Volumes",
 
-  "menu.section.new_item": "Item",
+"search.description": "",
 
-  "menu.section.new_item_version": "Item Version",
+"search.filters.applied.f.author": "Author",
 
-  "menu.section.new_impact_pathway": "Impact pathway",
+"search.filters.applied.f.birthDate.max": "End birth date",
 
+"search.filters.applied.f.birthDate.min": "Start birth date",
 
+"search.filters.applied.f.dateIssued.max": "End date",
 
-  "menu.section.pin": "Pin sidebar",
+"search.filters.applied.f.dateIssued.min": "Start date",
 
-  "menu.section.unpin": "Unpin sidebar",
+"search.filters.applied.f.dateSubmitted": "Date submitted",
 
+"search.filters.applied.f.entityType": "Item Type",
 
+"search.filters.applied.f.has_content_in_original_bundle": "Has files",
 
-  "menu.section.registries": "Registries",
+"search.filters.applied.f.itemtype": "Type",
 
-  "menu.section.registries_format": "Format",
+"search.filters.applied.f.jobTitle": "Job Title",
 
-  "menu.section.registries_metadata": "Metadata",
+"search.filters.applied.f.namedresourcetype": "Status",
 
+"search.filters.applied.f.subject": "Subject",
 
+"search.filters.applied.f.submitter": "Submitter",
 
-  "menu.section.statistics": "Statistics",
+"search.filters.filter.author.head": "Author",
 
-  "menu.section.statistics_task": "Statistics Task",
+"search.filters.filter.author.placeholder": "Author name",
 
+"search.filters.filter.birthDate.head": "Birth Date",
 
+"search.filters.filter.birthDate.placeholder": "Birth Date",
 
-  "menu.section.toggle.access_control": "Toggle Access Control section",
+"search.filters.filter.creativeDatePublished.head": "Date Published",
 
-  "menu.section.toggle.control_panel": "Toggle Control Panel section",
+"search.filters.filter.creativeDatePublished.placeholder": "Date Published",
 
-  "menu.section.toggle.curation_task": "Toggle Curation Task section",
+"search.filters.filter.creativeWorkEditor.head": "Editor",
 
-  "menu.section.toggle.edit": "Toggle Edit section",
+"search.filters.filter.creativeWorkEditor.placeholder": "Editor",
 
-  "menu.section.toggle.export": "Toggle Export section",
+"search.filters.filter.creativeWorkKeywords.head": "Subject",
 
-  "menu.section.toggle.find": "Toggle Find section",
+"search.filters.filter.creativeWorkKeywords.placeholder": "Subject",
 
-  "menu.section.toggle.import": "Toggle Import section",
+"search.filters.filter.creativeWorkPublisher.head": "Publisher",
 
-  "menu.section.toggle.new": "Toggle New section",
+"search.filters.filter.creativeWorkPublisher.placeholder": "Publisher",
 
-  "menu.section.toggle.registries": "Toggle Registries section",
+"search.filters.filter.dateIssued.head": "Date",
 
-  "menu.section.toggle.statistics_task": "Toggle Statistics Task section",
+"search.filters.filter.dateIssued.max.placeholder": "Minimum Date",
 
+"search.filters.filter.dateIssued.min.placeholder": "Maximum Date",
 
+"search.filters.filter.dateSubmitted.head": "Date submitted",
 
-  "mydspace.description": "",
+"search.filters.filter.dateSubmitted.placeholder": "Date submitted",
 
-  "mydspace.general.text-here": "HERE",
+"search.filters.filter.entityType.head": "Item Type",
 
-  "mydspace.messages.controller-help": "Select this option to send a message to item's submitter.",
+"search.filters.filter.entityType.placeholder": "Item Type",
 
-  "mydspace.messages.description-placeholder": "Insert your message here...",
+"search.filters.filter.has_content_in_original_bundle.head": "Has files",
 
-  "mydspace.messages.hide-msg": "Hide message",
+"search.filters.filter.itemtype.head": "Type",
 
-  "mydspace.messages.mark-as-read": "Mark as read",
+"search.filters.filter.itemtype.placeholder": "Type",
 
-  "mydspace.messages.mark-as-unread": "Mark as unread",
+"search.filters.filter.jobTitle.head": "Job Title",
 
-  "mydspace.messages.no-content": "No content.",
+"search.filters.filter.jobTitle.placeholder": "Job Title",
 
-  "mydspace.messages.no-messages": "No messages yet.",
+"search.filters.filter.knowsLanguage.head": "Known language",
 
-  "mydspace.messages.send-btn": "Send",
+"search.filters.filter.knowsLanguage.placeholder": "Known language",
 
-  "mydspace.messages.show-msg": "Show message",
+"search.filters.filter.namedresourcetype.head": "Status",
 
-  "mydspace.messages.subject-placeholder": "Subject...",
+"search.filters.filter.namedresourcetype.placeholder": "Status",
 
-  "mydspace.messages.submitter-help": "Select this option to send a message to controller.",
+"search.filters.filter.objectpeople.head": "People",
 
-  "mydspace.messages.title": "Messages",
+"search.filters.filter.objectpeople.placeholder": "People",
 
-  "mydspace.messages.to": "To",
+"search.filters.filter.organizationAddressCountry.head": "Country",
 
-  "mydspace.new-submission": "New submission",
+"search.filters.filter.organizationAddressCountry.placeholder": "Country",
 
-  "mydspace.results.head": "Your submissions",
+"search.filters.filter.organizationAddressLocality.head": "City",
 
-  "mydspace.results.no-abstract": "No Abstract",
+"search.filters.filter.organizationAddressLocality.placeholder": "City",
 
-  "mydspace.results.no-authors": "No Authors",
+"search.filters.filter.organizationFoundingDate.head": "Date Founded",
 
-  "mydspace.results.no-collections": "No Collections",
+"search.filters.filter.organizationFoundingDate.placeholder": "Date Founded",
 
-  "mydspace.results.no-date": "No Date",
+"search.filters.filter.scope.head": "Scope",
 
-  "mydspace.results.no-files": "No Files",
+"search.filters.filter.scope.placeholder": "Scope filter",
 
-  "mydspace.results.no-results": "There were no items to show",
+"search.filters.filter.show-less": "Collapse",
 
-  "mydspace.results.no-title": "No title",
+"search.filters.filter.show-more": "Show more",
 
-  "mydspace.results.no-uri": "No Uri",
+"search.filters.filter.subject.head": "Subject",
 
-  "mydspace.show.workflow": "All tasks",
+"search.filters.filter.subject.placeholder": "Subject",
 
-  "mydspace.show.workspace": "Your Submissions",
+"search.filters.filter.submitter.head": "Submitter",
 
-  "mydspace.status.archived": "Archived",
+"search.filters.filter.submitter.placeholder": "Submitter",
 
-  "mydspace.status.validation": "Validation",
+"search.filters.head": "Filters",
 
-  "mydspace.status.waiting-for-controller": "Waiting for controller",
+"search.filters.reset": "Reset filters",
 
-  "mydspace.status.workflow": "Workflow",
+"search.form.search": "Search",
 
-  "mydspace.status.workspace": "Workspace",
+"search.form.search_dspace": "Search DSpace",
 
-  "mydspace.title": "MyDSpace",
+"search.form.search_mydspace": "Search MyDSpace",
 
-  "mydspace.upload.upload-failed": "Error creating new workspace. Please verify the content uploaded before retry.",
+"search.results.empty": "Your search returned no results.",
 
-  "mydspace.upload.upload-multiple-successful": "{{qty}} new workspace items created.",
+"search.results.head": "Search Results",
 
-  "mydspace.upload.upload-successful": "New workspace item created. Click {{here}} for edit it.",
+"search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting",
 
-  "mydspace.view-btn": "View",
+"search.results.no-results-link": "quotes around it",
 
+"search.sidebar.close": "Back to results",
 
+"search.sidebar.filters.title": "Filters",
 
-  "nav.browse.header": "All of DSpace",
+"search.sidebar.open": "Search Tools",
 
-  "nav.community-browse.header": "By Community",
+"search.sidebar.results": "results",
 
-  "nav.language": "Language switch",
+"search.sidebar.settings.rpp": "Results per page",
 
-  "nav.login": "Log In",
+"search.sidebar.settings.sort-by": "Sort By",
 
-  "nav.logout": "Log Out",
+"search.sidebar.settings.title": "Settings",
 
-  "nav.mydspace": "MyDSpace",
+"search.switch-configuration.title": "Show",
 
-  "nav.search": "Search",
+"search.title": "DSpace Cris Angular :: Search",
 
-  "nav.statistics.header": "Statistics",
+"search.view-switch.show-detail": "Show detail",
 
+"search.view-switch.show-grid": "Show as grid",
 
+"search.view-switch.show-list": "Show as list",
 
-  "orgunit.listelement.badge": "Organizational Unit",
+"sorting.ASC": "Ascending",
 
-  "orgunit.page.city": "City",
+"sorting.DESC": "Descending",
 
-  "orgunit.page.country": "Country",
+"sorting.dc.title.ASC": "Title Ascending",
 
-  "orgunit.page.dateestablished": "Date established",
+"sorting.dc.title.DESC": "Title Descending",
 
-  "orgunit.page.description": "Description",
+"sorting.score.DESC": "Relevance",
 
-  "orgunit.page.id": "ID",
+"submission.edit.title": "Edit Submission",
 
-  "orgunit.page.titleprefix": "Organizational Unit: ",
+"submission.general.cannot_submit": "You have not the privilege to make a new submission.",
 
+"submission.general.deposit": "Deposit",
 
+"submission.general.discard.confirm.cancel": "Cancel",
 
-  "pagination.results-per-page": "Results Per Page",
+"submission.general.discard.confirm.info": "This operation can't be undone. Are you sure?",
 
-  "pagination.showing.detail": "{{ range }} of {{ total }}",
+"submission.general.discard.confirm.submit": "Yes, I'm sure",
 
-  "pagination.showing.label": "Now showing ",
+"submission.general.discard.confirm.title": "Discard submission",
 
-  "pagination.sort-direction": "Sort Options",
+"submission.general.discard.submit": "Discard",
 
+"submission.general.save": "Save",
 
+"submission.general.save-later": "Save for later",
 
-  "person.listelement.badge": "Person",
+"submission.sections.describe.relationship-lookup.close": "Close",
 
-  "person.page.birthdate": "Birth Date",
+"submission.sections.describe.relationship-lookup.external-source.added": "Successfully added local entry to the selection",
 
-  "person.page.email": "Email Address",
+"submission.sections.describe.relationship-lookup.external-source.import-button-title.Author": "Import remote author",
 
-  "person.page.firstname": "First Name",
+"submission.sections.describe.relationship-lookup.external-source.import-button-title.Journal": "Import remote journal",
 
-  "person.page.jobtitle": "Job Title",
+"submission.sections.describe.relationship-lookup.external-source.import-button-title.Journal Issue": "Import remote journal issue",
 
-  "person.page.lastname": "Last Name",
+"submission.sections.describe.relationship-lookup.external-source.import-button-title.Journal Volume": "Import remote journal volume",
 
-  "person.page.link.full": "Show all metadata",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.Author.added.local-entity": "Successfully added local author to the selection",
 
-  "person.page.orcid": "ORCID",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.Author.added.new-entity": "Successfully imported and added external author to the selection",
 
-  "person.page.staffid": "Staff ID",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.Author.title": "Import Remote Author",
 
-  "person.page.titleprefix": "Person: ",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.added.local-entity": "Successfully added local journal issue to the selection",
 
-  "person.search.results.head": "Person Search Results",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.added.new-entity": "Successfully imported and added external journal issue to the selection",
 
-  "person.search.title": "DSpace Cris Angular :: Person Search",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.title": "Import Remote Journal Issue",
 
+"submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Volume.added.local-entity": "Successfully added local journal volume to the selection",
 
+"submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Volume.added.new-entity": "Successfully imported and added external journal volume to the selection",
 
-  "project.listelement.badge": "Research Project",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Volume.title": "Import Remote Journal Volume",
 
-  "project.page.contributor": "Contributors",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.Journal.added.local-entity": "Successfully added local journal to the selection",
 
-  "project.page.description": "Description",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.Journal.added.new-entity": "Successfully imported and added external journal to the selection",
 
-  "project.page.expectedcompletion": "Expected Completion",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.Journal.title": "Import Remote Journal",
 
-  "project.page.funder": "Funders",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.authority": "Authority",
 
-  "project.page.id": "ID",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.authority.new": "Import as a new local authority entry",
 
-  "project.page.keyword": "Keywords",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.cancel": "Cancel",
 
-  "project.page.status": "Status",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.collection": "Select a collection to import new entries to",
 
-  "project.page.titleprefix": "Research Project: ",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.entities": "Entities",
 
-  "project.search.results.head": "Project Search Results",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.entities.new": "Import as a new local entity",
 
+"submission.sections.describe.relationship-lookup.external-source.import-modal.head.lcname": "Importing from LC Name",
 
+"submission.sections.describe.relationship-lookup.external-source.import-modal.head.orcidV2": "Importing from ORCID",
 
-  "publication.listelement.badge": "Publication",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.head.sherpaJournal": "Importing from Sherpa Journal",
 
-  "publication.page.description": "Description",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.head.sherpaPublisher": "Importing from Sherpa Publisher",
 
-  "publication.page.journal-issn": "Journal ISSN",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.import": "Import",
 
-  "publication.page.journal-title": "Journal Title",
+"submission.sections.describe.relationship-lookup.external-source.import-modal.select": "Select a local match:",
 
-  "publication.page.publisher": "Publisher",
+"submission.sections.describe.relationship-lookup.name-variant.notification.confirm": "Save a new name variant",
 
-  "publication.page.titleprefix": "Publication: ",
+"submission.sections.describe.relationship-lookup.name-variant.notification.content": "Would you like to save \"{{ value }}\" as a name variant for this person so you and others can reuse it for future submissions? If you don't you can still use it for this submission.",
 
-  "publication.page.volume-title": "Volume Title",
+"submission.sections.describe.relationship-lookup.name-variant.notification.decline": "Use only for this submission",
 
-  "publication.search.results.head": "Publication Search Results",
+"submission.sections.describe.relationship-lookup.search-tab.deselect-all": "Deselect all",
 
-  "publication.search.title": "DSpace Cris Angular :: Publication Search",
+"submission.sections.describe.relationship-lookup.search-tab.deselect-page": "Deselect page",
 
+"submission.sections.describe.relationship-lookup.search-tab.loading": "Loading...",
 
+"submission.sections.describe.relationship-lookup.search-tab.placeholder": "Search query",
 
-  "relationships.isAuthorOf": "Authors",
+"submission.sections.describe.relationship-lookup.search-tab.search": "Go",
 
-  "relationships.isIssueOf": "Journal Issues",
+"submission.sections.describe.relationship-lookup.search-tab.select-all": "Select all",
 
-  "relationships.isJournalIssueOf": "Journal Issue",
+"submission.sections.describe.relationship-lookup.search-tab.select-page": "Select page",
 
-  "relationships.isJournalOf": "Journals",
+"submission.sections.describe.relationship-lookup.search-tab.tab-title.Author": "Local Authors ({{ count }})",
 
-  "relationships.isOrgUnitOf": "Organizational Units",
+"submission.sections.describe.relationship-lookup.search-tab.tab-title.Funding": "Search for Funding",
 
-  "relationships.isPersonOf": "Authors",
+"submission.sections.describe.relationship-lookup.search-tab.tab-title.Funding Agency": "Search for Funding Agencies",
 
-  "relationships.isProjectOf": "Research Projects",
+"submission.sections.describe.relationship-lookup.search-tab.tab-title.Journal": "Local Journals ({{ count }})",
 
-  "relationships.isPublicationOf": "Publications",
+"submission.sections.describe.relationship-lookup.search-tab.tab-title.Journal Issue": "Local Journal Issues ({{ count }})",
 
-  "relationships.isPublicationOfJournalIssue": "Articles",
+"submission.sections.describe.relationship-lookup.search-tab.tab-title.Journal Volume": "Local Journal Volumes ({{ count }})",
 
-  "relationships.isSingleJournalOf": "Journal",
+"submission.sections.describe.relationship-lookup.search-tab.tab-title.lcname": "LC Names ({{ count }})",
 
-  "relationships.isSingleVolumeOf": "Journal Volume",
+"submission.sections.describe.relationship-lookup.search-tab.tab-title.orcidV2": "ORCID ({{ count }})",
 
-  "relationships.isVolumeOf": "Journal Volumes",
-  
-  "relationships.isContributorOf": "Contributors",
+"submission.sections.describe.relationship-lookup.search-tab.tab-title.sherpaJournal": "Sherpa Journals ({{ count }})",
 
+"submission.sections.describe.relationship-lookup.search-tab.tab-title.sherpaPublisher": "Sherpa Publishers ({{ count }})",
 
+"submission.sections.describe.relationship-lookup.search-tab.toggle-dropdown": "Toggle dropdown",
 
-  "search.description": "",
+"submission.sections.describe.relationship-lookup.selected": "Selected {{ size }} items",
 
-  "search.switch-configuration.title": "Show",
+"submission.sections.describe.relationship-lookup.selection-tab.no-selection": "Your selection is currently empty.",
 
-  "search.title": "DSpace Cris Angular :: Search",
+"submission.sections.describe.relationship-lookup.selection-tab.settings": "Settings",
 
-  "search.breadcrumbs": "Search",
+"submission.sections.describe.relationship-lookup.selection-tab.tab-title": "Current Selection ({{ count }})",
 
+"submission.sections.describe.relationship-lookup.selection-tab.title.Author": "Selected Authors",
 
-  "search.filters.applied.f.author": "Author",
+"submission.sections.describe.relationship-lookup.selection-tab.title.Journal": "Selected Journals",
 
-  "search.filters.applied.f.dateIssued.max": "End date",
+"submission.sections.describe.relationship-lookup.selection-tab.title.Journal Issue": "Selected Issue",
 
-  "search.filters.applied.f.dateIssued.min": "Start date",
+"submission.sections.describe.relationship-lookup.selection-tab.title.Journal Volume": "Selected Journal Volume",
 
-  "search.filters.applied.f.dateSubmitted": "Date submitted",
+"submission.sections.describe.relationship-lookup.selection-tab.title.lcname": "Search Results",
 
-  "search.filters.applied.f.entityType": "Item Type",
+"submission.sections.describe.relationship-lookup.selection-tab.title.orcidV2": "Search Results",
 
-  "search.filters.applied.f.has_content_in_original_bundle": "Has files",
+"submission.sections.describe.relationship-lookup.selection-tab.title.sherpaJournal": "Search Results",
 
-  "search.filters.applied.f.itemtype": "Type",
+"submission.sections.describe.relationship-lookup.selection-tab.title.sherpaPublisher": "Search Results",
 
-  "search.filters.applied.f.namedresourcetype": "Status",
+"submission.sections.describe.relationship-lookup.title.Author": "Authors",
 
-  "search.filters.applied.f.subject": "Subject",
+"submission.sections.describe.relationship-lookup.title.Funding": "Funding",
 
-  "search.filters.applied.f.submitter": "Submitter",
-  "search.filters.applied.f.jobTitle": "Job Title",
-  "search.filters.applied.f.birthDate.max": "End birth date",
-  "search.filters.applied.f.birthDate.min": "Start birth date",
+"submission.sections.describe.relationship-lookup.title.Funding Agency": "Funding Agency",
 
+"submission.sections.describe.relationship-lookup.title.Journal": "Journals",
 
+"submission.sections.describe.relationship-lookup.title.Journal Issue": "Journal Issues",
 
-  "search.filters.filter.author.head": "Author",
+"submission.sections.describe.relationship-lookup.title.Journal Volume": "Journal Volumes",
 
-  "search.filters.filter.author.placeholder": "Author name",
+"submission.sections.general.add-more": "Add more",
 
-  "search.filters.filter.birthDate.head": "Birth Date",
+"submission.sections.general.collection": "Collection",
 
-  "search.filters.filter.birthDate.placeholder": "Birth Date",
+"submission.sections.general.deposit_error_notice": "There was an issue when submitting the item, please try again later.",
 
-  "search.filters.filter.creativeDatePublished.head": "Date Published",
+"submission.sections.general.deposit_success_notice": "Submission deposited successfully.",
 
-  "search.filters.filter.creativeDatePublished.placeholder": "Date Published",
+"submission.sections.general.discard_error_notice": "There was an issue when discarding the item, please try again later.",
 
-  "search.filters.filter.creativeWorkEditor.head": "Editor",
+"submission.sections.general.discard_success_notice": "Submission discarded successfully.",
 
-  "search.filters.filter.creativeWorkEditor.placeholder": "Editor",
+"submission.sections.general.metadata-extracted": "New metadata have been extracted and added to the <strong>{{sectionId}}</strong> section.",
 
-  "search.filters.filter.creativeWorkKeywords.head": "Subject",
+"submission.sections.general.metadata-extracted-new-section": "New <strong>{{sectionId}}</strong> section has been added to submission.",
 
-  "search.filters.filter.creativeWorkKeywords.placeholder": "Subject",
+"submission.sections.general.no-collection": "No collection found",
 
-  "search.filters.filter.creativeWorkPublisher.head": "Publisher",
+"submission.sections.general.no-sections": "No options available",
 
-  "search.filters.filter.creativeWorkPublisher.placeholder": "Publisher",
+"submission.sections.general.save_error_notice": "There was an issue when saving the item, please try again later.",
 
-  "search.filters.filter.dateIssued.head": "Date",
+"submission.sections.general.save_success_notice": "Submission saved successfully.",
 
-  "search.filters.filter.dateIssued.max.placeholder": "Minimum Date",
+"submission.sections.general.search-collection": "Search for a collection",
 
-  "search.filters.filter.dateIssued.min.placeholder": "Maximum Date",
+"submission.sections.general.sections_not_valid": "There are incomplete sections.",
 
-  "search.filters.filter.dateSubmitted.head": "Date submitted",
+"submission.sections.submit.progressbar.cclicense": "Creative commons license",
 
-  "search.filters.filter.dateSubmitted.placeholder": "Date submitted",
+"submission.sections.submit.progressbar.describe.agrovoc_keywords": "Agrovoc keywords",
 
-  "search.filters.filter.entityType.head": "Item Type",
+"submission.sections.submit.progressbar.describe.applications_econtech": "Succsessful use of results for change processes",
 
-  "search.filters.filter.entityType.placeholder": "Item Type",
+"submission.sections.submit.progressbar.describe.applications_econtech_quant": "Quantification of the use of results and development of the outreach",
 
-  "search.filters.filter.has_content_in_original_bundle.head": "Has files",
+"submission.sections.submit.progressbar.describe.applications_econtech_types": "If no innovation-potential is linked: Type and actors group of the successful use of results",
 
-  "search.filters.filter.itemtype.head": "Type",
+"submission.sections.submit.progressbar.describe.applications_econtech_types.info": "The following information need only be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
 
-  "search.filters.filter.itemtype.placeholder": "Type",
+"submission.sections.submit.progressbar.describe.applications_social": "Succsessful use of results for social innovations/ change processes",
 
-  "search.filters.filter.jobTitle.head": "Job Title",
+"submission.sections.submit.progressbar.describe.applications_social_quant": "Quantification of the use of results and development of the outreach",
 
-  "search.filters.filter.jobTitle.placeholder": "Job Title",
+"submission.sections.submit.progressbar.describe.applications_social_quant.info": "Please provide details about the scope and development of the application success, if possible.",
 
-  "search.filters.filter.knowsLanguage.head": "Known language",
+"submission.sections.submit.progressbar.describe.applications_social_types": "If no innovation-potential is linked: Type and actors group of the successful use of results",
 
-  "search.filters.filter.knowsLanguage.placeholder": "Known language",
+"submission.sections.submit.progressbar.describe.applications_social_types.info": "The following information need only be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
 
-  "search.filters.filter.namedresourcetype.head": "Status",
+"submission.sections.submit.progressbar.describe.awards": "Prizes and awards",
 
-  "search.filters.filter.namedresourcetype.placeholder": "Status",
+"submission.sections.submit.progressbar.describe.awards.info": "Please document here all prizes and awards related to the project and/or its results.",
 
-  "search.filters.filter.objectpeople.head": "People",
+"submission.sections.submit.progressbar.describe.conditions": "Reflection of external conditions and requirements",
 
-  "search.filters.filter.objectpeople.placeholder": "People",
+"submission.sections.submit.progressbar.describe.conditions.info": "Please reflect here on external conditions and requirements that are relevant to the project. Through these considerations, you show that you are aware of relevant conditions and requirements and that you deal with them adequately in the project.",
 
-  "search.filters.filter.organizationAddressCountry.head": "Country",
+"submission.sections.submit.progressbar.describe.contribution_fundingprogramme": "Contribution to funding programme objectives",
 
-  "search.filters.filter.organizationAddressCountry.placeholder": "Country",
+"submission.sections.submit.progressbar.describe.contribution_fundingprogramme.info": "Please describe here the contribution of the project to the funding policy objectives. Select the relevant (or possibly mandatory) funding policy objectives and briefly explain the (intended) contribution of the project to the funding policy objective. You can visualise the interrelationships in the impact pathway with arrows. You should therefore focus your explanation on additional information and the reasons for the connections.",
 
-  "search.filters.filter.organizationAddressLocality.head": "City",
+"submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg": "Relation of the project to SDGs",
 
-  "search.filters.filter.organizationAddressLocality.placeholder": "City",
+"submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg.info": "The assignment to the UN Sustainable Development Goals (SDGs) are carried out for programme evaluation. If SDGs have already been assigned to the programme objectives, these are displayed. Please select a SDG target manually if no assignment has been made yet or if the project contributes to other SDGs that go beyond the program objectives. Further information can be found here [LINK].",
 
-  "search.filters.filter.organizationFoundingDate.head": "Date Founded",
+"submission.sections.submit.progressbar.describe.cooperation_events": "Cooperation processes basic information",
 
-  "search.filters.filter.organizationFoundingDate.placeholder": "Date Founded",
+"submission.sections.submit.progressbar.describe.cooperation_events.info": "Cooperation processes comprise the collaboration of formal and informal cooperation partners in the project.",
 
-  "search.filters.filter.scope.head": "Scope",
+"submission.sections.submit.progressbar.describe.cooperation_events_date": "Dates of personal meetings or other central activities",
 
-  "search.filters.filter.scope.placeholder": "Scope filter",
+"submission.sections.submit.progressbar.describe.cooperation_events_date.info": "It is not expected here that every telephone call or frequent web conferences will be recorded with exact data. Please use the frequency information for this purpose",
 
-  "search.filters.filter.show-less": "Collapse",
+"submission.sections.submit.progressbar.describe.cooperation_events_frequency": "Frequency of the cooperation processes",
 
-  "search.filters.filter.show-more": "Show more",
+"submission.sections.submit.progressbar.describe.cooperation_partners": "Project partners and cooperation partners",
 
-  "search.filters.filter.subject.head": "Subject",
+"submission.sections.submit.progressbar.describe.cooperation_partners.info": "This area serves to map the cooperation within a project. Cooperation is understood to be the agreed collaboration with other organisations, companies or institutions. Collaboration partners, subcontractors and contractual partners already specified in the easy-online proposal are imported and you only need to add information. Please add informal cooperation partners and all project partners joining after the beginning of the project so that a comprehensive picture of the cooperation partners of the project is available. If desired or required, contracts, letters of intent or similar evidence of cooperation can be uploaded. They will not be published and can only be viewed by the funder.",
 
-  "search.filters.filter.subject.placeholder": "Subject",
+"submission.sections.submit.progressbar.describe.cooperation_partners_contribution": "Contribution of the cooperation partner to the project",
 
-  "search.filters.filter.submitter.head": "Submitter",
+"submission.sections.submit.progressbar.describe.cooperation_partners_orgunits": "Description of the cooperating organisational unit",
 
-  "search.filters.filter.submitter.placeholder": "Submitter",
+"submission.sections.submit.progressbar.describe.cooperation_partners_orgunits.info": "Please complete the imported data and make any necessary corrections.",
 
+"submission.sections.submit.progressbar.describe.cooperation_partners_orgunits_companies": "Details only for companies",
 
+"submission.sections.submit.progressbar.describe.cooperation_partners_orgunits_research": "Details only for research institutions",
 
-  "search.filters.head": "Filters",
+"submission.sections.submit.progressbar.describe.cooperation_partners_staff": "Project staff",
 
-  "search.filters.reset": "Reset filters",
+"submission.sections.submit.progressbar.describe.cooperation_partners_staff.info": "Please complete the information on project staff. The information is used for criteria on equality and interdisciplinarity.",
 
+"submission.sections.submit.progressbar.describe.entity_type_selection": "Selection of the entity type",
 
+"submission.sections.submit.progressbar.describe.events": "Event basic information",
 
-  "search.form.search": "Search",
+"submission.sections.submit.progressbar.describe.events.info": "Please record events and interactions that were organised in the project or attended in the project context. Do not include here cooperation processes with your partners or participatory processes that build on each other. These have their own section.",
 
-  "search.form.search_dspace": "Search DSpace",
+"submission.sections.submit.progressbar.describe.events_result": "Dates of the Event",
 
-  "search.form.search_mydspace": "Search MyDSpace",
+"submission.sections.submit.progressbar.describe.events_result.info": "Please only enter several events here if the basic information and groups of actors involved are indeed the same.",
 
+"submission.sections.submit.progressbar.describe.gender_personal": "Gender mainstreaming in the project team",
 
+"submission.sections.submit.progressbar.describe.gender_personal.info": "The effective implementation of equal rights for women and men is a high political priority. For this reason, the objective in science is to actively remedy the under-representation of women in top positions. Please identify the particular challenges in the context of the project to achieve gender parity and any specific activities of the project related to them. (The balance between women and men in management and decision-making positions, first authorships etc. realised in the project is recorded in the SynSICRIS tool with the help of the information on gender and the role of the project staff).",
 
-  "search.results.head": "Search Results",
+"submission.sections.submit.progressbar.describe.gender_project": "Gender aspects in the R&D process",
 
-  "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting",
+"submission.sections.submit.progressbar.describe.gender_project.info": "Gender aspects can be relevant at several points of an R&D process. Please indicate where gender aspects may be affected by the project. If you choose \"yes\" in an area, please address these aspects in the corresponding section in the SynSICRIS tool.",
 
-  "search.results.no-results-link": "quotes around it",
+"submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
 
-  "search.results.empty": "Your search returned no results.",
+"submission.sections.submit.progressbar.describe.import_orgunits_companies": "Details only for companies",
 
+"submission.sections.submit.progressbar.describe.import_person_a2": "Personal data",
 
+"submission.sections.submit.progressbar.describe.import_person_a2.info": "This section contains personal information that simplifies the use the system and provides contact details for the funding agency.",
 
-  "search.sidebar.close": "Back to results",
+"submission.sections.submit.progressbar.describe.import_person_pa": "Personal data",
 
-  "search.sidebar.filters.title": "Filters",
+"submission.sections.submit.progressbar.describe.import_person_pa.info": "This section contains personal information that simplifies the use the system and provides contact details for the funding agency.",
 
-  "search.sidebar.open": "Search Tools",
+"submission.sections.submit.progressbar.describe.import_person_pl": "Personal data",
 
-  "search.sidebar.results": "results",
+"submission.sections.submit.progressbar.describe.import_person_pl.info": "This section contains personal information that simplifies the use the system and provides contact details for the funding agency.",
 
-  "search.sidebar.settings.rpp": "Results per page",
+"submission.sections.submit.progressbar.describe.import_person_uz": "Personal data",
 
-  "search.sidebar.settings.sort-by": "Sort By",
+"submission.sections.submit.progressbar.describe.import_person_uz.info": "This section contains personal information that simplifies the use the system and provides contact details for the funding agency.",
 
-  "search.sidebar.settings.title": "Settings",
+"submission.sections.submit.progressbar.describe.import_projects": "Projects",
 
+"submission.sections.submit.progressbar.describe.innovationideas": "Ideas for innovation- and change processes",
 
+"submission.sections.submit.progressbar.describe.innovationideas.info": "Describe here possible, not yet tangible contributions of the project results to innovation and change processes. If there are concrete intentions in the project to develop certain innovations or to contribute to change processes, select the category intended Innovation or intended change processes. If necessary, enter here additional secondary objectives or possible alternatives to the concrete intentions documented there.",
 
-  "search.view-switch.show-detail": "Show detail",
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech": "Concrete intentions for the development of economic-technical innovations based on the project results (e.g. products, services, processes)",
 
-  "search.view-switch.show-grid": "Show as grid",
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech.info": "Document here which concrete intentions exist for the use of the project results for innovations by the project partners or other cooperation partners. If the innovation/ development is related to intended social innovation/ change processes, please document these separately. You can create a link from the social innovation to the economic-technical innovation. If you see different, unspecific application possibilities for the (expected) project results, which can only be substantiated at a later date and for whose further implementation no partners have yet been identified, please switch to \"Innovation ideas\".",
 
-  "search.view-switch.show-list": "Show as list",
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability": "Description of the applicability",
 
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability.info": "Please describe the current status of applicability and name deficits in applicability whose improvement is addressed in the project. In some cases, this information will not yet be available in the proposal phase, but will be identified in the course of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. Update this information at the required times. At the end of the project, describe the achieved applicability.It is recommended to conduct the applicability analysis with the participation of actors from the field of practice.The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project.  Add any information that you consider important but not requested under \"other\".",
 
-  "sorting.ASC": "Ascending",
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech_trl": "Technology Readiness Level (TRL)",
 
-  "sorting.DESC": "Descending",
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech_trl.info": "Please describe which Technology Readiness Level is given at project start and should be reached by the end of the project. For the final report, please complete which TRL has actually been achieved. Further information on the TRL can be found here (LINK).",
 
-  "sorting.dc.title.ASC": "Title Ascending",
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech_userbenefit": "Expected benefit for potential customer or user groups",
 
-  "sorting.dc.title.DESC": "Title Descending",
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech_userbenefit.info": "Describe the expected benefit for any number of relevant customer or user groups and estimate the size of the potential market.",
 
-  "sorting.score.DESC": "Relevance",
+"submission.sections.submit.progressbar.describe.innovationpotentials_social": "Concrete intentions for using the project results for social innovation / change processes",
 
+"submission.sections.submit.progressbar.describe.innovationpotentials_social.info": "Document here what concrete intentions exist for the use of the project results for social innovation/ changes in the field of practice. (e.g. changed skills, actions, structures but also political changes). If social innovations/ change processes are related to intended economic-technical innovations, please document them separately. If you see different, vague application possibilities for the (expected) project results, which can only be concretised at a later date and for whose further implementation no partners have been identified yet, please change to \"Innovation ideas\".",
 
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability": "Description of the achieved applicability",
 
-  "submission.edit.title": "Edit Submission",
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability.info": "Please give a description of the applicability of the social innovation/ change process, reached at the end of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project. Add any information that you consider important but not requested under \"other\".",
 
-  "submission.general.cannot_submit": "You have not the privilege to make a new submission.",
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability_plan": "Description of the current applicability and the intended improvement",
 
-  "submission.general.deposit": "Deposit",
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability_plan.info": "Please describe the current status of applicability and name deficits in applicability whose improvement is addressed in the project. In some cases, this information will not yet be available in the proposal phase, but will be identified in the course of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project.  Add any information that you consider important but not requested under \"other\".",
 
-  "submission.general.discard.confirm.cancel": "Cancel",
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_srl": "Solution Readiness Level (SRL)",
 
-  "submission.general.discard.confirm.info": "This operation can't be undone. Are you sure?",
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_srl.info": "Please describe which Solution Readiness Level is given at project start and intended at the project end. Add for the final report which SRL was actually reached. Further information on the SRL can be found here (LINK).",
 
-  "submission.general.discard.confirm.submit": "Yes, I'm sure",
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_types": "Detailed description of the social innovation/ change process",
 
-  "submission.general.discard.confirm.title": "Discard submission",
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_types.info": "Social innovations or change processes often address different areas (e.g. individual behaviour but also networks or structures). Describe the areas separately by selecting the appropriate area (as often as you like) and describe it in the text field.",
 
-  "submission.general.discard.submit": "Discard",
+"submission.sections.submit.progressbar.describe.license": "License",
 
-  "submission.general.save": "Save",
+"submission.sections.submit.progressbar.describe.link_to_plan": "Link to a planned item",
 
-  "submission.general.save-later": "Save for later",
+"submission.sections.submit.progressbar.describe.link_to_plan.info": "This entry is made via a button from the planned item and usually leads to an import of the information, which can then be changed and supplemented.",
 
+"submission.sections.submit.progressbar.describe.milestones": "Milestones",
 
+"submission.sections.submit.progressbar.describe.orgunits": "Organisation unit",
 
-  "submission.sections.describe.relationship-lookup.close": "Close",
+"submission.sections.submit.progressbar.describe.orgunits_companies": "Details only for companies",
 
-  "submission.sections.describe.relationship-lookup.external-source.added": "Successfully added local entry to the selection",
+"submission.sections.submit.progressbar.describe.orgunits_research": "Details only for research institutions",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-button-title.Author": "Import remote author",
+"submission.sections.submit.progressbar.describe.participation_events": "Participative processes basic information",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-button-title.Journal": "Import remote journal",
+"submission.sections.submit.progressbar.describe.participation_events.info": "Please record participative processes with groups of actors that were organised in the project. Do not include here cooperation processes with your partners or single events. These have their own section.",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-button-title.Journal Issue": "Import remote journal issue",
+"submission.sections.submit.progressbar.describe.participation_events_date": "Dates of the participatory events",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-button-title.Journal Volume": "Import remote journal volume",
+"submission.sections.submit.progressbar.describe.participation_events_frequency": "Planned frequency of the participatory events",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.title": "Import Remote Author",
+"submission.sections.submit.progressbar.describe.patents": "Patents and utility patents",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.added.local-entity": "Successfully added local author to the selection",
+"submission.sections.submit.progressbar.describe.patents.info": "Please document here the Industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.added.new-entity": "Successfully imported and added external author to the selection",
+"submission.sections.submit.progressbar.describe.patents_result": "Information from application at the Patent Office",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.authority": "Authority",
+"submission.sections.submit.progressbar.describe.patents_result.info": "Please complete the mandatory information. The information will be regularly compared with the patent database. This means that as soon as the patent or utility model is published, it can be automatically transferred to the system. You will receive a message for this purpose.",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.authority.new": "Import as a new local authority entry",
+"submission.sections.submit.progressbar.describe.persons": "Personal data",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.cancel": "Cancel",
+"submission.sections.submit.progressbar.describe.persons.info": "This section contains personal information that allows you to use the system and provides contact details for the funding agency.",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.collection": "Select a collection to import new entries to",
+"submission.sections.submit.progressbar.describe.physical_objects": "Objects, Materials",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.entities": "Entities",
+"submission.sections.submit.progressbar.describe.physical_objects.info": "Document all types of (physical) objects and materials here. This summarizes all outputs like e.g. devices as prototypes, miniatures, sediments.If you don't find a specific object type here, check whether it is available under \"Publications\".",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.entities.new": "Import as a new local entity",
+"submission.sections.submit.progressbar.describe.physical_objects_result": "Type of use and accessibility",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.head.lcname": "Importing from LC Name",
+"submission.sections.submit.progressbar.describe.physical_objects_result.info": "Please complete the information on intended use and accessibility, if available.",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.head.orcidV2": "Importing from ORCID",
+"submission.sections.submit.progressbar.describe.pot_societalimpact": "Expected societal impacts",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.head.sherpaJournal": "Importing from Sherpa Journal",
+"submission.sections.submit.progressbar.describe.pot_societalimpact.info": "The focus is on describing which ecological, economic or social-cultural effects can be associated with an application of the project results. By documenting possible positive as well as negative impacts, you demonstrate the awareness of side effects of your research work and contribute to orienting further innovation processes towards positive impacts and the reduction of side effects.",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.head.sherpaPublisher": "Importing from Sherpa Publisher",
+"submission.sections.submit.progressbar.describe.proj_objectives": "Project objectives",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.import": "Import",
+"submission.sections.submit.progressbar.describe.projects": "Projects",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal.title": "Import Remote Journal",
+"submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties.  Please upload a logo of the project, if available, to support the public presentation of the project.",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal.added.local-entity": "Successfully added local journal to the selection",
+"submission.sections.submit.progressbar.describe.projects_overview": "Project overview",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal.added.new-entity": "Successfully imported and added external journal to the selection",
+"submission.sections.submit.progressbar.describe.projects_overview.info": "This information is generated from the corresponding subprojects. During the proposal preparation phase, the information comes from the easy-online imports of the subprojects. During the project phase, the information is regularly updated from profi.",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.title": "Import Remote Journal Issue",
+"submission.sections.submit.progressbar.describe.publications": "Publications",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.added.local-entity": "Successfully added local journal issue to the selection",
+"submission.sections.submit.progressbar.describe.publications.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Enter here the information about a planned publication.",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.added.new-entity": "Successfully imported and added external journal issue to the selection",
+"submission.sections.submit.progressbar.describe.publications_result": "Meta(Data) of the publication",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Volume.title": "Import Remote Journal Volume",
+"submission.sections.submit.progressbar.describe.publications_result.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Use the import function via an identifier. If no identifier is available or information from the import is incomplete, please enter the metadata. Precise metadata make your publication easier to find for interested parties.",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Volume.added.local-entity": "Successfully added local journal volume to the selection",
+"submission.sections.submit.progressbar.describe.regional_scope": "Regional field of application",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Volume.added.new-entity": "Successfully imported and added external journal volume to the selection",
+"submission.sections.submit.progressbar.describe.regional_scope.info": "Please describe the possible field of application for the planned innovation or change process.",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.select": "Select a local match:",
+"submission.sections.submit.progressbar.describe.relation_targetgroup": "Relation to the group of actors",
 
-  "submission.sections.describe.relationship-lookup.search-tab.deselect-all": "Deselect all",
+"submission.sections.submit.progressbar.describe.relation_targetgroup.info": "Please select the involved or participating group of actors or create a new group of actors if needed. Add details if necessary.",
 
-  "submission.sections.describe.relationship-lookup.search-tab.deselect-page": "Deselect page",
+"submission.sections.submit.progressbar.describe.spinoffs": "Spin-offs (incl. associations)",
 
-  "submission.sections.describe.relationship-lookup.search-tab.loading": "Loading...",
+"submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/person by founding a company or association.",
 
-  "submission.sections.describe.relationship-lookup.search-tab.placeholder": "Search query",
+"submission.sections.submit.progressbar.describe.spinoffs_result": "Details of spin-off carried out",
 
-  "submission.sections.describe.relationship-lookup.search-tab.search": "Go",
+"submission.sections.submit.progressbar.describe.spinoffs_result_funding": "Details of spin-off funding",
 
-  "submission.sections.describe.relationship-lookup.search-tab.select-all": "Select all",
+"submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "Please document any subsidies received for the spin-off here.",
 
-  "submission.sections.describe.relationship-lookup.search-tab.select-page": "Select page",
+"submission.sections.submit.progressbar.describe.spinoffs_result_performance_development": "Survey on success and economic development",
 
-  "submission.sections.describe.relationship-lookup.selected": "Selected {{ size }} items",
+"submission.sections.submit.progressbar.describe.spinoffs_result_performance_development.info": "This section can be used for surveys.",
 
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.Author": "Local Authors ({{ count }})",
+"submission.sections.submit.progressbar.describe.stateofart": "State of knowledge and adressed problem",
 
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.Journal": "Local Journals ({{ count }})",
+"submission.sections.submit.progressbar.describe.stateofart.info": "Please describe here very briefly the state of knowledge and the problem addressed in the project. Upload the detailed text with references.",
 
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.Journal Issue": "Local Journal Issues ({{ count }})",
+"submission.sections.submit.progressbar.describe.steps": "Next steps and continuation of cooperation after the end of the project",
 
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.Journal Volume": "Local Journal Volumes ({{ count }})",
+"submission.sections.submit.progressbar.describe.steps.info": "What steps do you intend after the end of the project to further bring project results into application and to continue cooperation (also with other objectives)?",
 
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.sherpaJournal": "Sherpa Journals ({{ count }})",
+"submission.sections.submit.progressbar.describe.subprojects": "Sub-projects",
 
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.sherpaPublisher": "Sherpa Publishers ({{ count }})",
+"submission.sections.submit.progressbar.describe.subprojects.info": "During the proposal preparation phase, the information can be entered via the import of the easy-online xml.  During the ongoing project, the information is regularly updated from profi. Please complete the information.",
 
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.orcidV2": "ORCID ({{ count }})",
+"submission.sections.submit.progressbar.describe.targetgroups": "Target groups",
 
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.lcname": "LC Names ({{ count }})",
+"submission.sections.submit.progressbar.describe.targetgroups.info": "Who is the target group of your project? <b>Direct</b> target group are groups of actors, that (a) directly may apply and/or benefit from the results or possible solutions of the project; (b) those with whom the project cooperates to investigate a problem and/or develop a solution; (c) which are important to bring results into application and/or to disseminate them. <b>Indirect</b> target groups are in addition groups of actors in society who are touched by the application of the project results in any way in their interests or actions. <i>We thus use the term target group as a synonym for further terms from other concepts such as stakeholders, practitioners, actors from the field of action, end users, multipliers, profiteers or affected persons.</i>",
 
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.Funding Agency": "Search for Funding Agencies",
+"submission.sections.submit.progressbar.describe.tasks": "Tasks",
 
-  "submission.sections.describe.relationship-lookup.search-tab.tab-title.Funding": "Search for Funding",
+"submission.sections.submit.progressbar.describe.tasks.info": "Use this section only for research tasks and tasks that cannot be assigned to other areas (such as events, participatory processes, etc.).",
 
-  "submission.sections.describe.relationship-lookup.selection-tab.tab-title": "Current Selection ({{ count }})",
+"submission.sections.submit.progressbar.describe.tests": "Tests",
 
-  "submission.sections.describe.relationship-lookup.title.Journal Issue": "Journal Issues",
+"submission.sections.submit.progressbar.describe.tests.info": "This area serves only test purposes to implement new features and behaviours.",
 
-  "submission.sections.describe.relationship-lookup.title.Journal Volume": "Journal Volumes",
+"submission.sections.submit.progressbar.describe.unexpected_results": "Unexpected results and problems",
 
-  "submission.sections.describe.relationship-lookup.title.Journal": "Journals",
+"submission.sections.submit.progressbar.describe.unexpected_results.info": "Please document findings that can’t be used as planned. These include non-significant results, results that contradict) the hypothesis or support the null hypothesis, methodological problems that hindered research work, results that indicate unexpected risks, etc.. By documenting (and ideally publishing) such results, you mark the integrity and responsibility of the research in the project. You avoid wasting resources by replicating research that have already failed, avoid misinterpreting the significance and effect size e in reviews and meta-analyses and contribute to the further development of methods. With practice-oriented results, you help to prevent the application of ineffective or risky measures.",
 
-  "submission.sections.describe.relationship-lookup.title.Author": "Authors",
+"submission.sections.submit.progressbar.describe.upload": "Upload",
 
-  "submission.sections.describe.relationship-lookup.title.Funding Agency": "Funding Agency",
+"submission.sections.submit.progressbar.describe.upload.info": "If required, you can upload additional information, such as documents, descriptions etc.",
 
-  "submission.sections.describe.relationship-lookup.title.Funding": "Funding",
+"submission.sections.submit.progressbar.describe.workpackages": "Description of the workpackage",
 
-  "submission.sections.describe.relationship-lookup.search-tab.toggle-dropdown": "Toggle dropdown",
+"submission.sections.submit.progressbar.describe.workpackages.info": "Describe here only general aspects that do not also arise in the assigned tasks and activities.",
 
-  "submission.sections.describe.relationship-lookup.selection-tab.settings": "Settings",
+"submission.sections.submit.progressbar.describe.workpackages_result": "Reasons for changes in the work package",
 
-  "submission.sections.describe.relationship-lookup.selection-tab.no-selection": "Your selection is currently empty.",
+"submission.sections.submit.progressbar.detect-duplicate": "Potential duplicates",
 
-  "submission.sections.describe.relationship-lookup.selection-tab.title.Author": "Selected Authors",
+"submission.sections.submit.progressbar.license": "Deposit license",
 
-  "submission.sections.describe.relationship-lookup.selection-tab.title.Journal": "Selected Journals",
+"submission.sections.submit.progressbar.upload": "Upload files",
 
-  "submission.sections.describe.relationship-lookup.selection-tab.title.Journal Volume": "Selected Journal Volume",
+"submission.sections.upload.delete.confirm.cancel": "Cancel",
 
-  "submission.sections.describe.relationship-lookup.selection-tab.title.Journal Issue": "Selected Issue",
+"submission.sections.upload.delete.confirm.info": "This operation can't be undone. Are you sure?",
 
-  "submission.sections.describe.relationship-lookup.selection-tab.title.sherpaJournal": "Search Results",
+"submission.sections.upload.delete.confirm.submit": "Yes, I'm sure",
 
-  "submission.sections.describe.relationship-lookup.selection-tab.title.sherpaPublisher": "Search Results",
+"submission.sections.upload.delete.confirm.title": "Delete bitstream",
 
-  "submission.sections.describe.relationship-lookup.selection-tab.title.orcidV2": "Search Results",
+"submission.sections.upload.delete.submit": "Delete",
 
-  "submission.sections.describe.relationship-lookup.selection-tab.title.lcname": "Search Results",
+"submission.sections.upload.drop-message": "Drop files to attach them to the item",
 
-  "submission.sections.describe.relationship-lookup.name-variant.notification.content": "Would you like to save \"{{ value }}\" as a name variant for this person so you and others can reuse it for future submissions? If you don\'t you can still use it for this submission.",
+"submission.sections.upload.form.access-condition-label": "Access condition type",
 
-  "submission.sections.describe.relationship-lookup.name-variant.notification.confirm": "Save a new name variant",
+"submission.sections.upload.form.date-required": "Date is required.",
 
-  "submission.sections.describe.relationship-lookup.name-variant.notification.decline": "Use only for this submission",
+"submission.sections.upload.form.from-label": "Access grant from",
 
-  "submission.sections.general.add-more": "Add more",
+"submission.sections.upload.form.from-placeholder": "From",
 
-  "submission.sections.general.collection": "Collection",
+"submission.sections.upload.form.group-label": "Group",
 
-  "submission.sections.general.deposit_error_notice": "There was an issue when submitting the item, please try again later.",
+"submission.sections.upload.form.group-required": "Group is required.",
 
-  "submission.sections.general.deposit_success_notice": "Submission deposited successfully.",
+"submission.sections.upload.form.until-label": "Access grant until",
 
-  "submission.sections.general.discard_error_notice": "There was an issue when discarding the item, please try again later.",
+"submission.sections.upload.form.until-placeholder": "Until",
 
-  "submission.sections.general.discard_success_notice": "Submission discarded successfully.",
+"submission.sections.upload.header.policy.default.nolist": "Uploaded files in the {{collectionName}} collection will be accessible according to the following group(s):",
 
-  "submission.sections.general.metadata-extracted": "New metadata have been extracted and added to the <strong>{{sectionId}}</strong> section.",
+"submission.sections.upload.header.policy.default.withlist": "Please note that uploaded files in the {{collectionName}} collection will be accessible, in addition to what is explicitly decided for the single file, with the following group(s):",
 
-  "submission.sections.general.metadata-extracted-new-section": "New <strong>{{sectionId}}</strong> section has been added to submission.",
+"submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <strong>upload additional files just dragging & dropping them everywhere in the page</strong>",
 
-  "submission.sections.general.no-collection": "No collection found",
+"submission.sections.upload.no-entry": "No",
 
-  "submission.sections.general.no-sections": "No options available",
+"submission.sections.upload.no-file-uploaded": "No file uploaded yet.",
 
-  "submission.sections.general.save_error_notice": "There was an issue when saving the item, please try again later.",
+"submission.sections.upload.save-metadata": "Save metadata",
 
-  "submission.sections.general.save_success_notice": "Submission saved successfully.",
+"submission.sections.upload.undo": "Cancel",
 
-  "submission.sections.general.search-collection": "Search for a collection",
+"submission.sections.upload.upload-failed": "Upload failed",
 
-  "submission.sections.general.sections_not_valid": "There are incomplete sections.",
+"submission.sections.upload.upload-successful": "Upload successful",
 
+"submission.submit.title": "Submission",
 
+"submission.workflow.generic.delete": "Delete",
 
-  "submission.sections.submit.progressbar.cclicense": "Creative commons license",
+"submission.workflow.generic.delete-help": "If you would to discard this item, select \"Delete\".  You will then be asked to confirm it.",
 
-  "submission.sections.submit.progressbar.describe.cooperation_events": "Cooperation events",
+"submission.workflow.generic.edit": "Edit",
 
-  "submission.sections.submit.progressbar.describe.cooperation_events_frequency": "Cooperation event frequency",
+"submission.workflow.generic.edit-help": "Select this option to change the item's metadata.",
 
-  "submission.sections.submit.progressbar.describe.cooperation_events_dates": "Cooperation event dates",
+"submission.workflow.generic.view": "View",
 
-  "submission.sections.submit.progressbar.describe.cooperation_partner": "Cooperation partner",
+"submission.workflow.generic.view-help": "Select this option to view the item's metadata.",
 
-  "submission.sections.submit.progressbar.describe.equipment": "Equipment basic information",
+"submission.workflow.tasks.claimed.approve": "Approve",
 
-  "submission.sections.submit.progressbar.describe.events": "Event basic information",
+"submission.workflow.tasks.claimed.approve_help": "If you have reviewed the item and it is suitable for inclusion in the collection, select \"Approve\".",
 
-  "submission.sections.submit.progressbar.describe.events_dates": "Event dates",
+"submission.workflow.tasks.claimed.edit": "Edit",
 
-  "submission.sections.submit.progressbar.describe.journal": "Journal basic information",
+"submission.workflow.tasks.claimed.edit_help": "Select this option to change the item's metadata.",
 
-  "submission.sections.submit.progressbar.describe.orgunit": "Org Unit basic information",
+"submission.workflow.tasks.claimed.reject.reason.info": "Please enter your reason for rejecting the submission into the box below, indicating whether the submitter may fix a problem and resubmit.",
 
-  "submission.sections.submit.progressbar.describe.participation_events": "Participation events",
+"submission.workflow.tasks.claimed.reject.reason.placeholder": "Describe the reason of reject",
 
-  "submission.sections.submit.progressbar.describe.participation_events_frequency": "Participation event frequency",
+"submission.workflow.tasks.claimed.reject.reason.submit": "Reject item",
 
-  "submission.sections.submit.progressbar.describe.participation_events_dates": "Participation event dates",
+"submission.workflow.tasks.claimed.reject.reason.title": "Reason",
 
-  "submission.sections.submit.progressbar.describe.patent": "Patent basic information",
+"submission.workflow.tasks.claimed.reject.submit": "Reject",
 
-  "submission.sections.submit.progressbar.describe.patent_indexing": "Patent indexing",
+"submission.workflow.tasks.claimed.reject_help": "If you have reviewed the item and found it is <strong>not</strong> suitable for inclusion in the collection, select \"Reject\".  You will then be asked to enter a message indicating why the item is unsuitable, and whether the submitter should change something and resubmit.",
 
-  "submission.sections.submit.progressbar.describe.patent_references": "Patent references",
+"submission.workflow.tasks.claimed.return": "Return to pool",
 
-  "submission.sections.submit.progressbar.describe.patents": "Patente und Gebrauchsmuster",
+"submission.workflow.tasks.claimed.return_help": "Return the task to the pool so that another user may perform the task.",
 
-  "submission.sections.submit.progressbar.describe.patents.info": "Dokumentieren Sie hier geplante oder angemeldete Schutzrechte sowie deren geplante Verwertung. Die Angaben können während der Projektdurchführung jederzeit angepaßt werden.",
+"submission.workflow.tasks.generic.error": "Error occurred during operation...",
 
-  "submission.sections.submit.progressbar.describe.patents_result": "Patent results",
+"submission.workflow.tasks.generic.processing": "Processing...",
 
-  "submission.sections.submit.progressbar.describe.product": "Product basic information",
+"submission.workflow.tasks.generic.submitter": "Submitter",
 
-  "submission.sections.submit.progressbar.describe.product_indexing": "Product indexing",
+"submission.workflow.tasks.generic.success": "Operation successful",
 
-  "submission.sections.submit.progressbar.describe.product_references": "Product references",
+"submission.workflow.tasks.pool.claim": "Claim",
 
-  "submission.sections.submit.progressbar.describe.project": "Project basic information",
+"submission.workflow.tasks.pool.claim_help": "Assign this task to yourself.",
 
-  "submission.sections.submit.progressbar.describe.publication": "Publication basic information",
+"submission.workflow.tasks.pool.hide-detail": "Hide detail",
 
-  "submission.sections.submit.progressbar.describe.publication_bibliographic_details": "Publication bibliographic details",
+"submission.workflow.tasks.pool.show-detail": "Show detail",
 
-  "submission.sections.submit.progressbar.describe.publication_indexing": "Publication indexing",
+"title": "DSpace Cris",
 
-  "submission.sections.submit.progressbar.describe.publication_references": "Publication references",
+"tree.description.srsc": "Research Subject Categories",
 
-  "submission.sections.submit.progressbar.describe.rp": "Researcher basic information",
+"treeview.header": "Hierarchical tree view",
 
-  "submission.sections.submit.progressbar.describe.recycle": "Recycle",
+"treeview.load-more": "Load more",
 
-  "submission.sections.submit.progressbar.describe.spinoffs": "Spin-off",
+"treeview.search.form.reset": "Reset",
 
-  "submission.sections.submit.progressbar.describe.spinoffs_result": "Spin-off results",
+"treeview.search.form.search": "Search",
 
-  "submission.sections.submit.progressbar.describe.stepcustom": "Describe",
+"treeview.search.no-result": "There were no items to show",
 
-  "submission.sections.submit.progressbar.describe.stepone": "Describe",
+"uploader.browse": "browse",
 
-  "submission.sections.submit.progressbar.describe.steptwo": "Describe",
+"uploader.drag-message": "Drag & Drop your files here",
 
-  "submission.sections.submit.progressbar.detect-duplicate": "Potential duplicates",
+"uploader.or": ", or",
 
-  "submission.sections.submit.progressbar.license": "Deposit license",
+"uploader.processing": "Processing",
 
-  "submission.sections.submit.progressbar.upload": "Upload files",
+"uploader.queue-length": "Queue length",
 
+"virtual-metadata.delete-item.info": "Select the types for which you want to save the virtual metadata as real metadata",
 
+"virtual-metadata.delete-item.modal-head": "The virtual metadata of this relation",
 
-  "submission.sections.upload.delete.confirm.cancel": "Cancel",
-
-  "submission.sections.upload.delete.confirm.info": "This operation can't be undone. Are you sure?",
-
-  "submission.sections.upload.delete.confirm.submit": "Yes, I'm sure",
-
-  "submission.sections.upload.delete.confirm.title": "Delete bitstream",
-
-  "submission.sections.upload.delete.submit": "Delete",
-
-  "submission.sections.upload.drop-message": "Drop files to attach them to the item",
-
-  "submission.sections.upload.form.access-condition-label": "Access condition type",
-
-  "submission.sections.upload.form.date-required": "Date is required.",
-
-  "submission.sections.upload.form.from-label": "Access grant from",
-
-  "submission.sections.upload.form.from-placeholder": "From",
-
-  "submission.sections.upload.form.group-label": "Group",
-
-  "submission.sections.upload.form.group-required": "Group is required.",
-
-  "submission.sections.upload.form.until-label": "Access grant until",
-
-  "submission.sections.upload.form.until-placeholder": "Until",
-
-  "submission.sections.upload.header.policy.default.nolist": "Uploaded files in the {{collectionName}} collection will be accessible according to the following group(s):",
-
-  "submission.sections.upload.header.policy.default.withlist": "Please note that uploaded files in the {{collectionName}} collection will be accessible, in addition to what is explicitly decided for the single file, with the following group(s):",
-
-  "submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <strong>upload additional files just dragging & dropping them everywhere in the page</strong>",
-
-  "submission.sections.upload.no-entry": "No",
-
-  "submission.sections.upload.no-file-uploaded": "No file uploaded yet.",
-
-  "submission.sections.upload.save-metadata": "Save metadata",
-
-  "submission.sections.upload.undo": "Cancel",
-
-  "submission.sections.upload.upload-failed": "Upload failed",
-
-  "submission.sections.upload.upload-successful": "Upload successful",
-
-
-
-  "submission.submit.title": "Submission",
-
-
-
-  "submission.workflow.generic.delete": "Delete",
-
-  "submission.workflow.generic.delete-help": "If you would to discard this item, select \"Delete\".  You will then be asked to confirm it.",
-
-  "submission.workflow.generic.edit": "Edit",
-
-  "submission.workflow.generic.edit-help": "Select this option to change the item's metadata.",
-
-  "submission.workflow.generic.view": "View",
-
-  "submission.workflow.generic.view-help": "Select this option to view the item's metadata.",
-
-
-
-  "submission.workflow.tasks.claimed.approve": "Approve",
-
-  "submission.workflow.tasks.claimed.approve_help": "If you have reviewed the item and it is suitable for inclusion in the collection, select \"Approve\".",
-
-  "submission.workflow.tasks.claimed.edit": "Edit",
-
-  "submission.workflow.tasks.claimed.edit_help": "Select this option to change the item's metadata.",
-
-  "submission.workflow.tasks.claimed.reject.reason.info": "Please enter your reason for rejecting the submission into the box below, indicating whether the submitter may fix a problem and resubmit.",
-
-  "submission.workflow.tasks.claimed.reject.reason.placeholder": "Describe the reason of reject",
-
-  "submission.workflow.tasks.claimed.reject.reason.submit": "Reject item",
-
-  "submission.workflow.tasks.claimed.reject.reason.title": "Reason",
-
-  "submission.workflow.tasks.claimed.reject.submit": "Reject",
-
-  "submission.workflow.tasks.claimed.reject_help": "If you have reviewed the item and found it is <strong>not</strong> suitable for inclusion in the collection, select \"Reject\".  You will then be asked to enter a message indicating why the item is unsuitable, and whether the submitter should change something and resubmit.",
-
-  "submission.workflow.tasks.claimed.return": "Return to pool",
-
-  "submission.workflow.tasks.claimed.return_help": "Return the task to the pool so that another user may perform the task.",
-
-
-
-  "submission.workflow.tasks.generic.error": "Error occurred during operation...",
-
-  "submission.workflow.tasks.generic.processing": "Processing...",
-
-  "submission.workflow.tasks.generic.submitter": "Submitter",
-
-  "submission.workflow.tasks.generic.success": "Operation successful",
-
-
-
-  "submission.workflow.tasks.pool.claim": "Claim",
-
-  "submission.workflow.tasks.pool.claim_help": "Assign this task to yourself.",
-
-  "submission.workflow.tasks.pool.hide-detail": "Hide detail",
-
-  "submission.workflow.tasks.pool.show-detail": "Show detail",
-
-
-
-  "title": "DSpace Cris",
-
-
-
-  "tree.description.srsc": "Research Subject Categories",
-
-
-
-  "treeview.header": "Hierarchical tree view",
-
-
-
-  "treeview.search.form.reset": "Reset",
-
-  "treeview.search.form.search": "Search",
-
-  "treeview.search.no-result": "There were no items to show",
-
-
-
-  "treeview.load-more": "Load more",
-
-
-
-
-  "uploader.browse": "browse",
-
-  "uploader.drag-message": "Drag & Drop your files here",
-
-  "uploader.or": ", or",
-
-  "uploader.processing": "Processing",
-
-  "uploader.queue-length": "Queue length",
-
-  "virtual-metadata.delete-item.info": "Select the types for which you want to save the virtual metadata as real metadata",
-
-  "virtual-metadata.delete-item.modal-head": "The virtual metadata of this relation",
-
-  "virtual-metadata.delete-relationship.modal-head": "Select the items for which you want to save the virtual metadata as real metadata",
-
-
-
-  "working-plan.page.title": "Working plan",
-
-  "working-plan.chart.button.add": "add",
-
-  "working-plan.chart.column.dates": "Dates",
-
-  "working-plan.chart.column.responsible": "Responsible",
-
-  "working-plan.chart.column.status": "Status",
-
-  "working-plan.chart.column.steps": "Steps",
-
-  "working-plan.chart.toolbar.date-view.month": "Month",
-
-  "working-plan.chart.toolbar.date-view.quarter": "Quarter",
-
-  "working-plan.chart.toolbar.date-view.quarter.first": "First Quarter",
-
-  "working-plan.chart.toolbar.date-view.quarter.second": "Second Quarter",
-
-  "working-plan.chart.toolbar.date-view.quarter.third": "Third Quarter",
-
-  "working-plan.chart.toolbar.date-view.quarter.fourth": "Fourth Quarter",
-
-  "working-plan.chart.toolbar.date-view.year": "Year",
-
-  "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
-
-  "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
+"virtual-metadata.delete-relationship.modal-head": "Select the items for which you want to save the virtual metadata as real metadata"
 }
-
