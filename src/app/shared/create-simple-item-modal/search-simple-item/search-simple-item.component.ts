@@ -4,7 +4,7 @@ import { BehaviorSubject, from as observableFrom, Observable, Subscription } fro
 import { concatMap, scan, take } from 'rxjs/operators';
 import { NgbActiveModal, NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { findIndex } from 'lodash';
-import { hasValue, isNotEmpty } from '../../empty.util';
+import { hasValue, isEmpty, isNotEmpty } from '../../empty.util';
 import { PaginatedList } from '../../../core/data/paginated-list';
 import { SortDirection, SortOptions } from '../../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../pagination/pagination-component-options.model';
@@ -257,15 +257,20 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   }
 
   private updateResultList(resultList: Array<Observable<SimpleItem>>) {
-    this.subs.push(observableFrom(resultList).pipe(
-      concatMap((list: Observable<SimpleItem>) => list),
-      scan((acc: any, value: any) => [...acc, ...value], [])
-    ).subscribe((itemList: SimpleItem[]) => {
-      if (itemList.length === resultList.length) {
-        this.availableTaskList$.next(itemList);
-        this.searching$.next(false);
-      }
-    }));
+    if (isEmpty(resultList)) {
+      this.availableTaskList$.next([]);
+      this.searching$.next(false);
+    } else {
+      this.subs.push(observableFrom(resultList).pipe(
+        concatMap((list: Observable<SimpleItem>) => list),
+        scan((acc: any, value: any) => [...acc, ...value], [])
+      ).subscribe((itemList: SimpleItem[]) => {
+        if (itemList.length === resultList.length) {
+          this.availableTaskList$.next(itemList);
+          this.searching$.next(false);
+        }
+      }));
+    }
   }
 
   ngOnDestroy(): void {
