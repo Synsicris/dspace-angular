@@ -221,8 +221,8 @@ export class ImpactPathwayService {
       flatMap((collectionId) => {
         const searchOptions = new IntegrationSearchOptions(
           collectionId,
-          'impactpathway_step_type',
-          'impactpathway.step.type');
+          this.config.impactPathway.impactPathwayStepTypeAuthority,
+          this.config.impactPathway.impactPathwayStepTypeMetadata);
 
         return this.authorityService.getEntriesByName(searchOptions).pipe(
           take(1),
@@ -326,7 +326,7 @@ export class ImpactPathwayService {
       display: step.name,
       value: step.id,
     }));
-    this.operationsBuilder.add(pathCombiner.getPath('impactpathway.relation.step'), stepValueList, true, false);
+    this.operationsBuilder.add(pathCombiner.getPath(this.config.impactPathway.impactPathwayStepRelationMetadata), stepValueList, true, false);
   }
 
   private addPatchOperationForImpactPathwayStep(
@@ -344,7 +344,7 @@ export class ImpactPathwayService {
     );
 
     this.operationsBuilder.add(
-      pathCombiner.getPath('impactpathway.step.type'),
+      pathCombiner.getPath(this.config.impactPathway.impactPathwayStepTypeMetadata),
       impactPathwayStepType,
       true,
       true
@@ -352,7 +352,7 @@ export class ImpactPathwayService {
 
     this.operationsBuilder.add(
       pathCombiner.getPath('relationship.type'),
-      'impactpathwaystep',
+      this.config.impactPathway.impactPathwayStepEntity,
       true,
       true
     );
@@ -363,7 +363,7 @@ export class ImpactPathwayService {
       place: 0,
       confidence: 600
     };
-    this.operationsBuilder.add(pathCombiner.getPath('impactpathway.relation.parent'), parent, true, true);
+    this.operationsBuilder.add(pathCombiner.getPath(this.config.impactPathway.impactPathwayParentRelationMetadata), parent, true, true);
 
   }
 
@@ -405,7 +405,7 @@ export class ImpactPathwayService {
   }
 
   private getImpactPathwaysCollection(): Observable<string> {
-    return this.getCollectionByEntity('impactpathway');
+    return this.getCollectionByEntity(this.config.impactPathway.impactPathwayEntity);
   }
 
   private getImpactPathwaysFormSection(): Observable<string> {
@@ -417,14 +417,14 @@ export class ImpactPathwayService {
   }
 
   private getImpactPathwayStepsCollection(): Observable<string> {
-    return this.getCollectionByEntity('impactpathwaystep');
+    return this.getCollectionByEntity(this.config.impactPathway.impactPathwayStepEntity);
   }
 
   private getCollectionByEntity(entityType: string): Observable<string> {
     const searchOptions: IntegrationSearchOptions = new IntegrationSearchOptions(
       '',
-      'impactpathway_entity_to_collection_map',
-      'impactpathway.entity.map',
+      this.config.impactPathway.entityToCollectionMapAuthority,
+      this.config.impactPathway.entityToCollectionMapAuthorityMetadata,
       entityType,
       1,
       1);
@@ -531,7 +531,7 @@ export class ImpactPathwayService {
   }
 
   initImpactPathwaySteps(impacPathwayId: string, parentItem: Item): Observable<ImpactPathwayStep[]> {
-    return observableFrom(Metadata.all(parentItem.metadata, 'impactpathway.relation.step')).pipe(
+    return observableFrom(Metadata.all(parentItem.metadata, this.config.impactPathway.impactPathwayStepRelationMetadata)).pipe(
       concatMap((step: MetadataValue) => this.itemService.findById(step.value).pipe(
         getFirstSucceededRemoteDataPayload(),
         flatMap((stepItem: Item) => this.initImpactPathwayTasksFromParentItem(impacPathwayId, stepItem).pipe(
@@ -543,11 +543,11 @@ export class ImpactPathwayService {
   }
 
   initImpactPathwayTasksFromParentItem(impacPathwayId: string, parentItem: Item, buildLinks = true): Observable<ImpactPathwayTask[]> {
-    const relatedTaskMetadata = Metadata.all(parentItem.metadata, 'impactpathway.relation.task');
+    const relatedTaskMetadata = Metadata.all(parentItem.metadata, this.config.impactPathway.impactPathwayTaskRelationMetadata);
     if (isEmpty(relatedTaskMetadata)) {
       return observableOf([])
     } else {
-      return observableFrom(Metadata.all(parentItem.metadata, 'impactpathway.relation.task')).pipe(
+      return observableFrom(Metadata.all(parentItem.metadata, this.config.impactPathway.impactPathwayTaskRelationMetadata)).pipe(
         concatMap((task: MetadataValue) => this.itemService.findById(task.value).pipe(
           getFirstSucceededRemoteDataPayload(),
           flatMap((taskItem: Item) => this.initImpactPathwayTasksFromParentItem(impacPathwayId, taskItem, false).pipe(
@@ -568,13 +568,13 @@ export class ImpactPathwayService {
     return this.itemAuthorityRelationService.unlinkItemFromParent(
       previousParentTaskId,
       taskId,
-      'impactpathway.relation.parent',
-      'impactpathway.relation.task').pipe(
+      this.config.impactPathway.impactPathwayParentRelationMetadata,
+      this.config.impactPathway.impactPathwayTaskRelationMetadata).pipe(
       flatMap(() => this.itemAuthorityRelationService.linkItemToParent(
         newParentTaskId,
         taskId,
-        'impactpathway.relation.parent',
-        'impactpathway.relation.task'))
+        this.config.impactPathway.impactPathwayParentRelationMetadata,
+        this.config.impactPathway.impactPathwayTaskRelationMetadata))
     )
   }
 
@@ -618,7 +618,7 @@ export class ImpactPathwayService {
   }
 
   initImpactPathwayStep(parentId: string, stepItem: Item, tasks: ImpactPathwayTask[]): ImpactPathwayStep {
-    const type = stepItem.firstMetadataValue('impactpathway.step.type');
+    const type = stepItem.firstMetadataValue(this.config.impactPathway.impactPathwayStepTypeMetadata);
 
     return new ImpactPathwayStep(parentId, stepItem.id, type, stepItem.name, tasks);
   }
@@ -666,9 +666,9 @@ export class ImpactPathwayService {
 
   private addImpactPathwayLinksFromTaskItem(taskItem: Item, impactPathwayId: string, impactPathwayStepId: string): void {
     const taskOutcomeLinkList: MetadataValue[] = taskItem
-      .findMetadataSortedByPlace('impactpathway.outcome.link');
+      .findMetadataSortedByPlace(this.config.impactPathway.impactpathwayOutcomeLinkMetadata);
     const taskBidirectionalLinkList: MetadataValue[] = taskItem
-      .findMetadataSortedByPlace('impactpathway.bidirectional.link');
+      .findMetadataSortedByPlace(this.config.impactPathway.impactpathwayBidirectionalLinkMetadata);
 
     const linksList: ImpactPathwayLink[] = [];
 

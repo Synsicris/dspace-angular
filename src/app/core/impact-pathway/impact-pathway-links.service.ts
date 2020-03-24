@@ -254,8 +254,10 @@ export class ImpactPathwayLinksService {
   }
 
   private buildPatchOperations(targetItem: Item, toSave: ImpactPathwayLink[], toDelete: ImpactPathwayLink[]): void {
-    const taskOutcomeLinkList: MetadataValue[] = targetItem.findMetadataSortedByPlace('impactpathway.outcome.link');
-    const taskBidirectionalLinkList: MetadataValue[] = targetItem.findMetadataSortedByPlace('impactpathway.bidirectional.link');
+    const taskOutcomeLinkList: MetadataValue[] = targetItem
+      .findMetadataSortedByPlace(this.config.impactPathway.impactpathwayOutcomeLinkMetadata);
+    const taskBidirectionalLinkList: MetadataValue[] = targetItem
+      .findMetadataSortedByPlace(this.config.impactPathway.impactpathwayBidirectionalLinkMetadata);
 
     this.buildAddPatchOperations(toSave, taskOutcomeLinkList, taskBidirectionalLinkList);
     this.buildRemovePatchOperations(toDelete, taskOutcomeLinkList, taskBidirectionalLinkList);
@@ -272,7 +274,9 @@ export class ImpactPathwayLinksService {
     let placeWhereToAddBidirectionalLink: number = taskBidirectionalLinkList.length;
 
     toSave.forEach((relation: ImpactPathwayLink) => {
-      const relationMetadata: string = (relation.twoWay) ? 'impactpathway.bidirectional.link' : 'impactpathway.outcome.link';
+      const relationMetadata: string = (relation.twoWay) ?
+        this.config.impactPathway.impactpathwayBidirectionalLinkMetadata :
+        this.config.impactPathway.impactpathwayOutcomeLinkMetadata;
       const relationPlace: number = (relation.twoWay) ? placeWhereToAddBidirectionalLink++ : placeWhereToAddOutcomeLink++;
       const isFirstRelation: boolean = (relation.twoWay) ? isEmpty(taskBidirectionalLinkList) : isEmpty(taskOutcomeLinkList);
       const relationToAdd = {
@@ -301,7 +305,9 @@ export class ImpactPathwayLinksService {
     const currentBidirectionalLinkList: MetadataValue[] = [...taskBidirectionalLinkList];
 
     toDelete.forEach((relation: ImpactPathwayLink) => {
-      const relationMetadata: string = (relation.twoWay) ? 'impactpathway.bidirectional.link' : 'impactpathway.outcome.link';
+      const relationMetadata: string = (relation.twoWay) ?
+        this.config.impactPathway.impactpathwayBidirectionalLinkMetadata :
+        this.config.impactPathway.impactpathwayOutcomeLinkMetadata;
       let relationPlace: number;
       if (relation.twoWay) {
         relationPlace = findIndex(currentBidirectionalLinkList, { authority: relation.toTaskId })

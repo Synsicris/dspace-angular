@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
 import { catchError, concatMap, delay, filter, flatMap, map, reduce, scan, startWith, take, tap } from 'rxjs/operators';
@@ -45,6 +45,7 @@ import { ItemAuthorityRelationService } from '../shared/item-authority-relation.
 import { WorkingPlanStateService } from './working-plan-state.service';
 import { PageInfo } from '../shared/page-info.model';
 import { dateToISOFormat, isNgbDateStruct } from '../../shared/date.util';
+import { GLOBAL_CONFIG, GlobalConfig } from '../../../config';
 
 export const moment = extendMoment(Moment);
 
@@ -52,6 +53,7 @@ export const moment = extendMoment(Moment);
 export class WorkingPlanService {
 
   constructor(
+    @Inject(GLOBAL_CONFIG) protected config: GlobalConfig,
     private authorityService: AuthorityService,
     private formConfigService: SubmissionFormsConfigService,
     private itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
@@ -68,7 +70,7 @@ export class WorkingPlanService {
   }
 
   generateWorkpackageItem(metadata: MetadataMap): Observable<Item> {
-    return this.createWorkspaceItem('plan_workpackages').pipe(
+    return this.createWorkspaceItem(this.config.workingPlan.workpackageEntityName).pipe(
       map((submission: SubmissionObject) => submission.item),
       tap(() => this.addPatchOperationForWorkpackage(metadata)),
       delay(100),
@@ -86,14 +88,14 @@ export class WorkingPlanService {
   }
 
   getWorkpackageFormConfig(): Observable<SubmissionFormModel> {
-    const formName = 'working_plan_workpackage_form';
+    const formName = this.config.workingPlan.workingPlanFormName;
     return this.formConfigService.getConfigByName(formName).pipe(
       map((configData: ConfigData) => configData.payload as SubmissionFormModel)
     )
   }
 
   getWorkpackageStepFormConfig(): Observable<SubmissionFormModel> {
-    const formName = 'working_plan_workpackage_step_form';
+    const formName = this.config.workingPlan.workingPlanStepsFormName;
     return this.formConfigService.getConfigByName(formName).pipe(
       map((configData: ConfigData) => configData.payload as SubmissionFormModel)
     )
@@ -116,8 +118,8 @@ export class WorkingPlanService {
   getWorkpackageStatusTypes(): Observable<AuthorityEntry[]> {
     const searchOptions: IntegrationSearchOptions = new IntegrationSearchOptions(
       '',
-      'working_plan_workpackage_status_type',
-      'workingplan.step.status');
+      this.config.workingPlan.workpackageStatusTypeAuthority,
+      this.config.workingPlan.workingPlanStepStatusMetadata);
     return this.authorityService.getEntriesByName(searchOptions).pipe(
       catchError(() => {
         const emptyResult = new IntegrationData(
@@ -132,15 +134,15 @@ export class WorkingPlanService {
   }
 
   getWorkpackageStepTypeAuthorityName(): string {
-    return 'working_plan_workpackage_step_type';
+    return this.config.workingPlan.workpackageStepTypeAuthority;
   }
 
   getWorkpackageStepSearchConfigName(): string  {
-    return 'workpackageSteps';
+    return this.config.workingPlan.workpackageStepsSearchConfigName;
   }
 
   searchForAvailableWorpackages(): Observable<Item[]> {
-    const searchConfiguration = 'allWorkpackages';
+    const searchConfiguration = this.config.workingPlan.workpackagesSearchConfigName;
     const paginationOptions: PaginationComponentOptions = new PaginationComponentOptions();
     paginationOptions.id = 'search-available-workpackages';
     paginationOptions.pageSize = 1000;
@@ -188,8 +190,8 @@ export class WorkingPlanService {
   public initWorkpackageFromItem(item: Item, steps: WorkpackageStep[] = []): Workpackage {
 
     const dates = this.initWorkpackageDatesFromItem(item);
-    const responsible = item.firstMetadataValue('workingplan.responsible');
-    const status = item.firstMetadataValue('workingplan.step.status');
+    const responsible = item.firstMetadataValue(this.config.workingPlan.workingPlanStepResponsibleMetadata);
+    const status = item.firstMetadataValue(this.config.workingPlan.workingPlanStepStatusMetadata);
 
     return {
       id: item.id,
@@ -207,8 +209,8 @@ export class WorkingPlanService {
   public initWorkpackageStepFromItem(item: Item, parentId: string): WorkpackageStep {
 
     const dates = this.initWorkpackageDatesFromItem(item);
-    const responsible = item.firstMetadataValue('workingplan.responsible');
-    const status = item.firstMetadataValue('workingplan.step.status');
+    const responsible = item.firstMetadataValue(this.config.workingPlan.workingPlanStepResponsibleMetadata);
+    const status = item.firstMetadataValue(this.config.workingPlan.workingPlanStepStatusMetadata);
 
     return {
       id: item.id,
@@ -254,8 +256,8 @@ export class WorkingPlanService {
   private getCollectionByEntity(entityType: string): Observable<string> {
     const searchOptions: IntegrationSearchOptions = new IntegrationSearchOptions(
       '',
-      'impactpathway_entity_to_collection_map',
-      'impactpathway.entity.map',
+      this.config.impactPathway.entityToCollectionMapAuthority,
+      this.config.impactPathway.entityToCollectionMapAuthorityMetadata,
       entityType,
       1,
       1);
@@ -280,7 +282,7 @@ export class WorkingPlanService {
   }
 
   initWorkpackageStepsFromParentItem(workpackageId: string, parentItem: Item): Observable<WorkpackageStep[]> {
-    const relatedTaskMetadata = Metadata.all(parentItem.metadata, 'workingplan.relation.step');
+    const relatedTaskMetadata = Metadata.all(parentItem.metadata, this.config.workingPlan.workingPlanStepRelationMetadata);
     if (isEmpty(relatedTaskMetadata)) {
       return observableOf([])
     } else {
@@ -301,7 +303,7 @@ export class WorkingPlanService {
     let end;
     let endMonth;
     let endyear;
-    const startDate = item.firstMetadataValue('dc.date.start');
+    const startDate = item.firstMetadataValue(this.config.workingPlan.workingPlanStepDateStartMetadata);
     if (isEmpty(startDate)) {
       start = moment().format('YYYY-MM-DD');
       startMonth = moment().format('YYYY-MM');
@@ -312,7 +314,7 @@ export class WorkingPlanService {
       startYear = moment(startDate).format('YYYY');
     }
 
-    const endDate = item.firstMetadataValue('dc.date.end');
+    const endDate = item.firstMetadataValue(this.config.workingPlan.workingPlanStepDateEndMetadata);
     if (isEmpty(startDate)) {
       end = moment().add(7, 'days').format('YYYY-MM-DD');
       endMonth = moment().add(7, 'days').format('YYYY-MM');

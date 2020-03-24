@@ -202,11 +202,33 @@ module.exports = {
     name: 'default',
   },
   impactPathway: {
-    impactPathwaysCollection: '2dc09d3e-d1ec-4f13-9ffc-fcac7b10b52d',
-    impactPathwayStepsCollection: 'c0ee6a8a-5dac-42bb-8a5c-c24239cc46a4',
-    impactPathwayTasksCollection: '23ab6982-b88e-43ac-ab2d-5bbd7225b104',
     impactPathwaysFormSection: 'impact_pathway_form',
     impactPathwayStepsFormSection: 'impact_pathway_step_form',
-    impactPathwayTasksFormSection: 'impact_pathway_task_form'
+    impactPathwayTasksFormSection: 'impact_pathway_task_form',
+    impactPathwayEntity: 'impactpathway',
+    impactPathwayStepEntity: 'impactpathwaystep',
+    impactPathwayParentRelationMetadata: 'impactpathway.relation.parent',
+    impactPathwayStepRelationMetadata: 'impactpathway.relation.step',
+    impactPathwayStepTypeMetadata: 'impactpathway.step.type',
+    impactPathwayTaskRelationMetadata: 'impactpathway.relation.task',
+    impactpathwayOutcomeLinkMetadata: 'impactpathway.outcome.link',
+    impactpathwayBidirectionalLinkMetadata: 'impactpathway.bidirectional.link',
+    impactPathwayStepTypeAuthority: 'impactpathway_step_type',
+    entityToCollectionMapAuthority: 'impactpathway_entity_to_collection_map',
+    entityToCollectionMapAuthorityMetadata: 'impactpathway.entity.map'
+  },
+  workingPlan: {
+    workingPlanFormName: 'working_plan_workpackage_form',
+    workingPlanStepsFormName: 'working_plan_workpackage_step_form',
+    workingPlanStepStatusMetadata: 'workingplan.step.status',
+    workingPlanStepResponsibleMetadata: 'workingplan.responsible',
+    workingPlanStepRelationMetadata: 'workingplan.relation.step',
+    workingPlanStepDateStartMetadata: 'dc.date.start',
+    workingPlanStepDateEndMetadata: 'dc.date.end',
+    workpackageEntityName: 'plan_workpackages',
+    workpackagesSearchConfigName: 'allWorkpackages',
+    workpackageStepsSearchConfigName: 'workpackageSteps',
+    workpackageStatusTypeAuthority: 'working_plan_workpackage_status_type',
+    workpackageStepTypeAuthority: 'working_plan_workpackage_step_type'
   }
 };

@@ -1,10 +1,18 @@
 import { Config } from './config.interface';
 
 export interface ImpactPathwayConfig extends Config {
-  impactPathwaysCollection: string;
-  impactPathwayStepsCollection: string;
-  impactPathwayTasksCollection: string;
   impactPathwaysFormSection: string;
   impactPathwayStepsFormSection: string;
   impactPathwayTasksFormSection: string;
+  impactPathwayEntity: string;
+  impactPathwayStepEntity: string;
+  impactPathwayParentRelationMetadata: string;
+  impactPathwayStepRelationMetadata: string;
+  impactPathwayStepTypeMetadata: string;
+  impactPathwayTaskRelationMetadata: string;
+  impactpathwayOutcomeLinkMetadata: string;
+  impactpathwayBidirectionalLinkMetadata: string;
+  impactPathwayStepTypeAuthority: string;
+  entityToCollectionMapAuthority: string;
+  entityToCollectionMapAuthorityMetadata: string;
 }

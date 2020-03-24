@@ -12,6 +12,7 @@ import { CollectionPageConfig } from './collection-page-config.interface';
 import { Theme } from './theme.inferface';
 import {AuthConfig} from './auth-config.interfaces';
 import { ImpactPathwayConfig } from './impact-pathway-config.interface';
+import { WorkingPlanConfig } from './working-plan-config.interface';
 
 export interface GlobalConfig extends Config {
   ui: ServerConfig;
@@ -33,4 +34,5 @@ export interface GlobalConfig extends Config {
   collection: CollectionPageConfig;
   themes: Theme[];
   impactPathway: ImpactPathwayConfig;
+  workingPlan: WorkingPlanConfig;
 }
