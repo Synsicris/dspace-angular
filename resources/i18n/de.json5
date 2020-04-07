@@ -1466,22 +1466,299 @@
   // "submission.sections.general.sections_not_valid": "There are incomplete sections.",
   "submission.sections.general.sections_not_valid": "Es gibt unvollständige Abschnitte.",
 
-  // "submission.sections.submit.progressbar.cclicense": "Creative commons license",
-  "submission.sections.submit.progressbar.cclicense": "Creative Commons Lizenz",
-  // "submission.sections.submit.progressbar.describe.recycle": "Recycle",
-  "submission.sections.submit.progressbar.describe.recycle": "Wiederverwerten",
-  // "submission.sections.submit.progressbar.describe.stepcustom": "Describe",
-  "submission.sections.submit.progressbar.describe.stepcustom": "Beschreiben",
-  // "submission.sections.submit.progressbar.describe.stepone": "Describe",
-  "submission.sections.submit.progressbar.describe.stepone": "Beschreiben",
-  // "submission.sections.submit.progressbar.describe.steptwo": "Describe",
-  "submission.sections.submit.progressbar.describe.steptwo": "Beschreiben",
-  // "submission.sections.submit.progressbar.detect-duplicate": "Potential duplicates",
-  "submission.sections.submit.progressbar.detect-duplicate": "Mögliche Dubletten",
-  // "submission.sections.submit.progressbar.license": "Deposit license",
-  "submission.sections.submit.progressbar.license": "Einreichlizenz",
-  // "submission.sections.submit.progressbar.upload": "Upload files",
-  "submission.sections.submit.progressbar.upload": "Hochgeladene Dateien",
+"submission.sections.submit.progressbar.cclicense": "Creative Commons Lizenz",
+
+"submission.sections.submit.progressbar.describe.agrovoc_keywords": "Agrovoc keywords",
+
+"submission.sections.submit.progressbar.describe.applications_econtech": "Erfolgreiche Anwendung von Ergebnissen für Veränderungsprozesse",
+
+"submission.sections.submit.progressbar.describe.applications_econtech_quant": "Quantifizierung und Entwicklung der Ausbreitung der Anwendung",
+
+"submission.sections.submit.progressbar.describe.applications_econtech_types": "Wenn kein Innovationspotential verlinkt ist: Art und Akteursgruppe der erfolgreichen Nutzung der Ergebnisse",
+
+"submission.sections.submit.progressbar.describe.applications_econtech_types.info": "Die folgenden Angaben müssen nur vorgenommen werden, wenn kein Innovationspotenzial verlinkt ist, d.h. wenn die Anwendung der Ergebnisse in einer anderen Form aufgetreten ist, als zum Projektende beschrieben.",
+
+"submission.sections.submit.progressbar.describe.applications_social": "Erfolgreiche Anwendung von Ergebnissen für soziale Innovationen/ Veränderungsprozesse",
+
+"submission.sections.submit.progressbar.describe.applications_social_quant": "Quantifizierung und Entwicklung der Ausbreitung der Anwendung",
+
+"submission.sections.submit.progressbar.describe.applications_social_quant.info": "Bitte geben Sie, wenn möglich, den Umfang und die Entwicklung des Anwendungserfolgs an.",
+
+"submission.sections.submit.progressbar.describe.applications_social_types": "Wenn kein Innovationspotential verlinkt ist: Art und Akteursgruppe der erfolgreichen Nutzung der Ergebnisse",
+
+"submission.sections.submit.progressbar.describe.applications_social_types.info": "Die folgenden Angaben müssen nur vorgenommen werden, wenn kein Innovationspotenzial verlinkt ist, d.h. wenn die Anwendung der Ergebnisse in einer anderen Form aufgetreten ist, als zum Projektende beschrieben.",
+
+"submission.sections.submit.progressbar.describe.awards": "Preise und Auszeichnungen",
+
+"submission.sections.submit.progressbar.describe.awards.info": "Bitte dokumentieren Sie hier alle Preise und Auszeichnungen, die im Zusammenhang mit dem Projekt und/oder seiner Ergebnisse stehen.",
+
+"submission.sections.submit.progressbar.describe.conditions": "Reflexion externer Bedingungen und Anforderungen",
+
+"submission.sections.submit.progressbar.describe.conditions.info": "Bitte reflektieren Sie hier externe Rahmenbedingungen und Anforderungen, die für das Projekt relevant sind. Durch die Reflexion zeigen Sie, dass Sie relevante Rahmenbedingungen und Anforderungen kennen und damit adäquat im Projekt umgehen.",
+
+"submission.sections.submit.progressbar.describe.contribution_fundingprogramme": "Beitrag zu förderpolitischen Zielen",
+
+"submission.sections.submit.progressbar.describe.contribution_fundingprogramme.info": "Bitte stellen Sie hier den Beitrag des Vorhabens zu den förderpolitischen Zielen dar. Wählen Sie die relevanten (bzw. ggf. vorgegebenen) förderpolitische Ziele aus und erläutern Sie kurz den (geplanten) Beitrag des Projektes zu dem förderpolitischen Ziel. Zusammenhänge können Sie im Wirkungspfad durch die Pfeile visualisieren. Fokussieren Sie Ihre Erläuterung daher auf ergänzende Informationen und die Begründung der Zusammenhänge.",
+
+"submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg": "Bezug des Projektes zu SDGs",
+
+"submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg.info": "Die Zuordnung zu den UN Sustainable Development Goals (SDGs) erfolgt für die Programmevaluierung. Sofern den Programmzielen bereits SDGs zugeordnet wurden, werden diese angezeigt. Wählen sie bitte manuell ein SDG Unterziel aus, wenn noch keine Zuordnung erfolgt ist oder das Projekt einen weiteren Beitrag zu anderen SDGs liefert, die über die Programmziele hinausgehen. Weiterführende Informationen finden Sie hier [LINK].",
+
+"submission.sections.submit.progressbar.describe.cooperation_events": "Kooperationsprozesse - Basisinformation",
+
+"submission.sections.submit.progressbar.describe.cooperation_events.info": "Kooperationsprozesse umfassen die Zusammenarbeit von formellen und informellen Kooperationspartnern im Projekt.",
+
+"submission.sections.submit.progressbar.describe.cooperation_events_date": "Daten der persönlichen Treffen oder anderer zentraler Aktivitäten",
+
+"submission.sections.submit.progressbar.describe.cooperation_events_date.info": "Es wird hier nicht erwartet, dass jedes Telefongespräch oder häufige Webkonferenzen mit genauen Daten hinterlegt werden. Nutzen Sie dazu bitte die Häufigkeitsangaben.",
+
+"submission.sections.submit.progressbar.describe.cooperation_events_frequency": "Häufigkeit der Kooperationsprozesse",
+
+"submission.sections.submit.progressbar.describe.cooperation_partners": "Projektpartner und Kooperationspartner",
+
+"submission.sections.submit.progressbar.describe.cooperation_partners.info": "Dieser Bereich dient dazu, die Kooperationen im Rahmen eines Projektes abzubilden. Unter Kooperationen wird die vereinbarte Zusammenarbeit mit anderen Organisationen, Unternehmen und Institutionen verstanden. Bereits im easy-online Antrag angegebene Verbundpartner, Unterauftragnehmer und Vertragspartner werden importiert und Sie müssen nur Angaben ergänzen. Bitte ergänzen Sie informelle Kooperationspartner und alle nach Projektbeginn hinzukommenden Projektpartner, damit ein umfassendes Bild zu den projektbeteiligten Kooperationspartnern vorliegt. Wenn gewünscht oder gefordert, können Verträge, Letter of Intent oder ähnliche Belege für die Kooperation hochgeladen werden. Sie werden nicht veröffentlicht und sind nur für den Förderer einsehbar.",
+
+"submission.sections.submit.progressbar.describe.cooperation_partners_contribution": "Beitrag des Kooperationspartners zum Projekt",
+
+"submission.sections.submit.progressbar.describe.cooperation_partners_orgunits": "Beschreibung der kooperierenden Organisationseinheit",
+
+"submission.sections.submit.progressbar.describe.cooperation_partners_orgunits.info": "Bitte ergänzen Sie die importierten Angaben und führen ggf. Korrekturen durch.",
+
+"submission.sections.submit.progressbar.describe.cooperation_partners_orgunits_companies": "Angaben nur für Unternehmen",
+
+"submission.sections.submit.progressbar.describe.cooperation_partners_orgunits_research": "Angaben nur für Forschungseinrichtungen",
+
+"submission.sections.submit.progressbar.describe.cooperation_partners_staff": "Projektpersonal",
+
+"submission.sections.submit.progressbar.describe.cooperation_partners_staff.info": "Bitte ergänzen Sie Angaben zum Projektpersonal. Die Informationen dienen für Kriterien zur Gleichstellung und Interdisziplinarität und sind die Grundlage für eine komfortable Nutzung der Informationen durch die einzelnen Mitarbeitenden.",
+
+"submission.sections.submit.progressbar.describe.easy_upload": "Import aus easy-online",
+
+"submission.sections.submit.progressbar.describe.easy_upload.info": "Durch den upload Ihres easy-Online Antrags importieren Sie Angaben zum Teilprojekt, zur ausführenden Stelle und zu beteiligten Personen. Damit können Sie diese Informationen auch hier nutzen. Der upload kann jederzeit mit einer aktualisierten xml-Datei aus easy-online wiederholt werden.",
+
+"submission.sections.submit.progressbar.describe.entity_type_selection": "Auswahl des Entitätstypen",
+
+"submission.sections.submit.progressbar.describe.ethics": "Ethische Reflexion",
+
+"submission.sections.submit.progressbar.describe.ethics.info": "Bedenken Sie, dass sich in vielen Bereichen der Forschung ethische Fragen stellen. Abgesehen von den offensichtlichen Beispielen aus dem medizinischen Bereich berühren zahlreiche Problemstellungen der Umwelt- und Agrarwissenschaften, der Sozialwissenschaften, der Psychologie oder der Sicherheitsforschung usw. ethische Leitlinien. Bitte reflektieren Sie nachfolgend, inwiefern der F&E-Prozess oder die Ergebnisse des Projektes ethische Aspekte berühren. Gehen Sie in den Textfeldern bitte darauf ein, wie Sie mit ethischen Prinzipien und/oder den zutreffenden rechtlichen Bestimmungen umgehen. Das beigefügte Dokument enthält Hinweise, was Sie im Detail beachten sollten  [Link].",
+
+"submission.sections.submit.progressbar.describe.ethics_process": "Reflexion zu Einhaltung ethischer Grundsätze im F&E-Prozess",
+
+"submission.sections.submit.progressbar.describe.ethics_process.info": "Ethische Aspekte können Ihr Forschungsobjekt betreffen und in einem F&E-Prozess an mehreren Punkten relevant sein. Bitte nehmen Sie dazu Stellung, welche ethischen Aspekte Ihr Projekt ggf. berührt:",
+
+"submission.sections.submit.progressbar.describe.ethics_use": "Reflexion zur ethischen Akzeptanz der Projektergebnisse",
+
+"submission.sections.submit.progressbar.describe.ethics_use.info": "F&E-Ergebnisse können Grenzen des ethisch Akzeptierten in der Gesellschaft berühren. Bitte nehmen dazu Stellung, ob Ihre F&E-Ergebnisse ggf. die ethische Akzeptanz berühren oder Potenzial zum Missbrauch bieten.",
+
+"submission.sections.submit.progressbar.describe.events": "Veranstaltungen - Basisinformation",
+
+"submission.sections.submit.progressbar.describe.events.info": "Bitte erfassen Sie hier Veranstaltungen und Interaktionen, die im Projekt durchgeführt wurden oder an denen im Projektkontext teilgenommen wurde. Erfassen Sie hier keine Kooperationsprozesse mit ihren Partnern und auch keine aufeinander aufbauenden partizipativen Prozesse. Diese haben eigene Dokumentationsbereiche..",
+
+"submission.sections.submit.progressbar.describe.events_result": "Daten der Veranstaltung",
+
+"submission.sections.submit.progressbar.describe.events_result.info": "Bitte geben Sie hier nur mehrere Veranstaltungen ein, wenn die Basisinformationen und involvierten Akteursgruppen tatsächlich gleich sind.",
+
+"submission.sections.submit.progressbar.describe.gender_personal": "Gleichstellungsaspekte im Projektteam",
+
+"submission.sections.submit.progressbar.describe.gender_personal.info": "Der tatsächlichen Durchsetzung der Gleichberechtigung von Frauen und Männern kommt eine hohe politische Priorität zu. Deshalb wird in der Wissenschaft das Ziel verfolgt, die Unterrepräsentation von Frauen in Spitzenpositionen aktiv zu beheben (siehe DFG-Positionspapier [Link]). Beschreiben Sie bitte die besonderen Herausforderungen im Kontext des Projektes Geschlechterparität zu erzielen und ggf. darauf bezogene spezifische Aktivitäten des Projektes. (Das im Projekt realisierte Verhältnis zwischen Frauen und Männern bei Leitungs- und Entscheidungspositionen, Erstautorenschaften etc. wird im SynSICRIS-Tool mit Hilfe der Informationen zum Geschlecht und zur Rolle der Projektmitarbeiteri*innen erfasst.)",
+
+"submission.sections.submit.progressbar.describe.gender_project": "Geschlechtergerechtigkeit im F&E-Prozess",
+
+"submission.sections.submit.progressbar.describe.gender_project.info": "Aspekte der Geschlechtergerechtigkeit können in einem F&E-Prozess an mehreren Punkten relevant sein. Bitte nehmen Sie dazu Stellung, wo das Projekt ggf. Geschlechteraspekte berührt. Wenn Sie in einem Bereich \"ja\" wählen, berücksichtigen Sie diese Aspekte bitte jeweils in dem entschprechenden Bereich im SynSICRIS-Tool.",
+
+"submission.sections.submit.progressbar.describe.import_orgunits": "Organisationseinheit",
+
+"submission.sections.submit.progressbar.describe.import_orgunits_companies": "Angaben nur für Unternehmen",
+
+"submission.sections.submit.progressbar.describe.import_orgunits_companies_st": "Handelsregistereintrag",
+
+"submission.sections.submit.progressbar.describe.import_orgunits_companies_zk": "Handelsregistereintrag",
+
+"submission.sections.submit.progressbar.describe.import_orgunits_st": "Angaben zur ausführenden Stelle",
+
+"submission.sections.submit.progressbar.describe.import_orgunits_zk": "Angaben zum Antragsteller",
+
+"submission.sections.submit.progressbar.describe.import_person_a2": "Personendaten administrativer Ansprechpartner  (nur während der Antragstellung)",
+
+"submission.sections.submit.progressbar.describe.import_person_pa": "Personendaten administrativer Ansprechpartner (im Falle der Bewilligung)",
+
+"submission.sections.submit.progressbar.describe.import_person_pl": "Personendaten Projektleitung",
+
+"submission.sections.submit.progressbar.describe.import_person_uz": "Personendaten bevollmächtigter Unterzeichner",
+
+"submission.sections.submit.progressbar.describe.import_projects": "Projekte",
+
+"submission.sections.submit.progressbar.describe.import_subprojects": "Angaben zum Teilprojekt",
+
+"submission.sections.submit.progressbar.describe.innovationideas": "Ideen für Innovations- und Veränderungsprozesse",
+
+"submission.sections.submit.progressbar.describe.innovationideas.info": "Beschreiben Sie hier mögliche, noch nicht konkret fassbare Beiträge der Projektergebnisse zu Innovations- und Veränderungsprozessen. Falls im Projekt konkrete Absichten bestehen, bestimmte Innovationen zu entwickeln oder zu Veränderungsprozessen beizutragen, wählen Sie die Rubrik intendierte Innovationen oder intendierte Veränderungsprozesse aus. Erfassen Sie hier ggf. weitere Nebenziele oder mögliche Alternativen zu den dort dokumentierten konkreten Absichten.",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech": "Konkrete Absichten für die Entwicklung von wirtschaftlich-technischen  Innovationen auf Basis der Projektergebnisse (z.B. Produkte, Dienstleistungen, Prozesse)",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech.info": "Dokumentieren Sie hier, welche konkreten Absichten für die Nutzung der Projektergebnisse für Innovationen durch einen der Projektpartner oder andere Kooperationspartner bestehen. Wenn die Innovation/ Entwicklung mit intendierten sozialen Innovationen/ Veränderungsprozessen in Verbindung steht, dokumentiere Sie diese bitte separat. Sie können von der sozialen Innovation eine Verlinkung zu der wirtschaftlich-technischen Innovation herstellen. Wenn Sie verschiedene, unspezifische Anwendungsmöglichkeiten für die (erwarteten) Projektergebnisse sehen, die erst zu einem späteren Zeitpunkt konkretisiert werden können und für deren weitere Umsetzung ggf. auch noch keine Partner identifiziert sind, wechseln Sie bitte in \"Innovationsideen\"",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability": "Beschreibung der Anwendbarkeit",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability.info": "Bitte beschreiben Sie in der Antragstellung den bisherigen Stand in der Anwendbarkeit und nennen Sie Defizite und erwartete Potenziale in der Anwendbarkeit, die im Projekt adressiert werden. In einigen Fällen werden diese Informationen in der Antragsphase noch nicht konkret vorliegen, sondern erst im Projektverlauf identifiziert. Aktualisieren Sie diese Angaben zu den vorgegebenen Zeitpunkten. Zum Projektende soll die erzielte Anwendbarkeit beschrieben werden.Es wird empfohlen, die Analyse der Anwendbarkeit mit Beteiligung von Akteuren aus dem Handlungsfeld vorzunehmen. Die Beschreibung soll anhand aller vorgegebenen Rubriken erfolgen. Nehmen Sie in jeder Rubrik zu den Fragen Stellung, die für das Projekt relevant sind. Ergänzen Sie aus Ihrer Sicht wichtige, aber nicht abgefragte Informationen ggf. unter \"sonstiges\".",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech_trl": "Reifegrad - Technology Readiness Level (TRL)",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech_trl.info": "Bitte beschreiben Sie, welcher Technology Readinness Level zu Projektbeginn vorliegt und zum Projektende erreicht werden soll. Ergänzen Sie für den Schlussbericht, welcher TRL tatsächlich erreicht wurde. Weiterführende Informationen zum TRL finden Sie hier (LINK).",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech_userbenefit": "Erwarteter Nutzen für potenzielle Kunden- bzw. Nutzergruppen.",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_econtech_userbenefit.info": "Beschreiben Sie hier den erwarteten Nutzen für beliebig viele Kunden- oder Nutzergruppen und schätzen Sie die Größe des potenziellen Marktes ein.",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_social": "Konkrete Absichten für eine Nutzung der Projektergebnisse für soziale Innovationen / Veränderungsprozesse",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_social.info": "Dokumentieren Sie hier, welche konkreten Absichten für die Nutzung der Projektergebnisse für soziale Innovationen/ Veränderungen im Praxisfeld bestehen. (z.B. veränderte Fähigkeiten, Handlungen, Strukturen aber auch politische Veränderungen). Wenn sozialen Innovationen/ Veränderungsprozessen mit intendierten wirtschaftlich-technischen Innovationen in Verbindung stehen, dokumentiere Sie diese bitte separat. Wenn Sie verschiedene, unspezifische Anwendungsmöglichkeiten für die (erwarteten) Projektergebnisse sehen, die erst zu einem späteren Zeitpunkt konkretisiert werden können und für deren weitere Umsetzung ggf. auch noch keine Partner identifiziert sind, wechseln Sie bitte in \"Innovationsideen\"",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability": "Beschreibung der erzielten Anwendbarkeit",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability.info": "Bitte geben Sie eine Beschreibung der Anwendbarkeit der sozialen Innovation/ des Veränderungsprozesses, die am Ende der Projektlaufzeit erreicht wurde. Es wird empfohlen, die Analyse der Anwendbarkeit mit Beteiligung von Akteuren aus dem Handlungsfeld vorzunehmen. Die Beschreibung soll anhand aller vorgegebenen Rubriken erfolgen. Nehem Sie in jeder Rubrik zu den Fragen Stellung, die für das Projekt relevant sind. Ergänzen Sie aus Ihrer Sicht wichtige, aber nicht abgefragte Informationen ggf. unter \"sonstiges\".",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability_plan": "Beschreibung der derzeitigen Anwendbarkeit und der angestrebten Verbesserung",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability_plan.info": "Bitte beschreiben Sie den bisherigen Stand in der Anwendbarkeit und nennen Sie Defizite in der Anwendbarkeit deren Verbesserung im Projekt adressiert werden. In einigen Fällen werden diese Informationen in der Antragsphase noch nicht konkret vorliegen, sondern erst im Projektverlauf identifiziert. Es wird empfohlen, die Analyse der Anwendbarkeit mit Beteiligung von Akteuren aus dem Handlungsfeld vorzunehmen. Die Beschreibung soll anhand aller vorgegebenen Rubriken erfolgen. Nehem Sie in jeder Rubrik zu den Fragen Stellung, die für das Projekt relevant sind. Ergänzen Sie aus Ihrer Sicht wichtige, aber nicht abgefragte Informationen  ggf. unter \"sonstiges\".",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_srl": "Reifegrad - Solution Readiness Level (SRL)",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_srl.info": "Bitte beschreiben Sie, welcher Solution Readiness Level zu Projektbeginn vorliegt und zum Projektende erreicht werden soll. Ergänzen Sie für den Schlussbericht, welcher SRL tatsächlich erreicht wurde. Weiterführende Informationen zum SRL finden Sie hier (LINK).",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_types": "Detailierte Beschreibung der Sozialen Innovation/ des Veränderungsprozesses",
+
+"submission.sections.submit.progressbar.describe.innovationpotentials_social_types.info": "Soziale Innovationen oder Veränderungsprozesse setzen häufig auf verschiedenen Ebenen (z.B. individuellem Verhalten aber auch Netzwerken oder Strukturen an). Beschreiben Sie die Ebenen separat, indem Sie (beliebig oft) die passende Ebene und die damit adressierte Akteursgruppe auswählen und im Textfeld den Lösungsansatz beschreiben.",
+
+"submission.sections.submit.progressbar.describe.license": "Lizenz",
+
+"submission.sections.submit.progressbar.describe.link_to_plan": "Link zu einem geplanten Element",
+
+"submission.sections.submit.progressbar.describe.link_to_plan.info": "Dieser Eintrag erfolgt über einen Button aus dem geplanten Element heraus und führt i.d.R. zu einem Import der Informationen, die dann geändert und ergänzt werden können.",
+
+"submission.sections.submit.progressbar.describe.milestones": "Meilensteine",
+
+"submission.sections.submit.progressbar.describe.orgunits": "Organisationseinheit",
+
+"submission.sections.submit.progressbar.describe.orgunits_companies": "Angaben nur für Unternehmen",
+
+"submission.sections.submit.progressbar.describe.orgunits_research": "Angaben nur für Forschungseinrichtungen",
+
+"submission.sections.submit.progressbar.describe.participation_events": "Partizipative Prozesse - Basisinformationen",
+
+"submission.sections.submit.progressbar.describe.participation_events.info": "Bitte erfassen Sie hier partizipative Prozesse mit Akteursgruppen die im Projekt durchgeführt wurden. Erfassen Sie hier keine Kooperationsprozesse mit ihren Partnern und auch keine einzelnen Veranstaltungen. Diese haben eigene Dokumentationsbereiche.",
+
+"submission.sections.submit.progressbar.describe.participation_events_date": "Daten der partizipativen Veranstaltungen",
+
+"submission.sections.submit.progressbar.describe.participation_events_frequency": "Geplante Häufigkeit der partizipativen Veranstaltungen",
+
+"submission.sections.submit.progressbar.describe.patents": "Patente und Gebrauchsmuster",
+
+"submission.sections.submit.progressbar.describe.patents.info": "Bitte dokumentieren Sie hier Schutzrechte sowie deren geplante Verwertung. Diese Informationen sind intern für den Forschungsförderer zugänglich und werden öffentlich, wenn das Schutzrecht durch das Patentamt erteilt ist. Einnahmen aus der Verwertung von Schutz- oder Urheberrechten dokumentieren Sie bitte unter „Anwendungserfolg für wirtschaftlich-technische Innovationen“.",
+
+"submission.sections.submit.progressbar.describe.patents_result": "Angaben aus der Anmeldung beim Patentamt",
+
+"submission.sections.submit.progressbar.describe.patents_result.info": "Bitte ergänzen Sie die Pflichtangaben. Mit den Angaben erfolgt ein regelmäßiger Abgleich mit der Patentdatenbank. D.h. sobald das Patent oder Gebrauchsmuster veröffentlicht ist, kann es automatisch in das System zu übertragen werden. Dazu erhalten Sie eine Meldung.",
+
+"submission.sections.submit.progressbar.describe.persons": "Personendaten",
+
+"submission.sections.submit.progressbar.describe.persons.info": "Dieser Bereich umfasst Angaben zu Ihrer Person, die eine Nutzung des Systems ermöglichen und dem Förderer Kontaktdaten zur Verfügung stellen.",
+
+"submission.sections.submit.progressbar.describe.physical_objects": "Objekte, Materialien",
+
+"submission.sections.submit.progressbar.describe.physical_objects.info": "Dokumentieren Sie hier alle Arten von (physischen) Objekten. Hierunter werden unterschiedlichste Objektgattungen wie z.B. Prototypen, Miniaturmodelle oder Sedimentproben zusammengefasst.Wenn Sie eine bestimmte Objektgattung nicht finden, sichten Sie, ob diese unter \"Veröffentlichungen\" vorhanden ist.",
+
+"submission.sections.submit.progressbar.describe.physical_objects_result": "Verwendung und Zugänglichkeit",
+
+"submission.sections.submit.progressbar.describe.physical_objects_result.info": "Bitte ergänzen Sie Angaben zur Verwendung und Zugänglichkeit, soweit möglich. .",
+
+"submission.sections.submit.progressbar.describe.pot_societalimpact": "Erwartete gesellschaftliche Auswirkungen",
+
+"submission.sections.submit.progressbar.describe.pot_societalimpact.info": "Der Fokus liegt darauf, zu beschreiben, welche ökologischen, öknomischen oder sozial-kulturellen Auswirkungen mit einer Anwendung der Projektergebnisse verbunden sein können. Indem Sie mögliche positive als auch negative Impacts dokumentieren, weisen Sie das Nebenfolgenbewusstsein ihrer Forschungsarbeiten nach und leisten einen Beitrag, weitergehende Innovationsprozesse auf positive Impacts und die Verminderung von Nebenfolgen auszurichten.",
+
+"submission.sections.submit.progressbar.describe.proj_objectives": "Projektziele",
+
+"submission.sections.submit.progressbar.describe.projects": "Projekte",
+
+"submission.sections.submit.progressbar.describe.projects.info": "Zur Antragstellung: Bitte geben Sie ihren Projektpartnern mit den Teilprojekten Zugang auf das System. Nach der Projektbewilligung:  Beschreiben Sie das Projekt durch Keywords, schließen Sie dabei alle relevanten Aspekte von der Forschungsfrage bis zur Ergebnisverwertung ein. Sie erreichen dadurch eine höhere Sichtbarkeit und fördern den Transfer, da das Projekt bei Suchen von Forschenden, Praxisakteuren und Interessierten leicht gefunden werden kannn.  Bitte laden Sie, falls vorhanden, ein Logo des Projektes hoch, um die öffentliche Darstellung des Projektes zu unterstützen.",
+
+"submission.sections.submit.progressbar.describe.projects_overview": "Projektübersicht",
+
+"submission.sections.submit.progressbar.describe.projects_overview.info": "Diese Informationen werden aus den dazugehörigen Teilprojekten generiert. Während der Antragstellung stammen die Informationen aus den easy-online Importen der Teilprojekte. Während der Projektlaufzeit werden die Informationen regelmäßig aus profi aktualisiert.",
+
+"submission.sections.submit.progressbar.describe.publications": "Veröffentlichungen",
+
+"submission.sections.submit.progressbar.describe.publications.info": "Veröffentlichungen umfassen alle Typen von schriftlichem, bildlichem oder filmischem Material, welches im Projekt erstellt wird und veröffentlicht oder dem Förderer zur Verfügung gestellt wird. Geben Sie hier die Informationen zu einer geplanten Veröffentlichung ein.",
+
+"submission.sections.submit.progressbar.describe.publications_result": "(Meta)Daten zur Veröffentlichung",
+
+"submission.sections.submit.progressbar.describe.publications_result.info": "Veröffentlichungen umfassen alle Typen von schriftlichem, bildlichem oder filmischem Material, welches im Projekt erstellt wird und veröffentlicht oder dem Förderer zur Verfügung gestellt wird. Nutzen Sie die Importfunktion über einen Identifier. Wenn kein Identifier vorliegt oder Angaben aus dem Import unvollständig sind, geben Sie die Metadaten bitte ein. Präzise Angaben machen Ihre Veröffentlichung für Interessierte leichter auffindbar.",
+
+"submission.sections.submit.progressbar.describe.regional_scope": "Regionaler Einsatzbereich",
+
+"submission.sections.submit.progressbar.describe.regional_scope.info": "Bitte beschreiben Sie dass mögliche Einsatzgebiet für die geplante Innovation oder den beabsichtigen Veränderungsprozess.",
+
+"submission.sections.submit.progressbar.describe.relation_targetgroup": "Bezug zur Akteursgruppe",
+
+"submission.sections.submit.progressbar.describe.relation_targetgroup.info": "Bitte wählen Sie die involvierte oder teilnehmende Akteursgruppe aus oder legen Sie bei Bedarf eine neue Akteursgruppe an. Ergänzen Sie Details falls erforderlich.",
+
+"submission.sections.submit.progressbar.describe.spinoffs": "Ausgründungen (inkl. Vereinsgründungen)",
+
+"submission.sections.submit.progressbar.describe.spinoffs.info": "Dokumentieren Sie hier, wenn Projektergebnisse von einer beteiligten Organisation/Person durch Gründung eines Unternehmens oder Vereins verwertet werden sollen.",
+
+"submission.sections.submit.progressbar.describe.spinoffs_result": "Angaben zur erfolgten Ausgründung",
+
+"submission.sections.submit.progressbar.describe.spinoffs_result_funding": "Angaben zur Förderung der Ausgründung",
+
+"submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "Bitte dokumentieren Sie hier ggfls. erhaltene Förderungen für die Ausgründung.",
+
+"submission.sections.submit.progressbar.describe.spinoffs_result_performance_development": "Abfrage zum Erfolg und wirtschaftlichen Entwicklung",
+
+"submission.sections.submit.progressbar.describe.spinoffs_result_performance_development.info": "Dieser Abschnitt kann für Umfragen genutzt werden.",
+
+"submission.sections.submit.progressbar.describe.stateofart": "Stand des Wissens und adressierte Probleme",
+
+"submission.sections.submit.progressbar.describe.stateofart.info": "Bitte beschreiben Sie hier sehr kurz den Stand des Wissens und das im Projekt bearbeitete Problem. Laden Sie den ausführlichen Text mit Referenzen hoch.",
+
+"submission.sections.submit.progressbar.describe.steps": "Nächste Schritte und Fortsetzung von Kooperationen nach Projektende",
+
+"submission.sections.submit.progressbar.describe.steps.info": "Welche Schritte planen Sie nach Projektende, um Projektergebnisse weiter in die Anwendung zu bringen und Kooperationen (auch mit weiteren Zielen) fortzusetzen.",
+
+"submission.sections.submit.progressbar.describe.subprojects": "Teilprojekte",
+
+"submission.sections.submit.progressbar.describe.subprojects.info": "Während der Antragstellung können die Informationen über den Import der easy-online xml eingespielt werden. Während des laufenden Projektes werden die Informationen regelmäßig aus profi aktualisiert. Bitte ergänzen Sie die Angaben zum Projektpersonal.",
+
+"submission.sections.submit.progressbar.describe.targetgroups": "Zielgruppen",
+
+"submission.sections.submit.progressbar.describe.targetgroups.info": "Wer ist die Zielgruppe Ihres Projektes? <b>Direkte</b> Zielgruppe sind Akteursgruppen, (a) die Ergebnisse oder Lösungsmöglichkeiten des Projektes direkt einsetzen und/oder davon profitieren können; (b) mit denen im Projekt zusammengearbeitet wird, um ein Problem zu untersuchen und/oder eine Lösung zu entwickeln; die wichtig sind, um Ergebnisse in die Anwendung zu bringen und/oder zu verbreiten. <b>Indirekte</b> Zielgruppe sind darüber hinausgehend Akteursgruppen in der Gesellschaft, die von der Anwendung der Projektergebnisse in irgendeiner Weise in ihren Interessen oder ihrem Handeln berührt sind. <i>Den Begriff Zielgruppe verwenden wir somit stellvertretend für weitere Begriffe aus anderen Konzepten wie Stakeholder, Praxisakteure, Akteure aus dem Handlungsfeld, Endnutzerinnen/Endnutzer, Multiplikatoren, Profiteure oder Betroffene.</i>",
+
+"submission.sections.submit.progressbar.describe.tasks": "Aufgaben",
+
+"submission.sections.submit.progressbar.describe.tasks.info": "Nutzen Sie diesen Bereich nur für Forschungsaufgaben und Aufgaben, die sich nicht anderen Bereichen (wie Veranstaltungen, partizipative Prozesse etc.) zuordnen lassen.",
+
+"submission.sections.submit.progressbar.describe.tests": "Tests",
+
+"submission.sections.submit.progressbar.describe.tests.info": "Dieser Bereich dient ausschließlich dazu, neue Features und Verhaltensweisen zu testen.",
+
+"submission.sections.submit.progressbar.describe.unexpected_results": "Unerwartete Ergebnisse und Probleme",
+
+"submission.sections.submit.progressbar.describe.unexpected_results.info": "Dokumentieren Sie hier bitte Erkenntnisse, die nicht wie geplant nutzbar sind. Dazu zählen nicht-signifikante Ergebnisse, Ergebnisse welche die Hypothese widerlegen bzw. die Null-Hypothese stützen, methodische Probleme, die eine Durchführung von Forschungsarbeiten verhinderten, Ergebnisse, die auf unerwartete Risiken hindeuten, etc. Mit der Dokumentation (und idealerweise auch Publikation) solcher Ergebnisse kennzeichnen Sie die Integrität und Verantwortlichkeit der Forschung im Projekt. Sie vermeiden Ressourcenverschwendung durch Wiederholung bereits gescheiterter Forschungstätigkeiten, vermeiden Fehleinschätzung der Signifikanz und Effektgröße in Reviews und Metaanalysen und tragen zur Weiterentwicklung von Methoden bei. Bei praxisorientierten Ergebnissen tragen Sie dazu bei, die Anwendung unwirksamer oder risikoreicher Maßnahmen zu verhindern.",
+
+"submission.sections.submit.progressbar.describe.upload": "Hochladen von Dateien",
+
+"submission.sections.submit.progressbar.describe.upload.info": "Bei Bedarf können Sie weitere Informationen hochladen, wie z.B. Belege, Beschreibungen etc.",
+
+"submission.sections.submit.progressbar.describe.workpackages": "Beschreibung des Arbeitspaketes",
+
+"submission.sections.submit.progressbar.describe.workpackages.info": "Beschreiben Sie hier nur übergeordnete Aspekte, die sich nicht aus den zugeordneten Aufgaben und Aktivitäten ergeben.",
+
+"submission.sections.submit.progressbar.describe.workpackages_result": "Begründung von Veränderungen im Arbeitspaket",
+
+"submission.sections.submit.progressbar.detect-duplicate": "Mögliche Dubletten",
+
+"submission.sections.submit.progressbar.license": "Einreichlizenz",
+
+"submission.sections.submit.progressbar.upload": "Hochgeladene Dateien",
 
   // "submission.sections.upload.delete.confirm.cancel": "Cancel",
   "submission.sections.upload.delete.confirm.cancel": "Abbrechen",
