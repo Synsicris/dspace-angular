@@ -8,7 +8,7 @@ import {
 import { JsonPatchOperationPathObject } from './json-patch-operation-path-combiner';
 import { Injectable } from '@angular/core';
 import { hasValue, isEmpty, isNotEmpty } from '../../../shared/empty.util';
-import { dateToString } from '../../../shared/date.util';
+import { dateToISOFormat } from '../../../shared/date.util';
 import { AuthorityEntry } from '../../integration/models/authority-entry.model';
 import { FormFieldMetadataValueObject } from '../../../shared/form/builder/models/form-field-metadata-value.model';
 import { FormFieldLanguageValueObject } from '../../../shared/form/builder/models/form-field-language-value.model';
@@ -105,7 +105,7 @@ export class JsonPatchOperationsBuilder {
     if (isEmpty(value) || value instanceof FormFieldMetadataValueObject) {
       operationValue = value;
     } else if (value instanceof Date) {
-      operationValue = new FormFieldMetadataValueObject(dateToString(value));
+      operationValue = new FormFieldMetadataValueObject(dateToISOFormat(value));
     } else if (value instanceof AuthorityEntry) {
       operationValue = this.prepareAuthorityValue(value);
     } else if (value instanceof FormFieldLanguageValueObject) {
