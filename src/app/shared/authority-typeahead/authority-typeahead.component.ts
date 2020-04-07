@@ -1,7 +1,17 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { AUTOCOMPLETE_OFF } from '@ng-dynamic-forms/core';
+import { AUTOCOMPLETE_OFF, isObject } from '@ng-dynamic-forms/core';
 import { Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 import {
   catchError,
@@ -28,12 +38,12 @@ import { Authority } from '../../core/integration/models/authority.model';
 import { AuthorityTreeviewComponent } from '../authority-treeview/authority-treeview.component';
 import { AuthorityEntry } from '../../core/integration/models/authority-entry.model';
 import { AuthorityOptions } from '../../core/integration/models/authority-options.model';
-import { isObject } from 'util';
 
 @Component({
   selector: 'ds-authority-typeahead',
   styleUrls: ['./authority-typeahead.component.scss'],
-  templateUrl: './authority-typeahead.component.html'
+  templateUrl: './authority-typeahead.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
   @Input() bindId = true;
@@ -149,7 +159,7 @@ export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
   onBlur(event: Event) {
     if (!this.instance.isPopupOpen()) {
       if (!this.authorityOptions.closed && isNotEmpty(this.inputValue)) {
-        if (isNotNull(this.inputValue) && ((isObject(this.inputValue) && this.initValue !== this.inputValue.value)
+        if (isNotNull(this.inputValue) && ((isObject(this.inputValue) && this.initValue !== (this.inputValue as any).value)
           || (!isObject(this.inputValue) && this.initValue !== this.inputValue))) {
           this.change.emit(this.inputValue);
         }
