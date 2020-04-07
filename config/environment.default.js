@@ -52,7 +52,7 @@ module.exports = {
   submission: {
     autosave: {
       // NOTE: which metadata trigger an autosave
-      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv'],
+      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv', 'dc.identifier.patentno'],
       // NOTE: every how many minutes submission is saved automatically
       timer: 5
     },
