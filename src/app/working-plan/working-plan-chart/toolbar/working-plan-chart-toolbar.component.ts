@@ -49,7 +49,8 @@ export class WorkingPlanChartToolbarComponent implements OnInit {
     modalRef.componentInstance.excludeListId = [];
     modalRef.componentInstance.hasSearch = false;
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
-      this.workingPlanStateService.dispatchGenerateWorkpackage(item.metadata, modalRef)
+      const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
+      this.workingPlanStateService.dispatchGenerateWorkpackage(metadata, modalRef)
     });
 
   }

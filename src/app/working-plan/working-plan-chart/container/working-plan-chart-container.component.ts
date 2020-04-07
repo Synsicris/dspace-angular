@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { MatSelectChange } from '@angular/material';
+import { MAT_DATE_FORMATS, MatSelectChange } from '@angular/material';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
 import { ResizeEvent } from 'angular-resizable-element';
@@ -30,7 +30,7 @@ export const MY_FORMATS = {
     dateInput: 'YYYY-MM-DD',
   },
   display: {
-    dateInput: 'DD MMM YYYY',
+    dateInput: 'YYYY-MM-DD',
     monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'DD MMM YYYY',
     monthYearA11yLabel: 'MMMM YYYY',
@@ -43,7 +43,10 @@ export const MY_FORMATS = {
 @Component({
   selector: 'ipw-working-plan-chart-container',
   templateUrl: './working-plan-chart-container.component.html',
-  styleUrls: ['./working-plan-chart-container.component.scss']
+  styleUrls: ['./working-plan-chart-container.component.scss'],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ]
 })
 export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   @Input() workpackages: Observable<Workpackage[]>;
@@ -140,7 +143,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       node.progress,
       node.progressDates,
       node.dates,
-      node.expanded,
+      (node.steps && node.steps.length !== 0),
       node.steps,
       node.parentId
     );
@@ -177,7 +180,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.authorityName = this.workingPlanService.getWorkpackageStepTypeAuthorityName();
     modalRef.componentInstance.searchConfiguration = this.workingPlanService.getWorkpackageStepSearchConfigName();
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
-      this.workingPlanStateService.dispatchGenerateWorkpackageStep(node.id, item.type.value, item.metadata, modalRef)
+      const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
+      this.workingPlanStateService.dispatchGenerateWorkpackageStep(node.id, item.type.value, metadata, modalRef)
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {
@@ -308,19 +312,22 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.datesYear = [];
 
     this.dataSource.data.forEach((step: Workpackage) => {
-      const start = this.moment(step.dates.start.full);
-      const end = this.moment(step.dates.end.full);
+      const start = this.moment(step.dates.start.full, this.dateFormat);
+      const end = this.moment(step.dates.end.full, this.dateFormat);
+      const dateRange = moment.range(start, end);
+
       // Moment range sometimes does not include all the month, so use the end of the month to get the correct range
       const endForMonth = this.moment(step.dates.end.full).endOf('month');
-      const dateRange = this.moment.range(start, end);
       const dateRangeForMonth = this.moment.range(start, endForMonth);
 
-      const dateRangeForQuarter = this.moment.range(start, end);
+      // Moment range sometimes does not include all the year, so use the end of the year to get the correct range
+      const endForYear = this.moment(step.dates.end.full, this.dateFormat).endOf('year');
+      const dateRangeForYear = this.moment.range(start, endForYear);
 
       const days = Array.from(dateRange.by('days'));
       const months = Array.from(dateRangeForMonth.by('months'));
-      const quarters = Array.from(dateRangeForQuarter.by('quarters'));
-      const years = Array.from(dateRange.by('years'));
+      const quarters = Array.from(dateRange.by('quarters'));
+      const years = Array.from(dateRangeForYear.by('year'));
 
       this.dates = this.dates.concat(days
         .map((d) => d.format(this.dateFormat))
@@ -447,5 +454,19 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.subs
       .filter((subscription) => hasValue(subscription))
       .forEach((subscription) => subscription.unsubscribe());
+  }
+
+  getDatesMonthByYear(year: string): string[] {
+    return this.datesMonth.filter((date) => {
+      const dateYear = moment(date).format('YYYY');
+      return dateYear === year;
+    });
+  }
+
+  getDatesQuarterByYear(year: string) {
+    return this.datesQuarter.filter((date) => {
+      const dateYear = moment(date).format('YYYY');
+      return dateYear === year;
+    });
   }
 }

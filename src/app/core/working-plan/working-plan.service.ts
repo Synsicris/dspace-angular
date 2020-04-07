@@ -1,7 +1,20 @@
 import { Inject, Injectable } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
-import { catchError, concatMap, delay, filter, flatMap, map, reduce, scan, startWith, take, tap } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  delay,
+  filter,
+  first,
+  flatMap,
+  map,
+  reduce,
+  scan,
+  startWith,
+  take,
+  tap
+} from 'rxjs/operators';
 import { extendMoment } from 'moment-range';
 import * as Moment from 'moment';
 
@@ -14,7 +27,7 @@ import { PaginatedList } from '../data/paginated-list';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
 import { RemoteData } from '../data/remote-data';
 import { SearchResult } from '../../shared/search/search-result.model';
-import { hasValue, isEmpty, isNotEmpty } from '../../shared/empty.util';
+import { hasValue, isEmpty, isNotEmpty, isNotUndefined } from '../../shared/empty.util';
 import { followLink } from '../../shared/utils/follow-link-config.model';
 import { Item } from '../shared/item.model';
 import { SearchService } from '../shared/search/search.service';
@@ -183,7 +196,7 @@ export class WorkingPlanService {
           )
         }
       }),
-      take(1),
+      first((result) => isNotUndefined(result))
     );
   }
 
@@ -360,6 +373,24 @@ export class WorkingPlanService {
 
   removeWorkpackageItem(itemId: string): Observable<boolean> {
     return this.itemService.delete(itemId);
+  }
+
+  setDefaultForStatusMetadata(metadata: MetadataMap): MetadataMap {
+    let result: MetadataMap = metadata;
+    if (!metadata.hasOwnProperty(this.config.workingPlan.workingPlanStepStatusMetadata)
+      || isEmpty(metadata[this.config.workingPlan.workingPlanStepStatusMetadata])) {
+      result = Object.assign({}, metadata, {
+        [this.config.workingPlan.workingPlanStepStatusMetadata]: [{
+          authority: 'not_done',
+          confidence: 600,
+          language: null,
+          place: 0,
+          value: 'not_done'
+        }]
+      })
+    }
+
+    return result
   }
 
   updateMetadataItem(

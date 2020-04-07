@@ -1,21 +1,31 @@
 <div *ngIf="(workpackages | async)?.length > 0" class="container-fluid p-0" fxLayout="column">
   <div class="sidenav-container" fxFlex fxLayout="row">
     <!-- steps -->
-    <div class="sidenav chart-column" [ngStyle]="sidebarStyle" fxLayout="column">
+    <div class="sidenav chart-column names" [ngStyle]="sidebarStyle" fxLayout="column">
       <div class="sidenav-header text-center">{{'working-plan.chart.column.steps' | translate}}</div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarStyle"
         mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event)">
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
           <button mat-icon-button disabled></button>
           <mat-form-field fxFlex floatLabel="never">
-            <input matInput placeholder="Step Name" name="node" class="text-truncate" [(ngModel)]="node.name" (change)="updateStepName(node, $event?.target?.value)"
-              required>
+            <input matInput
+                   placeholder="Step Name"
+                   name="node"
+                   class="text-truncate"
+                   [(ngModel)]="node.name"
+                   (change)="updateStepName(node, $event?.target?.value)"
+                   [ngbTooltip]="node.name"
+                   container="body"
+                   placement="right"
+                   [openDelay]="1000"
+                   required>
           </mat-form-field>
-          <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level===0">
+          <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level === 0">
             <mat-icon>{{'working-plan.chart.button.add' | translate}}</mat-icon>
           </button>
           <button *ngIf="dataSource.data.length > 1"
                   class="btn btn-lg btn-link p-0 text-danger mr-1"
+                  [class.ml-1]="node.level !== 0"
                   [disabled]="(isProcessingWorkpackageRemove(node) | async)"
                   (click)="deleteStep(node); $event.stopPropagation()">
             <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='far fa-trash-alt'></i></span>
@@ -29,14 +39,24 @@
             </mat-icon>
           </button>
           <mat-form-field fxFlex floatLabel="never">
-            <input matInput placeholder="Step Name" name="node" class="text-truncate" [(ngModel)]="node.name" (change)="updateStepName(node, $event?.target?.value)"
-              required>
+            <input matInput
+                   placeholder="Step Name"
+                   name="node"
+                   class="text-truncate"
+                   [(ngModel)]="node.name"
+                   (change)="updateStepName(node, $event?.target?.value)"
+                   [ngbTooltip]="node.name"
+                   container="body"
+                   placement="right"
+                   [openDelay]="1000"
+                   required>
           </mat-form-field>
-          <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level<3">
+          <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level < 3">
             <mat-icon>{{'working-plan.chart.button.add' | translate}}</mat-icon>
           </button>
           <button *ngIf="dataSource.data.length > 1"
                   class="btn btn-lg btn-link p-0 text-danger mr-1"
+                  [class.ml-1]="node.level < 3"
                   [disabled]="(isProcessingWorkpackageRemove(node) | async)"
                   (click)="deleteStep(node); $event.stopPropagation()">
             <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='far fa-trash-alt'></i></span>
@@ -74,8 +94,6 @@
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarStyle"
                 mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event)">
         <mat-tree-node *matTreeNodeDef="let node" class="responsible-field">
-<!--            <input matInput placeholder="Responsible" name="responsible" [(ngModel)]="node.responsible" (change)="updateStepResponsible(node, $event?.target?.value)"
-                   required>-->
             <ds-authority-typeahead fxFlex floatLabel="never" class="pr-3 pl-3"
                                     [fieldId]="'responsible'"
                                     [fieldName]="'responsible'"
@@ -121,7 +139,12 @@
     <!-- calendar for months -->
     <div *ngIf="chartDateView.value === ChartDateViewType.month" class="sidenav-content calendar w-100" fxLayout="column">
       <div fxLayout="row">
-        <div *ngFor="let date of datesMonth" class="calendar-cell w-100">{{formatDate(date)}}</div>
+        <div fxLayout="column" *ngFor="let year of datesYear">
+          <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center">{{year}}</div>
+          <div fxLayout="row">
+            <div *ngFor="let date of getDatesMonthByYear(year)" class="calendar-cell-heading w-100">{{formatDate(date)}}</div>
+          </div>
+        </div>
       </div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
         <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100">
@@ -137,7 +160,12 @@
     <!-- calendar for quarters -->
     <div *ngIf="chartDateView.value === ChartDateViewType.quarter" class="sidenav-content calendar w-100" fxLayout="column">
       <div fxLayout="row">
-        <div *ngFor="let date of datesQuarter" class="calendar-cell w-100">{{formatDate(date)}}</div>
+        <div fxLayout="column" *ngFor="let year of datesYear">
+          <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center">{{year}}</div>
+          <div fxLayout="row">
+            <div *ngFor="let date of getDatesQuarterByYear(year)" class="calendar-cell-heading w-100">{{formatDate(date)}}</div>
+          </div>
+        </div>
       </div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
         <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100">

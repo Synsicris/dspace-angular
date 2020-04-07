@@ -5,6 +5,7 @@ button.btn:focus {
 // variables
 $toolbarHeight: 64px;
 $nodeWidth: 100px;
+$calendarCellWidth: 60px;
 $nodeHeight: 50px;
 $completeColor: #2196F3;
 $incompleteColor: #9E9E9E;
@@ -32,9 +33,9 @@ $highlightBorderColor: #FF9800;
 // sidenav header(not calendar)
 .sidenav-header {
   text-align: center;
-  line-height: $nodeHeight - 2px;
-  height: $nodeHeight - 2px;
-  min-height: $nodeHeight - 2px;
+  line-height: $nodeHeight;
+  height: $nodeHeight;
+  min-height: $nodeHeight;
   border-width: 1px 3px 1px 0;
   border-color: $borderColor;
   border-style: solid;
@@ -47,6 +48,10 @@ $highlightBorderColor: #FF9800;
 }
 
 /** names */
+
+.sidenav.names {
+  min-width: 20rem;
+}
 
 .sidenav.chart-column {
   mat-tree.tree {
@@ -93,7 +98,7 @@ $highlightBorderColor: #FF9800;
 /** responsible */
 
 .sidenav.responsible {
-  min-width: 20rem;
+  min-width: 18rem;
 }
 
 .responsible-field {
@@ -119,11 +124,21 @@ $highlightBorderColor: #FF9800;
 ::ng-deep .calendar-cell {
   text-align: center;
   line-height: $nodeHeight - 1px;
-  width: $nodeWidth - 2px;
   height: $nodeHeight - 1px;
-  min-width: $nodeWidth - 2px;
+  min-width: $calendarCellWidth;
   min-height: $nodeHeight - 1px;
   border-width: 0.5px 1px;
+  border-color: $borderColor;
+  border-style: solid;
+}
+
+.calendar-cell-heading {
+  text-align: center;
+  line-height: ($nodeHeight / 2) - 1px;
+  height: ($nodeHeight / 2) - 1px;
+  min-width: $calendarCellWidth;
+  min-height: ($nodeHeight / 2) - 1px;
+  border-width: 0.5px;
   border-color: $borderColor;
   border-style: solid;
 }
