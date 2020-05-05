@@ -1334,7 +1334,9 @@
   "menu.section.edit_community": "Community",
   
   "menu.section.edit_item": "Item",
-  
+
+  "menu.section.edit_workingplan": "Working plan",
+
   "menu.section.export": "Export",
   
   "menu.section.export_collection": "Collection",

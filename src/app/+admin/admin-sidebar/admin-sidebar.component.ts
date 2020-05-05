@@ -228,6 +228,17 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
           }
         } as OnClickMenuItemModel,
       },
+      {
+        id: 'edit_workingplan',
+        parentID: 'edit',
+        active: false,
+        visible: true,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.edit_workingplan',
+          link: '/workingplan'
+        } as LinkMenuItemModel,
+      },
 
       /* Import */
       {
