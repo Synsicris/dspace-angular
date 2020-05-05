@@ -139,7 +139,7 @@
     <!-- calendar for months -->
     <div *ngIf="chartDateView.value === ChartDateViewType.month" class="sidenav-content calendar w-100" fxLayout="column">
       <div fxLayout="row">
-        <div fxLayout="column" *ngFor="let year of datesYear">
+        <div fxLayout="column" class="flex-fill" *ngFor="let year of datesYear">
           <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center">{{year}}</div>
           <div fxLayout="row">
             <div *ngFor="let date of getDatesMonthByYear(year)" class="calendar-cell-heading w-100">{{formatDate(date)}}</div>
@@ -160,7 +160,7 @@
     <!-- calendar for quarters -->
     <div *ngIf="chartDateView.value === ChartDateViewType.quarter" class="sidenav-content calendar w-100" fxLayout="column">
       <div fxLayout="row">
-        <div fxLayout="column" *ngFor="let year of datesYear">
+        <div fxLayout="column" class="flex-fill" *ngFor="let year of datesYear">
           <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center">{{year}}</div>
           <div fxLayout="row">
             <div *ngFor="let date of getDatesQuarterByYear(year)" class="calendar-cell-heading w-100">{{formatDate(date)}}</div>
