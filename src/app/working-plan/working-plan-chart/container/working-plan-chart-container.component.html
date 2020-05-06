@@ -6,6 +6,18 @@
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarStyle"
         mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event)">
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+          <button *ngIf="node.level == 0"
+                  class="btn btn-lg btn-link p-0 text-primary"
+                  [disabled]="dataSource.data.length == 0 || node.index == (dataSource.data.length - 1) || (isMoving() | async)"
+                  (click)="moveWorkpackage(node, node.index, (node.index + 1)); $event.stopPropagation()">
+            <span><i class='fas fa-arrow-down'></i></span>
+          </button>
+          <button *ngIf="node.level == 0"
+                  class="btn btn-lg btn-link p-0 text-primary"
+                  [disabled]="dataSource.data.length == 0 || node.index == 0 || (isMoving() | async)"
+                  (click)="moveWorkpackage(node, node.index, (node.index - 1)); $event.stopPropagation()">
+            <span><i class='fas fa-arrow-up'></i></span>
+          </button>
           <button mat-icon-button disabled></button>
           <mat-form-field fxFlex floatLabel="never">
             <input matInput
@@ -33,6 +45,19 @@
           </button>
         </mat-tree-node>
         <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+          <button *ngIf="node.level !== 0" mat-icon-button disabled></button>
+          <button *ngIf="node.level == 0"
+                  class="btn btn-lg btn-link p-0 text-primary"
+                  [disabled]="dataSource.data.length == 0 || node.index == (dataSource.data.length - 1) || (isMoving() | async)"
+                  (click)="moveWorkpackage(node, node.index, (node.index + 1)); $event.stopPropagation()">
+            <span><i class='fas fa-arrow-down'></i></span>
+          </button>
+          <button *ngIf="node.level == 0"
+                  class="btn btn-lg btn-link p-0 text-primary"
+                  [disabled]="dataSource.data.length == 0 || node.index == 0 || (isMoving() | async)"
+                  (click)="moveWorkpackage(node, node.index, (node.index - 1)); $event.stopPropagation()">
+            <span><i class='fas fa-arrow-up'></i></span>
+          </button>
           <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
             <mat-icon class="mat-icon-rtl-mirror">
               {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
@@ -139,7 +164,7 @@
     <!-- calendar for months -->
     <div *ngIf="chartDateView.value === ChartDateViewType.month" class="sidenav-content calendar w-100" fxLayout="column">
       <div fxLayout="row">
-        <div fxLayout="column" *ngFor="let year of datesYear">
+        <div fxLayout="column" class="flex-fill" *ngFor="let year of datesYear">
           <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center">{{year}}</div>
           <div fxLayout="row">
             <div *ngFor="let date of getDatesMonthByYear(year)" class="calendar-cell-heading w-100">{{formatDate(date)}}</div>
@@ -160,7 +185,7 @@
     <!-- calendar for quarters -->
     <div *ngIf="chartDateView.value === ChartDateViewType.quarter" class="sidenav-content calendar w-100" fxLayout="column">
       <div fxLayout="row">
-        <div fxLayout="column" *ngFor="let year of datesYear">
+        <div fxLayout="column" class="flex-fill" *ngFor="let year of datesYear">
           <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center">{{year}}</div>
           <div fxLayout="row">
             <div *ngFor="let date of getDatesQuarterByYear(year)" class="calendar-cell-heading w-100">{{formatDate(date)}}</div>

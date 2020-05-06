@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { of as observableOf } from 'rxjs';
-import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,6 +14,7 @@ import {
   AddWorkpackageStepErrorAction,
   AddWorkpackageStepSuccessAction,
   AddWorkpackageSuccessAction,
+  GenerateWorkpackageAction,
   GenerateWorkpackageErrorAction,
   GenerateWorkpackageStepAction,
   GenerateWorkpackageStepErrorAction,
@@ -22,6 +23,7 @@ import {
   InitWorkingplanAction,
   InitWorkingplanErrorAction,
   InitWorkingplanSuccessAction,
+  MoveWorkpackageAction,
   RemoveWorkpackageAction,
   RemoveWorkpackageErrorAction,
   RemoveWorkpackageStepAction,
@@ -29,6 +31,9 @@ import {
   RemoveWorkpackageStepSuccessAction,
   RemoveWorkpackageSuccessAction,
   RetrieveAllWorkpackagesErrorAction,
+  SaveWorkpackageOrderAction,
+  SaveWorkpackageOrderErrorAction,
+  SaveWorkpackageOrderSuccessAction,
   UpdateWorkpackageAction,
   UpdateWorkpackageErrorAction,
   UpdateWorkpackageStepAction,
@@ -37,13 +42,10 @@ import {
   WorkpackageActionTypes
 } from './working-plan.actions';
 import { WorkingPlanService } from './working-plan.service';
-import { Workpackage, WorkpackageStep } from './models/workpackage-step.model';
-import {
-  AddImpactPathwaySubTaskAction,
-  GenerateImpactPathwayTaskAction
-} from '../impact-pathway/impact-pathway.actions';
+import { Workpackage, WorkpackageSearchItem, WorkpackageStep } from './models/workpackage-step.model';
 import { Item } from '../shared/item.model';
 import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
+import { isNotNull } from '../../shared/empty.util';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -56,11 +58,13 @@ export class WorkingPlanEffects {
    */
   @Effect() generateWorkpackage$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.GENERATE_WORKPACKAGE),
-    switchMap((action: GenerateImpactPathwayTaskAction) => {
+    switchMap((action: GenerateWorkpackageAction) => {
       return this.workingPlanService.generateWorkpackageItem(
-        action.payload.metadata).pipe(
-        map((item: Item) => new GenerateWorkpackageSuccessAction(
-          item,
+        action.payload.metadata,
+        action.payload.place).pipe(
+        map((searchItem: WorkpackageSearchItem) => new GenerateWorkpackageSuccessAction(
+          searchItem.item,
+          searchItem.id,
           action.payload.modal)),
         catchError((error: Error) => {
           if (error) {
@@ -76,7 +80,7 @@ export class WorkingPlanEffects {
   @Effect() generateWorkpackageSuccess$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.GENERATE_WORKPACKAGE_SUCCESS),
     map((action: GenerateWorkpackageSuccessAction) => {
-      return new AddWorkpackageAction(action.payload.item.id, action.payload.modal)
+      return new AddWorkpackageAction(action.payload.item.id, action.payload.workspaceItemId, action.payload.modal)
     }));
 
   /**
@@ -87,7 +91,7 @@ export class WorkingPlanEffects {
     concatMap((action: AddWorkpackageAction) => {
       return this.workingPlanService.getWorkpackageItemById(action.payload.workpackageId).pipe(
         map((workpackageItem: Item) => {
-          return this.workingPlanService.initWorkpackageFromItem(workpackageItem);
+          return this.workingPlanService.initWorkpackageFromItem(workpackageItem, action.payload.workspaceItemId);
         }),
         map((workpackage: Workpackage) => {
           return new AddWorkpackageSuccessAction(
@@ -141,9 +145,10 @@ export class WorkingPlanEffects {
         action.payload.parentId,
         action.payload.workpackageStepType,
         action.payload.metadata).pipe(
-        map((item: Item) => new GenerateWorkpackageStepSuccessAction(
+        map((searchItem: WorkpackageSearchItem) => new GenerateWorkpackageStepSuccessAction(
           action.payload.parentId,
-          item,
+          searchItem.item,
+          searchItem.id,
           action.payload.modal)),
         catchError((error: Error) => {
           if (error) {
@@ -162,6 +167,7 @@ export class WorkingPlanEffects {
       return new AddWorkpackageStepAction(
         action.payload.parentId,
         action.payload.item.id,
+        action.payload.workspaceItemId,
         action.payload.modal)
     }));
 
@@ -177,7 +183,11 @@ export class WorkingPlanEffects {
         'workingplan.relation.parent',
         'workingplan.relation.step').pipe(
         map((taskItem: Item) => {
-          return this.workingPlanService.initWorkpackageStepFromItem(taskItem, action.payload.parentId);
+          return this.workingPlanService.initWorkpackageStepFromItem(
+            taskItem,
+            action.payload.workspaceItemId,
+            action.payload.parentId
+          );
         }),
         map((step: WorkpackageStep) => {
           return new AddWorkpackageStepSuccessAction(
@@ -201,7 +211,7 @@ export class WorkingPlanEffects {
     tap(() => {
       this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'))
     }),
-    tap((action: AddImpactPathwaySubTaskAction) => {
+    tap((action: AddWorkpackageStepSuccessAction) => {
       if (action.payload.modal) {
         action.payload.modal.close();
       }
@@ -217,7 +227,13 @@ export class WorkingPlanEffects {
         action.payload.workpackageId,
         'workingplan.relation.parent',
         'workingplan.relation.step').pipe(
-        map((item: Item) => this.workingPlanService.removeWorkpackageItem(item.id)),
+        map((item: Item) => {
+          if (isNotNull(action.payload.workspaceItemId)) {
+            this.workingPlanService.removeWorkpackageByWorkspaceItemId(action.payload.workspaceItemId)
+          } else {
+            this.workingPlanService.removeWorkpackageByItemId(item.id)
+          }
+        }),
         map(() => new RemoveWorkpackageSuccessAction(
           action.payload.workpackageId)),
         catchError((error: Error) => {
@@ -257,7 +273,7 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.RETRIEVE_ALL_WORKPACKAGES),
     switchMap(() => {
       return this.workingPlanService.searchForAvailableWorpackages().pipe(
-        map((items: Item[]) => new InitWorkingplanAction(items)),
+        map((items: WorkpackageSearchItem[]) => new InitWorkingplanAction(items)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
@@ -292,7 +308,7 @@ export class WorkingPlanEffects {
         action.payload.workpackageId,
         action.payload.metadatumViewList
       ).pipe(
-        map((items: Item) => new UpdateWorkpackageSuccessAction()),
+        map(() => new UpdateWorkpackageSuccessAction()),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
@@ -311,7 +327,7 @@ export class WorkingPlanEffects {
         action.payload.workpackageStepId,
         action.payload.metadatumViewList
       ).pipe(
-        map((items: Item) => new UpdateWorkpackageSuccessAction()),
+        map(() => new UpdateWorkpackageSuccessAction()),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
@@ -321,6 +337,43 @@ export class WorkingPlanEffects {
             action.payload.workpackageStepId
           ))
         }));
+    }));
+
+  /**
+   * Dispatch a [SaveWorkpackageOrderAction]
+   */
+  @Effect() moveWorkpackage$ = this.actions$.pipe(
+    ofType(WorkpackageActionTypes.MOVE_WORKPACKAGE),
+    withLatestFrom(this.store$),
+    map(([action, state]: [MoveWorkpackageAction, any]) => {
+      return new SaveWorkpackageOrderAction(state.core.workingplan.workpackages)
+    }));
+
+  /**
+   * Dispatch a [SaveWorkpackageOrderSuccessAction] or a [SaveWorkpackageOrderErrorAction] on error
+   */
+  @Effect() updateWorkpackagesPlace$ = this.actions$.pipe(
+    ofType(WorkpackageActionTypes.SAVE_WORKPACKAGE_ORDER),
+    withLatestFrom(this.store$),
+    switchMap(([action, state]: [SaveWorkpackageOrderAction, any]) => {
+      return this.workingPlanService.updateWorkpackagePlace(
+        state.core.workingplan.workpackages).pipe(
+        map(() => new SaveWorkpackageOrderSuccessAction()),
+        catchError((error: Error) => {
+          if (error) {
+            console.error(error.message);
+          }
+          return observableOf(new SaveWorkpackageOrderErrorAction(action.payload.oldWorkpackageEntries))
+        }));
+    }));
+
+  /**
+   * Show a notification on error
+   */
+  @Effect({ dispatch: false }) moveError$ = this.actions$.pipe(
+    ofType(WorkpackageActionTypes.SAVE_WORKPACKAGE_ORDER_ERROR),
+    tap(() => {
+      this.notificationsService.error(null, this.translate.get('working-plan.chart.move.error'))
     }));
 
   constructor(

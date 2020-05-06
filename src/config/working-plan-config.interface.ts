@@ -5,6 +5,7 @@ export interface WorkingPlanConfig extends Config {
   workingPlanStepsFormName: string;
   workingPlanStepStatusMetadata: string;
   workingPlanStepResponsibleMetadata: string;
+  workingPlanStepResponsibleAuthority: string;
   workingPlanStepRelationMetadata: string;
   workingPlanStepDateStartMetadata: string;
   workingPlanStepDateEndMetadata: string;
@@ -13,4 +14,5 @@ export interface WorkingPlanConfig extends Config {
   workpackageStepsSearchConfigName: string;
   workpackageStatusTypeAuthority: string
   workpackageStepTypeAuthority: string;
+  workingPlanPlaceMetadata: string;
 }

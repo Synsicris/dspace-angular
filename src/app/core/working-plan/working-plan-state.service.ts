@@ -6,7 +6,7 @@ import {
   AddWorkpackageStepAction,
   ChangeChartViewAction,
   GenerateWorkpackageAction,
-  GenerateWorkpackageStepAction,
+  GenerateWorkpackageStepAction, MoveWorkpackageAction,
   RemoveWorkpackageAction,
   RemoveWorkpackageStepAction,
   RetrieveAllWorkpackagesAction, UpdateWorkpackageAction, UpdateWorkpackageStepAction
@@ -16,7 +16,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/internal/Observable';
 import {
   chartDateViewSelector,
-  isWorkingPlanLoadedSelector,
+  isWorkingPlanLoadedSelector, isWorkingPlanMovingSelector,
   isWorkingPlanProcessingSelector,
   workpackageToRemoveSelector
 } from './selectors';
@@ -31,16 +31,21 @@ export class WorkingPlanStateService {
 
   }
 
-  public dispatchAddWorkpackageStep(parentId: string, workpackageStepId: string, modal?: NgbActiveModal): void {
-    this.store.dispatch(new AddWorkpackageStepAction(parentId, workpackageStepId, modal))
+  public dispatchAddWorkpackageStep(
+    parentId: string,
+    workpackageStepId: string,
+    workspaceItemId: string,
+    modal?: NgbActiveModal
+  ): void {
+    this.store.dispatch(new AddWorkpackageStepAction(parentId, workpackageStepId, workspaceItemId, modal))
   }
 
   public dispatchChangeChartDateView(chartDateView: ChartDateViewType): void {
     this.store.dispatch(new ChangeChartViewAction(chartDateView))
   }
 
-  public dispatchGenerateWorkpackage(metadata: MetadataMap, modal?: NgbActiveModal): void {
-    this.store.dispatch(new GenerateWorkpackageAction(metadata, modal))
+  public dispatchGenerateWorkpackage(metadata: MetadataMap, place: string, modal?: NgbActiveModal): void {
+    this.store.dispatch(new GenerateWorkpackageAction(metadata, place, modal))
   }
 
   public dispatchGenerateWorkpackageStep(
@@ -52,12 +57,16 @@ export class WorkingPlanStateService {
     this.store.dispatch(new GenerateWorkpackageStepAction(parentId, workpackageStepType, metadata, modal))
   }
 
-  public dispatchRemoveWorkpackage(workpackageId: string): void {
-    this.store.dispatch(new RemoveWorkpackageAction(workpackageId))
+  public dispatchMoveWorkpackage(workpackageId: string, oldIndex: number, newIndex: number): void {
+    this.store.dispatch(new MoveWorkpackageAction(workpackageId, oldIndex, newIndex))
   }
 
-  public dispatchRemoveWorkpackageStep(workpackageId: string, workpackageStepId: string): void {
-    this.store.dispatch(new RemoveWorkpackageStepAction(workpackageId, workpackageStepId))
+  public dispatchRemoveWorkpackage(workpackageId: string, workspaceItemId: string): void {
+    this.store.dispatch(new RemoveWorkpackageAction(workpackageId, workspaceItemId))
+  }
+
+  public dispatchRemoveWorkpackageStep(workpackageId: string, workpackageStepId: string, workspaceItemId: string): void {
+    this.store.dispatch(new RemoveWorkpackageStepAction(workpackageId, workpackageStepId, workspaceItemId))
   }
 
   public dispatchRetrieveAllWorkpackages(): void {
@@ -102,6 +111,10 @@ export class WorkingPlanStateService {
 
   public isWorkingPlanLoaded(): Observable<boolean> {
     return this.store.pipe(select(isWorkingPlanLoadedSelector));
+  }
+
+  public isWorkingPlanMoving(): Observable<boolean> {
+    return this.store.pipe(select(isWorkingPlanMovingSelector));
   }
 
 }

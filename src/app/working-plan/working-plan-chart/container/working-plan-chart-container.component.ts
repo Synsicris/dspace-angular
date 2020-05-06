@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { MAT_DATE_FORMATS, MatSelectChange } from '@angular/material';
@@ -6,6 +6,7 @@ import { MAT_DATE_FORMATS, MatSelectChange } from '@angular/material';
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
 import { ResizeEvent } from 'angular-resizable-element';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { findIndex } from 'lodash';
 
 import { range } from '../../../shared/array.util';
@@ -23,7 +24,7 @@ import { AuthorityEntry } from '../../../core/integration/models/authority-entry
 import { hasValue } from '../../../shared/empty.util';
 import { AuthorityOptions } from '../../../core/integration/models/authority-options.model';
 import { ChartDateViewType } from '../../../core/working-plan/working-plan.reducer';
-import { TranslateService } from '@ngx-translate/core';
+import { GLOBAL_CONFIG, GlobalConfig } from '../../../../config';
 
 export const MY_FORMATS = {
   parse: {
@@ -82,6 +83,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
 
   constructor(
+    @Inject(GLOBAL_CONFIG) protected config: GlobalConfig,
     protected cdr: ChangeDetectorRef,
     private modalService: NgbModal,
     private translate: TranslateService,
@@ -93,8 +95,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.treeControl = new FlatTreeControl<WorkpacakgeFlatNode>(this._getLevel, this._isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
     this.responsibleAuthorityOptions = new AuthorityOptions(
-      'WorkingplanOrgUnitAuthority',
-      'workingplan.responsible',
+      this.config.workingPlan.workingPlanStepResponsibleAuthority,
+      this.config.workingPlan.workingPlanStepResponsibleMetadata,
       null,
       true
     );
@@ -135,6 +137,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   transformer = (node: Workpackage, level: number) => {
     const flatNode = new WorkpacakgeFlatNode(
       node.id,
+      node.workspaceItemId,
+      this.getIndex(node),
       (node.steps && node.steps.length !== 0),
       level,
       node.name,
@@ -188,6 +192,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         this.workingPlanStateService.dispatchAddWorkpackageStep(
           node.id,
           item.id,
+          item.workspaceItemId,
           modalRef);
       })
     });
@@ -197,14 +202,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     // if root, ignore
     if (this.treeControl.getLevel(node) < 1) {
       const parentNode = this.flatNodeMap.get(node);
-      this.workingPlanStateService.dispatchRemoveWorkpackage(parentNode.id);
-      // this.database.deleteFlatStep(parentNode);
+      this.workingPlanStateService.dispatchRemoveWorkpackage(parentNode.id, parentNode.workspaceItemId);
     } else {
       const parentFlatNode = this.getParentStep(node);
       const parentNode = this.flatNodeMap.get(parentFlatNode) as Workpackage;
       const childNode = this.flatNodeMap.get(node) as WorkpackageStep;
-      this.workingPlanStateService.dispatchRemoveWorkpackageStep(parentNode.id, childNode.id);
-      // this.database.deleteStep(parentNode, childNode);
+      this.workingPlanStateService.dispatchRemoveWorkpackageStep(parentNode.id, childNode.id, childNode.workspaceItemId);
     }
   }
 
@@ -252,7 +255,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
     this.updateField(
       node,
-      ['dc.date.start', 'dc.date.end'],
+      [this.config.workingPlan.workingPlanStepDateStartMetadata, this.config.workingPlan.workingPlanStepDateEndMetadata],
       [nestedNode.dates.start.full, nestedNode.dates.end.full]
     );
   }
@@ -266,13 +269,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   updateStepResponsible(node: WorkpacakgeFlatNode, responsible: string) {
     const nestedNode = this.flatNodeMap.get(node);
     nestedNode.responsible = responsible;
-    this.updateField(node, ['workingplan.responsible'], [responsible]);
+    this.updateField(node, [this.config.workingPlan.workingPlanStepResponsibleMetadata], [responsible]);
   }
 
   updateStepStatus(node: WorkpacakgeFlatNode, $event: MatSelectChange,) {
     const nestedNode = this.flatNodeMap.get(node);
     nestedNode.status = $event.value;
-    this.updateField(node, ['workingplan.step.status'], [$event.value]);
+    this.updateField(node, [this.config.workingPlan.workingPlanStepStatusMetadata], [$event.value]);
   }
 
   private updateField(node: WorkpacakgeFlatNode, metadata: string[], value: any[]) {
@@ -401,6 +404,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return date >= node.dates.start.full && date <= node.dates.end.full
   }
 
+  isMoving(): Observable<boolean> {
+    return this.workingPlanStateService.isWorkingPlanMoving();
+  }
+
+  moveWorkpackage(node: Workpackage, oldIndex: number, newIndex: number) {
+    this.workingPlanStateService.dispatchMoveWorkpackage(node.id, oldIndex, newIndex);
+  }
+
   getMonthInYear() {
     return range(1, 12)
       .map((entry: number) => entry.toString().padStart(2, '0'));
@@ -468,5 +479,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       const dateYear = moment(date).format('YYYY');
       return dateYear === year;
     });
+  }
+
+  getIndex(node: Workpackage) {
+    return findIndex(this.dataSource.data, { id: node.id });
   }
 }

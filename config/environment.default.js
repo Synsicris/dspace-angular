@@ -222,6 +222,7 @@ module.exports = {
     workingPlanStepsFormName: 'working_plan_workpackage_step_form',
     workingPlanStepStatusMetadata: 'workingplan.step.status',
     workingPlanStepResponsibleMetadata: 'workingplan.responsible',
+    workingPlanStepResponsibleAuthority: 'WorkingplanOrgUnitAuthority',
     workingPlanStepRelationMetadata: 'workingplan.relation.step',
     workingPlanStepDateStartMetadata: 'dc.date.start',
     workingPlanStepDateEndMetadata: 'dc.date.end',
@@ -229,6 +230,7 @@ module.exports = {
     workpackagesSearchConfigName: 'allWorkpackages',
     workpackageStepsSearchConfigName: 'workpackageSteps',
     workpackageStatusTypeAuthority: 'working_plan_workpackage_status_type',
-    workpackageStepTypeAuthority: 'working_plan_workpackage_step_type'
+    workpackageStepTypeAuthority: 'working_plan_workpackage_step_type',
+    workingPlanPlaceMetadata: 'workingplan.place'
   }
 };
