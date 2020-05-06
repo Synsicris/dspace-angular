@@ -6,6 +6,8 @@ import { WorkpackageChartDate } from './workpackage-step.model';
 export class WorkpacakgeFlatNode {
   constructor(
     public id: string,
+    public workspaceItemId: string,
+    public index: number,
     public expandable: boolean,
     public level: number,
     public name: string,
