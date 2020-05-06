@@ -1,10 +1,10 @@
-import { findIndex, remove } from 'lodash';
+import { findIndex, get, remove } from 'lodash';
 
 import { Workpackage } from './models/workpackage-step.model';
 import {
   AddWorkpackageStepSuccessAction,
   AddWorkpackageSuccessAction,
-  InitWorkingplanSuccessAction,
+  InitWorkingplanSuccessAction, MoveWorkpackageAction,
   RemoveWorkpackageAction,
   RemoveWorkpackageStepAction,
   RemoveWorkpackageStepSuccessAction,
@@ -38,6 +38,7 @@ export interface WorkingPlanState {
   workpackageToRemove: string;
   loaded: boolean;
   processing: boolean;
+  moving: boolean;
   chartDateView: ChartDateViewType;
 }
 
@@ -46,6 +47,7 @@ const workpackageInitialState: WorkingPlanState = {
   workpackageToRemove: '',
   loaded: false,
   processing: false,
+  moving: false,
   chartDateView: ChartDateViewType.month
 };
 
@@ -139,6 +141,23 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
 
     case WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP: {
       return updateWorkpackageStep(state, action as UpdateWorkpackageStepAction);
+    }
+
+    case WorkpackageActionTypes.MOVE_WORKPACKAGE: {
+      return moveWorkpackage(state, action as MoveWorkpackageAction);
+    }
+
+    case WorkpackageActionTypes.SAVE_WORKPACKAGE_ORDER_SUCCESS: {
+      return Object.assign({}, state, {
+        moving: false
+      });
+    }
+
+    case WorkpackageActionTypes.SAVE_WORKPACKAGE_ORDER_ERROR: {
+      return Object.assign({}, state, {
+        workpackages: action.payload.oldWorkpackageEntries,
+        moving: false
+      });
     }
 
     case WorkpackageActionTypes.NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE: {
@@ -307,5 +326,38 @@ function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackag
       })
     }),
     processing: false
+  })
+}
+
+/**
+ * Change a workpackage object order.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an MoveWorkpackageAction
+ * @return WorkingPlanState
+ *    the new state.
+ */
+function moveWorkpackage(state: WorkingPlanState, action: MoveWorkpackageAction) {
+  const toMove = get(state.workpackages, action.payload.workpackageId);
+  let oldValue = get(state.workpackages, Object.keys(state.workpackages)[action.payload.newIndex])
+
+  const newWorpackages = {};
+
+  Object.keys(state.workpackages)
+    .forEach((workpackageId, index) => {
+      if (index === action.payload.oldIndex) {
+        newWorpackages[oldValue.id] = oldValue;
+      } else if (index === action.payload.newIndex) {
+        newWorpackages[toMove.id] = toMove;
+      } else {
+        newWorpackages[workpackageId] = state.workpackages[workpackageId]
+      }
+    });
+
+  return Object.assign({}, state, {
+    workpackages: newWorpackages,
+    moving: true
   })
 }

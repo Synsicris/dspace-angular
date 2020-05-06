@@ -86,3 +86,12 @@ export const chartDateViewSelector = createSelector(_getWorkingPlanState,
 export function workpackageByIDSelector(workpackageId: string): MemoizedSelector<AppState, Workpackage> {
   return workpackageKeySelector<Workpackage>(workpackageId, workingPlanStateSelector);
 }
+
+/**
+ * Returns true if a moving operation is processing.
+ * @function isWorkingPlanMovingSelector
+ * @return {boolean}
+ */
+export const isWorkingPlanMovingSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.moving
+);

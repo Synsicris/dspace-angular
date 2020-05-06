@@ -79,7 +79,7 @@ export class SearchSimpleItemService {
               return searchResult.indexableObject.item.pipe(
                 filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
                 take(1),
-                map((itemRD: RemoteData<Item>) => this.initSimpleItem(itemRD.payload))
+                map((itemRD: RemoteData<Item>) => this.initSimpleItem(itemRD.payload, searchResult.indexableObject.id))
               )
             }
           });
@@ -90,10 +90,11 @@ export class SearchSimpleItemService {
     );
   }
 
-  private initSimpleItem(searchItem: Item): SimpleItem {
+  private initSimpleItem(searchItem: Item, searchworkspaceItemId: string = null): SimpleItem {
     const type: any = searchItem.firstMetadata('relationship.type');
     return {
       id: searchItem.id,
+      workspaceItemId: searchworkspaceItemId,
       type: type,
       metadata: searchItem.metadata
     };
