@@ -59,8 +59,9 @@ export function getDSOPath(dso: DSpaceObject): string {
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: '', redirectTo: '/home', pathMatch: 'full' },
-      { path: 'home', loadChildren: './+home-page/home-page.module#HomePageModule', data: { showBreadcrumbs: false } },
+      { path: '', redirectTo: '/coordinator-overview', pathMatch: 'full' },
+      // { path: 'home', loadChildren: './+home-page/home-page.module#HomePageModule', data: { showBreadcrumbs: false } },
+      { path: 'home', redirectTo: '/coordinator-overview', pathMatch: 'full' },
       { path: 'community-list', loadChildren: './community-list-page/community-list-page.module#CommunityListPageModule' },
       { path: 'id', loadChildren: './+lookup-by-id/lookup-by-id.module#LookupIdModule' },
       { path: 'handle', loadChildren: './+lookup-by-id/lookup-by-id.module#LookupIdModule' },
@@ -94,7 +95,7 @@ export function getDSOPath(dso: DSpaceObject): string {
         path: PROFILE_MODULE_PATH,
         loadChildren: './profile-page/profile-page.module#ProfilePageModule', canActivate: [AuthenticatedGuard]
       },
-      { path: 'coordinator', loadChildren: './coordinator-page/coordinator-page.module#CoordinatorPageModule' },
+      { path: 'coordinator-overview', loadChildren: './coordinator-page/coordinator-page.module#CoordinatorPageModule' },
       {
         path: 'project-overview',
         loadChildren: './project-overview-page/project-overview-page.module#ProjectOverviewPageModule'
