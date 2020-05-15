@@ -17,7 +17,8 @@ import { ProjectDsoBreadcrumbsService } from '../core/breadcrumbs/project-dso-br
         component: ImpactPathwayPageComponent,
         data: {
           title: 'impact-pathway.edit.page.title',
-          breadcrumbKey: 'impact-pathway'
+          breadcrumbKey: 'impact-pathway',
+          showBreadcrumbsFluid: true
         },
         resolve: {
           item: ItemPageResolver,

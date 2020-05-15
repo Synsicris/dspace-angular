@@ -15,7 +15,7 @@ import { ProjectI18nBreadcrumbResolver } from '../core/breadcrumbs/project-i18n-
         component: WorkingPlanPageComponent,
         pathMatch: 'full',
         resolve: { breadcrumb: ProjectI18nBreadcrumbResolver },
-        data: { title: 'working-plan.page.title', breadcrumbKey: 'working-plan' }
+        data: { title: 'working-plan.page.title', breadcrumbKey: 'working-plan', showBreadcrumbsFluid: true }
       },
     ])
   ],
