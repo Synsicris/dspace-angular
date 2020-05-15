@@ -725,6 +725,8 @@
 
   "impact-pathway.add.btn": "Add item",
 
+  "impact-pathway.breadcrumbs" : "Impact pathway",
+
   "impact-pathway.create.btn": "Create item",
 
   "impact-pathway.create.error": "There was an issue when generating the impact pathway, please try again later.",
@@ -1641,6 +1643,8 @@
 
   "project.search.results.head": "Project Search Results",
 
+  "project-overview.breadcrumbs" : "Wühlkegel",
+
   "project-overview.page.title" : "Project overview",
 
   "publication.listelement.badge": "Publication",
@@ -2492,6 +2496,8 @@
   "virtual-metadata.delete-item.modal-head": "The virtual metadata of this relation",
 
   "virtual-metadata.delete-relationship.modal-head": "Select the items for which you want to save the virtual metadata as real metadata",
+
+  "working-plan.breadcrumbs" : "Working plan",
 
   "working-plan.chart.button.add": "add",
 
