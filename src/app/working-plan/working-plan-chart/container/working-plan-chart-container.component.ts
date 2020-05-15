@@ -77,7 +77,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   chartData;
 
-  sidebarStyle = {};
+  sidebarNamesStyle = {
+    'min-width': 20 + 'rem'
+  };
+  sidebarResponsibleStyle = {
+    'min-width': 18 + 'rem'
+  };
+  sidebarStatusStyle = {};
 
   private chartStatusTypeList$: BehaviorSubject<AuthorityEntry[]> = new BehaviorSubject<AuthorityEntry[]>([]);
   private subs: Subscription[] = [];
@@ -303,10 +309,22 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   /** resize and validate */
 
-  onResizeEnd(event: ResizeEvent): void {
-    this.sidebarStyle = {
+  onResizeEnd(event: ResizeEvent, field: string): void {
+    const style: any = {
       width: event.rectangle.width + 'px'
     };
+
+    switch (field) {
+      case 'names':
+        this.sidebarNamesStyle = style;
+        break;
+      case 'Responsible':
+        this.sidebarResponsibleStyle = style;
+        break;
+      case 'status':
+        this.sidebarStatusStyle = style;
+        break;
+    }
   }
 
   buildCalendar() {
