@@ -1,10 +1,10 @@
-import { ProjectOverViewPageRoutingModule } from './project-page.routing.module';
+import { ProjectOverviewPageRoutingModule } from './project-overview-page.routing.module';
 
 describe('ProjectPage.RoutingModule', () => {
-  let projectPageRoutingModule: ProjectOverViewPageRoutingModule;
+  let projectPageRoutingModule: ProjectOverviewPageRoutingModule;
 
   beforeEach(() => {
-    projectPageRoutingModule = new ProjectOverViewPageRoutingModule();
+    projectPageRoutingModule = new ProjectOverviewPageRoutingModule();
   });
 
   it('should create an instance', () => {
