@@ -49,10 +49,6 @@ $highlightBorderColor: #FF9800;
 
 /** names */
 
-.sidenav.names {
-  min-width: 20rem;
-}
-
 .sidenav.chart-column {
   mat-tree.tree {
     padding-top: 14px; // align the lines of input and table
@@ -96,10 +92,6 @@ $highlightBorderColor: #FF9800;
 }
 
 /** responsible */
-
-.sidenav.responsible {
-  min-width: 18rem;
-}
 
 .responsible-field {
   overflow: inherit !important;
