@@ -18,8 +18,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class DSOBreadcrumbsService implements BreadcrumbsService<ChildHALResource & DSpaceObject> {
   constructor(
-    private linkService: LinkService,
-    private dsoNameService: DSONameService
+    protected linkService: LinkService,
+    protected dsoNameService: DSONameService
   ) {
 
   }

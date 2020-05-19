@@ -10,7 +10,8 @@ import { DeleteCollectionPageComponent } from './delete-collection-page/delete-c
 import { URLCombiner } from '../core/url-combiner/url-combiner';
 import { getCollectionModulePath } from '../app-routing.module';
 import { CollectionItemMapperComponent } from './collection-item-mapper/collection-item-mapper.component';
-import { CollectionBreadcrumbResolver } from '../core/breadcrumbs/collection-breadcrumb.resolver';
+import { ProjectCollectionBreadcrumbResolver } from '../core/breadcrumbs/project-collection-breadcrumb.resolver';
+import { ProjectDsoBreadcrumbsService } from '../core/breadcrumbs/project-dso-breadcrumbs.service';
 import { DSOBreadcrumbsService } from '../core/breadcrumbs/dso-breadcrumbs.service';
 import { LinkService } from '../core/cache/builders/link.service';
 
@@ -43,7 +44,7 @@ const COLLECTION_EDIT_PATH = 'edit';
         path: ':id',
         resolve: {
           dso: CollectionPageResolver,
-          breadcrumb: CollectionBreadcrumbResolver
+          breadcrumb: ProjectCollectionBreadcrumbResolver
         },
         runGuardsAndResolvers: 'always',
         children: [
@@ -75,7 +76,8 @@ const COLLECTION_EDIT_PATH = 'edit';
   ],
   providers: [
     CollectionPageResolver,
-    CollectionBreadcrumbResolver,
+    ProjectCollectionBreadcrumbResolver,
+    ProjectDsoBreadcrumbsService,
     DSOBreadcrumbsService,
     LinkService,
     CreateCollectionPageGuard
