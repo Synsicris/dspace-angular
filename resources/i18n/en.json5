@@ -599,6 +599,8 @@
 
   "communityList.title": "List of Communities",
 
+  "coordinator.page.title": "Coordinator overview",
+
   "dso-selector.create.collection.head": "New collection",
 
   "dso-selector.create.community.head": "New community",
@@ -722,6 +724,8 @@
   "home.top-level-communities.help": "Select a community to browse its collections.",
 
   "impact-pathway.add.btn": "Add item",
+
+  "impact-pathway.breadcrumbs" : "Impact pathway",
 
   "impact-pathway.create.btn": "Create item",
 
@@ -1639,6 +1643,10 @@
 
   "project.search.results.head": "Project Search Results",
 
+  "project-overview.breadcrumbs" : "Wühlkegel",
+
+  "project-overview.page.title" : "Project overview",
+
   "publication.listelement.badge": "Publication",
 
   "publication.page.description": "Description",
@@ -2488,6 +2496,8 @@
   "virtual-metadata.delete-item.modal-head": "The virtual metadata of this relation",
 
   "virtual-metadata.delete-relationship.modal-head": "Select the items for which you want to save the virtual metadata as real metadata",
+
+  "working-plan.breadcrumbs" : "Working plan",
 
   "working-plan.chart.button.add": "add",
 

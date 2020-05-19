@@ -1021,6 +1021,10 @@
   // TODO New key - Add a translation
   "communityList.title": "List of Communities",
 
+  // "coordinator.page.title": "Coordinator overview",
+  // TODO New key - Add a translation
+  "coordinator.page.title": "Coordinator overview",
+
   // "dso-selector.create.collection.head": "New collection",
   "dso-selector.create.collection.head": "Neue Sammlung",
 
@@ -1213,6 +1217,10 @@
   // "impact-pathway.add.btn": "Add item",
   // TODO New key - Add a translation
   "impact-pathway.add.btn": "Add item",
+
+  // "impact-pathway.breadcrumbs" : "Impact pathway",
+  // TODO New key - Add a translation
+  "impact-pathway.breadcrumbs" : "Impact pathway",
 
   // "impact-pathway.create.btn": "Create item",
   // TODO New key - Add a translation
@@ -2708,6 +2716,14 @@
   // TODO New key - Add a translation
   "project.search.results.head": "Project Search Results",
 
+  // "project-overview.breadcrumbs" : "Wühlkegel",
+  // TODO New key - Add a translation
+  "project-overview.breadcrumbs" : "Wühlkegel",
+
+  // "project-overview.page.title" : "Project overview",
+  // TODO New key - Add a translation
+  "project-overview.page.title" : "Project overview",
+
   // "publication.listelement.badge": "Publication",
   "publication.listelement.badge": "Veröffentlichung",
 
@@ -4081,6 +4097,10 @@
   // "virtual-metadata.delete-relationship.modal-head": "Select the items for which you want to save the virtual metadata as real metadata",
   // TODO New key - Add a translation
   "virtual-metadata.delete-relationship.modal-head": "Select the items for which you want to save the virtual metadata as real metadata",
+
+  // "working-plan.breadcrumbs" : "Working plan",
+  // TODO New key - Add a translation
+  "working-plan.breadcrumbs" : "Arbeitsplan",
 
   // "working-plan.chart.button.add": "add",
   // TODO New key - Add a translation

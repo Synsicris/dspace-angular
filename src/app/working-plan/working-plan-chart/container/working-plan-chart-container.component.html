@@ -1,10 +1,10 @@
 <div *ngIf="(workpackages | async)?.length > 0" class="container-fluid p-0" fxLayout="column">
   <div class="sidenav-container" fxFlex fxLayout="row">
     <!-- steps -->
-    <div class="sidenav chart-column names" [ngStyle]="sidebarStyle" fxLayout="column">
+    <div class="sidenav chart-column names" [ngStyle]="sidebarNamesStyle" fxLayout="column">
       <div class="sidenav-header text-center">{{'working-plan.chart.column.steps' | translate}}</div>
-      <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarStyle"
-        mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event)">
+      <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarNamesStyle"
+        mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'names')">
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
           <button *ngIf="node.level == 0"
                   class="btn btn-lg btn-link p-0 text-primary"
@@ -114,10 +114,10 @@
       </mat-tree>
     </div>
     <!-- responsibles -->
-    <div class="sidenav chart-column responsible" [ngStyle]="sidebarStyle" fxLayout="column">
+    <div class="sidenav chart-column responsible" [ngStyle]="sidebarResponsibleStyle" fxLayout="column">
       <div class="sidenav-header text-center">{{'working-plan.chart.column.responsible' | translate}}</div>
-      <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarStyle"
-                mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event)">
+      <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarResponsibleStyle"
+                mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'Responsible')">
         <mat-tree-node *matTreeNodeDef="let node" class="responsible-field">
             <ds-authority-typeahead fxFlex floatLabel="never" class="pr-3 pl-3"
                                     [fieldId]="'responsible'"
@@ -129,10 +129,10 @@
       </mat-tree>
     </div>
     <!-- status -->
-    <div class="sidenav chart-column" [ngStyle]="sidebarStyle" fxLayout="column">
+    <div class="sidenav chart-column" [ngStyle]="sidebarStatusStyle" fxLayout="column">
       <div class="sidenav-header text-center">{{'working-plan.chart.column.status' | translate}}</div>
-      <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarStyle"
-                mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event)">
+      <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarStatusStyle"
+                mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'status')">
         <mat-tree-node *matTreeNodeDef="let node">
           <mat-form-field fxFlex floatLabel="never" class="pr-3 pl-3">
             <mat-select class="text-center" (selectionChange)="updateStepStatus(node, $event)" [(value)]="node.status">
