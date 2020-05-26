@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="collection-page">
+    <div @fadeInOut>
+      <div>
+        <header class="comcol-header border-bottom mb-4 pb-4">
+          <!-- Collection Name -->
+          <ds-comcol-page-header
+            [name]="listKey | translate">
+          </ds-comcol-page-header>
+
+        </header>
+        <section class="comcol-page-browse-section">
+
+          <ng-container>
+            <div class="mt-4" *ngIf="entityList" @fadeInOut>
+              <ds-pagination #p='paginationComponent'
+                             [paginationOptions]="paginationOptions"
+                             [sortOptions]="sortOptions"
+                             [collectionSize]="entityList.length"
+                             (pageChange)="pageChanged($event)"
+                             (pageSizeChange)="pageSizeChanged($event)">
+                <ul class="list-unstyled">
+                  <li *ngFor='let entity of entityList | paginate: { itemsPerPage: paginationOptions.pageSize,
+                  currentPage: paginationOptions.currentPage, totalItems: entityList.length }'>
+                    <a class="h3" [routerLink]="['/mydspace']"
+                                  [queryParams]="{configuration: 'workspace', 'f.entityType': entity}">
+                      {{ entity + '.listelement.badge' | translate }}
+                    </a>
+                  </li>
+                </ul>
+              </ds-pagination>
+            </div>
+          </ng-container>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

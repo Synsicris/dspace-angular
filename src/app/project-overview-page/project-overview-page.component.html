@@ -14,7 +14,7 @@
       <div class="flex-fill card">
         <div class="py-4 card-body">
           <p>
-            <a class="h3 mb-2 text-decoration-none" [routerLink]="['/impactpathway', impactPathwayUUID, 'edit']" role="button">
+            <a class="h3 mb-2 text-decoration-none" [routerLink]="" (click)="navigateToImpactPathway()" role="button">
               <span>Impact pathway</span>
             </a>
           </p>
@@ -48,10 +48,10 @@
     <div class="col-xl-3 mb-1">
       <div class="flex-fill card">
         <div class="py-4 card-body">
-          <h3>Kooperationspartner und Zielgruppen</h3>
+          <h4 class="word-wrap">Kooperationspartner und Zielgruppen</h4>
           <ul class="list-unstyled">
-            <li><a class="h5" routerLink="/handle/123456789/26">Kooperationspartner</a></li>
-            <li><a class="h5" routerLink="./handle/123456789/188">Zielgruppen</a></li>
+            <li><a class="h5" [routerLink]="" (click)="navigateToMydspaceByScope('123456789/26')">Kooperationspartner</a></li>
+            <li><a class="h5" [routerLink]="" (click)="navigateToMydspaceByScope('123456789/188')">Zielgruppen</a></li>
           </ul>
         </div>
       </div>
@@ -59,10 +59,10 @@
     <div class="col-xl-3 mb-1">
       <div class="flex-fill card">
         <div class="py-4 card-body">
-          <h3>Aktivitäten</h3>
+          <h4 class="word-wrap">Aktivitäten</h4>
           <ul class="list-unstyled">
-            <li><a class="h5" routerLink="/handle/">Plan</a></li>
-            <li><a class="h5" routerLink="./handle/">IST</a></li>
+            <li><a class="h5" [routerLink]="['./activities', 'plan', 'list']">Plan</a></li>
+            <li><a class="h5" [routerLink]="['./activities', 'ist', 'list']">IST</a></li>
           </ul>
         </div>
       </div>
@@ -70,10 +70,10 @@
     <div class="col-xl-3 mb-1">
       <div class="flex-fill card">
         <div class="py-4 card-body">
-          <h2>Veröffentlichungen</h2>
+          <h4 class="word-wrap">Veröffentlichungen</h4>
           <ul class="list-unstyled">
-            <li><a class="h5" routerLink="/handle/123456789/129">Plan</a></li>
-            <li><a class="h5" routerLink="./handle/123456789/11">IST</a></li>
+            <li><a class="h5" [routerLink]="" (click)="navigateToMydspaceByScope('123456789/129')">Plan</a></li>
+            <li><a class="h5" [routerLink]="" (click)="navigateToMydspaceByScope('123456789/11')">IST</a></li>
           </ul>
         </div>
       </div>
@@ -81,10 +81,10 @@
     <div class="col-xl-3 mb-1">
       <div class="flex-fill card">
         <div class="py-4 card-body">
-          <h3>Alle Ergebnisse</h3>
+          <h4 class="word-wrap">Alle Ergebnisse</h4>
           <ul class="list-unstyled">
-            <li><a class="h5" routerLink="/handle/">Plan</a></li>
-            <li><a class="h5" routerLink="./handle/">IST</a></li>
+            <li><a class="h5" [routerLink]="['./results', 'plan', 'list']">Plan</a></li>
+            <li><a class="h5" [routerLink]="['./results', 'ist', 'list']">IST</a></li>
           </ul>
         </div>
       </div>

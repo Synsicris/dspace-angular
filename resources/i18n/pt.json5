@@ -8,6 +8,14 @@
   // "404.page-not-found": "page not found",
   "404.page-not-found": "página não encontrada",
   
+  // "activities_plan.breadcrumbs":  "Activities plan",
+  // TODO New key - Add a translation
+  "activities_plan.breadcrumbs":  "Activities plan",
+  
+  // "activities_ist.breadcrumbs":  "Activities IST",
+  // TODO New key - Add a translation
+  "activities_ist.breadcrumbs":  "Activities IST",
+  
   // "admin.access-control.epeople.button.add": "Add EPerson",
   // TODO New key - Add a translation
   "admin.access-control.epeople.button.add": "Add EPerson",
@@ -417,6 +425,18 @@
   // "administrativeView.search.results.head": "Administrative Search",
   // TODO New key - Add a translation
   "administrativeView.search.results.head": "Administrative Search",
+  
+  // "applications_econtech.listelement.badge": "Application success for business innovations",
+  // TODO New key - Add a translation
+  "applications_econtech.listelement.badge": "Application success for business innovations",
+  
+  // "applications_social.listelement.badge": "Application success in social innovations/change processes",
+  // TODO New key - Add a translation
+  "applications_social.listelement.badge": "Application success in social innovations/change processes",
+  
+  // "awards.listelement.badge": "Awards and prizes",
+  // TODO New key - Add a translation
+  "awards.listelement.badge": "Awards and prizes",
   
   // "auth.errors.invalid-user": "Invalid email address or password.",
   "auth.errors.invalid-user": "Endereço de email ou senha inválidos.",
@@ -1028,6 +1048,10 @@
   // TODO New key - Add a translation
   "coordinator.page.title": "Coordinator overview",
   
+  // "cooperation_events.listelement.badge": "Cooperation processes",
+  // TODO New key - Add a translation
+  "cooperation_events.listelement.badge": "Cooperation processes",
+  
   // "dso-selector.create.collection.head": "New collection",
   "dso-selector.create.collection.head": "Nova coleção",
   
@@ -1116,6 +1140,10 @@
   
   // "error.validation.pattern": "This input is restricted by the current pattern: {{ pattern }}.",
   "error.validation.pattern": "Este campo está restrito ao seguinte padrão: {{ pattern }}.",
+  
+  // "events.listelement.badge": "Events",
+  // TODO New key - Add a translation
+  "events.listelement.badge": "Events",
   
   // "footer.copyright": "copyright © 2002-{{ year }}",
   "footer.copyright": "copyright © 2002-{{ year }}",
@@ -1288,6 +1316,18 @@
   // "impactpathwaystep.listelement.badge": "Impact pathway step",
   // TODO New key - Add a translation
   "impactpathwaystep.listelement.badge": "Impact pathway step",
+  
+  // "innovationideas.listelement.badge": "Ideas for innovation and change",
+  // TODO New key - Add a translation
+  "innovationideas.listelement.badge": "Ideas for innovation and change",
+  
+  // "innovationpotentials_econtech.listelement.badge": "Intended business innovations",
+  // TODO New key - Add a translation
+  "innovationpotentials_econtech.listelement.badge": "Intended business innovations",
+  
+  // "innovationpotentials_social.listelement.badge": "Intended social innovations/change processes",
+  // TODO New key - Add a translation
+  "innovationpotentials_social.listelement.badge": "Intended social innovations/change processes",
   
   // "item.access-control.epeople.table.edit.buttons.edit": "Edit",
   // TODO New key - Add a translation
@@ -2378,6 +2418,10 @@
   // "menu.section.unpin": "Unpin sidebar",
   "menu.section.unpin": "Soltar barra lateral",
   
+  // "milestones.listelement.badge": "Milestones",
+  // TODO New key - Add a translation
+  "milestones.listelement.badge": "Milestones",
+  
   // "mydspace.description": "",
   "mydspace.description": "",
   
@@ -2550,6 +2594,14 @@
   // "pagination.sort-direction": "Sort Options",
   "pagination.sort-direction": "Opções de Ordenação",
   
+  // "participation_events.listelement.badge": "Participative processes",
+  // TODO New key - Add a translation
+  "participation_events.listelement.badge": "Participative processes",
+  
+  // "patents.listelement.badge": "Patents and utility patents",
+  // TODO New key - Add a translation
+  "patents.listelement.badge": "Patents and utility patents",
+  
   // "person.listelement.badge": "Person",
   "person.listelement.badge": "Pessoa",
   
@@ -2586,6 +2638,75 @@
   // "person.search.title": "DSpace Cris Angular :: Person Search",
   // TODO New key - Add a translation
   "person.search.title": "DSpace Cris Angular :: Person Search",
+  
+  
+  // "physical_objects.listelement.badge": "Objects, materials",
+  // TODO New key - Add a translation
+  "physical_objects.listelement.badge": "Objects, materials",
+  
+  // "plan_cooperation_events.listelement.badge": "Cooperation processes (plan)",
+  // TODO New key - Add a translation
+  "plan_cooperation_events.listelement.badge": "Cooperation processes (plan)",
+  
+  // "plan_events.listelement.badge": "Events (plan)",
+  // TODO New key - Add a translation
+  "plan_events.listelement.badge": "Events (plan)",
+  
+  // "plan_innovationideas.listelement.badge": "Ideas for innovation and change (plan)",
+  // TODO New key - Add a translation
+  "plan_innovationideas.listelement.badge": "Ideas for innovation and change (plan)",
+  
+  // "plan_innovationpotentials_econtech.listelement.badge": "Intended business innovations (plan)",
+  // TODO New key - Add a translation
+  "plan_innovationpotentials_econtech.listelement.badge": "Intended business innovations (plan)",
+  
+  // "plan_innovationpotentials_social.listelement.badge": "Intended social innovations/change processes (plan)",
+  // TODO New key - Add a translation
+  "plan_innovationpotentials_social.listelement.badge": "Intended social innovations/change processes (plan)",
+  
+  // "plan_milestones.listelement.badge": "Milestones (plan)",
+  // TODO New key - Add a translation
+  "plan_milestones.listelement.badge": "Milestones (plan)",
+  
+  // "plan_participation_events.listelement.badge": "Patents and utility patents (plan)",
+  // TODO New key - Add a translation
+  "plan_participation_events.listelement.badge": "Patents and utility patents (plan)",
+  
+  // "plan_patents.listelement.badge": "Patents and utility patents (plan)",
+  // TODO New key - Add a translation
+  "plan_patents.listelement.badge": "Patents and utility patents (plan)",
+  
+  // "plan_physical_objects.listelement.badge": "Objects, materials (plan)",
+  // TODO New key - Add a translation
+  "plan_physical_objects.listelement.badge": "Objects, materials (plan)",
+  
+  // "plan_publications.listelement.badge": "Publications (plan)",
+  // TODO New key - Add a translation
+  "plan_publications.listelement.badge": "Publications (plan)",
+  
+  // "plan_spinoffs.listelement.badge": "Spin-offs (incl. associations) (plan)",
+  // TODO New key - Add a translation
+  "plan_spinoffs.listelement.badge": "Spin-offs (incl. associations) (plan)",
+  
+  // "pot_societalimpact.listelement.badge": "Expected societal impact",
+  // TODO New key - Add a translation
+  "pot_societalimpact.listelement.badge": "Expected societal impact",
+  
+  // "plan_workpackages.listelement.badge": "Workpackages (plan)",
+  // TODO New key - Add a translation
+  "plan_workpackages.listelement.badge": "Workpackages (plan)",
+  // "plan_tasks.listelement.badge": "Tasks (plan)",
+  // TODO New key - Add a translation
+  "plan_tasks.listelement.badge": "Tasks (plan)",
+  
+  // "proj_objectives.listelement.badge": "Project objectives",
+  // TODO New key - Add a translation
+  "proj_objectives.listelement.badge": "Project objectives",
+  
+  // "publications.listelement.badge": "Publications",
+  // TODO New key - Add a translation
+  "publications.listelement.badge": "Publications",
+  
   
   // "profile.breadcrumbs": "Update Profile",
   // TODO New key - Add a translation
@@ -2805,6 +2926,14 @@
   
   // "relationships.isVolumeOf": "Journal Volumes",
   "relationships.isVolumeOf": "Volumes do Periódico",
+  
+  // "results_plan.breadcrumbs":  "Results plan",
+  // TODO New key - Add a translation
+  "results_plan.breadcrumbs":  "Results plan",
+  
+  // "results_ist.breadcrumbs":  "Results IST",
+  // TODO New key - Add a translation
+  "results_ist.breadcrumbs":  "Results IST",
   
   // "search.breadcrumbs": "Search",
   // TODO New key - Add a translation
@@ -3120,6 +3249,14 @@
   
   // "sorting.score.DESC": "Relevance",
   "sorting.score.DESC": "Relevância",
+  
+  // "spinoffs.listelement.badge": "Next steps and cooperation",
+  // TODO New key - Add a translation
+  "spinoffs.listelement.badge": "Next steps and cooperation",
+  
+  // "steps.listelement.badge": "Spin-offs (incl. associations)",
+  // TODO New key - Add a translation
+  "steps.listelement.badge": "Spin-offs (incl. associations)",
   
   // "submission.edit.title": "Edit Submission",
   "submission.edit.title": "Editar Submissão",
@@ -4203,6 +4340,14 @@
   // "submission.workflow.tasks.pool.show-detail": "Show detail",
   "submission.workflow.tasks.pool.show-detail": "Mostrar detalhes",
   
+  // "targetgroups.listelement.badge": "Target groups",
+  // TODO New key - Add a translation
+  "targetgroups.listelement.badge": "Target groups",
+  
+  // "tasks.listelement.badge": "Tasks",
+  // TODO New key - Add a translation
+  "tasks.listelement.badge": "Tasks",
+  
   // "title": "DSpace Cris",
   // TODO Source message changed - Revise the translation
   "title": "DSpace",
@@ -4230,6 +4375,10 @@
   // "treeview.search.no-result": "There were no items to show",
   // TODO New key - Add a translation
   "treeview.search.no-result": "There were no items to show",
+  
+  // "unexpected_results.listelement.badge":  "Unexpected results and problems",
+  // TODO New key - Add a translation
+  "unexpected_results.listelement.badge":  "Unexpected results and problems",
   
   // "uploader.browse": "browse",
   "uploader.browse": "Navegar",
