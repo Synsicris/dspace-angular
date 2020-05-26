@@ -5,6 +5,10 @@
 
   "404.page-not-found": "page not found",
 
+  "activities_plan.breadcrumbs":  "Activities plan",
+
+  "activities_ist.breadcrumbs":  "Activities IST",
+
   "admin.access-control.epeople.button.add": "Add EPerson",
 
   "admin.access-control.epeople.form.canLogIn": "Can log in",
@@ -246,6 +250,12 @@
   "admin.search.title": "Administrative Search",
 
   "administrativeView.search.results.head": "Administrative Search",
+
+  "applications_econtech.listelement.badge": "Application success for business innovations",
+
+  "applications_social.listelement.badge": "Application success in social innovations/change processes",
+
+  "awards.listelement.badge": "Awards and prizes",
 
   "auth.errors.invalid-user": "Invalid email address or password.",
 
@@ -601,6 +611,8 @@
 
   "coordinator.page.title": "Coordinator overview",
 
+  "cooperation_events.listelement.badge": "Cooperation processes",
+
   "dso-selector.create.collection.head": "New collection",
 
   "dso-selector.create.community.head": "New community",
@@ -658,6 +670,8 @@
   "error.validation.license.notgranted": "You must grant this license to complete your submission. If you are unable to grant this license at this time you may save your work and return later or remove the submission.",
 
   "error.validation.pattern": "This input is restricted by the current pattern: {{ pattern }}.",
+
+  "events.listelement.badge": "Events",
 
   "footer.copyright": "copyright © 2002-{{ year }}",
 
@@ -756,6 +770,12 @@
   "impactpathway.listelement.badge": "Impact pathway",
 
   "impactpathwaystep.listelement.badge": "Impact pathway step",
+
+  "innovationideas.listelement.badge": "Ideas for innovation and change",
+
+  "innovationpotentials_econtech.listelement.badge": "Intended business innovations",
+
+  "innovationpotentials_social.listelement.badge": "Intended social innovations/change processes",
 
   "item.access-control.epeople.table.edit.buttons.edit": "Edit",
 
@@ -1429,6 +1449,8 @@
 
   "menu.section.unpin": "Unpin sidebar",
 
+  "milestones.listelement.badge": "Milestones",
+
   "mydspace.description": "",
 
   "mydspace.general.text-here": "HERE",
@@ -1543,6 +1565,10 @@
 
   "pagination.sort-direction": "Sort Options",
 
+  "participation_events.listelement.badge": "Participative processes",
+
+  "patents.listelement.badge": "Patents and utility patents",
+
   "person.listelement.badge": "Person",
 
   "person.page.birthdate": "Birth Date",
@@ -1566,6 +1592,42 @@
   "person.search.results.head": "Person Search Results",
 
   "person.search.title": "DSpace Cris Angular :: Person Search",
+
+
+  "physical_objects.listelement.badge": "Objects, materials",
+
+  "plan_cooperation_events.listelement.badge": "Cooperation processes (plan)",
+
+  "plan_events.listelement.badge": "Events (plan)",
+
+  "plan_innovationideas.listelement.badge": "Ideas for innovation and change (plan)",
+
+  "plan_innovationpotentials_econtech.listelement.badge": "Intended business innovations (plan)",
+
+  "plan_innovationpotentials_social.listelement.badge": "Intended social innovations/change processes (plan)",
+
+  "plan_milestones.listelement.badge": "Milestones (plan)",
+
+  "plan_participation_events.listelement.badge": "Participative processes (plan)",
+
+  "plan_patents.listelement.badge": "Patents and utility patents (plan)",
+
+  "plan_physical_objects.listelement.badge": "Objects, materials (plan)",
+
+  "plan_publications.listelement.badge": "Publications (plan)",
+
+  "plan_spinoffs.listelement.badge": "Spin-offs (incl. associations) (plan)",
+
+  "plan_workpackages.listelement.badge": "Workpackages (plan)",
+
+  "plan_tasks.listelement.badge": "Tasks (plan)",
+
+  "pot_societalimpact.listelement.badge": "Expected societal impact",
+
+  "proj_objectives.listelement.badge": "Project objectives",
+
+  "publications.listelement.badge": "Publications",
+
 
   "profile.breadcrumbs": "Update Profile",
 
@@ -1690,6 +1752,10 @@
   "relationships.isSingleVolumeOf": "Journal Volume",
 
   "relationships.isVolumeOf": "Journal Volumes",
+
+  "results_plan.breadcrumbs":  "Results plan",
+
+  "results_ist.breadcrumbs":  "Results IST",
 
   "search.breadcrumbs": "Search",
 
@@ -1886,6 +1952,10 @@
   "sorting.dc.title.DESC": "Title Descending",
 
   "sorting.score.DESC": "Relevance",
+
+  "spinoffs.listelement.badge": "Spin-offs (incl. associations)",
+
+  "steps.listelement.badge": "Next steps and cooperation",
 
   "submission.edit.title": "Edit Submission",
 
@@ -2467,6 +2537,10 @@
 
   "submission.workflow.tasks.pool.show-detail": "Show detail",
 
+  "targetgroups.listelement.badge": "Target groups",
+
+  "tasks.listelement.badge": "Tasks",
+
   "title": "DSpace Cris",
 
   "tree.description.srsc": "Research Subject Categories",
@@ -2480,6 +2554,8 @@
   "treeview.search.form.search": "Search",
 
   "treeview.search.no-result": "There were no items to show",
+
+  "unexpected_results.listelement.badge":  "Unexpected results and problems",
 
   "uploader.browse": "browse",
 

@@ -8,6 +8,12 @@
   // "404.page-not-found": "page not found",
   "404.page-not-found": "Seite nicht gefunden",
 
+  // "activities_plan.breadcrumbs":  "Activities plan",
+  "activities_plan.breadcrumbs":  "Aktivitäten plan",
+
+  // "activities_ist.breadcrumbs":  "Activities IST",
+  "activities_ist.breadcrumbs":  "Aktivitäten IST",
+
   // "admin.access-control.epeople.button.add": "Add EPerson",
   // TODO New key - Add a translation
   "admin.access-control.epeople.button.add": "Add EPerson",
@@ -414,6 +420,15 @@
   // "administrativeView.search.results.head": "Administrative Search",
   // TODO New key - Add a translation
   "administrativeView.search.results.head": "Administrative Search",
+
+  // "applications_econtech.listelement.badge": "Application success for business innovations",
+  "applications_econtech.listelement.badge": "Anwendungserfolg für wirtschaftlich-technische Innovationen",
+
+  // "applications_social.listelement.badge": "Application success in social innovations/change processes",
+  "applications_social.listelement.badge": "Anwendungserfolg für soziale Innovationen/Veränderungsprozesse",
+
+  // "awards.listelement.badge": "Awards and prizes",
+  "awards.listelement.badge": "Auszeichnungen und Preise",
 
   // "auth.errors.invalid-user": "Invalid email address or password.",
   "auth.errors.invalid-user": "Password oder E-Mail-Adresse ungültig.",
@@ -1025,6 +1040,9 @@
   // TODO New key - Add a translation
   "coordinator.page.title": "Coordinator overview",
 
+  // "cooperation_events.listelement.badge": "Cooperation processes",
+  "cooperation_events.listelement.badge": "Kooperationsprozesse",
+
   // "dso-selector.create.collection.head": "New collection",
   "dso-selector.create.collection.head": "Neue Sammlung",
 
@@ -1113,6 +1131,9 @@
 
   // "error.validation.pattern": "This input is restricted by the current pattern: {{ pattern }}.",
   "error.validation.pattern": "Die Eingabe hat dem folgenden Muster zu entsprechen: {{ pattern }}.",
+
+  // "events.listelement.badge": "Events",
+  "events.listelement.badge": "Veranstaltungen",
 
   // "footer.copyright": "copyright © 2002-{{ year }}",
   "footer.copyright": "Copyright © 2002-{{ year }}",
@@ -1281,6 +1302,15 @@
   // "impactpathwaystep.listelement.badge": "Impact pathway step",
   // TODO New key - Add a translation
   "impactpathwaystep.listelement.badge": "Impact pathway step",
+
+  // "innovationideas.listelement.badge": "Ideas for innovation and change",
+  "innovationideas.listelement.badge": "Ideen für Innovation und Veränderung",
+
+  // "innovationpotentials_econtech.listelement.badge": "Intended business innovations",
+  "innovationpotentials_econtech.listelement.badge": "Beabsichtigte wirtschaftlich-technische Innovationen",
+
+  // "innovationpotentials_social.listelement.badge": "Intended social innovations/change processes",
+  "innovationpotentials_social.listelement.badge": "Beabsichtigte  soziale Innovationen/Veränderungsprozesse",
 
   // "item.access-control.epeople.table.edit.buttons.edit": "Edit",
   // TODO New key - Add a translation
@@ -2365,6 +2395,10 @@
   // "menu.section.unpin": "Unpin sidebar",
   "menu.section.unpin": "Seitenleiste loslösen",
 
+  // "milestones.listelement.badge": "Milestones",
+  // TODO New key - Add a translation
+  "milestones.listelement.badge": "Milestones",
+
   // "mydspace.description": "",
   "mydspace.description": "",
 
@@ -2537,6 +2571,12 @@
   // "pagination.sort-direction": "Sort Options",
   "pagination.sort-direction": "Sortieroptionen",
 
+  // "participation_events.listelement.badge": "Participative processes",
+  "participation_events.listelement.badge": "Partizipative Prozesse",
+
+  // "patents.listelement.badge": "Patents and utility patents",
+  "patents.listelement.badge": "Patente und Gebrauchsmuster",
+
   // "person.listelement.badge": "Person",
   "person.listelement.badge": "Person",
 
@@ -2572,6 +2612,63 @@
 
   // "person.search.title": "DSpace Cris Angular :: Person Search",
   "person.search.title": "DSpace Cris Angular :: Personensuche",
+
+
+  // "physical_objects.listelement.badge": "Objects, materials",
+  "physical_objects.listelement.badge": "Objekte, Materialien",
+
+  // "plan_cooperation_events.listelement.badge": "Cooperation processes (plan)",
+  "plan_cooperation_events.listelement.badge": "Kooperationsprozesse (plan)",
+
+  // "plan_events.listelement.badge": "Events (plan)",
+  "plan_events.listelement.badge": "Veranstaltungen (plan)",
+
+  // "plan_innovationideas.listelement.badge": "Ideas for innovation and change (plan)",
+  "plan_innovationideas.listelement.badge": "Ideen für Innovation und Veränderung (plan)",
+
+  // "plan_innovationpotentials_econtech.listelement.badge": "Intended business innovations (plan)",
+  "plan_innovationpotentials_econtech.listelement.badge": "Beabsichtigte wirtschaftlich-technische Innovationen (plan)",
+
+  // "plan_innovationpotentials_social.listelement.badge": "Intended social innovations/change processes (plan)",
+  "plan_innovationpotentials_social.listelement.badge": "Beabsichtigte soziale Innovationen/Veränderungsprozesse  (plan)",
+
+  // "plan_milestones.listelement.badge": "Milestones (plan)",
+  // TODO New key - Add a translation
+  "plan_milestones.listelement.badge": "Milestones (plan)",
+
+  // "plan_participation_events.listelement.badge": "Participative processes (plan)",
+  "plan_participation_events.listelement.badge": "Partizipative prozesse (plan)",
+
+  // "plan_patents.listelement.badge": "Patents and utility patents (plan)",
+  "plan_patents.listelement.badge": "Patente und Gebrauchsmuster (plan)",
+
+  // "plan_physical_objects.listelement.badge": "Objects, materials (plan)",
+  "plan_physical_objects.listelement.badge": "Objekte, Materialien",
+
+  // "plan_publications.listelement.badge": "Publications (plan)",
+  "plan_publications.listelement.badge": "Publikationen (plan)",
+
+  // "plan_spinoffs.listelement.badge": "Spin-offs (incl. associations) (plan)",
+  "plan_spinoffs.listelement.badge": "Ausgründungen (inkl. Vereinsgründungen) (plan)",
+
+  // "plan_workpackages.listelement.badge": "Workpackages (plan)",
+  // TODO New key - Add a translation
+  "plan_workpackages.listelement.badge": "Workpackages (plan)",
+  // "plan_tasks.listelement.badge": "Tasks (plan)",
+  // TODO New key - Add a translation
+  "plan_tasks.listelement.badge": "Tasks (plan)",
+
+  // "pot_societalimpact.listelement.badge": "Expected societal impact",
+  // TODO New key - Add a translation
+  "pot_societalimpact.listelement.badge": "Expected societal impact",
+
+  // "proj_objectives.listelement.badge": "Project objectives",
+  // TODO New key - Add a translation
+  "proj_objectives.listelement.badge": "Project objectives",
+
+  // "publications.listelement.badge": "Publications",
+  "publications.listelement.badge": "Publikationen",
+
 
   // "profile.breadcrumbs": "Update Profile",
   // TODO New key - Add a translation
@@ -2790,6 +2887,14 @@
 
   // "relationships.isVolumeOf": "Journal Volumes",
   "relationships.isVolumeOf": "Zeitschriftenbände",
+
+  // "results_plan.breadcrumbs":  "Results plan",
+  // TODO New key - Add a translation
+  "results_plan.breadcrumbs":  "Results plan",
+
+  // "results_ist.breadcrumbs":  "Results IST",
+  // TODO New key - Add a translation
+  "results_ist.breadcrumbs":  "Results IST",
 
   // "search.breadcrumbs": "Search",
   // TODO New key - Add a translation
@@ -3104,6 +3209,12 @@
 
   // "sorting.score.DESC": "Relevance",
   "sorting.score.DESC": "Relevanz",
+
+  // "spinoffs.listelement.badge": "Spin-offs (incl. associations)",
+  "spinoffs.listelement.badge": "Ausgründungen (inkl. Vereinsgründungen)",
+
+  // "steps.listelement.badge": "Next steps and cooperation",
+  "steps.listelement.badge": "Arbeiten und Kooperation nach Projektende",
 
   // "submission.edit.title": "Edit Submission",
   "submission.edit.title": "Einreichung bearbeiten",
@@ -4044,6 +4155,13 @@
   // "submission.workflow.tasks.pool.show-detail": "Show detail",
   "submission.workflow.tasks.pool.show-detail": "Details anzeigen",
 
+  // "targetgroups.listelement.badge": "Target groups",
+  "targetgroups.listelement.badge": "Zielgruppen",
+
+  // "tasks.listelement.badge": "Tasks",
+  // TODO New key - Add a translation
+  "tasks.listelement.badge": "Tasks",
+
   // "title": "DSpace Cris",
   "title": "DSpace",
 
@@ -4070,6 +4188,9 @@
   // "treeview.search.no-result": "There were no items to show",
   // TODO New key - Add a translation
   "treeview.search.no-result": "There were no items to show",
+
+  // "unexpected_results.listelement.badge":  "Unexpected results and problems",
+  "unexpected_results.listelement.badge":  "Unerwartete Ergebnisse und Probleme",
 
   // "uploader.browse": "browse",
   "uploader.browse": "stöbern",
@@ -4100,7 +4221,7 @@
 
   // "working-plan.breadcrumbs" : "Working plan",
   // TODO New key - Add a translation
-  "working-plan.breadcrumbs" : "Arbeitsplan",
+  "working-plan.breadcrumbs" : "Working plan",
 
   // "working-plan.chart.button.add": "add",
   // TODO New key - Add a translation
