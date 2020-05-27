@@ -13,11 +13,11 @@
     <div class="col-md-6 col-xl mb-1">
       <div class="flex-fill card">
         <div class="py-4 card-body">
-          <p>
-            <a class="h3 mb-2 text-decoration-none" [routerLink]="" (click)="navigateToImpactPathway()" role="button">
-              <span>Impact pathway</span>
-            </a>
-          </p>
+          <h4 class="word-wrap">Impact pathway</h4>
+          <ul class="list-unstyled">
+            <li><a class="h5" [routerLink]="" (click)="navigateToImpactPathway('plan')">Plan</a></li>
+            <li><a class="h5" [routerLink]="" (click)="navigateToImpactPathway('result')">Result</a></li>
+          </ul>
         </div>
       </div>
     </div>
