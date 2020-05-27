@@ -37,13 +37,13 @@ export class ProjectOverviewPageComponent {
   /**
    * Get the uuid of the first impact pathway item available
    */
-  getFirstImpactPathway(): Observable<string> {
+  getFirstImpactPathway(query: string): Observable<string> {
     const filters: SearchFilter[] = [new SearchFilter('f.entityType', ['impactpathway'])]
     const sort = new SortOptions('dc.title', SortDirection.ASC);
     const pagination = new PaginationComponentOptions()
     const searchOptions = new PaginatedSearchOptions({
       configuration: 'default',
-      query: '',
+      query: query,
       filters: filters,
       pagination: pagination,
       sort: sort
@@ -78,8 +78,14 @@ export class ProjectOverviewPageComponent {
     );
   }
 
-  public navigateToImpactPathway(): void {
-    this.getFirstImpactPathway()
+  public navigateToImpactPathway(type: string): void {
+    let query = ''
+    if (type === 'plan') {
+      query = 'Wühlkegel (Plan)'
+    } else {
+      query = 'Wühlkegel (Result)'
+    }
+    this.getFirstImpactPathway(query)
       .subscribe((UUID) => {
         console.log(UUID);
         const url = `/impactpathway/${UUID}/edit`;
