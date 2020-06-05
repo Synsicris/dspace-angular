@@ -33,7 +33,7 @@ export function getBitstreamModulePath() {
   return `/${BITSTREAM_MODULE_PATH}`;
 }
 
-const ADMIN_MODULE_PATH = 'admin';
+export const ADMIN_MODULE_PATH = 'admin';
 
 export function getAdminModulePath() {
   return `/${ADMIN_MODULE_PATH}`;
@@ -43,6 +43,12 @@ const PROFILE_MODULE_PATH = 'profile';
 
 export function getProfileModulePath() {
   return `/${PROFILE_MODULE_PATH}`;
+}
+
+const WORKFLOW_ITEM_MODULE_PATH = 'workflowitems';
+
+export function getWorkflowItemModulePath() {
+  return `/${WORKFLOW_ITEM_MODULE_PATH}`;
 }
 
 export function getDSOPath(dso: DSpaceObject): string {
@@ -59,9 +65,10 @@ export function getDSOPath(dso: DSpaceObject): string {
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: '', redirectTo: '/coordinator-overview', pathMatch: 'full' },
-      // { path: 'home', loadChildren: './+home-page/home-page.module#HomePageModule', data: { showBreadcrumbs: false } },
-      { path: 'home', redirectTo: '/coordinator-overview', pathMatch: 'full' },
+        { path: '', redirectTo: '/coordinator-overview', pathMatch: 'full' },
+      { path: 'reload/:rnd', redirectTo: '/home', pathMatch: 'full' },
+      //{ path: 'home', loadChildren: './+home-page/home-page.module#HomePageModule', data: { showBreadcrumbs: false } },
+        { path: 'home', redirectTo: '/coordinator-overview', pathMatch: 'full' },
       { path: 'community-list', loadChildren: './community-list-page/community-list-page.module#CommunityListPageModule' },
       { path: 'id', loadChildren: './+lookup-by-id/lookup-by-id.module#LookupIdModule' },
       { path: 'handle', loadChildren: './+lookup-by-id/lookup-by-id.module#LookupIdModule' },
@@ -74,7 +81,7 @@ export function getDSOPath(dso: DSpaceObject): string {
         loadChildren: './+my-dspace-page/my-dspace-page.module#MyDSpacePageModule',
         canActivate: [AuthenticatedGuard]
       },
-      { path: 'search', loadChildren: './+search-page/search-page.module#SearchPageModule' },
+      { path: 'search', loadChildren: './+search-page/search-page-routing.module#SearchPageRoutingModule' },
       { path: 'browse', loadChildren: './+browse-by/browse-by.module#BrowseByModule'},
       { path: ADMIN_MODULE_PATH, loadChildren: './+admin/admin.module#AdminModule', canActivate: [AuthenticatedGuard] },
       { path: 'login', loadChildren: './+login-page/login-page.module#LoginPageModule' },
@@ -85,7 +92,7 @@ export function getDSOPath(dso: DSpaceObject): string {
         loadChildren: './+workspaceitems-edit-page/workspaceitems-edit-page.module#WorkspaceitemsEditPageModule'
       },
       {
-        path: 'workflowitems',
+        path: WORKFLOW_ITEM_MODULE_PATH,
         loadChildren: './+workflowitems-edit-page/workflowitems-edit-page.module#WorkflowItemsEditPageModule'
       },
       { path: 'impactpathway', loadChildren: './+impact-pathway-page/impact-pathway-page.module#ImpactPathwayPageModule' },

@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngrx/store';
 import { of as observableOf } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -7,23 +9,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { RemoteDataBuildService } from '../../../../core/cache/builders/remote-data-build.service';
+import { ObjectCacheService } from '../../../../core/cache/object-cache.service';
 import { RestResponse } from '../../../../core/cache/response.models';
+import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
 import { PaginatedList } from '../../../../core/data/paginated-list';
 import { RemoteData } from '../../../../core/data/remote-data';
 import { FindListOptions } from '../../../../core/data/request.models';
 import { EPersonDataService } from '../../../../core/eperson/eperson-data.service';
 import { EPerson } from '../../../../core/eperson/models/eperson.model';
+import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
 import { PageInfo } from '../../../../core/shared/page-info.model';
+import { UUIDService } from '../../../../core/shared/uuid.service';
 import { FormBuilderService } from '../../../../shared/form/builder/form-builder.service';
-import { getMockFormBuilderService } from '../../../../shared/mocks/mock-form-builder-service';
-import { getMockTranslateService } from '../../../../shared/mocks/mock-translate.service';
 import { NotificationsService } from '../../../../shared/notifications/notifications.service';
-import { EPersonMock, EPersonMock2 } from '../../../../shared/testing/eperson-mock';
-import { MockTranslateLoader } from '../../../../shared/testing/mock-translate-loader';
-import { NotificationsServiceStub } from '../../../../shared/testing/notifications-service-stub';
-import { createSuccessfulRemoteDataObject$ } from '../../../../shared/testing/utils';
 import { EPeopleRegistryComponent } from '../epeople-registry.component';
 import { EPersonFormComponent } from './eperson-form.component';
+import { EPersonMock, EPersonMock2 } from '../../../../shared/testing/eperson.mock';
+import { createSuccessfulRemoteDataObject$ } from '../../../../shared/remote-data.utils';
+import { getMockFormBuilderService } from '../../../../shared/mocks/form-builder-service.mock';
+import { getMockTranslateService } from '../../../../shared/mocks/translate.service.mock';
+import { NotificationsServiceStub } from '../../../../shared/testing/notifications-service.stub';
+import { TranslateLoaderMock } from '../../../../shared/mocks/translate-loader.mock';
+import { AuthService } from '../../../../core/auth/auth.service';
+import { AuthServiceStub } from '../../../../shared/testing/auth-service.stub';
 
 describe('EPersonFormComponent', () => {
   let component: EPersonFormComponent;
@@ -31,10 +40,12 @@ describe('EPersonFormComponent', () => {
   let translateService: TranslateService;
   let builderService: FormBuilderService;
 
-  const mockEPeople = [EPersonMock, EPersonMock2];
+  let mockEPeople;
   let ePersonDataServiceStub: any;
+  let authService: AuthServiceStub;
 
   beforeEach(async(() => {
+    mockEPeople = [EPersonMock, EPersonMock2];
     ePersonDataServiceStub = {
       activeEPerson: null,
       allEpeople: mockEPeople,
@@ -52,6 +63,9 @@ describe('EPersonFormComponent', () => {
           return createSuccessfulRemoteDataObject$(new PaginatedList(new PageInfo(), [result]));
         }
         if (scope === 'metadata') {
+          if (query === '') {
+            return createSuccessfulRemoteDataObject$(new PaginatedList(null, this.allEpeople));
+          }
           const result = this.allEpeople.find((ePerson: EPerson) => {
             return (ePerson.name.includes(query) || ePerson.email.includes(query))
           });
@@ -93,12 +107,13 @@ describe('EPersonFormComponent', () => {
     };
     builderService = getMockFormBuilderService();
     translateService = getMockTranslateService();
+    authService = new AuthServiceStub();
     TestBed.configureTestingModule({
       imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useClass: MockTranslateLoader
+            useClass: TranslateLoaderMock
           }
         }),
       ],
@@ -107,6 +122,14 @@ describe('EPersonFormComponent', () => {
         { provide: EPersonDataService, useValue: ePersonDataServiceStub },
         { provide: NotificationsService, useValue: new NotificationsServiceStub() },
         { provide: FormBuilderService, useValue: builderService },
+        { provide: DSOChangeAnalyzer, useValue: {} },
+        { provide: HttpClient, useValue: {} },
+        { provide: ObjectCacheService, useValue: {} },
+        { provide: UUIDService, useValue: {} },
+        { provide: Store, useValue: {} },
+        { provide: RemoteDataBuildService, useValue: {} },
+        { provide: HALEndpointService, useValue: {} },
+        { provide: AuthService, useValue: authService },
         EPeopleRegistryComponent
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -116,7 +139,6 @@ describe('EPersonFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EPersonFormComponent);
     component = fixture.componentInstance;
-    component.ngOnInit();
     fixture.detectChanges();
   });
 
@@ -125,30 +147,37 @@ describe('EPersonFormComponent', () => {
   }));
 
   describe('when submitting the form', () => {
-    const firstName = 'testName';
-    const lastName = 'testLastName';
-    const email = 'testEmail@test.com';
-    const canLogIn = false;
-    const requireCertificate = false;
+    let firstName;
+    let lastName;
+    let email;
+    let canLogIn;
+    let requireCertificate;
 
-    const expected = Object.assign(new EPerson(), {
-      metadata: {
-        'eperson.firstname': [
-          {
-            value: firstName
-          }
-        ],
-        'eperson.lastname': [
-          {
-            value: lastName
-          },
-        ],
-      },
-      email: email,
-      canLogIn: canLogIn,
-      requireCertificate: requireCertificate,
-    });
+    let expected;
     beforeEach(() => {
+      firstName = 'testName';
+      lastName = 'testLastName';
+      email = 'testEmail@test.com';
+      canLogIn = false;
+      requireCertificate = false;
+
+      expected = Object.assign(new EPerson(), {
+        metadata: {
+          'eperson.firstname': [
+            {
+              value: firstName
+            }
+          ],
+          'eperson.lastname': [
+            {
+              value: lastName
+            },
+          ],
+        },
+        email: email,
+        canLogIn: canLogIn,
+        requireCertificate: requireCertificate,
+      });
       spyOn(component.submitForm, 'emit');
       component.firstName.value = firstName;
       component.lastName.value = lastName;
@@ -171,25 +200,26 @@ describe('EPersonFormComponent', () => {
     });
 
     describe('with an active eperson', () => {
-      const expectedWithId = Object.assign(new EPerson(), {
-        metadata: {
-          'eperson.firstname': [
-            {
-              value: firstName
-            }
-          ],
-          'eperson.lastname': [
-            {
-              value: lastName
-            },
-          ],
-        },
-        email: email,
-        canLogIn: canLogIn,
-        requireCertificate: requireCertificate,
-      });
+      let expectedWithId;
 
       beforeEach(() => {
+        expectedWithId = Object.assign(new EPerson(), {
+          metadata: {
+            'eperson.firstname': [
+              {
+                value: firstName
+              }
+            ],
+            'eperson.lastname': [
+              {
+                value: lastName
+              },
+            ],
+          },
+          email: email,
+          canLogIn: canLogIn,
+          requireCertificate: requireCertificate,
+        });
         spyOn(ePersonDataServiceStub, 'getActiveEPerson').and.returnValue(observableOf(expectedWithId));
         component.onSubmit();
         fixture.detectChanges();
@@ -200,6 +230,42 @@ describe('EPersonFormComponent', () => {
           expect(component.submitForm.emit).toHaveBeenCalledWith(expectedWithId);
         });
       }));
+    });
+  });
+
+  describe('impersonate', () => {
+    let ePersonId;
+
+    beforeEach(() => {
+      spyOn(authService, 'impersonate').and.callThrough();
+      ePersonId = 'testEPersonId';
+      component.epersonInitial = Object.assign(new EPerson(), {
+        id: ePersonId
+      });
+      component.impersonate();
+    });
+
+    it('should call authService.impersonate', () => {
+      expect(authService.impersonate).toHaveBeenCalledWith(ePersonId);
+    });
+
+    it('should set isImpersonated to true', () => {
+      expect(component.isImpersonated).toBe(true);
+    });
+  });
+
+  describe('stopImpersonating', () => {
+    beforeEach(() => {
+      spyOn(authService, 'stopImpersonatingAndRefresh').and.callThrough();
+      component.stopImpersonating();
+    });
+
+    it('should call authService.stopImpersonatingAndRefresh', () => {
+      expect(authService.stopImpersonatingAndRefresh).toHaveBeenCalled();
+    });
+
+    it('should set isImpersonated to false', () => {
+      expect(component.isImpersonated).toBe(false);
     });
   });
 

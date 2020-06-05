@@ -1,15 +1,14 @@
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 
-import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, Subscription} from 'rxjs';
+import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, find, flatMap, map, reduce, take, tap } from 'rxjs/operators';
-import { followLink } from '../../../shared/utils/follow-link-config.model';
 
 import { SectionModelComponent } from '../models/section.model';
 import { hasValue, isNotEmpty, isNotUndefined, isUndefined } from '../../../shared/empty.util';
 import { SectionUploadService } from './section-upload.service';
 import { CollectionDataService } from '../../../core/data/collection-data.service';
 import { GroupDataService } from '../../../core/eperson/group-data.service';
-import { ResourcePolicyService } from '../../../core/data/resource-policy.service';
+import { ResourcePolicyService } from '../../../core/resource-policy/resource-policy.service';
 import { SubmissionUploadsConfigService } from '../../../core/config/submission-uploads-config.service';
 import { SubmissionUploadsModel } from '../../../core/config/models/config-submission-uploads.model';
 import { SubmissionFormsModel } from '../../../core/config/models/config-submission-forms.model';
@@ -23,7 +22,6 @@ import { Group } from '../../../core/eperson/models/group.model';
 import { SectionsService } from '../sections.service';
 import { SubmissionService } from '../../submission.service';
 import { Collection } from '../../../core/shared/collection.model';
-import { ResourcePolicy } from '../../../core/shared/resource-policy.model';
 import { AccessConditionOption } from '../../../core/config/models/config-access-condition-option.model';
 import { PaginatedList } from '../../../core/data/paginated-list';
 
@@ -103,7 +101,7 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
   /**
    * List of Groups available for every access condition
    */
-  protected availableGroups: Map<string, Group[]>; // Groups for any policy
+  public availableGroups: Map<string, Group[]>; // Groups for any policy
 
   /**
    * Is the upload required
@@ -205,7 +203,7 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
                 mapGroups$.push(
                   this.groupService.findById(accessCondition.selectGroupUUID).pipe(
                     find((rd: RemoteData<Group>) => !rd.isResponsePending && rd.hasSucceeded),
-                    flatMap((group: RemoteData<Group>) => group.payload.groups),
+                    flatMap((group: RemoteData<Group>) => group.payload.subgroups),
                     find((rd: RemoteData<PaginatedList<Group>>) => !rd.isResponsePending && rd.hasSucceeded),
                     map((rd: RemoteData<PaginatedList<Group>>) => ({
                       accessCondition: accessCondition.name,

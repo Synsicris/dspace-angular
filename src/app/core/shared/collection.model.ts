@@ -10,11 +10,13 @@ import { DSpaceObject } from './dspace-object.model';
 import { HALLink } from './hal-link.model';
 import { License } from './license.model';
 import { LICENSE } from './license.resource-type';
-import { ResourcePolicy } from './resource-policy.model';
-import { RESOURCE_POLICY } from './resource-policy.resource-type';
+import { ResourcePolicy } from '../resource-policy/models/resource-policy.model';
+import { RESOURCE_POLICY } from '../resource-policy/models/resource-policy.resource-type';
 import { COMMUNITY } from './community.resource-type';
 import { Community } from './community.model';
 import { ChildHALResource } from './child-hal-resource.model';
+import { GROUP } from '../eperson/models/group.resource-type';
+import { Group } from '../eperson/models/group.model';
 
 @typedObject
 @inheritSerialization(DSpaceObject)
@@ -69,6 +71,12 @@ export class Collection extends DSpaceObject implements ChildHALResource {
    */
   @link(COMMUNITY, false)
   parentCommunity?: Observable<RemoteData<Community>>;
+
+  /**
+   * The administrators group of this community.
+   */
+  @link(GROUP)
+  adminGroup?: Observable<RemoteData<Group>>;
 
   /**
    * The introductory text of this Collection
