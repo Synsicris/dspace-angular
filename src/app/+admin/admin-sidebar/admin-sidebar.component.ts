@@ -361,7 +361,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
         model: {
           type: MenuItemType.LINK,
           text: 'menu.section.access_control_groups',
-          link: ''
+          link: '/admin/access-control/groups'
         } as LinkMenuItemModel,
       },
       {
@@ -463,6 +463,19 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
         } as LinkMenuItemModel,
         icon: 'cogs',
         index: 9
+      },
+      /* Workflow */
+      {
+        id: 'workflow',
+        active: false,
+        visible: true,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.workflow',
+          link: '/admin/workflow'
+        } as LinkMenuItemModel,
+        icon: 'user-check',
+        index: 10
       },
     ];
     menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, menuSection));

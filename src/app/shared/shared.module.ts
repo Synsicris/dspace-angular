@@ -11,6 +11,7 @@ import { NgbDatepickerModule, NgbModule, NgbTimepickerModule, NgbTypeaheadModule
 import { MissingTranslationHandler, TranslateModule } from '@ngx-translate/core';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ComcolRoleComponent } from './comcol-forms/edit-comcol-page/comcol-role/comcol-role.component';
 import { PublicationListElementComponent } from './object-list/item-list-element/item-types/publication/publication-list-element.component';
 
 import { FileUploadModule } from 'ng2-file-upload';
@@ -73,7 +74,7 @@ import { DsDatePickerInlineComponent } from './form/builder/ds-dynamic-form-ui/m
 import { NumberPickerComponent } from './number-picker/number-picker.component';
 import { DsDatePickerComponent } from './form/builder/ds-dynamic-form-ui/models/date-picker/date-picker.component';
 import { DsDynamicLookupComponent } from './form/builder/ds-dynamic-form-ui/models/lookup/dynamic-lookup.component';
-import { MockAdminGuard } from './mocks/mock-admin-guard.service';
+import { MockAdminGuard } from './mocks/admin-guard.service.mock';
 import { AlertComponent } from './alert/alert.component';
 import { SearchResultDetailElementComponent } from './object-detail/my-dspace-result-detail-element/search-result-detail-element.component';
 import { ClaimedTaskActionsComponent } from './mydspace-actions/claimed-task/claimed-task-actions.component';
@@ -194,9 +195,19 @@ import { CustomSwitchComponent } from './form/builder/ds-dynamic-form-ui/models/
 import { BundleListElementComponent } from './object-list/bundle-list-element/bundle-list-element.component';
 import { MissingTranslationHelper } from './translate/missing-translation.helper';
 import { ItemVersionsNoticeComponent } from './item/item-versions/notice/item-versions-notice.component';
+import { ModifyItemOverviewComponent } from '../+item-page/edit-item-page/modify-item-overview/modify-item-overview.component';
 import { ClaimedTaskActionsLoaderComponent } from './mydspace-actions/claimed-task/switcher/claimed-task-actions-loader.component';
 import { ClaimedTaskActionsDirective } from './mydspace-actions/claimed-task/switcher/claimed-task-actions.directive';
 import { ClaimedTaskActionsEditMetadataComponent } from './mydspace-actions/claimed-task/edit-metadata/claimed-task-actions-edit-metadata.component';
+import { ImpersonateNavbarComponent } from './impersonate-navbar/impersonate-navbar.component';
+import { ResourcePoliciesComponent } from './resource-policies/resource-policies.component';
+import { NgForTrackByIdDirective } from './ng-for-track-by-id.directive';
+import { ResourcePolicyFormComponent } from './resource-policies/form/resource-policy-form.component';
+import { EpersonGroupListComponent } from './resource-policies/form/eperson-group-list/eperson-group-list.component';
+import { ResourcePolicyTargetResolver } from './resource-policies/resolvers/resource-policy-target.resolver';
+import { ResourcePolicyResolver } from './resource-policies/resolvers/resource-policy.resolver';
+import { EpersonSearchBoxComponent } from './resource-policies/form/eperson-group-list/eperson-search-box/eperson-search-box.component';
+import { GroupSearchBoxComponent } from './resource-policies/form/eperson-group-list/group-search-box/group-search-box.component';
 import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { ContextMenuComponent } from '../+item-page/context-menu/context-menu.component';
 import { ContextMenuEditImpactPathwayComponent } from '../+item-page/context-menu/edit-impact-pathway/edit-impact-pathway.component';
@@ -274,6 +285,7 @@ const COMPONENTS = [
   EditComColPageComponent,
   DeleteComColPageComponent,
   ComcolPageBrowseByComponent,
+  ComcolRoleComponent,
   DsDynamicFormComponent,
   DsDynamicFormControlContainerComponent,
   DsDynamicListComponent,
@@ -392,6 +404,13 @@ const COMPONENTS = [
   ItemVersionsComponent,
   PublicationSearchResultListElementComponent,
   ItemVersionsNoticeComponent,
+  ModifyItemOverviewComponent,
+  ImpersonateNavbarComponent,
+  ResourcePoliciesComponent,
+  ResourcePolicyFormComponent,
+  EpersonGroupListComponent,
+  EpersonSearchBoxComponent,
+  GroupSearchBoxComponent,
   CreateImpactPathwayComponent,
   ContextMenuComponent,
   ContextMenuEditImpactPathwayComponent,
@@ -496,6 +515,8 @@ const PROVIDERS = [
     provide: DYNAMIC_FORM_CONTROL_MAP_FN,
     useValue: dsDynamicFormControlMapFn
   },
+  ResourcePolicyResolver,
+  ResourcePolicyTargetResolver,
   SearchSimpleItemService
 ];
 
@@ -511,7 +532,7 @@ const DIRECTIVES = [
   MetadataRepresentationDirective,
   ListableObjectDirective,
   ClaimedTaskActionsDirective,
-  ListableObjectDirective,
+  NgForTrackByIdDirective,
   TaskColorDirective
 ];
 

@@ -1,22 +1,13 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { combineLatest as observableCombineLatest, Observable, throwError as observableThrowError } from 'rxjs';
-import {
-  catchError,
-  delay,
-  distinctUntilChanged,
-  filter,
-  flatMap,
-  map,
-  startWith,
-  tap
-} from 'rxjs/operators';
+import { catchError, delay, distinctUntilChanged, filter, flatMap, map, startWith, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { difference, findIndex, union } from 'lodash';
 
 import { isEmpty, isNotEmpty } from '../../shared/empty.util';
 import { ItemDataService } from '../data/item-data.service';
-import { GLOBAL_CONFIG, GlobalConfig } from '../../../config';
+import { environment } from '../../../environments/environment';
 import { SubmissionJsonPatchOperationsService } from '../submission/submission-json-patch-operations.service';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
@@ -30,7 +21,8 @@ import {
   AddImpactPathwayTaskLinkAction,
   CompleteEditingImpactPathwayTaskLinksAction,
   EditImpactPathwayTaskLinksAction,
-  RemoveImpactPathwayTaskLinkAction, SaveImpactPathwayTaskLinksAction
+  RemoveImpactPathwayTaskLinkAction,
+  SaveImpactPathwayTaskLinksAction
 } from './impact-pathway.actions';
 import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
 import { Item } from '../shared/item.model';
@@ -43,7 +35,6 @@ import { ImpactPathwayLinksMap } from './models/impact-pathway-task-links-map';
 export class ImpactPathwayLinksService {
 
   constructor(
-    @Inject(GLOBAL_CONFIG) protected config: GlobalConfig,
     private authorityService: AuthorityService,
     private formConfigService: SubmissionFormsConfigService,
     private itemService: ItemDataService,
@@ -255,9 +246,9 @@ export class ImpactPathwayLinksService {
 
   private buildPatchOperations(targetItem: Item, toSave: ImpactPathwayLink[], toDelete: ImpactPathwayLink[]): void {
     const taskOutcomeLinkList: MetadataValue[] = targetItem
-      .findMetadataSortedByPlace(this.config.impactPathway.impactpathwayOutcomeLinkMetadata);
+      .findMetadataSortedByPlace(environment.impactPathway.impactpathwayOutcomeLinkMetadata);
     const taskBidirectionalLinkList: MetadataValue[] = targetItem
-      .findMetadataSortedByPlace(this.config.impactPathway.impactpathwayBidirectionalLinkMetadata);
+      .findMetadataSortedByPlace(environment.impactPathway.impactpathwayBidirectionalLinkMetadata);
 
     this.buildAddPatchOperations(toSave, taskOutcomeLinkList, taskBidirectionalLinkList);
     this.buildRemovePatchOperations(toDelete, taskOutcomeLinkList, taskBidirectionalLinkList);
@@ -275,8 +266,8 @@ export class ImpactPathwayLinksService {
 
     toSave.forEach((relation: ImpactPathwayLink) => {
       const relationMetadata: string = (relation.twoWay) ?
-        this.config.impactPathway.impactpathwayBidirectionalLinkMetadata :
-        this.config.impactPathway.impactpathwayOutcomeLinkMetadata;
+        environment.impactPathway.impactpathwayBidirectionalLinkMetadata :
+        environment.impactPathway.impactpathwayOutcomeLinkMetadata;
       const relationPlace: number = (relation.twoWay) ? placeWhereToAddBidirectionalLink++ : placeWhereToAddOutcomeLink++;
       const isFirstRelation: boolean = (relation.twoWay) ? isEmpty(taskBidirectionalLinkList) : isEmpty(taskOutcomeLinkList);
       const relationToAdd = {
@@ -306,8 +297,8 @@ export class ImpactPathwayLinksService {
 
     toDelete.forEach((relation: ImpactPathwayLink) => {
       const relationMetadata: string = (relation.twoWay) ?
-        this.config.impactPathway.impactpathwayBidirectionalLinkMetadata :
-        this.config.impactPathway.impactpathwayOutcomeLinkMetadata;
+        environment.impactPathway.impactpathwayBidirectionalLinkMetadata :
+        environment.impactPathway.impactpathwayOutcomeLinkMetadata;
       let relationPlace: number;
       if (relation.twoWay) {
         relationPlace = findIndex(currentBidirectionalLinkList, { authority: relation.toTaskId })

@@ -15,7 +15,7 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { dataService } from '../cache/builders/build-decorators';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
-import { SearchParam } from '../cache/models/search-param.model';
+import { RequestParam } from '../cache/models/request-param.model';
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { RestResponse } from '../cache/response.models';
 import { DataService } from '../data/data.service';
@@ -97,7 +97,7 @@ export class EPersonDataService extends DataService<EPerson> {
    * @param linksToFollow
    */
   private getEpeopleByEmail(query: string, options?: FindListOptions, ...linksToFollow: Array<FollowLinkConfig<EPerson>>): Observable<RemoteData<PaginatedList<EPerson>>> {
-    const searchParams = [new SearchParam('email', query)];
+    const searchParams = [new RequestParam('email', query)];
     return this.getEPeopleBy(searchParams, this.searchByEmailPath, options, ...linksToFollow);
   }
 
@@ -108,7 +108,7 @@ export class EPersonDataService extends DataService<EPerson> {
    * @param linksToFollow
    */
   private getEpeopleByMetadata(query: string, options?: FindListOptions, ...linksToFollow: Array<FollowLinkConfig<EPerson>>): Observable<RemoteData<PaginatedList<EPerson>>> {
-    const searchParams = [new SearchParam('query', query)];
+    const searchParams = [new RequestParam('query', query)];
     return this.getEPeopleBy(searchParams, this.searchByMetadataPath, options, ...linksToFollow);
   }
 
@@ -119,7 +119,7 @@ export class EPersonDataService extends DataService<EPerson> {
    * @param options
    * @param linksToFollow
    */
-  private getEPeopleBy(searchParams: SearchParam[], searchMethod: string, options?: FindListOptions, ...linksToFollow: Array<FollowLinkConfig<EPerson>>): Observable<RemoteData<PaginatedList<EPerson>>> {
+  private getEPeopleBy(searchParams: RequestParam[], searchMethod: string, options?: FindListOptions, ...linksToFollow: Array<FollowLinkConfig<EPerson>>): Observable<RemoteData<PaginatedList<EPerson>>> {
     let findListOptions = new FindListOptions();
     if (options) {
       findListOptions = Object.assign(new FindListOptions(), options);
@@ -181,12 +181,19 @@ export class EPersonDataService extends DataService<EPerson> {
   }
 
   /**
-   * Method that clears a cached EPerson request and returns its REST url
+   * Method that clears a cached EPerson request
    */
   public clearEPersonRequests(): void {
     this.getBrowseEndpoint().pipe(take(1)).subscribe((link: string) => {
       this.requestService.removeByHrefSubstring(link);
     });
+  }
+
+  /**
+   * Method that clears a link's requests in cache
+   */
+  public clearLinkRequests(href: string): void {
+    this.requestService.removeByHrefSubstring(href);
   }
 
   /**
@@ -217,6 +224,29 @@ export class EPersonDataService extends DataService<EPerson> {
    */
   public deleteEPerson(ePerson: EPerson): Observable<boolean> {
     return this.delete(ePerson.id);
+  }
+
+  /**
+   * Change which ePerson is being edited and return the link for EPeople edit page
+   * @param ePerson New EPerson to edit
+   */
+  public startEditingNewEPerson(ePerson: EPerson): string {
+    this.getActiveEPerson().pipe(take(1)).subscribe((activeEPerson: EPerson) => {
+      if (ePerson === activeEPerson) {
+        this.cancelEditEPerson();
+      } else {
+        this.editEPerson(ePerson);
+      }
+    });
+    return '/admin/access-control/epeople';
+  }
+
+  /**
+   * Get EPeople admin page
+   * @param ePerson New EPerson to edit
+   */
+  public getEPeoplePageRouterLink(): string {
+    return '/admin/access-control/epeople';
   }
 
 }

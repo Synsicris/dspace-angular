@@ -19,7 +19,7 @@ export interface GlobalConfig extends Config {
   rest: ServerConfig;
   production: boolean;
   cache: CacheConfig;
-  auth: AuthConfig;
+  auth?: AuthConfig;
   form: FormConfig;
   notifications: INotificationBoardOptions;
   submission: SubmissionConfig;
@@ -32,7 +32,7 @@ export interface GlobalConfig extends Config {
   browseBy: BrowseByConfig;
   item: ItemPageConfig;
   collection: CollectionPageConfig;
-  themes: Theme[];
+  theme: Theme;
   impactPathway: ImpactPathwayConfig;
   workingPlan: WorkingPlanConfig;
 }

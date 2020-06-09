@@ -7,17 +7,22 @@ import {
   DynamicInputModel
 } from '@ng-dynamic-forms/core';
 import { TranslateService } from '@ngx-translate/core';
-import { combineLatest } from 'rxjs/internal/observable/combineLatest';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { Subscription, combineLatest, of } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { take } from 'rxjs/operators';
 import { RestResponse } from '../../../../core/cache/response.models';
 import { PaginatedList } from '../../../../core/data/paginated-list';
+import { RemoteData } from '../../../../core/data/remote-data';
 import { EPersonDataService } from '../../../../core/eperson/eperson-data.service';
+import { GroupDataService } from '../../../../core/eperson/group-data.service';
 import { EPerson } from '../../../../core/eperson/models/eperson.model';
+import { Group } from '../../../../core/eperson/models/group.model';
 import { getRemoteDataPayload, getSucceededRemoteData } from '../../../../core/shared/operators';
 import { hasValue } from '../../../../shared/empty.util';
 import { FormBuilderService } from '../../../../shared/form/builder/form-builder.service';
 import { NotificationsService } from '../../../../shared/notifications/notifications.service';
+import { PaginationComponentOptions } from '../../../../shared/pagination/pagination-component-options.model';
+import { AuthService } from '../../../../core/auth/auth.service';
 
 @Component({
   selector: 'ds-eperson-form',
@@ -102,21 +107,63 @@ export class EPersonFormComponent implements OnInit, OnDestroy {
   @Output() cancelForm: EventEmitter<any> = new EventEmitter();
 
   /**
+   * Observable whether or not the admin is allowed to reset the EPerson's password
+   * TODO: Initialize the observable once the REST API supports this (currently hardcoded to return false)
+   */
+  canReset$: Observable<boolean> = of(false);
+
+  /**
+   * Observable whether or not the admin is allowed to delete the EPerson
+   * TODO: Initialize the observable once the REST API supports this (currently hardcoded to return false)
+   */
+  canDelete$: Observable<boolean> = of(false);
+
+  /**
+   * Observable whether or not the admin is allowed to impersonate the EPerson
+   * TODO: Initialize the observable once the REST API supports this (currently hardcoded to return true)
+   */
+  canImpersonate$: Observable<boolean> = of(true);
+
+  /**
    * List of subscriptions
    */
   subs: Subscription[] = [];
+
+  /**
+   * A list of all the groups this EPerson is a member of
+   */
+  groups: Observable<RemoteData<PaginatedList<Group>>>;
+
+  /**
+   * Pagination config used to display the list of groups
+   */
+  config: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
+    id: 'groups-ePersonMemberOf-list-pagination',
+    pageSize: 5,
+    currentPage: 1
+  });
 
   /**
    * Try to retrieve initial active eperson, to fill in checkboxes at component creation
    */
   epersonInitial: EPerson;
 
+  /**
+   * Whether or not this EPerson is currently being impersonated
+   */
+  isImpersonated = false;
+
   constructor(public epersonService: EPersonDataService,
+              public groupsDataService: GroupDataService,
               private formBuilderService: FormBuilderService,
               private translateService: TranslateService,
-              private notificationsService: NotificationsService,) {
+              private notificationsService: NotificationsService,
+              private authService: AuthService) {
     this.subs.push(this.epersonService.getActiveEPerson().subscribe((eperson: EPerson) => {
       this.epersonInitial = eperson;
+      if (hasValue(eperson)) {
+        this.isImpersonated = this.authService.isImpersonatingUser(eperson.id);
+      }
     }));
   }
 
@@ -181,6 +228,12 @@ export class EPersonFormComponent implements OnInit, OnDestroy {
       ];
       this.formGroup = this.formBuilderService.createFormGroup(this.formModel);
       this.subs.push(this.epersonService.getActiveEPerson().subscribe((eperson: EPerson) => {
+        if (eperson != null) {
+          this.groups = this.groupsDataService.findAllByHref(eperson._links.groups.href, {
+            currentPage: 1,
+            elementsPerPage: this.config.pageSize
+          });
+        }
         this.formGroup.patchValue({
           firstName: eperson != null ? eperson.firstMetadataValue('eperson.firstname') : '',
           lastName: eperson != null ? eperson.firstMetadataValue('eperson.lastname') : '',
@@ -209,7 +262,6 @@ export class EPersonFormComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.epersonService.getActiveEPerson().pipe(take(1)).subscribe(
       (ePerson: EPerson) => {
-        console.log('onsubmit ep', ePerson)
         const values = {
           metadata: {
             'eperson.firstname': [
@@ -241,7 +293,6 @@ export class EPersonFormComponent implements OnInit, OnDestroy {
    * @param values
    */
   createNewEPerson(values) {
-    console.log('createNewEPerson(values)', values)
     const ePersonToCreate = Object.assign(new EPerson(), values);
 
     const response = this.epersonService.tryToCreate(ePersonToCreate);
@@ -322,16 +373,39 @@ export class EPersonFormComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Reset all input-fields to be empty
+   * Event triggered when the user changes page
+   * @param event
    */
-  clearFields() {
-    this.formGroup.patchValue({
-      firstName: '',
-      lastName: '',
-      email: '',
-      canLogin: true,
-      requireCertificate: false
+  onPageChange(event) {
+    this.updateGroups({
+      currentPage: event,
+      elementsPerPage: this.config.pageSize
     });
+  }
+
+  /**
+   * Update the list of groups by fetching it from the rest api or cache
+   */
+  private updateGroups(options) {
+    this.subs.push(this.epersonService.getActiveEPerson().subscribe((eperson: EPerson) => {
+      this.groups = this.groupsDataService.findAllByHref(eperson._links.groups.href, options);
+    }));
+  }
+
+  /**
+   * Start impersonating the EPerson
+   */
+  impersonate() {
+    this.authService.impersonate(this.epersonInitial.id);
+    this.isImpersonated = true;
+  }
+
+  /**
+   * Stop impersonating the EPerson
+   */
+  stopImpersonating() {
+    this.authService.stopImpersonatingAndRefresh();
+    this.isImpersonated = false;
   }
 
   /**
