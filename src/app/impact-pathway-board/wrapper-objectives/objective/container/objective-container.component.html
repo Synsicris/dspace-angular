@@ -23,8 +23,7 @@
                               [isObjectivePage]="true"
                               (cdkDragDropped)="drop($event)"
                               (cdkDragEntered)="dragEntered($event)"
-                              (cdkDragExited)="dragExited($event)"
-                              (selected)="onTaskSelected($event)">
+                              (cdkDragExited)="dragExited($event)">
       <div *cdkDragPlaceholder
            class="task-placeholder d-flex justify-content-center align-items-center mr-sm-1 mr-lg-4"
            [ngClass]="{
