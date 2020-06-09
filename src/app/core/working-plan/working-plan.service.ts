@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
 import {
@@ -63,7 +63,7 @@ import { ItemAuthorityRelationService } from '../shared/item-authority-relation.
 import { WorkingPlanStateService } from './working-plan-state.service';
 import { PageInfo } from '../shared/page-info.model';
 import { dateToISOFormat, isNgbDateStruct } from '../../shared/date.util';
-import { GLOBAL_CONFIG, GlobalConfig } from '../../../config';
+import { environment } from '../../../environments/environment';
 import { WorkspaceitemDataService } from '../submission/workspaceitem-data.service';
 
 export const moment = extendMoment(Moment);
@@ -72,7 +72,6 @@ export const moment = extendMoment(Moment);
 export class WorkingPlanService {
 
   constructor(
-    @Inject(GLOBAL_CONFIG) protected config: GlobalConfig,
     private authorityService: AuthorityService,
     private formConfigService: SubmissionFormsConfigService,
     private itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
@@ -90,13 +89,13 @@ export class WorkingPlanService {
   }
 
   generateWorkpackageItem(metadata: MetadataMap, place: string): Observable<WorkpackageSearchItem> {
-    return this.createWorkspaceItem(this.config.workingPlan.workpackageEntityName).pipe(
-      map((submission: SubmissionObject) => ({id: submission.id, item: submission.item})),
+    return this.createWorkspaceItem(environment.workingPlan.workpackageEntityName).pipe(
+      map((submission: SubmissionObject) => ({ id: submission.id, item: submission.item })),
       tap(() => this.addPatchOperationForWorkpackage(metadata, place)),
       delay(100),
       flatMap((taskItem: WorkpackageSearchItem) => {
         return this.executeItemPatch(taskItem.item.uuid, 'metadata').pipe(
-          map((item: Item) => ({id: taskItem.id, item: item}))
+          map((item: Item) => ({ id: taskItem.id, item: item }))
         )
       }),
     )
@@ -104,26 +103,26 @@ export class WorkingPlanService {
 
   generateWorkpackageStepItem(parentId: string, stepType: string, metadata: MetadataMap): Observable<WorkpackageSearchItem> {
     return this.createWorkspaceItem(stepType).pipe(
-      map((submission: SubmissionObject) => ({id: submission.id, item: submission.item})),
+      map((submission: SubmissionObject) => ({ id: submission.id, item: submission.item })),
       tap(() => this.addPatchOperationForWorkpackage(metadata)),
       delay(100),
       flatMap((taskItem: WorkpackageSearchItem) => {
         return this.executeItemPatch(taskItem.item.uuid, 'metadata').pipe(
-          map((item: Item) => ({id: taskItem.id, item: item}))
+          map((item: Item) => ({ id: taskItem.id, item: item }))
         )
       })
     )
   }
 
   getWorkpackageFormConfig(): Observable<SubmissionFormModel> {
-    const formName = this.config.workingPlan.workingPlanFormName;
+    const formName = environment.workingPlan.workingPlanFormName;
     return this.formConfigService.getConfigByName(formName).pipe(
       map((configData: ConfigData) => configData.payload as SubmissionFormModel)
     )
   }
 
   getWorkpackageStepFormConfig(): Observable<SubmissionFormModel> {
-    const formName = this.config.workingPlan.workingPlanStepsFormName;
+    const formName = environment.workingPlan.workingPlanStepsFormName;
     return this.formConfigService.getConfigByName(formName).pipe(
       map((configData: ConfigData) => configData.payload as SubmissionFormModel)
     )
@@ -146,8 +145,8 @@ export class WorkingPlanService {
   getWorkpackageStatusTypes(): Observable<AuthorityEntry[]> {
     const searchOptions: IntegrationSearchOptions = new IntegrationSearchOptions(
       '',
-      this.config.workingPlan.workpackageStatusTypeAuthority,
-      this.config.workingPlan.workingPlanStepStatusMetadata);
+      environment.workingPlan.workpackageStatusTypeAuthority,
+      environment.workingPlan.workingPlanStepStatusMetadata);
     return this.authorityService.getEntriesByName(searchOptions).pipe(
       catchError(() => {
         const emptyResult = new IntegrationData(
@@ -162,19 +161,19 @@ export class WorkingPlanService {
   }
 
   getWorkpackageStepTypeAuthorityName(): string {
-    return this.config.workingPlan.workpackageStepTypeAuthority;
+    return environment.workingPlan.workpackageStepTypeAuthority;
   }
 
-  getWorkpackageStepSearchConfigName(): string  {
-    return this.config.workingPlan.workpackageStepsSearchConfigName;
+  getWorkpackageStepSearchConfigName(): string {
+    return environment.workingPlan.workpackageStepsSearchConfigName;
   }
 
   searchForAvailableWorpackages(): Observable<WorkpackageSearchItem[]> {
-    const searchConfiguration = this.config.workingPlan.workpackagesSearchConfigName;
+    const searchConfiguration = environment.workingPlan.workpackagesSearchConfigName;
     const paginationOptions: PaginationComponentOptions = new PaginationComponentOptions();
     paginationOptions.id = 'search-available-workpackages';
     paginationOptions.pageSize = 1000;
-    const sortOptions = new SortOptions(this.config.workingPlan.workingPlanPlaceMetadata, SortDirection.ASC);
+    const sortOptions = new SortOptions(environment.workingPlan.workingPlanPlaceMetadata, SortDirection.ASC);
 
     const searchOptions = new PaginatedSearchOptions({
       configuration: searchConfiguration,
@@ -225,8 +224,8 @@ export class WorkingPlanService {
   public initWorkpackageFromItem(item: Item, workspaceItemId: string, steps: WorkpackageStep[] = []): Workpackage {
 
     const dates = this.initWorkpackageDatesFromItem(item);
-    const responsible = item.firstMetadataValue(this.config.workingPlan.workingPlanStepResponsibleMetadata);
-    const status = item.firstMetadataValue(this.config.workingPlan.workingPlanStepStatusMetadata);
+    const responsible = item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
+    const status = item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
 
     return {
       id: item.id,
@@ -245,8 +244,8 @@ export class WorkingPlanService {
   public initWorkpackageStepFromItem(item: Item, workspaceItemId: string, parentId: string): WorkpackageStep {
 
     const dates = this.initWorkpackageDatesFromItem(item);
-    const responsible = item.firstMetadataValue(this.config.workingPlan.workingPlanStepResponsibleMetadata);
-    const status = item.firstMetadataValue(this.config.workingPlan.workingPlanStepStatusMetadata);
+    const responsible = item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
+    const status = item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
 
     return {
       id: item.id,
@@ -260,61 +259,6 @@ export class WorkingPlanService {
       status: status,
       expanded: false
     };
-  }
-
-  private addPatchOperationForWorkpackage(metadata: MetadataMap, place: string = null): void {
-
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
-    Object.keys(metadata).forEach((metadataName) => {
-      this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
-    });
-    if (isNotNull(place)) {
-      this.operationsBuilder.add(
-        pathCombiner.getPath(this.config.workingPlan.workingPlanPlaceMetadata),
-        place,
-        true,
-        true
-      );
-    }
-  }
-
-  private createWorkspaceItem(taskType: string): Observable<SubmissionObject> {
-    return this.getCollectionByEntity(taskType).pipe(
-      flatMap((collectionId) => this.submissionService.createSubmissionForCollection(collectionId)),
-      flatMap((submission: SubmissionObject) =>
-        (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
-      )
-    )
-  }
-
-  private executeItemPatch(objectId: string, pathName: string): Observable<Item> {
-    return this.itemJsonPatchOperationsService.jsonPatchByResourceType(
-      'items',
-      objectId,
-      pathName).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      tap((item: Item) => this.itemService.update(item)),
-      catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
-    )
-  }
-
-  private getCollectionByEntity(entityType: string): Observable<string> {
-    const searchOptions: IntegrationSearchOptions = new IntegrationSearchOptions(
-      '',
-      this.config.impactPathway.entityToCollectionMapAuthority,
-      this.config.impactPathway.entityToCollectionMapAuthorityMetadata,
-      entityType,
-      1,
-      1);
-    return this.authorityService.getEntryByValue(searchOptions).pipe(
-      map((result: IntegrationData) => {
-        if (result.pageInfo.totalElements !== 1) {
-          throw new Error(`No collection found for ${entityType}`);
-        }
-
-        return (result.payload[0] as AuthorityEntry).display;
-      })
-    )
   }
 
   initWorkingPlan(workpackageListItem: WorkpackageSearchItem[]): Observable<Workpackage[]> {
@@ -334,7 +278,7 @@ export class WorkingPlanService {
   }
 
   initWorkpackageStepsFromParentItem(workpackageId: string, parentItem: Item, workspaceItemId: string): Observable<WorkpackageStep[]> {
-    const relatedTaskMetadata = Metadata.all(parentItem.metadata, this.config.workingPlan.workingPlanStepRelationMetadata);
+    const relatedTaskMetadata = Metadata.all(parentItem.metadata, environment.workingPlan.workingPlanStepRelationMetadata);
     if (isEmpty(relatedTaskMetadata)) {
       return observableOf([])
     } else {
@@ -355,7 +299,7 @@ export class WorkingPlanService {
     let end;
     let endMonth;
     let endyear;
-    const startDate = item.firstMetadataValue(this.config.workingPlan.workingPlanStepDateStartMetadata);
+    const startDate = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateStartMetadata);
     if (isEmpty(startDate)) {
       start = moment().format('YYYY-MM-DD');
       startMonth = moment().format('YYYY-MM');
@@ -366,7 +310,7 @@ export class WorkingPlanService {
       startYear = moment(startDate).format('YYYY');
     }
 
-    const endDate = item.firstMetadataValue(this.config.workingPlan.workingPlanStepDateEndMetadata);
+    const endDate = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateEndMetadata);
     if (isEmpty(endDate)) {
       end = moment().add(7, 'days').format('YYYY-MM-DD');
       endMonth = moment().add(7, 'days').format('YYYY-MM');
@@ -380,13 +324,13 @@ export class WorkingPlanService {
     const dates = {
       start: {
         full: start,
-          month: startMonth,
-          year: startYear
+        month: startMonth,
+        year: startYear
       },
       end: {
         full: end,
-          month: endMonth,
-          year: endyear
+        month: endMonth,
+        year: endyear
       },
     };
 
@@ -420,10 +364,10 @@ export class WorkingPlanService {
 
   setDefaultForStatusMetadata(metadata: MetadataMap): MetadataMap {
     let result: MetadataMap = metadata;
-    if (!metadata.hasOwnProperty(this.config.workingPlan.workingPlanStepStatusMetadata)
-      || isEmpty(metadata[this.config.workingPlan.workingPlanStepStatusMetadata])) {
+    if (!metadata.hasOwnProperty(environment.workingPlan.workingPlanStepStatusMetadata)
+      || isEmpty(metadata[environment.workingPlan.workingPlanStepStatusMetadata])) {
       result = Object.assign({}, metadata, {
-        [this.config.workingPlan.workingPlanStepStatusMetadata]: [{
+        [environment.workingPlan.workingPlanStepStatusMetadata]: [{
           authority: 'not_done',
           confidence: 600,
           language: null,
@@ -470,7 +414,7 @@ export class WorkingPlanService {
         id: key,
         metadataList: [
           {
-            key: this.config.workingPlan.workingPlanPlaceMetadata,
+            key: environment.workingPlan.workingPlanPlaceMetadata,
             language: '',
             value: index.toString().padStart(3, '0'),
             place: 0,
@@ -541,5 +485,60 @@ export class WorkingPlanService {
       workpackageStep,
       metadatumViewList
     );
+  }
+
+  private addPatchOperationForWorkpackage(metadata: MetadataMap, place: string = null): void {
+
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    Object.keys(metadata).forEach((metadataName) => {
+      this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
+    });
+    if (isNotNull(place)) {
+      this.operationsBuilder.add(
+        pathCombiner.getPath(environment.workingPlan.workingPlanPlaceMetadata),
+        place,
+        true,
+        true
+      );
+    }
+  }
+
+  private createWorkspaceItem(taskType: string): Observable<SubmissionObject> {
+    return this.getCollectionByEntity(taskType).pipe(
+      flatMap((collectionId) => this.submissionService.createSubmissionForCollection(collectionId)),
+      flatMap((submission: SubmissionObject) =>
+        (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
+      )
+    )
+  }
+
+  private executeItemPatch(objectId: string, pathName: string): Observable<Item> {
+    return this.itemJsonPatchOperationsService.jsonPatchByResourceType(
+      'items',
+      objectId,
+      pathName).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      tap((item: Item) => this.itemService.update(item)),
+      catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
+    )
+  }
+
+  private getCollectionByEntity(entityType: string): Observable<string> {
+    const searchOptions: IntegrationSearchOptions = new IntegrationSearchOptions(
+      '',
+      environment.impactPathway.entityToCollectionMapAuthority,
+      environment.impactPathway.entityToCollectionMapAuthorityMetadata,
+      entityType,
+      1,
+      1);
+    return this.authorityService.getEntryByValue(searchOptions).pipe(
+      map((result: IntegrationData) => {
+        if (result.pageInfo.totalElements !== 1) {
+          throw new Error(`No collection found for ${entityType}`);
+        }
+
+        return (result.payload[0] as AuthorityEntry).display;
+      })
+    )
   }
 }

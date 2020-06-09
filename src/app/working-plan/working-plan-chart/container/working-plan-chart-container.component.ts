@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { MAT_DATE_FORMATS, MatSelectChange } from '@angular/material';
@@ -24,7 +24,7 @@ import { AuthorityEntry } from '../../../core/integration/models/authority-entry
 import { hasValue } from '../../../shared/empty.util';
 import { AuthorityOptions } from '../../../core/integration/models/authority-options.model';
 import { ChartDateViewType } from '../../../core/working-plan/working-plan.reducer';
-import { GLOBAL_CONFIG, GlobalConfig } from '../../../../config';
+import { environment } from '../../../../environments/environment';
 
 export const MY_FORMATS = {
   parse: {
@@ -89,7 +89,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
 
   constructor(
-    @Inject(GLOBAL_CONFIG) protected config: GlobalConfig,
     protected cdr: ChangeDetectorRef,
     private modalService: NgbModal,
     private translate: TranslateService,
@@ -101,8 +100,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.treeControl = new FlatTreeControl<WorkpacakgeFlatNode>(this._getLevel, this._isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
     this.responsibleAuthorityOptions = new AuthorityOptions(
-      this.config.workingPlan.workingPlanStepResponsibleAuthority,
-      this.config.workingPlan.workingPlanStepResponsibleMetadata,
+      environment.workingPlan.workingPlanStepResponsibleAuthority,
+      environment.workingPlan.workingPlanStepResponsibleMetadata,
       null,
       true
     );
@@ -162,15 +161,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return flatNode;
   };
 
-  private _getLevel = (node: WorkpacakgeFlatNode) => node.level;
-
-  private _isExpandable = (node: WorkpacakgeFlatNode) => node.expandable;
-
-  private _getChildren = (node: Workpackage): Observable<WorkpackageStep[]> => observableOf(node.steps);
-
   hasChild = (_: number, _nodeData: WorkpacakgeFlatNode) => _nodeData.expandable;
-
-  /** end of utils of building tree */
 
   /** tree nodes manipulations */
 
@@ -234,6 +225,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     }
   }
 
+  /** end of utils of building tree */
+
   getStatusTypeLabel(statusType: string) {
     const index = findIndex(this.chartStatusTypeList$.value, (entry) => entry.value === statusType);
     return (index !== -1) ? this.chartStatusTypeList$.value[index].display : statusType;
@@ -261,7 +254,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
     this.updateField(
       node,
-      [this.config.workingPlan.workingPlanStepDateStartMetadata, this.config.workingPlan.workingPlanStepDateEndMetadata],
+      [environment.workingPlan.workingPlanStepDateStartMetadata, environment.workingPlan.workingPlanStepDateEndMetadata],
       [nestedNode.dates.start.full, nestedNode.dates.end.full]
     );
   }
@@ -275,36 +268,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   updateStepResponsible(node: WorkpacakgeFlatNode, responsible: string) {
     const nestedNode = this.flatNodeMap.get(node);
     nestedNode.responsible = responsible;
-    this.updateField(node, [this.config.workingPlan.workingPlanStepResponsibleMetadata], [responsible]);
+    this.updateField(node, [environment.workingPlan.workingPlanStepResponsibleMetadata], [responsible]);
   }
 
   updateStepStatus(node: WorkpacakgeFlatNode, $event: MatSelectChange,) {
     const nestedNode = this.flatNodeMap.get(node);
     nestedNode.status = $event.value;
-    this.updateField(node, [this.config.workingPlan.workingPlanStepStatusMetadata], [$event.value]);
-  }
-
-  private updateField(node: WorkpacakgeFlatNode, metadata: string[], value: any[]) {
-    if (this.treeControl.getLevel(node) < 1) {
-      const nestedNode = this.flatNodeMap.get(node);
-      this.workingPlanService.updateWorkpackageMetadata(
-        nestedNode.id,
-        nestedNode,
-        [...metadata],
-        [...value]
-      );
-    } else {
-      const parentFlatNode = this.getParentStep(node);
-      const parentNode = this.flatNodeMap.get(parentFlatNode) as Workpackage;
-      const childNode = this.flatNodeMap.get(node) as WorkpackageStep;
-      this.workingPlanService.updateWorkpackageStepMetadata(
-        parentNode.id,
-        childNode.id,
-        childNode,
-        [...metadata],
-        [...value]
-      );
-    }
+    this.updateField(node, [environment.workingPlan.workingPlanStepStatusMetadata], [$event.value]);
   }
 
   /** resize and validate */
@@ -501,5 +471,34 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   getIndex(node: Workpackage) {
     return findIndex(this.dataSource.data, { id: node.id });
+  }
+
+  private _getLevel = (node: WorkpacakgeFlatNode) => node.level;
+
+  private _isExpandable = (node: WorkpacakgeFlatNode) => node.expandable;
+
+  private _getChildren = (node: Workpackage): Observable<WorkpackageStep[]> => observableOf(node.steps);
+
+  private updateField(node: WorkpacakgeFlatNode, metadata: string[], value: any[]) {
+    if (this.treeControl.getLevel(node) < 1) {
+      const nestedNode = this.flatNodeMap.get(node);
+      this.workingPlanService.updateWorkpackageMetadata(
+        nestedNode.id,
+        nestedNode,
+        [...metadata],
+        [...value]
+      );
+    } else {
+      const parentFlatNode = this.getParentStep(node);
+      const parentNode = this.flatNodeMap.get(parentFlatNode) as Workpackage;
+      const childNode = this.flatNodeMap.get(node) as WorkpackageStep;
+      this.workingPlanService.updateWorkpackageStepMetadata(
+        parentNode.id,
+        childNode.id,
+        childNode,
+        [...metadata],
+        [...value]
+      );
+    }
   }
 }
