@@ -296,7 +296,7 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
         return combineLatest(collection$, submissionDefinition$).pipe(
           map(([collection, submissionDefinition]) => {
             this.requestService.removeByHrefSubstring(submissionObject._links.submissionDefinition.href);
-            return Object.assign(submissionObject, {
+            return Object.assign({}, submissionObject, {
               collection: collection.payload,
               submissionDefinition: submissionDefinition.payload
             })
