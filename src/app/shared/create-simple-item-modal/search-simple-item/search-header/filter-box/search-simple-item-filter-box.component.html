@@ -17,7 +17,7 @@
           </div>
         </li>
         <li *ngIf="innerFilterFacetValues?.length > 0" class="d-flex justify-content-center mt-1 border-top pt-2">
-          <button class="btn btn-outline-primary" id="{{filterId + filterType}}_submit" (click)="onSubmit(myDrop)">Submit</button>
+          <button class="btn btn-outline-primary" id="{{filterId + filterBox.filterType}}_submit" (click)="onSubmit(myDrop)">Submit</button>
         </li>
         <li *ngIf="innerFilterFacetValues?.length == 0" class="d-flex justify-content-center mt-1 border-top pt-2">
           <a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">No filter available</a>

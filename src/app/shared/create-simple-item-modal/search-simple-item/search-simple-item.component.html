@@ -3,7 +3,7 @@
 </ng-template>
 
 <ds-search-simple-item-header [filterBoxList]="filterBoxList$.asObservable()"
-                              [availableTaskList]="availableTaskList$"
+                              [availableTaskList]="availableTaskList$.asObservable()"
                               (filterChange)="onFilterChange($event)"
                               (removeFilter)="onRemoveFilter($event)"
                               (searchChange)="onSearchChange($event)"></ds-search-simple-item-header>
@@ -15,7 +15,7 @@
                  [paginationOptions]="paginationOptions"
                  [collectionSize]="pageInfoState?.totalElements"
                  [sortOptions]="sortOptions"
-                 [hidePagerWhenSinglePage]="hidePagerWhenSinglePage"
+                 [hidePagerWhenSinglePage]="true"
                  [disableRouteParameterUpdate]="true"
                  (paginationChange)="onPaginationChange($event)">
     <div id="sidebar-object-list"

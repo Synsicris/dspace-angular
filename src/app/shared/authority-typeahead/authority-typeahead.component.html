@@ -30,7 +30,7 @@
      (whenClickOnConfidenceNotAccepted)="whenClickOnConfidenceNotAccepted($event)"></i>
   <input #instance="ngbTypeahead"
          class="form-control"
-         [attr.autoComplete]="autoComplete"
+         [attr.autoComplete]="autocomplete"
          [class.is-invalid]="showErrorMessages"
          [dynamicId]="bindId && fieldId"
          [inputFormatter]="formatter"
@@ -50,7 +50,7 @@
 
 <input *ngIf="(isHierarchical$ | async)"
        class="form-control custom-select"
-       [attr.autoComplete]="autoComplete"
+       [attr.autoComplete]="autocomplete"
        [class.is-invalid]="showErrorMessages"
        [dynamicId]="bindId && fieldId"
        [name]="fieldName"
