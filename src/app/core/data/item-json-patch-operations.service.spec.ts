@@ -8,7 +8,7 @@ import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { RequestService } from './request.service';
 import { PatchRequest } from './request.models';
 import { ItemJsonPatchOperationsService } from './item-json-patch-operations.service';
-import { getMockRemoteDataBuildService } from '../../shared/mocks/mock-remote-data-build.service';
+import { getMockRemoteDataBuildService } from '../../shared/mocks/remote-data-build.service.mock';
 
 describe('ItemJsonPatchOperationsService', () => {
   let scheduler: TestScheduler;

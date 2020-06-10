@@ -12,22 +12,18 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { AuthorityOptions } from '../../core/integration/models/authority-options.model';
 import { AuthorityService } from '../../core/integration/authority.service';
-import { AuthorityServiceStub } from '../testing/authority-service-stub';
-import { GlobalConfig } from '../../../config/global-config.interface';
-import { GLOBAL_CONFIG } from '../../../config';
+import { AuthorityServiceStub } from '../testing/authority-service.stub';
 import { AuthorityTypeaheadComponent } from './authority-typeahead.component';
 import { DynamicTypeaheadModel } from '../form/builder/ds-dynamic-form-ui/models/typeahead/dynamic-typeahead.model';
 import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-metadata-value.model';
-import { createTestComponent } from '../testing/utils';
+import { createTestComponent } from '../testing/utils.test';
 import { AuthorityConfidenceStateDirective } from '../authority-confidence/authority-confidence-state.directive';
-import { MOCK_SUBMISSION_CONFIG } from '../testing/mock-submission-config';
 import { ObjNgFor } from '../utils/object-ngfor.pipe';
 
 export let TYPEAHEAD_TEST_GROUP;
 
 export let TYPEAHEAD_TEST_MODEL_CONFIG;
 
-const envConfig: GlobalConfig = MOCK_SUBMISSION_CONFIG;
 const authorityOptions: AuthorityOptions = new AuthorityOptions(
   'EVENTAuthority',
   'typeahead',
@@ -83,7 +79,6 @@ describe('AuthorityTypeaheadComponent test suite', () => {
       providers: [
         ChangeDetectorRef,
         AuthorityTypeaheadComponent,
-        { provide: GLOBAL_CONFIG, useValue: envConfig },
         { provide: AuthorityService, useValue: authorityServiceStub },
         { provide: DynamicFormLayoutService, useValue: {} },
         { provide: DynamicFormValidationService, useValue: {} }

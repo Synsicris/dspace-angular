@@ -28,6 +28,12 @@ export class WorkspaceitemActionsComponent extends MyDSpaceActionsComponent<Work
   @Input() object: WorkspaceItem;
 
   /**
+   * A boolean representing if discard button should be showed or not
+   * @type {string}
+   */
+  @Input() showDiscard = true;
+
+  /**
    * A boolean representing if a delete operation is pending
    * @type {BehaviorSubject<boolean>}
    */
