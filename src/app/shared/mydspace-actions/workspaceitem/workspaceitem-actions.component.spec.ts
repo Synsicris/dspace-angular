@@ -67,7 +67,7 @@ const item = Object.assign(new Item(), {
 const rd = createSuccessfulRemoteDataObject(item);
 mockObject = Object.assign(new WorkspaceItem(), { item: observableOf(rd), id: '1234', uuid: '1234' });
 
-describe('WorkspaceitemActionsComponent', () => {
+fdescribe('WorkspaceitemActionsComponent', () => {
   beforeEach(async(() => {
 
     TestBed.configureTestingModule({
@@ -126,6 +126,15 @@ describe('WorkspaceitemActionsComponent', () => {
     const btn = fixture.debugElement.query(By.css('.btn-danger'));
 
     expect(btn).toBeDefined();
+  });
+
+  it('should not display delete button', () => {
+    component.showDiscard = false;
+    fixture.detectChanges();
+
+    const btn = fixture.debugElement.query(By.css('.btn-danger'));
+
+    expect(btn).toBeNull();
   });
 
   it('should call confirmDiscard on discard confirmation', () => {
