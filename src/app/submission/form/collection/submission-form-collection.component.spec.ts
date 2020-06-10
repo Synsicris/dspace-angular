@@ -26,7 +26,7 @@ import { PageInfo } from '../../../core/shared/page-info.model';
 import { Collection } from '../../../core/shared/collection.model';
 import { createTestComponent } from '../../../shared/testing/utils.test';
 import { CollectionDataService } from '../../../core/data/collection-data.service';
-import { getMockRequestService } from '../../../shared/mocks/mock-request.service';
+import { getMockRequestService } from '../../../shared/mocks/request.service.mock';
 import { RequestService } from '../../../core/data/request.service';
 import { SubmissionDefinitionsConfigService } from '../../../core/config/submission-definitions-config.service';
 
