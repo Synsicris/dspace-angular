@@ -1,6 +1,10 @@
 <div class="row" *ngIf="!!submissionId">
   <div class="col">
-    <button *ngIf="(showDepositAndDiscard | async)" type="button" class="btn btn-danger" (click)="$event.preventDefault();confirmDiscard(content)">{{'submission.general.discard.submit' | translate}}</button>
+    <button *ngIf="(showDepositAndDiscard | async)"
+            type="button"
+            class="btn btn-danger"
+            id="discard"
+            (click)="$event.preventDefault();confirmDiscard(content)">{{'submission.general.discard.submit' | translate}}</button>
   </div>
   <div *ngIf="(processingSaveStatus | async) || (processingDepositStatus | async)" class="col d-flex justify-content-end align-items-center">
     <div class="progress w-75">
@@ -26,6 +30,7 @@
     <button *ngIf="(showDepositAndDiscard | async)"
             type="button"
             class="btn btn-primary"
+            id="deposit"
             [disabled]="(submissionIsInvalid | async)" (click)="deposit($event)">
       <span>{{'submission.general.deposit' | translate}}</span>
     </button>

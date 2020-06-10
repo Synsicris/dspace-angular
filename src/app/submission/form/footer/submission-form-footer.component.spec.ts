@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, inject, TestBed } from '@angular/core/testing';
+import { ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from '@angular/core';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { of as observableOf } from 'rxjs';
@@ -15,6 +15,7 @@ import { SubmissionRestServiceStub } from '../../../shared/testing/submission-re
 import { SubmissionFormFooterComponent } from './submission-form-footer.component';
 import { SubmissionRestService } from '../../../core/submission/submission-rest.service';
 import { createTestComponent } from '../../../shared/testing/utils.test';
+import { SubmissionScopeType } from '../../../core/submission/submission-scope-type';
 
 describe('SubmissionFormFooterComponent Component', () => {
 
@@ -210,7 +211,7 @@ describe('SubmissionFormFooterComponent Component', () => {
       comp.showDepositAndDiscard = observableOf(true);
       compAsAny.submissionIsInvalid = observableOf(true);
       fixture.detectChanges();
-      const depositBtn: any = fixture.debugElement.query(By.css('.btn-primary'));
+      const depositBtn: any = fixture.debugElement.query(By.css('button#deposit'));
 
       expect(depositBtn.nativeElement.disabled).toBeTruthy();
     });
@@ -219,11 +220,44 @@ describe('SubmissionFormFooterComponent Component', () => {
       comp.showDepositAndDiscard = observableOf(true);
       compAsAny.submissionIsInvalid = observableOf(false);
       fixture.detectChanges();
-      const depositBtn: any = fixture.debugElement.query(By.css('.btn-primary'));
+      const depositBtn: any = fixture.debugElement.query(By.css('button#deposit'));
 
       expect(depositBtn.nativeElement.disabled).toBeFalsy();
     });
 
+  });
+
+  describe('when disableDepositAndDiscard is true', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(SubmissionFormFooterComponent);
+      comp = fixture.componentInstance;
+      compAsAny = comp;
+      submissionServiceStub = TestBed.get(SubmissionService);
+      submissionRestServiceStub = TestBed.get(SubmissionRestService);
+      comp.submissionId = submissionId;
+      comp.disableDepositAndDiscard = true;
+      submissionServiceStub.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkspaceItem);
+    });
+
+    afterEach(() => {
+      comp = null;
+      compAsAny = null;
+      fixture = null;
+      submissionServiceStub = null;
+      submissionRestServiceStub = null;
+    });
+
+    it('should not have deposit button', () => {
+      const depositBtn: any = fixture.debugElement.query(By.css('button#deposit'));
+
+      expect(depositBtn).toBeNull();
+    });
+
+    it('should not have discard button', () => {
+      const depositBtn: any = fixture.debugElement.query(By.css('button#discard'));
+
+      expect(depositBtn).toBeNull();
+    });
   });
 });
 

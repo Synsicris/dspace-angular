@@ -5,7 +5,8 @@
   <i class="fa fa-edit"></i> {{'submission.workflow.generic.edit' | translate}}
 </a>
 
-<button type="button"
+<button *ngIf="showDiscard"
+        type="button"
         class="btn btn-danger mt-1 mb-3"
         ngbTooltip="{{'submission.workflow.generic.delete-help' | translate}}"
         (click)="$event.preventDefault();confirmDiscard(content)">

@@ -26,6 +26,12 @@ export class SubmissionFormFooterComponent implements OnChanges {
   @Input() submissionId: string;
 
   /**
+   * A boolean representing if discard and delete button should be disable or not
+   * @type {string}
+   */
+  @Input() disableDepositAndDiscard = false;
+
+  /**
    * A boolean representing if a submission deposit operation is pending
    * @type {Observable<boolean>}
    */
@@ -69,10 +75,11 @@ export class SubmissionFormFooterComponent implements OnChanges {
       this.submissionIsInvalid = this.submissionService.getSubmissionStatus(this.submissionId).pipe(
         map((isValid: boolean) => isValid === false)
       );
-
+      console.log(this.disableDepositAndDiscard);
       this.processingSaveStatus = this.submissionService.getSubmissionSaveProcessingStatus(this.submissionId);
       this.processingDepositStatus = this.submissionService.getSubmissionDepositProcessingStatus(this.submissionId);
-      this.showDepositAndDiscard = observableOf(this.submissionService.getSubmissionScope() === SubmissionScopeType.WorkspaceItem);
+      this.showDepositAndDiscard = observableOf(!this.disableDepositAndDiscard &&
+        this.submissionService.getSubmissionScope() === SubmissionScopeType.WorkspaceItem);
     }
   }
 
