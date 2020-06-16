@@ -182,15 +182,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.searchConfiguration = this.workingPlanService.getWorkpackageStepSearchConfigName();
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
-      this.workingPlanStateService.dispatchGenerateWorkpackageStep(node.id, item.type.value, metadata, modalRef)
+      this.workingPlanStateService.dispatchGenerateWorkpackageStep(node.id, item.type.value, metadata)
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {
         this.workingPlanStateService.dispatchAddWorkpackageStep(
           node.id,
           item.id,
-          item.workspaceItemId,
-          modalRef);
+          item.workspaceItemId);
       })
     });
   }

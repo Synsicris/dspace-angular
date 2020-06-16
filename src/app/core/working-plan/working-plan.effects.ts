@@ -46,6 +46,7 @@ import { Workpackage, WorkpackageSearchItem, WorkpackageStep } from './models/wo
 import { Item } from '../shared/item.model';
 import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
 import { isNotNull } from '../../shared/empty.util';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -64,13 +65,12 @@ export class WorkingPlanEffects {
         action.payload.place).pipe(
         map((searchItem: WorkpackageSearchItem) => new GenerateWorkpackageSuccessAction(
           searchItem.item,
-          searchItem.id,
-          action.payload.modal)),
+          searchItem.id)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new GenerateWorkpackageErrorAction(action.payload.modal))
+          return observableOf(new GenerateWorkpackageErrorAction())
         }));
     }));
 
@@ -80,7 +80,7 @@ export class WorkingPlanEffects {
   @Effect() generateWorkpackageSuccess$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.GENERATE_WORKPACKAGE_SUCCESS),
     map((action: GenerateWorkpackageSuccessAction) => {
-      return new AddWorkpackageAction(action.payload.item.id, action.payload.workspaceItemId, action.payload.modal)
+      return new AddWorkpackageAction(action.payload.item.id, action.payload.workspaceItemId)
     }));
 
   /**
@@ -95,12 +95,11 @@ export class WorkingPlanEffects {
         }),
         map((workpackage: Workpackage) => {
           return new AddWorkpackageSuccessAction(
-            workpackage,
-            action.payload.modal);
+            workpackage);
         }),
         catchError((error: Error) => {
           console.error(error.message);
-          return observableOf(new AddWorkpackageErrorAction(action.payload.modal))
+          return observableOf(new AddWorkpackageErrorAction())
         }));
     }));
 
@@ -113,9 +112,7 @@ export class WorkingPlanEffects {
       this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'))
     }),
     tap((action: AddWorkpackageSuccessAction) => {
-      if (action.payload.modal) {
-        action.payload.modal.close();
-      }
+      this.modalService.dismissAll();
     }));
 
   /**
@@ -130,9 +127,7 @@ export class WorkingPlanEffects {
       this.notificationsService.error(null, this.translate.get('impact-pathway.task.create.error'))
     }),
     tap((action: any) => {
-      if (action.payload.modal) {
-        action.payload.modal.close();
-      }
+      this.modalService.dismissAll();
     }));
 
   /**
@@ -148,13 +143,12 @@ export class WorkingPlanEffects {
         map((searchItem: WorkpackageSearchItem) => new GenerateWorkpackageStepSuccessAction(
           action.payload.parentId,
           searchItem.item,
-          searchItem.id,
-          action.payload.modal)),
+          searchItem.id)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new GenerateWorkpackageStepErrorAction(action.payload.modal))
+          return observableOf(new GenerateWorkpackageStepErrorAction())
         }));
     }));
 
@@ -167,8 +161,7 @@ export class WorkingPlanEffects {
       return new AddWorkpackageStepAction(
         action.payload.parentId,
         action.payload.item.id,
-        action.payload.workspaceItemId,
-        action.payload.modal)
+        action.payload.workspaceItemId)
     }));
 
   /**
@@ -192,14 +185,13 @@ export class WorkingPlanEffects {
         map((step: WorkpackageStep) => {
           return new AddWorkpackageStepSuccessAction(
             action.payload.parentId,
-            step,
-            action.payload.modal);
+            step);
         }),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new AddWorkpackageStepErrorAction(action.payload.modal))
+          return observableOf(new AddWorkpackageStepErrorAction())
         }));
     }));
 
@@ -212,9 +204,7 @@ export class WorkingPlanEffects {
       this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'))
     }),
     tap((action: AddWorkpackageStepSuccessAction) => {
-      if (action.payload.modal) {
-        action.payload.modal.close();
-      }
+      this.modalService.dismissAll();
     }));
 
   /**
@@ -379,6 +369,7 @@ export class WorkingPlanEffects {
   constructor(
     private actions$: Actions,
     private itemAuthorityRelationService: ItemAuthorityRelationService,
+    private modalService: NgbModal,
     private notificationsService: NotificationsService,
     private store$: Store<any>,
     private translate: TranslateService,

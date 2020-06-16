@@ -6,17 +6,20 @@ import {
   AddWorkpackageStepAction,
   ChangeChartViewAction,
   GenerateWorkpackageAction,
-  GenerateWorkpackageStepAction, MoveWorkpackageAction,
+  GenerateWorkpackageStepAction,
+  MoveWorkpackageAction,
   RemoveWorkpackageAction,
   RemoveWorkpackageStepAction,
-  RetrieveAllWorkpackagesAction, UpdateWorkpackageAction, UpdateWorkpackageStepAction
+  RetrieveAllWorkpackagesAction,
+  UpdateWorkpackageAction,
+  UpdateWorkpackageStepAction
 } from './working-plan.actions';
-import { MetadataMap, MetadataValue, MetadatumViewModel } from '../shared/metadata.models';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MetadataMap, MetadatumViewModel } from '../shared/metadata.models';
 import { Observable } from 'rxjs/internal/Observable';
 import {
   chartDateViewSelector,
-  isWorkingPlanLoadedSelector, isWorkingPlanMovingSelector,
+  isWorkingPlanLoadedSelector,
+  isWorkingPlanMovingSelector,
   isWorkingPlanProcessingSelector,
   workpackageToRemoveSelector
 } from './selectors';
@@ -34,27 +37,25 @@ export class WorkingPlanStateService {
   public dispatchAddWorkpackageStep(
     parentId: string,
     workpackageStepId: string,
-    workspaceItemId: string,
-    modal?: NgbActiveModal
+    workspaceItemId: string
   ): void {
-    this.store.dispatch(new AddWorkpackageStepAction(parentId, workpackageStepId, workspaceItemId, modal))
+    this.store.dispatch(new AddWorkpackageStepAction(parentId, workpackageStepId, workspaceItemId))
   }
 
   public dispatchChangeChartDateView(chartDateView: ChartDateViewType): void {
     this.store.dispatch(new ChangeChartViewAction(chartDateView))
   }
 
-  public dispatchGenerateWorkpackage(metadata: MetadataMap, place: string, modal?: NgbActiveModal): void {
-    this.store.dispatch(new GenerateWorkpackageAction(metadata, place, modal))
+  public dispatchGenerateWorkpackage(metadata: MetadataMap, place: string): void {
+    this.store.dispatch(new GenerateWorkpackageAction(metadata, place))
   }
 
   public dispatchGenerateWorkpackageStep(
     parentId: string,
     workpackageStepType: string,
-    metadata: MetadataMap,
-    modal?: NgbActiveModal
+    metadata: MetadataMap
   ): void {
-    this.store.dispatch(new GenerateWorkpackageStepAction(parentId, workpackageStepType, metadata, modal))
+    this.store.dispatch(new GenerateWorkpackageStepAction(parentId, workpackageStepType, metadata))
   }
 
   public dispatchMoveWorkpackage(workpackageId: string, oldIndex: number, newIndex: number): void {
