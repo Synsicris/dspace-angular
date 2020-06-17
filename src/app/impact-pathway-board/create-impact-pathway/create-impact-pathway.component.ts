@@ -58,7 +58,7 @@ export class CreateImpactPathwayComponent implements OnInit {
 
   create() {
     const impactPathwayName = this.createForm.get('name').value;
-    this.impactPathwayService.dispatchGenerateImpactPathway(impactPathwayName, this.activeModal);
+    this.impactPathwayService.dispatchGenerateImpactPathway(impactPathwayName);
   }
 
   /**

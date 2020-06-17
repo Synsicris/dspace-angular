@@ -1,20 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { of as observableOf } from 'rxjs';
-import {
-  catchError,
-  concatMap,
-  flatMap,
-  map,
-  mergeMap,
-  mergeMapTo,
-  switchMap,
-  tap,
-  withLatestFrom
-} from 'rxjs/operators';
+import { catchError, concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import {
   AddImpactPathwaySubTaskAction,
@@ -83,9 +74,7 @@ export class ImpactPathwayEffects {
     switchMap((action: GenerateImpactPathwayAction) => {
       return this.impactPathwayService.generateImpactPathwayItem(action.payload.name, '').pipe(
         tap(() => {
-          if (action.payload.modal) {
-            action.payload.modal.close();
-          }
+          this.modalService.dismissAll();
         }),
         map((item: Item) => new GenerateImpactPathwaySuccessAction(item)),
         catchError((error: Error) => {
@@ -146,13 +135,12 @@ export class ImpactPathwayEffects {
         map((item: Item) => new GenerateImpactPathwayTaskSuccessAction(
           action.payload.impactPathwayId,
           action.payload.stepId,
-          item,
-          action.payload.modal)),
+          item)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new GenerateImpactPathwayTaskErrorAction(action.payload.modal))
+          return observableOf(new GenerateImpactPathwayTaskErrorAction())
         }));
     }));
 
@@ -165,8 +153,7 @@ export class ImpactPathwayEffects {
       return new AddImpactPathwayTaskAction(
         action.payload.impactPathwayId,
         action.payload.stepId,
-        action.payload.item.id,
-        action.payload.modal)
+        action.payload.item.id)
     }));
 
   /**
@@ -181,9 +168,7 @@ export class ImpactPathwayEffects {
       this.notificationsService.error(null, this.translate.get('impact-pathway.task.create.error'))
     }),
     tap((action: AddImpactPathwaySubTaskAction) => {
-      if (action.payload.modal) {
-        action.payload.modal.close();
-      }
+      this.modalService.dismissAll();
     }));
 
   /**
@@ -204,14 +189,13 @@ export class ImpactPathwayEffects {
           return new AddImpactPathwayTaskSuccessAction(
             action.payload.impactPathwayId,
             action.payload.stepId,
-            task,
-            action.payload.modal);
+            task);
         }),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new AddImpactPathwayTaskErrorAction(action.payload.modal))
+          return observableOf(new AddImpactPathwayTaskErrorAction())
         }));
     }));
 
@@ -224,9 +208,7 @@ export class ImpactPathwayEffects {
       this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'))
     }),
     tap((action: AddImpactPathwaySubTaskAction) => {
-      if (action.payload.modal) {
-        action.payload.modal.close();
-      }
+      this.modalService.dismissAll();
     }));
 
   /**
@@ -243,14 +225,13 @@ export class ImpactPathwayEffects {
           action.payload.impactPathwayId,
           action.payload.stepId,
           action.payload.parentTaskId,
-          item,
-          action.payload.modal)
+          item)
         ),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new GenerateImpactPathwayTaskErrorAction(action.payload.modal))
+          return observableOf(new GenerateImpactPathwayTaskErrorAction())
         }));
     }));
 
@@ -264,8 +245,7 @@ export class ImpactPathwayEffects {
         action.payload.impactPathwayId,
         action.payload.stepId,
         action.payload.parentTaskId,
-        action.payload.item.id,
-        action.payload.modal)
+        action.payload.item.id)
     }));
 
   /**
@@ -287,14 +267,13 @@ export class ImpactPathwayEffects {
             action.payload.impactPathwayId,
             action.payload.stepId,
             action.payload.parentTaskId,
-            task,
-            action.payload.modal);
+            task);
         }),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new AddImpactPathwayTaskErrorAction(action.payload.modal))
+          return observableOf(new AddImpactPathwayTaskErrorAction())
         }));
     }));
 
@@ -307,9 +286,7 @@ export class ImpactPathwayEffects {
       this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'))
     }),
     tap((action: AddImpactPathwaySubTaskSuccessAction) => {
-      if (action.payload.modal) {
-        action.payload.modal.close();
-      }
+      this.modalService.dismissAll();
     }));
 
   /**
@@ -554,6 +531,7 @@ export class ImpactPathwayEffects {
     private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
     private itemAuthorityRelationService: ItemAuthorityRelationService,
+    private modalService: NgbModal,
     private notificationsService: NotificationsService,
     private store$: Store<any>,
     private translate: TranslateService

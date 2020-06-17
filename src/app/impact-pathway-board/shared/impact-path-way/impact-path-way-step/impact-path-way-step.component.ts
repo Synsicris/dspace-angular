@@ -67,16 +67,14 @@ export class ImpactPathWayStepComponent {
           impactPathwayStep.parentId,
           impactPathwayStep.id,
           item.type.value,
-          item.metadata,
-          modalRef);
+          item.metadata);
       });
       modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
         items.forEach((item) => {
           this.impactPathwayService.dispatchAddImpactPathwayTaskAction(
             impactPathwayStep.parentId,
             impactPathwayStep.id,
-            item.id,
-            modalRef);
+            item.id);
         })
       });
     })

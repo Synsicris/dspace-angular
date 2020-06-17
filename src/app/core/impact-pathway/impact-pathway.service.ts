@@ -11,7 +11,6 @@ import {
 } from 'rxjs';
 import { catchError, concatMap, delay, distinctUntilChanged, flatMap, map, reduce, take, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from './models/impact-pathway.model';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
@@ -88,32 +87,28 @@ export class ImpactPathwayService {
     impactPathwayId: string,
     stepId: string,
     parentTaskId: string,
-    taskId: string,
-    modal?: NgbActiveModal
+    taskId: string
   ) {
     this.store.dispatch(new AddImpactPathwaySubTaskAction(
       impactPathwayId,
       stepId,
       parentTaskId,
-      taskId,
-      modal));
+      taskId));
   }
 
   dispatchAddImpactPathwayTaskAction(
     impactPathwayId: string,
     stepId: string,
-    taskId: string,
-    modal?: NgbActiveModal
+    taskId: string
   ) {
     this.store.dispatch(new AddImpactPathwayTaskAction(
       impactPathwayId,
       stepId,
-      taskId,
-      modal));
+      taskId));
   }
 
-  dispatchGenerateImpactPathway(impactPathwayName: string, modal?: NgbActiveModal) {
-    this.store.dispatch(new GenerateImpactPathwayAction(impactPathwayName, modal));
+  dispatchGenerateImpactPathway(impactPathwayName: string) {
+    this.store.dispatch(new GenerateImpactPathwayAction(impactPathwayName));
   }
 
   dispatchGenerateImpactPathwaySubTask(
@@ -121,31 +116,27 @@ export class ImpactPathwayService {
     stepId: string,
     parentTaskId: string,
     type: string,
-    metadataMap: MetadataMap,
-    modal?: NgbActiveModal
+    metadataMap: MetadataMap
   ) {
     this.store.dispatch(new GenerateImpactPathwaySubTaskAction(
       impactPathwayId,
       stepId,
       parentTaskId,
       type,
-      metadataMap,
-      modal));
+      metadataMap));
   }
 
   dispatchGenerateImpactPathwayTask(
     impactPathwayId: string,
     stepId: string,
     type: string,
-    metadataMap: MetadataMap,
-    modal?: NgbActiveModal
+    metadataMap: MetadataMap
   ) {
     this.store.dispatch(new GenerateImpactPathwayTaskAction(
       impactPathwayId,
       stepId,
       type,
-      metadataMap,
-      modal));
+      metadataMap));
   }
 
   dispatchMoveSubTask(
