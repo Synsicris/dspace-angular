@@ -7,7 +7,7 @@ import {
   ChangeChartViewAction,
   GenerateWorkpackageAction,
   GenerateWorkpackageStepAction,
-  MoveWorkpackageAction,
+  MoveWorkpackageAction, MoveWorkpackageStepAction,
   RemoveWorkpackageAction,
   RemoveWorkpackageStepAction,
   RetrieveAllWorkpackagesAction,
@@ -60,6 +60,10 @@ export class WorkingPlanStateService {
 
   public dispatchMoveWorkpackage(workpackageId: string, oldIndex: number, newIndex: number): void {
     this.store.dispatch(new MoveWorkpackageAction(workpackageId, oldIndex, newIndex))
+  }
+
+  public dispatchMoveWorkpackageStep(workpackageId: string, workpackage: Workpackage, workpackageStepId: string, oldIndex: number, newIndex: number): void {
+    this.store.dispatch(new MoveWorkpackageStepAction(workpackageId, workpackage, workpackageStepId, oldIndex, newIndex))
   }
 
   public dispatchRemoveWorkpackage(workpackageId: string, workspaceItemId: string): void {

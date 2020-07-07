@@ -23,7 +23,7 @@ import {
   InitWorkingplanAction,
   InitWorkingplanErrorAction,
   InitWorkingplanSuccessAction,
-  MoveWorkpackageAction,
+  MoveWorkpackageAction, MoveWorkpackageStepAction,
   RemoveWorkpackageAction,
   RemoveWorkpackageErrorAction,
   RemoveWorkpackageStepAction,
@@ -33,7 +33,7 @@ import {
   RetrieveAllWorkpackagesErrorAction,
   SaveWorkpackageOrderAction,
   SaveWorkpackageOrderErrorAction,
-  SaveWorkpackageOrderSuccessAction,
+  SaveWorkpackageOrderSuccessAction, SaveWorkpackageStepsOrderAction, SaveWorkpackageStepsOrderErrorAction,
   UpdateWorkpackageAction,
   UpdateWorkpackageErrorAction,
   UpdateWorkpackageStepAction,
@@ -354,6 +354,43 @@ export class WorkingPlanEffects {
             console.error(error.message);
           }
           return observableOf(new SaveWorkpackageOrderErrorAction(action.payload.oldWorkpackageEntries))
+        }));
+    }));
+
+  /**
+   * Dispatch a [SaveWorkpackageOrderAction]
+   */
+  @Effect() moveWorkpackageSteps$ = this.actions$.pipe(
+    ofType(WorkpackageActionTypes.MOVE_WORKPACKAGE_STEP),
+    withLatestFrom(this.store$),
+    map(([action, state]: [MoveWorkpackageStepAction, any]) => {
+      return new SaveWorkpackageStepsOrderAction(
+        action.payload.workpackageId,
+        state.core.workingplan.workpackages[action.payload.workpackageId],
+        action.payload.workpackage.steps
+      );
+    }));
+
+  /**
+   * Dispatch a [SaveWorkpackageOrderSuccessAction] or a [SaveWorkpackageOrderErrorAction] on error
+   */
+  @Effect() updateWorkpackageStepsPlace$ = this.actions$.pipe(
+    ofType(WorkpackageActionTypes.SAVE_WORKPACKAGE_STEPS_ORDER),
+    withLatestFrom(this.store$),
+    switchMap(([action, state]: [SaveWorkpackageStepsOrderAction, any]) => {
+      return this.workingPlanService.updateWorkpackageStepsPlace(
+        action.payload.workpackageId,
+        state.core.workingplan.workpackages[action.payload.workpackageId].steps
+      ).pipe(
+        map(() => new SaveWorkpackageOrderSuccessAction()),
+        catchError((error: Error) => {
+          if (error) {
+            console.error(error.message);
+          }
+          return observableOf(new SaveWorkpackageStepsOrderErrorAction(
+            action.payload.workpackageId,
+            action.payload.previousStepsState
+          ));
         }));
     }));
 

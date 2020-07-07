@@ -49,6 +49,9 @@ export const WorkpackageActionTypes = {
   SAVE_WORKPACKAGE_ORDER: type('dspace/core/workingplan/SAVE_WORKPACKAGE_ORDER'),
   SAVE_WORKPACKAGE_ORDER_SUCCESS: type('dspace/core/workingplan/SAVE_WORKPACKAGE_ORDER_SUCCESS'),
   SAVE_WORKPACKAGE_ORDER_ERROR: type('dspace/core/workingplan/SAVE_WORKPACKAGE_ORDER_ERROR'),
+  SAVE_WORKPACKAGE_STEPS_ORDER: type('dspace/core/workingplan/SAVE_WORKPACKAGE_STEPS_ORDER'),
+  SAVE_WORKPACKAGE_STEPS_ORDER_SUCCESS: type('dspace/core/workingplan/SAVE_WORKPACKAGE_STEPS_ORDER_SUCCESS'),
+  SAVE_WORKPACKAGE_STEPS_ORDER_ERROR: type('dspace/core/workingplan/SAVE_WORKPACKAGE_STEPS_ORDER_ERROR'),
   NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE: type('dspace/core/workingplan/NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE'),
 };
 
@@ -608,6 +611,7 @@ export class MoveWorkpackageStepAction implements Action {
   type = WorkpackageActionTypes.MOVE_WORKPACKAGE_STEP;
   payload: {
     workpackageId: string;
+    workpackage: Workpackage;
     workpackageStepId: string;
     oldIndex: number
     newIndex: number;
@@ -618,6 +622,8 @@ export class MoveWorkpackageStepAction implements Action {
    *
    * @param workpackageId
    *    the workpackage's id
+   * @param workpackage
+   *    the workpackage's object
    * @param workpackageStepId
    *    the workpackage step's id
    * @param oldIndex
@@ -625,8 +631,8 @@ export class MoveWorkpackageStepAction implements Action {
    * @param newIndex
    *    the new index
    */
-  constructor(workpackageId: string, workpackageStepId: string, oldIndex: number, newIndex: number) {
-    this.payload = { workpackageId, workpackageStepId, oldIndex, newIndex };
+  constructor(workpackageId: string, workpackage: Workpackage, workpackageStepId: string, oldIndex: number, newIndex: number) {
+    this.payload = { workpackageId, workpackage, workpackageStepId, oldIndex, newIndex };
   }
 }
 
@@ -643,7 +649,7 @@ export class SaveWorkpackageOrderAction implements Action {
    * Create a new UpdateWorkpackageErrorAction
    *
    * @param oldWorkpackageEntries
-   *    the old old Workpackage Entries state
+   *    the old Workpackage Entries state
    */
   constructor(oldWorkpackageEntries: WorkpackageEntries) {
     this.payload = { oldWorkpackageEntries };
@@ -670,10 +676,66 @@ export class SaveWorkpackageOrderErrorAction implements Action {
    * Create a new UpdateWorkpackageErrorAction
    *
    * @param oldWorkpackageEntries
-   *    the old old Workpackage Entries state
+   *    the old Workpackage Entries state
    */
   constructor(oldWorkpackageEntries: WorkpackageEntries) {
     this.payload = { oldWorkpackageEntries };
+  }
+}
+
+/**
+ * An ngrx action to change order of a workpackage
+ */
+export class SaveWorkpackageStepsOrderAction implements Action {
+  type = WorkpackageActionTypes.SAVE_WORKPACKAGE_STEPS_ORDER;
+  payload: {
+    workpackageId: string;
+    workpackage: Workpackage;
+    previousStepsState: WorkpackageStep[];
+  };
+
+  /**
+   * Create a new SaveWorkpackageStepsOrderAction
+   *
+   * @param workpackageId
+   *    the parent workpackage's id
+   * @param workpackage
+   *    the parent workpackage
+   * @param previousStepsState
+   *    the previous WorkpackageSteps array state
+   */
+  constructor(workpackageId: string, workpackage: Workpackage, previousStepsState: WorkpackageStep[]) {
+    this.payload = { workpackageId, workpackage, previousStepsState };
+  }
+}
+
+/**
+ * An ngrx action to change order of a workpackage
+ */
+export class SaveWorkpackageStepsOrderSuccessAction implements Action {
+  type = WorkpackageActionTypes.SAVE_WORKPACKAGE_STEPS_ORDER_SUCCESS;
+}
+
+/**
+ * An ngrx action to change order of a workpackage
+ */
+export class SaveWorkpackageStepsOrderErrorAction implements Action {
+  type = WorkpackageActionTypes.SAVE_WORKPACKAGE_STEPS_ORDER_ERROR;
+  payload: {
+    workpackageId: string;
+    previousStepsState: WorkpackageStep[];
+  };
+
+  /**
+   * Create a new SaveWorkpackageStepsOrderErrorAction
+   *
+   * @param workpackageId
+   *    the parent workpackage's id
+   * @param previousStepsState
+   *    the previous WorkpackageSteps array state
+   */
+  constructor(workpackageId: string, previousStepsState: WorkpackageStep[]) {
+    this.payload = { workpackageId, previousStepsState };
   }
 }
 
@@ -721,6 +783,9 @@ export type WorkingPlanActions
   | SaveWorkpackageOrderAction
   | SaveWorkpackageOrderErrorAction
   | SaveWorkpackageOrderSuccessAction
+  | SaveWorkpackageStepsOrderAction
+  | SaveWorkpackageStepsOrderErrorAction
+  | SaveWorkpackageStepsOrderSuccessAction
   | UpdateWorkpackageAction
   | UpdateWorkpackageErrorAction
   | UpdateWorkpackageSuccessAction

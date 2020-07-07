@@ -431,6 +431,21 @@ export class WorkingPlanService {
     )
   }
 
+  updateWorkpackageStepsPlace(workpackageId: string, workpackageSteps: WorkpackageStep[]): Observable<Item> {
+    const metadataList: MetadatumViewModel[] = workpackageSteps
+      .map((step, index) => (
+          {
+            key: environment.workingPlan.workingPlanStepRelationMetadata,
+            language: '',
+            value: step.id,
+            place: index,
+            authority: '',
+            confidence: -1
+          } as MetadatumViewModel));
+
+    return this.updateMetadataItem(workpackageId, metadataList)
+  }
+
   updateWorkpackageMetadata(
     workpackageId: string,
     workpackage: Workpackage,
