@@ -127,7 +127,7 @@ export class ItemAuthorityRelationService {
       confidence: 600
     };
     const path = isEmpty(stepTasks) ? pathCombiner.getPath(relation)
-      : pathCombiner.getPath([relation, stepTasks.length.toString()]);
+      : pathCombiner.getPath([relation, '-']);
     this.operationsBuilder.add(
       path,
       taskToAdd,
