@@ -26,6 +26,7 @@ export class ImpactPathWayStepComponent {
 
   public impactPathwayStep$: Observable<ImpactPathwayStep>;
 
+  private title$: Observable<string>;
   constructor(
     protected cdr: ChangeDetectorRef,
     protected impactPathwayService: ImpactPathwayService,
@@ -34,6 +35,7 @@ export class ImpactPathWayStepComponent {
 
   ngOnInit(): void {
     this.impactPathwayStep$ = this.impactPathwayService.getImpactPathwayStepById(this.impactPathwayStepId);
+    this.title$ = this.impactPathwayService.getImpactPathwayStepTitle(this.impactPathwayStepId);
   }
 
   createTask() {
@@ -85,7 +87,7 @@ export class ImpactPathWayStepComponent {
   }
 
   getStepTitle(): Observable<string> {
-    return this.impactPathwayService.getImpactPathwayStepTitle(this.impactPathwayStepId)
+    return this.title$;
   }
 
   getTasks(): Observable<ImpactPathwayTask[]> {
