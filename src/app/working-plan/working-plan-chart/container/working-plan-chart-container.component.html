@@ -46,14 +46,14 @@
           <button *ngIf="node.level !== 0" mat-icon-button disabled></button>
           <button *ngIf="node.level == 0"
                   class="btn btn-lg btn-link p-0 text-primary"
-                  [disabled]="dataSource.data.length == 0 || node.index == (dataSource.data.length - 1) || (isMoving() | async)"
-                  (click)="moveWorkpackage(node, node.index, (node.index + 1)); $event.stopPropagation()">
+                  [disabled]="canMoveDown(node, node.level, node.index) || (isMoving() | async)"
+                  (click)="moveWorkpackage(node, node.level, node.index, (node.index + 1)); $event.stopPropagation()">
             <span><i class='fas fa-arrow-down'></i></span>
           </button>
           <button *ngIf="node.level == 0"
                   class="btn btn-lg btn-link p-0 text-primary"
-                  [disabled]="dataSource.data.length == 0 || node.index == 0 || (isMoving() | async)"
-                  (click)="moveWorkpackage(node, node.index, (node.index - 1)); $event.stopPropagation()">
+                  [disabled]="canMoveUp(node, node.level, node.index) || (isMoving() | async)"
+                  (click)="moveWorkpackage(node, node.level, node.index, (node.index - 1)); $event.stopPropagation()">
             <span><i class='fas fa-arrow-up'></i></span>
           </button>
           <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
