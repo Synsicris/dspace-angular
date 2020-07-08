@@ -1,6 +1,6 @@
 {
 
-  // "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page. ",
+  // "404.help": "We can\'t find the page you\'re looking for. The page may have been moved or deleted. You can use the button below to get back to the home page. ",
   "404.help": "Die Seite, die Sie aufrufen wollten, konnte nicht gefunden werden. Sie könnte verschoben oder gelöscht worden sein. Mit dem Link unten kommen Sie zurück zur Startseite. ",
 
   // "404.link.home-page": "Take me to the home page",
@@ -635,9 +635,9 @@
   // TODO New key - Add a translation
   "admin.access-control.groups.form.subgroups-list.notification.failure.noActiveGroup": "No current active group, submit a name first.",
 
-  // "admin.access-control.groups.form.subgroups-list.notification.failure.subgroupToAddIsActiveGroup": "This is the current group, can't be added.",
+  // "admin.access-control.groups.form.subgroups-list.notification.failure.subgroupToAddIsActiveGroup": "This is the current group, can\'t be added.",
   // TODO New key - Add a translation
-  "admin.access-control.groups.form.subgroups-list.notification.failure.subgroupToAddIsActiveGroup": "This is the current group, can't be added.",
+  "admin.access-control.groups.form.subgroups-list.notification.failure.subgroupToAddIsActiveGroup": "This is the current group, can\'t be added.",
 
   // "admin.access-control.groups.form.subgroups-list.no-items": "No groups found with this in their name or this as UUID",
   // TODO New key - Add a translation
@@ -735,9 +735,9 @@
   // TODO New key - Add a translation
   "bitstream.edit.form.description.label": "Description",
 
-  // "bitstream.edit.form.embargo.hint": "The first day from which access is allowed. <b>This date cannot be modified on this form.</b> To set an embargo date for a bitstream, go to the <i>Item Status</i> tab, click <i>Authorizations...</i>, create or edit the bitstream's <i>READ</i> policy, and set the <i>Start Date</i> as desired.",
+  // "bitstream.edit.form.embargo.hint": "The first day from which access is allowed. <b>This date cannot be modified on this form.</b> To set an embargo date for a bitstream, go to the <i>Item Status</i> tab, click <i>Authorizations...</i>, create or edit the bitstream\'s <i>READ</i> policy, and set the <i>Start Date</i> as desired.",
   // TODO New key - Add a translation
-  "bitstream.edit.form.embargo.hint": "The first day from which access is allowed. <b>This date cannot be modified on this form.</b> To set an embargo date for a bitstream, go to the <i>Item Status</i> tab, click <i>Authorizations...</i>, create or edit the bitstream's <i>READ</i> policy, and set the <i>Start Date</i> as desired.",
+  "bitstream.edit.form.embargo.hint": "The first day from which access is allowed. <b>This date cannot be modified on this form.</b> To set an embargo date for a bitstream, go to the <i>Item Status</i> tab, click <i>Authorizations...</i>, create or edit the bitstream\'s <i>READ</i> policy, and set the <i>Start Date</i> as desired.",
 
   // "bitstream.edit.form.embargo.label": "Embargo until specific date",
   // TODO New key - Add a translation
@@ -775,9 +775,9 @@
   // TODO New key - Add a translation
   "bitstream.edit.form.selectedFormat.unknown": "Format not in list",
 
-  // "bitstream.edit.notifications.error.format.title": "An error occurred saving the bitstream's format",
+  // "bitstream.edit.notifications.error.format.title": "An error occurred saving the bitstream\'s format",
   // TODO New key - Add a translation
-  "bitstream.edit.notifications.error.format.title": "An error occurred saving the bitstream's format",
+  "bitstream.edit.notifications.error.format.title": "An error occurred saving the bitstream\'s format",
 
   // "bitstream.edit.notifications.saved.content": "Your changes to this bitstream were saved.",
   // TODO New key - Add a translation
@@ -1006,7 +1006,7 @@
   // "collection.edit.logo.notifications.delete.success.title": "Logo deleted",
   "collection.edit.logo.notifications.delete.success.title": "Logo gelöscht",
 
-  // "collection.edit.logo.notifications.delete.success.content": "Successfully deleted the collection's logo",
+  // "collection.edit.logo.notifications.delete.success.content": "Successfully deleted the collection\'s logo",
   "collection.edit.logo.notifications.delete.success.content": "Logo der Sammlung erfolgreich gelöscht",
 
   // "collection.edit.logo.notifications.delete.error.title": "Error deleting logo",
@@ -1076,8 +1076,8 @@
   // "collection.edit.tabs.source.head": "Content Source",
   "collection.edit.tabs.source.head": "Herkunft des Inhalts",
 
-  // "collection.edit.tabs.source.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
-  "collection.edit.tabs.source.notifications.discarded.content": "Die Änderungen wurden verworfen. Um die Änderungen wieder einzusetzen klicken Sie auf den 'Rückgängig' Knopf",
+  // "collection.edit.tabs.source.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the \'Undo\' button",
+  "collection.edit.tabs.source.notifications.discarded.content": "Die Änderungen wurden verworfen. Um die Änderungen wieder einzusetzen klicken Sie auf den \'Rückgängig\' Knopf",
 
   // "collection.edit.tabs.source.notifications.discarded.title": "Changed discarded",
   "collection.edit.tabs.source.notifications.discarded.title": "Änderungen verworfen",
@@ -1088,7 +1088,7 @@
   // "collection.edit.tabs.source.notifications.invalid.title": "Metadata invalid",
   "collection.edit.tabs.source.notifications.invalid.title": "Metadaten ungültig",
 
-  // "collection.edit.tabs.source.notifications.saved.content": "Your changes to this collection's content source were saved.",
+  // "collection.edit.tabs.source.notifications.saved.content": "Your changes to this collection\'s content source were saved.",
   "collection.edit.tabs.source.notifications.saved.content": "Ihre Änderunge bezüglich der Quelle für den Inhalt der Sammlung wurden gespeichert.",
 
   // "collection.edit.tabs.source.notifications.saved.title": "Content Source saved",
@@ -1153,7 +1153,7 @@
 
 
 
-  // "collection.source.update.notifications.error.content": "The provided settings have been tested and didn't work.",
+  // "collection.source.update.notifications.error.content": "The provided settings have been tested and didn\'t work.",
   "collection.source.update.notifications.error.content": "Die angegebenen Einstellen wurden getestet und haben nicht funktioniert.",
 
   // "collection.source.update.notifications.error.title": "Server Error",
@@ -1221,7 +1221,7 @@
   // "community.edit.logo.notifications.delete.success.title": "Logo deleted",
   "community.edit.logo.notifications.delete.success.title": "Logo gelöscht",
 
-  // "community.edit.logo.notifications.delete.success.content": "Successfully deleted the community's logo",
+  // "community.edit.logo.notifications.delete.success.content": "Successfully deleted the community\'s logo",
   "community.edit.logo.notifications.delete.success.content": "Das Bereichslogo wurde erfolgreich gelöscht",
 
   // "community.edit.logo.notifications.delete.error.title": "Error deleting logo",
@@ -1502,72 +1502,57 @@
 
 
   // "impact-pathway.add.btn": "Add item",
-  // TODO New key - Add a translation
-  "impact-pathway.add.btn": "Add item",
+  "impact-pathway.add.btn": "Ressource hinzufügen",
 
   // "impact-pathway.breadcrumbs" : "Impact pathway",
-  // TODO New key - Add a translation
-  "impact-pathway.breadcrumbs" : "Impact pathway",
+  "impact-pathway.breadcrumbs" : "Impact Pathway",
 
   // "impact-pathway.create.btn": "Create item",
-  // TODO New key - Add a translation
-  "impact-pathway.create.btn": "Create item",
+  "impact-pathway.create.btn": "Ressource erstellen",
 
   // "impact-pathway.create.error": "There was an issue when generating the impact pathway, please try again later.",
-  // TODO New key - Add a translation
-  "impact-pathway.create.error": "There was an issue when generating the impact pathway, please try again later.",
+  "impact-pathway.create.error": "Es gab ein Problem bei der Erstellung des Impact Pathway. Versuchen sie es später noch einmal.",
 
   // "impact-pathway.create.head": "New impact pathway",
-  // TODO New key - Add a translation
-  "impact-pathway.create.head": "New impact pathway",
+  "impact-pathway.create.head": "Neuer Impact Pathway",
 
   // "impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
-  // TODO New key - Add a translation
-  "impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
+  "impact-pathway.create.placeholder": "Geben sie den Namen des neuen Impact Pathways ein",
 
   // "impact-pathway.create.success": "The impact pathway has been generated successfully.",
-  // TODO New key - Add a translation
-  "impact-pathway.create.success": "The impact pathway has been generated successfully.",
+  "impact-pathway.create.success": "Der Impact Pathway wurde erfolgreich erstellt.",
 
   // "impact-pathway.edit.page.title": "Edit impact pathway",
-  // TODO New key - Add a translation
-  "impact-pathway.edit.page.title": "Edit impact pathway",
+    "impact-pathway.edit.page.title": "Bearbeiten sie den Impact Pathway",
 
   // "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
-  // TODO New key - Add a translation
-  "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
+  "impact-pathway.move.task.error": "Es gab ein Problem beim Verschieben einer Ressource. Versuchen sie es später noch einmal.",
 
   // "impact-pathway.objectives.edit.page.title": "Edit objectives",
-  // TODO New key - Add a translation
-  "impact-pathway.objectives.edit.page.title": "Edit objectives",
+  "impact-pathway.objectives.edit.page.title": "Bearbeiten sie die Ziele",
 
   // "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
-  // TODO New key - Add a translation
-  "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
+  "impact-pathway.patch.metadata.error": "Es gab ein Problem beim Speichern der Metadaten. Versuchen sie es später noch einmal.",
 
   // "impact-pathway.task.create.error": "There was an issue when creating the new item, please try again later.",
-  // TODO New key - Add a translation
-  "impact-pathway.task.create.error": "There was an issue when creating the new item, please try again later.",
+  "impact-pathway.task.create.error": "Es gab ein Problem beim Erstellen einer neuen Ressource. Versuchen sie es später noch einmal.",
 
   // "impact-pathway.task.create.head": "New item",
-  // TODO New key - Add a translation
-  "impact-pathway.task.create.head": "New item",
+  "impact-pathway.task.create.head": "Neue Ressource",
 
   // "impact-pathway.task.create.success": "New item has been created successfully.",
-  // TODO New key - Add a translation
-  "impact-pathway.task.create.success": "New item has been created successfully.",
+  "impact-pathway.task.create.success": "Die neue Ressource wurde erfolgreich erstellt.",
 
   // "impact-pathway.wrapper.info": "<b>Develop your Impact Pathway</b><br>  What are your objectives so that your project can have an impact? Sort objectives into categories. Select and describe funder objectives. How are your project objectives related (Draw arrows between your objectives)? Add further explanations. Specify each objectives and add items and tasks.",
-  // TODO New key - Add a translation
-  "impact-pathway.wrapper.info": "<b>Develop your Impact Pathway</b><br>  What are your objectives so that your project can have an impact? Sort objectives into categories. Select and describe funder objectives. How are your project objectives related (Draw arrows between your objectives)? Add further explanations. Specify each objectives and add items and tasks.",
+  "impact-pathway.wrapper.info": "<b>Entwicklen sie ihren Impact Pathway</b><br>  Was sind ihre Ziele, damit ihr Projekt eine Wirkung erzielen kann? Sortieren sie die Ziele in Kategorien. Wählen und beschreiben sie die Ziele der Förderer. Wie hängen ihre Projektziele zusammen? Nutzen sie dafür die Pfeile. Fügen sie weitere Erklärungen hinzu. Geben sie die einzelnen Ziele an und fügen Sie Ressourcen und Aufgaben hinzu.",
 
   // "impactpathway.listelement.badge": "Impact pathway",
-  // TODO New key - Add a translation
-  "impactpathway.listelement.badge": "Impact pathway",
+  "impactpathway.listelement.badge": "Impact Pathway",
 
   // "impactpathwaystep.listelement.badge": "Impact pathway step",
-  // TODO New key - Add a translation
-  "impactpathwaystep.listelement.badge": "Impact pathway step",
+  "impactpathwaystep.listelement.badge": "Impact Pathway Schritt",
+
+
 
   // "innovationideas.listelement.badge": "Ideas for innovation and change",
   "innovationideas.listelement.badge": "Ideen für Innovation und Veränderung",
@@ -1669,9 +1654,9 @@
   // TODO New key - Add a translation
   "item.edit.bitstreams.edit.buttons.undo": "Undo changes",
 
-  // "item.edit.bitstreams.empty": "This item doesn't contain any bitstreams. Click the upload button to create one.",
+  // "item.edit.bitstreams.empty": "This item doesn\'t contain any bitstreams. Click the upload button to create one.",
   // TODO New key - Add a translation
-  "item.edit.bitstreams.empty": "This item doesn't contain any bitstreams. Click the upload button to create one.",
+  "item.edit.bitstreams.empty": "This item doesn\'t contain any bitstreams. Click the upload button to create one.",
 
   // "item.edit.bitstreams.headers.actions": "Actions",
   // TODO New key - Add a translation
@@ -1693,9 +1678,9 @@
   // TODO New key - Add a translation
   "item.edit.bitstreams.headers.name": "Name",
 
-  // "item.edit.bitstreams.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
+  // "item.edit.bitstreams.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the \'Undo\' button",
   // TODO New key - Add a translation
-  "item.edit.bitstreams.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
+  "item.edit.bitstreams.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the \'Undo\' button",
 
   // "item.edit.bitstreams.notifications.discarded.title": "Changes discarded",
   // TODO New key - Add a translation
@@ -1705,17 +1690,17 @@
   // TODO New key - Add a translation
   "item.edit.bitstreams.notifications.move.failed.title": "Error moving bitstreams",
 
-  // "item.edit.bitstreams.notifications.move.saved.content": "Your move changes to this item's bitstreams and bundles have been saved.",
+  // "item.edit.bitstreams.notifications.move.saved.content": "Your move changes to this item\'s bitstreams and bundles have been saved.",
   // TODO New key - Add a translation
-  "item.edit.bitstreams.notifications.move.saved.content": "Your move changes to this item's bitstreams and bundles have been saved.",
+  "item.edit.bitstreams.notifications.move.saved.content": "Your move changes to this item\'s bitstreams and bundles have been saved.",
 
   // "item.edit.bitstreams.notifications.move.saved.title": "Move changes saved",
   // TODO New key - Add a translation
   "item.edit.bitstreams.notifications.move.saved.title": "Move changes saved",
 
-  // "item.edit.bitstreams.notifications.outdated.content": "The item you're currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
+  // "item.edit.bitstreams.notifications.outdated.content": "The item you\'re currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
   // TODO New key - Add a translation
-  "item.edit.bitstreams.notifications.outdated.content": "The item you're currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
+  "item.edit.bitstreams.notifications.outdated.content": "The item you\'re currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
 
   // "item.edit.bitstreams.notifications.outdated.title": "Changes outdated",
   // TODO New key - Add a translation
@@ -1725,9 +1710,9 @@
   // TODO New key - Add a translation
   "item.edit.bitstreams.notifications.remove.failed.title": "Error deleting bitstream",
 
-  // "item.edit.bitstreams.notifications.remove.saved.content": "Your removal changes to this item's bitstreams have been saved.",
+  // "item.edit.bitstreams.notifications.remove.saved.content": "Your removal changes to this item\'s bitstreams have been saved.",
   // TODO New key - Add a translation
-  "item.edit.bitstreams.notifications.remove.saved.content": "Your removal changes to this item's bitstreams have been saved.",
+  "item.edit.bitstreams.notifications.remove.saved.content": "Your removal changes to this item\'s bitstreams have been saved.",
 
   // "item.edit.bitstreams.notifications.remove.saved.title": "Removal changes saved",
   // TODO New key - Add a translation
@@ -1776,7 +1761,7 @@
   // "item.edit.item-mapper.buttons.add": "Map item to selected collections",
   "item.edit.item-mapper.buttons.add": "Ressource in die gewählte(n) Sammlung(en) spiegeln",
 
-  // "item.edit.item-mapper.buttons.remove": "Remove item's mapping for selected collections",
+  // "item.edit.item-mapper.buttons.remove": "Remove item\'s mapping for selected collections",
   "item.edit.item-mapper.buttons.remove": "Spiegelung der Ressource aus der/den gewählten Sammlung(en) entfernen",
 
   // "item.edit.item-mapper.cancel": "Cancel",
@@ -1859,8 +1844,8 @@
   // "item.edit.metadata.metadatafield.invalid": "Please choose a valid metadata field",
   "item.edit.metadata.metadatafield.invalid": "Bitte wählen Sie ein gültiges Metadatenfeld",
 
-  // "item.edit.metadata.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
-  "item.edit.metadata.notifications.discarded.content": "Ihre Änderungen wurden verworfen. Um diese wieder anzuwenden, klicken Sie auf den 'Rückgängig machen' Knopf",
+  // "item.edit.metadata.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the \'Undo\' button",
+  "item.edit.metadata.notifications.discarded.content": "Ihre Änderungen wurden verworfen. Um diese wieder anzuwenden, klicken Sie auf den \'Rückgängig machen\' Knopf",
 
   // "item.edit.metadata.notifications.discarded.title": "Changed discarded",
   "item.edit.metadata.notifications.discarded.title": "Änderungen verworfen",
@@ -1871,13 +1856,13 @@
   // "item.edit.metadata.notifications.invalid.title": "Metadata invalid",
   "item.edit.metadata.notifications.invalid.title": "Metadaten ungültig",
 
-  // "item.edit.metadata.notifications.outdated.content": "The item you're currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
+  // "item.edit.metadata.notifications.outdated.content": "The item you\'re currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
   "item.edit.metadata.notifications.outdated.content": "Die Ressource, an der Sie gerade arbeiten, wurde von einem anderen Benutzer geändert. Ihre aktuellen Änderungen werden nicht angewandt, um Konflikte zu vermeiden.",
 
   // "item.edit.metadata.notifications.outdated.title": "Changed outdated",
   "item.edit.metadata.notifications.outdated.title": "Änderung veraltet",
 
-  // "item.edit.metadata.notifications.saved.content": "Your changes to this item's metadata were saved.",
+  // "item.edit.metadata.notifications.saved.content": "Your changes to this item\'s metadata were saved.",
   "item.edit.metadata.notifications.saved.content": "Ihre Änderungen an den Metadaten der Ressource wurden gespeichert.",
 
   // "item.edit.metadata.notifications.saved.title": "Metadata saved",
@@ -2006,8 +1991,8 @@
   // "item.edit.relationships.edit.buttons.undo": "Undo changes",
   "item.edit.relationships.edit.buttons.undo": "Rückgängig machen",
 
-  // "item.edit.relationships.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the 'Undo' button",
-  "item.edit.relationships.notifications.discarded.content": "Ihre Änderungen wurden verworfen. Um sie dennoch anzuwenden klicken Sie auf den 'Rückgängig machen' Knopf",
+  // "item.edit.relationships.notifications.discarded.content": "Your changes were discarded. To reinstate your changes click the \'Undo\' button",
+  "item.edit.relationships.notifications.discarded.content": "Ihre Änderungen wurden verworfen. Um sie dennoch anzuwenden klicken Sie auf den \'Rückgängig machen\' Knopf",
 
   // "item.edit.relationships.notifications.discarded.title": "Changes discarded",
   "item.edit.relationships.notifications.discarded.title": "Änderungen verworfen",
@@ -2015,13 +2000,13 @@
   // "item.edit.relationships.notifications.failed.title": "Error deleting relationship",
   "item.edit.relationships.notifications.failed.title": "Fehler beim Löschen der Beziehung",
 
-  // "item.edit.relationships.notifications.outdated.content": "The item you're currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
+  // "item.edit.relationships.notifications.outdated.content": "The item you\'re currently working on has been changed by another user. Your current changes are discarded to prevent conflicts",
   "item.edit.relationships.notifications.outdated.content": "Die Ressource, die Sie gerade bearbeiten, wurde von einem anderen Benutzer geändert. Ihre aktuellen Änderungen werden verworfen, um Konflikte zu vermeiden.",
 
   // "item.edit.relationships.notifications.outdated.title": "Changes outdated",
   "item.edit.relationships.notifications.outdated.title": "Änderungen veraltet",
 
-  // "item.edit.relationships.notifications.saved.content": "Your changes to this item's relationships were saved.",
+  // "item.edit.relationships.notifications.saved.content": "Your changes to this item\'s relationships were saved.",
   "item.edit.relationships.notifications.saved.content": "Ihre Änderungen an den Beziehungen der Ressource wurden gespeichert.",
 
   // "item.edit.relationships.notifications.saved.title": "Relationships saved",
@@ -2065,7 +2050,7 @@
   // "item.edit.tabs.status.buttons.authorizations.button": "Authorizations...",
   "item.edit.tabs.status.buttons.authorizations.button": "Rechte...",
 
-  // "item.edit.tabs.status.buttons.authorizations.label": "Edit item's authorization policies",
+  // "item.edit.tabs.status.buttons.authorizations.label": "Edit item\'s authorization policies",
   "item.edit.tabs.status.buttons.authorizations.label": "Rechte der Ressource bearbeiten",
 
   // "item.edit.tabs.status.buttons.delete.button": "Permanently delete",
@@ -2185,12 +2170,10 @@
   "item.page.collections": "Sammlungen",
 
   // "item.page.context-menu.options": "Options",
-  // TODO New key - Add a translation
-  "item.page.context-menu.options": "Options",
+  "item.page.context-menu.options": "Optionen",
 
   // "item.page.context-menu.options.edit-impact-pathway.btn": "Edit impact pathway",
-  // TODO New key - Add a translation
-  "item.page.context-menu.options.edit-impact-pathway.btn": "Edit impact pathway",
+  "item.page.context-menu.options.edit-impact-pathway.btn": "Bearbeiten sie den Impact Pathway",
 
   // "item.page.date": "Date",
   "item.page.date": "Datum",
@@ -2305,9 +2288,9 @@
 
 
 
-  // "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href='{{destination}}'>here</a>.",
+  // "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href=\'{{destination}}\'>here</a>.",
   // TODO New key - Add a translation
-  "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href='{{destination}}'>here</a>.",
+  "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href=\'{{destination}}\'>here</a>.",
 
 
 
@@ -2566,8 +2549,7 @@
 
 
   // "menu.section.edit_workingplan": "Working plan",
-  // TODO New key - Add a translation
-  "menu.section.edit_workingplan": "Working plan",
+  "menu.section.edit_workingplan": "Arbeitsplan",
 
   // "menu.section.export": "Export",
   "menu.section.export": "Export",
@@ -2650,8 +2632,7 @@
 
 
   // "menu.section.new_impact_pathway": "Impact pathway",
-  // TODO New key - Add a translation
-  "menu.section.new_impact_pathway": "Impact pathway",
+  "menu.section.new_impact_pathway": "Impact Pathway",
 
   // "menu.section.new_item": "Item",
   "menu.section.new_item": "Ressource",
@@ -2730,7 +2711,7 @@
   // "mydspace.general.text-here": "HERE",
   "mydspace.general.text-here": "Hier",
 
-  // "mydspace.messages.controller-help": "Select this option to send a message to item's submitter.",
+  // "mydspace.messages.controller-help": "Select this option to send a message to item\'s submitter.",
   "mydspace.messages.controller-help": "Wählen Sie diese Option, um dem/derjenigen, die die Ressource eingereicht hat, eine Nachricht zu schicken.",
 
   // "mydspace.messages.description-placeholder": "Insert your message here...",
@@ -2985,15 +2966,13 @@
   "plan_spinoffs.listelement.badge": "Ausgründungen (inkl. Vereinsgründungen) (plan)",
 
   // "plan_workpackages.listelement.badge": "Workpackages (plan)",
-  // TODO New key - Add a translation
-  "plan_workpackages.listelement.badge": "Workpackages (plan)",
+  "plan_workpackages.listelement.badge": "Arbeitspakete (plan)",
+
   // "plan_tasks.listelement.badge": "Tasks (plan)",
-  // TODO New key - Add a translation
-  "plan_tasks.listelement.badge": "Tasks (plan)",
+  "plan_tasks.listelement.badge": "Aufgaben (plan)",
 
   // "pot_societalimpact.listelement.badge": "Expected societal impact",
-  // TODO New key - Add a translation
-  "pot_societalimpact.listelement.badge": "Expected societal impact",
+  "pot_societalimpact.listelement.badge": "Erwartete gesellschaftliche Wirkung",
 
   // "proj_objectives.listelement.badge": "Project objectives",
   // TODO New key - Add a translation
@@ -3500,7 +3479,7 @@
   // "search.results.head": "Search Results",
   "search.results.head": "Suchergebnisse",
 
-  // "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting",
+  // "search.results.no-results": "Your search returned no results. Having trouble finding what you\'re looking for? Try putting",
   "search.results.no-results": "Ihre Suche führte zu keinem Ergebnis. Versuchen Sie es mit ",
 
   // "search.results.no-results-link": "quotes around it",
@@ -3582,10 +3561,10 @@
   // "submission.general.discard.confirm.cancel": "Cancel",
   "submission.general.discard.confirm.cancel": "Abbrechen",
 
-  // "submission.general.discard.confirm.info": "This operation can't be undone. Are you sure?",
+  // "submission.general.discard.confirm.info": "This operation can\'t be undone. Are you sure?",
   "submission.general.discard.confirm.info": "Diese Aktion kann nicht rückgängig gemacht werden. Sind Sie sicher?",
 
-  // "submission.general.discard.confirm.submit": "Yes, I'm sure",
+  // "submission.general.discard.confirm.submit": "Yes, I\'m sure",
   "submission.general.discard.confirm.submit": "Ja, ich bin sicher",
 
   // "submission.general.discard.confirm.title": "Discard submission",
@@ -4166,7 +4145,7 @@
   // "submission.sections.submit.progressbar.describe.physical_objects": "Objects, Materials",
   "submission.sections.submit.progressbar.describe.physical_objects": "Objekte, Materialien",
 
-  // "submission.sections.submit.progressbar.describe.physical_objects.info": "Document all types of (physical) objects and materials here. This summarizes all outputs like e.g. devices as prototypes, miniatures, sediments.If you don't find a specific object type here, check whether it is available under \"Publications\".",
+  // "submission.sections.submit.progressbar.describe.physical_objects.info": "Document all types of (physical) objects and materials here. This summarizes all outputs like e.g. devices as prototypes, miniatures, sediments.If you don\'t find a specific object type here, check whether it is available under \"Publications\".",
   "submission.sections.submit.progressbar.describe.physical_objects.info": "Dokumentieren Sie hier alle Arten von (physischen) Objekten. Hierunter werden unterschiedlichste Objektgattungen wie z.B. Prototypen, Miniaturmodelle oder Sedimentproben zusammengefasst.Wenn Sie eine bestimmte Objektgattung nicht finden, sichten Sie, ob diese unter \"Veröffentlichungen\" vorhanden ist.",
 
   // "submission.sections.submit.progressbar.describe.physical_objects_result": "Type of use and accessibility",
@@ -4187,7 +4166,7 @@
   // "submission.sections.submit.progressbar.describe.projects": "Projects",
   "submission.sections.submit.progressbar.describe.projects": "Projekte",
 
-  // "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties.  Please upload a logo of the project, if available, to support the public presentation of the project.",
+  // "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project\'s visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties.  Please upload a logo of the project, if available, to support the public presentation of the project.",
   "submission.sections.submit.progressbar.describe.projects.info": "Zur Antragstellung: Bitte geben Sie ihren Projektpartnern mit den Teilprojekten Zugang auf das System. Nach der Projektbewilligung:  Beschreiben Sie das Projekt durch Keywords, schließen Sie dabei alle relevanten Aspekte von der Forschungsfrage bis zur Ergebnisverwertung ein. Sie erreichen dadurch eine höhere Sichtbarkeit und fördern den Transfer, da das Projekt bei Suchen von Forschenden, Praxisakteuren und Interessierten leicht gefunden werden kannn.  Bitte laden Sie, falls vorhanden, ein Logo des Projektes hoch, um die öffentliche Darstellung des Projektes zu unterstützen.",
 
   // "submission.sections.submit.progressbar.describe.projects_overview": "Project overview",
@@ -4312,10 +4291,10 @@
   // "submission.sections.upload.delete.confirm.cancel": "Cancel",
   "submission.sections.upload.delete.confirm.cancel": "Abbrechen",
 
-  // "submission.sections.upload.delete.confirm.info": "This operation can't be undone. Are you sure?",
+  // "submission.sections.upload.delete.confirm.info": "This operation can\'t be undone. Are you sure?",
   "submission.sections.upload.delete.confirm.info": "Diese Aktion kann nicht rückgängig gemacht werden. Sind Sie sicher?",
 
-  // "submission.sections.upload.delete.confirm.submit": "Yes, I'm sure",
+  // "submission.sections.upload.delete.confirm.submit": "Yes, I\'m sure",
   "submission.sections.upload.delete.confirm.submit": "Ja, ich bin sicher",
 
   // "submission.sections.upload.delete.confirm.title": "Delete bitstream",
@@ -4394,13 +4373,13 @@
   // "submission.workflow.generic.edit": "Edit",
   "submission.workflow.generic.edit": "Bearbeiten",
 
-  // "submission.workflow.generic.edit-help": "Select this option to change the item's metadata.",
+  // "submission.workflow.generic.edit-help": "Select this option to change the item\'s metadata.",
   "submission.workflow.generic.edit-help": "Wählen Sie diese Option, um die Metadaten der Ressource zu bearbeiten.",
 
   // "submission.workflow.generic.view": "View",
   "submission.workflow.generic.view": "Anzeige",
 
-  // "submission.workflow.generic.view-help": "Select this option to view the item's metadata.",
+  // "submission.workflow.generic.view-help": "Select this option to view the item\'s metadata.",
   "submission.workflow.generic.view-help": "Wählen Sie diese Option, um die Metadaten der Ressourcen anzuzeigen",
 
 
@@ -4414,7 +4393,7 @@
   // "submission.workflow.tasks.claimed.edit": "Edit",
   "submission.workflow.tasks.claimed.edit": "Bearbeiten",
 
-  // "submission.workflow.tasks.claimed.edit_help": "Select this option to change the item's metadata.",
+  // "submission.workflow.tasks.claimed.edit_help": "Select this option to change the item\'s metadata.",
   "submission.workflow.tasks.claimed.edit_help": "Wählen Sie diese Option, um die Metadaten der Ressource zu bearbeiten.",
 
   // "submission.workflow.tasks.claimed.reject.reason.info": "Please enter your reason for rejecting the submission into the box below, indicating whether the submitter may fix a problem and resubmit.",
@@ -4547,72 +4526,55 @@
 
 
   // "working-plan.breadcrumbs" : "Working plan",
-  // TODO New key - Add a translation
-  "working-plan.breadcrumbs" : "Working plan",
+  "working-plan.breadcrumbs" : "Arbeitsplan",
 
   // "working-plan.chart.button.add": "add",
-  // TODO New key - Add a translation
-  "working-plan.chart.button.add": "add",
+  "working-plan.chart.button.add": "Hinzufügen",
 
   // "working-plan.chart.column.dates": "Dates",
-  // TODO New key - Add a translation
-  "working-plan.chart.column.dates": "Dates",
+  "working-plan.chart.column.dates": "Daten",
 
   // "working-plan.chart.column.responsible": "Responsible",
-  // TODO New key - Add a translation
-  "working-plan.chart.column.responsible": "Responsible",
+  "working-plan.chart.column.responsible": "Verantwortlich",
 
   // "working-plan.chart.column.status": "Status",
-  // TODO New key - Add a translation
   "working-plan.chart.column.status": "Status",
 
   // "working-plan.chart.column.steps": "Steps",
-  // TODO New key - Add a translation
-  "working-plan.chart.column.steps": "Steps",
+  "working-plan.chart.column.steps": "Schritte",
 
   // "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
-  // TODO New key - Add a translation
-  "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
+  "working-plan.chart.move.error": "Es gab ein Problem beim Verschieben einer Ressource. Versuchen sie es später noch einmal.",
 
   // "working-plan.chart.toolbar.date-view.month": "Month",
-  // TODO New key - Add a translation
-  "working-plan.chart.toolbar.date-view.month": "Month",
+  "working-plan.chart.toolbar.date-view.month": "Monat",
 
   // "working-plan.chart.toolbar.date-view.quarter": "Quarter",
-  // TODO New key - Add a translation
-  "working-plan.chart.toolbar.date-view.quarter": "Quarter",
+  "working-plan.chart.toolbar.date-view.quarter": "Quartal",
 
   // "working-plan.chart.toolbar.date-view.quarter.first": "First",
-  // TODO New key - Add a translation
-  "working-plan.chart.toolbar.date-view.quarter.first": "First",
+  "working-plan.chart.toolbar.date-view.quarter.first": "Erstes",
 
   // "working-plan.chart.toolbar.date-view.quarter.fourth": "Fourth",
-  // TODO New key - Add a translation
-  "working-plan.chart.toolbar.date-view.quarter.fourth": "Fourth",
+  "working-plan.chart.toolbar.date-view.quarter.fourth": "Viertes",
 
   // "working-plan.chart.toolbar.date-view.quarter.second": "Second",
-  // TODO New key - Add a translation
-  "working-plan.chart.toolbar.date-view.quarter.second": "Second",
+  "working-plan.chart.toolbar.date-view.quarter.second": "Zweites",
 
   // "working-plan.chart.toolbar.date-view.quarter.third": "Third",
-  // TODO New key - Add a translation
-  "working-plan.chart.toolbar.date-view.quarter.third": "Third",
+  "working-plan.chart.toolbar.date-view.quarter.third": "Drittes",
 
   // "working-plan.chart.toolbar.date-view.year": "Year",
-  // TODO New key - Add a translation
-  "working-plan.chart.toolbar.date-view.year": "Year",
+  "working-plan.chart.toolbar.date-view.year": "Jahr",
 
   // "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
-  // TODO New key - Add a translation
-  "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
+  "working-plan.chart.toolbar.no-workpackages": "Es konnten keine Arbeitspakete angezeigt werden",
 
   // "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
-  // TODO New key - Add a translation
-  "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
+  "working-plan.chart.toolbar.workpackage-btn": "Arbeitspaket",
 
   // "working-plan.page.title": "Working plan"
-  // TODO New key - Add a translation
-  "working-plan.page.title": "Working plan"
+  "working-plan.page.title": "Arbeitsplan"
 
 
 }
