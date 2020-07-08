@@ -426,8 +426,7 @@ export class WorkingPlanService {
 
     return observableFrom(list).pipe(
       concatMap((entry) => this.updateMetadataItem(entry.id, entry.metadataList)),
-      reduce((acc: any, value: any) => [...acc, ...value], []),
-      tap((r) => console.log('observableFrom', r))
+      reduce((acc: any, value: any) => [...acc, ...value], [])
     )
   }
 

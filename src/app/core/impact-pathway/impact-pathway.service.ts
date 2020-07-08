@@ -9,7 +9,18 @@ import {
   of as observableOf,
   throwError as observableThrowError
 } from 'rxjs';
-import { catchError, concatMap, delay, distinctUntilChanged, flatMap, map, reduce, take, tap } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  delay,
+  distinctUntilChanged,
+  filter,
+  flatMap,
+  map,
+  reduce,
+  take,
+  tap
+} from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
 import { ImpactPathway } from './models/impact-pathway.model';
@@ -36,7 +47,7 @@ import {
   impactPathwayObjectsSelector,
   impactPathwayStateSelector,
   isImpactPathwayLoadedSelector,
-  isImpactPathwayProcessingSelector
+  isImpactPathwayProcessingSelector, isImpactPathwayRemovingSelector
 } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
@@ -54,7 +65,7 @@ import {
   GenerateImpactPathwayTaskAction,
   MoveImpactPathwaySubTaskAction,
   PatchImpactPathwayMetadataAction,
-  PatchImpactPathwayTaskMetadataAction,
+  PatchImpactPathwayTaskMetadataAction, RemoveImpactPathwayAction,
   RemoveImpactPathwaySubTaskAction,
   RemoveImpactPathwayTaskAction,
   SetImpactPathwayTargetTaskAction
@@ -190,6 +201,10 @@ export class ImpactPathwayService {
     ));
   }
 
+  dispatchRemoveImpactPathwayAction(impactPathwayId: string) {
+    this.store.dispatch(new RemoveImpactPathwayAction(impactPathwayId));
+  }
+
   dispatchSetTargetTask(taskId: string) {
     this.store.dispatch(new SetImpactPathwayTargetTaskAction(taskId))
   }
@@ -258,6 +273,7 @@ export class ImpactPathwayService {
       map((entries: ImpactPathwayEntries) => Object.keys(entries)
         .filter((key) => entries[key].hasStep(impactPathwayStepId))
         .map((key) => entries[key]).pop()),
+      filter((impactPathway: ImpactPathway) => isNotEmpty(impactPathway)),
       map((impactPathway: ImpactPathway) => impactPathway.getStep(impactPathwayStepId))
     );
   }
@@ -273,6 +289,7 @@ export class ImpactPathwayService {
   getImpactPathwayTasksByStepId(impactPathwayId: string, impactPathwayStepId: string): Observable<ImpactPathwayTask[]> {
     return this.store.pipe(
       select(impactPathwayByIDSelector(impactPathwayId)),
+      filter((impactPathway: ImpactPathway) => isNotEmpty(impactPathway)),
       map((impactPathway: ImpactPathway) => impactPathway.getStep(impactPathwayStepId).tasks)
     );
   }
@@ -305,6 +322,7 @@ export class ImpactPathwayService {
     impactPathwayTaskId): Observable<ImpactPathwayTask[]> {
     return this.store.pipe(
       select(impactPathwayByIDSelector(impactPathwayId)),
+      filter((impactPathway: ImpactPathway) => isNotEmpty(impactPathway)),
       map((impactPathway: ImpactPathway) => {
         return impactPathway.getStep(impactPathwayStepId).getTask(impactPathwayTaskId).tasks;
       })
@@ -368,6 +386,10 @@ export class ImpactPathwayService {
     )
   }
 
+  removeByItemId(itemId: string): Observable<boolean> {
+    return this.itemService.delete(itemId);
+  }
+
   setSelectedTask(task: ImpactPathwayTask): void {
     this._currentSelectedTask.next(task);
   }
@@ -407,6 +429,10 @@ export class ImpactPathwayService {
     return this.store.pipe(select(isImpactPathwayProcessingSelector));
   }
 
+  isRemoving(): Observable<boolean> {
+    return this.store.pipe(select(isImpactPathwayRemovingSelector));
+  }
+
   initImpactPathwayStep(parentId: string, stepItem: Item, tasks: ImpactPathwayTask[]): ImpactPathwayStep {
     const type = stepItem.firstMetadataValue(environment.impactPathway.impactPathwayStepTypeMetadata);
 
@@ -420,6 +446,12 @@ export class ImpactPathwayService {
       delay(100),
       flatMap(() => this.executeItemPatch(itemId, 'metadata'))
     )
+  }
+
+  retrieveObjectItem(id: string): Observable<Item> {
+    return this.itemService.findById(id).pipe(
+      getFirstSucceededRemoteDataPayload()
+    );
   }
 
   replaceMetadataPatch(metadataName: string, position: number, value: string): void {
@@ -452,6 +484,10 @@ export class ImpactPathwayService {
 
   redirectToEditPage(impacPathwayId: string) {
     this.router.navigate(['/impactpathway', impacPathwayId, 'edit']);
+  }
+
+  redirectToProjectPage() {
+    this.router.navigate(['/']);
   }
 
   private createImpactPathwaySteps(impactPathwayId: string): Observable<Item[]> {

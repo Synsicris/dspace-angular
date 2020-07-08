@@ -37,6 +37,12 @@ export const ImpactPathwayActionTypes = {
   MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/core/impactpathway/MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
   MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR: type('dspace/core/impactpathway/MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR'),
   NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE: type('dspace/core/impactpathway/NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE'),
+  REMOVE_IMPACT_PATHWAY: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY'),
+  REMOVE_IMPACT_PATHWAY_SUCCESS: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_SUCCESS'),
+  REMOVE_IMPACT_PATHWAY_ERROR: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_ERROR'),
+  REMOVE_IMPACT_PATHWAY_STEP: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_STEP'),
+  REMOVE_IMPACT_PATHWAY_STEP_SUCCESS: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_STEP_SUCCESS'),
+  REMOVE_IMPACT_PATHWAY_STEP_ERROR: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_STEP_ERROR'),
   REMOVE_IMPACT_PATHWAY_TASK: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_TASK'),
   REMOVE_IMPACT_PATHWAY_TASK_SUCCESS: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_SUCCESS'),
   REMOVE_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_SUB_TASK'),
@@ -497,6 +503,106 @@ export class MoveImpactPathwaySubTaskErrorAction implements Action {
   ) {
     this.payload = { impactPathwayId, stepId, previousParentTaskId, currentParentTaskId, taskId};
   }
+}
+
+/**
+ * An ngrx action for removing task
+ */
+export class RemoveImpactPathwayAction implements Action {
+  type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY;
+  payload: {
+    impactPathwayId: string;
+  };
+
+  /**
+   * Create a new RemoveImpactPathwayAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   */
+  constructor(impactPathwayId: string) {
+    this.payload = { impactPathwayId };
+  }
+}
+
+/**
+ * An ngrx action for remove success
+ */
+export class RemoveImpactPathwaySuccessAction implements Action {
+  type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUCCESS;
+  payload: {
+    impactPathwayId: string;
+  };
+
+  /**
+   * Create a new RemoveImpactPathwaySuccessAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   */
+  constructor(impactPathwayId: string) {
+    this.payload = { impactPathwayId };
+  }
+}
+
+/**
+ * An ngrx action for remove error
+ */
+export class RemoveImpactPathwayErrorAction implements Action {
+  type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_ERROR;
+}
+
+/**
+ * An ngrx action for removing task
+ */
+export class RemoveImpactPathwayStepAction implements Action {
+  type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_STEP;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+  };
+
+  /**
+   * Create a new RemoveImpactPathwayStepAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   */
+  constructor(impactPathwayId: string, stepId: string) {
+    this.payload = { impactPathwayId, stepId };
+  }
+}
+
+/**
+ * An ngrx action for remove success
+ */
+export class RemoveImpactPathwayStepSuccessAction implements Action {
+  type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_STEP_SUCCESS;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+  };
+
+  /**
+   * Create a new RemoveImpactPathwayStepSuccessAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   */
+  constructor(impactPathwayId: string, stepId: string) {
+    this.payload = { impactPathwayId, stepId };
+  }
+}
+
+/**
+ * An ngrx action for remove error
+ */
+export class RemoveImpactPathwayStepErrorAction implements Action {
+  type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_STEP_ERROR;
 }
 
 /**
@@ -1124,6 +1230,12 @@ export type ImpactPathwayActions
   | PatchImpactPathwayTaskMetadataAction
   | PatchImpactPathwayTaskMetadataErrorAction
   | PatchImpactPathwayTaskMetadataSuccessAction
+  | RemoveImpactPathwayAction
+  | RemoveImpactPathwayErrorAction
+  | RemoveImpactPathwaySuccessAction
+  | RemoveImpactPathwayStepAction
+  | RemoveImpactPathwayStepErrorAction
+  | RemoveImpactPathwayStepSuccessAction
   | RemoveImpactPathwaySubTaskAction
   | RemoveImpactPathwaySubTaskSuccessAction
   | RemoveImpactPathwayTaskAction

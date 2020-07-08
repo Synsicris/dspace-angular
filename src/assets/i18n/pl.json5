@@ -14,6 +14,17 @@
   
   
   
+  // "activities_plan.breadcrumbs":  "Activities plan",
+  // TODO New key - Add a translation
+  "activities_plan.breadcrumbs":  "Activities plan",
+  
+  // "activities_ist.breadcrumbs":  "Activities IST",
+  // TODO New key - Add a translation
+  "activities_ist.breadcrumbs":  "Activities IST",
+  
+  
+  
+  
   // "admin.registries.bitstream-formats.create.failure.content": "An error occurred while creating the new bitstream format.",
   // TODO New key - Add a translation
   "admin.registries.bitstream-formats.create.failure.content": "An error occurred while creating the new bitstream format.",
@@ -178,9 +189,9 @@
   // TODO New key - Add a translation
   "admin.registries.bitstream-formats.table.supportLevel.head": "Support Level",
   
-  // "admin.registries.bitstream-formats.title": "DSpace Angular :: Bitstream Format Registry",
+  // "admin.registries.bitstream-formats.title": "DSpace Cris Angular :: Bitstream Format Registry",
   // TODO New key - Add a translation
-  "admin.registries.bitstream-formats.title": "DSpace Angular :: Bitstream Format Registry",
+  "admin.registries.bitstream-formats.title": "DSpace Cris Angular :: Bitstream Format Registry",
   
   
   
@@ -228,9 +239,9 @@
   // TODO New key - Add a translation
   "admin.registries.metadata.schemas.table.namespace": "Namespace",
   
-  // "admin.registries.metadata.title": "DSpace Angular :: Metadata Registry",
+  // "admin.registries.metadata.title": "DSpace Cris Angular :: Metadata Registry",
   // TODO New key - Add a translation
-  "admin.registries.metadata.title": "DSpace Angular :: Metadata Registry",
+  "admin.registries.metadata.title": "DSpace Cris Angular :: Metadata Registry",
   
   
   
@@ -326,11 +337,27 @@
   // TODO New key - Add a translation
   "admin.registries.schema.return": "Return",
   
-  // "admin.registries.schema.title": "DSpace Angular :: Metadata Schema Registry",
+  // "admin.registries.schema.title": "DSpace Cris Angular :: Metadata Schema Registry",
   // TODO New key - Add a translation
-  "admin.registries.schema.title": "DSpace Angular :: Metadata Schema Registry",
+  "admin.registries.schema.title": "DSpace Cris Angular :: Metadata Schema Registry",
   
   
+  
+  // "admin.access-control.epeople.actions.delete": "Delete EPerson",
+  // TODO New key - Add a translation
+  "admin.access-control.epeople.actions.delete": "Delete EPerson",
+  
+  // "admin.access-control.epeople.actions.impersonate": "Impersonate EPerson",
+  // TODO New key - Add a translation
+  "admin.access-control.epeople.actions.impersonate": "Impersonate EPerson",
+  
+  // "admin.access-control.epeople.actions.reset": "Reset password",
+  // TODO New key - Add a translation
+  "admin.access-control.epeople.actions.reset": "Reset password",
+  
+  // "admin.access-control.epeople.actions.stop-impersonating": "Stop impersonating EPerson",
+  // TODO New key - Add a translation
+  "admin.access-control.epeople.actions.stop-impersonating": "Stop impersonating EPerson",
   
   // "admin.access-control.epeople.title": "DSpace Angular :: EPeople",
   // TODO New key - Add a translation
@@ -780,6 +807,44 @@
   // "admin.search.title": "Administrative Search",
   // TODO New key - Add a translation
   "admin.search.title": "Administrative Search",
+  
+  // "administrativeView.search.results.head": "Administrative Search",
+  // TODO New key - Add a translation
+  "administrativeView.search.results.head": "Administrative Search",
+  
+  // "applications_econtech.listelement.badge": "Application success for business innovations",
+  // TODO New key - Add a translation
+  "applications_econtech.listelement.badge": "Application success for business innovations",
+  
+  // "applications_social.listelement.badge": "Application success in social innovations/change processes",
+  // TODO New key - Add a translation
+  "applications_social.listelement.badge": "Application success in social innovations/change processes",
+  
+  // "awards.listelement.badge": "Awards and prizes",
+  // TODO New key - Add a translation
+  "awards.listelement.badge": "Awards and prizes",
+  
+  
+  // "admin.workflow.breadcrumbs": "Administer Workflow",
+  // TODO New key - Add a translation
+  "admin.workflow.breadcrumbs": "Administer Workflow",
+  
+  // "admin.workflow.title": "Administer Workflow",
+  // TODO New key - Add a translation
+  "admin.workflow.title": "Administer Workflow",
+  
+  // "admin.workflow.item.workflow": "Workflow",
+  // TODO New key - Add a translation
+  "admin.workflow.item.workflow": "Workflow",
+  
+  // "admin.workflow.item.delete": "Delete",
+  // TODO New key - Add a translation
+  "admin.workflow.item.delete": "Delete",
+  
+  // "admin.workflow.item.send-back": "Send back",
+  // TODO New key - Add a translation
+  "admin.workflow.item.send-back": "Send back",
+  
   
   
   
@@ -1475,6 +1540,104 @@
   
   
   
+  // "comcol-role.edit.no-group": "None",
+  // TODO New key - Add a translation
+  "comcol-role.edit.no-group": "None",
+  
+  // "comcol-role.edit.create": "Create",
+  // TODO New key - Add a translation
+  "comcol-role.edit.create": "Create",
+  
+  // "comcol-role.edit.restrict": "Restrict",
+  // TODO New key - Add a translation
+  "comcol-role.edit.restrict": "Restrict",
+  
+  // "comcol-role.edit.delete": "Delete",
+  // TODO New key - Add a translation
+  "comcol-role.edit.delete": "Delete",
+  
+  
+  // "comcol-role.edit.community-admin.name": "Administrators",
+  // TODO New key - Add a translation
+  "comcol-role.edit.community-admin.name": "Administrators",
+  
+  // "comcol-role.edit.collection-admin.name": "Administrators",
+  // TODO New key - Add a translation
+  "comcol-role.edit.collection-admin.name": "Administrators",
+  
+  
+  // "comcol-role.edit.community-admin.description": "Community administrators can create sub-communities or collections, and manage or assign management for those sub-communities or collections. In addition, they decide who can submit items to any sub-collections, edit item metadata (after submission), and add (map) existing items from other collections (subject to authorization).",
+  // TODO New key - Add a translation
+  "comcol-role.edit.community-admin.description": "Community administrators can create sub-communities or collections, and manage or assign management for those sub-communities or collections. In addition, they decide who can submit items to any sub-collections, edit item metadata (after submission), and add (map) existing items from other collections (subject to authorization).",
+  
+  // "comcol-role.edit.collection-admin.description": "Collection administrators decide who can submit items to the collection, edit item metadata (after submission), and add (map) existing items from other collections to this collection (subject to authorization for that collection).",
+  // TODO New key - Add a translation
+  "comcol-role.edit.collection-admin.description": "Collection administrators decide who can submit items to the collection, edit item metadata (after submission), and add (map) existing items from other collections to this collection (subject to authorization for that collection).",
+  
+  
+  // "comcol-role.edit.submitters.name": "Submitters",
+  // TODO New key - Add a translation
+  "comcol-role.edit.submitters.name": "Submitters",
+  
+  // "comcol-role.edit.submitters.description": "The E-People and Groups that have permission to submit new items to this collection.",
+  // TODO New key - Add a translation
+  "comcol-role.edit.submitters.description": "The E-People and Groups that have permission to submit new items to this collection.",
+  
+  
+  // "comcol-role.edit.item_read.name": "Default item read access",
+  // TODO New key - Add a translation
+  "comcol-role.edit.item_read.name": "Default item read access",
+  
+  // "comcol-role.edit.item_read.description": "E-People and Groups that can read new items submitted to this collection. Changes to this role are not retroactive. Existing items in the system will still be viewable by those who had read access at the time of their addition.",
+  // TODO New key - Add a translation
+  "comcol-role.edit.item_read.description": "E-People and Groups that can read new items submitted to this collection. Changes to this role are not retroactive. Existing items in the system will still be viewable by those who had read access at the time of their addition.",
+  
+  // "comcol-role.edit.item_read.anonymous-group": "Default read for incoming items is currently set to Anonymous.",
+  // TODO New key - Add a translation
+  "comcol-role.edit.item_read.anonymous-group": "Default read for incoming items is currently set to Anonymous.",
+  
+  
+  // "comcol-role.edit.bitstream_read.name": "Default bitstream read access",
+  // TODO New key - Add a translation
+  "comcol-role.edit.bitstream_read.name": "Default bitstream read access",
+  
+  // "comcol-role.edit.bitstream_read.description": "Community administrators can create sub-communities or collections, and manage or assign management for those sub-communities or collections. In addition, they decide who can submit items to any sub-collections, edit item metadata (after submission), and add (map) existing items from other collections (subject to authorization).",
+  // TODO New key - Add a translation
+  "comcol-role.edit.bitstream_read.description": "Community administrators can create sub-communities or collections, and manage or assign management for those sub-communities or collections. In addition, they decide who can submit items to any sub-collections, edit item metadata (after submission), and add (map) existing items from other collections (subject to authorization).",
+  
+  // "comcol-role.edit.bitstream_read.anonymous-group": "Default read for incoming bitstreams is currently set to Anonymous.",
+  // TODO New key - Add a translation
+  "comcol-role.edit.bitstream_read.anonymous-group": "Default read for incoming bitstreams is currently set to Anonymous.",
+  
+  
+  // "comcol-role.edit.editor.name": "Editors",
+  // TODO New key - Add a translation
+  "comcol-role.edit.editor.name": "Editors",
+  
+  // "comcol-role.edit.editor.description": "Editors are able to edit the metadata of incoming submissions, and then accept or reject them.",
+  // TODO New key - Add a translation
+  "comcol-role.edit.editor.description": "Editors are able to edit the metadata of incoming submissions, and then accept or reject them.",
+  
+  
+  // "comcol-role.edit.finaleditor.name": "Final editors",
+  // TODO New key - Add a translation
+  "comcol-role.edit.finaleditor.name": "Final editors",
+  
+  // "comcol-role.edit.finaleditor.description": "Final editors are able to edit the metadata of incoming submissions, but will not be able to reject them.",
+  // TODO New key - Add a translation
+  "comcol-role.edit.finaleditor.description": "Final editors are able to edit the metadata of incoming submissions, but will not be able to reject them.",
+  
+  
+  // "comcol-role.edit.reviewer.name": "Reviewers",
+  // TODO New key - Add a translation
+  "comcol-role.edit.reviewer.name": "Reviewers",
+  
+  // "comcol-role.edit.reviewer.description": "Reviewers are able to accept or reject incoming submissions. However, they are not able to edit the submission's metadata.",
+  // TODO New key - Add a translation
+  "comcol-role.edit.reviewer.description": "Reviewers are able to accept or reject incoming submissions. However, they are not able to edit the submission's metadata.",
+  
+  
+  
   // "community.form.abstract": "Short Description",
   // TODO New key - Add a translation
   "community.form.abstract": "Short Description",
@@ -1522,6 +1685,17 @@
   // "community.sub-community-list.head": "Communities of this Community",
   // TODO New key - Add a translation
   "community.sub-community-list.head": "Communities of this Community",
+  
+  
+  
+  // "coordinator.page.title": "Coordinator overview",
+  // TODO New key - Add a translation
+  "coordinator.page.title": "Coordinator overview",
+  
+  // "cooperation_events.listelement.badge": "Cooperation processes",
+  // TODO New key - Add a translation
+  "cooperation_events.listelement.badge": "Cooperation processes",
+  
   
   
   
@@ -1750,9 +1924,9 @@
   // TODO New key - Add a translation
   "form.search": "Search",
   
-  // "form.search-help": "Click here to looking for an existing correspondence",
+  // "form.search-help": "Click here to look for an existing correspondence",
   // TODO New key - Add a translation
-  "form.search-help": "Click here to looking for an existing correspondence",
+  "form.search-help": "Click here to look for an existing correspondence",
   
   // "form.submit": "Submit",
   // TODO New key - Add a translation
@@ -1764,18 +1938,127 @@
   // TODO New key - Add a translation
   "home.description": "",
   
-  // "home.title": "DSpace Angular :: Home",
+  // "home.title": "DSpace Cris Angular :: Home",
   // TODO New key - Add a translation
-  "home.title": "DSpace Angular :: Home",
+  "home.title": "DSpace Cris Angular :: Home",
   
-  // "home.top-level-communities.head": "Communities in DSpace",
+  // "home.top-level-communities.head": "Communities in DSpace Cris",
   // TODO New key - Add a translation
-  "home.top-level-communities.head": "Communities in DSpace",
+  "home.top-level-communities.head": "Communities in DSpace Cris",
   
   // "home.top-level-communities.help": "Select a community to browse its collections.",
   // TODO New key - Add a translation
   "home.top-level-communities.help": "Select a community to browse its collections.",
   
+  // "impact-pathway.add.btn": "Add item",
+  // TODO New key - Add a translation
+  "impact-pathway.add.btn": "Add item",
+  
+  // "impact-pathway.breadcrumbs" : "Impact pathway",
+  // TODO New key - Add a translation
+  "impact-pathway.breadcrumbs" : "Impact pathway",
+  
+  // "impact-pathway.create.btn": "Create item",
+  // TODO New key - Add a translation
+  "impact-pathway.create.btn": "Create item",
+  
+  // "impact-pathway.create.error": "There was an issue when generating the impact pathway, please try again later.",
+  // TODO New key - Add a translation
+  "impact-pathway.create.error": "There was an issue when generating the impact pathway, please try again later.",
+  
+  // "impact-pathway.create.head": "New impact pathway",
+  // TODO New key - Add a translation
+  "impact-pathway.create.head": "New impact pathway",
+  
+  // "impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
+  // TODO New key - Add a translation
+  "impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
+  
+  // "impact-pathway.create.success": "The impact pathway has been generated successfully.",
+  // TODO New key - Add a translation
+  "impact-pathway.create.success": "The impact pathway has been generated successfully.",
+  
+  // "impact-pathway.edit.page.title": "Edit impact pathway",
+  // TODO New key - Add a translation
+  "impact-pathway.edit.page.title": "Edit impact pathway",
+  
+  // "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
+  // TODO New key - Add a translation
+  "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
+  
+  // "impact-pathway.objectives.edit.page.title": "Edit objectives",
+  // TODO New key - Add a translation
+  "impact-pathway.objectives.edit.page.title": "Edit objectives",
+  
+  // "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
+  // TODO New key - Add a translation
+  "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
+  
+  // "impact-pathway.remove.confirm.cancel": "Cancel",
+  // TODO New key - Add a translation
+  "impact-pathway.remove.confirm.cancel": "Cancel",
+  
+  // "impact-pathway.remove.confirm.info": "This operation can't be undone. Are you sure?",
+  // TODO New key - Add a translation
+  "impact-pathway.remove.confirm.info": "This operation can't be undone. Are you sure?",
+  
+  // "impact-pathway.remove.confirm.submit": "Yes, I'm sure",
+  // TODO New key - Add a translation
+  "impact-pathway.remove.confirm.submit": "Yes, I'm sure",
+  
+  // "impact-pathway.remove.confirm.title": "Discard impact pathway",
+  // TODO New key - Add a translation
+  "impact-pathway.remove.confirm.title": "Discard impact pathway",
+  
+  // "impact-pathway.remove.success": "The impact pathway has been deleted successfully.",
+  // TODO New key - Add a translation
+  "impact-pathway.remove.success": "The impact pathway has been deleted successfully.",
+  
+  // "impact-pathway.task.create.error": "There was an issue when creating the new item, please try again later.",
+  // TODO New key - Add a translation
+  "impact-pathway.task.create.error": "There was an issue when creating the new item, please try again later.",
+  
+  // "impact-pathway.task.create.head": "New item",
+  // TODO New key - Add a translation
+  "impact-pathway.task.create.head": "New item",
+  
+  // "impact-pathway.task.create.success": "New item has been created successfully.",
+  // TODO New key - Add a translation
+  "impact-pathway.task.create.success": "New item has been created successfully.",
+  
+  // "impact-pathway.wrapper.info": "<b>Develop your Impact Pathway</b><br>  What are your objectives so that your project can have an impact? Sort objectives into categories. Select and describe funder objectives. How are your project objectives related (Draw arrows between your objectives)? Add further explanations. Specify each objectives and add items and tasks.",
+  // TODO New key - Add a translation
+  "impact-pathway.wrapper.info": "<b>Develop your Impact Pathway</b><br>  What are your objectives so that your project can have an impact? Sort objectives into categories. Select and describe funder objectives. How are your project objectives related (Draw arrows between your objectives)? Add further explanations. Specify each objectives and add items and tasks.",
+  
+  // "impactpathway.listelement.badge": "Impact pathway",
+  // TODO New key - Add a translation
+  "impactpathway.listelement.badge": "Impact pathway",
+  
+  // "impactpathwaystep.listelement.badge": "Impact pathway step",
+  // TODO New key - Add a translation
+  "impactpathwaystep.listelement.badge": "Impact pathway step",
+  
+  // "innovationideas.listelement.badge": "Ideas for innovation and change",
+  // TODO New key - Add a translation
+  "innovationideas.listelement.badge": "Ideas for innovation and change",
+  
+  // "innovationpotentials_econtech.listelement.badge": "Intended business innovations",
+  // TODO New key - Add a translation
+  "innovationpotentials_econtech.listelement.badge": "Intended business innovations",
+  
+  // "innovationpotentials_social.listelement.badge": "Intended social innovations/change processes",
+  // TODO New key - Add a translation
+  "innovationpotentials_social.listelement.badge": "Intended social innovations/change processes",
+  
+  
+  
+  // "item.edit.authorizations.heading": "With this editor you can view and alter the policies of an item, plus alter policies of individual item components: bundles and bitstreams. Briefly, an item is a container of bundles, and bundles are containers of bitstreams. Containers usually have ADD/REMOVE/READ/WRITE policies, while bitstreams only have READ/WRITE policies.",
+  // TODO New key - Add a translation
+  "item.edit.authorizations.heading": "With this editor you can view and alter the policies of an item, plus alter policies of individual item components: bundles and bitstreams. Briefly, an item is a container of bundles, and bundles are containers of bitstreams. Containers usually have ADD/REMOVE/READ/WRITE policies, while bitstreams only have READ/WRITE policies.",
+  
+  // "item.edit.authorizations.title": "Edit item's Policies",
+  // TODO New key - Add a translation
+  "item.edit.authorizations.title": "Edit item's Policies",
   
   
   
@@ -2513,6 +2796,14 @@
   // TODO New key - Add a translation
   "item.page.collections": "Collections",
   
+  // "item.page.context-menu.options": "Options",
+  // TODO New key - Add a translation
+  "item.page.context-menu.options": "Options",
+  
+  // "item.page.context-menu.options.edit-impact-pathway.btn": "Edit impact pathway",
+  // TODO New key - Add a translation
+  "item.page.context-menu.options.edit-impact-pathway.btn": "Edit impact pathway",
+  
   // "item.page.date": "Date",
   // TODO New key - Add a translation
   "item.page.date": "Date",
@@ -2684,9 +2975,9 @@
   // TODO New key - Add a translation
   "journal.search.results.head": "Journal Search Results",
   
-  // "journal.search.title": "DSpace Angular :: Journal Search",
+  // "journal.search.title": "DSpace Cris Angular :: Journal Search",
   // TODO New key - Add a translation
-  "journal.search.title": "DSpace Angular :: Journal Search",
+  "journal.search.title": "DSpace Cris Angular :: Journal Search",
   
   
   
@@ -2978,7 +3269,9 @@
   // TODO New key - Add a translation
   "menu.section.edit_item": "Item",
   
-  
+  // "menu.section.edit_workingplan": "Working plan",
+  // TODO New key - Add a translation
+  "menu.section.edit_workingplan": "Working plan",
   
   // "menu.section.export": "Export",
   // TODO New key - Add a translation
@@ -3082,6 +3375,10 @@
   // TODO New key - Add a translation
   "menu.section.new_community": "Community",
   
+  // "menu.section.new_impact_pathway": "Impact pathway",
+  // TODO New key - Add a translation
+  "menu.section.new_impact_pathway": "Impact pathway",
+  
   // "menu.section.new_item": "Item",
   // TODO New key - Add a translation
   "menu.section.new_item": "Item",
@@ -3167,6 +3464,14 @@
   "menu.section.toggle.statistics_task": "Toggle Statistics Task section",
   
   
+  // "menu.section.workflow": "Administer Workflow",
+  // TODO New key - Add a translation
+  "menu.section.workflow": "Administer Workflow",
+  
+  
+  // "milestones.listelement.badge": "Milestones",
+  // TODO New key - Add a translation
+  "milestones.listelement.badge": "Milestones",
   
   // "mydspace.description": "",
   // TODO New key - Add a translation
@@ -3354,6 +3659,10 @@
   // TODO New key - Add a translation
   "nav.statistics.header": "Statistics",
   
+  // "nav.stop-impersonating": "Stop impersonating EPerson",
+  // TODO New key - Add a translation
+  "nav.stop-impersonating": "Stop impersonating EPerson",
+  
   
   
   // "orgunit.listelement.badge": "Organizational Unit",
@@ -3402,7 +3711,13 @@
   // TODO New key - Add a translation
   "pagination.sort-direction": "Sort Options",
   
+  // "participation_events.listelement.badge": "Participative processes",
+  // TODO New key - Add a translation
+  "participation_events.listelement.badge": "Participative processes",
   
+  // "patents.listelement.badge": "Patents and utility patents",
+  // TODO New key - Add a translation
+  "patents.listelement.badge": "Patents and utility patents",
   
   // "person.listelement.badge": "Person",
   // TODO New key - Add a translation
@@ -3448,9 +3763,191 @@
   // TODO New key - Add a translation
   "person.search.results.head": "Person Search Results",
   
-  // "person.search.title": "DSpace Angular :: Person Search",
+  // "person.search.title": "DSpace Cris Angular :: Person Search",
   // TODO New key - Add a translation
-  "person.search.title": "DSpace Angular :: Person Search",
+  "person.search.title": "DSpace Cris Angular :: Person Search",
+  
+  
+  // "physical_objects.listelement.badge": "Objects, materials",
+  // TODO New key - Add a translation
+  "physical_objects.listelement.badge": "Objects, materials",
+  
+  // "plan_cooperation_events.listelement.badge": "Cooperation processes (plan)",
+  // TODO New key - Add a translation
+  "plan_cooperation_events.listelement.badge": "Cooperation processes (plan)",
+  
+  // "plan_events.listelement.badge": "Events (plan)",
+  // TODO New key - Add a translation
+  "plan_events.listelement.badge": "Events (plan)",
+  
+  // "plan_innovationideas.listelement.badge": "Ideas for innovation and change (plan)",
+  // TODO New key - Add a translation
+  "plan_innovationideas.listelement.badge": "Ideas for innovation and change (plan)",
+  
+  // "plan_innovationpotentials_econtech.listelement.badge": "Intended business innovations (plan)",
+  // TODO New key - Add a translation
+  "plan_innovationpotentials_econtech.listelement.badge": "Intended business innovations (plan)",
+  
+  // "plan_innovationpotentials_social.listelement.badge": "Intended social innovations/change processes (plan)",
+  // TODO New key - Add a translation
+  "plan_innovationpotentials_social.listelement.badge": "Intended social innovations/change processes (plan)",
+  
+  // "plan_milestones.listelement.badge": "Milestones (plan)",
+  // TODO New key - Add a translation
+  "plan_milestones.listelement.badge": "Milestones (plan)",
+  
+  // "plan_participation_events.listelement.badge": "Participative processes (plan)",
+  // TODO New key - Add a translation
+  "plan_participation_events.listelement.badge": "Participative processes (plan)",
+  
+  // "plan_patents.listelement.badge": "Patents and utility patents (plan)",
+  // TODO New key - Add a translation
+  "plan_patents.listelement.badge": "Patents and utility patents (plan)",
+  
+  // "plan_physical_objects.listelement.badge": "Objects, materials (plan)",
+  // TODO New key - Add a translation
+  "plan_physical_objects.listelement.badge": "Objects, materials (plan)",
+  
+  // "plan_publications.listelement.badge": "Publications (plan)",
+  // TODO New key - Add a translation
+  "plan_publications.listelement.badge": "Publications (plan)",
+  
+  // "plan_spinoffs.listelement.badge": "Spin-offs (incl. associations) (plan)",
+  // TODO New key - Add a translation
+  "plan_spinoffs.listelement.badge": "Spin-offs (incl. associations) (plan)",
+  
+  // "plan_workpackages.listelement.badge": "Workpackages (plan)",
+  // TODO New key - Add a translation
+  "plan_workpackages.listelement.badge": "Workpackages (plan)",
+  
+  // "plan_tasks.listelement.badge": "Tasks (plan)",
+  // TODO New key - Add a translation
+  "plan_tasks.listelement.badge": "Tasks (plan)",
+  
+  // "pot_societalimpact.listelement.badge": "Expected societal impact",
+  // TODO New key - Add a translation
+  "pot_societalimpact.listelement.badge": "Expected societal impact",
+  
+  // "proj_objectives.listelement.badge": "Project objectives",
+  // TODO New key - Add a translation
+  "proj_objectives.listelement.badge": "Project objectives",
+  
+  // "publications.listelement.badge": "Publications",
+  // TODO New key - Add a translation
+  "publications.listelement.badge": "Publications",
+  
+  
+  // "profile.breadcrumbs": "Update Profile",
+  // TODO New key - Add a translation
+  "profile.breadcrumbs": "Update Profile",
+  
+  // "profile.card.identify": "Identify",
+  // TODO New key - Add a translation
+  "profile.card.identify": "Identify",
+  
+  // "profile.card.security": "Security",
+  // TODO New key - Add a translation
+  "profile.card.security": "Security",
+  
+  // "profile.form.submit": "Update Profile",
+  // TODO New key - Add a translation
+  "profile.form.submit": "Update Profile",
+  
+  // "profile.groups.head": "Authorization groups you belong to",
+  // TODO New key - Add a translation
+  "profile.groups.head": "Authorization groups you belong to",
+  
+  // "profile.head": "Update Profile",
+  // TODO New key - Add a translation
+  "profile.head": "Update Profile",
+  
+  // "profile.metadata.form.error.firstname.required": "First Name is required",
+  // TODO New key - Add a translation
+  "profile.metadata.form.error.firstname.required": "First Name is required",
+  
+  // "profile.metadata.form.error.lastname.required": "Last Name is required",
+  // TODO New key - Add a translation
+  "profile.metadata.form.error.lastname.required": "Last Name is required",
+  
+  // "profile.metadata.form.label.email": "Email Address",
+  // TODO New key - Add a translation
+  "profile.metadata.form.label.email": "Email Address",
+  
+  // "profile.metadata.form.label.firstname": "First Name",
+  // TODO New key - Add a translation
+  "profile.metadata.form.label.firstname": "First Name",
+  
+  // "profile.metadata.form.label.language": "Language",
+  // TODO New key - Add a translation
+  "profile.metadata.form.label.language": "Language",
+  
+  // "profile.metadata.form.label.lastname": "Last Name",
+  // TODO New key - Add a translation
+  "profile.metadata.form.label.lastname": "Last Name",
+  
+  // "profile.metadata.form.label.phone": "Contact Telephone",
+  // TODO New key - Add a translation
+  "profile.metadata.form.label.phone": "Contact Telephone",
+  
+  // "profile.metadata.form.notifications.success.content": "Your changes to the profile were saved.",
+  // TODO New key - Add a translation
+  "profile.metadata.form.notifications.success.content": "Your changes to the profile were saved.",
+  
+  // "profile.metadata.form.notifications.success.title": "Profile saved",
+  // TODO New key - Add a translation
+  "profile.metadata.form.notifications.success.title": "Profile saved",
+  
+  // "profile.notifications.warning.no-changes.content": "No changes were made to the Profile.",
+  // TODO New key - Add a translation
+  "profile.notifications.warning.no-changes.content": "No changes were made to the Profile.",
+  
+  // "profile.notifications.warning.no-changes.title": "No changes",
+  // TODO New key - Add a translation
+  "profile.notifications.warning.no-changes.title": "No changes",
+  
+  // "profile.security.form.error.matching-passwords": "The passwords do not match.",
+  // TODO New key - Add a translation
+  "profile.security.form.error.matching-passwords": "The passwords do not match.",
+  
+  // "profile.security.form.error.password-length": "The password should be at least 6 characters long.",
+  // TODO New key - Add a translation
+  "profile.security.form.error.password-length": "The password should be at least 6 characters long.",
+  
+  // "profile.security.form.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  // TODO New key - Add a translation
+  "profile.security.form.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  
+  // "profile.security.form.label.password": "Password",
+  // TODO New key - Add a translation
+  "profile.security.form.label.password": "Password",
+  
+  // "profile.security.form.label.passwordrepeat": "Retype to confirm",
+  // TODO New key - Add a translation
+  "profile.security.form.label.passwordrepeat": "Retype to confirm",
+  
+  // "profile.security.form.notifications.success.content": "Your changes to the password were saved.",
+  // TODO New key - Add a translation
+  "profile.security.form.notifications.success.content": "Your changes to the password were saved.",
+  
+  // "profile.security.form.notifications.success.title": "Password saved",
+  // TODO New key - Add a translation
+  "profile.security.form.notifications.success.title": "Password saved",
+  
+  // "profile.security.form.notifications.error.title": "Error changing passwords",
+  // TODO New key - Add a translation
+  "profile.security.form.notifications.error.title": "Error changing passwords",
+  
+  // "profile.security.form.notifications.error.not-long-enough": "The password has to be at least 6 characters long.",
+  // TODO New key - Add a translation
+  "profile.security.form.notifications.error.not-long-enough": "The password has to be at least 6 characters long.",
+  
+  // "profile.security.form.notifications.error.not-same": "The provided passwords are not the same.",
+  // TODO New key - Add a translation
+  "profile.security.form.notifications.error.not-same": "The provided passwords are not the same.",
+  
+  // "profile.title": "Update Profile",
+  // TODO New key - Add a translation
+  "profile.title": "Update Profile",
   
   
   
@@ -3608,7 +4105,13 @@
   // TODO New key - Add a translation
   "project.search.results.head": "Project Search Results",
   
+  // "project-overview.breadcrumbs" : "Wühlkegel",
+  // TODO New key - Add a translation
+  "project-overview.breadcrumbs" : "Wühlkegel",
   
+  // "project-overview.page.title" : "Project overview",
+  // TODO New key - Add a translation
+  "project-overview.page.title" : "Project overview",
   
   // "publication.listelement.badge": "Publication",
   // TODO New key - Add a translation
@@ -3642,9 +4145,9 @@
   // TODO New key - Add a translation
   "publication.search.results.head": "Publication Search Results",
   
-  // "publication.search.title": "DSpace Angular :: Publication Search",
+  // "publication.search.title": "DSpace Cris Angular :: Publication Search",
   // TODO New key - Add a translation
-  "publication.search.title": "DSpace Angular :: Publication Search",
+  "publication.search.title": "DSpace Cris Angular :: Publication Search",
   
   
   
@@ -3700,6 +4203,199 @@
   // TODO New key - Add a translation
   "relationships.isContributorOf": "Contributors",
   
+  // "results_plan.breadcrumbs":  "Results plan",
+  // TODO New key - Add a translation
+  "results_plan.breadcrumbs":  "Results plan",
+  
+  // "results_ist.breadcrumbs":  "Results IST",
+  // TODO New key - Add a translation
+  "results_ist.breadcrumbs":  "Results IST",
+  
+  
+  // "resource-policies.add.button": "Add",
+  // TODO New key - Add a translation
+  "resource-policies.add.button": "Add",
+  
+  // "resource-policies.add.for.": "Add a new policy",
+  // TODO New key - Add a translation
+  "resource-policies.add.for.": "Add a new policy",
+  
+  // "resource-policies.add.for.bitstream": "Add a new Bitstream policy",
+  // TODO New key - Add a translation
+  "resource-policies.add.for.bitstream": "Add a new Bitstream policy",
+  
+  // "resource-policies.add.for.bundle": "Add a new Bundle policy",
+  // TODO New key - Add a translation
+  "resource-policies.add.for.bundle": "Add a new Bundle policy",
+  
+  // "resource-policies.add.for.item": "Add a new Item policy",
+  // TODO New key - Add a translation
+  "resource-policies.add.for.item": "Add a new Item policy",
+  
+  // "resource-policies.create.page.heading": "Create new resource policy for ",
+  // TODO New key - Add a translation
+  "resource-policies.create.page.heading": "Create new resource policy for ",
+  
+  // "resource-policies.create.page.failure.content": "An error occurred while creating the resource policy.",
+  // TODO New key - Add a translation
+  "resource-policies.create.page.failure.content": "An error occurred while creating the resource policy.",
+  
+  // "resource-policies.create.page.success.content": "Operation successful",
+  // TODO New key - Add a translation
+  "resource-policies.create.page.success.content": "Operation successful",
+  
+  // "resource-policies.create.page.title": "Create new resource policy",
+  // TODO New key - Add a translation
+  "resource-policies.create.page.title": "Create new resource policy",
+  
+  // "resource-policies.delete.btn": "Delete selected",
+  // TODO New key - Add a translation
+  "resource-policies.delete.btn": "Delete selected",
+  
+  // "resource-policies.delete.btn.title": "Delete selected resource policies",
+  // TODO New key - Add a translation
+  "resource-policies.delete.btn.title": "Delete selected resource policies",
+  
+  // "resource-policies.delete.failure.content": "An error occurred while deleting selected resource policies.",
+  // TODO New key - Add a translation
+  "resource-policies.delete.failure.content": "An error occurred while deleting selected resource policies.",
+  
+  // "resource-policies.delete.success.content": "Operation successful",
+  // TODO New key - Add a translation
+  "resource-policies.delete.success.content": "Operation successful",
+  
+  // "resource-policies.edit.page.heading": "Edit resource policy ",
+  // TODO New key - Add a translation
+  "resource-policies.edit.page.heading": "Edit resource policy ",
+  
+  // "resource-policies.edit.page.failure.content": "An error occurred while editing the resource policy.",
+  // TODO New key - Add a translation
+  "resource-policies.edit.page.failure.content": "An error occurred while editing the resource policy.",
+  
+  // "resource-policies.edit.page.success.content": "Operation successful",
+  // TODO New key - Add a translation
+  "resource-policies.edit.page.success.content": "Operation successful",
+  
+  // "resource-policies.edit.page.title": "Edit resource policy",
+  // TODO New key - Add a translation
+  "resource-policies.edit.page.title": "Edit resource policy",
+  
+  // "resource-policies.form.action-type.label": "Select the action type",
+  // TODO New key - Add a translation
+  "resource-policies.form.action-type.label": "Select the action type",
+  
+  // "resource-policies.form.action-type.required": "You must select the resource policy action.",
+  // TODO New key - Add a translation
+  "resource-policies.form.action-type.required": "You must select the resource policy action.",
+  
+  // "resource-policies.form.eperson-group-list.label": "The eperson or group that will be grant of the permission",
+  // TODO New key - Add a translation
+  "resource-policies.form.eperson-group-list.label": "The eperson or group that will be grant of the permission",
+  
+  // "resource-policies.form.eperson-group-list.select.btn": "Select",
+  // TODO New key - Add a translation
+  "resource-policies.form.eperson-group-list.select.btn": "Select",
+  
+  // "resource-policies.form.eperson-group-list.tab.eperson": "Search for a ePerson",
+  // TODO New key - Add a translation
+  "resource-policies.form.eperson-group-list.tab.eperson": "Search for a ePerson",
+  
+  // "resource-policies.form.eperson-group-list.tab.group": "Search for a group",
+  // TODO New key - Add a translation
+  "resource-policies.form.eperson-group-list.tab.group": "Search for a group",
+  
+  // "resource-policies.form.eperson-group-list.table.headers.action": "Action",
+  // TODO New key - Add a translation
+  "resource-policies.form.eperson-group-list.table.headers.action": "Action",
+  
+  // "resource-policies.form.eperson-group-list.table.headers.id": "ID",
+  // TODO New key - Add a translation
+  "resource-policies.form.eperson-group-list.table.headers.id": "ID",
+  
+  // "resource-policies.form.eperson-group-list.table.headers.name": "Name",
+  // TODO New key - Add a translation
+  "resource-policies.form.eperson-group-list.table.headers.name": "Name",
+  
+  // "resource-policies.form.date.end.label": "End Date",
+  // TODO New key - Add a translation
+  "resource-policies.form.date.end.label": "End Date",
+  
+  // "resource-policies.form.date.start.label": "Start Date",
+  // TODO New key - Add a translation
+  "resource-policies.form.date.start.label": "Start Date",
+  
+  // "resource-policies.form.description.label": "Description",
+  // TODO New key - Add a translation
+  "resource-policies.form.description.label": "Description",
+  
+  // "resource-policies.form.name.label": "Name",
+  // TODO New key - Add a translation
+  "resource-policies.form.name.label": "Name",
+  
+  // "resource-policies.form.policy-type.label": "Select the policy type",
+  // TODO New key - Add a translation
+  "resource-policies.form.policy-type.label": "Select the policy type",
+  
+  // "resource-policies.form.policy-type.required": "You must select the resource policy type.",
+  // TODO New key - Add a translation
+  "resource-policies.form.policy-type.required": "You must select the resource policy type.",
+  
+  // "resource-policies.table.headers.action": "Action",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.action": "Action",
+  
+  // "resource-policies.table.headers.date.end": "End Date",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.date.end": "End Date",
+  
+  // "resource-policies.table.headers.date.start": "Start Date",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.date.start": "Start Date",
+  
+  // "resource-policies.table.headers.edit": "Edit",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.edit": "Edit",
+  
+  // "resource-policies.table.headers.edit.group": "Edit group",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.edit.group": "Edit group",
+  
+  // "resource-policies.table.headers.edit.policy": "Edit policy",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.edit.policy": "Edit policy",
+  
+  // "resource-policies.table.headers.eperson": "EPerson",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.eperson": "EPerson",
+  
+  // "resource-policies.table.headers.group": "Group",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.group": "Group",
+  
+  // "resource-policies.table.headers.id": "ID",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.id": "ID",
+  
+  // "resource-policies.table.headers.name": "Name",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.name": "Name",
+  
+  // "resource-policies.table.headers.policyType": "type",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.policyType": "type",
+  
+  // "resource-policies.table.headers.title.for.bitstream": "Policies for Bitstream",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.title.for.bitstream": "Policies for Bitstream",
+  
+  // "resource-policies.table.headers.title.for.bundle": "Policies for Bundle",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.title.for.bundle": "Policies for Bundle",
+  
+  // "resource-policies.table.headers.title.for.item": "Policies for Item",
+  // TODO New key - Add a translation
+  "resource-policies.table.headers.title.for.item": "Policies for Item",
+  
   
   
   // "search.description": "",
@@ -3710,9 +4406,9 @@
   // TODO New key - Add a translation
   "search.switch-configuration.title": "Show",
   
-  // "search.title": "DSpace Angular :: Search",
+  // "search.title": "DSpace Cris Angular :: Search",
   // TODO New key - Add a translation
-  "search.title": "DSpace Angular :: Search",
+  "search.title": "DSpace Cris Angular :: Search",
   
   // "search.breadcrumbs": "Search",
   // TODO New key - Add a translation
@@ -4075,6 +4771,9 @@
   "search.sidebar.settings.title": "Settings",
   
   
+  // "search.title": "DSpace Cris Angular :: Search",
+  // TODO New key - Add a translation
+  "search.title": "DSpace Cris Angular :: Search",
   
   // "search.view-switch.show-detail": "Show detail",
   // TODO New key - Add a translation
@@ -4088,7 +4787,13 @@
   // TODO New key - Add a translation
   "search.view-switch.show-list": "Show as list",
   
+  // "sorting.ASC": "Ascending",
+  // TODO New key - Add a translation
+  "sorting.ASC": "Ascending",
   
+  // "sorting.DESC": "Descending",
+  // TODO New key - Add a translation
+  "sorting.DESC": "Descending",
   
   // "sorting.dc.title.ASC": "Title Ascending",
   // TODO New key - Add a translation
@@ -4102,7 +4807,13 @@
   // TODO New key - Add a translation
   "sorting.score.DESC": "Relevance",
   
+  // "spinoffs.listelement.badge": "Spin-offs (incl. associations)",
+  // TODO New key - Add a translation
+  "spinoffs.listelement.badge": "Spin-offs (incl. associations)",
   
+  // "steps.listelement.badge": "Next steps and cooperation",
+  // TODO New key - Add a translation
+  "steps.listelement.badge": "Next steps and cooperation",
   
   // "submission.edit.title": "Edit Submission",
   // TODO New key - Add a translation
@@ -4146,6 +4857,84 @@
   
   
   
+  // "submission.sections.detect-duplicate.clear-decision": "Undo",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.clear-decision": "Undo",
+  
+  // "submission.sections.detect-duplicate.clear-decision-help": "Click for clear the decision about this pontential duplicate",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.clear-decision-help": "Click for clear the decision about this pontential duplicate",
+  
+  // "submission.sections.detect-duplicate.confirm-duplicate": "Confirm (It's a duplicate)",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.confirm-duplicate": "Confirm (It's a duplicate)",
+  
+  // "submission.sections.detect-duplicate.confirm-not-duplicate": "Confirm (It's not a duplicate)",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.confirm-not-duplicate": "Confirm (It's not a duplicate)",
+  
+  // "submission.sections.detect-duplicate.decision-success-notice": "Choice registered successfully",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.decision-success-notice": "Choice registered successfully",
+  
+  // "submission.sections.detect-duplicate.disclaimer": "The system has identified some potential duplicates. Please carefully review the list and flag each occurency with the appropriate choice or discard this submission.",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.disclaimer": "The system has identified some potential duplicates. Please carefully review the list and flag each occurency with the appropriate choice or discard this submission.",
+  
+  // "submission.sections.detect-duplicate.disclaimer-ctrl": "The system has identified some potential duplicates. Please carefully review the list and the submitter comments and perform the appropriate action.",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.disclaimer-ctrl": "The system has identified some potential duplicates. Please carefully review the list and the submitter comments and perform the appropriate action.",
+  
+  // "submission.sections.detect-duplicate.disclaimer-no-match": "All your feedback on potential duplicates have been registered correctly.",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.disclaimer-no-match": "All your feedback on potential duplicates have been registered correctly.",
+  
+  // "submission.sections.detect-duplicate.duplicate": "It's a duplicate",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.duplicate": "It's a duplicate",
+  
+  // "submission.sections.detect-duplicate.duplicate-ctrl": "Mark the record to merge",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.duplicate-ctrl": "Mark the record to merge",
+  
+  // "submission.sections.detect-duplicate.duplicate-detected": "Potential duplicate detected",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.duplicate-detected": "Potential duplicate detected",
+  
+  // "submission.sections.detect-duplicate.duplicate-help": "Click here if this is a duplicate of your item",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.duplicate-help": "Click here if this is a duplicate of your item",
+  
+  // "submission.sections.detect-duplicate.note-help": "Please enter your reason for the duplication into the box below.",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.note-help": "Please enter your reason for the duplication into the box below.",
+  
+  // "submission.sections.detect-duplicate.note-placeholder": "Describe the reason of duplication",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.note-placeholder": "Describe the reason of duplication",
+  
+  // "submission.sections.detect-duplicate.no-decision": "No decision yet",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.no-decision": "No decision yet",
+  
+  // "submission.sections.detect-duplicate.not-duplicate": "It's not a duplicate",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.not-duplicate": "It's not a duplicate",
+  
+  // "submission.sections.detect-duplicate.not-duplicate-help": "Click here if this is not a duplicate of your item",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.not-duplicate-help": "Click here if this is not a duplicate of your item",
+  
+  // "submission.sections.detect-duplicate.submitter-decision": "Submitter decision:",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.submitter-decision": "Submitter decision:",
+  
+  // "submission.sections.detect-duplicate.submitter-note": "Submitter note:",
+  // TODO New key - Add a translation
+  "submission.sections.detect-duplicate.submitter-note": "Submitter note:",
+  
+  
+  
   // "submission.sections.describe.relationship-lookup.close": "Close",
   // TODO New key - Add a translation
   "submission.sections.describe.relationship-lookup.close": "Close",
@@ -4181,6 +4970,46 @@
   // "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.added.new-entity": "Successfully imported and added external author to the selection",
   // TODO New key - Add a translation
   "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.added.new-entity": "Successfully imported and added external author to the selection",
+  
+  // "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.title": "Import Remote Author",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.title": "Import Remote Author",
+  
+  // "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.added.local-entity": "Successfully added local journal issue to the selection",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.added.local-entity": "Successfully added local journal issue to the selection",
+  
+  // "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.added.new-entity": "Successfully imported and added external journal issue to the selection",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.added.new-entity": "Successfully imported and added external journal issue to the selection",
+  
+  // "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.title": "Import Remote Journal Issue",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.title": "Import Remote Journal Issue",
+  
+  // "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Volume.added.local-entity": "Successfully added local journal volume to the selection",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Volume.added.local-entity": "Successfully added local journal volume to the selection",
+  
+  // "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Volume.added.new-entity": "Successfully imported and added external journal volume to the selection",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Volume.added.new-entity": "Successfully imported and added external journal volume to the selection",
+  
+  // "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Volume.title": "Import Remote Journal Volume",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Volume.title": "Import Remote Journal Volume",
+  
+  // "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal.added.local-entity": "Successfully added local journal to the selection",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal.added.local-entity": "Successfully added local journal to the selection",
+  
+  // "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal.added.new-entity": "Successfully imported and added external journal to the selection",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal.added.new-entity": "Successfully imported and added external journal to the selection",
+  
+  // "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal.title": "Import Remote Journal",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal.title": "Import Remote Journal",
   
   // "submission.sections.describe.relationship-lookup.external-source.import-modal.authority": "Authority",
   // TODO New key - Add a translation
@@ -4484,21 +5313,577 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.cclicense": "Creative commons license",
   
-  // "submission.sections.submit.progressbar.describe.recycle": "Recycle",
+  // "submission.sections.submit.progressbar.describe.agrovoc_keywords": "Agrovoc keywords",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.recycle": "Recycle",
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords": "Agrovoc keywords",
   
-  // "submission.sections.submit.progressbar.describe.stepcustom": "Describe",
+  // "submission.sections.submit.progressbar.describe.applications_econtech": "Succsessful use of results for change processes",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.stepcustom": "Describe",
+  "submission.sections.submit.progressbar.describe.applications_econtech": "Succsessful use of results for change processes",
   
-  // "submission.sections.submit.progressbar.describe.stepone": "Describe",
+  // "submission.sections.submit.progressbar.describe.applications_econtech_quant": "Quantification of the use of results and development of the outreach",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.stepone": "Describe",
+  "submission.sections.submit.progressbar.describe.applications_econtech_quant": "Quantification of the use of results and development of the outreach",
   
-  // "submission.sections.submit.progressbar.describe.steptwo": "Describe",
+  // "submission.sections.submit.progressbar.describe.applications_econtech_types": "If no innovation-potential is linked: Type and actors group of the successful use of results",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.steptwo": "Describe",
+  "submission.sections.submit.progressbar.describe.applications_econtech_types": "If no innovation-potential is linked: Type and actors group of the successful use of results",
+  
+  // "submission.sections.submit.progressbar.describe.applications_econtech_types.info": "The following information need only be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.applications_econtech_types.info": "The following information need only be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
+  
+  // "submission.sections.submit.progressbar.describe.applications_social": "Succsessful use of results for social innovations/ change processes",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.applications_social": "Succsessful use of results for social innovations/ change processes",
+  
+  // "submission.sections.submit.progressbar.describe.applications_social_quant": "Quantification of the use of results and development of the outreach",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.applications_social_quant": "Quantification of the use of results and development of the outreach",
+  
+  // "submission.sections.submit.progressbar.describe.applications_social_quant.info": "Please provide details about the scope and development of the application success, if possible.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.applications_social_quant.info": "Please provide details about the scope and development of the application success, if possible.",
+  
+  // "submission.sections.submit.progressbar.describe.applications_social_types": "If no innovation-potential is linked: Type and actors group of the successful use of results",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.applications_social_types": "If no innovation-potential is linked: Type and actors group of the successful use of results",
+  
+  // "submission.sections.submit.progressbar.describe.applications_social_types.info": "The following information need only be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.applications_social_types.info": "The following information need only be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
+  
+  // "submission.sections.submit.progressbar.describe.awards": "Prizes and awards",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.awards": "Prizes and awards",
+  
+  // "submission.sections.submit.progressbar.describe.awards.info": "Please document here all prizes and awards related to the project and/or its results.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.awards.info": "Please document here all prizes and awards related to the project and/or its results.",
+  
+  // "submission.sections.submit.progressbar.describe.conditions": "Reflection of external conditions and requirements",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.conditions": "Reflection of external conditions and requirements",
+  
+  // "submission.sections.submit.progressbar.describe.conditions.info": "Please reflect here on external conditions and requirements that are relevant to the project. Through these considerations, you show that you are aware of relevant conditions and requirements and that you deal with them adequately in the project.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.conditions.info": "Please reflect here on external conditions and requirements that are relevant to the project. Through these considerations, you show that you are aware of relevant conditions and requirements and that you deal with them adequately in the project.",
+  
+  // "submission.sections.submit.progressbar.describe.contribution_fundingprogramme": "Contribution to funding programme objectives",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.contribution_fundingprogramme": "Contribution to funding programme objectives",
+  
+  // "submission.sections.submit.progressbar.describe.contribution_fundingprogramme.info": "Please describe here the contribution of the project to the funding policy objectives. Select the relevant (or possibly mandatory) funding policy objectives and briefly explain the (intended) contribution of the project to the funding policy objective. You can visualise the interrelationships in the impact pathway with arrows. You should therefore focus your explanation on additional information and the reasons for the connections.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.contribution_fundingprogramme.info": "Please describe here the contribution of the project to the funding policy objectives. Select the relevant (or possibly mandatory) funding policy objectives and briefly explain the (intended) contribution of the project to the funding policy objective. You can visualise the interrelationships in the impact pathway with arrows. You should therefore focus your explanation on additional information and the reasons for the connections.",
+  
+  // "submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg": "Relation of the project to SDGs",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg": "Relation of the project to SDGs",
+  
+  // "submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg.info": "The assignment to the UN Sustainable Development Goals (SDGs) are carried out for programme evaluation. If SDGs have already been assigned to the programme objectives, these are displayed. Please select a SDG target manually if no assignment has been made yet or if the project contributes to other SDGs that go beyond the program objectives. Further information can be found here [LINK].",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg.info": "The assignment to the UN Sustainable Development Goals (SDGs) are carried out for programme evaluation. If SDGs have already been assigned to the programme objectives, these are displayed. Please select a SDG target manually if no assignment has been made yet or if the project contributes to other SDGs that go beyond the program objectives. Further information can be found here [LINK].",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_events": "Cooperation processes basic information",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_events": "Cooperation processes basic information",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_events.info": "Cooperation processes comprise the collaboration of formal and informal cooperation partners in the project.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_events.info": "Cooperation processes comprise the collaboration of formal and informal cooperation partners in the project.",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_events_date": "Dates of personal meetings or other central activities",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_events_date": "Dates of personal meetings or other central activities",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_events_date.info": "It is not expected here that every telephone call or frequent web conferences will be recorded with exact data. Please use the frequency information for this purpose",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_events_date.info": "It is not expected here that every telephone call or frequent web conferences will be recorded with exact data. Please use the frequency information for this purpose",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_events_frequency": "Frequency of the cooperation processes",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_events_frequency": "Frequency of the cooperation processes",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_partners": "Project partners and cooperation partners",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_partners": "Project partners and cooperation partners",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_partners.info": "This area serves to map the cooperation within a project. Cooperation is understood to be the agreed collaboration with other organisations, companies or institutions. Collaboration partners, subcontractors and contractual partners already specified in the easy-online proposal are imported and you only need to add information. Please add informal cooperation partners and all project partners joining after the beginning of the project so that a comprehensive picture of the cooperation partners of the project is available. If desired or required, contracts, letters of intent or similar evidence of cooperation can be uploaded. They will not be published and can only be viewed by the funder.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_partners.info": "This area serves to map the cooperation within a project. Cooperation is understood to be the agreed collaboration with other organisations, companies or institutions. Collaboration partners, subcontractors and contractual partners already specified in the easy-online proposal are imported and you only need to add information. Please add informal cooperation partners and all project partners joining after the beginning of the project so that a comprehensive picture of the cooperation partners of the project is available. If desired or required, contracts, letters of intent or similar evidence of cooperation can be uploaded. They will not be published and can only be viewed by the funder.",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_partners_contribution": "Contribution of the cooperation partner to the project",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_partners_contribution": "Contribution of the cooperation partner to the project",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_partners_orgunits": "Description of the cooperating organisational unit",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_partners_orgunits": "Description of the cooperating organisational unit",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_partners_orgunits.info": "Please complete the imported data and make any necessary corrections.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_partners_orgunits.info": "Please complete the imported data and make any necessary corrections.",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_partners_orgunits_companies": "Details only for companies",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_partners_orgunits_companies": "Details only for companies",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_partners_orgunits_research": "Details only for research institutions",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_partners_orgunits_research": "Details only for research institutions",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_partners_staff": "Project staff",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_partners_staff": "Project staff",
+  
+  // "submission.sections.submit.progressbar.describe.cooperation_partners_staff.info": "Please complete the information on project staff. The information is used for criteria on equality and interdisciplinarity.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.cooperation_partners_staff.info": "Please complete the information on project staff. The information is used for criteria on equality and interdisciplinarity.",
+  
+  // "submission.sections.submit.progressbar.describe.easy_upload": "Import from easy-Online",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.easy_upload": "Import from easy-Online",
+  
+  // "submission.sections.submit.progressbar.describe.easy_upload.info": "By uploading your easy-Online application, you import information about the sub-project, the executing agency and the persons involved. You can use this information here as well. The upload can be repeated at any time with an updated xml file from easy-online.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.easy_upload.info": "By uploading your easy-Online application, you import information about the sub-project, the executing agency and the persons involved. You can use this information here as well. The upload can be repeated at any time with an updated xml file from easy-online.",
+  
+  // "submission.sections.submit.progressbar.describe.entity_type_selection": "Selection of the entity type",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.entity_type_selection": "Selection of the entity type",
+  
+  // "submission.sections.submit.progressbar.describe.ethics": "Ethical reflection",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.ethics": "Ethical reflection",
+  
+  // "submission.sections.submit.progressbar.describe.ethics.info": "Consider that ethical questions arise in many areas of research. Apart from obvious examples from the medical field, many problems in environmental and agricultural sciences, social sciences, psychology or security research etc. touch on ethical guidelines. Please reflect below to what extent the R&D process or the results of the project touch on ethical aspects. Please use the text fields to explain how you deal with ethical principles and/or the applicable legal regulations. <br />The attached document contains information about what you should pay attention to in detail [Link].",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.ethics.info": "Consider that ethical questions arise in many areas of research. Apart from obvious examples from the medical field, many problems in environmental and agricultural sciences, social sciences, psychology or security research etc. touch on ethical guidelines. Please reflect below to what extent the R&D process or the results of the project touch on ethical aspects. Please use the text fields to explain how you deal with ethical principles and/or the applicable legal regulations. <br />The attached document contains information about what you should pay attention to in detail [Link].",
+  
+  // "submission.sections.submit.progressbar.describe.ethics_process": "Reflection on compliance with ethical principles in the R&D process",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.ethics_process": "Reflection on compliance with ethical principles in the R&D process",
+  
+  // "submission.sections.submit.progressbar.describe.ethics_process.info": "Ethical aspects can affect your research object and might be relevant at several points in an R&D process. Please provide comments on which ethical aspects your project may affect.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.ethics_process.info": "Ethical aspects can affect your research object and might be relevant at several points in an R&D process. Please provide comments on which ethical aspects your project may affect.",
+  
+  // "submission.sections.submit.progressbar.describe.ethics_use": "Reflection on ethical acceptance of the project results",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.ethics_use": "Reflection on ethical acceptance of the project results",
+  
+  // "submission.sections.submit.progressbar.describe.ethics_use.info": "Project results can touch the limits of what is ethically acceptable in society. Please comment on whether your findings may affect ethical acceptance or have the potential for abuse.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.ethics_use.info": "Project results can touch the limits of what is ethically acceptable in society. Please comment on whether your findings may affect ethical acceptance or have the potential for abuse.",
+  
+  // "submission.sections.submit.progressbar.describe.events": "Event basic information",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.events": "Event basic information",
+  
+  // "submission.sections.submit.progressbar.describe.events.info": "Please record events and interactions that were organised in the project or attended in the project context. Do not include here cooperation processes with your partners or participatory processes that build on each other. These have their own section.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.events.info": "Please record events and interactions that were organised in the project or attended in the project context. Do not include here cooperation processes with your partners or participatory processes that build on each other. These have their own section.",
+  
+  // "submission.sections.submit.progressbar.describe.events_result": "Dates of the Event",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.events_result": "Dates of the Event",
+  
+  // "submission.sections.submit.progressbar.describe.events_result.info": "Please only enter several events here if the basic information and groups of actors involved are indeed the same.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.events_result.info": "Please only enter several events here if the basic information and groups of actors involved are indeed the same.",
+  
+  // "submission.sections.submit.progressbar.describe.gender_personal": "Gender mainstreaming in the project team",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.gender_personal": "Gender mainstreaming in the project team",
+  
+  // "submission.sections.submit.progressbar.describe.gender_personal.info": "The effective implementation of equal rights for women and men is a high political priority. For this reason, the objective in science is to actively remedy the under-representation of women in top positions. Please identify the particular challenges in the context of the project to achieve gender parity and any specific activities of the project related to them. (The balance between women and men in management and decision-making positions, first authorships etc. realised in the project is recorded in the SynSICRIS tool with the help of the information on gender and the role of the project staff).",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.gender_personal.info": "The effective implementation of equal rights for women and men is a high political priority. For this reason, the objective in science is to actively remedy the under-representation of women in top positions. Please identify the particular challenges in the context of the project to achieve gender parity and any specific activities of the project related to them. (The balance between women and men in management and decision-making positions, first authorships etc. realised in the project is recorded in the SynSICRIS tool with the help of the information on gender and the role of the project staff).",
+  
+  // "submission.sections.submit.progressbar.describe.gender_project": "Gender aspects in the R&D process",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.gender_project": "Gender aspects in the R&D process",
+  
+  // "submission.sections.submit.progressbar.describe.gender_project.info": "Gender aspects can be relevant at several points of an R&D process. Please indicate where gender aspects may be affected by the project. If you choose \"yes\" in an area, please address these aspects in the corresponding section in the SynSICRIS tool.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.gender_project.info": "Gender aspects can be relevant at several points of an R&D process. Please indicate where gender aspects may be affected by the project. If you choose \"yes\" in an area, please address these aspects in the corresponding section in the SynSICRIS tool.",
+  
+  // "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
+  
+  // "submission.sections.submit.progressbar.describe.import_orgunits_companies": "Details only for companies",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.import_orgunits_companies": "Details only for companies",
+  
+  // "submission.sections.submit.progressbar.describe.import_orgunits_companies_st": "Commercial register entry",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.import_orgunits_companies_st": "Commercial register entry",
+  
+  // "submission.sections.submit.progressbar.describe.import_orgunits_companies_zk": "Commercial register entry",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.import_orgunits_companies_zk": "Commercial register entry",
+  
+  // "submission.sections.submit.progressbar.describe.import_orgunits_st": "Information on the executing acency",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.import_orgunits_st": "Information on the executing acency",
+  
+  // "submission.sections.submit.progressbar.describe.import_orgunits_zk": "Information on the applicant",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.import_orgunits_zk": "Information on the applicant",
+  
+  // "submission.sections.submit.progressbar.describe.import_person_a2": "Personal data administrative contact person (only during the application process)",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.import_person_a2": "Personal data administrative contact person (only during the application process)",
+  
+  // "submission.sections.submit.progressbar.describe.import_person_pa": "Personal data administrative contact person (in case of grant approval)",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.import_person_pa": "Personal data administrative contact person (in case of grant approval)",
+  
+  // "submission.sections.submit.progressbar.describe.import_person_pl": "Personal data Project management",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.import_person_pl": "Personal data Project management",
+  
+  // "submission.sections.submit.progressbar.describe.import_person_uz": "Personal data authorised signatory",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.import_person_uz": "Personal data authorised signatory",
+  
+  // "submission.sections.submit.progressbar.describe.import_projects": "Projects",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.import_projects": "Projects",
+  
+  // "submission.sections.submit.progressbar.describe.import_subprojects": "Information on the subproject",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.import_subprojects": "Information on the subproject",
+  
+  // "submission.sections.submit.progressbar.describe.innovationideas": "Ideas for innovation- and change processes",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationideas": "Ideas for innovation- and change processes",
+  
+  // "submission.sections.submit.progressbar.describe.innovationideas.info": "Describe here possible, not yet tangible contributions of the project results to innovation and change processes. If there are concrete intentions in the project to develop certain innovations or to contribute to change processes, select the category intended Innovation or intended change processes. If necessary, enter here additional secondary objectives or possible alternatives to the concrete intentions documented there.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationideas.info": "Describe here possible, not yet tangible contributions of the project results to innovation and change processes. If there are concrete intentions in the project to develop certain innovations or to contribute to change processes, select the category intended Innovation or intended change processes. If necessary, enter here additional secondary objectives or possible alternatives to the concrete intentions documented there.",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_econtech": "Concrete intentions for the development of economic-technical innovations based on the project results (e.g. products, services, processes)",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_econtech": "Concrete intentions for the development of economic-technical innovations based on the project results (e.g. products, services, processes)",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_econtech.info": "Document here which concrete intentions exist for the use of the project results for innovations by the project partners or other cooperation partners. If the innovation/ development is related to intended social innovation/ change processes, please document these separately. You can create a link from the social innovation to the economic-technical innovation. If you see different, unspecific application possibilities for the (expected) project results, which can only be substantiated at a later date and for whose further implementation no partners have yet been identified, please switch to \"Innovation ideas\".",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_econtech.info": "Document here which concrete intentions exist for the use of the project results for innovations by the project partners or other cooperation partners. If the innovation/ development is related to intended social innovation/ change processes, please document these separately. You can create a link from the social innovation to the economic-technical innovation. If you see different, unspecific application possibilities for the (expected) project results, which can only be substantiated at a later date and for whose further implementation no partners have yet been identified, please switch to \"Innovation ideas\".",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability": "Description of the applicability",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability": "Description of the applicability",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability.info": "Please describe the current status of applicability and name deficits in applicability whose improvement is addressed in the project. In some cases, this information will not yet be available in the proposal phase, but will be identified in the course of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. Update this information at the required times. At the end of the project, describe the achieved applicability.It is recommended to conduct the applicability analysis with the participation of actors from the field of practice.The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project.  Add any information that you consider important but not requested under \"other\".",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability.info": "Please describe the current status of applicability and name deficits in applicability whose improvement is addressed in the project. In some cases, this information will not yet be available in the proposal phase, but will be identified in the course of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. Update this information at the required times. At the end of the project, describe the achieved applicability.It is recommended to conduct the applicability analysis with the participation of actors from the field of practice.The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project.  Add any information that you consider important but not requested under \"other\".",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_trl": "Technology Readiness Level (TRL)",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_trl": "Technology Readiness Level (TRL)",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_trl.info": "Please describe which Technology Readiness Level is given at project start and should be reached by the end of the project. For the final report, please complete which TRL has actually been achieved. Further information on the TRL can be found here (LINK).",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_trl.info": "Please describe which Technology Readiness Level is given at project start and should be reached by the end of the project. For the final report, please complete which TRL has actually been achieved. Further information on the TRL can be found here (LINK).",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_userbenefit": "Expected benefit for potential customer or user groups",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_userbenefit": "Expected benefit for potential customer or user groups",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_userbenefit.info": "Describe the expected benefit for any number of relevant customer or user groups and estimate the size of the potential market.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_userbenefit.info": "Describe the expected benefit for any number of relevant customer or user groups and estimate the size of the potential market.",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_social": "Concrete intentions for using the project results for social innovation / change processes",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_social": "Concrete intentions for using the project results for social innovation / change processes",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_social.info": "Document here what concrete intentions exist for the use of the project results for social innovation/ changes in the field of practice. (e.g. changed skills, actions, structures but also political changes). If social innovations/ change processes are related to intended economic-technical innovations, please document them separately. If you see different, vague application possibilities for the (expected) project results, which can only be concretised at a later date and for whose further implementation no partners have been identified yet, please change to \"Innovation ideas\".",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_social.info": "Document here what concrete intentions exist for the use of the project results for social innovation/ changes in the field of practice. (e.g. changed skills, actions, structures but also political changes). If social innovations/ change processes are related to intended economic-technical innovations, please document them separately. If you see different, vague application possibilities for the (expected) project results, which can only be concretised at a later date and for whose further implementation no partners have been identified yet, please change to \"Innovation ideas\".",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability": "Description of the achieved applicability",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability": "Description of the achieved applicability",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability.info": "Please give a description of the applicability of the social innovation/ change process, reached at the end of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project. Add any information that you consider important but not requested under \"other\".",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability.info": "Please give a description of the applicability of the social innovation/ change process, reached at the end of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project. Add any information that you consider important but not requested under \"other\".",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability_plan": "Description of the current applicability and the intended improvement",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability_plan": "Description of the current applicability and the intended improvement",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability_plan.info": "Please describe the current status of applicability and name deficits in applicability whose improvement is addressed in the project. In some cases, this information will not yet be available in the proposal phase, but will be identified in the course of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project.  Add any information that you consider important but not requested under \"other\".",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_social_applicability_plan.info": "Please describe the current status of applicability and name deficits in applicability whose improvement is addressed in the project. In some cases, this information will not yet be available in the proposal phase, but will be identified in the course of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project.  Add any information that you consider important but not requested under \"other\".",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_social_srl": "Solution Readiness Level (SRL)",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_social_srl": "Solution Readiness Level (SRL)",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_social_srl.info": "Please describe which Solution Readiness Level is given at project start and intended at the project end. Add for the final report which SRL was actually reached. Further information on the SRL can be found here (LINK).",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_social_srl.info": "Please describe which Solution Readiness Level is given at project start and intended at the project end. Add for the final report which SRL was actually reached. Further information on the SRL can be found here (LINK).",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_social_types": "Detailed description of the social innovation/ change process",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_social_types": "Detailed description of the social innovation/ change process",
+  
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_social_types.info": "Social innovations or change processes often address different areas (e.g. individual behaviour but also networks or structures). Describe the areas separately by selecting the appropriate area (as often as you like) and describe it in the text field.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.innovationpotentials_social_types.info": "Social innovations or change processes often address different areas (e.g. individual behaviour but also networks or structures). Describe the areas separately by selecting the appropriate area (as often as you like) and describe it in the text field.",
+  
+  // "submission.sections.submit.progressbar.describe.license": "License",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.license": "License",
+  
+  // "submission.sections.submit.progressbar.describe.link_to_plan": "Link to a planned item",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.link_to_plan": "Link to a planned item",
+  
+  // "submission.sections.submit.progressbar.describe.link_to_plan.info": "This entry is made via a button from the planned item and usually leads to an import of the information, which can then be changed and supplemented.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.link_to_plan.info": "This entry is made via a button from the planned item and usually leads to an import of the information, which can then be changed and supplemented.",
+  
+  // "submission.sections.submit.progressbar.describe.milestones": "Milestones",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.milestones": "Milestones",
+  
+  // "submission.sections.submit.progressbar.describe.orgunits": "Organisation unit",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.orgunits": "Organisation unit",
+  
+  // "submission.sections.submit.progressbar.describe.orgunits_companies": "Details only for companies",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.orgunits_companies": "Details only for companies",
+  
+  // "submission.sections.submit.progressbar.describe.orgunits_research": "Details only for research institutions",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.orgunits_research": "Details only for research institutions",
+  
+  // "submission.sections.submit.progressbar.describe.participation_events": "Participative processes basic information",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.participation_events": "Participative processes basic information",
+  
+  // "submission.sections.submit.progressbar.describe.participation_events.info": "Please record participative processes with groups of actors that were organised in the project. Do not include here cooperation processes with your partners or single events. These have their own section.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.participation_events.info": "Please record participative processes with groups of actors that were organised in the project. Do not include here cooperation processes with your partners or single events. These have their own section.",
+  
+  // "submission.sections.submit.progressbar.describe.participation_events_date": "Dates of the participatory events",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.participation_events_date": "Dates of the participatory events",
+  
+  // "submission.sections.submit.progressbar.describe.participation_events_frequency": "Planned frequency of the participatory events",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.participation_events_frequency": "Planned frequency of the participatory events",
+  
+  // "submission.sections.submit.progressbar.describe.patents": "Patents and utility patents",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.patents": "Patents and utility patents",
+  
+  // "submission.sections.submit.progressbar.describe.patents.info": "Please document here the Industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.patents.info": "Please document here the Industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
+  
+  // "submission.sections.submit.progressbar.describe.patents_result": "Information from application at the Patent Office",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.patents_result": "Information from application at the Patent Office",
+  
+  // "submission.sections.submit.progressbar.describe.patents_result.info": "Please complete the mandatory information. The information will be regularly compared with the patent database. This means that as soon as the patent or utility model is published, it can be automatically transferred to the system. You will receive a message for this purpose.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.patents_result.info": "Please complete the mandatory information. The information will be regularly compared with the patent database. This means that as soon as the patent or utility model is published, it can be automatically transferred to the system. You will receive a message for this purpose.",
+  
+  // "submission.sections.submit.progressbar.describe.persons": "Personal data",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.persons": "Personal data",
+  
+  // "submission.sections.submit.progressbar.describe.persons.info": "This section contains personal information that allows you to use the system and provides contact details for the funding agency.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.persons.info": "This section contains personal information that allows you to use the system and provides contact details for the funding agency.",
+  
+  // "submission.sections.submit.progressbar.describe.physical_objects": "Objects, Materials",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.physical_objects": "Objects, Materials",
+  
+  // "submission.sections.submit.progressbar.describe.physical_objects.info": "Document all types of (physical) objects and materials here. This summarizes all outputs like e.g. devices as prototypes, miniatures, sediments.If you don't find a specific object type here, check whether it is available under \"Publications\".",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.physical_objects.info": "Document all types of (physical) objects and materials here. This summarizes all outputs like e.g. devices as prototypes, miniatures, sediments.If you don't find a specific object type here, check whether it is available under \"Publications\".",
+  
+  // "submission.sections.submit.progressbar.describe.physical_objects_result": "Type of use and accessibility",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.physical_objects_result": "Type of use and accessibility",
+  
+  // "submission.sections.submit.progressbar.describe.physical_objects_result.info": "Please complete the information on intended use and accessibility, if available.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.physical_objects_result.info": "Please complete the information on intended use and accessibility, if available.",
+  
+  // "submission.sections.submit.progressbar.describe.pot_societalimpact": "Expected societal impacts",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.pot_societalimpact": "Expected societal impacts",
+  
+  // "submission.sections.submit.progressbar.describe.pot_societalimpact.info": "The focus is on describing which ecological, economic or social-cultural effects can be associated with an application of the project results. By documenting possible positive as well as negative impacts, you demonstrate the awareness of side effects of your research work and contribute to orienting further innovation processes towards positive impacts and the reduction of side effects.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.pot_societalimpact.info": "The focus is on describing which ecological, economic or social-cultural effects can be associated with an application of the project results. By documenting possible positive as well as negative impacts, you demonstrate the awareness of side effects of your research work and contribute to orienting further innovation processes towards positive impacts and the reduction of side effects.",
+  
+  // "submission.sections.submit.progressbar.describe.proj_objectives": "Project objectives",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.proj_objectives": "Project objectives",
+  
+  // "submission.sections.submit.progressbar.describe.projects": "Projects",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.projects": "Projects",
+  
+  // "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties.  Please upload a logo of the project, if available, to support the public presentation of the project.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties.  Please upload a logo of the project, if available, to support the public presentation of the project.",
+  
+  // "submission.sections.submit.progressbar.describe.projects_overview": "Project overview",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.projects_overview": "Project overview",
+  
+  // "submission.sections.submit.progressbar.describe.projects_overview.info": "This information is generated from the corresponding subprojects. During the proposal preparation phase, the information comes from the easy-online imports of the subprojects. During the project phase, the information is regularly updated from profi.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.projects_overview.info": "This information is generated from the corresponding subprojects. During the proposal preparation phase, the information comes from the easy-online imports of the subprojects. During the project phase, the information is regularly updated from profi.",
+  
+  // "submission.sections.submit.progressbar.describe.publications": "Publications",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.publications": "Publications",
+  
+  // "submission.sections.submit.progressbar.describe.publications.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Enter here the information about a planned publication.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.publications.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Enter here the information about a planned publication.",
+  
+  // "submission.sections.submit.progressbar.describe.publications_result": "Meta(Data) of the publication",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.publications_result": "Meta(Data) of the publication",
+  
+  // "submission.sections.submit.progressbar.describe.publications_result.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Use the import function via an identifier. If no identifier is available or information from the import is incomplete, please enter the metadata. Precise metadata make your publication easier to find for interested parties.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.publications_result.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Use the import function via an identifier. If no identifier is available or information from the import is incomplete, please enter the metadata. Precise metadata make your publication easier to find for interested parties.",
+  
+  // "submission.sections.submit.progressbar.describe.regional_scope": "Regional field of application",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.regional_scope": "Regional field of application",
+  
+  // "submission.sections.submit.progressbar.describe.regional_scope.info": "Please describe the possible field of application for the planned innovation or change process.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.regional_scope.info": "Please describe the possible field of application for the planned innovation or change process.",
+  
+  // "submission.sections.submit.progressbar.describe.relation_targetgroup": "Relation to the group of actors",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.relation_targetgroup": "Relation to the group of actors",
+  
+  // "submission.sections.submit.progressbar.describe.relation_targetgroup.info": "Please select the involved or participating group of actors or create a new group of actors if needed. Add details if necessary.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.relation_targetgroup.info": "Please select the involved or participating group of actors or create a new group of actors if needed. Add details if necessary.",
+  
+  // "submission.sections.submit.progressbar.describe.spinoffs": "Spin-offs (incl. associations)",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.spinoffs": "Spin-offs (incl. associations)",
+  
+  // "submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/person by founding a company or association.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/person by founding a company or association.",
+  
+  // "submission.sections.submit.progressbar.describe.spinoffs_result": "Details of spin-off carried out",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.spinoffs_result": "Details of spin-off carried out",
+  
+  // "submission.sections.submit.progressbar.describe.spinoffs_result_funding": "Details of spin-off funding",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.spinoffs_result_funding": "Details of spin-off funding",
+  
+  // "submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "Please document any subsidies received for the spin-off here.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "Please document any subsidies received for the spin-off here.",
+  
+  // "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development": "Survey on success and economic development",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development": "Survey on success and economic development",
+  
+  // "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development.info": "This section can be used for surveys.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development.info": "This section can be used for surveys.",
+  
+  // "submission.sections.submit.progressbar.describe.stateofart": "State of knowledge and adressed problem",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.stateofart": "State of knowledge and adressed problem",
+  
+  // "submission.sections.submit.progressbar.describe.stateofart.info": "Please describe here very briefly the state of knowledge and the problem addressed in the project. Upload the detailed text with references.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.stateofart.info": "Please describe here very briefly the state of knowledge and the problem addressed in the project. Upload the detailed text with references.",
+  
+  // "submission.sections.submit.progressbar.describe.steps": "Next steps and continuation of cooperation after the end of the project",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.steps": "Next steps and continuation of cooperation after the end of the project",
+  
+  // "submission.sections.submit.progressbar.describe.steps.info": "What steps do you intend after the end of the project to further bring project results into application and to continue cooperation (also with other objectives)?",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.steps.info": "What steps do you intend after the end of the project to further bring project results into application and to continue cooperation (also with other objectives)?",
+  
+  // "submission.sections.submit.progressbar.describe.subprojects": "Sub-projects",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.subprojects": "Sub-projects",
+  
+  // "submission.sections.submit.progressbar.describe.subprojects.info": "During the proposal preparation phase, the information can be entered via the import of the easy-online xml.  During the ongoing project, the information is regularly updated from profi. Please complete the information.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.subprojects.info": "During the proposal preparation phase, the information can be entered via the import of the easy-online xml.  During the ongoing project, the information is regularly updated from profi. Please complete the information.",
+  
+  // "submission.sections.submit.progressbar.describe.targetgroups": "Target groups",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.targetgroups": "Target groups",
+  
+  // "submission.sections.submit.progressbar.describe.targetgroups.info": "Who is the target group of your project? <b>Direct</b> target group are groups of actors, that (a) directly may apply and/or benefit from the results or possible solutions of the project; (b) those with whom the project cooperates to investigate a problem and/or develop a solution; (c) which are important to bring results into application and/or to disseminate them. <b>Indirect</b> target groups are in addition groups of actors in society who are touched by the application of the project results in any way in their interests or actions. <i>We thus use the term target group as a synonym for further terms from other concepts such as stakeholders, practitioners, actors from the field of action, end users, multipliers, profiteers or affected persons.</i>",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.targetgroups.info": "Who is the target group of your project? <b>Direct</b> target group are groups of actors, that (a) directly may apply and/or benefit from the results or possible solutions of the project; (b) those with whom the project cooperates to investigate a problem and/or develop a solution; (c) which are important to bring results into application and/or to disseminate them. <b>Indirect</b> target groups are in addition groups of actors in society who are touched by the application of the project results in any way in their interests or actions. <i>We thus use the term target group as a synonym for further terms from other concepts such as stakeholders, practitioners, actors from the field of action, end users, multipliers, profiteers or affected persons.</i>",
+  
+  // "submission.sections.submit.progressbar.describe.tasks": "Tasks",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.tasks": "Tasks",
+  
+  // "submission.sections.submit.progressbar.describe.tasks.info": "Use this section only for research tasks and tasks that cannot be assigned to other areas (such as events, participatory processes, etc.).",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.tasks.info": "Use this section only for research tasks and tasks that cannot be assigned to other areas (such as events, participatory processes, etc.).",
+  
+  // "submission.sections.submit.progressbar.describe.tests": "Tests",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.tests": "Tests",
+  
+  // "submission.sections.submit.progressbar.describe.tests.info": "This area serves only test purposes to implement new features and behaviours.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.tests.info": "This area serves only test purposes to implement new features and behaviours.",
+  
+  // "submission.sections.submit.progressbar.describe.unexpected_results": "Unexpected results and problems",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.unexpected_results": "Unexpected results and problems",
+  
+  // "submission.sections.submit.progressbar.describe.unexpected_results.info": "Please document findings that can’t be used as planned. These include non-significant results, results that contradict) the hypothesis or support the null hypothesis, methodological problems that hindered research work, results that indicate unexpected risks, etc.. By documenting (and ideally publishing) such results, you mark the integrity and responsibility of the research in the project. You avoid wasting resources by replicating research that have already failed, avoid misinterpreting the significance and effect size e in reviews and meta-analyses and contribute to the further development of methods. With practice-oriented results, you help to prevent the application of ineffective or risky measures.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.unexpected_results.info": "Please document findings that can’t be used as planned. These include non-significant results, results that contradict) the hypothesis or support the null hypothesis, methodological problems that hindered research work, results that indicate unexpected risks, etc.. By documenting (and ideally publishing) such results, you mark the integrity and responsibility of the research in the project. You avoid wasting resources by replicating research that have already failed, avoid misinterpreting the significance and effect size e in reviews and meta-analyses and contribute to the further development of methods. With practice-oriented results, you help to prevent the application of ineffective or risky measures.",
+  
+  // "submission.sections.submit.progressbar.describe.upload": "Upload",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.upload": "Upload",
+  
+  // "submission.sections.submit.progressbar.describe.upload.info": "If required, you can upload additional information, such as documents, descriptions etc.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.upload.info": "If required, you can upload additional information, such as documents, descriptions etc.",
+  
+  // "submission.sections.submit.progressbar.describe.workpackages": "Description of the workpackage",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.workpackages": "Description of the workpackage",
+  
+  // "submission.sections.submit.progressbar.describe.workpackages.info": "Describe here only general aspects that do not also arise in the assigned tasks and activities.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.workpackages.info": "Describe here only general aspects that do not also arise in the assigned tasks and activities.",
+  
+  // "submission.sections.submit.progressbar.describe.workpackages_result": "Reasons for changes in the work package",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.workpackages_result": "Reasons for changes in the work package",
   
   // "submission.sections.submit.progressbar.detect-duplicate": "Potential duplicates",
   // TODO New key - Add a translation
@@ -4546,9 +5931,9 @@
   // TODO New key - Add a translation
   "submission.sections.upload.form.date-required": "Date is required.",
   
-  // "submission.sections.upload.form.from-label": "Access grant from",
+  // "submission.sections.upload.form.from-label": "Grant access from",
   // TODO New key - Add a translation
-  "submission.sections.upload.form.from-label": "Access grant from",
+  "submission.sections.upload.form.from-label": "Grant access from",
   
   // "submission.sections.upload.form.from-placeholder": "From",
   // TODO New key - Add a translation
@@ -4562,9 +5947,9 @@
   // TODO New key - Add a translation
   "submission.sections.upload.form.group-required": "Group is required.",
   
-  // "submission.sections.upload.form.until-label": "Access grant until",
+  // "submission.sections.upload.form.until-label": "Grant access until",
   // TODO New key - Add a translation
-  "submission.sections.upload.form.until-label": "Access grant until",
+  "submission.sections.upload.form.until-label": "Grant access until",
   
   // "submission.sections.upload.form.until-placeholder": "Until",
   // TODO New key - Add a translation
@@ -4724,11 +6109,50 @@
   // TODO New key - Add a translation
   "submission.workflow.tasks.pool.show-detail": "Show detail",
   
-  
-  
-  // "title": "DSpace",
+  // "targetgroups.listelement.badge": "Target groups",
   // TODO New key - Add a translation
-  "title": "DSpace",
+  "targetgroups.listelement.badge": "Target groups",
+  
+  // "tasks.listelement.badge": "Tasks",
+  // TODO New key - Add a translation
+  "tasks.listelement.badge": "Tasks",
+  
+  // "title": "DSpace Cris",
+  // TODO New key - Add a translation
+  "title": "DSpace Cris",
+  
+  
+  
+  // "tree.description.srsc": "Research Subject Categories",
+  // TODO New key - Add a translation
+  "tree.description.srsc": "Research Subject Categories",
+  
+  
+  
+  // "treeview.header": "Hierarchical tree view",
+  // TODO New key - Add a translation
+  "treeview.header": "Hierarchical tree view",
+  
+  
+  
+  // "treeview.search.form.reset": "Reset",
+  // TODO New key - Add a translation
+  "treeview.search.form.reset": "Reset",
+  
+  // "treeview.search.form.search": "Search",
+  // TODO New key - Add a translation
+  "treeview.search.form.search": "Search",
+  
+  // "treeview.search.no-result": "There were no items to show",
+  // TODO New key - Add a translation
+  "treeview.search.no-result": "There were no items to show",
+  
+  
+  
+  // "treeview.load-more": "Load more",
+  // TODO New key - Add a translation
+  "treeview.load-more": "Load more",
+  
   
   
   // "administrativeView.search.results.head": "Administrative Search",
@@ -4740,6 +6164,9 @@
   "menu.section.admin_search": "Admin Search",
   
   
+  // "unexpected_results.listelement.badge":  "Unexpected results and problems",
+  // TODO New key - Add a translation
+  "unexpected_results.listelement.badge":  "Unexpected results and problems",
   
   // "uploader.browse": "browse",
   // TODO New key - Add a translation
@@ -4773,6 +6200,147 @@
   // TODO New key - Add a translation
   "virtual-metadata.delete-relationship.modal-head": "Select the items for which you want to save the virtual metadata as real metadata",
   
+  
+  
+  // "workflowAdmin.search.results.head": "Administer Workflow",
+  // TODO New key - Add a translation
+  "workflowAdmin.search.results.head": "Administer Workflow",
+  
+  
+  
+  // "workflow-item.delete.notification.success.title": "Deleted",
+  // TODO New key - Add a translation
+  "workflow-item.delete.notification.success.title": "Deleted",
+  
+  // "workflow-item.delete.notification.success.content": "This workflow item was successfully deleted",
+  // TODO New key - Add a translation
+  "workflow-item.delete.notification.success.content": "This workflow item was successfully deleted",
+  
+  // "workflow-item.delete.notification.error.title": "Something went wrong",
+  // TODO New key - Add a translation
+  "workflow-item.delete.notification.error.title": "Something went wrong",
+  
+  // "workflow-item.delete.notification.error.content": "The workflow item could not be deleted",
+  // TODO New key - Add a translation
+  "workflow-item.delete.notification.error.content": "The workflow item could not be deleted",
+  
+  // "workflow-item.delete.title": "Delete workflow item",
+  // TODO New key - Add a translation
+  "workflow-item.delete.title": "Delete workflow item",
+  
+  // "workflow-item.delete.header": "Delete workflow item",
+  // TODO New key - Add a translation
+  "workflow-item.delete.header": "Delete workflow item",
+  
+  // "workflow-item.delete.button.cancel": "Cancel",
+  // TODO New key - Add a translation
+  "workflow-item.delete.button.cancel": "Cancel",
+  
+  // "workflow-item.delete.button.confirm": "Delete",
+  // TODO New key - Add a translation
+  "workflow-item.delete.button.confirm": "Delete",
+  
+  
+  // "workflow-item.send-back.notification.success.title": "Sent back to submitter",
+  // TODO New key - Add a translation
+  "workflow-item.send-back.notification.success.title": "Sent back to submitter",
+  
+  // "workflow-item.send-back.notification.success.content": "This workflow item was successfully sent back to the submitter",
+  // TODO New key - Add a translation
+  "workflow-item.send-back.notification.success.content": "This workflow item was successfully sent back to the submitter",
+  
+  // "workflow-item.send-back.notification.error.title": "Something went wrong",
+  // TODO New key - Add a translation
+  "workflow-item.send-back.notification.error.title": "Something went wrong",
+  
+  // "workflow-item.send-back.notification.error.content": "The workflow item could not be sent back to the submitter",
+  // TODO New key - Add a translation
+  "workflow-item.send-back.notification.error.content": "The workflow item could not be sent back to the submitter",
+  
+  // "workflow-item.send-back.title": "Send workflow item back to submitter",
+  // TODO New key - Add a translation
+  "workflow-item.send-back.title": "Send workflow item back to submitter",
+  
+  // "workflow-item.send-back.header": "Send workflow item back to submitter",
+  // TODO New key - Add a translation
+  "workflow-item.send-back.header": "Send workflow item back to submitter",
+  
+  // "workflow-item.send-back.button.cancel": "Cancel",
+  // TODO New key - Add a translation
+  "workflow-item.send-back.button.cancel": "Cancel",
+  
+  // "workflow-item.send-back.button.confirm": "Send back",
+  // TODO New key - Add a translation
+  "workflow-item.send-back.button.confirm": "Send back",
+  
+  
+  // "working-plan.breadcrumbs" : "Working plan",
+  // TODO New key - Add a translation
+  "working-plan.breadcrumbs" : "Working plan",
+  
+  // "working-plan.chart.button.add": "add",
+  // TODO New key - Add a translation
+  "working-plan.chart.button.add": "add",
+  
+  // "working-plan.chart.column.dates": "Dates",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.dates": "Dates",
+  
+  // "working-plan.chart.column.responsible": "Responsible",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.responsible": "Responsible",
+  
+  // "working-plan.chart.column.status": "Status",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.status": "Status",
+  
+  // "working-plan.chart.column.steps": "Steps",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.steps": "Steps",
+  
+  // "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
+  // TODO New key - Add a translation
+  "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
+  
+  // "working-plan.chart.toolbar.date-view.month": "Month",
+  // TODO New key - Add a translation
+  "working-plan.chart.toolbar.date-view.month": "Month",
+  
+  // "working-plan.chart.toolbar.date-view.quarter": "Quarter",
+  // TODO New key - Add a translation
+  "working-plan.chart.toolbar.date-view.quarter": "Quarter",
+  
+  // "working-plan.chart.toolbar.date-view.quarter.first": "First",
+  // TODO New key - Add a translation
+  "working-plan.chart.toolbar.date-view.quarter.first": "First",
+  
+  // "working-plan.chart.toolbar.date-view.quarter.fourth": "Fourth",
+  // TODO New key - Add a translation
+  "working-plan.chart.toolbar.date-view.quarter.fourth": "Fourth",
+  
+  // "working-plan.chart.toolbar.date-view.quarter.second": "Second",
+  // TODO New key - Add a translation
+  "working-plan.chart.toolbar.date-view.quarter.second": "Second",
+  
+  // "working-plan.chart.toolbar.date-view.quarter.third": "Third",
+  // TODO New key - Add a translation
+  "working-plan.chart.toolbar.date-view.quarter.third": "Third",
+  
+  // "working-plan.chart.toolbar.date-view.year": "Year",
+  // TODO New key - Add a translation
+  "working-plan.chart.toolbar.date-view.year": "Year",
+  
+  // "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
+  // TODO New key - Add a translation
+  "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
+  
+  // "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
+  // TODO New key - Add a translation
+  "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
+  
+  // "working-plan.page.title": "Working plan"
+  // TODO New key - Add a translation
+  "working-plan.page.title": "Working plan"
   
 
 }
