@@ -279,15 +279,15 @@ function removeWorkpackage(state: WorkingPlanState, action: RemoveWorkpackageSuc
  *    the new state.
  */
 function removeWorkpackageStep(state: WorkingPlanState, action: RemoveWorkpackageStepSuccessAction): WorkingPlanState {
-  const newWorpackage = Object.assign({}, state.workpackages[action.payload.workpackageId], {
-    steps: remove(state.workpackages[action.payload.workpackageId].steps, (innerTask) => {
-      return innerTask.id !== action.payload.workpackageStepId;
-    })
+  const newSteps = remove([...state.workpackages[action.payload.workpackageId].steps], (innerTask) => {
+    return innerTask.id !== action.payload.workpackageStepId;
   });
 
   return Object.assign({}, state, {
     workpackages: Object.assign({}, state.workpackages, {
-      [action.payload.workpackageId]: newWorpackage
+      [action.payload.workpackageId]: Object.assign({}, state.workpackages[action.payload.workpackageId], {
+        steps: newSteps
+      })
     }),
     workpackageToRemove: '',
     processing: false
