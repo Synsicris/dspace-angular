@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Inject, Input, ViewChild } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../../core/impact-pathway/models/impact-pathway.model';
 import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
@@ -26,7 +26,8 @@ export class ImpactPathWayComponent {
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
               private cdr: ChangeDetectorRef,
               private impactPathwayService: ImpactPathwayService,
-              private impactPathwayLinksService: ImpactPathwayLinksService) {
+              private impactPathwayLinksService: ImpactPathwayLinksService,
+              private modalService: NgbModal) {
   }
 
   ngAfterContentChecked() {
@@ -41,11 +42,11 @@ export class ImpactPathWayComponent {
     return this.impactPathwayLinksService.getAllLinks();
   }
 
-  isOpen() {
+  isOpen(): boolean {
     return this.wrapper && this.wrapper.activeIds.includes(this.impactPathway.id);
   }
 
-  updateDescription(value) {
+  updateDescription(value): void {
     this.impactPathwayService.dispatchPatchImpactPathwayMetadata(
       this.impactPathway.id,
       this.impactPathway,
@@ -54,4 +55,22 @@ export class ImpactPathWayComponent {
       value
     );
   }
+
+  isProcessingRemove(): Observable<boolean> {
+    return this.impactPathwayService.isRemoving();
+  }
+
+  /**
+   * Dispatch a dispatchRemoveImpactPathwayAction
+   */
+  public confirmRemove(content) {
+    this.modalService.open(content).result.then(
+      (result) => {
+        if (result === 'ok') {
+          this.impactPathwayService.dispatchRemoveImpactPathwayAction(this.impactPathway.id);
+        }
+      }
+    );
+  }
+
 }

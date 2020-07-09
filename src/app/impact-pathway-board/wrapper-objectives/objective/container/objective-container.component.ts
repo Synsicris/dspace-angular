@@ -91,8 +91,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
         this.impactPathwayStep.id,
         this.impactPathwayTask.id,
         item.type.value,
-        item.metadata,
-        modalRef);
+        item.metadata);
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {
@@ -100,8 +99,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
           this.impactPathwayStep.parentId,
           this.impactPathwayStep.id,
           this.impactPathwayTask.id,
-          item.id,
-          modalRef);
+          item.id);
       })
     });
   }

@@ -14,14 +14,14 @@ import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-it
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
 import { WorkpacakgeFlatNode } from '../../../core/working-plan/models/workpackage-step-flat-node.model';
 import {
-  Workpackage,
+  Workpackage, WorkpackageChartDate,
   WorkpackageStep,
   WorkpackageTreeObject
 } from '../../../core/working-plan/models/workpackage-step.model';
 import { moment, WorkingPlanService } from '../../../core/working-plan/working-plan.service';
 import { WorkingPlanStateService } from '../../../core/working-plan/working-plan-state.service';
 import { AuthorityEntry } from '../../../core/integration/models/authority-entry.model';
-import { hasValue } from '../../../shared/empty.util';
+import { hasValue, isNotNull } from '../../../shared/empty.util';
 import { AuthorityOptions } from '../../../core/integration/models/authority-options.model';
 import { ChartDateViewType } from '../../../core/working-plan/working-plan.reducer';
 import { environment } from '../../../../environments/environment';
@@ -66,10 +66,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   ChartDateViewType = ChartDateViewType;
   responsibleAuthorityOptions: AuthorityOptions;
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
-  flatNodeMap: Map<WorkpacakgeFlatNode, WorkpackageTreeObject> = new Map<WorkpacakgeFlatNode, WorkpackageTreeObject>();
+  flatNodeMap: Map<string, WorkpacakgeFlatNode> = new Map<string, WorkpacakgeFlatNode>();
 
   /** Map from nested node to flattened node. This helps us to keep the same object for selection */
-  nestedNodeMap: Map<WorkpackageTreeObject, WorkpacakgeFlatNode> = new Map<WorkpackageTreeObject, WorkpacakgeFlatNode>();
+  nestedNodeMap: Map<string, WorkpackageTreeObject> = new Map<string, WorkpackageTreeObject>();
 
   treeControl: FlatTreeControl<WorkpacakgeFlatNode>;
   treeFlattener: MatTreeFlattener<WorkpackageTreeObject, WorkpacakgeFlatNode>;
@@ -143,7 +143,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     const flatNode = new WorkpacakgeFlatNode(
       node.id,
       node.workspaceItemId,
-      this.getIndex(node),
+      this.getIndex(node, level),
       (node.steps && node.steps.length !== 0),
       level,
       node.name,
@@ -156,8 +156,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       node.steps,
       node.parentId
     );
-    this.flatNodeMap.set(flatNode, node);
-    this.nestedNodeMap.set(node, flatNode);
+    this.updateTreeMap(flatNode, node);
     return flatNode;
   };
 
@@ -165,8 +164,20 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   /** tree nodes manipulations */
 
-  addChildStep(node: WorkpacakgeFlatNode) {
-    const nestedNode: Workpackage = this.flatNodeMap.get(node) as Workpackage;
+  updateTreeMap(flatNode: WorkpacakgeFlatNode, nestedNode: WorkpackageTreeObject) {
+    if (this.flatNodeMap.has(flatNode.id)) {
+      this.flatNodeMap.delete(flatNode.id)
+    }
+    if (this.nestedNodeMap.has(nestedNode.id)) {
+      this.nestedNodeMap.delete(nestedNode.id);
+    }
+
+    this.flatNodeMap.set(flatNode.id, flatNode);
+    this.nestedNodeMap.set(nestedNode.id, nestedNode);
+  }
+
+  addChildStep(flatNode: WorkpacakgeFlatNode) {
+    const nestedNode: Workpackage = this.nestedNodeMap.get(flatNode.id) as Workpackage;
     const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg' });
 
     modalRef.result.then((result) => {
@@ -182,33 +193,31 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.searchConfiguration = this.workingPlanService.getWorkpackageStepSearchConfigName();
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
-      this.workingPlanStateService.dispatchGenerateWorkpackageStep(node.id, item.type.value, metadata, modalRef)
+      this.workingPlanStateService.dispatchGenerateWorkpackageStep(flatNode.id, item.type.value, metadata)
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {
         this.workingPlanStateService.dispatchAddWorkpackageStep(
-          node.id,
+          flatNode.id,
           item.id,
-          item.workspaceItemId,
-          modalRef);
+          item.workspaceItemId);
       })
     });
   }
 
-  deleteStep(node: WorkpacakgeFlatNode) {
+  deleteStep(flatNode: WorkpacakgeFlatNode) {
     // if root, ignore
-    if (this.treeControl.getLevel(node) < 1) {
-      const parentNode = this.flatNodeMap.get(node);
+    if (this.treeControl.getLevel(flatNode) < 1) {
+      const parentNode = this.nestedNodeMap.get(flatNode.id);
       this.workingPlanStateService.dispatchRemoveWorkpackage(parentNode.id, parentNode.workspaceItemId);
     } else {
-      const parentFlatNode = this.getParentStep(node);
-      const parentNode = this.flatNodeMap.get(parentFlatNode) as Workpackage;
-      const childNode = this.flatNodeMap.get(node) as WorkpackageStep;
+      const parentNode: Workpackage = this.nestedNodeMap.get(flatNode.parentId);
+      const childNode: WorkpackageStep = this.nestedNodeMap.get(flatNode.id);
       this.workingPlanStateService.dispatchRemoveWorkpackageStep(parentNode.id, childNode.id, childNode.workspaceItemId);
     }
   }
 
-  getParentStep(node: WorkpacakgeFlatNode) {
+  getParentStep(node: WorkpacakgeFlatNode): WorkpacakgeFlatNode {
     const { treeControl } = this;
     const currentLevel = treeControl.getLevel(node);
     // if root, ignore
@@ -232,49 +241,71 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return (index !== -1) ? this.chartStatusTypeList$.value[index].display : statusType;
   }
 
-  updateDateRange(node: WorkpacakgeFlatNode) {
+  updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string) {
 
-    const startMoment = this.moment(node.dates.start.full); // create start moment
-    node.dates.start.full = startMoment.format(this.dateFormat); // convert moment to string
-    node.dates.start.month = startMoment.format(this.dateMonthFormat); // convert moment to string
-    node.dates.start.year = startMoment.format(this.dateYearFormat); // convert moment to string
+    // create new dates object
+    const startMoment = this.moment(startDate); // create start moment
+    const startDateObj: WorkpackageChartDate = {
+      full: startMoment.format(this.dateFormat),
+      month: startMoment.format(this.dateMonthFormat),
+      year: startMoment.format(this.dateYearFormat)
+    };
 
-    const endMoment = this.moment(node.dates.end.full); // create start moment
-    node.dates.end.full = endMoment.format(this.dateFormat); // convert moment to string
-    node.dates.end.month = endMoment.format(this.dateMonthFormat); // convert moment to string
-    node.dates.end.year = endMoment.format(this.dateYearFormat); // convert moment to string
+    const endMoment = this.moment(endDate); // create start moment
+    const endDateObj: WorkpackageChartDate = {
+      full: endMoment.format(this.dateFormat),
+      month: endMoment.format(this.dateMonthFormat),
+      year: endMoment.format(this.dateYearFormat)
+    };
 
-    const nestedNode = this.flatNodeMap.get(node);
-    nestedNode.dates = node.dates;
+    const dates = {
+      start: startDateObj,
+      end: endDateObj
+    }
 
-    /** rebuild calendar if the root is updated */
-    if (node.level === 0) {
+    // update flat node dates
+    flatNode = Object.assign({}, flatNode, {
+      dates: dates
+    });
+
+    // update nested node dates
+    const nestedNode = Object.assign({}, this.nestedNodeMap.get(flatNode.id), {
+      dates: dates
+    });
+
+    // rebuild calendar if the root is updated
+    if (flatNode.level === 0) {
       this.buildCalendar();
     }
 
     this.updateField(
-      node,
+      flatNode,
+      nestedNode,
       [environment.workingPlan.workingPlanStepDateStartMetadata, environment.workingPlan.workingPlanStepDateEndMetadata],
       [nestedNode.dates.start.full, nestedNode.dates.end.full]
     );
   }
 
-  updateStepName(node: WorkpacakgeFlatNode, name: string) {
-    const nestedNode = this.flatNodeMap.get(node);
-    nestedNode.name = name;
-    this.updateField(node, ['dc.title'], [name]);
+  updateStepName(flatNode: WorkpacakgeFlatNode, name: string) {
+    const nestedNode: Workpackage = Object.assign({}, this.nestedNodeMap.get(flatNode.id), {
+      name: name
+    });
+
+    this.updateField(flatNode, nestedNode, ['dc.title'], [name]);
   }
 
-  updateStepResponsible(node: WorkpacakgeFlatNode, responsible: string) {
-    const nestedNode = this.flatNodeMap.get(node);
-    nestedNode.responsible = responsible;
-    this.updateField(node, [environment.workingPlan.workingPlanStepResponsibleMetadata], [responsible]);
+  updateStepResponsible(flatNode: WorkpacakgeFlatNode, responsible: string) {
+    const nestedNode = Object.assign({}, this.nestedNodeMap.get(flatNode.id), {
+      responsible: responsible
+    });
+    this.updateField(flatNode, nestedNode, [environment.workingPlan.workingPlanStepResponsibleMetadata], [responsible]);
   }
 
-  updateStepStatus(node: WorkpacakgeFlatNode, $event: MatSelectChange,) {
-    const nestedNode = this.flatNodeMap.get(node);
-    nestedNode.status = $event.value;
-    this.updateField(node, [environment.workingPlan.workingPlanStepStatusMetadata], [$event.value]);
+  updateStepStatus(flatNode: WorkpacakgeFlatNode, $event: MatSelectChange,) {
+    const nestedNode = Object.assign({}, this.nestedNodeMap.get(flatNode.id), {
+      status: $event.value
+    });
+    this.updateField(flatNode, nestedNode, [environment.workingPlan.workingPlanStepStatusMetadata], [$event.value]);
   }
 
   /** resize and validate */
@@ -396,8 +427,44 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return this.workingPlanStateService.isWorkingPlanMoving();
   }
 
-  moveWorkpackage(node: Workpackage, oldIndex: number, newIndex: number) {
-    this.workingPlanStateService.dispatchMoveWorkpackage(node.id, oldIndex, newIndex);
+  canMoveDown(flatNode: WorkpacakgeFlatNode, level: number, index: number) {
+    let data: any[];
+    if (level === 0) {
+      data = this.dataSource.data;
+    } else {
+      const parentNode: Workpackage = this.nestedNodeMap.get(flatNode.parentId);
+      data = parentNode.steps;
+    }
+
+    return data.length === 0 || index === (data.length - 1)
+  }
+
+  canMoveUp(flatNode: WorkpacakgeFlatNode, level: number, index: number) {
+    let data: any[];
+    if (level === 0) {
+      data = this.dataSource.data;
+    } else {
+      const parentNode: Workpackage = this.nestedNodeMap.get(flatNode.parentId);
+      data = parentNode.steps;
+    }
+
+    return data.length === 0 || index === 0;
+  }
+
+  moveWorkpackage(flatNode: WorkpacakgeFlatNode, level: number, oldIndex: number, newIndex: number) {
+    if (level === 0) {
+      this.workingPlanStateService.dispatchMoveWorkpackage(flatNode.id, oldIndex, newIndex);
+    } else {
+      const parentNestedNode: Workpackage = this.nestedNodeMap.get(flatNode.parentId);
+      const childNestedNode: WorkpackageStep = this.nestedNodeMap.get(flatNode.id);
+      this.workingPlanStateService.dispatchMoveWorkpackageStep(
+        parentNestedNode.id,
+        parentNestedNode,
+        childNestedNode.id,
+        oldIndex,
+        newIndex
+      );
+    }
   }
 
   getMonthInYear() {
@@ -445,8 +512,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   isProcessingWorkpackageRemove(node: WorkpacakgeFlatNode): Observable<boolean> {
-    const flatNode = this.flatNodeMap.get(node);
-    return this.workingPlanService.isProcessingWorkpackageRemove(flatNode.id);
+    return this.workingPlanService.isProcessingWorkpackageRemove(node.id);
   }
 
   ngOnDestroy(): void {
@@ -469,8 +535,17 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     });
   }
 
-  getIndex(node: Workpackage) {
-    return findIndex(this.dataSource.data, { id: node.id });
+  getIndex(node: Workpackage, level: number) {
+    if (level === 0) {
+      return findIndex(this.dataSource.data, { id: node.id });
+    } else {
+      const parentFlatNode = this.flatNodeMap.get(node.parentId);
+      if (isNotNull(parentFlatNode)) {
+        return findIndex(parentFlatNode.steps, { id: node.id });
+      } else {
+        return -1;
+      }
+    }
   }
 
   private _getLevel = (node: WorkpacakgeFlatNode) => node.level;
@@ -479,9 +554,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   private _getChildren = (node: Workpackage): Observable<WorkpackageStep[]> => observableOf(node.steps);
 
-  private updateField(node: WorkpacakgeFlatNode, metadata: string[], value: any[]) {
-    if (this.treeControl.getLevel(node) < 1) {
-      const nestedNode = this.flatNodeMap.get(node);
+  private updateField(flatNode: WorkpacakgeFlatNode, nestedNode: WorkpackageTreeObject, metadata: string[], value: any[]) {
+    // Update reference in the maps
+    this.updateTreeMap(flatNode, nestedNode);
+
+    // dispatch action to update item metadata
+    if (this.treeControl.getLevel(flatNode) < 1) {
       this.workingPlanService.updateWorkpackageMetadata(
         nestedNode.id,
         nestedNode,
@@ -489,13 +567,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         [...value]
       );
     } else {
-      const parentFlatNode = this.getParentStep(node);
-      const parentNode = this.flatNodeMap.get(parentFlatNode) as Workpackage;
-      const childNode = this.flatNodeMap.get(node) as WorkpackageStep;
+      const parentNestedNode: Workpackage = this.nestedNodeMap.get(flatNode.parentId);
+      const childNestedNode: WorkpackageStep = this.nestedNodeMap.get(flatNode.id);
       this.workingPlanService.updateWorkpackageStepMetadata(
-        parentNode.id,
-        childNode.id,
-        childNode,
+        parentNestedNode.id,
+        childNestedNode.id,
+        childNestedNode,
         [...metadata],
         [...value]
       );

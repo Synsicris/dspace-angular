@@ -17,7 +17,7 @@ import {
   UpdateImpactPathwayTaskAction,
   MoveImpactPathwaySubTaskAction,
   SetImpactPathwayTargetTaskAction,
-  MoveImpactPathwaySubTaskErrorAction
+  MoveImpactPathwaySubTaskErrorAction, RemoveImpactPathwaySuccessAction
 } from './impact-pathway.actions';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
@@ -60,6 +60,7 @@ export interface ImpactPathwayState {
   objects: ImpactPathwayEntries;
   loaded: boolean;
   processing: boolean;
+  removing: boolean;
   targetTaskId: string;
   links: ImpactPathwayLinks;
 }
@@ -68,6 +69,7 @@ const impactPathwayInitialState: ImpactPathwayState = {
   objects: {},
   loaded: false,
   processing: false,
+  removing: false,
   targetTaskId: '',
   links: {
     showLinks: true,
@@ -110,6 +112,23 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
     case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK: {
       return Object.assign({}, state, {
         processing: true
+      });
+    }
+
+    case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY: {
+      return Object.assign({}, state, {
+        removing: true
+      });
+    }
+
+    case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUCCESS: {
+      return removeImpactPathway(state, action as RemoveImpactPathwaySuccessAction);
+    }
+
+    case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_ERROR:
+    case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_STEP_ERROR: {
+      return Object.assign({}, state, {
+        removing: false
       });
     }
 
@@ -268,6 +287,30 @@ function initImpactPathway(state: ImpactPathwayState, action: InitImpactPathwayS
     }),
     processing: false,
     loaded: true
+  })
+}
+
+/**
+ * Remove a impact pathway object.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an RemoveImpactPathwaySuccessAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function removeImpactPathway(state: ImpactPathwayState, action: RemoveImpactPathwaySuccessAction): ImpactPathwayState {
+  const newObjects = {};
+
+  Object.keys(state.objects)
+    .filter((impcatPathwayId) => impcatPathwayId !== action.payload.impactPathwayId)
+    .map((impcatPathwayId) => newObjects[impcatPathwayId] = state.objects[impcatPathwayId]);
+
+  return Object.assign({}, state, {
+    objects: newObjects,
+    removing: false,
+    loaded: false
   })
 }
 

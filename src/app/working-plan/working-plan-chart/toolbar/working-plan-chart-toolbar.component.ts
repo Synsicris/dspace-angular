@@ -60,8 +60,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
       this.workingPlanStateService.dispatchGenerateWorkpackage(
         metadata,
-        this.workpackagesCount.value.toString().padStart(3, '0'),
-        modalRef
+        this.workpackagesCount.value.toString().padStart(3, '0')
       )
     });
 
