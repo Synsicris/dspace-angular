@@ -60,6 +60,15 @@ export const isImpactPathwayProcessingSelector = createSelector(_getImpactPathwa
 );
 
 /**
+ * Returns true if the user a delete operation is processing.
+ * @function isImpactPathwayRemovingSelector
+ * @return {boolean}
+ */
+export const isImpactPathwayRemovingSelector = createSelector(_getImpactPathwayState,
+  (state: ImpactPathwayState) => state.removing
+);
+
+/**
  * Returns the ImpactPathway object.
  * @function impactPathwayByIDSelector
  * @param {string} impactPathwayId

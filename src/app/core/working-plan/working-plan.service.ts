@@ -426,9 +426,23 @@ export class WorkingPlanService {
 
     return observableFrom(list).pipe(
       concatMap((entry) => this.updateMetadataItem(entry.id, entry.metadataList)),
-      reduce((acc: any, value: any) => [...acc, ...value], []),
-      tap((r) => console.log('observableFrom', r))
+      reduce((acc: any, value: any) => [...acc, ...value], [])
     )
+  }
+
+  updateWorkpackageStepsPlace(workpackageId: string, workpackageSteps: WorkpackageStep[]): Observable<Item> {
+    const metadataList: MetadatumViewModel[] = workpackageSteps
+      .map((step, index) => (
+          {
+            key: environment.workingPlan.workingPlanStepRelationMetadata,
+            language: '',
+            value: step.id,
+            place: index,
+            authority: '',
+            confidence: -1
+          } as MetadatumViewModel));
+
+    return this.updateMetadataItem(workpackageId, metadataList)
   }
 
   updateWorkpackageMetadata(

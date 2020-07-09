@@ -62,39 +62,32 @@ export class ItemAuthorityRelationService {
     relationMetadataName: string): Observable<Item> {
     return this.itemService.findById(parentId).pipe(
       getFirstSucceededRemoteDataPayload(),
-      tap((stepItem: Item) => this.removeRelationPatch(stepItem, taskId, relationMetadataName)),
+      tap((parentItem: Item) => {
+        this.removeRelationPatch(parentItem, taskId, relationMetadataName)
+      }),
       delay(100),
-      flatMap((stepItem: Item) => this.executeItemPatch(stepItem.id, 'metadata').pipe(
+      flatMap((parentItem: Item) => this.executeItemPatch(parentItem.id, 'metadata').pipe(
         flatMap(() => this.itemService.findById(taskId)),
         getFirstSucceededRemoteDataPayload(),
-        tap((taskItem: Item) => this.removeRelationPatch(taskItem, parentId, relationParentMetadataName)),
+        tap((childItem: Item) => this.removeRelationPatch(childItem, parentId, relationParentMetadataName)),
         delay(100),
         flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
       ))
     )
   }
 
-/*
-  unlinkParentItemFromChildren(
+  removeParentRelationFromChild(
     parentId: string,
-    relationParentMetadataName: string,
-    relationMetadataName: string
-  ): Observable<Item> {
-    return this.itemService.findById(parentId).pipe(
+    childId: string,
+    relationParentMetadataName: string
+  ) {
+    return this.itemService.findById(childId).pipe(
       getFirstSucceededRemoteDataPayload(),
-      map((parentItem) => parentItem.findMetadataSortedByPlace(relationMetadataName)),
-      flatMap((relationMetadataList: MetadataValue[]) => relationMetadataList),
-      tap((relationMetadata: MetadataValue) => console.log(`retrieving ${relationMetadata.value}`)),
-      flatMap((relationMetadata: MetadataValue) => this.itemService.findById(relationMetadata.value).pipe(
-        getFirstSucceededRemoteDataPayload(),
-        tap((stepItem: Item) => this.removeRelationPatch(stepItem, parentId, relationParentMetadataName)),
-        delay(100),
-        tap((stepItem: Item) => console.log(`removing ${relationMetadata.value} from ${stepItem.id}`)),
-        flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
-      ))
-    );
+      tap((childItem: Item) => this.removeRelationPatch(childItem, parentId, relationParentMetadataName)),
+      delay(100),
+      flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
+    )
   }
-*/
 
   unlinkParentItemFromChildren(
     parentId: string,
@@ -103,17 +96,18 @@ export class ItemAuthorityRelationService {
   ): Observable<Item> {
     return this.itemService.findById(parentId).pipe(
       getFirstSucceededRemoteDataPayload(),
-      flatMap((parentItem) => observableFrom(parentItem.findMetadataSortedByPlace(relationMetadataName)).pipe(
-        tap((relationMetadata: MetadataValue) => console.log(`retrieving ${relationMetadata.value}`)),
-        concatMap((relationMetadata: MetadataValue) => this.unlinkItemFromParent(
-          parentId,
-          relationMetadata.value,
-          relationParentMetadataName,
-          relationMetadataName
-        )),
-        reduce((acc: any, value: any) => [...acc, ...value], []),
-        map(() => parentItem)
-      )),
+      flatMap((parentItem: Item) => {
+        return observableFrom(parentItem.findMetadataSortedByPlace(relationMetadataName)).pipe(
+          concatMap((relationMetadata: MetadataValue) => this.unlinkItemFromParent(
+            parentId,
+            relationMetadata.value,
+            relationParentMetadataName,
+            relationMetadataName
+          )),
+          reduce((acc: any, value: any) => [...acc, ...value], []),
+          map(() => parentItem)
+        )
+      }),
     );
   }
 
@@ -127,7 +121,7 @@ export class ItemAuthorityRelationService {
       confidence: 600
     };
     const path = isEmpty(stepTasks) ? pathCombiner.getPath(relation)
-      : pathCombiner.getPath([relation, stepTasks.length.toString()]);
+      : pathCombiner.getPath([relation, '-']);
     this.operationsBuilder.add(
       path,
       taskToAdd,

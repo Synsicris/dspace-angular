@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { type } from '../../shared/ngrx/type';
 import { Workpackage, WorkpackageSearchItem, WorkpackageStep } from './models/workpackage-step.model';
@@ -46,9 +45,13 @@ export const WorkpackageActionTypes = {
   UPDATE_WORKPACKAGE_STEP: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_STEP'),
   UPDATE_WORKPACKAGE_STEP_ERROR: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_STEP_ERROR'),
   MOVE_WORKPACKAGE: type('dspace/core/workingplan/MOVE_WORKPACKAGE'),
+  MOVE_WORKPACKAGE_STEP: type('dspace/core/workingplan/MOVE_WORKPACKAGE_STEP'),
   SAVE_WORKPACKAGE_ORDER: type('dspace/core/workingplan/SAVE_WORKPACKAGE_ORDER'),
   SAVE_WORKPACKAGE_ORDER_SUCCESS: type('dspace/core/workingplan/SAVE_WORKPACKAGE_ORDER_SUCCESS'),
   SAVE_WORKPACKAGE_ORDER_ERROR: type('dspace/core/workingplan/SAVE_WORKPACKAGE_ORDER_ERROR'),
+  SAVE_WORKPACKAGE_STEPS_ORDER: type('dspace/core/workingplan/SAVE_WORKPACKAGE_STEPS_ORDER'),
+  SAVE_WORKPACKAGE_STEPS_ORDER_SUCCESS: type('dspace/core/workingplan/SAVE_WORKPACKAGE_STEPS_ORDER_SUCCESS'),
+  SAVE_WORKPACKAGE_STEPS_ORDER_ERROR: type('dspace/core/workingplan/SAVE_WORKPACKAGE_STEPS_ORDER_ERROR'),
   NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE: type('dspace/core/workingplan/NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE'),
 };
 
@@ -62,7 +65,6 @@ export class GenerateWorkpackageAction implements Action {
   payload: {
     metadata: MetadataMap,
     place: string;
-    modal?: NgbActiveModal;
   };
 
   /**
@@ -72,11 +74,9 @@ export class GenerateWorkpackageAction implements Action {
    *    the workpackage's Metadata
    * @param place: string
    *    the workpackage's place
-   * @param modal
-   *    the active modal
    */
-  constructor(metadata: MetadataMap, place: string, modal?: NgbActiveModal) {
-    this.payload = { metadata, place, modal };
+  constructor(metadata: MetadataMap, place: string) {
+    this.payload = { metadata, place };
   }
 }
 
@@ -88,7 +88,6 @@ export class GenerateWorkpackageSuccessAction implements Action {
   payload: {
     item: Item;
     workspaceItemId: string;
-    modal?: NgbActiveModal;
   };
 
   /**
@@ -98,11 +97,9 @@ export class GenerateWorkpackageSuccessAction implements Action {
    *    the Item of the workpackage generated
    * @param workspaceItemId
    *    the workspaceItem's id generated
-   * @param modal
-   *    the active modal
    */
-  constructor(item: Item, workspaceItemId: string, modal?: NgbActiveModal) {
-    this.payload = { item, workspaceItemId, modal };
+  constructor(item: Item, workspaceItemId: string) {
+    this.payload = { item, workspaceItemId };
   }
 }
 
@@ -111,20 +108,6 @@ export class GenerateWorkpackageSuccessAction implements Action {
  */
 export class GenerateWorkpackageErrorAction implements Action {
   type = WorkpackageActionTypes.GENERATE_WORKPACKAGE_ERROR;
-  payload: {
-    modal?: NgbActiveModal;
-  };
-
-  /**
-   * Create a new GenerateWorkpackageErrorAction
-   *
-   * @param modal
-   *    the active modal
-   */
-  constructor(modal?: NgbActiveModal) {
-    this.payload = { modal };
-  }
-
 }
 
 /**
@@ -135,7 +118,6 @@ export class AddWorkpackageAction implements Action {
   payload: {
     workpackageId: string;
     workspaceItemId: string;
-    modal?: NgbActiveModal
   };
 
   /**
@@ -145,11 +127,9 @@ export class AddWorkpackageAction implements Action {
    *    the Item id of the workpackage to add
    * @param workspaceItemId
    *    the workspaceItem's id of the workpackage to add
-   * @param modal
-   *    the active modal
    */
-  constructor(workpackageId: string, workspaceItemId: string, modal?: NgbActiveModal) {
-    this.payload = { workpackageId, workspaceItemId, modal };
+  constructor(workpackageId: string, workspaceItemId: string) {
+    this.payload = { workpackageId, workspaceItemId };
   }
 }
 
@@ -160,7 +140,6 @@ export class AddWorkpackageSuccessAction implements Action {
   type = WorkpackageActionTypes.ADD_WORKPACKAGE_SUCCESS;
   payload: {
     workpackage: Workpackage;
-    modal?: NgbActiveModal
   };
 
   /**
@@ -168,11 +147,9 @@ export class AddWorkpackageSuccessAction implements Action {
    *
    * @param workpackage
    *    the Workpackage object to add
-   * @param modal
-   *    the active modal
    */
-  constructor(workpackage: Workpackage, modal?: NgbActiveModal) {
-    this.payload = { workpackage, modal };
+  constructor(workpackage: Workpackage) {
+    this.payload = { workpackage };
   }
 }
 
@@ -181,19 +158,6 @@ export class AddWorkpackageSuccessAction implements Action {
  */
 export class AddWorkpackageErrorAction implements Action {
   type = WorkpackageActionTypes.ADD_WORKPACKAGE_ERROR;
-  payload: {
-    modal?: NgbActiveModal;
-  };
-
-  /**
-   * Create a new AddWorkpackageErrorAction
-   *
-   * @param modal
-   *    the active modal
-   */
-  constructor(modal?: NgbActiveModal) {
-    this.payload = { modal };
-  }
 }
 
 /**
@@ -205,7 +169,6 @@ export class GenerateWorkpackageStepAction implements Action {
     parentId: string;
     workpackageStepType: string;
     metadata: MetadataMap
-    modal?: NgbActiveModal;
   };
 
   /**
@@ -217,11 +180,9 @@ export class GenerateWorkpackageStepAction implements Action {
    *    the workpackage step's type
    * @param metadata
    *    the workpackage step's Metadata
-   * @param modal
-   *    the active modal
    */
-  constructor(parentId: string, workpackageStepType: string, metadata: MetadataMap, modal?: NgbActiveModal) {
-    this.payload = { parentId, workpackageStepType, metadata, modal };
+  constructor(parentId: string, workpackageStepType: string, metadata: MetadataMap) {
+    this.payload = { parentId, workpackageStepType, metadata };
   }
 }
 
@@ -234,7 +195,6 @@ export class GenerateWorkpackageStepSuccessAction implements Action {
     parentId: string;
     item: Item;
     workspaceItemId: string;
-    modal?: NgbActiveModal;
   };
 
   /**
@@ -246,11 +206,9 @@ export class GenerateWorkpackageStepSuccessAction implements Action {
    *    the Item of the workpackage step generated
    * @param workspaceItemId
    *    the workspaceItem's id generated
-   * @param modal
-   *    the active modal
    */
-  constructor(parentId: string, item: Item, workspaceItemId: string, modal?: NgbActiveModal) {
-    this.payload = { parentId, item, workspaceItemId, modal };
+  constructor(parentId: string, item: Item, workspaceItemId: string) {
+    this.payload = { parentId, item, workspaceItemId };
   }
 }
 
@@ -259,20 +217,6 @@ export class GenerateWorkpackageStepSuccessAction implements Action {
  */
 export class GenerateWorkpackageStepErrorAction implements Action {
   type = WorkpackageActionTypes.GENERATE_WORKPACKAGE_STEP_ERROR;
-  payload: {
-    modal?: NgbActiveModal;
-  };
-
-  /**
-   * Create a new GenerateWorkpackageStepErrorAction
-   *
-   * @param modal
-   *    the active modal
-   */
-  constructor(modal?: NgbActiveModal) {
-    this.payload = { modal };
-  }
-
 }
 
 /**
@@ -284,7 +228,6 @@ export class AddWorkpackageStepAction implements Action {
     parentId: string;
     workpackageStepId: string;
     workspaceItemId: string;
-    modal?: NgbActiveModal
   };
 
   /**
@@ -296,11 +239,9 @@ export class AddWorkpackageStepAction implements Action {
    *    the Item's id of the workpackage step to add
    * @param workspaceItemId
    *    the workspaceItem's id generated
-   * @param modal
-   *    the active modal
    */
-  constructor(parentId: string, workpackageStepId: string, workspaceItemId: string, modal?: NgbActiveModal) {
-    this.payload = { parentId, workpackageStepId, workspaceItemId, modal };
+  constructor(parentId: string, workpackageStepId: string, workspaceItemId: string) {
+    this.payload = { parentId, workpackageStepId, workspaceItemId };
   }
 }
 
@@ -312,7 +253,6 @@ export class AddWorkpackageStepSuccessAction implements Action {
   payload: {
     parentId: string;
     workpackageStep: WorkpackageStep;
-    modal?: NgbActiveModal
   };
 
   /**
@@ -322,11 +262,9 @@ export class AddWorkpackageStepSuccessAction implements Action {
    *    the workpackage step parent's id
    * @param workpackageStep
    *    the WorkpackageStep object to add
-   * @param modal
-   *    the active modal
    */
-  constructor(parentId: string, workpackageStep: WorkpackageStep, modal?: NgbActiveModal) {
-    this.payload = { parentId, workpackageStep, modal };
+  constructor(parentId: string, workpackageStep: WorkpackageStep) {
+    this.payload = { parentId, workpackageStep };
   }
 }
 
@@ -335,19 +273,6 @@ export class AddWorkpackageStepSuccessAction implements Action {
  */
 export class AddWorkpackageStepErrorAction implements Action {
   type = WorkpackageActionTypes.ADD_WORKPACKAGE_STEP_ERROR;
-  payload: {
-    modal?: NgbActiveModal;
-  };
-
-  /**
-   * Create a new AddWorkpackageStepErrorAction
-   *
-   * @param modal
-   *    the active modal
-   */
-  constructor(modal?: NgbActiveModal) {
-    this.payload = { modal };
-  }
 }
 
 /**
@@ -680,6 +605,38 @@ export class MoveWorkpackageAction implements Action {
 }
 
 /**
+ * An ngrx action to change order of a workpackage step
+ */
+export class MoveWorkpackageStepAction implements Action {
+  type = WorkpackageActionTypes.MOVE_WORKPACKAGE_STEP;
+  payload: {
+    workpackageId: string;
+    workpackage: Workpackage;
+    workpackageStepId: string;
+    oldIndex: number
+    newIndex: number;
+  };
+
+  /**
+   * Create a new MoveWorkpackageStepAction
+   *
+   * @param workpackageId
+   *    the workpackage's id
+   * @param workpackage
+   *    the workpackage's object
+   * @param workpackageStepId
+   *    the workpackage step's id
+   * @param oldIndex
+   *    the old index
+   * @param newIndex
+   *    the new index
+   */
+  constructor(workpackageId: string, workpackage: Workpackage, workpackageStepId: string, oldIndex: number, newIndex: number) {
+    this.payload = { workpackageId, workpackage, workpackageStepId, oldIndex, newIndex };
+  }
+}
+
+/**
  * An ngrx action to change order of a workpackage
  */
 export class SaveWorkpackageOrderAction implements Action {
@@ -692,7 +649,7 @@ export class SaveWorkpackageOrderAction implements Action {
    * Create a new UpdateWorkpackageErrorAction
    *
    * @param oldWorkpackageEntries
-   *    the old old Workpackage Entries state
+   *    the old Workpackage Entries state
    */
   constructor(oldWorkpackageEntries: WorkpackageEntries) {
     this.payload = { oldWorkpackageEntries };
@@ -719,10 +676,66 @@ export class SaveWorkpackageOrderErrorAction implements Action {
    * Create a new UpdateWorkpackageErrorAction
    *
    * @param oldWorkpackageEntries
-   *    the old old Workpackage Entries state
+   *    the old Workpackage Entries state
    */
   constructor(oldWorkpackageEntries: WorkpackageEntries) {
     this.payload = { oldWorkpackageEntries };
+  }
+}
+
+/**
+ * An ngrx action to change order of a workpackage
+ */
+export class SaveWorkpackageStepsOrderAction implements Action {
+  type = WorkpackageActionTypes.SAVE_WORKPACKAGE_STEPS_ORDER;
+  payload: {
+    workpackageId: string;
+    workpackage: Workpackage;
+    previousStepsState: WorkpackageStep[];
+  };
+
+  /**
+   * Create a new SaveWorkpackageStepsOrderAction
+   *
+   * @param workpackageId
+   *    the parent workpackage's id
+   * @param workpackage
+   *    the parent workpackage
+   * @param previousStepsState
+   *    the previous WorkpackageSteps array state
+   */
+  constructor(workpackageId: string, workpackage: Workpackage, previousStepsState: WorkpackageStep[]) {
+    this.payload = { workpackageId, workpackage, previousStepsState };
+  }
+}
+
+/**
+ * An ngrx action to change order of a workpackage
+ */
+export class SaveWorkpackageStepsOrderSuccessAction implements Action {
+  type = WorkpackageActionTypes.SAVE_WORKPACKAGE_STEPS_ORDER_SUCCESS;
+}
+
+/**
+ * An ngrx action to change order of a workpackage
+ */
+export class SaveWorkpackageStepsOrderErrorAction implements Action {
+  type = WorkpackageActionTypes.SAVE_WORKPACKAGE_STEPS_ORDER_ERROR;
+  payload: {
+    workpackageId: string;
+    previousStepsState: WorkpackageStep[];
+  };
+
+  /**
+   * Create a new SaveWorkpackageStepsOrderErrorAction
+   *
+   * @param workpackageId
+   *    the parent workpackage's id
+   * @param previousStepsState
+   *    the previous WorkpackageSteps array state
+   */
+  constructor(workpackageId: string, previousStepsState: WorkpackageStep[]) {
+    this.payload = { workpackageId, previousStepsState };
   }
 }
 
@@ -757,6 +770,7 @@ export type WorkingPlanActions
   | InitWorkingplanErrorAction
   | InitWorkingplanSuccessAction
   | MoveWorkpackageAction
+  | MoveWorkpackageStepAction
   | NormalizeWorkpackageObjectsOnRehydrateAction
   | RemoveWorkpackageAction
   | RemoveWorkpackageErrorAction
@@ -769,6 +783,9 @@ export type WorkingPlanActions
   | SaveWorkpackageOrderAction
   | SaveWorkpackageOrderErrorAction
   | SaveWorkpackageOrderSuccessAction
+  | SaveWorkpackageStepsOrderAction
+  | SaveWorkpackageStepsOrderErrorAction
+  | SaveWorkpackageStepsOrderSuccessAction
   | UpdateWorkpackageAction
   | UpdateWorkpackageErrorAction
   | UpdateWorkpackageSuccessAction
