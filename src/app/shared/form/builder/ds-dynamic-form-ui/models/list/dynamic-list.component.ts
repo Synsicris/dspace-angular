@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { findKey } from 'lodash';
+import { findKey, uniqueId } from 'lodash';
 
 import { AuthorityService } from '../../../../../../core/integration/authority.service';
 import { IntegrationSearchOptions } from '../../../../../../core/integration/models/integration-options.model';
@@ -39,6 +39,7 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
   @Output() focus: EventEmitter<any> = new EventEmitter<any>();
 
   public items: ListItem[][] = [];
+  public uniqueId: string = uniqueId();
   protected optionsList: AuthorityEntry[];
   protected searchOptions: IntegrationSearchOptions;
 
