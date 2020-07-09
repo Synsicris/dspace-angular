@@ -1,8 +1,9 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { find, flatMap, map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
@@ -10,6 +11,7 @@ import { fadeInOut } from '../../../../shared/animations/fade';
 import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
 import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';
+import { isNotEmpty } from '../../../../shared/empty.util';
 
 @Component({
   selector: 'ipw-impact-path-way-step',
@@ -30,12 +32,19 @@ export class ImpactPathWayStepComponent {
   constructor(
     protected cdr: ChangeDetectorRef,
     protected impactPathwayService: ImpactPathwayService,
-    protected modalService: NgbModal) {
+    protected modalService: NgbModal,
+    protected translate: TranslateService
+    ) {
   }
 
   ngOnInit(): void {
     this.impactPathwayStep$ = this.impactPathwayService.getImpactPathwayStepById(this.impactPathwayStepId);
-    this.title$ = this.impactPathwayService.getImpactPathwayStepTitle(this.impactPathwayStepId);
+    this.title$ = this.impactPathwayStep$.pipe(
+      find((impactPathwayStep: ImpactPathwayStep) => isNotEmpty(impactPathwayStep)),
+      map((impactPathwayStep: ImpactPathwayStep) => `impact-pathway.step.label.${impactPathwayStep.type}`),
+      flatMap((label: string) => this.translate.get(label))
+    );
+
   }
 
   createTask() {

@@ -1046,6 +1046,18 @@
 
   "impact-pathway.remove.success": "The impact pathway has been deleted successfully.",
 
+  "impact-pathway.step.label.step_type_1": "Background",
+
+  "impact-pathway.step.label.step_type_2": "Research and development objectives",
+
+  "impact-pathway.step.label.step_type_3": "Interactions with partners and stakeholders. Outputs for dissemination",
+
+  "impact-pathway.step.label.step_type_4": "Application (opportunities)",
+
+  "impact-pathway.step.label.step_type_5": "Expected Societal Impact",
+
+  "impact-pathway.step.label.step_type_6": "Contribution to funding programme objectives",
+
   "impact-pathway.task.create.error": "There was an issue when creating the new item, please try again later.",
 
   "impact-pathway.task.create.head": "New item",
