@@ -1,7 +1,11 @@
 <ipw-collapsable-panel class="d-block mb-3" [sidebarPanelTitle]="impactPathway.title" [startOpen]="true">
   <ng-container ngProjectAs="panelIconStatus">
-      <i class="fas fa-check-circle text-success mr-3"
-         aria-hidden="true"></i>
+    <button class="btn btn-lg btn-link p-0 flex-shrink-1 align-self-start mr-3 text-danger"
+            [disabled]="(isProcessingRemove() | async)"
+            (click)="$event.preventDefault(); confirmRemove(content); $event.stopPropagation()">
+      <span *ngIf="!(isProcessingRemove() | async)"><i class="far fa-trash-alt"></i></span>
+      <span *ngIf="(isProcessingRemove() | async)"><i class="fas fa-circle-notch fa-spin"></i></span>
+    </button>
   </ng-container>
   <ng-container ngProjectAs="panelContent">
     <div class="d-flex align-items-stretch border-bottom">
@@ -31,3 +35,19 @@
                 [onlyVisible]="true"
                 color="red"></ngx-domarrow>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title text-danger">{{'impact-pathway.remove.confirm.title' | translate}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('cancel')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{'impact-pathway.remove.confirm.info' | translate}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('cancel')">{{'impact-pathway.remove.confirm.cancel' | translate}}</button>
+    <button type="button" class="btn btn-danger" (click)="c('ok')">{{'impact-pathway.remove.confirm.submit' | translate}}</button>
+  </div>
+</ng-template>

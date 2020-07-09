@@ -87,7 +87,6 @@ export class ProjectOverviewPageComponent {
     }
     this.getFirstImpactPathway(query)
       .subscribe((UUID) => {
-        console.log(UUID);
         const url = `/impactpathway/${UUID}/edit`;
         this.router.navigateByUrl(url)
       });

@@ -8,7 +8,7 @@
                               (removeFilter)="onRemoveFilter($event)"
                               (searchChange)="onSearchChange($event)"></ds-search-simple-item-header>
 
-  <ds-loading *ngIf="(isProcessing() | async)" [message]="'loading.processing' | translate"></ds-loading>
+  <ds-loading *ngIf="(isProcessing() | async)" [message]="'loading.default' | translate"></ds-loading>
   <ds-loading *ngIf="(isSearching() | async)"></ds-loading>
   <ds-pagination *ngIf="!(isSearching() | async) && !(isProcessing() | async) && ((availableTaskList$ | async)?.length > 0)"
                  [pageInfoState]="pageInfoState"

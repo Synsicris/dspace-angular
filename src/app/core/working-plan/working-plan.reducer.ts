@@ -4,11 +4,11 @@ import { Workpackage } from './models/workpackage-step.model';
 import {
   AddWorkpackageStepSuccessAction,
   AddWorkpackageSuccessAction,
-  InitWorkingplanSuccessAction, MoveWorkpackageAction,
+  InitWorkingplanSuccessAction, MoveWorkpackageAction, MoveWorkpackageStepAction,
   RemoveWorkpackageAction,
   RemoveWorkpackageStepAction,
   RemoveWorkpackageStepSuccessAction,
-  RemoveWorkpackageSuccessAction,
+  RemoveWorkpackageSuccessAction, SaveWorkpackageStepsOrderErrorAction,
   UpdateWorkpackageAction,
   UpdateWorkpackageStepAction,
   WorkingPlanActions,
@@ -147,7 +147,12 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
       return moveWorkpackage(state, action as MoveWorkpackageAction);
     }
 
-    case WorkpackageActionTypes.SAVE_WORKPACKAGE_ORDER_SUCCESS: {
+    case WorkpackageActionTypes.MOVE_WORKPACKAGE_STEP: {
+      return moveWorkpackageStep(state, action as MoveWorkpackageStepAction);
+    }
+
+    case WorkpackageActionTypes.SAVE_WORKPACKAGE_ORDER_SUCCESS:
+    case WorkpackageActionTypes.SAVE_WORKPACKAGE_STEPS_ORDER_SUCCESS: {
       return Object.assign({}, state, {
         moving: false
       });
@@ -158,6 +163,10 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
         workpackages: action.payload.oldWorkpackageEntries,
         moving: false
       });
+    }
+
+    case WorkpackageActionTypes.SAVE_WORKPACKAGE_STEPS_ORDER_ERROR: {
+      return revertWorkpackageStepOrder(state, action as SaveWorkpackageStepsOrderErrorAction);
     }
 
     case WorkpackageActionTypes.NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE: {
@@ -270,15 +279,15 @@ function removeWorkpackage(state: WorkingPlanState, action: RemoveWorkpackageSuc
  *    the new state.
  */
 function removeWorkpackageStep(state: WorkingPlanState, action: RemoveWorkpackageStepSuccessAction): WorkingPlanState {
-  const newWorpackage = Object.assign({}, state.workpackages[action.payload.workpackageId], {
-    steps: remove(state.workpackages[action.payload.workpackageId].steps, (innerTask) => {
-      return innerTask.id !== action.payload.workpackageStepId;
-    })
+  const newSteps = remove([...state.workpackages[action.payload.workpackageId].steps], (innerTask) => {
+    return innerTask.id !== action.payload.workpackageStepId;
   });
 
   return Object.assign({}, state, {
     workpackages: Object.assign({}, state.workpackages, {
-      [action.payload.workpackageId]: newWorpackage
+      [action.payload.workpackageId]: Object.assign({}, state.workpackages[action.payload.workpackageId], {
+        steps: newSteps
+      })
     }),
     workpackageToRemove: '',
     processing: false
@@ -341,7 +350,7 @@ function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackag
  */
 function moveWorkpackage(state: WorkingPlanState, action: MoveWorkpackageAction) {
   const toMove = get(state.workpackages, action.payload.workpackageId);
-  let oldValue = get(state.workpackages, Object.keys(state.workpackages)[action.payload.newIndex])
+  const oldValue = get(state.workpackages, Object.keys(state.workpackages)[action.payload.newIndex])
 
   const newWorpackages = {};
 
@@ -359,5 +368,58 @@ function moveWorkpackage(state: WorkingPlanState, action: MoveWorkpackageAction)
   return Object.assign({}, state, {
     workpackages: newWorpackages,
     moving: true
+  })
+}
+
+/**
+ * Change a workpackage step object order.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an MoveWorkpackageStepAction
+ * @return WorkingPlanState
+ *    the new state.
+ */
+function moveWorkpackageStep(state: WorkingPlanState, action: MoveWorkpackageStepAction) {
+  const toMove = state.workpackages[action.payload.workpackageId].steps[action.payload.oldIndex];
+  const oldValue = state.workpackages[action.payload.workpackageId].steps[action.payload.newIndex];
+  const newSteps = [...state.workpackages[action.payload.workpackageId].steps];
+
+  newSteps[action.payload.newIndex] = toMove;
+  newSteps[action.payload.oldIndex] = oldValue;
+
+  const newWorpackage = Object.assign({}, state.workpackages[action.payload.workpackageId], {
+    steps: newSteps
+  });
+
+  return Object.assign({}, state, {
+    workpackages: Object.assign({}, state.workpackages, {
+      [action.payload.workpackageId]: newWorpackage
+    }),
+    moving: true
+  })
+}
+
+/**
+ * Revert a workpackage step order.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an SaveWorkpackageStepsOrderErrorAction
+ * @return WorkingPlanState
+ *    the new state.
+ */
+function revertWorkpackageStepOrder(state: WorkingPlanState, action: SaveWorkpackageStepsOrderErrorAction): WorkingPlanState {
+  const newWorpackage = Object.assign({}, state.workpackages[action.payload.workpackageId], {
+    steps: action.payload.previousStepsState
+  });
+
+  return Object.assign({}, state, {
+    workpackages: Object.assign({}, state.workpackages, {
+      [action.payload.workpackageId]: newWorpackage
+    }),
+    moving: false
   })
 }

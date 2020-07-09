@@ -6,16 +6,14 @@
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarNamesStyle"
         mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'names')">
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
-          <button *ngIf="node.level == 0"
-                  class="btn btn-lg btn-link p-0 text-primary"
-                  [disabled]="dataSource.data.length == 0 || node.index == (dataSource.data.length - 1) || (isMoving() | async)"
-                  (click)="moveWorkpackage(node, node.index, (node.index + 1)); $event.stopPropagation()">
+          <button class="btn btn-lg btn-link p-0 text-primary"
+                  [disabled]="canMoveDown(node, node.level, node.index) || (isMoving() | async)"
+                  (click)="moveWorkpackage(node, node.level, node.index, (node.index + 1)); $event.stopPropagation()">
             <span><i class='fas fa-arrow-down'></i></span>
           </button>
-          <button *ngIf="node.level == 0"
-                  class="btn btn-lg btn-link p-0 text-primary"
-                  [disabled]="dataSource.data.length == 0 || node.index == 0 || (isMoving() | async)"
-                  (click)="moveWorkpackage(node, node.index, (node.index - 1)); $event.stopPropagation()">
+          <button class="btn btn-lg btn-link p-0 text-primary"
+                  [disabled]="canMoveUp(node, node.level, node.index) || (isMoving() | async)"
+                  (click)="moveWorkpackage(node, node.level, node.index, (node.index - 1)); $event.stopPropagation()">
             <span><i class='fas fa-arrow-up'></i></span>
           </button>
           <button mat-icon-button disabled></button>
@@ -48,14 +46,14 @@
           <button *ngIf="node.level !== 0" mat-icon-button disabled></button>
           <button *ngIf="node.level == 0"
                   class="btn btn-lg btn-link p-0 text-primary"
-                  [disabled]="dataSource.data.length == 0 || node.index == (dataSource.data.length - 1) || (isMoving() | async)"
-                  (click)="moveWorkpackage(node, node.index, (node.index + 1)); $event.stopPropagation()">
+                  [disabled]="canMoveDown(node, node.level, node.index) || (isMoving() | async)"
+                  (click)="moveWorkpackage(node, node.level, node.index, (node.index + 1)); $event.stopPropagation()">
             <span><i class='fas fa-arrow-down'></i></span>
           </button>
           <button *ngIf="node.level == 0"
                   class="btn btn-lg btn-link p-0 text-primary"
-                  [disabled]="dataSource.data.length == 0 || node.index == 0 || (isMoving() | async)"
-                  (click)="moveWorkpackage(node, node.index, (node.index - 1)); $event.stopPropagation()">
+                  [disabled]="canMoveUp(node, node.level, node.index) || (isMoving() | async)"
+                  (click)="moveWorkpackage(node, node.level, node.index, (node.index - 1)); $event.stopPropagation()">
             <span><i class='fas fa-arrow-up'></i></span>
           </button>
           <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
@@ -97,16 +95,16 @@
         <mat-tree-node *matTreeNodeDef="let node">
           <mat-form-field class="date-picker" floatLabel="never">
             <input matInput [matDatepicker]="startDate" [min]="node.level > 0 ? getParentStep(node).dates.start.full : null"
-              [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [(ngModel)]="node.dates.start.full"
-              (ngModelChange)="updateDateRange(node)">
+              [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [value]="node.dates.start.full"
+              (dateChange)="updateDateRange(node, $event.value, node.dates.end.full)">
             <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
             <mat-datepicker #startDate></mat-datepicker>
           </mat-form-field>
           &nbsp;&nbsp;-&nbsp;&nbsp;
           <mat-form-field class="date-picker" floatLabel="never">
             <input matInput [matDatepicker]="endDate" [min]="node.level > 0 ? getParentStep(node).dates.start.full : null"
-              [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [(ngModel)]="node.dates.end.full"
-              (ngModelChange)="updateDateRange(node)">
+              [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [value]="node.dates.end.full"
+              (dateChange)="updateDateRange(node, node.dates.start.full, $event.value)">
             <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
             <mat-datepicker #endDate></mat-datepicker>
           </mat-form-field>
