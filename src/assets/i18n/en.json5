@@ -15,6 +15,10 @@
 
 
 
+  "admin.registries.bitstream-formats.breadcrumbs": "Format registry",
+
+  "admin.registries.bitstream-formats.create.breadcrumbs": "Bitstream format",
+
   "admin.registries.bitstream-formats.create.failure.content": "An error occurred while creating the new bitstream format.",
 
   "admin.registries.bitstream-formats.create.failure.head": "Failure",
@@ -36,6 +40,8 @@
   "admin.registries.bitstream-formats.delete.success.head": "Success",
 
   "admin.registries.bitstream-formats.description": "This list of bitstream formats provides information about known formats and their support level.",
+
+  "admin.registries.bitstream-formats.edit.breadcrumbs": "Bitstream format",
 
   "admin.registries.bitstream-formats.edit.description.hint": "",
 
@@ -101,6 +107,8 @@
 
 
 
+  "admin.registries.metadata.breadcrumbs": "Metadata registry",
+
   "admin.registries.metadata.description": "The metadata registry maintains a list of all metadata fields available in the repository. These fields may be divided amongst multiple schemas. However, DSpace requires the qualified Dublin Core schema.",
 
   "admin.registries.metadata.form.create": "Create metadata schema",
@@ -126,6 +134,8 @@
   "admin.registries.metadata.title": "DSpace Cris Angular :: Metadata Registry",
 
 
+
+  "admin.registries.schema.breadcrumbs": "Metadata schema",
 
   "admin.registries.schema.description": "This is the metadata schema for \"{{namespace}}\".",
 
@@ -627,8 +637,6 @@
 
   "collection.edit.logo.upload": "Drop a Collection Logo to upload",
 
-
-
   "collection.edit.notifications.success": "Successfully edited the Collection",
 
   "collection.edit.return": "Return",
@@ -685,6 +693,28 @@
 
 
 
+  "collection.edit.template.add-button": "Add",
+
+  "collection.edit.template.breadcrumbs": "Item template",
+
+  "collection.edit.template.cancel": "Cancel",
+
+  "collection.edit.template.delete-button": "Delete",
+
+  "collection.edit.template.edit-button": "Edit",
+
+  "collection.edit.template.head": "Edit Template Item for Collection \"{{ collection }}\"",
+
+  "collection.edit.template.label": "Template item",
+
+  "collection.edit.template.notifications.delete.error": "Failed to delete the item template",
+
+  "collection.edit.template.notifications.delete.success": "Successfully deleted the item template",
+
+  "collection.edit.template.title": "Edit Template Item",
+
+
+
   "collection.form.abstract": "Short Description",
 
   "collection.form.description": "Introductory text (HTML)",
@@ -701,6 +731,9 @@
 
   "collection.form.title": "Name",
 
+  "collection.form.entitytype": "Type",
+
+  "collection.form.errors.entitytype.required": "Please choose an option",
 
 
   "collection.page.browse.recent.head": "Recent Submissions",
@@ -779,6 +812,10 @@
 
 
   "community.edit.notifications.success": "Successfully edited the Community",
+
+  "community.edit.notifications.unauthorized": "You do not have privileges to make this change",
+
+  "community.edit.notifications.error": "An error occured while editing the Community",
 
   "community.edit.return": "Return",
 
@@ -877,6 +914,9 @@
   "community.sub-community-list.head": "Communities of this Community",
 
 
+  "datafile.listelement.badge": "Data File",
+
+  "datapackage.listelement.badge": "Data Package",
 
   "coordinator.page.title": "Coordinator overview",
 
@@ -894,6 +934,8 @@
   "dso-selector.create.community.top-level": "Create a new top-level community",
 
   "dso-selector.create.item.head": "New item",
+
+  "dso-selector.create.submission.head": "New submission",
 
   "dso-selector.edit.collection.head": "Edit collection",
 
@@ -952,6 +994,62 @@
   "footer.link.dspace": "DSpace software",
 
   "footer.link.duraspace": "DuraSpace",
+
+
+  "forgot-email.form.header": "Forgot Password",
+
+  "forgot-email.form.info": "Enter Register an account to subscribe to collections for email updates, and submit new items to DSpace.",
+
+  "forgot-email.form.email": "Email Address *",
+
+  "forgot-email.form.email.error.required": "Please fill in an email address",
+
+  "forgot-email.form.email.error.pattern": "Please fill in a valid email address",
+
+  "forgot-email.form.email.hint": "This address will be verified and used as your login name.",
+
+  "forgot-email.form.submit": "Submit",
+
+  "forgot-email.form.success.head": "Verification email sent",
+
+  "forgot-email.form.success.content": "An email has been sent to {{ email }} containing a special URL and further instructions.",
+
+  "forgot-email.form.error.head": "Error when trying to register email",
+
+  "forgot-email.form.error.content": "An error occured when registering the following email address: {{ email }}",
+
+
+
+  "forgot-password.title": "Forgot Password",
+
+  "forgot-password.form.head": "Forgot Password",
+
+  "forgot-password.form.info": "Enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+
+  "forgot-password.form.card.security": "Security",
+
+  "forgot-password.form.identification.header": "Identify",
+
+  "forgot-password.form.identification.email": "Email address: ",
+
+  "forgot-password.form.label.password": "Password",
+
+  "forgot-password.form.label.passwordrepeat": "Retype to confirm",
+
+  "forgot-password.form.error.empty-password": "Please enter a password in the box below.",
+
+  "forgot-password.form.error.matching-passwords": "The passwords do not match.",
+
+  "forgot-password.form.error.password-length": "The password should be at least 6 characters long.",
+
+  "forgot-password.form.notification.error.title": "Error when trying to submit new password",
+
+  "forgot-password.form.notification.success.content": "The password reset was successful. You have been logged in as the created user.",
+
+  "forgot-password.form.notification.success.title": "Password reset completed",
+
+  "forgot-password.form.submit": "Submit password",
+
 
 
   "form.add": "Add",
@@ -1235,6 +1333,8 @@
   "item.edit.metadata.edit.buttons.undo": "Undo changes",
 
   "item.edit.metadata.edit.buttons.unedit": "Stop editing",
+
+  "item.edit.metadata.empty": "The item currently doesn't contain any metadata. Click Add to start adding a metadata value.",
 
   "item.edit.metadata.headers.edit": "Edit",
 
@@ -1749,6 +1849,8 @@
 
   "menu.section.icon.pin": "Pin sidebar",
 
+  "menu.section.icon.processes": "Processes menu section",
+
   "menu.section.icon.registries": "Registries menu section",
 
   "menu.section.icon.statistics_task": "Statistics Task menu section",
@@ -1777,11 +1879,17 @@
 
   "menu.section.new_item_version": "Item Version",
 
+  "menu.section.new_process": "Process",
+
 
 
   "menu.section.pin": "Pin sidebar",
 
   "menu.section.unpin": "Unpin sidebar",
+
+
+
+  "menu.section.processes": "Processes",
 
 
 
@@ -1827,7 +1935,7 @@
 
   "mydspace.description": "",
 
-  "mydspace.general.text-here": "HERE",
+  "mydspace.general.text-here": "here",
 
   "mydspace.messages.controller-help": "Select this option to send a message to item's submitter.",
 
@@ -1892,6 +2000,10 @@
   "mydspace.title": "MyDSpace",
 
   "mydspace.upload.upload-failed": "Error creating new workspace. Please verify the content uploaded before retry.",
+
+  "mydspace.upload.upload-failed-manyentries": "Unprocessable file. Detected too many entries but allowed only one for file.",
+
+  "mydspace.upload.upload-failed-moreonefile": "Unprocessable request. Only one file is allowed.",
 
   "mydspace.upload.upload-multiple-successful": "{{qty}} new workspace items created.",
 
@@ -2009,6 +2121,93 @@
   "proj_objectives.listelement.badge": "Project objectives",
 
   "publications.listelement.badge": "Publications",
+
+
+  "process.new.select-parameters": "Parameters",
+
+  "process.new.cancel": "Cancel",
+
+  "process.new.submit": "Submit",
+
+  "process.new.select-script": "Script",
+
+  "process.new.select-script.placeholder": "Choose a script...",
+
+  "process.new.select-script.required": "Script is required",
+
+  "process.new.parameter.file.upload-button": "Select file...",
+
+  "process.new.parameter.file.required": "Please select a file",
+
+  "process.new.parameter.string.required": "Parameter value is required",
+
+  "process.new.parameter.type.value": "value",
+
+  "process.new.parameter.type.file": "file",
+
+  "process.new.parameter.required.missing": "The following parameters are required but still missing:",
+
+  "process.new.notification.success.title": "Success",
+
+  "process.new.notification.success.content": "The process was successfully created",
+
+  "process.new.notification.error.title": "Error",
+
+  "process.new.notification.error.content": "An error occurred while creating this process",
+
+  "process.new.header": "Create a new process",
+
+  "process.new.title": "Create a new process",
+
+  "process.new.breadcrumbs": "Create a new process",
+
+
+
+  "process.detail.arguments" : "Arguments",
+
+  "process.detail.arguments.empty" : "This process doesn't contain any arguments",
+
+  "process.detail.back" : "Back",
+
+  "process.detail.output" : "Process Output",
+
+  "process.detail.output.alert" : "Work in progress - Process output is not available yet",
+
+  "process.detail.output-files" : "Output Files",
+
+  "process.detail.output-files.empty" : "This process doesn't contain any output files",
+
+  "process.detail.script" : "Script",
+
+  "process.detail.title" : "Process: {{ id }} - {{ name }}",
+
+  "process.detail.start-time" : "Start time",
+
+  "process.detail.end-time" : "Finish time",
+
+  "process.detail.status" : "Status",
+
+  "process.detail.create" : "Create similar process",
+
+
+
+  "process.overview.table.finish" : "Finish time",
+
+  "process.overview.table.id" : "Process ID",
+
+  "process.overview.table.name" : "Name",
+
+  "process.overview.table.start" : "Start time",
+
+  "process.overview.table.status" : "Status",
+
+  "process.overview.table.user" : "User",
+
+  "process.overview.title": "Processes Overview",
+
+  "process.overview.breadcrumbs": "Processes Overview",
+
+  "process.overview.new": "New",
 
 
   "profile.breadcrumbs": "Update Profile",
@@ -2168,6 +2367,74 @@
   "publication.search.results.head": "Publication Search Results",
 
   "publication.search.title": "DSpace Cris Angular :: Publication Search",
+
+
+  "register-email.title": "New user registration",
+
+  "register-page.create-profile.header": "Create Profile",
+
+  "register-page.create-profile.identification.header": "Identify",
+
+  "register-page.create-profile.identification.email": "Email Address",
+
+  "register-page.create-profile.identification.first-name": "First Name *",
+
+  "register-page.create-profile.identification.first-name.error": "Please fill in a First Name",
+
+  "register-page.create-profile.identification.last-name": "Last Name *",
+
+  "register-page.create-profile.identification.last-name.error": "Please fill in a Last Name",
+
+  "register-page.create-profile.identification.contact": "Contact Telephone",
+
+  "register-page.create-profile.identification.language": "Language",
+
+  "register-page.create-profile.security.header": "Security",
+
+  "register-page.create-profile.security.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+
+  "register-page.create-profile.security.label.password": "Password *",
+
+  "register-page.create-profile.security.label.passwordrepeat": "Retype to confirm *",
+
+  "register-page.create-profile.security.error.empty-password": "Please enter a password in the box below.",
+
+  "register-page.create-profile.security.error.matching-passwords": "The passwords do not match.",
+
+  "register-page.create-profile.security.error.password-length": "The password should be at least 6 characters long.",
+
+  "register-page.create-profile.submit": "Complete Registration",
+
+  "register-page.create-profile.submit.error.content": "Something went wrong while registering a new user.",
+
+  "register-page.create-profile.submit.error.head": "Registration failed",
+
+  "register-page.create-profile.submit.success.content": "The registration was successful. You have been logged in as the created user.",
+
+  "register-page.create-profile.submit.success.head": "Registration completed",
+
+
+  "register-page.registration.header": "New user registration",
+
+  "register-page.registration.info": "Register an account to subscribe to collections for email updates, and submit new items to DSpace.",
+
+  "register-page.registration.email": "Email Address *",
+
+  "register-page.registration.email.error.required": "Please fill in an email address",
+
+  "register-page.registration.email.error.pattern": "Please fill in a valid email address",
+
+  "register-page.registration.email.hint": "This address will be verified and used as your login name.",
+
+  "register-page.registration.submit": "Register",
+
+  "register-page.registration.success.head": "Verification email sent",
+
+  "register-page.registration.success.content": "An email has been sent to {{ email }} containing a special URL and further instructions.",
+
+  "register-page.registration.error.head": "Error when trying to register email",
+
+  "register-page.registration.error.content": "An error occured when registering the following email address: {{ email }}",
 
 
 
@@ -2532,7 +2799,6 @@
   "submission.general.save-later": "Save for later",
 
 
-
   "submission.sections.detect-duplicate.clear-decision": "Undo",
 
   "submission.sections.detect-duplicate.clear-decision-help": "Click for clear the decision about this pontential duplicate",
@@ -2731,6 +2997,20 @@
 
   "submission.sections.describe.relationship-lookup.name-variant.notification.decline": "Use only for this submission",
 
+  "submission.sections.ccLicense.type": "License Type",
+
+  "submission.sections.ccLicense.select": "Select a license type…",
+
+  "submission.sections.ccLicense.change": "Change your license type…",
+
+  "submission.sections.ccLicense.none": "No licenses available",
+
+  "submission.sections.ccLicense.option.select": "Select an option…",
+
+  "submission.sections.ccLicense.link": "You’ve selected the following license:",
+
+  "submission.sections.ccLicense.confirmation": "I grant the license above",
+
   "submission.sections.general.add-more": "Add more",
 
   "submission.sections.general.collection": "Collection",
@@ -2761,7 +3041,7 @@
 
 
 
-  "submission.sections.submit.progressbar.cclicense": "Creative commons license",
+  "submission.sections.submit.progressbar.CClicense": "Creative commons license",
 
   "submission.sections.submit.progressbar.describe.agrovoc_keywords": "Agrovoc keywords",
 
@@ -3195,6 +3475,24 @@
 
 
 
+
+
+  "vocabulary-treeview.header": "Hierarchical tree view",
+
+  "vocabulary-treeview.load-more": "Load more",
+
+  "vocabulary-treeview.search.form.reset": "Reset",
+
+  "vocabulary-treeview.search.form.search": "Search",
+
+  "vocabulary-treeview.search.no-result": "There were no items to show",
+
+  "vocabulary-treeview.tree.description.nsi": "The Norwegian Science Index",
+
+  "vocabulary-treeview.tree.description.srsc": "Research Subject Categories",
+
+
+
   "administrativeView.search.results.head": "Administrative Search",
 
   "menu.section.admin_search": "Admin Search",
@@ -3256,6 +3554,11 @@
   "workflow-item.send-back.button.cancel": "Cancel",
 
   "workflow-item.send-back.button.confirm": "Send back",
+
+  "relation.rp.researchoutputs.search.results.head": "Related Publications",
+
+  "relation.rp.projects.search.results.head": "Related Projects",
+
 
 
   "working-plan.breadcrumbs" : "Working plan",

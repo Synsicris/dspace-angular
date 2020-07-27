@@ -25,6 +25,8 @@ import { ServerSubmissionService } from '../../app/submission/server-submission.
 import { Angulartics2DSpace } from '../../app/statistics/angulartics/dspace-provider';
 import { Angulartics2RouterlessModule } from 'angulartics2/routerlessmodule';
 import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
+import { ServerLocaleService } from 'src/app/core/locale/server-locale.service';
+import { LocaleService } from 'src/app/core/locale/locale.service';
 import { FlexLayoutServerModule } from '@angular/flex-layout/server';
 
 export function createTranslateLoader() {
@@ -75,6 +77,10 @@ export function createTranslateLoader() {
     {
       provide: SubmissionService,
       useClass: ServerSubmissionService
+    },
+    {
+      provide: LocaleService,
+      useClass: ServerLocaleService
     }
   ]
 })
