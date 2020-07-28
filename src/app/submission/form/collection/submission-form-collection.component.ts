@@ -10,9 +10,9 @@ import {
   ViewChild
 } from '@angular/core';
 
-import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
 import {
-  find,
+  find, flatMap,
   map
 } from 'rxjs/operators';
 
@@ -119,11 +119,11 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
    * Initialize instance variables
    *
    * @param {ChangeDetectorRef} cdr
-   * @param {CommunityDataService} communityDataService
    * @param {CollectionDataService} collectionDataService
    * @param {JsonPatchOperationsBuilder} operationsBuilder
    * @param {SubmissionJsonPatchOperationsService} operationsService
    * @param {RequestService} requestService
+   * @param {SectionsService} sectionsService
    * @param {SubmissionService} submissionService
    * @param {SubmissionDefinitionsConfigService} submissionDefinitionsService
    */
@@ -132,8 +132,8 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
               private operationsBuilder: JsonPatchOperationsBuilder,
               private operationsService: SubmissionJsonPatchOperationsService,
               private requestService: RequestService,
-              private submissionService: SubmissionService,
               private sectionsService: SectionsService,
+              private submissionService: SubmissionService,
               private submissionDefinitionsService: SubmissionDefinitionsConfigService) {
   }
 

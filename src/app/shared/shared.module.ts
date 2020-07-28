@@ -220,6 +220,7 @@ import { SearchSimpleItemFilterBoxComponent } from './create-simple-item-modal/s
 import { TaskColorDirective } from '../impact-pathway-board/shared/impact-path-way/impact-path-way-task/task.directive';
 import { SearchSimpleItemService } from './create-simple-item-modal/search-simple-item/search-simple-item.service';
 import { AuthorityTypeaheadComponent } from './authority-typeahead/authority-typeahead.component';
+import { MaterialModule } from './material/material.module';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -242,7 +243,7 @@ const MODULES = [
   TextMaskModule,
   MenuModule,
   DragDropModule,
-  CdkTreeModule
+  CdkTreeModule,
   MaterialModule,
   FlexLayoutModule
 ];
@@ -412,7 +413,7 @@ const COMPONENTS = [
   GroupSearchBoxComponent,
   FileDownloadLinkComponent,
   CollectionDropdownComponent,
-  VocabularyTreeviewComponent
+  VocabularyTreeviewComponent,
   CreateImpactPathwayComponent,
   ContextMenuComponent,
   ContextMenuEditImpactPathwayComponent,
@@ -500,7 +501,7 @@ const ENTRY_COMPONENTS = [
   ClaimedTaskActionsReturnToPoolComponent,
   ClaimedTaskActionsEditMetadataComponent,
   FileDownloadLinkComponent,
-  VocabularyTreeviewComponent
+  VocabularyTreeviewComponent,
   ClaimedTaskActionsEditMetadataComponent,
   CreateImpactPathwayComponent,
   CreateSimpleItemModalComponent

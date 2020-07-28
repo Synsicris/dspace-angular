@@ -121,7 +121,7 @@ describe('AuthorityTypeaheadComponent test suite', () => {
         typeaheadComp.group = TYPEAHEAD_TEST_GROUP;
         typeaheadComp.fieldId = 'typeahead';
         typeaheadComp.fieldName = 'typeahead';
-        typeaheadComp.authorityOptions = Object.assign({}, authorityOptions);
+        typeaheadComp.vocabularyOptions = Object.assign({}, authorityOptions);
         typeaheadFixture.detectChanges();
       });
 
@@ -158,7 +158,7 @@ describe('AuthorityTypeaheadComponent test suite', () => {
       });
 
       it('should not set value on input type when AuthorityOptions.closed is true', () => {
-        typeaheadComp.authorityOptions.closed = true;
+        typeaheadComp.vocabularyOptions.closed = true;
         typeaheadComp.initValue = '';
         typeaheadFixture.detectChanges();
         const inputDe = typeaheadFixture.debugElement.query(By.css('input.form-control'));
@@ -218,7 +218,7 @@ describe('AuthorityTypeaheadComponent test suite', () => {
         typeaheadComp.fieldId = 'typeahead';
         typeaheadComp.fieldName = 'typeahead';
         typeaheadComp.initValue = 'test value';
-        typeaheadComp.authorityOptions = authorityOptions;
+        typeaheadComp.vocabularyOptions = authorityOptions;
         typeaheadFixture.detectChanges();
         spyOn(typeaheadComp.blur, 'emit');
         spyOn(typeaheadComp.change, 'emit');
@@ -243,7 +243,7 @@ describe('AuthorityTypeaheadComponent test suite', () => {
         typeaheadComp.group = TYPEAHEAD_TEST_GROUP;
         typeaheadComp.fieldId = 'typeahead';
         typeaheadComp.fieldName = 'typeahead';
-        typeaheadComp.authorityOptions = authorityOptions;
+        typeaheadComp.vocabularyOptions = authorityOptions;
         typeaheadComp.initValue = new FormFieldMetadataValueObject('test', null, 'test001');
         typeaheadFixture.detectChanges();
       });

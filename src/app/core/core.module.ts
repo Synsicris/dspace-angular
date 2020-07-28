@@ -319,7 +319,7 @@ const PROVIDERS = [
   VocabularyService,
   VocabularyEntriesResponseParsingService,
   VocabularyTreeviewService,
-  SearchcomponentService
+  SearchcomponentService,
   ItemAuthorityRelationService,
   ImpactPathwayService,
   ObjectiveService,

@@ -49,15 +49,14 @@ import { SubmissionObject } from '../submission/models/submission-object.model';
 import { throwError as observableThrowError } from 'rxjs/internal/observable/throwError';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
-import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
+import { getFirstSucceededRemoteDataPayload, getSucceededRemoteData } from '../shared/operators';
 import { ErrorResponse } from '../cache/response.models';
 import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
 import { ItemDataService } from '../data/item-data.service';
 import { SubmissionService } from '../../submission/submission.service';
-import { IntegrationSearchOptions } from '../integration/models/integration-options.model';
-import { IntegrationData } from '../integration/integration-data';
-import { AuthorityEntry } from '../integration/models/authority-entry.model';
-import { AuthorityService } from '../integration/authority.service';
+import { VocabularyOptions } from '../submission/vocabularies/models/vocabulary-options.model';
+import { VocabularyEntry } from '../submission/vocabularies/models/vocabulary-entry.model';
+import { VocabularyService } from '../submission/vocabularies/vocabulary.service';
 import { Metadata } from '../shared/metadata.utils';
 import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
 import { WorkingPlanStateService } from './working-plan-state.service';
@@ -72,7 +71,7 @@ export const moment = extendMoment(Moment);
 export class WorkingPlanService {
 
   constructor(
-    private authorityService: AuthorityService,
+    private vocabularyService: VocabularyService,
     private formConfigService: SubmissionFormsConfigService,
     private itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
     private itemAuthorityRelationService: ItemAuthorityRelationService,
@@ -142,20 +141,24 @@ export class WorkingPlanService {
     )
   }
 
-  getWorkpackageStatusTypes(): Observable<AuthorityEntry[]> {
-    const searchOptions: IntegrationSearchOptions = new IntegrationSearchOptions(
-      '',
+  getWorkpackageStatusTypes(): Observable<VocabularyEntry[]> {
+    const searchOptions: VocabularyOptions = new VocabularyOptions(
       environment.workingPlan.workpackageStatusTypeAuthority,
       environment.workingPlan.workingPlanStepStatusMetadata);
-    return this.authorityService.getEntriesByName(searchOptions).pipe(
+    const pageInfo: PageInfo = new PageInfo({
+      elementsPerPage: 10,
+      currentPage: 1
+    });
+    return this.vocabularyService.getVocabularyEntries(searchOptions, pageInfo).pipe(
+      getSucceededRemoteData(),
       catchError(() => {
-        const emptyResult = new IntegrationData(
+        const emptyResult = new PaginatedList(
           new PageInfo(),
           []
         );
         return observableOf(emptyResult);
       }),
-      map((result: IntegrationData) => result.payload as AuthorityEntry[]),
+      map((result: PaginatedList<VocabularyEntry>) => result.page),
       take(1)
     )
   }
@@ -518,8 +521,7 @@ export class WorkingPlanService {
   }
 
   private createWorkspaceItem(taskType: string): Observable<SubmissionObject> {
-    return this.getCollectionByEntity(taskType).pipe(
-      flatMap((collectionId) => this.submissionService.createSubmissionForCollection(collectionId)),
+    return this.submissionService.createSubmission(null, taskType).pipe(
       flatMap((submission: SubmissionObject) =>
         (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
       )
@@ -537,7 +539,7 @@ export class WorkingPlanService {
     )
   }
 
-  private getCollectionByEntity(entityType: string): Observable<string> {
+/*  private getCollectionByEntity(entityType: string): Observable<string> {
     const searchOptions: IntegrationSearchOptions = new IntegrationSearchOptions(
       '',
       environment.impactPathway.entityToCollectionMapAuthority,
@@ -545,7 +547,7 @@ export class WorkingPlanService {
       entityType,
       1,
       1);
-    return this.authorityService.getEntryByValue(searchOptions).pipe(
+    return this.vocabularyService.getEntryByValue(searchOptions).pipe(
       map((result: IntegrationData) => {
         if (result.pageInfo.totalElements !== 1) {
           throw new Error(`No collection found for ${entityType}`);
@@ -554,5 +556,5 @@ export class WorkingPlanService {
         return (result.payload[0] as AuthorityEntry).display;
       })
     )
-  }
+  }*/
 }
