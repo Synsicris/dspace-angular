@@ -1886,6 +1886,8 @@
 
   "menu.section.new_process": "Process",
 
+  "menu.section.new_project": "Project",
+
 
 
   "menu.section.pin": "Pin sidebar",
@@ -2330,6 +2332,16 @@
   "profile.title": "Update Profile",
 
 
+
+  "project.create.btn": "Create project",
+
+  "project.create.error": "There was an issue when generating the project, please try again later.",
+
+  "project.create.head": "New project",
+
+  "project.create.placeholder": "Enter the name for the new project",
+
+  "project.create.success": "The new project has been generated successfully.",
 
   "project.listelement.badge": "Research Project",
 

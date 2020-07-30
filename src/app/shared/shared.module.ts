@@ -221,6 +221,7 @@ import { TaskColorDirective } from '../impact-pathway-board/shared/impact-path-w
 import { SearchSimpleItemService } from './create-simple-item-modal/search-simple-item/search-simple-item.service';
 import { AuthorityTypeaheadComponent } from './authority-typeahead/authority-typeahead.component';
 import { MaterialModule } from './material/material.module';
+import { CreateProjectComponent } from '../projects/create-project/create-project.component';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -425,7 +426,8 @@ const COMPONENTS = [
   SearchSimpleItemBoxComponent,
   SearchSimpleItemFilterBoxComponent,
   SimpleItemBoxComponent,
-  AuthorityTypeaheadComponent
+  AuthorityTypeaheadComponent,
+  CreateProjectComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -504,7 +506,8 @@ const ENTRY_COMPONENTS = [
   VocabularyTreeviewComponent,
   ClaimedTaskActionsEditMetadataComponent,
   CreateImpactPathwayComponent,
-  CreateSimpleItemModalComponent
+  CreateSimpleItemModalComponent,
+  CreateProjectComponent
 ];
 
 const SHARED_ITEM_PAGE_COMPONENTS = [

@@ -19,6 +19,7 @@ import { MenuComponent } from '../../shared/menu/menu.component';
 import { MenuService } from '../../shared/menu/menu.service';
 import { CSSVariableService } from '../../shared/sass-helper/sass-helper.service';
 import { CreateImpactPathwayComponent } from '../../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
+import { CreateProjectComponent } from '../../projects/create-project/create-project.component';
 
 /**
  * Component representing the admin sidebar
@@ -179,6 +180,19 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
           text: 'menu.section.new_impact_pathway',
           function: () => {
             this.modalService.open(CreateImpactPathwayComponent);
+          }
+        } as OnClickMenuItemModel,
+      },
+      {
+        id: 'new_project',
+        parentID: 'new',
+        active: false,
+        visible: true,
+        model: {
+          type: MenuItemType.ONCLICK,
+          text: 'menu.section.new_project',
+          function: () => {
+            this.modalService.open(CreateProjectComponent);
           }
         } as OnClickMenuItemModel,
       },
