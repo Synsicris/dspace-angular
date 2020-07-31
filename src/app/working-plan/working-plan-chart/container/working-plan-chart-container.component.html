@@ -30,8 +30,8 @@
                    [openDelay]="1000"
                    required>
           </mat-form-field>
-          <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level === 0">
-            <mat-icon>{{'working-plan.chart.button.add' | translate}}</mat-icon>
+          <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level === 0" title="{{'working-plan.chart.button.add' | translate}}">
+            <mat-icon>add</mat-icon>
           </button>
           <button *ngIf="dataSource.data.length > 1"
                   class="btn btn-lg btn-link p-0 text-danger mr-1"
@@ -74,8 +74,8 @@
                    [openDelay]="1000"
                    required>
           </mat-form-field>
-          <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level < 3">
-            <mat-icon>{{'working-plan.chart.button.add' | translate}}</mat-icon>
+          <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level < 3" title="{{'working-plan.chart.button.add' | translate}}">
+            <mat-icon>add</mat-icon>
           </button>
           <button *ngIf="dataSource.data.length > 1"
                   class="btn btn-lg btn-link p-0 text-danger mr-1"
