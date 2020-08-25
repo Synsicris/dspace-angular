@@ -169,6 +169,8 @@ import { VocabularyService } from './submission/vocabularies/vocabulary.service'
 import { VocabularyTreeviewService } from '../shared/vocabulary-treeview/vocabulary-treeview.service';
 import { SearchcomponentService } from './layout/searchcomponent.service';
 import { SearchComponent } from './layout/models/search-component.model';
+import { ResearcherProfileService } from './profile/researcher-profile.service';
+import { ResearcherProfile } from './profile/model/researcher-profile.model';
 import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
 import { ObjectiveService } from './impact-pathway/objective.service';
 import { ImpactPathwayLinksService } from './impact-pathway/impact-pathway-links.service';
@@ -320,6 +322,8 @@ const PROVIDERS = [
   VocabularyEntriesResponseParsingService,
   VocabularyTreeviewService,
   SearchcomponentService,
+  ResearcherProfileService,
+  SearchcomponentService,
   ItemAuthorityRelationService,
   ImpactPathwayService,
   ObjectiveService,
@@ -379,7 +383,8 @@ export const models =
     Vocabulary,
     VocabularyEntry,
     VocabularyEntryDetail,
-    SearchComponent
+    SearchComponent,
+    ResearcherProfile
   ];
 
 @NgModule({
