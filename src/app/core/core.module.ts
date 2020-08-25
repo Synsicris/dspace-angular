@@ -177,6 +177,7 @@ import { ImpactPathwayLinksService } from './impact-pathway/impact-pathway-links
 import { WorkingPlanService } from './working-plan/working-plan.service';
 import { WorkingPlanStateService } from './working-plan/working-plan-state.service';
 import { ItemAuthorityRelationService } from './shared/item-authority-relation.service';
+import { ProjectDataService } from './project/project-data.service';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -329,7 +330,8 @@ const PROVIDERS = [
   ObjectiveService,
   ImpactPathwayLinksService,
   WorkingPlanService,
-  WorkingPlanStateService
+  WorkingPlanStateService,
+  ProjectDataService
 ];
 
 /**

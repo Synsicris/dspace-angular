@@ -2,38 +2,46 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { distinctUntilChanged, filter, flatMap, map, switchMap, take } from 'rxjs/operators';
+import { combineLatest, Observable, of as observableOf } from 'rxjs';
+import { catchError, distinctUntilChanged, filter, flatMap, map, switchMap, take } from 'rxjs/operators';
+import { ReplaceOperation } from 'fast-json-patch';
+
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { dataService } from '../cache/builders/build-decorators';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { CoreState } from '../core.reducers';
 import { Community } from '../shared/community.model';
-import { COMMUNITY } from '../shared/community.resource-type';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { DSOChangeAnalyzer } from '../data/dso-change-analyzer.service';
 import { PaginatedList } from '../data/paginated-list';
 import { RemoteData } from '../data/remote-data';
-import { FindListOptions, FindListRequest, PostRequest } from '../data/request.models';
+import { FindListOptions, PostRequest } from '../data/request.models';
 import { RequestService } from '../data/request.service';
 import { CommunityDataService } from '../data/community-data.service';
-import { Group } from '../eperson/models/group.model';
-import { RestResponse } from '../cache/response.models';
+import { ErrorResponse, RestResponse } from '../cache/response.models';
 import { HttpOptions } from '../dspace-rest-v2/dspace-rest-v2.service';
-import { SearchFilter } from '../../shared/search/search-filter.model';
 import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
 import { SearchResult } from '../../shared/search/search-result.model';
-import { followLink } from '../../shared/utils/follow-link-config.model';
-import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
-import { Item } from '../shared/item.model';
+import {
+  configureRequest,
+  getFinishedRemoteData,
+  getFirstSucceededRemoteDataPayload,
+  getResponseFromEntry
+} from '../shared/operators';
 import { DSpaceObjectType } from '../shared/dspace-object-type.model';
+import { SearchService } from '../shared/search/search.service';
+import { LinkService } from '../cache/builders/link.service';
+import { createFailedRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { environment } from '../../../environments/environment';
+import { followLink } from '../../shared/utils/follow-link-config.model';
+
+export const PROJECT_TEMPLATE_NAME = 'project-template';
+export const PROJECTS_COMMUNITY_NAME = 'projects';
 
 @Injectable()
-@dataService(COMMUNITY)
 export class ProjectDataService extends CommunityDataService {
 
   constructor(
@@ -44,41 +52,132 @@ export class ProjectDataService extends CommunityDataService {
     protected halService: HALEndpointService,
     protected notificationsService: NotificationsService,
     protected http: HttpClient,
-    protected comparator: DSOChangeAnalyzer<Community>
+    protected comparator: DSOChangeAnalyzer<Community>,
+    protected searchService: SearchService,
+    protected linkService: LinkService,
   ) {
     super(requestService, rdbService, store, objectCache, halService, notificationsService, http, comparator);
   }
 
   /**
-   * Adds given subgroup as a subgroup to the given active group
-   * @param activeGroup   Group we want to add subgroup to
-   * @param subgroup      Group we want to add as subgroup to activeGroup
+   * Create a new project from project template
+   *
+   * @param name   Group we want to add subgroup to
+   * @return Observable<RemoteData<Community>>
+   *   The project created
    */
-  addSubGroupToGroup(activeGroup: Group, subgroup: Group): Observable<RestResponse> {
-/*    this.se
+  createProject(name: string): Observable<RemoteData<Community>> {
+
     const requestId = this.requestService.generateRequestId();
     const options: HttpOptions = Object.create({});
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'text/uri-list');
     options.headers = headers;
-    const postRequest = new PostRequest(requestId, activeGroup.self + '/' + this.subgroupsEndpoint, subgroup.self, options);
-    this.requestService.configure(postRequest);
+    const template$ = this.getProjectTemplate();
+    const projects$ = this.getCommunityProjects();
+    const href$ = this.getEndpoint();
+    combineLatest([template$, href$, projects$]).pipe(
+      map(([template, href, projects]: [Community, string, Community]) => {
+        const hrefWithParent = `${href}?parent=${projects.id}`
+        return new PostRequest(requestId, hrefWithParent, template.self, options);
+      }),
+      configureRequest(this.requestService)
+    ).subscribe()
 
-    return this.fetchResponse(requestId);*/
+    return this.fetchCreateResponse(requestId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      flatMap((project: Community) => this.patchProjectName(name, project)),
+      catchError((error: Error) => {
+        this.notificationsService.error('Server Error:', error.message);
+        return createFailedRemoteDataObject$() as Observable<RemoteData<Community>>
+      })
+    );
+  }
+
+  protected fetchCreateResponse(requestId: string): Observable<RemoteData<Community>> {
+    // Resolve self link for new object
+    const selfLink$ = this.requestService.getByUUID(requestId).pipe(
+      getResponseFromEntry(),
+      map((response: RestResponse) => {
+        if (!response.isSuccessful && response instanceof ErrorResponse) {
+          throw new Error(response.errorMessage);
+        } else {
+          return response;
+        }
+      }),
+      map((response: any) => {
+        if (isNotEmpty(response.resourceSelfLinks)) {
+          return response.resourceSelfLinks[0];
+        }
+      }),
+      distinctUntilChanged()
+    ) as Observable<string>;
+
+    return selfLink$.pipe(
+      switchMap((selfLink: string) => this.findByHref(selfLink)),
+    )
   }
 
   /**
-   * Get the uuid of the first impact pathway item available
+   * Perform a patch operation to change the project name
+   * @param name
+   * @param project
+   * @protected
+   */
+  protected patchProjectName(name: string, project: Community): Observable<RemoteData<Community>> {
+    const operation: ReplaceOperation<string> = {
+      path: '/metadata/dc.title/0',
+      op: 'replace',
+      value: name
+    };
+
+    return this.patch(project, [operation]).pipe(
+      flatMap( () => this.findById(project.id, followLink('parentCommunity'))),
+      getFinishedRemoteData()
+    );
+  }
+
+  /**
+   * Get the first project template available
+   *
+   * @return Observable<Community>
    */
   getProjectTemplate(): Observable<Community> {
-    const filters: SearchFilter[] = [new SearchFilter('f.entityType', ['impactpathway'])]
+    return this.searchCommunityById(environment.projects.projectTemplateUUID);
+  }
+
+  /**
+   * Get community that contains all projects
+   *
+   * @return Observable<Community>
+   */
+  getCommunityProjects(): Observable<Community> {
+    return this.searchCommunityById(environment.projects.communityProjectsUUID);
+  }
+
+  /**
+   * Get all authorized projects
+   *
+   * @return Observable<RemoteData<PaginatedList<Community>>>
+   */
+  findAllAuthorizedProjects(findListOptions: FindListOptions = {}): Observable<RemoteData<PaginatedList<Community>>> {
+    return this.getCommunityProjects().pipe(
+      flatMap((projects) => this.findAllByHref(projects._links.subcommunities.href, findListOptions))
+    );
+  }
+
+  /**
+   * Search a community by name
+   *
+   * @return Observable<Community>
+   */
+  private searchCommunityById(id: string): Observable<Community> {
     const sort = new SortOptions('dc.title', SortDirection.ASC);
     const pagination = new PaginationComponentOptions()
     const searchOptions = new PaginatedSearchOptions({
       configuration: 'default',
-      query: 'project-template',
+      query: 'search.resourceid:' + id,
       dsoType: DSpaceObjectType.COMMUNITY,
-      filters: filters,
       pagination: pagination,
       sort: sort
     });
@@ -88,25 +187,16 @@ export class ProjectDataService extends CommunityDataService {
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
           .filter((result) => hasValue(result))
-          .map((searchResult: SearchResult<any>) => {
-            if (searchResult.indexableObject.type === 'item') {
-              return observableOf((searchResult.indexableObject));
-            } else {
-              this.linkService.resolveLink(searchResult.indexableObject, followLink('item'));
-              return searchResult.indexableObject.item.pipe(
-                getFirstSucceededRemoteDataPayload()
-              )
-            }
-          });
+          .map((searchResult: SearchResult<any>) => observableOf(searchResult.indexableObject));
         const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<any>;
         return Object.assign(rd, { payload: payload });
       }),
-      map((rd: RemoteData<PaginatedList<Observable<Item>>>) => rd.payload),
-      filter((list: PaginatedList<Observable<Item>>) => list.page.length > 0),
-      flatMap((list: PaginatedList<Observable<Item>>) => (list.page[0]).pipe(
-        map((item: Item) => item.id)
+      map((rd: RemoteData<PaginatedList<Observable<Community>>>) => rd.payload),
+      filter((list: PaginatedList<Observable<Community>>) => list.page.length > 0),
+      flatMap((list: PaginatedList<Observable<Community>>) => (list.page[0]).pipe(
+        map((community: Community) => community)
       )),
-      filter((itemUUID) => isNotEmpty(itemUUID)),
+      filter((community: Community) => isNotEmpty(community)),
       take(1),
       distinctUntilChanged()
     );
