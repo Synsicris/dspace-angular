@@ -1,6 +1,6 @@
 <div>
   <div class="modal-header">{{'project.create.head' | translate}}
-    <button type="button" class="close" (click)="close()" aria-label="Close">
+    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="(processing$ | async)">
       <span aria-hidden="true">×</span>
     </button>
   </div>
