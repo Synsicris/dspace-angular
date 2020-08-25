@@ -15,11 +15,10 @@ import { ProjectEntityListBreadcrumbResolver } from '../core/breadcrumbs/project
     RouterModule.forChild([
       {
         canActivate: [AuthenticatedGuard],
-        path: '',
+        path: ':id',
         resolve: { breadcrumb: I18nBreadcrumbResolver },
         data: { title: 'project-overview.page.title', breadcrumbKey: 'project-overview' },
-        component: ProjectOverviewPageComponent,
-        pathMatch: 'full',
+        component: ProjectOverviewPageComponent
       },
       {
         canActivate: [AuthenticatedGuard],

@@ -81,7 +81,7 @@ export function getDSOPath(dso: DSpaceObject): string {
     RouterModule.forRoot([
         { path: '', redirectTo: '/coordinator-overview', pathMatch: 'full' },
       { path: 'reload/:rnd', redirectTo: '/home', pathMatch: 'full' },
-      //{ path: 'home', loadChildren: './+home-page/home-page.module#HomePageModule', data: { showBreadcrumbs: false } },
+      // { path: 'home', loadChildren: './+home-page/home-page.module#HomePageModule', data: { showBreadcrumbs: false } },
         { path: 'home', redirectTo: '/coordinator-overview', pathMatch: 'full' },
       { path: 'community-list', loadChildren: './community-list-page/community-list-page.module#CommunityListPageModule' },
       { path: 'id', loadChildren: './+lookup-by-id/lookup-by-id.module#LookupIdModule' },
