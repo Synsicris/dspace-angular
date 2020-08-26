@@ -77,17 +77,20 @@ export const ImpactPathwayActionTypes = {
 export class GenerateImpactPathwayAction implements Action {
   type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY;
   payload: {
+    projectId: string;
     name: string;
   };
 
   /**
    * Create a new GenerateImpactPathwayAction
    *
+   * @param projectId
+   *    the project's UUID where to create the object
    * @param name
    *    the impact pathway's title
    */
-  constructor(name: string) {
-    this.payload = { name };
+  constructor(projectId: string, name: string,) {
+    this.payload = { projectId, name };
   }
 }
 
@@ -97,17 +100,20 @@ export class GenerateImpactPathwayAction implements Action {
 export class GenerateImpactPathwaySuccessAction implements Action {
   type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUCCESS;
   payload: {
+    projectId: string;
     item: Item;
   };
 
   /**
    * Create a new GenerateImpactPathwaySuccessAction
    *
+   * @param projectId
+   *    the project's UUID where to create the object
    * @param item
    *    the Item of the impact pathway generated
    */
-  constructor(item: Item) {
-    this.payload = { item };
+  constructor(projectId: string, item: Item) {
+    this.payload = { projectId, item };
   }
 }
 
@@ -175,6 +181,7 @@ export class InitImpactPathwayErrorAction implements Action {
 export class GenerateImpactPathwayTaskAction implements Action {
   type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK;
   payload: {
+    projectId: string;
     impactPathwayId: string;
     stepId: string;
     taskType: string;
@@ -184,6 +191,8 @@ export class GenerateImpactPathwayTaskAction implements Action {
   /**
    * Create a new GenerateImpactPathwayTaskAction
    *
+   * @param projectId
+   *    the project's UUID where to create the object
    * @param impactPathwayId
    *    the impact pathway's id
    * @param stepId
@@ -193,8 +202,8 @@ export class GenerateImpactPathwayTaskAction implements Action {
    * @param metadata: Metadata
    *    the impact pathway task's Metadata
    */
-  constructor(impactPathwayId: string, stepId: string, taskType: string, metadata: MetadataMap) {
-    this.payload = { impactPathwayId, stepId, taskType, metadata };
+  constructor(projectId: string, impactPathwayId: string, stepId: string, taskType: string, metadata: MetadataMap) {
+    this.payload = { projectId, impactPathwayId, stepId, taskType, metadata };
   }
 }
 
@@ -237,6 +246,7 @@ export class GenerateImpactPathwayTaskErrorAction implements Action {
 export class GenerateImpactPathwaySubTaskAction implements Action {
   type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUB_TASK;
   payload: {
+    projectId: string;
     impactPathwayId: string;
     stepId: string;
     parentTaskId: string;
@@ -247,6 +257,8 @@ export class GenerateImpactPathwaySubTaskAction implements Action {
   /**
    * Create a new GenerateImpactPathwaySubTaskAction
    *
+   * @param projectId
+   *    the project's UUID where to create the object
    * @param impactPathwayId
    *    the impact pathway's id
    * @param stepId
@@ -259,13 +271,14 @@ export class GenerateImpactPathwaySubTaskAction implements Action {
    *    the impact pathway task's Metadata
    */
   constructor(
+    projectId: string,
     impactPathwayId: string,
     stepId: string,
     parentTaskId: string,
     taskType: string,
     metadata: MetadataMap,
   ) {
-    this.payload = { impactPathwayId, stepId, parentTaskId, taskType, metadata };
+    this.payload = { projectId, impactPathwayId, stepId, parentTaskId, taskType, metadata };
   }
 }
 

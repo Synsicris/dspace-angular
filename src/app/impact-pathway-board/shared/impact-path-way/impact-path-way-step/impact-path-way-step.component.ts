@@ -23,6 +23,7 @@ import { isNotEmpty } from '../../../../shared/empty.util';
 })
 export class ImpactPathWayStepComponent {
 
+  @Input() public projectId: string;
   @Input() public impactPathwayId: string;
   @Input() public impactPathwayStepId: string;
 
@@ -75,6 +76,7 @@ export class ImpactPathWayStepComponent {
       );
       modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
         this.impactPathwayService.dispatchGenerateImpactPathwayTask(
+          this.projectId,
           impactPathwayStep.parentId,
           impactPathwayStep.id,
           item.type.value,

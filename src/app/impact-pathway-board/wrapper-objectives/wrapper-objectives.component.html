@@ -5,7 +5,8 @@
   </h1>
   <hr/>
   <ng-container *ngFor="let task of getObjectivesTasks()">
-    <ipw-objective [impactPathwayStep]="impactPathwayStep"
+    <ipw-objective [projectId]="projectId"
+                   [impactPathwayStep]="impactPathwayStep"
                    [impactPathwayTask]="task"
                    [targetImpactPathwayTaskId]="targetImpactPathwayTaskId"
     ></ipw-objective>

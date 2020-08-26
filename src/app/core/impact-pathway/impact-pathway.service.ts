@@ -26,7 +26,7 @@ import { select, Store } from '@ngrx/store';
 import { ImpactPathway } from './models/impact-pathway.model';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
-import { isEmpty, isNotEmpty, isNull } from '../../shared/empty.util';
+import { hasValue, isEmpty, isNotEmpty, isNull } from '../../shared/empty.util';
 import { ItemDataService } from '../data/item-data.service';
 import { SubmissionService } from '../../submission/submission.service';
 import { environment } from '../../../environments/environment';
@@ -75,6 +75,20 @@ import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload 
 import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
 import { VocabularyOptions } from '../submission/vocabularies/models/vocabulary-options.model';
 import { PageInfo } from '../shared/page-info.model';
+import { CollectionDataService } from '../data/collection-data.service';
+import { Collection } from '../shared/collection.model';
+import { RequestService } from '../data/request.service';
+import { FindListOptions } from '../data/request.models';
+import { SearchFilter } from '../../shared/search/search-filter.model';
+import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
+import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
+import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
+import { PaginatedList } from '../data/paginated-list';
+import { SearchResult } from '../../shared/search/search-result.model';
+import { followLink } from '../../shared/utils/follow-link-config.model';
+import { DSpaceObjectType } from '../shared/dspace-object-type.model';
+import { SearchService } from '../shared/search/search.service';
+import { DSpaceObject } from '../shared/dspace-object.model';
 
 @Injectable()
 export class ImpactPathwayService {
@@ -82,6 +96,7 @@ export class ImpactPathwayService {
   private _currentSelectedTask: BehaviorSubject<ImpactPathwayTask> = new BehaviorSubject<ImpactPathwayTask>(null);
 
   constructor(
+    private collectionService: CollectionDataService,
     private vocabularyService: VocabularyService,
     private formConfigService: SubmissionFormsConfigService,
     private itemService: ItemDataService,
@@ -90,7 +105,9 @@ export class ImpactPathwayService {
     private itemAuthorityRelationService: ItemAuthorityRelationService,
     private submissionJsonPatchOperationsService: SubmissionJsonPatchOperationsService,
     private rdbService: RemoteDataBuildService,
+    private requestService: RequestService,
     private router: Router,
+    private searchService: SearchService,
     private submissionService: SubmissionService,
     private store: Store<AppState>
   ) {
@@ -120,11 +137,12 @@ export class ImpactPathwayService {
       taskId));
   }
 
-  dispatchGenerateImpactPathway(impactPathwayName: string) {
-    this.store.dispatch(new GenerateImpactPathwayAction(impactPathwayName));
+  dispatchGenerateImpactPathway(projectId: string, impactPathwayName: string) {
+    this.store.dispatch(new GenerateImpactPathwayAction(projectId, impactPathwayName));
   }
 
   dispatchGenerateImpactPathwaySubTask(
+    projectId: string,
     impactPathwayId: string,
     stepId: string,
     parentTaskId: string,
@@ -132,6 +150,7 @@ export class ImpactPathwayService {
     metadataMap: MetadataMap
   ) {
     this.store.dispatch(new GenerateImpactPathwaySubTaskAction(
+      projectId,
       impactPathwayId,
       stepId,
       parentTaskId,
@@ -140,12 +159,14 @@ export class ImpactPathwayService {
   }
 
   dispatchGenerateImpactPathwayTask(
+    projectId: string,
     impactPathwayId: string,
     stepId: string,
     type: string,
     metadataMap: MetadataMap
   ) {
     this.store.dispatch(new GenerateImpactPathwayTaskAction(
+      projectId,
       impactPathwayId,
       stepId,
       type,
@@ -223,8 +244,8 @@ export class ImpactPathwayService {
     return isObjectivePage ? `impactpathway_${stepType}_task_objective_type` : `impactpathway_${stepType}_task_type`;
   }
 
-  generateImpactPathwayItem(impactPathwayName: string, impactPathwayDescription: string): Observable<Item> {
-    return this.createImpactPathwayWorkspaceItem(impactPathwayName, impactPathwayDescription).pipe(
+  generateImpactPathwayItem(projectId: string, impactPathwayName: string, impactPathwayDescription: string): Observable<Item> {
+    return this.createImpactPathwayWorkspaceItem(projectId, impactPathwayName, impactPathwayDescription).pipe(
       flatMap((submission: SubmissionObject) => this.depositWorkspaceItem(submission)),
       getFirstSucceededRemoteDataPayload()
     )
@@ -450,6 +471,39 @@ export class ImpactPathwayService {
     );
   }
 
+  retrieveImpactPathwaysByProject(projectId: string, options: PageInfo): Observable<PaginatedList<Item>> {
+    const filters: SearchFilter[] = [new SearchFilter('f.entityType', ['impactpathway'])]
+    const sort = new SortOptions('dc.title', SortDirection.ASC);
+    const pagination = Object.assign(new PaginationComponentOptions(), {
+      currentPage: options.currentPage,
+      pageSize: options.elementsPerPage
+    });
+
+    const searchOptions = new PaginatedSearchOptions({
+      configuration: 'default',
+      scope: projectId,
+      filters: filters,
+      pagination: pagination,
+      sort: sort,
+      dsoType: DSpaceObjectType.ITEM
+    });
+
+    return this.searchService.search(searchOptions).pipe(
+      filter((rd: RemoteData<PaginatedList<SearchResult<any>>>) => rd.hasSucceeded),
+      map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
+        const dsoPage: any[] = rd.payload.page
+          .filter((result) => hasValue(result))
+          .map((searchResult: SearchResult<any>) => searchResult.indexableObject);
+        const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<any>;
+        return Object.assign(rd, { payload: payload });
+      }),
+      map((rd: RemoteData<PaginatedList<Item>>) => rd.payload),
+      filter((list: PaginatedList<Item>) => list.page.length > 0),
+      take(1),
+      distinctUntilChanged()
+    );
+  }
+
   replaceMetadataPatch(metadataName: string, position: number, value: string): void {
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
     const path = pathCombiner.getPath([metadataName, position.toString()]);
@@ -478,37 +532,42 @@ export class ImpactPathwayService {
     )
   }
 
-  redirectToEditPage(impacPathwayId: string) {
-    this.router.navigate(['/impactpathway', impacPathwayId, 'edit']);
+  redirectToEditPage(projectId: string, impacPathwayId: string) {
+    this.router.navigate(['project-overview', projectId ,'impactpathway', impacPathwayId, 'edit']);
   }
 
   redirectToProjectPage() {
     this.router.navigate(['/']);
   }
 
-  private createImpactPathwaySteps(impactPathwayId: string): Observable<Item[]> {
+  private createImpactPathwaySteps(projectId: string, impactPathwayId: string): Observable<Item[]> {
     const vocabularyOptions: VocabularyOptions = new VocabularyOptions(
-      environment.impactPathway.impactPathwayStepTypeAuthority,
-      environment.impactPathway.impactPathwayStepTypeMetadata);
+      environment.impactPathway.impactPathwayStepTypeAuthority
+    );
     const pageInfo: PageInfo = new PageInfo({
-      elementsPerPage: 10,
+      elementsPerPage: 100,
       currentPage: 1
     } as any);
 
-    return this.vocabularyService.getVocabularyEntriesByValue(impactPathwayId, false, vocabularyOptions, pageInfo).pipe(
+    return this.vocabularyService.getVocabularyEntries(vocabularyOptions, pageInfo).pipe(
       getFirstSucceededRemoteListPayload(),
+      tap((e) => console.log('entries', e)),
       flatMap((entries: VocabularyEntry[]) => observableFrom(entries)),
+      tap((e) => console.log('before concatMap', e)),
       concatMap((stepType: VocabularyEntry) => this.createImpactPathwayStepItem(
+        projectId,
         impactPathwayId,
-        stepType.authority,
+        stepType.value,
         stepType.display
       )),
+      tap((e) => console.log('after concatMap', e)),
       reduce((acc: any, value: any) => [...acc, ...value], []),
     )
   }
 
-  private createImpactPathwayStepWorkspaceItem(impactPathwayId: string, impactPathwayStepType: string, impactPathwayStepName: string): Observable<SubmissionObject> {
-    const submission$ = this.submissionService.createSubmission(null, environment.impactPathway.impactPathwayStepEntity).pipe(
+  private createImpactPathwayStepWorkspaceItem(projectId: string, impactPathwayId: string, impactPathwayStepType: string, impactPathwayStepName: string): Observable<SubmissionObject> {
+    const submission$ = this.getCollectionIdByProjectAndEntity(projectId, environment.impactPathway.impactPathwayStepEntity).pipe(
+      flatMap((collectionId) => this.submissionService.createSubmission(collectionId, environment.impactPathway.impactPathwayStepEntity)),
       flatMap((submission: SubmissionObject) =>
         (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
       ));
@@ -521,18 +580,20 @@ export class ImpactPathwayService {
   }
 
   private createImpactPathwayStepItem(
+    projectId: string,
     impactPathwayId: string,
     impactPathwayStepType: string,
     impactPathwayStepName: string): Observable<Item> {
 
-    return this.createImpactPathwayStepWorkspaceItem(impactPathwayId, impactPathwayStepType, impactPathwayStepName).pipe(
+    return this.createImpactPathwayStepWorkspaceItem(projectId, impactPathwayId, impactPathwayStepType, impactPathwayStepName).pipe(
       flatMap((submission: SubmissionObject) => this.depositWorkspaceItem(submission)),
       getFirstSucceededRemoteDataPayload()
     )
   }
 
-  private createImpactPathwayWorkspaceItem(impactPathwayName: string, impactPathwayDescription: string): Observable<SubmissionObject> {
-    const submission$ = this.submissionService.createSubmission(null, environment.impactPathway.impactPathwayEntity).pipe(
+  private createImpactPathwayWorkspaceItem(projectId: string, impactPathwayName: string, impactPathwayDescription: string): Observable<SubmissionObject> {
+    const submission$ = this.getCollectionIdByProjectAndEntity(projectId, environment.impactPathway.impactPathwayEntity).pipe(
+      flatMap((collectionId) => this.submissionService.createSubmission(collectionId, environment.impactPathway.impactPathwayEntity)),
       flatMap((submission: SubmissionObject) =>
         (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
       ),
@@ -540,7 +601,7 @@ export class ImpactPathwayService {
         return [submission, (submission.item as Item).id]
       }));
     return combineLatestObservable(submission$.pipe(
-      flatMap(([submission, parentId]: [SubmissionObject, string]) => this.createImpactPathwaySteps(parentId).pipe(
+      flatMap(([submission, parentId]: [SubmissionObject, string]) => this.createImpactPathwaySteps(projectId,parentId).pipe(
         map((steps) => {
           return [submission, steps]
         })
@@ -702,5 +763,14 @@ export class ImpactPathwayService {
     if (isNotEmpty(linksList)) {
       this.store.dispatch(new AddImpactPathwayTaskLinksAction(linksList));
     }
+  }
+
+  private getCollectionIdByProjectAndEntity(projectId: string, entityType: string): Observable<string> {
+    return this.collectionService.findAuthorizedByCommunityAndRelationshipType(projectId, entityType).pipe(
+      getFirstSucceededRemoteListPayload(),
+      map((list: Collection[]) => (list && list.length > 0) ? list[0] : null),
+      map((collection: Collection) => isNotEmpty(collection) ? collection.id : null),
+      tap(() => this.requestService.removeByHrefSubstring('findSubmitAuthorizedByCommunityAndMetadata'))
+    );
   }
 }

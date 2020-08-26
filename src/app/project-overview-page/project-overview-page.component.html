@@ -1,7 +1,7 @@
 <div class="container">
   <header class="comcol-header border-bottom mb-4 pb-4">
     <ds-comcol-page-header
-      [name]="'Projektübersicht: Wühlkegel'">
+      [name]="'Projektübersicht: ' + (getProjectName() | async)">
     </ds-comcol-page-header>
     <!-- Handle -->
     <ds-comcol-page-handle
@@ -15,9 +15,34 @@
         <div class="py-4 card-body">
           <h4 class="word-wrap">Impact pathway</h4>
           <ul class="list-unstyled">
-            <li><a class="h5" [routerLink]="" (click)="navigateToImpactPathway('plan')">Plan</a></li>
-            <li><a class="h5" [routerLink]="" (click)="navigateToImpactPathway('result')">Result</a></li>
+            <li *ngFor="let impactPathway of (impactPathwayList | async)">
+              <button class="btn btn-link m-0 p-0" (click)="navigateToImpactPathway(impactPathway)">
+                <span class="h5">{{getImpactPathwayName(impactPathway)}}</span>
+              </button>
+            </li>
           </ul>
+          <nav *ngIf="(impactPathwayListPageInfo | async)?.totalPages > 1">
+            <ul class="pagination">
+              <li class="page-item {{ ((impactPathwayListPageInfo | async)?.currentPage <= 1) ? 'disabled' : ''}}">
+                <button class="page-link" aria-label="Previous"
+                        (click)="retrievePrevProjectList()">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </button>
+              </li>
+              <li class="page-item {{ ((impactPathwayListPageInfo | async)?.currentPage >= (impactPathwayListPageInfo | async)?.totalPages) ? 'disabled' : ''}}">
+                <button class="page-link" aria-label="Next"
+                        (click)="retrieveNextProjectList()">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+          <button class="btn btn-link btn-lg p-0 m-0 h3 text-decoration-none" role="button" (click)="createImpactPathway()">
+            <i class="fas fa-plus-circle"></i>
+            <span class="text-dark"> {{'project-overview.page.new-impact-pathway' | translate}}</span>
+          </button>
         </div>
       </div>
     </div>

@@ -1131,7 +1131,7 @@
 
   "impact-pathway.breadcrumbs" : "Impact pathway",
 
-  "impact-pathway.create.btn": "Create item",
+  "impact-pathway.create.btn": "Create impact pathway",
 
   "impact-pathway.create.error": "There was an issue when generating the impact pathway, please try again later.",
 
@@ -1888,8 +1888,6 @@
 
   "menu.section.new_community": "Community",
 
-  "menu.section.new_impact_pathway": "Impact pathway",
-
   "menu.section.new_item": "Item",
 
   "menu.section.new_item_version": "Item Version",
@@ -2375,7 +2373,7 @@
 
   "project.search.results.head": "Project Search Results",
 
-  "project-overview.breadcrumbs" : "Wühlkegel",
+  "project-overview.page.new-impact-pathway" : "Create new impact pathway",
 
   "project-overview.page.title" : "Project overview",
 

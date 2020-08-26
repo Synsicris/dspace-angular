@@ -28,8 +28,7 @@ export class ProjectDsoBreadcrumbsService extends DSOBreadcrumbsService {
    */
   getBreadcrumbs(key: ChildHALResource & DSpaceObject, url: string): Observable<Breadcrumb[]> {
     const label = this.dsoNameService.getName(key);
-    const projectCrumb = new Breadcrumb('project-overview.breadcrumbs', '/project-overview');
-    const crumb = new Breadcrumb(label, url);
-    return observableOf([projectCrumb, crumb])
+    const projectCrumb = new Breadcrumb(label, url);
+    return observableOf([projectCrumb])
   }
 }

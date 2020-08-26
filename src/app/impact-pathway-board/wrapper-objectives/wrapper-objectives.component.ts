@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class WrapperObjectivesComponent {
 
+  @Input() public projectId: string;
   @Input() public impactPathwayStep: ImpactPathwayStep;
   @Input() public targetImpactPathwayTaskId: string;
 

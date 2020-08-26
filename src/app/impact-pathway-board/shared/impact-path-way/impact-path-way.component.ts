@@ -16,6 +16,7 @@ import { ImpactPathwayService } from '../../../core/impact-pathway/impact-pathwa
 })
 export class ImpactPathWayComponent {
 
+  @Input() public projectId: string;
   @Input() public impactPathway: ImpactPathway;
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;

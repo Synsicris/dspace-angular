@@ -80,11 +80,11 @@ export class ImpactPathwayEffects {
   @Effect() generate$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY),
     switchMap((action: GenerateImpactPathwayAction) => {
-      return this.impactPathwayService.generateImpactPathwayItem(action.payload.name, '').pipe(
+      return this.impactPathwayService.generateImpactPathwayItem(action.payload.projectId, action.payload.name, '').pipe(
         tap(() => {
           this.modalService.dismissAll();
         }),
-        map((item: Item) => new GenerateImpactPathwaySuccessAction(item)),
+        map((item: Item) => new GenerateImpactPathwaySuccessAction(action.payload.projectId, item)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
@@ -102,7 +102,7 @@ export class ImpactPathwayEffects {
       this.notificationsService.success(null, this.translate.get('impact-pathway.create.success'))
     }),
     tap((action: GenerateImpactPathwaySuccessAction) => {
-      this.impactPathwayService.redirectToEditPage(action.payload.item.id)
+      this.impactPathwayService.redirectToEditPage(action.payload.projectId ,action.payload.item.id)
     }));
 
   /**

@@ -18,6 +18,7 @@ import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/s
 })
 export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
+  @Input() public projectId: string;
   @Input() public impactPathwayStep: ImpactPathwayStep;
   @Input() public impactPathwayTask: ImpactPathwayTask;
 
@@ -87,6 +88,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
     );
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       this.impactPathwayService.dispatchGenerateImpactPathwaySubTask(
+        this.projectId,
         this.impactPathwayStep.parentId,
         this.impactPathwayStep.id,
         this.impactPathwayTask.id,
