@@ -18,6 +18,7 @@ import { MatCheckboxChange } from '@angular/material';
 })
 export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
+  @Input() public projectId: string;
   @Input() public impactPathwayId: string;
   @Input() public impactPathwayStepId: string;
   @Input() public impactPathwayStepType: string;

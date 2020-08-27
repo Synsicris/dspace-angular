@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 
 import { BreadcrumbConfig } from '../../breadcrumbs/breadcrumb/breadcrumb-config.model';
-import { hasNoValue } from '../../shared/empty.util';
+import { hasNoValue, isNotEmpty } from '../../shared/empty.util';
 import { ProjectI18nBreadcrumbsService } from './project-i18n-breadcrumbs.service';
+import { ProjectDataService } from '../project/project-data.service';
 
 /**
  * The class that resolves a BreadcrumbConfig object with an i18n key string for a route
  */
 @Injectable()
 export class ProjectI18nBreadcrumbResolver implements Resolve<BreadcrumbConfig<string>> {
-  constructor(protected breadcrumbService: ProjectI18nBreadcrumbsService) {
+  constructor(
+    protected breadcrumbService: ProjectI18nBreadcrumbsService,
+    protected projectService: ProjectDataService) {
   }
 
   /**
@@ -20,11 +23,14 @@ export class ProjectI18nBreadcrumbResolver implements Resolve<BreadcrumbConfig<s
    * @returns BreadcrumbConfig object
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): BreadcrumbConfig<string> {
-    const key = route.data.breadcrumbKey;
+    let key = route.data.breadcrumbKey;
     if (hasNoValue(key)) {
       throw new Error('You provided an i18nBreadcrumbResolver for url \"' + route.url + '\" but no breadcrumbKey in the route\'s data')
     }
     const fullPath = route.url.join('');
+    if (isNotEmpty(route.params.projectId)) {
+      key = route.params.projectId + '::' + key;
+    }
     return { provider: this.breadcrumbService, key: key, url: fullPath };
   }
 }

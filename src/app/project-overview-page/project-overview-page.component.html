@@ -1,19 +1,14 @@
 <div class="container">
   <header class="comcol-header border-bottom mb-4 pb-4">
     <ds-comcol-page-header
-      [name]="'Projektübersicht: ' + (getProjectName() | async)">
+      [name]="('project-overview.page.project.title' | translate ) + (getProjectName() | async)">
     </ds-comcol-page-header>
-    <!-- Handle -->
-    <ds-comcol-page-handle
-      [content]="'123456789/123'"
-      [title]="'collection.page.handle'" >
-    </ds-comcol-page-handle>
   </header>
   <div class="row mb-4">
     <div class="col-md-6 col-xl mb-1">
       <div class="flex-fill card">
         <div class="py-4 card-body">
-          <h4 class="word-wrap">Impact pathway</h4>
+          <h4 class="word-wrap">{{'project-overview.page.impact-pathways' | translate}}</h4>
           <ul class="list-unstyled">
             <li *ngFor="let impactPathway of (impactPathwayList | async)">
               <button class="btn btn-link m-0 p-0" (click)="navigateToImpactPathway(impactPathway)">
@@ -50,8 +45,9 @@
       <div class="flex-fill card">
         <div class="py-4 card-body">
           <p>
-            <a class="h3 mb-2 text-decoration-none" routerLink="/workingplan" role="button">
-              <span>Arbeitsplan</span>
+            <a class="h3 mb-2 text-decoration-none" role="button"
+               [routerLink]="['/project-overview', (projectUUID$ | async) , 'workingplan']">
+              <span>{{'project-overview.page.working-plan' | translate}}</span>
             </a>
           </p>
         </div>
@@ -62,7 +58,7 @@
         <div class="py-4 card-body">
           <p>
             <a class="h3 mb-2 text-decoration-none" routerLink="./" role="button">
-              <span>Verwertunsplan</span>
+              <span>{{'project-overview.page.exploitation-plan' | translate}}</span>
             </a>
           </p>
         </div>

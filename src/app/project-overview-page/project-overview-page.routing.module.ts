@@ -11,20 +11,21 @@ import { CommunityBreadcrumbResolver } from '../core/breadcrumbs/community-bread
 import { CommunityPageResolver } from '../+community-page/community-page.resolver';
 import { ProjectCollectionBreadcrumbResolver } from '../core/breadcrumbs/project-collection-breadcrumb.resolver';
 import { ProjectDsoBreadcrumbsService } from '../core/breadcrumbs/project-dso-breadcrumbs.service';
-import { DSOBreadcrumbsService } from '../core/breadcrumbs/dso-breadcrumbs.service';
 import { ProjectBreadcrumbResolver } from '../core/breadcrumbs/project-breadcrumb.resolver';
+import { ProjectPageResolver } from '../projects/project-page.resolver';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
       { path: ':projectId/impactpathway', loadChildren: '../+impact-pathway-page/impact-pathway-page.module#ImpactPathwayPageModule' },
       { path: ':projectId/objectives', loadChildren: '../+objectives-page/objectives-page.module#ObjectivesPageModule' },
+      { path: ':projectId/workingplan', loadChildren: '../+working-plan-page/working-plan-page.module#WorkingPlanPageModule' },
       {
         canActivate: [AuthenticatedGuard],
-        path: ':id',
+        path: ':projectId',
         resolve: {
           breadcrumb: ProjectBreadcrumbResolver,
-          project: CommunityPageResolver
+          project: ProjectPageResolver
         },
         data: { title: 'project-overview.page.title', breadcrumbKey: 'project-overview' },
         component: ProjectOverviewPageComponent
@@ -49,8 +50,8 @@ import { ProjectBreadcrumbResolver } from '../core/breadcrumbs/project-breadcrum
     ProjectCollectionBreadcrumbResolver,
     ProjectI18nBreadcrumbsService,
     ProjectDsoBreadcrumbsService,
-    DSOBreadcrumbsService,
-    ProjectBreadcrumbResolver
+    ProjectBreadcrumbResolver,
+    ProjectPageResolver
   ]
 })
 export class ProjectOverviewPageRoutingModule {

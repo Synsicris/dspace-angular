@@ -2373,9 +2373,17 @@
 
   "project.search.results.head": "Project Search Results",
 
+  "project-overview.page.exploitation-plan" : "Exploitation plan",
+
+  "project-overview.page.impact-pathways" : "Impact pathways",
+
+  "project-overview.page.project.title" : "Project overview : ",
+
   "project-overview.page.new-impact-pathway" : "Create new impact pathway",
 
   "project-overview.page.title" : "Project overview",
+
+  "project-overview.page.working-plan" : "Working plan",
 
   "publication.listelement.badge": "Publication",
 

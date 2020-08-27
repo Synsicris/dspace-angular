@@ -6,11 +6,13 @@ import { filter, flatMap, map, take, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
-import { redirectToPageNotFoundOn404 } from '../core/shared/operators';
+import { getFirstSucceededRemoteDataPayload, redirectToPageNotFoundOn404 } from '../core/shared/operators';
 import { ImpactPathwayService } from '../core/impact-pathway/impact-pathway.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import { InitImpactPathwayAction } from '../core/impact-pathway/impact-pathway.actions';
+import { ProjectDataService } from '../core/project/project-data.service';
+import { Community } from '../core/shared/community.model';
 
 @Component({
   selector: 'ipw-dashboard-page',
@@ -29,8 +31,14 @@ export class ImpactPathwayPageComponent implements OnInit {
    */
   itemId$: Observable<string>;
 
+  /**
+   * The project's id
+   */
+  projectId$: Observable<string>;
+
   constructor(
     private impactPathwayService: ImpactPathwayService,
+    private projectService: ProjectDataService,
     private route: ActivatedRoute,
     private router: Router,
     private store: Store<AppState>
@@ -54,6 +62,13 @@ export class ImpactPathwayPageComponent implements OnInit {
         }
       }),
       map(([itemRD, loaded]: [RemoteData<Item>, boolean]) => itemRD.payload.id)
+    );
+
+    this.projectId$ = this.route.data.pipe(
+      map((data) => data.item as RemoteData<Community>),
+      redirectToPageNotFoundOn404(this.router),
+      getFirstSucceededRemoteDataPayload(),
+      map((project: Community) => project.id)
     );
   }
 }
