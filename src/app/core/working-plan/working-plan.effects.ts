@@ -29,7 +29,7 @@ import {
   RemoveWorkpackageStepAction,
   RemoveWorkpackageStepErrorAction,
   RemoveWorkpackageStepSuccessAction,
-  RemoveWorkpackageSuccessAction,
+  RemoveWorkpackageSuccessAction, RetrieveAllWorkpackagesAction,
   RetrieveAllWorkpackagesErrorAction,
   SaveWorkpackageOrderAction,
   SaveWorkpackageOrderErrorAction,
@@ -261,8 +261,8 @@ export class WorkingPlanEffects {
    */
   @Effect() retrieveAllWorkpackages$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.RETRIEVE_ALL_WORKPACKAGES),
-    switchMap(() => {
-      return this.workingPlanService.searchForAvailableWorpackages().pipe(
+    switchMap((action: RetrieveAllWorkpackagesAction) => {
+      return this.workingPlanService.searchForAvailableWorpackages(action.payload.projectId).pipe(
         map((items: WorkpackageSearchItem[]) => new InitWorkingplanAction(items)),
         catchError((error: Error) => {
           if (error) {

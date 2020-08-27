@@ -111,7 +111,6 @@ export function getDSOPath(dso: DSpaceObject): string {
         path: WORKFLOW_ITEM_MODULE_PATH,
         loadChildren: './+workflowitems-edit-page/workflowitems-edit-page.module#WorkflowItemsEditPageModule'
       },
-      { path: 'workingplan', loadChildren: './+working-plan-page/working-plan-page.module#WorkingPlanPageModule' },
       {
         path: PROFILE_MODULE_PATH,
         loadChildren: './profile-page/profile-page.module#ProfilePageModule', canActivate: [AuthenticatedGuard]

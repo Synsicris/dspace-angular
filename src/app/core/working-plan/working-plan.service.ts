@@ -171,7 +171,7 @@ export class WorkingPlanService {
     return environment.workingPlan.workpackageStepsSearchConfigName;
   }
 
-  searchForAvailableWorpackages(): Observable<WorkpackageSearchItem[]> {
+  searchForAvailableWorpackages(projectId: string): Observable<WorkpackageSearchItem[]> {
     const searchConfiguration = environment.workingPlan.workpackagesSearchConfigName;
     const paginationOptions: PaginationComponentOptions = new PaginationComponentOptions();
     paginationOptions.id = 'search-available-workpackages';
@@ -181,7 +181,8 @@ export class WorkingPlanService {
     const searchOptions = new PaginatedSearchOptions({
       configuration: searchConfiguration,
       pagination: paginationOptions,
-      sort: sortOptions
+      sort: sortOptions,
+      scope: projectId
     });
 
     return this.searchService.search(searchOptions).pipe(
