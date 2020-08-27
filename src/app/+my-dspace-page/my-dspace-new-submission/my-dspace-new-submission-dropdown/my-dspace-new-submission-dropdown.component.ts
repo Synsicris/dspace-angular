@@ -11,6 +11,7 @@ import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operato
 import { hasValue } from '../../../shared/empty.util';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateItemParentSelectorComponent } from 'src/app/shared/dso-selector/modal-wrappers/create-item-parent-selector/create-item-parent-selector.component';
+import { environment } from '../../../../environments/environment';
 
 /**
  * This component represents the new submission dropdown
@@ -89,7 +90,11 @@ export class MyDSpaceNewSubmissionDropdownComponent implements OnDestroy, OnInit
           this.loading = false;
           this.pageInfo.totalPages = list.pageInfo.totalPages;
           this.availableEntityTypeList = this.availableEntityTypeList
-            .concat(list.page.map((type) => type.label));
+            .concat(list.page
+              // NOTE: Hide impactPathway and impactPathwayStep entities from the list
+              .filter((type) => type.label !== environment.impactPathway.impactPathwayEntity &&
+                type.label !== environment.impactPathway.impactPathwayStepEntity)
+              .map((type) => type.label));
           this.changeDetectorRef.detectChanges();
         },
         () => {
