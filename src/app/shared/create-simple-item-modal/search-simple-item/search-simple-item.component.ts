@@ -33,6 +33,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   @Input() excludeFilterName: string;
   @Input() processing: Observable<boolean>;
   @Input() searchConfiguration: string;
+  @Input() scope = '';
 
   @Output() addItems: EventEmitter<SimpleItem[]> = new EventEmitter<SimpleItem[]>();
 
@@ -191,7 +192,8 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
       this.defaultSearchQuery,
       this.defaultSearchFilters,
       page,
-      this.entityTypeSearchFilter)
+      this.entityTypeSearchFilter,
+      this.scope)
       .subscribe((resultPaginatedList: PaginatedList<FacetValue>) => {
         this.filterBoxEntries$.next(resultPaginatedList.page);
 
@@ -235,7 +237,8 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
       this.defaultSearchQuery,
       this.defaultSearchFilters,
       paginationOptions,
-      sortOptions).pipe(
+      sortOptions,
+      this.scope).pipe(
       take(1)
     ).subscribe((resultPaginatedList: PaginatedList<Observable<SimpleItem>>) => {
       this.pageInfoState = resultPaginatedList.pageInfo;

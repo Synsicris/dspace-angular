@@ -19,6 +19,7 @@ export class CreateSimpleItemModalComponent {
   @Input() processing: Observable<boolean>;
   @Input() searchConfiguration: string;
   @Input() hasSearch = true;
+  @Input() scope: string;
 
   @Output() createItem: EventEmitter<SimpleItem> = new EventEmitter<SimpleItem>();
   @Output() addItems: EventEmitter<SimpleItem[]> = new EventEmitter<SimpleItem[]>();

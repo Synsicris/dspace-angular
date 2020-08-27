@@ -36,12 +36,14 @@ export class SearchSimpleItemService {
     query: string = '',
     filters: SearchFilter[] = [],
     page: number,
-    filterConfig: SearchFilterConfig): Observable<PaginatedList<FacetValue>> {
+    filterConfig: SearchFilterConfig,
+    scope: string = ''): Observable<PaginatedList<FacetValue>> {
 
     const searchOptions = new SearchOptions({
       configuration: searchConfiguration,
       filters: filters,
       query: query,
+      scope: scope
     });
 
     return this.searchService.getFacetValuesFor(filterConfig, page, searchOptions).pipe(
@@ -56,14 +58,16 @@ export class SearchSimpleItemService {
     query: string = '',
     filters: SearchFilter[] = [],
     pagination?: PaginationComponentOptions,
-    sort?: SortOptions): Observable<PaginatedList<Observable<SimpleItem>>> {
+    sort?: SortOptions,
+    scope: string = ''): Observable<PaginatedList<Observable<SimpleItem>>> {
 
     const searchOptions = new PaginatedSearchOptions({
       configuration: searchConfiguration,
       query: query,
       filters: filters,
       pagination: pagination,
-      sort: sort
+      sort: sort,
+      scope: scope
     });
 
     return this.searchService.search(searchOptions).pipe(

@@ -86,6 +86,8 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
       this.impactPathwayStep.type,
       true
     );
+    modalRef.componentInstance.scope = this.projectId;
+
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       this.impactPathwayService.dispatchGenerateImpactPathwaySubTask(
         this.projectId,

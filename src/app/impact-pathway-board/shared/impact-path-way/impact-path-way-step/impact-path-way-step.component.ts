@@ -74,6 +74,8 @@ export class ImpactPathWayStepComponent {
         impactPathwayStep.type,
         false
       );
+      modalRef.componentInstance.scope = this.projectId;
+
       modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
         this.impactPathwayService.dispatchGenerateImpactPathwayTask(
           this.projectId,
