@@ -2,7 +2,16 @@ import { Component, OnInit, HostListener, ChangeDetectorRef, OnDestroy, Output, 
 import { FormControl } from '@angular/forms';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { hasValue } from '../empty.util';
-import { map, mergeMap, startWith, debounceTime, distinctUntilChanged, switchMap, reduce } from 'rxjs/operators';
+import {
+  map,
+  mergeMap,
+  startWith,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  reduce,
+  filter
+} from 'rxjs/operators';
 import { RemoteData } from 'src/app/core/data/remote-data';
 import { FindListOptions } from 'src/app/core/data/request.models';
 import { PaginatedList } from 'src/app/core/data/paginated-list';
@@ -11,6 +20,7 @@ import { CollectionDataService } from 'src/app/core/data/collection-data.service
 import { Collection } from '../../core/shared/collection.model';
 import { followLink } from '../utils/follow-link-config.model';
 import { getFirstSucceededRemoteDataPayload, getSucceededRemoteWithNotEmptyData } from '../../core/shared/operators';
+import { environment } from '../../../environments/environment';
 
 /**
  * An interface to represent a collection entry
@@ -209,6 +219,8 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
         }),
         mergeMap((collection: Collection) => collection.parentCommunity.pipe(
           getFirstSucceededRemoteDataPayload(),
+          // NOTE: Hide project community template from the list
+          filter((community: Community) => community.id !== environment.projects.projectTemplateUUID),
           map((community: Community) => ({
             communities: [{ id: community.id, name: community.name }],
             collection: { id: collection.id, uuid: collection.id, name: collection.name }
