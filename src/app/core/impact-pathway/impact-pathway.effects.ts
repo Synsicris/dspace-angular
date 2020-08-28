@@ -308,6 +308,7 @@ export class ImpactPathwayEffects {
       return this.impactPathwayService.retrieveObjectItem(
         action.payload.impactPathwayId
       ).pipe(
+        tap((item: Item) => this.impactPathwayService.addImpactPathwayToBeRemovedList(item.id)),
         mergeMap((item: Item) => {
           const actions = item.findMetadataSortedByPlace(environment.impactPathway.impactPathwayStepRelationMetadata)
             .map((relationMetadata: MetadataValue) => new RemoveImpactPathwayStepAction(
@@ -316,6 +317,7 @@ export class ImpactPathwayEffects {
             )
           )
           return [...actions, new RemoveImpactPathwaySuccessAction(
+            action.payload.projectId,
             action.payload.impactPathwayId)];
         }),
         catchError((error: Error) => {
@@ -334,7 +336,7 @@ export class ImpactPathwayEffects {
     tap((action: RemoveImpactPathwaySuccessAction) => {
       this.impactPathwayService.removeByItemId(action.payload.impactPathwayId);
       this.notificationsService.success(null, this.translate.get('impact-pathway.remove.success'));
-      this.impactPathwayService.redirectToProjectPage();
+      this.impactPathwayService.redirectToProjectPage(action.payload.projectId);
     }),
   );
 

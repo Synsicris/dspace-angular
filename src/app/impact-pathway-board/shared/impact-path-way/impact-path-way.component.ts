@@ -68,7 +68,7 @@ export class ImpactPathWayComponent {
     this.modalService.open(content).result.then(
       (result) => {
         if (result === 'ok') {
-          this.impactPathwayService.dispatchRemoveImpactPathwayAction(this.impactPathway.id);
+          this.impactPathwayService.dispatchRemoveImpactPathwayAction(this.projectId, this.impactPathway.id);
         }
       }
     );

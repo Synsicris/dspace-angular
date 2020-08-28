@@ -524,17 +524,20 @@ export class MoveImpactPathwaySubTaskErrorAction implements Action {
 export class RemoveImpactPathwayAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY;
   payload: {
+    projectId: string;
     impactPathwayId: string;
   };
 
   /**
    * Create a new RemoveImpactPathwayAction
    *
+   * @param projectId
+   *    the project's id whom the impact pathway belong to
    * @param impactPathwayId
    *    the impact pathway's id
    */
-  constructor(impactPathwayId: string) {
-    this.payload = { impactPathwayId };
+  constructor(projectId: string, impactPathwayId: string) {
+    this.payload = { projectId, impactPathwayId };
   }
 }
 
@@ -544,17 +547,20 @@ export class RemoveImpactPathwayAction implements Action {
 export class RemoveImpactPathwaySuccessAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUCCESS;
   payload: {
+    projectId: string;
     impactPathwayId: string;
   };
 
   /**
    * Create a new RemoveImpactPathwaySuccessAction
    *
+   * @param projectId
+   *    the project's id whom the impact pathway belong to
    * @param impactPathwayId
    *    the impact pathway's id
    */
-  constructor(impactPathwayId: string) {
-    this.payload = { impactPathwayId };
+  constructor(projectId: string, impactPathwayId: string) {
+    this.payload = { projectId, impactPathwayId };
   }
 }
 

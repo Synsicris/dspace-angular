@@ -91,6 +91,7 @@ import { SearchService } from '../shared/search/search.service';
 export class ImpactPathwayService {
 
   private _currentSelectedTask: BehaviorSubject<ImpactPathwayTask> = new BehaviorSubject<ImpactPathwayTask>(null);
+  private _onTheirWayToBeRemoved: string[] = [];
 
   constructor(
     private collectionService: CollectionDataService,
@@ -108,6 +109,14 @@ export class ImpactPathwayService {
     private submissionService: SubmissionService,
     private store: Store<AppState>
   ) {
+  }
+
+  addImpactPathwayToBeRemovedList(id: string) {
+    this._onTheirWayToBeRemoved.push(id);
+  }
+
+  isImpactPathwayToBeRemoved(id: string): boolean {
+    return this._onTheirWayToBeRemoved.includes(id);
   }
 
   dispatchAddImpactPathwaySubTaskAction(
@@ -221,8 +230,8 @@ export class ImpactPathwayService {
     ));
   }
 
-  dispatchRemoveImpactPathwayAction(impactPathwayId: string) {
-    this.store.dispatch(new RemoveImpactPathwayAction(impactPathwayId));
+  dispatchRemoveImpactPathwayAction(projectId: string, impactPathwayId: string) {
+    this.store.dispatch(new RemoveImpactPathwayAction(projectId, impactPathwayId));
   }
 
   dispatchSetTargetTask(taskId: string) {
@@ -497,7 +506,8 @@ export class ImpactPathwayService {
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
           .filter((result) => hasValue(result))
-          .map((searchResult: SearchResult<any>) => searchResult.indexableObject);
+          .map((searchResult: SearchResult<any>) => searchResult.indexableObject)
+          .filter((item: Item) => !this.isImpactPathwayToBeRemoved(item.id));
         const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<any>;
         return Object.assign(rd, { payload: payload });
       }),
@@ -546,8 +556,8 @@ export class ImpactPathwayService {
     this.router.navigate(['project-overview', projectId ,'impactpathway', impacPathwayId, 'edit']);
   }
 
-  redirectToProjectPage() {
-    this.router.navigate(['/']);
+  redirectToProjectPage(projectId: string,) {
+    this.router.navigate(['project-overview', projectId]);
   }
 
   private createImpactPathwaySteps(projectId: string, impactPathwayId: string): Observable<Item[]> {
