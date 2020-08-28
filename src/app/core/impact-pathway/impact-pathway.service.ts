@@ -647,7 +647,6 @@ export class ImpactPathwayService {
     const pathCombiner = new JsonPatchOperationPathCombiner('sections', sectionName);
     this.operationsBuilder.add(pathCombiner.getPath('dc.title'), impactPathwayName, true, true);
     this.operationsBuilder.add(pathCombiner.getPath('dc.description'), impactPathwayDescription, true, true);
-    this.operationsBuilder.add(pathCombiner.getPath('relationship.type'), 'impactpathway', true, true);
     const stepValueList = steps.map((step: Item) => Object.assign(new VocabularyEntry(), {
       authority: step.id,
       display: step.name,
@@ -677,13 +676,6 @@ export class ImpactPathwayService {
       true
     );
 
-    this.operationsBuilder.add(
-      pathCombiner.getPath('relationship.type'),
-      environment.impactPathway.impactPathwayStepEntity,
-      true,
-      true
-    );
-
     const parent = {
       value: impactPathwayId,
       authority: impactPathwayId,
@@ -697,7 +689,9 @@ export class ImpactPathwayService {
   private addPatchOperationForImpactPathwayTask(metadata: MetadataMap): void {
 
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
-    Object.keys(metadata).forEach((metadataName) => {
+    Object.keys(metadata)
+      .filter((metadataName) => metadataName !== 'relationship.type')
+      .forEach((metadataName) => {
       this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
     });
   }

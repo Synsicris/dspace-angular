@@ -519,7 +519,9 @@ export class WorkingPlanService {
   private addPatchOperationForWorkpackage(metadata: MetadataMap, place: string = null): void {
 
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
-    Object.keys(metadata).forEach((metadataName) => {
+    Object.keys(metadata)
+      .filter((metadataName) => metadataName !== 'relationship.type')
+      .forEach((metadataName) => {
       this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
     });
     if (isNotNull(place)) {
@@ -561,23 +563,4 @@ export class WorkingPlanService {
       tap(() => this.requestService.removeByHrefSubstring('findSubmitAuthorizedByCommunityAndMetadata'))
     );
   }
-
-/*  private getCollectionByEntity(entityType: string): Observable<string> {
-    const searchOptions: IntegrationSearchOptions = new IntegrationSearchOptions(
-      '',
-      environment.impactPathway.entityToCollectionMapAuthority,
-      environment.impactPathway.entityToCollectionMapAuthorityMetadata,
-      entityType,
-      1,
-      1);
-    return this.vocabularyService.getEntryByValue(searchOptions).pipe(
-      map((result: IntegrationData) => {
-        if (result.pageInfo.totalElements !== 1) {
-          throw new Error(`No collection found for ${entityType}`);
-        }
-
-        return (result.payload[0] as AuthorityEntry).display;
-      })
-    )
-  }*/
 }
