@@ -19,6 +19,9 @@ import { MomentModule } from 'ngx-moment';
 import { TooltipModule } from 'ngx-bootstrap';
 
 import { ComcolRoleComponent } from './comcol-forms/edit-comcol-page/comcol-role/comcol-role.component';
+import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
+import { ExportMetadataSelectorComponent } from './dso-selector/modal-wrappers/export-metadata-selector/export-metadata-selector.component';
+import { FileDropzoneNoUploaderComponent } from './file-dropzone-no-uploader/file-dropzone-no-uploader.component';
 import { PublicationListElementComponent } from './object-list/item-list-element/item-types/publication/publication-list-element.component';
 import { EnumKeysPipe } from './utils/enum-keys-pipe';
 import { FileSizePipe } from './utils/file-size-pipe';
@@ -189,6 +192,7 @@ import { MissingTranslationHelper } from './translate/missing-translation.helper
 import { ItemVersionsNoticeComponent } from './item/item-versions/notice/item-versions-notice.component';
 import { FileValidator } from './utils/require-file.validator';
 import { FileValueAccessorDirective } from './utils/file-value-accessor.directive';
+import { ExistingRelationListElementComponent } from './form/builder/ds-dynamic-form-ui/existing-relation-list-element/existing-relation-list-element.component';
 import { ModifyItemOverviewComponent } from '../+item-page/edit-item-page/modify-item-overview/modify-item-overview.component';
 import { ClaimedTaskActionsLoaderComponent } from './mydspace-actions/claimed-task/switcher/claimed-task-actions-loader.component';
 import { ClaimedTaskActionsDirective } from './mydspace-actions/claimed-task/switcher/claimed-task-actions.directive';
@@ -206,6 +210,7 @@ import { FileDownloadLinkComponent } from './file-download-link/file-download-li
 import { CollectionDropdownComponent } from './collection-dropdown/collection-dropdown.component';
 import { DsSelectComponent } from './ds-select/ds-select.component';
 import { VocabularyTreeviewComponent } from './vocabulary-treeview/vocabulary-treeview.component';
+import { CurationFormComponent } from '../curation-form/curation-form.component';
 import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { ContextMenuComponent } from '../+item-page/context-menu/context-menu.component';
 import { ContextMenuEditImpactPathwayComponent } from '../+item-page/context-menu/edit-impact-pathway/edit-impact-pathway.component';
@@ -324,6 +329,7 @@ const COMPONENTS = [
   ThumbnailComponent,
   GridThumbnailComponent,
   UploaderComponent,
+  FileDropzoneNoUploaderComponent,
   ItemListPreviewComponent,
   MyDSpaceItemStatusComponent,
   ItemSubmitterComponent,
@@ -399,6 +405,7 @@ const COMPONENTS = [
   ExternalSourceEntryImportModalComponent,
   ImportableListItemControlComponent,
   ExistingMetadataListElementComponent,
+  ExistingRelationListElementComponent,
   LogInShibbolethComponent,
   LogInPasswordComponent,
   LogInContainerComponent,
@@ -414,6 +421,8 @@ const COMPONENTS = [
   GroupSearchBoxComponent,
   FileDownloadLinkComponent,
   CollectionDropdownComponent,
+  ExportMetadataSelectorComponent,
+  ConfirmationModalComponent,
   VocabularyTreeviewComponent,
   CreateImpactPathwayComponent,
   ContextMenuComponent,
@@ -493,6 +502,7 @@ const ENTRY_COMPONENTS = [
   DsDynamicLookupRelationSelectionTabComponent,
   DsDynamicLookupRelationExternalSourceTabComponent,
   ExternalSourceEntryImportModalComponent,
+  ExistingRelationListElementComponent,
   LogInPasswordComponent,
   LogInShibbolethComponent,
   ItemVersionsComponent,
@@ -503,6 +513,9 @@ const ENTRY_COMPONENTS = [
   ClaimedTaskActionsReturnToPoolComponent,
   ClaimedTaskActionsEditMetadataComponent,
   FileDownloadLinkComponent,
+  CurationFormComponent,
+  ExportMetadataSelectorComponent,
+  ConfirmationModalComponent,
   VocabularyTreeviewComponent,
   ClaimedTaskActionsEditMetadataComponent,
   CreateImpactPathwayComponent,
@@ -567,7 +580,8 @@ const DIRECTIVES = [
     ...PIPES,
     ...COMPONENTS,
     ...SHARED_ITEM_PAGE_COMPONENTS,
-    ...DIRECTIVES
+    ...DIRECTIVES,
+    CurationFormComponent
   ],
   entryComponents: [
     ...ENTRY_COMPONENTS

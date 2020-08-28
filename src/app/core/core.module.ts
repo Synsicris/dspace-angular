@@ -145,6 +145,11 @@ import { WorkflowActionDataService } from './data/workflow-action-data.service';
 import { WorkflowAction } from './tasks/models/workflow-action-object.model';
 import { ItemTemplateDataService } from './data/item-template-data.service';
 import { TemplateItem } from './shared/template-item.model';
+import { Feature } from './shared/feature.model';
+import { Authorization } from './shared/authorization.model';
+import { FeatureDataService } from './data/feature-authorization/feature-data.service';
+import { AuthorizationDataService } from './data/feature-authorization/authorization-data.service';
+import { SiteAdministratorGuard } from './data/feature-authorization/feature-authorization-guard/site-administrator.guard';
 import { Registration } from './shared/registration.model';
 import { MetadataSchemaDataService } from './data/metadata-schema-data.service';
 import { MetadataFieldDataService } from './data/metadata-field-data.service';
@@ -167,10 +172,15 @@ import { VocabularyEntriesResponseParsingService } from './submission/vocabulari
 import { VocabularyEntryDetail } from './submission/vocabularies/models/vocabulary-entry-detail.model';
 import { VocabularyService } from './submission/vocabularies/vocabulary.service';
 import { VocabularyTreeviewService } from '../shared/vocabulary-treeview/vocabulary-treeview.service';
+import { ConfigurationDataService } from './data/configuration-data.service';
+import { ConfigurationProperty } from './shared/configuration-property.model';
 import { SearchcomponentService } from './layout/searchcomponent.service';
 import { SearchComponent } from './layout/models/search-component.model';
 import { ResearcherProfileService } from './profile/researcher-profile.service';
 import { ResearcherProfile } from './profile/model/researcher-profile.model';
+import { SectionDataService } from './layout/section-data.service';
+import { Section } from './layout/models/section.model';
+import { SearchConfigResponseParsingService } from './data/search-config-response-parsing.service';
 import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
 import { ObjectiveService } from './impact-pathway/objective.service';
 import { ImpactPathwayLinksService } from './impact-pathway/impact-pathway-links.service';
@@ -234,6 +244,7 @@ const PROVIDERS = [
   FacetValueResponseParsingService,
   FacetValueMapResponseParsingService,
   FacetConfigResponseParsingService,
+  SearchConfigResponseParsingService,
   MappedCollectionsReponseParsingService,
   DebugResponseParsingService,
   SearchResponseParsingService,
@@ -262,6 +273,7 @@ const PROVIDERS = [
   UploaderService,
   FileService,
   DSpaceObjectDataService,
+  ConfigurationDataService,
   DSOChangeAnalyzer,
   DefaultChangeAnalyzer,
   ArrayMoveChangeAnalyzer,
@@ -298,6 +310,9 @@ const PROVIDERS = [
   ProcessDataService,
   ScriptDataService,
   ProcessFilesResponseParsingService,
+  FeatureDataService,
+  AuthorizationDataService,
+  SiteAdministratorGuard,
   MetadataSchemaDataService,
   MetadataFieldDataService,
   TokenResponseParsingService,
@@ -323,6 +338,8 @@ const PROVIDERS = [
   VocabularyEntriesResponseParsingService,
   VocabularyTreeviewService,
   SearchcomponentService,
+  ResearcherProfileService,
+  SectionDataService,
   ResearcherProfileService,
   SearchcomponentService,
   ItemAuthorityRelationService,
@@ -378,6 +395,8 @@ export const models =
     VersionHistory,
     WorkflowAction,
     TemplateItem,
+    Feature,
+    Authorization,
     Registration,
     Tab,
     Box,
@@ -385,8 +404,10 @@ export const models =
     Vocabulary,
     VocabularyEntry,
     VocabularyEntryDetail,
+    ConfigurationProperty,
     SearchComponent,
-    ResearcherProfile
+    ResearcherProfile,
+    Section
   ];
 
 @NgModule({

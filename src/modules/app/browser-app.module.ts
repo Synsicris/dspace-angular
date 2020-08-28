@@ -45,6 +45,7 @@ export function getRequest(transferState: TransferState): any {
     RouterModule.forRoot([], {
       // enableTracing: true,
       useHash: false,
+      scrollPositionRestoration: 'enabled',
       preloadingStrategy:
       IdlePreload
     }),
