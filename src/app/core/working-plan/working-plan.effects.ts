@@ -61,6 +61,7 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.GENERATE_WORKPACKAGE),
     switchMap((action: GenerateWorkpackageAction) => {
       return this.workingPlanService.generateWorkpackageItem(
+        action.payload.projectId,
         action.payload.metadata,
         action.payload.place).pipe(
         map((searchItem: WorkpackageSearchItem) => new GenerateWorkpackageSuccessAction(
@@ -137,6 +138,7 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.GENERATE_WORKPACKAGE_STEP),
     switchMap((action: GenerateWorkpackageStepAction) => {
       return this.workingPlanService.generateWorkpackageStepItem(
+        action.payload.projectId,
         action.payload.parentId,
         action.payload.workpackageStepType,
         action.payload.metadata).pipe(

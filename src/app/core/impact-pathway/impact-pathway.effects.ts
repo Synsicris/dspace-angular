@@ -137,6 +137,7 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK),
     switchMap((action: GenerateImpactPathwayTaskAction) => {
       return this.impactPathwayService.generateImpactPathwayTaskItem(
+        action.payload.projectId,
         action.payload.stepId,
         action.payload.taskType,
         action.payload.metadata).pipe(
@@ -226,6 +227,7 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUB_TASK),
     switchMap((action: GenerateImpactPathwaySubTaskAction) => {
       return this.impactPathwayService.generateImpactPathwayTaskItem(
+        action.payload.projectId,
         action.payload.parentTaskId,
         action.payload.taskType,
         action.payload.metadata).pipe(

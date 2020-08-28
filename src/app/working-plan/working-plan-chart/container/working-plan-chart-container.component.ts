@@ -51,7 +51,16 @@ export const MY_FORMATS = {
   ]
 })
 export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
-  @Input() workpackages: Observable<Workpackage[]>;
+
+  /**
+   * The current project'id
+   */
+  @Input() public projectId: string;
+
+  /**
+   * Array containing a list of Workpackage object
+   */
+  @Input() public workpackages: Observable<Workpackage[]>;
 
   dateFormat = 'YYYY-MM-DD';
   dateMonthFormat = 'YYYY-MM';
@@ -114,7 +123,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
     this.subs.push(
       this.workingPlanService.getWorkpackageStatusTypes()
-        .subscribe((statusList: VocabularyEntry[]) => this.chartStatusTypeList$.next(statusList)));
+        .subscribe((statusList: VocabularyEntry[]) => {
+          this.chartStatusTypeList$.next(statusList)
+        }));
 
     this.workpackages.subscribe((tree: Workpackage[]) => {
       if (tree) {
@@ -190,11 +201,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
     modalRef.componentInstance.excludeListId = [nestedNode.id];
     modalRef.componentInstance.excludeFilterName = 'parentWorkpackageId';
-    modalRef.componentInstance.authorityName = this.workingPlanService.getWorkpackageStepTypeAuthorityName();
+    modalRef.componentInstance.vocabularyName = this.workingPlanService.getWorkpackageStepTypeAuthorityName();
     modalRef.componentInstance.searchConfiguration = this.workingPlanService.getWorkpackageStepSearchConfigName();
+    modalRef.componentInstance.scope = this.projectId;
+
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
-      this.workingPlanStateService.dispatchGenerateWorkpackageStep(flatNode.id, item.type.value, metadata)
+      this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectId, flatNode.id, item.type.value, metadata)
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {

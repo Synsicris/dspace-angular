@@ -12,7 +12,7 @@ import { SimpleItem } from './models/simple-item.model';
 })
 export class CreateSimpleItemModalComponent {
 
-  @Input() authorityName: string;
+  @Input() vocabularyName: string;
   @Input() excludeListId: string[];
   @Input() excludeFilterName: string;
   @Input() formConfig: Observable<SubmissionFormModel>;

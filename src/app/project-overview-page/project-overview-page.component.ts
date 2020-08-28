@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { flatMap, map, take, tap } from 'rxjs/operators';
+import { flatMap, map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { PaginatedList } from '../core/data/paginated-list';
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
@@ -64,7 +65,6 @@ export class ProjectOverviewPageComponent implements OnInit {
   ngOnInit(): void {
     this.projectRD$ = this.route.data.pipe(
       map((data) => data.project as RemoteData<Community>),
-      tap((p) => console.log(p)),
       redirectToPageNotFoundOn404(this.router)
     );
 

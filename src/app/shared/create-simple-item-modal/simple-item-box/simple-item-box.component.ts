@@ -17,7 +17,7 @@ import { VocabularyService } from '../../../core/submission/vocabularies/vocabul
 })
 export class SimpleItemBoxComponent implements OnInit, OnDestroy {
 
-  @Input() public authorityName: string;
+  @Input() public vocabularyName: string;
   @Input() public data: SimpleItem;
 
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -37,11 +37,8 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.title = Metadata.firstValue(this.data.metadata, 'dc.title');
+    this.vocabularyOptions = new VocabularyOptions(this.vocabularyName);
     this.type$ = this.getItemType();
-    this.vocabularyOptions = new VocabularyOptions(
-      this.authorityName,
-      'relationship.type'
-    );
 
     this.subs.push(this.selectStatus.pipe(
       distinctUntilChanged())
@@ -72,7 +69,7 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
   getItemType(): Observable<string> {
     const itemType = this.data.type.value;
 
-    return this.vocabularyService.getVocabularyEntryByID(itemType, this.vocabularyOptions).pipe(
+    return this.vocabularyService.getVocabularyEntryByValue(itemType, this.vocabularyOptions).pipe(
       map((result: VocabularyEntry) => {
         if (isNull(result)) {
           throw new Error(`No task type found for ${itemType}`);

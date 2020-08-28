@@ -65,7 +65,7 @@ export class ImpactPathwayPageComponent implements OnInit {
     );
 
     this.projectId$ = this.route.data.pipe(
-      map((data) => data.item as RemoteData<Community>),
+      map((data) => data.project as RemoteData<Community>),
       redirectToPageNotFoundOn404(this.router),
       getFirstSucceededRemoteDataPayload(),
       map((project: Community) => project.id)

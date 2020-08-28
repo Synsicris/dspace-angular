@@ -78,17 +78,14 @@ import { PageInfo } from '../shared/page-info.model';
 import { CollectionDataService } from '../data/collection-data.service';
 import { Collection } from '../shared/collection.model';
 import { RequestService } from '../data/request.service';
-import { FindListOptions } from '../data/request.models';
 import { SearchFilter } from '../../shared/search/search-filter.model';
 import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
 import { PaginatedList } from '../data/paginated-list';
 import { SearchResult } from '../../shared/search/search-result.model';
-import { followLink } from '../../shared/utils/follow-link-config.model';
 import { DSpaceObjectType } from '../shared/dspace-object-type.model';
 import { SearchService } from '../shared/search/search.service';
-import { DSpaceObject } from '../shared/dspace-object.model';
 
 @Injectable()
 export class ImpactPathwayService {
@@ -251,8 +248,8 @@ export class ImpactPathwayService {
     )
   }
 
-  generateImpactPathwayTaskItem(parentId: string, taskType: string, metadata: MetadataMap): Observable<Item> {
-    return this.createImpactPathwayTaskWorkspaceItem(taskType).pipe(
+  generateImpactPathwayTaskItem(projectId: string, parentId: string, taskType: string, metadata: MetadataMap): Observable<Item> {
+    return this.createImpactPathwayTaskWorkspaceItem(projectId, taskType).pipe(
       map((submission: SubmissionObject) => submission.item),
       tap(() => this.addPatchOperationForImpactPathwayTask(metadata)),
       delay(100),
@@ -319,9 +316,9 @@ export class ImpactPathwayService {
 
   getImpactPathwayTaskType(stepType: string, taskType: string, isObjective: boolean): Observable<string> {
     const name = isObjective ? `impactpathway_${stepType}_task_objective_type` : `impactpathway_${stepType}_task_type`;
-    const vocabularyOptions: VocabularyOptions = new VocabularyOptions(name, 'relationship.type');
+    const vocabularyOptions: VocabularyOptions = new VocabularyOptions(name);
 
-    return this.vocabularyService.getVocabularyEntryByID(taskType, vocabularyOptions).pipe(
+    return this.vocabularyService.getVocabularyEntryByValue(taskType, vocabularyOptions).pipe(
       map((entry: VocabularyEntry) => {
         if (isNull(entry)) {
           throw new Error(`No task type found for ${taskType}`);
@@ -551,16 +548,13 @@ export class ImpactPathwayService {
 
     return this.vocabularyService.getVocabularyEntries(vocabularyOptions, pageInfo).pipe(
       getFirstSucceededRemoteListPayload(),
-      tap((e) => console.log('entries', e)),
       flatMap((entries: VocabularyEntry[]) => observableFrom(entries)),
-      tap((e) => console.log('before concatMap', e)),
       concatMap((stepType: VocabularyEntry) => this.createImpactPathwayStepItem(
         projectId,
         impactPathwayId,
         stepType.value,
         stepType.display
       )),
-      tap((e) => console.log('after concatMap', e)),
       reduce((acc: any, value: any) => [...acc, ...value], []),
     )
   }
@@ -616,11 +610,13 @@ export class ImpactPathwayService {
     )
   }
 
-  private createImpactPathwayTaskWorkspaceItem(taskType: string): Observable<SubmissionObject> {
-    return this.submissionService.createSubmission(null, taskType).pipe(
-      flatMap((submission: SubmissionObject) =>
-        (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
-      )
+  private createImpactPathwayTaskWorkspaceItem(projectId: string, taskType: string): Observable<SubmissionObject> {
+    return this.getCollectionIdByProjectAndEntity(projectId, taskType).pipe(
+      flatMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType).pipe(
+        flatMap((submission: SubmissionObject) =>
+          (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
+        )
+      )),
     )
   }
 

@@ -28,7 +28,7 @@ import { SimpleItem } from '../models/simple-item.model';
 })
 export class SearchSimpleItemComponent implements OnInit, OnDestroy {
 
-  @Input() authorityName: string;
+  @Input() vocabularyName: string;
   @Input() excludeListId: string[] = [];
   @Input() excludeFilterName: string;
   @Input() processing: Observable<boolean>;
@@ -189,21 +189,22 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   private getFilterEntries(page: number) {
     this.searchTaskService.getAvailableFilterEntriesByStepType(
       this.searchConfiguration,
+      this.vocabularyName,
       this.defaultSearchQuery,
       this.defaultSearchFilters,
       page,
       this.entityTypeSearchFilter,
       this.scope)
-      .subscribe((resultPaginatedList: PaginatedList<FacetValue>) => {
-        this.filterBoxEntries$.next(resultPaginatedList.page);
+      .subscribe((resultPaginatedList: FacetValue[]) => {
+        this.filterBoxEntries$.next(resultPaginatedList);
 
         const appliedFilterBoxEntries = [...this.entityTypeFilterBox.appliedFilterBoxEntries]
           .filter((entry: FilterBoxEntry) => {
-            return findIndex(resultPaginatedList.page, { label: entry.label }) !== -1
+            return findIndex(resultPaginatedList, { label: entry.label }) !== -1
           });
 
         this.entityTypeFilterBox = Object.assign(this.entityTypeFilterBox, {
-          filterFacetValues: resultPaginatedList.page,
+          filterFacetValues: resultPaginatedList,
           appliedFilterBoxEntries: appliedFilterBoxEntries
         });
         this.filterBoxList$.next([this.entityTypeFilterBox, this.titleFilterBox]);

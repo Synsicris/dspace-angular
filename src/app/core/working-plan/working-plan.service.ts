@@ -49,7 +49,12 @@ import { SubmissionObject } from '../submission/models/submission-object.model';
 import { throwError as observableThrowError } from 'rxjs/internal/observable/throwError';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
-import { getFirstSucceededRemoteDataPayload, getSucceededRemoteData } from '../shared/operators';
+import {
+  getFirstSucceededRemoteDataPayload,
+  getFirstSucceededRemoteListPayload,
+  getRemoteDataPayload,
+  getSucceededRemoteData
+} from '../shared/operators';
 import { ErrorResponse } from '../cache/response.models';
 import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
 import { ItemDataService } from '../data/item-data.service';
@@ -64,6 +69,9 @@ import { PageInfo } from '../shared/page-info.model';
 import { dateToISOFormat, isNgbDateStruct } from '../../shared/date.util';
 import { environment } from '../../../environments/environment';
 import { WorkspaceitemDataService } from '../submission/workspaceitem-data.service';
+import { Collection } from '../shared/collection.model';
+import { CollectionDataService } from '../data/collection-data.service';
+import { RequestService } from '../data/request.service';
 
 export const moment = extendMoment(Moment);
 
@@ -71,6 +79,7 @@ export const moment = extendMoment(Moment);
 export class WorkingPlanService {
 
   constructor(
+    private collectionService: CollectionDataService,
     private vocabularyService: VocabularyService,
     private formConfigService: SubmissionFormsConfigService,
     private itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
@@ -79,6 +88,7 @@ export class WorkingPlanService {
     private workspaceitemService: WorkspaceitemDataService,
     private linkService: LinkService,
     private operationsBuilder: JsonPatchOperationsBuilder,
+    private requestService: RequestService,
     private searchService: SearchService,
     private store: Store<AppState>,
     private submissionService: SubmissionService,
@@ -87,8 +97,8 @@ export class WorkingPlanService {
     this.searchService.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
   }
 
-  generateWorkpackageItem(metadata: MetadataMap, place: string): Observable<WorkpackageSearchItem> {
-    return this.createWorkspaceItem(environment.workingPlan.workpackageEntityName).pipe(
+  generateWorkpackageItem(projectId: string, metadata: MetadataMap, place: string): Observable<WorkpackageSearchItem> {
+    return this.createWorkspaceItem(projectId, environment.workingPlan.workpackageEntityName).pipe(
       map((submission: SubmissionObject) => ({ id: submission.id, item: submission.item })),
       tap(() => this.addPatchOperationForWorkpackage(metadata, place)),
       delay(100),
@@ -100,8 +110,8 @@ export class WorkingPlanService {
     )
   }
 
-  generateWorkpackageStepItem(parentId: string, stepType: string, metadata: MetadataMap): Observable<WorkpackageSearchItem> {
-    return this.createWorkspaceItem(stepType).pipe(
+  generateWorkpackageStepItem(projectId: string, parentId: string, stepType: string, metadata: MetadataMap): Observable<WorkpackageSearchItem> {
+    return this.createWorkspaceItem(projectId, stepType).pipe(
       map((submission: SubmissionObject) => ({ id: submission.id, item: submission.item })),
       tap(() => this.addPatchOperationForWorkpackage(metadata)),
       delay(100),
@@ -143,14 +153,15 @@ export class WorkingPlanService {
 
   getWorkpackageStatusTypes(): Observable<VocabularyEntry[]> {
     const searchOptions: VocabularyOptions = new VocabularyOptions(
-      environment.workingPlan.workpackageStatusTypeAuthority,
-      environment.workingPlan.workingPlanStepStatusMetadata);
+      environment.workingPlan.workpackageStatusTypeAuthority
+    );
     const pageInfo: PageInfo = new PageInfo({
       elementsPerPage: 10,
       currentPage: 1
     });
     return this.vocabularyService.getVocabularyEntries(searchOptions, pageInfo).pipe(
       getSucceededRemoteData(),
+      getRemoteDataPayload(),
       catchError(() => {
         const emptyResult = new PaginatedList(
           new PageInfo(),
@@ -521,11 +532,13 @@ export class WorkingPlanService {
     }
   }
 
-  private createWorkspaceItem(taskType: string): Observable<SubmissionObject> {
-    return this.submissionService.createSubmission(null, taskType).pipe(
-      flatMap((submission: SubmissionObject) =>
-        (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
-      )
+  private createWorkspaceItem(projectId: string, taskType: string): Observable<SubmissionObject> {
+    return this.getCollectionIdByProjectAndEntity(projectId, taskType).pipe(
+      flatMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType).pipe(
+        flatMap((submission: SubmissionObject) =>
+          (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
+        )
+      )),
     )
   }
 
@@ -538,6 +551,15 @@ export class WorkingPlanService {
       tap((item: Item) => this.itemService.update(item)),
       catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
     )
+  }
+
+  private getCollectionIdByProjectAndEntity(projectId: string, entityType: string): Observable<string> {
+    return this.collectionService.findAuthorizedByCommunityAndRelationshipType(projectId, entityType).pipe(
+      getFirstSucceededRemoteListPayload(),
+      map((list: Collection[]) => (list && list.length > 0) ? list[0] : null),
+      map((collection: Collection) => isNotEmpty(collection) ? collection.id : null),
+      tap(() => this.requestService.removeByHrefSubstring('findSubmitAuthorizedByCommunityAndMetadata'))
+    );
   }
 
 /*  private getCollectionByEntity(entityType: string): Observable<string> {

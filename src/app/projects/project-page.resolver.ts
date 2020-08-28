@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { find, tap } from 'rxjs/operators';
+import { find } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Community } from '../core/shared/community.model';
@@ -28,9 +28,6 @@ export class ProjectPageResolver implements Resolve<RemoteData<Community>> {
     return this.communityService.findById(
       route.params.projectId
     ).pipe(
-      tap((r) => {
-        console.log('resolve',r);
-      }),
       find((RD) => hasValue(RD.error) || RD.hasSucceeded)
     );
   }
