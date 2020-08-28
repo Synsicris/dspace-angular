@@ -456,8 +456,15 @@ export class ImpactPathwayService {
   updateMetadataItem(itemId: string, metadataName: string, position: number, value: string): Observable<Item> {
     return this.itemService.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload(),
-      tap(() => this.replaceMetadataPatch(metadataName, position, value)),
-      delay(100),
+      map((item: Item) => Metadata.first(item.metadata, metadataName)),
+      tap((metadataValue: MetadataValue) => {
+        if (isNotEmpty(metadataValue)) {
+          this.replaceMetadataPatch(metadataName, position, value)
+        } else {
+          this.addMetadataPatch(metadataName, value);
+        }
+      }),
+      delay(200),
       flatMap(() => this.executeItemPatch(itemId, 'metadata'))
     )
   }
@@ -505,6 +512,12 @@ export class ImpactPathwayService {
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
     const path = pathCombiner.getPath([metadataName, position.toString()]);
     this.operationsBuilder.replace(path, value, true);
+  }
+
+  addMetadataPatch(metadataName: string, value: string): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    const path = pathCombiner.getPath([metadataName]);
+    this.operationsBuilder.add(path, value, true, true);
   }
 
   isImpactPathwayLoaded(): Observable<boolean> {

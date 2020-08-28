@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
 import { ItemPageResolver } from '../+item-page/item-page.resolver';
 import { ObjectivesPageComponent } from './objectives-page.component';
+import { ProjectPageResolver } from '../projects/project-page.resolver';
 
 @NgModule({
   imports: [
@@ -17,10 +18,14 @@ import { ObjectivesPageComponent } from './objectives-page.component';
           title: 'impact-pathway.objectives.edit.page.title'
         },
         resolve: {
-          item: ItemPageResolver
+          item: ItemPageResolver,
+          project: ProjectPageResolver,
         }
       }
     ])
+  ],
+  providers: [
+    ProjectPageResolver
   ]
 })
 export class ObjectivesPageRoutingModule { }
