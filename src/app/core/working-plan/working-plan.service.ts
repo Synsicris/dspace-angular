@@ -55,7 +55,7 @@ import {
   getRemoteDataPayload,
   getSucceededRemoteData
 } from '../shared/operators';
-import { ErrorResponse } from '../cache/response.models';
+import { ErrorResponse, RestResponse } from '../cache/response.models';
 import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
 import { ItemDataService } from '../data/item-data.service';
 import { SubmissionService } from '../../submission/submission.service';
@@ -370,11 +370,15 @@ export class WorkingPlanService {
   }
 
   removeWorkpackageByItemId(itemId: string): Observable<boolean> {
-    return this.itemService.delete(itemId);
+    return this.itemService.delete(itemId).pipe(
+      map((response: RestResponse) => response.isSuccessful)
+    );
   }
 
   removeWorkpackageByWorkspaceItemId(workspaceItemId: string): Observable<boolean> {
-    return this.workspaceitemService.delete(workspaceItemId);
+    return this.workspaceitemService.delete(workspaceItemId).pipe(
+      map((response: RestResponse) => response.isSuccessful)
+    );
   }
 
   setDefaultForStatusMetadata(metadata: MetadataMap): MetadataMap {

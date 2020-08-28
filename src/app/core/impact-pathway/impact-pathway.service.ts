@@ -70,7 +70,7 @@ import {
   RemoveImpactPathwayTaskAction,
   SetImpactPathwayTargetTaskAction
 } from './impact-pathway.actions';
-import { ErrorResponse } from '../cache/response.models';
+import { ErrorResponse, RestResponse } from '../cache/response.models';
 import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../shared/operators';
 import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
 import { VocabularyOptions } from '../submission/vocabularies/models/vocabulary-options.model';
@@ -410,7 +410,9 @@ export class ImpactPathwayService {
   }
 
   removeByItemId(itemId: string): Observable<boolean> {
-    return this.itemService.delete(itemId);
+    return this.itemService.delete(itemId).pipe(
+      map((response: RestResponse) => response.isSuccessful)
+    );
   }
 
   setSelectedTask(task: ImpactPathwayTask): void {
