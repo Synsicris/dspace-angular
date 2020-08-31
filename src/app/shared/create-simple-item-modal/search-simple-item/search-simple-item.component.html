@@ -2,7 +2,8 @@
   <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
 </ng-template>
 
-<ds-search-simple-item-header [filterBoxList]="filterBoxList$.asObservable()"
+<ds-search-simple-item-header [vocabularyName]="vocabularyName"
+                              [filterBoxList]="filterBoxList$.asObservable()"
                               [availableTaskList]="availableTaskList$.asObservable()"
                               (filterChange)="onFilterChange($event)"
                               (removeFilter)="onRemoveFilter($event)"
@@ -22,7 +23,7 @@
          class="task-list d-flex flex-wrap p-3">
       <ds-simple-item-box *ngFor="let task of (availableTaskList$ | async)"
                           class="mb-sm-1 mb-lg-4 mr-sm-1 mr-lg-4 task-horizontal selectable-task"
-                          [authorityName]="authorityName"
+                          [vocabularyName]="vocabularyName"
                           [data]="task"
                           (deselected)="onTaskDeselected($event)"
                           (selected)="onTaskSelected($event)">

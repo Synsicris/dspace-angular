@@ -14,15 +14,16 @@ import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-it
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
 import { WorkpacakgeFlatNode } from '../../../core/working-plan/models/workpackage-step-flat-node.model';
 import {
-  Workpackage, WorkpackageChartDate,
+  Workpackage,
+  WorkpackageChartDate,
   WorkpackageStep,
   WorkpackageTreeObject
 } from '../../../core/working-plan/models/workpackage-step.model';
 import { moment, WorkingPlanService } from '../../../core/working-plan/working-plan.service';
 import { WorkingPlanStateService } from '../../../core/working-plan/working-plan-state.service';
-import { AuthorityEntry } from '../../../core/integration/models/authority-entry.model';
+import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { hasValue, isNotNull } from '../../../shared/empty.util';
-import { AuthorityOptions } from '../../../core/integration/models/authority-options.model';
+import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { ChartDateViewType } from '../../../core/working-plan/working-plan.reducer';
 import { environment } from '../../../../environments/environment';
 
@@ -50,7 +51,16 @@ export const MY_FORMATS = {
   ]
 })
 export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
-  @Input() workpackages: Observable<Workpackage[]>;
+
+  /**
+   * The current project'id
+   */
+  @Input() public projectId: string;
+
+  /**
+   * Array containing a list of Workpackage object
+   */
+  @Input() public workpackages: Observable<Workpackage[]>;
 
   dateFormat = 'YYYY-MM-DD';
   dateMonthFormat = 'YYYY-MM';
@@ -64,7 +74,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   today = moment().format(this.dateFormat);
   chartDateView: BehaviorSubject<ChartDateViewType> = new BehaviorSubject<ChartDateViewType>(null);
   ChartDateViewType = ChartDateViewType;
-  responsibleAuthorityOptions: AuthorityOptions;
+  responsibleVocabularyOptions: VocabularyOptions;
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap: Map<string, WorkpacakgeFlatNode> = new Map<string, WorkpacakgeFlatNode>();
 
@@ -85,7 +95,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   };
   sidebarStatusStyle = {};
 
-  private chartStatusTypeList$: BehaviorSubject<AuthorityEntry[]> = new BehaviorSubject<AuthorityEntry[]>([]);
+  private chartStatusTypeList$: BehaviorSubject<VocabularyEntry[]> = new BehaviorSubject<VocabularyEntry[]>([]);
   private subs: Subscription[] = [];
 
   constructor(
@@ -99,7 +109,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this._isExpandable, this._getChildren);
     this.treeControl = new FlatTreeControl<WorkpacakgeFlatNode>(this._getLevel, this._isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.responsibleAuthorityOptions = new AuthorityOptions(
+    this.responsibleVocabularyOptions = new VocabularyOptions(
       environment.workingPlan.workingPlanStepResponsibleAuthority,
       environment.workingPlan.workingPlanStepResponsibleMetadata,
       null,
@@ -113,7 +123,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
     this.subs.push(
       this.workingPlanService.getWorkpackageStatusTypes()
-        .subscribe((statusList: AuthorityEntry[]) => this.chartStatusTypeList$.next(statusList)));
+        .subscribe((statusList: VocabularyEntry[]) => {
+          this.chartStatusTypeList$.next(statusList)
+        }));
 
     this.workpackages.subscribe((tree: Workpackage[]) => {
       if (tree) {
@@ -189,11 +201,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
     modalRef.componentInstance.excludeListId = [nestedNode.id];
     modalRef.componentInstance.excludeFilterName = 'parentWorkpackageId';
-    modalRef.componentInstance.authorityName = this.workingPlanService.getWorkpackageStepTypeAuthorityName();
+    modalRef.componentInstance.vocabularyName = this.workingPlanService.getWorkpackageStepTypeAuthorityName();
     modalRef.componentInstance.searchConfiguration = this.workingPlanService.getWorkpackageStepSearchConfigName();
+    modalRef.componentInstance.scope = this.projectId;
+
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
-      this.workingPlanStateService.dispatchGenerateWorkpackageStep(flatNode.id, item.type.value, metadata)
+      this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectId, flatNode.id, item.type.value, metadata)
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {
@@ -486,7 +500,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return year;
   }
 
-  getQaurterInYear() {
+  getQuarterInYear() {
     return range(1, 4)
       .map((entry: number) => entry.toString());
   }
@@ -507,7 +521,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return days;
   }
 
-  getStatusValues(): Observable<AuthorityEntry[]> {
+  getStatusValues(): Observable<VocabularyEntry[]> {
     return this.chartStatusTypeList$;
   }
 

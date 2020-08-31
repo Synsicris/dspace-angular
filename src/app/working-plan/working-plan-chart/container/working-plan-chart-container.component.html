@@ -120,7 +120,7 @@
             <ds-authority-typeahead fxFlex floatLabel="never" class="pr-3 pl-3"
                                     [fieldId]="'responsible'"
                                     [fieldName]="'responsible'"
-                                    [authorityOptions]="responsibleAuthorityOptions"
+                                    [vocabularyOptions]="responsibleVocabularyOptions"
                                     [initValue]="node.responsible"
                                     (change)="updateStepResponsible(node, $event.value)"></ds-authority-typeahead>
         </mat-tree-node>

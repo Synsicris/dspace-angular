@@ -21,6 +21,11 @@ export class SearchSimpleItemLabelsComponent {
   @Input() filterBoxList: Observable<FilterBox[]>;
 
   /**
+   * A map to keep track of the label retrieved by vocabulary
+   */
+  public facetLabelMap: Map<string, string> = new Map<string, string>();
+
+  /**
    * Emits FilterBox
    * @type {EventEmitter<string>}
    */
@@ -33,5 +38,12 @@ export class SearchSimpleItemLabelsComponent {
       appliedFilterBoxEntries: appliedFilterBoxEntries
     });
     this.removeFilter.emit(removeFilterBox);
+  }
+
+  /**
+   * Prevent unnecessary rendering
+   */
+  trackUpdate(index, item: any) {
+    return item
   }
 }

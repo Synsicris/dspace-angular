@@ -10,7 +10,7 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { take } from 'rxjs/operators';
+import { take, first } from 'rxjs/operators';
 import { RestResponse } from '../../../../core/cache/response.models';
 import { PaginatedList } from '../../../../core/data/paginated-list';
 import { EPersonDataService } from '../../../../core/eperson/eperson-data.service';
@@ -20,6 +20,8 @@ import { getRemoteDataPayload, getSucceededRemoteData } from '../../../../core/s
 import { hasValue, isNotEmpty } from '../../../../shared/empty.util';
 import { FormBuilderService } from '../../../../shared/form/builder/form-builder.service';
 import { NotificationsService } from '../../../../shared/notifications/notifications.service';
+import { deepClone } from 'fast-json-patch/lib/core';
+import { DSpaceObject } from 'src/app/core/shared/dspace-object.model';
 
 @Component({
   selector: 'ds-group-form',
@@ -225,14 +227,36 @@ export class GroupFormComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * // TODO
+   * Edit the group information with new values
    * @param group
    * @param values
    */
   editGroup(group: Group, values) {
-    // TODO (backend)
-    console.log('TODO implement editGroup', values);
-    this.notificationsService.error('TODO implement editGroup (not yet implemented in backend) ');
+    const editedGroup = Object.assign(deepClone(group), {
+      id: group.id,
+      name: (hasValue(values.name) ? values.name : group.name),
+      permanent: (hasValue(values.permanent) ? values.permanent : group.permanent),
+      handle: (hasValue(values.handle) ? values.handle : group.handle),
+      _links: group._links,
+    });
+
+    if ( this.groupDescription && this.groupDescription.value) {
+      this.addOrReplaceMetadataValue(group, editedGroup, 'dc.description', this.groupDescription.value);
+    }
+
+    this.groupDataService
+        .updateGroup(editedGroup)
+        .pipe(first())
+        .subscribe((response: any) => {
+          if (response.isSuccessful) {
+            this.notificationsService.success(
+              this.translateService.get('admin.access-control.groups.notification.edit.success', { name: group.name }));
+            this.router.navigate(['groups']);
+          } else {
+            this.notificationsService.error(
+              this.translateService.get('admin.access-control.groups.notification.edit.failure', { name: group.name }));
+          }
+        });
   }
 
   /**
@@ -276,5 +300,13 @@ export class GroupFormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.onCancel();
     this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
+  }
+
+  private addOrReplaceMetadataValue(dspaceObject: DSpaceObject, editedObject: any, metadataField: string, value: string) {
+    if (dspaceObject.hasMetadata(metadataField)) {
+      editedObject.metadata[metadataField][0].value = value;
+    } else {
+      editedObject.metadata[metadataField] = [Object.assign<any,any>({}, {value: value})];
+    }
   }
 }

@@ -12,13 +12,14 @@ import { SimpleItem } from './models/simple-item.model';
 })
 export class CreateSimpleItemModalComponent {
 
-  @Input() authorityName: string;
+  @Input() vocabularyName: string;
   @Input() excludeListId: string[];
   @Input() excludeFilterName: string;
   @Input() formConfig: Observable<SubmissionFormModel>;
   @Input() processing: Observable<boolean>;
   @Input() searchConfiguration: string;
   @Input() hasSearch = true;
+  @Input() scope: string;
 
   @Output() createItem: EventEmitter<SimpleItem> = new EventEmitter<SimpleItem>();
   @Output() addItems: EventEmitter<SimpleItem[]> = new EventEmitter<SimpleItem[]>();

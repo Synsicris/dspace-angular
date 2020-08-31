@@ -10,6 +10,15 @@ import { Workpackage } from '../../core/working-plan/models/workpackage-step.mod
   styleUrls: ['./working-plan-chart.component.scss'],
 })
 export class WorkingPlanChartComponent {
-  @Input() workpackages: Observable<Workpackage[]>;
+
+  /**
+   * The current project'id
+   */
+  @Input() public projectId: string;
+
+  /**
+   * Array containing a list of Workpackage object
+   */
+  @Input() public workpackages: Observable<Workpackage[]>;
 
 }

@@ -15,6 +15,7 @@
       <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps"
                                 ipwStepColor
                                 class="vertical-step"
+                                [projectId]="projectId"
                                 [impactPathwayId]="impactPathway.id"
                                 [impactPathwayStepId]="step.id"
                                 [stepType]="step.type"></ipw-impact-path-way-step>

@@ -2,7 +2,7 @@
   <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Filter by {{filterName | titlecase}}</button>
 
       <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <li *ngFor="let facetValue of innerFilterFacetValues" ngbDropdownItem>
+        <li *ngFor="let facetValue of innerFilterFacetValues; trackBy: trackUpdate;" ngbDropdownItem>
           <div class="custom-control custom-checkbox d-flex justify-content-between"
                *ngVar="getFacetValue(facetValue) as value">
             <input type="checkbox"

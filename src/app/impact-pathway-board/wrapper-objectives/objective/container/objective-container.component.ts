@@ -18,6 +18,7 @@ import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/s
 })
 export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
+  @Input() public projectId: string;
   @Input() public impactPathwayStep: ImpactPathwayStep;
   @Input() public impactPathwayTask: ImpactPathwayTask;
 
@@ -77,7 +78,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
     modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
     modalRef.componentInstance.excludeListId = [this.impactPathwayTask.id];
     modalRef.componentInstance.excludeFilterName = 'parentStepId';
-    modalRef.componentInstance.authorityName = this.impactPathwayService.getTaskTypeAuthorityName(
+    modalRef.componentInstance.vocabularyName = this.impactPathwayService.getTaskTypeAuthorityName(
       this.impactPathwayStep.type,
       true
     );
@@ -85,8 +86,11 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
       this.impactPathwayStep.type,
       true
     );
+    modalRef.componentInstance.scope = this.projectId;
+
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       this.impactPathwayService.dispatchGenerateImpactPathwaySubTask(
+        this.projectId,
         this.impactPathwayStep.parentId,
         this.impactPathwayStep.id,
         this.impactPathwayTask.id,

@@ -7,6 +7,8 @@ import { TextMenuItemModel } from '../shared/menu/menu-item/models/text.model';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { HostWindowService } from '../shared/host-window.service';
 import { environment } from '../../environments/environment';
+import { SectionDataService } from '../core/layout/section-data.service';
+import { getFirstSucceededRemoteListPayload, getPaginatedListPayload } from '../core/shared/operators';
 
 /**
  * Component representing the public navbar
@@ -17,7 +19,7 @@ import { environment } from '../../environments/environment';
   templateUrl: './navbar.component.html',
   animations: [slideMobileNav]
 })
-export class NavbarComponent extends MenuComponent implements OnInit {
+export class NavbarComponent extends MenuComponent {
   /**
    * The menu ID of the Navbar is PUBLIC
    * @type {MenuID.PUBLIC}
@@ -26,7 +28,8 @@ export class NavbarComponent extends MenuComponent implements OnInit {
 
   constructor(protected menuService: MenuService,
               protected injector: Injector,
-              public windowService: HostWindowService
+              public windowService: HostWindowService,
+              protected sectionDataService: SectionDataService
   ) {
     super(menuService, injector);
   }
@@ -41,26 +44,14 @@ export class NavbarComponent extends MenuComponent implements OnInit {
    */
   createMenu() {
     const menuList: any[] = [
-      /* News */
-      {
-        id: 'browse_global',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.TEXT,
-          text: 'menu.section.browse_global'
-        } as TextMenuItemModel,
-        index: 0
-      },
       /* Communities & Collections tree */
       {
-        id: `browse_global_communities_and_collections`,
-        parentID: 'browse_global',
+        id: `communities_and_collections`,
         active: false,
         visible: true,
         model: {
           type: MenuItemType.LINK,
-          text: `menu.section.browse_global_communities_and_collections`,
+          text: `menu.section.communities_and_collections`,
           link: `/community-list`
         } as LinkMenuItemModel
       },
@@ -78,22 +69,30 @@ export class NavbarComponent extends MenuComponent implements OnInit {
         index: 2
       },
     ];
-    // Read the different Browse-By types from config and add them to the browse menu
-    const types = environment.browseBy.types;
-    types.forEach((typeConfig) => {
-      menuList.push({
-        id: `browse_global_by_${typeConfig.id}`,
-        parentID: 'browse_global',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.LINK,
-          text: `menu.section.browse_global_by_${typeConfig.id}`,
-          link: `/browse/${typeConfig.id}`
-        } as LinkMenuItemModel
+
+    menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
+      shouldPersistOnRouteChange: true
+    })));
+
+    this.sectionDataService.findAll()
+      .pipe( getFirstSucceededRemoteListPayload())
+      .subscribe( (sections) => {
+        sections.forEach( (section) => {
+          const menuSection = {
+            id: `explore_${section.id}`,
+            active: false,
+            visible: true,
+            model: {
+              type: MenuItemType.LINK,
+              text: `menu.section.explore_${section.id}`,
+              link: `/explore/${section.id}`
+            } as LinkMenuItemModel
+          };
+          this.menuService.addSection(this.menuID, Object.assign(menuSection, {
+            shouldPersistOnRouteChange: true
+          }));
+        });
       });
-    });
-    menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, menuSection));
 
   }
 

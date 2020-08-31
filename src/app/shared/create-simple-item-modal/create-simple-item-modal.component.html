@@ -19,11 +19,12 @@
     <ngb-tab *ngIf="hasSearch" title="Search">
       <ng-template ngbTabContent>
         <div  class="mt-3">
-          <ds-search-simple-item [authorityName]="authorityName"
+          <ds-search-simple-item [vocabularyName]="vocabularyName"
                                  [processing]="processing"
                                  [excludeListId]="excludeListId"
                                  [excludeFilterName]="excludeFilterName"
                                  [searchConfiguration]="searchConfiguration"
+                                 [scope]="scope"
                                  (addItems)="addItems.emit($event)"></ds-search-simple-item>
         </div>
       </ng-template>

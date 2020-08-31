@@ -14,7 +14,8 @@ import { NotificationsService } from '../shared/notifications/notifications.serv
 })
 export class ImpactPathwayBoardComponent implements OnInit {
 
-  @Input() impactPathwayId: string;
+  @Input() public projectId: string;
+  @Input() public impactPathwayId: string;
 
   private impactPathWay$: Observable<ImpactPathway>;
 

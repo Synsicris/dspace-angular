@@ -63,6 +63,7 @@ export const WorkpackageActionTypes = {
 export class GenerateWorkpackageAction implements Action {
   type = WorkpackageActionTypes.GENERATE_WORKPACKAGE;
   payload: {
+    projectId: string,
     metadata: MetadataMap,
     place: string;
   };
@@ -70,13 +71,15 @@ export class GenerateWorkpackageAction implements Action {
   /**
    * Create a new GenerateWorkpackageAction
    *
+   * @param projectId
+   *    the project's UUID where to create the object
    * @param metadata: Metadata
    *    the workpackage's Metadata
    * @param place: string
    *    the workpackage's place
    */
-  constructor(metadata: MetadataMap, place: string) {
-    this.payload = { metadata, place };
+  constructor(projectId: string, metadata: MetadataMap, place: string) {
+    this.payload = { projectId, metadata, place };
   }
 }
 
@@ -166,6 +169,7 @@ export class AddWorkpackageErrorAction implements Action {
 export class GenerateWorkpackageStepAction implements Action {
   type = WorkpackageActionTypes.GENERATE_WORKPACKAGE_STEP;
   payload: {
+    projectId: string;
     parentId: string;
     workpackageStepType: string;
     metadata: MetadataMap
@@ -174,6 +178,8 @@ export class GenerateWorkpackageStepAction implements Action {
   /**
    * Create a new GenerateWorkpackageStepAction
    *
+   * @param projectId
+   *    the project's UUID where to create the object
    * @param parentId
    *    the workpackage step parent's id
    * @param workpackageStepType
@@ -181,8 +187,8 @@ export class GenerateWorkpackageStepAction implements Action {
    * @param metadata
    *    the workpackage step's Metadata
    */
-  constructor(parentId: string, workpackageStepType: string, metadata: MetadataMap) {
-    this.payload = { parentId, workpackageStepType, metadata };
+  constructor(projectId: string, parentId: string, workpackageStepType: string, metadata: MetadataMap) {
+    this.payload = { projectId, parentId, workpackageStepType, metadata };
   }
 }
 
