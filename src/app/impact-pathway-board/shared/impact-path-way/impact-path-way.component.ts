@@ -16,6 +16,7 @@ import { ImpactPathwayService } from '../../../core/impact-pathway/impact-pathwa
 })
 export class ImpactPathWayComponent {
 
+  @Input() public projectId: string;
   @Input() public impactPathway: ImpactPathway;
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
@@ -67,7 +68,7 @@ export class ImpactPathWayComponent {
     this.modalService.open(content).result.then(
       (result) => {
         if (result === 'ok') {
-          this.impactPathwayService.dispatchRemoveImpactPathwayAction(this.impactPathway.id);
+          this.impactPathwayService.dispatchRemoveImpactPathwayAction(this.projectId, this.impactPathway.id);
         }
       }
     );

@@ -5,6 +5,7 @@ import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
 import { WorkingPlanPageComponent } from './working-plan-page.component';
 import { ProjectI18nBreadcrumbsService } from '../core/breadcrumbs/project-i18n-breadcrumbs.service';
 import { ProjectI18nBreadcrumbResolver } from '../core/breadcrumbs/project-i18n-breadcrumb.resolver';
+import { ProjectPageResolver } from '../projects/project-page.resolver';
 
 @NgModule({
   imports: [
@@ -14,14 +15,18 @@ import { ProjectI18nBreadcrumbResolver } from '../core/breadcrumbs/project-i18n-
         path: '',
         component: WorkingPlanPageComponent,
         pathMatch: 'full',
-        resolve: { breadcrumb: ProjectI18nBreadcrumbResolver },
+        resolve: {
+          project: ProjectPageResolver,
+          breadcrumb: ProjectI18nBreadcrumbResolver
+        },
         data: { title: 'working-plan.page.title', breadcrumbKey: 'working-plan', showBreadcrumbsFluid: true }
       },
     ])
   ],
   providers: [
     ProjectI18nBreadcrumbResolver,
-    ProjectI18nBreadcrumbsService
+    ProjectI18nBreadcrumbsService,
+    ProjectPageResolver
   ]
 })
 export class WorkingPlanPageRoutingModule {

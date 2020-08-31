@@ -6,6 +6,7 @@ import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact
 import { SearchFilterConfig } from '../../../search/search-filter-config.model';
 import { FacetValue } from '../../../search/facet-value.model';
 import { FilterBox } from './filter-box/search-simple-item-filter-box.component';
+import { SimpleItem } from '../../models/simple-item.model';
 
 @Component({
   selector: 'ds-search-simple-item-header',
@@ -15,6 +16,11 @@ import { FilterBox } from './filter-box/search-simple-item-filter-box.component'
 export class SearchSimpleItemHeaderComponent {
 
   /**
+   * The vocabulary name used for authority filter
+   */
+  @Input() vocabularyName: string;
+
+  /**
    * Emits the currently active filters
    */
   @Input() filterBoxList: Observable<FilterBox[]>;
@@ -22,8 +28,16 @@ export class SearchSimpleItemHeaderComponent {
   /**
    * Emits the currently active filters
    */
-  @Input() availableTaskList: Observable<ImpactPathwayTask[]>;
+  @Input() availableTaskList: Observable<SimpleItem[]>;
+
+  /**
+   * The list of filter entries value
+   */
   @Input() filterBoxEntries: FacetValue[];
+
+  /**
+   * The filter configuration object
+   */
   @Input() filterConfig: SearchFilterConfig;
 
   /**

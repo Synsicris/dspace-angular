@@ -36,11 +36,17 @@ export class FormBuilderService extends DynamicFormService {
 
   private typeBindModel: DynamicFormControlModel;
 
+  /**
+   * This map contains the active forms model
+   */
+  private formModels: Map<string, DynamicFormControlModel[]>;
+
   constructor(
     validationService: DynamicFormValidationService,
     protected rowParser: RowParser
   ) {
     super(validationService);
+    this.formModels = new Map();
   }
 
   getTypeBindModel() {
@@ -250,7 +256,7 @@ export class FormBuilderService extends DynamicFormService {
   }
 
   hasArrayGroupValue(model: DynamicFormControlModel): boolean {
-    return model && (this.isListGroup(model) || model.type === DYNAMIC_FORM_CONTROL_TYPE_TAG);
+    return model && (this.isListGroup(model) || model.type === DYNAMIC_FORM_CONTROL_TYPE_TAG || model.type === DYNAMIC_FORM_CONTROL_TYPE_ARRAY);
   }
 
   hasMappedGroupValue(model: DynamicFormControlModel): boolean {
@@ -307,11 +313,16 @@ export class FormBuilderService extends DynamicFormService {
     return isNotEmpty(fieldModel) ? formGroup.get(this.getPath(fieldModel)) : null;
   }
 
+  /**
+   * Note (discovered while debugging) this is not the ID as used in the form,
+   * but the first part of the path needed in a patch operation:
+   * e.g. add foo/0 -> the id is 'foo'
+   */
   getId(model: DynamicPathable): string {
     let tempModel: DynamicFormControlModel;
 
     if (this.isArrayGroup(model as DynamicFormControlModel)) {
-      return model.index.toString();
+      return hasValue((model as any).metadataKey) ? (model as any).metadataKey : model.index.toString();
     } else if (this.isModelInCustomGroup(model as DynamicFormControlModel)) {
       tempModel = (model as any).parent;
     } else {
@@ -319,6 +330,41 @@ export class FormBuilderService extends DynamicFormService {
     }
 
     return (tempModel.id !== tempModel.name) ? tempModel.name : tempModel.id;
+  }
+
+  /**
+   * Add new form model to formModels map
+   * @param id id of model
+   * @param model model
+   */
+  addFormModel(id: string, model: DynamicFormControlModel[]): void {
+    this.formModels.set(id, model);
+  }
+
+  /**
+   * If present, remove form model from formModels map
+   * @param id id of model
+   */
+  removeFormModel(id: string): void {
+    if (this.formModels.has(id)) {
+      this.formModels.delete(id);
+    }
+  }
+
+  /**
+   * This method searches a field in all forms instantiate by section-form.component
+   * and, if find it, update its value
+   * @param fieldId id of field to update
+   * @param value new value to set
+   */
+  updateValue(fieldId: string, value: any) {
+    this.formModels.forEach( (model, formId) => {
+      const fieldModel: any = this.findById(fieldId, model);
+      if (hasValue(fieldModel)) {
+        fieldModel.valueUpdates.next(value);
+        return;
+      }
+    });
   }
 
 }

@@ -16,7 +16,12 @@ export const EXPLOITATION_PLAN_ARRAY_CONFIG: DynamicRowArrayModelConfig = {
   notRepeatable: false,
   groupFactory: null,
   required: false,
-  showButtons: true
+  showButtons: true,
+  hasSelectableMetadata: false,
+  metadataFields: [],
+  metadataKey: '',
+  relationshipConfig: undefined,
+  submissionId: '',
 };
 
 export const EXPLOITATION_PLAN_SELECT_LAYOUT: DynamicFormControlLayout = {
@@ -59,4 +64,5 @@ export const TASK_NOTE_TEXTAREA_CONFIG: DsDynamicTextAreaModelConfig = {
   required: true,
   rows: 5,
   submissionId: null,
+  hasSelectableMetadata: false,
 };

@@ -47,8 +47,8 @@ export class PageInfo implements HALResource {
   constructor(
     options?: {
       elementsPerPage: number,
-      totalElements: number,
-      totalPages: number,
+      totalElements?: number,
+      totalPages?: number,
       currentPage: number
     }
   ) {

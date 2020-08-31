@@ -28,11 +28,12 @@ import { SimpleItem } from '../models/simple-item.model';
 })
 export class SearchSimpleItemComponent implements OnInit, OnDestroy {
 
-  @Input() authorityName: string;
+  @Input() vocabularyName: string;
   @Input() excludeListId: string[] = [];
   @Input() excludeFilterName: string;
   @Input() processing: Observable<boolean>;
   @Input() searchConfiguration: string;
+  @Input() scope = '';
 
   @Output() addItems: EventEmitter<SimpleItem[]> = new EventEmitter<SimpleItem[]>();
 
@@ -188,20 +189,22 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   private getFilterEntries(page: number) {
     this.searchTaskService.getAvailableFilterEntriesByStepType(
       this.searchConfiguration,
+      this.vocabularyName,
       this.defaultSearchQuery,
       this.defaultSearchFilters,
       page,
-      this.entityTypeSearchFilter)
-      .subscribe((resultPaginatedList: PaginatedList<FacetValue>) => {
-        this.filterBoxEntries$.next(resultPaginatedList.page);
+      this.entityTypeSearchFilter,
+      this.scope)
+      .subscribe((resultPaginatedList: FacetValue[]) => {
+        this.filterBoxEntries$.next(resultPaginatedList);
 
         const appliedFilterBoxEntries = [...this.entityTypeFilterBox.appliedFilterBoxEntries]
           .filter((entry: FilterBoxEntry) => {
-            return findIndex(resultPaginatedList.page, { label: entry.label }) !== -1
+            return findIndex(resultPaginatedList, { label: entry.label }) !== -1
           });
 
         this.entityTypeFilterBox = Object.assign(this.entityTypeFilterBox, {
-          filterFacetValues: resultPaginatedList.page,
+          filterFacetValues: resultPaginatedList,
           appliedFilterBoxEntries: appliedFilterBoxEntries
         });
         this.filterBoxList$.next([this.entityTypeFilterBox, this.titleFilterBox]);
@@ -235,7 +238,8 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
       this.defaultSearchQuery,
       this.defaultSearchFilters,
       paginationOptions,
-      sortOptions).pipe(
+      sortOptions,
+      this.scope).pipe(
       take(1)
     ).subscribe((resultPaginatedList: PaginatedList<Observable<SimpleItem>>) => {
       this.pageInfoState = resultPaginatedList.pageInfo;

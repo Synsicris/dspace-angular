@@ -2,60 +2,33 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
-  HostListener,
   Input,
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges
+  SimpleChanges,
+  ViewChild
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
 import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  find,
-  flatMap,
-  map,
-  mergeMap,
-  reduce,
-  startWith
+  find, flatMap,
+  map
 } from 'rxjs/operators';
 
 import { Collection } from '../../../core/shared/collection.model';
-import { CommunityDataService } from '../../../core/data/community-data.service';
-import { Community } from '../../../core/shared/community.model';
-import { hasValue, isEmpty, isNotEmpty } from '../../../shared/empty.util';
+import { hasValue, isNotEmpty } from '../../../shared/empty.util';
 import { RemoteData } from '../../../core/data/remote-data';
 import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
-import { PaginatedList } from '../../../core/data/paginated-list';
 import { SubmissionService } from '../../submission.service';
 import { SubmissionObject } from '../../../core/submission/models/submission-object.model';
 import { SubmissionJsonPatchOperationsService } from '../../../core/submission/submission-json-patch-operations.service';
 import { CollectionDataService } from '../../../core/data/collection-data.service';
-import { FindListOptions } from '../../../core/data/request.models';
-import { SubmissionDefinitionsModel } from '../../../core/config/models/config-submission-definitions.model';
+import { CollectionDropdownComponent } from 'src/app/shared/collection-dropdown/collection-dropdown.component';
+import { SectionsService } from '../../sections/sections.service';
 import { SubmissionDefinitionsConfigService } from '../../../core/config/submission-definitions-config.service';
 import { RequestService } from '../../../core/data/request.service';
-
-/**
- * An interface to represent a collection entry
- */
-interface CollectionListEntryItem {
-  id: string;
-  name: string;
-}
-
-/**
- * An interface to represent an entry in the collection list
- */
-interface CollectionListEntry {
-  communities: CollectionListEntryItem[],
-  collection: CollectionListEntryItem
-}
 
 /**
  * This component allows to show the current collection the submission belonging to and to change it.
@@ -86,34 +59,22 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
   @Input() submissionId;
 
   /**
+   * The entity type input used to create a new submission
+   * @type {string}
+   */
+  @Input() entityType: string;
+
+  /**
    * An event fired when a different collection is selected.
    * Event's payload equals to new SubmissionObject.
    */
   @Output() collectionChange: EventEmitter<SubmissionObject> = new EventEmitter<SubmissionObject>();
 
   /**
-   * A boolean representing if this dropdown button is disabled
-   * @type {BehaviorSubject<boolean>}
-   */
-  public disabled$ = new BehaviorSubject<boolean>(true);
-
-  /**
    * A boolean representing if a collection change operation is processing
    * @type {BehaviorSubject<boolean>}
    */
   public processingChange$ = new BehaviorSubject<boolean>(false);
-
-  /**
-   * The search form control
-   * @type {FormControl}
-   */
-  public searchField: FormControl = new FormControl();
-
-  /**
-   * The collection list obtained from a search
-   * @type {Observable<CollectionListEntry[]>}
-   */
-  public searchListCollection$: Observable<CollectionListEntry[]>;
 
   /**
    * The selected collection id
@@ -134,69 +95,46 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
   protected pathCombiner: JsonPatchOperationPathCombiner;
 
   /**
-   * A boolean representing if dropdown list is scrollable to the bottom
-   * @type {boolean}
-   */
-  private scrollableBottom = false;
-
-  /**
-   * A boolean representing if dropdown list is scrollable to the top
-   * @type {boolean}
-   */
-  private scrollableTop = false;
-
-  /**
    * Array to track all subscriptions and unsubscribe them onDestroy
    * @type {Array}
    */
   private subs: Subscription[] = [];
 
   /**
+   * The html child that contains the collections list
+   */
+  @ViewChild(CollectionDropdownComponent, {static: false}) collectionDropdown: CollectionDropdownComponent;
+
+  /**
+   * A boolean representing if the collection section is available
+   * @type {BehaviorSubject<boolean>}
+   */
+  available$: Observable<boolean>;
+
+  /**
+   * Metadata name to filter collection list
+   */
+  metadata: string;
+  /**
    * Initialize instance variables
    *
    * @param {ChangeDetectorRef} cdr
-   * @param {CommunityDataService} communityDataService
    * @param {CollectionDataService} collectionDataService
    * @param {JsonPatchOperationsBuilder} operationsBuilder
    * @param {SubmissionJsonPatchOperationsService} operationsService
    * @param {RequestService} requestService
+   * @param {SectionsService} sectionsService
    * @param {SubmissionService} submissionService
    * @param {SubmissionDefinitionsConfigService} submissionDefinitionsService
    */
   constructor(protected cdr: ChangeDetectorRef,
-              private communityDataService: CommunityDataService,
               private collectionDataService: CollectionDataService,
               private operationsBuilder: JsonPatchOperationsBuilder,
               private operationsService: SubmissionJsonPatchOperationsService,
               private requestService: RequestService,
+              private sectionsService: SectionsService,
               private submissionService: SubmissionService,
               private submissionDefinitionsService: SubmissionDefinitionsConfigService) {
-  }
-
-  /**
-   * Method called on mousewheel event, it prevent the page scroll
-   * when arriving at the top/bottom of dropdown menu
-   *
-   * @param event
-   *     mousewheel event
-   */
-  @HostListener('mousewheel', ['$event']) onMousewheel(event) {
-    if (event.wheelDelta > 0 && this.scrollableTop) {
-      event.preventDefault();
-    }
-    if (event.wheelDelta < 0 && this.scrollableBottom) {
-      event.preventDefault();
-    }
-  }
-
-  /**
-   * Check if dropdown scrollbar is at the top or bottom of the dropdown list
-   *
-   * @param event
-   */
-  onScroll(event) {
-    this.scrollableBottom = (event.target.scrollTop + event.target.clientHeight === event.target.scrollHeight);
-    this.scrollableTop = (event.target.scrollTop === 0);
   }
 
   /**
@@ -211,51 +149,6 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
         find((collectionRD: RemoteData<Collection>) => isNotEmpty(collectionRD.payload)),
         map((collectionRD: RemoteData<Collection>) => collectionRD.payload.name)
       );
-
-      const findOptions: FindListOptions = {
-        elementsPerPage: 1000
-      };
-
-      // Retrieve collection list only when is the first change
-      if (changes.currentCollectionId.isFirstChange()) {
-        // @TODO replace with search/top browse endpoint
-        // @TODO implement community/subcommunity hierarchy
-        const communities$ = this.communityDataService.findAll(findOptions).pipe(
-          find((communities: RemoteData<PaginatedList<Community>>) => isNotEmpty(communities.payload)),
-          mergeMap((communities: RemoteData<PaginatedList<Community>>) => communities.payload.page));
-
-        const listCollection$ = communities$.pipe(
-          flatMap((communityData: Community) => {
-            return this.collectionDataService.getAuthorizedCollectionByCommunity(communityData.uuid, findOptions).pipe(
-              find((collections: RemoteData<PaginatedList<Collection>>) => !collections.isResponsePending && collections.hasSucceeded),
-              mergeMap((collections: RemoteData<PaginatedList<Collection>>) => collections.payload.page),
-              filter((collectionData: Collection) => isNotEmpty(collectionData)),
-              map((collectionData: Collection) => ({
-                communities: [{ id: communityData.id, name: communityData.name }],
-                collection: { id: collectionData.id, name: collectionData.name }
-              }))
-            );
-          }),
-          reduce((acc: any, value: any) => [...acc, ...value], []),
-          startWith([])
-        );
-
-        const searchTerm$ = this.searchField.valueChanges.pipe(
-          debounceTime(200),
-          distinctUntilChanged(),
-          startWith('')
-        );
-
-        this.searchListCollection$ = combineLatest(searchTerm$, listCollection$).pipe(
-          map(([searchTerm, listCollection]) => {
-            this.disabled$.next(isEmpty(listCollection));
-            if (isEmpty(searchTerm)) {
-              return listCollection;
-            } else {
-              return listCollection.filter((v) => v.collection.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1).slice(0, 5);
-            }
-          }));
-      }
     }
   }
 
@@ -264,6 +157,10 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
    */
   ngOnInit() {
     this.pathCombiner = new JsonPatchOperationPathCombiner('sections', 'collection');
+    this.available$ = this.sectionsService.isSectionAvailable(this.submissionId, 'collection');
+    if (this.entityType) {
+      this.metadata = 'relationship.type';
+    }
   }
 
   /**
@@ -280,7 +177,6 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
    *    the selected [CollectionListEntryItem]
    */
   onSelect(event) {
-    this.searchField.reset();
     this.processingChange$.next(true);
     this.operationsBuilder.replace(this.pathCombiner.getPath(), event.collection.id, true);
     this.subs.push(this.operationsService.jsonPatchByResourceID(
@@ -318,7 +214,7 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
    * Reset search form control on dropdown menu close
    */
   onClose() {
-    this.searchField.reset();
+    this.collectionDropdown.reset();
   }
 
   /**
@@ -329,7 +225,7 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
    */
   toggled(isOpen: boolean) {
     if (!isOpen) {
-      this.searchField.reset();
+      this.collectionDropdown.reset();
     }
   }
 }

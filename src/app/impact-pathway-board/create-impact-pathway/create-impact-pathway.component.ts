@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -14,10 +14,9 @@ import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.s
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 
 /**
- * Component to wrap a list of existing communities inside a modal
- * Used to choose a community from to create a new collection in
+ * Component to wrap a form inside a modal
+ * Used to create a new impact pathway
  */
-
 @Component({
   selector: 'ds-create-collection-parent-selector',
   templateUrl: './create-impact-pathway.component.html',
@@ -25,7 +24,12 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 export class CreateImpactPathwayComponent implements OnInit {
 
   /**
-   * The reject form group
+   * The project's UUID where to create the new impact pathway
+   */
+  @Input() projectId: string;
+
+  /**
+   * The creation form group
    */
   public createForm: FormGroup;
 
@@ -58,7 +62,7 @@ export class CreateImpactPathwayComponent implements OnInit {
 
   create() {
     const impactPathwayName = this.createForm.get('name').value;
-    this.impactPathwayService.dispatchGenerateImpactPathway(impactPathwayName);
+    this.impactPathwayService.dispatchGenerateImpactPathway(this.projectId, impactPathwayName);
   }
 
   /**

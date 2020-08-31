@@ -6,6 +6,7 @@
        class="d-flex p-2 h-100 flex-column">
     <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index"
                               class="mb-sm-1 mb-lg-4"
+                              [projectId]="projectId"
                               [impactPathwayId]="(impactPathwayStep$ | async)?.parentId"
                               [impactPathwayStepId]="(impactPathwayStep$ | async)?.id"
                               [impactPathwayStepType]="(impactPathwayStep$ | async)?.type"

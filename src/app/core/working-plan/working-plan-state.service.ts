@@ -46,16 +46,17 @@ export class WorkingPlanStateService {
     this.store.dispatch(new ChangeChartViewAction(chartDateView))
   }
 
-  public dispatchGenerateWorkpackage(metadata: MetadataMap, place: string): void {
-    this.store.dispatch(new GenerateWorkpackageAction(metadata, place))
+  public dispatchGenerateWorkpackage(projectId: string, metadata: MetadataMap, place: string): void {
+    this.store.dispatch(new GenerateWorkpackageAction(projectId, metadata, place))
   }
 
   public dispatchGenerateWorkpackageStep(
+    projectId: string,
     parentId: string,
     workpackageStepType: string,
     metadata: MetadataMap
   ): void {
-    this.store.dispatch(new GenerateWorkpackageStepAction(parentId, workpackageStepType, metadata))
+    this.store.dispatch(new GenerateWorkpackageStepAction(projectId, parentId, workpackageStepType, metadata))
   }
 
   public dispatchMoveWorkpackage(workpackageId: string, oldIndex: number, newIndex: number): void {
@@ -74,8 +75,8 @@ export class WorkingPlanStateService {
     this.store.dispatch(new RemoveWorkpackageStepAction(workpackageId, workpackageStepId, workspaceItemId))
   }
 
-  public dispatchRetrieveAllWorkpackages(): void {
-    this.store.dispatch(new RetrieveAllWorkpackagesAction(null))
+  public dispatchRetrieveAllWorkpackages(projectId: string): void {
+    this.store.dispatch(new RetrieveAllWorkpackagesAction(projectId))
   }
 
   public dispatchUpdateWorkpackageAction(

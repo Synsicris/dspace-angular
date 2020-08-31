@@ -80,11 +80,11 @@ export class ImpactPathwayEffects {
   @Effect() generate$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY),
     switchMap((action: GenerateImpactPathwayAction) => {
-      return this.impactPathwayService.generateImpactPathwayItem(action.payload.name, '').pipe(
+      return this.impactPathwayService.generateImpactPathwayItem(action.payload.projectId, action.payload.name, '').pipe(
         tap(() => {
           this.modalService.dismissAll();
         }),
-        map((item: Item) => new GenerateImpactPathwaySuccessAction(item)),
+        map((item: Item) => new GenerateImpactPathwaySuccessAction(action.payload.projectId, item)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
@@ -102,7 +102,7 @@ export class ImpactPathwayEffects {
       this.notificationsService.success(null, this.translate.get('impact-pathway.create.success'))
     }),
     tap((action: GenerateImpactPathwaySuccessAction) => {
-      this.impactPathwayService.redirectToEditPage(action.payload.item.id)
+      this.impactPathwayService.redirectToEditPage(action.payload.projectId ,action.payload.item.id)
     }));
 
   /**
@@ -137,6 +137,7 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK),
     switchMap((action: GenerateImpactPathwayTaskAction) => {
       return this.impactPathwayService.generateImpactPathwayTaskItem(
+        action.payload.projectId,
         action.payload.stepId,
         action.payload.taskType,
         action.payload.metadata).pipe(
@@ -226,6 +227,7 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUB_TASK),
     switchMap((action: GenerateImpactPathwaySubTaskAction) => {
       return this.impactPathwayService.generateImpactPathwayTaskItem(
+        action.payload.projectId,
         action.payload.parentTaskId,
         action.payload.taskType,
         action.payload.metadata).pipe(
@@ -306,6 +308,7 @@ export class ImpactPathwayEffects {
       return this.impactPathwayService.retrieveObjectItem(
         action.payload.impactPathwayId
       ).pipe(
+        tap((item: Item) => this.impactPathwayService.addImpactPathwayToBeRemovedList(item.id)),
         mergeMap((item: Item) => {
           const actions = item.findMetadataSortedByPlace(environment.impactPathway.impactPathwayStepRelationMetadata)
             .map((relationMetadata: MetadataValue) => new RemoveImpactPathwayStepAction(
@@ -314,6 +317,7 @@ export class ImpactPathwayEffects {
             )
           )
           return [...actions, new RemoveImpactPathwaySuccessAction(
+            action.payload.projectId,
             action.payload.impactPathwayId)];
         }),
         catchError((error: Error) => {
@@ -332,7 +336,7 @@ export class ImpactPathwayEffects {
     tap((action: RemoveImpactPathwaySuccessAction) => {
       this.impactPathwayService.removeByItemId(action.payload.impactPathwayId);
       this.notificationsService.success(null, this.translate.get('impact-pathway.remove.success'));
-      this.impactPathwayService.redirectToProjectPage();
+      this.impactPathwayService.redirectToProjectPage(action.payload.projectId);
     }),
   );
 

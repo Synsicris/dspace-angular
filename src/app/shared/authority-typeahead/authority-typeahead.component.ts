@@ -18,7 +18,6 @@ import {
   debounceTime,
   distinctUntilChanged,
   filter,
-  find,
   map,
   merge,
   switchMap,
@@ -27,17 +26,18 @@ import {
 } from 'rxjs/operators';
 import { NgbModal, NgbModalRef, NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 
-import { AuthorityService } from '../../core/integration/authority.service';
-
-import { IntegrationSearchOptions } from '../../core/integration/models/integration-options.model';
+import { VocabularyService } from '../../core/submission/vocabularies/vocabulary.service';
+import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
 import { hasValue, isEmpty, isNotEmpty, isNotNull } from '../empty.util';
 import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-metadata-value.model'
-import { ConfidenceType } from '../../core/integration/models/confidence-type';
-import { RemoteData } from '../../core/data/remote-data';
-import { Authority } from '../../core/integration/models/authority.model';
-import { AuthorityTreeviewComponent } from '../authority-treeview/authority-treeview.component';
-import { AuthorityEntry } from '../../core/integration/models/authority-entry.model';
-import { AuthorityOptions } from '../../core/integration/models/authority-options.model';
+import { ConfidenceType } from '../../core/shared/confidence-type';
+import { Vocabulary } from '../../core/submission/vocabularies/models/vocabulary.model';
+import { VocabularyTreeviewComponent } from '../vocabulary-treeview/vocabulary-treeview.component';
+import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
+import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
+import { PaginatedList } from '../../core/data/paginated-list';
+import { PageInfo } from '../../core/shared/page-info.model';
+import { VocabularyEntryDetail } from '../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 
 @Component({
   selector: 'ds-authority-typeahead',
@@ -50,7 +50,7 @@ export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
   @Input() group: FormGroup;
   @Input() fieldId: string;
   @Input() fieldName: string;
-  @Input() authorityOptions: AuthorityOptions;
+  @Input() vocabularyOptions: VocabularyOptions;
   @Input() initValue: any;
   @Input() readOnly = false;
   @Input() minChars = 3;
@@ -65,15 +65,15 @@ export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
 
   autocomplete = AUTOCOMPLETE_OFF;
   searching = false;
-  searchOptions: IntegrationSearchOptions;
   searchFailed = false;
   hideSearchingWhenUnsubscribed$ = new Observable(() => () => this.changeSearchingStatus(false));
   click$ = new Subject<string>();
   currentValue: any;
   inputValue: any;
-  authority$: Observable<Authority>;
+  vocabulary$: Observable<Vocabulary>;
   isHierarchical$: Observable<boolean>;
   preloadLevel: number;
+  pageInfo: PageInfo = new PageInfo();
 
   private subs: Subscription[] = [];
 
@@ -89,31 +89,31 @@ export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
       tap(() => this.changeSearchingStatus(true)),
       switchMap((term) => {
         if (term === '' || term.length < this.minChars) {
-          return observableOf({list: []});
+          return observableOf({ list: [] });
         } else {
-          this.searchOptions.query = term;
-          return this.authorityService.getEntriesByName(this.searchOptions).pipe(
-            map((authorities) => {
-              // @TODO Pagination for authority is not working, to refactor when it will be fixed
-              return {
-                list: authorities.payload,
-                pageInfo: authorities.pageInfo
-              };
-            }),
+          return this.vocabularyService.getVocabularyEntriesByValue(
+            term,
+            false,
+            this.vocabularyOptions,
+            this.pageInfo).pipe(
+            getFirstSucceededRemoteDataPayload(),
             tap(() => this.searchFailed = false),
             catchError(() => {
               this.searchFailed = true;
-              return observableOf({list: []});
+              return observableOf(new PaginatedList(
+                new PageInfo(),
+                []
+              ));
             }));
         }
       }),
-      map((results) => results.list),
+      map((list: PaginatedList<VocabularyEntry>) => list.page),
       tap(() => this.changeSearchingStatus(false)),
       merge(this.hideSearchingWhenUnsubscribed$)
     )
   };
 
-  constructor(private authorityService: AuthorityService,
+  constructor(private vocabularyService: VocabularyService,
               private cdr: ChangeDetectorRef,
               private modalService: NgbModal
   ) {
@@ -121,18 +121,13 @@ export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentValue = this.initValue;
-    this.searchOptions = new IntegrationSearchOptions(
-      this.authorityOptions.scope,
-      this.authorityOptions.name,
-      this.authorityOptions.metadata);
 
-    this.authority$ = this.authorityService.findById(this.authorityOptions.name).pipe(
-      find((result: RemoteData<Authority>) => result.hasSucceeded && !result.isResponsePending),
-      map((result: RemoteData<Authority>) => result.payload as Authority)
+    this.vocabulary$ = this.vocabularyService.findVocabularyById(this.vocabularyOptions.name).pipe(
+      getFirstSucceededRemoteDataPayload()
     );
 
-    this.isHierarchical$ = this.authority$.pipe(
-      map((result: Authority) => result.hierarchical)
+    this.isHierarchical$ = this.vocabulary$.pipe(
+      map((result: Vocabulary) => result.hierarchical)
     );
 
     this.isHierarchical$.subscribe();
@@ -151,14 +146,14 @@ export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
   }
 
   onInput(event) {
-    if (!this.authorityOptions.closed && isNotEmpty(event.target.value)) {
+    if (!this.vocabularyOptions.closed && isNotEmpty(event.target.value)) {
       this.inputValue = new FormFieldMetadataValueObject(event.target.value);
     }
   }
 
   onBlur(event: Event) {
     if (!this.instance.isPopupOpen()) {
-      if (!this.authorityOptions.closed && isNotEmpty(this.inputValue)) {
+      if (!this.vocabularyOptions.closed && isNotEmpty(this.inputValue)) {
         if (isNotNull(this.inputValue) && ((isObject(this.inputValue) && this.initValue !== (this.inputValue as any).value)
           || (!isObject(this.inputValue) && this.initValue !== this.inputValue))) {
           this.change.emit(this.inputValue);
@@ -195,15 +190,15 @@ export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
   openTree(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
-    this.subs.push(this.authority$.pipe(
-      map((authority: Authority) => authority.preloadLevel),
+    this.subs.push(this.vocabulary$.pipe(
+      map((authority: Vocabulary) => authority.preloadLevel),
       take(1)
     ).subscribe((preloadLevel) => {
-      const modalRef: NgbModalRef = this.modalService.open(AuthorityTreeviewComponent, { size: 'lg', windowClass: 'treeview' });
-      modalRef.componentInstance.searchOptions = this.searchOptions;
+      const modalRef: NgbModalRef = this.modalService.open(VocabularyTreeviewComponent, { size: 'lg', windowClass: 'treeview' });
+      modalRef.componentInstance.vocabularyOptions = this.vocabularyOptions;
       modalRef.componentInstance.preloadLevel = preloadLevel;
       modalRef.componentInstance.selectedItem = this.currentValue ? this.currentValue : '';
-      modalRef.result.then((result: AuthorityEntry) => {
+      modalRef.result.then((result: VocabularyEntryDetail) => {
         if (result) {
           this.currentValue = result;
           this.change.emit(result);

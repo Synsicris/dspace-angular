@@ -6,7 +6,7 @@ import { filter, flatMap, map, take, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
-import { redirectToPageNotFoundOn404 } from '../core/shared/operators';
+import { getFirstSucceededRemoteDataPayload, redirectToPageNotFoundOn404 } from '../core/shared/operators';
 import { ImpactPathwayService } from '../core/impact-pathway/impact-pathway.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
@@ -14,6 +14,7 @@ import { InitImpactPathwayAction } from '../core/impact-pathway/impact-pathway.a
 import { ItemDataService } from '../core/data/item-data.service';
 import { hasValue, isNotEmpty } from '../shared/empty.util';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { Community } from '../core/shared/community.model';
 
 @Component({
   selector: 'ipw-objectives-page',
@@ -31,6 +32,11 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
    * The item's id
    */
   itemId$: Observable<string>;
+
+  /**
+   * The project's id
+   */
+  projectId$: Observable<string>;
 
   /**
    * Subscription to unsubscribe
@@ -79,6 +85,13 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
         }
       }),
       map(([itemRD, parentItemRD, loaded]: [RemoteData<Item>, RemoteData<Item>, boolean]) => itemRD.payload.id)
+    );
+
+    this.projectId$ = this.route.data.pipe(
+      map((data) => data.project as RemoteData<Community>),
+      redirectToPageNotFoundOn404(this.router),
+      getFirstSucceededRemoteDataPayload(),
+      map((project: Community) => project.id)
     );
   }
 

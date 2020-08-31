@@ -16,8 +16,8 @@ import { MenuService } from '../shared/menu/menu.service';
 import { EndpointMockingRestService } from '../shared/mocks/dspace-rest-v2/endpoint-mocking-rest.service';
 import {
   MOCK_RESPONSE_MAP,
-  ResponseMapMock,
-  mockResponseMap
+  mockResponseMap,
+  ResponseMapMock
 } from '../shared/mocks/dspace-rest-v2/mocks/response-map.mock';
 import { NotificationsService } from '../shared/notifications/notifications.service';
 import { SelectableListService } from '../shared/object-list/selectable-list/selectable-list.service';
@@ -69,13 +69,8 @@ import { ItemDataService } from './data/item-data.service';
 import { LicenseDataService } from './data/license-data.service';
 import { LookupRelationService } from './data/lookup-relation.service';
 import { MappedCollectionsReponseParsingService } from './data/mapped-collections-reponse-parsing.service';
-import { MetadatafieldParsingService } from './data/metadatafield-parsing.service';
-import { MetadataschemaParsingService } from './data/metadataschema-parsing.service';
 import { MyDSpaceResponseParsingService } from './data/mydspace-response-parsing.service';
 import { ObjectUpdatesService } from './data/object-updates/object-updates.service';
-import { RegistryBitstreamformatsResponseParsingService } from './data/registry-bitstreamformats-response-parsing.service';
-import { RegistryMetadatafieldsResponseParsingService } from './data/registry-metadatafields-response-parsing.service';
-import { RegistryMetadataschemasResponseParsingService } from './data/registry-metadataschemas-response-parsing.service';
 import { RelationshipTypeService } from './data/relationship-type.service';
 import { RelationshipService } from './data/relationship.service';
 import { ResourcePolicyService } from './resource-policy/resource-policy.service';
@@ -86,14 +81,13 @@ import { EPersonDataService } from './eperson/eperson-data.service';
 import { EpersonResponseParsingService } from './eperson/eperson-response-parsing.service';
 import { EPerson } from './eperson/models/eperson.model';
 import { Group } from './eperson/models/group.model';
-import { AuthorityService } from './integration/authority.service';
-import { IntegrationResponseParsingService } from './integration/integration-response-parsing.service';
 import { JsonPatchOperationsBuilder } from './json-patch/builder/json-patch-operations-builder';
 import { MetadataField } from './metadata/metadata-field.model';
 import { MetadataSchema } from './metadata/metadata-schema.model';
 import { MetadataService } from './metadata/metadata.service';
 import { RegistryService } from './registry/registry.service';
 import { RoleService } from './roles/role.service';
+
 import { ApiService } from './services/api.service';
 import { ServerResponseService } from './services/server-response.service';
 import { NativeWindowFactory, NativeWindowService } from './services/window.service';
@@ -142,19 +136,58 @@ import { VersionDataService } from './data/version-data.service';
 import { VersionHistoryDataService } from './data/version-history-data.service';
 import { Version } from './shared/version.model';
 import { VersionHistory } from './shared/version-history.model';
+import { Script } from '../process-page/scripts/script.model';
+import { Process } from '../process-page/processes/process.model';
+import { ProcessDataService } from './data/processes/process-data.service';
+import { ScriptDataService } from './data/processes/script-data.service';
+import { ProcessFilesResponseParsingService } from './data/process-files-response-parsing.service';
 import { WorkflowActionDataService } from './data/workflow-action-data.service';
 import { WorkflowAction } from './tasks/models/workflow-action-object.model';
+import { ItemTemplateDataService } from './data/item-template-data.service';
+import { TemplateItem } from './shared/template-item.model';
+import { Feature } from './shared/feature.model';
+import { Authorization } from './shared/authorization.model';
+import { FeatureDataService } from './data/feature-authorization/feature-data.service';
+import { AuthorizationDataService } from './data/feature-authorization/authorization-data.service';
+import { SiteAdministratorGuard } from './data/feature-authorization/feature-authorization-guard/site-administrator.guard';
+import { Registration } from './shared/registration.model';
+import { MetadataSchemaDataService } from './data/metadata-schema-data.service';
+import { MetadataFieldDataService } from './data/metadata-field-data.service';
 import { LocaleInterceptor } from './locale/locale.interceptor';
-import { AuthorityTreeviewService } from '../shared/authority-treeview/authority-treeview.service';
 import { DsDynamicTypeBindRelationService } from '../shared/form/builder/ds-dynamic-form-ui/ds-dynamic-type-bind-relation.service';
-import { Authority } from './integration/models/authority.model';
-import { AuthorityEntry } from './integration/models/authority-entry.model';
+import { TabDataService } from './layout/tab-data.service';
+import { Tab } from './layout/models/tab.model';
+import { BoxDataService } from './layout/box-data.service';
+import { Box } from './layout/models/box.model';
+import { MetadataComponentsDataService } from './layout/metadata-components-data.service';
+import { MetadataComponent } from './layout/models/metadata-component.model';
+import { TokenResponseParsingService } from './auth/token-response-parsing.service';
+import { SubmissionCcLicenseDataService } from './submission/submission-cc-license-data.service';
+import { SubmissionCcLicence } from './submission/models/submission-cc-license.model';
+import { SubmissionCcLicenceUrl } from './submission/models/submission-cc-license-url.model';
+import { SubmissionCcLicenseUrlDataService } from './submission/submission-cc-license-url-data.service';
+import { VocabularyEntry } from './submission/vocabularies/models/vocabulary-entry.model';
+import { Vocabulary } from './submission/vocabularies/models/vocabulary.model';
+import { VocabularyEntriesResponseParsingService } from './submission/vocabularies/vocabulary-entries-response-parsing.service';
+import { VocabularyEntryDetail } from './submission/vocabularies/models/vocabulary-entry-detail.model';
+import { VocabularyService } from './submission/vocabularies/vocabulary.service';
+import { VocabularyTreeviewService } from '../shared/vocabulary-treeview/vocabulary-treeview.service';
+import { ConfigurationDataService } from './data/configuration-data.service';
+import { ConfigurationProperty } from './shared/configuration-property.model';
+import { SearchcomponentService } from './layout/searchcomponent.service';
+import { SearchComponent } from './layout/models/search-component.model';
+import { ResearcherProfileService } from './profile/researcher-profile.service';
+import { ResearcherProfile } from './profile/model/researcher-profile.model';
+import { SectionDataService } from './layout/section-data.service';
+import { Section } from './layout/models/section.model';
+import { SearchConfigResponseParsingService } from './data/search-config-response-parsing.service';
 import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
 import { ObjectiveService } from './impact-pathway/objective.service';
 import { ImpactPathwayLinksService } from './impact-pathway/impact-pathway-links.service';
 import { WorkingPlanService } from './working-plan/working-plan.service';
 import { WorkingPlanStateService } from './working-plan/working-plan-state.service';
 import { ItemAuthorityRelationService } from './shared/item-authority-relation.service';
+import { ProjectDataService } from './project/project-data.service';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -188,7 +221,7 @@ const PROVIDERS = [
   SiteDataService,
   DSOResponseParsingService,
   { provide: MOCK_RESPONSE_MAP, useValue: mockResponseMap },
-  { provide: DSpaceRESTv2Service, useFactory: restServiceFactory, deps: [MOCK_RESPONSE_MAP, HttpClient]},
+  { provide: DSpaceRESTv2Service, useFactory: restServiceFactory, deps: [MOCK_RESPONSE_MAP, HttpClient] },
   DynamicFormLayoutService,
   DynamicFormService,
   DynamicFormValidationService,
@@ -211,9 +244,7 @@ const PROVIDERS = [
   FacetValueResponseParsingService,
   FacetValueMapResponseParsingService,
   FacetConfigResponseParsingService,
-  RegistryMetadataschemasResponseParsingService,
-  RegistryMetadatafieldsResponseParsingService,
-  RegistryBitstreamformatsResponseParsingService,
+  SearchConfigResponseParsingService,
   MappedCollectionsReponseParsingService,
   DebugResponseParsingService,
   SearchResponseParsingService,
@@ -224,6 +255,8 @@ const PROVIDERS = [
   BrowseItemsResponseParsingService,
   BrowseService,
   ConfigResponseParsingService,
+  SubmissionCcLicenseDataService,
+  SubmissionCcLicenseUrlDataService,
   SubmissionDefinitionsConfigService,
   SubmissionFormsConfigService,
   SubmissionRestService,
@@ -232,10 +265,6 @@ const PROVIDERS = [
   SubmissionJsonPatchOperationsService,
   ItemJsonPatchOperationsService,
   JsonPatchOperationsBuilder,
-  AuthorityService,
-  IntegrationResponseParsingService,
-  MetadataschemaParsingService,
-  MetadatafieldParsingService,
   UploaderService,
   UUIDService,
   NotificationsService,
@@ -244,6 +273,7 @@ const PROVIDERS = [
   UploaderService,
   FileService,
   DSpaceObjectDataService,
+  ConfigurationDataService,
   DSOChangeAnalyzer,
   DefaultChangeAnalyzer,
   ArrayMoveChangeAnalyzer,
@@ -262,6 +292,8 @@ const PROVIDERS = [
   DsDynamicTypeBindRelationService,
   EntityTypeService,
   ContentSourceResponseParsingService,
+  ItemTemplateDataService,
+  SearchService,
   SidebarService,
   SearchFilterService,
   SearchFilterService,
@@ -275,6 +307,15 @@ const PROVIDERS = [
   LicenseDataService,
   ItemTypeDataService,
   WorkflowActionDataService,
+  ProcessDataService,
+  ScriptDataService,
+  ProcessFilesResponseParsingService,
+  FeatureDataService,
+  AuthorizationDataService,
+  SiteAdministratorGuard,
+  MetadataSchemaDataService,
+  MetadataFieldDataService,
+  TokenResponseParsingService,
   // register AuthInterceptor as HttpInterceptor
   {
     provide: HTTP_INTERCEPTORS,
@@ -290,13 +331,24 @@ const PROVIDERS = [
   NotificationsService,
   FilteredDiscoveryPageResponseParsingService,
   { provide: NativeWindowService, useFactory: NativeWindowFactory },
-  AuthorityTreeviewService,
+  TabDataService,
+  BoxDataService,
+  MetadataComponentsDataService,
+  VocabularyService,
+  VocabularyEntriesResponseParsingService,
+  VocabularyTreeviewService,
+  SearchcomponentService,
+  ResearcherProfileService,
+  SectionDataService,
+  ResearcherProfileService,
+  SearchcomponentService,
   ItemAuthorityRelationService,
   ImpactPathwayService,
   ObjectiveService,
   ImpactPathwayLinksService,
   WorkingPlanService,
-  WorkingPlanStateService
+  WorkingPlanStateService,
+  ProjectDataService
 ];
 
 /**
@@ -320,13 +372,13 @@ export const models =
     License,
     WorkflowItem,
     WorkspaceItem,
+    SubmissionCcLicence,
+    SubmissionCcLicenceUrl,
     SubmissionDefinitionsModel,
     SubmissionFormsModel,
     SubmissionSectionModel,
     SubmissionUploadsModel,
     AuthStatus,
-    Authority,
-    AuthorityEntry,
     BrowseEntry,
     BrowseDefinition,
     ClaimedTask,
@@ -337,9 +389,25 @@ export const models =
     ItemType,
     ExternalSource,
     ExternalSourceEntry,
+    Script,
+    Process,
     Version,
     VersionHistory,
-    WorkflowAction
+    WorkflowAction,
+    TemplateItem,
+    Feature,
+    Authorization,
+    Registration,
+    Tab,
+    Box,
+    MetadataComponent,
+    Vocabulary,
+    VocabularyEntry,
+    VocabularyEntryDetail,
+    ConfigurationProperty,
+    SearchComponent,
+    ResearcherProfile,
+    Section
   ];
 
 @NgModule({

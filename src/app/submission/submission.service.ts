@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -28,7 +28,6 @@ import {
   SubmissionSectionObject
 } from './objects/submission-objects.reducer';
 import { submissionObjectFromIdSelector } from './selectors';
-import { GlobalConfig } from '../../config/global-config.interface';
 import { HttpOptions } from '../core/dspace-rest-v2/dspace-rest-v2.service';
 import { SubmissionRestService } from '../core/submission/submission-rest.service';
 import { SectionDataObject } from './sections/models/section-data.model';
@@ -45,6 +44,7 @@ import { RemoteDataError } from '../core/data/remote-data-error';
 import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject } from '../shared/remote-data.utils';
 import { RequestService } from '../core/data/request.service';
 import { SearchService } from '../core/shared/search/search.service';
+import { Item } from '../core/shared/item.model';
 import { environment } from '../../environments/environment';
 import { NotificationOptions } from '../shared/notifications/models/notification-options.model';
 import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
@@ -69,7 +69,6 @@ export class SubmissionService {
   private workflowLinkPath = 'workflowitems';
   /**
    * Initialize service variables
-   * @param {GlobalConfig} EnvConfig
    * @param {NotificationsService} notificationsService
    * @param {SubmissionRestService} restService
    * @param {Router} router
@@ -108,11 +107,22 @@ export class SubmissionService {
    *
    * @param collectionId
    *    The owning collection id
+   * @param entityType
+   *    The entity type
    * @return Observable<SubmissionObject>
    *    observable of SubmissionObject
    */
-  createSubmission(collectionId?: string): Observable<SubmissionObject> {
-    return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, null, collectionId).pipe(
+  createSubmission(collectionId?: string, entityType?: string,): Observable<SubmissionObject> {
+    const paramsObj = Object.create({});
+
+    if (isNotEmpty(entityType)) {
+      paramsObj.entityType = entityType;
+    }
+
+    const params = new HttpParams({fromObject: paramsObj});
+    const options: HttpOptions = Object.create({});
+    options.params = params;
+    return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, options, collectionId).pipe(
       map((workspaceitem: SubmissionObject[]) => workspaceitem[0] as SubmissionObject),
       catchError(() => observableOf({} as SubmissionObject)))
   }
@@ -191,8 +201,9 @@ export class SubmissionService {
     selfUrl: string,
     submissionDefinition: SubmissionDefinitionsModel,
     sections: WorkspaceitemSectionsObject,
+    item: Item,
     errors: SubmissionSectionError[]) {
-    this.store.dispatch(new InitSubmissionFormAction(collectionId, submissionId, selfUrl, submissionDefinition, sections, errors));
+    this.store.dispatch(new InitSubmissionFormAction(collectionId, submissionId, selfUrl, submissionDefinition, sections, item, errors));
   }
 
   /**
@@ -557,9 +568,10 @@ export class SubmissionService {
     submissionId: string,
     selfUrl: string,
     submissionDefinition: SubmissionDefinitionsModel,
-    sections: WorkspaceitemSectionsObject
+    sections: WorkspaceitemSectionsObject,
+    item: Item
   ) {
-    this.store.dispatch(new ResetSubmissionFormAction(collectionId, submissionId, selfUrl, sections, submissionDefinition));
+    this.store.dispatch(new ResetSubmissionFormAction(collectionId, submissionId, selfUrl, sections, submissionDefinition, item));
   }
 
   /**

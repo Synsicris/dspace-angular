@@ -63,7 +63,8 @@ export const TASK_TITLE_INPUT_CONFIG: DsDynamicInputModelConfig = {
   },
   errorMessages: {
     required: '{{ label }} is required'
-  }
+  },
+  hasSelectableMetadata: false,
 };
 
 export const TASK_DESCRIPTION_CONFIG: DsDynamicTextAreaModelConfig = {
@@ -80,5 +81,6 @@ export const TASK_DESCRIPTION_CONFIG: DsDynamicTextAreaModelConfig = {
   },
   errorMessages: {
     required: '{{ label }} is required'
-  }
+  },
+  hasSelectableMetadata: false
 };

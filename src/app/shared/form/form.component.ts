@@ -2,19 +2,18 @@ import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 
-import {
-  DynamicFormArrayModel,
-  DynamicFormControlEvent,
-  DynamicFormControlModel,
-  DynamicFormGroupModel,
-  DynamicFormLayout,
-} from '@ng-dynamic-forms/core';
+import { DynamicFormArrayModel, DynamicFormControlEvent, DynamicFormControlModel, DynamicFormGroupModel, DynamicFormLayout, } from '@ng-dynamic-forms/core';
 import { findIndex } from 'lodash';
 import { FormBuilderService } from './builder/form-builder.service';
 import { Observable, Subscription } from 'rxjs';
 import { hasValue, isNotEmpty, isNotNull, isNull } from '../empty.util';
 import { FormService } from './form.service';
 import { FormEntry, FormError } from './form.reducer';
+import { DYNAMIC_FORM_CONTROL_TYPE_SCROLLABLE_DROPDOWN } from './builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.model';
+import { QUALDROP_GROUP_SUFFIX } from './builder/ds-dynamic-form-ui/models/ds-dynamic-qualdrop.model';
+import { DYNAMIC_FORM_CONTROL_TYPE_ONEBOX } from './builder/ds-dynamic-form-ui/models/onebox/dynamic-onebox.model';
+
+const QUALDROP_GROUP_REGEX = new RegExp(`${QUALDROP_GROUP_SUFFIX}_\\d+$`);
 
 /**
  * The default form component.
