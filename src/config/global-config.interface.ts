@@ -11,6 +11,7 @@ import { ItemPageConfig } from './item-page-config.interface';
 import { CollectionPageConfig } from './collection-page-config.interface';
 import { Theme } from './theme.inferface';
 import {AuthConfig} from './auth-config.interfaces';
+import { LayoutConfig } from './layout-config.interfaces';
 import { ImpactPathwayConfig } from './impact-pathway-config.interface';
 import { WorkingPlanConfig } from './working-plan-config.interface';
 import { ProjectsConfig } from './projects-config.interface';
@@ -34,6 +35,7 @@ export interface GlobalConfig extends Config {
   item: ItemPageConfig;
   collection: CollectionPageConfig;
   theme: Theme;
+  layout: LayoutConfig;
   impactPathway: ImpactPathwayConfig;
   workingPlan: WorkingPlanConfig;
   projects: ProjectsConfig
