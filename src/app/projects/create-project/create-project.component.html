@@ -1,0 +1,23 @@
+<div>
+  <div class="modal-header">{{'project.create.head' | translate}}
+    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="(processing$ | async)">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="create();" [formGroup]="createForm" >
+      <input type="search"
+             class="form-control"
+             formControlName="name"
+             (click)="$event.stopPropagation();"
+             placeholder="{{'project.create.placeholder' | translate }}"
+             dsAutoFocus>
+      <button class="btn btn-success btn-lg btn-block mt-3"
+              [disabled]="!createForm.valid || (processing$ | async)"
+              type="submit">
+        <span *ngIf="processing$ | async"><i class='fas fa-circle-notch fa-spin'></i> {{'submission.workflow.tasks.generic.processing' | translate}}</span>
+        <span *ngIf="!(processing$ | async)">{{'project.create.btn' | translate}}</span>
+      </button>
+    </form>
+  </div>
+</div>

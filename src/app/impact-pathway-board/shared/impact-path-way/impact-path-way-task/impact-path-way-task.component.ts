@@ -18,6 +18,7 @@ import { MatCheckboxChange } from '@angular/material';
 })
 export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
+  @Input() public projectId: string;
   @Input() public impactPathwayId: string;
   @Input() public impactPathwayStepId: string;
   @Input() public impactPathwayStepType: string;
@@ -176,7 +177,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   }
 
   public showObjectives() {
-    this.router.navigate(['objectives', this.data.parentId, 'edit'], { queryParams: { target: this.data.id } })
+    this.router.navigate(['project-overview', this.projectId, 'objectives', this.data.parentId, 'edit'], { queryParams: { target: this.data.id } })
   }
 
   private isTaskSelectable() {

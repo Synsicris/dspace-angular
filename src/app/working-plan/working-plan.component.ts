@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -13,6 +13,9 @@ import { WorkingPlanStateService } from '../core/working-plan/working-plan-state
   styleUrls: ['./working-plan.component.scss'],
 })
 export class WorkingPlanComponent {
+
+  @Input() public projectId: string;
+
   constructor(
     private workingPlanService: WorkingPlanService,
     private workingPlanStateService: WorkingPlanStateService
@@ -23,7 +26,7 @@ export class WorkingPlanComponent {
     this.workingPlanStateService.isWorkingPlanLoaded().pipe(
       take(1)
     ).subscribe(() => {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages();
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectId);
     })
   }
 

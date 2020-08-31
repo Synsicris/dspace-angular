@@ -35,6 +35,7 @@ export class EditableTextareaComponent implements OnInit {
   @ViewChild('textarea', { static: false }) textarea: ElementRef;
 
   ngOnInit(): void {
+    this.initContent = this.initContent || ''
     this.savedContent = this.initContent;
   }
 

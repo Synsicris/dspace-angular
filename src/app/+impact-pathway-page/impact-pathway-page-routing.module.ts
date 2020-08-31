@@ -4,8 +4,9 @@ import { RouterModule } from '@angular/router';
 import { ImpactPathwayPageComponent } from './impact-pathway-page.component';
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
 import { ItemPageResolver } from '../+item-page/item-page.resolver';
-import { ProjectItemBreadcrumbResolver } from '../core/breadcrumbs/project-item-breadcrumb.resolver';
-import { ProjectDsoBreadcrumbsService } from '../core/breadcrumbs/project-dso-breadcrumbs.service';
+import { ProjectPageResolver } from '../projects/project-page.resolver';
+import { ProjectI18nBreadcrumbResolver } from '../core/breadcrumbs/project-i18n-breadcrumb.resolver';
+import { ProjectI18nBreadcrumbsService } from '../core/breadcrumbs/project-i18n-breadcrumbs.service';
 
 @NgModule({
   imports: [
@@ -22,14 +23,16 @@ import { ProjectDsoBreadcrumbsService } from '../core/breadcrumbs/project-dso-br
         },
         resolve: {
           item: ItemPageResolver,
-          breadcrumb: ProjectItemBreadcrumbResolver
+          project: ProjectPageResolver,
+          breadcrumb: ProjectI18nBreadcrumbResolver
         }
       }
     ])
   ],
   providers: [
-    ProjectItemBreadcrumbResolver,
-    ProjectDsoBreadcrumbsService
+    ProjectI18nBreadcrumbResolver,
+    ProjectI18nBreadcrumbsService,
+    ProjectPageResolver
   ]
 })
 export class ImpactPathwayPageRoutingModule {

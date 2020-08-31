@@ -11,7 +11,6 @@ import { environment } from '../../../environments/environment';
 import { SubmissionJsonPatchOperationsService } from '../submission/submission-json-patch-operations.service';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
-import { AuthorityService } from '../integration/authority.service';
 import { impactPathwayRelationsSelector } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayLink, ImpactPathwayLinks } from './impact-pathway.reducer';
@@ -35,7 +34,6 @@ import { ImpactPathwayLinksMap } from './models/impact-pathway-task-links-map';
 export class ImpactPathwayLinksService {
 
   constructor(
-    private authorityService: AuthorityService,
     private formConfigService: SubmissionFormsConfigService,
     private itemService: ItemDataService,
     private operationsBuilder: JsonPatchOperationsBuilder,

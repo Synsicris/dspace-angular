@@ -1,6 +1,7 @@
 <ds-loading class="container-fluid" *ngIf="(isLoading() | async)" message="Loading..."></ds-loading>
 <div *ngIf="!(isLoading() | async)" class="container-fluid d-flex align-items-stretch mt-3 mb-3">
   <ipw-wrapper-objectives class="wrapper"
+                          [projectId]="projectId"
                           [impactPathwayStep]="(getImpactPathwayStep() | async)"
                           [targetImpactPathwayTaskId]="(targetImpactPathwayTaskId$ | async)"></ipw-wrapper-objectives>
 </div>

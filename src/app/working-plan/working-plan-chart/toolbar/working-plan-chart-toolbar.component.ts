@@ -20,7 +20,16 @@ import { Workpackage } from '../../../core/working-plan/models/workpackage-step.
   styleUrls: ['./working-plan-chart-toolbar.component.scss']
 })
 export class WorkingPlanChartToolbarComponent implements OnInit {
-  @Input() workpackages: Observable<Workpackage[]>;
+
+  /**
+   * The current project'id
+   */
+  @Input() public projectId: string;
+
+  /**
+   * Array containing a list of Workpackage object
+   */
+  @Input() public workpackages: Observable<Workpackage[]>;
 
   workpackagesCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   chartDateView: Observable<ChartDateViewType>;
@@ -59,6 +68,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit {
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
       this.workingPlanStateService.dispatchGenerateWorkpackage(
+        this.projectId,
         metadata,
         this.workpackagesCount.value.toString().padStart(3, '0')
       )

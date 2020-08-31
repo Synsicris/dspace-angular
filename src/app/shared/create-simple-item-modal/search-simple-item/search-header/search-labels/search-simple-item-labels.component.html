@@ -1,7 +1,7 @@
 <div class="row p-3">
     <div class="labels">
-        <ng-container *ngFor="let filterBox of (filterBoxList | async)"><!--Do not remove this to prevent uneven spacing
-        --><button *ngFor="let filterEntry of filterBox.appliedFilterBoxEntries; let i = index"
+        <ng-container *ngFor="let filterBox of (filterBoxList | async); trackBy: trackUpdate;"><!--Do not remove this to prevent uneven spacing
+        --><button *ngFor="let filterEntry of filterBox.appliedFilterBoxEntries; let i = index; trackBy: trackUpdate"
                    class="btn badge badge-primary  mr-1 mb-1"
                    (click)="remove(filterBox, i)">{{ filterBox.filterName | titlecase}}: {{filterEntry.label}}
           <span> ×</span></button><!--Do not remove this to prevent uneven spacing

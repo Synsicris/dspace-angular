@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-
 import { NgbDropdown, NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { findIndex, uniqueId } from 'lodash';
 
@@ -21,11 +20,17 @@ export enum FilterBoxType {
   filter = 'filter',
 }
 
+/**
+ * Interface representing a filter box entry
+ */
 export interface FilterBoxEntry {
   value: string;
   label: string;
 }
 
+/**
+ * Interface representing a filter box
+ */
 export interface FilterBox {
   filterName: string;
   filterType: FilterBoxType;
@@ -41,8 +46,19 @@ export interface FilterBox {
 })
 export class SearchSimpleItemFilterBoxComponent implements OnChanges, OnInit {
 
+  /**
+   * The {@link FilterBox} object
+   */
   @Input() filterBox: FilterBox;
+
+  /**
+   * The list of facet values
+   */
   @Input() filterFacetValues: FacetValue[];
+
+  /**
+   * The list of applied facet value
+   */
   @Input() appliedFilterBoxEntries: FilterBoxEntry[];
 
   /**
@@ -51,14 +67,25 @@ export class SearchSimpleItemFilterBoxComponent implements OnChanges, OnInit {
    */
   @Output() filterChange: EventEmitter<FilterBox> = new EventEmitter();
 
+  /**
+   * The unique filter's id
+   */
   public filterId: string = uniqueId();
+
+  /**
+   * The filter's name
+   */
   public filterName: string;
+
+  /**
+   * The list of facet values used internally in the component
+   */
   public innerFilterFacetValues: FacetValue[];
 
   private selectedFilterBoxEntries: FilterBoxEntry[] = [];
 
   constructor(private dropdownConfig: NgbDropdownConfig) {
-    // customize default values of dropdowns used by this component tree
+    // customize default values of dropdowns used by this component
     dropdownConfig.autoClose = false;
   }
 
@@ -113,6 +140,13 @@ export class SearchSimpleItemFilterBoxComponent implements OnChanges, OnInit {
     });
 
     return params[this.filterBox.filterConfig.paramName];
+  }
+
+  /**
+   * Prevent unnecessary rendering
+   */
+  trackUpdate(index, item: any) {
+    return item
   }
 
 }

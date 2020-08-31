@@ -9,17 +9,27 @@ import {
   DynamicFormControlModel
 } from '@ng-dynamic-forms/core';
 
-import { isNotEmpty, isNotNull, isNotUndefined, isNull, isUndefined } from '../../../shared/empty.util';
+import {
+  hasNoValue,
+  hasValue,
+  isNotEmpty,
+  isNotNull,
+  isNotUndefined,
+  isNull,
+  isUndefined
+} from '../../../shared/empty.util';
 import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { FormFieldPreviousValueObject } from '../../../shared/form/builder/models/form-field-previous-value-object';
 import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
 import { FormFieldLanguageValueObject } from '../../../shared/form/builder/models/form-field-language-value.model';
 import { DsDynamicInputModel } from '../../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-input.model';
-import { AuthorityEntry } from '../../../core/integration/models/authority-entry.model';
+import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { FormBuilderService } from '../../../shared/form/builder/form-builder.service';
 import { FormFieldMetadataValueObject } from '../../../shared/form/builder/models/form-field-metadata-value.model';
 import { DynamicQualdropModel } from '../../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-qualdrop.model';
 import { DynamicRelationGroupModel } from '../../../shared/form/builder/ds-dynamic-form-ui/models/relation-group/dynamic-relation-group.model';
+import { VocabularyEntryDetail } from '../../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
+import { deepClone } from 'fast-json-patch';
 import { dateToString, isNgbDateStruct } from '../../../shared/date.util';
 
 /**
@@ -61,6 +71,9 @@ export class SectionFormOperationsService {
         break;
       case 'change':
         this.dispatchOperationsFromChangeEvent(pathCombiner, event, previousValue, hasStoredValue);
+        break;
+      case 'add':
+        this.dispatchOperationsFromAddEvent(pathCombiner, event);
         break;
       default:
         break;
@@ -158,7 +171,7 @@ export class SectionFormOperationsService {
    *    the field path
    */
   public getQualdropItemPathFromEvent(event: DynamicFormControlEvent): string {
-    const arrayIndex = this.getArrayIndexFromEvent(event);
+    const fieldIndex = this.getArrayIndexFromEvent(event);
     const metadataValueMap = new Map();
     let path = null;
 
@@ -173,9 +186,8 @@ export class SectionFormOperationsService {
         metadataValueList.push(groupModel.value);
         metadataValueMap.set(groupModel.qualdropId, metadataValueList);
       }
-      if (index === arrayIndex) {
-        const fieldIndex = (metadataValueMap.get(groupModel.qualdropId)) ? (metadataValueMap.get(groupModel.qualdropId).length - 1) : 0;
-        path = groupModel.qualdropId + '/' + fieldIndex;
+      if (index === fieldIndex) {
+        path = groupModel.qualdropId + '/' + (metadataValueList.length - 1)
       }
     });
 
@@ -223,12 +235,12 @@ export class SectionFormOperationsService {
       if ((event.model as DsDynamicInputModel).hasAuthority) {
         if (Array.isArray(value)) {
           value.forEach((authority, index) => {
-            authority = Object.assign(new AuthorityEntry(), authority, { language });
+            authority = Object.assign(new VocabularyEntry(), authority, { language });
             value[index] = authority;
           });
           fieldValue = value;
         } else {
-          fieldValue = Object.assign(new AuthorityEntry(), value, { language });
+          fieldValue = Object.assign(new VocabularyEntry(), value, { language });
         }
       } else {
         // Language without Authority (input, textArea)
@@ -236,7 +248,8 @@ export class SectionFormOperationsService {
       }
     } else if (isNgbDateStruct(value)) {
       fieldValue = new FormFieldMetadataValueObject(dateToString(value))
-    } else if (value instanceof FormFieldLanguageValueObject || value instanceof AuthorityEntry || isObject(value)) {
+    } else if (value instanceof FormFieldLanguageValueObject || value instanceof VocabularyEntry
+      || value instanceof VocabularyEntryDetail || isObject(value)) {
       fieldValue = value;
     } else {
       fieldValue = new FormFieldMetadataValueObject(value);
@@ -291,6 +304,42 @@ export class SectionFormOperationsService {
   }
 
   /**
+   * Handle form add operations
+   *
+   * @param pathCombiner
+   *    the [[JsonPatchOperationPathCombiner]] object for the specified operation
+   * @param event
+   *    the [[DynamicFormControlEvent]] for the specified operation
+   */
+  protected dispatchOperationsFromAddEvent(
+    pathCombiner: JsonPatchOperationPathCombiner,
+    event: DynamicFormControlEvent
+  ): void {
+    const path = this.getFieldPathSegmentedFromChangeEvent(event);
+    const value = deepClone(this.getFieldValueFromChangeEvent(event));
+    if (isNotEmpty(value)) {
+      value.place = this.getArrayIndexFromEvent(event);
+      if (hasValue(event.group) && hasValue(event.group.value)) {
+        const valuesInGroup = event.group.value
+          .map((g) => Object.values(g))
+          .reduce((accumulator, currentValue) => accumulator.concat(currentValue))
+          .filter((v) => isNotEmpty(v));
+        if (valuesInGroup.length === 1) {
+          // The first add for a field needs to be a different PATCH operation
+          // for some reason
+          this.operationsBuilder.add(
+            pathCombiner.getPath([path]),
+            [value], false);
+        } else {
+          this.operationsBuilder.add(
+            pathCombiner.getPath([path, '-']),
+            value, false);
+        }
+      }
+    }
+  }
+
+  /**
    * Handle form change operations
    *
    * @param pathCombiner
@@ -316,14 +365,29 @@ export class SectionFormOperationsService {
     } else if (this.formBuilder.isRelationGroup(event.model)) {
       // It's a relation model
       this.dispatchOperationsFromMap(this.getValueMap(value), pathCombiner, event, previousValue);
-    } else if (this.formBuilder.hasArrayGroupValue(event.model)) {
+    } else if (this.formBuilder.hasArrayGroupValue(event.model) && hasNoValue((event.model as any).relationshipConfig)) {
       // Model has as value an array, so dispatch an add operation with entire block of values
       this.operationsBuilder.add(
         pathCombiner.getPath(segmentedPath),
         value, true);
     } else if (previousValue.isPathEqual(this.formBuilder.getPath(event.model)) || hasStoredValue) {
       // Here model has a previous value changed or stored in the server
-      if (!value.hasValue()) {
+      if (hasValue(event.$event) && hasValue(event.$event.previousIndex)) {
+        if (event.$event.previousIndex < 0) {
+          this.operationsBuilder.add(
+            pathCombiner.getPath(segmentedPath),
+            value, true);
+        } else {
+          const moveTo = pathCombiner.getPath(path);
+          const moveFrom = pathCombiner.getPath(segmentedPath + '/' + event.$event.previousIndex);
+          if (isNotEmpty(moveFrom.path) && isNotEmpty(moveTo.path) && moveFrom.path !== moveTo.path) {
+            this.operationsBuilder.move(
+              moveTo,
+              moveFrom.path
+            )
+          }
+        }
+      } else if (!value.hasValue()) {
         // New value is empty, so dispatch a remove operation
         if (this.getArrayIndexFromEvent(event) === 0) {
           this.operationsBuilder.remove(pathCombiner.getPath(segmentedPath));
@@ -337,22 +401,13 @@ export class SectionFormOperationsService {
           value);
       }
       previousValue.delete();
-    } else if (value.hasValue()) {
-      // Here model has no previous value but a new one
-      if (isUndefined(this.getArrayIndexFromEvent(event))
-        || this.getArrayIndexFromEvent(event) === 0) {
+    } else if (value.hasValue() && (isUndefined(this.getArrayIndexFromEvent(event))
+        || this.getArrayIndexFromEvent(event) === 0)) {
         // Model is single field or is part of an array model but is the first item,
         // so dispatch an add operation that initialize the values of a specific metadata
         this.operationsBuilder.add(
           pathCombiner.getPath(segmentedPath),
           value, true);
-      } else {
-        // Model is part of an array model but is not the first item,
-        // so dispatch an add operation that add a value to an existent metadata
-        this.operationsBuilder.add(
-          pathCombiner.getPath(path),
-          value);
-      }
     }
   }
 

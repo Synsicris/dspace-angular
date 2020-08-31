@@ -13,6 +13,7 @@ import { ImpactPathwayService } from '../../../core/impact-pathway/impact-pathwa
 })
 export class ObjectiveComponent {
 
+  @Input() public projectId: string;
   @Input() public impactPathwayStep: ImpactPathwayStep;
   @Input() public impactPathwayTask: ImpactPathwayTask;
   @Input() public targetImpactPathwayTaskId: string;
