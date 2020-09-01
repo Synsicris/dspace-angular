@@ -10,7 +10,7 @@ import { ProjectDsoBreadcrumbsService } from './project-dso-breadcrumbs.service'
 import { Community } from '../shared/community.model';
 import { CommunityDataService } from '../data/community-data.service';
 import { BreadcrumbConfig } from '../../breadcrumbs/breadcrumb/breadcrumb-config.model';
-import { getRemoteDataPayload, getSucceededRemoteData } from '../shared/operators';
+import { getFinishedRemoteData, getRemoteDataPayload } from '../shared/operators';
 
 /**
  * The class that resolves the BreadcrumbConfig object for a Project
@@ -39,7 +39,7 @@ export class ProjectBreadcrumbResolver extends DSOBreadcrumbResolver<Community> 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BreadcrumbConfig<Community>> {
     const uuid = route.params.projectId;
     return this.dataService.findById(uuid, ...this.followLinks).pipe(
-      getSucceededRemoteData(),
+      getFinishedRemoteData(),
       getRemoteDataPayload(),
       map((object: Community) => {
         const fullPath = state.url;

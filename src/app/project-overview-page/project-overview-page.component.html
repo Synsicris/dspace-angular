@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="(projectRD$ | async).hasSucceeded" class="container">
   <header class="comcol-header border-bottom mb-4 pb-4">
     <ds-comcol-page-header
       [name]="('project-overview.page.project.title' | translate ) + (getProjectName() | async)">

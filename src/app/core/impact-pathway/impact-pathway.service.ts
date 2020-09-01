@@ -500,7 +500,7 @@ export class ImpactPathwayService {
       filters: filters,
       pagination: pagination,
       sort: sort,
-      dsoType: DSpaceObjectType.ITEM
+      dsoTypes: [DSpaceObjectType.ITEM]
     });
 
     return this.searchService.search(searchOptions).pipe(
