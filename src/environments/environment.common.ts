@@ -283,7 +283,7 @@ export const environment: GlobalConfig = {
         icon: 'fa fa-university'
       }
     ]
-  }
+  },
   impactPathway: {
     impactPathwaysFormSection: 'impact_pathway_form',
     impactPathwayStepsFormSection: 'impact_pathway_step_form',
