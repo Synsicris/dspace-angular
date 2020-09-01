@@ -7,6 +7,7 @@ import { ChildHALResource } from '../shared/child-hal-resource.model';
 import { LinkService } from '../cache/builders/link.service';
 import { DSpaceObject } from '../shared/dspace-object.model';
 import { DSOBreadcrumbsService } from './dso-breadcrumbs.service';
+import { isNotEmpty } from '../../shared/empty.util';
 
 /**
  * Service to calculate DSpaceObject breadcrumbs for a single part of the route including the project path
@@ -27,7 +28,7 @@ export class ProjectDsoBreadcrumbsService extends DSOBreadcrumbsService {
    * @param url The url to use as a link for this breadcrumb
    */
   getBreadcrumbs(key: ChildHALResource & DSpaceObject, url: string): Observable<Breadcrumb[]> {
-    const label = this.dsoNameService.getName(key);
+    const label = isNotEmpty(key) ? this.dsoNameService.getName(key) : '';
     const projectCrumb = new Breadcrumb(label, url);
     return observableOf([projectCrumb])
   }
