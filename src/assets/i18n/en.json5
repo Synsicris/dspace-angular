@@ -1052,8 +1052,6 @@
 
   "dso-selector.export-metadata.dspaceobject.head": "Export metadata from",
 
-  "dso-selector.export-metadata.notValidDSO": "You can only export metadata for collections and communities",
-
   "dso-selector.no-results": "No {{ type }} found",
 
   "dso-selector.placeholder": "Search for a {{ type }}",
@@ -3850,6 +3848,8 @@
   "relation.rp.researchoutputs.search.results.head": "Related Publications",
 
   "relation.rp.projects.search.results.head": "Related Projects",
+
+  "layout.i18n.link.default": "link",
 
 
 

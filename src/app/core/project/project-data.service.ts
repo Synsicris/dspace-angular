@@ -177,7 +177,7 @@ export class ProjectDataService extends CommunityDataService {
     const searchOptions = new PaginatedSearchOptions({
       configuration: 'default',
       query: 'search.resourceid:' + id,
-      dsoType: DSpaceObjectType.COMMUNITY,
+      dsoTypes: [DSpaceObjectType.COMMUNITY],
       pagination: pagination,
       sort: sort
     });

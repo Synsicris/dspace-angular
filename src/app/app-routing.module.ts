@@ -88,7 +88,7 @@ export function getUnauthorizedPath() {
   imports: [
     RouterModule.forRoot([
         { path: '', redirectTo: '/coordinator-overview', pathMatch: 'full' },
-      { path: 'reload/:rnd', redirectTo: '/home', pathMatch: 'full' },
+      { path: 'reload/:rnd', redirectTo: '/coordinator-overview', pathMatch: 'full' },
       // { path: 'home', loadChildren: './+home-page/home-page.module#HomePageModule', data: { showBreadcrumbs: false } },
         { path: 'home', redirectTo: '/coordinator-overview', pathMatch: 'full' },
       { path: 'community-list', loadChildren: './community-list-page/community-list-page.module#CommunityListPageModule' },
