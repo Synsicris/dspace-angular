@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable, of as observableOf } from 'rxjs';
-import { catchError, distinctUntilChanged, filter, flatMap, map, switchMap, take } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, filter, flatMap, map, switchMap, take, tap } from 'rxjs/operators';
 import { ReplaceOperation } from 'fast-json-patch';
 
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
@@ -198,6 +198,7 @@ export class ProjectDataService extends CommunityDataService {
       )),
       filter((community: Community) => isNotEmpty(community)),
       take(1),
+      tap(() => this.requestService.removeByHrefSubstring(id)),
       distinctUntilChanged()
     );
   }
