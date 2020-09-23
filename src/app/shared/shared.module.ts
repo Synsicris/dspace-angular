@@ -512,6 +512,7 @@ const ENTRY_COMPONENTS = [
   ClaimedTaskActionsRejectComponent,
   ClaimedTaskActionsReturnToPoolComponent,
   ClaimedTaskActionsEditMetadataComponent,
+  CollectionDropdownComponent,
   FileDownloadLinkComponent,
   CurationFormComponent,
   ExportMetadataSelectorComponent,

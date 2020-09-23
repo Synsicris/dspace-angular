@@ -6,12 +6,6 @@
   color: rgba(0, 0, 0, 0.5);
 }
 
-:host ::ng-deep a, a:hover, a:focus {
-  color: inherit;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-
 :host ::ng-deep .line {
   width: 100%;
   height: 1px;
@@ -28,6 +22,9 @@
   perspective: 1500px;
 }
 
+:host ::ng-deep .wrapper-close {
+  perspective: none !important;
+}
 
 :host ::ng-deep #sidebar {
   min-width: 250px;
@@ -38,7 +35,11 @@
 
 :host ::ng-deep #sidebar.active {
   margin-left: -250px;
-  transform: rotateY(100deg);
+  transform: rotateY(90deg);
+}
+
+:host ::ng-deep #sidebar.active::after {
+  visibility: hidden;
 }
 
 :host ::ng-deep #sidebar .sidebar-header {
@@ -106,7 +107,6 @@
 
 :host ::ng-deep #content {
   width: 100%;
-  padding: 20px;
   min-height: 100vh;
   transition: all 0.3s;
 }

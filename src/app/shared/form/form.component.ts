@@ -156,8 +156,8 @@ export class FormComponent implements OnDestroy, OnInit {
     this.formValid = this.getFormGroupValidStatus();
 
     this.subs.push(this.formGroup.statusChanges.pipe(
-      filter((currentStatus) => this.formValid !== this.getFormGroupValidStatus()))
-      .subscribe((currentStatus) => {
+      filter(() => this.formValid !== this.getFormGroupValidStatus()))
+      .subscribe(() => {
         this.formService.setStatusChanged(this.formId, this.getFormGroupValidStatus());
         this.formValid = this.getFormGroupValidStatus();
       }));
