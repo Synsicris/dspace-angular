@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { CoordinatorPageComponent } from './coordinator-page.component';
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
+import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end-user-agreement-current-user.guard';
 
 /**
  * RouterModule to help navigate to the page with the community list tree
@@ -11,7 +12,7 @@ import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
   imports: [
     RouterModule.forChild([
       {
-        canActivate: [AuthenticatedGuard],
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
         path: '',
         component: CoordinatorPageComponent,
         pathMatch: 'full',
