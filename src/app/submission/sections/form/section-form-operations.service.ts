@@ -72,9 +72,6 @@ export class SectionFormOperationsService {
       case 'change':
         this.dispatchOperationsFromChangeEvent(pathCombiner, event, previousValue, hasStoredValue);
         break;
-      case 'add':
-        this.dispatchOperationsFromAddEvent(pathCombiner, event);
-        break;
       default:
         break;
     }
@@ -365,29 +362,14 @@ export class SectionFormOperationsService {
     } else if (this.formBuilder.isRelationGroup(event.model)) {
       // It's a relation model
       this.dispatchOperationsFromMap(this.getValueMap(value), pathCombiner, event, previousValue);
-    } else if (this.formBuilder.hasArrayGroupValue(event.model) && hasNoValue((event.model as any).relationshipConfig)) {
+    } else if (this.formBuilder.hasArrayGroupValue(event.model)) {
       // Model has as value an array, so dispatch an add operation with entire block of values
       this.operationsBuilder.add(
         pathCombiner.getPath(segmentedPath),
         value, true);
     } else if (previousValue.isPathEqual(this.formBuilder.getPath(event.model)) || hasStoredValue) {
       // Here model has a previous value changed or stored in the server
-      if (hasValue(event.$event) && hasValue(event.$event.previousIndex)) {
-        if (event.$event.previousIndex < 0) {
-          this.operationsBuilder.add(
-            pathCombiner.getPath(segmentedPath),
-            value, true);
-        } else {
-          const moveTo = pathCombiner.getPath(path);
-          const moveFrom = pathCombiner.getPath(segmentedPath + '/' + event.$event.previousIndex);
-          if (isNotEmpty(moveFrom.path) && isNotEmpty(moveTo.path) && moveFrom.path !== moveTo.path) {
-            this.operationsBuilder.move(
-              moveTo,
-              moveFrom.path
-            )
-          }
-        }
-      } else if (!value.hasValue()) {
+      if (!value.hasValue()) {
         // New value is empty, so dispatch a remove operation
         if (this.getArrayIndexFromEvent(event) === 0) {
           this.operationsBuilder.remove(pathCombiner.getPath(segmentedPath));
@@ -401,13 +383,22 @@ export class SectionFormOperationsService {
           value);
       }
       previousValue.delete();
-    } else if (value.hasValue() && (isUndefined(this.getArrayIndexFromEvent(event))
-        || this.getArrayIndexFromEvent(event) === 0)) {
+    } else if (value.hasValue()) {
+      // Here model has no previous value but a new one
+      if (isUndefined(this.getArrayIndexFromEvent(event))
+        || this.getArrayIndexFromEvent(event) === 0) {
         // Model is single field or is part of an array model but is the first item,
         // so dispatch an add operation that initialize the values of a specific metadata
         this.operationsBuilder.add(
           pathCombiner.getPath(segmentedPath),
           value, true);
+      } else {
+        // Model is part of an array model but is not the first item,
+        // so dispatch an add operation that add a value to an existent metadata
+        this.operationsBuilder.add(
+          pathCombiner.getPath(path),
+          value);
+      }
     }
   }
 

@@ -343,7 +343,7 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes && !this.isRelationship && hasValue(this.group.get(this.model.id))) {
+    if (changes) {
       super.ngOnChanges(changes);
       if (this.model && this.model.placeholder) {
         this.model.placeholder = this.translateService.instant(this.model.placeholder);

@@ -256,7 +256,7 @@ export class FormBuilderService extends DynamicFormService {
   }
 
   hasArrayGroupValue(model: DynamicFormControlModel): boolean {
-    return model && (this.isListGroup(model) || model.type === DYNAMIC_FORM_CONTROL_TYPE_TAG || model.type === DYNAMIC_FORM_CONTROL_TYPE_ARRAY);
+    return model && (this.isListGroup(model) || model.type === DYNAMIC_FORM_CONTROL_TYPE_TAG);
   }
 
   hasMappedGroupValue(model: DynamicFormControlModel): boolean {
@@ -322,7 +322,7 @@ export class FormBuilderService extends DynamicFormService {
     let tempModel: DynamicFormControlModel;
 
     if (this.isArrayGroup(model as DynamicFormControlModel)) {
-      return hasValue((model as any).metadataKey) ? (model as any).metadataKey : model.index.toString();
+      return model.index.toString();
     } else if (this.isModelInCustomGroup(model as DynamicFormControlModel)) {
       tempModel = (model as any).parent;
     } else {

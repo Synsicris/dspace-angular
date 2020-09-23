@@ -69,22 +69,16 @@ export abstract class FieldParser {
             model = this.modelFactory();
             arrayCounter++;
           } else {
-            const fieldArrayOfValueLength = this.getInitValueCount(arrayCounter - 1);
+            const fieldArrayOfValueLenght = this.getInitValueCount(arrayCounter - 1);
             let fieldValue = null;
-            if (fieldArrayOfValueLength > 0) {
-              if (fieldArrayCounter === 0) {
-                fieldValue = '';
-              } else {
-                fieldValue = this.getInitFieldValue(arrayCounter - 1, fieldArrayCounter - 1);
-              }
-              fieldArrayCounter++;
-              if (fieldArrayCounter === fieldArrayOfValueLength + 1) {
+            if (fieldArrayOfValueLenght > 0) {
+              fieldValue = this.getInitFieldValue(arrayCounter - 1, fieldArrayCounter++);
+              if (fieldArrayCounter === fieldArrayOfValueLenght) {
                 fieldArrayCounter = 0;
                 arrayCounter++;
               }
             }
             model = this.modelFactory(fieldValue, false);
-            model.id = `${model.id}_${fieldArrayCounter}`;
           }
           setLayout(model, 'element', 'host', 'col');
           if (model.hasLanguages || isNotEmpty(model.relationship)) {
@@ -217,10 +211,9 @@ export abstract class FieldParser {
   }
 
   protected getInitArrayIndex() {
-    let fieldCount = 0;
     const fieldIds: any = this.getAllFieldIds();
     if (isNotEmpty(this.initFormValues) && isNotNull(fieldIds) && fieldIds.length === 1 && this.initFormValues.hasOwnProperty(fieldIds)) {
-      fieldCount = this.initFormValues[fieldIds].filter((value) => hasValue(value) && hasValue(value.value)).length;
+      return this.initFormValues[fieldIds].length;
     } else if (isNotEmpty(this.initFormValues) && isNotNull(fieldIds) && fieldIds.length > 1) {
       let counter = 0;
       fieldIds.forEach((id) => {
@@ -228,9 +221,10 @@ export abstract class FieldParser {
           counter = counter + this.initFormValues[id].length;
         }
       });
-      fieldCount = counter;
+      return (counter === 0) ? 1 : counter;
+    } else {
+      return 1;
     }
-    return (fieldCount === 0) ? 1 : fieldCount + 1
   }
 
   protected getFieldId(): string {
