@@ -178,6 +178,7 @@ import { ReloadGuard } from './reload/reload.guard';
 import { EndUserAgreementCurrentUserGuard } from './end-user-agreement/end-user-agreement-current-user.guard';
 import { EndUserAgreementCookieGuard } from './end-user-agreement/end-user-agreement-cookie.guard';
 import { EndUserAgreementService } from './end-user-agreement/end-user-agreement.service';
+import { SiteRegisterGuard } from './data/feature-authorization/feature-authorization-guard/site-register.guard';
 import { SearchcomponentService } from './layout/searchcomponent.service';
 import { SearchComponent } from './layout/models/search-component.model';
 import { ResearcherProfileService } from './profile/researcher-profile.service';
@@ -187,6 +188,8 @@ import { Section } from './layout/models/section.model';
 import { SearchConfigResponseParsingService } from './data/search-config-response-parsing.service';
 import { OrcidQueueService } from './orcid/orcid-queue.service';
 import { OrcidQueue } from './orcid/model/orcid-queue.model';
+import { OrcidHistoryService } from './orcid/orcid-history.service';
+import { OrcidHistory } from './orcid/model/orcid-history.model';
 import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
 import { ObjectiveService } from './impact-pathway/objective.service';
 import { ImpactPathwayLinksService } from './impact-pathway/impact-pathway-links.service';
@@ -319,6 +322,7 @@ const PROVIDERS = [
   FeatureDataService,
   AuthorizationDataService,
   SiteAdministratorGuard,
+  SiteRegisterGuard,
   MetadataSchemaDataService,
   MetadataFieldDataService,
   TokenResponseParsingService,
@@ -351,6 +355,7 @@ const PROVIDERS = [
   ResearcherProfileService,
   SectionDataService,
   OrcidQueueService,
+  OrcidHistoryService,
   ResearcherProfileService,
   SearchcomponentService,
   ItemAuthorityRelationService,
@@ -419,6 +424,7 @@ export const models =
     SearchComponent,
     ResearcherProfile,
     OrcidQueue,
+    OrcidHistory,
     Section
   ];
 
