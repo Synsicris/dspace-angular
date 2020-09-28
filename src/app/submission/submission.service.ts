@@ -551,7 +551,7 @@ export class SubmissionService {
         () => this.routeService.getPreviousUrl().pipe(
           take(1),
           tap((previousUrl) => {
-            if (isEmpty(previousUrl) || !previousUrl.startsWith('/mydspace')) {
+            if (isEmpty(previousUrl)) {
               this.router.navigate(['/mydspace']);
             } else {
               this.router.navigateByUrl(previousUrl);

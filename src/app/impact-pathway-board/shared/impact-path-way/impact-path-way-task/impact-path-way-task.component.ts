@@ -10,6 +10,9 @@ import { hasValue, isNotEmpty, isNotUndefined } from '../../../../shared/empty.u
 import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayLinksService } from '../../../../core/impact-pathway/impact-pathway-links.service';
 import { MatCheckboxChange } from '@angular/material';
+import { WorkspaceitemDataService } from '../../../../core/submission/workspaceitem-data.service';
+import { getFirstSucceededRemoteDataPayload } from '../../../../core/shared/operators';
+import { WorkspaceItem } from '../../../../core/submission/models/workspaceitem.model';
 
 @Component({
   selector: 'ipw-impact-path-way-task',
@@ -33,6 +36,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isRedirectingToEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public taskHTMLDivId: string;
   public taskType$: Observable<string>;
 
@@ -46,7 +50,8 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   constructor(
     private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
-    private router: Router
+    private router: Router,
+    private workspaceItemService: WorkspaceitemDataService
   ) {
   }
 
@@ -140,6 +145,17 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
     } else {
       this.impactPathwayLinksService.dispatchRemoveRelation(this.taskHTMLDivId, this.data.id)
     }
+  }
+
+  public navigateToSubmissionPage(): void {
+    this.isRedirectingToEdit$.next(true);
+    this.workspaceItemService.findByItem(this.data.id).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((taskWsi: WorkspaceItem) => taskWsi.id)
+    ).subscribe((workspaceItemId: string) => {
+      this.router.navigate(['workspaceitems', workspaceItemId, 'edit']);
+      this.isRedirectingToEdit$.next(false);
+    })
   }
 
   public setEditRelations(isTwoWayRelation: boolean): void {

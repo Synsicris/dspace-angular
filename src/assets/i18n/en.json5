@@ -1386,15 +1386,21 @@
 
   "impact-pathway.breadcrumbs" : "Impact pathway",
 
+  "impact-pathway.create.bidirectional-link": "Create bidirectional link",
+
   "impact-pathway.create.btn": "Create impact pathway",
 
   "impact-pathway.create.error": "There was an issue when generating the impact pathway, please try again later.",
 
   "impact-pathway.create.head": "New impact pathway",
 
+  "impact-pathway.create.outcome-link": "Create link",
+
   "impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
 
   "impact-pathway.create.success": "The impact pathway has been generated successfully.",
+
+  "impact-pathway.edit.item.title": "Edit  item",
 
   "impact-pathway.edit.page.title": "Edit impact pathway",
 
@@ -1412,7 +1418,13 @@
 
   "impact-pathway.remove.confirm.title": "Discard impact pathway",
 
+  "impact-pathway.remove.item.title": "Delete item",
+
+  "impact-pathway.remove.title": "Delete impact pathway",
+
   "impact-pathway.remove.success": "The impact pathway has been deleted successfully.",
+
+  "impact-pathway.save.link.title": "Save",
 
   "impact-pathway.step.label.step_type_1": "Background",
 
