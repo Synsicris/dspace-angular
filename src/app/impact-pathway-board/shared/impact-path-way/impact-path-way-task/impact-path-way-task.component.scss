@@ -44,3 +44,8 @@
 ::ng-deep .mat-checkbox-frame {
   border-color: white;
 }
+
+button.btn:focus {
+  outline: none;
+  box-shadow: none !important;
+}

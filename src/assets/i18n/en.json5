@@ -6,13 +6,13 @@
 
   "401.unauthorized": "unauthorized",
 
-
-
   "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page. ",
 
   "404.link.home-page": "Take me to the home page",
 
   "404.page-not-found": "page not found",
+
+
 
   "admin.curation-tasks.breadcrumbs": "System curation tasks",
 
@@ -24,6 +24,29 @@
 
   "activities_ist.breadcrumbs":  "Activities IST",
 
+
+
+  "admin.edit-user-agreement.breadcrumbs": "Edit User Agreement",
+
+  "admin.edit-user-agreement.confirm.title": "Force acceptance",
+
+  "admin.edit-user-agreement.confirm.info":"Do you want to force all users to accept the new user agreement?",
+
+  "admin.edit-user-agreement.confirm.cancel":"Cancel",
+
+  "admin.edit-user-agreement.confirm.no":"No, update only",
+
+  "admin.edit-user-agreement.confirm.yes":"Yes, update and force",
+
+  "admin.edit-user-agreement.save-button": "Save",
+
+  "admin.edit-user-agreement.header": "Edit User Agreement",
+
+  "admin.edit-user-agreement.success": "User agreement successfully updated",
+
+  "admin.edit-user-agreement.error": "An error occurred while updating the user agreement",
+
+  "admin.edit-user-agreement.title": "Edit User Agreement",
 
 
 
@@ -521,14 +544,26 @@
   "bitstream.edit.title": "Edit bitstream",
 
 
-
   "browse.comcol.by.author": "By Author",
 
   "browse.comcol.by.dateissued": "By Issue Date",
 
+  "browse.comcol.by.ouname": "By Name",
+
+  "browse.comcol.by.pjtitle": "By Title",
+
+  "browse.comcol.by.rodept": "By Department",
+
+  "browse.comcol.by.rpdept": "By Department",
+
+  "browse.comcol.by.rpname": "By Name",
+
   "browse.comcol.by.subject": "By Subject",
 
   "browse.comcol.by.title": "By Title",
+
+  "browse.comcol.by.type": "By Type",
+
 
   "browse.comcol.head": "Browse",
 
@@ -987,6 +1022,69 @@
 
   "datapackage.listelement.badge": "Data Package",
 
+  "cookies.consent.accept-all": "Accept all",
+
+  "cookies.consent.accept-selected": "Accept selected",
+
+  "cookies.consent.app.opt-out.description": "This app is loaded by default (but you can opt out)",
+
+  "cookies.consent.app.opt-out.title": "(opt-out)",
+
+  "cookies.consent.app.purpose": "purpose",
+
+  "cookies.consent.app.required.description": "This application is always required",
+
+  "cookies.consent.app.required.title": "(always required)",
+
+  "cookies.consent.update": "There were changes since your last visit, please update your consent.",
+
+  "cookies.consent.close": "Close",
+
+  "cookies.consent.decline": "Decline",
+
+  "cookies.consent.content-notice.description": "We collect and process your personal information for the following purposes: <strong>Authentication, Preferences, Acknowledgement and Statistics</strong>. <br/> To learn more, please read our {privacyPolicy}.",
+
+  "cookies.consent.content-notice.learnMore": "Customize",
+
+  "cookies.consent.content-modal.description": "Here you can see and customize the information that we collect about you.",
+
+  "cookies.consent.content-modal.privacy-policy.name": "privacy policy",
+
+  "cookies.consent.content-modal.privacy-policy.text": "To learn more, please read our {privacyPolicy}.",
+
+  "cookies.consent.content-modal.title": "Information that we collect",
+
+
+
+  "cookies.consent.app.title.authentication": "Authentication",
+
+  "cookies.consent.app.description.authentication": "Required for signing you in",
+
+
+  "cookies.consent.app.title.preferences": "Preferences",
+
+  "cookies.consent.app.description.preferences": "Required for saving your preferences",
+
+
+
+  "cookies.consent.app.title.acknowledgement": "Acknowledgement",
+
+  "cookies.consent.app.description.acknowledgement": "Required for saving your acknowledgements and consents",
+
+
+
+  "cookies.consent.app.title.google-analytics": "Google Analytics",
+
+  "cookies.consent.app.description.google-analytics": "Allows us to track statistical data",
+
+
+
+  "cookies.consent.purpose.functional": "Functional",
+
+  "cookies.consent.purpose.statistical": "Statistical",
+
+
+
   "coordinator.page.new-project": "Create new project",
 
   "coordinator.page.my-profile": "My profile",
@@ -1203,7 +1301,7 @@
 
   "explore.search-section.publications.title": "Search Research Outputs",
 
-  "explore.search-section.researcherprofiles.title": "Search Researchers",
+  "explore.search-section.researcherprofiles.title": "Search People",
 
   "explore.search-section.search-button": "Search",
 
@@ -1215,7 +1313,7 @@
 
   "explore.publications.breadcrumbs": "Research Outputs",
 
-  "explore.researcherprofiles.breadcrumbs": "Researchers",
+  "explore.researcherprofiles.breadcrumbs": "People",
 
   "explore.title": "Explore section",
 
@@ -1225,6 +1323,13 @@
   "footer.link.dspace": "DSpace software",
 
   "footer.link.duraspace": "DuraSpace",
+
+  "footer.link.cookies": "Cookie settings",
+
+  "footer.link.privacy-policy": "Privacy policy",
+
+  "footer.link.end-user-agreement":"End User Agreement",
+
 
 
   "forgot-email.form.header": "Forgot Password",
@@ -1319,7 +1424,11 @@
 
   "form.no-value": "No value entered",
 
-  "form.other-information": {},
+  "form.other-information.data-oairecerif_author_affiliation": "Affiliation",
+
+  "form.other-information.data-oairecerif_editor_affiliation": "Affiliation",
+
+  "form.other-information.not-available": "Not available",
 
   "form.remove": "Remove",
 
@@ -1347,15 +1456,21 @@
 
   "impact-pathway.breadcrumbs" : "Impact pathway",
 
+  "impact-pathway.create.bidirectional-link": "Create bidirectional link",
+
   "impact-pathway.create.btn": "Create impact pathway",
 
   "impact-pathway.create.error": "There was an issue when generating the impact pathway, please try again later.",
 
   "impact-pathway.create.head": "New impact pathway",
 
+  "impact-pathway.create.outcome-link": "Create link",
+
   "impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
 
   "impact-pathway.create.success": "The impact pathway has been generated successfully.",
+
+  "impact-pathway.edit.item.title": "Edit  item",
 
   "impact-pathway.edit.page.title": "Edit impact pathway",
 
@@ -1373,7 +1488,13 @@
 
   "impact-pathway.remove.confirm.title": "Discard impact pathway",
 
+  "impact-pathway.remove.item.title": "Delete item",
+
+  "impact-pathway.remove.title": "Delete impact pathway",
+
   "impact-pathway.remove.success": "The impact pathway has been deleted successfully.",
+
+  "impact-pathway.save.link.title": "Save",
 
   "impact-pathway.step.label.step_type_1": "Background",
 
@@ -1404,6 +1525,32 @@
   "innovationpotentials_econtech.listelement.badge": "Intended business innovations",
 
   "innovationpotentials_social.listelement.badge": "Intended social innovations/change processes",
+
+
+
+  "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
+
+  "info.end-user-agreement.accept.error": "An error occurred accepting the End User Agreement",
+
+  "info.end-user-agreement.accept.success": "Successfully updated the End User Agreement",
+
+  "info.end-user-agreement.accept.warning": "Before you can proceed, you must agree to the End User Agreement",
+
+  "info.end-user-agreement.breadcrumbs": "End User Agreement",
+
+  "info.end-user-agreement.buttons.cancel": "Cancel",
+
+  "info.end-user-agreement.buttons.save": "Save",
+
+  "info.end-user-agreement.head": "End User Agreement",
+
+  "info.end-user-agreement.title": "End User Agreement",
+
+  "info.privacy.breadcrumbs": "Privacy Statement",
+
+  "info.privacy.head": "Privacy Statement",
+
+  "info.privacy.title": "Privacy Statement",
 
 
 
@@ -1847,6 +1994,28 @@
 
   "item.page.filesection.license.bundle" : "License bundle",
 
+  "item.preview.dc.identifier.uri": "Identifier:",
+
+  "item.preview.dc.contributor.author": "Authors:",
+
+  "item.preview.dc.date.issued": "Published date:",
+
+  "item.preview.dc.description.abstract": "Abstract:",
+
+  "item.preview.dc.identifier.other": "Other identifier:",
+
+  "item.preview.dc.language.iso": "Language:",
+
+  "item.preview.dc.subject": "Subjects:",
+
+  "item.preview.dc.title": "Title:",
+
+  "item.preview.person.familyName": "Surname:",
+
+  "item.preview.person.givenName": "Name:",
+
+  "item.preview.person.identifier.orcid": "ORCID:",
+
 
   "item.select.confirm": "Confirm selected",
 
@@ -2029,7 +2198,7 @@
 
   "menu.section.explore_publications": "Research Outputs",
 
-  "menu.section.explore_researcherprofiles": "Researchers",
+  "menu.section.explore_researcherprofiles": "People",
 
   "menu.section.explore_orgunits": "Organizations",
 
@@ -2165,6 +2334,7 @@
 
   "menu.section.toggle.statistics_task": "Toggle Statistics Task section",
 
+  "menu.section.edit_user_agreement":"Edit User Agreement",
 
   "menu.section.workflow": "Administer Workflow",
 
@@ -2202,6 +2372,10 @@
   "mydspace.messages.to": "To",
 
   "mydspace.new-submission": "New submission",
+
+  "mydspace.new-submission-external": "Import metadata from external source",
+
+  "mydspace.new-submission-external-short": "Import metadata",
 
   "mydspace.results.head": "Your submissions",
 
@@ -2316,6 +2490,97 @@
   "person.page.link.full": "Show all metadata",
 
   "person.page.orcid": "ORCID",
+
+  "person.page.orcid.create": "Create an ORCID ID",
+
+  "person.page.orcid.granted-authorizations": "Granted authorizations",
+
+  "person.page.orcid.link": "Connect to ORCID ID",
+
+  "person.page.orcid.missing-authorizations": "Missing authorizations",
+
+  "person.page.orcid.missing-authorizations-message": "The following authorizations are missing:",
+
+  "person.page.orcid.no-missing-authorizations-message": "Great! This box is empty, so you have granted all access rights to use all functions offers by your institution.",
+
+  "person.page.orcid.no-orcid-message": "No ORCID iD associated yet",
+
+  "person.page.orcid.profile-preferences": "Profile preferences",
+
+  "person.page.orcid.project-preferences": "Project preferences",
+
+  "person.page.orcid.publications-preferences": "Publication preferences",
+
+  "person.page.orcid.remove-orcid-message": "If you need to remove your ORCID, please contact the repository administrator",
+
+  "person.page.orcid.save.preference.changes": "Save changes",
+
+  "person.page.orcid.sync-profile.affiliation" : "Affiliation",
+
+  "person.page.orcid.sync-profile.bibliographic" : "Bibliographic data",
+
+  "person.page.orcid.sync-profile.education" : "Education",
+
+  "person.page.orcid.sync-profile.identifiers" : "Identifiers",
+
+  "person.page.orcid.sync-projects.all" : "All projects",
+
+  "person.page.orcid.sync-projects.mine" : "My projects",
+
+  "person.page.orcid.sync-projects.my-selected" : "Selected projects",
+
+  "person.page.orcid.sync-projects.disabled" : "Disabled",
+
+  "person.page.orcid.sync-publications.all" : "All publications",
+
+  "person.page.orcid.sync-publications.mine" : "My publications",
+
+  "person.page.orcid.sync-publications.my-selected" : "Selected publications",
+
+  "person.page.orcid.sync-publications.disabled" : "Disabled",
+
+  "person.page.orcid.sync-queue.delete" : "Delete",
+
+  "person.page.orcid.sync-queue.delete.error": "The deletion of the ORCID queue record failed",
+
+  "person.page.orcid.sync-queue.delete.success": "The ORCID queue record have been deleted successfully",
+
+  "person.page.orcid.sync-queue.empty-message": "The ORCID queue registry is empty",
+
+  "person.page.orcid.sync-queue.entity-name" : "Name",
+
+  "person.page.orcid.sync-queue.send" : "Send",
+
+  "person.page.orcid.sync-queue.send.error": "The submission to ORCID failed",
+
+  "person.page.orcid.sync-queue.send.conflict-error": "The submission to ORCID failed because the resource is already present on the ORCID registry",
+
+  "person.page.orcid.sync-queue.send.not-found-error": "The submission to ORCID failed because the expected resource to be update does not exists anymore on the ORCID registry.",
+
+  "person.page.orcid.sync-queue.send.success": "The submission to ORCID was completed successfully",
+
+  "person.page.orcid.synchronization-mode": "Synchronization mode",
+
+  "person.page.orcid.synchronization-mode.batch": "Batch",
+
+  "person.page.orcid.synchronization-mode.label": "Synchronization mode",
+
+  "person.page.orcid.synchronization-mode-message": "Enable 'Manual' Synchronization mode to disable batch synchronization, so you must send your data to ORCID Registry manually",
+
+  "person.page.orcid.synchronization-settings-update.success": "The synchronization settings have been updated successfully",
+
+  "person.page.orcid.synchronization-settings-update.error": "The update of the synchronization settings failed",
+
+
+  "person.page.orcid.synchronization-mode.manual": "Manual",
+
+  "person.page.orcid.scope.authenticate": "Get your ORCID iD",
+
+  "person.page.orcid.scope.read-limited": "Read your information with visibility set to Trusted Parties",
+
+  "person.page.orcid.scope.activities-update": "Add/update your research activities",
+
+  "person.page.orcid.scope.person-update": "Add/update other information about you",
 
   "person.page.staffid": "Staff ID",
 
@@ -3079,6 +3344,43 @@
   "submission.general.save-later": "Save for later",
 
 
+  "submission.import-external.page.title": "Import metadata from an external source",
+
+  "submission.import-external.title": "Import metadata from an external source",
+
+  "submission.import-external.page.hint": "Enter a query above to find items from the web to import in to DSpace.",
+
+  "submission.import-external.back-to-my-dspace": "Back to MyDSpace",
+
+  "submission.import-external.search.placeholder": "Search the external source",
+
+  "submission.import-external.search.button": "Search",
+
+  "submission.import-external.search.button.hint": "Write some words to search",
+
+  "submission.import-external.search.source.hint": "Pick an external source",
+
+  "submission.import-external.source.loading": "Loading ...",
+
+  "submission.import-external.source.sherpaJournal": "SHERPA Journals",
+
+  "submission.import-external.source.sherpaPublisher": "SHERPA Publishers",
+
+  "submission.import-external.source.orcidV2": "ORCID",
+
+  "submission.import-external.source.pubmed": "Pubmed",
+
+  "submission.import-external.source.lcname": "Library of Congress Names",
+
+  "submission.import-external.preview.title": "Item Preview",
+
+  "submission.import-external.preview.subtitle": "The metadata below was imported from an external source. It will be pre-filled when you start the submission.",
+
+  "submission.import-external.preview.button.import": "Start submission",
+
+  "submission.import-external.preview.error.import.title": "Submission error",
+
+  "submission.import-external.preview.error.import.body": "An error occurs during the external source entry import process.",
   "submission.sections.detect-duplicate.clear-decision": "Undo",
 
   "submission.sections.detect-duplicate.clear-decision-help": "Click for clear the decision about this pontential duplicate",
@@ -3279,7 +3581,11 @@
 
   "submission.sections.describe.relationship-lookup.selection-tab.title.orcidV2": "Search Results",
 
+  "submission.sections.describe.relationship-lookup.selection-tab.title.orcidv2": "Search Results",
+
   "submission.sections.describe.relationship-lookup.selection-tab.title.lcname": "Search Results",
+
+  "submission.sections.describe.relationship-lookup.selection-tab.title.pubmed": "Search Results",
 
   "submission.sections.describe.relationship-lookup.name-variant.notification.content": "Would you like to save \"{{ value }}\" as a name variant for this person so you and others can reuse it for future submissions? If you don\'t you can still use it for this submission.",
 

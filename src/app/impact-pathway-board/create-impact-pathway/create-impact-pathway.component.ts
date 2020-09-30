@@ -7,8 +7,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import {
   COLLECTION_PARENT_PARAMETER,
-  getCollectionCreatePath
-} from '../../+collection-page/collection-page-routing.module';
+  getCollectionCreateRoute
+} from '../../+collection-page/collection-page-routing-paths';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
@@ -74,7 +74,7 @@ export class CreateImpactPathwayComponent implements OnInit {
         [COLLECTION_PARENT_PARAMETER]: dso.uuid,
       }
     };
-    this.router.navigate([getCollectionCreatePath()], navigationExtras);
+    this.router.navigate([getCollectionCreateRoute()], navigationExtras);
   }
 
 }

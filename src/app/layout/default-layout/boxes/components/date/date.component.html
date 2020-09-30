@@ -1,8 +1,8 @@
 <span class="{{containerStyle}}">
   <span
     *ngIf="hasLabel"
-    class="font-weight-bold {{labelStyle}}">
-    {{label}}
+    class="{{labelStyle}}">
+    {{label | translate}}
   </span>
   <span class="txt-value {{valueStyle}}">
     {{ metadataValue | dsDate }}

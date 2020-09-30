@@ -2,7 +2,7 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output, QueryList } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
-  DynamicFormArrayComponent,
+  DynamicFormArrayComponent, DynamicFormArrayModel,
   DynamicFormControlCustomEvent,
   DynamicFormControlEvent,
   DynamicFormControlEventType,
@@ -18,8 +18,7 @@ import { hasValue } from '../../../../../empty.util';
 
 @Component({
   selector: 'ds-dynamic-form-array',
-  templateUrl: './dynamic-form-array.component.html',
-  styleUrls: ['./dynamic-form-array.component.scss']
+  templateUrl: './dynamic-form-array.component.html'
 })
 export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
 
@@ -27,7 +26,7 @@ export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
   @Input() formModel: DynamicFormControlModel[];
   @Input() group: FormGroup;
   @Input() layout: DynamicFormLayout;
-  @Input() model: DynamicRowArrayModel;
+  @Input() model: DynamicFormArrayModel;
   @Input() templates: QueryList<DynamicTemplateDirective> | undefined;
 
   /* tslint:disable:no-output-rename */
