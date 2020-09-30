@@ -134,6 +134,8 @@ export class JsonPatchOperationsBuilder {
       operationValue = this.prepareAuthorityValue(value);
     } else if (value instanceof FormFieldLanguageValueObject) {
       operationValue = new FormFieldMetadataValueObject(value.value, value.language);
+    } else if (value.hasOwnProperty('authority')) {
+      operationValue = new FormFieldMetadataValueObject(value.value, value.language, value.authority);
     } else if (isNgbDateStruct(value)) {
       operationValue = new FormFieldMetadataValueObject(dateToString(value));
     } else if (value.hasOwnProperty('value')) {
@@ -151,8 +153,8 @@ export class JsonPatchOperationsBuilder {
     return operationValue;
   }
 
-  protected prepareAuthorityValue(value: any) {
-    let operationValue: any = null;
+  protected prepareAuthorityValue(value: any): FormFieldMetadataValueObject {
+    let operationValue: FormFieldMetadataValueObject;
     if (isNotEmpty(value.authority)) {
       operationValue = new FormFieldMetadataValueObject(value.value, value.language, value.authority);
     } else {

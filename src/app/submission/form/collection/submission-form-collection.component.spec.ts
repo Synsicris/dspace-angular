@@ -23,6 +23,9 @@ import { of } from 'rxjs';
 import { SectionsService } from '../../sections/sections.service';
 import { componentFactoryName } from '@angular/compiler';
 import { Collection } from 'src/app/core/shared/collection.model';
+import { getMockRequestService } from '../../../shared/mocks/request.service.mock';
+import { RequestService } from '../../../core/data/request.service';
+import { SubmissionDefinitionsConfigService } from '../../../core/config/submission-definitions-config.service';
 
 describe('SubmissionFormCollectionComponent Component', () => {
 

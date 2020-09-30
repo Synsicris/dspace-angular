@@ -13,15 +13,27 @@ import { ProjectCollectionBreadcrumbResolver } from '../core/breadcrumbs/project
 import { ProjectDsoBreadcrumbsService } from '../core/breadcrumbs/project-dso-breadcrumbs.service';
 import { ProjectBreadcrumbResolver } from '../core/breadcrumbs/project-breadcrumb.resolver';
 import { ProjectPageResolver } from '../projects/project-page.resolver';
+import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end-user-agreement-current-user.guard';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: ':projectId/impactpathway', loadChildren: '../+impact-pathway-page/impact-pathway-page.module#ImpactPathwayPageModule' },
-      { path: ':projectId/objectives', loadChildren: '../+objectives-page/objectives-page.module#ObjectivesPageModule' },
-      { path: ':projectId/workingplan', loadChildren: '../+working-plan-page/working-plan-page.module#WorkingPlanPageModule' },
       {
-        canActivate: [AuthenticatedGuard],
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
+        path: ':projectId/impactpathway',
+        loadChildren: '../+impact-pathway-page/impact-pathway-page.module#ImpactPathwayPageModule' },
+      {
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
+        path: ':projectId/objectives',
+        loadChildren: '../+objectives-page/objectives-page.module#ObjectivesPageModule'
+      },
+      {
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
+        path: ':projectId/workingplan',
+        loadChildren: '../+working-plan-page/working-plan-page.module#WorkingPlanPageModule'
+      },
+      {
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
         path: ':projectId',
         resolve: {
           breadcrumb: ProjectBreadcrumbResolver,
@@ -31,7 +43,7 @@ import { ProjectPageResolver } from '../projects/project-page.resolver';
         component: ProjectOverviewPageComponent
       },
       {
-        canActivate: [AuthenticatedGuard],
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
         path: ':name/:type/list',
         resolve: {
           breadcrumb: ProjectEntityListBreadcrumbResolver,

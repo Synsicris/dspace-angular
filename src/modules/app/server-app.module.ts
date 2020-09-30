@@ -29,6 +29,8 @@ import { ServerLocaleService } from 'src/app/core/locale/server-locale.service';
 import { LocaleService } from 'src/app/core/locale/locale.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ForwardClientIpInterceptor } from '../../app/core/forward-client-ip/forward-client-ip.interceptor';
+import { HardRedirectService } from '../../app/core/services/hard-redirect.service';
+import { ServerHardRedirectService } from '../../app/core/services/server-hard-redirect.service';
 import { FlexLayoutServerModule } from '@angular/flex-layout/server';
 
 export function createTranslateLoader() {
@@ -89,6 +91,10 @@ export function createTranslateLoader() {
       provide: HTTP_INTERCEPTORS,
       useClass: ForwardClientIpInterceptor,
       multi: true
+    },
+    {
+      provide: HardRedirectService,
+      useClass: ServerHardRedirectService,
     },
   ]
 })

@@ -156,6 +156,24 @@ export class SubmissionService {
    *
    * @param selfUrl
    *    The workspaceitem self url
+   * @param collectionId
+   *    Optional collection id
+   * @return Observable<SubmissionObject>
+   *    observable of SubmissionObject
+   */
+  createSubmissionFromExternalSource(selfUrl: string, collectionId?: string): Observable<SubmissionObject[]> {
+    const options: HttpOptions = Object.create({});
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'text/uri-list');
+    options.headers = headers;
+    return this.restService.postToEndpoint(this.workspaceLinkPath, selfUrl, null, options, collectionId) as Observable<SubmissionObject[]>;
+  }
+
+  /**
+   * Perform a REST call to deposit a workspaceitem and return response
+   *
+   * @param selfUrl
+   *    The workspaceitem self url
    * @return Observable<SubmissionObject>
    *    observable of SubmissionObject
    */
@@ -533,7 +551,7 @@ export class SubmissionService {
         () => this.routeService.getPreviousUrl().pipe(
           take(1),
           tap((previousUrl) => {
-            if (isEmpty(previousUrl) || !previousUrl.startsWith('/mydspace')) {
+            if (isEmpty(previousUrl)) {
               this.router.navigate(['/mydspace']);
             } else {
               this.router.navigateByUrl(previousUrl);

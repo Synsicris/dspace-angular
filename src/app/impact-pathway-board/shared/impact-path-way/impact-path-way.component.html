@@ -2,6 +2,7 @@
   <ng-container ngProjectAs="panelIconStatus">
     <button class="btn btn-lg btn-link p-0 flex-shrink-1 align-self-start mr-3 text-danger"
             [disabled]="(isProcessingRemove() | async)"
+            [title]="('impact-pathway.remove.title' | translate)"
             (click)="$event.preventDefault(); confirmRemove(content); $event.stopPropagation()">
       <span *ngIf="!(isProcessingRemove() | async)"><i class="far fa-trash-alt"></i></span>
       <span *ngIf="(isProcessingRemove() | async)"><i class="fas fa-circle-notch fa-spin"></i></span>
