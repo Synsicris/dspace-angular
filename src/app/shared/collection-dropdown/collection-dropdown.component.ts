@@ -1,16 +1,27 @@
-import { Component, OnInit, HostListener, ChangeDetectorRef, OnDestroy, Output, EventEmitter, ElementRef, Input } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, Subscription, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { hasValue } from '../empty.util';
 import {
-  map,
-  mergeMap,
-  startWith,
   debounceTime,
   distinctUntilChanged,
-  switchMap,
+  filter,
+  flatMap,
+  map,
+  mergeMap,
   reduce,
-  filter
+  startWith,
+  switchMap
 } from 'rxjs/operators';
 import { RemoteData } from 'src/app/core/data/remote-data';
 import { FindListOptions } from 'src/app/core/data/request.models';
@@ -20,7 +31,7 @@ import { CollectionDataService } from 'src/app/core/data/collection-data.service
 import { Collection } from '../../core/shared/collection.model';
 import { followLink } from '../utils/follow-link-config.model';
 import { getFirstSucceededRemoteDataPayload, getSucceededRemoteWithNotEmptyData } from '../../core/shared/operators';
-import { environment } from '../../../environments/environment';
+import { ProjectDataService } from '../../core/project/project-data.service';
 
 /**
  * An interface to represent a collection entry
@@ -115,7 +126,8 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private collectionDataService: CollectionDataService,
-    private el: ElementRef
+    private el: ElementRef,
+    private projectService: ProjectDataService
   ) { }
 
   /**
@@ -209,7 +221,12 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
       searchListService$ = this.collectionDataService
       .getAuthorizedCollection(query, findOptions, followLink('parentCommunity'));
     }
-    this.searchListCollection$ = searchListService$.pipe(
+    const projectTemplateUUID$ = this.projectService.getProjectTemplate().pipe(
+      map((projectTemplate: Community) => projectTemplate.id)
+    );
+
+    this.searchListCollection$ = projectTemplateUUID$.pipe(
+      flatMap((projectTemplateUUID: string) => searchListService$.pipe(
         getSucceededRemoteWithNotEmptyData(),
         switchMap((collections: RemoteData<PaginatedList<Collection>>) => {
           if ( (this.searchListCollection.length + findOptions.elementsPerPage) >= collections.payload.totalElements ) {
@@ -220,15 +237,17 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
         mergeMap((collection: Collection) => collection.parentCommunity.pipe(
           getFirstSucceededRemoteDataPayload(),
           // NOTE: Hide project community template from the list
-          filter((community: Community) => community.id !== environment.projects.projectTemplateUUID),
+          filter((community: Community) => community.id !== projectTemplateUUID),
           map((community: Community) => ({
-            communities: [{ id: community.id, name: community.name }],
-            collection: { id: collection.id, uuid: collection.id, name: collection.name }
-          })
-        ))),
+              communities: [{ id: community.id, name: community.name }],
+              collection: { id: collection.id, uuid: collection.id, name: collection.name }
+            })
+          ))),
         reduce((acc: any, value: any) => [...acc, ...value], []),
         startWith([])
-        );
+        )
+      )
+    );
     this.subs.push(this.searchListCollection$.subscribe(
       (next) => { this.searchListCollection.push(...next); }, undefined,
       () => { this.hideShowLoader(false); this.changeDetectorRef.detectChanges(); }
