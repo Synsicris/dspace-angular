@@ -13,6 +13,9 @@ import { RemoteData } from '../../core/data/remote-data';
 import { Community } from '../../core/shared/community.model';
 import { RequestService } from '../../core/data/request.service';
 import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
+import { catchError } from 'rxjs/operators';
+import { createFailedRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { Observable } from 'rxjs/internal/Observable';
 
 /**
  * Component to wrap a form inside a modal
@@ -77,19 +80,30 @@ export class CreateProjectComponent implements OnInit {
   create() {
     this.processing$.next(true);
     const projectName = this.createForm.get('name').value;
-    this.projectService.createProject(projectName)
-      .subscribe((response: RemoteData<Community>) => {
-        if (response.hasSucceeded) {
-          this.navigate(response.payload);
-          response.payload.parentCommunity.pipe(getFirstSucceededRemoteDataPayload())
-            .subscribe((parent: Community) => {
-              this.notificationService.success(null, this.translate.instant('project.create.success'));
-              this.requestService.removeByHrefSubstring(parent._links.self.href);
-            });
+    this.projectService.createProject(projectName).pipe(
+      catchError(() => {
+        return createFailedRemoteDataObject$() as Observable<RemoteData<Community>>
+      })
+    ).subscribe({
+        next: (response: RemoteData<Community>) => {
+          console.log(response);
+          if (response.hasSucceeded) {
+            this.navigate(response.payload);
+            response.payload.parentCommunity.pipe(getFirstSucceededRemoteDataPayload())
+              .subscribe((parent: Community) => {
+                this.notificationService.success(null, this.translate.instant('project.create.success'));
+                this.requestService.removeByHrefSubstring(parent._links.self.href);
+              });
+          } else {
+            this.notificationService.error(null,  this.translate.instant('project.create.error'));
+          }
+          this.processing$.next(false);
+          this.close();
+        },
+      error: () => {
+          this.notificationService.error(null,  this.translate.instant('project.create.error'));
         }
-        this.processing$.next(false);
-        this.close();
-    });
+      });
   }
 
   /**
