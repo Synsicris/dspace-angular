@@ -2,7 +2,7 @@
   <ng-container ngProjectAs="panelIconStatus">
     <button class="btn btn-lg btn-link p-0 flex-shrink-1 align-self-start mr-3 text-danger"
             [disabled]="(isProcessingRemove() | async)"
-            [title]="('impact-pathway.remove.title' | translate)"
+            title="{{'impact-pathway.remove.title' | translate}}"
             (click)="$event.preventDefault(); confirmRemove(content); $event.stopPropagation()">
       <span *ngIf="!(isProcessingRemove() | async)"><i class="far fa-trash-alt"></i></span>
       <span *ngIf="(isProcessingRemove() | async)"><i class="fas fa-circle-notch fa-spin"></i></span>
@@ -49,7 +49,17 @@
     <p>{{'impact-pathway.remove.confirm.info' | translate}}</p>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="c('cancel')">{{'impact-pathway.remove.confirm.cancel' | translate}}</button>
-    <button type="button" class="btn btn-danger" (click)="c('ok')">{{'impact-pathway.remove.confirm.submit' | translate}}</button>
+    <button type="button"
+            class="btn btn-secondary"
+            title="{{'impact-pathway.remove.confirm.cancel' | translate}}"
+            (click)="c('cancel')">
+      {{'impact-pathway.remove.confirm.cancel' | translate}}
+    </button>
+    <button type="button"
+            class="btn btn-danger"
+            title="{{'impact-pathway.remove.confirm.submit' | translate}}"
+            (click)="c('ok')">
+      {{'impact-pathway.remove.confirm.submit' | translate}}
+    </button>
   </div>
 </ng-template>
