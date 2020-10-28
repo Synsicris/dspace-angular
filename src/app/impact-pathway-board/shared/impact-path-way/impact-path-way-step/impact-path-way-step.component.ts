@@ -63,6 +63,10 @@ export class ImpactPathWayStepComponent {
         impactPathwayStep.type,
         false
       );
+      modalRef.componentInstance.formHeader = this.impactPathwayService.getImpactPathwayStepTaskFormHeader(
+        impactPathwayStep.type,
+        false
+      );
       modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
       modalRef.componentInstance.excludeListId = [this.impactPathwayStepId];
       modalRef.componentInstance.excludeFilterName = 'parentStepId';

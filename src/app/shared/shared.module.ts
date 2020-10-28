@@ -216,7 +216,7 @@ import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-imp
 import { ContextMenuComponent } from '../+item-page/context-menu/context-menu.component';
 import { ContextMenuEditImpactPathwayComponent } from '../+item-page/context-menu/edit-impact-pathway/edit-impact-pathway.component';
 import { CreateSimpleItemModalComponent } from './create-simple-item-modal/create-simple-item-modal.component';
-import { CreateSimpleItemComponent } from './create-simple-item-modal/create-simple-item/create-simple.item.component';
+import { CreateSimpleItemComponent } from './create-simple-item-modal/create-simple-item/create-simple-item.component';
 import { SimpleItemBoxComponent } from './create-simple-item-modal/simple-item-box/simple-item-box.component';
 import { SearchSimpleItemComponent } from './create-simple-item-modal/search-simple-item/search-simple-item.component';
 import { SearchSimpleItemBoxComponent } from './create-simple-item-modal/search-simple-item/search-header/search-box/search-simple-item-box.component';

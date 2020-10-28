@@ -1476,11 +1476,15 @@
 
   "impact-pathway.edit.page.title": "Edit impact pathway",
 
+  "impact-pathway.info.btn.title": "Show information",
+
   "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
 
   "impact-pathway.objectives.back-btn": "Back to impact pathway",
 
   "impact-pathway.objectives.edit.page.title": "Edit objectives",
+
+  "impact-pathway.objectives.info.panel": "",
 
   "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
 
@@ -3741,6 +3745,22 @@
 
   "submission.sections.submit.progressbar.describe.gender_project.info": "Gender aspects can be relevant at several points of an R&D process. Please indicate where gender aspects may be affected by the project. If you choose \"yes\" in an area, please address these aspects in the corresponding section in the SynSICRIS tool.",
 
+  "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_form.info": "",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_objective_form.info": "",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_5_task_form.info": "",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "",
+
   "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
 
   "submission.sections.submit.progressbar.describe.import_orgunits_companies": "Details only for companies",
@@ -3924,6 +3944,8 @@
   "submission.sections.submit.progressbar.describe.upload.info": "If required, you can upload additional information, such as documents, descriptions etc.",
 
   "submission.sections.submit.progressbar.describe.workpackages": "Description of the workpackage",
+
+  "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
 
   "submission.sections.submit.progressbar.describe.workpackages.info": "Describe here only general aspects that do not also arise in the assigned tasks and activities.",
 
