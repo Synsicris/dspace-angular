@@ -22,8 +22,8 @@
        [taskType]="data.type"
        (click)="setFocus($event)">
     <div class="task-header d-flex p-1 justify-content-between">
-      <div class="text-break flex-shrink-1 font-weight-bold w-100 pr-2">
-        <span>{{data.title}}</span>
+      <div class="task-title line-clamp font-weight-bold">
+        <p title="{{data.title}}">{{data.title}}</p>
       </div>
       <button *ngIf="data.hasParent()"
               class="btn btn-lg btn-link p-0 flex-shrink-1 align-self-start text-danger"
@@ -35,7 +35,7 @@
       </button>
     </div>
     <div class="task-content text-break p-1 d-flex justify-content-between">
-      <span>{{taskType$ | async}}</span>
+      <span class="text-truncate" title="{{taskType$ | async}}">{{taskType$ | async}}</span>
     </div>
 
     <div class="d-flex justify-content-end">
