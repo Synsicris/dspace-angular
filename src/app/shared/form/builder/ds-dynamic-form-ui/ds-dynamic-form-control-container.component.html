@@ -4,16 +4,21 @@
      [ngClass]="[getClass('element', 'container'), getClass('grid', 'container')]">
     <label *ngIf="!isCheckbox && hasLabel"
            [for]="model.id"
-           [innerHTML]="(model.required && model.label) ? (model.label | translate) + ' *' : (model.label | translate)"
-           [ngClass]="[getClass('element', 'label'), getClass('grid', 'label')]"></label>
+           [ngClass]="[getClass('element', 'label'), getClass('grid', 'label')]">
+      {{(model.required && model.label) ? (model.label | translate) + ' *' : (model.label | translate)}}
+      <i *ngIf="hasHint" class="far fa-question-circle text-info"
+         [ngbTooltip]="(model.hint | translate)"
+         placement="top"
+         container="body"></i>
+    </label>
     <ng-container *ngTemplateOutlet="startTemplate?.templateRef; context: model"></ng-container>
     <!--    Should be *ngIf instead of class d-none, but that breaks the #componentViewContainer reference-->
     <div [ngClass]="{'form-row': model.hasLanguages || isRelationship,
                       'd-none': value?.isVirtual && (model.hasSelectableMetadata || context?.index > 0)}">
         <div [ngClass]="getClass('grid', 'control')">
             <ng-container #componentViewContainer></ng-container>
-            <small *ngIf="hasHint && (!showErrorMessages || errorMessages.length === 0)"
-                   class="text-muted" [innerHTML]="model.hint | translate" [ngClass]="getClass('element', 'hint')"></small>
+            <small *ngIf="(model.type !== 'GROUP') && !asBootstrapFormGroup && (!showErrorMessages || errorMessages.length === 0)"
+                   class="text-muted" [ngClass]="getClass('element', 'hint')">&nbsp;</small>
 
             <div *ngIf="showErrorMessages" [ngClass]="[getClass('element', 'errors'), getClass('grid', 'errors')]">
                 <small *ngFor="let message of errorMessages" class="invalid-feedback d-block">{{ message | translate: model.validators }}</small>
