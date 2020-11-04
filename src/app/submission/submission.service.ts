@@ -239,9 +239,11 @@ export class SubmissionService {
    *
    * @param submissionId
    *    The submission id
+   * @param itemId
+   *    The submission item id
    */
-  dispatchDiscard(submissionId) {
-    this.store.dispatch(new DiscardSubmissionAction(submissionId));
+  dispatchDiscard(submissionId, itemId) {
+    this.store.dispatch(new DiscardSubmissionAction(submissionId, itemId));
   }
 
   /**

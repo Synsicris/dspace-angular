@@ -53,6 +53,8 @@ import { Item } from '../../core/shared/item.model';
 import { WorkspaceitemDataService } from '../../core/submission/workspaceitem-data.service';
 import { WorkflowItemDataService } from '../../core/submission/workflowitem-data.service';
 import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
+import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
+import { WorkingPlanService } from '../../core/working-plan/working-plan.service';
 
 describe('SubmissionObjectEffects test suite', () => {
   let submissionObjectEffects: SubmissionObjectEffects;
@@ -68,6 +70,14 @@ describe('SubmissionObjectEffects test suite', () => {
   const submissionDefinition: any = mockSubmissionDefinition;
   const selfUrl: string = mockSubmissionSelfUrl;
   const submissionState: any = Object.assign({}, mockSubmissionState);
+
+  const impactPathwayService = jasmine.createSpyObj('ImpactPathwayService', {
+    checkAndRemoveRelations: jasmine.createSpy('checkAndRemoveRelations')
+  });
+
+  const workingPlanService = jasmine.createSpyObj('WorkingPlanService', {
+    checkAndRemoveRelations: jasmine.createSpy('checkAndRemoveRelations')
+  });
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -93,6 +103,8 @@ describe('SubmissionObjectEffects test suite', () => {
         { provide: WorkflowItemDataService, useValue: {} },
         { provide: WorkflowItemDataService, useValue: {} },
         { provide: HALEndpointService, useValue: {} },
+        { provide: ImpactPathwayService, useValue: impactPathwayService },
+        { provide: WorkingPlanService, useValue: workingPlanService },
       ],
     });
 
@@ -826,7 +838,13 @@ describe('SubmissionObjectEffects test suite', () => {
   });
 
   describe('discardSubmission$', () => {
+    beforeEach(() => {
+      impactPathwayService.checkAndRemoveRelations.and.returnValue(observableOf(new Item()))
+      workingPlanService.checkAndRemoveRelations.and.returnValue(observableOf(new Item()))
+    });
+
     it('should return a DISCARD_SUBMISSION_SUCCESS action on success', () => {
+
       store.nextState({
         submission: {
           objects: submissionState

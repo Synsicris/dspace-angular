@@ -54,6 +54,7 @@ import { NotificationOptions } from '../shared/notifications/models/notification
 describe('SubmissionService test suite', () => {
   const collectionId = '43fe1f8c-09a6-4fcf-9c78-5d4fed8f2c8f';
   const submissionId = '826';
+  const itemId = '5dsf6dsf-09a6-4fcf-9c78-5d4fed8f2c8f';
   const sectionId = 'test';
   const subState = {
     objects: {
@@ -523,8 +524,8 @@ describe('SubmissionService test suite', () => {
 
   describe('dispatchDiscard', () => {
     it('should dispatch a new DiscardSubmissionAction', () => {
-      service.dispatchDiscard(submissionId,);
-      const expected = new DiscardSubmissionAction(submissionId);
+      service.dispatchDiscard(submissionId, itemId);
+      const expected = new DiscardSubmissionAction(submissionId, itemId);
 
       expect((service as any).store.dispatch).toHaveBeenCalledWith(expected);
     });

@@ -13,7 +13,7 @@ import {
   AddWorkpackageStepAction,
   AddWorkpackageStepErrorAction,
   AddWorkpackageStepSuccessAction,
-  AddWorkpackageSuccessAction,
+  AddWorkpackageSuccessAction, ClearWorkingPlanAction,
   GenerateWorkpackageAction,
   GenerateWorkpackageErrorAction,
   GenerateWorkpackageStepAction,
@@ -47,6 +47,7 @@ import { Item } from '../shared/item.model';
 import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
 import { isNotNull } from '../../shared/empty.util';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SubmissionObjectActionTypes } from '../../submission/objects/submission-objects.actions';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -404,6 +405,13 @@ export class WorkingPlanEffects {
     tap(() => {
       this.notificationsService.error(null, this.translate.get('working-plan.chart.move.error'))
     }));
+
+  /**
+   * Clear state on submission discard
+   */
+  @Effect() clearState$ = this.actions$.pipe(
+    ofType(SubmissionObjectActionTypes.DISCARD_SUBMISSION),
+    map(() => new ClearWorkingPlanAction()));
 
   constructor(
     private actions$: Actions,

@@ -1,7 +1,6 @@
 <div class="row" *ngIf="!!submissionId">
   <div class="col">
-    <button *ngIf="(showDepositAndDiscard | async)"
-            type="button"
+    <button type="button"
             class="btn btn-danger"
             id="discard"
             (click)="$event.preventDefault();confirmDiscard(content)">{{'submission.general.discard.submit' | translate}}</button>
@@ -27,7 +26,7 @@
             (click)="saveLater($event)">
       <span>{{'submission.general.save-later' | translate}}</span>
     </button>
-    <button *ngIf="(showDepositAndDiscard | async)"
+    <button *ngIf="(showDeposit | async)"
             type="button"
             class="btn btn-primary"
             id="deposit"

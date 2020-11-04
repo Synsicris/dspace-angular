@@ -302,6 +302,7 @@ export const environment: GlobalConfig = {
   },
   workingPlan: {
     workingPlanFormName: 'working_plan_workpackage_form',
+    workingPlanParentRelationMetadata: 'workingplan.relation.parent',
     workingPlanStepsFormName: 'working_plan_workpackage_step_form',
     workingPlanStepStatusMetadata: 'workingplan.step.status',
     workingPlanStepResponsibleMetadata: 'workingplan.responsible',

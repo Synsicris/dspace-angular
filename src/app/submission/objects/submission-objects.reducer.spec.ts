@@ -45,12 +45,12 @@ import {
   mockSubmissionObject
 } from '../../shared/mocks/submission.mock';
 import { Item } from '../../core/shared/item.model';
-import { SubmissionObject } from '../../core/submission/models/submission-object.model';
 
 describe('submissionReducer test suite', () => {
 
   const collectionId = mockSubmissionCollectionId;
   const submissionId = mockSubmissionId;
+  const itemId = '5dsf6dsf-09a6-4fcf-9c78-5d4fed8f2c8f';
   const submissionDefinition = mockSubmissionDefinitionResponse;
   const selfUrl = mockSubmissionSelfUrl;
 
@@ -214,7 +214,7 @@ describe('submissionReducer test suite', () => {
   });
 
   it('should return same state on discard', () => {
-    const action: any = new DiscardSubmissionAction(submissionId);
+    const action: any = new DiscardSubmissionAction(submissionId, itemId);
     const newState = submissionObjectReducer(initState, action);
 
     expect(newState).toEqual(initState);
@@ -228,7 +228,7 @@ describe('submissionReducer test suite', () => {
   });
 
   it('should return same state once the discard action is completed unsuccessfully', () => {
-    const action: any = new DiscardSubmissionAction(submissionId);
+    const action: any = new DiscardSubmissionAction(submissionId, itemId);
     const newState = submissionObjectReducer(initState, action);
 
     expect(newState).toEqual(initState);

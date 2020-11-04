@@ -537,6 +537,20 @@ export class ImpactPathwayService {
     this.operationsBuilder.add(path, value, true, true);
   }
 
+  checkAndRemoveRelations(itemId: string): Observable<Item> {
+    return this.itemAuthorityRelationService.removeRelationFromParent(
+      itemId,
+      environment.impactPathway.impactPathwayParentRelationMetadata,
+      environment.impactPathway.impactPathwayTaskRelationMetadata
+    ).pipe(
+      flatMap(() => this.itemAuthorityRelationService.unlinkParentItemFromChildren(
+        itemId,
+        environment.impactPathway.impactPathwayParentRelationMetadata,
+        environment.impactPathway.impactPathwayTaskRelationMetadata
+      ))
+    )
+  }
+
   isImpactPathwayLoaded(): Observable<boolean> {
     return this.store.pipe(
       select(isImpactPathwayLoadedSelector),

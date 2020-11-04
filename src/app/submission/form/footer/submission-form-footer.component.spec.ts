@@ -190,7 +190,7 @@ describe('SubmissionFormFooterComponent Component', () => {
     });
 
     it('should call dispatchDiscard on discard confirmation', () => {
-      comp.showDepositAndDiscard = observableOf(true);
+      comp.showDeposit = observableOf(true);
       fixture.detectChanges();
       const modalBtn = fixture.debugElement.query(By.css('.btn-danger'));
 
@@ -208,7 +208,7 @@ describe('SubmissionFormFooterComponent Component', () => {
     });
 
     it('should have deposit button disabled when submission is not valid', () => {
-      comp.showDepositAndDiscard = observableOf(true);
+      comp.showDeposit = observableOf(true);
       compAsAny.submissionIsInvalid = observableOf(true);
       fixture.detectChanges();
       const depositBtn: any = fixture.debugElement.query(By.css('button#deposit'));
@@ -217,7 +217,7 @@ describe('SubmissionFormFooterComponent Component', () => {
     });
 
     it('should not have deposit button disabled when submission is valid', () => {
-      comp.showDepositAndDiscard = observableOf(true);
+      comp.showDeposit = observableOf(true);
       compAsAny.submissionIsInvalid = observableOf(false);
       fixture.detectChanges();
       const depositBtn: any = fixture.debugElement.query(By.css('button#deposit'));
@@ -227,7 +227,7 @@ describe('SubmissionFormFooterComponent Component', () => {
 
   });
 
-  describe('when disableDepositAndDiscard is true', () => {
+  describe('when disableDeposit is true', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(SubmissionFormFooterComponent);
       comp = fixture.componentInstance;
@@ -235,7 +235,7 @@ describe('SubmissionFormFooterComponent Component', () => {
       submissionServiceStub = TestBed.get(SubmissionService);
       submissionRestServiceStub = TestBed.get(SubmissionRestService);
       comp.submissionId = submissionId;
-      comp.disableDepositAndDiscard = true;
+      comp.disableDeposit = true;
       submissionServiceStub.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkspaceItem);
     });
 
