@@ -2625,6 +2625,10 @@
   // TODO New key - Add a translation
   "impact-pathway.edit.page.title": "Edit impact pathway",
   
+  // "impact-pathway.info.btn.title": "Show information",
+  // TODO New key - Add a translation
+  "impact-pathway.info.btn.title": "Show information",
+  
   // "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
   // TODO New key - Add a translation
   "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
@@ -2636,6 +2640,10 @@
   // "impact-pathway.objectives.edit.page.title": "Edit objectives",
   // TODO New key - Add a translation
   "impact-pathway.objectives.edit.page.title": "Edit objectives",
+  
+  // "impact-pathway.objectives.info.panel": "",
+  // TODO New key - Add a translation
+  "impact-pathway.objectives.info.panel": "",
   
   // "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
   // TODO New key - Add a translation
@@ -6591,6 +6599,38 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.gender_project.info": "Gender aspects can be relevant at several points of an R&D process. Please indicate where gender aspects may be affected by the project. If you choose \"yes\" in an area, please address these aspects in the corresponding section in the SynSICRIS tool.",
   
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_objective_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_objective_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_5_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_5_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "",
+  
   // "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
@@ -6958,6 +6998,10 @@
   // "submission.sections.submit.progressbar.describe.workpackages": "Description of the workpackage",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.workpackages": "Description of the workpackage",
+  
+  // "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
   
   // "submission.sections.submit.progressbar.describe.workpackages.info": "Describe here only general aspects that do not also arise in the assigned tasks and activities.",
   // TODO New key - Add a translation
