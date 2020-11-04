@@ -2544,6 +2544,10 @@
   // "impact-pathway.edit.page.title": "Edit impact pathway",
   "impact-pathway.edit.page.title": "Bearbeiten sie den Impact Pathway",
   
+  // "impact-pathway.info.btn.title": "Show information",
+  // TODO New key - Add a translation
+  "impact-pathway.info.btn.title": "Show information",
+  
   // "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
   "impact-pathway.move.task.error": "Es gab ein Problem beim Verschieben einer Ressource. Versuchen sie es später noch einmal.",
   
@@ -2553,6 +2557,10 @@
   
   // "impact-pathway.objectives.edit.page.title": "Edit objectives",
   "impact-pathway.objectives.edit.page.title": "Bearbeiten sie die Ziele",
+  
+  // "impact-pathway.objectives.info.panel": "",
+  // TODO New key - Add a translation
+  "impact-pathway.objectives.info.panel": "",
   
   // "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
   "impact-pathway.patch.metadata.error": "Es gab ein Problem beim Speichern der Metadaten. Versuchen sie es später noch einmal.",
@@ -6352,6 +6360,38 @@
   // "submission.sections.submit.progressbar.describe.gender_project.info": "Gender aspects can be relevant at several points of an R&D process. Please indicate where gender aspects may be affected by the project. If you choose \"yes\" in an area, please address these aspects in the corresponding section in the SynSICRIS tool.",
   "submission.sections.submit.progressbar.describe.gender_project.info": "Aspekte der Geschlechtergerechtigkeit können in einem F&E-Prozess an mehreren Punkten relevant sein. Bitte nehmen Sie dazu Stellung, wo das Projekt ggf. Geschlechteraspekte berührt. Wenn Sie in einem Bereich \"ja\" wählen, berücksichtigen Sie diese Aspekte bitte jeweils in dem entschprechenden Bereich im SynSICRIS-Tool.",
   
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_objective_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_objective_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_5_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_5_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "",
+  
   // "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
   "submission.sections.submit.progressbar.describe.import_orgunits": "Organisationseinheit",
   
@@ -6629,6 +6669,10 @@
   
   // "submission.sections.submit.progressbar.describe.workpackages": "Description of the workpackage",
   "submission.sections.submit.progressbar.describe.workpackages": "Beschreibung des Arbeitspaketes",
+  
+  // "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
   
   // "submission.sections.submit.progressbar.describe.workpackages.info": "Describe here only general aspects that do not also arise in the assigned tasks and activities.",
   "submission.sections.submit.progressbar.describe.workpackages.info": "Beschreiben Sie hier nur übergeordnete Aspekte, die sich nicht aus den zugeordneten Aufgaben und Aktivitäten ergeben.",
