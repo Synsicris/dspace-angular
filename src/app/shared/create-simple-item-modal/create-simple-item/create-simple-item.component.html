@@ -1,3 +1,6 @@
+<ds-alert *ngIf="hasInfoMessage | async"
+          [content]="messageInfoKey"
+          [type]="'alert-info'"></ds-alert>
   <ds-loading *ngIf="(isProcessing() | async)" [message]="'loading.default' | translate"></ds-loading>
   <ds-form *ngIf="!(isProcessing() | async) && formId && formModel?.length > 0" #formRef="formComponent"
            [formId]="formId"

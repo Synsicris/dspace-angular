@@ -28,13 +28,45 @@ import { SimpleItem } from '../models/simple-item.model';
 })
 export class SearchSimpleItemComponent implements OnInit, OnDestroy {
 
+  /**
+   * The vocabulary name to use retrieve search filter labels
+   * @type {string}
+   */
   @Input() vocabularyName: string;
+
+  /**
+   * The list of id to exclude from search results
+   * @type {string[]}
+   */
   @Input() excludeListId: string[] = [];
+
+  /**
+   * The name of the filter used to exclude results from a search
+   * @type {string[]}
+   */
   @Input() excludeFilterName: string;
+
+  /**
+   * A boolean representing if an operation is processing
+   * @type {Observable<boolean>}
+   */
   @Input() processing: Observable<boolean>;
+
+  /**
+   * The search config name
+   * @type {string}
+   */
   @Input() searchConfiguration: string;
+
+  /**
+   * The search scope
+   * @type {string}
+   */
   @Input() scope = '';
 
+  /**
+   * EventEmitter that will emit an array of SimpleItem object to add
+   */
   @Output() addItems: EventEmitter<SimpleItem[]> = new EventEmitter<SimpleItem[]>();
 
   public filterBoxList$: BehaviorSubject<FilterBox[]> = new BehaviorSubject<FilterBox[]>([]);
@@ -66,13 +98,15 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     private dropdownConfig: NgbDropdownConfig,
     private searchTaskService: SearchSimpleItemService
   ) {
-
     // customize default values of typeaheads used by this component tree
     typeaheadConfig.showHint = true;
     // customize default values of dropdowns used by this component tree
     dropdownConfig.autoClose = false;
   }
 
+  /**
+   * Initialize all instance variables
+   */
   ngOnInit(): void {
     this.defaultSearchFilters = this.excludeListId.map((excludeId) => {
       return new SearchFilter(`f.${this.excludeFilterName}`, [excludeId], 'not');
@@ -114,20 +148,38 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
 
   }
 
+  /**
+   * Return boolean representing if an operation is processing
+   *
+   * @return {Observable<boolean>}
+   */
   isProcessing(): Observable<boolean> {
     return this.processing;
   }
 
+  /**
+   * Return boolean representing if an searching is processing
+   *
+   * @return {Observable<boolean>}
+   */
   isSearching(): Observable<boolean> {
     return this.searching$.asObservable();
   }
 
-  onFilterChange(filterBox: FilterBox) {
+  /**
+   * Update the filter list on change and dispatch a new search
+   * @param filterBox
+   */
+  onFilterChange(filterBox: FilterBox): void {
     this.updateFilterList(filterBox);
     this.search(this.paginationOptions, this.sortOptions);
   }
 
-  onPaginationChange(event) {
+  /**
+   * Update the pagination object and dispatch a new search
+   * @param event
+   */
+  onPaginationChange(event): void {
     this.paginationOptions = Object.assign(new PaginationComponentOptions(), this.paginationOptions, {
       currentPage: event.pagination.currentPage,
       pageSize: event.pagination.pageSize,
@@ -138,32 +190,55 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     this.search(this.paginationOptions, this.sortOptions);
   }
 
+  /**
+   * Update the current page and dispatch a new search
+   * @param page
+   */
   onPageChange(page) {
     this.search(Object.assign(new PaginationComponentOptions(), this.paginationOptions, {
       currentPage: page
     }), this.sortOptions);
   }
 
+  /**
+   * Update the current page size and dispatch a new search
+   * @param pageSize
+   */
   onPageSizeChange(pageSize) {
     this.search(Object.assign(new PaginationComponentOptions(), this.paginationOptions, {
       pageSize: pageSize
     }), this.sortOptions);
   }
 
+  /**
+   * Update the filter list on remove and dispatch a new search
+   * @param removedFilter
+   */
   onRemoveFilter(removedFilter: FilterBox) {
     this.updateFilterList(removedFilter);
     this.search(this.paginationOptions, this.sortOptions);
   }
 
+  /**
+   * Update the filter list on search and dispatch a new search
+   * @param searchbox
+   */
   onSearchChange(searchbox: FilterBox) {
     this.updateFilterList(searchbox);
     this.search(this.paginationOptions, this.sortOptions);
   }
 
+  /**
+   * Emit list of selected item
+   */
   onSubmit() {
     this.addItems.emit(this.selectedTasks);
   }
 
+  /**
+   * Remove element from the selected item list
+   * @param item
+   */
   onTaskDeselected(item: SimpleItem) {
     const index: number = this.selectedTasks.indexOf(item);
     if (index !== -1) {
@@ -171,6 +246,10 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Add element from the selected item list
+   * @param item
+   */
   onTaskSelected(item: SimpleItem) {
     this.selectedTasks.push(item)
   }
@@ -277,6 +356,9 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Unsubscribe from all subscriptions
+   */
   ngOnDestroy(): void {
     this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
   }

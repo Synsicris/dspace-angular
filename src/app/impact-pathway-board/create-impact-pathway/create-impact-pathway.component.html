@@ -13,6 +13,7 @@
              placeholder="{{'impact-pathway.create.placeholder' | translate }}"
              dsAutoFocus>
       <button class="btn btn-success btn-lg btn-block mt-3"
+              title="{{'impact-pathway.create.btn' | translate}}"
               [disabled]="!createForm.valid || (processing$ | async)"
               type="submit">
         <span *ngIf="processing$ | async"><i class='fas fa-circle-notch fa-spin'></i> {{'submission.workflow.tasks.generic.processing' | translate}}</span>

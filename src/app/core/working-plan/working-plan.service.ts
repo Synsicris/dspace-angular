@@ -130,11 +130,19 @@ export class WorkingPlanService {
     )
   }
 
+  getWorkpackageFormHeader(): string {
+    return environment.workingPlan.workingPlanFormName;
+  }
+
   getWorkpackageStepFormConfig(): Observable<SubmissionFormModel> {
     const formName = environment.workingPlan.workingPlanStepsFormName;
     return this.formConfigService.getConfigByName(formName).pipe(
       map((configData: ConfigData) => configData.payload as SubmissionFormModel)
     )
+  }
+
+  getWorkpackageStepFormHeader(): string {
+    return environment.workingPlan.workingPlanStepsFormName;
   }
 
   getWorkpackageItemById(itemId): Observable<Item> {

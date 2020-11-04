@@ -23,6 +23,7 @@ export class ImpactPathWayComponent {
 
   canShowRelations: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   loaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  infoShowed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
               private cdr: ChangeDetectorRef,
@@ -74,4 +75,10 @@ export class ImpactPathWayComponent {
     );
   }
 
+  /**
+   * Toggles info panel
+   */
+  toggleInfoPanel() {
+    this.infoShowed.next(!this.infoShowed.value)
+  }
 }

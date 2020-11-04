@@ -1,9 +1,17 @@
 <div>
   <h1>
     <span>{{stepTitle}}</span>
-    <button class='btn btn-primary float-right' (click)="back()">Back to impact pathway</button>
+    <button class='btn btn-primary float-right'
+            title="{{'impact-pathway.objectives.back-btn' | translate}}"
+            (click)="back()">
+      {{'impact-pathway.objectives.back-btn' | translate}}
+    </button>
   </h1>
   <hr/>
+  <ds-alert class="bg-light"
+            [dismissible]="false"
+            [content]="'impact-pathway.objectives.info.panel'"
+            [type]="'alert-info'"></ds-alert>
   <ng-container *ngFor="let task of getObjectivesTasks()">
     <ipw-objective [projectId]="projectId"
                    [impactPathwayStep]="impactPathwayStep"

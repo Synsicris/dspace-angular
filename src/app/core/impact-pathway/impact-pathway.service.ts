@@ -266,10 +266,15 @@ export class ImpactPathwayService {
     )
   }
 
+  getImpactPathwayStepTaskFormHeader(stepType: string, isObjective = false): string {
+    return isObjective ? `impact_pathway_${stepType}_task_objective_form` : `impact_pathway_${stepType}_task_form`;
+  }
+
   getImpactPathwayStepTaskFormConfig(stepType: string, isObjective = false): Observable<SubmissionFormModel> {
     const formName = isObjective ? `impact_pathway_${stepType}_task_objective_form` : `impact_pathway_${stepType}_task_form`;
     return this.formConfigService.getConfigByName(formName).pipe(
-      map((configData: ConfigData) => configData.payload as SubmissionFormModel)
+      map((configData: ConfigData) => configData.payload as SubmissionFormModel),
+      take(1)
     )
   }
 

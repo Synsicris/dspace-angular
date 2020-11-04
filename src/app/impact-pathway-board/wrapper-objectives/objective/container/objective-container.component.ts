@@ -75,6 +75,10 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
       this.impactPathwayStep.type,
       true
     );
+    modalRef.componentInstance.formHeader = this.impactPathwayService.getImpactPathwayStepTaskFormHeader(
+      this.impactPathwayStep.type,
+      true
+    );
     modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
     modalRef.componentInstance.excludeListId = [this.impactPathwayTask.id];
     modalRef.componentInstance.excludeFilterName = 'parentStepId';
