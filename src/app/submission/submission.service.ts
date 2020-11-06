@@ -48,6 +48,7 @@ import { Item } from '../core/shared/item.model';
 import { environment } from '../../environments/environment';
 import { NotificationOptions } from '../shared/notifications/models/notification-options.model';
 import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
+import { MYDSPACE_ROUTE } from '../+my-dspace-page/my-dspace-page.component';
 
 /**
  * A service that provides methods used in submission process.
@@ -554,7 +555,7 @@ export class SubmissionService {
           take(1),
           tap((previousUrl) => {
             if (isEmpty(previousUrl)) {
-              this.router.navigate(['/mydspace']);
+              this.router.navigate([MYDSPACE_ROUTE]);
             } else {
               this.router.navigateByUrl(previousUrl);
             }

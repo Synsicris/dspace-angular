@@ -50,6 +50,7 @@ import { storeModuleConfig } from '../app.reducer';
 import { environment } from '../../environments/environment';
 import { ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 import { NotificationOptions } from '../shared/notifications/models/notification-options.model';
+import { MYDSPACE_ROUTE } from '../+my-dspace-page/my-dspace-page.component';
 
 describe('SubmissionService test suite', () => {
   const collectionId = '43fe1f8c-09a6-4fcf-9c78-5d4fed8f2c8f';
@@ -890,23 +891,23 @@ describe('SubmissionService test suite', () => {
       scheduler = getTestScheduler();
       const spy = spyOn((service as any).routeService, 'getPreviousUrl');
 
-      spy.and.returnValue(observableOf('/mydspace?configuration=workflow'));
+      spy.and.returnValue(observableOf(MYDSPACE_ROUTE + '?configuration=workflow'));
       scheduler.schedule(() => service.redirectToMyDSpace());
       scheduler.flush();
 
-      expect((service as any).router.navigateByUrl).toHaveBeenCalledWith('/mydspace?configuration=workflow');
+      expect((service as any).router.navigateByUrl).toHaveBeenCalledWith(MYDSPACE_ROUTE + '?configuration=workflow');
 
       spy.and.returnValue(observableOf(''));
       scheduler.schedule(() => service.redirectToMyDSpace());
       scheduler.flush();
 
-      expect((service as any).router.navigate).toHaveBeenCalledWith(['/mydspace']);
+      expect((service as any).router.navigate).toHaveBeenCalledWith([MYDSPACE_ROUTE]);
 
       spy.and.returnValue(observableOf('/home'));
       scheduler.schedule(() => service.redirectToMyDSpace());
       scheduler.flush();
 
-      expect((service as any).router.navigate).toHaveBeenCalledWith(['/mydspace']);
+      expect((service as any).router.navigate).toHaveBeenCalledWith([MYDSPACE_ROUTE]);
     });
   });
 

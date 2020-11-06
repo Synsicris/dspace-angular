@@ -12,6 +12,7 @@ import { SubmissionObject } from '../../core/submission/models/submission-object
 import { Collection } from '../../core/shared/collection.model';
 import { Item } from '../../core/shared/item.model';
 import { WorkspaceitemSectionsObject } from '../../core/submission/models/workspaceitem-sections.model';
+import { MYDSPACE_ROUTE } from '../../+my-dspace-page/my-dspace-page.component';
 
 /**
  * This component allows to submit a new workspaceitem.
@@ -110,7 +111,7 @@ export class SubmissionSubmitComponent implements OnDestroy, OnInit {
           if (isNotNull(submissionObject)) {
             if (isEmpty(submissionObject)) {
               this.notificationsService.info(null, this.translate.get('submission.general.cannot_submit'));
-              this.router.navigate(['/mydspace']);
+              this.router.navigate([MYDSPACE_ROUTE]);
             } else {
               this.collectionId = (submissionObject.collection as Collection).id;
               this.sections = submissionObject.sections;
