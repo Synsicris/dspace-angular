@@ -2555,9 +2555,13 @@
   // "impact-pathway.objectives.edit.page.title": "Edit objectives",
   "impact-pathway.objectives.edit.page.title": "Bearbeiten Sie die Ziele",
 
-  // "impact-pathway.objectives.info.panel": "",
-  // TODO Source message changed - Revise the translation
-  "impact-pathway.objectives.info.panel": "Hier legen Sie die wichtigsten Arbeitspakete und Aufgaben fest, die zum wissenschaftlich-technischen Arbeitsziel beitragen und für die Entwicklung von Wirkungen relevant sind.</br>Alle hier angelegten Einträge können im Arbeitsplan weiterverwendet werden und umgekehrt können dort bereits getätigte Einträge hier verwendet werden.</br>Detaillierte Beschreibungen zu Material und Methoden formulieren Sie in einem Dokument und laden es auf der Projektseite hoch.</br>Über [Eintrag bearbeiten] im Beschreibungsfeld können Sie das Arbeitsziel und das Beschreibungsfeld editieren. Speichern Sie anschließend Ihre Angaben.",
+  // "impact-pathway.objectives.step_type_2.info.panel": "",
+  // TODO New key - Add a translation
+  "impact-pathway.objectives.step_type_2.info.panel": "Hier legen Sie die wichtigsten Arbeitspakete und Aufgaben fest, die zum wissenschaftlich-technischen Arbeitsziel beitragen und für die Entwicklung von Wirkungen relevant sind.</br>Alle hier angelegten Einträge können im Arbeitsplan weiterverwendet werden und umgekehrt können dort bereits getätigte Einträge hier verwendet werden.</br>Detaillierte Beschreibungen zu Material und Methoden formulieren Sie in einem Dokument und laden es auf der Projektseite hoch.</br>Über [Eintrag bearbeiten] im Beschreibungsfeld können Sie das Arbeitsziel und das Beschreibungsfeld editieren. Speichern Sie anschließend Ihre Angaben.",
+
+  // "impact-pathway.objectives.step_type_3.info.panel": "",
+  // TODO New key - Add a translation
+  "impact-pathway.objectives.step_type_3.info.panel": "Hier legen Sie die wichtigsten Arbeitspakete und Aufgaben fest, die zum wissenschaftlich-technischen Arbeitsziel beitragen und für die Entwicklung von Wirkungen relevant sind.</br>Alle hier angelegten Einträge können im Arbeitsplan weiterverwendet werden und umgekehrt können dort bereits getätigte Einträge hier verwendet werden.</br>Detaillierte Beschreibungen zu Material und Methoden formulieren Sie in einem Dokument und laden es auf der Projektseite hoch.</br>Über [Eintrag bearbeiten] im Beschreibungsfeld können Sie das Arbeitsziel und das Beschreibungsfeld editieren. Speichern Sie anschließend Ihre Angaben.",
 
   // "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
   "impact-pathway.patch.metadata.error": "Es gab ein Problem beim Speichern der Metadaten. Versuchen Sie es später noch einmal.",

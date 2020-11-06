@@ -1484,7 +1484,9 @@
 
   "impact-pathway.objectives.edit.page.title": "Edit objectives",
 
-  "impact-pathway.objectives.info.panel": "",
+  "impact-pathway.objectives.step_type_2.info.panel": "",
+
+  "impact-pathway.objectives.step_type_3.info.panel": "",
 
   "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
 

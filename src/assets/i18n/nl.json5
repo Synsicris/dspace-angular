@@ -2640,9 +2640,13 @@
   // TODO New key - Add a translation
   "impact-pathway.objectives.edit.page.title": "Edit objectives",
   
-  // "impact-pathway.objectives.info.panel": "",
+  // "impact-pathway.objectives.step_type_2.info.panel": "",
   // TODO New key - Add a translation
-  "impact-pathway.objectives.info.panel": "",
+  "impact-pathway.objectives.step_type_2.info.panel": "",
+  
+  // "impact-pathway.objectives.step_type_3.info.panel": "",
+  // TODO New key - Add a translation
+  "impact-pathway.objectives.step_type_3.info.panel": "",
   
   // "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
   // TODO New key - Add a translation
@@ -5032,9 +5036,9 @@
   // TODO New key - Add a translation
   "project-overview.page.content.card-project.link2" : "Uploads for parts of reports",
   
-  // "project-overview.page.content.card-checklist.title" : "Checklists for reflection ",
+  // "project-overview.page.content.card-checklist.title" : "Checklists for reflection",
   // TODO New key - Add a translation
-  "project-overview.page.content.card-checklist.title" : "Checklists for reflection ",
+  "project-overview.page.content.card-checklist.title" : "Checklists for reflection",
   
   // "project-overview.page.content.card-checklist.link1" : "Ethical Aspects",
   // TODO New key - Add a translation
