@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
@@ -22,6 +22,8 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './my-dspace-new-submission-dropdown.component.html'
 })
 export class MyDSpaceNewSubmissionDropdownComponent implements OnDestroy, OnInit {
+
+  @Input() scope: string;
 
   /**
    * Representing if dropdown list is initialized
@@ -134,6 +136,7 @@ export class MyDSpaceNewSubmissionDropdownComponent implements OnDestroy, OnInit
     modalRef.componentInstance.metadata = 'relationship.type';
     if (hasValue(this.availableEntityTypeList) && this.availableEntityTypeList.length > 0) {
       modalRef.componentInstance.metadatavalue = this.availableEntityTypeList[idx];
+      modalRef.componentInstance.scope = this.scope;
     }
   }
 }

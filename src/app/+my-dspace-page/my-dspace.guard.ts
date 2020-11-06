@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, NavigationExtras, Router, RouterStateSnapshot } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  NavigationExtras,
+  PRIMARY_OUTLET,
+  Router,
+  RouterStateSnapshot,
+  UrlSegmentGroup
+} from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { isEmpty } from '../shared/empty.util';
-import { MYDSPACE_ROUTE } from './my-dspace-page.component';
+import { MYDSPACE_PAGE } from './my-dspace-page.component';
 import { MyDSpaceConfigurationValueType } from './my-dspace-configuration-value-type';
 import { MyDSpaceConfigurationService } from './my-dspace-configuration.service';
 
@@ -45,10 +53,14 @@ export class MyDSpaceGuard implements CanActivate {
     if (isEmpty(configuration) || !configurationList.includes(configuration as MyDSpaceConfigurationValueType)) {
       // If configuration param is empty or is not included in available configurations redirect to a default configuration value
       const navigationExtras: NavigationExtras = {
-        queryParams: {configuration: configurationDefault}
+        queryParams: {configuration: configurationDefault},
+        queryParamsHandling: 'merge'
       };
 
-      this.router.navigate([MYDSPACE_ROUTE], navigationExtras);
+      const urlTree = this.router.parseUrl(this.router.url);
+      const g: UrlSegmentGroup = urlTree.root.children[PRIMARY_OUTLET];
+      const redirectUrlPath = '/' + g.toString();
+      this.router.navigate([redirectUrlPath, MYDSPACE_PAGE], navigationExtras);
       return false;
     } else {
       return true;

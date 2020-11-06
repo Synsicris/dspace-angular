@@ -23,6 +23,7 @@ export class CreateItemParentSelectorComponent extends DSOSelectorModalWrapperCo
 
   @Input() metadata: string;
   @Input() metadatavalue: string;
+  @Input() scope: string;
 
   constructor(protected activeModal: NgbActiveModal, protected route: ActivatedRoute, private router: Router) {
     super(activeModal, route);

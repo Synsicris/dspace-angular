@@ -30,7 +30,8 @@ import { MyDSpaceRequest } from '../core/data/request.models';
 import { SearchResult } from '../shared/search/search-result.model';
 import { Context } from '../core/shared/context.model';
 
-export const MYDSPACE_ROUTE = '/mydspace';
+export const MYDSPACE_PAGE = 'allitems';
+export const MYDSPACE_ROUTE = '/' + MYDSPACE_PAGE;
 export const SEARCH_CONFIG_SERVICE: InjectionToken<SearchConfigurationService> = new InjectionToken<SearchConfigurationService>('searchConfigurationService');
 
 /**
@@ -70,6 +71,11 @@ export class MyDSpacePageComponent implements OnInit {
    * The current paginated search options
    */
   searchOptions$: Observable<PaginatedSearchOptions>;
+
+  /**
+   * The current relevant scopes
+   */
+  scope$: Observable<string>;
 
   /**
    * The current relevant scopes
@@ -131,7 +137,9 @@ export class MyDSpacePageComponent implements OnInit {
         this.resultsRD$.next(results);
       });
 
-    this.scopeListRD$ = this.searchConfigService.getCurrentScope('').pipe(
+    this.scope$ = this.searchConfigService.getCurrentScope('');
+
+    this.scopeListRD$ = this.scope$.pipe(
       switchMap((scopeId) => this.service.getScopes(scopeId))
     );
 
