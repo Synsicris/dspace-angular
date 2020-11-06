@@ -4,6 +4,7 @@ import { ObjectiveService } from '../../core/impact-pathway/objective.service';
 import { ImpactPathwayStep } from '../../core/impact-pathway/models/impact-pathway-step.model';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { isNotEmpty } from '../../shared/empty.util';
 
 @Component({
   selector: 'ipw-wrapper-objectives',
@@ -37,5 +38,13 @@ export class WrapperObjectivesComponent {
     this.router.navigate(
       ['/project-overview', this.projectId, 'impactpathway', this.impactPathwayStep.parentId, 'edit']
     )
+  }
+
+  hasInfoMessage(): boolean {
+    return isNotEmpty(this.getInfoMessage());
+  }
+
+  getInfoMessage(): string {
+    return this.translate.instant('impact-pathway.objectives.' + this.impactPathwayStep.type + '.info.panel');
   }
 }

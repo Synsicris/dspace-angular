@@ -366,6 +366,14 @@ export class WorkingPlanService {
     )
   }
 
+  checkAndRemoveRelations(itemId: string): Observable<Item> {
+    return this.itemAuthorityRelationService.removeRelationFromParent(
+      itemId,
+      environment.workingPlan.workingPlanParentRelationMetadata,
+      environment.workingPlan.workingPlanStepRelationMetadata
+    );
+  }
+
   createAddMetadataPatchOp(metadataName: string, value: any): void {
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
     this.operationsBuilder.add(pathCombiner.getPath(metadataName), value, true, true);

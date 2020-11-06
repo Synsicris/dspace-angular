@@ -19,6 +19,7 @@ export const ImpactPathwayActionTypes = {
   GENERATE_IMPACT_PATHWAY: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY'),
   GENERATE_IMPACT_PATHWAY_SUCCESS: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_SUCCESS'),
   GENERATE_IMPACT_PATHWAY_ERROR: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_ERROR'),
+  CLEAR_IMPACT_PATHWAY: type('dspace/core/impactpathway/CLEAR_IMPACT_PATHWAY'),
   INIT_IMPACT_PATHWAY: type('dspace/core/impactpathway/INIT_IMPACT_PATHWAY'),
   INIT_IMPACT_PATHWAY_SUCCESS: type('dspace/core/impactpathway/INIT_IMPACT_PATHWAY_SUCCESS'),
   INIT_IMPACT_PATHWAY_ERROR: type('dspace/core/impactpathway/INIT_IMPACT_PATHWAY_ERROR'),
@@ -70,6 +71,13 @@ export const ImpactPathwayActionTypes = {
 };
 
 /* tslint:disable:max-classes-per-file */
+
+/**
+ * An ngrx action to clear the impact pathway state
+ */
+export class ClearImpactPathwayAction implements Action {
+  type = ImpactPathwayActionTypes.CLEAR_IMPACT_PATHWAY;
+}
 
 /**
  * An ngrx action to generate a impact pathway objects
@@ -1226,6 +1234,7 @@ export type ImpactPathwayActions
   | AddImpactPathwaySubTaskSuccessAction
   | AddImpactPathwayTaskLinkAction
   | AddImpactPathwayTaskLinksAction
+  | ClearImpactPathwayAction
   | CompleteEditingImpactPathwayTaskLinksAction
   | EditImpactPathwayTaskLinksAction
   | GenerateImpactPathwayAction

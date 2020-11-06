@@ -34,6 +34,11 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
       },
       {
         canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
+        path: ':projectId/allitems',
+        loadChildren: '../+my-dspace-page/my-dspace-page.module#MyDSpacePageModule',
+      },
+      {
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
         path: ':projectId',
         resolve: {
           breadcrumb: ProjectBreadcrumbResolver,

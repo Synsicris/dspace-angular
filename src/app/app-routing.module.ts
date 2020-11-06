@@ -7,14 +7,14 @@ import { AuthenticatedGuard } from './core/auth/authenticated.guard';
 import { SiteAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/site-administrator.guard';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import {
-  UNAUTHORIZED_PATH,
-  WORKFLOW_ITEM_MODULE_PATH,
-  FORGOT_PASSWORD_PATH,
-  REGISTER_PATH,
-  PROFILE_MODULE_PATH,
   ADMIN_MODULE_PATH,
   BITSTREAM_MODULE_PATH,
-  INFO_MODULE_PATH
+  FORGOT_PASSWORD_PATH,
+  INFO_MODULE_PATH,
+  PROFILE_MODULE_PATH,
+  REGISTER_PATH,
+  UNAUTHORIZED_PATH,
+  WORKFLOW_ITEM_MODULE_PATH
 } from './app-routing-paths';
 import { COLLECTION_MODULE_PATH } from './+collection-page/collection-page-routing-paths';
 import { COMMUNITY_MODULE_PATH } from './+community-page/community-page-routing-paths';
@@ -34,17 +34,12 @@ import { SiteRegisterGuard } from './core/data/feature-authorization/feature-aut
           { path: 'community-list', loadChildren: './community-list-page/community-list-page.module#CommunityListPageModule', canActivate: [EndUserAgreementCurrentUserGuard] },
           { path: 'id', loadChildren: './+lookup-by-id/lookup-by-id.module#LookupIdModule', canActivate: [EndUserAgreementCurrentUserGuard] },
           { path: 'handle', loadChildren: './+lookup-by-id/lookup-by-id.module#LookupIdModule', canActivate: [EndUserAgreementCurrentUserGuard] },
-            { path: REGISTER_PATH, loadChildren: './register-page/register-page.module#RegisterPageModule', canActivate: [SiteRegisterGuard] },
+          { path: REGISTER_PATH, loadChildren: './register-page/register-page.module#RegisterPageModule', canActivate: [SiteRegisterGuard] },
           { path: FORGOT_PASSWORD_PATH, loadChildren: './forgot-password/forgot-password.module#ForgotPasswordModule', canActivate: [EndUserAgreementCurrentUserGuard] },
           { path: COMMUNITY_MODULE_PATH, loadChildren: './+community-page/community-page.module#CommunityPageModule', canActivate: [EndUserAgreementCurrentUserGuard] },
           { path: COLLECTION_MODULE_PATH, loadChildren: './+collection-page/collection-page.module#CollectionPageModule', canActivate: [EndUserAgreementCurrentUserGuard] },
           { path: ITEM_MODULE_PATH, loadChildren: './+item-page/item-page.module#ItemPageModule', canActivate: [EndUserAgreementCurrentUserGuard] },
           { path: BITSTREAM_MODULE_PATH, loadChildren: './+bitstream-page/bitstream-page.module#BitstreamPageModule', canActivate: [EndUserAgreementCurrentUserGuard] },
-          {
-            path: 'mydspace',
-            loadChildren: './+my-dspace-page/my-dspace-page.module#MyDSpacePageModule',
-            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
-          },
           { path: 'search', loadChildren: './+search-page/search-page-routing.module#SearchPageRoutingModule', canActivate: [EndUserAgreementCurrentUserGuard] },
           { path: 'browse', loadChildren: './+browse-by/browse-by.module#BrowseByModule', canActivate: [EndUserAgreementCurrentUserGuard] },
           { path: 'explore', loadChildren: './+explore/explore.module#ExploreModule'},

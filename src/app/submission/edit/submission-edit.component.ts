@@ -15,6 +15,7 @@ import { Collection } from '../../core/shared/collection.model';
 import { RemoteData } from '../../core/data/remote-data';
 import { Item } from '../../core/shared/item.model';
 import { CollectionDataService } from '../../core/data/collection-data.service';
+import { MYDSPACE_ROUTE } from '../../+my-dspace-page/my-dspace-page.component';
 
 /**
  * This component allows to edit an existing workspaceitem/workflowitem.
@@ -95,7 +96,7 @@ export class SubmissionEditComponent implements OnDestroy, OnInit {
       if (submissionObjectRD.hasSucceeded) {
         if (isEmpty(submissionObjectRD.payload)) {
           this.notificationsService.info(null, this.translate.get('submission.general.cannot_submit'));
-          this.router.navigate(['/mydspace']);
+          this.router.navigate([MYDSPACE_ROUTE]);
         } else {
           this.submissionId = submissionObjectRD.payload.id.toString();
           this.collectionId = (submissionObjectRD.payload.collection as Collection).id;

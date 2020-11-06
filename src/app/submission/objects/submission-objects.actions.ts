@@ -648,6 +648,7 @@ export class DiscardSubmissionAction implements Action {
   type = SubmissionObjectActionTypes.DISCARD_SUBMISSION;
   payload: {
     submissionId: string;
+    itemId: string;
   };
 
   /**
@@ -655,9 +656,11 @@ export class DiscardSubmissionAction implements Action {
    *
    * @param submissionId
    *    the submission's ID to discard
+   * @param itemId
+   *    the submission item's ID to discard
    */
-  constructor(submissionId: string) {
-    this.payload = { submissionId };
+  constructor(submissionId: string, itemId: string) {
+    this.payload = { submissionId, itemId };
   }
 }
 

@@ -12,17 +12,7 @@ import {
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { hasValue } from '../empty.util';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  flatMap,
-  map,
-  mergeMap,
-  reduce,
-  startWith,
-  switchMap
-} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, mergeMap, reduce, startWith, switchMap } from 'rxjs/operators';
 import { RemoteData } from 'src/app/core/data/remote-data';
 import { FindListOptions } from 'src/app/core/data/request.models';
 import { PaginatedList } from 'src/app/core/data/paginated-list';
@@ -31,7 +21,6 @@ import { CollectionDataService } from 'src/app/core/data/collection-data.service
 import { Collection } from '../../core/shared/collection.model';
 import { followLink } from '../utils/follow-link-config.model';
 import { getFirstSucceededRemoteDataPayload, getSucceededRemoteWithNotEmptyData } from '../../core/shared/operators';
-import { ProjectDataService } from '../../core/project/project-data.service';
 
 /**
  * An interface to represent a collection entry
@@ -92,7 +81,7 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
    */
   searchListCollection: CollectionListEntry[] = [];
 
-  @Output() selectionChange = new EventEmitter<CollectionListEntry>();
+  @Output() selectionChange: EventEmitter<CollectionListEntry> = new EventEmitter<CollectionListEntry>();
   /**
    * A boolean representing if the loader is visible or not
    */
@@ -123,11 +112,15 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
    */
   @Input() metadatavalue: string;
 
+  /**
+   * If present this value is used to filter collection list by community
+   */
+  @Input() scope: string;
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private collectionDataService: CollectionDataService,
-    private el: ElementRef,
-    private projectService: ProjectDataService
+    private el: ElementRef
   ) { }
 
   /**
@@ -209,44 +202,43 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
       currentPage: page
     };
     let searchListService$: Observable<RemoteData<PaginatedList<Collection>>> = null;
-    if (this.metadata) {
+    if (this.metadata && this.scope) {
       searchListService$ = this.collectionDataService
-      .getAuthorizedCollectionAndMetadata(
-        query,
-        this.metadata,
-        this.metadatavalue,
-        findOptions,
-        followLink('parentCommunity'));
+        .findAuthorizedByCommunityAndRelationshipType(
+          this.scope,
+          this.metadatavalue,
+          findOptions,
+          followLink('parentCommunity'));
+    } else if (this.metadata) {
+      searchListService$ = this.collectionDataService
+        .getAuthorizedCollectionAndMetadata(
+          query,
+          this.metadata,
+          this.metadatavalue,
+          findOptions,
+          followLink('parentCommunity'));
     } else {
       searchListService$ = this.collectionDataService
-      .getAuthorizedCollection(query, findOptions, followLink('parentCommunity'));
+        .getAuthorizedCollection(query, findOptions, followLink('parentCommunity'));
     }
-    const projectTemplateUUID$ = this.projectService.getProjectTemplate().pipe(
-      map((projectTemplate: Community) => projectTemplate.id)
-    );
 
-    this.searchListCollection$ = projectTemplateUUID$.pipe(
-      flatMap((projectTemplateUUID: string) => searchListService$.pipe(
-        getSucceededRemoteWithNotEmptyData(),
-        switchMap((collections: RemoteData<PaginatedList<Collection>>) => {
-          if ( (this.searchListCollection.length + findOptions.elementsPerPage) >= collections.payload.totalElements ) {
-            this.hasNextPage = false;
-          }
-          return collections.payload.page;
-        }),
-        mergeMap((collection: Collection) => collection.parentCommunity.pipe(
-          getFirstSucceededRemoteDataPayload(),
-          // NOTE: Hide project community template from the list
-          filter((community: Community) => community.id !== projectTemplateUUID),
-          map((community: Community) => ({
-              communities: [{ id: community.id, name: community.name }],
-              collection: { id: collection.id, uuid: collection.id, name: collection.name }
-            })
-          ))),
-        reduce((acc: any, value: any) => [...acc, ...value], []),
-        startWith([])
-        )
-      )
+    this.searchListCollection$ = searchListService$.pipe(
+      getSucceededRemoteWithNotEmptyData(),
+      switchMap((collections: RemoteData<PaginatedList<Collection>>) => {
+        if ( (this.searchListCollection.length + findOptions.elementsPerPage) >= collections.payload.totalElements ) {
+          this.hasNextPage = false;
+        }
+        return collections.payload.page;
+      }),
+      mergeMap((collection: Collection) => collection.parentCommunity.pipe(
+        getFirstSucceededRemoteDataPayload(),
+        map((community: Community) => ({
+            communities: [{ id: community.id, name: community.name }],
+            collection: { id: collection.id, uuid: collection.id, name: collection.name }
+          })
+        ))),
+      reduce((acc: any, value: any) => [...acc, ...value], []),
+      startWith([])
     );
     this.subs.push(this.searchListCollection$.subscribe(
       (next) => { this.searchListCollection.push(...next); }, undefined,

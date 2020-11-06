@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { combineLatest, Observable, of as observableOf } from 'rxjs';
+import { combineLatest, Observable, of as observableOf, throwError } from 'rxjs';
 import { catchError, distinctUntilChanged, filter, flatMap, map, switchMap, take, tap } from 'rxjs/operators';
 import { ReplaceOperation } from 'fast-json-patch';
 
@@ -29,6 +29,7 @@ import {
   configureRequest,
   getFinishedRemoteData,
   getFirstSucceededRemoteDataPayload,
+  getFirstSucceededRemoteListPayload,
   getResponseFromEntry
 } from '../shared/operators';
 import { DSpaceObjectType } from '../shared/dspace-object-type.model';
@@ -38,6 +39,8 @@ import { createFailedRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { followLink, FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { ConfigurationDataService } from '../data/configuration-data.service';
 import { ConfigurationProperty } from '../shared/configuration-property.model';
+import { GroupDataService } from '../eperson/group-data.service';
+import { Group } from '../eperson/models/group.model';
 
 @Injectable()
 export class ProjectDataService extends CommunityDataService {
@@ -54,6 +57,7 @@ export class ProjectDataService extends CommunityDataService {
     protected searchService: SearchService,
     protected linkService: LinkService,
     protected configurationService: ConfigurationDataService,
+    protected groupDataService: GroupDataService,
   ) {
     super(requestService, rdbService, store, objectCache, halService, notificationsService, http, comparator);
   }
@@ -93,46 +97,41 @@ export class ProjectDataService extends CommunityDataService {
     );
   }
 
-  protected fetchCreateResponse(requestId: string): Observable<RemoteData<Community>> {
-    // Resolve self link for new object
-    const selfLink$ = this.requestService.getByUUID(requestId).pipe(
-      getResponseFromEntry(),
-      map((response: RestResponse) => {
-        if (!response.isSuccessful && response instanceof ErrorResponse) {
-          throw new Error(response.errorMessage);
-        } else {
-          return response;
-        }
-      }),
-      map((response: any) => {
-        if (isNotEmpty(response.resourceSelfLinks)) {
-          return response.resourceSelfLinks[0];
-        }
-      }),
-      distinctUntilChanged()
-    ) as Observable<string>;
-
-    return selfLink$.pipe(
-      switchMap((selfLink: string) => this.findByHref(selfLink, followLink('parentCommunity'))),
-    )
-  }
-
   /**
-   * Perform a patch operation to change the project name
-   * @param name
-   * @param project
-   * @protected
+   * Delete an existing project on the server
+   * @param projectId The project id to be removed
+   *
+   * @return the RestResponse as an Observable
    */
-  protected patchProjectName(name: string, project: Community): Observable<RemoteData<Community>> {
-    const operation: ReplaceOperation<string> = {
-      path: '/metadata/dc.title/0',
-      op: 'replace',
-      value: name
-    };
-
-    return this.patch(project, [operation]).pipe(
-      flatMap( () => this.findById(project.id, followLink('parentCommunity'))),
-      getFinishedRemoteData()
+  delete(projectId: string): Observable<RestResponse> {
+    const projectGroup = `project_${projectId}_group`
+    return super.delete(projectId).pipe(
+      flatMap((response: RestResponse) => {
+        if (response) {
+          return this.groupDataService.searchGroups(projectGroup)
+        } else {
+          throwError('Unexpected error while deleting project.')
+        }
+      }),
+      getFirstSucceededRemoteListPayload(),
+      map((groups: Group[]) => {
+        if (groups.length === 1) {
+          return groups[0]
+        } else {
+          throw new Error('Unexpected error while retrieving project group.');
+        }
+      }),
+      flatMap((group: Group) => this.groupDataService.deleteGroup(group)),
+      map((response: boolean) => {
+        if (response) {
+          return new RestResponse(response, 200, 'OK');
+        } else {
+          throwError('Unexpected error while deleting project group.')
+        }
+      }),
+      catchError(() => {
+        return observableOf(new RestResponse(false, null, null));
+      })
     );
   }
 
@@ -202,6 +201,49 @@ export class ProjectDataService extends CommunityDataService {
     );
   }
 
+  protected fetchCreateResponse(requestId: string): Observable<RemoteData<Community>> {
+    // Resolve self link for new object
+    const selfLink$ = this.requestService.getByUUID(requestId).pipe(
+      getResponseFromEntry(),
+      map((response: RestResponse) => {
+        if (!response.isSuccessful && response instanceof ErrorResponse) {
+          throw new Error(response.errorMessage);
+        } else {
+          return response;
+        }
+      }),
+      map((response: any) => {
+        if (isNotEmpty(response.resourceSelfLinks)) {
+          return response.resourceSelfLinks[0];
+        }
+      }),
+      distinctUntilChanged()
+    ) as Observable<string>;
+
+    return selfLink$.pipe(
+      switchMap((selfLink: string) => this.findByHref(selfLink, followLink('parentCommunity'))),
+    )
+  }
+
+  /**
+   * Perform a patch operation to change the project name
+   * @param name
+   * @param project
+   * @protected
+   */
+  protected patchProjectName(name: string, project: Community): Observable<RemoteData<Community>> {
+    const operation: ReplaceOperation<string> = {
+      path: '/metadata/dc.title/0',
+      op: 'replace',
+      value: name
+    };
+
+    return this.patch(project, [operation]).pipe(
+      flatMap(() => this.findById(project.id, followLink('parentCommunity'))),
+      getFinishedRemoteData()
+    );
+  }
+
   /**
    * Search a community by name
    *
@@ -232,7 +274,7 @@ export class ProjectDataService extends CommunityDataService {
         if (list.page.length > 0) {
           return (list.page[0]).pipe(
             map((community: Community) => community),
-            flatMap( (community: Community) => this.findById(community.id, ...linksToFollow)),
+            flatMap((community: Community) => this.findById(community.id, ...linksToFollow)),
             getFirstSucceededRemoteDataPayload()
           )
         } else {

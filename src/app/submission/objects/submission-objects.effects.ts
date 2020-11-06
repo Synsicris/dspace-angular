@@ -9,7 +9,7 @@ import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
 import {
   catchError,
   concatMap,
-  filter,
+  filter, flatMap,
   map,
   mergeMap,
   switchMap,
@@ -37,7 +37,7 @@ import {
   DepositSubmissionSuccessAction,
   DisableSectionAction,
   DisableSectionErrorAction,
-  DisableSectionSuccessAction,
+  DisableSectionSuccessAction, DiscardSubmissionAction,
   DiscardSubmissionErrorAction,
   DiscardSubmissionSuccessAction,
   InitSectionAction,
@@ -66,6 +66,8 @@ import { RemoteData } from '../../core/data/remote-data';
 import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
 import { SubmissionObjectDataService } from '../../core/submission/submission-object-data.service';
 import { followLink } from '../../shared/utils/follow-link-config.model';
+import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
+import { WorkingPlanService } from '../../core/working-plan/working-plan.service';
 
 @Injectable()
 export class SubmissionObjectEffects {
@@ -287,10 +289,13 @@ export class SubmissionObjectEffects {
    */
   @Effect() discardSubmission$ = this.actions$.pipe(
     ofType(SubmissionObjectActionTypes.DISCARD_SUBMISSION),
-    switchMap((action: DepositSubmissionAction) => {
-      return this.submissionService.discardSubmission(action.payload.submissionId).pipe(
-        map(() => new DiscardSubmissionSuccessAction(action.payload.submissionId)),
-        catchError(() => observableOf(new DiscardSubmissionErrorAction(action.payload.submissionId))));
+    switchMap((action: DiscardSubmissionAction) => {
+      return this.impactPathwayService.checkAndRemoveRelations(action.payload.itemId).pipe(
+        flatMap(() => this.workingPlanService.checkAndRemoveRelations(action.payload.itemId)),
+        flatMap(() => this.submissionService.discardSubmission(action.payload.submissionId).pipe(
+          map(() => new DiscardSubmissionSuccessAction(action.payload.submissionId)),
+          catchError(() => observableOf(new DiscardSubmissionErrorAction(action.payload.submissionId)))))
+      );
     }));
 
   /**
@@ -349,7 +354,10 @@ export class SubmissionObjectEffects {
               private store$: Store<any>,
               private submissionService: SubmissionService,
               private submissionObjectService: SubmissionObjectDataService,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private impactPathwayService: ImpactPathwayService,
+              private workingPlanService: WorkingPlanService,
+              ) {
   }
 
   /**

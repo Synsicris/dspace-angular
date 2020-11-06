@@ -8,9 +8,9 @@
     </button>
   </h1>
   <hr/>
-  <ds-alert class="bg-light"
+  <ds-alert *ngIf="hasInfoMessage()" class="bg-light"
             [dismissible]="false"
-            [content]="'impact-pathway.objectives.info.panel'"
+            [content]="getInfoMessage()"
             [type]="'alert-info'"></ds-alert>
   <ng-container *ngFor="let task of getObjectivesTasks()">
     <ipw-objective [projectId]="projectId"

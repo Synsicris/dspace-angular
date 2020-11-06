@@ -15,6 +15,7 @@ import { ChartDateViewType, WorkpackageEntries } from './working-plan.reducer';
  * action types in the application are unique.
  */
 export const WorkpackageActionTypes = {
+  CLEAR_WORKINGPLAN: type('dspace/core/workingplan/CLEAR_WORKINGPLAN'),
   ADD_WORKPACKAGE: type('dspace/core/workingplan/ADD_WORKPACKAGE'),
   ADD_WORKPACKAGE_ERROR: type('dspace/core/workingplan/ADD_WORKPACKAGE_ERROR'),
   ADD_WORKPACKAGE_SUCCESS: type('dspace/core/workingplan/ADD_WORKPACKAGE_SUCCESS'),
@@ -56,6 +57,13 @@ export const WorkpackageActionTypes = {
 };
 
 /* tslint:disable:max-classes-per-file */
+
+/**
+ * An ngrx action to clear the impact pathway state
+ */
+export class ClearWorkingPlanAction implements Action {
+  type = WorkpackageActionTypes.CLEAR_WORKINGPLAN;
+}
 
 /**
  * An ngrx action to generate a workpackage item
@@ -766,6 +774,7 @@ export type WorkingPlanActions
   | AddWorkpackageStepErrorAction
   | AddWorkpackageStepSuccessAction
   | ChangeChartViewAction
+  | ClearWorkingPlanAction
   | GenerateWorkpackageAction
   | GenerateWorkpackageErrorAction
   | GenerateWorkpackageSuccessAction

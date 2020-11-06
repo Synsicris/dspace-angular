@@ -24,12 +24,17 @@ export class SubmissionFormFooterComponent implements OnChanges {
    * @type {string}
    */
   @Input() submissionId: string;
+  /**
+   * The submission item id
+   * @type {string}
+   */
+  @Input() itemId: string;
 
   /**
    * A boolean representing if discard and delete button should be disable or not
    * @type {string}
    */
-  @Input() disableDepositAndDiscard = false;
+  @Input() disableDeposit = false;
 
   /**
    * A boolean representing if a submission deposit operation is pending
@@ -47,7 +52,7 @@ export class SubmissionFormFooterComponent implements OnChanges {
    * A boolean representing if showing deposit and discard buttons
    * @type {Observable<boolean>}
    */
-  public showDepositAndDiscard: Observable<boolean>;
+  public showDeposit: Observable<boolean>;
 
   /**
    * A boolean representing if submission form is valid or not
@@ -75,10 +80,9 @@ export class SubmissionFormFooterComponent implements OnChanges {
       this.submissionIsInvalid = this.submissionService.getSubmissionStatus(this.submissionId).pipe(
         map((isValid: boolean) => isValid === false)
       );
-      console.log(this.disableDepositAndDiscard);
       this.processingSaveStatus = this.submissionService.getSubmissionSaveProcessingStatus(this.submissionId);
       this.processingDepositStatus = this.submissionService.getSubmissionDepositProcessingStatus(this.submissionId);
-      this.showDepositAndDiscard = observableOf(!this.disableDepositAndDiscard &&
+      this.showDeposit = observableOf(!this.disableDeposit &&
         this.submissionService.getSubmissionScope() === SubmissionScopeType.WorkspaceItem);
     }
   }
@@ -111,7 +115,7 @@ export class SubmissionFormFooterComponent implements OnChanges {
     this.modalService.open(content).result.then(
       (result) => {
         if (result === 'ok') {
-          this.submissionService.dispatchDiscard(this.submissionId)
+          this.submissionService.dispatchDiscard(this.submissionId, this.itemId)
         }
       }
     );
