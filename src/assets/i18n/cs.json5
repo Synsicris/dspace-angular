@@ -4426,6 +4426,7 @@
   // TODO New key - Add a translation
   "milestones.listelement.badge": "Milestone",
   
+  
   // "mydspace.breadcrumbs" : "All items",
   // TODO New key - Add a translation
   "mydspace.breadcrumbs" : "All items",
@@ -4678,6 +4679,7 @@
   // "pagination.sort-direction": "Sort Options",
   "pagination.sort-direction": "Seřazení",
   
+  
   // "participation_events.listelement.badge": "Participative process",
   // TODO New key - Add a translation
   "participation_events.listelement.badge": "Participative process",
@@ -4686,10 +4688,10 @@
   // TODO New key - Add a translation
   "patents.listelement.badge": "Patent and utility patent",
   
-  
   // "person.listelement.badge": "Person",
   // TODO New key - Add a translation
   "person.listelement.badge": "Person",
+  
   
   // "person.page.birthdate": "Birth Date",
   // TODO New key - Add a translation
@@ -5477,6 +5479,30 @@
   // TODO New key - Add a translation
   "project-overview.page.content.all-items" : "All items",
   
+  // "project-overview.page.content.card-project.title" : "Project related uploads",
+  // TODO New key - Add a translation
+  "project-overview.page.content.card-project.title" : "Project related uploads",
+  
+  // "project-overview.page.content.card-project.link1" : "Uploads for proposals",
+  // TODO New key - Add a translation
+  "project-overview.page.content.card-project.link1" : "Uploads for proposals",
+  
+  // "project-overview.page.content.card-project.link2" : "Uploads for parts of reports",
+  // TODO New key - Add a translation
+  "project-overview.page.content.card-project.link2" : "Uploads for parts of reports",
+  
+  // "project-overview.page.content.card-checklist.title" : "Checklists for reflection ",
+  // TODO New key - Add a translation
+  "project-overview.page.content.card-checklist.title" : "Checklists for reflection ",
+  
+  // "project-overview.page.content.card-checklist.link1" : "Ethical Aspects",
+  // TODO New key - Add a translation
+  "project-overview.page.content.card-checklist.link1" : "Ethical Aspects",
+  
+  // "project-overview.page.content.card-checklist.link2" : "Gender Aspects",
+  // TODO New key - Add a translation
+  "project-overview.page.content.card-checklist.link2" : "Gender Aspects",
+  
   // "project-overview.page.content.exploitation-plan" : "Exploitation plan",
   // TODO New key - Add a translation
   "project-overview.page.content.exploitation-plan" : "Exploitation plan",
@@ -6209,6 +6235,201 @@
   "search.filters.filter.submitter.placeholder": "Submitter",
   
   
+  // "search.filters.entityType.applications_econtech": "Application success for business innovations",
+  // TODO New key - Add a translation
+  "search.filters.entityType.applications_econtech": "Application success for business innovations",
+  
+  // "search.filters.entityType.applications_social": "Application success in social innovations/change processes",
+  // TODO New key - Add a translation
+  "search.filters.entityType.applications_social": "Application success in social innovations/change processes",
+  
+  // "search.filters.entityType.awards": "Award or prize",
+  // TODO New key - Add a translation
+  "search.filters.entityType.awards": "Award or prize",
+  
+  // "search.filters.entityType.datafile": "Data file",
+  // TODO New key - Add a translation
+  "search.filters.entityType.datafile": "Data file",
+  
+  // "search.filters.entityType.datapackage": "Data package",
+  // TODO New key - Add a translation
+  "search.filters.entityType.datapackage": "Data package",
+  
+  // "search.filters.entityType.cooperation_events": "Cooperation process",
+  // TODO New key - Add a translation
+  "search.filters.entityType.cooperation_events": "Cooperation process",
+  
+  // "search.filters.entityType.cooperation_partners": "Cooperation partner",
+  // TODO New key - Add a translation
+  "search.filters.entityType.cooperation_partners": "Cooperation partner",
+  
+  // "search.filters.entityType.conditions": "External condition or requirement",
+  // TODO New key - Add a translation
+  "search.filters.entityType.conditions": "External condition or requirement",
+  
+  // "search.filters.entityType.contribution_fundingprogramme": "Contribution to funding programme objectives",
+  // TODO New key - Add a translation
+  "search.filters.entityType.contribution_fundingprogramme": "Contribution to funding programme objectives",
+  
+  // "search.filters.entityType.ethics": "Ethical reflection",
+  // TODO New key - Add a translation
+  "search.filters.entityType.ethics": "Ethical reflection",
+  
+  // "search.filters.entityType.Event": "Event",
+  // TODO New key - Add a translation
+  "search.filters.entityType.Event": "Event",
+  
+  // "search.filters.entityType.gender": "Gender reflection",
+  // TODO New key - Add a translation
+  "search.filters.entityType.gender": "Gender reflection",
+  
+  // "search.filters.entityType.inn_pot_econtech": "Intended business innovation",
+  // TODO New key - Add a translation
+  "search.filters.entityType.inn_pot_econtech": "Intended business innovation",
+  
+  // "search.filters.entityType.inn_pot_social": "Intended social innovation/ change process",
+  // TODO New key - Add a translation
+  "search.filters.entityType.inn_pot_social": "Intended social innovation/ change process",
+  
+  // "search.filters.entityType.impactpathway": "Impact pathway",
+  // TODO New key - Add a translation
+  "search.filters.entityType.impactpathway": "Impact pathway",
+  
+  // "search.filters.entityType.impactpathwaystep": "Impact pathway step",
+  // TODO New key - Add a translation
+  "search.filters.entityType.impactpathwaystep": "Impact pathway step",
+  
+  // "search.filters.entityType.innovationideas": "Idea for innovation or change",
+  // TODO New key - Add a translation
+  "search.filters.entityType.innovationideas": "Idea for innovation or change",
+  
+  // "search.filters.entityType.milestones": "Milestone",
+  // TODO New key - Add a translation
+  "search.filters.entityType.milestones": "Milestone",
+  
+  // "search.filters.entityType.participation_events": "Participative process",
+  // TODO New key - Add a translation
+  "search.filters.entityType.participation_events": "Participative process",
+  
+  // "search.filters.entityType.Patent": "Patent or utility patent",
+  // TODO New key - Add a translation
+  "search.filters.entityType.Patent": "Patent or utility patent",
+  
+  // "search.filters.entityType.Person": "Persons",
+  // TODO New key - Add a translation
+  "search.filters.entityType.Person": "Persons",
+  
+  // "search.filters.entityType.physical_objects": "Object, material",
+  // TODO New key - Add a translation
+  "search.filters.entityType.physical_objects": "Object, material",
+  
+  // "search.filters.entityType.plan_cooperation_events": "Cooperation process (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_cooperation_events": "Cooperation process (plan)",
+  
+  // "search.filters.entityType.plan_events": "Event (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_events": "Event (plan)",
+  
+  // "search.filters.entityType.plan_innovationideas": "Idea for innovation or change (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_innovationideas": "Idea for innovation or change (plan)",
+  
+  // "search.filters.entityType.plan_milestones": "Milestone (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_milestones": "Milestone (plan)",
+  
+  // "search.filters.entityType.plan_participation_events": "Participative process (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_participation_events": "Participative process (plan)",
+  
+  // "search.filters.entityType.plan_physical_objects": "Object, material (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_physical_objects": "Object, material (plan)",
+  
+  // "search.filters.entityType.plan_spinoffs": "Spin-off (or association) (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_spinoffs": "Spin-off (or association) (plan)",
+  
+  // "search.filters.entityType.plan_workpackages": "Workpackage (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_workpackages": "Workpackage (plan)",
+  
+  // "search.filters.entityType.plan_tasks": "Task (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_tasks": "Task (plan)",
+  
+  // "search.filters.entityType.plan_inn_pot_econtech": "Intended business innovation (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_inn_pot_econtech": "Intended business innovation (plan)",
+  
+  // "search.filters.entityType.plan_inn_pot_social": "Intended social innovation/change process (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_inn_pot_social": "Intended social innovation/change process (plan)",
+  
+  // "search.filters.entityType.plan_patent": "Patent or utility patent (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_patent": "Patent or utility patent (plan)",
+  
+  // "search.filters.entityType.plan_publication": "Publication (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_publication": "Publication (plan)",
+  
+  // "search.filters.entityType.plan_research_quest": "Research quest",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_research_quest": "Research quest",
+  
+  // "search.filters.entityType.pot_societalimpact": "Expected societal impact",
+  // TODO New key - Add a translation
+  "search.filters.entityType.pot_societalimpact": "Expected societal impact",
+  
+  // "search.filters.entityType.proj_objectives": "Project objective",
+  // TODO New key - Add a translation
+  "search.filters.entityType.proj_objectives": "Project objective",
+  
+  // "search.filters.entityType.Project": "Research projects",
+  // TODO New key - Add a translation
+  "search.filters.entityType.Project": "Research projects",
+  
+  // "search.filters.entityType.Publication": "Publication",
+  // TODO New key - Add a translation
+  "search.filters.entityType.Publication": "Publication",
+  
+  // "search.filters.entityType.research_results": "Research result",
+  // TODO New key - Add a translation
+  "search.filters.entityType.research_results": "Research result",
+  
+  // "search.filters.entityType.spinoffs": "Spin-off (or associations)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.spinoffs": "Spin-off (or associations)",
+  
+  // "search.filters.entityType.stateofart": "State of knowledge",
+  // TODO New key - Add a translation
+  "search.filters.entityType.stateofart": "State of knowledge",
+  
+  // "search.filters.entityType.steps": "Next step or cooperation",
+  // TODO New key - Add a translation
+  "search.filters.entityType.steps": "Next step or cooperation",
+  
+  // "search.filters.entityType.subproject": "Subproject",
+  // TODO New key - Add a translation
+  "search.filters.entityType.subproject": "Subproject",
+  
+  // "search.filters.entityType.targetgroups": "Target group",
+  // TODO New key - Add a translation
+  "search.filters.entityType.targetgroups": "Target group",
+  
+  // "search.filters.entityType.tasks": "Task",
+  // TODO New key - Add a translation
+  "search.filters.entityType.tasks": "Task",
+  
+  // "search.filters.entityType.unexpected_results": "Unexpected result or problem",
+  // TODO New key - Add a translation
+  "search.filters.entityType.unexpected_results": "Unexpected result or problem",
+  
+  // "search.filters.entityType.workpackages": "Work package",
+  // TODO New key - Add a translation
+  "search.filters.entityType.workpackages": "Work package",
   
   // "search.filters.entityType.JournalIssue": "Journal Issue",
   // TODO New key - Add a translation
@@ -6221,6 +6442,7 @@
   // "search.filters.entityType.OrgUnit": "Organizational Unit",
   // TODO New key - Add a translation
   "search.filters.entityType.OrgUnit": "Organizational Unit",
+  
   
   // "search.filters.has_content_in_original_bundle.true": "Yes",
   // TODO New key - Add a translation
@@ -7810,6 +8032,7 @@
   // TODO New key - Add a translation
   "tasks.listelement.badge": "Task",
   
+  
   // "title": "DSpace Cris",
   // TODO Source message changed - Revise the translation
   "title": "DSpace",
@@ -8113,13 +8336,9 @@
   // TODO New key - Add a translation
   "ethics.listelement.badge": "Ethical reflection",
   
-  // "event.listelement.badge": "Event",
+  // "Event.listelement.badge": "Event",
   // TODO New key - Add a translation
-  "event.listelement.badge": "Event",
-  
-  // "events.listelement.badge": "Events",
-  // TODO New key - Add a translation
-  "events.listelement.badge": "Events",
+  "Event.listelement.badge": "Event",
   
   // "gender.listelement.badge": "Gender reflection",
   // TODO New key - Add a translation
@@ -8141,17 +8360,17 @@
   // TODO New key - Add a translation
   "inn_pot_social.listelement.badge": "Intended social innovation/ change process",
   
-  // "orgunits.listelement.badge": "Organizational units",
+  // "OrgUnit.listelement.badge": "Organizational units",
   // TODO New key - Add a translation
-  "orgunits.listelement.badge": "Organizational units",
+  "OrgUnit.listelement.badge": "Organizational units",
   
-  // "patent.listelement.badge": "Patent or utility patent",
+  // "Patent.listelement.badge": "Patent or utility patent",
   // TODO New key - Add a translation
-  "patent.listelement.badge": "Patent or utility patent",
+  "Patent.listelement.badge": "Patent or utility patent",
   
-  // "persons.listelement.badge": "Persons",
+  // "Person.listelement.badge": "Persons",
   // TODO New key - Add a translation
-  "persons.listelement.badge": "Persons",
+  "Person.listelement.badge": "Persons",
   
   // "plan_inn_pot_econtech.listelement.badge": "Intended business innovation (plan)",
   // TODO New key - Add a translation
@@ -8169,9 +8388,13 @@
   // TODO New key - Add a translation
   "plan_publication.listelement.badge": "Publication (plan)",
   
-  // "projects.listelement.badge": "Research projects",
+  // "plan_research_quest.listelement.badge": "Research quest",
   // TODO New key - Add a translation
-  "projects.listelement.badge": "Research projects",
+  "plan_research_quest.listelement.badge": "Research quest",
+  
+  // "Project.listelement.badge": "Research projects",
+  // TODO New key - Add a translation
+  "Project.listelement.badge": "Research projects",
   
   // "research_results.listelement.badge": "Research result",
   // TODO New key - Add a translation
@@ -8181,9 +8404,9 @@
   // TODO New key - Add a translation
   "stateofart.listelement.badge": "State of knowledge",
   
-  // "subprojects.listelement.badge": "Subproject",
+  // "subproject.listelement.badge": "Subproject",
   // TODO New key - Add a translation
-  "subprojects.listelement.badge": "Subproject",
+  "subproject.listelement.badge": "Subproject",
   
   // "workpackages.listelement.badge": "Work package",
   // TODO New key - Add a translation

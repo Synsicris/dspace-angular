@@ -2344,6 +2344,7 @@
 
   "milestones.listelement.badge": "Milestone",
 
+
   "mydspace.breadcrumbs" : "All items",
 
   "mydspace.description": "",
@@ -2476,12 +2477,13 @@
 
   "pagination.sort-direction": "Sort Options",
 
+
   "participation_events.listelement.badge": "Participative process",
 
   "patents.listelement.badge": "Patent and utility patent",
 
-
   "person.listelement.badge": "Person",
+
 
   "person.page.birthdate": "Birth Date",
 
@@ -2883,6 +2885,18 @@
 
   "project-overview.page.content.all-items" : "All items",
 
+  "project-overview.page.content.card-project.title" : "Project related uploads",
+
+  "project-overview.page.content.card-project.link1" : "Uploads for proposals",
+
+  "project-overview.page.content.card-project.link2" : "Uploads for parts of reports",
+
+  "project-overview.page.content.card-checklist.title" : "Checklists for reflection",
+
+  "project-overview.page.content.card-checklist.link1" : "Ethical Aspects",
+
+  "project-overview.page.content.card-checklist.link2" : "Gender Aspects",
+
   "project-overview.page.content.exploitation-plan" : "Exploitation plan",
 
   "project-overview.page.content.impact-pathways" : "Impact pathway",
@@ -3265,12 +3279,110 @@
   "search.filters.filter.submitter.placeholder": "Submitter",
 
 
+  "search.filters.entityType.applications_econtech": "Application success for business innovations",
+
+  "search.filters.entityType.applications_social": "Application success in social innovations/change processes",
+
+  "search.filters.entityType.awards": "Award or prize",
+
+  "search.filters.entityType.datafile": "Data file",
+
+  "search.filters.entityType.datapackage": "Data package",
+
+  "search.filters.entityType.cooperation_events": "Cooperation process",
+
+  "search.filters.entityType.cooperation_partners": "Cooperation partner",
+
+  "search.filters.entityType.conditions": "External condition or requirement",
+
+  "search.filters.entityType.contribution_fundingprogramme": "Contribution to funding programme objectives",
+
+  "search.filters.entityType.ethics": "Ethical reflection",
+
+  "search.filters.entityType.Event": "Event",
+
+  "search.filters.entityType.gender": "Gender reflection",
+
+  "search.filters.entityType.inn_pot_econtech": "Intended business innovation",
+
+  "search.filters.entityType.inn_pot_social": "Intended social innovation/ change process",
+
+  "search.filters.entityType.impactpathway": "Impact pathway",
+
+  "search.filters.entityType.impactpathwaystep": "Impact pathway step",
+
+  "search.filters.entityType.innovationideas": "Idea for innovation or change",
+
+  "search.filters.entityType.milestones": "Milestone",
+
+  "search.filters.entityType.participation_events": "Participative process",
+
+  "search.filters.entityType.Patent": "Patent or utility patent",
+
+  "search.filters.entityType.Person": "Persons",
+
+  "search.filters.entityType.physical_objects": "Object, material",
+
+  "search.filters.entityType.plan_cooperation_events": "Cooperation process (plan)",
+
+  "search.filters.entityType.plan_events": "Event (plan)",
+
+  "search.filters.entityType.plan_innovationideas": "Idea for innovation or change (plan)",
+
+  "search.filters.entityType.plan_milestones": "Milestone (plan)",
+
+  "search.filters.entityType.plan_participation_events": "Participative process (plan)",
+
+  "search.filters.entityType.plan_physical_objects": "Object, material (plan)",
+
+  "search.filters.entityType.plan_spinoffs": "Spin-off (or association) (plan)",
+
+  "search.filters.entityType.plan_workpackages": "Workpackage (plan)",
+
+  "search.filters.entityType.plan_tasks": "Task (plan)",
+
+  "search.filters.entityType.plan_inn_pot_econtech": "Intended business innovation (plan)",
+
+  "search.filters.entityType.plan_inn_pot_social": "Intended social innovation/change process (plan)",
+
+  "search.filters.entityType.plan_patent": "Patent or utility patent (plan)",
+
+  "search.filters.entityType.plan_publication": "Publication (plan)",
+
+  "search.filters.entityType.plan_research_quest": "Research quest",
+
+  "search.filters.entityType.pot_societalimpact": "Expected societal impact",
+
+  "search.filters.entityType.proj_objectives": "Project objective",
+
+  "search.filters.entityType.Project": "Research projects",
+
+  "search.filters.entityType.Publication": "Publication",
+
+  "search.filters.entityType.research_results": "Research result",
+
+  "search.filters.entityType.spinoffs": "Spin-off (or associations)",
+
+  "search.filters.entityType.stateofart": "State of knowledge",
+
+  "search.filters.entityType.steps": "Next step or cooperation",
+
+  "search.filters.entityType.subproject": "Subproject",
+
+  "search.filters.entityType.targetgroups": "Target group",
+
+  "search.filters.entityType.tasks": "Task",
+
+  "search.filters.entityType.unexpected_results": "Unexpected result or problem",
+
+  "search.filters.entityType.workpackages": "Work package",
 
   "search.filters.entityType.JournalIssue": "Journal Issue",
 
   "search.filters.entityType.JournalVolume": "Journal Volume",
 
   "search.filters.entityType.OrgUnit": "Organizational Unit",
+
 
   "search.filters.has_content_in_original_bundle.true": "Yes",
 
@@ -4088,6 +4200,7 @@
 
   "tasks.listelement.badge": "Task",
 
+
   "title": "DSpace Cris",
 
 
@@ -4249,9 +4362,7 @@
 
   "ethics.listelement.badge": "Ethical reflection",
 
-  "event.listelement.badge": "Event",
-
-  "events.listelement.badge": "Events",
+  "Event.listelement.badge": "Event",
 
   "gender.listelement.badge": "Gender reflection",
 
@@ -4263,11 +4374,11 @@
 
   "inn_pot_social.listelement.badge": "Intended social innovation/ change process",
 
-  "orgunits.listelement.badge": "Organizational units",
+  "OrgUnit.listelement.badge": "Organizational units",
 
-  "patent.listelement.badge": "Patent or utility patent",
+  "Patent.listelement.badge": "Patent or utility patent",
 
-  "persons.listelement.badge": "Persons",
+  "Person.listelement.badge": "Persons",
 
   "plan_inn_pot_econtech.listelement.badge": "Intended business innovation (plan)",
 
@@ -4277,13 +4388,15 @@
 
   "plan_publication.listelement.badge": "Publication (plan)",
 
-  "projects.listelement.badge": "Research projects",
+  "plan_research_quest.listelement.badge": "Research quest",
+
+  "Project.listelement.badge": "Research projects",
 
   "research_results.listelement.badge": "Research result",
 
   "stateofart.listelement.badge": "State of knowledge",
 
-  "subprojects.listelement.badge": "Subproject",
+  "subproject.listelement.badge": "Subproject",
 
   "workpackages.listelement.badge": "Work package",
 

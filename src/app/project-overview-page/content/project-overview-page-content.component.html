@@ -28,7 +28,7 @@
               </li>
             </ul>
           </nav>
-          <button class="btn btn-link btn-lg p-0 m-0 h3 text-decoration-none" role="button" (click)="createImpactPathway()">
+          <button class="btn btn-link btn-lg p-0 m-0 h3 text-decoration-none text-left" role="button" (click)="createImpactPathway()">
             <i class="fas fa-plus-circle"></i>
             <span class="text-dark"> {{'project-overview.page.content.new-impact-pathway' | translate}}</span>
           </button>
@@ -59,7 +59,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-4">
     <div class="col-md-6 col-xl mb-1">
       <div class="flex-fill card">
         <div class="py-4 card-body">
@@ -85,10 +85,10 @@
     <div class="col-xl-3 mb-1">
       <div class="flex-fill card">
         <div class="py-4 card-body">
-          <h4 class="word-wrap">Kooperationspartner und Zielgruppen</h4>
+          <h4 class="word-wrap">Kooperationspartner und Akteursgruppen</h4>
           <ul class="list-unstyled">
             <li><a class="h5" [routerLink]="" (click)="navigateToMydspaceByScope('123456789/26')">Kooperationspartner</a></li>
-            <li><a class="h5" [routerLink]="" (click)="navigateToMydspaceByScope('123456789/188')">Zielgruppen</a></li>
+            <li><a class="h5" [routerLink]="" (click)="navigateToMydspaceByScope('123456789/188')">Akteursgruppen</a></li>
           </ul>
         </div>
       </div>
@@ -111,6 +111,46 @@
           <ul class="list-unstyled">
             <li><a class="h5" [routerLink]="" (click)="navigateToMydspaceByScope('123456789/129')">Plan</a></li>
             <li><a class="h5" [routerLink]="" (click)="navigateToMydspaceByScope('123456789/11')">IST</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-xl mb-1">
+      <div class="flex-fill card">
+        <div class="py-4 card-body">
+          <h4 class="word-wrap">{{'project-overview.page.content.card-project.title' | translate}}</h4>
+          <ul class="list-unstyled">
+            <li>
+              <a class="h3 mb-2 text-decoration-none" routerLink="./" role="button">
+                <span>{{'project-overview.page.content.card-project.link1' | translate}}</span>
+              </a>
+            </li>
+            <li>
+              <a class="h3 mb-2 text-decoration-none" routerLink="./" role="button">
+                <span>{{'project-overview.page.content.card-project.link2' | translate}}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl mb-1">
+      <div class="flex-fill card">
+        <div class="py-4 card-body">
+          <h4 class="word-wrap">{{'project-overview.page.content.card-checklist.title' | translate}}</h4>
+          <ul class="list-unstyled">
+            <li>
+              <a class="h3 mb-2 text-decoration-none" routerLink="./" role="button">
+                <span>{{'project-overview.page.content.card-checklist.link1' | translate}}</span>
+              </a>
+            </li>
+            <li>
+              <a class="h3 mb-2 text-decoration-none" routerLink="./" role="button">
+                <span>{{'project-overview.page.content.card-checklist.link2' | translate}}</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
