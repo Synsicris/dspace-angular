@@ -2344,6 +2344,8 @@
 
   "milestones.listelement.badge": "Milestone",
 
+  "mydspace.breadcrumbs" : "All items",
+
   "mydspace.description": "",
 
   "mydspace.general.text-here": "here",
@@ -2857,7 +2859,7 @@
 
   "project.search.results.head": "Project Search Results",
 
-  "project-overview.page.exploitation-plan" : "Exploitation plan",
+
 
   "project-overview.page.header.delete.btn" : "Delete project",
 
@@ -2879,13 +2881,20 @@
 
   "project-overview.page.header.project.title" : "Project overview : ",
 
-  "project-overview.page.impact-pathways" : "Impact pathways",
+  "project-overview.page.content.all-items" : "All items",
 
-  "project-overview.page.new-impact-pathway" : "Create new impact pathway",
+  "project-overview.page.content.exploitation-plan" : "Exploitation plan",
+
+  "project-overview.page.content.impact-pathways" : "Impact pathway",
+
+  "project-overview.page.content.new-impact-pathway" : "Create new impact pathway",
+
+  "project-overview.page.content.reports" : "Reports / export",
+
+  "project-overview.page.content.working-plan" : "Working plan",
 
   "project-overview.page.title" : "Project overview",
 
-  "project-overview.page.working-plan" : "Working plan",
 
   "publication.listelement.badge": "Publication",
 
