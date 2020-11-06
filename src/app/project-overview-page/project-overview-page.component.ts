@@ -87,16 +87,6 @@ export class ProjectOverviewPageComponent implements OnInit {
   }
 
   /**
-   * Return project name
-   */
-  getProjectName(): Observable<string> {
-    return this.projectRD$.pipe(
-      getFirstSucceededRemoteDataPayload(),
-      map((project: Community) => this.nameService.getName(project))
-    )
-  }
-
-  /**
    * Return name by given ImpactPathway
    *
    * @param impactPathway

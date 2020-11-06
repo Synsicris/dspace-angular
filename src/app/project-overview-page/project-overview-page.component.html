@@ -1,9 +1,6 @@
 <div *ngIf="(projectRD$ | async).hasSucceeded" class="container">
-  <header class="comcol-header border-bottom mb-4 pb-4">
-    <ds-comcol-page-header
-      [name]="('project-overview.page.project.title' | translate ) + (getProjectName() | async)">
-    </ds-comcol-page-header>
-  </header>
+  <ds-project-overview-page-header [project]="(projectRD$ | async)?.payload"
+                                   [projectUUID]="(projectUUID$ | async)"></ds-project-overview-page-header>
   <div class="row mb-4">
     <div class="col-md-6 col-xl mb-1">
       <div class="flex-fill card">
