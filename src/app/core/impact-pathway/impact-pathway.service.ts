@@ -800,7 +800,7 @@ export class ImpactPathwayService {
   }
 
   private getCollectionIdByProjectAndEntity(projectId: string, entityType: string): Observable<string> {
-    return this.collectionService.findAuthorizedByCommunityAndRelationshipType(projectId, entityType).pipe(
+    return this.collectionService.getAuthorizedCollectionByCommunityAndEntityType(projectId, entityType).pipe(
       getFirstSucceededRemoteListPayload(),
       map((list: Collection[]) => (list && list.length > 0) ? list[0] : null),
       map((collection: Collection) => isNotEmpty(collection) ? collection.id : null),
