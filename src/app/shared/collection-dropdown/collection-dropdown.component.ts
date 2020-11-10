@@ -204,16 +204,15 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
     let searchListService$: Observable<RemoteData<PaginatedList<Collection>>> = null;
     if (this.metadata && this.scope) {
       searchListService$ = this.collectionDataService
-        .findAuthorizedByCommunityAndRelationshipType(
+        .getAuthorizedByCommunityAndRelationshipType(
           this.scope,
           this.metadatavalue,
           findOptions,
           followLink('parentCommunity'));
     } else if (this.metadata) {
       searchListService$ = this.collectionDataService
-        .getAuthorizedCollectionAndMetadata(
+      .getAuthorizedCollectionByEntityType(
           query,
-          this.metadata,
           this.metadatavalue,
           findOptions,
           followLink('parentCommunity'));
