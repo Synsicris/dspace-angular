@@ -103,14 +103,9 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
   currentQuery: string;
 
   /**
-   * If present this value is used to filter collection list
+   * If present this value is used to filter collection list by entity type
    */
-  @Input() metadata: string;
-
-  /**
-   * If present this value is used to filter collection list
-   */
-  @Input() metadatavalue: string;
+  @Input() entityType: string;
 
   /**
    * If present this value is used to filter collection list by community
@@ -202,18 +197,18 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
       currentPage: page
     };
     let searchListService$: Observable<RemoteData<PaginatedList<Collection>>> = null;
-    if (this.metadata && this.scope) {
+    if (this.entityType && this.scope) {
       searchListService$ = this.collectionDataService
         .getAuthorizedCollectionByCommunityAndEntityType(
           this.scope,
-          this.metadatavalue,
+          this.entityType,
           findOptions,
           followLink('parentCommunity'));
-    } else if (this.metadata) {
+    } else if (this.entityType) {
       searchListService$ = this.collectionDataService
       .getAuthorizedCollectionByEntityType(
           query,
-          this.metadatavalue,
+        this.entityType,
           findOptions,
           followLink('parentCommunity'));
     } else {
