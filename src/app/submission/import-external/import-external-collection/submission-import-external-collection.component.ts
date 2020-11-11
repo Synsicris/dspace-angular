@@ -17,6 +17,11 @@ export class SubmissionImportExternalCollectionComponent {
   @Output() public selectedEvent = new EventEmitter<CollectionListEntry>();
 
   /**
+   * If present this value is used to filter collection list by entity type
+   */
+  public entityType: string;
+
+  /**
    * Initialize the component variables.
    * @param {NgbActiveModal} activeModal
    */
