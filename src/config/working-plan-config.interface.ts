@@ -2,6 +2,7 @@ import { Config } from './config.interface';
 
 export interface WorkingPlanConfig extends Config {
   workingPlanFormName: string;
+  workingPlanParentRelationMetadata: string;
   workingPlanStepsFormName: string;
   workingPlanStepStatusMetadata: string;
   workingPlanStepResponsibleMetadata: string;

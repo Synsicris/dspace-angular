@@ -130,11 +130,19 @@ export class WorkingPlanService {
     )
   }
 
+  getWorkpackageFormHeader(): string {
+    return environment.workingPlan.workingPlanFormName;
+  }
+
   getWorkpackageStepFormConfig(): Observable<SubmissionFormModel> {
     const formName = environment.workingPlan.workingPlanStepsFormName;
     return this.formConfigService.getConfigByName(formName).pipe(
       map((configData: ConfigData) => configData.payload as SubmissionFormModel)
     )
+  }
+
+  getWorkpackageStepFormHeader(): string {
+    return environment.workingPlan.workingPlanStepsFormName;
   }
 
   getWorkpackageItemById(itemId): Observable<Item> {
@@ -358,6 +366,14 @@ export class WorkingPlanService {
     )
   }
 
+  checkAndRemoveRelations(itemId: string): Observable<Item> {
+    return this.itemAuthorityRelationService.removeRelationFromParent(
+      itemId,
+      environment.workingPlan.workingPlanParentRelationMetadata,
+      environment.workingPlan.workingPlanStepRelationMetadata
+    );
+  }
+
   createAddMetadataPatchOp(metadataName: string, value: any): void {
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
     this.operationsBuilder.add(pathCombiner.getPath(metadataName), value, true, true);
@@ -560,7 +576,7 @@ export class WorkingPlanService {
   }
 
   private getCollectionIdByProjectAndEntity(projectId: string, entityType: string): Observable<string> {
-    return this.collectionService.findAuthorizedByCommunityAndRelationshipType(projectId, entityType).pipe(
+    return this.collectionService.getAuthorizedCollectionByCommunityAndEntityType(projectId, entityType).pipe(
       getFirstSucceededRemoteListPayload(),
       map((list: Collection[]) => (list && list.length > 0) ? list[0] : null),
       map((collection: Collection) => isNotEmpty(collection) ? collection.id : null),

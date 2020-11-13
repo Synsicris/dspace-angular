@@ -198,6 +198,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       }
     }, () => null);
     modalRef.componentInstance.formConfig = this.workingPlanService.getWorkpackageStepFormConfig();
+    modalRef.componentInstance.formHeader = this.workingPlanService.getWorkpackageStepFormHeader();
     modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
     modalRef.componentInstance.excludeListId = [nestedNode.id];
     modalRef.componentInstance.excludeFilterName = 'parentWorkpackageId';

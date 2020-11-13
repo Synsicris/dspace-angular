@@ -467,7 +467,7 @@
 
   "applications_social.listelement.badge": "Application success in social innovations/change processes",
 
-  "awards.listelement.badge": "Awards and prizes",
+  "awards.listelement.badge": "Award or prize",
 
 
   "admin.workflow.breadcrumbs": "Administer Workflow",
@@ -1018,9 +1018,10 @@
   "community.sub-community-list.head": "Communities of this Community",
 
 
-  "datafile.listelement.badge": "Data File",
+  "datafile.listelement.badge": "Data file",
 
-  "datapackage.listelement.badge": "Data Package",
+  "datapackage.listelement.badge": "Data package",
+
 
   "cookies.consent.accept-all": "Accept all",
 
@@ -1093,9 +1094,8 @@
 
   "coordinator.page.title": "Coordinator overview",
 
-  "cooperation_events.listelement.badge": "Cooperation processes",
 
-
+  "cooperation_events.listelement.badge": "Cooperation process",
 
 
   "curation-task.task.checklinks.label":  "Check Links in Metadata",
@@ -1456,6 +1456,8 @@
 
   "impact-pathway.breadcrumbs" : "Impact pathway",
 
+  "impact-pathway.checkbox.link": "Click here to link/unlink item",
+
   "impact-pathway.create.bidirectional-link": "Create bidirectional link",
 
   "impact-pathway.create.btn": "Create impact pathway",
@@ -1466,7 +1468,7 @@
 
   "impact-pathway.create.outcome-link": "Create link",
 
-  "impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
+  "impact-pathway.create.placeholder": "Enter the name of the new impact pathway.",
 
   "impact-pathway.create.success": "The impact pathway has been generated successfully.",
 
@@ -1474,9 +1476,17 @@
 
   "impact-pathway.edit.page.title": "Edit impact pathway",
 
+  "impact-pathway.info.btn.title": "Show information",
+
   "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
 
+  "impact-pathway.objectives.back-btn": "Back to impact pathway",
+
   "impact-pathway.objectives.edit.page.title": "Edit objectives",
+
+  "impact-pathway.objectives.step_type_2.info.panel": "Here you define the most important work packages and tasks which contribute to the research and development objective and are relevant for the development of impacts.</br>All items created here can be reused in the working plan and vice versa items already created in the working plan can be used here.</br>For detailed descriptions of materials and methods, please formulate them in a document and upload it on the project page.</br>Via [Edit Item] in the description field, you can edit the objective and description field. Then save your settings.",
+
+  "impact-pathway.objectives.step_type_3.info.panel": "Here you define the most important work packages and tasks which contribute to the research and development objective and are relevant for the development of impacts.</br>All items created here can be reused in the working plan and vice versa items already created in the working plan can be used here.</br>For detailed descriptions of materials and methods, please formulate them in a document and upload it on the project page.</br>Via [Edit Item] in the description field, you can edit the objective and description field. Then save your settings.",
 
   "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
 
@@ -1514,18 +1524,13 @@
 
   "impact-pathway.task.create.success": "New item has been created successfully.",
 
-  "impact-pathway.wrapper.info": "<b>Develop your Impact Pathway</b><br>  What are your objectives so that your project can have an impact? Sort objectives into categories. Select and describe funder objectives. How are your project objectives related (Draw arrows between your objectives)? Add further explanations. Specify each objectives and add items and tasks.",
+  "impact-pathway.wrapper.info": "<b>Develop the Impact Pathway of the project</b></br><p>The Impact Pathway supports you in the impact-oriented planning and implementation of the project. Please present the most important objectives, activities and intended impacts of the project in a clear and concise manner by means of key messages. Use arrows to illustrate particularly important and non-linear relationships. While the project is progressing, you can update the Impact Pathway and add any results achieved.</p><p>The columns structure the key messages for impact-oriented planning:</br>In <b>Background</b> important preliminary considerations for the project are presented, such as problem definition, state of knowledge and conditions.</br>The <b>Objectives of research and development</b> describe the scientific/technical work objectives of the project. These objectives can be assigned to work packages and tasks on a second level.</br><b>Interactions with partners and groups of actors. Outputs for dissemination</b> reflect all exchange and transfer activities of the project. In a first step, key messages about the purpose and group of actors of the interactions are formulated. These key messages can be assigned to specific activities on a second level.</br>The intended impacts of the project are structured in two columns:</br>In <b>Application (possibilities)</b> the contributions of the project to the application of the project results are presented.</br><b>Expected societal impacts</b> describe what societal effects are expected when the results of projects are applied.</br>In <b>Contribution to funding programme objectives</b>, the funding programme objectives to which the project contributes are selected.</p><p>In each column, you can use [+] to create unlimited items or search for and select previously created items.</br>Each item has a specific detail page (depending on the section selected) in which further details are usually given. You can switch between the Impact Pathway and the detail page of an item at any time.</br>You can start to create items in any column of the Impact Pathway.</p><p><b>Key questions and tips for developing the Impact Pathway:</b> What impacts do you want to achieve with the project? How would you like to contribute to the development of these impacts?<br>It is recommended, to plan the Impact Pathway for the project in terms of the intended impacts and to develop it together with partners in practice and groups of actors.</br></p>",
 
   "impactpathway.listelement.badge": "Impact pathway",
 
   "impactpathwaystep.listelement.badge": "Impact pathway step",
 
-  "innovationideas.listelement.badge": "Ideas for innovation and change",
-
-  "innovationpotentials_econtech.listelement.badge": "Intended business innovations",
-
-  "innovationpotentials_social.listelement.badge": "Intended social innovations/change processes",
-
+  "innovationideas.listelement.badge": "Idea for innovation or change",
 
 
   "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
@@ -2339,7 +2344,10 @@
   "menu.section.workflow": "Administer Workflow",
 
 
-  "milestones.listelement.badge": "Milestones",
+  "milestones.listelement.badge": "Milestone",
+
+
+  "mydspace.breadcrumbs" : "All items",
 
   "mydspace.description": "",
 
@@ -2471,11 +2479,13 @@
 
   "pagination.sort-direction": "Sort Options",
 
-  "participation_events.listelement.badge": "Participative processes",
 
-  "patents.listelement.badge": "Patents and utility patents",
+  "participation_events.listelement.badge": "Participative process",
+
+  "patents.listelement.badge": "Patent and utility patent",
 
   "person.listelement.badge": "Person",
+
 
   "person.page.birthdate": "Birth Date",
 
@@ -2591,39 +2601,31 @@
   "person.search.title": "DSpace Cris Angular :: Person Search",
 
 
-  "physical_objects.listelement.badge": "Objects, materials",
+  "physical_objects.listelement.badge": "Object, material",
 
-  "plan_cooperation_events.listelement.badge": "Cooperation processes (plan)",
+  "plan_cooperation_events.listelement.badge": "Cooperation process (plan)",
 
-  "plan_events.listelement.badge": "Events (plan)",
+  "plan_events.listelement.badge": "Event (plan)",
 
-  "plan_innovationideas.listelement.badge": "Ideas for innovation and change (plan)",
+  "plan_innovationideas.listelement.badge": "Idea for innovation or change (plan)",
 
-  "plan_innovationpotentials_econtech.listelement.badge": "Intended business innovations (plan)",
+  "plan_milestones.listelement.badge": "Milestone (plan)",
 
-  "plan_innovationpotentials_social.listelement.badge": "Intended social innovations/change processes (plan)",
+  "plan_participation_events.listelement.badge": "Participative process (plan)",
 
-  "plan_milestones.listelement.badge": "Milestones (plan)",
+  "plan_physical_objects.listelement.badge": "Object, material (plan)",
 
-  "plan_participation_events.listelement.badge": "Participative processes (plan)",
+  "plan_spinoffs.listelement.badge": "Spin-off (or association) (plan)",
 
-  "plan_patents.listelement.badge": "Patents and utility patents (plan)",
+  "plan_workpackages.listelement.badge": "Workpackage (plan)",
 
-  "plan_physical_objects.listelement.badge": "Objects, materials (plan)",
-
-  "plan_publications.listelement.badge": "Publications (plan)",
-
-  "plan_spinoffs.listelement.badge": "Spin-offs (incl. associations) (plan)",
-
-  "plan_workpackages.listelement.badge": "Workpackages (plan)",
-
-  "plan_tasks.listelement.badge": "Tasks (plan)",
+  "plan_tasks.listelement.badge": "Task (plan)",
 
   "pot_societalimpact.listelement.badge": "Expected societal impact",
 
-  "proj_objectives.listelement.badge": "Project objectives",
+  "proj_objectives.listelement.badge": "Project objective",
 
-  "publications.listelement.badge": "Publications",
+  "Publication.listelement.badge": "Publication",
 
 
   "process.new.select-parameters": "Parameters",
@@ -2841,7 +2843,7 @@
 
   "project.create.success": "The new project has been generated successfully.",
 
-  "project.listelement.badge": "Research Project",
+  "project.listelement.badge": "Research project",
 
   "project.page.contributor": "Contributors",
 
@@ -2861,17 +2863,54 @@
 
   "project.search.results.head": "Project Search Results",
 
-  "project-overview.page.exploitation-plan" : "Exploitation plan",
 
-  "project-overview.page.impact-pathways" : "Impact pathways",
 
-  "project-overview.page.project.title" : "Project overview : ",
+  "project-overview.page.header.delete.btn" : "Delete project",
 
-  "project-overview.page.new-impact-pathway" : "Create new impact pathway",
+  "project-overview.page.header.delete.confirm.cancel": "Cancel",
+
+  "project-overview.page.header.delete.confirm.info": "This operation can't be undone. Are you sure?",
+
+  "project-overview.page.header.delete.confirm.submit": "Yes, I'm sure",
+
+  "project-overview.page.header.delete.confirm.title": "Delete project",
+
+  "project-overview.page.header.delete.error": "There was an issue when deleting the project, please try again later.",
+
+  "project-overview.page.header.delete.processing": "Processing...",
+
+  "project-overview.page.header.delete.success": "Project deleted successfully.",
+
+  "project-overview.page.header.delete.submit": "Delete",
+
+  "project-overview.page.header.project.title" : "Project overview : ",
+
+  "project-overview.page.content.all-items" : "All items",
+
+  "project-overview.page.content.card-project.title" : "Project related uploads",
+
+  "project-overview.page.content.card-project.link1" : "Uploads for proposals",
+
+  "project-overview.page.content.card-project.link2" : "Uploads for parts of reports",
+
+  "project-overview.page.content.card-checklist.title" : "Checklists for reflection",
+
+  "project-overview.page.content.card-checklist.link1" : "Ethical Aspects",
+
+  "project-overview.page.content.card-checklist.link2" : "Gender Aspects",
+
+  "project-overview.page.content.exploitation-plan" : "Exploitation plan",
+
+  "project-overview.page.content.impact-pathways" : "Impact pathway",
+
+  "project-overview.page.content.new-impact-pathway" : "Create new impact pathway",
+
+  "project-overview.page.content.reports" : "Reports / export",
+
+  "project-overview.page.content.working-plan" : "Working plan",
 
   "project-overview.page.title" : "Project overview",
 
-  "project-overview.page.working-plan" : "Working plan",
 
   "publication.listelement.badge": "Publication",
 
@@ -3242,12 +3281,110 @@
   "search.filters.filter.submitter.placeholder": "Submitter",
 
 
+  "search.filters.entityType.applications_econtech": "Application success for business innovations",
+
+  "search.filters.entityType.applications_social": "Application success in social innovations/change processes",
+
+  "search.filters.entityType.awards": "Award or prize",
+
+  "search.filters.entityType.datafile": "Data file",
+
+  "search.filters.entityType.datapackage": "Data package",
+
+  "search.filters.entityType.cooperation_events": "Cooperation process",
+
+  "search.filters.entityType.cooperation_partners": "Cooperation partner",
+
+  "search.filters.entityType.conditions": "External condition or requirement",
+
+  "search.filters.entityType.contribution_fundingprogramme": "Contribution to funding programme objectives",
+
+  "search.filters.entityType.ethics": "Ethical reflection",
+
+  "search.filters.entityType.Event": "Event",
+
+  "search.filters.entityType.gender": "Gender reflection",
+
+  "search.filters.entityType.inn_pot_econtech": "Intended business innovation",
+
+  "search.filters.entityType.inn_pot_social": "Intended social innovation/ change process",
+
+  "search.filters.entityType.impactpathway": "Impact pathway",
+
+  "search.filters.entityType.impactpathwaystep": "Impact pathway step",
+
+  "search.filters.entityType.innovationideas": "Idea for innovation or change",
+
+  "search.filters.entityType.milestones": "Milestone",
+
+  "search.filters.entityType.participation_events": "Participative process",
+
+  "search.filters.entityType.Patent": "Patent or utility patent",
+
+  "search.filters.entityType.Person": "Persons",
+
+  "search.filters.entityType.physical_objects": "Object, material",
+
+  "search.filters.entityType.plan_cooperation_events": "Cooperation process (plan)",
+
+  "search.filters.entityType.plan_events": "Event (plan)",
+
+  "search.filters.entityType.plan_innovationideas": "Idea for innovation or change (plan)",
+
+  "search.filters.entityType.plan_milestones": "Milestone (plan)",
+
+  "search.filters.entityType.plan_participation_events": "Participative process (plan)",
+
+  "search.filters.entityType.plan_physical_objects": "Object, material (plan)",
+
+  "search.filters.entityType.plan_spinoffs": "Spin-off (or association) (plan)",
+
+  "search.filters.entityType.plan_workpackages": "Workpackage (plan)",
+
+  "search.filters.entityType.plan_tasks": "Task (plan)",
+
+  "search.filters.entityType.plan_inn_pot_econtech": "Intended business innovation (plan)",
+
+  "search.filters.entityType.plan_inn_pot_social": "Intended social innovation/change process (plan)",
+
+  "search.filters.entityType.plan_patent": "Patent or utility patent (plan)",
+
+  "search.filters.entityType.plan_publication": "Publication (plan)",
+
+  "search.filters.entityType.plan_research_quest": "Research quest",
+
+  "search.filters.entityType.pot_societalimpact": "Expected societal impact",
+
+  "search.filters.entityType.proj_objectives": "Project objective",
+
+  "search.filters.entityType.Project": "Research projects",
+
+  "search.filters.entityType.Publication": "Publication",
+
+  "search.filters.entityType.research_results": "Research result",
+
+  "search.filters.entityType.spinoffs": "Spin-off (or associations)",
+
+  "search.filters.entityType.stateofart": "State of knowledge",
+
+  "search.filters.entityType.steps": "Next step or cooperation",
+
+  "search.filters.entityType.subproject": "Subproject",
+
+  "search.filters.entityType.targetgroups": "Target group",
+
+  "search.filters.entityType.tasks": "Task",
+
+  "search.filters.entityType.unexpected_results": "Unexpected result or problem",
+
+  "search.filters.entityType.workpackages": "Work package",
 
   "search.filters.entityType.JournalIssue": "Journal Issue",
 
   "search.filters.entityType.JournalVolume": "Journal Volume",
 
   "search.filters.entityType.OrgUnit": "Organizational Unit",
+
 
   "search.filters.has_content_in_original_bundle.true": "Yes",
 
@@ -3319,9 +3456,10 @@
 
   "sorting.score.DESC": "Relevance",
 
-  "spinoffs.listelement.badge": "Spin-offs (incl. associations)",
 
-  "steps.listelement.badge": "Next steps and cooperation",
+  "spinoffs.listelement.badge": "Spin-off (or associations)",
+
+  "steps.listelement.badge": "Next step or cooperation",
 
   "submission.edit.title": "Edit Submission",
 
@@ -3438,8 +3576,6 @@
   "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.added.local-entity": "Successfully added local author to the selection",
 
   "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.added.new-entity": "Successfully imported and added external author to the selection",
-
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.title": "Import Remote Author",
 
   "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.added.local-entity": "Successfully added local journal issue to the selection",
 
@@ -3595,13 +3731,13 @@
 
   "submission.sections.ccLicense.type": "License Type",
 
-  "submission.sections.ccLicense.select": "Select a license type…",
+  "submission.sections.ccLicense.select": "Select a license type...",
 
-  "submission.sections.ccLicense.change": "Change your license type…",
+  "submission.sections.ccLicense.change": "Change your license type...",
 
   "submission.sections.ccLicense.none": "No licenses available",
 
-  "submission.sections.ccLicense.option.select": "Select an option…",
+  "submission.sections.ccLicense.option.select": "Select an option...",
 
   "submission.sections.ccLicense.link": "You’ve selected the following license:",
 
@@ -3641,15 +3777,15 @@
 
   "submission.sections.submit.progressbar.describe.agrovoc_keywords": "Agrovoc keywords",
 
-  "submission.sections.submit.progressbar.describe.applications_econtech": "Succsessful use of results for change processes",
+  "submission.sections.submit.progressbar.describe.applications_econtech": "Successful use of results for change processes",
 
   "submission.sections.submit.progressbar.describe.applications_econtech_quant": "Quantification of the use of results and development of the outreach",
 
   "submission.sections.submit.progressbar.describe.applications_econtech_types": "If no innovation-potential is linked: Type and actors group of the successful use of results",
 
-  "submission.sections.submit.progressbar.describe.applications_econtech_types.info": "The following information need only be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
+  "submission.sections.submit.progressbar.describe.applications_econtech_types.info": "The following information needs only to be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
 
-  "submission.sections.submit.progressbar.describe.applications_social": "Succsessful use of results for social innovations/ change processes",
+  "submission.sections.submit.progressbar.describe.applications_social": "Successful use of results for social innovations/ change processes",
 
   "submission.sections.submit.progressbar.describe.applications_social_quant": "Quantification of the use of results and development of the outreach",
 
@@ -3661,7 +3797,7 @@
 
   "submission.sections.submit.progressbar.describe.awards": "Prizes and awards",
 
-  "submission.sections.submit.progressbar.describe.awards.info": "Please document here all prizes and awards related to the project and/or its results.",
+  "submission.sections.submit.progressbar.describe.awards.info": "Please document here all prizes and awards related to the project and/ or its results.",
 
   "submission.sections.submit.progressbar.describe.conditions": "Reflection of external conditions and requirements",
 
@@ -3673,7 +3809,7 @@
 
   "submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg": "Relation of the project to SDGs",
 
-  "submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg.info": "The assignment to the UN Sustainable Development Goals (SDGs) are carried out for programme evaluation. If SDGs have already been assigned to the programme objectives, these are displayed. Please select a SDG target manually if no assignment has been made yet or if the project contributes to other SDGs that go beyond the program objectives. Further information can be found here [LINK].",
+  "submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg.info": "The assignment to the UN Sustainable Development Goals (SDGs) are carried out for programme evaluation. If SDGs have already been assigned to the program objectives, these are displayed. Please select a SDG target manually if no assignment has been made yet or if the project contributes to other SDGs that go beyond the program objectives. Further information can be found here [LINK].",
 
   "submission.sections.submit.progressbar.describe.cooperation_events": "Cooperation processes basic information",
 
@@ -3681,7 +3817,7 @@
 
   "submission.sections.submit.progressbar.describe.cooperation_events_date": "Dates of personal meetings or other central activities",
 
-  "submission.sections.submit.progressbar.describe.cooperation_events_date.info": "It is not expected here that every telephone call or frequent web conferences will be recorded with exact data. Please use the frequency information for this purpose",
+  "submission.sections.submit.progressbar.describe.cooperation_events_date.info": "It is not expected here that every telephone call or frequent web conferences will be recorded with exact data. Please use the frequency information for this purpose.",
 
   "submission.sections.submit.progressbar.describe.cooperation_events_frequency": "Frequency of the cooperation processes",
 
@@ -3703,9 +3839,9 @@
 
   "submission.sections.submit.progressbar.describe.cooperation_partners_staff.info": "Please complete the information on project staff. The information is used for criteria on equality and interdisciplinarity.",
 
-  "submission.sections.submit.progressbar.describe.easy_upload": "Import from easy-Online",
+  "submission.sections.submit.progressbar.easy_upload": "Import from easy-Online",
 
-  "submission.sections.submit.progressbar.describe.easy_upload.info": "By uploading your easy-Online application, you import information about the sub-project, the executing agency and the persons involved. You can use this information here as well. The upload can be repeated at any time with an updated xml file from easy-online.",
+  "submission.sections.submit.progressbar.easy_upload.info": "By uploading your easy-Online application, you import information about the sub-project, the executing agency and the persons involved. You can use this information here as well. The upload can be repeated at any time with an updated xml file from easy-online.",
 
   "submission.sections.submit.progressbar.describe.entity_type_selection": "Selection of the entity type",
 
@@ -3737,25 +3873,43 @@
 
   "submission.sections.submit.progressbar.describe.gender_project.info": "Gender aspects can be relevant at several points of an R&D process. Please indicate where gender aspects may be affected by the project. If you choose \"yes\" in an area, please address these aspects in the corresponding section in the SynSICRIS tool.",
 
+  "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "<i>Please select a section from the list and give a key message. Or select already existing items via the search.</i><p><b>State of knowledge/problem definition</b> covers important points of the problem definition dealt with in the project and summarises the current state of knowledge in concise key messages. A document with a detailed description and references can be uploaded on the project page. This information is only required for application purposes and does not need to be updated during the course of the project. </br><b>External conditions and requirements</b> indicate which external conditions are relevant for the development of impacts by the project. Whether research has an impact also depends on the external conditions, such as the legal framework, consumer behaviour or production methods. The relevant external conditions or inhibiting influences on the development of impacts can be described and updated if changes occur. Arrows can be used to illustrate relationships between external conditions and other items.</br>Key messages on <b>ethical aspects</b> and <b>gender equality</b> should only be made after the reflection, led by questions, has taken place (accessible via the project page).</p><b>Key question:</b> Which preliminary considerations are relevant for project implementation and for developing impacts?",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_form.info": "<i>Please create an item by defining a scientific/technical work objective. Or select already existing items via the search. After you have created the item, you can open a second level. There you can specify the approach for achieving the objectives.</i><p><b>Key question:</b> Which research questions are derived from the problem definition?",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_objective_form.info": "<i>Please define a work package or a task that is necessary for the research and development objective. Or select already existing items via the search. When selecting, please consider whether they relate to project planning or reporting.</i><p><b>Workpackages</b> serve to structure tasks in the working plan; on the detail page, changes in the workpackages can also be explained in the course of reporting.</br><b>Tasks</b> are separate work steps which can be assigned to the individual workpackages in the working plan.<p><b>Key question:</b> Which research design is required to achieve transferable and scientifically reliable results?",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "Here you can formulate key messages on the purpose and with which groups of actors exchange and transfer activities take place or outputs are produced for transfer.<p><i>Please create an item by defining a key message. Or select already existing items via the search. After you have created the item, you can open a second level. There you can assign specific activities and outputs to the key message.</i><p>Direct interaction with groups of actors and transfer via target group-specific project outputs are essential for the development of impacts. In parallel to or before planning exchange and transfer activities, you should have identified the relevant groups of actors in the project.</p><p><b>Key questions:</b> Which exchange processes with the target groups, stakeholders or multipliers and also with critical groups of actors are necessary in order to develop applicable results and promote the application of the results? Which groups of actors should be reached and in what form, so that the transfer of results is successful?",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "<i>Please select the section from the list and provide a key message. Or select already existing items via the search. When selecting, please consider whether the item relates to project planning or reporting.</i><p><b>Cooperation processes</b> include the collaboration of formal and informal cooperation partners in the project.</br><b>Participatory processes</b> are exchange processes with groups of actors consisting of several interactions/events that build on each other.</br><b>Events</b> are individual events with groups of actors.</br><b>Publications</b> include e.g. scientific article, practical contribution, video, website of the project. For planning, enter the type and a number in the key message.</br><b>Objects, materials</b> such as exhibits or other objects are relevant outputs that serve the transfer and/or can be further used by third parties for transfer, research or teaching.</br>Select <b>Tasks</b> if the above sections are not applicable.</p><p><b>Key questions:</b> At what point in time and with what content are interactions required to contribute to the project objectives? How can continuity in the exchange processes be ensured? Which contents and formats can be used to particularly arouse the interest of a group of actors and, if necessary, to maintain it in the long term? What benefits can a group of actors derive from interaction?</br>Which opportunities exist to reach groups of actors where they have already been informing themselves or exchanging information?",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "<i>Please select a section from the list and give a key message. Or select already existing items via the search. When selecting, please consider whether the item relates to project planning or reporting.</i></br>Focus on the (possible) application of the project results by the relevant groups of actors. Include also aspects that you consider in the exploitation plan.<p><b>Intended business innovations</b> include the contribution of the project to the development or improvement of products, services or production and business processes.</br><b>Intended social innovation/change processes</b> focus on processes of change in attitudes, knowledge and actions of groups of actors or changed regulations, guidelines or structures to which the project contributes.</br><b>Ideas for innovation and change</b> include all possible applications that are still unclear or far in the future.</br><b>Patents and utility models</b> record the plans and results for the registration of property rights.</br><b>Spin-offs (incl. associations)</b> comprise the intentions and results for the foundation of transfer and competence spin-offs as well as the founding of associations.</br><b>Unexpected results and problems</b> arise when it becomes apparent in the course of the project that certain results cannot or should not be applied. This is regarded as valuable progress in terms of lessons learned.</br><b>Next steps and cooperation after the end of the project</b> include the steps planned after the end of the project in order to bring project results further into application and to continue cooperation.</br><b>Application success for business innovations</b> or <b>application success for social innovations/change processe</b> are successes and examples in which project results are demonstrably applied</br><b>Awards and prizes</b> related to the project and/or its results may give an indication e.g. of the degree of innovation or high applicability.",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_5_task_form.info": "<i>Please create an item by giving a key message about the expected societal impact and selecting the type of impact. Or select already existing items via the search.</i><p><b>Key questions and tips:</b> What societal impacts are expected when project results are put into practice? Please document both possible positive and negative societal impacts. This way you can demonstrate the awareness of the project's side effects and contribute to orienting further innovation processes towards positive effects and the reduction of side effects.",
+
+  "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "<i>Please select a funding programme objective to which the project contributes. Please describe the contribution of the project in a key message. Or select already existing items via the search.</i></br>The description of the contribution can usually be kept short.",
+
   "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
 
   "submission.sections.submit.progressbar.describe.import_orgunits_companies": "Details only for companies",
 
   "submission.sections.submit.progressbar.describe.import_orgunits_companies_st": "Commercial register entry",
 
-  "submission.sections.submit.progressbar.describe.import_orgunits_companies_zk": "Commercial register entry",
+  "submission.sections.submit.progressbar.describe.import_orgunits_ST": "Information on the executing agency",
 
-  "submission.sections.submit.progressbar.describe.import_orgunits_st": "Information on the executing acency",
+  "submission.sections.submit.progressbar.describe.import_orgunits_companies_ST": "Commercial register entry",
 
-  "submission.sections.submit.progressbar.describe.import_orgunits_zk": "Information on the applicant",
+  "submission.sections.submit.progressbar.describe.import_orgunits_companies_ZK": "Commercial register entry",
 
-  "submission.sections.submit.progressbar.describe.import_person_a2": "Personal data administrative contact person (only during the application process)",
+  "submission.sections.submit.progressbar.describe.import_orgunits_ZK": "Information on the applicant",
 
-  "submission.sections.submit.progressbar.describe.import_person_pa": "Personal data administrative contact person (in case of grant approval)",
+  "submission.sections.submit.progressbar.describe.import_person_A2": "Personal data administrative contact person (only during the application process)",
 
-  "submission.sections.submit.progressbar.describe.import_person_pl": "Personal data Project management",
+  "submission.sections.submit.progressbar.describe.import_person_PA": "Personal data administrative contact person (in case of grant approval)",
 
-  "submission.sections.submit.progressbar.describe.import_person_uz": "Personal data authorised signatory",
+  "submission.sections.submit.progressbar.describe.import_person_PL": "Personal data project management",
+
+  "submission.sections.submit.progressbar.describe.import_person_UZ": "Personal data authorised signatory",
 
   "submission.sections.submit.progressbar.describe.import_projects": "Projects",
 
@@ -3771,7 +3925,7 @@
 
   "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability": "Description of the applicability",
 
-  "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability.info": "Please describe the current status of applicability and name deficits in applicability whose improvement is addressed in the project. In some cases, this information will not yet be available in the proposal phase, but will be identified in the course of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. Update this information at the required times. At the end of the project, describe the achieved applicability.It is recommended to conduct the applicability analysis with the participation of actors from the field of practice.The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project.  Add any information that you consider important but not requested under \"other\".",
+  "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability.info": "Please describe the current status of applicability and name deficits in applicability whose improvement is addressed in the project. In some cases, this information will not yet be available in the proposal phase, but will be identified in the course of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. Update this information at the required times. At the end of the project, describe the achieved applicability.It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project. Add any information that you consider important but not requested under \"other\".",
 
   "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_trl": "Technology Readiness Level (TRL)",
 
@@ -3781,7 +3935,7 @@
 
   "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_userbenefit.info": "Describe the expected benefit for any number of relevant customer or user groups and estimate the size of the potential market.",
 
-  "submission.sections.submit.progressbar.describe.innovationpotentials_social": "Concrete intentions for using the project results for social innovation / change processes",
+  "submission.sections.submit.progressbar.describe.innovationpotentials_social": "Concrete intentions for using the project results for social innovation/ change processes",
 
   "submission.sections.submit.progressbar.describe.innovationpotentials_social.info": "Document here what concrete intentions exist for the use of the project results for social innovation/ changes in the field of practice. (e.g. changed skills, actions, structures but also political changes). If social innovations/ change processes are related to intended economic-technical innovations, please document them separately. If you see different, vague application possibilities for the (expected) project results, which can only be concretised at a later date and for whose further implementation no partners have been identified yet, please change to \"Innovation ideas\".",
 
@@ -3825,7 +3979,7 @@
 
   "submission.sections.submit.progressbar.describe.patents": "Patents and utility patents",
 
-  "submission.sections.submit.progressbar.describe.patents.info": "Please document here the Industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
+  "submission.sections.submit.progressbar.describe.patents.info": "Please document here the industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
 
   "submission.sections.submit.progressbar.describe.patents_result": "Information from application at the Patent Office",
 
@@ -3837,7 +3991,7 @@
 
   "submission.sections.submit.progressbar.describe.physical_objects": "Objects, Materials",
 
-  "submission.sections.submit.progressbar.describe.physical_objects.info": "Document all types of (physical) objects and materials here. This summarizes all outputs like e.g. devices as prototypes, miniatures, sediments.If you don't find a specific object type here, check whether it is available under \"Publications\".",
+  "submission.sections.submit.progressbar.describe.physical_objects.info": "Document all types of (physical) objects and materials here. This summarizes all outputs like e.g. devices as prototypes, miniatures, sediments. If you don't find a specific object type here, check whether it is available under \"Publications\".",
 
   "submission.sections.submit.progressbar.describe.physical_objects_result": "Type of use and accessibility",
 
@@ -3851,7 +4005,7 @@
 
   "submission.sections.submit.progressbar.describe.projects": "Projects",
 
-  "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties.  Please upload a logo of the project, if available, to support the public presentation of the project.",
+  "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
 
   "submission.sections.submit.progressbar.describe.projects_overview": "Project overview",
 
@@ -3875,7 +4029,7 @@
 
   "submission.sections.submit.progressbar.describe.spinoffs": "Spin-offs (incl. associations)",
 
-  "submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/person by founding a company or association.",
+  "submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/ person by founding a company or association.",
 
   "submission.sections.submit.progressbar.describe.spinoffs_result": "Details of spin-off carried out",
 
@@ -3913,13 +4067,15 @@
 
   "submission.sections.submit.progressbar.describe.unexpected_results": "Unexpected results and problems",
 
-  "submission.sections.submit.progressbar.describe.unexpected_results.info": "Please document findings that can’t be used as planned. These include non-significant results, results that contradict) the hypothesis or support the null hypothesis, methodological problems that hindered research work, results that indicate unexpected risks, etc.. By documenting (and ideally publishing) such results, you mark the integrity and responsibility of the research in the project. You avoid wasting resources by replicating research that have already failed, avoid misinterpreting the significance and effect size e in reviews and meta-analyses and contribute to the further development of methods. With practice-oriented results, you help to prevent the application of ineffective or risky measures.",
+  "submission.sections.submit.progressbar.describe.unexpected_results.info": "Please document findings that can’t be used as planned. These include non-significant results, results that contradict the hypothesis or support the null hypothesis, methodological problems that hindered research work, results that indicate unexpected risks, etc.. By documenting (and ideally publishing) such results, you mark the integrity and responsibility of the research in the project. You avoid wasting resources by replicating research that have already failed, avoid misinterpreting the significance and effect size in reviews and meta-analyses and contribute to the further development of methods. With practice-oriented results, you help to prevent the application of ineffective or risky measures.",
 
   "submission.sections.submit.progressbar.describe.upload": "Upload",
 
   "submission.sections.submit.progressbar.describe.upload.info": "If required, you can upload additional information, such as documents, descriptions etc.",
 
   "submission.sections.submit.progressbar.describe.workpackages": "Description of the workpackage",
+
+  "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
 
   "submission.sections.submit.progressbar.describe.workpackages.info": "Describe here only general aspects that do not also arise in the assigned tasks and activities.",
 
@@ -3930,7 +4086,6 @@
   "submission.sections.submit.progressbar.license": "Deposit license",
 
   "submission.sections.submit.progressbar.upload": "Upload files",
-
 
 
   "submission.sections.upload.delete.confirm.cancel": "Cancel",
@@ -3961,9 +4116,9 @@
 
   "submission.sections.upload.form.until-placeholder": "Until",
 
-  "submission.sections.upload.header.policy.default.nolist": "Uploaded files in the {{collectionName}} collection will be accessible according to the following group(s):",
+  "submission.sections.upload.header.policy.default.nolist": "Uploaded files in the {{collectionName}} collection will be accessible according to the following group(s): ",
 
-  "submission.sections.upload.header.policy.default.withlist": "Please note that uploaded files in the {{collectionName}} collection will be accessible, in addition to what is explicitly decided for the single file, with the following group(s):",
+  "submission.sections.upload.header.policy.default.withlist": "Please note that uploaded files in the {{collectionName}} collection will be accessible, in addition to what is explicitly decided for the single file, with the following group(s): ",
 
   "submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <strong>upload additional files just dragging & dropping them everywhere in the page</strong>",
 
@@ -4043,9 +4198,11 @@
 
   "submission.workflow.tasks.pool.show-detail": "Show detail",
 
-  "targetgroups.listelement.badge": "Target groups",
 
-  "tasks.listelement.badge": "Tasks",
+  "targetgroups.listelement.badge": "Target group",
+
+  "tasks.listelement.badge": "Task",
+
 
   "title": "DSpace Cris",
 
@@ -4054,9 +4211,7 @@
   "tree.description.srsc": "Research Subject Categories",
 
 
-
-  "treeview.header": "Hierarchical tree view",
-
+  "treeview.header": "Cascade Dropdown",
 
 
   "treeview.search.form.reset": "Reset",
@@ -4070,10 +4225,7 @@
   "treeview.load-more": "Load more",
 
 
-
-
-
-  "vocabulary-treeview.header": "Hierarchical tree view",
+  "vocabulary-treeview.header": "Cascade Dropdown",
 
   "vocabulary-treeview.load-more": "Load more",
 
@@ -4094,7 +4246,7 @@
   "menu.section.admin_search": "Admin Search",
 
 
-  "unexpected_results.listelement.badge":  "Unexpected results and problems",
+  "unexpected_results.listelement.badge": "Unexpected result or problem",
 
   "uploader.browse": "browse",
 
@@ -4161,7 +4313,9 @@
 
   "working-plan.breadcrumbs" : "Working plan",
 
-  "working-plan.chart.button.add": "add",
+  "working-plan.chart.button.add": "Add",
+
+  "working-plan.chart.button.remove": "Remove",
 
   "working-plan.chart.column.dates": "Dates",
 
@@ -4171,7 +4325,15 @@
 
   "working-plan.chart.column.steps": "Steps",
 
+  "working-plan.chart.move.down.btn": "Move down",
+
   "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
+
+  "working-plan.chart.move.up.btn": "Move up",
+
+  "working-plan.chart.toggle.collapse.btn": "Collapse",
+
+  "working-plan.chart.toggle.expand.btn": "Expand",
 
   "working-plan.chart.toolbar.date-view.month": "Month",
 
@@ -4191,5 +4353,60 @@
 
   "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
 
-  "working-plan.page.title": "Working plan"
+
+  "working-plan.page.title": "Working plan",
+
+
+  "conditions.listelement.badge": "External condition or requirement",
+
+  "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objectives",
+
+  "cooperation_partners.listelement.badge": "Cooperation partner",
+
+  "ethics.listelement.badge": "Ethical reflection",
+
+  "Event.listelement.badge": "Event",
+
+  "gender.listelement.badge": "Gender reflection",
+
+  "impact_pathway.listelement.badge": "Impact pathway",
+
+  "impact_pathway_step.listelement.badge": "Impact pathway step",
+
+  "inn_pot_econtech.listelement.badge": "Intended business innovation",
+
+  "inn_pot_social.listelement.badge": "Intended social innovation/ change process",
+
+  "OrgUnit.listelement.badge": "Organizational units",
+
+  "Patent.listelement.badge": "Patent or utility patent",
+
+  "Person.listelement.badge": "Persons",
+
+
+  "plan_inn_pot_econtech.listelement.badge": "Intended business innovation (plan)",
+
+  "plan_inn_pot_social.listelement.badge": "Intended social innovation/change process (plan)",
+
+  "plan_patent.listelement.badge": "Patent or utility patent (plan)",
+
+  "plan_publication.listelement.badge": "Publication (plan)",
+
+  "plan_research_quest.listelement.badge": "Research quest",
+
+  "Project.listelement.badge": "Research projects",
+
+  "research_results.listelement.badge": "Research result",
+
+  "stateofart.listelement.badge": "State of knowledge",
+
+  "subproject.listelement.badge": "Subproject",
+
+  "workpackages.listelement.badge": "Work package",
+
+
+  "tree.description.nuts2": "Nomenclature of territorial units for statistics",
+
+  "vocabulary-treeview.tree.description.nuts2": "Nomenclature of territorial units for statistics"
+
 }

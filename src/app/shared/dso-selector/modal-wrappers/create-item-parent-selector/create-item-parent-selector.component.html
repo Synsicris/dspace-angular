@@ -6,8 +6,8 @@
   </div>
   <div class="modal-body">
     <ds-collection-dropdown
-      [metadata]="metadata"
-      [metadatavalue]="metadatavalue"
+      [entityType]="entityType"
+      [scope]="scope"
       (selectionChange)="selectObject($event.collection)">
     </ds-collection-dropdown>
   </div>

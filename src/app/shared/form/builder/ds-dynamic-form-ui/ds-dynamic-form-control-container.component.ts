@@ -462,6 +462,10 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
       .forEach((sub) => sub.unsubscribe());
   }
 
+  get hasHint(): boolean {
+    return isNotEmpty(this.model.hint) && this.model.hint !== '&nbsp;';
+  }
+
   /**
    *  Initialize this.item$ based on this.model.submissionId
    */

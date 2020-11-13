@@ -62,6 +62,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit {
       }
     }, () => null);
     modalRef.componentInstance.formConfig = this.workingPlanService.getWorkpackageFormConfig();
+    modalRef.componentInstance.formHeader = this.workingPlanService.getWorkpackageFormHeader();
     modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
     modalRef.componentInstance.excludeListId = [];
     modalRef.componentInstance.hasSearch = false;

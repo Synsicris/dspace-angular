@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { from as observableFrom, Observable } from 'rxjs';
+import { from as observableFrom, Observable, of as observableOf, } from 'rxjs';
 import { catchError, concatMap, delay, flatMap, map, reduce, tap } from 'rxjs/operators';
 import { findIndex } from 'lodash';
 
@@ -12,7 +12,7 @@ import { throwError as observableThrowError } from 'rxjs/internal/observable/thr
 import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
 import { MetadataValue } from './metadata.models';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
-import { isEmpty } from '../../shared/empty.util';
+import { isEmpty, isNotEmpty } from '../../shared/empty.util';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
 
 @Injectable()
@@ -73,6 +73,31 @@ export class ItemAuthorityRelationService {
         delay(100),
         flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
       ))
+    )
+  }
+
+  removeRelationFromParent(
+    itemId: string,
+    relationParentMetadataName: string,
+    relationMetadataName: string
+  ): Observable<Item> {
+    return this.itemService.findById(itemId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      flatMap((item: Item) => {
+        const parentId = item.firstMetadataValue(relationParentMetadataName);
+        console.log(parentId);
+        if (isNotEmpty(parentId)) {
+          return this.itemService.findById(parentId).pipe(
+            getFirstSucceededRemoteDataPayload(),
+            tap((parentItem: Item) => this.removeRelationPatch(parentItem, itemId, relationMetadataName)),
+            delay(100),
+            flatMap((parentItem: Item) => this.executeItemPatch(parentItem.id, 'metadata')),
+            map(() => item)
+          )
+        } else {
+          return observableOf(item)
+        }
+      })
     )
   }
 

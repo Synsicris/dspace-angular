@@ -302,6 +302,7 @@ export const environment: GlobalConfig = {
   },
   workingPlan: {
     workingPlanFormName: 'working_plan_workpackage_form',
+    workingPlanParentRelationMetadata: 'workingplan.relation.parent',
     workingPlanStepsFormName: 'working_plan_workpackage_step_form',
     workingPlanStepStatusMetadata: 'workingplan.step.status',
     workingPlanStepResponsibleMetadata: 'workingplan.responsible',
@@ -315,9 +316,5 @@ export const environment: GlobalConfig = {
     workpackageStatusTypeAuthority: 'working_plan_workpackage_status_type',
     workpackageStepTypeAuthority: 'working_plan_workpackage_step_type',
     workingPlanPlaceMetadata: 'workingplan.place'
-  },
-  projects: {
-    projectTemplateUUID: '',
-    communityProjectsUUID: ''
   }
 };

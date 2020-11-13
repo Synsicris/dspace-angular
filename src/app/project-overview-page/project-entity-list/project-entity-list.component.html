@@ -22,7 +22,7 @@
                 <ul class="list-unstyled">
                   <li *ngFor='let entity of entityList | paginate: { itemsPerPage: paginationOptions.pageSize,
                   currentPage: paginationOptions.currentPage, totalItems: entityList.length }'>
-                    <a class="h3" [routerLink]="['/mydspace']"
+                    <a class="h3" [routerLink]="[mydspaceRoute]"
                                   [queryParams]="{configuration: 'workspace', 'f.entityType': entity}">
                       {{ entity + '.listelement.badge' | translate }}
                     </a>

@@ -98,6 +98,9 @@ const impactPathwayInitialState: ImpactPathwayState = {
 export function impactPathwayReducer(state = impactPathwayInitialState, action: ImpactPathwayActions): ImpactPathwayState {
   switch (action.type) {
 
+    case ImpactPathwayActionTypes.CLEAR_IMPACT_PATHWAY:
+      return impactPathwayInitialState;
+
     case ImpactPathwayActionTypes.INIT_IMPACT_PATHWAY:
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY: {
       return Object.assign({}, impactPathwayInitialState, {

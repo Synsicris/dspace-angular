@@ -1,7 +1,9 @@
 <mat-toolbar color="primary" class="bg-white">
   <mat-toolbar-row>
     <span>
-      <button class="btn btn-primary" (click)="createWorkpackage()">
+      <button class="btn btn-primary"
+              title="{{'working-plan.chart.toolbar.workpackage-btn' | translate}}"
+              (click)="createWorkpackage()">
         <i class="fas fa-plus"></i> {{'working-plan.chart.toolbar.workpackage-btn' | translate}}
       </button>
     </span>

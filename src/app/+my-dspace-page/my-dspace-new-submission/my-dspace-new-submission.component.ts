@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
@@ -14,7 +14,6 @@ import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
 import { NotificationType } from '../../shared/notifications/models/notification-type';
 import { hasValue } from '../../shared/empty.util';
 import { SearchResult } from '../../shared/search/search-result.model';
-import { CreateItemParentSelectorComponent } from '../../shared/dso-selector/modal-wrappers/create-item-parent-selector/create-item-parent-selector.component';
 import { CollectionSelectorComponent } from '../collection-selector/collection-selector.component';
 import { UploaderComponent } from '../../shared/uploader/uploader.component';
 import { UploaderError } from '../../shared/uploader/uploader-error.model';
@@ -28,6 +27,9 @@ import { UploaderError } from '../../shared/uploader/uploader-error.model';
   templateUrl: './my-dspace-new-submission.component.html'
 })
 export class MyDSpaceNewSubmissionComponent implements OnDestroy, OnInit {
+
+  @Input() scope: string;
+
   /**
    * Output that emits the workspace item when the upload has completed
    */

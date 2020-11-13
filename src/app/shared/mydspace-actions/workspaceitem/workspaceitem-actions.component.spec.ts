@@ -67,7 +67,7 @@ const item = Object.assign(new Item(), {
 const rd = createSuccessfulRemoteDataObject(item);
 mockObject = Object.assign(new WorkspaceItem(), { item: observableOf(rd), id: '1234', uuid: '1234' });
 
-fdescribe('WorkspaceitemActionsComponent', () => {
+describe('WorkspaceitemActionsComponent', () => {
   beforeEach(async(() => {
 
     TestBed.configureTestingModule({

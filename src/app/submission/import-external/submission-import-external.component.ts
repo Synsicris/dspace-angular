@@ -17,6 +17,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SubmissionImportExternalPreviewComponent } from './import-external-preview/submission-import-external-preview.component';
 import { fadeIn } from '../../shared/animations/fade';
 import { PageInfo } from '../../core/shared/page-info.model';
+import { MYDSPACE_ROUTE } from '../../+my-dspace-page/my-dspace-page.component';
 
 /**
  * This component allows to submit a new workspaceitem importing the data from an external source.
@@ -71,6 +72,12 @@ export class SubmissionImportExternalComponent implements OnInit {
    * The modal for the entry preview
    */
   public modalRef: NgbModalRef;
+
+  /**
+   * The mydspace page route.
+   * @type {string}
+   */
+  public mydspaceRoute = MYDSPACE_ROUTE;
 
   /**
    * Initialize the component variables.

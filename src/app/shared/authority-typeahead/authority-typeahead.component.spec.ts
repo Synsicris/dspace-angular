@@ -10,11 +10,11 @@ import { DynamicFormLayoutService, DynamicFormsCoreModule, DynamicFormValidation
 import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { AuthorityOptions } from '../../core/integration/models/authority-options.model';
-import { AuthorityService } from '../../core/integration/authority.service';
-import { AuthorityServiceStub } from '../testing/authority-service.stub';
+import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
+import { VocabularyService } from '../../core/submission/vocabularies/vocabulary.service';
+import { VocabularyServiceStub } from '../testing/vocabulary-service.stub';
 import { AuthorityTypeaheadComponent } from './authority-typeahead.component';
-import { DynamicTypeaheadModel } from '../form/builder/ds-dynamic-form-ui/models/typeahead/dynamic-typeahead.model';
+import { DynamicOneboxModel } from '../form/builder/ds-dynamic-form-ui/models/onebox/dynamic-onebox.model';
 import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-metadata-value.model';
 import { createTestComponent } from '../testing/utils.test';
 import { AuthorityConfidenceStateDirective } from '../authority-confidence/authority-confidence-state.directive';
@@ -24,7 +24,7 @@ export let TYPEAHEAD_TEST_GROUP;
 
 export let TYPEAHEAD_TEST_MODEL_CONFIG;
 
-const authorityOptions: AuthorityOptions = new AuthorityOptions(
+const authorityOptions: VocabularyOptions = new VocabularyOptions(
   'EVENTAuthority',
   'typeahead',
   'c1c16450-d56f-41bc-bb81-27f1d1eb5c23'
@@ -59,7 +59,7 @@ describe('AuthorityTypeaheadComponent test suite', () => {
 
   // async beforeEach
   beforeEach(async(() => {
-    const authorityServiceStub = new AuthorityServiceStub();
+    const authorityServiceStub = new VocabularyServiceStub();
     init();
     TestBed.configureTestingModule({
       imports: [
@@ -79,7 +79,7 @@ describe('AuthorityTypeaheadComponent test suite', () => {
       providers: [
         ChangeDetectorRef,
         AuthorityTypeaheadComponent,
-        { provide: AuthorityService, useValue: authorityServiceStub },
+        { provide: VocabularyService, useValue: authorityServiceStub },
         { provide: DynamicFormLayoutService, useValue: {} },
         { provide: DynamicFormValidationService, useValue: {} }
       ],
@@ -278,6 +278,6 @@ class TestComponent {
 
   group: FormGroup = TYPEAHEAD_TEST_GROUP;
 
-  model = new DynamicTypeaheadModel(TYPEAHEAD_TEST_MODEL_CONFIG);
+  model = new DynamicOneboxModel(TYPEAHEAD_TEST_MODEL_CONFIG);
 
 }

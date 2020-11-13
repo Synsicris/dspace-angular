@@ -1,17 +1,18 @@
-import { Component, OnInit, HostListener, ChangeDetectorRef, OnDestroy, Output, EventEmitter, ElementRef, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable, Subscription, BehaviorSubject } from 'rxjs';
-import { hasValue } from '../empty.util';
 import {
-  map,
-  mergeMap,
-  startWith,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  reduce,
-  filter
-} from 'rxjs/operators';
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { hasValue } from '../empty.util';
+import { debounceTime, distinctUntilChanged, map, mergeMap, reduce, startWith, switchMap } from 'rxjs/operators';
 import { RemoteData } from 'src/app/core/data/remote-data';
 import { FindListOptions } from 'src/app/core/data/request.models';
 import { PaginatedList } from 'src/app/core/data/paginated-list';
@@ -20,7 +21,6 @@ import { CollectionDataService } from 'src/app/core/data/collection-data.service
 import { Collection } from '../../core/shared/collection.model';
 import { followLink } from '../utils/follow-link-config.model';
 import { getFirstSucceededRemoteDataPayload, getSucceededRemoteWithNotEmptyData } from '../../core/shared/operators';
-import { environment } from '../../../environments/environment';
 
 /**
  * An interface to represent a collection entry
@@ -81,7 +81,7 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
    */
   searchListCollection: CollectionListEntry[] = [];
 
-  @Output() selectionChange = new EventEmitter<CollectionListEntry>();
+  @Output() selectionChange: EventEmitter<CollectionListEntry> = new EventEmitter<CollectionListEntry>();
   /**
    * A boolean representing if the loader is visible or not
    */
@@ -103,14 +103,14 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
   currentQuery: string;
 
   /**
-   * If present this value is used to filter collection list
+   * If present this value is used to filter collection list by entity type
    */
-  @Input() metadata: string;
+  @Input() entityType: string;
 
   /**
-   * If present this value is used to filter collection list
+   * If present this value is used to filter collection list by community
    */
-  @Input() metadatavalue: string;
+  @Input() scope: string;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -197,38 +197,43 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
       currentPage: page
     };
     let searchListService$: Observable<RemoteData<PaginatedList<Collection>>> = null;
-    if (this.metadata) {
+    if (this.entityType && this.scope) {
       searchListService$ = this.collectionDataService
-      .getAuthorizedCollectionAndMetadata(
-        query,
-        this.metadata,
-        this.metadatavalue,
-        findOptions,
-        followLink('parentCommunity'));
+        .getAuthorizedCollectionByCommunityAndEntityType(
+          this.scope,
+          this.entityType,
+          findOptions,
+          followLink('parentCommunity'));
+    } else if (this.entityType) {
+      searchListService$ = this.collectionDataService
+      .getAuthorizedCollectionByEntityType(
+          query,
+        this.entityType,
+          findOptions,
+          followLink('parentCommunity'));
     } else {
       searchListService$ = this.collectionDataService
-      .getAuthorizedCollection(query, findOptions, followLink('parentCommunity'));
+        .getAuthorizedCollection(query, findOptions, followLink('parentCommunity'));
     }
+
     this.searchListCollection$ = searchListService$.pipe(
-        getSucceededRemoteWithNotEmptyData(),
-        switchMap((collections: RemoteData<PaginatedList<Collection>>) => {
-          if ( (this.searchListCollection.length + findOptions.elementsPerPage) >= collections.payload.totalElements ) {
-            this.hasNextPage = false;
-          }
-          return collections.payload.page;
-        }),
-        mergeMap((collection: Collection) => collection.parentCommunity.pipe(
-          getFirstSucceededRemoteDataPayload(),
-          // NOTE: Hide project community template from the list
-          filter((community: Community) => community.id !== environment.projects.projectTemplateUUID),
-          map((community: Community) => ({
+      getSucceededRemoteWithNotEmptyData(),
+      switchMap((collections: RemoteData<PaginatedList<Collection>>) => {
+        if ( (this.searchListCollection.length + findOptions.elementsPerPage) >= collections.payload.totalElements ) {
+          this.hasNextPage = false;
+        }
+        return collections.payload.page;
+      }),
+      mergeMap((collection: Collection) => collection.parentCommunity.pipe(
+        getFirstSucceededRemoteDataPayload(),
+        map((community: Community) => ({
             communities: [{ id: community.id, name: community.name }],
             collection: { id: collection.id, uuid: collection.id, name: collection.name }
           })
         ))),
-        reduce((acc: any, value: any) => [...acc, ...value], []),
-        startWith([])
-        );
+      reduce((acc: any, value: any) => [...acc, ...value], []),
+      startWith([])
+    );
     this.subs.push(this.searchListCollection$.subscribe(
       (next) => { this.searchListCollection.push(...next); }, undefined,
       () => { this.hideShowLoader(false); this.changeDetectorRef.detectChanges(); }

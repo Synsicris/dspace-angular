@@ -38,6 +38,7 @@
                     [disabled]="!node.item?.selectable"
                     [ngbTooltip]="node.item?.otherInformation?.note"
                     [openDelay]="500"
+                    placement="bottom"
                     container="body"
                     (click)="onSelect(node.item)">{{node.item.display}}</button>
         </cdk-tree-node>
@@ -56,6 +57,7 @@
                     [disabled]="!node.item?.selectable"
                     [ngbTooltip]="node.item?.otherInformation?.note"
                     [openDelay]="500"
+                    placement="bottom"
                     container="body"
                     (click)="onSelect(node.item)">{{node.item.display}}</button>
         </cdk-tree-node>

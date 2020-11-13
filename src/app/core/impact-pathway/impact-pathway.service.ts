@@ -266,10 +266,15 @@ export class ImpactPathwayService {
     )
   }
 
+  getImpactPathwayStepTaskFormHeader(stepType: string, isObjective = false): string {
+    return isObjective ? `impact_pathway_${stepType}_task_objective_form` : `impact_pathway_${stepType}_task_form`;
+  }
+
   getImpactPathwayStepTaskFormConfig(stepType: string, isObjective = false): Observable<SubmissionFormModel> {
     const formName = isObjective ? `impact_pathway_${stepType}_task_objective_form` : `impact_pathway_${stepType}_task_form`;
     return this.formConfigService.getConfigByName(formName).pipe(
-      map((configData: ConfigData) => configData.payload as SubmissionFormModel)
+      map((configData: ConfigData) => configData.payload as SubmissionFormModel),
+      take(1)
     )
   }
 
@@ -532,6 +537,20 @@ export class ImpactPathwayService {
     this.operationsBuilder.add(path, value, true, true);
   }
 
+  checkAndRemoveRelations(itemId: string): Observable<Item> {
+    return this.itemAuthorityRelationService.removeRelationFromParent(
+      itemId,
+      environment.impactPathway.impactPathwayParentRelationMetadata,
+      environment.impactPathway.impactPathwayTaskRelationMetadata
+    ).pipe(
+      flatMap(() => this.itemAuthorityRelationService.unlinkParentItemFromChildren(
+        itemId,
+        environment.impactPathway.impactPathwayParentRelationMetadata,
+        environment.impactPathway.impactPathwayTaskRelationMetadata
+      ))
+    )
+  }
+
   isImpactPathwayLoaded(): Observable<boolean> {
     return this.store.pipe(
       select(isImpactPathwayLoadedSelector),
@@ -781,7 +800,7 @@ export class ImpactPathwayService {
   }
 
   private getCollectionIdByProjectAndEntity(projectId: string, entityType: string): Observable<string> {
-    return this.collectionService.findAuthorizedByCommunityAndRelationshipType(projectId, entityType).pipe(
+    return this.collectionService.getAuthorizedCollectionByCommunityAndEntityType(projectId, entityType).pipe(
       getFirstSucceededRemoteListPayload(),
       map((list: Collection[]) => (list && list.length > 0) ? list[0] : null),
       map((collection: Collection) => isNotEmpty(collection) ? collection.id : null),

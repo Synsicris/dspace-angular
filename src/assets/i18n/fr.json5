@@ -12,8 +12,6 @@
   // TODO New key - Add a translation
   "401.unauthorized": "unauthorized",
   
-  
-  
   // "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page. ",
   "404.help": "La page que vous recherchez n'a pas pu être localisée. Cette page pourrait avoir été déplacée ou supprimée. Vous pouvez utiliser le bouton ci-dessous pour revenir sur la page d'accueil.",
   
@@ -22,6 +20,8 @@
   
   // "404.page-not-found": "page not found",
   "404.page-not-found": "Page introuvable",
+  
+  
   
   // "admin.curation-tasks.breadcrumbs": "System curation tasks",
   // TODO New key - Add a translation
@@ -43,6 +43,51 @@
   // TODO New key - Add a translation
   "activities_ist.breadcrumbs":  "Activities IST",
   
+  
+  
+  // "admin.edit-user-agreement.breadcrumbs": "Edit User Agreement",
+  // TODO New key - Add a translation
+  "admin.edit-user-agreement.breadcrumbs": "Edit User Agreement",
+  
+  // "admin.edit-user-agreement.confirm.title": "Force acceptance",
+  // TODO New key - Add a translation
+  "admin.edit-user-agreement.confirm.title": "Force acceptance",
+  
+  // "admin.edit-user-agreement.confirm.info":"Do you want to force all users to accept the new user agreement?",
+  // TODO New key - Add a translation
+  "admin.edit-user-agreement.confirm.info":"Do you want to force all users to accept the new user agreement?",
+  
+  // "admin.edit-user-agreement.confirm.cancel":"Cancel",
+  // TODO New key - Add a translation
+  "admin.edit-user-agreement.confirm.cancel":"Cancel",
+  
+  // "admin.edit-user-agreement.confirm.no":"No, update only",
+  // TODO New key - Add a translation
+  "admin.edit-user-agreement.confirm.no":"No, update only",
+  
+  // "admin.edit-user-agreement.confirm.yes":"Yes, update and force",
+  // TODO New key - Add a translation
+  "admin.edit-user-agreement.confirm.yes":"Yes, update and force",
+  
+  // "admin.edit-user-agreement.save-button": "Save",
+  // TODO New key - Add a translation
+  "admin.edit-user-agreement.save-button": "Save",
+  
+  // "admin.edit-user-agreement.header": "Edit User Agreement",
+  // TODO New key - Add a translation
+  "admin.edit-user-agreement.header": "Edit User Agreement",
+  
+  // "admin.edit-user-agreement.success": "User agreement successfully updated",
+  // TODO New key - Add a translation
+  "admin.edit-user-agreement.success": "User agreement successfully updated",
+  
+  // "admin.edit-user-agreement.error": "An error occurred while updating the user agreement",
+  // TODO New key - Add a translation
+  "admin.edit-user-agreement.error": "An error occurred while updating the user agreement",
+  
+  // "admin.edit-user-agreement.title": "Edit User Agreement",
+  // TODO New key - Add a translation
+  "admin.edit-user-agreement.title": "Edit User Agreement",
   
   
   
@@ -796,9 +841,9 @@
   // TODO New key - Add a translation
   "applications_social.listelement.badge": "Application success in social innovations/change processes",
   
-  // "awards.listelement.badge": "Awards and prizes",
+  // "awards.listelement.badge": "Award or prize",
   // TODO New key - Add a translation
-  "awards.listelement.badge": "Awards and prizes",
+  "awards.listelement.badge": "Award or prize",
   
   
   // "admin.workflow.breadcrumbs": "Administer Workflow",
@@ -939,18 +984,42 @@
   "bitstream.edit.title": "Edit bitstream",
   
   
-  
   // "browse.comcol.by.author": "By Author",
   "browse.comcol.by.author": "Auteur",
   
   // "browse.comcol.by.dateissued": "By Issue Date",
   "browse.comcol.by.dateissued": "Date de publication",
   
+  // "browse.comcol.by.ouname": "By Name",
+  // TODO New key - Add a translation
+  "browse.comcol.by.ouname": "By Name",
+  
+  // "browse.comcol.by.pjtitle": "By Title",
+  // TODO New key - Add a translation
+  "browse.comcol.by.pjtitle": "By Title",
+  
+  // "browse.comcol.by.rodept": "By Department",
+  // TODO New key - Add a translation
+  "browse.comcol.by.rodept": "By Department",
+  
+  // "browse.comcol.by.rpdept": "By Department",
+  // TODO New key - Add a translation
+  "browse.comcol.by.rpdept": "By Department",
+  
+  // "browse.comcol.by.rpname": "By Name",
+  // TODO New key - Add a translation
+  "browse.comcol.by.rpname": "By Name",
+  
   // "browse.comcol.by.subject": "By Subject",
   "browse.comcol.by.subject": "Sujet",
   
   // "browse.comcol.by.title": "By Title",
   "browse.comcol.by.title": "Titre",
+  
+  // "browse.comcol.by.type": "By Type",
+  // TODO New key - Add a translation
+  "browse.comcol.by.type": "By Type",
+  
   
   // "browse.comcol.head": "Browse",
   "browse.comcol.head": "Parcourir par",
@@ -1723,13 +1792,129 @@
   "community.sub-community-list.head": "Sous-Communautés au sein de cette Communauté",
   
   
-  // "datafile.listelement.badge": "Data File",
+  // "datafile.listelement.badge": "Data file",
   // TODO New key - Add a translation
-  "datafile.listelement.badge": "Data File",
+  "datafile.listelement.badge": "Data file",
   
-  // "datapackage.listelement.badge": "Data Package",
+  // "datapackage.listelement.badge": "Data package",
   // TODO New key - Add a translation
-  "datapackage.listelement.badge": "Data Package",
+  "datapackage.listelement.badge": "Data package",
+  
+  
+  // "cookies.consent.accept-all": "Accept all",
+  // TODO New key - Add a translation
+  "cookies.consent.accept-all": "Accept all",
+  
+  // "cookies.consent.accept-selected": "Accept selected",
+  // TODO New key - Add a translation
+  "cookies.consent.accept-selected": "Accept selected",
+  
+  // "cookies.consent.app.opt-out.description": "This app is loaded by default (but you can opt out)",
+  // TODO New key - Add a translation
+  "cookies.consent.app.opt-out.description": "This app is loaded by default (but you can opt out)",
+  
+  // "cookies.consent.app.opt-out.title": "(opt-out)",
+  // TODO New key - Add a translation
+  "cookies.consent.app.opt-out.title": "(opt-out)",
+  
+  // "cookies.consent.app.purpose": "purpose",
+  // TODO New key - Add a translation
+  "cookies.consent.app.purpose": "purpose",
+  
+  // "cookies.consent.app.required.description": "This application is always required",
+  // TODO New key - Add a translation
+  "cookies.consent.app.required.description": "This application is always required",
+  
+  // "cookies.consent.app.required.title": "(always required)",
+  // TODO New key - Add a translation
+  "cookies.consent.app.required.title": "(always required)",
+  
+  // "cookies.consent.update": "There were changes since your last visit, please update your consent.",
+  // TODO New key - Add a translation
+  "cookies.consent.update": "There were changes since your last visit, please update your consent.",
+  
+  // "cookies.consent.close": "Close",
+  // TODO New key - Add a translation
+  "cookies.consent.close": "Close",
+  
+  // "cookies.consent.decline": "Decline",
+  // TODO New key - Add a translation
+  "cookies.consent.decline": "Decline",
+  
+  // "cookies.consent.content-notice.description": "We collect and process your personal information for the following purposes: <strong>Authentication, Preferences, Acknowledgement and Statistics</strong>. <br/> To learn more, please read our {privacyPolicy}.",
+  // TODO New key - Add a translation
+  "cookies.consent.content-notice.description": "We collect and process your personal information for the following purposes: <strong>Authentication, Preferences, Acknowledgement and Statistics</strong>. <br/> To learn more, please read our {privacyPolicy}.",
+  
+  // "cookies.consent.content-notice.learnMore": "Customize",
+  // TODO New key - Add a translation
+  "cookies.consent.content-notice.learnMore": "Customize",
+  
+  // "cookies.consent.content-modal.description": "Here you can see and customize the information that we collect about you.",
+  // TODO New key - Add a translation
+  "cookies.consent.content-modal.description": "Here you can see and customize the information that we collect about you.",
+  
+  // "cookies.consent.content-modal.privacy-policy.name": "privacy policy",
+  // TODO New key - Add a translation
+  "cookies.consent.content-modal.privacy-policy.name": "privacy policy",
+  
+  // "cookies.consent.content-modal.privacy-policy.text": "To learn more, please read our {privacyPolicy}.",
+  // TODO New key - Add a translation
+  "cookies.consent.content-modal.privacy-policy.text": "To learn more, please read our {privacyPolicy}.",
+  
+  // "cookies.consent.content-modal.title": "Information that we collect",
+  // TODO New key - Add a translation
+  "cookies.consent.content-modal.title": "Information that we collect",
+  
+  
+  
+  // "cookies.consent.app.title.authentication": "Authentication",
+  // TODO New key - Add a translation
+  "cookies.consent.app.title.authentication": "Authentication",
+  
+  // "cookies.consent.app.description.authentication": "Required for signing you in",
+  // TODO New key - Add a translation
+  "cookies.consent.app.description.authentication": "Required for signing you in",
+  
+  
+  // "cookies.consent.app.title.preferences": "Preferences",
+  // TODO New key - Add a translation
+  "cookies.consent.app.title.preferences": "Preferences",
+  
+  // "cookies.consent.app.description.preferences": "Required for saving your preferences",
+  // TODO New key - Add a translation
+  "cookies.consent.app.description.preferences": "Required for saving your preferences",
+  
+  
+  
+  // "cookies.consent.app.title.acknowledgement": "Acknowledgement",
+  // TODO New key - Add a translation
+  "cookies.consent.app.title.acknowledgement": "Acknowledgement",
+  
+  // "cookies.consent.app.description.acknowledgement": "Required for saving your acknowledgements and consents",
+  // TODO New key - Add a translation
+  "cookies.consent.app.description.acknowledgement": "Required for saving your acknowledgements and consents",
+  
+  
+  
+  // "cookies.consent.app.title.google-analytics": "Google Analytics",
+  // TODO New key - Add a translation
+  "cookies.consent.app.title.google-analytics": "Google Analytics",
+  
+  // "cookies.consent.app.description.google-analytics": "Allows us to track statistical data",
+  // TODO New key - Add a translation
+  "cookies.consent.app.description.google-analytics": "Allows us to track statistical data",
+  
+  
+  
+  // "cookies.consent.purpose.functional": "Functional",
+  // TODO New key - Add a translation
+  "cookies.consent.purpose.functional": "Functional",
+  
+  // "cookies.consent.purpose.statistical": "Statistical",
+  // TODO New key - Add a translation
+  "cookies.consent.purpose.statistical": "Statistical",
+  
+  
   
   // "coordinator.page.new-project": "Create new project",
   // TODO New key - Add a translation
@@ -1747,11 +1932,10 @@
   // TODO New key - Add a translation
   "coordinator.page.title": "Coordinator overview",
   
-  // "cooperation_events.listelement.badge": "Cooperation processes",
+  
+  // "cooperation_events.listelement.badge": "Cooperation process",
   // TODO New key - Add a translation
-  "cooperation_events.listelement.badge": "Cooperation processes",
-  
-  
+  "cooperation_events.listelement.badge": "Cooperation process",
   
   
   // "curation-task.task.checklinks.label":  "Check Links in Metadata",
@@ -1845,10 +2029,6 @@
   // "dso-selector.export-metadata.dspaceobject.head": "Export metadata from",
   // TODO New key - Add a translation
   "dso-selector.export-metadata.dspaceobject.head": "Export metadata from",
-  
-  // "dso-selector.export-metadata.notValidDSO": "You can only export metadata for collections and communities",
-  // TODO New key - Add a translation
-  "dso-selector.export-metadata.notValidDSO": "You can only export metadata for collections and communities",
   
   // "dso-selector.no-results": "No {{ type }} found",
   "dso-selector.no-results": "Aucun {{ type }} trouvé",
@@ -2128,9 +2308,9 @@
   // TODO New key - Add a translation
   "explore.search-section.publications.title": "Search Research Outputs",
   
-  // "explore.search-section.researcherprofiles.title": "Search Researchers",
+  // "explore.search-section.researcherprofiles.title": "Search People",
   // TODO New key - Add a translation
-  "explore.search-section.researcherprofiles.title": "Search Researchers",
+  "explore.search-section.researcherprofiles.title": "Search People",
   
   // "explore.search-section.search-button": "Search",
   // TODO New key - Add a translation
@@ -2152,9 +2332,9 @@
   // TODO New key - Add a translation
   "explore.publications.breadcrumbs": "Research Outputs",
   
-  // "explore.researcherprofiles.breadcrumbs": "Researchers",
+  // "explore.researcherprofiles.breadcrumbs": "People",
   // TODO New key - Add a translation
-  "explore.researcherprofiles.breadcrumbs": "Researchers",
+  "explore.researcherprofiles.breadcrumbs": "People",
   
   // "explore.title": "Explore section",
   // TODO New key - Add a translation
@@ -2170,6 +2350,19 @@
   
   // "footer.link.duraspace": "DuraSpace",
   "footer.link.duraspace": "DuraSpace",
+  
+  // "footer.link.cookies": "Cookie settings",
+  // TODO New key - Add a translation
+  "footer.link.cookies": "Cookie settings",
+  
+  // "footer.link.privacy-policy": "Privacy policy",
+  // TODO New key - Add a translation
+  "footer.link.privacy-policy": "Privacy policy",
+  
+  // "footer.link.end-user-agreement":"End User Agreement",
+  // TODO New key - Add a translation
+  "footer.link.end-user-agreement":"End User Agreement",
+  
   
   
   // "forgot-email.form.header": "Forgot Password",
@@ -2338,8 +2531,17 @@
   // "form.no-value": "No value entered",
   "form.no-value": "Aucune valeur entrée",
   
-  // "form.other-information": {},
-  "form.other-information": {},
+  // "form.other-information.data-oairecerif_author_affiliation": "Affiliation",
+  // TODO New key - Add a translation
+  "form.other-information.data-oairecerif_author_affiliation": "Affiliation",
+  
+  // "form.other-information.data-oairecerif_editor_affiliation": "Affiliation",
+  // TODO New key - Add a translation
+  "form.other-information.data-oairecerif_editor_affiliation": "Affiliation",
+  
+  // "form.other-information.not-available": "Not available",
+  // TODO New key - Add a translation
+  "form.other-information.not-available": "Not available",
   
   // "form.remove": "Remove",
   "form.remove": "Supprimer",
@@ -2384,6 +2586,14 @@
   // TODO New key - Add a translation
   "impact-pathway.breadcrumbs" : "Impact pathway",
   
+  // "impact-pathway.checkbox.link": "Click here to link/unlink item",
+  // TODO New key - Add a translation
+  "impact-pathway.checkbox.link": "Click here to link/unlink item",
+  
+  // "impact-pathway.create.bidirectional-link": "Create bidirectional link",
+  // TODO New key - Add a translation
+  "impact-pathway.create.bidirectional-link": "Create bidirectional link",
+  
   // "impact-pathway.create.btn": "Create impact pathway",
   // TODO New key - Add a translation
   "impact-pathway.create.btn": "Create impact pathway",
@@ -2396,6 +2606,10 @@
   // TODO New key - Add a translation
   "impact-pathway.create.head": "New impact pathway",
   
+  // "impact-pathway.create.outcome-link": "Create link",
+  // TODO New key - Add a translation
+  "impact-pathway.create.outcome-link": "Create link",
+  
   // "impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
   // TODO New key - Add a translation
   "impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
@@ -2404,17 +2618,37 @@
   // TODO New key - Add a translation
   "impact-pathway.create.success": "The impact pathway has been generated successfully.",
   
+  // "impact-pathway.edit.item.title": "Edit  item",
+  // TODO New key - Add a translation
+  "impact-pathway.edit.item.title": "Edit  item",
+  
   // "impact-pathway.edit.page.title": "Edit impact pathway",
   // TODO New key - Add a translation
   "impact-pathway.edit.page.title": "Edit impact pathway",
+  
+  // "impact-pathway.info.btn.title": "Show information",
+  // TODO New key - Add a translation
+  "impact-pathway.info.btn.title": "Show information",
   
   // "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
   // TODO New key - Add a translation
   "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
   
+  // "impact-pathway.objectives.back-btn": "Back to impact pathway",
+  // TODO New key - Add a translation
+  "impact-pathway.objectives.back-btn": "Back to impact pathway",
+  
   // "impact-pathway.objectives.edit.page.title": "Edit objectives",
   // TODO New key - Add a translation
   "impact-pathway.objectives.edit.page.title": "Edit objectives",
+  
+  // "impact-pathway.objectives.step_type_2.info.panel": "",
+  // TODO New key - Add a translation
+  "impact-pathway.objectives.step_type_2.info.panel": "",
+  
+  // "impact-pathway.objectives.step_type_3.info.panel": "",
+  // TODO New key - Add a translation
+  "impact-pathway.objectives.step_type_3.info.panel": "",
   
   // "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
   // TODO New key - Add a translation
@@ -2436,9 +2670,21 @@
   // TODO New key - Add a translation
   "impact-pathway.remove.confirm.title": "Discard impact pathway",
   
+  // "impact-pathway.remove.item.title": "Delete item",
+  // TODO New key - Add a translation
+  "impact-pathway.remove.item.title": "Delete item",
+  
+  // "impact-pathway.remove.title": "Delete impact pathway",
+  // TODO New key - Add a translation
+  "impact-pathway.remove.title": "Delete impact pathway",
+  
   // "impact-pathway.remove.success": "The impact pathway has been deleted successfully.",
   // TODO New key - Add a translation
   "impact-pathway.remove.success": "The impact pathway has been deleted successfully.",
+  
+  // "impact-pathway.save.link.title": "Save",
+  // TODO New key - Add a translation
+  "impact-pathway.save.link.title": "Save",
   
   // "impact-pathway.step.label.step_type_1": "Background",
   // TODO New key - Add a translation
@@ -2488,17 +2734,58 @@
   // TODO New key - Add a translation
   "impactpathwaystep.listelement.badge": "Impact pathway step",
   
-  // "innovationideas.listelement.badge": "Ideas for innovation and change",
+  // "innovationideas.listelement.badge": "Idea for innovation or change",
   // TODO New key - Add a translation
-  "innovationideas.listelement.badge": "Ideas for innovation and change",
+  "innovationideas.listelement.badge": "Idea for innovation or change",
   
-  // "innovationpotentials_econtech.listelement.badge": "Intended business innovations",
-  // TODO New key - Add a translation
-  "innovationpotentials_econtech.listelement.badge": "Intended business innovations",
   
-  // "innovationpotentials_social.listelement.badge": "Intended social innovations/change processes",
+  // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   // TODO New key - Add a translation
-  "innovationpotentials_social.listelement.badge": "Intended social innovations/change processes",
+  "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
+  
+  // "info.end-user-agreement.accept.error": "An error occurred accepting the End User Agreement",
+  // TODO New key - Add a translation
+  "info.end-user-agreement.accept.error": "An error occurred accepting the End User Agreement",
+  
+  // "info.end-user-agreement.accept.success": "Successfully updated the End User Agreement",
+  // TODO New key - Add a translation
+  "info.end-user-agreement.accept.success": "Successfully updated the End User Agreement",
+  
+  // "info.end-user-agreement.accept.warning": "Before you can proceed, you must agree to the End User Agreement",
+  // TODO New key - Add a translation
+  "info.end-user-agreement.accept.warning": "Before you can proceed, you must agree to the End User Agreement",
+  
+  // "info.end-user-agreement.breadcrumbs": "End User Agreement",
+  // TODO New key - Add a translation
+  "info.end-user-agreement.breadcrumbs": "End User Agreement",
+  
+  // "info.end-user-agreement.buttons.cancel": "Cancel",
+  // TODO New key - Add a translation
+  "info.end-user-agreement.buttons.cancel": "Cancel",
+  
+  // "info.end-user-agreement.buttons.save": "Save",
+  // TODO New key - Add a translation
+  "info.end-user-agreement.buttons.save": "Save",
+  
+  // "info.end-user-agreement.head": "End User Agreement",
+  // TODO New key - Add a translation
+  "info.end-user-agreement.head": "End User Agreement",
+  
+  // "info.end-user-agreement.title": "End User Agreement",
+  // TODO New key - Add a translation
+  "info.end-user-agreement.title": "End User Agreement",
+  
+  // "info.privacy.breadcrumbs": "Privacy Statement",
+  // TODO New key - Add a translation
+  "info.privacy.breadcrumbs": "Privacy Statement",
+  
+  // "info.privacy.head": "Privacy Statement",
+  // TODO New key - Add a translation
+  "info.privacy.head": "Privacy Statement",
+  
+  // "info.privacy.title": "Privacy Statement",
+  // TODO New key - Add a translation
+  "info.privacy.title": "Privacy Statement",
   
   
   
@@ -3216,6 +3503,50 @@
   // TODO New key - Add a translation
   "item.page.filesection.license.bundle" : "License bundle",
   
+  // "item.preview.dc.identifier.uri": "Identifier:",
+  // TODO New key - Add a translation
+  "item.preview.dc.identifier.uri": "Identifier:",
+  
+  // "item.preview.dc.contributor.author": "Authors:",
+  // TODO New key - Add a translation
+  "item.preview.dc.contributor.author": "Authors:",
+  
+  // "item.preview.dc.date.issued": "Published date:",
+  // TODO New key - Add a translation
+  "item.preview.dc.date.issued": "Published date:",
+  
+  // "item.preview.dc.description.abstract": "Abstract:",
+  // TODO New key - Add a translation
+  "item.preview.dc.description.abstract": "Abstract:",
+  
+  // "item.preview.dc.identifier.other": "Other identifier:",
+  // TODO New key - Add a translation
+  "item.preview.dc.identifier.other": "Other identifier:",
+  
+  // "item.preview.dc.language.iso": "Language:",
+  // TODO New key - Add a translation
+  "item.preview.dc.language.iso": "Language:",
+  
+  // "item.preview.dc.subject": "Subjects:",
+  // TODO New key - Add a translation
+  "item.preview.dc.subject": "Subjects:",
+  
+  // "item.preview.dc.title": "Title:",
+  // TODO New key - Add a translation
+  "item.preview.dc.title": "Title:",
+  
+  // "item.preview.person.familyName": "Surname:",
+  // TODO New key - Add a translation
+  "item.preview.person.familyName": "Surname:",
+  
+  // "item.preview.person.givenName": "Name:",
+  // TODO New key - Add a translation
+  "item.preview.person.givenName": "Name:",
+  
+  // "item.preview.person.identifier.orcid": "ORCID:",
+  // TODO New key - Add a translation
+  "item.preview.person.identifier.orcid": "ORCID:",
+  
   
   // "item.select.confirm": "Confirm selected",
   "item.select.confirm": "Confirmer sélection",
@@ -3496,9 +3827,9 @@
   // TODO New key - Add a translation
   "menu.section.explore_publications": "Research Outputs",
   
-  // "menu.section.explore_researcherprofiles": "Researchers",
+  // "menu.section.explore_researcherprofiles": "People",
   // TODO New key - Add a translation
-  "menu.section.explore_researcherprofiles": "Researchers",
+  "menu.section.explore_researcherprofiles": "People",
   
   // "menu.section.explore_orgunits": "Organizations",
   // TODO New key - Add a translation
@@ -3701,15 +4032,23 @@
   // "menu.section.toggle.statistics_task": "Toggle Statistics Task section",
   "menu.section.toggle.statistics_task": "Ouvrir/Fermer section Tâche statistiques",
   
+  // "menu.section.edit_user_agreement":"Edit User Agreement",
+  // TODO New key - Add a translation
+  "menu.section.edit_user_agreement":"Edit User Agreement",
   
   // "menu.section.workflow": "Administer Workflow",
   // TODO New key - Add a translation
   "menu.section.workflow": "Administer Workflow",
   
   
-  // "milestones.listelement.badge": "Milestones",
+  // "milestones.listelement.badge": "Milestone",
   // TODO New key - Add a translation
-  "milestones.listelement.badge": "Milestones",
+  "milestones.listelement.badge": "Milestone",
+  
+  
+  // "mydspace.breadcrumbs" : "All items",
+  // TODO New key - Add a translation
+  "mydspace.breadcrumbs" : "All items",
   
   // "mydspace.description": "",
   "mydspace.description": "",
@@ -3759,6 +4098,14 @@
   
   // "mydspace.new-submission": "New submission",
   "mydspace.new-submission": "Nouveau dépôt",
+  
+  // "mydspace.new-submission-external": "Import metadata from external source",
+  // TODO New key - Add a translation
+  "mydspace.new-submission-external": "Import metadata from external source",
+  
+  // "mydspace.new-submission-external-short": "Import metadata",
+  // TODO New key - Add a translation
+  "mydspace.new-submission-external-short": "Import metadata",
   
   // "mydspace.results.head": "Your submissions",
   "mydspace.results.head": "Vos dépôts",
@@ -3902,16 +4249,18 @@
   // "pagination.sort-direction": "Sort Options",
   "pagination.sort-direction": "Options de tri",
   
-  // "participation_events.listelement.badge": "Participative processes",
-  // TODO New key - Add a translation
-  "participation_events.listelement.badge": "Participative processes",
   
-  // "patents.listelement.badge": "Patents and utility patents",
+  // "participation_events.listelement.badge": "Participative process",
   // TODO New key - Add a translation
-  "patents.listelement.badge": "Patents and utility patents",
+  "participation_events.listelement.badge": "Participative process",
+  
+  // "patents.listelement.badge": "Patent and utility patent",
+  // TODO New key - Add a translation
+  "patents.listelement.badge": "Patent and utility patent",
   
   // "person.listelement.badge": "Person",
   "person.listelement.badge": "Personne",
+  
   
   // "person.page.birthdate": "Birth Date",
   "person.page.birthdate": "Date de naissance",
@@ -3934,6 +4283,187 @@
   // "person.page.orcid": "ORCID",
   "person.page.orcid": "ORCID",
   
+  // "person.page.orcid.create": "Create an ORCID ID",
+  // TODO New key - Add a translation
+  "person.page.orcid.create": "Create an ORCID ID",
+  
+  // "person.page.orcid.granted-authorizations": "Granted authorizations",
+  // TODO New key - Add a translation
+  "person.page.orcid.granted-authorizations": "Granted authorizations",
+  
+  // "person.page.orcid.link": "Connect to ORCID ID",
+  // TODO New key - Add a translation
+  "person.page.orcid.link": "Connect to ORCID ID",
+  
+  // "person.page.orcid.missing-authorizations": "Missing authorizations",
+  // TODO New key - Add a translation
+  "person.page.orcid.missing-authorizations": "Missing authorizations",
+  
+  // "person.page.orcid.missing-authorizations-message": "The following authorizations are missing:",
+  // TODO New key - Add a translation
+  "person.page.orcid.missing-authorizations-message": "The following authorizations are missing:",
+  
+  // "person.page.orcid.no-missing-authorizations-message": "Great! This box is empty, so you have granted all access rights to use all functions offers by your institution.",
+  // TODO New key - Add a translation
+  "person.page.orcid.no-missing-authorizations-message": "Great! This box is empty, so you have granted all access rights to use all functions offers by your institution.",
+  
+  // "person.page.orcid.no-orcid-message": "No ORCID iD associated yet",
+  // TODO New key - Add a translation
+  "person.page.orcid.no-orcid-message": "No ORCID iD associated yet",
+  
+  // "person.page.orcid.profile-preferences": "Profile preferences",
+  // TODO New key - Add a translation
+  "person.page.orcid.profile-preferences": "Profile preferences",
+  
+  // "person.page.orcid.project-preferences": "Project preferences",
+  // TODO New key - Add a translation
+  "person.page.orcid.project-preferences": "Project preferences",
+  
+  // "person.page.orcid.publications-preferences": "Publication preferences",
+  // TODO New key - Add a translation
+  "person.page.orcid.publications-preferences": "Publication preferences",
+  
+  // "person.page.orcid.remove-orcid-message": "If you need to remove your ORCID, please contact the repository administrator",
+  // TODO New key - Add a translation
+  "person.page.orcid.remove-orcid-message": "If you need to remove your ORCID, please contact the repository administrator",
+  
+  // "person.page.orcid.save.preference.changes": "Save changes",
+  // TODO New key - Add a translation
+  "person.page.orcid.save.preference.changes": "Save changes",
+  
+  // "person.page.orcid.sync-profile.affiliation" : "Affiliation",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-profile.affiliation" : "Affiliation",
+  
+  // "person.page.orcid.sync-profile.bibliographic" : "Bibliographic data",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-profile.bibliographic" : "Bibliographic data",
+  
+  // "person.page.orcid.sync-profile.education" : "Education",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-profile.education" : "Education",
+  
+  // "person.page.orcid.sync-profile.identifiers" : "Identifiers",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-profile.identifiers" : "Identifiers",
+  
+  // "person.page.orcid.sync-projects.all" : "All projects",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-projects.all" : "All projects",
+  
+  // "person.page.orcid.sync-projects.mine" : "My projects",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-projects.mine" : "My projects",
+  
+  // "person.page.orcid.sync-projects.my-selected" : "Selected projects",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-projects.my-selected" : "Selected projects",
+  
+  // "person.page.orcid.sync-projects.disabled" : "Disabled",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-projects.disabled" : "Disabled",
+  
+  // "person.page.orcid.sync-publications.all" : "All publications",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-publications.all" : "All publications",
+  
+  // "person.page.orcid.sync-publications.mine" : "My publications",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-publications.mine" : "My publications",
+  
+  // "person.page.orcid.sync-publications.my-selected" : "Selected publications",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-publications.my-selected" : "Selected publications",
+  
+  // "person.page.orcid.sync-publications.disabled" : "Disabled",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-publications.disabled" : "Disabled",
+  
+  // "person.page.orcid.sync-queue.delete" : "Delete",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.delete" : "Delete",
+  
+  // "person.page.orcid.sync-queue.delete.error": "The deletion of the ORCID queue record failed",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.delete.error": "The deletion of the ORCID queue record failed",
+  
+  // "person.page.orcid.sync-queue.delete.success": "The ORCID queue record have been deleted successfully",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.delete.success": "The ORCID queue record have been deleted successfully",
+  
+  // "person.page.orcid.sync-queue.empty-message": "The ORCID queue registry is empty",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.empty-message": "The ORCID queue registry is empty",
+  
+  // "person.page.orcid.sync-queue.entity-name" : "Name",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.entity-name" : "Name",
+  
+  // "person.page.orcid.sync-queue.send" : "Send",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send" : "Send",
+  
+  // "person.page.orcid.sync-queue.send.error": "The submission to ORCID failed",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.error": "The submission to ORCID failed",
+  
+  // "person.page.orcid.sync-queue.send.conflict-error": "The submission to ORCID failed because the resource is already present on the ORCID registry",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.conflict-error": "The submission to ORCID failed because the resource is already present on the ORCID registry",
+  
+  // "person.page.orcid.sync-queue.send.not-found-error": "The submission to ORCID failed because the expected resource to be update does not exists anymore on the ORCID registry.",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.not-found-error": "The submission to ORCID failed because the expected resource to be update does not exists anymore on the ORCID registry.",
+  
+  // "person.page.orcid.sync-queue.send.success": "The submission to ORCID was completed successfully",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.success": "The submission to ORCID was completed successfully",
+  
+  // "person.page.orcid.synchronization-mode": "Synchronization mode",
+  // TODO New key - Add a translation
+  "person.page.orcid.synchronization-mode": "Synchronization mode",
+  
+  // "person.page.orcid.synchronization-mode.batch": "Batch",
+  // TODO New key - Add a translation
+  "person.page.orcid.synchronization-mode.batch": "Batch",
+  
+  // "person.page.orcid.synchronization-mode.label": "Synchronization mode",
+  // TODO New key - Add a translation
+  "person.page.orcid.synchronization-mode.label": "Synchronization mode",
+  
+  // "person.page.orcid.synchronization-mode-message": "Enable 'Manual' Synchronization mode to disable batch synchronization, so you must send your data to ORCID Registry manually",
+  // TODO New key - Add a translation
+  "person.page.orcid.synchronization-mode-message": "Enable 'Manual' Synchronization mode to disable batch synchronization, so you must send your data to ORCID Registry manually",
+  
+  // "person.page.orcid.synchronization-settings-update.success": "The synchronization settings have been updated successfully",
+  // TODO New key - Add a translation
+  "person.page.orcid.synchronization-settings-update.success": "The synchronization settings have been updated successfully",
+  
+  // "person.page.orcid.synchronization-settings-update.error": "The update of the synchronization settings failed",
+  // TODO New key - Add a translation
+  "person.page.orcid.synchronization-settings-update.error": "The update of the synchronization settings failed",
+  
+  
+  // "person.page.orcid.synchronization-mode.manual": "Manual",
+  // TODO New key - Add a translation
+  "person.page.orcid.synchronization-mode.manual": "Manual",
+  
+  // "person.page.orcid.scope.authenticate": "Get your ORCID iD",
+  // TODO New key - Add a translation
+  "person.page.orcid.scope.authenticate": "Get your ORCID iD",
+  
+  // "person.page.orcid.scope.read-limited": "Read your information with visibility set to Trusted Parties",
+  // TODO New key - Add a translation
+  "person.page.orcid.scope.read-limited": "Read your information with visibility set to Trusted Parties",
+  
+  // "person.page.orcid.scope.activities-update": "Add/update your research activities",
+  // TODO New key - Add a translation
+  "person.page.orcid.scope.activities-update": "Add/update your research activities",
+  
+  // "person.page.orcid.scope.person-update": "Add/update other information about you",
+  // TODO New key - Add a translation
+  "person.page.orcid.scope.person-update": "Add/update other information about you",
+  
   // "person.page.staffid": "Staff ID",
   "person.page.staffid": "Staff ID",
   
@@ -3948,73 +4478,57 @@
   "person.search.title": "DSpace Cris Angular :: Person Search",
   
   
-  // "physical_objects.listelement.badge": "Objects, materials",
+  // "physical_objects.listelement.badge": "Object, material",
   // TODO New key - Add a translation
-  "physical_objects.listelement.badge": "Objects, materials",
+  "physical_objects.listelement.badge": "Object, material",
   
-  // "plan_cooperation_events.listelement.badge": "Cooperation processes (plan)",
+  // "plan_cooperation_events.listelement.badge": "Cooperation process (plan)",
   // TODO New key - Add a translation
-  "plan_cooperation_events.listelement.badge": "Cooperation processes (plan)",
+  "plan_cooperation_events.listelement.badge": "Cooperation process (plan)",
   
-  // "plan_events.listelement.badge": "Events (plan)",
+  // "plan_events.listelement.badge": "Event (plan)",
   // TODO New key - Add a translation
-  "plan_events.listelement.badge": "Events (plan)",
+  "plan_events.listelement.badge": "Event (plan)",
   
-  // "plan_innovationideas.listelement.badge": "Ideas for innovation and change (plan)",
+  // "plan_innovationideas.listelement.badge": "Idea for innovation or change (plan)",
   // TODO New key - Add a translation
-  "plan_innovationideas.listelement.badge": "Ideas for innovation and change (plan)",
+  "plan_innovationideas.listelement.badge": "Idea for innovation or change (plan)",
   
-  // "plan_innovationpotentials_econtech.listelement.badge": "Intended business innovations (plan)",
+  // "plan_milestones.listelement.badge": "Milestone (plan)",
   // TODO New key - Add a translation
-  "plan_innovationpotentials_econtech.listelement.badge": "Intended business innovations (plan)",
+  "plan_milestones.listelement.badge": "Milestone (plan)",
   
-  // "plan_innovationpotentials_social.listelement.badge": "Intended social innovations/change processes (plan)",
+  // "plan_participation_events.listelement.badge": "Participative process (plan)",
   // TODO New key - Add a translation
-  "plan_innovationpotentials_social.listelement.badge": "Intended social innovations/change processes (plan)",
+  "plan_participation_events.listelement.badge": "Participative process (plan)",
   
-  // "plan_milestones.listelement.badge": "Milestones (plan)",
+  // "plan_physical_objects.listelement.badge": "Object, material (plan)",
   // TODO New key - Add a translation
-  "plan_milestones.listelement.badge": "Milestones (plan)",
+  "plan_physical_objects.listelement.badge": "Object, material (plan)",
   
-  // "plan_participation_events.listelement.badge": "Participative processes (plan)",
+  // "plan_spinoffs.listelement.badge": "Spin-off (or association) (plan)",
   // TODO New key - Add a translation
-  "plan_participation_events.listelement.badge": "Participative processes (plan)",
+  "plan_spinoffs.listelement.badge": "Spin-off (or association) (plan)",
   
-  // "plan_patents.listelement.badge": "Patents and utility patents (plan)",
+  // "plan_workpackages.listelement.badge": "Workpackage (plan)",
   // TODO New key - Add a translation
-  "plan_patents.listelement.badge": "Patents and utility patents (plan)",
+  "plan_workpackages.listelement.badge": "Workpackage (plan)",
   
-  // "plan_physical_objects.listelement.badge": "Objects, materials (plan)",
+  // "plan_tasks.listelement.badge": "Task (plan)",
   // TODO New key - Add a translation
-  "plan_physical_objects.listelement.badge": "Objects, materials (plan)",
-  
-  // "plan_publications.listelement.badge": "Publications (plan)",
-  // TODO New key - Add a translation
-  "plan_publications.listelement.badge": "Publications (plan)",
-  
-  // "plan_spinoffs.listelement.badge": "Spin-offs (incl. associations) (plan)",
-  // TODO New key - Add a translation
-  "plan_spinoffs.listelement.badge": "Spin-offs (incl. associations) (plan)",
-  
-  // "plan_workpackages.listelement.badge": "Workpackages (plan)",
-  // TODO New key - Add a translation
-  "plan_workpackages.listelement.badge": "Workpackages (plan)",
-  
-  // "plan_tasks.listelement.badge": "Tasks (plan)",
-  // TODO New key - Add a translation
-  "plan_tasks.listelement.badge": "Tasks (plan)",
+  "plan_tasks.listelement.badge": "Task (plan)",
   
   // "pot_societalimpact.listelement.badge": "Expected societal impact",
   // TODO New key - Add a translation
   "pot_societalimpact.listelement.badge": "Expected societal impact",
   
-  // "proj_objectives.listelement.badge": "Project objectives",
+  // "proj_objectives.listelement.badge": "Project objective",
   // TODO New key - Add a translation
-  "proj_objectives.listelement.badge": "Project objectives",
+  "proj_objectives.listelement.badge": "Project objective",
   
-  // "publications.listelement.badge": "Publications",
+  // "Publication.listelement.badge": "Publication",
   // TODO New key - Add a translation
-  "publications.listelement.badge": "Publications",
+  "Publication.listelement.badge": "Publication",
   
   
   // "process.new.select-parameters": "Parameters",
@@ -4438,7 +4952,8 @@
   // TODO New key - Add a translation
   "project.create.success": "The new project has been generated successfully.",
   
-  // "project.listelement.badge": "Research Project",
+  // "project.listelement.badge": "Research project",
+  // TODO Source message changed - Revise the translation
   "project.listelement.badge": "Projet de recherche",
   
   // "project.page.contributor": "Contributors",
@@ -4469,29 +4984,100 @@
   // TODO New key - Add a translation
   "project.search.results.head": "Project Search Results",
   
-  // "project-overview.page.exploitation-plan" : "Exploitation plan",
-  // TODO New key - Add a translation
-  "project-overview.page.exploitation-plan" : "Exploitation plan",
   
-  // "project-overview.page.impact-pathways" : "Impact pathways",
-  // TODO New key - Add a translation
-  "project-overview.page.impact-pathways" : "Impact pathways",
   
-  // "project-overview.page.project.title" : "Project overview : ",
+  // "project-overview.page.header.delete.btn" : "Delete project",
   // TODO New key - Add a translation
-  "project-overview.page.project.title" : "Project overview : ",
+  "project-overview.page.header.delete.btn" : "Delete project",
   
-  // "project-overview.page.new-impact-pathway" : "Create new impact pathway",
+  // "project-overview.page.header.delete.confirm.cancel": "Cancel",
   // TODO New key - Add a translation
-  "project-overview.page.new-impact-pathway" : "Create new impact pathway",
+  "project-overview.page.header.delete.confirm.cancel": "Cancel",
+  
+  // "project-overview.page.header.delete.confirm.info": "This operation can't be undone. Are you sure?",
+  // TODO New key - Add a translation
+  "project-overview.page.header.delete.confirm.info": "This operation can't be undone. Are you sure?",
+  
+  // "project-overview.page.header.delete.confirm.submit": "Yes, I'm sure",
+  // TODO New key - Add a translation
+  "project-overview.page.header.delete.confirm.submit": "Yes, I'm sure",
+  
+  // "project-overview.page.header.delete.confirm.title": "Delete project",
+  // TODO New key - Add a translation
+  "project-overview.page.header.delete.confirm.title": "Delete project",
+  
+  // "project-overview.page.header.delete.error": "There was an issue when deleting the project, please try again later.",
+  // TODO New key - Add a translation
+  "project-overview.page.header.delete.error": "There was an issue when deleting the project, please try again later.",
+  
+  // "project-overview.page.header.delete.processing": "Processing...",
+  // TODO New key - Add a translation
+  "project-overview.page.header.delete.processing": "Processing...",
+  
+  // "project-overview.page.header.delete.success": "Project deleted successfully.",
+  // TODO New key - Add a translation
+  "project-overview.page.header.delete.success": "Project deleted successfully.",
+  
+  // "project-overview.page.header.delete.submit": "Delete",
+  // TODO New key - Add a translation
+  "project-overview.page.header.delete.submit": "Delete",
+  
+  // "project-overview.page.header.project.title" : "Project overview : ",
+  // TODO New key - Add a translation
+  "project-overview.page.header.project.title" : "Project overview : ",
+  
+  // "project-overview.page.content.all-items" : "All items",
+  // TODO New key - Add a translation
+  "project-overview.page.content.all-items" : "All items",
+  
+  // "project-overview.page.content.card-project.title" : "Project related uploads",
+  // TODO New key - Add a translation
+  "project-overview.page.content.card-project.title" : "Project related uploads",
+  
+  // "project-overview.page.content.card-project.link1" : "Uploads for proposals",
+  // TODO New key - Add a translation
+  "project-overview.page.content.card-project.link1" : "Uploads for proposals",
+  
+  // "project-overview.page.content.card-project.link2" : "Uploads for parts of reports",
+  // TODO New key - Add a translation
+  "project-overview.page.content.card-project.link2" : "Uploads for parts of reports",
+  
+  // "project-overview.page.content.card-checklist.title" : "Checklists for reflection",
+  // TODO New key - Add a translation
+  "project-overview.page.content.card-checklist.title" : "Checklists for reflection",
+  
+  // "project-overview.page.content.card-checklist.link1" : "Ethical Aspects",
+  // TODO New key - Add a translation
+  "project-overview.page.content.card-checklist.link1" : "Ethical Aspects",
+  
+  // "project-overview.page.content.card-checklist.link2" : "Gender Aspects",
+  // TODO New key - Add a translation
+  "project-overview.page.content.card-checklist.link2" : "Gender Aspects",
+  
+  // "project-overview.page.content.exploitation-plan" : "Exploitation plan",
+  // TODO New key - Add a translation
+  "project-overview.page.content.exploitation-plan" : "Exploitation plan",
+  
+  // "project-overview.page.content.impact-pathways" : "Impact pathway",
+  // TODO New key - Add a translation
+  "project-overview.page.content.impact-pathways" : "Impact pathway",
+  
+  // "project-overview.page.content.new-impact-pathway" : "Create new impact pathway",
+  // TODO New key - Add a translation
+  "project-overview.page.content.new-impact-pathway" : "Create new impact pathway",
+  
+  // "project-overview.page.content.reports" : "Reports / export",
+  // TODO New key - Add a translation
+  "project-overview.page.content.reports" : "Reports / export",
+  
+  // "project-overview.page.content.working-plan" : "Working plan",
+  // TODO New key - Add a translation
+  "project-overview.page.content.working-plan" : "Working plan",
   
   // "project-overview.page.title" : "Project overview",
   // TODO New key - Add a translation
   "project-overview.page.title" : "Project overview",
   
-  // "project-overview.page.working-plan" : "Working plan",
-  // TODO New key - Add a translation
-  "project-overview.page.working-plan" : "Working plan",
   
   // "publication.listelement.badge": "Publication",
   "publication.listelement.badge": "Publication",
@@ -5142,6 +5728,201 @@
   "search.filters.filter.submitter.placeholder": "Déposant",
   
   
+  // "search.filters.entityType.applications_econtech": "Application success for business innovations",
+  // TODO New key - Add a translation
+  "search.filters.entityType.applications_econtech": "Application success for business innovations",
+  
+  // "search.filters.entityType.applications_social": "Application success in social innovations/change processes",
+  // TODO New key - Add a translation
+  "search.filters.entityType.applications_social": "Application success in social innovations/change processes",
+  
+  // "search.filters.entityType.awards": "Award or prize",
+  // TODO New key - Add a translation
+  "search.filters.entityType.awards": "Award or prize",
+  
+  // "search.filters.entityType.datafile": "Data file",
+  // TODO New key - Add a translation
+  "search.filters.entityType.datafile": "Data file",
+  
+  // "search.filters.entityType.datapackage": "Data package",
+  // TODO New key - Add a translation
+  "search.filters.entityType.datapackage": "Data package",
+  
+  // "search.filters.entityType.cooperation_events": "Cooperation process",
+  // TODO New key - Add a translation
+  "search.filters.entityType.cooperation_events": "Cooperation process",
+  
+  // "search.filters.entityType.cooperation_partners": "Cooperation partner",
+  // TODO New key - Add a translation
+  "search.filters.entityType.cooperation_partners": "Cooperation partner",
+  
+  // "search.filters.entityType.conditions": "External condition or requirement",
+  // TODO New key - Add a translation
+  "search.filters.entityType.conditions": "External condition or requirement",
+  
+  // "search.filters.entityType.contribution_fundingprogramme": "Contribution to funding programme objectives",
+  // TODO New key - Add a translation
+  "search.filters.entityType.contribution_fundingprogramme": "Contribution to funding programme objectives",
+  
+  // "search.filters.entityType.ethics": "Ethical reflection",
+  // TODO New key - Add a translation
+  "search.filters.entityType.ethics": "Ethical reflection",
+  
+  // "search.filters.entityType.Event": "Event",
+  // TODO New key - Add a translation
+  "search.filters.entityType.Event": "Event",
+  
+  // "search.filters.entityType.gender": "Gender reflection",
+  // TODO New key - Add a translation
+  "search.filters.entityType.gender": "Gender reflection",
+  
+  // "search.filters.entityType.inn_pot_econtech": "Intended business innovation",
+  // TODO New key - Add a translation
+  "search.filters.entityType.inn_pot_econtech": "Intended business innovation",
+  
+  // "search.filters.entityType.inn_pot_social": "Intended social innovation/ change process",
+  // TODO New key - Add a translation
+  "search.filters.entityType.inn_pot_social": "Intended social innovation/ change process",
+  
+  // "search.filters.entityType.impactpathway": "Impact pathway",
+  // TODO New key - Add a translation
+  "search.filters.entityType.impactpathway": "Impact pathway",
+  
+  // "search.filters.entityType.impactpathwaystep": "Impact pathway step",
+  // TODO New key - Add a translation
+  "search.filters.entityType.impactpathwaystep": "Impact pathway step",
+  
+  // "search.filters.entityType.innovationideas": "Idea for innovation or change",
+  // TODO New key - Add a translation
+  "search.filters.entityType.innovationideas": "Idea for innovation or change",
+  
+  // "search.filters.entityType.milestones": "Milestone",
+  // TODO New key - Add a translation
+  "search.filters.entityType.milestones": "Milestone",
+  
+  // "search.filters.entityType.participation_events": "Participative process",
+  // TODO New key - Add a translation
+  "search.filters.entityType.participation_events": "Participative process",
+  
+  // "search.filters.entityType.Patent": "Patent or utility patent",
+  // TODO New key - Add a translation
+  "search.filters.entityType.Patent": "Patent or utility patent",
+  
+  // "search.filters.entityType.Person": "Persons",
+  // TODO New key - Add a translation
+  "search.filters.entityType.Person": "Persons",
+  
+  // "search.filters.entityType.physical_objects": "Object, material",
+  // TODO New key - Add a translation
+  "search.filters.entityType.physical_objects": "Object, material",
+  
+  // "search.filters.entityType.plan_cooperation_events": "Cooperation process (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_cooperation_events": "Cooperation process (plan)",
+  
+  // "search.filters.entityType.plan_events": "Event (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_events": "Event (plan)",
+  
+  // "search.filters.entityType.plan_innovationideas": "Idea for innovation or change (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_innovationideas": "Idea for innovation or change (plan)",
+  
+  // "search.filters.entityType.plan_milestones": "Milestone (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_milestones": "Milestone (plan)",
+  
+  // "search.filters.entityType.plan_participation_events": "Participative process (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_participation_events": "Participative process (plan)",
+  
+  // "search.filters.entityType.plan_physical_objects": "Object, material (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_physical_objects": "Object, material (plan)",
+  
+  // "search.filters.entityType.plan_spinoffs": "Spin-off (or association) (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_spinoffs": "Spin-off (or association) (plan)",
+  
+  // "search.filters.entityType.plan_workpackages": "Workpackage (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_workpackages": "Workpackage (plan)",
+  
+  // "search.filters.entityType.plan_tasks": "Task (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_tasks": "Task (plan)",
+  
+  // "search.filters.entityType.plan_inn_pot_econtech": "Intended business innovation (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_inn_pot_econtech": "Intended business innovation (plan)",
+  
+  // "search.filters.entityType.plan_inn_pot_social": "Intended social innovation/change process (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_inn_pot_social": "Intended social innovation/change process (plan)",
+  
+  // "search.filters.entityType.plan_patent": "Patent or utility patent (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_patent": "Patent or utility patent (plan)",
+  
+  // "search.filters.entityType.plan_publication": "Publication (plan)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_publication": "Publication (plan)",
+  
+  // "search.filters.entityType.plan_research_quest": "Research quest",
+  // TODO New key - Add a translation
+  "search.filters.entityType.plan_research_quest": "Research quest",
+  
+  // "search.filters.entityType.pot_societalimpact": "Expected societal impact",
+  // TODO New key - Add a translation
+  "search.filters.entityType.pot_societalimpact": "Expected societal impact",
+  
+  // "search.filters.entityType.proj_objectives": "Project objective",
+  // TODO New key - Add a translation
+  "search.filters.entityType.proj_objectives": "Project objective",
+  
+  // "search.filters.entityType.Project": "Research projects",
+  // TODO New key - Add a translation
+  "search.filters.entityType.Project": "Research projects",
+  
+  // "search.filters.entityType.Publication": "Publication",
+  // TODO New key - Add a translation
+  "search.filters.entityType.Publication": "Publication",
+  
+  // "search.filters.entityType.research_results": "Research result",
+  // TODO New key - Add a translation
+  "search.filters.entityType.research_results": "Research result",
+  
+  // "search.filters.entityType.spinoffs": "Spin-off (or associations)",
+  // TODO New key - Add a translation
+  "search.filters.entityType.spinoffs": "Spin-off (or associations)",
+  
+  // "search.filters.entityType.stateofart": "State of knowledge",
+  // TODO New key - Add a translation
+  "search.filters.entityType.stateofart": "State of knowledge",
+  
+  // "search.filters.entityType.steps": "Next step or cooperation",
+  // TODO New key - Add a translation
+  "search.filters.entityType.steps": "Next step or cooperation",
+  
+  // "search.filters.entityType.subproject": "Subproject",
+  // TODO New key - Add a translation
+  "search.filters.entityType.subproject": "Subproject",
+  
+  // "search.filters.entityType.targetgroups": "Target group",
+  // TODO New key - Add a translation
+  "search.filters.entityType.targetgroups": "Target group",
+  
+  // "search.filters.entityType.tasks": "Task",
+  // TODO New key - Add a translation
+  "search.filters.entityType.tasks": "Task",
+  
+  // "search.filters.entityType.unexpected_results": "Unexpected result or problem",
+  // TODO New key - Add a translation
+  "search.filters.entityType.unexpected_results": "Unexpected result or problem",
+  
+  // "search.filters.entityType.workpackages": "Work package",
+  // TODO New key - Add a translation
+  "search.filters.entityType.workpackages": "Work package",
   
   // "search.filters.entityType.JournalIssue": "Journal Issue",
   // TODO New key - Add a translation
@@ -5154,6 +5935,7 @@
   // "search.filters.entityType.OrgUnit": "Organizational Unit",
   // TODO New key - Add a translation
   "search.filters.entityType.OrgUnit": "Organizational Unit",
+  
   
   // "search.filters.has_content_in_original_bundle.true": "Yes",
   // TODO New key - Add a translation
@@ -5266,13 +6048,14 @@
   // "sorting.score.DESC": "Relevance",
   "sorting.score.DESC": "Pertinence",
   
-  // "spinoffs.listelement.badge": "Spin-offs (incl. associations)",
-  // TODO New key - Add a translation
-  "spinoffs.listelement.badge": "Spin-offs (incl. associations)",
   
-  // "steps.listelement.badge": "Next steps and cooperation",
+  // "spinoffs.listelement.badge": "Spin-off (or associations)",
   // TODO New key - Add a translation
-  "steps.listelement.badge": "Next steps and cooperation",
+  "spinoffs.listelement.badge": "Spin-off (or associations)",
+  
+  // "steps.listelement.badge": "Next step or cooperation",
+  // TODO New key - Add a translation
+  "steps.listelement.badge": "Next step or cooperation",
   
   // "submission.edit.title": "Edit Submission",
   "submission.edit.title": "Éditer dépôt",
@@ -5305,6 +6088,81 @@
   "submission.general.save-later": "Sauvegarder pour plus tard",
   
   
+  // "submission.import-external.page.title": "Import metadata from an external source",
+  // TODO New key - Add a translation
+  "submission.import-external.page.title": "Import metadata from an external source",
+  
+  // "submission.import-external.title": "Import metadata from an external source",
+  // TODO New key - Add a translation
+  "submission.import-external.title": "Import metadata from an external source",
+  
+  // "submission.import-external.page.hint": "Enter a query above to find items from the web to import in to DSpace.",
+  // TODO New key - Add a translation
+  "submission.import-external.page.hint": "Enter a query above to find items from the web to import in to DSpace.",
+  
+  // "submission.import-external.back-to-my-dspace": "Back to MyDSpace",
+  // TODO New key - Add a translation
+  "submission.import-external.back-to-my-dspace": "Back to MyDSpace",
+  
+  // "submission.import-external.search.placeholder": "Search the external source",
+  // TODO New key - Add a translation
+  "submission.import-external.search.placeholder": "Search the external source",
+  
+  // "submission.import-external.search.button": "Search",
+  // TODO New key - Add a translation
+  "submission.import-external.search.button": "Search",
+  
+  // "submission.import-external.search.button.hint": "Write some words to search",
+  // TODO New key - Add a translation
+  "submission.import-external.search.button.hint": "Write some words to search",
+  
+  // "submission.import-external.search.source.hint": "Pick an external source",
+  // TODO New key - Add a translation
+  "submission.import-external.search.source.hint": "Pick an external source",
+  
+  // "submission.import-external.source.loading": "Loading ...",
+  // TODO New key - Add a translation
+  "submission.import-external.source.loading": "Loading ...",
+  
+  // "submission.import-external.source.sherpaJournal": "SHERPA Journals",
+  // TODO New key - Add a translation
+  "submission.import-external.source.sherpaJournal": "SHERPA Journals",
+  
+  // "submission.import-external.source.sherpaPublisher": "SHERPA Publishers",
+  // TODO New key - Add a translation
+  "submission.import-external.source.sherpaPublisher": "SHERPA Publishers",
+  
+  // "submission.import-external.source.orcidV2": "ORCID",
+  // TODO New key - Add a translation
+  "submission.import-external.source.orcidV2": "ORCID",
+  
+  // "submission.import-external.source.pubmed": "Pubmed",
+  // TODO New key - Add a translation
+  "submission.import-external.source.pubmed": "Pubmed",
+  
+  // "submission.import-external.source.lcname": "Library of Congress Names",
+  // TODO New key - Add a translation
+  "submission.import-external.source.lcname": "Library of Congress Names",
+  
+  // "submission.import-external.preview.title": "Item Preview",
+  // TODO New key - Add a translation
+  "submission.import-external.preview.title": "Item Preview",
+  
+  // "submission.import-external.preview.subtitle": "The metadata below was imported from an external source. It will be pre-filled when you start the submission.",
+  // TODO New key - Add a translation
+  "submission.import-external.preview.subtitle": "The metadata below was imported from an external source. It will be pre-filled when you start the submission.",
+  
+  // "submission.import-external.preview.button.import": "Start submission",
+  // TODO New key - Add a translation
+  "submission.import-external.preview.button.import": "Start submission",
+  
+  // "submission.import-external.preview.error.import.title": "Submission error",
+  // TODO New key - Add a translation
+  "submission.import-external.preview.error.import.title": "Submission error",
+  
+  // "submission.import-external.preview.error.import.body": "An error occurs during the external source entry import process.",
+  // TODO New key - Add a translation
+  "submission.import-external.preview.error.import.body": "An error occurs during the external source entry import process.",
   // "submission.sections.detect-duplicate.clear-decision": "Undo",
   // TODO New key - Add a translation
   "submission.sections.detect-duplicate.clear-decision": "Undo",
@@ -5418,10 +6276,6 @@
   // "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.added.new-entity": "Successfully imported and added external author to the selection",
   // TODO New key - Add a translation
   "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.added.new-entity": "Successfully imported and added external author to the selection",
-  
-  // "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.title": "Import Remote Author",
-  // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.Author.title": "Import Remote Author",
   
   // "submission.sections.describe.relationship-lookup.external-source.import-modal.Journal Issue.added.local-entity": "Successfully added local journal issue to the selection",
   // TODO New key - Add a translation
@@ -5703,9 +6557,17 @@
   // TODO New key - Add a translation
   "submission.sections.describe.relationship-lookup.selection-tab.title.orcidV2": "Search Results",
   
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.orcidv2": "Search Results",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.selection-tab.title.orcidv2": "Search Results",
+  
   // "submission.sections.describe.relationship-lookup.selection-tab.title.lcname": "Search Results",
   // TODO New key - Add a translation
   "submission.sections.describe.relationship-lookup.selection-tab.title.lcname": "Search Results",
+  
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.pubmed": "Search Results",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.selection-tab.title.pubmed": "Search Results",
   
   // "submission.sections.describe.relationship-lookup.name-variant.notification.content": "Would you like to save \"{{ value }}\" as a name variant for this person so you and others can reuse it for future submissions? If you don\'t you can still use it for this submission.",
   // TODO New key - Add a translation
@@ -5799,9 +6661,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.agrovoc_keywords": "Agrovoc keywords",
   
-  // "submission.sections.submit.progressbar.describe.applications_econtech": "Succsessful use of results for change processes",
+  // "submission.sections.submit.progressbar.describe.applications_econtech": "Successful use of results for change processes",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.applications_econtech": "Succsessful use of results for change processes",
+  "submission.sections.submit.progressbar.describe.applications_econtech": "Successful use of results for change processes",
   
   // "submission.sections.submit.progressbar.describe.applications_econtech_quant": "Quantification of the use of results and development of the outreach",
   // TODO New key - Add a translation
@@ -5811,13 +6673,13 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.applications_econtech_types": "If no innovation-potential is linked: Type and actors group of the successful use of results",
   
-  // "submission.sections.submit.progressbar.describe.applications_econtech_types.info": "The following information need only be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
+  // "submission.sections.submit.progressbar.describe.applications_econtech_types.info": "The following information needs only to be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.applications_econtech_types.info": "The following information need only be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
+  "submission.sections.submit.progressbar.describe.applications_econtech_types.info": "The following information needs only to be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
   
-  // "submission.sections.submit.progressbar.describe.applications_social": "Succsessful use of results for social innovations/ change processes",
+  // "submission.sections.submit.progressbar.describe.applications_social": "Successful use of results for social innovations/ change processes",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.applications_social": "Succsessful use of results for social innovations/ change processes",
+  "submission.sections.submit.progressbar.describe.applications_social": "Successful use of results for social innovations/ change processes",
   
   // "submission.sections.submit.progressbar.describe.applications_social_quant": "Quantification of the use of results and development of the outreach",
   // TODO New key - Add a translation
@@ -5839,9 +6701,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.awards": "Prizes and awards",
   
-  // "submission.sections.submit.progressbar.describe.awards.info": "Please document here all prizes and awards related to the project and/or its results.",
+  // "submission.sections.submit.progressbar.describe.awards.info": "Please document here all prizes and awards related to the project and/ or its results.",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.awards.info": "Please document here all prizes and awards related to the project and/or its results.",
+  "submission.sections.submit.progressbar.describe.awards.info": "Please document here all prizes and awards related to the project and/ or its results.",
   
   // "submission.sections.submit.progressbar.describe.conditions": "Reflection of external conditions and requirements",
   // TODO New key - Add a translation
@@ -5863,9 +6725,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg": "Relation of the project to SDGs",
   
-  // "submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg.info": "The assignment to the UN Sustainable Development Goals (SDGs) are carried out for programme evaluation. If SDGs have already been assigned to the programme objectives, these are displayed. Please select a SDG target manually if no assignment has been made yet or if the project contributes to other SDGs that go beyond the program objectives. Further information can be found here [LINK].",
+  // "submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg.info": "The assignment to the UN Sustainable Development Goals (SDGs) are carried out for programme evaluation. If SDGs have already been assigned to the program objectives, these are displayed. Please select a SDG target manually if no assignment has been made yet or if the project contributes to other SDGs that go beyond the program objectives. Further information can be found here [LINK].",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg.info": "The assignment to the UN Sustainable Development Goals (SDGs) are carried out for programme evaluation. If SDGs have already been assigned to the programme objectives, these are displayed. Please select a SDG target manually if no assignment has been made yet or if the project contributes to other SDGs that go beyond the program objectives. Further information can be found here [LINK].",
+  "submission.sections.submit.progressbar.describe.contribution_fundingprogramme_sdg.info": "The assignment to the UN Sustainable Development Goals (SDGs) are carried out for programme evaluation. If SDGs have already been assigned to the program objectives, these are displayed. Please select a SDG target manually if no assignment has been made yet or if the project contributes to other SDGs that go beyond the program objectives. Further information can be found here [LINK].",
   
   // "submission.sections.submit.progressbar.describe.cooperation_events": "Cooperation processes basic information",
   // TODO New key - Add a translation
@@ -5879,9 +6741,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.cooperation_events_date": "Dates of personal meetings or other central activities",
   
-  // "submission.sections.submit.progressbar.describe.cooperation_events_date.info": "It is not expected here that every telephone call or frequent web conferences will be recorded with exact data. Please use the frequency information for this purpose",
+  // "submission.sections.submit.progressbar.describe.cooperation_events_date.info": "It is not expected here that every telephone call or frequent web conferences will be recorded with exact data. Please use the frequency information for this purpose.",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.cooperation_events_date.info": "It is not expected here that every telephone call or frequent web conferences will be recorded with exact data. Please use the frequency information for this purpose",
+  "submission.sections.submit.progressbar.describe.cooperation_events_date.info": "It is not expected here that every telephone call or frequent web conferences will be recorded with exact data. Please use the frequency information for this purpose.",
   
   // "submission.sections.submit.progressbar.describe.cooperation_events_frequency": "Frequency of the cooperation processes",
   // TODO New key - Add a translation
@@ -5991,6 +6853,38 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.gender_project.info": "Gender aspects can be relevant at several points of an R&D process. Please indicate where gender aspects may be affected by the project. If you choose \"yes\" in an area, please address these aspects in the corresponding section in the SynSICRIS tool.",
   
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_objective_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_objective_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_5_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_5_task_form.info": "",
+  
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "",
+  
   // "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
@@ -6007,9 +6901,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.import_orgunits_companies_zk": "Commercial register entry",
   
-  // "submission.sections.submit.progressbar.describe.import_orgunits_st": "Information on the executing acency",
+  // "submission.sections.submit.progressbar.describe.import_orgunits_st": "Information on the executing agency",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.import_orgunits_st": "Information on the executing acency",
+  "submission.sections.submit.progressbar.describe.import_orgunits_st": "Information on the executing agency",
   
   // "submission.sections.submit.progressbar.describe.import_orgunits_zk": "Information on the applicant",
   // TODO New key - Add a translation
@@ -6023,9 +6917,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.import_person_pa": "Personal data administrative contact person (in case of grant approval)",
   
-  // "submission.sections.submit.progressbar.describe.import_person_pl": "Personal data Project management",
+  // "submission.sections.submit.progressbar.describe.import_person_pl": "Personal data project management",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.import_person_pl": "Personal data Project management",
+  "submission.sections.submit.progressbar.describe.import_person_pl": "Personal data project management",
   
   // "submission.sections.submit.progressbar.describe.import_person_uz": "Personal data authorised signatory",
   // TODO New key - Add a translation
@@ -6059,9 +6953,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability": "Description of the applicability",
   
-  // "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability.info": "Please describe the current status of applicability and name deficits in applicability whose improvement is addressed in the project. In some cases, this information will not yet be available in the proposal phase, but will be identified in the course of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. Update this information at the required times. At the end of the project, describe the achieved applicability.It is recommended to conduct the applicability analysis with the participation of actors from the field of practice.The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project.  Add any information that you consider important but not requested under \"other\".",
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability.info": "Please describe the current status of applicability and name deficits in applicability whose improvement is addressed in the project. In some cases, this information will not yet be available in the proposal phase, but will be identified in the course of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. Update this information at the required times. At the end of the project, describe the achieved applicability.It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project. Add any information that you consider important but not requested under \"other\".",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability.info": "Please describe the current status of applicability and name deficits in applicability whose improvement is addressed in the project. In some cases, this information will not yet be available in the proposal phase, but will be identified in the course of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. Update this information at the required times. At the end of the project, describe the achieved applicability.It is recommended to conduct the applicability analysis with the participation of actors from the field of practice.The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project.  Add any information that you consider important but not requested under \"other\".",
+  "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_applicability.info": "Please describe the current status of applicability and name deficits in applicability whose improvement is addressed in the project. In some cases, this information will not yet be available in the proposal phase, but will be identified in the course of the project. It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. Update this information at the required times. At the end of the project, describe the achieved applicability.It is recommended to conduct the applicability analysis with the participation of actors from the field of practice. The description should be carried out on the basis of all given categories. In each category, comment on the questions relevant to the project. Add any information that you consider important but not requested under \"other\".",
   
   // "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_trl": "Technology Readiness Level (TRL)",
   // TODO New key - Add a translation
@@ -6079,9 +6973,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.innovationpotentials_econtech_userbenefit.info": "Describe the expected benefit for any number of relevant customer or user groups and estimate the size of the potential market.",
   
-  // "submission.sections.submit.progressbar.describe.innovationpotentials_social": "Concrete intentions for using the project results for social innovation / change processes",
+  // "submission.sections.submit.progressbar.describe.innovationpotentials_social": "Concrete intentions for using the project results for social innovation/ change processes",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.innovationpotentials_social": "Concrete intentions for using the project results for social innovation / change processes",
+  "submission.sections.submit.progressbar.describe.innovationpotentials_social": "Concrete intentions for using the project results for social innovation/ change processes",
   
   // "submission.sections.submit.progressbar.describe.innovationpotentials_social.info": "Document here what concrete intentions exist for the use of the project results for social innovation/ changes in the field of practice. (e.g. changed skills, actions, structures but also political changes). If social innovations/ change processes are related to intended economic-technical innovations, please document them separately. If you see different, vague application possibilities for the (expected) project results, which can only be concretised at a later date and for whose further implementation no partners have been identified yet, please change to \"Innovation ideas\".",
   // TODO New key - Add a translation
@@ -6167,9 +7061,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.patents": "Patents and utility patents",
   
-  // "submission.sections.submit.progressbar.describe.patents.info": "Please document here the Industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
+  // "submission.sections.submit.progressbar.describe.patents.info": "Please document here the industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.patents.info": "Please document here the Industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
+  "submission.sections.submit.progressbar.describe.patents.info": "Please document here the industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
   
   // "submission.sections.submit.progressbar.describe.patents_result": "Information from application at the Patent Office",
   // TODO New key - Add a translation
@@ -6191,9 +7085,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.physical_objects": "Objects, Materials",
   
-  // "submission.sections.submit.progressbar.describe.physical_objects.info": "Document all types of (physical) objects and materials here. This summarizes all outputs like e.g. devices as prototypes, miniatures, sediments.If you don't find a specific object type here, check whether it is available under \"Publications\".",
+  // "submission.sections.submit.progressbar.describe.physical_objects.info": "Document all types of (physical) objects and materials here. This summarizes all outputs like e.g. devices as prototypes, miniatures, sediments. If you don't find a specific object type here, check whether it is available under \"Publications\".",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.physical_objects.info": "Document all types of (physical) objects and materials here. This summarizes all outputs like e.g. devices as prototypes, miniatures, sediments.If you don't find a specific object type here, check whether it is available under \"Publications\".",
+  "submission.sections.submit.progressbar.describe.physical_objects.info": "Document all types of (physical) objects and materials here. This summarizes all outputs like e.g. devices as prototypes, miniatures, sediments. If you don't find a specific object type here, check whether it is available under \"Publications\".",
   
   // "submission.sections.submit.progressbar.describe.physical_objects_result": "Type of use and accessibility",
   // TODO New key - Add a translation
@@ -6219,9 +7113,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.projects": "Projects",
   
-  // "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties.  Please upload a logo of the project, if available, to support the public presentation of the project.",
+  // "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties.  Please upload a logo of the project, if available, to support the public presentation of the project.",
+  "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
   
   // "submission.sections.submit.progressbar.describe.projects_overview": "Project overview",
   // TODO New key - Add a translation
@@ -6267,9 +7161,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.spinoffs": "Spin-offs (incl. associations)",
   
-  // "submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/person by founding a company or association.",
+  // "submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/ person by founding a company or association.",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/person by founding a company or association.",
+  "submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/ person by founding a company or association.",
   
   // "submission.sections.submit.progressbar.describe.spinoffs_result": "Details of spin-off carried out",
   // TODO New key - Add a translation
@@ -6343,9 +7237,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.unexpected_results": "Unexpected results and problems",
   
-  // "submission.sections.submit.progressbar.describe.unexpected_results.info": "Please document findings that can’t be used as planned. These include non-significant results, results that contradict) the hypothesis or support the null hypothesis, methodological problems that hindered research work, results that indicate unexpected risks, etc.. By documenting (and ideally publishing) such results, you mark the integrity and responsibility of the research in the project. You avoid wasting resources by replicating research that have already failed, avoid misinterpreting the significance and effect size e in reviews and meta-analyses and contribute to the further development of methods. With practice-oriented results, you help to prevent the application of ineffective or risky measures.",
+  // "submission.sections.submit.progressbar.describe.unexpected_results.info": "Please document findings that can’t be used as planned. These include non-significant results, results that contradict the hypothesis or support the null hypothesis, methodological problems that hindered research work, results that indicate unexpected risks, etc.. By documenting (and ideally publishing) such results, you mark the integrity and responsibility of the research in the project. You avoid wasting resources by replicating research that have already failed, avoid misinterpreting the significance and effect size in reviews and meta-analyses and contribute to the further development of methods. With practice-oriented results, you help to prevent the application of ineffective or risky measures.",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.unexpected_results.info": "Please document findings that can’t be used as planned. These include non-significant results, results that contradict) the hypothesis or support the null hypothesis, methodological problems that hindered research work, results that indicate unexpected risks, etc.. By documenting (and ideally publishing) such results, you mark the integrity and responsibility of the research in the project. You avoid wasting resources by replicating research that have already failed, avoid misinterpreting the significance and effect size e in reviews and meta-analyses and contribute to the further development of methods. With practice-oriented results, you help to prevent the application of ineffective or risky measures.",
+  "submission.sections.submit.progressbar.describe.unexpected_results.info": "Please document findings that can’t be used as planned. These include non-significant results, results that contradict the hypothesis or support the null hypothesis, methodological problems that hindered research work, results that indicate unexpected risks, etc.. By documenting (and ideally publishing) such results, you mark the integrity and responsibility of the research in the project. You avoid wasting resources by replicating research that have already failed, avoid misinterpreting the significance and effect size in reviews and meta-analyses and contribute to the further development of methods. With practice-oriented results, you help to prevent the application of ineffective or risky measures.",
   
   // "submission.sections.submit.progressbar.describe.upload": "Upload",
   // TODO New key - Add a translation
@@ -6358,6 +7252,10 @@
   // "submission.sections.submit.progressbar.describe.workpackages": "Description of the workpackage",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.workpackages": "Description of the workpackage",
+  
+  // "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
   
   // "submission.sections.submit.progressbar.describe.workpackages.info": "Describe here only general aspects that do not also arise in the assigned tasks and activities.",
   // TODO New key - Add a translation
@@ -6422,10 +7320,12 @@
   // "submission.sections.upload.form.until-placeholder": "Until",
   "submission.sections.upload.form.until-placeholder": "Jusque",
   
-  // "submission.sections.upload.header.policy.default.nolist": "Uploaded files in the {{collectionName}} collection will be accessible according to the following group(s):",
+  // "submission.sections.upload.header.policy.default.nolist": "Uploaded files in the {{collectionName}} collection will be accessible according to the following group(s): ",
+  // TODO Source message changed - Revise the translation
   "submission.sections.upload.header.policy.default.nolist": "Les fichiers uploadés dans la Collection {{collectionName}} seront accessibles au(x) groupe(s) suivant(s) :",
   
-  // "submission.sections.upload.header.policy.default.withlist": "Please note that uploaded files in the {{collectionName}} collection will be accessible, in addition to what is explicitly decided for the single file, with the following group(s):",
+  // "submission.sections.upload.header.policy.default.withlist": "Please note that uploaded files in the {{collectionName}} collection will be accessible, in addition to what is explicitly decided for the single file, with the following group(s): ",
+  // TODO Source message changed - Revise the translation
   "submission.sections.upload.header.policy.default.withlist": "Veuillez noter que, en complément des accès spécifiquement accordés pour le fichier, les fichiers uploadés dans la Collection {{collectionName}} seront accessibles par défaut au(x) groupe(s) suivant(s) :",
   
   // "submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <strong>upload additional files just dragging & dropping them everywhere in the page</strong>",
@@ -6541,13 +7441,15 @@
   // "submission.workflow.tasks.pool.show-detail": "Show detail",
   "submission.workflow.tasks.pool.show-detail": "Afficher détails",
   
-  // "targetgroups.listelement.badge": "Target groups",
-  // TODO New key - Add a translation
-  "targetgroups.listelement.badge": "Target groups",
   
-  // "tasks.listelement.badge": "Tasks",
+  // "targetgroups.listelement.badge": "Target group",
   // TODO New key - Add a translation
-  "tasks.listelement.badge": "Tasks",
+  "targetgroups.listelement.badge": "Target group",
+  
+  // "tasks.listelement.badge": "Task",
+  // TODO New key - Add a translation
+  "tasks.listelement.badge": "Task",
+  
   
   // "title": "DSpace Cris",
   // TODO Source message changed - Revise the translation
@@ -6560,11 +7462,9 @@
   "tree.description.srsc": "Research Subject Categories",
   
   
-  
-  // "treeview.header": "Hierarchical tree view",
+  // "treeview.header": "Cascade Dropdown",
   // TODO New key - Add a translation
-  "treeview.header": "Hierarchical tree view",
-  
+  "treeview.header": "Cascade Dropdown",
   
   
   // "treeview.search.form.reset": "Reset",
@@ -6586,12 +7486,9 @@
   "treeview.load-more": "Load more",
   
   
-  
-  
-  
-  // "vocabulary-treeview.header": "Hierarchical tree view",
+  // "vocabulary-treeview.header": "Cascade Dropdown",
   // TODO New key - Add a translation
-  "vocabulary-treeview.header": "Hierarchical tree view",
+  "vocabulary-treeview.header": "Cascade Dropdown",
   
   // "vocabulary-treeview.load-more": "Load more",
   // TODO New key - Add a translation
@@ -6628,9 +7525,9 @@
   "menu.section.admin_search": "Admin Search",
   
   
-  // "unexpected_results.listelement.badge":  "Unexpected results and problems",
+  // "unexpected_results.listelement.badge": "Unexpected result or problem",
   // TODO New key - Add a translation
-  "unexpected_results.listelement.badge":  "Unexpected results and problems",
+  "unexpected_results.listelement.badge": "Unexpected result or problem",
   
   // "uploader.browse": "browse",
   "uploader.browse": "parcourir",
@@ -6740,15 +7637,23 @@
   // TODO New key - Add a translation
   "relation.rp.projects.search.results.head": "Related Projects",
   
+  // "layout.i18n.link.default": "link",
+  // TODO New key - Add a translation
+  "layout.i18n.link.default": "link",
+  
   
   
   // "working-plan.breadcrumbs" : "Working plan",
   // TODO New key - Add a translation
   "working-plan.breadcrumbs" : "Working plan",
   
-  // "working-plan.chart.button.add": "add",
+  // "working-plan.chart.button.add": "Add",
   // TODO New key - Add a translation
-  "working-plan.chart.button.add": "add",
+  "working-plan.chart.button.add": "Add",
+  
+  // "working-plan.chart.button.remove": "Remove",
+  // TODO New key - Add a translation
+  "working-plan.chart.button.remove": "Remove",
   
   // "working-plan.chart.column.dates": "Dates",
   // TODO New key - Add a translation
@@ -6766,9 +7671,25 @@
   // TODO New key - Add a translation
   "working-plan.chart.column.steps": "Steps",
   
+  // "working-plan.chart.move.down.btn": "Move down",
+  // TODO New key - Add a translation
+  "working-plan.chart.move.down.btn": "Move down",
+  
   // "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
   // TODO New key - Add a translation
   "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
+  
+  // "working-plan.chart.move.up.btn": "Move up",
+  // TODO New key - Add a translation
+  "working-plan.chart.move.up.btn": "Move up",
+  
+  // "working-plan.chart.toggle.collapse.btn": "Collapse",
+  // TODO New key - Add a translation
+  "working-plan.chart.toggle.collapse.btn": "Collapse",
+  
+  // "working-plan.chart.toggle.expand.btn": "Expand",
+  // TODO New key - Add a translation
+  "working-plan.chart.toggle.expand.btn": "Expand",
   
   // "working-plan.chart.toolbar.date-view.month": "Month",
   // TODO New key - Add a translation
@@ -6806,9 +7727,113 @@
   // TODO New key - Add a translation
   "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
   
-  // "working-plan.page.title": "Working plan"
+  
+  // "working-plan.page.title": "Working plan",
   // TODO New key - Add a translation
-  "working-plan.page.title": "Working plan"
+  "working-plan.page.title": "Working plan",
+  
+  
+  // "conditions.listelement.badge": "External condition or requirement",
+  // TODO New key - Add a translation
+  "conditions.listelement.badge": "External condition or requirement",
+  
+  // "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objectives",
+  // TODO New key - Add a translation
+  "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objectives",
+  
+  // "cooperation_partners.listelement.badge": "Cooperation partner",
+  // TODO New key - Add a translation
+  "cooperation_partners.listelement.badge": "Cooperation partner",
+  
+  // "ethics.listelement.badge": "Ethical reflection",
+  // TODO New key - Add a translation
+  "ethics.listelement.badge": "Ethical reflection",
+  
+  // "Event.listelement.badge": "Event",
+  // TODO New key - Add a translation
+  "Event.listelement.badge": "Event",
+  
+  // "gender.listelement.badge": "Gender reflection",
+  // TODO New key - Add a translation
+  "gender.listelement.badge": "Gender reflection",
+  
+  // "impact_pathway.listelement.badge": "Impact pathway",
+  // TODO New key - Add a translation
+  "impact_pathway.listelement.badge": "Impact pathway",
+  
+  // "impact_pathway_step.listelement.badge": "Impact pathway step",
+  // TODO New key - Add a translation
+  "impact_pathway_step.listelement.badge": "Impact pathway step",
+  
+  // "inn_pot_econtech.listelement.badge": "Intended business innovation",
+  // TODO New key - Add a translation
+  "inn_pot_econtech.listelement.badge": "Intended business innovation",
+  
+  // "inn_pot_social.listelement.badge": "Intended social innovation/ change process",
+  // TODO New key - Add a translation
+  "inn_pot_social.listelement.badge": "Intended social innovation/ change process",
+  
+  // "OrgUnit.listelement.badge": "Organizational units",
+  // TODO New key - Add a translation
+  "OrgUnit.listelement.badge": "Organizational units",
+  
+  // "Patent.listelement.badge": "Patent or utility patent",
+  // TODO New key - Add a translation
+  "Patent.listelement.badge": "Patent or utility patent",
+  
+  // "Person.listelement.badge": "Persons",
+  // TODO New key - Add a translation
+  "Person.listelement.badge": "Persons",
+  
+  // "plan_inn_pot_econtech.listelement.badge": "Intended business innovation (plan)",
+  // TODO New key - Add a translation
+  "plan_inn_pot_econtech.listelement.badge": "Intended business innovation (plan)",
+  
+  // "plan_inn_pot_social.listelement.badge": "Intended social innovation/change process (plan)",
+  // TODO New key - Add a translation
+  "plan_inn_pot_social.listelement.badge": "Intended social innovation/change process (plan)",
+  
+  // "plan_patent.listelement.badge": "Patent or utility patent (plan)",
+  // TODO New key - Add a translation
+  "plan_patent.listelement.badge": "Patent or utility patent (plan)",
+  
+  // "plan_publication.listelement.badge": "Publication (plan)",
+  // TODO New key - Add a translation
+  "plan_publication.listelement.badge": "Publication (plan)",
+  
+  // "plan_research_quest.listelement.badge": "Research quest",
+  // TODO New key - Add a translation
+  "plan_research_quest.listelement.badge": "Research quest",
+  
+  // "Project.listelement.badge": "Research projects",
+  // TODO New key - Add a translation
+  "Project.listelement.badge": "Research projects",
+  
+  // "research_results.listelement.badge": "Research result",
+  // TODO New key - Add a translation
+  "research_results.listelement.badge": "Research result",
+  
+  // "stateofart.listelement.badge": "State of knowledge",
+  // TODO New key - Add a translation
+  "stateofart.listelement.badge": "State of knowledge",
+  
+  // "subproject.listelement.badge": "Subproject",
+  // TODO New key - Add a translation
+  "subproject.listelement.badge": "Subproject",
+  
+  // "workpackages.listelement.badge": "Work package",
+  // TODO New key - Add a translation
+  "workpackages.listelement.badge": "Work package",
+  
+  
+  // "tree.description.nuts2": "Nomenclature of territorial units for statistics",
+  // TODO New key - Add a translation
+  "tree.description.nuts2": "Nomenclature of territorial units for statistics",
+  
+  // "vocabulary-treeview.tree.description.nuts2": "Nomenclature of territorial units for statistics"
+  // TODO New key - Add a translation
+  "vocabulary-treeview.tree.description.nuts2": "Nomenclature of territorial units for statistics"
+  
   
 
 }

@@ -13,6 +13,7 @@ import {
   AddImpactPathwayTaskAction,
   AddImpactPathwayTaskErrorAction,
   AddImpactPathwayTaskSuccessAction,
+  ClearImpactPathwayAction,
   CompleteEditingImpactPathwayTaskLinksAction,
   GenerateImpactPathwayAction,
   GenerateImpactPathwayErrorAction,
@@ -67,6 +68,7 @@ import { ItemAuthorityRelationService } from '../shared/item-authority-relation.
 import { ImpactPathwayLinksMap } from './models/impact-pathway-task-links-map';
 import { environment } from '../../../environments/environment';
 import { MetadataValue } from '../shared/metadata.models';
+import { SubmissionObjectActionTypes } from '../../submission/objects/submission-objects.actions';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -598,6 +600,13 @@ export class ImpactPathwayEffects {
       });
     })
   );
+
+  /**
+   * Clear state on submission discard
+   */
+  @Effect() clearState$ = this.actions$.pipe(
+    ofType(SubmissionObjectActionTypes.DISCARD_SUBMISSION),
+    map(() => new ClearImpactPathwayAction()));
 
   /**
    * When the store is rehydrated objects in the state lose the prototypes,

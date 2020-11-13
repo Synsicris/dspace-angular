@@ -11,6 +11,7 @@ import { NotificationsService } from '../shared/notifications/notifications.serv
 import { RemoteData } from '../core/data/remote-data';
 import { getAllSucceededRemoteData, getRemoteDataPayload } from '../core/shared/operators';
 import { isEmpty } from '../shared/empty.util';
+import { MYDSPACE_ROUTE } from '../+my-dspace-page/my-dspace-page.component';
 
 /**
  * Abstract component representing a page to perform an action on a workflow item
@@ -66,7 +67,7 @@ export abstract class WorkflowItemActionPageComponent implements OnInit {
     this.routeService.getPreviousUrl().pipe(take(1))
       .subscribe((url) => {
           if (isEmpty(url)) {
-            url = '/mydspace';
+            url = MYDSPACE_ROUTE;
           }
           this.router.navigateByUrl(url);
         }
