@@ -15,9 +15,9 @@
     </button>
   </ng-container>
   <ng-container ngProjectAs="panelContent">
-    <div class="d-flex align-items-stretch border-bottom">
+    <div class="d-flex align-items-stretch border-bottom w-100">
       <ds-alert *ngIf="infoShowed | async"
-                class="bg-light"
+                class="bg-light w-100"
                 [dismissible]="true"
                 [content]="'impact-pathway.wrapper.info'"
                 (close)="toggleInfoPanel()"></ds-alert>
