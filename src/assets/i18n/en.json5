@@ -1498,13 +1498,25 @@
 
   "impact-pathway.remove.confirm.title": "Discard impact pathway",
 
-  "impact-pathway.remove.item.title": "Delete item",
+  "impact-pathway.remove.item.title": "Remove item",
 
   "impact-pathway.remove.title": "Delete impact pathway",
 
   "impact-pathway.remove.success": "The impact pathway has been deleted successfully.",
 
   "impact-pathway.save.link.title": "Save",
+
+  "impact-pathway.step.info.step_type_1": "Background",
+
+  "impact-pathway.step.info.step_type_2": "Research and development objectives",
+
+  "impact-pathway.step.info.step_type_3": "Interactions with partners and stakeholders. Outputs for dissemination",
+
+  "impact-pathway.step.info.step_type_4": "Application (opportunities)",
+
+  "impact-pathway.step.info.step_type_5": "Expected Societal Impact",
+
+  "impact-pathway.step.info.step_type_6": "Contribution to funding programme objectives",
 
   "impact-pathway.step.label.step_type_1": "Background",
 
@@ -2901,7 +2913,7 @@
 
   "project-overview.page.content.exploitation-plan" : "Exploitation plan",
 
-  "project-overview.page.content.impact-pathways" : "Impact pathway",
+  "project-overview.page.content.impact-pathways" : "Impact Pathway",
 
   "project-overview.page.content.new-impact-pathway" : "Create new impact pathway",
 

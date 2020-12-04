@@ -2609,9 +2609,9 @@
   // TODO New key - Add a translation
   "impact-pathway.create.outcome-link": "Create link",
   
-  // "impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
+  // "impact-pathway.create.placeholder": "Enter the name of the new impact pathway.",
   // TODO New key - Add a translation
-  "impact-pathway.create.placeholder": "Enter the name of the new impact pathway",
+  "impact-pathway.create.placeholder": "Enter the name of the new impact pathway.",
   
   // "impact-pathway.create.success": "The impact pathway has been generated successfully.",
   // TODO New key - Add a translation
@@ -2641,13 +2641,13 @@
   // TODO New key - Add a translation
   "impact-pathway.objectives.edit.page.title": "Edit objectives",
   
-  // "impact-pathway.objectives.step_type_2.info.panel": "",
+  // "impact-pathway.objectives.step_type_2.info.panel": "Here you define the most important work packages and tasks which contribute to the research and development objective and are relevant for the development of impacts.</br>All items created here can be reused in the working plan and vice versa items already created in the working plan can be used here.</br>For detailed descriptions of materials and methods, please formulate them in a document and upload it on the project page.</br>Via [Edit Item] in the description field, you can edit the objective and description field. Then save your settings.",
   // TODO New key - Add a translation
-  "impact-pathway.objectives.step_type_2.info.panel": "",
+  "impact-pathway.objectives.step_type_2.info.panel": "Here you define the most important work packages and tasks which contribute to the research and development objective and are relevant for the development of impacts.</br>All items created here can be reused in the working plan and vice versa items already created in the working plan can be used here.</br>For detailed descriptions of materials and methods, please formulate them in a document and upload it on the project page.</br>Via [Edit Item] in the description field, you can edit the objective and description field. Then save your settings.",
   
-  // "impact-pathway.objectives.step_type_3.info.panel": "",
+  // "impact-pathway.objectives.step_type_3.info.panel": "Here you define the most important work packages and tasks which contribute to the research and development objective and are relevant for the development of impacts.</br>All items created here can be reused in the working plan and vice versa items already created in the working plan can be used here.</br>For detailed descriptions of materials and methods, please formulate them in a document and upload it on the project page.</br>Via [Edit Item] in the description field, you can edit the objective and description field. Then save your settings.",
   // TODO New key - Add a translation
-  "impact-pathway.objectives.step_type_3.info.panel": "",
+  "impact-pathway.objectives.step_type_3.info.panel": "Here you define the most important work packages and tasks which contribute to the research and development objective and are relevant for the development of impacts.</br>All items created here can be reused in the working plan and vice versa items already created in the working plan can be used here.</br>For detailed descriptions of materials and methods, please formulate them in a document and upload it on the project page.</br>Via [Edit Item] in the description field, you can edit the objective and description field. Then save your settings.",
   
   // "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
   // TODO New key - Add a translation
@@ -2669,9 +2669,9 @@
   // TODO New key - Add a translation
   "impact-pathway.remove.confirm.title": "Discard impact pathway",
   
-  // "impact-pathway.remove.item.title": "Delete item",
+  // "impact-pathway.remove.item.title": "Remove item",
   // TODO New key - Add a translation
-  "impact-pathway.remove.item.title": "Delete item",
+  "impact-pathway.remove.item.title": "Remove item",
   
   // "impact-pathway.remove.title": "Delete impact pathway",
   // TODO New key - Add a translation
@@ -2684,6 +2684,30 @@
   // "impact-pathway.save.link.title": "Save",
   // TODO New key - Add a translation
   "impact-pathway.save.link.title": "Save",
+  
+  // "impact-pathway.step.info.step_type_1": "Background",
+  // TODO New key - Add a translation
+  "impact-pathway.step.info.step_type_1": "Background",
+  
+  // "impact-pathway.step.info.step_type_2": "Research and development objectives",
+  // TODO New key - Add a translation
+  "impact-pathway.step.info.step_type_2": "Research and development objectives",
+  
+  // "impact-pathway.step.info.step_type_3": "Interactions with partners and stakeholders. Outputs for dissemination",
+  // TODO New key - Add a translation
+  "impact-pathway.step.info.step_type_3": "Interactions with partners and stakeholders. Outputs for dissemination",
+  
+  // "impact-pathway.step.info.step_type_4": "Application (opportunities)",
+  // TODO New key - Add a translation
+  "impact-pathway.step.info.step_type_4": "Application (opportunities)",
+  
+  // "impact-pathway.step.info.step_type_5": "Expected Societal Impact",
+  // TODO New key - Add a translation
+  "impact-pathway.step.info.step_type_5": "Expected Societal Impact",
+  
+  // "impact-pathway.step.info.step_type_6": "Contribution to funding programme objectives",
+  // TODO New key - Add a translation
+  "impact-pathway.step.info.step_type_6": "Contribution to funding programme objectives",
   
   // "impact-pathway.step.label.step_type_1": "Background",
   // TODO New key - Add a translation
@@ -2721,9 +2745,9 @@
   // TODO New key - Add a translation
   "impact-pathway.task.create.success": "New item has been created successfully.",
   
-  // "impact-pathway.wrapper.info": "<b>Develop your Impact Pathway</b><br>  What are your objectives so that your project can have an impact? Sort objectives into categories. Select and describe funder objectives. How are your project objectives related (Draw arrows between your objectives)? Add further explanations. Specify each objectives and add items and tasks.",
+  // "impact-pathway.wrapper.info": "<b>Develop the Impact Pathway of the project</b></br><p>The Impact Pathway supports you in the impact-oriented planning and implementation of the project. Please present the most important objectives, activities and intended impacts of the project in a clear and concise manner by means of key messages. Use arrows to illustrate particularly important and non-linear relationships. While the project is progressing, you can update the Impact Pathway and add any results achieved.</p><p>The columns structure the key messages for impact-oriented planning:</br>In <b>Background</b> important preliminary considerations for the project are presented, such as problem definition, state of knowledge and conditions.</br>The <b>Objectives of research and development</b> describe the scientific/technical work objectives of the project. These objectives can be assigned to work packages and tasks on a second level.</br><b>Interactions with partners and groups of actors. Outputs for dissemination</b> reflect all exchange and transfer activities of the project. In a first step, key messages about the purpose and group of actors of the interactions are formulated. These key messages can be assigned to specific activities on a second level.</br>The intended impacts of the project are structured in two columns:</br>In <b>Application (possibilities)</b> the contributions of the project to the application of the project results are presented.</br><b>Expected societal impacts</b> describe what societal effects are expected when the results of projects are applied.</br>In <b>Contribution to funding programme objectives</b>, the funding programme objectives to which the project contributes are selected.</p><p>In each column, you can use [+] to create unlimited items or search for and select previously created items.</br>Each item has a specific detail page (depending on the section selected) in which further details are usually given. You can switch between the Impact Pathway and the detail page of an item at any time.</br>You can start to create items in any column of the Impact Pathway.</p><p><b>Key questions and tips for developing the Impact Pathway:</b> What impacts do you want to achieve with the project? How would you like to contribute to the development of these impacts?<br>It is recommended, to plan the Impact Pathway for the project in terms of the intended impacts and to develop it together with partners in practice and groups of actors.</br></p>",
   // TODO New key - Add a translation
-  "impact-pathway.wrapper.info": "<b>Develop your Impact Pathway</b><br>  What are your objectives so that your project can have an impact? Sort objectives into categories. Select and describe funder objectives. How are your project objectives related (Draw arrows between your objectives)? Add further explanations. Specify each objectives and add items and tasks.",
+  "impact-pathway.wrapper.info": "<b>Develop the Impact Pathway of the project</b></br><p>The Impact Pathway supports you in the impact-oriented planning and implementation of the project. Please present the most important objectives, activities and intended impacts of the project in a clear and concise manner by means of key messages. Use arrows to illustrate particularly important and non-linear relationships. While the project is progressing, you can update the Impact Pathway and add any results achieved.</p><p>The columns structure the key messages for impact-oriented planning:</br>In <b>Background</b> important preliminary considerations for the project are presented, such as problem definition, state of knowledge and conditions.</br>The <b>Objectives of research and development</b> describe the scientific/technical work objectives of the project. These objectives can be assigned to work packages and tasks on a second level.</br><b>Interactions with partners and groups of actors. Outputs for dissemination</b> reflect all exchange and transfer activities of the project. In a first step, key messages about the purpose and group of actors of the interactions are formulated. These key messages can be assigned to specific activities on a second level.</br>The intended impacts of the project are structured in two columns:</br>In <b>Application (possibilities)</b> the contributions of the project to the application of the project results are presented.</br><b>Expected societal impacts</b> describe what societal effects are expected when the results of projects are applied.</br>In <b>Contribution to funding programme objectives</b>, the funding programme objectives to which the project contributes are selected.</p><p>In each column, you can use [+] to create unlimited items or search for and select previously created items.</br>Each item has a specific detail page (depending on the section selected) in which further details are usually given. You can switch between the Impact Pathway and the detail page of an item at any time.</br>You can start to create items in any column of the Impact Pathway.</p><p><b>Key questions and tips for developing the Impact Pathway:</b> What impacts do you want to achieve with the project? How would you like to contribute to the development of these impacts?<br>It is recommended, to plan the Impact Pathway for the project in terms of the intended impacts and to develop it together with partners in practice and groups of actors.</br></p>",
   
   // "impactpathway.listelement.badge": "Impact pathway",
   // TODO New key - Add a translation
@@ -5053,9 +5077,9 @@
   // TODO New key - Add a translation
   "project-overview.page.content.exploitation-plan" : "Exploitation plan",
   
-  // "project-overview.page.content.impact-pathways" : "Impact pathway",
+  // "project-overview.page.content.impact-pathways" : "Impact Pathway",
   // TODO New key - Add a translation
-  "project-overview.page.content.impact-pathways" : "Impact pathway",
+  "project-overview.page.content.impact-pathways" : "Impact Pathway",
   
   // "project-overview.page.content.new-impact-pathway" : "Create new impact pathway",
   // TODO New key - Add a translation
@@ -6580,21 +6604,21 @@
   // TODO New key - Add a translation
   "submission.sections.ccLicense.type": "License Type",
   
-  // "submission.sections.ccLicense.select": "Select a license type…",
+  // "submission.sections.ccLicense.select": "Select a license type...",
   // TODO New key - Add a translation
-  "submission.sections.ccLicense.select": "Select a license type…",
+  "submission.sections.ccLicense.select": "Select a license type...",
   
-  // "submission.sections.ccLicense.change": "Change your license type…",
+  // "submission.sections.ccLicense.change": "Change your license type...",
   // TODO New key - Add a translation
-  "submission.sections.ccLicense.change": "Change your license type…",
+  "submission.sections.ccLicense.change": "Change your license type...",
   
   // "submission.sections.ccLicense.none": "No licenses available",
   // TODO New key - Add a translation
   "submission.sections.ccLicense.none": "No licenses available",
   
-  // "submission.sections.ccLicense.option.select": "Select an option…",
+  // "submission.sections.ccLicense.option.select": "Select an option...",
   // TODO New key - Add a translation
-  "submission.sections.ccLicense.option.select": "Select an option…",
+  "submission.sections.ccLicense.option.select": "Select an option...",
   
   // "submission.sections.ccLicense.link": "You’ve selected the following license:",
   // TODO New key - Add a translation
@@ -6780,13 +6804,13 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.cooperation_partners_staff.info": "Please complete the information on project staff. The information is used for criteria on equality and interdisciplinarity.",
   
-  // "submission.sections.submit.progressbar.describe.easy_upload": "Import from easy-Online",
+  // "submission.sections.submit.progressbar.easy_upload": "Import from easy-Online",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.easy_upload": "Import from easy-Online",
+  "submission.sections.submit.progressbar.easy_upload": "Import from easy-Online",
   
-  // "submission.sections.submit.progressbar.describe.easy_upload.info": "By uploading your easy-Online application, you import information about the sub-project, the executing agency and the persons involved. You can use this information here as well. The upload can be repeated at any time with an updated xml file from easy-online.",
+  // "submission.sections.submit.progressbar.easy_upload.info": "By uploading your easy-Online application, you import information about the sub-project, the executing agency and the persons involved. You can use this information here as well. The upload can be repeated at any time with an updated xml file from easy-online.",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.easy_upload.info": "By uploading your easy-Online application, you import information about the sub-project, the executing agency and the persons involved. You can use this information here as well. The upload can be repeated at any time with an updated xml file from easy-online.",
+  "submission.sections.submit.progressbar.easy_upload.info": "By uploading your easy-Online application, you import information about the sub-project, the executing agency and the persons involved. You can use this information here as well. The upload can be repeated at any time with an updated xml file from easy-online.",
   
   // "submission.sections.submit.progressbar.describe.entity_type_selection": "Selection of the entity type",
   // TODO New key - Add a translation
@@ -6848,37 +6872,37 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.gender_project.info": "Gender aspects can be relevant at several points of an R&D process. Please indicate where gender aspects may be affected by the project. If you choose \"yes\" in an area, please address these aspects in the corresponding section in the SynSICRIS tool.",
   
-  // "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "",
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "<i>Please select a section from the list and give a key message. Or select already existing items via the search.</i><p><b>State of knowledge/problem definition</b> covers important points of the problem definition dealt with in the project and summarises the current state of knowledge in concise key messages. A document with a detailed description and references can be uploaded on the project page. This information is only required for application purposes and does not need to be updated during the course of the project. </br><b>External conditions and requirements</b> indicate which external conditions are relevant for the development of impacts by the project. Whether research has an impact also depends on the external conditions, such as the legal framework, consumer behaviour or production methods. The relevant external conditions or inhibiting influences on the development of impacts can be described and updated if changes occur. Arrows can be used to illustrate relationships between external conditions and other items.</br>Key messages on <b>ethical aspects</b> and <b>gender equality</b> should only be made after the reflection, led by questions, has taken place (accessible via the project page).</p><b>Key question:</b> Which preliminary considerations are relevant for project implementation and for developing impacts?",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "",
+  "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "<i>Please select a section from the list and give a key message. Or select already existing items via the search.</i><p><b>State of knowledge/problem definition</b> covers important points of the problem definition dealt with in the project and summarises the current state of knowledge in concise key messages. A document with a detailed description and references can be uploaded on the project page. This information is only required for application purposes and does not need to be updated during the course of the project. </br><b>External conditions and requirements</b> indicate which external conditions are relevant for the development of impacts by the project. Whether research has an impact also depends on the external conditions, such as the legal framework, consumer behaviour or production methods. The relevant external conditions or inhibiting influences on the development of impacts can be described and updated if changes occur. Arrows can be used to illustrate relationships between external conditions and other items.</br>Key messages on <b>ethical aspects</b> and <b>gender equality</b> should only be made after the reflection, led by questions, has taken place (accessible via the project page).</p><b>Key question:</b> Which preliminary considerations are relevant for project implementation and for developing impacts?",
   
-  // "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_form.info": "",
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_form.info": "<i>Please create an item by defining a scientific/technical work objective. Or select already existing items via the search. After you have created the item, you can open a second level. There you can specify the approach for achieving the objectives.</i><p><b>Key question:</b> Which research questions are derived from the problem definition?",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_form.info": "",
+  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_form.info": "<i>Please create an item by defining a scientific/technical work objective. Or select already existing items via the search. After you have created the item, you can open a second level. There you can specify the approach for achieving the objectives.</i><p><b>Key question:</b> Which research questions are derived from the problem definition?",
   
-  // "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_objective_form.info": "",
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_objective_form.info": "<i>Please define a work package or a task that is necessary for the research and development objective. Or select already existing items via the search. When selecting, please consider whether they relate to project planning or reporting.</i><p><b>Workpackages</b> serve to structure tasks in the working plan; on the detail page, changes in the workpackages can also be explained in the course of reporting.</br><b>Tasks</b> are separate work steps which can be assigned to the individual workpackages in the working plan.<p><b>Key question:</b> Which research design is required to achieve transferable and scientifically reliable results?",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_objective_form.info": "",
+  "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_objective_form.info": "<i>Please define a work package or a task that is necessary for the research and development objective. Or select already existing items via the search. When selecting, please consider whether they relate to project planning or reporting.</i><p><b>Workpackages</b> serve to structure tasks in the working plan; on the detail page, changes in the workpackages can also be explained in the course of reporting.</br><b>Tasks</b> are separate work steps which can be assigned to the individual workpackages in the working plan.<p><b>Key question:</b> Which research design is required to achieve transferable and scientifically reliable results?",
   
-  // "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "",
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "Here you can formulate key messages on the purpose and with which groups of actors exchange and transfer activities take place or outputs are produced for transfer.<p><i>Please create an item by defining a key message. Or select already existing items via the search. After you have created the item, you can open a second level. There you can assign specific activities and outputs to the key message.</i><p>Direct interaction with groups of actors and transfer via target group-specific project outputs are essential for the development of impacts. In parallel to or before planning exchange and transfer activities, you should have identified the relevant groups of actors in the project.</p><p><b>Key questions:</b> Which exchange processes with the target groups, stakeholders or multipliers and also with critical groups of actors are necessary in order to develop applicable results and promote the application of the results? Which groups of actors should be reached and in what form, so that the transfer of results is successful?",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "",
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "Here you can formulate key messages on the purpose and with which groups of actors exchange and transfer activities take place or outputs are produced for transfer.<p><i>Please create an item by defining a key message. Or select already existing items via the search. After you have created the item, you can open a second level. There you can assign specific activities and outputs to the key message.</i><p>Direct interaction with groups of actors and transfer via target group-specific project outputs are essential for the development of impacts. In parallel to or before planning exchange and transfer activities, you should have identified the relevant groups of actors in the project.</p><p><b>Key questions:</b> Which exchange processes with the target groups, stakeholders or multipliers and also with critical groups of actors are necessary in order to develop applicable results and promote the application of the results? Which groups of actors should be reached and in what form, so that the transfer of results is successful?",
   
-  // "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "",
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "<i>Please select the section from the list and provide a key message. Or select already existing items via the search. When selecting, please consider whether the item relates to project planning or reporting.</i><p><b>Cooperation processes</b> include the collaboration of formal and informal cooperation partners in the project.</br><b>Participatory processes</b> are exchange processes with groups of actors consisting of several interactions/events that build on each other.</br><b>Events</b> are individual events with groups of actors.</br><b>Publications</b> include e.g. scientific article, practical contribution, video, website of the project. For planning, enter the type and a number in the key message.</br><b>Objects, materials</b> such as exhibits or other objects are relevant outputs that serve the transfer and/or can be further used by third parties for transfer, research or teaching.</br>Select <b>Tasks</b> if the above sections are not applicable.</p><p><b>Key questions:</b> At what point in time and with what content are interactions required to contribute to the project objectives? How can continuity in the exchange processes be ensured? Which contents and formats can be used to particularly arouse the interest of a group of actors and, if necessary, to maintain it in the long term? What benefits can a group of actors derive from interaction?</br>Which opportunities exist to reach groups of actors where they have already been informing themselves or exchanging information?",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "",
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "<i>Please select the section from the list and provide a key message. Or select already existing items via the search. When selecting, please consider whether the item relates to project planning or reporting.</i><p><b>Cooperation processes</b> include the collaboration of formal and informal cooperation partners in the project.</br><b>Participatory processes</b> are exchange processes with groups of actors consisting of several interactions/events that build on each other.</br><b>Events</b> are individual events with groups of actors.</br><b>Publications</b> include e.g. scientific article, practical contribution, video, website of the project. For planning, enter the type and a number in the key message.</br><b>Objects, materials</b> such as exhibits or other objects are relevant outputs that serve the transfer and/or can be further used by third parties for transfer, research or teaching.</br>Select <b>Tasks</b> if the above sections are not applicable.</p><p><b>Key questions:</b> At what point in time and with what content are interactions required to contribute to the project objectives? How can continuity in the exchange processes be ensured? Which contents and formats can be used to particularly arouse the interest of a group of actors and, if necessary, to maintain it in the long term? What benefits can a group of actors derive from interaction?</br>Which opportunities exist to reach groups of actors where they have already been informing themselves or exchanging information?",
   
-  // "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "",
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "<i>Please select a section from the list and give a key message. Or select already existing items via the search. When selecting, please consider whether the item relates to project planning or reporting.</i></br>Focus on the (possible) application of the project results by the relevant groups of actors. Include also aspects that you consider in the exploitation plan.<p><b>Intended business innovations</b> include the contribution of the project to the development or improvement of products, services or production and business processes.</br><b>Intended social innovation/change processes</b> focus on processes of change in attitudes, knowledge and actions of groups of actors or changed regulations, guidelines or structures to which the project contributes.</br><b>Ideas for innovation and change</b> include all possible applications that are still unclear or far in the future.</br><b>Patents and utility models</b> record the plans and results for the registration of property rights.</br><b>Spin-offs (incl. associations)</b> comprise the intentions and results for the foundation of transfer and competence spin-offs as well as the founding of associations.</br><b>Unexpected results and problems</b> arise when it becomes apparent in the course of the project that certain results cannot or should not be applied. This is regarded as valuable progress in terms of lessons learned.</br><b>Next steps and cooperation after the end of the project</b> include the steps planned after the end of the project in order to bring project results further into application and to continue cooperation.</br><b>Application success for business innovations</b> or <b>application success for social innovations/change processe</b> are successes and examples in which project results are demonstrably applied</br><b>Awards and prizes</b> related to the project and/or its results may give an indication e.g. of the degree of innovation or high applicability.",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "",
+  "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "<i>Please select a section from the list and give a key message. Or select already existing items via the search. When selecting, please consider whether the item relates to project planning or reporting.</i></br>Focus on the (possible) application of the project results by the relevant groups of actors. Include also aspects that you consider in the exploitation plan.<p><b>Intended business innovations</b> include the contribution of the project to the development or improvement of products, services or production and business processes.</br><b>Intended social innovation/change processes</b> focus on processes of change in attitudes, knowledge and actions of groups of actors or changed regulations, guidelines or structures to which the project contributes.</br><b>Ideas for innovation and change</b> include all possible applications that are still unclear or far in the future.</br><b>Patents and utility models</b> record the plans and results for the registration of property rights.</br><b>Spin-offs (incl. associations)</b> comprise the intentions and results for the foundation of transfer and competence spin-offs as well as the founding of associations.</br><b>Unexpected results and problems</b> arise when it becomes apparent in the course of the project that certain results cannot or should not be applied. This is regarded as valuable progress in terms of lessons learned.</br><b>Next steps and cooperation after the end of the project</b> include the steps planned after the end of the project in order to bring project results further into application and to continue cooperation.</br><b>Application success for business innovations</b> or <b>application success for social innovations/change processe</b> are successes and examples in which project results are demonstrably applied</br><b>Awards and prizes</b> related to the project and/or its results may give an indication e.g. of the degree of innovation or high applicability.",
   
-  // "submission.sections.submit.progressbar.impact_pathway_step_type_5_task_form.info": "",
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_5_task_form.info": "<i>Please create an item by giving a key message about the expected societal impact and selecting the type of impact. Or select already existing items via the search.</i><p><b>Key questions and tips:</b> What societal impacts are expected when project results are put into practice? Please document both possible positive and negative societal impacts. This way you can demonstrate the awareness of the project's side effects and contribute to orienting further innovation processes towards positive effects and the reduction of side effects.",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.impact_pathway_step_type_5_task_form.info": "",
+  "submission.sections.submit.progressbar.impact_pathway_step_type_5_task_form.info": "<i>Please create an item by giving a key message about the expected societal impact and selecting the type of impact. Or select already existing items via the search.</i><p><b>Key questions and tips:</b> What societal impacts are expected when project results are put into practice? Please document both possible positive and negative societal impacts. This way you can demonstrate the awareness of the project's side effects and contribute to orienting further innovation processes towards positive effects and the reduction of side effects.",
   
-  // "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "",
+  // "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "<i>Please select a funding programme objective to which the project contributes. Please describe the contribution of the project in a key message. Or select already existing items via the search.</i></br>The description of the contribution can usually be kept short.",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "",
+  "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "<i>Please select a funding programme objective to which the project contributes. Please describe the contribution of the project in a key message. Or select already existing items via the search.</i></br>The description of the contribution can usually be kept short.",
   
   // "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
   // TODO New key - Add a translation
@@ -6892,33 +6916,37 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.import_orgunits_companies_st": "Commercial register entry",
   
-  // "submission.sections.submit.progressbar.describe.import_orgunits_companies_zk": "Commercial register entry",
+  // "submission.sections.submit.progressbar.describe.import_orgunits_ST": "Information on the executing agency",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.import_orgunits_companies_zk": "Commercial register entry",
+  "submission.sections.submit.progressbar.describe.import_orgunits_ST": "Information on the executing agency",
   
-  // "submission.sections.submit.progressbar.describe.import_orgunits_st": "Information on the executing agency",
+  // "submission.sections.submit.progressbar.describe.import_orgunits_companies_ST": "Commercial register entry",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.import_orgunits_st": "Information on the executing agency",
+  "submission.sections.submit.progressbar.describe.import_orgunits_companies_ST": "Commercial register entry",
   
-  // "submission.sections.submit.progressbar.describe.import_orgunits_zk": "Information on the applicant",
+  // "submission.sections.submit.progressbar.describe.import_orgunits_companies_ZK": "Commercial register entry",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.import_orgunits_zk": "Information on the applicant",
+  "submission.sections.submit.progressbar.describe.import_orgunits_companies_ZK": "Commercial register entry",
   
-  // "submission.sections.submit.progressbar.describe.import_person_a2": "Personal data administrative contact person (only during the application process)",
+  // "submission.sections.submit.progressbar.describe.import_orgunits_ZK": "Information on the applicant",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.import_person_a2": "Personal data administrative contact person (only during the application process)",
+  "submission.sections.submit.progressbar.describe.import_orgunits_ZK": "Information on the applicant",
   
-  // "submission.sections.submit.progressbar.describe.import_person_pa": "Personal data administrative contact person (in case of grant approval)",
+  // "submission.sections.submit.progressbar.describe.import_person_A2": "Personal data administrative contact person (only during the application process)",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.import_person_pa": "Personal data administrative contact person (in case of grant approval)",
+  "submission.sections.submit.progressbar.describe.import_person_A2": "Personal data administrative contact person (only during the application process)",
   
-  // "submission.sections.submit.progressbar.describe.import_person_pl": "Personal data project management",
+  // "submission.sections.submit.progressbar.describe.import_person_PA": "Personal data administrative contact person (in case of grant approval)",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.import_person_pl": "Personal data project management",
+  "submission.sections.submit.progressbar.describe.import_person_PA": "Personal data administrative contact person (in case of grant approval)",
   
-  // "submission.sections.submit.progressbar.describe.import_person_uz": "Personal data authorised signatory",
+  // "submission.sections.submit.progressbar.describe.import_person_PL": "Personal data project management",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.import_person_uz": "Personal data authorised signatory",
+  "submission.sections.submit.progressbar.describe.import_person_PL": "Personal data project management",
+  
+  // "submission.sections.submit.progressbar.describe.import_person_UZ": "Personal data authorised signatory",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.import_person_UZ": "Personal data authorised signatory",
   
   // "submission.sections.submit.progressbar.describe.import_projects": "Projects",
   // TODO New key - Add a translation
@@ -7268,7 +7296,6 @@
   
   // "submission.sections.submit.progressbar.upload": "Upload files",
   "submission.sections.submit.progressbar.upload": "Enviar arquivos",
-  
   
   
   // "submission.sections.upload.delete.confirm.cancel": "Cancel",
@@ -7778,6 +7805,7 @@
   // "Person.listelement.badge": "Persons",
   // TODO New key - Add a translation
   "Person.listelement.badge": "Persons",
+  
   
   // "plan_inn_pot_econtech.listelement.badge": "Intended business innovation (plan)",
   // TODO New key - Add a translation

@@ -1,6 +1,11 @@
 <div class="h-100 d-flex flex-column vertical-step">
-  <div class="text-center text-truncate p-1 m-2 font-weight-bold" title="{{getStepTitle() | async}}">
-    <span>{{getStepTitle() | async}}</span>
+  <div class="p-1 m-2 font-weight-bold d-flex justify-content-between" title="{{getStepTitle() | async}}">
+    <span class="text-truncate">
+      {{getStepTitle() | async}}
+    </span>
+    <span class="far fa-question-circle text-info"
+       [ngbTooltip]="(getStepInfoTitle() | async)"
+       container="body"></span>
   </div>
   <div id="{{(impactPathwayStep$ | async)?.id}}"
        class="d-flex p-2 h-100 flex-column">

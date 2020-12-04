@@ -52,9 +52,9 @@ button.btn:focus {
 
 .task-header {
   height: 70px;
+  margin: 0;
 }
-.task-title {
-  margin: 0 0 1em 0;
+.task-title, .task-type {
   overflow: hidden;
 }
 
@@ -62,7 +62,21 @@ button.btn:focus {
   margin: 0;
 }
 
-.line-clamp {
+.title-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.task-content {
+  height: 50px;
+}
+
+.task-content p {
+  font-size: 15px;
+}
+
+.type-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
