@@ -2562,7 +2562,7 @@
 
   // "impact-pathway.objectives.step_type_3.info.panel": "Here you define the most important work packages and tasks which contribute to the research and development objective and are relevant for the development of impacts.</br>All items created here can be reused in the working plan and vice versa items already created in the working plan can be used here.</br>For detailed descriptions of materials and methods, please formulate them in a document and upload it on the project page.</br>Via [Edit Item] in the description field, you can edit the objective and description field. Then save your settings.",
   // TODO New key - Add a translation
-  "impact-pathway.objectives.step_type_3.info.panel": "Hier legen Sie die wichtigsten Arbeitspakete und Aufgaben fest, die zum wissenschaftlich-technischen Arbeitsziel beitragen und für die Entwicklung von Wirkungen relevant sind.</br>Alle hier angelegten Einträge können im Arbeitsplan weiterverwendet werden und umgekehrt können dort bereits getätigte Einträge hier verwendet werden.</br>Detaillierte Beschreibungen zu Material und Methoden formulieren Sie in einem Dokument und laden es auf der Projektseite hoch.</br>Über [Eintrag bearbeiten] im Beschreibungsfeld können Sie das Arbeitsziel und das Beschreibungsfeld editieren. Speichern Sie anschließend Ihre Angaben.",
+  "impact-pathway.objectives.step_type_3.info.panel": "Hier können Sie beschreiben, mit welchen Aktivitäten und Outputs die Kernaussage/der Zweck umgesetzt wird. Alle hier angelegten Einträge können im Arbeitsplan weiterverwendet werden und umgekehrt können dort bereits getätigte Einträge hier verwendet werden.</br>Detaillierte Beschreibungen zu Material und Methoden formulieren Sie in einem Dokument und laden es auf der Projektseite hoch.</br>Über [Eintrag bearbeiten] im Beschreibungsfeld können Sie das Arbeitsziel und das Beschreibungsfeld editieren. Speichern Sie anschließend Ihre Angaben.",
 
   // "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
   "impact-pathway.patch.metadata.error": "Es gab ein Problem beim Speichern der Metadaten. Versuchen Sie es später noch einmal.",
@@ -2595,28 +2595,22 @@
   "impact-pathway.save.link.title": "Save",
 
   // "impact-pathway.step.info.step_type_1": "Background",
-  // TODO New key - Add a translation
-  "impact-pathway.step.info.step_type_1": "Hintergrund",
+  "impact-pathway.step.info.step_type_1": "Diese Säule stellt die Vorüberlegungen zum Hintergrund des Projektes dar.",
 
   // "impact-pathway.step.info.step_type_2": "Research and development objectives",
-  // TODO New key - Add a translation
-  "impact-pathway.step.info.step_type_2": "Forschungs- und Entwicklungsziele",
+  "impact-pathway.step.info.step_type_2": "Diese Säule dient der Formulierung der wissenschaftlich/technischen Arbeitsziele und der wissenschaftlichen Erkenntnisse des Projektes.",
 
   // "impact-pathway.step.info.step_type_3": "Interactions with partners and stakeholders. Outputs for dissemination",
-  // TODO New key - Add a translation
-  "impact-pathway.step.info.step_type_3": "Interaktionen mit Partnern und Akteursgruppen. Outputs zur Verbreitung",
+  "impact-pathway.step.info.step_type_3": "Diese Säule bildet Austausch- und Transferprozesse zwischen Projektbeteiligten und mit Akteursgruppen sowie Outputs des Projektes ab.",
 
   // "impact-pathway.step.info.step_type_4": "Application (opportunities)",
-  // TODO New key - Add a translation
-  "impact-pathway.step.info.step_type_4": "Anwendung (Möglichkeiten)",
+  "impact-pathway.step.info.step_type_4": "Diese Säule verdeutlicht die Beiträge des Projektes zur Anwendung der Projektergebnisse.",
 
   // "impact-pathway.step.info.step_type_5": "Expected Societal Impact",
-  // TODO New key - Add a translation
-  "impact-pathway.step.info.step_type_5": "Erwartete gesellschaftliche Wirkungen",
+  "impact-pathway.step.info.step_type_5": "Diese Säule dient dazu, darzustellen, zu welchen ökologischen, ökonomischen oder sozial-kulturellen Wirkungen das Projekt beitragen kann.",
 
   // "impact-pathway.step.info.step_type_6": "Contribution to funding programme objectives",
-  // TODO New key - Add a translation
-  "impact-pathway.step.info.step_type_6": "Beitrag zu förderpolitischen Zielen",
+  "impact-pathway.step.info.step_type_6": "Diese Säule dient dazu, den Beitrag des Projektes zu den förderpolitischen Zielen des Programms für den Fördermittelgeber darzustellen.",
 
   // "impact-pathway.step.label.step_type_1": "Background",
   "impact-pathway.step.label.step_type_1": "Hintergrund",
@@ -6735,16 +6729,16 @@
   "submission.sections.submit.progressbar.describe.persons.info": "Dieser Bereich umfasst Angaben zu Ihrer Person, die eine Nutzung des Systems ermöglichen und dem Förderer Kontaktdaten zur Verfügung stellen.",
 
   // "submission.sections.submit.progressbar.describe.physical_objects": "Objects, Materials",
-  "submission.sections.submit.progressbar.describe.physical_objects": "Objekte, Materialien",
+  "submission.sections.submit.progressbar.describe.physical_objects": "Gegenstände und Materialien für Wissenstransfer und Nachnutzung in Forschung und Lehre",
 
   // "submission.sections.submit.progressbar.describe.physical_objects.info": "Document all types of (physical) objects and materials here. This summarizes all outputs like e.g. devices as prototypes, miniatures, sediments. If you don't find a specific object type here, check whether it is available under \"Publications\".",
-  "submission.sections.submit.progressbar.describe.physical_objects.info": "Dokumentieren Sie hier alle Arten von (physischen) Objekten. Hierunter werden unterschiedlichste Objektgattungen wie z.B. Prototypen, Miniaturmodelle oder Sedimentproben zusammengefasst. Wenn Sie eine bestimmte Objektgattung nicht finden, sichten Sie, ob diese unter \"Veröffentlichungen\" vorhanden ist.",
+  "submission.sections.submit.progressbar.describe.physical_objects.info": "<i>Erfassen Sie bitte hier, wenn im Projekt Gegenstände oder Materialien erstellt werden, die dem Wissenstransfer dienen oder für Forschung oder Lehre auch von Dritten nachgenutzt werden können.</i></br>Geben Sie hier keine Veröffentlichungen (z. B. Text, Bild, Ton oder Software) ein. Im Fall von Versuchs- und Demonstrationsstandorten, die besucht werden können, nutzen Sie bitte den Bereich „Veranstaltungen“.",
 
   // "submission.sections.submit.progressbar.describe.physical_objects_result": "Type of use and accessibility",
-  "submission.sections.submit.progressbar.describe.physical_objects_result": "Verwendung und Zugänglichkeit",
+  "submission.sections.submit.progressbar.describe.physical_objects_result": "Verwendung und Zugänglichkeit des Gegenstandes oder Materials für Dritte",
 
   // "submission.sections.submit.progressbar.describe.physical_objects_result.info": "Please complete the information on intended use and accessibility, if available.",
-  "submission.sections.submit.progressbar.describe.physical_objects_result.info": "Bitte ergänzen Sie Angaben zur Verwendung und Zugänglichkeit, soweit möglich.",
+  "submission.sections.submit.progressbar.describe.physical_objects_result.info": "<i>Ergänzen Sie hier bitte, in welcher Form das Objekt von Dritten verwendet werden kann und an wen sich Interessierte wenden können.</i></br>Mit den Angaben zu den Verwendungsmöglichkeiten leisten Sie einen Beitrag zur Nachnutzung Ihrer Projektarbeiten.",
 
   // "submission.sections.submit.progressbar.describe.pot_societalimpact": "Expected societal impacts",
   "submission.sections.submit.progressbar.describe.pot_societalimpact": "Erwartete gesellschaftliche Wirkungen",
