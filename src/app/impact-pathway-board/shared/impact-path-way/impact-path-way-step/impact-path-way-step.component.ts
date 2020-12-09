@@ -30,6 +30,8 @@ export class ImpactPathWayStepComponent {
   public impactPathwayStep$: Observable<ImpactPathwayStep>;
 
   private title$: Observable<string>;
+  private info$: Observable<string>;
+
   constructor(
     protected cdr: ChangeDetectorRef,
     protected impactPathwayService: ImpactPathwayService,
@@ -43,6 +45,12 @@ export class ImpactPathWayStepComponent {
     this.title$ = this.impactPathwayStep$.pipe(
       find((impactPathwayStep: ImpactPathwayStep) => isNotEmpty(impactPathwayStep)),
       map((impactPathwayStep: ImpactPathwayStep) => `impact-pathway.step.label.${impactPathwayStep.type}`),
+      flatMap((label: string) => this.translate.get(label))
+    );
+
+    this.info$ = this.impactPathwayStep$.pipe(
+      find((impactPathwayStep: ImpactPathwayStep) => isNotEmpty(impactPathwayStep)),
+      map((impactPathwayStep: ImpactPathwayStep) => `impact-pathway.step.info.${impactPathwayStep.type}`),
       flatMap((label: string) => this.translate.get(label))
     );
 
@@ -105,6 +113,10 @@ export class ImpactPathWayStepComponent {
 
   getStepTitle(): Observable<string> {
     return this.title$;
+  }
+
+  getStepInfoTitle(): Observable<string> {
+    return this.info$;
   }
 
   getTasks(): Observable<ImpactPathwayTask[]> {

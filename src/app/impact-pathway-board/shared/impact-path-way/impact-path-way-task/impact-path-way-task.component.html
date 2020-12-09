@@ -21,8 +21,8 @@
        ipwTaskColor
        [taskType]="data.type"
        (click)="setFocus($event)">
-    <div class="task-header d-flex p-1 justify-content-between">
-      <div class="task-title line-clamp font-weight-bold">
+    <div class="task-header d-flex pl-1 justify-content-between">
+      <div class="task-title title-clamp font-weight-bold">
         <p title="{{data.title}}">{{data.title}}</p>
       </div>
       <button *ngIf="data.hasParent()"
@@ -30,12 +30,15 @@
               title="{{'impact-pathway.remove.item.title' | translate}}"
               [disabled]="(isEditingRelation() | async)"
               (click)="removeTask(); $event.stopPropagation()">
-        <span *ngIf="!(isProcessingRemove() | async)"><i class='far fa-trash-alt'></i></span>
+        <span *ngIf="!(isProcessingRemove() | async)"><i class='fas fa-unlink'></i></span>
         <span *ngIf="(isProcessingRemove() | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
       </button>
     </div>
-    <div class="task-content text-break p-1 d-flex justify-content-between">
-      <span class="text-truncate" title="{{taskType$ | async}}">{{taskType$ | async}}</span>
+    <div class="task-content p-1">
+      <div class="task-type type-clamp">
+        <p title="{{taskType$ | async}}">{{taskType$ | async}}</p>
+      </div>
+
     </div>
 
     <div class="d-flex justify-content-end">
@@ -72,7 +75,7 @@
                 class="btn btn-lg btn-link p-0 flex-shrink-1"
                 title="{{'impact-pathway.objectives.edit.page.title' | translate}}"
                 [disabled]="(isEditingRelation() | async)"
-                (click)="showObjectives(); $event.stopPropagation()"><i class="fas fa-info-circle"></i>
+                (click)="showObjectives(); $event.stopPropagation()"><i class="far fa-list-alt"></i>
         </button>
       </div>
       <button class="btn btn-lg btn-link p-0 flex-shrink-1"
