@@ -1486,7 +1486,7 @@
 
   "impact-pathway.objectives.step_type_2.info.panel": "Here you define the most important work packages and tasks which contribute to the research and development objective and are relevant for the development of impacts.</br>All items created here can be reused in the working plan and vice versa items already created in the working plan can be used here.</br>For detailed descriptions of materials and methods, please formulate them in a document and upload it on the project page.</br>Via [Edit Item] in the description field, you can edit the objective and description field. Then save your settings.",
 
-  "impact-pathway.objectives.step_type_3.info.panel": "Here you define the most important work packages and tasks which contribute to the research and development objective and are relevant for the development of impacts.</br>All items created here can be reused in the working plan and vice versa items already created in the working plan can be used here.</br>For detailed descriptions of materials and methods, please formulate them in a document and upload it on the project page.</br>Via [Edit Item] in the description field, you can edit the objective and description field. Then save your settings.",
+  "impact-pathway.objectives.step_type_3.info.panel": "Here you can describe activities and outputs to carry out the key message/objective. All items created here can be reused in the working plan and vice versa, items already created in the working plan can be used here.</br>Please provide detailed descriptions of materials and methods in a document and upload it on the project page.</br>Via [Edit Item] in the description field, you can edit the objective and description field. Then save your settings.",
 
   "impact-pathway.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
 
@@ -1506,17 +1506,17 @@
 
   "impact-pathway.save.link.title": "Save",
 
-  "impact-pathway.step.info.step_type_1": "Background",
+  "impact-pathway.step.info.step_type_1": "This column presents the preliminary considerations on the background of the project.",
 
-  "impact-pathway.step.info.step_type_2": "Research and development objectives",
+  "impact-pathway.step.info.step_type_2": "This column serves to specify the scientific/technical work objectives and the scientific findings of the project.",
 
-  "impact-pathway.step.info.step_type_3": "Interactions with partners and stakeholders. Outputs for dissemination",
+  "impact-pathway.step.info.step_type_3": "This column illustrates exchange and transfer processes between project participants and with groups of actors as well as outputs of the project.",
 
-  "impact-pathway.step.info.step_type_4": "Application (opportunities)",
+  "impact-pathway.step.info.step_type_4": "This column illustrates the contributions of the project to the application of the project results.",
 
-  "impact-pathway.step.info.step_type_5": "Expected Societal Impact",
+  "impact-pathway.step.info.step_type_5": "This column serves to show to which ecological, economic or socio-cultural effects the project can contribute.",
 
-  "impact-pathway.step.info.step_type_6": "Contribution to funding programme objectives",
+  "impact-pathway.step.info.step_type_6": "This column presents the project's contribution to the funding programme objectives of the funding agency.",
 
   "impact-pathway.step.label.step_type_1": "Background",
 
@@ -4001,13 +4001,13 @@
 
   "submission.sections.submit.progressbar.describe.persons.info": "This section contains personal information that allows you to use the system and provides contact details for the funding agency.",
 
-  "submission.sections.submit.progressbar.describe.physical_objects": "Objects, Materials",
+  "submission.sections.submit.progressbar.describe.physical_objects": "Objects and materials for knowledge transfer and subsequent use in research and teaching",
 
-  "submission.sections.submit.progressbar.describe.physical_objects.info": "Document all types of (physical) objects and materials here. This summarizes all outputs like e.g. devices as prototypes, miniatures, sediments. If you don't find a specific object type here, check whether it is available under \"Publications\".",
+  "submission.sections.submit.progressbar.describe.physical_objects.info": "<i>Please record here if objects or materials are created in the project that serve the transfer of knowledge or can be used by third parties for research or teaching.</i></br>Do not enter any publications (e.g. text, image, sound or software) here. In case of trial and demonstration sites that can be visited, please use the \"Events\" section.",
 
-  "submission.sections.submit.progressbar.describe.physical_objects_result": "Type of use and accessibility",
+  "submission.sections.submit.progressbar.describe.physical_objects_result": "Use and accessibility of the object or material for third parties",
 
-  "submission.sections.submit.progressbar.describe.physical_objects_result.info": "Please complete the information on intended use and accessibility, if available.",
+  "submission.sections.submit.progressbar.describe.physical_objects_result.info": "<i>Please add here in which form the object can be used by third parties and whom interested parties can contact.</i></br>With the information on the possible uses, you contribute to the subsequent use of your project work.",
 
   "submission.sections.submit.progressbar.describe.pot_societalimpact": "Expected societal impacts",
 
@@ -4325,7 +4325,7 @@
 
   "working-plan.breadcrumbs" : "Working plan",
 
-  "working-plan.chart.button.add": "Add",
+  "working-plan.chart.button.add": "add",
 
   "working-plan.chart.button.remove": "Remove",
 
