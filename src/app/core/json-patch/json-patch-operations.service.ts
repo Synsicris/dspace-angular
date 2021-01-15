@@ -15,7 +15,6 @@ import {
   hasValue,
   isEmpty,
   isNotEmpty,
-  isNotNull,
   isNotUndefined,
   isUndefined
 } from '../../shared/empty.util';
@@ -59,7 +58,7 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
    * @return Observable<ResponseDefinitionDomain>
    *    observable of response
    */
-  protected submitJsonPatchOperations(hrefObs: Observable<string>, resourceType: string, resourceId?: string): Observable<RestResponse> {
+  protected submitJsonPatchOperations(hrefObs: Observable<string>, resourceType: string, resourceId?: string): Observable<ResponseDefinitionDomain> {
     const requestId = this.requestService.generateRequestId();
     let startTransactionTime = null;
     const [patchRequest$, emptyRequest$] = partition((request: PatchRequestDefinition) => isNotEmpty(request.body))(hrefObs.pipe(
@@ -159,9 +158,7 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
       distinctUntilChanged(),
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId)));
 
-    return this.submitJsonPatchOperations(href$, resourceType).pipe(
-      map((response: PostPatchSuccessResponse) => isNotNull(response) ? response.dataDefinition : null)
-    );
+    return this.submitJsonPatchOperations(href$, resourceType);
   }
 
   /**
@@ -196,8 +193,6 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
       distinctUntilChanged(),
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId)));
 
-    return this.submitJsonPatchOperations(hrefObs, resourceType, resourceId).pipe(
-      map((response: PostPatchSuccessResponse) => isNotNull(response) ? response.dataDefinition : null)
-    );
+    return this.submitJsonPatchOperations(hrefObs, resourceType, resourceId);
   }
 }

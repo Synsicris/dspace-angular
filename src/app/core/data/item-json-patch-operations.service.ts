@@ -10,9 +10,8 @@ import { CoreState } from '../core.reducers';
 import { RemoteData } from './remote-data';
 import { Item } from '../shared/item.model';
 import { Observable } from 'rxjs/internal/Observable';
-import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { isNotEmpty } from '../../shared/empty.util';
-import { ErrorResponse, RestResponse } from '../cache/response.models';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 
 /**
@@ -51,22 +50,7 @@ export class ItemJsonPatchOperationsService extends JsonPatchOperationsService<R
       distinctUntilChanged(),
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId)));
 
-    return this.submitJsonPatchOperations(href$, resourceType).pipe(
-      map((response: RestResponse) => {
-        if (!response.isSuccessful && response instanceof ErrorResponse) {
-          throw new Error(response.errorMessage)
-        } else {
-          return response;
-        }
-      }),
-      map((response: any) => {
-        if (isNotEmpty(response.resourceSelfLinks)) {
-          return response.resourceSelfLinks[0];
-        }
-      }),
-      distinctUntilChanged(),
-      switchMap((href) => this.rdbService.buildSingle<Item>(href))
-    )
+    return this.submitJsonPatchOperations(href$, resourceType);
   }
 
   /**
@@ -90,22 +74,7 @@ export class ItemJsonPatchOperationsService extends JsonPatchOperationsService<R
       distinctUntilChanged(),
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId)));
 
-    return this.submitJsonPatchOperations(href$, resourceType).pipe(
-      map((response: RestResponse) => {
-        if (!response.isSuccessful && response instanceof ErrorResponse) {
-          throw new Error(response.errorMessage)
-        } else {
-          return response;
-        }
-      }),
-      map((response: any) => {
-        if (isNotEmpty(response.resourceSelfLinks)) {
-          return response.resourceSelfLinks[0];
-        }
-      }),
-      distinctUntilChanged(),
-      switchMap((href) => this.rdbService.buildSingle<Item>(href))
-    )
+    return this.submitJsonPatchOperations(href$, resourceType);
   }
 
 }
