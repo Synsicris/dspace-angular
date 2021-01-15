@@ -170,7 +170,7 @@ describe('SubmissionFormFooterComponent Component', () => {
       comp.save(null);
       fixture.detectChanges();
 
-      expect(submissionServiceStub.dispatchSave).toHaveBeenCalledWith(submissionId);
+      expect(submissionServiceStub.dispatchSave).toHaveBeenCalledWith(submissionId, true);
     });
 
     it('should call dispatchSaveForLater on save for later', () => {
@@ -189,7 +189,7 @@ describe('SubmissionFormFooterComponent Component', () => {
       expect(submissionServiceStub.dispatchDeposit).toHaveBeenCalledWith(submissionId);
     });
 
-    it('should call dispatchDiscard on discard confirmation', () => {
+    it('should call dispatchDiscard on discard confirmation', (done) => {
       comp.showDeposit = observableOf(true);
       fixture.detectChanges();
       const modalBtn = fixture.debugElement.query(By.css('.btn-danger'));
@@ -204,6 +204,7 @@ describe('SubmissionFormFooterComponent Component', () => {
 
       fixture.whenStable().then(() => {
         expect(submissionServiceStub.dispatchDiscard).toHaveBeenCalledWith(submissionId);
+        done();
       });
     });
 
@@ -224,6 +225,48 @@ describe('SubmissionFormFooterComponent Component', () => {
 
       expect(depositBtn.nativeElement.disabled).toBeFalsy();
     });
+
+    it('should disable save button when all modifications had been saved', () => {
+      comp.hasUnsavedModification = observableOf(false);
+      fixture.detectChanges();
+
+      const saveBtn: any = fixture.debugElement.query(By.css('#save'));
+      expect(saveBtn.nativeElement.disabled).toBeTruthy();
+    });
+
+    it('should enable save button when there are not saved modifications', () => {
+      comp.hasUnsavedModification = observableOf(true);
+      fixture.detectChanges();
+
+      const saveBtn: any = fixture.debugElement.query(By.css('#save'));
+      expect(saveBtn.nativeElement.disabled).toBeFalsy();
+    });
+
+    describe( 'submission form footer buttons\' labels', () => {
+
+      it('should use saveForLaterLabel method for the save for later button', () => {
+
+        spyOn(comp, 'saveForLaterLabel').and.returnValue('saveForLaterLabel');
+
+        fixture.detectChanges();
+        const saveForLaterBtn: any = fixture.debugElement.query(By.css('#saveForLater'));
+
+        expect(comp.saveForLaterLabel).toHaveBeenCalled();
+        expect(saveForLaterBtn.nativeElement.innerText).toContain('saveForLaterLabel');
+      });
+
+      it('should display the proper saveForLaterLabel for save for later button', () => {
+        submissionServiceStub.getSubmissionScope.and.returnValue(SubmissionScopeType.EditItem);
+        expect(comp.saveForLaterLabel()).toBe('submission.general.save-later.edit-item');
+
+        submissionServiceStub.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkspaceItem);
+        expect(comp.saveForLaterLabel()).toBe('submission.general.save-later');
+
+        submissionServiceStub.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkflowItem);
+        expect(comp.saveForLaterLabel()).toBe('submission.general.save-later');
+
+      });
+    })
 
   });
 

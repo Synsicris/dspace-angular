@@ -52,7 +52,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "3mb",
-                  "maximumError": "5mb"
+                  "maximumError": "6mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -94,6 +94,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
+            "sourceMap": {
+              "scripts": false,
+              "styles": false,
+              "hidden": false,
+              "vendor": false
+            },
             "assets": [
               "src/assets"
             ],

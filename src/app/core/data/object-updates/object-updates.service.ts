@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { createSelector, MemoizedSelector, select, Store } from '@ngrx/store';
 import { CoreState } from '../../core.reducers';
 import { coreSelector } from '../../core.selectors';
@@ -24,8 +24,17 @@ import {
   SetValidFieldUpdateAction
 } from './object-updates.actions';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
-import { hasNoValue, hasValue, isEmpty, isNotEmpty, isNotEmptyOperator } from '../../../shared/empty.util';
+import {
+  hasNoValue,
+  hasValue,
+  isEmpty,
+  isNotEmpty,
+  hasValueOperator
+} from '../../../shared/empty.util';
 import { INotification } from '../../../shared/notifications/models/notification.model';
+import { Operation } from 'fast-json-patch';
+import { PatchOperationService } from './patch-operation-service/patch-operation.service';
+import { GenericConstructor } from '../../shared/generic-constructor';
 
 function objectUpdatesStateSelector(): MemoizedSelector<CoreState, ObjectUpdatesState> {
   return createSelector(coreSelector, (state: CoreState) => state['cache/object-updates']);
@@ -48,7 +57,8 @@ function virtualMetadataSourceSelector(url: string, source: string): MemoizedSel
  */
 @Injectable()
 export class ObjectUpdatesService {
-  constructor(private store: Store<CoreState>) {
+  constructor(private store: Store<CoreState>,
+              private injector: Injector) {
   }
 
   /**
@@ -56,9 +66,10 @@ export class ObjectUpdatesService {
    * @param url The page's URL for which the changes are being mapped
    * @param fields The initial fields for the page's object
    * @param lastModified The date the object was last modified
+   * @param patchOperationService A {@link PatchOperationService} used for creating a patch
    */
-  initialize(url, fields: Identifiable[], lastModified: Date): void {
-    this.store.dispatch(new InitializeFieldsAction(url, fields, lastModified));
+  initialize(url, fields: Identifiable[], lastModified: Date, patchOperationService?: GenericConstructor<PatchOperationService>): void {
+    this.store.dispatch(new InitializeFieldsAction(url, fields, lastModified, patchOperationService));
   }
 
   /**
@@ -125,7 +136,9 @@ export class ObjectUpdatesService {
    */
   getFieldUpdatesExclusive(url: string, initialFields: Identifiable[]): Observable<FieldUpdates> {
     const objectUpdates = this.getObjectEntry(url);
-    return objectUpdates.pipe(isNotEmptyOperator(), map((objectEntry) => {
+    return objectUpdates.pipe(
+      hasValueOperator(),
+      map((objectEntry) => {
       const fieldUpdates: FieldUpdates = {};
       for (const object of initialFields) {
         let fieldUpdate = objectEntry.fieldUpdates[object.uuid];
@@ -338,5 +351,23 @@ export class ObjectUpdatesService {
    */
   getLastModified(url: string): Observable<Date> {
     return this.getObjectEntry(url).pipe(map((entry: ObjectUpdatesEntry) => entry.lastModified));
+  }
+
+  /**
+   * Create a patch from the current object-updates state
+   * The {@link ObjectUpdatesEntry} should contain a patchOperationService, in order to define how a patch should
+   * be created. If it doesn't, an empty patch will be returned.
+   * @param url The URL of the page for which the patch should be created
+   */
+  createPatch(url: string): Observable<Operation[]> {
+    return this.getObjectEntry(url).pipe(
+      map((entry) => {
+        let patch = [];
+        if (hasValue(entry.patchOperationService)) {
+          patch = this.injector.get(entry.patchOperationService).fieldUpdatesToPatchOperations(entry.fieldUpdates);
+        }
+        return patch;
+      })
+    );
   }
 }

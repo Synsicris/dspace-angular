@@ -115,6 +115,12 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
    * Metadata name to filter collection list
    */
   metadata: string;
+
+  /**
+   * If a collection choice is available
+   */
+  hasChoice = true;
+
   /**
    * Initialize instance variables
    *
@@ -227,5 +233,14 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
     if (!isOpen) {
       this.collectionDropdown.reset();
     }
+  }
+
+  /**
+   * Update the component's hasChoice value.
+   * @param hasChoice
+   *   the new value
+   */
+  onHasChoice(hasChoice: boolean) {
+    this.hasChoice = hasChoice;
   }
 }

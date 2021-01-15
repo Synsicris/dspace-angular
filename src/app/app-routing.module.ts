@@ -5,23 +5,26 @@ import { AuthBlockingGuard } from './core/auth/auth-blocking.guard';
 import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
 import { AuthenticatedGuard } from './core/auth/authenticated.guard';
 import { SiteAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/site-administrator.guard';
-import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import {
   ADMIN_MODULE_PATH,
   BITSTREAM_MODULE_PATH,
+  BULK_IMPORT_PATH,
+  EDIT_ITEM_PATH,
+  FORBIDDEN_PATH,
   FORGOT_PASSWORD_PATH,
   INFO_MODULE_PATH,
   PROFILE_MODULE_PATH,
   REGISTER_PATH,
-  UNAUTHORIZED_PATH,
   WORKFLOW_ITEM_MODULE_PATH
 } from './app-routing-paths';
 import { COLLECTION_MODULE_PATH } from './+collection-page/collection-page-routing-paths';
 import { COMMUNITY_MODULE_PATH } from './+community-page/community-page-routing-paths';
 import { ITEM_MODULE_PATH } from './+item-page/item-page-routing-paths';
+import { PROCESS_MODULE_PATH } from './process-page/process-page-routing.paths';
 import { ReloadGuard } from './core/reload/reload.guard';
 import { EndUserAgreementCurrentUserGuard } from './core/end-user-agreement/end-user-agreement-current-user.guard';
 import { SiteRegisterGuard } from './core/data/feature-authorization/feature-authorization-guard/site-register.guard';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 @NgModule({
   imports: [
@@ -59,10 +62,17 @@ import { SiteRegisterGuard } from './core/data/feature-authorization/feature-aut
             canActivate: [EndUserAgreementCurrentUserGuard]
           },
           {
+            path: EDIT_ITEM_PATH,
+            loadChildren: './edit-item/edit-item.module#EditItemModule',
+            canActivate: [EndUserAgreementCurrentUserGuard]
+          },
+          {
             path: PROFILE_MODULE_PATH,
             loadChildren: './profile-page/profile-page.module#ProfilePageModule', canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
-          { path: 'processes', loadChildren: './process-page/process-page.module#ProcessPageModule', canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard] },
+          { path: PROCESS_MODULE_PATH, loadChildren: './process-page/process-page.module#ProcessPageModule', canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard] },
+          { path: 'auditlogs', loadChildren: './audit-page/audit-page.module#AuditPageModule', canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard] },
+          { path: BULK_IMPORT_PATH, loadChildren: './bulk-import/bulk-import-page.module#BulkImportPageModule', canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard] },
           { path: INFO_MODULE_PATH, loadChildren: './info/info.module#InfoModule' },
           { path: UNAUTHORIZED_PATH, component: UnauthorizedComponent },
           { path: 'coordinator-overview',
@@ -71,6 +81,11 @@ import { SiteRegisterGuard } from './core/data/feature-authorization/feature-aut
           {
             path: 'project-overview',
             loadChildren: './project-overview-page/project-overview-page.module#ProjectOverviewPageModule'
+          },
+          { path: FORBIDDEN_PATH, component: ForbiddenComponent },
+          {
+            path: 'statistics',
+            loadChildren: './statistics-page/statistics-page-routing.module#StatisticsPageRoutingModule',
           },
           { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
         ]}

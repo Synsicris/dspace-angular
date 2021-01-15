@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
 import { catchError, filter, first, flatMap, map, take } from 'rxjs/operators';
 
-import { PaginatedList } from '../../../core/data/paginated-list';
+import { PaginatedList, buildPaginatedList } from '../../../core/data/paginated-list.model';
 import {
   getFirstSucceededRemoteDataPayload,
   getFirstSucceededRemoteDataWithNotEmptyPayload
@@ -75,7 +75,7 @@ export class ItemAuthorizationsComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     this.item$ = this.route.data.pipe(
-      map((data) => data.item),
+      map((data) => data.dso),
       getFirstSucceededRemoteDataWithNotEmptyPayload(),
       map((item: Item) => this.linkService.resolveLink(
         item,
@@ -89,7 +89,7 @@ export class ItemAuthorizationsComponent implements OnInit, OnDestroy {
       getFirstSucceededRemoteDataWithNotEmptyPayload(),
       catchError((error) => {
         console.error(error);
-        return observableOf(new PaginatedList(null, []))
+        return observableOf(buildPaginatedList(null, []))
       })
     );
 
@@ -139,7 +139,7 @@ export class ItemAuthorizationsComponent implements OnInit, OnDestroy {
       getFirstSucceededRemoteDataPayload(),
       catchError((error) => {
         console.error(error);
-        return observableOf(new PaginatedList(null, []))
+        return observableOf(buildPaginatedList(null, []))
       })
     )
   }
