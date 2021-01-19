@@ -27,6 +27,9 @@ export class CreateItemParentSelectorComponent extends DSOSelectorModalWrapperCo
    */
   @Input() entityType: string;
 
+  /**
+   * If present this value is used to filter collection list by community
+   */
   @Input() scope: string;
 
   constructor(protected activeModal: NgbActiveModal, protected route: ActivatedRoute, private router: Router) {

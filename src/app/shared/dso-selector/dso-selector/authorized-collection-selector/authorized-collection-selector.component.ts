@@ -12,6 +12,7 @@ import { buildPaginatedList, PaginatedList } from '../../../../core/data/paginat
 import { RemoteData } from '../../../../core/data/remote-data';
 import { Collection } from '../../../../core/shared/collection.model';
 import { FindListOptions } from '../../../../core/data/request.models';
+import { followLink } from '../../../utils/follow-link-config.model';
 
 @Component({
   selector: 'ds-authorized-collection-selector',
@@ -26,6 +27,11 @@ export class AuthorizedCollectionSelectorComponent extends DSOSelectorComponent 
    * If present this value is used to filter collection list by entity type
    */
   @Input() entityType: string;
+
+  /**
+   * If present this value is used to filter collection list by community
+   */
+  @Input() scope: string;
 
   constructor(protected searchService: SearchService,
               protected collectionDataService: CollectionDataService) {
@@ -51,12 +57,22 @@ export class AuthorizedCollectionSelectorComponent extends DSOSelectorComponent 
       elementsPerPage: this.defaultPagination.pageSize
     };
 
-    if (this.entityType) {
+    if (this.entityType && this.scope) {
+      searchListService$ = this.collectionDataService
+        .getAuthorizedCollectionByCommunityAndEntityType(
+          this.scope,
+          this.entityType,
+          findOptions,
+          true,
+          followLink('parentCommunity'));
+    } else if (this.entityType) {
       searchListService$ = this.collectionDataService
         .getAuthorizedCollectionByEntityType(
           query,
           this.entityType,
-          findOptions);
+          findOptions,
+          true,
+          followLink('parentCommunity'));
     } else {
       searchListService$ = this.collectionDataService
         .getAuthorizedCollection(query, findOptions);
