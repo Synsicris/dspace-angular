@@ -6,7 +6,7 @@ import { catchError, concatMap, filter, first, flatMap, map, scan, take } from '
 import { hasValue, isNotEmpty, isNotUndefined, isNull } from '../../empty.util';
 import { PaginationComponentOptions } from '../../pagination/pagination-component-options.model';
 import { SortOptions } from '../../../core/cache/models/sort-options.model';
-import { PaginatedList } from '../../../core/data/paginated-list';
+import { PaginatedList } from '../../../core/data/paginated-list.model';
 import { PaginatedSearchOptions } from '../../search/paginated-search-options.model';
 import { RemoteData } from '../../../core/data/remote-data';
 import { SearchService } from '../../../core/shared/search/search.service';

@@ -194,7 +194,7 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
       flatMap((submissionObject: SubmissionObject) => {
         const collection$ = this.collectionDataService.findByHref(submissionObject._links.collection.href);
         const submissionDefinition$ = this.submissionDefinitionsService
-          .getConfigByHref(submissionObject._links.submissionDefinition.href + '?projection=full');
+          .findByHref(submissionObject._links.submissionDefinition.href + '?projection=full');
         return combineLatest(collection$, submissionDefinition$).pipe(
           map(([collection, submissionDefinition]) => {
             this.requestService.removeByHrefSubstring(submissionObject._links.submissionDefinition.href);

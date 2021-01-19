@@ -9,8 +9,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Community } from '../../core/shared/community.model';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import { ProjectDataService } from '../../core/project/project-data.service';
-import { RestResponse } from '../../core/cache/response.models';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { RemoteData } from '../../core/data/remote-data';
+import { NoContent } from '../../core/shared/NoContent.model';
 
 @Component({
   selector: 'ds-project-overview-page-header',
@@ -54,9 +55,9 @@ export class ProjectOverviewPageHeaderComponent {
       if (result === 'ok') {
         this.processing$.next(true);
         this.projectService.delete(this.projectUUID).pipe(take(1))
-          .subscribe((response: RestResponse) => {
+          .subscribe((response: RemoteData<NoContent>) => {
             this.processing$.next(false);
-            if (response.isSuccessful) {
+            if (response.isSuccess) {
               this.navigateToMainPage();
               this.notificationsService.success(null, this.translate.instant('project-overview.page.header.delete.success'))
             } else {

@@ -5,7 +5,7 @@ import { concatMap, scan, take } from 'rxjs/operators';
 import { NgbActiveModal, NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { findIndex } from 'lodash';
 import { hasValue, isEmpty, isNotEmpty } from '../../empty.util';
-import { PaginatedList } from '../../../core/data/paginated-list';
+import { PaginatedList } from '../../../core/data/paginated-list.model';
 import { SortDirection, SortOptions } from '../../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../pagination/pagination-component-options.model';
 import { PageInfo } from '../../../core/shared/page-info.model';
@@ -297,7 +297,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
         searchFilters.push(new SearchFilter(
           filterBox.filterConfig.name,
           filterBox.appliedFilterBoxEntries.map((entry: FilterBoxEntry) => entry.value),
-          filterBox.filterConfig.type === FilterType.authority ? 'authority' : ''
+          filterBox.filterConfig.filterType === FilterType.authority ? 'authority' : ''
         ));
       }
     });

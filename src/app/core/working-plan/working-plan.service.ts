@@ -19,11 +19,10 @@ import { extendMoment } from 'moment-range';
 import * as Moment from 'moment';
 
 import { SubmissionFormModel } from '../config/models/config-submission-form.model';
-import { ConfigData } from '../config/config-data';
 import { SubmissionFormsConfigService } from '../config/submission-forms-config.service';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
-import { PaginatedList } from '../data/paginated-list';
+import { buildPaginatedList, PaginatedList } from '../data/paginated-list.model';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
 import { RemoteData } from '../data/remote-data';
 import { SearchResult } from '../../shared/search/search-result.model';
@@ -50,12 +49,12 @@ import { throwError as observableThrowError } from 'rxjs/internal/observable/thr
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
 import {
+  getFinishedRemoteData,
   getFirstSucceededRemoteDataPayload,
   getFirstSucceededRemoteListPayload,
-  getRemoteDataPayload,
-  getSucceededRemoteData
+  getRemoteDataPayload
 } from '../shared/operators';
-import { ErrorResponse, RestResponse } from '../cache/response.models';
+import { ErrorResponse } from '../cache/response.models';
 import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
 import { ItemDataService } from '../data/item-data.service';
 import { SubmissionService } from '../../submission/submission.service';
@@ -72,6 +71,7 @@ import { WorkspaceitemDataService } from '../submission/workspaceitem-data.servi
 import { Collection } from '../shared/collection.model';
 import { CollectionDataService } from '../data/collection-data.service';
 import { RequestService } from '../data/request.service';
+import { NoContent } from '../shared/NoContent.model';
 
 export const moment = extendMoment(Moment);
 
@@ -125,8 +125,8 @@ export class WorkingPlanService {
 
   getWorkpackageFormConfig(): Observable<SubmissionFormModel> {
     const formName = environment.workingPlan.workingPlanFormName;
-    return this.formConfigService.getConfigByName(formName).pipe(
-      map((configData: ConfigData) => configData.payload as SubmissionFormModel)
+    return this.formConfigService.findByName(formName).pipe(
+      map((configData: RemoteData<SubmissionFormModel>) => configData.payload)
     )
   }
 
@@ -136,8 +136,8 @@ export class WorkingPlanService {
 
   getWorkpackageStepFormConfig(): Observable<SubmissionFormModel> {
     const formName = environment.workingPlan.workingPlanStepsFormName;
-    return this.formConfigService.getConfigByName(formName).pipe(
-      map((configData: ConfigData) => configData.payload as SubmissionFormModel)
+    return this.formConfigService.findByName(formName).pipe(
+      map((configData: RemoteData<SubmissionFormModel>) => configData.payload)
     )
   }
 
@@ -168,13 +168,10 @@ export class WorkingPlanService {
       currentPage: 1
     });
     return this.vocabularyService.getVocabularyEntries(searchOptions, pageInfo).pipe(
-      getSucceededRemoteData(),
+      getFinishedRemoteData(),
       getRemoteDataPayload(),
       catchError(() => {
-        const emptyResult = new PaginatedList(
-          new PageInfo(),
-          []
-        );
+        const emptyResult = buildPaginatedList(new PageInfo(), []);
         return observableOf(emptyResult);
       }),
       map((result: PaginatedList<VocabularyEntry>) => result.page),
@@ -387,13 +384,13 @@ export class WorkingPlanService {
 
   removeWorkpackageByItemId(itemId: string): Observable<boolean> {
     return this.itemService.delete(itemId).pipe(
-      map((response: RestResponse) => response.isSuccessful)
+      map((response: RemoteData<NoContent>) => response.isSuccess)
     );
   }
 
   removeWorkpackageByWorkspaceItemId(workspaceItemId: string): Observable<boolean> {
     return this.workspaceitemService.delete(workspaceItemId).pipe(
-      map((response: RestResponse) => response.isSuccessful)
+      map((response: RemoteData<NoContent>) => response.isSuccess)
     );
   }
 

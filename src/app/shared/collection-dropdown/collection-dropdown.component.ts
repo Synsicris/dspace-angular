@@ -204,6 +204,7 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
           this.scope,
           this.entityType,
           findOptions,
+          true,
           followLink('parentCommunity'));
     } else if (this.entityType) {
       searchListService$ = this.collectionDataService
