@@ -2004,13 +2004,6 @@
   // TODO New key - Add a translation
   "context-menu.actions.dso-page-edit.ITEM.btn": "Administer",
 
-  // "datafile.listelement.badge": "Data File",
-  "datafile.listelement.badge": "Datendatei",
-
-  // "datapackage.listelement.badge": "Data Package",
-  // TODO New key - Add a translation
-  "datapackage.listelement.badge": "Data Package",
-
   // "cookies.consent.accept-all": "Accept all",
   // TODO New key - Add a translation
   "cookies.consent.accept-all": "Accept all",
@@ -5290,8 +5283,7 @@
   "audit.detail.back.subject": "Subject Audit Logs",
 
   // "patent.listelement.badge": "Patent",
-  // TODO New key - Add a translation
-  "patent.listelement.badge": "Patent",
+  "patent.listelement.badge": "Patent oder Gebrauchsmuster",
 
   // "profile.breadcrumbs": "Update Profile",
   // TODO New key - Add a translation
@@ -8604,9 +8596,6 @@
   // "orgunits.listelement.badge": "Organizational units",
   "orgunits.listelement.badge": "Organisationseinheiten",
 
-  // "patent.listelement.badge": "Patent or utility patent",
-  "patent.listelement.badge": "Patent oder Gebrauchsmuster",
-
   // "persons.listelement.badge": "Persons",
   "persons.listelement.badge": "Personen",
 
@@ -8629,7 +8618,7 @@
   "publications.listelement.badge": "Veröffentlichungen",
 
   // "subprojects.listelement.badge": "Subproject",
-  "subprojects.listelement.badge": "Teilprojekt"
+  "subprojects.listelement.badge": "Teilprojekt",
 
   // "workflowAdmin.search.results.head": "Administer Workflow",
   // TODO New key - Add a translation
