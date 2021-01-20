@@ -44,6 +44,12 @@ export function getWorkflowItemModuleRoute() {
   return `/${WORKFLOW_ITEM_MODULE_PATH}`;
 }
 
+export const BULK_IMPORT_PATH = 'bulk-import';
+
+export function getBulkImportRoute(collection: Collection): string {
+  return `/${BULK_IMPORT_PATH}/${collection.id}`;
+}
+
 export function getDSORoute(dso: DSpaceObject): string {
   switch ((dso as any).type) {
     case Community.type.value:
@@ -55,13 +61,21 @@ export function getDSORoute(dso: DSpaceObject): string {
   }
 }
 
-export const UNAUTHORIZED_PATH = 'unauthorized';
+export const FORBIDDEN_PATH = '403';
 
-export function getUnauthorizedRoute() {
-  return `/${UNAUTHORIZED_PATH}`;
+export function getForbiddenRoute() {
+  return `/${FORBIDDEN_PATH}`;
+}
+
+export const PAGE_NOT_FOUND_PATH = '404';
+
+export function getPageNotFoundRoute() {
+  return `/${PAGE_NOT_FOUND_PATH}`;
 }
 
 export const INFO_MODULE_PATH = 'info';
 export function getInfoModulePath() {
   return `/${INFO_MODULE_PATH}`;
 }
+
+export const EDIT_ITEM_PATH = 'edit-items';

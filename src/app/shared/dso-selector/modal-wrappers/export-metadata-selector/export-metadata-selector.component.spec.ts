@@ -14,7 +14,11 @@ import { ConfirmationModalComponent } from '../../../confirmation-modal/confirma
 import { TranslateLoaderMock } from '../../../mocks/translate-loader.mock';
 import { NotificationsService } from '../../../notifications/notifications.service';
 import { NotificationsServiceStub } from '../../../testing/notifications-service.stub';
-import { createSuccessfulRemoteDataObject } from '../../../remote-data.utils';
+import {
+  createFailedRemoteDataObject$,
+  createSuccessfulRemoteDataObject,
+  createSuccessfulRemoteDataObject$
+} from '../../../remote-data.utils';
 import { ExportMetadataSelectorComponent } from './export-metadata-selector.component';
 
 // No way to add entryComponents yet to testbed; alternative implemented; source: https://stackoverflow.com/questions/41689468/how-to-shallow-test-a-component-with-an-entrycomponents
@@ -53,12 +57,26 @@ describe('ExportMetadataSelectorComponent', () => {
   const mockCollection: Collection = Object.assign(new Collection(), {
     id: 'test-collection-1-1',
     name: 'test-collection-1',
-    handle: 'fake/test-collection-1',
+    metadata: {
+      'dc.identifier.uri': [
+        {
+          language: null,
+          value: 'fake/test-collection-1'
+        }
+      ]
+    }
   });
 
   const mockCommunity = Object.assign(new Community(), {
     id: 'test-uuid',
-    handle: 'fake/test-community-1',
+    metadata: {
+      'dc.identifier.uri': [
+        {
+          language: null,
+          value: 'fake/test-community-1'
+        }
+      ]
+    }
   });
 
   const itemRD = createSuccessfulRemoteDataObject(mockItem);
@@ -71,13 +89,7 @@ describe('ExportMetadataSelectorComponent', () => {
     });
     scriptService = jasmine.createSpyObj('scriptService',
       {
-        invoke: observableOf({
-          response:
-            {
-              isSuccessful: true,
-              resourceSelfLinks: ['https://localhost:8080/api/core/processes/45']
-            }
-        })
+        invoke: createSuccessfulRemoteDataObject$({ processId: '45' })
       }
     );
     TestBed.configureTestingModule({
@@ -190,12 +202,7 @@ describe('ExportMetadataSelectorComponent', () => {
     beforeEach((done) => {
       spyOn((component as any).modalService, 'open').and.returnValue(modalRef);
       jasmine.getEnv().allowRespy(true);
-      spyOn(scriptService, 'invoke').and.returnValue(observableOf({
-        response:
-          {
-            isSuccessful: false,
-          }
-      }));
+      spyOn(scriptService, 'invoke').and.returnValue(createFailedRemoteDataObject$('Error', 500));
       component.navigate(mockCommunity).subscribe((succeeded: boolean) => {
         scriptRequestSucceeded = succeeded;
         done()

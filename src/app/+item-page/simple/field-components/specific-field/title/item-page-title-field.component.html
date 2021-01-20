@@ -4,6 +4,6 @@
   </div>
   <div class="d-flex justify-content-between">
     <ds-metadata-values [mdValues]="item?.allMetadata(fields)"></ds-metadata-values>
-    <ds-item-page-context-menu [item]="item"></ds-item-page-context-menu>
+    <ds-context-menu [contextMenuObject]="item" [contextMenuObjectType]="'ITEM'"></ds-context-menu>
   </div>
 </h2>

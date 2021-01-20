@@ -35,7 +35,7 @@ import { Vocabulary } from '../../core/submission/vocabularies/models/vocabulary
 import { VocabularyTreeviewComponent } from '../vocabulary-treeview/vocabulary-treeview.component';
 import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
-import { PaginatedList } from '../../core/data/paginated-list';
+import { buildPaginatedList, PaginatedList } from '../../core/data/paginated-list.model';
 import { PageInfo } from '../../core/shared/page-info.model';
 import { VocabularyEntryDetail } from '../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 
@@ -100,10 +100,7 @@ export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
             tap(() => this.searchFailed = false),
             catchError(() => {
               this.searchFailed = true;
-              return observableOf(new PaginatedList(
-                new PageInfo(),
-                []
-              ));
+              return observableOf(buildPaginatedList(new PageInfo(), []));
             }));
         }
       }),

@@ -12,11 +12,12 @@ import { DefaultChangeAnalyzer } from './default-change-analyzer.service';
 import { Injectable } from '@angular/core';
 import { FindListOptions, GetRequest } from './request.models';
 import { Observable } from 'rxjs/internal/Observable';
-import { switchMap, take, filter } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { RemoteData } from './remote-data';
-import {RelationshipType} from '../shared/item-relationships/relationship-type.model';
-import {PaginatedList} from './paginated-list';
-import {ItemType} from '../shared/item-relationships/item-type.model';
+import { ItemType } from '../shared/item-relationships/item-type.model';
+import { RelationshipType } from '../shared/item-relationships/relationship-type.model';
+import { getFirstCompletedRemoteData, getFirstSucceededRemoteData, getRemoteDataPayload } from '../shared/operators';
+import { PaginatedList } from './paginated-list.model';
 
 /**
  * Service handling all ItemType requests
@@ -50,15 +51,70 @@ export class EntityTypeService extends DataService<ItemType> {
       switchMap((href) => this.halService.getEndpoint('relationshiptypes', `${href}/${entityTypeId}`))
     );
   }
+
+  /**
+   * Check whether a given entity type is the left type of a given relationship type, as an observable boolean
+   * @param relationshipType  the relationship type for which to check whether the given entity type is the left type
+   * @param entityType  the entity type for which to check whether it is the left type of the given relationship type
+   */
+  isLeftType(relationshipType: RelationshipType, itemType: ItemType): Observable<boolean> {
+
+    return relationshipType.leftType.pipe(
+      getFirstSucceededRemoteData(),
+      getRemoteDataPayload(),
+      map((leftType) => leftType.uuid === itemType.uuid),
+    );
+  }
+
   /**
    * Get the endpoint for the item type's allowed relationship types
-   * @param entityTypeId
+   *
+   * @param {FindListOptions} options
    */
   getAllAuthorizedRelationshipType(options: FindListOptions = {}): Observable<RemoteData<PaginatedList<ItemType>>> {
     const searchHref = 'findAllByAuthorizedCollection';
 
     return this.searchBy(searchHref, options).pipe(
       filter((type: RemoteData<PaginatedList<ItemType>>) => !type.isResponsePending));
+  }
+
+  /**
+   * Used to verify if there are one or more entities available
+   */
+  hasMoreThanOneAuthorized(): Observable<boolean> {
+    const findListOptions: FindListOptions = {
+      elementsPerPage: 1,
+      currentPage: 1
+    };
+    return this.getAllAuthorizedRelationshipType(findListOptions).pipe(
+      getFirstCompletedRemoteData(),
+      map((result: RemoteData<PaginatedList<ItemType>>) => result.payload.totalElements > 1)
+    );
+  }
+
+  /**
+   * Get the endpoint for the item type's allowed relationship types. To use with external source import.
+   * @param entityTypeId
+   */
+  getAllAuthorizedRelationshipTypeImport(options: FindListOptions = {}): Observable<RemoteData<PaginatedList<ItemType>>> {
+    const searchHref = 'findAllByAuthorizedExternalSource';
+
+    return this.searchBy(searchHref, options).pipe(
+      filter((type: RemoteData<PaginatedList<ItemType>>) => !type.isResponsePending));
+  }
+
+  /**
+   * Used to verify if there are one or more entities available. To use with external source import.
+   */
+  hasMoreThanOneAuthorizedImport(): Observable<boolean> {
+    const findListOptions: FindListOptions = {
+      elementsPerPage: 1,
+      currentPage: 1
+    };
+    return this.getAllAuthorizedRelationshipTypeImport(findListOptions).pipe(
+      getFirstCompletedRemoteData(),
+      map((result: RemoteData<PaginatedList<ItemType>>) => result.payload.totalElements > 1)
+    );
   }
 
   /**
@@ -83,30 +139,10 @@ export class EntityTypeService extends DataService<ItemType> {
    * @param label
    */
   getEntityTypeByLabel(label: string): Observable<RemoteData<ItemType>> {
-
-    // TODO: Remove mock data once REST API supports this
-    /*
-    href$.pipe(take(1)).subscribe((href) => {
-      const request = new GetRequest(this.requestService.generateRequestId(), href);
-      this.requestService.configure(request);
-    });
-
-    return this.rdbService.buildSingle<EntityType>(href$);
-    */
-
-    // Mock:
-    const index = [
-      'Publication',
-      'Person',
-      'Project',
-      'OrgUnit',
-      'Journal',
-      'JournalVolume',
-      'JournalIssue',
-      'DataPackage',
-      'DataFile',
-    ].indexOf(label);
-
-    return this.findById((index + 1) + '');
+    return this.halService.getEndpoint(this.linkPath).pipe(
+      take(1),
+      switchMap((endPoint: string) =>
+        this.findByHref(endPoint + '/label/' + label))
+    );
   }
 }

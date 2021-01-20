@@ -20,12 +20,16 @@ export class CreateItemParentSelectorComponent extends DSOSelectorModalWrapperCo
   objectType = DSpaceObjectType.ITEM;
   selectorTypes = [DSpaceObjectType.COLLECTION];
   action = SelectorActionType.CREATE;
+  header = 'dso-selector.create.item.sub-level';
 
   /**
    * If present this value is used to filter collection list by entity type
    */
   @Input() entityType: string;
 
+  /**
+   * If present this value is used to filter collection list by community
+   */
   @Input() scope: string;
 
   constructor(protected activeModal: NgbActiveModal, protected route: ActivatedRoute, private router: Router) {

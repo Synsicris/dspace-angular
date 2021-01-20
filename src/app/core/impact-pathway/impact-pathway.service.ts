@@ -52,7 +52,6 @@ import {
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
 import { SubmissionFormsConfigService } from '../config/submission-forms-config.service';
-import { ConfigData } from '../config/config-data';
 import { SubmissionFormModel } from '../config/models/config-submission-form.model';
 import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
 import {
@@ -82,10 +81,11 @@ import { SearchFilter } from '../../shared/search/search-filter.model';
 import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
-import { PaginatedList } from '../data/paginated-list';
+import { PaginatedList } from '../data/paginated-list.model';
 import { SearchResult } from '../../shared/search/search-result.model';
 import { DSpaceObjectType } from '../shared/dspace-object-type.model';
 import { SearchService } from '../shared/search/search.service';
+import { NoContent } from '../shared/NoContent.model';
 
 @Injectable()
 export class ImpactPathwayService {
@@ -263,7 +263,7 @@ export class ImpactPathwayService {
       tap(() => this.addPatchOperationForImpactPathwayTask(metadata)),
       delay(100),
       flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata')),
-    )
+    );
   }
 
   getImpactPathwayStepTaskFormHeader(stepType: string, isObjective = false): string {
@@ -272,10 +272,9 @@ export class ImpactPathwayService {
 
   getImpactPathwayStepTaskFormConfig(stepType: string, isObjective = false): Observable<SubmissionFormModel> {
     const formName = isObjective ? `impact_pathway_${stepType}_task_objective_form` : `impact_pathway_${stepType}_task_form`;
-    return this.formConfigService.getConfigByName(formName).pipe(
-      map((configData: ConfigData) => configData.payload as SubmissionFormModel),
-      take(1)
-    )
+    return this.formConfigService.findByName(formName).pipe(
+      getFirstSucceededRemoteDataPayload()
+    ) as Observable<SubmissionFormModel>;
   }
 
   getImpactPathwayStepTitle(stepId: string): Observable<string> {
@@ -416,7 +415,7 @@ export class ImpactPathwayService {
 
   removeByItemId(itemId: string): Observable<boolean> {
     return this.itemService.delete(itemId).pipe(
-      map((response: RestResponse) => response.isSuccessful)
+      map((response: RemoteData<NoContent>) => response.isSuccess)
     );
   }
 
@@ -734,9 +733,8 @@ export class ImpactPathwayService {
       'items',
       objectId,
       pathName).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      tap((item: Item) => this.itemService.update(item)),
-      catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
+        tap((item: Item) => this.itemService.update(item)),
+        catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
     )
   }
 

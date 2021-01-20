@@ -9,7 +9,7 @@ import { Community } from '../core/shared/community.model';
 import { CreateProjectComponent } from '../projects/create-project/create-project.component';
 import { FindListOptions } from '../core/data/request.models';
 import { PageInfo } from '../core/shared/page-info.model';
-import { PaginatedList } from '../core/data/paginated-list';
+import { PaginatedList } from '../core/data/paginated-list.model';
 import { DSONameService } from '../core/breadcrumbs/dso-name.service';
 
 @Component({

@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { combineLatest, BehaviorSubject } from 'rxjs';
+
+import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
+import { filter, flatMap, take } from 'rxjs/operators';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+
 import { ExternalSourceService } from '../../core/data/external-source.service';
 import { ExternalSourceData } from './import-external-searchbar/submission-import-external-searchbar.component';
 import { RemoteData } from '../../core/data/remote-data';
-import { PaginatedList } from '../../core/data/paginated-list';
+import { PaginatedList, buildPaginatedList } from '../../core/data/paginated-list.model';
 import { ExternalSourceEntry } from '../../core/shared/external-source-entry.model';
 import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
-import { switchMap, filter, take } from 'rxjs/operators';
-import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
 import { Context } from '../../core/shared/context.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { RouteService } from '../../core/services/route.service';
 import { createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SubmissionImportExternalPreviewComponent } from './import-external-preview/submission-import-external-preview.component';
 import { fadeIn } from '../../shared/animations/fade';
 import { PageInfo } from '../../core/shared/page-info.model';
+import { hasValue, isNotEmpty } from '../../shared/empty.util';
+import { getFinishedRemoteData } from '../../core/shared/operators';
 import { MYDSPACE_ROUTE } from '../../+my-dspace-page/my-dspace-page.component';
 
 /**
@@ -26,9 +29,10 @@ import { MYDSPACE_ROUTE } from '../../+my-dspace-page/my-dspace-page.component';
   selector: 'ds-submission-import-external',
   styleUrls: ['./submission-import-external.component.scss'],
   templateUrl: './submission-import-external.component.html',
-  animations: [ fadeIn ]
+  animations: [fadeIn]
 })
-export class SubmissionImportExternalComponent implements OnInit {
+export class SubmissionImportExternalComponent implements OnInit, OnDestroy {
+
   /**
    * The external source search data from the routing service.
    */
@@ -36,11 +40,11 @@ export class SubmissionImportExternalComponent implements OnInit {
   /**
    * The displayed list of entries
    */
-  public entriesRD$: BehaviorSubject<RemoteData<PaginatedList<ExternalSourceEntry>>>;
+  public entriesRD$: BehaviorSubject<RemoteData<PaginatedList<ExternalSourceEntry>>> = new BehaviorSubject<RemoteData<PaginatedList<ExternalSourceEntry>>>(null);
   /**
    * TRUE if the REST service is called to retrieve the external source items
    */
-  public isLoading$: BehaviorSubject<boolean>;
+  public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   /**
    * Configuration to use for the import buttons
    */
@@ -62,7 +66,7 @@ export class SubmissionImportExternalComponent implements OnInit {
    */
   public initialPagination = Object.assign(new PaginationComponentOptions(), {
     id: 'submission-external-source-relation-list',
-    pageSize: 5
+    pageSize: 10
   });
   /**
    * The context to displaying lists for
@@ -80,6 +84,11 @@ export class SubmissionImportExternalComponent implements OnInit {
   public mydspaceRoute = MYDSPACE_ROUTE;
 
   /**
+   * The subscription to unsubscribe
+   */
+  protected subs: Subscription[] = [];
+
+  /**
    * Initialize the component variables.
    * @param {SearchConfigurationService} searchConfigService
    * @param {ExternalSourceService} externalService
@@ -93,57 +102,44 @@ export class SubmissionImportExternalComponent implements OnInit {
     private routeService: RouteService,
     private router: Router,
     private modalService: NgbModal,
-  ) { }
+  ) {
+  }
 
   /**
    * Get the entries for the selected external source and set initial configuration.
    */
   ngOnInit(): void {
-    this.label      = 'Journal';
-    this.listId     = 'list-submission-external-sources';
-    this.context    = Context.EntitySearchModalWithNameVariants;
+    this.listId = 'list-submission-external-sources';
+    this.context = Context.EntitySearchModalWithNameVariants;
     this.repeatable = false;
-    this.routeData  = { sourceId: '', query: '' };
-    this.importConfig = {
-      buttonLabel: 'submission.sections.describe.relationship-lookup.external-source.import-button-title.' + this.label
-    };
-    this.entriesRD$ = new BehaviorSubject(createSuccessfulRemoteDataObject(new PaginatedList(new PageInfo(), [])));
+    this.routeData = { entity: '', sourceId: '', query: '' };
+    this.entriesRD$ = new BehaviorSubject(createSuccessfulRemoteDataObject(buildPaginatedList(new PageInfo(), [])));
     this.isLoading$ = new BehaviorSubject(false);
-    combineLatest(
+    this.subs.push(combineLatest(
       [
+        this.routeService.getQueryParameterValue('entity'),
         this.routeService.getQueryParameterValue('source'),
         this.routeService.getQueryParameterValue('query')
       ]).pipe(
-        filter(([source, query]) => source && query && source !== '' && query !== ''),
-        filter(([source, query]) => source !== this.routeData.sourceId || query !== this.routeData.query),
-        switchMap(([source, query]) => {
-          this.routeData.sourceId = source;
-          this.routeData.query = query;
-          this.isLoading$.next(true);
-          return this.searchConfigService.paginatedSearchOptions.pipe(
-            switchMap((searchOptions: PaginatedSearchOptions) => {
-              return this.externalService.getExternalSourceEntries(this.routeData.sourceId, searchOptions);
-            }),
-            take(1)
-          )
-        }),
-    ).subscribe((rdData) => {
-      this.entriesRD$.next(rdData);
-      this.isLoading$.next(false);
-    });
+      take(1)
+    ).subscribe(([entity, source, query]: [string, string, string]) => {
+      this.routeData = { entity: entity, sourceId: '', query: '' };
+      this.selectLabel(entity);
+      this.retrieveExternalSources(entity, source, query);
+    }));
   }
 
   /**
    * Get the data from the searchbar and changes the router data.
    */
-  public getExternalsourceData(event: ExternalSourceData): void {
+  public getExternalSourceData(event: ExternalSourceData): void {
     this.router.navigate(
       [],
       {
-        queryParams: { source: event.sourceId, query: event.query },
+        queryParams: { entity: event.entity, source: event.sourceId, query: event.query },
         replaceUrl: true
       }
-    );
+    ).then(() => this.retrieveExternalSources(event.entity, event.sourceId, event.query));
   }
 
   /**
@@ -156,5 +152,69 @@ export class SubmissionImportExternalComponent implements OnInit {
     });
     const modalComp = this.modalRef.componentInstance;
     modalComp.externalSourceEntry = entry;
+    modalComp.labelPrefix = this.label;
   }
+
+  /**
+   * Retrieve external sources on pagination change
+   */
+  paginationChange() {
+    this.retrieveExternalSources(
+      this.routeData.entity,
+      this.routeData.sourceId,
+      this.routeData.query
+    );
+  }
+
+  /**
+   * Unsubscribe from all subscriptions
+   */
+  ngOnDestroy(): void {
+    this.subs
+      .filter((sub) => hasValue(sub))
+      .forEach((sub) => sub.unsubscribe());
+  }
+
+  /**
+   * Retrieve external source entries.
+   *
+   * @param entity The entity name
+   * @param source The source tupe
+   * @param query The query string to search
+   */
+  private retrieveExternalSources(entity: string, source: string, query: string): void {
+    if (isNotEmpty(source) && isNotEmpty(query)) {
+      this.routeData.entity = entity;
+      this.routeData.sourceId = source;
+      this.routeData.query = query;
+      this.isLoading$.next(true);
+      this.subs.push(
+        this.searchConfigService.paginatedSearchOptions.pipe(
+          filter((searchOptions) => searchOptions.query === query),
+          take(1),
+          flatMap((searchOptions) => this.externalService.getExternalSourceEntries(this.routeData.sourceId, searchOptions).pipe(
+            getFinishedRemoteData(),
+            take(1)
+          )),
+          take(1)
+        ).subscribe((rdData) => {
+          this.entriesRD$.next(rdData);
+          this.isLoading$.next(false);
+        })
+      );
+    }
+  }
+
+  /**
+   * Set the correct button label, depending on the entity.
+   *
+   * @param entity The entity name
+   */
+  private selectLabel(entity: string): void {
+    this.label = entity;
+    this.importConfig = {
+      buttonLabel: 'submission.sections.describe.relationship-lookup.external-source.import-button-title.' + this.label
+    };
+  }
+
 }
