@@ -16,7 +16,7 @@ import { filter, map, switchMap, take } from 'rxjs/operators';
 import { RemoteData } from './remote-data';
 import { ItemType } from '../shared/item-relationships/item-type.model';
 import { RelationshipType } from '../shared/item-relationships/relationship-type.model';
-import { getFirstSucceededRemoteData, getRemoteDataPayload } from '../shared/operators';
+import { getFirstCompletedRemoteData, getFirstSucceededRemoteData, getRemoteDataPayload } from '../shared/operators';
 import { PaginatedList } from './paginated-list.model';
 
 /**
@@ -83,19 +83,12 @@ export class EntityTypeService extends DataService<ItemType> {
    */
   hasMoreThanOneAuthorized(): Observable<boolean> {
     const findListOptions: FindListOptions = {
-      elementsPerPage: 2,
+      elementsPerPage: 1,
       currentPage: 1
     };
     return this.getAllAuthorizedRelationshipType(findListOptions).pipe(
-      map((result: RemoteData<PaginatedList<ItemType>>) => {
-        let output: boolean;
-        if (result.payload) {
-          output = ( result.payload.page.length > 1 );
-        } else {
-          output = false;
-        }
-        return output;
-      })
+      getFirstCompletedRemoteData(),
+      map((result: RemoteData<PaginatedList<ItemType>>) => result.payload.totalElements > 1)
     );
   }
 
@@ -115,19 +108,12 @@ export class EntityTypeService extends DataService<ItemType> {
    */
   hasMoreThanOneAuthorizedImport(): Observable<boolean> {
     const findListOptions: FindListOptions = {
-      elementsPerPage: 2,
+      elementsPerPage: 1,
       currentPage: 1
     };
     return this.getAllAuthorizedRelationshipTypeImport(findListOptions).pipe(
-      map((result: RemoteData<PaginatedList<ItemType>>) => {
-        let output: boolean;
-        if (result.payload) {
-          output = ( result.payload.page.length > 1 );
-        } else {
-          output = false;
-        }
-        return output;
-      })
+      getFirstCompletedRemoteData(),
+      map((result: RemoteData<PaginatedList<ItemType>>) => result.payload.totalElements > 1)
     );
   }
 
