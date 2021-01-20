@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable, of as observableOf, throwError } from 'rxjs';
-import { catchError, distinctUntilChanged, filter, flatMap, map, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, filter, flatMap, map, take, takeWhile, tap } from 'rxjs/operators';
 import { ReplaceOperation } from 'fast-json-patch';
 
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
@@ -14,13 +14,12 @@ import { CoreState } from '../core.reducers';
 import { Community } from '../shared/community.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { DSOChangeAnalyzer } from '../data/dso-change-analyzer.service';
-import { PaginatedList } from '../data/paginated-list';
+import { PaginatedList } from '../data/paginated-list.model';
 import { RemoteData } from '../data/remote-data';
 import { FindListOptions, PostRequest } from '../data/request.models';
 import { RequestService } from '../data/request.service';
 import { CommunityDataService } from '../data/community-data.service';
-import { ErrorResponse, RestResponse } from '../cache/response.models';
-import { HttpOptions } from '../dspace-rest-v2/dspace-rest-v2.service';
+import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
@@ -29,8 +28,7 @@ import {
   configureRequest,
   getFinishedRemoteData,
   getFirstSucceededRemoteDataPayload,
-  getFirstSucceededRemoteListPayload,
-  getResponseFromEntry
+  getFirstSucceededRemoteListPayload
 } from '../shared/operators';
 import { DSpaceObjectType } from '../shared/dspace-object-type.model';
 import { SearchService } from '../shared/search/search.service';
@@ -41,6 +39,9 @@ import { ConfigurationDataService } from '../data/configuration-data.service';
 import { ConfigurationProperty } from '../shared/configuration-property.model';
 import { GroupDataService } from '../eperson/group-data.service';
 import { Group } from '../eperson/models/group.model';
+import { BitstreamDataService } from '../data/bitstream-data.service';
+import { NoContent } from '../shared/NoContent.model';
+import { NotificationOptions } from '../../shared/notifications/models/notification-options.model';
 
 @Injectable()
 export class ProjectDataService extends CommunityDataService {
@@ -52,6 +53,7 @@ export class ProjectDataService extends CommunityDataService {
     protected objectCache: ObjectCacheService,
     protected halService: HALEndpointService,
     protected notificationsService: NotificationsService,
+    protected bitstreamDataService: BitstreamDataService,
     protected http: HttpClient,
     protected comparator: DSOChangeAnalyzer<Community>,
     protected searchService: SearchService,
@@ -59,7 +61,7 @@ export class ProjectDataService extends CommunityDataService {
     protected configurationService: ConfigurationDataService,
     protected groupDataService: GroupDataService,
   ) {
-    super(requestService, rdbService, store, objectCache, halService, notificationsService, http, comparator);
+    super(requestService, rdbService, store, objectCache, halService, notificationsService, bitstreamDataService, http, comparator);
   }
 
   /**
@@ -103,11 +105,11 @@ export class ProjectDataService extends CommunityDataService {
    *
    * @return the RestResponse as an Observable
    */
-  delete(projectId: string): Observable<RestResponse> {
+  delete(projectId: string): Observable<RemoteData<NoContent>> {
     const projectGroup = `project_${projectId}_group`
     return super.delete(projectId).pipe(
-      flatMap((response: RestResponse) => {
-        if (response) {
+      flatMap((response: RemoteData<NoContent>) => {
+        if (response.isSuccess) {
           return this.groupDataService.searchGroups(projectGroup)
         } else {
           throwError('Unexpected error while deleting project.')
@@ -121,16 +123,16 @@ export class ProjectDataService extends CommunityDataService {
           throw new Error('Unexpected error while retrieving project group.');
         }
       }),
-      flatMap((group: Group) => this.groupDataService.deleteGroup(group)),
-      map((response: boolean) => {
+      flatMap((group: Group) => this.groupDataService.delete(group.id)),
+/*      map((response: boolean) => {
         if (response) {
           return new RestResponse(response, 200, 'OK');
         } else {
           throwError('Unexpected error while deleting project group.')
         }
-      }),
+      }),*/
       catchError(() => {
-        return observableOf(new RestResponse(false, null, null));
+        return createFailedRemoteDataObject$('Unexpected error while deleting project group.');
       })
     );
   }
@@ -202,7 +204,20 @@ export class ProjectDataService extends CommunityDataService {
   }
 
   protected fetchCreateResponse(requestId: string): Observable<RemoteData<Community>> {
-    // Resolve self link for new object
+    const result$ = this.rdbService.buildFromRequestUUID<Community>(requestId, followLink('parentCommunity'));
+
+    // TODO a dataservice is not the best place to show a notification,
+    // this should move up to the components that use this method
+    result$.pipe(
+      takeWhile((rd: RemoteData<Community>) => rd.isLoading, true)
+    ).subscribe((rd: RemoteData<Community>) => {
+      if (rd.hasFailed) {
+        this.notificationsService.error('Server Error:', rd.errorMessage, new NotificationOptions(-1));
+      }
+    });
+
+    return result$;
+/*    // Resolve self link for new object
     const selfLink$ = this.requestService.getByUUID(requestId).pipe(
       getResponseFromEntry(),
       map((response: RestResponse) => {
@@ -221,8 +236,8 @@ export class ProjectDataService extends CommunityDataService {
     ) as Observable<string>;
 
     return selfLink$.pipe(
-      switchMap((selfLink: string) => this.findByHref(selfLink, followLink('parentCommunity'))),
-    )
+      switchMap((selfLink: string) => this.findByHref(selfLink, true, followLink('parentCommunity'))),
+    )*/
   }
 
   /**
@@ -239,7 +254,7 @@ export class ProjectDataService extends CommunityDataService {
     };
 
     return this.patch(project, [operation]).pipe(
-      flatMap(() => this.findById(project.id, followLink('parentCommunity'))),
+      flatMap(() => this.findById(project.id, true, followLink('parentCommunity'))),
       getFinishedRemoteData()
     );
   }
@@ -274,7 +289,7 @@ export class ProjectDataService extends CommunityDataService {
         if (list.page.length > 0) {
           return (list.page[0]).pipe(
             map((community: Community) => community),
-            flatMap((community: Community) => this.findById(community.id, ...linksToFollow)),
+            flatMap((community: Community) => this.findById(community.id, true, ...linksToFollow)),
             getFirstSucceededRemoteDataPayload()
           )
         } else {

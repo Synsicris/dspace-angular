@@ -61,6 +61,11 @@ export class SubmissionFormFooterComponent implements OnChanges {
   public submissionIsInvalid: Observable<boolean> = observableOf(true);
 
   /**
+   * A boolean representing if submission form has unsaved modifications
+   */
+  public hasUnsavedModification: Observable<boolean>;
+
+  /**
    * Initialize instance variables
    *
    * @param {NgbModal} modalService
@@ -84,6 +89,7 @@ export class SubmissionFormFooterComponent implements OnChanges {
       this.processingDepositStatus = this.submissionService.getSubmissionDepositProcessingStatus(this.submissionId);
       this.showDeposit = observableOf(!this.disableDeposit &&
         this.submissionService.getSubmissionScope() === SubmissionScopeType.WorkspaceItem);
+      this.hasUnsavedModification = this.submissionService.hasUnsavedModification();
     }
   }
 
@@ -91,7 +97,7 @@ export class SubmissionFormFooterComponent implements OnChanges {
    * Dispatch a submission save action
    */
   save(event) {
-    this.submissionService.dispatchSave(this.submissionId);
+    this.submissionService.dispatchSave(this.submissionId, true);
   }
 
   /**
@@ -120,4 +126,15 @@ export class SubmissionFormFooterComponent implements OnChanges {
       }
     );
   }
+
+  /**
+   * Compute the proper label for the save for later button
+   */
+  public saveForLaterLabel(): string {
+    if (this.submissionService.getSubmissionScope() === SubmissionScopeType.EditItem) {
+      return 'submission.general.save-later.edit-item';
+    }
+    return 'submission.general.save-later';
+  }
+
 }

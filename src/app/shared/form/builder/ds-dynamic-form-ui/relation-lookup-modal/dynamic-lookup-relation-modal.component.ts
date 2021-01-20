@@ -1,5 +1,5 @@
 import { Component, EventEmitter, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
-import { combineLatest, Observable, Subscription, zip as observableZip } from 'rxjs';
+import { combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { hasValue } from '../../../../empty.util';
 import { map, skip, switchMap, take } from 'rxjs/operators';
@@ -20,7 +20,7 @@ import { AppState } from '../../../../../app.reducer';
 import { Context } from '../../../../../core/shared/context.model';
 import { LookupRelationService } from '../../../../../core/data/lookup-relation.service';
 import { RemoteData } from '../../../../../core/data/remote-data';
-import { PaginatedList } from '../../../../../core/data/paginated-list';
+import { PaginatedList } from '../../../../../core/data/paginated-list.model';
 import { ExternalSource } from '../../../../../core/shared/external-source.model';
 import { ExternalSourceService } from '../../../../../core/data/external-source.service';
 import { Router } from '@angular/router';
@@ -157,7 +157,7 @@ export class DsDynamicLookupRelationModalComponent implements OnInit, OnDestroy 
   select(...selectableObjects: Array<SearchResult<Item>>) {
     this.zone.runOutsideAngular(
       () => {
-        const obs: Observable<any[]> = combineLatest(...selectableObjects.map((sri: SearchResult<Item>) => {
+        const obs: Observable<any[]> = observableCombineLatest(...selectableObjects.map((sri: SearchResult<Item>) => {
             this.addNameVariantSubscription(sri);
             return this.relationshipService.getNameVariant(this.listId, sri.indexableObject.uuid)
               .pipe(
@@ -223,7 +223,7 @@ export class DsDynamicLookupRelationModalComponent implements OnInit, OnDestroy 
       switchMap((options) => this.lookupRelationService.getTotalLocalResults(this.relationshipOptions, options))
     );
 
-    const externalSourcesAndOptions$ = combineLatest(
+    const externalSourcesAndOptions$ = observableCombineLatest(
       this.externalSourcesRD$.pipe(
         getAllSucceededRemoteData(),
         getRemoteDataPayload()
@@ -233,7 +233,7 @@ export class DsDynamicLookupRelationModalComponent implements OnInit, OnDestroy 
 
     this.totalExternal$ = externalSourcesAndOptions$.pipe(
       switchMap(([sources, options]) =>
-        observableZip(...sources.page.map((source: ExternalSource) => this.lookupRelationService.getTotalExternalResults(source, options))))
+        observableCombineLatest(...sources.page.map((source: ExternalSource) => this.lookupRelationService.getTotalExternalResults(source, options))))
     );
   }
 

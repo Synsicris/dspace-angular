@@ -4,14 +4,18 @@ import { ObjectUpdatesService } from './object-updates.service';
 import {
   DiscardObjectUpdatesAction,
   FieldChangeType,
-  InitializeFieldsAction, ReinstateObjectUpdatesAction, RemoveFieldUpdateAction, SelectVirtualMetadataAction,
+  InitializeFieldsAction,
+  ReinstateObjectUpdatesAction,
+  RemoveFieldUpdateAction,
+  SelectVirtualMetadataAction,
   SetEditableFieldUpdateAction
 } from './object-updates.actions';
 import { of as observableOf } from 'rxjs';
 import { Notification } from '../../../shared/notifications/models/notification.model';
 import { NotificationType } from '../../../shared/notifications/models/notification-type';
 import { OBJECT_UPDATES_TRASH_PATH } from './object-updates.reducer';
-import {Relationship} from '../../shared/item-relationships/relationship.model';
+import { Relationship } from '../../shared/item-relationships/relationship.model';
+import { Injector } from '@angular/core';
 
 describe('ObjectUpdatesService', () => {
   let service: ObjectUpdatesService;
@@ -31,6 +35,8 @@ describe('ObjectUpdatesService', () => {
   };
 
   const modDate = new Date(2010, 2, 11);
+  let patchOperationService;
+  let injector: Injector;
 
   beforeEach(() => {
     const fieldStates = {
@@ -39,12 +45,18 @@ describe('ObjectUpdatesService', () => {
       [identifiable3.uuid]: { editable: true, isNew: true, isValid: true },
     };
 
+    patchOperationService = jasmine.createSpyObj('patchOperationService', {
+      fieldUpdatesToPatchOperations: []
+    });
     const objectEntry = {
-      fieldStates, fieldUpdates, lastModified: modDate, virtualMetadataSources: {}
+      fieldStates, fieldUpdates, lastModified: modDate, virtualMetadataSources: {}, patchOperationService
     };
     store = new Store<CoreState>(undefined, undefined, undefined);
     spyOn(store, 'dispatch');
-    service = new ObjectUpdatesService(store);
+    injector = jasmine.createSpyObj('injector', {
+      get: patchOperationService
+    });
+    service = new ObjectUpdatesService(store, injector);
 
     spyOn(service as any, 'getObjectEntry').and.returnValue(observableOf(objectEntry));
     spyOn(service as any, 'getFieldState').and.callFake((uuid) => {
@@ -274,6 +286,28 @@ describe('ObjectUpdatesService', () => {
     it('should dispatch a SELECT_VIRTUAL_METADATA action with the correct URL, relationship, identifiable and boolean', () => {
       service.setSelectedVirtualMetadata(url, relationship.uuid, identifiable1.uuid, true);
       expect(store.dispatch).toHaveBeenCalledWith(new SelectVirtualMetadataAction(url, relationship.uuid, identifiable1.uuid, true));
+    });
+  });
+
+  describe('createPatch', () => {
+    let result$;
+
+    beforeEach(() => {
+      result$ = service.createPatch(url);
+    });
+
+    it('should inject the service stored in the entry', (done) => {
+      result$.subscribe(() => {
+        expect(injector.get).toHaveBeenCalledWith(patchOperationService);
+        done();
+      });
+    });
+
+    it('should create a patch from the fieldUpdates using the injected service', (done) => {
+      result$.subscribe(() => {
+        expect(patchOperationService.fieldUpdatesToPatchOperations).toHaveBeenCalledWith(fieldUpdates);
+        done();
+      });
     });
   });
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SharedModule } from './../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { GenericItemPageFieldComponent } from './simple/field-components/specific-field/generic/generic-item-page-field.component';
 
 import { ItemPageComponent } from './simple/item-page.component';
@@ -30,7 +30,10 @@ import { UploadBitstreamComponent } from './bitstreams/upload/upload-bitstream.c
 import { TabbedRelatedEntitiesSearchComponent } from './simple/related-entities/tabbed-related-entities-search/tabbed-related-entities-search.component';
 import { StatisticsModule } from '../statistics/statistics.module';
 import { AbstractIncrementalListComponent } from './simple/abstract-incremental-list/abstract-incremental-list.component';
+import { UntypedItemComponent } from './simple/item-types/untyped-item/untyped-item.component';
 import { CrisItemPageModule } from '../cris-item-page/cris-item-page.module';
+import { SubmissionModule } from '../submission/submission.module';
+import { ContextMenuModule } from '../shared/context-menu/context-menu.module';
 
 @NgModule({
   imports: [
@@ -40,7 +43,9 @@ import { CrisItemPageModule } from '../cris-item-page/cris-item-page.module';
     EditItemPageModule,
     SearchPageModule,
     StatisticsModule.forRoot(),
-    CrisItemPageModule
+    CrisItemPageModule,
+    SubmissionModule,
+    ContextMenuModule
   ],
   declarations: [
     ItemPageComponent,
@@ -56,6 +61,7 @@ import { CrisItemPageModule } from '../cris-item-page/cris-item-page.module';
     CollectionsComponent,
     FullFileSectionComponent,
     PublicationComponent,
+    UntypedItemComponent,
     RelatedItemsComponent,
     ItemComponent,
     GenericItemPageFieldComponent,
@@ -63,7 +69,7 @@ import { CrisItemPageModule } from '../cris-item-page/cris-item-page.module';
     RelatedEntitiesSearchComponent,
     UploadBitstreamComponent,
     TabbedRelatedEntitiesSearchComponent,
-    AbstractIncrementalListComponent,
+    AbstractIncrementalListComponent
   ],
   exports: [
     ItemComponent,
@@ -77,7 +83,8 @@ import { CrisItemPageModule } from '../cris-item-page/cris-item-page.module';
     TabbedRelatedEntitiesSearchComponent
   ],
   entryComponents: [
-    PublicationComponent
+    PublicationComponent,
+    UntypedItemComponent
   ]
 })
 export class ItemPageModule {

@@ -85,7 +85,6 @@ export class ItemAuthorityRelationService {
       getFirstSucceededRemoteDataPayload(),
       flatMap((item: Item) => {
         const parentId = item.firstMetadataValue(relationParentMetadataName);
-        console.log(parentId);
         if (isNotEmpty(parentId)) {
           return this.itemService.findById(parentId).pipe(
             getFirstSucceededRemoteDataPayload(),
@@ -159,7 +158,6 @@ export class ItemAuthorityRelationService {
       'items',
       objectId,
       pathName).pipe(
-      getFirstSucceededRemoteDataPayload(),
       tap((item: Item) => this.itemService.update(item)),
       catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
     )

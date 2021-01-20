@@ -10,31 +10,24 @@ import { CookieAttributes } from 'js-cookie';
 
 import { EPerson } from '../eperson/models/eperson.model';
 import { AuthRequestService } from './auth-request.service';
-import { HttpOptions } from '../dspace-rest-v2/dspace-rest-v2.service';
+import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 import { AuthStatus } from './models/auth-status.model';
 import { AuthTokenInfo, TOKENITEM } from './models/auth-token-info.model';
-import {
-  hasValue,
-  hasValueOperator,
-  isEmpty,
-  isNotEmpty,
-  isNotNull,
-  isNotUndefined,
-  hasNoValue
-} from '../../shared/empty.util';
+import { hasNoValue, hasValue, isEmpty, isNotEmpty, isNotNull, isNotUndefined } from '../../shared/empty.util';
 import { CookieService } from '../services/cookie.service';
 import {
   getAuthenticatedUser,
   getAuthenticationToken,
   getRedirectUrl,
   isAuthenticated,
-  isTokenRefreshing,
-  isAuthenticatedLoaded
+  isAuthenticatedLoaded,
+  isTokenRefreshing
 } from './selectors';
 import { AppState } from '../../app.reducer';
 import {
   CheckAuthenticationTokenAction,
   ResetAuthenticationMessagesAction,
+  RetrieveAuthMethodsAction,
   SetRedirectUrlAction
 } from './auth.actions';
 import { NativeWindowRef, NativeWindowService } from '../services/window.service';
@@ -44,6 +37,7 @@ import { EPersonDataService } from '../eperson/eperson-data.service';
 import { getAllSucceededRemoteDataPayload } from '../shared/operators';
 import { AuthMethod } from './models/auth.method';
 import { HardRedirectService } from '../services/hard-redirect.service';
+import { RemoteData } from '../data/remote-data';
 
 export const LOGIN_ROUTE = '/login';
 export const LOGOUT_ROUTE = '/logout';
@@ -94,9 +88,9 @@ export class AuthService {
     headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
     options.headers = headers;
     return this.authRequestService.postToEndpoint('login', body, options).pipe(
-      map((status: AuthStatus) => {
-        if (status.authenticated) {
-          return status;
+      map((rd: RemoteData<AuthStatus>) => {
+        if (hasValue(rd.payload) && rd.payload.authenticated) {
+          return rd.payload;
         } else {
           throw(new Error('Invalid email or password'));
         }
@@ -115,7 +109,7 @@ export class AuthService {
     options.headers = headers;
     options.withCredentials = true;
     return this.authRequestService.getRequest('status', options).pipe(
-      map((status: AuthStatus) => Object.assign(new AuthStatus(), status))
+      map((rd: RemoteData<AuthStatus>) => Object.assign(new AuthStatus(), rd.payload))
     );
   }
 
@@ -147,8 +141,9 @@ export class AuthService {
     headers = headers.append('Authorization', `Bearer ${token.accessToken}`);
     options.headers = headers;
     return this.authRequestService.getRequest('status', options).pipe(
-      map((status: AuthStatus) => {
-        if (status.authenticated) {
+      map((rd: RemoteData<AuthStatus>) => {
+        const status = rd.payload;
+        if (hasValue(status) && status.authenticated) {
           return status._links.eperson.href;
         } else {
           throw(new Error('Not authenticated'));
@@ -228,8 +223,9 @@ export class AuthService {
     options.headers = headers;
     options.withCredentials = true;
     return this.authRequestService.postToEndpoint('login', {}, options).pipe(
-      map((status: AuthStatus) => {
-        if (status.authenticated) {
+      map((rd: RemoteData<AuthStatus>) => {
+        const status = rd.payload;
+        if (hasValue(status) && status.authenticated) {
           return status.token;
         } else {
           throw(new Error('Not authenticated'));
@@ -266,8 +262,9 @@ export class AuthService {
     headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
     const options: HttpOptions = Object.create({ headers, responseType: 'text' });
     return this.authRequestService.getRequest('logout', options).pipe(
-      map((status: AuthStatus) => {
-        if (!status.authenticated) {
+      map((rd: RemoteData<AuthStatus>) => {
+        const status = rd.payload;
+        if (hasValue(status) && !status.authenticated) {
           return true;
         } else {
           throw(new Error('auth.errors.invalid-user'));
@@ -452,7 +449,7 @@ export class AuthService {
    * Clear redirect url
    */
   clearRedirectUrl() {
-    this.store.dispatch(new SetRedirectUrlAction(''));
+    this.store.dispatch(new SetRedirectUrlAction(undefined));
     this.storage.remove(REDIRECT_COOKIE);
   }
 
@@ -511,6 +508,15 @@ export class AuthService {
     return this.isAuthenticated().pipe(
       switchMap((authenticated) => authenticated ? this.authRequestService.getShortlivedToken() : observableOf(null))
     );
+  }
+
+  /**
+   * Return a new instance of RetrieveAuthMethodsAction
+   *
+   * @param authStatus The auth status
+   */
+  getRetrieveAuthMethodsAction(authStatus: AuthStatus): RetrieveAuthMethodsAction {
+    return new RetrieveAuthMethodsAction(authStatus, false);
   }
 
 }

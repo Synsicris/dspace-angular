@@ -6,7 +6,8 @@ import { map } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Community } from '../core/shared/community.model';
-import { getFirstSucceededRemoteDataPayload, redirectToPageNotFoundOn404 } from '../core/shared/operators';
+import { getFirstSucceededRemoteDataPayload, redirectOn4xx } from '../core/shared/operators';
+import { AuthService } from '../core/auth/auth.service';
 
 @Component({
   selector: 'ipw-working-plan-page',
@@ -19,6 +20,7 @@ export class WorkingPlanPageComponent implements OnInit {
   projectId$: Observable<string>;
 
   constructor(
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
   ) { }
@@ -29,7 +31,7 @@ export class WorkingPlanPageComponent implements OnInit {
   ngOnInit(): void {
     this.projectId$ = this.route.data.pipe(
       map((data) => data.project as RemoteData<Community>),
-      redirectToPageNotFoundOn404(this.router),
+      redirectOn4xx(this.router, this.authService),
       getFirstSucceededRemoteDataPayload(),
       map((project: Community) => project.id)
     );

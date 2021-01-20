@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
-import { catchError, concatMap, filter, first, flatMap, map, scan, take } from 'rxjs/operators';
+import { catchError, concatMap, filter, first, flatMap, map, scan, switchMap, take } from 'rxjs/operators';
 
 import { hasValue, isNotEmpty, isNotUndefined, isNull } from '../../empty.util';
 import { PaginationComponentOptions } from '../../pagination/pagination-component-options.model';
 import { SortOptions } from '../../../core/cache/models/sort-options.model';
-import { PaginatedList } from '../../../core/data/paginated-list';
+import { PaginatedList } from '../../../core/data/paginated-list.model';
 import { PaginatedSearchOptions } from '../../search/paginated-search-options.model';
 import { RemoteData } from '../../../core/data/remote-data';
 import { SearchService } from '../../../core/shared/search/search.service';
@@ -24,6 +24,7 @@ import { followLink } from '../../utils/follow-link-config.model';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
+import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 
 @Injectable()
 export class SearchSimpleItemService {
@@ -51,34 +52,52 @@ export class SearchSimpleItemService {
       scope: scope
     });
 
-    return this.searchService.getFacetValuesFor(filterConfig, page, searchOptions).pipe(
-      filter((rd: RemoteData<PaginatedList<FacetValue>>) => rd.hasSucceeded),
-      map((rd: RemoteData<PaginatedList<FacetValue>>) => {
-        const dsoPage: any[] = rd.payload.page
-          .filter((result) => hasValue(result))
-          .map((searchResult: FacetValue) => {
-            return this.getFacetLabel(searchResult.label, vocabularyName).pipe(
-              map((label: string) => Object.assign(new FacetValue(), searchResult, {
-                label: label
-              }))
-            )
-          });
-        const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<any>;
-        return Object.assign(rd, { payload: payload });
+    return this.searchService.getConfig(scope, searchConfiguration).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((configFilters: SearchFilterConfig[]) => {
+        let filterFound: SearchFilterConfig;
+        configFilters.forEach((filterEntry: SearchFilterConfig) => {
+          if (filterEntry.name === filterConfig.name) {
+            filterFound = Object.assign(new SearchFilterConfig(), filterConfig, {
+              _links: filterEntry._links
+            });
+          }
+        });
+
+        return filterFound;
       }),
-      flatMap((rd: RemoteData<PaginatedList<Observable<FacetValue>>>) => {
-        if (rd.payload.page.length === 0) {
-          return observableOf([]);
-        } else {
-          return observableFrom(rd.payload.page).pipe(
-            concatMap((list: Observable<FacetValue>) => list),
-            scan((acc: any, value: any) => [...acc, ...value], []),
-            filter((list: FacetValue[]) => list.length === rd.payload.page.length),
-          )
-        }
-      }),
-      first((result: FacetValue[]) => isNotUndefined(result))
-    )
+      switchMap((searchFilterConfig: SearchFilterConfig ) => {
+        return this.searchService.getFacetValuesFor(searchFilterConfig, page, searchOptions).pipe(
+          filter((rd: RemoteData<PaginatedList<FacetValue>>) => rd.hasSucceeded),
+          map((rd: RemoteData<PaginatedList<FacetValue>>) => {
+            const dsoPage: any[] = rd.payload.page
+              .filter((result) => hasValue(result))
+              .map((searchResult: FacetValue) => {
+                return this.getFacetLabel(searchResult.label, vocabularyName).pipe(
+                  map((label: string) => Object.assign(new FacetValue(), searchResult, {
+                    label: label
+                  }))
+                )
+              });
+            const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<any>;
+            return Object.assign(rd, { payload: payload });
+          }),
+          flatMap((rd: RemoteData<PaginatedList<Observable<FacetValue>>>) => {
+            if (rd.payload.page.length === 0) {
+              return observableOf([]);
+            } else {
+              return observableFrom(rd.payload.page).pipe(
+                concatMap((list: Observable<FacetValue>) => list),
+                scan((acc: any, value: any) => [...acc, ...value], []),
+                filter((list: FacetValue[]) => list.length === rd.payload.page.length),
+              )
+            }
+          }),
+          first((result: FacetValue[]) => isNotUndefined(result))
+        );
+
+      })
+    );
 
   }
 

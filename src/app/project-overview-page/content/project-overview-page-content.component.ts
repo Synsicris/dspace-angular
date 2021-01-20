@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { PaginatedList } from '../../core/data/paginated-list';
+import { PaginatedList } from '../../core/data/paginated-list.model';
 import { Item } from '../../core/shared/item.model';
 import { SearchService } from '../../core/shared/search/search.service';
 import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
