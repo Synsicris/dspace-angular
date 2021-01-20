@@ -172,6 +172,9 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    */
   onFilterChange(filterBox: FilterBox): void {
     this.updateFilterList(filterBox);
+    this.paginationOptions = Object.assign(new PaginationComponentOptions(), this.paginationOptions, {
+      currentPage: 0
+    });
     this.search(this.paginationOptions, this.sortOptions);
   }
 
@@ -225,6 +228,9 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    */
   onSearchChange(searchbox: FilterBox) {
     this.updateFilterList(searchbox);
+    this.paginationOptions = Object.assign(new PaginationComponentOptions(), this.paginationOptions, {
+      currentPage: 0
+    });
     this.search(this.paginationOptions, this.sortOptions);
   }
 

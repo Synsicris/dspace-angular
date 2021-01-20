@@ -263,7 +263,7 @@ export class ImpactPathwayService {
       tap(() => this.addPatchOperationForImpactPathwayTask(metadata)),
       delay(100),
       flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata')),
-    )
+    );
   }
 
   getImpactPathwayStepTaskFormHeader(stepType: string, isObjective = false): string {
@@ -733,9 +733,8 @@ export class ImpactPathwayService {
       'items',
       objectId,
       pathName).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      tap((item: Item) => this.itemService.update(item)),
-      catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
+        tap((item: Item) => this.itemService.update(item)),
+        catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
     )
   }
 

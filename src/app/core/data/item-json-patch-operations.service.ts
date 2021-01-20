@@ -7,7 +7,6 @@ import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { JsonPatchOperationsService } from '../json-patch/json-patch-operations.service';
 import { PatchRequest } from './request.models';
 import { CoreState } from '../core.reducers';
-import { RemoteData } from './remote-data';
 import { Item } from '../shared/item.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
@@ -18,7 +17,7 @@ import { RemoteDataBuildService } from '../cache/builders/remote-data-build.serv
  * A service that provides methods to make JSON Patch requests.
  */
 @Injectable()
-export class ItemJsonPatchOperationsService extends JsonPatchOperationsService<RemoteData<Item>, PatchRequest> {
+export class ItemJsonPatchOperationsService extends JsonPatchOperationsService<Item, PatchRequest> {
   protected linkPath = '';
   protected patchRequestConstructor = PatchRequest;
 
@@ -43,7 +42,7 @@ export class ItemJsonPatchOperationsService extends JsonPatchOperationsService<R
    * @return Observable<ResponseDefinitionDomain>
    *    observable of response
    */
-  public jsonPatchByResourceType(linkPath: string, scopeId: string, resourceType: string): Observable<RemoteData<Item>> {
+  public jsonPatchByResourceType(linkPath: string, scopeId: string, resourceType: string): Observable<Item> {
 
     const href$ = this.halService.getEndpoint(linkPath).pipe(
       filter((href: string) => isNotEmpty(href)),
@@ -67,7 +66,7 @@ export class ItemJsonPatchOperationsService extends JsonPatchOperationsService<R
    * @return Observable<ResponseDefinitionDomain>
    *    observable of response
    */
-  public jsonPatchByResourceID(linkPath: string, scopeId: string, resourceType: string, resourceId: string): Observable<RemoteData<Item>> {
+  public jsonPatchByResourceID(linkPath: string, scopeId: string, resourceType: string, resourceId: string): Observable<Item> {
 
     const href$ = this.halService.getEndpoint(linkPath).pipe(
       filter((href: string) => isNotEmpty(href)),

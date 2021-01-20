@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable, of as observableOf, throwError } from 'rxjs';
-import { catchError, distinctUntilChanged, filter, flatMap, map, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, filter, flatMap, map, take, takeWhile, tap } from 'rxjs/operators';
 import { ReplaceOperation } from 'fast-json-patch';
 
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
@@ -19,7 +19,6 @@ import { RemoteData } from '../data/remote-data';
 import { FindListOptions, PostRequest } from '../data/request.models';
 import { RequestService } from '../data/request.service';
 import { CommunityDataService } from '../data/community-data.service';
-import { ErrorResponse, RestResponse } from '../cache/response.models';
 import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
@@ -29,8 +28,7 @@ import {
   configureRequest,
   getFinishedRemoteData,
   getFirstSucceededRemoteDataPayload,
-  getFirstSucceededRemoteListPayload,
-  getResponseFromEntry
+  getFirstSucceededRemoteListPayload
 } from '../shared/operators';
 import { DSpaceObjectType } from '../shared/dspace-object-type.model';
 import { SearchService } from '../shared/search/search.service';
@@ -43,6 +41,7 @@ import { GroupDataService } from '../eperson/group-data.service';
 import { Group } from '../eperson/models/group.model';
 import { BitstreamDataService } from '../data/bitstream-data.service';
 import { NoContent } from '../shared/NoContent.model';
+import { NotificationOptions } from '../../shared/notifications/models/notification-options.model';
 
 @Injectable()
 export class ProjectDataService extends CommunityDataService {
@@ -205,7 +204,20 @@ export class ProjectDataService extends CommunityDataService {
   }
 
   protected fetchCreateResponse(requestId: string): Observable<RemoteData<Community>> {
-    // Resolve self link for new object
+    const result$ = this.rdbService.buildFromRequestUUID<Community>(requestId, followLink('parentCommunity'));
+
+    // TODO a dataservice is not the best place to show a notification,
+    // this should move up to the components that use this method
+    result$.pipe(
+      takeWhile((rd: RemoteData<Community>) => rd.isLoading, true)
+    ).subscribe((rd: RemoteData<Community>) => {
+      if (rd.hasFailed) {
+        this.notificationsService.error('Server Error:', rd.errorMessage, new NotificationOptions(-1));
+      }
+    });
+
+    return result$;
+/*    // Resolve self link for new object
     const selfLink$ = this.requestService.getByUUID(requestId).pipe(
       getResponseFromEntry(),
       map((response: RestResponse) => {
@@ -225,7 +237,7 @@ export class ProjectDataService extends CommunityDataService {
 
     return selfLink$.pipe(
       switchMap((selfLink: string) => this.findByHref(selfLink, true, followLink('parentCommunity'))),
-    )
+    )*/
   }
 
   /**

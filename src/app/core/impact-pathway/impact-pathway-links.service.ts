@@ -320,7 +320,6 @@ export class ImpactPathwayLinksService {
       'items',
       objectId,
       pathName).pipe(
-      getFirstSucceededRemoteDataPayload(),
       tap((item: Item) => this.itemService.update(item)),
       catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
     )

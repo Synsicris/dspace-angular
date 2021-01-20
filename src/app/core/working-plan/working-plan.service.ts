@@ -126,8 +126,8 @@ export class WorkingPlanService {
   getWorkpackageFormConfig(): Observable<SubmissionFormModel> {
     const formName = environment.workingPlan.workingPlanFormName;
     return this.formConfigService.findByName(formName).pipe(
-      map((configData: RemoteData<SubmissionFormModel>) => configData.payload)
-    )
+      getFirstSucceededRemoteDataPayload()
+    ) as Observable<SubmissionFormModel>;
   }
 
   getWorkpackageFormHeader(): string {
@@ -137,8 +137,8 @@ export class WorkingPlanService {
   getWorkpackageStepFormConfig(): Observable<SubmissionFormModel> {
     const formName = environment.workingPlan.workingPlanStepsFormName;
     return this.formConfigService.findByName(formName).pipe(
-      map((configData: RemoteData<SubmissionFormModel>) => configData.payload)
-    )
+      getFirstSucceededRemoteDataPayload()
+    ) as Observable<SubmissionFormModel>;
   }
 
   getWorkpackageStepFormHeader(): string {
@@ -566,7 +566,6 @@ export class WorkingPlanService {
       'items',
       objectId,
       pathName).pipe(
-      getFirstSucceededRemoteDataPayload(),
       tap((item: Item) => this.itemService.update(item)),
       catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
     )

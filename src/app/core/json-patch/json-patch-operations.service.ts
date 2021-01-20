@@ -112,6 +112,9 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
               } else if (hasValue(rd.payload) && isNotEmpty(rd.payload.dataDefinition)) {
                 this.store.dispatch(new CommitPatchOperationsAction(resourceType, resourceId));
                 return rd.payload.dataDefinition;
+              } else if (hasValue(rd.payload)) {
+                this.store.dispatch(new CommitPatchOperationsAction(resourceType, resourceId));
+                return rd.payload;
               }
             }),
             distinctUntilChanged()
