@@ -7,7 +7,9 @@ import {
   DYNAMIC_FORM_CONTROL_TYPE_GROUP,
   DYNAMIC_FORM_CONTROL_TYPE_INPUT,
   DYNAMIC_FORM_CONTROL_TYPE_RADIO_GROUP,
-  DynamicFormArrayModel, DynamicFormControlEvent,
+  DynamicFormArrayModel,
+  DynamicFormComponentService,
+  DynamicFormControlEvent,
   DynamicFormControlModel,
   DynamicFormGroupModel,
   DynamicFormService,
@@ -18,7 +20,7 @@ import {
 import { isObject, isString, mergeWith } from 'lodash';
 
 import { hasValue, isEmpty, isNotEmpty, isNotNull, isNotUndefined, isNull } from '../../empty.util';
-import {DynamicQualdropModel} from './ds-dynamic-form-ui/models/ds-dynamic-qualdrop.model';
+import { DynamicQualdropModel } from './ds-dynamic-form-ui/models/ds-dynamic-qualdrop.model';
 import { SubmissionFormsModel } from '../../../core/config/models/config-submission-forms.model';
 import { DYNAMIC_FORM_CONTROL_TYPE_TAG } from './ds-dynamic-form-ui/models/tag/dynamic-tag.model';
 import { RowParser } from './parsers/row-parser';
@@ -41,15 +43,16 @@ export class FormBuilderService extends DynamicFormService {
   private formModels: Map<string, DynamicFormControlModel[]>;
 
   constructor(
+    componentService: DynamicFormComponentService,
     validationService: DynamicFormValidationService,
     protected rowParser: RowParser
   ) {
-    super(validationService);
+    super(componentService, validationService);
     this.formModels = new Map();
   }
 
   getTypeBindModel() {
-    return this.typeBindModel
+    return this.typeBindModel;
   }
 
   setTypeBindModel(model: DynamicFormControlModel) {
@@ -113,8 +116,8 @@ export class FormBuilderService extends DynamicFormService {
           continue;
         }
 
-        if (controlModel.hasOwnProperty('valueUpdates')) {
-          (controlModel as any).valueUpdates.next(undefined);
+        if (controlModel.hasOwnProperty('valueChanges')) {
+          (controlModel as any).value = undefined;
         }
       }
     };
@@ -137,7 +140,7 @@ export class FormBuilderService extends DynamicFormService {
       if (isString(controlValue)) {
         return new FormFieldMetadataValueObject(controlValue, controlLanguage, null, null, controlModelIndex);
       } else if (isNgbDateStruct(controlValue)) {
-        return new FormFieldMetadataValueObject(dateToString(controlValue))
+        return new FormFieldMetadataValueObject(dateToString(controlValue));
       } else if (isObject(controlValue)) {
         const authority = (controlValue as any).authority || (controlValue as any).id || null;
         const place = controlModelIndex || (controlValue as any).place;
@@ -230,13 +233,13 @@ export class FormBuilderService extends DynamicFormService {
     return result;
   }
 
-  modelFromConfiguration(submissionId: string, json: string | SubmissionFormsModel, scopeUUID: string, sectionData: any = {}, submissionScope?: string, readOnly = false, typeBindModel = null): DynamicFormControlModel[] | never {
+  modelFromConfiguration(submissionId: string, json: string | SubmissionFormsModel, scopeUUID: string, sectionData: any = {}, submissionScope?: string, readOnly = false, typeBindModel = null, isInnerForm = false): DynamicFormControlModel[] | never {
     let rows: DynamicFormControlModel[] = [];
     const rawData = typeof json === 'string' ? JSON.parse(json, parseReviver) : json;
 
     if (rawData.rows && !isEmpty(rawData.rows)) {
       rawData.rows.forEach((currentRow) => {
-        const rowParsed = this.rowParser.parse(submissionId, currentRow, scopeUUID, sectionData, submissionScope, readOnly);
+        const rowParsed = this.rowParser.parse(submissionId, currentRow, scopeUUID, sectionData, submissionScope, readOnly, isInnerForm);
         if (isNotNull(rowParsed)) {
           if (Array.isArray(rowParsed)) {
             rows = rows.concat(rowParsed);
@@ -371,7 +374,7 @@ export class FormBuilderService extends DynamicFormService {
     this.formModels.forEach( (model, formId) => {
       const fieldModel: any = this.findById(fieldId, model);
       if (hasValue(fieldModel)) {
-        fieldModel.valueUpdates.next(value);
+        fieldModel.value = value;
         return;
       }
     });

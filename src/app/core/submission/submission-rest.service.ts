@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { distinctUntilChanged, filter, flatMap, map, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, mergeMap, tap } from 'rxjs/operators';
 
 import { RequestService } from '../data/request.service';
-import { isNotEmpty, hasValue } from '../../shared/empty.util';
+import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import {
   DeleteRequest,
   PostRequest,
@@ -105,7 +105,7 @@ export class SubmissionRestService {
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId, fullProjection)),
       map((endpointURL: string) => new SubmissionDeleteRequest(requestId, endpointURL)),
       tap((request: DeleteRequest) => this.requestService.configure(request)),
-      flatMap(() => this.fetchRequest(requestId)),
+      mergeMap(() => this.fetchRequest(requestId)),
       distinctUntilChanged());
   }
 
@@ -132,7 +132,7 @@ export class SubmissionRestService {
         this.requestService.removeByHrefSubstring(request.href);
         this.requestService.configure(request);
       }),
-      flatMap(() => this.fetchRequest(requestId)),
+      mergeMap(() => this.fetchRequest(requestId)),
       distinctUntilChanged());
   }
 
@@ -172,7 +172,7 @@ export class SubmissionRestService {
       distinctUntilChanged(),
       map((endpointURL: string) => new SubmissionPostRequest(requestId, endpointURL, body, options)),
       tap((request: PostRequest) => this.requestService.configure(request)),
-      flatMap(() => this.fetchRequest(requestId)),
+      mergeMap(() => this.fetchRequest(requestId)),
       distinctUntilChanged());
   }
 
@@ -198,7 +198,7 @@ export class SubmissionRestService {
       distinctUntilChanged(),
       map((endpointURL: string) => new SubmissionPatchRequest(requestId, endpointURL, body)),
       tap((request: PostRequest) => this.requestService.configure(request)),
-      flatMap(() => this.fetchRequest(requestId)),
+      mergeMap(() => this.fetchRequest(requestId)),
       distinctUntilChanged());
   }
 

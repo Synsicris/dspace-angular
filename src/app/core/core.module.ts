@@ -92,7 +92,6 @@ import { Community } from './shared/community.model';
 import { DSpaceObject } from './shared/dspace-object.model';
 import { ExternalSourceEntry } from './shared/external-source-entry.model';
 import { ExternalSource } from './shared/external-source.model';
-import { FileService } from './shared/file.service';
 import { HALEndpointService } from './shared/hal-endpoint.service';
 import { ItemType } from './shared/item-relationships/item-type.model';
 import { RelationshipType } from './shared/item-relationships/relationship-type.model';
@@ -176,7 +175,6 @@ import { ResearcherProfileService } from './profile/researcher-profile.service';
 import { ResearcherProfile } from './profile/model/researcher-profile.model';
 import { SectionDataService } from './layout/section-data.service';
 import { Section } from './layout/models/section.model';
-import { SearchConfigResponseParsingService } from './data/search-config-response-parsing.service';
 import { OrcidQueueService } from './orcid/orcid-queue.service';
 import { OrcidQueue } from './orcid/model/orcid-queue.model';
 import { OrcidHistoryService } from './orcid/orcid-history.service';
@@ -254,7 +252,6 @@ const PROVIDERS = [
   EndpointMapResponseParsingService,
   FacetValueResponseParsingService,
   FacetConfigResponseParsingService,
-  SearchConfigResponseParsingService,
   DebugResponseParsingService,
   SearchResponseParsingService,
   MyDSpaceResponseParsingService,
@@ -275,7 +272,6 @@ const PROVIDERS = [
   WorkspaceitemDataService,
   WorkflowItemDataService,
   UploaderService,
-  FileService,
   DSpaceObjectDataService,
   ConfigurationDataService,
   DSOChangeAnalyzer,
@@ -453,7 +449,7 @@ export const models =
 })
 
 export class CoreModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
       providers: [

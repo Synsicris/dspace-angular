@@ -16,7 +16,6 @@ import { DYNAMIC_FORM_CONTROL_MAP_FN, DynamicFormsCoreModule } from '@ng-dynamic
 import { DynamicFormsNGBootstrapUIModule } from '@ng-dynamic-forms/ui-ng-bootstrap';
 import { TextMaskModule } from 'angular2-text-mask';
 import { MomentModule } from 'ngx-moment';
-import { TooltipModule } from 'ngx-bootstrap';
 
 import { ComcolRoleComponent } from './comcol-forms/edit-comcol-page/comcol-role/comcol-role.component';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
@@ -100,7 +99,6 @@ import { InputSuggestionsComponent } from './input-suggestions/input-suggestions
 import { CapitalizePipe } from './utils/capitalize.pipe';
 import { ObjectKeysPipe } from './utils/object-keys-pipe';
 import { AuthorityConfidenceStateDirective } from './authority-confidence/authority-confidence-state.directive';
-import { MenuModule } from './menu/menu.module';
 import { LangSwitchComponent } from './lang-switch/lang-switch.component';
 import { PlainTextMetadataListElementComponent } from './object-list/metadata-representation-list-element/plain-text/plain-text-metadata-list-element.component';
 import { ItemMetadataListElementComponent } from './object-list/metadata-representation-list-element/item/item-metadata-list-element.component';
@@ -228,6 +226,15 @@ import { SearchObjects } from './search/search-objects.model';
 import { SearchResult } from './search/search-result.model';
 import { FacetConfigResponse } from './search/facet-config-response.model';
 import { FacetValues } from './search/facet-values.model';
+import { GenericItemPageFieldComponent } from '../+item-page/simple/field-components/specific-field/generic/generic-item-page-field.component';
+import { MetadataRepresentationListComponent } from '../+item-page/simple/metadata-representation-list/metadata-representation-list.component';
+import { RelatedItemsComponent } from '../+item-page/simple/related-items/related-items-component';
+import { TabbedRelatedEntitiesSearchComponent } from '../+item-page/simple/related-entities/tabbed-related-entities-search/tabbed-related-entities-search.component';
+import { RelatedEntitiesSearchComponent } from '../+item-page/simple/related-entities/related-entities-search/related-entities-search.component';
+import { ConfigurationSearchPageComponent } from '../+search-page/configuration-search-page.component';
+import { LinkMenuItemComponent } from './menu/menu-item/link-menu-item.component';
+import { OnClickMenuItemComponent } from './menu/menu-item/onclick-menu-item.component';
+import { TextMenuItemComponent } from './menu/menu-item/text-menu-item.component';
 import { ItemExportComponent } from './item-export/item-export/item-export.component';
 import { ItemExportModalWrapperComponent } from './item-export/item-export-modal-wrapper/item-export-modal-wrapper.component';
 import { SearchChartsComponent } from './search/search-charts/search-charts.component';
@@ -238,6 +245,7 @@ import { SearchChartFilterWrapperComponent } from './search/search-charts/search
 import { SearchChartComponent } from './search/search-charts/search-chart/search-chart.component';
 import { ChartsModule } from '../charts/charts.module';
 import { SearchChartFilterComponent } from './search/search-charts/search-chart/search-chart-filter/search-chart-filter.component';
+import { VocabularyExternalSourceComponent } from './vocabulary-external-source/vocabulary-external-source.component';
 import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { ContextMenuComponent } from '../+item-page/context-menu/context-menu.component';
 import { ContextMenuEditImpactPathwayComponent } from '../+item-page/context-menu/edit-impact-pathway/edit-impact-pathway.component';
@@ -284,7 +292,6 @@ const MODULES = [
   NouisliderModule,
   MomentModule,
   TextMaskModule,
-  MenuModule,
   DragDropModule,
   CdkTreeModule,
   ChartsModule,
@@ -296,8 +303,7 @@ const ROOT_MODULES = [
   TranslateModule.forChild({
     missingTranslationHandler: { provide: MissingTranslationHandler, useClass: MissingTranslationHelper },
     useDefaultLang: true
-  }),
-  TooltipModule.forRoot(),
+  })
 ];
 
 const PIPES = [
@@ -411,7 +417,6 @@ const COMPONENTS = [
   SearchFacetFilterComponent,
   SearchLabelsComponent,
   SearchLabelComponent,
-  SearchFacetFilterComponent,
   SearchFacetFilterWrapperComponent,
   SearchRangeFilterComponent,
   SearchTextFilterComponent,
@@ -423,8 +428,6 @@ const COMPONENTS = [
   SearchSwitchConfigurationComponent,
   SearchAuthorityFilterComponent,
   PageSizeSelectorComponent,
-  CommunitySearchResultGridElementComponent,
-  CollectionSearchResultGridElementComponent,
   ListableObjectComponentLoaderComponent,
   CollectionListElementComponent,
   CommunityListElementComponent,
@@ -467,6 +470,28 @@ const COMPONENTS = [
   ConfirmationModalComponent,
   VocabularyTreeviewComponent,
   AuthorizedCollectionSelectorComponent,
+  CurationFormComponent,
+  SearchResultListElementComponent,
+  SearchResultGridElementComponent,
+  ItemListElementComponent,
+  ItemGridElementComponent,
+  ItemSearchResultGridElementComponent,
+  BrowseEntryListElementComponent,
+  SearchResultDetailElementComponent,
+  PlainTextMetadataListElementComponent,
+  ItemMetadataListElementComponent,
+  MetadataRepresentationListElementComponent,
+  DsDynamicLookupRelationSearchTabComponent,
+  DsDynamicLookupRelationSelectionTabComponent,
+  ItemMetadataRepresentationListElementComponent,
+  DsDynamicLookupRelationExternalSourceTabComponent,
+  BundleListElementComponent,
+  StartsWithDateComponent,
+  StartsWithTextComponent,
+  SidebarSearchListElementComponent,
+  PublicationSidebarSearchListElementComponent,
+  CollectionSidebarSearchListElementComponent,
+  CommunitySidebarSearchListElementComponent,
   ItemExportComponent,
   ItemExportModalWrapperComponent,
   SearchChartsComponent,
@@ -475,7 +500,8 @@ const COMPONENTS = [
   SearchChartLineComponent,
   SearchChartFilterWrapperComponent,
   SearchChartComponent,
-  VocabularyTreeviewComponent,
+  SearchChartFilterComponent,
+  VocabularyExternalSourceComponent,
   CreateImpactPathwayComponent,
   ContextMenuComponent,
   ContextMenuEditImpactPathwayComponent,
@@ -492,7 +518,7 @@ const COMPONENTS = [
 ];
 
 const ENTRY_COMPONENTS = [
-  // put shared entry components (components that are created dynamically) here
+  // put only entry components that use custom decorator
   CollectionListElementComponent,
   CommunityListElementComponent,
   SearchResultListElementComponent,
@@ -509,38 +535,20 @@ const ENTRY_COMPONENTS = [
   ItemSearchResultGridElementComponent,
   BrowseEntryListElementComponent,
   SearchResultDetailElementComponent,
-  SearchResultGridElementComponent,
-  DsDynamicListComponent,
-  DsDynamicLookupComponent,
-  DsDynamicDisabledComponent,
-  DsDynamicLookupRelationModalComponent,
-  DsDynamicScrollableDropdownComponent,
-  DsDynamicTagComponent,
-  DsDynamicOneboxComponent,
-  DsDynamicRelationGroupComponent,
-  DsDynamicRelationInlineGroupComponent,
-  DsDatePickerComponent,
-  DsDynamicFormGroupComponent,
-  DsDynamicFormArrayComponent,
-  DsDatePickerInlineComponent,
   StartsWithDateComponent,
   StartsWithTextComponent,
-  DSOSelectorComponent,
   CreateCommunityParentSelectorComponent,
   CreateCollectionParentSelectorComponent,
   CreateItemParentSelectorComponent,
   EditCommunitySelectorComponent,
   EditCollectionSelectorComponent,
   EditItemSelectorComponent,
-  StartsWithTextComponent,
   PlainTextMetadataListElementComponent,
   ItemMetadataListElementComponent,
   MetadataRepresentationListElementComponent,
   CustomSwitchComponent,
   ItemMetadataRepresentationListElementComponent,
   SearchResultsComponent,
-  CollectionSearchResultGridElementComponent,
-  CommunitySearchResultGridElementComponent,
   SearchFacetFilterComponent,
   SearchRangeFilterComponent,
   SearchTextFilterComponent,
@@ -550,44 +558,23 @@ const ENTRY_COMPONENTS = [
   SearchFacetSelectedOptionComponent,
   SearchFacetRangeOptionComponent,
   SearchAuthorityFilterComponent,
-  DsDynamicLookupRelationSearchTabComponent,
-  DsDynamicLookupRelationSelectionTabComponent,
-  DsDynamicLookupRelationExternalSourceTabComponent,
-  ExternalSourceEntryImportModalComponent,
-  ExistingRelationListElementComponent,
   LogInPasswordComponent,
   LogInShibbolethComponent,
-  ItemVersionsComponent,
   BundleListElementComponent,
-  ItemVersionsNoticeComponent,
   ClaimedTaskActionsApproveComponent,
   ClaimedTaskActionsRejectComponent,
   ClaimedTaskActionsReturnToPoolComponent,
   ClaimedTaskActionsEditMetadataComponent,
-  CollectionDropdownComponent,
-  EntityDropdownComponent,
-  FileDownloadLinkComponent,
-  CurationFormComponent,
-  ExportMetadataSelectorComponent,
-  ConfirmationModalComponent,
-  VocabularyTreeviewComponent,
-  SidebarSearchListElementComponent,
   PublicationSidebarSearchListElementComponent,
   CollectionSidebarSearchListElementComponent,
   CommunitySidebarSearchListElementComponent,
-  AuthorizedCollectionSelectorComponent,
-  ItemExportComponent,
-  SearchChartsComponent,
-  SearchChartBarComponent,
-  SearchChartPieComponent,
-  SearchChartLineComponent,
-  SearchChartFilterWrapperComponent,
-  SearchChartComponent,
-  SearchChartFilterComponent,
-  ClaimedTaskActionsEditMetadataComponent,
-  CreateImpactPathwayComponent,
-  CreateSimpleItemModalComponent,
-  CreateProjectComponent
+  LinkMenuItemComponent,
+  OnClickMenuItemComponent,
+  TextMenuItemComponent
+];
+
+const SHARED_SEARCH_PAGE_COMPONENTS = [
+  ConfigurationSearchPageComponent
 ];
 
 const SHARED_ITEM_PAGE_COMPONENTS = [
@@ -595,6 +582,11 @@ const SHARED_ITEM_PAGE_COMPONENTS = [
   MetadataValuesComponent,
   DsoPageEditButtonComponent,
   ItemAlertsComponent,
+  GenericItemPageFieldComponent,
+  MetadataRepresentationListComponent,
+  RelatedItemsComponent,
+  RelatedEntitiesSearchComponent,
+  TabbedRelatedEntitiesSearchComponent
 ];
 
 const PROVIDERS = [
@@ -633,29 +625,27 @@ const DIRECTIVES = [
 
 @NgModule({
   imports: [
-    ...ROOT_MODULES,
     ...MODULES,
+    ...ROOT_MODULES
   ],
   declarations: [
     ...PIPES,
     ...COMPONENTS,
     ...DIRECTIVES,
-    ...ENTRY_COMPONENTS,
     ...SHARED_ITEM_PAGE_COMPONENTS,
+    ...SHARED_SEARCH_PAGE_COMPONENTS
   ],
   providers: [
     ...PROVIDERS
   ],
-    exports: [
-        ...MODULES,
-        ...PIPES,
-        ...COMPONENTS,
-        ...SHARED_ITEM_PAGE_COMPONENTS,
-        ...DIRECTIVES,
-        CurationFormComponent
-    ],
-  entryComponents: [
-    ...ENTRY_COMPONENTS
+  exports: [
+    ...MODULES,
+    ...PIPES,
+    ...COMPONENTS,
+    ...SHARED_ITEM_PAGE_COMPONENTS,
+    ...SHARED_SEARCH_PAGE_COMPONENTS,
+    ...DIRECTIVES,
+    TranslateModule
   ]
 })
 
@@ -663,5 +653,14 @@ const DIRECTIVES = [
  * This module handles all components and pipes that need to be shared among multiple other modules
  */
 export class SharedModule {
-
+  /**
+   * NOTE: this method allows to resolve issue with components that using a custom decorator
+   * which are not loaded during CSR otherwise
+   */
+  static withEntryComponents() {
+    return {
+      ngModule: SharedModule,
+      providers: ENTRY_COMPONENTS.map((component) => ({provide: component}))
+    };
+  }
 }

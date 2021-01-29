@@ -32,8 +32,6 @@ import {
   getRemoteDataPayload
 } from '../operators';
 import { RouteService } from '../../services/route.service';
-import { SearchConfigResponseParsingService } from '../../data/search-config-response-parsing.service';
-import { SearchConfig } from 'src/app/shared/search/search-filters/search-config.model';
 import { SearchResult } from '../../../shared/search/search-result.model';
 import { ListableObject } from '../../../shared/object-collection/shared/listable-object.model';
 import { getSearchResultFor } from '../../../shared/search/search-result-element-decorator';
@@ -125,7 +123,7 @@ export class SearchService implements OnDestroy {
    * @param linksToFollow List of {@link FollowLinkConfig} that indicate which {@link HALLink}s should be automatically resolved
    * @returns {Observable<RemoteData<SearchObjects<T>>>} Emits a paginated list with all search results found
    */
-  search<T extends DSpaceObject>(searchOptions?: PaginatedSearchOptions, responseMsToLive?: number, ...linksToFollow: Array<FollowLinkConfig<T>>): Observable<RemoteData<SearchObjects<T>>> {
+  search<T extends DSpaceObject>(searchOptions?: PaginatedSearchOptions, responseMsToLive?: number, ...linksToFollow: FollowLinkConfig<T>[]): Observable<RemoteData<SearchObjects<T>>> {
     const href$ = this.getEndpoint(searchOptions);
 
     href$.pipe(take(1)).subscribe((url: string) => {
@@ -176,12 +174,12 @@ export class SearchService implements OnDestroy {
    *                      the indexableObjects should be automatically resolved
    * @protected
    */
-  protected directlyAttachIndexableObjects<T extends DSpaceObject>(sqr$: Observable<RemoteData<SearchObjects<T>>>, ...linksToFollow: Array<FollowLinkConfig<T>>): Observable<RemoteData<SearchObjects<T>>> {
+  protected directlyAttachIndexableObjects<T extends DSpaceObject>(sqr$: Observable<RemoteData<SearchObjects<T>>>, ...linksToFollow: FollowLinkConfig<T>[]): Observable<RemoteData<SearchObjects<T>>> {
     return sqr$.pipe(
       switchMap((resultsRd: RemoteData<SearchObjects<T>>) => {
         if (hasValue(resultsRd.payload) && isNotEmpty(resultsRd.payload.page)) {
           // retrieve the indexableObjects for all search results on the page
-          const searchResult$Array: Array<Observable<SearchResult<T>>> = resultsRd.payload.page.map((result: SearchResult<T>) =>
+          const searchResult$Array: Observable<SearchResult<T>>[] = resultsRd.payload.page.map((result: SearchResult<T>) =>
             this.dspaceObjectService.findByHref(result._links.indexableObject.href, true, ...linksToFollow as any).pipe(
               getFirstCompletedRemoteData(),
               getRemoteDataPayload(),
@@ -204,7 +202,7 @@ export class SearchService implements OnDestroy {
           // Swap the original page in the remoteData with the new one, now that the results have the
           // correct types, and all indexableObjects are directly attached.
           return observableCombineLatest(searchResult$Array).pipe(
-            map((page: Array<SearchResult<T>>) => {
+            map((page: SearchResult<T>[]) => {
 
               const payload = Object.assign(new SearchObjects(), resultsRd.payload, {
                 page
@@ -218,9 +216,9 @@ export class SearchService implements OnDestroy {
                 resultsRd.errorMessage,
                 payload,
                 resultsRd.statusCode,
-              )
+              );
             })
-          )
+          );
         }
         // If we don't have a payload, or the page is empty, simply pass on the unmodified
         // RemoteData object
@@ -293,7 +291,7 @@ export class SearchService implements OnDestroy {
           return rd as any as RemoteData<SearchFilterConfig[]>;
         }
       })
-    )
+    );
   }
   /**
    * Method to request a single page of filter values for a given value
@@ -365,7 +363,7 @@ export class SearchService implements OnDestroy {
             ]).pipe(
               map(([subCommunities, collections]) => {
                 /*if this is a community, we also need to show the direct children*/
-                return [community, ...subCommunities.payload.page, ...collections.payload.page]
+                return [community, ...subCommunities.payload.page, ...collections.payload.page];
               })
             );
           } else {
@@ -411,47 +409,7 @@ export class SearchService implements OnDestroy {
         };
 
         this.router.navigate(hasValue(searchLinkParts) ? searchLinkParts : [this.getSearchLink()], navigationExtras);
-      })
-  }
-
-  /**
-   * Request the search configuration for a given scope or the whole repository
-   * @param {string} scope UUID of the object for which config the filter config is requested, when no scope is provided the configuration for the whole repository is loaded
-   * @param {string} configurationName the name of the configuration
-   * @returns {Observable<RemoteData<SearchConfig[]>>} The found configuration
-   */
-  getSearchConfigurationFor(scope?: string, configurationName?: string ): Observable<RemoteData<SearchConfig>> {
-    const href$ = this.halService.getEndpoint(this.configurationLinkPath).pipe(
-      map((url: string) => {
-        const args: string[] = [];
-
-        if (isNotEmpty(scope)) {
-          args.push(`scope=${scope}`);
-        }
-
-        if (isNotEmpty(configurationName)) {
-          args.push(`configuration=${configurationName}`);
-        }
-
-        if (isNotEmpty(args)) {
-          url = new URLCombiner(url, `?${args.join('&')}`).toString();
-        }
-
-        return url;
-      }),
-    );
-
-    href$.pipe(take(1)).subscribe((url: string) => {
-      let request = new this.request(this.requestService.generateRequestId(), url);
-      request = Object.assign(request, {
-        getResponseParser(): GenericConstructor<ResponseParsingService> {
-          return SearchConfigResponseParsingService;
-        }
       });
-      this.requestService.configure(request);
-    });
-
-    return this.rdb.buildFromHref(href$);
   }
 
   /**

@@ -1,6 +1,6 @@
 <ng-container [formGroup]="group">
 
-    <div [dynamicId]="bindId && model.id"
+    <div [id]="id"
          [formArrayName]="model.id"
          [class.d-none]="model.hidden"
          [ngClass]="getClass('element', 'control')">
@@ -17,7 +17,7 @@
                                                [context]="groupModel"
                                                [group]="control.get([idx])"
                                                [hidden]="_model.hidden"
-                                               [layout]="layout"
+                                       [layout]="formLayout"
                                                [model]="_model"
                                                [templates]="templates"
                                                [ngClass]="[getClass('element', 'host', _model), getClass('grid', 'host', _model)]"

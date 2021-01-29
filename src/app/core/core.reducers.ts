@@ -18,17 +18,17 @@ import { workingPlanReducer, WorkingPlanState } from './working-plan/working-pla
 
 export interface CoreState {
   'bitstreamFormats': BitstreamFormatRegistryState;
-  'cache/object': ObjectCacheState,
-  'cache/syncbuffer': ServerSyncBufferState,
-  'cache/object-updates': ObjectUpdatesState
-  'data/request': RequestState,
+  'cache/object': ObjectCacheState;
+  'cache/syncbuffer': ServerSyncBufferState;
+  'cache/object-updates': ObjectUpdatesState;
+  'data/request': RequestState;
   'history': HistoryState;
-  'index': MetaIndexState,
-  'auth': AuthState,
-  'json/patch': JsonPatchOperationsState,
-  'route': RouteState,
-  'impactPathway': ImpactPathwayState,
-  'workingplan': WorkingPlanState
+  'index': MetaIndexState;
+  'auth': AuthState;
+  'json/patch': JsonPatchOperationsState;
+  'route': RouteState;
+  'impactPathway': ImpactPathwayState;
+  'workingplan': WorkingPlanState;
 
 }
 
