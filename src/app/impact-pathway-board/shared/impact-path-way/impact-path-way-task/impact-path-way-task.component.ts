@@ -9,7 +9,7 @@ import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pat
 import { hasValue, isNotEmpty, isNotUndefined } from '../../../../shared/empty.util';
 import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayLinksService } from '../../../../core/impact-pathway/impact-pathway-links.service';
-import { MatCheckboxChange } from '@angular/material';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { WorkspaceitemDataService } from '../../../../core/submission/workspaceitem-data.service';
 import { getFirstSucceededRemoteDataPayload } from '../../../../core/shared/operators';
 import { WorkspaceItem } from '../../../../core/submission/models/workspaceitem.model';
@@ -109,7 +109,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   public isEditingRelationOnTask(isTwoWayRelation: boolean): Observable<boolean> {
     return this.impactPathwayLinksService.isEditingLinkOnTask(this.taskHTMLDivId).pipe((
       map((isEditing) => isEditing && this.isTwoWayRelationSelected.value === isTwoWayRelation)
-    ))
+    ));
   }
 
   public isEditingRelation(): Observable<boolean> {
@@ -126,7 +126,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
   public isDisabled() {
     return ((!this.isObjectivePage && isNotUndefined(this.parentStep) && this.parentStep.hasTask(this.data.id)) ||
-      (this.isObjectivePage && isNotUndefined(this.parentTask) && this.parentTask.hasSubTask(this.data.id)))
+      (this.isObjectivePage && isNotUndefined(this.parentTask) && this.parentTask.hasSubTask(this.data.id)));
   }
 
   public isProcessingRemove(): Observable<boolean> {
@@ -141,9 +141,9 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
         this.impactPathwayId,
         this.impactPathwayStepId,
         this.data.id,
-        this.data.title)
+        this.data.title);
     } else {
-      this.impactPathwayLinksService.dispatchRemoveRelation(this.taskHTMLDivId, this.data.id)
+      this.impactPathwayLinksService.dispatchRemoveRelation(this.taskHTMLDivId, this.data.id);
     }
   }
 
@@ -155,7 +155,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
     ).subscribe((workspaceItemId: string) => {
       this.router.navigate(['workspaceitems', workspaceItemId, 'edit']);
       this.isRedirectingToEdit$.next(false);
-    })
+    });
   }
 
   public setEditRelations(isTwoWayRelation: boolean): void {
@@ -193,7 +193,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   }
 
   public showObjectives() {
-    this.router.navigate(['project-overview', this.projectId, 'objectives', this.data.parentId, 'edit'], { queryParams: { target: this.data.id } })
+    this.router.navigate(['project-overview', this.projectId, 'objectives', this.data.parentId, 'edit'], { queryParams: { target: this.data.id } });
   }
 
   private isTaskSelectable() {

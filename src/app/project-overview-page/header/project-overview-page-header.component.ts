@@ -59,9 +59,9 @@ export class ProjectOverviewPageHeaderComponent {
             this.processing$.next(false);
             if (response.isSuccess) {
               this.navigateToMainPage();
-              this.notificationsService.success(null, this.translate.instant('project-overview.page.header.delete.success'))
+              this.notificationsService.success(null, this.translate.instant('project-overview.page.header.delete.success'));
             } else {
-              this.notificationsService.error(null, this.translate.instant('project-overview.page.header.delete.error'))
+              this.notificationsService.error(null, this.translate.instant('project-overview.page.header.delete.error'));
             }
         });
       }
@@ -77,6 +77,6 @@ export class ProjectOverviewPageHeaderComponent {
   }
 
   isProcessing() {
-    return this.processing$.asObservable()
+    return this.processing$.asObservable();
   }
 }

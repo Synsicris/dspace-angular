@@ -9,7 +9,7 @@ import { ImpactPathwayBoardModule } from '../impact-pathway-board/impact-pathway
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule,
+    SharedModule.withEntryComponents(),
     ImpactPathwayPageRoutingModule,
     ImpactPathwayBoardModule
   ],

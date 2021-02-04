@@ -20,18 +20,18 @@ export class ProjectEntityListResolver implements Resolve<string[]> {
     const name = route.params.name;
     const type = route.params.type;
     if (hasNoValue(name) || hasNoValue(type)) {
-      throw new Error('You provided an ProjectEntityListResolver for url \"' + route.url + '\" but no name or type in the route\'s data')
+      throw new Error('You provided an ProjectEntityListResolver for url \"' + route.url + '\" but no name or type in the route\'s data');
     }
 
     return this.getEntityList(name, type);
   }
 
   private getEntityList(name, type): string[] {
-    let list: string[] = []
+    let list: string[] = [];
     if (ProjectEntityList.has(name) && ProjectEntityList.get(name).has(type)) {
-      list = ProjectEntityList.get(name).get(type)
+      list = ProjectEntityList.get(name).get(type);
     }
 
-    return list
+    return list;
   }
 }

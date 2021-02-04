@@ -83,18 +83,18 @@ export class ProjectDataService extends CommunityDataService {
     const href$ = this.getEndpoint();
     combineLatest([template$, href$, projects$]).pipe(
       map(([templateUrl, href, projects]: [string, string, Community]) => {
-        const hrefWithParent = `${href}?parent=${projects.id}&name=${name}`
+        const hrefWithParent = `${href}?parent=${projects.id}&name=${name}`;
         return new PostRequest(requestId, hrefWithParent, templateUrl, options);
       }),
       configureRequest(this.requestService),
-    ).subscribe()
+    ).subscribe();
 
     return this.fetchCreateResponse(requestId).pipe(
       getFinishedRemoteData(),
       take(1),
       catchError((error: Error) => {
         this.notificationsService.error('Server Error:', error.message);
-        return createFailedRemoteDataObject$() as Observable<RemoteData<Community>>
+        return createFailedRemoteDataObject$() as Observable<RemoteData<Community>>;
       })
     );
   }
@@ -106,19 +106,19 @@ export class ProjectDataService extends CommunityDataService {
    * @return the RestResponse as an Observable
    */
   delete(projectId: string): Observable<RemoteData<NoContent>> {
-    const projectGroup = `project_${projectId}_group`
+    const projectGroup = `project_${projectId}_group`;
     return super.delete(projectId).pipe(
       flatMap((response: RemoteData<NoContent>) => {
         if (response.isSuccess) {
-          return this.groupDataService.searchGroups(projectGroup)
+          return this.groupDataService.searchGroups(projectGroup);
         } else {
-          throwError('Unexpected error while deleting project.')
+          throwError('Unexpected error while deleting project.');
         }
       }),
       getFirstSucceededRemoteListPayload(),
       map((groups: Group[]) => {
         if (groups.length === 1) {
-          return groups[0]
+          return groups[0];
         } else {
           throw new Error('Unexpected error while retrieving project group.');
         }
@@ -148,7 +148,7 @@ export class ProjectDataService extends CommunityDataService {
       flatMap((conf: ConfigurationProperty) => this.searchCommunityById(conf.values[0])),
       map((community) => {
         if (isNotEmpty(community)) {
-          return community
+          return community;
         } else {
           throw new Error('Community Projects does not exist');
         }
@@ -184,7 +184,7 @@ export class ProjectDataService extends CommunityDataService {
       )),
       map((community) => {
         if (isNotEmpty(community)) {
-          return community
+          return community;
         } else {
           throw new Error('Community Projects does not exist');
         }
@@ -264,9 +264,9 @@ export class ProjectDataService extends CommunityDataService {
    *
    * @return Observable<Community>
    */
-  private searchCommunityById(id: string, ...linksToFollow: Array<FollowLinkConfig<Community>>): Observable<Community> {
+  private searchCommunityById(id: string, ...linksToFollow: FollowLinkConfig<Community>[]): Observable<Community> {
     const sort = new SortOptions('dc.title', SortDirection.ASC);
-    const pagination = new PaginationComponentOptions()
+    const pagination = new PaginationComponentOptions();
     const searchOptions = new PaginatedSearchOptions({
       configuration: 'default',
       query: 'search.resourceid:' + id,
@@ -291,7 +291,7 @@ export class ProjectDataService extends CommunityDataService {
             map((community: Community) => community),
             flatMap((community: Community) => this.findById(community.id, true, ...linksToFollow)),
             getFirstSucceededRemoteDataPayload()
-          )
+          );
         } else {
           return observableOf(null);
         }

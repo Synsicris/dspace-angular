@@ -78,6 +78,6 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
         return result.display;
       }),
       catchError((error: Error) => observableOf(''))
-    )
+    );
   }
 }

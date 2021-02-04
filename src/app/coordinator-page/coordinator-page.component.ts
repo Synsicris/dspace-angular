@@ -71,12 +71,12 @@ export class CoordinatorPageComponent implements OnInit {
     const options: FindListOptions = {
       elementsPerPage: this.elementsPerPage,
       currentPage: page
-    }
+    };
     this.projectService.findAllAuthorizedProjects(options).pipe(
       getFirstSucceededRemoteDataPayload()
     ).subscribe((list: PaginatedList<Community>) => {
       this.projectList.next(list.page);
-      this.projectsPageInfo.next(list.pageInfo)
+      this.projectsPageInfo.next(list.pageInfo);
     });
   }
 

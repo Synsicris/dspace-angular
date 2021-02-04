@@ -36,7 +36,7 @@ export class ProjectI18nBreadcrumbsService implements BreadcrumbsService<string>
    */
   getBreadcrumbs(key: string, url: string): Observable<Breadcrumb[]> {
     let projectId;
-    let i18nKey = key
+    let i18nKey = key;
     if (key.includes('::')) {
       [projectId, i18nKey] = key.split('::');
       return this.projectService.findById(projectId).pipe(
@@ -47,9 +47,9 @@ export class ProjectI18nBreadcrumbsService implements BreadcrumbsService<string>
             new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url)
           ];
         })
-      )
+      );
     } else {
-      return obeservableOf([new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url)])
+      return obeservableOf([new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url)]);
     }
 
   }

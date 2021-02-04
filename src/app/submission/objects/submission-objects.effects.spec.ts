@@ -1168,8 +1168,8 @@ describe('SubmissionObjectEffects test suite', () => {
 
   describe('discardSubmission$', () => {
     beforeEach(() => {
-      impactPathwayService.checkAndRemoveRelations.and.returnValue(observableOf(new Item()))
-      workingPlanService.checkAndRemoveRelations.and.returnValue(observableOf(new Item()))
+      impactPathwayService.checkAndRemoveRelations.and.returnValue(observableOf(new Item()));
+      workingPlanService.checkAndRemoveRelations.and.returnValue(observableOf(new Item()));
     });
 
     it('should return a DISCARD_SUBMISSION_SUCCESS action on success', () => {

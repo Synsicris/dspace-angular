@@ -60,7 +60,7 @@ export class ImpactPathwayPageComponent implements OnInit {
       )),
       tap(([itemRD, loaded]: [RemoteData<Item>, boolean]) => {
         if (!loaded) {
-          this.store.dispatch(new InitImpactPathwayAction(itemRD.payload))
+          this.store.dispatch(new InitImpactPathwayAction(itemRD.payload));
         }
       }),
       map(([itemRD, loaded]: [RemoteData<Item>, boolean]) => itemRD.payload.id)

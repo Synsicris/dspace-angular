@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
-import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
+import { from as observableFrom, Observable, of as observableOf, throwError as observableThrowError } from 'rxjs';
 import {
   catchError,
   concatMap,
   delay,
   filter,
   first,
-  flatMap,
   map,
+  mergeMap,
   reduce,
   scan,
   startWith,
@@ -45,7 +45,6 @@ import { workpackagesSelector } from './selectors';
 import { WorkpackageEntries } from './working-plan.reducer';
 import { MetadataMap, MetadataValue, MetadatumViewModel } from '../shared/metadata.models';
 import { SubmissionObject } from '../submission/models/submission-object.model';
-import { throwError as observableThrowError } from 'rxjs/internal/observable/throwError';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
 import {
@@ -102,12 +101,12 @@ export class WorkingPlanService {
       map((submission: SubmissionObject) => ({ id: submission.id, item: submission.item })),
       tap(() => this.addPatchOperationForWorkpackage(metadata, place)),
       delay(100),
-      flatMap((taskItem: WorkpackageSearchItem) => {
+      mergeMap((taskItem: WorkpackageSearchItem) => {
         return this.executeItemPatch(taskItem.item.uuid, 'metadata').pipe(
           map((item: Item) => ({ id: taskItem.id, item: item }))
-        )
+        );
       }),
-    )
+    );
   }
 
   generateWorkpackageStepItem(projectId: string, parentId: string, stepType: string, metadata: MetadataMap): Observable<WorkpackageSearchItem> {
@@ -115,12 +114,12 @@ export class WorkingPlanService {
       map((submission: SubmissionObject) => ({ id: submission.id, item: submission.item })),
       tap(() => this.addPatchOperationForWorkpackage(metadata)),
       delay(100),
-      flatMap((taskItem: WorkpackageSearchItem) => {
+      mergeMap((taskItem: WorkpackageSearchItem) => {
         return this.executeItemPatch(taskItem.item.uuid, 'metadata').pipe(
           map((item: Item) => ({ id: taskItem.id, item: item }))
-        )
+        );
       })
-    )
+    );
   }
 
   getWorkpackageFormConfig(): Observable<SubmissionFormModel> {
@@ -148,7 +147,7 @@ export class WorkingPlanService {
   getWorkpackageItemById(itemId): Observable<Item> {
     return this.itemService.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload()
-    )
+    );
   }
 
   getWorkpackages(): Observable<Workpackage[]> {
@@ -156,7 +155,7 @@ export class WorkingPlanService {
       select(workpackagesSelector),
       map((entries: WorkpackageEntries) => Object.keys(entries).map((key) => entries[key])),
       startWith([])
-    )
+    );
   }
 
   getWorkpackageStatusTypes(): Observable<VocabularyEntry[]> {
@@ -176,7 +175,7 @@ export class WorkingPlanService {
       }),
       map((result: PaginatedList<VocabularyEntry>) => result.page),
       take(1)
-    )
+    );
   }
 
   getWorkpackageStepTypeAuthorityName(): string {
@@ -220,21 +219,21 @@ export class WorkingPlanService {
                   id: searchResult.indexableObject.id,
                   item: item
                 }))
-              )
+              );
             }
           });
         const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<any>;
         return Object.assign(rd, { payload: payload });
       }),
-      flatMap((rd: RemoteData<PaginatedList<Observable<WorkpackageSearchItem>>>) => {
+      mergeMap((rd: RemoteData<PaginatedList<Observable<WorkpackageSearchItem>>>) => {
         if (rd.payload.page.length === 0) {
           return observableOf([]);
         } else {
           return observableFrom(rd.payload.page).pipe(
             concatMap((list: Observable<WorkpackageSearchItem>) => list),
-            scan((acc: any, value: any) => [...acc, ...value], []),
+            scan((acc: any, value: any) => [...acc, value], []),
             filter((list: WorkpackageSearchItem[]) => list.length === rd.payload.page.length),
-          )
+          );
         }
       }),
       first((result: WorkpackageSearchItem[]) => isNotUndefined(result))
@@ -293,22 +292,22 @@ export class WorkingPlanService {
           steps
         ))
       )),
-      reduce((acc: any, value: any) => [...acc, ...value], [])
+      reduce((acc: any, value: any) => [...acc, value], [])
     );
   }
 
   initWorkpackageStepsFromParentItem(workpackageId: string, parentItem: Item, workspaceItemId: string): Observable<WorkpackageStep[]> {
     const relatedTaskMetadata = Metadata.all(parentItem.metadata, environment.workingPlan.workingPlanStepRelationMetadata);
     if (isEmpty(relatedTaskMetadata)) {
-      return observableOf([])
+      return observableOf([]);
     } else {
       return observableFrom(relatedTaskMetadata).pipe(
         concatMap((task: MetadataValue) => this.itemService.findById(task.value).pipe(
           getFirstSucceededRemoteDataPayload(),
           map((stepItem: Item) => this.initWorkpackageStepFromItem(stepItem, workspaceItemId, workpackageId)),
         )),
-        reduce((acc: any, value: any) => [...acc, ...value], [])
-      )
+        reduce((acc: any, value: any) => [...acc, value], [])
+      );
     }
   }
 
@@ -360,7 +359,7 @@ export class WorkingPlanService {
   isProcessingWorkpackageRemove(workpackageId: string): Observable<boolean> {
     return this.workingPlanStateService.getWorkpackageToRemoveId().pipe(
       map((workpackageToRemoveId) => workpackageId === workpackageToRemoveId)
-    )
+    );
   }
 
   checkAndRemoveRelations(itemId: string): Observable<Item> {
@@ -406,10 +405,10 @@ export class WorkingPlanService {
           place: 0,
           value: 'not_done'
         }]
-      })
+      });
     }
 
-    return result
+    return result;
   }
 
   updateMetadataItem(
@@ -431,13 +430,13 @@ export class WorkingPlanService {
           if (isEmpty(storedValue)) {
             this.createAddMetadataPatchOp(metadatumView.key, value);
           } else {
-            this.createReplaceMetadataPatchOp(metadatumView.key, metadatumView.place, value)
+            this.createReplaceMetadataPatchOp(metadatumView.key, metadatumView.place, value);
           }
         });
       }),
       delay(100),
-      flatMap(() => this.executeItemPatch(itemId, 'metadata'))
-    )
+      mergeMap(() => this.executeItemPatch(itemId, 'metadata'))
+    );
   }
 
   updateWorkpackagePlace(workpackages: WorkpackageEntries): Observable<Item[]> {
@@ -458,8 +457,8 @@ export class WorkingPlanService {
 
     return observableFrom(list).pipe(
       concatMap((entry) => this.updateMetadataItem(entry.id, entry.metadataList)),
-      reduce((acc: any, value: any) => [...acc, ...value], [])
-    )
+      reduce((acc: any, value: any) => [...acc, value], [])
+    );
   }
 
   updateWorkpackageStepsPlace(workpackageId: string, workpackageSteps: WorkpackageStep[]): Observable<Item> {
@@ -474,7 +473,7 @@ export class WorkingPlanService {
             confidence: -1
           } as MetadatumViewModel));
 
-    return this.updateMetadataItem(workpackageId, metadataList)
+    return this.updateMetadataItem(workpackageId, metadataList);
   }
 
   updateWorkpackageMetadata(
@@ -496,7 +495,7 @@ export class WorkingPlanService {
           authority: hasAuthority ? value : '',
           confidence: hasAuthority ? 600 : -1
         } as MetadatumViewModel
-      )
+      );
     });
 
     this.workingPlanStateService.dispatchUpdateWorkpackageAction(workpackageId, workpackage, metadatumViewList);
@@ -522,7 +521,7 @@ export class WorkingPlanService {
           authority: hasAuthority ? value : '',
           confidence: hasAuthority ? 600 : -1
         } as MetadatumViewModel
-      )
+      );
     });
 
     this.workingPlanStateService.dispatchUpdateWorkpackageStepAction(
@@ -553,12 +552,12 @@ export class WorkingPlanService {
 
   private createWorkspaceItem(projectId: string, taskType: string): Observable<SubmissionObject> {
     return this.getCollectionIdByProjectAndEntity(projectId, taskType).pipe(
-      flatMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType).pipe(
-        flatMap((submission: SubmissionObject) =>
+      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType).pipe(
+        mergeMap((submission: SubmissionObject) =>
           (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
         )
       )),
-    )
+    );
   }
 
   private executeItemPatch(objectId: string, pathName: string): Observable<Item> {
@@ -568,7 +567,7 @@ export class WorkingPlanService {
       pathName).pipe(
       tap((item: Item) => this.itemService.update(item)),
       catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
-    )
+    );
   }
 
   private getCollectionIdByProjectAndEntity(projectId: string, entityType: string): Observable<string> {

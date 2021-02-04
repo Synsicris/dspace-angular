@@ -3,21 +3,22 @@ import { difference, findIndex } from 'lodash';
 import { ImpactPathway } from './models/impact-pathway.model';
 import {
   AddImpactPathwaySubTaskSuccessAction,
-  AddImpactPathwayTaskLinksAction,
   AddImpactPathwayTaskLinkAction,
+  AddImpactPathwayTaskLinksAction,
   AddImpactPathwayTaskSuccessAction,
   EditImpactPathwayTaskLinksAction,
   ImpactPathwayActions,
   ImpactPathwayActionTypes,
   InitImpactPathwaySuccessAction,
+  MoveImpactPathwaySubTaskAction,
+  MoveImpactPathwaySubTaskErrorAction,
   RemoveImpactPathwaySubTaskSuccessAction,
+  RemoveImpactPathwaySuccessAction,
   RemoveImpactPathwayTaskLinkAction,
   RemoveImpactPathwayTaskSuccessAction,
-  UpdateImpactPathwaySubTaskAction,
-  UpdateImpactPathwayTaskAction,
-  MoveImpactPathwaySubTaskAction,
   SetImpactPathwayTargetTaskAction,
-  MoveImpactPathwaySubTaskErrorAction, RemoveImpactPathwaySuccessAction
+  UpdateImpactPathwaySubTaskAction,
+  UpdateImpactPathwayTaskAction
 } from './impact-pathway.actions';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
@@ -37,7 +38,7 @@ export interface ImpactPathwayLink {
   toTaskId: string;
   toTaskUniqueId: string;
   toTaskTitle?: string;
-  twoWay: boolean
+  twoWay: boolean;
 }
 
 export interface ImpactPathwayLinks {
@@ -46,8 +47,8 @@ export interface ImpactPathwayLinks {
   selectedTaskHTMLId: string;
   selectedTaskId: string;
   selectedTwoWay: boolean;
-  relatedImpactPathwayId: string
-  relatedStepId: string
+  relatedImpactPathwayId: string;
+  relatedStepId: string;
   stored: ImpactPathwayLink[];
   toSave: ImpactPathwayLink[];
   toDelete: ImpactPathwayLink[];
@@ -290,7 +291,7 @@ function initImpactPathway(state: ImpactPathwayState, action: InitImpactPathwayS
     }),
     processing: false,
     loaded: true
-  })
+  });
 }
 
 /**
@@ -314,7 +315,7 @@ function removeImpactPathway(state: ImpactPathwayState, action: RemoveImpactPath
     objects: newObjects,
     removing: false,
     loaded: false
-  })
+  });
 }
 
 /**
@@ -664,10 +665,10 @@ function removeImpactPathwayTaskRelation(state: ImpactPathwayState, action: Remo
 
   const relationIndex = findIndex(state.links.stored, (link) => {
     if (!link.twoWay) {
-      return link.to === action.payload.targetImpactPathwayTaskHTMLId
+      return link.to === action.payload.targetImpactPathwayTaskHTMLId;
     } else {
       return (link.from === action.payload.targetImpactPathwayTaskHTMLId
-        || link.to === action.payload.targetImpactPathwayTaskHTMLId)
+        || link.to === action.payload.targetImpactPathwayTaskHTMLId);
     }
   });
 

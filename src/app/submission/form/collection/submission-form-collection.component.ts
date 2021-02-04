@@ -11,10 +11,7 @@ import {
 } from '@angular/core';
 
 import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
-import {
-  find, flatMap,
-  map
-} from 'rxjs/operators';
+import { find, flatMap, map } from 'rxjs/operators';
 
 import { Collection } from '../../../core/shared/collection.model';
 import { hasValue, isNotEmpty } from '../../../shared/empty.util';
@@ -201,9 +198,9 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
             return Object.assign({}, submissionObject, {
               collection: collection.payload,
               submissionDefinition: submissionDefinition.payload
-            })
+            });
           })
-        )
+        );
       })
       ).subscribe((submissionObject: SubmissionObject) => {
         this.selectedCollectionId = event.collection.id;

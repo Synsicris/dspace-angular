@@ -109,7 +109,7 @@ export class ProjectOverviewPageContentComponent implements OnInit {
     this.impactPathwayService.retrieveImpactPathwaysByProject(this.projectUUID, pageInfo)
       .subscribe((list: PaginatedList<Item>) => {
         this.impactPathwayList.next(list.page);
-        this.impactPathwayListPageInfo.next(list.pageInfo)
+        this.impactPathwayListPageInfo.next(list.pageInfo);
       });
   }
 
@@ -134,7 +134,7 @@ export class ProjectOverviewPageContentComponent implements OnInit {
    */
   navigateToImpactPathway(impactPathway: Item): void {
     const url = `${PROJECT_PAGE}/${this.projectUUID}/impactpathway/${impactPathway.id}/edit`;
-    this.router.navigateByUrl(url)
+    this.router.navigateByUrl(url);
 
   }
 
@@ -143,8 +143,8 @@ export class ProjectOverviewPageContentComponent implements OnInit {
       getFirstSucceededRemoteDataPayload(),
       take(1))
       .subscribe((dso) => {
-        const url = `${MYDSPACE_ROUTE}?configuration=workspace&scope=${(dso as any).uuid}`
-        this.router.navigateByUrl(url)
+        const url = `${MYDSPACE_ROUTE}?configuration=workspace&scope=${(dso as any).uuid}`;
+        this.router.navigateByUrl(url);
       });
   }
 }

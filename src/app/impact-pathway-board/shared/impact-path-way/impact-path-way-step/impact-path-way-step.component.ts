@@ -102,13 +102,13 @@ export class ImpactPathWayStepComponent {
             impactPathwayStep.parentId,
             impactPathwayStep.id,
             item.id);
-        })
+        });
       });
-    })
+    });
   }
 
   onTaskSelected($event: ImpactPathwayTask) {
-    this.impactPathwayService.setSelectedTask($event)
+    this.impactPathwayService.setSelectedTask($event);
   }
 
   getStepTitle(): Observable<string> {

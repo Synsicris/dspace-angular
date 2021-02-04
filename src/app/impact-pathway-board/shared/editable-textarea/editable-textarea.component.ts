@@ -35,7 +35,7 @@ export class EditableTextareaComponent implements OnInit {
   @ViewChild('textarea', { static: false }) textarea: ElementRef;
 
   ngOnInit(): void {
-    this.initContent = this.initContent || ''
+    this.initContent = this.initContent || '';
     this.savedContent = this.initContent;
   }
 
@@ -46,7 +46,7 @@ export class EditableTextareaComponent implements OnInit {
   canSetEditable() {
     return this.isEditable().pipe(
       map((editable) => !editable)
-    )
+    );
   }
 
   /**
@@ -60,7 +60,7 @@ export class EditableTextareaComponent implements OnInit {
   }
 
   isEditable(): Observable<boolean> {
-    return this.editable$.asObservable()
+    return this.editable$.asObservable();
   }
 
   /**

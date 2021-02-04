@@ -19,7 +19,7 @@ export class ImpactPathway {
       step = this.steps[index];
     }
 
-    return step
+    return step;
   }
 
   getStepIndex(stepId: string): number {

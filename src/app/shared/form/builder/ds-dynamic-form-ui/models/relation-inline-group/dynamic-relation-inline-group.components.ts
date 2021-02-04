@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 
 import { of as observableOf } from 'rxjs';
@@ -166,7 +166,7 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
   }
 
   private hasPlaceholder(value: string|FormFieldMetadataValueObject): boolean {
-    return (value instanceof FormFieldMetadataValueObject) ? value.hasPlaceholder() : (isNotEmpty(value) && value === PLACEHOLDER_PARENT_METADATA)
+    return (value instanceof FormFieldMetadataValueObject) ? value.hasPlaceholder() : (isNotEmpty(value) && value === PLACEHOLDER_PARENT_METADATA);
   }
 
   private removeItemFromModelValue(removeIndex) {

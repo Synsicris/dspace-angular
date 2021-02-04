@@ -82,7 +82,7 @@ export class CreateProjectComponent implements OnInit {
     const projectName = this.createForm.get('name').value;
     this.projectService.createProject(projectName).pipe(
       catchError(() => {
-        return createFailedRemoteDataObject$() as Observable<RemoteData<Community>>
+        return createFailedRemoteDataObject$() as Observable<RemoteData<Community>>;
       })
     ).subscribe({
         next: (response: RemoteData<Community>) => {
