@@ -199,6 +199,13 @@ import { WorkingPlanService } from './working-plan/working-plan.service';
 import { WorkingPlanStateService } from './working-plan/working-plan-state.service';
 import { ItemAuthorityRelationService } from './shared/item-authority-relation.service';
 import { ProjectDataService } from './project/project-data.service';
+import { CollectionSearchResult } from '../shared/object-collection/shared/collection-search-result.model';
+import { WorkspaceItemSearchResult } from '../shared/object-collection/shared/workspace-item-search-result.model';
+import { ClaimedTaskSearchResult } from '../shared/object-collection/shared/claimed-task-search-result.model';
+import { WorkflowItemSearchResult } from '../shared/object-collection/shared/workflow-item-search-result.model';
+import { PoolTaskSearchResult } from '../shared/object-collection/shared/pool-task-search-result.model';
+import { CommunitySearchResult } from '../shared/object-collection/shared/community-search-result.model';
+import { ItemSearchResult } from '../shared/object-collection/shared/item-search-result.model';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -430,7 +437,14 @@ export const models =
     OrcidHistory,
     Section,
     EditItem,
-    EditItemMode
+    EditItemMode,
+    ClaimedTaskSearchResult,
+    CollectionSearchResult,
+    CommunitySearchResult,
+    ItemSearchResult,
+    PoolTaskSearchResult,
+    WorkflowItemSearchResult,
+    WorkspaceItemSearchResult
   ];
 
 @NgModule({
