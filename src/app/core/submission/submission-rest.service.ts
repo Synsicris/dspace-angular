@@ -74,7 +74,7 @@ export class SubmissionRestService {
     let url = isNotEmpty(resourceID) ? `${endpoint}/${resourceID}` : `${endpoint}`;
     const params: string[] = [];
     if (fullProjection) {
-      params.push('embed=submitter&embed=submissionDefinition&embed=item&embed=sections');
+      params.push('projection=full');
     }
     if (collectionId) {
       params.push(`owningCollection=${collectionId}`);
