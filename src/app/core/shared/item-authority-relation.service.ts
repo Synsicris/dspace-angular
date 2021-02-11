@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf, throwError as observableThrowError, } from 'rxjs';
-import { catchError, concatMap, delay, flatMap, map, reduce, tap } from 'rxjs/operators';
+import { catchError, concatMap, delay, map, mergeMap, reduce, tap } from 'rxjs/operators';
 import { findIndex } from 'lodash';
 
 import { Item } from './item.model';
@@ -36,12 +36,12 @@ export class ItemAuthorityRelationService {
       getFirstSucceededRemoteDataPayload(),
       tap((workpackageItem: Item) => this.addRelationPatch(workpackageItem, itemId, relationMetadataName)),
       delay(100),
-      flatMap((workpackageItem: Item) => this.executeItemPatch(workpackageItem.id, 'metadata').pipe(
-        flatMap(() => this.itemService.findById(itemId)),
+      mergeMap((workpackageItem: Item) => this.executeItemPatch(workpackageItem.id, 'metadata').pipe(
+        mergeMap(() => this.itemService.findById(itemId)),
         getFirstSucceededRemoteDataPayload(),
         tap((stepItem: Item) => this.addRelationPatch(stepItem, parentItemId, relationParentMetadataName)),
         delay(100),
-        flatMap((stepItem: Item) => this.executeItemPatch(stepItem.id, 'metadata'))
+        mergeMap((stepItem: Item) => this.executeItemPatch(stepItem.id, 'metadata'))
       ))
     );
   }
@@ -65,12 +65,12 @@ export class ItemAuthorityRelationService {
         this.removeRelationPatch(parentItem, taskId, relationMetadataName);
       }),
       delay(100),
-      flatMap((parentItem: Item) => this.executeItemPatch(parentItem.id, 'metadata').pipe(
-        flatMap(() => this.itemService.findById(taskId)),
+      mergeMap((parentItem: Item) => this.executeItemPatch(parentItem.id, 'metadata').pipe(
+        mergeMap(() => this.itemService.findById(taskId)),
         getFirstSucceededRemoteDataPayload(),
         tap((childItem: Item) => this.removeRelationPatch(childItem, parentId, relationParentMetadataName)),
         delay(100),
-        flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
+        mergeMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
       ))
     );
   }
@@ -82,14 +82,14 @@ export class ItemAuthorityRelationService {
   ): Observable<Item> {
     return this.itemService.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload(),
-      flatMap((item: Item) => {
+      mergeMap((item: Item) => {
         const parentId = item.firstMetadataValue(relationParentMetadataName);
         if (isNotEmpty(parentId)) {
           return this.itemService.findById(parentId).pipe(
             getFirstSucceededRemoteDataPayload(),
             tap((parentItem: Item) => this.removeRelationPatch(parentItem, itemId, relationMetadataName)),
             delay(100),
-            flatMap((parentItem: Item) => this.executeItemPatch(parentItem.id, 'metadata')),
+            mergeMap((parentItem: Item) => this.executeItemPatch(parentItem.id, 'metadata')),
             map(() => item)
           );
         } else {
@@ -108,7 +108,28 @@ export class ItemAuthorityRelationService {
       getFirstSucceededRemoteDataPayload(),
       tap((childItem: Item) => this.removeRelationPatch(childItem, parentId, relationParentMetadataName)),
       delay(100),
-      flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
+      mergeMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
+    );
+  }
+
+  /**
+   * Remove from parent item the child relation by the child id
+   * @param parentId
+   * @param taskId
+   * @param relationChildMetadataName
+   */
+  removeChildRelationFromParent(
+    parentId: string,
+    taskId: string,
+    relationChildMetadataName: string
+  ): Observable<Item> {
+    return this.itemService.findById(parentId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      tap((parentItem: Item) => {
+        this.removeRelationPatch(parentItem, taskId, relationChildMetadataName);
+      }),
+      delay(100),
+      mergeMap((parentItem: Item) => this.executeItemPatch(parentItem.id, 'metadata'))
     );
   }
 
@@ -119,7 +140,7 @@ export class ItemAuthorityRelationService {
   ): Observable<Item> {
     return this.itemService.findById(parentId).pipe(
       getFirstSucceededRemoteDataPayload(),
-      flatMap((parentItem: Item) => {
+      mergeMap((parentItem: Item) => {
         return observableFrom(parentItem.findMetadataSortedByPlace(relationMetadataName)).pipe(
           concatMap((relationMetadata: MetadataValue) => this.unlinkItemFromParent(
             parentId,
