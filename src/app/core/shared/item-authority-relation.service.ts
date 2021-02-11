@@ -114,6 +114,27 @@ export class ItemAuthorityRelationService {
     )
   }
 
+  /**
+   * Remove from parent item the child relation by the child id
+   * @param parentId
+   * @param taskId
+   * @param relationChildMetadataName
+   */
+  removeChildRelationFromParent(
+    parentId: string,
+    taskId: string,
+    relationChildMetadataName: string
+  ): Observable<Item> {
+    return this.itemService.findById(parentId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      tap((parentItem: Item) => {
+        this.removeRelationPatch(parentItem, taskId, relationChildMetadataName)
+      }),
+      delay(100),
+      flatMap((parentItem: Item) => this.executeItemPatch(parentItem.id, 'metadata'))
+    )
+  }
+
   unlinkParentItemFromChildren(
     parentId: string,
     relationParentMetadataName: string,

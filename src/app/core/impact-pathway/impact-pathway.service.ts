@@ -17,6 +17,7 @@ import {
   filter,
   flatMap,
   map,
+  mapTo,
   reduce,
   take,
   tap
@@ -26,7 +27,7 @@ import { select, Store } from '@ngrx/store';
 import { ImpactPathway } from './models/impact-pathway.model';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
-import { hasValue, isEmpty, isNotEmpty, isNull } from '../../shared/empty.util';
+import { hasValue, isEmpty, isNotEmpty, isNotNull, isNull } from '../../shared/empty.util';
 import { ItemDataService } from '../data/item-data.service';
 import { SubmissionService } from '../../submission/submission.service';
 import { environment } from '../../../environments/environment';
@@ -71,7 +72,11 @@ import {
   SetImpactPathwayTargetTaskAction
 } from './impact-pathway.actions';
 import { ErrorResponse, RestResponse } from '../cache/response.models';
-import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../shared/operators';
+import {
+  getFinishedRemoteData,
+  getFirstSucceededRemoteDataPayload,
+  getFirstSucceededRemoteListPayload
+} from '../shared/operators';
 import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
 import { VocabularyOptions } from '../submission/vocabularies/models/vocabulary-options.model';
 import { PageInfo } from '../shared/page-info.model';
@@ -385,17 +390,35 @@ export class ImpactPathwayService {
     } else {
       return observableFrom(Metadata.all(parentItem.metadata, environment.impactPathway.impactPathwayTaskRelationMetadata)).pipe(
         concatMap((task: MetadataValue) => this.itemService.findById(task.value).pipe(
-          getFirstSucceededRemoteDataPayload(),
-          flatMap((taskItem: Item) => this.initImpactPathwayTasksFromParentItem(impacPathwayId, taskItem, false).pipe(
-            tap(() => {
-              if (buildLinks) {
-                this.addImpactPathwayLinksFromTaskItem(taskItem, impacPathwayId, parentItem.id);
-              }
-            }),
-            map((tasks: ImpactPathwayTask[]) => this.initImpactPathwayTask(taskItem, parentItem.id, tasks))
-          )),
+          getFinishedRemoteData(),
+          flatMap((rd: RemoteData<Item>) => {
+            if (rd.hasSucceeded) {
+              const taskItem = rd.payload;
+              return this.initImpactPathwayTasksFromParentItem(impacPathwayId, taskItem, false).pipe(
+                tap(() => {
+                  if (buildLinks) {
+                    this.addImpactPathwayLinksFromTaskItem(taskItem, impacPathwayId, parentItem.id);
+                  }
+                }),
+                map((tasks: ImpactPathwayTask[]) => this.initImpactPathwayTask(taskItem, parentItem.id, tasks))
+              )
+            } else {
+              // NOTE if a task is not found probably it has been deleted without unlinking it from parent step, so unlink it
+              return this.itemAuthorityRelationService.removeChildRelationFromParent(
+                parentItem.id,
+                task.value,
+                environment.impactPathway.impactPathwayTaskRelationMetadata
+              ).pipe(mapTo(null));
+            }
+          })
         )),
-        reduce((acc: any, value: any) => [...acc, ...value], [])
+        reduce((acc: any, value: any) => {
+          if (isNotNull(value)) {
+            return [...acc, ...value];
+          } else {
+            return acc;
+          }
+        }, [])
       )
     }
   }
