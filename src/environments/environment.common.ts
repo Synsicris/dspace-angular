@@ -310,7 +310,7 @@ export const environment: GlobalConfig = {
     workingPlanStepRelationMetadata: 'workingplan.relation.step',
     workingPlanStepDateStartMetadata: 'dc.date.start',
     workingPlanStepDateEndMetadata: 'dc.date.end',
-    workpackageEntityName: 'plan_workpackages',
+    workpackageEntityName: 'workpackages',
     workpackagesSearchConfigName: 'allWorkpackages',
     workpackageStepsSearchConfigName: 'workpackageSteps',
     workpackageStatusTypeAuthority: 'working_plan_workpackage_status_type',
