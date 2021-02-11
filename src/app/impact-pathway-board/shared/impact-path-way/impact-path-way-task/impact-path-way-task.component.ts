@@ -103,7 +103,8 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   }
 
   public canShowRelationCheckBox(): Observable<boolean> {
-    return this.impactPathwayLinksService.isEditingLinkOnOtherStepAndTask(this.impactPathwayStepId, this.taskHTMLDivId);
+    // return this.impactPathwayLinksService.isEditingLinkOnOtherStepAndTask(this.impactPathwayStepId, this.taskHTMLDivId);
+    return this.impactPathwayLinksService.isEditingLinkOnOtherTask(this.taskHTMLDivId);
   }
 
   public isEditingRelationOnTask(isTwoWayRelation: boolean): Observable<boolean> {
