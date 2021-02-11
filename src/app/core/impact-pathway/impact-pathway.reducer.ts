@@ -104,7 +104,8 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
     case ImpactPathwayActionTypes.INIT_IMPACT_PATHWAY:
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY: {
       return Object.assign({}, impactPathwayInitialState, {
-        processing: true
+        processing: true,
+        targetTaskId: (action.payload && (action as any).payload.withTarget) ? state.targetTaskId : ''
       });
     }
 

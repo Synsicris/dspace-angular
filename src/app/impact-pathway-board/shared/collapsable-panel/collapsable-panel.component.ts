@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -22,10 +30,16 @@ export class CollapsablePanelComponent implements OnInit {
 
   @Input() startOpen = false;
 
+  @Input() collapsable = true;
+
+  @Input() titleEditable = false;
+
   /**
    * True when the panel is 100% collapsed in the UI
    */
   collapsed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+
+  @Output() titleChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private cdr: ChangeDetectorRef) { }
 
@@ -46,8 +60,10 @@ export class CollapsablePanelComponent implements OnInit {
    *  Changes the state for this filter to collapsed when it's expanded and to expanded it when it's collapsed
    */
   toggle() {
-    this.collapsed.next(!this.collapsed.value);
-    this.cdr.detectChanges();
+    if (this.collapsable) {
+      this.collapsed.next(!this.collapsed.value);
+      this.cdr.detectChanges();
+    }
   }
 
   /**

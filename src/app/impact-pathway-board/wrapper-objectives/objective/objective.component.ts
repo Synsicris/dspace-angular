@@ -38,4 +38,16 @@ export class ObjectiveComponent {
       value
     );
   }
+
+  updateTitle(value) {
+    this.impactPathwayService.dispatchPatchImpactPathwayTaskMetadata(
+      this.impactPathwayStep.parentId,
+      this.impactPathwayStep.id,
+      this.impactPathwayTask.id,
+      this.impactPathwayTask,
+      'dc.title',
+      0,
+      value
+    );
+  }
 }

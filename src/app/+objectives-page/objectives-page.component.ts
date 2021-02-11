@@ -81,7 +81,7 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
       )),
       tap(([itemRD, parentItemRD, loaded]: [RemoteData<Item>, RemoteData<Item>, boolean]) => {
         if (!loaded) {
-          this.store.dispatch(new InitImpactPathwayAction(parentItemRD.payload))
+          this.store.dispatch(new InitImpactPathwayAction(parentItemRD.payload, true))
         }
       }),
       map(([itemRD, parentItemRD, loaded]: [RemoteData<Item>, RemoteData<Item>, boolean]) => itemRD.payload.id)
