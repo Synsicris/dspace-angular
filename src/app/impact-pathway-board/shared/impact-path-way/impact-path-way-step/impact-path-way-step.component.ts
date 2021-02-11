@@ -15,7 +15,7 @@ import { isNotEmpty } from '../../../../shared/empty.util';
 
 @Component({
   selector: 'ipw-impact-path-way-step',
-  styleUrls: ['../../drag-and-drop-container.component.scss'],
+  styleUrls: ['./impact-path-way-step.component.scss', '../../drag-and-drop-container.component.scss'],
   templateUrl: './impact-path-way-step.component.html',
   animations: [
     fadeInOut

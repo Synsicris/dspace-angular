@@ -1,8 +1,8 @@
 <div class="h-100 d-flex flex-column vertical-step">
-  <div class="p-1 m-2 font-weight-bold d-flex justify-content-between" title="{{getStepTitle() | async}}">
-    <span class="text-truncate">
-      {{getStepTitle() | async}}
-    </span>
+  <div class="p-1 m-2 font-weight-bold d-flex justify-content-between title-content" title="{{getStepTitle() | async}}">
+    <div class="title-clamp">
+      <p title="{{getStepTitle() | async}}">{{getStepTitle() | async}}</p>
+    </div>
     <span class="far fa-question-circle text-info"
        [ngbTooltip]="(getStepInfoTitle() | async)"
        container="body"></span>
