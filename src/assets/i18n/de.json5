@@ -2648,8 +2648,8 @@
   // "impactpathwaystep.listelement.badge": "Impact pathway step",
   "impactpathwaystep.listelement.badge": "Wirkungspfadschritt",
 
-  // "innovationideas.listelement.badge": "Idea for innovation or change",
-  "innovationideas.listelement.badge": "Idee für Innovation oder Veränderung",
+  // "innovationideas.listelement.badge": "Idea for use of project results",
+  "innovationideas.listelement.badge": "Idee für eine Nutzung von Projektergebnissen",
 
 
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
@@ -4158,7 +4158,7 @@
   "participation_events.listelement.badge": "Partizipativer Prozess",
 
   // "patents.listelement.badge": "Patent and utility patent",
-  "patents.listelement.badge": "Patente und Gebrauchsmuster",
+  "patents.listelement.badge": "Patente oder Gebrauchsmuster",
 
   // "person.listelement.badge": "Person",
   "person.listelement.badge": "Person",
@@ -4379,38 +4379,11 @@
   "person.search.title": "DSpace Cris Angular :: Personensuche",
 
 
-  // "physical_objects.listelement.badge": "Object, material",
-  "physical_objects.listelement.badge": "Objekt, Material",
-
-  // "plan_cooperation_events.listelement.badge": "Cooperation process (plan)",
-  "plan_cooperation_events.listelement.badge": "Kooperationsprozess (Plan)",
-
-  // "plan_events.listelement.badge": "Event (plan)",
-  "plan_events.listelement.badge": "Veranstaltung (Plan)",
-
-  // "plan_innovationideas.listelement.badge": "Idea for innovation or change (plan)",
-  "plan_innovationideas.listelement.badge": "Idee für Innovation oder Veränderung (Plan)",
-
-  // "plan_milestones.listelement.badge": "Milestone (plan)",
-  "plan_milestones.listelement.badge": "Meilenstein (Plan)",
-
-  // "plan_participation_events.listelement.badge": "Participative process (plan)",
-  "plan_participation_events.listelement.badge": "Partizipativer Prozess (Plan)",
-
-  // "plan_physical_objects.listelement.badge": "Object, material (plan)",
-  "plan_physical_objects.listelement.badge": "Objekt, Material (Plan)",
-
-  // "plan_spinoffs.listelement.badge": "Spin-off (or association) (plan)",
-  "plan_spinoffs.listelement.badge": "Ausgründung (oder Vereinsgründung) (Plan)",
-
-  // "plan_workpackages.listelement.badge": "Workpackage (plan)",
-  "plan_workpackages.listelement.badge": "Arbeitspaket (Plan)",
-
-  // "plan_tasks.listelement.badge": "Task (plan)",
-  "plan_tasks.listelement.badge": "Aufgabe (Plan)",
+  // "physical_objects.listelement.badge": "Object or material",
+  "physical_objects.listelement.badge": "Gegenstand oder Material",
 
   // "pot_societalimpact.listelement.badge": "Expected societal impact",
-  "pot_societalimpact.listelement.badge": "Erwartete gesellschaftliche Wirkung",
+  "pot_societalimpact.listelement.badge": "Erwartete gesellschaftliche Wirkungen",
 
   // "proj_objectives.listelement.badge": "Project objective",
   "proj_objectives.listelement.badge": "Projektziel",
@@ -5655,49 +5628,6 @@
 
   // "search.filters.entityType.physical_objects": "Object, material",
   "search.filters.entityType.physical_objects": "Objekt, Material",
-
-  // "search.filters.entityType.plan_cooperation_events": "Cooperation process (plan)",
-  "search.filters.entityType.plan_cooperation_events": "Kooperationsprozess (Plan)",
-
-  // "search.filters.entityType.plan_events": "Event (plan)",
-  "search.filters.entityType.plan_events": "Veranstaltung (Plan)",
-
-  // "search.filters.entityType.plan_innovationideas": "Idea for innovation or change (plan)",
-  "search.filters.entityType.plan_innovationideas": "Idee für Innovation oder Veränderung (Plan)",
-
-  // "search.filters.entityType.plan_milestones": "Milestone (plan)",
-  "search.filters.entityType.plan_milestones": "Meilenstein (plan)",
-
-  // "search.filters.entityType.plan_participation_events": "Participative process (plan)",
-  "search.filters.entityType.plan_participation_events": "Partizipativer prozess (Plan)",
-
-  // "search.filters.entityType.plan_physical_objects": "Object, material (plan)",
-  "search.filters.entityType.plan_physical_objects": "Objekt, material (Plan)",
-
-  // "search.filters.entityType.plan_spinoffs": "Spin-off (or association) (plan)",
-  "search.filters.entityType.plan_spinoffs": "Ausgründung (oder Vereinsgründung) (Plan)",
-
-  // "search.filters.entityType.plan_workpackages": "Workpackage (plan)",
-  "search.filters.entityType.plan_workpackages": "Arbeitspaket (Plan)",
-
-  // "search.filters.entityType.plan_tasks": "Task (plan)",
-  "search.filters.entityType.plan_tasks": "Aufgabe (Plan)",
-
-  // "search.filters.entityType.plan_inn_pot_econtech": "Intended business innovation (plan)",
-  "search.filters.entityType.plan_inn_pot_econtech": "Beabsichtigte wirtschaftlich-technische Innovation (Plan)",
-
-  // "search.filters.entityType.plan_inn_pot_social": "Intended social innovation/change process (plan)",
-  "search.filters.entityType.plan_inn_pot_social": "Beabsichtigte soziale Innovation/Veränderungsprozess (Plan)",
-
-  // "search.filters.entityType.plan_patent": "Patent or utility patent (plan)",
-  "search.filters.entityType.plan_patent": "Patent oder Gebrauchsmuster (Plan)",
-
-  // "search.filters.entityType.plan_publication": "Publication (plan)",
-  "search.filters.entityType.plan_publication": "Veröffentlichung (Plan)",
-
-  // "search.filters.entityType.plan_research_quest": "Research quest",
-  // TODO New key - Add a translation
-  "search.filters.entityType.plan_research_quest": "Research quest",
 
   // "search.filters.entityType.pot_societalimpact": "Expected societal impact",
   "search.filters.entityType.pot_societalimpact": "Erwartete gesellschaftliche Wirkung",
@@ -7049,7 +6979,7 @@
 
 
   // "targetgroups.listelement.badge": "Target group",
-  "targetgroups.listelement.badge": "Zielgruppe",
+  "targetgroups.listelement.badge": "Akteursgruppe",
 
   // "tasks.listelement.badge": "Task",
   "tasks.listelement.badge": "Aufgabe",
@@ -7309,7 +7239,7 @@
 
 
   // "conditions.listelement.badge": "External condition or requirement",
-  "conditions.listelement.badge": "Rahmenbedingung/ Anforderung",
+  "conditions.listelement.badge": "Rahmenbedingung / Anforderung",
 
   // "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objectives",
   "contribution_fundingprogramme.listelement.badge": "Beitrag zu förderpolitischen Zielen",
@@ -7321,8 +7251,7 @@
   "ethics.listelement.badge": "Ethische Reflexion",
 
   // "Event.listelement.badge": "Event",
-  // TODO New key - Add a translation
-  "Event.listelement.badge": "Event",
+  "Event.listelement.badge": "Veranstaltung",
 
   // "gender.listelement.badge": "Gender reflection",
   "gender.listelement.badge": "Reflexion der Geschlechtergerechtigkeit",
@@ -7352,38 +7281,33 @@
   "Person.listelement.badge": "Persons",
 
 
-  // "plan_inn_pot_econtech.listelement.badge": "Intended business innovation (plan)",
-  "plan_inn_pot_econtech.listelement.badge": "Beabsichtigte wirtschaftlich-technische Innovation (Plan)",
-
-  // "plan_inn_pot_social.listelement.badge": "Intended social innovation/change process (plan)",
-  "plan_inn_pot_social.listelement.badge": "Beabsichtigte soziale Innovation/Veränderungsprozess (Plan)",
-
-  // "plan_patent.listelement.badge": "Patent or utility patent (plan)",
-  "plan_patent.listelement.badge": "Patent oder Gebrauchsmuster (Plan)",
-
-  // "plan_publication.listelement.badge": "Publication (plan)",
-  "plan_publication.listelement.badge": "Veröffentlichung (Plan)",
-
-  // "plan_research_quest.listelement.badge": "Research quest",
-  // TODO New key - Add a translation
-  "plan_research_quest.listelement.badge": "Research quest",
-
   // "Project.listelement.badge": "Research projects",
   // TODO New key - Add a translation
   "Project.listelement.badge": "Research projects",
 
-  // "research_results.listelement.badge": "Research result",
-  "research_results.listelement.badge": "Forschungsergebniss",
+  // "research_results.listelement.badge": "Research finding",
+  "research_results.listelement.badge": "Forschungsergebnis",
 
-  // "stateofart.listelement.badge": "State of knowledge",
-  "stateofart.listelement.badge": "Stand des Wissens",
+  // "stateofart.listelement.badge": "State of knowledge and adressed problem",
+  "stateofart.listelement.badge": "Stand des Wissens und adressiertes Problem",
 
   // "subproject.listelement.badge": "Subproject",
-  // TODO New key - Add a translation
-  "subproject.listelement.badge": "Subproject",
+  "subproject.listelement.badge": "Teilprojekte",
 
   // "workpackages.listelement.badge": "Work package",
   "workpackages.listelement.badge": "Arbeitspaket",
+
+  //  "others.listelement.badge": "Others",
+  "others.listelement.badge": "Sonstiges",
+
+  //  "innovationpotentials.listelement.badge": "Solution / change / innovation",
+  "innovationpotentials.listelement.badge": "Lösung / Veränderung / Innovation",
+
+  //  "process_events.listelement.badge": "Process of cooperation, participation and working together",
+  "process_events.listelement.badge": "Prozess der Kooperation, Partizipation und Zusammenarbeit ",
+
+  //  "applications.listelement.badge": "Application of a solution / change / innovation",
+  "applications.listelement.badge": "Anwendung einer Lösung / Veränderung / Innovation ",
 
 
   // "tree.description.nuts2": "Nomenclature of territorial units for statistics",

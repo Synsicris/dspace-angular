@@ -1542,7 +1542,7 @@
 
   "impactpathwaystep.listelement.badge": "Impact pathway step",
 
-  "innovationideas.listelement.badge": "Idea for innovation or change",
+  "innovationideas.listelement.badge": "Idea for use of project results",
 
 
   "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
@@ -2613,25 +2613,7 @@
   "person.search.title": "DSpace Cris Angular :: Person Search",
 
 
-  "physical_objects.listelement.badge": "Object, material",
-
-  "plan_cooperation_events.listelement.badge": "Cooperation process (plan)",
-
-  "plan_events.listelement.badge": "Event (plan)",
-
-  "plan_innovationideas.listelement.badge": "Idea for innovation or change (plan)",
-
-  "plan_milestones.listelement.badge": "Milestone (plan)",
-
-  "plan_participation_events.listelement.badge": "Participative process (plan)",
-
-  "plan_physical_objects.listelement.badge": "Object, material (plan)",
-
-  "plan_spinoffs.listelement.badge": "Spin-off (or association) (plan)",
-
-  "plan_workpackages.listelement.badge": "Workpackage (plan)",
-
-  "plan_tasks.listelement.badge": "Task (plan)",
+  "physical_objects.listelement.badge": "Object or material",
 
   "pot_societalimpact.listelement.badge": "Expected societal impact",
 
@@ -3336,34 +3318,6 @@
   "search.filters.entityType.Person": "Persons",
 
   "search.filters.entityType.physical_objects": "Object, material",
-
-  "search.filters.entityType.plan_cooperation_events": "Cooperation process (plan)",
-
-  "search.filters.entityType.plan_events": "Event (plan)",
-
-  "search.filters.entityType.plan_innovationideas": "Idea for innovation or change (plan)",
-
-  "search.filters.entityType.plan_milestones": "Milestone (plan)",
-
-  "search.filters.entityType.plan_participation_events": "Participative process (plan)",
-
-  "search.filters.entityType.plan_physical_objects": "Object, material (plan)",
-
-  "search.filters.entityType.plan_spinoffs": "Spin-off (or association) (plan)",
-
-  "search.filters.entityType.plan_workpackages": "Workpackage (plan)",
-
-  "search.filters.entityType.plan_tasks": "Task (plan)",
-
-  "search.filters.entityType.plan_inn_pot_econtech": "Intended business innovation (plan)",
-
-  "search.filters.entityType.plan_inn_pot_social": "Intended social innovation/change process (plan)",
-
-  "search.filters.entityType.plan_patent": "Patent or utility patent (plan)",
-
-  "search.filters.entityType.plan_publication": "Publication (plan)",
-
-  "search.filters.entityType.plan_research_quest": "Research quest",
 
   "search.filters.entityType.pot_societalimpact": "Expected societal impact",
 
@@ -4396,25 +4350,25 @@
   "Person.listelement.badge": "Persons",
 
 
-  "plan_inn_pot_econtech.listelement.badge": "Intended business innovation (plan)",
-
-  "plan_inn_pot_social.listelement.badge": "Intended social innovation/change process (plan)",
-
-  "plan_patent.listelement.badge": "Patent or utility patent (plan)",
-
-  "plan_publication.listelement.badge": "Publication (plan)",
-
-  "plan_research_quest.listelement.badge": "Research quest",
 
   "Project.listelement.badge": "Research projects",
 
-  "research_results.listelement.badge": "Research result",
+  "research_results.listelement.badge": "Research finding",
 
-  "stateofart.listelement.badge": "State of knowledge",
+  "stateofart.listelement.badge": "State of knowledge and adressed problem",
 
   "subproject.listelement.badge": "Subproject",
 
   "workpackages.listelement.badge": "Work package",
+
+  "others.listelement.badge": "Others",
+
+  "innovationpotentials.listelement.badge": "Solution / change / innovation",
+
+  "process_events.listelement.badge": "Process of cooperation, participation and working together",
+
+  "applications.listelement.badge": "Application of a solution / change / innovation",
+
 
 
   "tree.description.nuts2": "Nomenclature of territorial units for statistics",
