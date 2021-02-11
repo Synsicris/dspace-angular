@@ -72,13 +72,13 @@
           <span><i class='far fa-save'></i></span>
         </button>
         <button *ngIf="data.hasDetail()"
-                class="btn btn-lg btn-link p-0 flex-shrink-1"
+                class="btn btn-lg btn-link p-0 flex-shrink-1 mr-1"
                 title="{{'impact-pathway.objectives.edit.page.title' | translate}}"
                 [disabled]="(isEditingRelation() | async)"
                 (click)="showObjectives(); $event.stopPropagation()"><i class="far fa-list-alt"></i>
         </button>
       </div>
-      <button class="btn btn-lg btn-link p-0 flex-shrink-1"
+      <button *ngIf="!data.hasDetail()" class="btn btn-lg btn-link p-0 flex-shrink-1 mr-1"
               [disabled]="(isEditingRelation() | async)"
               title="{{'impact-pathway.edit.item.title' | translate}}"
               (click)="navigateToSubmissionPage(); $event.stopPropagation()">

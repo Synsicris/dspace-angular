@@ -140,6 +140,7 @@ export class InitImpactPathwayAction implements Action {
   type = ImpactPathwayActionTypes.INIT_IMPACT_PATHWAY;
   payload: {
     item: Item;
+    withTarget: boolean
   };
 
   /**
@@ -148,8 +149,8 @@ export class InitImpactPathwayAction implements Action {
    * @param item
    *    the Item of the impact pathway generated
    */
-  constructor(item: Item) {
-    this.payload = { item };
+  constructor(item: Item, withTarget = false) {
+    this.payload = { item, withTarget };
   }
 }
 

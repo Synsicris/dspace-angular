@@ -7,12 +7,19 @@
     overflow: hidden;
   }
   .sidebar-panel-name {
-    cursor: pointer;
     border-bottom: 1px solid map-get($theme-colors, dark);
+  }
+  .sidebar-panel-name-collapsable {
+    cursor: pointer;
   }
   .sidebar-panel-toggle {
     line-height: $line-height-base;
+    color: black !important;
+    &:active:focus {
+      box-shadow: none;
+    }
   }
+
   .sidebar-panel-content {
     min-height: 300px;
     min-width: 200px;
