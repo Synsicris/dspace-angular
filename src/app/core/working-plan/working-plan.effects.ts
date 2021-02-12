@@ -70,8 +70,8 @@ export class WorkingPlanEffects {
         action.payload.projectId,
         action.payload.metadata,
         action.payload.place).pipe(
-        map((searchItem: WorkpackageSearchItem) => new GenerateWorkpackageSuccessAction(
-          searchItem.item,
+        map((searchItem: Item) => new GenerateWorkpackageSuccessAction(
+          searchItem,
           searchItem.id)),
         catchError((error: Error) => {
           if (error) {
@@ -148,9 +148,9 @@ export class WorkingPlanEffects {
         action.payload.parentId,
         action.payload.workpackageStepType,
         action.payload.metadata).pipe(
-        map((searchItem: WorkpackageSearchItem) => new GenerateWorkpackageStepSuccessAction(
+        map((searchItem: Item) => new GenerateWorkpackageStepSuccessAction(
           action.payload.parentId,
-          searchItem.item,
+          searchItem,
           searchItem.id)),
         catchError((error: Error) => {
           if (error) {

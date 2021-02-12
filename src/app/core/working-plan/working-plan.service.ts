@@ -96,20 +96,34 @@ export class WorkingPlanService {
     this.searchService.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
   }
 
-  generateWorkpackageItem(projectId: string, metadata: MetadataMap, place: string): Observable<WorkpackageSearchItem> {
+  generateWorkpackageItem(projectId: string, metadata: MetadataMap, place: string): Observable<Item> {
     return this.createWorkspaceItem(projectId, environment.workingPlan.workpackageEntityName).pipe(
-      map((submission: SubmissionObject) => ({ id: submission.id, item: submission.item })),
-      tap(() => this.addPatchOperationForWorkpackage(metadata, place)),
-      delay(100),
-      mergeMap((taskItem: WorkpackageSearchItem) => {
-        return this.executeItemPatch(taskItem.item.uuid, 'metadata').pipe(
-          map((item: Item) => ({ id: taskItem.id, item: item }))
-        );
-      }),
+      mergeMap((submission: SubmissionObject) => observableOf(submission.item).pipe(
+        tap(() => this.addPatchOperationForWorkpackage(metadata, place)),
+        delay(100),
+        mergeMap((item: Item) => this.executeItemPatch(item.id, 'metadata').pipe(
+          mergeMap(() => this.depositWorkspaceItem(submission).pipe(
+            getFirstSucceededRemoteDataPayload()
+          ))
+        ))
+      ))
     );
   }
 
-  generateWorkpackageStepItem(projectId: string, parentId: string, stepType: string, metadata: MetadataMap): Observable<WorkpackageSearchItem> {
+  generateWorkpackageStepItem(projectId: string, parentId: string, stepType: string, metadata: MetadataMap): Observable<Item> {
+    return this.createWorkspaceItem(projectId, stepType).pipe(
+      mergeMap((submission: SubmissionObject) => observableOf(submission.item).pipe(
+        tap(() => this.addPatchOperationForWorkpackage(metadata)),
+        delay(100),
+        mergeMap((item: Item) => this.executeItemPatch(item.id, 'metadata').pipe(
+          mergeMap(() => this.depositWorkspaceItem(submission).pipe(
+            getFirstSucceededRemoteDataPayload()
+          ))
+        ))
+      ))
+    );
+  }
+/*  generateWorkpackageStepItem(projectId: string, parentId: string, stepType: string, metadata: MetadataMap): Observable<WorkpackageSearchItem> {
     return this.createWorkspaceItem(projectId, stepType).pipe(
       map((submission: SubmissionObject) => ({ id: submission.id, item: submission.item })),
       tap(() => this.addPatchOperationForWorkpackage(metadata)),
@@ -120,7 +134,7 @@ export class WorkingPlanService {
         );
       })
     );
-  }
+  }*/
 
   getWorkpackageFormConfig(): Observable<SubmissionFormModel> {
     const formName = environment.workingPlan.workingPlanFormName;
@@ -557,6 +571,12 @@ export class WorkingPlanService {
           (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
         )
       )),
+    );
+  }
+
+  private depositWorkspaceItem(submission: SubmissionObject): Observable<RemoteData<Item>> {
+    return this.submissionService.depositSubmission(submission.self).pipe(
+      mergeMap(() => this.itemService.findById((submission.item as Item).id))
     );
   }
 
