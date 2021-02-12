@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable, of as observableOf, throwError } from 'rxjs';
-import { catchError, distinctUntilChanged, filter, flatMap, map, take, takeWhile, tap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, filter, map, mergeMap, take, takeWhile, tap } from 'rxjs/operators';
 import { ReplaceOperation } from 'fast-json-patch';
 
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
@@ -27,6 +27,7 @@ import { SearchResult } from '../../shared/search/search-result.model';
 import {
   configureRequest,
   getFinishedRemoteData,
+  getFirstCompletedRemoteData,
   getFirstSucceededRemoteDataPayload,
   getFirstSucceededRemoteListPayload
 } from '../shared/operators';
@@ -108,7 +109,8 @@ export class ProjectDataService extends CommunityDataService {
   delete(projectId: string): Observable<RemoteData<NoContent>> {
     const projectGroup = `project_${projectId}_group`;
     return super.delete(projectId).pipe(
-      flatMap((response: RemoteData<NoContent>) => {
+      getFirstCompletedRemoteData(),
+      mergeMap((response: RemoteData<NoContent>) => {
         if (response.isSuccess) {
           return this.groupDataService.searchGroups(projectGroup);
         } else {
@@ -123,14 +125,16 @@ export class ProjectDataService extends CommunityDataService {
           throw new Error('Unexpected error while retrieving project group.');
         }
       }),
-      flatMap((group: Group) => this.groupDataService.delete(group.id)),
-/*      map((response: boolean) => {
-        if (response) {
-          return new RestResponse(response, 200, 'OK');
-        } else {
-          throwError('Unexpected error while deleting project group.')
-        }
-      }),*/
+      mergeMap((group: Group) => this.groupDataService.delete(group.id).pipe(
+        getFirstCompletedRemoteData(),
+        map((response: RemoteData<NoContent>) => {
+          if (response.isSuccess) {
+            return response;
+          } else {
+            throwError('Unexpected error while deleting project group.');
+          }
+        })
+      )),
       catchError(() => {
         return createFailedRemoteDataObject$('Unexpected error while deleting project group.');
       })
@@ -145,7 +149,7 @@ export class ProjectDataService extends CommunityDataService {
   getProjectTemplate(): Observable<Community> {
     return this.configurationService.findByPropertyName('project.template-id').pipe(
       getFirstSucceededRemoteDataPayload(),
-      flatMap((conf: ConfigurationProperty) => this.searchCommunityById(conf.values[0])),
+      mergeMap((conf: ConfigurationProperty) => this.searchCommunityById(conf.values[0])),
       map((community) => {
         if (isNotEmpty(community)) {
           return community;
@@ -164,7 +168,7 @@ export class ProjectDataService extends CommunityDataService {
   getProjectTemplateUrl(): Observable<string> {
     return this.configurationService.findByPropertyName('project.template-id').pipe(
       getFirstSucceededRemoteDataPayload(),
-      flatMap((conf: ConfigurationProperty) => this.getEndpoint().pipe(
+      mergeMap((conf: ConfigurationProperty) => this.getEndpoint().pipe(
         map((href) => href + '/' + conf.values[0])
       )));
   }
@@ -177,7 +181,7 @@ export class ProjectDataService extends CommunityDataService {
   getCommunityProjects(): Observable<Community> {
     return this.configurationService.findByPropertyName('project.parent-community-id').pipe(
       getFirstSucceededRemoteDataPayload(),
-      flatMap((conf: ConfigurationProperty) => this.searchCommunityById(
+      mergeMap((conf: ConfigurationProperty) => this.searchCommunityById(
         conf.values[0],
         followLink('parentCommunity'),
         followLink('subcommunities')
@@ -199,7 +203,7 @@ export class ProjectDataService extends CommunityDataService {
    */
   findAllAuthorizedProjects(findListOptions: FindListOptions = {}): Observable<RemoteData<PaginatedList<Community>>> {
     return this.getCommunityProjects().pipe(
-      flatMap((projects) => this.findAllByHref(projects._links.subcommunities.href, findListOptions))
+      mergeMap((projects) => this.findAllByHref(projects._links.subcommunities.href, findListOptions))
     );
   }
 
@@ -217,27 +221,6 @@ export class ProjectDataService extends CommunityDataService {
     });
 
     return result$;
-/*    // Resolve self link for new object
-    const selfLink$ = this.requestService.getByUUID(requestId).pipe(
-      getResponseFromEntry(),
-      map((response: RestResponse) => {
-        if (!response.isSuccessful && response instanceof ErrorResponse) {
-          throw new Error(response.errorMessage);
-        } else {
-          return response;
-        }
-      }),
-      map((response: any) => {
-        if (isNotEmpty(response.resourceSelfLinks)) {
-          return response.resourceSelfLinks[0];
-        }
-      }),
-      distinctUntilChanged()
-    ) as Observable<string>;
-
-    return selfLink$.pipe(
-      switchMap((selfLink: string) => this.findByHref(selfLink, true, followLink('parentCommunity'))),
-    )*/
   }
 
   /**
@@ -254,7 +237,7 @@ export class ProjectDataService extends CommunityDataService {
     };
 
     return this.patch(project, [operation]).pipe(
-      flatMap(() => this.findById(project.id, true, followLink('parentCommunity'))),
+      mergeMap(() => this.findById(project.id, true, followLink('parentCommunity'))),
       getFinishedRemoteData()
     );
   }
@@ -285,11 +268,11 @@ export class ProjectDataService extends CommunityDataService {
         return Object.assign(rd, { payload: payload });
       }),
       map((rd: RemoteData<PaginatedList<Observable<Community>>>) => rd.payload),
-      flatMap((list: PaginatedList<Observable<Community>>) => {
+      mergeMap((list: PaginatedList<Observable<Community>>) => {
         if (list.page.length > 0) {
           return (list.page[0]).pipe(
             map((community: Community) => community),
-            flatMap((community: Community) => this.findById(community.id, true, ...linksToFollow)),
+            mergeMap((community: Community) => this.findById(community.id, true, ...linksToFollow)),
             getFirstSucceededRemoteDataPayload()
           );
         } else {

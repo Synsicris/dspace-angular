@@ -22,10 +22,10 @@ describe('SubmissionFormFooterComponent Component', () => {
   let comp: SubmissionFormFooterComponent;
   let compAsAny: any;
   let fixture: ComponentFixture<SubmissionFormFooterComponent>;
-  let submissionRestServiceStub: SubmissionRestServiceStub;
+  let submissionRestServiceStub: any;
   let scheduler: TestScheduler;
+  let submissionServiceStub: any = new SubmissionServiceStub();
 
-  const submissionServiceStub: SubmissionServiceStub = new SubmissionServiceStub();
   const submissionId = mockSubmissionId;
 
   beforeEach(waitForAsync(() => {
@@ -269,8 +269,8 @@ describe('SubmissionFormFooterComponent Component', () => {
       fixture = TestBed.createComponent(SubmissionFormFooterComponent);
       comp = fixture.componentInstance;
       compAsAny = comp;
-      submissionServiceStub = TestBed.get(SubmissionService);
-      submissionRestServiceStub = TestBed.get(SubmissionRestService);
+      submissionServiceStub = TestBed.inject(SubmissionService);
+      submissionRestServiceStub = TestBed.inject(SubmissionRestService);
       comp.submissionId = submissionId;
       comp.disableDeposit = true;
       submissionServiceStub.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkspaceItem);
