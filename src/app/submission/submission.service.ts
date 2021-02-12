@@ -113,10 +113,12 @@ export class SubmissionService {
    *    The owning collection id
    * @param entityType
    *    The entity type
+   * @param fullProjection
+   *    If true use full projection to make request
    * @return Observable<SubmissionObject>
    *    observable of SubmissionObject
    */
-  createSubmission(collectionId?: string, entityType?: string,): Observable<SubmissionObject> {
+  createSubmission(collectionId?: string, entityType?: string, fullProjection = true): Observable<SubmissionObject> {
     const paramsObj = Object.create({});
 
     if (isNotEmpty(entityType)) {

@@ -75,6 +75,8 @@ export class SubmissionRestService {
     const params: string[] = [];
     if (fullProjection) {
       params.push('projection=full');
+    } else {
+      params.push('embed=submitter&embed=submissionDefinition&embed=item&embed=sections');
     }
     if (collectionId) {
       params.push(`owningCollection=${collectionId}`);
