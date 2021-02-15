@@ -1443,6 +1443,8 @@
   "form.submit": "Submit",
 
 
+  "funding.listelement.badge": "Funding",
+
 
   "home.description": "",
 
@@ -1542,7 +1544,8 @@
 
   "impactpathwaystep.listelement.badge": "Impact pathway step",
 
-  "innovationideas.listelement.badge": "Idea for use of project results",
+
+  "innovationideas.listelement.badge": "Idea for innovation or change",
 
 
   "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
@@ -2613,7 +2616,7 @@
   "person.search.title": "DSpace Cris Angular :: Person Search",
 
 
-  "physical_objects.listelement.badge": "Object or material",
+  "physical_objects.listelement.badge": "Object / material for knowledge transfer and subsequent use in research and teaching",
 
   "pot_societalimpact.listelement.badge": "Expected societal impact",
 
@@ -3747,7 +3750,7 @@
 
   "submission.sections.submit.progressbar.describe.applications_econtech_quant": "Quantification of the use of results and development of the outreach",
 
-  "submission.sections.submit.progressbar.describe.applications_econtech_types": "If no innovation-potential is linked: Type and actors group of the successful use of results",
+  "submission.sections.submit.progressbar.describe.applications_econtech_types": "If no innovation-potential is linked: Type and stakeholder group of the successful use of results",
 
   "submission.sections.submit.progressbar.describe.applications_econtech_types.info": "The following information needs only to be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
 
@@ -3757,15 +3760,15 @@
 
   "submission.sections.submit.progressbar.describe.applications_social_quant.info": "Please provide details about the scope and development of the application success, if possible.",
 
-  "submission.sections.submit.progressbar.describe.applications_social_types": "If no innovation-potential is linked: Type and actors group of the successful use of results",
+  "submission.sections.submit.progressbar.describe.applications_social_types": "If no innovation-potential is linked: Type and stakeholder group of the successful use of results",
 
   "submission.sections.submit.progressbar.describe.applications_social_types.info": "The following information need only be provided if no innovation potential is linked, i.e. if the application of the results has occurred in a different way than described at the end of the project.",
 
-  "submission.sections.submit.progressbar.describe.awards": "Prizes and awards",
+  "submission.sections.submit.progressbar.describe.awards": "Prize or award",
 
   "submission.sections.submit.progressbar.describe.awards.info": "Please document here all prizes and awards related to the project and/ or its results.",
 
-  "submission.sections.submit.progressbar.describe.conditions": "Reflection of external conditions and requirements",
+  "submission.sections.submit.progressbar.describe.conditions": "External condition / requirement",
 
   "submission.sections.submit.progressbar.describe.conditions.info": "Please reflect here on external conditions and requirements that are relevant to the project. Through these considerations, you show that you are aware of relevant conditions and requirements and that you deal with them adequately in the project.",
 
@@ -3783,6 +3786,13 @@
 
   "submission.sections.submit.progressbar.describe.cooperation_events_date": "Dates of personal meetings or other central activities",
 
+
+  "submission.sections.submit.progressbar.describe.funding": "Funding basic information",
+
+
+  "submission.sections.submit.progressbar.describe.journal": "Journal basic information",
+
+
   "submission.sections.submit.progressbar.describe.cooperation_events_date.info": "It is not expected here that every telephone call or frequent web conferences will be recorded with exact data. Please use the frequency information for this purpose.",
 
   "submission.sections.submit.progressbar.describe.cooperation_events_frequency": "Frequency of the cooperation processes",
@@ -3792,6 +3802,13 @@
   "submission.sections.submit.progressbar.describe.cooperation_partners.info": "This area serves to map the cooperation within a project. Cooperation is understood to be the agreed collaboration with other organisations, companies or institutions. Collaboration partners, subcontractors and contractual partners already specified in the easy-online proposal are imported and you only need to add information. Please add informal cooperation partners and all project partners joining after the beginning of the project so that a comprehensive picture of the cooperation partners of the project is available. If desired or required, contracts, letters of intent or similar evidence of cooperation can be uploaded. They will not be published and can only be viewed by the funder.",
 
   "submission.sections.submit.progressbar.describe.cooperation_partners_contribution": "Contribution of the cooperation partner to the project",
+
+
+  "submission.sections.submit.progressbar.describe.person": "Person basic information",
+
+
+  "submission.sections.submit.progressbar.describe.product": "Product basic information",
+
 
   "submission.sections.submit.progressbar.describe.cooperation_partners_orgunits": "Description of the cooperating organisational unit",
 
@@ -3823,13 +3840,13 @@
 
   "submission.sections.submit.progressbar.describe.ethics_use.info": "Project results can touch the limits of what is ethically acceptable in society. Please comment on whether your findings may affect ethical acceptance or have the potential for abuse.",
 
-  "submission.sections.submit.progressbar.describe.events": "Event basic information",
+  "submission.sections.submit.progressbar.describe.events": "Event",
 
-  "submission.sections.submit.progressbar.describe.events.info": "Please record events and interactions that were organised in the project or attended in the project context. Do not include here cooperation processes with your partners or participatory processes that build on each other. These have their own section.",
+  "submission.sections.submit.progressbar.describe.events.info": "Events include events carried out by the project as well as participation in third-party events (e.g. individual workshops, lectures, trade fairs). Interactions such as an interview or a test can also be recorded.<p><i>Please record an event or interaction here. Describe your planning in the application and update and add your information during the project progress.</i></p>Events that are part of a long-term process of cooperation, participation or collaboration, enter under \"Process of cooperation, participation and collaboration\". Please register contributions to scientific conferences for which a conference contribution has been made as publication.</br>It is advisable to collect the project and cooperation partners as well as the relevant stakeholder groups in the project before describing an event.",
 
-  "submission.sections.submit.progressbar.describe.events_result": "Dates of the Event",
+  "submission.sections.submit.progressbar.describe.events_result": "Documentation of the event for reporting purposes",
 
-  "submission.sections.submit.progressbar.describe.events_result.info": "Please only enter several events here if the basic information and groups of actors involved are indeed the same.",
+  "submission.sections.submit.progressbar.describe.events_result.info": "<i>Please provide here details of the event.</i></br>It is advisable to make these entries directly before or after the respective event.</br>You can do uploads to provide informations to the sponsor about the individual events, and, if necessary, to publish it.",
 
   "submission.sections.submit.progressbar.describe.gender_personal": "Gender mainstreaming in the project team",
 
@@ -3881,7 +3898,7 @@
 
   "submission.sections.submit.progressbar.describe.import_subprojects": "Information on the subproject",
 
-  "submission.sections.submit.progressbar.describe.innovationideas": "Ideas for innovation- and change processes",
+  "submission.sections.submit.progressbar.describe.innovationideas": "Idea for the use of project results",
 
   "submission.sections.submit.progressbar.describe.innovationideas.info": "Describe here possible, not yet tangible contributions of the project results to innovation and change processes. If there are concrete intentions in the project to develop certain innovations or to contribute to change processes, select the category intended Innovation or intended change processes. If necessary, enter here additional secondary objectives or possible alternatives to the concrete intentions documented there.",
 
@@ -3927,7 +3944,7 @@
 
   "submission.sections.submit.progressbar.describe.link_to_plan.info": "This entry is made via a button from the planned item and usually leads to an import of the information, which can then be changed and supplemented.",
 
-  "submission.sections.submit.progressbar.describe.milestones": "Milestones",
+  "submission.sections.submit.progressbar.describe.milestones": "Milestone",
 
   "submission.sections.submit.progressbar.describe.orgunits": "Organisation unit",
 
@@ -3943,7 +3960,7 @@
 
   "submission.sections.submit.progressbar.describe.participation_events_frequency": "Planned frequency of the participatory events",
 
-  "submission.sections.submit.progressbar.describe.patents": "Patents and utility patents",
+  "submission.sections.submit.progressbar.describe.patents": "Patent or utility patent",
 
   "submission.sections.submit.progressbar.describe.patents.info": "Please document here the industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
 
@@ -3955,19 +3972,19 @@
 
   "submission.sections.submit.progressbar.describe.persons.info": "This section contains personal information that allows you to use the system and provides contact details for the funding agency.",
 
-  "submission.sections.submit.progressbar.describe.physical_objects": "Objects and materials for knowledge transfer and subsequent use in research and teaching",
+  "submission.sections.submit.progressbar.describe.physical_objects": "Object / material for knowledge transfer and subsequent use in research and teaching",
 
-  "submission.sections.submit.progressbar.describe.physical_objects.info": "<i>Please record here if objects or materials are created in the project that serve the transfer of knowledge or can be used by third parties for research or teaching.</i></br>Do not enter any publications (e.g. text, image, sound or software) here. In case of trial and demonstration sites that can be visited, please use the \"Events\" section.",
+  "submission.sections.submit.progressbar.describe.physical_objects.info": "<i>Please record here if objects or materials are created in the project that serve the transfer of knowledge or can be used by third parties for research or teaching.</i></br>Do not record any kind of publication (e.g. text, image, sound or software) here. In case of trial and demonstration sites that can be visited, please use the \"Events\" section.",
 
   "submission.sections.submit.progressbar.describe.physical_objects_result": "Use and accessibility of the object or material for third parties",
 
   "submission.sections.submit.progressbar.describe.physical_objects_result.info": "<i>Please add here in which form the object can be used by third parties and whom interested parties can contact.</i></br>With the information on the possible uses, you contribute to the subsequent use of your project work.",
 
-  "submission.sections.submit.progressbar.describe.pot_societalimpact": "Expected societal impacts",
+  "submission.sections.submit.progressbar.describe.pot_societalimpact": "Expected societal impact",
 
   "submission.sections.submit.progressbar.describe.pot_societalimpact.info": "The focus is on describing which ecological, economic or social-cultural effects can be associated with an application of the project results. By documenting possible positive as well as negative impacts, you demonstrate the awareness of side effects of your research work and contribute to orienting further innovation processes towards positive impacts and the reduction of side effects.",
 
-  "submission.sections.submit.progressbar.describe.proj_objectives": "Project objectives",
+  "submission.sections.submit.progressbar.describe.proj_objectives": "Project objective",
 
   "submission.sections.submit.progressbar.describe.projects": "Projects",
 
@@ -3989,11 +4006,11 @@
 
   "submission.sections.submit.progressbar.describe.regional_scope.info": "Please describe the possible field of application for the planned innovation or change process.",
 
-  "submission.sections.submit.progressbar.describe.relation_targetgroup": "Relation to the group of actors",
+  "submission.sections.submit.progressbar.describe.relation_targetgroup": "Relation to the stakeholder group",
 
-  "submission.sections.submit.progressbar.describe.relation_targetgroup.info": "Please select the involved or participating group of actors or create a new group of actors if needed. Add details if necessary.",
+  "submission.sections.submit.progressbar.describe.relation_targetgroup.info": "Please select the involved or participating stakeholder group or create a new group if needed. Add details if necessary.",
 
-  "submission.sections.submit.progressbar.describe.spinoffs": "Spin-offs (incl. associations)",
+  "submission.sections.submit.progressbar.describe.spinoffs": "Spin-off (incl. association)",
 
   "submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/ person by founding a company or association.",
 
@@ -4007,11 +4024,11 @@
 
   "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development.info": "This section can be used for surveys.",
 
-  "submission.sections.submit.progressbar.describe.stateofart": "State of knowledge and adressed problem",
+  "submission.sections.submit.progressbar.describe.stateofart": "State of knowledge / problem definition",
 
   "submission.sections.submit.progressbar.describe.stateofart.info": "Please describe here very briefly the state of knowledge and the problem addressed in the project. Upload the detailed text with references.",
 
-  "submission.sections.submit.progressbar.describe.steps": "Next steps and continuation of cooperation after the end of the project",
+  "submission.sections.submit.progressbar.describe.steps": "Next steps and cooperation after the end of the project",
 
   "submission.sections.submit.progressbar.describe.steps.info": "What steps do you intend after the end of the project to further bring project results into application and to continue cooperation (also with other objectives)?",
 
@@ -4019,11 +4036,11 @@
 
   "submission.sections.submit.progressbar.describe.subprojects.info": "During the proposal preparation phase, the information can be entered via the import of the easy-online xml.  During the ongoing project, the information is regularly updated from profi. Please complete the information.",
 
-  "submission.sections.submit.progressbar.describe.targetgroups": "Target groups",
+  "submission.sections.submit.progressbar.describe.targetgroups": "Stakeholder group",
 
-  "submission.sections.submit.progressbar.describe.targetgroups.info": "Who is the target group of your project? <b>Direct</b> target group are groups of actors, that (a) directly may apply and/or benefit from the results or possible solutions of the project; (b) those with whom the project cooperates to investigate a problem and/or develop a solution; (c) which are important to bring results into application and/or to disseminate them. <b>Indirect</b> target groups are in addition groups of actors in society who are touched by the application of the project results in any way in their interests or actions. <i>We thus use the term target group as a synonym for further terms from other concepts such as stakeholders, practitioners, actors from the field of action, end users, multipliers, profiteers or affected persons.</i>",
+  "submission.sections.submit.progressbar.describe.targetgroups.info": "Stakeholder groups in the project are, for example, users, stakeholders, multipliers, profiteers or affected persons. Groups of actors are recorded here in order to assign them to the interactions of the project. This makes it clear which groups of actors are to be involved in the project and in what way, or which groups are to be reached with results.</br>Stakeholder groups can be used to group together a larger number of organisations or persons from the same field of action without naming individual organisations.</br>Please record very closely cooperating actors who play a significant role in the development of project results as organisations.<p><i>Please characterise each stakeholder group in the project separately by filling in this detail page several times.</i></p>",
 
-  "submission.sections.submit.progressbar.describe.tasks": "Tasks",
+  "submission.sections.submit.progressbar.describe.tasks": "Task",
 
   "submission.sections.submit.progressbar.describe.tasks.info": "Use this section only for research tasks and tasks that cannot be assigned to other areas (such as events, participatory processes, etc.).",
 
@@ -4031,7 +4048,7 @@
 
   "submission.sections.submit.progressbar.describe.tests.info": "This area serves only test purposes to implement new features and behaviours.",
 
-  "submission.sections.submit.progressbar.describe.unexpected_results": "Unexpected results and problems",
+  "submission.sections.submit.progressbar.describe.unexpected_results": "Unexpected result or problem",
 
   "submission.sections.submit.progressbar.describe.unexpected_results.info": "Please document findings that can’t be used as planned. These include non-significant results, results that contradict the hypothesis or support the null hypothesis, methodological problems that hindered research work, results that indicate unexpected risks, etc.. By documenting (and ideally publishing) such results, you mark the integrity and responsibility of the research in the project. You avoid wasting resources by replicating research that have already failed, avoid misinterpreting the significance and effect size in reviews and meta-analyses and contribute to the further development of methods. With practice-oriented results, you help to prevent the application of ineffective or risky measures.",
 
@@ -4039,7 +4056,7 @@
 
   "submission.sections.submit.progressbar.describe.upload.info": "If required, you can upload additional information, such as documents, descriptions etc.",
 
-  "submission.sections.submit.progressbar.describe.workpackages": "Description of the workpackage",
+  "submission.sections.submit.progressbar.describe.workpackages": "Workpackage",
 
   "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
 
@@ -4190,8 +4207,7 @@
 
   "treeview.load-more": "Load more",
 
-
-  "vocabulary-treeview.header": "Cascade Dropdown",
+  "vocabulary-treeview.header": "Selection list",
 
   "vocabulary-treeview.load-more": "Load more",
 
@@ -4353,9 +4369,9 @@
 
   "Project.listelement.badge": "Research projects",
 
-  "research_results.listelement.badge": "Research finding",
+  "research_results.listelement.badge": "Research result",
 
-  "stateofart.listelement.badge": "State of knowledge and adressed problem",
+  "stateofart.listelement.badge": "State of knowledge",
 
   "subproject.listelement.badge": "Subproject",
 
