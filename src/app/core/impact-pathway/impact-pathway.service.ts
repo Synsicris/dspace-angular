@@ -403,12 +403,16 @@ export class ImpactPathwayService {
                 map((tasks: ImpactPathwayTask[]) => this.initImpactPathwayTask(taskItem, parentItem.id, tasks))
               );
             } else {
-              // NOTE if a task is not found probably it has been deleted without unlinking it from parent step, so unlink it
-              return this.itemAuthorityRelationService.removeChildRelationFromParent(
-                parentItem.id,
-                task.value,
-                environment.impactPathway.impactPathwayTaskRelationMetadata
-              ).pipe(mapTo(null));
+              if (rd.statusCode === 404) {
+                // NOTE if a task is not found probably it has been deleted without unlinking it from parent step, so unlink it
+                return this.itemAuthorityRelationService.removeChildRelationFromParent(
+                  parentItem.id,
+                  task.value,
+                  environment.impactPathway.impactPathwayTaskRelationMetadata
+                ).pipe(mapTo(null));
+              } else {
+                return observableOf(null);
+              }
             }
           })
         )),
