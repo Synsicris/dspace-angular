@@ -100,7 +100,7 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
         this.model.valueUpdates.next(newValue);
       }
     } else {
-      (this.model as DynamicListRadioGroupModel).valueUpdates.next(this.optionsList[target.value].display);
+      (this.model as DynamicListRadioGroupModel).valueUpdates.next(this.optionsList[target.value]);
     }
     this.change.emit(event);
   }
@@ -128,13 +128,13 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
           if (this.model.repeatable) {
             checked = isNotEmpty(findKey(
               this.model.value,
-              (v) => v.value === option.display));
+              (v) => v.value === option.value));
           } else {
-            checked = this.model.value && option.display === this.model.value.value;
+            checked = this.model.value && option.value === this.model.value.value;
           }
 
           const item: ListItem = {
-            id: option.display,
+            id: value,
             label: option.display,
             value: checked,
             index: key
@@ -144,7 +144,7 @@ export class DsDynamicListComponent extends DynamicFormControlComponent implemen
           } else {
             (this.model as DynamicListRadioGroupModel).options.push({
               label: item.label,
-              value: item.label
+              value: option
             });
           }
           tempList.push(item);
