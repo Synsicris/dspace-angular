@@ -31,7 +31,9 @@
 
       </div>
 
-      <div class="d-flex justify-content-between">
+      <div class="d-flex"
+           [class.justify-content-between]="!isObjectivePage"
+           [class.justify-content-end]="isObjectivePage">
         <div *ngIf="data.hasParent() && !isObjectivePage" class="d-flex justify-content-between w-100">
           <div>
             <button *ngIf="(canShowRelationButton(true) | async)"
