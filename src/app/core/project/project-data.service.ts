@@ -3,7 +3,19 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable, of as observableOf, throwError } from 'rxjs';
-import { catchError, distinctUntilChanged, filter, map, mergeMap, take, takeWhile, tap } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  distinctUntilChanged,
+  filter,
+  map,
+  mapTo,
+  mergeMap,
+  reduce,
+  take,
+  takeWhile,
+  tap
+} from 'rxjs/operators';
 import { ReplaceOperation } from 'fast-json-patch';
 
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
@@ -34,7 +46,7 @@ import {
 import { DSpaceObjectType } from '../shared/dspace-object-type.model';
 import { SearchService } from '../shared/search/search.service';
 import { LinkService } from '../cache/builders/link.service';
-import { createFailedRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { createFailedRemoteDataObject$, createNoContentRemoteDataObject } from '../../shared/remote-data.utils';
 import { followLink, FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { ConfigurationDataService } from '../data/configuration-data.service';
 import { ConfigurationProperty } from '../shared/configuration-property.model';
@@ -106,8 +118,8 @@ export class ProjectDataService extends CommunityDataService {
    *
    * @return the RestResponse as an Observable
    */
-  delete(projectId: string): Observable<RemoteData<NoContent>> {
-    const projectGroup = `project_${projectId}_group`;
+  delete(projectId: string): Observable<any> {
+    const projectGroup = `project_${projectId}`;
     return super.delete(projectId).pipe(
       getFirstCompletedRemoteData(),
       mergeMap((response: RemoteData<NoContent>) => {
@@ -119,22 +131,27 @@ export class ProjectDataService extends CommunityDataService {
       }),
       getFirstSucceededRemoteListPayload(),
       map((groups: Group[]) => {
-        if (groups.length === 1) {
-          return groups[0];
+        if (groups.length === 2) {
+          return groups;
         } else {
           throw new Error('Unexpected error while retrieving project group.');
         }
       }),
-      mergeMap((group: Group) => this.groupDataService.delete(group.id).pipe(
+      mergeMap((groups: Group[]) => groups),
+      concatMap((group: Group) => this.groupDataService.delete(group.id).pipe(
         getFirstCompletedRemoteData(),
         map((response: RemoteData<NoContent>) => {
-          if (response.isSuccess) {
+          // TODO review when https://4science.atlassian.net/browse/CST-3907 is resolved
+          if (response.isSuccess || response.statusCode === 403) {
             return response;
           } else {
             throwError('Unexpected error while deleting project group.');
           }
         })
       )),
+      reduce((acc: any, value: any) => [...acc, value], []),
+      tap((r) => console.log(r)),
+      mapTo((createNoContentRemoteDataObject() as RemoteData<NoContent>)),
       catchError(() => {
         return createFailedRemoteDataObject$('Unexpected error while deleting project group.');
       })

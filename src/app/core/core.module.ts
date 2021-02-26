@@ -206,6 +206,7 @@ import { WorkflowItemSearchResult } from '../shared/object-collection/shared/wor
 import { PoolTaskSearchResult } from '../shared/object-collection/shared/pool-task-search-result.model';
 import { CommunitySearchResult } from '../shared/object-collection/shared/community-search-result.model';
 import { ItemSearchResult } from '../shared/object-collection/shared/item-search-result.model';
+import { ProjectAuthorizationService } from './project/project-authorization.service';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -366,7 +367,8 @@ const PROVIDERS = [
   ImpactPathwayLinksService,
   WorkingPlanService,
   WorkingPlanStateService,
-  ProjectDataService
+  ProjectDataService,
+  ProjectAuthorizationService
 ];
 
 /**

@@ -12,6 +12,8 @@ import { AuditItemMenuComponent } from './audit-item/audit-item-menu.component';
 import { DsoPageEditMenuComponent } from './dso-page-edit/dso-page-edit-menu.component';
 import { ExportCollectionMenuComponent } from './export-collection/export-collection-menu.component';
 import { BulkImportMenuComponent } from './bulk-import/bulk-import-menu.component';
+import { DeleteProjectMenuComponent } from './delete-project/delete-project-menu.component';
+import { ProjectInvitationMenuComponent } from './project-invitation/project-invitation-menu.component';
 
 const COMPONENTS = [
   BulkImportMenuComponent,
@@ -20,7 +22,9 @@ const COMPONENTS = [
   ContextMenuComponent,
   EditItemMenuComponent,
   ExportItemMenuComponent,
-  ExportCollectionMenuComponent
+  ExportCollectionMenuComponent,
+  DeleteProjectMenuComponent,
+  ProjectInvitationMenuComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -29,7 +33,9 @@ const ENTRY_COMPONENTS = [
   AuditItemMenuComponent,
   EditItemMenuComponent,
   ExportItemMenuComponent,
-  ExportCollectionMenuComponent
+  ExportCollectionMenuComponent,
+  DeleteProjectMenuComponent,
+  ProjectInvitationMenuComponent
 ];
 
 const MODULE = [
