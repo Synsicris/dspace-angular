@@ -3259,6 +3259,24 @@
 
 
 
+  "project-overview.invitation.btn" : "Send invitation",
+
+  "project-overview.invitation.title" : "Invitation",
+
+  "project-overview.invitation.email" : "Email",
+
+  "project-overview.invitation.menu.project" : "Invite to project",
+
+  "project-overview.invitation.project.msg" : "Please insert the email address of the person to invite to the project",
+
+  "project-overview.invitation.processing" : "Processing...",
+
+  "project-overview.invitation.sub-project.msg" : "Please insert the email address of the person to invite to the sub-project",
+
+  "project-overview.invitation.error": "There was an issue when sending the invitation, please try again later.",
+
+  "project-overview.invitation.success": "Invitation sent successfully.",
+
   "project-overview.page.header.delete.btn" : "Delete project",
 
   "project-overview.page.header.delete.confirm.cancel": "Cancel",

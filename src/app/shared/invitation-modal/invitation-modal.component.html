@@ -1,0 +1,24 @@
+<div>
+  <div class="modal-header">{{ 'project-overview.invitation.title' | translate }}
+    <button type="button" class="close" (click)="close()" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ds-alert [type]="'alert-info'" [content]="'project-overview.invitation.project.msg'"></ds-alert>
+    <form (ngSubmit)="send();" [formGroup]="invitationForm" >
+      <input type="search"
+             class="form-control"
+             formControlName="email"
+             (click)="$event.stopPropagation();"
+             placeholder="{{'project-overview.invitation.email' | translate }}"
+             dsAutoFocus>
+      <button class="btn btn-success btn-lg btn-block mt-3"
+              [disabled]="!invitationForm.valid || (processing$ | async)"
+              type="submit">
+        <span *ngIf="processing$ | async"><i class='fas fa-circle-notch fa-spin'></i> {{'project-overview.invitation.processing' | translate}}</span>
+        <span *ngIf="!(processing$ | async)">{{'project-overview.invitation.btn' | translate}}</span>
+      </button>
+    </form>
+  </div>
+</div>

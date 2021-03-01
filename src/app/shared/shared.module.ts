@@ -262,6 +262,7 @@ import { SearchSimpleItemService } from './create-simple-item-modal/search-simpl
 import { AuthorityTypeaheadComponent } from './authority-typeahead/authority-typeahead.component';
 import { MaterialModule } from './material/material.module';
 import { CreateProjectComponent } from '../projects/create-project/create-project.component';
+import { InvitationModalComponent } from './invitation-modal/invitation-modal.component';
 
 /**
  * Declaration needed to make sure all decorator functions are called in time
@@ -514,7 +515,8 @@ const COMPONENTS = [
   SearchSimpleItemFilterBoxComponent,
   SimpleItemBoxComponent,
   AuthorityTypeaheadComponent,
-  CreateProjectComponent
+  CreateProjectComponent,
+  InvitationModalComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -633,7 +635,8 @@ const DIRECTIVES = [
     ...COMPONENTS,
     ...DIRECTIVES,
     ...SHARED_ITEM_PAGE_COMPONENTS,
-    ...SHARED_SEARCH_PAGE_COMPONENTS
+    ...SHARED_SEARCH_PAGE_COMPONENTS,
+    InvitationModalComponent
   ],
   providers: [
     ...PROVIDERS

@@ -207,6 +207,7 @@ import { PoolTaskSearchResult } from '../shared/object-collection/shared/pool-ta
 import { CommunitySearchResult } from '../shared/object-collection/shared/community-search-result.model';
 import { ItemSearchResult } from '../shared/object-collection/shared/item-search-result.model';
 import { ProjectAuthorizationService } from './project/project-authorization.service';
+import { ProjectGroupService } from './project/project-group.service';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -368,7 +369,8 @@ const PROVIDERS = [
   WorkingPlanService,
   WorkingPlanStateService,
   ProjectDataService,
-  ProjectAuthorizationService
+  ProjectAuthorizationService,
+  ProjectGroupService
 ];
 
 /**
