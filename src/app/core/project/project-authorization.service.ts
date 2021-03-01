@@ -28,6 +28,24 @@ export class ProjectAuthorizationService {
         ]
       )),
       take(1),
+      map(([isCommunityAdmin, isAdmin]) => isCommunityAdmin || isAdmin),
+      distinctUntilChanged()
+    );
+  }
+
+  /**
+   * Check if user has permission to create a new sub-project
+   */
+  canCreateSubproject(parentProjectUUID): Observable<boolean> {
+    return this.projectDataService.getSubprojectCommunityByParentProjectUUID(parentProjectUUID).pipe(
+      map((community: Community) => community._links.self.href),
+      mergeMap((href: string) => combineLatest([this.authorizationService.isAuthorized(
+        FeatureID.CanCreateCommunities,
+        href),
+          this.authorizationService.isAuthorized(FeatureID.AdministratorOf)
+        ]
+      )),
+      take(1),
       tap(([isCommunityAdmin, isAdmin]) => console.log(isCommunityAdmin, isAdmin)),
       map(([isCommunityAdmin, isAdmin]) => isCommunityAdmin || isAdmin),
       tap((can) => console.log(can)),

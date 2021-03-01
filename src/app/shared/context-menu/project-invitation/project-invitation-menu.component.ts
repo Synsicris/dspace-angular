@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 
 import { take } from 'rxjs/operators';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -22,7 +22,10 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
   templateUrl: './project-invitation-menu.component.html'
 })
 @rendersContextMenuEntriesForType('PROJECT')
-export class ProjectInvitationMenuComponent extends ContextMenuEntryComponent {
+@rendersContextMenuEntriesForType('SUBPROJECT')
+export class ProjectInvitationMenuComponent extends ContextMenuEntryComponent implements OnInit {
+
+  isSubproject;
 
   /**
    * Modal reference
@@ -40,12 +43,17 @@ export class ProjectInvitationMenuComponent extends ContextMenuEntryComponent {
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
-    @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
+    @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: any,
     protected authorizationService: AuthorizationDataService,
     protected modalService: NgbModal,
     protected projectGroupService: ProjectGroupService
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType);
+  }
+
+
+  ngOnInit(): void {
+    this.isSubproject = ((this.contextMenuObjectType as any) === 'SUBPROJECT');
   }
 
   /**
@@ -56,10 +64,18 @@ export class ProjectInvitationMenuComponent extends ContextMenuEntryComponent {
   }
 
   public openInvitationModal() {
-    this.projectGroupService.getAllProjectGroupsByCommunity(this.contextMenuObject as Community).pipe(take(1))
+    let groups$: Observable<string[]>;
+    if (this.isSubproject) {
+      groups$ = this.projectGroupService.getInvitationSubprojectGroupsByCommunity(this.contextMenuObject as Community);
+    } else {
+      groups$ = this.projectGroupService.getInvitationProjectGroupsByCommunity(this.contextMenuObject as Community);
+    }
+
+    groups$.pipe(take(1))
       .subscribe((groups: string[]) => {
         this.modalRef = this.modalService.open(InvitationModalComponent);
         this.modalRef.componentInstance.groupList = groups;
       });
   }
+
 }

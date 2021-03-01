@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -26,6 +26,16 @@ import { Observable } from 'rxjs/internal/Observable';
   templateUrl: './create-project.component.html',
 })
 export class CreateProjectComponent implements OnInit {
+
+  /**
+   * A boolean representing if creation regarding a project or a subproject
+   */
+  @Input() isSubproject = false;
+
+  /**
+   * In case of subproject represent the parent project's UUID
+   */
+  @Input() parentProjectUUID: string;
 
   /**
    * The reject form group
@@ -80,7 +90,15 @@ export class CreateProjectComponent implements OnInit {
   create() {
     this.processing$.next(true);
     const projectName = this.createForm.get('name').value;
-    this.projectService.createProject(projectName).pipe(
+
+    let create$: Observable<RemoteData<Community>>;
+    if (this.isSubproject) {
+      create$ = this.projectService.createSubproject(projectName, this.parentProjectUUID);
+    } else {
+      create$ = this.projectService.createProject(projectName);
+    }
+
+    create$.pipe(
       catchError(() => {
         return createFailedRemoteDataObject$() as Observable<RemoteData<Community>>;
       })
@@ -109,7 +127,11 @@ export class CreateProjectComponent implements OnInit {
    * Navigate to the collection create page
    */
   navigate(dso: DSpaceObject) {
-    this.router.navigate(['project-overview', dso.id]);
+    if (this.isSubproject) {
+      this.router.navigate(['project-overview', this.parentProjectUUID, 'subproject', dso.id]);
+    } else {
+      this.router.navigate(['project-overview', dso.id]);
+    }
   }
 
 }

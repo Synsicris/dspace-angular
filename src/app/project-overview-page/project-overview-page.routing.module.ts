@@ -43,6 +43,12 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
         canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
       },
       {
+        path: ':projectId/subproject',
+        loadChildren: () => import('../sub-project-page/sub-project-page.module')
+          .then((m) => m.SubProjectPageModule),
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+      },
+      {
         path: ':projectId',
         canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
         resolve: {

@@ -1,158 +1,44 @@
-  <div class="row mb-4">
-    <div class="col-md-6 col-xl mb-1">
-      <div class="flex-fill card">
-        <div class="py-4 card-body">
-          <h4 class="word-wrap">{{'project-overview.page.content.impact-pathways' | translate}}</h4>
-          <ul class="list-unstyled">
-            <li *ngFor="let impactPathway of (impactPathwayList | async)">
-              <button class="btn btn-link m-0 p-0" (click)="navigateToImpactPathway(impactPathway)">
-                <span class="h5">{{getImpactPathwayName(impactPathway)}}</span>
+<div class="row mb-4">
+  <div class="col-md-6 col-xl mb-1">
+    <div class="flex-fill card">
+      <div class="py-4 card-body">
+        <h4 class="word-wrap">{{'project-overview.page.subproject.card.title' | translate}}</h4>
+        <ds-loading *ngIf="(loading$ | async)" [showMessage]="false"></ds-loading>
+        <ul class="list-unstyled">
+          <li *ngFor="let subproject of (subprojectList$ | async)">
+            <button class="btn btn-link m-0 p-0" (click)="navigateToSubProject(subproject)">
+              <span class="h5">{{getSubprojectName(subproject)}}</span>
+            </button>
+          </li>
+          <li *ngIf="!(loading$ | async) && (subprojectList$ | async)?.length === 0">
+            <span class="h5 text-muted">{{'project-overview.page.subproject.none-available' | translate}}</span>
+          </li>
+        </ul>
+        <nav *ngIf="(subprojectListPageInfo$ | async)?.totalPages > 1">
+          <ul class="pagination">
+            <li class="page-item {{ ((subprojectListPageInfo$ | async)?.currentPage <= 1) ? 'disabled' : ''}}">
+              <button class="page-link" aria-label="Previous"
+                      (click)="retrieveSubprojectList()">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </button>
+            </li>
+            <li class="page-item {{ ((subprojectListPageInfo$ | async)?.currentPage >= (subprojectListPageInfo$ | async)?.totalPages) ? 'disabled' : ''}}">
+              <button class="page-link" aria-label="Next"
+                      (click)="retrieveSubprojectList()">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
               </button>
             </li>
           </ul>
-          <nav *ngIf="(impactPathwayListPageInfo | async)?.totalPages > 1">
-            <ul class="pagination">
-              <li class="page-item {{ ((impactPathwayListPageInfo | async)?.currentPage <= 1) ? 'disabled' : ''}}">
-                <button class="page-link" aria-label="Previous"
-                        (click)="retrievePrevProjectList()">
-                  <span aria-hidden="true">&laquo;</span>
-                  <span class="sr-only">Previous</span>
-                </button>
-              </li>
-              <li class="page-item {{ ((impactPathwayListPageInfo | async)?.currentPage >= (impactPathwayListPageInfo | async)?.totalPages) ? 'disabled' : ''}}">
-                <button class="page-link" aria-label="Next"
-                        (click)="retrieveNextProjectList()">
-                  <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
-                </button>
-              </li>
-            </ul>
-          </nav>
-          <button class="btn btn-link btn-lg p-0 m-0 h3 text-decoration-none text-left" role="button" (click)="createImpactPathway()">
-            <i class="fas fa-plus-circle"></i>
-            <span class="text-dark"> {{'project-overview.page.content.new-impact-pathway' | translate}}</span>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6 col-xl mb-1">
-      <div class="flex-fill card">
-        <div class="py-4 card-body">
-          <p>
-            <a class="h3 mb-2 text-decoration-none" role="button"
-               [routerLink]="['/project-overview', projectUUID , 'workingplan']">
-              <span>{{'project-overview.page.content.working-plan' | translate}}</span>
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6 col-xl mb-1">
-      <div class="flex-fill card">
-        <div class="py-4 card-body">
-          <p>
-            <a class="h3 mb-2 text-decoration-none" routerLink="./" role="button">
-              <span>{{'project-overview.page.content.exploitation-plan' | translate}}</span>
-            </a>
-          </p>
-        </div>
+        </nav>
+        <button *ngIf="(canCreateSubproject() | async)"
+                class="btn btn-link btn-lg p-0 m-0 h3 text-decoration-none text-left" role="button"
+                (click)="createSubproject()">
+          <i class="fas fa-plus-circle"></i>
+          <span class="text-dark"> {{'project-overview.page.subproject.create.btn' | translate}}</span>
+        </button>
       </div>
     </div>
   </div>
-  <div class="row mb-4">
-    <div class="col-md-6 col-xl mb-1">
-      <div class="flex-fill card">
-        <div class="py-4 card-body">
-          <p>
-            <a class="h3 mb-2 text-decoration-none"
-               [routerLink]="[projectRoute, projectUUID, mydspacePage]"
-               [queryParams]="{configuration: 'workspace', scope: projectUUID}">
-              <span>{{'project-overview.page.content.all-items' | translate}}</span>
-            </a>
-          </p>
-        </div>
-      </div>
-      <div class="flex-fill card mt-2">
-        <div class="py-4 card-body">
-          <p>
-            <a class="h3 mb-2 text-decoration-none" routerLink="./" role="button">
-              <span>{{'project-overview.page.content.reports' | translate}}</span>
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-3 mb-1">
-      <div class="flex-fill card">
-        <div class="py-4 card-body">
-          <h4 class="word-wrap">Kooperationspartner und Akteursgruppen</h4>
-          <ul class="list-unstyled">
-            <li><a class="h5" [routerLink]="" (click)="navigateToMydspaceByScope('123456789/26')">Kooperationspartner</a></li>
-            <li><a class="h5" [routerLink]="" (click)="navigateToMydspaceByScope('123456789/188')">Akteursgruppen</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-3 mb-1">
-      <div class="flex-fill card">
-        <div class="py-4 card-body">
-          <h4 class="word-wrap">Aktivitäten</h4>
-          <ul class="list-unstyled">
-            <li><a class="h5" [routerLink]="['./activities', 'plan', 'list']">Plan</a></li>
-            <li><a class="h5" [routerLink]="['./activities', 'ist', 'list']">IST</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-3 mb-1">
-      <div class="flex-fill card">
-        <div class="py-4 card-body">
-          <h4 class="word-wrap">Veröffentlichungen</h4>
-          <ul class="list-unstyled">
-            <li><a class="h5" [routerLink]="" (click)="navigateToMydspaceByScope('123456789/129')">Plan</a></li>
-            <li><a class="h5" [routerLink]="" (click)="navigateToMydspaceByScope('123456789/11')">IST</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6 col-xl mb-1">
-      <div class="flex-fill card">
-        <div class="py-4 card-body">
-          <h4 class="word-wrap">{{'project-overview.page.content.card-project.title' | translate}}</h4>
-          <ul class="list-unstyled">
-            <li>
-              <a class="h5 mb-2 text-decoration-none" routerLink="./" role="button">
-                <span>{{'project-overview.page.content.card-project.link1' | translate}}</span>
-              </a>
-            </li>
-            <li>
-              <a class="h5 mb-2 text-decoration-none" routerLink="./" role="button">
-                <span>{{'project-overview.page.content.card-project.link2' | translate}}</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6 col-xl mb-1">
-      <div class="flex-fill card">
-        <div class="py-4 card-body">
-          <h4 class="word-wrap">{{'project-overview.page.content.card-checklist.title' | translate}}</h4>
-          <ul class="list-unstyled">
-            <li>
-              <a class="h5 mb-2 text-decoration-none" routerLink="./" role="button">
-                <span>{{'project-overview.page.content.card-checklist.link1' | translate}}</span>
-              </a>
-            </li>
-            <li>
-              <a class="h5 mb-2 text-decoration-none" routerLink="./" role="button">
-                <span>{{'project-overview.page.content.card-checklist.link2' | translate}}</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>

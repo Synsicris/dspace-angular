@@ -3321,6 +3321,12 @@
 
   "project-overview.page.content.working-plan" : "Working plan",
 
+  "project-overview.page.subproject.card.title" : "Your Subprojects",
+
+  "project-overview.page.subproject.create.btn" : "Create new Subproject",
+
+  "project-overview.page.subproject.none-available" : "No subproject available",
+
   "project-overview.page.title" : "Project overview",
 
 
