@@ -25,6 +25,7 @@ import { ProjectPageResolver } from '../projects/project-page.resolver';
     ])
   ],
   providers: [
+    ItemPageResolver,
     ProjectPageResolver
   ]
 })
