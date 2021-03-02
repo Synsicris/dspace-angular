@@ -14,6 +14,7 @@ import { ExportCollectionMenuComponent } from './export-collection/export-collec
 import { BulkImportMenuComponent } from './bulk-import/bulk-import-menu.component';
 import { DeleteProjectMenuComponent } from './delete-project/delete-project-menu.component';
 import { ProjectInvitationMenuComponent } from './project-invitation/project-invitation-menu.component';
+import { GenerateReportMenuComponent } from './generate-report/generate-report-menu.component';
 
 const COMPONENTS = [
   BulkImportMenuComponent,
@@ -24,7 +25,8 @@ const COMPONENTS = [
   ExportItemMenuComponent,
   ExportCollectionMenuComponent,
   DeleteProjectMenuComponent,
-  ProjectInvitationMenuComponent
+  ProjectInvitationMenuComponent,
+  GenerateReportMenuComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -35,7 +37,8 @@ const ENTRY_COMPONENTS = [
   ExportItemMenuComponent,
   ExportCollectionMenuComponent,
   DeleteProjectMenuComponent,
-  ProjectInvitationMenuComponent
+  ProjectInvitationMenuComponent,
+  GenerateReportMenuComponent
 ];
 
 const MODULE = [
