@@ -72,10 +72,10 @@
                   (click)="showObjectives(); $event.stopPropagation()"><i class="far fa-list-alt"></i>
           </button>
         </div>
-        <button *ngIf="!data.hasDetail()" class="btn btn-lg btn-link p-0 flex-shrink-1"
+        <button *ngIf="!data.hasDetail() && canEdit()" class="btn btn-lg btn-link p-0 flex-shrink-1"
                 [disabled]="(isEditingRelation() | async)"
                 title="{{'impact-pathway.edit.item.title' | translate}}"
-                (click)="navigateToSubmissionPage(); $event.stopPropagation()">
+                (click)="navigateToEditItemPage(); $event.stopPropagation()">
           <span *ngIf="!(isRedirectingToEdit$ | async)"><i class="fas fa-edit"></i></span>
           <span *ngIf="(isRedirectingToEdit$ | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
         </button>

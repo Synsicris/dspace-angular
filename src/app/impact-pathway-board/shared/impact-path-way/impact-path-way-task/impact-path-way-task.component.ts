@@ -11,8 +11,8 @@ import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact
 import { ImpactPathwayLinksService } from '../../../../core/impact-pathway/impact-pathway-links.service';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { WorkspaceitemDataService } from '../../../../core/submission/workspaceitem-data.service';
-import { getFirstSucceededRemoteDataPayload } from '../../../../core/shared/operators';
-import { WorkspaceItem } from '../../../../core/submission/models/workspaceitem.model';
+import { EditItemDataService } from '../../../../core/submission/edititem-data.service';
+import { EditItemMode } from '../../../../core/submission/models/edititem-mode.model';
 
 @Component({
   selector: 'ipw-impact-path-way-task',
@@ -48,6 +48,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   @Output() public deselected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
 
   constructor(
+    private editItemDataService: EditItemDataService,
     private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
     private router: Router,
@@ -148,13 +149,13 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
     }
   }
 
-  public navigateToSubmissionPage(): void {
+  public navigateToEditItemPage(): void {
     this.isRedirectingToEdit$.next(true);
-    this.workspaceItemService.findByItem(this.data.id).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      map((taskWsi: WorkspaceItem) => taskWsi.id)
-    ).subscribe((workspaceItemId: string) => {
-      this.router.navigate(['workspaceitems', workspaceItemId, 'edit']);
+    this.editItemDataService.searchEditModesByID(this.data.id).pipe(
+      filter((editModes: EditItemMode[]) => editModes && editModes.length > 0),
+      map((editModes: EditItemMode[]) => editModes[0])
+    ).subscribe((editMode: EditItemMode) => {
+      this.router.navigate(['edit-items', this.data.id + ':' + editMode.name]);
       this.isRedirectingToEdit$.next(false);
     });
   }
@@ -203,5 +204,11 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
+  }
+
+  canEdit(): Observable<boolean> {
+    return this.editItemDataService.searchEditModesByID(this.data.id).pipe(
+      map((editModes: EditItemMode[]) => editModes && editModes.length > 0)
+    );
   }
 }
