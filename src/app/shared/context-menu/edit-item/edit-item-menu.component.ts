@@ -1,13 +1,11 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { map, mergeMap, startWith } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+
 import { hasValue, isNotEmpty } from '../../empty.util';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
-import { followLink } from '../../utils/follow-link-config.model';
-import { getAllSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../../../core/shared/operators';
-import { EditItem } from '../../../core/submission/models/edititem.model';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
@@ -63,11 +61,7 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
 
   ngOnInit(): void {
     // Retrieve edit modes
-    this.sub = this.editItemService.findById(this.contextMenuObject.id + ':none', true, followLink('modes')).pipe(
-      getAllSucceededRemoteDataPayload(),
-      mergeMap((editItem: EditItem) => editItem.modes.pipe(
-        getFirstSucceededRemoteListPayload())
-      ),
+    this.sub = this.editItemService.searchEditModesByID(this.contextMenuObject.id).pipe(
       startWith([])
     ).subscribe((editModes: EditItemMode[]) => {
       this.editModes$.next(editModes);
