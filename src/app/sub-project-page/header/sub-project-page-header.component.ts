@@ -29,7 +29,6 @@ export class SubProjectPageHeaderComponent {
    * Return project name
    */
   getProjectName(): string {
-    console.log('getProjectName', this.project);
     return this.nameService.getName(this.project);
   }
 

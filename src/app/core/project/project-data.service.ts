@@ -306,9 +306,7 @@ export class ProjectDataService extends CommunityDataService {
             const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<any>;
             return Object.assign(rd, { payload: payload });
           }),
-          tap((r) => console.log('retrieveSubprojectsByParentProjectUUID pre ', r)),
           getFirstSucceededRemoteDataPayload(),
-          tap((r) => console.log('retrieveSubprojectsByParentProjectUUID post ', r)),
           distinctUntilChanged()
         );
       })

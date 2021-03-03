@@ -13,7 +13,7 @@ import { PaginatedList } from '../core/data/paginated-list.model';
 import { DSONameService } from '../core/breadcrumbs/dso-name.service';
 import { ProjectAuthorizationService } from '../core/project/project-authorization.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { take, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { hasValue } from '../shared/empty.util';
 
@@ -62,8 +62,7 @@ export class CoordinatorPageComponent implements OnInit {
     this.retrieveProjectList();
     this.subs.push(
       this.projectAuthorizationService.canCreateProject().pipe(
-        take(1),
-        tap((can) => console.log('canCreateProject', can))
+        take(1)
       ).subscribe((canCreateProject: boolean) => {
         this.canCreateProject$.next(canCreateProject);
       })

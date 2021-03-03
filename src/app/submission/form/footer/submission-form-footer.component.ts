@@ -103,7 +103,6 @@ export class SubmissionFormFooterComponent implements OnChanges {
         this.submissionService.getSubmissionScope() === SubmissionScopeType.WorkspaceItem);
       this.showSaveForLater = observableOf(!this.disableSaveForLater ||
         (this.disableSaveForLater && this.submissionService.getSubmissionScope() !== SubmissionScopeType.WorkspaceItem));
-      console.log(this.submissionService.getSubmissionScope());
       this.hasUnsavedModification = this.submissionService.hasUnsavedModification();
     }
   }

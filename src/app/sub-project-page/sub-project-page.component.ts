@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
-import {
-  getFirstSucceededRemoteDataPayload,
-  redirectOn4xx
-} from '../core/shared/operators';
+import { getFirstSucceededRemoteDataPayload, redirectOn4xx } from '../core/shared/operators';
 import { Community } from '../core/shared/community.model';
 import { AuthService } from '../core/auth/auth.service';
 
@@ -58,7 +55,6 @@ export class SubProjectPageComponent implements OnInit {
 
     this.subprojectRD$ = this.route.data.pipe(
       map((data) => data.subproject as RemoteData<Community>),
-      tap((s) => console.log('subprojectRD$', s)),
       redirectOn4xx(this.router, this.authService)
     );
 
