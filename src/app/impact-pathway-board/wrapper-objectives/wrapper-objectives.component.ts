@@ -31,13 +31,13 @@ export class WrapperObjectivesComponent {
   }
 
   getObjectivesTasks() {
-    return this.impactPathwayStep.tasks.filter((task) => task.type === 'proj_objectives')
+    return this.impactPathwayStep.tasks.filter((task) => task.type === 'proj_objectives');
   }
 
   back() {
     this.router.navigate(
       ['/project-overview', this.projectId, 'impactpathway', this.impactPathwayStep.parentId, 'edit']
-    )
+    );
   }
 
   hasInfoMessage(): boolean {

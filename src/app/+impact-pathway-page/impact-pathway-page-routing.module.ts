@@ -30,6 +30,7 @@ import { ProjectI18nBreadcrumbsService } from '../core/breadcrumbs/project-i18n-
     ])
   ],
   providers: [
+    ItemPageResolver,
     ProjectI18nBreadcrumbResolver,
     ProjectI18nBreadcrumbsService,
     ProjectPageResolver

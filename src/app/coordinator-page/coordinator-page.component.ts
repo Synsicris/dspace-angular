@@ -11,6 +11,11 @@ import { FindListOptions } from '../core/data/request.models';
 import { PageInfo } from '../core/shared/page-info.model';
 import { PaginatedList } from '../core/data/paginated-list.model';
 import { DSONameService } from '../core/breadcrumbs/dso-name.service';
+import { ProjectAuthorizationService } from '../core/project/project-authorization.service';
+import { Observable } from 'rxjs/internal/Observable';
+import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { hasValue } from '../shared/empty.util';
 
 @Component({
   selector: 'ds-coordinator-page',
@@ -25,6 +30,11 @@ export class CoordinatorPageComponent implements OnInit {
   elementsPerPage = 5;
 
   /**
+   * A boolean representing if user can create a new project
+   */
+  canCreateProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * The list of available projects
    */
   projectList: BehaviorSubject<Community[]> = new BehaviorSubject<Community[]>([]);
@@ -34,9 +44,15 @@ export class CoordinatorPageComponent implements OnInit {
    */
   projectsPageInfo: BehaviorSubject<PageInfo> = new BehaviorSubject<PageInfo>(null);
 
+  /**
+   * Array to track all subscriptions and unsubscribe them onDestroy
+   */
+  private subs: Subscription[] = [];
+
   constructor(
     protected modalService: NgbModal,
     protected nameService: DSONameService,
+    protected projectAuthorizationService: ProjectAuthorizationService,
     protected projectService: ProjectDataService) { }
 
   /**
@@ -44,6 +60,20 @@ export class CoordinatorPageComponent implements OnInit {
    */
   ngOnInit() {
     this.retrieveProjectList();
+    this.subs.push(
+      this.projectAuthorizationService.canCreateProject().pipe(
+        take(1)
+      ).subscribe((canCreateProject: boolean) => {
+        this.canCreateProject$.next(canCreateProject);
+      })
+    );
+  }
+
+  /**
+   * Check if user has permission to create a new project
+   */
+  canCreateProject(): Observable<boolean> {
+    return this.canCreateProject$.asObservable();
   }
 
   /**
@@ -71,12 +101,12 @@ export class CoordinatorPageComponent implements OnInit {
     const options: FindListOptions = {
       elementsPerPage: this.elementsPerPage,
       currentPage: page
-    }
+    };
     this.projectService.findAllAuthorizedProjects(options).pipe(
       getFirstSucceededRemoteDataPayload()
     ).subscribe((list: PaginatedList<Community>) => {
       this.projectList.next(list.page);
-      this.projectsPageInfo.next(list.pageInfo)
+      this.projectsPageInfo.next(list.pageInfo);
     });
   }
 
@@ -92,5 +122,14 @@ export class CoordinatorPageComponent implements OnInit {
    */
   retrieveNextProjectList() {
     this.retrieveProjectList(this.projectsPageInfo.value.currentPage + 1);
+  }
+
+  /**
+   * Unsubscribe from all subscriptions
+   */
+  ngOnDestroy(): void {
+    this.subs
+      .filter((sub) => hasValue(sub))
+      .forEach((sub) => sub.unsubscribe());
   }
 }

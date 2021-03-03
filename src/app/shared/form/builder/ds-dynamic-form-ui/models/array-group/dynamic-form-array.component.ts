@@ -6,6 +6,7 @@ import {
   DynamicFormControlCustomEvent,
   DynamicFormControlEvent,
   DynamicFormControlEventType,
+  DynamicFormControlLayout,
   DynamicFormControlModel,
   DynamicFormLayout,
   DynamicFormLayoutService,
@@ -24,8 +25,9 @@ export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
 
   @Input() bindId = true;
   @Input() formModel: DynamicFormControlModel[];
+  @Input() formLayout: DynamicFormLayout;
   @Input() group: FormGroup;
-  @Input() layout: DynamicFormLayout;
+  @Input() layout: DynamicFormControlLayout;
   @Input() model: DynamicFormArrayModel;
   @Input() templates: QueryList<DynamicTemplateDirective> | undefined;
 
@@ -67,6 +69,6 @@ export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
       context: { index: index - 1}
     });
 
-    this.onChange($event)
+    this.onChange($event);
   }
 }

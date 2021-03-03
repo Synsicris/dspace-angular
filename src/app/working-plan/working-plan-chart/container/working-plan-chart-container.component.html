@@ -38,13 +38,12 @@
                   (click)="addChildStep(node)">
             <mat-icon>add</mat-icon>
           </button>
-          <button *ngIf="dataSource.data.length > 1"
-                  class="btn btn-lg btn-link p-0 text-danger mr-1"
+          <button class="btn btn-lg btn-link p-0 text-danger mr-1"
                   title="{{'working-plan.chart.button.remove' | translate}}"
                   [class.ml-1]="node.level !== 0"
                   [disabled]="(isProcessingWorkpackageRemove(node) | async)"
                   (click)="deleteStep(node); $event.stopPropagation()">
-            <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='far fa-trash-alt'></i></span>
+            <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
             <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
           </button>
         </mat-tree-node>
@@ -88,13 +87,12 @@
           <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level < 3" title="{{'working-plan.chart.button.add' | translate}}">
             <mat-icon>add</mat-icon>
           </button>
-          <button *ngIf="dataSource.data.length > 1"
-                  class="btn btn-lg btn-link p-0 text-danger mr-1"
+          <button class="btn btn-lg btn-link p-0 text-danger mr-1"
                   title="{{'working-plan.chart.button.remove' | translate}}"
                   [class.ml-1]="node.level < 3"
                   [disabled]="(isProcessingWorkpackageRemove(node) | async)"
                   (click)="deleteStep(node); $event.stopPropagation()">
-            <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='far fa-trash-alt'></i></span>
+            <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
             <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
           </button>
         </mat-tree-node>

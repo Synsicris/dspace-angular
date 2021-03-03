@@ -19,7 +19,8 @@
             (click)="save($event)">
       <span>{{'submission.general.save' | translate}}</span>
     </button>
-    <button type="button"
+    <button *ngIf="(showSaveForLater | async)"
+            type="button"
             class="btn btn-info"
             id="saveForLater"
             [disabled]="(processingSaveStatus | async)"

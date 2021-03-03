@@ -2,11 +2,13 @@ import { Observable, of as observableOf } from 'rxjs';
 
 import { PageInfo } from '../../core/shared/page-info.model';
 import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
-import { PaginatedList, buildPaginatedList } from '../../core/data/paginated-list.model';
+import { buildPaginatedList, PaginatedList } from '../../core/data/paginated-list.model';
 import { createSuccessfulRemoteDataObject$ } from '../remote-data.utils';
 import { RemoteData } from '../../core/data/remote-data';
 import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
 import { Vocabulary } from '../../core/submission/vocabularies/models/vocabulary.model';
+import { FollowLinkConfig } from '../utils/follow-link-config.model';
+import { VocabularyEntryDetail } from '../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 
 export class VocabularyServiceStub {
 
@@ -20,7 +22,7 @@ export class VocabularyServiceStub {
   }
 
   getList() {
-    return this._payload
+    return this._payload;
   }
 
   getVocabularyEntries(vocabularyOptions: VocabularyOptions, pageInfo: PageInfo): Observable<RemoteData<PaginatedList<VocabularyEntry>>> {
@@ -41,5 +43,13 @@ export class VocabularyServiceStub {
 
   findVocabularyById(id: string): Observable<RemoteData<Vocabulary>> {
     return;
+  }
+
+  searchVocabularyByMetadataAndCollection(vocabularyOptions: VocabularyOptions): Observable<RemoteData<Vocabulary>> {
+    return;
+  }
+
+  findEntryDetailById(id: string, name: string, ...linksToFollow: FollowLinkConfig<VocabularyEntryDetail>[]): Observable<VocabularyEntry> {
+    return observableOf(Object.assign(new VocabularyEntry(), { authority: 1, display: 'one', value: 1 }));
   }
 }

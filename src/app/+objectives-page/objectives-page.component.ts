@@ -75,14 +75,14 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
           filter((parentItemRD: RemoteData<Item>) => parentItemRD.hasSucceeded && isNotEmpty(parentItemRD.payload)),
           take(1),
           map((parentItemRD: RemoteData<Item>) => [itemRD, parentItemRD])
-        )
+        );
       }),
       flatMap(([itemRD, parentItemRD]: [RemoteData<Item>, RemoteData<Item>]) => this.impactPathwayService.isImpactPathwayLoadedById(parentItemRD.payload.id).pipe(
         map((loaded) => [itemRD, parentItemRD, loaded])
       )),
       tap(([itemRD, parentItemRD, loaded]: [RemoteData<Item>, RemoteData<Item>, boolean]) => {
         if (!loaded) {
-          this.store.dispatch(new InitImpactPathwayAction(parentItemRD.payload))
+          this.store.dispatch(new InitImpactPathwayAction(parentItemRD.payload, true));
         }
       }),
       map(([itemRD, parentItemRD, loaded]: [RemoteData<Item>, RemoteData<Item>, boolean]) => itemRD.payload.id)

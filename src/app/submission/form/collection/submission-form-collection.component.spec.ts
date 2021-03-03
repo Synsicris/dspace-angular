@@ -1,11 +1,13 @@
 import { ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import { cold } from 'jasmine-marbles';
+import { of } from 'rxjs';
 
 import { SubmissionServiceStub } from '../../../shared/testing/submission-service.stub';
 import { mockSubmissionId, mockSubmissionRestResponse } from '../../../shared/mocks/submission.mock';
@@ -18,9 +20,9 @@ import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/jso
 import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { createTestComponent } from '../../../shared/testing/utils.test';
 import { CollectionDataService } from '../../../core/data/collection-data.service';
-import { cold } from 'jasmine-marbles';
-import { of } from 'rxjs';
 import { SectionsService } from '../../sections/sections.service';
+import { Collection } from '../../../core/shared/collection.model';
+import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
 import { getMockRequestService } from '../../../shared/mocks/request.service.mock';
 import { RequestService } from '../../../core/data/request.service';
 import { SubmissionDefinitionsConfigService } from '../../../core/config/submission-definitions-config.service';
@@ -40,6 +42,20 @@ describe('SubmissionFormCollectionComponent Component', () => {
   const submissionDefinitionRestResponse = { payload: mockSubmissionRestResponse[0].submissionDefinition };
   const searchedCollection = 'Community 2-Collection 2';
   const requestServce = getMockRequestService();
+
+  const mockCollection = Object.assign(new Collection(), {
+    name: 'Community 1-Collection 1',
+    id: collectionId,
+    metadata: [
+      {
+        key: 'dc.title',
+        language: 'en_US',
+        value: 'Community 1-Collection 1'
+      }],
+    _links: {
+      defaultAccessConditions: collectionId + '/defaultAccessConditions'
+    }
+  });
 
   const mockCollectionList = [
     {
@@ -118,7 +134,7 @@ describe('SubmissionFormCollectionComponent Component', () => {
     getConfigByHref: jasmine.createSpy('getConfigByHref')
   });
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
@@ -153,6 +169,7 @@ describe('SubmissionFormCollectionComponent Component', () => {
 
     // synchronous beforeEach
     beforeEach(() => {
+      collectionDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(mockCollection));
       const html = `
         <ds-submission-form-collection [currentCollectionId]="collectionId"
                                        [currentDefinition]="definitionId"
@@ -180,8 +197,8 @@ describe('SubmissionFormCollectionComponent Component', () => {
       fixture = TestBed.createComponent(SubmissionFormCollectionComponent);
       comp = fixture.componentInstance;
       compAsAny = comp;
-      submissionServiceStub = TestBed.get(SubmissionService);
-      jsonPatchOpServiceStub = TestBed.get(SubmissionJsonPatchOperationsService);
+      submissionServiceStub = TestBed.inject(SubmissionService as any);
+      jsonPatchOpServiceStub = TestBed.inject(SubmissionJsonPatchOperationsService as any);
       comp.currentCollectionId = collectionId;
       comp.currentDefinition = definition;
       comp.submissionId = submissionId;
@@ -301,7 +318,7 @@ describe('SubmissionFormCollectionComponent Component', () => {
       }));
 
       it('dropdown button should be disabled if there is no choice', fakeAsync(() => {
-        comp.hasChoice = false
+        comp.hasChoice = false;
         fixture.detectChanges();
         fixture.whenStable().then(() => {
           expect(dropdowBtn.nativeElement.disabled).toBeTruthy();
@@ -323,6 +340,6 @@ class TestComponent {
   definitionId = 'traditional';
   submissionId = mockSubmissionId;
 
-  onCollectionChange = () => { return; }
+  onCollectionChange = () => { return; };
 
 }

@@ -25,7 +25,7 @@ export class ProjectI18nBreadcrumbResolver implements Resolve<BreadcrumbConfig<s
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): BreadcrumbConfig<string> {
     let key = route.data.breadcrumbKey;
     if (hasNoValue(key)) {
-      throw new Error('You provided an i18nBreadcrumbResolver for url \"' + route.url + '\" but no breadcrumbKey in the route\'s data')
+      throw new Error('You provided an i18nBreadcrumbResolver for url \"' + route.url + '\" but no breadcrumbKey in the route\'s data');
     }
     const fullPath = route.url.join('');
     if (isNotEmpty(route.params.projectId)) {

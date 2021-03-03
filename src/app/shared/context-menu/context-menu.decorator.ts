@@ -1,22 +1,22 @@
 import { DSpaceObjectType } from '../../core/shared/dspace-object-type.model';
 
-const contextMenuEntriesMap: Map<DSpaceObjectType, any[]> = new Map();
+const contextMenuEntriesMap: Map<DSpaceObjectType|string, any[]> = new Map();
 
 /**
  * Decorator function to link a DSpaceObjectType to a list of context menu entries components
  * @param {DSpaceObjectType} type The DSpaceObjectType
  * @returns {(entryComponent: GenericContructor) => void}
  */
-export function rendersContextMenuEntriesForType(type: DSpaceObjectType) {
+export function rendersContextMenuEntriesForType(type: DSpaceObjectType|string) {
   return function decorator(entryComponent: any) {
     if (!entryComponent) {
       return;
     }
     let entryList: any[];
     if (contextMenuEntriesMap.has(type)) {
-      entryList = [...contextMenuEntriesMap.get(type), entryComponent]
+      entryList = [...contextMenuEntriesMap.get(type), entryComponent];
     } else {
-      entryList = [entryComponent]
+      entryList = [entryComponent];
     }
     contextMenuEntriesMap.set(type, entryList);
   };

@@ -13,7 +13,7 @@ export interface WorkingPlanConfig extends Config {
   workpackageEntityName: string;
   workpackagesSearchConfigName: string;
   workpackageStepsSearchConfigName: string;
-  workpackageStatusTypeAuthority: string
+  workpackageStatusTypeAuthority: string;
   workpackageStepTypeAuthority: string;
   workingPlanPlaceMetadata: string;
 }

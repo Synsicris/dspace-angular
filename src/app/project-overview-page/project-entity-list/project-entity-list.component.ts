@@ -43,12 +43,12 @@ export class ProjectEntityListComponent implements OnInit {
       this.listType = params.type;
       this.listKey = this.listName + '_' + this.listType + '.breadcrumbs';
       this.paginationOptions.id = `${this.listName}_${this.listType}_list`;
-      this.paginationOptions.pageSize = 5
-    })
+      this.paginationOptions.pageSize = 5;
+    });
     this.route.data.pipe(
       take(1)
     ).subscribe((data) => {
-      this.entityList = data.entityList
+      this.entityList = data.entityList;
     });
   }
 

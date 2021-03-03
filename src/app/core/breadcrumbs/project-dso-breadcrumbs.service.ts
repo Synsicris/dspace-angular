@@ -19,7 +19,7 @@ export class ProjectDsoBreadcrumbsService extends DSOBreadcrumbsService {
     protected linkService: LinkService,
     protected dsoNameService: DSONameService
   ) {
-    super(linkService, dsoNameService)
+    super(linkService, dsoNameService);
   }
 
   /**
@@ -30,6 +30,6 @@ export class ProjectDsoBreadcrumbsService extends DSOBreadcrumbsService {
   getBreadcrumbs(key: ChildHALResource & DSpaceObject, url: string): Observable<Breadcrumb[]> {
     const label = isNotEmpty(key) ? this.dsoNameService.getName(key) : '';
     const projectCrumb = new Breadcrumb(label, url);
-    return observableOf([projectCrumb])
+    return observableOf([projectCrumb]);
   }
 }

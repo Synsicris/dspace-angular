@@ -11,10 +11,7 @@ import {
 } from '@angular/core';
 
 import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
-import {
-  find, flatMap,
-  map
-} from 'rxjs/operators';
+import { find, flatMap, map } from 'rxjs/operators';
 
 import { Collection } from '../../../core/shared/collection.model';
 import { hasValue, isNotEmpty } from '../../../shared/empty.util';
@@ -25,7 +22,7 @@ import { SubmissionService } from '../../submission.service';
 import { SubmissionObject } from '../../../core/submission/models/submission-object.model';
 import { SubmissionJsonPatchOperationsService } from '../../../core/submission/submission-json-patch-operations.service';
 import { CollectionDataService } from '../../../core/data/collection-data.service';
-import { CollectionDropdownComponent } from 'src/app/shared/collection-dropdown/collection-dropdown.component';
+import { CollectionDropdownComponent } from '../../../shared/collection-dropdown/collection-dropdown.component';
 import { SectionsService } from '../../sections/sections.service';
 import { SubmissionDefinitionsConfigService } from '../../../core/config/submission-definitions-config.service';
 import { RequestService } from '../../../core/data/request.service';
@@ -103,7 +100,7 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
   /**
    * The html child that contains the collections list
    */
-  @ViewChild(CollectionDropdownComponent, {static: false}) collectionDropdown: CollectionDropdownComponent;
+  @ViewChild(CollectionDropdownComponent) collectionDropdown: CollectionDropdownComponent;
 
   /**
    * A boolean representing if the collection section is available
@@ -201,9 +198,9 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
             return Object.assign({}, submissionObject, {
               collection: collection.payload,
               submissionDefinition: submissionDefinition.payload
-            })
+            });
           })
-        )
+        );
       })
       ).subscribe((submissionObject: SubmissionObject) => {
         this.selectedCollectionId = event.collection.id;

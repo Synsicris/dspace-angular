@@ -13,7 +13,8 @@ import {
   AddWorkpackageStepAction,
   AddWorkpackageStepErrorAction,
   AddWorkpackageStepSuccessAction,
-  AddWorkpackageSuccessAction, ClearWorkingPlanAction,
+  AddWorkpackageSuccessAction,
+  ClearWorkingPlanAction,
   GenerateWorkpackageAction,
   GenerateWorkpackageErrorAction,
   GenerateWorkpackageStepAction,
@@ -23,17 +24,21 @@ import {
   InitWorkingplanAction,
   InitWorkingplanErrorAction,
   InitWorkingplanSuccessAction,
-  MoveWorkpackageAction, MoveWorkpackageStepAction,
+  MoveWorkpackageAction,
+  MoveWorkpackageStepAction,
   RemoveWorkpackageAction,
   RemoveWorkpackageErrorAction,
   RemoveWorkpackageStepAction,
   RemoveWorkpackageStepErrorAction,
   RemoveWorkpackageStepSuccessAction,
-  RemoveWorkpackageSuccessAction, RetrieveAllWorkpackagesAction,
+  RemoveWorkpackageSuccessAction,
+  RetrieveAllWorkpackagesAction,
   RetrieveAllWorkpackagesErrorAction,
   SaveWorkpackageOrderAction,
   SaveWorkpackageOrderErrorAction,
-  SaveWorkpackageOrderSuccessAction, SaveWorkpackageStepsOrderAction, SaveWorkpackageStepsOrderErrorAction,
+  SaveWorkpackageOrderSuccessAction,
+  SaveWorkpackageStepsOrderAction,
+  SaveWorkpackageStepsOrderErrorAction,
   UpdateWorkpackageAction,
   UpdateWorkpackageErrorAction,
   UpdateWorkpackageStepAction,
@@ -65,14 +70,14 @@ export class WorkingPlanEffects {
         action.payload.projectId,
         action.payload.metadata,
         action.payload.place).pipe(
-        map((searchItem: WorkpackageSearchItem) => new GenerateWorkpackageSuccessAction(
-          searchItem.item,
+        map((searchItem: Item) => new GenerateWorkpackageSuccessAction(
+          searchItem,
           searchItem.id)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new GenerateWorkpackageErrorAction())
+          return observableOf(new GenerateWorkpackageErrorAction());
         }));
     }));
 
@@ -82,7 +87,7 @@ export class WorkingPlanEffects {
   @Effect() generateWorkpackageSuccess$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.GENERATE_WORKPACKAGE_SUCCESS),
     map((action: GenerateWorkpackageSuccessAction) => {
-      return new AddWorkpackageAction(action.payload.item.id, action.payload.workspaceItemId)
+      return new AddWorkpackageAction(action.payload.item.id, action.payload.workspaceItemId);
     }));
 
   /**
@@ -101,7 +106,7 @@ export class WorkingPlanEffects {
         }),
         catchError((error: Error) => {
           console.error(error.message);
-          return observableOf(new AddWorkpackageErrorAction())
+          return observableOf(new AddWorkpackageErrorAction());
         }));
     }));
 
@@ -111,7 +116,7 @@ export class WorkingPlanEffects {
   @Effect({ dispatch: false }) addTaskSuccess$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.ADD_WORKPACKAGE_SUCCESS),
     tap(() => {
-      this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'))
+      this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'));
     }),
     tap((action: AddWorkpackageSuccessAction) => {
       this.modalService.dismissAll();
@@ -126,7 +131,7 @@ export class WorkingPlanEffects {
       WorkpackageActionTypes.GENERATE_WORKPACKAGE_ERROR,
       WorkpackageActionTypes.GENERATE_WORKPACKAGE_STEP_ERROR),
     tap(() => {
-      this.notificationsService.error(null, this.translate.get('impact-pathway.task.create.error'))
+      this.notificationsService.error(null, this.translate.get('impact-pathway.task.create.error'));
     }),
     tap((action: any) => {
       this.modalService.dismissAll();
@@ -143,15 +148,15 @@ export class WorkingPlanEffects {
         action.payload.parentId,
         action.payload.workpackageStepType,
         action.payload.metadata).pipe(
-        map((searchItem: WorkpackageSearchItem) => new GenerateWorkpackageStepSuccessAction(
+        map((searchItem: Item) => new GenerateWorkpackageStepSuccessAction(
           action.payload.parentId,
-          searchItem.item,
+          searchItem,
           searchItem.id)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new GenerateWorkpackageStepErrorAction())
+          return observableOf(new GenerateWorkpackageStepErrorAction());
         }));
     }));
 
@@ -164,7 +169,7 @@ export class WorkingPlanEffects {
       return new AddWorkpackageStepAction(
         action.payload.parentId,
         action.payload.item.id,
-        action.payload.workspaceItemId)
+        action.payload.workspaceItemId);
     }));
 
   /**
@@ -194,7 +199,7 @@ export class WorkingPlanEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new AddWorkpackageStepErrorAction())
+          return observableOf(new AddWorkpackageStepErrorAction());
         }));
     }));
 
@@ -204,7 +209,7 @@ export class WorkingPlanEffects {
   @Effect({ dispatch: false }) addStepSuccess$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.ADD_WORKPACKAGE_STEP_SUCCESS),
     tap(() => {
-      this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'))
+      this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'));
     }),
     tap((action: AddWorkpackageStepSuccessAction) => {
       this.modalService.dismissAll();
@@ -222,9 +227,9 @@ export class WorkingPlanEffects {
         'workingplan.relation.step').pipe(
         map((item: Item) => {
           if (isNotNull(action.payload.workspaceItemId)) {
-            this.workingPlanService.removeWorkpackageByWorkspaceItemId(action.payload.workspaceItemId)
+            this.workingPlanService.removeWorkpackageByWorkspaceItemId(action.payload.workspaceItemId);
           } else {
-            this.workingPlanService.removeWorkpackageByItemId(item.id)
+            this.workingPlanService.removeWorkpackageByItemId(item.id);
           }
         }),
         map(() => new RemoveWorkpackageSuccessAction(
@@ -233,7 +238,7 @@ export class WorkingPlanEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new RemoveWorkpackageErrorAction())
+          return observableOf(new RemoveWorkpackageErrorAction());
         }));
     }));
 
@@ -255,7 +260,7 @@ export class WorkingPlanEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new RemoveWorkpackageStepErrorAction())
+          return observableOf(new RemoveWorkpackageStepErrorAction());
         }));
     }));
 
@@ -271,7 +276,7 @@ export class WorkingPlanEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new RetrieveAllWorkpackagesErrorAction())
+          return observableOf(new RetrieveAllWorkpackagesErrorAction());
         }));
     }));
 
@@ -287,8 +292,8 @@ export class WorkingPlanEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new InitWorkingplanErrorAction())
-        }))
+          return observableOf(new InitWorkingplanErrorAction());
+        }));
     }));
 
   /**
@@ -306,7 +311,7 @@ export class WorkingPlanEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new UpdateWorkpackageErrorAction(action.payload.workpackageId))
+          return observableOf(new UpdateWorkpackageErrorAction(action.payload.workpackageId));
         }));
     }));
 
@@ -328,7 +333,7 @@ export class WorkingPlanEffects {
           return observableOf(new UpdateWorkpackageStepErrorAction(
             action.payload.workpackageId,
             action.payload.workpackageStepId
-          ))
+          ));
         }));
     }));
 
@@ -339,7 +344,7 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.MOVE_WORKPACKAGE),
     withLatestFrom(this.store$),
     map(([action, state]: [MoveWorkpackageAction, any]) => {
-      return new SaveWorkpackageOrderAction(state.core.workingplan.workpackages)
+      return new SaveWorkpackageOrderAction(state.core.workingplan.workpackages);
     }));
 
   /**
@@ -356,7 +361,7 @@ export class WorkingPlanEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new SaveWorkpackageOrderErrorAction(action.payload.oldWorkpackageEntries))
+          return observableOf(new SaveWorkpackageOrderErrorAction(action.payload.oldWorkpackageEntries));
         }));
     }));
 
@@ -403,7 +408,7 @@ export class WorkingPlanEffects {
   @Effect({ dispatch: false }) moveError$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.SAVE_WORKPACKAGE_ORDER_ERROR),
     tap(() => {
-      this.notificationsService.error(null, this.translate.get('working-plan.chart.move.error'))
+      this.notificationsService.error(null, this.translate.get('working-plan.chart.move.error'));
     }));
 
   /**

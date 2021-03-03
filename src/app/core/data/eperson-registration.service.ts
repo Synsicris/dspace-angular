@@ -58,6 +58,23 @@ export class EpersonRegistrationService {
     const registration = new Registration();
     registration.email = email;
 
+    return this.fetchRegister(registration);
+  }
+
+  /**
+   * Send an invitation to register and join these groups
+   * @param email
+   * @param groups The group(s) to join
+   */
+  sendInvitation(email: string, groups: string[]): Observable<RemoteData<Registration>> {
+    const registration = new Registration();
+    registration.email = email;
+    registration.groups = groups;
+
+    return this.fetchRegister(registration);
+  }
+
+  private fetchRegister(registration: Registration) {
     const requestId = this.requestService.generateRequestId();
 
     const hrefObs = this.getRegistrationEndpoint();

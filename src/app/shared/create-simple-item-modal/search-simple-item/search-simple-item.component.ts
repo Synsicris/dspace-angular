@@ -257,7 +257,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    * @param item
    */
   onTaskSelected(item: SimpleItem) {
-    this.selectedTasks.push(item)
+    this.selectedTasks.push(item);
   }
 
   private buildSearchQuery(filters: SearchFilter[]) {
@@ -285,7 +285,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
 
         const appliedFilterBoxEntries = [...this.entityTypeFilterBox.appliedFilterBoxEntries]
           .filter((entry: FilterBoxEntry) => {
-            return findIndex(resultPaginatedList, { label: entry.label }) !== -1
+            return findIndex(resultPaginatedList, { label: entry.label }) !== -1;
           });
 
         this.entityTypeFilterBox = Object.assign(this.entityTypeFilterBox, {
@@ -293,7 +293,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
           appliedFilterBoxEntries: appliedFilterBoxEntries
         });
         this.filterBoxList$.next([this.entityTypeFilterBox, this.titleFilterBox]);
-      })
+      });
   }
 
   private getSearchFiltersFromFilterBoxes(filterBoxes: FilterBox[]) {
@@ -335,7 +335,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
 
   private updateFilterList(filterUpdate: FilterBox) {
     const filterIndex = findIndex(this.filterBoxList$.value, (filter) => {
-      return filter.filterConfig.name === filterUpdate.filterConfig.name
+      return filter.filterConfig.name === filterUpdate.filterConfig.name;
     });
 
     const newFilterList = [...this.filterBoxList$.value];
@@ -345,14 +345,14 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     this.buildSearchQuery([...this.getSearchFiltersFromFilterBoxes(this.filterBoxList$.value)]);
   }
 
-  private updateResultList(resultList: Array<Observable<SimpleItem>>) {
+  private updateResultList(resultList: Observable<SimpleItem>[]) {
     if (isEmpty(resultList)) {
       this.availableTaskList$.next([]);
       this.searching$.next(false);
     } else {
       this.subs.push(observableFrom(resultList).pipe(
         concatMap((list: Observable<SimpleItem>) => list),
-        scan((acc: any, value: any) => [...acc, ...value], [])
+        scan((acc: any, value: any) => [...acc, value], [])
       ).subscribe((itemList: SimpleItem[]) => {
         if (itemList.length === resultList.length) {
           this.availableTaskList$.next(itemList);

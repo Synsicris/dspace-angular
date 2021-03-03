@@ -7,7 +7,8 @@ import {
   ChangeChartViewAction,
   GenerateWorkpackageAction,
   GenerateWorkpackageStepAction,
-  MoveWorkpackageAction, MoveWorkpackageStepAction,
+  MoveWorkpackageAction,
+  MoveWorkpackageStepAction,
   RemoveWorkpackageAction,
   RemoveWorkpackageStepAction,
   RetrieveAllWorkpackagesAction,
@@ -39,15 +40,15 @@ export class WorkingPlanStateService {
     workpackageStepId: string,
     workspaceItemId: string
   ): void {
-    this.store.dispatch(new AddWorkpackageStepAction(parentId, workpackageStepId, workspaceItemId))
+    this.store.dispatch(new AddWorkpackageStepAction(parentId, workpackageStepId, workspaceItemId));
   }
 
   public dispatchChangeChartDateView(chartDateView: ChartDateViewType): void {
-    this.store.dispatch(new ChangeChartViewAction(chartDateView))
+    this.store.dispatch(new ChangeChartViewAction(chartDateView));
   }
 
   public dispatchGenerateWorkpackage(projectId: string, metadata: MetadataMap, place: string): void {
-    this.store.dispatch(new GenerateWorkpackageAction(projectId, metadata, place))
+    this.store.dispatch(new GenerateWorkpackageAction(projectId, metadata, place));
   }
 
   public dispatchGenerateWorkpackageStep(
@@ -56,27 +57,27 @@ export class WorkingPlanStateService {
     workpackageStepType: string,
     metadata: MetadataMap
   ): void {
-    this.store.dispatch(new GenerateWorkpackageStepAction(projectId, parentId, workpackageStepType, metadata))
+    this.store.dispatch(new GenerateWorkpackageStepAction(projectId, parentId, workpackageStepType, metadata));
   }
 
   public dispatchMoveWorkpackage(workpackageId: string, oldIndex: number, newIndex: number): void {
-    this.store.dispatch(new MoveWorkpackageAction(workpackageId, oldIndex, newIndex))
+    this.store.dispatch(new MoveWorkpackageAction(workpackageId, oldIndex, newIndex));
   }
 
   public dispatchMoveWorkpackageStep(workpackageId: string, workpackage: Workpackage, workpackageStepId: string, oldIndex: number, newIndex: number): void {
-    this.store.dispatch(new MoveWorkpackageStepAction(workpackageId, workpackage, workpackageStepId, oldIndex, newIndex))
+    this.store.dispatch(new MoveWorkpackageStepAction(workpackageId, workpackage, workpackageStepId, oldIndex, newIndex));
   }
 
   public dispatchRemoveWorkpackage(workpackageId: string, workspaceItemId: string): void {
-    this.store.dispatch(new RemoveWorkpackageAction(workpackageId, workspaceItemId))
+    this.store.dispatch(new RemoveWorkpackageAction(workpackageId, workspaceItemId));
   }
 
   public dispatchRemoveWorkpackageStep(workpackageId: string, workpackageStepId: string, workspaceItemId: string): void {
-    this.store.dispatch(new RemoveWorkpackageStepAction(workpackageId, workpackageStepId, workspaceItemId))
+    this.store.dispatch(new RemoveWorkpackageStepAction(workpackageId, workpackageStepId, workspaceItemId));
   }
 
   public dispatchRetrieveAllWorkpackages(projectId: string): void {
-    this.store.dispatch(new RetrieveAllWorkpackagesAction(projectId))
+    this.store.dispatch(new RetrieveAllWorkpackagesAction(projectId));
   }
 
   public dispatchUpdateWorkpackageAction(
@@ -84,7 +85,7 @@ export class WorkingPlanStateService {
     workpackage: Workpackage,
     metadatumViewList: MetadatumViewModel[]
   ) {
-    this.store.dispatch((new UpdateWorkpackageAction(workpackageId, workpackage, metadatumViewList)))
+    this.store.dispatch((new UpdateWorkpackageAction(workpackageId, workpackage, metadatumViewList)));
   }
 
   public dispatchUpdateWorkpackageStepAction(
@@ -93,7 +94,7 @@ export class WorkingPlanStateService {
     workpackageStep: WorkpackageStep,
     metadatumViewList: MetadatumViewModel[]
   ) {
-    this.store.dispatch((new UpdateWorkpackageStepAction(workpackageId, workpackageStepId, workpackageStep, metadatumViewList)))
+    this.store.dispatch((new UpdateWorkpackageStepAction(workpackageId, workpackageStepId, workpackageStep, metadatumViewList)));
   }
 
   public getChartDateViewSelector() {

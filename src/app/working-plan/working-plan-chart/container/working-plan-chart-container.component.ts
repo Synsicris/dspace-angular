@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { MAT_DATE_FORMATS, MatSelectChange } from '@angular/material';
+import { MatSelectChange } from '@angular/material/select';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
 import { ResizeEvent } from 'angular-resizable-element';
@@ -124,7 +125,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.subs.push(
       this.workingPlanService.getWorkpackageStatusTypes()
         .subscribe((statusList: VocabularyEntry[]) => {
-          this.chartStatusTypeList$.next(statusList)
+          this.chartStatusTypeList$.next(statusList);
         }));
 
     this.workpackages.subscribe((tree: Workpackage[]) => {
@@ -170,7 +171,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     );
     this.updateTreeMap(flatNode, node);
     return flatNode;
-  };
+  }
 
   hasChild = (_: number, _nodeData: WorkpacakgeFlatNode) => _nodeData.expandable;
 
@@ -178,7 +179,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   updateTreeMap(flatNode: WorkpacakgeFlatNode, nestedNode: WorkpackageTreeObject) {
     if (this.flatNodeMap.has(flatNode.id)) {
-      this.flatNodeMap.delete(flatNode.id)
+      this.flatNodeMap.delete(flatNode.id);
     }
     if (this.nestedNodeMap.has(nestedNode.id)) {
       this.nestedNodeMap.delete(nestedNode.id);
@@ -208,7 +209,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
-      this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectId, flatNode.id, item.type.value, metadata)
+      this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectId, flatNode.id, item.type.value, metadata);
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {
@@ -216,7 +217,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
           flatNode.id,
           item.id,
           item.workspaceItemId);
-      })
+      });
     });
   }
 
@@ -276,7 +277,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     const dates = {
       start: startDateObj,
       end: endDateObj
-    }
+    };
 
     // update flat node dates
     flatNode = Object.assign({}, flatNode, {
@@ -381,12 +382,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this.datesYear = this.datesYear.concat(years
         .map((d) => d.format(this.dateYearFormat))
         .filter((d) => !this.datesYear.includes(d))).sort();
-    })
+    });
   }
 
   formatDate(date: string): string {
     if (this.chartDateView.value === ChartDateViewType.day) {
-      return moment(date).format('DD MMM')
+      return moment(date).format('DD MMM');
     } else if (this.chartDateView.value === ChartDateViewType.month) {
       return moment(date).format('MMM');
     } else if (this.chartDateView.value === ChartDateViewType.quarter) {
@@ -418,7 +419,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   isToday(date): boolean {
     if (this.chartDateView.value === ChartDateViewType.day) {
-      return date === this.today
+      return date === this.today;
     } else if (this.chartDateView.value === ChartDateViewType.month) {
       return moment(date).format(this.dateMonthFormat) === moment(this.today).format(this.dateMonthFormat);
     } else if (this.chartDateView.value === ChartDateViewType.quarter) {
@@ -431,11 +432,11 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   /** other methods */
 
   isDateInsidePogressRange(date: string, node: Workpackage): boolean {
-    return (node.progressDates.indexOf(date) > -1)
+    return (node.progressDates.indexOf(date) > -1);
   }
 
   isDateInsideRange(date: string, node: Workpackage): boolean {
-    return date >= node.dates.start.full && date <= node.dates.end.full
+    return date >= node.dates.start.full && date <= node.dates.end.full;
   }
 
   isMoving(): Observable<boolean> {
@@ -451,7 +452,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       data = parentNode.steps;
     }
 
-    return data.length === 0 || index === (data.length - 1)
+    return data.length === 0 || index === (data.length - 1);
   }
 
   canMoveUp(flatNode: WorkpacakgeFlatNode, level: number, index: number) {
@@ -516,7 +517,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     const [year, quarter] = date.split('-');
     const months = this.getMonthInQuarter(date);
     months.forEach((month) => {
-      days.push(...this.getDaysInMonth(`${year}-${month}`))
+      days.push(...this.getDaysInMonth(`${year}-${month}`));
     });
 
     return days;

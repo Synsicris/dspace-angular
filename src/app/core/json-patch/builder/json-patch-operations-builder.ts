@@ -54,7 +54,7 @@ export class JsonPatchOperationsBuilder {
    *    a boolean representing if the value to be added is a plain text value
    */
   replace(path: JsonPatchOperationPathObject, value, plain = false) {
-    if (hasNoValue(value) || (typeof value === 'object' && hasNoValue(value.value))) {
+    if (hasNoValue(value) || (!Array.isArray(value) && typeof value === 'object' && hasNoValue(value.value))) {
       this.remove(path);
     } else {
       this.store.dispatch(
