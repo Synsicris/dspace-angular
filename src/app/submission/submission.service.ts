@@ -80,6 +80,7 @@ export class SubmissionService {
    * @param {TranslateService} translate
    * @param {SearchService} searchService
    * @param {RequestService} requestService
+   * @param {SubmissionJsonPatchOperationsService} jsonPatchOperationService
    */
   constructor(protected notificationsService: NotificationsService,
               protected restService: SubmissionRestService,
@@ -112,10 +113,12 @@ export class SubmissionService {
    *    The owning collection id
    * @param entityType
    *    The entity type
+   * @param fullProjection
+   *    If true use full projection to make request
    * @return Observable<SubmissionObject>
    *    observable of SubmissionObject
    */
-  createSubmission(collectionId?: string, entityType?: string,): Observable<SubmissionObject> {
+  createSubmission(collectionId?: string, entityType?: string, fullProjection = true): Observable<SubmissionObject> {
     const paramsObj = Object.create({});
 
     if (isNotEmpty(entityType)) {
@@ -127,7 +130,7 @@ export class SubmissionService {
     options.params = params;
     return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, options, collectionId).pipe(
       map((workspaceitem: SubmissionObject[]) => workspaceitem[0] as SubmissionObject),
-      catchError(() => observableOf({} as SubmissionObject)))
+      catchError(() => observableOf({} as SubmissionObject)));
   }
 
   /**
@@ -151,7 +154,7 @@ export class SubmissionService {
 
     return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, options).pipe(
       map((workspaceitem: SubmissionObject[]) => workspaceitem[0] as SubmissionObject),
-      catchError(() => observableOf({} as SubmissionObject)))
+      catchError(() => observableOf({} as SubmissionObject)));
   }
 
   /**
@@ -262,7 +265,7 @@ export class SubmissionService {
       find((isPending: boolean) => !isPending)
     ).subscribe(() => {
       this.store.dispatch(new SaveSubmissionFormAction(submissionId, manual));
-    })
+    });
   }
 
   /**
@@ -573,7 +576,7 @@ export class SubmissionService {
           take(1),
           tap((previousUrl) => {
             if (isEmpty(previousUrl)) {
-              this.router.navigate([MYDSPACE_ROUTE]);
+              this.router.navigate(['/home']);
             } else {
               this.router.navigateByUrl(previousUrl);
             }
@@ -588,10 +591,17 @@ export class SubmissionService {
       take(1),
       tap((url) => this.requestService.removeByHrefSubstring(url)),
       // Now, do redirect.
-      tap(() => {
-        const itemUuid = submissionId.indexOf(':') > -1 ? submissionId.split(':')[0] : submissionId;
-        this.router.navigateByUrl('/items/' + itemUuid, { replaceUrl: true });
-      })
+      concatMap(
+        () => this.routeService.getPreviousUrl().pipe(
+          take(1),
+          tap((previousUrl) => {
+            if (isEmpty(previousUrl)) {
+              const itemUuid = submissionId.indexOf(':') > -1 ? submissionId.split(':')[0] : submissionId;
+              this.router.navigateByUrl('/items/' + itemUuid, { replaceUrl: true });
+            } else {
+              this.router.navigateByUrl(previousUrl);
+            }
+          })))
     ).subscribe();
   }
 
@@ -639,7 +649,7 @@ export class SubmissionService {
       map((submissionObjects: SubmissionObject[]) => createSuccessfulRemoteDataObject(
         submissionObjects[0])),
       catchError((errorResponse: ErrorResponse) => {
-        return createFailedRemoteDataObject$<SubmissionObject>(errorResponse.errorMessage, errorResponse.statusCode)
+        return createFailedRemoteDataObject$<SubmissionObject>(errorResponse.errorMessage, errorResponse.statusCode);
       })
     );
   }

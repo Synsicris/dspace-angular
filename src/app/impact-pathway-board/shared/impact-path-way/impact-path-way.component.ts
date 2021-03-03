@@ -79,6 +79,6 @@ export class ImpactPathWayComponent {
    * Toggles info panel
    */
   toggleInfoPanel() {
-    this.infoShowed.next(!this.infoShowed.value)
+    this.infoShowed.next(!this.infoShowed.value);
   }
 }

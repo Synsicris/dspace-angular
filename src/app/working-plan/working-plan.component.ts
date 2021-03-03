@@ -27,7 +27,7 @@ export class WorkingPlanComponent {
       take(1)
     ).subscribe(() => {
       this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectId);
-    })
+    });
   }
 
   public getWorkpackages(): Observable<Workpackage[]> {

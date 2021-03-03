@@ -19,7 +19,7 @@ export class WorkpackageStatusDirective implements OnChanges {
     if (changes.status.isFirstChange() || (changes.status.previousValue !== changes.status.currentValue)) {
       this.getIconClassByType().forEach((className: string) => {
         this.renderer.addClass(this.elem.nativeElement, className);
-      })
+      });
     }
   }
 

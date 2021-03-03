@@ -2545,8 +2545,8 @@
   // "impactpathwaystep.listelement.badge": "Impact pathway step",
   "impactpathwaystep.listelement.badge": "Wirkungspfadschritt",
 
-  // "innovationideas.listelement.badge": "Idea for innovation or change",
-  "innovationideas.listelement.badge": "Idee für Innovation oder Veränderung",
+  // "innovationideas.listelement.badge": "Idea for use of project results",
+  "innovationideas.listelement.badge": "Idee für eine Nutzung von Projektergebnissen",
 
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   // TODO New key - Add a translation
@@ -3970,7 +3970,7 @@
   "participation_events.listelement.badge": "Partizipativer Prozess",
 
   // "patents.listelement.badge": "Patent and utility patent",
-  "patents.listelement.badge": "Patente und Gebrauchsmuster",
+  "patents.listelement.badge": "Patente oder Gebrauchsmuster",
 
   // "person.listelement.badge": "Person",
   "person.listelement.badge": "Person",
@@ -6586,7 +6586,7 @@
   "submission.workflow.tasks.pool.show-detail": "Details anzeigen",
 
   // "targetgroups.listelement.badge": "Target group",
-  "targetgroups.listelement.badge": "Zielgruppe",
+  "targetgroups.listelement.badge": "Akteursgruppe",
 
   // "tasks.listelement.badge": "Task",
   "tasks.listelement.badge": "Aufgabe",
@@ -6817,7 +6817,7 @@
   "working-plan.page.title": "Arbeitsplan",
 
   // "conditions.listelement.badge": "External condition or requirement",
-  "conditions.listelement.badge": "Rahmenbedingung/ Anforderung",
+  "conditions.listelement.badge": "Rahmenbedingung / Anforderung",
 
   // "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objectives",
   "contribution_fundingprogramme.listelement.badge": "Beitrag zu förderpolitischen Zielen",
@@ -6858,15 +6858,16 @@
   // TODO New key - Add a translation
   "Person.listelement.badge": "Persons",
 
+
   // "Project.listelement.badge": "Research projects",
   // TODO New key - Add a translation
   "Project.listelement.badge": "Research projects",
 
-  // "research_results.listelement.badge": "Research result",
-  "research_results.listelement.badge": "Forschungsergebniss",
+  // "research_results.listelement.badge": "Research finding",
+  "research_results.listelement.badge": "Forschungsergebnis",
 
-  // "stateofart.listelement.badge": "State of knowledge",
-  "stateofart.listelement.badge": "Stand des Wissens",
+  // "stateofart.listelement.badge": "State of knowledge and adressed problem",
+  "stateofart.listelement.badge": "Stand des Wissens und adressiertes Problem",
 
   // "subproject.listelement.badge": "Subproject",
   "subproject.listelement.badge": "Teilprojekte",

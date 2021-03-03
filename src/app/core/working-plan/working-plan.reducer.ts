@@ -4,11 +4,14 @@ import { Workpackage } from './models/workpackage-step.model';
 import {
   AddWorkpackageStepSuccessAction,
   AddWorkpackageSuccessAction,
-  InitWorkingplanSuccessAction, MoveWorkpackageAction, MoveWorkpackageStepAction,
+  InitWorkingplanSuccessAction,
+  MoveWorkpackageAction,
+  MoveWorkpackageStepAction,
   RemoveWorkpackageAction,
   RemoveWorkpackageStepAction,
   RemoveWorkpackageStepSuccessAction,
-  RemoveWorkpackageSuccessAction, SaveWorkpackageStepsOrderErrorAction,
+  RemoveWorkpackageSuccessAction,
+  SaveWorkpackageStepsOrderErrorAction,
   UpdateWorkpackageAction,
   UpdateWorkpackageStepAction,
   WorkingPlanActions,
@@ -170,7 +173,7 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
     }
 
     case WorkpackageActionTypes.NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE: {
-      return state
+      return state;
     }
 
     default: {
@@ -195,7 +198,7 @@ function addWorkpackage(state: WorkingPlanState, action: AddWorkpackageSuccessAc
       [action.payload.workpackage.id]: action.payload.workpackage
     }),
     processing: false
-  })
+  });
 }
 
 /**
@@ -218,7 +221,7 @@ function addWorkpackageStep(state: WorkingPlanState, action: AddWorkpackageStepS
       [action.payload.parentId]: newWorpackage
     }),
     processing: false
-  })
+  });
 }
 
 /**
@@ -241,7 +244,7 @@ function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSucces
     workpackages: workpackages,
     processing: false,
     loaded: true
-  })
+  });
 }
 
 /**
@@ -265,7 +268,7 @@ function removeWorkpackage(state: WorkingPlanState, action: RemoveWorkpackageSuc
     workpackages: newWorpackages,
     workpackageToRemove: '',
     processing: false
-  })
+  });
 }
 
 /**
@@ -291,7 +294,7 @@ function removeWorkpackageStep(state: WorkingPlanState, action: RemoveWorkpackag
     }),
     workpackageToRemove: '',
     processing: false
-  })
+  });
 }
 
 /**
@@ -310,7 +313,7 @@ function updateWorkpackage(state: WorkingPlanState, action: UpdateWorkpackageAct
       [action.payload.workpackageId]: action.payload.workpackage
     }),
     processing: false
-  })
+  });
 }
 
 /**
@@ -335,7 +338,7 @@ function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackag
       })
     }),
     processing: false
-  })
+  });
 }
 
 /**
@@ -350,7 +353,7 @@ function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackag
  */
 function moveWorkpackage(state: WorkingPlanState, action: MoveWorkpackageAction) {
   const toMove = get(state.workpackages, action.payload.workpackageId);
-  const oldValue = get(state.workpackages, Object.keys(state.workpackages)[action.payload.newIndex])
+  const oldValue = get(state.workpackages, Object.keys(state.workpackages)[action.payload.newIndex]);
 
   const newWorpackages = {};
 
@@ -361,14 +364,14 @@ function moveWorkpackage(state: WorkingPlanState, action: MoveWorkpackageAction)
       } else if (index === action.payload.newIndex) {
         newWorpackages[toMove.id] = toMove;
       } else {
-        newWorpackages[workpackageId] = state.workpackages[workpackageId]
+        newWorpackages[workpackageId] = state.workpackages[workpackageId];
       }
     });
 
   return Object.assign({}, state, {
     workpackages: newWorpackages,
     moving: true
-  })
+  });
 }
 
 /**
@@ -398,7 +401,7 @@ function moveWorkpackageStep(state: WorkingPlanState, action: MoveWorkpackageSte
       [action.payload.workpackageId]: newWorpackage
     }),
     moving: true
-  })
+  });
 }
 
 /**
@@ -421,5 +424,5 @@ function revertWorkpackageStepOrder(state: WorkingPlanState, action: SaveWorkpac
       [action.payload.workpackageId]: newWorpackage
     }),
     moving: false
-  })
+  });
 }

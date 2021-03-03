@@ -92,7 +92,6 @@ import { Community } from './shared/community.model';
 import { DSpaceObject } from './shared/dspace-object.model';
 import { ExternalSourceEntry } from './shared/external-source-entry.model';
 import { ExternalSource } from './shared/external-source.model';
-import { FileService } from './shared/file.service';
 import { HALEndpointService } from './shared/hal-endpoint.service';
 import { ItemType } from './shared/item-relationships/item-type.model';
 import { RelationshipType } from './shared/item-relationships/relationship-type.model';
@@ -176,7 +175,6 @@ import { ResearcherProfileService } from './profile/researcher-profile.service';
 import { ResearcherProfile } from './profile/model/researcher-profile.model';
 import { SectionDataService } from './layout/section-data.service';
 import { Section } from './layout/models/section.model';
-import { SearchConfigResponseParsingService } from './data/search-config-response-parsing.service';
 import { OrcidQueueService } from './orcid/orcid-queue.service';
 import { OrcidQueue } from './orcid/model/orcid-queue.model';
 import { OrcidHistoryService } from './orcid/orcid-history.service';
@@ -201,6 +199,15 @@ import { WorkingPlanService } from './working-plan/working-plan.service';
 import { WorkingPlanStateService } from './working-plan/working-plan-state.service';
 import { ItemAuthorityRelationService } from './shared/item-authority-relation.service';
 import { ProjectDataService } from './project/project-data.service';
+import { CollectionSearchResult } from '../shared/object-collection/shared/collection-search-result.model';
+import { WorkspaceItemSearchResult } from '../shared/object-collection/shared/workspace-item-search-result.model';
+import { ClaimedTaskSearchResult } from '../shared/object-collection/shared/claimed-task-search-result.model';
+import { WorkflowItemSearchResult } from '../shared/object-collection/shared/workflow-item-search-result.model';
+import { PoolTaskSearchResult } from '../shared/object-collection/shared/pool-task-search-result.model';
+import { CommunitySearchResult } from '../shared/object-collection/shared/community-search-result.model';
+import { ItemSearchResult } from '../shared/object-collection/shared/item-search-result.model';
+import { ProjectAuthorizationService } from './project/project-authorization.service';
+import { ProjectGroupService } from './project/project-group.service';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -254,7 +261,6 @@ const PROVIDERS = [
   EndpointMapResponseParsingService,
   FacetValueResponseParsingService,
   FacetConfigResponseParsingService,
-  SearchConfigResponseParsingService,
   DebugResponseParsingService,
   SearchResponseParsingService,
   MyDSpaceResponseParsingService,
@@ -275,7 +281,6 @@ const PROVIDERS = [
   WorkspaceitemDataService,
   WorkflowItemDataService,
   UploaderService,
-  FileService,
   DSpaceObjectDataService,
   ConfigurationDataService,
   DSOChangeAnalyzer,
@@ -363,7 +368,9 @@ const PROVIDERS = [
   ImpactPathwayLinksService,
   WorkingPlanService,
   WorkingPlanStateService,
-  ProjectDataService
+  ProjectDataService,
+  ProjectAuthorizationService,
+  ProjectGroupService
 ];
 
 /**
@@ -434,7 +441,14 @@ export const models =
     OrcidHistory,
     Section,
     EditItem,
-    EditItemMode
+    EditItemMode,
+    ClaimedTaskSearchResult,
+    CollectionSearchResult,
+    CommunitySearchResult,
+    ItemSearchResult,
+    PoolTaskSearchResult,
+    WorkflowItemSearchResult,
+    WorkspaceItemSearchResult
   ];
 
 @NgModule({
@@ -453,7 +467,7 @@ export const models =
 })
 
 export class CoreModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
       providers: [

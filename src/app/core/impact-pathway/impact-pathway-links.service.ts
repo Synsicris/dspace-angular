@@ -58,11 +58,11 @@ export class ImpactPathwayLinksService {
         targetImpactPathwayTaskId,
         targetImpactPathwayTaskTitle
       )
-    )
+    );
   }
 
   dispatchRemoveRelation(targetImpactPathwayTaskHTMLId: string, targetImpactPathwayTaskId: string) {
-    this.store.dispatch(new RemoveImpactPathwayTaskLinkAction(targetImpactPathwayTaskHTMLId, targetImpactPathwayTaskId))
+    this.store.dispatch(new RemoveImpactPathwayTaskLinkAction(targetImpactPathwayTaskHTMLId, targetImpactPathwayTaskId));
   }
 
   dispatchSaveImpactPathwayTaskLinksAction(
@@ -74,7 +74,7 @@ export class ImpactPathwayLinksService {
       impactPathwayTaskId,
       toSave,
       toDelete
-    ))
+    ));
   }
 
   getAllLinks(): Observable<ImpactPathwayLink[]> {
@@ -85,7 +85,7 @@ export class ImpactPathwayLinksService {
         const unionList = union(relationsState.stored, relationsState.toSave);
         return difference(unionList, relationsState.toDelete);
       })
-    )
+    );
   }
 
   isEditingLinkOnOtherStepAndTask(impactPathwayStepId: string, impactPathwayTaskHTMLId: string): Observable<boolean> {
@@ -94,10 +94,10 @@ export class ImpactPathwayLinksService {
       filter((relationsState: ImpactPathwayLinks) => isNotEmpty(relationsState)),
       map((relationsState: ImpactPathwayLinks) => {
         return relationsState.editing && relationsState.relatedStepId !== impactPathwayStepId
-          && relationsState.selectedTaskHTMLId !== impactPathwayTaskHTMLId
+          && relationsState.selectedTaskHTMLId !== impactPathwayTaskHTMLId;
       }),
       startWith(false)
-    )
+    );
   }
 
   isEditingLinkOnOtherTask(impactPathwayTaskHTMLId: string): Observable<boolean> {
@@ -105,10 +105,10 @@ export class ImpactPathwayLinksService {
       select(impactPathwayRelationsSelector),
       filter((relationsState: ImpactPathwayLinks) => isNotEmpty(relationsState)),
       map((relationsState: ImpactPathwayLinks) => {
-        return relationsState.editing && relationsState.selectedTaskHTMLId !== impactPathwayTaskHTMLId
+        return relationsState.editing && relationsState.selectedTaskHTMLId !== impactPathwayTaskHTMLId;
       }),
       startWith(false)
-    )
+    );
   }
 
   isEditingLink(): Observable<boolean> {
@@ -117,7 +117,7 @@ export class ImpactPathwayLinksService {
       filter((relationsState: ImpactPathwayLinks) => isNotEmpty(relationsState)),
       map((relationsState: ImpactPathwayLinks) => relationsState.editing),
       startWith(false)
-    )
+    );
   }
 
   isEditingLinkOnTask(impactPathwayTaskHTMLId: string): Observable<boolean> {
@@ -125,10 +125,10 @@ export class ImpactPathwayLinksService {
       select(impactPathwayRelationsSelector),
       filter((relationsState: ImpactPathwayLinks) => isNotEmpty(relationsState)),
       map((relationsState: ImpactPathwayLinks) => {
-        return relationsState.editing && relationsState.selectedTaskHTMLId === impactPathwayTaskHTMLId
+        return relationsState.editing && relationsState.selectedTaskHTMLId === impactPathwayTaskHTMLId;
       }),
       startWith(false)
-    )
+    );
   }
 
   getActiveEditingTaskHTMLId(): Observable<string> {
@@ -137,7 +137,7 @@ export class ImpactPathwayLinksService {
       filter((relationsState: ImpactPathwayLinks) => isNotEmpty(relationsState)),
       map((relationsState: ImpactPathwayLinks) => relationsState.selectedTaskHTMLId),
       distinctUntilChanged()
-    )
+    );
   }
 
   isTaskPartOfLink(impactPathwayTaskHTMLId: string): Observable<boolean> {
@@ -149,13 +149,13 @@ export class ImpactPathwayLinksService {
           if (relation.twoWay) {
             return relation.to === impactPathwayTaskHTMLId || relation.from === impactPathwayTaskHTMLId;
           } else {
-            return relation.to === impactPathwayTaskHTMLId
+            return relation.to === impactPathwayTaskHTMLId;
           }
-        }) !== -1
+        }) !== -1;
       }),
       startWith(false),
       distinctUntilChanged()
-    )
+    );
   }
 
   isLinkedWithActiveEditingTask(impactPathwayTaskHTMLId: string): Observable<boolean> {
@@ -175,9 +175,9 @@ export class ImpactPathwayLinksService {
             return (relation.from === activeImpactPathwayTaskHTMLId && relation.to === impactPathwayTaskHTMLId)
               || (relation.from === impactPathwayTaskHTMLId && relation.to === activeImpactPathwayTaskHTMLId);
           } else {
-            return (relation.from === activeImpactPathwayTaskHTMLId && relation.to === impactPathwayTaskHTMLId)
+            return (relation.from === activeImpactPathwayTaskHTMLId && relation.to === impactPathwayTaskHTMLId);
           }
-        }) !== -1
+        }) !== -1;
       }),
       startWith(false),
       distinctUntilChanged()
@@ -185,7 +185,7 @@ export class ImpactPathwayLinksService {
   }
 
   completeEditingLinks() {
-    this.store.dispatch(new CompleteEditingImpactPathwayTaskLinksAction())
+    this.store.dispatch(new CompleteEditingImpactPathwayTaskLinksAction());
   }
 
   saveLinks(impactPathwayTaskId: string, toSave: ImpactPathwayLink[], toDelete: ImpactPathwayLink[]): Observable<Item> {
@@ -194,7 +194,7 @@ export class ImpactPathwayLinksService {
       tap((taskItem: Item) => this.buildPatchOperations(taskItem, toSave, toDelete)),
       delay(100),
       flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
-    )
+    );
   }
 
   setEditLinks(
@@ -212,7 +212,7 @@ export class ImpactPathwayLinksService {
         impactPathwayTaskHTMLId,
         impactPathwayTaskId
       )
-    )
+    );
   }
 
   createMapOfLinksToFetch(toSave: ImpactPathwayLink[], toDelete: ImpactPathwayLink[]): ImpactPathwayLinksMap {
@@ -224,7 +224,7 @@ export class ImpactPathwayLinksService {
         linksMap[link.fromTaskId] = {
           toSave: [link],
           toDelete: []
-        }
+        };
       }
     });
 
@@ -235,7 +235,7 @@ export class ImpactPathwayLinksService {
         linksMap[link.fromTaskId] = {
           toSave: [],
           toDelete: [link]
-        }
+        };
       }
     });
 
@@ -281,7 +281,7 @@ export class ImpactPathwayLinksService {
         relationToAdd,
         isFirstRelation,
         true);
-    })
+    });
   }
 
   private buildRemovePatchOperations(
@@ -299,9 +299,9 @@ export class ImpactPathwayLinksService {
         environment.impactPathway.impactpathwayOutcomeLinkMetadata;
       let relationPlace: number;
       if (relation.twoWay) {
-        relationPlace = findIndex(currentBidirectionalLinkList, { authority: relation.toTaskId })
+        relationPlace = findIndex(currentBidirectionalLinkList, { authority: relation.toTaskId });
       } else {
-        relationPlace = findIndex(currentOutcomeLinkList, { authority: relation.toTaskId })
+        relationPlace = findIndex(currentOutcomeLinkList, { authority: relation.toTaskId });
       }
       if (relationPlace !== -1) {
         const path = pathCombiner.getPath([relationMetadata, relationPlace.toString()]);
@@ -312,7 +312,7 @@ export class ImpactPathwayLinksService {
           currentOutcomeLinkList.splice(relationPlace, 1);
         }
       }
-    })
+    });
   }
 
   private executeItemPatch(objectId: string, pathName: string): Observable<Item> {
@@ -322,7 +322,7 @@ export class ImpactPathwayLinksService {
       pathName).pipe(
       tap((item: Item) => this.itemService.update(item)),
       catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
-    )
+    );
   }
 
 }

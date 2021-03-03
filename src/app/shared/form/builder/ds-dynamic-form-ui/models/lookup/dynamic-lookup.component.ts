@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { of as observableOf, Subscription } from 'rxjs';
 import { catchError, distinctUntilChanged } from 'rxjs/operators';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicFormLayoutService, DynamicFormValidationService } from '@ng-dynamic-forms/core';
 
 import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
@@ -20,6 +20,7 @@ import {
 import { getFirstSucceededRemoteDataPayload } from '../../../../../../core/shared/operators';
 import { DsDynamicVocabularyComponent } from '../dynamic-vocabulary.component';
 import { FormBuilderService } from '../../../form-builder.service';
+import { SubmissionService } from '../../../../../../submission/submission.service';
 
 /**
  * Component representing a lookup or lookup-name input field
@@ -30,7 +31,7 @@ import { FormBuilderService } from '../../../form-builder.service';
   templateUrl: './dynamic-lookup.component.html'
 })
 export class DsDynamicLookupComponent extends DsDynamicVocabularyComponent implements OnDestroy, OnInit {
-  @Input() bindId = true;
+
   @Input() group: FormGroup;
   @Input() model: any;
 
@@ -48,12 +49,14 @@ export class DsDynamicLookupComponent extends DsDynamicVocabularyComponent imple
   protected subs: Subscription[] = [];
 
   constructor(protected vocabularyService: VocabularyService,
-              private cdr: ChangeDetectorRef,
+              protected cdr: ChangeDetectorRef,
               protected layoutService: DynamicFormLayoutService,
               protected validationService: DynamicFormValidationService,
-              protected formBuilderService: FormBuilderService
+              protected formBuilderService: FormBuilderService,
+              protected modalService: NgbModal,
+              protected submissionService: SubmissionService
   ) {
-    super(vocabularyService, layoutService, validationService, formBuilderService);
+    super(vocabularyService, layoutService, validationService, formBuilderService, modalService, submissionService);
   }
 
   /**
@@ -61,17 +64,19 @@ export class DsDynamicLookupComponent extends DsDynamicVocabularyComponent imple
    */
   inputFormatter = (x: { display: string }, y: number) => {
     return y === 1 ? this.firstInputValue : this.secondInputValue;
-  };
+  }
 
   /**
    * Initialize the component, setting up the init form value
    */
   ngOnInit() {
+    this.initVocabulary();
+
     if (isNotEmpty(this.model.value)) {
       this.setCurrentValue(this.model.value, true);
     }
 
-    this.subs.push(this.model.valueUpdates
+    this.subs.push(this.model.valueChanges
       .subscribe((value) => {
         if (isEmpty(value)) {
           this.resetFields();
@@ -191,7 +196,7 @@ export class DsDynamicLookupComponent extends DsDynamicVocabularyComponent imple
    */
   public remove() {
     this.group.markAsPristine();
-    this.dispatchUpdate(null)
+    this.dispatchUpdate(null);
   }
 
   /**

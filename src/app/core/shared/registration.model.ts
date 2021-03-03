@@ -5,7 +5,7 @@ import { UnCacheableObject } from './uncacheable-object.model';
 
 @typedObject
 export class Registration implements UnCacheableObject {
-  static type = REGISTRATION
+  static type = REGISTRATION;
   /**
    * The object type
    */
@@ -26,4 +26,8 @@ export class Registration implements UnCacheableObject {
    */
   token: string;
 
+  /**
+   * In case the groups field contains values, then it is interpret as an invitation to register and join these groups
+   */
+  groups?: string[];
 }

@@ -77,7 +77,7 @@ export class SearchSimpleItemService {
                   map((label: string) => Object.assign(new FacetValue(), searchResult, {
                     label: label
                   }))
-                )
+                );
               });
             const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<any>;
             return Object.assign(rd, { payload: payload });
@@ -88,9 +88,9 @@ export class SearchSimpleItemService {
             } else {
               return observableFrom(rd.payload.page).pipe(
                 concatMap((list: Observable<FacetValue>) => list),
-                scan((acc: any, value: any) => [...acc, ...value], []),
+                scan((acc: any, value: any) => [...acc, value], []),
                 filter((list: FacetValue[]) => list.length === rd.payload.page.length),
-              )
+              );
             }
           }),
           first((result: FacetValue[]) => isNotUndefined(result))
@@ -106,7 +106,7 @@ export class SearchSimpleItemService {
     return this.vocabularyService.getVocabularyEntryByValue(label, vocabularyOptions).pipe(
       map((result: VocabularyEntry) => isNull(result) ? label : result.display),
       catchError((error: Error) => observableOf(label))
-    )
+    );
   }
 
   searchAvailableImpactPathwayTasksByStepType(
@@ -140,7 +140,7 @@ export class SearchSimpleItemService {
                 filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && isNotEmpty(itemRD.payload)),
                 take(1),
                 map((itemRD: RemoteData<Item>) => this.initSimpleItem(itemRD.payload, searchResult.indexableObject.id))
-              )
+              );
             }
           });
         const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<any>;

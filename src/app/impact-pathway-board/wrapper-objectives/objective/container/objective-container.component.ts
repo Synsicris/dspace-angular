@@ -59,7 +59,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
   getObjectivesTaskIds(): string[] {
     return this.impactPathwayStep.tasks
       .filter((task) => task.type === 'proj_objectives')
-      .map((task) => task.id)
+      .map((task) => task.id);
   }
 
   openModal() {
@@ -108,7 +108,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
           this.impactPathwayStep.id,
           this.impactPathwayTask.id,
           item.id);
-      })
+      });
     });
   }
 

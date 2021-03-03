@@ -46,8 +46,8 @@ export class SearchSimpleItemBoxComponent {
   }
 
   formatter = (x: ImpactPathwayTask) => {
-    return (typeof x === 'object') ? x.title : x
-  };
+    return (typeof x === 'object') ? x.title : x;
+  }
 
   search = (text$: Observable<string>) =>
     text$.pipe(
@@ -62,15 +62,15 @@ export class SearchSimpleItemBoxComponent {
             map((list) => list
               .filter((task: ImpactPathwayTask) => {
                 const regex = new RegExp('(?:^|\\W)' + term.toLocaleLowerCase() + '(?:$|\\W)', 'g');
-                return isNotNull(task.title.toLowerCase().match(regex))
+                return isNotNull(task.title.toLowerCase().match(regex));
               })
             ),
-          )
+          );
         }
       }),
       tap(() => this.searching.next(false)),
       merge(this.hideSearchingWhenUnsubscribed$)
-    );
+    )
 
   onSearchChange(event: any) {
     event.stopImmediatePropagation();

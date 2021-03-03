@@ -3,7 +3,19 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable, of as observableOf, throwError } from 'rxjs';
-import { catchError, distinctUntilChanged, filter, flatMap, map, take, takeWhile, tap } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  distinctUntilChanged,
+  filter,
+  map,
+  mapTo,
+  mergeMap,
+  reduce,
+  take,
+  takeWhile,
+  tap
+} from 'rxjs/operators';
 import { ReplaceOperation } from 'fast-json-patch';
 
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
@@ -27,13 +39,14 @@ import { SearchResult } from '../../shared/search/search-result.model';
 import {
   configureRequest,
   getFinishedRemoteData,
+  getFirstCompletedRemoteData,
   getFirstSucceededRemoteDataPayload,
   getFirstSucceededRemoteListPayload
 } from '../shared/operators';
 import { DSpaceObjectType } from '../shared/dspace-object-type.model';
 import { SearchService } from '../shared/search/search.service';
 import { LinkService } from '../cache/builders/link.service';
-import { createFailedRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { createFailedRemoteDataObject$, createNoContentRemoteDataObject } from '../../shared/remote-data.utils';
 import { followLink, FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { ConfigurationDataService } from '../data/configuration-data.service';
 import { ConfigurationProperty } from '../shared/configuration-property.model';
@@ -42,6 +55,7 @@ import { Group } from '../eperson/models/group.model';
 import { BitstreamDataService } from '../data/bitstream-data.service';
 import { NoContent } from '../shared/NoContent.model';
 import { NotificationOptions } from '../../shared/notifications/models/notification-options.model';
+import { PageInfo } from '../shared/page-info.model';
 
 @Injectable()
 export class ProjectDataService extends CommunityDataService {
@@ -72,29 +86,53 @@ export class ProjectDataService extends CommunityDataService {
    *   The project created
    */
   createProject(name: string): Observable<RemoteData<Community>> {
+    const template$ = this.getProjectTemplateUrl();
+    const projectsCommunity$ = this.getCommunityProjects();
+    return this.fetchCreate(name, template$, projectsCommunity$);
+  }
+
+  /**
+   * Create a new project from project template
+   *
+   * @param name       The subproject name
+   * @param projectId  The parent project id
+   * @return Observable<RemoteData<Community>>
+   *   The project created
+   */
+  createSubproject(name: string, projectId: string): Observable<RemoteData<Community>> {
+    const template$ = this.getSubprojectTemplateUrl();
+    const subprojectsCommunity$ = this.getSubprojectCommunityByParentProjectUUID(projectId);
+    return this.fetchCreate(name, template$, subprojectsCommunity$);
+  }
+
+
+  /**
+   * Fetch a create community request
+   *
+   * @return Observable<Community>
+   */
+  private fetchCreate(name: string, template: Observable<string>, parentCommunity: Observable<Community>): Observable<RemoteData<Community>> {
 
     const requestId = this.requestService.generateRequestId();
     const options: HttpOptions = Object.create({});
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'text/uri-list');
     options.headers = headers;
-    const template$ = this.getProjectTemplateUrl();
-    const projects$ = this.getCommunityProjects();
     const href$ = this.getEndpoint();
-    combineLatest([template$, href$, projects$]).pipe(
+    combineLatest([template, href$, parentCommunity]).pipe(
       map(([templateUrl, href, projects]: [string, string, Community]) => {
-        const hrefWithParent = `${href}?parent=${projects.id}&name=${name}`
+        const hrefWithParent = `${href}?parent=${projects.id}&name=${name}`;
         return new PostRequest(requestId, hrefWithParent, templateUrl, options);
       }),
       configureRequest(this.requestService),
-    ).subscribe()
+    ).subscribe();
 
     return this.fetchCreateResponse(requestId).pipe(
       getFinishedRemoteData(),
       take(1),
       catchError((error: Error) => {
         this.notificationsService.error('Server Error:', error.message);
-        return createFailedRemoteDataObject$() as Observable<RemoteData<Community>>
+        return createFailedRemoteDataObject$() as Observable<RemoteData<Community>>;
       })
     );
   }
@@ -105,32 +143,40 @@ export class ProjectDataService extends CommunityDataService {
    *
    * @return the RestResponse as an Observable
    */
-  delete(projectId: string): Observable<RemoteData<NoContent>> {
-    const projectGroup = `project_${projectId}_group`
+  delete(projectId: string): Observable<any> {
+    const projectGroup = `project_${projectId}`;
     return super.delete(projectId).pipe(
-      flatMap((response: RemoteData<NoContent>) => {
+      getFirstCompletedRemoteData(),
+      mergeMap((response: RemoteData<NoContent>) => {
         if (response.isSuccess) {
-          return this.groupDataService.searchGroups(projectGroup)
+          return this.groupDataService.searchGroups(projectGroup);
         } else {
-          throwError('Unexpected error while deleting project.')
+          throwError('Unexpected error while deleting project.');
         }
       }),
       getFirstSucceededRemoteListPayload(),
       map((groups: Group[]) => {
-        if (groups.length === 1) {
-          return groups[0]
+        if (groups.length === 2) {
+          return groups;
         } else {
           throw new Error('Unexpected error while retrieving project group.');
         }
       }),
-      flatMap((group: Group) => this.groupDataService.delete(group.id)),
-/*      map((response: boolean) => {
-        if (response) {
-          return new RestResponse(response, 200, 'OK');
-        } else {
-          throwError('Unexpected error while deleting project group.')
-        }
-      }),*/
+      mergeMap((groups: Group[]) => groups),
+      concatMap((group: Group) => this.groupDataService.delete(group.id).pipe(
+        getFirstCompletedRemoteData(),
+        map((response: RemoteData<NoContent>) => {
+          // TODO review when https://4science.atlassian.net/browse/CST-3907 is resolved
+          if (response.isSuccess || response.statusCode === 403) {
+            return response;
+          } else {
+            throwError('Unexpected error while deleting project group.');
+          }
+        })
+      )),
+      reduce((acc: any, value: any) => [...acc, value], []),
+      tap((r) => console.log(r)),
+      mapTo((createNoContentRemoteDataObject() as RemoteData<NoContent>)),
       catchError(() => {
         return createFailedRemoteDataObject$('Unexpected error while deleting project group.');
       })
@@ -145,10 +191,10 @@ export class ProjectDataService extends CommunityDataService {
   getProjectTemplate(): Observable<Community> {
     return this.configurationService.findByPropertyName('project.template-id').pipe(
       getFirstSucceededRemoteDataPayload(),
-      flatMap((conf: ConfigurationProperty) => this.searchCommunityById(conf.values[0])),
+      mergeMap((conf: ConfigurationProperty) => this.searchCommunityById(conf.values[0])),
       map((community) => {
         if (isNotEmpty(community)) {
-          return community
+          return community;
         } else {
           throw new Error('Community Projects does not exist');
         }
@@ -164,7 +210,20 @@ export class ProjectDataService extends CommunityDataService {
   getProjectTemplateUrl(): Observable<string> {
     return this.configurationService.findByPropertyName('project.template-id').pipe(
       getFirstSucceededRemoteDataPayload(),
-      flatMap((conf: ConfigurationProperty) => this.getEndpoint().pipe(
+      mergeMap((conf: ConfigurationProperty) => this.getEndpoint().pipe(
+        map((href) => href + '/' + conf.values[0])
+      )));
+  }
+
+  /**
+   * Get the first subproject template available
+   *
+   * @return Observable<Community>
+   */
+  getSubprojectTemplateUrl(): Observable<string> {
+    return this.configurationService.findByPropertyName('subproject.template-id').pipe(
+      getFirstSucceededRemoteDataPayload(),
+      mergeMap((conf: ConfigurationProperty) => this.getEndpoint().pipe(
         map((href) => href + '/' + conf.values[0])
       )));
   }
@@ -177,14 +236,15 @@ export class ProjectDataService extends CommunityDataService {
   getCommunityProjects(): Observable<Community> {
     return this.configurationService.findByPropertyName('project.parent-community-id').pipe(
       getFirstSucceededRemoteDataPayload(),
-      flatMap((conf: ConfigurationProperty) => this.searchCommunityById(
+      mergeMap((conf: ConfigurationProperty) => this.searchCommunityById(
         conf.values[0],
+        '',
         followLink('parentCommunity'),
         followLink('subcommunities')
       )),
       map((community) => {
         if (isNotEmpty(community)) {
-          return community
+          return community;
         } else {
           throw new Error('Community Projects does not exist');
         }
@@ -193,13 +253,74 @@ export class ProjectDataService extends CommunityDataService {
   }
 
   /**
+   * Get community that contains all projects
+   *
+   * @return Observable<Community>
+   */
+  getSubprojectCommunityByParentProjectUUID(projectId: string): Observable<Community> {
+    return this.configurationService.findByPropertyName('project.subproject-community-name').pipe(
+      getFirstSucceededRemoteDataPayload(),
+      mergeMap((conf: ConfigurationProperty) => this.searchCommunityByName(
+        conf.values[0],
+        projectId
+      )),
+      map((community) => {
+        if (isNotEmpty(community)) {
+          return community;
+        } else {
+          throw new Error('Community Projects does not exist');
+        }
+      })
+    );
+  }
+
+  /**
+   * Retrieve subproject by parent project
+   *
+   * @param projectId
+   * @param options
+   * @return Observable<PaginatedList<Community>>
+   */
+  retrieveSubprojectsByParentProjectUUID(projectId: string, options: PageInfo): Observable<PaginatedList<Community>> {
+    return this.getSubprojectCommunityByParentProjectUUID(projectId).pipe(
+      mergeMap((subprojectCommunity: Community) => {
+        const sort = new SortOptions('dc.title', SortDirection.ASC);
+        const pagination = Object.assign(new PaginationComponentOptions(), {
+          currentPage: options.currentPage,
+          pageSize: options.elementsPerPage
+        });
+        const searchOptions = new PaginatedSearchOptions({
+          configuration: 'default',
+          scope: subprojectCommunity.uuid,
+          pagination: pagination,
+          sort: sort,
+          dsoTypes: [DSpaceObjectType.COMMUNITY]
+        });
+
+        return this.searchService.search(searchOptions).pipe(
+          filter((rd: RemoteData<PaginatedList<SearchResult<any>>>) => rd.hasSucceeded),
+          map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
+            const dsoPage: any[] = rd.payload.page
+              .filter((result) => hasValue(result))
+              .map((searchResult: SearchResult<any>) => searchResult.indexableObject);
+            const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<any>;
+            return Object.assign(rd, { payload: payload });
+          }),
+          getFirstSucceededRemoteDataPayload(),
+          distinctUntilChanged()
+        );
+      })
+    );
+
+  }
+  /**
    * Get all authorized projects
    *
    * @return Observable<RemoteData<PaginatedList<Community>>>
    */
   findAllAuthorizedProjects(findListOptions: FindListOptions = {}): Observable<RemoteData<PaginatedList<Community>>> {
     return this.getCommunityProjects().pipe(
-      flatMap((projects) => this.findAllByHref(projects._links.subcommunities.href, findListOptions))
+      mergeMap((projects) => this.findAllByHref(projects._links.subcommunities.href, findListOptions))
     );
   }
 
@@ -217,27 +338,6 @@ export class ProjectDataService extends CommunityDataService {
     });
 
     return result$;
-/*    // Resolve self link for new object
-    const selfLink$ = this.requestService.getByUUID(requestId).pipe(
-      getResponseFromEntry(),
-      map((response: RestResponse) => {
-        if (!response.isSuccessful && response instanceof ErrorResponse) {
-          throw new Error(response.errorMessage);
-        } else {
-          return response;
-        }
-      }),
-      map((response: any) => {
-        if (isNotEmpty(response.resourceSelfLinks)) {
-          return response.resourceSelfLinks[0];
-        }
-      }),
-      distinctUntilChanged()
-    ) as Observable<string>;
-
-    return selfLink$.pipe(
-      switchMap((selfLink: string) => this.findByHref(selfLink, true, followLink('parentCommunity'))),
-    )*/
   }
 
   /**
@@ -254,9 +354,29 @@ export class ProjectDataService extends CommunityDataService {
     };
 
     return this.patch(project, [operation]).pipe(
-      flatMap(() => this.findById(project.id, true, followLink('parentCommunity'))),
+      mergeMap(() => this.findById(project.id, true, followLink('parentCommunity'))),
       getFinishedRemoteData()
     );
+  }
+
+  /**
+   * Search a community by id
+   *
+   * @return Observable<Community>
+   */
+  private searchCommunityById(id: string, scope: string = '', ...linksToFollow: FollowLinkConfig<Community>[]): Observable<Community> {
+    const sort = new SortOptions('dc.title', SortDirection.ASC);
+    const pagination = new PaginationComponentOptions();
+    const searchOptions = new PaginatedSearchOptions({
+      configuration: 'default',
+      query: 'search.resourceid:' + id,
+      dsoTypes: [DSpaceObjectType.COMMUNITY],
+      pagination: pagination,
+      sort: sort,
+      scope: scope
+    });
+
+    return this.fetchSearchCommunity(searchOptions, ...linksToFollow);
   }
 
   /**
@@ -264,17 +384,27 @@ export class ProjectDataService extends CommunityDataService {
    *
    * @return Observable<Community>
    */
-  private searchCommunityById(id: string, ...linksToFollow: Array<FollowLinkConfig<Community>>): Observable<Community> {
+  private searchCommunityByName(name: string, scope: string = '', ...linksToFollow: FollowLinkConfig<Community>[]): Observable<Community> {
     const sort = new SortOptions('dc.title', SortDirection.ASC);
-    const pagination = new PaginationComponentOptions()
+    const pagination = new PaginationComponentOptions();
     const searchOptions = new PaginatedSearchOptions({
       configuration: 'default',
-      query: 'search.resourceid:' + id,
+      query: 'dc.title:' + name,
       dsoTypes: [DSpaceObjectType.COMMUNITY],
       pagination: pagination,
-      sort: sort
+      sort: sort,
+      scope: scope
     });
 
+    return this.fetchSearchCommunity(searchOptions, ...linksToFollow);
+  }
+
+  /**
+   * Fetch a search request
+   *
+   * @return Observable<Community>
+   */
+  private fetchSearchCommunity(searchOptions: PaginatedSearchOptions, ...linksToFollow: FollowLinkConfig<Community>[]): Observable<Community> {
     return this.searchService.search(searchOptions).pipe(
       filter((rd: RemoteData<PaginatedList<SearchResult<any>>>) => rd.hasSucceeded),
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
@@ -285,19 +415,20 @@ export class ProjectDataService extends CommunityDataService {
         return Object.assign(rd, { payload: payload });
       }),
       map((rd: RemoteData<PaginatedList<Observable<Community>>>) => rd.payload),
-      flatMap((list: PaginatedList<Observable<Community>>) => {
+      mergeMap((list: PaginatedList<Observable<Community>>) => {
         if (list.page.length > 0) {
           return (list.page[0]).pipe(
             map((community: Community) => community),
-            flatMap((community: Community) => this.findById(community.id, true, ...linksToFollow)),
+            mergeMap((community: Community) => this.findById(community.id, true, ...linksToFollow).pipe(
+              tap(() => this.requestService.removeByHrefSubstring(community.id))
+            )),
             getFirstSucceededRemoteDataPayload()
-          )
+          );
         } else {
           return observableOf(null);
         }
       }),
       take(1),
-      tap(() => this.requestService.removeByHrefSubstring(id)),
       distinctUntilChanged()
     );
   }

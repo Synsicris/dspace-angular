@@ -87,7 +87,7 @@ export class MyDSpaceConfigurationService extends SearchConfigurationService {
           availableConf.push(MyDSpaceConfigurationValueType.Workspace);
         }
         if (isController || isAdmin) {
-          availableConf.push(MyDSpaceConfigurationValueType.Workflow);
+          availableConf.push(MyDSpaceConfigurationValueType.AllProjectItems);
         }
         return availableConf;
       }));
@@ -111,7 +111,7 @@ export class MyDSpaceConfigurationService extends SearchConfigurationService {
         });
         return configurationOptions;
       })
-    )
+    );
   }
 
 }

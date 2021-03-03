@@ -11,7 +11,7 @@ export class ImpactPathwayTask {
     public title?: string,
     public description?: string,
     public tasks: ImpactPathwayTask[] = []) {
-  };
+  }
 
   hasDetail() {
     return this.hasParent() && this.type === 'proj_objectives';
@@ -32,7 +32,7 @@ export class ImpactPathwayTask {
       step = this.tasks[index];
     }
 
-    return step
+    return step;
   }
 
   getSubTaskIndex(taskId: string): number {

@@ -32,4 +32,4 @@ export const ProjectEntityList = new Map([
         ]]
       ])
     ]
-])
+]);

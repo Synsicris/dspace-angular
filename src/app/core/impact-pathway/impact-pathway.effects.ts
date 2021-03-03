@@ -91,7 +91,7 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new GenerateImpactPathwayErrorAction())
+          return observableOf(new GenerateImpactPathwayErrorAction());
         }));
     }));
 
@@ -101,10 +101,10 @@ export class ImpactPathwayEffects {
   @Effect({ dispatch: false }) generateSuccess$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUCCESS),
     tap(() => {
-      this.notificationsService.success(null, this.translate.get('impact-pathway.create.success'))
+      this.notificationsService.success(null, this.translate.get('impact-pathway.create.success'));
     }),
     tap((action: GenerateImpactPathwaySuccessAction) => {
-      this.impactPathwayService.redirectToEditPage(action.payload.projectId ,action.payload.item.id)
+      this.impactPathwayService.redirectToEditPage(action.payload.projectId ,action.payload.item.id);
     }));
 
   /**
@@ -113,7 +113,7 @@ export class ImpactPathwayEffects {
   @Effect({ dispatch: false }) generateError$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_ERROR),
     tap(() => {
-      this.notificationsService.error(null, this.translate.get('impact-pathway.create.error'))
+      this.notificationsService.error(null, this.translate.get('impact-pathway.create.error'));
     }));
 
   /**
@@ -125,9 +125,9 @@ export class ImpactPathwayEffects {
       return this.impactPathwayService.initImpactPathway(action.payload.item).pipe(
         map((object: ImpactPathway) => {
           if (isNotEmpty(object)) {
-            return new InitImpactPathwaySuccessAction(object.id, object)
+            return new InitImpactPathwaySuccessAction(object.id, object);
           } else {
-            return new InitImpactPathwayErrorAction()
+            return new InitImpactPathwayErrorAction();
           }
         }));
     }));
@@ -151,7 +151,7 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new GenerateImpactPathwayTaskErrorAction())
+          return observableOf(new GenerateImpactPathwayTaskErrorAction());
         }));
     }));
 
@@ -164,7 +164,7 @@ export class ImpactPathwayEffects {
       return new AddImpactPathwayTaskAction(
         action.payload.impactPathwayId,
         action.payload.stepId,
-        action.payload.item.id)
+        action.payload.item.id);
     }));
 
   /**
@@ -176,7 +176,7 @@ export class ImpactPathwayEffects {
       ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK_ERROR,
       ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK_ERROR),
     tap(() => {
-      this.notificationsService.error(null, this.translate.get('impact-pathway.task.create.error'))
+      this.notificationsService.error(null, this.translate.get('impact-pathway.task.create.error'));
     }),
     tap((action: AddImpactPathwaySubTaskAction) => {
       this.modalService.dismissAll();
@@ -206,7 +206,7 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new AddImpactPathwayTaskErrorAction())
+          return observableOf(new AddImpactPathwayTaskErrorAction());
         }));
     }));
 
@@ -216,7 +216,7 @@ export class ImpactPathwayEffects {
   @Effect({ dispatch: false }) addTaskSuccess$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_SUCCESS),
     tap(() => {
-      this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'))
+      this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'));
     }),
     tap((action: AddImpactPathwaySubTaskAction) => {
       this.modalService.dismissAll();
@@ -243,7 +243,7 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new GenerateImpactPathwayTaskErrorAction())
+          return observableOf(new GenerateImpactPathwayTaskErrorAction());
         }));
     }));
 
@@ -257,7 +257,7 @@ export class ImpactPathwayEffects {
         action.payload.impactPathwayId,
         action.payload.stepId,
         action.payload.parentTaskId,
-        action.payload.item.id)
+        action.payload.item.id);
     }));
 
   /**
@@ -285,7 +285,7 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new AddImpactPathwayTaskErrorAction())
+          return observableOf(new AddImpactPathwayTaskErrorAction());
         }));
     }));
 
@@ -295,7 +295,7 @@ export class ImpactPathwayEffects {
   @Effect({ dispatch: false }) addSubTaskSuccess$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS),
     tap(() => {
-      this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'))
+      this.notificationsService.success(null, this.translate.get('impact-pathway.task.create.success'));
     }),
     tap((action: AddImpactPathwaySubTaskSuccessAction) => {
       this.modalService.dismissAll();
@@ -317,7 +317,7 @@ export class ImpactPathwayEffects {
               item.id,
               relationMetadata.value
             )
-          )
+          );
           return [...actions, new RemoveImpactPathwaySuccessAction(
             action.payload.projectId,
             action.payload.impactPathwayId)];
@@ -326,7 +326,7 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new RemoveImpactPathwayErrorAction())
+          return observableOf(new RemoveImpactPathwayErrorAction());
         }));
     }));
 
@@ -356,9 +356,9 @@ export class ImpactPathwayEffects {
               relationMetadata.value,
               environment.impactPathway.impactPathwayParentRelationMetadata
             )),
-            reduce((acc: any, value: any) => [...acc, ...value], []),
+            reduce((acc: any, value: any) => [...acc, value], []),
             map(() => parentItem)
-          )
+          );
         }),
         map(() => this.impactPathwayService.removeByItemId(action.payload.stepId)),
         map(() => new RemoveImpactPathwayStepSuccessAction(
@@ -369,7 +369,7 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new RemoveImpactPathwayStepErrorAction())
+          return observableOf(new RemoveImpactPathwayStepErrorAction());
         }));
     }));
 
@@ -392,7 +392,7 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new RemoveImpactPathwayTaskErrorAction())
+          return observableOf(new RemoveImpactPathwayTaskErrorAction());
         }));
     }));
 
@@ -416,7 +416,7 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new RemoveImpactPathwayTaskErrorAction())
+          return observableOf(new RemoveImpactPathwayTaskErrorAction());
         }));
     }));
 
@@ -439,7 +439,7 @@ export class ImpactPathwayEffects {
             action.payload.parentTaskId,
             action.payload.newParentTaskId,
             action.payload.taskId
-          ))
+          ));
         }));
     }));
 
@@ -449,7 +449,7 @@ export class ImpactPathwayEffects {
   @Effect({ dispatch: false }) moveSubTaskError$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR),
     tap(() => {
-      this.notificationsService.error(null, this.translate.get('impact-pathway.move.task.error'))
+      this.notificationsService.error(null, this.translate.get('impact-pathway.move.task.error'));
     }));
 
   /**
@@ -473,7 +473,7 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new PatchImpactPathwayMetadataErrorAction())
+          return observableOf(new PatchImpactPathwayMetadataErrorAction());
         }));
     }));
 
@@ -486,7 +486,7 @@ export class ImpactPathwayEffects {
       return new UpdateImpactPathwayAction(
         action.payload.impactPathwayId,
         this.impactPathwayService.updateImpactPathway(action.payload.item, action.payload.oldImpactPathway)
-      )
+      );
     })
   );
 
@@ -514,7 +514,7 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new PatchImpactPathwayTaskMetadataErrorAction())
+          return observableOf(new PatchImpactPathwayTaskMetadataErrorAction());
         }));
     }));
 
@@ -531,14 +531,14 @@ export class ImpactPathwayEffects {
           action.payload.parentTaskId,
           action.payload.taskId,
           this.impactPathwayService.updateImpactPathwayTask(action.payload.item, action.payload.oldTask)
-        )
+        );
       } else {
         return new UpdateImpactPathwayTaskAction(
           action.payload.impactPathwayId,
           action.payload.stepId,
           action.payload.taskId,
           this.impactPathwayService.updateImpactPathwayTask(action.payload.item, action.payload.oldTask)
-        )
+        );
       }
     })
   );
@@ -560,7 +560,7 @@ export class ImpactPathwayEffects {
             if (error) {
               console.error(error.message);
             }
-            return observableOf(new SaveImpactPathwayTaskLinksErrorAction())
+            return observableOf(new SaveImpactPathwayTaskLinksErrorAction());
           }));
       } else {
         return observableOf(new SaveImpactPathwayTaskLinksSuccessAction());
@@ -576,7 +576,7 @@ export class ImpactPathwayEffects {
       ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_TASK_METADATA_ERROR,
       ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_METADATA_ERROR),
     tap(() => {
-      this.notificationsService.error(null, this.translate.get('impact-pathway.patch.metadata.error'))
+      this.notificationsService.error(null, this.translate.get('impact-pathway.patch.metadata.error'));
     }));
 
   /**

@@ -2,44 +2,8 @@
   <ds-comcol-page-header
     [name]="('project-overview.page.header.project.title' | translate ) + getProjectName()">
   </ds-comcol-page-header>
-  <button type="button"
-          class="btn btn-danger"
-          title="{{'project-overview.page.header.delete.btn' | translate}}"
-          [disabled]="(isProcessing() | async)"
-          (click)="$event.preventDefault();confirmDelete(content)">
-    <span *ngIf="(isProcessing() | async)">
-      <i class='fas fa-circle-notch fa-spin'></i>&nbsp;{{'project-overview.page.header.delete.processing' | translate}}
-    </span>
-    <span *ngIf="!(isProcessing() | async)">
-      <i class="fas fa-trash-alt"></i>&nbsp;{{'project-overview.page.header.delete.btn' | translate}}
-    </span>
-  </button>
+  <div class="pl-2">
+    <ds-context-menu [contextMenuObject]="project" [contextMenuObjectType]="'PROJECT'"></ds-context-menu>
+  </div>
 </div>
 
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title text-danger">
-      {{'project-overview.page.header.delete.confirm.title' | translate}}
-    </h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('cancel')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>{{'project-overview.page.header.delete.confirm.info' | translate}}</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button"
-            class="btn btn-secondary"
-            title="{{'project-overview.page.header.delete.confirm.cancel' | translate}}"
-            (click)="c('cancel')">
-      {{'project-overview.page.header.delete.confirm.cancel' | translate}}
-    </button>
-    <button type="button"
-            class="btn btn-danger"
-            title="{{'project-overview.page.header.delete.confirm.submit' | translate}}"
-            (click)="c('ok')">
-      {{'project-overview.page.header.delete.confirm.submit' | translate}}
-    </button>
-  </div>
-</ng-template>

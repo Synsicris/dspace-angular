@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { DynamicFormLayoutService, DynamicFormValidationService } from '@ng-dynamic-forms/core';
 import { Observable, of as observableOf } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, merge, switchMap, tap } from 'rxjs/operators';
-import { NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { isEqual } from 'lodash';
 
 import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
@@ -21,6 +21,7 @@ import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/
 import { PageInfo } from '../../../../../../core/shared/page-info.model';
 import { DsDynamicVocabularyComponent } from '../dynamic-vocabulary.component';
 import { FormBuilderService } from '../../../form-builder.service';
+import { SubmissionService } from '../../../../../../submission/submission.service';
 
 /**
  * Component representing a tag input field
@@ -40,7 +41,7 @@ export class DsDynamicTagComponent extends DsDynamicVocabularyComponent implemen
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
   @Output() focus: EventEmitter<any> = new EventEmitter<any>();
 
-  @ViewChild('instance', { static: false }) instance: NgbTypeahead;
+  @ViewChild('instance') instance: NgbTypeahead;
 
   chips: Chips;
   hasAuthority: boolean;
@@ -55,9 +56,11 @@ export class DsDynamicTagComponent extends DsDynamicVocabularyComponent implemen
               private cdr: ChangeDetectorRef,
               protected layoutService: DynamicFormLayoutService,
               protected validationService: DynamicFormValidationService,
-              protected formBuilderService: FormBuilderService
+              protected formBuilderService: FormBuilderService,
+              protected modalService: NgbModal,
+              protected submissionService: SubmissionService
   ) {
-    super(vocabularyService, layoutService, validationService, formBuilderService);
+    super(vocabularyService, layoutService, validationService, formBuilderService, modalService, submissionService);
   }
 
   /**
@@ -92,7 +95,7 @@ export class DsDynamicTagComponent extends DsDynamicVocabularyComponent implemen
       }),
       map((list: PaginatedList<VocabularyEntry>) => list.page),
       tap(() => this.changeSearchingStatus(false)),
-      merge(this.hideSearchingWhenUnsubscribed));
+      merge(this.hideSearchingWhenUnsubscribed))
 
   /**
    * Initialize the component, setting up the init form value
@@ -101,7 +104,7 @@ export class DsDynamicTagComponent extends DsDynamicVocabularyComponent implemen
     this.hasAuthority = this.model.vocabularyOptions && hasValue(this.model.vocabularyOptions.name);
 
     this.chips = new Chips(
-      this.model.value,
+      this.model.value as any[],
       'display',
       null,
       environment.submission.icons.metadata);
@@ -164,8 +167,6 @@ export class DsDynamicTagComponent extends DsDynamicVocabularyComponent implemen
   }
 
   updateModel(event) {
-    /*    this.model.valueUpdates.next(this.chips.getChipsItems());
-        this.change.emit(event);*/
     this.dispatchUpdate(this.chips.getChipsItems());
   }
 

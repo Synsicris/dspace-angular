@@ -1,0 +1,4 @@
+<button *ngIf="(isProjectAdmin() | async)" class="dropdown-item"
+        (click)="$event.preventDefault();openInvitationModal();">
+  <span>{{'project-overview.invitation.menu.project' | translate}}</span>
+</button>

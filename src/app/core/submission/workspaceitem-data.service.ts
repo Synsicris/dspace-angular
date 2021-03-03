@@ -50,7 +50,7 @@ export class WorkspaceitemDataService extends DataService<WorkspaceItem> {
    * @param options        The {@link FindListOptions} object
    * @param linksToFollow  List of {@link FollowLinkConfig} that indicate which {@link HALLink}s should be automatically resolved
    */
-  public findByItem(uuid: string, options: FindListOptions = {}, ...linksToFollow: Array<FollowLinkConfig<WorkspaceItem>>): Observable<RemoteData<WorkspaceItem>> {
+  public findByItem(uuid: string, options: FindListOptions = {}, ...linksToFollow: FollowLinkConfig<WorkspaceItem>[]): Observable<RemoteData<WorkspaceItem>> {
     const optionsWithUUID = Object.assign(new FindListOptions(), options, {
       searchParams: [new RequestParam('uuid', uuid)]
     });
