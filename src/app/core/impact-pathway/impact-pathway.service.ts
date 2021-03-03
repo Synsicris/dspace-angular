@@ -740,7 +740,12 @@ export class ImpactPathwayService {
     Object.keys(metadata)
       .filter((metadataName) => metadataName !== 'relationship.type')
       .forEach((metadataName) => {
-      this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
+        if (metadataName !== 'cris.workspace.shared') {
+          this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
+        } else {
+          const path = pathCombiner.getPath([metadataName, '0']);
+          this.operationsBuilder.replace(path, metadata[metadataName], true);
+        }
     });
   }
 
