@@ -576,7 +576,7 @@ export class SubmissionService {
           take(1),
           tap((previousUrl) => {
             if (isEmpty(previousUrl)) {
-              this.router.navigate([MYDSPACE_ROUTE]);
+              this.router.navigate(['/home']);
             } else {
               this.router.navigateByUrl(previousUrl);
             }
@@ -591,10 +591,17 @@ export class SubmissionService {
       take(1),
       tap((url) => this.requestService.removeByHrefSubstring(url)),
       // Now, do redirect.
-      tap(() => {
-        const itemUuid = submissionId.indexOf(':') > -1 ? submissionId.split(':')[0] : submissionId;
-        this.router.navigateByUrl('/items/' + itemUuid, { replaceUrl: true });
-      })
+      concatMap(
+        () => this.routeService.getPreviousUrl().pipe(
+          take(1),
+          tap((previousUrl) => {
+            if (isEmpty(previousUrl)) {
+              const itemUuid = submissionId.indexOf(':') > -1 ? submissionId.split(':')[0] : submissionId;
+              this.router.navigateByUrl('/items/' + itemUuid, { replaceUrl: true });
+            } else {
+              this.router.navigateByUrl(previousUrl);
+            }
+          })))
     ).subscribe();
   }
 
