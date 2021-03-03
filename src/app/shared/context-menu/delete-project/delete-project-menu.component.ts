@@ -96,8 +96,8 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
   /**
    * Check if user is administrator for this project
    */
-  isProjectAdmin(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, this.contextMenuObject.self, undefined);
+  canDeleteProject(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.CanDelete, this.contextMenuObject.self, undefined);
   }
 
   isProcessing() {
