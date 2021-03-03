@@ -1,4 +1,4 @@
-<button *ngIf="canEdit()" class="btn btn-primary mt-1 mb-3"
+<button *ngIf="(canEdit() | async)" class="btn btn-primary mt-1 mb-3"
    ngbTooltip="{{'submission.workflow.generic.edit-help' | translate}}"
    [disabled]="(isRedirectingToEdit$ | async)"
    (click)="navigateToEditItemPage()"

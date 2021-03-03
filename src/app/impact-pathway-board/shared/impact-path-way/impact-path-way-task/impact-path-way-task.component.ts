@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest as combineLatestObservable, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 
 import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
 import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
@@ -10,7 +10,6 @@ import { hasValue, isNotEmpty, isNotUndefined } from '../../../../shared/empty.u
 import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
 import { ImpactPathwayLinksService } from '../../../../core/impact-pathway/impact-pathway-links.service';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { WorkspaceitemDataService } from '../../../../core/submission/workspaceitem-data.service';
 import { EditItemDataService } from '../../../../core/submission/edititem-data.service';
 import { EditItemMode } from '../../../../core/submission/models/edititem-mode.model';
 
@@ -43,6 +42,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   private removing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private subs: Subscription[] = [];
   private isTwoWayRelationSelected: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private canEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Output() public selected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
   @Output() public deselected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
@@ -51,8 +51,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
     private editItemDataService: EditItemDataService,
     private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
-    private router: Router,
-    private workspaceItemService: WorkspaceitemDataService
+    private router: Router
   ) {
   }
 
@@ -66,6 +65,13 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
       filter((task: ImpactPathwayTask) => !this.multiSelectEnabled && isNotEmpty(task) && this.isTaskSelectable()),
       map((task: ImpactPathwayTask) => task.id === this.data.id),
     ).subscribe((hasFocus) => this.selectStatus.next(hasFocus));
+
+    this.editItemDataService.searchEditModesByID(this.data.id).pipe(
+      map((editModes: EditItemMode[]) => editModes && editModes.length > 0),
+      take(1)
+    ).subscribe((canEdit: boolean) => {
+      this.canEdit$.next(canEdit);
+    });
 
     this.subs.push(this.selectStatus.pipe(
       distinctUntilChanged(),
@@ -153,7 +159,8 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
     this.isRedirectingToEdit$.next(true);
     this.editItemDataService.searchEditModesByID(this.data.id).pipe(
       filter((editModes: EditItemMode[]) => editModes && editModes.length > 0),
-      map((editModes: EditItemMode[]) => editModes[0])
+      map((editModes: EditItemMode[]) => editModes[0]),
+      take(1)
     ).subscribe((editMode: EditItemMode) => {
       this.router.navigate(['edit-items', this.data.id + ':' + editMode.name]);
       this.isRedirectingToEdit$.next(false);
@@ -207,8 +214,6 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   }
 
   canEdit(): Observable<boolean> {
-    return this.editItemDataService.searchEditModesByID(this.data.id).pipe(
-      map((editModes: EditItemMode[]) => editModes && editModes.length > 0)
-    );
+    return this.canEdit$.asObservable();
   }
 }

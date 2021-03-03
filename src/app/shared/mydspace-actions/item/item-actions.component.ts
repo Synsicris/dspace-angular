@@ -1,8 +1,8 @@
-import { Component, Injector, Input } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
 import { MyDSpaceActionsComponent } from '../mydspace-actions';
@@ -23,7 +23,7 @@ import { EditItemDataService } from '../../../core/submission/edititem-data.serv
   templateUrl: './item-actions.component.html',
 })
 
-export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDataService> {
+export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDataService> implements OnInit {
 
   /**
    * The Item object
@@ -35,6 +35,13 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    * @type {BehaviorSubject<boolean>}
    */
   public isRedirectingToEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * A boolean representing if editing is available
+   * @type {BehaviorSubject<boolean>}
+   */
+  private canEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   /**
    * Initialize instance variables
    *
@@ -56,6 +63,16 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
     super(Item.type, injector, router, notificationsService, translate, searchService, requestService);
   }
 
+
+  ngOnInit(): void {
+    this.editItemDataService.searchEditModesByID(this.object.id).pipe(
+      map((editModes: EditItemMode[]) => editModes && editModes.length > 0),
+      take(1)
+    ).subscribe((canEdit: boolean) => {
+      this.canEdit$.next(canEdit);
+    });
+  }
+
   /**
    * Init the target object
    *
@@ -69,9 +86,7 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    * Check if edit modes are available for the item
    */
   canEdit(): Observable<boolean> {
-    return this.editItemDataService.searchEditModesByID(this.object.id).pipe(
-      map((editModes: EditItemMode[]) => editModes && editModes.length > 0)
-    );
+    return this.canEdit$.asObservable();
   }
 
   /**
@@ -81,10 +96,12 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
     this.isRedirectingToEdit$.next(true);
     this.editItemDataService.searchEditModesByID(this.object.id).pipe(
       filter((editModes: EditItemMode[]) => editModes && editModes.length > 0),
-      map((editModes: EditItemMode[]) => editModes[0])
+      map((editModes: EditItemMode[]) => editModes[0]),
+      take(1)
     ).subscribe((editMode: EditItemMode) => {
       this.router.navigate(['edit-items', this.object.id + ':' + editMode.name]);
       this.isRedirectingToEdit$.next(false);
     });
   }
+
 }

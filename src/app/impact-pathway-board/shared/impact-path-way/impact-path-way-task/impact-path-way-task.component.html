@@ -72,7 +72,7 @@
                   (click)="showObjectives(); $event.stopPropagation()"><i class="far fa-list-alt"></i>
           </button>
         </div>
-        <button *ngIf="!data.hasDetail() && canEdit()" class="btn btn-lg btn-link p-0 flex-shrink-1"
+        <button *ngIf="!data.hasDetail() && (canEdit() | async)" class="btn btn-lg btn-link p-0 flex-shrink-1"
                 [disabled]="(isEditingRelation() | async)"
                 title="{{'impact-pathway.edit.item.title' | translate}}"
                 (click)="navigateToEditItemPage(); $event.stopPropagation()">
