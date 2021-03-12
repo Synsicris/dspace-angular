@@ -7243,6 +7243,12 @@
   "vocabulary-treeview.tree.description.units": "Please select a suitable unit. If no unit fits, please use the next field.",
 
   
+  "tree.description.event-type": "Type of event/interaction",
+
+  
+  "vocabulary-treeview.tree.description.event-type": "Please select the appropriate format for the event/ interaction.",
+
+  
   "tree.description.coar": "Type of publication",
 
   

@@ -8462,13 +8462,19 @@
   "tree.description.all-innovation": ".Art der Lösung / Veränderung / Innovation",
 
   // "vocabulary-treeview.tree.description.all-innovation": "Please characterize the type of solution / change / innovation by selecting (multiple selections possible).",
-  "vocabulary-treeview.tree.description.all-innovation": "Charakterisieren Sie bitte die Art der Lösung / Veränderung / Innovation durch eine Auswahl  (Mehrfachangabe möglich).Art der Lösung / Veränderung / Innovation",
+  "vocabulary-treeview.tree.description.all-innovation": "Charakterisieren Sie bitte die Art der Lösung / Veränderung / Innovation durch eine Auswahl  (Mehrfachangabe möglich).",
 
   // "tree.description.units": "Unit (selection list)",
   "tree.description.units": "Einheit (Auswahlliste)",
 
   // "vocabulary-treeview.tree.description.units": "Please select a suitable unit. If no unit fits, please use the next field.",
   "vocabulary-treeview.tree.description.units": "Bitte wählen Sie eine passende Einheit aus. Falls keine Einheit passt, nutzen Sie bitte das nächste Feld.",
+
+  // "tree.description.event-type": "Type of event/interaction",
+  "tree.description.event-type": "Art der Veranstaltung/Interaktion",
+
+  // "vocabulary-treeview.tree.description.event-type": "Please select the appropriate format for the event/ interaction.",
+  "vocabulary-treeview.tree.description.event-type": "Wählen Sie bitte das passende Format für die Veranstaltung/Interaktion.",
 
   // "tree.description.coar": "Type of publication",
   "tree.description.coar": "Art der Veröffentlichung",
