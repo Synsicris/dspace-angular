@@ -57,6 +57,11 @@ import { NoContent } from '../shared/NoContent.model';
 import { NotificationOptions } from '../../shared/notifications/models/notification-options.model';
 import { PageInfo } from '../shared/page-info.model';
 
+export enum ProjectGrantsTypes {
+  Project = 'project',
+  Subproject = 'subproject',
+}
+
 @Injectable()
 export class ProjectDataService extends CommunityDataService {
 
@@ -96,13 +101,14 @@ export class ProjectDataService extends CommunityDataService {
    *
    * @param name       The subproject name
    * @param projectId  The parent project id
+   * @param grants     The grants to for the subproject to create
    * @return Observable<RemoteData<Community>>
    *   The project created
    */
-  createSubproject(name: string, projectId: string): Observable<RemoteData<Community>> {
+  createSubproject(name: string, projectId: string, grants: ProjectGrantsTypes): Observable<RemoteData<Community>> {
     const template$ = this.getSubprojectTemplateUrl();
     const subprojectsCommunity$ = this.getSubprojectCommunityByParentProjectUUID(projectId);
-    return this.fetchCreate(name, template$, subprojectsCommunity$);
+    return this.fetchCreate(name, template$, subprojectsCommunity$, grants);
   }
 
 
@@ -111,7 +117,7 @@ export class ProjectDataService extends CommunityDataService {
    *
    * @return Observable<Community>
    */
-  private fetchCreate(name: string, template: Observable<string>, parentCommunity: Observable<Community>): Observable<RemoteData<Community>> {
+  private fetchCreate(name: string, template: Observable<string>, parentCommunity: Observable<Community>, grants?: ProjectGrantsTypes): Observable<RemoteData<Community>> {
 
     const requestId = this.requestService.generateRequestId();
     const options: HttpOptions = Object.create({});
@@ -121,7 +127,10 @@ export class ProjectDataService extends CommunityDataService {
     const href$ = this.getEndpoint();
     combineLatest([template, href$, parentCommunity]).pipe(
       map(([templateUrl, href, projects]: [string, string, Community]) => {
-        const hrefWithParent = `${href}?parent=${projects.id}&name=${name}`;
+        let hrefWithParent = `${href}?parent=${projects.id}&name=${name}`;
+        if (isNotEmpty(grants)) {
+          hrefWithParent = hrefWithParent + `&grants=${grants}`;
+        }
         return new PostRequest(requestId, hrefWithParent, templateUrl, options);
       }),
       configureRequest(this.requestService),

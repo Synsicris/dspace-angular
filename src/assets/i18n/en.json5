@@ -3239,7 +3239,13 @@
 
   "project.create.head": "New project",
 
-  "project.create.placeholder": "Enter the name for the new project",
+  "project.create.grants.placeholder": "Please select editable grants",
+
+  "project.create.grants.project-option": "Editable by all project members",
+
+  "project.create.grants.subproject-option": "Editable by only sub-project members",
+
+  "project.create.name.placeholder": "Enter the name for the new project",
 
   "project.create.success": "The new project has been generated successfully.",
 

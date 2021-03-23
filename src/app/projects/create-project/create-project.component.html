@@ -5,13 +5,24 @@
     </button>
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="create();" [formGroup]="createForm" >
-      <input type="search"
-             class="form-control"
-             formControlName="name"
-             (click)="$event.stopPropagation();"
-             placeholder="{{'project.create.placeholder' | translate }}"
-             dsAutoFocus>
+    <form *ngIf="createForm" (ngSubmit)="create();" [formGroup]="createForm" >
+      <div class="form-group">
+        <input type="search"
+               class="form-control"
+               formControlName="name"
+               id="name"
+               (click)="$event.stopPropagation();"
+               placeholder="{{'project.create.name.placeholder' | translate }}"
+               dsAutoFocus>
+      </div>
+      <div *ngIf="isSubproject" class="form-group">
+        <select class="form-control" formControlName="grants" id="grants">
+          <option value="">{{'project.create.grants.placeholder' | translate}}</option>
+          <option *ngFor="let option of grantsOptions" [value]="option.id">
+            {{option.name | translate}}
+          </option>
+        </select>
+      </div>
       <button class="btn btn-success btn-lg btn-block mt-3"
               [disabled]="!createForm.valid || (processing$ | async)"
               type="submit">
