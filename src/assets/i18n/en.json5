@@ -1155,6 +1155,8 @@
 
   "context-menu.actions.generate-report.error": "There was an issue when generating the process report, please try again later.",
 
+  "context-menu.actions.btn": "Select an action",
+
   "context-menu.actions.label": "Options",
 
   "context-menu.actions.edit-item.btn.FULL": "Edit item",
