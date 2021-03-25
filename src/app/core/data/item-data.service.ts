@@ -2,7 +2,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { distinctUntilChanged, filter, find, map, switchMap, take } from 'rxjs/operators';
+import {
+  catchError,
+  delay,
+  distinctUntilChanged,
+  filter,
+  find,
+  map,
+  mergeMap,
+  switchMap,
+  take,
+  tap
+} from 'rxjs/operators';
 import { hasValue, isNotEmpty, isNotEmptyOperator } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { BrowseService } from '../browse/browse.service';
@@ -16,29 +27,28 @@ import { ExternalSourceEntry } from '../shared/external-source-entry.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { Item } from '../shared/item.model';
 import { ITEM } from '../shared/item.resource-type';
-import { configureRequest } from '../shared/operators';
+import { configureRequest, getFirstSucceededRemoteDataPayload } from '../shared/operators';
 import { URLCombiner } from '../url-combiner/url-combiner';
 
 import { DataService } from './data.service';
 import { DSOChangeAnalyzer } from './dso-change-analyzer.service';
 import { PaginatedList } from './paginated-list.model';
 import { RemoteData } from './remote-data';
-import {
-  DeleteRequest,
-  FindListOptions,
-  GetRequest,
-  PostRequest,
-  PutRequest,
-  RestRequest
-} from './request.models';
+import { DeleteRequest, FindListOptions, GetRequest, PostRequest, PutRequest, RestRequest } from './request.models';
 import { RequestService } from './request.service';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
 import { Bundle } from '../shared/bundle.model';
-import { MetadataMap } from '../shared/metadata.models';
+import { MetadataMap, MetadataValue } from '../shared/metadata.models';
 import { BundleDataService } from './bundle-data.service';
 import { Operation } from 'fast-json-patch';
 import { NoContent } from '../shared/NoContent.model';
 import { Metric } from '../shared/metric.model';
+import { Metadata } from '../shared/metadata.utils';
+import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
+import { ErrorResponse } from '../cache/response.models';
+import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
+import { ItemJsonPatchOperationsService } from './item-json-patch-operations.service';
+import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
 
 @Injectable()
 @dataService(ITEM)
@@ -55,7 +65,9 @@ export class ItemDataService extends DataService<Item> {
     protected notificationsService: NotificationsService,
     protected http: HttpClient,
     protected comparator: DSOChangeAnalyzer<Item>,
-    protected bundleService: BundleDataService
+    protected bundleService: BundleDataService,
+    protected operationsBuilder: JsonPatchOperationsBuilder,
+    protected itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
   ) {
     super();
   }
@@ -329,6 +341,45 @@ export class ItemDataService extends DataService<Item> {
   public getBitstreamsEndpoint(itemId: string): Observable<string> {
     return this.halService.getEndpoint(this.linkPath).pipe(
       switchMap((url: string) => this.halService.getEndpoint('bitstreams', `${url}/${itemId}`))
+    );
+  }
+
+  updateItemMetadata(itemId: string, metadataName: string, position: number, value: string): Observable<RemoteData<Item>> {
+    return this.findById(itemId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((item: Item) => Metadata.first(item.metadata, metadataName)),
+      tap((metadataValue: MetadataValue) => {
+        if (isNotEmpty(metadataValue)) {
+          this.replaceMetadataPatch(metadataName, position, value);
+        } else {
+          this.addMetadataPatch(metadataName, value);
+        }
+      }),
+      delay(200),
+      mergeMap(() => this.executeItemPatch(itemId, 'metadata'))
+    );
+  }
+
+  replaceMetadataPatch(metadataName: string, position: number, value: string): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    const path = pathCombiner.getPath([metadataName, position.toString()]);
+    this.operationsBuilder.replace(path, value, true);
+  }
+
+  addMetadataPatch(metadataName: string, value: string): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    const path = pathCombiner.getPath([metadataName]);
+    this.operationsBuilder.add(path, value, true, true);
+  }
+
+  private executeItemPatch(objectId: string, pathName: string): Observable<RemoteData<Item>> {
+    return this.itemJsonPatchOperationsService.jsonPatchByResourceType(
+      'items',
+      objectId,
+      pathName).pipe(
+      tap((item: Item) => this.update(item)),
+      map((item: Item) => createSuccessfulRemoteDataObject<Item>(item)),
+      catchError((error: ErrorResponse) => createFailedRemoteDataObject$<Item>(error.errorMessage))
     );
   }
 }

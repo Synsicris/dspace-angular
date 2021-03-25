@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,7 +12,6 @@ import { AuthorizationDataService } from '../../../core/data/feature-authorizati
 import { InvitationModalComponent } from '../../invitation-modal/invitation-modal.component';
 import { ProjectGroupService } from '../../../core/project/project-group.service';
 import { Community } from '../../../core/shared/community.model';
-import { Observable } from 'rxjs/internal/Observable';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 
 /**
@@ -19,11 +19,11 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
  */
 @Component({
   selector: 'ds-context-menu-project-invitation',
-  templateUrl: './project-invitation-menu.component.html'
+  templateUrl: './project-members-invitation-menu.component.html'
 })
 @rendersContextMenuEntriesForType('PROJECT')
 @rendersContextMenuEntriesForType('SUBPROJECT')
-export class ProjectInvitationMenuComponent extends ContextMenuEntryComponent implements OnInit {
+export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryComponent implements OnInit {
 
   isSubproject;
 
@@ -66,13 +66,14 @@ export class ProjectInvitationMenuComponent extends ContextMenuEntryComponent im
   public openInvitationModal() {
     let groups$: Observable<string[]>;
     if (this.isSubproject) {
-      groups$ = this.projectGroupService.getInvitationSubprojectGroupsByCommunity(this.contextMenuObject as Community);
+      groups$ = this.projectGroupService.getInvitationSubprojectMembersGroupsByCommunity(this.contextMenuObject as Community);
     } else {
-      groups$ = this.projectGroupService.getInvitationProjectGroupsByCommunity(this.contextMenuObject as Community);
+      groups$ = this.projectGroupService.getProjectMembersGroupNameByCommunity(this.contextMenuObject as Community);
     }
 
     groups$.pipe(take(1))
       .subscribe((groups: string[]) => {
+        console.log('members', groups);
         this.modalRef = this.modalService.open(InvitationModalComponent);
         this.modalRef.componentInstance.groupList = groups;
       });

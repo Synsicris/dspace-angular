@@ -341,5 +341,8 @@ export const environment: GlobalConfig = {
     workpackageStatusTypeAuthority: 'working_plan_workpackage_status_type',
     workpackageStepTypeAuthority: 'working_plan_workpackage_step_type',
     workingPlanPlaceMetadata: 'workingplan.place'
+  },
+  projects: {
+    projectsGrantsOptionsVocabularyName: 'item_shared'
   }
 };

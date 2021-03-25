@@ -13,6 +13,11 @@ import { RequestService } from '../../../core/data/request.service';
 import { SearchService } from '../../../core/shared/search/search.service';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
+import { isNotEmpty } from '../../empty.util';
 
 /**
  * This component represents mydspace actions related to Item object.
@@ -43,8 +48,15 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   private canEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * A boolean representing if editing grants is available
+   * @type {BehaviorSubject<boolean>}
+   */
+  private canEditGrants$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * Initialize instance variables
    *
+   * @param {AuthorizationDataService} authorizationService
    * @param {Injector} injector
    * @param {Router} router
    * @param {NotificationsService} notificationsService
@@ -52,14 +64,17 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    * @param {SearchService} searchService
    * @param {RequestService} requestService
    * @param {EditItemDataService} editItemDataService
+   * @param {NgbModal} modalService
    */
-  constructor(protected injector: Injector,
+  constructor(protected authorizationService: AuthorizationDataService,
+              protected injector: Injector,
               protected router: Router,
               protected notificationsService: NotificationsService,
               protected translate: TranslateService,
               protected searchService: SearchService,
               protected requestService: RequestService,
-              protected editItemDataService: EditItemDataService) {
+              protected editItemDataService: EditItemDataService,
+              protected modalService: NgbModal) {
     super(Item.type, injector, router, notificationsService, translate, searchService, requestService);
   }
 
@@ -70,6 +85,12 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEdit$.next(canEdit);
+    });
+
+    this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.object.self, undefined).pipe(
+      take(1)
+    ).subscribe((canEdit: boolean) => {
+      this.canEditGrants$.next(canEdit);
     });
   }
 
@@ -90,6 +111,13 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   }
 
   /**
+   * Check if edit modes are available for the item
+   */
+  canEditGrants(): Observable<boolean> {
+    return this.canEditGrants$.asObservable();
+  }
+
+  /**
    * Navigate to edit item page
    */
   public navigateToEditItemPage(): void {
@@ -104,4 +132,18 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
     });
   }
 
+  /**
+   * Open edit grants modal
+   */
+  openEditGrantsModal() {
+    const modRef = this.modalService.open(EditItemGrantsModalComponent);
+    modRef.componentInstance.item = this.object;
+
+    modRef.result.then((item: Item) => {
+      if (isNotEmpty(item)) {
+        this.object = item;
+      }
+    });
+
+  }
 }

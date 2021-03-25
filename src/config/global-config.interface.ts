@@ -15,6 +15,7 @@ import { UIServerConfig } from './ui-server-config.interface';
 import { LayoutConfig } from './layout-config.interfaces';
 import { ImpactPathwayConfig } from './impact-pathway-config.interface';
 import { WorkingPlanConfig } from './working-plan-config.interface';
+import { ProjectsConfig } from './projects-config.interface';
 
 export interface GlobalConfig extends Config {
   ui: UIServerConfig;
@@ -39,4 +40,5 @@ export interface GlobalConfig extends Config {
   layout: LayoutConfig;
   impactPathway: ImpactPathwayConfig;
   workingPlan: WorkingPlanConfig;
+  projects: ProjectsConfig;
 }

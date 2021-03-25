@@ -1,23 +1,22 @@
 import { Component, Inject } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { BehaviorSubject, Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
-import { take } from 'rxjs/operators';
 import { RemoteData } from '../../../core/data/remote-data';
 import { NoContent } from '../../../core/shared/NoContent.model';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { ProjectDataService } from '../../../core/project/project-data.service';
 import { Community } from '../../../core/shared/community.model';
 import { NotificationsService } from '../../notifications/notifications.service';
-import { TranslateService } from '@ngx-translate/core';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
-import { Observable } from 'rxjs/internal/Observable';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
 /**
  * This component renders a context menu option that provides to export an item.

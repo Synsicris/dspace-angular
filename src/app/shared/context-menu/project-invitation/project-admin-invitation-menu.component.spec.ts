@@ -10,12 +10,12 @@ import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
 import { Item } from '../../../core/shared/item.model';
-import { ProjectInvitationMenuComponent } from './project-invitation-menu.component';
+import { ProjectAdminInvitationMenuComponent } from './project-admin-invitation-menu.component';
 
 describe('AuditItemMenuComponent', () => {
-  let component: ProjectInvitationMenuComponent;
+  let component: ProjectAdminInvitationMenuComponent;
   let componentAsAny: any;
-  let fixture: ComponentFixture<ProjectInvitationMenuComponent>;
+  let fixture: ComponentFixture<ProjectAdminInvitationMenuComponent>;
   let scheduler: TestScheduler;
 
   let dso: DSpaceObject;
@@ -29,7 +29,7 @@ describe('AuditItemMenuComponent', () => {
     });
 
     TestBed.configureTestingModule({
-      declarations: [ ProjectInvitationMenuComponent ],
+      declarations: [ ProjectAdminInvitationMenuComponent ],
       imports: [
         RouterTestingModule.withRoutes([]),
         TranslateModule.forRoot({
@@ -48,7 +48,7 @@ describe('AuditItemMenuComponent', () => {
 
   beforeEach(() => {
     scheduler = getTestScheduler();
-    fixture = TestBed.createComponent(ProjectInvitationMenuComponent);
+    fixture = TestBed.createComponent(ProjectAdminInvitationMenuComponent);
     component = fixture.componentInstance;
     componentAsAny = fixture.componentInstance;
     component.contextMenuObject = dso;
