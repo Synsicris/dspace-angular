@@ -36,7 +36,20 @@ export class ProjectGroupService {
     return this.getGroupsByQuery(query);
   }
 
-  getInvitationSubprojectGroupsByCommunity(subproject: Community): Observable<string[]> {
+  getInvitationSubprojectAdminsGroupsByCommunity(subproject: Community): Observable<string[]> {
+    const subprojectMembers$ = this.getInvitationProjectGroupsByCommunity(subproject);
+    const projectMembers$ = this.communityService.findByHref(subproject._links.parentCommunity.href).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      mergeMap((subprojectsCommunity: Community) => this.communityService.findByHref(subprojectsCommunity._links.parentCommunity.href)),
+      getFirstSucceededRemoteDataPayload(),
+      mergeMap((parentProjectCommunity: Community) => this.getProjectMembersGroupNameByCommunity(parentProjectCommunity))
+    );
+    return combineLatest([subprojectMembers$, projectMembers$]).pipe(
+      map(([subprojectMembers, projectMembers]) => [...subprojectMembers, ...projectMembers])
+    );
+  }
+
+  getInvitationSubprojectMembersGroupsByCommunity(subproject: Community): Observable<string[]> {
     const subprojectMembers$ = this.getProjectMembersGroupNameByCommunity(subproject);
     const projectMembers$ = this.communityService.findByHref(subproject._links.parentCommunity.href).pipe(
       getFirstSucceededRemoteDataPayload(),

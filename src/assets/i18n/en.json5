@@ -3284,7 +3284,9 @@
 
   "project-overview.invitation.email" : "Email",
 
-  "project-overview.invitation.menu.project" : "Invite to project",
+  "project-overview.invitation-admin.menu.project" : "Invite coordinators to the current project",
+
+  "project-overview.invitation-members.menu.project" : "Invite members to the current project",
 
   "project-overview.invitation.project.msg" : "Please insert the email address of the person to invite to the project",
 
@@ -3295,6 +3297,10 @@
   "project-overview.invitation.error": "There was an issue when sending the invitation, please try again later.",
 
   "project-overview.invitation.success": "Invitation sent successfully.",
+
+  "project-overview.invitation-admin.menu.subproject" : "Invite coordinators to the current subproject",
+
+  "project-overview.invitation-members.menu.subproject" : "Invite members to the current subproject",
 
   "project-overview.page.header.delete.btn" : "Delete project",
 
