@@ -1,0 +1,27 @@
+<div>
+  <div class="modal-header">{{'submission.workflow.generic.edit-grants.head' | translate}}
+    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="(processing$ | async)">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form *ngIf="editForm" (ngSubmit)="editGrants();" [formGroup]="editForm" >
+      <label>{{'submission.workflow.generic.edit-grants.label' | translate}}</label>
+      <div class="form-group" ngbRadioGroup (change)="onChange($event?.target?.value)">
+        <div *ngFor="let option of grantsOptions" class="custom-control custom-radio">
+          <input type="radio" name="grants" class="custom-control-input"
+                 [checked]="option.id == currentItemGrantsValue"
+                 [id]="option.id"
+                 [value]="option.id">
+          <label class="custom-control-label" [for]="option.id">{{option.name | translate}}</label>
+        </div>
+      </div>
+      <button class="btn btn-success btn-lg btn-block mt-3"
+              [disabled]="!canSubmit() || (processing$ | async)"
+              type="submit">
+        <span *ngIf="processing$ | async"><i class='fas fa-circle-notch fa-spin'></i> {{'submission.workflow.tasks.generic.processing' | translate}}</span>
+        <span *ngIf="!(processing$ | async)">{{'submission.workflow.generic.edit-grants' | translate}}</span>
+      </button>
+    </form>
+  </div>
+</div>

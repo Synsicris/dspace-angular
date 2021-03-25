@@ -263,6 +263,7 @@ import { AuthorityTypeaheadComponent } from './authority-typeahead/authority-typ
 import { MaterialModule } from './material/material.module';
 import { CreateProjectComponent } from '../projects/create-project/create-project.component';
 import { InvitationModalComponent } from './invitation-modal/invitation-modal.component';
+import { EditItemGrantsModalComponent } from './edit-item-grants-modal/edit-item-grants-modal.component';
 
 /**
  * Declaration needed to make sure all decorator functions are called in time
@@ -516,7 +517,8 @@ const COMPONENTS = [
   SimpleItemBoxComponent,
   AuthorityTypeaheadComponent,
   CreateProjectComponent,
-  InvitationModalComponent
+  InvitationModalComponent,
+  EditItemGrantsModalComponent
 ];
 
 const ENTRY_COMPONENTS = [

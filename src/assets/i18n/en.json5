@@ -4876,6 +4876,18 @@
 
   "submission.workflow.generic.edit-help": "Select this option to change the item's metadata.",
 
+  "submission.workflow.generic.edit-grants": "Edit permissions",
+
+  "submission.workflow.generic.edit-grants-help": "Select this option to change the item's editable options.",
+
+  "submission.workflow.generic.edit-grants.error": "There was an issue when chancing the item permissions, please try again later.",
+
+  "submission.workflow.generic.edit-grants.head": "Change item edit permissions",
+
+  "submission.workflow.generic.edit-grants.label": "Please select editable permissions",
+
+  "submission.workflow.generic.edit-grants.success": "Operations successful",
+
   "submission.workflow.generic.view": "View",
 
   "submission.workflow.generic.view-help": "Select this option to view the item's metadata.",

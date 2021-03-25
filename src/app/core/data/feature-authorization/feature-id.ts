@@ -9,5 +9,6 @@ export enum FeatureID {
   WithdrawItem = 'withdrawItem',
   ReinstateItem = 'reinstateItem',
   EPersonRegistration = 'epersonRegistration',
-  CanCreateCommunities = 'canCreateCommunities'
+  CanCreateCommunities = 'canCreateCommunities',
+  CanEditItemGrants = 'canEditedGrants',
 }
