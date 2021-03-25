@@ -22,6 +22,8 @@ import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { NoContent } from '../shared/NoContent.model';
 import { hasValue } from '../../shared/empty.util';
 import { Operation } from 'fast-json-patch';
+import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
+import { ItemJsonPatchOperationsService } from './item-json-patch-operations.service';
 
 /* tslint:disable:max-classes-per-file */
 /**
@@ -53,8 +55,10 @@ class DataServiceImpl extends ItemDataService {
     protected http: HttpClient,
     protected comparator: DSOChangeAnalyzer<Item>,
     protected bundleService: BundleDataService,
-    protected collectionService: CollectionDataService) {
-    super(requestService, rdbService, store, bs, objectCache, halService, notificationsService, http, comparator, bundleService);
+    protected collectionService: CollectionDataService,
+    protected operationsBuilder: JsonPatchOperationsBuilder,
+    protected itemJsonPatchOperationsService: ItemJsonPatchOperationsService) {
+    super(requestService, rdbService, store, bs, objectCache, halService, notificationsService, http, comparator, bundleService, operationsBuilder, itemJsonPatchOperationsService);
   }
 
   /**
@@ -153,8 +157,10 @@ export class ItemTemplateDataService implements UpdateDataService<Item> {
     protected http: HttpClient,
     protected comparator: DSOChangeAnalyzer<Item>,
     protected bundleService: BundleDataService,
-    protected collectionService: CollectionDataService) {
-    this.dataService = new DataServiceImpl(requestService, rdbService, store, bs, objectCache, halService, notificationsService, http, comparator, bundleService, collectionService);
+    protected collectionService: CollectionDataService,
+    protected operationsBuilder: JsonPatchOperationsBuilder,
+    protected itemJsonPatchOperationsService: ItemJsonPatchOperationsService,) {
+    this.dataService = new DataServiceImpl(requestService, rdbService, store, bs, objectCache, halService, notificationsService, http, comparator, bundleService, collectionService, operationsBuilder, itemJsonPatchOperationsService);
   }
 
   /**

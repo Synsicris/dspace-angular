@@ -16,8 +16,8 @@ import {
   distinctUntilChanged,
   filter,
   map,
-  mergeMap,
   mapTo,
+  mergeMap,
   reduce,
   take,
   tap
@@ -71,7 +71,11 @@ import {
   SetImpactPathwayTargetTaskAction
 } from './impact-pathway.actions';
 import { ErrorResponse } from '../cache/response.models';
-import { getFinishedRemoteData, getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../shared/operators';
+import {
+  getFinishedRemoteData,
+  getFirstSucceededRemoteDataPayload,
+  getFirstSucceededRemoteListPayload
+} from '../shared/operators';
 import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
 import { VocabularyOptions } from '../submission/vocabularies/models/vocabulary-options.model';
 import { PageInfo } from '../shared/page-info.model';
@@ -496,22 +500,6 @@ export class ImpactPathwayService {
     return new ImpactPathwayStep(parentId, stepItem.id, type, stepItem.name, tasks);
   }
 
-  updateMetadataItem(itemId: string, metadataName: string, position: number, value: string): Observable<Item> {
-    return this.itemService.findById(itemId).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      map((item: Item) => Metadata.first(item.metadata, metadataName)),
-      tap((metadataValue: MetadataValue) => {
-        if (isNotEmpty(metadataValue)) {
-          this.replaceMetadataPatch(metadataName, position, value);
-        } else {
-          this.addMetadataPatch(metadataName, value);
-        }
-      }),
-      delay(200),
-      mergeMap(() => this.executeItemPatch(itemId, 'metadata'))
-    );
-  }
-
   retrieveObjectItem(id: string): Observable<Item> {
     return this.itemService.findById(id).pipe(
       getFirstSucceededRemoteDataPayload()
@@ -550,18 +538,6 @@ export class ImpactPathwayService {
       take(1),
       distinctUntilChanged()
     );
-  }
-
-  replaceMetadataPatch(metadataName: string, position: number, value: string): void {
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
-    const path = pathCombiner.getPath([metadataName, position.toString()]);
-    this.operationsBuilder.replace(path, value, true);
-  }
-
-  addMetadataPatch(metadataName: string, value: string): void {
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
-    const path = pathCombiner.getPath([metadataName]);
-    this.operationsBuilder.add(path, value, true, true);
   }
 
   checkAndRemoveRelations(itemId: string): Observable<Item> {

@@ -69,6 +69,8 @@ import { ImpactPathwayLinksMap } from './models/impact-pathway-task-links-map';
 import { environment } from '../../../environments/environment';
 import { MetadataValue } from '../shared/metadata.models';
 import { SubmissionObjectActionTypes } from '../../submission/objects/submission-objects.actions';
+import { ItemDataService } from '../data/item-data.service';
+import { RemoteData } from '../data/remote-data';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -458,17 +460,26 @@ export class ImpactPathwayEffects {
   @Effect() patchMetadataImpactPathway$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_METADATA),
     switchMap((action: PatchImpactPathwayMetadataAction) => {
-      return this.impactPathwayService.updateMetadataItem(
+      return this.itemService.updateItemMetadata(
         action.payload.impactPathwayId,
         action.payload.metadata,
         action.payload.metadataIndex,
         action.payload.value
       ).pipe(
-        map((item: Item) => new PatchImpactPathwayMetadataSuccessAction(
-          action.payload.impactPathwayId,
-          action.payload.oldImpactPathway,
-          item
-        )),
+        map((response: RemoteData<Item>) => {
+          if (response.hasSucceeded) {
+            return new PatchImpactPathwayMetadataSuccessAction(
+              action.payload.impactPathwayId,
+              action.payload.oldImpactPathway,
+              response.payload
+            );
+          } else {
+            if (response.errorMessage) {
+              console.error(response.errorMessage);
+            }
+            return new PatchImpactPathwayMetadataErrorAction();
+          }
+        }),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
@@ -496,20 +507,29 @@ export class ImpactPathwayEffects {
   @Effect() patchMetadataTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_TASK_METADATA),
     switchMap((action: PatchImpactPathwayTaskMetadataAction) => {
-      return this.impactPathwayService.updateMetadataItem(
+      return this.itemService.updateItemMetadata(
         action.payload.taskId,
         action.payload.metadata,
         action.payload.metadataIndex,
         action.payload.value
       ).pipe(
-        map((item: Item) => new PatchImpactPathwayTaskMetadataSuccessAction(
-          action.payload.impactPathwayId,
-          action.payload.stepId,
-          action.payload.taskId,
-          action.payload.oldTask,
-          item,
-          action.payload.parentTaskId
-        )),
+        map((response: RemoteData<Item>) => {
+          if (response.hasSucceeded) {
+            return new PatchImpactPathwayTaskMetadataSuccessAction(
+              action.payload.impactPathwayId,
+              action.payload.stepId,
+              action.payload.taskId,
+              action.payload.oldTask,
+              response.payload,
+              action.payload.parentTaskId
+            );
+          } else {
+            if (response.errorMessage) {
+              console.error(response.errorMessage);
+            }
+            return new PatchImpactPathwayTaskMetadataErrorAction();
+          }
+        }),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
@@ -622,6 +642,7 @@ export class ImpactPathwayEffects {
     private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
     private itemAuthorityRelationService: ItemAuthorityRelationService,
+    private itemService: ItemDataService,
     private modalService: NgbModal,
     private notificationsService: NotificationsService,
     private store$: Store<any>,
