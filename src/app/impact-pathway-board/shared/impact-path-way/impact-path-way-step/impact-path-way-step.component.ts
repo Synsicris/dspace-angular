@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { find, flatMap, map, take } from 'rxjs/operators';
+import { find, map, mergeMap, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -12,6 +12,8 @@ import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact
 import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';
 import { isNotEmpty } from '../../../../shared/empty.util';
+import { DragAndDropContainerComponent } from '../../drag-and-drop-container.component';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'ipw-impact-path-way-step',
@@ -21,11 +23,12 @@ import { isNotEmpty } from '../../../../shared/empty.util';
     fadeInOut
   ]
 })
-export class ImpactPathWayStepComponent {
+export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
 
   @Input() public projectId: string;
   @Input() public impactPathwayId: string;
   @Input() public impactPathwayStepId: string;
+  @Input() public allImpactPathwayStepIds: string[];
 
   public impactPathwayStep$: Observable<ImpactPathwayStep>;
 
@@ -38,22 +41,34 @@ export class ImpactPathWayStepComponent {
     protected modalService: NgbModal,
     protected translate: TranslateService
     ) {
+    super(impactPathwayService);
   }
 
   ngOnInit(): void {
+    this.connectedToList = this.allImpactPathwayStepIds;
     this.impactPathwayStep$ = this.impactPathwayService.getImpactPathwayStepById(this.impactPathwayStepId);
     this.title$ = this.impactPathwayStep$.pipe(
       find((impactPathwayStep: ImpactPathwayStep) => isNotEmpty(impactPathwayStep)),
       map((impactPathwayStep: ImpactPathwayStep) => `impact-pathway.step.label.${impactPathwayStep.type}`),
-      flatMap((label: string) => this.translate.get(label))
+      mergeMap((label: string) => this.translate.get(label))
     );
 
     this.info$ = this.impactPathwayStep$.pipe(
       find((impactPathwayStep: ImpactPathwayStep) => isNotEmpty(impactPathwayStep)),
       map((impactPathwayStep: ImpactPathwayStep) => `impact-pathway.step.info.${impactPathwayStep.type}`),
-      flatMap((label: string) => this.translate.get(label))
+      mergeMap((label: string) => this.translate.get(label))
     );
 
+  }
+
+  drop(event: CdkDragDrop<ImpactPathwayStep>) {
+    if (event.previousContainer === event.container) {
+      const newList = [...event.container.data.tasks];
+      moveItemInArray(newList, event.previousIndex, event.currentIndex);
+      this.impactPathwayService.dispatchOrderTasks(this.impactPathwayId, this.impactPathwayStepId, newList, event.container.data.tasks);
+    }
+    this.isDragging.next(false);
+    this.isDropAllowed.next(false);
   }
 
   createTask() {

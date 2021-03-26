@@ -40,9 +40,18 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
   drop(event: CdkDragDrop<ImpactPathwayTask>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data.tasks, event.previousIndex, event.currentIndex);
+/*      moveItemInArray(event.container.data.tasks, event.previousIndex, event.currentIndex);
+      const newList = [...event.container.data.tasks];
+      moveItemInArray(newList, event.previousIndex, event.currentIndex);
+      this.impactPathwayService.dispatchOrderSubTasks(
+        this.impactPathwayStep.parentId,
+        this.impactPathwayStep.id,
+        this.impactPathwayTask.id,
+        newList,
+        event.container.data.tasks
+      );*/
     } else {
-      if (this.canDrop(event.container.data, event.item.data)) {
+      if (this.canDropOnTask(event.container.data, event.item.data)) {
         this.impactPathwayService.dispatchSetTargetTask('');
         this.impactPathwayService.dispatchMoveSubTask(
           this.impactPathwayStep.parentId,

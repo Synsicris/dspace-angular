@@ -62,7 +62,7 @@ import {
   GenerateImpactPathwayAction,
   GenerateImpactPathwaySubTaskAction,
   GenerateImpactPathwayTaskAction,
-  MoveImpactPathwaySubTaskAction,
+  MoveImpactPathwaySubTaskAction, OrderImpactPathwaySubTasksAction, OrderImpactPathwayTasksAction,
   PatchImpactPathwayMetadataAction,
   PatchImpactPathwayTaskMetadataAction,
   RemoveImpactPathwayAction,
@@ -239,6 +239,36 @@ export class ImpactPathwayService {
     this.store.dispatch(new RemoveImpactPathwayAction(projectId, impactPathwayId));
   }
 
+  dispatchOrderTasks(
+    impactPathwayId: string,
+    stepId: string,
+    currentTasks: ImpactPathwayTask[],
+    previousTasks: ImpactPathwayTask[]
+  ) {
+    this.store.dispatch(new OrderImpactPathwayTasksAction(
+      impactPathwayId,
+      stepId,
+      currentTasks,
+      previousTasks
+    ));
+  }
+
+  dispatchOrderSubTasks(
+    impactPathwayId: string,
+    stepId: string,
+    parentTaskId: string,
+    currentTasks: ImpactPathwayTask[],
+    previousTasks: ImpactPathwayTask[]
+) {
+    this.store.dispatch(new OrderImpactPathwaySubTasksAction(
+      impactPathwayId,
+      stepId,
+      parentTaskId,
+      currentTasks,
+      previousTasks
+    ));
+  }
+
   dispatchSetTargetTask(taskId: string) {
     this.store.dispatch(new SetImpactPathwayTargetTaskAction(taskId));
   }
@@ -273,6 +303,15 @@ export class ImpactPathwayService {
           ))
         ))
       ))
+    );
+  }
+
+  getImpactPathwayStepIds(impactPathwayId: string): Observable<string[]> {
+    return this.store.pipe(
+      select(impactPathwayObjectsSelector),
+      map((entries: ImpactPathwayEntries) => entries[impactPathwayId]),
+      take(1),
+      map((impactPathway: ImpactPathway) => impactPathway.steps.map((step: ImpactPathwayStep) => step.id))
     );
   }
 
@@ -442,6 +481,14 @@ export class ImpactPathwayService {
         taskId,
         environment.impactPathway.impactPathwayParentRelationMetadata,
         environment.impactPathway.impactPathwayTaskRelationMetadata))
+    );
+  }
+
+  orderTasks(parentTasksId: string, taskIds: string[]): Observable<Item> {
+    return this.itemAuthorityRelationService.orderRelations(
+      parentTasksId,
+      taskIds,
+      environment.impactPathway.impactPathwayTaskRelationMetadata
     );
   }
 

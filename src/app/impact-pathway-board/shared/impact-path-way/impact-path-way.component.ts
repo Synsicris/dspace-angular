@@ -8,6 +8,7 @@ import { NativeWindowRef, NativeWindowService } from '../../../core/services/win
 import { ImpactPathwayLink } from '../../../core/impact-pathway/impact-pathway.reducer';
 import { ImpactPathwayLinksService } from '../../../core/impact-pathway/impact-pathway-links.service';
 import { ImpactPathwayService } from '../../../core/impact-pathway/impact-pathway.service';
+import { ImpactPathwayStep } from '../../../core/impact-pathway/models/impact-pathway-step.model';
 
 @Component({
   selector: 'ipw-impact-path-way',
@@ -80,5 +81,12 @@ export class ImpactPathWayComponent {
    */
   toggleInfoPanel() {
     this.infoShowed.next(!this.infoShowed.value);
+  }
+
+  /**
+   * Return all impactPathway step ids
+   */
+  getImpactPathwayStepIds(): string[] {
+    return this.impactPathway.steps.map((step: ImpactPathwayStep) => step.id);
   }
 }

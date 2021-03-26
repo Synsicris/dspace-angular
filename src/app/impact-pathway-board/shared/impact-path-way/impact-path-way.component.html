@@ -29,7 +29,8 @@
                                 [projectId]="projectId"
                                 [impactPathwayId]="impactPathway.id"
                                 [impactPathwayStepId]="step.id"
-                                [stepType]="step.type"></ipw-impact-path-way-step>
+                                [stepType]="step.type"
+                                [allImpactPathwayStepIds]="getImpactPathwayStepIds()"></ipw-impact-path-way-step>
     </div>
     <ipw-editable-textarea *ngIf="impactPathway"
                            [placeholder]="impactPathway.description"

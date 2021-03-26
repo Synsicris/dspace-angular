@@ -1,11 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
-import { CdkDragDrop, CdkDragEnter, CdkDragExit } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragEnter, CdkDragExit, CdkDragStart } from '@angular/cdk/drag-drop';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { ImpactPathwayTask } from '../../core/impact-pathway/models/impact-pathway-task.model';
 import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
 import { hasValue } from '../../shared/empty.util';
+import { ImpactPathwayStep } from '../../core/impact-pathway/models/impact-pathway-step.model';
 
 @Component({
   selector: 'ipw-drag-and-drop-container',
@@ -26,13 +27,31 @@ export class DragAndDropContainerComponent implements OnDestroy {
   constructor(protected service: ImpactPathwayService) {
   }
 
-  canDrop(parent: ImpactPathwayTask, task: ImpactPathwayTask) {
+  canDropOnStep(parent: ImpactPathwayStep, task: ImpactPathwayTask) {
+    return task.parentId === parent.id;
+  }
+
+  canDropOnTask(parent: ImpactPathwayTask, task: ImpactPathwayTask) {
     return !parent.hasSubTask(task.id) || task.parentId === parent.id;
   }
 
-  dragEntered(event: CdkDragEnter<any>) {
+  dragStarted(event: CdkDragStart<ImpactPathwayTask>) {
     this.isDragging.next(true);
-    if (this.canDrop(event.container.data, event.item.data)) {
+    if (this.canDropOnStep(event.source.dropContainer.data, event.source.data)) {
+      this.isDropAllowed.next(true);
+    }
+  }
+
+  dragEnteredToTask(event: CdkDragEnter<ImpactPathwayTask, ImpactPathwayTask>) {
+    this.isDragging.next(true);
+    if (this.canDropOnTask(event.container.data, event.item.data)) {
+      this.isDropAllowed.next(true);
+    }
+  }
+
+  dragEnteredToStep(event: CdkDragEnter<ImpactPathwayStep, ImpactPathwayTask>) {
+    this.isDragging.next(true);
+    if (this.canDropOnStep(event.container.data, event.item.data)) {
       this.isDropAllowed.next(true);
     }
   }
@@ -42,19 +61,26 @@ export class DragAndDropContainerComponent implements OnDestroy {
     this.isDropAllowed.next(false);
   }
 
-  listEntered(event: CdkDragEnter<any>) {
+  listEnteredToTask(event: CdkDragEnter<ImpactPathwayTask, ImpactPathwayTask>) {
     this.isDragging.next(true);
-    if (this.canDrop(event.container.data, event.item.data)) {
+    if (this.canDropOnTask(event.container.data, event.item.data)) {
       this.isDropAllowed.next(true);
     }
   }
 
-  listExited(event: CdkDragExit<any>) {
+  listEnteredToStep(event: CdkDragEnter<ImpactPathwayStep, ImpactPathwayTask>) {
+    this.isDragging.next(true);
+    if (this.canDropOnStep(event.container.data, event.item.data)) {
+      this.isDropAllowed.next(true);
+    }
+  }
+
+  listExited(event: CdkDragExit<ImpactPathwayStep|ImpactPathwayTask>) {
     this.isDragging.next(false);
     this.isDropAllowed.next(false);
   }
 
-  listDropped(task: CdkDragDrop<ImpactPathwayTask>) {
+  listDropped(task: CdkDragDrop<ImpactPathwayStep|ImpactPathwayTask>) {
     this.isDragging.next(false);
     this.isDropAllowed.next(false);
   }

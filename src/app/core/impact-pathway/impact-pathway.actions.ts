@@ -38,6 +38,12 @@ export const ImpactPathwayActionTypes = {
   MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/core/impactpathway/MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
   MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR: type('dspace/core/impactpathway/MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR'),
   NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE: type('dspace/core/impactpathway/NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE'),
+  ORDER_IMPACT_PATHWAY_TASKS: type('dspace/core/impactpathway/ORDER_IMPACT_PATHWAY_TASKS'),
+  ORDER_IMPACT_PATHWAY_TASKS_SUCCESS: type('dspace/core/impactpathway/ORDER_IMPACT_PATHWAY_TASKS_SUCCESS'),
+  ORDER_IMPACT_PATHWAY_TASKS_ERROR: type('dspace/core/impactpathway/ORDER_IMPACT_PATHWAY_TASKS_ERROR'),
+  ORDER_IMPACT_PATHWAY_SUB_TASKS: type('dspace/core/impactpathway/ORDER_IMPACT_PATHWAY_SUB_TASKS'),
+  ORDER_IMPACT_PATHWAY_SUB_TASKS_SUCCESS: type('dspace/core/impactpathway/ORDER_IMPACT_PATHWAY_SUB_TASKS_SUCCESS'),
+  ORDER_IMPACT_PATHWAY_SUB_TASKS_ERROR: type('dspace/core/impactpathway/ORDER_IMPACT_PATHWAY_SUB_TASKS_ERROR'),
   REMOVE_IMPACT_PATHWAY: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY'),
   REMOVE_IMPACT_PATHWAY_SUCCESS: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_SUCCESS'),
   REMOVE_IMPACT_PATHWAY_ERROR: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_ERROR'),
@@ -524,6 +530,157 @@ export class MoveImpactPathwaySubTaskErrorAction implements Action {
     taskId: string
   ) {
     this.payload = { impactPathwayId, stepId, previousParentTaskId, currentParentTaskId, taskId};
+  }
+}
+
+
+/**
+ * An ngrx action for ordering tasks
+ */
+export class OrderImpactPathwayTasksAction implements Action {
+  type = ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_TASKS;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    currentTasks: ImpactPathwayTask[];
+    previousTasks: ImpactPathwayTask[];
+  };
+
+  /**
+   * Create a new OrderImpactPathwayTasksAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id where to order task
+   * @param currentTasks
+   *    the list of the impact pathway tasks in the new order
+   * @param previousTasks
+   *    the list of the impact pathway tasks in the previous order to restore in case of error
+   */
+  constructor(
+    impactPathwayId: string,
+    stepId: string,
+    currentTasks: ImpactPathwayTask[],
+    previousTasks: ImpactPathwayTask[]
+  ) {
+    this.payload = { impactPathwayId, stepId, currentTasks, previousTasks};
+  }
+}
+
+/**
+ * An ngrx action for ordering success
+ */
+export class OrderImpactPathwayTasksSuccessAction implements Action {
+  type = ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_TASKS_SUCCESS;
+}
+
+/**
+ * An ngrx action for ordering tasks error
+ */
+export class OrderImpactPathwayTasksErrorAction implements Action {
+  type = ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_TASKS_ERROR;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    previousTasks: ImpactPathwayTask[];
+  };
+
+  /**
+   * Create a new OrderImpactPathwayTasksErrorAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   * @param previousTasks
+   *    the list of the impact pathway tasks in the previous order to restore
+   */
+  constructor(
+    impactPathwayId: string,
+    stepId: string,
+    previousTasks: ImpactPathwayTask[]
+  ) {
+    this.payload = { impactPathwayId, stepId, previousTasks};
+  }
+}
+
+/**
+ * An ngrx action for ordering subtasks
+ */
+export class OrderImpactPathwaySubTasksAction implements Action {
+  type = ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_SUB_TASKS;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    parentTaskId: string;
+    currentTasks: ImpactPathwayTask[];
+    previousTasks: ImpactPathwayTask[];
+  };
+
+  /**
+   * Create a new OrderImpactPathwaySubTasksAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   * @param parentTaskId
+   *    the impact pathway parent task's id where to order task
+   * @param currentTasks
+   *    the list of the impact pathway tasks in the new order
+   * @param previousTasks
+   *    the list of the impact pathway tasks in the previous order to restore in case of error
+   */
+  constructor(
+    impactPathwayId: string,
+    stepId: string,
+    parentTaskId: string,
+    currentTasks: ImpactPathwayTask[],
+    previousTasks: ImpactPathwayTask[]
+  ) {
+    this.payload = { impactPathwayId, stepId, parentTaskId, currentTasks, previousTasks};
+  }
+}
+
+/**
+ * An ngrx action for ordering success
+ */
+export class OrderImpactPathwaySubTasksSuccessAction implements Action {
+  type = ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_SUB_TASKS_SUCCESS;
+}
+
+/**
+ * An ngrx action for ordering tasks error
+ */
+export class OrderImpactPathwaySubTasksErrorAction implements Action {
+  type = ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_SUB_TASKS_ERROR;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    parentTaskId: string;
+    previousTasks: ImpactPathwayTask[];
+  };
+
+  /**
+   * Create a new OrderImpactPathwaySubTasksErrorAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   * @param parentTaskId
+   *    the impact pathway parent task's id where to order task
+   * @param previousTasks
+   *    the list of the impact pathway tasks in the previous order to restore
+   */
+  constructor(
+    impactPathwayId: string,
+    stepId: string,
+    parentTaskId: string,
+    previousTasks: ImpactPathwayTask[]
+  ) {
+    this.payload = { impactPathwayId, stepId, parentTaskId, previousTasks};
   }
 }
 
@@ -1253,6 +1410,12 @@ export type ImpactPathwayActions
   | MoveImpactPathwaySubTaskErrorAction
   | MoveImpactPathwaySubTaskSuccessAction
   | NormalizeImpactPathwayObjectsOnRehydrateAction
+  | OrderImpactPathwayTasksAction
+  | OrderImpactPathwayTasksErrorAction
+  | OrderImpactPathwayTasksSuccessAction
+  | OrderImpactPathwaySubTasksAction
+  | OrderImpactPathwaySubTasksErrorAction
+  | OrderImpactPathwaySubTasksSuccessAction
   | PatchImpactPathwayMetadataAction
   | PatchImpactPathwayMetadataErrorAction
   | PatchImpactPathwayMetadataSuccessAction
