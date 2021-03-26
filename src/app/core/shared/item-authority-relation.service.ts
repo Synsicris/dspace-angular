@@ -155,6 +155,19 @@ export class ItemAuthorityRelationService {
     );
   }
 
+  orderRelations(
+    parentId: string,
+    taskIds: string[],
+    relationMetadataName: string
+  ): Observable<Item> {
+    return this.itemService.findById(parentId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      tap((childItem: Item) => this.addAllRelationsPatch(childItem, taskIds, relationMetadataName)),
+      delay(100),
+      mergeMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
+    );
+  }
+
   private addRelationPatch(targetItem: Item, relatedItemId: string, relation: string): void {
     const stepTasks: MetadataValue[] = targetItem.findMetadataSortedByPlace(relation);
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
@@ -171,6 +184,36 @@ export class ItemAuthorityRelationService {
       taskToAdd,
       isEmpty(stepTasks),
       true);
+  }
+
+  private addAllRelationsPatch(targetItem: Item, relatedItemIds: string[], relation: string): void {
+    const stepTasks: MetadataValue[] = targetItem.findMetadataSortedByPlace(relation);
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    relatedItemIds.forEach((relatedItemId: string, index: number) => {
+      const path = pathCombiner.getPath([relation, index.toString()]);
+      const value = {
+        value: relatedItemId,
+        authority: relatedItemId,
+        place: stepTasks.length,
+        confidence: 600
+      };
+      this.operationsBuilder.replace(path, value, true);
+    });
+
+/*  const tasksToAdd: any[] = [];
+    relatedItemIds.forEach((relatedItemId) => tasksToAdd.push({
+      value: relatedItemId,
+      authority: relatedItemId,
+      place: stepTasks.length,
+      confidence: 600
+    }));
+    const path = pathCombiner.getPath(relation);
+    this.operationsBuilder.add(
+      path,
+      tasksToAdd,
+      false,
+      true
+    );*/
   }
 
   private executeItemPatch(objectId: string, pathName: string): Observable<Item> {

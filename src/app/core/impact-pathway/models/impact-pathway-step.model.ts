@@ -45,4 +45,8 @@ export class ImpactPathwayStep {
     const index = this.getTaskIndex(taskId);
     this.tasks[index] = newTask;
   }
+
+  setTasks(tasks: ImpactPathwayTask[]) {
+    this.tasks = [...tasks];
+  }
 }

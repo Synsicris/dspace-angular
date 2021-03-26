@@ -9,7 +9,7 @@
        cdkDropListOrientation="'horizontal'"
        [cdkDropListData]="impactPathwayTask"
        [cdkDropListConnectedTo]="connectedToList"
-       (cdkDropListEntered)="listEntered($event)"
+       (cdkDropListEntered)="listEnteredToTask($event)"
        (cdkDropListExited)="listExited($event)"
        (cdkDropListDropped)="listDropped($event)">
     <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
@@ -23,7 +23,7 @@
                               [taskPosition]="i"
                               [isObjectivePage]="true"
                               (cdkDragDropped)="drop($event)"
-                              (cdkDragEntered)="dragEntered($event)"
+                              (cdkDragEntered)="dragEnteredToTask($event)"
                               (cdkDragExited)="dragExited($event)">
       <div *cdkDragPlaceholder
            class="task-placeholder d-flex justify-content-center align-items-center mr-sm-1 mr-lg-4"

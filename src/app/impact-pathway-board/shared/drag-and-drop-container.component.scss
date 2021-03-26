@@ -40,10 +40,9 @@
 }
 
 .task-placeholder {
-  width: 200px;
+  width: 100%;
   height: 100px;
-  /*  background: map-get($theme-colors, success);
-    border: dotted 2px #999;
+  /*  border: dotted 2px #999;
     min-height: 100px;
     height: 100%;
     width: 100%;*/
@@ -67,11 +66,11 @@
 }
 
 .drop-allowed {
-  //background-color: map-get($theme-colors, success);
+  background-color: map-get($theme-colors, success);
   opacity: 0.3;
 }
 
 .drop-denied {
-  //background-color: map-get($theme-colors, warning);
+  background-color: map-get($theme-colors, warning);
   opacity: 0.3;
 }

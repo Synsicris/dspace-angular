@@ -31,6 +31,11 @@ import {
   MoveImpactPathwaySubTaskErrorAction,
   MoveImpactPathwaySubTaskSuccessAction,
   NormalizeImpactPathwayObjectsOnRehydrateAction,
+  OrderImpactPathwaySubTasksAction, OrderImpactPathwaySubTasksErrorAction,
+  OrderImpactPathwaySubTasksSuccessAction,
+  OrderImpactPathwayTasksAction,
+  OrderImpactPathwayTasksErrorAction,
+  OrderImpactPathwayTasksSuccessAction,
   PatchImpactPathwayMetadataAction,
   PatchImpactPathwayMetadataErrorAction,
   PatchImpactPathwayMetadataSuccessAction,
@@ -431,7 +436,8 @@ export class ImpactPathwayEffects {
       return this.impactPathwayService.moveSubTask(
         action.payload.parentTaskId,
         action.payload.newParentTaskId,
-        action.payload.taskId).pipe(
+        action.payload.taskId
+      ).pipe(
         map(() => new MoveImpactPathwaySubTaskSuccessAction()),
         catchError((error: Error) => {
           console.error(error.message);
@@ -453,6 +459,61 @@ export class ImpactPathwayEffects {
     tap(() => {
       this.notificationsService.error(null, this.translate.get('impact-pathway.move.task.error'));
     }));
+
+  /**
+   * Order tasks on an impactPathway step
+   */
+  @Effect() orderTasks$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_TASKS),
+    switchMap((action: OrderImpactPathwayTasksAction) => {
+      const taskIds: string[] = action.payload.currentTasks.map((task: ImpactPathwayTask) => task.id);
+      return this.impactPathwayService.orderTasks(action.payload.stepId, taskIds).pipe(
+        map(() => new OrderImpactPathwayTasksSuccessAction()),
+        catchError((error: Error) => {
+          console.error(error.message);
+          return observableOf(new OrderImpactPathwayTasksErrorAction(
+            action.payload.impactPathwayId,
+            action.payload.stepId,
+            action.payload.previousTasks
+          ));
+        })
+      );
+    })
+  );
+
+  /**
+   * Show a notification on error
+   */
+  @Effect({ dispatch: false }) orderTasksError$ = this.actions$.pipe(
+    ofType(
+      ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_TASKS_ERROR,
+      ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_SUB_TASKS_ERROR
+    ),
+    tap(() => {
+      this.notificationsService.error(null, this.translate.get('impact-pathway.move.task.error'));
+    }));
+
+  /**
+   * Order tasks on an impactPathway step
+   */
+  @Effect() orderSubTasks$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_SUB_TASKS),
+    switchMap((action: OrderImpactPathwaySubTasksAction) => {
+      const taskIds: string[] = action.payload.currentTasks.map((task: ImpactPathwayTask) => task.id);
+      return this.impactPathwayService.orderTasks(action.payload.parentTaskId, taskIds).pipe(
+        map(() => new OrderImpactPathwaySubTasksSuccessAction()),
+        catchError((error: Error) => {
+          console.error(error.message);
+          return observableOf(new OrderImpactPathwaySubTasksErrorAction(
+            action.payload.impactPathwayId,
+            action.payload.stepId,
+            action.payload.parentTaskId,
+            action.payload.previousTasks
+          ));
+        })
+      );
+    })
+  );
 
   /**
    * Patch an impactPathway task and dispatch PatchImpactPathwayMetadataSuccessAction
