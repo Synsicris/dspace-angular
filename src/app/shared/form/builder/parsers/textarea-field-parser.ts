@@ -10,7 +10,7 @@ export class TextareaFieldParser extends FieldParser {
   public modelFactory(fieldValue?: FormFieldMetadataValueObject | any, label?: boolean): any {
     const textAreaModelConfig: DsDynamicTextAreaModelConfig = this.initModel(null, label);
 
-    textAreaModelConfig.rows = 10;
+    textAreaModelConfig.rows = 5;
     this.setValues(textAreaModelConfig, fieldValue);
     return new DsDynamicTextAreaModel(textAreaModelConfig);
   }
