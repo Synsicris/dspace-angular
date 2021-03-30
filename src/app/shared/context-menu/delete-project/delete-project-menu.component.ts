@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -17,6 +16,7 @@ import { ProjectDataService } from '../../../core/project/project-data.service';
 import { Community } from '../../../core/shared/community.model';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 
 /**
  * This component renders a context menu option that provides to export an item.
@@ -68,17 +68,18 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
    */
   public confirmDelete() {
     this.processing$.next(true);
-    this.projectService.delete((this.contextMenuObject as Community).id).pipe(take(1))
-      .subscribe((response: RemoteData<NoContent>) => {
-        this.processing$.next(false);
-        if (response.isSuccess) {
-          this.navigateToMainPage();
-          this.notificationsService.success(null, this.translate.instant('project-overview.page.header.delete.success'));
-        } else {
-          this.notificationsService.error(null, this.translate.instant('project-overview.page.header.delete.error'));
-        }
-        this.modalRef.close();
-      });
+    this.projectService.delete((this.contextMenuObject as Community).id).pipe(
+      getFirstCompletedRemoteData(),
+    ).subscribe((response: RemoteData<NoContent>) => {
+      this.processing$.next(false);
+      if (response.isSuccess) {
+        this.navigateToMainPage();
+        this.notificationsService.success(null, this.translate.instant('project-overview.page.header.delete.success'));
+      } else {
+        this.notificationsService.error(null, this.translate.instant('project-overview.page.header.delete.error'));
+      }
+      this.modalRef.close();
+    });
   }
 
   public openConfirmationModal(content) {

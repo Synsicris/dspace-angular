@@ -2,20 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { combineLatest, Observable, of as observableOf, throwError } from 'rxjs';
-import {
-  catchError,
-  concatMap,
-  distinctUntilChanged,
-  filter,
-  map,
-  mapTo,
-  mergeMap,
-  reduce,
-  take,
-  takeWhile,
-  tap
-} from 'rxjs/operators';
+import { combineLatest, Observable, of as observableOf } from 'rxjs';
+import { catchError, distinctUntilChanged, filter, map, mergeMap, take, takeWhile, tap } from 'rxjs/operators';
 import { ReplaceOperation } from 'fast-json-patch';
 
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
@@ -36,22 +24,15 @@ import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
 import { SearchResult } from '../../shared/search/search-result.model';
-import {
-  configureRequest,
-  getFinishedRemoteData,
-  getFirstCompletedRemoteData,
-  getFirstSucceededRemoteDataPayload,
-  getFirstSucceededRemoteListPayload
-} from '../shared/operators';
+import { configureRequest, getFinishedRemoteData, getFirstSucceededRemoteDataPayload } from '../shared/operators';
 import { DSpaceObjectType } from '../shared/dspace-object-type.model';
 import { SearchService } from '../shared/search/search.service';
 import { LinkService } from '../cache/builders/link.service';
-import { createFailedRemoteDataObject$, createNoContentRemoteDataObject } from '../../shared/remote-data.utils';
+import { createFailedRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { followLink, FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { ConfigurationDataService } from '../data/configuration-data.service';
 import { ConfigurationProperty } from '../shared/configuration-property.model';
 import { GroupDataService } from '../eperson/group-data.service';
-import { Group } from '../eperson/models/group.model';
 import { BitstreamDataService } from '../data/bitstream-data.service';
 import { NoContent } from '../shared/NoContent.model';
 import { NotificationOptions } from '../../shared/notifications/models/notification-options.model';
@@ -152,44 +133,9 @@ export class ProjectDataService extends CommunityDataService {
    *
    * @return the RestResponse as an Observable
    */
-  delete(projectId: string): Observable<any> {
+  delete(projectId: string): Observable<RemoteData<NoContent>> {
     const projectGroup = `project_${projectId}`;
-    return super.delete(projectId).pipe(
-      getFirstCompletedRemoteData(),
-      mergeMap((response: RemoteData<NoContent>) => {
-        if (response.isSuccess) {
-          return this.groupDataService.searchGroups(projectGroup);
-        } else {
-          throwError('Unexpected error while deleting project.');
-        }
-      }),
-      getFirstSucceededRemoteListPayload(),
-      map((groups: Group[]) => {
-        if (groups.length === 2) {
-          return groups;
-        } else {
-          throw new Error('Unexpected error while retrieving project group.');
-        }
-      }),
-      mergeMap((groups: Group[]) => groups),
-      concatMap((group: Group) => this.groupDataService.delete(group.id).pipe(
-        getFirstCompletedRemoteData(),
-        map((response: RemoteData<NoContent>) => {
-          // TODO review when https://4science.atlassian.net/browse/CST-3907 is resolved
-          if (response.isSuccess || response.statusCode === 403) {
-            return response;
-          } else {
-            throwError('Unexpected error while deleting project group.');
-          }
-        })
-      )),
-      reduce((acc: any, value: any) => [...acc, value], []),
-      tap((r) => console.log(r)),
-      mapTo((createNoContentRemoteDataObject() as RemoteData<NoContent>)),
-      catchError(() => {
-        return createFailedRemoteDataObject$('Unexpected error while deleting project group.');
-      })
-    );
+    return super.delete(projectId);
   }
 
   /**

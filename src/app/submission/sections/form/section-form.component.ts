@@ -177,7 +177,7 @@ export class SubmissionSectionformComponent extends SectionModelComponent implem
                 this.objectCache.hasByHref$(href),
                 this.requestService.hasByHref$(href)
               ).pipe(
-                filter(([existsInOC, existsInRC]) => !existsInOC && !existsInRC),
+                filter(([existsInOC, existsInRC]) => !existsInOC || !existsInRC),
                 take(1),
                 switchMap(() => this.submissionObjectService.findById(this.submissionId, false, followLink('item')).pipe(getFirstSucceededRemoteData(), getRemoteDataPayload()) as Observable<SubmissionObject>)
               );
