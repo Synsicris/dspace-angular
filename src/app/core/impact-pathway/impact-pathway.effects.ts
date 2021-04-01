@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { from as observableFrom, of as observableOf } from 'rxjs';
-import { catchError, concatMap, flatMap, map, mergeMap, reduce, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, map, mergeMap, reduce, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,7 +31,8 @@ import {
   MoveImpactPathwaySubTaskErrorAction,
   MoveImpactPathwaySubTaskSuccessAction,
   NormalizeImpactPathwayObjectsOnRehydrateAction,
-  OrderImpactPathwaySubTasksAction, OrderImpactPathwaySubTasksErrorAction,
+  OrderImpactPathwaySubTasksAction,
+  OrderImpactPathwaySubTasksErrorAction,
   OrderImpactPathwaySubTasksSuccessAction,
   OrderImpactPathwayTasksAction,
   OrderImpactPathwayTasksErrorAction,
@@ -327,7 +328,7 @@ export class ImpactPathwayEffects {
           );
           return [...actions, new RemoveImpactPathwaySuccessAction(
             action.payload.projectId,
-            action.payload.impactPathwayId)];
+            item.self)];
         }),
         catchError((error: Error) => {
           if (error) {
@@ -343,7 +344,7 @@ export class ImpactPathwayEffects {
   @Effect({ dispatch: false }) removeImpactPathwaySuccess$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUCCESS),
     tap((action: RemoveImpactPathwaySuccessAction) => {
-      this.impactPathwayService.removeByItemId(action.payload.impactPathwayId);
+      this.impactPathwayService.removeByHref(action.payload.impactPathwayId);
       this.notificationsService.success(null, this.translate.get('impact-pathway.remove.success'));
       this.impactPathwayService.redirectToProjectPage(action.payload.projectId);
     }),
@@ -356,7 +357,7 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_STEP),
     concatMap((action: RemoveImpactPathwayStepAction) => {
       return this.impactPathwayService.retrieveObjectItem(action.payload.stepId).pipe(
-        flatMap((parentItem: Item) => {
+        mergeMap((parentItem: Item) => {
           return observableFrom(parentItem.findMetadataSortedByPlace(environment.impactPathway.impactPathwayTaskRelationMetadata)).pipe(
             concatMap((relationMetadata: MetadataValue) => this.itemAuthorityRelationService.removeParentRelationFromChild(
               action.payload.stepId,
@@ -367,7 +368,7 @@ export class ImpactPathwayEffects {
             map(() => parentItem)
           );
         }),
-        map(() => this.impactPathwayService.removeByItemId(action.payload.stepId)),
+        map((parentItem: Item) => this.impactPathwayService.removeByHref(parentItem.self)),
         map(() => new RemoveImpactPathwayStepSuccessAction(
           action.payload.impactPathwayId,
           action.payload.stepId
