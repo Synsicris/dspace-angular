@@ -62,7 +62,9 @@ import {
   GenerateImpactPathwayAction,
   GenerateImpactPathwaySubTaskAction,
   GenerateImpactPathwayTaskAction,
-  MoveImpactPathwaySubTaskAction, OrderImpactPathwaySubTasksAction, OrderImpactPathwayTasksAction,
+  MoveImpactPathwaySubTaskAction,
+  OrderImpactPathwaySubTasksAction,
+  OrderImpactPathwayTasksAction,
   PatchImpactPathwayMetadataAction,
   PatchImpactPathwayTaskMetadataAction,
   RemoveImpactPathwayAction,
@@ -494,6 +496,13 @@ export class ImpactPathwayService {
 
   removeByItemId(itemId: string): Observable<boolean> {
     return this.itemService.delete(itemId).pipe(
+      map((response: RemoteData<NoContent>) => response.isSuccess)
+    );
+  }
+
+  removeByHref(href: string): Observable<boolean> {
+    console.log('removeByItemId', href);
+    return this.itemService.deleteByHref(href).pipe(
       map((response: RemoteData<NoContent>) => response.isSuccess)
     );
   }

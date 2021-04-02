@@ -875,17 +875,6 @@
   // "administrativeView.search.results.head": "Administrative Search",
   "administrativeView.search.results.head": "Administratīvā meklēšana",
   
-  // "applications_econtech.listelement.badge": "Application success for business innovations",
-  // TODO New key - Add a translation
-  "applications_econtech.listelement.badge": "Application success for business innovations",
-  
-  // "applications_social.listelement.badge": "Application success in social innovations/change processes",
-  // TODO New key - Add a translation
-  "applications_social.listelement.badge": "Application success in social innovations/change processes",
-  
-  // "awards.listelement.badge": "Award or prize",
-  // TODO New key - Add a translation
-  "awards.listelement.badge": "Award or prize",
   
   
   // "admin.workflow.breadcrumbs": "Administer Workflow",
@@ -1957,6 +1946,10 @@
   // "context-menu.actions.generate-report.error": "There was an issue when generating the process report, please try again later.",
   // TODO New key - Add a translation
   "context-menu.actions.generate-report.error": "There was an issue when generating the process report, please try again later.",
+  
+  // "context-menu.actions.btn": "Select an action",
+  // TODO New key - Add a translation
+  "context-menu.actions.btn": "Select an action",
   
   // "context-menu.actions.label": "Options",
   // TODO New key - Add a translation
@@ -3073,19 +3066,6 @@
   // "impact-pathway.wrapper.info": "<b>Develop the Impact Pathway of the project</b></br><p>The Impact Pathway supports you in the impact-oriented planning and implementation of the project. Please present the most important objectives, activities and intended impacts of the project in a clear and concise manner by means of key messages. Use arrows to illustrate particularly important and non-linear relationships. While the project is progressing, you can update the Impact Pathway and add any results achieved.</p><p>The columns structure the key messages for impact-oriented planning:</br>In <b>Background</b> important preliminary considerations for the project are presented, such as problem definition, state of knowledge and conditions.</br>The <b>Objectives of research and development</b> describe the scientific/technical work objectives of the project. These objectives can be assigned to work packages and tasks on a second level.</br><b>Interactions with partners and groups of actors. Outputs for dissemination</b> reflect all exchange and transfer activities of the project. In a first step, key messages about the purpose and group of actors of the interactions are formulated. These key messages can be assigned to specific activities on a second level.</br>The intended impacts of the project are structured in two columns:</br>In <b>Application (possibilities)</b> the contributions of the project to the application of the project results are presented.</br><b>Expected societal impacts</b> describe what societal effects are expected when the results of projects are applied.</br>In <b>Contribution to funding programme objectives</b>, the funding programme objectives to which the project contributes are selected.</p><p>In each column, you can use [+] to create unlimited items or search for and select previously created items.</br>Each item has a specific detail page (depending on the section selected) in which further information is usually given. You can switch between the Impact Pathway and the detail page of an item at any time.</br>You can start to create items in any column of the Impact Pathway.</br>Via [Edit] below the columns of the Impact Pathway you can add a description to the overall objectives of the project.</p><p><b>Key questions and tips for developing the Impact Pathway:</b> What impacts do you want to achieve with the project? How would you like to contribute to the development of these impacts?<br>It is recommended, to plan the Impact Pathway for the project in terms of the intended impacts and to develop it together with partners in practice and groups of actors.</br></p>",
   // TODO New key - Add a translation
   "impact-pathway.wrapper.info": "<b>Develop the Impact Pathway of the project</b></br><p>The Impact Pathway supports you in the impact-oriented planning and implementation of the project. Please present the most important objectives, activities and intended impacts of the project in a clear and concise manner by means of key messages. Use arrows to illustrate particularly important and non-linear relationships. While the project is progressing, you can update the Impact Pathway and add any results achieved.</p><p>The columns structure the key messages for impact-oriented planning:</br>In <b>Background</b> important preliminary considerations for the project are presented, such as problem definition, state of knowledge and conditions.</br>The <b>Objectives of research and development</b> describe the scientific/technical work objectives of the project. These objectives can be assigned to work packages and tasks on a second level.</br><b>Interactions with partners and groups of actors. Outputs for dissemination</b> reflect all exchange and transfer activities of the project. In a first step, key messages about the purpose and group of actors of the interactions are formulated. These key messages can be assigned to specific activities on a second level.</br>The intended impacts of the project are structured in two columns:</br>In <b>Application (possibilities)</b> the contributions of the project to the application of the project results are presented.</br><b>Expected societal impacts</b> describe what societal effects are expected when the results of projects are applied.</br>In <b>Contribution to funding programme objectives</b>, the funding programme objectives to which the project contributes are selected.</p><p>In each column, you can use [+] to create unlimited items or search for and select previously created items.</br>Each item has a specific detail page (depending on the section selected) in which further information is usually given. You can switch between the Impact Pathway and the detail page of an item at any time.</br>You can start to create items in any column of the Impact Pathway.</br>Via [Edit] below the columns of the Impact Pathway you can add a description to the overall objectives of the project.</p><p><b>Key questions and tips for developing the Impact Pathway:</b> What impacts do you want to achieve with the project? How would you like to contribute to the development of these impacts?<br>It is recommended, to plan the Impact Pathway for the project in terms of the intended impacts and to develop it together with partners in practice and groups of actors.</br></p>",
-  
-  // "impactpathway.listelement.badge": "Impact pathway",
-  // TODO New key - Add a translation
-  "impactpathway.listelement.badge": "Impact pathway",
-  
-  // "impactpathwaystep.listelement.badge": "Impact pathway step",
-  // TODO New key - Add a translation
-  "impactpathwaystep.listelement.badge": "Impact pathway step",
-  
-  
-  // "innovationideas.listelement.badge": "Idea for innovation or change",
-  // TODO New key - Add a translation
-  "innovationideas.listelement.badge": "Idea for innovation or change",
   
   
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
@@ -4628,11 +4608,6 @@
   "menu.section.workflow": "Administer Workflow",
   
   
-  // "milestones.listelement.badge": "Milestone",
-  // TODO New key - Add a translation
-  "milestones.listelement.badge": "Milestone",
-  
-  
   // "mydspace.breadcrumbs" : "All items",
   // TODO New key - Add a translation
   "mydspace.breadcrumbs" : "All items",
@@ -5079,22 +5054,6 @@
   // TODO New key - Add a translation
   "person.search.title": "DSpace Cris Angular :: Person Search",
   
-  
-  // "physical_objects.listelement.badge": "Object / material for knowledge transfer and subsequent use in research and teaching",
-  // TODO New key - Add a translation
-  "physical_objects.listelement.badge": "Object / material for knowledge transfer and subsequent use in research and teaching",
-  
-  // "pot_societalimpact.listelement.badge": "Expected societal impact",
-  // TODO New key - Add a translation
-  "pot_societalimpact.listelement.badge": "Expected societal impact",
-  
-  // "proj_objectives.listelement.badge": "Project objective",
-  // TODO New key - Add a translation
-  "proj_objectives.listelement.badge": "Project objective",
-  
-  // "Publication.listelement.badge": "Publication",
-  // TODO New key - Add a translation
-  "Publication.listelement.badge": "Publication",
   
   
   // "process.new.select-parameters": "Parameters",
@@ -5618,9 +5577,13 @@
   // TODO New key - Add a translation
   "project-overview.invitation.email" : "Email",
   
-  // "project-overview.invitation.menu.project" : "Invite to project",
+  // "project-overview.invitation-admin.menu.project" : "Invite coordinators to the current project",
   // TODO New key - Add a translation
-  "project-overview.invitation.menu.project" : "Invite to project",
+  "project-overview.invitation-admin.menu.project" : "Invite coordinators to the current project",
+  
+  // "project-overview.invitation-members.menu.project" : "Invite members to the current project",
+  // TODO New key - Add a translation
+  "project-overview.invitation-members.menu.project" : "Invite members to the current project",
   
   // "project-overview.invitation.project.msg" : "Please insert the email address of the person to invite to the project",
   // TODO New key - Add a translation
@@ -5641,6 +5604,14 @@
   // "project-overview.invitation.success": "Invitation sent successfully.",
   // TODO New key - Add a translation
   "project-overview.invitation.success": "Invitation sent successfully.",
+  
+  // "project-overview.invitation-admin.menu.subproject" : "Invite coordinators to the current subproject",
+  // TODO New key - Add a translation
+  "project-overview.invitation-admin.menu.subproject" : "Invite coordinators to the current subproject",
+  
+  // "project-overview.invitation-members.menu.subproject" : "Invite members to the current subproject",
+  // TODO New key - Add a translation
+  "project-overview.invitation-members.menu.subproject" : "Invite members to the current subproject",
   
   // "project-overview.page.header.delete.btn" : "Delete project",
   // TODO New key - Add a translation
@@ -6805,14 +6776,6 @@
   // "sorting.score.DESC": "Relevance",
   "sorting.score.DESC": "Atbilstība",
   
-  
-  // "spinoffs.listelement.badge": "Spin-off (or associations)",
-  // TODO New key - Add a translation
-  "spinoffs.listelement.badge": "Spin-off (or associations)",
-  
-  // "steps.listelement.badge": "Next step or cooperation",
-  // TODO New key - Add a translation
-  "steps.listelement.badge": "Next step or cooperation",
   
   // "statistics.title": "Statistics",
   // TODO New key - Add a translation
@@ -8155,9 +8118,9 @@
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.physical_objects.info": "<i>Please record here if objects or materials are created in the project that serve the transfer of knowledge or can be used by third parties for research or teaching.</i></br>Do not record any kind of publication (e.g. text, image, sound or software) here. In case of trial and demonstration sites that can be visited, please use the \"Events\" section.",
   
-  // "submission.sections.submit.progressbar.describe.physical_objects_result": "Use and accessibility of the object or material for third parties",
+  // "submission.sections.submit.progressbar.describe.physical_objects_result": "Use and accessibilityl for third parties",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.physical_objects_result": "Use and accessibility of the object or material for third parties",
+  "submission.sections.submit.progressbar.describe.physical_objects_result": "Use and accessibilityl for third parties",
   
   // "submission.sections.submit.progressbar.describe.physical_objects_result.info": "<i>Please add here in which form the object can be used by third parties and whom interested parties can contact.</i></br>With the information on the possible uses, you contribute to the subsequent use of your project work.",
   // TODO New key - Add a translation
@@ -8194,6 +8157,10 @@
   // "submission.sections.submit.progressbar.describe.publications": "Publications",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.publications": "Publications",
+  
+  // "submission.sections.submit.progressbar.describe.plan_publications": "Planned Publications",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.plan_publications": "Planned Publications",
   
   // "submission.sections.submit.progressbar.describe.publications.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Enter here the information about a planned publication.",
   // TODO New key - Add a translation
@@ -8646,10 +8613,6 @@
   "submission.workflow.tasks.pool.show-detail": "Parādīt detaļas",
   
   
-  // "targetgroups.listelement.badge": "Target group",
-  // TODO New key - Add a translation
-  "targetgroups.listelement.badge": "Target group",
-  
   // "tasks.listelement.badge": "Task",
   // TODO New key - Add a translation
   "tasks.listelement.badge": "Task",
@@ -8784,21 +8747,12 @@
   "vocabulary-treeview.tree.description.srsc": "Research Subject Categories",
   
   
-  // "unexpected_results.listelement.badge": "(Intermediate) result / problem that causes change",
-  // TODO New key - Add a translation
-  "unexpected_results.listelement.badge": "(Intermediate) result / problem that causes change",
-  
   
   // "administrativeView.search.results.head": "Administrative Search",
   "administrativeView.search.results.head": "Administratīvā meklēšana",
   
   // "menu.section.admin_search": "Admin Search",
   "menu.section.admin_search": "Administratora Meklēšana",
-  
-  
-  // "unexpected_results.listelement.badge": "Unexpected result or problem",
-  // TODO New key - Add a translation
-  "unexpected_results.listelement.badge": "Unexpected result or problem",
   
   // "uploader.browse": "browse",
   "uploader.browse": "pārlūkot",
@@ -9001,129 +8955,135 @@
   "working-plan.page.title": "Working plan",
   
   
-  // "conditions.listelement.badge": "External condition or requirement",
-  // TODO New key - Add a translation
-  "conditions.listelement.badge": "External condition or requirement",
   
-  // "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objectives",
+  // "application.listelement.badge": "Applications of solutions / changes / innovations",
   // TODO New key - Add a translation
-  "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objectives",
+  "application.listelement.badge": "Applications of solutions / changes / innovations",
   
-  // "cooperation_partners.listelement.badge": "Cooperation partner",
+  // "award.listelement.badge": "Awards and prizes",
   // TODO New key - Add a translation
-  "cooperation_partners.listelement.badge": "Cooperation partner",
+  "award.listelement.badge": "Awards and prizes",
   
-  // "ethics.listelement.badge": "Ethical reflection",
+  // "condition.listelement.badge": "External conditions",
   // TODO New key - Add a translation
-  "ethics.listelement.badge": "Ethical reflection",
+  "condition.listelement.badge": "External conditions",
   
-  // "Event.listelement.badge": "Event",
+  // "contribution_fundingprogramme.listelement.badge": "Contributions to funding programme objectives",
   // TODO New key - Add a translation
-  "Event.listelement.badge": "Event",
+  "contribution_fundingprogramme.listelement.badge": "Contributions to funding programme objectives",
+  
+  // "cooperation_partner.listelement.badge": "Cooperation partners",
+  // TODO New key - Add a translation
+  "cooperation_partner.listelement.badge": "Cooperation partners",
+  
+  // "Event.listelement.badge": "Events / Interactions",
+  // TODO New key - Add a translation
+  "Event.listelement.badge": "Events / Interactions",
+  
+  // "ethic.listelement.badge": "Ethical reflection",
+  // TODO New key - Add a translation
+  "ethic.listelement.badge": "Ethical reflection",
   
   // "gender.listelement.badge": "Gender reflection",
   // TODO New key - Add a translation
   "gender.listelement.badge": "Gender reflection",
   
-  // "impact_pathway.listelement.badge": "Impact pathway",
+  // "impactpathway.listelement.badge": "Impact pathway",
   // TODO New key - Add a translation
-  "impact_pathway.listelement.badge": "Impact pathway",
+  "impactpathway.listelement.badge": "Impact pathway",
   
-  // "impact_pathway_step.listelement.badge": "Impact pathway step",
+  // "impactpathwaystep.listelement.badge": "Impact pathway step",
   // TODO New key - Add a translation
-  "impact_pathway_step.listelement.badge": "Impact pathway step",
+  "impactpathwaystep.listelement.badge": "Impact pathway step",
   
-  // "inn_pot_econtech.listelement.badge": "Intended business innovation",
+  // "innovationidea.listelement.badge": "Ideas for use of project results",
   // TODO New key - Add a translation
-  "inn_pot_econtech.listelement.badge": "Intended business innovation",
+  "innovationidea.listelement.badge": "Ideas for use of project results",
   
-  // "inn_pot_social.listelement.badge": "Intended social innovation/ change process",
+  // "innovationpotential.listelement.badge": "Solutions / changes / innovations",
   // TODO New key - Add a translation
-  "inn_pot_social.listelement.badge": "Intended social innovation/ change process",
+  "innovationpotential.listelement.badge": "Solutions / changes / innovations",
   
-  // "OrgUnit.listelement.badge": "Organizational units",
+  // "milestone.listelement.badge": "Milestones",
   // TODO New key - Add a translation
-  "OrgUnit.listelement.badge": "Organizational units",
+  "milestone.listelement.badge": "Milestones",
   
-  // "Patent.listelement.badge": "Patent or utility patent",
+  // "OrgUnit.listelement.badge": "Organisations",
   // TODO New key - Add a translation
-  "Patent.listelement.badge": "Patent or utility patent",
+  "OrgUnit.listelement.badge": "Organisations",
+  
+  // "other.listelement.badge": "Others",
+  // TODO New key - Add a translation
+  "other.listelement.badge": "Others",
+  
+  // "Patent.listelement.badge": "Patents andr utility patents",
+  // TODO New key - Add a translation
+  "Patent.listelement.badge": "Patents andr utility patents",
   
   // "Person.listelement.badge": "Persons",
   // TODO New key - Add a translation
   "Person.listelement.badge": "Persons",
   
-  // "Project.listelement.badge": "Research projects",
+  // "pot_societalimpact.listelement.badge": "Expected societal impacts",
   // TODO New key - Add a translation
-  "Project.listelement.badge": "Research projects",
+  "pot_societalimpact.listelement.badge": "Expected societal impacts",
   
-  // "research_results.listelement.badge": "Research result",
+  // "Project.listelement.badge": "Projects",
   // TODO New key - Add a translation
-  "research_results.listelement.badge": "Research result",
+  "Project.listelement.badge": "Projects",
   
-  // "stateofart.listelement.badge": "State of knowledge",
+  // "physical_object.listelement.badge": "Objects and materials",
   // TODO New key - Add a translation
-  "stateofart.listelement.badge": "State of knowledge",
+  "physical_object.listelement.badge": "Objects and materials",
   
-  // "subproject.listelement.badge": "Subproject",
+  // "proj_objective.listelement.badge": "Project objectives",
   // TODO New key - Add a translation
-  "subproject.listelement.badge": "Subproject",
+  "proj_objective.listelement.badge": "Project objectives",
   
-  // "workpackages.listelement.badge": "Work package",
+  // "Publication.listelement.badge": "Publication",
   // TODO New key - Add a translation
-  "workpackages.listelement.badge": "Work package",
+  "Publication.listelement.badge": "Publication",
   
-  // "others.listelement.badge": "Others",
+  // "plan_publication.listelement.badge": "Planned Publications",
   // TODO New key - Add a translation
-  "others.listelement.badge": "Others",
+  "plan_publication.listelement.badge": "Planned Publications",
   
-  // "innovationpotentials.listelement.badge": "Solution / change / innovation",
+  // "research_result.listelement.badge": "Research results",
   // TODO New key - Add a translation
-  "innovationpotentials.listelement.badge": "Solution / change / innovation",
+  "research_result.listelement.badge": "Research results",
   
-  // "process_events.listelement.badge": "Process of cooperation, participation and working together",
+  // "stateofart.listelement.badge": "State of knowledge and addressed problem",
   // TODO New key - Add a translation
-  "process_events.listelement.badge": "Process of cooperation, participation and working together",
+  "stateofart.listelement.badge": "State of knowledge and addressed problem",
   
-  // "applications.listelement.badge": "Application of a solution / change / innovation",
+  // "spinoff.listelement.badge": "Spin-offs (incl. association)",
   // TODO New key - Add a translation
-  "applications.listelement.badge": "Application of a solution / change / innovation",
+  "spinoff.listelement.badge": "Spin-offs (incl. association)",
   
-  // "event.listelement.badge": "Event",
+  // "step.listelement.badge": "Next steps and cooperations",
   // TODO New key - Add a translation
-  "event.listelement.badge": "Event",
+  "step.listelement.badge": "Next steps and cooperations",
   
-  // "events.listelement.badge": "Events",
+  // "subproject.listelement.badge": "Subprojects",
   // TODO New key - Add a translation
-  "events.listelement.badge": "Events",
+  "subproject.listelement.badge": "Subprojects",
   
-  // "innovationpotentials_econtech.listelement.badge": "Intended business innovation",
+  // "targetgroup.listelement.badge": "Stakeholder groups",
   // TODO New key - Add a translation
-  "innovationpotentials_econtech.listelement.badge": "Intended business innovation",
+  "targetgroup.listelement.badge": "Stakeholder groups",
   
-  // "innovationpotentials_social.listelement.badge": "Intended social innovation/change process",
+  // "task.listelement.badge": "Tasks",
   // TODO New key - Add a translation
-  "innovationpotentials_social.listelement.badge": "Intended social innovation/change process",
+  "task.listelement.badge": "Tasks",
   
-  // "orgunits.listelement.badge": "Organizational units",
+  // "unexpected_result.listelement.badge": "(Intermediate) results / problems that causes change",
   // TODO New key - Add a translation
-  "orgunits.listelement.badge": "Organizational units",
+  "unexpected_result.listelement.badge": "(Intermediate) results / problems that causes change",
   
-  // "persons.listelement.badge": "Persons",
+  // "workpackage.listelement.badge": "Work packages",
   // TODO New key - Add a translation
-  "persons.listelement.badge": "Persons",
+  "workpackage.listelement.badge": "Work packages",
   
-  // "projects.listelement.badge": "Research projects",
-  // TODO New key - Add a translation
-  "projects.listelement.badge": "Research projects",
-  
-  // "publications.listelement.badge": "Publications",
-  // TODO New key - Add a translation
-  "publications.listelement.badge": "Publications",
-  
-  // "subprojects.listelement.badge": "Subproject",
-  // TODO New key - Add a translation
-  "subprojects.listelement.badge": "Subproject",
   
   
   // "tree.description.nuts2": "Please select a region.",
