@@ -8846,8 +8846,8 @@
   // "cooperation_partner.listelement.badge": "Cooperation partners",
   "cooperation_partner.listelement.badge": "Kooperationspartner",
 
-  // "Event.listelement.badge": "Events / Interactions",
-  "Event.listelement.badge": "Veranstaltungen / Interaktionen",
+  // "event.listelement.badge": "Events / Interactions",
+  "event.listelement.badge": "Veranstaltungen / Interaktionen",
 
   // "ethic.listelement.badge": "Ethical reflection",
   "ethic.listelement.badge": "Ethische Reflexion",
@@ -8870,17 +8870,17 @@
   // "milestone.listelement.badge": "Milestones",
   "milestone.listelement.badge": "Meilenstein",
 
-  // "OrgUnit.listelement.badge": "Organisations",
-  "OrgUnit.listelement.badge": "Organisationen",
+  // "orgunit.listelement.badge": "Organisations",
+  "orgunit.listelement.badge": "Organisationen",
 
   // "other.listelement.badge": "Others",
   "other.listelement.badge": "Sonstiges",
 
-  // "Patent.listelement.badge": "Patents andr utility patents",
-  "Patent.listelement.badge": "Patente und Gebrauchsmuster",
+  // "patent.listelement.badge": "Patents andr utility patents",
+  "patent.listelement.badge": "Patente und Gebrauchsmuster",
 
-  // "Person.listelement.badge": "Persons",
-  "Person.listelement.badge": "Personen",
+  // "person.listelement.badge": "Persons",
+  "person.listelement.badge": "Personen",
 
   // "pot_societalimpact.listelement.badge": "Expected societal impacts",
   "pot_societalimpact.listelement.badge": "Erwartete gesellschaftliche Wirkungen",
@@ -8888,8 +8888,8 @@
   // "process_event.listelement.badge": "Processes of cooperation, participation and working together",
   "process_event.listelement.badge": "Prozesse der Kooperation, Partizipation und Zusammenarbeit",
 
-  // "Project.listelement.badge": "Projects",
-  "Project.listelement.badge": "Projekte",
+  // "project.listelement.badge": "Projects",
+  "project.listelement.badge": "Projekte",
 
   // "physical_object.listelement.badge": "Objects and materials",
   "physical_object.listelement.badge": "Gegenstände und Materialien",
@@ -8897,8 +8897,8 @@
   // "proj_objective.listelement.badge": "Project objectives",
   "proj_objective.listelement.badge": "Projektziele",
 
-  // "Publication.listelement.badge": "Publication",
-  "Publication.listelement.badge": "Veröffentlichungen",
+  // "publication.listelement.badge": "Publication",
+  "publication.listelement.badge": "Veröffentlichungen",
 
   // "plan_publication.listelement.badge": "Planned Publications",
   "plan_publication.listelement.badge": "Geplante Veröffentlichungen",

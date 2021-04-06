@@ -5118,7 +5118,7 @@
 
   "cooperation_partner.listelement.badge": "Cooperation partners",
 
-  "Event.listelement.badge": "Events / Interactions",
+  "event.listelement.badge": "Events / Interactions",
 
   "ethic.listelement.badge": "Ethical reflection",
 
@@ -5134,25 +5134,25 @@
 
   "milestone.listelement.badge": "Milestones",
 
-  "OrgUnit.listelement.badge": "Organisations",
+  "orgunit.listelement.badge": "Organisations",
 
   "other.listelement.badge": "Others",
 
-  "Patent.listelement.badge": "Patents andr utility patents",
+  "patent.listelement.badge": "Patents andr utility patents",
 
-  "Person.listelement.badge": "Persons",
+  "person.listelement.badge": "Persons",
 
   "pot_societalimpact.listelement.badge": "Expected societal impacts",
 
   "process_event.listelement.badge": "Processes of cooperation, participation and working together",
 
-  "Project.listelement.badge": "Projects",
+  "project.listelement.badge": "Projects",
 
   "physical_object.listelement.badge": "Objects and materials",
 
   "proj_objective.listelement.badge": "Project objectives",
 
-  "Publication.listelement.badge": "Publication",
+  "publication.listelement.badge": "Publication",
 
   "plan_publication.listelement.badge": "Planned Publications",
 
