@@ -1,6 +1,7 @@
 import { findIndex, remove } from 'lodash';
 
 import { isNotEmpty } from '../../../shared/empty.util';
+import { environment } from '../../../../environments/environment';
 
 export class ImpactPathwayTask {
 
@@ -14,7 +15,7 @@ export class ImpactPathwayTask {
   }
 
   hasDetail() {
-    return this.hasParent() && this.type === 'proj_objectives';
+    return this.hasParent() && this.type === environment.impactPathway.projObjectiveEntity;
   }
 
   hasParent() {
