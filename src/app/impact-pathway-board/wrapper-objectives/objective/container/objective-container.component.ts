@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 import { Observable, of as observableOf } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,7 @@ import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pat
 import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-container.component';
 import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'ipw-objective-container',
@@ -67,7 +68,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
   getObjectivesTaskIds(): string[] {
     return this.impactPathwayStep.tasks
-      .filter((task) => task.type === 'proj_objectives')
+      .filter((task) => task.type === environment.impactPathway.projObjectiveEntity)
       .map((task) => task.id);
   }
 

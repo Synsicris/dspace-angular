@@ -323,7 +323,8 @@ export const environment: GlobalConfig = {
     impactpathwayBidirectionalLinkMetadata: 'impactpathway.bidirectional.link',
     impactPathwayStepTypeAuthority: 'impactpathway_step_type',
     entityToCollectionMapAuthority: 'impactpathway_entity_to_collection_map',
-    entityToCollectionMapAuthorityMetadata: 'impactpathway.entity.map'
+    entityToCollectionMapAuthorityMetadata: 'impactpathway.entity.map',
+    projObjectiveEntity: 'proj_objective'
   },
   workingPlan: {
     workingPlanFormName: 'working_plan_workpackage_form',

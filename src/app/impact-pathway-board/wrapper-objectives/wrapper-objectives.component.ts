@@ -5,6 +5,7 @@ import { ImpactPathwayStep } from '../../core/impact-pathway/models/impact-pathw
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { isNotEmpty } from '../../shared/empty.util';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'ipw-wrapper-objectives',
@@ -31,7 +32,7 @@ export class WrapperObjectivesComponent {
   }
 
   getObjectivesTasks() {
-    return this.impactPathwayStep.tasks.filter((task) => task.type === 'proj_objectives');
+    return this.impactPathwayStep.tasks.filter((task) => task.type === environment.impactPathway.projObjectiveEntity);
   }
 
   back() {
