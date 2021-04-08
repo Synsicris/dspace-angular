@@ -147,7 +147,9 @@ export class DsDynamicRelationInlineGroupComponent extends DynamicFormControlCom
   private getRowValue(formGroup: DynamicFormGroupModel) {
     const groupValue = Object.create({});
     formGroup.group.forEach((model: any) => {
-      groupValue[model.name] = (model.name !== this.model.mandatoryField && isEmpty(model.value)) ? PLACEHOLDER_PARENT_METADATA : model.value;
+      groupValue[model.name] = (model.name !== this.model.mandatoryField && isEmpty(model.value)) ?
+        PLACEHOLDER_PARENT_METADATA :
+        Array.isArray(model.value) ? model.value[0] : model.value;
     });
     return groupValue;
   }

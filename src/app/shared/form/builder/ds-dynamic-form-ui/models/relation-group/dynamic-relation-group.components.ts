@@ -302,8 +302,10 @@ export class DsDynamicRelationGroupComponent extends DynamicFormControlComponent
     const item = Object.create({});
     this.formModel.forEach((row) => {
       const modelRow = row as DynamicFormGroupModel;
-      modelRow.group.forEach((control: DynamicInputModel) => {
-        item[control.name] = control.value || PLACEHOLDER_PARENT_METADATA;
+      modelRow.group.forEach((model: DynamicInputModel) => {
+        item[model.name] = (model.name !== this.model.mandatoryField && isEmpty(model.value)) ?
+          PLACEHOLDER_PARENT_METADATA :
+          Array.isArray(model.value) ? model.value[0] : model.value;
       });
     });
     return item;
