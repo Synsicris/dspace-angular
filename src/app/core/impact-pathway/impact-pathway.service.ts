@@ -524,7 +524,7 @@ export class ImpactPathwayService {
   }
 
   initImpactPathwayTask(taskItem: Item, parentId?: string, tasks: ImpactPathwayTask[] = []): ImpactPathwayTask {
-    const type = taskItem.firstMetadataValue('relationship.type');
+    const type = taskItem.firstMetadataValue('dspace.entity.type');
     const description = taskItem.firstMetadataValue('dc.description');
 
     return new ImpactPathwayTask(taskItem.id, type, parentId, taskItem.name, description, tasks);
@@ -563,7 +563,6 @@ export class ImpactPathwayService {
   }
 
   retrieveImpactPathwaysByProject(projectId: string, options: PageInfo): Observable<PaginatedList<Item>> {
-    const filters: SearchFilter[] = [new SearchFilter('f.entityType', ['impactpathway'])];
     const sort = new SortOptions('dc.title', SortDirection.ASC);
     const pagination = Object.assign(new PaginationComponentOptions(), {
       currentPage: options.currentPage,
@@ -571,12 +570,10 @@ export class ImpactPathwayService {
     });
 
     const searchOptions = new PaginatedSearchOptions({
-      configuration: 'default',
+      configuration: environment.impactPathway.impactPathwaysSearchConfigName,
       scope: projectId,
-      filters: filters,
       pagination: pagination,
-      sort: sort,
-      dsoTypes: [DSpaceObjectType.ITEM]
+      sort: sort
     });
 
     return this.searchService.search(searchOptions).pipe(
@@ -770,7 +767,7 @@ export class ImpactPathwayService {
 
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
     Object.keys(metadata)
-      .filter((metadataName) => metadataName !== 'relationship.type')
+      .filter((metadataName) => metadataName !== 'dspace.entity.type')
       .forEach((metadataName) => {
         if (metadataName !== 'cris.workspace.shared') {
           this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);

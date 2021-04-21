@@ -226,6 +226,7 @@ import { SearchObjects } from './search/search-objects.model';
 import { SearchResult } from './search/search-result.model';
 import { FacetConfigResponse } from './search/facet-config-response.model';
 import { FacetValues } from './search/facet-values.model';
+import { BitstreamDownloadPageComponent } from './bitstream-download-page/bitstream-download-page.component';
 import { GenericItemPageFieldComponent } from '../+item-page/simple/field-components/specific-field/generic/generic-item-page-field.component';
 import { MetadataRepresentationListComponent } from '../+item-page/simple/metadata-representation-list/metadata-representation-list.component';
 import { RelatedItemsComponent } from '../+item-page/simple/related-items/related-items-component';
@@ -236,9 +237,10 @@ import { LinkMenuItemComponent } from './menu/menu-item/link-menu-item.component
 import { OnClickMenuItemComponent } from './menu/menu-item/onclick-menu-item.component';
 import { TextMenuItemComponent } from './menu/menu-item/text-menu-item.component';
 import { ItemExportComponent } from './item-export/item-export/item-export.component';
-import { ItemExportModalWrapperComponent } from './item-export/item-export-modal-wrapper/item-export-modal-wrapper.component';
 import { SearchChartsComponent } from './search/search-charts/search-charts.component';
 import { SearchChartBarComponent } from './search/search-charts/search-chart/search-chart-bar/search-chart-bar.component';
+import { SearchChartBarToLeftComponent } from './search/search-charts/search-chart/search-chart-bar-to-left/search-chart-bar-to-left.component';
+import { SearchChartBarToRightComponent } from './search/search-charts/search-chart/search-chart-bar-to-right/search-chart-bar-to-right.component';
 import { SearchChartPieComponent } from './search/search-charts/search-chart/search-chart-pie/search-chart-pie.component';
 import { SearchChartLineComponent } from './search/search-charts/search-chart/search-chart-line/search-chart-line.component';
 import { SearchChartFilterWrapperComponent } from './search/search-charts/search-chart/search-chart-wrapper/search-chart-wrapper.component';
@@ -246,6 +248,13 @@ import { SearchChartComponent } from './search/search-charts/search-chart/search
 import { ChartsModule } from '../charts/charts.module';
 import { SearchChartFilterComponent } from './search/search-charts/search-chart/search-chart-filter/search-chart-filter.component';
 import { VocabularyExternalSourceComponent } from './vocabulary-external-source/vocabulary-external-source.component';
+import { ItemExportAlertComponent } from './item-export/item-export-alert/item-export-alert.component';
+import { ItemExportModalLauncherComponent } from './item-export/item-export-modal-launcher/item-export-modal-launcher.component';
+import { BulkImportSelectorComponent } from './dso-selector/modal-wrappers/bulk-import-collection-selector/bulk-import-collection-selector.component';
+import { AdministeredCollectionSelectorComponent } from './dso-selector/dso-selector/administered-collection-selector/administered-collection-selector.component';
+import { ThemedConfigurationSearchPageComponent } from '../+search-page/themed-configuration-search-page.component';
+import { SearchNavbarComponent } from '../search-navbar/search-navbar.component';
+import { LogInOrcidComponent } from './log-in/methods/orcid/log-in-orcid.component';
 import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { ContextMenuComponent } from '../+item-page/context-menu/context-menu.component';
 import { ContextMenuEditImpactPathwayComponent } from '../+item-page/context-menu/edit-impact-pathway/edit-impact-pathway.component';
@@ -274,6 +283,7 @@ export const MODELS = [
   FacetValues,
   SearchResult
 ];
+
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -403,6 +413,7 @@ const COMPONENTS = [
   CreateCommunityParentSelectorComponent,
   CreateCollectionParentSelectorComponent,
   CreateItemParentSelectorComponent,
+  BulkImportSelectorComponent,
   EditCommunitySelectorComponent,
   EditCollectionSelectorComponent,
   EditItemSelectorComponent,
@@ -451,6 +462,7 @@ const COMPONENTS = [
   ExistingMetadataListElementComponent,
   ExistingRelationListElementComponent,
   LogInShibbolethComponent,
+  LogInOrcidComponent,
   LogInPasswordComponent,
   LogInContainerComponent,
   ItemVersionsComponent,
@@ -466,12 +478,14 @@ const COMPONENTS = [
   EpersonSearchBoxComponent,
   GroupSearchBoxComponent,
   FileDownloadLinkComponent,
+  BitstreamDownloadPageComponent,
   CollectionDropdownComponent,
   EntityDropdownComponent,
   ExportMetadataSelectorComponent,
   ConfirmationModalComponent,
   VocabularyTreeviewComponent,
   AuthorizedCollectionSelectorComponent,
+  AdministeredCollectionSelectorComponent,
   CurationFormComponent,
   SearchResultListElementComponent,
   SearchResultGridElementComponent,
@@ -495,15 +509,19 @@ const COMPONENTS = [
   CollectionSidebarSearchListElementComponent,
   CommunitySidebarSearchListElementComponent,
   ItemExportComponent,
-  ItemExportModalWrapperComponent,
+  ItemExportAlertComponent,
+  ItemExportModalLauncherComponent,
   SearchChartsComponent,
   SearchChartBarComponent,
+  SearchChartBarToLeftComponent,
+  SearchChartBarToRightComponent,
   SearchChartPieComponent,
   SearchChartLineComponent,
   SearchChartFilterWrapperComponent,
   SearchChartComponent,
   SearchChartFilterComponent,
   VocabularyExternalSourceComponent,
+  SearchNavbarComponent,
   CreateImpactPathwayComponent,
   ContextMenuComponent,
   ContextMenuEditImpactPathwayComponent,
@@ -544,6 +562,7 @@ const ENTRY_COMPONENTS = [
   CreateCommunityParentSelectorComponent,
   CreateCollectionParentSelectorComponent,
   CreateItemParentSelectorComponent,
+  BulkImportSelectorComponent,
   EditCommunitySelectorComponent,
   EditCollectionSelectorComponent,
   EditItemSelectorComponent,
@@ -564,11 +583,20 @@ const ENTRY_COMPONENTS = [
   SearchAuthorityFilterComponent,
   LogInPasswordComponent,
   LogInShibbolethComponent,
+  LogInOrcidComponent,
   BundleListElementComponent,
   ClaimedTaskActionsApproveComponent,
   ClaimedTaskActionsRejectComponent,
   ClaimedTaskActionsReturnToPoolComponent,
   ClaimedTaskActionsEditMetadataComponent,
+  CollectionDropdownComponent,
+  FileDownloadLinkComponent,
+  BitstreamDownloadPageComponent,
+  CurationFormComponent,
+  ExportMetadataSelectorComponent,
+  ConfirmationModalComponent,
+  VocabularyTreeviewComponent,
+  SidebarSearchListElementComponent,
   PublicationSidebarSearchListElementComponent,
   CollectionSidebarSearchListElementComponent,
   CommunitySidebarSearchListElementComponent,
@@ -578,7 +606,8 @@ const ENTRY_COMPONENTS = [
 ];
 
 const SHARED_SEARCH_PAGE_COMPONENTS = [
-  ConfigurationSearchPageComponent
+  ConfigurationSearchPageComponent,
+  ThemedConfigurationSearchPageComponent
 ];
 
 const SHARED_ITEM_PAGE_COMPONENTS = [
@@ -638,6 +667,7 @@ const DIRECTIVES = [
     ...DIRECTIVES,
     ...SHARED_ITEM_PAGE_COMPONENTS,
     ...SHARED_SEARCH_PAGE_COMPONENTS,
+    ItemExportAlertComponent,
     InvitationModalComponent
   ],
   providers: [

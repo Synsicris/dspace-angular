@@ -151,7 +151,7 @@ export class SearchSimpleItemService {
   }
 
   private initSimpleItem(searchItem: Item, searchworkspaceItemId: string = null): SimpleItem {
-    const type: any = searchItem.firstMetadata('relationship.type');
+    const type: any = searchItem.firstMetadata('dspace.entity.type');
     return {
       id: searchItem.id,
       workspaceItemId: searchworkspaceItemId,

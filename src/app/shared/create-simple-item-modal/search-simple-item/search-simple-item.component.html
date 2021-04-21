@@ -17,8 +17,7 @@
                  [collectionSize]="pageInfoState?.totalElements"
                  [sortOptions]="sortOptions"
                  [hidePagerWhenSinglePage]="true"
-                 [disableRouteParameterUpdate]="true"
-                 (paginationChange)="onPaginationChange($event)">
+                 [retainScrollPosition]="true">
     <div id="sidebar-object-list"
          class="task-list d-flex flex-wrap p-3">
       <ds-simple-item-box *ngFor="let task of (availableTaskList$ | async)"

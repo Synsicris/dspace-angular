@@ -3,10 +3,10 @@ import { RouterModule } from '@angular/router';
 
 import { ImpactPathwayPageComponent } from './impact-pathway-page.component';
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
-import { ItemPageResolver } from '../+item-page/item-page.resolver';
 import { ProjectPageResolver } from '../projects/project-page.resolver';
 import { ProjectI18nBreadcrumbResolver } from '../core/breadcrumbs/project-i18n-breadcrumb.resolver';
 import { ProjectI18nBreadcrumbsService } from '../core/breadcrumbs/project-i18n-breadcrumbs.service';
+import { ProjectItemPageResolver } from '../projects/project-item-page.resolver';
 
 @NgModule({
   imports: [
@@ -22,7 +22,7 @@ import { ProjectI18nBreadcrumbsService } from '../core/breadcrumbs/project-i18n-
           showBreadcrumbsFluid: true
         },
         resolve: {
-          item: ItemPageResolver,
+          item: ProjectItemPageResolver,
           project: ProjectPageResolver,
           breadcrumb: ProjectI18nBreadcrumbResolver
         }
@@ -30,7 +30,7 @@ import { ProjectI18nBreadcrumbsService } from '../core/breadcrumbs/project-i18n-
     ])
   ],
   providers: [
-    ItemPageResolver,
+    ProjectItemPageResolver,
     ProjectI18nBreadcrumbResolver,
     ProjectI18nBreadcrumbsService,
     ProjectPageResolver

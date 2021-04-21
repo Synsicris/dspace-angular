@@ -83,7 +83,7 @@ export class EpersonRegistrationService {
       find((href: string) => hasValue(href)),
       map((href: string) => {
         const request = new PostRequest(requestId, href, registration);
-        this.requestService.configure(request);
+        this.requestService.send(request);
       })
     ).subscribe();
 
@@ -110,7 +110,7 @@ export class EpersonRegistrationService {
             return RegistrationResponseParsingService;
           }
         });
-        this.requestService.configure(request);
+        this.requestService.send(request, true);
       })
     ).subscribe();
 

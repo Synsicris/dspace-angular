@@ -4,12 +4,13 @@ import { Observable, of as obeservableOf } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Breadcrumb } from '../../breadcrumbs/breadcrumb/breadcrumb.model';
-import { BreadcrumbsService } from './breadcrumbs.service';
+
 import { LinkService } from '../cache/builders/link.service';
 import { DSONameService } from './dso-name.service';
 import { ProjectDataService } from '../project/project-data.service';
 import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
 import { Community } from '../shared/community.model';
+import { BreadcrumbsProviderService } from './breadcrumbsProviderService';
 
 /**
  * The postfix for i18n breadcrumbs
@@ -20,7 +21,7 @@ export const BREADCRUMB_MESSAGE_POSTFIX = '.breadcrumbs';
  * Service to calculate i18n breadcrumbs for a single part of the route including the project path
  */
 @Injectable()
-export class ProjectI18nBreadcrumbsService implements BreadcrumbsService<string> {
+export class ProjectI18nBreadcrumbsService implements BreadcrumbsProviderService<string> {
 
   constructor(
     protected linkService: LinkService,

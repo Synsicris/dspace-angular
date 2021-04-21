@@ -7,7 +7,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { Store } from '@ngrx/store';
-import { TranslateModule } from '@ngx-translate/core';
 import { cold } from 'jasmine-marbles';
 import { of as observableOf } from 'rxjs';
 
@@ -29,6 +28,7 @@ import { RoleService } from '../core/roles/role.service';
 import { RoleServiceMock } from '../shared/mocks/role-service.mock';
 import { createSuccessfulRemoteDataObject$ } from '../shared/remote-data.utils';
 import { SidebarServiceStub } from '../shared/testing/sidebar-service.stub';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('MyDSpacePageComponent', () => {
   let comp: MyDSpacePageComponent;
@@ -45,6 +45,7 @@ describe('MyDSpacePageComponent', () => {
   pagination.id = 'mydspace-results-pagination';
   pagination.currentPage = 1;
   pagination.pageSize = 10;
+  const sortOption = { name: 'score', metadata: null };
   const sort: SortOptions = new SortOptions('score', SortDirection.DESC);
   const mockResults = createSuccessfulRemoteDataObject$(['test', 'data']);
   const searchServiceStub = jasmine.createSpyObj('SearchService', {
@@ -52,7 +53,8 @@ describe('MyDSpacePageComponent', () => {
     getEndpoint: observableOf('discover/search/objects'),
     getSearchLink: MYDSPACE_ROUTE,
     getScopes: observableOf(['test-scope']),
-    setServiceOptions: {}
+    setServiceOptions: {},
+    getSearchConfigurationFor: createSuccessfulRemoteDataObject$({ sortOptions: [sortOption]})
   });
   const configurationParam = 'default';
   const queryParam = 'test query';
@@ -125,9 +127,9 @@ describe('MyDSpacePageComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MyDSpacePageComponent);
     comp = fixture.componentInstance; // SearchPageComponent test instance
-    fixture.detectChanges();
     searchServiceObject = (comp as any).service;
     searchConfigurationServiceObject = (comp as any).searchConfigService;
+    fixture.detectChanges();
   });
 
   afterEach(() => {
@@ -185,6 +187,26 @@ describe('MyDSpacePageComponent', () => {
 
     it('should open the menu', () => {
       expect(menu.classList).toContain('active');
+    });
+
+  });
+
+  describe('when stable', () => {
+
+    beforeEach(() => {
+      fixture.detectChanges();
+    });
+
+    it('should have initialized the sortOptions$ observable', (done) => {
+
+      comp.sortOptions$.subscribe((sortOptions) => {
+
+        expect(sortOptions.length).toEqual(2);
+        expect(sortOptions[0]).toEqual(new SortOptions('score', SortDirection.ASC));
+        expect(sortOptions[1]).toEqual(new SortOptions('score', SortDirection.DESC));
+        done();
+      });
+
     });
 
   });

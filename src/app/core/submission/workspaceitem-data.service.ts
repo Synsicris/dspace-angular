@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Store } from '@ngrx/store';
 import { dataService } from '../cache/builders/build-decorators';
@@ -12,14 +12,16 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { DSOChangeAnalyzer } from '../data/dso-change-analyzer.service';
 import { WorkspaceItem } from './models/workspaceitem.model';
-import { FindListOptions } from '../data/request.models';
+import { Observable } from 'rxjs';
+import { RemoteData } from '../data/remote-data';
+import { HttpOptions } from '../dspace-rest/dspace-rest.service';
+import { find, map } from 'rxjs/operators';
+import { hasValue } from '../../shared/empty.util';
+import { FindListOptions, PostRequest } from '../data/request.models';
+import { getFinishedRemoteData } from '../shared/operators';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { RequestParam } from '../cache/models/request-param.model';
-import { getFinishedRemoteData } from '../shared/operators';
-import { RemoteData } from '../data/remote-data';
 import { PaginatedList } from '../data/paginated-list.model';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { createFailedRemoteDataObject, createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
 
 /**
@@ -54,7 +56,7 @@ export class WorkspaceitemDataService extends DataService<WorkspaceItem> {
     const optionsWithUUID = Object.assign(new FindListOptions(), options, {
       searchParams: [new RequestParam('uuid', uuid)]
     });
-    return this.searchBy(this.searchByItemLinkPath, optionsWithUUID, true, ...linksToFollow).pipe(
+    return this.searchBy(this.searchByItemLinkPath, optionsWithUUID, false, true, ...linksToFollow).pipe(
       getFinishedRemoteData(),
       map((rd: RemoteData<PaginatedList<WorkspaceItem>>) => {
         if (rd.hasSucceeded) {
@@ -65,4 +67,30 @@ export class WorkspaceitemDataService extends DataService<WorkspaceItem> {
       })
     );
   }
+
+  /**
+   * Import an external source entry into a collection
+   * @param externalSourceEntryHref
+   * @param collectionId
+   */
+  public importExternalSourceEntry(externalSourceEntryHref: string, collectionId: string): Observable<RemoteData<WorkspaceItem>> {
+    const options: HttpOptions = Object.create({});
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'text/uri-list');
+    options.headers = headers;
+
+    const requestId = this.requestService.generateRequestId();
+    const href$ = this.halService.getEndpoint(this.linkPath).pipe(map((href) => `${href}?owningCollection=${collectionId}`));
+
+    href$.pipe(
+      find((href: string) => hasValue(href)),
+      map((href: string) => {
+        const request = new PostRequest(requestId, href, externalSourceEntryHref, options);
+        this.requestService.send(request);
+      })
+    ).subscribe();
+
+    return this.rdbService.buildFromRequestUUID(requestId);
+  }
+
 }
