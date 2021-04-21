@@ -11,7 +11,7 @@ export class ImpactPathwayStep {
     public tasks: ImpactPathwayTask[] = [],
     public connectedSteps: string[] = []) {
 
-  };
+  }
 
   hasDetail() {
     return this.type === 'step_type_2' || this.type === 'step_type_3';
@@ -28,7 +28,7 @@ export class ImpactPathwayStep {
       step = this.tasks[index];
     }
 
-    return step
+    return step;
   }
 
   getTaskIndex(taskId: string): number {
@@ -44,5 +44,9 @@ export class ImpactPathwayStep {
   replaceTask(taskId: string, newTask: ImpactPathwayTask) {
     const index = this.getTaskIndex(taskId);
     this.tasks[index] = newTask;
+  }
+
+  setTasks(tasks: ImpactPathwayTask[]) {
+    this.tasks = [...tasks];
   }
 }

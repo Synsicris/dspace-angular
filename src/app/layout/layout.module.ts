@@ -25,7 +25,35 @@ import { AttachmentComponent } from './default-layout/boxes/components/attachmen
 import { OrcidSyncQueueComponent } from './custom-layout/orcid-sync-queue/orcid-sync-queue.component';
 import { OrcidAuthorizationsComponent } from './custom-layout/orcid-authorizations/orcid-authorizations.component';
 import { OrcidSyncSettingsComponent } from './custom-layout/orcid-sync-settings/orcid-sync-settings.component';
+import { CrisLayoutMetricsBoxComponent } from './default-layout/boxes/metrics/cris-layout-metrics-box.component';
+import { MetricRowComponent } from './default-layout/boxes/components/metric-row/metric-row.component';
+import { ContextMenuModule } from '../shared/context-menu/context-menu.module';
+import { MetricLoaderComponent } from './default-layout/boxes/components/metric/metric-loader/metric-loader.component';
+import { MetricAltmetricComponent } from './default-layout/boxes/components/metric/metric-altmetric/metric-altmetric.component';
+import { MetricDimensionsComponent } from './default-layout/boxes/components/metric/metric-dimensions/metric-dimensions.component';
+import { MetricDspacecrisComponent } from './default-layout/boxes/components/metric/metric-dspacecris/metric-dspacecris.component';
+import { MetricGooglescholarComponent } from './default-layout/boxes/components/metric/metric-googlescholar/metric-googlescholar.component';
 
+const ENTRY_COMPONENTS = [
+  // put only entry components that use custom decorator
+  CrisLayoutDefaultComponent,
+  CrisLayoutDefaultTabComponent,
+  CrisLayoutMetadataBoxComponent,
+  CrisLayoutMetricsBoxComponent,
+  CrisLayoutSearchBoxComponent,
+  TextComponent,
+  HeadingComponent,
+  LongtextComponent,
+  DateComponent,
+  LinkComponent,
+  IdentifierComponent,
+  CrisrefComponent,
+  ThumbnailComponent,
+  AttachmentComponent,
+  OrcidSyncSettingsComponent,
+  OrcidSyncQueueComponent,
+  OrcidAuthorizationsComponent
+];
 @NgModule({
   declarations: [
     CrisLayoutLoaderDirective,
@@ -34,6 +62,7 @@ import { OrcidSyncSettingsComponent } from './custom-layout/orcid-sync-settings/
     CrisLayoutDefaultComponent,
     CrisLayoutDefaultTabComponent,
     CrisLayoutMetadataBoxComponent,
+    CrisLayoutMetricsBoxComponent,
     RowComponent,
     TextComponent,
     HeadingComponent,
@@ -48,31 +77,20 @@ import { OrcidSyncSettingsComponent } from './custom-layout/orcid-sync-settings/
     AttachmentComponent,
     OrcidSyncSettingsComponent,
     OrcidSyncQueueComponent,
-    OrcidAuthorizationsComponent
+    OrcidAuthorizationsComponent,
+    MetricRowComponent,
+    MetricLoaderComponent,
+    MetricAltmetricComponent,
+    MetricDimensionsComponent,
+    MetricDspacecrisComponent,
+    MetricGooglescholarComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     SearchPageModule,
-    MyDSpacePageModule
-  ],
-  entryComponents: [
-    CrisLayoutDefaultComponent,
-    CrisLayoutDefaultTabComponent,
-    CrisLayoutMetadataBoxComponent,
-    CrisLayoutSearchBoxComponent,
-    TextComponent,
-    HeadingComponent,
-    LongtextComponent,
-    DateComponent,
-    LinkComponent,
-    IdentifierComponent,
-    CrisrefComponent,
-    ThumbnailComponent,
-    AttachmentComponent,
-    OrcidSyncSettingsComponent,
-    OrcidSyncQueueComponent,
-    OrcidAuthorizationsComponent
+    MyDSpacePageModule,
+    ContextMenuModule
   ],
   exports: [
     CrisPageLoaderComponent,
@@ -81,4 +99,15 @@ import { OrcidSyncSettingsComponent } from './custom-layout/orcid-sync-settings/
     CrisLayoutMetadataBoxComponent
   ]
 })
-export class LayoutModule { }
+export class LayoutModule {
+  /**
+   * NOTE: this method allows to resolve issue with components that using a custom decorator
+   * which are not loaded during CSR otherwise
+   */
+  static withEntryComponents() {
+    return {
+      ngModule: LayoutModule,
+      providers: ENTRY_COMPONENTS.map((component) => ({provide: component}))
+    };
+  }
+}

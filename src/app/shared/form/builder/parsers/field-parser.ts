@@ -52,6 +52,7 @@ export abstract class FieldParser {
       if (Array.isArray(this.configData.selectableMetadata) && this.configData.selectableMetadata.length === 1) {
         metadataKey = this.configData.selectableMetadata[0].metadata;
       }
+
       const config = {
         id: uniqueId() + '_array',
         label: this.configData.label,
@@ -63,6 +64,7 @@ export abstract class FieldParser {
         metadataKey,
         metadataFields: this.getAllFieldIds(),
         hasSelectableMetadata: isNotEmpty(this.configData.selectableMetadata),
+        typeBindRelations: isNotEmpty(this.configData.typeBind) ? this.getTypeBindRelations(this.configData.typeBind) : null,
         groupFactory: () => {
           let model;
           if ((arrayCounter === 0)) {
@@ -113,7 +115,7 @@ export abstract class FieldParser {
         this.configData.selectableMetadata[0].metadata,
         scope,
         this.configData.selectableMetadata[0].closed
-      )
+      );
     }
   }
 
@@ -262,6 +264,7 @@ export abstract class FieldParser {
     // Set read only option
     controlModel.readOnly = this.parserOptions.readOnly;
     controlModel.disabled = this.parserOptions.readOnly;
+    controlModel.isModelOfInnerForm = this.parserOptions.isInnerForm;
     if (hasValue(this.configData.selectableRelationship)) {
       controlModel.relationship = Object.assign(new RelationshipOptions(), this.configData.selectableRelationship);
     }
@@ -273,7 +276,7 @@ export abstract class FieldParser {
     // Set label
     this.setLabel(controlModel, label);
     if (hint) {
-      controlModel.hint = this.configData.hints || '&nbsp;'
+      controlModel.hint = this.configData.hints || '&nbsp;';
     }
     controlModel.placeholder = this.configData.label;
 
@@ -291,21 +294,25 @@ export abstract class FieldParser {
     }
 
     if (isNotEmpty(this.configData.typeBind)) {
-      const bindValues = [];
-      this.configData.typeBind.forEach((value) => {
-        bindValues.push({
-          id: 'dc_type',
-          value: value
-        })
-      });
-      (controlModel as DsDynamicInputModel).typeBindRelations = [{
-        match: MATCH_VISIBLE,
-        operator: OR_OPERATOR,
-        when: bindValues
-      }];
+      (controlModel as DsDynamicInputModel).typeBindRelations = this.getTypeBindRelations(this.configData.typeBind);
     }
 
     return controlModel;
+  }
+
+  private getTypeBindRelations(configuredTypeBindValues: string[]): any[] {
+    const bindValues = [];
+    configuredTypeBindValues.forEach((value) => {
+      bindValues.push({
+        id: 'dc_type',
+        value: value
+      });
+    });
+    return [{
+      match: MATCH_VISIBLE,
+      operator: OR_OPERATOR,
+      when: bindValues
+    }];
   }
 
   protected hasRegex() {

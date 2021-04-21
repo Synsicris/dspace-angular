@@ -1,15 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LongtextComponent } from './longtext.component';
-import { TruncatePipe } from 'src/app/shared/utils/truncate.pipe';
-import { TruncatableService } from 'src/app/shared/truncatable/truncatable.service';
+import { TruncatePipe } from '../../../../../shared/utils/truncate.pipe';
+import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { Item } from 'src/app/core/shared/item.model';
+import { Item } from '../../../../../core/shared/item.model';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
-import { Field } from 'src/app/core/layout/models/metadata-component.model';
+import { LayoutField } from '../../../../../core/layout/models/metadata-component.model';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateLoaderMock } from 'src/app/shared/mocks/translate-loader.mock';
+import { TranslateLoaderMock } from '../../../../../shared/mocks/translate-loader.mock';
 
 describe('LongtextComponent', () => {
   let component: LongtextComponent;
@@ -32,7 +32,7 @@ describe('LongtextComponent', () => {
     label: 'Field Label',
     style: 'col-md-6',
     metadata: 'dc.title'
-  }) as Field;
+  }) as LayoutField;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -75,6 +75,6 @@ describe('LongtextComponent', () => {
   });
 
   it('should get the item metadata value', () => {
-    expect(component.metadataValue).toEqual(testItem.metadata[testField.metadata][0].value);
+    expect(component.metadataValues[0]).toEqual(testItem.metadata[testField.metadata][0].value);
   });
 });

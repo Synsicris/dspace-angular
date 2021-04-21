@@ -132,7 +132,7 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
           if (!isLoading) {
             return this.getSectionsList();
           } else {
-            return observableOf([])
+            return observableOf([]);
           }
         }));
 
@@ -145,7 +145,7 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
 
       // init submission state
       this.subs.push(
-        this.halService.getEndpoint('workspaceitems').pipe(
+        this.halService.getEndpoint(this.submissionService.getSubmissionObjectLinkName()).pipe(
           filter((href: string) => isNotEmpty(href)),
           distinctUntilChanged())
           .subscribe((endpointURL) => {

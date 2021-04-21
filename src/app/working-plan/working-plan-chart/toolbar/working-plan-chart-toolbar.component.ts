@@ -49,8 +49,8 @@ export class WorkingPlanChartToolbarComponent implements OnInit {
     this.chartDateView = this.workingPlanStateService.getChartDateViewSelector();
     this.sub = this.workpackages.pipe(map((workpackages: Workpackage[]) => workpackages.length))
       .subscribe((count) => {
-        this.workpackagesCount.next(count)
-      })
+        this.workpackagesCount.next(count);
+      });
   }
 
   createWorkpackage() {
@@ -72,7 +72,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit {
         this.projectId,
         metadata,
         this.workpackagesCount.value.toString().padStart(3, '0')
-      )
+      );
     });
 
   }

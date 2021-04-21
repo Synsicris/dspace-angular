@@ -6,7 +6,7 @@
             (click)="$event.preventDefault(); toggleInfoPanel(); $event.stopPropagation()">
       <span><i class="far fa-question-circle"></i></span>
     </button>
-    <button class="btn btn-lg btn-link p-0 flex-shrink-1 align-self-start text-danger"
+    <button *ngIf="(canDeleteImpactPathway$ | async)" class="btn btn-lg btn-link p-0 flex-shrink-1 align-self-start text-danger"
             [disabled]="(isProcessingRemove() | async)"
             title="{{'impact-pathway.remove.title' | translate}}"
             (click)="$event.preventDefault(); confirmRemove(content); $event.stopPropagation()">
@@ -29,7 +29,8 @@
                                 [projectId]="projectId"
                                 [impactPathwayId]="impactPathway.id"
                                 [impactPathwayStepId]="step.id"
-                                [stepType]="step.type"></ipw-impact-path-way-step>
+                                [stepType]="step.type"
+                                [allImpactPathwayStepIds]="getImpactPathwayStepIds()"></ipw-impact-path-way-step>
     </div>
     <ipw-editable-textarea *ngIf="impactPathway"
                            [placeholder]="impactPathway.description"

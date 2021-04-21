@@ -1,26 +1,17 @@
-import { HttpClient } from '@angular/common/http';
-import { Store } from '@ngrx/store';
-import { of as observableOf } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { RemoteDataBuildService } from '../../../../core/cache/builders/remote-data-build.service';
-import { ObjectCacheService } from '../../../../core/cache/object-cache.service';
-import { RestResponse } from '../../../../core/cache/response.models';
-import { DSOChangeAnalyzer } from '../../../../core/data/dso-change-analyzer.service';
-import { PaginatedList } from '../../../../core/data/paginated-list';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { buildPaginatedList, PaginatedList } from '../../../../core/data/paginated-list.model';
 import { RemoteData } from '../../../../core/data/remote-data';
 import { FindListOptions } from '../../../../core/data/request.models';
 import { EPersonDataService } from '../../../../core/eperson/eperson-data.service';
 import { EPerson } from '../../../../core/eperson/models/eperson.model';
-import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
 import { PageInfo } from '../../../../core/shared/page-info.model';
-import { UUIDService } from '../../../../core/shared/uuid.service';
 import { FormBuilderService } from '../../../../shared/form/builder/form-builder.service';
 import { NotificationsService } from '../../../../shared/notifications/notifications.service';
 import { EPeopleRegistryComponent } from '../epeople-registry.component';
@@ -28,7 +19,6 @@ import { EPersonFormComponent } from './eperson-form.component';
 import { EPersonMock, EPersonMock2 } from '../../../../shared/testing/eperson.mock';
 import { createSuccessfulRemoteDataObject$ } from '../../../../shared/remote-data.utils';
 import { getMockFormBuilderService } from '../../../../shared/mocks/form-builder-service.mock';
-import { getMockTranslateService } from '../../../../shared/mocks/translate.service.mock';
 import { NotificationsServiceStub } from '../../../../shared/testing/notifications-service.stub';
 import { TranslateLoaderMock } from '../../../../shared/mocks/translate-loader.mock';
 import { AuthService } from '../../../../core/auth/auth.service';
@@ -36,12 +26,12 @@ import { AuthServiceStub } from '../../../../shared/testing/auth-service.stub';
 import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 import { GroupDataService } from '../../../../core/eperson/group-data.service';
 import { createPaginatedList } from '../../../../shared/testing/utils.test';
-import { EpersonRegistrationService } from 'src/app/core/data/eperson-registration.service';
+import { RequestService } from '../../../../core/data/request.service';
+import { EpersonRegistrationService } from '../../../../core/data/eperson-registration.service';
 
 describe('EPersonFormComponent', () => {
   let component: EPersonFormComponent;
   let fixture: ComponentFixture<EPersonFormComponent>;
-  let translateService: TranslateService;
   let builderService: FormBuilderService;
 
   let mockEPeople;
@@ -51,13 +41,13 @@ describe('EPersonFormComponent', () => {
   let groupsDataService: GroupDataService;
   let epersonRegistrationService: EpersonRegistrationService;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     mockEPeople = [EPersonMock, EPersonMock2];
     ePersonDataServiceStub = {
       activeEPerson: null,
       allEpeople: mockEPeople,
       getEPeople(): Observable<RemoteData<PaginatedList<EPerson>>> {
-        return createSuccessfulRemoteDataObject$(new PaginatedList(null, this.allEpeople));
+        return createSuccessfulRemoteDataObject$(buildPaginatedList(null, this.allEpeople));
       },
       getActiveEPerson(): Observable<EPerson> {
         return observableOf(this.activeEPerson);
@@ -65,20 +55,20 @@ describe('EPersonFormComponent', () => {
       searchByScope(scope: string, query: string, options: FindListOptions = {}): Observable<RemoteData<PaginatedList<EPerson>>> {
         if (scope === 'email') {
           const result = this.allEpeople.find((ePerson: EPerson) => {
-            return ePerson.email === query
+            return ePerson.email === query;
           });
-          return createSuccessfulRemoteDataObject$(new PaginatedList(new PageInfo(), [result]));
+          return createSuccessfulRemoteDataObject$(buildPaginatedList(new PageInfo(), [result]));
         }
         if (scope === 'metadata') {
           if (query === '') {
-            return createSuccessfulRemoteDataObject$(new PaginatedList(null, this.allEpeople));
+            return createSuccessfulRemoteDataObject$(buildPaginatedList(null, this.allEpeople));
           }
           const result = this.allEpeople.find((ePerson: EPerson) => {
-            return (ePerson.name.includes(query) || ePerson.email.includes(query))
+            return (ePerson.name.includes(query) || ePerson.email.includes(query));
           });
-          return createSuccessfulRemoteDataObject$(new PaginatedList(new PageInfo(), [result]));
+          return createSuccessfulRemoteDataObject$(buildPaginatedList(new PageInfo(), [result]));
         }
-        return createSuccessfulRemoteDataObject$(new PaginatedList(null, this.allEpeople));
+        return createSuccessfulRemoteDataObject$(buildPaginatedList(null, this.allEpeople));
       },
       deleteEPerson(ePerson: EPerson): Observable<boolean> {
         this.allEpeople = this.allEpeople.filter((ePerson2: EPerson) => {
@@ -86,8 +76,9 @@ describe('EPersonFormComponent', () => {
         });
         return observableOf(true);
       },
-      create(ePerson: EPerson) {
-        this.allEpeople = [...this.allEpeople, ePerson]
+      create(ePerson: EPerson): Observable<RemoteData<EPerson>> {
+        this.allEpeople = [...this.allEpeople, ePerson];
+        return createSuccessfulRemoteDataObject$(ePerson);
       },
       editEPerson(ePerson: EPerson) {
         this.activeEPerson = ePerson;
@@ -98,22 +89,16 @@ describe('EPersonFormComponent', () => {
       clearEPersonRequests(): void {
         // empty
       },
-      tryToCreate(ePerson: EPerson): Observable<RestResponse> {
-        this.allEpeople = [...this.allEpeople, ePerson]
-        return observableOf(new RestResponse(true, 200, 'Success'));
-      },
-      updateEPerson(ePerson: EPerson): Observable<RestResponse> {
+      updateEPerson(ePerson: EPerson): Observable<RemoteData<EPerson>> {
         this.allEpeople.forEach((ePersonInList: EPerson, i: number) => {
           if (ePersonInList.id === ePerson.id) {
             this.allEpeople[i] = ePerson;
           }
         });
-        return observableOf(new RestResponse(true, 200, 'Success'));
-
+        return createSuccessfulRemoteDataObject$(ePerson);
       }
     };
     builderService = getMockFormBuilderService();
-    translateService = getMockTranslateService();
     authService = new AuthServiceStub();
     authorizationService = jasmine.createSpyObj('authorizationService', {
       isAuthorized: observableOf(true)
@@ -123,7 +108,7 @@ describe('EPersonFormComponent', () => {
       getGroupRegistryRouterLink: ''
     });
     epersonRegistrationService = jasmine.createSpyObj('epersonRegistrationService', {
-      registerEmail: observableOf(new RestResponse(true, 200, 'Success'))
+      registerEmail: createSuccessfulRemoteDataObject$(null)
     });
     TestBed.configureTestingModule({
       imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule,
@@ -134,21 +119,15 @@ describe('EPersonFormComponent', () => {
           }
         }),
       ],
-      declarations: [EPeopleRegistryComponent, EPersonFormComponent],
-      providers: [EPersonFormComponent,
+      declarations: [EPersonFormComponent],
+      providers: [
         { provide: EPersonDataService, useValue: ePersonDataServiceStub },
-        { provide: NotificationsService, useValue: new NotificationsServiceStub() },
+        { provide: GroupDataService, useValue: groupsDataService },
         { provide: FormBuilderService, useValue: builderService },
-        { provide: DSOChangeAnalyzer, useValue: {} },
-        { provide: HttpClient, useValue: {} },
-        { provide: ObjectCacheService, useValue: {} },
-        { provide: UUIDService, useValue: {} },
-        { provide: Store, useValue: {} },
-        { provide: RemoteDataBuildService, useValue: {} },
-        { provide: HALEndpointService, useValue: {} },
+        { provide: NotificationsService, useValue: new NotificationsServiceStub() },
         { provide: AuthService, useValue: authService },
         { provide: AuthorizationDataService, useValue: authorizationService },
-        { provide: GroupDataService, useValue: groupsDataService },
+        { provide: RequestService, useValue: jasmine.createSpyObj('requestService', ['removeByHrefSubstring'])},
         { provide: EpersonRegistrationService, useValue: epersonRegistrationService },
         EPeopleRegistryComponent
       ],
@@ -162,9 +141,9 @@ describe('EPersonFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create EPersonFormComponent', inject([EPersonFormComponent], (comp: EPersonFormComponent) => {
-    expect(comp).toBeDefined();
-  }));
+  it('should create EPersonFormComponent', () => {
+    expect(component).toBeDefined();
+  });
 
   describe('when submitting the form', () => {
     let firstName;
@@ -212,7 +191,7 @@ describe('EPersonFormComponent', () => {
         fixture.detectChanges();
       });
 
-      it('should emit a new eperson using the correct values', async(() => {
+      it('should emit a new eperson using the correct values', waitForAsync(() => {
         fixture.whenStable().then(() => {
           expect(component.submitForm.emit).toHaveBeenCalledWith(expected);
         });
@@ -224,6 +203,7 @@ describe('EPersonFormComponent', () => {
 
       beforeEach(() => {
         expectedWithId = Object.assign(new EPerson(), {
+          id: 'id',
           metadata: {
             'eperson.firstname': [
               {
@@ -239,13 +219,14 @@ describe('EPersonFormComponent', () => {
           email: email,
           canLogIn: canLogIn,
           requireCertificate: requireCertificate,
+          _links: undefined
         });
         spyOn(ePersonDataServiceStub, 'getActiveEPerson').and.returnValue(observableOf(expectedWithId));
         component.onSubmit();
         fixture.detectChanges();
       });
 
-      it('should emit the existing eperson using the correct values', async(() => {
+      it('should emit the existing eperson using the correct values', waitForAsync(() => {
         fixture.whenStable().then(() => {
           expect(component.submitForm.emit).toHaveBeenCalledWith(expectedWithId);
         });
@@ -286,6 +267,56 @@ describe('EPersonFormComponent', () => {
 
     it('should set isImpersonated to false', () => {
       expect(component.isImpersonated).toBe(false);
+    });
+  });
+
+  describe('delete', () => {
+
+    let ePersonId;
+    let eperson: EPerson;
+    let modalService;
+
+    beforeEach(() => {
+      spyOn(authService, 'impersonate').and.callThrough();
+      ePersonId = 'testEPersonId';
+      eperson = EPersonMock;
+      component.epersonInitial = eperson;
+      component.canDelete$ = observableOf(true);
+      spyOn(component.epersonService, 'getActiveEPerson').and.returnValue(observableOf(eperson));
+      modalService = (component as any).modalService;
+      spyOn(modalService, 'open').and.returnValue(Object.assign({ componentInstance: Object.assign({ response: observableOf(true) }) }));
+      fixture.detectChanges();
+
+    });
+
+    it('the delete button should be active if the eperson can be deleted', () => {
+      const deleteButton = fixture.debugElement.query(By.css('.delete-button'));
+      expect(deleteButton.nativeElement.disabled).toBe(false);
+    });
+
+    it('the delete button should be disabled if the eperson cannot be deleted', () => {
+      component.canDelete$ = observableOf(false);
+      fixture.detectChanges();
+      const deleteButton = fixture.debugElement.query(By.css('.delete-button'));
+      expect(deleteButton.nativeElement.disabled).toBe(true);
+    });
+
+    it('should call the epersonFormComponent delete when clicked on the button', () => {
+      spyOn(component, 'delete').and.stub();
+      spyOn(component.epersonService, 'deleteEPerson').and.returnValue(createSuccessfulRemoteDataObject$('No Content', 204));
+      const deleteButton = fixture.debugElement.query(By.css('.delete-button'));
+      deleteButton.triggerEventHandler('click', null);
+      expect(component.delete).toHaveBeenCalled();
+    });
+
+    it('should call the epersonService delete when clicked on the button', () => {
+      // ePersonDataServiceStub.activeEPerson = eperson;
+      spyOn(component.epersonService, 'deleteEPerson').and.returnValue(createSuccessfulRemoteDataObject$('No Content', 204));
+      const deleteButton = fixture.debugElement.query(By.css('.delete-button'));
+      expect(deleteButton.nativeElement.disabled).toBe(false);
+      deleteButton.triggerEventHandler('click', null);
+      fixture.detectChanges();
+      expect(component.epersonService.deleteEPerson).toHaveBeenCalledWith(eperson);
     });
   });
 

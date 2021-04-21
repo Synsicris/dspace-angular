@@ -28,7 +28,7 @@ import {
   SubmissionSectionObject
 } from './objects/submission-objects.reducer';
 import { submissionObjectFromIdSelector } from './selectors';
-import { HttpOptions } from '../core/dspace-rest-v2/dspace-rest-v2.service';
+import { HttpOptions } from '../core/dspace-rest/dspace-rest.service';
 import { SubmissionRestService } from '../core/submission/submission-rest.service';
 import { SectionDataObject } from './sections/models/section-data.model';
 import { SubmissionScopeType } from '../core/submission/submission-scope-type';
@@ -40,12 +40,12 @@ import { SubmissionDefinitionsModel } from '../core/config/models/config-submiss
 import { WorkspaceitemSectionsObject } from '../core/submission/models/workspaceitem-sections.model';
 import { RemoteData } from '../core/data/remote-data';
 import { ErrorResponse } from '../core/cache/response.models';
-import { RemoteDataError } from '../core/data/remote-data-error';
 import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject } from '../shared/remote-data.utils';
 import { RequestService } from '../core/data/request.service';
 import { SearchService } from '../core/shared/search/search.service';
 import { Item } from '../core/shared/item.model';
 import { environment } from '../../environments/environment';
+import { SubmissionJsonPatchOperationsService } from '../core/submission/submission-json-patch-operations.service';
 import { NotificationOptions } from '../shared/notifications/models/notification-options.model';
 import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 import { MYDSPACE_ROUTE } from '../+my-dspace-page/my-dspace-page.component';
@@ -68,6 +68,7 @@ export class SubmissionService {
 
   private workspaceLinkPath = 'workspaceitems';
   private workflowLinkPath = 'workflowitems';
+  private editItemsLinkPath = 'edititems';
   /**
    * Initialize service variables
    * @param {NotificationsService} notificationsService
@@ -79,6 +80,7 @@ export class SubmissionService {
    * @param {TranslateService} translate
    * @param {SearchService} searchService
    * @param {RequestService} requestService
+   * @param {SubmissionJsonPatchOperationsService} jsonPatchOperationService
    */
   constructor(protected notificationsService: NotificationsService,
               protected restService: SubmissionRestService,
@@ -88,7 +90,8 @@ export class SubmissionService {
               protected scrollToService: ScrollToService,
               protected translate: TranslateService,
               protected searchService: SearchService,
-              protected requestService: RequestService) {
+              protected requestService: RequestService,
+              protected jsonPatchOperationService: SubmissionJsonPatchOperationsService) {
   }
 
   /**
@@ -110,10 +113,12 @@ export class SubmissionService {
    *    The owning collection id
    * @param entityType
    *    The entity type
+   * @param fullProjection
+   *    If true use full projection to make request
    * @return Observable<SubmissionObject>
    *    observable of SubmissionObject
    */
-  createSubmission(collectionId?: string, entityType?: string,): Observable<SubmissionObject> {
+  createSubmission(collectionId?: string, entityType?: string, fullProjection = true): Observable<SubmissionObject> {
     const paramsObj = Object.create({});
 
     if (isNotEmpty(entityType)) {
@@ -125,7 +130,7 @@ export class SubmissionService {
     options.params = params;
     return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, options, collectionId).pipe(
       map((workspaceitem: SubmissionObject[]) => workspaceitem[0] as SubmissionObject),
-      catchError(() => observableOf({} as SubmissionObject)))
+      catchError(() => observableOf({} as SubmissionObject)));
   }
 
   /**
@@ -149,7 +154,7 @@ export class SubmissionService {
 
     return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, options).pipe(
       map((workspaceitem: SubmissionObject[]) => workspaceitem[0] as SubmissionObject),
-      catchError(() => observableOf({} as SubmissionObject)))
+      catchError(() => observableOf({} as SubmissionObject)));
   }
 
   /**
@@ -252,13 +257,15 @@ export class SubmissionService {
    *
    * @param submissionId
    *    The submission id
+   * @param manual
+   *    whether is a manual save, default false
    */
-  dispatchSave(submissionId) {
+  dispatchSave(submissionId, manual?: boolean) {
     this.getSubmissionSaveProcessingStatus(submissionId).pipe(
       find((isPending: boolean) => !isPending)
     ).subscribe(() => {
-      this.store.dispatch(new SaveSubmissionFormAction(submissionId));
-    })
+      this.store.dispatch(new SaveSubmissionFormAction(submissionId, manual));
+    });
   }
 
   /**
@@ -359,6 +366,7 @@ export class SubmissionService {
         Object.keys(sections)
           .filter((sectionId) => !this.isSectionHidden(sections[sectionId] as SubmissionSectionObject))
           .filter((sectionId) => !sections[sectionId].enabled)
+          .filter((sectionId) => sections[sectionId].sectionType !== SectionsType.DetectDuplicate)
           .forEach((sectionId) => {
             const sectionObject: SectionDataObject = Object.create({});
             sectionObject.header = sections[sectionId].header;
@@ -384,7 +392,7 @@ export class SubmissionService {
     } else if (url.startsWith('/workflowitems')) {
       return this.workflowLinkPath;
     } else {
-      return 'edititems';
+      return this.editItemsLinkPath;
     }
   }
 
@@ -402,6 +410,9 @@ export class SubmissionService {
         break;
       case this.workflowLinkPath:
         scope = SubmissionScopeType.WorkflowItem;
+        break;
+      case this.editItemsLinkPath:
+        scope = SubmissionScopeType.EditItem;
         break;
     }
     return scope;
@@ -486,6 +497,16 @@ export class SubmissionService {
   }
 
   /**
+   * Return whether submission unsaved modification are present
+   *
+   * @return Observable<boolean>
+   *    observable with submission unsaved modification presence
+   */
+  hasUnsavedModification(): Observable<boolean> {
+    return this.jsonPatchOperationService.hasPendingOperations('sections');
+  }
+
+  /**
    * Return the visibility status of the specified section
    *
    * @param sectionData
@@ -555,11 +576,32 @@ export class SubmissionService {
           take(1),
           tap((previousUrl) => {
             if (isEmpty(previousUrl)) {
-              this.router.navigate([MYDSPACE_ROUTE]);
+              this.router.navigate(['/home']);
             } else {
               this.router.navigateByUrl(previousUrl);
             }
         })))
+    ).subscribe();
+  }
+
+  redirectToItemPage(submissionId: string) {
+    // This assures that the cache is empty before redirecting to mydspace.
+    // See https://github.com/DSpace/dspace-angular/pull/468
+    this.searchService.getEndpoint().pipe(
+      take(1),
+      tap((url) => this.requestService.removeByHrefSubstring(url)),
+      // Now, do redirect.
+      concatMap(
+        () => this.routeService.getPreviousUrl().pipe(
+          take(1),
+          tap((previousUrl) => {
+            if (isEmpty(previousUrl)) {
+              const itemUuid = submissionId.indexOf(':') > -1 ? submissionId.split(':')[0] : submissionId;
+              this.router.navigateByUrl('/items/' + itemUuid, { replaceUrl: true });
+            } else {
+              this.router.navigateByUrl(previousUrl);
+            }
+          })))
     ).subscribe();
   }
 
@@ -607,9 +649,7 @@ export class SubmissionService {
       map((submissionObjects: SubmissionObject[]) => createSuccessfulRemoteDataObject(
         submissionObjects[0])),
       catchError((errorResponse: ErrorResponse) => {
-        return createFailedRemoteDataObject$(null,
-          new RemoteDataError(errorResponse.statusCode, errorResponse.statusText, errorResponse.errorMessage)
-        )
+        return createFailedRemoteDataObject$<SubmissionObject>(errorResponse.errorMessage, errorResponse.statusCode);
       })
     );
   }
@@ -634,9 +674,12 @@ export class SubmissionService {
    */
   startAutoSave(submissionId) {
     this.stopAutoSave();
+    if (environment.submission.autosave.timer === 0) {
+      return;
+    }
+
     // AUTOSAVE submission
-    // Retrieve interval from config and convert to milliseconds
-    const duration = environment.submission.autosave.timer * (1000 * 60);
+    const duration = environment.submission.autosave.timer;
     // Dispatch save action after given duration
     this.timer$ = observableTimer(duration, duration);
     this.autoSaveSub = this.timer$

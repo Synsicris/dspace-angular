@@ -8,10 +8,9 @@ import {
   Output
 } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { slide } from '../../../shared/animations/slide';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Component({
   selector: 'ipw-collapsable-panel',

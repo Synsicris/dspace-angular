@@ -14,10 +14,12 @@ import { AuthenticateAction } from '../../core/auth/auth.actions';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { environment } from '../../../environments/environment';
 import { isEmpty } from '../../shared/empty.util';
+import { RemoteData } from '../../core/data/remote-data';
 import {
   END_USER_AGREEMENT_METADATA_FIELD,
   EndUserAgreementService
 } from '../../core/end-user-agreement/end-user-agreement.service';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 
 /**
  * Component that renders the create profile page to be used by a user registering through a token
@@ -70,6 +72,9 @@ export class CreateProfileComponent implements OnInit {
       }),
       contactPhone: new FormControl(''),
       language: new FormControl(''),
+      userAgreementAccept: new FormControl(false, {
+        validators: [Validators.requiredTrue],
+      })
     });
 
   }
@@ -107,6 +112,10 @@ export class CreateProfileComponent implements OnInit {
     return this.userInfoForm.get('language');
   }
 
+  get userAgreementAccept() {
+    return this.userInfoForm.get('userAgreementAccept');
+  }
+
   /**
    * Submits the eperson to the service to be created.
    * The submission will not be made when the form or the password is not valid.
@@ -142,8 +151,8 @@ export class CreateProfileComponent implements OnInit {
         requireCertificate: false
       };
 
-      // If the End User Agreement cookie is accepted, add end-user agreement metadata to the user
-      if (this.endUserAgreementService.isCookieAccepted()) {
+      // If the End User Agreement is accepted, add end-user agreement metadata to the user
+      if (this.userAgreementAccept) {
         values.metadata[END_USER_AGREEMENT_METADATA_FIELD] = [
           {
             value: String(true)
@@ -153,8 +162,10 @@ export class CreateProfileComponent implements OnInit {
       }
 
       const eperson = Object.assign(new EPerson(), values);
-      this.ePersonDataService.createEPersonForToken(eperson, this.token).subscribe((response) => {
-        if (response.isSuccessful) {
+      this.ePersonDataService.createEPersonForToken(eperson, this.token).pipe(
+        getFirstCompletedRemoteData(),
+      ).subscribe((rd: RemoteData<EPerson>) => {
+        if (rd.hasSucceeded) {
           this.notificationsService.success(this.translateService.get('register-page.create-profile.submit.success.head'),
             this.translateService.get('register-page.create-profile.submit.success.content'));
           this.store.dispatch(new AuthenticateAction(this.email, this.password));

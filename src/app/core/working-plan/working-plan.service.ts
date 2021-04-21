@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
-import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
+import { from as observableFrom, Observable, of as observableOf, throwError as observableThrowError } from 'rxjs';
 import {
   catchError,
   concatMap,
   delay,
   filter,
   first,
-  flatMap,
   map,
+  mergeMap,
   reduce,
   scan,
   startWith,
@@ -19,11 +19,10 @@ import { extendMoment } from 'moment-range';
 import * as Moment from 'moment';
 
 import { SubmissionFormModel } from '../config/models/config-submission-form.model';
-import { ConfigData } from '../config/config-data';
 import { SubmissionFormsConfigService } from '../config/submission-forms-config.service';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
-import { PaginatedList } from '../data/paginated-list';
+import { buildPaginatedList, PaginatedList } from '../data/paginated-list.model';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
 import { RemoteData } from '../data/remote-data';
 import { SearchResult } from '../../shared/search/search-result.model';
@@ -46,16 +45,15 @@ import { workpackagesSelector } from './selectors';
 import { WorkpackageEntries } from './working-plan.reducer';
 import { MetadataMap, MetadataValue, MetadatumViewModel } from '../shared/metadata.models';
 import { SubmissionObject } from '../submission/models/submission-object.model';
-import { throwError as observableThrowError } from 'rxjs/internal/observable/throwError';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
 import {
+  getFinishedRemoteData,
   getFirstSucceededRemoteDataPayload,
   getFirstSucceededRemoteListPayload,
-  getRemoteDataPayload,
-  getSucceededRemoteData
+  getRemoteDataPayload
 } from '../shared/operators';
-import { ErrorResponse, RestResponse } from '../cache/response.models';
+import { ErrorResponse } from '../cache/response.models';
 import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
 import { ItemDataService } from '../data/item-data.service';
 import { SubmissionService } from '../../submission/submission.service';
@@ -72,6 +70,7 @@ import { WorkspaceitemDataService } from '../submission/workspaceitem-data.servi
 import { Collection } from '../shared/collection.model';
 import { CollectionDataService } from '../data/collection-data.service';
 import { RequestService } from '../data/request.service';
+import { NoContent } from '../shared/NoContent.model';
 
 export const moment = extendMoment(Moment);
 
@@ -97,37 +96,51 @@ export class WorkingPlanService {
     this.searchService.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
   }
 
-  generateWorkpackageItem(projectId: string, metadata: MetadataMap, place: string): Observable<WorkpackageSearchItem> {
+  generateWorkpackageItem(projectId: string, metadata: MetadataMap, place: string): Observable<Item> {
     return this.createWorkspaceItem(projectId, environment.workingPlan.workpackageEntityName).pipe(
-      map((submission: SubmissionObject) => ({ id: submission.id, item: submission.item })),
-      tap(() => this.addPatchOperationForWorkpackage(metadata, place)),
-      delay(100),
-      flatMap((taskItem: WorkpackageSearchItem) => {
-        return this.executeItemPatch(taskItem.item.uuid, 'metadata').pipe(
-          map((item: Item) => ({ id: taskItem.id, item: item }))
-        )
-      }),
-    )
+      mergeMap((submission: SubmissionObject) => observableOf(submission.item).pipe(
+        tap(() => this.addPatchOperationForWorkpackage(metadata, place)),
+        delay(100),
+        mergeMap((item: Item) => this.executeItemPatch(item.id, 'metadata').pipe(
+          mergeMap(() => this.depositWorkspaceItem(submission).pipe(
+            getFirstSucceededRemoteDataPayload()
+          ))
+        ))
+      ))
+    );
   }
 
-  generateWorkpackageStepItem(projectId: string, parentId: string, stepType: string, metadata: MetadataMap): Observable<WorkpackageSearchItem> {
+  generateWorkpackageStepItem(projectId: string, parentId: string, stepType: string, metadata: MetadataMap): Observable<Item> {
+    return this.createWorkspaceItem(projectId, stepType).pipe(
+      mergeMap((submission: SubmissionObject) => observableOf(submission.item).pipe(
+        tap(() => this.addPatchOperationForWorkpackage(metadata)),
+        delay(100),
+        mergeMap((item: Item) => this.executeItemPatch(item.id, 'metadata').pipe(
+          mergeMap(() => this.depositWorkspaceItem(submission).pipe(
+            getFirstSucceededRemoteDataPayload()
+          ))
+        ))
+      ))
+    );
+  }
+/*  generateWorkpackageStepItem(projectId: string, parentId: string, stepType: string, metadata: MetadataMap): Observable<WorkpackageSearchItem> {
     return this.createWorkspaceItem(projectId, stepType).pipe(
       map((submission: SubmissionObject) => ({ id: submission.id, item: submission.item })),
       tap(() => this.addPatchOperationForWorkpackage(metadata)),
       delay(100),
-      flatMap((taskItem: WorkpackageSearchItem) => {
+      mergeMap((taskItem: WorkpackageSearchItem) => {
         return this.executeItemPatch(taskItem.item.uuid, 'metadata').pipe(
           map((item: Item) => ({ id: taskItem.id, item: item }))
-        )
+        );
       })
-    )
-  }
+    );
+  }*/
 
   getWorkpackageFormConfig(): Observable<SubmissionFormModel> {
     const formName = environment.workingPlan.workingPlanFormName;
-    return this.formConfigService.getConfigByName(formName).pipe(
-      map((configData: ConfigData) => configData.payload as SubmissionFormModel)
-    )
+    return this.formConfigService.findByName(formName).pipe(
+      getFirstSucceededRemoteDataPayload()
+    ) as Observable<SubmissionFormModel>;
   }
 
   getWorkpackageFormHeader(): string {
@@ -136,9 +149,9 @@ export class WorkingPlanService {
 
   getWorkpackageStepFormConfig(): Observable<SubmissionFormModel> {
     const formName = environment.workingPlan.workingPlanStepsFormName;
-    return this.formConfigService.getConfigByName(formName).pipe(
-      map((configData: ConfigData) => configData.payload as SubmissionFormModel)
-    )
+    return this.formConfigService.findByName(formName).pipe(
+      getFirstSucceededRemoteDataPayload()
+    ) as Observable<SubmissionFormModel>;
   }
 
   getWorkpackageStepFormHeader(): string {
@@ -148,7 +161,7 @@ export class WorkingPlanService {
   getWorkpackageItemById(itemId): Observable<Item> {
     return this.itemService.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload()
-    )
+    );
   }
 
   getWorkpackages(): Observable<Workpackage[]> {
@@ -156,7 +169,7 @@ export class WorkingPlanService {
       select(workpackagesSelector),
       map((entries: WorkpackageEntries) => Object.keys(entries).map((key) => entries[key])),
       startWith([])
-    )
+    );
   }
 
   getWorkpackageStatusTypes(): Observable<VocabularyEntry[]> {
@@ -168,18 +181,15 @@ export class WorkingPlanService {
       currentPage: 1
     });
     return this.vocabularyService.getVocabularyEntries(searchOptions, pageInfo).pipe(
-      getSucceededRemoteData(),
+      getFinishedRemoteData(),
       getRemoteDataPayload(),
       catchError(() => {
-        const emptyResult = new PaginatedList(
-          new PageInfo(),
-          []
-        );
+        const emptyResult = buildPaginatedList(new PageInfo(), []);
         return observableOf(emptyResult);
       }),
       map((result: PaginatedList<VocabularyEntry>) => result.page),
       take(1)
-    )
+    );
   }
 
   getWorkpackageStepTypeAuthorityName(): string {
@@ -223,21 +233,21 @@ export class WorkingPlanService {
                   id: searchResult.indexableObject.id,
                   item: item
                 }))
-              )
+              );
             }
           });
         const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<any>;
         return Object.assign(rd, { payload: payload });
       }),
-      flatMap((rd: RemoteData<PaginatedList<Observable<WorkpackageSearchItem>>>) => {
+      mergeMap((rd: RemoteData<PaginatedList<Observable<WorkpackageSearchItem>>>) => {
         if (rd.payload.page.length === 0) {
           return observableOf([]);
         } else {
           return observableFrom(rd.payload.page).pipe(
             concatMap((list: Observable<WorkpackageSearchItem>) => list),
-            scan((acc: any, value: any) => [...acc, ...value], []),
+            scan((acc: any, value: any) => [...acc, value], []),
             filter((list: WorkpackageSearchItem[]) => list.length === rd.payload.page.length),
-          )
+          );
         }
       }),
       first((result: WorkpackageSearchItem[]) => isNotUndefined(result))
@@ -296,22 +306,22 @@ export class WorkingPlanService {
           steps
         ))
       )),
-      reduce((acc: any, value: any) => [...acc, ...value], [])
+      reduce((acc: any, value: any) => [...acc, value], [])
     );
   }
 
   initWorkpackageStepsFromParentItem(workpackageId: string, parentItem: Item, workspaceItemId: string): Observable<WorkpackageStep[]> {
     const relatedTaskMetadata = Metadata.all(parentItem.metadata, environment.workingPlan.workingPlanStepRelationMetadata);
     if (isEmpty(relatedTaskMetadata)) {
-      return observableOf([])
+      return observableOf([]);
     } else {
       return observableFrom(relatedTaskMetadata).pipe(
         concatMap((task: MetadataValue) => this.itemService.findById(task.value).pipe(
           getFirstSucceededRemoteDataPayload(),
           map((stepItem: Item) => this.initWorkpackageStepFromItem(stepItem, workspaceItemId, workpackageId)),
         )),
-        reduce((acc: any, value: any) => [...acc, ...value], [])
-      )
+        reduce((acc: any, value: any) => [...acc, value], [])
+      );
     }
   }
 
@@ -363,7 +373,7 @@ export class WorkingPlanService {
   isProcessingWorkpackageRemove(workpackageId: string): Observable<boolean> {
     return this.workingPlanStateService.getWorkpackageToRemoveId().pipe(
       map((workpackageToRemoveId) => workpackageId === workpackageToRemoveId)
-    )
+    );
   }
 
   checkAndRemoveRelations(itemId: string): Observable<Item> {
@@ -387,13 +397,13 @@ export class WorkingPlanService {
 
   removeWorkpackageByItemId(itemId: string): Observable<boolean> {
     return this.itemService.delete(itemId).pipe(
-      map((response: RestResponse) => response.isSuccessful)
+      map((response: RemoteData<NoContent>) => response.isSuccess)
     );
   }
 
   removeWorkpackageByWorkspaceItemId(workspaceItemId: string): Observable<boolean> {
     return this.workspaceitemService.delete(workspaceItemId).pipe(
-      map((response: RestResponse) => response.isSuccessful)
+      map((response: RemoteData<NoContent>) => response.isSuccess)
     );
   }
 
@@ -409,10 +419,10 @@ export class WorkingPlanService {
           place: 0,
           value: 'not_done'
         }]
-      })
+      });
     }
 
-    return result
+    return result;
   }
 
   updateMetadataItem(
@@ -434,13 +444,13 @@ export class WorkingPlanService {
           if (isEmpty(storedValue)) {
             this.createAddMetadataPatchOp(metadatumView.key, value);
           } else {
-            this.createReplaceMetadataPatchOp(metadatumView.key, metadatumView.place, value)
+            this.createReplaceMetadataPatchOp(metadatumView.key, metadatumView.place, value);
           }
         });
       }),
       delay(100),
-      flatMap(() => this.executeItemPatch(itemId, 'metadata'))
-    )
+      mergeMap(() => this.executeItemPatch(itemId, 'metadata'))
+    );
   }
 
   updateWorkpackagePlace(workpackages: WorkpackageEntries): Observable<Item[]> {
@@ -461,8 +471,8 @@ export class WorkingPlanService {
 
     return observableFrom(list).pipe(
       concatMap((entry) => this.updateMetadataItem(entry.id, entry.metadataList)),
-      reduce((acc: any, value: any) => [...acc, ...value], [])
-    )
+      reduce((acc: any, value: any) => [...acc, value], [])
+    );
   }
 
   updateWorkpackageStepsPlace(workpackageId: string, workpackageSteps: WorkpackageStep[]): Observable<Item> {
@@ -477,7 +487,7 @@ export class WorkingPlanService {
             confidence: -1
           } as MetadatumViewModel));
 
-    return this.updateMetadataItem(workpackageId, metadataList)
+    return this.updateMetadataItem(workpackageId, metadataList);
   }
 
   updateWorkpackageMetadata(
@@ -499,7 +509,7 @@ export class WorkingPlanService {
           authority: hasAuthority ? value : '',
           confidence: hasAuthority ? 600 : -1
         } as MetadatumViewModel
-      )
+      );
     });
 
     this.workingPlanStateService.dispatchUpdateWorkpackageAction(workpackageId, workpackage, metadatumViewList);
@@ -525,7 +535,7 @@ export class WorkingPlanService {
           authority: hasAuthority ? value : '',
           confidence: hasAuthority ? 600 : -1
         } as MetadatumViewModel
-      )
+      );
     });
 
     this.workingPlanStateService.dispatchUpdateWorkpackageStepAction(
@@ -556,12 +566,18 @@ export class WorkingPlanService {
 
   private createWorkspaceItem(projectId: string, taskType: string): Observable<SubmissionObject> {
     return this.getCollectionIdByProjectAndEntity(projectId, taskType).pipe(
-      flatMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType).pipe(
-        flatMap((submission: SubmissionObject) =>
+      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType).pipe(
+        mergeMap((submission: SubmissionObject) =>
           (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
         )
       )),
-    )
+    );
+  }
+
+  private depositWorkspaceItem(submission: SubmissionObject): Observable<RemoteData<Item>> {
+    return this.submissionService.depositSubmission(submission.self).pipe(
+      mergeMap(() => this.itemService.findById((submission.item as Item).id))
+    );
   }
 
   private executeItemPatch(objectId: string, pathName: string): Observable<Item> {
@@ -569,10 +585,9 @@ export class WorkingPlanService {
       'items',
       objectId,
       pathName).pipe(
-      getFirstSucceededRemoteDataPayload(),
       tap((item: Item) => this.itemService.update(item)),
       catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
-    )
+    );
   }
 
   private getCollectionIdByProjectAndEntity(projectId: string, entityType: string): Observable<string> {

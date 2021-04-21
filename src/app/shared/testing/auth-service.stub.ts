@@ -6,6 +6,7 @@ import { EPerson } from '../../core/eperson/models/eperson.model';
 import { createSuccessfulRemoteDataObject$ } from '../remote-data.utils';
 import { AuthMethod } from '../../core/auth/models/auth.method';
 import { hasValue } from '../empty.util';
+import { RetrieveAuthMethodsAction } from '../../core/auth/auth.actions';
 
 export const authMethodsMock = [
   new AuthMethod('password'),
@@ -54,7 +55,7 @@ export class AuthServiceStub {
   }
 
   public buildAuthHeader(token?: AuthTokenInfo): string {
-    return `Bearer ${token.accessToken}`;
+    return `Bearer ${token ? token.accessToken : ''}`;
   }
 
   public getToken(): AuthTokenInfo {
@@ -77,14 +78,14 @@ export class AuthServiceStub {
    * This method is used to ease testing
    */
   public setTokenAsExpired() {
-    this._tokenExpired = true
+    this._tokenExpired = true;
   }
 
   /**
    * This method is used to ease testing
    */
   public setTokenAsNotExpired() {
-    this._tokenExpired = false
+    this._tokenExpired = false;
   }
 
   public isTokenExpiring(): Observable<boolean> {
@@ -169,5 +170,9 @@ export class AuthServiceStub {
 
   public replaceToken(token: AuthTokenInfo) {
     return token;
+  }
+
+  getRetrieveAuthMethodsAction(authStatus: AuthStatus): RetrieveAuthMethodsAction {
+    return;
   }
 }

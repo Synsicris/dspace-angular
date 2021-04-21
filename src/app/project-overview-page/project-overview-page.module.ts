@@ -9,6 +9,7 @@ import { ProjectEntityListComponent } from './project-entity-list/project-entity
 import { LookupIdModule } from '../+lookup-by-id/lookup-by-id.module';
 import { ProjectOverviewPageHeaderComponent } from './header/project-overview-page-header.component';
 import { ProjectOverviewPageContentComponent } from './content/project-overview-page-content.component';
+import { ContextMenuModule } from '../shared/context-menu/context-menu.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { ProjectOverviewPageContentComponent } from './content/project-overview-
     RouterModule,
     ProjectOverviewPageRoutingModule,
     SharedModule,
-    LookupIdModule
+    LookupIdModule,
+    ContextMenuModule
   ],
   declarations: [
     ProjectOverviewPageComponent,

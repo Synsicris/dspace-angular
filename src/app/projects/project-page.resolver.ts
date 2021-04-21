@@ -28,7 +28,7 @@ export class ProjectPageResolver implements Resolve<RemoteData<Community>> {
     return this.communityService.findById(
       route.params.projectId
     ).pipe(
-      find((RD) => hasValue(RD.error) || RD.hasSucceeded)
+      find((RD) => hasValue(RD.errorMessage) || RD.hasSucceeded)
     );
   }
 }

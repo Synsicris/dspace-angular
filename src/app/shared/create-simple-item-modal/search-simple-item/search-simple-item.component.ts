@@ -5,7 +5,7 @@ import { concatMap, scan, take } from 'rxjs/operators';
 import { NgbActiveModal, NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { findIndex } from 'lodash';
 import { hasValue, isEmpty, isNotEmpty } from '../../empty.util';
-import { PaginatedList } from '../../../core/data/paginated-list';
+import { PaginatedList } from '../../../core/data/paginated-list.model';
 import { SortDirection, SortOptions } from '../../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../pagination/pagination-component-options.model';
 import { PageInfo } from '../../../core/shared/page-info.model';
@@ -172,6 +172,9 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    */
   onFilterChange(filterBox: FilterBox): void {
     this.updateFilterList(filterBox);
+    this.paginationOptions = Object.assign(new PaginationComponentOptions(), this.paginationOptions, {
+      currentPage: 0
+    });
     this.search(this.paginationOptions, this.sortOptions);
   }
 
@@ -225,6 +228,9 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    */
   onSearchChange(searchbox: FilterBox) {
     this.updateFilterList(searchbox);
+    this.paginationOptions = Object.assign(new PaginationComponentOptions(), this.paginationOptions, {
+      currentPage: 0
+    });
     this.search(this.paginationOptions, this.sortOptions);
   }
 
@@ -251,7 +257,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    * @param item
    */
   onTaskSelected(item: SimpleItem) {
-    this.selectedTasks.push(item)
+    this.selectedTasks.push(item);
   }
 
   private buildSearchQuery(filters: SearchFilter[]) {
@@ -279,7 +285,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
 
         const appliedFilterBoxEntries = [...this.entityTypeFilterBox.appliedFilterBoxEntries]
           .filter((entry: FilterBoxEntry) => {
-            return findIndex(resultPaginatedList, { label: entry.label }) !== -1
+            return findIndex(resultPaginatedList, { label: entry.label }) !== -1;
           });
 
         this.entityTypeFilterBox = Object.assign(this.entityTypeFilterBox, {
@@ -287,7 +293,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
           appliedFilterBoxEntries: appliedFilterBoxEntries
         });
         this.filterBoxList$.next([this.entityTypeFilterBox, this.titleFilterBox]);
-      })
+      });
   }
 
   private getSearchFiltersFromFilterBoxes(filterBoxes: FilterBox[]) {
@@ -297,7 +303,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
         searchFilters.push(new SearchFilter(
           filterBox.filterConfig.name,
           filterBox.appliedFilterBoxEntries.map((entry: FilterBoxEntry) => entry.value),
-          filterBox.filterConfig.type === FilterType.authority ? 'authority' : ''
+          filterBox.filterConfig.filterType === FilterType.authority ? 'authority' : ''
         ));
       }
     });
@@ -329,7 +335,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
 
   private updateFilterList(filterUpdate: FilterBox) {
     const filterIndex = findIndex(this.filterBoxList$.value, (filter) => {
-      return filter.filterConfig.name === filterUpdate.filterConfig.name
+      return filter.filterConfig.name === filterUpdate.filterConfig.name;
     });
 
     const newFilterList = [...this.filterBoxList$.value];
@@ -339,14 +345,14 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     this.buildSearchQuery([...this.getSearchFiltersFromFilterBoxes(this.filterBoxList$.value)]);
   }
 
-  private updateResultList(resultList: Array<Observable<SimpleItem>>) {
+  private updateResultList(resultList: Observable<SimpleItem>[]) {
     if (isEmpty(resultList)) {
       this.availableTaskList$.next([]);
       this.searching$.next(false);
     } else {
       this.subs.push(observableFrom(resultList).pipe(
         concatMap((list: Observable<SimpleItem>) => list),
-        scan((acc: any, value: any) => [...acc, ...value], [])
+        scan((acc: any, value: any) => [...acc, value], [])
       ).subscribe((itemList: SimpleItem[]) => {
         if (itemList.length === resultList.length) {
           this.availableTaskList$.next(itemList);

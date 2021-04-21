@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 
 import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, find, flatMap, map, reduce, take, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, mergeMap, scan, switchMap, tap } from 'rxjs/operators';
 
 import { SectionModelComponent } from '../models/section.model';
 import { hasValue, isNotEmpty, isNotUndefined, isUndefined } from '../../../shared/empty.util';
@@ -23,14 +23,21 @@ import { SectionsService } from '../sections.service';
 import { SubmissionService } from '../../submission.service';
 import { Collection } from '../../../core/shared/collection.model';
 import { AccessConditionOption } from '../../../core/config/models/config-access-condition-option.model';
-import { PaginatedList } from '../../../core/data/paginated-list';
+import { followLink } from '../../../shared/utils/follow-link-config.model';
+import {
+  getFirstSucceededRemoteData,
+  getFirstSucceededRemoteDataPayload,
+  getFirstSucceededRemoteListPayload
+} from '../../../core/shared/operators';
+import { ActionType } from '../../../core/resource-policy/models/action-type.model';
+import { ResourcePolicy } from '../../../core/resource-policy/models/resource-policy.model';
 
 export const POLICY_DEFAULT_NO_LIST = 1; // Banner1
 export const POLICY_DEFAULT_WITH_LIST = 2; // Banner2
 
 export interface AccessConditionGroupsMapEntry {
   accessCondition: string;
-  groups: Group[]
+  groups: Group[];
 }
 
 /**
@@ -146,38 +153,39 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
    * Initialize all instance variables and retrieve collection default access conditions
    */
   onSectionInit() {
-    const config$ = this.uploadsConfigService.getConfigByHref(this.sectionData.config).pipe(
+    const config$ = this.uploadsConfigService.findByHref(this.sectionData.config, false, followLink('metadata')).pipe(
+      getFirstSucceededRemoteData(),
       map((config) => config.payload));
 
     // retrieve configuration for the bitstream's metadata form
     this.configMetadataForm$ = config$.pipe(
-      take(1),
-      map((config: SubmissionUploadsModel) => config.metadata));
+      switchMap((config: SubmissionUploadsModel) =>
+        config.metadata.pipe(
+          getFirstSucceededRemoteData(),
+          map((remoteData: RemoteData<SubmissionFormsModel>) => remoteData.payload)
+        )
+      ));
 
     this.subs.push(
       this.submissionService.getSubmissionObject(this.submissionId).pipe(
         filter((submissionObject: SubmissionObjectEntry) => isNotUndefined(submissionObject) && !submissionObject.isLoading),
         filter((submissionObject: SubmissionObjectEntry) => isUndefined(this.collectionId) || this.collectionId !== submissionObject.collection),
         tap((submissionObject: SubmissionObjectEntry) => this.collectionId = submissionObject.collection),
-        flatMap((submissionObject: SubmissionObjectEntry) => this.collectionDataService.findById(submissionObject.collection)),
+        mergeMap((submissionObject: SubmissionObjectEntry) => this.collectionDataService.findById(submissionObject.collection)),
         filter((rd: RemoteData<Collection>) => isNotUndefined((rd.payload))),
         tap((collectionRemoteData: RemoteData<Collection>) => this.collectionName = collectionRemoteData.payload.name),
-        // TODO review this part when https://github.com/DSpace/dspace-angular/issues/575 is resolved
-/*        flatMap((collectionRemoteData: RemoteData<Collection>) => {
-          return this.resourcePolicyService.findByHref(
-            (collectionRemoteData.payload as any)._links.defaultAccessConditions.href
+        mergeMap((collectionRemoteData: RemoteData<Collection>) => {
+          return this.resourcePolicyService.searchByResource(collectionRemoteData.payload.id, ActionType.DEFAULT_BITSTREAM_READ).pipe(
+            getFirstSucceededRemoteListPayload(),
+            tap((defaultAccessConditionsRemoteData: ResourcePolicy[]) => {
+              if (isNotEmpty(defaultAccessConditionsRemoteData)) {
+                this.collectionDefaultAccessConditions = defaultAccessConditionsRemoteData;
+              }
+            })
           );
         }),
-        filter((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) =>
-          defaultAccessConditionsRemoteData.hasSucceeded),
-        tap((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) => {
-          if (isNotEmpty(defaultAccessConditionsRemoteData.payload)) {
-            this.collectionDefaultAccessConditions = Array.isArray(defaultAccessConditionsRemoteData.payload)
-              ? defaultAccessConditionsRemoteData.payload : [defaultAccessConditionsRemoteData.payload];
-          }
-        }),*/
-        flatMap(() => config$),
-        flatMap((config: SubmissionUploadsModel) => {
+        mergeMap(() => config$),
+        mergeMap((config: SubmissionUploadsModel) => {
           this.required$.next(config.required);
           this.availableAccessConditionOptions = isNotEmpty(config.accessConditionOptions) ? config.accessConditionOptions : [];
 
@@ -186,28 +194,28 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
             : POLICY_DEFAULT_NO_LIST;
 
           this.availableGroups = new Map();
-          const mapGroups$: Array<Observable<AccessConditionGroupsMapEntry>> = [];
+          const mapGroups$: Observable<AccessConditionGroupsMapEntry>[] = [];
           // Retrieve Groups for accessCondition Policies
           this.availableAccessConditionOptions.forEach((accessCondition: AccessConditionOption) => {
             if (accessCondition.hasEndDate === true || accessCondition.hasStartDate === true) {
               if (accessCondition.groupUUID) {
                 mapGroups$.push(
                   this.groupService.findById(accessCondition.groupUUID).pipe(
-                    find((rd: RemoteData<Group>) => !rd.isResponsePending && rd.hasSucceeded),
-                    map((rd: RemoteData<Group>) => ({
+                    getFirstSucceededRemoteDataPayload(),
+                    map((group: Group) => ({
                       accessCondition: accessCondition.name,
-                      groups: [rd.payload]
+                      groups: [group]
                     } as AccessConditionGroupsMapEntry)))
                 );
               } else if (accessCondition.selectGroupUUID) {
                 mapGroups$.push(
                   this.groupService.findById(accessCondition.selectGroupUUID).pipe(
-                    find((rd: RemoteData<Group>) => !rd.isResponsePending && rd.hasSucceeded),
-                    flatMap((group: RemoteData<Group>) => group.payload.subgroups),
-                    find((rd: RemoteData<PaginatedList<Group>>) => !rd.isResponsePending && rd.hasSucceeded),
-                    map((rd: RemoteData<PaginatedList<Group>>) => ({
+                    getFirstSucceededRemoteDataPayload(),
+                    mergeMap((group: Group) => group.subgroups),
+                    getFirstSucceededRemoteListPayload(),
+                    map((groups: Group[]) => ({
                       accessCondition: accessCondition.name,
-                      groups: rd.payload.page
+                      groups: groups
                     } as AccessConditionGroupsMapEntry))
                   ));
               }
@@ -215,11 +223,8 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
           });
           return mapGroups$;
         }),
-        flatMap((entry) => entry),
-        reduce((acc: any[], entry: AccessConditionGroupsMapEntry) => {
-          acc.push(entry);
-          return acc;
-        }, []),
+        mergeMap((entry) => entry),
+        scan((acc: any[], entry: AccessConditionGroupsMapEntry) => [...acc, entry], []),
       ).subscribe((entries: AccessConditionGroupsMapEntry[]) => {
         entries.forEach((entry: AccessConditionGroupsMapEntry) => {
           this.availableGroups.set(entry.accessCondition, entry.groups);
@@ -228,10 +233,12 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
       }),
 
       // retrieve submission's bitstreams from state
-      observableCombineLatest(this.configMetadataForm$,
-        this.bitstreamService.getUploadedFileList(this.submissionId, this.sectionData.id)).pipe(
+      observableCombineLatest([
+        this.configMetadataForm$,
+        this.bitstreamService.getUploadedFileList(this.submissionId, this.sectionData.id)
+      ]).pipe(
         filter(([configMetadataForm, fileList]: [SubmissionFormsModel, any[]]) => {
-          return isNotEmpty(configMetadataForm) && isNotUndefined(fileList)
+          return isNotEmpty(configMetadataForm) && isNotUndefined(fileList);
         }),
         distinctUntilChanged())
         .subscribe(([configMetadataForm, fileList]: [SubmissionFormsModel, any[]]) => {
@@ -282,11 +289,13 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
   protected getSectionStatus(): Observable<boolean> {
     // if not mandatory, always true
     // if mandatory, at least one file is required
-    return observableCombineLatest(this.required$,
-      this.bitstreamService.getUploadedFileList(this.submissionId, this.sectionData.id),
-      (required,fileList: any[]) => {
+    return observableCombineLatest([this.required$,
+      this.bitstreamService.getUploadedFileList(this.submissionId, this.sectionData.id)
+    ]).pipe(
+      map(([required, fileList]: [boolean, any[]]) => {
         return (!required || (isNotUndefined(fileList) && fileList.length > 0));
-      });
+      })
+    );
   }
 
   /**

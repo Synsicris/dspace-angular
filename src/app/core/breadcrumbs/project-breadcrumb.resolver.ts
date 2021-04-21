@@ -26,7 +26,7 @@ export class ProjectBreadcrumbResolver extends DSOBreadcrumbResolver<Community> 
    * The self links defined in this list are expected to be requested somewhere in the near future
    * Requesting them as embeds will limit the number of requests
    */
-  get followLinks(): Array<FollowLinkConfig<Community>> {
+  get followLinks(): FollowLinkConfig<Community>[] {
     return [];
   }
 
@@ -38,7 +38,7 @@ export class ProjectBreadcrumbResolver extends DSOBreadcrumbResolver<Community> 
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BreadcrumbConfig<Community>> {
     const uuid = route.params.projectId;
-    return this.dataService.findById(uuid, ...this.followLinks).pipe(
+    return this.dataService.findById(uuid, true, ...this.followLinks).pipe(
       getFinishedRemoteData(),
       getRemoteDataPayload(),
       map((object: Community) => {

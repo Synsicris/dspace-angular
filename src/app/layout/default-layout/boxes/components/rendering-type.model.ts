@@ -1,13 +1,17 @@
-import { Input } from '@angular/core';
-import { hasValue } from 'src/app/shared/empty.util';
-import { Item } from 'src/app/core/shared/item.model';
-import { Field } from 'src/app/core/layout/models/metadata-component.model';
+import { Component, Input } from '@angular/core';
+
+import { hasValue } from '../../../../shared/empty.util';
+import { Item } from '../../../../core/shared/item.model';
+import { LayoutField } from '../../../../core/layout/models/metadata-component.model';
 
 /**
  * This class defines the basic model to extends for create a new
  * field render component
  */
-export class RenderingTypeModel {
+@Component({
+  template: ''
+})
+export abstract class RenderingTypeModelComponent {
 
   /**
    * Current DSpace item
@@ -16,7 +20,7 @@ export class RenderingTypeModel {
   /**
    * Current field
    */
-  @Input() field: Field;
+  @Input() field: LayoutField;
   /**
    * Defines the subtype of a rendering.
    * ex. for type identifier.doi this property
@@ -24,15 +28,11 @@ export class RenderingTypeModel {
    */
   @Input() subtype: string;
 
-  getMetadatavalue(key: string): any {
-    return key ? this.item.firstMetadataValue(key) : '';
-  }
-
   /**
    * Returns the value of the metadata to show
    */
-  get metadataValue(): string {
-    return this.item.firstMetadataValue(this.field.metadata);
+  get metadataValues(): string[] {
+    return this.item.allMetadataValues(this.field.metadata);
   }
 
   /**

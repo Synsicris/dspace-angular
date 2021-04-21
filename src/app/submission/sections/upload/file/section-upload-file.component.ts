@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { filter, first, flatMap, take } from 'rxjs/operators';
+import { filter, first, mergeMap, take } from 'rxjs/operators';
 import { DynamicFormControlModel, } from '@ng-dynamic-forms/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -13,7 +13,6 @@ import { JsonPatchOperationPathCombiner } from '../../../../core/json-patch/buil
 import { WorkspaceitemSectionUploadFileObject } from '../../../../core/submission/models/workspaceitem-section-upload-file.model';
 import { SubmissionFormsModel } from '../../../../core/config/models/config-submission-forms.model';
 import { deleteProperty } from '../../../../shared/object.util';
-import { dateToISOFormat } from '../../../../shared/date.util';
 import { SubmissionService } from '../../../submission.service';
 import { FileService } from '../../../../core/shared/file.service';
 import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
@@ -141,7 +140,7 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
    * The [[SubmissionSectionUploadFileEditComponent]] reference
    * @type {SubmissionSectionUploadFileEditComponent}
    */
-  @ViewChild(SubmissionSectionUploadFileEditComponent, {static: false}) fileEditComp: SubmissionSectionUploadFileEditComponent;
+  @ViewChild(SubmissionSectionUploadFileEditComponent) fileEditComp: SubmissionSectionUploadFileEditComponent;
 
   /**
    * Initialize instance variables
@@ -250,9 +249,9 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
     this.subscriptions.push(this.formService.isValid(this.formId).pipe(
       take(1),
       filter((isValid) => isValid),
-      flatMap(() => this.formService.getFormData(this.formId)),
+      mergeMap(() => this.formService.getFormData(this.formId)),
       take(1),
-      flatMap((formData: any) => {
+      mergeMap((formData: any) => {
         // collect bitstream metadata
         Object.keys((formData.metadata))
           .filter((key) => isNotEmpty(formData.metadata[key]))
@@ -283,13 +282,11 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
                 accessConditionOpt.name = this.retrieveValueFromField(accessCondition.name);
                 accessConditionOpt.groupUUID = this.retrieveValueFromField(accessCondition.groupUUID);
                 if (accessCondition.startDate) {
-                  const startDate = this.retrieveValueFromField(accessCondition.startDate);
-                  accessConditionOpt.startDate = dateToISOFormat(startDate);
+                  accessConditionOpt.startDate = this.retrieveValueFromField(accessCondition.startDate);
                   accessConditionOpt = deleteProperty(accessConditionOpt, 'endDate');
                 }
                 if (accessCondition.endDate) {
-                  const endDate = this.retrieveValueFromField(accessCondition.endDate);
-                  accessConditionOpt.endDate = dateToISOFormat(endDate);
+                  accessConditionOpt.endDate = this.retrieveValueFromField(accessCondition.endDate);
                   accessConditionOpt = deleteProperty(accessConditionOpt, 'startDate');
                 }
                 accessConditionsToSave.push(accessConditionOpt);
@@ -306,7 +303,7 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
           this.submissionService.getSubmissionObjectLinkName(),
           this.submissionId,
           this.pathCombiner.rootElement,
-          this.pathCombiner.subRootElement)
+          this.pathCombiner.subRootElement);
       })
     ).subscribe((result: SubmissionObject[]) => {
       if (result[0].sections.upload) {

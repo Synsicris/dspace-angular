@@ -5,6 +5,6 @@ export interface SimpleItem {
   id?: string;
   workspaceItemId?: string;
   type: FormFieldMetadataValueObject;
-  metadata: MetadataMap
+  metadata: MetadataMap;
 
 }

@@ -5,8 +5,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
-import { getFirstSucceededRemoteDataPayload, redirectToPageNotFoundOn404 } from '../core/shared/operators';
+import { getFirstSucceededRemoteDataPayload, redirectOn4xx } from '../core/shared/operators';
 import { Community } from '../core/shared/community.model';
+import { AuthService } from '../core/auth/auth.service';
 
 export const PROJECT_PAGE = 'project-overview';
 export const PROJECT_ROUTE = '/' + PROJECT_PAGE;
@@ -28,13 +29,13 @@ export class ProjectOverviewPageComponent implements OnInit {
    */
   projectUUID$: Observable<string>;
 
-  constructor(protected route: ActivatedRoute, protected router: Router) {
+  constructor(protected route: ActivatedRoute, protected authService: AuthService, protected router: Router) {
   }
 
   ngOnInit(): void {
     this.projectRD$ = this.route.data.pipe(
       map((data) => data.project as RemoteData<Community>),
-      redirectToPageNotFoundOn404(this.router)
+      redirectOn4xx(this.router, this.authService)
     );
 
     this.projectUUID$ = this.projectRD$.pipe(

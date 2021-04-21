@@ -3,21 +3,25 @@ import { difference, findIndex } from 'lodash';
 import { ImpactPathway } from './models/impact-pathway.model';
 import {
   AddImpactPathwaySubTaskSuccessAction,
-  AddImpactPathwayTaskLinksAction,
   AddImpactPathwayTaskLinkAction,
+  AddImpactPathwayTaskLinksAction,
   AddImpactPathwayTaskSuccessAction,
   EditImpactPathwayTaskLinksAction,
   ImpactPathwayActions,
   ImpactPathwayActionTypes,
   InitImpactPathwaySuccessAction,
+  MoveImpactPathwaySubTaskAction,
+  MoveImpactPathwaySubTaskErrorAction, OrderImpactPathwaySubTasksAction,
+  OrderImpactPathwaySubTasksErrorAction,
+  OrderImpactPathwayTasksAction,
+  OrderImpactPathwayTasksErrorAction,
   RemoveImpactPathwaySubTaskSuccessAction,
+  RemoveImpactPathwaySuccessAction,
   RemoveImpactPathwayTaskLinkAction,
   RemoveImpactPathwayTaskSuccessAction,
-  UpdateImpactPathwaySubTaskAction,
-  UpdateImpactPathwayTaskAction,
-  MoveImpactPathwaySubTaskAction,
   SetImpactPathwayTargetTaskAction,
-  MoveImpactPathwaySubTaskErrorAction, RemoveImpactPathwaySuccessAction
+  UpdateImpactPathwaySubTaskAction,
+  UpdateImpactPathwayTaskAction
 } from './impact-pathway.actions';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
@@ -37,7 +41,7 @@ export interface ImpactPathwayLink {
   toTaskId: string;
   toTaskUniqueId: string;
   toTaskTitle?: string;
-  twoWay: boolean
+  twoWay: boolean;
 }
 
 export interface ImpactPathwayLinks {
@@ -46,8 +50,8 @@ export interface ImpactPathwayLinks {
   selectedTaskHTMLId: string;
   selectedTaskId: string;
   selectedTwoWay: boolean;
-  relatedImpactPathwayId: string
-  relatedStepId: string
+  relatedImpactPathwayId: string;
+  relatedStepId: string;
   stored: ImpactPathwayLink[];
   toSave: ImpactPathwayLink[];
   toDelete: ImpactPathwayLink[];
@@ -183,6 +187,44 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
         false);
     }
 
+    case ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_TASKS: {
+      return setImpactPathwayTasks(
+        state,
+        (action as OrderImpactPathwayTasksAction).payload.impactPathwayId,
+        (action as OrderImpactPathwayTasksAction).payload.stepId,
+        (action as OrderImpactPathwayTasksAction).payload.currentTasks
+      );
+    }
+
+    case ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_TASKS_ERROR: {
+      return setImpactPathwayTasks(
+        state,
+        (action as OrderImpactPathwayTasksErrorAction).payload.impactPathwayId,
+        (action as OrderImpactPathwayTasksErrorAction).payload.stepId,
+        (action as OrderImpactPathwayTasksErrorAction).payload.previousTasks
+      );
+    }
+
+    case ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_SUB_TASKS: {
+      return setImpactPathwaySubTasks(
+        state,
+        (action as OrderImpactPathwaySubTasksAction).payload.impactPathwayId,
+        (action as OrderImpactPathwaySubTasksAction).payload.stepId,
+        (action as OrderImpactPathwaySubTasksAction).payload.parentTaskId,
+        (action as OrderImpactPathwaySubTasksAction).payload.currentTasks
+      );
+    }
+
+    case ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_SUB_TASKS_ERROR: {
+      return setImpactPathwaySubTasks(
+        state,
+        (action as OrderImpactPathwaySubTasksErrorAction).payload.impactPathwayId,
+        (action as OrderImpactPathwaySubTasksErrorAction).payload.stepId,
+        (action as OrderImpactPathwaySubTasksErrorAction).payload.parentTaskId,
+        (action as OrderImpactPathwaySubTasksErrorAction).payload.previousTasks
+      );
+    }
+
     case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_LINK: {
       return addImpactPathwayTaskRelation(state, action as AddImpactPathwayTaskLinkAction);
     }
@@ -291,7 +333,7 @@ function initImpactPathway(state: ImpactPathwayState, action: InitImpactPathwayS
     }),
     processing: false,
     loaded: true
-  })
+  });
 }
 
 /**
@@ -315,7 +357,7 @@ function removeImpactPathway(state: ImpactPathwayState, action: RemoveImpactPath
     objects: newObjects,
     removing: false,
     loaded: false
-  })
+  });
 }
 
 /**
@@ -622,6 +664,94 @@ function moveImpactPathwaySubTask(
 }
 
 /**
+ * Revert task list of a step
+ *
+ * @param state
+ *    the current state
+ * @param impactPathwayId
+ *    the impactPathway's Id
+ * @param stepId
+ *    the impactPathway step's Id
+ * @param previousParentTasks
+ *    the impactPathway task list to revert
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function setImpactPathwayTasks(
+  state: ImpactPathwayState,
+  impactPathwayId: string,
+  stepId: string,
+  previousParentTasks: ImpactPathwayTask[],
+) {
+  const newState = Object.assign({}, state);
+  const step: ImpactPathwayStep = newState.objects[impactPathwayId].getStep(stepId);
+  const stepIndex: number = newState.objects[impactPathwayId].getStepIndex(stepId);
+  const newStep = Object.assign(new ImpactPathwayStep(), step, {
+    tasks: [...previousParentTasks]
+  });
+  const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[impactPathwayId], {
+    steps: newState.objects[impactPathwayId].steps.map((stepEntry, index) => {
+      return (index === stepIndex) ? newStep : stepEntry;
+    })
+  });
+  return Object.assign({}, state, {
+    objects: Object.assign({}, state.objects, {
+      [impactPathwayId]: newImpactPathway
+    })
+  });
+}
+
+/**
+ * Revert task list of a step
+ *
+ * @param state
+ *    the current state
+ * @param impactPathwayId
+ *    the impactPathway's Id
+ * @param stepId
+ *    the impactPathway step's Id
+ * @param previousParentTasks
+ *    the impactPathway task list to revert
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function setImpactPathwaySubTasks(
+  state: ImpactPathwayState,
+  impactPathwayId: string,
+  stepId: string,
+  parentTaskId: string,
+  previousParentTasks: ImpactPathwayTask[],
+) {
+  const newState = Object.assign({}, state);
+  const step: ImpactPathwayStep = newState.objects[impactPathwayId].getStep(stepId);
+  const stepIndex: number = newState.objects[impactPathwayId].getStepIndex(stepId);
+  const parentTask: ImpactPathwayTask = step.getTask(parentTaskId);
+  const parentTaskIndex: number = step.getTaskIndex(parentTaskId);
+
+  const newParentTask = Object.assign(new ImpactPathwayTask(), parentTask, {
+    tasks: [...previousParentTasks]
+  });
+
+  const newTaskList = step.tasks.slice(0);
+  newTaskList[parentTaskIndex] = newParentTask;
+
+  const newStep = Object.assign(new ImpactPathwayStep(), step, {
+    tasks: newTaskList
+  });
+
+  const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[impactPathwayId], {
+    steps: newState.objects[impactPathwayId].steps.map((stepEntry, index) => {
+      return (index === stepIndex) ? newStep : stepEntry;
+    })
+  });
+  return Object.assign({}, state, {
+    objects: Object.assign({}, state.objects, {
+      [impactPathwayId]: newImpactPathway
+    })
+  });
+}
+
+/**
  * Add a new task relation
  *
  * @param state
@@ -665,10 +795,10 @@ function removeImpactPathwayTaskRelation(state: ImpactPathwayState, action: Remo
 
   const relationIndex = findIndex(state.links.stored, (link) => {
     if (!link.twoWay) {
-      return link.to === action.payload.targetImpactPathwayTaskHTMLId
+      return link.to === action.payload.targetImpactPathwayTaskHTMLId;
     } else {
       return (link.from === action.payload.targetImpactPathwayTaskHTMLId
-        || link.to === action.payload.targetImpactPathwayTaskHTMLId)
+        || link.to === action.payload.targetImpactPathwayTaskHTMLId);
     }
   });
 

@@ -35,7 +35,7 @@ export interface FilterBox {
   filterName: string;
   filterType: FilterBoxType;
   filterConfig: SearchFilterConfig;
-  filterFacetValues: FacetValue[]
+  filterFacetValues: FacetValue[];
   appliedFilterBoxEntries: FilterBoxEntry[];
 }
 
@@ -146,7 +146,7 @@ export class SearchSimpleItemFilterBoxComponent implements OnChanges, OnInit {
    * Prevent unnecessary rendering
    */
   trackUpdate(index, item: any) {
-    return item
+    return item;
   }
 
 }

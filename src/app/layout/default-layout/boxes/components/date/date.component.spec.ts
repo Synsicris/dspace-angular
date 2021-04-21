@@ -1,14 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DateComponent } from './date.component';
-import { Item } from 'src/app/core/shared/item.model';
+import { Item } from '../../../../../core/shared/item.model';
 import { of } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { DsDatePipe } from 'src/app/layout/pipes/ds-date.pipe';
-import { TranslateService, TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { DsDatePipe } from '../../../../pipes/ds-date.pipe';
+import { TranslateModule } from '@ngx-translate/core';
 import { By } from '@angular/platform-browser';
-import { Field } from 'src/app/core/layout/models/metadata-component.model';
-import { TranslateLoaderMock } from 'src/app/shared/mocks/translate-loader.mock';
+import { LayoutField } from '../../../../../core/layout/models/metadata-component.model';
 
 describe('DateComponent', () => {
   let component: DateComponent;
@@ -30,7 +29,7 @@ describe('DateComponent', () => {
     label: 'Field Label',
     style: 'col-md-6',
     metadata: 'person.birthDate'
-  }) as Field;
+  }) as LayoutField;
 
   const translateServiceInstace = Object.assign({
     get: (key: string) => {

@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
 import { SearchFilterConfig } from '../../../search/search-filter-config.model';
 import { FacetValue } from '../../../search/facet-value.model';
 import { FilterBox } from './filter-box/search-simple-item-filter-box.component';
@@ -62,7 +61,7 @@ export class SearchSimpleItemHeaderComponent {
     return this.filterBoxList.pipe(
       map((list: FilterBox[]) => list
         .filter((filterBox: FilterBox) => filterBox.filterType === type))
-    )
+    );
   }
 
   onFilterChange(value: FilterBox) {

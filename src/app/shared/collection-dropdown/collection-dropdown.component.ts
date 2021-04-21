@@ -10,17 +10,22 @@ import {
   Output
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
+
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, mergeMap, reduce, startWith, switchMap, take } from 'rxjs/operators';
+
 import { hasValue } from '../empty.util';
-import { debounceTime, distinctUntilChanged, map, mergeMap, reduce, startWith, switchMap } from 'rxjs/operators';
-import { RemoteData } from 'src/app/core/data/remote-data';
-import { FindListOptions } from 'src/app/core/data/request.models';
-import { PaginatedList } from 'src/app/core/data/paginated-list';
-import { Community } from 'src/app/core/shared/community.model';
-import { CollectionDataService } from 'src/app/core/data/collection-data.service';
+import { RemoteData } from '../../core/data/remote-data';
+import { FindListOptions } from '../../core/data/request.models';
+import { PaginatedList } from '../../core/data/paginated-list.model';
+import { Community } from '../../core/shared/community.model';
+import { CollectionDataService } from '../../core/data/collection-data.service';
 import { Collection } from '../../core/shared/collection.model';
 import { followLink } from '../utils/follow-link-config.model';
-import { getFirstSucceededRemoteDataPayload, getSucceededRemoteWithNotEmptyData } from '../../core/shared/operators';
+import {
+  getFirstSucceededRemoteDataPayload,
+  getFirstSucceededRemoteWithNotEmptyData
+} from '../../core/shared/operators';
 
 /**
  * An interface to represent a collection entry
@@ -35,8 +40,8 @@ interface CollectionListEntryItem {
  * An interface to represent an entry in the collection list
  */
 export interface CollectionListEntry {
-  communities: CollectionListEntryItem[],
-  collection: CollectionListEntryItem
+  communities: CollectionListEntryItem[];
+  collection: CollectionListEntryItem;
 }
 
 @Component({
@@ -108,9 +113,17 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
   @Input() entityType: string;
 
   /**
+   * Emit to notify whether collections to choice from are more than one
    * If present this value is used to filter collection list by community
    */
   @Input() scope: string;
+
+  @Output() hasChoice = new EventEmitter<boolean>();
+
+  /**
+   * Emit to notify the only selectable collection.
+   */
+  @Output() theOnlySelectable = new EventEmitter<CollectionListEntry>();
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -203,37 +216,40 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
           this.scope,
           this.entityType,
           findOptions,
+          true,
           followLink('parentCommunity'));
     } else if (this.entityType) {
       searchListService$ = this.collectionDataService
-      .getAuthorizedCollectionByEntityType(
+        .getAuthorizedCollectionByEntityType(
           query,
-        this.entityType,
+          this.entityType,
           findOptions,
+        false,
           followLink('parentCommunity'));
     } else {
       searchListService$ = this.collectionDataService
-        .getAuthorizedCollection(query, findOptions, followLink('parentCommunity'));
+      .getAuthorizedCollection(query, findOptions, false, followLink('parentCommunity'));
     }
 
     this.searchListCollection$ = searchListService$.pipe(
-      getSucceededRemoteWithNotEmptyData(),
-      switchMap((collections: RemoteData<PaginatedList<Collection>>) => {
-        if ( (this.searchListCollection.length + findOptions.elementsPerPage) >= collections.payload.totalElements ) {
-          this.hasNextPage = false;
-        }
-        return collections.payload.page;
-      }),
-      mergeMap((collection: Collection) => collection.parentCommunity.pipe(
-        getFirstSucceededRemoteDataPayload(),
-        map((community: Community) => ({
+        getFirstSucceededRemoteWithNotEmptyData(),
+        switchMap((collections: RemoteData<PaginatedList<Collection>>) => {
+          if ( (this.searchListCollection.length + findOptions.elementsPerPage) >= collections.payload.totalElements ) {
+            this.hasNextPage = false;
+          }
+          this.emitSelectionEvents(collections);
+          return collections.payload.page;
+        }),
+        mergeMap((collection: Collection) => collection.parentCommunity.pipe(
+          getFirstSucceededRemoteDataPayload(),
+          map((community: Community) => ({
             communities: [{ id: community.id, name: community.name }],
             collection: { id: collection.id, uuid: collection.id, name: collection.name }
           })
         ))),
-      reduce((acc: any, value: any) => [...acc, ...value], []),
-      startWith([])
-    );
+        reduce((acc: any, value: any) => [...acc, value], []),
+        startWith([])
+        );
     this.subs.push(this.searchListCollection$.subscribe(
       (next) => { this.searchListCollection.push(...next); }, undefined,
       () => { this.hideShowLoader(false); this.changeDetectorRef.detectChanges(); }
@@ -271,4 +287,28 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
   hideShowLoader(hideShow: boolean) {
     this.isLoadingList.next(hideShow);
   }
+
+  /**
+   * Emit events related to the number of selectable collections.
+   * hasChoice containing whether there are more then one selectable collections.
+   * theOnlySelectable containing the only collection available.
+   * @param collections
+   * @private
+   */
+  private emitSelectionEvents(collections: RemoteData<PaginatedList<Collection>>) {
+    this.hasChoice.emit(collections.payload.totalElements > 1);
+    if (collections.payload.totalElements === 1) {
+      const collection = collections.payload.page[0];
+      collections.payload.page[0].parentCommunity.pipe(
+        getFirstSucceededRemoteDataPayload(),
+        take(1)
+      ).subscribe((community: Community) => {
+        this.theOnlySelectable.emit({
+          communities: [{ id: community.id, name: community.name, uuid: community.id }],
+          collection: { id: collection.id, uuid: collection.id, name: collection.name }
+        });
+      });
+    }
+  }
+
 }

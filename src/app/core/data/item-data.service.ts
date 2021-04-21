@@ -2,49 +2,53 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { distinctUntilChanged, filter, find, map, switchMap, take } from 'rxjs/operators';
+import {
+  catchError,
+  delay,
+  distinctUntilChanged,
+  filter,
+  find,
+  map,
+  mergeMap,
+  switchMap,
+  take,
+  tap
+} from 'rxjs/operators';
 import { hasValue, isNotEmpty, isNotEmptyOperator } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { BrowseService } from '../browse/browse.service';
 import { dataService } from '../cache/builders/build-decorators';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../cache/object-cache.service';
-import { GenericSuccessResponse, RestResponse } from '../cache/response.models';
 import { CoreState } from '../core.reducers';
-import { HttpOptions } from '../dspace-rest-v2/dspace-rest-v2.service';
+import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 import { Collection } from '../shared/collection.model';
 import { ExternalSourceEntry } from '../shared/external-source-entry.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { Item } from '../shared/item.model';
 import { ITEM } from '../shared/item.resource-type';
-import {
-  configureRequest,
-  filterSuccessfulResponses,
-  getRequestFromRequestHref, getRequestFromRequestUUID,
-  getResponseFromEntry
-} from '../shared/operators';
+import { configureRequest, getFirstSucceededRemoteDataPayload } from '../shared/operators';
 import { URLCombiner } from '../url-combiner/url-combiner';
 
 import { DataService } from './data.service';
 import { DSOChangeAnalyzer } from './dso-change-analyzer.service';
-import { PaginatedList } from './paginated-list';
+import { PaginatedList } from './paginated-list.model';
 import { RemoteData } from './remote-data';
-import {
-  DeleteRequest,
-  FindListOptions,
-  GetRequest,
-  MappedCollectionsRequest,
-  PatchRequest,
-  PostRequest,
-  PutRequest,
-  RestRequest
-} from './request.models';
-import { RequestEntry } from './request.reducer';
+import { DeleteRequest, FindListOptions, GetRequest, PostRequest, PutRequest, RestRequest } from './request.models';
 import { RequestService } from './request.service';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
 import { Bundle } from '../shared/bundle.model';
-import { MetadataMap } from '../shared/metadata.models';
+import { MetadataMap, MetadataValue } from '../shared/metadata.models';
 import { BundleDataService } from './bundle-data.service';
+import { Operation } from 'fast-json-patch';
+import { NoContent } from '../shared/NoContent.model';
+import { Metric } from '../shared/metric.model';
+import { Metadata } from '../shared/metadata.utils';
+import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
+import { ErrorResponse } from '../cache/response.models';
+import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
+import { ItemJsonPatchOperationsService } from './item-json-patch-operations.service';
+import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
 
 @Injectable()
 @dataService(ITEM)
@@ -61,7 +65,9 @@ export class ItemDataService extends DataService<Item> {
     protected notificationsService: NotificationsService,
     protected http: HttpClient,
     protected comparator: DSOChangeAnalyzer<Item>,
-    protected bundleService: BundleDataService
+    protected bundleService: BundleDataService,
+    protected operationsBuilder: JsonPatchOperationsBuilder,
+    protected itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
   ) {
     super();
   }
@@ -101,14 +107,13 @@ export class ItemDataService extends DataService<Item> {
    * @param itemId        The item's id
    * @param collectionId  The collection's id
    */
-  public removeMappingFromCollection(itemId: string, collectionId: string): Observable<RestResponse> {
+  public removeMappingFromCollection(itemId: string, collectionId: string): Observable<RemoteData<NoContent>> {
     return this.getMappedCollectionsEndpoint(itemId, collectionId).pipe(
       isNotEmptyOperator(),
       distinctUntilChanged(),
       map((endpointURL: string) => new DeleteRequest(this.requestService.generateRequestId(), endpointURL)),
       configureRequest(this.requestService),
-      switchMap((request: RestRequest) => this.requestService.getByUUID(request.uuid)),
-      getResponseFromEntry()
+      switchMap((request: RestRequest) => this.rdbService.buildFromRequestUUID(request.uuid)),
     );
   }
 
@@ -117,7 +122,7 @@ export class ItemDataService extends DataService<Item> {
    * @param itemId          The item's id
    * @param collectionHref  The collection's self link
    */
-  public mapToCollection(itemId: string, collectionHref: string): Observable<RestResponse> {
+  public mapToCollection(itemId: string, collectionHref: string): Observable<RemoteData<NoContent>> {
     return this.getMappedCollectionsEndpoint(itemId).pipe(
       isNotEmptyOperator(),
       distinctUntilChanged(),
@@ -129,8 +134,7 @@ export class ItemDataService extends DataService<Item> {
         return new PostRequest(this.requestService.generateRequestId(), endpointURL, collectionHref, options);
       }),
       configureRequest(this.requestService),
-      switchMap((request: RestRequest) => this.requestService.getByUUID(request.uuid)),
-      getResponseFromEntry()
+      switchMap((request: RestRequest) => this.rdbService.buildFromRequestUUID(request.uuid))
     );
   }
 
@@ -139,90 +143,47 @@ export class ItemDataService extends DataService<Item> {
    * @param itemId    The item's id
    */
   public getMappedCollections(itemId: string): Observable<RemoteData<PaginatedList<Collection>>> {
-    const request$ = this.getMappedCollectionsEndpoint(itemId).pipe(
+    const href$ = this.getMappedCollectionsEndpoint(itemId).pipe(
       isNotEmptyOperator(),
-      distinctUntilChanged(),
-      map((endpointURL: string) => new MappedCollectionsRequest(this.requestService.generateRequestId(), endpointURL)),
-      configureRequest(this.requestService)
+      take(1)
     );
 
-    const requestEntry$ = request$.pipe(
-      switchMap((request: RestRequest) => this.requestService.getByHref(request.href))
-    );
-    const payload$ = requestEntry$.pipe(
-      filterSuccessfulResponses(),
-      map((response: GenericSuccessResponse<PaginatedList<Collection>>) => response.payload)
-    );
+    href$.subscribe((href: string) => {
+      const request = new GetRequest(this.requestService.generateRequestId(), href);
+      this.requestService.configure(request);
+    });
 
-    return this.rdbService.toRemoteDataObservable(requestEntry$, payload$);
-  }
-
-  /**
-   * Get the endpoint for item withdrawal and reinstatement
-   * @param itemId
-   */
-  public getItemWithdrawEndpoint(itemId: string): Observable<string> {
-    return this.halService.getEndpoint(this.linkPath).pipe(
-      map((endpoint: string) => this.getIDHref(endpoint, itemId))
-    );
-  }
-
-  /**
-   * Get the endpoint to make item private and public
-   * @param itemId
-   */
-  public getItemDiscoverableEndpoint(itemId: string): Observable<string> {
-    return this.halService.getEndpoint(this.linkPath).pipe(
-      map((endpoint: string) => this.getIDHref(endpoint, itemId))
-    );
+    return this.rdbService.buildList(href$);
   }
 
   /**
    * Set the isWithdrawn state of an item to a specified state
-   * @param itemId
+   * @param item
    * @param withdrawn
    */
-  public setWithDrawn(itemId: string, withdrawn: boolean) {
-    const patchOperation = [{
+  public setWithDrawn(item: Item, withdrawn: boolean): Observable<RemoteData<Item>> {
+
+    const patchOperation = {
       op: 'replace', path: '/withdrawn', value: withdrawn
-    }];
+    } as Operation;
     this.requestService.removeByHrefSubstring('/discover');
 
-    return this.getItemWithdrawEndpoint(itemId).pipe(
-      distinctUntilChanged(),
-      map((endpointURL: string) =>
-        new PatchRequest(this.requestService.generateRequestId(), endpointURL, patchOperation)
-      ),
-      configureRequest(this.requestService),
-      map((request: RestRequest) => request.uuid),
-      getRequestFromRequestUUID(this.requestService),
-      filter((requestEntry: RequestEntry) => requestEntry.completed),
-      map((requestEntry: RequestEntry) => requestEntry.response)
-    );
+    return this.patch(item, [patchOperation]);
   }
 
   /**
    * Set the isDiscoverable state of an item to a specified state
-   * @param itemId
+   * @param item
    * @param discoverable
    */
-  public setDiscoverable(itemId: string, discoverable: boolean) {
-    const patchOperation = [{
+  public setDiscoverable(item: Item, discoverable: boolean): Observable<RemoteData<Item>> {
+    const patchOperation = {
       op: 'replace', path: '/discoverable', value: discoverable
-    }];
+    } as Operation;
     this.requestService.removeByHrefSubstring('/discover');
 
-    return this.getItemDiscoverableEndpoint(itemId).pipe(
-      distinctUntilChanged(),
-      map((endpointURL: string) =>
-        new PatchRequest(this.requestService.generateRequestId(), endpointURL, patchOperation)
-      ),
-      configureRequest(this.requestService),
-      map((request: RestRequest) => request.uuid),
-      getRequestFromRequestUUID(this.requestService),
-      filter((requestEntry: RequestEntry) => requestEntry.completed),
-      map((requestEntry: RequestEntry) => requestEntry.response)
-    );
+    return this.patch(item, [patchOperation]);
+
   }
 
   /**
@@ -255,6 +216,35 @@ export class ItemDataService extends DataService<Item> {
   }
 
   /**
+   * Get the endpoint for an item's metrics
+   * @param itemId
+   */
+  public getMetricsEndpoint(itemId: string): Observable<string> {
+    return this.halService.getEndpoint(this.linkPath).pipe(
+      switchMap((url: string) => this.halService.getEndpoint('metrics', `${url}/${itemId}`))
+    );
+  }
+
+  /**
+   * Get an item's metrics using paginated search options
+   * @param itemId          The item's ID
+   * @param searchOptions   The search options to use
+   */
+  public getMetrics(itemId: string, searchOptions?: PaginatedSearchOptions): Observable<RemoteData<PaginatedList<Metric>>> {
+    const hrefObs = this.getMetricsEndpoint(itemId).pipe(
+      map((href) => searchOptions ? searchOptions.toRestUrl(href) : href)
+    );
+    hrefObs.pipe(
+      take(1)
+    ).subscribe((href) => {
+      const request = new GetRequest(this.requestService.generateRequestId(), href);
+      this.requestService.configure(request);
+    });
+
+    return this.rdbService.buildList<Metric>(hrefObs);
+  }
+
+  /**
    * Create a new bundle on an item
    * @param itemId      The item's ID
    * @param bundleName  The new bundle's name
@@ -280,19 +270,7 @@ export class ItemDataService extends DataService<Item> {
       this.requestService.configure(request);
     });
 
-    const selfLink$ = this.requestService.getByUUID(requestId).pipe(
-      getResponseFromEntry(),
-      map((response: any) => {
-        if (isNotEmpty(response.resourceSelfLinks)) {
-          return response.resourceSelfLinks[0];
-        }
-      }),
-      distinctUntilChanged()
-    ) as Observable<string>;
-
-    return selfLink$.pipe(
-      switchMap((selfLink: string) => this.bundleService.findByHref(selfLink)),
-    );
+    return this.rdbService.buildFromRequestUUID(requestId);
   }
 
   /**
@@ -311,7 +289,7 @@ export class ItemDataService extends DataService<Item> {
    * @param itemId
    * @param collection
    */
-  public moveToCollection(itemId: string, collection: Collection): Observable<RestResponse> {
+  public moveToCollection(itemId: string, collection: Collection): Observable<RemoteData<Collection>> {
     const options: HttpOptions = Object.create({});
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'text/uri-list');
@@ -328,10 +306,7 @@ export class ItemDataService extends DataService<Item> {
       })
     ).subscribe();
 
-    return this.requestService.getByUUID(requestId).pipe(
-      find((request: RequestEntry) => request.completed),
-      map((request: RequestEntry) => request.response)
-    );
+    return this.rdbService.buildFromRequestUUID(requestId);
   }
 
   /**
@@ -356,16 +331,7 @@ export class ItemDataService extends DataService<Item> {
       })
     ).subscribe();
 
-    return this.requestService.getByUUID(requestId).pipe(
-      find((request: RequestEntry) => request.completed),
-      getResponseFromEntry(),
-      map((response: any) => {
-        if (isNotEmpty(response.resourceSelfLinks)) {
-          return response.resourceSelfLinks[0];
-        }
-      }),
-      switchMap((selfLink: string) => this.findByHref(selfLink))
-    );
+    return this.rdbService.buildFromRequestUUID(requestId);
   }
 
   /**
@@ -375,6 +341,45 @@ export class ItemDataService extends DataService<Item> {
   public getBitstreamsEndpoint(itemId: string): Observable<string> {
     return this.halService.getEndpoint(this.linkPath).pipe(
       switchMap((url: string) => this.halService.getEndpoint('bitstreams', `${url}/${itemId}`))
+    );
+  }
+
+  updateItemMetadata(itemId: string, metadataName: string, position: number, value: string): Observable<RemoteData<Item>> {
+    return this.findById(itemId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((item: Item) => Metadata.first(item.metadata, metadataName)),
+      tap((metadataValue: MetadataValue) => {
+        if (isNotEmpty(metadataValue)) {
+          this.replaceMetadataPatch(metadataName, position, value);
+        } else {
+          this.addMetadataPatch(metadataName, value);
+        }
+      }),
+      delay(200),
+      mergeMap(() => this.executeItemPatch(itemId, 'metadata'))
+    );
+  }
+
+  replaceMetadataPatch(metadataName: string, position: number, value: string): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    const path = pathCombiner.getPath([metadataName, position.toString()]);
+    this.operationsBuilder.replace(path, value, true);
+  }
+
+  addMetadataPatch(metadataName: string, value: string): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    const path = pathCombiner.getPath([metadataName]);
+    this.operationsBuilder.add(path, value, true, true);
+  }
+
+  private executeItemPatch(objectId: string, pathName: string): Observable<RemoteData<Item>> {
+    return this.itemJsonPatchOperationsService.jsonPatchByResourceType(
+      'items',
+      objectId,
+      pathName).pipe(
+      tap((item: Item) => this.update(item)),
+      map((item: Item) => createSuccessfulRemoteDataObject<Item>(item)),
+      catchError((error: ErrorResponse) => createFailedRemoteDataObject$<Item>(error.errorMessage))
     );
   }
 }

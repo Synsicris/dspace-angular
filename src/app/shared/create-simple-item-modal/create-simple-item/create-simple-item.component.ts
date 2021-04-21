@@ -113,7 +113,7 @@ export class CreateSimpleItemComponent implements OnInit, OnDestroy {
           null,
           formConfig,
           ''
-        )
+        );
       });
   }
 
@@ -132,11 +132,11 @@ export class CreateSimpleItemComponent implements OnInit, OnDestroy {
           place: formValue.place,
           authority: formValue.authority,
           confidence: formValue.confidence
-        }))
+        }));
       });
 
       this.createItem.emit({ type: type, metadata: metadataMap });
-    })
+    });
   }
 
   /**

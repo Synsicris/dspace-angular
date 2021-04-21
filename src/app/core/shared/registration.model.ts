@@ -1,12 +1,15 @@
-/**
- * Model representing a registration
- */
-export class Registration {
+import { typedObject } from '../cache/builders/build-decorators';
+import { ResourceType } from './resource-type';
+import { REGISTRATION } from './registration.resource-type';
+import { UnCacheableObject } from './uncacheable-object.model';
 
+@typedObject
+export class Registration implements UnCacheableObject {
+  static type = REGISTRATION;
   /**
    * The object type
    */
-  type: string;
+  type: ResourceType;
 
   /**
    * The email linked to the registration
@@ -23,4 +26,8 @@ export class Registration {
    */
   token: string;
 
+  /**
+   * In case the groups field contains values, then it is interpret as an invitation to register and join these groups
+   */
+  groups?: string[];
 }

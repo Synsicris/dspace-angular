@@ -1,0 +1,9 @@
+<div class="border-bottom mb-4 pb-4 d-flex justify-content-between align-items-center">
+  <ds-comcol-page-header
+    [name]="('project-overview.page.header.project.title' | translate ) + getProjectName()">
+  </ds-comcol-page-header>
+  <div class="pl-2">
+    <ds-context-menu [contextMenuObject]="project" [contextMenuObjectType]="'SUBPROJECT'"></ds-context-menu>
+  </div>
+</div>
+

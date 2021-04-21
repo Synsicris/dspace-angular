@@ -44,6 +44,6 @@ export class SearchSimpleItemLabelsComponent {
    * Prevent unnecessary rendering
    */
   trackUpdate(index, item: any) {
-    return item
+    return item;
   }
 }

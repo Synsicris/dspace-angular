@@ -1,0 +1,6 @@
+<div *ngIf="(projectRD$ | async).hasSucceeded" class="container">
+  <ds-sub-project-page-header [project]="(subprojectRD$ | async)?.payload"
+                                   [projectUUID]="(subprojectUUID$ | async)"></ds-sub-project-page-header>
+  <ds-sub-project-page-content [project]="(projectRD$ | async)?.payload"
+                               [projectUUID]="(projectUUID$ | async)"></ds-sub-project-page-content>
+</div>

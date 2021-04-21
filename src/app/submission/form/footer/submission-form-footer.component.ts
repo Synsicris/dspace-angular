@@ -37,6 +37,12 @@ export class SubmissionFormFooterComponent implements OnChanges {
   @Input() disableDeposit = false;
 
   /**
+   * A boolean representing if discard and delete button should be disable or not
+   * @type {string}
+   */
+  @Input() disableSaveForLater = false;
+
+  /**
    * A boolean representing if a submission deposit operation is pending
    * @type {Observable<boolean>}
    */
@@ -55,10 +61,21 @@ export class SubmissionFormFooterComponent implements OnChanges {
   public showDeposit: Observable<boolean>;
 
   /**
+   * A boolean representing if showing deposit and discard buttons
+   * @type {Observable<boolean>}
+   */
+  public showSaveForLater: Observable<boolean>;
+
+  /**
    * A boolean representing if submission form is valid or not
    * @type {Observable<boolean>}
    */
   public submissionIsInvalid: Observable<boolean> = observableOf(true);
+
+  /**
+   * A boolean representing if submission form has unsaved modifications
+   */
+  public hasUnsavedModification: Observable<boolean>;
 
   /**
    * Initialize instance variables
@@ -84,6 +101,9 @@ export class SubmissionFormFooterComponent implements OnChanges {
       this.processingDepositStatus = this.submissionService.getSubmissionDepositProcessingStatus(this.submissionId);
       this.showDeposit = observableOf(!this.disableDeposit &&
         this.submissionService.getSubmissionScope() === SubmissionScopeType.WorkspaceItem);
+      this.showSaveForLater = observableOf(!this.disableSaveForLater ||
+        (this.disableSaveForLater && this.submissionService.getSubmissionScope() !== SubmissionScopeType.WorkspaceItem));
+      this.hasUnsavedModification = this.submissionService.hasUnsavedModification();
     }
   }
 
@@ -91,7 +111,7 @@ export class SubmissionFormFooterComponent implements OnChanges {
    * Dispatch a submission save action
    */
   save(event) {
-    this.submissionService.dispatchSave(this.submissionId);
+    this.submissionService.dispatchSave(this.submissionId, true);
   }
 
   /**
@@ -115,9 +135,20 @@ export class SubmissionFormFooterComponent implements OnChanges {
     this.modalService.open(content).result.then(
       (result) => {
         if (result === 'ok') {
-          this.submissionService.dispatchDiscard(this.submissionId, this.itemId)
+          this.submissionService.dispatchDiscard(this.submissionId, this.itemId);
         }
       }
     );
   }
+
+  /**
+   * Compute the proper label for the save for later button
+   */
+  public saveForLaterLabel(): string {
+    if (this.submissionService.getSubmissionScope() === SubmissionScopeType.EditItem) {
+      return 'submission.general.save-later.edit-item';
+    }
+    return 'submission.general.save-later';
+  }
+
 }

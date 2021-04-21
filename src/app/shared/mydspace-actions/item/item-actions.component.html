@@ -1,5 +1,15 @@
-<button class="btn btn-primary mt-1 mb-3"
-            ngbTooltip="{{'submission.workflow.generic.view-help' | translate}}"
-            [routerLink]="['/items/' + object.id]">
-  <i class="fa fa-info-circle"></i> {{"submission.workflow.generic.view" | translate}}
+<button *ngIf="(canEdit() | async)" class="btn btn-primary mt-1 mb-3"
+   ngbTooltip="{{'submission.workflow.generic.edit-help' | translate}}"
+   [disabled]="(isRedirectingToEdit$ | async)"
+   (click)="navigateToEditItemPage()"
+   role="button">
+  <i class="fa fa-edit"></i> {{'submission.workflow.generic.edit' | translate}}
+</button>
+
+<button *ngIf="(canEditGrants() | async)" class="btn btn-warning mt-1 mb-3"
+        ngbTooltip="{{'submission.workflow.generic.edit-grants-help' | translate}}"
+        [disabled]="(isRedirectingToEdit$ | async)"
+        (click)="openEditGrantsModal()"
+        role="button">
+  <i class="fa fa-edit"></i> {{'submission.workflow.generic.edit-grants' | translate}}
 </button>

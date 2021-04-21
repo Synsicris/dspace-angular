@@ -6,26 +6,32 @@ import { SubmissionScopeType } from './submission-scope-type';
 import { WorkflowItemDataService } from './workflowitem-data.service';
 import { WorkspaceitemDataService } from './workspaceitem-data.service';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
+import { EditItemDataService } from './edititem-data.service';
 
 describe('SubmissionObjectDataService', () => {
   let service: SubmissionObjectDataService;
   let submissionService: SubmissionService;
   let workspaceitemDataService: WorkspaceitemDataService;
   let workflowItemDataService: WorkflowItemDataService;
+  let editItemDataService: EditItemDataService;
   let halService: HALEndpointService;
 
   const submissionId = '1234';
   const wsiResult = 'wsiResult' as any;
   const wfiResult = 'wfiResult' as any;
+  const eiResult = 'eiResult' as any;
 
   beforeEach(() => {
     workspaceitemDataService = jasmine.createSpyObj('WorkspaceitemDataService', {
       findById: wsiResult
     });
-    workflowItemDataService  = jasmine.createSpyObj('WorkflowItemDataService', {
+    workflowItemDataService = jasmine.createSpyObj('WorkflowItemDataService', {
       findById: wfiResult
     });
-    halService  = jasmine.createSpyObj('HALEndpointService', {
+    editItemDataService  = jasmine.createSpyObj('EditItemDataService', {
+      findById: eiResult
+    });
+    halService = jasmine.createSpyObj('HALEndpointService', {
       getEndpoint: '/workspaceItem'
     });
   });
@@ -35,7 +41,7 @@ describe('SubmissionObjectDataService', () => {
       submissionService = jasmine.createSpyObj('SubmissionService', {
         getSubmissionScope: {}
       });
-      service = new SubmissionObjectDataService(workspaceitemDataService, workflowItemDataService, submissionService, halService);
+      service = new SubmissionObjectDataService(workspaceitemDataService, workflowItemDataService, editItemDataService, submissionService, halService);
       service.findById(submissionId);
       expect(submissionService.getSubmissionScope).toHaveBeenCalled();
     });
@@ -45,12 +51,12 @@ describe('SubmissionObjectDataService', () => {
         submissionService = jasmine.createSpyObj('SubmissionService', {
           getSubmissionScope: SubmissionScopeType.WorkspaceItem
         });
-        service = new SubmissionObjectDataService(workspaceitemDataService, workflowItemDataService, submissionService, halService);
+        service = new SubmissionObjectDataService(workspaceitemDataService, workflowItemDataService, editItemDataService, submissionService, halService);
       });
 
       it('should forward the result of WorkspaceitemDataService.findByIdAndIDType()', () => {
         const result = service.findById(submissionId);
-        expect(workspaceitemDataService.findById).toHaveBeenCalledWith(submissionId);
+        expect(workspaceitemDataService.findById).toHaveBeenCalledWith(submissionId, true);
         expect(result).toBe(wsiResult);
       });
     });
@@ -60,12 +66,12 @@ describe('SubmissionObjectDataService', () => {
         submissionService = jasmine.createSpyObj('SubmissionService', {
           getSubmissionScope: SubmissionScopeType.WorkflowItem
         });
-        service = new SubmissionObjectDataService(workspaceitemDataService, workflowItemDataService, submissionService, halService);
+        service = new SubmissionObjectDataService(workspaceitemDataService, workflowItemDataService, editItemDataService, submissionService, halService);
       });
 
       it('should forward the result of WorkflowItemDataService.findByIdAndIDType()', () => {
         const result = service.findById(submissionId);
-        expect(workflowItemDataService.findById).toHaveBeenCalledWith(submissionId);
+        expect(workflowItemDataService.findById).toHaveBeenCalledWith(submissionId, true);
         expect(result).toBe(wfiResult);
       });
     });
@@ -75,7 +81,7 @@ describe('SubmissionObjectDataService', () => {
         submissionService = jasmine.createSpyObj('SubmissionService', {
           getSubmissionScope: 'Something else'
         });
-        service = new SubmissionObjectDataService(workspaceitemDataService, workflowItemDataService, submissionService, halService);
+        service = new SubmissionObjectDataService(workspaceitemDataService, workflowItemDataService, editItemDataService, submissionService, halService);
       });
 
       it('shouldn\'t call any data service methods', () => {
@@ -88,9 +94,9 @@ describe('SubmissionObjectDataService', () => {
         const result = service.findById(submissionId);
         result.subscribe((rd: RemoteData<SubmissionObject>) => {
           expect(rd.hasFailed).toBe(true);
-          expect(rd.error).toBeDefined();
+          expect(rd.errorMessage).toBeDefined();
           done();
-        })
+        });
       });
     });
 

@@ -39,7 +39,7 @@ export class ObjectivesBoardComponent implements OnInit {
   isLoading(): Observable<boolean> {
     return this.impactPathwayService.isImpactPathwayLoaded().pipe(
       map((loaded: boolean) => !loaded)
-    )
+    );
   }
 
 }

@@ -1,6 +1,7 @@
 import { findIndex, remove } from 'lodash';
 
 import { isNotEmpty } from '../../../shared/empty.util';
+import { environment } from '../../../../environments/environment';
 
 export class ImpactPathwayTask {
 
@@ -11,10 +12,10 @@ export class ImpactPathwayTask {
     public title?: string,
     public description?: string,
     public tasks: ImpactPathwayTask[] = []) {
-  };
+  }
 
   hasDetail() {
-    return this.hasParent() && this.type === 'proj_objectives';
+    return this.hasParent() && this.type === environment.impactPathway.projObjectiveEntity;
   }
 
   hasParent() {
@@ -32,7 +33,7 @@ export class ImpactPathwayTask {
       step = this.tasks[index];
     }
 
-    return step
+    return step;
   }
 
   getSubTaskIndex(taskId: string): number {

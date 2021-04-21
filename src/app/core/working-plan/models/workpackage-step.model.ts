@@ -1,8 +1,8 @@
 import { Item } from '../../shared/item.model';
 
 export interface WorkpackageSearchItem {
-  id: string
-  item: Item
+  id: string;
+  item: Item;
 }
 export interface WorkpackageChartDates {
   start: WorkpackageChartDate;
@@ -32,5 +32,5 @@ export interface WorkpackageTreeObject {
   dates: WorkpackageChartDates;
   status: string;
   expanded: boolean; // status of expanded
-  steps?: WorkpackageTreeObject[]
+  steps?: WorkpackageTreeObject[];
 }

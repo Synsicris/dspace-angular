@@ -15,16 +15,17 @@
     <button type="button"
             class="btn btn-info"
             id="save"
-            [disabled]="(processingSaveStatus | async)"
+            [disabled]="(processingSaveStatus | async) || !(hasUnsavedModification | async)"
             (click)="save($event)">
       <span>{{'submission.general.save' | translate}}</span>
     </button>
-    <button type="button"
+    <button *ngIf="(showSaveForLater | async)"
+            type="button"
             class="btn btn-info"
             id="saveForLater"
             [disabled]="(processingSaveStatus | async)"
             (click)="saveLater($event)">
-      <span>{{'submission.general.save-later' | translate}}</span>
+      <span>{{ saveForLaterLabel() | translate}}</span>
     </button>
     <button *ngIf="(showDeposit | async)"
             type="button"

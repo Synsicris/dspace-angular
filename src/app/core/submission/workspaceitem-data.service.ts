@@ -17,9 +17,9 @@ import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { RequestParam } from '../cache/models/request-param.model';
 import { getFinishedRemoteData } from '../shared/operators';
 import { RemoteData } from '../data/remote-data';
-import { PaginatedList } from '../data/paginated-list';
+import { PaginatedList } from '../data/paginated-list.model';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
 import { createFailedRemoteDataObject, createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
 
 /**
@@ -50,17 +50,17 @@ export class WorkspaceitemDataService extends DataService<WorkspaceItem> {
    * @param options        The {@link FindListOptions} object
    * @param linksToFollow  List of {@link FollowLinkConfig} that indicate which {@link HALLink}s should be automatically resolved
    */
-  public findByItem(uuid: string, options: FindListOptions = {}, ...linksToFollow: Array<FollowLinkConfig<WorkspaceItem>>): Observable<RemoteData<WorkspaceItem>> {
+  public findByItem(uuid: string, options: FindListOptions = {}, ...linksToFollow: FollowLinkConfig<WorkspaceItem>[]): Observable<RemoteData<WorkspaceItem>> {
     const optionsWithUUID = Object.assign(new FindListOptions(), options, {
       searchParams: [new RequestParam('uuid', uuid)]
     });
-    return this.searchBy(this.searchByItemLinkPath, optionsWithUUID, ...linksToFollow).pipe(
+    return this.searchBy(this.searchByItemLinkPath, optionsWithUUID, true, ...linksToFollow).pipe(
       getFinishedRemoteData(),
       map((rd: RemoteData<PaginatedList<WorkspaceItem>>) => {
         if (rd.hasSucceeded) {
           return createSuccessfulRemoteDataObject(rd.payload.page[0]);
         } else {
-          return createFailedRemoteDataObject(null, rd.error);
+          return createFailedRemoteDataObject(rd.errorMessage, rd.statusCode);
         }
       })
     );

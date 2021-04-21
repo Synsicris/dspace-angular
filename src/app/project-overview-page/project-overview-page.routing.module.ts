@@ -19,27 +19,38 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
   imports: [
     RouterModule.forChild([
       {
-        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
         path: ':projectId/impactpathway',
-        loadChildren: '../+impact-pathway-page/impact-pathway-page.module#ImpactPathwayPageModule' },
+        loadChildren: () => import('../+impact-pathway-page/impact-pathway-page.module')
+          .then((m) => m.ImpactPathwayPageModule),
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+      },
       {
-        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
         path: ':projectId/objectives',
-        loadChildren: '../+objectives-page/objectives-page.module#ObjectivesPageModule'
+        loadChildren: () => import('../+objectives-page/objectives-page.module')
+          .then((m) => m.ObjectivesPageModule),
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
       },
       {
-        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
         path: ':projectId/workingplan',
-        loadChildren: '../+working-plan-page/working-plan-page.module#WorkingPlanPageModule'
+        loadChildren: () => import('../+working-plan-page/working-plan-page.module')
+          .then((m) => m.WorkingPlanPageModule),
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
       },
       {
-        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
         path: ':projectId/allitems',
-        loadChildren: '../+my-dspace-page/my-dspace-page.module#MyDSpacePageModule',
+        loadChildren: () => import('../+my-dspace-page/my-dspace-page.module')
+          .then((m) => m.MyDSpacePageModule),
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
       },
       {
-        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
+        path: ':projectId/subproject',
+        loadChildren: () => import('../sub-project-page/sub-project-page.module')
+          .then((m) => m.SubProjectPageModule),
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+      },
+      {
         path: ':projectId',
+        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
         resolve: {
           breadcrumb: ProjectBreadcrumbResolver,
           project: ProjectPageResolver

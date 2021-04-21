@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 import { Observable, of as observableOf } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,7 @@ import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pat
 import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-container.component';
 import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'ipw-objective-container',
@@ -40,9 +41,18 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
   drop(event: CdkDragDrop<ImpactPathwayTask>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data.tasks, event.previousIndex, event.currentIndex);
+/*      moveItemInArray(event.container.data.tasks, event.previousIndex, event.currentIndex);
+      const newList = [...event.container.data.tasks];
+      moveItemInArray(newList, event.previousIndex, event.currentIndex);
+      this.impactPathwayService.dispatchOrderSubTasks(
+        this.impactPathwayStep.parentId,
+        this.impactPathwayStep.id,
+        this.impactPathwayTask.id,
+        newList,
+        event.container.data.tasks
+      );*/
     } else {
-      if (this.canDrop(event.container.data, event.item.data)) {
+      if (this.canDropOnTask(event.container.data, event.item.data)) {
         this.impactPathwayService.dispatchSetTargetTask('');
         this.impactPathwayService.dispatchMoveSubTask(
           this.impactPathwayStep.parentId,
@@ -58,8 +68,8 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
   getObjectivesTaskIds(): string[] {
     return this.impactPathwayStep.tasks
-      .filter((task) => task.type === 'proj_objectives')
-      .map((task) => task.id)
+      .filter((task) => task.type === environment.impactPathway.projObjectiveEntity)
+      .map((task) => task.id);
   }
 
   openModal() {
@@ -108,7 +118,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
           this.impactPathwayStep.id,
           this.impactPathwayTask.id,
           item.id);
-      })
+      });
     });
   }
 

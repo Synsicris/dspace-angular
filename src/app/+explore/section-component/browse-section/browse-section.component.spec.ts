@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, inject, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateLoaderMock } from 'src/app/shared/mocks/translate-loader.mock';
+import { TranslateLoaderMock } from '../../../shared/mocks/translate-loader.mock';
 import { BrowseSectionComponent } from './browse-section.component';
 
 describe('BrowseSectionComponent', () => {
@@ -38,7 +38,7 @@ describe('BrowseSectionComponent', () => {
       browseNames: ['rodept', 'author', 'title', 'type'],
       componentType: 'browse',
       style: 'col-md-4'
-    }
+    };
 
     fixture.detectChanges();
   });
@@ -47,7 +47,7 @@ describe('BrowseSectionComponent', () => {
     expect(comp).toBeDefined();
   }));
 
-  it('should show one link foreach browse names', async(() => {
+  it('should show one link foreach browse names', fakeAsync(() => {
     fixture.whenStable().then(() => {
       const browseLinks = fixture.debugElement.queryAll(By.css('a.lead'));
       expect(browseLinks.length).toEqual(4);

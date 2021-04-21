@@ -29,13 +29,13 @@ import { NgbModal, NgbModalRef, NgbTypeahead, NgbTypeaheadSelectItemEvent } from
 import { VocabularyService } from '../../core/submission/vocabularies/vocabulary.service';
 import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
 import { hasValue, isEmpty, isNotEmpty, isNotNull } from '../empty.util';
-import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-metadata-value.model'
+import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-metadata-value.model';
 import { ConfidenceType } from '../../core/shared/confidence-type';
 import { Vocabulary } from '../../core/submission/vocabularies/models/vocabulary.model';
 import { VocabularyTreeviewComponent } from '../vocabulary-treeview/vocabulary-treeview.component';
 import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
-import { PaginatedList } from '../../core/data/paginated-list';
+import { buildPaginatedList, PaginatedList } from '../../core/data/paginated-list.model';
 import { PageInfo } from '../../core/shared/page-info.model';
 import { VocabularyEntryDetail } from '../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 
@@ -78,8 +78,8 @@ export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
 
   formatter = (x: { display: string }) => {
-    return (typeof x === 'object') ? x.display : x
-  };
+    return (typeof x === 'object') ? x.display : x;
+  }
 
   search = (text$: Observable<string>) => {
     return text$.pipe(
@@ -100,18 +100,15 @@ export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
             tap(() => this.searchFailed = false),
             catchError(() => {
               this.searchFailed = true;
-              return observableOf(new PaginatedList(
-                new PageInfo(),
-                []
-              ));
+              return observableOf(buildPaginatedList(new PageInfo(), []));
             }));
         }
       }),
       map((list: PaginatedList<VocabularyEntry>) => list.page),
       tap(() => this.changeSearchingStatus(false)),
       merge(this.hideSearchingWhenUnsubscribed$)
-    )
-  };
+    );
+  }
 
   constructor(private vocabularyService: VocabularyService,
               private cdr: ChangeDetectorRef,
@@ -206,7 +203,7 @@ export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
       }, () => {
         return;
       });
-    }))
+    }));
   }
 
   public whenClickOnConfidenceNotAccepted(confidence: ConfidenceType) {

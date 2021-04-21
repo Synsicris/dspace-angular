@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 
 import { ImpactPathway } from '../core/impact-pathway/models/impact-pathway.model';
 import { ImpactPathwayService } from '../core/impact-pathway/impact-pathway.service';
-import { NotificationsService } from '../shared/notifications/notifications.service';
 
 @Component({
   selector: 'ipw-dashboard',
@@ -19,7 +18,7 @@ export class ImpactPathwayBoardComponent implements OnInit {
 
   private impactPathWay$: Observable<ImpactPathway>;
 
-  constructor(private impactPathwayService: ImpactPathwayService, private notificationService: NotificationsService) {
+  constructor(private impactPathwayService: ImpactPathwayService) {
   }
 
   ngOnInit(): void {
@@ -33,7 +32,7 @@ export class ImpactPathwayBoardComponent implements OnInit {
   isLoading(): Observable<boolean> {
     return this.impactPathwayService.isImpactPathwayLoaded().pipe(
       map((loaded: boolean) => !loaded)
-    )
+    );
   }
 
 }

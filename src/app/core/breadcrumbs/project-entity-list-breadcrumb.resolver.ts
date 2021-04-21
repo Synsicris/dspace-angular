@@ -22,7 +22,7 @@ export class ProjectEntityListBreadcrumbResolver implements Resolve<BreadcrumbCo
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): BreadcrumbConfig<string> {
     const key = route.params.name + '_' + route.params.type;
     if (hasNoValue(key)) {
-      throw new Error('You provided an i18nBreadcrumbResolver for url \"' + route.url + '\" but no breadcrumbKey in the route\'s data')
+      throw new Error('You provided an i18nBreadcrumbResolver for url \"' + route.url + '\" but no breadcrumbKey in the route\'s data');
     }
     const fullPath = route.url.join('');
     return { provider: this.breadcrumbService, key: key, url: fullPath };
