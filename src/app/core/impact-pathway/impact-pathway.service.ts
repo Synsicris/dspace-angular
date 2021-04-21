@@ -501,7 +501,6 @@ export class ImpactPathwayService {
   }
 
   removeByHref(href: string): Observable<boolean> {
-    console.log('removeByItemId', href);
     return this.itemService.deleteByHref(href).pipe(
       map((response: RemoteData<NoContent>) => response.isSuccess)
     );

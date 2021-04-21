@@ -78,9 +78,7 @@ export class EditItemGrantsModalComponent implements OnInit {
    * Initialize the component, setting up creation form
    */
   ngOnInit(): void {
-    console.log('init');
     this.currentItemGrantsValue = Metadata.firstValue(this.item.metadata, 'cris.workspace.shared');
-    console.log(this.item.metadata, this.currentItemGrantsValue);
     this.vocabulary.getVocabularyEntries(
       new VocabularyOptions(environment.projects.projectsGrantsOptionsVocabularyName),
       new PageInfo()
@@ -132,7 +130,6 @@ export class EditItemGrantsModalComponent implements OnInit {
     ).subscribe({
         next: (response: RemoteData<Item>) => {
           if (response.hasSucceeded) {
-            console.log(response.payload);
             this.currentItemGrantsValue = projectGrants;
             this.notificationService.success(null, this.translate.instant('submission.workflow.generic.edit-grants.success'));
             this.close(response.payload);
