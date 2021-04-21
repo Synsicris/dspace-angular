@@ -8,7 +8,7 @@ import { CrisLayoutDefaultComponent } from './default-layout/cris-layout-default
 import { CrisLayoutDefaultSidebarComponent } from './default-layout/sidebar/cris-layout-default-sidebar.component';
 import { CrisLayoutDefaultTabComponent } from './default-layout/tab/cris-layout-default-tab.component';
 import { CrisLayoutMetadataBoxComponent } from './default-layout/boxes/metadata/cris-layout-metadata-box.component';
-import { RowComponent } from './default-layout/boxes/components/row/row.component';
+import { RowComponent } from './default-layout/boxes/metadata/row/row.component';
 import { TextComponent } from './default-layout/boxes/components/text/text.component';
 import { HeadingComponent } from './default-layout/boxes/components/heading/heading.component';
 import { CrisLayoutSearchBoxComponent } from './default-layout/boxes/search/cris-layout-search-box.component';
@@ -33,6 +33,8 @@ import { MetricAltmetricComponent } from './default-layout/boxes/components/metr
 import { MetricDimensionsComponent } from './default-layout/boxes/components/metric/metric-dimensions/metric-dimensions.component';
 import { MetricDspacecrisComponent } from './default-layout/boxes/components/metric/metric-dspacecris/metric-dspacecris.component';
 import { MetricGooglescholarComponent } from './default-layout/boxes/components/metric/metric-googlescholar/metric-googlescholar.component';
+import { TableComponent } from './default-layout/boxes/components/table/table.component';
+import { InlineComponent } from './default-layout/boxes/components/inline/inline.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -83,7 +85,9 @@ const ENTRY_COMPONENTS = [
     MetricAltmetricComponent,
     MetricDimensionsComponent,
     MetricDspacecrisComponent,
-    MetricGooglescholarComponent
+    MetricGooglescholarComponent,
+    TableComponent,
+    InlineComponent
   ],
   imports: [
     CommonModule,

@@ -550,7 +550,7 @@ export class WorkingPlanService {
 
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
     Object.keys(metadata)
-      .filter((metadataName) => metadataName !== 'relationship.type')
+      .filter((metadataName) => metadataName !== 'dspace.entity.type')
       .forEach((metadataName) => {
       this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
     });

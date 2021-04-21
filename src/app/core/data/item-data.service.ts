@@ -27,7 +27,7 @@ import { ExternalSourceEntry } from '../shared/external-source-entry.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { Item } from '../shared/item.model';
 import { ITEM } from '../shared/item.resource-type';
-import { configureRequest, getFirstSucceededRemoteDataPayload } from '../shared/operators';
+import { getFirstSucceededRemoteDataPayload, sendRequest } from '../shared/operators';
 import { URLCombiner } from '../url-combiner/url-combiner';
 
 import { DataService } from './data.service';
@@ -112,7 +112,7 @@ export class ItemDataService extends DataService<Item> {
       isNotEmptyOperator(),
       distinctUntilChanged(),
       map((endpointURL: string) => new DeleteRequest(this.requestService.generateRequestId(), endpointURL)),
-      configureRequest(this.requestService),
+      sendRequest(this.requestService),
       switchMap((request: RestRequest) => this.rdbService.buildFromRequestUUID(request.uuid)),
     );
   }
@@ -133,27 +133,9 @@ export class ItemDataService extends DataService<Item> {
         options.headers = headers;
         return new PostRequest(this.requestService.generateRequestId(), endpointURL, collectionHref, options);
       }),
-      configureRequest(this.requestService),
+      sendRequest(this.requestService),
       switchMap((request: RestRequest) => this.rdbService.buildFromRequestUUID(request.uuid))
     );
-  }
-
-  /**
-   * Fetches all collections the item is mapped to
-   * @param itemId    The item's id
-   */
-  public getMappedCollections(itemId: string): Observable<RemoteData<PaginatedList<Collection>>> {
-    const href$ = this.getMappedCollectionsEndpoint(itemId).pipe(
-      isNotEmptyOperator(),
-      take(1)
-    );
-
-    href$.subscribe((href: string) => {
-      const request = new GetRequest(this.requestService.generateRequestId(), href);
-      this.requestService.configure(request);
-    });
-
-    return this.rdbService.buildList(href$);
   }
 
   /**
@@ -209,7 +191,7 @@ export class ItemDataService extends DataService<Item> {
       take(1)
     ).subscribe((href) => {
       const request = new GetRequest(this.requestService.generateRequestId(), href);
-      this.requestService.configure(request);
+      this.requestService.send(request);
     });
 
     return this.rdbService.buildList<Bundle>(hrefObs);
@@ -238,7 +220,7 @@ export class ItemDataService extends DataService<Item> {
       take(1)
     ).subscribe((href) => {
       const request = new GetRequest(this.requestService.generateRequestId(), href);
-      this.requestService.configure(request);
+      this.requestService.send(request);
     });
 
     return this.rdbService.buildList<Metric>(hrefObs);
@@ -267,7 +249,7 @@ export class ItemDataService extends DataService<Item> {
       headers = headers.append('Content-Type', 'application/json');
       options.headers = headers;
       const request = new PostRequest(requestId, href, JSON.stringify(bundleJson), options);
-      this.requestService.configure(request);
+      this.requestService.send(request);
     });
 
     return this.rdbService.buildFromRequestUUID(requestId);
@@ -302,7 +284,7 @@ export class ItemDataService extends DataService<Item> {
       find((href: string) => hasValue(href)),
       map((href: string) => {
         const request = new PutRequest(requestId, href, collection._links.self.href, options);
-        this.requestService.configure(request);
+        this.requestService.send(request);
       })
     ).subscribe();
 
@@ -327,7 +309,7 @@ export class ItemDataService extends DataService<Item> {
       find((href: string) => hasValue(href)),
       map((href: string) => {
         const request = new PostRequest(requestId, href, externalSourceEntry._links.self.href, options);
-        this.requestService.configure(request);
+        this.requestService.send(request);
       })
     ).subscribe();
 
