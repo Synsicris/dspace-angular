@@ -44,7 +44,7 @@ export class EditItemDataService extends DataService<EditItem> {
    * @param itemId
    */
   searchEditModesByID(itemId: string): Observable<EditItemMode[]> {
-    return this.findById(itemId + ':none', true, followLink('modes')).pipe(
+    return this.findById(itemId + ':none', false, true, followLink('modes')).pipe(
       getAllSucceededRemoteDataPayload(),
       mergeMap((editItem: EditItem) => editItem.modes.pipe(
         getFirstSucceededRemoteListPayload())

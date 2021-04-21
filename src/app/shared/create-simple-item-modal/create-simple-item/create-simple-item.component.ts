@@ -123,7 +123,7 @@ export class CreateSimpleItemComponent implements OnInit, OnDestroy {
   public createTask(data: Observable<any>): void {
     data.pipe(first()).subscribe((formData) => {
 
-      const type = (formData['relationship.type']) ? formData['relationship.type'][0] : null;
+      const type = (formData['dspace.entity.type']) ? formData['dspace.entity.type'][0] : null;
       const metadataMap = {};
       Object.keys(formData).forEach((metadataName) => {
         metadataMap[metadataName] = formData[metadataName].map((formValue: FormFieldMetadataValueObject) => ({

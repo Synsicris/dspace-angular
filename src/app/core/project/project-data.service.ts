@@ -24,7 +24,12 @@ import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
 import { SearchResult } from '../../shared/search/search-result.model';
-import { configureRequest, getFinishedRemoteData, getFirstSucceededRemoteDataPayload } from '../shared/operators';
+import {
+  getFinishedRemoteData,
+  getFirstSucceededRemoteData,
+  getFirstSucceededRemoteDataPayload,
+  sendRequest
+} from '../shared/operators';
 import { DSpaceObjectType } from '../shared/dspace-object-type.model';
 import { SearchService } from '../shared/search/search.service';
 import { LinkService } from '../cache/builders/link.service';
@@ -114,7 +119,7 @@ export class ProjectDataService extends CommunityDataService {
         }
         return new PostRequest(requestId, hrefWithParent, templateUrl, options);
       }),
-      configureRequest(this.requestService),
+      sendRequest(this.requestService),
     ).subscribe();
 
     return this.fetchCreateResponse(requestId).pipe(
@@ -309,7 +314,7 @@ export class ProjectDataService extends CommunityDataService {
     };
 
     return this.patch(project, [operation]).pipe(
-      mergeMap(() => this.findById(project.id, true, followLink('parentCommunity'))),
+      mergeMap(() => this.findById(project.id, false, true, followLink('parentCommunity'))),
       getFinishedRemoteData()
     );
   }
@@ -361,7 +366,7 @@ export class ProjectDataService extends CommunityDataService {
    */
   private fetchSearchCommunity(searchOptions: PaginatedSearchOptions, ...linksToFollow: FollowLinkConfig<Community>[]): Observable<Community> {
     return this.searchService.search(searchOptions).pipe(
-      filter((rd: RemoteData<PaginatedList<SearchResult<any>>>) => rd.hasSucceeded),
+      getFirstSucceededRemoteData(),
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
           .filter((result) => hasValue(result))
@@ -374,8 +379,8 @@ export class ProjectDataService extends CommunityDataService {
         if (list.page.length > 0) {
           return (list.page[0]).pipe(
             map((community: Community) => community),
-            mergeMap((community: Community) => this.findById(community.id, true, ...linksToFollow).pipe(
-              tap(() => this.requestService.removeByHrefSubstring(community.id))
+            mergeMap((community: Community) => this.findById(community.id, true, true, ...linksToFollow).pipe(
+              tap(() => this.requestService.setStaleByHrefSubstring(community.id))
             )),
             getFirstSucceededRemoteDataPayload()
           );

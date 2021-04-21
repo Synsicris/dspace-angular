@@ -138,7 +138,7 @@
 
   "admin.registries.bitstream-formats.table.name": "Name",
 
-  "admin.registries.bitstream-formats.table.return": "Return",
+  "admin.registries.bitstream-formats.table.return": "Back",
 
   "admin.registries.bitstream-formats.table.supportLevel.KNOWN": "Known",
 
@@ -148,7 +148,7 @@
 
   "admin.registries.bitstream-formats.table.supportLevel.head": "Support Level",
 
-  "admin.registries.bitstream-formats.title": "DSpace Cris Angular :: Bitstream Format Registry",
+  "admin.registries.bitstream-formats.title": "Bitstream Format Registry",
 
 
 
@@ -176,7 +176,7 @@
 
   "admin.registries.metadata.schemas.table.namespace": "Namespace",
 
-  "admin.registries.metadata.title": "DSpace Cris Angular :: Metadata Registry",
+  "admin.registries.metadata.title": "Metadata Registry",
 
 
 
@@ -226,9 +226,9 @@
 
   "admin.registries.schema.notification.success": "Success",
 
-  "admin.registries.schema.return": "Return",
+  "admin.registries.schema.return": "Back",
 
-  "admin.registries.schema.title": "DSpace Cris Angular :: Metadata Schema Registry",
+  "admin.registries.schema.title": "Metadata Schema Registry",
 
 
 
@@ -240,7 +240,9 @@
 
   "admin.access-control.epeople.actions.stop-impersonating": "Stop impersonating EPerson",
 
-  "admin.access-control.epeople.title": "DSpace Angular :: EPeople",
+  "admin.access-control.epeople.breadcrumbs": "EPeople",
+
+  "admin.access-control.epeople.title": "EPeople",
 
   "admin.access-control.epeople.head": "EPeople",
 
@@ -253,6 +255,8 @@
   "admin.access-control.epeople.search.scope.email": "E-mail (exact)",
 
   "admin.access-control.epeople.search.button": "Search",
+
+  "admin.access-control.epeople.search.placeholder": "Search people...",
 
   "admin.access-control.epeople.button.add": "Add EPerson",
 
@@ -286,6 +290,8 @@
 
   "admin.access-control.epeople.form.requireCertificate": "Requires certificate",
 
+  "admin.access-control.epeople.form.return": "Back",
+
   "admin.access-control.epeople.form.notification.created.success": "Successfully created EPerson \"{{name}}\"",
 
   "admin.access-control.epeople.form.notification.created.failure": "Failed to create EPerson \"{{name}}\"",
@@ -318,11 +324,17 @@
 
 
 
-  "admin.access-control.groups.title": "DSpace Angular :: Groups",
+  "admin.access-control.groups.title": "Groups",
 
-  "admin.access-control.groups.title.singleGroup": "DSpace Angular :: Edit Group",
+  "admin.access-control.groups.breadcrumbs": "Groups",
 
-  "admin.access-control.groups.title.addGroup": "DSpace Angular :: New Group",
+  "admin.access-control.groups.singleGroup.breadcrumbs": "Edit Group",
+
+  "admin.access-control.groups.title.singleGroup": "Edit Group",
+
+  "admin.access-control.groups.title.addGroup": "New Group",
+
+  "admin.access-control.groups.addGroup.breadcrumbs": "New Group",
 
   "admin.access-control.groups.head": "Groups",
 
@@ -334,13 +346,13 @@
 
   "admin.access-control.groups.search.button": "Search",
 
+  "admin.access-control.groups.search.placeholder": "Search groups...",
+
   "admin.access-control.groups.table.id": "ID",
 
   "admin.access-control.groups.table.name": "Name",
 
   "admin.access-control.groups.table.members": "Members",
-
-  "admin.access-control.groups.table.comcol": "Community / Collection",
 
   "admin.access-control.groups.table.edit": "Edit",
 
@@ -440,6 +452,8 @@
 
   "admin.access-control.groups.form.members-list.no-items": "No EPeople found in that search",
 
+  "admin.access-control.groups.form.subgroups-list.notification.failure": "Something went wrong: \"{{cause}}\"",
+
   "admin.access-control.groups.form.subgroups-list.head": "Groups",
 
   "admin.access-control.groups.form.subgroups-list.search.head": "Add Subgroup",
@@ -478,8 +492,21 @@
 
   "admin.access-control.groups.form.subgroups-list.no-subgroups-yet": "No subgroups in group yet.",
 
-  "admin.access-control.groups.form.return": "Return to groups",
+  "admin.access-control.groups.form.return": "Back",
 
+
+
+  "admin.notifications.openairebroker.breadcrumbs": "OpenAIRE Broker",
+
+  "admin.notifications.openairebroker.page.title": "OpenAIRE Broker",
+
+  "admin.notifications.openaireevent.breadcrumbs": "OpenAIRE Broker Suggestions",
+
+  "admin.notifications.openaireevent.page.title": "OpenAIRE Broker Suggestions",
+
+  "admin.notifications.recitersuggestion.breadcrumbs": "Suggestions",
+
+  "admin.notifications.recitersuggestion.page.title": "Suggestions",
 
 
   "admin.search.breadcrumbs": "Administrative Search",
@@ -508,6 +535,7 @@
 
 
 
+
   "admin.workflow.breadcrumbs": "Administer Workflow",
 
   "admin.workflow.title": "Administer Workflow",
@@ -532,7 +560,7 @@
 
   "admin.metadata-import.page.dropMsgReplace": "Drop to replace the metadata CSV to import",
 
-  "admin.metadata-import.page.button.return": "Return",
+  "admin.metadata-import.page.button.return": "Back",
 
   "admin.metadata-import.page.button.proceed": "Proceed",
 
@@ -544,6 +572,10 @@
   "auth.errors.invalid-user": "Invalid email address or password.",
 
   "auth.messages.expired": "Your session has expired. Please log in again.",
+
+
+
+  "bitstream.download.page": "Now downloading {{bitstream}}..." ,
 
 
 
@@ -659,9 +691,15 @@
 
   "browse.metadata.title.breadcrumbs": "Browse by Title",
 
+  "browse.next.button": "Next",
+
+  "browse.previous.button": "Previous",
+
   "browse.startsWith.choose_start": "(Choose start)",
 
   "browse.startsWith.choose_year": "(Choose year)",
+
+  "browse.startsWith.choose_year.label": "Choose the issue year",
 
   "browse.startsWith.jump": "Jump to a point in the index:",
 
@@ -685,17 +723,21 @@
 
   "browse.startsWith.months.none": "(Choose month)",
 
+  "browse.startsWith.months.none.label": "Choose the issue month",
+
   "browse.startsWith.months.november": "November",
 
   "browse.startsWith.months.october": "October",
 
   "browse.startsWith.months.september": "September",
 
-  "browse.startsWith.submit": "Go",
+  "browse.startsWith.submit": "Browse",
 
-  "browse.startsWith.type_date": "Or type in a date (year-month):",
+  "browse.startsWith.type_date": "Or type in a date (year-month) and click 'Browse'",
 
-  "browse.startsWith.type_text": "Or enter first few letters:",
+  "browse.startsWith.type_date.label": "Or type in a date (year-month) and click on the Browse button",
+
+  "browse.startsWith.type_text": "Type the first few letters and click on the Browse button",
 
   "browse.title": "Browsing {{ collection }} by {{ field }} {{ value }}",
 
@@ -723,12 +765,11 @@
 
   "bulk-import.title" : "Bulk import",
 
-  "bulk-import.workflow" : "Use collection workflow",
-
 
 
   "chips.remove": "Remove chip",
 
+  "chart.load-more": "Load more results",
 
 
   "collection.create.head": "Create a Collection",
@@ -761,6 +802,10 @@
 
 
 
+  "collection.edit.tabs.mapper.head": "Item Mapper",
+
+  "collection.edit.tabs.item-mapper.title": "Collection Edit - Item Mapper",
+
   "collection.edit.item-mapper.cancel": "Cancel",
 
   "collection.edit.item-mapper.collection": "Collection: \"<b>{{name}}</b>\"",
@@ -791,11 +836,17 @@
 
   "collection.edit.item-mapper.remove": "Remove selected item mappings",
 
+  "collection.edit.item-mapper.search-form.placeholder": "Search items...",
+
   "collection.edit.item-mapper.tabs.browse": "Browse mapped items",
 
   "collection.edit.item-mapper.tabs.map": "Map new items",
 
 
+
+  "collection.edit.logo.delete.title": "Delete logo",
+
+  "collection.edit.logo.delete-undo.title": "Undo delete",
 
   "collection.edit.logo.label": "Collection logo",
 
@@ -813,7 +864,7 @@
 
   "collection.edit.notifications.success": "Successfully edited the Collection",
 
-  "collection.edit.return": "Return",
+  "collection.edit.return": "Back",
 
 
 
@@ -895,9 +946,13 @@
 
   "collection.edit.template.edit-button": "Edit",
 
+  "collection.edit.template.error": "An error occurred retrieving the template item",
+
   "collection.edit.template.head": "Edit Template Item for Collection \"{{ collection }}\"",
 
   "collection.edit.template.label": "Template item",
+
+  "collection.edit.template.loading": "Loading template item...",
 
   "collection.edit.template.notifications.delete.error": "Failed to delete the item template",
 
@@ -973,7 +1028,9 @@
 
 
 
-  "communityList.tabTitle": "DSpace - Community List",
+  "communityList.breadcrumbs": "Community List",
+
+  "communityList.tabTitle": "Community List",
 
   "communityList.title": "List of Communities",
 
@@ -1008,6 +1065,10 @@
   "community.edit.breadcrumbs": "Edit Community",
 
 
+  "community.edit.logo.delete.title": "Delete logo",
+
+  "community.edit.logo.delete-undo.title": "Undo delete",
+
   "community.edit.logo.label": "Community logo",
 
   "community.edit.logo.notifications.add.error": "Uploading Community logo failed. Please verify the content before retrying.",
@@ -1030,7 +1091,7 @@
 
   "community.edit.notifications.error": "An error occured while editing the Community",
 
-  "community.edit.return": "Return",
+  "community.edit.return": "Back",
 
 
 
@@ -1288,6 +1349,10 @@
 
 
 
+  "dso.name.untitled": "Untitled",
+
+
+
   "dso-selector.create.collection.head": "New collection",
 
   "dso-selector.create.collection.sub-level": "Create a new collection in",
@@ -1311,6 +1376,10 @@
   "dso-selector.edit.item.head": "Edit item",
 
   "dso-selector.export-metadata.dspaceobject.head": "Export metadata from",
+
+  "dso-selector.import-item.item.head": "Import items",
+
+  "dso-selector.import-item.sub-level": "Bulk import items in",
 
   "dso-selector.no-results": "No {{ type }} found",
 
@@ -1553,7 +1622,7 @@
 
   "forgot-email.form.email.hint": "This address will be verified and used as your login name.",
 
-  "forgot-email.form.submit": "Submit",
+  "forgot-email.form.submit": "Save",
 
   "forgot-email.form.success.head": "Verification email sent",
 
@@ -1597,7 +1666,7 @@
 
 
 
-  "form.add": "Add",
+  "form.add": "Add more",
 
   "form.add-help": "Click here to add the current entry and to add another one",
 
@@ -1606,6 +1675,8 @@
   "form.clear": "Clear",
 
   "form.clear-help": "Click here to remove the selected value",
+
+  "form.discard": "Discard",
 
   "form.edit": "Edit",
 
@@ -1653,7 +1724,10 @@
 
   "form.search-help": "Click here to look for an existing correspondence",
 
-  "form.submit": "Submit",
+  "form.submit": "Save",
+
+  "form.repeatable.sort.tip": "Drop the item in the new position",
+
 
   "funding.listelement.badge" : "Funding",
 
@@ -1662,7 +1736,9 @@
 
   "home.breadcrumbs": "Home",
 
-  "home.title": "DSpace Cris Angular :: Home",
+  "home.search-form.placeholder": "Search the repository ...",
+
+  "home.title": "Home",
 
   "home.top-level-communities.head": "Communities in DSpace Cris",
 
@@ -1901,7 +1977,12 @@
 
   "item.edit.breadcrumbs": "Edit Item",
 
+  "item.edit.tabs.disabled.tooltip": "You don't have permission to access this tab",
 
+
+  "item.edit.tabs.mapper.head": "Collection Mapper",
+
+  "item.edit.tabs.item-mapper.title": "Item Edit - Collection Mapper",
 
   "item.edit.item-mapper.buttons.add": "Map item to selected collections",
 
@@ -1932,6 +2013,8 @@
   "item.edit.item-mapper.notifications.remove.success.content": "Successfully removed mapping of item to {{amount}} collections.",
 
   "item.edit.item-mapper.notifications.remove.success.head": "Removal of mapping completed",
+
+  "item.edit.item-mapper.search-form.placeholder": "Search collections...",
 
   "item.edit.item-mapper.tabs.browse": "Browse mapped collections",
 
@@ -2089,8 +2172,10 @@
 
   "item.edit.relationships.save-button": "Save",
 
-  "item.edit.relationships.no-entity-type": "Add 'relationship.type' metadata to enable relationships for this item",
+  "item.edit.relationships.no-entity-type": "Add 'dspace.entity.type' metadata to enable relationships for this item",
 
+
+  "item.edit.return": "Back",
 
 
   "item.edit.tabs.bitstreams.head": "Bitstreams",
@@ -2199,7 +2284,7 @@
 
   "item.search.results.head": "Item Search Results",
 
-  "item.search.title": "DSpace Angular :: Item Search",
+  "item.search.title": "Item Search",
 
 
 
@@ -2380,7 +2465,7 @@
 
   "item.version.history.head": "Version History",
 
-  "item.version.history.return": "Return",
+  "item.version.history.return": "Back",
 
   "item.version.history.selected": "Selected version",
 
@@ -2399,6 +2484,25 @@
   "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href='{{destination}}'>here</a>.",
 
 
+  "item-export.modal-launcher.single.btn": "Export",
+
+  "item-export.modal-launcher.multiple.btn": "Bulk Export",
+
+  "item-export.alert.single": "Export item ",
+
+  "item-export.alert.multiple": "Export all items of a particular entity type belonging to the current search.",
+
+  "item-export.form.entityType": "Entity Type",
+
+  "item-export.form.entityType.tip": "Choose the entity type to export",
+
+  "item-export.form.format": "Format",
+
+  "item-export.form.format.tip": "Choose the export format",
+
+  "item-export.form.btn.submit": "Export",
+
+  "item-export.form.btn.cancel": "Cancel",
 
   "journal.listelement.badge": "Journal",
 
@@ -2416,7 +2520,7 @@
 
   "journal.search.results.head": "Journal Search Results",
 
-  "journal.search.title": "DSpace Cris Angular :: Journal Search",
+  "journal.search.title": "Journal Search",
 
 
 
@@ -2502,6 +2606,8 @@
 
   "login.form.or-divider": "or",
 
+  "login.form.orcid": "Log in with ORCID",
+
   "login.form.password": "Password",
 
   "login.form.shibboleth": "Log in with Shibboleth",
@@ -2522,9 +2628,19 @@
 
 
 
-  "menu.header.admin": "Admin",
+  "menu.header.admin": "Management",
 
   "menu.header.image.logo": "Repository logo",
+
+  "menu.header.admin.description": "Management menu",
+
+
+
+  "menu.section.notifications": "Notifications",
+
+  "menu.section.notifications_openaire_broker": "OpenAIRE Broker",
+
+  "menu.section.notifications_reciter": "Publication Claim",
 
 
 
@@ -2607,6 +2723,8 @@
   "menu.section.icon.edit": "Edit menu section",
 
   "menu.section.icon.export": "Export menu section",
+
+  "menu.section.icon.notifications": "Notifictions menu section",
 
   "menu.section.icon.find": "Find menu section",
 
@@ -2733,6 +2851,8 @@
 
   "mydspace.new-submission": "New submission",
 
+  "mydspace.new-bulk-import": "New bulk import",
+
   "mydspace.new-submission-external": "Import metadata from external source",
 
   "mydspace.new-submission-external-short": "Import metadata",
@@ -2756,6 +2876,8 @@
   "mydspace.results.no-uri": "No Uri",
 
   "mydspace.show.allProjectItems": "All items in the project",
+
+  "mydspace.search-form.placeholder": "Search in mydspace...",
 
   "mydspace.show.workflow": "All tasks",
 
@@ -2785,7 +2907,9 @@
 
   "mydspace.view-btn": "View",
 
+  "mydspace.notification.suggestion": "We found <b>{{count}} publications</b><br> in the {{source}} that seems to be related to your profile.<br> Please <a href='/suggestions/{{suggestionId}}'>review the suggestions</a>",
 
+  "mydspace.notification.suggestion.page": "We found <b>{{count}} publications</b> in the {{source}} that seems to be related to your profile. Please <a href='/suggestions/{{suggestionId}}'>review the suggestions.</a>",
 
   "nav.browse.header": "All of DSpace",
 
@@ -2795,7 +2919,9 @@
 
   "nav.login": "Log In",
 
-  "nav.logout": "Log Out",
+  "nav.logout": "User profile menu and Log Out",
+
+  "nav.main.description": "Main navigation bar",
 
   "nav.mydspace": "MyDSpace",
 
@@ -2806,6 +2932,189 @@
   "nav.statistics.header": "Statistics",
 
   "nav.stop-impersonating": "Stop impersonating EPerson",
+
+  "nav.user.description" : "User profile bar",
+
+
+
+  "openaire.broker.title": "OpenAIRE Broker",
+
+  "openaire.broker.topics.description": "Below you can see all the topics received from the subscriptions to OpenAIRE.",
+
+  "openaire.broker.topics": "Current Topics",
+
+  "openaire.broker.table.topic": "Topic",
+
+  "openaire.broker.table.last-event": "Last Event",
+
+  "openaire.broker.table.actions": "Actions",
+
+  "openaire.broker.button.detail": "Show details",
+
+  "openaire.broker.noTopics": "No topics found.",
+
+  "openaire.broker.topic.error.service.retrieve": "An error occurred while loading the OpenAIRE Broker topics",
+
+  "openaire.broker.loading": "Loading ...",
+
+  "openaire.events.title": "OpenAIRE Broker Suggestions",
+
+  "openaire.broker.events.description": "Below the list of all the suggestions, received from OpenAIRE, for the selected topic.",
+
+  "openaire.broker.events.topic": "Topic:",
+
+  "openaire.broker.noEvents": "No suggestions found.",
+
+  "openaire.broker.event.table.trust": "Trust",
+
+  "openaire.broker.event.table.publication": "Publication",
+
+  "openaire.broker.event.table.details": "Details",
+
+  "openaire.broker.event.table.project-details": "Project details",
+
+  "openaire.broker.event.table.actions": "Actions",
+
+  "openaire.broker.event.action.accept": "Accept suggestion",
+
+  "openaire.broker.event.action.ignore": "Ignore suggestion",
+
+  "openaire.broker.event.action.reject": "Reject suggestion",
+
+  "openaire.broker.event.action.import": "Import project and accept suggestion",
+
+  "openaire.broker.event.table.pidtype": "PID Type:",
+
+  "openaire.broker.event.table.pidvalue": "PID Value:",
+
+  "openaire.broker.event.table.subjectValue": "Subject Value:",
+
+  "openaire.broker.event.table.abstract": "Abstract:",
+
+  "openaire.broker.event.table.suggestedProject": "OpenAIRE Suggested Project data",
+
+  "openaire.broker.event.table.project": "Project title:",
+
+  "openaire.broker.event.table.acronym": "Acronym:",
+
+  "openaire.broker.event.table.code": "Code:",
+
+  "openaire.broker.event.table.funder": "Funder:",
+
+  "openaire.broker.event.table.fundingProgram": "Funding program:",
+
+  "openaire.broker.event.table.jurisdiction": "Jurisdiction:",
+
+  "openaire.broker.events.back": "Back to topics",
+
+  "openaire.broker.event.table.less": "Show less",
+
+  "openaire.broker.event.table.more": "Show more",
+
+  "openaire.broker.event.project.found": "Bound to the local record:",
+
+  "openaire.broker.event.project.notFound": "No local record found",
+
+  "openaire.broker.event.sure": "Are you sure?",
+
+  "openaire.broker.event.ignore.description": "This operation can't be undone. Ignore this suggestion?",
+
+  "openaire.broker.event.reject.description": "This operation can't be undone. Reject this suggestion?",
+
+  "openaire.broker.event.accept.description": "No DSpace project selected. A new project will be created based on the suggestion data.",
+
+  "openaire.broker.event.action.cancel": "Cancel",
+
+  "openaire.broker.event.action.saved": "Your decision has been saved successfully.",
+
+  "openaire.broker.event.action.error": "An error has occurred. Your decision has not been saved.",
+
+  "openaire.broker.event.modal.project.title": "Choose a project to bound",
+
+  "openaire.broker.event.modal.project.publication": "Publication:",
+
+  "openaire.broker.event.modal.project.bountToLocal": "Bound to the local record:",
+
+  "openaire.broker.event.modal.project.select": "Project search",
+
+  "openaire.broker.event.modal.project.search": "Search",
+
+  "openaire.broker.event.modal.project.clear": "Clear",
+
+  "openaire.broker.event.modal.project.cancel": "Cancel",
+
+  "openaire.broker.event.modal.project.bound": "Bound project",
+
+  "openaire.broker.event.modal.project.placeholder": "Enter a project name",
+
+  "openaire.broker.event.modal.project.notFound": "No project found.",
+
+  "openaire.broker.event.project.bounded": "The project has been linked successfully.",
+
+  "openaire.broker.event.project.removed": "The project has been successfully unlinked.",
+
+  "openaire.broker.event.project.error": "An error has occurred. No operation performed.",
+
+  "openaire.broker.event.reason": "Reason",
+
+  "reciter.suggestion.loading": "Loading ...",
+
+  "reciter.suggestion.title": "Suggestions",
+
+  "reciter.suggestion.targets.description": "Below you can see all the suggestions ",
+
+  "reciter.suggestion.targets": "Current Suggestions",
+
+  "reciter.suggestion.table.name": "Researcher Name",
+
+  "reciter.suggestion.table.actions": "Actions",
+
+  "reciter.suggestion.button.review": "Review {{ total }} suggestion(s)",
+
+  "reciter.suggestion.noTargets": "No target found.",
+
+  "reciter.suggestion.target.error.service.retrieve": "An error occurred while loading the Suggestion targets",
+
+  "reciter.suggestion.evidence.type": "Type",
+
+  "reciter.suggestion.evidence.score": "Score",
+
+  "reciter.suggestion.evidence.notes": "Notes",
+
+  "reciter.suggestion.approveAndImport": "Approve & import",
+
+  "reciter.suggestion.approveAndImport.success": "The suggestion has been imported successfully",
+
+  "reciter.suggestion.approveAndImport.bulk": "Approve & import Selected",
+
+  "reciter.suggestion.approveAndImport.bulk.success": "{{ count }} suggestions have been imported successfully ",
+
+  "reciter.suggestion.approveAndImport.bulk.error": "{{ count }} suggestions haven't been imported due to unexpected server errors",
+
+  "reciter.suggestion.notMine": "Not mine",
+
+  "reciter.suggestion.notMine.success": "The suggestion has been discarded",
+
+  "reciter.suggestion.notMine.bulk": "Not mine Selected",
+
+  "reciter.suggestion.notMine.bulk.success": "{{ count }} suggestions have been discarded ",
+
+  "reciter.suggestion.notMine.bulk.error": "{{ count }} suggestions haven't been discarded due to unexpected server errors",
+
+  "reciter.suggestion.seeEvidence": "See evidence",
+
+  "reciter.suggestion.hideEvidence": "Hide evidence",
+
+  "reciter.suggestion.suggestionFor": "Suggestion for",
+
+  "reciter.suggestion.source.oaire": "OpenAIRE Graph",
+
+  "reciter.suggestion.from.source": "from the ",
+
+  "reciter.suggestion.totalScore": "Total Score",
+
+
+
 
 
 
@@ -2826,6 +3135,8 @@
   "orgunit.page.titleprefix": "Organizational Unit: ",
 
 
+
+  "pagination.options.description": "Pagination options",
 
   "pagination.results-per-page": "Results Per Page",
 
@@ -2886,7 +3197,7 @@
 
   "person.page.orcid.sync-profile.affiliation" : "Affiliation",
 
-  "person.page.orcid.sync-profile.bibliographic" : "Bibliographic data",
+  "person.page.orcid.sync-profile.biographical" : "Biographical data",
 
   "person.page.orcid.sync-profile.education" : "Education",
 
@@ -2957,7 +3268,7 @@
 
   "person.search.results.head": "Person Search Results",
 
-  "person.search.title": "DSpace Cris Angular :: Person Search",
+  "person.search.title": "Person Search",
 
 
 
@@ -2965,7 +3276,7 @@
 
   "process.new.cancel": "Cancel",
 
-  "process.new.submit": "Submit",
+  "process.new.submit": "Save",
 
   "process.new.select-script": "Script",
 
@@ -3163,7 +3474,7 @@
 
   "profile.card.researcher": "Researcher Profile",
 
-  "profile.form.submit": "Update Profile",
+  "profile.form.submit": "Save",
 
   "profile.groups.head": "Authorization groups you belong to",
 
@@ -3356,7 +3667,14 @@
 
   "publication.search.results.head": "Publication Search Results",
 
-  "publication.search.title": "DSpace Cris Angular :: Publication Search",
+  "publication.search.title": "Publication Search",
+
+
+  "media-viewer.next": "Next",
+
+  "media-viewer.previous": "Previous",
+
+  "media-viewer.playlist": "Playlist",
 
 
   "register-email.title": "New user registration",
@@ -3434,6 +3752,12 @@
 
 
 
+  "relationships.add.error.relationship-type.content": "No suitable match could be found for relationship type {{ type }} between the two items",
+
+  "relationships.add.error.server.content": "The server returned an error",
+
+  "relationships.add.error.title": "Unable to add relationship",
+
   "relationships.isAuthorOf": "Authors",
 
   "relationships.isAuthorOf.Person": "Authors (persons)",
@@ -3467,6 +3791,10 @@
   "results_plan.breadcrumbs":  "Results plan",
 
   "results_ist.breadcrumbs":  "Results IST",
+
+  "repository.image.logo": "Repository logo",
+
+  "repository.title.prefix": "DSpace Cris Angular :: ",
 
 
   "researcher.profile.action.processing" : "Processing...",
@@ -3533,7 +3861,7 @@
 
   "resource-policies.form.action-type.required": "You must select the resource policy action.",
 
-  "resource-policies.form.eperson-group-list.label": "The eperson or group that will be grant of the permission",
+  "resource-policies.form.eperson-group-list.label": "The eperson or group that will be granted the permission",
 
   "resource-policies.form.eperson-group-list.select.btn": "Select",
 
@@ -3597,9 +3925,11 @@
 
   "search.switch-configuration.title": "Show",
 
-  "search.title": "DSpace Cris Angular :: Search",
+  "search.title": "Search",
 
   "search.breadcrumbs": "Search",
+
+  "search.search-form.placeholder": "Search the repository ...",
 
 
   "search.filters.applied.f.author": "Author",
@@ -3632,8 +3962,19 @@
 
   "search.filters.applied.f.withdrawn": "Withdrawn",
 
+  "search.filters.applied.f.graphitemtype": "Item type",
+
+  "search.filters.applied.f.graphpubldate": "Public date",
+
+  "search.filters.applied.f.graphpubldateltr": "Public date LTR",
+
+  "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
+
+
 
   "search.filters.applied.charts.chart.bar.dateIssued.year.tab" : "Date Issued",
+
+  "search.filters.applied.charts.chart.pie.more-value" : "More",
 
   "search.filters.applied.charts.chart.pie.itemtype_filter.tab" : "Item Type",
 
@@ -3649,6 +3990,8 @@
 
   "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output",
 
+  "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
+
   "search.filters.applied.charts.no.data.found": "No data found",
 
 
@@ -3661,6 +4004,8 @@
   "search.filters.filter.birthDate.head": "Birth Date",
 
   "search.filters.filter.birthDate.placeholder": "Birth Date",
+
+  "search.filters.filter.collapse": "Collapse filter",
 
   "search.filters.filter.creativeDatePublished.head": "Date Published",
 
@@ -3699,6 +4044,8 @@
   "search.filters.filter.entityType.head": "Item Type",
 
   "search.filters.filter.entityType.placeholder": "Item Type",
+
+  "search.filters.filter.expand": "Expand filter",
 
   "search.filters.filter.eqowner.head": "Researcher",
 
@@ -3879,13 +4226,21 @@
 
   "search.form.search": "Search",
 
-  "search.form.search_dspace": "Search DSpace",
-
-  "search.form.search_mydspace": "Search MyDSpace",
+  "search.form.search_dspace": "All repository",
 
 
 
   "search.results.head": "Search Results",
+
+  "default.search.results.head": "Search Results",
+
+  "infrastructure.search.results.head": "Infrastructures Search Results",
+
+  "project_funding.search.results.head": "Projects Search Results",
+
+  "researchoutputs.search.results.head": "Publications Search Results",
+
+  "orgunit.search.results.head": "Organizations Search Results",
 
   "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting",
 
@@ -3930,8 +4285,30 @@
 
   "sorting.dc.title.DESC": "Title Descending",
 
-  "sorting.score.DESC": "Relevance",
+  "sorting.score.ASC": "Relevance Ascending",
 
+  "sorting.score.DESC": "Relevance Descending",
+
+  "sorting.dc.date.issued.ASC": "Date Issued Ascending",
+
+  "sorting.dc.date.issued.DESC": "Date Issued Descending",
+
+  "sorting.dc.date.accessioned.ASC": "Accessioned Date Ascending",
+
+  "sorting.dc.date.accessioned.DESC": "Accessioned Date Descending",
+
+  "sorting.lastModified.ASC": "Last modified Ascending",
+
+  "sorting.lastModified.DESC": "Last modified Descending",
+
+
+  "statistics.export.csv": "Export CSV",
+
+  "statistics.export.excel": "Export Excel",
+
+  "statistics.export.jpg": "Export as JPEG",
+
+  "statistics.export.png": "Export as PNG",
 
   "statistics.title": "Statistics",
 
@@ -3955,9 +4332,22 @@
 
   "statistics.table.header.views": "Views",
 
+  "statistics.categories.title": "Statistics by Category",
 
+  "statistics.categories.mainReports.tab": "Main Reports",
+
+  "statistics.categories.projectsReports.tab": "Project Reports",
+
+  "statistics.categories.publicationsReports.tab": "Publication Reports",
+
+  "statistics.reports.title": "Reports",
+
+
+  "submission.edit.breadcrumbs": "Edit Submission",
 
   "submission.edit.title": "Edit Submission",
+
+  "submission.general.cancel": "Cancel",
 
   "submission.general.cannot_submit": "You have not the privilege to make a new submission.",
 
@@ -4018,11 +4408,11 @@
 
   "submission.import-external.search.source.hint": "Pick an external source",
 
-  "submission.import-external.source.ads": "Ads",
+  "submission.import-external.source.ads": "NASA/ADS",
 
   "submission.import-external.source.arxiv": "arXiv",
 
-  "submission.import-external.source.cinii": "Cinii",
+  "submission.import-external.source.cinii": "CiNii",
 
   "submission.import-external.source.crossref": "CrossRef",
 
@@ -4036,13 +4426,15 @@
 
   "submission.import-external.source.pubmed": "Pubmed",
 
-  "submission.import-external.source.pubmedeu": "Pubmed EU",
+  "submission.import-external.source.pubmedeu": "Pubmed Europe",
 
   "submission.import-external.source.lcname": "Library of Congress Names",
 
   "submission.import-external.source.scopus": "Scopus",
 
-  "submission.import-external.source.openaire": "OpenAIRE",
+  "submission.import-external.source.openaire": "OpenAIRE by Author",
+
+  "submission.import-external.source.openaireTitle": "OpenAIRE by Title",
 
   "submission.import-external.source.epo": "European Patent Office (EPO)",
 
@@ -4227,6 +4619,8 @@
 
   "submission.sections.describe.relationship-lookup.search-tab.search": "Go",
 
+  "submission.sections.describe.relationship-lookup.search-tab.search-form.placeholder": "Search...",
+
   "submission.sections.describe.relationship-lookup.search-tab.select-all": "Select all",
 
   "submission.sections.describe.relationship-lookup.search-tab.select-page": "Select page",
@@ -4275,6 +4669,8 @@
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isFundingOfPublication": "Search for Funding",
 
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.isChildOrgUnitOf": "Search for Organizational Units",
+
+  "submission.sections.describe.relationship-lookup.selection-tab.search-form.placeholder": "Search...",
 
   "submission.sections.describe.relationship-lookup.selection-tab.tab-title": "Current Selection ({{ count }})",
 
@@ -4363,6 +4759,8 @@
   "submission.sections.describe.relationship-lookup.selection-tab.title.epo": "Search Results",
 
   "submission.sections.describe.relationship-lookup.selection-tab.title.scopus": "Search Results",
+
+  "submission.sections.describe.relationship-lookup.selection-tab.title": "Search Results",
 
   "submission.sections.describe.relationship-lookup.name-variant.notification.content": "Would you like to save \"{{ value }}\" as a name variant for this person so you and others can reuse it for future submissions? If you don\'t you can still use it for this submission.",
 
@@ -4467,6 +4865,10 @@
   "submission.sections.submit.progressbar.describe.cooperation_events_date.info": "It is not expected here that every telephone call or frequent web conferences will be recorded with exact data. Please use the frequency information for this purpose.",
 
   "submission.sections.submit.progressbar.describe.cooperation_events_frequency": "Frequency of the cooperation processes",
+
+  "submission.sections.submit.progressbar.describe.owner": "Owner",
+
+  "submission.sections.submit.progressbar.describe.patent": "Patent basic information",
 
   "submission.sections.submit.progressbar.describe.cooperation_partners": "Project partners and cooperation partners",
 
@@ -4847,7 +5249,9 @@
 
 
 
-  "submission.submit.title": "Submission",
+  "submission.submit.breadcrumbs": "New submission",
+
+  "submission.submit.title": "New submission",
 
 
 
@@ -4995,10 +5399,6 @@
 
 
 
-  "administrativeView.search.results.head": "Administrative Search",
-
-  "menu.section.admin_search": "Admin Search",
-
   "uploader.browse": "browse",
 
   "uploader.drag-message": "Drag & Drop your files here",
@@ -5020,6 +5420,10 @@
   "workflowAdmin.search.results.head": "Administer Workflow",
 
 
+
+  "workflow-item.edit.breadcrumbs": "Edit workflowitem",
+
+  "workflow-item.edit.title": "Edit workflowitem",
 
   "workflow-item.delete.notification.success.title": "Deleted",
 

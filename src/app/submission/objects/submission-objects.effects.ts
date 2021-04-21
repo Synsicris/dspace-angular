@@ -341,7 +341,7 @@ export class SubmissionObjectEffects {
     switchMap(([action, section]: [UpdateSectionDataAction, SubmissionSectionObject]) => {
       if (section.sectionType === SectionsType.SubmissionForm) {
         const submissionObject$ = this.submissionObjectService
-          .findById(action.payload.submissionId, false, followLink('item')).pipe(
+          .findById(action.payload.submissionId, true, false, followLink('item')).pipe(
             getFirstSucceededRemoteDataPayload()
           );
 
