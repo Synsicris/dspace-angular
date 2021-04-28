@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of as obeservableOf } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Breadcrumb } from '../../breadcrumbs/breadcrumb/breadcrumb.model';
@@ -50,7 +50,7 @@ export class ProjectI18nBreadcrumbsService implements BreadcrumbsProviderService
         })
       );
     } else {
-      return obeservableOf([new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url)]);
+      return observableOf([new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url)]);
     }
 
   }
