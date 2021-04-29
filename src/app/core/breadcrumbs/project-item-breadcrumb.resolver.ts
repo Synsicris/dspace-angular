@@ -20,10 +20,10 @@ export class ProjectItemBreadcrumbResolver extends DSOBreadcrumbResolver<Item> {
    * The self links defined in this list are expected to be requested somewhere in the near future
    * Requesting them as embeds will limit the number of requests
    */
-  get followLinks(): Array<FollowLinkConfig<Item>> {
+  get followLinks(): FollowLinkConfig<Item>[] {
     return [
-      followLink('owningCollection', undefined, true,
-        followLink('parentCommunity', undefined, true,
+      followLink('owningCollection', undefined, true, true,true,
+        followLink('parentCommunity', undefined, true,true,true,
           followLink('parentCommunity'))
       ),
       followLink('bundles'),

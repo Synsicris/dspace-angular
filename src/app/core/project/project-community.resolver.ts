@@ -2,18 +2,20 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { find } from 'rxjs/operators';
 
-import { RemoteData } from '../core/data/remote-data';
-import { Community } from '../core/shared/community.model';
-import { CommunityDataService } from '../core/data/community-data.service';
-import { hasValue } from '../shared/empty.util';
+import { RemoteData } from '../data/remote-data';
+import { Community } from '../shared/community.model';
+import { CommunityDataService } from '../data/community-data.service';
+import { getFirstCompletedRemoteData } from '../shared/operators';
 
 /**
  * This class represents a resolver that requests a specific project before the route is activated
  */
 @Injectable()
-export class ProjectPageResolver implements Resolve<RemoteData<Community>> {
+export class ProjectCommunityResolver implements Resolve<RemoteData<Community>> {
+
+  routeParam = 'projectId';
+
   constructor(private communityService: CommunityDataService) {
   }
 
@@ -26,9 +28,9 @@ export class ProjectPageResolver implements Resolve<RemoteData<Community>> {
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RemoteData<Community>> {
     return this.communityService.findById(
-      route.params.projectId
+      route.params[this.routeParam]
     ).pipe(
-      find((RD) => hasValue(RD.errorMessage) || RD.hasSucceeded)
+      getFirstCompletedRemoteData()
     );
   }
 }
