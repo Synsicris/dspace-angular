@@ -26,6 +26,7 @@ export interface WorkpackageTreeObject {
   workspaceItemId: string;
   parentId?: string;
   name: string;
+  type: string;
   responsible: string;
   progress: number;
   progressDates: string[];

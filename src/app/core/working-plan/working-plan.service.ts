@@ -259,11 +259,13 @@ export class WorkingPlanService {
     const dates = this.initWorkpackageDatesFromItem(item);
     const responsible = item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
     const status = item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
+    const type = item.firstMetadataValue('dspace.entity.type');
 
     return {
       id: item.id,
       workspaceItemId: workspaceItemId,
       name: item.name,
+      type: type,
       responsible: responsible,
       progress: 0,
       progressDates: [],
@@ -279,12 +281,14 @@ export class WorkingPlanService {
     const dates = this.initWorkpackageDatesFromItem(item);
     const responsible = item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
     const status = item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
+    const type = item.firstMetadataValue('dspace.entity.type');
 
     return {
       id: item.id,
       workspaceItemId: workspaceItemId,
       parentId: parentId,
       name: item.name,
+      type: type,
       responsible: responsible,
       progress: 0,
       progressDates: [],
