@@ -9,42 +9,36 @@ import { ImpactPathWayComponent } from './shared/impact-path-way/impact-path-way
 import { WrapperImpactPathWayComponent } from './wrapper-impact-path-way/wrapper-impact-path-way.component';
 import { ImpactPathWayStepComponent } from './shared/impact-path-way/impact-path-way-step/impact-path-way-step.component';
 import { ImpactPathWayTaskComponent } from './shared/impact-path-way/impact-path-way-task/impact-path-way-task.component';
-import { CollapsablePanelComponent } from './shared/collapsable-panel/collapsable-panel.component';
 import { StepColorDirective } from './shared/impact-path-way/impact-path-way-step/step.directive';
-import { ExploitationPlanDirective } from './shared/impact-path-way/impact-path-way-task/exploitation-plan.directive';
-import { DragAndDropContainerComponent } from './shared/drag-and-drop-container.component';
 import { ObjectivesBoardComponent } from './objectives-board.component';
 import { WrapperObjectivesComponent } from './wrapper-objectives/wrapper-objectives.component';
 import { ObjectiveContainerComponent } from './wrapper-objectives/objective/container/objective-container.component';
 import { ObjectiveComponent } from './wrapper-objectives/objective/objective.component';
-import { EditableTextareaComponent } from './shared/editable-textarea/editable-textarea.component';
 import { NgxDomarrowModule } from 'ngx-domarrow';
+import { ImpactPathwaySharedModule } from './shared/impact-pathway-shared.module';
 
 const MODULES = [
   CommonModule,
   SharedModule,
   CoreModule.forRoot(),
   DragDropModule,
-  NgxDomarrowModule
+  NgxDomarrowModule,
+  ImpactPathwaySharedModule
 ];
 
 const COMPONENTS = [
   ImpactPathwayBoardComponent,
-  DragAndDropContainerComponent,
   ImpactPathWayComponent,
   ImpactPathWayStepComponent,
   ImpactPathWayTaskComponent,
   WrapperImpactPathWayComponent,
-  CollapsablePanelComponent,
   ObjectivesBoardComponent,
   WrapperObjectivesComponent,
   ObjectiveComponent,
   ObjectiveContainerComponent,
-  EditableTextareaComponent
 ];
 
 const DIRECTIVES = [
-  ExploitationPlanDirective,
   StepColorDirective
 ];
 
