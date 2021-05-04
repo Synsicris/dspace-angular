@@ -1,17 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { BehaviorSubject, combineLatest, from as observableFrom, Observable, Subscription } from 'rxjs';
-import {
-  concatMap,
-  debounce,
-  debounceTime,
-  distinctUntilChanged,
-  scan,
-  switchMap,
-  take,
-  takeLast,
-  tap
-} from 'rxjs/operators';
+import { concatMap, debounceTime, scan, switchMap, tap } from 'rxjs/operators';
 import { NgbActiveModal, NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { findIndex } from 'lodash';
 import { hasValue, isEmpty, isNotEmpty } from '../../empty.util';
@@ -70,6 +60,12 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   @Input() searchConfiguration: string;
 
   /**
+   * Additional search query
+   * @type {string}
+   */
+  @Input() query = '';
+
+  /**
    * The search scope
    * @type {string}
    */
@@ -87,8 +83,8 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   public paginationOptions: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
     id: 'ssi',
     currentPage: 1,
-    pageSizeOptions: [4, 8, 12, 16, 20],
-    pageSize: 4
+    pageSizeOptions: [3, 6, 12, 16, 20],
+    pageSize: 6
   });
   public selectable = true;
   public selectedTasks: SimpleItem[] = [];
@@ -112,7 +108,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     private searchTaskService: SearchSimpleItemService,
     private typeaheadConfig: NgbTypeaheadConfig,
   ) {
-    // customize default values of typeaheads used by this component tree
+    // customize default values of typeahead used by this component tree
     typeaheadConfig.showHint = true;
     // customize default values of dropdowns used by this component tree
     dropdownConfig.autoClose = false;
@@ -130,7 +126,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
       type: 'authority',
       pageSize: 20,
     });
-
+    this.buildSearchQuery([]);
     this.entityTypeFilterBox = {
       filterName: 'type',
       filterType: FilterBoxType.filter,
@@ -183,50 +179,6 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Update the pagination object and dispatch a new search
-   * @param event
-   */
-  onPaginationChange(): void {
-/*    const pagination$ = this.paginationService.getCurrentPagination(this.paginationOptions.id, this.paginationOptions);
-    const sort$ = this.paginationService.getCurrentSort(this.paginationOptions.id, this.sortOptions);
-    this.pageSub = combineLatest([pagination$, sort$]).pipe(
-      distinctUntilChanged(),
-    ).subscribe(([paginationOptions, sortOptions]: [PaginationComponentOptions, SortOptions]) => {
-      console.log('onPaginationChange',paginationOptions, sortOptions);
-      this.search(paginationOptions, sortOptions);
-    });*/
-  }
-
-/*  /!**
-   * Update the current page and dispatch a new search
-   * @param page
-   *!/
-  onPageChange() {
-    this.paginationService.getCurrentPagination(this.paginationOptions.id, this.paginationOptions).pipe(
-      distinctUntilChanged(),
-      tap((pagination) => console.log('onPaginationChange',pagination)),
-      take(1)
-    ).subscribe((paginationOptions: PaginationComponentOptions) => {
-
-      this.search(paginationOptions, this.sortOptions);
-    });
-  }
-
-  /!**
-   * Update the current page size and dispatch a new search
-   * @param pageSize
-   *!/
-  onPageSizeChange() {
-    this.paginationService.getCurrentSort(this.paginationOptions.id, this.sortOptions).pipe(
-      distinctUntilChanged(),
-      tap((pagination) => console.log('onPaginationChange',pagination)),
-      take(1)
-    ).subscribe((sortOptions: SortOptions) => {
-      this.search(this.paginationOptions, sortOptions);
-    });
-  }*/
-
-  /**
    * Update the filter list on remove and dispatch a new search
    * @param removedFilter
    */
@@ -269,7 +221,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   }
 
   private buildSearchQuery(filters: SearchFilter[]) {
-    const queries = [];
+    const queries = isNotEmpty(this.query) ? [this.query] : [];
     filters.forEach((filter) => {
       if (isNotEmpty(filter) && isNotEmpty(filter.values)) {
         queries.push(filter.key + ':(' + filter.values.join(' OR ') + ')');
