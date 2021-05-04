@@ -1735,6 +1735,23 @@
 
   "context-menu.actions.dso-page-edit.ITEM.btn": "Administer",
 
+  "context-menu.actions.edit-item-relationships.btn.researchoutputs": "Manage Research Outputs",
+
+  "context-menu.actions.edit-item-relationships.btn.projects": "Manage Projects",
+
+  "context-menu.actions.edit-item-relationships.btn.organizations": "Manage Organizations",
+
+  "context-menu.actions.edit-item-relationships.btn.rppublications": "Manage Rppublications",
+
+  "context-menu.actions.edit-item-relationships.btn.publications": "Manage Publications",
+
+  "context-menu.actions.edit-item-relationships.btn.rpprojects": "Manage Rpprojects",
+
+  "context-menu.actions.edit-item-relationships.btn.people": "Manage People",
+
+  "context-menu.actions.edit-item-relationships.btn.projects": "Manage Projects",
+
+
 
   "datafile.listelement.badge": "Data file",
 
@@ -5281,6 +5298,20 @@
 
 
   "relationships.isContributorOf": "Contributors",
+
+  "relationships.select": "Select",
+
+  "relationships.hide": "Hide",
+
+  "relationships.unselect": "Unselect",
+
+  "relationships.unhide": "Unhide",
+
+  "relationships.title" : "Relationships",
+
+  "relationships.no.relationships.found" : "No relationships",
+
+  "relationships.no.data.found" : "No data found",
 
 
   "results_plan.breadcrumbs": "Results plan",

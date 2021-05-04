@@ -199,6 +199,7 @@ import { OpenaireSuggestionSource } from './openaire/reciter-suggestions/models/
 import { StatisticsCategory } from './statistics/models/statistics-category.model';
 import { RootDataService } from './data/root-data.service';
 import { SearchConfig } from '../shared/search/search-filters/search-config.model';
+import { EditItemRelationsGuard } from '../edit-item-relationships/guards/edit-item-relationships.guard';
 import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
 import { ObjectiveService } from './impact-pathway/objective.service';
 import { ImpactPathwayLinksService } from './impact-pathway/impact-pathway-links.service';
@@ -353,6 +354,7 @@ const PROVIDERS = [
   OrcidHistoryService,
   EditItemDataService,
   EditItemModeDataService,
+  EditItemRelationsGuard,
   ResearcherProfileService,
   SearchcomponentService,
   ItemAuthorityRelationService,
