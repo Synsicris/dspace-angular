@@ -8135,7 +8135,7 @@
   "submission.sections.submit.progressbar.describe.conditions": "Rahmenbedingung",
 
   // "submission.sections.submit.progressbar.describe.conditions.info": "Please reflect here on external conditions and requirements that are relevant to the project. Through these considerations, you show that you are aware of relevant conditions and requirements and that you deal with them adequately in the project.",
-  "submission.sections.submit.progressbar.describe.conditions.info": "<p>Hier können Sie Rahmenbedingungen erfassen, die den Erfolg des Projektes oder die Entwicklung von Wirkungen des Projektes beeinflussen (z. B. Rechtsrahmen, Konsumverhalten oder Produktionsweisen). Mit den Einträgen an dieser Stelle verdeutlichen Sie, dass Sie die maßgeblichen Rahmenbedingungen kennen und damit im Projekt angemessen umgehen.</p> <br><p><i>Beschreiben Sie hier eine Rahmenbedingung, die für das Projekt maßgeblich ist, und reflektieren Sie, wie damit im Projekt umgegangen wird. Legen Sie für jede Rahmenbedingung einen eigenen Eintrag an.</i></p><br><p><i>Hinweis: Aktualisieren Sie die Angaben im Projektverlauf, falls sich die genannten Rahmenbedingungen ändern. Legen Sie weitere Einträge an, wenn neue Rahmenbedingungen bekannt werden.</i></p>",
+  "submission.sections.submit.progressbar.describe.conditions.info": "<p>Hier können Sie Rahmenbedingungen erfassen, die den Erfolg des Projektes oder die Entwicklung von Wirkungen des Projektes beeinflussen (z. B. Rechtsrahmen, Konsumverhalten oder Produktionsweisen). Mit den Einträgen an dieser Stelle verdeutlichen Sie, dass Sie die maßgeblichen Rahmenbedingungen kennen und damit im Projekt angemessen umgehen.</p><p><i>Beschreiben Sie hier eine Rahmenbedingung, die für das Projekt maßgeblich ist, und reflektieren Sie, wie damit im Projekt umgegangen wird. Legen Sie für jede Rahmenbedingung einen eigenen Eintrag an.</i></p><p><i>Hinweis: Aktualisieren Sie die Angaben im Projektverlauf, falls sich die genannten Rahmenbedingungen ändern. Legen Sie weitere Einträge an, wenn neue Rahmenbedingungen bekannt werden.</i></p>",
 
   // "submission.sections.submit.progressbar.describe.contribution_fundingprogramme": "Contribution to funding programme objectives",
   "submission.sections.submit.progressbar.describe.contribution_fundingprogramme": "Beitrag zu förderpolitischen Zielen",
@@ -8225,10 +8225,10 @@
   "submission.sections.submit.progressbar.describe.entity_type_selection": "Auswahl des Entitätstypen",
 
   // "submission.sections.submit.progressbar.describe.ethics": "Ethical reflection",
-  "submission.sections.submit.progressbar.describe.ethics": "Kernaussage zu den relevanten ethischen Aspekten",
+  "submission.sections.submit.progressbar.describe.ethics": "Zusammenfassendes Fazit zur Reflexion der ethischen Aspekte",
 
   // "submission.sections.submit.progressbar.describe.ethics.info": "Consider that ethical questions arise in many areas of research. Apart from obvious examples from the medical field, many problems in environmental and agricultural sciences, social sciences, psychology or security research etc. touch on ethical guidelines. Please reflect below to what extent the R&D process or the results of the project touch on ethical aspects. Please use the text fields to explain how you deal with ethical principles and/or the applicable legal regulations. <br />The attached document contains information about what you should pay attention to in detail [Link].",
-  "submission.sections.submit.progressbar.describe.ethics.info": "<i>Formulieren Sie zum Abschluss bitte eine Kernaussage zur ethischen Reflexion. Diese wird in Übersichten angezeigt. Wenn ethische Aspekte eine Relevanz für die Durchführung und Wirkung des Projektes haben, übernehmen Sie den Eintrag bitte in die 1. Säule (Hintergrund) des Impact Pathway.</i>",
+  "submission.sections.submit.progressbar.describe.ethics.info": "<p><i>Formulieren Sie zum Abschluss bitte ein zusammenfassendes Fazit zur ethischen Reflexion. Dieses wird in Übersichten angezeigt. </br>Wenn ethische Aspekte eine Relevanz für die Durchführung und Wirkung des Projektes haben, übernehmen Sie den Eintrag bitte in die 1. Säule (Hintergrund) des Impact Pathway.</i></p>",
 
   // "submission.sections.submit.progressbar.describe.ethics_process": "Reflection on compliance with ethical principles in the R&D process",
   "submission.sections.submit.progressbar.describe.ethics_process": "Reflexion zu Einhaltung ethischer Grundsätze im F&E-Prozess",
@@ -8482,14 +8482,14 @@
   "submission.sections.submit.progressbar.describe.projects_overview.info": "Diese Informationen werden aus den dazugehörigen Teilprojekten generiert. Während der Antragstellung stammen die Informationen aus den easy-online Importen der Teilprojekte. Während der Projektlaufzeit werden die Informationen regelmäßig aus profi aktualisiert.",
 
   // "submission.sections.submit.progressbar.describe.publications": "Publications",
-  "submission.sections.submit.progressbar.describe.publications": "Geplante Veröffentlichungen",
+  "submission.sections.submit.progressbar.describe.publications": "Veröffentlichung - Basisdaten",
 
   // "submission.sections.submit.progressbar.describe.plan_publications": "Planned Publications",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.plan_publications": "Geplante Veröffentlichungen",
 
   // "submission.sections.submit.progressbar.describe.publications.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Enter here the information about a planned publication.",
-  "submission.sections.submit.progressbar.describe.publications.info": "<i>Erfassen Sie hier bitte im Projekt geplante Veröffentlichungen.</i><p><i>Hinweis: Diese Angaben sind ausschließlich in der Projektplanung erforderlich. Bitte nennen Sie in der Bezeichnung Anzahl, Art und Thema, z.B. Eintrag 1: 2-3 wissenschaftliche Artikel zu Thema x, Eintrag 2: 1 Praxisbeitrag zum Thema y.</i>",
+  "submission.sections.submit.progressbar.describe.publications.info": "<i>Erfassen Sie hier bitte die im Projekt erstellten Veröffentlichungen wie z. B. Text-, Bild-, Tondokumente oder Webseiten.<p>Hinweis: Wenn möglich, verwenden Sie den Import aus Onlinedatenbanken über einen Identifier oder über den Upload eines Dokuments. Damit werden viele Angaben automatisch in das Eingabeformular übertragen.</br>Hinweis: Über <b>Mehr Hinzufügen</b> können Sie Dokumente hochladen.</i></p>",
 
   // "submission.sections.submit.progressbar.describe.publications_result": "Meta(Data) of the publication",
   "submission.sections.submit.progressbar.describe.publications_result": "Veröffentlichung - Basisdaten",
@@ -8516,22 +8516,22 @@
   "submission.sections.submit.progressbar.describe.spinoffs": "Ausgründung (inkl. Verein)",
 
   // "submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/ person by founding a company or association.",
-  "submission.sections.submit.progressbar.describe.spinoffs.info": "<i>Erfassen Sie hier bitte, wenn Projektergebnisse von einer beteiligten Organisation oder Person durch Gründung eines Unternehmens oder Vereins verwertet werden sollen.</br>Hinweis: Mit den Angaben verdeutlichen Sie die Praxisorientierung des Projektes.</i>",
+  "submission.sections.submit.progressbar.describe.spinoffs.info": "<i>Erfassen Sie hier bitte die geplante Gründung eines Unternehmens oder Vereins zur Verwertung von Projektergebnissen. Sobald die Gründung erfolgt ist, ergänzen Sie bitte die Angaben zur Anmeldung.</br>Hinweis: Mit diesen Angaben verdeutlichen Sie die Praxisorientierung des Projektes.</i>",
 
   // "submission.sections.submit.progressbar.describe.spinoffs_result": "Details of spin-off carried out",
-  "submission.sections.submit.progressbar.describe.spinoffs_result": "Angaben zur Registereintragung",
+  "submission.sections.submit.progressbar.describe.spinoffs_result": "Angaben zur Anmeldung im Handels-, Genossenschafts- oder Vereinsregister",
 
   // "submission.sections.submit.progressbar.describe.spinoffs_result_funding": "Details of spin-off funding",
   "submission.sections.submit.progressbar.describe.spinoffs_result_funding": "Angaben zur Förderung",
 
   // "submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "Please document any subsidies received for the spin-off here.",
-  "submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "<i>Wenn die Ausgründung Fördermittel erhalten hat, ergänzen Sie bitte nachfolgende Angaben.</i>",
+  "submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "<i>Wenn die Ausgründung Fördermittel erhalten hat, machen Sie bitte die nachfolgende Angaben.</i>",
 
   // "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development": "Survey on success and economic development",
-  "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development": "Angaben zur wirtschaftlichen Entwicklung und Erfolg",
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development": "Angaben zu wirtschaftlicher Entwicklung und Erfolg",
 
   // "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development.info": "This section can be used for surveys.",
-  "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development.info": "<i>Bitte dokumentieren Sie hier die wirtschaftliche Entwicklung der Ausgründung im Zeitverlauf und die Erfolge, sofern Ihnen Daten dazu vorliegen.</br>Hinweis: Mit diesen Angaben können Sie dem Fördermittelgeber die erfolgreiche Verwertung der Projektergebnisse belegen.</i>",
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development.info": "<p><i>Bitte dokumentieren Sie hier, sofern Ihnen Daten dazu vorliegen, die wirtschaftliche Entwicklung der Ausgründung im Zeitverlauf und stellen Sie den Nutzen der Ausgründung dar. </br>Hinweis: Mit diesen Angaben können Sie dem Fördermittelgeber die erfolgreiche Verwertung der Projektergebnisse belegen. </i></p>",
 
   // "submission.sections.submit.progressbar.describe.stateofart": "State of knowledge / problem definition",
   // TODO Source message changed - Revise the translation
@@ -8687,7 +8687,7 @@
   "submission.sections.submit.progressbar.describe.targetgroups_classification.info": "<i>Bitte nehmen Sie eine Einordnung der Akteursgruppe vor.</i></br>Ihre Angaben charakterisieren die Akteursgruppe genauer und ermöglichen eine projektübergreifende Auswertung (z.B. für Programmevaluationen).",
 
   // "submission.sections.submit.progressbar.describe.gender": "Gender reflection",
-  "submission.sections.submit.progressbar.describe.gender": "Kernaussage zur Reflexion der Geschlechteraspekte im Rahmen des Projektes",
+  "submission.sections.submit.progressbar.describe.gender": "Zusammenfassendes Fazit zur Reflexion der Geschlechteraspekte",
 
   // "submission.sections.submit.progressbar.detect-duplicate": "Potential duplicates",
   "submission.sections.submit.progressbar.detect-duplicate": "Mögliche Dubletten",
@@ -9295,10 +9295,10 @@
   "vocabulary-treeview.tree.description.coar": "<i>Wählen Sie den passenden Typ für die Veröffentlichung aus, zum Beispiel eine Dissertation oder einen Artikel/Aufsatz. Die folgenden Eingabefelder richten sich nach dem ausgewählten Publikationstyp.</i>",
 
   // "submission.sections.submit.progressbar.describe.spinoffs_result.info": "missing",
-  "submission.sections.submit.progressbar.describe.spinoffs_result.info": "<p><i>Ergänzen Sie hier bitte die Art der Ausgründung und Informationen zur offiziellen Eintragung ins Registerportal.</p><p>Hinweis: Unterscheiden Sie bei der Ausgründung, ob konkrete Forschungsergebnisse oder neu entwickelte Methoden in die Gründung einfließen (<b>Verwertungs-Spinoff</b>) oder ob eher besondere Fähigkeiten und Kenntnisse, die einer der Gründer sich in der Wissenschaft angeeignet hat, unverzichtbar für die Ausgründung sind (<b>Kompetenz-Spinoff</b>).</i></p>",
+  "submission.sections.submit.progressbar.describe.spinoffs_result.info": "<p><i>Beschreiben Sie hier bitte die Art der Ausgründung und Informationen zur offiziellen Eintragung ins Registerportal.</p><p>Hinweis: Unterscheiden Sie bei der Ausgründung, ob praxisorientierte Forschungsergebnisse oder neu entwickelte Methoden in die Gründung einfließen <b>(Transfer-Spin-off)</b> oder ob eher besondere Fähigkeiten und Kenntnisse, die sich einer der Gründer angeeignet hat, unverzichtbar für die Ausgründung sind <b>(Kompetenz-Spin-off)</b>.</p>",
 
   // "submission.sections.submit.progressbar.describe.plan_publications.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Enter here the information about a planned publication.",
-  "submission.sections.submit.progressbar.describe.plan_publications.info": "<i>Erfassen Sie hier bitte im Projekt geplante Veröffentlichungen.</i><p><i>Hinweis: Diese Angaben sind ausschließlich in der Projektplanung erforderlich. Bitte nennen Sie in der Bezeichnung Anzahl, Art und Thema, z.B. Eintrag 1: 2-3 wissenschaftliche Artikel zu Thema x, Eintrag 2: 1 Praxisbeitrag zum Thema y.</i>",
+  "submission.sections.submit.progressbar.describe.plan_publications.info": "<p><i>Erfassen Sie hier bitte im Projekt geplante Veröffentlichungen.</p><p>Bitte nennen Sie in der Bezeichnung Anzahl, Art und Thema.</br>Beispiel 1: „2-3 wissenschaftliche Artikel zum Thema x“ </br>Beispiel 2: „1 Praxisbeitrag zum Thema y“</i></p>",
 
   // "submission.sections.submit.progressbar.describe.publications_result_more": "missing",
   "submission.sections.submit.progressbar.describe.publications_result_more": "Klassifizierung und Verknüpfung zu anderen Daten",
@@ -9322,16 +9322,16 @@
   "submission.sections.submit.progressbar.describe.gender_reflection": "Reflexion der Geschlechtergerechtigkeit",
 
   // "submission.sections.submit.progressbar.describe.gender_reflection.info": "missing",
-  "submission.sections.submit.progressbar.describe.gender_reflection.info": "Dieser Bereich dient dazu, Aspekte der Geschlechtergerechtigkeit für das Projekt zu reflektieren.</br>Forschung und Entwicklung sind eine wichtige Grundlage für eine zukunftsfähige Entwicklung unserer Gesellschaft, in die alle sozialen Gruppen unabhängig von Geschlecht, Herkunft und Religion gleichermaßen eingebunden sein sollen. In der Förderung von Forschung und Entwicklung sind daher Fragen der sozialen Gerechtigkeit und damit auch der Geschlechtergleichstellung zentral. Dies zeigt sich z. B. in Forschungsorientierten Gleichstellungsrichtlinien der Deutschen Forschungsgemeinschaft (DFG).<p><i>Bitte nehmen Sie dazu Stellung, wo das Projekt ggf. Geschlechteraspekte berücksichtigt. Wenn Sie \"ja\" wählen, fügen Sie bitte eine kurze Beschreibung hinzu, wenn Sie „nein“ wählen, begründen Sie kurz.</i></p>",
+  "submission.sections.submit.progressbar.describe.gender_reflection.info": "<p>Dieser Bereich dient dazu, Aspekte der Geschlechtergerechtigkeit für das Projekt zu reflektieren.</p><p>In die zukunftsfähige Entwicklung unserer Gesellschaft sollen alle sozialen Gruppen unabhängig von Geschlecht, Herkunft und Religion gleichermaßen eingebunden sein. Forschungs- und Innovationsförderung spielen hierbei eine wichtige Rolle.</br>In der öffentlich geförderten Forschung und Entwicklung sind daher Fragen der sozialen Gerechtigkeit und damit auch der Geschlechtergleichstellung zu berücksichtigen. Dies zeigt sich z. B. in den „Forschungsorientierten Gleichstellungsrichtlinien“ der Deutschen Forschungsgemeinschaft (DFG).</p><p><i>Bitte geben Sie einen Einblick, inwieweit das Projekt Geschlechteraspekte berücksichtigt. Ergänzen Sie Ihr „ja“ oder „nein“ bei den folgenden Fragen bitte jeweils mit einer kurzen Begründung.</i></p>",
 
   // "submission.sections.submit.progressbar.describe.gender.info": "missing",
-  "submission.sections.submit.progressbar.describe.gender.info": "<i>Zum Abschluss formulieren Sie bitte eine Kernaussage zur erfolgten Reflexion der Geschlechteraspekte im Rahmen des Projektes. Bitte formulieren Sie eine eindeutige Bezeichnung, weil diese in Übersichten angezeigt wird.</br>Hinweis: Wenn die Geschlechteraspekte eine Relevanz für die Durchführung und Wirkung des Projektes haben, übernehmen Sie den Eintrag bitte in die 1. Säule (Hintergrund) des Impact Pathway.</i>",
+  "submission.sections.submit.progressbar.describe.gender.info": "<p><i>Zum Abschluss formulieren Sie bitte ein zusammenfassendes Fazit zur erfolgten Reflexion der Geschlechteraspekte im Rahmen des Projektes.</i></br>Diese wird in Übersichten angezeigt.</p><i>Hinweis: Wenn die Geschlechteraspekte eine Relevanz für die Durchführung und Wirkung des Projektes haben, übernehmen Sie den Eintrag bitte in die 1. Säule (Hintergrund) des Impact Pathway.</i>",
 
   // "submission.sections.submit.progressbar.describe.ethics_reflection": "Ethical reflection",
   "submission.sections.submit.progressbar.describe.ethics_reflection": "Ethische Reflexion",
 
   // "submission.sections.submit.progressbar.describe.ethics_reflection.info": "Consider that ethical questions arise in many areas of research. Apart from obvious examples from the medical field, many problems in environmental and agricultural sciences, social sciences, psychology or security research etc. touch on ethical guidelines. Please reflect below to what extent the R&D process or the results of the project touch on ethical aspects. Please use the text fields to explain how you deal with ethical principles and/or the applicable legal regulations. <br>The attached document contains information about what you should pay attention to in detail [Link].",
-  "submission.sections.submit.progressbar.describe.ethics_reflection.info": "Dieser Bereich dient der Reflexion ethischer Aspekte der Forschungs- und Entwicklungsprozesse des Projektes als auch der Verwendung der Projektergebnisse. Damit kann die gesellschaftliche Relevanz der Forschung erhöht werden. Eine Anwendung von Ergebnissen wird gefördert. Forschung zeigt damit ihre Verantwortung für die Einhaltung ethischer Standards.<p><i>Bitte reflektieren Sie anhand der folgenden Fragen, welche ethischen Aspekte für das Projekt relevant sind. Wählen Sie anschließend die relevanten ethischen Aspekte aus und beschreiben die Maßnahmen im Projekt, um damit angemessen umzugehen.</i></p>",
+  "submission.sections.submit.progressbar.describe.ethics_reflection.info": "<p>Dieser Bereich dient der Reflexion ethischer Aspekte sowohl der Forschungs- und Entwicklungsprozesse des Projektes als auch der Anwendung der Projektergebnisse. Damit kann die gesellschaftliche Relevanz der Forschung erhöht werden. Eine Anwendung von Ergebnissen wird gefördert. Die Forschung zeigt damit ihre Verantwortung für die Einhaltung ethischer Standards.</p><p><i>Bitte reflektieren Sie anhand der folgenden Fragen, welche ethischen Aspekte für das Projekt relevant sind.</br>Wählen Sie anschließend die relevanten ethischen Aspekte aus. Beschreiben Sie die Maßnahmen, die Sie im Projekt ergriffen haben, um mit den relevanten ethischen Aspekten angemessen umzugehen.</p><p>Hinweis: Forschung an menschlichen embryonalen Stammzellen, menschlichen Zellen oder Geweben erfordert zwingend gesetzlich geregelte Ethikbewertungen. Sie wird daher hier nicht berücksichtigt. </i></p>",
 
   // "applications.listelement.badge": "Application of a solution / change / innovation",
   "applications.listelement.badge": "Anwendung einer Lösung / Veränderung / Innovation",
@@ -9427,12 +9427,24 @@
   "tree.description.nace": "Auswahl Wirtschaftszweig",
 
   // "vocabulary-treeview.tree.description.nace": "missing",
-  "vocabulary-treeview.tree.description.nace": "<i>Wählen Sie den Wirtschaftszweig bitte so spezifisch wie möglich.</br>Über die Pfeile lassen sich Listen aufklappen, in denen sich die Wirtschaftszeige auf vier Ebenen auswählen lassen. Alternativ können Sie durch Eingabe der ersten Buchstaben eines gesuchten Begriffes im Textfeld die Auswahl eingrenzen.</i></br>Die Liste umfasst die Wirtschaftszweige gemäß der statistischen Systematik der Europäischen Gemeinschaft (NACE).",
+  "vocabulary-treeview.tree.description.nace": "<i>Wählen Sie den Wirtschaftszweig bitte so spezifisch wie möglich.</br>Über die Pfeile lassen sich Listen aufklappen, in denen sich die Wirtschaftszeige auf vier Ebenen auswählen lassen. Alternativ können Sie durch Eingabe der ersten Buchstaben eines gesuchten Begriffes im Textfeld die Auswahl eingrenzen.</i></br>Die Liste umfasst die Wirtschaftszweige gemäß der Statistischen Systematik der Europäischen Gemeinschaft (NACE).",
 
   // "submission.sections.submit.progressbar.describe.research_results.info": "missing",
   "submission.sections.submit.progressbar.describe.research_results.info": "Dieser Bereich dient dazu, die wichtigsten Ergebnisse des Projektes komprimiert darzustellen.<p><i>Legen Sie im Projektverlauf für jedes Ergebnis, das Sie im Impact Pathway darstellen möchten, einen eigenen Eintrag an. (Es ist empfehlenswert, die Darstellung der Ergebnisse auf wenige Einträge (3-5) zu fokussieren.)</br>Hinweis: Die ausführliche Darstellung von Ergebnissen in Form von Veröffentlichungen oder Berichten für die fördernde Einrichtung wird im Bereich <b>Veröffentlichungen</b> erfasst.</i></p>",
 
   // "submission.sections.submit.progressbar.describe.others.info": "missing",
-  "submission.sections.submit.progressbar.describe.others.info": "<i>Verwenden Sie <b>Sonstiges</b> bitte nur, wenn Sie im Impact Pathway eine wichtige Information eintragen möchten, die zu keinem der anderen Dokumentationsbereiche passt.</i>"
+  "submission.sections.submit.progressbar.describe.others.info": "<i>Verwenden Sie <b>Sonstiges</b> bitte nur, wenn Sie im Impact Pathway eine wichtige Information eintragen möchten, die zu keinem der anderen Dokumentationsbereiche passt.</i>",
+
+  // "submission.sections.submit.progressbar.describe.publications_reference": "missing",
+  "submission.sections.submit.progressbar.describe.publications_reference": "Klassifizierung und Verknüpfung zu anderen Daten",
+
+  // "submission.sections.submit.progressbar.describe.publications_reference.info": "missing",
+  "submission.sections.submit.progressbar.describe.publications_reference.info": "<i>Ergänzen Sie bitte nachfolgende Angaben.</i>",
+
+  // "submission.sections.submit.progressbar.describe.publications_references": "missing",
+  "submission.sections.submit.progressbar.describe.publications_references": "Klassifizierung und Verknüpfung zu anderen Daten",
+
+  // "submission.sections.submit.progressbar.describe.publications_references.info": "missing",
+  "submission.sections.submit.progressbar.describe.publications_references.info": "<i>Ergänzen Sie bitte nachfolgende Angaben.</i>"
 
 }

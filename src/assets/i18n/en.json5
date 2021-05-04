@@ -7162,13 +7162,13 @@
   "submission.sections.submit.progressbar.describe.projects_overview.info": "This information is generated from the corresponding subprojects. During the proposal preparation phase, the information comes from the easy-online imports of the subprojects. During the project phase, the information is regularly updated from profi.",
 
 
-  "submission.sections.submit.progressbar.describe.publications": "Publications",
+  "submission.sections.submit.progressbar.describe.publications": "Meta(Data) of the publication",
 
 
   "submission.sections.submit.progressbar.describe.plan_publications": "Planned Publications",
 
 
-  "submission.sections.submit.progressbar.describe.publications.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Enter here the information about a planned publication.",
+  "submission.sections.submit.progressbar.describe.publications.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Use the import function via an identifier. If no identifier is available or information from the import is incomplete, please enter the metadata. Precise metadata make your publication easier to find for interested parties.",
 
 
   "submission.sections.submit.progressbar.describe.publications_result": "Meta(Data) of the publication",
