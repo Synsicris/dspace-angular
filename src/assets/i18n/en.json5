@@ -2012,9 +2012,36 @@
   "error.validation.filerequired": "The file upload is mandatory",
 
 
+
+  "exploitation-plan.info.text": "Info text for the exploitation Plan",
+
   "exploitation-plan.page.title": "Exploitation Plan",
 
   "exploitation-plan.breadcrumbs": "Exploitation Plan",
+
+  "exploitation-plan.step_type_1.info.text": "Info text for section 1",
+
+  "exploitation-plan.step_type_2.info.text": "Info text for section 2",
+
+  "exploitation-plan.step_type_3.info.text": "Info text for section 3",
+
+  "exploitation-plan.step_type_4.info.text": "Info text for section 4",
+
+  "exploitation-plan.step_type_1.title": "Intellectual property rights",
+
+  "exploitation-plan.step_type_2.title": "Economic prospects",
+
+  "exploitation-plan.step_type_3.title": "Scientific and technical prospects",
+
+  "exploitation-plan.step_type_4.title": "Connectivity",
+
+  "exploitation-plan.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
+
+  "exploitation-plan.task.create.error": "There was an issue when creating the new item, please try again later.",
+
+  "exploitation-plan.task.create.success": "New item has been created successfully.",
+
+
 
   "explore.browse-section.title": "Browse",
 
