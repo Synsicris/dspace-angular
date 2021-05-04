@@ -18,7 +18,7 @@ import { ThemedCreateProfileComponent } from './create-profile/themed-create-pro
         path: ':token',
         component: ThemedCreateProfileComponent,
         resolve: {registration: RegistrationResolver},
-        canActivate: [EndUserAgreementCookieGuard]
+        canActivate: []
       }
     ])
   ],
