@@ -1,155 +1,169 @@
-<div *ngIf="(workpackages | async)?.length > 0" class="container-fluid p-0" fxLayout="column">
+<div *ngIf="(workpackages | async)?.length > 0" class="container-fluid" fxLayout="column">
   <div class="sidenav-container" fxFlex fxLayout="row">
     <!-- steps -->
-    <div class="sidenav chart-column names" [ngStyle]="sidebarNamesStyle" fxLayout="column">
-      <div class="sidenav-header text-center">{{'working-plan.chart.column.steps' | translate}}</div>
-      <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarNamesStyle"
-        mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'names')">
-        <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
-          <button class="btn btn-lg btn-link p-0 text-primary"
-                  title="{{'working-plan.chart.move.down.btn' | translate}}"
-                  [disabled]="canMoveDown(node, node.level, node.index) || (isMoving() | async)"
-                  (click)="moveWorkpackage(node, node.level, node.index, (node.index + 1)); $event.stopPropagation()">
-            <span><i class='fas fa-arrow-down'></i></span>
-          </button>
-          <button class="btn btn-lg btn-link p-0 text-primary"
-                  title="{{'working-plan.chart.move.up.btn' | translate}}"
-                  [disabled]="canMoveUp(node, node.level, node.index) || (isMoving() | async)"
-                  (click)="moveWorkpackage(node, node.level, node.index, (node.index - 1)); $event.stopPropagation()">
-            <span><i class='fas fa-arrow-up'></i></span>
-          </button>
-          <button mat-icon-button disabled></button>
-          <mat-form-field fxFlex floatLabel="never">
-            <input matInput
-                   placeholder="Step Name"
-                   name="node"
-                   class="text-truncate"
-                   [(ngModel)]="node.name"
-                   (change)="updateStepName(node, $event?.target?.value)"
-                   [ngbTooltip]="node.name"
-                   container="body"
-                   placement="right"
-                   [openDelay]="1000"
-                   required>
-          </mat-form-field>
-          <button mat-icon-button *ngIf="node.level === 0"
-                  class="text-success"
-                  title="{{'working-plan.chart.button.add' | translate}}"
-                  (click)="addChildStep(node)">
-            <mat-icon>add</mat-icon>
-          </button>
-          <button class="btn btn-lg btn-link p-0 text-danger mr-1"
-                  title="{{'working-plan.chart.button.remove' | translate}}"
-                  [class.ml-1]="node.level !== 0"
-                  [disabled]="(isProcessingWorkpackageRemove(node) | async)"
-                  (click)="deleteStep(node); $event.stopPropagation()">
-            <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
-            <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
-          </button>
+    <div class="sidenav chart-column names" [ngStyle]="sidebarNamesStyle" fxLayout="column"
+         mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'names')">
+      <div class="sidenav-header">
+        <div class="float-left">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-secondary btn-xs" id="wpDisplay" ngbDropdownToggle>Display</button>
+            <div ngbDropdownMenu aria-labelledby="wpDisplay">
+              <button class="btn-sm" ngbDropdownItem>Option1</button>
+              <button class="btn-sm" ngbDropdownItem>Option2</button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline-secondary btn-xs">Expand all</button>
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-secondary btn-xs" id="wpFilter" ngbDropdownToggle>Filter</button>
+            <div ngbDropdownMenu aria-labelledby="wpFilter">
+              <button class="btn-sm" ngbDropdownItem>Option1</button>
+              <button class="btn-sm" ngbDropdownItem>Option2</button>
+            </div>
+          </div>
+        </div>
+        <div class="float-right">
+          <button id="collapsable-column-show-button" type="button" class="btn btn-primary btn-xs mr-2"
+                  onclick="javascript:document.getElementById('collapsable-column').style.display = ((document.getElementById('collapsable-column').style.display == 'flex')?'none':'flex');"><i class="fas fa-angle-double-left"></i></button>
+        </div>
+      </div>
+      <mat-tree class="tree pt-0" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarNamesStyle">
+        <mat-tree-node *matTreeNodeDef="let node" class="tree-node-customization" matTreeNodeToggle matTreeNodePadding [matTreeNodePaddingIndent]="18">
+          <div>
+            <button mat-icon-button class="btn btn-xs btn-link p-0 text-primary" title="Drag & Drop">
+              <i class='fas fa-grip-vertical'></i>
+            </button>
+          </div>
+          <div class="mat-form-field auto-width mt-1">
+            <p class="block-ellipsis">{{node.name}}</p>
+            <br>
+            <span class="text-success font-weight-bold pt-2">Workpackage</span>
+          </div>
+          <div class="mr-05">
+            <button mat-icon-button *ngIf="node.level === 0"
+                    class="btn btn-xs btn-link p-0 text-success"
+                    title="{{'working-plan.chart.button.add' | translate}}"
+                    (click)="addChildStep(node)">
+              <mat-icon>add</mat-icon>
+            </button>
+            <br *ngIf="node.level === 0">
+            <button mat-icon-button *ngIf="node.level === 0"
+                    class="btn btn-xs btn-link p-0 text-primary"
+                    title="Edit">
+              <i class="fas fa-edit"></i>
+            </button>
+            <br *ngIf="node.level === 0">
+            <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger"
+                    title="{{'working-plan.chart.button.remove' | translate}}"
+                    [class.ml-1]="node.level !== 0"
+                    [disabled]="(isProcessingWorkpackageRemove(node) | async)"
+                    (click)="deleteStep(node); $event.stopPropagation()">
+              <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
+              <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
+            </button>
+          </div>
         </mat-tree-node>
-        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
-          <button *ngIf="node.level !== 0" mat-icon-button disabled></button>
-          <button *ngIf="node.level == 0"
-                  class="btn btn-lg btn-link p-0 text-primary"
-                  title="{{'working-plan.chart.move.down.btn' | translate}}"
-                  [disabled]="canMoveDown(node, node.level, node.index) || (isMoving() | async)"
-                  (click)="moveWorkpackage(node, node.level, node.index, (node.index + 1)); $event.stopPropagation()">
-            <span><i class='fas fa-arrow-down'></i></span>
-          </button>
-          <button *ngIf="node.level == 0"
-                  class="btn btn-lg btn-link p-0 text-primary"
-                  title="{{'working-plan.chart.move.up.btn' | translate}}"
-                  [disabled]="canMoveUp(node, node.level, node.index) || (isMoving() | async)"
-                  (click)="moveWorkpackage(node, node.level, node.index, (node.index - 1)); $event.stopPropagation()">
-            <span><i class='fas fa-arrow-up'></i></span>
-          </button>
-          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name"
-                  title="{{treeControl.isExpanded(node) ?
-                           ('working-plan.chart.toggle.collapse.btn' | translate) :
-                           ('working-plan.chart.toggle.expand.btn' | translate)}}">
-            <mat-icon class="mat-icon-rtl-mirror">
-              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-            </mat-icon>
-          </button>
-          <mat-form-field fxFlex floatLabel="never">
-            <input matInput
-                   placeholder="Step Name"
-                   name="node"
-                   class="text-truncate"
-                   [(ngModel)]="node.name"
-                   (change)="updateStepName(node, $event?.target?.value)"
-                   [ngbTooltip]="node.name"
-                   container="body"
-                   placement="right"
-                   [openDelay]="1000"
-                   required>
-          </mat-form-field>
-          <button mat-icon-button (click)="addChildStep(node)" class="text-success" *ngIf="node.level < 3" title="{{'working-plan.chart.button.add' | translate}}">
-            <mat-icon>add</mat-icon>
-          </button>
-          <button class="btn btn-lg btn-link p-0 text-danger mr-1"
-                  title="{{'working-plan.chart.button.remove' | translate}}"
-                  [class.ml-1]="node.level < 3"
-                  [disabled]="(isProcessingWorkpackageRemove(node) | async)"
-                  (click)="deleteStep(node); $event.stopPropagation()">
-            <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
-            <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
-          </button>
-        </mat-tree-node>
-      </mat-tree>
-    </div>
-    <!-- date pickers -->
-    <div class="sidenav date-pickers" fxLayout="column">
-      <div class="sidenav-header text-center">{{'working-plan.chart.column.dates' | translate}}</div>
-      <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
-        <mat-tree-node *matTreeNodeDef="let node">
-          <mat-form-field class="date-picker" floatLabel="never">
-            <input matInput [matDatepicker]="startDate" [min]="node.level > 0 ? getParentStep(node).dates.start.full : null"
-              [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [value]="node.dates.start.full"
-              (dateChange)="updateDateRange(node, $event.value, node.dates.end.full)">
-            <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
-            <mat-datepicker #startDate></mat-datepicker>
-          </mat-form-field>
-          &nbsp;&nbsp;-&nbsp;&nbsp;
-          <mat-form-field class="date-picker" floatLabel="never">
-            <input matInput [matDatepicker]="endDate" [min]="node.level > 0 ? getParentStep(node).dates.start.full : null"
-              [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [value]="node.dates.end.full"
-              (dateChange)="updateDateRange(node, node.dates.start.full, $event.value)">
-            <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
-            <mat-datepicker #endDate></mat-datepicker>
-          </mat-form-field>
+        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" class="tree-node-customization" matTreeNodePadding [matTreeNodePaddingIndent]="18">
+          <div>
+            <button mat-icon-button class="btn btn-xs btn-link p-0 text-primary" title="Drag & Drop">
+              <i class='fas fa-grip-vertical'></i>
+            </button>
+            <br>
+            <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name" class="btn btn-xs btn-link p-0 text-primary"
+                    title="{{treeControl.isExpanded(node) ?
+                            ('working-plan.chart.toggle.collapse.btn' | translate) :
+                            ('working-plan.chart.toggle.expand.btn' | translate)}}">
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+            </button>
+          </div>
+          <div class="mat-form-field auto-width mt-1">
+            <p class="block-ellipsis font-weight-bold">{{node.name}}</p>
+            <br>
+            <span class="text-success font-weight-bold pt-2">Workpackage</span>
+          </div>
+          <div class="mr-05">
+            <button mat-icon-button *ngIf="node.level < 3"
+                    class="btn btn-xs btn-link p-0 text-success"
+                    title="{{'working-plan.chart.button.add' | translate}}"
+                    (click)="addChildStep(node)">
+              <mat-icon>add</mat-icon>
+            </button>
+            <br *ngIf="node.level < 3">
+            <button mat-icon-button
+                    class="btn btn-xs btn-link p-0 text-primary"
+                    title="Edit">
+              <i class="fas fa-edit"></i>
+            </button>
+            <br>
+            <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger"
+                    title="{{'working-plan.chart.button.remove' | translate}}"
+                    [disabled]="(isProcessingWorkpackageRemove(node) | async)"
+                    (click)="deleteStep(node); $event.stopPropagation()">
+              <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
+              <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
+            </button>
+          </div>
         </mat-tree-node>
       </mat-tree>
     </div>
-    <!-- responsibles -->
-    <div class="sidenav chart-column responsible" [ngStyle]="sidebarResponsibleStyle" fxLayout="column">
-      <div class="sidenav-header text-center">{{'working-plan.chart.column.responsible' | translate}}</div>
-      <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarResponsibleStyle"
-                mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'Responsible')">
-        <mat-tree-node *matTreeNodeDef="let node" class="responsible-field">
-            <ds-authority-typeahead fxFlex floatLabel="never" class="pr-3 pl-3"
-                                    [fieldId]="'responsible'"
-                                    [fieldName]="'responsible'"
-                                    [vocabularyOptions]="responsibleVocabularyOptions"
-                                    [initValue]="node.responsible"
-                                    (change)="updateStepResponsible(node, $event.value)"></ds-authority-typeahead>
-        </mat-tree-node>
-      </mat-tree>
-    </div>
-    <!-- status -->
-    <div class="sidenav chart-column" [ngStyle]="sidebarStatusStyle" fxLayout="column">
-      <div class="sidenav-header text-center">{{'working-plan.chart.column.status' | translate}}</div>
-      <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarStatusStyle"
-                mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'status')">
-        <mat-tree-node *matTreeNodeDef="let node">
-          <mat-form-field fxFlex floatLabel="never" class="pr-3 pl-3">
-            <mat-select class="text-center" (selectionChange)="updateStepStatus(node, $event)" [(value)]="node.status">
-              <mat-select-trigger>
-                <span><i ipwWorkpackageStatusIcon [status]="node?.status"></i> {{getStatusTypeLabel(node?.status)}}</span>
-              </mat-select-trigger>
-              <mat-option *ngFor="let statusType of (getStatusValues() | async)" [value]="statusType.value">{{statusType.display}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+    <!-- dates, responsibles and statuses -->
+    <div id="collapsable-column" class="sidenav chart-column responsible" [ngStyle]="sidebarResponsibleStyle" fxLayout="column"
+         mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'responsible')">
+      <div class="sidenav-header">
+        <div class="float-left">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-secondary btn-xs mr-2 ml-2" id="wpDisplay" ngbDropdownToggle>Change start date</button>
+            <div ngbDropdownMenu aria-labelledby="wpDisplay">
+              <button class="btn-sm" ngbDropdownItem>Option1</button>
+              <button class="btn-sm" ngbDropdownItem>Option2</button>
+            </div>
+          </div>
+        </div>
+        <div class="float-right"></div>
+      </div>
+      <mat-tree class="tree pt-0" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarResponsibleStyle">
+        <mat-tree-node *matTreeNodeDef="let node" class="tree-node-customization">
+          <div class="ml-05 mt-1 font-size-07">
+            <p class="font-weight-bold m-0">Dates</p>
+            <mat-form-field floatLabel="never" appearance="fill" class="p-0">
+              <mat-label>Start</mat-label>
+              <input matInput [matDatepicker]="startDate" [min]="node.level > 0 ? getParentStep(node).dates.start.full : null"
+                [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [value]="node.dates.start.full"
+                (dateChange)="updateDateRange(node, $event.value, node.dates.end.full)">
+              <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+              <mat-datepicker #startDate></mat-datepicker>
+            </mat-form-field>
+            <br>
+            <mat-form-field floatLabel="never" appearance="fill" class="p-0">
+              <mat-label>End</mat-label>
+              <input matInput [matDatepicker]="endDate" [min]="node.level > 0 ? getParentStep(node).dates.start.full : null"
+                [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [value]="node.dates.end.full"
+                (dateChange)="updateDateRange(node, node.dates.start.full, $event.value)">
+              <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+              <mat-datepicker #endDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="ml-05 mt-1 font-size-07">
+            <p class="font-weight-bold m-0">Organizations</p>
+            <ds-authority-typeahead floatLabel="never" class="min-width-large"
+              [fieldId]="'responsible'"
+              [fieldName]="'responsible'"
+              [vocabularyOptions]="responsibleVocabularyOptions"
+              [initValue]="node.responsible"
+              (change)="updateStepResponsible(node, $event.value)"></ds-authority-typeahead>
+          </div>
+          <div class="ml-05 mt-1 font-size-07">
+            <p class="font-weight-bold m-0">Status</p>
+            <mat-form-field appearance="fill" floatLabel="never" class="mr-05 min-width-small">
+              <mat-select class="text-center" (selectionChange)="updateStepStatus(node, $event)" [(value)]="node.status">
+                <mat-select-trigger>
+                  <span><i ipwWorkpackageStatusIcon [status]="node?.status"></i> {{getStatusTypeLabel(node?.status)}}</span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let statusType of (getStatusValues() | async)" [value]="statusType.value">{{statusType.display}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </mat-tree-node>
       </mat-tree>
     </div>
@@ -174,18 +188,20 @@
       <div fxLayout="row">
         <div fxLayout="column" class="flex-fill" *ngFor="let year of datesYear">
           <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center">{{year}}</div>
-          <div fxLayout="row">
+          <div fxLayout="row" class="calendar-head-border">
             <div *ngFor="let date of getDatesMonthByYear(year)" class="calendar-cell-heading w-100">{{formatDate(date)}}</div>
           </div>
         </div>
       </div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
         <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100">
-          <div *ngFor="let date of datesMonth; let i=index;" class="calendar-cell w-100 d-flex flex-wrap" >
-            <div *ngFor="let day of getDaysInMonth(date);"
-                 class="calendar-inner-cell h-100 flex-fill"
-                 [attr.date-filled]="isDateInsidePogressRange(date + '-' + day, node)"
-                 [attr.date-inside]="isDateInsideRange(date + '-' + day, node)"></div>
+          <div *ngFor="let date of datesMonth; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization">
+            <div class="calendar-cell w-100 d-flex flex-wrap calendar-cell-customization">
+              <div *ngFor="let day of getDaysInMonth(date);"
+                  class="calendar-inner-cell h-100 flex-fill"
+                  [attr.date-filled]="isDateInsidePogressRange(date + '-' + day, node)"
+                  [attr.date-inside]="isDateInsideRange(date + '-' + day, node)"></div>
+            </div>
           </div>
         </mat-tree-node>
       </mat-tree>
@@ -195,21 +211,23 @@
       <div fxLayout="row">
         <div fxLayout="column" class="flex-fill" *ngFor="let year of datesYear">
           <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center">{{year}}</div>
-          <div fxLayout="row">
+          <div fxLayout="row" class="calendar-head-border">
             <div *ngFor="let date of getDatesQuarterByYear(year)" class="calendar-cell-heading w-100">{{formatDate(date)}}</div>
           </div>
         </div>
       </div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
         <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100">
-          <div *ngFor="let quarter of datesQuarter; let i=index;" class="calendar-cell w-100 d-flex flex-wrap">
-            <div *ngFor="let month of getMonthInQuarter(quarter);"
-                 class="h-100 d-flex flex-fill flex-wrap"
-                 [attr.date-filled]="false">
-              <div *ngFor="let day of getDaysInMonth(getQaurterYear(quarter) + '-' + month);"
-                   class="calendar-inner-cell h-100 flex-fill"
-                   [attr.date-filled]="isDateInsidePogressRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"
-                   [attr.date-inside]="isDateInsideRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"></div>
+          <div *ngFor="let quarter of datesQuarter; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization">
+            <div class="calendar-cell w-100 d-flex flex-wrap calendar-cell-customization">
+              <div *ngFor="let month of getMonthInQuarter(quarter);"
+                  class="h-100 d-flex flex-fill flex-wrap"
+                  [attr.date-filled]="false">
+                <div *ngFor="let day of getDaysInMonth(getQaurterYear(quarter) + '-' + month);"
+                    class="calendar-inner-cell h-100 flex-fill"
+                    [attr.date-filled]="isDateInsidePogressRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"
+                    [attr.date-inside]="isDateInsideRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"></div>
+              </div>
             </div>
           </div>
         </mat-tree-node>
@@ -217,19 +235,21 @@
     </div>
     <!-- calendar for years -->
     <div *ngIf="chartDateView.value === ChartDateViewType.year" class="sidenav-content calendar w-100" fxLayout="column">
-      <div fxLayout="row">
-        <div *ngFor="let date of datesYear" class="calendar-cell w-100">{{formatDate(date)}}</div>
+      <div fxLayout="row" class="calendar-head-year-sub-border">
+        <div *ngFor="let date of datesYear" class="calendar-cell w-100 calendar-head-year-border">{{formatDate(date)}}</div>
       </div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
         <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100">
-          <div *ngFor="let year of datesYear; let i=index;" class="calendar-cell w-100 d-flex flex-wrap">
-            <div *ngFor="let month of getMonthInYear();"
-                 class="h-100 d-flex flex-fill flex-wrap"
-                 [attr.date-filled]="false">
-              <div *ngFor="let day of getDaysInMonth(year + '-' + month);"
-                   class="calendar-inner-cell h-100 flex-fill"
-                   [attr.date-filled]="isDateInsidePogressRange(year + '-' + month + '-' + day, node)"
-                   [attr.date-inside]="isDateInsideRange(year + '-' + month + '-' + day, node)"></div>
+          <div *ngFor="let year of datesYear; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization">
+            <div class="calendar-cell w-100 d-flex flex-wrap calendar-cell-customization">
+              <div *ngFor="let month of getMonthInYear();"
+                  class="h-100 d-flex flex-fill flex-wrap"
+                  [attr.date-filled]="false">
+                <div *ngFor="let day of getDaysInMonth(year + '-' + month);"
+                    class="calendar-inner-cell h-100 flex-fill"
+                    [attr.date-filled]="isDateInsidePogressRange(year + '-' + month + '-' + day, node)"
+                    [attr.date-inside]="isDateInsideRange(year + '-' + month + '-' + day, node)"></div>
+              </div>
             </div>
           </div>
         </mat-tree-node>

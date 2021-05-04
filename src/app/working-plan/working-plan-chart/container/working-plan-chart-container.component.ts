@@ -89,10 +89,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   chartData;
 
   sidebarNamesStyle = {
-    'min-width': 20 + 'rem'
+    'min-width': 25 + 'rem'
   };
   sidebarResponsibleStyle = {
-    'min-width': 18 + 'rem'
+    'min-width': 30 + 'rem'
   };
   sidebarStatusStyle = {};
 
@@ -335,7 +335,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       case 'names':
         this.sidebarNamesStyle = style;
         break;
-      case 'Responsible':
+      case 'responsible':
         this.sidebarResponsibleStyle = style;
         break;
       case 'status':
