@@ -3,15 +3,14 @@ import { RouterModule } from '@angular/router';
 
 import { ImpactPathwayPageComponent } from './impact-pathway-page.component';
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
-import { ProjectPageResolver } from '../projects/project-page.resolver';
+import { ProjectCommunityResolver } from '../core/project/project-community.resolver';
 import { ProjectI18nBreadcrumbResolver } from '../core/breadcrumbs/project-i18n-breadcrumb.resolver';
 import { ProjectI18nBreadcrumbsService } from '../core/breadcrumbs/project-i18n-breadcrumbs.service';
-import { ProjectItemPageResolver } from '../projects/project-item-page.resolver';
+import { ProjectItemPageResolver } from '../core/project/project-item-page.resolver';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: '', redirectTo: '/home', pathMatch: 'full' },
       {
         canActivate: [AuthenticatedGuard],
         path: ':id/edit',
@@ -23,7 +22,7 @@ import { ProjectItemPageResolver } from '../projects/project-item-page.resolver'
         },
         resolve: {
           item: ProjectItemPageResolver,
-          project: ProjectPageResolver,
+          project: ProjectCommunityResolver,
           breadcrumb: ProjectI18nBreadcrumbResolver
         }
       }
@@ -33,7 +32,7 @@ import { ProjectItemPageResolver } from '../projects/project-item-page.resolver'
     ProjectItemPageResolver,
     ProjectI18nBreadcrumbResolver,
     ProjectI18nBreadcrumbsService,
-    ProjectPageResolver
+    ProjectCommunityResolver
   ]
 })
 export class ImpactPathwayPageRoutingModule {

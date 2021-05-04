@@ -3,7 +3,17 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable, of as observableOf } from 'rxjs';
-import { catchError, distinctUntilChanged, filter, map, mergeMap, take, takeWhile, tap } from 'rxjs/operators';
+import {
+  catchError,
+  distinctUntilChanged,
+  filter,
+  map,
+  mergeMap,
+  switchMap,
+  take,
+  takeWhile,
+  tap
+} from 'rxjs/operators';
 import { ReplaceOperation } from 'fast-json-patch';
 
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
@@ -26,6 +36,7 @@ import { PaginatedSearchOptions } from '../../shared/search/paginated-search-opt
 import { SearchResult } from '../../shared/search/search-result.model';
 import {
   getFinishedRemoteData,
+  getFirstCompletedRemoteData,
   getFirstSucceededRemoteData,
   getFirstSucceededRemoteDataPayload,
   sendRequest
@@ -42,6 +53,9 @@ import { BitstreamDataService } from '../data/bitstream-data.service';
 import { NoContent } from '../shared/NoContent.model';
 import { NotificationOptions } from '../../shared/notifications/models/notification-options.model';
 import { PageInfo } from '../shared/page-info.model';
+import { Item } from '../shared/item.model';
+import { Metadata } from '../shared/metadata.utils';
+import { ItemDataService } from '../data/item-data.service';
 
 export enum ProjectGrantsTypes {
   Project = 'project',
@@ -65,6 +79,7 @@ export class ProjectDataService extends CommunityDataService {
     protected linkService: LinkService,
     protected configurationService: ConfigurationDataService,
     protected groupDataService: GroupDataService,
+    protected itemService: ItemDataService,
   ) {
     super(requestService, rdbService, store, objectCache, halService, notificationsService, bitstreamDataService, http, comparator);
   }
@@ -141,6 +156,28 @@ export class ProjectDataService extends CommunityDataService {
   delete(projectId: string): Observable<RemoteData<NoContent>> {
     const projectGroup = `project_${projectId}`;
     return super.delete(projectId);
+  }
+
+  /**
+   * Get the item associated with the project by dc.relation.project metadata
+   *
+   * @param projectCommunityId The project community id
+   * @return the RestResponse as an Observable
+   */
+  getProjectItemByRelation(projectCommunityId: string): Observable<RemoteData<Item>> {
+    return this.findById(projectCommunityId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      switchMap((community: Community) => {
+        const metadataValue = Metadata.first(community.metadata, 'dc.relation.project');
+        if (isNotEmpty(metadataValue) && isNotEmpty(metadataValue.authority)) {
+          return this.itemService.findById(metadataValue.authority).pipe(
+            getFirstCompletedRemoteData()
+          );
+        } else {
+          throw(new Error('Link to project item is missing.'));
+        }
+      })
+    );
   }
 
   /**

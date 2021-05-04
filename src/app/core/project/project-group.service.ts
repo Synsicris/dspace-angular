@@ -21,13 +21,21 @@ export class ProjectGroupService {
     protected groupService: GroupDataService) {
   }
 
-  getProjectAdminsGroupNameByCommunity(project: Community): Observable<string[]> {
-    const query = PROJECT_ADMIN_GROUP_TEMPLATE.replace('%s', project.uuid);
+  getProjectAdminsGroupNameByCommunity(project: Community): string {
+    return PROJECT_ADMIN_GROUP_TEMPLATE.replace('%s', project.uuid);
+  }
+
+  getProjectAdminsGroupUUIDByCommunity(project: Community): Observable<string[]> {
+    const query = this.getProjectAdminsGroupNameByCommunity(project);
     return this.getGroupsByQuery(query);
   }
 
-  getProjectMembersGroupNameByCommunity(project: Community): Observable<string[]> {
-    const query = PROJECT_MEMBERS_GROUP_TEMPLATE.replace('%s', project.uuid);
+  getProjectMembersGroupNameByCommunity(project: Community): string {
+    return PROJECT_MEMBERS_GROUP_TEMPLATE.replace('%s', project.uuid);
+  }
+
+  getProjectMembersGroupUUIDByCommunity(project: Community): Observable<string[]> {
+    const query = this.getProjectMembersGroupNameByCommunity(project);
     return this.getGroupsByQuery(query);
   }
 
@@ -42,7 +50,7 @@ export class ProjectGroupService {
       getFirstSucceededRemoteDataPayload(),
       mergeMap((subprojectsCommunity: Community) => this.communityService.findByHref(subprojectsCommunity._links.parentCommunity.href)),
       getFirstSucceededRemoteDataPayload(),
-      mergeMap((parentProjectCommunity: Community) => this.getProjectMembersGroupNameByCommunity(parentProjectCommunity))
+      mergeMap((parentProjectCommunity: Community) => this.getProjectMembersGroupUUIDByCommunity(parentProjectCommunity))
     );
     return combineLatest([subprojectMembers$, projectMembers$]).pipe(
       map(([subprojectMembers, projectMembers]) => [...subprojectMembers, ...projectMembers])
@@ -50,12 +58,12 @@ export class ProjectGroupService {
   }
 
   getInvitationSubprojectMembersGroupsByCommunity(subproject: Community): Observable<string[]> {
-    const subprojectMembers$ = this.getProjectMembersGroupNameByCommunity(subproject);
+    const subprojectMembers$ = this.getProjectMembersGroupUUIDByCommunity(subproject);
     const projectMembers$ = this.communityService.findByHref(subproject._links.parentCommunity.href).pipe(
       getFirstSucceededRemoteDataPayload(),
       mergeMap((subprojectsCommunity: Community) => this.communityService.findByHref(subprojectsCommunity._links.parentCommunity.href)),
       getFirstSucceededRemoteDataPayload(),
-      mergeMap((parentProjectCommunity: Community) => this.getProjectMembersGroupNameByCommunity(parentProjectCommunity))
+      mergeMap((parentProjectCommunity: Community) => this.getProjectMembersGroupUUIDByCommunity(parentProjectCommunity))
     );
     return combineLatest([subprojectMembers$, projectMembers$]).pipe(
       map(([subprojectMembers, projectMembers]) => [...subprojectMembers, ...projectMembers])

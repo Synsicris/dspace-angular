@@ -24,7 +24,7 @@ export class CreateSimpleItemModalComponent implements OnInit {
    * The list of id to exclude from search results
    * @type {string[]}
    */
-  @Input() excludeListId: string[];
+  @Input() excludeListId: string[] = [];
 
   /**
    * The name of the filter used to exclude results from a search
@@ -61,6 +61,12 @@ export class CreateSimpleItemModalComponent implements OnInit {
    * @type {boolean}
    */
   @Input() hasSearch = true;
+
+  /**
+   * Additional search query
+   * @type {string}
+   */
+  @Input() query: string;
 
   /**
    * The search scope

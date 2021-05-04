@@ -1,5 +1,6 @@
 <div>
   <div *ngIf="!titleEditable" (click)="toggle()" class="sidebar-panel-name p-3 bg-light" [class.sidebar-panel-name-collapsable]="collapsable">
+    <ng-content select="panelIconTitle"></ng-content>
     <h5 class="d-inline-block mb-0">{{sidebarPanelTitle}}</h5>
     <div class="d-inline-block float-right">
       <ng-content select="panelIconStatus"></ng-content>

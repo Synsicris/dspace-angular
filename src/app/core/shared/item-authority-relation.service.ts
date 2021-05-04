@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { from as observableFrom, Observable, of as observableOf, throwError as observableThrowError, } from 'rxjs';
-import { catchError, concatMap, delay, map, mergeMap, reduce, tap } from 'rxjs/operators';
+import {
+  combineLatest,
+  from as observableFrom,
+  Observable,
+  of as observableOf,
+  throwError as observableThrowError,
+} from 'rxjs';
+import { catchError, concatMap, delay, map, mapTo, mergeMap, reduce, tap } from 'rxjs/operators';
 import { findIndex } from 'lodash';
 
 import { Item } from './item.model';
@@ -25,23 +31,62 @@ export class ItemAuthorityRelationService {
 
   }
 
+  /**
+   * Create a relation between two item by adding authority from parent to child
+   *
+   * @param parentItemId               The parent item id
+   * @param linkedItemId               The linked child item id
+   * @param relationMetadataName       The metadata that contains authority from parent to child
+   * @return the linked Item
+   */
+  addLinkedItemToParent(
+    parentItemId: string,
+    linkedItemId: string,
+    relationMetadataName: string
+  ): Observable<Item> {
+    const parentItem$: Observable<Item> = this.itemService.findById(parentItemId).pipe(
+      getFirstSucceededRemoteDataPayload()
+    );
+    const linkedItem$: Observable<Item> = this.itemService.findById(linkedItemId).pipe(
+      getFirstSucceededRemoteDataPayload()
+    );
+    return combineLatest([parentItem$, linkedItem$]).pipe(
+      tap(([parentItem, linkedItem]: [Item, Item]) => this.addRelationPatch(parentItem, linkedItem.name, linkedItemId, relationMetadataName)),
+      delay(100),
+      mergeMap(([parentItem, linkedItem]: [Item, Item]) => this.executeItemPatch(parentItem.id, 'metadata').pipe(
+        mapTo(linkedItem)
+      ))
+    );
+  }
+
+  /**
+   * Create a relation between two item by adding authority from parent to child and from child to parent
+   *
+   * @param parentItemId               The parent item id
+   * @param linkedItemId               The linked child item id
+   * @param relationParentMetadataName The metadata that contains authority from child to parent
+   * @param relationMetadataName       The metadata that contains authority from parent to child
+   * @return the patched linked Item
+   */
   linkItemToParent(
     parentItemId: string,
-    itemId: string,
+    linkedItemId: string,
     relationParentMetadataName: string,
     relationMetadataName: string
   ): Observable<Item> {
-
-    return this.itemService.findById(parentItemId).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      tap((workpackageItem: Item) => this.addRelationPatch(workpackageItem, itemId, relationMetadataName)),
+    const parentItem$: Observable<Item> = this.itemService.findById(parentItemId).pipe(
+      getFirstSucceededRemoteDataPayload()
+    );
+    const linkedItem$: Observable<Item> = this.itemService.findById(linkedItemId).pipe(
+      getFirstSucceededRemoteDataPayload()
+    );
+    return combineLatest([parentItem$, linkedItem$]).pipe(
+      tap(([parentItem, linkedItem]: [Item, Item]) => this.addRelationPatch(parentItem, linkedItem.name, linkedItemId, relationMetadataName)),
       delay(100),
-      mergeMap((workpackageItem: Item) => this.executeItemPatch(workpackageItem.id, 'metadata').pipe(
-        mergeMap(() => this.itemService.findById(itemId)),
-        getFirstSucceededRemoteDataPayload(),
-        tap((stepItem: Item) => this.addRelationPatch(stepItem, parentItemId, relationParentMetadataName)),
+      mergeMap(([parentItem, linkedItem]: [Item, Item]) => this.executeItemPatch(parentItem.id, 'metadata').pipe(
+        tap(() => this.addRelationPatch(linkedItem, parentItem.name, parentItemId, relationParentMetadataName)),
         delay(100),
-        mergeMap((stepItem: Item) => this.executeItemPatch(stepItem.id, 'metadata'))
+        mergeMap(() => this.executeItemPatch(linkedItemId, 'metadata'))
       ))
     );
   }
@@ -54,40 +99,55 @@ export class ItemAuthorityRelationService {
     this.operationsBuilder.remove(path);
   }
 
+  /**
+   * Remove a relation between two items by deleting authority from parent to child and from child to parent
+   *
+   * @param parentItemId               The parent item id
+   * @param linkedItemId               The linked child item id
+   * @param relationParentMetadataName The metadata that contains authority from child to parent
+   * @param relationMetadataName       The metadata that contains authority from parent to child
+   */
   unlinkItemFromParent(
-    parentId: string,
-    taskId: string,
+    parentItemId: string,
+    linkedItemId: string,
     relationParentMetadataName: string,
     relationMetadataName: string): Observable<Item> {
-    return this.itemService.findById(parentId).pipe(
+    return this.itemService.findById(parentItemId).pipe(
       getFirstSucceededRemoteDataPayload(),
       tap((parentItem: Item) => {
-        this.removeRelationPatch(parentItem, taskId, relationMetadataName);
+        this.removeRelationPatch(parentItem, linkedItemId, relationMetadataName);
       }),
       delay(100),
       mergeMap((parentItem: Item) => this.executeItemPatch(parentItem.id, 'metadata').pipe(
-        mergeMap(() => this.itemService.findById(taskId)),
+        mergeMap(() => this.itemService.findById(linkedItemId)),
         getFirstSucceededRemoteDataPayload(),
-        tap((childItem: Item) => this.removeRelationPatch(childItem, parentId, relationParentMetadataName)),
+        tap((childItem: Item) => this.removeRelationPatch(childItem, parentItemId, relationParentMetadataName)),
         delay(100),
         mergeMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
       ))
     );
   }
 
+  /**
+   * Remove a relation between two items starting from the authority value which links child to parent
+   *
+   * @param targetItemId               The target item id from which find out the parent item
+   * @param relationParentMetadataName The metadata that contains authority from child to parent
+   * @param relationMetadataName       The metadata that contains authority from parent to child
+   */
   removeRelationFromParent(
-    itemId: string,
+    targetItemId: string,
     relationParentMetadataName: string,
     relationMetadataName: string
   ): Observable<Item> {
-    return this.itemService.findById(itemId).pipe(
+    return this.itemService.findById(targetItemId).pipe(
       getFirstSucceededRemoteDataPayload(),
       mergeMap((item: Item) => {
         const parentId = item.firstMetadataValue(relationParentMetadataName);
         if (isNotEmpty(parentId)) {
           return this.itemService.findById(parentId).pipe(
             getFirstSucceededRemoteDataPayload(),
-            tap((parentItem: Item) => this.removeRelationPatch(parentItem, itemId, relationMetadataName)),
+            tap((parentItem: Item) => this.removeRelationPatch(parentItem, targetItemId, relationMetadataName)),
             delay(100),
             mergeMap((parentItem: Item) => this.executeItemPatch(parentItem.id, 'metadata')),
             map(() => item)
@@ -99,14 +159,21 @@ export class ItemAuthorityRelationService {
     );
   }
 
+  /**
+   * Remove a relation from a linked item to a parent item
+   *
+   * @param parentItemId               The parent item id
+   * @param linkedItemId               The target item id from which to remove link to parent
+   * @param relationParentMetadataName The metadata that contains authority from child to parent
+   */
   removeParentRelationFromChild(
-    parentId: string,
-    childId: string,
+    parentItemId: string,
+    linkedItemId: string,
     relationParentMetadataName: string
   ) {
-    return this.itemService.findById(childId).pipe(
+    return this.itemService.findById(linkedItemId).pipe(
       getFirstSucceededRemoteDataPayload(),
-      tap((childItem: Item) => this.removeRelationPatch(childItem, parentId, relationParentMetadataName)),
+      tap((childItem: Item) => this.removeRelationPatch(childItem, parentItemId, relationParentMetadataName)),
       delay(100),
       mergeMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
     );
@@ -114,36 +181,44 @@ export class ItemAuthorityRelationService {
 
   /**
    * Remove from parent item the child relation by the child id
-   * @param parentId
-   * @param taskId
-   * @param relationChildMetadataName
+   *
+   * @param parentItemId               The parent item id from which to remove link to child
+   * @param linkedItemId               The linked item id to remove
+   * @param relationChildMetadataName  The metadata that contains authority from parent to child
    */
   removeChildRelationFromParent(
-    parentId: string,
-    taskId: string,
+    parentItemId: string,
+    linkedItemId: string,
     relationChildMetadataName: string
   ): Observable<Item> {
-    return this.itemService.findById(parentId).pipe(
+    return this.itemService.findById(parentItemId).pipe(
       getFirstSucceededRemoteDataPayload(),
       tap((parentItem: Item) => {
-        this.removeRelationPatch(parentItem, taskId, relationChildMetadataName);
+        this.removeRelationPatch(parentItem, linkedItemId, relationChildMetadataName);
       }),
       delay(100),
       mergeMap((parentItem: Item) => this.executeItemPatch(parentItem.id, 'metadata'))
     );
   }
 
+  /**
+   * Remove a relation from a linked item to a parent item, by starting from parent authority values
+   *
+   * @param parentItemId               The parent item id from which selecting child items
+   * @param relationParentMetadataName The metadata that contains authority from child to parent
+   * @param relationMetadataName       The metadata that contains authority from parent to child
+   */
   unlinkParentItemFromChildren(
-    parentId: string,
+    parentItemId: string,
     relationParentMetadataName: string,
     relationMetadataName: string
   ): Observable<Item> {
-    return this.itemService.findById(parentId).pipe(
+    return this.itemService.findById(parentItemId).pipe(
       getFirstSucceededRemoteDataPayload(),
       mergeMap((parentItem: Item) => {
         return observableFrom(parentItem.findMetadataSortedByPlace(relationMetadataName)).pipe(
           concatMap((relationMetadata: MetadataValue) => this.unlinkItemFromParent(
-            parentId,
+            parentItemId,
             relationMetadata.value,
             relationParentMetadataName,
             relationMetadataName
@@ -155,30 +230,38 @@ export class ItemAuthorityRelationService {
     );
   }
 
+  /**
+   * Reorder metadata authorities for an item
+   *
+   * @param parentItemId               The parent item id from which selecting child items
+   * @param linkedItemIds              The list of item id in the new order
+   * @param relationMetadataName       The metadata that contains authority from parent to child
+   */
   orderRelations(
-    parentId: string,
-    taskIds: string[],
+    parentItemId: string,
+    linkedItemIds: string[],
     relationMetadataName: string
   ): Observable<Item> {
-    return this.itemService.findById(parentId).pipe(
+    return this.itemService.findById(parentItemId).pipe(
       getFirstSucceededRemoteDataPayload(),
-      tap((childItem: Item) => this.addAllRelationsPatch(childItem, taskIds, relationMetadataName)),
+      tap((childItem: Item) => this.addAllRelationsPatch(childItem, linkedItemIds, relationMetadataName)),
       delay(100),
       mergeMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
     );
   }
 
-  private addRelationPatch(targetItem: Item, relatedItemId: string, relation: string): void {
+  private addRelationPatch(targetItem: Item, relatedItemTitle: string, relatedItemId: string, relation: string): void {
     const stepTasks: MetadataValue[] = targetItem.findMetadataSortedByPlace(relation);
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
     const taskToAdd = {
-      value: relatedItemId,
+      value: relatedItemTitle,
       authority: relatedItemId,
       place: stepTasks.length,
       confidence: 600
     };
     const path = isEmpty(stepTasks) ? pathCombiner.getPath(relation)
       : pathCombiner.getPath([relation, '-']);
+
     this.operationsBuilder.add(
       path,
       taskToAdd,
@@ -199,21 +282,6 @@ export class ItemAuthorityRelationService {
       };
       this.operationsBuilder.replace(path, value, true);
     });
-
-/*  const tasksToAdd: any[] = [];
-    relatedItemIds.forEach((relatedItemId) => tasksToAdd.push({
-      value: relatedItemId,
-      authority: relatedItemId,
-      place: stepTasks.length,
-      confidence: 600
-    }));
-    const path = pathCombiner.getPath(relation);
-    this.operationsBuilder.add(
-      path,
-      tasksToAdd,
-      false,
-      true
-    );*/
   }
 
   private executeItemPatch(objectId: string, pathName: string): Observable<Item> {

@@ -2,7 +2,6 @@ import { GlobalConfig } from '../config/global-config.interface';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { BrowseByType } from '../app/+browse-by/+browse-by-switcher/browse-by-decorator';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
-import { BASE_THEME_NAME } from '../app/shared/theme-support/theme.constants';
 
 export const environment: GlobalConfig = {
   production: true,
@@ -395,5 +394,11 @@ export const environment: GlobalConfig = {
   },
   projects: {
     projectsGrantsOptionsVocabularyName: 'item_shared'
+  },
+  exploitationPlan: {
+    exploitationPlanRelationMetadata: 'dc.relation.exploitationplan',
+    exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
+    exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
+    exploitationPlanPartnerMetadata: ''
   }
 };

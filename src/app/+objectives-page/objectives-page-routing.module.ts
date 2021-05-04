@@ -3,8 +3,8 @@ import { RouterModule } from '@angular/router';
 
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
 import { ObjectivesPageComponent } from './objectives-page.component';
-import { ProjectPageResolver } from '../projects/project-page.resolver';
-import { ProjectItemPageResolver } from '../projects/project-item-page.resolver';
+import { ProjectCommunityResolver } from '../core/project/project-community.resolver';
+import { ProjectItemPageResolver } from '../core/project/project-item-page.resolver';
 
 @NgModule({
   imports: [
@@ -19,14 +19,14 @@ import { ProjectItemPageResolver } from '../projects/project-item-page.resolver'
         },
         resolve: {
           item: ProjectItemPageResolver,
-          project: ProjectPageResolver,
+          project: ProjectCommunityResolver,
         }
       }
     ])
   ],
   providers: [
     ProjectItemPageResolver,
-    ProjectPageResolver
+    ProjectCommunityResolver
   ]
 })
 export class ObjectivesPageRoutingModule { }

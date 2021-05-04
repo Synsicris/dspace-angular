@@ -12,7 +12,7 @@ import { CommunityPageResolver } from '../+community-page/community-page.resolve
 import { ProjectCollectionBreadcrumbResolver } from '../core/breadcrumbs/project-collection-breadcrumb.resolver';
 import { ProjectDsoBreadcrumbsService } from '../core/breadcrumbs/project-dso-breadcrumbs.service';
 import { ProjectBreadcrumbResolver } from '../core/breadcrumbs/project-breadcrumb.resolver';
-import { ProjectPageResolver } from '../projects/project-page.resolver';
+import { ProjectCommunityResolver } from '../core/project/project-community.resolver';
 import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end-user-agreement-current-user.guard';
 
 @NgModule({
@@ -53,7 +53,7 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
         canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard],
         resolve: {
           breadcrumb: ProjectBreadcrumbResolver,
-          project: ProjectPageResolver
+          project: ProjectCommunityResolver
         },
         data: { title: 'project-overview.page.title', breadcrumbKey: 'project-overview' },
         component: ProjectOverviewPageComponent
@@ -79,7 +79,7 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
     ProjectI18nBreadcrumbsService,
     ProjectDsoBreadcrumbsService,
     ProjectBreadcrumbResolver,
-    ProjectPageResolver
+    ProjectCommunityResolver
   ]
 })
 export class ProjectOverviewPageRoutingModule {

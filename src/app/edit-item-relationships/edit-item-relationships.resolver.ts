@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RemoteData } from '../core/data/remote-data';
 import { ItemDataService } from '../core/data/item-data.service';
@@ -29,11 +29,10 @@ export const ITEM_PAGE_LINKS_TO_FOLLOW: FollowLinkConfig<Item>[] = [
  * This class represents a resolver that requests a specific item before the route is activated
  */
 @Injectable()
-export class ProjectItemPageResolver implements Resolve<RemoteData<Item>> {
+export class EditItemRelationshipsResolver implements Resolve<RemoteData<Item>> {
   constructor(
     private itemService: ItemDataService,
-    private store: Store<any>,
-    private router: Router
+    private store: Store<any>
   ) {
   }
 
@@ -50,7 +49,7 @@ export class ProjectItemPageResolver implements Resolve<RemoteData<Item>> {
       false,
       ...ITEM_PAGE_LINKS_TO_FOLLOW
     ).pipe(
-      getFirstCompletedRemoteData()
+      getFirstCompletedRemoteData(),
     );
 
     itemRD$.subscribe((itemRD: RemoteData<Item>) => {

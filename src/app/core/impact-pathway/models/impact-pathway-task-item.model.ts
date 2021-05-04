@@ -1,5 +1,5 @@
 import { uniqueId } from 'lodash';
-import { ExploitationPlanType } from './exploitation-plan-type';
+import { ExploitationPlanType } from '../../../exploitation-plan/core/models/exploitation-plan-type';
 import { isEmpty } from '../../../shared/empty.util';
 
 export class ImpactPathwayTaskItem {
@@ -22,7 +22,7 @@ export class ImpactPathwayTaskItem {
         this.exploitationPlans.push(this.generateRandomExploitationPlanType(i))
       }
     }*/
-  };
+  }
 
   get id(): string {
     return this._id;

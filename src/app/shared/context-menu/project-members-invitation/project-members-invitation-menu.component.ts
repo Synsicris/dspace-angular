@@ -68,7 +68,7 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
     if (this.isSubproject) {
       groups$ = this.projectGroupService.getInvitationSubprojectMembersGroupsByCommunity(this.contextMenuObject as Community);
     } else {
-      groups$ = this.projectGroupService.getProjectMembersGroupNameByCommunity(this.contextMenuObject as Community);
+      groups$ = this.projectGroupService.getProjectMembersGroupUUIDByCommunity(this.contextMenuObject as Community);
     }
 
     groups$.pipe(take(1))
