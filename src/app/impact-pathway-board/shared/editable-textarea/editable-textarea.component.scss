@@ -1,5 +1,13 @@
-.edit-field {
+.edit-buttons {
   position:absolute;
   bottom:1rem;
   right:1rem;
+}
+
+.editor {
+  box-sizing: border-box;
+  height:100%;
+  width:100%;
+  display:block;
+  padding-right:50px;
 }
