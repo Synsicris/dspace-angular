@@ -7723,19 +7723,34 @@
   "working-plan.breadcrumbs": "Working plan",
 
 
+  "working-plan.chart.button.expandAll": "Expand all",
+
+
+  "working-plan.chart.button.collapseAll": "Collapse all",
+
+
   "working-plan.chart.button.add": "add",
 
 
   "working-plan.chart.button.remove": "Unlink item",
 
 
+  "working-plan.chart.button.edit": "Edit item",
+
+
   "working-plan.chart.column.dates": "Dates",
 
 
-  "working-plan.chart.column.responsible": "Responsible",
+  "working-plan.chart.column.responsible": "Organisation",
 
 
   "working-plan.chart.column.status": "Status",
+
+
+  "working-plan.chart.column.expand": "Expand column",
+
+
+  "working-plan.chart.column.collapse": "Collapse column",
 
 
   "working-plan.chart.move.down.btn": "Move down",
@@ -7745,6 +7760,12 @@
 
 
   "working-plan.chart.move.up.btn": "Move up",
+
+
+  "working-plan.chart.page.description": "Maecenas facilisis cursus nisl, eget gravida risus mollis a. Phasellus a quam vitae lorem finibus consequat. Vestibulum dictum, sem sed suscipit euismod, lorem diam lobortis sem, in ultrices ipsum risus a enim. Nunc efficitur interdum urna, eget accumsan arcu scelerisque maximus. In hac habitasse platea dictumst. Nunc vestibulum volutpat iaculis. Phasellus scelerisque congue ante vel luctus. Proin gravida semper eros, dignissim dapibus tortor laoreet quis. Maecenas nec dui risus. Sed metus lorem, egestas quis turpis et, viverra aliquet metus. Praesent et viverra velit. Donec vel magna tempor, tempus sem vel, ultrices diam. In sed neque id ligula hendrerit vulputate sit amet id ex. Mauris dignissim scelerisque tempor. Maecenas quis convallis felis. Nunc pharetra maximus sapien id vulputate.",
+
+
+  "working-plan.page.title": "Working plan",
 
 
   "working-plan.chart.toggle.collapse.btn": "Collapse",
@@ -7781,12 +7802,6 @@
 
 
   "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
-
-
-  "working-plan.page.description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porta turpis fermentum, finibus quam vitae, efficitur ex.",
-
-
-  "working-plan.page.title": "Working plan",
 
 
   "application.listelement.badge": "Applications of solutions / changes / innovations",

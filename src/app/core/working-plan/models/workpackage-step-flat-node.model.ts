@@ -8,6 +8,7 @@ export class WorkpacakgeFlatNode {
     public id: string,
     public workspaceItemId: string,
     public index: number,
+    public type: string,
     public expandable: boolean,
     public level: number,
     public name: string,

@@ -10,6 +10,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { findIndex } from 'lodash';
 
+import { startWith, mergeMap, map } from 'rxjs/operators';
+
 import { range } from '../../../shared/array.util';
 import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
@@ -23,10 +25,17 @@ import {
 import { moment, WorkingPlanService } from '../../../core/working-plan/working-plan.service';
 import { WorkingPlanStateService } from '../../../core/working-plan/working-plan-state.service';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
-import { hasValue, isNotNull } from '../../../shared/empty.util';
+import { hasValue, isNotEmpty, isNotNull } from '../../../shared/empty.util';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { ChartDateViewType } from '../../../core/working-plan/working-plan.reducer';
 import { environment } from '../../../../environments/environment';
+import { followLink } from '../../../shared/utils/follow-link-config.model';
+import { getAllSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../../../core/shared/operators';
+import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
+import { EditItemDataService } from '../../../core/submission/edititem-data.service';
+import { EditItem } from '../../../core/submission/models/edititem.model';
+import { ContextMenuEntryComponent } from '../../../shared/context-menu/context-menu-entry.component';
+
 
 export const MY_FORMATS = {
   parse: {
@@ -94,7 +103,16 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   sidebarResponsibleStyle = {
     'min-width': 30 + 'rem'
   };
+  sidebarResponsibleStatus = true;
+
+  /**
+   * The responsible column status (used to expand and collapse the column).
+   */
   sidebarStatusStyle = {};
+  /**
+   * List of Edit Modes available on each node for the current user
+   */
+  private editModes$: BehaviorSubject<Map<string, EditItemMode[]>> = new BehaviorSubject<Map<string, EditItemMode[]>>(new Map());
 
   private chartStatusTypeList$: BehaviorSubject<VocabularyEntry[]> = new BehaviorSubject<VocabularyEntry[]>([]);
   private subs: Subscription[] = [];
@@ -104,7 +122,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private translate: TranslateService,
     private workingPlanService: WorkingPlanService,
-    private workingPlanStateService: WorkingPlanStateService
+    private workingPlanStateService: WorkingPlanStateService,
+    private editItemService: EditItemDataService,
   ) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
       this._isExpandable, this._getChildren);
@@ -141,6 +160,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         this.buildCalendar();
         /** expand tree based on status */
         this.treeControl.dataNodes.forEach((node) => {
+          // Retrieve edit modes
+          this.retrieveEditMode(node.id);
           if (node.expanded) {
             this.treeControl.expand(node);
           } else {
@@ -151,12 +172,36 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Set the responsible column status (used to expand and collapse the column).
+   */
+  sidebarStatusToggle() {
+    this.sidebarResponsibleStatus = !this.sidebarResponsibleStatus;
+  }
+
+  /**
+   * Check if edit mode is available.
+   */
+  isEditAvailable(nodeId): Observable<boolean> {
+    return this.editModes$.asObservable().pipe(
+      map((editModes) => isNotEmpty(editModes) && editModes.has(nodeId) && editModes.get(nodeId).length > 0)
+    );
+  }
+
+  /**
+   * Returns the edit modes.
+   */
+  getEditModes(): Observable<Map<string, EditItemMode[]>> {
+    return this.editModes$;
+  }
+
   /** utils of building tree */
   transformer = (node: Workpackage, level: number) => {
     const flatNode = new WorkpacakgeFlatNode(
       node.id,
       node.workspaceItemId,
       this.getIndex(node, level),
+      node.type,
       (node.steps && node.steps.length !== 0),
       level,
       node.name,
@@ -210,6 +255,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
       this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectId, flatNode.id, item.type.value, metadata);
+      // the 'this.editModes$' map is auto-updated by the ngOnInit subscribe
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {
@@ -231,6 +277,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       const childNode: WorkpackageStep = this.nestedNodeMap.get(flatNode.id);
       this.workingPlanStateService.dispatchRemoveWorkpackageStep(parentNode.id, childNode.id, childNode.workspaceItemId);
     }
+    // We use 'next' to be sure that the event is emitted
+    this.editModes$.value.delete(flatNode.id);
+    this.editModes$.next(this.editModes$.value);
   }
 
   getParentStep(node: WorkpacakgeFlatNode): WorkpacakgeFlatNode {
@@ -354,17 +403,21 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       const end = this.moment(step.dates.end.full, this.dateFormat);
       const dateRange = moment.range(start, end);
 
-      // Moment range sometimes does not include all the month, so use the end of the month to get the correct range
+      // Moment range sometimes does not include all the months, so use the end of the month to get the correct range
       const endForMonth = this.moment(step.dates.end.full).endOf('month');
       const dateRangeForMonth = this.moment.range(start, endForMonth);
 
-      // Moment range sometimes does not include all the year, so use the end of the year to get the correct range
+      // Moment range sometimes does not include all the quarters, so use the end of the quarter to get the correct range
+      const endForQuarter = this.moment(step.dates.end.full).endOf('quarter');
+      const dateRangeForQuarter = this.moment.range(start, endForQuarter);
+
+      // Moment range sometimes does not include all the years, so use the end of the year to get the correct range
       const endForYear = this.moment(step.dates.end.full, this.dateFormat).endOf('year');
       const dateRangeForYear = this.moment.range(start, endForYear);
 
       const days = Array.from(dateRange.by('days'));
       const months = Array.from(dateRangeForMonth.by('months'));
-      const quarters = Array.from(dateRange.by('quarters'));
+      const quarters = Array.from(dateRangeForQuarter.by('quarters'));
       const years = Array.from(dateRangeForYear.by('year'));
 
       this.dates = this.dates.concat(days
@@ -593,5 +646,22 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         [...value]
       );
     }
+  }
+
+  /**
+   * Retrieve edit modes.
+   *
+   * @param nodeId string
+   */
+  private retrieveEditMode(nodeId: string) {
+    this.subs.push(this.editItemService.findById(nodeId + ':none', true, true, followLink('modes')).pipe(
+      getAllSucceededRemoteDataPayload(),
+      mergeMap((editItem: EditItem) => editItem.modes.pipe(
+        getFirstSucceededRemoteListPayload())
+      ),
+      startWith([])
+    ).subscribe((editModes: EditItemMode[]) => {
+      this.editModes$.next(this.editModes$.value.set(nodeId, editModes));
+    }));
   }
 }
