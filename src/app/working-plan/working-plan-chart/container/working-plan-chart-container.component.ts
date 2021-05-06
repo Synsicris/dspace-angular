@@ -396,6 +396,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   buildCalendar() {
     this.dates = [];
     this.datesMonth = [];
+    this.datesQuarter = [];
     this.datesYear = [];
 
     this.dataSource.data.forEach((step: Workpackage) => {
@@ -436,6 +437,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         .map((d) => d.format(this.dateYearFormat))
         .filter((d) => !this.datesYear.includes(d))).sort();
     });
+    this.adjustDates();
   }
 
   formatDate(date: string): string {
@@ -663,5 +665,49 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     ).subscribe((editModes: EditItemMode[]) => {
       this.editModes$.next(this.editModes$.value.set(nodeId, editModes));
     }));
+  }
+
+  /**
+   * Corrects the months and quarters headers adding what's missing to complete the years.
+   */
+  private adjustDates() {
+    if (this.datesMonth.length > 0) {
+      const dateFormat = 'YYYY-MM';
+      const firstDateMonth = moment(this.datesMonth[0], dateFormat);
+      const lastDateMonth = moment(this.datesMonth[this.datesMonth.length-1], dateFormat);
+
+      const beforeStart = moment(firstDateMonth.format('YYYY') + '-01', dateFormat);
+      const afterLimit = moment(lastDateMonth.format('YYYY') + '-12', dateFormat);
+
+      const beforeRange = moment.range(beforeStart, firstDateMonth);
+      const afterRange = moment.range(lastDateMonth, afterLimit);
+
+      const beforeRangeArray = Array.from(beforeRange.by('months'));
+      const afterRangeArray = Array.from(afterRange.by('months'));
+      this.datesMonth = this.datesMonth.concat(
+        beforeRangeArray
+          .map((d) => d.format(this.dateMonthFormat))
+          .filter((d) => this.datesMonth.indexOf(d) == -1)
+        ).sort();
+      this.datesMonth = this.datesMonth.concat(
+        afterRangeArray
+          .map((d) => d.format(this.dateMonthFormat))
+          .filter((d) => this.datesMonth.indexOf(d) == -1)
+      ).sort();
+    }
+    if (this.datesQuarter.length > 0) {
+      const firstDateQuarter = this.datesQuarter[0].split('-');
+      const lastDateQuarter = this.datesQuarter[this.datesQuarter.length-1].split('-');
+      let beforeStart = 1;
+      const beforeLimit = parseInt(firstDateQuarter[1]);
+      let afterStart = parseInt(lastDateQuarter[1]);
+      const afterLimit = 4
+      for (beforeStart; beforeStart < beforeLimit; beforeStart++) {
+        this.datesQuarter.unshift(firstDateQuarter[0] + '-' + beforeStart);
+      }
+      for (afterStart++; afterStart <= afterLimit; afterStart++) {
+        this.datesQuarter.push(lastDateQuarter[0] + '-' + afterStart);
+      }
+    }
   }
 }
