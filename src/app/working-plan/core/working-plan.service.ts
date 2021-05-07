@@ -1,7 +1,20 @@
 import { Injectable } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
-import { catchError, concatMap, delay, filter, first, map, mergeMap, reduce, scan, take, tap } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  delay,
+  filter,
+  first,
+  map,
+  mapTo,
+  mergeMap,
+  reduce,
+  scan,
+  take,
+  tap
+} from 'rxjs/operators';
 import { extendMoment } from 'moment-range';
 import * as Moment from 'moment';
 
@@ -278,10 +291,32 @@ export class WorkingPlanService {
     } else {
       return observableFrom(relatedTaskMetadata).pipe(
         concatMap((task: MetadataValue) => this.itemService.findById(task.authority).pipe(
-          getFirstSucceededRemoteDataPayload(),
-          map((stepItem: Item) => this.initWorkpackageStepFromItem(stepItem, workspaceItemId, workpackageId)),
+          getFinishedRemoteData(),
+          mergeMap((rd: RemoteData<Item>) => {
+            if (rd.hasSucceeded) {
+              const stepItem = rd.payload;
+              return observableOf(this.initWorkpackageStepFromItem(stepItem, workspaceItemId, workpackageId));
+            } else {
+              if (rd.statusCode === 404) {
+                // NOTE if a task is not found probably it has been deleted without unlinking it from parent step, so unlink it
+                return this.itemAuthorityRelationService.removeChildRelationFromParent(
+                  parentItem.id,
+                  task.authority,
+                  environment.workingPlan.workingPlanStepRelationMetadata
+                ).pipe(mapTo(null));
+              } else {
+                return observableOf(null);
+              }
+            }
+          })
         )),
-        reduce((acc: any, value: any) => [...acc, value], [])
+        reduce((acc: any, value: any) => {
+          if (isNotNull(value)) {
+            return [...acc, value];
+          } else {
+            return acc;
+          }
+        }, [])
       );
     }
   }
@@ -334,14 +369,6 @@ export class WorkingPlanService {
   isProcessingWorkpackageRemove(workpackageId: string): Observable<boolean> {
     return this.workingPlanStateService.getWorkpackageToRemoveId().pipe(
       map((workpackageToRemoveId) => workpackageId === workpackageToRemoveId)
-    );
-  }
-
-  checkAndRemoveRelations(itemId: string): Observable<Item> {
-    return this.itemAuthorityRelationService.removeRelationFromParent(
-      itemId,
-      environment.workingPlan.workingPlanParentRelationMetadata,
-      environment.workingPlan.workingPlanStepRelationMetadata
     );
   }
 

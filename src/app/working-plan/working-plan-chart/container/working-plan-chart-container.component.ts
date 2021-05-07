@@ -225,14 +225,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   chartCheckEndOfTheYear(date: string, type: string): boolean {
     let output = false;
     let momentDate;
-    if (type == 'month') {
+    if (type === 'month') {
       momentDate = moment(date, 'YYYY-MM');
-      if (momentDate.format('MM') == '12') {
+      if (momentDate.format('MM') === '12') {
         output = true;
       }
-    } else if (type == 'quarter') {
+    } else if (type === 'quarter') {
       momentDate = date.split('-');
-      if (momentDate[1] == '4') {
+      if (momentDate[1] === '4') {
         output = true;
       }
     } else {
@@ -314,11 +314,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.formConfig = this.workingPlanService.getWorkpackageStepFormConfig();
     modalRef.componentInstance.formHeader = this.workingPlanService.getWorkpackageStepFormHeader();
     modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
-    modalRef.componentInstance.excludeListId = [nestedNode.id];
-    modalRef.componentInstance.excludeFilterName = 'parentWorkpackageId';
     modalRef.componentInstance.vocabularyName = this.workingPlanService.getWorkpackageStepTypeAuthorityName();
     modalRef.componentInstance.searchConfiguration = this.workingPlanService.getWorkpackageStepSearchConfigName();
     modalRef.componentInstance.scope = this.projectId;
+    modalRef.componentInstance.query = this.buildExcludedTasksQuery(flatNode);
 
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
@@ -784,5 +783,18 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         this.datesQuarter.push(lastDateQuarter[0] + '-' + afterStart);
       }
     }
+  }
+
+  private buildExcludedTasksQuery(flatNode: WorkpacakgeFlatNode): string {
+/*    const subprojectMembersGroup = this.projectGroupService.getProjectMembersGroupNameByCommunity(this.subproject);
+    let query = `(entityGrants:project OR cris.policy.group: ${subprojectMembersGroup})`;*/
+    let query = '';
+    const tasksIds = flatNode.steps.map((step) => step.id);
+    if (tasksIds.length > 0) {
+      const excludedIdsQuery = '-(search.resourceid' + ':(' + tasksIds.join(' OR ') + '))';
+      query += `${excludedIdsQuery}`;
+    }
+
+    return query;
   }
 }
