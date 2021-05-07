@@ -2,11 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 
-import {
-  DynamicFormLayoutService,
-  DynamicFormService,
-  DynamicFormValidationService
-} from '@ng-dynamic-forms/core';
+import { DynamicFormLayoutService, DynamicFormService, DynamicFormValidationService } from '@ng-dynamic-forms/core';
 import { EffectsModule } from '@ngrx/effects';
 
 import { Action, StoreConfig, StoreModule } from '@ngrx/store';
@@ -216,6 +212,7 @@ import { CommunitySearchResult } from '../shared/object-collection/shared/commun
 import { ItemSearchResult } from '../shared/object-collection/shared/item-search-result.model';
 import { ProjectAuthorizationService } from './project/project-authorization.service';
 import { ProjectGroupService } from './project/project-group.service';
+import { ProjectItemService } from './project/project-item.service';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -365,7 +362,8 @@ const PROVIDERS = [
   WorkingPlanStateService,
   ProjectDataService,
   ProjectAuthorizationService,
-  ProjectGroupService
+  ProjectGroupService,
+  ProjectItemService
 ];
 
 /**

@@ -60,6 +60,33 @@ export class ProjectItemService {
       });
   }
 
+  createAddMetadataPatchOp(metadataName: string, value: any): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    this.operationsBuilder.add(pathCombiner.getPath(metadataName), value, true, true);
+  }
+
+  createRemoveMetadataPatchOp(metadataName: string, position: number): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    const path = pathCombiner.getPath([metadataName, position.toString()]);
+    this.operationsBuilder.remove(path);
+  }
+
+  createReplaceMetadataPatchOp(metadataName: string, position: number, value: any): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    const path = pathCombiner.getPath([metadataName, position.toString()]);
+    this.operationsBuilder.replace(path, value, true);
+  }
+
+  createWorkspaceItem(projectId: string, taskType: string): Observable<SubmissionObject> {
+    return this.getCollectionIdByProjectAndEntity(projectId, taskType).pipe(
+      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType).pipe(
+        mergeMap((submission: SubmissionObject) =>
+          (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
+        )
+      )),
+    );
+  }
+
   private createProjectEntityWorkspaceItem(projectId: string, taskType: string): Observable<SubmissionObject> {
     return this.getCollectionIdByProjectAndEntity(projectId, taskType).pipe(
       mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType, false).pipe(
@@ -82,7 +109,7 @@ export class ProjectItemService {
     );
   }
 
-  private executeItemPatch(objectId: string, pathName: string): Observable<Item> {
+  executeItemPatch(objectId: string, pathName: string): Observable<Item> {
     return this.itemJsonPatchOperationsService.jsonPatchByResourceType(
       'items',
       objectId,
@@ -92,7 +119,7 @@ export class ProjectItemService {
     );
   }
 
-  private depositWorkspaceItem(submission: SubmissionObject): Observable<RemoteData<Item>> {
+  depositWorkspaceItem(submission: SubmissionObject): Observable<RemoteData<Item>> {
     return this.submissionService.depositSubmission(submission.self).pipe(
       mergeMap(() => this.itemService.findById((submission.item as Item).id))
     );

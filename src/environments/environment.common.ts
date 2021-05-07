@@ -386,11 +386,15 @@ export const environment: GlobalConfig = {
     workingPlanStepDateStartMetadata: 'dc.date.start',
     workingPlanStepDateEndMetadata: 'dc.date.end',
     workpackageEntityName: 'workpackage',
-    workpackagesSearchConfigName: 'allWorkpackages',
+    milestoneEntityName: 'milestone',
+    allLinkedWorkingPlanObjSearchConfigName: 'allLinkedWorkingPlanObj',
+    allUnlinkedWorkingPlanObjSearchConfigName: 'allUnlinkedWorkingPlanObj',
     workpackageStepsSearchConfigName: 'workpackageSteps',
     workpackageStatusTypeAuthority: 'working_plan_workpackage_status_type',
+    workpackageTypeAuthority: 'working_plan_workpackage_type',
     workpackageStepTypeAuthority: 'working_plan_workpackage_step_type',
-    workingPlanPlaceMetadata: 'workingplan.place'
+    workingPlanPlaceMetadata: 'workingplan.place',
+    workingPlanLinkMetadata: 'workingplan.link.status'
   },
   projects: {
     projectsGrantsOptionsVocabularyName: 'item_shared'

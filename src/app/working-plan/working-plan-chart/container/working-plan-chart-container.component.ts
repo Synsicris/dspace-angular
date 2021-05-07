@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { findIndex } from 'lodash';
 
-import { startWith, mergeMap, map } from 'rxjs/operators';
+import { map, mergeMap, startWith } from 'rxjs/operators';
 
 import { range } from '../../../shared/array.util';
 import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
@@ -34,7 +34,6 @@ import { getAllSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } 
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { EditItem } from '../../../core/submission/models/edititem.model';
-import { ContextMenuEntryComponent } from '../../../shared/context-menu/context-menu-entry.component';
 
 
 export const MY_FORMATS = {
@@ -271,6 +270,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     // if root, ignore
     if (this.treeControl.getLevel(flatNode) < 1) {
       const parentNode = this.nestedNodeMap.get(flatNode.id);
+      console.log('dispatchRemoveWorkpackage');
       this.workingPlanStateService.dispatchRemoveWorkpackage(parentNode.id, parentNode.workspaceItemId);
     } else {
       const parentNode: Workpackage = this.nestedNodeMap.get(flatNode.parentId);
