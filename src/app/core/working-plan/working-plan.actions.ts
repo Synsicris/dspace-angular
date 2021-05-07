@@ -38,8 +38,8 @@ export const WorkpackageActionTypes = {
   REMOVE_WORKPACKAGE_STEP: type('dspace/core/workingplan/REMOVE_WORKPACKAGE_STEP'),
   REMOVE_WORKPACKAGE_STEP_ERROR: type('dspace/core/workingplan/REMOVE_WORKPACKAGE_STEP_ERROR'),
   REMOVE_WORKPACKAGE_STEP_SUCCESS: type('dspace/core/workingplan/REMOVE_WORKPACKAGE_STEP_SUCCESS'),
-  RETRIEVE_ALL_WORKPACKAGES: type('dspace/core/workingplan/RETRIEVE_ALL_WORKPACKAGES'),
-  RETRIEVE_ALL_WORKPACKAGES_ERROR: type('dspace/core/workingplan/RETRIEVE_ALL_WORKPACKAGES_ERROR'),
+  RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS: type('dspace/core/workingplan/RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS'),
+  RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS_ERROR: type('dspace/core/workingplan/RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS_ERROR'),
   UPDATE_WORKPACKAGE: type('dspace/core/workingplan/UPDATE_WORKPACKAGE'),
   UPDATE_WORKPACKAGE_SUCCESS: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_SUCCESS'),
   UPDATE_WORKPACKAGE_ERROR: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_ERROR'),
@@ -72,6 +72,7 @@ export class GenerateWorkpackageAction implements Action {
   type = WorkpackageActionTypes.GENERATE_WORKPACKAGE;
   payload: {
     projectId: string,
+    entityType: string,
     metadata: MetadataMap,
     place: string;
   };
@@ -81,13 +82,15 @@ export class GenerateWorkpackageAction implements Action {
    *
    * @param projectId
    *    the project's UUID where to create the object
+   * @param entityType
+   *    the entity type, can be workpackage or milestone
    * @param metadata: Metadata
    *    the workpackage's Metadata
-   * @param place: string
+   * @param place string
    *    the workpackage's place
    */
-  constructor(projectId: string, metadata: MetadataMap, place: string) {
-    this.payload = { projectId, metadata, place };
+  constructor(projectId: string, entityType: string, metadata: MetadataMap, place: string) {
+    this.payload = { projectId, entityType, metadata, place };
   }
 }
 
@@ -129,6 +132,7 @@ export class AddWorkpackageAction implements Action {
   payload: {
     workpackageId: string;
     workspaceItemId: string;
+    place?: string;
   };
 
   /**
@@ -138,9 +142,11 @@ export class AddWorkpackageAction implements Action {
    *    the Item id of the workpackage to add
    * @param workspaceItemId
    *    the workspaceItem's id of the workpackage to add
+   * @param place string
+   *    the workpackage's place
    */
-  constructor(workpackageId: string, workspaceItemId: string) {
-    this.payload = { workpackageId, workspaceItemId };
+  constructor(workpackageId: string, workspaceItemId: string, place?: string) {
+    this.payload = { workpackageId, workspaceItemId, place };
   }
 }
 
@@ -445,14 +451,14 @@ export class RemoveWorkpackageStepErrorAction implements Action {
 /**
  * An ngrx action to retrieve all working plan's workpackages
  */
-export class RetrieveAllWorkpackagesAction implements Action {
-  type = WorkpackageActionTypes.RETRIEVE_ALL_WORKPACKAGES;
+export class RetrieveAllLinkedWorkingPlanObjectsAction implements Action {
+  type = WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS;
   payload: {
     projectId: string;
   };
 
   /**
-   * Create a new RetrieveAllWorkpackagesAction
+   * Create a new RetrieveAllLinkedWorkingPlanObjectsAction
    *
    * @param projectId
    *    the project'id
@@ -483,8 +489,8 @@ export class ChangeChartViewAction implements Action {
 /**
  * An ngrx action for retrieving all working plan's workpackages error
  */
-export class RetrieveAllWorkpackagesErrorAction implements Action {
-  type = WorkpackageActionTypes.RETRIEVE_ALL_WORKPACKAGES_ERROR;
+export class RetrieveAllLinkedWorkingPlanObjectsErrorAction implements Action {
+  type = WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS_ERROR;
 }
 
 /**
@@ -793,8 +799,8 @@ export type WorkingPlanActions
   | RemoveWorkpackageStepAction
   | RemoveWorkpackageStepErrorAction
   | RemoveWorkpackageStepSuccessAction
-  | RetrieveAllWorkpackagesAction
-  | RetrieveAllWorkpackagesErrorAction
+  | RetrieveAllLinkedWorkingPlanObjectsAction
+  | RetrieveAllLinkedWorkingPlanObjectsErrorAction
   | SaveWorkpackageOrderAction
   | SaveWorkpackageOrderErrorAction
   | SaveWorkpackageOrderSuccessAction

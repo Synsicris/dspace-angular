@@ -73,7 +73,7 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
       });
     }
 
-    case WorkpackageActionTypes.RETRIEVE_ALL_WORKPACKAGES: {
+    case WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS: {
       return Object.assign({}, workpackageInitialState, {
         processing: true
       });
