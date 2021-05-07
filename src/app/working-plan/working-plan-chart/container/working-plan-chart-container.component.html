@@ -24,7 +24,7 @@
         </div>
       </div>
       <mat-tree class="tree pt-0" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarNamesStyle">
-        <mat-tree-node *matTreeNodeDef="let node" class="tree-node-customization" matTreeNodeToggle matTreeNodePadding [matTreeNodePaddingIndent]="18">
+        <mat-tree-node *matTreeNodeDef="let node" class="tree-node-customization" matTreeNodeToggle matTreeNodePadding [matTreeNodePaddingIndent]="18" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
           <div>
             <button mat-icon-button class="btn btn-xs btn-link p-0 text-primary" title="Drag & Drop">
               <i class='fas fa-grip-vertical'></i>
@@ -61,7 +61,7 @@
             </button>
           </div>
         </mat-tree-node>
-        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" class="tree-node-customization" matTreeNodePadding [matTreeNodePaddingIndent]="18">
+        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" class="tree-node-customization" matTreeNodePadding [matTreeNodePaddingIndent]="18" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
           <div>
             <button mat-icon-button class="btn btn-xs btn-link p-0 text-primary" title="Drag & Drop">
               <i class='fas fa-grip-vertical'></i>
@@ -125,7 +125,7 @@
         </div>
       </div>
       <mat-tree class="tree pt-0" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarResponsibleStyle">
-        <mat-tree-node *matTreeNodeDef="let node" class="tree-node-customization">
+        <mat-tree-node *matTreeNodeDef="let node" class="tree-node-customization" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
           <div class="ml-05 mt-1 font-size-07">
             <p class="font-weight-bold m-0">{{'working-plan.chart.column.dates' | translate}}</p>
             <mat-form-field floatLabel="never" appearance="fill" class="p-0">
@@ -173,18 +173,18 @@
     <div *ngIf="chartDateView.value === ChartDateViewType.month" class="sidenav-content calendar w-100" fxLayout="column">
       <div fxLayout="row">
         <div fxLayout="column" class="flex-fill" *ngFor="let year of datesYear">
-          <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center">{{year}}</div>
+          <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center tree-node-end-of-the-year-customization">{{year}}</div>
           <div fxLayout="row" class="calendar-head-border">
-            <div *ngFor="let date of getDatesMonthByYear(year)" class="calendar-cell-heading w-100">{{formatDate(date)}}</div>
+            <div *ngFor="let date of getDatesMonthByYear(year)" class="calendar-cell-heading w-100{{(chartCheckEndOfTheYear(date, 'month'))?' tree-node-end-of-the-year-customization':''}}">{{formatDate(date)}}</div>
           </div>
         </div>
       </div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
-        <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100">
-          <div *ngFor="let date of datesMonth; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization">
+        <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
+          <div *ngFor="let date of datesMonth; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(date, 'month'))?' tree-node-end-of-the-year-customization':''}}">
             <div class="calendar-cell w-100 d-flex flex-wrap calendar-cell-customization">
               <div *ngFor="let day of getDaysInMonth(date);"
-                  class="calendar-inner-cell h-100 flex-fill"
+                  class="calendar-inner-cell h-100 flex-fill{{(chartCheckChangeColor(node, date + '-' + day, date + '-' + day))?' calendar-inner-cell-over':''}}"
                   [attr.date-filled]="isDateInsidePogressRange(date + '-' + day, node)"
                   [attr.date-inside]="isDateInsideRange(date + '-' + day, node)"></div>
             </div>
@@ -196,21 +196,21 @@
     <div *ngIf="chartDateView.value === ChartDateViewType.quarter" class="sidenav-content calendar w-100" fxLayout="column">
       <div fxLayout="row">
         <div fxLayout="column" class="flex-fill" *ngFor="let year of datesYear">
-          <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center">{{year}}</div>
+          <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center tree-node-end-of-the-year-customization">{{year}}</div>
           <div fxLayout="row" class="calendar-head-border">
-            <div *ngFor="let date of getDatesQuarterByYear(year)" class="calendar-cell-heading w-100">{{formatDate(date)}}</div>
+            <div *ngFor="let date of getDatesQuarterByYear(year)" class="calendar-cell-heading w-100{{(chartCheckEndOfTheYear(date, 'quarter'))?' tree-node-end-of-the-year-customization':''}}">{{formatDate(date)}}</div>
           </div>
         </div>
       </div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
-        <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100">
-          <div *ngFor="let quarter of datesQuarter; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization">
+        <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
+          <div *ngFor="let quarter of datesQuarter; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(quarter, 'quarter'))?' tree-node-end-of-the-year-customization':''}}">
             <div class="calendar-cell w-100 d-flex flex-wrap calendar-cell-customization">
               <div *ngFor="let month of getMonthInQuarter(quarter);"
                   class="h-100 d-flex flex-fill flex-wrap"
                   [attr.date-filled]="false">
                 <div *ngFor="let day of getDaysInMonth(getQaurterYear(quarter) + '-' + month);"
-                    class="calendar-inner-cell h-100 flex-fill"
+                    class="calendar-inner-cell h-100 flex-fill{{(chartCheckChangeColor(node, getQaurterYear(quarter) + '-' + month + '-' + day, getQaurterYear(quarter) + '-' + month + '-' + day))?' calendar-inner-cell-over':''}}"
                     [attr.date-filled]="isDateInsidePogressRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"
                     [attr.date-inside]="isDateInsideRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"></div>
               </div>
@@ -222,17 +222,17 @@
     <!-- calendar for years -->
     <div *ngIf="chartDateView.value === ChartDateViewType.year" class="sidenav-content calendar w-100" fxLayout="column">
       <div fxLayout="row" class="calendar-head-year-sub-border">
-        <div *ngFor="let date of datesYear" class="calendar-cell w-100 calendar-head-year-border">{{formatDate(date)}}</div>
+        <div *ngFor="let date of datesYear" class="calendar-cell w-100 calendar-head-year-border tree-node-end-of-the-year-customization">{{formatDate(date)}}</div>
       </div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
-        <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100">
-          <div *ngFor="let year of datesYear; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization">
+        <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
+          <div *ngFor="let year of datesYear; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(year, 'year'))?' tree-node-end-of-the-year-customization':''}}">
             <div class="calendar-cell w-100 d-flex flex-wrap calendar-cell-customization">
               <div *ngFor="let month of getMonthInYear();"
                   class="h-100 d-flex flex-fill flex-wrap"
                   [attr.date-filled]="false">
                 <div *ngFor="let day of getDaysInMonth(year + '-' + month);"
-                    class="calendar-inner-cell h-100 flex-fill"
+                    class="calendar-inner-cell h-100 flex-fill{{(chartCheckChangeColor(node, year + '-' + month + '-' + day, year + '-' + month + '-' + day))?' calendar-inner-cell-over':''}}"
                     [attr.date-filled]="isDateInsidePogressRange(year + '-' + month + '-' + day, node)"
                     [attr.date-inside]="isDateInsideRange(year + '-' + month + '-' + day, node)"></div>
               </div>
