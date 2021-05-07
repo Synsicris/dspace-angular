@@ -72,7 +72,7 @@ import parseSectionErrorPaths, { SectionErrorPath } from '../utils/parseSectionE
 import { FormState } from '../../shared/form/form.reducer';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
 import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
-import { WorkingPlanService } from '../../core/working-plan/working-plan.service';
+import { WorkingPlanService } from '../../working-plan/core/working-plan.service';
 
 @Injectable()
 export class SubmissionObjectEffects {

@@ -21,7 +21,7 @@ function workpackageKeySelector<T>(key: string, selector): MemoizedSelector<AppS
  * @param {AppState} state Top level state.
  * @return {ImpactPathwayState}
  */
-const _getWorkingPlanState = (state: any) => state.core.workingplan;
+const _getWorkingPlanState = (state: any) => state.workingplan;
 
 /**
  * Returns the impact pathway state.

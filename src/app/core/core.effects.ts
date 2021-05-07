@@ -9,7 +9,6 @@ import { RouteEffects } from './services/route.effects';
 import { RouterEffects } from './router/router.effects';
 import { MenuEffects } from '../shared/menu/menu.effects';
 import { ImpactPathwayEffects } from './impact-pathway/impact-pathway.effects';
-import { WorkingPlanEffects } from './working-plan/working-plan.effects';
 
 export const coreEffects = [
   RequestEffects,
@@ -22,6 +21,5 @@ export const coreEffects = [
   RouteEffects,
   RouterEffects,
   MenuEffects,
-  ImpactPathwayEffects,
-  WorkingPlanEffects
+  ImpactPathwayEffects
 ];

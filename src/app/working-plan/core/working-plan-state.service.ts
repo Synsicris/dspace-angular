@@ -16,7 +16,7 @@ import {
   UpdateWorkpackageAction,
   UpdateWorkpackageStepAction
 } from './working-plan.actions';
-import { MetadataMap, MetadatumViewModel } from '../shared/metadata.models';
+import { MetadataMap, MetadatumViewModel } from '../../core/shared/metadata.models';
 import { Observable } from 'rxjs/internal/Observable';
 import {
   chartDateViewSelector,

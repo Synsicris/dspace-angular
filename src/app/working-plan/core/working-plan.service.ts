@@ -5,21 +5,21 @@ import { catchError, concatMap, delay, filter, first, map, mergeMap, reduce, sca
 import { extendMoment } from 'moment-range';
 import * as Moment from 'moment';
 
-import { SubmissionFormModel } from '../config/models/config-submission-form.model';
-import { SubmissionFormsConfigService } from '../config/submission-forms-config.service';
+import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
+import { SubmissionFormsConfigService } from '../../core/config/submission-forms-config.service';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
-import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
-import { buildPaginatedList, PaginatedList } from '../data/paginated-list.model';
+import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
+import { buildPaginatedList, PaginatedList } from '../../core/data/paginated-list.model';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
-import { RemoteData } from '../data/remote-data';
+import { RemoteData } from '../../core/data/remote-data';
 import { SearchResult } from '../../shared/search/search-result.model';
 import { hasValue, isEmpty, isNotEmpty, isNotNull, isNotUndefined } from '../../shared/empty.util';
 import { followLink } from '../../shared/utils/follow-link-config.model';
-import { Item } from '../shared/item.model';
-import { SearchService } from '../shared/search/search.service';
-import { LinkService } from '../cache/builders/link.service';
-import { MyDSpaceResponseParsingService } from '../data/mydspace-response-parsing.service';
-import { MyDSpaceRequest } from '../data/request.models';
+import { Item } from '../../core/shared/item.model';
+import { SearchService } from '../../core/shared/search/search.service';
+import { LinkService } from '../../core/cache/builders/link.service';
+import { MyDSpaceResponseParsingService } from '../../core/data/mydspace-response-parsing.service';
+import { MyDSpaceRequest } from '../../core/data/request.models';
 import {
   Workpackage,
   WorkpackageChartDates,
@@ -27,25 +27,29 @@ import {
   WorkpackageStep
 } from './models/workpackage-step.model';
 import { WorkpackageEntries } from './working-plan.reducer';
-import { MetadataMap, MetadataValue, MetadatumViewModel } from '../shared/metadata.models';
-import { SubmissionObject } from '../submission/models/submission-object.model';
-import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
-import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
-import { getFinishedRemoteData, getFirstSucceededRemoteDataPayload, getRemoteDataPayload } from '../shared/operators';
-import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
-import { ItemDataService } from '../data/item-data.service';
-import { VocabularyOptions } from '../submission/vocabularies/models/vocabulary-options.model';
-import { VocabularyEntry } from '../submission/vocabularies/models/vocabulary-entry.model';
-import { VocabularyService } from '../submission/vocabularies/vocabulary.service';
-import { Metadata } from '../shared/metadata.utils';
-import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
+import { MetadataMap, MetadataValue, MetadatumViewModel } from '../../core/shared/metadata.models';
+import { SubmissionObject } from '../../core/submission/models/submission-object.model';
+import { JsonPatchOperationPathCombiner } from '../../core/json-patch/builder/json-patch-operation-path-combiner';
+import { JsonPatchOperationsBuilder } from '../../core/json-patch/builder/json-patch-operations-builder';
+import {
+  getFinishedRemoteData,
+  getFirstSucceededRemoteDataPayload,
+  getRemoteDataPayload
+} from '../../core/shared/operators';
+import { ItemJsonPatchOperationsService } from '../../core/data/item-json-patch-operations.service';
+import { ItemDataService } from '../../core/data/item-data.service';
+import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
+import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
+import { VocabularyService } from '../../core/submission/vocabularies/vocabulary.service';
+import { Metadata } from '../../core/shared/metadata.utils';
+import { ItemAuthorityRelationService } from '../../core/shared/item-authority-relation.service';
 import { WorkingPlanStateService } from './working-plan-state.service';
-import { PageInfo } from '../shared/page-info.model';
+import { PageInfo } from '../../core/shared/page-info.model';
 import { dateToISOFormat, isNgbDateStruct } from '../../shared/date.util';
 import { environment } from '../../../environments/environment';
-import { CollectionDataService } from '../data/collection-data.service';
-import { RequestService } from '../data/request.service';
-import { ProjectItemService } from '../project/project-item.service';
+import { CollectionDataService } from '../../core/data/collection-data.service';
+import { RequestService } from '../../core/data/request.service';
+import { ProjectItemService } from '../../core/project/project-item.service';
 
 export const moment = extendMoment(Moment);
 
@@ -273,7 +277,7 @@ export class WorkingPlanService {
       return observableOf([]);
     } else {
       return observableFrom(relatedTaskMetadata).pipe(
-        concatMap((task: MetadataValue) => this.itemService.findById(task.value).pipe(
+        concatMap((task: MetadataValue) => this.itemService.findById(task.authority).pipe(
           getFirstSucceededRemoteDataPayload(),
           map((stepItem: Item) => this.initWorkpackageStepFromItem(stepItem, workspaceItemId, workpackageId)),
         )),

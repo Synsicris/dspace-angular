@@ -1,4 +1,4 @@
-import { Item } from '../../shared/item.model';
+import { Item } from '../../../core/shared/item.model';
 
 export interface WorkpackageSearchItem {
   id: string;

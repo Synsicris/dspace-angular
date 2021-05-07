@@ -59,7 +59,7 @@ import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
 import { EditItemDataService } from '../../core/submission/edititem-data.service';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
 import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
-import { WorkingPlanService } from '../../core/working-plan/working-plan.service';
+import { WorkingPlanService } from '../../working-plan/core/working-plan.service';
 
 describe('SubmissionObjectEffects test suite', () => {
   let submissionObjectEffects: SubmissionObjectEffects;

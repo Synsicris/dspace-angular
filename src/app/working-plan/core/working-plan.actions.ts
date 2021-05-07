@@ -2,8 +2,8 @@ import { Action } from '@ngrx/store';
 
 import { type } from '../../shared/ngrx/type';
 import { Workpackage, WorkpackageSearchItem, WorkpackageStep } from './models/workpackage-step.model';
-import { MetadataMap, MetadatumViewModel } from '../shared/metadata.models';
-import { Item } from '../shared/item.model';
+import { MetadataMap, MetadatumViewModel } from '../../core/shared/metadata.models';
+import { Item } from '../../core/shared/item.model';
 import { ChartDateViewType, WorkpackageEntries } from './working-plan.reducer';
 
 /**

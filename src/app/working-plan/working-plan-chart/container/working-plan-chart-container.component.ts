@@ -15,19 +15,19 @@ import { map, mergeMap, startWith } from 'rxjs/operators';
 import { range } from '../../../shared/array.util';
 import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
-import { WorkpacakgeFlatNode } from '../../../core/working-plan/models/workpackage-step-flat-node.model';
+import { WorkpacakgeFlatNode } from '../../core/models/workpackage-step-flat-node.model';
 import {
   Workpackage,
   WorkpackageChartDate,
   WorkpackageStep,
   WorkpackageTreeObject
-} from '../../../core/working-plan/models/workpackage-step.model';
-import { moment, WorkingPlanService } from '../../../core/working-plan/working-plan.service';
-import { WorkingPlanStateService } from '../../../core/working-plan/working-plan-state.service';
+} from '../../core/models/workpackage-step.model';
+import { moment, WorkingPlanService } from '../../core/working-plan.service';
+import { WorkingPlanStateService } from '../../core/working-plan-state.service';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { hasValue, isNotEmpty, isNotNull } from '../../../shared/empty.util';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
-import { ChartDateViewType } from '../../../core/working-plan/working-plan.reducer';
+import { ChartDateViewType } from '../../core/working-plan.reducer';
 import { environment } from '../../../../environments/environment';
 import { followLink } from '../../../shared/utils/follow-link-config.model';
 import { getAllSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../../../core/shared/operators';
@@ -498,6 +498,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return this.workingPlanStateService.isWorkingPlanMoving();
   }
 
+  canAddChildStep(node: WorkpacakgeFlatNode) {
+    return node.level === 0 && node.type !== environment.workingPlan.milestoneEntityName;
+  }
+
   canMoveDown(flatNode: WorkpacakgeFlatNode, level: number, index: number) {
     let data: any[];
     if (level === 0) {
@@ -674,7 +678,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     if (this.datesMonth.length > 0) {
       const dateFormat = 'YYYY-MM';
       const firstDateMonth = moment(this.datesMonth[0], dateFormat);
-      const lastDateMonth = moment(this.datesMonth[this.datesMonth.length-1], dateFormat);
+      const lastDateMonth = moment(this.datesMonth[this.datesMonth.length - 1], dateFormat);
 
       const beforeStart = moment(firstDateMonth.format('YYYY') + '-01', dateFormat);
       const afterLimit = moment(lastDateMonth.format('YYYY') + '-12', dateFormat);
@@ -687,21 +691,21 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this.datesMonth = this.datesMonth.concat(
         beforeRangeArray
           .map((d) => d.format(this.dateMonthFormat))
-          .filter((d) => this.datesMonth.indexOf(d) == -1)
+          .filter((d) => this.datesMonth.indexOf(d) === -1)
         ).sort();
       this.datesMonth = this.datesMonth.concat(
         afterRangeArray
           .map((d) => d.format(this.dateMonthFormat))
-          .filter((d) => this.datesMonth.indexOf(d) == -1)
+          .filter((d) => this.datesMonth.indexOf(d) === -1)
       ).sort();
     }
     if (this.datesQuarter.length > 0) {
       const firstDateQuarter = this.datesQuarter[0].split('-');
-      const lastDateQuarter = this.datesQuarter[this.datesQuarter.length-1].split('-');
+      const lastDateQuarter = this.datesQuarter[this.datesQuarter.length - 1].split('-');
       let beforeStart = 1;
-      const beforeLimit = parseInt(firstDateQuarter[1]);
-      let afterStart = parseInt(lastDateQuarter[1]);
-      const afterLimit = 4
+      const beforeLimit = parseInt(firstDateQuarter[1], 10);
+      let afterStart = parseInt(lastDateQuarter[1], 10);
+      const afterLimit = 4;
       for (beforeStart; beforeStart < beforeLimit; beforeStart++) {
         this.datesQuarter.unshift(firstDateQuarter[0] + '-' + beforeStart);
       }

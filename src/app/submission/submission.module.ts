@@ -40,6 +40,9 @@ import { DetectDuplicateService } from './sections/detect-duplicate/detect-dupli
 import { ThemedSubmissionEditComponent } from './edit/themed-submission-edit.component';
 import { ThemedSubmissionSubmitComponent } from './submit/themed-submission-submit.component';
 import { ThemedSubmissionImportExternalComponent } from './import-external/themed-submission-import-external.component';
+import { WorkingPlanService } from '../working-plan/core/working-plan.service';
+import { ProjectItemService } from '../core/project/project-item.service';
+import { WorkingPlanStateService } from '../working-plan/core/working-plan-state.service';
 
 const DECLARATIONS = [
   SubmissionSectionUploadAccessConditionsComponent,
@@ -86,7 +89,10 @@ const DECLARATIONS = [
     SectionUploadService,
     SectionsService,
     SubmissionUploadsConfigService,
-    DetectDuplicateService
+    DetectDuplicateService,
+    ProjectItemService,
+    WorkingPlanService,
+    WorkingPlanStateService
   ]
 })
 
