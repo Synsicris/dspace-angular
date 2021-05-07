@@ -32,6 +32,6 @@
         </ng-container>
     </div>
     <div *ngIf="!(isLoading() | async)" class="submission-form-footer mt-3 mb-3 position-sticky">
-    <ds-submission-form-footer [submissionId]="submissionId" [itemId]="item.id" [disableSaveForLater]="true"></ds-submission-form-footer>
+    <ds-submission-form-footer [submissionId]="submissionId" [item]="item" [disableSaveForLater]="true"></ds-submission-form-footer>
     </div>
 </div>

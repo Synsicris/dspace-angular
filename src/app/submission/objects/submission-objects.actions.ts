@@ -678,6 +678,7 @@ export class DiscardSubmissionAction implements Action {
   payload: {
     submissionId: string;
     itemId: string;
+    isEditItem: boolean;
   };
 
   /**
@@ -687,9 +688,11 @@ export class DiscardSubmissionAction implements Action {
    *    the submission's ID to discard
    * @param itemId
    *    the submission item's ID to discard
+   * @param isEditItem
+   *    is submission object is an EditItem
    */
-  constructor(submissionId: string, itemId: string) {
-    this.payload = { submissionId, itemId };
+  constructor(submissionId: string, itemId: string, isEditItem: boolean) {
+    this.payload = { submissionId, itemId, isEditItem };
   }
 }
 
