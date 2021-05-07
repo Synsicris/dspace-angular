@@ -35,6 +35,8 @@ import { EditItemMode } from '../../../core/submission/models/edititem-mode.mode
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { EditItem } from '../../../core/submission/models/edititem.model';
 import { ContextMenuEntryComponent } from '../../../shared/context-menu/context-menu-entry.component';
+import { response } from 'express';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 
 export const MY_FORMATS = {
@@ -106,6 +108,11 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   sidebarResponsibleStatus = true;
 
   /**
+   * The map with the MouseOver statuses of the nodes (rows). Used to change the filled row color on MouseOver.
+   */
+  chartChangeColorIsOver: Map<string, boolean> = new Map<string, boolean>();
+
+  /**
    * The responsible column status (used to expand and collapse the column).
    */
   sidebarStatusStyle = {};
@@ -162,6 +169,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         this.treeControl.dataNodes.forEach((node) => {
           // Retrieve edit modes
           this.retrieveEditMode(node.id);
+          // MouseOver Map
+          this.chartChangeColorIsOver.set(node.id, false);
           if (node.expanded) {
             this.treeControl.expand(node);
           } else {
@@ -180,7 +189,67 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Set the map with the nodes (rows) ids (used to change the filled row color on MouseOver).
+   *
+   * @param nodeId string
+   * @param isOver boolean
+   */
+  chartChangeColor(nodeId: string, isOver: boolean): void {
+    this.chartChangeColorIsOver.set(nodeId, isOver);
+  }
+
+  /**
+   * Returns TRUE or FALSE based on the 'this.chartChangeColorIsOver' variable (used to change the filled row color on MouseOver).
+   *
+   * @param node Workpackage
+   * @param progressDate string
+   * @param rangeDate string
+   *
+   * @returns boolean
+   */
+  chartCheckChangeColor(node: Workpackage, progressDate: string, rangeDate: string): boolean {
+    let response = false;
+    if (this.chartChangeColorIsOver.get(node.id)
+      && !this.isDateInsidePogressRange(progressDate, node)
+      && this.isDateInsideRange(rangeDate, node)) {
+      response = true;
+    }
+    return response;
+  }
+
+  /**
+   * Returns TRUE if the node is the last node of the year (used to draw a red line at the end of the year).
+   *
+   * @param date string
+   * @param type string
+   *
+   * @returns boolean
+   */
+  chartCheckEndOfTheYear(date: string, type: string): boolean {
+    let output = false;
+    let momentDate;
+    if (type == 'month') {
+      momentDate = moment(date, 'YYYY-MM');
+      if (momentDate.format('MM') == '12') {
+        output = true;
+      }
+    } else if (type == 'quarter') {
+      momentDate = date.split('-');
+      if (momentDate[1] == '4') {
+        output = true;
+      }
+    } else {
+      output = true;
+    }
+    return output;
+  }
+
+  /**
    * Check if edit mode is available.
+   *
+   * @param nodeId string
+   *
+   * @returns Observable<boolean>
    */
   isEditAvailable(nodeId): Observable<boolean> {
     return this.editModes$.asObservable().pipe(
@@ -190,6 +259,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   /**
    * Returns the edit modes.
+   *
+   * @returns Observable<Map<string, EditItemMode[]>>
    */
   getEditModes(): Observable<Map<string, EditItemMode[]>> {
     return this.editModes$;
@@ -280,6 +351,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     // We use 'next' to be sure that the event is emitted
     this.editModes$.value.delete(flatNode.id);
     this.editModes$.next(this.editModes$.value);
+    // MouseOver map update
+    this.chartChangeColorIsOver.delete(flatNode.id);
   }
 
   getParentStep(node: WorkpacakgeFlatNode): WorkpacakgeFlatNode {
@@ -655,7 +728,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    *
    * @param nodeId string
    */
-  private retrieveEditMode(nodeId: string) {
+  private retrieveEditMode(nodeId: string): void {
     this.subs.push(this.editItemService.findById(nodeId + ':none', true, true, followLink('modes')).pipe(
       getAllSucceededRemoteDataPayload(),
       mergeMap((editItem: EditItem) => editItem.modes.pipe(
@@ -670,7 +743,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   /**
    * Corrects the months and quarters headers adding what's missing to complete the years.
    */
-  private adjustDates() {
+  private adjustDates(): void {
     if (this.datesMonth.length > 0) {
       const dateFormat = 'YYYY-MM';
       const firstDateMonth = moment(this.datesMonth[0], dateFormat);
