@@ -90,8 +90,6 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
       true
     );
     modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
-    modalRef.componentInstance.excludeListId = [this.impactPathwayTask.id];
-    modalRef.componentInstance.excludeFilterName = 'parentStepId';
     modalRef.componentInstance.vocabularyName = this.impactPathwayService.getTaskTypeAuthorityName(
       this.impactPathwayStep.type,
       true
@@ -101,6 +99,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
       true
     );
     modalRef.componentInstance.scope = this.projectId;
+    modalRef.componentInstance.query = this.buildExcludedTasksQuery();
 
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       this.impactPathwayService.dispatchGenerateImpactPathwaySubTask(
@@ -131,6 +130,19 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
   isProcessing(): Observable<boolean> {
     return this.processing$;
+  }
+
+  private buildExcludedTasksQuery(): string {
+    /*    const subprojectMembersGroup = this.projectGroupService.getProjectMembersGroupNameByCommunity(this.subproject);
+        let query = `(entityGrants:project OR cris.policy.group: ${subprojectMembersGroup})`;*/
+    let query = '';
+    const tasksIds = this.impactPathwayTask.getSubTasksIds();
+    if (tasksIds.length > 0) {
+      const excludedIdsQuery = '-(search.resourceid' + ':(' + tasksIds.join(' OR ') + '))';
+      query += `${excludedIdsQuery}`;
+    }
+
+    return query;
   }
 
 }

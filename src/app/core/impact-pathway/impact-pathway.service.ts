@@ -84,13 +84,11 @@ import { PageInfo } from '../shared/page-info.model';
 import { CollectionDataService } from '../data/collection-data.service';
 import { Collection } from '../shared/collection.model';
 import { RequestService } from '../data/request.service';
-import { SearchFilter } from '../../shared/search/search-filter.model';
 import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
 import { PaginatedList } from '../data/paginated-list.model';
 import { SearchResult } from '../../shared/search/search-result.model';
-import { DSpaceObjectType } from '../shared/dspace-object-type.model';
 import { SearchService } from '../shared/search/search.service';
 import { NoContent } from '../shared/NoContent.model';
 
@@ -418,7 +416,7 @@ export class ImpactPathwayService {
 
   initImpactPathwaySteps(impactPathwayId: string, parentItem: Item): Observable<ImpactPathwayStep[]> {
     return observableFrom(Metadata.all(parentItem.metadata, environment.impactPathway.impactPathwayStepRelationMetadata)).pipe(
-      concatMap((step: MetadataValue) => this.itemService.findById(step.value).pipe(
+      concatMap((step: MetadataValue) => this.itemService.findById(step.authority).pipe(
         getFirstSucceededRemoteDataPayload(),
         mergeMap((stepItem: Item) => this.initImpactPathwayTasksFromParentItem(impactPathwayId, stepItem).pipe(
           map((tasks: ImpactPathwayTask[]) => this.initImpactPathwayStep(impactPathwayId, stepItem, tasks))
@@ -434,7 +432,7 @@ export class ImpactPathwayService {
       return observableOf([]);
     } else {
       return observableFrom(Metadata.all(parentItem.metadata, environment.impactPathway.impactPathwayTaskRelationMetadata)).pipe(
-        concatMap((task: MetadataValue) => this.itemService.findById(task.value).pipe(
+        concatMap((task: MetadataValue) => this.itemService.findById(task.authority).pipe(
           getFinishedRemoteData(),
           mergeMap((rd: RemoteData<Item>) => {
             if (rd.hasSucceeded) {
@@ -452,7 +450,7 @@ export class ImpactPathwayService {
                 // NOTE if a task is not found probably it has been deleted without unlinking it from parent step, so unlink it
                 return this.itemAuthorityRelationService.removeChildRelationFromParent(
                   parentItem.id,
-                  task.value,
+                  task.authority,
                   environment.impactPathway.impactPathwayTaskRelationMetadata
                 ).pipe(mapTo(null));
               } else {
@@ -502,6 +500,7 @@ export class ImpactPathwayService {
 
   removeByHref(href: string): Observable<boolean> {
     return this.itemService.deleteByHref(href).pipe(
+      getFinishedRemoteData(),
       map((response: RemoteData<NoContent>) => response.isSuccess)
     );
   }
@@ -725,8 +724,8 @@ export class ImpactPathwayService {
     this.operationsBuilder.add(pathCombiner.getPath('dc.description'), impactPathwayDescription, true, true);
     const stepValueList = steps.map((step: Item) => Object.assign(new VocabularyEntry(), {
       authority: step.id,
-      display: step.name,
-      value: step.id,
+      value: step.name,
+      confidence: 600,
     }));
     this.operationsBuilder.add(pathCombiner.getPath(environment.impactPathway.impactPathwayStepRelationMetadata), stepValueList, true, false);
   }

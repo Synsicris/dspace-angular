@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { find, map, mergeMap, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,7 +14,6 @@ import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple
 import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';
 import { isNotEmpty } from '../../../../shared/empty.util';
 import { DragAndDropContainerComponent } from '../../drag-and-drop-container.component';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'ipw-impact-path-way-step',
@@ -30,7 +30,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
   @Input() public impactPathwayStepId: string;
   @Input() public allImpactPathwayStepIds: string[];
 
-  public impactPathwayStep$: Observable<ImpactPathwayStep>;
+  public impactPathwayStep$: BehaviorSubject<ImpactPathwayStep> = new BehaviorSubject<ImpactPathwayStep>(null);
 
   private title$: Observable<string>;
   private info$: Observable<string>;
@@ -46,7 +46,11 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
 
   ngOnInit(): void {
     this.connectedToList = this.allImpactPathwayStepIds;
-    this.impactPathwayStep$ = this.impactPathwayService.getImpactPathwayStepById(this.impactPathwayStepId);
+    this.subs.push(this.impactPathwayService.getImpactPathwayStepById(this.impactPathwayStepId)
+      .subscribe((step: ImpactPathwayStep) => {
+        this.impactPathwayStep$.next(step);
+      })
+    );
     this.title$ = this.impactPathwayStep$.pipe(
       find((impactPathwayStep: ImpactPathwayStep) => isNotEmpty(impactPathwayStep)),
       map((impactPathwayStep: ImpactPathwayStep) => `impact-pathway.step.label.${impactPathwayStep.type}`),
@@ -91,8 +95,6 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
         false
       );
       modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
-      modalRef.componentInstance.excludeListId = [this.impactPathwayStepId];
-      modalRef.componentInstance.excludeFilterName = 'parentStepId';
       modalRef.componentInstance.vocabularyName = this.impactPathwayService.getTaskTypeAuthorityName(
         impactPathwayStep.type,
         false
@@ -102,6 +104,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
         false
       );
       modalRef.componentInstance.scope = this.projectId;
+      modalRef.componentInstance.query = this.buildExcludedTasksQuery();
 
       modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
         this.impactPathwayService.dispatchGenerateImpactPathwayTask(
@@ -137,4 +140,18 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
   getTasks(): Observable<ImpactPathwayTask[]> {
     return this.impactPathwayService.getImpactPathwayTasksByStepId(this.impactPathwayId, this.impactPathwayStepId);
   }
+
+  private buildExcludedTasksQuery(): string {
+    /*    const subprojectMembersGroup = this.projectGroupService.getProjectMembersGroupNameByCommunity(this.subproject);
+        let query = `(entityGrants:project OR cris.policy.group: ${subprojectMembersGroup})`;*/
+    let query = '';
+    const tasksIds = this.impactPathwayStep$.value.getTasksIds();
+    if (tasksIds.length > 0) {
+      const excludedIdsQuery = '-(search.resourceid' + ':(' + tasksIds.join(' OR ') + '))';
+      query += `${excludedIdsQuery}`;
+    }
+
+    return query;
+  }
+
 }
