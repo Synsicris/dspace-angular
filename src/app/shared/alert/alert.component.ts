@@ -33,7 +33,7 @@ export class AlertComponent implements OnInit {
   /**
    * A boolean representing if alert is rendered already collapsed
    */
-  @Input() collapsed = false;
+  @Input() collapsed = true;
 
   /**
    * A boolean representing if alert is dismissible
