@@ -22,9 +22,9 @@ export const environment: GlobalConfig = {
   // The REST API server settings.
   // NOTE: these must be "synced" with the 'dspace.server.url' setting in your backend's local.cfg.
   rest: {
-    ssl: true,
-    host: 'dspacecris7.4science.cloud',
-    port: 443,
+    ssl: false,
+    host: 'localhost',
+    port: 8080,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/server',
   },
@@ -377,7 +377,6 @@ export const environment: GlobalConfig = {
   },
   workingPlan: {
     workingPlanFormName: 'working_plan_workpackage_form',
-    workingPlanParentRelationMetadata: 'workingplan.relation.parent',
     workingPlanStepsFormName: 'working_plan_workpackage_step_form',
     workingPlanStepStatusMetadata: 'workingplan.step.status',
     workingPlanStepResponsibleMetadata: 'workingplan.responsible',
@@ -386,11 +385,15 @@ export const environment: GlobalConfig = {
     workingPlanStepDateStartMetadata: 'dc.date.start',
     workingPlanStepDateEndMetadata: 'dc.date.end',
     workpackageEntityName: 'workpackage',
-    workpackagesSearchConfigName: 'allWorkpackages',
+    milestoneEntityName: 'milestone',
+    allLinkedWorkingPlanObjSearchConfigName: 'allLinkedWorkingPlanObj',
+    allUnlinkedWorkingPlanObjSearchConfigName: 'allUnlinkedWorkingPlanObj',
     workpackageStepsSearchConfigName: 'workpackageSteps',
     workpackageStatusTypeAuthority: 'working_plan_workpackage_status_type',
+    workpackageTypeAuthority: 'working_plan_workpackage_type',
     workpackageStepTypeAuthority: 'working_plan_workpackage_step_type',
-    workingPlanPlaceMetadata: 'workingplan.place'
+    workingPlanPlaceMetadata: 'workingplan.place',
+    workingPlanLinkMetadata: 'workingplan.link.status'
   },
   projects: {
     projectsGrantsOptionsVocabularyName: 'item_shared'

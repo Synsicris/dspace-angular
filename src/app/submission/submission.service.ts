@@ -247,9 +247,11 @@ export class SubmissionService {
    *    The submission id
    * @param itemId
    *    The submission item id
+   * @param isEditItem
+   *    is submission object is an EditItem
    */
-  dispatchDiscard(submissionId, itemId) {
-    this.store.dispatch(new DiscardSubmissionAction(submissionId, itemId));
+  dispatchDiscard(submissionId, itemId, isEditItem = false) {
+    this.store.dispatch(new DiscardSubmissionAction(submissionId, itemId, isEditItem));
   }
 
   /**

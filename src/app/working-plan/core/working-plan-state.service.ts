@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store';
 
 import { AppState } from '../../app.reducer';
 import {
+  AddWorkpackageAction,
   AddWorkpackageStepAction,
   ChangeChartViewAction,
   GenerateWorkpackageAction,
@@ -11,21 +12,22 @@ import {
   MoveWorkpackageStepAction,
   RemoveWorkpackageAction,
   RemoveWorkpackageStepAction,
-  RetrieveAllWorkpackagesAction,
+  RetrieveAllLinkedWorkingPlanObjectsAction,
   UpdateWorkpackageAction,
   UpdateWorkpackageStepAction
 } from './working-plan.actions';
-import { MetadataMap, MetadatumViewModel } from '../shared/metadata.models';
+import { MetadataMap, MetadatumViewModel } from '../../core/shared/metadata.models';
 import { Observable } from 'rxjs/internal/Observable';
 import {
   chartDateViewSelector,
   isWorkingPlanLoadedSelector,
   isWorkingPlanMovingSelector,
   isWorkingPlanProcessingSelector,
+  workpackagesSelector,
   workpackageToRemoveSelector
 } from './selectors';
-import { map } from 'rxjs/operators';
-import { ChartDateViewType } from './working-plan.reducer';
+import { map, startWith } from 'rxjs/operators';
+import { ChartDateViewType, WorkpackageEntries } from './working-plan.reducer';
 import { Workpackage, WorkpackageStep } from './models/workpackage-step.model';
 
 @Injectable()
@@ -47,8 +49,12 @@ export class WorkingPlanStateService {
     this.store.dispatch(new ChangeChartViewAction(chartDateView));
   }
 
-  public dispatchGenerateWorkpackage(projectId: string, metadata: MetadataMap, place: string): void {
-    this.store.dispatch(new GenerateWorkpackageAction(projectId, metadata, place));
+  public dispatchGenerateWorkpackage(projectId: string, type: string, metadata: MetadataMap, place: string): void {
+    this.store.dispatch(new GenerateWorkpackageAction(projectId, type, metadata, place));
+  }
+
+  public dispatchAddWorkpackageAction(itemId: string, workspaceItemId: string, place: string): void {
+    this.store.dispatch(new AddWorkpackageAction(itemId, workspaceItemId, place));
   }
 
   public dispatchGenerateWorkpackageStep(
@@ -77,7 +83,7 @@ export class WorkingPlanStateService {
   }
 
   public dispatchRetrieveAllWorkpackages(projectId: string): void {
-    this.store.dispatch(new RetrieveAllWorkpackagesAction(projectId));
+    this.store.dispatch(new RetrieveAllLinkedWorkingPlanObjectsAction(projectId));
   }
 
   public dispatchUpdateWorkpackageAction(
@@ -99,6 +105,14 @@ export class WorkingPlanStateService {
 
   public getChartDateViewSelector() {
     return this.store.pipe(select(chartDateViewSelector));
+  }
+
+  public getWorkpackages(): Observable<Workpackage[]> {
+    return this.store.pipe(
+      select(workpackagesSelector),
+      map((entries: WorkpackageEntries) => Object.keys(entries).map((key) => entries[key])),
+      startWith([])
+    );
   }
 
   public getWorkpackageToRemoveId() {

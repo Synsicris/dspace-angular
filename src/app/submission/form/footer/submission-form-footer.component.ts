@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 import { Observable, of as observableOf } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,6 +8,10 @@ import { SubmissionRestService } from '../../../core/submission/submission-rest.
 import { SubmissionService } from '../../submission.service';
 import { SubmissionScopeType } from '../../../core/submission/submission-scope-type';
 import { isNotEmpty } from '../../../shared/empty.util';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Item } from '../../../core/shared/item.model';
 
 /**
  * This component represents submission form footer bar.
@@ -17,18 +21,19 @@ import { isNotEmpty } from '../../../shared/empty.util';
   styleUrls: ['./submission-form-footer.component.scss'],
   templateUrl: './submission-form-footer.component.html'
 })
-export class SubmissionFormFooterComponent implements OnChanges {
+export class SubmissionFormFooterComponent implements OnInit, OnChanges {
 
   /**
    * The submission id
    * @type {string}
    */
   @Input() submissionId: string;
+
   /**
-   * The submission item id
+   * The submission item
    * @type {string}
    */
-  @Input() itemId: string;
+  @Input() item: Item;
 
   /**
    * A boolean representing if discard and delete button should be disable or not
@@ -78,15 +83,29 @@ export class SubmissionFormFooterComponent implements OnChanges {
   public hasUnsavedModification: Observable<boolean>;
 
   /**
+   * A boolean representing if submission object can be deleted by current user
+   */
+  private canDelete$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * Initialize instance variables
    *
+   * @param {AuthorizationDataService} authorizationService
    * @param {NgbModal} modalService
    * @param {SubmissionRestService} restService
    * @param {SubmissionService} submissionService
    */
-  constructor(private modalService: NgbModal,
+  constructor(private authorizationService: AuthorizationDataService,
+              private modalService: NgbModal,
               private restService: SubmissionRestService,
               private submissionService: SubmissionService) {
+  }
+
+  ngOnInit(): void {
+    this.authorizationService.isAuthorized(FeatureID.CanDelete, this.item.self)
+      .subscribe((canDelete) => {
+        this.canDelete$.next(this.submissionService.getSubmissionScope() === SubmissionScopeType.EditItem && canDelete);
+      });
   }
 
   /**
@@ -128,6 +147,10 @@ export class SubmissionFormFooterComponent implements OnChanges {
     this.submissionService.dispatchDeposit(this.submissionId);
   }
 
+  public canDelete() {
+    return this.canDelete$.asObservable();
+  }
+
   /**
    * Dispatch a submission discard action
    */
@@ -135,7 +158,11 @@ export class SubmissionFormFooterComponent implements OnChanges {
     this.modalService.open(content).result.then(
       (result) => {
         if (result === 'ok') {
-          this.submissionService.dispatchDiscard(this.submissionId, this.itemId);
+          this.submissionService.dispatchDiscard(
+            this.submissionId,
+            this.item.id,
+            this.submissionService.getSubmissionScope() === SubmissionScopeType.EditItem
+          );
         }
       }
     );

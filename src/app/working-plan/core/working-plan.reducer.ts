@@ -17,7 +17,7 @@ import {
   WorkingPlanActions,
   WorkpackageActionTypes
 } from './working-plan.actions';
-import { ImpactPathwayState } from '../impact-pathway/impact-pathway.reducer';
+import { ImpactPathwayState } from '../../core/impact-pathway/impact-pathway.reducer';
 
 export enum ChartDateViewType {
   day = 'day',
@@ -73,7 +73,7 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
       });
     }
 
-    case WorkpackageActionTypes.RETRIEVE_ALL_WORKPACKAGES: {
+    case WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS: {
       return Object.assign({}, workpackageInitialState, {
         processing: true
       });

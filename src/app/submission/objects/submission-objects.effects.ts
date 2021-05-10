@@ -10,7 +10,6 @@ import {
   catchError,
   concatMap,
   filter,
-  flatMap,
   map,
   mergeMap,
   switchMap,
@@ -65,14 +64,14 @@ import {
 import { SubmissionObjectEntry, SubmissionSectionError, SubmissionSectionObject } from './submission-objects.reducer';
 import { Item } from '../../core/shared/item.model';
 import { RemoteData } from '../../core/data/remote-data';
-import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
+import { getFinishedRemoteData, getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
 import { SubmissionObjectDataService } from '../../core/submission/submission-object-data.service';
 import { followLink } from '../../shared/utils/follow-link-config.model';
 import parseSectionErrorPaths, { SectionErrorPath } from '../utils/parseSectionErrorPaths';
 import { FormState } from '../../shared/form/form.reducer';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
 import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
-import { WorkingPlanService } from '../../core/working-plan/working-plan.service';
+import { ItemDataService } from '../../core/data/item-data.service';
 
 @Injectable()
 export class SubmissionObjectEffects {
@@ -321,10 +320,14 @@ export class SubmissionObjectEffects {
     ofType(SubmissionObjectActionTypes.DISCARD_SUBMISSION),
     switchMap((action: DiscardSubmissionAction) => {
       return this.impactPathwayService.checkAndRemoveRelations(action.payload.itemId).pipe(
-        flatMap(() => this.workingPlanService.checkAndRemoveRelations(action.payload.itemId)),
-        flatMap(() => this.submissionService.discardSubmission(action.payload.submissionId).pipe(
-          map(() => new DiscardSubmissionSuccessAction(action.payload.submissionId)),
-          catchError(() => observableOf(new DiscardSubmissionErrorAction(action.payload.submissionId)))))
+        mergeMap(() => {
+          const remove$: Observable<any> = action.payload.isEditItem ? this.itemDataService.delete(action.payload.itemId).pipe(getFinishedRemoteData()) :
+            this.submissionService.discardSubmission(action.payload.submissionId);
+          return remove$.pipe(
+            map(() => new DiscardSubmissionSuccessAction(action.payload.submissionId)),
+            catchError(() => observableOf(new DiscardSubmissionErrorAction(action.payload.submissionId)))
+          );
+        })
       );
     }));
 
@@ -385,8 +388,8 @@ export class SubmissionObjectEffects {
               private submissionService: SubmissionService,
               private submissionObjectService: SubmissionObjectDataService,
               private translate: TranslateService,
-              private impactPathwayService: ImpactPathwayService,
-              private workingPlanService: WorkingPlanService,
+              private itemDataService: ItemDataService,
+              private impactPathwayService: ImpactPathwayService
               ) {
   }
 

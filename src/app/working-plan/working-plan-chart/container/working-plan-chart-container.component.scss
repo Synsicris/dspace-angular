@@ -1,5 +1,78 @@
+.auto-width {
+  flex: 1 1 0%;
+  box-sizing: border-box;
+  font-size: .85rem;
+}
+
+.block-ellipsis {
+  display: block;
+  display: -webkit-box;
+  max-width: 100%;
+  height: 43px;
+  margin: 0 auto;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ml-05 {
+  margin-left: .5rem;
+}
+
+.mr-05 {
+  margin-right: .5rem;
+}
+
+.font-size-07 {
+  font-size: .7rem;
+}
+
+.min-width-large {
+  min-width: 300px;
+}
+
+.min-width-small {
+  min-width: 100px;
+}
+
+// Buttons styles
 button.btn:focus {
   outline: none;
+}
+
+.mat-icon-button {
+  width: 26px;
+  height: 26px;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .mat-form-field-flex {
+  padding: 0 !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 2px;
+}
+
+::ng-deep .mat-select-arrow-wrapper {
+  transform: none !important;
+}
+
+// Extra small buttons
+.btn-group-xs > .btn, .btn-xs {
+  padding: .4rem .35rem;
+  font-size: .875rem;
+  line-height: .5;
+  border-radius: .2rem;
+}
+
+// Document wide tree-node adjustment
+.mat-tree-node {
+  min-height: 100px;
 }
 
 // variables
@@ -7,10 +80,54 @@ $toolbarHeight: 64px;
 $nodeWidth: 100px;
 $calendarCellWidth: 60px;
 $nodeHeight: 50px;
-$completeColor: #2196F3;
-$incompleteColor: #9E9E9E;
+$completeColor: #89b34d;
+$incompleteColor: #89b34d;
+$overColor: #559541;
 $borderColor: #BDBDBD;
 $highlightBorderColor: #FF9800;
+
+.calendar-head-border {
+  border-bottom: solid 2px $borderColor;
+}
+
+.calendar-head-year-border {
+  border-bottom: solid 3px $borderColor;
+}
+
+.calendar-head-year-sub-border {
+  border-bottom: solid 1px $borderColor;
+}
+
+.calendar-node-customization {
+  height: 100%;
+  align-items: center;
+  border-top: none;
+  border-left: none;
+}
+
+.calendar-cell-customization {
+  border-style: none;
+  border-left: none;
+  border-right: none;
+  height: 30px;
+  min-height: 30px;
+  line-height: 30px;
+}
+
+.calendar-cell-heading {
+  border-bottom-width: 2px !important;
+}
+
+// column adjustment
+.tree-node-customization {
+  align-items: normal;
+  border-bottom: solid 1px $borderColor;
+  border-right: solid 1px $borderColor;
+}
+
+.tree-node-end-of-the-year-customization {
+  border-right: solid 2px red !important;
+}
 
 // sidenav
 .sidenav {
@@ -26,17 +143,16 @@ $highlightBorderColor: #FF9800;
 
 // resizable border
 [mwlResizable] {
-  border-right: 3px solid $borderColor;
+  border-right: 1px solid $borderColor;
   box-sizing: border-box;
 }
 
 // sidenav header(not calendar)
 .sidenav-header {
-  text-align: center;
   line-height: $nodeHeight;
   height: $nodeHeight;
   min-height: $nodeHeight;
-  border-width: 1px 3px 1px 0;
+  border-width: 0 0px 4px 0;
   border-color: $borderColor;
   border-style: solid;
 }
@@ -50,6 +166,7 @@ $highlightBorderColor: #FF9800;
 /** names */
 
 .sidenav.chart-column {
+  background-color: #FFFFFF;
   mat-tree.tree {
     padding-top: 14px; // align the lines of input and table
   }
@@ -61,7 +178,7 @@ $highlightBorderColor: #FF9800;
   flex: 0 0 300px;
   mat-tree.tree {
     padding-top: 14px; // align the lines and table
-    border-width: 0 3px 0 0;
+    border-width: 0 1px 0 0;
     border-color: $borderColor;
     border-style: solid;
     mat-tree-node {
@@ -158,4 +275,9 @@ $highlightBorderColor: #FF9800;
 // incompleted inner cell
 .calendar-inner-cell[date-filled=false][date-inside=true] {
   background-color: $incompleteColor;
+}
+
+// MouseOver effect on the filled cells
+.calendar-inner-cell-over {
+  background-color: $overColor !important;
 }

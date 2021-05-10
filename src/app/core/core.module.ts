@@ -2,11 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 
-import {
-  DynamicFormLayoutService,
-  DynamicFormService,
-  DynamicFormValidationService
-} from '@ng-dynamic-forms/core';
+import { DynamicFormLayoutService, DynamicFormService, DynamicFormValidationService } from '@ng-dynamic-forms/core';
 import { EffectsModule } from '@ngrx/effects';
 
 import { Action, StoreConfig, StoreModule } from '@ngrx/store';
@@ -203,8 +199,6 @@ import { EditItemRelationsGuard } from '../edit-item-relationships/guards/edit-i
 import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
 import { ObjectiveService } from './impact-pathway/objective.service';
 import { ImpactPathwayLinksService } from './impact-pathway/impact-pathway-links.service';
-import { WorkingPlanService } from './working-plan/working-plan.service';
-import { WorkingPlanStateService } from './working-plan/working-plan-state.service';
 import { ItemAuthorityRelationService } from './shared/item-authority-relation.service';
 import { ProjectDataService } from './project/project-data.service';
 import { CollectionSearchResult } from '../shared/object-collection/shared/collection-search-result.model';
@@ -361,8 +355,6 @@ const PROVIDERS = [
   ImpactPathwayService,
   ObjectiveService,
   ImpactPathwayLinksService,
-  WorkingPlanService,
-  WorkingPlanStateService,
   ProjectDataService,
   ProjectAuthorizationService,
   ProjectGroupService
