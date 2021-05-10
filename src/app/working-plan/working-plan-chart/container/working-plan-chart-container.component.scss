@@ -106,9 +106,6 @@ $highlightBorderColor: #FF9800;
 }
 
 .calendar-cell-customization {
-  border-style: none;
-  border-left: none;
-  border-right: none;
   height: 30px;
   min-height: 30px;
   line-height: 30px;
@@ -116,6 +113,10 @@ $highlightBorderColor: #FF9800;
 
 .calendar-cell-heading {
   border-bottom-width: 2px !important;
+}
+
+.milestone-border {
+  border: solid 1px greenyellow;
 }
 
 // column adjustment

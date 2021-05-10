@@ -254,6 +254,11 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     );
   }
 
+  isMilestoneBorder() {
+    /*node.type == 'milestone'*/
+    return false;
+  }
+
   /**
    * Returns the edit modes.
    *

@@ -182,9 +182,8 @@
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
         <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
           <div *ngFor="let date of datesMonth; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(date, 'month'))?' tree-node-end-of-the-year-customization':''}}">
-            <div class="calendar-cell w-100 d-flex flex-wrap calendar-cell-customization">
-              <div *ngFor="let day of getDaysInMonth(date);"
-                  class="calendar-inner-cell h-100 flex-fill{{(chartCheckChangeColor(node, date + '-' + day, date + '-' + day))?' calendar-inner-cell-over':''}}"
+            <div *ngFor="let day of getDaysInMonth(date);" class="d-flex flex-fill calendar-node-customization{{(isMilestoneBorder())?' milestone-border':''}}">
+              <div class="calendar-inner-cell flex-fill calendar-cell-customization{{(chartCheckChangeColor(node, date + '-' + day, date + '-' + day))?' calendar-inner-cell-over':''}}"
                   [attr.date-filled]="isDateInsidePogressRange(date + '-' + day, node)"
                   [attr.date-inside]="isDateInsideRange(date + '-' + day, node)"></div>
             </div>
