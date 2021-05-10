@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Workpackage } from '../core/working-plan/models/workpackage-step.model';
-import { WorkingPlanStateService } from '../core/working-plan/working-plan-state.service';
+import { Workpackage } from './core/models/workpackage-step.model';
+import { WorkingPlanStateService } from './core/working-plan-state.service';
 
 @Component({
   selector: 'ipw-working-plan',

@@ -48,10 +48,11 @@ import {
 } from './working-plan.actions';
 import { WorkingPlanService } from './working-plan.service';
 import { Workpackage, WorkpackageSearchItem, WorkpackageStep } from './models/workpackage-step.model';
-import { Item } from '../shared/item.model';
-import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
+import { Item } from '../../core/shared/item.model';
+import { ItemAuthorityRelationService } from '../../core/shared/item-authority-relation.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SubmissionObjectActionTypes } from '../../submission/objects/submission-objects.actions';
+import { environment } from '../../../environments/environment';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -181,11 +182,10 @@ export class WorkingPlanEffects {
   @Effect() addStep$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.ADD_WORKPACKAGE_STEP),
     concatMap((action: AddWorkpackageStepAction) => {
-      return this.itemAuthorityRelationService.linkItemToParent(
+      return this.itemAuthorityRelationService.addLinkedItemToParent(
         action.payload.parentId,
         action.payload.workpackageStepId,
-        'workingplan.relation.parent',
-        'workingplan.relation.step').pipe(
+        environment.workingPlan.workingPlanStepRelationMetadata).pipe(
         map((taskItem: Item) => {
           return this.workingPlanService.initWorkpackageStepFromItem(
             taskItem,
@@ -240,11 +240,11 @@ export class WorkingPlanEffects {
   @Effect() removeStep$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.REMOVE_WORKPACKAGE_STEP),
     switchMap((action: RemoveWorkpackageStepAction) => {
-      return this.itemAuthorityRelationService.unlinkItemFromParent(
+      return this.itemAuthorityRelationService.removeChildRelationFromParent(
         action.payload.workpackageId,
         action.payload.workpackageStepId,
-        'workingplan.relation.parent',
-        'workingplan.relation.step').pipe(
+        environment.workingPlan.workingPlanStepRelationMetadata
+      ).pipe(
         map(() => new RemoveWorkpackageStepSuccessAction(
           action.payload.workpackageId,
           action.payload.workpackageStepId)),
@@ -296,7 +296,7 @@ export class WorkingPlanEffects {
     withLatestFrom(this.store$),
     switchMap(([action, state]: [InitWorkingplanSuccessAction, any]) => {
       return this.workingPlanService.updateWorkpackagePlace(
-        state.core.workingplan.workpackages);
+        state.workingplan.workpackages);
     }));
 
   /**
@@ -347,7 +347,7 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.MOVE_WORKPACKAGE),
     withLatestFrom(this.store$),
     map(([action, state]: [MoveWorkpackageAction, any]) => {
-      return new SaveWorkpackageOrderAction(state.core.workingplan.workpackages);
+      return new SaveWorkpackageOrderAction(state.workingplan.workpackages);
     }));
 
   /**
@@ -358,7 +358,7 @@ export class WorkingPlanEffects {
     withLatestFrom(this.store$),
     switchMap(([action, state]: [SaveWorkpackageOrderAction, any]) => {
       return this.workingPlanService.updateWorkpackagePlace(
-        state.core.workingplan.workpackages).pipe(
+        state.workingplan.workpackages).pipe(
         map(() => new SaveWorkpackageOrderSuccessAction()),
         catchError((error: Error) => {
           if (error) {
@@ -377,7 +377,7 @@ export class WorkingPlanEffects {
     map(([action, state]: [MoveWorkpackageStepAction, any]) => {
       return new SaveWorkpackageStepsOrderAction(
         action.payload.workpackageId,
-        state.core.workingplan.workpackages[action.payload.workpackageId],
+        state.workingplan.workpackages[action.payload.workpackageId],
         action.payload.workpackage.steps
       );
     }));
@@ -391,7 +391,7 @@ export class WorkingPlanEffects {
     switchMap(([action, state]: [SaveWorkpackageStepsOrderAction, any]) => {
       return this.workingPlanService.updateWorkpackageStepsPlace(
         action.payload.workpackageId,
-        state.core.workingplan.workpackages[action.payload.workpackageId].steps
+        state.workingplan.workpackages[action.payload.workpackageId].steps
       ).pipe(
         map(() => new SaveWorkpackageOrderSuccessAction()),
         catchError((error: Error) => {

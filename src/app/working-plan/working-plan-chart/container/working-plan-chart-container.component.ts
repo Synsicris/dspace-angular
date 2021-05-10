@@ -15,19 +15,19 @@ import { map, mergeMap, startWith } from 'rxjs/operators';
 import { range } from '../../../shared/array.util';
 import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
-import { WorkpacakgeFlatNode } from '../../../core/working-plan/models/workpackage-step-flat-node.model';
+import { WorkpacakgeFlatNode } from '../../core/models/workpackage-step-flat-node.model';
 import {
   Workpackage,
   WorkpackageChartDate,
   WorkpackageStep,
   WorkpackageTreeObject
-} from '../../../core/working-plan/models/workpackage-step.model';
-import { moment, WorkingPlanService } from '../../../core/working-plan/working-plan.service';
-import { WorkingPlanStateService } from '../../../core/working-plan/working-plan-state.service';
+} from '../../core/models/workpackage-step.model';
+import { moment, WorkingPlanService } from '../../core/working-plan.service';
+import { WorkingPlanStateService } from '../../core/working-plan-state.service';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { hasValue, isNotEmpty, isNotNull } from '../../../shared/empty.util';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
-import { ChartDateViewType } from '../../../core/working-plan/working-plan.reducer';
+import { ChartDateViewType } from '../../core/working-plan.reducer';
 import { environment } from '../../../../environments/environment';
 import { followLink } from '../../../shared/utils/follow-link-config.model';
 import { getAllSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../../../core/shared/operators';
@@ -225,14 +225,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   chartCheckEndOfTheYear(date: string, type: string): boolean {
     let output = false;
     let momentDate;
-    if (type == 'month') {
+    if (type === 'month') {
       momentDate = moment(date, 'YYYY-MM');
-      if (momentDate.format('MM') == '12') {
+      if (momentDate.format('MM') === '12') {
         output = true;
       }
-    } else if (type == 'quarter') {
+    } else if (type === 'quarter') {
       momentDate = date.split('-');
-      if (momentDate[1] == '4') {
+      if (momentDate[1] === '4') {
         output = true;
       }
     } else {
@@ -319,11 +319,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.formConfig = this.workingPlanService.getWorkpackageStepFormConfig();
     modalRef.componentInstance.formHeader = this.workingPlanService.getWorkpackageStepFormHeader();
     modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
-    modalRef.componentInstance.excludeListId = [nestedNode.id];
-    modalRef.componentInstance.excludeFilterName = 'parentWorkpackageId';
     modalRef.componentInstance.vocabularyName = this.workingPlanService.getWorkpackageStepTypeAuthorityName();
     modalRef.componentInstance.searchConfiguration = this.workingPlanService.getWorkpackageStepSearchConfigName();
     modalRef.componentInstance.scope = this.projectId;
+    modalRef.componentInstance.query = this.buildExcludedTasksQuery(flatNode);
 
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
@@ -574,6 +573,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return this.workingPlanStateService.isWorkingPlanMoving();
   }
 
+  canAddChildStep(node: WorkpacakgeFlatNode) {
+    return node.level === 0 && node.type !== environment.workingPlan.milestoneEntityName;
+  }
+
   canMoveDown(flatNode: WorkpacakgeFlatNode, level: number, index: number) {
     let data: any[];
     if (level === 0) {
@@ -750,7 +753,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     if (this.datesMonth.length > 0) {
       const dateFormat = 'YYYY-MM';
       const firstDateMonth = moment(this.datesMonth[0], dateFormat);
-      const lastDateMonth = moment(this.datesMonth[this.datesMonth.length-1], dateFormat);
+      const lastDateMonth = moment(this.datesMonth[this.datesMonth.length - 1], dateFormat);
 
       const beforeStart = moment(firstDateMonth.format('YYYY') + '-01', dateFormat);
       const afterLimit = moment(lastDateMonth.format('YYYY') + '-12', dateFormat);
@@ -763,21 +766,21 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this.datesMonth = this.datesMonth.concat(
         beforeRangeArray
           .map((d) => d.format(this.dateMonthFormat))
-          .filter((d) => this.datesMonth.indexOf(d) == -1)
+          .filter((d) => this.datesMonth.indexOf(d) === -1)
         ).sort();
       this.datesMonth = this.datesMonth.concat(
         afterRangeArray
           .map((d) => d.format(this.dateMonthFormat))
-          .filter((d) => this.datesMonth.indexOf(d) == -1)
+          .filter((d) => this.datesMonth.indexOf(d) === -1)
       ).sort();
     }
     if (this.datesQuarter.length > 0) {
       const firstDateQuarter = this.datesQuarter[0].split('-');
-      const lastDateQuarter = this.datesQuarter[this.datesQuarter.length-1].split('-');
+      const lastDateQuarter = this.datesQuarter[this.datesQuarter.length - 1].split('-');
       let beforeStart = 1;
-      const beforeLimit = parseInt(firstDateQuarter[1]);
-      let afterStart = parseInt(lastDateQuarter[1]);
-      const afterLimit = 4
+      const beforeLimit = parseInt(firstDateQuarter[1], 10);
+      let afterStart = parseInt(lastDateQuarter[1], 10);
+      const afterLimit = 4;
       for (beforeStart; beforeStart < beforeLimit; beforeStart++) {
         this.datesQuarter.unshift(firstDateQuarter[0] + '-' + beforeStart);
       }
@@ -785,5 +788,18 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         this.datesQuarter.push(lastDateQuarter[0] + '-' + afterStart);
       }
     }
+  }
+
+  private buildExcludedTasksQuery(flatNode: WorkpacakgeFlatNode): string {
+/*    const subprojectMembersGroup = this.projectGroupService.getProjectMembersGroupNameByCommunity(this.subproject);
+    let query = `(entityGrants:project OR cris.policy.group: ${subprojectMembersGroup})`;*/
+    let query = '';
+    const tasksIds = flatNode.steps.map((step) => step.id);
+    if (tasksIds.length > 0) {
+      const excludedIdsQuery = '-(search.resourceid' + ':(' + tasksIds.join(' OR ') + '))';
+      query += `${excludedIdsQuery}`;
+    }
+
+    return query;
   }
 }

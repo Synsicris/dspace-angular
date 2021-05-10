@@ -6,10 +6,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
-import { WorkingPlanService } from '../../../core/working-plan/working-plan.service';
-import { WorkingPlanStateService } from '../../../core/working-plan/working-plan-state.service';
-import { ChartDateViewType } from '../../../core/working-plan/working-plan.reducer';
-import { Workpackage } from '../../../core/working-plan/models/workpackage-step.model';
+import { WorkingPlanService } from '../../core/working-plan.service';
+import { WorkingPlanStateService } from '../../core/working-plan-state.service';
+import { ChartDateViewType } from '../../core/working-plan.reducer';
+import { Workpackage } from '../../core/models/workpackage-step.model';
 import { environment } from '../../../../environments/environment';
 import { hasValue } from '../../../shared/empty.util';
 

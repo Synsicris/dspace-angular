@@ -199,8 +199,6 @@ import { EditItemRelationsGuard } from '../edit-item-relationships/guards/edit-i
 import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
 import { ObjectiveService } from './impact-pathway/objective.service';
 import { ImpactPathwayLinksService } from './impact-pathway/impact-pathway-links.service';
-import { WorkingPlanService } from './working-plan/working-plan.service';
-import { WorkingPlanStateService } from './working-plan/working-plan-state.service';
 import { ItemAuthorityRelationService } from './shared/item-authority-relation.service';
 import { ProjectDataService } from './project/project-data.service';
 import { CollectionSearchResult } from '../shared/object-collection/shared/collection-search-result.model';
@@ -212,7 +210,6 @@ import { CommunitySearchResult } from '../shared/object-collection/shared/commun
 import { ItemSearchResult } from '../shared/object-collection/shared/item-search-result.model';
 import { ProjectAuthorizationService } from './project/project-authorization.service';
 import { ProjectGroupService } from './project/project-group.service';
-import { ProjectItemService } from './project/project-item.service';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -358,12 +355,9 @@ const PROVIDERS = [
   ImpactPathwayService,
   ObjectiveService,
   ImpactPathwayLinksService,
-  WorkingPlanService,
-  WorkingPlanStateService,
   ProjectDataService,
   ProjectAuthorizationService,
-  ProjectGroupService,
-  ProjectItemService
+  ProjectGroupService
 ];
 
 /**

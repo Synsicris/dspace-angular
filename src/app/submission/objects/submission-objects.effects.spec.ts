@@ -59,7 +59,8 @@ import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
 import { EditItemDataService } from '../../core/submission/edititem-data.service';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
 import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
-import { WorkingPlanService } from '../../core/working-plan/working-plan.service';
+import { ItemDataService } from '../../core/data/item-data.service';
+import { createNoContentRemoteDataObject$ } from '../../shared/remote-data.utils';
 
 describe('SubmissionObjectEffects test suite', () => {
   let submissionObjectEffects: SubmissionObjectEffects;
@@ -80,8 +81,8 @@ describe('SubmissionObjectEffects test suite', () => {
     checkAndRemoveRelations: jasmine.createSpy('checkAndRemoveRelations')
   });
 
-  const workingPlanService = jasmine.createSpyObj('WorkingPlanService', {
-    checkAndRemoveRelations: jasmine.createSpy('checkAndRemoveRelations')
+  const mockItemDataService = jasmine.createSpyObj('mockItemDataService', {
+    delete: createNoContentRemoteDataObject$()
   });
 
   beforeEach(() => {
@@ -113,8 +114,8 @@ describe('SubmissionObjectEffects test suite', () => {
         { provide: WorkflowItemDataService, useValue: {} },
         { provide: EditItemDataService, useValue: {} },
         { provide: HALEndpointService, useValue: {} },
-        { provide: ImpactPathwayService, useValue: impactPathwayService },
-        { provide: WorkingPlanService, useValue: workingPlanService },
+        { provide: ItemDataService, useValue: mockItemDataService },
+        { provide: ImpactPathwayService, useValue: impactPathwayService }
       ],
     });
 
@@ -1169,7 +1170,6 @@ describe('SubmissionObjectEffects test suite', () => {
   describe('discardSubmission$', () => {
     beforeEach(() => {
       impactPathwayService.checkAndRemoveRelations.and.returnValue(observableOf(new Item()));
-      workingPlanService.checkAndRemoveRelations.and.returnValue(observableOf(new Item()));
     });
 
     it('should return a DISCARD_SUBMISSION_SUCCESS action on success', () => {

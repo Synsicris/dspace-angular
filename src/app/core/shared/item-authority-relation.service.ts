@@ -93,10 +93,12 @@ export class ItemAuthorityRelationService {
 
   removeRelationPatch(targetItem: Item, relationIdToRemove: string, relationMetadataName: string): void {
     const relationMetadataList: MetadataValue[] = targetItem.findMetadataSortedByPlace(relationMetadataName);
-    const relationPlace: number = findIndex(relationMetadataList, { value: relationIdToRemove });
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
-    const path = pathCombiner.getPath([relationMetadataName, relationPlace.toString()]);
-    this.operationsBuilder.remove(path);
+    const relationPlace: number = findIndex(relationMetadataList, { authority: relationIdToRemove });
+    if (relationPlace !== -1) {
+      const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+      const path = pathCombiner.getPath([relationMetadataName, relationPlace.toString()]);
+      this.operationsBuilder.remove(path);
+    }
   }
 
   /**

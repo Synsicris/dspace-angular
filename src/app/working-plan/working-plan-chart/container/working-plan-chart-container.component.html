@@ -36,13 +36,13 @@
             <span class="text-success font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
           </div>
           <div class="mr-05">
-            <button mat-icon-button *ngIf="node.level === 0"
+            <button mat-icon-button *ngIf="canAddChildStep(node)"
                     class="btn btn-xs btn-link p-0 text-success"
                     title="{{'working-plan.chart.button.add' | translate}}"
                     (click)="addChildStep(node)">
               <mat-icon>add</mat-icon>
             </button>
-            <br *ngIf="node.level === 0">
+            <br *ngIf="canAddChildStep(node)">
             <button *ngIf="(isEditAvailable(node.id) | async)" mat-icon-button
                     class="btn btn-xs btn-link p-0 text-primary"
                     [class.ml-1]="node.level !== 0"

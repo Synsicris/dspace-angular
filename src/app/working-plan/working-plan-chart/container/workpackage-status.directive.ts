@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 
-import { WorkpackageStatusType } from '../../../core/working-plan/models/workpackage-status-type';
+import { WorkpackageStatusType } from '../../core/models/workpackage-status-type';
 
 @Directive({
   selector: '[ipwWorkpackageStatusIcon]'
