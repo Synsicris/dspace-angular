@@ -6979,6 +6979,12 @@
   "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "<i>Please select a funding programme objective to which the project contributes. Please describe the contribution of the project in a key message. Or select already existing items via the search.</i></br>The description of the contribution can usually be kept short.",
 
 
+  "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
+
+
+  "submission.sections.submit.progressbar.working_plan_workpackage_step_form.info": "",
+
+
   "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
 
 
@@ -7259,9 +7265,6 @@
 
 
   "submission.sections.submit.progressbar.describe.workpackages": "Workpackage",
-
-
-  "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
 
 
   "submission.sections.submit.progressbar.describe.workpackages.info": "Describe here only general aspects that do not also arise in the assigned tasks and activities.",
