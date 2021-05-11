@@ -49,4 +49,10 @@ export class ImpactPathwayStep {
   setTasks(tasks: ImpactPathwayTask[]) {
     this.tasks = [...tasks];
   }
+
+  getTasksIds(): string[] {
+    const tasksIds: string[] = this.tasks.map((task) => task.id);
+
+    return tasksIds;
+  }
 }

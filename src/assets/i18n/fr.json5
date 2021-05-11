@@ -1277,13 +1277,13 @@
   // TODO New key - Add a translation
   "alert.close.aria": "Close",
   
-  // "alert.toggle.hide": "Hide",
+  // "alert.toggle.hide": "Show less",
   // TODO New key - Add a translation
-  "alert.toggle.hide": "Hide",
+  "alert.toggle.hide": "Show less",
   
-  // "alert.toggle.show": "Show",
+  // "alert.toggle.show": "Show more",
   // TODO New key - Add a translation
-  "alert.toggle.show": "Show",
+  "alert.toggle.show": "Show more",
   
   
   // "auth.errors.invalid-user": "Invalid email address or password.",
@@ -11008,6 +11008,16 @@
   "submission.sections.submit.progressbar.impact_pathway_step_type_6_task_form.info": "<i>Please select a funding programme objective to which the project contributes. Please describe the contribution of the project in a key message. Or select already existing items via the search.</i></br>The description of the contribution can usually be kept short.",
   
   
+  // "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
+  
+  
+  // "submission.sections.submit.progressbar.working_plan_workpackage_step_form.info": "",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.working_plan_workpackage_step_form.info": "",
+  
+  
   // "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
@@ -11476,11 +11486,6 @@
   // "submission.sections.submit.progressbar.describe.workpackages": "Workpackage",
   // TODO New key - Add a translation
   "submission.sections.submit.progressbar.describe.workpackages": "Workpackage",
-  
-  
-  // "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
   
   
   // "submission.sections.submit.progressbar.describe.workpackages.info": "Describe here only general aspects that do not also arise in the assigned tasks and activities.",
@@ -12197,6 +12202,16 @@
   "working-plan.breadcrumbs": "Working plan",
   
   
+  // "working-plan.chart.button.expandAll": "Expand all",
+  // TODO New key - Add a translation
+  "working-plan.chart.button.expandAll": "Expand all",
+  
+  
+  // "working-plan.chart.button.collapseAll": "Collapse all",
+  // TODO New key - Add a translation
+  "working-plan.chart.button.collapseAll": "Collapse all",
+  
+  
   // "working-plan.chart.button.add": "add",
   // TODO New key - Add a translation
   "working-plan.chart.button.add": "add",
@@ -12207,14 +12222,19 @@
   "working-plan.chart.button.remove": "Unlink item",
   
   
+  // "working-plan.chart.button.edit": "Edit item",
+  // TODO New key - Add a translation
+  "working-plan.chart.button.edit": "Edit item",
+  
+  
   // "working-plan.chart.column.dates": "Dates",
   // TODO New key - Add a translation
   "working-plan.chart.column.dates": "Dates",
   
   
-  // "working-plan.chart.column.responsible": "Responsible",
+  // "working-plan.chart.column.responsible": "Organisation",
   // TODO New key - Add a translation
-  "working-plan.chart.column.responsible": "Responsible",
+  "working-plan.chart.column.responsible": "Organisation",
   
   
   // "working-plan.chart.column.status": "Status",
@@ -12222,9 +12242,14 @@
   "working-plan.chart.column.status": "Status",
   
   
-  // "working-plan.chart.column.steps": "Steps",
+  // "working-plan.chart.column.expand": "Expand column",
   // TODO New key - Add a translation
-  "working-plan.chart.column.steps": "Steps",
+  "working-plan.chart.column.expand": "Expand column",
+  
+  
+  // "working-plan.chart.column.collapse": "Collapse column",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.collapse": "Collapse column",
   
   
   // "working-plan.chart.move.down.btn": "Move down",
@@ -12240,6 +12265,16 @@
   // "working-plan.chart.move.up.btn": "Move up",
   // TODO New key - Add a translation
   "working-plan.chart.move.up.btn": "Move up",
+  
+  
+  // "working-plan.chart.page.description": "Maecenas facilisis cursus nisl, eget gravida risus mollis a. Phasellus a quam vitae lorem finibus consequat. Vestibulum dictum, sem sed suscipit euismod, lorem diam lobortis sem, in ultrices ipsum risus a enim. Nunc efficitur interdum urna, eget accumsan arcu scelerisque maximus. In hac habitasse platea dictumst. Nunc vestibulum volutpat iaculis. Phasellus scelerisque congue ante vel luctus. Proin gravida semper eros, dignissim dapibus tortor laoreet quis. Maecenas nec dui risus. Sed metus lorem, egestas quis turpis et, viverra aliquet metus. Praesent et viverra velit. Donec vel magna tempor, tempus sem vel, ultrices diam. In sed neque id ligula hendrerit vulputate sit amet id ex. Mauris dignissim scelerisque tempor. Maecenas quis convallis felis. Nunc pharetra maximus sapien id vulputate.",
+  // TODO New key - Add a translation
+  "working-plan.chart.page.description": "Maecenas facilisis cursus nisl, eget gravida risus mollis a. Phasellus a quam vitae lorem finibus consequat. Vestibulum dictum, sem sed suscipit euismod, lorem diam lobortis sem, in ultrices ipsum risus a enim. Nunc efficitur interdum urna, eget accumsan arcu scelerisque maximus. In hac habitasse platea dictumst. Nunc vestibulum volutpat iaculis. Phasellus scelerisque congue ante vel luctus. Proin gravida semper eros, dignissim dapibus tortor laoreet quis. Maecenas nec dui risus. Sed metus lorem, egestas quis turpis et, viverra aliquet metus. Praesent et viverra velit. Donec vel magna tempor, tempus sem vel, ultrices diam. In sed neque id ligula hendrerit vulputate sit amet id ex. Mauris dignissim scelerisque tempor. Maecenas quis convallis felis. Nunc pharetra maximus sapien id vulputate.",
+  
+  
+  // "working-plan.page.title": "Working plan",
+  // TODO New key - Add a translation
+  "working-plan.page.title": "Working plan",
   
   
   // "working-plan.chart.toggle.collapse.btn": "Collapse",
@@ -12292,14 +12327,14 @@
   "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
   
   
+  // "working-plan.chart.toolbar.versions": "Versions",
+  // TODO New key - Add a translation
+  "working-plan.chart.toolbar.versions": "Versions",
+  
+  
   // "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
   // TODO New key - Add a translation
   "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
-  
-  
-  // "working-plan.page.title": "Working plan",
-  // TODO New key - Add a translation
-  "working-plan.page.title": "Working plan",
   
   
   // "application.listelement.badge": "Applications of solutions / changes / innovations",

@@ -36,6 +36,12 @@ export class ImpactPathwayTask {
     return step;
   }
 
+  getSubTasksIds(): string[] {
+    const tasksIds: string[] = this.tasks.map((task) => task.id);
+
+    return tasksIds;
+  }
+
   getSubTaskIndex(taskId: string): number {
     return findIndex(this.tasks, { id: taskId });
   }

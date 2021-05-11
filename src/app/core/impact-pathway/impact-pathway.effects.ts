@@ -196,11 +196,10 @@ export class ImpactPathwayEffects {
   @Effect() addTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK),
     concatMap((action: AddImpactPathwayTaskAction) => {
-      return this.itemAuthorityRelationService.linkItemToParent(
+      return this.itemAuthorityRelationService.addLinkedItemToParent(
         action.payload.stepId,
         action.payload.taskId,
-        'impactpathway.relation.parent',
-        'impactpathway.relation.task').pipe(
+        environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
         map((taskItem: Item) => {
           return this.impactPathwayService.initImpactPathwayTask(taskItem, action.payload.stepId);
         }),
@@ -274,11 +273,11 @@ export class ImpactPathwayEffects {
   @Effect() addSubTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK),
     concatMap((action: AddImpactPathwaySubTaskAction) => {
-      return this.itemAuthorityRelationService.linkItemToParent(
+      return this.itemAuthorityRelationService.addLinkedItemToParent(
         action.payload.parentTaskId,
         action.payload.taskId,
-        'impactpathway.relation.parent',
-        'impactpathway.relation.task').pipe(
+        environment.impactPathway.impactPathwayTaskRelationMetadata
+      ).pipe(
         map((taskItem: Item) => {
           return this.impactPathwayService.initImpactPathwayTask(taskItem, action.payload.parentTaskId);
         }),
@@ -323,7 +322,7 @@ export class ImpactPathwayEffects {
           const actions = item.findMetadataSortedByPlace(environment.impactPathway.impactPathwayStepRelationMetadata)
             .map((relationMetadata: MetadataValue) => new RemoveImpactPathwayStepAction(
               item.id,
-              relationMetadata.value
+              relationMetadata.authority
             )
           );
           return [...actions, new RemoveImpactPathwaySuccessAction(
@@ -361,7 +360,7 @@ export class ImpactPathwayEffects {
           return observableFrom(parentItem.findMetadataSortedByPlace(environment.impactPathway.impactPathwayTaskRelationMetadata)).pipe(
             concatMap((relationMetadata: MetadataValue) => this.itemAuthorityRelationService.removeParentRelationFromChild(
               action.payload.stepId,
-              relationMetadata.value,
+              relationMetadata.authority,
               environment.impactPathway.impactPathwayParentRelationMetadata
             )),
             reduce((acc: any, value: any) => [...acc, value], []),
@@ -375,7 +374,7 @@ export class ImpactPathwayEffects {
         )),
         catchError((error: Error) => {
           if (error) {
-            console.error(error.message);
+            console.error(error.message || error);
           }
           return observableOf(new RemoveImpactPathwayStepErrorAction());
         }));
@@ -387,11 +386,11 @@ export class ImpactPathwayEffects {
   @Effect() removeTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK),
     switchMap((action: RemoveImpactPathwayTaskAction) => {
-      return this.itemAuthorityRelationService.unlinkItemFromParent(
+      return this.itemAuthorityRelationService.removeChildRelationFromParent(
         action.payload.parentId,
         action.payload.taskId,
-        'impactpathway.relation.parent',
-        'impactpathway.relation.task').pipe(
+        environment.impactPathway.impactPathwayTaskRelationMetadata
+      ).pipe(
         map(() => new RemoveImpactPathwayTaskSuccessAction(
           action.payload.impactPathwayId,
           action.payload.parentId,
@@ -410,11 +409,11 @@ export class ImpactPathwayEffects {
   @Effect() removeSubTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUB_TASK),
     switchMap((action: RemoveImpactPathwaySubTaskAction) => {
-      return this.itemAuthorityRelationService.unlinkItemFromParent(
+      return this.itemAuthorityRelationService.removeChildRelationFromParent(
         action.payload.parentTaskId,
         action.payload.taskId,
-        'impactpathway.relation.parent',
-        'impactpathway.relation.task').pipe(
+        environment.impactPathway.impactPathwayTaskRelationMetadata
+      ).pipe(
         map(() => new RemoveImpactPathwaySubTaskSuccessAction(
           action.payload.impactPathwayId,
           action.payload.stepId,

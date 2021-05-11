@@ -292,7 +292,10 @@ export class ItemAuthorityRelationService {
       objectId,
       pathName).pipe(
       tap((item: Item) => this.itemService.update(item)),
-      catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
+      catchError((error: ErrorResponse) => {
+        console.log(objectId, pathName);
+        return observableThrowError(new Error(error.errorMessage));
+      })
     );
   }
 }
