@@ -177,35 +177,35 @@ export const environment: GlobalConfig = {
   }, {
     code: 'cs',
     label: 'Čeština',
-    active: true,
+    active: false,
   }, {
     code: 'nl',
     label: 'Nederlands',
-    active: true,
+    active: false,
   },{
     code: 'pt-BR',
     label: 'Português do Brasil',
-    active: true,
+    active: false,
   },{
     code: 'pt-PT',
     label: 'Português',
-    active: true,
+    active: false,
   }, {
     code: 'fr',
     label: 'Français',
-    active: true,
+    active: false,
   }, {
     code: 'lv',
     label: 'Latviešu',
-    active: true,
+    active: false,
   },{
     code: 'fi',
     label: 'Suomi',
-    active: true,
+    active: false,
   },{
     code: 'hu',
     label: 'magyar',
-    active: true,
+    active: false,
   }],
   // Browse-By Pages
   browseBy: {
