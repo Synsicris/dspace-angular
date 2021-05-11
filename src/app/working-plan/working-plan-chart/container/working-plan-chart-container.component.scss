@@ -106,17 +106,13 @@ $highlightBorderColor: #FF9800;
 }
 
 .calendar-cell-customization {
-  height: 30px;
+  height: 30px !important;
   min-height: 30px;
   line-height: 30px;
 }
 
 .calendar-cell-heading {
   border-bottom-width: 2px !important;
-}
-
-.milestone-border {
-  border: solid 1px greenyellow;
 }
 
 // column adjustment
@@ -127,7 +123,24 @@ $highlightBorderColor: #FF9800;
 }
 
 .tree-node-end-of-the-year-customization {
-  border-right: solid 2px red !important;
+  border-right: solid 1px red !important;
+}
+
+.tree-node-milestone-customization {
+  width: 1px;
+  border-right: solid 1px blue;
+  background-color: #adbb97;
+  box-shadow: -4px 0px 10px 0px #59870e;
+}
+
+.tree-node-milestone-rhombus {
+  width: 8px;
+  height: 8px !important;
+  border: solid 1px blue;
+  background-color: blue !important;
+  transform: rotate(45deg);
+  min-width: 8px !important;
+  min-height: 8px !important;
 }
 
 // sidenav

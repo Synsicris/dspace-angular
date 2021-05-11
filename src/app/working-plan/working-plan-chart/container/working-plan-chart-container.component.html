@@ -107,7 +107,7 @@
         </mat-tree-node>
       </mat-tree>
     </div>
-    <!-- dates, responsibles and statuses -->
+    <!-- dates, organisations and statuses -->
     <div class="sidenav chart-column responsible{{(this.sidebarResponsibleStatus)?'':' d-none'}}" [ngStyle]="sidebarResponsibleStyle" fxLayout="column"
          mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'responsible')">
       <div class="sidenav-header">
@@ -128,7 +128,7 @@
         <mat-tree-node *matTreeNodeDef="let node" class="tree-node-customization" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
           <div class="ml-05 mt-1 font-size-07">
             <p class="font-weight-bold m-0">{{'working-plan.chart.column.dates' | translate}}</p>
-            <mat-form-field floatLabel="never" appearance="fill" class="p-0">
+            <mat-form-field *ngIf="node.type != 'milestone'" floatLabel="never" appearance="fill" class="p-0">
               <mat-label>Start</mat-label>
               <input matInput [matDatepicker]="startDate" [min]="node.level > 0 ? getParentStep(node).dates.start.full : null"
                 [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [value]="node.dates.start.full"
@@ -136,12 +136,12 @@
               <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
               <mat-datepicker #startDate></mat-datepicker>
             </mat-form-field>
-            <br>
+            <br *ngIf="node.type != 'milestone'">
             <mat-form-field floatLabel="never" appearance="fill" class="p-0">
               <mat-label>End</mat-label>
               <input matInput [matDatepicker]="endDate" [min]="node.level > 0 ? getParentStep(node).dates.start.full : null"
                 [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [value]="node.dates.end.full"
-                (dateChange)="updateDateRange(node, node.dates.start.full, $event.value)">
+                (dateChange)="updateDateRange(node, (node.type != 'milestone')?node.dates.start.full:$event.value, $event.value)">
               <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
               <mat-datepicker #endDate></mat-datepicker>
             </mat-form-field>
@@ -182,8 +182,11 @@
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
         <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
           <div *ngFor="let date of datesMonth; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(date, 'month'))?' tree-node-end-of-the-year-customization':''}}">
-            <div *ngFor="let day of getDaysInMonth(date);" class="d-flex flex-fill calendar-node-customization{{(isMilestoneBorder())?' milestone-border':''}}">
-              <div class="calendar-inner-cell flex-fill calendar-cell-customization{{(chartCheckChangeColor(node, date + '-' + day, date + '-' + day))?' calendar-inner-cell-over':''}}"
+            <div *ngFor="let day of getDaysInMonth(date);" class="d-flex flex-fill calendar-node-customization"
+              [class.tree-node-milestone-customization]="chartCheckMilestone(date + '-' + day)">
+              <div class="calendar-inner-cell flex-fill calendar-cell-customization"
+                  [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, date + '-' + day)"
+                  [class.calendar-inner-cell-over]="chartCheckChangeColor(node, date + '-' + day, date + '-' + day)"
                   [attr.date-filled]="isDateInsidePogressRange(date + '-' + day, node)"
                   [attr.date-inside]="isDateInsideRange(date + '-' + day, node)"></div>
             </div>
@@ -204,16 +207,16 @@
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
         <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
           <div *ngFor="let quarter of datesQuarter; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(quarter, 'quarter'))?' tree-node-end-of-the-year-customization':''}}">
-            <div class="calendar-cell w-100 d-flex flex-wrap calendar-cell-customization">
-              <div *ngFor="let month of getMonthInQuarter(quarter);"
-                  class="h-100 d-flex flex-fill flex-wrap"
-                  [attr.date-filled]="false">
-                <div *ngFor="let day of getDaysInMonth(getQaurterYear(quarter) + '-' + month);"
-                    class="calendar-inner-cell h-100 flex-fill{{(chartCheckChangeColor(node, getQaurterYear(quarter) + '-' + month + '-' + day, getQaurterYear(quarter) + '-' + month + '-' + day))?' calendar-inner-cell-over':''}}"
+            <ng-container *ngFor="let month of getMonthInQuarter(quarter);">
+              <div *ngFor="let day of getDaysInMonth(getQaurterYear(quarter) + '-' + month);" class="d-flex flex-fill calendar-node-customization"
+                [class.tree-node-milestone-customization]="chartCheckMilestone(getQaurterYear(quarter) + '-' + month + '-' + day)">
+                <div class="calendar-inner-cell h-100 flex-fill calendar-cell-customization"
+                    [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, getQaurterYear(quarter) + '-' + month + '-' + day)"
+                    [class.calendar-inner-cell-over]="chartCheckChangeColor(node, getQaurterYear(quarter) + '-' + month + '-' + day, getQaurterYear(quarter) + '-' + month + '-' + day)"
                     [attr.date-filled]="isDateInsidePogressRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"
                     [attr.date-inside]="isDateInsideRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"></div>
               </div>
-            </div>
+            </ng-container>
           </div>
         </mat-tree-node>
       </mat-tree>
@@ -226,16 +229,16 @@
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
         <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
           <div *ngFor="let year of datesYear; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(year, 'year'))?' tree-node-end-of-the-year-customization':''}}">
-            <div class="calendar-cell w-100 d-flex flex-wrap calendar-cell-customization">
-              <div *ngFor="let month of getMonthInYear();"
-                  class="h-100 d-flex flex-fill flex-wrap"
-                  [attr.date-filled]="false">
-                <div *ngFor="let day of getDaysInMonth(year + '-' + month);"
-                    class="calendar-inner-cell h-100 flex-fill{{(chartCheckChangeColor(node, year + '-' + month + '-' + day, year + '-' + month + '-' + day))?' calendar-inner-cell-over':''}}"
+            <ng-container *ngFor="let month of getMonthInYear();">
+              <div *ngFor="let day of getDaysInMonth(year + '-' + month);" class="d-flex flex-fill calendar-node-customization"
+              [class.tree-node-milestone-customization]="chartCheckMilestone(year + '-' + month + '-' + day)">
+                <div class="calendar-inner-cell h-100 flex-fill calendar-cell-customization"
+                    [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, year + '-' + month + '-' + day)"
+                    [class.calendar-inner-cell-over]="chartCheckChangeColor(node, year + '-' + month + '-' + day, year + '-' + month + '-' + day)"
                     [attr.date-filled]="isDateInsidePogressRange(year + '-' + month + '-' + day, node)"
                     [attr.date-inside]="isDateInsideRange(year + '-' + month + '-' + day, node)"></div>
               </div>
-            </div>
+            </ng-container>
           </div>
         </mat-tree-node>
       </mat-tree>

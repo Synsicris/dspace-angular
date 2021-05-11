@@ -113,6 +113,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    * The responsible column status (used to expand and collapse the column).
    */
   sidebarStatusStyle = {};
+
+  /**
+   * The milestones map used to draw a blue line and a rhombus at the milestone date.
+   */
+  milestonesMap: Map<string, string> = new Map<string, string>();
+
   /**
    * List of Edit Modes available on each node for the current user
    */
@@ -168,6 +174,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
           this.retrieveEditMode(node.id);
           // MouseOver Map
           this.chartChangeColorIsOver.set(node.id, false);
+          // Milestones border and rhombus
+          if (node.type === 'milestone') {
+            this.milestonesMap.set(node.id, node.dates.end.full);
+          }
           if (node.expanded) {
             this.treeControl.expand(node);
           } else {
@@ -242,6 +252,38 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Returns TRUE if the node date match a milestone date (used to draw a blue line at the milestone date).
+   *
+   * @param date string
+   *
+   * @returns boolean
+   */
+  chartCheckMilestone(date: string): boolean {
+    const milestoneDates = Array.from(this.milestonesMap.values());
+    let output = false;
+    if (milestoneDates.indexOf(date) !== -1) {
+      output = true;
+    }
+    return output;
+  }
+
+  /**
+   * Returns TRUE if the node id match a milestone id (used to draw a rhombus at the milestone date).
+   *
+   * @param nodeId string
+   * @param date string
+   *
+   * @returns boolean
+   */
+  chartCheckNodeMilestone(nodeId: string, date: string): boolean {
+    let output = false;
+    if (this.milestonesMap.has(nodeId) && this.milestonesMap.get(nodeId) === date) {
+      output = true;
+    }
+    return output;
+  }
+
+  /**
    * Check if edit mode is available.
    *
    * @param nodeId string
@@ -252,11 +294,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return this.editModes$.asObservable().pipe(
       map((editModes) => isNotEmpty(editModes) && editModes.has(nodeId) && editModes.get(nodeId).length > 0)
     );
-  }
-
-  isMilestoneBorder() {
-    /*node.type == 'milestone'*/
-    return false;
   }
 
   /**
@@ -328,6 +365,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
       this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectId, flatNode.id, item.type.value, metadata);
       // the 'this.editModes$' map is auto-updated by the ngOnInit subscribe
+      if (flatNode.type === 'milestone') {
+        this.milestonesMap.set(flatNode.id, flatNode.dates.end.full);
+      }
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {
@@ -355,6 +395,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.editModes$.next(this.editModes$.value);
     // MouseOver map update
     this.chartChangeColorIsOver.delete(flatNode.id);
+    // Milestones map update
+    this.milestonesMap.delete(flatNode.id);
   }
 
   getParentStep(node: WorkpacakgeFlatNode): WorkpacakgeFlatNode {
@@ -384,13 +426,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string) {
 
     // create new dates object
-    const startMoment = this.moment(startDate); // create start moment
-    const startDateObj: WorkpackageChartDate = {
-      full: startMoment.format(this.dateFormat),
-      month: startMoment.format(this.dateMonthFormat),
-      year: startMoment.format(this.dateYearFormat)
-    };
-
+    let dates;
+    let startMoment;
+    let startDateObj: WorkpackageChartDate;
     const endMoment = this.moment(endDate); // create start moment
     const endDateObj: WorkpackageChartDate = {
       full: endMoment.format(this.dateFormat),
@@ -398,10 +436,23 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       year: endMoment.format(this.dateYearFormat)
     };
 
-    const dates = {
-      start: startDateObj,
-      end: endDateObj
-    };
+    if (flatNode.type !== 'milestone') {
+      startMoment = this.moment(startDate); // create start moment
+      startDateObj = {
+        full: startMoment.format(this.dateFormat),
+        month: startMoment.format(this.dateMonthFormat),
+        year: startMoment.format(this.dateYearFormat)
+      };
+
+      dates = {
+        start: startDateObj,
+        end: endDateObj
+      };
+    } else {
+      dates = {
+        end: endDateObj
+      };
+    }
 
     // update flat node dates
     flatNode = Object.assign({}, flatNode, {
@@ -418,11 +469,18 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this.buildCalendar();
     }
 
+    let velues = [];
+    if (nestedNode.type !== 'milestone') {
+      velues = [nestedNode.dates.start.full, nestedNode.dates.end.full];
+    } else {
+      velues = [nestedNode.dates.end.full];
+    }
+
     this.updateField(
       flatNode,
       nestedNode,
       [environment.workingPlan.workingPlanStepDateStartMetadata, environment.workingPlan.workingPlanStepDateEndMetadata],
-      [nestedNode.dates.start.full, nestedNode.dates.end.full]
+      velues
     );
   }
 
@@ -475,8 +533,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.datesYear = [];
 
     this.dataSource.data.forEach((step: Workpackage) => {
-      const start = this.moment(step.dates.start.full, this.dateFormat);
+      let start;
       const end = this.moment(step.dates.end.full, this.dateFormat);
+      if (step.type === 'milestone') {
+        start = this.moment(this.moment(step.dates.end.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
+      } else {
+        start = this.moment(step.dates.start.full, this.dateFormat);
+      }
       const dateRange = moment.range(start, end);
 
       // Moment range sometimes does not include all the months, so use the end of the month to get the correct range
@@ -565,8 +628,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return (node.progressDates.indexOf(date) > -1);
   }
 
-  isDateInsideRange(date: string, node: Workpackage): boolean {
-    return date >= node.dates.start.full && date <= node.dates.end.full;
+  isDateInsideRange(date: string, node: Workpackage): boolean {2
+    if (node.type !== 'milestone') {
+      return date >= node.dates.start.full && date <= node.dates.end.full;
+    } else {
+      return date == node.dates.end.full;
+    }
   }
 
   isMoving(): Observable<boolean> {
