@@ -35,7 +35,6 @@ import { EditItemMode } from '../../../core/submission/models/edititem-mode.mode
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { EditItem } from '../../../core/submission/models/edititem.model';
 
-
 export const MY_FORMATS = {
   parse: {
     dateInput: 'YYYY-MM-DD',
@@ -423,6 +422,32 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return (index !== -1) ? this.chartStatusTypeList$.value[index].display : statusType;
   }
 
+  updateAllDateRange(days: string, direction: string) {
+    let startDate;
+    let endDate;
+    let startStringDate;
+    let endStringDate;
+    const originalMap = new Map(this.flatNodeMap);
+
+    originalMap.forEach((node: WorkpacakgeFlatNode) => {
+      if (node.type === 'milestone') {
+        startDate = this.moment(node.dates.end.full, this.dateFormat);
+      } else {
+        startDate = this.moment(node.dates.start.full, this.dateFormat);
+      }
+      endDate = this.moment(node.dates.end.full, this.dateFormat);
+      if (direction === 'later') {
+        startStringDate = startDate.add(days, 'days').format(this.dateFormat);
+        endStringDate = endDate.add(days, 'days').format(this.dateFormat);
+      } else {
+        startStringDate = startDate.subtract(days, 'days').format(this.dateFormat);
+        endStringDate = endDate.subtract(days, 'days').format(this.dateFormat);
+      }
+
+      this.updateDateRange(node, startStringDate, endStringDate);
+    });
+  }
+
   updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string) {
 
     // create new dates object
@@ -469,18 +494,18 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this.buildCalendar();
     }
 
-    let velues = [];
+    let values = [];
     if (nestedNode.type !== 'milestone') {
-      velues = [nestedNode.dates.start.full, nestedNode.dates.end.full];
+      values = [nestedNode.dates.start.full, nestedNode.dates.end.full];
     } else {
-      velues = [nestedNode.dates.end.full];
+      values = [null, nestedNode.dates.end.full];
     }
 
     this.updateField(
       flatNode,
       nestedNode,
       [environment.workingPlan.workingPlanStepDateStartMetadata, environment.workingPlan.workingPlanStepDateEndMetadata],
-      velues
+      values
     );
   }
 
@@ -628,11 +653,11 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return (node.progressDates.indexOf(date) > -1);
   }
 
-  isDateInsideRange(date: string, node: Workpackage): boolean {2
+  isDateInsideRange(date: string, node: Workpackage): boolean {
     if (node.type !== 'milestone') {
       return date >= node.dates.start.full && date <= node.dates.end.full;
     } else {
-      return date == node.dates.end.full;
+      return date === node.dates.end.full;
     }
   }
 
@@ -730,6 +755,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   isProcessingWorkpackageRemove(node: WorkpacakgeFlatNode): Observable<boolean> {
     return this.workingPlanService.isProcessingWorkpackageRemove(node.id);
+  }
+
+  isProcessingWorkpackage(): Observable<boolean> {
+    return this.workingPlanService.isProcessingWorkpackage();
   }
 
   ngOnDestroy(): void {

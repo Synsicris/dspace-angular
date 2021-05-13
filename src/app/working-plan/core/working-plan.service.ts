@@ -372,6 +372,10 @@ export class WorkingPlanService {
     );
   }
 
+  isProcessingWorkpackage(): Observable<boolean> {
+    return this.workingPlanStateService.isProcessing();
+  }
+
   setDefaultForStatusMetadata(metadata: MetadataMap): MetadataMap {
     let result: MetadataMap = metadata;
     if (!metadata.hasOwnProperty(environment.workingPlan.workingPlanStepStatusMetadata)

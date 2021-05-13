@@ -7744,6 +7744,30 @@
   "working-plan.chart.column.dates": "Dates",
 
 
+  "working-plan.chart.column.dates.start": "Start date",
+
+
+  "working-plan.chart.column.dates.end": "End date",
+
+
+  "working-plan.chart.column.changeStartDate.input.description": "Difference in days:",
+
+
+  "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later:",
+
+
+  "working-plan.chart.column.changeStartDate.radio.earlier": "Earlier",
+
+
+  "working-plan.chart.column.changeStartDate.radio.later": "Later",
+
+
+  "working-plan.chart.column.changeStartDate": "Change start date",
+
+
+  "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
+
+
   "working-plan.chart.column.responsible": "Organisation",
 
 

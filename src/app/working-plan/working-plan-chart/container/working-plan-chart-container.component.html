@@ -112,11 +112,36 @@
          mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'responsible')">
       <div class="sidenav-header">
         <div class="float-left">
-          <div ngbDropdown class="d-inline-block">
-            <button class="btn btn-outline-secondary btn-xs mr-2 ml-2" id="wpDisplay" ngbDropdownToggle>Change start date</button>
-            <div ngbDropdownMenu aria-labelledby="wpDisplay">
-              <button class="btn-sm" ngbDropdownItem>Option1</button>
-              <button class="btn-sm" ngbDropdownItem>Option2</button>
+          <div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block">
+            <button class="btn btn-outline-secondary btn-xs mr-2 ml-2" id="changeAllStartDate" ngbDropdownToggle>{{'working-plan.chart.column.changeStartDate' | translate}}</button>
+            <div ngbDropdownMenu class="block-change-start-date font-size-07 p-2" aria-labelledby="changeAllStartDate">
+              <div class="font-weight-bold mb-1">{{'working-plan.chart.column.changeStartDate' | translate}}</div>
+              <div class="mb-3">{{'working-plan.chart.column.changeStartDate.description' | translate}}</div>
+              <div id="changeAllStartDateDaysInput" class="font-weight-bold mb-1">{{'working-plan.chart.column.changeStartDate.input.description' | translate}}</div>
+              <div>
+                <mat-form-field floatLabel="never" appearance="fill" class="p-0 mb-3" aria-labelledby="changeAllStartDateDaysInput">
+                  <input matInput type="number" min="1" value="1">
+                </mat-form-field>
+              </div>
+              <div class="d-flex align-items-end">
+                <div>
+                  <div id="changeAllStartDateDaysRadio" class="font-weight-bold">{{'working-plan.chart.column.changeStartDate.radio.description' | translate}}</div>
+                  <mat-radio-group class="block-change-start-date-radio" aria-labelledby="changeAllStartDateDaysRadio">
+                    <mat-radio-button [value]="'later'" checked>
+                      {{'working-plan.chart.column.changeStartDate.radio.later' | translate}}
+                    </mat-radio-button>
+                    <mat-radio-button [value]="'earlier'">
+                      {{'working-plan.chart.column.changeStartDate.radio.earlier' | translate}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div class="ml-auto">
+                  <button class="btn btn-primary btn-sm" (click)="updateAllDateRange('3', 'later');myDrop.close();">
+                    <span *ngIf="!(isProcessingWorkpackage() | async)">{{'working-plan.chart.column.changeStartDate' | translate}}</span>
+                    <span *ngIf="(isProcessingWorkpackage() | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -129,7 +154,7 @@
           <div class="ml-05 mt-1 font-size-07">
             <p class="font-weight-bold m-0">{{'working-plan.chart.column.dates' | translate}}</p>
             <mat-form-field *ngIf="node.type != 'milestone'" floatLabel="never" appearance="fill" class="p-0">
-              <mat-label>Start</mat-label>
+              <mat-label>{{'working-plan.chart.column.dates.start' | translate}}</mat-label>
               <input matInput [matDatepicker]="startDate" [min]="node.level > 0 ? getParentStep(node).dates.start.full : null"
                 [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [value]="node.dates.start.full"
                 (dateChange)="updateDateRange(node, $event.value, node.dates.end.full)">
@@ -138,7 +163,7 @@
             </mat-form-field>
             <br *ngIf="node.type != 'milestone'">
             <mat-form-field floatLabel="never" appearance="fill" class="p-0">
-              <mat-label>End</mat-label>
+              <mat-label>{{'working-plan.chart.column.dates.end' | translate}}</mat-label>
               <input matInput [matDatepicker]="endDate" [min]="node.level > 0 ? getParentStep(node).dates.start.full : null"
                 [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [value]="node.dates.end.full"
                 (dateChange)="updateDateRange(node, (node.type != 'milestone')?node.dates.start.full:$event.value, $event.value)">
