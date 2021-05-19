@@ -112,36 +112,41 @@
          mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'responsible')">
       <div class="sidenav-header">
         <div class="float-left">
-          <div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block">
+          <div ngbDropdown #changeAllStartDatesDrop="ngbDropdown" class="d-inline-block">
             <button class="btn btn-outline-secondary btn-xs mr-2 ml-2" id="changeAllStartDate" ngbDropdownToggle>{{'working-plan.chart.column.changeStartDate' | translate}}</button>
             <div ngbDropdownMenu class="block-change-start-date font-size-07 p-2" aria-labelledby="changeAllStartDate">
               <div class="font-weight-bold mb-1">{{'working-plan.chart.column.changeStartDate' | translate}}</div>
               <div class="mb-3">{{'working-plan.chart.column.changeStartDate.description' | translate}}</div>
               <div id="changeAllStartDateDaysInput" class="font-weight-bold mb-1">{{'working-plan.chart.column.changeStartDate.input.description' | translate}}</div>
-              <div>
-                <mat-form-field floatLabel="never" appearance="fill" class="p-0 mb-3" aria-labelledby="changeAllStartDateDaysInput">
-                  <input matInput type="number" min="1" value="1">
-                </mat-form-field>
-              </div>
-              <div class="d-flex align-items-end">
+              <form>
                 <div>
-                  <div id="changeAllStartDateDaysRadio" class="font-weight-bold">{{'working-plan.chart.column.changeStartDate.radio.description' | translate}}</div>
-                  <mat-radio-group class="block-change-start-date-radio" aria-labelledby="changeAllStartDateDaysRadio">
-                    <mat-radio-button [value]="'later'" checked>
-                      {{'working-plan.chart.column.changeStartDate.radio.later' | translate}}
-                    </mat-radio-button>
-                    <mat-radio-button [value]="'earlier'">
-                      {{'working-plan.chart.column.changeStartDate.radio.earlier' | translate}}
-                    </mat-radio-button>
-                  </mat-radio-group>
+                  <mat-form-field floatLabel="never" appearance="fill" class="p-0 mb-3" aria-labelledby="changeAllStartDateDaysInput">
+                    <input matInput (change)="updateChangeStartDateDays($event.target.value)" type="number" min="1" value="1">
+                  </mat-form-field>
                 </div>
-                <div class="ml-auto">
-                  <button class="btn btn-primary btn-sm" (click)="updateAllDateRange('3', 'later');myDrop.close();">
-                    <span *ngIf="!(isProcessingWorkpackage() | async)">{{'working-plan.chart.column.changeStartDate' | translate}}</span>
-                    <span *ngIf="(isProcessingWorkpackage() | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
-                  </button>
+                <div class="d-flex align-items-end">
+                  <div>
+                    <div id="changeAllStartDateDaysRadio" class="font-weight-bold">{{'working-plan.chart.column.changeStartDate.radio.description' | translate}}</div>
+                    <mat-radio-group (change)="updateChangeStartDateDirection($event.source.value)" class="block-change-start-date-radio" aria-labelledby="changeAllStartDateDaysRadio">
+                      <mat-radio-button [value]="'later'" checked>
+                        {{'working-plan.chart.column.changeStartDate.radio.later' | translate}}
+                      </mat-radio-button>
+                      <mat-radio-button [value]="'earlier'">
+                        {{'working-plan.chart.column.changeStartDate.radio.earlier' | translate}}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="ml-auto">
+                    <button type="submit" class="btn btn-primary btn-sm" (click)="updateAllDateRange()" [disabled]="(isProcessingWorkpackage() | async)">
+                      <span *ngIf="!(isProcessingWorkpackage() | async)">{{'working-plan.chart.column.changeStartDate' | translate}}</span>
+                      <span *ngIf="(isProcessingWorkpackage() | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm" (click)="changeAllStartDatesDrop.close()" title="{{'working-plan.chart.column.changeStartDateClose' | translate}}">
+                      <i class='fas fa-times'></i>
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

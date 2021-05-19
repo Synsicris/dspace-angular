@@ -5,6 +5,7 @@ import { Workpackage, WorkpackageSearchItem, WorkpackageStep } from './models/wo
 import { MetadataMap, MetadatumViewModel } from '../../core/shared/metadata.models';
 import { Item } from '../../core/shared/item.model';
 import { ChartDateViewType, WorkpackageEntries } from './working-plan.reducer';
+import { WpActionPackage, WpStepActionPackage } from './working-plan-state.service';
 
 /**
  * For each action type in an action group, make a simple
@@ -42,9 +43,16 @@ export const WorkpackageActionTypes = {
   RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS_ERROR: type('dspace/core/workingplan/RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS_ERROR'),
   UPDATE_WORKPACKAGE: type('dspace/core/workingplan/UPDATE_WORKPACKAGE'),
   UPDATE_WORKPACKAGE_SUCCESS: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_SUCCESS'),
+  UPDATE_ALL_WORKPACKAGE: type('dspace/core/workingplan/UPDATE_ALL_WORKPACKAGE'),
+  UPDATE_ALL_WORKPACKAGE_SUCCESS: type('dspace/core/workingplan/UPDATE_ALL_WORKPACKAGE_SUCCESS'),
   UPDATE_WORKPACKAGE_ERROR: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_ERROR'),
+  UPDATE_ALL_WORKPACKAGE_ERROR: type('dspace/core/workingplan/UPDATE_ALL_WORKPACKAGE_ERROR'),
   UPDATE_WORKPACKAGE_STEP: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_STEP'),
+  UPDATE_WORKPACKAGE_STEP_SUCCESS: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_STEP_SUCCESS'),
+  UPDATE_ALL_WORKPACKAGE_STEP: type('dspace/core/workingplan/UPDATE_ALL_WORKPACKAGE_STEP'),
+  UPDATE_ALL_WORKPACKAGE_STEP_SUCCESS: type('dspace/core/workingplan/UPDATE_ALL_WORKPACKAGE_STEP_SUCCESS'),
   UPDATE_WORKPACKAGE_STEP_ERROR: type('dspace/core/workingplan/UPDATE_WORKPACKAGE_STEP_ERROR'),
+  UPDATE_ALL_WORKPACKAGE_STEP_ERROR: type('dspace/core/workingplan/UPDATE_ALL_WORKPACKAGE_STEP_ERROR'),
   MOVE_WORKPACKAGE: type('dspace/core/workingplan/MOVE_WORKPACKAGE'),
   MOVE_WORKPACKAGE_STEP: type('dspace/core/workingplan/MOVE_WORKPACKAGE_STEP'),
   SAVE_WORKPACKAGE_ORDER: type('dspace/core/workingplan/SAVE_WORKPACKAGE_ORDER'),
@@ -520,10 +528,69 @@ export class UpdateWorkpackageAction implements Action {
 }
 
 /**
+ * An ngrx action to update all the workpackage's object
+ */
+ export class UpdateAllWorkpackageAction implements Action {
+  type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE;
+  payload: {
+    wpActionPackage: WpActionPackage[];
+  };
+
+  /**
+   * Create a new UpdateAllWorkpackageAction
+   *
+   * @param wpActionPackage
+   *    the workpackages data to update
+   */
+  constructor(wpActionPackage: WpActionPackage[]) {
+    this.payload = { wpActionPackage };
+  }
+}
+
+/**
+ * An ngrx action to update all the workpackage's object
+ */
+ export class UpdateAllWorkpackageSuccessAction implements Action {
+  type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_SUCCESS;
+  payload: {
+    wpActionPackage: WpActionPackage[];
+  };
+
+  /**
+   * Create a new UpdateAllWorkpackageSuccessAction
+   *
+   * @param wpActionPackage
+   *    the workpackages data to update
+   */
+  constructor(wpActionPackage: WpActionPackage[]) {
+    this.payload = { wpActionPackage };
+  }
+}
+
+/**
  * An ngrx action to retrieve all working plan's workpackages
  */
 export class UpdateWorkpackageSuccessAction implements Action {
   type = WorkpackageActionTypes.UPDATE_WORKPACKAGE_SUCCESS;
+  payload: {
+    workpackageId: string;
+    workpackage: Workpackage;
+    metadatumViewList: MetadatumViewModel[];
+  };
+
+  /**
+   * Create a new UpdateWorkpackageAction
+   *
+   * @param workpackageId
+   *    the workpackage's id
+   * @param workpackage
+   *    the workpackage's object
+   * @param metadatumViewList
+   *    the list of metadata to patch
+   */
+  constructor(workpackageId: string, workpackage: Workpackage, metadatumViewList: MetadatumViewModel[]) {
+    this.payload = { workpackageId, workpackage, metadatumViewList };
+  }
 }
 
 /**
@@ -547,10 +614,99 @@ export class UpdateWorkpackageErrorAction implements Action {
 }
 
 /**
+ * An ngrx action to update all the workpackage's object
+ */
+ export class UpdateAllWorkpackageErrorAction implements Action {
+  type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_ERROR;
+  payload: {
+    wpActionPackage: WpActionPackage[];
+  };
+
+  /**
+   * Create a new UpdateAllWorkpackageErrorAction
+   *
+   * @param wpActionPackage
+   *    the workpackages data
+   */
+  constructor(wpActionPackage: WpActionPackage[]) {
+    this.payload = { wpActionPackage };
+  }
+}
+
+/**
  * An ngrx action to update a workpackage's object
  */
 export class UpdateWorkpackageStepAction implements Action {
   type = WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP;
+  payload: {
+    workpackageId: string;
+    workpackageStepId: string;
+    workpackageStep: WorkpackageStep;
+    metadatumViewList: MetadatumViewModel[];
+  };
+
+  /**
+   * Create a new UpdateWorkpackageStepAction
+   *
+   * @param workpackageId
+   *    the workpackage's id
+   * @param workpackageStepId
+   *    the workpackage step's id
+   * @param workpackageStep
+   *    the workpackage step's object
+   * @param metadatumViewList
+   *    the list of metadata to patch
+   */
+  constructor(workpackageId: string, workpackageStepId: string, workpackageStep: WorkpackageStep, metadatumViewList: MetadatumViewModel[]) {
+    this.payload = { workpackageId, workpackageStepId, workpackageStep, metadatumViewList };
+  }
+}
+
+/**
+ * An ngrx action to update all the workpackage's object
+ */
+ export class UpdateAllWorkpackageStepAction implements Action {
+  type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP;
+  payload: {
+    wpStepActionPackage: WpStepActionPackage[];
+  };
+
+  /**
+   * Create a new UpdateAllWorkpackageStepAction
+   *
+   * @param wpStepActionPackage
+   *    the workpackages data to Update
+   */
+  constructor(wpStepActionPackage: WpStepActionPackage[]) {
+    this.payload = { wpStepActionPackage };
+  }
+}
+
+/**
+ * An ngrx action to retrieve all working plan's workpackages
+ */
+ export class UpdateAllWorkpackageStepSuccessAction implements Action {
+  type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP_SUCCESS;
+  payload: {
+    wpStepActionPackage: WpStepActionPackage[];
+  };
+
+  /**
+   * Create a new UpdateAllWorkpackageStepSuccessAction
+   *
+   * @param wpStepActionPackage
+   *    the workpackages data to Update
+   */
+  constructor(wpStepActionPackage: WpStepActionPackage[]) {
+    this.payload = { wpStepActionPackage };
+  }
+}
+
+/**
+ * An ngrx action to retrieve all working plan's workpackages
+ */
+ export class UpdateWorkpackageStepSuccessAction implements Action {
+  type = WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP_SUCCESS;
   payload: {
     workpackageId: string;
     workpackageStepId: string;
@@ -595,6 +751,26 @@ export class UpdateWorkpackageStepErrorAction implements Action {
    */
   constructor(workpackageId: string, workpackageStepId: string) {
     this.payload = { workpackageId, workpackageStepId };
+  }
+}
+
+/**
+ * An ngrx action to retrieve all working plan's workpackages
+ */
+ export class UpdateAllWorkpackageStepErrorAction implements Action {
+  type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP_ERROR;
+  payload: {
+    wpStepActionPackage: WpStepActionPackage[];
+  };
+
+  /**
+   * Create a new UpdateAllWorkpackageStepErrorAction
+   *
+   * @param wpStepActionPackage
+   *    the workpackages data
+   */
+  constructor(wpStepActionPackage: WpStepActionPackage[]) {
+    this.payload = { wpStepActionPackage };
   }
 }
 
@@ -809,6 +985,13 @@ export type WorkingPlanActions
   | SaveWorkpackageStepsOrderSuccessAction
   | UpdateWorkpackageAction
   | UpdateWorkpackageErrorAction
+  | UpdateAllWorkpackageErrorAction
   | UpdateWorkpackageSuccessAction
+  | UpdateAllWorkpackageAction
+  | UpdateAllWorkpackageSuccessAction
   | UpdateWorkpackageStepAction
-  | UpdateWorkpackageStepErrorAction;
+  | UpdateWorkpackageStepErrorAction
+  | UpdateWorkpackageStepSuccessAction
+  | UpdateAllWorkpackageStepAction
+  | UpdateAllWorkpackageStepSuccessAction
+  | UpdateAllWorkpackageStepErrorAction;

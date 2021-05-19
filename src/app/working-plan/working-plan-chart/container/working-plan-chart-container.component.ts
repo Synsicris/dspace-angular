@@ -22,7 +22,7 @@ import {
   WorkpackageStep,
   WorkpackageTreeObject
 } from '../../core/models/workpackage-step.model';
-import { moment, WorkingPlanService } from '../../core/working-plan.service';
+import { moment, WorkingPlanService, WpMetadata, WpStepMetadata } from '../../core/working-plan.service';
 import { WorkingPlanStateService } from '../../core/working-plan-state.service';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { hasValue, isNotEmpty, isNotNull } from '../../../shared/empty.util';
@@ -46,6 +46,16 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
+
+/**
+ * Defines the UpdateData parameters.
+ */
+interface UpdateData {
+  flatNode: WorkpacakgeFlatNode;
+  nestedNode: WorkpackageTreeObject;
+  metadata: string[];
+  values: string[];
+}
 
 /**
  * @title Tree with nested nodes
@@ -83,6 +93,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   chartDateView: BehaviorSubject<ChartDateViewType> = new BehaviorSubject<ChartDateViewType>(null);
   ChartDateViewType = ChartDateViewType;
   responsibleVocabularyOptions: VocabularyOptions;
+  /**
+   * The number of days of the ChangeAllStartDate dropdown.
+   */
+  changeStartDateDays = '1';
+  /**
+   * The direction of the ChangeAllStartDate dropdown.
+   */
+  changeStartDateDirection = 'later';
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap: Map<string, WorkpacakgeFlatNode> = new Map<string, WorkpacakgeFlatNode>();
 
@@ -422,91 +440,75 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return (index !== -1) ? this.chartStatusTypeList$.value[index].display : statusType;
   }
 
-  updateAllDateRange(days: string, direction: string) {
+  /**
+   * Update the number of days of the ChangeAllStartDate dropdown.
+   *
+   * @param days string
+   */
+  updateChangeStartDateDays(days: string): void {
+    this.changeStartDateDays = days;
+  }
+
+  /**
+   * Update the direction of the ChangeAllStartDate dropdown.
+   *
+   * @param direction string
+   */
+  updateChangeStartDateDirection(direction: string): void {
+    this.changeStartDateDirection = direction;
+  }
+
+  /**
+   * Update all the nodes date range.
+   *
+   */
+  updateAllDateRange(): void {
     let startDate;
     let endDate;
     let startStringDate;
     let endStringDate;
-    const originalMap = new Map(this.flatNodeMap);
+    const updateAllMap: Map<string, { startDate: string, endDate: string }> = new Map();
 
-    originalMap.forEach((node: WorkpacakgeFlatNode) => {
+    this.flatNodeMap.forEach((node: WorkpacakgeFlatNode) => {
       if (node.type === 'milestone') {
         startDate = this.moment(node.dates.end.full, this.dateFormat);
       } else {
         startDate = this.moment(node.dates.start.full, this.dateFormat);
       }
       endDate = this.moment(node.dates.end.full, this.dateFormat);
-      if (direction === 'later') {
-        startStringDate = startDate.add(days, 'days').format(this.dateFormat);
-        endStringDate = endDate.add(days, 'days').format(this.dateFormat);
+      if (this.changeStartDateDirection === 'later') {
+        startStringDate = startDate.add(this.changeStartDateDays, 'days').format(this.dateFormat);
+        endStringDate = endDate.add(this.changeStartDateDays, 'days').format(this.dateFormat);
       } else {
-        startStringDate = startDate.subtract(days, 'days').format(this.dateFormat);
-        endStringDate = endDate.subtract(days, 'days').format(this.dateFormat);
+        startStringDate = startDate.subtract(this.changeStartDateDays, 'days').format(this.dateFormat);
+        endStringDate = endDate.subtract(this.changeStartDateDays, 'days').format(this.dateFormat);
       }
-
-      this.updateDateRange(node, startStringDate, endStringDate);
+      updateAllMap.set(node.id, { 'startDate': startStringDate, 'endDate': endStringDate });
     });
+    this.updateAllDateRanges(updateAllMap);
   }
 
   updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string) {
-
-    // create new dates object
-    let dates;
-    let startMoment;
-    let startDateObj: WorkpackageChartDate;
-    const endMoment = this.moment(endDate); // create start moment
-    const endDateObj: WorkpackageChartDate = {
-      full: endMoment.format(this.dateFormat),
-      month: endMoment.format(this.dateMonthFormat),
-      year: endMoment.format(this.dateYearFormat)
-    };
-
-    if (flatNode.type !== 'milestone') {
-      startMoment = this.moment(startDate); // create start moment
-      startDateObj = {
-        full: startMoment.format(this.dateFormat),
-        month: startMoment.format(this.dateMonthFormat),
-        year: startMoment.format(this.dateYearFormat)
-      };
-
-      dates = {
-        start: startDateObj,
-        end: endDateObj
-      };
-    } else {
-      dates = {
-        end: endDateObj
-      };
-    }
-
-    // update flat node dates
-    flatNode = Object.assign({}, flatNode, {
-      dates: dates
-    });
-
-    // update nested node dates
-    const nestedNode = Object.assign({}, this.nestedNodeMap.get(flatNode.id), {
-      dates: dates
-    });
-
-    // rebuild calendar if the root is updated
-    if (flatNode.level === 0) {
-      this.buildCalendar();
-    }
-
-    let values = [];
-    if (nestedNode.type !== 'milestone') {
-      values = [nestedNode.dates.start.full, nestedNode.dates.end.full];
-    } else {
-      values = [null, nestedNode.dates.end.full];
-    }
+    const nodeData: UpdateData = this._updateDateRangeOperations(flatNode, startDate, endDate);
 
     this.updateField(
-      flatNode,
-      nestedNode,
-      [environment.workingPlan.workingPlanStepDateStartMetadata, environment.workingPlan.workingPlanStepDateEndMetadata],
-      values
+      nodeData.flatNode,
+      nodeData.nestedNode,
+      nodeData.metadata,
+      nodeData.values
     );
+  }
+
+  updateAllDateRanges(updateAllMap: Map<string, { startDate: string, endDate: string }>): void {
+    let nodeData;
+    const nodeDataArray: UpdateData[] = [];
+
+    updateAllMap.forEach((data: { startDate: string, endDate: string }, index: string) => {
+      nodeData = this._updateDateRangeOperations(this.flatNodeMap.get(index), data.startDate, data.endDate);
+      nodeDataArray.push(nodeData);
+    });
+
+    this.updateAllField(nodeDataArray);
   }
 
   updateStepName(flatNode: WorkpacakgeFlatNode, name: string) {
@@ -800,6 +802,66 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   private _getChildren = (node: Workpackage): Observable<WorkpackageStep[]> => observableOf(node.steps);
 
+  private _updateDateRangeOperations(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string): UpdateData {
+    // create new dates object
+    let dates;
+    let startMoment;
+    let startDateObj: WorkpackageChartDate;
+    const endMoment = this.moment(endDate); // create start moment
+    const endDateObj: WorkpackageChartDate = {
+      full: endMoment.format(this.dateFormat),
+      month: endMoment.format(this.dateMonthFormat),
+      year: endMoment.format(this.dateYearFormat)
+    };
+
+    if (flatNode.type !== 'milestone') {
+      startMoment = this.moment(startDate); // create start moment
+      startDateObj = {
+        full: startMoment.format(this.dateFormat),
+        month: startMoment.format(this.dateMonthFormat),
+        year: startMoment.format(this.dateYearFormat)
+      };
+
+      dates = {
+        start: startDateObj,
+        end: endDateObj
+      };
+    } else {
+      dates = {
+        end: endDateObj
+      };
+    }
+
+    // update flat node dates
+    flatNode = Object.assign({}, flatNode, {
+      dates: dates
+    });
+
+    // update nested node dates
+    const nestedNode = Object.assign({}, this.nestedNodeMap.get(flatNode.id), {
+      dates: dates
+    });
+
+    // rebuild calendar if the root is updated
+    if (flatNode.level === 0) {
+      this.buildCalendar();
+    }
+
+    let values = [];
+    if (nestedNode.type !== 'milestone') {
+      values = [nestedNode.dates.start.full, nestedNode.dates.end.full];
+    } else {
+      values = [null, nestedNode.dates.end.full];
+    }
+
+    return {
+      'flatNode': flatNode,
+      'nestedNode': nestedNode,
+      'metadata': [environment.workingPlan.workingPlanStepDateStartMetadata, environment.workingPlan.workingPlanStepDateEndMetadata],
+      'values': values
+    };
+  }
+
   private updateField(flatNode: WorkpacakgeFlatNode, nestedNode: WorkpackageTreeObject, metadata: string[], value: any[]) {
     // Update reference in the maps
     this.updateTreeMap(flatNode, nestedNode);
@@ -823,6 +885,48 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         [...value]
       );
     }
+  }
+
+  /**
+   * Dispatch the update of all nodes metadata.
+   *
+   * @param nodeDataArray UpdateData[]
+   */
+  private updateAllField(nodeDataArray: UpdateData[]): void {
+    const wpMetadata: WpMetadata[] = [];
+    const wpStepMetadata: WpStepMetadata[] = [];
+    let parentNestedNode: Workpackage;
+    let childNestedNode: WorkpackageStep;
+    nodeDataArray.forEach((nodeData) => {
+      this.updateTreeMap(nodeData.flatNode, nodeData.nestedNode);
+      if (this.treeControl.getLevel(nodeData.flatNode) < 1) {
+        wpMetadata.push({
+          'nestedNodeId': nodeData.nestedNode.id,
+          'nestedNode': nodeData.nestedNode,
+          'metadata': [...nodeData.metadata],
+          'values': [...nodeData.values],
+          'hasAuthority': false
+        });
+      } else {
+        parentNestedNode = this.nestedNodeMap.get(nodeData.flatNode.parentId);
+        childNestedNode = this.nestedNodeMap.get(nodeData.flatNode.id);
+        wpStepMetadata.push({
+          'parentNestedNodeId': parentNestedNode.id,
+          'childNestedNodeId': childNestedNode.id,
+          'childNestedNode': childNestedNode,
+          'metadata': [...nodeData.metadata],
+          'values': [...nodeData.values],
+          'hasAuthority': false
+        });
+      }
+    });
+    // dispatch action to update item metadata
+    if (wpMetadata.length !== 0) {
+      this.workingPlanService.updateAllWorkpackageMetadata(wpMetadata);
+    }
+    /*if (wpStepMetadata.length !== 0) {
+      this.workingPlanService.updateAllWorkpackageStepMetadata(wpStepMetadata);
+    }*/
   }
 
   /**
