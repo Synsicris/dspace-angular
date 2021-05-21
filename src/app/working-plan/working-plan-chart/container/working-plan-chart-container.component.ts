@@ -921,12 +921,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       }
     });
     // dispatch action to update item metadata
-    if (wpMetadata.length !== 0) {
-      this.workingPlanService.updateAllWorkpackageMetadata(wpMetadata);
+    if (wpMetadata.length !== 0 || wpStepMetadata.length !== 0) {
+      this.workingPlanService.updateAllWorkpackageMetadata(wpMetadata, wpStepMetadata);
     }
-    /*if (wpStepMetadata.length !== 0) {
-      this.workingPlanService.updateAllWorkpackageStepMetadata(wpStepMetadata);
-    }*/
   }
 
   /**

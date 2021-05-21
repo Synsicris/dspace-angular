@@ -534,6 +534,7 @@ export class UpdateWorkpackageAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE;
   payload: {
     wpActionPackage: WpActionPackage[];
+    wpStepsActionPackage: WpStepActionPackage[];
   };
 
   /**
@@ -541,9 +542,11 @@ export class UpdateWorkpackageAction implements Action {
    *
    * @param wpActionPackage
    *    the workpackages data to update
+   * @param wpStepsActionPackage
+   *    the workpackages steps data to update
    */
-  constructor(wpActionPackage: WpActionPackage[]) {
-    this.payload = { wpActionPackage };
+  constructor(wpActionPackage: WpActionPackage[], wpStepsActionPackage: WpStepActionPackage[]) {
+    this.payload = { wpActionPackage, wpStepsActionPackage };
   }
 }
 
@@ -554,6 +557,7 @@ export class UpdateWorkpackageAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_SUCCESS;
   payload: {
     wpActionPackage: WpActionPackage[];
+    wpStepsActionPackage: WpStepActionPackage[];
   };
 
   /**
@@ -561,9 +565,11 @@ export class UpdateWorkpackageAction implements Action {
    *
    * @param wpActionPackage
    *    the workpackages data to update
+   * @param wpStepsActionPackage
+   *    the workpackages steps data to update
    */
-  constructor(wpActionPackage: WpActionPackage[]) {
-    this.payload = { wpActionPackage };
+  constructor(wpActionPackage: WpActionPackage[], wpStepsActionPackage: WpStepActionPackage[]) {
+    this.payload = { wpActionPackage, wpStepsActionPackage };
   }
 }
 

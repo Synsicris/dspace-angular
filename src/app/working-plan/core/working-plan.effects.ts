@@ -346,9 +346,10 @@ export class WorkingPlanEffects {
             wp.metadatumViewList
           );
         }),
-        reduce((acc: any, value: any) => [...acc, ...value], []),
+        reduce((acc: any, value: any) => [...acc, value], []),
         map(() => new UpdateAllWorkpackageSuccessAction(
-          action.payload.wpActionPackage
+          action.payload.wpActionPackage,
+          action.payload.wpStepsActionPackage
         )),
         catchError((error: Error) => {
           if (error) {
@@ -358,6 +359,15 @@ export class WorkingPlanEffects {
         })
       );
     }));
+
+  /**
+   * Update all workpackages into the state
+   */
+  @Effect() updateAllWorkpackageSuccess$ = this.actions$.pipe(
+    ofType(WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_SUCCESS),
+    map((action: UpdateAllWorkpackageSuccessAction) => new UpdateAllWorkpackageStepAction(
+      action.payload.wpStepsActionPackage
+    )));
 
   /**
    * Update a workpackage into the state
@@ -399,7 +409,7 @@ export class WorkingPlanEffects {
             wp.metadatumViewList
           );
         }),
-        reduce((acc: any, value: any) => [...acc, ...value], []),
+        reduce((acc: any, value: any) => [...acc, value], []),
         map(() => new UpdateAllWorkpackageStepSuccessAction(
           action.payload.wpStepActionPackage
         )),
@@ -409,6 +419,24 @@ export class WorkingPlanEffects {
           }
           return observableOf(new UpdateAllWorkpackageStepErrorAction(action.payload.wpStepActionPackage));
         })
+      );
+    }));
+
+  /**
+   * Init workingplan objects place
+   */
+  @Effect({dispatch: false}) updateError$ = this.actions$.pipe(
+    ofType(
+      WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_ERROR,
+      WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP_ERROR,
+      WorkpackageActionTypes.UPDATE_WORKPACKAGE_ERROR,
+      WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP_ERROR
+    ),
+    tap(() => {
+      this.notificationsService.error(
+        null,
+        this.translate.get('working-plan.chart.update.error'),
+        {timeOut: 0, clickToClose: false}
       );
     }));
 

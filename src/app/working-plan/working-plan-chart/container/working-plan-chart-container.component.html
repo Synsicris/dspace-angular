@@ -115,17 +115,21 @@
           <div ngbDropdown #changeAllStartDatesDrop="ngbDropdown" class="d-inline-block">
             <button class="btn btn-outline-secondary btn-xs mr-2 ml-2" id="changeAllStartDate" ngbDropdownToggle>{{'working-plan.chart.column.changeStartDate' | translate}}</button>
             <div ngbDropdownMenu class="block-change-start-date font-size-07 p-2" aria-labelledby="changeAllStartDate">
+              <button type="button" class="close" data-dismiss="alert" attr.aria-label="{{'working-plan.chart.column.changeStartDateClose' | translate}}" (click)="changeAllStartDatesDrop.close()">
+                <span aria-hidden="true">&times;</span>
+              </button>
               <div class="font-weight-bold mb-1">{{'working-plan.chart.column.changeStartDate' | translate}}</div>
               <div class="mb-3">{{'working-plan.chart.column.changeStartDate.description' | translate}}</div>
               <div id="changeAllStartDateDaysInput" class="font-weight-bold mb-1">{{'working-plan.chart.column.changeStartDate.input.description' | translate}}</div>
               <form>
                 <div>
                   <mat-form-field floatLabel="never" appearance="fill" class="p-0 mb-3" aria-labelledby="changeAllStartDateDaysInput">
-                    <input matInput (change)="updateChangeStartDateDays($event.target.value)" type="number" min="1" value="1">
+                    <input matInput (change)="updateChangeStartDateDays($event?.target?.value)" type="number" min="1" value="1" class="px-2">
                   </mat-form-field>
                 </div>
                 <div class="d-flex align-items-end">
                   <div>
+
                     <div id="changeAllStartDateDaysRadio" class="font-weight-bold">{{'working-plan.chart.column.changeStartDate.radio.description' | translate}}</div>
                     <mat-radio-group (change)="updateChangeStartDateDirection($event.source.value)" class="block-change-start-date-radio" aria-labelledby="changeAllStartDateDaysRadio">
                       <mat-radio-button [value]="'later'" checked>
@@ -138,11 +142,12 @@
                   </div>
                   <div class="ml-auto">
                     <button type="submit" class="btn btn-primary btn-sm" (click)="updateAllDateRange()" [disabled]="(isProcessingWorkpackage() | async)">
-                      <span *ngIf="!(isProcessingWorkpackage() | async)">{{'working-plan.chart.column.changeStartDate' | translate}}</span>
-                      <span *ngIf="(isProcessingWorkpackage() | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
-                    </button>
-                    <button class="btn btn-outline-secondary btn-sm" (click)="changeAllStartDatesDrop.close()" title="{{'working-plan.chart.column.changeStartDateClose' | translate}}">
-                      <i class='fas fa-times'></i>
+                      <span *ngIf="!(isProcessingWorkpackage() | async)">
+                        {{'working-plan.chart.column.changeStartDate.apply' | translate}}
+                      </span>
+                      <span *ngIf="(isProcessingWorkpackage() | async)">
+                        <i class='fas fa-circle-notch fa-spin'></i> {{'working-plan.chart.column.changeStartDate.saving' | translate}}
+                      </span>
                     </button>
                   </div>
                 </div>

@@ -539,24 +539,11 @@ export class WorkingPlanService {
     this.workingPlanStateService.dispatchUpdateWorkpackageAction(workpackageId, workpackage, metadatumViewList);
   }
 
-  updateAllWorkpackageMetadata(wpMetadata: WpMetadata[]): void {
+  updateAllWorkpackageMetadata(wpMetadata: WpMetadata[], wpStepMetadata: WpStepMetadata[]): void {
     const wpActionPackage: WpActionPackage[] = [];
     let metadatumViewList;
     wpMetadata.forEach((itemMetadata: WpMetadata) => {
-      metadatumViewList = [];
-      itemMetadata.metadata.forEach((metadata, index) => {
-        const value = itemMetadata.values[index] as any;
-        metadatumViewList.push(
-          {
-            key: metadata,
-            language: '',
-            value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
-            place: 0,
-            authority: itemMetadata.hasAuthority ? value : '',
-            confidence: itemMetadata.hasAuthority ? 600 : -1
-          } as MetadatumViewModel
-        );
-      });
+      metadatumViewList = this.generateMetadatumViewList(itemMetadata);
       wpActionPackage.push({
         'workpackageId': itemMetadata.nestedNodeId,
         'workpackage': itemMetadata.nestedNode,
@@ -564,7 +551,37 @@ export class WorkingPlanService {
       });
     });
 
-    this.workingPlanStateService.dispatchUpdateAllWorkpackageAction(wpActionPackage);
+    const wpStepActionPackage: WpStepActionPackage[] = [];
+    wpStepMetadata.forEach((itemMetadata: WpStepMetadata) => {
+      metadatumViewList = this.generateMetadatumViewList(itemMetadata);
+      wpStepActionPackage.push({
+        'workpackageId': itemMetadata.parentNestedNodeId,
+        'workpackageStepId': itemMetadata.childNestedNodeId,
+        'workpackageStep': itemMetadata.childNestedNode,
+        'metadatumViewList': metadatumViewList
+      });
+    });
+
+    this.workingPlanStateService.dispatchUpdateAllWorkpackageAction(wpActionPackage, wpStepActionPackage);
+  }
+
+  private generateMetadatumViewList(itemMetadata: WpMetadata|WpStepMetadata): MetadatumViewModel[] {
+    const metadatumViewList = [];
+    itemMetadata.metadata.forEach((metadata, index) => {
+      const value = itemMetadata.values[index] as any;
+      metadatumViewList.push(
+        {
+          key: metadata,
+          language: '',
+          value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
+          place: 0,
+          authority: itemMetadata.hasAuthority ? value : '',
+          confidence: itemMetadata.hasAuthority ? 600 : -1
+        } as MetadatumViewModel
+      );
+    });
+
+    return metadatumViewList;
   }
 
   updateWorkpackageStepMetadata(
@@ -598,7 +615,7 @@ export class WorkingPlanService {
     );
   }
 
-  updateAllWorkpackageStepMetadata(wpStepMetadata: WpStepMetadata[]) {
+/*  updateAllWorkpackageStepMetadata(wpStepMetadata: WpStepMetadata[]) {
     const wpStepActionPackage: WpStepActionPackage[] = [];
     let metadatumViewList;
     wpStepMetadata.forEach((itemMetadata: WpStepMetadata) => {
@@ -625,7 +642,7 @@ export class WorkingPlanService {
     });
 
     this.workingPlanStateService.dispatchUpdateAllWorkpackageStepAction(wpStepActionPackage);
-  }
+  }*/
 
   private addPatchOperationForWorkpackage(metadata: MetadataMap, place: string = null): void {
 

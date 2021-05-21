@@ -188,6 +188,13 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
       return updateAllWorkpackageStep(state, action as UpdateAllWorkpackageStepSuccessAction);
     }
 
+    case WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_ERROR:
+    case WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP_ERROR: {
+      return Object.assign({}, state, {
+        processing: false
+      });
+    }
+
     case WorkpackageActionTypes.MOVE_WORKPACKAGE: {
       return moveWorkpackage(state, action as MoveWorkpackageAction);
     }
@@ -377,7 +384,7 @@ function updateAllWorkpackage(state: WorkingPlanState, action: UpdateAllWorkpack
     });
   });
   return Object.assign({}, state, {
-    processing: false
+    processing: true
   });
 }
 

@@ -109,8 +109,8 @@ export class WorkingPlanStateService {
     this.store.dispatch((new UpdateWorkpackageAction(workpackageId, workpackage, metadatumViewList)));
   }
 
-  public dispatchUpdateAllWorkpackageAction(wpActionPackage: WpActionPackage[]) {
-    this.store.dispatch((new UpdateAllWorkpackageAction(wpActionPackage)));
+  public dispatchUpdateAllWorkpackageAction(wpActionPackage: WpActionPackage[], wpStepsActionPackage: WpStepActionPackage[]) {
+    this.store.dispatch((new UpdateAllWorkpackageAction(wpActionPackage, wpStepsActionPackage)));
   }
 
   public dispatchUpdateWorkpackageStepAction(
