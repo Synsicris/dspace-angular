@@ -2044,13 +2044,18 @@
 
   "exploitation-plan.step_type_4.info.text": "Info text for section 4",
 
-  "exploitation-plan.step_type_1.title": "Intellectual property rights",
 
-  "exploitation-plan.step_type_2.title": "Economic prospects",
+  "exploitation-plan.step_type_1.title": "1. Intellectual property rights",
 
-  "exploitation-plan.step_type_3.title": "Scientific and technical prospects",
 
-  "exploitation-plan.step_type_4.title": "Connectivity",
+  "exploitation-plan.step_type_2.title": "2. Economic prospects",
+
+
+  "exploitation-plan.step_type_3.title": "3. Scientific and technical prospects",
+
+
+  "exploitation-plan.step_type_4.title": "4. Connectivity",
+
 
   "exploitation-plan.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
 
@@ -8050,6 +8055,24 @@
   "tree.description.register-court": "Registry Court",
 
 
-  "vocabulary-treeview.tree.description.register-court": "Please select the city of the registry court."
+  "vocabulary-treeview.tree.description.register-court": "Please select the city of the registry court.",
+
+
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance": "Survey on success and economic development",
+
+
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance.info": "This section can be used for surveys.",
+
+
+  "working-plan.chart.column.steps": "Steps",
+
+
+  "submission.sections.submit.progressbar.describe.datasets": "Data set",
+
+
+  "submission.sections.submit.progressbar.describe.datasets_references": "Link to publications",
+
+
+  "exploitationplan.listelement.badge": "Exploitation plan"
 
 }

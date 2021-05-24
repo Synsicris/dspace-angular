@@ -3160,21 +3160,26 @@
   // TODO New key - Add a translation
   "exploitation-plan.step_type_4.info.text": "Info text for section 4",
   
-  // "exploitation-plan.step_type_1.title": "Intellectual property rights",
-  // TODO New key - Add a translation
-  "exploitation-plan.step_type_1.title": "Intellectual property rights",
   
-  // "exploitation-plan.step_type_2.title": "Economic prospects",
+  // "exploitation-plan.step_type_1.title": "1. Intellectual property rights",
   // TODO New key - Add a translation
-  "exploitation-plan.step_type_2.title": "Economic prospects",
+  "exploitation-plan.step_type_1.title": "1. Intellectual property rights",
   
-  // "exploitation-plan.step_type_3.title": "Scientific and technical prospects",
-  // TODO New key - Add a translation
-  "exploitation-plan.step_type_3.title": "Scientific and technical prospects",
   
-  // "exploitation-plan.step_type_4.title": "Connectivity",
+  // "exploitation-plan.step_type_2.title": "2. Economic prospects",
   // TODO New key - Add a translation
-  "exploitation-plan.step_type_4.title": "Connectivity",
+  "exploitation-plan.step_type_2.title": "2. Economic prospects",
+  
+  
+  // "exploitation-plan.step_type_3.title": "3. Scientific and technical prospects",
+  // TODO New key - Add a translation
+  "exploitation-plan.step_type_3.title": "3. Scientific and technical prospects",
+  
+  
+  // "exploitation-plan.step_type_4.title": "4. Connectivity",
+  // TODO New key - Add a translation
+  "exploitation-plan.step_type_4.title": "4. Connectivity",
+  
   
   // "exploitation-plan.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
   // TODO New key - Add a translation
@@ -3990,6 +3995,9 @@
   // TODO New key - Add a translation
   "impact-pathway.remove.item.title": "Remove item",
   
+  // "impact-pathway.remove.processing": "Deleting",
+  // TODO New key - Add a translation
+  "impact-pathway.remove.processing": "Deleting",
   
   // "impact-pathway.remove.title": "Delete impact pathway",
   // TODO New key - Add a translation
@@ -10773,8 +10781,8 @@
   
   
   // "submission.sections.submit.progressbar.working_plan_workpackage_step_form.info": "",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.working_plan_workpackage_step_form.info": "",
+  // TODO Source message changed - Revise the translation
+  "submission.sections.submit.progressbar.working_plan_workpackage_step_form.info": "<p><i>Wählen Sie bitte aus der Liste einen Bereich aus und formulieren Sie dazu eine Bezeichnung, oder wählen Sie bereits vorhandene Einträge über die Schaltfläche <b>Suche</b> aus.</i></p><p><b>Bereiche:</b></br>• <b><i>Aufgaben</i></b> sind einzelne Arbeitsschritte, z. B. bestimmte Forschungsarbeiten. </br><I>Hinweis: Verwenden Sie Arbeitsschritte nicht für Arbeiten, die durch die u. g. Bereiche abgedeckt sind.</i></br>• <b><i>Prozesse der Kooperation, Partizipation und Zusammenarbeit</i></b> umfasst Aktivitäten, die über einen längeren Zeitraum mit den gleichen Partnern/Organisationen oder Akteursgruppen stattfinden.</br>• <b><i>Veranstaltungen / Interaktionen</i></b> erfasst Einzelveranstaltungen mit Akteursgruppen, die vom Projekt veranstaltet werden oder an denen das Projekt teilnimmt.</br>• <b><i>Geplante Veröffentlichungen</i></b> werden zugehörig zum Zweck der Austausch- und Transferaktivitäten erfasst und können gruppiert werden. </br><i>Hinweis: Diese Angaben sind ausschließlich in der Projektplanung erforderlich. Bitte nennen Sie in der Bezeichnung Anzahl, Art und Thema der geplanten Veröffentlichungen (z. B. Eintrag 1: 2-3 wissenschaftliche Artikel zu Thema x, Eintrag 2: 1 Praxisbeitrag zum Thema y).</i></br>• <b><i>Gegenstände / Materialien</i></b> sind Outputs, die dem Transfer dienen und/oder von Dritten für Transfer, Forschung oder Lehre weiter genutzt werden können, wie z. B. Ausstellungsstücke, Geräte, Proben oder Sammelstücke.</br>• <b><i>Meilensteine</i></b> sind wichtige Punkte im Projektverlauf. Sie dienen zur Prüfung, wann etwas abgeschlossen ist, etwas begonnen wird oder über die weitere Vorgehensweise entschieden wird.</p>",
   
   
   // "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
@@ -10961,7 +10969,7 @@
   
   
   // "submission.sections.submit.progressbar.describe.patents.info": "Please document here the industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
-  "submission.sections.submit.progressbar.describe.patents.info": "<i>Erfassen Sie hier bitte, wenn Projektergebnisse durch ein Patent oder Gebrauchsmuster geschützt und verwertet werden sollen. <p>Hinweis: Wenn möglich geben Sie bitte die Bezeichnung an, unter der das Schutzrecht beim Patentamt angemeldet werden soll. </br>Hinweis: Wenn das Schutzrecht verwertet wird, erfassen Sie dieses bitte unter <b>Anwendung einer Lösung / Veränderung / Innovation</b>. </i></p>",
+  "submission.sections.submit.progressbar.describe.patents.info": "<p>Hier werden Schutzrechte sowie deren geplante Verwertung dokumentiert. Beschreiben Sie im Antrag die geplante Anmeldung. Erfassen Sie später die Anmeldedaten. Wenn das Schutzrecht erteilt wurde, erfolgt ein Import der Patentdaten. Bis zur Erteilung des Schutzrechtes sind die Informationen nur für den Forschungsförderer zugänglich.</p><p><i>Erfassen Sie hier ein Patent oder Gebrauchsmuster, durch das Projektergebnisse geschützt und verwertet werden sollen. </br>Hinweis: Bitte geben Sie im Feld „Bezeichnung“ nach Möglichkeit diejenige an, unter der das Schutzrecht beim Patentamt angemeldet werden soll. </br>Hinweis: Die Verwertung des Schutzrechtes erfassen Sie bitte unter <b>Anwendung einer Lösung / Veränderung / Innovation</b>. </i></p>",
   
   
   // "submission.sections.submit.progressbar.describe.patents_result": "Information from application at the Patent Office",
@@ -10969,7 +10977,7 @@
   
   
   // "submission.sections.submit.progressbar.describe.patents_result.info": "Please complete the mandatory information. The information will be regularly compared with the patent database. This means that as soon as the patent or utility model is published, it can be automatically transferred to the system. You will receive a message for this purpose.",
-  "submission.sections.submit.progressbar.describe.patents_result.info": "<i>Ergänzen Sie hier, folgende Angaben, wenn eine Anmeldung des Schutzrechts erfolgt ist: </br>• Anmeldenummer</br>• Datum der Anmeldung</br>• Antragsteller<p>Hinweis: Diese Informationen sind nur für den Forschungsförderer zugänglich. Nach Prüfung und Veröffentlichung durch das Patentamt erhalten Sie eine Meldung. Anschließend können die weiteren Angaben automatisch in das System importiert werden. </i></p>",
+  "submission.sections.submit.progressbar.describe.patents_result.info": "<i>Tragen Sie hier bitte die Anmeldedaten ein.</br>Hinweis: Anhand dieser Angaben erfolgt ein Import aus der Patentdatenbank, sobald das Schutzrecht erteilt wurde. Dazu erhalten Sie und der Förderer eine Meldung, um den Import zu bestätigen.</i>",
   
   
   // "submission.sections.submit.progressbar.describe.persons": "Personal data",
@@ -11071,11 +11079,11 @@
   
   
   // "submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/ person by founding a company or association.",
-  "submission.sections.submit.progressbar.describe.spinoffs.info": "<i>Erfassen Sie hier bitte die geplante Gründung eines Unternehmens oder Vereins zur Verwertung von Projektergebnissen. Sobald die Gründung erfolgt ist, ergänzen Sie bitte die Angaben zur Anmeldung.</br>Hinweis: Mit diesen Angaben verdeutlichen Sie die Praxisorientierung des Projektes.</i>",
+  "submission.sections.submit.progressbar.describe.spinoffs.info": "<p>Hier wird erfasst, wenn die Verwertung von Projektergebnissen durch die Gründung eines Unternehmens oder Vereins angestrebt wird. </p><p><i>Erfassen Sie hier bitte die geplante Ausgründung. <br>Im Projektverlauf können Sie die Informationen zu einer erfolgten Gründung durch die Angaben zur Anmeldung des Unternehmens oder Vereins ergänzen. </br>Hinweis: Mit diesen Angaben verdeutlichen Sie die Praxisorientierung des Projektes. </i></p>",
   
   
   // "submission.sections.submit.progressbar.describe.spinoffs_result": "Details of spin-off carried out",
-  "submission.sections.submit.progressbar.describe.spinoffs_result": "Angaben zur Anmeldung im Handels-, Genossenschafts- oder Vereinsregister",
+  "submission.sections.submit.progressbar.describe.spinoffs_result": "Angaben zur Anmeldung der Ausgründung im Handels-, Genossenschafts- oder Vereinsregister",
   
   
   // "submission.sections.submit.progressbar.describe.spinoffs_result_funding": "Details of spin-off funding",
@@ -11083,7 +11091,7 @@
   
   
   // "submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "Please document any subsidies received for the spin-off here.",
-  "submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "<i>Wenn die Ausgründung Fördermittel erhalten hat, machen Sie bitte die nachfolgende Angaben.</i>",
+  "submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "<i>Wenn die Ausgründung Fördermittel oder sonstige Unterstützung erhalten hat, ergänzen Sie bitte die nachfolgenden Angaben.</i>",
   
   
   // "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development": "Survey on success and economic development",
@@ -11867,6 +11875,55 @@
   "working-plan.chart.column.dates": "Daten",
   
   
+  // "working-plan.chart.column.dates.start": "Start date",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.dates.start": "Start date",
+  
+  
+  // "working-plan.chart.column.dates.end": "End date",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.dates.end": "End date",
+  
+  
+  // "working-plan.chart.column.changeStartDate.input.description": "Difference in days:",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.input.description": "Difference in days:",
+  
+  // "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later:",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later:",
+  
+  // "working-plan.chart.column.changeStartDate.radio.earlier": "Earlier",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.radio.earlier": "Earlier",
+  
+  // "working-plan.chart.column.changeStartDate.radio.later": "Later",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.radio.later": "Later",
+  
+  // "working-plan.chart.column.changeStartDate": "Change start date",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate": "Change start date",
+  
+  // "working-plan.chart.column.changeStartDate.apply": "Apply",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.apply": "Apply",
+  
+  // "working-plan.chart.column.changeStartDate.saving": "saving...",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.saving": "saving...",
+  
+  
+  // "working-plan.chart.column.changeStartDateClose": "Close",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDateClose": "Close",
+  
+  
+  // "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
+  
+  
   // "working-plan.chart.column.responsible": "Organisation",
   // TODO Source message changed - Revise the translation
   "working-plan.chart.column.responsible": "Verantwortliche Organisation(en)",
@@ -11894,6 +11951,10 @@
   // "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
   "working-plan.chart.move.error": "Es gab ein Problem beim Verschieben eines Eintrags. Versuchen Sie es später noch einmal.",
   
+  // "working-plan.chart.update.error": "There was an unexpected issue when fetching update, please reload the page to have consistent data.",
+  // TODO New key - Add a translation
+  "working-plan.chart.update.error": "There was an unexpected issue when fetching update, please reload the page to have consistent data.",
+  
   
   // "working-plan.chart.move.up.btn": "Move up",
   // TODO New key - Add a translation
@@ -11901,8 +11962,7 @@
   
   
   // "working-plan.chart.page.description": "Maecenas facilisis cursus nisl, eget gravida risus mollis a. Phasellus a quam vitae lorem finibus consequat. Vestibulum dictum, sem sed suscipit euismod, lorem diam lobortis sem, in ultrices ipsum risus a enim. Nunc efficitur interdum urna, eget accumsan arcu scelerisque maximus. In hac habitasse platea dictumst. Nunc vestibulum volutpat iaculis. Phasellus scelerisque congue ante vel luctus. Proin gravida semper eros, dignissim dapibus tortor laoreet quis. Maecenas nec dui risus. Sed metus lorem, egestas quis turpis et, viverra aliquet metus. Praesent et viverra velit. Donec vel magna tempor, tempus sem vel, ultrices diam. In sed neque id ligula hendrerit vulputate sit amet id ex. Mauris dignissim scelerisque tempor. Maecenas quis convallis felis. Nunc pharetra maximus sapien id vulputate.",
-  // TODO New key - Add a translation
-  "working-plan.chart.page.description": "Maecenas facilisis cursus nisl, eget gravida risus mollis a. Phasellus a quam vitae lorem finibus consequat. Vestibulum dictum, sem sed suscipit euismod, lorem diam lobortis sem, in ultrices ipsum risus a enim. Nunc efficitur interdum urna, eget accumsan arcu scelerisque maximus. In hac habitasse platea dictumst. Nunc vestibulum volutpat iaculis. Phasellus scelerisque congue ante vel luctus. Proin gravida semper eros, dignissim dapibus tortor laoreet quis. Maecenas nec dui risus. Sed metus lorem, egestas quis turpis et, viverra aliquet metus. Praesent et viverra velit. Donec vel magna tempor, tempus sem vel, ultrices diam. In sed neque id ligula hendrerit vulputate sit amet id ex. Mauris dignissim scelerisque tempor. Maecenas quis convallis felis. Nunc pharetra maximus sapien id vulputate.",
+  "working-plan.chart.page.description": "<p>Der Arbeitsplan unterstützt Sie bei der Planung und Umsetzung des Projektes.</p><p><i>Sie strukturieren hier die Arbeiten des Projektes über <b>Arbeitspakete</b> und <b>Meilensteine</b>.</br>Alle Arbeitspakete, die Sie bereits im Impact Pathway angelegt haben, werden im Arbeitsplan direkt angezeigt.</br>Innerhalb der Arbeitspakete können Sie Einträge aus den Bereichen <b>Aufgaben</b>, <b>Veranstaltungen / Interaktionen</b>, <b>Prozesse</b>, <b>Geplante Veröffentlichungen</b>, <b>Gegenstände oder Materialien</b> sowie <b>Meilensteine</b> hinzufügen oder neu anlegen. D. h. Meilensteine können innerhalb von Arbeitspaketen oder übergeordnet angelegt werden.</p><p>Mit der Schaltfläche [+] oberhalb des Arbeitsplans können Sie Arbeitspakete und Meilensteine anlegen oder bereits vorhandene suchen und auswählen. </br>Über die Schaltfläche [+] innerhalb der Arbeitspakete können Sie beliebig viele Einträge anlegen oder bereits vorhandene Einträge suchen und auswählen. Im Projektverlauf können Sie die Angaben jederzeit bearbeiten und ergänzen.</br>Mit der Drag-and-Drop-Funktion können Sie alle Einträge verschieben.</br>Ergänzen Sie zu den Einträgen den Zeitraum und das Akronym der verantwortlichen Partner. Diese Angaben sind für die Arbeitspakete und Meilensteine verpflichtend.</br>Im Projektverlauf können Sie den Status der Einträge ändern, um den aktuellen Stand des Projektes darzustellen.</p><p>Es besteht die Möglichkeit, den aktuellen Stand des Projektes mit einer älteren Version (z. B. der Antragsversion) zu vergleichen. Diese können Sie über die Schaltfläche [Version] auswählen.</br>Die Darstellung der Zeitachse können Sie über die Schaltflächen Jahr, Quartal und Monat wählen.</i></p>",
   
   
   // "working-plan.page.title": "Working plan",
@@ -12116,7 +12176,7 @@
   
   
   // "vocabulary-treeview.tree.description.coar": "Please characterize the type of publication by selecting.",
-  "vocabulary-treeview.tree.description.coar": "<i>Wählen Sie den passenden Typ für die Veröffentlichung aus, zum Beispiel eine Dissertation oder einen Artikel/Aufsatz. Die folgenden Eingabefelder richten sich nach dem ausgewählten Publikationstyp.</i>",
+  "vocabulary-treeview.tree.description.coar": "<i>Wählen Sie den passenden Typ für die Veröffentlichung aus, zum Beispiel eine Dissertation oder einen Artikel/Aufsatz. Die folgenden Eingabefelder richten sich nach dem ausgewählten Publikationstyp.</br>Alternativ können Sie durch Eingabe der ersten Buchstaben eines gesuchten Begriffes im Textfeld die Auswahl eingrenzen.</i>",
   
   
   // "submission.sections.submit.progressbar.describe.plan_publications.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Enter here the information about a planned publication.",
@@ -12244,16 +12304,42 @@
   
   
   // "vocabulary-treeview.tree.description.countries": "Please select the country.",
-  "vocabulary-treeview.tree.description.countries": "<i>Bitte wählen Sie das Land aus.</i>",
+  "vocabulary-treeview.tree.description.countries": "<i>Wählen Sie bitte das Land.</br>Über die Pfeile lassen sich Listen aufklappen, in denen Sie das passende Land auswählen können. Alternativ können Sie durch Eingabe der ersten Buchstaben eines gesuchten Begriffes im Textfeld die Auswahl auch schon eingrenzen.</i>",
   
   
   // "tree.description.register-court": "Registry Court",
   "tree.description.register-court": "Registergericht",
   
   
-  // "vocabulary-treeview.tree.description.register-court": "Please select the city of the registry court."
+  // "vocabulary-treeview.tree.description.register-court": "Please select the city of the registry court.",
   // TODO Source message changed - Revise the translation
-  "vocabulary-treeview.tree.description.register-court": "<i>Bitte wählen Sie den Ort des zuständigen Registergerichts aus.</i>",
+  "vocabulary-treeview.tree.description.register-court": "<i>Bitte wählen Sie den Ort des zuständigen Registergerichts aus.</br>Über die Pfeile lassen sich Listen aufklappen, in denen Sie den Ort auswählen können. Alternativ können Sie durch Eingabe der ersten Buchstaben eines gesuchten Begriffes im Textfeld die Auswahl auch schon eingrenzen.</i>",
+  
+  
+  // "submission.sections.submit.progressbar.describe.spinoffs_result_performance": "Survey on success and economic development",
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance": "Angaben zu wirtschaftlicher Entwicklung und Arbeitsschwerpunkten",
+  
+  
+  // "submission.sections.submit.progressbar.describe.spinoffs_result_performance.info": "This section can be used for surveys.",
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance.info": "<p><i>Bitte dokumentieren Sie hier, sofern Ihnen Informationen dazu vorliegen, die wirtschaftliche Entwicklung und inhaltliche Arbeitsschwerpunkte der Ausgründung im Zeitverlauf. </br>Hinweis: Mit diesen Angaben können Sie dem Fördermittelgeber die erfolgreiche Verwertung der Projektergebnisse belegen. </i></p>",
+  
+  
+  // "working-plan.chart.column.steps": "Steps",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.steps": "Steps",
+  
+  
+  // "submission.sections.submit.progressbar.describe.datasets": "Data set",
+  "submission.sections.submit.progressbar.describe.datasets": "Forschungsdaten",
+  
+  
+  // "submission.sections.submit.progressbar.describe.datasets_references": "Link to publications",
+  "submission.sections.submit.progressbar.describe.datasets_references": "Verknüpfung zu Veröffentlichungen",
+  
+  
+  // "exploitationplan.listelement.badge": "Exploitation plan"
+  // TODO Source message changed - Revise the translation
+  "exploitationplan.listelement.badge": "Verwertungsplan"
   
   
 

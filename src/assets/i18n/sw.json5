@@ -3416,21 +3416,26 @@
   // TODO New key - Add a translation
   "exploitation-plan.step_type_4.info.text": "Info text for section 4",
   
-  // "exploitation-plan.step_type_1.title": "Intellectual property rights",
-  // TODO New key - Add a translation
-  "exploitation-plan.step_type_1.title": "Intellectual property rights",
   
-  // "exploitation-plan.step_type_2.title": "Economic prospects",
+  // "exploitation-plan.step_type_1.title": "1. Intellectual property rights",
   // TODO New key - Add a translation
-  "exploitation-plan.step_type_2.title": "Economic prospects",
+  "exploitation-plan.step_type_1.title": "1. Intellectual property rights",
   
-  // "exploitation-plan.step_type_3.title": "Scientific and technical prospects",
-  // TODO New key - Add a translation
-  "exploitation-plan.step_type_3.title": "Scientific and technical prospects",
   
-  // "exploitation-plan.step_type_4.title": "Connectivity",
+  // "exploitation-plan.step_type_2.title": "2. Economic prospects",
   // TODO New key - Add a translation
-  "exploitation-plan.step_type_4.title": "Connectivity",
+  "exploitation-plan.step_type_2.title": "2. Economic prospects",
+  
+  
+  // "exploitation-plan.step_type_3.title": "3. Scientific and technical prospects",
+  // TODO New key - Add a translation
+  "exploitation-plan.step_type_3.title": "3. Scientific and technical prospects",
+  
+  
+  // "exploitation-plan.step_type_4.title": "4. Connectivity",
+  // TODO New key - Add a translation
+  "exploitation-plan.step_type_4.title": "4. Connectivity",
+  
   
   // "exploitation-plan.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
   // TODO New key - Add a translation
@@ -4285,6 +4290,9 @@
   // TODO New key - Add a translation
   "impact-pathway.remove.item.title": "Remove item",
   
+  // "impact-pathway.remove.processing": "Deleting",
+  // TODO New key - Add a translation
+  "impact-pathway.remove.processing": "Deleting",
   
   // "impact-pathway.remove.title": "Delete impact pathway",
   // TODO New key - Add a translation
@@ -12924,6 +12932,55 @@
   "working-plan.chart.column.dates": "Dates",
   
   
+  // "working-plan.chart.column.dates.start": "Start date",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.dates.start": "Start date",
+  
+  
+  // "working-plan.chart.column.dates.end": "End date",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.dates.end": "End date",
+  
+  
+  // "working-plan.chart.column.changeStartDate.input.description": "Difference in days:",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.input.description": "Difference in days:",
+  
+  // "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later:",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later:",
+  
+  // "working-plan.chart.column.changeStartDate.radio.earlier": "Earlier",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.radio.earlier": "Earlier",
+  
+  // "working-plan.chart.column.changeStartDate.radio.later": "Later",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.radio.later": "Later",
+  
+  // "working-plan.chart.column.changeStartDate": "Change start date",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate": "Change start date",
+  
+  // "working-plan.chart.column.changeStartDate.apply": "Apply",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.apply": "Apply",
+  
+  // "working-plan.chart.column.changeStartDate.saving": "saving...",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.saving": "saving...",
+  
+  
+  // "working-plan.chart.column.changeStartDateClose": "Close",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDateClose": "Close",
+  
+  
+  // "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
+  
+  
   // "working-plan.chart.column.responsible": "Organisation",
   // TODO New key - Add a translation
   "working-plan.chart.column.responsible": "Organisation",
@@ -12952,6 +13009,10 @@
   // "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
   // TODO New key - Add a translation
   "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
+  
+  // "working-plan.chart.update.error": "There was an unexpected issue when fetching update, please reload the page to have consistent data.",
+  // TODO New key - Add a translation
+  "working-plan.chart.update.error": "There was an unexpected issue when fetching update, please reload the page to have consistent data.",
   
   
   // "working-plan.chart.move.up.btn": "Move up",
@@ -13384,9 +13445,39 @@
   "tree.description.register-court": "Registry Court",
   
   
-  // "vocabulary-treeview.tree.description.register-court": "Please select the city of the registry court."
+  // "vocabulary-treeview.tree.description.register-court": "Please select the city of the registry court.",
   // TODO New key - Add a translation
-  "vocabulary-treeview.tree.description.register-court": "Please select the city of the registry court."
+  "vocabulary-treeview.tree.description.register-court": "Please select the city of the registry court.",
+  
+  
+  // "submission.sections.submit.progressbar.describe.spinoffs_result_performance": "Survey on success and economic development",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance": "Survey on success and economic development",
+  
+  
+  // "submission.sections.submit.progressbar.describe.spinoffs_result_performance.info": "This section can be used for surveys.",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance.info": "This section can be used for surveys.",
+  
+  
+  // "working-plan.chart.column.steps": "Steps",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.steps": "Steps",
+  
+  
+  // "submission.sections.submit.progressbar.describe.datasets": "Data set",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.datasets": "Data set",
+  
+  
+  // "submission.sections.submit.progressbar.describe.datasets_references": "Link to publications",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.datasets_references": "Link to publications",
+  
+  
+  // "exploitationplan.listelement.badge": "Exploitation plan"
+  // TODO New key - Add a translation
+  "exploitationplan.listelement.badge": "Exploitation plan"
   
   
 
