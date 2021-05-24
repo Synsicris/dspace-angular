@@ -196,9 +196,6 @@ import { StatisticsCategory } from './statistics/models/statistics-category.mode
 import { RootDataService } from './data/root-data.service';
 import { SearchConfig } from '../shared/search/search-filters/search-config.model';
 import { EditItemRelationsGuard } from '../edit-item-relationships/guards/edit-item-relationships.guard';
-import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
-import { ObjectiveService } from './impact-pathway/objective.service';
-import { ImpactPathwayLinksService } from './impact-pathway/impact-pathway-links.service';
 import { ItemAuthorityRelationService } from './shared/item-authority-relation.service';
 import { ProjectDataService } from './project/project-data.service';
 import { CollectionSearchResult } from '../shared/object-collection/shared/collection-search-result.model';
@@ -352,9 +349,6 @@ const PROVIDERS = [
   ResearcherProfileService,
   SearchcomponentService,
   ItemAuthorityRelationService,
-  ImpactPathwayService,
-  ObjectiveService,
-  ImpactPathwayLinksService,
   ProjectDataService,
   ProjectAuthorizationService,
   ProjectGroupService

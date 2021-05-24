@@ -8,6 +8,7 @@ import { SubProjectPageComponent } from './sub-project-page.component';
 import { SubProjectPageHeaderComponent } from './header/sub-project-page-header.component';
 import { SubProjectPageContentComponent } from './content/sub-project-page-content.component';
 import { ContextMenuModule } from '../shared/context-menu/context-menu.module';
+import { ImpactPathwayCoreModule } from '../impact-pathway-board/core/impact-pathway-core.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ContextMenuModule } from '../shared/context-menu/context-menu.module';
     SharedModule,
     SubProjectPageRoutingModule,
     ImpactPathwayBoardModule,
-    ContextMenuModule
+    ContextMenuModule,
+    ImpactPathwayCoreModule
   ],
   declarations: [
     SubProjectPageComponent,

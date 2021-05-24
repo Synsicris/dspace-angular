@@ -70,7 +70,7 @@ import { followLink } from '../../shared/utils/follow-link-config.model';
 import parseSectionErrorPaths, { SectionErrorPath } from '../utils/parseSectionErrorPaths';
 import { FormState } from '../../shared/form/form.reducer';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
-import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
+import { ImpactPathwayService } from '../../impact-pathway-board/core/impact-pathway.service';
 import { ItemDataService } from '../../core/data/item-data.service';
 
 @Injectable()

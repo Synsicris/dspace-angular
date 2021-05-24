@@ -62,7 +62,7 @@ import {
   UpdateImpactPathwayTaskAction
 } from './impact-pathway.actions';
 import { ImpactPathwayService } from './impact-pathway.service';
-import { Item } from '../shared/item.model';
+import { Item } from '../../core/shared/item.model';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { ImpactPathway } from './models/impact-pathway.model';
 import { isNotEmpty } from '../../shared/empty.util';
@@ -70,13 +70,13 @@ import { ImpactPathwayTask } from './models/impact-pathway-task.model';
 import { StoreActionTypes } from '../../store.actions';
 import { ImpactPathwayState } from './impact-pathway.reducer';
 import { ImpactPathwayLinksService } from './impact-pathway-links.service';
-import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
+import { ItemAuthorityRelationService } from '../../core/shared/item-authority-relation.service';
 import { ImpactPathwayLinksMap } from './models/impact-pathway-task-links-map';
 import { environment } from '../../../environments/environment';
-import { MetadataValue } from '../shared/metadata.models';
+import { MetadataValue } from '../../core/shared/metadata.models';
 import { SubmissionObjectActionTypes } from '../../submission/objects/submission-objects.actions';
-import { ItemDataService } from '../data/item-data.service';
-import { RemoteData } from '../data/remote-data';
+import { ItemDataService } from '../../core/data/item-data.service';
+import { RemoteData } from '../../core/data/remote-data';
 
 /**
  * Provides effect methods for jsonPatch Operations actions

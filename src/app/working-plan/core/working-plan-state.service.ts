@@ -13,6 +13,8 @@ import {
   RemoveWorkpackageAction,
   RemoveWorkpackageStepAction,
   RetrieveAllLinkedWorkingPlanObjectsAction,
+  UpdateAllWorkpackageAction,
+  UpdateAllWorkpackageStepAction,
   UpdateWorkpackageAction,
   UpdateWorkpackageStepAction
 } from './working-plan.actions';
@@ -29,6 +31,19 @@ import {
 import { map, startWith } from 'rxjs/operators';
 import { ChartDateViewType, WorkpackageEntries } from './working-plan.reducer';
 import { Workpackage, WorkpackageStep } from './models/workpackage-step.model';
+
+export interface WpActionPackage {
+  workpackageId: string;
+  workpackage: Workpackage;
+  metadatumViewList: any[];
+}
+
+export interface WpStepActionPackage {
+  workpackageId: string;
+  workpackageStepId: string;
+  workpackageStep: WorkpackageStep;
+  metadatumViewList: any[];
+}
 
 @Injectable()
 export class WorkingPlanStateService {
@@ -94,6 +109,10 @@ export class WorkingPlanStateService {
     this.store.dispatch((new UpdateWorkpackageAction(workpackageId, workpackage, metadatumViewList)));
   }
 
+  public dispatchUpdateAllWorkpackageAction(wpActionPackage: WpActionPackage[], wpStepsActionPackage: WpStepActionPackage[]) {
+    this.store.dispatch((new UpdateAllWorkpackageAction(wpActionPackage, wpStepsActionPackage)));
+  }
+
   public dispatchUpdateWorkpackageStepAction(
     workpackageId: string,
     workpackageStepId: string,
@@ -101,6 +120,10 @@ export class WorkingPlanStateService {
     metadatumViewList: MetadatumViewModel[]
   ) {
     this.store.dispatch((new UpdateWorkpackageStepAction(workpackageId, workpackageStepId, workpackageStep, metadatumViewList)));
+  }
+
+  public dispatchUpdateAllWorkpackageStepAction(wpStepActionPackage: WpStepActionPackage[]) {
+    this.store.dispatch((new UpdateAllWorkpackageStepAction(wpStepActionPackage)));
   }
 
   public getChartDateViewSelector() {

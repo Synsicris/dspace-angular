@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { of as observableOf } from 'rxjs';
-import { catchError, concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import {
+  of as observableOf,
+  from as observableFrom
+} from 'rxjs';
+import { catchError, concatMap, map, mergeMap, reduce, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
@@ -39,10 +42,17 @@ import {
   SaveWorkpackageOrderSuccessAction,
   SaveWorkpackageStepsOrderAction,
   SaveWorkpackageStepsOrderErrorAction,
+  UpdateAllWorkpackageAction,
+  UpdateAllWorkpackageErrorAction,
+  UpdateAllWorkpackageStepAction,
+  UpdateAllWorkpackageStepErrorAction,
+  UpdateAllWorkpackageStepSuccessAction,
+  UpdateAllWorkpackageSuccessAction,
   UpdateWorkpackageAction,
   UpdateWorkpackageErrorAction,
   UpdateWorkpackageStepAction,
   UpdateWorkpackageStepErrorAction,
+  UpdateWorkpackageStepSuccessAction,
   UpdateWorkpackageSuccessAction,
   WorkpackageActionTypes
 } from './working-plan.actions';
@@ -53,6 +63,7 @@ import { ItemAuthorityRelationService } from '../../core/shared/item-authority-r
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SubmissionObjectActionTypes } from '../../submission/objects/submission-objects.actions';
 import { environment } from '../../../environments/environment';
+import { WpActionPackage, WpStepActionPackage } from './working-plan-state.service';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -304,12 +315,16 @@ export class WorkingPlanEffects {
    */
   @Effect() updateWorkpackage$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.UPDATE_WORKPACKAGE),
-    switchMap((action: UpdateWorkpackageAction) => {
+    mergeMap((action: UpdateWorkpackageAction) => {
       return this.workingPlanService.updateMetadataItem(
         action.payload.workpackageId,
         action.payload.metadatumViewList
       ).pipe(
-        map(() => new UpdateWorkpackageSuccessAction()),
+        map(() => new UpdateWorkpackageSuccessAction(
+          action.payload.workpackageId,
+          action.payload.workpackage,
+          action.payload.metadatumViewList
+        )),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
@@ -319,16 +334,57 @@ export class WorkingPlanEffects {
     }));
 
   /**
+   * Update all workpackages into the state
+   */
+  @Effect() updateAllWorkpackage$ = this.actions$.pipe(
+    ofType(WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE),
+    concatMap((action: UpdateAllWorkpackageAction) => {
+      return observableFrom(action.payload.wpActionPackage).pipe(
+        concatMap((wp: WpActionPackage) => {
+          return this.workingPlanService.updateMetadataItem(
+            wp.workpackageId,
+            wp.metadatumViewList
+          );
+        }),
+        reduce((acc: any, value: any) => [...acc, value], []),
+        map(() => new UpdateAllWorkpackageSuccessAction(
+          action.payload.wpActionPackage,
+          action.payload.wpStepsActionPackage
+        )),
+        catchError((error: Error) => {
+          if (error) {
+            console.error(error.message);
+          }
+          return observableOf(new UpdateAllWorkpackageErrorAction(action.payload.wpActionPackage));
+        })
+      );
+    }));
+
+  /**
+   * Update all workpackages into the state
+   */
+  @Effect() updateAllWorkpackageSuccess$ = this.actions$.pipe(
+    ofType(WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_SUCCESS),
+    map((action: UpdateAllWorkpackageSuccessAction) => new UpdateAllWorkpackageStepAction(
+      action.payload.wpStepsActionPackage
+    )));
+
+  /**
    * Update a workpackage into the state
    */
   @Effect() updateWorkpackageStep$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP),
-    switchMap((action: UpdateWorkpackageStepAction) => {
+    mergeMap((action: UpdateWorkpackageStepAction) => {
       return this.workingPlanService.updateMetadataItem(
         action.payload.workpackageStepId,
         action.payload.metadatumViewList
       ).pipe(
-        map(() => new UpdateWorkpackageSuccessAction()),
+        map(() => new UpdateWorkpackageStepSuccessAction(
+          action.payload.workpackageId,
+          action.payload.workpackageStepId,
+          action.payload.workpackageStep,
+          action.payload.metadatumViewList
+        )),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
@@ -338,6 +394,50 @@ export class WorkingPlanEffects {
             action.payload.workpackageStepId
           ));
         }));
+    }));
+
+  /**
+   * Update a workpackage into the state
+   */
+  @Effect() updateAllWorkpackageStep$ = this.actions$.pipe(
+    ofType(WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP),
+    concatMap((action: UpdateAllWorkpackageStepAction) => {
+      return observableFrom(action.payload.wpStepActionPackage).pipe(
+        concatMap((wp: WpStepActionPackage) => {
+          return this.workingPlanService.updateMetadataItem(
+            wp.workpackageStepId,
+            wp.metadatumViewList
+          );
+        }),
+        reduce((acc: any, value: any) => [...acc, value], []),
+        map(() => new UpdateAllWorkpackageStepSuccessAction(
+          action.payload.wpStepActionPackage
+        )),
+        catchError((error: Error) => {
+          if (error) {
+            console.error(error.message);
+          }
+          return observableOf(new UpdateAllWorkpackageStepErrorAction(action.payload.wpStepActionPackage));
+        })
+      );
+    }));
+
+  /**
+   * Init workingplan objects place
+   */
+  @Effect({dispatch: false}) updateError$ = this.actions$.pipe(
+    ofType(
+      WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_ERROR,
+      WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP_ERROR,
+      WorkpackageActionTypes.UPDATE_WORKPACKAGE_ERROR,
+      WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP_ERROR
+    ),
+    tap(() => {
+      this.notificationsService.error(
+        null,
+        this.translate.get('working-plan.chart.update.error'),
+        {timeOut: 0, clickToClose: false}
+      );
     }));
 
   /**

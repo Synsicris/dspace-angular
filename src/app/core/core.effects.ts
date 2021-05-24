@@ -8,7 +8,6 @@ import { ObjectUpdatesEffects } from './data/object-updates/object-updates.effec
 import { RouteEffects } from './services/route.effects';
 import { RouterEffects } from './router/router.effects';
 import { MenuEffects } from '../shared/menu/menu.effects';
-import { ImpactPathwayEffects } from './impact-pathway/impact-pathway.effects';
 
 export const coreEffects = [
   RequestEffects,
@@ -20,6 +19,5 @@ export const coreEffects = [
   ObjectUpdatesEffects,
   RouteEffects,
   RouterEffects,
-  MenuEffects,
-  ImpactPathwayEffects
+  MenuEffects
 ];

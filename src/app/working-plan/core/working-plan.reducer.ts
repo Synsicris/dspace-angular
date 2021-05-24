@@ -12,12 +12,16 @@ import {
   RemoveWorkpackageStepSuccessAction,
   RemoveWorkpackageSuccessAction,
   SaveWorkpackageStepsOrderErrorAction,
+  UpdateAllWorkpackageStepSuccessAction,
+  UpdateAllWorkpackageSuccessAction,
   UpdateWorkpackageAction,
   UpdateWorkpackageStepAction,
+  UpdateWorkpackageStepSuccessAction,
+  UpdateWorkpackageSuccessAction,
   WorkingPlanActions,
   WorkpackageActionTypes
 } from './working-plan.actions';
-import { ImpactPathwayState } from '../../core/impact-pathway/impact-pathway.reducer';
+import { WpActionPackage, WpStepActionPackage } from './working-plan-state.service';
 
 export enum ChartDateViewType {
   day = 'day',
@@ -39,6 +43,7 @@ export interface WorkpackageEntries {
 export interface WorkingPlanState {
   workpackages: WorkpackageEntries;
   workpackageToRemove: string;
+  workpackageToUpdate: string;
   loaded: boolean;
   processing: boolean;
   moving: boolean;
@@ -48,6 +53,7 @@ export interface WorkingPlanState {
 const workpackageInitialState: WorkingPlanState = {
   workpackages: {},
   workpackageToRemove: '',
+  workpackageToUpdate: '',
   loaded: false,
   processing: false,
   moving: false,
@@ -139,11 +145,52 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
     }
 
     case WorkpackageActionTypes.UPDATE_WORKPACKAGE: {
-      return updateWorkpackage(state, action as UpdateWorkpackageAction);
+      return Object.assign({}, state, {
+        workpackageToUpdate: (action as UpdateWorkpackageAction).payload.workpackageId,
+        processing: true
+      });
     }
 
     case WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP: {
-      return updateWorkpackageStep(state, action as UpdateWorkpackageStepAction);
+      return Object.assign({}, state, {
+        workpackageToUpdate: (action as UpdateWorkpackageStepAction).payload.workpackageStepId,
+        processing: true
+      });
+    }
+
+    case WorkpackageActionTypes.UPDATE_WORKPACKAGE_SUCCESS: {
+      return updateWorkpackage(state, action as UpdateWorkpackageSuccessAction);
+    }
+
+    case WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP_SUCCESS: {
+      return updateWorkpackageStep(state, action as UpdateWorkpackageStepSuccessAction);
+    }
+
+    case WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE: {
+      return Object.assign({}, state, {
+        processing: true
+      });
+    }
+
+    case WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP: {
+      return Object.assign({}, state, {
+        processing: true
+      });
+    }
+
+    case WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_SUCCESS: {
+      return updateAllWorkpackage(state, action as UpdateAllWorkpackageSuccessAction);
+    }
+
+    case WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP_SUCCESS: {
+      return updateAllWorkpackageStep(state, action as UpdateAllWorkpackageStepSuccessAction);
+    }
+
+    case WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_ERROR:
+    case WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP_ERROR: {
+      return Object.assign({}, state, {
+        processing: false
+      });
     }
 
     case WorkpackageActionTypes.MOVE_WORKPACKAGE: {
@@ -307,12 +354,35 @@ function removeWorkpackageStep(state: WorkingPlanState, action: RemoveWorkpackag
  * @return WorkingPlanState
  *    the new state.
  */
-function updateWorkpackage(state: WorkingPlanState, action: UpdateWorkpackageAction): WorkingPlanState {
+function updateWorkpackage(state: WorkingPlanState, action: UpdateWorkpackageSuccessAction): WorkingPlanState {
   return Object.assign({}, state, {
     workpackages: Object.assign({}, state.workpackages, {
       [action.payload.workpackageId]: action.payload.workpackage
     }),
     processing: false
+  });
+}
+
+/**
+ * Update all the workpackage objects.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an UpdateAllWorkpackageSuccessAction
+ * @return WorkingPlanState
+ *    the new state.
+ */
+function updateAllWorkpackage(state: WorkingPlanState, action: UpdateAllWorkpackageSuccessAction): WorkingPlanState {
+  action.payload.wpActionPackage.forEach((wp: WpActionPackage) => {
+    state = Object.assign({}, state, {
+      workpackages: Object.assign({}, state.workpackages, {
+        [wp.workpackageId]: wp.workpackage
+      })
+    });
+  });
+  return Object.assign({}, state, {
+    processing: true
   });
 }
 
@@ -326,8 +396,7 @@ function updateWorkpackage(state: WorkingPlanState, action: UpdateWorkpackageAct
  * @return WorkingPlanState
  *    the new state.
  */
-function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackageStepAction): WorkingPlanState {
-
+function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackageStepSuccessAction): WorkingPlanState {
   const steps = [...state.workpackages[action.payload.workpackageId].steps];
   const stepIndex = findIndex(steps, { id: action.payload.workpackageStepId });
   steps[stepIndex] = action.payload.workpackageStep;
@@ -337,6 +406,36 @@ function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackag
         steps: steps
       })
     }),
+    processing: false
+  });
+}
+
+/**
+ * Update all the workpackage step objects.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an UpdateAllWorkpackageStepSuccessAction
+ * @return WorkingPlanState
+ *    the new state.
+ */
+ function updateAllWorkpackageStep(state: WorkingPlanState, action: UpdateAllWorkpackageStepSuccessAction): WorkingPlanState {
+  let steps;
+  let stepIndex;
+  action.payload.wpStepActionPackage.forEach((wp: WpStepActionPackage) => {
+    steps = [...state.workpackages[wp.workpackageId].steps];
+    stepIndex = findIndex(steps, { id: wp.workpackageStepId });
+    steps[stepIndex] = wp.workpackageStep;
+    state = Object.assign({}, state, {
+      workpackages: Object.assign({}, state.workpackages, {
+        [wp.workpackageId]: Object.assign({}, state.workpackages[wp.workpackageId], {
+          steps: steps
+        })
+      })
+    });
+  });
+  return Object.assign({}, state, {
     processing: false
   });
 }

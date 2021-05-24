@@ -16,6 +16,17 @@
   text-overflow: ellipsis;
 }
 
+.block-change-start-date {
+  width: 300px;
+  line-height: 1.15;
+}
+
+.block-change-start-date-radio {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+}
+
 .ml-05 {
   margin-left: .5rem;
 }
@@ -106,10 +117,7 @@ $highlightBorderColor: #FF9800;
 }
 
 .calendar-cell-customization {
-  border-style: none;
-  border-left: none;
-  border-right: none;
-  height: 30px;
+  height: 30px !important;
   min-height: 30px;
   line-height: 30px;
 }
@@ -126,7 +134,24 @@ $highlightBorderColor: #FF9800;
 }
 
 .tree-node-end-of-the-year-customization {
-  border-right: solid 2px red !important;
+  border-right: solid 1px red !important;
+}
+
+.tree-node-milestone-customization {
+  width: 1px;
+  border-right: solid 1px blue;
+  background-color: #adbb97;
+  box-shadow: -4px 0px 10px 0px #59870e;
+}
+
+.tree-node-milestone-rhombus {
+  width: 8px;
+  height: 8px !important;
+  border: solid 1px blue;
+  background-color: blue !important;
+  transform: rotate(45deg);
+  min-width: 8px !important;
+  min-height: 8px !important;
 }
 
 // sidenav

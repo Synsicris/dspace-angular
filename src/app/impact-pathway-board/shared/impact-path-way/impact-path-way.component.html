@@ -1,43 +1,42 @@
-<ipw-collapsable-panel class="d-block mb-3" [sidebarPanelTitle]="impactPathway.title" [startOpen]="true" [collapsable]="false">
-  <ng-container ngProjectAs="panelIconStatus">
-    <button class="btn btn-lg btn-link p-0 flex-shrink-1 align-self-start mr-3 text-info"
-            [disabled]="(infoShowed | async)"
-            title="{{'impact-pathway.info.btn.title' | translate}}"
-            (click)="$event.preventDefault(); toggleInfoPanel(); $event.stopPropagation()">
-      <span><i class="far fa-question-circle"></i></span>
-    </button>
-    <button *ngIf="(canDeleteImpactPathway$ | async)" class="btn btn-lg btn-link p-0 flex-shrink-1 align-self-start text-danger"
+<div class="border-bottom mb-4 pb-4 d-flex justify-content-between align-items-center">
+  <ds-comcol-page-header
+    [name]="impactPathway.title | titlecase">
+  </ds-comcol-page-header>
+  <div class="pl-2">
+    <button *ngIf="(canDeleteImpactPathway$ | async)" class="btn btn-danger"
             [disabled]="(isProcessingRemove() | async)"
             title="{{'impact-pathway.remove.title' | translate}}"
             (click)="$event.preventDefault(); confirmRemove(content); $event.stopPropagation()">
-      <span *ngIf="!(isProcessingRemove() | async)"><i class="far fa-trash-alt"></i></span>
-      <span *ngIf="(isProcessingRemove() | async)"><i class="fas fa-circle-notch fa-spin"></i></span>
+      <span *ngIf="!(isProcessingRemove() | async)">
+        <i class="far fa-trash-alt"></i> {{'impact-pathway.remove.title' | translate}}
+      </span>
+      <span *ngIf="(isProcessingRemove() | async)">
+        <i class="fas fa-circle-notch fa-spin"> {{'mpact-pathway.remove.processing' | translate}}</i>
+      </span>
     </button>
-  </ng-container>
-  <ng-container ngProjectAs="panelContent">
-    <div class="d-flex align-items-stretch border-bottom w-100">
-      <ds-alert *ngIf="infoShowed | async"
-                class="bg-light w-100"
-                [dismissible]="true"
-                [content]="'impact-pathway.wrapper.info'"
-                (close)="toggleInfoPanel()"></ds-alert>
-    </div>
-    <div class="d-flex align-items-stretch p-0 m-0 vertical-content">
-      <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps"
-                                ipwStepColor
-                                class="vertical-step"
-                                [projectId]="projectId"
-                                [impactPathwayId]="impactPathway.id"
-                                [impactPathwayStepId]="step.id"
-                                [stepType]="step.type"
-                                [allImpactPathwayStepIds]="getImpactPathwayStepIds()"></ipw-impact-path-way-step>
-    </div>
-    <ipw-editable-textarea *ngIf="impactPathway"
-                           [placeholder]="impactPathway.description"
-                           [initContent]="impactPathway.description"
-                           (contentChange)="updateDescription($event)"></ipw-editable-textarea>
-  </ng-container>
-</ipw-collapsable-panel>
+  </div>
+</div>
+
+<div>
+  <ds-alert *ngIf="infoShowed | async"
+            [type]="'alert-info'"
+            [collapsible]="true"
+            [content]="'impact-pathway.wrapper.info'"></ds-alert>
+  <div class="d-flex align-items-stretch p-0 m-0 vertical-content border">
+    <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps"
+                              ipwStepColor
+                              class="vertical-step"
+                              [projectId]="projectId"
+                              [impactPathwayId]="impactPathway.id"
+                              [impactPathwayStepId]="step.id"
+                              [stepType]="step.type"
+                              [allImpactPathwayStepIds]="getImpactPathwayStepIds()"></ipw-impact-path-way-step>
+  </div>
+  <ipw-editable-textarea *ngIf="impactPathway"
+                         [placeholder]="impactPathway.description"
+                         [initContent]="impactPathway.description"
+                         (contentChange)="updateDescription($event)"></ipw-editable-textarea>
+</div>
 
 <div *ngIf="(loaded | async)">
   <ngx-domarrow *ngFor="let relation of (getRelations() | async)"

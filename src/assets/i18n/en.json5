@@ -2563,6 +2563,7 @@
 
   "impact-pathway.remove.item.title": "Remove item",
 
+  "impact-pathway.remove.processing": "Deleting",
 
   "impact-pathway.remove.title": "Delete impact pathway",
 
@@ -7744,6 +7745,33 @@
   "working-plan.chart.column.dates": "Dates",
 
 
+  "working-plan.chart.column.dates.start": "Start date",
+
+
+  "working-plan.chart.column.dates.end": "End date",
+
+
+  "working-plan.chart.column.changeStartDate.input.description": "Difference in days:",
+
+  "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later:",
+
+  "working-plan.chart.column.changeStartDate.radio.earlier": "Earlier",
+
+  "working-plan.chart.column.changeStartDate.radio.later": "Later",
+
+  "working-plan.chart.column.changeStartDate": "Change start date",
+
+  "working-plan.chart.column.changeStartDate.apply": "Apply",
+
+  "working-plan.chart.column.changeStartDate.saving": "saving...",
+
+
+  "working-plan.chart.column.changeStartDateClose": "Close",
+
+
+  "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
+
+
   "working-plan.chart.column.responsible": "Organisation",
 
 
@@ -7760,6 +7788,8 @@
 
 
   "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
+
+  "working-plan.chart.update.error": "There was an unexpected issue when fetching update, please reload the page to have consistent data.",
 
 
   "working-plan.chart.move.up.btn": "Move up",

@@ -3,8 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ImpactPathway } from '../core/impact-pathway/models/impact-pathway.model';
-import { ImpactPathwayService } from '../core/impact-pathway/impact-pathway.service';
+import { ImpactPathway } from './core/models/impact-pathway.model';
+import { ImpactPathwayService } from './core/impact-pathway.service';
 
 @Component({
   selector: 'ipw-dashboard',

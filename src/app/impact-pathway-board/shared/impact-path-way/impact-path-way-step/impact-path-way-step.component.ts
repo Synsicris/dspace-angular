@@ -6,10 +6,10 @@ import { find, map, mergeMap, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
-import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
-import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
+import { ImpactPathwayStep } from '../../../core/models/impact-pathway-step.model';
+import { ImpactPathwayService } from '../../../core/impact-pathway.service';
 import { fadeInOut } from '../../../../shared/animations/fade';
-import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
+import { ImpactPathwayTask } from '../../../core/models/impact-pathway-task.model';
 import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';
 import { isNotEmpty } from '../../../../shared/empty.util';

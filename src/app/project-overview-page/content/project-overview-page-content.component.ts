@@ -13,7 +13,7 @@ import { DsoRedirectDataService } from '../../core/data/dso-redirect-data.servic
 import { IdentifierType } from '../../core/data/request.models';
 import { Community } from '../../core/shared/community.model';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
-import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
+import { ImpactPathwayService } from '../../impact-pathway-board/core/impact-pathway.service';
 import { PageInfo } from '../../core/shared/page-info.model';
 import { MYDSPACE_PAGE, MYDSPACE_ROUTE } from '../../+my-dspace-page/my-dspace-page.component';
 import { PROJECT_PAGE, PROJECT_ROUTE } from '../project-overview-page.component';

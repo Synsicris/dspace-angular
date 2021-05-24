@@ -4,9 +4,9 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Observable, of as observableOf } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
-import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
-import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
+import { ImpactPathwayTask } from '../../../core/models/impact-pathway-task.model';
+import { ImpactPathwayStep } from '../../../core/models/impact-pathway-step.model';
+import { ImpactPathwayService } from '../../../core/impact-pathway.service';
 import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-container.component';
 import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';

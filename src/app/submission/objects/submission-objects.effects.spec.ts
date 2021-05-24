@@ -58,7 +58,7 @@ import { WorkflowItemDataService } from '../../core/submission/workflowitem-data
 import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
 import { EditItemDataService } from '../../core/submission/edititem-data.service';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
-import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
+import { ImpactPathwayService } from '../../impact-pathway-board/core/impact-pathway.service';
 import { ItemDataService } from '../../core/data/item-data.service';
 import { createNoContentRemoteDataObject$ } from '../../shared/remote-data.utils';
 

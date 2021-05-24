@@ -3,12 +3,12 @@ import { ChangeDetectorRef, Component, Inject, Input, OnInit, ViewChild } from '
 import { BehaviorSubject, Observable } from 'rxjs';
 import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ImpactPathway } from '../../../core/impact-pathway/models/impact-pathway.model';
+import { ImpactPathway } from '../../core/models/impact-pathway.model';
 import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
-import { ImpactPathwayLink } from '../../../core/impact-pathway/impact-pathway.reducer';
-import { ImpactPathwayLinksService } from '../../../core/impact-pathway/impact-pathway-links.service';
-import { ImpactPathwayService } from '../../../core/impact-pathway/impact-pathway.service';
-import { ImpactPathwayStep } from '../../../core/impact-pathway/models/impact-pathway-step.model';
+import { ImpactPathwayLink } from '../../core/impact-pathway.reducer';
+import { ImpactPathwayLinksService } from '../../core/impact-pathway-links.service';
+import { ImpactPathwayService } from '../../core/impact-pathway.service';
+import { ImpactPathwayStep } from '../../core/models/impact-pathway-step.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { mergeMap, take } from 'rxjs/operators';

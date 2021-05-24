@@ -1,5 +1,4 @@
 import { ImpactPathwayLink } from '../impact-pathway.reducer';
-import { MetadataValueInterface } from '../../shared/metadata.models';
 
 export interface ImpactPathwayLinksMapEntry {
   toSave: ImpactPathwayLink[];

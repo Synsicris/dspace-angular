@@ -22,7 +22,7 @@ import {
   WorkpackageStep,
   WorkpackageTreeObject
 } from '../../core/models/workpackage-step.model';
-import { moment, WorkingPlanService } from '../../core/working-plan.service';
+import { moment, WorkingPlanService, WpMetadata, WpStepMetadata } from '../../core/working-plan.service';
 import { WorkingPlanStateService } from '../../core/working-plan-state.service';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { hasValue, isNotEmpty, isNotNull } from '../../../shared/empty.util';
@@ -35,7 +35,6 @@ import { EditItemMode } from '../../../core/submission/models/edititem-mode.mode
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { EditItem } from '../../../core/submission/models/edititem.model';
 
-
 export const MY_FORMATS = {
   parse: {
     dateInput: 'YYYY-MM-DD',
@@ -47,6 +46,16 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
+
+/**
+ * Defines the UpdateData parameters.
+ */
+interface UpdateData {
+  flatNode: WorkpacakgeFlatNode;
+  nestedNode: WorkpackageTreeObject;
+  metadata: string[];
+  values: string[];
+}
 
 /**
  * @title Tree with nested nodes
@@ -84,6 +93,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   chartDateView: BehaviorSubject<ChartDateViewType> = new BehaviorSubject<ChartDateViewType>(null);
   ChartDateViewType = ChartDateViewType;
   responsibleVocabularyOptions: VocabularyOptions;
+  /**
+   * The number of days of the ChangeAllStartDate dropdown.
+   */
+  changeStartDateDays = '1';
+  /**
+   * The direction of the ChangeAllStartDate dropdown.
+   */
+  changeStartDateDirection = 'later';
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap: Map<string, WorkpacakgeFlatNode> = new Map<string, WorkpacakgeFlatNode>();
 
@@ -113,6 +130,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    * The responsible column status (used to expand and collapse the column).
    */
   sidebarStatusStyle = {};
+
+  /**
+   * The milestones map used to draw a blue line and a rhombus at the milestone date.
+   */
+  milestonesMap: Map<string, string> = new Map<string, string>();
+
   /**
    * List of Edit Modes available on each node for the current user
    */
@@ -168,6 +191,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
           this.retrieveEditMode(node.id);
           // MouseOver Map
           this.chartChangeColorIsOver.set(node.id, false);
+          // Milestones border and rhombus
+          if (node.type === 'milestone') {
+            this.milestonesMap.set(node.id, node.dates.end.full);
+          }
           if (node.expanded) {
             this.treeControl.expand(node);
           } else {
@@ -236,6 +263,38 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         output = true;
       }
     } else {
+      output = true;
+    }
+    return output;
+  }
+
+  /**
+   * Returns TRUE if the node date match a milestone date (used to draw a blue line at the milestone date).
+   *
+   * @param date string
+   *
+   * @returns boolean
+   */
+  chartCheckMilestone(date: string): boolean {
+    const milestoneDates = Array.from(this.milestonesMap.values());
+    let output = false;
+    if (milestoneDates.indexOf(date) !== -1) {
+      output = true;
+    }
+    return output;
+  }
+
+  /**
+   * Returns TRUE if the node id match a milestone id (used to draw a rhombus at the milestone date).
+   *
+   * @param nodeId string
+   * @param date string
+   *
+   * @returns boolean
+   */
+  chartCheckNodeMilestone(nodeId: string, date: string): boolean {
+    let output = false;
+    if (this.milestonesMap.has(nodeId) && this.milestonesMap.get(nodeId) === date) {
       output = true;
     }
     return output;
@@ -323,6 +382,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
       this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectId, flatNode.id, item.type.value, metadata);
       // the 'this.editModes$' map is auto-updated by the ngOnInit subscribe
+      if (flatNode.type === 'milestone') {
+        this.milestonesMap.set(flatNode.id, flatNode.dates.end.full);
+      }
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {
@@ -350,6 +412,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.editModes$.next(this.editModes$.value);
     // MouseOver map update
     this.chartChangeColorIsOver.delete(flatNode.id);
+    // Milestones map update
+    this.milestonesMap.delete(flatNode.id);
   }
 
   getParentStep(node: WorkpacakgeFlatNode): WorkpacakgeFlatNode {
@@ -376,49 +440,75 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return (index !== -1) ? this.chartStatusTypeList$.value[index].display : statusType;
   }
 
+  /**
+   * Update the number of days of the ChangeAllStartDate dropdown.
+   *
+   * @param days string
+   */
+  updateChangeStartDateDays(days: string): void {
+    this.changeStartDateDays = days;
+  }
+
+  /**
+   * Update the direction of the ChangeAllStartDate dropdown.
+   *
+   * @param direction string
+   */
+  updateChangeStartDateDirection(direction: string): void {
+    this.changeStartDateDirection = direction;
+  }
+
+  /**
+   * Update all the nodes date range.
+   *
+   */
+  updateAllDateRange(): void {
+    let startDate;
+    let endDate;
+    let startStringDate;
+    let endStringDate;
+    const updateAllMap: Map<string, { startDate: string, endDate: string }> = new Map();
+
+    this.flatNodeMap.forEach((node: WorkpacakgeFlatNode) => {
+      if (node.type === 'milestone') {
+        startDate = this.moment(node.dates.end.full, this.dateFormat);
+      } else {
+        startDate = this.moment(node.dates.start.full, this.dateFormat);
+      }
+      endDate = this.moment(node.dates.end.full, this.dateFormat);
+      if (this.changeStartDateDirection === 'later') {
+        startStringDate = startDate.add(this.changeStartDateDays, 'days').format(this.dateFormat);
+        endStringDate = endDate.add(this.changeStartDateDays, 'days').format(this.dateFormat);
+      } else {
+        startStringDate = startDate.subtract(this.changeStartDateDays, 'days').format(this.dateFormat);
+        endStringDate = endDate.subtract(this.changeStartDateDays, 'days').format(this.dateFormat);
+      }
+      updateAllMap.set(node.id, { 'startDate': startStringDate, 'endDate': endStringDate });
+    });
+    this.updateAllDateRanges(updateAllMap);
+  }
+
   updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string) {
-
-    // create new dates object
-    const startMoment = this.moment(startDate); // create start moment
-    const startDateObj: WorkpackageChartDate = {
-      full: startMoment.format(this.dateFormat),
-      month: startMoment.format(this.dateMonthFormat),
-      year: startMoment.format(this.dateYearFormat)
-    };
-
-    const endMoment = this.moment(endDate); // create start moment
-    const endDateObj: WorkpackageChartDate = {
-      full: endMoment.format(this.dateFormat),
-      month: endMoment.format(this.dateMonthFormat),
-      year: endMoment.format(this.dateYearFormat)
-    };
-
-    const dates = {
-      start: startDateObj,
-      end: endDateObj
-    };
-
-    // update flat node dates
-    flatNode = Object.assign({}, flatNode, {
-      dates: dates
-    });
-
-    // update nested node dates
-    const nestedNode = Object.assign({}, this.nestedNodeMap.get(flatNode.id), {
-      dates: dates
-    });
-
-    // rebuild calendar if the root is updated
-    if (flatNode.level === 0) {
-      this.buildCalendar();
-    }
+    const nodeData: UpdateData = this._updateDateRangeOperations(flatNode, startDate, endDate);
 
     this.updateField(
-      flatNode,
-      nestedNode,
-      [environment.workingPlan.workingPlanStepDateStartMetadata, environment.workingPlan.workingPlanStepDateEndMetadata],
-      [nestedNode.dates.start.full, nestedNode.dates.end.full]
+      nodeData.flatNode,
+      nodeData.nestedNode,
+      nodeData.metadata,
+      nodeData.values
     );
+  }
+
+  updateAllDateRanges(updateAllMap: Map<string, { startDate: string, endDate: string }>): void {
+    let nodeData;
+    const nodeDataArray: UpdateData[] = [];
+
+    updateAllMap.forEach((data: { startDate: string, endDate: string }, index: string) => {
+      nodeData = this._updateDateRangeOperations(this.flatNodeMap.get(index), data.startDate, data.endDate);
+      nodeDataArray.push(nodeData);
+    });
+
+    this.updateAllField(nodeDataArray);
   }
 
   updateStepName(flatNode: WorkpacakgeFlatNode, name: string) {
@@ -470,8 +560,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.datesYear = [];
 
     this.dataSource.data.forEach((step: Workpackage) => {
-      const start = this.moment(step.dates.start.full, this.dateFormat);
+      let start;
       const end = this.moment(step.dates.end.full, this.dateFormat);
+      if (step.type === 'milestone') {
+        start = this.moment(this.moment(step.dates.end.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
+      } else {
+        start = this.moment(step.dates.start.full, this.dateFormat);
+      }
       const dateRange = moment.range(start, end);
 
       // Moment range sometimes does not include all the months, so use the end of the month to get the correct range
@@ -561,7 +656,11 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   isDateInsideRange(date: string, node: Workpackage): boolean {
-    return date >= node.dates.start.full && date <= node.dates.end.full;
+    if (node.type !== 'milestone') {
+      return date >= node.dates.start.full && date <= node.dates.end.full;
+    } else {
+      return date === node.dates.end.full;
+    }
   }
 
   isMoving(): Observable<boolean> {
@@ -660,6 +759,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return this.workingPlanService.isProcessingWorkpackageRemove(node.id);
   }
 
+  isProcessingWorkpackage(): Observable<boolean> {
+    return this.workingPlanService.isProcessingWorkpackage();
+  }
+
   ngOnDestroy(): void {
     this.subs
       .filter((subscription) => hasValue(subscription))
@@ -699,6 +802,66 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   private _getChildren = (node: Workpackage): Observable<WorkpackageStep[]> => observableOf(node.steps);
 
+  private _updateDateRangeOperations(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string): UpdateData {
+    // create new dates object
+    let dates;
+    let startMoment;
+    let startDateObj: WorkpackageChartDate;
+    const endMoment = this.moment(endDate); // create start moment
+    const endDateObj: WorkpackageChartDate = {
+      full: endMoment.format(this.dateFormat),
+      month: endMoment.format(this.dateMonthFormat),
+      year: endMoment.format(this.dateYearFormat)
+    };
+
+    if (flatNode.type !== 'milestone') {
+      startMoment = this.moment(startDate); // create start moment
+      startDateObj = {
+        full: startMoment.format(this.dateFormat),
+        month: startMoment.format(this.dateMonthFormat),
+        year: startMoment.format(this.dateYearFormat)
+      };
+
+      dates = {
+        start: startDateObj,
+        end: endDateObj
+      };
+    } else {
+      dates = {
+        end: endDateObj
+      };
+    }
+
+    // update flat node dates
+    flatNode = Object.assign({}, flatNode, {
+      dates: dates
+    });
+
+    // update nested node dates
+    const nestedNode = Object.assign({}, this.nestedNodeMap.get(flatNode.id), {
+      dates: dates
+    });
+
+    // rebuild calendar if the root is updated
+    if (flatNode.level === 0) {
+      this.buildCalendar();
+    }
+
+    let values = [];
+    if (nestedNode.type !== 'milestone') {
+      values = [nestedNode.dates.start.full, nestedNode.dates.end.full];
+    } else {
+      values = [null, nestedNode.dates.end.full];
+    }
+
+    return {
+      'flatNode': flatNode,
+      'nestedNode': nestedNode,
+      'metadata': [environment.workingPlan.workingPlanStepDateStartMetadata, environment.workingPlan.workingPlanStepDateEndMetadata],
+      'values': values
+    };
+  }
+
   private updateField(flatNode: WorkpacakgeFlatNode, nestedNode: WorkpackageTreeObject, metadata: string[], value: any[]) {
     // Update reference in the maps
     this.updateTreeMap(flatNode, nestedNode);
@@ -721,6 +884,45 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         [...metadata],
         [...value]
       );
+    }
+  }
+
+  /**
+   * Dispatch the update of all nodes metadata.
+   *
+   * @param nodeDataArray UpdateData[]
+   */
+  private updateAllField(nodeDataArray: UpdateData[]): void {
+    const wpMetadata: WpMetadata[] = [];
+    const wpStepMetadata: WpStepMetadata[] = [];
+    let parentNestedNode: Workpackage;
+    let childNestedNode: WorkpackageStep;
+    nodeDataArray.forEach((nodeData) => {
+      this.updateTreeMap(nodeData.flatNode, nodeData.nestedNode);
+      if (this.treeControl.getLevel(nodeData.flatNode) < 1) {
+        wpMetadata.push({
+          'nestedNodeId': nodeData.nestedNode.id,
+          'nestedNode': nodeData.nestedNode,
+          'metadata': [...nodeData.metadata],
+          'values': [...nodeData.values],
+          'hasAuthority': false
+        });
+      } else {
+        parentNestedNode = this.nestedNodeMap.get(nodeData.flatNode.parentId);
+        childNestedNode = this.nestedNodeMap.get(nodeData.flatNode.id);
+        wpStepMetadata.push({
+          'parentNestedNodeId': parentNestedNode.id,
+          'childNestedNodeId': childNestedNode.id,
+          'childNestedNode': childNestedNode,
+          'metadata': [...nodeData.metadata],
+          'values': [...nodeData.values],
+          'hasAuthority': false
+        });
+      }
+    });
+    // dispatch action to update item metadata
+    if (wpMetadata.length !== 0 || wpStepMetadata.length !== 0) {
+      this.workingPlanService.updateAllWorkpackageMetadata(wpMetadata, wpStepMetadata);
     }
   }
 

@@ -28,20 +28,20 @@ import { ImpactPathway } from './models/impact-pathway.model';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
 import { hasValue, isEmpty, isNotEmpty, isNotNull, isNull } from '../../shared/empty.util';
-import { ItemDataService } from '../data/item-data.service';
+import { ItemDataService } from '../../core/data/item-data.service';
 import { SubmissionService } from '../../submission/submission.service';
 import { environment } from '../../../environments/environment';
-import { SubmissionObject } from '../submission/models/submission-object.model';
-import { SubmissionJsonPatchOperationsService } from '../submission/submission-json-patch-operations.service';
-import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
-import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
-import { Item } from '../shared/item.model';
-import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
-import { RemoteData } from '../data/remote-data';
-import { VocabularyService } from '../submission/vocabularies/vocabulary.service';
-import { VocabularyEntry } from '../submission/vocabularies/models/vocabulary-entry.model';
-import { MetadataMap, MetadataValue } from '../shared/metadata.models';
-import { Metadata } from '../shared/metadata.utils';
+import { SubmissionObject } from '../../core/submission/models/submission-object.model';
+import { SubmissionJsonPatchOperationsService } from '../../core/submission/submission-json-patch-operations.service';
+import { JsonPatchOperationsBuilder } from '../../core/json-patch/builder/json-patch-operations-builder';
+import { JsonPatchOperationPathCombiner } from '../../core/json-patch/builder/json-patch-operation-path-combiner';
+import { Item } from '../../core/shared/item.model';
+import { RemoteDataBuildService } from '../../core/cache/builders/remote-data-build.service';
+import { RemoteData } from '../../core/data/remote-data';
+import { VocabularyService } from '../../core/submission/vocabularies/vocabulary.service';
+import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
+import { MetadataMap, MetadataValue } from '../../core/shared/metadata.models';
+import { Metadata } from '../../core/shared/metadata.utils';
 import {
   impactPathwayByIDSelector,
   impactPathwayObjectsSelector,
@@ -52,9 +52,9 @@ import {
 } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
-import { SubmissionFormsConfigService } from '../config/submission-forms-config.service';
-import { SubmissionFormModel } from '../config/models/config-submission-form.model';
-import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
+import { SubmissionFormsConfigService } from '../../core/config/submission-forms-config.service';
+import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
+import { ItemJsonPatchOperationsService } from '../../core/data/item-json-patch-operations.service';
 import {
   AddImpactPathwaySubTaskAction,
   AddImpactPathwayTaskAction,
@@ -72,25 +72,25 @@ import {
   RemoveImpactPathwayTaskAction,
   SetImpactPathwayTargetTaskAction
 } from './impact-pathway.actions';
-import { ErrorResponse } from '../cache/response.models';
+import { ErrorResponse } from '../../core/cache/response.models';
 import {
   getFinishedRemoteData,
   getFirstSucceededRemoteDataPayload,
   getFirstSucceededRemoteListPayload
-} from '../shared/operators';
-import { ItemAuthorityRelationService } from '../shared/item-authority-relation.service';
-import { VocabularyOptions } from '../submission/vocabularies/models/vocabulary-options.model';
-import { PageInfo } from '../shared/page-info.model';
-import { CollectionDataService } from '../data/collection-data.service';
-import { Collection } from '../shared/collection.model';
-import { RequestService } from '../data/request.service';
-import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
+} from '../../core/shared/operators';
+import { ItemAuthorityRelationService } from '../../core/shared/item-authority-relation.service';
+import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
+import { PageInfo } from '../../core/shared/page-info.model';
+import { CollectionDataService } from '../../core/data/collection-data.service';
+import { Collection } from '../../core/shared/collection.model';
+import { RequestService } from '../../core/data/request.service';
+import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
-import { PaginatedList } from '../data/paginated-list.model';
+import { PaginatedList } from '../../core/data/paginated-list.model';
 import { SearchResult } from '../../shared/search/search-result.model';
-import { SearchService } from '../shared/search/search.service';
-import { NoContent } from '../shared/NoContent.model';
+import { SearchService } from '../../core/shared/search/search.service';
+import { NoContent } from '../../core/shared/NoContent.model';
 
 @Injectable()
 export class ImpactPathwayService {

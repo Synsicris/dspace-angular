@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, combineLatest as combineLatestObservable, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 
-import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
-import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
+import { ImpactPathwayTask } from '../../../core/models/impact-pathway-task.model';
+import { ImpactPathwayService } from '../../../core/impact-pathway.service';
 import { hasValue, isNotEmpty, isNotUndefined } from '../../../../shared/empty.util';
-import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
-import { ImpactPathwayLinksService } from '../../../../core/impact-pathway/impact-pathway-links.service';
+import { ImpactPathwayStep } from '../../../core/models/impact-pathway-step.model';
+import { ImpactPathwayLinksService } from '../../../core/impact-pathway-links.service';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { EditItemDataService } from '../../../../core/submission/edititem-data.service';
 import { EditItemMode } from '../../../../core/submission/models/edititem-mode.model';

@@ -37,7 +37,8 @@ import {
   Workpackage,
   WorkpackageChartDates,
   WorkpackageSearchItem,
-  WorkpackageStep
+  WorkpackageStep,
+  WorkpackageTreeObject
 } from './models/workpackage-step.model';
 import { WorkpackageEntries } from './working-plan.reducer';
 import { MetadataMap, MetadataValue, MetadatumViewModel } from '../../core/shared/metadata.models';
@@ -56,7 +57,7 @@ import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocab
 import { VocabularyService } from '../../core/submission/vocabularies/vocabulary.service';
 import { Metadata } from '../../core/shared/metadata.utils';
 import { ItemAuthorityRelationService } from '../../core/shared/item-authority-relation.service';
-import { WorkingPlanStateService } from './working-plan-state.service';
+import { WorkingPlanStateService, WpActionPackage, WpStepActionPackage } from './working-plan-state.service';
 import { PageInfo } from '../../core/shared/page-info.model';
 import { dateToISOFormat, isNgbDateStruct } from '../../shared/date.util';
 import { environment } from '../../../environments/environment';
@@ -65,6 +66,23 @@ import { RequestService } from '../../core/data/request.service';
 import { ProjectItemService } from '../../core/project/project-item.service';
 
 export const moment = extendMoment(Moment);
+
+export interface WpMetadata {
+  nestedNodeId: string;
+  nestedNode: WorkpackageTreeObject;
+  metadata: string[];
+  values: string[];
+  hasAuthority: boolean;
+}
+
+export interface WpStepMetadata {
+  parentNestedNodeId: string;
+  childNestedNodeId: string;
+  childNestedNode: WorkpackageStep;
+  metadata: string[];
+  values: string[];
+  hasAuthority: boolean;
+}
 
 @Injectable()
 export class WorkingPlanService {
@@ -372,6 +390,10 @@ export class WorkingPlanService {
     );
   }
 
+  isProcessingWorkpackage(): Observable<boolean> {
+    return this.workingPlanStateService.isProcessing();
+  }
+
   setDefaultForStatusMetadata(metadata: MetadataMap): MetadataMap {
     let result: MetadataMap = metadata;
     if (!metadata.hasOwnProperty(environment.workingPlan.workingPlanStepStatusMetadata)
@@ -517,6 +539,51 @@ export class WorkingPlanService {
     this.workingPlanStateService.dispatchUpdateWorkpackageAction(workpackageId, workpackage, metadatumViewList);
   }
 
+  updateAllWorkpackageMetadata(wpMetadata: WpMetadata[], wpStepMetadata: WpStepMetadata[]): void {
+    const wpActionPackage: WpActionPackage[] = [];
+    let metadatumViewList;
+    wpMetadata.forEach((itemMetadata: WpMetadata) => {
+      metadatumViewList = this.generateMetadatumViewList(itemMetadata);
+      wpActionPackage.push({
+        'workpackageId': itemMetadata.nestedNodeId,
+        'workpackage': itemMetadata.nestedNode,
+        'metadatumViewList': metadatumViewList
+      });
+    });
+
+    const wpStepActionPackage: WpStepActionPackage[] = [];
+    wpStepMetadata.forEach((itemMetadata: WpStepMetadata) => {
+      metadatumViewList = this.generateMetadatumViewList(itemMetadata);
+      wpStepActionPackage.push({
+        'workpackageId': itemMetadata.parentNestedNodeId,
+        'workpackageStepId': itemMetadata.childNestedNodeId,
+        'workpackageStep': itemMetadata.childNestedNode,
+        'metadatumViewList': metadatumViewList
+      });
+    });
+
+    this.workingPlanStateService.dispatchUpdateAllWorkpackageAction(wpActionPackage, wpStepActionPackage);
+  }
+
+  private generateMetadatumViewList(itemMetadata: WpMetadata|WpStepMetadata): MetadatumViewModel[] {
+    const metadatumViewList = [];
+    itemMetadata.metadata.forEach((metadata, index) => {
+      const value = itemMetadata.values[index] as any;
+      metadatumViewList.push(
+        {
+          key: metadata,
+          language: '',
+          value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
+          place: 0,
+          authority: itemMetadata.hasAuthority ? value : '',
+          confidence: itemMetadata.hasAuthority ? 600 : -1
+        } as MetadatumViewModel
+      );
+    });
+
+    return metadatumViewList;
+  }
+
   updateWorkpackageStepMetadata(
     workpackageId: string,
     workpackageStepId: string,
@@ -548,6 +615,35 @@ export class WorkingPlanService {
     );
   }
 
+/*  updateAllWorkpackageStepMetadata(wpStepMetadata: WpStepMetadata[]) {
+    const wpStepActionPackage: WpStepActionPackage[] = [];
+    let metadatumViewList;
+    wpStepMetadata.forEach((itemMetadata: WpStepMetadata) => {
+      metadatumViewList = [];
+      itemMetadata.metadata.forEach((metadata, index) => {
+        const value = itemMetadata.values[index] as any;
+        metadatumViewList.push(
+          {
+            key: metadata,
+            language: '',
+            value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
+            place: 0,
+            authority: itemMetadata.hasAuthority ? value : '',
+            confidence: itemMetadata.hasAuthority ? 600 : -1
+          } as MetadatumViewModel
+        );
+      });
+      wpStepActionPackage.push({
+        'workpackageId': itemMetadata.parentNestedNodeId,
+        'workpackageStepId': itemMetadata.childNestedNodeId,
+        'workpackageStep': itemMetadata.childNestedNode,
+        'metadatumViewList': metadatumViewList
+      });
+    });
+
+    this.workingPlanStateService.dispatchUpdateAllWorkpackageStepAction(wpStepActionPackage);
+  }*/
+
   private addPatchOperationForWorkpackage(metadata: MetadataMap, place: string = null): void {
 
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
@@ -565,6 +661,5 @@ export class WorkingPlanService {
       );
     }
   }
-
 
 }

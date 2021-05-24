@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ImpactPathway } from '../../core/impact-pathway/models/impact-pathway.model';
+import { ImpactPathway } from '../core/models/impact-pathway.model';
 
 @Component({
   selector: 'ipw-wrapper-impact-path-way',

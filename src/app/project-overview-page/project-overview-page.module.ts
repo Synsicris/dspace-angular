@@ -10,6 +10,7 @@ import { LookupIdModule } from '../+lookup-by-id/lookup-by-id.module';
 import { ProjectOverviewPageHeaderComponent } from './header/project-overview-page-header.component';
 import { ProjectOverviewPageContentComponent } from './content/project-overview-page-content.component';
 import { ContextMenuModule } from '../shared/context-menu/context-menu.module';
+import { ImpactPathwayCoreModule } from '../impact-pathway-board/core/impact-pathway-core.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { ContextMenuModule } from '../shared/context-menu/context-menu.module';
     ProjectOverviewPageRoutingModule,
     SharedModule,
     LookupIdModule,
-    ContextMenuModule
+    ContextMenuModule,
+    ImpactPathwayCoreModule
   ],
   declarations: [
     ProjectOverviewPageComponent,
