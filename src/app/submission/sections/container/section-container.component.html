@@ -35,6 +35,7 @@
       </ng-template>
       <ng-template ngbPanelContent>
         <ds-alert *ngIf="hasInfoMessage | async"
+                  [collapsible]="true"
                   [content]="'submission.sections.'+sectionData.header+'.info'"
                   [type]="AlertTypeEnum.Info"></ds-alert>
         <div id="sectionGenericError_{{sectionData.id}}" *ngIf="sectionRef.hasGenericErrors()">
