@@ -21,7 +21,7 @@ function impactPathwayKeySelector<T>(key: string, selector): MemoizedSelector<Ap
  * @param {AppState} state Top level state.
  * @return {ImpactPathwayState}
  */
-const _getImpactPathwayState = (state: any) => state.core.impactPathway;
+const _getImpactPathwayState = (state: any) => state.impactPathway;
 
 /**
  * Returns the impact pathway state.

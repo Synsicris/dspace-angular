@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-import { ObjectiveService } from '../../core/impact-pathway/objective.service';
-import { ImpactPathwayStep } from '../../core/impact-pathway/models/impact-pathway-step.model';
+import { ObjectiveService } from '../core/objective.service';
+import { ImpactPathwayStep } from '../core/models/impact-pathway-step.model';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { isNotEmpty } from '../../shared/empty.util';

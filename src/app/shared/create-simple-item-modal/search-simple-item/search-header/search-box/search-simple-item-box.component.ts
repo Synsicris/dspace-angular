@@ -3,8 +3,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, merge, switchMap, tap } from 'rxjs/operators';
 import { NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
-import { ImpactPathwayService } from '../../../../../core/impact-pathway/impact-pathway.service';
-import { ImpactPathwayTask } from '../../../../../core/impact-pathway/models/impact-pathway-task.model';
+import { ImpactPathwayService } from '../../../../../impact-pathway-board/core/impact-pathway.service';
+import { ImpactPathwayTask } from '../../../../../impact-pathway-board/core/models/impact-pathway-task.model';
 import { isNotNull } from '../../../../empty.util';
 import { FilterBox } from '../filter-box/search-simple-item-filter-box.component';
 

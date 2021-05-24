@@ -13,7 +13,7 @@ import {
   BitstreamFormatRegistryState
 } from '../+admin/admin-registries/bitstream-formats/bitstream-format.reducers';
 import { historyReducer, HistoryState } from './history/history.reducer';
-import { impactPathwayReducer, ImpactPathwayState } from './impact-pathway/impact-pathway.reducer';
+import { impactPathwayReducer, ImpactPathwayState } from '../impact-pathway-board/core/impact-pathway.reducer';
 
 export interface CoreState {
   'bitstreamFormats': BitstreamFormatRegistryState;

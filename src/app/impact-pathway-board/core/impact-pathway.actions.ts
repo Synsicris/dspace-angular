@@ -1,10 +1,10 @@
 import { Action } from '@ngrx/store';
 
 import { type } from '../../shared/ngrx/type';
-import { Item } from '../shared/item.model';
+import { Item } from '../../core/shared/item.model';
 import { ImpactPathway } from './models/impact-pathway.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
-import { MetadataMap } from '../shared/metadata.models';
+import { MetadataMap } from '../../core/shared/metadata.models';
 import { ImpactPathwayLink } from './impact-pathway.reducer';
 
 /**

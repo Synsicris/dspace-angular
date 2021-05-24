@@ -1,10 +1,10 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 
-import { ImpactPathwayTask } from '../../../core/impact-pathway/models/impact-pathway-task.model';
-import { ImpactPathwayStep } from '../../../core/impact-pathway/models/impact-pathway-step.model';
+import { ImpactPathwayTask } from '../../core/models/impact-pathway-task.model';
+import { ImpactPathwayStep } from '../../core/models/impact-pathway-step.model';
 import { isEmpty } from '../../../shared/empty.util';
-import { ImpactPathwayService } from '../../../core/impact-pathway/impact-pathway.service';
+import { ImpactPathwayService } from '../../core/impact-pathway.service';
 
 @Component({
   selector: 'ipw-objective',

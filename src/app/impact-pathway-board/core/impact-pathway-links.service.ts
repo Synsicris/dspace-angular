@@ -6,16 +6,16 @@ import { select, Store } from '@ngrx/store';
 import { difference, findIndex, union } from 'lodash';
 
 import { isEmpty, isNotEmpty } from '../../shared/empty.util';
-import { ItemDataService } from '../data/item-data.service';
+import { ItemDataService } from '../../core/data/item-data.service';
 import { environment } from '../../../environments/environment';
-import { SubmissionJsonPatchOperationsService } from '../submission/submission-json-patch-operations.service';
-import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
-import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
+import { SubmissionJsonPatchOperationsService } from '../../core/submission/submission-json-patch-operations.service';
+import { JsonPatchOperationsBuilder } from '../../core/json-patch/builder/json-patch-operations-builder';
+import { RemoteDataBuildService } from '../../core/cache/builders/remote-data-build.service';
 import { impactPathwayRelationsSelector } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayLink, ImpactPathwayLinks } from './impact-pathway.reducer';
-import { SubmissionFormsConfigService } from '../config/submission-forms-config.service';
-import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
+import { SubmissionFormsConfigService } from '../../core/config/submission-forms-config.service';
+import { ItemJsonPatchOperationsService } from '../../core/data/item-json-patch-operations.service';
 import {
   AddImpactPathwayTaskLinkAction,
   CompleteEditingImpactPathwayTaskLinksAction,
@@ -23,11 +23,11 @@ import {
   RemoveImpactPathwayTaskLinkAction,
   SaveImpactPathwayTaskLinksAction
 } from './impact-pathway.actions';
-import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
-import { Item } from '../shared/item.model';
-import { MetadataValue } from '../shared/metadata.models';
-import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
-import { ErrorResponse } from '../cache/response.models';
+import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
+import { Item } from '../../core/shared/item.model';
+import { MetadataValue } from '../../core/shared/metadata.models';
+import { JsonPatchOperationPathCombiner } from '../../core/json-patch/builder/json-patch-operation-path-combiner';
+import { ErrorResponse } from '../../core/cache/response.models';
 import { ImpactPathwayLinksMap } from './models/impact-pathway-task-links-map';
 
 @Injectable()

@@ -3,10 +3,10 @@ import { CdkDragDrop, CdkDragEnter, CdkDragExit, CdkDragStart } from '@angular/c
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 
-import { ImpactPathwayTask } from '../../core/impact-pathway/models/impact-pathway-task.model';
-import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
+import { ImpactPathwayTask } from '../core/models/impact-pathway-task.model';
+import { ImpactPathwayService } from '../core/impact-pathway.service';
 import { hasValue } from '../../shared/empty.util';
-import { ImpactPathwayStep } from '../../core/impact-pathway/models/impact-pathway-step.model';
+import { ImpactPathwayStep } from '../core/models/impact-pathway-step.model';
 
 @Component({
   selector: 'ipw-drag-and-drop-container',

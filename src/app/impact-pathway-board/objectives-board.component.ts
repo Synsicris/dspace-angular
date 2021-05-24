@@ -3,8 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 
-import { ImpactPathwayService } from '../core/impact-pathway/impact-pathway.service';
-import { ImpactPathwayStep } from '../core/impact-pathway/models/impact-pathway-step.model';
+import { ImpactPathwayService } from './core/impact-pathway.service';
+import { ImpactPathwayStep } from './core/models/impact-pathway-step.model';
 import { isNotEmpty } from '../shared/empty.util';
 
 @Component({

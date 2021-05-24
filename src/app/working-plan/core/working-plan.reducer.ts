@@ -21,8 +21,6 @@ import {
   WorkingPlanActions,
   WorkpackageActionTypes
 } from './working-plan.actions';
-import { ImpactPathwayState } from '../../core/impact-pathway/impact-pathway.reducer';
-import { act } from '@ngrx/effects';
 import { WpActionPackage, WpStepActionPackage } from './working-plan-state.service';
 
 export enum ChartDateViewType {

@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, Renderer2, RendererStyleFlags2 } from '@angular/core';
-import { ImpactPathwayTaskType } from '../../../../core/impact-pathway/models/impact-pathway-task-type';
+import { ImpactPathwayTaskType } from '../../../core/models/impact-pathway-task-type';
 
 @Directive({
   selector: '[ipwTaskColor]'
