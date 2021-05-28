@@ -6,10 +6,40 @@
       <div class="sidenav-header">
         <div class="float-left">
           <div ngbDropdown class="d-inline-block">
-            <button class="btn btn-outline-secondary btn-xs" id="wpDisplay" ngbDropdownToggle>Display</button>
+            <button class="btn btn-outline-info btn-xs" id="wpDisplay" ngbDropdownToggle>Display</button>
             <div ngbDropdownMenu aria-labelledby="wpDisplay">
               <button class="btn-sm" ngbDropdownItem>Option1</button>
               <button class="btn-sm" ngbDropdownItem>Option2</button>
+            </div>
+          </div>
+          <div ngbDropdown #sortByDrop="ngbDropdown" class="d-inline-block">
+            <button class="btn btn-outline-info btn-xs mr-2" id="sortBy" ngbDropdownToggle>{{'working-plan.chart.column.sortBy' | translate}}</button>
+            <div ngbDropdownMenu class="block-change-start-date font-size-07 p-2" aria-labelledby="sortBy">
+              <button type="button" class="close" data-dismiss="alert" attr.aria-label="{{'working-plan.chart.column.changeStartDateClose' | translate}}" (click)="sortByDrop.close()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="font-weight-bold mb-1">{{'working-plan.chart.column.sortBy' | translate}}</div>
+              <form>
+                <div>
+                  <div>
+                    <mat-radio-group (change)="updateChangeStartDateDirection($event.source.value)" class="block-change-start-date-radio" aria-labelledby="changeAllStartDateDaysRadio">
+                      <mat-radio-button *ngFor="let sortOpts of (sortOptions$ | async).sortOptions" [value]="sortOpts.name" [checked]="sortOpts.name == sortSelected">
+                        {{sortOpts.name | translate}}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="ml-auto float-right">
+                    <button type="submit" class="btn btn-primary btn-sm" (click)="updateSort()" [disabled]="(isProcessingWorkpackage() | async)">
+                      <span *ngIf="!(isProcessingWorkpackage() | async)">
+                        {{'working-plan.chart.column.changeStartDate.apply' | translate}}
+                      </span>
+                      <span *ngIf="(isProcessingWorkpackage() | async)">
+                        <i class='fas fa-circle-notch fa-spin'></i> {{'working-plan.chart.column.changeStartDate.saving' | translate}}
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
           <button type="button" class="btn btn-outline-secondary btn-xs" (click)="treeControl.expandAll()">
@@ -129,7 +159,6 @@
                 </div>
                 <div class="d-flex align-items-end">
                   <div>
-
                     <div id="changeAllStartDateDaysRadio" class="font-weight-bold">{{'working-plan.chart.column.changeStartDate.radio.description' | translate}}</div>
                     <mat-radio-group (change)="updateChangeStartDateDirection($event.source.value)" class="block-change-start-date-radio" aria-labelledby="changeAllStartDateDaysRadio">
                       <mat-radio-button [value]="'later'" checked>

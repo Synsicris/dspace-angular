@@ -34,6 +34,8 @@ import { getAllSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } 
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { EditItem } from '../../../core/submission/models/edititem.model';
+import { SearchConfig } from 'src/app/core/shared/search/search-filters/search-config.model';
+import { runInThisContext } from 'node:vm';
 
 export const MY_FORMATS = {
   parse: {
@@ -111,6 +113,15 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   treeFlattener: MatTreeFlattener<WorkpackageTreeObject, WorkpacakgeFlatNode>;
   dataSource: MatTreeFlatDataSource<WorkpackageTreeObject, WorkpacakgeFlatNode>;
 
+  /**
+   * The sorting options for the chart.
+   */
+  sortOptions$: Observable<SearchConfig>;
+  /**
+   * The selected sorting options.
+   */
+  sortSelected: string;
+
   chartData;
 
   sidebarNamesStyle = {
@@ -165,6 +176,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.sortSelected = 'workingplan.place';
     this.workingPlanStateService.getChartDateViewSelector()
       .subscribe((view) => this.chartDateView.next(view));
 
@@ -172,7 +184,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this.workingPlanService.getWorkpackageStatusTypes()
         .subscribe((statusList: VocabularyEntry[]) => {
           this.chartStatusTypeList$.next(statusList);
-        }));
+        })
+    );
 
     this.workpackages.subscribe((tree: Workpackage[]) => {
       if (tree) {
@@ -203,6 +216,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         });
       }
     });
+
+    this.sortOptions$ = this.workingPlanService.getWorkpackageSortOptions();
   }
 
   /**
@@ -459,8 +474,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Update the chart with the new sort option.
+   */
+  updateSort() {
+
+  }
+
+  /**
    * Update all the nodes date range.
-   *
    */
   updateAllDateRange(): void {
     let startDate;
@@ -988,8 +1009,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   private buildExcludedTasksQuery(flatNode: WorkpacakgeFlatNode): string {
-/*    const subprojectMembersGroup = this.projectGroupService.getProjectMembersGroupNameByCommunity(this.subproject);
-    let query = `(entityGrants:project OR cris.policy.group: ${subprojectMembersGroup})`;*/
+    /* const subprojectMembersGroup = this.projectGroupService.getProjectMembersGroupNameByCommunity(this.subproject);
+    let query = `(entityGrants:project OR cris.policy.group: ${subprojectMembersGroup})`; */
     let query = '';
     const tasksIds = flatNode.steps.map((step) => step.id);
     if (tasksIds.length > 0) {

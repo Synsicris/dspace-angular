@@ -50,6 +50,7 @@ import {
   getFirstSucceededRemoteDataPayload,
   getRemoteDataPayload
 } from '../../core/shared/operators';
+import { SearchConfig } from '../../core/shared/search/search-filters/search-config.model';
 import { ItemJsonPatchOperationsService } from '../../core/data/item-json-patch-operations.service';
 import { ItemDataService } from '../../core/data/item-data.service';
 import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
@@ -137,6 +138,12 @@ export class WorkingPlanService {
     return this.formConfigService.findByName(formName).pipe(
       getFirstSucceededRemoteDataPayload()
     ) as Observable<SubmissionFormModel>;
+  }
+
+  getWorkpackageSortOptions(): Observable<SearchConfig> {
+    return this.searchService.getSearchConfigurationFor(null, 'workingplan').pipe(
+      getFirstSucceededRemoteDataPayload()
+    ) as Observable<SearchConfig>;
   }
 
   getWorkpackageFormHeader(): string {
