@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { startWith, switchMap } from 'rxjs/operators';
+import { startWith, switchMap, } from 'rxjs/operators';
 import { PaginatedList } from '../core/data/paginated-list.model';
 import { RemoteData } from '../core/data/remote-data';
 import { DSpaceObject } from '../core/shared/dspace-object.model';
@@ -16,7 +16,7 @@ import { SearchResult } from '../shared/search/search-result.model';
 import { SearchConfigurationService } from '../core/shared/search/search-configuration.service';
 import { SearchService } from '../core/shared/search/search.service';
 import { currentPath } from '../shared/utils/route.utils';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { Context } from '../core/shared/context.model';
 import { SortOptions } from '../core/cache/models/sort-options.model';
 
@@ -107,6 +107,16 @@ export class SearchComponent implements OnInit {
    */
   isSidebarCollapsed$: Observable<boolean>;
 
+  /**
+   * Emit custom event for listable object custom actions.
+   */
+  @Output() customEvent = new EventEmitter<any>();
+
+  /**
+   * Pass custom data to the component for custom utilization
+   */
+  @Input() customData: any;
+
   constructor(protected service: SearchService,
               protected sidebarService: SidebarService,
               protected windowService: HostWindowService,
@@ -128,7 +138,12 @@ export class SearchComponent implements OnInit {
     this.searchLink = this.getSearchLink();
     this.searchOptions$ = this.getSearchOptions();
     this.sub = this.searchOptions$.pipe(
-      switchMap((options) => this.service.search(options).pipe(getFirstSucceededRemoteData(), startWith(undefined))))
+      switchMap((options: PaginatedSearchOptions) => {
+        const opt = Object.assign(options, {
+          forcedEmbeddedKeys: ['metrics']
+        });
+        return this.service.search(opt).pipe(getFirstSucceededRemoteData(), startWith(undefined));
+      }))
       .subscribe((results) => {
         this.resultsRD$.next(results);
       });

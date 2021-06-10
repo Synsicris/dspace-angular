@@ -4,7 +4,7 @@ import { from as observableFrom, Observable, of as observableOf, Subscription } 
 import { concatMap, map, reduce } from 'rxjs/operators';
 
 import { RenderingTypeModelComponent } from '../rendering-type.model';
-import { FieldRendetingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
+import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
 import { hasValue } from '../../../../../shared/empty.util';
 import { ItemDataService } from '../../../../../core/data/item-data.service';
 import { getFirstCompletedRemoteData } from '../../../../../core/shared/operators';
@@ -17,6 +17,7 @@ interface CrisRef {
   id: string;
   icon: string;
   value: string;
+  orcidAuthenticated: string;
 }
 
 /**
@@ -28,7 +29,7 @@ interface CrisRef {
   templateUrl: './crisref.component.html',
   styleUrls: ['./crisref.component.scss']
 })
-@MetadataBoxFieldRendering(FieldRendetingType.CRISREF)
+@MetadataBoxFieldRendering(FieldRenderingType.CRISREF)
 export class CrisrefComponent extends RenderingTypeModelComponent implements OnInit {
 
   private entity2icon: Map<string, string>;
@@ -74,13 +75,15 @@ export class CrisrefComponent extends RenderingTypeModelComponent implements OnI
                   return {
                     id: metadataValue.authority,
                     icon: this.getIcon( itemRD.payload.firstMetadataValue('dspace.entity.type')),
-                    value: metadataValue.value
+                    value: metadataValue.value,
+                    orcidAuthenticated: this.getOrcid(itemRD.payload)
                   };
                 } else {
                   return {
                     id: null,
                     icon: null,
-                    value: metadataValue.value
+                    value: metadataValue.value,
+                    orcidAuthenticated: null
                   };
                 }
               })
@@ -89,7 +92,8 @@ export class CrisrefComponent extends RenderingTypeModelComponent implements OnI
             return observableOf({
               id: null,
               icon: null,
-              value: metadataValue.value
+              value: metadataValue.value,
+              orcidAuthenticated: null
             });
           }
         }),
@@ -107,6 +111,13 @@ export class CrisrefComponent extends RenderingTypeModelComponent implements OnI
     return hasValue(entityType) && this.entity2icon.has(entityType.toUpperCase()) ?
       this.entity2icon.get(entityType.toUpperCase()) :
       this.entity2icon.get('DEFAULT');
+  }
+
+  getOrcid(referencedItem: Item): string {
+    if (referencedItem.hasMetadata('cris.orcid.authenticated')) {
+      return referencedItem.firstMetadataValue('person.identifier.orcid');
+    }
+    return null;
   }
 
   /**

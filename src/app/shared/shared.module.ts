@@ -258,6 +258,25 @@ import { RelationshipsItemsListPreviewComponent } from './object-list/relationsh
 import { ThemedConfigurationSearchPageComponent } from '../+search-page/themed-configuration-search-page.component';
 import { SearchNavbarComponent } from '../search-navbar/search-navbar.component';
 import { LogInOrcidComponent } from './log-in/methods/orcid/log-in-orcid.component';
+import { DsDynamicRelationGroupModalComponent } from './form/builder/ds-dynamic-form-ui/models/relation-group/modal/dynamic-relation-group-modal.components';
+import { ClaimItemSelectorComponent } from './dso-selector/modal-wrappers/claim-item-selector/claim-item-selector.component';
+import { MetricBadgesComponent } from './object-list/metric-badges/metric-badges.component';
+import { MetricLoaderComponent } from './metric/metric-loader/metric-loader.component';
+import { MetricAltmetricComponent } from './metric/metric-altmetric/metric-altmetric.component';
+import { MetricDimensionsComponent } from './metric/metric-dimensions/metric-dimensions.component';
+import { MetricDspacecrisComponent } from './metric/metric-dspacecris/metric-dspacecris.component';
+import { MetricGooglescholarComponent } from './metric/metric-googlescholar/metric-googlescholar.component';
+import { MetricEmbeddedViewComponent } from './metric/metric-embedded-view/metric-embedded-view.component';
+import { MetricEmbeddedDownloadComponent } from './metric/metric-embedded-download/metric-embedded-download.component';
+import { MetricDonutsComponent } from './object-list/metric-donuts/metric-donuts.component';
+import { BrowseMostElementsComponent } from './browse-most-elements/browse-most-elements.component';
+import { BrowseSectionComponent } from './explore/section-component/browse-section/browse-section.component';
+import { TopSectionComponent } from './explore/section-component/top-section/top-section.component';
+import { FacetSectionComponent } from './explore/section-component/facet-section/facet-section.component';
+import { SearchSectionComponent } from './explore/section-component/search-section/search-section.component';
+import { TextSectionComponent } from './explore/section-component/text-section/text-section.component';
+import { CountersSectionComponent } from './explore/section-component/counters-section/counters-section.component';
+import { MultiColumnTopSectionComponent } from './explore/section-component/multi-column-top-section/multi-column-top-section.component';
 import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { ContextMenuComponent } from '../+item-page/context-menu/context-menu.component';
 import { ContextMenuEditImpactPathwayComponent } from '../+item-page/context-menu/edit-impact-pathway/edit-impact-pathway.component';
@@ -361,6 +380,7 @@ const COMPONENTS = [
   DsDynamicTagComponent,
   DsDynamicOneboxComponent,
   DsDynamicRelationGroupComponent,
+  DsDynamicRelationGroupModalComponent,
   DsDynamicRelationInlineGroupComponent,
   DsDatePickerComponent,
   DsDynamicFormGroupComponent,
@@ -420,6 +440,7 @@ const COMPONENTS = [
   EditCommunitySelectorComponent,
   EditCollectionSelectorComponent,
   EditItemSelectorComponent,
+  ClaimItemSelectorComponent,
   CommunitySearchResultListElementComponent,
   CollectionSearchResultListElementComponent,
   BrowseByComponent,
@@ -453,6 +474,8 @@ const COMPONENTS = [
   AbstractTrackableComponent,
   ComcolMetadataComponent,
   TypeBadgeComponent,
+  MetricBadgesComponent,
+  MetricDonutsComponent,
   BrowseByComponent,
   AbstractTrackableComponent,
   CustomSwitchComponent,
@@ -528,6 +551,21 @@ const COMPONENTS = [
   RelationshipsListComponent,
   RelationshipsItemsActionsComponent,
   RelationshipsItemsListPreviewComponent,
+  MetricLoaderComponent,
+  MetricAltmetricComponent,
+  MetricDimensionsComponent,
+  MetricDspacecrisComponent,
+  MetricGooglescholarComponent,
+  MetricEmbeddedViewComponent,
+  MetricEmbeddedDownloadComponent,
+  BrowseMostElementsComponent,
+  BrowseSectionComponent,
+  TopSectionComponent,
+  FacetSectionComponent,
+  SearchSectionComponent,
+  TextSectionComponent,
+  CountersSectionComponent,
+  MultiColumnTopSectionComponent
   CreateImpactPathwayComponent,
   ContextMenuComponent,
   ContextMenuEditImpactPathwayComponent,
@@ -569,6 +607,7 @@ const ENTRY_COMPONENTS = [
   CreateCollectionParentSelectorComponent,
   CreateItemParentSelectorComponent,
   BulkImportSelectorComponent,
+  ClaimItemSelectorComponent,
   EditCommunitySelectorComponent,
   EditCollectionSelectorComponent,
   EditItemSelectorComponent,
@@ -608,7 +647,14 @@ const ENTRY_COMPONENTS = [
   CommunitySidebarSearchListElementComponent,
   LinkMenuItemComponent,
   OnClickMenuItemComponent,
-  TextMenuItemComponent
+  TextMenuItemComponent,
+  BrowseSectionComponent,
+  TopSectionComponent,
+  FacetSectionComponent,
+  SearchSectionComponent,
+  TextSectionComponent,
+  CountersSectionComponent,
+  MultiColumnTopSectionComponent
 ];
 
 const SHARED_SEARCH_PAGE_COMPONENTS = [

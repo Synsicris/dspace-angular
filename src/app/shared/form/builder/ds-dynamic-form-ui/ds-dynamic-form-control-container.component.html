@@ -25,8 +25,8 @@
                  class="clearfix w-100 mb-4"></div>
 
             <!-- In case of repeatable fields show empty space for all elements except the first -->
-            <div *ngIf="context?.index !== null
-                && (!showErrorMessages || errorMessages.length === 0)" class="clearfix w-100 mb-2"></div>
+          <div *ngIf="(context?.index !== null
+              && (!showErrorMessages || errorMessages.length === 0)) || (!hasHint && !showErrorMessages)" class="clearfix w-100 mb-2"></div>
 
             <div *ngIf="showErrorMessages" [ngClass]="[getClass('element', 'errors'), getClass('grid', 'errors')]">
               <small *ngFor="let message of errorMessages" class="invalid-feedback d-block">{{ message | translate: model.validators }}</small>
@@ -46,7 +46,7 @@
                 <option *ngFor="let lang of model.languageCodes" [value]="lang.code">{{lang.display}}</option>
             </select>
         </div>
-        <div *ngIf="isRelationship && !isVirtual()" class="col-auto text-center">
+        <div *ngIf="isRelationship" class="col-auto text-center">
             <button class="btn btn-secondary"
                     type="button"
                     ngbTooltip="{{'form.lookup-help' | translate}}"

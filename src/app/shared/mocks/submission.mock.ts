@@ -60,7 +60,7 @@ export const mockSectionsErrors = [
   }
 ];
 
-export const mockSectionsErrorsTwo = [
+export const mockSectionsErrorsTouchedField = [
   {
     message: 'error.validation.required',
     paths: [
@@ -2840,7 +2840,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2856,7 +2856,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2869,7 +2869,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         formId: '2_traditionalpageone',
         isLoading: false,
         isValid: false,
@@ -2883,7 +2883,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         collapsed: false,
         enabled: false,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2898,7 +2898,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         data: {
           matches: {}
         },
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2913,7 +2913,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         data: {
           files: []
         },
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2930,7 +2930,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2960,7 +2960,7 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2976,7 +2976,7 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2989,7 +2989,7 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         formId: '2_traditionalpageone',
         isLoading: false,
         isValid: false,
@@ -3003,7 +3003,7 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: false,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -3018,7 +3018,7 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         data: {
           matches: mockDeduplicationMatches
         },
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -3033,7 +3033,7 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         data: {
           files: []
         },
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -3050,7 +3050,7 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -3080,7 +3080,7 @@ export const mockSubmissionStateWithoutUpload: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false
       } as any,
@@ -3095,7 +3095,7 @@ export const mockSubmissionStateWithoutUpload: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false
       } as any,
@@ -3107,7 +3107,7 @@ export const mockSubmissionStateWithoutUpload: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         formId: '2_traditionalpageone',
         isLoading: false,
         isValid: false
@@ -3120,7 +3120,7 @@ export const mockSubmissionStateWithoutUpload: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: false,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false
       } as any,
@@ -3136,7 +3136,7 @@ export const mockSubmissionStateWithoutUpload: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false
       } as any
@@ -3159,7 +3159,7 @@ export const mockSectionsState = Object.assign({}, {
     collapsed: false,
     enabled: true,
     data: {},
-    errors: [],
+    errorsToShow: [],
     isLoading: false,
     isValid: false
   } as any,
@@ -3174,7 +3174,7 @@ export const mockSectionsState = Object.assign({}, {
     collapsed: false,
     enabled: true,
     data: {},
-    errors: [],
+    errorsToShow: [],
     isLoading: false,
     isValid: false,
     removePending: false
@@ -3187,7 +3187,7 @@ export const mockSectionsState = Object.assign({}, {
     collapsed: false,
     enabled: true,
     data: {},
-    errors: [],
+    errorsToShow: [],
     isLoading: false,
     isValid: false,
     removePending: false
@@ -3200,7 +3200,7 @@ export const mockSectionsState = Object.assign({}, {
     collapsed: false,
     enabled: false,
     data: {},
-    errors: [],
+    errorsToShow: [],
     isLoading: false,
     isValid: false,
     removePending: false
@@ -3213,7 +3213,7 @@ export const mockSectionsState = Object.assign({}, {
     collapsed: false,
     enabled: true,
     data: {},
-    errors: [],
+    errorsToShow: [],
     isLoading: false,
     isValid: false,
     removePending: false
@@ -3230,7 +3230,7 @@ export const mockSectionsState = Object.assign({}, {
     collapsed: false,
     enabled: true,
     data: {},
-    errors: [],
+    errorsToShow: [],
     isLoading: false,
     isValid: false,
     removePending: false
@@ -3485,83 +3485,87 @@ export const mockFileFormData = {
   },
   accessConditions: [
     {
-      name: [
-        {
-          value: 'openaccess',
-          language: null,
-          authority: null,
-          display: 'openaccess',
-          confidence: -1,
-          place: 0,
-          otherInformation: null
-        }
-      ],
-    }
-    ,
+      accessConditionGroup: {
+        name: [
+          {
+            value: 'openaccess',
+            language: null,
+            authority: null,
+            display: 'openaccess',
+            confidence: -1,
+            place: 0,
+            otherInformation: null
+          }
+        ],
+      },
+    },
     {
-      name: [
-        {
-          value: 'lease',
-          language: null,
-          authority: null,
-          display: 'lease',
-          confidence: -1,
-          place: 0,
-          otherInformation: null
-        }
-      ],
-      endDate: [
-        {
-          value: {
-            year: 2019,
-            month: 1,
-            day: 16
-          },
-          language: null,
-          authority: null,
-          display: {
-            year: 2019,
-            month: 1,
-            day: 16
-          },
-          confidence: -1,
-          place: 0,
-          otherInformation: null
-        }
-      ],
-    }
-    ,
+      accessConditionGroup:{
+        name: [
+          {
+            value: 'lease',
+            language: null,
+            authority: null,
+            display: 'lease',
+            confidence: -1,
+            place: 0,
+            otherInformation: null
+          }
+        ],
+        endDate: [
+          {
+            value: {
+              year: 2019,
+              month: 1,
+              day: 16
+            },
+            language: null,
+            authority: null,
+            display: {
+              year: 2019,
+              month: 1,
+              day: 16
+            },
+            confidence: -1,
+            place: 0,
+            otherInformation: null
+          }
+        ],
+      }
+    },
     {
-      name: [
-        {
-          value: 'embargo',
-          language: null,
-          authority: null,
-          display: 'lease',
-          confidence: -1,
-          place: 0,
-          otherInformation: null
-        }
-      ],
-      startDate: [
-        {
-          value: {
-            year: 2019,
-            month: 1,
-            day: 16
-          },
-          language: null,
-          authority: null,
-          display: {
-            year: 2019,
-            month: 1,
-            day: 16
-          },
-          confidence: -1,
-          place: 0,
-          otherInformation: null
-        }
-      ],
+      accessConditionGroup: {
+        name: [
+          {
+            value: 'embargo',
+            language: null,
+            authority: null,
+            display: 'lease',
+            confidence: -1,
+            place: 0,
+            otherInformation: null
+          }
+        ],
+        startDate: [
+          {
+            value: {
+              year: 2019,
+              month: 1,
+              day: 16
+            },
+            language: null,
+            authority: null,
+            display: {
+              year: 2019,
+              month: 1,
+              day: 16
+            },
+            confidence: -1,
+            place: 0,
+            otherInformation: null
+          }
+        ],
+      }
     }
   ]
 };

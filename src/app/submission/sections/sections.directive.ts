@@ -6,7 +6,7 @@ import { uniq } from 'lodash';
 
 import { SectionsService } from './sections.service';
 import { hasValue, isNotEmpty, isNotNull } from '../../shared/empty.util';
-import { SubmissionSectionError, SubmissionSectionObject } from '../objects/submission-objects.reducer';
+import { SubmissionSectionError } from '../objects/submission-objects.reducer';
 import parseSectionErrorPaths, { SectionErrorPath } from '../utils/parseSectionErrorPaths';
 import { SubmissionService } from '../submission.service';
 import { SectionsType } from './sections-type';
@@ -68,6 +68,13 @@ export class SectionsDirective implements OnDestroy, OnInit {
    */
   private enabled: Observable<boolean>;
 
+
+  /**
+   * A boolean representing if section has read-only visibility
+   * @type {boolean}
+   */
+  private readOnly: Observable<boolean>;
+
   /**
    * A boolean representing the panel collapsible state: opened (true) or closed (false)
    * @type {boolean}
@@ -111,8 +118,7 @@ export class SectionsDirective implements OnDestroy, OnInit {
       }));
 
     this.subs.push(
-      this.sectionService.getSectionState(this.submissionId, this.sectionId, this.sectionType).pipe(
-        map((state: SubmissionSectionObject) => state.errors))
+      this.sectionService.getShownSectionErrors(this.submissionId, this.sectionId, this.sectionType)
         .subscribe((errors: SubmissionSectionError[]) => {
           if (isNotEmpty(errors)) {
             errors.forEach((errorItem: SubmissionSectionError) => {
@@ -145,6 +151,11 @@ export class SectionsDirective implements OnDestroy, OnInit {
     );
 
     this.enabled = this.sectionService.isSectionEnabled(this.submissionId, this.sectionId);
+    this.readOnly = this.sectionService.isSectionReadOnly(
+      this.submissionId,
+      this.sectionId,
+      this.submissionService.getSubmissionScope()
+    );
   }
 
   /**
@@ -204,6 +215,16 @@ export class SectionsDirective implements OnDestroy, OnInit {
    */
   public isEnabled(): Observable<boolean> {
     return this.enabled;
+  }
+
+  /**
+   * Check if section has visibility read only
+   *
+   * @returns {Observable<boolean>}
+   *    Emits true whenever section is read only
+   */
+  public isReadOnly(): Observable<boolean> {
+    return this.readOnly;
   }
 
   /**
