@@ -13,7 +13,7 @@ export class FooterComponent {
   /**
    * A boolean representing if to show or not the top footer container
    */
-  showTopFooter = true;
+  showTopFooter = false;
 
   constructor(@Optional() private cookies: KlaroService) {
   }
