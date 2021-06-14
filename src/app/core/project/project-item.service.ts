@@ -19,9 +19,8 @@ import { catchError, delay, map, mergeMap, take, tap } from 'rxjs/operators';
 import { isEmpty, isNotEmpty } from '../../shared/empty.util';
 import { Item } from '../shared/item.model';
 import { ErrorResponse } from '../cache/response.models';
-import { throwError as observableThrowError } from 'rxjs/internal/observable/throwError';
+import { Observable, of as observableOf, throwError as observableThrowError } from 'rxjs';
 import { RemoteData } from '../data/remote-data';
-import { Observable, of as observableOf } from 'rxjs';
 import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../shared/operators';
 import { Collection } from '../shared/collection.model';
 
@@ -51,7 +50,7 @@ export class ProjectItemService {
     Object.keys(metadata)
       .filter((metadataName) => metadataName !== 'dspace.entity.type')
       .forEach((metadataName) => {
-        if (metadataName !== 'cris.workspace.shared') {
+        if (metadataName !== 'cris.project.shared') {
           this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
         } else {
           const path = pathCombiner.getPath([metadataName, '0']);

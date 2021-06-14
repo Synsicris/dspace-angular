@@ -1,11 +1,13 @@
 import {
   ChangeDetectorRef,
-  Component, ComponentFactory,
+  Component,
+  ComponentFactory,
   ComponentFactoryResolver,
   ComponentRef,
   OnDestroy,
   OnInit,
-  ViewChild, ViewContainerRef
+  ViewChild,
+  ViewContainerRef
 } from '@angular/core';
 import { Box } from '../../../core/layout/models/box.model';
 import { CrisLayoutLoaderDirective } from '../../directives/cris-layout-loader.directive';
@@ -18,8 +20,8 @@ import { getFirstSucceededRemoteListPayload } from '../../../core/shared/operato
 import { getCrisLayoutBox } from '../../decorators/cris-layout-box.decorator';
 import { GenericConstructor } from '../../../core/shared/generic-constructor';
 import { followLink } from '../../../shared/utils/follow-link-config.model';
-import { Subscription } from 'rxjs';
-import { hasValue } from '../../../shared/empty.util';
+import { catchError, takeUntil, tap } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
 
 /**
  * This component defines the default layout for all tabs of DSpace Items.
@@ -35,6 +37,7 @@ import { hasValue } from '../../../shared/empty.util';
 export class CrisLayoutDefaultTabComponent extends CrisLayoutTabObj implements OnInit, OnDestroy {
 
   boxes: Box[];
+
   /**
    * Directive hook used to place the dynamic child component
    */
@@ -43,10 +46,8 @@ export class CrisLayoutDefaultTabComponent extends CrisLayoutTabObj implements O
   showLoader: boolean;
 
   componentRef: ComponentRef<Component>[] = [];
-  /**
-   * List of subscriptions
-   */
-  subs: Subscription[] = [];
+
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     public cd: ChangeDetectorRef,
@@ -57,52 +58,111 @@ export class CrisLayoutDefaultTabComponent extends CrisLayoutTabObj implements O
   }
 
   ngOnInit() {
-    this.showLoader = true;
-    this.subs.push(this.boxService.findByItem(this.item.id, this.tab.id, followLink('configuration'))
-      .pipe(getFirstSucceededRemoteListPayload())
-      .subscribe({
-        next: (next: Box[]) => {
-          this.boxes = next;
-          this.addBoxes(this.boxes);
-          this.cd.markForCheck();
-        },
-        complete: () => {
-          this.showLoader = false;
-        }
-      }));
+    this.initializeComponent();
   }
 
-  addBoxes(boxes: Box[]) {
-    const viewContainerRef = this.crisLayoutLoader.viewContainerRef;
-    viewContainerRef.clear();
+  ngOnDestroy(): void {
+    this.destroyBoxes();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 
-    boxes.forEach((box) => {
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-        this.getComponent(box.boxType)
-      );
-      const componentRef = this.instantiateBox(viewContainerRef, componentFactory, box);
-      this.componentRef.push(componentRef);
+  protected initializeComponent() {
+    this.showLoader = true;
+    this.setBoxes(false).subscribe(() => {
+      const viewContainerRef = this.crisLayoutLoader.viewContainerRef;
+      viewContainerRef.clear();
+      this.boxes.forEach((box, index) => {
+        let nextBoxClear = true;
+
+        if ( !!this.boxes[ index + 1 ] ) {
+          nextBoxClear = this.boxes[ index + 1 ].clear;
+        }
+
+        const componentRef = this.createBox(viewContainerRef, box, index, nextBoxClear);
+        this.componentRef.push(componentRef);
+      });
+      this.cd.markForCheck();
+      this.showLoader = false;
     });
   }
 
-  instantiateBox(viewContainerRef: ViewContainerRef, componentFactory: ComponentFactory<any>, box: Box): ComponentRef<any> {
-    const componentRef = viewContainerRef.createComponent(componentFactory);
+
+  protected createBox(viewContainerRef: ViewContainerRef, box: Box, boxPosition: number, nextBoxClear?: boolean): ComponentRef<Component> {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+      this.getComponent(box.boxType)
+    );
+
+    const componentRef = this.instantiateBox(viewContainerRef, componentFactory, box, boxPosition, nextBoxClear);
+
+    (componentRef.instance as any).refreshTab.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+      this.refreshTab.emit();
+    });
+    (componentRef.instance as any).refreshBox.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+      this.onRefreshBox(viewContainerRef, componentRef, box, boxPosition);
+
+    });
+
+    this.cd.markForCheck();
+
+    return componentRef;
+  }
+
+  protected destroyBox(componentRef: ComponentRef<Component>) {
+    componentRef.destroy();
+  }
+
+  protected destroyBoxes() {
+    if (this.componentRef && this.componentRef.length > 0) {
+      this.componentRef.forEach((component) => {
+        this.destroyBox(component);
+      });
+    }
+  }
+
+  instantiateBox(viewContainerRef: ViewContainerRef, componentFactory: ComponentFactory<any>, box: Box, boxPosition: number, nextBoxClear?: boolean): ComponentRef<any> {
+    const componentRef = viewContainerRef.createComponent(componentFactory, boxPosition);
     (componentRef.instance as any).item = this.item;
     (componentRef.instance as any).box = box;
+    (componentRef.instance as any).nextBoxClear = nextBoxClear;
     return componentRef;
+  }
+
+  protected onRefreshBox(viewContainerRef: ViewContainerRef, componentRef: ComponentRef<Component>, box: Box, boxPosition: number) {
+    this.setBoxes(false).subscribe((boxes) => {
+      this.boxes = boxes;
+      const refreshedBox = boxes.find((b) => b.id === box.id);
+      if (refreshedBox) {
+        this.destroyBox(componentRef);
+
+        let nextBoxClear = true;
+
+        if ( !!this.boxes[ boxPosition + 1 ] ) {
+          nextBoxClear = this.boxes[ boxPosition + 1 ].clear;
+        }
+
+        this.createBox(viewContainerRef, refreshedBox, boxPosition,nextBoxClear);
+      }
+    });
   }
 
   protected getComponent(boxType: string): GenericConstructor<Component> {
     return getCrisLayoutBox(this.item, this.tab.shortname, boxType);
   }
 
-  ngOnDestroy(): void {
-    if (this.componentRef && this.componentRef.length > 0) {
-      this.componentRef.forEach((component) => {
-        component.destroy();
-      });
-    }
-    this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
+  protected setBoxes(useCachedVersionIfAvailable: boolean): Observable<Box[]> {
+    return this.boxService.findByItem(this.item.id, this.tab.id, useCachedVersionIfAvailable, followLink('configuration'))
+      .pipe(
+        getFirstSucceededRemoteListPayload(),
+        tap((boxes: Box[]) => {
+          this.boxes = boxes;
+        }),
+        catchError((error) => {
+          this.boxes = [];
+          return of(this.boxes);
+        })
+      );
   }
+
 
 }

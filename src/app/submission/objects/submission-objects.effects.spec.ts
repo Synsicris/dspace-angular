@@ -30,7 +30,7 @@ import {
   mockSectionsData,
   mockSectionsDataTwo,
   mockSectionsErrors,
-  mockSectionsErrorsTwo,
+  mockSectionsErrorsTouchedField,
   mockSubmissionCollectionId,
   mockSubmissionDefinition,
   mockSubmissionDefinitionResponse,
@@ -375,18 +375,21 @@ describe('SubmissionObjectEffects test suite', () => {
           submissionId,
           'traditionalpageone',
           mockSectionsData.traditionalpageone as any,
+          errorsList.traditionalpageone || [],
           errorsList.traditionalpageone || []
         ),
         c: new UpdateSectionDataAction(
           submissionId,
           'license',
           mockSectionsData.license as any,
+          errorsList.license || [],
           errorsList.license || []
         ),
         d: new UpdateSectionDataAction(
           submissionId,
           'upload',
           mockSectionsData.upload as any,
+          errorsList.upload || [],
           errorsList.upload || []
         ),
       });
@@ -425,25 +428,29 @@ describe('SubmissionObjectEffects test suite', () => {
         }
       });
 
-      const errorsList = parseSectionErrors(mockSectionsErrorsTwo);
+      const errorsToShowList = parseSectionErrors(mockSectionsErrorsTouchedField);
+      const serverValidationErrorsList = parseSectionErrors(mockSectionsErrors);
       const expected = cold('--(bcd)-', {
         b: new UpdateSectionDataAction(
           submissionId,
           'traditionalpageone',
           mockSectionsData.traditionalpageone as any,
-          errorsList.traditionalpageone
+          errorsToShowList.traditionalpageone,
+          serverValidationErrorsList.traditionalpageone
         ),
         c: new UpdateSectionDataAction(
           submissionId,
           'license',
           mockSectionsData.license as any,
-          errorsList.license || []
+          errorsToShowList.license || [],
+          serverValidationErrorsList.license || []
         ),
         d: new UpdateSectionDataAction(
           submissionId,
           'upload',
           mockSectionsData.upload as any,
-          errorsList.upload || []
+          errorsToShowList.upload || [],
+          serverValidationErrorsList.upload || []
         ),
       });
 
@@ -476,18 +483,21 @@ describe('SubmissionObjectEffects test suite', () => {
           submissionId,
           'traditionalpageone',
           mockSectionsData.traditionalpageone as any,
+          [],
           []
         ),
         c: new UpdateSectionDataAction(
           submissionId,
           'license',
           mockSectionsData.license as any,
+          [],
           []
         ),
         d: new UpdateSectionDataAction(
           submissionId,
           'upload',
           mockSectionsData.upload as any,
+          [],
           []
         ),
       });
@@ -523,18 +533,21 @@ describe('SubmissionObjectEffects test suite', () => {
           submissionId,
           'traditionalpageone',
           mockSectionsData.traditionalpageone as any,
+          errorsList.traditionalpageone || [],
           errorsList.traditionalpageone || []
         ),
         c: new UpdateSectionDataAction(
           submissionId,
           'license',
           mockSectionsData.license as any,
+          errorsList.license || [],
           errorsList.license || []
         ),
         d: new UpdateSectionDataAction(
           submissionId,
           'upload',
           mockSectionsData.upload as any,
+          errorsList.upload || [],
           errorsList.upload || []
         ),
       });
@@ -570,24 +583,28 @@ describe('SubmissionObjectEffects test suite', () => {
           submissionId,
           'traditionalpageone',
           mockSectionsDataTwo.traditionalpageone as any,
+          errorsList.traditionalpageone || [],
           errorsList.traditionalpageone || []
         ),
         c: new UpdateSectionDataAction(
           submissionId,
           'traditionalpagetwo',
           mockSectionsDataTwo.traditionalpagetwo as any,
+          errorsList.traditionalpagetwo || [],
           errorsList.traditionalpagetwo || []
         ),
         d: new UpdateSectionDataAction(
           submissionId,
           'license',
           mockSectionsDataTwo.license as any,
+          errorsList.license || [],
           errorsList.license || []
         ),
         e: new UpdateSectionDataAction(
           submissionId,
           'upload',
           mockSectionsDataTwo.upload as any,
+          errorsList.upload || [],
           errorsList.upload || []
         ),
       });
@@ -627,18 +644,21 @@ describe('SubmissionObjectEffects test suite', () => {
           submissionId,
           'traditionalpageone',
           mockSectionsData.traditionalpageone as any,
-          []
+          [],
+          errorsList.traditionalpageone
         ),
         c: new UpdateSectionDataAction(
           submissionId,
           'license',
           mockSectionsData.license as any,
+          errorsList.license || [],
           errorsList.license || []
         ),
         d: new UpdateSectionDataAction(
           submissionId,
           'upload',
           mockSectionsData.upload as any,
+          errorsList.upload || [],
           errorsList.upload || []
         ),
       });
@@ -672,18 +692,21 @@ describe('SubmissionObjectEffects test suite', () => {
           submissionId,
           'traditionalpageone',
           mockSectionsData.traditionalpageone as any,
+          [],
           []
         ),
         c: new UpdateSectionDataAction(
           submissionId,
           'license',
           mockSectionsData.license as any,
+          [],
           []
         ),
         d: new UpdateSectionDataAction(
           submissionId,
           'upload',
           mockSectionsData.upload as any,
+          [],
           []
         ),
       });
@@ -713,25 +736,28 @@ describe('SubmissionObjectEffects test suite', () => {
         }
       });
 
-      const errorsList = parseSectionErrors(mockSectionsErrors);
+      const serverValidationErrorsList = parseSectionErrors(mockSectionsErrors);
       const expected = cold('--(bcd)-', {
         b: new UpdateSectionDataAction(
           submissionId,
           'traditionalpageone',
           mockSectionsData.traditionalpageone as any,
-          []
+          [],
+          serverValidationErrorsList.traditionalpageone
         ),
         c: new UpdateSectionDataAction(
           submissionId,
           'license',
           mockSectionsData.license as any,
-          errorsList.license || []
+          serverValidationErrorsList.license || [],
+          serverValidationErrorsList.license || []
         ),
         d: new UpdateSectionDataAction(
           submissionId,
           'upload',
           mockSectionsData.upload as any,
-          errorsList.upload || []
+          serverValidationErrorsList.upload || [],
+          serverValidationErrorsList.upload || []
         ),
       });
 
@@ -766,24 +792,28 @@ describe('SubmissionObjectEffects test suite', () => {
           submissionId,
           'traditionalpageone',
           mockSectionsDataTwo.traditionalpageone as any,
-          []
+          [],
+          errorsList.traditionalpageone
         ),
         c: new UpdateSectionDataAction(
           submissionId,
           'traditionalpagetwo',
           mockSectionsDataTwo.traditionalpagetwo as any,
+          errorsList.traditionalpagetwo || [],
           errorsList.traditionalpagetwo || []
         ),
         d: new UpdateSectionDataAction(
           submissionId,
           'license',
           mockSectionsDataTwo.license as any,
+          errorsList.license || [],
           errorsList.license || []
         ),
         e: new UpdateSectionDataAction(
           submissionId,
           'upload',
           mockSectionsDataTwo.upload as any,
+          errorsList.upload || [],
           errorsList.upload || []
         ),
       });
@@ -896,18 +926,21 @@ describe('SubmissionObjectEffects test suite', () => {
             submissionId,
             'traditionalpageone',
             mockSectionsData.traditionalpageone as any,
+            errorsList.traditionalpageone || [],
             errorsList.traditionalpageone || []
           ),
           new UpdateSectionDataAction(
             submissionId,
             'license',
             mockSectionsData.license as any,
+            errorsList.license || [],
             errorsList.license || []
           ),
           new UpdateSectionDataAction(
             submissionId,
             'upload',
             mockSectionsData.upload as any,
+            errorsList.upload || [],
             errorsList.upload || []
           )
         ]

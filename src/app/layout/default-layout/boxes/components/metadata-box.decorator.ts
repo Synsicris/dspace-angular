@@ -1,4 +1,4 @@
-export enum FieldRendetingType {
+export enum FieldRenderingType {
   TEXT = 'TEXT',
   HEADING = 'HEADING',
   LONGTEXT = 'LONGTEXT',
@@ -9,12 +9,13 @@ export enum FieldRendetingType {
   THUMBNAIL = 'THUMBNAIL',
   ATTACHMENT = 'ATTACHMENT',
   TABLE = 'TABLE',
-  INLINE = 'INLINE'
+  INLINE = 'INLINE',
+  ORCID = 'ORCID',
 }
 
 const fieldType = new Map();
 
-export function MetadataBoxFieldRendering(objectType: FieldRendetingType) {
+export function MetadataBoxFieldRendering(objectType: FieldRenderingType) {
   return function decorator(component: any) {
     if (objectType) {
       fieldType.set(objectType, component);

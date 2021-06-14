@@ -2814,8 +2814,9 @@
   // "footer.link.dspace": "DSpace software",
   "footer.link.dspace": "DSpace Software",
 
-  // "footer.link.duraspace": "DuraSpace",
-  "footer.link.duraspace": "DuraSpace",
+
+  // "footer.link.lyrasis": "LYRASIS",
+  "footer.link.lyrasis": "LYRASIS",
 
   // "footer.link.cookies": "Cookie settings",
   // TODO New key - Add a translation
@@ -6455,15 +6456,15 @@
 
   // "relationships.title" : "Relationships",
   // TODO New key - Add a translation
-  "relationships.title": "Relationships",
+  "relationships.title" : "Relationships",
 
   // "relationships.no.relationships.found" : "No relationships",
   // TODO New key - Add a translation
-  "relationships.no.relationships.found": "No relationships",
+  "relationships.no.relationships.found" : "No relationships",
 
   // "relationships.no.data.found" : "No data found",
   // TODO New key - Add a translation
-  "relationships.no.data.found": "No data found",
+  "relationships.no.data.found" : "No data found",
 
   // "results_plan.breadcrumbs": "Results plan",
   // TODO New key - Add a translation
@@ -9313,11 +9314,11 @@
 
   // "working-plan.chart.column.changeStartDate.input.description": "Difference in days:",
   // TODO New key - Add a translation
-  "working-plan.chart.column.changeStartDate.input.description": "Difference in days: ",
+  "working-plan.chart.column.changeStartDate.input.description": "Difference in days:",
 
   // "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later:",
   // TODO New key - Add a translation
-  "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later: ",
+  "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later:",
 
   // "working-plan.chart.column.changeStartDate.radio.earlier": "Earlier",
   // TODO New key - Add a translation

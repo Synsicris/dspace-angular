@@ -196,6 +196,7 @@ import { StatisticsCategory } from './statistics/models/statistics-category.mode
 import { RootDataService } from './data/root-data.service';
 import { SearchConfig } from '../shared/search/search-filters/search-config.model';
 import { EditItemRelationsGuard } from '../edit-item-relationships/guards/edit-item-relationships.guard';
+import { ProfileClaimService } from '../profile-page/profile-claim/profile-claim.service';
 import { ItemAuthorityRelationService } from './shared/item-authority-relation.service';
 import { ProjectDataService } from './project/project-data.service';
 import { CollectionSearchResult } from '../shared/object-collection/shared/collection-search-result.model';
@@ -338,6 +339,7 @@ const PROVIDERS = [
   VocabularyService,
   VocabularyTreeviewService,
   SearchcomponentService,
+  ProfileClaimService,
   ResearcherProfileService,
   ItemExportFormatService,
   SectionDataService,
