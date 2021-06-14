@@ -131,7 +131,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
         {
           id: 'new',
           active: false,
-          visible: isCollectionAdmin || isCommunityAdmin || isSiteAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.TEXT,
             text: 'menu.section.new'
@@ -143,7 +143,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
           id: 'new_community',
           parentID: 'new',
           active: false,
-          visible: isCommunityAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.ONCLICK,
             text: 'menu.section.new_community',
@@ -156,7 +156,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
           id: 'new_collection',
           parentID: 'new',
           active: false,
-          visible: isCommunityAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.ONCLICK,
             text: 'menu.section.new_collection',
@@ -182,7 +182,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
           id: 'new_process',
           parentID: 'new',
           active: false,
-          visible: isCollectionAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.LINK,
             text: 'menu.section.new_process',
@@ -219,7 +219,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
         {
           id: 'edit',
           active: false,
-          visible: isCollectionAdmin || isCommunityAdmin || isSiteAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.TEXT,
             text: 'menu.section.edit'
@@ -231,7 +231,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
           id: 'edit_community',
           parentID: 'edit',
           active: false,
-          visible: isCommunityAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.ONCLICK,
             text: 'menu.section.edit_community',
@@ -244,7 +244,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
           id: 'edit_collection',
           parentID: 'edit',
           active: false,
-          visible: isCollectionAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.ONCLICK,
             text: 'menu.section.edit_collection',
@@ -629,7 +629,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
    * Create menu sections dependent on whether or not the current user can manage access control groups
    */
   createAccessControlMenuSections() {
-    this.authorizationService.isAuthorized(FeatureID.CanManageGroups).subscribe((authorized) => {
+    this.authorizationService.isAuthorized(FeatureID.AdministratorOf).subscribe((authorized) => {
       const menuList = [
         /* Access Control */
         {
