@@ -810,7 +810,9 @@
 
   "alert.close.aria": "Close",
 
+
   "alert.toggle.hide": "Show less",
+
 
   "alert.toggle.show": "Show more",
 
@@ -1749,17 +1751,22 @@
 
   "context-menu.actions.dso-page-edit.ITEM.btn": "Administer",
 
-  "context-menu.actions.edit-item-relationships.btn.fundings": "Manage Fundints",
+  "context-menu.actions.edit-item-relationships.btn.fundings": "Manage Fundings",
 
   "context-menu.actions.edit-item-relationships.btn.researchoutputs": "Manage Research Outputs",
 
+
   "context-menu.actions.edit-item-relationships.btn.organizations": "Manage SubOrganizations",
+
 
   "context-menu.actions.edit-item-relationships.btn.rppublications": "Manage Researchers Publications",
 
+
   "context-menu.actions.edit-item-relationships.btn.publications": "Manage Publications",
 
+
   "context-menu.actions.edit-item-relationships.btn.rpprojects": "Manage Researchers Projects",
+
 
   "context-menu.actions.edit-item-relationships.btn.people": "Manage People",
 
@@ -2070,18 +2077,23 @@
   "error.validation.fundingInvestigatorOrLeadOrganizationRequired" : "At least one investigator or one lead organization is required",
 
 
-
   "exploitation-plan.info.text": "Info text for the exploitation Plan",
+
 
   "exploitation-plan.page.title": "Exploitation Plan",
 
+
   "exploitation-plan.breadcrumbs": "Exploitation Plan",
+
 
   "exploitation-plan.step_type_1.info.text": "Info text for section 1",
 
+
   "exploitation-plan.step_type_2.info.text": "Info text for section 2",
 
+
   "exploitation-plan.step_type_3.info.text": "Info text for section 3",
+
 
   "exploitation-plan.step_type_4.info.text": "Info text for section 4",
 
@@ -2100,10 +2112,11 @@
 
   "exploitation-plan.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
 
+
   "exploitation-plan.task.create.error": "There was an issue when creating the new item, please try again later.",
 
-  "exploitation-plan.task.create.success": "New item has been created successfully.",
 
+  "exploitation-plan.task.create.success": "New item has been created successfully.",
 
 
   "explore.browse-section.title": "Browse",
@@ -2631,7 +2644,9 @@
 
   "impact-pathway.remove.item.title": "Remove item",
 
+
   "impact-pathway.remove.processing": "Deleting",
+
 
   "impact-pathway.remove.title": "Delete impact pathway",
 
@@ -7395,7 +7410,7 @@
   "submission.sections.submit.progressbar.describe.patents_result.info": "Please complete the mandatory information. The information will be regularly compared with the patent database. This means that as soon as the patent or utility model is published, it can be automatically transferred to the system. You will receive a message for this purpose.",
 
 
-  "submission.sections.submit.progressbar.describe.persons": "Personal data",
+  "submission.sections.submit.progressbar.describe.persons": "Person",
 
 
   "submission.sections.submit.progressbar.describe.persons.info": "This section contains personal information that allows you to use the system and provides contact details for the funding agency.",
@@ -7422,7 +7437,7 @@
   "submission.sections.submit.progressbar.describe.proj_objectives": "Project objective",
 
 
-  "submission.sections.submit.progressbar.describe.projects": "Projects",
+  "submission.sections.submit.progressbar.describe.projects": "Subproject",
 
 
   "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
@@ -8017,17 +8032,23 @@
   "working-plan.chart.column.dates.end": "End date",
 
 
-  "working-plan.chart.column.changeStartDate.input.description": "Difference in days:",
+  "working-plan.chart.column.changeStartDate.input.description": "Difference in days: ",
 
-  "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later:",
+
+  "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later: ",
+
 
   "working-plan.chart.column.changeStartDate.radio.earlier": "Earlier",
 
+
   "working-plan.chart.column.changeStartDate.radio.later": "Later",
+
 
   "working-plan.chart.column.changeStartDate": "Change start date",
 
+
   "working-plan.chart.column.changeStartDate.apply": "Apply",
+
 
   "working-plan.chart.column.changeStartDate.saving": "saving...",
 
@@ -8038,7 +8059,7 @@
   "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
 
 
-  "working-plan.chart.column.responsible": "Organisation",
+  "working-plan.chart.column.responsible": "Responsible",
 
 
   "working-plan.chart.column.status": "Status",
@@ -8054,6 +8075,7 @@
 
 
   "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
+
 
   "working-plan.chart.update.error": "There was an unexpected issue when fetching update, please reload the page to have consistent data.",
 
@@ -8106,13 +8128,13 @@
   "application.listelement.badge": "Applications of solutions / changes / innovations",
 
 
-  "award.listelement.badge": "Awards and prizes",
+  "award.listelement.badge": "Award / prize",
 
 
   "condition.listelement.badge": "External conditions",
 
 
-  "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objectives",
+  "contribution_fundingprogramme.listelement.badge": "Contributions to funding programme objectives",
 
 
   "cooperation_partner.listelement.badge": "Cooperation partners",
@@ -8133,13 +8155,13 @@
   "impactpathwaystep.listelement.badge": "Impact pathway step",
 
 
-  "innovationidea.listelement.badge": "Ideas for use of project results",
+  "innovationidea.listelement.badge": "Idea for the use of project results",
 
 
-  "innovationpotential.listelement.badge": "Solutions / changes / innovations",
+  "innovationpotential.listelement.badge": "Solution / change / innovation",
 
 
-  "milestone.listelement.badge": "Milestones",
+  "milestone.listelement.badge": "Milestone",
 
 
   "other.listelement.badge": "Others",
@@ -8148,16 +8170,16 @@
   "pot_societalimpact.listelement.badge": "Expected societal impact",
 
 
-  "process_event.listelement.badge": "Processes of cooperation, participation and working together",
+  "process_event.listelement.badge": "Process of cooperation, participation and working together",
 
 
-  "physical_object.listelement.badge": "Objects and materials",
+  "physical_object.listelement.badge": "Object / material for knowledge transfer and subsequent use in research and teaching",
 
 
   "proj_objective.listelement.badge": "Project objectives",
 
 
-  "plan_publication.listelement.badge": "Planned Publications",
+  "plan_publication.listelement.badge": "Planned publications",
 
 
   "research_result.listelement.badge": "Research results",
@@ -8166,7 +8188,7 @@
   "stateofart.listelement.badge": "State of knowledge / problem definition",
 
 
-  "spinoff.listelement.badge": "Spin-offs (incl. association)",
+  "spinoff.listelement.badge": "Spin-off (incl. association)",
 
 
   "step.listelement.badge": "Next steps and cooperations",
@@ -8175,16 +8197,16 @@
   "subproject.listelement.badge": "Subprojects",
 
 
-  "targetgroup.listelement.badge": "Stakeholder groups",
+  "targetgroup.listelement.badge": "Target group",
 
 
-  "task.listelement.badge": "Tasks",
+  "task.listelement.badge": "Task",
 
 
   "unexpected_result.listelement.badge": "(Intermediate) results / problems that causes change",
 
 
-  "workpackage.listelement.badge": "Work packages",
+  "workpackage.listelement.badge": "Work package",
 
 
   "tree.description.nuts2": "Please select a region.",
@@ -8232,10 +8254,10 @@
   "applications.listelement.badge": "Application of a solution / change / innovation",
 
 
-  "awards.listelement.badge": "Award or prize",
+  "awards.listelement.badge": "Awards and prizes",
 
 
-  "conditions.listelement.badge": "External condition",
+  "conditions.listelement.badge": "External conditions",
 
 
   "process_events.listelement.badge": "Process of cooperation, participation and working together",
@@ -8277,7 +8299,7 @@
   "plan_publications.listelement.badge": "Planned publications",
 
 
-  "proj_objectives.listelement.badge": "Project objective",
+  "proj_objectives.listelement.badge": "Project objectives",
 
 
   "projects.listelement.badge": "Research projects",
@@ -8286,22 +8308,22 @@
   "publications.listelement.badge": "Publications",
 
 
-  "research_results.listelement.badge": "Research result",
+  "research_results.listelement.badge": "Research results",
 
 
-  "spinoffs.listelement.badge": "Spin-off",
+  "spinoffs.listelement.badge": "Spin-offs",
 
 
-  "steps.listelement.badge": "Next step or cooperation",
+  "steps.listelement.badge": "Next steps and cooperations",
 
 
-  "subprojects.listelement.badge": "Subproject",
+  "subprojects.listelement.badge": "Subprojects",
 
 
   "targetgroups.listelement.badge": "Target group",
 
 
-  "unexpected_results.listelement.badge": "(Intermediate) result / problem that causes change",
+  "unexpected_results.listelement.badge": "(Intermediate) results / problems that cause change",
 
 
   "workpackages.listelement.badge": "Work package",
@@ -8334,6 +8356,93 @@
   "submission.sections.submit.progressbar.describe.datasets_references": "Link to publications",
 
 
-  "exploitationplan.listelement.badge": "Exploitation plan"
+  "exploitationplan.listelement.badge": "Exploitation plan",
+
+
+  "submission.sections.submit.progressbar.describe.parentprojects": "Project",
+
+
+  "submission.sections.submit.progressbar.describe.projects_import": "Project overview",
+
+
+  "submission.sections.submit.progressbar.describe.projects_import.info": "This information is generated from the corresponding subprojects. During the proposal preparation phase, the information comes from the easy-online imports of the subprojects. During the project phase, the information is regularly updated from profi.",
+
+
+  "submission.sections.submit.progressbar.describe.projectpartners": "Project partner",
+
+
+  "submission.sections.submit.progressbar.describe.projectpartners_import": "Information from import",
+
+
+  "submission.sections.submit.progressbar.describe.subcontractors_orgunit": "Subcontractor",
+
+
+  "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit": "Ohter cooperationpartner",
+
+
+  "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit.info": "This area serves to map the cooperation within a project. Cooperation is understood to be the agreed collaboration with other organisations, companies or institutions. Collaboration partners, subcontractors and contractual partners already specified in the easy-online proposal are imported and you only need to add information. Please add informal cooperation partners and all project partners joining after the beginning of the project so that a comprehensive picture of the cooperation partners of the project is available. If desired or required, contracts, letters of intent or similar evidence of cooperation can be uploaded. They will not be published and can only be viewed by the funder.",
+
+
+  "submission.sections.submit.progressbar.describe.team": "Team",
+
+
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentprojects": "Keywords",
+
+
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords_others": "Keywords",
+
+
+  "submission.sections.submit.progressbar.describe.statusacc1": "Status",
+
+
+  "submission.sections.submit.progressbar.describe.statusacc2": "Status",
+
+
+  "submission.sections.submit.progressbar.describe.statusacc3": "Status",
+
+
+  "submission.sections.submit.progressbar.describe.statusacc4": "Status",
+
+
+  "cooperation-partners.listelement.badge": "Cooperation partner",
+
+
+  "Event.listelement.badge": "Event",
+
+
+  "OrgUnit.listelement.badge": "Organizational unit",
+
+
+  "Patent.listelement.badge": "Patent or utility patent",
+
+
+  "Person.listelement.badge": "Person",
+
+
+  "team.listelement.badge": "Team of subproject",
+
+
+  "Poduct.listelement.badge": "Research data",
+
+
+  "Publication.listelement.badge": "Publication",
+
+
+  "tree.description.agrovoc": "Keywords",
+
+
+  "submission.sections.submit.progressbar.describe.products": "Data set",
+
+
+  "submission.sections.submit.progressbar.describe.products_references": "Link to publications",
+
+
+  "submission.sections.submit.progressbar.describe.programmes": "Programme",
+
+
+  "submission.sections.submit.progressbar.describe.calls": "Call",
+
+
+  "submission.sections.submit.progressbar.describe.fundingobjectives": "Funding objective"
 
 }
