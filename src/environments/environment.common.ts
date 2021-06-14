@@ -378,8 +378,8 @@ export const environment: GlobalConfig = {
   workingPlan: {
     workingPlanFormName: 'working_plan_workpackage_form',
     workingPlanStepsFormName: 'working_plan_workpackage_step_form',
-    workingPlanStepStatusMetadata: 'workingplan.step.status',
-    workingPlanStepResponsibleMetadata: 'workingplan.responsible',
+    workingPlanStepStatusMetadata: 'synsicris.type.status',
+    workingPlanStepResponsibleMetadata: 'synsicris.relation.partner',
     workingPlanStepResponsibleAuthority: 'WorkingplanOrgUnitAuthority',
     workingPlanStepRelationMetadata: 'workingplan.relation.step',
     workingPlanStepDateStartMetadata: 'dc.date.start',
