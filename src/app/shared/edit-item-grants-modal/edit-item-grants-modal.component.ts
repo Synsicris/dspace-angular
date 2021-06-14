@@ -47,8 +47,8 @@ export class EditItemGrantsModalComponent implements OnInit {
    * The grant options available
    */
   public grantsOptions = [
-    { id: 'project', name: 'project.create.grants.project-option' },
-    { id: 'subproject', name: 'project.create.grants.subproject-option' }
+    { id: 'parentproject', name: 'project.create.grants.project-option' },
+    { id: 'project', name: 'project.create.grants.subproject-option' }
   ];
 
   public processing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -78,7 +78,7 @@ export class EditItemGrantsModalComponent implements OnInit {
    * Initialize the component, setting up creation form
    */
   ngOnInit(): void {
-    this.currentItemGrantsValue = Metadata.firstValue(this.item.metadata, 'cris.workspace.shared');
+    this.currentItemGrantsValue = Metadata.firstValue(this.item.metadata, 'cris.project.shared');
     this.vocabulary.getVocabularyEntries(
       new VocabularyOptions(environment.projects.projectsGrantsOptionsVocabularyName),
       new PageInfo()
@@ -124,7 +124,7 @@ export class EditItemGrantsModalComponent implements OnInit {
 
     this.itemService.updateItemMetadata(
       this.item.uuid,
-      'cris.workspace.shared',
+      'cris.project.shared',
       0,
       projectGrants
     ).subscribe({

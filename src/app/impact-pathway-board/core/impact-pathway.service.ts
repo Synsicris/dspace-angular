@@ -767,7 +767,7 @@ export class ImpactPathwayService {
     Object.keys(metadata)
       .filter((metadataName) => metadataName !== 'dspace.entity.type')
       .forEach((metadataName) => {
-        if (metadataName !== 'cris.workspace.shared') {
+        if (metadataName !== 'cris.project.shared') {
           this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
         } else {
           const path = pathCombiner.getPath([metadataName, '0']);
