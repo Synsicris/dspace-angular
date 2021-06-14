@@ -8166,6 +8166,7 @@
 
   "other.listelement.badge": "Others",
 
+  "parentproject.listelement.badge": "Joint Project",
 
   "pot_societalimpact.listelement.badge": "Expected societal impact",
 
@@ -8175,6 +8176,8 @@
 
   "physical_object.listelement.badge": "Object / material for knowledge transfer and subsequent use in research and teaching",
 
+
+  "Project.listelement.badge": "Project",
 
   "proj_objective.listelement.badge": "Project objectives",
 
@@ -8422,8 +8425,9 @@
   "team.listelement.badge": "Team of subproject",
 
 
-  "Poduct.listelement.badge": "Research data",
+  "subcontractor.listelement.badge": "Subcontractor",
 
+  "Product.listelement.badge": "Research data",
 
   "Publication.listelement.badge": "Publication",
 
