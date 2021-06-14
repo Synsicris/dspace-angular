@@ -58,8 +58,8 @@ import { Metadata } from '../shared/metadata.utils';
 import { ItemDataService } from '../data/item-data.service';
 
 export enum ProjectGrantsTypes {
-  Project = 'project',
-  Subproject = 'subproject',
+  Project = 'parentproject',
+  Subproject = 'project',
 }
 
 @Injectable()
