@@ -22,7 +22,7 @@ export enum FeatureID {
   CanMove = 'canMove',
   ShowClaimItem = 'showClaimItem',
   CanClaimItem = 'canClaimItem',
-  CanCorrectItem = 'canCorrectItem'
+  CanCorrectItem = 'canCorrectItem',
   CanCreateCommunities = 'canCreateCommunities',
-  CanEditItemGrants = 'canEditedGrants',
+  CanEditItemGrants = 'canEditedGrants'
 }

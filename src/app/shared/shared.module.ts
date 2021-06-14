@@ -565,7 +565,7 @@ const COMPONENTS = [
   SearchSectionComponent,
   TextSectionComponent,
   CountersSectionComponent,
-  MultiColumnTopSectionComponent
+  MultiColumnTopSectionComponent,
   CreateImpactPathwayComponent,
   ContextMenuComponent,
   ContextMenuEditImpactPathwayComponent,

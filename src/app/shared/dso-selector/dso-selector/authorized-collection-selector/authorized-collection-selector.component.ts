@@ -16,7 +16,6 @@ import { NotificationsService } from '../../../notifications/notifications.servi
 import { TranslateService } from '@ngx-translate/core';
 import { Collection } from '../../../../core/shared/collection.model';
 import { FindListOptions } from '../../../../core/data/request.models';
-import { followLink } from '../../../utils/follow-link-config.model';
 
 @Component({
   selector: 'ds-authorized-collection-selector',
