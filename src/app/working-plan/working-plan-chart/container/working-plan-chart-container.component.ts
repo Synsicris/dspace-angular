@@ -118,9 +118,17 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   sortOptions$: Observable<SearchConfig>;
   /**
-   * The selected sorting options.
+   * The active sorting option.
    */
-  sortSelected: string;
+  sortSelected$: Observable<string>;
+  /**
+   * The active sorting option value.
+   */
+   sortSelectedValue: string;
+  /**
+   * The selected sorting option. This choice is not yet applied.
+   */
+  sortSelectedTemp: string;
 
   chartData;
 
@@ -176,7 +184,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.sortSelected = 'workingplan.place';
+    this.sortSelected$ = this.workingPlanStateService.getWorkpackagesSortOption();
+
     this.workingPlanStateService.getChartDateViewSelector()
       .subscribe((view) => this.chartDateView.next(view));
 
@@ -184,7 +193,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this.workingPlanService.getWorkpackageStatusTypes()
         .subscribe((statusList: VocabularyEntry[]) => {
           this.chartStatusTypeList$.next(statusList);
-        })
+        }),
+      this.sortSelected$.subscribe(
+        (sortOption: string) => {
+          this.sortSelectedValue = sortOption;
+          this.sortSelectedTemp = sortOption;
+        }
+      )
     );
 
     this.workpackages.subscribe((tree: Workpackage[]) => {
@@ -474,10 +489,21 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Update the sort option selected inside the SortBy dropdown. This choice is not yet applied.
+   *
+   * @param sortOption string
+   */
+  updateTempSelectedSortOption(sortOption: string): void {
+    this.sortSelectedTemp = sortOption;
+  }
+
+  /**
    * Update the chart with the new sort option.
    */
   updateSort() {
-
+    if (this.sortSelectedValue !== this.sortSelectedTemp) {
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectId, this.sortSelectedTemp);
+    }
   }
 
   /**

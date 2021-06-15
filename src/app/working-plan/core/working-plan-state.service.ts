@@ -26,11 +26,13 @@ import {
   isWorkingPlanMovingSelector,
   isWorkingPlanProcessingSelector,
   workpackagesSelector,
+  workpackagesSortOptionSelector,
   workpackageToRemoveSelector
 } from './selectors';
 import { map, startWith } from 'rxjs/operators';
 import { ChartDateViewType, WorkpackageEntries } from './working-plan.reducer';
 import { Workpackage, WorkpackageStep } from './models/workpackage-step.model';
+import { empty } from 'rxjs';
 
 export interface WpActionPackage {
   workpackageId: string;
@@ -97,8 +99,8 @@ export class WorkingPlanStateService {
     this.store.dispatch(new RemoveWorkpackageStepAction(workpackageId, workpackageStepId, workspaceItemId));
   }
 
-  public dispatchRetrieveAllWorkpackages(projectId: string): void {
-    this.store.dispatch(new RetrieveAllLinkedWorkingPlanObjectsAction(projectId));
+  public dispatchRetrieveAllWorkpackages(projectId: string, sortOption: string): void {
+    this.store.dispatch(new RetrieveAllLinkedWorkingPlanObjectsAction(projectId, sortOption));
   }
 
   public dispatchUpdateWorkpackageAction(
@@ -140,6 +142,10 @@ export class WorkingPlanStateService {
 
   public getWorkpackageToRemoveId() {
     return this.store.pipe(select(workpackageToRemoveSelector));
+  }
+
+  public getWorkpackagesSortOption() {
+    return this.store.pipe(select(workpackagesSortOptionSelector));
   }
 
   public isProcessing(): Observable<boolean> {

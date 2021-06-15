@@ -22,14 +22,14 @@
               <form>
                 <div>
                   <div>
-                    <mat-radio-group (change)="updateChangeStartDateDirection($event.source.value)" class="block-change-start-date-radio" aria-labelledby="changeAllStartDateDaysRadio">
-                      <mat-radio-button *ngFor="let sortOpts of (sortOptions$ | async).sortOptions" [value]="sortOpts.name" [checked]="sortOpts.name == sortSelected">
-                        {{sortOpts.name | translate}}
+                    <mat-radio-group (change)="updateTempSelectedSortOption($event.source.value)" class="block-change-start-date-radio" aria-labelledby="changeAllStartDateDaysRadio">
+                      <mat-radio-button *ngFor="let sortOpts of (sortOptions$ | async)?.sortOptions" [value]="sortOpts.name" [checked]="(sortSelected$ | async) === sortOpts.name">
+                        {{'working-plan.chart.column.sortBy.option.' + sortOpts.name | translate}}
                       </mat-radio-button>
                     </mat-radio-group>
                   </div>
                   <div class="ml-auto float-right">
-                    <button type="submit" class="btn btn-primary btn-sm" (click)="updateSort()" [disabled]="(isProcessingWorkpackage() | async)">
+                    <button type="submit" class="btn btn-primary btn-sm" (click)="updateSort();sortByDrop.close();" [disabled]="(isProcessingWorkpackage() | async) || sortSelectedTemp === ''">
                       <span *ngIf="!(isProcessingWorkpackage() | async)">
                         {{'working-plan.chart.column.changeStartDate.apply' | translate}}
                       </span>

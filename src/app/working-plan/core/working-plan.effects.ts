@@ -273,8 +273,8 @@ export class WorkingPlanEffects {
   @Effect() retrieveAllWorkpackages$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS),
     switchMap((action: RetrieveAllLinkedWorkingPlanObjectsAction) => {
-      return this.workingPlanService.searchForLinkedWorkingPlanObjects(action.payload.projectId).pipe(
-        map((items: WorkpackageSearchItem[]) => new InitWorkingplanAction(items)),
+      return this.workingPlanService.searchForLinkedWorkingPlanObjects(action.payload.projectId, action.payload.sortOption).pipe(
+        map((items: WorkpackageSearchItem[]) => new InitWorkingplanAction(items, action.payload.sortOption)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
@@ -290,7 +290,7 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.INIT_WORKINGPLAN),
     switchMap((action: InitWorkingplanAction) => {
       return this.workingPlanService.initWorkingPlan(action.payload.items).pipe(
-        map((workpackages: Workpackage[]) => new InitWorkingplanSuccessAction(workpackages)),
+        map((workpackages: Workpackage[]) => new InitWorkingplanSuccessAction(workpackages, action.payload.sortOption)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);

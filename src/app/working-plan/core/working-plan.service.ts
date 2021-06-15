@@ -141,7 +141,7 @@ export class WorkingPlanService {
   }
 
   getWorkpackageSortOptions(): Observable<SearchConfig> {
-    return this.searchService.getSearchConfigurationFor(null, 'workingplan').pipe(
+    return this.searchService.getSearchConfigurationFor(null, 'allLinkedWorkingPlanObj').pipe(
       getFirstSucceededRemoteDataPayload()
     ) as Observable<SearchConfig>;
   }
@@ -195,12 +195,12 @@ export class WorkingPlanService {
     return environment.workingPlan.workpackageStepsSearchConfigName;
   }
 
-  searchForLinkedWorkingPlanObjects(projectId: string): Observable<WorkpackageSearchItem[]> {
+  searchForLinkedWorkingPlanObjects(projectId: string, sortOption: string = environment.workingPlan.workingPlanPlaceMetadata): Observable<WorkpackageSearchItem[]> {
     const searchConfiguration = environment.workingPlan.allLinkedWorkingPlanObjSearchConfigName;
     const paginationOptions: PaginationComponentOptions = new PaginationComponentOptions();
     paginationOptions.id = 'slw';
     paginationOptions.pageSize = 1000;
-    const sortOptions = new SortOptions(environment.workingPlan.workingPlanPlaceMetadata, SortDirection.ASC);
+    const sortOptions = new SortOptions(sortOption, SortDirection.ASC);
 
     const searchOptions = new PaginatedSearchOptions({
       configuration: searchConfiguration,

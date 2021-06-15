@@ -22,6 +22,7 @@ import {
   WorkpackageActionTypes
 } from './working-plan.actions';
 import { WpActionPackage, WpStepActionPackage } from './working-plan-state.service';
+import { act } from '@ngrx/effects';
 
 export enum ChartDateViewType {
   day = 'day',
@@ -48,6 +49,7 @@ export interface WorkingPlanState {
   processing: boolean;
   moving: boolean;
   chartDateView: ChartDateViewType;
+  sortOption: string;
 }
 
 const workpackageInitialState: WorkingPlanState = {
@@ -57,7 +59,8 @@ const workpackageInitialState: WorkingPlanState = {
   loaded: false,
   processing: false,
   moving: false,
-  chartDateView: ChartDateViewType.month
+  chartDateView: ChartDateViewType.month,
+  sortOption: ''
 };
 
 /**
@@ -290,7 +293,8 @@ function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSucces
   return Object.assign({}, state, {
     workpackages: workpackages,
     processing: false,
-    loaded: true
+    loaded: true,
+    sortOption: action.payload.sortOption
   });
 }
 
