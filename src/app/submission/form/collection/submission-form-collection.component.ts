@@ -10,8 +10,8 @@ import {
   ViewChild
 } from '@angular/core';
 
-import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
-import { find, flatMap, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
+import { find, map, mergeMap } from 'rxjs/operators';
 
 import { Collection } from '../../../core/shared/collection.model';
 import { hasValue, isNotEmpty } from '../../../shared/empty.util';
@@ -24,6 +24,7 @@ import { SubmissionJsonPatchOperationsService } from '../../../core/submission/s
 import { CollectionDataService } from '../../../core/data/collection-data.service';
 import { CollectionDropdownComponent } from '../../../shared/collection-dropdown/collection-dropdown.component';
 import { SectionsService } from '../../sections/sections.service';
+import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { SubmissionDefinitionsConfigService } from '../../../core/config/submission-definitions-config.service';
 import { RequestService } from '../../../core/data/request.service';
 
@@ -187,21 +188,12 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
       this.submissionId,
       'sections',
       'collection').pipe(
-      map((submissionObjects: SubmissionObject[]) => submissionObjects[0]),
-      flatMap((submissionObject: SubmissionObject) => {
-        const collection$ = this.collectionDataService.findByHref(submissionObject._links.collection.href);
-        const submissionDefinition$ = this.submissionDefinitionsService
-          .findByHref(submissionObject._links.submissionDefinition.href + '?projection=full');
-        return combineLatest(collection$, submissionDefinition$).pipe(
-          map(([collection, submissionDefinition]) => {
-            this.requestService.removeByHrefSubstring(submissionObject._links.submissionDefinition.href);
-            return Object.assign({}, submissionObject, {
-              collection: collection.payload,
-              submissionDefinition: submissionDefinition.payload
-            });
-          })
-        );
-      })
+        mergeMap((submissionObject: SubmissionObject[]) => {
+          // retrieve the full submission object with embeds
+          return this.submissionService.retrieveSubmission(submissionObject[0].id).pipe(
+            getFirstSucceededRemoteDataPayload()
+          );
+        })
       ).subscribe((submissionObject: SubmissionObject) => {
         this.selectedCollectionId = event.collection.id;
         this.selectedCollectionName$ = observableOf(event.collection.name);
