@@ -98,10 +98,12 @@ describe('SubmissionSectionUploadComponent test suite', () => {
       data: {
         files: []
       },
-      errors: [],
+      errorsToShow: [],
+      serverValidationErrors: [],
       header: 'submit.progressbar.describe.upload',
       id: 'upload-id',
-      sectionType: SectionsType.Upload
+      sectionType: SectionsType.Upload,
+      sectionVisibility: null
     };
     submissionId = mockSubmissionId;
     collectionId = mockSubmissionCollectionId;

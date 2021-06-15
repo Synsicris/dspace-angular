@@ -1276,6 +1276,21 @@
   // TODO New key - Add a translation
   "alert.close.aria": "Close",
   
+  
+  // "alert.toggle.hide": "Show less",
+  // TODO New key - Add a translation
+  "alert.toggle.hide": "Show less",
+  
+  
+  // "alert.toggle.show": "Show more",
+  // TODO New key - Add a translation
+  "alert.toggle.show": "Show more",
+  
+  
+  // "alert.close.aria": "Close",
+  // TODO New key - Add a translation
+  "alert.close.aria": "Close",
+  
   // "alert.toggle.hide": "Show less",
   // TODO New key - Add a translation
   "alert.toggle.hide": "Show less",
@@ -2586,6 +2601,9 @@
   // TODO New key - Add a translation
   "context-menu.actions.bulk-import.btn": "Import items into collection",
   
+  // "context-menu.actions.claim.btn": "Claim this profile",
+  // TODO New key - Add a translation
+  "context-menu.actions.claim.btn": "Claim this profile",
   
   // "context-menu.actions.export-item.btn": "Export",
   // TODO New key - Add a translation
@@ -2617,14 +2635,26 @@
   "context-menu.actions.label": "Options",
   
   
-  // "context-menu.actions.edit-item.btn.FULL": "Edit item",
+  // "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
   // TODO New key - Add a translation
-  "context-menu.actions.edit-item.btn.FULL": "Edit item",
+  "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
+  
+  // "context-menu.actions.edit-item.btn.OWNER": "Edit",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item.btn.OWNER": "Edit",
   
   
-  // "context-menu.actions.request-correction.btn": "Request correction",
+  // "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
   // TODO New key - Add a translation
-  "context-menu.actions.request-correction.btn": "Request correction",
+  "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
+  
+  // "context-menu.actions.edit-item.btn.INVESTIGATOR": "Edit",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item.btn.INVESTIGATOR": "Edit",
+  
+  // "context-menu.actions.request-correction.btn": "Request a correction",
+  // TODO New key - Add a translation
+  "context-menu.actions.request-correction.btn": "Request a correction",
   
   
   // "context-menu.actions.request-correction.confirm.cancel": "Cancel",
@@ -2671,29 +2701,34 @@
   // TODO New key - Add a translation
   "context-menu.actions.dso-page-edit.ITEM.btn": "Administer",
   
+  // "context-menu.actions.edit-item-relationships.btn.fundings": "Manage Fundings",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item-relationships.btn.fundings": "Manage Fundings",
+  
   // "context-menu.actions.edit-item-relationships.btn.researchoutputs": "Manage Research Outputs",
   // TODO New key - Add a translation
   "context-menu.actions.edit-item-relationships.btn.researchoutputs": "Manage Research Outputs",
   
-  // "context-menu.actions.edit-item-relationships.btn.projects": "Manage Projects",
-  // TODO New key - Add a translation
-  "context-menu.actions.edit-item-relationships.btn.projects": "Manage Projects",
   
-  // "context-menu.actions.edit-item-relationships.btn.organizations": "Manage Organizations",
+  // "context-menu.actions.edit-item-relationships.btn.organizations": "Manage SubOrganizations",
   // TODO New key - Add a translation
-  "context-menu.actions.edit-item-relationships.btn.organizations": "Manage Organizations",
+  "context-menu.actions.edit-item-relationships.btn.organizations": "Manage SubOrganizations",
   
-  // "context-menu.actions.edit-item-relationships.btn.rppublications": "Manage Rppublications",
+  
+  // "context-menu.actions.edit-item-relationships.btn.rppublications": "Manage Researchers Publications",
   // TODO New key - Add a translation
-  "context-menu.actions.edit-item-relationships.btn.rppublications": "Manage Rppublications",
+  "context-menu.actions.edit-item-relationships.btn.rppublications": "Manage Researchers Publications",
+  
   
   // "context-menu.actions.edit-item-relationships.btn.publications": "Manage Publications",
   // TODO New key - Add a translation
   "context-menu.actions.edit-item-relationships.btn.publications": "Manage Publications",
   
-  // "context-menu.actions.edit-item-relationships.btn.rpprojects": "Manage Rpprojects",
+  
+  // "context-menu.actions.edit-item-relationships.btn.rpprojects": "Manage Researchers Projects",
   // TODO New key - Add a translation
-  "context-menu.actions.edit-item-relationships.btn.rpprojects": "Manage Rpprojects",
+  "context-menu.actions.edit-item-relationships.btn.rpprojects": "Manage Researchers Projects",
+  
   
   // "context-menu.actions.edit-item-relationships.btn.people": "Manage People",
   // TODO New key - Add a translation
@@ -2703,7 +2738,41 @@
   // TODO New key - Add a translation
   "context-menu.actions.edit-item-relationships.btn.projects": "Manage Projects",
   
+  // "RELATION.Person.researchoutputs.search.results.head" : "Research Outputs",
+  // TODO New key - Add a translation
+  "RELATION.Person.researchoutputs.search.results.head" : "Research Outputs",
   
+  // "RELATION.Person.projects.search.results.head" : "Projects",
+  // TODO New key - Add a translation
+  "RELATION.Person.projects.search.results.head" : "Projects",
+  
+  // "RELATION.OrgUnit.organizations.search.results.head" : "Organizations",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.organizations.search.results.head" : "Organizations",
+  
+  // "RELATION.OrgUnit.rppublications.search.results.head" : "Researchers Publications",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.rppublications.search.results.head" : "Researchers Publications",
+  
+  // "RELATION.OrgUnit.publications.search.results.head" : "Publications",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.publications.search.results.head" : "Publications",
+  
+  // "RELATION.OrgUnit.rpprojects.search.results.head" : "Researchers Projects",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.rpprojects.search.results.head" : "Researchers Projects",
+  
+  // "RELATION.OrgUnit.projects.search.results.head" : "Projects",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.projects.search.results.head" : "Projects",
+  
+  // "RELATION.Project.researchoutputs.search.results.head" : "Publications",
+  // TODO New key - Add a translation
+  "RELATION.Project.researchoutputs.search.results.head" : "Publications",
+  
+  // "RELATION.OrgUnit.people.search.results.head" : "People",
+  // TODO New key - Add a translation
+  "RELATION.OrgUnit.people.search.results.head" : "People",
   
   // "datafile.listelement.badge": "Data file",
   "datafile.listelement.badge": "Datendatei",
@@ -2939,6 +3008,22 @@
   "dso.name.untitled": "Untitled",
   
   
+  // "dso-selector.claim.item.head": "Profile tips",
+  // TODO New key - Add a translation
+  "dso-selector.claim.item.head": "Profile tips",
+  
+  // "dso-selector.claim.item.body": "These are existing profiles that may be related to you. If you recognize yourself in one of these profiles, select it and on the detail page, among the options, choose to claim it. Otherwise you can create a new profile from scratch using the button below.",
+  // TODO New key - Add a translation
+  "dso-selector.claim.item.body": "These are existing profiles that may be related to you. If you recognize yourself in one of these profiles, select it and on the detail page, among the options, choose to claim it. Otherwise you can create a new profile from scratch using the button below.",
+  
+  // "dso-selector.claim.item.create-from-scratch": "Create a new one",
+  // TODO New key - Add a translation
+  "dso-selector.claim.item.create-from-scratch": "Create a new one",
+  
+  // "dso-selector.claim.item.not-mine-label": "None of these are mine",
+  // TODO New key - Add a translation
+  "dso-selector.claim.item.not-mine-label": "None of these are mine",
+  
   // "dso-selector.create.collection.head": "New collection",
   "dso-selector.create.collection.head": "Neue Sammlung",
   
@@ -2985,6 +3070,9 @@
   // "dso-selector.edit.item.head": "Edit item",
   "dso-selector.edit.item.head": "Ressource bearbeiten",
   
+  // "dso-selector.error.title": "An error occurred searching for a {{ type }}",
+  // TODO New key - Add a translation
+  "dso-selector.error.title": "An error occurred searching for a {{ type }}",
   
   // "dso-selector.export-metadata.dspaceobject.head": "Export metadata from",
   // TODO New key - Add a translation
@@ -3130,70 +3218,96 @@
   // "error.validation.filerequired": "The file upload is mandatory",
   "error.validation.filerequired": "Das Hochladen einer Datei ist erforderlich.",
   
+  // "error.validation.fundingInvestigatorOrLeadOrganizationRequired" : "At least one investigator or one lead organization is required",
+  // TODO New key - Add a translation
+  "error.validation.fundingInvestigatorOrLeadOrganizationRequired" : "At least one investigator or one lead organization is required",
   
   
   // "exploitation-plan.info.text": "Info text for the exploitation Plan",
   // TODO New key - Add a translation
   "exploitation-plan.info.text": "Info text for the exploitation Plan",
   
+  
   // "exploitation-plan.page.title": "Exploitation Plan",
   // TODO New key - Add a translation
   "exploitation-plan.page.title": "Exploitation Plan",
+  
   
   // "exploitation-plan.breadcrumbs": "Exploitation Plan",
   // TODO New key - Add a translation
   "exploitation-plan.breadcrumbs": "Exploitation Plan",
   
+  
   // "exploitation-plan.step_type_1.info.text": "Info text for section 1",
   // TODO New key - Add a translation
   "exploitation-plan.step_type_1.info.text": "Info text for section 1",
+  
   
   // "exploitation-plan.step_type_2.info.text": "Info text for section 2",
   // TODO New key - Add a translation
   "exploitation-plan.step_type_2.info.text": "Info text for section 2",
   
+  
   // "exploitation-plan.step_type_3.info.text": "Info text for section 3",
   // TODO New key - Add a translation
   "exploitation-plan.step_type_3.info.text": "Info text for section 3",
+  
   
   // "exploitation-plan.step_type_4.info.text": "Info text for section 4",
   // TODO New key - Add a translation
   "exploitation-plan.step_type_4.info.text": "Info text for section 4",
   
-  // "exploitation-plan.step_type_1.title": "Intellectual property rights",
-  // TODO New key - Add a translation
-  "exploitation-plan.step_type_1.title": "Intellectual property rights",
   
-  // "exploitation-plan.step_type_2.title": "Economic prospects",
+  // "exploitation-plan.step_type_1.title": "1. Intellectual property rights",
   // TODO New key - Add a translation
-  "exploitation-plan.step_type_2.title": "Economic prospects",
+  "exploitation-plan.step_type_1.title": "1. Intellectual property rights",
   
-  // "exploitation-plan.step_type_3.title": "Scientific and technical prospects",
-  // TODO New key - Add a translation
-  "exploitation-plan.step_type_3.title": "Scientific and technical prospects",
   
-  // "exploitation-plan.step_type_4.title": "Connectivity",
+  // "exploitation-plan.step_type_2.title": "2. Economic prospects",
   // TODO New key - Add a translation
-  "exploitation-plan.step_type_4.title": "Connectivity",
+  "exploitation-plan.step_type_2.title": "2. Economic prospects",
+  
+  
+  // "exploitation-plan.step_type_3.title": "3. Scientific and technical prospects",
+  // TODO New key - Add a translation
+  "exploitation-plan.step_type_3.title": "3. Scientific and technical prospects",
+  
+  
+  // "exploitation-plan.step_type_4.title": "4. Connectivity",
+  // TODO New key - Add a translation
+  "exploitation-plan.step_type_4.title": "4. Connectivity",
+  
   
   // "exploitation-plan.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
   // TODO New key - Add a translation
   "exploitation-plan.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
   
+  
   // "exploitation-plan.task.create.error": "There was an issue when creating the new item, please try again later.",
   // TODO New key - Add a translation
   "exploitation-plan.task.create.error": "There was an issue when creating the new item, please try again later.",
+  
   
   // "exploitation-plan.task.create.success": "New item has been created successfully.",
   // TODO New key - Add a translation
   "exploitation-plan.task.create.success": "New item has been created successfully.",
   
   
-  
   // "explore.browse-section.title": "Browse",
   // TODO New key - Add a translation
   "explore.browse-section.title": "Browse",
   
+  // "explore.counters-section.rprofiles" : "People",
+  // TODO New key - Add a translation
+  "explore.counters-section.rprofiles" : "People",
+  
+  // "explore.counters-section.publications" : "Research outputs",
+  // TODO New key - Add a translation
+  "explore.counters-section.publications" : "Research outputs",
+  
+  // "explore.counters-section.project_funding" : "Projects",
+  // TODO New key - Add a translation
+  "explore.counters-section.project_funding" : "Projects",
   
   // "explore.facet-section.title": "Discover",
   // TODO New key - Add a translation
@@ -3214,6 +3328,17 @@
   // TODO New key - Add a translation
   "explore.index.birthDate": "Birthday",
   
+  // "explore.index.metric.view" : "Most viewed",
+  // TODO New key - Add a translation
+  "explore.index.metric.view" : "Most viewed",
+  
+  // "explore.index.metric.download" : "Most downloaded",
+  // TODO New key - Add a translation
+  "explore.index.metric.download" : "Most downloaded",
+  
+  // "explore.index.metric.scopus.citation" : "Most cited",
+  // TODO New key - Add a translation
+  "explore.index.metric.scopus.citation" : "Most cited",
   
   // "explore.index.chart.pie.itemtype_filter": "Item Type",
   // TODO New key - Add a translation
@@ -3235,9 +3360,9 @@
   "explore.index.dateissued": "Date issued",
   
   
-  // "explore.index.dc.date.accessioned": "Date accesioned",
+  // "explore.index.dc.date.accessioned": "Recent Addition",
   // TODO New key - Add a translation
-  "explore.index.dc.date.accessioned": "Date accesioned",
+  "explore.index.dc.date.accessioned": "Recent Addition",
   
   
   // "explore.index.dc.title": "Title",
@@ -3560,16 +3685,31 @@
   "file-section.error.header": "Error obtaining files for this item",
   
   
+  // "footer.built-with":"Built with",
+  // TODO New key - Add a translation
+  "footer.built-with":"Built with",
+  
   // "footer.copyright": "copyright © 2002-{{ year }}",
   "footer.copyright": "Copyright © 2002-{{ year }}",
   
+  // "footer.extension-by": "- Extension maintained and optimized by",
+  // TODO New key - Add a translation
+  "footer.extension-by": "- Extension maintained and optimized by",
+  
+  // "footer.link.4science": "4Science",
+  // TODO New key - Add a translation
+  "footer.link.4science": "4Science",
   
   // "footer.link.dspace": "DSpace software",
   "footer.link.dspace": "DSpace Software",
   
   
-  // "footer.link.duraspace": "DuraSpace",
-  "footer.link.duraspace": "DuraSpace",
+  // "footer.link.dspace-cris": "DSpace-CRIS software",
+  // TODO New key - Add a translation
+  "footer.link.dspace-cris": "DSpace-CRIS software",
+  
+  // "footer.link.lyrasis": "LYRASIS",
+  "footer.link.lyrasis": "LYRASIS",
   
   
   // "footer.link.cookies": "Cookie settings",
@@ -3755,6 +3895,9 @@
   // TODO New key - Add a translation
   "form.external.source-help": "Click here to create a new item from this field",
   
+  // "form.external.source.group.btn": "Create entity",
+  // TODO New key - Add a translation
+  "form.external.source.group.btn": "Create entity",
   
   // "form.external.source.group-help": "Click here to create a new item from this group of fields",
   // TODO New key - Add a translation
@@ -3765,20 +3908,19 @@
   "form.first-name": "Vorname",
   
   
-  // "form.group-collapse": "Collapse",
-  "form.group-collapse": "Zusammenklappen",
+  // "form.group.add": "Add",
+  // TODO New key - Add a translation
+  "form.group.add": "Add",
   
   
-  // "form.group-collapse-help": "Click here to collapse",
-  "form.group-collapse-help": "Zum Zusammenfalten bitte hier klicken",
+  // "form.group.close": "Close",
+  // TODO New key - Add a translation
+  "form.group.close": "Close",
   
   
-  // "form.group-expand": "Expand",
-  "form.group-expand": "Auffalten",
-  
-  
-  // "form.group-expand-help": "Click here to expand and add more elements",
-  "form.group-expand-help": "Zum Ausklappten und Hinzufügen von mehr Elementen, klicken Sie hier",
+  // "form.group.set": "Set",
+  // TODO New key - Add a translation
+  "form.group.set": "Set",
   
   
   // "form.last-name": "Last name",
@@ -3814,6 +3956,17 @@
   // TODO New key - Add a translation
   "form.other-information.data-oairecerif_editor_affiliation": "Affiliation",
   
+  // "form.other-information.data-person_identifier_orcid": "ORCID iD",
+  // TODO New key - Add a translation
+  "form.other-information.data-person_identifier_orcid": "ORCID iD",
+  
+  // "form.other-information.institution-affiliation-name": "Affiliation(s)",
+  // TODO New key - Add a translation
+  "form.other-information.institution-affiliation-name": "Affiliation(s)",
+  
+  // "form.other-information.data-dc_relation_grantno": "Grant Number",
+  // TODO New key - Add a translation
+  "form.other-information.data-dc_relation_grantno": "Grant Number",
   
   // "form.other-information.not-available": "Not available",
   // TODO New key - Add a translation
@@ -3854,6 +4007,10 @@
   // "funding.listelement.badge": "Funding",
   // TODO New key - Add a translation
   "funding.listelement.badge": "Funding",
+  
+  // "funding.page.titleprefix" : "Funding:",
+  // TODO New key - Add a translation
+  "funding.page.titleprefix" : "Funding:",
   
   
   // "home.description": "",
@@ -3989,6 +4146,11 @@
   // "impact-pathway.remove.item.title": "Remove item",
   // TODO New key - Add a translation
   "impact-pathway.remove.item.title": "Remove item",
+  
+  
+  // "impact-pathway.remove.processing": "Deleting",
+  // TODO New key - Add a translation
+  "impact-pathway.remove.processing": "Deleting",
   
   
   // "impact-pathway.remove.title": "Delete impact pathway",
@@ -4402,9 +4564,9 @@
   "item.edit.breadcrumbs": "Ressource bearbeiten",
   
   
-  // "item.edit.tabs.disabled.tooltip": "You don't have permission to access this tab",
+  // "item.edit.tabs.disabled.tooltip": "You're not authorized to access this tab",
   // TODO New key - Add a translation
-  "item.edit.tabs.disabled.tooltip": "You don't have permission to access this tab",
+  "item.edit.tabs.disabled.tooltip": "You're not authorized to access this tab",
   
   
   // "item.edit.tabs.mapper.head": "Collection Mapper",
@@ -4878,6 +5040,9 @@
   // "item.edit.tabs.status.buttons.reinstate.label": "Reinstate item into the repository",
   "item.edit.tabs.status.buttons.reinstate.label": "Ressource wieder ins Repositorium einsetzen",
   
+  // "item.edit.tabs.status.buttons.unauthorized": "You're not authorized to perform this action",
+  // TODO New key - Add a translation
+  "item.edit.tabs.status.buttons.unauthorized": "You're not authorized to perform this action",
   
   // "item.edit.tabs.status.buttons.withdraw.button": "Withdraw...",
   "item.edit.tabs.status.buttons.withdraw.button": "Zurückziehen...",
@@ -4886,6 +5051,13 @@
   // "item.edit.tabs.status.buttons.withdraw.label": "Withdraw item from the repository",
   "item.edit.tabs.status.buttons.withdraw.label": "Ressource aus dem Repositorium zurückziehen",
   
+  // "item.edit.tabs.status.buttons.unlinkOrcid.button": "Disconnect...",
+  // TODO New key - Add a translation
+  "item.edit.tabs.status.buttons.unlinkOrcid.button": "Disconnect...",
+  
+  // "item.edit.tabs.status.buttons.unlinkOrcid.label": "Disconnect from ORCID",
+  // TODO New key - Add a translation
+  "item.edit.tabs.status.buttons.unlinkOrcid.label": "Disconnect from ORCID",
   
   // "item.edit.tabs.status.description": "Welcome to the item management page. From here you can withdraw, reinstate, move or delete the item. You may also update or add new metadata / bitstreams on the other tabs.",
   "item.edit.tabs.status.description": "Ressource bearbeiten. Von hier können Sie Ressourcen zurückziehen, wiedereinsetzen, verschieben oder Löschen. Des weiteren können die Metadaten und die zugehörigen Dateien bearbeitet werden.",
@@ -4939,6 +5111,40 @@
   "item.edit.tabs.view.title": "Ressource bearbeiten -  Ansicht",
   
   
+  
+  // "item.edit.unlink-orcid.cancel": "Cancel",
+  // TODO New key - Add a translation
+  "item.edit.unlink-orcid.cancel": "Cancel",
+  
+  // "item.edit.unlink-orcid.description": "From here you can disconnect the given profile item from the linked ORCID account, if any.",
+  // TODO New key - Add a translation
+  "item.edit.unlink-orcid.description": "From here you can disconnect the given profile item from the linked ORCID account, if any.",
+  
+  // "item.edit.unlink-orcid.head": "Disconnect from ORCID",
+  // TODO New key - Add a translation
+  "item.edit.unlink-orcid.head": "Disconnect from ORCID",
+  
+  // "item.edit.unlink-orcid.not-linked-to-orcid" : "The operation cannot be completed because the given item is not a profile linked to ORCID",
+  // TODO New key - Add a translation
+  "item.edit.unlink-orcid.not-linked-to-orcid" : "The operation cannot be completed because the given item is not a profile linked to ORCID",
+  
+  // "item.edit.unlink-orcid.unlink": "Disconnect",
+  // TODO New key - Add a translation
+  "item.edit.unlink-orcid.unlink": "Disconnect",
+  
+  // "item.edit.unlink-orcid.unlink.success": "The disconnection between the profile and the ORCID registry was successful",
+  // TODO New key - Add a translation
+  "item.edit.unlink-orcid.unlink.success": "The disconnection between the profile and the ORCID registry was successful",
+  
+  // "item.edit.unlink-orcid.unlink.error" :"An error occurred while disconnecting between the profile and the ORCID registry. Try again",
+  // TODO New key - Add a translation
+  "item.edit.unlink-orcid.unlink.error" :"An error occurred while disconnecting between the profile and the ORCID registry. Try again",
+  
+  // "item.edit.unlink-orcid.processing": "Processing",
+  // TODO New key - Add a translation
+  "item.edit.unlink-orcid.processing": "Processing",
+  
+  
   // "item.edit.withdraw.cancel": "Cancel",
   "item.edit.withdraw.cancel": "Abbrechen",
   
@@ -4971,12 +5177,6 @@
   // "item.page.description": "Description",
   // TODO New key - Add a translation
   "item.page.description": "Description",
-  
-  
-  // "item.page.edit": "Edit this item",
-  // TODO New key - Add a translation
-  "item.page.edit": "Edit this item",
-  
   
   // "item.page.journal-issn": "Journal ISSN",
   // TODO New key - Add a translation
@@ -5091,9 +5291,22 @@
   "item.page.metric.deltaPeriod2": "Last Month",
   
   
-  // "item.page.metric.label.altmetrics": "Altmetrics",
+  // "item.page.metric.details": "Details",
   // TODO New key - Add a translation
-  "item.page.metric.label.altmetrics": "Altmetrics",
+  "item.page.metric.details": "Details",
+  
+  // "item.page.metric.label.altmetrics": "Altmetrics©",
+  // TODO New key - Add a translation
+  "item.page.metric.label.altmetrics": "Altmetrics©",
+  
+  
+  // "item.page.metric.label.download": "Downloads",
+  // TODO New key - Add a translation
+  "item.page.metric.label.download": "Downloads",
+  
+  // "item.page.metric.label.view": "Views",
+  // TODO New key - Add a translation
+  "item.page.metric.label.view": "Views",
   
   
   // "item.page.metric.label.google-scholar": "Google Scholar",
@@ -5101,44 +5314,44 @@
   "item.page.metric.label.google-scholar": "Google Scholar",
   
   
-  // "item.page.metric.label.scopusCitation": "Scopus citations",
+  // "item.page.metric.label.scopusCitation": "Scopus© citations",
   // TODO New key - Add a translation
-  "item.page.metric.label.scopusCitation": "Scopus citations",
+  "item.page.metric.label.scopusCitation": "Scopus© citations",
   
   
-  // "item.page.metric.label.scopus-author-h-index": "H-index",
+  // "item.page.metric.label.scopus-author-h-index": "Scopus© H-Index",
   // TODO New key - Add a translation
-  "item.page.metric.label.scopus-author-h-index": "H-index",
+  "item.page.metric.label.scopus-author-h-index": "Scopus© H-Index",
   
   
-  // "item.page.metric.label.scopus-author-coauthor-count": "Coauthor",
+  // "item.page.metric.label.scopus-author-coauthor-count": "Scopus© Coauthor",
   // TODO New key - Add a translation
-  "item.page.metric.label.scopus-author-coauthor-count": "Coauthor",
+  "item.page.metric.label.scopus-author-coauthor-count": "Scopus© Coauthor",
   
   
-  // "item.page.metric.label.scopus-author-cited-count": "Cited By",
+  // "item.page.metric.label.scopus-author-cited-count": "Scopus© Cited By",
   // TODO New key - Add a translation
-  "item.page.metric.label.scopus-author-cited-count": "Cited By",
+  "item.page.metric.label.scopus-author-cited-count": "Scopus© Cited By",
   
   
-  // "item.page.metric.label.scopus-author-citation-count": "Author Citations",
+  // "item.page.metric.label.scopus-author-citation-count": "Scopus© Citations",
   // TODO New key - Add a translation
-  "item.page.metric.label.scopus-author-citation-count": "Author Citations",
+  "item.page.metric.label.scopus-author-citation-count": "Scopus© Citations",
   
   
-  // "item.page.metric.label.scopus-author-document-count": "Author Documents",
+  // "item.page.metric.label.scopus-author-document-count": "Scopus© Documents",
   // TODO New key - Add a translation
-  "item.page.metric.label.scopus-author-document-count": "Author Documents",
+  "item.page.metric.label.scopus-author-document-count": "Scopus© Documents",
   
   
-  // "item.page.metric.label.wosCitation": "WOS citations",
+  // "item.page.metric.label.wosCitation": "Web of Science© citations",
   // TODO New key - Add a translation
-  "item.page.metric.label.wosCitation": "WOS citations",
+  "item.page.metric.label.wosCitation": "Web of Science© citations",
   
   
-  // "item.page.metric.label.wosPersonCitation": "WOS citations",
+  // "item.page.metric.label.wosPersonCitation": "Web of Science© citations",
   // TODO New key - Add a translation
-  "item.page.metric.label.wosPersonCitation": "WOS citations",
+  "item.page.metric.label.wosPersonCitation": "Web of Science© citations",
   
   
   // "item.page.person.search.title": "Articles by this author",
@@ -5196,16 +5409,37 @@
   // TODO New key - Add a translation
   "item.page.filesection.license.bundle": "License bundle",
   
+  // "item.preview.dc.description" : "Summary",
+  // TODO New key - Add a translation
+  "item.preview.dc.description" : "Summary",
   
   // "item.preview.dc.description.tableOfContents": "Table of Contents",
   // TODO New key - Add a translation
   "item.preview.dc.description.tableOfContents": "Table of Contents",
   
+  // "item.preview.dc.identifier.arxiv": "arXiv ID",
+  // TODO New key - Add a translation
+  "item.preview.dc.identifier.arxiv": "arXiv ID",
+  
+  // "item.preview.dc.identifier.patentno": "Patent Number",
+  // TODO New key - Add a translation
+  "item.preview.dc.identifier.patentno": "Patent Number",
+  
+  // "item.preview.dc.subject.ipc": "Subject IPC",
+  // TODO New key - Add a translation
+  "item.preview.dc.subject.ipc": "Subject IPC",
+  
+  // "item.preview.dcterms.dateSubmitted": "Registration Date",
+  // TODO New key - Add a translation
+  "item.preview.dcterms.dateSubmitted": "Registration Date",
   
   // "item.preview.dc.identifier.doi": "DOI",
   // TODO New key - Add a translation
   "item.preview.dc.identifier.doi": "DOI",
   
+  // "item.preview.dc.identifier.isi" : "ISI",
+  // TODO New key - Add a translation
+  "item.preview.dc.identifier.isi" : "ISI",
   
   // "item.preview.dc.identifier.issn": "ISSN",
   // TODO New key - Add a translation
@@ -5356,6 +5590,17 @@
   // TODO New key - Add a translation
   "item.preview.dc.relation.issn": "ISSN",
   
+  // "item.preview.oaire.citation.endPage" : "End Page",
+  // TODO New key - Add a translation
+  "item.preview.oaire.citation.endPage" : "End Page",
+  
+  // "item.preview.oaire.citation.edition": "Edition",
+  // TODO New key - Add a translation
+  "item.preview.oaire.citation.edition": "Edition",
+  
+  // "item.preview.oaire.citation.startPage" : "Start Page",
+  // TODO New key - Add a translation
+  "item.preview.oaire.citation.startPage" : "Start Page",
   
   // "item.preview.oaire.citation.issue": "Issue",
   // TODO New key - Add a translation
@@ -5366,11 +5611,33 @@
   // TODO New key - Add a translation
   "item.preview.oaire.citation.volume": "Volume",
   
-  
-  // "item.preview.oairecerif.affiliation.orgunit": "Affiliation",
+  // "item.preview.oairecerif.acronym" : "Acronym",
   // TODO New key - Add a translation
-  "item.preview.oairecerif.affiliation.orgunit": "Affiliation",
+  "item.preview.oairecerif.acronym" : "Acronym",
   
+  // "item.preview.oairecerif.affiliation.orgunit" : "Affiliation",
+  // TODO New key - Add a translation
+  "item.preview.oairecerif.affiliation.orgunit" : "Affiliation",
+  
+  // "item.preview.oairecerif.funder" : "Funder",
+  // TODO New key - Add a translation
+  "item.preview.oairecerif.funder" : "Funder",
+  
+  // "item.preview.oairecerif.funding.identifier" : "Grant Number / Funding identifier",
+  // TODO New key - Add a translation
+  "item.preview.oairecerif.funding.identifier" : "Grant Number / Funding identifier",
+  
+  // "item.preview.oairecerif.funding.endDate" : "End Date",
+  // TODO New key - Add a translation
+  "item.preview.oairecerif.funding.endDate" : "End Date",
+  
+  // "item.preview.oairecerif.funding.startDate" : "Start Date",
+  // TODO New key - Add a translation
+  "item.preview.oairecerif.funding.startDate" : "Start Date",
+  
+  // "item.preview.oairecerif.oamandate" : "OA Mandate",
+  // TODO New key - Add a translation
+  "item.preview.oairecerif.oamandate" : "OA Mandate",
   
   // "item.preview.person.familyName": "Surname: ",
   // TODO New key - Add a translation
@@ -5386,6 +5653,9 @@
   // TODO New key - Add a translation
   "item.preview.person.identifier.orcid": "ORCID: ",
   
+  // "item.preview.person.identifier.rid": "Researcher ID:",
+  // TODO New key - Add a translation
+  "item.preview.person.identifier.rid": "Researcher ID:",
   
   // "item.preview.person.identifier.scopus-author-id": "Scopus Author Id",
   // TODO New key - Add a translation
@@ -5467,9 +5737,9 @@
   "item-export.modal-launcher.single.btn": "Export",
   
   
-  // "item-export.modal-launcher.multiple.btn": "Bulk Export",
+  // "item-export.modal-launcher.multiple.btn": "Export",
   // TODO New key - Add a translation
-  "item-export.modal-launcher.multiple.btn": "Bulk Export",
+  "item-export.modal-launcher.multiple.btn": "Export",
   
   
   // "item-export.alert.single": "Export item",
@@ -5511,6 +5781,9 @@
   // TODO New key - Add a translation
   "item-export.form.btn.cancel": "Cancel",
   
+  // "item-export.process.title": "Bulk export item",
+  // TODO New key - Add a translation
+  "item-export.process.title": "Bulk export item",
   
   // "journal.listelement.badge": "Journal",
   "journal.listelement.badge": "Zeitschrift",
@@ -5745,6 +6018,35 @@
   
   // "logout.title": "Logout",
   "logout.title": "Abmelden",
+  
+  
+  // "manage.relationships.select": "Select",
+  // TODO New key - Add a translation
+  "manage.relationships.select": "Select",
+  
+  // "manage.relationships.hide": "Hide",
+  // TODO New key - Add a translation
+  "manage.relationships.hide": "Hide",
+  
+  // "manage.relationships.unselect": "Unselect",
+  // TODO New key - Add a translation
+  "manage.relationships.unselect": "Unselect",
+  
+  // "manage.relationships.unhide": "Unhide",
+  // TODO New key - Add a translation
+  "manage.relationships.unhide": "Unhide",
+  
+  // "manage.relationships.title" : "Selected items",
+  // TODO New key - Add a translation
+  "manage.relationships.title" : "Selected items",
+  
+  // "manage.relationships.no.relationships.found" : "Empty selection",
+  // TODO New key - Add a translation
+  "manage.relationships.no.relationships.found" : "Empty selection",
+  
+  // "manage.relationships.no.data.found" : "No data found",
+  // TODO New key - Add a translation
+  "manage.relationships.no.data.found" : "No data found",
   
   
   // "menu.header.admin": "Management",
@@ -6089,10 +6391,46 @@
   "menu.section.workflow": "Administer Workflow",
   
   
+  // "metric-badges.scopusCitation": "Scopus© Citations",
+  // TODO New key - Add a translation
+  "metric-badges.scopusCitation": "Scopus© Citations",
+  
+  // "metric-badges.scopus-author-citation-count": "Scopus© Citations",
+  // TODO New key - Add a translation
+  "metric-badges.scopus-author-citation-count": "Scopus© Citations",
+  
+  // "metric-badges.scopus-author-coauthor-count": "<span class=\"fa fa-users\" title=\"Scopus© Coauthors\">&nbsp;</span>",
+  // TODO New key - Add a translation
+  "metric-badges.scopus-author-coauthor-count": "<span class=\"fa fa-users\" title=\"Scopus© Coauthors\">&nbsp;</span>",
+  
+  // "metric-badges.scopus-author-document-count": "<span class=\"fa fa-book-open\" title=\"Scopus© Documents\">&nbsp;</span>",
+  // TODO New key - Add a translation
+  "metric-badges.scopus-author-document-count": "<span class=\"fa fa-book-open\" title=\"Scopus© Documents\">&nbsp;</span>",
+  
+  // "metric-badges.scopus-author-h-index": "Scopus© H-Index",
+  // TODO New key - Add a translation
+  "metric-badges.scopus-author-h-index": "Scopus© H-Index",
+  
+  // "metric-badges.scopus-author-cited-count": "Scopus© Cited By",
+  // TODO New key - Add a translation
+  "metric-badges.scopus-author-cited-count": "Scopus© Cited By",
+  
+  // "metric-badges.wosCitation": "WOS© Citations",
+  // TODO New key - Add a translation
+  "metric-badges.wosCitation": "WOS© Citations",
+  
+  // "metric-badges.view": "<span class=\"fa fa-eye\" title=\"View\">&nbsp;</span>",
+  // TODO New key - Add a translation
+  "metric-badges.view": "<span class=\"fa fa-eye\" title=\"View\">&nbsp;</span>",
+  
+  // "metric-badges.download": "<span class=\"fa fa-download\" title=\"Downloads\">&nbsp;</span>",
+  // TODO New key - Add a translation
+  "metric-badges.download": "<span class=\"fa fa-download\" title=\"Downloads\">&nbsp;</span>",
+  
+  
   // "mydspace.breadcrumbs": "All items",
   // TODO New key - Add a translation
   "mydspace.breadcrumbs": "All items",
-  
   
   // "mydspace.description": "",
   "mydspace.description": "",
@@ -6771,6 +7109,9 @@
   // TODO New key - Add a translation
   "reciter.suggestion.source.oaire": "OpenAIRE Graph",
   
+  // "reciter.suggestion.source.orcidWorks": "ORCID registry",
+  // TODO New key - Add a translation
+  "reciter.suggestion.source.orcidWorks": "ORCID registry",
   
   // "reciter.suggestion.from.source": "from the",
   // TODO New key - Add a translation
@@ -6897,11 +7238,25 @@
   // TODO New key - Add a translation
   "person.page.orcid.granted-authorizations": "Granted authorizations",
   
+  // "person.page.orcid.grant-authorizations" : "Grant authorizations",
+  // TODO New key - Add a translation
+  "person.page.orcid.grant-authorizations" : "Grant authorizations",
   
   // "person.page.orcid.link": "Connect to ORCID ID",
   // TODO New key - Add a translation
   "person.page.orcid.link": "Connect to ORCID ID",
   
+  // "person.page.orcid.orcid-not-linked-message": "The ORCID iD of this profile ({{ orcid }}) has not yet been connected to an account on the ORCID registry or the connection is expired.",
+  // TODO New key - Add a translation
+  "person.page.orcid.orcid-not-linked-message": "The ORCID iD of this profile ({{ orcid }}) has not yet been connected to an account on the ORCID registry or the connection is expired.",
+  
+  // "person.page.orcid.unlink": "Disconnect from ORCID",
+  // TODO New key - Add a translation
+  "person.page.orcid.unlink": "Disconnect from ORCID",
+  
+  // "person.page.orcid.unlink.processing": "Processing...",
+  // TODO New key - Add a translation
+  "person.page.orcid.unlink.processing": "Processing...",
   
   // "person.page.orcid.missing-authorizations": "Missing authorizations",
   // TODO New key - Add a translation
@@ -6918,9 +7273,9 @@
   "person.page.orcid.no-missing-authorizations-message": "Great! This box is empty, so you have granted all access rights to use all functions offers by your institution.",
   
   
-  // "person.page.orcid.no-orcid-message": "No ORCID iD associated yet",
+  // "person.page.orcid.no-orcid-message": "No ORCID iD associated yet. By clicking on the button below it is possible to link this profile with an ORCID account.",
   // TODO New key - Add a translation
-  "person.page.orcid.no-orcid-message": "No ORCID iD associated yet",
+  "person.page.orcid.no-orcid-message": "No ORCID iD associated yet. By clicking on the button below it is possible to link this profile with an ORCID account.",
   
   
   // "person.page.orcid.profile-preferences": "Profile preferences",
@@ -6928,9 +7283,9 @@
   "person.page.orcid.profile-preferences": "Profile preferences",
   
   
-  // "person.page.orcid.project-preferences": "Project preferences",
+  // "person.page.orcid.funding-preferences": "Funding preferences",
   // TODO New key - Add a translation
-  "person.page.orcid.project-preferences": "Project preferences",
+  "person.page.orcid.funding-preferences": "Funding preferences",
   
   
   // "person.page.orcid.publications-preferences": "Publication preferences",
@@ -6943,9 +7298,9 @@
   "person.page.orcid.remove-orcid-message": "If you need to remove your ORCID, please contact the repository administrator",
   
   
-  // "person.page.orcid.save.preference.changes": "Save changes",
+  // "person.page.orcid.save.preference.changes": "Update settings",
   // TODO New key - Add a translation
-  "person.page.orcid.save.preference.changes": "Save changes",
+  "person.page.orcid.save.preference.changes": "Update settings",
   
   
   // "person.page.orcid.sync-profile.affiliation": "Affiliation",
@@ -6968,24 +7323,24 @@
   "person.page.orcid.sync-profile.identifiers": "Identifiers",
   
   
-  // "person.page.orcid.sync-projects.all": "All projects",
+  // "person.page.orcid.sync-fundings.all": "All fundings",
   // TODO New key - Add a translation
-  "person.page.orcid.sync-projects.all": "All projects",
+  "person.page.orcid.sync-fundings.all": "All fundings",
   
   
-  // "person.page.orcid.sync-projects.mine": "My projects",
+  // "person.page.orcid.sync-fundings.mine": "My fundings",
   // TODO New key - Add a translation
-  "person.page.orcid.sync-projects.mine": "My projects",
+  "person.page.orcid.sync-fundings.mine": "My fundings",
   
   
-  // "person.page.orcid.sync-projects.my-selected": "Selected projects",
+  // "person.page.orcid.sync-fundings.my_selected": "Selected fundings",
   // TODO New key - Add a translation
-  "person.page.orcid.sync-projects.my-selected": "Selected projects",
+  "person.page.orcid.sync-fundings.my_selected": "Selected fundings",
   
   
-  // "person.page.orcid.sync-projects.disabled": "Disabled",
+  // "person.page.orcid.sync-fundings.disabled": "Disabled",
   // TODO New key - Add a translation
-  "person.page.orcid.sync-projects.disabled": "Disabled",
+  "person.page.orcid.sync-fundings.disabled": "Disabled",
   
   
   // "person.page.orcid.sync-publications.all": "All publications",
@@ -6998,9 +7353,9 @@
   "person.page.orcid.sync-publications.mine": "My publications",
   
   
-  // "person.page.orcid.sync-publications.my-selected": "Selected publications",
+  // "person.page.orcid.sync-publications.my_selected": "Selected publications",
   // TODO New key - Add a translation
-  "person.page.orcid.sync-publications.my-selected": "Selected publications",
+  "person.page.orcid.sync-publications.my_selected": "Selected publications",
   
   
   // "person.page.orcid.sync-publications.disabled": "Disabled",
@@ -7008,19 +7363,19 @@
   "person.page.orcid.sync-publications.disabled": "Disabled",
   
   
-  // "person.page.orcid.sync-queue.delete": "Delete",
+  // "person.page.orcid.sync-queue.discard" : "Discard the change and do not synchronize with the ORCID registry",
   // TODO New key - Add a translation
-  "person.page.orcid.sync-queue.delete": "Delete",
+  "person.page.orcid.sync-queue.discard" : "Discard the change and do not synchronize with the ORCID registry",
   
   
-  // "person.page.orcid.sync-queue.delete.error": "The deletion of the ORCID queue record failed",
+  // "person.page.orcid.sync-queue.discard.error": "The discarding of the ORCID queue record failed",
   // TODO New key - Add a translation
-  "person.page.orcid.sync-queue.delete.error": "The deletion of the ORCID queue record failed",
+  "person.page.orcid.sync-queue.discard.error": "The discarding of the ORCID queue record failed",
   
   
-  // "person.page.orcid.sync-queue.delete.success": "The ORCID queue record have been deleted successfully",
+  // "person.page.orcid.sync-queue.discard.success": "The ORCID queue record have been discarded successfully",
   // TODO New key - Add a translation
-  "person.page.orcid.sync-queue.delete.success": "The ORCID queue record have been deleted successfully",
+  "person.page.orcid.sync-queue.discard.success": "The ORCID queue record have been discarded successfully",
   
   
   // "person.page.orcid.sync-queue.empty-message": "The ORCID queue registry is empty",
@@ -7028,14 +7383,110 @@
   "person.page.orcid.sync-queue.empty-message": "The ORCID queue registry is empty",
   
   
-  // "person.page.orcid.sync-queue.entity-name": "Name",
+  // "person.page.orcid.sync-queue.description" : "Description",
   // TODO New key - Add a translation
-  "person.page.orcid.sync-queue.entity-name": "Name",
+  "person.page.orcid.sync-queue.description" : "Description",
+  
+  // "person.page.orcid.sync-queue.description.affiliation": "Affiliations",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.description.affiliation": "Affiliations",
+  
+  // "person.page.orcid.sync-queue.description.country": "Country",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.description.country": "Country",
+  
+  // "person.page.orcid.sync-queue.description.education": "Educations",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.description.education": "Educations",
+  
+  // "person.page.orcid.sync-queue.description.external_ids": "External ids",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.description.external_ids": "External ids",
+  
+  // "person.page.orcid.sync-queue.description.other_names": "Other names",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.description.other_names": "Other names",
+  
+  // "person.page.orcid.sync-queue.description.qualification": "Qualifications",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.description.qualification": "Qualifications",
+  
+  // "person.page.orcid.sync-queue.description.researcher_urls": "Researcher urls",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.description.researcher_urls": "Researcher urls",
+  
+  // "person.page.orcid.sync-queue.description.keywords": "Keywords",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.description.keywords": "Keywords",
+  
+  // "person.page.orcid.sync-queue.tooltip.insert": "Add a new entry in the ORCID registry",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.insert": "Add a new entry in the ORCID registry",
+  
+  // "person.page.orcid.sync-queue.tooltip.update": "Update this entry on the ORCID registry",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.update": "Update this entry on the ORCID registry",
+  
+  // "person.page.orcid.sync-queue.tooltip.delete": "Remove this entry from the ORCID registry",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.delete": "Remove this entry from the ORCID registry",
+  
+  // "person.page.orcid.sync-queue.tooltip.publication": "Publication",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.publication": "Publication",
+  
+  // "person.page.orcid.sync-queue.tooltip.funding": "Funding",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.funding": "Funding",
+  
+  // "person.page.orcid.sync-queue.tooltip.affiliation": "Affiliation",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.affiliation": "Affiliation",
+  
+  // "person.page.orcid.sync-queue.tooltip.education": "Education",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.education": "Education",
+  
+  // "person.page.orcid.sync-queue.tooltip.qualification": "Qualification",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.qualification": "Qualification",
+  
+  // "person.page.orcid.sync-queue.tooltip.other_names": "Othername",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.other_names": "Othername",
+  
+  // "person.page.orcid.sync-queue.tooltip.country": "Country",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.country": "Country",
+  
+  // "person.page.orcid.sync-queue.tooltip.keywords": "Keyword",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.keywords": "Keyword",
+  
+  // "person.page.orcid.sync-queue.tooltip.external_ids": "External identifier",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.external_ids": "External identifier",
+  
+  // "person.page.orcid.sync-queue.tooltip.researcher_urls": "Researcher url",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.tooltip.researcher_urls": "Researcher url",
+  
+  // "person.page.orcid.sync-queue.send" : "Synchronize with ORCID registry",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send" : "Synchronize with ORCID registry",
   
   
-  // "person.page.orcid.sync-queue.send": "Send",
+  // "person.page.orcid.sync-queue.send.unauthorized-error.title": "The submission to ORCID failed for missing authorizations.",
   // TODO New key - Add a translation
-  "person.page.orcid.sync-queue.send": "Send",
+  "person.page.orcid.sync-queue.send.unauthorized-error.title": "The submission to ORCID failed for missing authorizations.",
+  
+  // "person.page.orcid.sync-queue.send.unauthorized-error.content": "Click <a href='{{orcid}}'>here</a> to grant again the required permissions. If the problem persists, contact the administrator",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.unauthorized-error.content": "Click <a href='{{orcid}}'>here</a> to grant again the required permissions. If the problem persists, contact the administrator",
+  
+  // "person.page.orcid.sync-queue.send.bad-request-error": "The submission to ORCID failed because the resource sent to ORCID registry is not valid",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.bad-request-error": "The submission to ORCID failed because the resource sent to ORCID registry is not valid",
   
   
   // "person.page.orcid.sync-queue.send.error": "The submission to ORCID failed",
@@ -7048,15 +7499,78 @@
   "person.page.orcid.sync-queue.send.conflict-error": "The submission to ORCID failed because the resource is already present on the ORCID registry",
   
   
-  // "person.page.orcid.sync-queue.send.not-found-error": "The submission to ORCID failed because the expected resource to be update does not exists anymore on the ORCID registry.",
+  // "person.page.orcid.sync-queue.send.not-found-warning": "The resource does not exists anymore on the ORCID registry.",
   // TODO New key - Add a translation
-  "person.page.orcid.sync-queue.send.not-found-error": "The submission to ORCID failed because the expected resource to be update does not exists anymore on the ORCID registry.",
+  "person.page.orcid.sync-queue.send.not-found-warning": "The resource does not exists anymore on the ORCID registry.",
   
   
   // "person.page.orcid.sync-queue.send.success": "The submission to ORCID was completed successfully",
   // TODO New key - Add a translation
   "person.page.orcid.sync-queue.send.success": "The submission to ORCID was completed successfully",
   
+  // "person.page.orcid.sync-queue.send.validation-error": "The data that you want to synchronize with ORCID is not valid",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error": "The data that you want to synchronize with ORCID is not valid",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.amount-currency.required": "The amount's currency is required",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.amount-currency.required": "The amount's currency is required",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.external-id.required": "The resource to be sent requires at least one identifier",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.external-id.required": "The resource to be sent requires at least one identifier",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.title.required": "The title is required",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.title.required": "The title is required",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.type.required": "The type is required",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.type.required": "The type is required",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.start-date.required": "The start date is required",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.start-date.required": "The start date is required",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.funder.required": "The funder is required",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.funder.required": "The funder is required",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.organization.required": "The organization is required",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.organization.required": "The organization is required",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.organization.name-required": "The organization's name is required",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.organization.name-required": "The organization's name is required",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.organization.address-required": "The organization to be sent requires an address",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.organization.address-required": "The organization to be sent requires an address",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.organization.city-required": "The address of the organization to be sent requires a city",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.organization.city-required": "The address of the organization to be sent requires a city",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.organization.country-required": "The address of the organization to be sent requires a country",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.organization.country-required": "The address of the organization to be sent requires a country",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.disambiguated-organization.required": "An identifier to disambiguate organizations is required. Supported ids are GRID, Ringgold, Legal Entity identifiers (LEIs) and Crossref Funder Registry identifiers",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.disambiguated-organization.required": "An identifier to disambiguate organizations is required. Supported ids are GRID, Ringgold, Legal Entity identifiers (LEIs) and Crossref Funder Registry identifiers",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.disambiguated-organization.value-required": "The organization's identifiers requires a value",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.disambiguated-organization.value-required": "The organization's identifiers requires a value",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.disambiguation-source.required": "The organization's identifiers requires a source",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.disambiguation-source.required": "The organization's identifiers requires a source",
+  
+  // "person.page.orcid.sync-queue.send.validation-error.disambiguation-source.invalid": "The source of one of the organization identifiers is invalid. Supported sources are RINGGOLD, GRID, LEI and FUNDREF",
+  // TODO New key - Add a translation
+  "person.page.orcid.sync-queue.send.validation-error.disambiguation-source.invalid": "The source of one of the organization identifiers is invalid. Supported sources are RINGGOLD, GRID, LEI and FUNDREF",
   
   // "person.page.orcid.synchronization-mode": "Synchronization mode",
   // TODO New key - Add a translation
@@ -7112,6 +7626,13 @@
   // TODO New key - Add a translation
   "person.page.orcid.scope.person-update": "Add/update other information about you",
   
+  // "person.page.orcid.unlink.success": "The disconnection between the profile and the ORCID registry was successful",
+  // TODO New key - Add a translation
+  "person.page.orcid.unlink.success": "The disconnection between the profile and the ORCID registry was successful",
+  
+  // "person.page.orcid.unlink.error": "An error occurred while disconnecting between the profile and the ORCID registry. Try again",
+  // TODO New key - Add a translation
+  "person.page.orcid.unlink.error": "An error occurred while disconnecting between the profile and the ORCID registry. Try again",
   
   // "person.page.staffid": "Staff ID",
   "person.page.staffid": "Personalnummer",
@@ -7209,6 +7730,13 @@
   // TODO New key - Add a translation
   "process.new.notification.error.content": "An error occurred while creating this process",
   
+  // "process.new.notification.process.processing": "Processing...",
+  // TODO New key - Add a translation
+  "process.new.notification.process.processing": "Processing...",
+  
+  // "process.new.notification.process.files": "Output Files: ",
+  // TODO New key - Add a translation
+  "process.new.notification.process.files": "Output Files: ",
   
   // "process.new.header": "Create a new process",
   // TODO New key - Add a translation
@@ -7450,6 +7978,12 @@
   "patent.listelement.badge": "Patent oder Gebrauchsmuster",
   
   
+  // "product.listelement.badge": "Product",
+  // TODO New key - Add a translation
+  "product.listelement.badge": "Product",
+  
+  
+  
   // "profile.breadcrumbs": "Update Profile",
   // TODO New key - Add a translation
   "profile.breadcrumbs": "Update Profile",
@@ -7588,7 +8122,6 @@
   // "profile.title": "Update Profile",
   // TODO New key - Add a translation
   "profile.title": "Update Profile",
-  
   
   // "profile.card.researcher": "Researcher Profile",
   // TODO New key - Add a translation
@@ -8190,34 +8723,6 @@
   // "relationships.isContributorOf": "Contributors",
   "relationships.isContributorOf": "Beteiligte",
   
-  // "relationships.select": "Select",
-  // TODO New key - Add a translation
-  "relationships.select": "Select",
-  
-  // "relationships.hide": "Hide",
-  // TODO New key - Add a translation
-  "relationships.hide": "Hide",
-  
-  // "relationships.unselect": "Unselect",
-  // TODO New key - Add a translation
-  "relationships.unselect": "Unselect",
-  
-  // "relationships.unhide": "Unhide",
-  // TODO New key - Add a translation
-  "relationships.unhide": "Unhide",
-  
-  // "relationships.title" : "Relationships",
-  // TODO New key - Add a translation
-  "relationships.title" : "Relationships",
-  
-  // "relationships.no.relationships.found" : "No relationships",
-  // TODO New key - Add a translation
-  "relationships.no.relationships.found" : "No relationships",
-  
-  // "relationships.no.data.found" : "No data found",
-  // TODO New key - Add a translation
-  "relationships.no.data.found" : "No data found",
-  
   
   // "results_plan.breadcrumbs": "Results plan",
   // TODO New key - Add a translation
@@ -8253,6 +8758,13 @@
   // TODO New key - Add a translation
   "researcher.profile.create.new": "Create new",
   
+  // "researcher.profile.create.success": "Researcher profile created succcessfully",
+  // TODO New key - Add a translation
+  "researcher.profile.create.success": "Researcher profile created succcessfully",
+  
+  // "researcher.profile.create.fail": "An error occurs during the researcher profile creation",
+  // TODO New key - Add a translation
+  "researcher.profile.create.fail": "An error occurs during the researcher profile creation",
   
   // "researcher.profile.delete": "Delete",
   // TODO New key - Add a translation
@@ -8287,6 +8799,26 @@
   // "researcher.profile.public.visibility": "PUBLIC",
   // TODO New key - Add a translation
   "researcher.profile.public.visibility": "PUBLIC",
+  
+  // "researcherprofile.claim.not-authorized": "You are not authorized to claim this item. For more details contact the administrator(s).",
+  // TODO New key - Add a translation
+  "researcherprofile.claim.not-authorized": "You are not authorized to claim this item. For more details contact the administrator(s).",
+  
+  // "researcherprofile.error.claim.body" : "An error occurred while claiming the profile, please try again later",
+  // TODO New key - Add a translation
+  "researcherprofile.error.claim.body" : "An error occurred while claiming the profile, please try again later",
+  
+  // "researcherprofile.error.claim.title" : "Error",
+  // TODO New key - Add a translation
+  "researcherprofile.error.claim.title" : "Error",
+  
+  // "researcherprofile.success.claim.body" : "Profile claimed with success",
+  // TODO New key - Add a translation
+  "researcherprofile.success.claim.body" : "Profile claimed with success",
+  
+  // "researcherprofile.success.claim.title" : "Success",
+  // TODO New key - Add a translation
+  "researcherprofile.success.claim.title" : "Success",
   
   
   // "resource-policies.add.button": "Add",
@@ -8585,10 +9117,16 @@
   // "search.filters.applied.f.entityType": "Item Type",
   "search.filters.applied.f.entityType": "Art der Ressource",
   
+  // "search.filters.applied.f.editor": "Editor",
+  // TODO New key - Add a translation
+  "search.filters.applied.f.editor": "Editor",
   
   // "search.filters.applied.f.has_content_in_original_bundle": "Has files",
   "search.filters.applied.f.has_content_in_original_bundle": "Hat Dateien",
   
+  // "search.filters.applied.f.investigators": "Investigator",
+  // TODO New key - Add a translation
+  "search.filters.applied.f.investigators": "Investigator",
   
   // "search.filters.applied.f.itemtype": "Type",
   "search.filters.applied.f.itemtype": "Typ",
@@ -8597,6 +9135,13 @@
   // "search.filters.applied.f.namedresourcetype": "Status",
   "search.filters.applied.f.namedresourcetype": "Status",
   
+  // "search.filters.applied.f.personorgunits": "Organisation",
+  // TODO New key - Add a translation
+  "search.filters.applied.f.personorgunits": "Organisation",
+  
+  // "search.filters.applied.f.projectorgunits": "Organisation",
+  // TODO New key - Add a translation
+  "search.filters.applied.f.projectorgunits": "Organisation",
   
   // "search.filters.applied.f.subject": "Subject",
   "search.filters.applied.f.subject": "Thema",
@@ -8641,6 +9186,10 @@
   // "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
   // TODO New key - Add a translation
   "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
+  
+  // "search.filters.applied.f.organization": "Organisation",
+  // TODO New key - Add a translation
+  "search.filters.applied.f.organization": "Organisation",
   
   
   // "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
@@ -9275,12 +9824,12 @@
   "sorting.dc.title.DESC": "Titel absteigend",
   
   
-  // "sorting.score.ASC": "Relevance Ascending",
+  // "sorting.score.ASC": "Least Relevant",
   // TODO New key - Add a translation
-  "sorting.score.ASC": "Relevance Ascending",
+  "sorting.score.ASC": "Least Relevant",
   
   
-  // "sorting.score.DESC": "Relevance Descending",
+  // "sorting.score.DESC": "Most Relevant",
   // TODO Source message changed - Revise the translation
   "sorting.score.DESC": "Relevanz",
   
@@ -9313,6 +9862,14 @@
   // "sorting.lastModified.DESC": "Last modified Descending",
   // TODO New key - Add a translation
   "sorting.lastModified.DESC": "Last modified Descending",
+  
+  // "sorting.ownerselection.ASC": "Owner Relevance Ascending",
+  // TODO New key - Add a translation
+  "sorting.ownerselection.ASC": "Owner Relevance Ascending",
+  
+  // "sorting.ownerselection.DESC": "Owner Relevance Descending",
+  // TODO New key - Add a translation
+  "sorting.ownerselection.DESC": "Owner Relevance Descending",
   
   
   // "statistics.export.csv": "Export CSV",
@@ -9374,6 +9931,9 @@
   // TODO New key - Add a translation
   "statistics.table.title.TotalDownloads": "File Visits",
   
+  // "statistics.table.title.TotalVisitsAndDownloads": "Items and file Visits",
+  // TODO New key - Add a translation
+  "statistics.table.title.TotalVisitsAndDownloads": "Items and file Visits",
   
   // "statistics.table.title.TopCountries": "Top country views",
   // TODO New key - Add a translation
@@ -9405,9 +9965,17 @@
   "statistics.categories.projectsReports.tab": "Project Reports",
   
   
-  // "statistics.categories.publicationsReports.tab": "Publication Reports",
+  // "statistics.categories.rpprojectsReports.tab": "Researchers Projects Reports",
   // TODO New key - Add a translation
-  "statistics.categories.publicationsReports.tab": "Publication Reports",
+  "statistics.categories.rpprojectsReports.tab": "Researchers Projects Reports",
+  
+  // "statistics.categories.publicationsReports.tab": "Publications Reports",
+  // TODO New key - Add a translation
+  "statistics.categories.publicationsReports.tab": "Publications Reports",
+  
+  // "statistics.categories.rppublicationsReports.tab": "Researchers Publication Reports",
+  // TODO New key - Add a translation
+  "statistics.categories.rppublicationsReports.tab": "Researchers Publication Reports",
   
   
   // "statistics.reports.title": "Reports",
@@ -9482,12 +10050,6 @@
   // TODO New key - Add a translation
   "submission.import-external.title": "Import metadata from an external source",
   
-  
-  // "submission.import-external.title.Dataset": "Import dataset from an external source",
-  // TODO New key - Add a translation
-  "submission.import-external.title.Dataset": "Import dataset from an external source",
-  
-  
   // "submission.import-external.title.Equipment": "Import equipment from an external source",
   // TODO New key - Add a translation
   "submission.import-external.title.Equipment": "Import equipment from an external source",
@@ -9522,6 +10084,9 @@
   // TODO New key - Add a translation
   "submission.import-external.title.Person": "Import person from an external source",
   
+  // "submission.import-external.title.Product": "Import product from an external source",
+  // TODO New key - Add a translation
+  "submission.import-external.title.Product": "Import product from an external source",
   
   // "submission.import-external.title.Project": "Import project from an external source",
   // TODO New key - Add a translation
@@ -9602,11 +10167,17 @@
   // TODO New key - Add a translation
   "submission.import-external.source.sherpaPublisher": "SHERPA Publishers",
   
+  // "submission.import-external.source.sherpaJournalIssn": "SHERPA Journals ISSN",
+  // TODO New key - Add a translation
+  "submission.import-external.source.sherpaJournalIssn": "SHERPA Journals ISSN",
   
   // "submission.import-external.source.orcid": "ORCID",
   // TODO New key - Add a translation
   "submission.import-external.source.orcid": "ORCID",
   
+  // "submission.import-external.source.orcidWorks": "ORCID",
+  // TODO New key - Add a translation
+  "submission.import-external.source.orcidWorks": "ORCID",
   
   // "submission.import-external.source.pubmed": "Pubmed",
   // TODO New key - Add a translation
@@ -9622,11 +10193,21 @@
   // TODO New key - Add a translation
   "submission.import-external.source.lcname": "Library of Congress Names",
   
+  // "submission.import-external.source.scielo": "Scopus",
+  // TODO New key - Add a translation
+  "submission.import-external.source.scielo": "Scopus",
   
   // "submission.import-external.source.scopus": "Scopus",
   // TODO New key - Add a translation
   "submission.import-external.source.scopus": "Scopus",
   
+  // "submission.import-external.source.wos": "Web Of Science",
+  // TODO New key - Add a translation
+  "submission.import-external.source.wos": "Web Of Science",
+  
+  // "submission.import-external.source.openaireProject": "OpenAIRE",
+  // TODO New key - Add a translation
+  "submission.import-external.source.openaireProject": "OpenAIRE",
   
   // "submission.import-external.source.openaire": "OpenAIRE by Author",
   // TODO New key - Add a translation
@@ -9641,12 +10222,6 @@
   // "submission.import-external.source.epo": "European Patent Office (EPO)",
   // TODO New key - Add a translation
   "submission.import-external.source.epo": "European Patent Office (EPO)",
-  
-  
-  // "submission.import-external.preview.title.Dataset": "Dataset Preview",
-  // TODO New key - Add a translation
-  "submission.import-external.preview.title.Dataset": "Dataset Preview",
-  
   
   // "submission.import-external.preview.title.Equipment": "Equipment Preview",
   // TODO New key - Add a translation
@@ -9682,6 +10257,9 @@
   // TODO New key - Add a translation
   "submission.import-external.preview.title.Person": "Person Preview",
   
+  // "submission.import-external.preview.title.Product": "Product Preview",
+  // TODO New key - Add a translation
+  "submission.import-external.preview.title.Product": "Product Preview",
   
   // "submission.import-external.preview.title.Project": "Project Preview",
   // TODO New key - Add a translation
@@ -9843,9 +10421,9 @@
   "submission.sections.describe.relationship-lookup.external-source.import-button-title.Person": "Import remote person",
   
   
-  // "submission.sections.describe.relationship-lookup.external-source.import-button-title.Dataset": "Import remote dataset",
+  // "submission.sections.describe.relationship-lookup.external-source.import-button-title.Product": "Import remote product",
   // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.external-source.import-button-title.Dataset": "Import remote dataset",
+  "submission.sections.describe.relationship-lookup.external-source.import-button-title.Product": "Import remote product",
   
   
   // "submission.sections.describe.relationship-lookup.external-source.import-button-title.Equipment": "Import remote equipment",
@@ -10379,6 +10957,13 @@
   // TODO New key - Add a translation
   "submission.sections.describe.relationship-lookup.selection-tab.title.scopus": "Search Results",
   
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.scielo": "Search Results",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.selection-tab.title.scielo": "Search Results",
+  
+  // "submission.sections.describe.relationship-lookup.selection-tab.title.wos": "Search Results",
+  // TODO New key - Add a translation
+  "submission.sections.describe.relationship-lookup.selection-tab.title.wos": "Search Results",
   
   // "submission.sections.describe.relationship-lookup.selection-tab.title": "Search Results",
   // TODO New key - Add a translation
@@ -10477,7 +11062,8 @@
   "submission.sections.general.no-sections": "Es stehen keine Optionen zur Verfügung",
   
   
-  // "submission.sections.general.save_error_notice": "There was an issue when saving the item, please try again later.",
+  // "submission.sections.general.save_error_notice": "There was an unexpected error when saving the item. Refresh the page and try again. After refreshing unsaved modifications could be lost.",
+  // TODO Source message changed - Revise the translation
   "submission.sections.general.save_error_notice": "Beim Speichern der Ressource ist ein Fehler aufgetreten, bitte versuchen Sie es später noch einmal.",
   
   
@@ -10735,7 +11321,7 @@
   
   
   // "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "<i>Please select a section from the list and give a key message. Or select already existing items via the search.</i><p><b>State of knowledge/problem definition</b> covers important points of the problem definition dealt with in the project and summarises the current state of knowledge in concise key messages. A document with a detailed description and references can be uploaded on the project page. This information is only required for application purposes and does not need to be updated during the course of the project. </br><b>External conditions and requirements</b> indicate which external conditions are relevant for the development of impacts by the project. Whether research has an impact also depends on the external conditions, such as the legal framework, consumer behaviour or production methods. The relevant external conditions or inhibiting influences on the development of impacts can be described and updated if changes occur. Arrows can be used to illustrate relationships between external conditions and other items.</br>Key messages on <b>ethical aspects</b> and <b>gender equality</b> should only be made after the reflection, led by questions, has taken place (accessible via the project page).</br><b>Others</b> includes important information that should be clarified in the Impact Pathway but cannot be categorised in the above areas.</p><b>Key question:</b> Which preliminary considerations are relevant for project implementation and for developing impacts?",
-  "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "<p><i>Wählen Sie bitte aus der Liste einen Bereich aus und formulieren Sie dazu eine Bezeichnung, oder wählen Sie bereits vorhandene Einträge über die Schaltfläche <b>Suche</b> aus.</i></p><p><b>Bereiche:</b></br>• <b><i>Stand des Wissens / Problemstellung</i></b> umfasst wichtige Punkte der Problemstellung, die im Projekt bearbeitet werden, und fasst den aktuellen Wissenstand in prägnanten Kernaussagen zusammen. Diese Angaben sind nur zur Antragstellung erforderlich und müssen im Projektverlauf nicht aktualisiert werden.</br><i>Hinweis: Auf der Projektseite unter <b>Uploads</b> können Sie, wenn erforderlich, ein Dokument mit einer ausführlichen Beschreibung und Referenzen hochladen.</i></br>• <b><i>Rahmenbedingungen</i></b> sind, externe Einflüsse (z. B. Rechtsrahmen, Konsumverhalten oder Produktionsweisen), die die Entwicklung von Wirkungen des Projektes beeinflussen.</br><i>Hinweis: Aktualisieren Sie die Angaben im Projektverlauf, wenn sich Rahmenbedingungen für die Entwicklung von Wirkungen im Projekt ändern oder neue bekannt werden.</i></br>• Die <b><i>Ethische Reflexion</i></b> und die <b><i>Reflexion der Geschlechtergerechtigkeit</i></b> dienen dazu, verantwortungsvoll zu handeln, die gesellschaftliche Relevanz der Forschung zu erhöhen und eine Anwendung von Ergebnissen zu fördern.</br><i>Sie können hier jeweils einen Eintrag mit einer vorläufigen Bezeichnung anlegen und anschließend in die Detailseite des Eintrags wechseln, um die Reflexion durchzuführen und die Bezeichnung zu konkretisieren. Oder Sie führen zunächst die Reflexion durch (zugänglich über die Projektseite) und fügen anschließend den Eintrag hier über die Schaltfläche <b>Suche</b> hinzu.</br><b><i>• Sonstiges</i></b> umfasst wichtige Informationen, die sich nicht in die o. g. Bereiche einordnen lassen.</br></i></p><p><b><i>Leitfrage:</b></br>• Welche Vorüberlegungen sind für die Durchführung des Projektes und für eine Entwicklung von Wirkungen relevant?</i></p>",
+  "submission.sections.submit.progressbar.impact_pathway_step_type_1_task_form.info": "<p><i>Wählen Sie bitte aus der Liste einen Bereich aus und formulieren Sie dazu eine Bezeichnung oder wählen Sie bereits vorhandene Einträge über die Schaltfläche <b>Suche</b> aus.</i></p><p><b>Bereiche:</b></br>• <b><i>Stand des Wissens / Problemstellung</i></b> umfasst wichtige Punkte der Problemstellung, die im Projekt bearbeitet werden, und fasst den aktuellen Wissenstand in prägnanten Kernaussagen zusammen. Diese Angaben sind nur zur Antragstellung erforderlich und müssen im Projektverlauf nicht aktualisiert werden.</br><i>Hinweis: Auf der Projektseite unter <b>Uploads</b> können Sie, wenn erforderlich, ein Dokument mit einer ausführlichen Beschreibung und Referenzen hochladen.</i></br>• <b><i>Rahmenbedingungen</i></b> sind externe Einflüsse (z. B. Rechtsrahmen, Konsumverhalten oder Produktionsweisen), die die Entwicklung von Wirkungen des Projektes beeinflussen.</br><i>Hinweis: Aktualisieren Sie die Angaben im Projektverlauf, wenn sich Rahmenbedingungen für die Entwicklung von Wirkungen im Projekt ändern oder neue bekannt werden.</i></br>• Die <b><i>Ethische Reflexion</i></b> und die <b><i>Reflexion der Geschlechtergerechtigkeit</i></b> dienen dazu, verantwortungsvoll zu handeln, die gesellschaftliche Relevanz der Forschung zu erhöhen und eine Anwendung von Ergebnissen zu fördern.</br><i>Sie können hier jeweils einen Eintrag mit einer vorläufigen Bezeichnung anlegen und anschließend in die Detailseite des Eintrags wechseln, um die Reflexion durchzuführen und die Bezeichnung zu konkretisieren. Oder Sie führen zunächst die Reflexion durch (zugänglich über die Projektseite) und fügen anschließend den Eintrag hier über die Schaltfläche <b>Suche</b> hinzu.</br><b><i>• Sonstiges</i></b> umfasst wichtige Informationen, die sich nicht in die o. g. Bereiche einordnen lassen.</br></i></p><p><b><i>Leitfrage:</b></br>• Welche Vorüberlegungen sind für die Durchführung des Projektes und für eine Entwicklung von Wirkungen relevant?</i></p>",
   
   
   // "submission.sections.submit.progressbar.impact_pathway_step_type_2_task_form.info": "<i>Please select an area from the list and formulate a key message for it. Or select already existing items via the search.</i><p><b>Scientific/Technical Work Objectives</b> include what the project is trying to achieve. <i>After you have created the item, you can open a second level. There you concretise the procedure for achieving the objectives.</i></br>Research findings</b> summarises key findings.</br><b>(Intermediate) results / problems causing change</b> is used to clarify in the Impact Pathway why changes are needed in the work of the project or the intended application and impact. (Can be used here for outcomes or problems related to the research).</br><b>Others</b> includes important information that should be clarified in the Impact Pathway but does not fit into the above areas.</br><p><b>Key question:</b> Which research questions are derived from the problem definition?",
@@ -10773,8 +11359,8 @@
   
   
   // "submission.sections.submit.progressbar.working_plan_workpackage_step_form.info": "",
-  // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.working_plan_workpackage_step_form.info": "",
+  // TODO Source message changed - Revise the translation
+  "submission.sections.submit.progressbar.working_plan_workpackage_step_form.info": "<p><i>Wählen Sie bitte aus der Liste einen Bereich aus und formulieren Sie dazu eine Bezeichnung, oder wählen Sie bereits vorhandene Einträge über die Schaltfläche <b>Suche</b> aus.</i></p><p><b>Bereiche:</b></br>• <b><i>Aufgaben</i></b> sind einzelne Arbeitsschritte, z. B. bestimmte Forschungsarbeiten. </br><I>Hinweis: Verwenden Sie Arbeitsschritte nicht für Arbeiten, die durch die u. g. Bereiche abgedeckt sind.</i></br>• <b><i>Prozesse der Kooperation, Partizipation und Zusammenarbeit</i></b> umfasst Aktivitäten, die über einen längeren Zeitraum mit den gleichen Partnern/Organisationen oder Akteursgruppen stattfinden.</br>• <b><i>Veranstaltungen / Interaktionen</i></b> erfasst Einzelveranstaltungen mit Akteursgruppen, die vom Projekt veranstaltet werden oder an denen das Projekt teilnimmt.</br>• <b><i>Geplante Veröffentlichungen</i></b> werden zugehörig zum Zweck der Austausch- und Transferaktivitäten erfasst und können gruppiert werden. </br><i>Hinweis: Diese Angaben sind ausschließlich in der Projektplanung erforderlich. Bitte nennen Sie in der Bezeichnung Anzahl, Art und Thema der geplanten Veröffentlichungen (z. B. Eintrag 1: 2-3 wissenschaftliche Artikel zu Thema x, Eintrag 2: 1 Praxisbeitrag zum Thema y).</i></br>• <b><i>Gegenstände / Materialien</i></b> sind Outputs, die dem Transfer dienen und/oder von Dritten für Transfer, Forschung oder Lehre weiter genutzt werden können, wie z. B. Ausstellungsstücke, Geräte, Proben oder Sammelstücke.</br>• <b><i>Meilensteine</i></b> sind wichtige Punkte im Projektverlauf. Sie dienen zur Prüfung, wann etwas abgeschlossen ist, etwas begonnen wird oder über die weitere Vorgehensweise entschieden wird.</p>",
   
   
   // "submission.sections.submit.progressbar.describe.import_orgunits": "Organisation unit",
@@ -10961,7 +11547,7 @@
   
   
   // "submission.sections.submit.progressbar.describe.patents.info": "Please document here the industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
-  "submission.sections.submit.progressbar.describe.patents.info": "<i>Erfassen Sie hier bitte, wenn Projektergebnisse durch ein Patent oder Gebrauchsmuster geschützt und verwertet werden sollen. <p>Hinweis: Wenn möglich geben Sie bitte die Bezeichnung an, unter der das Schutzrecht beim Patentamt angemeldet werden soll. </br>Hinweis: Wenn das Schutzrecht verwertet wird, erfassen Sie dieses bitte unter <b>Anwendung einer Lösung / Veränderung / Innovation</b>. </i></p>",
+  "submission.sections.submit.progressbar.describe.patents.info": "<p>Hier werden Schutzrechte sowie deren geplante Verwertung dokumentiert. Beschreiben Sie im Antrag die geplante Anmeldung. Erfassen Sie später die Anmeldedaten. Wenn das Schutzrecht erteilt wurde, erfolgt ein Import der Patentdaten. Bis zur Erteilung des Schutzrechtes sind die Informationen nur für den Forschungsförderer zugänglich.</p><p><i>Erfassen Sie hier ein Patent oder Gebrauchsmuster, durch das Projektergebnisse geschützt und verwertet werden sollen. </br>Hinweis: Bitte geben Sie im Feld „Bezeichnung“ nach Möglichkeit diejenige an, unter der das Schutzrecht beim Patentamt angemeldet werden soll. </br>Hinweis: Die Verwertung des Schutzrechtes erfassen Sie bitte unter <b>Anwendung einer Lösung / Veränderung / Innovation</b>. </i></p>",
   
   
   // "submission.sections.submit.progressbar.describe.patents_result": "Information from application at the Patent Office",
@@ -10969,15 +11555,16 @@
   
   
   // "submission.sections.submit.progressbar.describe.patents_result.info": "Please complete the mandatory information. The information will be regularly compared with the patent database. This means that as soon as the patent or utility model is published, it can be automatically transferred to the system. You will receive a message for this purpose.",
-  "submission.sections.submit.progressbar.describe.patents_result.info": "<i>Ergänzen Sie hier, folgende Angaben, wenn eine Anmeldung des Schutzrechts erfolgt ist: </br>• Anmeldenummer</br>• Datum der Anmeldung</br>• Antragsteller<p>Hinweis: Diese Informationen sind nur für den Forschungsförderer zugänglich. Nach Prüfung und Veröffentlichung durch das Patentamt erhalten Sie eine Meldung. Anschließend können die weiteren Angaben automatisch in das System importiert werden. </i></p>",
+  "submission.sections.submit.progressbar.describe.patents_result.info": "<i>Tragen Sie hier bitte die Anmeldedaten ein.</br>Hinweis: Anhand dieser Angaben erfolgt ein Import aus der Patentdatenbank, sobald das Schutzrecht erteilt wurde. Dazu erhalten Sie und der Förderer eine Meldung, um den Import zu bestätigen.</i>",
   
   
-  // "submission.sections.submit.progressbar.describe.persons": "Personal data",
-  "submission.sections.submit.progressbar.describe.persons": "Personendaten",
+  // "submission.sections.submit.progressbar.describe.persons": "Person",
+  // TODO Source message changed - Revise the translation
+  "submission.sections.submit.progressbar.describe.persons": "Person",
   
   
   // "submission.sections.submit.progressbar.describe.persons.info": "This section contains personal information that allows you to use the system and provides contact details for the funding agency.",
-  "submission.sections.submit.progressbar.describe.persons.info": "Dieser Bereich umfasst Angaben zu Ihrer Person, die eine Nutzung des Systems ermöglichen und dem Förderer Kontaktdaten zur Verfügung stellen.",
+  "submission.sections.submit.progressbar.describe.persons.info": "<i>Hier können Sie Ihr Personenprofil anlegen.</br>Die Angaben dienen dazu, Funktionen zum Import Ihrer Publikationen anzubieten, Verknüpfungen mit anderen Datensätzen zu ermöglichen, (z. B. mit dem Projekt in dem Sie tätig sind) und Ihr Personenprofil sichtbar machen. </br>Sie können Ihr Profil jederzeit löschen, wenn Sie nicht möchten, dass Ihre personenbezogenen Daten im System gespeichert werden. Damit werden auch alle Links zwischen Ihren Personendaten und anderen Datensätzen im System deaktiviert. </br>Sie können das System weiterhin über Ihre Login Daten nutzen. Verpflichtende öffentliche Informationen, wie die Autorenschaft von Publikationen bleiben im System erhalten.</i>",
   
   
   // "submission.sections.submit.progressbar.describe.physical_objects": "Object / material for knowledge transfer and subsequent use in research and teaching",
@@ -11008,12 +11595,13 @@
   "submission.sections.submit.progressbar.describe.proj_objectives": "Projektziel",
   
   
-  // "submission.sections.submit.progressbar.describe.projects": "Projects",
-  "submission.sections.submit.progressbar.describe.projects": "Projekte",
+  // "submission.sections.submit.progressbar.describe.projects": "Subproject",
+  // TODO Source message changed - Revise the translation
+  "submission.sections.submit.progressbar.describe.projects": "Teilprojekt",
   
   
   // "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
-  "submission.sections.submit.progressbar.describe.projects.info": "Zur Antragstellung: Bitte geben Sie ihren Projektpartnern mit den Teilprojekten Zugang auf das System. Nach der Projektbewilligung: Beschreiben Sie das Projekt durch Keywords, schließen Sie dabei alle relevanten Aspekte von der Forschungsfrage bis zur Ergebnisverwertung ein. Sie erreichen dadurch eine höhere Sichtbarkeit und fördern den Transfer, da das Projekt bei Suchen von Forschenden, Praxisakteuren und Interessierten leicht gefunden werden kann. Bitte laden Sie, falls vorhanden, ein Logo des Projektes hoch, um die öffentliche Darstellung des Projektes zu unterstützen.",
+  "submission.sections.submit.progressbar.describe.projects.info": "<p>Hier werden Daten zu Ihrem Teilprojekt dargestellt. Sie stammen aus dem easy-online Import und werden im Projektverlauf über eine Schnittstelle zum Fördermittelgeber aktualisiert.</p><p><i>Ergänzen Sie bitte die nachfolgenden Angaben.</i></p>",
   
   
   // "submission.sections.submit.progressbar.describe.projects_overview": "Project overview",
@@ -11036,7 +11624,7 @@
   
   // "submission.sections.submit.progressbar.describe.publications.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Use the import function via an identifier. If no identifier is available or information from the import is incomplete, please enter the metadata. Precise metadata make your publication easier to find for interested parties.",
   // TODO Source message changed - Revise the translation
-  "submission.sections.submit.progressbar.describe.publications.info": "<i>Erfassen Sie hier bitte die im Projekt erstellten Veröffentlichungen wie z. B. Text-, Bild-, Tondokumente oder Webseiten.<p>Hinweis: Wenn möglich, verwenden Sie den Import aus Onlinedatenbanken über einen Identifier oder über den Upload eines Dokuments. Damit werden viele Angaben automatisch in das Eingabeformular übertragen.</br>Hinweis: Über <b>Mehr Hinzufügen</b> können Sie Dokumente hochladen.</i></p>",
+  "submission.sections.submit.progressbar.describe.publications.info": "<i>Erfassen Sie hier bitte die im Projekt erstellten Veröffentlichungen wie z. B. Text-, Bild-, Tondokumente oder Webseiten.<p>Sie haben folgende Möglichkeiten: </br>• Import von Daten aus Online-Datenbanken (z. B. Crossref, Scopus, PubMed): Hierfür geben Sie den Identifier ein. Wenn die Suche über den Identifier nicht erfolgreich ist, können Sie die Suchfunktion über die Eingabe des Titels unterstützen. </br>• Import von Daten aus dem Volltext: Hierfür laden Sie Ihre Veröffentlichung als PDF über das obere Feld auf der Seite hoch. </br>• Manueller Eintrag der Daten </p><p>Hinweis: Der Import von Daten ist aktuell noch nicht möglich, deshalb nutzen Sie bitte die manuelle Erfassung. </i></p>",
   
   
   // "submission.sections.submit.progressbar.describe.publications_result": "Meta(Data) of the publication",
@@ -11071,11 +11659,11 @@
   
   
   // "submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/ person by founding a company or association.",
-  "submission.sections.submit.progressbar.describe.spinoffs.info": "<i>Erfassen Sie hier bitte die geplante Gründung eines Unternehmens oder Vereins zur Verwertung von Projektergebnissen. Sobald die Gründung erfolgt ist, ergänzen Sie bitte die Angaben zur Anmeldung.</br>Hinweis: Mit diesen Angaben verdeutlichen Sie die Praxisorientierung des Projektes.</i>",
+  "submission.sections.submit.progressbar.describe.spinoffs.info": "<p>Hier wird erfasst, wenn die Verwertung von Projektergebnissen durch die Gründung eines Unternehmens oder Vereins angestrebt wird. </p><p><i>Erfassen Sie hier bitte die geplante Ausgründung. <br>Im Projektverlauf können Sie die Informationen zu einer erfolgten Gründung durch die Angaben zur Anmeldung des Unternehmens oder Vereins ergänzen. </br>Hinweis: Mit diesen Angaben verdeutlichen Sie die Praxisorientierung des Projektes. </i></p>",
   
   
   // "submission.sections.submit.progressbar.describe.spinoffs_result": "Details of spin-off carried out",
-  "submission.sections.submit.progressbar.describe.spinoffs_result": "Angaben zur Anmeldung im Handels-, Genossenschafts- oder Vereinsregister",
+  "submission.sections.submit.progressbar.describe.spinoffs_result": "Angaben zur Anmeldung der Ausgründung im Handels-, Genossenschafts- oder Vereinsregister",
   
   
   // "submission.sections.submit.progressbar.describe.spinoffs_result_funding": "Details of spin-off funding",
@@ -11083,7 +11671,7 @@
   
   
   // "submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "Please document any subsidies received for the spin-off here.",
-  "submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "<i>Wenn die Ausgründung Fördermittel erhalten hat, machen Sie bitte die nachfolgende Angaben.</i>",
+  "submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "<i>Wenn die Ausgründung Fördermittel oder sonstige Unterstützung erhalten hat, ergänzen Sie bitte die nachfolgenden Angaben.</i>",
   
   
   // "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development": "Survey on success and economic development",
@@ -11579,9 +12167,9 @@
   "treeview.load-more": "Mehr Laden",
   
   
-  // "vocabulary.import-external.preview.title.Dataset": "Dataset Preview",
+  // "vocabulary.import-external.preview.title.Product": "Product Preview",
   // TODO New key - Add a translation
-  "vocabulary.import-external.preview.title.Dataset": "Dataset Preview",
+  "vocabulary.import-external.preview.title.Product": "Product Preview",
   
   
   // "vocabulary.import-external.preview.title.Equipment": "Equipment Preview",
@@ -11827,10 +12415,13 @@
   // TODO New key - Add a translation
   "relation.rp.projects.search.results.head": "Related Projects",
   
-  
   // "layout.i18n.link.default": "link",
   // TODO New key - Add a translation
   "layout.i18n.link.default": "link",
+  
+  // "orcid.badge.tooltip": "Connected to ORCID",
+  // TODO New key - Add a translation
+  "orcid.badge.tooltip": "Connected to ORCID",
   
   
   // "working-plan.breadcrumbs": "Working plan",
@@ -11867,7 +12458,62 @@
   "working-plan.chart.column.dates": "Daten",
   
   
-  // "working-plan.chart.column.responsible": "Organisation",
+  // "working-plan.chart.column.dates.start": "Start date",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.dates.start": "Start date",
+  
+  
+  // "working-plan.chart.column.dates.end": "End date",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.dates.end": "End date",
+  
+  
+  // "working-plan.chart.column.changeStartDate.input.description": "Difference in days: ",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.input.description": "Difference in days: ",
+  
+  
+  // "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later: ",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later: ",
+  
+  
+  // "working-plan.chart.column.changeStartDate.radio.earlier": "Earlier",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.radio.earlier": "Earlier",
+  
+  
+  // "working-plan.chart.column.changeStartDate.radio.later": "Later",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.radio.later": "Later",
+  
+  
+  // "working-plan.chart.column.changeStartDate": "Change start date",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate": "Change start date",
+  
+  
+  // "working-plan.chart.column.changeStartDate.apply": "Apply",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.apply": "Apply",
+  
+  
+  // "working-plan.chart.column.changeStartDate.saving": "saving...",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.saving": "saving...",
+  
+  
+  // "working-plan.chart.column.changeStartDateClose": "Close",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDateClose": "Close",
+  
+  
+  // "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
+  
+  
+  // "working-plan.chart.column.responsible": "Responsible",
   // TODO Source message changed - Revise the translation
   "working-plan.chart.column.responsible": "Verantwortliche Organisation(en)",
   
@@ -11895,14 +12541,18 @@
   "working-plan.chart.move.error": "Es gab ein Problem beim Verschieben eines Eintrags. Versuchen Sie es später noch einmal.",
   
   
+  // "working-plan.chart.update.error": "There was an unexpected issue when fetching update, please reload the page to have consistent data.",
+  // TODO New key - Add a translation
+  "working-plan.chart.update.error": "There was an unexpected issue when fetching update, please reload the page to have consistent data.",
+  
+  
   // "working-plan.chart.move.up.btn": "Move up",
   // TODO New key - Add a translation
   "working-plan.chart.move.up.btn": "Move up",
   
   
   // "working-plan.chart.page.description": "Maecenas facilisis cursus nisl, eget gravida risus mollis a. Phasellus a quam vitae lorem finibus consequat. Vestibulum dictum, sem sed suscipit euismod, lorem diam lobortis sem, in ultrices ipsum risus a enim. Nunc efficitur interdum urna, eget accumsan arcu scelerisque maximus. In hac habitasse platea dictumst. Nunc vestibulum volutpat iaculis. Phasellus scelerisque congue ante vel luctus. Proin gravida semper eros, dignissim dapibus tortor laoreet quis. Maecenas nec dui risus. Sed metus lorem, egestas quis turpis et, viverra aliquet metus. Praesent et viverra velit. Donec vel magna tempor, tempus sem vel, ultrices diam. In sed neque id ligula hendrerit vulputate sit amet id ex. Mauris dignissim scelerisque tempor. Maecenas quis convallis felis. Nunc pharetra maximus sapien id vulputate.",
-  // TODO New key - Add a translation
-  "working-plan.chart.page.description": "Maecenas facilisis cursus nisl, eget gravida risus mollis a. Phasellus a quam vitae lorem finibus consequat. Vestibulum dictum, sem sed suscipit euismod, lorem diam lobortis sem, in ultrices ipsum risus a enim. Nunc efficitur interdum urna, eget accumsan arcu scelerisque maximus. In hac habitasse platea dictumst. Nunc vestibulum volutpat iaculis. Phasellus scelerisque congue ante vel luctus. Proin gravida semper eros, dignissim dapibus tortor laoreet quis. Maecenas nec dui risus. Sed metus lorem, egestas quis turpis et, viverra aliquet metus. Praesent et viverra velit. Donec vel magna tempor, tempus sem vel, ultrices diam. In sed neque id ligula hendrerit vulputate sit amet id ex. Mauris dignissim scelerisque tempor. Maecenas quis convallis felis. Nunc pharetra maximus sapien id vulputate.",
+  "working-plan.chart.page.description": "<p>Der Arbeitsplan unterstützt Sie bei der Planung und Umsetzung des Projektes.</p><p><i>Sie strukturieren hier die Arbeiten des Projektes über <b>Arbeitspakete</b> und <b>Meilensteine</b>.</br>Alle Arbeitspakete, die Sie bereits im Impact Pathway angelegt haben, werden im Arbeitsplan direkt angezeigt.</br>Innerhalb der Arbeitspakete können Sie Einträge aus den Bereichen <b>Aufgaben</b>, <b>Veranstaltungen / Interaktionen</b>, <b>Prozesse</b>, <b>Geplante Veröffentlichungen</b>, <b>Gegenstände oder Materialien</b> sowie <b>Meilensteine</b> hinzufügen oder neu anlegen. D. h. Meilensteine können innerhalb von Arbeitspaketen oder übergeordnet angelegt werden.</p><p>Mit der Schaltfläche [+] oberhalb des Arbeitsplans können Sie Arbeitspakete und Meilensteine anlegen oder bereits vorhandene suchen und auswählen. </br>Über die Schaltfläche [+] innerhalb der Arbeitspakete können Sie beliebig viele Einträge anlegen oder bereits vorhandene Einträge suchen und auswählen. Im Projektverlauf können Sie die Angaben jederzeit bearbeiten und ergänzen.</br>Mit der Drag-and-Drop-Funktion können Sie alle Einträge verschieben.</br>Ergänzen Sie zu den Einträgen den Zeitraum und das Akronym der verantwortlichen Partner. Diese Angaben sind für die Arbeitspakete und Meilensteine verpflichtend.</br>Im Projektverlauf können Sie den Status der Einträge ändern, um den aktuellen Stand des Projektes darzustellen.</p><p>Es besteht die Möglichkeit, den aktuellen Stand des Projektes mit einer älteren Version (z. B. der Antragsversion) zu vergleichen. Diese können Sie über die Schaltfläche [Version] auswählen.</br>Die Darstellung der Zeitachse können Sie über die Schaltflächen Jahr, Quartal und Monat wählen.</i></p>",
   
   
   // "working-plan.page.title": "Working plan",
@@ -11928,19 +12578,19 @@
   
   
   // "working-plan.chart.toolbar.date-view.quarter.first": "First",
-  "working-plan.chart.toolbar.date-view.quarter.first": "Erstes",
+  "working-plan.chart.toolbar.date-view.quarter.first": "Erstes Quartal",
   
   
   // "working-plan.chart.toolbar.date-view.quarter.fourth": "Fourth",
-  "working-plan.chart.toolbar.date-view.quarter.fourth": "Viertes",
+  "working-plan.chart.toolbar.date-view.quarter.fourth": "Viertes Quartal",
   
   
   // "working-plan.chart.toolbar.date-view.quarter.second": "Second",
-  "working-plan.chart.toolbar.date-view.quarter.second": "Zweites",
+  "working-plan.chart.toolbar.date-view.quarter.second": "Zweites Quartel",
   
   
   // "working-plan.chart.toolbar.date-view.quarter.third": "Third",
-  "working-plan.chart.toolbar.date-view.quarter.third": "Drittes",
+  "working-plan.chart.toolbar.date-view.quarter.third": "Drittes Quartal",
   
   
   // "working-plan.chart.toolbar.date-view.year": "Year",
@@ -11964,17 +12614,18 @@
   "application.listelement.badge": "Anwendungen von Lösungen / Veränderungen / Innovationen",
   
   
-  // "award.listelement.badge": "Awards and prizes",
-  "award.listelement.badge": "Auszeichnungen und Preise",
+  // "award.listelement.badge": "Award / prize",
+  // TODO Source message changed - Revise the translation
+  "award.listelement.badge": "Preis / Auszeichnung",
   
   
   // "condition.listelement.badge": "External conditions",
   "condition.listelement.badge": "Rahmenbedingungen",
   
   
-  // "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objectives",
+  // "contribution_fundingprogramme.listelement.badge": "Contributions to funding programme objectives",
   // TODO Source message changed - Revise the translation
-  "contribution_fundingprogramme.listelement.badge": "Beitrag zu förderpolitischen Zielen",
+  "contribution_fundingprogramme.listelement.badge": "Beiträge zu förderpolitischen Zielen",
   
   
   // "cooperation_partner.listelement.badge": "Cooperation partners",
@@ -12002,41 +12653,54 @@
   "impactpathwaystep.listelement.badge": "Wirkungspfadschritt",
   
   
-  // "innovationidea.listelement.badge": "Ideas for use of project results",
-  "innovationidea.listelement.badge": "Ideen für eine Nutzung von Projektergebnissen",
+  // "innovationidea.listelement.badge": "Idea for the use of project results",
+  // TODO Source message changed - Revise the translation
+  "innovationidea.listelement.badge": "Idee für eine Nutzung von Projektergebnissen",
   
   
-  // "innovationpotential.listelement.badge": "Solutions / changes / innovations",
-  "innovationpotential.listelement.badge": "Lösungen / Veränderungen / Innovationen",
+  // "innovationpotential.listelement.badge": "Solution / change / innovation",
+  // TODO Source message changed - Revise the translation
+  "innovationpotential.listelement.badge": "Lösung / Veränderung / Innovation",
   
   
-  // "milestone.listelement.badge": "Milestones",
+  // "milestone.listelement.badge": "Milestone",
+  // TODO Source message changed - Revise the translation
   "milestone.listelement.badge": "Meilenstein",
   
   
   // "other.listelement.badge": "Others",
   "other.listelement.badge": "Sonstiges",
   
+  // "parentproject.listelement.badge": "Joint Project",
+  // TODO New key - Add a translation
+  "parentproject.listelement.badge": "Joint Project",
   
   // "pot_societalimpact.listelement.badge": "Expected societal impact",
   // TODO Source message changed - Revise the translation
   "pot_societalimpact.listelement.badge": "Erwartete gesellschaftliche Wirkung",
   
   
-  // "process_event.listelement.badge": "Processes of cooperation, participation and working together",
-  "process_event.listelement.badge": "Prozesse der Kooperation, Partizipation und Zusammenarbeit",
+  // "process_event.listelement.badge": "Process of cooperation, participation and working together",
+  // TODO Source message changed - Revise the translation
+  "process_event.listelement.badge": "Prozess der Kooperation, Partizipation und Zusammenarbeit",
   
   
-  // "physical_object.listelement.badge": "Objects and materials",
-  "physical_object.listelement.badge": "Gegenstände und Materialien",
+  // "physical_object.listelement.badge": "Object / material for knowledge transfer and subsequent use in research and teaching",
+  // TODO Source message changed - Revise the translation
+  "physical_object.listelement.badge": "Gegenstand / Material",
   
+  
+  // "Project.listelement.badge": "Project",
+  // TODO New key - Add a translation
+  "Project.listelement.badge": "Project",
   
   // "proj_objective.listelement.badge": "Project objectives",
   "proj_objective.listelement.badge": "Projektziele",
   
   
-  // "plan_publication.listelement.badge": "Planned Publications",
-  "plan_publication.listelement.badge": "Geplante Veröffentlichungen",
+  // "plan_publication.listelement.badge": "Planned publications",
+  // TODO Source message changed - Revise the translation
+  "plan_publication.listelement.badge": "Geplante Veröffentlchungen",
   
   
   // "research_result.listelement.badge": "Research results",
@@ -12048,8 +12712,9 @@
   "stateofart.listelement.badge": "Stand des Wissens / Problemstellung",
   
   
-  // "spinoff.listelement.badge": "Spin-offs (incl. association)",
-  "spinoff.listelement.badge": "Ausgründungen (inkl. Vereine)",
+  // "spinoff.listelement.badge": "Spin-off (incl. association)",
+  // TODO Source message changed - Revise the translation
+  "spinoff.listelement.badge": "Ausgründung (inkl. Verein)",
   
   
   // "step.listelement.badge": "Next steps and cooperations",
@@ -12060,20 +12725,23 @@
   "subproject.listelement.badge": "Teilprojekte",
   
   
-  // "targetgroup.listelement.badge": "Stakeholder groups",
-  "targetgroup.listelement.badge": "Akteursgruppen",
+  // "targetgroup.listelement.badge": "Target group",
+  // TODO Source message changed - Revise the translation
+  "targetgroup.listelement.badge": "Akteursgruppe",
   
   
-  // "task.listelement.badge": "Tasks",
-  "task.listelement.badge": "Aufgaben",
+  // "task.listelement.badge": "Task",
+  // TODO Source message changed - Revise the translation
+  "task.listelement.badge": "Aufgabe",
   
   
   // "unexpected_result.listelement.badge": "(Intermediate) results / problems that causes change",
   "unexpected_result.listelement.badge": "(Zwischen) Ergebnisse / Probleme, das Veränderungen bewirkt",
   
   
-  // "workpackage.listelement.badge": "Work packages",
-  "workpackage.listelement.badge": "Arbeitspakete",
+  // "workpackage.listelement.badge": "Work package",
+  // TODO Source message changed - Revise the translation
+  "workpackage.listelement.badge": "Arbeitspaket",
   
   
   // "tree.description.nuts2": "Please select a region.",
@@ -12083,7 +12751,7 @@
   
   // "vocabulary-treeview.tree.description.nuts2": "Selection of region",
   // TODO Source message changed - Revise the translation
-  "vocabulary-treeview.tree.description.nuts2": "<i>Wählen Sie bitte die passende Region.</br>Über die Pfeile lassen sich Listen aufklappen, in denen Sie die passende Region auswählen können. Alternativ können Sie durch Eingabe der ersten Buchstaben eines gesuchten Begriffes im Textfeld die Auswahl auch schon eingrenzen.</i>",
+  "vocabulary-treeview.tree.description.nuts2": "<i>Wählen Sie bitte die passende Region.</br>Über die Pfeile lassen sich Listen aufklappen, in denen Sie die passende Region auswählen können. Auswählbar sind nur die in schwarz angezeigten Regionen. Alternativ können Sie durch Eingabe der ersten Buchstaben eines gesuchten Begriffes im Textfeld die Auswahl auch schon eingrenzen.</i>",
   
   
   // "tree.description.all-innovation": "Type of solution / change / innovation",
@@ -12091,7 +12759,7 @@
   
   
   // "vocabulary-treeview.tree.description.all-innovation": "Please characterize the type of solution / change / innovation by selecting (multiple selections possible).",
-  "vocabulary-treeview.tree.description.all-innovation": "<i>Wählen Sie hier bitte die Art der von Ihnen beschriebenen Lösung, Veränderung oder Innovation. </br>Über die Pfeile lassen sich Listen aufklappen, in denen sich eine passende Art auswählen lässt. Alternativ können Sie durch Eingabe der ersten Buchstaben eines gesuchten Begriffes im Textfeld die Auswahl eingrenzen.</i>",
+  "vocabulary-treeview.tree.description.all-innovation": "<i>Wählen Sie hier bitte die Art der von Ihnen beschriebenen Lösung, Veränderung oder Innovation. </br>Über die Pfeile lassen sich Listen aufklappen, in denen sich eine passende Art auswählen lässt. Auswählbar sind nur die in schwarz angezeigten Arten. Alternativ können Sie durch Eingabe der ersten Buchstaben eines gesuchten Begriffes im Textfeld die Auswahl eingrenzen.</i>",
   
   
   // "tree.description.units": "Unit (selection list)",
@@ -12099,7 +12767,7 @@
   
   
   // "vocabulary-treeview.tree.description.units": "Please select a suitable unit. If no unit fits, please use the next field.",
-  "vocabulary-treeview.tree.description.units": "<i>Bitte wählen Sie eine passende Einheit aus. Falls keine Einheit passt, nutzen Sie bitte das nächste Feld.</i>",
+  "vocabulary-treeview.tree.description.units": "<i>Bitte wählen Sie eine passende Einheit aus. </br>Über die Pfeile lassen sich Listen aufklappen, in denen Sie die passende Einheit auswählen können. Auswählbar sind nur die in schwarz angezeigten Begriffe. Falls keine Einheit passt, nutzen Sie bitte das nächste Feld.</i>",
   
   
   // "tree.description.event-type": "Type of event/interaction",
@@ -12107,7 +12775,7 @@
   
   
   // "vocabulary-treeview.tree.description.event-type": "Please select the appropriate format for the event/ interaction.",
-  "vocabulary-treeview.tree.description.event-type": "<i>Wählen Sie bitte das passende Format für die Veranstaltung oder die Art Interaktion.</i>",
+  "vocabulary-treeview.tree.description.event-type": "<i>Wählen Sie bitte das passende Format für die Veranstaltung oder die Art Interaktion. </br>Über die Pfeile lassen sich Listen aufklappen, in denen Sie das Format auswählen können. Auswählbar sind nur die in schwarz angezeigten Begriffe.</i>",
   
   
   // "tree.description.coar": "Type",
@@ -12116,7 +12784,7 @@
   
   
   // "vocabulary-treeview.tree.description.coar": "Please characterize the type of publication by selecting.",
-  "vocabulary-treeview.tree.description.coar": "<i>Wählen Sie den passenden Typ für die Veröffentlichung aus, zum Beispiel eine Dissertation oder einen Artikel/Aufsatz. Die folgenden Eingabefelder richten sich nach dem ausgewählten Publikationstyp.</i>",
+  "vocabulary-treeview.tree.description.coar": "<i>Wählen Sie bitte den passenden Typ für die Veröffentlichung aus, zum Beispiel eine Dissertation oder einen Artikel/Aufsatz.</br>Über die Pfeile lassen sich Listen aufklappen, in denen Sie den Typ auswählen können. Auswählbar sind nur die in schwarz angezeigten Typen. Alternativ können Sie durch Eingabe der ersten Buchstaben eines gesuchten Begriffes im Textfeld die Auswahl auch schon eingrenzen.</i>",
   
   
   // "submission.sections.submit.progressbar.describe.plan_publications.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Enter here the information about a planned publication.",
@@ -12136,15 +12804,17 @@
   
   
   // "applications.listelement.badge": "Application of a solution / change / innovation",
-  "applications.listelement.badge": "Anwendung einer Lösung / Veränderung / Innovation",
+  "applications.listelement.badge": "Anwendungen von Lösung / Veränderung / Innovation",
   
   
-  // "awards.listelement.badge": "Award or prize",
-  "awards.listelement.badge": "Auszeichnung oder Preis",
+  // "awards.listelement.badge": "Awards and prizes",
+  // TODO Source message changed - Revise the translation
+  "awards.listelement.badge": "Auszeichnungen und Preise",
   
   
-  // "conditions.listelement.badge": "External condition",
-  "conditions.listelement.badge": "Rahmenbedingung",
+  // "conditions.listelement.badge": "External conditions",
+  // TODO Source message changed - Revise the translation
+  "conditions.listelement.badge": "Rahmenbedingungen",
   
   
   // "process_events.listelement.badge": "Process of cooperation, participation and working together",
@@ -12199,8 +12869,9 @@
   "plan_publications.listelement.badge": "Geplannte Veröffentlchungen",
   
   
-  // "proj_objectives.listelement.badge": "Project objective",
-  "proj_objectives.listelement.badge": "Projektziel",
+  // "proj_objectives.listelement.badge": "Project objectives",
+  // TODO Source message changed - Revise the translation
+  "proj_objectives.listelement.badge": "Projektziele",
   
   
   // "projects.listelement.badge": "Research projects",
@@ -12211,28 +12882,33 @@
   "publications.listelement.badge": "Veröffentlichungen",
   
   
-  // "research_results.listelement.badge": "Research result",
-  "research_results.listelement.badge": "Forschungsergebniss",
+  // "research_results.listelement.badge": "Research results",
+  // TODO Source message changed - Revise the translation
+  "research_results.listelement.badge": "Forschungsergebnisse",
   
   
-  // "spinoffs.listelement.badge": "Spin-off",
-  "spinoffs.listelement.badge": "Ausgründung (inkl. Vereinsgründung)",
+  // "spinoffs.listelement.badge": "Spin-offs",
+  // TODO Source message changed - Revise the translation
+  "spinoffs.listelement.badge": "Ausgründungen (inkl. Vereine)",
   
   
-  // "steps.listelement.badge": "Next step or cooperation",
-  "steps.listelement.badge": "Arbeit und Kooperation nach Projektende",
+  // "steps.listelement.badge": "Next steps and cooperations",
+  // TODO Source message changed - Revise the translation
+  "steps.listelement.badge": "Arbeiten und Kooperationen nach Projektende",
   
   
-  // "subprojects.listelement.badge": "Subproject",
-  "subprojects.listelement.badge": "Teilprojekt",
+  // "subprojects.listelement.badge": "Subprojects",
+  // TODO Source message changed - Revise the translation
+  "subprojects.listelement.badge": "Teilprojekte",
   
   
   // "targetgroups.listelement.badge": "Target group",
   "targetgroups.listelement.badge": "Akteursgruppe",
   
   
-  // "unexpected_results.listelement.badge": "(Intermediate) result / problem that causes change",
-  "unexpected_results.listelement.badge": "(Zwischen) Ergebnis / Problem, das Veränderungen bewirkt",
+  // "unexpected_results.listelement.badge": "(Intermediate) results / problems that cause change",
+  // TODO Source message changed - Revise the translation
+  "unexpected_results.listelement.badge": "(Zwischen) Ergebnisse / Probleme, die Veränderungen bewirken",
   
   
   // "workpackages.listelement.badge": "Work package",
@@ -12244,16 +12920,163 @@
   
   
   // "vocabulary-treeview.tree.description.countries": "Please select the country.",
-  "vocabulary-treeview.tree.description.countries": "<i>Bitte wählen Sie das Land aus.</i>",
+  "vocabulary-treeview.tree.description.countries": "<i>Wählen Sie bitte das Land.</br>Über die Pfeile lassen sich Listen aufklappen, in denen Sie das passende Land auswählen können.  Auswählbar sind nur die in schwarz angezeigten Begriffe. Alternativ können Sie durch Eingabe der ersten Buchstaben eines gesuchten Begriffes im Textfeld die Auswahl auch schon eingrenzen.</i>",
   
   
   // "tree.description.register-court": "Registry Court",
   "tree.description.register-court": "Registergericht",
   
   
-  // "vocabulary-treeview.tree.description.register-court": "Please select the city of the registry court."
+  // "vocabulary-treeview.tree.description.register-court": "Please select the city of the registry court.",
   // TODO Source message changed - Revise the translation
-  "vocabulary-treeview.tree.description.register-court": "<i>Bitte wählen Sie den Ort des zuständigen Registergerichts aus.</i>",
+  "vocabulary-treeview.tree.description.register-court": "<i>Bitte wählen Sie den Ort des zuständigen Registergerichts aus.</br>Über die Pfeile lassen sich Listen aufklappen, in denen Sie den Ort auswählen können. Auswählbar sind die in schwarz angezeigten Orte. Alternativ können Sie durch Eingabe der ersten Buchstaben eines gesuchten Begriffes im Textfeld die Auswahl auch schon eingrenzen.</i>",
+  
+  
+  // "submission.sections.submit.progressbar.describe.spinoffs_result_performance": "Survey on success and economic development",
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance": "Angaben zu wirtschaftlicher Entwicklung und Arbeitsschwerpunkten",
+  
+  
+  // "submission.sections.submit.progressbar.describe.spinoffs_result_performance.info": "This section can be used for surveys.",
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance.info": "<p><i>Bitte dokumentieren Sie hier, sofern Ihnen Informationen dazu vorliegen, die wirtschaftliche Entwicklung und inhaltliche Arbeitsschwerpunkte der Ausgründung im Zeitverlauf. </br>Hinweis: Mit diesen Angaben können Sie dem Fördermittelgeber die erfolgreiche Verwertung der Projektergebnisse belegen. </i></p>",
+  
+  
+  // "working-plan.chart.column.steps": "Steps",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.steps": "Steps",
+  
+  
+  // "submission.sections.submit.progressbar.describe.datasets": "Data set",
+  "submission.sections.submit.progressbar.describe.datasets": "Forschungsdaten",
+  
+  
+  // "submission.sections.submit.progressbar.describe.datasets_references": "Link to publications",
+  "submission.sections.submit.progressbar.describe.datasets_references": "Verknüpfung zu Veröffentlichungen",
+  
+  
+  // "exploitationplan.listelement.badge": "Exploitation plan",
+  // TODO Source message changed - Revise the translation
+  "exploitationplan.listelement.badge": "Verwertungsplan",
+  
+  
+  // "submission.sections.submit.progressbar.describe.parentprojects": "Project",
+  "submission.sections.submit.progressbar.describe.parentprojects": "Verbundprojekt",
+  
+  
+  // "submission.sections.submit.progressbar.describe.projects_import": "Project overview",
+  "submission.sections.submit.progressbar.describe.projects_import": "Importierte Informationen",
+  
+  
+  // "submission.sections.submit.progressbar.describe.projects_import.info": "This information is generated from the corresponding subprojects. During the proposal preparation phase, the information comes from the easy-online imports of the subprojects. During the project phase, the information is regularly updated from profi.",
+  "submission.sections.submit.progressbar.describe.projects_import.info": "<p>Über den Import der easy-xml-Dateien und im Projektverlauf über eine Schnittstelle zum Fördermittelgeber findet eine regelmäßige Aktualisierung statt. Es sind keine Eingaben erforderlich.</br>Sollten die Angaben fehlerhaft sein, brauchen und können Sie hier nicht korrigiert werden. Eine Korrektur kann durch einen weiteren easy-online Import Ihres Teilprojektes erfolgen oder im Projektverlauf über eine regelmäßige Aktualisierung aus profi. (Profi ist die Software der Forschungsförderer, in der die Antragsdaten aus easy-online weiter verwaltet werden.)</p>",
+  
+  
+  // "submission.sections.submit.progressbar.describe.projectpartners": "Project partner",
+  "submission.sections.submit.progressbar.describe.projectpartners": "Projektpartner / Verbundpartner",
+  
+  
+  // "submission.sections.submit.progressbar.describe.projectpartners_import": "Information from import",
+  "submission.sections.submit.progressbar.describe.projectpartners_import": "Importierte Informationen",
+  
+  
+  // "submission.sections.submit.progressbar.describe.subcontractors_orgunit": "Subcontractor",
+  "submission.sections.submit.progressbar.describe.subcontractors_orgunit": "Unterauftragnehmer",
+  
+  
+  // "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit": "Ohter cooperationpartner",
+  "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit": "Informeller Kooperationspartner",
+  
+  
+  // "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit.info": "This area serves to map the cooperation within a project. Cooperation is understood to be the agreed collaboration with other organisations, companies or institutions. Collaboration partners, subcontractors and contractual partners already specified in the easy-online proposal are imported and you only need to add information. Please add informal cooperation partners and all project partners joining after the beginning of the project so that a comprehensive picture of the cooperation partners of the project is available. If desired or required, contracts, letters of intent or similar evidence of cooperation can be uploaded. They will not be published and can only be viewed by the funder.",
+  "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit.info": "<p>Hier können Sie Organisationen erfassen, die ohne vertragliche Bindung maßgeblich an der Erarbeitung von Ergebnissen im Projekt mitwirken. D. h. hier erfassen Sie Kooperationspartner des Projektes, die weder Verbundpartner im Projekt noch Unterauftragnehmer sind.</p><p><i>Geben Sie bitte jeden Kooperationspartner separat ein. Über „Name der Organisation“ können Sie suchen, ob bereits Informationen im System vorliegen, die sie importieren können.</i></p>",
+  
+  
+  // "submission.sections.submit.progressbar.describe.team": "Team",
+  "submission.sections.submit.progressbar.describe.team": "Team",
+  
+  
+  // "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentprojects": "Keywords",
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentprojects": "Schlagwörter",
+  
+  
+  // "submission.sections.submit.progressbar.describe.agrovoc_keywords_others": "Keywords",
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords_others": "Schlagwörter",
+  
+  
+  // "submission.sections.submit.progressbar.describe.statusacc1": "Status",
+  "submission.sections.submit.progressbar.describe.statusacc1": "Im Projektverlauf Status der Informationen aktualisieren",
+  
+  
+  // "submission.sections.submit.progressbar.describe.statusacc2": "Status",
+  "submission.sections.submit.progressbar.describe.statusacc2": "Im Projektverlauf Status der Informationen aktualisieren",
+  
+  
+  // "submission.sections.submit.progressbar.describe.statusacc3": "Status",
+  "submission.sections.submit.progressbar.describe.statusacc3": "Im Projektverlauf Status der Informationen aktualisieren",
+  
+  
+  // "submission.sections.submit.progressbar.describe.statusacc4": "Status",
+  "submission.sections.submit.progressbar.describe.statusacc4": "Im Projektverlauf Status der Informationen aktualisieren",
+  
+  
+  // "cooperation-partners.listelement.badge": "Cooperation partner",
+  "cooperation-partners.listelement.badge": "Kooperationspartner",
+  
+  
+  // "Event.listelement.badge": "Event",
+  "Event.listelement.badge": "Veranstaltung / Interaktion",
+  
+  
+  // "OrgUnit.listelement.badge": "Organizational unit",
+  "OrgUnit.listelement.badge": "Organisationseinheit",
+  
+  
+  // "Patent.listelement.badge": "Patent or utility patent",
+  "Patent.listelement.badge": "Patent / Gebrauchsmuster",
+  
+  
+  // "Person.listelement.badge": "Person",
+  "Person.listelement.badge": "Person",
+  
+  
+  // "team.listelement.badge": "Team of subproject",
+  "team.listelement.badge": "Team des Teilprojektes",
+  
+  
+  // "subcontractor.listelement.badge": "Subcontractor",
+  // TODO New key - Add a translation
+  "subcontractor.listelement.badge": "Subcontractor",
+  
+  // "Product.listelement.badge": "Research data",
+  // TODO New key - Add a translation
+  "Product.listelement.badge": "Research data",
+  
+  // "Publication.listelement.badge": "Publication",
+  "Publication.listelement.badge": "Veröffentlichung",
+  
+  
+  // "tree.description.agrovoc": "Keywords",
+  "tree.description.agrovoc": "Schlagwörter",
+  
+  
+  // "submission.sections.submit.progressbar.describe.products": "Data set",
+  "submission.sections.submit.progressbar.describe.products": "Forschungsdaten",
+  
+  
+  // "submission.sections.submit.progressbar.describe.products_references": "Link to publications",
+  "submission.sections.submit.progressbar.describe.products_references": "Verknüpfung zu Veröffentlichungen",
+  
+  
+  // "submission.sections.submit.progressbar.describe.programmes": "Programme",
+  "submission.sections.submit.progressbar.describe.programmes": "Förderprogramm",
+  
+  
+  // "submission.sections.submit.progressbar.describe.calls": "Call",
+  "submission.sections.submit.progressbar.describe.calls": "Bekanntmachung / Ausschreibung",
+  
+  
+  // "submission.sections.submit.progressbar.describe.fundingobjectives": "Funding objective"
+  // TODO Source message changed - Revise the translation
+  "submission.sections.submit.progressbar.describe.fundingobjectives": "Förderziel"
   
   
 

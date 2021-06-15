@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 
-import { Observable, of as observableOf, Subscription } from 'rxjs';
+import { combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { AuthService } from '../../core/auth/auth.service';
 import { SubmissionDefinitionsModel } from '../../core/config/models/config-submission-definitions.model';
@@ -11,7 +11,7 @@ import { WorkspaceitemSectionsObject } from '../../core/submission/models/worksp
 
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import { UploaderOptions } from '../../shared/uploader/uploader-options.model';
-import { SubmissionObjectEntry } from '../objects/submission-objects.reducer';
+import { SubmissionError, SubmissionObjectEntry } from '../objects/submission-objects.reducer';
 import { SectionDataObject } from '../sections/models/section-data.model';
 import { SubmissionService } from '../submission.service';
 import { Item } from '../../core/shared/item.model';
@@ -40,6 +40,12 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * @type {WorkspaceitemSectionsObject}
    */
   @Input() sections: WorkspaceitemSectionsObject;
+
+  /**
+   * The submission errors present in the submission object
+   * @type {SubmissionError}
+   */
+  @Input() submissionErrors: SubmissionError;
 
   /**
    * The submission self url
@@ -128,7 +134,7 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * Initialize all instance variables and retrieve form configuration
    */
   ngOnChanges(changes: SimpleChanges) {
-    if (this.collectionId && this.submissionId) {
+    if ((changes.collectionId && this.collectionId) && (changes.submissionId && this.submissionId)) {
       this.isActive = true;
 
       // retrieve submission's section list
@@ -144,7 +150,15 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
             return observableOf([]);
           }
         }));
-      this.uploadEnabled$ = this.sectionsService.isSectionTypeAvailable(this.submissionId, SectionsType.Upload);
+      const isAvailable$ = this.sectionsService.isSectionTypeAvailable(this.submissionId, SectionsType.Upload);
+      const isReadOnly$ = this.sectionsService.isSectionReadOnly(
+        this.submissionId,
+        SectionsType.Upload,
+        this.submissionService.getSubmissionScope()
+      );
+      this.uploadEnabled$ = combineLatest([isAvailable$, isReadOnly$]).pipe(
+        map(([isAvailable, isReadOnly]: [boolean, boolean]) => isAvailable && !isReadOnly)
+      );
 
       // check if is submission loading
       this.loading = this.submissionService.getSubmissionObject(this.submissionId).pipe(
@@ -162,6 +176,7 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
             this.uploadFilesOptions.authToken = this.authService.buildAuthHeader();
             this.uploadFilesOptions.url = endpointURL.concat(`/${this.submissionId}`);
             this.definitionId = this.submissionDefinition.name;
+            // const { errors } = item;
             this.submissionService.dispatchInit(
               this.collectionId,
               this.submissionId,
@@ -169,7 +184,7 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
               this.submissionDefinition,
               this.sections,
               this.item,
-              null);
+              this.submissionErrors);
             this.changeDetectorRef.detectChanges();
           })
       );

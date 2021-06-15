@@ -27,12 +27,20 @@ import {
   ITEM_EDIT_PRIVATE_PATH,
   ITEM_EDIT_PUBLIC_PATH,
   ITEM_EDIT_REINSTATE_PATH,
+  ITEM_EDIT_UNLINK_ORCID,
   ITEM_EDIT_WITHDRAW_PATH
 } from './edit-item-page.routing-paths';
 import { ItemPageReinstateGuard } from './item-page-reinstate.guard';
 import { ItemPageWithdrawGuard } from './item-page-withdraw.guard';
-import { ItemPageEditMetadataGuard } from '../item-page-edit-metadata.guard';
+import { ItemPageMetadataGuard } from './item-page-metadata.guard';
 import { ItemPageAdministratorGuard } from '../item-page-administrator.guard';
+import { ItemPageStatusGuard } from './item-page-status.guard';
+import { ItemPageBitstreamsGuard } from './item-page-bitstreams.guard';
+import { ItemPageRelationshipsGuard } from './item-page-relationships.guard';
+import { ItemPageVersionHistoryGuard } from './item-page-version-history.guard';
+import { ItemPageCollectionMapperGuard } from './item-page-collection-mapper.guard';
+import { ItemUnlinkOrcidComponent } from './item-unlink-orcid/item-unlink-orcid.component';
+import { ItemPageUnlinkOrcidGuard } from './item-page-unlink-orcid.guard';
 
 /**
  * Routing module that handles the routing for the Edit Item page administrator functionality
@@ -60,25 +68,25 @@ import { ItemPageAdministratorGuard } from '../item-page-administrator.guard';
                 path: 'status',
                 component: ItemStatusComponent,
                 data: { title: 'item.edit.tabs.status.title', showBreadcrumbs: true },
-                canActivate: [ItemPageAdministratorGuard]
+                canActivate: [ItemPageStatusGuard]
               },
               {
                 path: 'bitstreams',
                 component: ItemBitstreamsComponent,
                 data: { title: 'item.edit.tabs.bitstreams.title', showBreadcrumbs: true },
-                canActivate: [ItemPageAdministratorGuard]
+                canActivate: [ItemPageBitstreamsGuard]
               },
               {
                 path: 'metadata',
                 component: ItemMetadataComponent,
                 data: { title: 'item.edit.tabs.metadata.title', showBreadcrumbs: true },
-                canActivate: [ItemPageEditMetadataGuard]
+                canActivate: [ItemPageMetadataGuard]
               },
               {
                 path: 'relationships',
                 component: ItemRelationshipsComponent,
                 data: { title: 'item.edit.tabs.relationships.title', showBreadcrumbs: true },
-                canActivate: [ItemPageEditMetadataGuard]
+                canActivate: [ItemPageRelationshipsGuard]
               },
               /* TODO - uncomment & fix when view page exists
               {
@@ -96,13 +104,13 @@ import { ItemPageAdministratorGuard } from '../item-page-administrator.guard';
                 path: 'versionhistory',
                 component: ItemVersionHistoryComponent,
                 data: { title: 'item.edit.tabs.versionhistory.title', showBreadcrumbs: true },
-                canActivate: [ItemPageAdministratorGuard]
+                canActivate: [ItemPageVersionHistoryGuard]
               },
               {
                 path: 'mapper',
                 component: ItemCollectionMapperComponent,
                 data: { title: 'item.edit.tabs.item-mapper.title', showBreadcrumbs: true },
-                canActivate: [ItemPageAdministratorGuard]
+                canActivate: [ItemPageCollectionMapperGuard]
               }
             ]
           },
@@ -136,6 +144,11 @@ import { ItemPageAdministratorGuard } from '../item-page-administrator.guard';
             path: ITEM_EDIT_MOVE_PATH,
             component: ItemMoveComponent,
             data: { title: 'item.edit.move.title' },
+          },
+          {
+            path: ITEM_EDIT_UNLINK_ORCID,
+            component: ItemUnlinkOrcidComponent,
+            canActivate: [ItemPageUnlinkOrcidGuard],
           },
           {
             path: ITEM_EDIT_AUTHORIZATIONS_PATH,
@@ -175,7 +188,13 @@ import { ItemPageAdministratorGuard } from '../item-page-administrator.guard';
     ItemPageReinstateGuard,
     ItemPageWithdrawGuard,
     ItemPageAdministratorGuard,
-    ItemPageEditMetadataGuard,
+    ItemPageMetadataGuard,
+    ItemPageStatusGuard,
+    ItemPageBitstreamsGuard,
+    ItemPageRelationshipsGuard,
+    ItemPageVersionHistoryGuard,
+    ItemPageCollectionMapperGuard,
+    ItemPageUnlinkOrcidGuard,
   ]
 })
 export class EditItemPageRoutingModule {

@@ -7,7 +7,9 @@ import {
   Inject,
   Input,
   OnDestroy,
-  OnInit
+  OnInit,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { pushInOut } from '../shared/animations/push';
 import { SEARCH_CONFIG_SERVICE } from '../+my-dspace-page/my-dspace-page.component';
@@ -47,6 +49,17 @@ export class ConfigurationSearchPageComponent extends SearchComponent implements
    */
   @Input() fixedFilterQuery: string;
 
+
+  /**
+   * Emit custom event for listable object custom actions.
+   */
+  @Output() customEvent = new EventEmitter<any>();
+
+  /**
+   * Pass custom data to the component for custom utilization
+   */
+  @Input() customData: any;
+
   constructor(protected service: SearchService,
               protected sidebarService: SidebarService,
               protected windowService: HostWindowService,
@@ -64,13 +77,13 @@ export class ConfigurationSearchPageComponent extends SearchComponent implements
    * If something changes, update the list of scopes for the dropdown
    */
   ngOnInit(): void {
-    super.ngOnInit();
     if (hasValue(this.configuration)) {
       this.routeService.setParameter('configuration', this.configuration);
     }
     if (hasValue(this.fixedFilterQuery)) {
       this.routeService.setParameter('fixedFilterQuery', this.fixedFilterQuery);
     }
+    super.ngOnInit();
   }
 
   /**

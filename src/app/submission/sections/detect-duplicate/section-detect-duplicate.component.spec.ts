@@ -99,10 +99,12 @@ const sectionObject: SectionDataObject = {
   config: 'https://dspace.org/api/config/submissionforms/detect-duplicate',
   mandatory: true,
   data: sectionData,
-  errors: [],
+  errorsToShow: [],
+  serverValidationErrors: [],
   header: 'submit.progressbar.detect-duplicate',
   id: 'detect-duplicate',
-  sectionType: SectionsType.DetectDuplicate
+  sectionType: SectionsType.DetectDuplicate,
+  sectionVisibility: null
 };
 
 describe('SubmissionSectionDetectDuplicateComponent test suite', () => {

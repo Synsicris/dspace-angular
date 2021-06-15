@@ -55,7 +55,12 @@ describe('SubmissionFormComponent Component', () => {
         { provide: AuthService, useClass: AuthServiceStub },
         { provide: HALEndpointService, useValue: new HALEndpointServiceStub('workspaceitems') },
         { provide: SubmissionService, useValue: submissionServiceStub },
-        { provide: SectionsService, useValue: { isSectionTypeAvailable: () => observableOf(true) } },
+        { provide: SectionsService, useValue:
+          {
+            isSectionTypeAvailable: () => observableOf(true),
+            isSectionReadOnly: () => observableOf(false)
+          }
+        },
         ChangeDetectorRef,
         SubmissionFormComponent
       ],
@@ -96,6 +101,7 @@ describe('SubmissionFormComponent Component', () => {
       comp = fixture.componentInstance;
       compAsAny = comp;
       authServiceStub = TestBed.inject(AuthService as any);
+      submissionServiceStub.isSectionReadOnly.and.returnValue(observableOf(false));
       submissionServiceStub.startAutoSave.calls.reset();
       submissionServiceStub.resetSubmissionObject.calls.reset();
       submissionServiceStub.dispatchInit.calls.reset();
@@ -126,6 +132,7 @@ describe('SubmissionFormComponent Component', () => {
       comp.submissionDefinition = submissionDefinition;
       comp.selfUrl = selfUrl;
       comp.sections = sectionsData;
+      comp.submissionErrors = null;
       comp.item = new Item();
 
       submissionServiceStub.getSubmissionObject.and.returnValue(observableOf(submissionState));

@@ -1,69 +1,45 @@
-import { Component, OnInit,Inject, InjectionToken } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { RelationshipService  } from '../core/data/relationship.service';
+import { RelationshipService } from '../core/data/relationship.service';
 import { RelationshipType } from '../core/shared/item-relationships/relationship-type.model';
 import { Relationship } from '../core/shared/item-relationships/relationship.model';
-import { defaultIfEmpty, filter, map, mergeMap, switchMap, take,tap,first, mergeAll } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { hasValue, isNotEmpty } from '../shared/empty.util';
+import { hasValue } from '../shared/empty.util';
 import { followLink } from '../shared/utils/follow-link-config.model';
-import { LinkService } from '../core/cache/builders/link.service';
 
 import {
-  getRemoteDataPayload,
   getFirstSucceededRemoteData,
-  getFirstCompletedRemoteData
+  getFirstSucceededRemoteDataPayload,
+  getRemoteDataPayload
 } from '../core/shared/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
-import { redirectOn4xx } from '../core/shared/operators';
-import { fadeInOut } from '../shared/animations/fade';
-import { AuthService } from '../core/auth/auth.service';
 import { EntityTypeService } from '../core/data/entity-type.service';
-import { PaginatedSearchOptions } from '../shared/search/paginated-search-options.model';
-import { SearchService } from '../core/shared/search/search.service';
-import { SearchConfigurationService } from '../core/shared/search/search-configuration.service';
-import { RelationshipsConfigurationService } from './relationships-configuration.service';
-import { SearchConfigurationOption } from '../shared/search/search-switch-configuration/search-configuration-option.model';
-import { MyDSpaceResponseParsingService } from '../core/data/mydspace-response-parsing.service';
-
-import { MyDSpaceRequest } from '../core/data/request.models';
 
 import { Context } from '../core/shared/context.model';
+import { HostWindowService } from '../shared/host-window.service';
 
-import { buildPaginatedList, PaginatedList } from '../core/data/paginated-list.model';
-import { DSpaceObject } from '../core/shared/dspace-object.model';
-import { SearchResult } from '../shared/search/search-result.model';
-
-import {
-  combineLatest as observableCombineLatest,
-  combineLatest,
-  BehaviorSubject,
-  Observable,
-  of as observableOf,
-  zip as observableZip,
-} from 'rxjs';
-
-export const SEARCH_CONFIG_SERVICE: InjectionToken<SearchConfigurationService> = new InjectionToken<SearchConfigurationService>('searchConfigurationService');
-
+import { BehaviorSubject, Observable, } from 'rxjs';
+import { getItemPageRoute } from '../+item-page/item-page-routing-paths';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'ds-edit-item-relationships',
   templateUrl: './edit-item-relationships.component.html',
   styleUrls: ['./edit-item-relationships.component.scss'],
-  providers: [
-    {
-      provide: SEARCH_CONFIG_SERVICE,
-      useClass: RelationshipsConfigurationService
-    }
-  ]
 })
-export class EditItemRelationshipsComponent implements OnInit {
-
+export class EditItemRelationshipsComponent implements OnInit, OnDestroy {
 
   /**
-   * Item as observable Remot Data
+   * A boolean representing if component is active
+   * @type {boolean}
+   */
+  isActive: boolean;
+
+  /**
+   * Item as observable Remote Data
    */
   itemRD$: Observable<RemoteData<Item>>;
 
@@ -71,11 +47,6 @@ export class EditItemRelationshipsComponent implements OnInit {
    * Item that is being checked for relationships
    */
   item: Item;
-
-  /**
-   * The relationship type of the item
-   */
-  itemType: string;
 
   /**
    * A map which stores the relationship types of this item as observable lists
@@ -87,7 +58,7 @@ export class EditItemRelationshipsComponent implements OnInit {
    * A map which stores the relationships of this item for each type as observable lists
    */
 
-  // relationships$: Observable<Relationship[]>;
+    // relationships$: Observable<Relationship[]>;
 
   relationshipsByType$: Map<RelationshipType, Observable<Relationship[]>>
     = new Map<RelationshipType, Observable<Relationship[]>>();
@@ -109,21 +80,6 @@ export class EditItemRelationshipsComponent implements OnInit {
   hasBorder = true;
 
   /**
-   * The current search results
-   */
-  resultsRD$: BehaviorSubject<RemoteData<PaginatedList<SearchResult<DSpaceObject>>>> = new BehaviorSubject(null);
-
-  /**
-   * The current paginated search options
-   */
-  searchOptions$: Observable<PaginatedSearchOptions>;
-
-  /**
-   * The list of available configuration options
-   */
-  configurationList$: Observable<SearchConfigurationOption[]>;
-
-  /**
    * The current context of this page: workspace or workflow
    */
   context: Context = Context.RelationshipItem;
@@ -138,18 +94,43 @@ export class EditItemRelationshipsComponent implements OnInit {
    */
   relationshipResults$: BehaviorSubject<Relationship[]> = new BehaviorSubject([]);
 
+  /**
+   * The relationship configuration
+   */
+  relationshipConfig: string;
+
+  /**
+   * The relationship configuration
+   */
+  searchFilter: string;
+  /**
+   * Emits true if were on a small screen
+   */
+  isXsOrSm$: Observable<boolean>;
+
+  /**
+   * A boolean representing if relationships are initialized
+   */
+  isInit = false;
+
+  /**
+   * This parameter define the status of sidebar (hide/show)
+   */
+  private sidebarStatus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
+  /**
+   * Array to track all subscriptions and unsubscribe them onDestroy
+   */
+  private subs: Subscription[] = [];
+
   constructor(protected relationshipService: RelationshipService,
-    private route: ActivatedRoute,
-    private authService: AuthService,
-    protected entityTypeService: EntityTypeService,
-    protected linkService: LinkService,
-    private service: SearchService,
-    private router: Router,
-    @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: RelationshipsConfigurationService) {
-
+              private route: ActivatedRoute,
+              private router: Router,
+              protected entityTypeService: EntityTypeService,
+              private windowService: HostWindowService
+  ) {
     this.relationshipType = this.route.snapshot.params.type;
-    // this.service.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
-
+    this.isXsOrSm$ = this.windowService.isXsOrSm();
   }
 
   /**
@@ -164,120 +145,66 @@ export class EditItemRelationshipsComponent implements OnInit {
       getFirstSucceededRemoteData()
     ) as Observable<RemoteData<Item>>;
 
-    this.itemRD$.pipe(first()).subscribe((rd) => {
-        this.item = rd.payload;
+    this.getInfo();
 
-        this.itemType = this.item.firstMetadataValue('dspace.entity.type');
-        const relationshipConfig = 'RELATION.' + this.itemType + '.' + this.relationshipType;
+    this.getEntityType();
 
-        this.searchConfigService.setOptions(relationshipConfig,this.item.id);
-
-        this.getResults();
-
-        this.getEntityType();
-
-        this.getRelationships$();
-      }
-    );
+    this.retrieveRelationships();
 
   }
 
-  /**
-   * Get all results of the relation to manage
-   */
-  getResults(): void {
-    this.configurationList$ = this.searchConfigService.getAvailableConfigurationOptions();
-    this.searchOptions$ = this.searchConfigService.paginatedSearchOptions;
-    this.searchOptions$.pipe(
-      tap(() => this.resultsRD$.next(null)),
-      switchMap((options: PaginatedSearchOptions) => this.service.search(options).pipe(getFirstSucceededRemoteData())))
-      .subscribe((results) => {
-        console.log(results);
-        this.resultsRD$.next(results);
-      });
+  getInfo() {
+    this.subs.push(
+      this.itemRD$.pipe(
+        getRemoteDataPayload(),
+        take(1)
+      ).subscribe((item: Item) => {
+        this.item = item;
+        const itemType = item.firstMetadataValue('dspace.entity.type');
+        this.relationshipConfig = 'RELATION.' + itemType + '.' + this.relationshipType;
+        this.searchFilter = `scope=${item.id}`;
+        console.log(this.relationshipConfig);
+        this.isActive = true;
+      })
+    );
   }
 
   /**
    * Get all relationships of the relation to manage
    */
-  getRelationships$(): void {
-
-    this.relationshipService.getItemRelationshipsAsArrayAll(this.item,
-      followLink('leftItem')
-    )
-    .subscribe((relationships: Relationship[]) => {
-      const relations = relationships.filter((relation) => relation.leftwardValue.toLowerCase().includes(this.relationshipType));
-      setTimeout( () => {
-        console.log(relations);
+  retrieveRelationships(): void {
+    this.subs.push(
+      this.itemRD$.pipe(
+        getRemoteDataPayload(),
+        switchMap((item: Item) => this.relationshipService.getItemRelationshipsAsArrayAll(item,
+          followLink('leftItem')
+        ))
+      ).subscribe((relationships: Relationship[]) => {
+        console.log('retrieveRelationships', relationships);
+        const relations = relationships
+          .filter((relation) => relation.leftwardValue.toLowerCase().includes('is' + this.relationshipType));
         this.relationshipResults$.next(relations);
-      }, 500);
-    });
+        this.isInit = true;
+      }));
   }
 
   /**
-   * Get all relationship types availabe to the item selected
+   * Get all relationship types available to the item selected
    */
   getEntityType(): void {
-
-      this.entityTypeService.getEntityTypeByLabel(this.itemType).pipe(
-        getFirstSucceededRemoteData(),
+    this.subs.push(
+      this.itemRD$.pipe(
         getRemoteDataPayload(),
-        switchMap((entityType) => this.entityTypeService.getEntityTypeRelationships(entityType.id)),
-        getFirstSucceededRemoteData(),
-        getRemoteDataPayload(),
-        map((relationshipTypes) => relationshipTypes.page),
-        take(1)
-      ).subscribe( (relationshipTypes) => {
-        this.relTypes = relationshipTypes;
-      });
-
-  }
-
-  /**
-   * Get the relationships of this item with a given type as an observable
-   * @param relationshipType  the relationship type to filter the item's relationships on
-   */
-  getRelationships(relationshipType: RelationshipType): Observable<Relationship[]> {
-
-    if (!this.relationshipsByType$.has(relationshipType)) {
-      this.relationshipsByType$.set(
-        relationshipType,
-        this.relationshipService.getItemRelationshipsAsArrayAll(this.item).pipe(
-          // filter on type
-          switchMap((relationships) =>
-            observableCombineLatest(
-              relationships.map((relationship) => this.getRelationshipType(relationship))
-            )
-            .pipe(
-              defaultIfEmpty([]),
-              map((types) => relationships.filter(
-                (relationship, index) => relationshipType.id === types[index].id
-              )),
-            )
-          ),
-        )
-      );
-    }
-
-    return this.relationshipsByType$.get(relationshipType);
-  }
-
-  /**
-   * Get the type of a given relationship as an observable
-   * @param relationship  the relationship to get the type for
-   */
-  private getRelationshipType(relationship: Relationship): Observable<RelationshipType> {
-
-    this.linkService.resolveLinks(
-      relationship,
-      followLink('relationshipType'),
-      followLink('leftItem'),
-      followLink('rightItem'),
-    );
-    return relationship.relationshipType.pipe(
-      getFirstSucceededRemoteData(),
-      getRemoteDataPayload(),
-      filter((relationshipType: RelationshipType) => hasValue(relationshipType) && isNotEmpty(relationshipType.uuid))
+        map((item: Item) => item.firstMetadataValue('dspace.entity.type')),
+        switchMap((itemType: string) => this.entityTypeService.getEntityTypeByLabel(itemType).pipe(
+          getFirstSucceededRemoteDataPayload(),
+          switchMap((entityType) => this.entityTypeService.getEntityTypeRelationships(entityType.id)),
+          getFirstSucceededRemoteDataPayload(),
+          map((relationshipTypes) => relationshipTypes.page),
+          take(1)
+        ))).subscribe((relationshipTypes) => {
+          this.relTypes = relationshipTypes;
+        })
     );
   }
 
@@ -291,33 +218,36 @@ export class EditItemRelationshipsComponent implements OnInit {
     this.updateRelationship(relationship);
   }
 
-
   /**
    * When an action is performed manage the relationships of the item
    * @param event  the event from which comes an action type
    */
   manageRelationship(event): void {
-    if ( event.action === 'select' ) {
-      const relationshipType = this.relTypes.find((type) => type.leftwardType.toLowerCase().includes('select') && type.leftwardType.toLowerCase().includes(this.relationshipType));
-      this.addRelationship(relationshipType, event.item);
-    } else if ( event.action === 'hide' ) {
-      const relationshipType = this.relTypes.find((type) => type.leftwardType.toLowerCase().includes('hidden') && type.leftwardType.toLowerCase().includes(this.relationshipType));
-      this.addRelationship(relationshipType, event.item);
+    if (event.action === 'select' || event.action === 'hide') {
+      const relType = event.action === 'select' ? 'select' : 'hidden';
+      const relationshipType = this.relTypes.find((type) => type.leftwardType.toLowerCase().includes(relType) && type.leftwardType.toLowerCase().includes('is' + this.relationshipType));
+
+      if (!event.relationship) {
+        this.addRelationship(relationshipType, event.item);
+      } else {
+        this.deleteAddRelationship(relationshipType, event.item, event.relationship);
+      }
+
     } else {
       this.deleteRelationship(event.relationship);
     }
   }
 
-
   /**
    * Request for adding relationship between two items
    * @param type  the relationship type of the relationship created
-   * @param ojbectItem  the relationship type of the relationship created
+   * @param objectItem  the relationship type of the relationship created
    */
   addRelationship(type: RelationshipType, objectItem: Item): void {
-    this.relationshipService.addRelationship(type.id, objectItem, this.item, type.leftwardType, type.rightwardType).subscribe((res) => {
-      this.getRelationships$();
-    });
+    this.relationshipService.addRelationship(type.id, objectItem, this.item, type.leftwardType, type.rightwardType).pipe(take(1))
+      .subscribe(() => {
+        this.retrieveRelationships();
+      });
   }
 
   /**
@@ -325,11 +255,12 @@ export class EditItemRelationshipsComponent implements OnInit {
    * @param relationship  the relationship to update place
    */
   updateRelationship(relationship: Relationship): void {
-    this.relationshipService.updateRightPlace(relationship).subscribe((res) => {
-      console.log(res);
-    },(err) => {
-      this.getRelationships$();
-    });
+    this.relationshipService.updateRightPlace(relationship).pipe(take(1))
+      .subscribe((res) => {
+        console.log(res);
+      }, (err) => {
+        this.retrieveRelationships();
+      });
   }
 
   /**
@@ -338,10 +269,54 @@ export class EditItemRelationshipsComponent implements OnInit {
    */
   deleteRelationship(relationship: Relationship): void {
     this.relationshipService.deleteRelationship(relationship.id).subscribe((res) => {
-      this.getRelationships$();
+      this.retrieveRelationships();
     });
   }
 
+  /**
+   * Request for deleting a relationship and then adding a new relationship between two items
+   * @param type  the relationship type of the relationship created
+   * @param objectItem  the relationship type of the relationship created
+   * @param relationship  the relationship to delete
+   */
+  deleteAddRelationship(type: RelationshipType, objectItem: Item, relationship: Relationship) {
+    this.relationshipService.deleteRelationship(relationship.id).pipe(take(1))
+      .subscribe(() => {
+        this.addRelationship(type, objectItem);
+      });
+  }
 
+  /**
+   * It is used for hide/show the right relationship list
+   */
+  toggleSidebar(): void {
+    this.sidebarStatus$.next(!this.sidebarStatus$.value);
+  }
+
+  /**
+   * Return the relationship list status
+   */
+  isSideBarHidden(): Observable<boolean> {
+    return this.sidebarStatus$.asObservable().pipe(
+      map((status: boolean) => !status)
+    );
+  }
+
+  /**
+   * When return button is pressed go to previous location
+   */
+  public onReturn() {
+    this.router.navigateByUrl(getItemPageRoute(this.item));
+  }
+
+  /**
+   * Unsubscribe from all subscriptions
+   */
+  ngOnDestroy(): void {
+    this.isActive = false;
+    this.subs
+      .filter((sub) => hasValue(sub))
+      .forEach((sub) => sub.unsubscribe());
+  }
 
 }
