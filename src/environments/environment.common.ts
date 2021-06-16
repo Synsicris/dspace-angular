@@ -389,7 +389,7 @@ export const environment: GlobalConfig = {
     allLinkedWorkingPlanObjSearchConfigName: 'allLinkedWorkingPlanObj',
     allUnlinkedWorkingPlanObjSearchConfigName: 'allUnlinkedWorkingPlanObj',
     workpackageStepsSearchConfigName: 'workpackageSteps',
-    workpackageStatusTypeAuthority: 'working_plan_workpackage_status_type',
+    workpackageStatusTypeAuthority: 'stat_col23',
     workpackageTypeAuthority: 'working_plan_workpackage_type',
     workpackageStepTypeAuthority: 'working_plan_workpackage_step_type',
     workingPlanPlaceMetadata: 'workingplan.place',
