@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { PaginatedList } from '../../core/data/paginated-list.model';
@@ -22,6 +22,7 @@ import { ProjectAuthorizationService } from '../../core/project/project-authoriz
 import { ProjectDataService } from '../../core/project/project-data.service';
 import { CreateProjectComponent } from '../../projects/create-project/create-project.component';
 import { CreateImpactPathwayComponent } from '../../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
+import { getItemPageRoute } from '../../+item-page/item-page-routing-paths';
 
 @Component({
   selector: 'ds-project-overview-page-content',
@@ -221,6 +222,17 @@ export class ProjectOverviewPageContentComponent implements OnInit {
   navigateToSubProject(subproject: Community) {
     const url = `${PROJECT_PAGE}/${this.projectUUID}/subproject/${subproject.id}`;
     this.router.navigateByUrl(url);
+  }
+
+  /**
+   * Get link to the item project page
+   * @param projectCommunityId
+   */
+  getProjectItemPath(projectCommunityId: string): Observable<string> {
+    return this.projectService.getProjectItemByRelation(projectCommunityId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((item: Item) => getItemPageRoute(item))
+    );
   }
 
   /**
