@@ -83,6 +83,7 @@ export class WorkingPlanEffects {
         action.payload.metadata,
         action.payload.place).pipe(
         map((searchItem: Item) => new GenerateWorkpackageSuccessAction(
+          action.payload.projectId,
           searchItem,
           searchItem.id)),
         catchError((error: Error) => {
@@ -99,7 +100,7 @@ export class WorkingPlanEffects {
   @Effect() generateWorkpackageSuccess$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.GENERATE_WORKPACKAGE_SUCCESS),
     map((action: GenerateWorkpackageSuccessAction) => {
-      return new AddWorkpackageAction(action.payload.item.id, action.payload.workspaceItemId);
+      return new AddWorkpackageAction(action.payload.projectId,  action.payload.item.id, action.payload.workspaceItemId);
     }));
 
   /**
@@ -107,17 +108,20 @@ export class WorkingPlanEffects {
    */
   @Effect() addWorkpackage$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.ADD_WORKPACKAGE),
-    concatMap((action: AddWorkpackageAction) => {
+    withLatestFrom(this.store$),
+    concatMap(([action, state]: [AddWorkpackageAction, any]) => {
       return this.workingPlanService.linkWorkingPlanObject(
         action.payload.workpackageId,
         action.payload.place
       ).pipe(
-        map((workpackageItem: Item) => {
-          return this.workingPlanService.initWorkpackageFromItem(workpackageItem, action.payload.workspaceItemId);
+        map(() => {
+          console.log(state);
+          return new RetrieveAllLinkedWorkingPlanObjectsAction(
+            action.payload.projectId,
+            state.workingplan.sortOption);
         }),
-        map((workpackage: Workpackage) => {
-          return new AddWorkpackageSuccessAction(
-            workpackage);
+        tap(() => {
+          this.store$.dispatch(new AddWorkpackageSuccessAction());
         }),
         catchError((error: Error) => {
           console.error(error.message);
@@ -307,7 +311,8 @@ export class WorkingPlanEffects {
     withLatestFrom(this.store$),
     switchMap(([action, state]: [InitWorkingplanSuccessAction, any]) => {
       return this.workingPlanService.updateWorkpackagePlace(
-        state.workingplan.workpackages);
+        state.workingplan.workpackages,
+        action.payload.sortOption);
     }));
 
   /**

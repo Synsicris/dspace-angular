@@ -108,6 +108,7 @@ export class GenerateWorkpackageAction implements Action {
 export class GenerateWorkpackageSuccessAction implements Action {
   type = WorkpackageActionTypes.GENERATE_WORKPACKAGE_SUCCESS;
   payload: {
+    projectId: string;
     item: Item;
     workspaceItemId: string;
   };
@@ -115,13 +116,15 @@ export class GenerateWorkpackageSuccessAction implements Action {
   /**
    * Create a new GenerateWorkpackageSuccessAction
    *
+   * @param projectId
+   *    the project identifier
    * @param item
    *    the Item of the workpackage generated
    * @param workspaceItemId
    *    the workspaceItem's id generated
    */
-  constructor(item: Item, workspaceItemId: string) {
-    this.payload = { item, workspaceItemId };
+  constructor(projectId: string, item: Item, workspaceItemId: string) {
+    this.payload = {projectId, item, workspaceItemId };
   }
 }
 
@@ -138,6 +141,7 @@ export class GenerateWorkpackageErrorAction implements Action {
 export class AddWorkpackageAction implements Action {
   type = WorkpackageActionTypes.ADD_WORKPACKAGE;
   payload: {
+    projectId: string;
     workpackageId: string;
     workspaceItemId: string;
     place?: string;
@@ -146,6 +150,8 @@ export class AddWorkpackageAction implements Action {
   /**
    * Create a new AddWorkpackageAction
    *
+   * @param projectId
+   *    the project identifier
    * @param workpackageId
    *    the Item id of the workpackage to add
    * @param workspaceItemId
@@ -153,8 +159,8 @@ export class AddWorkpackageAction implements Action {
    * @param place string
    *    the workpackage's place
    */
-  constructor(workpackageId: string, workspaceItemId: string, place?: string) {
-    this.payload = { workpackageId, workspaceItemId, place };
+  constructor(projectId: string, workpackageId: string, workspaceItemId: string, place?: string) {
+    this.payload = { projectId, workpackageId, workspaceItemId, place };
   }
 }
 
@@ -163,19 +169,6 @@ export class AddWorkpackageAction implements Action {
  */
 export class AddWorkpackageSuccessAction implements Action {
   type = WorkpackageActionTypes.ADD_WORKPACKAGE_SUCCESS;
-  payload: {
-    workpackage: Workpackage;
-  };
-
-  /**
-   * Create a new AddWorkpackageSuccessAction
-   *
-   * @param workpackage
-   *    the Workpackage object to add
-   */
-  constructor(workpackage: Workpackage) {
-    this.payload = { workpackage };
-  }
 }
 
 /**
@@ -476,7 +469,9 @@ export class RetrieveAllLinkedWorkingPlanObjectsAction implements Action {
    * Create a new RetrieveAllLinkedWorkingPlanObjectsAction
    *
    * @param projectId
-   *    the project'id
+   *    the project id
+   * @param sortOption
+   *    the sort type
    */
   constructor(projectId: string, sortOption: string) {
     this.payload = { projectId, sortOption };

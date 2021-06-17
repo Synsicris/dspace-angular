@@ -209,7 +209,7 @@ export class WorkingPlanService {
       scope: projectId
     });
 
-    return this.searchService.search(searchOptions).pipe(
+    return this.searchService.search(searchOptions, 0, false).pipe(
       filter((rd: RemoteData<PaginatedList<SearchResult<any>>>) => rd.hasSucceeded),
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
@@ -484,21 +484,26 @@ export class WorkingPlanService {
     );
   }
 
-  updateWorkpackagePlace(workpackages: WorkpackageEntries): Observable<Item[]> {
-    const list = Object.keys(workpackages)
-      .map((key, index) => ({
-        id: key,
-        metadataList: [
-          {
-            key: environment.workingPlan.workingPlanPlaceMetadata,
-            language: '',
-            value: index.toString().padStart(3, '0'),
-            place: 0,
-            authority: '',
-            confidence: -1
-          } as MetadatumViewModel
-        ]
-      }));
+  updateWorkpackagePlace(workpackages: WorkpackageEntries, sortOption: string = environment.workingPlan.workingPlanPlaceMetadata): Observable<Item[]> {
+    let list: any[];
+    if (sortOption === environment.workingPlan.workingPlanPlaceMetadata) {
+      list = Object.keys(workpackages)
+        .map((key, index) => ({
+          id: key,
+          metadataList: [
+            {
+              key: environment.workingPlan.workingPlanPlaceMetadata,
+              language: '',
+              value: index.toString().padStart(3, '0'),
+              place: 0,
+              authority: '',
+              confidence: -1
+            } as MetadatumViewModel
+          ]
+        }));
+    } else {
+      list = [];
+    }
 
     return observableFrom(list).pipe(
       concatMap((entry) => this.updateMetadataItem(entry.id, entry.metadataList)),

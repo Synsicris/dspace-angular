@@ -126,9 +126,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
    sortSelectedValue: string;
   /**
-   * The selected sorting option. This choice is not yet applied.
+   * The old selected sorting option.
    */
-  sortSelectedTemp: string;
+   sortSelectedOld: string;
 
   chartData;
 
@@ -197,7 +197,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this.sortSelected$.subscribe(
         (sortOption: string) => {
           this.sortSelectedValue = sortOption;
-          this.sortSelectedTemp = sortOption;
+          this.sortSelectedOld = sortOption;
         }
       )
     );
@@ -489,20 +489,22 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Update the sort option selected inside the SortBy dropdown. This choice is not yet applied.
+   * Reset the SortBy dropdown to the actual value.
    *
-   * @param sortOption string
+   * @param isOpen boolean
    */
-  updateTempSelectedSortOption(sortOption: string): void {
-    this.sortSelectedTemp = sortOption;
+  resetSortDropdown(isOpen: boolean): void {
+    if ( isOpen ) {
+      this.sortSelectedValue = this.sortSelectedOld;
+    }
   }
 
   /**
    * Update the chart with the new sort option.
    */
   updateSort() {
-    if (this.sortSelectedValue !== this.sortSelectedTemp) {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectId, this.sortSelectedTemp);
+    if (this.sortSelectedValue !== this.sortSelectedOld) {
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectId, this.sortSelectedValue);
     }
   }
 

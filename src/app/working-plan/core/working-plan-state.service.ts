@@ -70,8 +70,8 @@ export class WorkingPlanStateService {
     this.store.dispatch(new GenerateWorkpackageAction(projectId, type, metadata, place));
   }
 
-  public dispatchAddWorkpackageAction(itemId: string, workspaceItemId: string, place: string): void {
-    this.store.dispatch(new AddWorkpackageAction(itemId, workspaceItemId, place));
+  public dispatchAddWorkpackageAction(projectId: string, itemId: string, workspaceItemId: string, place: string): void {
+    this.store.dispatch(new AddWorkpackageAction(projectId, itemId, workspaceItemId, place));
   }
 
   public dispatchGenerateWorkpackageStep(

@@ -8059,7 +8059,7 @@
   "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
 
 
-  "working-plan.chart.column.responsible": "Responsible",
+  "working-plan.chart.column.responsible": "Responsible Organisation",
 
 
   "working-plan.chart.column.sortBy": "Sort by ...",

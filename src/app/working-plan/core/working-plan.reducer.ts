@@ -96,10 +96,6 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
       });
     }
 
-    case WorkpackageActionTypes.ADD_WORKPACKAGE_SUCCESS: {
-      return addWorkpackage(state, action as AddWorkpackageSuccessAction);
-    }
-
     case WorkpackageActionTypes.ADD_WORKPACKAGE_STEP_SUCCESS: {
       return addWorkpackageStep(state, action as AddWorkpackageStepSuccessAction);
     }
@@ -230,25 +226,6 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
       return state;
     }
   }
-}
-
-/**
- * Add a workpackage object.
- *
- * @param state
- *    the current state
- * @param action
- *    an AddWorkpackageSuccessAction
- * @return WorkingPlanState
- *    the new state.
- */
-function addWorkpackage(state: WorkingPlanState, action: AddWorkpackageSuccessAction): WorkingPlanState {
-  return Object.assign({}, state, {
-    workpackages: Object.assign({}, state.workpackages, {
-      [action.payload.workpackage.id]: action.payload.workpackage
-    }),
-    processing: false
-  });
 }
 
 /**

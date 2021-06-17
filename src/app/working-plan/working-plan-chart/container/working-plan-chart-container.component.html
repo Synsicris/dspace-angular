@@ -12,7 +12,7 @@
               <button class="btn-sm" ngbDropdownItem>Option2</button>
             </div>
           </div>
-          <div ngbDropdown #sortByDrop="ngbDropdown" class="d-inline-block">
+          <div ngbDropdown #sortByDrop="ngbDropdown" class="d-inline-block" (openChange)="resetSortDropdown($event)">
             <button class="btn btn-outline-info btn-xs mr-2" id="sortBy" ngbDropdownToggle>{{'working-plan.chart.column.sortBy' | translate}}</button>
             <div ngbDropdownMenu class="block-change-start-date font-size-07 p-2" aria-labelledby="sortBy">
               <button type="button" class="close" data-dismiss="alert" attr.aria-label="{{'working-plan.chart.column.changeStartDateClose' | translate}}" (click)="sortByDrop.close()">
@@ -22,14 +22,14 @@
               <form>
                 <div>
                   <div>
-                    <mat-radio-group (change)="updateTempSelectedSortOption($event.source.value)" class="block-change-start-date-radio" aria-labelledby="changeAllStartDateDaysRadio">
-                      <mat-radio-button *ngFor="let sortOpts of (sortOptions$ | async)?.sortOptions" [value]="sortOpts.name" [checked]="(sortSelected$ | async) === sortOpts.name">
+                    <mat-radio-group [(ngModel)]="sortSelectedValue" [ngModelOptions]="{standalone: true}" class="block-change-start-date-radio" aria-labelledby="changeAllStartDateDaysRadio">
+                      <mat-radio-button *ngFor="let sortOpts of (sortOptions$ | async)?.sortOptions" [value]="sortOpts.name">
                         {{'working-plan.chart.column.sortBy.option.' + sortOpts.name | translate}}
                       </mat-radio-button>
                     </mat-radio-group>
                   </div>
                   <div class="ml-auto float-right">
-                    <button type="submit" class="btn btn-primary btn-sm" (click)="updateSort();sortByDrop.close();" [disabled]="(isProcessingWorkpackage() | async) || sortSelectedTemp === ''">
+                    <button type="submit" class="btn btn-primary btn-sm" (click)="updateSort();sortByDrop.close();" [disabled]="(isProcessingWorkpackage() | async) || sortSelectedOld === ''">
                       <span *ngIf="!(isProcessingWorkpackage() | async)">
                         {{'working-plan.chart.column.changeStartDate.apply' | translate}}
                       </span>
