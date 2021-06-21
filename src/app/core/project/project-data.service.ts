@@ -159,7 +159,7 @@ export class ProjectDataService extends CommunityDataService {
   }
 
   /**
-   * Get the item associated with the project by dc.relation.project metadata
+   * Get the item associated with the project by synsicris.relation.entity_project metadata
    *
    * @param projectCommunityId The project community id
    * @return the RestResponse as an Observable
@@ -168,7 +168,7 @@ export class ProjectDataService extends CommunityDataService {
     return this.findById(projectCommunityId).pipe(
       getFirstSucceededRemoteDataPayload(),
       switchMap((community: Community) => {
-        const metadataValue = Metadata.first(community.metadata, 'dc.relation.project');
+        const metadataValue = Metadata.first(community.metadata, 'synsicris.relation.entity_project');
         if (isNotEmpty(metadataValue) && isNotEmpty(metadataValue.authority)) {
           return this.itemService.findById(metadataValue.authority).pipe(
             getFirstCompletedRemoteData()
