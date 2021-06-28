@@ -14,7 +14,7 @@ import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'ipw-objective-container',
-  styleUrls: ['./objective-container.component.scss', '../../../shared/drag-and-drop-container.component.scss'],
+  styleUrls: ['../../../shared/drag-and-drop-container.component.scss', './objective-container.component.scss'],
   templateUrl: './objective-container.component.html'
 })
 export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
