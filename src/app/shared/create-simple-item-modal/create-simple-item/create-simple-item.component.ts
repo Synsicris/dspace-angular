@@ -13,6 +13,7 @@ import { FormFieldMetadataValueObject } from '../../form/builder/models/form-fie
 import { SimpleItem } from '../models/simple-item.model';
 import { dateToISOFormat, isNgbDateStruct } from '../../date.util';
 import { isNotEmpty } from '../../empty.util';
+import { SubmissionScopeType } from '../../../core/submission/submission-scope-type';
 
 @Component({
   selector: 'ds-create-simple-item',
@@ -112,7 +113,9 @@ export class CreateSimpleItemComponent implements OnInit, OnDestroy {
         this.formModel = this.formBuilderService.modelFromConfiguration(
           null,
           formConfig,
-          ''
+          '',
+          null,
+          SubmissionScopeType.WorkspaceItem
         );
       });
   }
