@@ -18,3 +18,11 @@
 .hint {
   cursor: pointer;
 }
+
+::ng-deep .hint-tooltip .tooltip-inner {
+  background-color: #d2e4ea;
+  color: #113d4f;
+}
+::ng-deep .hint-tooltip .arrow::before {
+  border-top-color: #d2e4ea;
+}

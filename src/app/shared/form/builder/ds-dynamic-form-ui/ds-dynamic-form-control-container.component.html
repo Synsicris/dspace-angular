@@ -7,13 +7,14 @@
            [ngClass]="[getClass('element', 'label'), getClass('grid', 'label')]">
       {{(model.required && model.label) ? (model.label | translate) + ' *' : (model.label | translate)}}
       <i *ngIf="hasHint" class="far fa-question-circle text-info hint"
-       [ngbTooltip]="(model.hint | translate)"
-       [autoClose]="false"
-       triggers="manual"
-       #hint="ngbTooltip"
-       placement="top"
-       container="body"
-       (click)="hint.toggle();$event.preventDefault();"></i>
+         [ngbTooltip]="(model.hint | translate)"
+         [autoClose]="false"
+         tooltipClass="hint-tooltip"
+         triggers="manual"
+         #hint="ngbTooltip"
+         placement="top"
+         container="body"
+         (click)="hint.toggle();$event.preventDefault();"></i>
     </label>
     <ng-container *ngTemplateOutlet="startTemplate?.templateRef; context: model"></ng-container>
     <!--    Should be *ngIf instead of class d-none, but that breaks the #componentViewContainer reference-->

@@ -601,15 +601,17 @@ export class SubmissionService {
       tap((url) => this.requestService.removeByHrefSubstring(url)),
       // Now, do redirect.
       concatMap(
-        () => this.routeService.getPreviousUrl().pipe(
+        () => this.routeService.getHistory().pipe(
           take(1),
-          tap((previousUrl) => {
+          tap((history: string[]) => {
+            let previousUrl = history[history.length - 2] || '';
             if (isEmpty(previousUrl)) {
               this.router.navigate(['/home']);
-            } else {
-              this.router.navigateByUrl(previousUrl);
+            } else if (previousUrl.startsWith('/submit')) {
+              previousUrl = history[history.length - 3];
             }
-        })))
+            this.router.navigateByUrl(previousUrl);
+          })))
     ).subscribe();
   }
 
