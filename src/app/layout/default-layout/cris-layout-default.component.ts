@@ -167,6 +167,13 @@ export class CrisLayoutDefaultComponent extends CrisLayoutPageObj implements OnI
   }
 
   /**
+   * Get Item entity type
+   */
+  getEntityType() {
+    return this.item.firstMetadataValue('dspace.entity.type');
+  }
+
+  /**
    * Return list of tabs
    */
   getTabs(): Observable<Tab[]> {
