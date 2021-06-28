@@ -444,6 +444,9 @@ export class SubmissionService {
       case this.editItemsLinkPath:
         scope = SubmissionScopeType.EditItem;
         break;
+      default:
+        scope = SubmissionScopeType.WorkspaceItem;
+        break;
     }
     return scope;
   }
