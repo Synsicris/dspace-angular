@@ -50,6 +50,7 @@ import {
   getFirstSucceededRemoteDataPayload,
   getRemoteDataPayload
 } from '../../core/shared/operators';
+import { SearchConfig } from '../../core/shared/search/search-filters/search-config.model';
 import { ItemJsonPatchOperationsService } from '../../core/data/item-json-patch-operations.service';
 import { ItemDataService } from '../../core/data/item-data.service';
 import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
@@ -139,6 +140,12 @@ export class WorkingPlanService {
     ) as Observable<SubmissionFormModel>;
   }
 
+  getWorkpackageSortOptions(): Observable<SearchConfig> {
+    return this.searchService.getSearchConfigurationFor(null, 'allLinkedWorkingPlanObj').pipe(
+      getFirstSucceededRemoteDataPayload()
+    ) as Observable<SearchConfig>;
+  }
+
   getWorkpackageFormHeader(): string {
     return environment.workingPlan.workingPlanFormName;
   }
@@ -188,12 +195,12 @@ export class WorkingPlanService {
     return environment.workingPlan.workpackageStepsSearchConfigName;
   }
 
-  searchForLinkedWorkingPlanObjects(projectId: string): Observable<WorkpackageSearchItem[]> {
+  searchForLinkedWorkingPlanObjects(projectId: string, sortOption: string = environment.workingPlan.workingPlanPlaceMetadata): Observable<WorkpackageSearchItem[]> {
     const searchConfiguration = environment.workingPlan.allLinkedWorkingPlanObjSearchConfigName;
     const paginationOptions: PaginationComponentOptions = new PaginationComponentOptions();
     paginationOptions.id = 'slw';
     paginationOptions.pageSize = 1000;
-    const sortOptions = new SortOptions(environment.workingPlan.workingPlanPlaceMetadata, SortDirection.ASC);
+    const sortOptions = new SortOptions(sortOption, SortDirection.ASC);
 
     const searchOptions = new PaginatedSearchOptions({
       configuration: searchConfiguration,
@@ -202,7 +209,7 @@ export class WorkingPlanService {
       scope: projectId
     });
 
-    return this.searchService.search(searchOptions).pipe(
+    return this.searchService.search(searchOptions, 0, false).pipe(
       filter((rd: RemoteData<PaginatedList<SearchResult<any>>>) => rd.hasSucceeded),
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
@@ -477,21 +484,26 @@ export class WorkingPlanService {
     );
   }
 
-  updateWorkpackagePlace(workpackages: WorkpackageEntries): Observable<Item[]> {
-    const list = Object.keys(workpackages)
-      .map((key, index) => ({
-        id: key,
-        metadataList: [
-          {
-            key: environment.workingPlan.workingPlanPlaceMetadata,
-            language: '',
-            value: index.toString().padStart(3, '0'),
-            place: 0,
-            authority: '',
-            confidence: -1
-          } as MetadatumViewModel
-        ]
-      }));
+  updateWorkpackagePlace(workpackages: WorkpackageEntries, sortOption: string = environment.workingPlan.workingPlanPlaceMetadata): Observable<Item[]> {
+    let list: any[];
+    if (sortOption === environment.workingPlan.workingPlanPlaceMetadata) {
+      list = Object.keys(workpackages)
+        .map((key, index) => ({
+          id: key,
+          metadataList: [
+            {
+              key: environment.workingPlan.workingPlanPlaceMetadata,
+              language: '',
+              value: index.toString().padStart(3, '0'),
+              place: 0,
+              authority: '',
+              confidence: -1
+            } as MetadatumViewModel
+          ]
+        }));
+    } else {
+      list = [];
+    }
 
     return observableFrom(list).pipe(
       concatMap((entry) => this.updateMetadataItem(entry.id, entry.metadataList)),
@@ -505,10 +517,10 @@ export class WorkingPlanService {
         {
           key: environment.workingPlan.workingPlanStepRelationMetadata,
           language: '',
-          value: step.id,
+          value: step.name,
           place: index,
-          authority: '',
-          confidence: -1
+          authority: step.id,
+          confidence: 600
         } as MetadatumViewModel));
 
     return this.updateMetadataItem(workpackageId, metadataList);

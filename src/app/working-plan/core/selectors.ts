@@ -51,6 +51,15 @@ export const isWorkingPlanLoadedSelector = createSelector(_getWorkingPlanState,
 );
 
 /**
+ * Returns the WorkPackages sort option.
+ * @function workpackagesSortOptionSelector
+ * @return {string}
+ */
+ export const workpackagesSortOptionSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.sortOption
+);
+
+/**
  * Returns true if the user a operation is processing.
  * @function isWorkingPlanProcessingSelector
  * @return {boolean}

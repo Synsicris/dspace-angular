@@ -22,6 +22,7 @@ import {
   WorkpackageActionTypes
 } from './working-plan.actions';
 import { WpActionPackage, WpStepActionPackage } from './working-plan-state.service';
+import { act } from '@ngrx/effects';
 
 export enum ChartDateViewType {
   day = 'day',
@@ -48,6 +49,7 @@ export interface WorkingPlanState {
   processing: boolean;
   moving: boolean;
   chartDateView: ChartDateViewType;
+  sortOption: string;
 }
 
 const workpackageInitialState: WorkingPlanState = {
@@ -57,7 +59,8 @@ const workpackageInitialState: WorkingPlanState = {
   loaded: false,
   processing: false,
   moving: false,
-  chartDateView: ChartDateViewType.month
+  chartDateView: ChartDateViewType.month,
+  sortOption: ''
 };
 
 /**
@@ -91,10 +94,6 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
       return Object.assign({}, state, {
         processing: true
       });
-    }
-
-    case WorkpackageActionTypes.ADD_WORKPACKAGE_SUCCESS: {
-      return addWorkpackage(state, action as AddWorkpackageSuccessAction);
     }
 
     case WorkpackageActionTypes.ADD_WORKPACKAGE_STEP_SUCCESS: {
@@ -230,25 +229,6 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
 }
 
 /**
- * Add a workpackage object.
- *
- * @param state
- *    the current state
- * @param action
- *    an AddWorkpackageSuccessAction
- * @return WorkingPlanState
- *    the new state.
- */
-function addWorkpackage(state: WorkingPlanState, action: AddWorkpackageSuccessAction): WorkingPlanState {
-  return Object.assign({}, state, {
-    workpackages: Object.assign({}, state.workpackages, {
-      [action.payload.workpackage.id]: action.payload.workpackage
-    }),
-    processing: false
-  });
-}
-
-/**
  * Add a workpackage step object.
  *
  * @param state
@@ -290,7 +270,8 @@ function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSucces
   return Object.assign({}, state, {
     workpackages: workpackages,
     processing: false,
-    loaded: true
+    loaded: true,
+    sortOption: action.payload.sortOption
   });
 }
 
@@ -452,18 +433,15 @@ function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackag
  */
 function moveWorkpackage(state: WorkingPlanState, action: MoveWorkpackageAction) {
   const toMove = get(state.workpackages, action.payload.workpackageId);
-  const oldValue = get(state.workpackages, Object.keys(state.workpackages)[action.payload.newIndex]);
-
   const newWorpackages = {};
 
   Object.keys(state.workpackages)
     .forEach((workpackageId, index) => {
-      if (index === action.payload.oldIndex) {
-        newWorpackages[oldValue.id] = oldValue;
-      } else if (index === action.payload.newIndex) {
-        newWorpackages[toMove.id] = toMove;
-      } else {
+      if (index !== action.payload.oldIndex) {
         newWorpackages[workpackageId] = state.workpackages[workpackageId];
+        if (index === action.payload.newIndex) {
+          newWorpackages[toMove.id] = toMove;
+        }
       }
     });
 

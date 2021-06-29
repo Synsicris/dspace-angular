@@ -34,6 +34,9 @@ import { getAllSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } 
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { EditItem } from '../../../core/submission/models/edititem.model';
+import { SearchConfig } from 'src/app/core/shared/search/search-filters/search-config.model';
+import { CdkDragDrop, CdkDragEnter, CdkDragExit, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
+
 
 export const MY_FORMATS = {
   parse: {
@@ -108,8 +111,32 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   nestedNodeMap: Map<string, WorkpackageTreeObject> = new Map<string, WorkpackageTreeObject>();
 
   treeControl: FlatTreeControl<WorkpacakgeFlatNode>;
+  // TODO HERE
   treeFlattener: MatTreeFlattener<WorkpackageTreeObject, WorkpacakgeFlatNode>;
   dataSource: MatTreeFlatDataSource<WorkpackageTreeObject, WorkpacakgeFlatNode>;
+
+  /**
+   * The sorting options for the chart.
+   */
+  sortOptions$: Observable<SearchConfig>;
+  /**
+   * The active sorting option.
+   */
+  sortSelected$: Observable<string>;
+  /**
+   * The active sorting option value.
+   */
+  sortSelectedValue: string;
+  /**
+   * The old selected sorting option.
+   */
+  sortSelectedOld: string;
+  /**
+   * If TRUE the tree Drag&Drop is active.
+   */
+  dragAndDropIsActive: boolean;
+  isDragging: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isDropAllowed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   chartData;
 
@@ -165,6 +192,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.dragAndDropIsActive = false;
+    this.sortSelected$ = this.workingPlanStateService.getWorkpackagesSortOption();
+
     this.workingPlanStateService.getChartDateViewSelector()
       .subscribe((view) => this.chartDateView.next(view));
 
@@ -172,7 +202,17 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this.workingPlanService.getWorkpackageStatusTypes()
         .subscribe((statusList: VocabularyEntry[]) => {
           this.chartStatusTypeList$.next(statusList);
-        }));
+        }),
+      this.sortSelected$.subscribe(
+        (sortOption: string) => {
+          this.sortSelectedValue = sortOption;
+          this.sortSelectedOld = sortOption;
+          if (sortOption === environment.workingPlan.workingPlanPlaceMetadata) {
+            this.dragAndDropIsActive = true;
+          }
+        }
+      )
+    );
 
     this.workpackages.subscribe((tree: Workpackage[]) => {
       if (tree) {
@@ -203,6 +243,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         });
       }
     });
+
+    this.sortOptions$ = this.workingPlanService.getWorkpackageSortOptions();
   }
 
   /**
@@ -459,8 +501,27 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Update all the nodes date range.
+   * Reset the SortBy dropdown to the actual value.
    *
+   * @param isOpen boolean
+   */
+  resetSortDropdown(isOpen: boolean): void {
+    if ( isOpen ) {
+      this.sortSelectedValue = this.sortSelectedOld;
+    }
+  }
+
+  /**
+   * Update the chart with the new sort option.
+   */
+  updateSort() {
+    if (this.sortSelectedValue !== this.sortSelectedOld) {
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectId, this.sortSelectedValue);
+    }
+  }
+
+  /**
+   * Update all the nodes date range.
    */
   updateAllDateRange(): void {
     let startDate;
@@ -671,30 +732,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return node.level === 0 && node.type !== environment.workingPlan.milestoneEntityName;
   }
 
-  canMoveDown(flatNode: WorkpacakgeFlatNode, level: number, index: number) {
-    let data: any[];
-    if (level === 0) {
-      data = this.dataSource.data;
-    } else {
-      const parentNode: Workpackage = this.nestedNodeMap.get(flatNode.parentId);
-      data = parentNode.steps;
-    }
-
-    return data.length === 0 || index === (data.length - 1);
-  }
-
-  canMoveUp(flatNode: WorkpacakgeFlatNode, level: number, index: number) {
-    let data: any[];
-    if (level === 0) {
-      data = this.dataSource.data;
-    } else {
-      const parentNode: Workpackage = this.nestedNodeMap.get(flatNode.parentId);
-      data = parentNode.steps;
-    }
-
-    return data.length === 0 || index === 0;
-  }
-
   moveWorkpackage(flatNode: WorkpacakgeFlatNode, level: number, oldIndex: number, newIndex: number) {
     if (level === 0) {
       this.workingPlanStateService.dispatchMoveWorkpackage(flatNode.id, oldIndex, newIndex);
@@ -708,6 +745,37 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         oldIndex,
         newIndex
       );
+    }
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    this.isDragging.next(false);
+    this.isDropAllowed.next(false);
+    // ignore drops outside of the tree
+    if (!event.isPointerOverContainer) {
+      return;
+    }
+    // Tree Update
+    if (event.previousIndex !== event.currentIndex) {
+      const destNode = this.treeControl.dataNodes[event.currentIndex];
+      if (event.item.data.parentId === destNode.parentId && event.item.data.level === destNode.level) {
+        this.moveWorkpackage(event.item.data, event.item.data.level, event.item.data.index, destNode.index);
+      }
+    }
+  }
+
+  dragStarted(event: CdkDragStart<WorkpacakgeFlatNode[]>) {
+    this.isDragging.next(true);
+    this.isDropAllowed.next(true);
+  }
+
+  dragEntered(event: CdkDragSortEvent<WorkpacakgeFlatNode, WorkpacakgeFlatNode>) {
+    this.isDragging.next(true);
+    const destNode = this.treeControl.dataNodes[event.currentIndex];
+    if (event.item.data.parentId === destNode.parentId && event.item.data.level === destNode.level) {
+      this.isDropAllowed.next(true);
+    }else{
+      this.isDropAllowed.next(false);
     }
   }
 
@@ -988,8 +1056,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   private buildExcludedTasksQuery(flatNode: WorkpacakgeFlatNode): string {
-/*    const subprojectMembersGroup = this.projectGroupService.getProjectMembersGroupNameByCommunity(this.subproject);
-    let query = `(entityGrants:project OR cris.policy.group: ${subprojectMembersGroup})`;*/
+    /* const subprojectMembersGroup = this.projectGroupService.getProjectMembersGroupNameByCommunity(this.subproject);
+    let query = `(entityGrants:project OR cris.policy.group: ${subprojectMembersGroup})`; */
     let query = '';
     const tasksIds = flatNode.steps.map((step) => step.id);
     if (tasksIds.length > 0) {

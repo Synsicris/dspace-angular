@@ -85,6 +85,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
         let place = this.workpackagesCount.value;
         items.forEach((item) => {
           this.workingPlanStateService.dispatchAddWorkpackageAction(
+            this.projectId,
             item.id,
             item.workspaceItemId,
             (place++).toString().padStart(3, '0')
