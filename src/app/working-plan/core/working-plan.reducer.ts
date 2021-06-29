@@ -1,9 +1,8 @@
-import { findIndex, get, remove } from 'lodash';
+import { findIndex, remove } from 'lodash';
 
 import { Workpackage } from './models/workpackage-step.model';
 import {
   AddWorkpackageStepSuccessAction,
-  AddWorkpackageSuccessAction,
   InitWorkingplanSuccessAction,
   MoveWorkpackageAction,
   MoveWorkpackageStepAction,
@@ -22,7 +21,6 @@ import {
   WorkpackageActionTypes
 } from './working-plan.actions';
 import { WpActionPackage, WpStepActionPackage } from './working-plan-state.service';
-import { act } from '@ngrx/effects';
 
 export enum ChartDateViewType {
   day = 'day',
@@ -432,18 +430,17 @@ function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackag
  *    the new state.
  */
 function moveWorkpackage(state: WorkingPlanState, action: MoveWorkpackageAction) {
-  const toMove = get(state.workpackages, action.payload.workpackageId);
+  const keys = [...Object.keys(state.workpackages)];
+  const toMove = keys[action.payload.oldIndex];
   const newWorpackages = {};
 
-  Object.keys(state.workpackages)
-    .forEach((workpackageId, index) => {
-      if (index !== action.payload.oldIndex) {
-        newWorpackages[workpackageId] = state.workpackages[workpackageId];
-        if (index === action.payload.newIndex) {
-          newWorpackages[toMove.id] = toMove;
-        }
-      }
-    });
+  keys.splice(action.payload.oldIndex, 1);
+  keys.splice(action.payload.newIndex, 0, toMove);
+
+  // create object in base of the new order
+  keys.forEach((key) => {
+    newWorpackages[key] = state.workpackages[key];
+  });
 
   return Object.assign({}, state, {
     workpackages: newWorpackages,
@@ -462,12 +459,10 @@ function moveWorkpackage(state: WorkingPlanState, action: MoveWorkpackageAction)
  *    the new state.
  */
 function moveWorkpackageStep(state: WorkingPlanState, action: MoveWorkpackageStepAction) {
-  const toMove = state.workpackages[action.payload.workpackageId].steps[action.payload.oldIndex];
-  const oldValue = state.workpackages[action.payload.workpackageId].steps[action.payload.newIndex];
   const newSteps = [...state.workpackages[action.payload.workpackageId].steps];
-
-  newSteps[action.payload.newIndex] = toMove;
-  newSteps[action.payload.oldIndex] = oldValue;
+  const toMove = newSteps[action.payload.oldIndex];
+  newSteps.splice(action.payload.oldIndex, 1);
+  newSteps.splice(action.payload.newIndex, 0, toMove);
 
   const newWorpackage = Object.assign({}, state.workpackages[action.payload.workpackageId], {
     steps: newSteps

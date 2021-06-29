@@ -235,6 +235,7 @@ export class WorkingPlanService {
         return Object.assign(rd, { payload: payload });
       }),
       mergeMap((rd: RemoteData<PaginatedList<Observable<WorkpackageSearchItem>>>) => {
+        this.requestService.setStaleByHrefSubstring(rd.payload._links.self.href);
         if (rd.payload.page.length === 0) {
           return observableOf([]);
         } else {

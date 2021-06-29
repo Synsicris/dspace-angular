@@ -35,7 +35,7 @@ import { EditItemMode } from '../../../core/submission/models/edititem-mode.mode
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { EditItem } from '../../../core/submission/models/edititem.model';
 import { SearchConfig } from 'src/app/core/shared/search/search-filters/search-config.model';
-import { CdkDragDrop, CdkDragEnter, CdkDragExit, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
 
 
 export const MY_FORMATS = {
@@ -442,7 +442,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     // if root, ignore
     if (this.treeControl.getLevel(flatNode) < 1) {
       const parentNode = this.nestedNodeMap.get(flatNode.id);
-      console.log('dispatchRemoveWorkpackage');
       this.workingPlanStateService.dispatchRemoveWorkpackage(parentNode.id, parentNode.workspaceItemId);
     } else {
       const parentNode: Workpackage = this.nestedNodeMap.get(flatNode.parentId);
@@ -774,7 +773,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     const destNode = this.treeControl.dataNodes[event.currentIndex];
     if (event.item.data.parentId === destNode.parentId && event.item.data.level === destNode.level) {
       this.isDropAllowed.next(true);
-    }else{
+    } else {
       this.isDropAllowed.next(false);
     }
   }

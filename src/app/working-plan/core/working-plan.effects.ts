@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 
+import { from as observableFrom, of as observableOf } from 'rxjs';
 import {
-  of as observableOf,
-  from as observableFrom
-} from 'rxjs';
-import { catchError, concatMap, map, mergeMap, reduce, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+  catchError,
+  concatMap,
+  debounceTime,
+  map,
+  mergeMap,
+  reduce,
+  switchMap,
+  tap,
+  withLatestFrom
+} from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
@@ -114,8 +121,8 @@ export class WorkingPlanEffects {
         action.payload.workpackageId,
         action.payload.place
       ).pipe(
+        debounceTime(200),
         map(() => {
-          console.log(state);
           return new RetrieveAllLinkedWorkingPlanObjectsAction(
             action.payload.projectId,
             state.workingplan.sortOption);
@@ -278,7 +285,9 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS),
     switchMap((action: RetrieveAllLinkedWorkingPlanObjectsAction) => {
       return this.workingPlanService.searchForLinkedWorkingPlanObjects(action.payload.projectId, action.payload.sortOption).pipe(
-        map((items: WorkpackageSearchItem[]) => new InitWorkingplanAction(items, action.payload.sortOption)),
+        map((items: WorkpackageSearchItem[]) => {
+          return new InitWorkingplanAction(items, action.payload.sortOption);
+        }),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
