@@ -5490,6 +5490,9 @@
   // TODO New key - Add a translation
   "item.preview.dc.contributor.author": "Authors: ",
   
+  // "item.preview.dc.contributor.applicant": "Applicant",
+  // TODO New key - Add a translation
+  "item.preview.dc.contributor.applicant": "Applicant",
   
   // "item.preview.dc.contributor.editor": "Editors: ",
   // TODO New key - Add a translation
@@ -5634,6 +5637,10 @@
   // "item.preview.oairecerif.funding.startDate" : "Start Date",
   // TODO New key - Add a translation
   "item.preview.oairecerif.funding.startDate" : "Start Date",
+  
+  // "item.preview.oairecerif.fundingParent" : "Funding Program / Call",
+  // TODO New key - Add a translation
+  "item.preview.oairecerif.fundingParent" : "Funding Program / Call",
   
   // "item.preview.oairecerif.oamandate" : "OA Mandate",
   // TODO New key - Add a translation
@@ -10040,7 +10047,6 @@
   // TODO New key - Add a translation
   "submission.general.save-later.edit-item": "Save and return",
   
-  
   // "submission.import-external.page.title": "Import metadata from an external source",
   // TODO New key - Add a translation
   "submission.import-external.page.title": "Import metadata from an external source",
@@ -10050,52 +10056,52 @@
   // TODO New key - Add a translation
   "submission.import-external.title": "Import metadata from an external source",
   
-  // "submission.import-external.title.Equipment": "Import equipment from an external source",
+  // "submission.import-external.title.Equipment": "Import an equipment from an external source",
   // TODO New key - Add a translation
-  "submission.import-external.title.Equipment": "Import equipment from an external source",
+  "submission.import-external.title.Equipment": "Import an equipment from an external source",
   
   
-  // "submission.import-external.title.Event": "Import event from an external source",
+  // "submission.import-external.title.Event": "Import an event from an external source",
   // TODO New key - Add a translation
-  "submission.import-external.title.Event": "Import event from an external source",
+  "submission.import-external.title.Event": "Import an event from an external source",
   
   
-  // "submission.import-external.title.Funding": "Import fund from an external source",
+  // "submission.import-external.title.Funding": "Import a funding from an external source",
   // TODO New key - Add a translation
-  "submission.import-external.title.Funding": "Import fund from an external source",
+  "submission.import-external.title.Funding": "Import a funding from an external source",
   
   
-  // "submission.import-external.title.Journal": "Import journal from an external source",
+  // "submission.import-external.title.Journal": "Import a journal from an external source",
   // TODO New key - Add a translation
-  "submission.import-external.title.Journal": "Import journal from an external source",
+  "submission.import-external.title.Journal": "Import a journal from an external source",
   
   
-  // "submission.import-external.title.OrgUnit": "Import publisher from an external source",
+  // "submission.import-external.title.OrgUnit": "Import a publisher from an external source",
   // TODO New key - Add a translation
-  "submission.import-external.title.OrgUnit": "Import publisher from an external source",
+  "submission.import-external.title.OrgUnit": "Import a publisher from an external source",
   
   
-  // "submission.import-external.title.Patent": "Import patent from an external source",
+  // "submission.import-external.title.Patent": "Import a patent from an external source",
   // TODO New key - Add a translation
-  "submission.import-external.title.Patent": "Import patent from an external source",
+  "submission.import-external.title.Patent": "Import a patent from an external source",
   
   
-  // "submission.import-external.title.Person": "Import person from an external source",
+  // "submission.import-external.title.Person": "Import a person from an external source",
   // TODO New key - Add a translation
-  "submission.import-external.title.Person": "Import person from an external source",
+  "submission.import-external.title.Person": "Import a person from an external source",
   
-  // "submission.import-external.title.Product": "Import product from an external source",
+  // "submission.import-external.title.Product": "Import a product from an external source",
   // TODO New key - Add a translation
-  "submission.import-external.title.Product": "Import product from an external source",
+  "submission.import-external.title.Product": "Import a product from an external source",
   
-  // "submission.import-external.title.Project": "Import project from an external source",
+  // "submission.import-external.title.Project": "Import a project from an external source",
   // TODO New key - Add a translation
-  "submission.import-external.title.Project": "Import project from an external source",
+  "submission.import-external.title.Project": "Import a project from an external source",
   
   
-  // "submission.import-external.title.Publication": "Import publication from an external source",
+  // "submission.import-external.title.Publication": "Import a publication from an external source",
   // TODO New key - Add a translation
-  "submission.import-external.title.Publication": "Import publication from an external source",
+  "submission.import-external.title.Publication": "Import a publication from an external source",
   
   
   // "submission.import-external.page.hint": "Enter a query above to find items from the web to import in to DSpace.",
@@ -10193,13 +10199,17 @@
   // TODO New key - Add a translation
   "submission.import-external.source.lcname": "Library of Congress Names",
   
-  // "submission.import-external.source.scielo": "Scopus",
+  // "submission.import-external.source.scielo": "SciELO",
   // TODO New key - Add a translation
-  "submission.import-external.source.scielo": "Scopus",
+  "submission.import-external.source.scielo": "SciELO",
   
   // "submission.import-external.source.scopus": "Scopus",
   // TODO New key - Add a translation
   "submission.import-external.source.scopus": "Scopus",
+  
+  // "submission.import-external.source.vufind": "VuFind",
+  // TODO New key - Add a translation
+  "submission.import-external.source.vufind": "VuFind",
   
   // "submission.import-external.source.wos": "Web Of Science",
   // TODO New key - Add a translation
@@ -12428,186 +12438,180 @@
   // TODO Source message changed - Revise the translation
   "working-plan.breadcrumbs": "Arbeitsplan",
   
-  
   // "working-plan.chart.button.expandAll": "Expand all",
   // TODO New key - Add a translation
   "working-plan.chart.button.expandAll": "Expand all",
-  
   
   // "working-plan.chart.button.collapseAll": "Collapse all",
   // TODO New key - Add a translation
   "working-plan.chart.button.collapseAll": "Collapse all",
   
-  
   // "working-plan.chart.button.add": "add",
   // TODO Source message changed - Revise the translation
   "working-plan.chart.button.add": "Hinzufügen",
-  
   
   // "working-plan.chart.button.remove": "Unlink item",
   // TODO New key - Add a translation
   "working-plan.chart.button.remove": "Unlink item",
   
-  
   // "working-plan.chart.button.edit": "Edit item",
   // TODO New key - Add a translation
   "working-plan.chart.button.edit": "Edit item",
   
-  
   // "working-plan.chart.column.dates": "Dates",
   "working-plan.chart.column.dates": "Daten",
-  
   
   // "working-plan.chart.column.dates.start": "Start date",
   // TODO New key - Add a translation
   "working-plan.chart.column.dates.start": "Start date",
   
-  
   // "working-plan.chart.column.dates.end": "End date",
   // TODO New key - Add a translation
   "working-plan.chart.column.dates.end": "End date",
-  
   
   // "working-plan.chart.column.changeStartDate.input.description": "Difference in days: ",
   // TODO New key - Add a translation
   "working-plan.chart.column.changeStartDate.input.description": "Difference in days: ",
   
-  
   // "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later: ",
   // TODO New key - Add a translation
   "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later: ",
-  
   
   // "working-plan.chart.column.changeStartDate.radio.earlier": "Earlier",
   // TODO New key - Add a translation
   "working-plan.chart.column.changeStartDate.radio.earlier": "Earlier",
   
-  
   // "working-plan.chart.column.changeStartDate.radio.later": "Later",
   // TODO New key - Add a translation
   "working-plan.chart.column.changeStartDate.radio.later": "Later",
-  
   
   // "working-plan.chart.column.changeStartDate": "Change start date",
   // TODO New key - Add a translation
   "working-plan.chart.column.changeStartDate": "Change start date",
   
-  
   // "working-plan.chart.column.changeStartDate.apply": "Apply",
   // TODO New key - Add a translation
   "working-plan.chart.column.changeStartDate.apply": "Apply",
-  
   
   // "working-plan.chart.column.changeStartDate.saving": "saving...",
   // TODO New key - Add a translation
   "working-plan.chart.column.changeStartDate.saving": "saving...",
   
-  
   // "working-plan.chart.column.changeStartDateClose": "Close",
   // TODO New key - Add a translation
   "working-plan.chart.column.changeStartDateClose": "Close",
-  
   
   // "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
   // TODO New key - Add a translation
   "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
   
-  
-  // "working-plan.chart.column.responsible": "Responsible",
+  // "working-plan.chart.column.responsible": "Responsible Organisation",
   // TODO Source message changed - Revise the translation
   "working-plan.chart.column.responsible": "Verantwortliche Organisation(en)",
   
+  // "working-plan.chart.column.sortBy": "Sort by ...",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.sortBy": "Sort by ...",
+  
+  // "working-plan.chart.column.sortBy.option.workingplan.place": "Tree order",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.sortBy.option.workingplan.place": "Tree order",
+  
+  // "working-plan.chart.column.sortBy.option.dc.title": "Title",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.sortBy.option.dc.title": "Title",
+  
+  // "working-plan.chart.column.sortBy.option.dspace.entity.type": "Type",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.sortBy.option.dspace.entity.type": "Type",
+  
+  // "working-plan.chart.column.sortBy.option.synsicris.type.status": "Status",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.sortBy.option.synsicris.type.status": "Status",
+  
+  // "working-plan.chart.column.sortBy.option.synsicris.relation.partner": "Organization",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.sortBy.option.synsicris.relation.partner": "Organization",
+  
+  // "working-plan.chart.column.sortBy.option.dc.date.start": "Start date",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.sortBy.option.dc.date.start": "Start date",
+  
+  // "working-plan.chart.column.sortBy.option.dc.date.end": "End date",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.sortBy.option.dc.date.end": "End date",
   
   // "working-plan.chart.column.status": "Status",
   "working-plan.chart.column.status": "Status",
-  
   
   // "working-plan.chart.column.expand": "Expand column",
   // TODO New key - Add a translation
   "working-plan.chart.column.expand": "Expand column",
   
-  
   // "working-plan.chart.column.collapse": "Collapse column",
   // TODO New key - Add a translation
   "working-plan.chart.column.collapse": "Collapse column",
-  
   
   // "working-plan.chart.move.down.btn": "Move down",
   // TODO New key - Add a translation
   "working-plan.chart.move.down.btn": "Move down",
   
-  
   // "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
   "working-plan.chart.move.error": "Es gab ein Problem beim Verschieben eines Eintrags. Versuchen Sie es später noch einmal.",
-  
   
   // "working-plan.chart.update.error": "There was an unexpected issue when fetching update, please reload the page to have consistent data.",
   // TODO New key - Add a translation
   "working-plan.chart.update.error": "There was an unexpected issue when fetching update, please reload the page to have consistent data.",
   
-  
   // "working-plan.chart.move.up.btn": "Move up",
   // TODO New key - Add a translation
   "working-plan.chart.move.up.btn": "Move up",
   
-  
   // "working-plan.chart.page.description": "Maecenas facilisis cursus nisl, eget gravida risus mollis a. Phasellus a quam vitae lorem finibus consequat. Vestibulum dictum, sem sed suscipit euismod, lorem diam lobortis sem, in ultrices ipsum risus a enim. Nunc efficitur interdum urna, eget accumsan arcu scelerisque maximus. In hac habitasse platea dictumst. Nunc vestibulum volutpat iaculis. Phasellus scelerisque congue ante vel luctus. Proin gravida semper eros, dignissim dapibus tortor laoreet quis. Maecenas nec dui risus. Sed metus lorem, egestas quis turpis et, viverra aliquet metus. Praesent et viverra velit. Donec vel magna tempor, tempus sem vel, ultrices diam. In sed neque id ligula hendrerit vulputate sit amet id ex. Mauris dignissim scelerisque tempor. Maecenas quis convallis felis. Nunc pharetra maximus sapien id vulputate.",
   "working-plan.chart.page.description": "<p>Der Arbeitsplan unterstützt Sie bei der Planung und Umsetzung des Projektes.</p><p><i>Sie strukturieren hier die Arbeiten des Projektes über <b>Arbeitspakete</b> und <b>Meilensteine</b>.</br>Alle Arbeitspakete, die Sie bereits im Impact Pathway angelegt haben, werden im Arbeitsplan direkt angezeigt.</br>Innerhalb der Arbeitspakete können Sie Einträge aus den Bereichen <b>Aufgaben</b>, <b>Veranstaltungen / Interaktionen</b>, <b>Prozesse</b>, <b>Geplante Veröffentlichungen</b>, <b>Gegenstände oder Materialien</b> sowie <b>Meilensteine</b> hinzufügen oder neu anlegen. D. h. Meilensteine können innerhalb von Arbeitspaketen oder übergeordnet angelegt werden.</p><p>Mit der Schaltfläche [+] oberhalb des Arbeitsplans können Sie Arbeitspakete und Meilensteine anlegen oder bereits vorhandene suchen und auswählen. </br>Über die Schaltfläche [+] innerhalb der Arbeitspakete können Sie beliebig viele Einträge anlegen oder bereits vorhandene Einträge suchen und auswählen. Im Projektverlauf können Sie die Angaben jederzeit bearbeiten und ergänzen.</br>Mit der Drag-and-Drop-Funktion können Sie alle Einträge verschieben.</br>Ergänzen Sie zu den Einträgen den Zeitraum und das Akronym der verantwortlichen Partner. Diese Angaben sind für die Arbeitspakete und Meilensteine verpflichtend.</br>Im Projektverlauf können Sie den Status der Einträge ändern, um den aktuellen Stand des Projektes darzustellen.</p><p>Es besteht die Möglichkeit, den aktuellen Stand des Projektes mit einer älteren Version (z. B. der Antragsversion) zu vergleichen. Diese können Sie über die Schaltfläche [Version] auswählen.</br>Die Darstellung der Zeitachse können Sie über die Schaltflächen Jahr, Quartal und Monat wählen.</i></p>",
   
-  
   // "working-plan.page.title": "Working plan",
   "working-plan.page.title": "Arbeitsplan",
-  
   
   // "working-plan.chart.toggle.collapse.btn": "Collapse",
   // TODO New key - Add a translation
   "working-plan.chart.toggle.collapse.btn": "Collapse",
   
-  
   // "working-plan.chart.toggle.expand.btn": "Expand",
   // TODO New key - Add a translation
   "working-plan.chart.toggle.expand.btn": "Expand",
   
-  
   // "working-plan.chart.toolbar.date-view.month": "Month",
   "working-plan.chart.toolbar.date-view.month": "Monat",
-  
   
   // "working-plan.chart.toolbar.date-view.quarter": "Quarter",
   "working-plan.chart.toolbar.date-view.quarter": "Quartal",
   
-  
   // "working-plan.chart.toolbar.date-view.quarter.first": "First",
   "working-plan.chart.toolbar.date-view.quarter.first": "Erstes Quartal",
-  
   
   // "working-plan.chart.toolbar.date-view.quarter.fourth": "Fourth",
   "working-plan.chart.toolbar.date-view.quarter.fourth": "Viertes Quartal",
   
-  
   // "working-plan.chart.toolbar.date-view.quarter.second": "Second",
   "working-plan.chart.toolbar.date-view.quarter.second": "Zweites Quartel",
-  
   
   // "working-plan.chart.toolbar.date-view.quarter.third": "Third",
   "working-plan.chart.toolbar.date-view.quarter.third": "Drittes Quartal",
   
-  
   // "working-plan.chart.toolbar.date-view.year": "Year",
   "working-plan.chart.toolbar.date-view.year": "Jahr",
   
-  
   // "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
   "working-plan.chart.toolbar.no-workpackages": "Es konnten keine Arbeitspakete angezeigt werden.",
-  
   
   // "working-plan.chart.toolbar.versions": "Versions",
   // TODO New key - Add a translation
   "working-plan.chart.toolbar.versions": "Versions",
   
-  
   // "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
   "working-plan.chart.toolbar.workpackage-btn": "Arbeitspaket",
+  
   
   
   // "application.listelement.badge": "Applications of solutions / changes / innovations",
