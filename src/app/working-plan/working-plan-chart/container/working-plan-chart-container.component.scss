@@ -47,7 +47,28 @@
   min-width: 100px;
 }
 
+.opacity-50 {
+  opacity: 0.5;
+}
+
+// Tree
+.task-placeholder {
+  min-height: 100px;
+}
+
+.placeholder-allowed {
+  background-color: #92c642;
+}
+
+.placeholder-denied {
+  background-color: #CF4444;
+}
+
 // Buttons styles
+.button-move {
+  cursor: move;
+}
+
 button.btn:focus {
   outline: none;
 }
@@ -131,6 +152,7 @@ $highlightBorderColor: #FF9800;
   align-items: normal;
   border-bottom: solid 1px $borderColor;
   border-right: solid 1px $borderColor;
+  background-color: white;
 }
 
 .tree-node-end-of-the-year-customization {

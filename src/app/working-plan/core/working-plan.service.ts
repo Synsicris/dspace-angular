@@ -517,10 +517,10 @@ export class WorkingPlanService {
         {
           key: environment.workingPlan.workingPlanStepRelationMetadata,
           language: '',
-          value: step.id,
+          value: step.name,
           place: index,
-          authority: '',
-          confidence: -1
+          authority: step.id,
+          confidence: 600
         } as MetadatumViewModel));
 
     return this.updateMetadataItem(workpackageId, metadataList);

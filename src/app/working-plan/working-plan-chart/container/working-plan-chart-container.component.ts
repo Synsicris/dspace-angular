@@ -35,7 +35,8 @@ import { EditItemMode } from '../../../core/submission/models/edititem-mode.mode
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { EditItem } from '../../../core/submission/models/edititem.model';
 import { SearchConfig } from 'src/app/core/shared/search/search-filters/search-config.model';
-import { runInThisContext } from 'node:vm';
+import { CdkDragDrop, CdkDragEnter, CdkDragExit, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
+
 
 export const MY_FORMATS = {
   parse: {
@@ -110,6 +111,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   nestedNodeMap: Map<string, WorkpackageTreeObject> = new Map<string, WorkpackageTreeObject>();
 
   treeControl: FlatTreeControl<WorkpacakgeFlatNode>;
+  // TODO HERE
   treeFlattener: MatTreeFlattener<WorkpackageTreeObject, WorkpacakgeFlatNode>;
   dataSource: MatTreeFlatDataSource<WorkpackageTreeObject, WorkpacakgeFlatNode>;
 
@@ -124,11 +126,17 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   /**
    * The active sorting option value.
    */
-   sortSelectedValue: string;
+  sortSelectedValue: string;
   /**
    * The old selected sorting option.
    */
-   sortSelectedOld: string;
+  sortSelectedOld: string;
+  /**
+   * If TRUE the tree Drag&Drop is active.
+   */
+  dragAndDropIsActive: boolean;
+  isDragging: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isDropAllowed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   chartData;
 
@@ -184,6 +192,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.dragAndDropIsActive = false;
     this.sortSelected$ = this.workingPlanStateService.getWorkpackagesSortOption();
 
     this.workingPlanStateService.getChartDateViewSelector()
@@ -198,6 +207,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         (sortOption: string) => {
           this.sortSelectedValue = sortOption;
           this.sortSelectedOld = sortOption;
+          if (sortOption === environment.workingPlan.workingPlanPlaceMetadata) {
+            this.dragAndDropIsActive = true;
+          }
         }
       )
     );
@@ -720,30 +732,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return node.level === 0 && node.type !== environment.workingPlan.milestoneEntityName;
   }
 
-  canMoveDown(flatNode: WorkpacakgeFlatNode, level: number, index: number) {
-    let data: any[];
-    if (level === 0) {
-      data = this.dataSource.data;
-    } else {
-      const parentNode: Workpackage = this.nestedNodeMap.get(flatNode.parentId);
-      data = parentNode.steps;
-    }
-
-    return data.length === 0 || index === (data.length - 1);
-  }
-
-  canMoveUp(flatNode: WorkpacakgeFlatNode, level: number, index: number) {
-    let data: any[];
-    if (level === 0) {
-      data = this.dataSource.data;
-    } else {
-      const parentNode: Workpackage = this.nestedNodeMap.get(flatNode.parentId);
-      data = parentNode.steps;
-    }
-
-    return data.length === 0 || index === 0;
-  }
-
   moveWorkpackage(flatNode: WorkpacakgeFlatNode, level: number, oldIndex: number, newIndex: number) {
     if (level === 0) {
       this.workingPlanStateService.dispatchMoveWorkpackage(flatNode.id, oldIndex, newIndex);
@@ -757,6 +745,37 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         oldIndex,
         newIndex
       );
+    }
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    this.isDragging.next(false);
+    this.isDropAllowed.next(false);
+    // ignore drops outside of the tree
+    if (!event.isPointerOverContainer) {
+      return;
+    }
+    // Tree Update
+    if (event.previousIndex !== event.currentIndex) {
+      const destNode = this.treeControl.dataNodes[event.currentIndex];
+      if (event.item.data.parentId === destNode.parentId && event.item.data.level === destNode.level) {
+        this.moveWorkpackage(event.item.data, event.item.data.level, event.item.data.index, destNode.index);
+      }
+    }
+  }
+
+  dragStarted(event: CdkDragStart<WorkpacakgeFlatNode[]>) {
+    this.isDragging.next(true);
+    this.isDropAllowed.next(true);
+  }
+
+  dragEntered(event: CdkDragSortEvent<WorkpacakgeFlatNode, WorkpacakgeFlatNode>) {
+    this.isDragging.next(true);
+    const destNode = this.treeControl.dataNodes[event.currentIndex];
+    if (event.item.data.parentId === destNode.parentId && event.item.data.level === destNode.level) {
+      this.isDropAllowed.next(true);
+    }else{
+      this.isDropAllowed.next(false);
     }
   }
 

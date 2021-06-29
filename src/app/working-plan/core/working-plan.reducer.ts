@@ -433,18 +433,15 @@ function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackag
  */
 function moveWorkpackage(state: WorkingPlanState, action: MoveWorkpackageAction) {
   const toMove = get(state.workpackages, action.payload.workpackageId);
-  const oldValue = get(state.workpackages, Object.keys(state.workpackages)[action.payload.newIndex]);
-
   const newWorpackages = {};
 
   Object.keys(state.workpackages)
     .forEach((workpackageId, index) => {
-      if (index === action.payload.oldIndex) {
-        newWorpackages[oldValue.id] = oldValue;
-      } else if (index === action.payload.newIndex) {
-        newWorpackages[toMove.id] = toMove;
-      } else {
+      if (index !== action.payload.oldIndex) {
         newWorpackages[workpackageId] = state.workpackages[workpackageId];
+        if (index === action.payload.newIndex) {
+          newWorpackages[toMove.id] = toMove;
+        }
       }
     });
 
