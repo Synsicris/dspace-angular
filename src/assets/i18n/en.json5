@@ -8015,11 +8015,15 @@
 
   "working-plan.chart.button.collapseAll": "Collapse all",
 
-  "working-plan.chart.button.add": "add",
+
+  "working-plan.chart.button.add": "Add",
+
 
   "working-plan.chart.button.remove": "Unlink item",
 
-  "working-plan.chart.button.edit": "Edit item",
+
+  "working-plan.chart.button.edit": "Edit",
+
 
   "working-plan.chart.column.dates": "Dates",
 
@@ -8045,7 +8049,7 @@
 
   "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
 
-  "working-plan.chart.column.responsible": "Responsible Organisation",
+  "working-plan.chart.column.responsible": "Responsible organisation(s)",
 
   "working-plan.chart.column.sortBy": "Sort by ...",
 
@@ -8429,6 +8433,39 @@
   "submission.sections.submit.progressbar.describe.calls": "Call",
 
 
-  "submission.sections.submit.progressbar.describe.fundingobjectives": "Funding objective"
+  "submission.sections.submit.progressbar.describe.fundingobjectives": "Funding objective",
+
+
+  "working-plan.chart.column.change.StartDate.input.description": "Difference in days:",
+
+
+  "working-plan.chart.column.change.StartDate.radio.description": "Earlier or later:",
+
+
+  "working-plan.chart.column.change.StartDate.radio.earlier": "Earlier",
+
+
+  "working-plan.chart.column.change.StartDate.radio.later": "Later",
+
+
+  "working-plan.chart.column.change.StartDate": "Change Start date",
+
+
+  "working-plan.chart.column.change.StartDate.apply": "Apply",
+
+
+  "working-plan.chart.column.change.StartDate.saving": "saving…",
+
+
+  "working-plan.chart.column.change.StartDate.Close": "Close",
+
+
+  "working-plan.chart.column.change.StartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
+
+
+  "working-plan.chart.column.collpase": "Collpase column",
+
+
+  "Poduct.listelement.badge": "Research data"
 
 }
