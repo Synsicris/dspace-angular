@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { Workpackage } from './core/models/workpackage-step.model';
 import { WorkingPlanStateService } from './core/working-plan-state.service';
 
