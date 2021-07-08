@@ -1,6 +1,6 @@
 <div #sdRef="ngbDropdown" ngbDropdown display="dynamic" placement="bottom-right" class="w-100">
   <div class="position-relative right-addon">
-    <i ngbDropdownToggle class="far fa-caret-down position-absolute scrollable-dropdown-toggle"
+    <i ngbDropdownToggle class="position-absolute scrollable-dropdown-toggle"
        aria-hidden="true"></i>
     <input class="form-control"
            [attr.autoComplete]="model.autoComplete"
@@ -22,6 +22,13 @@
        aria-haspopup="true"
        aria-expanded="false"
        aria-labelledby="scrollableDropdownMenuButton">
+
+    <div>
+      <input class="form-control scrollable-dropdown-search-input" type="text"
+                    [placeholder]="'form.scrollable-input.search' | translate"
+                    (input)="filter($event?.target?.value)">
+    </div>
+
     <div class="scrollable-menu"
          aria-labelledby="scrollableDropdownMenuButton"
          infiniteScroll
