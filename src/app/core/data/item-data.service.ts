@@ -342,13 +342,43 @@ export class ItemDataService extends DataService<Item> {
     );
   }
 
-  replaceMetadataPatch(metadataName: string, position: number, value: string): void {
+  public updateMultipleItemMetadata(itemId: string, metadata: MetadataMap): Observable<RemoteData<Item>> {
+    return this.findById(itemId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      tap((item: Item) => {
+        const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+        Object.keys(metadata)
+          .forEach((metadataName) => {
+            const metadataValues: MetadataValue[] = metadata[metadataName];
+            metadataValues.forEach((metadataValue, place) => {
+              const itemMetadataValues = Metadata.all(item.metadata, metadataName);
+              const valueToSave: any = {
+                value: metadataValue.value,
+                language: metadataValue.language,
+                authority: metadataValue.authority,
+                place: metadataValue.place,
+                confidence: metadataValue.confidence
+              };
+              if (isNotEmpty(itemMetadataValues) && isNotEmpty(itemMetadataValues[place])) {
+                this.replaceMetadataPatch(metadataName, place, valueToSave);
+              } else {
+                this.addMetadataPatch(metadataName, valueToSave);
+              }
+            });
+          });
+      }),
+      delay(200),
+      mergeMap(() => this.executeItemPatch(itemId, 'metadata'))
+    );
+  }
+
+  replaceMetadataPatch(metadataName: string, position: number, value: string|MetadataValue): void {
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
     const path = pathCombiner.getPath([metadataName, position.toString()]);
     this.operationsBuilder.replace(path, value, true);
   }
 
-  addMetadataPatch(metadataName: string, value: string): void {
+  addMetadataPatch(metadataName: string, value: string|MetadataValue): void {
     const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
     const path = pathCombiner.getPath([metadataName]);
     this.operationsBuilder.add(path, value, true, true);

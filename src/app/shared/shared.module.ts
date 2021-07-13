@@ -295,6 +295,7 @@ import { MaterialModule } from './material/material.module';
 import { CreateProjectComponent } from '../projects/create-project/create-project.component';
 import { InvitationModalComponent } from './invitation-modal/invitation-modal.component';
 import { EditItemGrantsModalComponent } from './edit-item-grants-modal/edit-item-grants-modal.component';
+import { EditSimpleItemModalComponent } from './edit-simple-item-modal/edit-simple-item-modal.component';
 
 /**
  * Declaration needed to make sure all decorator functions are called in time
@@ -571,6 +572,7 @@ const COMPONENTS = [
   ContextMenuEditImpactPathwayComponent,
   CreateSimpleItemModalComponent,
   CreateSimpleItemComponent,
+  EditSimpleItemModalComponent,
   SearchSimpleItemComponent,
   SearchSimpleItemHeaderComponent,
   SearchSimpleItemLabelsComponent,
@@ -720,7 +722,8 @@ const DIRECTIVES = [
     ...SHARED_ITEM_PAGE_COMPONENTS,
     ...SHARED_SEARCH_PAGE_COMPONENTS,
     ItemExportAlertComponent,
-    InvitationModalComponent
+    InvitationModalComponent,
+    EditSimpleItemModalComponent
   ],
   providers: [
     ...PROVIDERS
