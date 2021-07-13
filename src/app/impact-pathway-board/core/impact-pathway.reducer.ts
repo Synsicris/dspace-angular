@@ -11,7 +11,8 @@ import {
   ImpactPathwayActionTypes,
   InitImpactPathwaySuccessAction,
   MoveImpactPathwaySubTaskAction,
-  MoveImpactPathwaySubTaskErrorAction, OrderImpactPathwaySubTasksAction,
+  MoveImpactPathwaySubTaskErrorAction,
+  OrderImpactPathwaySubTasksAction,
   OrderImpactPathwaySubTasksErrorAction,
   OrderImpactPathwayTasksAction,
   OrderImpactPathwayTasksErrorAction,
@@ -20,6 +21,7 @@ import {
   RemoveImpactPathwayTaskLinkAction,
   RemoveImpactPathwayTaskSuccessAction,
   SetImpactPathwayTargetTaskAction,
+  UpdateImpactPathwayAction,
   UpdateImpactPathwaySubTaskAction,
   UpdateImpactPathwayTaskAction
 } from './impact-pathway.actions';
@@ -292,6 +294,10 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
       return RemoveImpactPathwaySubTaskFromImpactPathwayTask(state, action as RemoveImpactPathwaySubTaskSuccessAction);
     }
 
+    case ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY: {
+      return replaceImpactPathway(state, action as UpdateImpactPathwayAction);
+    }
+
     case ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY_TASK: {
       return replaceImpactPathwayTask(state, action as UpdateImpactPathwayTaskAction);
     }
@@ -520,6 +526,25 @@ function RemoveImpactPathwaySubTaskFromImpactPathwayTask(state: ImpactPathwaySta
   return Object.assign({}, state, {
     objects: Object.assign({}, state.objects, {
       [action.payload.impactPathwayId]: newImpactPathway
+    }),
+    processing: false
+  });
+}
+
+/**
+ * Init a impact pathway object.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitImpactPathwaySuccessAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function replaceImpactPathway(state: ImpactPathwayState, action: UpdateImpactPathwayAction): ImpactPathwayState {
+  return Object.assign({}, state, {
+    objects: Object.assign({}, state.objects, {
+      [action.payload.impactPathwayId]: action.payload.impactPathway
     }),
     processing: false
   });

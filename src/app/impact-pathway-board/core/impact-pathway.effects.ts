@@ -563,6 +563,16 @@ export class ImpactPathwayEffects {
   );
 
   /**
+   * Update an impactPathway object
+   */
+  @Effect({ dispatch: false }) UpdateImpactPathway$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY),
+    tap((action: AddImpactPathwaySubTaskAction) => {
+      this.modalService.dismissAll();
+    })
+  );
+
+  /**
    * Patch an impactPathway task and dispatch PatchImpactPathwayTaskMetadataSuccessAction
    */
   @Effect() patchMetadataTask$ = this.actions$.pipe(
