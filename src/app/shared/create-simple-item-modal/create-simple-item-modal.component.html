@@ -5,8 +5,8 @@
   </button>
 </div>
 <div class="modal-body modal-body-height">
-  <ngb-tabset type="pills">
-    <ngb-tab title="Create">
+  <ngb-tabset type="pills" [activeId]="startWithSearch ? 'tab-search' : 'tab-create'">
+    <ngb-tab title="Create" id="tab-create">
       <ng-template ngbTabContent>
         <div  class="mt-3 modal-height">
           <ds-create-simple-item
@@ -17,7 +17,7 @@
         </div>
       </ng-template>
     </ngb-tab>
-    <ngb-tab *ngIf="hasSearch" title="Search">
+    <ngb-tab *ngIf="hasSearch" title="Search" id="tab-search">
       <ng-template ngbTabContent>
         <div  class="mt-3">
           <ds-search-simple-item [vocabularyName]="vocabularyName"

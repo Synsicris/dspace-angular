@@ -75,6 +75,12 @@ export class CreateSimpleItemModalComponent implements OnInit {
   @Input() scope: string;
 
   /**
+   * A boolean representing if start with search tab active
+   * @type {boolean}
+   */
+  @Input() startWithSearch = false;
+
+  /**
    * EventEmitter that will emit a SimpleItem object created
    */
   @Output() createItem: EventEmitter<SimpleItem> = new EventEmitter<SimpleItem>();
