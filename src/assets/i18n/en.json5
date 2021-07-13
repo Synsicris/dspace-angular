@@ -2097,6 +2097,14 @@
 
   "exploitation-plan.step_type_4.info.text": "Info text for section 4",
 
+  "exploitation-plan.step_type_1.task_search": "Info text search for section 1",
+
+  "exploitation-plan.step_type_2.task_search": "Info text search for section 2",
+
+  "exploitation-plan.step_type_3.task_search": "Info text search for section 3",
+
+  "exploitation-plan.step_type_4.task_search": "Info text search for section 4",
+
 
   "exploitation-plan.step_type_1.title": "1. Intellectual property rights",
 
@@ -2574,6 +2582,22 @@
 
   "home.top-level-communities.help": "Search for a collection",
 
+
+  "impact-pathway.step_type_1.task_search.info": "",
+
+  "impact-pathway.step_type_2.task_search.info": "",
+
+  "impact-pathway.step_type_2.task_objective_search.info": "",
+
+  "impact-pathway.step_type_3.task_search.info": "",
+
+  "impact-pathway.step_type_3.task_objective_search.info": "",
+
+  "impact-pathway.step_type_4.task_search.info": "",
+
+  "impact-pathway.step_type_5.task_search.info": "",
+
+  "impact-pathway.step_type_6.task_search.info": "",
 
   "impact-pathway.add.btn": "Add item",
 
@@ -8113,6 +8137,8 @@
   "working-plan.chart.toolbar.versions": "Versions",
 
   "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
+
+  "working-plan.task.search.header": "",
 
 
 

@@ -75,6 +75,11 @@ export class CreateSimpleItemModalComponent implements OnInit {
   @Input() scope: string;
 
   /**
+   * The i18n key of the info message to display
+   */
+  @Input() searchMessageInfoKey;
+
+  /**
    * A boolean representing if start with search tab active
    * @type {boolean}
    */

@@ -2,6 +2,12 @@
   <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
 </ng-template>
 
+<ds-alert *ngIf="hasInfoMessage | async"
+          [content]="searchMessageInfoKey"
+          [collapsible]="true"
+          [collapsed]="true"
+          [type]="'alert-info'"></ds-alert>
+
 <ds-search-simple-item-header [vocabularyName]="vocabularyName"
                               [filterBoxList]="filterBoxList$.asObservable()"
                               [availableTaskList]="availableTaskList$.asObservable()"

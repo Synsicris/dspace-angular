@@ -94,6 +94,10 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
         impactPathwayStep.type,
         false
       );
+      modalRef.componentInstance.searchMessageInfoKey = this.impactPathwayService.getImpactPathwayStepTaskSearchHeader(
+        impactPathwayStep.type,
+        false
+      );
       modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
       modalRef.componentInstance.vocabularyName = this.impactPathwayService.getTaskTypeAuthorityName(
         impactPathwayStep.type,

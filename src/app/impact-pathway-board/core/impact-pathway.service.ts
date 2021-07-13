@@ -319,6 +319,10 @@ export class ImpactPathwayService {
     return isObjective ? `impact_pathway_${stepType}_task_objective_form` : `impact_pathway_${stepType}_task_form`;
   }
 
+  getImpactPathwayStepTaskSearchHeader(stepType: string, isObjective = false): string {
+    return isObjective ? `impact-pathway.${stepType}.task_objective_search.info` : `impact-pathway.${stepType}.task_search.info`;
+  }
+
   getImpactPathwayStepTaskFormConfig(stepType: string, isObjective = false): Observable<SubmissionFormModel> {
     const formName = isObjective ? `impact_pathway_${stepType}_task_objective_form` : `impact_pathway_${stepType}_task_form`;
     return this.formConfigService.findByName(formName).pipe(

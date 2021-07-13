@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { BehaviorSubject, combineLatest, from as observableFrom, Observable, Subscription } from 'rxjs';
-import { concatMap, debounceTime, scan, switchMap, tap } from 'rxjs/operators';
+import { concatMap, debounceTime, map, scan, switchMap, tap } from 'rxjs/operators';
 import { NgbActiveModal, NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { findIndex } from 'lodash';
 import { hasValue, isEmpty, isNotEmpty } from '../../empty.util';
@@ -21,6 +21,7 @@ import { SearchFilter } from '../../search/search-filter.model';
 import { FilterType } from '../../search/filter-type.model';
 import { SimpleItem } from '../models/simple-item.model';
 import { PaginationService } from '../../../core/pagination/pagination.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ds-search-simple-item',
@@ -72,14 +73,26 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   @Input() scope = '';
 
   /**
+   * The i18n key of the info message to display
+   */
+  @Input() searchMessageInfoKey;
+
+  /**
    * EventEmitter that will emit an array of SimpleItem object to add
    */
   @Output() addItems: EventEmitter<SimpleItem[]> = new EventEmitter<SimpleItem[]>();
+
+
+  /**
+   * A boolean representing if there is an info message to display
+   */
+  public hasInfoMessage: Observable<boolean>;
 
   public filterBoxList$: BehaviorSubject<FilterBox[]> = new BehaviorSubject<FilterBox[]>([]);
   public availableTaskList$: BehaviorSubject<SimpleItem[]> = new BehaviorSubject<SimpleItem[]>([]);
   public filterBoxEntries$: BehaviorSubject<FacetValue[]> = new BehaviorSubject<FacetValue[]>([]);
   public pageInfoState: PageInfo = new PageInfo();
+
   public paginationOptions: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
     id: 'ssi',
     currentPage: 1,
@@ -107,6 +120,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     private paginationService: PaginationService,
     private searchTaskService: SearchSimpleItemService,
     private typeaheadConfig: NgbTypeaheadConfig,
+    private translate: TranslateService
   ) {
     // customize default values of typeahead used by this component tree
     typeaheadConfig.showHint = true;
@@ -118,6 +132,11 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    * Initialize all instance variables
    */
   ngOnInit(): void {
+
+    this.hasInfoMessage = this.translate.get(this.searchMessageInfoKey).pipe(
+      map((message: string) => isNotEmpty(message) && this.searchMessageInfoKey !== message)
+    );
+
     this.defaultSearchFilters = this.excludeListId.map((excludeId) => {
       return new SearchFilter(`f.${this.excludeFilterName}`, [excludeId], 'notequals');
     });
