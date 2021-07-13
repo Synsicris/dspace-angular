@@ -25,6 +25,8 @@ import { slide } from '../../../shared/animations/slide';
  */
 export class CollapsablePanelComponent implements OnInit {
 
+  @Input() sidebarPanelDescription: string;
+
   @Input() sidebarPanelTitle: string;
 
   @Input() startOpen = false;

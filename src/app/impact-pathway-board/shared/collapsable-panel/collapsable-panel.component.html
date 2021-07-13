@@ -1,8 +1,11 @@
 <div>
-  <div *ngIf="!titleEditable" (click)="toggle()" class="sidebar-panel-name p-3 bg-light" [class.sidebar-panel-name-collapsable]="collapsable">
-    <ng-content select="panelIconTitle"></ng-content>
-    <h5 class="d-inline-block mb-0">{{sidebarPanelTitle}}</h5>
-    <div class="d-inline-block float-right">
+  <div *ngIf="!titleEditable" class="sidebar-panel-name bg-light d-flex bg-light">
+    <div class="flex-grow-1 p-2">
+      <ng-content select="panelIconTitle"></ng-content>
+      <h5 class="d-inline-block mb-0">{{sidebarPanelTitle}}</h5>
+      <p class="text-muted">{{sidebarPanelDescription}}</p>
+    </div>
+    <div class="d-flex align-items-center px-2">
       <ng-content select="panelIconStatus"></ng-content>
       <span *ngIf="collapsable" class="sidebar-panel-toggle fas" [ngClass]="(isCollapsed() | async) ? 'fa-chevron-down' : 'fa-chevron-up'"></span>
     </div>
