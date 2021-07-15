@@ -71,7 +71,8 @@ import {
   RemoveImpactPathwaySubTaskAction,
   RemoveImpactPathwayTaskAction,
   SetImpactPathwayTargetTaskAction,
-  UpdateImpactPathwayAction
+  UpdateImpactPathwayAction,
+  UpdateImpactPathwayTaskAction
 } from './impact-pathway.actions';
 import { ErrorResponse } from '../../core/cache/response.models';
 import {
@@ -286,6 +287,22 @@ export class ImpactPathwayService {
     this.store.dispatch(new UpdateImpactPathwayAction(impactPathwayId, impactPathway));
   }
 
+  /**
+   * Dispatch a new UpdateImpactPathwayTaskAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id where to update task
+   * @param taskId
+   *    the Item id of the impact pathway task to add
+   * @param task
+   *    the updated impact pathway task
+   */
+  dispatchUpdateImpactPathwayTask(impactPathwayId: string, stepId: string, taskId: string, task: ImpactPathwayTask): void {
+    this.store.dispatch(new UpdateImpactPathwayTaskAction(impactPathwayId, stepId, taskId, task));
+  }
+
   getCreateTaskFormConfigName(stepType: string, isObjectivePage: boolean): string {
     return isObjectivePage ? `impact_pathway_${stepType}_task_objective_form` : `impact_pathway_${stepType}_task_form`;
   }
@@ -338,6 +355,13 @@ export class ImpactPathwayService {
 
   getImpactPathwayFormConfig(): Observable<SubmissionFormModel> {
     const formName = 'impact_pathway_form';
+    return this.formConfigService.findByName(formName).pipe(
+      getFirstSucceededRemoteDataPayload()
+    ) as Observable<SubmissionFormModel>;
+  }
+
+  getImpactPathwayTaskEditFormConfig(stepType: string): Observable<SubmissionFormModel> {
+    const formName = `impact_pathway_${stepType}_task_objective_edit_form`;
     return this.formConfigService.findByName(formName).pipe(
       getFirstSucceededRemoteDataPayload()
     ) as Observable<SubmissionFormModel>;

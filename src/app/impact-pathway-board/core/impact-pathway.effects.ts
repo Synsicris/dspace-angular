@@ -566,7 +566,7 @@ export class ImpactPathwayEffects {
    * Update an impactPathway object
    */
   @Effect({ dispatch: false }) UpdateImpactPathway$ = this.actions$.pipe(
-    ofType(ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY),
+    ofType(ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY, ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY_TASK),
     tap((action: AddImpactPathwaySubTaskAction) => {
       this.modalService.dismissAll();
     })
