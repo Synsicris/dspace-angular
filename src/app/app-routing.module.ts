@@ -12,6 +12,7 @@ import {
   EDIT_ITEM_PATH,
   FORBIDDEN_PATH,
   FORGOT_PASSWORD_PATH,
+  HELP_PAGE_PATH,
   INFO_MODULE_PATH,
   PROFILE_MODULE_PATH,
   REGISTER_PATH,
@@ -225,6 +226,12 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             path: 'edit-item-relationships',
             loadChildren: () => import('./edit-item-relationships/edit-item-relationships.module')
               .then((m) => m.EditItemRelationshipsModule),
+          },
+          {
+            path: HELP_PAGE_PATH,
+            loadChildren: () => import('./help-page/help-page.module')
+              .then((m) => m.HelpPageModule),
+            canActivate: [AuthenticatedGuard]
           },
           { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
       ]}
