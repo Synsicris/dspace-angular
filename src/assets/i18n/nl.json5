@@ -3318,6 +3318,22 @@
   // TODO New key - Add a translation
   "exploitation-plan.step_type_4.info.text": "Info text for section 4",
   
+  // "exploitation-plan.step_type_1.task_search": "Info text search for section 1",
+  // TODO New key - Add a translation
+  "exploitation-plan.step_type_1.task_search": "Info text search for section 1",
+  
+  // "exploitation-plan.step_type_2.task_search": "Info text search for section 2",
+  // TODO New key - Add a translation
+  "exploitation-plan.step_type_2.task_search": "Info text search for section 2",
+  
+  // "exploitation-plan.step_type_3.task_search": "Info text search for section 3",
+  // TODO New key - Add a translation
+  "exploitation-plan.step_type_3.task_search": "Info text search for section 3",
+  
+  // "exploitation-plan.step_type_4.task_search": "Info text search for section 4",
+  // TODO New key - Add a translation
+  "exploitation-plan.step_type_4.task_search": "Info text search for section 4",
+  
   
   // "exploitation-plan.step_type_1.title": "1. Intellectual property rights",
   // TODO New key - Add a translation
@@ -3939,6 +3955,9 @@
   // "form.clear-help": "Click here to remove the selected value",
   "form.clear-help": "Klik hier om de geselecteerde waarde the verwijderen",
   
+  // "form.copy": "Copy",
+  // TODO New key - Add a translation
+  "form.copy": "Copy",
   
   // "form.discard": "Discard",
   // TODO New key - Add a translation
@@ -4049,8 +4068,9 @@
   "form.save-help": "Veranderingen opslaan",
   
   
-  // "form.search": "Search",
-  "form.search": "Zoek",
+  // "form.scrollable-input.search": "Search",
+  // TODO New key - Add a translation
+  "form.scrollable-input.search": "Search",
   
   
   // "form.search-help": "Click here to look for an existing correspondence",
@@ -4066,6 +4086,10 @@
   // "form.repeatable.sort.tip": "Drop the item in the new position",
   // TODO New key - Add a translation
   "form.repeatable.sort.tip": "Drop the item in the new position",
+  
+  // "form.search": "Drop the item in the new position",
+  // TODO Source message changed - Revise the translation
+  "form.search": "Zoek",
   
   
   // "funding.listelement.badge": "Funding",
@@ -4101,9 +4125,42 @@
   "home.top-level-communities.head": "Communities in DSpace",
   
   
-  // "home.top-level-communities.help": "Select a community to browse its collections.",
+  // "home.top-level-communities.help": "Search for a collection",
+  // TODO Source message changed - Revise the translation
   "home.top-level-communities.help": "Selecteer een community om diens collecties te verkennen.",
   
+  
+  // "impact-pathway.step_type_1.task_search.info": "",
+  // TODO New key - Add a translation
+  "impact-pathway.step_type_1.task_search.info": "",
+  
+  // "impact-pathway.step_type_2.task_search.info": "",
+  // TODO New key - Add a translation
+  "impact-pathway.step_type_2.task_search.info": "",
+  
+  // "impact-pathway.step_type_2.task_objective_search.info": "",
+  // TODO New key - Add a translation
+  "impact-pathway.step_type_2.task_objective_search.info": "",
+  
+  // "impact-pathway.step_type_3.task_search.info": "",
+  // TODO New key - Add a translation
+  "impact-pathway.step_type_3.task_search.info": "",
+  
+  // "impact-pathway.step_type_3.task_objective_search.info": "",
+  // TODO New key - Add a translation
+  "impact-pathway.step_type_3.task_objective_search.info": "",
+  
+  // "impact-pathway.step_type_4.task_search.info": "",
+  // TODO New key - Add a translation
+  "impact-pathway.step_type_4.task_search.info": "",
+  
+  // "impact-pathway.step_type_5.task_search.info": "",
+  // TODO New key - Add a translation
+  "impact-pathway.step_type_5.task_search.info": "",
+  
+  // "impact-pathway.step_type_6.task_search.info": "",
+  // TODO New key - Add a translation
+  "impact-pathway.step_type_6.task_search.info": "",
   
   // "impact-pathway.add.btn": "Add item",
   // TODO New key - Add a translation
@@ -4229,11 +4286,13 @@
   // TODO New key - Add a translation
   "impact-pathway.remove.processing": "Deleting",
   
+  // "impact-pathway.edit.title": "Edit impact pathway",
+  // TODO New key - Add a translation
+  "impact-pathway.edit.title": "Edit impact pathway",
   
   // "impact-pathway.remove.title": "Delete impact pathway",
   // TODO New key - Add a translation
   "impact-pathway.remove.title": "Delete impact pathway",
-  
   
   // "impact-pathway.remove.success": "The impact pathway has been deleted successfully.",
   // TODO New key - Add a translation
@@ -8912,6 +8971,10 @@
   // TODO New key - Add a translation
   "researcher.profile.public.visibility": "PUBLIC",
   
+  // "researcher.profile.status": "Status:",
+  // TODO New key - Add a translation
+  "researcher.profile.status": "Status:",
+  
   // "researcherprofile.claim.not-authorized": "You are not authorized to claim this item. For more details contact the administrator(s).",
   // TODO New key - Add a translation
   "researcherprofile.claim.not-authorized": "You are not authorized to claim this item. For more details contact the administrator(s).",
@@ -10177,6 +10240,13 @@
   // "submission.general.discard.submit": "Discard",
   "submission.general.discard.submit": "Annuleer",
   
+  // "submission.general.info.saved": "Saved",
+  // TODO New key - Add a translation
+  "submission.general.info.saved": "Saved",
+  
+  // "submission.general.info.pending-changes": "Unsaved changes",
+  // TODO New key - Add a translation
+  "submission.general.info.pending-changes": "Unsaved changes",
   
   // "submission.general.save": "Save",
   "submission.general.save": "Opslaan",
@@ -12801,17 +12871,21 @@
   // TODO New key - Add a translation
   "working-plan.chart.button.collapseAll": "Collapse all",
   
-  // "working-plan.chart.button.add": "add",
+  
+  // "working-plan.chart.button.add": "Add",
   // TODO New key - Add a translation
-  "working-plan.chart.button.add": "add",
+  "working-plan.chart.button.add": "Add",
+  
   
   // "working-plan.chart.button.remove": "Unlink item",
   // TODO New key - Add a translation
   "working-plan.chart.button.remove": "Unlink item",
   
-  // "working-plan.chart.button.edit": "Edit item",
+  
+  // "working-plan.chart.button.edit": "Edit",
   // TODO New key - Add a translation
-  "working-plan.chart.button.edit": "Edit item",
+  "working-plan.chart.button.edit": "Edit",
+  
   
   // "working-plan.chart.column.dates": "Dates",
   // TODO New key - Add a translation
@@ -12861,9 +12935,9 @@
   // TODO New key - Add a translation
   "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
   
-  // "working-plan.chart.column.responsible": "Responsible Organisation",
+  // "working-plan.chart.column.responsible": "Responsible organisation(s)",
   // TODO New key - Add a translation
-  "working-plan.chart.column.responsible": "Responsible Organisation",
+  "working-plan.chart.column.responsible": "Responsible organisation(s)",
   
   // "working-plan.chart.column.sortBy": "Sort by ...",
   // TODO New key - Add a translation
@@ -12980,6 +13054,10 @@
   // "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
   // TODO New key - Add a translation
   "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
+  
+  // "working-plan.task.search.header": "",
+  // TODO New key - Add a translation
+  "working-plan.task.search.header": "",
   
   
   
@@ -13523,9 +13601,68 @@
   "submission.sections.submit.progressbar.describe.calls": "Call",
   
   
-  // "submission.sections.submit.progressbar.describe.fundingobjectives": "Funding objective"
+  // "submission.sections.submit.progressbar.describe.fundingobjectives": "Funding objective",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.fundingobjectives": "Funding objective"
+  "submission.sections.submit.progressbar.describe.fundingobjectives": "Funding objective",
+  
+  
+  // "working-plan.chart.column.change.StartDate.input.description": "Difference in days:",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.change.StartDate.input.description": "Difference in days:",
+  
+  
+  // "working-plan.chart.column.change.StartDate.radio.description": "Earlier or later:",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.change.StartDate.radio.description": "Earlier or later:",
+  
+  
+  // "working-plan.chart.column.change.StartDate.radio.earlier": "Earlier",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.change.StartDate.radio.earlier": "Earlier",
+  
+  
+  // "working-plan.chart.column.change.StartDate.radio.later": "Later",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.change.StartDate.radio.later": "Later",
+  
+  
+  // "working-plan.chart.column.change.StartDate": "Change Start date",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.change.StartDate": "Change Start date",
+  
+  
+  // "working-plan.chart.column.change.StartDate.apply": "Apply",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.change.StartDate.apply": "Apply",
+  
+  
+  // "working-plan.chart.column.change.StartDate.saving": "saving…",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.change.StartDate.saving": "saving…",
+  
+  
+  // "working-plan.chart.column.change.StartDate.Close": "Close",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.change.StartDate.Close": "Close",
+  
+  
+  // "working-plan.chart.column.change.StartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.change.StartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
+  
+  
+  // "working-plan.chart.column.collpase": "Collpase column",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.collpase": "Collpase column",
+  
+  
+  // "Poduct.listelement.badge": "Research data",
+  // TODO New key - Add a translation
+  "Poduct.listelement.badge": "Research data",
+  
+  // "help-page.back-btn": "Back"
+  // TODO New key - Add a translation
+  "help-page.back-btn": "Back"
   
   
 
