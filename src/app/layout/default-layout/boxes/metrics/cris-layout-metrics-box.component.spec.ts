@@ -78,7 +78,7 @@ describe('CrisLayoutMetricsBoxComponent', () => {
 
   beforeEach(async(() => {
 
-    itemDataService = new ItemDataService(null, null, null, null, null, null, null, null, null, null);
+    itemDataService = new ItemDataService(null, null, null, null, null, null, null, null, null, null, null, null);
 
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot({

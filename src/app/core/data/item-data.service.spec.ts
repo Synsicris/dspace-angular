@@ -15,6 +15,8 @@ import { DeleteRequest, FindListOptions, PostRequest } from './request.models';
 import { RequestEntry } from './request.reducer';
 import { RequestService } from './request.service';
 import { getMockRemoteDataBuildService } from '../../shared/mocks/remote-data-build.service.mock';
+import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
+import { ItemJsonPatchOperationsService } from './item-json-patch-operations.service';
 
 describe('ItemDataService', () => {
   let scheduler: TestScheduler;
@@ -44,6 +46,15 @@ describe('ItemDataService', () => {
   });
   const bundleService = jasmine.createSpyObj('bundleService', {
     findByHref: {}
+  });
+
+  const jsonPatchOperationsBuilder = jasmine.createSpyObj('JsonPatchOperationsBuilder', {
+    replace: jasmine.createSpy('replace'),
+    add: jasmine.createSpy('add')
+  });
+
+  const itemJsonPatchOperationsService = jasmine.createSpyObj('ItemJsonPatchOperationsService', {
+    jsonPatchByResourceType: jasmine.createSpy('jsonPatchByResourceType')
   });
 
   const scopeID = '4af28e99-6a9c-4036-a199-e1b587046d39';
@@ -85,7 +96,9 @@ describe('ItemDataService', () => {
       notificationsService,
       http,
       comparator,
-      bundleService
+      bundleService,
+      jsonPatchOperationsBuilder,
+      itemJsonPatchOperationsService
     );
   }
 

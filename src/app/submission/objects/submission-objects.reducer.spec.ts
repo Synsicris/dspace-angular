@@ -215,7 +215,7 @@ describe('submissionReducer test suite', () => {
   });
 
   it('should return same state on discard', () => {
-    const action: any = new DiscardSubmissionAction(submissionId, itemId);
+    const action: any = new DiscardSubmissionAction(submissionId, itemId, false);
     const newState = submissionObjectReducer(initState, action);
 
     expect(newState).toEqual(initState);
@@ -229,7 +229,7 @@ describe('submissionReducer test suite', () => {
   });
 
   it('should return same state once the discard action is completed unsuccessfully', () => {
-    const action: any = new DiscardSubmissionAction(submissionId, itemId);
+    const action: any = new DiscardSubmissionAction(submissionId, itemId, false);
     const newState = submissionObjectReducer(initState, action);
 
     expect(newState).toEqual(initState);
