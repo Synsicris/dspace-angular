@@ -71,6 +71,7 @@ export class FormComponent implements OnDestroy, OnInit {
   @Input() formGroup: FormGroup;
   @Input() formLayout = null as DynamicFormLayout;
   @Input() arrayButtonsStyle: string;
+  @Input() isInlineGroupForm: boolean;
 
   /* tslint:disable:no-output-rename */
   @Output('dfBlur') blur: EventEmitter<DynamicFormControlEvent> = new EventEmitter<DynamicFormControlEvent>();
@@ -330,16 +331,25 @@ export class FormComponent implements OnDestroy, OnInit {
     this.formService.changeForm(this.formId, this.formModel);
   }
 
+  copyItem($event, arrayContext: DynamicFormArrayModel, index: number): void {
+    const formArrayControl = this.formGroup.get(this.formBuilderService.getPath(arrayContext)) as FormArray;
+    const newFormGroup = this.formBuilderService.copyFormArrayGroup(index, formArrayControl, arrayContext);
+    this.customEvent.emit(this.getEvent($event, arrayContext, index + 1, 'copy', newFormGroup));
+    this.formService.changeForm(this.formId, this.formModel);
+    this.formGroup.markAsPristine();
+  }
+
+
   isVirtual(arrayContext: DynamicFormArrayModel, index: number) {
     const context = arrayContext.groups[index];
     const value: FormFieldMetadataValueObject = (context.group[0] as any).metadataValue;
     return isNotEmpty(value) && value.isVirtual;
   }
 
-  protected getEvent($event: any, arrayContext: DynamicFormArrayModel, index: number, type: string): DynamicFormControlEvent {
+  protected getEvent($event: any, arrayContext: DynamicFormArrayModel, index: number, type: string, formGroup?: FormGroup): DynamicFormControlEvent {
     const context = arrayContext.groups[index];
     const itemGroupModel = context.context;
-    let group = this.formGroup.get(itemGroupModel.id) as FormGroup;
+    let group = (formGroup) ? formGroup : this.formGroup.get(itemGroupModel.id) as FormGroup;
     if (isNull(group)) {
       for (const key of Object.keys(this.formGroup.controls)) {
         group = this.formGroup.controls[key].get(itemGroupModel.id) as FormGroup;
@@ -352,4 +362,5 @@ export class FormComponent implements OnDestroy, OnInit {
     const control = group.controls[index] as FormControl;
     return { $event, context, control, group, model, type };
   }
+
 }
