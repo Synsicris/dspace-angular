@@ -25,6 +25,11 @@
 
     <div class="submission-form-content">
         <ds-loading *ngIf="(isLoading() | async)" message="Loading..."></ds-loading>
+        <ds-alert *ngIf="!(isLoading() | async) && (hasInfoMessage | async)"
+                  [collapsible]="true"
+                  [collapsed]="true"
+                  [content]="'submission.form.'+ submissionDefinition.name + '.info'"
+                  [type]="'alert-info'"></ds-alert>
         <ng-container *ngFor="let object of (submissionSections | async)">
             <ds-submission-section-container [collectionId]="collectionId"
                                              [submissionId]="submissionId"
