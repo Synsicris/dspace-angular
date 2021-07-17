@@ -1,3 +1,11 @@
+.input-height-adjustment {
+  height: calc(1.25em + 0.75rem + 2px);
+}
+
+.input-search-mt {
+  margin-top: 7px;
+}
+
 .authority-typeahead {
   .dropdown-menu {
     width: 100% !important;

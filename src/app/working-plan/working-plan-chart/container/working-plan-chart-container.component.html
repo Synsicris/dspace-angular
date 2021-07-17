@@ -6,7 +6,7 @@
       <div class="sidenav-header">
         <div class="float-left">
           <div ngbDropdown #sortByDrop="ngbDropdown" class="d-inline-block" (openChange)="resetSortDropdown($event)">
-            <button class="btn btn-outline-info btn-xs mr-2" id="sortBy" ngbDropdownToggle>{{'working-plan.chart.column.sortBy' | translate}}</button>
+            <button class="btn btn-outline-info btn-xs mr-2" id="sortBy" ngbDropdownToggle>{{'working-plan.chart.column.sortBy' | translate}} {{'working-plan.chart.column.sortBy.option.' + (sortSelected$ | async) | translate}}</button>
             <div ngbDropdownMenu class="block-change-start-date font-size-07 p-2" aria-labelledby="sortBy">
               <button type="button" class="close" data-dismiss="alert" attr.aria-label="{{'working-plan.chart.column.changeStartDateClose' | translate}}" (click)="sortByDrop.close()">
                 <span aria-hidden="true">&times;</span>
@@ -60,9 +60,11 @@
           cdkDrag [cdkDragData]="node"
           [cdkDragDisabled]="!dragAndDropIsActive || (isMoving() | async)"
           class="tree-node-customization"
+          [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
+          [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
           matTreeNodeToggle
           matTreeNodePadding
-          [matTreeNodePaddingIndent]="18"
+          [matTreeNodePaddingIndent]="24"
           (mouseover)="chartChangeColor(node.id, true)"
           (mouseout)="chartChangeColor(node.id, false)"
           (cdkDragStarted)="dragStarted($event)"
@@ -76,15 +78,15 @@
             <i *ngIf="(isDragging | async) && (isDropAllowed | async)" class="mt-2 ml-2 fas fa-check fa-4x"></i>
             <i *ngIf="(isDragging | async) && !(isDropAllowed | async)" class="mt-3 ml-4 fas fa-exclamation fa-4x"></i>
           </div>
-          <div>
+          <div [class.root-node-style]="node.level === 0">
             <button mat-icon-button matTreeNodeToggle [disabled]="!dragAndDropIsActive || (isMoving() | async)" cdkDragHandle class="btn btn-xs btn-link p-0 text-primary button-move" title="Drag & Drop">
               <i class="fas fa-grip-vertical{{(!dragAndDropIsActive || (isMoving() | async))?' opacity-50':''}}"></i>
             </button>
           </div>
-          <div class="mat-form-field auto-width mt-1">
+          <div class="mat-form-field auto-width mt-1{{node.level === 0?' pl-2':''}}">
             <p class="block-ellipsis">{{node.name}}</p>
             <br>
-            <span class="text-success font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
+            <span class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
           </div>
           <div class="mr-05">
             <button mat-icon-button *ngIf="canAddChildStep(node)"
@@ -116,8 +118,10 @@
           cdkDrag [cdkDragData]="node"
           [cdkDragDisabled]="!dragAndDropIsActive || (isMoving() | async)"
           class="tree-node-customization"
+          [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
+          [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
           matTreeNodePadding
-          [matTreeNodePaddingIndent]="18"
+          [matTreeNodePaddingIndent]="24"
           (mouseover)="chartChangeColor(node.id, true)"
           (mouseout)="chartChangeColor(node.id, false)"
           (cdkDragStarted)="dragStarted($event)"
@@ -131,7 +135,7 @@
             <i *ngIf="(isDragging | async) && (isDropAllowed | async)" class="mt-2 ml-2 fas fa-check fa-4x"></i>
             <i *ngIf="(isDragging | async) && !(isDropAllowed | async)" class="mt-3 ml-4 fas fa-exclamation fa-4x"></i>
           </div>
-          <div>
+          <div [class.root-node-style]="node.level === 0">
             <button mat-icon-button [disabled]="!dragAndDropIsActive || (isMoving() | async)" cdkDragHandle class="btn btn-xs btn-link p-0 text-primary button-move" title="Drag & Drop">
               <i class="fas fa-grip-vertical{{(!dragAndDropIsActive || (isMoving() | async))?' opacity-50':''}}"></i>
             </button>
@@ -145,10 +149,10 @@
               </mat-icon>
             </button>
           </div>
-          <div class="mat-form-field auto-width mt-1">
+          <div class="mat-form-field auto-width mt-1{{node.level === 0?' pl-2':''}}">
             <p class="block-ellipsis font-weight-bold">{{node.name}}</p>
             <br>
-            <span class="text-success font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
+            <span class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
           </div>
           <div class="mr-05">
             <button mat-icon-button *ngIf="node.level < 3"
@@ -289,7 +293,7 @@
               [class.tree-node-milestone-customization]="chartCheckMilestone(date + '-' + day)">
               <div class="calendar-inner-cell flex-fill calendar-cell-customization"
                   [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, date + '-' + day)"
-                  [class.calendar-inner-cell-over]="chartCheckChangeColor(node, date + '-' + day, date + '-' + day)"
+                  [class.calendar-inner-cell-over]="!chartCheckNodeMilestone(node.id, date + '-' + day) && chartCheckChangeColor(node, date + '-' + day, date + '-' + day)"
                   [attr.date-filled]="isDateInsidePogressRange(date + '-' + day, node)"
                   [attr.date-inside]="isDateInsideRange(date + '-' + day, node)"></div>
             </div>
@@ -315,7 +319,7 @@
                 [class.tree-node-milestone-customization]="chartCheckMilestone(getQaurterYear(quarter) + '-' + month + '-' + day)">
                 <div class="calendar-inner-cell h-100 flex-fill calendar-cell-customization"
                     [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, getQaurterYear(quarter) + '-' + month + '-' + day)"
-                    [class.calendar-inner-cell-over]="chartCheckChangeColor(node, getQaurterYear(quarter) + '-' + month + '-' + day, getQaurterYear(quarter) + '-' + month + '-' + day)"
+                    [class.calendar-inner-cell-over]="!chartCheckNodeMilestone(node.id, getQaurterYear(quarter) + '-' + month + '-' + day) && chartCheckChangeColor(node, getQaurterYear(quarter) + '-' + month + '-' + day, getQaurterYear(quarter) + '-' + month + '-' + day)"
                     [attr.date-filled]="isDateInsidePogressRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"
                     [attr.date-inside]="isDateInsideRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"></div>
               </div>
@@ -337,7 +341,7 @@
               [class.tree-node-milestone-customization]="chartCheckMilestone(year + '-' + month + '-' + day)">
                 <div class="calendar-inner-cell h-100 flex-fill calendar-cell-customization"
                     [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, year + '-' + month + '-' + day)"
-                    [class.calendar-inner-cell-over]="chartCheckChangeColor(node, year + '-' + month + '-' + day, year + '-' + month + '-' + day)"
+                    [class.calendar-inner-cell-over]="!chartCheckNodeMilestone(node.id, year + '-' + month + '-' + day) && chartCheckChangeColor(node, year + '-' + month + '-' + day, year + '-' + month + '-' + day)"
                     [attr.date-filled]="isDateInsidePogressRange(year + '-' + month + '-' + day, node)"
                     [attr.date-inside]="isDateInsideRange(year + '-' + month + '-' + day, node)"></div>
               </div>

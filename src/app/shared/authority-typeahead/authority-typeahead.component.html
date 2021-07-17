@@ -21,15 +21,15 @@
 </ng-template>
 
 <div *ngIf="!(isHierarchical$ | async)" class="position-relative right-addon authority-typeahead">
-  <i *ngIf="searching" class="fas fa-circle-notch fa-spin fa-2x fa-fw text-primary position-absolute mt-1 p-0" aria-hidden="true"></i>
+  <i *ngIf="searching" class="fas fa-circle-notch fa-spin fa-2x fa-fw text-primary position-absolute input-search-mt p-0" aria-hidden="true"></i>
   <i *ngIf="!searching"
      dsAuthorityConfidenceState
-     class="far fa-circle fa-2x fa-fw position-absolute mt-1 p-0"
+     class="far fa-circle fa-2x fa-fw position-absolute input-search-mt p-0"
      aria-hidden="true"
      [authorityValue]="currentValue"
      (whenClickOnConfidenceNotAccepted)="whenClickOnConfidenceNotAccepted($event)"></i>
   <input #instance="ngbTypeahead"
-         class="form-control"
+         class="form-control input-height-adjustment"
          [attr.autoComplete]="autocomplete"
          [class.is-invalid]="showErrorMessages"
          [id]="bindId && fieldId"

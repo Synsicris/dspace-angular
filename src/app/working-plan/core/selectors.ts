@@ -69,6 +69,15 @@ export const isWorkingPlanProcessingSelector = createSelector(_getWorkingPlanSta
 );
 
 /**
+ * Returns true if the user a operation is processing.
+ * @function getLastAddedNodesListSelector
+ * @return {string[]}
+ */
+export const getLastAddedNodesListSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.lastAddedNodes
+);
+
+/**
  * Returns workpackage id to remove.
  * @function workpackageToRemoveSelector
  * @return {boolean}

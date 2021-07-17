@@ -114,9 +114,16 @@ $calendarCellWidth: 60px;
 $nodeHeight: 50px;
 $completeColor: #89b34d;
 $incompleteColor: #89b34d;
-$overColor: #559541;
+$overColor: #245016;
+$overGrey: #fffde7;
+$recentGrey: #fffef5;
 $borderColor: #BDBDBD;
 $highlightBorderColor: #FF9800;
+
+.root-node-style {
+  background-color: #e9ecef;
+  border-right: 1px solid $borderColor;
+}
 
 .calendar-head-border {
   border-bottom: solid 2px $borderColor;
@@ -169,8 +176,9 @@ $highlightBorderColor: #FF9800;
 .tree-node-milestone-rhombus {
   width: 8px;
   height: 8px !important;
-  border: solid 1px blue;
-  background-color: blue !important;
+  border: solid 1px #347798;
+  background-color: #347798 !important;
+  margin-left: -2px;
   transform: rotate(45deg);
   min-width: 8px !important;
   min-height: 8px !important;
@@ -327,4 +335,14 @@ $highlightBorderColor: #FF9800;
 // MouseOver effect on the filled cells
 .calendar-inner-cell-over {
   background-color: $overColor !important;
+}
+
+// MouseOver effect on the title cells on the left
+.calendar-title-cell-over {
+  background-color: $overGrey;
+}
+
+// Background color for new added nodes
+.calendar-title-cell-now-added {
+  background-color: $recentGrey;
 }

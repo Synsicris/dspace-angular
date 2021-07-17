@@ -45,6 +45,7 @@ export interface WorkingPlanState {
   workpackageToUpdate: string;
   loaded: boolean;
   processing: boolean;
+  lastAddedNodes: string[];
   moving: boolean;
   chartDateView: ChartDateViewType;
   sortOption: string;
@@ -56,6 +57,7 @@ const workpackageInitialState: WorkingPlanState = {
   workpackageToUpdate: '',
   loaded: false,
   processing: false,
+  lastAddedNodes: [],
   moving: false,
   chartDateView: ChartDateViewType.month,
   sortOption: ''
@@ -245,7 +247,8 @@ function addWorkpackageStep(state: WorkingPlanState, action: AddWorkpackageStepS
     workpackages: Object.assign({}, state.workpackages, {
       [action.payload.parentId]: newWorpackage
     }),
-    processing: false
+    processing: false,
+    lastAddedNodes: [...state.lastAddedNodes, action.payload.workpackageStep.id]
   });
 }
 

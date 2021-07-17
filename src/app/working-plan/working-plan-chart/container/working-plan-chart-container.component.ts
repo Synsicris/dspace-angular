@@ -830,6 +830,24 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return this.workingPlanService.isProcessingWorkpackage();
   }
 
+  /**
+   * Check, inside the state, if the node has been added in the last operation.
+   *
+   * @param nodeId string
+   * @returns Observable<boolean>
+   */
+  hasBeenNowAdded(nodeId): Observable<boolean> {
+    return this.workingPlanService.getLastAddedNodesList().pipe(
+      map((nodeIdArray: string[]) => {
+        if (nodeIdArray.indexOf(nodeId) > -1) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
+  }
+
   ngOnDestroy(): void {
     this.subs
       .filter((subscription) => hasValue(subscription))

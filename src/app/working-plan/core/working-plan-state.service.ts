@@ -22,6 +22,7 @@ import { MetadataMap, MetadatumViewModel } from '../../core/shared/metadata.mode
 import { Observable } from 'rxjs/internal/Observable';
 import {
   chartDateViewSelector,
+  getLastAddedNodesListSelector,
   isWorkingPlanLoadedSelector,
   isWorkingPlanMovingSelector,
   isWorkingPlanProcessingSelector,
@@ -146,6 +147,10 @@ export class WorkingPlanStateService {
 
   public getWorkpackagesSortOption() {
     return this.store.pipe(select(workpackagesSortOptionSelector));
+  }
+
+  public getLastAddedNodesList(): Observable<string[]> {
+    return this.store.pipe(select(getLastAddedNodesListSelector));
   }
 
   public isProcessing(): Observable<boolean> {
