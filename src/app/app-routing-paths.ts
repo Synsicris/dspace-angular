@@ -93,3 +93,5 @@ export function getAccessControlModuleRoute() {
 }
 
 export const EDIT_ITEM_PATH = 'edit-items';
+
+export const HELP_PAGE_PATH = 'help';

@@ -17,8 +17,9 @@ import { SubmissionRestService } from '../../../core/submission/submission-rest.
 import { createTestComponent } from '../../../shared/testing/utils.test';
 import { SubmissionScopeType } from '../../../core/submission/submission-scope-type';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import createSpy = jasmine.createSpy;
 
-fdescribe('SubmissionFormFooterComponent Component', () => {
+describe('SubmissionFormFooterComponent Component', () => {
 
   let comp: SubmissionFormFooterComponent;
   let compAsAny: any;
@@ -29,7 +30,7 @@ fdescribe('SubmissionFormFooterComponent Component', () => {
 
   const submissionId = mockSubmissionId;
   const authorizationService = jasmine.createSpyObj('authorizationService', {
-    isAuthorized: observableOf(true)
+    isAuthorized: createSpy('isAuthorized').and.returnValue(observableOf(true))
   });
 
   beforeEach(waitForAsync(() => {

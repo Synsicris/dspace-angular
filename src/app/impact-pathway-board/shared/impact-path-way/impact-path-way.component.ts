@@ -13,6 +13,7 @@ import { AuthorizationDataService } from '../../../core/data/feature-authorizati
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { mergeMap, take } from 'rxjs/operators';
 import { Item } from '../../../core/shared/item.model';
+import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 
 @Component({
   selector: 'ipw-impact-path-way',
@@ -62,16 +63,6 @@ export class ImpactPathWayComponent implements OnInit {
     return this.wrapper && this.wrapper.activeIds.includes(this.impactPathway.id);
   }
 
-  updateDescription(value): void {
-    this.impactPathwayService.dispatchPatchImpactPathwayMetadata(
-      this.impactPathway.id,
-      this.impactPathway,
-      'dc.description',
-      0,
-      value
-    );
-  }
-
   isProcessingRemove(): Observable<boolean> {
     return this.impactPathwayService.isRemoving();
   }
@@ -101,5 +92,19 @@ export class ImpactPathWayComponent implements OnInit {
    */
   getImpactPathwayStepIds(): string[] {
     return this.impactPathway.steps.map((step: ImpactPathwayStep) => step.id);
+  }
+
+  openEditModal() {
+    const modalRef = this.modalService.open(EditSimpleItemModalComponent, { size: 'lg' });
+    modalRef.componentInstance.formConfig = this.impactPathwayService.getImpactPathwayFormConfig();
+    modalRef.componentInstance.itemId = this.impactPathway.id;
+
+    modalRef.componentInstance.itemUpdate.subscribe((item: Item) => {
+      this.impactPathway = this.impactPathwayService.updateImpactPathway(item, this.impactPathway);
+      this.impactPathwayService.dispatchUpdateImpactPathway(
+        this.impactPathway.id,
+        this.impactPathway
+      );
+    });
   }
 }

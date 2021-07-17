@@ -161,6 +161,10 @@ export class WorkingPlanService {
     return environment.workingPlan.workingPlanStepsFormName;
   }
 
+  getWorkingPlanTaskSearchHeader(): string {
+    return `working-plan.task.search.header`;
+  }
+
   getWorkpackageItemById(itemId): Observable<Item> {
     return this.itemService.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload()

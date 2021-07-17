@@ -17,6 +17,7 @@ import { SubmissionService } from '../submission.service';
 import { Item } from '../../core/shared/item.model';
 import { SectionsType } from '../sections/sections-type';
 import { SectionsService } from '../sections/sections.service';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * This component represents the submission form.
@@ -78,6 +79,12 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
   public definitionId: string;
 
   /**
+   * A boolean representing if a submission form has a info message to display
+   * @type {Observable<boolean>}
+   */
+  public hasInfoMessage: Observable<boolean>;
+
+  /**
    * A boolean representing if a submission form is pending
    * @type {Observable<boolean>}
    */
@@ -120,13 +127,15 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * @param {HALEndpointService} halService
    * @param {SubmissionService} submissionService
    * @param {SectionsService} sectionsService
+   * @param {TranslateService} translate
    */
   constructor(
     private authService: AuthService,
     private changeDetectorRef: ChangeDetectorRef,
     private halService: HALEndpointService,
     private submissionService: SubmissionService,
-    private sectionsService: SectionsService) {
+    private sectionsService: SectionsService,
+    private translate: TranslateService) {
     this.isActive = true;
   }
 
@@ -134,6 +143,14 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * Initialize all instance variables and retrieve form configuration
    */
   ngOnChanges(changes: SimpleChanges) {
+    if ((changes.submissionDefinition && this.submissionDefinition)) {
+      const messageInfoKey = 'submission.form.' + this.submissionDefinition.name + '.info';
+      console.log(messageInfoKey);
+      this.hasInfoMessage = this.translate.get(messageInfoKey).pipe(
+        map((message: string) => isNotEmpty(message) && messageInfoKey !== message)
+      );
+    }
+
     if ((changes.collectionId && this.collectionId) && (changes.submissionId && this.submissionId)) {
       this.isActive = true;
 
@@ -247,4 +264,6 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
       filter((sections: SectionDataObject[]) => isNotEmpty(sections)),
       map((sections: SectionDataObject[]) => sections));
   }
+
+
 }

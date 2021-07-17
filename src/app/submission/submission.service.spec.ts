@@ -541,7 +541,7 @@ describe('SubmissionService test suite', () => {
   describe('dispatchDiscard', () => {
     it('should dispatch a new DiscardSubmissionAction', () => {
       service.dispatchDiscard(submissionId, itemId);
-      const expected = new DiscardSubmissionAction(submissionId, itemId);
+      const expected = new DiscardSubmissionAction(submissionId, itemId, false);
 
       expect((service as any).store.dispatch).toHaveBeenCalledWith(expected);
     });
