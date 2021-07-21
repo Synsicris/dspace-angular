@@ -17,7 +17,7 @@
              [class.isInlineGroupForm-delete]="isInlineGroupForm"
              class="col-xs-2 d-flex flex-column justify-content-sm-start align-items-end"
              [class]="arrayButtonsStyle" [ngClass]="{'justify-content-sm-end' : isInlineGroupForm }">
-            <button type="button" class="btn btn-secondary"
+            <button type="button" class="btn btn-danger"
                     title="{{'form.remove' | translate}}"
                     (click)="removeItem($event, context, index)"
                     [disabled]="group.context.groups.length === 1 || isItemReadOnly(context, index)">
