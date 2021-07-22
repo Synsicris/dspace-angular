@@ -4025,6 +4025,9 @@
   // "form.save-help": "Save changes",
   "form.save-help": "Salvar alterações",
   
+  // "form.search": "Search",
+  // TODO Source message changed - Revise the translation
+  "form.search": "Buscar",
   
   // "form.scrollable-input.search": "Search",
   // TODO New key - Add a translation
@@ -4044,11 +4047,6 @@
   // "form.repeatable.sort.tip": "Drop the item in the new position",
   // TODO New key - Add a translation
   "form.repeatable.sort.tip": "Drop the item in the new position",
-  
-  // "form.search": "Drop the item in the new position",
-  // TODO Source message changed - Revise the translation
-  "form.search": "Buscar",
-  
   
   // "funding.listelement.badge": "Funding",
   // TODO New key - Add a translation
@@ -4129,6 +4127,10 @@
   // "impact-pathway.breadcrumbs": "Impact pathway",
   // TODO New key - Add a translation
   "impact-pathway.breadcrumbs": "Impact pathway",
+  
+  // "impact-pathway.heading": "Impact pathway",
+  // TODO New key - Add a translation
+  "impact-pathway.heading": "Impact pathway",
   
   
   // "impact-pathway.checkbox.link": "Click here to link/unlink item",
@@ -12886,9 +12888,9 @@
   // TODO New key - Add a translation
   "working-plan.chart.column.responsible": "Responsible organisation(s)",
   
-  // "working-plan.chart.column.sortBy": "Sort by ...",
+  // "working-plan.chart.column.sortBy": "Sort by",
   // TODO New key - Add a translation
-  "working-plan.chart.column.sortBy": "Sort by ...",
+  "working-plan.chart.column.sortBy": "Sort by",
   
   // "working-plan.chart.column.sortBy.option.workingplan.place": "Tree order",
   // TODO New key - Add a translation
