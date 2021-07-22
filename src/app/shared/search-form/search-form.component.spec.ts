@@ -8,13 +8,11 @@ import { Community } from '../../core/shared/community.model';
 import { TranslateModule } from '@ngx-translate/core';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { SearchService } from '../../core/shared/search/search.service';
-import { PaginationComponentOptions } from '../pagination/pagination-component-options.model';
-import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
-import { FindListOptions } from '../../core/data/request.models';
 import { of as observableOf } from 'rxjs';
 import { PaginationService } from '../../core/pagination/pagination.service';
 import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
 import { PaginationServiceStub } from '../testing/pagination-service.stub';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 
 describe('SearchFormComponent', () => {
   let comp: SearchFormComponent;
@@ -25,6 +23,9 @@ describe('SearchFormComponent', () => {
   const paginationService = new PaginationServiceStub();
 
   const searchConfigService = {paginationID: 'test-id'};
+  const authorizationService = jasmine.createSpyObj('authorizationService', {
+    isAuthorized: observableOf(true)
+  });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -35,7 +36,8 @@ describe('SearchFormComponent', () => {
           useValue: {}
         },
         { provide: PaginationService, useValue: paginationService },
-        { provide: SearchConfigurationService, useValue: searchConfigService }
+        { provide: SearchConfigurationService, useValue: searchConfigService },
+        { provide: AuthorizationDataService, useValue: authorizationService }
       ],
       declarations: [SearchFormComponent]
     }).compileComponents();

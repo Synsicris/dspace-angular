@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { Router } from '@angular/router';
 import { isNotEmpty } from '../empty.util';
@@ -6,6 +6,10 @@ import { SearchService } from '../../core/shared/search/search.service';
 import { currentPath } from '../utils/route.utils';
 import { PaginationService } from '../../core/pagination/pagination.service';
 import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
+import { FeatureID } from '../../core/data/feature-authorization/feature-id';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 /**
  * This component renders a simple item page.
@@ -22,7 +26,7 @@ import { SearchConfigurationService } from '../../core/shared/search/search-conf
 /**
  * Component that represents the search form
  */
-export class SearchFormComponent {
+export class SearchFormComponent implements OnInit {
   /**
    * The search query
    */
@@ -66,10 +70,22 @@ export class SearchFormComponent {
    */
   @Output() submitSearch = new EventEmitter<any>();
 
+  /**
+   * A boolean representing if current user is admin or not
+   */
+  isAdmin$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(private router: Router, private searchService: SearchService,
               private paginationService: PaginationService,
-              private searchConfig: SearchConfigurationService
+              private searchConfig: SearchConfigurationService,
+              private authorizationService: AuthorizationDataService
               ) {
+  }
+
+  ngOnInit(): void {
+    this.isCurrentUserAdmin().pipe(take(1)).subscribe((isAdmin) => {
+      this.isAdmin$.next(isAdmin);
+    });
   }
 
   /**
@@ -131,4 +147,12 @@ export class SearchFormComponent {
     }
     return this.getSearchLink().split('/');
   }
+
+  /**
+   * Check if user is administrator
+   */
+  isCurrentUserAdmin(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, undefined, undefined);
+  }
+
 }
