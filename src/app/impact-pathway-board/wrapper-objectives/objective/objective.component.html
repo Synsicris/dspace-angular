@@ -2,12 +2,10 @@
                        [sidebarPanelTitle]="impactPathwayTask.title"
                        [sidebarPanelDescription]="impactPathwayTask.description"
                        [startOpen]="isOpen()">
-  <ng-container ngProjectAs="panelIconStatus">
-    <button class="btn btn-lg btn-link flex-shrink-1 align-self-center text-primary">
-      <span (click)="openEditModal(); $event.stopImmediatePropagation()"><i class="fas fa-edit"></i></span>
-    </button>
-  </ng-container>
   <ng-container ngProjectAs="panelContent">
+    <ds-view-simple-item-form [formConfig]="formConfig$"
+                              [itemId]="impactPathwayTask.id"
+                              (itemUpdate)="updateImpactPathwayTask($event)"></ds-view-simple-item-form>
     <div class="d-flex align-items-stretch p-0 m-0">
       <ipw-objective-container class="horizontal-step h-100 horizontal-content"
                                [projectId]="projectId"
