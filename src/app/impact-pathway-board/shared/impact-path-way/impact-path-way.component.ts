@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
+import { mergeMap, take } from 'rxjs/operators';
 import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../core/models/impact-pathway.model';
@@ -11,9 +12,8 @@ import { ImpactPathwayService } from '../../core/impact-pathway.service';
 import { ImpactPathwayStep } from '../../core/models/impact-pathway-step.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
-import { mergeMap, take } from 'rxjs/operators';
 import { Item } from '../../../core/shared/item.model';
-import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
+import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
 
 @Component({
   selector: 'ipw-impact-path-way',
@@ -27,6 +27,7 @@ export class ImpactPathWayComponent implements OnInit {
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
 
+  formConfig$: Observable<SubmissionFormModel>;
   canDeleteImpactPathway$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   canShowRelations: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   loaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -41,6 +42,7 @@ export class ImpactPathWayComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.formConfig$ = this.impactPathwayService.getImpactPathwayFormConfig();
     this.impactPathwayService.retrieveObjectItem(this.impactPathway.id).pipe(
       mergeMap((item: Item) => this.authorizationService.isAuthorized(FeatureID.CanDelete, item.self, undefined)),
       take(1)
@@ -94,17 +96,15 @@ export class ImpactPathWayComponent implements OnInit {
     return this.impactPathway.steps.map((step: ImpactPathwayStep) => step.id);
   }
 
-  openEditModal() {
-    const modalRef = this.modalService.open(EditSimpleItemModalComponent, { size: 'lg' });
-    modalRef.componentInstance.formConfig = this.impactPathwayService.getImpactPathwayFormConfig();
-    modalRef.componentInstance.itemId = this.impactPathway.id;
-
-    modalRef.componentInstance.itemUpdate.subscribe((item: Item) => {
-      this.impactPathway = this.impactPathwayService.updateImpactPathway(item, this.impactPathway);
-      this.impactPathwayService.dispatchUpdateImpactPathway(
-        this.impactPathway.id,
-        this.impactPathway
-      );
-    });
+  /**
+   * Update impact-pathway object from given item
+   * @param item
+   */
+  updateImpactPathway(item) {
+    this.impactPathway = this.impactPathwayService.updateImpactPathway(item, this.impactPathway);
+    this.impactPathwayService.dispatchUpdateImpactPathway(
+      this.impactPathway.id,
+      this.impactPathway
+    );
   }
 }

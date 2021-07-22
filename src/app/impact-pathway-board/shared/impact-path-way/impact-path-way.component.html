@@ -1,6 +1,6 @@
 <div class="border-bottom mb-4 pb-2 d-flex justify-content-between align-items-center">
   <ds-comcol-page-header
-    [name]="impactPathway.title | titlecase">
+    [name]="'impact-pathway.heading' | translate">
   </ds-comcol-page-header>
   <div class="pl-2">
     <button *ngIf="(canDeleteImpactPathway$ | async)" class="btn btn-danger"
@@ -11,18 +11,7 @@
         <i class="far fa-trash-alt"></i> {{'impact-pathway.remove.title' | translate}}
       </span>
       <span *ngIf="(isProcessingRemove() | async)">
-        <i class="fas fa-circle-notch fa-spin"> {{'mpact-pathway.remove.processing' | translate}}</i>
-      </span>
-    </button>
-    <button class="btn btn-primary"
-            [disabled]="(isProcessingRemove() | async)"
-            title="{{'impact-pathway.edit.title' | translate}}"
-            (click)="$event.preventDefault(); openEditModal(); $event.stopPropagation()">
-      <span *ngIf="!(isProcessingRemove() | async)">
-        <i class="far fa-edit"></i> {{'impact-pathway.edit.title' | translate}}
-      </span>
-      <span *ngIf="(isProcessingRemove() | async)">
-        <i class="fas fa-circle-notch fa-spin"> {{'mpact-pathway.remove.processing' | translate}}</i>
+        <i class="fas fa-circle-notch fa-spin"> {{'impact-pathway.remove.processing' | translate}}</i>
       </span>
     </button>
   </div>
@@ -33,6 +22,9 @@
             [type]="'alert-info'"
             [collapsible]="true"
             [content]="'impact-pathway.wrapper.info'"></ds-alert>
+  <ds-view-simple-item-form [formConfig]="formConfig$"
+                            [itemId]="impactPathway.id"
+                            (itemUpdate)="updateImpactPathway($event)"></ds-view-simple-item-form>
   <div class="d-flex align-items-stretch p-0 m-0 vertical-content border">
     <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps"
                               ipwStepColor
