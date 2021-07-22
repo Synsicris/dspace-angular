@@ -2609,7 +2609,7 @@
   "impact-pathway.checkbox.link": "Click here to link/unlink item",
 
 
-  "impact-pathway.create.bidirectional-link": "Create bidirectional link",
+  "impact-pathway.create.bidirectional-link": "Create bidirectional arrow",
 
 
   "impact-pathway.create.btn": "Create impact pathway",
@@ -2621,7 +2621,7 @@
   "impact-pathway.create.head": "New impact pathway",
 
 
-  "impact-pathway.create.outcome-link": "Create link",
+  "impact-pathway.create.outcome-link": "Create arrow",
 
 
   "impact-pathway.create.placeholder": "Enter the name of the new impact pathway.",
@@ -2642,7 +2642,7 @@
   "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
 
 
-  "impact-pathway.objectives.back-btn": "Back to impact pathway",
+  "impact-pathway.objectives.back-btn": "Back to Impact Pathway",
 
 
   "impact-pathway.objectives.edit.page.title": "Edit objectives",
@@ -2669,14 +2669,16 @@
   "impact-pathway.remove.confirm.title": "Discard impact pathway",
 
 
-  "impact-pathway.remove.item.title": "Remove item",
+  "impact-pathway.remove.item.title": "Unlink item",
 
 
   "impact-pathway.remove.processing": "Deleting",
 
   "impact-pathway.edit.title": "Edit impact pathway",
 
-  "impact-pathway.remove.title": "Delete impact pathway",
+
+  "impact-pathway.remove.title": "Delete Impact Pathway",
+
 
   "impact-pathway.remove.success": "The impact pathway has been deleted successfully.",
 
@@ -4659,7 +4661,7 @@
   "participation_events.listelement.badge": "Participative process",
 
 
-  "patents.listelement.badge": "Patent and utility patent",
+  "patents.listelement.badge": "Patent or utility patent",
 
 
   "person.listelement.badge": "Person",
@@ -5236,7 +5238,7 @@
   "project.create.success": "The new project has been generated successfully.",
 
 
-  "project.listelement.badge": "Research project",
+  "project.listelement.badge": "Project",
 
 
   "project.page.contributor": "Contributors",
@@ -7734,7 +7736,7 @@
   "submission.sections.upload.header.policy.default.withlist": "Please note that uploaded files in the {{collectionName}} collection will be accessible, in addition to what is explicitly decided for the single file, with the following group(s): ",
 
 
-  "submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <strong>upload additional files just dragging & dropping them everywhere in the page</strong>",
+  "submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <b>upload additional files just dragging & dropping them everywhere in the page.</b>",
 
 
   "submission.sections.upload.no-entry": "No",
@@ -8071,7 +8073,9 @@
 
   "working-plan.chart.column.changeStartDate.radio.later": "Later",
 
-  "working-plan.chart.column.changeStartDate": "Change start date",
+
+  "working-plan.chart.column.changeStartDate": "Change Start date",
+
 
   "working-plan.chart.column.changeStartDate.apply": "Apply",
 
@@ -8081,11 +8085,14 @@
 
   "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
 
-  "working-plan.chart.column.responsible": "Responsible organisation(s)",
 
-  "working-plan.chart.column.sortBy": "Sort by",
+  "working-plan.chart.column.responsible": "Responsible project partner(s)",
 
-  "working-plan.chart.column.sortBy.option.workingplan.place": "Tree order",
+
+  "working-plan.chart.column.sortBy": "Sort by...",
+
+  "working-plan.chart.column.sortBy.option.workingplan.place": "Individual order",
+
 
   "working-plan.chart.column.sortBy.option.dc.title": "Title",
 
@@ -8093,7 +8100,9 @@
 
   "working-plan.chart.column.sortBy.option.synsicris.type.status": "Status",
 
-  "working-plan.chart.column.sortBy.option.synsicris.relation.partner": "Organization",
+
+  "working-plan.chart.column.sortBy.option.synsicris.relation.partner": "Organisation",
+
 
   "working-plan.chart.column.sortBy.option.dc.date.start": "Start date",
 
@@ -8144,17 +8153,16 @@
   "working-plan.task.search.header": "",
 
 
-
-  "application.listelement.badge": "Applications of solutions / changes / innovations",
-
-
-  "award.listelement.badge": "Award / prize",
+  "application.listelement.badge": "Application of a solution / change / innovation",
 
 
-  "condition.listelement.badge": "External conditions",
+  "award.listelement.badge": "Award",
 
 
-  "contribution_fundingprogramme.listelement.badge": "Contributions to funding programme objectives",
+  "condition.listelement.badge": "External condition",
+
+
+  "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objective",
 
 
   "cooperation_partner.listelement.badge": "Cooperation partners",
@@ -8169,7 +8177,7 @@
   "gender.listelement.badge": "Gender reflection",
 
 
-  "impactpathway.listelement.badge": "Impact pathway",
+  "impactpathway.listelement.badge": "Impact Pathway",
 
 
   "impactpathwaystep.listelement.badge": "Impact pathway step",
@@ -8280,7 +8288,7 @@
   "awards.listelement.badge": "Awards and prizes",
 
 
-  "conditions.listelement.badge": "External conditions",
+  "conditions.listelement.badge": "External condition",
 
 
   "process_events.listelement.badge": "Process of cooperation, participation and working together",
@@ -8292,7 +8300,7 @@
   "ethics.listelement.badge": "Ethical reflection",
 
 
-  "events.listelement.badge": "Events",
+  "events.listelement.badge": "Event",
 
 
   "impact_pathway.listelement.badge": "Impact pathway",
@@ -8313,7 +8321,7 @@
   "orgunits.listelement.badge": "Organizational units",
 
 
-  "persons.listelement.badge": "Persons",
+  "persons.listelement.badge": "Person",
 
 
   "physical_objects.listelement.badge": "Object / material for knowledge transfer and subsequent use in research and teaching",
@@ -8322,22 +8330,22 @@
   "plan_publications.listelement.badge": "Planned publications",
 
 
-  "proj_objectives.listelement.badge": "Project objectives",
+  "proj_objectives.listelement.badge": "Project objective",
 
 
-  "projects.listelement.badge": "Research projects",
+  "projects.listelement.badge": "Project",
 
 
-  "publications.listelement.badge": "Publications",
+  "publications.listelement.badge": "Publication",
 
 
-  "research_results.listelement.badge": "Research results",
+  "research_results.listelement.badge": "Research result",
 
 
-  "spinoffs.listelement.badge": "Spin-offs",
+  "spinoffs.listelement.badge": "Spin-off",
 
 
-  "steps.listelement.badge": "Next steps and cooperations",
+  "steps.listelement.badge": "Next steps and cooperation",
 
 
   "subprojects.listelement.badge": "Subprojects",
@@ -8488,7 +8496,7 @@
   "working-plan.chart.column.change.StartDate.apply": "Apply",
 
 
-  "working-plan.chart.column.change.StartDate.saving": "saving…",
+  "working-plan.chart.column.change.StartDate.saving": "saving...",
 
 
   "working-plan.chart.column.change.StartDate.Close": "Close",
@@ -8502,6 +8510,31 @@
 
   "Poduct.listelement.badge": "Research data",
 
-  "help-page.back-btn": "Back"
+
+  "help-page.back-btn": "Back",
+
+
+  "working-plan.chart.column.changeStartDate.Close": "Close",
+
+
+  "working-plan.task.create.head": "New item",
+
+
+  "subcontractors.listelement.badge": "Subcontractor",
+
+
+  "cooperationpartners.listelement.badge": "Cooperation partner",
+
+
+  "parentprojects.listelement.badge": "Joint Project",
+
+
+  "programmes.listelement.badge": "Programme",
+
+
+  "calls.listelement.badge": "Call",
+
+
+  "fundingobjectives.listelement.badge": "Funding objective",
 
 }
