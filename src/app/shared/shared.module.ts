@@ -296,6 +296,7 @@ import { CreateProjectComponent } from '../projects/create-project/create-projec
 import { InvitationModalComponent } from './invitation-modal/invitation-modal.component';
 import { EditItemGrantsModalComponent } from './edit-item-grants-modal/edit-item-grants-modal.component';
 import { EditSimpleItemModalComponent } from './edit-simple-item-modal/edit-simple-item-modal.component';
+import { ViewSimpleItemFormComponent } from './view-simple-item-form/view-simple-item-form.component';
 
 /**
  * Declaration needed to make sure all decorator functions are called in time
@@ -573,6 +574,7 @@ const COMPONENTS = [
   CreateSimpleItemModalComponent,
   CreateSimpleItemComponent,
   EditSimpleItemModalComponent,
+  ViewSimpleItemFormComponent,
   SearchSimpleItemComponent,
   SearchSimpleItemHeaderComponent,
   SearchSimpleItemLabelsComponent,
