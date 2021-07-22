@@ -11402,7 +11402,7 @@
 
 
   // "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "",
-  "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "<p><b><i>Wählen Sie bitte aus der Liste einen Bereich aus und formulieren Sie dazu eine Bezeichnung.</p></b></i> <b><p>Bereiche:</br></b> • <b>Arbeitspakete</b> dienen der Gliederung von Aufgaben im Arbeitsplan. Auf der Detailseite können im Zuge der Berichterstattung auch Änderungen erläutert werden.</br> • <b>Meilensteine</b> sind überprüfbare Zeitpunkte im Projektverlauf, die in Verbindung zu Arbeiten oder Entscheidungen stehen.</p>",
+  "submission.sections.submit.progressbar.working_plan_workpackage_form.info": "<p><i><b>Wählen Sie bitte aus der Liste einen Bereich aus und formulieren Sie dazu eine Bezeichnung.</b></i></p><p><b>Bereiche:</b></br>• <b>Arbeitspakete</b> dienen der Gliederung von Aufgaben im Arbeitsplan. Auf der Detailseite können im Zuge der Berichtserstattung auch Änderungen erläutert werden.</br>• <b>Meilensteine</b> sind wichtige Punkte im Projektverlauf. Sie dienen zur Prüfung, bis wann etwas abgeschlossen ist, etwas begonnen oder über die weitere Vorgehensweise entschieden wird. </p>",
 
   // "submission.sections.submit.progressbar.working_plan_workpackage_step_form.info": "",
   // TODO Source message changed - Revise the translation
@@ -11606,7 +11606,7 @@
   "submission.sections.submit.progressbar.describe.persons": "Personenprofil anlegen",
 
   // "submission.sections.submit.progressbar.describe.persons.info": "This section contains personal information that allows you to use the system and provides contact details for the funding agency.",
-  "submission.sections.submit.progressbar.describe.persons.info": "<b>Gut zu wissen:</b></br>• Die Angaben dienen dazu, Funktionen zum Import Ihrer Publikationen anzubieten, Verknüpfungen mit anderen Datensätzen zu ermöglichen, (z.B. mit dem Projekt in dem Sie tätig sind) und Ihr Personenprofil sichtbar machen. </br>• Sie können Ihr Profil jederzeit löschen, wenn Sie nicht möchten, dass Ihre personenbezogenen Daten im System gespeichert werden. Damit werden auch alle Links zwischen Ihren Personendaten und anderen Datensätzen im System deaktiviert. Sie können das System weiterhin über Ihre Login Daten nutzen. Verpflichtende öffentliche Informationen, wie die Autorenschaft von Publikationen bleiben im System erhalten.",
+  "submission.sections.submit.progressbar.describe.persons.info": "<b>Gut zu wissen:</b></br><br>• Die Angaben dienen dazu, Funktionen zum Import Ihrer Publikationen anzubieten, Verknüpfungen mit anderen Datensätzen zu ermöglichen, (z.B. mit dem Projekt in dem Sie tätig sind) und Ihr Personenprofil sichtbar machen. </br><br>• Sie können Ihr Profil jederzeit löschen, wenn Sie nicht möchten, dass Ihre personenbezogenen Daten im System gespeichert werden. Damit werden auch alle Links zwischen Ihren Personendaten und anderen Datensätzen im System deaktiviert. Sie können das System weiterhin über Ihre Login Daten nutzen. Verpflichtende öffentliche Informationen, wie die Autorenschaft von Publikationen bleiben im System erhalten.",
 
   // "submission.sections.submit.progressbar.describe.physical_objects": "Object / material for knowledge transfer and subsequent use in research and teaching",
   "submission.sections.submit.progressbar.describe.physical_objects": "Gegenstand / Material für Wissenstransfer und Nachnutzung in Forschung und Lehre",
@@ -12578,11 +12578,11 @@
 
   // "working-plan.chart.toggle.collapse.btn": "Collapse",
   // TODO New key - Add a translation
-  "working-plan.chart.toggle.collapse.btn": "Einklappen",
+  "working-plan.chart.toggle.collapse.btn": "Aufklappen",
 
   // "working-plan.chart.toggle.expand.btn": "Expand",
   // TODO New key - Add a translation
-  "working-plan.chart.toggle.expand.btn": "Aufklappen",
+  "working-plan.chart.toggle.expand.btn": "Einklappen",
 
   // "working-plan.chart.toolbar.date-view.month": "Month",
   "working-plan.chart.toolbar.date-view.month": "Monat",
@@ -12946,7 +12946,7 @@
   "submission.sections.submit.progressbar.describe.projects_import": "Importierte Informationen des Teilprojektes",
 
   // "submission.sections.submit.progressbar.describe.projects_import.info": "This information is generated from the corresponding subprojects. During the proposal preparation phase, the information comes from the easy-online imports of the subprojects. During the project phase, the information is regularly updated from profi.",
-  "submission.sections.submit.progressbar.describe.projects_import.info": "<p><b>Hier sind keine Eingaben erforderlich. Die Informationen kommen aus dem  Import der easy-xml-Datei und werden im Projektverlauf über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert.</p></b><p><b>Gut zuwissen:</b></br>• Wenn Sie in der Antragsphase fehlerhaften Angaben korrigieren möchten, ändern Sie diese Angaben in easy-online und importieren erneut.</br>• Im Projektverlauf sollten Sie fehlerhafte Angaben an den Förderer melden. Berücksichtigen Sie dabei, dass Daten aus profi alle 24 Std. aktualisiert werden.</p>",
+  "submission.sections.submit.progressbar.describe.projects_import.info": "<p><b>Hier sind keine Eingaben erforderlich. Die Informationen kommen aus dem  Import der easy-xml-Datei und werden im Projektverlauf über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert.</p></b></br> <b>Gut zuwissen:</b></br>• Wenn Sie in der Antragsphase fehlerhaften Angaben korrigieren möchten, ändern Sie diese Angaben in easy-online und importieren erneut.</br>• Im Projektverlauf sollten Sie fehlerhafte Angaben an den Förderer melden. Berücksichtigen Sie dabei, dass Daten aus profi alle 24 Std. aktualisiert werden.",
 
   // "submission.sections.submit.progressbar.describe.projectpartners": "Project partner",
   "submission.sections.submit.progressbar.describe.projectpartners": "Tätigkeitsbereich des Projektpartners / Verbundpartners beschreiben",
@@ -12958,10 +12958,10 @@
   "submission.sections.submit.progressbar.describe.subcontractors_orgunit": "Unterauftragnehmer eintragen",
 
   // "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit": "Ohter cooperationpartner",
-  "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit": "Kooperationspartner erfassen",
+  "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit": "Informellen Kooperationspartner erfassen",
 
   // "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit.info": "This area serves to map the cooperation within a project. Cooperation is understood to be the agreed collaboration with other organisations, companies or institutions. Collaboration partners, subcontractors and contractual partners already specified in the easy-online proposal are imported and you only need to add information. Please add informal cooperation partners and all project partners joining after the beginning of the project so that a comprehensive picture of the cooperation partners of the project is available. If desired or required, contracts, letters of intent or similar evidence of cooperation can be uploaded. They will not be published and can only be viewed by the funder.",
-  "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit.info": "<p><i><b>Über „Name der Organisation“ können Sie suchen, ob bereits Informationen im System vorliegen, die Sie importieren können.</p></i></b><p><b>Worum es hier geht:</b></br>• Hier können Sie Organisationen erfassen, die ohne vertragliche Bindung maßgeblich an der Erarbeitung von Ergebnissen im Projekt mitwirken.</br>• D.h. hier erfassen Sie Kooperationspartner des Projektes, die weder Verbundpartner im Projekt noch Unterauftragnehmer sind.</p>",
+  "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit.info": "<p><i><b>Über „Name der Organisation“ können Sie suchen, ob bereits Informationen im System vorliegen, die Sie importieren können.</p></i></b><br><b>Worum es hier geht:</b></br>• Hier können Sie Organisationen erfassen, die ohne vertragliche Bindung maßgeblich an der Erarbeitung von Ergebnissen im Projekt mitwirken.</br>• D.h. hier erfassen Sie Kooperationspartner des Projektes, die weder Verbundpartner im Projekt noch Unterauftragnehmer sind.",
 
   // "submission.sections.submit.progressbar.describe.team": "Team",
   "submission.sections.submit.progressbar.describe.team": "Teammitglied des Teilprojektes erfassen",
@@ -13067,13 +13067,13 @@
   "submission.sections.submit.progressbar.describe.parentprojects_calc.info": "<p>Hier werden Daten zum Verbundprojekt auf Basis der Teilprojekte automatisch kalkuliert und importiert. Über den Import der easy-xml-Dateien und im Projektverlauf über profi findet eine regelmäßige Aktualisierung statt. Eingaben sind weder erforderlich noch möglich.</p>",
 
   // "submission.sections.submit.progressbar.describe.projectpartners.info": "missing",
-  "submission.sections.submit.progressbar.describe.projectpartners.info": "<p><b><i>Ergänzen Sie bitte die folgenden Angaben, um den Tätigkeitsbereich Ihrer Organisation zu beschreiben. </i></b></p><p><b>Worum es hier geht:</b></br>• Projektpartner sind die Organisationen, die mit einem eigenen Teilprojekt in einem Verbundprojekt mitwirken. Erfasst wird hier die Organisationseinheit, die ausführende Stelle ist.</br>• Die Angaben zum Tätigkeitsbereich dienen dazu, die Einbindung relevanter Disziplinen und Handlungsfelder im Projekt einzuschätzen.</br>• Im zweiten Abschnitt werden Informationen angezeigt, die aus dem easy-online Import stammen und im Projektverlauf über eine Schnittstelle zum Fördermittelgeber (profi) aktualisiert werden.</p><p><b>Gut zu wissen:</b></br> • Wenn Sie noch keinen easy-online Import durchgeführt haben, aber in der Arbeitsplanung bereits die Zuordnung zu Ihrer Organisation vornehmen möchten, geben Sie bitte mindestens das Akronym ein. Wählen Sie für „Ausführende Stelle im offiziellen Antrag (easy-online)“ „ja“.</br>• Sollten weitere Organisationseinheiten aus Ihrer übergeordneten Organisation an dem Teilprojekt mitwirken, legen Sie für diese bitte einen eigenen Eintrag an. (Dies kann in seltenen Fällen zutreffen, weil in easy-online nur eine ausführende Stelle erfasst werden kann. Z.B. arbeiten gelegentlich mehre Fachgebiete derselben Universität in einem Teilprojekt zusammen). Wählen Sie in diesem Fall für „Ausführende Stelle im offiziellen Antrag (easy-online)“ „nein“.</p><p><b>Tipps:</b></br>• Ihre Unterauftragnehmer erfassen Sie bitte unter <b>Unterauftragnehmer</b> auf Ihrer Teilprojektseite.</br>• Weitere Organisationen, die ohne vertragliche Bindung mitwirken (Informelle Kooperationspartner), erfassen Sie bitte auf der Projektseite.<p>",
+  "submission.sections.submit.progressbar.describe.projectpartners.info": "<b>Worum es hier geht:</b></br><br>• Projektpartner sind die Organisationen, die mit einem eigenen Teilprojekt in einem Verbundprojekt mitwirken. Erfasst wird hier die Organisationseinheit, die ausführende Stelle ist.</br><br>• Die Angaben zum Tätigkeitsbereich dienen dazu, die Einbindung relevanter Disziplinen und Handlungsfelder im Projekt einzuschätzen.</br><br>• Im zweiten Abschnitt werden Informationen angezeigt, die aus dem easy-online Import stammen und im Projektverlauf über eine Schnittstelle zum Fördermittelgeber (profi) aktualisiert werden.<br><p><b>Gut zu wissen:</b></br> • Wenn Sie noch keinen easy-online Import durchgeführt haben, aber in der Arbeitsplanung bereits die Zuordnung zu Ihrer Organisation vornehmen möchten, geben Sie bitte mindestens das Akronym ein. Wählen Sie für „Ausführende Stelle im offiziellen Antrag (easy-online)“ „ja“.</br><br>• Sollten weitere Organisationseinheiten aus Ihrer übergeordneten Organisation an dem Teilprojekt mitwirken, legen Sie für diese bitte einen eigenen Eintrag an. (Dies kann in seltenen Fällen zutreffen, weil in easy-online nur eine ausführende Stelle erfasst werden kann. Z.B. arbeiten gelegentlich mehre Fachgebiete derselben Universität in einem Teilprojekt zusammen). Wählen Sie in diesem Fall für „Ausführende Stelle im offiziellen Antrag (easy-online)“ „nein“.</p><br><p><b>Tipps:</b></br><br>• Ihre Unterauftragnehmer erfassen Sie bitte unter <b>Unterauftragnehmer</b> auf Ihrer Teilprojektseite.</br><br>• Weitere Organisationen, die ohne vertragliche Bindung mitwirken (Informelle Kooperationspartner), erfassen Sie bitte auf der Projektseite.<p>",
 
   // "submission.sections.submit.progressbar.describe.projectpartners_import.info": "missing",
-  "submission.sections.submit.progressbar.describe.projectpartners_import.info": "<p><b>Hier sind i.d.R. keine Eingaben erforderlich. Die Informationen zu Ihrer Organisation, stammen aus dem Import der easy-xml-Datei und werden im Projektverlauf über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert. .Manuelle Eingaben müssen Sie nur tätigen, wenn Sie hier eine zusätzliche Abteilung aus Ihrer übergeordneten Organisation eintragen, die noch nicht als ausführende Stelle in Ihrem Teilprojekt erfasst wurde.</p></b><p><b>Gut zu wissen:</b></br>• Wenn Sie in der Antragsphase fehlerhaften Angaben korrigieren möchten, ändern Sie diese Angaben in easy-online und importieren erneut.</br>• Im Projektverlauf sollten Sie fehlerhafte Angaben an den Förderer melden. Berücksichtigen Sie dabei, dass Daten aus profi alle 24 Std. aktualisiert werden.</p>",
+  "submission.sections.submit.progressbar.describe.projectpartners_import.info": "<p><b>Hier sind i.d.R. keine Eingaben erforderlich. Die Informationen zu Ihrer Organisation, stammen aus dem Import der easy-xml-Datei und werden im Projektverlauf über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert. .Manuelle Eingaben müssen Sie nur tätigen, wenn Sie hier eine zusätzliche Abteilung aus Ihrer übergeordneten Organisation eintragen, die noch nicht als ausführende Stelle in Ihrem Teilprojekt erfasst wurde.</p></b><br><b>Gut zu wissen:</b></br>• Wenn Sie in der Antragsphase fehlerhaften Angaben korrigieren möchten, ändern Sie diese Angaben in easy-online und importieren erneut.</br>• Im Projektverlauf sollten Sie fehlerhafte Angaben an den Förderer melden. Berücksichtigen Sie dabei, dass Daten aus profi alle 24 Std. aktualisiert werden.",
 
   // "submission.sections.submit.progressbar.describe.subcontractors_orgunit.info": "missing",
-  "submission.sections.submit.progressbar.describe.subcontractors_orgunit.info": "<p><i><b>Über „Name der Organisation“ können Sie suchen, ob bereits Informationen im System vorliegen, die Sie importieren können.</p></i></b><p><b>Worum es hier geht:</b></br>Hier werden Unterauftragnehmer Ihres Teilprojektes erfasst, die <b>maßgeblich</b> an der Erarbeitung von Ergebnissen <b>mitwirken.</b> (D.h. Unterauftragnehmer, die vorwiegend ausführende Tätigkeiten vornehmen, müssen sie nicht erfassen.)</p><p><b> Zur Unterscheidung:</b></br> Weitere Organisationen, die ohne vertragliche Bindung mitwirken (Kooperationspartner), erfassen Sie bitte auf der Projektseite.</p>",
+  "submission.sections.submit.progressbar.describe.subcontractors_orgunit.info": "<b>Worum es hier geht:</b></br><br>Hier werden Unterauftragnehmer Ihres Teilprojektes erfasst, die <b>maßgeblich</b> an der Erarbeitung von Ergebnissen <b>mitwirken.</b> (D.h. Unterauftragnehmer, die vorwiegend ausführende Tätigkeiten vornehmen, müssen sie nicht erfassen.)<br><b>Tipps:</b> </br>• Zur Unterscheidung: Weitere Organisationen, die ohne vertragliche Bindung mitwirken (Informelle Kooperationspartner), erfassen Sie bitte auf der Projektseite.",
 
   // "submission.sections.submit.progressbar.describe.subcontractors": "missing",
   "submission.sections.submit.progressbar.describe.subcontractors": "Angaben zum Tätigkeitsbereich der Organisation ergänzen",
@@ -13088,7 +13088,7 @@
   "submission.sections.submit.progressbar.describe.cooperationpartners.info": "Diese Informationen dienen dazu, <b>die Einbindung relevanter Disziplinen und Handlungsfelder</b> im Projekt einzuschätzen.",
 
   // "submission.sections.submit.progressbar.describe.team.info": "missing",
-  "submission.sections.submit.progressbar.describe.team.info": "<p><b>Geben Sie hier bitte im Projektverlauf, spätestens jedoch zum Projektende, alle Beschäftigten mit einem relevanten Beschäftigungsumfang des Teilprojektes ein.</b></br>Ein relevanter Beschäftigungsumfang beginnt ab einem Stellenanteil von 25 % oder ab einer Beschäftigungsdauer von mindestens 25 % der Projektlaufzeit mit höherem Stellenanteil. Es steht Ihnen frei, auch Beschäftigte mit geringerem Stellenumfang oder geringerer Beschäftigungsdauer einzutragen.</p> <p><b>Worum es hier geht:</b></br> • Die Informationen dienen dazu, die Disziplinen übergreifende Arbeitsweise des Projektes einzuschätzen und die Umsetzung der geschlechterunabhängigen Gleichstellung auf projektübergreifend auszuwerten.</p> <p><b>Gut zu wissen:</b></br> • Sie können einen Teil der Informationen importieren, wenn die Beschäftigten ein Personenprofil angelegt haben.</br> • Wenn Personen sich entscheiden, ihr Profil zu löschen, werden damit auch alle Links zu anderen Datensätzen im System deaktiviert. Beschäftigte ohne Personenprofil werden hier anonym erfasst.</p>",
+  "submission.sections.submit.progressbar.describe.team.info": "<p><i>Geben Sie hier bitte im Projektverlauf, spätestens jedoch zum Projektende, alle Beschäftigten mit einem relevanten Beschäftigungsumfang des Teilprojektes ein.</br>Ein relevanter Beschäftigungsumfang beginnt ab einem Stellenanteil von 25 % oder ab einer Beschäftigungsdauer von mindestens 25 % der Projektlaufzeit mit höherem Stellenanteil. Es steht Ihnen frei, auch Beschäftigte mit geringerem Stellenumfang oder geringerer Beschäftigungsdauer einzutragen.</br>Sie können einen Teil der Informationen importieren, wenn die Beschäftigten ein Personenprofil angelegt haben.</i></p><p>Wenn Personen sich entscheiden, ihr Profil zu löschen, werden damit auch alle Links zu anderen Datensätzen im System deaktiviert. Beschäftigte ohne Personenprofil werden hier anonym erfasst.</br>Die Informationen dienen dazu, die Disziplinen übergreifende Arbeitsweise des Projektes einzuschätzen und die Umsetzung der geschlechterunabhängigen Gleichstellung auf Programmebene / projektübergreifend auszuwerten.</p>",
 
   // "submission.sections.submit.progressbar.describe.publications_references": "missing",
   "submission.sections.submit.progressbar.describe.publications_references": "Klassifizierung und Verknüpfung zu anderen Daten",
@@ -13115,10 +13115,10 @@
   "submission.sections.submit.progressbar.describe.statusacc4.info": "<i>Passen Sie bitte hier den Status der Informationen an, wenn sie sich in Bezug auf den Antrag verändert haben.  Damit werden Veränderungen leichter sichtbar. </br>Zur Antragstellung sind keine Angaben erforderlich.</i>",
 
   // "submission.sections.submit.progressbar.describe.unexpected_results_publication": "missing",
-  "submission.sections.submit.progressbar.describe.unexpected_results_publication": "Einschätzung zu einer möglichen Veröffentlichung im Fall von „Negative Results“",
+  "submission.sections.submit.progressbar.describe.unexpected_results_publication": "Einschätzung zu einer möglichen Veröffentlichung im Fall von „negativen Ergebnissen“ („Negative Results“)",
 
   // "submission.sections.submit.progressbar.describe.unexpected_results_publication.info": "missing",
-  "submission.sections.submit.progressbar.describe.unexpected_results_publication.info": "<b><p><i>Geben Sie hier an, ob die (Zwischen-) Ergebnisse / Probleme eine solche Relevanz im Sinne von „Negative Results“ haben, dass eine Veröffentlichung sinnvoll ist.</b></p></i> <b><p>Gut zu Wissen:</b></br> • Eine bereits erfolgte Veröffentlichung tragen Sie sie zuerst im Bereich Veröffentlichungen ein. Danach kann sie hier zugeordnet werden.",
+  "submission.sections.submit.progressbar.describe.unexpected_results_publication.info": "<i>Bitte prüfen Sie, ob die Ergebnisse eine solche Relevanz haben, dass eine Veröffentlichung sinnvoll ist.</i><p>Unter „negativen Ergebnissen“ („Negative Results“) werden u. a. nicht-signifikante oder eine Hypothese widerlegende Ergebnisse sowie methodische Probleme aufgefasst, die eine Durchführung der Forschungsarbeiten verhindern. Indem Sie diese veröffentlichen, zeigen Sie Integrität und Verantwortungsbewusstsein der Forschung im Projekt. Sie tragen in der wissenschaftlichen Community dazu bei, Methoden weiterzuentwickeln, Risiken wahrzunehmen und Verzerrungen in der Einschätzung von Signifikanzen und Effektgrößen in Reviews und Metaanalysen zu vermeiden. Bei praxisorientierten Ergebnissen tragen Sie dazu bei, die Anwendung unwirksamer oder risikoreicher Maßnahmen zu verhindern.</p>",
 
   // "submission.sections.submit.progressbar.describe.workpackages_result.info": "missing",
   "submission.sections.submit.progressbar.describe.workpackages_result.info": "<i>Beschreiben Sie bitte die Veränderung im Projektverlauf und begründen diese.</br>Im Impact Pathway können Sie wichtige Ursachen für eine Veränderung über Einträge in <b>Rahmenbedingungen</b> und <b>(Zwischen-) Ergebnisse / Probleme, die Veränderungen bewirken</b> darstellen.",
@@ -13127,10 +13127,10 @@
   "submission.sections.submit.progressbar.describe.milestones.info": "Über Meilensteine kennzeichnen Sie wichtige Etappen des Projektes. Meilensteine bekommen im Arbeitsplan einen Zeitpunkt zugewiesen. Sie können im Arbeitsplan innerhalb von Arbeitspaketen oder übergeordnet dazu angelegt bzw. zugeordnet werden.",
 
   // "submission.sections.submit.progressbar.describe.gender_reflection.info": "missing",
-  "submission.sections.submit.progressbar.describe.gender_reflection.info": "<p><b>Reflektieren Sie bitte hier, inwieweit das Projekt Geschlechteraspekte berücksichtigt. Ergänzen Sie Ihr „ja“ oder „nein“ bei den folgenden Fragen bitte jeweils mit einer kurzen Erläuterung.</p></b><br><p><b>Worum es hier geht:</b></br> • Forschung gestaltet maßgeblich Innovation – damit Menschen unabhängig vom Geschlecht davon profitieren können, ist es erforderlich, dass Forschung Fragen der Geschlechtergerechtigkeit einbezieht.</br> • Da Forschung und Entwicklung öffentlich gefördert werden, sind die wichtigen gesellschaftlichen Ziele der Geschlechtergleichstellung zu berücksichtigen.</br><br>• Der Erfolg von Forschung und Innovation kann erheblich gesteigert werden, wenn relevante Geschlechteraspekte im Vorfeld identifiziert und im Projekt berücksichtigt werden.</p> <p><b>Gut zu wissen:</b></br> • Wo Fragen der Geschlechtergerechtigkeit im Projekt relevant sind, ist nicht immer gleich offensichtlich. Reflektieren Sie daher bitte jede Frage und berücksichtigen Sie die Hinweise hinter den [?], um auch nicht direkt offensichtliche Aspekte zu identifizieren.</p> <p><b>Tipps</b></br><br>• Hintergrundinformationen (z. B. DFG-Gleichstellungsrichtlinien) und Beispiele [Link]</p>",
+  "submission.sections.submit.progressbar.describe.gender_reflection.info": "<p>Dieser Bereich dient dazu, Aspekte der Geschlechtergerechtigkeit für das Projekt zu reflektieren.</p><p>In die zukunftsfähige Entwicklung unserer Gesellschaft sollen alle sozialen Gruppen unabhängig von Geschlecht, Herkunft und Religion gleichermaßen eingebunden sein. Forschungs- und Innovationsförderung spielen hierbei eine wichtige Rolle.</br>In der öffentlich geförderten Forschung und Entwicklung sind daher Fragen der sozialen Gerechtigkeit und damit auch der Geschlechtergleichstellung zu berücksichtigen. Dies zeigt sich z. B. in den „Forschungsorientierten Gleichstellungsrichtlinien“ der Deutschen Forschungsgemeinschaft (DFG).</p><p><i>Bitte geben Sie einen Einblick, inwieweit das Projekt Geschlechteraspekte berücksichtigt. Ergänzen Sie Ihr „ja“ oder „nein“ bei den folgenden Fragen bitte jeweils mit einer kurzen Begründung.</i></p>",
 
   // "submission.sections.submit.progressbar.describe.gender.info": "missing",
-  "submission.sections.submit.progressbar.describe.gender.info": "<p><b><i>Formulieren Sie eine Kernaussage, die das Ergebnis der Reflexion zusammenfassend wiedergibt.</p></b></i> <p><b>Gut zu wissen:</b></br> • Anhand der Kernaussage wird das Ergebnis der Reflexion im Impact Pathway dargestellt. Außerdem wird sie in Übersichten angezeigt.</br> • Beispiele: „Berücksichtigung von Geschlechterunterschieden sind zentral für die Entwicklung von Wirkungen“, „Unterschiedliche Workshops für die Anforderungserhebung bei Frauen und Männern“, „Geschlechterstereotype werden gezielt hinterfragt“ „Geschlechterbezug ist nur für die Beschäftigten relevant“, „kein spezifischer Geschlechterbezug vorhanden“</p>",
+  "submission.sections.submit.progressbar.describe.gender.info": "<p><i>Zum Abschluss formulieren Sie bitte ein zusammenfassendes Fazit zur erfolgten Reflexion der Geschlechteraspekte im Rahmen des Projektes.</i></br>Diese wird in Übersichten angezeigt.</p><i>Hinweis: Wenn die Geschlechteraspekte eine Relevanz für die Durchführung und Wirkung des Projektes haben, übernehmen Sie den Eintrag bitte in die 1. Säule (Hintergrund) des Impact Pathway.</i>",
 
   // "working-plan.chart.column.change.StartDate.input.description": "Difference in days:",
   "working-plan.chart.column.change.StartDate.input.description": "Unterschied in Tagen:",
@@ -13179,28 +13179,28 @@
   "cooperationpartners.listelement.badge": "Kooperationspartner",
 
   // "parentprojects.listelement.badge": "missing",
-  "parentprojects.listelement.badge": "Verbundprojekt",
+  "parentprojects.listelement.badge": "Verbundprojekte",
 
   // "programmes.listelement.badge": "missing",
-  "programmes.listelement.badge": "Förderprogramm",
+  "programmes.listelement.badge": "Programme",
 
   // "calls.listelement.badge": "missing",
-  "calls.listelement.badge": "Bekanntmachung",
+  "calls.listelement.badge": "Bekanntmachungen",
 
   // "fundingobjectives.listelement.badge": "missing",
-  "fundingobjectives.listelement.badge": "Förderziel",
+  "fundingobjectives.listelement.badge": "Förderziele",
 
   // "Poduct.listelement.badge": "Research data",
   "Poduct.listelement.badge": "Forschungsdaten",
 
   // "vocabulary-treeview.tree.description.agrovoc": "missing",
-  "vocabulary-treeview.tree.description.agrovoc": "<i>Wählen Sie bitte passende Schlagwörter aus.</br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die in <b>schwarzen</b> Begriffe.</i>",
+  "vocabulary-treeview.tree.description.agrovoc": "<i>Wählen Sie bitte passende Schlagwörter aus.</br>Nutzen Sie die Pfeile, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die in <b>schwarzen</b> Begriffe.</i>",
 
   // "tree.description.nace": "missing",
   "tree.description.nace": "Auswahl Wirtschaftszweig",
 
   // "vocabulary-treeview.tree.description.nace": "missing",
-  "vocabulary-treeview.tree.description.nace": "<i>Wählen Sie den Wirtschaftszweig bitte so spezifisch wie möglich.</br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein. </br><b>Auswählbar</b> sind nur die in <b>schwarzen</b> Begriffe.</i></br>Die Liste umfasst die Wirtschaftszweige gemäß der Statistischen Systematik der Europäischen Gemeinschaft (NACE).",
+  "vocabulary-treeview.tree.description.nace": "<i>Wählen Sie den Wirtschaftszweig bitte so spezifisch wie möglich.</br>Nutzen Sie die Pfeile, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein. </br><b>Auswählbar</b> sind nur die in <b>schwarzen</b> Begriffe.</i></br>Die Liste umfasst die Wirtschaftszweige gemäß der Statistischen Systematik der Europäischen Gemeinschaft (NACE).",
 
   // "tree.description.trl": "missing",
   "tree.description.trl": "Auswahl Technology Readiness Level",
@@ -13218,48 +13218,30 @@
   "tree.description.coar2": "Dokumententyp",
 
   // "vocabulary-treeview.tree.description.coar2": "missing",
-  "vocabulary-treeview.tree.description.coar2": "<i>Wählen Sie bitte den passenden Typ für die Veröffentlichung aus, zum Beispiel eine Dissertation oder einen Artikel/Aufsatz.</br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die in <b>schwarzen</b> Begriffe.</i>",
+  "vocabulary-treeview.tree.description.coar2": "<i>Wählen Sie bitte den passenden Typ für die Veröffentlichung aus, zum Beispiel eine Dissertation oder einen Artikel/Aufsatz.</br>Nutzen Sie die Pfeile, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die in <b>schwarzen</b> Begriffe.</i>",
 
   // "tree.description.coar3": "missing",
   "tree.description.coar3": "Dokumententyp",
 
   // "vocabulary-treeview.tree.description.coar3": "missing",
-  "vocabulary-treeview.tree.description.coar3": "<i>Wählen Sie bitte den passenden Typ für die Veröffentlichung aus, zum Beispiel eine Dissertation oder einen Artikel/Aufsatz.</br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die in <b>schwarzen</b> Begriffe.</i>",
+  "vocabulary-treeview.tree.description.coar3": "<i>Wählen Sie bitte den passenden Typ für die Veröffentlichung aus, zum Beispiel eine Dissertation oder einen Artikel/Aufsatz.</br>Nutzen Sie die Pfeile, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die in <b>schwarzen</b> Begriffe.</i>",
 
   // "tree.description.destatis": "missing",
   "tree.description.destatis": "Auswahl Disziplin / Fachgebiet",
 
   // "vocabulary-treeview.tree.description.destatis": "missing",
-  "vocabulary-treeview.tree.description.destatis": "<i>Wählen Sie das Fachgebiet bitte so spezifisch wie möglich. </br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die in <b>schwarzen</b> Begriffe.</i>",
+  "vocabulary-treeview.tree.description.destatis": "<i>Wählen Sie das Fachgebiet bitte so spezifisch wie möglich. </br>Nutzen Sie die Pfeile, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die in <b>schwarzen</b> Begriffe.</i>",
 
   // "submission.sections.submit.progressbar.describe.research_results.info": "missing",
-  "submission.sections.submit.progressbar.describe.research_results.info": "<p><b><i>Legen Sie im Projektverlauf für jedes wichtige Forschungsergebnis, dass Sie im Impact Pathway darstellen möchten, einen eigenen Eintrag an.<p></b></i><p><b>Worum es hier geht:</b></br> • Hier stellen Sie sehr kurz und prägnant die wichtigsten Ergebnisse für den Förderer da.</br> • Ergebnisse sind alle wissenschaftlichen und technischen Erkenntnisse, die im Projekt gewonnen wurden.</br> • Dieser Bereich ersetzt nicht die ausführliche Darstellung von Ergebnissen in Berichten für die fördernde Einrichtung, Veröffentlichungen und anderen Textdokumenten. Diese werden im Bereich Veröffentlichungen erfasst und hochgeladen.</p><p><b>Zur Unterscheidung:</b></br> • Wenn Ergebnisse zu erheblichen Veränderungen in den Projektarbeiten oder Wirkungen führen, erfassen Sie diese bitte im Bereich (Zwischen-) Ergebnisse / Probleme.</p><p><b>Gut zu wissen:</b></br> • Die Bezeichnung soll eine gut verständliche Kernaussage zum Ergebnis sein.</br> • Die Beschreibung soll die wichtigsten Fakten zum Ergebnis zusammenfassen.</br><br>• Es ist empfehlenswert, die Einträge auf die wichtigsten Ergebnisse zu beschränken, damit der Impact Pathway übersichtlich bleibt.</p>",
+  "submission.sections.submit.progressbar.describe.research_results.info": "Dieser Bereich dient dazu, die wichtigsten Ergebnisse des Projektes komprimiert darzustellen.<p><i>Legen Sie im Projektverlauf für jedes Ergebnis, das Sie im Impact Pathway darstellen möchten, einen eigenen Eintrag an. (Es ist empfehlenswert, die Darstellung der Ergebnisse auf wenige Einträge (3-5) zu fokussieren.)</br>Hinweis: Die ausführliche Darstellung von Ergebnissen in Form von Veröffentlichungen oder Berichten für die fördernde Einrichtung wird im Bereich <b>Veröffentlichungen</b> erfasst.</i></p>",
 
   // "submission.sections.submit.progressbar.describe.others.info": "missing",
-  "submission.sections.submit.progressbar.describe.others.info": "<p><b><i>Legen Sie bitte einen Eintrag an und beschreiben Sie, worum es geht.</p></b></i> <p><b>Worum es hier geht:</b></br>• Hier können Sie eine wichtige Information eintragen, die im Impact Pathway angezeigt wird.</br> • Verwenden Sie <b>Sonstiges</b> ausschließlich für Einträge, die in keinen der anderen Bereiche passt.</p> <p><b>Tipps:</p></b></br> • Welche Inhalte gehören in welche Bereiche [Link]</p>",
+  "submission.sections.submit.progressbar.describe.others.info": "<i>Verwenden Sie <b>Sonstiges</b> bitte nur, wenn Sie im Impact Pathway eine wichtige Information eintragen möchten, die zu keinem der anderen Dokumentationsbereiche passt.</i>",
 
   // "submission.sections.submit.progressbar.describe.products.info": "missing",
   "submission.sections.submit.progressbar.describe.products.info": "<p><i>Hier können Sie digitale Forschungsdatensätze erfassen, die Sie veröffentlicht haben. Nutzen Sie bitte den Identifier des Forschungsdatensatzes um die Metadaten / Beschreibung des Datensatzes zu importieren. Ergänzen Sie ggf. fehlende Angaben.</p><p>Hinweis: Zu den Forschungsdaten sind noch zahlreiche Funktionen in der Entwicklung, daher wird derzeit noch nicht der vollständige Funktionsumfang angeboten. </i></p>",
 
   // "submission.sections.submit.progressbar.describe.products_references.info": "missing",
-  "submission.sections.submit.progressbar.describe.products_references.info": "<i>Hier können Sie zu Veröffentlichungen verlinken, die sich auf die Forschungsdaten beziehen.</i>",
-
-  // "submission.sections.submit.progressbar.describe.projectpartners_import_lead": "missing",
-  "submission.sections.submit.progressbar.describe.projectpartners_import_lead": "Daten zur Projektleitung",
-
-  // "submission.sections.submit.progressbar.describe.projectpartners_import_lead.info": "missing",
-  "submission.sections.submit.progressbar.describe.projectpartners_import_lead.info": "<b>Die Informationen stammen aus dem Import der easy-xml-Datei und werden im Projektverlauf über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert.</b>",
-
-  // "submission.sections.submit.progressbar.describe.projectpartners_import_leadadmin": "missing",
-  "submission.sections.submit.progressbar.describe.projectpartners_import_leadadmin": "Daten zur Projektkoordination",
-
-  // "submission.sections.submit.progressbar.describe.projectpartners_import_leadadmin.info": "missing",
-  "submission.sections.submit.progressbar.describe.projectpartners_import_leadadmin.info": "<b>Die Informationen stammen aus dem Import der easy-xml-Datei und werden im Projektverlauf über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert.</b>",
-
-  // "working-plan.chart.column.changeStartDate.Close": "Close",
-  "working-plan.chart.column.changeStartDate.Close": "Schließen",
-
-  // "working-plan.task.create.head": "New item",
-  "working-plan.task.create.head": "Eintrag hinzufügen über \"Neu anlegen\" oder \"Vorhandene auswählen\""
+  "submission.sections.submit.progressbar.describe.products_references.info": "<i>Hier können Sie zu Veröffentlichungen verlinken, die sich auf die Forschungsdaten beziehen.</i>"
 
 }
