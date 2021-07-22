@@ -463,6 +463,7 @@ export class RetrieveAllLinkedWorkingPlanObjectsAction implements Action {
   payload: {
     projectId: string;
     sortOption: string;
+    lastAddedId?: string;
   };
 
   /**
@@ -472,9 +473,11 @@ export class RetrieveAllLinkedWorkingPlanObjectsAction implements Action {
    *    the project id
    * @param sortOption
    *    the sort type
+   * @param lastAddedId
+   *    the id of the last added element
    */
-  constructor(projectId: string, sortOption: string) {
-    this.payload = { projectId, sortOption };
+  constructor(projectId: string, sortOption: string, lastAddedId?: string) {
+    this.payload = { projectId, sortOption, lastAddedId };
   }
 }
 

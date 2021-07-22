@@ -122,10 +122,11 @@ export class WorkingPlanEffects {
         action.payload.place
       ).pipe(
         debounceTime(200),
-        map(() => {
+        map((item: Item) => {
           return new RetrieveAllLinkedWorkingPlanObjectsAction(
             action.payload.projectId,
-            state.workingplan.sortOption);
+            state.workingplan.sortOption,
+            item.uuid);
         }),
         tap(() => {
           this.store$.dispatch(new AddWorkpackageSuccessAction());

@@ -83,8 +83,11 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
     }
 
     case WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS: {
+      const lastAddedNodes = (action.payload.lastAddedId) ? [action.payload.lastAddedId] : [];
+      console.log('RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS', lastAddedNodes);
       return Object.assign({}, workpackageInitialState, {
-        processing: true
+        processing: true,
+        lastAddedNodes: lastAddedNodes
       });
     }
 

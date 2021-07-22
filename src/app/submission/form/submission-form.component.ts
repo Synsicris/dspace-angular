@@ -145,7 +145,6 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     if ((changes.submissionDefinition && this.submissionDefinition)) {
       const messageInfoKey = 'submission.form.' + this.submissionDefinition.name + '.info';
-      console.log(messageInfoKey);
       this.hasInfoMessage = this.translate.get(messageInfoKey).pipe(
         map((message: string) => isNotEmpty(message) && messageInfoKey !== message)
       );
