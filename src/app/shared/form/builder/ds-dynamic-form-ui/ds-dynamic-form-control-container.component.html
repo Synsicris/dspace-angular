@@ -12,7 +12,7 @@
          tooltipClass="hint-tooltip"
          triggers="manual"
          #hint="ngbTooltip"
-         placement="top"
+         [placement]="['top', 'right', 'bottom']"
          container="body"
          (click)="hint.toggle();$event.preventDefault();"></i>
     </label>
