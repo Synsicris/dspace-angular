@@ -2645,7 +2645,7 @@
   "impact-pathway.objectives.back-btn": "Back to Impact Pathway",
 
 
-  "impact-pathway.objectives.edit.page.title": "Edit objectives",
+  "impact-pathway.objectives.edit.page.title": "Edit objective",
 
 
   "impact-pathway.objectives.step_type_2.info.panel": "Here you define the most important work packages and tasks which contribute to the research and development objective and are relevant for the development of impacts.</br>All items created here can be reused in the working plan and vice versa items already created in the working plan can be used here.</br>For detailed descriptions of materials and methods, please formulate them in a document and upload it on the project page.</br>Via [Edit Item] in the description field, you can edit the objective and description field in the second level. Then save your settings.",
@@ -2674,7 +2674,8 @@
 
   "impact-pathway.remove.processing": "Deleting",
 
-  "impact-pathway.edit.title": "Edit impact pathway",
+
+  "impact-pathway.edit.title": "Edit Impact Pathway",
 
 
   "impact-pathway.remove.title": "Delete Impact Pathway",
@@ -5238,7 +5239,7 @@
   "project.create.success": "The new project has been generated successfully.",
 
 
-  "project.listelement.badge": "Project",
+  "project.listelement.badge": "Subproject",
 
 
   "project.page.contributor": "Contributors",
@@ -8205,15 +8206,16 @@
   "physical_object.listelement.badge": "Object / material for knowledge transfer and subsequent use in research and teaching",
 
 
-  "Project.listelement.badge": "Project",
+  "Project.listelement.badge": "Subproject",
 
-  "proj_objective.listelement.badge": "Project objectives",
+
+  "proj_objective.listelement.badge": "Project objective",
 
 
   "plan_publication.listelement.badge": "Planned publications",
 
 
-  "research_result.listelement.badge": "Research results",
+  "research_result.listelement.badge": "Research result",
 
 
   "stateofart.listelement.badge": "State of knowledge / problem definition",
@@ -8222,7 +8224,7 @@
   "spinoff.listelement.badge": "Spin-off (incl. association)",
 
 
-  "step.listelement.badge": "Next steps and cooperations",
+  "step.listelement.badge": "Next steps and cooperation",
 
 
   "subproject.listelement.badge": "Subprojects",
@@ -8234,7 +8236,7 @@
   "task.listelement.badge": "Task",
 
 
-  "unexpected_result.listelement.badge": "(Intermediate) results / problems that causes change",
+  "unexpected_result.listelement.badge": "(Intermediate) results / problems that cause change",
 
 
   "workpackage.listelement.badge": "Work package",
@@ -8450,7 +8452,7 @@
   "Person.listelement.badge": "Person",
 
 
-  "team.listelement.badge": "Team of subproject",
+  "team.listelement.badge": "Team member",
 
 
   "subcontractor.listelement.badge": "Subcontractor",
@@ -8536,5 +8538,20 @@
 
 
   "fundingobjectives.listelement.badge": "Funding objective",
+
+
+  "projectpartner.listelement.badge": "Project partner",
+
+
+  "cooperationpartner.listelement.badge": "Cooperation partner",
+
+
+  "programme.listelement.badge": "Programme",
+
+
+  "call.listelement.badge": "Call",
+
+
+  "fundingobjective.listelement.badge": "Funding objective"
 
 }
