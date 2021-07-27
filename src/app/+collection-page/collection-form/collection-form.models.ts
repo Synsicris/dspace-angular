@@ -1,10 +1,14 @@
 import {
   DynamicCheckboxModelConfig,
+  DynamicFormArrayModelConfig,
+  DynamicFormControlLayout,
   DynamicFormControlModel,
   DynamicInputModel,
   DynamicTextAreaModel
 } from '@ng-dynamic-forms/core';
 import { DynamicSelectModelConfig } from '@ng-dynamic-forms/core/lib/model/select/dynamic-select.model';
+import { environment } from '../../../environments/environment';
+import { LangConfig } from '../../../config/lang-config.interface';
 
 export const collectionFormEntityTypeSelectionConfig: DynamicSelectModelConfig<string> = {
   id: 'entityType',
@@ -38,22 +42,45 @@ export const collectionFormSharedWorkspaceCheckboxConfig: DynamicCheckboxModelCo
   disabled: false
 };
 
+export const collectionTitleArrayConfig: DynamicFormArrayModelConfig = {
+  id: 'titleArray',
+  groupFactory: null,
+};
+
+export const collectionTitleArrayLayout: DynamicFormControlLayout = {
+  element: {
+    group: 'form-row'
+  }
+};
+export const collectionTitleLayout: DynamicFormControlLayout = {
+  grid: {
+    control: 'col',
+    host: 'col'
+  },
+};
+
+export const titleConfig: any = {
+  id: 'title',
+  name: 'dc.title',
+  required: true,
+  languageCodes: environment.languages
+    .filter((lang: LangConfig) => lang.active)
+    .map((lang: LangConfig) => ({
+    display: lang.label, code: lang.code
+  })),
+  validators: {
+    required: null
+  },
+  errorMessages: {
+    required: 'Please enter a name for this title'
+  },
+};
+
 /**
  * The dynamic form fields used for creating/editing a collection
  * @type {(DynamicInputModel | DynamicTextAreaModel)[]}
  */
 export const collectionFormModels: DynamicFormControlModel[] = [
-  new DynamicInputModel({
-    id: 'title',
-    name: 'dc.title',
-    required: true,
-    validators: {
-      required: null
-    },
-    errorMessages: {
-      required: 'Please enter a name for this title'
-    },
-  }),
   new DynamicTextAreaModel({
     id: 'description',
     name: 'dc.description',

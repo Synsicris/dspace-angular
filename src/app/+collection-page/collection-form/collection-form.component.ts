@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
   DynamicCheckboxModel,
+  DynamicFormArrayModel,
   DynamicFormControlModel,
   DynamicFormService,
   DynamicInputModel,
@@ -27,10 +28,15 @@ import {
   collectionFormEntityTypeSelectionConfig,
   collectionFormModels,
   collectionFormSharedWorkspaceCheckboxConfig,
-  collectionFormSubmissionDefinitionSelectionConfig
+  collectionFormSubmissionDefinitionSelectionConfig,
+  collectionTitleArrayConfig,
+  collectionTitleArrayLayout,
+  collectionTitleLayout,
+  titleConfig
 } from './collection-form.models';
 import { SubmissionDefinitionsConfigService } from '../../core/config/submission-definitions-config.service';
 import { ConfigObject } from '../../core/config/models/config.model';
+import { DsDynamicInputModel } from '../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-input.model';
 
 /**
  * Form used for creating and editing collections
@@ -88,11 +94,27 @@ export class CollectionFormComponent extends ComColFormComponent<Collection> imp
     let currentRelationshipValue: MetadataValue[];
     let currentDefinitionValue: MetadataValue[];
     let currentSharedWorkspaceValue: MetadataValue[];
+    let currentTitleValue: MetadataValue[];
     if (this.dso && this.dso.metadata) {
       currentRelationshipValue = this.dso.metadata['dspace.entity.type'];
       currentDefinitionValue = this.dso.metadata['cris.submission.definition'];
       currentSharedWorkspaceValue = this.dso.metadata['cris.workspace.shared'];
+      currentTitleValue = this.dso.metadata['dc.title'];
     }
+
+    const titleModel: DynamicFormArrayModel = new DynamicFormArrayModel(Object.assign({}, collectionTitleArrayConfig, {
+      initialCount: currentTitleValue.length,
+      groupFactory: () => {
+        return [new DsDynamicInputModel(titleConfig, collectionTitleLayout)];
+      }
+    }), collectionTitleArrayLayout);
+
+    currentTitleValue.forEach((metadata: MetadataValue, index: number) => {
+      const model: any = titleModel.get(index).group[0];
+      model.value = metadata.value;
+      model.language = metadata.language;
+      console.log(model);
+    });
 
     const entities$: Observable<ItemType[]> = this.entityTypeService.findAll({ elementsPerPage: 100, currentPage: 1 }).pipe(
       getFirstSucceededRemoteListPayload()
@@ -131,7 +153,7 @@ export class CollectionFormComponent extends ComColFormComponent<Collection> imp
           }
         });
 
-        this.formModel = [...collectionFormModels, this.entityTypeSelection, this.submissionDefinitionSelection, this.sharedWorkspaceChekbox];
+        this.formModel = [titleModel, ...collectionFormModels, this.entityTypeSelection, this.submissionDefinitionSelection, this.sharedWorkspaceChekbox];
 
         super.ngOnInit();
 

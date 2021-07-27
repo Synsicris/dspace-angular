@@ -116,7 +116,7 @@ describe('ComColFormComponent', () => {
             path: '/metadata/dc.title',
             value: {
               value: 'New Community Title',
-              language: null,
+              language: undefined,
             },
           },
           {
@@ -124,7 +124,7 @@ describe('ComColFormComponent', () => {
             path: '/metadata/dc.description.abstract',
             value: {
               value: 'Community description',
-              language: null,
+              language: undefined,
             },
           },
         ];

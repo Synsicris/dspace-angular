@@ -1,14 +1,7 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
+  DYNAMIC_FORM_CONTROL_TYPE_ARRAY,
   DynamicFormControlModel,
   DynamicFormService,
   DynamicInputModel
@@ -27,13 +20,14 @@ import { Collection } from '../../../core/shared/collection.model';
 import { Community } from '../../../core/shared/community.model';
 import { MetadataMap, MetadataValue } from '../../../core/shared/metadata.models';
 import { ResourceType } from '../../../core/shared/resource-type';
-import { hasValue, isNotEmpty } from '../../empty.util';
+import { hasValue, isEmpty, isNotEmpty } from '../../empty.util';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { UploaderOptions } from '../../uploader/uploader-options.model';
 import { UploaderComponent } from '../../uploader/uploader.component';
 import { Operation } from 'fast-json-patch';
 import { NoContent } from '../../../core/shared/NoContent.model';
 import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import { DynamicFormArrayGroupModel } from '@ng-dynamic-forms/core/lib/model/form-array/dynamic-form-array.model';
 
 /**
  * A form for creating and editing Communities or Collections
@@ -202,15 +196,31 @@ export class ComColFormComponent<T extends Collection | Community> implements On
     }
 
     const formMetadata = {}  as MetadataMap;
-    this.formModel.forEach((fieldModel: DynamicInputModel) => {
-      const value: MetadataValue = {
-        value: fieldModel.value as string,
-        language: null
-      } as any;
-      if (formMetadata.hasOwnProperty(fieldModel.name)) {
-        formMetadata[fieldModel.name].push(value);
+    this.formModel.forEach((fieldModel: any) => {
+      let values: MetadataValue[] = [];
+      let fieldModelName;
+      if (fieldModel.type === DYNAMIC_FORM_CONTROL_TYPE_ARRAY) {
+        values = fieldModel.groups.map((arrayModel: DynamicFormArrayGroupModel) => {
+          const inputModel: any = arrayModel.get(0);
+          fieldModelName = inputModel.name;
+          return {
+            value: inputModel.value as string,
+            language: inputModel.language
+          } as any;
+        });
+        console.log(values);
       } else {
-        formMetadata[fieldModel.name] = [value];
+        fieldModelName = fieldModel.name;
+        console.log(fieldModel);
+        values.push({
+          value: fieldModel.value as string,
+          language: null
+        } as any);
+      }
+      if (formMetadata.hasOwnProperty(fieldModelName)) {
+        formMetadata[fieldModelName].push(...values);
+      } else {
+        formMetadata[fieldModelName] = [...values];
       }
     });
 
@@ -223,16 +233,46 @@ export class ComColFormComponent<T extends Collection | Community> implements On
     });
 
     const operations: Operation[] = [];
-    this.formModel.forEach((fieldModel: DynamicInputModel) => {
-      if (fieldModel.value !== this.dso.firstMetadataValue(fieldModel.name)) {
-        operations.push({
-          op: 'replace',
-          path: `/metadata/${fieldModel.name}`,
-          value: {
-            value: fieldModel.value,
-            language: null,
-          },
+    this.formModel.forEach((fieldModel: any) => {
+      let fieldModelName;
+      if (fieldModel.type === DYNAMIC_FORM_CONTROL_TYPE_ARRAY) {
+        fieldModelName = fieldModel.groups[0].group[0].name;
+        const metadataValues = this.dso.metadata[fieldModelName];
+        fieldModel.groups.forEach((group: DynamicFormArrayGroupModel, index: number) => {
+          const dsoMetadata = metadataValues[index];
+          const inputModel: any = group.get(0);
+          if (isEmpty(dsoMetadata)) {
+            operations.push({
+              op: 'add',
+              path: `/metadata/${fieldModelName}/-`,
+              value: {
+                value: inputModel.value,
+                language: inputModel.language,
+              },
+            });
+          } else if (dsoMetadata.value !== inputModel.value || dsoMetadata.language !== inputModel.language) {
+            operations.push({
+              op: 'replace',
+              path: `/metadata/${fieldModelName}/${index}`,
+              value: {
+                value: inputModel.value,
+                language: inputModel.language,
+              },
+            });
+          }
         });
+      } else {
+        fieldModelName = fieldModel.name;
+        if (fieldModel.value !== this.dso.firstMetadataValue(fieldModelName)) {
+          operations.push({
+            op: 'replace',
+            path: `/metadata/${fieldModelName}`,
+            value: {
+              value: fieldModel.value,
+              language: fieldModel.language,
+            },
+          });
+        }
       }
     });
 
