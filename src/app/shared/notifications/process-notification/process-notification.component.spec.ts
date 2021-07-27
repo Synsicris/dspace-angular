@@ -20,6 +20,8 @@ import { IProcessNotification } from '../models/process-notification.model';
 import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
 import { createPaginatedList } from '../../testing/utils.test';
 import { ProcessDataService } from '../../../core/data/processes/process-data.service';
+import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../../mocks/dso-name.service.mock';
 
 xdescribe('ProcessNotificationComponent', () => {
 
@@ -66,6 +68,7 @@ xdescribe('ProcessNotificationComponent', () => {
       providers: [
         { provide: Store, useValue: store },
         { provide: ProcessDataService, useValue: processService },
+        { provide: DSONameService, useClass: DSONameServiceMock },
         ChangeDetectorRef,
         NotificationsService,
         TranslateService,

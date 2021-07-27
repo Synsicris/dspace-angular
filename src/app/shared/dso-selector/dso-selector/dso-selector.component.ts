@@ -34,6 +34,7 @@ import { SearchResult } from '../../search/search-result.model';
 import { RemoteData } from '../../../core/data/remote-data';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { TranslateService } from '@ngx-translate/core';
+import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 
 @Component({
   selector: 'ds-dso-selector',
@@ -133,7 +134,8 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
 
   constructor(protected searchService: SearchService,
               protected notifcationsService: NotificationsService,
-              protected translate: TranslateService) {
+              protected translate: TranslateService,
+              public dsoNameService: DSONameService) {
   }
 
   /**

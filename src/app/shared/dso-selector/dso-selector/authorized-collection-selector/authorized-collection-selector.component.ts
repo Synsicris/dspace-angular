@@ -16,6 +16,7 @@ import { NotificationsService } from '../../../notifications/notifications.servi
 import { TranslateService } from '@ngx-translate/core';
 import { Collection } from '../../../../core/shared/collection.model';
 import { FindListOptions } from '../../../../core/data/request.models';
+import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
 
 @Component({
   selector: 'ds-authorized-collection-selector',
@@ -39,8 +40,9 @@ export class AuthorizedCollectionSelectorComponent extends DSOSelectorComponent 
   constructor(protected searchService: SearchService,
               protected collectionDataService: CollectionDataService,
               protected notifcationsService: NotificationsService,
-              protected translate: TranslateService) {
-    super(searchService, notifcationsService, translate);
+              protected translate: TranslateService,
+              public dsoNameService: DSONameService) {
+    super(searchService, notifcationsService, translate, dsoNameService);
   }
 
   /**

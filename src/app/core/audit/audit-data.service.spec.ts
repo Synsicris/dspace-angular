@@ -15,6 +15,8 @@ import { AuditMock } from '../../shared/testing/audit.mock';
 import { FindListOptions } from '../data/request.models';
 import { RequestParam } from '../cache/models/request-param.model';
 import { followLink } from '../../shared/utils/follow-link-config.model';
+import { DSONameService } from '../breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../../shared/mocks/dso-name.service.mock';
 
 describe('AuditDataService', () => {
   let service: AuditDataService;
@@ -62,10 +64,12 @@ describe('AuditDataService', () => {
             provide: TranslateLoader,
             useClass: TranslateLoaderMock
           }
-        }),
+        })
       ],
       declarations: [],
-      providers: [],
+      providers: [
+        { provide: DSONameService, useClass: DSONameServiceMock }
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     });
   }

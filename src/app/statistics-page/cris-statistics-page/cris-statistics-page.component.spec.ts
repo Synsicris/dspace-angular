@@ -20,6 +20,8 @@ import { StatisticsCategoriesServiceStub } from '../../shared/testing/statistics
 import { AuthServiceStub } from '../../shared/testing/auth-service.stub';
 import { SiteDataServiceStub } from '../../shared/testing/site-data-service.stub';
 import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
+import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../../shared/mocks/dso-name.service.mock';
 
 
 describe('CrisStatisticsPageComponent', () => {
@@ -69,6 +71,7 @@ describe('CrisStatisticsPageComponent', () => {
         { provide: StatisticsCategoriesService, useValue: statisticsCategoriesServiceStub },
         { provide: SiteDataService, useValue: siteDataServiceStub },
         { provide: AuthService, useValue: authServiceStub },
+        { provide: DSONameService, useClass: DSONameServiceMock },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })

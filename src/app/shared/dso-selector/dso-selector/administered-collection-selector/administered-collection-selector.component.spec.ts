@@ -11,6 +11,8 @@ import { createPaginatedList } from '../../../testing/utils.test';
 import { VarDirective } from '../../../utils/var.directive';
 import { AdministeredCollectionSelectorComponent } from './administered-collection-selector.component';
 import { NotificationsService } from '../../../notifications/notifications.service';
+import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../../../mocks/dso-name.service.mock';
 
 describe('AdministeredCollectionSelectorComponent', () => {
   let component: AdministeredCollectionSelectorComponent;
@@ -36,6 +38,7 @@ describe('AdministeredCollectionSelectorComponent', () => {
         { provide: SearchService, useValue: {} },
         { provide: CollectionDataService, useValue: collectionService },
         { provide: NotificationsService, useValue: notificationsService },
+        { provide: DSONameService, useClass: DSONameServiceMock }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

@@ -4,6 +4,7 @@ import { GenericConstructor } from '../shared/generic-constructor';
 import { Item } from '../shared/item.model';
 import { MetadataValueFilter } from '../shared/metadata.models';
 import { DSONameService } from './dso-name.service';
+import { mockLocaleService } from '../../shared/testing/locale-service.stub';
 
 describe(`DSONameService`, () => {
   let service: DSONameService;
@@ -60,7 +61,7 @@ describe(`DSONameService`, () => {
       }
     });
 
-    service = new DSONameService({ instant: (a) => a } as any);
+    service = new DSONameService({ instant: (a) => a } as any, mockLocaleService);
   });
 
   describe(`getName`, () => {
@@ -138,8 +139,9 @@ describe(`DSONameService`, () => {
 
     it(`should return 'dc.title'`, () => {
       const result = (service as any).factories.Default(mockDSO);
+      const filter = { language: 'en' };
       expect(result).toBe(mockDSOName);
-      expect(mockDSO.firstMetadataValue).toHaveBeenCalledWith('dc.title');
+      expect(mockDSO.firstMetadataValue).toHaveBeenCalledWith('dc.title', filter);
     });
   });
 });

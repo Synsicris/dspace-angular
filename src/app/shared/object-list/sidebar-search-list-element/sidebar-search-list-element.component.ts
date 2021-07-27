@@ -95,7 +95,7 @@ export class SidebarSearchListElementComponent<T extends SearchResult<K>, K exte
    * Default: "dc.title"
    */
   getTitle(): string {
-    return this.firstMetadataValue('dc.title');
+    return this.dsoNameService.getName(this.dso);
   }
 
   /**

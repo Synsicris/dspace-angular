@@ -40,6 +40,8 @@ import {
   createSuccessfulRemoteDataObject$
 } from '../../shared/remote-data.utils';
 import { createPaginatedList } from '../../shared/testing/utils.test';
+import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../../shared/mocks/dso-name.service.mock';
 
 describe('CollectionItemMapperComponent', () => {
   let comp: CollectionItemMapperComponent;
@@ -152,6 +154,7 @@ describe('CollectionItemMapperComponent', () => {
         { provide: HostWindowService, useValue: new HostWindowServiceStub(0) },
         { provide: ObjectSelectService, useValue: new ObjectSelectServiceStub() },
         { provide: RouteService, useValue: routeServiceStub },
+        { provide: DSONameService, useClass: DSONameServiceMock }
       ]
     }).compileComponents();
   }));

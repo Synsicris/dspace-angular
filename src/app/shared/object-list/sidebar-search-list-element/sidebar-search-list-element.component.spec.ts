@@ -11,7 +11,6 @@ import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
 import { HALResource } from '../../../core/shared/hal-resource.model';
 import { ChildHALResource } from '../../../core/shared/child-hal-resource.model';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
-import { DSONameServiceMock } from '../../mocks/dso-name.service.mock';
 
 export function createSidebarSearchListElementTests(
   componentClass: any,
@@ -27,6 +26,9 @@ export function createSidebarSearchListElementTests(
     let fixture: ComponentFixture<any>;
 
     let linkService;
+    const DSONameServiceMock = jasmine.createSpyObj('DSONameService', {
+      getName: 'title'
+    });
 
     beforeEach(waitForAsync(() => {
       linkService = jasmine.createSpyObj('linkService', {
@@ -40,7 +42,7 @@ export function createSidebarSearchListElementTests(
         providers: [
           { provide: TruncatableService, useValue: {} },
           { provide: LinkService, useValue: linkService },
-          { provide: DSONameService, useClass: DSONameServiceMock },
+          { provide: DSONameService, useValue: DSONameServiceMock },
           ...extraProviders
         ],
         schemas: [NO_ERRORS_SCHEMA]

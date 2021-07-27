@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { EventEmitter } from '@angular/core';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -40,6 +40,8 @@ import {
   createSuccessfulRemoteDataObject$
 } from '../../../shared/remote-data.utils';
 import { createPaginatedList } from '../../../shared/testing/utils.test';
+import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../../../shared/mocks/dso-name.service.mock';
 
 describe('ItemCollectionMapperComponent', () => {
   let comp: ItemCollectionMapperComponent;
@@ -124,7 +126,8 @@ describe('ItemCollectionMapperComponent', () => {
         { provide: ObjectSelectService, useValue: new ObjectSelectServiceStub() },
         { provide: TranslateService, useValue: translateServiceStub },
         { provide: HostWindowService, useValue: new HostWindowServiceStub(0) },
-        { provide: CollectionDataService, useValue: collectionDataServiceStub }
+        { provide: CollectionDataService, useValue: collectionDataServiceStub },
+        { provide: DSONameService, useClass: DSONameServiceMock }
       ]
     }).compileComponents();
   }));

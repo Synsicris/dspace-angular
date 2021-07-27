@@ -23,6 +23,7 @@ import { ActivatedRouteStub } from '../shared/testing/active-router.stub';
 import { NotificationsServiceStub } from '../shared/testing/notifications-service.stub';
 import { BulkImportPageComponent } from './bulk-import-page.component';
 import { AuthService } from '../core/auth/auth.service';
+import { DSONameServiceMock } from '../shared/mocks/dso-name.service.mock';
 
 describe('BulkImportPageComponent', () => {
 
@@ -86,6 +87,7 @@ describe('BulkImportPageComponent', () => {
         { provide: ActivatedRoute, useValue: route },
         { provide: Router, useValue: router },
         { provide: AuthService, useValue: authService },
+        { provide: DSONameService, useClass: DSONameServiceMock }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

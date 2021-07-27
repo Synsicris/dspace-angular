@@ -1,4 +1,4 @@
-import { mergeMap, filter, map } from 'rxjs/operators';
+import { filter, map, mergeMap } from 'rxjs/operators';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -18,6 +18,7 @@ import { AuthService } from '../core/auth/auth.service';
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
 import { getCommunityPageRoute } from './community-page-routing-paths';
+import { DSONameService } from '../core/breadcrumbs/dso-name.service';
 
 @Component({
   selector: 'ds-community-page',
@@ -56,7 +57,8 @@ export class CommunityPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private authorizationDataService: AuthorizationDataService
+    private authorizationDataService: AuthorizationDataService,
+    public dsoNameService: DSONameService
   ) {
 
   }

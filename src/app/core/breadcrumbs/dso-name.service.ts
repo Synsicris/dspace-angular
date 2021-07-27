@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { hasValue, isEmpty } from '../../shared/empty.util';
 import { DSpaceObject } from '../shared/dspace-object.model';
 import { TranslateService } from '@ngx-translate/core';
+import { LocaleService } from '../locale/locale.service';
+import { MetadataValueFilter } from '../shared/metadata.models';
 
 /**
  * Returns a name for a {@link DSpaceObject} based
@@ -12,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class DSONameService {
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService, private locale: LocaleService) {
 
   }
 
@@ -39,8 +41,9 @@ export class DSONameService {
       return dso.firstMetadataValue('organization.legalName') || dso.firstMetadataValue('dc.title');
     },
     Default: (dso: DSpaceObject): string => {
+      const filter: MetadataValueFilter = { language: this.locale.getCurrentLanguageCode() };
       // If object doesn't have dc.title metadata use name property
-      return dso.firstMetadataValue('dc.title') || dso.name || this.translateService.instant('dso.name.untitled');
+      return dso.firstMetadataValue('dc.title', filter) || dso.name || this.translateService.instant('dso.name.untitled');
     }
   };
 
@@ -50,6 +53,7 @@ export class DSONameService {
    * @param dso  The {@link DSpaceObject} you want a name for
    */
   getName(dso: DSpaceObject): string {
+    console.log(this.locale.getCurrentLanguageCode());
     const types = dso.getRenderTypes();
     const match = types
       .filter((type) => typeof type === 'string')

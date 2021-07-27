@@ -7,6 +7,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 import { ItemExportFormatMolteplicity } from '../../../core/itemexportformat/item-export-format.service';
+import { DSONameServiceMock } from '../../mocks/dso-name.service.mock';
 
 describe('ItemExportAlertComponent', () => {
   let component: ItemExportAlertComponent;
@@ -18,7 +19,9 @@ describe('ItemExportAlertComponent', () => {
         BrowserModule,
         TranslateModule.forRoot({ loader: { provide: TranslateLoader,  useClass: TranslateLoaderMock }})
       ],
-      providers: [ DSONameService ],
+      providers: [
+        { provide: DSONameService, useClass: DSONameServiceMock }
+      ],
       declarations: [ItemExportAlertComponent]
     })
       .compileComponents();

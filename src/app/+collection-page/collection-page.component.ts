@@ -26,6 +26,7 @@ import { PaginationComponentOptions } from '../shared/pagination/pagination-comp
 import { AuthService } from '../core/auth/auth.service';
 import { PaginationService } from '../core/pagination/pagination.service';
 import { getCollectionPageRoute } from './collection-page-routing-paths';
+import { DSONameService } from '../core/breadcrumbs/dso-name.service';
 
 @Component({
   selector: 'ds-collection-page',
@@ -65,7 +66,8 @@ export class CollectionPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private paginationService: PaginationService
+    private paginationService: PaginationService,
+    public dsoNameService: DSONameService
   ) {
     this.paginationConfig = new PaginationComponentOptions();
     this.paginationConfig.id = 'cp';

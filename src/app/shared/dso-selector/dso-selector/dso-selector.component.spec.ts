@@ -11,6 +11,8 @@ import { PaginatedSearchOptions } from '../../search/paginated-search-options.mo
 import { hasValue } from '../../empty.util';
 import { createPaginatedList } from '../../testing/utils.test';
 import { NotificationsService } from '../../notifications/notifications.service';
+import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../../mocks/dso-name.service.mock';
 
 describe('DSOSelectorComponent', () => {
   let component: DSOSelectorComponent;
@@ -71,6 +73,7 @@ describe('DSOSelectorComponent', () => {
       providers: [
         { provide: SearchService, useValue: searchService },
         { provide: NotificationsService, useValue: notificationsService },
+        { provide: DSONameService, useClass: DSONameServiceMock }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

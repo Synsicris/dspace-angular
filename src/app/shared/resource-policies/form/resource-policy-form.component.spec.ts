@@ -30,6 +30,8 @@ import { ResourcePolicy } from '../../../core/resource-policy/models/resource-po
 import { RESOURCE_POLICY } from '../../../core/resource-policy/models/resource-policy.resource-type';
 import { EPersonMock } from '../../testing/eperson.mock';
 import { isNotEmptyOperator } from '../../empty.util';
+import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../../mocks/dso-name.service.mock';
 
 export const mockResourcePolicyFormData = {
   name: [
@@ -176,6 +178,7 @@ describe('ResourcePolicyFormComponent test suite', () => {
         { provide: FormService, useValue: formService },
         { provide: GroupDataService, useValue: groupService },
         { provide: RequestService, useValue: getMockRequestService() },
+        { provide: DSONameService, useClass: DSONameServiceMock },
         FormBuilderService,
         ChangeDetectorRef,
         ResourcePolicyFormComponent

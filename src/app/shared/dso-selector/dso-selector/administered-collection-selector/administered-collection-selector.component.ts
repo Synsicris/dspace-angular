@@ -17,6 +17,7 @@ import { RemoteData } from '../../../../core/data/remote-data';
 import { NotificationsService } from '../../../notifications/notifications.service';
 
 import { hasValue } from '../../../empty.util';
+import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
 
 @Component({
   selector: 'ds-administered-collection-selector',
@@ -31,8 +32,9 @@ export class AdministeredCollectionSelectorComponent extends DSOSelectorComponen
   constructor(protected searchService: SearchService,
               protected collectionDataService: CollectionDataService,
               protected notifcationsService: NotificationsService,
-              protected translate: TranslateService) {
-    super(searchService, notifcationsService, translate);
+              protected translate: TranslateService,
+              public dsoNameService: DSONameService) {
+    super(searchService, notifcationsService, translate, dsoNameService);
   }
 
   /**

@@ -11,6 +11,8 @@ import { createPaginatedList } from '../../../testing/utils.test';
 import { Collection } from '../../../../core/shared/collection.model';
 import { DSpaceObjectType } from '../../../../core/shared/dspace-object-type.model';
 import { NotificationsService } from '../../../notifications/notifications.service';
+import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../../../mocks/dso-name.service.mock';
 
 describe('AuthorizedCollectionSelectorComponent', () => {
   let component: AuthorizedCollectionSelectorComponent;
@@ -37,6 +39,7 @@ describe('AuthorizedCollectionSelectorComponent', () => {
         { provide: SearchService, useValue: {} },
         { provide: CollectionDataService, useValue: collectionService },
         { provide: NotificationsService, useValue: notificationsService },
+        { provide: DSONameService, useClass: DSONameServiceMock }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

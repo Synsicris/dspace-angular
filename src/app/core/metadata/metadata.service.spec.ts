@@ -51,10 +51,10 @@ import { UUIDService } from '../shared/uuid.service';
 import { MetadataService } from './metadata.service';
 import { environment } from '../../../environments/environment';
 import { storeModuleConfig } from '../../app.reducer';
-import { HardRedirectService } from '../services/hard-redirect.service';
-import { URLCombiner } from '../url-combiner/url-combiner';
 import { RootDataService } from '../data/root-data.service';
 import { Root } from '../data/root.model';
+import { mockLocaleService } from '../../shared/testing/locale-service.stub';
+import { LocaleService } from '../locale/locale.service';
 
 /* tslint:disable:max-classes-per-file */
 @Component({
@@ -178,6 +178,7 @@ describe('MetadataService', () => {
         { provide: BitstreamFormatDataService, useValue: mockBitstreamFormatDataService },
         { provide: BitstreamDataService, useValue: mockBitstreamDataService },
         { provide: RootDataService, useValue: rootService },
+        { provide: LocaleService, useValue: mockLocaleService },
         Meta,
         Title,
         // tslint:disable-next-line:no-empty
