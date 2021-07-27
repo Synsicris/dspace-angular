@@ -63,6 +63,7 @@ describe('SubmissionService test suite', () => {
           extraction: {
             config: '',
             mandatory: true,
+            opened: true,
             sectionType: 'utils',
             visibility: {
               submission: SubmissionVisibilityValue.Hidden,
@@ -79,6 +80,7 @@ describe('SubmissionService test suite', () => {
           collection: {
             config: '',
             mandatory: true,
+            opened: true,
             sectionType: 'collection',
             visibility: {
               submission: SubmissionVisibilityValue.Hidden,
@@ -96,6 +98,7 @@ describe('SubmissionService test suite', () => {
             header: 'submit.progressbar.describe.keyinformation',
             config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/keyinformation',
             mandatory: true,
+            opened: true,
             sectionType: 'submission-form',
             collapsed: false,
             enabled: true,
@@ -109,6 +112,7 @@ describe('SubmissionService test suite', () => {
             header: 'submit.progressbar.describe.indexing',
             config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/indexing',
             mandatory: false,
+            opened: true,
             sectionType: 'submission-form',
             collapsed: false,
             enabled: false,
@@ -122,6 +126,7 @@ describe('SubmissionService test suite', () => {
             header: 'submit.progressbar.describe.publicationchannel',
             config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/publicationchannel',
             mandatory: true,
+            opened: false,
             sectionType: 'submission-form',
             collapsed: false,
             enabled: true,
@@ -135,6 +140,7 @@ describe('SubmissionService test suite', () => {
             header: 'submit.progressbar.describe.acknowledgement',
             config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/acknowledgement',
             mandatory: false,
+            opened: true,
             sectionType: 'submission-form',
             collapsed: false,
             enabled: false,
@@ -148,6 +154,7 @@ describe('SubmissionService test suite', () => {
             header: 'submit.progressbar.describe.identifiers',
             config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/identifiers',
             mandatory: false,
+            opened: true,
             sectionType: 'submission-form',
             collapsed: false,
             enabled: false,
@@ -161,6 +168,7 @@ describe('SubmissionService test suite', () => {
             header: 'submit.progressbar.describe.references',
             config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/references',
             mandatory: false,
+            opened: true,
             sectionType: 'submission-form',
             collapsed: false,
             enabled: false,
@@ -174,6 +182,7 @@ describe('SubmissionService test suite', () => {
             header: 'submit.progressbar.upload',
             config: 'https://rest.api/dspace-spring-rest/api/config/submissionuploads/upload',
             mandatory: true,
+            opened: true,
             sectionType: 'upload',
             collapsed: false,
             enabled: true,
@@ -187,6 +196,7 @@ describe('SubmissionService test suite', () => {
             header: 'submit.progressbar.license',
             config: '',
             mandatory: true,
+            opened: true,
             sectionType: 'license',
             visibility: {
               workflow: SubmissionVisibilityValue.ReadOnly
@@ -608,12 +618,12 @@ describe('SubmissionService test suite', () => {
     });
   });
 
-  fdescribe('getSubmissionSections', () => {
+  describe('getSubmissionSections', () => {
     it('should return submission form sections', () => {
       spyOn(service, 'getSubmissionScope').and.returnValue(SubmissionScopeType.WorkspaceItem);
-      // spyOn((service as any).store, 'select').and.returnValue(hot('a|', {
-      //   a: subState.objects[826]
-      // }));
+      spyOn((service as any).store, 'select').and.returnValue(hot('a|', {
+        a: subState.objects[826]
+      }));
 
       const result = service.getSubmissionSections('826');
       const expected = cold('(bc|)', {
@@ -625,6 +635,7 @@ describe('SubmissionService test suite', () => {
               id: 'keyinformation',
               config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/keyinformation',
               mandatory: true,
+              opened: true,
               sectionType: 'submission-form',
               data: {},
               errorsToShow: [],
@@ -636,6 +647,7 @@ describe('SubmissionService test suite', () => {
               id: 'indexing',
               config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/indexing',
               mandatory: false,
+              opened: true,
               sectionType: 'submission-form',
               data: {},
               errorsToShow: [],
@@ -647,6 +659,7 @@ describe('SubmissionService test suite', () => {
               id: 'publicationchannel',
               config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/publicationchannel',
               mandatory: true,
+              opened: false,
               sectionType: 'submission-form',
               data: {},
               errorsToShow: [],
@@ -658,6 +671,7 @@ describe('SubmissionService test suite', () => {
               id: 'acknowledgement',
               config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/acknowledgement',
               mandatory: false,
+              opened: true,
               sectionType: 'submission-form',
               data: {},
               errorsToShow: [],
@@ -669,6 +683,7 @@ describe('SubmissionService test suite', () => {
               id: 'identifiers',
               config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/identifiers',
               mandatory: false,
+              opened: true,
               sectionType: 'submission-form',
               data: {},
               errorsToShow: [],
@@ -680,6 +695,7 @@ describe('SubmissionService test suite', () => {
               id: 'references',
               config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/references',
               mandatory: false,
+              opened: true,
               sectionType: 'submission-form',
               data: {},
               errorsToShow: [],
@@ -691,6 +707,7 @@ describe('SubmissionService test suite', () => {
               id: 'upload',
               config: 'https://rest.api/dspace-spring-rest/api/config/submissionuploads/upload',
               mandatory: true,
+              opened: true,
               sectionType: 'upload',
               data: {},
               errorsToShow: [],
@@ -702,6 +719,7 @@ describe('SubmissionService test suite', () => {
               id: 'license',
               config: '',
               mandatory: true,
+              opened: true,
               sectionType: 'license',
               data: {},
               errorsToShow: [],
