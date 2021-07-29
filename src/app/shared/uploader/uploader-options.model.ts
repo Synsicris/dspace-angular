@@ -26,4 +26,10 @@ export class UploaderOptions {
    * The request method to use for the file upload request
    */
   method: RestRequestMethod = RestRequestMethod.POST;
+
+  /**
+   * File's mime-type allowed for uploading
+   */
+  allowedMimeType: string[] = [];
+
 }

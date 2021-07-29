@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostListener, Input, Output, ViewEncapsulation, } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 
 import { of as observableOf } from 'rxjs';
 import { FileUploader } from 'ng2-file-upload';
@@ -105,6 +114,7 @@ export class UploaderComponent {
       autoUpload: this.uploadFilesOptions.autoUpload,
       method: this.uploadFilesOptions.method,
       queueLimit: this.uploadFilesOptions.maxFileNumber,
+      allowedMimeType: this.uploadFilesOptions.allowedMimeType
     });
 
     if (isUndefined(this.enableDragOverDocument)) {
