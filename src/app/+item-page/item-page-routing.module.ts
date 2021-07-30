@@ -6,7 +6,7 @@ import { ItemBreadcrumbResolver } from '../core/breadcrumbs/item-breadcrumb.reso
 import { DSOBreadcrumbsService } from '../core/breadcrumbs/dso-breadcrumbs.service';
 import { LinkService } from '../core/cache/builders/link.service';
 import { UploadBitstreamComponent } from './bitstreams/upload/upload-bitstream.component';
-import { ITEM_EDIT_PATH, UPLOAD_BITSTREAM_PATH } from './item-page-routing-paths';
+import { EASY_ONLINE_PATH, ITEM_EDIT_PATH, UPLOAD_BITSTREAM_PATH } from './item-page-routing-paths';
 import { ItemPageAdministratorGuard } from './item-page-administrator.guard';
 import { MenuItemType } from '../shared/menu/initial-menus-state';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
@@ -46,6 +46,11 @@ import { CrisItemPageTabResolver } from '../cris-item-page/cris-item-page-tab.re
             path: UPLOAD_BITSTREAM_PATH,
             component: UploadBitstreamComponent,
             canActivate: [AuthenticatedGuard]
+          },
+          {
+            path: EASY_ONLINE_PATH,
+            loadChildren: () => import('../easy-online-import-page/easy-online-import-page.module')
+              .then((m) => m.EasyOnlineImportPageModule)
           }
         ],
         data: {

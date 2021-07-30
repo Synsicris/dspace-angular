@@ -208,6 +208,7 @@ import { CommunitySearchResult } from '../shared/object-collection/shared/commun
 import { ItemSearchResult } from '../shared/object-collection/shared/item-search-result.model';
 import { ProjectAuthorizationService } from './project/project-authorization.service';
 import { ProjectGroupService } from './project/project-group.service';
+import { EasyOnlineImport } from './easy-online-import/models/easy-online-import.model';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -439,7 +440,8 @@ export const models =
     ItemSearchResult,
     PoolTaskSearchResult,
     WorkflowItemSearchResult,
-    WorkspaceItemSearchResult
+    WorkspaceItemSearchResult,
+    EasyOnlineImport
   ];
 
 @NgModule({

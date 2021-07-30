@@ -1,0 +1,5 @@
+<div class="container">
+  <ds-easy-online-import [projectItem]="(itemRD$ | async)?.payload" (importComplete)="updateResults($event)"></ds-easy-online-import>
+  <div class="clearfix mb-3"></div>
+  <ds-easy-online-import-result [result]="importResults | async"></ds-easy-online-import-result>
+</div>

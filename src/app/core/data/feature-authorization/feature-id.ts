@@ -24,5 +24,6 @@ export enum FeatureID {
   CanClaimItem = 'canClaimItem',
   CanCorrectItem = 'canCorrectItem',
   CanCreateCommunities = 'canCreateCommunities',
-  CanEditItemGrants = 'canEditedGrants'
+  CanEditItemGrants = 'canEditedGrants',
+  CanMakeEasyOnlineImport = 'canMakeEasyOnlineImport'
 }

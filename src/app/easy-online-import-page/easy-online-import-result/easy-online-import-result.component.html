@@ -1,0 +1,33 @@
+<ng-container *ngIf="!result">
+  <ds-alert [type]="'alert-info'" [dismissible]="false">
+    {{'easy-online-import.info' | translate}}
+  </ds-alert>
+</ng-container>
+<ng-container *ngIf="result">
+  <h2>{{'easy-online-import.result-info' | translate}}</h2>
+  <div *ngIf="result?.created?.length > 0">
+    <p class="lead">
+      {{'easy-online-import.created-info' | translate}}
+    </p>
+    <ul class="list-unstyled">
+      <li *ngFor="let item of (getItemList(result.created) | async)">
+        <button class="btn btn-link text-left" (click)="navigateToItem(item)">
+          <span class="h5">{{nameService.getName(item)}}</span>
+        </button>
+      </li>
+    </ul>
+
+  </div>
+  <div *ngIf="result?.modified?.length > 0">
+    <p class="lead">
+      {{'easy-online-import.modified-info' | translate}}
+    </p>
+    <ul class="list-unstyled">
+      <li *ngFor="let item of (getItemList(result.modified) | async)">
+        <button class="btn btn-link text-left" (click)="navigateToItem(item)">
+          <span class="h5">{{nameService.getName(item)}}</span>
+        </button>
+    </ul>
+
+  </div>
+</ng-container>

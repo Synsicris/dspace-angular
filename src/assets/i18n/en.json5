@@ -1712,10 +1712,13 @@
 
   "context-menu.actions.label": "Options",
 
+  "context-menu.actions.easy-online-import.btn": "Import from Easy-Online",
 
   "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
 
   "context-menu.actions.edit-item.btn.OWNER": "Edit",
+
+  "context-menu.actions.edit-item.btn.CUSTOM": "Edit",
 
 
   "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
@@ -2014,6 +2017,25 @@
 
   "confirmation-modal.delete-eperson.confirm": "Delete",
 
+  "easy-online-import.info": "Upload a new file to start the Easy-online import",
+
+  "easy-online-import.result-info": "Import results",
+
+  "easy-online-import.created-info": "Below all the new entities created by the Easy-online import :",
+
+  "easy-online-import.modified-info": "Below all the new entities modified by the Easy-online import :",
+
+  "easy-online-import.submit": "Start import",
+
+  "easy-online-import.back": "Back",
+
+  "easy-online-import.processing": "Processing",
+
+  "easy-online-import.upload": "Drop Easy-online xml files",
+
+  "easy-online-import.success": "Import has been succeeded",
+
+  "easy-online-import.error": "There was an issue during import, please check the import file and try again.",
 
   "equipment.listelement.badge": "Equipment",
 

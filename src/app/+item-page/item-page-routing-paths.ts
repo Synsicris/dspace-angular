@@ -36,3 +36,4 @@ export function getEntityEditRoute(entityType: string, itemId: string) {
 
 export const ITEM_EDIT_PATH = 'edit';
 export const UPLOAD_BITSTREAM_PATH = 'bitstreams/new';
+export const EASY_ONLINE_PATH = 'easyonlineimport';
