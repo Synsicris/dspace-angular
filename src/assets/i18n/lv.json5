@@ -2503,6 +2503,9 @@
   // TODO New key - Add a translation
   "context-menu.actions.label": "Options",
   
+  // "context-menu.actions.easy-online-import.btn": "Import from Easy-Online",
+  // TODO New key - Add a translation
+  "context-menu.actions.easy-online-import.btn": "Import from Easy-Online",
   
   // "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
   // TODO New key - Add a translation
@@ -2511,6 +2514,10 @@
   // "context-menu.actions.edit-item.btn.OWNER": "Edit",
   // TODO New key - Add a translation
   "context-menu.actions.edit-item.btn.OWNER": "Edit",
+  
+  // "context-menu.actions.edit-item.btn.CUSTOM": "Edit",
+  // TODO New key - Add a translation
+  "context-menu.actions.edit-item.btn.CUSTOM": "Edit",
   
   
   // "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
@@ -3011,6 +3018,45 @@
   // TODO New key - Add a translation
   "confirmation-modal.delete-eperson.confirm": "Delete",
   
+  // "easy-online-import.info": "Upload a new file to start the Easy-online import",
+  // TODO New key - Add a translation
+  "easy-online-import.info": "Upload a new file to start the Easy-online import",
+  
+  // "easy-online-import.result-info": "Import results",
+  // TODO New key - Add a translation
+  "easy-online-import.result-info": "Import results",
+  
+  // "easy-online-import.created-info": "Below all the new entities created by the Easy-online import :",
+  // TODO New key - Add a translation
+  "easy-online-import.created-info": "Below all the new entities created by the Easy-online import :",
+  
+  // "easy-online-import.modified-info": "Below all the new entities modified by the Easy-online import :",
+  // TODO New key - Add a translation
+  "easy-online-import.modified-info": "Below all the new entities modified by the Easy-online import :",
+  
+  // "easy-online-import.submit": "Start import",
+  // TODO New key - Add a translation
+  "easy-online-import.submit": "Start import",
+  
+  // "easy-online-import.back": "Back",
+  // TODO New key - Add a translation
+  "easy-online-import.back": "Back",
+  
+  // "easy-online-import.processing": "Processing",
+  // TODO New key - Add a translation
+  "easy-online-import.processing": "Processing",
+  
+  // "easy-online-import.upload": "Drop Easy-online xml files",
+  // TODO New key - Add a translation
+  "easy-online-import.upload": "Drop Easy-online xml files",
+  
+  // "easy-online-import.success": "Import has been succeeded",
+  // TODO New key - Add a translation
+  "easy-online-import.success": "Import has been succeeded",
+  
+  // "easy-online-import.error": "There was an issue during import, please check the import file and try again.",
+  // TODO New key - Add a translation
+  "easy-online-import.error": "There was an issue during import, please check the import file and try again.",
   
   // "equipment.listelement.badge": "Equipment",
   // TODO New key - Add a translation
@@ -3989,9 +4035,9 @@
   "impact-pathway.checkbox.link": "Click here to link/unlink item",
   
   
-  // "impact-pathway.create.bidirectional-link": "Create bidirectional link",
+  // "impact-pathway.create.bidirectional-link": "Create bidirectional arrow",
   // TODO New key - Add a translation
-  "impact-pathway.create.bidirectional-link": "Create bidirectional link",
+  "impact-pathway.create.bidirectional-link": "Create bidirectional arrow",
   
   
   // "impact-pathway.create.btn": "Create impact pathway",
@@ -4009,9 +4055,9 @@
   "impact-pathway.create.head": "New impact pathway",
   
   
-  // "impact-pathway.create.outcome-link": "Create link",
+  // "impact-pathway.create.outcome-link": "Create arrow",
   // TODO New key - Add a translation
-  "impact-pathway.create.outcome-link": "Create link",
+  "impact-pathway.create.outcome-link": "Create arrow",
   
   
   // "impact-pathway.create.placeholder": "Enter the name of the new impact pathway.",
@@ -4044,14 +4090,14 @@
   "impact-pathway.move.task.error": "There was an issue when moving the item, please try again later.",
   
   
-  // "impact-pathway.objectives.back-btn": "Back to impact pathway",
+  // "impact-pathway.objectives.back-btn": "Back to Impact Pathway",
   // TODO New key - Add a translation
-  "impact-pathway.objectives.back-btn": "Back to impact pathway",
+  "impact-pathway.objectives.back-btn": "Back to Impact Pathway",
   
   
-  // "impact-pathway.objectives.edit.page.title": "Edit objectives",
+  // "impact-pathway.objectives.edit.page.title": "Edit objective",
   // TODO New key - Add a translation
-  "impact-pathway.objectives.edit.page.title": "Edit objectives",
+  "impact-pathway.objectives.edit.page.title": "Edit objective",
   
   
   // "impact-pathway.objectives.step_type_2.info.panel": "Here you define the most important work packages and tasks which contribute to the research and development objective and are relevant for the development of impacts.</br>All items created here can be reused in the working plan and vice versa items already created in the working plan can be used here.</br>For detailed descriptions of materials and methods, please formulate them in a document and upload it on the project page.</br>Via [Edit Item] in the description field, you can edit the objective and description field in the second level. Then save your settings.",
@@ -4089,22 +4135,25 @@
   "impact-pathway.remove.confirm.title": "Discard impact pathway",
   
   
-  // "impact-pathway.remove.item.title": "Remove item",
+  // "impact-pathway.remove.item.title": "Unlink item",
   // TODO New key - Add a translation
-  "impact-pathway.remove.item.title": "Remove item",
+  "impact-pathway.remove.item.title": "Unlink item",
   
   
   // "impact-pathway.remove.processing": "Deleting",
   // TODO New key - Add a translation
   "impact-pathway.remove.processing": "Deleting",
   
-  // "impact-pathway.edit.title": "Edit impact pathway",
-  // TODO New key - Add a translation
-  "impact-pathway.edit.title": "Edit impact pathway",
   
-  // "impact-pathway.remove.title": "Delete impact pathway",
+  // "impact-pathway.edit.title": "Edit Impact Pathway",
   // TODO New key - Add a translation
-  "impact-pathway.remove.title": "Delete impact pathway",
+  "impact-pathway.edit.title": "Edit Impact Pathway",
+  
+  
+  // "impact-pathway.remove.title": "Delete Impact Pathway",
+  // TODO New key - Add a translation
+  "impact-pathway.remove.title": "Delete Impact Pathway",
+  
   
   // "impact-pathway.remove.success": "The impact pathway has been deleted successfully.",
   // TODO New key - Add a translation
@@ -7080,9 +7129,9 @@
   "participation_events.listelement.badge": "Participative process",
   
   
-  // "patents.listelement.badge": "Patent and utility patent",
+  // "patents.listelement.badge": "Patent or utility patent",
   // TODO New key - Add a translation
-  "patents.listelement.badge": "Patent and utility patent",
+  "patents.listelement.badge": "Patent or utility patent",
   
   
   // "person.listelement.badge": "Person",
@@ -8038,7 +8087,7 @@
   "project.create.success": "The new project has been generated successfully.",
   
   
-  // "project.listelement.badge": "Research project",
+  // "project.listelement.badge": "Subproject",
   // TODO Source message changed - Revise the translation
   "project.listelement.badge": "Izpētes projekts",
   
@@ -12022,7 +12071,8 @@
   "submission.sections.upload.header.policy.default.withlist": "Lūdzu, ņemiet vērā, ka augšupielādētie faili kolekcijā {{collectionName}} būs pieejami papildus tam, kas ir skaidri noteikts par atsevišķu failu, ar šādām grupām:",
   
   
-  // "submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <strong>upload additional files just dragging & dropping them everywhere in the page</strong>",
+  // "submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <b>upload additional files just dragging & dropping them everywhere in the page.</b>",
+  // TODO Source message changed - Revise the translation
   "submission.sections.upload.info": "Šeit atradīsit visus failus, kas pašlaik atrodas materiālā. Varat atjaunināt failu metadatus un piekļuves nosacījumus vai <strong>augšupielādēt papildu failus, vienkārši ievelkot un atstājot tos visur lapā</strong>",
   
   
@@ -12550,9 +12600,11 @@
   // TODO New key - Add a translation
   "working-plan.chart.column.changeStartDate.radio.later": "Later",
   
-  // "working-plan.chart.column.changeStartDate": "Change start date",
+  
+  // "working-plan.chart.column.changeStartDate": "Change Start date",
   // TODO New key - Add a translation
-  "working-plan.chart.column.changeStartDate": "Change start date",
+  "working-plan.chart.column.changeStartDate": "Change Start date",
+  
   
   // "working-plan.chart.column.changeStartDate.apply": "Apply",
   // TODO New key - Add a translation
@@ -12570,17 +12622,20 @@
   // TODO New key - Add a translation
   "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
   
-  // "working-plan.chart.column.responsible": "Responsible organisation(s)",
-  // TODO New key - Add a translation
-  "working-plan.chart.column.responsible": "Responsible organisation(s)",
   
-  // "working-plan.chart.column.sortBy": "Sort by",
+  // "working-plan.chart.column.responsible": "Responsible project partner(s)",
   // TODO New key - Add a translation
-  "working-plan.chart.column.sortBy": "Sort by",
+  "working-plan.chart.column.responsible": "Responsible project partner(s)",
   
-  // "working-plan.chart.column.sortBy.option.workingplan.place": "Tree order",
+  
+  // "working-plan.chart.column.sortBy": "Sort by...",
   // TODO New key - Add a translation
-  "working-plan.chart.column.sortBy.option.workingplan.place": "Tree order",
+  "working-plan.chart.column.sortBy": "Sort by...",
+  
+  // "working-plan.chart.column.sortBy.option.workingplan.place": "Individual order",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.sortBy.option.workingplan.place": "Individual order",
+  
   
   // "working-plan.chart.column.sortBy.option.dc.title": "Title",
   // TODO New key - Add a translation
@@ -12594,9 +12649,11 @@
   // TODO New key - Add a translation
   "working-plan.chart.column.sortBy.option.synsicris.type.status": "Status",
   
-  // "working-plan.chart.column.sortBy.option.synsicris.relation.partner": "Organization",
+  
+  // "working-plan.chart.column.sortBy.option.synsicris.relation.partner": "Organisation",
   // TODO New key - Add a translation
-  "working-plan.chart.column.sortBy.option.synsicris.relation.partner": "Organization",
+  "working-plan.chart.column.sortBy.option.synsicris.relation.partner": "Organisation",
+  
   
   // "working-plan.chart.column.sortBy.option.dc.date.start": "Start date",
   // TODO New key - Add a translation
@@ -12695,25 +12752,24 @@
   "working-plan.task.search.header": "",
   
   
-  
-  // "application.listelement.badge": "Applications of solutions / changes / innovations",
+  // "application.listelement.badge": "Application of a solution / change / innovation",
   // TODO New key - Add a translation
-  "application.listelement.badge": "Applications of solutions / changes / innovations",
+  "application.listelement.badge": "Application of a solution / change / innovation",
   
   
-  // "award.listelement.badge": "Award / prize",
+  // "award.listelement.badge": "Award",
   // TODO New key - Add a translation
-  "award.listelement.badge": "Award / prize",
+  "award.listelement.badge": "Award",
   
   
-  // "condition.listelement.badge": "External conditions",
+  // "condition.listelement.badge": "External condition",
   // TODO New key - Add a translation
-  "condition.listelement.badge": "External conditions",
+  "condition.listelement.badge": "External condition",
   
   
-  // "contribution_fundingprogramme.listelement.badge": "Contributions to funding programme objectives",
+  // "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objective",
   // TODO New key - Add a translation
-  "contribution_fundingprogramme.listelement.badge": "Contributions to funding programme objectives",
+  "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objective",
   
   
   // "cooperation_partner.listelement.badge": "Cooperation partners",
@@ -12736,9 +12792,9 @@
   "gender.listelement.badge": "Gender reflection",
   
   
-  // "impactpathway.listelement.badge": "Impact pathway",
+  // "impactpathway.listelement.badge": "Impact Pathway",
   // TODO New key - Add a translation
-  "impactpathway.listelement.badge": "Impact pathway",
+  "impactpathway.listelement.badge": "Impact Pathway",
   
   
   // "impactpathwaystep.listelement.badge": "Impact pathway step",
@@ -12784,13 +12840,14 @@
   "physical_object.listelement.badge": "Object / material for knowledge transfer and subsequent use in research and teaching",
   
   
-  // "Project.listelement.badge": "Project",
+  // "Project.listelement.badge": "Subproject",
   // TODO New key - Add a translation
-  "Project.listelement.badge": "Project",
+  "Project.listelement.badge": "Subproject",
   
-  // "proj_objective.listelement.badge": "Project objectives",
+  
+  // "proj_objective.listelement.badge": "Project objective",
   // TODO New key - Add a translation
-  "proj_objective.listelement.badge": "Project objectives",
+  "proj_objective.listelement.badge": "Project objective",
   
   
   // "plan_publication.listelement.badge": "Planned publications",
@@ -12798,9 +12855,9 @@
   "plan_publication.listelement.badge": "Planned publications",
   
   
-  // "research_result.listelement.badge": "Research results",
+  // "research_result.listelement.badge": "Research result",
   // TODO New key - Add a translation
-  "research_result.listelement.badge": "Research results",
+  "research_result.listelement.badge": "Research result",
   
   
   // "stateofart.listelement.badge": "State of knowledge / problem definition",
@@ -12813,9 +12870,9 @@
   "spinoff.listelement.badge": "Spin-off (incl. association)",
   
   
-  // "step.listelement.badge": "Next steps and cooperations",
+  // "step.listelement.badge": "Next steps and cooperation",
   // TODO New key - Add a translation
-  "step.listelement.badge": "Next steps and cooperations",
+  "step.listelement.badge": "Next steps and cooperation",
   
   
   // "subproject.listelement.badge": "Subprojects",
@@ -12833,9 +12890,9 @@
   "task.listelement.badge": "Task",
   
   
-  // "unexpected_result.listelement.badge": "(Intermediate) results / problems that causes change",
+  // "unexpected_result.listelement.badge": "(Intermediate) results / problems that cause change",
   // TODO New key - Add a translation
-  "unexpected_result.listelement.badge": "(Intermediate) results / problems that causes change",
+  "unexpected_result.listelement.badge": "(Intermediate) results / problems that cause change",
   
   
   // "workpackage.listelement.badge": "Work package",
@@ -12923,9 +12980,9 @@
   "awards.listelement.badge": "Awards and prizes",
   
   
-  // "conditions.listelement.badge": "External conditions",
+  // "conditions.listelement.badge": "External condition",
   // TODO New key - Add a translation
-  "conditions.listelement.badge": "External conditions",
+  "conditions.listelement.badge": "External condition",
   
   
   // "process_events.listelement.badge": "Process of cooperation, participation and working together",
@@ -12943,9 +13000,9 @@
   "ethics.listelement.badge": "Ethical reflection",
   
   
-  // "events.listelement.badge": "Events",
+  // "events.listelement.badge": "Event",
   // TODO New key - Add a translation
-  "events.listelement.badge": "Events",
+  "events.listelement.badge": "Event",
   
   
   // "impact_pathway.listelement.badge": "Impact pathway",
@@ -12978,9 +13035,9 @@
   "orgunits.listelement.badge": "Organizational units",
   
   
-  // "persons.listelement.badge": "Persons",
+  // "persons.listelement.badge": "Person",
   // TODO New key - Add a translation
-  "persons.listelement.badge": "Persons",
+  "persons.listelement.badge": "Person",
   
   
   // "physical_objects.listelement.badge": "Object / material for knowledge transfer and subsequent use in research and teaching",
@@ -12993,34 +13050,34 @@
   "plan_publications.listelement.badge": "Planned publications",
   
   
-  // "proj_objectives.listelement.badge": "Project objectives",
+  // "proj_objectives.listelement.badge": "Project objective",
   // TODO New key - Add a translation
-  "proj_objectives.listelement.badge": "Project objectives",
+  "proj_objectives.listelement.badge": "Project objective",
   
   
-  // "projects.listelement.badge": "Research projects",
+  // "projects.listelement.badge": "Project",
   // TODO New key - Add a translation
-  "projects.listelement.badge": "Research projects",
+  "projects.listelement.badge": "Project",
   
   
-  // "publications.listelement.badge": "Publications",
+  // "publications.listelement.badge": "Publication",
   // TODO New key - Add a translation
-  "publications.listelement.badge": "Publications",
+  "publications.listelement.badge": "Publication",
   
   
-  // "research_results.listelement.badge": "Research results",
+  // "research_results.listelement.badge": "Research result",
   // TODO New key - Add a translation
-  "research_results.listelement.badge": "Research results",
+  "research_results.listelement.badge": "Research result",
   
   
-  // "spinoffs.listelement.badge": "Spin-offs",
+  // "spinoffs.listelement.badge": "Spin-off",
   // TODO New key - Add a translation
-  "spinoffs.listelement.badge": "Spin-offs",
+  "spinoffs.listelement.badge": "Spin-off",
   
   
-  // "steps.listelement.badge": "Next steps and cooperations",
+  // "steps.listelement.badge": "Next steps and cooperation",
   // TODO New key - Add a translation
-  "steps.listelement.badge": "Next steps and cooperations",
+  "steps.listelement.badge": "Next steps and cooperation",
   
   
   // "subprojects.listelement.badge": "Subprojects",
@@ -13193,9 +13250,9 @@
   "Person.listelement.badge": "Person",
   
   
-  // "team.listelement.badge": "Team of subproject",
+  // "team.listelement.badge": "Team member",
   // TODO New key - Add a translation
-  "team.listelement.badge": "Team of subproject",
+  "team.listelement.badge": "Team member",
   
   
   // "subcontractor.listelement.badge": "Subcontractor",
@@ -13271,9 +13328,9 @@
   "working-plan.chart.column.change.StartDate.apply": "Apply",
   
   
-  // "working-plan.chart.column.change.StartDate.saving": "saving…",
+  // "working-plan.chart.column.change.StartDate.saving": "saving...",
   // TODO New key - Add a translation
-  "working-plan.chart.column.change.StartDate.saving": "saving…",
+  "working-plan.chart.column.change.StartDate.saving": "saving...",
   
   
   // "working-plan.chart.column.change.StartDate.Close": "Close",
@@ -13295,9 +13352,75 @@
   // TODO New key - Add a translation
   "Poduct.listelement.badge": "Research data",
   
-  // "help-page.back-btn": "Back"
+  
+  // "help-page.back-btn": "Back",
   // TODO New key - Add a translation
-  "help-page.back-btn": "Back"
+  "help-page.back-btn": "Back",
+  
+  
+  // "working-plan.chart.column.changeStartDate.Close": "Close",
+  // TODO New key - Add a translation
+  "working-plan.chart.column.changeStartDate.Close": "Close",
+  
+  
+  // "working-plan.task.create.head": "New item",
+  // TODO New key - Add a translation
+  "working-plan.task.create.head": "New item",
+  
+  
+  // "subcontractors.listelement.badge": "Subcontractor",
+  // TODO New key - Add a translation
+  "subcontractors.listelement.badge": "Subcontractor",
+  
+  
+  // "cooperationpartners.listelement.badge": "Cooperation partner",
+  // TODO New key - Add a translation
+  "cooperationpartners.listelement.badge": "Cooperation partner",
+  
+  
+  // "parentprojects.listelement.badge": "Joint Project",
+  // TODO New key - Add a translation
+  "parentprojects.listelement.badge": "Joint Project",
+  
+  
+  // "programmes.listelement.badge": "Programme",
+  // TODO New key - Add a translation
+  "programmes.listelement.badge": "Programme",
+  
+  
+  // "calls.listelement.badge": "Call",
+  // TODO New key - Add a translation
+  "calls.listelement.badge": "Call",
+  
+  
+  // "fundingobjectives.listelement.badge": "Funding objective",
+  // TODO New key - Add a translation
+  "fundingobjectives.listelement.badge": "Funding objective",
+  
+  
+  // "projectpartner.listelement.badge": "Project partner",
+  // TODO New key - Add a translation
+  "projectpartner.listelement.badge": "Project partner",
+  
+  
+  // "cooperationpartner.listelement.badge": "Cooperation partner",
+  // TODO New key - Add a translation
+  "cooperationpartner.listelement.badge": "Cooperation partner",
+  
+  
+  // "programme.listelement.badge": "Programme",
+  // TODO New key - Add a translation
+  "programme.listelement.badge": "Programme",
+  
+  
+  // "call.listelement.badge": "Call",
+  // TODO New key - Add a translation
+  "call.listelement.badge": "Call",
+  
+  
+  // "fundingobjective.listelement.badge": "Funding objective"
+  // TODO New key - Add a translation
+  "fundingobjective.listelement.badge": "Funding objective"
   
   
 
