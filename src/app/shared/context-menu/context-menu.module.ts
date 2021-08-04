@@ -15,6 +15,7 @@ import { ExportCollectionMenuComponent } from './export-collection/export-collec
 import { BulkImportMenuComponent } from './bulk-import/bulk-import-menu.component';
 import { EditItemRelationshipsMenuComponent } from './edit-item-relationships/edit-item-relationships-menu.component';
 import { ClaimItemMenuComponent } from './claim-item/claim-item-menu.component';
+import { StatisticsMenuComponent } from './statistics/statistics-menu.component';
 import { DeleteProjectMenuComponent } from './delete-project/delete-project-menu.component';
 import { ProjectAdminInvitationMenuComponent } from './project-invitation/project-admin-invitation-menu.component';
 import { ProjectMembersInvitationMenuComponent } from './project-members-invitation/project-members-invitation-menu.component';
@@ -32,6 +33,7 @@ const COMPONENTS = [
   EditItemRelationshipsMenuComponent,
   RequestCorrectionMenuComponent,
   ClaimItemMenuComponent,
+  StatisticsMenuComponent,
   DeleteProjectMenuComponent,
   GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
@@ -48,6 +50,7 @@ const ENTRY_COMPONENTS = [
   ExportCollectionMenuComponent,
   EditItemRelationshipsMenuComponent,
   ClaimItemMenuComponent,
+  StatisticsMenuComponent,
   DeleteProjectMenuComponent,
   GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
