@@ -53,7 +53,6 @@ export class DSONameService {
    * @param dso  The {@link DSpaceObject} you want a name for
    */
   getName(dso: DSpaceObject): string {
-    console.log(this.locale.getCurrentLanguageCode());
     const types = dso.getRenderTypes();
     const match = types
       .filter((type) => typeof type === 'string')
