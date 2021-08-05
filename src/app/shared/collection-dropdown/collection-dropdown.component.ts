@@ -26,6 +26,7 @@ import {
   getFirstSucceededRemoteDataPayload,
   getFirstSucceededRemoteWithNotEmptyData
 } from '../../core/shared/operators';
+import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 
 /**
  * An interface to represent a collection entry
@@ -128,7 +129,8 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private collectionDataService: CollectionDataService,
-    private el: ElementRef
+    private el: ElementRef,
+    private nameService: DSONameService,
   ) { }
 
   /**
@@ -243,8 +245,8 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
         mergeMap((collection: Collection) => collection.parentCommunity.pipe(
           getFirstSucceededRemoteDataPayload(),
           map((community: Community) => ({
-            communities: [{ id: community.id, name: community.name }],
-            collection: { id: collection.id, uuid: collection.id, name: collection.name }
+            communities: [{ id: community.id, name: this.nameService.getName(community) }],
+            collection: { id: collection.id, uuid: collection.id, name: this.nameService.getName(collection) }
           })
         ))),
         reduce((acc: any, value: any) => [...acc, value], []),

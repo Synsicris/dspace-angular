@@ -26,6 +26,8 @@ import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.u
 import { getMockRequestService } from '../../../shared/mocks/request.service.mock';
 import { RequestService } from '../../../core/data/request.service';
 import { SubmissionDefinitionsConfigService } from '../../../core/config/submission-definitions-config.service';
+import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../../../shared/mocks/dso-name.service.mock';
 
 describe('SubmissionFormCollectionComponent Component', () => {
 
@@ -34,6 +36,7 @@ describe('SubmissionFormCollectionComponent Component', () => {
   let fixture: ComponentFixture<SubmissionFormCollectionComponent>;
   let submissionServiceStub: SubmissionServiceStub;
   let jsonPatchOpServiceStub: SubmissionJsonPatchOperationsServiceStub;
+  let nameService: DSONameService;
 
   const submissionId = mockSubmissionId;
   const collectionId = '1234567890-1';
@@ -156,6 +159,7 @@ describe('SubmissionFormCollectionComponent Component', () => {
         { provide: SectionsService, useValue: sectionsService },
         { provide: RequestService, useValue: requestServce },
         { provide: SubmissionDefinitionsConfigService, useValue: submissionDefinitionsConfigService },
+        { provide: DSONameService, useClass: DSONameServiceMock },
         ChangeDetectorRef,
         SubmissionFormCollectionComponent
       ],
@@ -202,6 +206,7 @@ describe('SubmissionFormCollectionComponent Component', () => {
       comp.currentCollectionId = collectionId;
       comp.currentDefinition = definition;
       comp.submissionId = submissionId;
+      nameService = TestBed.inject(DSONameService);
     });
 
     afterEach(() => {
@@ -276,6 +281,7 @@ describe('SubmissionFormCollectionComponent Component', () => {
 
       it('should change collection properly', () => {
         spyOn(comp.collectionChange, 'emit').and.callThrough();
+        spyOn(nameService, 'getName').and.returnValue(mockCollectionList[1].collection.name);
         jsonPatchOpServiceStub.jsonPatchByResourceID.and.returnValue(of(submissionRestResponse));
         submissionServiceStub.retrieveSubmission.and.returnValue(createSuccessfulRemoteDataObject$(submissionRestResponse[0]));
         comp.ngOnInit();
