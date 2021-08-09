@@ -2800,6 +2800,10 @@
   // TODO New key - Add a translation
   "context-menu.actions.edit-item-relationships.btn.projects": "Manage Projects",
   
+  // "context-menu.actions.statistics.btn": "Statistics",
+  // TODO New key - Add a translation
+  "context-menu.actions.statistics.btn": "Statistics",
+  
   // "RELATION.Person.researchoutputs.search.results.head" : "Research Outputs",
   // TODO New key - Add a translation
   "RELATION.Person.researchoutputs.search.results.head" : "Research Outputs",
@@ -4418,11 +4422,6 @@
   // "impact-pathway.task.create.error": "There was an issue when creating the new item, please try again later.",
   // TODO New key - Add a translation
   "impact-pathway.task.create.error": "There was an issue when creating the new item, please try again later.",
-  
-  
-  // "impact-pathway.task.create.head": "New item",
-  // TODO New key - Add a translation
-  "impact-pathway.task.create.head": "New item",
   
   
   // "impact-pathway.task.create.success": "New item has been created successfully.",
@@ -6550,6 +6549,9 @@
   // "menu.section.statistics_task": "Statistics Task",
   "menu.section.statistics_task": "Tarea de Estadíisticas",
   
+  // "statistics": "Statistics",
+  // TODO New key - Add a translation
+  "statistics": "Statistics",
   
   // "menu.section.toggle.access_control": "Toggle Access Control section",
   "menu.section.toggle.access_control": "Alternar la sección de Control de Acceso",
@@ -10073,6 +10075,17 @@
   // "search.view-switch.show-list": "Show as list",
   "search.view-switch.show-list": "Mostrar como lista",
   
+  // "simple-item-modal.new.head": "Add item via \"Create new\" or \"Select existing\"",
+  // TODO New key - Add a translation
+  "simple-item-modal.new.head": "Add item via \"Create new\" or \"Select existing\"",
+  
+  // "simple-item-modal.create-btn": "Create new",
+  // TODO New key - Add a translation
+  "simple-item-modal.create-btn": "Create new",
+  
+  // "simple-item-modal.search-btn": "Select existing",
+  // TODO New key - Add a translation
+  "simple-item-modal.search-btn": "Select existing",
   
   // "sorting.ASC": "Ascending",
   // TODO New key - Add a translation
@@ -13060,9 +13073,9 @@
   // TODO New key - Add a translation
   "working-plan.chart.move.up.btn": "Move up",
   
-  // "working-plan.chart.page.description": "Maecenas facilisis cursus nisl, eget gravida risus mollis a. Phasellus a quam vitae lorem finibus consequat. Vestibulum dictum, sem sed suscipit euismod, lorem diam lobortis sem, in ultrices ipsum risus a enim. Nunc efficitur interdum urna, eget accumsan arcu scelerisque maximus. In hac habitasse platea dictumst. Nunc vestibulum volutpat iaculis. Phasellus scelerisque congue ante vel luctus. Proin gravida semper eros, dignissim dapibus tortor laoreet quis. Maecenas nec dui risus. Sed metus lorem, egestas quis turpis et, viverra aliquet metus. Praesent et viverra velit. Donec vel magna tempor, tempus sem vel, ultrices diam. In sed neque id ligula hendrerit vulputate sit amet id ex. Mauris dignissim scelerisque tempor. Maecenas quis convallis felis. Nunc pharetra maximus sapien id vulputate.",
+  // "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class=\\\"fas fa-plus-circle\\\"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class=\"fas fa-plus-circle\"></i> button in the work package to assign new or existing work.</p></b></i>",
   // TODO New key - Add a translation
-  "working-plan.chart.page.description": "Maecenas facilisis cursus nisl, eget gravida risus mollis a. Phasellus a quam vitae lorem finibus consequat. Vestibulum dictum, sem sed suscipit euismod, lorem diam lobortis sem, in ultrices ipsum risus a enim. Nunc efficitur interdum urna, eget accumsan arcu scelerisque maximus. In hac habitasse platea dictumst. Nunc vestibulum volutpat iaculis. Phasellus scelerisque congue ante vel luctus. Proin gravida semper eros, dignissim dapibus tortor laoreet quis. Maecenas nec dui risus. Sed metus lorem, egestas quis turpis et, viverra aliquet metus. Praesent et viverra velit. Donec vel magna tempor, tempus sem vel, ultrices diam. In sed neque id ligula hendrerit vulputate sit amet id ex. Mauris dignissim scelerisque tempor. Maecenas quis convallis felis. Nunc pharetra maximus sapien id vulputate.",
+  "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class=\\\"fas fa-plus-circle\\\"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class=\"fas fa-plus-circle\"></i> button in the work package to assign new or existing work.</p></b></i>",
   
   // "working-plan.page.title": "Working plan",
   // TODO New key - Add a translation
