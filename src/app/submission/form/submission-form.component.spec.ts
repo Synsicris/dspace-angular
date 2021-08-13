@@ -24,7 +24,9 @@ import { HALEndpointServiceStub } from '../../shared/testing/hal-endpoint-servic
 import { createTestComponent } from '../../shared/testing/utils.test';
 import { Item } from '../../core/shared/item.model';
 import { TestScheduler } from 'rxjs/testing';
-
+import { SectionsService } from '../sections/sections.service';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoaderMock } from '../../shared/testing/translate-loader.mock';
 
 describe('SubmissionFormComponent Component', () => {
 
@@ -46,7 +48,14 @@ describe('SubmissionFormComponent Component', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [],
+      imports: [
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock
+          }
+        })
+      ],
       declarations: [
         SubmissionFormComponent,
         TestComponent
@@ -55,6 +64,12 @@ describe('SubmissionFormComponent Component', () => {
         { provide: AuthService, useClass: AuthServiceStub },
         { provide: HALEndpointService, useValue: new HALEndpointServiceStub('workspaceitems') },
         { provide: SubmissionService, useValue: submissionServiceStub },
+        { provide: SectionsService, useValue:
+          {
+            isSectionTypeAvailable: () => observableOf(true),
+            isSectionReadOnly: () => observableOf(false)
+          }
+        },
         ChangeDetectorRef,
         SubmissionFormComponent
       ],
@@ -95,6 +110,7 @@ describe('SubmissionFormComponent Component', () => {
       comp = fixture.componentInstance;
       compAsAny = comp;
       authServiceStub = TestBed.inject(AuthService as any);
+      submissionServiceStub.isSectionReadOnly.and.returnValue(observableOf(false));
       submissionServiceStub.startAutoSave.calls.reset();
       submissionServiceStub.resetSubmissionObject.calls.reset();
       submissionServiceStub.dispatchInit.calls.reset();
@@ -115,7 +131,7 @@ describe('SubmissionFormComponent Component', () => {
       expect(compAsAny.submissionSections).toBeUndefined();
       expect(compAsAny.subs).toEqual([]);
       expect(submissionServiceStub.startAutoSave).not.toHaveBeenCalled();
-      expect(comp.loading).toBeObservable(cold('(a|)', {a: true}));
+      expect(comp.loading).toBeObservable(cold('(a|)', { a: true }));
       done();
     });
 
@@ -125,6 +141,7 @@ describe('SubmissionFormComponent Component', () => {
       comp.submissionDefinition = submissionDefinition;
       comp.selfUrl = selfUrl;
       comp.sections = sectionsData;
+      comp.submissionErrors = null;
       comp.item = new Item();
 
       submissionServiceStub.getSubmissionObject.and.returnValue(observableOf(submissionState));
@@ -140,7 +157,7 @@ describe('SubmissionFormComponent Component', () => {
       });
       scheduler.flush();
 
-      expect(comp.submissionSections).toBeObservable(cold('(a|)', {a: sectionsList}));
+      expect(comp.submissionSections).toBeObservable(cold('(a|)', { a: sectionsList }));
 
       expect(submissionServiceStub.dispatchInit).toHaveBeenCalledWith(
         collectionId,
@@ -201,7 +218,7 @@ describe('SubmissionFormComponent Component', () => {
           submissionDefinition: {
             name: 'traditional'
           }
-        } as  any);
+        } as any);
         fixture.detectChanges();
       });
       scheduler.flush();

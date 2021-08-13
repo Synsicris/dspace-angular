@@ -1,7 +1,16 @@
 import { HostWindowService } from '../shared/host-window.service';
 import { SidebarService } from '../shared/sidebar/sidebar.service';
 import { SearchComponent } from './search.component';
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { pushInOut } from '../shared/animations/push';
 import { SEARCH_CONFIG_SERVICE } from '../+my-dspace-page/my-dspace-page.component';
 import { SearchConfigurationService } from '../core/shared/search/search-configuration.service';
@@ -27,7 +36,7 @@ import { Router } from '@angular/router';
   ]
 })
 
-export class ConfigurationSearchPageComponent extends SearchComponent implements OnInit {
+export class ConfigurationSearchPageComponent extends SearchComponent implements OnInit, OnDestroy {
   /**
    * The configuration to use for the search options
    * If empty, the configuration will be determined by the route parameter called 'configuration'
@@ -39,6 +48,17 @@ export class ConfigurationSearchPageComponent extends SearchComponent implements
    * If empty, the query will be determined by the route parameter called 'filter'
    */
   @Input() fixedFilterQuery: string;
+
+
+  /**
+   * Emit custom event for listable object custom actions.
+   */
+  @Output() customEvent = new EventEmitter<any>();
+
+  /**
+   * Pass custom data to the component for custom utilization
+   */
+  @Input() customData: any;
 
   constructor(protected service: SearchService,
               protected sidebarService: SidebarService,
@@ -57,12 +77,25 @@ export class ConfigurationSearchPageComponent extends SearchComponent implements
    * If something changes, update the list of scopes for the dropdown
    */
   ngOnInit(): void {
-    super.ngOnInit();
     if (hasValue(this.configuration)) {
       this.routeService.setParameter('configuration', this.configuration);
     }
     if (hasValue(this.fixedFilterQuery)) {
       this.routeService.setParameter('fixedFilterQuery', this.fixedFilterQuery);
+    }
+    super.ngOnInit();
+  }
+
+  /**
+   * Reset the updated query/configuration set in ngOnInit()
+   */
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
+    if (hasValue(this.configuration)) {
+      this.routeService.setParameter('configuration', undefined);
+    }
+    if (hasValue(this.fixedFilterQuery)) {
+      this.routeService.setParameter('fixedFilterQuery', undefined);
     }
   }
 }

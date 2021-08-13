@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FieldRendetingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
+import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
 import { BitstreamDataService } from '../../../../../core/data/bitstream-data.service';
 import { map } from 'rxjs/operators';
 import { hasValue } from '../../../../../shared/empty.util';
 import { Observable } from 'rxjs';
 import { Bitstream } from '../../../../../core/shared/bitstream.model';
 import { BitstreamRenderingModel } from '../bitstream-rendering.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -13,15 +14,15 @@ import { BitstreamRenderingModel } from '../bitstream-rendering.model';
   templateUrl: './thumbnail.component.html',
   styleUrls: ['./thumbnail.component.scss']
 })
-@MetadataBoxFieldRendering(FieldRendetingType.THUMBNAIL)
+@MetadataBoxFieldRendering(FieldRenderingType.THUMBNAIL)
 export class ThumbnailComponent extends BitstreamRenderingModel implements OnInit {
 
   bitstream$: Observable<Bitstream>;
 
   default: string;
 
-  constructor(protected bitstreamDataService: BitstreamDataService) {
-    super(bitstreamDataService);
+  constructor(protected bitstreamDataService: BitstreamDataService, protected translateService: TranslateService) {
+    super(bitstreamDataService, translateService);
   }
 
   ngOnInit(): void {
@@ -41,7 +42,7 @@ export class ThumbnailComponent extends BitstreamRenderingModel implements OnIni
   }
 
   setDefaultImage(): void {
-    const eType = this.item.firstMetadataValue('relationship.type');
+    const eType = this.item.firstMetadataValue('dspace.entity.type');
     this.default = 'assets/images/person-placeholder.svg';
     if (hasValue(eType) && eType.toUpperCase() === 'PROJECT') {
       this.default = 'assets/images/project-placeholder.svg';

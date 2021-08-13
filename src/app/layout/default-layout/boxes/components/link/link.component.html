@@ -1,6 +1,6 @@
 <div class="{{containerStyle}}">
-  <span class="{{labelStyle}}">
-    {{label | translate}}
+  <span *ngIf="!nested" class="{{labelStyle}}">
+    {{label}}
   </span>
   <div [class]="'d-flex flex-column ' + valueStyle">
     <span *ngFor="let link of links">

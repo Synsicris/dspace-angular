@@ -1,0 +1,23 @@
+<div class="d-inline-block w-100">
+  <ds-uploader  *ngIf="initializedUploaderOptions | async"
+                [dropMsg]="'easy-online-import.upload'"
+                [dropOverDocumentMsg]="'easy-online-import.upload'"
+                [enableDragOverDocument]="true"
+                [uploadFilesOptions]="uploadFilesOptions"
+                [onBeforeUpload]="onBeforeUpload"
+                (onCompleteItem)="onImportComplete($event)"
+                (onUploadError)="onUploadError($event)"></ds-uploader>
+  <button type="submit" class="btn btn-primary float-right"
+          [disabled]="(uploaderComponent?.uploader?.queue?.length === 0) || (isProcessingImport() | async)"
+          (click)="startImport()">
+      <span *ngIf="(isProcessingImport() | async)">
+        <i class='fas fa-circle-notch fa-spin'></i> {{'easy-online-import.processing' | translate}}
+      </span>
+    <span *ngIf="!(isProcessingImport() | async)">
+      <i class="fas fa-file-import"></i> {{'easy-online-import.submit' | translate}}
+    </span>
+  </button>
+  <button class="btn btn-secondary float-right mr-2" (click)="goBack()">
+    <i class="fas fa-arrow-left"></i> {{'easy-online-import.back' | translate}}
+  </button>
+</div>

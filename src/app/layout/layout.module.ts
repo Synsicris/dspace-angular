@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../shared/shared.module';
 
+import { SharedModule } from '../shared/shared.module';
 import { CrisLayoutLoaderDirective } from './directives/cris-layout-loader.directive';
 import { CrisPageLoaderComponent } from './cris-page-loader.component';
 import { CrisLayoutDefaultComponent } from './default-layout/cris-layout-default.component';
 import { CrisLayoutDefaultSidebarComponent } from './default-layout/sidebar/cris-layout-default-sidebar.component';
 import { CrisLayoutDefaultTabComponent } from './default-layout/tab/cris-layout-default-tab.component';
 import { CrisLayoutMetadataBoxComponent } from './default-layout/boxes/metadata/cris-layout-metadata-box.component';
-import { RowComponent } from './default-layout/boxes/components/row/row.component';
+import { RowComponent } from './default-layout/boxes/metadata/row/row.component';
 import { TextComponent } from './default-layout/boxes/components/text/text.component';
 import { HeadingComponent } from './default-layout/boxes/components/heading/heading.component';
 import { CrisLayoutSearchBoxComponent } from './default-layout/boxes/search/cris-layout-search-box.component';
@@ -28,11 +28,11 @@ import { OrcidSyncSettingsComponent } from './custom-layout/orcid-sync-settings/
 import { CrisLayoutMetricsBoxComponent } from './default-layout/boxes/metrics/cris-layout-metrics-box.component';
 import { MetricRowComponent } from './default-layout/boxes/components/metric-row/metric-row.component';
 import { ContextMenuModule } from '../shared/context-menu/context-menu.module';
-import { MetricLoaderComponent } from './default-layout/boxes/components/metric/metric-loader/metric-loader.component';
-import { MetricAltmetricComponent } from './default-layout/boxes/components/metric/metric-altmetric/metric-altmetric.component';
-import { MetricDimensionsComponent } from './default-layout/boxes/components/metric/metric-dimensions/metric-dimensions.component';
-import { MetricDspacecrisComponent } from './default-layout/boxes/components/metric/metric-dspacecris/metric-dspacecris.component';
-import { MetricGooglescholarComponent } from './default-layout/boxes/components/metric/metric-googlescholar/metric-googlescholar.component';
+import { TableComponent } from './default-layout/boxes/components/table/table.component';
+import { InlineComponent } from './default-layout/boxes/components/inline/inline.component';
+import { OrcidComponent } from './default-layout/boxes/components/orcid/orcid.component';
+import { CrisLayoutSidebarItemComponent } from './default-layout/sidebar/sidebar-item/cris-layout-sidebar-item.component';
+import { CrisLayoutHelpBoxComponent } from './custom-layout/help-box/help-box.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -42,6 +42,7 @@ const ENTRY_COMPONENTS = [
   CrisLayoutMetricsBoxComponent,
   CrisLayoutSearchBoxComponent,
   TextComponent,
+  OrcidComponent,
   HeadingComponent,
   LongtextComponent,
   DateComponent,
@@ -65,6 +66,7 @@ const ENTRY_COMPONENTS = [
     CrisLayoutMetricsBoxComponent,
     RowComponent,
     TextComponent,
+    OrcidComponent,
     HeadingComponent,
     CrisLayoutSearchBoxComponent,
     LongtextComponent,
@@ -79,18 +81,17 @@ const ENTRY_COMPONENTS = [
     OrcidSyncQueueComponent,
     OrcidAuthorizationsComponent,
     MetricRowComponent,
-    MetricLoaderComponent,
-    MetricAltmetricComponent,
-    MetricDimensionsComponent,
-    MetricDspacecrisComponent,
-    MetricGooglescholarComponent
+    TableComponent,
+    InlineComponent,
+    CrisLayoutSidebarItemComponent,
+    CrisLayoutHelpBoxComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     SearchPageModule,
     MyDSpacePageModule,
-    ContextMenuModule
+    ContextMenuModule,
   ],
   exports: [
     CrisPageLoaderComponent,

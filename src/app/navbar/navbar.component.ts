@@ -3,6 +3,7 @@ import { slideMobileNav } from '../shared/animations/slide';
 import { MenuComponent } from '../shared/menu/menu.component';
 import { MenuService } from '../shared/menu/menu.service';
 import { MenuID, MenuItemType } from '../shared/menu/initial-menus-state';
+import { TextMenuItemModel } from '../shared/menu/menu-item/models/text.model';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { HostWindowService } from '../shared/host-window.service';
 import { SectionDataService } from '../core/layout/section-data.service';
@@ -45,7 +46,7 @@ export class NavbarComponent extends MenuComponent {
     const menuList: any[] = [
       /* Communities & Collections tree */
       {
-        id: `communities_and_collections`,
+        id: `browse_global_communities_and_collections`,
         active: false,
         visible: true,
         model: {
@@ -63,7 +64,9 @@ export class NavbarComponent extends MenuComponent {
     this.sectionDataService.findAll()
       .pipe( getFirstSucceededRemoteListPayload())
       .subscribe( (sections: Section[]) => {
-        sections.forEach( (section) => {
+        sections
+          .filter((section) => section.id !== 'site')
+          .forEach( (section) => {
           const menuSection = {
             id: `explore_${section.id}`,
             active: false,
@@ -81,5 +84,4 @@ export class NavbarComponent extends MenuComponent {
       });
 
   }
-
 }

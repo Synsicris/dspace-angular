@@ -10,6 +10,8 @@ import { BitstreamFormat } from '../../../../core/shared/bitstream-format.model'
 import { ResponsiveTableSizes } from '../../../../shared/responsive-table-sizes/responsive-table-sizes';
 import { ResponsiveColumnSizes } from '../../../../shared/responsive-table-sizes/responsive-column-sizes';
 import { createSuccessfulRemoteDataObject$ } from '../../../../shared/remote-data.utils';
+import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../../../../shared/mocks/dso-name.service.mock';
 
 let comp: ItemEditBitstreamComponent;
 let fixture: ComponentFixture<ItemEditBitstreamComponent>;
@@ -68,7 +70,8 @@ describe('ItemEditBitstreamComponent', () => {
       imports: [TranslateModule.forRoot()],
       declarations: [ItemEditBitstreamComponent, VarDirective],
       providers: [
-        { provide: ObjectUpdatesService, useValue: objectUpdatesService }
+        { provide: ObjectUpdatesService, useValue: objectUpdatesService },
+        { provide: DSONameService, useClass: DSONameServiceMock }
       ], schemas: [
         NO_ERRORS_SCHEMA
       ]

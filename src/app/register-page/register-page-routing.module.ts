@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { RegisterEmailComponent } from './register-email/register-email.component';
-import { CreateProfileComponent } from './create-profile/create-profile.component';
 import { ItemPageResolver } from '../+item-page/item-page.resolver';
 import { RegistrationResolver } from '../register-email-form/registration.resolver';
+import { EndUserAgreementCookieGuard } from '../core/end-user-agreement/end-user-agreement-cookie.guard';
+import { ThemedCreateProfileComponent } from './create-profile/themed-create-profile.component';
 
 @NgModule({
   imports: [
@@ -15,8 +16,9 @@ import { RegistrationResolver } from '../register-email-form/registration.resolv
       },
       {
         path: ':token',
-        component: CreateProfileComponent,
-        resolve: {registration: RegistrationResolver}
+        component: ThemedCreateProfileComponent,
+        resolve: {registration: RegistrationResolver},
+        canActivate: []
       }
     ])
   ],

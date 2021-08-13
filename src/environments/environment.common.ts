@@ -22,9 +22,9 @@ export const environment: GlobalConfig = {
   // The REST API server settings.
   // NOTE: these must be "synced" with the 'dspace.server.url' setting in your backend's local.cfg.
   rest: {
-    ssl: true,
-    host: 'dspacecris7.4science.cloud',
-    port: 443,
+    ssl: false,
+    host: 'localhost',
+    port: 8080,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/server',
   },
@@ -65,7 +65,7 @@ export const environment: GlobalConfig = {
   submission: {
     autosave: {
       // NOTE: which metadata trigger an autosave
-      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv', 'dc.identifier.patentno'],
+      metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv', 'dc.identifier.patentno', 'dc.identifier.scopus', 'dc.identifier.isi', 'dcterms.dateSubmitted', 'dc.identifier.applicationnumber'],
       /**
        * NOTE: after how many time (milliseconds) submission is saved automatically
        * eg. timer: 5 * (1000 * 60); // 5 minutes
@@ -158,8 +158,6 @@ export const environment: GlobalConfig = {
     async: true,
     time: false
   },
-  // Google Analytics tracking id
-  gaTrackingId: '',
   // Log directory
   logDirectory: '.',
   // NOTE: will log all redux actions and transfers in console
@@ -179,27 +177,35 @@ export const environment: GlobalConfig = {
   }, {
     code: 'cs',
     label: 'Čeština',
-    active: true,
+    active: false,
   }, {
     code: 'nl',
     label: 'Nederlands',
-    active: true,
-  }, {
-    code: 'pt',
+    active: false,
+  },{
+    code: 'pt-BR',
+    label: 'Português do Brasil',
+    active: false,
+  },{
+    code: 'pt-PT',
     label: 'Português',
-    active: true,
+    active: false,
   }, {
     code: 'fr',
     label: 'Français',
-    active: true,
+    active: false,
   }, {
     code: 'lv',
     label: 'Latviešu',
-    active: true,
+    active: false,
   },{
     code: 'fi',
     label: 'Suomi',
-    active: true,
+    active: false,
+  },{
+    code: 'hu',
+    label: 'magyar',
+    active: false,
   }],
   // Browse-By Pages
   browseBy: {
@@ -274,11 +280,53 @@ export const environment: GlobalConfig = {
       undoTimeout: 10000 // 10 seconds
     }
   },
-  theme: {
-    name: 'default',
-  },
+  themes: [
+    // Add additional themes here. In the case where multiple themes match a route, the first one
+    // in this list will get priority. It is advisable to always have a theme that matches
+    // every route as the last one
+
+    // {
+    //   // A theme with a handle property will match the community, collection or item with the given
+    //   // handle, and all collections and/or items within it
+    //   name: 'custom',
+    //   handle: '10673/1233'
+    // },
+    // {
+    //   // A theme with a regex property will match the route using a regular expression. If it
+    //   // matches the route for a community or collection it will also apply to all collections
+    //   // and/or items within it
+    //   name: 'custom',
+    //   regex: 'collections\/e8043bc2.*'
+    // },
+    // {
+    //   // A theme with a uuid property will match the community, collection or item with the given
+    //   // ID, and all collections and/or items within it
+    //   name: 'custom',
+    //   uuid: '0958c910-2037-42a9-81c7-dca80e3892b4'
+    // },
+    // {
+    //   // A theme with only a name will match every route
+    //   name: 'custom'
+    // },
+    // {
+    //   // This theme will use the default bootstrap styling for DSpace components
+    //   name: BASE_THEME_NAME
+    // },
+
+    {
+      // The default dspace theme
+      name: 'dspace'
+    },
+  ],
   // Whether the UI should rewrite file download URLs to match its domain. Only necessary to enable when running UI and REST API on separate domains
   rewriteDownloadUrls: false,
+  // Whether to enable media viewer for image and/or video Bitstreams (i.e. Bitstreams whose MIME type starts with "image" or "video").
+  // For images, this enables a gallery viewer where you can zoom or page through images.
+  // For videos, this enables embedded video streaming
+  mediaViewer: {
+    image: false,
+    video: false,
+  },
   layout: {
     urn: [
       {
@@ -324,26 +372,36 @@ export const environment: GlobalConfig = {
     impactPathwayStepTypeAuthority: 'impactpathway_step_type',
     entityToCollectionMapAuthority: 'impactpathway_entity_to_collection_map',
     entityToCollectionMapAuthorityMetadata: 'impactpathway.entity.map',
-    projObjectiveEntity: 'proj_objective'
+    projObjectiveEntity: 'proj_objective',
+    impactPathwaysSearchConfigName: 'allImpactPathways'
   },
   workingPlan: {
     workingPlanFormName: 'working_plan_workpackage_form',
-    workingPlanParentRelationMetadata: 'workingplan.relation.parent',
     workingPlanStepsFormName: 'working_plan_workpackage_step_form',
-    workingPlanStepStatusMetadata: 'workingplan.step.status',
-    workingPlanStepResponsibleMetadata: 'workingplan.responsible',
+    workingPlanStepStatusMetadata: 'synsicris.type.status',
+    workingPlanStepResponsibleMetadata: 'synsicris.relation.partner',
     workingPlanStepResponsibleAuthority: 'WorkingplanOrgUnitAuthority',
     workingPlanStepRelationMetadata: 'workingplan.relation.step',
     workingPlanStepDateStartMetadata: 'dc.date.start',
     workingPlanStepDateEndMetadata: 'dc.date.end',
     workpackageEntityName: 'workpackage',
-    workpackagesSearchConfigName: 'allWorkpackages',
+    milestoneEntityName: 'milestone',
+    allLinkedWorkingPlanObjSearchConfigName: 'allLinkedWorkingPlanObj',
+    allUnlinkedWorkingPlanObjSearchConfigName: 'allUnlinkedWorkingPlanObj',
     workpackageStepsSearchConfigName: 'workpackageSteps',
-    workpackageStatusTypeAuthority: 'working_plan_workpackage_status_type',
+    workpackageStatusTypeAuthority: 'stat_col23',
+    workpackageTypeAuthority: 'working_plan_workpackage_type',
     workpackageStepTypeAuthority: 'working_plan_workpackage_step_type',
-    workingPlanPlaceMetadata: 'workingplan.place'
+    workingPlanPlaceMetadata: 'workingplan.place',
+    workingPlanLinkMetadata: 'workingplan.link.status'
   },
   projects: {
     projectsGrantsOptionsVocabularyName: 'item_shared'
+  },
+  exploitationPlan: {
+    exploitationPlanRelationMetadata: 'dc.relation.exploitationplan',
+    exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
+    exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
+    exploitationPlanPartnerMetadata: ''
   }
 };

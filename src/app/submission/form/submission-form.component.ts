@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 
-import { Observable, of as observableOf, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
+import { combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
+import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../../core/auth/auth.service';
 import { SubmissionDefinitionsModel } from '../../core/config/models/config-submission-definitions.model';
 import { Collection } from '../../core/shared/collection.model';
@@ -11,10 +11,13 @@ import { WorkspaceitemSectionsObject } from '../../core/submission/models/worksp
 
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import { UploaderOptions } from '../../shared/uploader/uploader-options.model';
-import { SubmissionObjectEntry } from '../objects/submission-objects.reducer';
+import { SubmissionError, SubmissionObjectEntry } from '../objects/submission-objects.reducer';
 import { SectionDataObject } from '../sections/models/section-data.model';
 import { SubmissionService } from '../submission.service';
 import { Item } from '../../core/shared/item.model';
+import { SectionsType } from '../sections/sections-type';
+import { SectionsService } from '../sections/sections.service';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * This component represents the submission form.
@@ -38,6 +41,12 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * @type {WorkspaceitemSectionsObject}
    */
   @Input() sections: WorkspaceitemSectionsObject;
+
+  /**
+   * The submission errors present in the submission object
+   * @type {SubmissionError}
+   */
+  @Input() submissionErrors: SubmissionError;
 
   /**
    * The submission self url
@@ -70,10 +79,21 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
   public definitionId: string;
 
   /**
+   * A boolean representing if a submission form has a info message to display
+   * @type {Observable<boolean>}
+   */
+  public hasInfoMessage: Observable<boolean>;
+
+  /**
    * A boolean representing if a submission form is pending
    * @type {Observable<boolean>}
    */
   public loading: Observable<boolean> = observableOf(true);
+
+  /**
+   * Emits true when the submission config has bitstream uploading enabled in submission
+   */
+  public uploadEnabled$: Observable<boolean>;
 
   /**
    * Observable of the list of submission's sections
@@ -106,12 +126,16 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * @param {ChangeDetectorRef} changeDetectorRef
    * @param {HALEndpointService} halService
    * @param {SubmissionService} submissionService
+   * @param {SectionsService} sectionsService
+   * @param {TranslateService} translate
    */
   constructor(
     private authService: AuthService,
     private changeDetectorRef: ChangeDetectorRef,
     private halService: HALEndpointService,
-    private submissionService: SubmissionService) {
+    private submissionService: SubmissionService,
+    private sectionsService: SectionsService,
+    private translate: TranslateService) {
     this.isActive = true;
   }
 
@@ -119,7 +143,14 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * Initialize all instance variables and retrieve form configuration
    */
   ngOnChanges(changes: SimpleChanges) {
-    if (this.collectionId && this.submissionId) {
+    if ((changes.submissionDefinition && this.submissionDefinition)) {
+      const messageInfoKey = 'submission.form.' + this.submissionDefinition.name + '.info';
+      this.hasInfoMessage = this.translate.get(messageInfoKey).pipe(
+        map((message: string) => isNotEmpty(message) && messageInfoKey !== message)
+      );
+    }
+
+    if ((changes.collectionId && this.collectionId) && (changes.submissionId && this.submissionId)) {
       this.isActive = true;
 
       // retrieve submission's section list
@@ -135,6 +166,15 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
             return observableOf([]);
           }
         }));
+      const isAvailable$ = this.sectionsService.isSectionTypeAvailable(this.submissionId, SectionsType.Upload);
+      const isReadOnly$ = this.sectionsService.isSectionReadOnly(
+        this.submissionId,
+        SectionsType.Upload,
+        this.submissionService.getSubmissionScope()
+      );
+      this.uploadEnabled$ = combineLatest([isAvailable$, isReadOnly$]).pipe(
+        map(([isAvailable, isReadOnly]: [boolean, boolean]) => isAvailable && !isReadOnly)
+      );
 
       // check if is submission loading
       this.loading = this.submissionService.getSubmissionObject(this.submissionId).pipe(
@@ -152,6 +192,7 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
             this.uploadFilesOptions.authToken = this.authService.buildAuthHeader();
             this.uploadFilesOptions.url = endpointURL.concat(`/${this.submissionId}`);
             this.definitionId = this.submissionDefinition.name;
+            // const { errors } = item;
             this.submissionService.dispatchInit(
               this.collectionId,
               this.submissionId,
@@ -159,7 +200,7 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
               this.submissionDefinition,
               this.sections,
               this.item,
-              null);
+              this.submissionErrors);
             this.changeDetectorRef.detectChanges();
           })
       );
@@ -221,5 +262,8 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
     return this.submissionService.getSubmissionSections(this.submissionId).pipe(
       filter((sections: SectionDataObject[]) => isNotEmpty(sections)),
       map((sections: SectionDataObject[]) => sections));
+      
   }
+
+
 }

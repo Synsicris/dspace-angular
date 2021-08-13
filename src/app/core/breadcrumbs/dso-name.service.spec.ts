@@ -4,11 +4,13 @@ import { GenericConstructor } from '../shared/generic-constructor';
 import { Item } from '../shared/item.model';
 import { MetadataValueFilter } from '../shared/metadata.models';
 import { DSONameService } from './dso-name.service';
+import { mockLocaleService } from '../../shared/testing/locale-service.stub';
 
 describe(`DSONameService`, () => {
   let service: DSONameService;
   let mockPersonName: string;
   let mockPerson: DSpaceObject;
+  let mockPersonWithTitle: DSpaceObject;
   let mockOrgUnitName: string;
   let mockOrgUnit: DSpaceObject;
   let mockDSOName: string;
@@ -19,6 +21,20 @@ describe(`DSONameService`, () => {
     mockPerson = Object.assign(new DSpaceObject(), {
       firstMetadataValue(keyOrKeys: string | string[], valueFilter?: MetadataValueFilter): string {
         return mockPersonName;
+      },
+      getRenderTypes(): (string | GenericConstructor<ListableObject>)[] {
+        return ['Person', Item, DSpaceObject];
+      }
+    });
+
+    mockPersonWithTitle = Object.assign(new DSpaceObject(), {
+      metadata: {
+        'dc.title': [
+          {
+            language: null,
+            value: 'User Test'
+          }
+        ]
       },
       getRenderTypes(): (string | GenericConstructor<ListableObject>)[] {
         return ['Person', Item, DSpaceObject];
@@ -45,7 +61,7 @@ describe(`DSONameService`, () => {
       }
     });
 
-    service = new DSONameService();
+    service = new DSONameService({ instant: (a) => a } as any, mockLocaleService);
   });
 
   describe(`getName`, () => {
@@ -90,6 +106,20 @@ describe(`DSONameService`, () => {
     });
   });
 
+  describe(`factories.Person without person metadata`, () => {
+    beforeEach(() => {
+      spyOn(mockPersonWithTitle, 'firstMetadataValue').and.returnValues(null, null, 'User Test');
+    });
+
+    it(`should return 'person.familyName, person.givenName'`, () => {
+      const result = (service as any).factories.Person(mockPersonWithTitle);
+      expect(result).toBe('User Test');
+      expect(mockPersonWithTitle.firstMetadataValue).toHaveBeenCalledWith('person.familyName');
+      expect(mockPersonWithTitle.firstMetadataValue).toHaveBeenCalledWith('person.givenName');
+      expect(mockPersonWithTitle.firstMetadataValue).toHaveBeenCalledWith('dc.title');
+    });
+  });
+
   describe(`factories.OrgUnit`, () => {
     beforeEach(() => {
       spyOn(mockOrgUnit, 'firstMetadataValue').and.callThrough();
@@ -109,8 +139,9 @@ describe(`DSONameService`, () => {
 
     it(`should return 'dc.title'`, () => {
       const result = (service as any).factories.Default(mockDSO);
+      const filter = { language: 'en' };
       expect(result).toBe(mockDSOName);
-      expect(mockDSO.firstMetadataValue).toHaveBeenCalledWith('dc.title');
+      expect(mockDSO.firstMetadataValue).toHaveBeenCalledWith('dc.title', filter);
     });
   });
 });

@@ -1,18 +1,16 @@
 <ipw-collapsable-panel class="d-block mb-3"
                        [sidebarPanelTitle]="impactPathwayTask.title"
-                       [startOpen]="isOpen()"
-                       [titleEditable]="true"
-                       (titleChange)="updateTitle($event)">
+                       [sidebarPanelDescription]="impactPathwayTask.description"
+                       [startOpen]="isOpen()">
   <ng-container ngProjectAs="panelContent">
+    <ds-view-simple-item-form [formConfig]="formConfig$"
+                              [itemId]="impactPathwayTask.id"
+                              (itemUpdate)="updateImpactPathwayTask($event)"></ds-view-simple-item-form>
     <div class="d-flex align-items-stretch p-0 m-0">
       <ipw-objective-container class="horizontal-step h-100 horizontal-content"
                                [projectId]="projectId"
                                [impactPathwayStep]="impactPathwayStep"
                                [impactPathwayTask]="impactPathwayTask"></ipw-objective-container>
     </div>
-    <ipw-editable-textarea *ngIf="impactPathwayTask"
-                           [placeholder]="impactPathwayTask.description"
-                           [initContent]="impactPathwayTask.description"
-                           (contentChange)="updateDescription($event)"></ipw-editable-textarea>
   </ng-container>
 </ipw-collapsable-panel>

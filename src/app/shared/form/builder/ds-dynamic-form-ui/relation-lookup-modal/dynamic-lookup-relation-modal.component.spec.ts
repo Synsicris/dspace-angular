@@ -20,6 +20,9 @@ import { createSuccessfulRemoteDataObject$ } from '../../../../remote-data.utils
 import { createPaginatedList } from '../../../../testing/utils.test';
 import { ExternalSourceService } from '../../../../../core/data/external-source.service';
 import { LookupRelationService } from '../../../../../core/data/lookup-relation.service';
+import { RemoteDataBuildService } from '../../../../../core/cache/builders/remote-data-build.service';
+import { WorkspaceItem } from '../../../../../core/submission/models/workspaceitem.model';
+import { Collection } from '../../../../../core/shared/collection.model';
 
 describe('DsDynamicLookupRelationModalComponent', () => {
   let component: DsDynamicLookupRelationModalComponent;
@@ -27,6 +30,7 @@ describe('DsDynamicLookupRelationModalComponent', () => {
   let item;
   let item1;
   let item2;
+  let testWSI;
   let searchResult1;
   let searchResult2;
   let listID;
@@ -38,6 +42,7 @@ describe('DsDynamicLookupRelationModalComponent', () => {
   let pSearchOptions;
   let externalSourceService;
   let lookupRelationService;
+  let rdbService;
   let submissionId;
 
   const externalSources = [
@@ -54,11 +59,16 @@ describe('DsDynamicLookupRelationModalComponent', () => {
   ];
   const totalLocal = 10;
   const totalExternal = 8;
+  const collection: Collection = new Collection();
+
 
   function init() {
     item = Object.assign(new Item(), { uuid: '7680ca97-e2bd-4398-bfa7-139a8673dc42', metadata: {} });
     item1 = Object.assign(new Item(), { uuid: 'e1c51c69-896d-42dc-8221-1d5f2ad5516e' });
     item2 = Object.assign(new Item(), { uuid: 'c8279647-1acc-41ae-b036-951d5f65649b' });
+    testWSI = new WorkspaceItem();
+    testWSI.item = createSuccessfulRemoteDataObject$(item);
+    testWSI.collection = createSuccessfulRemoteDataObject$(collection);
     searchResult1 = Object.assign(new ItemSearchResult(), { indexableObject: item1 });
     searchResult2 = Object.assign(new ItemSearchResult(), { indexableObject: item2 });
     listID = '6b0c8221-fcb4-47a8-b483-ca32363fffb3';
@@ -68,17 +78,22 @@ describe('DsDynamicLookupRelationModalComponent', () => {
       filter: 'filter',
       relationshipType: 'isAuthorOfPublication',
       nameVariants: true,
-      searchConfiguration: 'personConfig'
+      searchConfiguration: 'personConfig',
+      externalSources: ['orcidV2', 'sherpaPublisher']
     });
     nameVariant = 'Doe, J.';
     metadataField = 'dc.contributor.author';
     pSearchOptions = new PaginatedSearchOptions({});
     externalSourceService = jasmine.createSpyObj('externalSourceService', {
-      findAll: createSuccessfulRemoteDataObject$(createPaginatedList(externalSources))
+      findAll: createSuccessfulRemoteDataObject$(createPaginatedList(externalSources)),
+      findById: createSuccessfulRemoteDataObject$(externalSources[0])
     });
     lookupRelationService = jasmine.createSpyObj('lookupRelationService', {
       getTotalLocalResults: observableOf(totalLocal),
       getTotalExternalResults: observableOf(totalExternal)
+    });
+    rdbService = jasmine.createSpyObj('rdbService', {
+      aggregate: createSuccessfulRemoteDataObject$(externalSources)
     });
     submissionId = '1234';
   }
@@ -103,6 +118,7 @@ describe('DsDynamicLookupRelationModalComponent', () => {
           provide: RelationshipService, useValue: { getNameVariant: () => observableOf(nameVariant) }
         },
         { provide: RelationshipTypeService, useValue: {} },
+        { provide: RemoteDataBuildService, useValue: rdbService },
         {
           provide: Store, useValue: {
             // tslint:disable-next-line:no-empty

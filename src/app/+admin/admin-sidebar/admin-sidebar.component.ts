@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { combineLatest as observableCombineLatest, Observable } from 'rxjs';
+import { combineLatest, combineLatest as observableCombineLatest, Observable } from 'rxjs';
 import { first, map, take } from 'rxjs/operators';
 import { AuthService } from '../../core/auth/auth.service';
 import { ScriptDataService } from '../../core/data/processes/script-data.service';
@@ -21,6 +21,8 @@ import { MenuService } from '../../shared/menu/menu.service';
 import { CSSVariableService } from '../../shared/sass-helper/sass-helper.service';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
+import { NOTIFICATIONS_RECITER_SUGGESTION_PATH } from '../admin-notifications/admin-notifications-routing-paths';
+import { MenuSection } from '../../shared/menu/menu.reducer';
 import { CreateProjectComponent } from '../../projects/create-project/create-project.component';
 
 /**
@@ -76,18 +78,19 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
    * Set and calculate all initial values of the instance variables
    */
   ngOnInit(): void {
+    // admin sidebar menu hidden by default when no visible top sections are found
+    this.menuService.hideMenu(this.menuID);
+    this.subs.push(this.menuService.getMenuTopSections(this.menuID).subscribe((topSections: MenuSection[]) => {
+        if (topSections.filter((topSection: MenuSection) => topSection.visible).length > 0) {
+          this.menuService.showMenu(this.menuID);
+        } else {
+          this.menuService.hideMenu(this.menuID);
+        }
+      }
+    ));
     this.createMenu();
-    this.createSiteAdministratorMenuSections();
-    this.createExportMenuSections();
-    this.createImportMenuSections();
     super.ngOnInit();
     this.sidebarWidth = this.variableService.getVariable('sidebarItemsWidth');
-    this.authService.isAuthenticated()
-      .subscribe((loggedIn: boolean) => {
-        if (loggedIn) {
-          this.menuService.showMenu(this.menuID);
-        }
-      });
     this.menuCollapsed.pipe(first())
       .subscribe((collapsed: boolean) => {
         this.sidebarOpen = !collapsed;
@@ -103,80 +106,101 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
    * Initialize all menu sections and items for this menu
    */
   createMenu() {
-    const menuList = [
-      /* News */
-      {
-        id: 'new',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.TEXT,
-          text: 'menu.section.new'
-        } as TextMenuItemModel,
-        icon: 'plus-circle',
-        index: 0
-      },
-      {
-        id: 'new_community',
-        parentID: 'new',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.ONCLICK,
-          text: 'menu.section.new_community',
-          function: () => {
-            this.modalService.open(CreateCommunityParentSelectorComponent);
-          }
-        } as OnClickMenuItemModel,
-      },
-      {
-        id: 'new_collection',
-        parentID: 'new',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.ONCLICK,
-          text: 'menu.section.new_collection',
-          function: () => {
-            this.modalService.open(CreateCollectionParentSelectorComponent);
-          }
-        } as OnClickMenuItemModel,
-      },
-      {
-        id: 'new_item',
-        parentID: 'new',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.ONCLICK,
-          text: 'menu.section.new_item',
-          function: () => {
-            this.modalService.open(CreateItemParentSelectorComponent);
-          }
-        } as OnClickMenuItemModel,
-      },
-      {
-        id: 'new_process',
-        parentID: 'new',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.LINK,
-          text: 'menu.section.new_process',
-          link: '/processes/new'
-        } as LinkMenuItemModel,
-      },
-      {
-        id: 'new_item_version',
-        parentID: 'new',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.LINK,
-          text: 'menu.section.new_item_version',
-          link: ''
-        } as LinkMenuItemModel,
-      },
+    combineLatest([
+      this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
+      this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
+      this.authorizationService.isAuthorized(FeatureID.AdministratorOf)
+    ]).subscribe(([isCollectionAdmin, isCommunityAdmin, isSiteAdmin]) => {
+      this.createMainMenuSections(isCollectionAdmin, isCommunityAdmin, isSiteAdmin);
+      this.createSiteAdministratorMenuSections();
+      this.createExportMenuSections();
+      this.createImportMenuSections();
+      this.createAccessControlMenuSections();
+
+    });
+  }
+
+  /**
+   * Initialize the main menu sections.
+   * edit_community / edit_collection is only included if the current user is a Community or Collection admin
+   */
+  createMainMenuSections(isCollectionAdmin: boolean, isCommunityAdmin: boolean, isSiteAdmin: boolean) {
+
+      const menuList = [
+        /* News */
+        {
+          id: 'new',
+          active: false,
+          visible: isSiteAdmin,
+          model: {
+            type: MenuItemType.TEXT,
+            text: 'menu.section.new'
+          } as TextMenuItemModel,
+          icon: 'plus',
+          index: 0
+        },
+        {
+          id: 'new_community',
+          parentID: 'new',
+          active: false,
+          visible: isSiteAdmin,
+          model: {
+            type: MenuItemType.ONCLICK,
+            text: 'menu.section.new_community',
+            function: () => {
+              this.modalService.open(CreateCommunityParentSelectorComponent);
+            }
+          } as OnClickMenuItemModel,
+        },
+        {
+          id: 'new_collection',
+          parentID: 'new',
+          active: false,
+          visible: isSiteAdmin,
+          model: {
+            type: MenuItemType.ONCLICK,
+            text: 'menu.section.new_collection',
+            function: () => {
+              this.modalService.open(CreateCollectionParentSelectorComponent);
+            }
+          } as OnClickMenuItemModel,
+        },
+        {
+          id: 'new_item',
+          parentID: 'new',
+          active: false,
+          visible: true,
+          model: {
+            type: MenuItemType.ONCLICK,
+            text: 'menu.section.new_item',
+            function: () => {
+              this.modalService.open(CreateItemParentSelectorComponent);
+            }
+          } as OnClickMenuItemModel,
+        },
+        {
+          id: 'new_process',
+          parentID: 'new',
+          active: false,
+          visible: isSiteAdmin,
+          model: {
+            type: MenuItemType.LINK,
+            text: 'menu.section.new_process',
+            link: '/processes/new'
+          } as LinkMenuItemModel,
+        },
+        // TODO: enable this menu item once the feature has been implemented
+        // {
+        //   id: 'new_item_version',
+        //   parentID: 'new',
+        //   active: false,
+        //   visible: false,
+        //   model: {
+        //     type: MenuItemType.LINK,
+        //     text: 'menu.section.new_item_version',
+        //     link: ''
+        //   } as LinkMenuItemModel,
+        // },
       {
         id: 'new_project',
         parentID: 'new',
@@ -191,57 +215,57 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
         } as OnClickMenuItemModel,
       },
 
-      /* Edit */
-      {
-        id: 'edit',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.TEXT,
-          text: 'menu.section.edit'
-        } as TextMenuItemModel,
-        icon: 'pencil-alt',
-        index: 1
-      },
-      {
-        id: 'edit_community',
-        parentID: 'edit',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.ONCLICK,
-          text: 'menu.section.edit_community',
-          function: () => {
-            this.modalService.open(EditCommunitySelectorComponent);
-          }
-        } as OnClickMenuItemModel,
-      },
-      {
-        id: 'edit_collection',
-        parentID: 'edit',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.ONCLICK,
-          text: 'menu.section.edit_collection',
-          function: () => {
-            this.modalService.open(EditCollectionSelectorComponent);
-          }
-        } as OnClickMenuItemModel,
-      },
-      {
-        id: 'edit_item',
-        parentID: 'edit',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.ONCLICK,
-          text: 'menu.section.edit_item',
-          function: () => {
-            this.modalService.open(EditItemSelectorComponent);
-          }
-        } as OnClickMenuItemModel,
-      },
+        /* Edit */
+        {
+          id: 'edit',
+          active: false,
+          visible: isSiteAdmin,
+          model: {
+            type: MenuItemType.TEXT,
+            text: 'menu.section.edit'
+          } as TextMenuItemModel,
+          icon: 'pencil-alt',
+          index: 1
+        },
+        {
+          id: 'edit_community',
+          parentID: 'edit',
+          active: false,
+          visible: isSiteAdmin,
+          model: {
+            type: MenuItemType.ONCLICK,
+            text: 'menu.section.edit_community',
+            function: () => {
+              this.modalService.open(EditCommunitySelectorComponent);
+            }
+          } as OnClickMenuItemModel,
+        },
+        {
+          id: 'edit_collection',
+          parentID: 'edit',
+          active: false,
+          visible: isSiteAdmin,
+          model: {
+            type: MenuItemType.ONCLICK,
+            text: 'menu.section.edit_collection',
+            function: () => {
+              this.modalService.open(EditCollectionSelectorComponent);
+            }
+          } as OnClickMenuItemModel,
+        },
+        {
+          id: 'edit_item',
+          parentID: 'edit',
+          active: false,
+          visible: true,
+          model: {
+            type: MenuItemType.ONCLICK,
+            text: 'menu.section.edit_item',
+            function: () => {
+              this.modalService.open(EditItemSelectorComponent);
+            }
+          } as OnClickMenuItemModel,
+        },
       {
         id: 'edit_workingplan',
         parentID: 'edit',
@@ -254,65 +278,67 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
         } as LinkMenuItemModel,
       },
 
-      /* Curation tasks */
-      {
-        id: 'curation_tasks',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.LINK,
-          text: 'menu.section.curation_task',
-          link: ''
-        } as LinkMenuItemModel,
-        icon: 'filter',
-        index: 7
-      },
+        /* Curation tasks */
+        {
+          id: 'curation_tasks',
+          active: false,
+          visible: false,
+          model: {
+            type: MenuItemType.LINK,
+            text: 'menu.section.curation_task',
+            link: ''
+          } as LinkMenuItemModel,
+          icon: 'filter',
+          index: 8
+        },
 
-      /* Statistics */
-      {
-        id: 'statistics_task',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.LINK,
-          text: 'menu.section.statistics_task',
-          link: ''
-        } as LinkMenuItemModel,
-        icon: 'chart-bar',
-        index: 8
-      },
+        /* Statistics */
+        // TODO: enable this menu item once the feature has been implemented
+        // {
+        //   id: 'statistics_task',
+        //   active: false,
+        //   visible: true,
+        //   model: {
+        //     type: MenuItemType.LINK,
+        //     text: 'menu.section.statistics_task',
+        //     link: ''
+        //   } as LinkMenuItemModel,
+        //   icon: 'chart-bar',
+        //   index: 8
+        // },
 
-      /* Control Panel */
-      {
-        id: 'control_panel',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.LINK,
-          text: 'menu.section.control_panel',
-          link: ''
-        } as LinkMenuItemModel,
-        icon: 'cogs',
-        index: 9
-      },
+        /* Control Panel */
+        // TODO: enable this menu item once the feature has been implemented
+        // {
+        //   id: 'control_panel',
+        //   active: false,
+        //   visible: isSiteAdmin,
+        //   model: {
+        //     type: MenuItemType.LINK,
+        //     text: 'menu.section.control_panel',
+        //     link: ''
+        //   } as LinkMenuItemModel,
+        //   icon: 'cogs',
+        //   index: 9
+        // },
 
-      /* Processes */
-      {
-        id: 'processes',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.LINK,
-          text: 'menu.section.processes',
-          link: '/processes'
-        } as LinkMenuItemModel,
-        icon: 'terminal',
-        index: 10
-      },
-    ];
-    menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
-      shouldPersistOnRouteChange: true
-    })));
+        /* Processes */
+        {
+          id: 'processes',
+          active: false,
+          visible: isSiteAdmin,
+          model: {
+            type: MenuItemType.LINK,
+            text: 'menu.section.processes',
+            link: '/processes'
+          } as LinkMenuItemModel,
+          icon: 'terminal',
+          index: 10
+        },
+      ];
+      menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
+        shouldPersistOnRouteChange: true
+      })));
   }
 
   /**
@@ -325,51 +351,54 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
       {
         id: 'export',
         active: false,
-        visible: true,
+        visible: false,
         model: {
           type: MenuItemType.TEXT,
           text: 'menu.section.export'
         } as TextMenuItemModel,
-        icon: 'sign-out-alt',
+        icon: 'file-export',
         index: 3,
         shouldPersistOnRouteChange: true
       },
-      {
-        id: 'export_community',
-        parentID: 'export',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.LINK,
-          text: 'menu.section.export_community',
-          link: ''
-        } as LinkMenuItemModel,
-        shouldPersistOnRouteChange: true
-      },
-      {
-        id: 'export_collection',
-        parentID: 'export',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.LINK,
-          text: 'menu.section.export_collection',
-          link: ''
-        } as LinkMenuItemModel,
-        shouldPersistOnRouteChange: true
-      },
-      {
-        id: 'export_item',
-        parentID: 'export',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.LINK,
-          text: 'menu.section.export_item',
-          link: ''
-        } as LinkMenuItemModel,
-        shouldPersistOnRouteChange: true
-      },
+      // TODO: enable this menu item once the feature has been implemented
+      // {
+      //   id: 'export_community',
+      //   parentID: 'export',
+      //   active: false,
+      //   visible: true,
+      //   model: {
+      //     type: MenuItemType.LINK,
+      //     text: 'menu.section.export_community',
+      //     link: ''
+      //   } as LinkMenuItemModel,
+      //   shouldPersistOnRouteChange: true
+      // },
+      // TODO: enable this menu item once the feature has been implemented
+      // {
+      //   id: 'export_collection',
+      //   parentID: 'export',
+      //   active: false,
+      //   visible: true,
+      //   model: {
+      //     type: MenuItemType.LINK,
+      //     text: 'menu.section.export_collection',
+      //     link: ''
+      //   } as LinkMenuItemModel,
+      //   shouldPersistOnRouteChange: true
+      // },
+      // TODO: enable this menu item once the feature has been implemented
+      // {
+      //   id: 'export_item',
+      //   parentID: 'export',
+      //   active: false,
+      //   visible: true,
+      //   model: {
+      //     type: MenuItemType.LINK,
+      //     text: 'menu.section.export_item',
+      //     link: ''
+      //   } as LinkMenuItemModel,
+      //   shouldPersistOnRouteChange: true
+      // },
     ];
     menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, menuSection));
 
@@ -380,12 +409,12 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
       // TODO uncomment when #635 (https://github.com/DSpace/dspace-angular/issues/635) is fixed; otherwise even in production mode, the metadata export button is only available after a refresh (and not in dev mode)
       // filter(([authorized, metadataExportScriptExists]: boolean[]) => authorized && metadataExportScriptExists),
       take(1)
-    ).subscribe(() => {
+    ).subscribe(([isAuthorized]) => {
       this.menuService.addSection(this.menuID, {
         id: 'export_metadata',
         parentID: 'export',
         active: true,
-        visible: true,
+        visible: isAuthorized,
         model: {
           type: MenuItemType.ONCLICK,
           text: 'menu.section.export_metadata',
@@ -403,34 +432,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
    * the import scripts exist and the current user is allowed to execute them
    */
   createImportMenuSections() {
-    const menuList = [
-      /* Import */
-      {
-        id: 'import',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.TEXT,
-          text: 'menu.section.import'
-        } as TextMenuItemModel,
-        icon: 'sign-in-alt',
-        index: 2
-      },
-      {
-        id: 'import_batch',
-        parentID: 'import',
-        active: false,
-        visible: true,
-        model: {
-          type: MenuItemType.LINK,
-          text: 'menu.section.import_batch',
-          link: ''
-        } as LinkMenuItemModel,
-      }
-    ];
-    menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
-      shouldPersistOnRouteChange: true
-    })));
+
 
     observableCombineLatest(
       this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
@@ -439,7 +441,38 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
       // TODO uncomment when #635 (https://github.com/DSpace/dspace-angular/issues/635) is fixed
       // filter(([authorized, metadataImportScriptExists]: boolean[]) => authorized && metadataImportScriptExists),
       take(1)
-    ).subscribe(() => {
+    ).subscribe(([isAuthorized]) => {
+
+      const menuList = [
+        /* Import */
+        {
+          id: 'import',
+          active: false,
+          visible: isAuthorized,
+          model: {
+            type: MenuItemType.TEXT,
+            text: 'menu.section.import'
+          } as TextMenuItemModel,
+          icon: 'file-import',
+          index: 2
+        },
+        // TODO: enable this menu item once the feature has been implemented
+        // {
+        //   id: 'import_batch',
+        //   parentID: 'import',
+        //   active: false,
+        //   visible: true,
+        //   model: {
+        //     type: MenuItemType.LINK,
+        //     text: 'menu.section.import_batch',
+        //     link: ''
+        //   } as LinkMenuItemModel,
+        // }
+      ];
+      menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
+        shouldPersistOnRouteChange: true
+      })));
+
       this.menuService.addSection(this.menuID, {
         id: 'import_metadata',
         parentID: 'import',
@@ -461,49 +494,38 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
   createSiteAdministratorMenuSections() {
     this.authorizationService.isAuthorized(FeatureID.AdministratorOf).subscribe((authorized) => {
       const menuList = [
-        /* Access Control */
+        /* Notifications */
         {
-          id: 'access_control',
+          id: 'notifications',
           active: false,
           visible: authorized,
           model: {
             type: MenuItemType.TEXT,
-            text: 'menu.section.access_control'
+            text: 'menu.section.notifications'
           } as TextMenuItemModel,
-          icon: 'key',
+          icon: 'bell',
           index: 4
         },
         {
-          id: 'access_control_people',
-          parentID: 'access_control',
+          id: 'notifications_openair_broker',
+          parentID: 'notifications',
           active: false,
           visible: authorized,
           model: {
             type: MenuItemType.LINK,
-            text: 'menu.section.access_control_people',
-            link: '/admin/access-control/epeople'
+            text: 'menu.section.notifications_openaire_broker',
+            link: '/admin/notifications/openaire-broker'
           } as LinkMenuItemModel,
         },
         {
-          id: 'access_control_groups',
-          parentID: 'access_control',
+          id: 'notifications_reciter',
+          parentID: 'notifications',
           active: false,
           visible: authorized,
           model: {
             type: MenuItemType.LINK,
-            text: 'menu.section.access_control_groups',
-            link: '/admin/access-control/groups'
-          } as LinkMenuItemModel,
-        },
-        {
-          id: 'access_control_authorizations',
-          parentID: 'access_control',
-          active: false,
-          visible: authorized,
-          model: {
-            type: MenuItemType.LINK,
-            text: 'menu.section.access_control_authorizations',
-            link: ''
+            text: 'menu.section.notifications_reciter',
+            link: '/admin/notifications/' + NOTIFICATIONS_RECITER_SUGGESTION_PATH
           } as LinkMenuItemModel,
         },
         /*  Admin Search */
@@ -517,7 +539,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
             link: '/admin/search'
           } as LinkMenuItemModel,
           icon: 'search',
-          index: 5
+          index: 6
         },
         /*  Registries */
         {
@@ -529,7 +551,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
             text: 'menu.section.registries'
           } as TextMenuItemModel,
           icon: 'list',
-          index: 6
+          index: 7
         },
         {
           id: 'registries_metadata',
@@ -565,7 +587,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
             link: 'admin/curation-tasks'
           } as LinkMenuItemModel,
           icon: 'filter',
-          index: 7
+          index: 8
         },
 
         /* Workflow */
@@ -579,7 +601,7 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
             link: '/admin/workflow'
           } as LinkMenuItemModel,
           icon: 'user-check',
-          index: 11
+          index: 12
         },
 
         /* User agreement edit*/
@@ -593,12 +615,72 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
             link: '/admin/edit-user-agreement'
           } as LinkMenuItemModel,
           icon: 'list-alt',
-            index: 12
+            index: 13
         }
       ];
 
       menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
         shouldPersistOnRouteChange: true
+      })));
+    });
+  }
+
+  /**
+   * Create menu sections dependent on whether or not the current user can manage access control groups
+   */
+  createAccessControlMenuSections() {
+    this.authorizationService.isAuthorized(FeatureID.AdministratorOf).subscribe((authorized) => {
+      const menuList = [
+        /* Access Control */
+        {
+          id: 'access_control_people',
+          parentID: 'access_control',
+          active: false,
+          visible: authorized,
+          model: {
+            type: MenuItemType.LINK,
+            text: 'menu.section.access_control_people',
+            link: '/access-control/epeople'
+          } as LinkMenuItemModel,
+        },
+        {
+          id: 'access_control_groups',
+          parentID: 'access_control',
+          active: false,
+          visible: authorized,
+          model: {
+            type: MenuItemType.LINK,
+            text: 'menu.section.access_control_groups',
+            link: '/access-control/groups'
+          } as LinkMenuItemModel,
+        },
+        // TODO: enable this menu item once the feature has been implemented
+        // {
+        //   id: 'access_control_authorizations',
+        //   parentID: 'access_control',
+        //   active: false,
+        //   visible: authorized,
+        //   model: {
+        //     type: MenuItemType.LINK,
+        //     text: 'menu.section.access_control_authorizations',
+        //     link: ''
+        //   } as LinkMenuItemModel,
+        // },
+        {
+          id: 'access_control',
+          active: false,
+          visible: authorized,
+          model: {
+            type: MenuItemType.TEXT,
+            text: 'menu.section.access_control'
+          } as TextMenuItemModel,
+          icon: 'key',
+          index: 4
+        },
+      ];
+
+      menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
+        shouldPersistOnRouteChange: true,
       })));
     });
   }

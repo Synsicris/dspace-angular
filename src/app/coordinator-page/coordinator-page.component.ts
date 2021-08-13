@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ProjectDataService } from '../core/project/project-data.service';
@@ -12,10 +13,9 @@ import { PageInfo } from '../core/shared/page-info.model';
 import { PaginatedList } from '../core/data/paginated-list.model';
 import { DSONameService } from '../core/breadcrumbs/dso-name.service';
 import { ProjectAuthorizationService } from '../core/project/project-authorization.service';
-import { Observable } from 'rxjs/internal/Observable';
-import { take } from 'rxjs/operators';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { hasValue } from '../shared/empty.util';
+import { getItemPageRoute } from '../+item-page/item-page-routing-paths';
+import { Item } from '../core/shared/item.model';
 
 @Component({
   selector: 'ds-coordinator-page',
@@ -90,6 +90,17 @@ export class CoordinatorPageComponent implements OnInit {
    */
   getProjectName(project: Community): string {
     return this.nameService.getName(project);
+  }
+
+  /**
+   * Get link to the item project page
+   * @param projectCommunityId
+   */
+  getProjectItemPath(projectCommunityId: string): Observable<string> {
+    return this.projectService.getProjectItemByRelation(projectCommunityId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((item: Item) => getItemPageRoute(item))
+    );
   }
 
   /**

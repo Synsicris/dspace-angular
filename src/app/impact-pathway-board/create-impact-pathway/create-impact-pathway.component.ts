@@ -10,7 +10,7 @@ import {
   getCollectionCreateRoute
 } from '../../+collection-page/collection-page-routing-paths';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
-import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
+import { ImpactPathwayService } from '../core/impact-pathway.service';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 
 /**

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 
 import { DynamicFormLayoutService, DynamicFormService, DynamicFormValidationService } from '@ng-dynamic-forms/core';
@@ -27,8 +27,6 @@ import { CSSVariableService } from '../shared/sass-helper/sass-helper.service';
 import { SidebarService } from '../shared/sidebar/sidebar.service';
 import { UploaderService } from '../shared/uploader/uploader.service';
 import { SectionFormOperationsService } from '../submission/sections/form/section-form-operations.service';
-import { AuthRequestService } from './auth/auth-request.service';
-import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthenticatedGuard } from './auth/authenticated.guard';
 import { AuthStatus } from './auth/models/auth-status.model';
 import { BrowseService } from './browse/browse.service';
@@ -52,14 +50,12 @@ import { DSOChangeAnalyzer } from './data/dso-change-analyzer.service';
 import { DSOResponseParsingService } from './data/dso-response-parsing.service';
 import { DSpaceObjectDataService } from './data/dspace-object-data.service';
 import { EndpointMapResponseParsingService } from './data/endpoint-map-response-parsing.service';
-import { ItemTypeDataService } from './data/entity-type-data.service';
 import { EntityTypeService } from './data/entity-type.service';
 import { ExternalSourceService } from './data/external-source.service';
 import { FacetConfigResponseParsingService } from './data/facet-config-response-parsing.service';
 import { FacetValueResponseParsingService } from './data/facet-value-response-parsing.service';
 import { FilteredDiscoveryPageResponseParsingService } from './data/filtered-discovery-page-response-parsing.service';
 import { ItemDataService } from './data/item-data.service';
-import { LicenseDataService } from './data/license-data.service';
 import { LookupRelationService } from './data/lookup-relation.service';
 import { MyDSpaceResponseParsingService } from './data/mydspace-response-parsing.service';
 import { ObjectUpdatesService } from './data/object-updates/object-updates.service';
@@ -142,7 +138,6 @@ import { SiteAdministratorGuard } from './data/feature-authorization/feature-aut
 import { Registration } from './shared/registration.model';
 import { MetadataSchemaDataService } from './data/metadata-schema-data.service';
 import { MetadataFieldDataService } from './data/metadata-field-data.service';
-import { LocaleInterceptor } from './locale/locale.interceptor';
 import { DsDynamicTypeBindRelationService } from '../shared/form/builder/ds-dynamic-form-ui/ds-dynamic-type-bind-relation.service';
 import { TabDataService } from './layout/tab-data.service';
 import { Tab } from './layout/models/tab.model';
@@ -185,18 +180,23 @@ import { EditItemMode } from './submission/models/edititem-mode.model';
 import { EditItemModeDataService } from './submission/edititemmode-data.service';
 import { AuditDataService } from './audit/audit-data.service';
 import { Audit } from './audit/model/audit.model';
-import { ItemExportFormatService } from './itemexportformat/item-export.service';
 import { ItemExportFormat } from './itemexportformat/model/item-export-format.model';
 import { MetricsComponentsDataService } from './layout/metrics-components-data.service';
 import { MetricsComponent } from './layout/models/metrics-component.model';
 import { Metric } from './shared/metric.model';
 import { MetricService } from './data/metric.service';
 import { Root } from './data/root.model';
-import { ImpactPathwayService } from './impact-pathway/impact-pathway.service';
-import { ObjectiveService } from './impact-pathway/objective.service';
-import { ImpactPathwayLinksService } from './impact-pathway/impact-pathway-links.service';
-import { WorkingPlanService } from './working-plan/working-plan.service';
-import { WorkingPlanStateService } from './working-plan/working-plan-state.service';
+import { ItemExportFormatService } from './itemexportformat/item-export-format.service';
+import { OpenaireBrokerTopicObject } from './openaire/broker/models/openaire-broker-topic.model';
+import { OpenaireBrokerEventObject } from './openaire/broker/models/openaire-broker-event.model';
+import { OpenaireSuggestionTarget } from './openaire/reciter-suggestions/models/openaire-suggestion-target.model';
+import { OpenaireSuggestion } from './openaire/reciter-suggestions/models/openaire-suggestion.model';
+import { OpenaireSuggestionSource } from './openaire/reciter-suggestions/models/openaire-suggestion-source.model';
+import { StatisticsCategory } from './statistics/models/statistics-category.model';
+import { RootDataService } from './data/root-data.service';
+import { SearchConfig } from '../shared/search/search-filters/search-config.model';
+import { EditItemRelationsGuard } from '../edit-item-relationships/guards/edit-item-relationships.guard';
+import { ProfileClaimService } from '../profile-page/profile-claim/profile-claim.service';
 import { ItemAuthorityRelationService } from './shared/item-authority-relation.service';
 import { ProjectDataService } from './project/project-data.service';
 import { CollectionSearchResult } from '../shared/object-collection/shared/collection-search-result.model';
@@ -208,6 +208,7 @@ import { CommunitySearchResult } from '../shared/object-collection/shared/commun
 import { ItemSearchResult } from '../shared/object-collection/shared/item-search-result.model';
 import { ProjectAuthorizationService } from './project/project-authorization.service';
 import { ProjectGroupService } from './project/project-group.service';
+import { EasyOnlineImport } from './easy-online-import/models/easy-online-import.model';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -234,7 +235,6 @@ const EXPORTS = [];
 const PROVIDERS = [
   ApiService,
   AuthenticatedGuard,
-  AuthRequestService,
   CommunityDataService,
   CollectionDataService,
   SiteDataService,
@@ -313,8 +313,6 @@ const PROVIDERS = [
   LookupRelationService,
   VersionDataService,
   VersionHistoryDataService,
-  LicenseDataService,
-  ItemTypeDataService,
   WorkflowActionDataService,
   ProcessDataService,
   AuditDataService,
@@ -330,18 +328,7 @@ const PROVIDERS = [
   EndUserAgreementCurrentUserGuard,
   EndUserAgreementCookieGuard,
   EndUserAgreementService,
-  // register AuthInterceptor as HttpInterceptor
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  },
-  // register LocaleInterceptor as HttpInterceptor
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: LocaleInterceptor,
-    multi: true
-  },
+  RootDataService,
   NotificationsService,
   FilteredDiscoveryPageResponseParsingService,
   { provide: NativeWindowService, useFactory: NativeWindowFactory },
@@ -353,6 +340,7 @@ const PROVIDERS = [
   VocabularyService,
   VocabularyTreeviewService,
   SearchcomponentService,
+  ProfileClaimService,
   ResearcherProfileService,
   ItemExportFormatService,
   SectionDataService,
@@ -360,14 +348,10 @@ const PROVIDERS = [
   OrcidHistoryService,
   EditItemDataService,
   EditItemModeDataService,
+  EditItemRelationsGuard,
   ResearcherProfileService,
   SearchcomponentService,
   ItemAuthorityRelationService,
-  ImpactPathwayService,
-  ObjectiveService,
-  ImpactPathwayLinksService,
-  WorkingPlanService,
-  WorkingPlanStateService,
   ProjectDataService,
   ProjectAuthorizationService,
   ProjectGroupService
@@ -442,13 +426,22 @@ export const models =
     Section,
     EditItem,
     EditItemMode,
+    OpenaireBrokerTopicObject,
+    OpenaireBrokerEventObject,
+    OpenaireSuggestion,
+    OpenaireSuggestionTarget,
+    OpenaireSuggestionSource,
+    StatisticsCategory,
+    Root,
+    SearchConfig,
     ClaimedTaskSearchResult,
     CollectionSearchResult,
     CommunitySearchResult,
     ItemSearchResult,
     PoolTaskSearchResult,
     WorkflowItemSearchResult,
-    WorkspaceItemSearchResult
+    WorkspaceItemSearchResult,
+    EasyOnlineImport
   ];
 
 @NgModule({

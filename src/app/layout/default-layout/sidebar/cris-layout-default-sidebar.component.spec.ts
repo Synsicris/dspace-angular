@@ -13,6 +13,7 @@ import { Location } from '@angular/common';
 import { NO_ERRORS_SCHEMA, SimpleChanges } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { createPaginatedList } from '../../../shared/testing/utils.test';
+import { ActivatedRoute, Router } from '@angular/router';
 
 class TabDataServiceMock {
   findByItem(itemUuid: string, linkToFollow?: FollowLinkConfig<Tab>): Observable<RemoteData<PaginatedList<Tab>>> {
@@ -25,15 +26,20 @@ class TabDataServiceMock {
 describe('CrisLayoutDefaultSidebarComponent', () => {
   let component: CrisLayoutDefaultSidebarComponent;
   let fixture: ComponentFixture<CrisLayoutDefaultSidebarComponent>;
-
+  const router = jasmine.createSpyObj('router', ['navigate']);
+  const location = {
+    path(): string {
+      return '/entities/orgunit/a14ba215-c0f0-4b74-b21a-06359bfabd45/rp::publications';
+    }
+  };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CrisLayoutDefaultSidebarComponent ],
-      providers: [ {provide: Location, useValue: {
-        path(): string {
-          return '/items/a96c6d24-757a-411d-8132-bbcbbbb04210/person-biography';
-        }
-      }} ],
+      providers: [
+        { provide: Location, useValue: location },
+        { provide: ActivatedRoute, useValue: {} },
+        { provide: Router, useValue: router }
+      ],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
@@ -49,7 +55,10 @@ describe('CrisLayoutDefaultSidebarComponent', () => {
   });
 
   it('check sidebar tabs rendering', () => {
-    const navbarTabsFound = fixture.debugElement.queryAll(By.css('#sidebar ul li'));
+    const navbarTabsFound = fixture.debugElement.queryAll(By.css('#sidebar ul ds-cris-layout-sidebar-item'));
+    console.log(fixture.debugElement.queryAll(By.css('ds-cris-layout-sidebar-item')));
+    console.log(location.path());
+
     expect(navbarTabsFound.length).toEqual(3);
   });
 
@@ -60,6 +69,6 @@ describe('CrisLayoutDefaultSidebarComponent', () => {
       }
     });
     component.ngOnChanges(change);
-    expect(component.selectTab).toHaveBeenCalledWith(1);
+    expect(component.selectTab).toHaveBeenCalledWith(0,null);
   });
 });

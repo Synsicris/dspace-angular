@@ -16,6 +16,8 @@ import { SubmissionFormFooterComponent } from './submission-form-footer.componen
 import { SubmissionRestService } from '../../../core/submission/submission-rest.service';
 import { createTestComponent } from '../../../shared/testing/utils.test';
 import { SubmissionScopeType } from '../../../core/submission/submission-scope-type';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import createSpy = jasmine.createSpy;
 
 describe('SubmissionFormFooterComponent Component', () => {
 
@@ -27,6 +29,9 @@ describe('SubmissionFormFooterComponent Component', () => {
   let submissionServiceStub: any = new SubmissionServiceStub();
 
   const submissionId = mockSubmissionId;
+  const authorizationService = jasmine.createSpyObj('authorizationService', {
+    isAuthorized: createSpy('isAuthorized').and.returnValue(observableOf(true))
+  });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -41,6 +46,7 @@ describe('SubmissionFormFooterComponent Component', () => {
       providers: [
         { provide: SubmissionService, useValue: submissionServiceStub },
         { provide: SubmissionRestService, useClass: SubmissionRestServiceStub },
+        { provide: AuthorizationDataService, useValue: authorizationService },
         ChangeDetectorRef,
         NgbModal,
         SubmissionFormFooterComponent

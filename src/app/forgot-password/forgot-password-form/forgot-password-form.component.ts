@@ -11,9 +11,11 @@ import { Store } from '@ngrx/store';
 import { CoreState } from '../../core/core.reducers';
 import { RemoteData } from '../../core/data/remote-data';
 import { EPerson } from '../../core/eperson/models/eperson.model';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 
 @Component({
   selector: 'ds-forgot-password-form',
+  styleUrls: ['./forgot-password-form.component.scss'],
   templateUrl: './forgot-password-form.component.html'
 })
 /**
@@ -69,7 +71,9 @@ export class ForgotPasswordFormComponent {
    */
   submit() {
     if (!this.isInValid) {
-      this.ePersonDataService.patchPasswordWithToken(this.user, this.token, this.password).subscribe((response: RemoteData<EPerson>) => {
+      this.ePersonDataService.patchPasswordWithToken(this.user, this.token, this.password).pipe(
+        getFirstCompletedRemoteData()
+      ).subscribe((response: RemoteData<EPerson>) => {
         if (response.hasSucceeded) {
           this.notificationsService.success(
             this.translateService.instant(this.NOTIFICATIONS_PREFIX + '.success.title'),

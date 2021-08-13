@@ -27,10 +27,14 @@ import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model'
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { ViewMode } from '../../../core/shared/view-mode.model';
 import { Context } from '../../../core/shared/context.model';
-import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
-import { hasValue, isEmpty, isNotEmpty } from '../../empty.util';
-import { PaginatedList, buildPaginatedList } from '../../../core/data/paginated-list.model';
+import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
+import { hasNoValue, hasValue, isEmpty, isNotEmpty } from '../../empty.util';
+import { buildPaginatedList, PaginatedList } from '../../../core/data/paginated-list.model';
 import { SearchResult } from '../../search/search-result.model';
+import { RemoteData } from '../../../core/data/remote-data';
+import { NotificationsService } from '../../notifications/notifications.service';
+import { TranslateService } from '@ngx-translate/core';
+import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 
 @Component({
   selector: 'ds-dso-selector',
@@ -57,6 +61,11 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
    */
   @Input() types: DSpaceObjectType[];
 
+  /**
+   * The configuration.
+   */
+  @Input() configuration = 'default';
+
   // list of allowed selectable dsoTypes
   typesString: string;
 
@@ -78,7 +87,7 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
   /**
    * List with search results of DSpace objects for the current query
    */
-  listEntries: SearchResult<DSpaceObject>[] = [];
+  listEntries: SearchResult<DSpaceObject>[] = null;
 
   /**
    * The current page to load
@@ -93,9 +102,9 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
   hasNextPage = false;
 
   /**
-   * Whether or not the list should be reset next time it receives a page to load
+   * Whether or not new results are currently loading
    */
-  resetList = false;
+  loading = false;
 
   /**
    * List of element references to all elements
@@ -123,7 +132,10 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
    */
   public subs: Subscription[] = [];
 
-  constructor(protected searchService: SearchService) {
+  constructor(protected searchService: SearchService,
+              protected notifcationsService: NotificationsService,
+              protected translate: TranslateService,
+              public dsoNameService: DSONameService) {
   }
 
   /**
@@ -136,7 +148,7 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
     // Create an observable searching for the current DSO (return empty list if there's no current DSO)
     let currentDSOResult$;
     if (isNotEmpty(this.currentDSOId)) {
-      currentDSOResult$ = this.search(this.getCurrentDSOQuery(), 1);
+      currentDSOResult$ = this.search(this.getCurrentDSOQuery(), 1).pipe(getFirstSucceededRemoteDataPayload());
     } else {
       currentDSOResult$ = observableOf(buildPaginatedList(undefined, []));
     }
@@ -152,31 +164,41 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
       this.currentPage$
     ).pipe(
       switchMap(([currentDSOResult, query, page]: [PaginatedList<SearchResult<DSpaceObject>>, string, number]) => {
+        this.loading = true;
         if (page === 1) {
           // The first page is loading, this means we should reset the list instead of adding to it
-          this.resetList = true;
+          this.listEntries = null;
         }
         return this.search(query, page).pipe(
-          map((list) => {
-            // If it's the first page and no query is entered, add the current DSO to the start of the list
-            // If no query is entered, filter out the current DSO from the results, as it'll be displayed at the start of the list already
-            list.page = [
-              ...((isEmpty(query) && page === 1) ? currentDSOResult.page : []),
-              ...list.page.filter((result) => isNotEmpty(query) || result.indexableObject.id !== this.currentDSOId)
-            ];
-            return list;
+          map((rd) => {
+            if (rd.hasSucceeded) {
+              // If it's the first page and no query is entered, add the current DSO to the start of the list
+              // If no query is entered, filter out the current DSO from the results, as it'll be displayed at the start of the list already
+              rd.payload.page = [
+                ...((isEmpty(query) && page === 1) ? currentDSOResult.page : []),
+                ...rd.payload.page.filter((result) => isNotEmpty(query) || result.indexableObject.id !== this.currentDSOId)
+              ];
+            } else if (rd.hasFailed) {
+              this.notifcationsService.error(this.translate.instant('dso-selector.error.title', { type: this.typesString }), rd.errorMessage);
+            }
+            return rd;
           })
         );
       })
-    ).subscribe((list) => {
-      if (this.resetList) {
-        this.listEntries = list.page;
-        this.resetList = false;
+    ).subscribe((rd) => {
+      this.loading = false;
+      if (rd.hasSucceeded) {
+        if (hasNoValue(this.listEntries)) {
+          this.listEntries = rd.payload.page;
+        } else {
+          this.listEntries.push(...rd.payload.page);
+        }
+        // Check if there are more pages available after the current one
+        this.hasNextPage = rd.payload.totalElements > this.listEntries.length;
       } else {
-        this.listEntries.push(...list.page);
+        this.listEntries = null;
+        this.hasNextPage = false;
       }
-      // Check if there are more pages available after the current one
-      this.hasNextPage = list.totalElements > this.listEntries.length;
     }));
   }
 
@@ -192,17 +214,18 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
    * @param query Query to search objects for
    * @param page  Page to retrieve
    */
-  search(query: string, page: number): Observable<PaginatedList<SearchResult<DSpaceObject>>> {
+  search(query: string, page: number): Observable<RemoteData<PaginatedList<SearchResult<DSpaceObject>>>> {
     return this.searchService.search(
       new PaginatedSearchOptions({
         query: query,
         dsoTypes: this.types,
+        configuration: this.configuration,
         pagination: Object.assign({}, this.defaultPagination, {
           currentPage: page
         })
       })
     ).pipe(
-      getFirstSucceededRemoteDataPayload()
+      getFirstCompletedRemoteData()
     );
   }
 
@@ -210,7 +233,7 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
    * When the user reaches the bottom of the page (or almost) and there's a next page available, increase the current page
    */
   onScrollDown() {
-    if (this.hasNextPage) {
+    if (this.hasNextPage && !this.loading) {
       this.currentPage$.next(this.currentPage$.value + 1);
     }
   }

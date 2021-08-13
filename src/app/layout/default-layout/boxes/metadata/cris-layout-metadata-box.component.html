@@ -1,5 +1,9 @@
-<ngb-accordion [activeIds]="activeIds">
-  <ngb-panel title="{{box.header | translate}}" id="{{box.shortname}}">
+<ngb-accordion [activeIds]="activeIds"
+               [class.mr-2]="!box.clear && !nextBoxClear">
+  <ngb-panel id="{{box.shortname}}">
+    <ng-template ngbPanelTitle>
+      <span [innerHTML]="getBoxHeader()"></span>
+    </ng-template>
     <ng-template ngbPanelContent>
       <div class="{{box.style}}">
         <!-- PRINT ROWS -->

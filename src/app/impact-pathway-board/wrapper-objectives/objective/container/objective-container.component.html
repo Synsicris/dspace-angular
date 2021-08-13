@@ -3,7 +3,7 @@
      [class.drop-denied]="(isDragging | async) && !(isDropAllowed | async)"
      [class.overlay]="(isProcessing() | async)">
   <div id="{{impactPathwayTask.id}}"
-       class="d-flex p-2 h-100 flex-wrap task-list-horizontal .overlay-hide"
+       class="d-flex p-2 h-100 flex-wrap task-list-horizontal overlay-hide row"
        [class.overlay-hide]="(isProcessing() | async)"
        cdkDropList
        cdkDropListOrientation="'horizontal'"
@@ -13,7 +13,7 @@
        (cdkDropListExited)="listExited($event)"
        (cdkDropListDropped)="listDropped($event)">
     <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
-                              class="mb-sm-1 mb-lg-4 mb-5 mr-sm-1 mr-lg-4 task-horizontal draggable-task"
+                              class="mb-sm-1 mb-lg-4 mb-5 mr-2 task-horizontal flex-grow-1 col-2 draggable-task"
                               [projectId]="projectId"
                               [impactPathwayId]="impactPathwayStep.parentId"
                               [impactPathwayStepId]="impactPathwayStep.id"

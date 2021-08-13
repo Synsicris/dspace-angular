@@ -13,10 +13,12 @@ import {
 import { DsDynamicInputModel, DsDynamicInputModelConfig } from '../ds-dynamic-form-ui/models/ds-dynamic-input.model';
 import { setLayout } from './parser.utils';
 import { ParserOptions } from './parser-options';
-import { ParserType } from './parser-type';
 import { RelationshipOptions } from '../models/relationship-options.model';
 import { VocabularyOptions } from '../../../../core/submission/vocabularies/models/vocabulary-options.model';
+import { ParserType } from './parser-type';
 import { isNgbDateStruct } from '../../../date.util';
+import { SubmissionVisibility } from '../../../../submission/utils/visibility.util';
+import { SubmissionVisibilityType } from '../../../../core/config/models/config-submission-section.model';
 
 export const SUBMISSION_ID: InjectionToken<string> = new InjectionToken<string>('submissionId');
 export const CONFIG_DATA: InjectionToken<FormFieldModel> = new InjectionToken<FormFieldModel>('configData');
@@ -53,6 +55,10 @@ export abstract class FieldParser {
         metadataKey = this.configData.selectableMetadata[0].metadata;
       }
 
+      let isDraggable = true;
+      if (this.configData.input.type === ParserType.Onebox && this.configData?.selectableMetadata?.length > 1) {
+        isDraggable = false;
+      }
       const config = {
         id: uniqueId() + '_array',
         label: this.configData.label,
@@ -64,6 +70,7 @@ export abstract class FieldParser {
         metadataKey,
         metadataFields: this.getAllFieldIds(),
         hasSelectableMetadata: isNotEmpty(this.configData.selectableMetadata),
+        isDraggable,
         typeBindRelations: isNotEmpty(this.configData.typeBind) ? this.getTypeBindRelations(this.configData.typeBind) : null,
         groupFactory: () => {
           let model;
@@ -71,11 +78,11 @@ export abstract class FieldParser {
             model = this.modelFactory();
             arrayCounter++;
           } else {
-            const fieldArrayOfValueLenght = this.getInitValueCount(arrayCounter - 1);
+            const fieldArrayOfValueLength = this.getInitValueCount(arrayCounter - 1);
             let fieldValue = null;
-            if (fieldArrayOfValueLenght > 0) {
+            if (fieldArrayOfValueLength > 0) {
               fieldValue = this.getInitFieldValue(arrayCounter - 1, fieldArrayCounter++);
-              if (fieldArrayCounter === fieldArrayOfValueLenght) {
+              if (fieldArrayCounter === fieldArrayOfValueLength) {
                 fieldArrayCounter = 0;
                 arrayCounter++;
               }
@@ -262,7 +269,8 @@ export abstract class FieldParser {
     controlModel.id = (this.fieldId).replace(/\./g, '_');
 
     // Set read only option
-    controlModel.readOnly = this.parserOptions.readOnly;
+    controlModel.readOnly = this.parserOptions.readOnly
+      || this.isFieldReadOnly(this.configData.visibility, this.parserOptions.submissionScope);
     controlModel.disabled = this.parserOptions.readOnly;
     controlModel.isModelOfInnerForm = this.parserOptions.isInnerForm;
     if (hasValue(this.configData.selectableRelationship)) {
@@ -298,6 +306,15 @@ export abstract class FieldParser {
     }
 
     return controlModel;
+  }
+
+  /**
+   * Check if a field is read-only with the given scope
+   * @param visibility
+   * @param submissionScope
+   */
+  private isFieldReadOnly(visibility: SubmissionVisibilityType, submissionScope) {
+    return isNotEmpty(submissionScope) && SubmissionVisibility.isReadOnly(visibility, submissionScope);
   }
 
   private getTypeBindRelations(configuredTypeBindValues: string[]): any[] {

@@ -60,7 +60,7 @@ export const mockSectionsErrors = [
   }
 ];
 
-export const mockSectionsErrorsTwo = [
+export const mockSectionsErrorsTouchedField = [
   {
     message: 'error.validation.required',
     paths: [
@@ -2840,7 +2840,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2856,7 +2856,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2869,7 +2869,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         formId: '2_traditionalpageone',
         isLoading: false,
         isValid: false,
@@ -2883,7 +2883,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         collapsed: false,
         enabled: false,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2898,7 +2898,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         data: {
           matches: {}
         },
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2913,7 +2913,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         data: {
           files: []
         },
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2930,7 +2930,7 @@ export const mockSubmissionState: SubmissionObjectState = Object.assign({}, {
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2960,7 +2960,7 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2976,7 +2976,7 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -2989,7 +2989,7 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         formId: '2_traditionalpageone',
         isLoading: false,
         isValid: false,
@@ -3003,7 +3003,7 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: false,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -3018,7 +3018,7 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         data: {
           matches: mockDeduplicationMatches
         },
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -3033,7 +3033,7 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         data: {
           files: []
         },
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
@@ -3050,10 +3050,95 @@ export const mockSubmissionStateWithDuplicate: SubmissionObjectState = Object.as
         collapsed: false,
         enabled: true,
         data: {},
-        errors: [],
+        errorsToShow: [],
         isLoading: false,
         isValid: false,
         removePending: false
+      } as any
+    },
+    isLoading: false,
+    savePending: false,
+    depositPending: false
+  }
+});
+
+export const mockSubmissionStateWithoutUpload: SubmissionObjectState = Object.assign({}, {
+  826: {
+    collection: mockSubmissionCollectionId,
+    definition: 'traditional',
+    selfUrl: mockSubmissionSelfUrl,
+    activeSection: null,
+    sections: {
+      extraction: {
+        config: '',
+        mandatory: true,
+        sectionType: 'utils',
+        visibility: {
+          main: 'HIDDEN',
+          other: 'HIDDEN'
+        },
+        collapsed: false,
+        enabled: true,
+        data: {},
+        errorsToShow: [],
+        isLoading: false,
+        isValid: false
+      } as any,
+      collection: {
+        config: '',
+        mandatory: true,
+        sectionType: 'collection',
+        visibility: {
+          main: 'HIDDEN',
+          other: 'HIDDEN'
+        },
+        collapsed: false,
+        enabled: true,
+        data: {},
+        errorsToShow: [],
+        isLoading: false,
+        isValid: false
+      } as any,
+      traditionalpageone: {
+        header: 'submit.progressbar.describe.stepone',
+        config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/traditionalpageone',
+        mandatory: true,
+        sectionType: 'submission-form',
+        collapsed: false,
+        enabled: true,
+        data: {},
+        errorsToShow: [],
+        formId: '2_traditionalpageone',
+        isLoading: false,
+        isValid: false
+      } as any,
+      traditionalpagetwo: {
+        header: 'submit.progressbar.describe.steptwo',
+        config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/traditionalpagetwo',
+        mandatory: false,
+        sectionType: 'submission-form',
+        collapsed: false,
+        enabled: false,
+        data: {},
+        errorsToShow: [],
+        isLoading: false,
+        isValid: false
+      } as any,
+      license: {
+        header: 'submit.progressbar.license',
+        config: '',
+        mandatory: true,
+        sectionType: 'license',
+        visibility: {
+          main: null,
+          other: 'READONLY'
+        },
+        collapsed: false,
+        enabled: true,
+        data: {},
+        errorsToShow: [],
+        isLoading: false,
+        isValid: false
       } as any
     },
     isLoading: false,
@@ -3074,7 +3159,7 @@ export const mockSectionsState = Object.assign({}, {
     collapsed: false,
     enabled: true,
     data: {},
-    errors: [],
+    errorsToShow: [],
     isLoading: false,
     isValid: false
   } as any,
@@ -3089,7 +3174,7 @@ export const mockSectionsState = Object.assign({}, {
     collapsed: false,
     enabled: true,
     data: {},
-    errors: [],
+    errorsToShow: [],
     isLoading: false,
     isValid: false,
     removePending: false
@@ -3102,7 +3187,7 @@ export const mockSectionsState = Object.assign({}, {
     collapsed: false,
     enabled: true,
     data: {},
-    errors: [],
+    errorsToShow: [],
     isLoading: false,
     isValid: false,
     removePending: false
@@ -3115,7 +3200,7 @@ export const mockSectionsState = Object.assign({}, {
     collapsed: false,
     enabled: false,
     data: {},
-    errors: [],
+    errorsToShow: [],
     isLoading: false,
     isValid: false,
     removePending: false
@@ -3128,7 +3213,7 @@ export const mockSectionsState = Object.assign({}, {
     collapsed: false,
     enabled: true,
     data: {},
-    errors: [],
+    errorsToShow: [],
     isLoading: false,
     isValid: false,
     removePending: false
@@ -3145,7 +3230,7 @@ export const mockSectionsState = Object.assign({}, {
     collapsed: false,
     enabled: true,
     data: {},
-    errors: [],
+    errorsToShow: [],
     isLoading: false,
     isValid: false,
     removePending: false
@@ -3250,27 +3335,23 @@ export const mockUploadConfigResponse = {
   accessConditionOptions: [
     {
       name: 'openaccess',
-      groupUUID: '123456-g',
       hasStartDate: false,
       hasEndDate: false
     },
     {
       name: 'lease',
-      groupUUID: '123456-g',
       hasStartDate: false,
       hasEndDate: true,
       maxEndDate: '2019-07-12T14:40:06.308+0000'
     },
     {
       name: 'embargo',
-      groupUUID: '123456-g',
       hasStartDate: true,
       hasEndDate: false,
       maxStartDate: '2022-01-12T14:40:06.308+0000'
     },
     {
       name: 'administrator',
-      groupUUID: '0f2773dd-1741-475f-80e7-ccdef153d655',
       hasStartDate: false,
       hasEndDate: false
     }
@@ -3288,35 +3369,6 @@ export const mockUploadConfigResponse = {
 
 // Clone the object and change one property
 export const mockUploadConfigResponseNotRequired = Object.assign({}, mockUploadConfigResponse, { required: false });
-
-export const mockAccessConditionOptions = [
-  {
-    name: 'openaccess',
-    groupUUID: '123456-g',
-    hasStartDate: false,
-    hasEndDate: false
-  },
-  {
-    name: 'lease',
-    groupUUID: '123456-g',
-    hasStartDate: false,
-    hasEndDate: true,
-    maxEndDate: '2019-07-12T14:40:06.308+0000'
-  },
-  {
-    name: 'embargo',
-    groupUUID: '123456-g',
-    hasStartDate: true,
-    hasEndDate: false,
-    maxStartDate: '2022-01-12T14:40:06.308+0000'
-  },
-  {
-    name: 'administrator',
-    groupUUID: '0f2773dd-1741-475f-80e7-ccdef153d655',
-    hasStartDate: false,
-    hasEndDate: false
-  }
-];
 
 export const mockGroup = Object.assign(new Group(), {
   handle: null,
@@ -3433,116 +3485,87 @@ export const mockFileFormData = {
   },
   accessConditions: [
     {
-      name: [
-        {
-          value: 'openaccess',
-          language: null,
-          authority: null,
-          display: 'openaccess',
-          confidence: -1,
-          place: 0,
-          otherInformation: null
-        }
-      ],
-      groupUUID: [
-        {
-          value: '123456-g',
-          language: null,
-          authority: null,
-          display: '123456-g',
-          confidence: -1,
-          place: 0,
-          otherInformation: null
-        }
-      ]
-    }
-    ,
+      accessConditionGroup: {
+        name: [
+          {
+            value: 'openaccess',
+            language: null,
+            authority: null,
+            display: 'openaccess',
+            confidence: -1,
+            place: 0,
+            otherInformation: null
+          }
+        ],
+      },
+    },
     {
-      name: [
-        {
-          value: 'lease',
-          language: null,
-          authority: null,
-          display: 'lease',
-          confidence: -1,
-          place: 0,
-          otherInformation: null
-        }
-      ],
-      endDate: [
-        {
-          value: {
-            year: 2019,
-            month: 1,
-            day: 16
-          },
-          language: null,
-          authority: null,
-          display: {
-            year: 2019,
-            month: 1,
-            day: 16
-          },
-          confidence: -1,
-          place: 0,
-          otherInformation: null
-        }
-      ],
-      groupUUID: [
-        {
-          value: '123456-g',
-          language: null,
-          authority: null,
-          display: '123456-g',
-          confidence: -1,
-          place: 0,
-          otherInformation: null
-        }
-      ]
-    }
-    ,
+      accessConditionGroup:{
+        name: [
+          {
+            value: 'lease',
+            language: null,
+            authority: null,
+            display: 'lease',
+            confidence: -1,
+            place: 0,
+            otherInformation: null
+          }
+        ],
+        endDate: [
+          {
+            value: {
+              year: 2019,
+              month: 1,
+              day: 16
+            },
+            language: null,
+            authority: null,
+            display: {
+              year: 2019,
+              month: 1,
+              day: 16
+            },
+            confidence: -1,
+            place: 0,
+            otherInformation: null
+          }
+        ],
+      }
+    },
     {
-      name: [
-        {
-          value: 'embargo',
-          language: null,
-          authority: null,
-          display: 'lease',
-          confidence: -1,
-          place: 0,
-          otherInformation: null
-        }
-      ],
-      startDate: [
-        {
-          value: {
-            year: 2019,
-            month: 1,
-            day: 16
-          },
-          language: null,
-          authority: null,
-          display: {
-            year: 2019,
-            month: 1,
-            day: 16
-          },
-          confidence: -1,
-          place: 0,
-          otherInformation: null
-        }
-      ],
-      groupUUID: [
-        {
-          value: '123456-g',
-          language: null,
-          authority: null,
-          display: '123456-g',
-          confidence: -1,
-          place: 0,
-          otherInformation: null
-        }
-      ]
+      accessConditionGroup: {
+        name: [
+          {
+            value: 'embargo',
+            language: null,
+            authority: null,
+            display: 'lease',
+            confidence: -1,
+            place: 0,
+            otherInformation: null
+          }
+        ],
+        startDate: [
+          {
+            value: {
+              year: 2019,
+              month: 1,
+              day: 16
+            },
+            language: null,
+            authority: null,
+            display: {
+              year: 2019,
+              month: 1,
+              day: 16
+            },
+            confidence: -1,
+            place: 0,
+            otherInformation: null
+          }
+        ],
+      }
     }
   ]
 };

@@ -4,9 +4,9 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Observable, of as observableOf } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ImpactPathwayTask } from '../../../../core/impact-pathway/models/impact-pathway-task.model';
-import { ImpactPathwayStep } from '../../../../core/impact-pathway/models/impact-pathway-step.model';
-import { ImpactPathwayService } from '../../../../core/impact-pathway/impact-pathway.service';
+import { ImpactPathwayTask } from '../../../core/models/impact-pathway-task.model';
+import { ImpactPathwayStep } from '../../../core/models/impact-pathway-step.model';
+import { ImpactPathwayService } from '../../../core/impact-pathway.service';
 import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-container.component';
 import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';
@@ -14,7 +14,7 @@ import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'ipw-objective-container',
-  styleUrls: ['./objective-container.component.scss', '../../../shared/drag-and-drop-container.component.scss'],
+  styleUrls: ['../../../shared/drag-and-drop-container.component.scss', './objective-container.component.scss'],
   templateUrl: './objective-container.component.html'
 })
 export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
@@ -89,9 +89,11 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
       this.impactPathwayStep.type,
       true
     );
+    modalRef.componentInstance.searchMessageInfoKey = this.impactPathwayService.getImpactPathwayStepTaskSearchHeader(
+      this.impactPathwayStep.type,
+      true
+    );
     modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
-    modalRef.componentInstance.excludeListId = [this.impactPathwayTask.id];
-    modalRef.componentInstance.excludeFilterName = 'parentStepId';
     modalRef.componentInstance.vocabularyName = this.impactPathwayService.getTaskTypeAuthorityName(
       this.impactPathwayStep.type,
       true
@@ -101,6 +103,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
       true
     );
     modalRef.componentInstance.scope = this.projectId;
+    modalRef.componentInstance.query = this.buildExcludedTasksQuery();
 
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       this.impactPathwayService.dispatchGenerateImpactPathwaySubTask(
@@ -131,6 +134,19 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
   isProcessing(): Observable<boolean> {
     return this.processing$;
+  }
+
+  private buildExcludedTasksQuery(): string {
+    /*    const subprojectMembersGroup = this.projectGroupService.getProjectMembersGroupNameByCommunity(this.subproject);
+        let query = `(entityGrants:project OR cris.policy.group: ${subprojectMembersGroup})`;*/
+    let query = '';
+    const tasksIds = this.impactPathwayTask.getSubTasksIds();
+    if (tasksIds.length > 0) {
+      const excludedIdsQuery = '-(search.resourceid' + ':(' + tasksIds.join(' OR ') + '))';
+      query += `${excludedIdsQuery}`;
+    }
+
+    return query;
   }
 
 }

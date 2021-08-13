@@ -8,8 +8,11 @@ import { Registration } from '../shared/registration.model';
 import { HALEndpointServiceStub } from '../../shared/testing/hal-endpoint-service.stub';
 import { createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
 import { of as observableOf } from 'rxjs/internal/observable/of';
+import { TestScheduler } from 'rxjs/testing';
 
 describe('EpersonRegistrationService', () => {
+  let testScheduler;
+
   let service: EpersonRegistrationService;
   let requestService: RequestService;
 
@@ -29,14 +32,21 @@ describe('EpersonRegistrationService', () => {
     rd = createSuccessfulRemoteDataObject(registrationWithUser);
     halService = new HALEndpointServiceStub('rest-url');
 
+    testScheduler = new TestScheduler((actual, expected) => {
+      // asserting the two objects are equal
+      // e.g. using chai.
+      expect(actual).toEqual(expected);
+    });
+
     requestService = jasmine.createSpyObj('requestService', {
       generateRequestId: 'request-id',
-      configure: {},
+      send: {},
       getByUUID: cold('a',
         { a: Object.assign(new RequestEntry(), { response: new RestResponse(true, 200, 'Success') }) })
     });
     rdbService = jasmine.createSpyObj('rdbService', {
-      buildFromRequestUUID: observableOf(rd)
+      buildSingle: observableOf(rd),
+      buildFromRequestUUID: observableOf(rd),
     });
     service = new EpersonRegistrationService(
       requestService,
@@ -70,7 +80,7 @@ describe('EpersonRegistrationService', () => {
 
       const expected = service.registerEmail('test@mail.org');
 
-      expect(requestService.configure).toHaveBeenCalledWith(new PostRequest('request-id', 'rest-url/registrations', registration));
+      expect(requestService.send).toHaveBeenCalledWith(new PostRequest('request-id', 'rest-url/registrations', registration));
       expect(expected).toBeObservable(cold('(a|)', { a: rd }));
     });
   });
@@ -86,8 +96,28 @@ describe('EpersonRegistrationService', () => {
           user: registrationWithUser.user
         })
       }));
-
     });
+
+    // tslint:disable:no-shadowed-variable
+    it('should use cached responses and /registrations/search/findByToken?', () => {
+      testScheduler.run(({ cold, expectObservable }) => {
+        rdbService.buildSingle.and.returnValue(cold('a', { a: rd }));
+
+        service.searchByToken('test-token');
+
+        expect(requestService.send).toHaveBeenCalledWith(
+          jasmine.objectContaining({
+            uuid: 'request-id', method: 'GET',
+            href: 'rest-url/registrations/search/findByToken?token=test-token',
+          }), true
+        );
+        expectObservable(rdbService.buildSingle.calls.argsFor(0)[0]).toBe('(a|)', {
+          a: 'rest-url/registrations/search/findByToken?token=test-token'
+        });
+      });
+    });
+
   });
 
 });
+/**/

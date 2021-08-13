@@ -10,7 +10,7 @@ import { CoreState } from '../core.reducers';
 import { jsonPatchOperationsByResourceType } from './selectors';
 import { JsonPatchOperationsResourceEntry } from './json-patch-operations.reducer';
 import {
-  CommitPatchOperationsAction,
+  CommitPatchOperationsAction, DeletePendingJsonPatchOperationsAction,
   RollbacktPatchOperationsAction,
   StartTransactionPatchOperationsAction
 } from './json-patch-operations.actions';
@@ -85,7 +85,7 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
       patchRequest$.pipe(
         filter((request: PatchRequestDefinition) => isNotEmpty(request.body)),
         tap(() => this.store.dispatch(new StartTransactionPatchOperationsAction(resourceType, resourceId, startTransactionTime))),
-        tap((request: PatchRequestDefinition) => this.requestService.configure(request)),
+        tap((request: PatchRequestDefinition) => this.requestService.send(request)),
         mergeMap(() => {
           return this.rdbService.buildFromRequestUUID(requestId).pipe(
             getFirstCompletedRemoteData(),
@@ -106,6 +106,13 @@ export abstract class JsonPatchOperationsService<ResponseDefinitionDomain, Patch
         );
         }))
     );
+  }
+
+  /**
+   * Dispatch an action to delete all pending JSON patch Operations.
+   */
+  public deletePendingJsonPatchOperations() {
+    this.store.dispatch(new DeletePendingJsonPatchOperationsAction());
   }
 
   /**

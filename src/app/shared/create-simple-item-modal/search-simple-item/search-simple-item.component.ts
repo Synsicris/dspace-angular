@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
-import { BehaviorSubject, from as observableFrom, Observable, Subscription } from 'rxjs';
-import { concatMap, scan, take } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, from as observableFrom, Observable, Subscription } from 'rxjs';
+import { concatMap, debounceTime, map, scan, switchMap, tap } from 'rxjs/operators';
 import { NgbActiveModal, NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { findIndex } from 'lodash';
 import { hasValue, isEmpty, isNotEmpty } from '../../empty.util';
@@ -20,6 +20,8 @@ import { FacetValue } from '../../search/facet-value.model';
 import { SearchFilter } from '../../search/search-filter.model';
 import { FilterType } from '../../search/filter-type.model';
 import { SimpleItem } from '../models/simple-item.model';
+import { PaginationService } from '../../../core/pagination/pagination.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ds-search-simple-item',
@@ -59,32 +61,52 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   @Input() searchConfiguration: string;
 
   /**
+   * Additional search query
+   * @type {string}
+   */
+  @Input() query = '';
+
+  /**
    * The search scope
    * @type {string}
    */
   @Input() scope = '';
 
   /**
+   * The i18n key of the info message to display
+   */
+  @Input() searchMessageInfoKey;
+
+  /**
    * EventEmitter that will emit an array of SimpleItem object to add
    */
   @Output() addItems: EventEmitter<SimpleItem[]> = new EventEmitter<SimpleItem[]>();
 
+
+  /**
+   * A boolean representing if there is an info message to display
+   */
+  public hasInfoMessage: Observable<boolean>;
+
   public filterBoxList$: BehaviorSubject<FilterBox[]> = new BehaviorSubject<FilterBox[]>([]);
   public availableTaskList$: BehaviorSubject<SimpleItem[]> = new BehaviorSubject<SimpleItem[]>([]);
   public filterBoxEntries$: BehaviorSubject<FacetValue[]> = new BehaviorSubject<FacetValue[]>([]);
-  public page = 1;
-  public pageSize = 8;
-  public sortDirection = SortDirection.ASC;
   public pageInfoState: PageInfo = new PageInfo();
-  public paginationOptions: PaginationComponentOptions = new PaginationComponentOptions();
+
+  public paginationOptions: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
+    id: 'ssi',
+    currentPage: 1,
+    pageSizeOptions: [3, 6, 12, 16, 20],
+    pageSize: 6
+  });
   public selectable = true;
   public selectedTasks: SimpleItem[] = [];
-  public sortOptions: SortOptions;
+  public sortOptions: SortOptions = new SortOptions('dc.title', SortDirection.ASC);
 
   private entityTypeFilterBox: FilterBox;
   private titleFilterBox: FilterBox;
   private defaultSearchFilters: SearchFilter[];
-  private defaultSearchQuery = '';
+  private defaultSearchQuery: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private entityTypeSearchFilter: SearchFilterConfig;
   private titleSearchFilter: SearchFilterConfig;
 
@@ -94,11 +116,13 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   constructor(
     private activeModal: NgbActiveModal,
     private cdr: ChangeDetectorRef,
-    private typeaheadConfig: NgbTypeaheadConfig,
     private dropdownConfig: NgbDropdownConfig,
-    private searchTaskService: SearchSimpleItemService
+    private paginationService: PaginationService,
+    private searchTaskService: SearchSimpleItemService,
+    private typeaheadConfig: NgbTypeaheadConfig,
+    private translate: TranslateService
   ) {
-    // customize default values of typeaheads used by this component tree
+    // customize default values of typeahead used by this component tree
     typeaheadConfig.showHint = true;
     // customize default values of dropdowns used by this component tree
     dropdownConfig.autoClose = false;
@@ -108,15 +132,20 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    * Initialize all instance variables
    */
   ngOnInit(): void {
+
+    this.hasInfoMessage = this.translate.get(this.searchMessageInfoKey).pipe(
+      map((message: string) => isNotEmpty(message) && this.searchMessageInfoKey !== message)
+    );
+
     this.defaultSearchFilters = this.excludeListId.map((excludeId) => {
-      return new SearchFilter(`f.${this.excludeFilterName}`, [excludeId], 'not');
+      return new SearchFilter(`f.${this.excludeFilterName}`, [excludeId], 'notequals');
     });
     this.entityTypeSearchFilter = Object.assign(new SearchFilterConfig(), {
       name: 'entityTaskType',
       type: 'authority',
       pageSize: 20,
     });
-
+    this.buildSearchQuery([]);
     this.entityTypeFilterBox = {
       filterName: 'type',
       filterType: FilterBoxType.filter,
@@ -138,14 +167,8 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
       appliedFilterBoxEntries: []
     };
     this.filterBoxList$.next([this.entityTypeFilterBox, this.titleFilterBox]);
-
-    this.paginationOptions.id = 'search-simple-item';
-    this.paginationOptions.pageSizeOptions = [4, 8, 12, 16, 20];
-    this.paginationOptions.pageSize = this.pageSize;
-    this.sortOptions = new SortOptions('dc.title', this.sortDirection);
-
-    this.search(this.paginationOptions, this.sortOptions);
-
+    this.paginationService.clearPagination(this.paginationOptions.id);
+    this.search();
   }
 
   /**
@@ -172,45 +195,6 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    */
   onFilterChange(filterBox: FilterBox): void {
     this.updateFilterList(filterBox);
-    this.paginationOptions = Object.assign(new PaginationComponentOptions(), this.paginationOptions, {
-      currentPage: 0
-    });
-    this.search(this.paginationOptions, this.sortOptions);
-  }
-
-  /**
-   * Update the pagination object and dispatch a new search
-   * @param event
-   */
-  onPaginationChange(event): void {
-    this.paginationOptions = Object.assign(new PaginationComponentOptions(), this.paginationOptions, {
-      currentPage: event.pagination.currentPage,
-      pageSize: event.pagination.pageSize,
-    });
-
-    this.sortOptions = new SortOptions(event.sort.field, event.sort.direction);
-
-    this.search(this.paginationOptions, this.sortOptions);
-  }
-
-  /**
-   * Update the current page and dispatch a new search
-   * @param page
-   */
-  onPageChange(page) {
-    this.search(Object.assign(new PaginationComponentOptions(), this.paginationOptions, {
-      currentPage: page
-    }), this.sortOptions);
-  }
-
-  /**
-   * Update the current page size and dispatch a new search
-   * @param pageSize
-   */
-  onPageSizeChange(pageSize) {
-    this.search(Object.assign(new PaginationComponentOptions(), this.paginationOptions, {
-      pageSize: pageSize
-    }), this.sortOptions);
   }
 
   /**
@@ -219,7 +203,6 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    */
   onRemoveFilter(removedFilter: FilterBox) {
     this.updateFilterList(removedFilter);
-    this.search(this.paginationOptions, this.sortOptions);
   }
 
   /**
@@ -228,10 +211,6 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    */
   onSearchChange(searchbox: FilterBox) {
     this.updateFilterList(searchbox);
-    this.paginationOptions = Object.assign(new PaginationComponentOptions(), this.paginationOptions, {
-      currentPage: 0
-    });
-    this.search(this.paginationOptions, this.sortOptions);
   }
 
   /**
@@ -261,21 +240,21 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   }
 
   private buildSearchQuery(filters: SearchFilter[]) {
-    const queries = [];
+    const queries = isNotEmpty(this.query) ? [this.query] : [];
     filters.forEach((filter) => {
       if (isNotEmpty(filter) && isNotEmpty(filter.values)) {
         queries.push(filter.key + ':(' + filter.values.join(' OR ') + ')');
       }
     });
 
-    this.defaultSearchQuery = encodeURIComponent(queries.join(' AND '));
+    this.defaultSearchQuery.next(encodeURIComponent(queries.join(' AND ')));
   }
 
-  private getFilterEntries(page: number) {
+  private getFilterEntries(page: number = 1) {
     this.searchTaskService.getAvailableFilterEntriesByStepType(
       this.searchConfiguration,
       this.vocabularyName,
-      this.defaultSearchQuery,
+      this.defaultSearchQuery.value,
       this.defaultSearchFilters,
       page,
       this.entityTypeSearchFilter,
@@ -311,26 +290,31 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     return searchFilters;
   }
 
-  private search(paginationOptions: PaginationComponentOptions, sortOptions: SortOptions) {
-    this.getFilterEntries(1);
-
-    this.searching$.next(true);
-    this.availableTaskList$.next([]);
-    this.availableTaskList$.next([]);
-
-    this.searchTaskService.searchAvailableImpactPathwayTasksByStepType(
-      this.searchConfiguration,
-      this.defaultSearchQuery,
-      this.defaultSearchFilters,
-      paginationOptions,
-      sortOptions,
-      this.scope).pipe(
-      take(1)
-    ).subscribe((resultPaginatedList: PaginatedList<Observable<SimpleItem>>) => {
-      this.pageInfoState = resultPaginatedList.pageInfo;
-      this.updateResultList(resultPaginatedList.page);
-    });
-
+  private search() {
+    const pagination$ = this.paginationService.getCurrentPagination(this.paginationOptions.id, this.paginationOptions);
+    const sort$ = this.paginationService.getCurrentSort(this.paginationOptions.id, this.sortOptions);
+    this.subs.push(
+      combineLatest([pagination$, sort$, this.defaultSearchQuery.asObservable()]).pipe(
+        tap(() => {
+          this.getFilterEntries();
+          this.searching$.next(true);
+          this.availableTaskList$.next([]);
+          this.availableTaskList$.next([]);
+        }),
+        debounceTime(100),
+        switchMap(([paginationOptions, sortOptions, defaultSearchQuery]: [PaginationComponentOptions, SortOptions, string]) => this.searchTaskService.searchAvailableImpactPathwayTasksByStepType(
+          this.searchConfiguration,
+          defaultSearchQuery,
+          this.defaultSearchFilters,
+          paginationOptions,
+          sortOptions,
+          this.scope)
+        )
+      ).subscribe((resultPaginatedList: PaginatedList<Observable<SimpleItem>>) => {
+        this.pageInfoState = resultPaginatedList.pageInfo;
+        this.updateResultList(resultPaginatedList.page);
+      })
+    );
   }
 
   private updateFilterList(filterUpdate: FilterBox) {

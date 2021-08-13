@@ -6,7 +6,7 @@ import { LinkService } from '../../core/cache/builders/link.service';
 import { DsoRedirectDataService } from '../../core/data/dso-redirect-data.service';
 import { Community } from '../../core/shared/community.model';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
-import { ImpactPathwayService } from '../../core/impact-pathway/impact-pathway.service';
+import { ImpactPathwayService } from '../../impact-pathway-board/core/impact-pathway.service';
 import { PROJECT_ROUTE } from '../sub-project-page.component';
 
 @Component({

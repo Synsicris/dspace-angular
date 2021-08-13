@@ -3,13 +3,15 @@ import { RouterModule } from '@angular/router';
 import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
 import { I18nBreadcrumbsService } from '../core/breadcrumbs/i18n-breadcrumbs.service';
 import { StatisticsPageModule } from './statistics-page.module';
-import { SiteStatisticsPageComponent } from './site-statistics-page/site-statistics-page.component';
-import { ItemPageResolver } from '../+item-page/item-page.resolver';
-import { ItemStatisticsPageComponent } from './item-statistics-page/item-statistics-page.component';
+import { StatisticsItemPageResolver } from './statistics-item-page.resolver';
 import { CollectionPageResolver } from '../+collection-page/collection-page.resolver';
-import { CollectionStatisticsPageComponent } from './collection-statistics-page/collection-statistics-page.component';
 import { CommunityPageResolver } from '../+community-page/community-page.resolver';
-import { CommunityStatisticsPageComponent } from './community-statistics-page/community-statistics-page.component';
+import { ThemedCollectionStatisticsPageComponent } from './collection-statistics-page/themed-collection-statistics-page.component';
+import { ThemedCommunityStatisticsPageComponent } from './community-statistics-page/themed-community-statistics-page.component';
+import { ThemedItemStatisticsPageComponent } from './item-statistics-page/themed-item-statistics-page.component';
+import { ThemedSiteStatisticsPageComponent } from './site-statistics-page/themed-site-statistics-page.component';
+
+import { DsoContextBreadcrumbResolver } from '../core/breadcrumbs/dso-context-breadcrumb.resolver';
 
 @NgModule({
   imports: [
@@ -22,50 +24,51 @@ import { CommunityStatisticsPageComponent } from './community-statistics-page/co
           },
           data: {
             title: 'statistics.title',
-            breadcrumbKey: 'statistics'
+            breadcrumbKey: 'statistics',
+            type: 'site'
           },
           children: [
             {
               path: '',
-              component: SiteStatisticsPageComponent,
+              component: ThemedSiteStatisticsPageComponent,
             },
           ]
         },
         {
           path: `items/:id`,
           resolve: {
-            scope: ItemPageResolver,
-            breadcrumb: I18nBreadcrumbResolver
+            scope: StatisticsItemPageResolver,
+            breadcrumb: DsoContextBreadcrumbResolver
           },
           data: {
             title: 'statistics.title',
             breadcrumbKey: 'statistics'
           },
-          component: ItemStatisticsPageComponent,
+          component: ThemedItemStatisticsPageComponent,
         },
         {
           path: `collections/:id`,
           resolve: {
             scope: CollectionPageResolver,
-            breadcrumb: I18nBreadcrumbResolver
+            breadcrumb: DsoContextBreadcrumbResolver
           },
           data: {
             title: 'statistics.title',
             breadcrumbKey: 'statistics'
           },
-          component: CollectionStatisticsPageComponent,
+          component: ThemedCollectionStatisticsPageComponent,
         },
         {
           path: `communities/:id`,
           resolve: {
             scope: CommunityPageResolver,
-            breadcrumb: I18nBreadcrumbResolver
+            breadcrumb: DsoContextBreadcrumbResolver
           },
           data: {
             title: 'statistics.title',
             breadcrumbKey: 'statistics'
           },
-          component: CommunityStatisticsPageComponent,
+          component: ThemedCommunityStatisticsPageComponent,
         },
       ]
     )
@@ -75,6 +78,7 @@ import { CommunityStatisticsPageComponent } from './community-statistics-page/co
     I18nBreadcrumbsService,
     CollectionPageResolver,
     CommunityPageResolver,
+    StatisticsItemPageResolver
   ]
 })
 export class StatisticsPageRoutingModule {

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { filter, first, mergeMap, take } from 'rxjs/operators';
+import { filter, mergeMap, take } from 'rxjs/operators';
 import { DynamicFormControlModel, } from '@ng-dynamic-forms/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,15 +12,14 @@ import { JsonPatchOperationsBuilder } from '../../../../core/json-patch/builder/
 import { JsonPatchOperationPathCombiner } from '../../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { WorkspaceitemSectionUploadFileObject } from '../../../../core/submission/models/workspaceitem-section-upload-file.model';
 import { SubmissionFormsModel } from '../../../../core/config/models/config-submission-forms.model';
-import { deleteProperty } from '../../../../shared/object.util';
+import { dateToISOFormat } from '../../../../shared/date.util';
 import { SubmissionService } from '../../../submission.service';
-import { FileService } from '../../../../core/shared/file.service';
 import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
 import { SubmissionJsonPatchOperationsService } from '../../../../core/submission/submission-json-patch-operations.service';
 import { SubmissionObject } from '../../../../core/submission/models/submission-object.model';
 import { WorkspaceitemSectionUploadObject } from '../../../../core/submission/models/workspaceitem-section-upload.model';
 import { SubmissionSectionUploadFileEditComponent } from './edit/section-upload-file-edit.component';
-import { Group } from '../../../../core/eperson/models/group.model';
+import { Bitstream } from '../../../../core/shared/bitstream.model';
 
 /**
  * This component represents a single bitstream contained in the submission
@@ -37,12 +36,6 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
    * @type {Array}
    */
   @Input() availableAccessConditionOptions: any[];
-
-  /**
-   * The list of available groups for an access condition
-   * @type {Array}
-   */
-  @Input() availableAccessConditionGroups: Map<string, Group[]>;
 
   /**
    * The submission id
@@ -81,6 +74,12 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
    * @type {string}
    */
   @Input() fileName: string;
+
+  /**
+   * Representing the possibility to edit or not the files
+   * @type {boolean}
+   */
+  @Input() readOnly = false;
 
   /**
    * The section id
@@ -146,7 +145,6 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
    * Initialize instance variables
    *
    * @param {ChangeDetectorRef} cdr
-   * @param {FileService} fileService
    * @param {FormService} formService
    * @param {HALEndpointService} halService
    * @param {NgbModal} modalService
@@ -156,7 +154,6 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
    * @param {SectionUploadService} uploadService
    */
   constructor(private cdr: ChangeDetectorRef,
-              private fileService: FileService,
               private formService: FormService,
               private halService: HALEndpointService,
               private modalService: NgbModal,
@@ -171,7 +168,7 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
    * Retrieve bitstream's metadata
    */
   ngOnChanges() {
-    if (this.availableAccessConditionOptions && this.availableAccessConditionGroups) {
+    if (this.availableAccessConditionOptions) {
       // Retrieve file state
       this.subscriptions.push(
         this.uploadService
@@ -224,15 +221,14 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
   }
 
   /**
-   * Perform bitstream download
+   * Build a Bitstream object by the current file uuid
+   *
+   * @return Bitstream object
    */
-  public downloadBitstreamFile() {
-    this.halService.getEndpoint('bitstreams').pipe(
-      first())
-      .subscribe((url) => {
-        const fileUrl = `${url}/${this.fileData.uuid}/content`;
-        this.fileService.downloadFile(fileUrl);
-      });
+  public getBitstream(): Bitstream {
+    return Object.assign(new Bitstream(), {
+      uuid: this.fileData.uuid
+    });
   }
 
   /**
@@ -262,6 +258,7 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
           });
         const accessConditionsToSave = [];
         formData.accessConditions
+          .map((accessConditions) => accessConditions.accessConditionGroup)
           .filter((accessCondition) => isNotEmpty(accessCondition))
           .forEach((accessCondition) => {
             let accessConditionOpt;
@@ -271,26 +268,17 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
               .forEach((element) => accessConditionOpt = element);
 
             if (accessConditionOpt) {
-
-              if (accessConditionOpt.hasStartDate !== true && accessConditionOpt.hasEndDate !== true) {
-                accessConditionOpt = deleteProperty(accessConditionOpt, 'hasStartDate');
-
-                accessConditionOpt = deleteProperty(accessConditionOpt, 'hasEndDate');
-                accessConditionsToSave.push(accessConditionOpt);
-              } else {
                 accessConditionOpt = Object.assign({}, accessCondition);
                 accessConditionOpt.name = this.retrieveValueFromField(accessCondition.name);
-                accessConditionOpt.groupUUID = this.retrieveValueFromField(accessCondition.groupUUID);
                 if (accessCondition.startDate) {
-                  accessConditionOpt.startDate = this.retrieveValueFromField(accessCondition.startDate);
-                  accessConditionOpt = deleteProperty(accessConditionOpt, 'endDate');
+                  const startDate = this.retrieveValueFromField(accessCondition.startDate);
+                  accessConditionOpt.startDate = dateToISOFormat(startDate);
                 }
                 if (accessCondition.endDate) {
-                  accessConditionOpt.endDate = this.retrieveValueFromField(accessCondition.endDate);
-                  accessConditionOpt = deleteProperty(accessConditionOpt, 'startDate');
+                  const endDate = this.retrieveValueFromField(accessCondition.endDate);
+                  accessConditionOpt.endDate = dateToISOFormat(endDate);
                 }
                 accessConditionsToSave.push(accessConditionOpt);
-              }
             }
           });
 

@@ -2,7 +2,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule, makeStateKey, TransferState } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NoPreloading, RouterModule } from '@angular/router';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -31,6 +30,10 @@ import {
   LocationToken
 } from '../../app/core/services/browser-hard-redirect.service';
 import { LocaleService } from '../../app/core/locale/locale.service';
+import { GoogleAnalyticsService } from '../../app/statistics/google-analytics.service';
+import { RouterModule, NoPreloading } from '@angular/router';
+import { AuthRequestService } from '../../app/core/auth/auth-request.service';
+import { BrowserAuthRequestService } from '../../app/core/auth/browser-auth-request.service';
 
 export const REQ_KEY = makeStateKey<string>('req');
 
@@ -55,6 +58,7 @@ export function getRequest(transferState: TransferState): any {
       // enableTracing: true,
       useHash: false,
       scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
       preloadingStrategy: NoPreloading
     }),
     StatisticsModule.forRoot(),
@@ -100,6 +104,14 @@ export function getRequest(transferState: TransferState): any {
     {
       provide: HardRedirectService,
       useClass: BrowserHardRedirectService,
+    },
+    {
+      provide: GoogleAnalyticsService,
+      useClass: GoogleAnalyticsService,
+    },
+    {
+      provide: AuthRequestService,
+      useClass: BrowserAuthRequestService,
     },
     {
       provide: LocationToken,

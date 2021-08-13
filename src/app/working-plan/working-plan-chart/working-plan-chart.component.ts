@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { Workpackage } from '../../core/working-plan/models/workpackage-step.model';
+import { Workpackage } from '../core/models/workpackage-step.model';
 
 @Component({
   selector: 'ipw-working-plan-chart',

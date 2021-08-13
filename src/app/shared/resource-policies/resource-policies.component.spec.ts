@@ -33,6 +33,8 @@ import { PolicyType } from '../../core/resource-policy/models/policy-type.model'
 import { ActionType } from '../../core/resource-policy/models/action-type.model';
 import { EPersonMock } from '../testing/eperson.mock';
 import { GroupMock } from '../testing/group-mock';
+import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../mocks/dso-name.service.mock';
 
 describe('ResourcePoliciesComponent test suite', () => {
   let comp: ResourcePoliciesComponent;
@@ -209,6 +211,7 @@ describe('ResourcePoliciesComponent test suite', () => {
         { provide: ResourcePolicyService, useValue: resourcePolicyService },
         { provide: RequestService, useValue: getMockRequestService() },
         { provide: Router, useValue: routerStub },
+        { provide: DSONameService, useClass: DSONameServiceMock },
         ChangeDetectorRef,
         ResourcePoliciesComponent
       ], schemas: [

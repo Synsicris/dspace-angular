@@ -2,13 +2,14 @@
      [attr.id]="sectionData.id"
      [ngClass]="{ 'section-focus' : sectionRef.isSectionActive() && !(isRemoving | async) }"
      [mandatory]="sectionData.mandatory"
+     [opened]="sectionData.opened"
      [submissionId]="submissionId"
      [sectionType]="sectionData.sectionType"
      [sectionId]="sectionData.id">
   <ngb-accordion #acc="ngbAccordion"
                  *ngIf="(sectionRef.isEnabled() | async)"
                  (panelChange)="sectionRef.sectionChange($event)"
-                 activeIds="{{ sectionData.id }}"
+                 activeIds="{{ sectionRef.isOpened() ? [sectionRef.sectionId] : [] }}"
                  [destroyOnHide]="false">
     <ngb-panel id="{{ sectionData.id }}">
       <ng-template ngbPanelTitle>
@@ -26,7 +27,7 @@
             <span *ngIf="!sectionRef.isOpen()" class="fas fa-chevron-down fa-fw"
                   aria-hidden="true"></span>
           </a>
-          <a href="#" class="close mr-3" *ngIf="!sectionRef.isMandatory()"
+          <a href="#" class="close mr-3" *ngIf="!sectionRef.isMandatory() && !(sectionRef.isReadOnly() | async)"
              (click)="removeSection($event)">
             <i *ngIf="!(isRemoving | async)" class="far fa-trash-alt" aria-hidden="true"></i>
             <i *ngIf="(isRemoving | async)" class="fas fa-circle-notch fa-spin" aria-hidden="true"></i>
@@ -35,6 +36,7 @@
       </ng-template>
       <ng-template ngbPanelContent>
         <ds-alert *ngIf="hasInfoMessage | async"
+                  [collapsible]="true"
                   [content]="'submission.sections.'+sectionData.header+'.info'"
                   [type]="AlertTypeEnum.Info"></ds-alert>
         <div id="sectionGenericError_{{sectionData.id}}" *ngIf="sectionRef.hasGenericErrors()">

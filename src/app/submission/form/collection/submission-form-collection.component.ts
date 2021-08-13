@@ -10,12 +10,11 @@ import {
   ViewChild
 } from '@angular/core';
 
-import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
-import { find, flatMap, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 
 import { Collection } from '../../../core/shared/collection.model';
-import { hasValue, isNotEmpty } from '../../../shared/empty.util';
-import { RemoteData } from '../../../core/data/remote-data';
+import { hasValue } from '../../../shared/empty.util';
 import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
 import { SubmissionService } from '../../submission.service';
@@ -24,8 +23,10 @@ import { SubmissionJsonPatchOperationsService } from '../../../core/submission/s
 import { CollectionDataService } from '../../../core/data/collection-data.service';
 import { CollectionDropdownComponent } from '../../../shared/collection-dropdown/collection-dropdown.component';
 import { SectionsService } from '../../sections/sections.service';
+import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { SubmissionDefinitionsConfigService } from '../../../core/config/submission-definitions-config.service';
 import { RequestService } from '../../../core/data/request.service';
+import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 
 /**
  * This component allows to show the current collection the submission belonging to and to change it.
@@ -123,6 +124,7 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
    *
    * @param {ChangeDetectorRef} cdr
    * @param {CollectionDataService} collectionDataService
+   * @param {DSONameService} nameService
    * @param {JsonPatchOperationsBuilder} operationsBuilder
    * @param {SubmissionJsonPatchOperationsService} operationsService
    * @param {RequestService} requestService
@@ -132,6 +134,7 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
    */
   constructor(protected cdr: ChangeDetectorRef,
               private collectionDataService: CollectionDataService,
+              private nameService: DSONameService,
               private operationsBuilder: JsonPatchOperationsBuilder,
               private operationsService: SubmissionJsonPatchOperationsService,
               private requestService: RequestService,
@@ -149,8 +152,8 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
       this.selectedCollectionId = this.currentCollectionId;
 
       this.selectedCollectionName$ = this.collectionDataService.findById(this.currentCollectionId).pipe(
-        find((collectionRD: RemoteData<Collection>) => isNotEmpty(collectionRD.payload)),
-        map((collectionRD: RemoteData<Collection>) => collectionRD.payload.name)
+        getFirstSucceededRemoteDataPayload(),
+        map((collection: Collection) => this.nameService.getName(collection))
       );
     }
   }
@@ -162,7 +165,7 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
     this.pathCombiner = new JsonPatchOperationPathCombiner('sections', 'collection');
     this.available$ = this.sectionsService.isSectionAvailable(this.submissionId, 'collection');
     if (this.entityType) {
-      this.metadata = 'relationship.type';
+      this.metadata = 'dspace.entity.type';
     }
   }
 
@@ -187,24 +190,15 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
       this.submissionId,
       'sections',
       'collection').pipe(
-      map((submissionObjects: SubmissionObject[]) => submissionObjects[0]),
-      flatMap((submissionObject: SubmissionObject) => {
-        const collection$ = this.collectionDataService.findByHref(submissionObject._links.collection.href);
-        const submissionDefinition$ = this.submissionDefinitionsService
-          .findByHref(submissionObject._links.submissionDefinition.href + '?projection=full');
-        return combineLatest(collection$, submissionDefinition$).pipe(
-          map(([collection, submissionDefinition]) => {
-            this.requestService.removeByHrefSubstring(submissionObject._links.submissionDefinition.href);
-            return Object.assign({}, submissionObject, {
-              collection: collection.payload,
-              submissionDefinition: submissionDefinition.payload
-            });
-          })
-        );
-      })
+        mergeMap((submissionObject: SubmissionObject[]) => {
+          // retrieve the full submission object with embeds
+          return this.submissionService.retrieveSubmission(submissionObject[0].id).pipe(
+            getFirstSucceededRemoteDataPayload()
+          );
+        })
       ).subscribe((submissionObject: SubmissionObject) => {
         this.selectedCollectionId = event.collection.id;
-        this.selectedCollectionName$ = observableOf(event.collection.name);
+        this.selectedCollectionName$ = observableOf(this.nameService.getName(event.collection));
         this.collectionChange.emit(submissionObject);
         this.submissionService.changeSubmissionCollection(this.submissionId, event.collection.id);
         this.processingChange$.next(false);

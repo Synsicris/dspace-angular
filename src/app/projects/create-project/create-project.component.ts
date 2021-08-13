@@ -9,7 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { ProjectDataService } from '../../core/project/project-data.service';
+import { ProjectDataService, ProjectGrantsTypes } from '../../core/project/project-data.service';
 import { RemoteData } from '../../core/data/remote-data';
 import { Community } from '../../core/shared/community.model';
 import { RequestService } from '../../core/data/request.service';
@@ -51,8 +51,8 @@ export class CreateProjectComponent implements OnInit {
    * The grant options available
    */
   public grantsOptions = [
-    { id: 'project', name: 'project.create.grants.project-option' },
-    { id: 'subproject', name: 'project.create.grants.subproject-option' }
+    { id: ProjectGrantsTypes.Project, name: 'project.create.grants.project-option' },
+    { id: ProjectGrantsTypes.Subproject, name: 'project.create.grants.subproject-option' }
   ];
 
   public processing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -96,7 +96,7 @@ export class CreateProjectComponent implements OnInit {
         if (results.hasSucceeded) {
           // use grant options from rest only if available
           this.grantsOptions = results.payload.page.map((entry: VocabularyEntry) => ({
-            id: entry.value,
+            id: entry.value as any,
             name: entry.display
           }));
         }

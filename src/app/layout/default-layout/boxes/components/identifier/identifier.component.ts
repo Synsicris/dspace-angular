@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { RenderingTypeModelComponent } from '../rendering-type.model';
-import { FieldRendetingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
+import { FieldRenderingType, MetadataBoxFieldRendering } from '../metadata-box.decorator';
 import { ResolverStrategyService } from '../../../../services/resolver-strategy.service';
 import { hasValue } from '../../../../../shared/empty.util';
 import { MetadataLinkValue } from '../../../../models/cris-layout-metadata-link-value.model';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * This component renders the identifier metadata fields.
@@ -14,7 +15,7 @@ import { MetadataLinkValue } from '../../../../models/cris-layout-metadata-link-
   templateUrl: './identifier.component.html',
   styleUrls: ['./identifier.component.scss']
 })
-@MetadataBoxFieldRendering(FieldRendetingType.IDENTIFIER)
+@MetadataBoxFieldRendering(FieldRenderingType.IDENTIFIER)
 export class IdentifierComponent extends RenderingTypeModelComponent implements OnInit {
 
   /**
@@ -34,15 +35,21 @@ export class IdentifierComponent extends RenderingTypeModelComponent implements 
    */
   target = '_blank';
 
-  constructor(private resolver: ResolverStrategyService) {
-    super();
+  constructor(private resolver: ResolverStrategyService, protected translateService: TranslateService) {
+    super(translateService);
   }
 
   ngOnInit(): void {
     const identifiers = [];
-    this.metadataValues.forEach((metadataValue) => {
+    let itemsToBeRendered = [];
+    if (this.indexToBeRendered >= 0) {
+      itemsToBeRendered.push(this.metadataValues[this.indexToBeRendered]);
+    } else {
+      itemsToBeRendered = [...this.metadataValues];
+    }
+    itemsToBeRendered.forEach((metadataValue) => {
       let identifier: MetadataLinkValue;
-      if ( hasValue(this.subtype) ) {
+      if (hasValue(this.subtype)) {
         identifier = this.composeLink(metadataValue, this.subtype);
       } else {
         // Check if the value is a link (http, https, ftp or ftps)

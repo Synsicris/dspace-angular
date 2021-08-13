@@ -108,7 +108,7 @@ describe('TabDataService', () => {
 
     requestService = jasmine.createSpyObj('requestService', {
       generateRequestId: requestUUID,
-      configure: true,
+      send: true,
       removeByHrefSubstring: {},
       getByHref: of(responseCacheEntry),
       getByUUID: of(responseCacheEntry),
@@ -165,14 +165,14 @@ describe('TabDataService', () => {
       options.searchParams = [
         new RequestParam('uuid', itemUUID)
       ];
-      scheduler.schedule(() => service.findByItem(itemUUID));
+      scheduler.schedule(() => service.findByItem(itemUUID, true));
       scheduler.flush();
 
-      expect((service as any).dataService.searchBy).toHaveBeenCalledWith((service as any).searchFindByItem, options);
+      expect((service as any).dataService.searchBy).toHaveBeenCalledWith((service as any).searchFindByItem, options, true);
     });
 
     it('should return a RemoteData<PaginatedList<Tab>> for the search', () => {
-      const result = service.findByItem(itemUUID);
+      const result = service.findByItem(itemUUID, true);
       const expected = cold('a|', {
         a: paginatedListRD
       });

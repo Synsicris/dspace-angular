@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { hasValue } from '../../shared/empty.util';
+import { hasValue, isEmpty } from '../../shared/empty.util';
 import { DSpaceObject } from '../shared/dspace-object.model';
+import { TranslateService } from '@ngx-translate/core';
+import { LocaleService } from '../locale/locale.service';
+import { MetadataValueFilter } from '../shared/metadata.models';
 
 /**
  * Returns a name for a {@link DSpaceObject} based
@@ -11,6 +14,10 @@ import { DSpaceObject } from '../shared/dspace-object.model';
 })
 export class DSONameService {
 
+  constructor(private translateService: TranslateService, private locale: LocaleService) {
+
+  }
+
   /**
    * Functions to generate the specific names.
    *
@@ -20,16 +27,23 @@ export class DSONameService {
    *
    * With only two exceptions those solutions seem overkill for now.
    */
-  private factories = {
+  private readonly factories = {
     Person: (dso: DSpaceObject): string => {
-      return `${dso.firstMetadataValue('person.familyName')}, ${dso.firstMetadataValue('person.givenName')}`;
+      const familyName = dso.firstMetadataValue('person.familyName');
+      const givenName = dso.firstMetadataValue('person.givenName');
+      if (isEmpty(familyName) && isEmpty(givenName)) {
+        return dso.firstMetadataValue('dc.title') || dso.name;
+      } else {
+        return `${familyName}, ${givenName}`;
+      }
     },
     OrgUnit: (dso: DSpaceObject): string => {
-      return dso.firstMetadataValue('organization.legalName');
+      return dso.firstMetadataValue('organization.legalName') || dso.firstMetadataValue('dc.title');
     },
     Default: (dso: DSpaceObject): string => {
+      const filter: MetadataValueFilter = { language: this.locale.getCurrentLanguageCode() };
       // If object doesn't have dc.title metadata use name property
-      return dso.firstMetadataValue('dc.title') || dso.name;
+      return dso.firstMetadataValue('dc.title', filter) || dso.name || this.translateService.instant('dso.name.untitled');
     }
   };
 

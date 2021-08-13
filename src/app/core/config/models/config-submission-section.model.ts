@@ -6,11 +6,18 @@ import { ConfigObject } from './config.model';
 import { SUBMISSION_SECTION_TYPE } from './config-type';
 
 /**
+ * An Enum defining the possible visibility values
+ */
+export enum SubmissionVisibilityValue {
+  ReadOnly = 'read-only',
+  Hidden = 'hidden'
+}
+
+/**
  * An interface that define section visibility and its properties.
  */
-export interface SubmissionSectionVisibility {
-  main: any;
-  other: any;
+export interface SubmissionVisibilityType {
+  [scope: string]: SubmissionVisibilityValue;
 }
 
 @typedObject
@@ -31,16 +38,22 @@ export class SubmissionSectionModel extends ConfigObject {
   mandatory: boolean;
 
   /**
+   * A boolean representing if this submission section is opened or collapsed by default
+   */
+  @autoserialize
+  opened: boolean;
+
+  /**
    * A string representing the kind of section object
    */
   @autoserialize
   sectionType: SectionsType;
 
   /**
-   * The [SubmissionSectionVisibility] object for this section
+   * The [SubmissionVisibilityType] object for this section
    */
   @autoserialize
-  visibility: SubmissionSectionVisibility;
+  visibility: SubmissionVisibilityType;
 
   /**
    * The {@link HALLink}s for this SubmissionSectionModel

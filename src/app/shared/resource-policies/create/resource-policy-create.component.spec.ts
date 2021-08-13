@@ -28,6 +28,7 @@ import { submittedResourcePolicy } from '../form/resource-policy-form.component.
 import { PolicyType } from '../../../core/resource-policy/models/policy-type.model';
 import { ActionType } from '../../../core/resource-policy/models/action-type.model';
 import { EPersonMock } from '../../testing/eperson.mock';
+import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 
 describe('ResourcePolicyCreateComponent test suite', () => {
   let comp: ResourcePolicyCreateComponent;
@@ -86,6 +87,9 @@ describe('ResourcePolicyCreateComponent test suite', () => {
   const routerStub = Object.assign(new RouterStub(), {
     url: `url/edit`
   });
+  const DSONameServiceMock = jasmine.createSpyObj('DSONameService', {
+    getName: jasmine.createSpy('getName')
+  });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -102,6 +106,7 @@ describe('ResourcePolicyCreateComponent test suite', () => {
         { provide: NotificationsService, useValue: new NotificationsServiceStub() },
         { provide: ResourcePolicyService, useValue: resourcePolicyService },
         { provide: Router, useValue: routerStub },
+        { provide: DSONameService, useValue: DSONameServiceMock },
         ResourcePolicyCreateComponent,
         ChangeDetectorRef,
         Injector
@@ -143,6 +148,7 @@ describe('ResourcePolicyCreateComponent test suite', () => {
       fixture = TestBed.createComponent(ResourcePolicyCreateComponent);
       comp = fixture.componentInstance;
       compAsAny = fixture.componentInstance;
+      DSONameServiceMock.getName.and.returnValue('test item');
     });
 
     afterEach(() => {

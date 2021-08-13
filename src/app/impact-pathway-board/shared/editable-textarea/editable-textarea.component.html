@@ -1,12 +1,13 @@
 <div class="d-flex">
   <div class="d-inline-block position-relative w-100 h-100">
-    <textarea #textarea class="form-control rounded-0"
+    <textarea #textarea class="form-control rounded-0 editor"
               placeholder="{{placeholder}}"
+              rows="{{rows}}"
               title="{{placeholder}}"
               [disabled]="!(isEditable() | async)"
               [value]="initContent"></textarea>
 
-      <div class="input-group-prepend edit-field">
+      <div class="input-group-prepend edit-buttons">
         <button [disabled]="!(canSetEditable() | async)" *ngIf="!(isEditable() | async)"
                 (click)="setEditable(true)" class="btn btn-outline-primary btn-sm rounded-0"
                 title="{{'item.edit.metadata.edit.buttons.edit' | translate}}">

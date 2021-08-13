@@ -1,11 +1,13 @@
 <div class="{{containerStyle}}">
-  <span class="{{labelStyle}}">
-    {{label | translate}}
+  <span  *ngIf="!nested" class="{{labelStyle}}">
+    {{label}}
   </span>
   <div [class]="'d-flex flex-column ' + valueStyle">
     <span *ngFor="let ref of (references| async)" class="txt-value">
-      <ng-container [ngTemplateOutlet]="ref.id ? withAuthority : withoutAuthority"
-                    [ngTemplateOutletContext]="{ref:ref}"></ng-container>
+      <span class="d-inline-flex align-items-center">
+        <ng-container [ngTemplateOutlet]="ref.id ? withAuthority : withoutAuthority"
+                      [ngTemplateOutletContext]="{ref:ref}"></ng-container>
+      </span>
     </span>
   </div>
 </div>
@@ -16,8 +18,13 @@
      [routerLink]="['/items/' + ref.id]">
     {{ref.value}} <i class="{{ref.icon}}"></i>
   </a>
+  <img *ngIf="ref.orcidAuthenticated"
+       placement="top"
+       ngbTooltip="{{ ref.orcidAuthenticated }}"
+       class="orcid-icon"
+       src="assets/images/orcid.logo.icon.svg"/>
 </ng-template>
 
 <ng-template #withoutAuthority let-ref="ref">
-  {{ref.value}}
+  {{normalizeValue(ref.value)}}
 </ng-template>

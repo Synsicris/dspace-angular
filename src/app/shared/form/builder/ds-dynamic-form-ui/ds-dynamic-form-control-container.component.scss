@@ -18,3 +18,20 @@
 .hint {
   cursor: pointer;
 }
+
+::ng-deep .hint-tooltip .tooltip-inner {
+  background-color: #d2e4ea;
+  color: #113d4f;
+}
+::ng-deep .bs-tooltip-top .arrow::before {
+  border-top-color: #d2e4ea;
+}
+::ng-deep .bs-tooltip-right .arrow::before {
+  border-right-color: #d2e4ea;
+}
+::ng-deep .bs-tooltip-left .arrow::before {
+  border-left-color: #d2e4ea;
+}
+::ng-deep .bs-tooltip-bottom .arrow::before {
+  border-bottom-color: #d2e4ea;
+}

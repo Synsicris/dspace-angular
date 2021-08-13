@@ -73,7 +73,6 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
 
     groups$.pipe(take(1))
       .subscribe((groups: string[]) => {
-        console.log('admins', groups);
         this.modalRef = this.modalService.open(InvitationModalComponent);
         this.modalRef.componentInstance.groupList = groups;
       });

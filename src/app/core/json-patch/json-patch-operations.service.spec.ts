@@ -17,6 +17,7 @@ import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { JsonPatchOperationsEntry, JsonPatchOperationsResourceEntry } from './json-patch-operations.reducer';
 import {
   CommitPatchOperationsAction,
+  DeletePendingJsonPatchOperationsAction,
   RollbacktPatchOperationsAction,
   StartTransactionPatchOperationsAction
 } from './json-patch-operations.actions';
@@ -145,12 +146,12 @@ describe('JsonPatchOperationsService test suite', () => {
       expect((service as any).submitJsonPatchOperations).toHaveBeenCalled();
     });
 
-    it('should configure a new SubmissionPatchRequest', () => {
+    it('should send a new SubmissionPatchRequest', () => {
       const expected = new SubmissionPatchRequest(requestService.generateRequestId(), resourceHref, patchOpBody);
       scheduler.schedule(() => service.jsonPatchByResourceType(resourceEndpoint, resourceScope, testJsonPatchResourceType).subscribe());
       scheduler.flush();
 
-      expect(requestService.configure).toHaveBeenCalledWith(expected);
+      expect(requestService.send).toHaveBeenCalledWith(expected);
     });
 
     it('should dispatch a new StartTransactionPatchOperationsAction', () => {
@@ -235,12 +236,12 @@ describe('JsonPatchOperationsService test suite', () => {
       expect((service as any).submitJsonPatchOperations).toHaveBeenCalled();
     });
 
-    it('should configure a new SubmissionPatchRequest', () => {
+    it('should send a new SubmissionPatchRequest', () => {
       const expected = new SubmissionPatchRequest(requestService.generateRequestId(), resourceHref, patchOpBody);
       scheduler.schedule(() => service.jsonPatchByResourceID(resourceEndpoint, resourceScope, testJsonPatchResourceType, testJsonPatchResourceId).subscribe());
       scheduler.flush();
 
-      expect(requestService.configure).toHaveBeenCalledWith(expected);
+      expect(requestService.send).toHaveBeenCalledWith(expected);
     });
 
     it('should dispatch a new StartTransactionPatchOperationsAction', () => {
@@ -285,6 +286,21 @@ describe('JsonPatchOperationsService test suite', () => {
 
         expect(store.dispatch).toHaveBeenCalledWith(expectedAction);
       });
+    });
+  });
+
+  describe('deletePendingJsonPatchOperations', () => {
+    beforeEach(() => {
+      store.dispatch.and.callFake(() => { /* */ });
+    });
+
+    it('should dispatch a new DeletePendingJsonPatchOperationsAction', () => {
+
+      const expectedAction = new DeletePendingJsonPatchOperationsAction();
+      scheduler.schedule(() => service.deletePendingJsonPatchOperations());
+      scheduler.flush();
+
+      expect(store.dispatch).toHaveBeenCalledWith(expectedAction);
     });
   });
 

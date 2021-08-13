@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 
 import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, mergeMap, scan, switchMap, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 import { SectionModelComponent } from '../models/section.model';
 import { hasValue, isNotEmpty, isNotUndefined, isUndefined } from '../../../shared/empty.util';
@@ -24,13 +24,8 @@ import { SubmissionService } from '../../submission.service';
 import { Collection } from '../../../core/shared/collection.model';
 import { AccessConditionOption } from '../../../core/config/models/config-access-condition-option.model';
 import { followLink } from '../../../shared/utils/follow-link-config.model';
-import {
-  getFirstSucceededRemoteData,
-  getFirstSucceededRemoteDataPayload,
-  getFirstSucceededRemoteListPayload
-} from '../../../core/shared/operators';
-import { ActionType } from '../../../core/resource-policy/models/action-type.model';
-import { ResourcePolicy } from '../../../core/resource-policy/models/resource-policy.model';
+import { getFirstSucceededRemoteData } from '../../../core/shared/operators';
+import { SubmissionVisibility } from '../../utils/visibility.util';
 
 export const POLICY_DEFAULT_NO_LIST = 1; // Banner1
 export const POLICY_DEFAULT_WITH_LIST = 2; // Banner2
@@ -106,11 +101,6 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
   public availableAccessConditionOptions: AccessConditionOption[];  // List of accessConditions that an user can select
 
   /**
-   * List of Groups available for every access condition
-   */
-  public availableGroups: Map<string, Group[]>; // Groups for any policy
-
-  /**
    * Is the upload required
    * @type {boolean}
    */
@@ -153,7 +143,7 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
    * Initialize all instance variables and retrieve collection default access conditions
    */
   onSectionInit() {
-    const config$ = this.uploadsConfigService.findByHref(this.sectionData.config, false, followLink('metadata')).pipe(
+    const config$ = this.uploadsConfigService.findByHref(this.sectionData.config, true, false, followLink('metadata')).pipe(
       getFirstSucceededRemoteData(),
       map((config) => config.payload));
 
@@ -174,69 +164,33 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
         mergeMap((submissionObject: SubmissionObjectEntry) => this.collectionDataService.findById(submissionObject.collection)),
         filter((rd: RemoteData<Collection>) => isNotUndefined((rd.payload))),
         tap((collectionRemoteData: RemoteData<Collection>) => this.collectionName = collectionRemoteData.payload.name),
-        mergeMap((collectionRemoteData: RemoteData<Collection>) => {
-          return this.resourcePolicyService.searchByResource(collectionRemoteData.payload.id, ActionType.DEFAULT_BITSTREAM_READ).pipe(
-            getFirstSucceededRemoteListPayload(),
-            tap((defaultAccessConditionsRemoteData: ResourcePolicy[]) => {
-              if (isNotEmpty(defaultAccessConditionsRemoteData)) {
-                this.collectionDefaultAccessConditions = defaultAccessConditionsRemoteData;
-              }
-            })
+        // TODO review this part when https://github.com/DSpace/dspace-angular/issues/575 is resolved
+/*        mergeMap((collectionRemoteData: RemoteData<Collection>) => {
+          return this.resourcePolicyService.findByHref(
+            (collectionRemoteData.payload as any)._links.defaultAccessConditions.href
           );
         }),
+        filter((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) =>
+          defaultAccessConditionsRemoteData.hasSucceeded),
+        tap((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) => {
+          if (isNotEmpty(defaultAccessConditionsRemoteData.payload)) {
+            this.collectionDefaultAccessConditions = Array.isArray(defaultAccessConditionsRemoteData.payload)
+              ? defaultAccessConditionsRemoteData.payload : [defaultAccessConditionsRemoteData.payload];
+          }
+        }),*/
         mergeMap(() => config$),
-        mergeMap((config: SubmissionUploadsModel) => {
-          this.required$.next(config.required);
-          this.availableAccessConditionOptions = isNotEmpty(config.accessConditionOptions) ? config.accessConditionOptions : [];
-
-          this.collectionPolicyType = this.availableAccessConditionOptions.length > 0
-            ? POLICY_DEFAULT_WITH_LIST
-            : POLICY_DEFAULT_NO_LIST;
-
-          this.availableGroups = new Map();
-          const mapGroups$: Observable<AccessConditionGroupsMapEntry>[] = [];
-          // Retrieve Groups for accessCondition Policies
-          this.availableAccessConditionOptions.forEach((accessCondition: AccessConditionOption) => {
-            if (accessCondition.hasEndDate === true || accessCondition.hasStartDate === true) {
-              if (accessCondition.groupUUID) {
-                mapGroups$.push(
-                  this.groupService.findById(accessCondition.groupUUID).pipe(
-                    getFirstSucceededRemoteDataPayload(),
-                    map((group: Group) => ({
-                      accessCondition: accessCondition.name,
-                      groups: [group]
-                    } as AccessConditionGroupsMapEntry)))
-                );
-              } else if (accessCondition.selectGroupUUID) {
-                mapGroups$.push(
-                  this.groupService.findById(accessCondition.selectGroupUUID).pipe(
-                    getFirstSucceededRemoteDataPayload(),
-                    mergeMap((group: Group) => group.subgroups),
-                    getFirstSucceededRemoteListPayload(),
-                    map((groups: Group[]) => ({
-                      accessCondition: accessCondition.name,
-                      groups: groups
-                    } as AccessConditionGroupsMapEntry))
-                  ));
-              }
-            }
-          });
-          return mapGroups$;
-        }),
-        mergeMap((entry) => entry),
-        scan((acc: any[], entry: AccessConditionGroupsMapEntry) => [...acc, entry], []),
-      ).subscribe((entries: AccessConditionGroupsMapEntry[]) => {
-        entries.forEach((entry: AccessConditionGroupsMapEntry) => {
-          this.availableGroups.set(entry.accessCondition, entry.groups);
-        });
+      ).subscribe((config: SubmissionUploadsModel) => {
+        this.required$.next(config.required);
+        this.availableAccessConditionOptions = isNotEmpty(config.accessConditionOptions) ? config.accessConditionOptions : [];
+        this.collectionPolicyType = this.availableAccessConditionOptions.length > 0
+          ? POLICY_DEFAULT_WITH_LIST
+          : POLICY_DEFAULT_NO_LIST;
         this.changeDetectorRef.detectChanges();
       }),
 
       // retrieve submission's bitstreams from state
-      observableCombineLatest([
-        this.configMetadataForm$,
-        this.bitstreamService.getUploadedFileList(this.submissionId, this.sectionData.id)
-      ]).pipe(
+      observableCombineLatest(this.configMetadataForm$,
+        this.bitstreamService.getUploadedFileList(this.submissionId, this.sectionData.id)).pipe(
         filter(([configMetadataForm, fileList]: [SubmissionFormsModel, any[]]) => {
           return isNotEmpty(configMetadataForm) && isNotUndefined(fileList);
         }),
@@ -257,6 +211,16 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
             this.changeDetectorRef.detectChanges();
           }
         )
+    );
+  }
+
+  /**
+   * Check if upload section has read-only visibility
+   */
+  isReadOnly(): boolean {
+    return SubmissionVisibility.isReadOnly(
+      this.sectionData.sectionVisibility,
+      this.submissionService.getSubmissionScope()
     );
   }
 
@@ -289,13 +253,11 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
   protected getSectionStatus(): Observable<boolean> {
     // if not mandatory, always true
     // if mandatory, at least one file is required
-    return observableCombineLatest([this.required$,
-      this.bitstreamService.getUploadedFileList(this.submissionId, this.sectionData.id)
-    ]).pipe(
-      map(([required, fileList]: [boolean, any[]]) => {
+    return observableCombineLatest(this.required$,
+      this.bitstreamService.getUploadedFileList(this.submissionId, this.sectionData.id),
+      (required,fileList: any[]) => {
         return (!required || (isNotUndefined(fileList) && fileList.length > 0));
-      })
-    );
+      });
   }
 
   /**

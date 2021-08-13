@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
+
 import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
 import { SimpleItem } from './models/simple-item.model';
 
@@ -10,7 +12,7 @@ import { SimpleItem } from './models/simple-item.model';
   styleUrls: ['./create-simple-item-modal.component.scss'],
   templateUrl: './create-simple-item-modal.component.html'
 })
-export class CreateSimpleItemModalComponent {
+export class CreateSimpleItemModalComponent implements OnInit {
 
   /**
    * The vocabulary name to use retrieve search filter labels
@@ -22,7 +24,7 @@ export class CreateSimpleItemModalComponent {
    * The list of id to exclude from search results
    * @type {string[]}
    */
-  @Input() excludeListId: string[];
+  @Input() excludeListId: string[] = [];
 
   /**
    * The name of the filter used to exclude results from a search
@@ -61,10 +63,27 @@ export class CreateSimpleItemModalComponent {
   @Input() hasSearch = true;
 
   /**
+   * Additional search query
+   * @type {string}
+   */
+  @Input() query: string;
+
+  /**
    * The search scope
    * @type {string}
    */
   @Input() scope: string;
+
+  /**
+   * The i18n key of the info message to display
+   */
+  @Input() searchMessageInfoKey;
+
+  /**
+   * A boolean representing if start with search tab active
+   * @type {boolean}
+   */
+  @Input() startWithSearch = false;
 
   /**
    * EventEmitter that will emit a SimpleItem object created
@@ -76,13 +95,24 @@ export class CreateSimpleItemModalComponent {
    */
   @Output() addItems: EventEmitter<SimpleItem[]> = new EventEmitter<SimpleItem[]>();
 
-  constructor(public activeModal: NgbActiveModal) {
+  constructor(public activeModal: NgbActiveModal, private route: ActivatedRoute, private router: Router) {
+  }
+
+  ngOnInit(): void {
+    this.removeParamFromUrl();
   }
 
   /**
    * Close modal
    */
   closeModal() {
+    this.removeParamFromUrl();
     this.activeModal.dismiss(false);
+  }
+
+  private removeParamFromUrl() {
+    const queryParams = {};
+
+    this.router.navigate([], { queryParams, replaceUrl: true, relativeTo: this.route });
   }
 }

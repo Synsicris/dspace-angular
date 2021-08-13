@@ -6,9 +6,10 @@
         <ds-loading *ngIf="(loading$ | async)" [showMessage]="false"></ds-loading>
         <ul class="list-unstyled">
           <li *ngFor="let subproject of (subprojectList$ | async)">
-            <button class="btn btn-link m-0 p-0" (click)="navigateToSubProject(subproject)">
+            <button class="btn btn-link m-0 p-0 text-left" (click)="navigateToSubProject(subproject)">
               <span class="h5">{{getSubprojectName(subproject)}}</span>
             </button>
+            <a class="h3" routerLink="{{getProjectItemPath(subproject.id) | async}}">Detail page</a>
           </li>
           <li *ngIf="!(loading$ | async) && (subprojectList$ | async)?.length === 0">
             <span class="h5 text-muted">{{'project-overview.page.subproject.none-available' | translate}}</span>

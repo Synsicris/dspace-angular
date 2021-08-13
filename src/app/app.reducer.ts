@@ -3,11 +3,8 @@ import { ActionReducerMap, createSelector, MemoizedSelector } from '@ngrx/store'
 import {
   ePeopleRegistryReducer,
   EPeopleRegistryState
-} from './+admin/admin-access-control/epeople-registry/epeople-registry.reducers';
-import {
-  groupRegistryReducer,
-  GroupRegistryState
-} from './+admin/admin-access-control/group-registry/group-registry.reducers';
+} from './access-control/epeople-registry/epeople-registry.reducers';
+import { groupRegistryReducer, GroupRegistryState } from './access-control/group-registry/group-registry.reducers';
 import {
   metadataRegistryReducer,
   MetadataRegistryState
@@ -33,6 +30,7 @@ import { filterReducer, SearchFiltersState } from './shared/search/search-filter
 import { sidebarFilterReducer, SidebarFiltersState } from './shared/sidebar/filter/sidebar-filter.reducer';
 import { sidebarReducer, SidebarState } from './shared/sidebar/sidebar.reducer';
 import { truncatableReducer, TruncatablesState } from './shared/truncatable/truncatable.reducer';
+import { themeReducer, ThemeState } from './shared/theme-support/theme.reducer';
 
 export interface AppState {
   router: fromRouter.RouterReducerState;
@@ -45,6 +43,7 @@ export interface AppState {
   searchFilter: SearchFiltersState;
   truncatable: TruncatablesState;
   cssVariables: CSSVariablesState;
+  theme: ThemeState;
   menus: MenusState;
   objectSelection: ObjectSelectionListState;
   selectableLists: SelectableListsState;
@@ -65,6 +64,7 @@ export const appReducers: ActionReducerMap<AppState> = {
   searchFilter: filterReducer,
   truncatable: truncatableReducer,
   cssVariables: cssVariablesReducer,
+  theme: themeReducer,
   menus: menusReducer,
   objectSelection: objectSelectionReducer,
   selectableLists: selectableListReducer,

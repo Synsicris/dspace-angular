@@ -22,6 +22,7 @@ export class EditableTextareaComponent implements OnInit {
 
   @Input() public placeholder: string;
   @Input() public initContent: string;
+  @Input() public rows = 5;
 
   savedContent: string;
 

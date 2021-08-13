@@ -2,6 +2,12 @@
   <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
 </ng-template>
 
+<ds-alert *ngIf="hasInfoMessage | async"
+          [content]="searchMessageInfoKey"
+          [collapsible]="true"
+          [collapsed]="true"
+          [type]="'alert-info'"></ds-alert>
+
 <ds-search-simple-item-header [vocabularyName]="vocabularyName"
                               [filterBoxList]="filterBoxList$.asObservable()"
                               [availableTaskList]="availableTaskList$.asObservable()"
@@ -17,8 +23,7 @@
                  [collectionSize]="pageInfoState?.totalElements"
                  [sortOptions]="sortOptions"
                  [hidePagerWhenSinglePage]="true"
-                 [disableRouteParameterUpdate]="true"
-                 (paginationChange)="onPaginationChange($event)">
+                 [retainScrollPosition]="true">
     <div id="sidebar-object-list"
          class="task-list d-flex flex-wrap p-3">
       <ds-simple-item-box *ngFor="let task of (availableTaskList$ | async)"

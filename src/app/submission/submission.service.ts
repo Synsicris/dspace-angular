@@ -22,9 +22,9 @@ import {
   SetActiveSectionAction
 } from './objects/submission-objects.actions';
 import {
+  SubmissionError,
   SubmissionObjectEntry,
   SubmissionSectionEntry,
-  SubmissionSectionError,
   SubmissionSectionObject
 } from './objects/submission-objects.reducer';
 import { submissionObjectFromIdSelector } from './selectors';
@@ -48,6 +48,7 @@ import { environment } from '../../environments/environment';
 import { SubmissionJsonPatchOperationsService } from '../core/submission/submission-json-patch-operations.service';
 import { NotificationOptions } from '../shared/notifications/models/notification-options.model';
 import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
+import { SubmissionVisibility } from './utils/visibility.util';
 import { MYDSPACE_ROUTE } from '../+my-dspace-page/my-dspace-page.component';
 
 /**
@@ -176,6 +177,31 @@ export class SubmissionService {
   }
 
   /**
+   * Perform a REST call to create a new workspaceitem by item and return response
+   *
+   * @return Observable<SubmissionObject>
+   *    observable of SubmissionObject
+   */
+  createSubmissionByItem(itemId: string, relationshipName?: string): Observable<SubmissionObject> {
+    const paramsObj = Object.create({});
+
+    if (isNotEmpty(itemId)) {
+      paramsObj.item = itemId;
+    }
+    if (isNotEmpty(relationshipName)) {
+      paramsObj.relationship = relationshipName;
+    }
+
+    const params = new HttpParams({fromObject: paramsObj});
+    const options: HttpOptions = Object.create({});
+    options.params = params;
+
+    return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, options).pipe(
+      map((workspaceitem: SubmissionObject[]) => workspaceitem[0] as SubmissionObject),
+      catchError(() => observableOf({} as SubmissionObject)));
+  }
+
+  /**
    * Perform a REST call to deposit a workspaceitem and return response
    *
    * @param selfUrl
@@ -226,7 +252,7 @@ export class SubmissionService {
     submissionDefinition: SubmissionDefinitionsModel,
     sections: WorkspaceitemSectionsObject,
     item: Item,
-    errors: SubmissionSectionError[]) {
+    errors: SubmissionError) {
     this.store.dispatch(new InitSubmissionFormAction(collectionId, submissionId, selfUrl, submissionDefinition, sections, item, errors));
   }
 
@@ -247,9 +273,11 @@ export class SubmissionService {
    *    The submission id
    * @param itemId
    *    The submission item id
+   * @param isEditItem
+   *    is submission object is an EditItem
    */
-  dispatchDiscard(submissionId, itemId) {
-    this.store.dispatch(new DiscardSubmissionAction(submissionId, itemId));
+  dispatchDiscard(submissionId, itemId, isEditItem = false) {
+    this.store.dispatch(new DiscardSubmissionAction(submissionId, itemId, isEditItem));
   }
 
   /**
@@ -336,11 +364,14 @@ export class SubmissionService {
             const sectionObject: SectionDataObject = Object.create({});
             sectionObject.config = sections[sectionId].config;
             sectionObject.mandatory = sections[sectionId].mandatory;
+            sectionObject.opened = sections[sectionId].opened;
             sectionObject.data = sections[sectionId].data;
-            sectionObject.errors = sections[sectionId].errors;
+            sectionObject.errorsToShow = sections[sectionId].errorsToShow;
+            sectionObject.serverValidationErrors = sections[sectionId].serverValidationErrors;
             sectionObject.header = sections[sectionId].header;
             sectionObject.id = sectionId;
             sectionObject.sectionType = sections[sectionId].sectionType;
+            sectionObject.sectionVisibility = sections[sectionId].visibility;
             availableSections.push(sectionObject);
           });
         return availableSections;
@@ -413,6 +444,9 @@ export class SubmissionService {
         break;
       case this.editItemsLinkPath:
         scope = SubmissionScopeType.EditItem;
+        break;
+      default:
+        scope = SubmissionScopeType.WorkspaceItem;
         break;
     }
     return scope;
@@ -507,17 +541,16 @@ export class SubmissionService {
   }
 
   /**
-   * Return the visibility status of the specified section
+   * Return the hidden visibility status of the specified section
    *
    * @param sectionData
    *    The section data
    * @return boolean
    *    true if section is hidden, false otherwise
    */
-  isSectionHidden(sectionData: SubmissionSectionObject): boolean {
-    return (isNotUndefined(sectionData.visibility)
-      && sectionData.visibility.main === 'HIDDEN'
-      && sectionData.visibility.other === 'HIDDEN');
+  private isSectionHidden(sectionData: SubmissionSectionObject): boolean {
+    const scope = this.getSubmissionScope();
+    return SubmissionVisibility.isHidden(sectionData.visibility, scope);
   }
 
   /**
@@ -572,15 +605,17 @@ export class SubmissionService {
       tap((url) => this.requestService.removeByHrefSubstring(url)),
       // Now, do redirect.
       concatMap(
-        () => this.routeService.getPreviousUrl().pipe(
+        () => this.routeService.getHistory().pipe(
           take(1),
-          tap((previousUrl) => {
+          tap((history: string[]) => {
+            let previousUrl = history[history.length - 2] || '';
             if (isEmpty(previousUrl)) {
               this.router.navigate(['/home']);
-            } else {
-              this.router.navigateByUrl(previousUrl);
+            } else if (previousUrl.startsWith('/submit')) {
+              previousUrl = history[history.length - 3];
             }
-        })))
+            this.router.navigateByUrl(previousUrl);
+          })))
     ).subscribe();
   }
 

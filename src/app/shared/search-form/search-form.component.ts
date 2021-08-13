@@ -1,9 +1,15 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { Router } from '@angular/router';
 import { isNotEmpty } from '../empty.util';
 import { SearchService } from '../../core/shared/search/search.service';
 import { currentPath } from '../utils/route.utils';
+import { PaginationService } from '../../core/pagination/pagination.service';
+import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
+import { FeatureID } from '../../core/data/feature-authorization/feature-id';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 /**
  * This component renders a simple item page.
@@ -14,14 +20,13 @@ import { currentPath } from '../utils/route.utils';
 @Component({
   selector: 'ds-search-form',
   styleUrls: ['./search-form.component.scss'],
-  // templateUrl: './search-form.component.html',
   templateUrl: './search-form.component.html'
 })
 
 /**
  * Component that represents the search form
  */
-export class SearchFormComponent {
+export class SearchFormComponent implements OnInit {
   /**
    * The search query
    */
@@ -56,11 +61,31 @@ export class SearchFormComponent {
   @Input() brandColor = 'primary';
 
   /**
+   * The placeholder of the search input
+   */
+  @Input() searchPlaceholder: string;
+
+  /**
    * Output the search data on submit
    */
   @Output() submitSearch = new EventEmitter<any>();
 
-  constructor(private router: Router, private searchService: SearchService) {
+  /**
+   * A boolean representing if current user is admin or not
+   */
+  isAdmin$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  constructor(private router: Router, private searchService: SearchService,
+              private paginationService: PaginationService,
+              private searchConfig: SearchConfigurationService,
+              private authorizationService: AuthorizationDataService
+              ) {
+  }
+
+  ngOnInit(): void {
+    this.isCurrentUserAdmin().pipe(take(1)).subscribe((isAdmin) => {
+      this.isAdmin$.next(isAdmin);
+    });
   }
 
   /**
@@ -85,10 +110,15 @@ export class SearchFormComponent {
    * @param data Updated parameters
    */
   updateSearch(data: any) {
-    this.router.navigate(this.getSearchLinkParts(), {
-      queryParams: Object.assign({}, { page: 1 }, data),
+      const queryParams =  Object.assign({}, data);
+      const pageParam = this.paginationService.getPageParam(this.searchConfig.paginationID);
+      queryParams[pageParam] = 1;
+
+      this.router.navigate(this.getSearchLinkParts(), {
+      queryParams: queryParams,
       queryParamsHandling: 'merge'
     });
+    this.paginationService.updateRouteWithUrl(this.searchConfig.paginationID, this.getSearchLinkParts(), { page: 1 }, data);
   }
 
   /**
@@ -117,4 +147,12 @@ export class SearchFormComponent {
     }
     return this.getSearchLink().split('/');
   }
+
+  /**
+   * Check if user is administrator
+   */
+  isCurrentUserAdmin(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, undefined, undefined);
+  }
+
 }

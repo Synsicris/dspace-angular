@@ -65,15 +65,18 @@ function getMockSubmissionFormsConfigService(): SubmissionFormsConfigService {
 const sectionObject: SectionDataObject = {
   config: 'https://dspace7.4science.it/or2018/api/config/submissionforms/license',
   mandatory: true,
+  opened: true,
   data: {
     url: null,
     acceptanceDate: null,
     granted: false
   },
-  errors: [],
+  errorsToShow: [],
+  serverValidationErrors: [],
   header: 'submit.progressbar.describe.license',
   id: 'license',
-  sectionType: SectionsType.License
+  sectionType: SectionsType.License,
+  sectionVisibility: null
 };
 
 const dynamicFormControlEvent: DynamicFormControlEvent = {

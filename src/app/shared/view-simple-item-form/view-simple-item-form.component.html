@@ -1,0 +1,14 @@
+<div class="pt-2 border">
+  <ds-form *ngIf="formId && formModel?.length > 0" #formRef="formComponent"
+           [formId]="formId"
+           [formModel]="formModel"
+           [formLayout]="formLayout"
+           [displaySubmit]="false"
+           [displayCancel]="false">
+    <div class="form-group row">
+      <div class="col text-right">
+        <button class="btn btn-primary" (click)="openEditModal()">{{'form.edit' | translate}}</button>
+      </div>
+    </div>
+  </ds-form>
+</div>

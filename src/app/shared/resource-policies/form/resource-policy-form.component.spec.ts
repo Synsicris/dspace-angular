@@ -29,6 +29,9 @@ import { stringToNgbDateStruct } from '../../date.util';
 import { ResourcePolicy } from '../../../core/resource-policy/models/resource-policy.model';
 import { RESOURCE_POLICY } from '../../../core/resource-policy/models/resource-policy.resource-type';
 import { EPersonMock } from '../../testing/eperson.mock';
+import { isNotEmptyOperator } from '../../empty.util';
+import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
+import { DSONameServiceMock } from '../../mocks/dso-name.service.mock';
 
 export const mockResourcePolicyFormData = {
   name: [
@@ -175,6 +178,7 @@ describe('ResourcePolicyFormComponent test suite', () => {
         { provide: FormService, useValue: formService },
         { provide: GroupDataService, useValue: groupService },
         { provide: RequestService, useValue: getMockRequestService() },
+        { provide: DSONameService, useClass: DSONameServiceMock },
         FormBuilderService,
         ChangeDetectorRef,
         ResourcePolicyFormComponent
@@ -307,14 +311,15 @@ describe('ResourcePolicyFormComponent test suite', () => {
 
     });
 
-    it('should init resourcePolicyGrant properly', () => {
+    it('should init resourcePolicyGrant properly', (done) => {
       compAsAny.isActive = true;
-
-      scheduler = getTestScheduler();
-      scheduler.schedule(() => comp.ngOnInit());
-      scheduler.flush();
-
-      expect(compAsAny.resourcePolicyGrant).toEqual(GroupMock);
+      comp.ngOnInit();
+      comp.resourcePolicyTargetName$.pipe(
+        isNotEmptyOperator()
+      ).subscribe(() => {
+        expect(compAsAny.resourcePolicyGrant).toEqual(GroupMock);
+        done();
+      });
     });
 
     it('should not can set grant', () => {

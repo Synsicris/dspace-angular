@@ -28,7 +28,7 @@ describe('ItemTemplateDataService', () => {
     generateRequestId(): string {
       return scopeID;
     },
-    configure(request: RestRequest) {
+    send(request: RestRequest) {
       // Do nothing
     },
     getByHref(requestHref: string) {
@@ -74,6 +74,15 @@ describe('ItemTemplateDataService', () => {
     }
   } as CollectionDataService;
 
+  const jsonPatchOperationsBuilder = jasmine.createSpyObj('JsonPatchOperationsBuilder', {
+    replace: jasmine.createSpy('replace'),
+    add: jasmine.createSpy('add')
+  });
+
+  const itemJsonPatchOperationsService = jasmine.createSpyObj('ItemJsonPatchOperationsService', {
+    jsonPatchByResourceType: jasmine.createSpy('jsonPatchByResourceType')
+  });
+
   function initTestService() {
     service = new ItemTemplateDataService(
       requestService,
@@ -86,7 +95,9 @@ describe('ItemTemplateDataService', () => {
       http,
       comparator,
       undefined,
-      collectionService
+      collectionService,
+      jsonPatchOperationsBuilder,
+      itemJsonPatchOperationsService
     );
     itemService = (service as any).dataService;
   }

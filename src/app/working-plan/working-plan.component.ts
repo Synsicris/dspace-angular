@@ -2,10 +2,9 @@ import { Component, Input } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-
-import { WorkingPlanService } from '../core/working-plan/working-plan.service';
-import { Workpackage } from '../core/working-plan/models/workpackage-step.model';
-import { WorkingPlanStateService } from '../core/working-plan/working-plan-state.service';
+import { environment } from '../../environments/environment';
+import { Workpackage } from './core/models/workpackage-step.model';
+import { WorkingPlanStateService } from './core/working-plan-state.service';
 
 @Component({
   selector: 'ipw-working-plan',
@@ -16,22 +15,19 @@ export class WorkingPlanComponent {
 
   @Input() public projectId: string;
 
-  constructor(
-    private workingPlanService: WorkingPlanService,
-    private workingPlanStateService: WorkingPlanStateService
-  ) {
+  constructor(private workingPlanStateService: WorkingPlanStateService) {
   }
 
   ngAfterViewInit(): void {
     this.workingPlanStateService.isWorkingPlanLoaded().pipe(
       take(1)
     ).subscribe(() => {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectId);
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectId, environment.workingPlan.workingPlanPlaceMetadata);
     });
   }
 
   public getWorkpackages(): Observable<Workpackage[]> {
-    return this.workingPlanService.getWorkpackages();
+    return this.workingPlanStateService.getWorkpackages();
   }
 
   public isLoading(): Observable<boolean> {

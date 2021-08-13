@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { Operation } from 'fast-json-patch';
+import { switchMap } from 'rxjs/operators';
+import { ResearcherProfileService } from '../../../core/profile/researcher-profile.service';
+import { AuthService } from '../../../core/auth/auth.service';
+import { getFinishedRemoteData } from '../../../core/shared/operators';
+import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { CrisLayoutBox } from '../../decorators/cris-layout-box.decorator';
-import { CrisLayoutBoxModelComponent as CrisLayoutBoxObj } from '../../models/cris-layout-box.model';
+import { LayoutBox } from '../../enums/layout-box.enum';
 import { LayoutPage } from '../../enums/layout-page.enum';
 import { LayoutTab } from '../../enums/layout-tab.enum';
-import { LayoutBox } from '../../enums/layout-box.enum';
-import { FormGroup } from '@angular/forms';
-import { ItemDataService } from '../../../core/data/item-data.service';
-import { Operation } from 'fast-json-patch';
-import { TranslateService } from '@ngx-translate/core';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { AuthService } from '../../../core/auth/auth.service';
-import { RequestService } from '../../../core/data/request.service';
-import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
+import { CrisLayoutBoxModelComponent as CrisLayoutBoxObj } from '../../models/cris-layout-box.model';
 
 @Component({
   selector: 'ds-orcid-sync-settings.component',
@@ -26,24 +26,37 @@ export class OrcidSyncSettingsComponent extends CrisLayoutBoxObj implements OnIn
 
   currentSyncPublications: string;
 
-  currentSyncProjects: string;
+  currentSyncFundings: string;
 
-  currentSyncProfile: string[];
+  syncModes: { value: string, label: string }[];
 
-  syncModes: {value: string, label: string}[];
+  syncPublicationOptions: { value: string, label: string }[];
 
-  syncPublicationOptions: {value: string, label: string}[];
+  syncFundingOptions: {value: string, label: string}[];
 
-  syncProjectOptions: {value: string, label: string}[];
+  syncProfileOptions: { value: string, label: string, checked: boolean }[];
 
-  syncProfileOptions: {value: string, label: string, checked: boolean}[];
+  /**
+   * Variable to understand if the next box clear value
+   */
+  nextBoxClear = true;
 
-  constructor(private itemDataService: ItemDataService,
-              private translateService: TranslateService,
+  /**
+   * Dynamic styling of the component host selector
+   */
+  @HostBinding('style.flex') flex = '0 0 100%';
+
+  /**
+   * Dynamic styling of the component host selector
+   */
+  @HostBinding('style.marginRight') margin = '0px';
+
+
+  constructor(private researcherProfileService: ResearcherProfileService,
+              protected translateService: TranslateService,
               private notificationsService: NotificationsService,
-              private requestService: RequestService,
               public authService: AuthService) {
-    super();
+    super(translateService);
   }
 
   ngOnInit() {
@@ -59,106 +72,81 @@ export class OrcidSyncSettingsComponent extends CrisLayoutBoxObj implements OnIn
       }
     ];
 
-    this.syncPublicationOptions = [
-      {
-        label: this.messagePrefix + '.sync-publications.disabled',
-        value: 'DISABLED'
-      },
-      {
-        label: this.messagePrefix + '.sync-publications.all',
-        value: 'ALL'
-      },
-      {
-        label: this.messagePrefix + '.sync-publications.my-selected',
-        value: 'MY_SELECTED'
-      },
-      {
-        label: this.messagePrefix + '.sync-publications.mine',
-        value: 'MINE'
-      }
-    ];
+    // this.syncPublicationOptions = ['DISABLED', 'ALL', 'MY_SELECTED', 'MINE']
+    this.syncPublicationOptions = ['DISABLED', 'ALL']
+      .map((value) => {
+        return {
+          label: this.messagePrefix + '.sync-publications.' + value.toLowerCase(),
+          value: value,
+        };
+      });
 
-    this.syncProjectOptions = [
-      {
-        label: this.messagePrefix + '.sync-projects.disabled',
-        value: 'DISABLED'
-      },
-      {
-        label: this.messagePrefix + '.sync-projects.all',
-        value: 'ALL'
-      },
-      {
-        label: this.messagePrefix + '.sync-projects.my-selected',
-        value: 'MY_SELECTED'
-      },
-      {
-        label: this.messagePrefix + '.sync-projects.mine',
-        value: 'MINE'
-      }
-    ];
+    // this.syncPublicationOptions = ['DISABLED', 'ALL', 'MY_SELECTED', 'MINE']
+    this.syncFundingOptions = ['DISABLED', 'ALL']
+      .map((value) => {
+        return {
+          label: this.messagePrefix + '.sync-fundings.' + value.toLowerCase(),
+          value: value,
+        };
+      });
 
-    this.syncProfileOptions = [
-      {
-        label: this.messagePrefix + '.sync-profile.affiliation',
-        value: 'AFFILIATION',
-        checked: true
-      },
-      {
-        label: this.messagePrefix + '.sync-profile.education',
-        value: 'EDUCATION',
-        checked: true
-      },
-      {
-        label: this.messagePrefix + '.sync-profile.bibliographic',
-        value: 'BIBLIOGRAPHIC',
-        checked: true
-      },
-      {
-        label: this.messagePrefix + '.sync-profile.identifiers',
-        value: 'IDENTIFIERS',
-        checked: true
-      }
-    ];
+    const syncProfilePreferences = this.item.allMetadataValues('cris.orcid.sync-profile');
 
-    this.currentSyncMode = this.item.hasMetadata('cris.orcid.sync-mode') ? this.item.firstMetadataValue('cris.orcid.sync-mode') : 'MANUAL';
-    this.currentSyncPublications = this.item.hasMetadata('cris.orcid.sync-publications') ? this.item.firstMetadataValue('cris.orcid.sync-publications') : 'DISABLED';
-    this.currentSyncProjects = this.item.hasMetadata('cris.orcid.sync-projects') ? this.item.firstMetadataValue('cris.orcid.sync-projects') : 'DISABLED';
-    this.currentSyncProfile = [];
+    this.syncProfileOptions = ['AFFILIATION', 'EDUCATION', 'BIOGRAPHICAL', 'IDENTIFIERS']
+      .map((value) => {
+        return {
+          label: this.messagePrefix + '.sync-profile.' + value.toLowerCase(),
+          value: value,
+          checked: syncProfilePreferences.includes(value)
+        };
+      });
+
+    this.currentSyncMode = this.getCurrentPreference('cris.orcid.sync-mode', ['BATCH, MANUAL'], 'MANUAL');
+    this.currentSyncPublications = this.getCurrentPreference('cris.orcid.sync-publications', ['DISABLED', 'ALL'], 'DISABLED');
+    this.currentSyncFundings = this.getCurrentPreference('cris.orcid.sync-fundings', ['DISABLED', 'ALL'], 'DISABLED');
   }
 
   onSubmit(form: FormGroup) {
     const operations: Operation[] = [];
-    this.fillOperationsFor(operations, 'cris.orcid.sync-mode', form.value.syncMode);
-    this.fillOperationsFor(operations, 'cris.orcid.sync-publications', form.value.syncPublications);
-    this.fillOperationsFor(operations, 'cris.orcid.sync-projects', form.value.syncProjects);
+    this.fillOperationsFor(operations, '/orcid/mode', form.value.syncMode);
+    this.fillOperationsFor(operations, '/orcid/publications', form.value.syncPublications);
+    this.fillOperationsFor(operations, '/orcid/fundings', form.value.syncFundings);
 
-    if (operations.length === 0 ) {
+    const syncProfileValue = this.syncProfileOptions
+      .map((syncProfileOption => syncProfileOption.value))
+      .filter((value) => form.value['syncProfile_' + value])
+      .join(',');
+
+    this.fillOperationsFor(operations, '/orcid/profile', syncProfileValue);
+
+    if (operations.length === 0) {
       return;
     }
 
-    this.itemDataService.patch(this.item, operations)
-      .subscribe((restResponse) => {
-        if (restResponse.isSuccess) {
-          this.notificationsService.success(this.translateService.get(this.messagePrefix + '.synchronization-settings-update.success'));
-          this.requestService.setStaleByHrefSubstring(this.item._links.self.href);
-          this.itemDataService.findById(this.item.id)
-            .pipe(getFirstSucceededRemoteDataPayload())
-            .subscribe((item) => this.item = item);
-        } else {
-          this.notificationsService.error(this.translateService.get(this.messagePrefix + '.synchronization-settings-update.error'));
-        }
-      });
+    this.researcherProfileService.findById(this.item.firstMetadata('cris.owner').authority).pipe(
+      switchMap((profile) => this.researcherProfileService.patch(profile, operations)),
+      getFinishedRemoteData()
+    ).subscribe((remoteData) => {
+      if (remoteData.isSuccess) {
+        this.refreshTab.emit();
+        this.notificationsService.success(this.translateService.get(this.messagePrefix + '.synchronization-settings-update.success'));
+      } else {
+        this.notificationsService.error(this.translateService.get(this.messagePrefix + '.synchronization-settings-update.error'));
+      }
+    });
   }
 
-  fillOperationsFor(operations: Operation[], metadataField: string, currentValue: string) {
-    if (this.item.hasMetadata(metadataField) && this.item.firstMetadataValue(metadataField) === currentValue) {
-      return;
-    }
-
+  fillOperationsFor(operations: Operation[], path: string, currentValue: string) {
     operations.push({
-      path: '/metadata/' + metadataField,
-      op: !this.item.hasMetadata(metadataField) ? 'add' : 'replace',
+      path: path,
+      op: 'replace',
       value: currentValue
     });
   }
+
+  getCurrentPreference(metadataField: string, allowedValues: string[], defaultValue: string): string {
+    const currentPreference = this.item.firstMetadataValue(metadataField);
+    return (currentPreference && allowedValues.includes(currentPreference)) ? currentPreference : defaultValue;
+  }
+
 }

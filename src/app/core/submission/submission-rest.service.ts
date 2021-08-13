@@ -106,7 +106,7 @@ export class SubmissionRestService {
       distinctUntilChanged(),
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId, fullProjection)),
       map((endpointURL: string) => new SubmissionDeleteRequest(requestId, endpointURL)),
-      tap((request: DeleteRequest) => this.requestService.configure(request)),
+      tap((request: DeleteRequest) => this.requestService.send(request)),
       mergeMap(() => this.fetchRequest(requestId)),
       distinctUntilChanged());
   }
@@ -131,8 +131,7 @@ export class SubmissionRestService {
       distinctUntilChanged(),
       map((endpointURL: string) => new SubmissionRequest(requestId, endpointURL)),
       tap((request: RestRequest) => {
-        this.requestService.removeByHrefSubstring(request.href);
-        this.requestService.configure(request);
+        this.requestService.send(request);
       }),
       mergeMap(() => this.fetchRequest(requestId)),
       distinctUntilChanged());
@@ -173,7 +172,7 @@ export class SubmissionRestService {
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId, fullProjection, collectionId)),
       distinctUntilChanged(),
       map((endpointURL: string) => new SubmissionPostRequest(requestId, endpointURL, body, options)),
-      tap((request: PostRequest) => this.requestService.configure(request)),
+      tap((request: PostRequest) => this.requestService.send(request)),
       mergeMap(() => this.fetchRequest(requestId)),
       distinctUntilChanged());
   }
@@ -199,7 +198,7 @@ export class SubmissionRestService {
       map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId, fullProjection)),
       distinctUntilChanged(),
       map((endpointURL: string) => new SubmissionPatchRequest(requestId, endpointURL, body)),
-      tap((request: PostRequest) => this.requestService.configure(request)),
+      tap((request: PostRequest) => this.requestService.send(request)),
       mergeMap(() => this.fetchRequest(requestId)),
       distinctUntilChanged());
   }

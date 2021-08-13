@@ -38,12 +38,13 @@ import { License } from '../../../core/shared/license.model';
 import { Collection } from '../../../core/shared/collection.model';
 import { ObjNgFor } from '../../../shared/utils/object-ngfor.pipe';
 import { VarDirective } from '../../../shared/utils/var.directive';
-import { PaginationComponentOptions } from '../../../shared/pagination/pagination-component-options.model';
 import {
   DetectDuplicateMatch,
   WorkspaceitemSectionDetectDuplicateObject
 } from '../../../core/submission/models/workspaceitem-section-deduplication.model';
 import { Item } from '../../../core/shared/item.model';
+import { PaginationService } from '../../../core/pagination/pagination.service';
+import { PaginationServiceStub } from '../../../shared/testing/pagination-service.stub';
 
 function getMockSubmissionFormsConfigService(): SubmissionFormsConfigService {
   return jasmine.createSpyObj('FormOperationsService', {
@@ -97,11 +98,14 @@ const sectionData: WorkspaceitemSectionDetectDuplicateObject = {
 const sectionObject: SectionDataObject = {
   config: 'https://dspace.org/api/config/submissionforms/detect-duplicate',
   mandatory: true,
+  opened: true,
   data: sectionData,
-  errors: [],
+  errorsToShow: [],
+  serverValidationErrors: [],
   header: 'submit.progressbar.detect-duplicate',
   id: 'detect-duplicate',
-  sectionType: SectionsType.DetectDuplicate
+  sectionType: SectionsType.DetectDuplicate,
+  sectionVisibility: null
 };
 
 describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
@@ -136,6 +140,7 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
       }],
     license: createSuccessfulRemoteDataObject$(Object.assign(new License(), { text: licenseText }))
   });
+  const paginationService = new PaginationServiceStub();
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -167,6 +172,7 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
         { provide: 'sectionDataProvider', useValue: sectionObject },
         { provide: 'submissionIdProvider', useValue: submissionId },
         { provide: DetectDuplicateService, useValue: mockDetectDuplicateService },
+        { provide: PaginationService, useValue: paginationService },
         ChangeDetectorRef,
         FormBuilderService,
         SubmissionSectionDetectDuplicateComponent
@@ -271,13 +277,6 @@ describe('SubmissionSectionDetectDuplicateComponent test suite', () => {
       expect(compAsAny.getTotalMatches()).toBeObservable(cold('(a|)', {
         a: 2
       }));
-    });
-
-    it('config.currentPage should be equal to page', () => {
-      const page = 5;
-      comp.config = new PaginationComponentOptions();
-      comp.setPage(page);
-      expect(comp.config.currentPage).toEqual(page);
     });
   });
 

@@ -1,9 +1,21 @@
-<div *ngIf="!dismissed" class="alert {{type}} alert-dismissible fade show w-100" role="alert" [@enterLeave]="animate">
-  <span *ngIf="content" [innerHTML]="content | translate"></span>
-
-  <ng-content></ng-content>
-
-  <button *ngIf="dismissible" type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="dismiss()">
+<div *ngIf="!isDismissed" class="alert {{type}} fade show w-100" role="alert" [class.alert-dismissible]="dismissible" [@enterLeave]="animate">
+  <button *ngIf="dismissible" type="button" class="close" data-dismiss="alert" attr.aria-label="{{'alert.close.aria' | translate}}" (click)="dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
+  <div class="d-flex justify-content-between">
+    <div *ngIf="collapsible" #collapse="ngbCollapse" [ngbCollapse]="isCollapsed">
+      <span *ngIf="content" [innerHTML]="content | translate"></span>
+      <ng-content></ng-content>
+    </div>
+
+    <div *ngIf="!collapsible">
+      <span *ngIf="content" [innerHTML]="content | translate"></span>
+      <ng-content></ng-content>
+    </div>
+
+    <button *ngIf="collapsible" type="button" class="btn btn-link float-right align-self-end flex-shrink-0" (click)="toggle()" [attr.aria-expanded]="!isCollapsed">
+      <span *ngIf="isCollapsed"><i class="fas fa-angle-down"></i> {{'alert.toggle.show' | translate}}</span>
+      <span *ngIf="!isCollapsed"><i class="fas fa-angle-up"></i> {{'alert.toggle.hide' | translate}}</span>
+    </button>
+  </div>
 </div>

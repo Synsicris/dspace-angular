@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
-import { ItemPageResolver } from '../+item-page/item-page.resolver';
 import { ObjectivesPageComponent } from './objectives-page.component';
-import { ProjectPageResolver } from '../projects/project-page.resolver';
+import { ProjectCommunityResolver } from '../core/project/project-community.resolver';
+import { ProjectItemPageResolver } from '../core/project/project-item-page.resolver';
 
 @NgModule({
   imports: [
@@ -18,15 +18,15 @@ import { ProjectPageResolver } from '../projects/project-page.resolver';
           title: 'impact-pathway.objectives.edit.page.title'
         },
         resolve: {
-          item: ItemPageResolver,
-          project: ProjectPageResolver,
+          item: ProjectItemPageResolver,
+          project: ProjectCommunityResolver,
         }
       }
     ])
   ],
   providers: [
-    ItemPageResolver,
-    ProjectPageResolver
+    ProjectItemPageResolver,
+    ProjectCommunityResolver
   ]
 })
 export class ObjectivesPageRoutingModule { }

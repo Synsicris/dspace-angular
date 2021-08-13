@@ -226,6 +226,7 @@ import { SearchObjects } from './search/search-objects.model';
 import { SearchResult } from './search/search-result.model';
 import { FacetConfigResponse } from './search/facet-config-response.model';
 import { FacetValues } from './search/facet-values.model';
+import { BitstreamDownloadPageComponent } from './bitstream-download-page/bitstream-download-page.component';
 import { GenericItemPageFieldComponent } from '../+item-page/simple/field-components/specific-field/generic/generic-item-page-field.component';
 import { MetadataRepresentationListComponent } from '../+item-page/simple/metadata-representation-list/metadata-representation-list.component';
 import { RelatedItemsComponent } from '../+item-page/simple/related-items/related-items-component';
@@ -236,9 +237,10 @@ import { LinkMenuItemComponent } from './menu/menu-item/link-menu-item.component
 import { OnClickMenuItemComponent } from './menu/menu-item/onclick-menu-item.component';
 import { TextMenuItemComponent } from './menu/menu-item/text-menu-item.component';
 import { ItemExportComponent } from './item-export/item-export/item-export.component';
-import { ItemExportModalWrapperComponent } from './item-export/item-export-modal-wrapper/item-export-modal-wrapper.component';
 import { SearchChartsComponent } from './search/search-charts/search-charts.component';
 import { SearchChartBarComponent } from './search/search-charts/search-chart/search-chart-bar/search-chart-bar.component';
+import { SearchChartBarToLeftComponent } from './search/search-charts/search-chart/search-chart-bar-to-left/search-chart-bar-to-left.component';
+import { SearchChartBarToRightComponent } from './search/search-charts/search-chart/search-chart-bar-to-right/search-chart-bar-to-right.component';
 import { SearchChartPieComponent } from './search/search-charts/search-chart/search-chart-pie/search-chart-pie.component';
 import { SearchChartLineComponent } from './search/search-charts/search-chart/search-chart-line/search-chart-line.component';
 import { SearchChartFilterWrapperComponent } from './search/search-charts/search-chart/search-chart-wrapper/search-chart-wrapper.component';
@@ -246,6 +248,35 @@ import { SearchChartComponent } from './search/search-charts/search-chart/search
 import { ChartsModule } from '../charts/charts.module';
 import { SearchChartFilterComponent } from './search/search-charts/search-chart/search-chart-filter/search-chart-filter.component';
 import { VocabularyExternalSourceComponent } from './vocabulary-external-source/vocabulary-external-source.component';
+import { ItemExportAlertComponent } from './item-export/item-export-alert/item-export-alert.component';
+import { ItemExportModalLauncherComponent } from './item-export/item-export-modal-launcher/item-export-modal-launcher.component';
+import { BulkImportSelectorComponent } from './dso-selector/modal-wrappers/bulk-import-collection-selector/bulk-import-collection-selector.component';
+import { AdministeredCollectionSelectorComponent } from './dso-selector/dso-selector/administered-collection-selector/administered-collection-selector.component';
+import { RelationshipsListComponent } from './object-list/relationships-list/relationships-list.component';
+import { RelationshipsItemsActionsComponent } from './object-list/relationships-list/relationships-items-actions/relationships-items-actions.component';
+import { RelationshipsItemsListPreviewComponent } from './object-list/relationships-list/relationships-items-list-preview/relationships-items-list-preview.component';
+import { ThemedConfigurationSearchPageComponent } from '../+search-page/themed-configuration-search-page.component';
+import { SearchNavbarComponent } from '../search-navbar/search-navbar.component';
+import { LogInOrcidComponent } from './log-in/methods/orcid/log-in-orcid.component';
+import { DsDynamicRelationGroupModalComponent } from './form/builder/ds-dynamic-form-ui/models/relation-group/modal/dynamic-relation-group-modal.components';
+import { ClaimItemSelectorComponent } from './dso-selector/modal-wrappers/claim-item-selector/claim-item-selector.component';
+import { MetricBadgesComponent } from './object-list/metric-badges/metric-badges.component';
+import { MetricLoaderComponent } from './metric/metric-loader/metric-loader.component';
+import { MetricAltmetricComponent } from './metric/metric-altmetric/metric-altmetric.component';
+import { MetricDimensionsComponent } from './metric/metric-dimensions/metric-dimensions.component';
+import { MetricDspacecrisComponent } from './metric/metric-dspacecris/metric-dspacecris.component';
+import { MetricGooglescholarComponent } from './metric/metric-googlescholar/metric-googlescholar.component';
+import { MetricEmbeddedViewComponent } from './metric/metric-embedded-view/metric-embedded-view.component';
+import { MetricEmbeddedDownloadComponent } from './metric/metric-embedded-download/metric-embedded-download.component';
+import { MetricDonutsComponent } from './object-list/metric-donuts/metric-donuts.component';
+import { BrowseMostElementsComponent } from './browse-most-elements/browse-most-elements.component';
+import { BrowseSectionComponent } from './explore/section-component/browse-section/browse-section.component';
+import { TopSectionComponent } from './explore/section-component/top-section/top-section.component';
+import { FacetSectionComponent } from './explore/section-component/facet-section/facet-section.component';
+import { SearchSectionComponent } from './explore/section-component/search-section/search-section.component';
+import { TextSectionComponent } from './explore/section-component/text-section/text-section.component';
+import { CountersSectionComponent } from './explore/section-component/counters-section/counters-section.component';
+import { MultiColumnTopSectionComponent } from './explore/section-component/multi-column-top-section/multi-column-top-section.component';
 import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { ContextMenuComponent } from '../+item-page/context-menu/context-menu.component';
 import { ContextMenuEditImpactPathwayComponent } from '../+item-page/context-menu/edit-impact-pathway/edit-impact-pathway.component';
@@ -264,6 +295,8 @@ import { MaterialModule } from './material/material.module';
 import { CreateProjectComponent } from '../projects/create-project/create-project.component';
 import { InvitationModalComponent } from './invitation-modal/invitation-modal.component';
 import { EditItemGrantsModalComponent } from './edit-item-grants-modal/edit-item-grants-modal.component';
+import { EditSimpleItemModalComponent } from './edit-simple-item-modal/edit-simple-item-modal.component';
+import { ViewSimpleItemFormComponent } from './view-simple-item-form/view-simple-item-form.component';
 
 /**
  * Declaration needed to make sure all decorator functions are called in time
@@ -274,6 +307,7 @@ export const MODELS = [
   FacetValues,
   SearchResult
 ];
+
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -348,6 +382,7 @@ const COMPONENTS = [
   DsDynamicTagComponent,
   DsDynamicOneboxComponent,
   DsDynamicRelationGroupComponent,
+  DsDynamicRelationGroupModalComponent,
   DsDynamicRelationInlineGroupComponent,
   DsDatePickerComponent,
   DsDynamicFormGroupComponent,
@@ -403,9 +438,11 @@ const COMPONENTS = [
   CreateCommunityParentSelectorComponent,
   CreateCollectionParentSelectorComponent,
   CreateItemParentSelectorComponent,
+  BulkImportSelectorComponent,
   EditCommunitySelectorComponent,
   EditCollectionSelectorComponent,
   EditItemSelectorComponent,
+  ClaimItemSelectorComponent,
   CommunitySearchResultListElementComponent,
   CollectionSearchResultListElementComponent,
   BrowseByComponent,
@@ -439,6 +476,8 @@ const COMPONENTS = [
   AbstractTrackableComponent,
   ComcolMetadataComponent,
   TypeBadgeComponent,
+  MetricBadgesComponent,
+  MetricDonutsComponent,
   BrowseByComponent,
   AbstractTrackableComponent,
   CustomSwitchComponent,
@@ -451,6 +490,7 @@ const COMPONENTS = [
   ExistingMetadataListElementComponent,
   ExistingRelationListElementComponent,
   LogInShibbolethComponent,
+  LogInOrcidComponent,
   LogInPasswordComponent,
   LogInContainerComponent,
   ItemVersionsComponent,
@@ -466,12 +506,14 @@ const COMPONENTS = [
   EpersonSearchBoxComponent,
   GroupSearchBoxComponent,
   FileDownloadLinkComponent,
+  BitstreamDownloadPageComponent,
   CollectionDropdownComponent,
   EntityDropdownComponent,
   ExportMetadataSelectorComponent,
   ConfirmationModalComponent,
   VocabularyTreeviewComponent,
   AuthorizedCollectionSelectorComponent,
+  AdministeredCollectionSelectorComponent,
   CurationFormComponent,
   SearchResultListElementComponent,
   SearchResultGridElementComponent,
@@ -495,20 +537,44 @@ const COMPONENTS = [
   CollectionSidebarSearchListElementComponent,
   CommunitySidebarSearchListElementComponent,
   ItemExportComponent,
-  ItemExportModalWrapperComponent,
+  ItemExportAlertComponent,
+  ItemExportModalLauncherComponent,
   SearchChartsComponent,
   SearchChartBarComponent,
+  SearchChartBarToLeftComponent,
+  SearchChartBarToRightComponent,
   SearchChartPieComponent,
   SearchChartLineComponent,
   SearchChartFilterWrapperComponent,
   SearchChartComponent,
   SearchChartFilterComponent,
   VocabularyExternalSourceComponent,
+  SearchNavbarComponent,
+  RelationshipsListComponent,
+  RelationshipsItemsActionsComponent,
+  RelationshipsItemsListPreviewComponent,
+  MetricLoaderComponent,
+  MetricAltmetricComponent,
+  MetricDimensionsComponent,
+  MetricDspacecrisComponent,
+  MetricGooglescholarComponent,
+  MetricEmbeddedViewComponent,
+  MetricEmbeddedDownloadComponent,
+  BrowseMostElementsComponent,
+  BrowseSectionComponent,
+  TopSectionComponent,
+  FacetSectionComponent,
+  SearchSectionComponent,
+  TextSectionComponent,
+  CountersSectionComponent,
+  MultiColumnTopSectionComponent,
   CreateImpactPathwayComponent,
   ContextMenuComponent,
   ContextMenuEditImpactPathwayComponent,
   CreateSimpleItemModalComponent,
   CreateSimpleItemComponent,
+  EditSimpleItemModalComponent,
+  ViewSimpleItemFormComponent,
   SearchSimpleItemComponent,
   SearchSimpleItemHeaderComponent,
   SearchSimpleItemLabelsComponent,
@@ -544,6 +610,8 @@ const ENTRY_COMPONENTS = [
   CreateCommunityParentSelectorComponent,
   CreateCollectionParentSelectorComponent,
   CreateItemParentSelectorComponent,
+  BulkImportSelectorComponent,
+  ClaimItemSelectorComponent,
   EditCommunitySelectorComponent,
   EditCollectionSelectorComponent,
   EditItemSelectorComponent,
@@ -564,21 +632,38 @@ const ENTRY_COMPONENTS = [
   SearchAuthorityFilterComponent,
   LogInPasswordComponent,
   LogInShibbolethComponent,
+  LogInOrcidComponent,
   BundleListElementComponent,
   ClaimedTaskActionsApproveComponent,
   ClaimedTaskActionsRejectComponent,
   ClaimedTaskActionsReturnToPoolComponent,
   ClaimedTaskActionsEditMetadataComponent,
+  CollectionDropdownComponent,
+  FileDownloadLinkComponent,
+  BitstreamDownloadPageComponent,
+  CurationFormComponent,
+  ExportMetadataSelectorComponent,
+  ConfirmationModalComponent,
+  VocabularyTreeviewComponent,
+  SidebarSearchListElementComponent,
   PublicationSidebarSearchListElementComponent,
   CollectionSidebarSearchListElementComponent,
   CommunitySidebarSearchListElementComponent,
   LinkMenuItemComponent,
   OnClickMenuItemComponent,
-  TextMenuItemComponent
+  TextMenuItemComponent,
+  BrowseSectionComponent,
+  TopSectionComponent,
+  FacetSectionComponent,
+  SearchSectionComponent,
+  TextSectionComponent,
+  CountersSectionComponent,
+  MultiColumnTopSectionComponent
 ];
 
 const SHARED_SEARCH_PAGE_COMPONENTS = [
-  ConfigurationSearchPageComponent
+  ConfigurationSearchPageComponent,
+  ThemedConfigurationSearchPageComponent
 ];
 
 const SHARED_ITEM_PAGE_COMPONENTS = [
@@ -638,7 +723,9 @@ const DIRECTIVES = [
     ...DIRECTIVES,
     ...SHARED_ITEM_PAGE_COMPONENTS,
     ...SHARED_SEARCH_PAGE_COMPONENTS,
-    InvitationModalComponent
+    ItemExportAlertComponent,
+    InvitationModalComponent,
+    EditSimpleItemModalComponent
   ],
   providers: [
     ...PROVIDERS

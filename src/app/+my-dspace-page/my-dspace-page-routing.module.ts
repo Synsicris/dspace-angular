@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-import { MyDSpacePageComponent } from './my-dspace-page.component';
 import { MyDSpaceGuard } from './my-dspace.guard';
-import { ProjectPageResolver } from '../projects/project-page.resolver';
+import { ThemedMyDSpacePageComponent } from './themed-my-dspace-page.component';
+import { ProjectCommunityResolver } from '../core/project/project-community.resolver';
 import { ProjectI18nBreadcrumbResolver } from '../core/breadcrumbs/project-i18n-breadcrumb.resolver';
 import { ProjectI18nBreadcrumbsService } from '../core/breadcrumbs/project-i18n-breadcrumbs.service';
 
@@ -12,22 +11,22 @@ import { ProjectI18nBreadcrumbsService } from '../core/breadcrumbs/project-i18n-
     RouterModule.forChild([
       {
         path: '',
-        component: MyDSpacePageComponent,
-        data: { title: 'mydspace.title', breadcrumbKey: 'mydspace', showBreadcrumbsFluid: false },
-        canActivate: [
-          MyDSpaceGuard
-        ],
+        component: ThemedMyDSpacePageComponent,
         resolve: {
-          project: ProjectPageResolver,
+          project: ProjectCommunityResolver,
           breadcrumb: ProjectI18nBreadcrumbResolver
         },
+        data: { title: 'mydspace.title', breadcrumbKey: 'mydspace' },
+        canActivate: [
+          MyDSpaceGuard
+        ]
       }
     ])
   ],
   providers: [
     ProjectI18nBreadcrumbResolver,
     ProjectI18nBreadcrumbsService,
-    ProjectPageResolver
+    ProjectCommunityResolver
   ]
 })
 /**

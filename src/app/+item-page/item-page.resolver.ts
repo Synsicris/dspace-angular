@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RemoteData } from '../core/data/remote-data';
 import { ItemDataService } from '../core/data/item-data.service';
 import { Item } from '../core/shared/item.model';
-import { followLink } from '../shared/utils/follow-link-config.model';
-import { FindListOptions } from '../core/data/request.models';
-import { getFirstCompletedRemoteData } from '../core/shared/operators';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
+import { hasValue } from '../shared/empty.util';
+import { getItemPageRoute } from './item-page-routing-paths';
+import { ItemResolver } from './item.resolver';
 
 /**
- * This class represents a resolver that requests a specific item before the route is activated
+ * This class represents a resolver that requests a specific item before the route is activated and will redirect to the
+ * entity page
  */
 @Injectable()
-export class ItemPageResolver implements Resolve<RemoteData<Item>> {
-  constructor(private itemService: ItemDataService) {
+export class ItemPageResolver extends ItemResolver {
+  constructor(
+    protected itemService: ItemDataService,
+    protected store: Store<any>,
+    protected router: Router
+  ) {
+    super(itemService, store, router);
   }
 
   /**
@@ -24,15 +32,19 @@ export class ItemPageResolver implements Resolve<RemoteData<Item>> {
    * or an error if something went wrong
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RemoteData<Item>> {
-    return this.itemService.findById(route.params.id,
-      false,
-      followLink('owningCollection'),
-      followLink('bundles', new FindListOptions(), true, followLink('bitstreams')),
-      followLink('relationships'),
-      followLink('version', undefined, true, followLink('versionhistory')),
-      followLink('metrics')
-    ).pipe(
-      getFirstCompletedRemoteData(),
+    return super.resolve(route, state).pipe(
+      map((rd: RemoteData<Item>) => {
+        if (rd.hasSucceeded && hasValue(rd.payload)) {
+          const itemRoute = getItemPageRoute(rd.payload);
+          const thisRoute = state.url;
+          if (!thisRoute.startsWith(itemRoute)) {
+            const itemId = rd.payload.uuid;
+            const subRoute = thisRoute.substring(thisRoute.indexOf(itemId) + itemId.length, thisRoute.length);
+            this.router.navigateByUrl(itemRoute + subRoute);
+          }
+        }
+        return rd;
+      })
     );
   }
 }

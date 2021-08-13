@@ -7,7 +7,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateLoaderMock } from '../../../../shared/mocks/translate-loader.mock';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CrisLayoutLoaderDirective } from '../../../directives/cris-layout-loader.directive';
-import { RowComponent } from '../components/row/row.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { boxMetadata } from '../../../../shared/testing/box.mock';
@@ -52,6 +51,9 @@ export const metricAltmetricMock = {...metric1Mock, metricType: 'altmetric', rem
 
 export const metricDimensionsMock = {...metric1Mock, metricType: 'dimensions', remark: dimensionsExample};
 
+export const metricEmbeddedView = {...metric1Mock, metricType: 'embedded-view', remark: ''};
+export const metricEmbeddedDownload = {...metric1Mock, metricType: 'embedded-download', remark: ''};
+
 export const metricRowsMock = [{
   metrics: [metric1Mock, metric2Mock]
 }];
@@ -76,7 +78,7 @@ describe('CrisLayoutMetricsBoxComponent', () => {
 
   beforeEach(async(() => {
 
-    itemDataService = new ItemDataService(null, null, null, null, null, null, null, null, null, null);
+    itemDataService = new ItemDataService(null, null, null, null, null, null, null, null, null, null, null, null);
 
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot({
@@ -94,7 +96,6 @@ describe('CrisLayoutMetricsBoxComponent', () => {
       declarations: [
         CrisLayoutMetricsBoxComponent,
         CrisLayoutLoaderDirective,
-        RowComponent,
         TextComponent
       ],
       schemas: [NO_ERRORS_SCHEMA]

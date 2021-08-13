@@ -3,7 +3,17 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable, of as observableOf } from 'rxjs';
-import { catchError, distinctUntilChanged, filter, map, mergeMap, take, takeWhile, tap } from 'rxjs/operators';
+import {
+  catchError,
+  distinctUntilChanged,
+  filter,
+  map,
+  mergeMap,
+  switchMap,
+  take,
+  takeWhile,
+  tap
+} from 'rxjs/operators';
 import { ReplaceOperation } from 'fast-json-patch';
 
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
@@ -24,7 +34,13 @@ import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
 import { SearchResult } from '../../shared/search/search-result.model';
-import { configureRequest, getFinishedRemoteData, getFirstSucceededRemoteDataPayload } from '../shared/operators';
+import {
+  getFinishedRemoteData,
+  getFirstCompletedRemoteData,
+  getFirstSucceededRemoteData,
+  getFirstSucceededRemoteDataPayload,
+  sendRequest
+} from '../shared/operators';
 import { DSpaceObjectType } from '../shared/dspace-object-type.model';
 import { SearchService } from '../shared/search/search.service';
 import { LinkService } from '../cache/builders/link.service';
@@ -37,10 +53,13 @@ import { BitstreamDataService } from '../data/bitstream-data.service';
 import { NoContent } from '../shared/NoContent.model';
 import { NotificationOptions } from '../../shared/notifications/models/notification-options.model';
 import { PageInfo } from '../shared/page-info.model';
+import { Item } from '../shared/item.model';
+import { Metadata } from '../shared/metadata.utils';
+import { ItemDataService } from '../data/item-data.service';
 
 export enum ProjectGrantsTypes {
-  Project = 'project',
-  Subproject = 'subproject',
+  Project = 'parentproject',
+  Subproject = 'project',
 }
 
 @Injectable()
@@ -60,6 +79,7 @@ export class ProjectDataService extends CommunityDataService {
     protected linkService: LinkService,
     protected configurationService: ConfigurationDataService,
     protected groupDataService: GroupDataService,
+    protected itemService: ItemDataService,
   ) {
     super(requestService, rdbService, store, objectCache, halService, notificationsService, bitstreamDataService, http, comparator);
   }
@@ -114,7 +134,7 @@ export class ProjectDataService extends CommunityDataService {
         }
         return new PostRequest(requestId, hrefWithParent, templateUrl, options);
       }),
-      configureRequest(this.requestService),
+      sendRequest(this.requestService),
     ).subscribe();
 
     return this.fetchCreateResponse(requestId).pipe(
@@ -136,6 +156,28 @@ export class ProjectDataService extends CommunityDataService {
   delete(projectId: string): Observable<RemoteData<NoContent>> {
     const projectGroup = `project_${projectId}`;
     return super.delete(projectId);
+  }
+
+  /**
+   * Get the item associated with the project by synsicris.relation.entity_project metadata
+   *
+   * @param projectCommunityId The project community id
+   * @return the RestResponse as an Observable
+   */
+  getProjectItemByRelation(projectCommunityId: string): Observable<RemoteData<Item>> {
+    return this.findById(projectCommunityId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      switchMap((community: Community) => {
+        const metadataValue = Metadata.first(community.metadata, 'synsicris.relation.entity_project');
+        if (isNotEmpty(metadataValue) && isNotEmpty(metadataValue.authority)) {
+          return this.itemService.findById(metadataValue.authority).pipe(
+            getFirstCompletedRemoteData()
+          );
+        } else {
+          throw(new Error('Link to project item is missing.'));
+        }
+      })
+    );
   }
 
   /**
@@ -309,7 +351,7 @@ export class ProjectDataService extends CommunityDataService {
     };
 
     return this.patch(project, [operation]).pipe(
-      mergeMap(() => this.findById(project.id, true, followLink('parentCommunity'))),
+      mergeMap(() => this.findById(project.id, false, true, followLink('parentCommunity'))),
       getFinishedRemoteData()
     );
   }
@@ -361,7 +403,7 @@ export class ProjectDataService extends CommunityDataService {
    */
   private fetchSearchCommunity(searchOptions: PaginatedSearchOptions, ...linksToFollow: FollowLinkConfig<Community>[]): Observable<Community> {
     return this.searchService.search(searchOptions).pipe(
-      filter((rd: RemoteData<PaginatedList<SearchResult<any>>>) => rd.hasSucceeded),
+      getFirstSucceededRemoteData(),
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
           .filter((result) => hasValue(result))
@@ -374,8 +416,8 @@ export class ProjectDataService extends CommunityDataService {
         if (list.page.length > 0) {
           return (list.page[0]).pipe(
             map((community: Community) => community),
-            mergeMap((community: Community) => this.findById(community.id, true, ...linksToFollow).pipe(
-              tap(() => this.requestService.removeByHrefSubstring(community.id))
+            mergeMap((community: Community) => this.findById(community.id, true, true, ...linksToFollow).pipe(
+              tap(() => this.requestService.setStaleByHrefSubstring(community.id))
             )),
             getFirstSucceededRemoteDataPayload()
           );

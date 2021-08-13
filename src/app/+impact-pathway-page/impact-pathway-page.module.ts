@@ -5,13 +5,15 @@ import { SharedModule } from '../shared/shared.module';
 import { ImpactPathwayPageComponent } from './impact-pathway-page.component';
 import { ImpactPathwayPageRoutingModule } from './impact-pathway-page-routing.module';
 import { ImpactPathwayBoardModule } from '../impact-pathway-board/impact-pathway-board.module';
+import { ImpactPathwayCoreModule } from '../impact-pathway-board/core/impact-pathway-core.module';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule.withEntryComponents(),
     ImpactPathwayPageRoutingModule,
-    ImpactPathwayBoardModule
+    ImpactPathwayBoardModule,
+    ImpactPathwayCoreModule
   ],
   declarations: [
     ImpactPathwayPageComponent

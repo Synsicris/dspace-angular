@@ -15,11 +15,13 @@ import { Collection } from '../../core/shared/collection.model';
 import { of as observableOf } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { isEmpty, isNotEmpty } from '../../shared/empty.util';
+import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 
 describe('CommunityListComponent', () => {
   let component: CommunityListComponent;
   let fixture: ComponentFixture<CommunityListComponent>;
 
+  const dsoNameService = { getName: (dso) => dso.name };
   const mockSubcommunities1Page1 = [Object.assign(new Community(), {
     id: 'ce64f48e-2c9b-411a-ac36-ee429c0e6a88',
     uuid: 'ce64f48e-2c9b-411a-ac36-ee429c0e6a88',
@@ -194,8 +196,11 @@ describe('CommunityListComponent', () => {
         CdkTreeModule,
         RouterTestingModule],
       declarations: [CommunityListComponent],
-      providers: [CommunityListComponent,
-        { provide: CommunityListService, useValue: communityListServiceStub },],
+      providers: [
+        CommunityListComponent,
+        { provide: CommunityListService, useValue: communityListServiceStub },
+        { provide: DSONameService, useValue: dsoNameService }
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
       .compileComponents();

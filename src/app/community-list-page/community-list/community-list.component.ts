@@ -6,6 +6,7 @@ import { CommunityListService, FlatNode } from '../community-list-service';
 import { CommunityListDatasource } from '../community-list-datasource';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { isEmpty } from '../../shared/empty.util';
+import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 
 /**
  * A tree-structured list of nodes representing the communities, their subCommunities and collections.
@@ -31,7 +32,7 @@ export class CommunityListComponent implements OnInit, OnDestroy {
 
   paginationConfig: FindListOptions;
 
-  constructor(private communityListService: CommunityListService) {
+  constructor(public nameService: DSONameService, private communityListService: CommunityListService) {
     this.paginationConfig = new FindListOptions();
     this.paginationConfig.elementsPerPage = 2;
     this.paginationConfig.currentPage = 1;

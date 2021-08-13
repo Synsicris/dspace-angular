@@ -26,11 +26,14 @@ describe('SubmissionSectionCcLicensesComponent', () => {
   const sectionObject: SectionDataObject = {
     config: 'test config',
     mandatory: true,
+    opened: true,
     data: {},
-    errors: [],
+    errorsToShow: [],
+    serverValidationErrors: [],
     header: 'test header',
     id: 'test section id',
-    sectionType: SectionsType.SubmissionForm
+    sectionType: SectionsType.SubmissionForm,
+    sectionVisibility: null
   };
 
   const submissionCcLicenses: SubmissionCcLicence[] = [

@@ -10,23 +10,33 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { findIndex } from 'lodash';
 
+import { map, mergeMap, startWith } from 'rxjs/operators';
+
 import { range } from '../../../shared/array.util';
 import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
-import { WorkpacakgeFlatNode } from '../../../core/working-plan/models/workpackage-step-flat-node.model';
+import { WorkpacakgeFlatNode } from '../../core/models/workpackage-step-flat-node.model';
 import {
   Workpackage,
   WorkpackageChartDate,
   WorkpackageStep,
   WorkpackageTreeObject
-} from '../../../core/working-plan/models/workpackage-step.model';
-import { moment, WorkingPlanService } from '../../../core/working-plan/working-plan.service';
-import { WorkingPlanStateService } from '../../../core/working-plan/working-plan-state.service';
+} from '../../core/models/workpackage-step.model';
+import { moment, WorkingPlanService, WpMetadata, WpStepMetadata } from '../../core/working-plan.service';
+import { WorkingPlanStateService } from '../../core/working-plan-state.service';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
-import { hasValue, isNotNull } from '../../../shared/empty.util';
+import { hasValue, isNotEmpty, isNotNull } from '../../../shared/empty.util';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
-import { ChartDateViewType } from '../../../core/working-plan/working-plan.reducer';
+import { ChartDateViewType } from '../../core/working-plan.reducer';
 import { environment } from '../../../../environments/environment';
+import { followLink } from '../../../shared/utils/follow-link-config.model';
+import { getAllSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../../../core/shared/operators';
+import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
+import { EditItemDataService } from '../../../core/submission/edititem-data.service';
+import { EditItem } from '../../../core/submission/models/edititem.model';
+import { SearchConfig } from 'src/app/core/shared/search/search-filters/search-config.model';
+import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
+
 
 export const MY_FORMATS = {
   parse: {
@@ -39,6 +49,16 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
+
+/**
+ * Defines the UpdateData parameters.
+ */
+interface UpdateData {
+  flatNode: WorkpacakgeFlatNode;
+  nestedNode: WorkpackageTreeObject;
+  metadata: string[];
+  values: string[];
+}
 
 /**
  * @title Tree with nested nodes
@@ -76,6 +96,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   chartDateView: BehaviorSubject<ChartDateViewType> = new BehaviorSubject<ChartDateViewType>(null);
   ChartDateViewType = ChartDateViewType;
   responsibleVocabularyOptions: VocabularyOptions;
+  /**
+   * The number of days of the ChangeAllStartDate dropdown.
+   */
+  changeStartDateDays = '1';
+  /**
+   * The direction of the ChangeAllStartDate dropdown.
+   */
+  changeStartDateDirection = 'later';
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap: Map<string, WorkpacakgeFlatNode> = new Map<string, WorkpacakgeFlatNode>();
 
@@ -83,18 +111,62 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   nestedNodeMap: Map<string, WorkpackageTreeObject> = new Map<string, WorkpackageTreeObject>();
 
   treeControl: FlatTreeControl<WorkpacakgeFlatNode>;
+  // TODO HERE
   treeFlattener: MatTreeFlattener<WorkpackageTreeObject, WorkpacakgeFlatNode>;
   dataSource: MatTreeFlatDataSource<WorkpackageTreeObject, WorkpacakgeFlatNode>;
+
+  /**
+   * The sorting options for the chart.
+   */
+  sortOptions$: Observable<SearchConfig>;
+  /**
+   * The active sorting option.
+   */
+  sortSelected$: Observable<string>;
+  /**
+   * The active sorting option value.
+   */
+  sortSelectedValue: string;
+  /**
+   * The old selected sorting option.
+   */
+  sortSelectedOld: string;
+  /**
+   * If TRUE the tree Drag&Drop is active.
+   */
+  dragAndDropIsActive: boolean;
+  isDragging: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isDropAllowed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   chartData;
 
   sidebarNamesStyle = {
-    'min-width': 20 + 'rem'
+    'min-width': 25 + 'rem'
   };
   sidebarResponsibleStyle = {
-    'min-width': 18 + 'rem'
+    'min-width': 30 + 'rem'
   };
+  sidebarResponsibleStatus = true;
+
+  /**
+   * The map with the MouseOver statuses of the nodes (rows). Used to change the filled row color on MouseOver.
+   */
+  chartChangeColorIsOver: Map<string, boolean> = new Map<string, boolean>();
+
+  /**
+   * The responsible column status (used to expand and collapse the column).
+   */
   sidebarStatusStyle = {};
+
+  /**
+   * The milestones map used to draw a blue line and a rhombus at the milestone date.
+   */
+  milestonesMap: Map<string, string> = new Map<string, string>();
+
+  /**
+   * List of Edit Modes available on each node for the current user
+   */
+  private editModes$: BehaviorSubject<Map<string, EditItemMode[]>> = new BehaviorSubject<Map<string, EditItemMode[]>>(new Map());
 
   private chartStatusTypeList$: BehaviorSubject<VocabularyEntry[]> = new BehaviorSubject<VocabularyEntry[]>([]);
   private subs: Subscription[] = [];
@@ -104,7 +176,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private translate: TranslateService,
     private workingPlanService: WorkingPlanService,
-    private workingPlanStateService: WorkingPlanStateService
+    private workingPlanStateService: WorkingPlanStateService,
+    private editItemService: EditItemDataService,
   ) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
       this._isExpandable, this._getChildren);
@@ -119,6 +192,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.dragAndDropIsActive = false;
+    this.sortSelected$ = this.workingPlanStateService.getWorkpackagesSortOption();
+
     this.workingPlanStateService.getChartDateViewSelector()
       .subscribe((view) => this.chartDateView.next(view));
 
@@ -126,7 +202,17 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this.workingPlanService.getWorkpackageStatusTypes()
         .subscribe((statusList: VocabularyEntry[]) => {
           this.chartStatusTypeList$.next(statusList);
-        }));
+        }),
+      this.sortSelected$.subscribe(
+        (sortOption: string) => {
+          this.sortSelectedValue = sortOption;
+          this.sortSelectedOld = sortOption;
+          if (sortOption === environment.workingPlan.workingPlanPlaceMetadata) {
+            this.dragAndDropIsActive = true;
+          }
+        }
+      )
+    );
 
     this.workpackages.subscribe((tree: Workpackage[]) => {
       if (tree) {
@@ -141,6 +227,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         this.buildCalendar();
         /** expand tree based on status */
         this.treeControl.dataNodes.forEach((node) => {
+          // Retrieve edit modes
+          this.retrieveEditMode(node.id);
+          // MouseOver Map
+          this.chartChangeColorIsOver.set(node.id, false);
+          // Milestones border and rhombus
+          if (node.type === 'milestone') {
+            this.milestonesMap.set(node.id, node.dates.end.full);
+          }
           if (node.expanded) {
             this.treeControl.expand(node);
           } else {
@@ -149,6 +243,125 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         });
       }
     });
+
+    this.sortOptions$ = this.workingPlanService.getWorkpackageSortOptions();
+  }
+
+  /**
+   * Set the responsible column status (used to expand and collapse the column).
+   */
+  sidebarStatusToggle() {
+    this.sidebarResponsibleStatus = !this.sidebarResponsibleStatus;
+  }
+
+  /**
+   * Set the map with the nodes (rows) ids (used to change the filled row color on MouseOver).
+   *
+   * @param nodeId string
+   * @param isOver boolean
+   */
+  chartChangeColor(nodeId: string, isOver: boolean): void {
+    this.chartChangeColorIsOver.set(nodeId, isOver);
+  }
+
+  /**
+   * Returns TRUE or FALSE based on the 'this.chartChangeColorIsOver' variable (used to change the filled row color on MouseOver).
+   *
+   * @param node Workpackage
+   * @param progressDate string
+   * @param rangeDate string
+   *
+   * @returns boolean
+   */
+  chartCheckChangeColor(node: Workpackage, progressDate: string, rangeDate: string): boolean {
+    let response = false;
+    if (this.chartChangeColorIsOver.get(node.id)
+      && !this.isDateInsidePogressRange(progressDate, node)
+      && this.isDateInsideRange(rangeDate, node)) {
+      response = true;
+    }
+    return response;
+  }
+
+  /**
+   * Returns TRUE if the node is the last node of the year (used to draw a red line at the end of the year).
+   *
+   * @param date string
+   * @param type string
+   *
+   * @returns boolean
+   */
+  chartCheckEndOfTheYear(date: string, type: string): boolean {
+    let output = false;
+    let momentDate;
+    if (type === 'month') {
+      momentDate = moment(date, 'YYYY-MM');
+      if (momentDate.format('MM') === '12') {
+        output = true;
+      }
+    } else if (type === 'quarter') {
+      momentDate = date.split('-');
+      if (momentDate[1] === '4') {
+        output = true;
+      }
+    } else {
+      output = true;
+    }
+    return output;
+  }
+
+  /**
+   * Returns TRUE if the node date match a milestone date (used to draw a blue line at the milestone date).
+   *
+   * @param date string
+   *
+   * @returns boolean
+   */
+  chartCheckMilestone(date: string): boolean {
+    const milestoneDates = Array.from(this.milestonesMap.values());
+    let output = false;
+    if (milestoneDates.indexOf(date) !== -1) {
+      output = true;
+    }
+    return output;
+  }
+
+  /**
+   * Returns TRUE if the node id match a milestone id (used to draw a rhombus at the milestone date).
+   *
+   * @param nodeId string
+   * @param date string
+   *
+   * @returns boolean
+   */
+  chartCheckNodeMilestone(nodeId: string, date: string): boolean {
+    let output = false;
+    if (this.milestonesMap.has(nodeId) && this.milestonesMap.get(nodeId) === date) {
+      output = true;
+    }
+    return output;
+  }
+
+  /**
+   * Check if edit mode is available.
+   *
+   * @param nodeId string
+   *
+   * @returns Observable<boolean>
+   */
+  isEditAvailable(nodeId): Observable<boolean> {
+    return this.editModes$.asObservable().pipe(
+      map((editModes) => isNotEmpty(editModes) && editModes.has(nodeId) && editModes.get(nodeId).length > 0)
+    );
+  }
+
+  /**
+   * Returns the edit modes.
+   *
+   * @returns Observable<Map<string, EditItemMode[]>>
+   */
+  getEditModes(): Observable<Map<string, EditItemMode[]>> {
+    return this.editModes$;
   }
 
   /** utils of building tree */
@@ -157,6 +370,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       node.id,
       node.workspaceItemId,
       this.getIndex(node, level),
+      node.type,
       (node.steps && node.steps.length !== 0),
       level,
       node.name,
@@ -200,16 +414,20 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     }, () => null);
     modalRef.componentInstance.formConfig = this.workingPlanService.getWorkpackageStepFormConfig();
     modalRef.componentInstance.formHeader = this.workingPlanService.getWorkpackageStepFormHeader();
+    modalRef.componentInstance.searchMessageInfoKey = this.workingPlanService.getWorkingPlanTaskSearchHeader();
     modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
-    modalRef.componentInstance.excludeListId = [nestedNode.id];
-    modalRef.componentInstance.excludeFilterName = 'parentWorkpackageId';
     modalRef.componentInstance.vocabularyName = this.workingPlanService.getWorkpackageStepTypeAuthorityName();
     modalRef.componentInstance.searchConfiguration = this.workingPlanService.getWorkpackageStepSearchConfigName();
     modalRef.componentInstance.scope = this.projectId;
+    modalRef.componentInstance.query = this.buildExcludedTasksQuery(flatNode);
 
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
       this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectId, flatNode.id, item.type.value, metadata);
+      // the 'this.editModes$' map is auto-updated by the ngOnInit subscribe
+      if (flatNode.type === 'milestone') {
+        this.milestonesMap.set(flatNode.id, flatNode.dates.end.full);
+      }
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {
@@ -231,6 +449,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       const childNode: WorkpackageStep = this.nestedNodeMap.get(flatNode.id);
       this.workingPlanStateService.dispatchRemoveWorkpackageStep(parentNode.id, childNode.id, childNode.workspaceItemId);
     }
+    // We use 'next' to be sure that the event is emitted
+    this.editModes$.value.delete(flatNode.id);
+    this.editModes$.next(this.editModes$.value);
+    // MouseOver map update
+    this.chartChangeColorIsOver.delete(flatNode.id);
+    // Milestones map update
+    this.milestonesMap.delete(flatNode.id);
   }
 
   getParentStep(node: WorkpacakgeFlatNode): WorkpacakgeFlatNode {
@@ -257,49 +482,94 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return (index !== -1) ? this.chartStatusTypeList$.value[index].display : statusType;
   }
 
-  updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string) {
+  /**
+   * Update the number of days of the ChangeAllStartDate dropdown.
+   *
+   * @param days string
+   */
+  updateChangeStartDateDays(days: string): void {
+    this.changeStartDateDays = days;
+  }
 
-    // create new dates object
-    const startMoment = this.moment(startDate); // create start moment
-    const startDateObj: WorkpackageChartDate = {
-      full: startMoment.format(this.dateFormat),
-      month: startMoment.format(this.dateMonthFormat),
-      year: startMoment.format(this.dateYearFormat)
-    };
+  /**
+   * Update the direction of the ChangeAllStartDate dropdown.
+   *
+   * @param direction string
+   */
+  updateChangeStartDateDirection(direction: string): void {
+    this.changeStartDateDirection = direction;
+  }
 
-    const endMoment = this.moment(endDate); // create start moment
-    const endDateObj: WorkpackageChartDate = {
-      full: endMoment.format(this.dateFormat),
-      month: endMoment.format(this.dateMonthFormat),
-      year: endMoment.format(this.dateYearFormat)
-    };
-
-    const dates = {
-      start: startDateObj,
-      end: endDateObj
-    };
-
-    // update flat node dates
-    flatNode = Object.assign({}, flatNode, {
-      dates: dates
-    });
-
-    // update nested node dates
-    const nestedNode = Object.assign({}, this.nestedNodeMap.get(flatNode.id), {
-      dates: dates
-    });
-
-    // rebuild calendar if the root is updated
-    if (flatNode.level === 0) {
-      this.buildCalendar();
+  /**
+   * Reset the SortBy dropdown to the actual value.
+   *
+   * @param isOpen boolean
+   */
+  resetSortDropdown(isOpen: boolean): void {
+    if ( isOpen ) {
+      this.sortSelectedValue = this.sortSelectedOld;
     }
+  }
+
+  /**
+   * Update the chart with the new sort option.
+   */
+  updateSort() {
+    if (this.sortSelectedValue !== this.sortSelectedOld) {
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectId, this.sortSelectedValue);
+    }
+  }
+
+  /**
+   * Update all the nodes date range.
+   */
+  updateAllDateRange(): void {
+    let startDate;
+    let endDate;
+    let startStringDate;
+    let endStringDate;
+    const updateAllMap: Map<string, { startDate: string, endDate: string }> = new Map();
+
+    this.flatNodeMap.forEach((node: WorkpacakgeFlatNode) => {
+      if (node.type === 'milestone') {
+        startDate = this.moment(node.dates.end.full, this.dateFormat);
+      } else {
+        startDate = this.moment(node.dates.start.full, this.dateFormat);
+      }
+      endDate = this.moment(node.dates.end.full, this.dateFormat);
+      if (this.changeStartDateDirection === 'later') {
+        startStringDate = startDate.add(this.changeStartDateDays, 'days').format(this.dateFormat);
+        endStringDate = endDate.add(this.changeStartDateDays, 'days').format(this.dateFormat);
+      } else {
+        startStringDate = startDate.subtract(this.changeStartDateDays, 'days').format(this.dateFormat);
+        endStringDate = endDate.subtract(this.changeStartDateDays, 'days').format(this.dateFormat);
+      }
+      updateAllMap.set(node.id, { 'startDate': startStringDate, 'endDate': endStringDate });
+    });
+    this.updateAllDateRanges(updateAllMap);
+  }
+
+  updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string) {
+    const nodeData: UpdateData = this._updateDateRangeOperations(flatNode, startDate, endDate);
 
     this.updateField(
-      flatNode,
-      nestedNode,
-      [environment.workingPlan.workingPlanStepDateStartMetadata, environment.workingPlan.workingPlanStepDateEndMetadata],
-      [nestedNode.dates.start.full, nestedNode.dates.end.full]
+      nodeData.flatNode,
+      nodeData.nestedNode,
+      nodeData.metadata,
+      nodeData.values
     );
+  }
+
+  updateAllDateRanges(updateAllMap: Map<string, { startDate: string, endDate: string }>): void {
+    let nodeData;
+    const nodeDataArray: UpdateData[] = [];
+
+    updateAllMap.forEach((data: { startDate: string, endDate: string }, index: string) => {
+      nodeData = this._updateDateRangeOperations(this.flatNodeMap.get(index), data.startDate, data.endDate);
+      nodeDataArray.push(nodeData);
+    });
+
+    this.updateAllField(nodeDataArray);
   }
 
   updateStepName(flatNode: WorkpacakgeFlatNode, name: string) {
@@ -335,7 +605,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       case 'names':
         this.sidebarNamesStyle = style;
         break;
-      case 'Responsible':
+      case 'responsible':
         this.sidebarResponsibleStyle = style;
         break;
       case 'status':
@@ -347,24 +617,34 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   buildCalendar() {
     this.dates = [];
     this.datesMonth = [];
+    this.datesQuarter = [];
     this.datesYear = [];
 
     this.dataSource.data.forEach((step: Workpackage) => {
-      const start = this.moment(step.dates.start.full, this.dateFormat);
+      let start;
       const end = this.moment(step.dates.end.full, this.dateFormat);
+      if (step.type === 'milestone') {
+        start = this.moment(this.moment(step.dates.end.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
+      } else {
+        start = this.moment(step.dates.start.full, this.dateFormat);
+      }
       const dateRange = moment.range(start, end);
 
-      // Moment range sometimes does not include all the month, so use the end of the month to get the correct range
+      // Moment range sometimes does not include all the months, so use the end of the month to get the correct range
       const endForMonth = this.moment(step.dates.end.full).endOf('month');
       const dateRangeForMonth = this.moment.range(start, endForMonth);
 
-      // Moment range sometimes does not include all the year, so use the end of the year to get the correct range
+      // Moment range sometimes does not include all the quarters, so use the end of the quarter to get the correct range
+      const endForQuarter = this.moment(step.dates.end.full).endOf('quarter');
+      const dateRangeForQuarter = this.moment.range(start, endForQuarter);
+
+      // Moment range sometimes does not include all the years, so use the end of the year to get the correct range
       const endForYear = this.moment(step.dates.end.full, this.dateFormat).endOf('year');
       const dateRangeForYear = this.moment.range(start, endForYear);
 
       const days = Array.from(dateRange.by('days'));
       const months = Array.from(dateRangeForMonth.by('months'));
-      const quarters = Array.from(dateRange.by('quarters'));
+      const quarters = Array.from(dateRangeForQuarter.by('quarters'));
       const years = Array.from(dateRangeForYear.by('year'));
 
       this.dates = this.dates.concat(days
@@ -383,6 +663,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         .map((d) => d.format(this.dateYearFormat))
         .filter((d) => !this.datesYear.includes(d))).sort();
     });
+    this.adjustDates();
   }
 
   formatDate(date: string): string {
@@ -436,35 +717,19 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   isDateInsideRange(date: string, node: Workpackage): boolean {
-    return date >= node.dates.start.full && date <= node.dates.end.full;
+    if (node.type !== 'milestone') {
+      return date >= node.dates.start.full && date <= node.dates.end.full;
+    } else {
+      return date === node.dates.end.full;
+    }
   }
 
   isMoving(): Observable<boolean> {
     return this.workingPlanStateService.isWorkingPlanMoving();
   }
 
-  canMoveDown(flatNode: WorkpacakgeFlatNode, level: number, index: number) {
-    let data: any[];
-    if (level === 0) {
-      data = this.dataSource.data;
-    } else {
-      const parentNode: Workpackage = this.nestedNodeMap.get(flatNode.parentId);
-      data = parentNode.steps;
-    }
-
-    return data.length === 0 || index === (data.length - 1);
-  }
-
-  canMoveUp(flatNode: WorkpacakgeFlatNode, level: number, index: number) {
-    let data: any[];
-    if (level === 0) {
-      data = this.dataSource.data;
-    } else {
-      const parentNode: Workpackage = this.nestedNodeMap.get(flatNode.parentId);
-      data = parentNode.steps;
-    }
-
-    return data.length === 0 || index === 0;
+  canAddChildStep(node: WorkpacakgeFlatNode) {
+    return node.level === 0 && node.type !== environment.workingPlan.milestoneEntityName;
   }
 
   moveWorkpackage(flatNode: WorkpacakgeFlatNode, level: number, oldIndex: number, newIndex: number) {
@@ -480,6 +745,37 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         oldIndex,
         newIndex
       );
+    }
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    this.isDragging.next(false);
+    this.isDropAllowed.next(false);
+    // ignore drops outside of the tree
+    if (!event.isPointerOverContainer) {
+      return;
+    }
+    // Tree Update
+    if (event.previousIndex !== event.currentIndex) {
+      const destNode = this.treeControl.dataNodes[event.currentIndex];
+      if (event.item.data.parentId === destNode.parentId && event.item.data.level === destNode.level) {
+        this.moveWorkpackage(event.item.data, event.item.data.level, event.item.data.index, destNode.index);
+      }
+    }
+  }
+
+  dragStarted(event: CdkDragStart<WorkpacakgeFlatNode[]>) {
+    this.isDragging.next(true);
+    this.isDropAllowed.next(true);
+  }
+
+  dragEntered(event: CdkDragSortEvent<WorkpacakgeFlatNode, WorkpacakgeFlatNode>) {
+    this.isDragging.next(true);
+    const destNode = this.treeControl.dataNodes[event.currentIndex];
+    if (event.item.data.parentId === destNode.parentId && event.item.data.level === destNode.level) {
+      this.isDropAllowed.next(true);
+    } else {
+      this.isDropAllowed.next(false);
     }
   }
 
@@ -531,6 +827,28 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return this.workingPlanService.isProcessingWorkpackageRemove(node.id);
   }
 
+  isProcessingWorkpackage(): Observable<boolean> {
+    return this.workingPlanService.isProcessingWorkpackage();
+  }
+
+  /**
+   * Check, inside the state, if the node has been added in the last operation.
+   *
+   * @param nodeId string
+   * @returns Observable<boolean>
+   */
+  hasBeenNowAdded(nodeId): Observable<boolean> {
+    return this.workingPlanService.getLastAddedNodesList().pipe(
+      map((nodeIdArray: string[]) => {
+        if (nodeIdArray.indexOf(nodeId) > -1) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
+  }
+
   ngOnDestroy(): void {
     this.subs
       .filter((subscription) => hasValue(subscription))
@@ -570,6 +888,66 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   private _getChildren = (node: Workpackage): Observable<WorkpackageStep[]> => observableOf(node.steps);
 
+  private _updateDateRangeOperations(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string): UpdateData {
+    // create new dates object
+    let dates;
+    let startMoment;
+    let startDateObj: WorkpackageChartDate;
+    const endMoment = this.moment(endDate); // create start moment
+    const endDateObj: WorkpackageChartDate = {
+      full: endMoment.format(this.dateFormat),
+      month: endMoment.format(this.dateMonthFormat),
+      year: endMoment.format(this.dateYearFormat)
+    };
+
+    if (flatNode.type !== 'milestone') {
+      startMoment = this.moment(startDate); // create start moment
+      startDateObj = {
+        full: startMoment.format(this.dateFormat),
+        month: startMoment.format(this.dateMonthFormat),
+        year: startMoment.format(this.dateYearFormat)
+      };
+
+      dates = {
+        start: startDateObj,
+        end: endDateObj
+      };
+    } else {
+      dates = {
+        end: endDateObj
+      };
+    }
+
+    // update flat node dates
+    flatNode = Object.assign({}, flatNode, {
+      dates: dates
+    });
+
+    // update nested node dates
+    const nestedNode = Object.assign({}, this.nestedNodeMap.get(flatNode.id), {
+      dates: dates
+    });
+
+    // rebuild calendar if the root is updated
+    if (flatNode.level === 0) {
+      this.buildCalendar();
+    }
+
+    let values = [];
+    if (nestedNode.type !== 'milestone') {
+      values = [nestedNode.dates.start.full, nestedNode.dates.end.full];
+    } else {
+      values = [null, nestedNode.dates.end.full];
+    }
+
+    return {
+      'flatNode': flatNode,
+      'nestedNode': nestedNode,
+      'metadata': [environment.workingPlan.workingPlanStepDateStartMetadata, environment.workingPlan.workingPlanStepDateEndMetadata],
+      'values': values
+    };
+  }
+
   private updateField(flatNode: WorkpacakgeFlatNode, nestedNode: WorkpackageTreeObject, metadata: string[], value: any[]) {
     // Update reference in the maps
     this.updateTreeMap(flatNode, nestedNode);
@@ -593,5 +971,118 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         [...value]
       );
     }
+  }
+
+  /**
+   * Dispatch the update of all nodes metadata.
+   *
+   * @param nodeDataArray UpdateData[]
+   */
+  private updateAllField(nodeDataArray: UpdateData[]): void {
+    const wpMetadata: WpMetadata[] = [];
+    const wpStepMetadata: WpStepMetadata[] = [];
+    let parentNestedNode: Workpackage;
+    let childNestedNode: WorkpackageStep;
+    nodeDataArray.forEach((nodeData) => {
+      this.updateTreeMap(nodeData.flatNode, nodeData.nestedNode);
+      if (this.treeControl.getLevel(nodeData.flatNode) < 1) {
+        wpMetadata.push({
+          'nestedNodeId': nodeData.nestedNode.id,
+          'nestedNode': nodeData.nestedNode,
+          'metadata': [...nodeData.metadata],
+          'values': [...nodeData.values],
+          'hasAuthority': false
+        });
+      } else {
+        parentNestedNode = this.nestedNodeMap.get(nodeData.flatNode.parentId);
+        childNestedNode = this.nestedNodeMap.get(nodeData.flatNode.id);
+        wpStepMetadata.push({
+          'parentNestedNodeId': parentNestedNode.id,
+          'childNestedNodeId': childNestedNode.id,
+          'childNestedNode': childNestedNode,
+          'metadata': [...nodeData.metadata],
+          'values': [...nodeData.values],
+          'hasAuthority': false
+        });
+      }
+    });
+    // dispatch action to update item metadata
+    if (wpMetadata.length !== 0 || wpStepMetadata.length !== 0) {
+      this.workingPlanService.updateAllWorkpackageMetadata(wpMetadata, wpStepMetadata);
+    }
+  }
+
+  /**
+   * Retrieve edit modes.
+   *
+   * @param nodeId string
+   */
+  private retrieveEditMode(nodeId: string): void {
+    this.subs.push(this.editItemService.findById(nodeId + ':none', true, true, followLink('modes')).pipe(
+      getAllSucceededRemoteDataPayload(),
+      mergeMap((editItem: EditItem) => editItem.modes.pipe(
+        getFirstSucceededRemoteListPayload())
+      ),
+      startWith([])
+    ).subscribe((editModes: EditItemMode[]) => {
+      this.editModes$.next(this.editModes$.value.set(nodeId, editModes));
+    }));
+  }
+
+  /**
+   * Corrects the months and quarters headers adding what's missing to complete the years.
+   */
+  private adjustDates(): void {
+    if (this.datesMonth.length > 0) {
+      const dateFormat = 'YYYY-MM';
+      const firstDateMonth = moment(this.datesMonth[0], dateFormat);
+      const lastDateMonth = moment(this.datesMonth[this.datesMonth.length - 1], dateFormat);
+
+      const beforeStart = moment(firstDateMonth.format('YYYY') + '-01', dateFormat);
+      const afterLimit = moment(lastDateMonth.format('YYYY') + '-12', dateFormat);
+
+      const beforeRange = moment.range(beforeStart, firstDateMonth);
+      const afterRange = moment.range(lastDateMonth, afterLimit);
+
+      const beforeRangeArray = Array.from(beforeRange.by('months'));
+      const afterRangeArray = Array.from(afterRange.by('months'));
+      this.datesMonth = this.datesMonth.concat(
+        beforeRangeArray
+          .map((d) => d.format(this.dateMonthFormat))
+          .filter((d) => this.datesMonth.indexOf(d) === -1)
+        ).sort();
+      this.datesMonth = this.datesMonth.concat(
+        afterRangeArray
+          .map((d) => d.format(this.dateMonthFormat))
+          .filter((d) => this.datesMonth.indexOf(d) === -1)
+      ).sort();
+    }
+    if (this.datesQuarter.length > 0) {
+      const firstDateQuarter = this.datesQuarter[0].split('-');
+      const lastDateQuarter = this.datesQuarter[this.datesQuarter.length - 1].split('-');
+      let beforeStart = 1;
+      const beforeLimit = parseInt(firstDateQuarter[1], 10);
+      let afterStart = parseInt(lastDateQuarter[1], 10);
+      const afterLimit = 4;
+      for (beforeStart; beforeStart < beforeLimit; beforeStart++) {
+        this.datesQuarter.unshift(firstDateQuarter[0] + '-' + beforeStart);
+      }
+      for (afterStart++; afterStart <= afterLimit; afterStart++) {
+        this.datesQuarter.push(lastDateQuarter[0] + '-' + afterStart);
+      }
+    }
+  }
+
+  private buildExcludedTasksQuery(flatNode: WorkpacakgeFlatNode): string {
+    /* const subprojectMembersGroup = this.projectGroupService.getProjectMembersGroupNameByCommunity(this.subproject);
+    let query = `(entityGrants:project OR cris.policy.group: ${subprojectMembersGroup})`; */
+    let query = '';
+    const tasksIds = flatNode.steps.map((step) => step.id);
+    if (tasksIds.length > 0) {
+      const excludedIdsQuery = '-(search.resourceid' + ':(' + tasksIds.join(' OR ') + '))';
+      query += `${excludedIdsQuery}`;
+    }
+
+    return query;
   }
 }

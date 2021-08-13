@@ -94,10 +94,10 @@ import { DYNAMIC_FORM_CONTROL_TYPE_DISABLED } from './models/disabled/dynamic-di
 import { DsDynamicLookupRelationModalComponent } from './relation-lookup-modal/dynamic-lookup-relation-modal.component';
 import {
   getAllSucceededRemoteData,
+  getFirstSucceededRemoteData,
   getFirstSucceededRemoteDataPayload,
   getPaginatedListPayload,
-  getRemoteDataPayload,
-  getFirstSucceededRemoteData
+  getRemoteDataPayload
 } from '../../../../core/shared/operators';
 import { RemoteData } from '../../../../core/data/remote-data';
 import { Item } from '../../../../core/shared/item.model';
@@ -282,6 +282,7 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
               relationshipOptions.relationshipType,
               undefined,
               true,
+              true,
               followLink('leftItem'),
               followLink('rightItem'),
               followLink('relationshipType')
@@ -318,7 +319,7 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
       }
 
       if (hasValue(this.value) && this.value.isVirtual) {
-        const relationship$ = this.relationshipService.findById(this.value.virtualValue, true, followLink('leftItem'), followLink('rightItem'), followLink('relationshipType'))
+        const relationship$ = this.relationshipService.findById(this.value.virtualValue, true, true, followLink('leftItem'), followLink('rightItem'), followLink('relationshipType'))
           .pipe(
             getAllSucceededRemoteData(),
             getRemoteDataPayload());
@@ -343,7 +344,7 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes) {
+    if (changes && !this.isRelationship && hasValue(this.group.get(this.model.id))) {
       super.ngOnChanges(changes);
       if (this.model && this.model.placeholder) {
         this.model.placeholder = this.translateService.instant(this.model.placeholder);
@@ -401,6 +402,15 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
     }
   }
 
+  hasRelationship() {
+    return isNotEmpty(this.model) && this.model.hasOwnProperty('relationship') && isNotEmpty(this.model.relationship);
+  }
+
+  isVirtual() {
+    const value: FormFieldMetadataValueObject = this.model.metadataValue;
+    return isNotEmpty(value) && value.isVirtual;
+  }
+
   public hasResultsSelected(): Observable<boolean> {
     return this.model.value.pipe(map((list: SearchResult<DSpaceObject>[]) => isNotEmpty(list)));
   }
@@ -412,6 +422,27 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
     this.modalRef = this.modalService.open(DsDynamicLookupRelationModalComponent, {
       size: 'lg'
     });
+
+    if (hasValue(this.model.value)) {
+      this.focus.emit({
+        $event: new Event('focus'),
+        context: this.context,
+        control: this.control,
+        model: this.model,
+        type: DynamicFormControlEventType.Focus
+      } as DynamicFormControlEvent);
+
+      this.change.emit({
+        $event: new Event('change'),
+        context: this.context,
+        control: this.control,
+        model: this.model,
+        type: DynamicFormControlEventType.Change
+      } as DynamicFormControlEvent);
+    }
+
+    this.submissionService.dispatchSave(this.model.submissionId);
+
     const modalComp = this.modalRef.componentInstance;
 
     if (hasValue(this.model.value) && !this.model.readOnly) {
@@ -421,18 +452,6 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
         modalComp.query = this.model.value.value;
       }
     }
-
-    if (hasValue(this.model.value)) {
-      this.model.value = '';
-      this.onChange({
-        $event: { previousIndex: 0 },
-        context: { index: 0 },
-        control: this.control,
-        model: this.model,
-        type: DynamicFormControlEventType.Change
-      });
-    }
-    this.submissionService.dispatchSave(this.model.submissionId);
 
     modalComp.repeatable = this.model.repeatable;
     modalComp.listId = this.listId;
@@ -453,6 +472,9 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
     const path = this.formBuilderService.getPath(arrayContext);
     const formArrayControl = this.group.root.get(path) as FormArray;
     this.formBuilderService.removeFormArrayGroup(this.context.index, formArrayControl, arrayContext);
+    if (this.model.parent.context.groups.length === 0) {
+      this.formBuilderService.addFormArrayGroup(formArrayControl, arrayContext);
+    }
   }
 
   /**
@@ -473,7 +495,7 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
    */
   private setItem() {
     const submissionObject$ = this.submissionObjectService
-      .findById(this.model.submissionId, true, followLink('item'), followLink('collection')).pipe(
+      .findById(this.model.submissionId, true, true, followLink('item'), followLink('collection')).pipe(
         getAllSucceededRemoteData(),
         getRemoteDataPayload()
       );
