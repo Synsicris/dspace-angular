@@ -75,11 +75,11 @@ export class DsDynamicTypeBindRelationService {
         if (bindModel && relation.match === matcher.match) {
 
           if (index > 0 && operator === AND_OPERATOR && !hasAlreadyMatched) {
-            returnValue =  false;
+            continue;
           }
 
           if (index > 0 && operator === OR_OPERATOR && hasAlreadyMatched) {
-            returnValue = true;
+            continue;
           }
 
           returnValue = condition.value === value;
@@ -92,11 +92,11 @@ export class DsDynamicTypeBindRelationService {
         if (bindModel && relation.match === matcher.opposingMatch) {
 
           if (index > 0 && operator === AND_OPERATOR && hasAlreadyMatched) {
-            returnValue = true;
+            continue;
           }
 
           if (index > 0 && operator === OR_OPERATOR && !hasAlreadyMatched) {
-            returnValue =  false;
+            continue;
           }
 
           returnValue = !(condition.value === value);
@@ -126,7 +126,7 @@ export class DsDynamicTypeBindRelationService {
           startWith(initValue)
         );
 
-        subscriptions.push(valueChanges.subscribe((v) => {
+        subscriptions.push(valueChanges.subscribe(() => {
 
           this.dynamicMatchers.forEach((matcher) => {
 
