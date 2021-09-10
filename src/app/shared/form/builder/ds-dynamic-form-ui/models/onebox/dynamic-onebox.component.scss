@@ -1,3 +1,5 @@
+@import '../../../../form.component';
+
 :host ::ng-deep .dropdown-menu {
   width: 100% !important;
   max-height: var(--ds-dropdown-menu-max-height);
@@ -22,40 +24,10 @@
   overflow-y: auto;
 }
 
-
-.custom-select{
-  cursor: pointer;
-  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23444444' d='M2 4L0 2h4zm0 3L3'/%3e%3c/svg%3e") no-repeat right 0.75rem center/8px 10px;
-}
-
-/* style fa-spin */
-.fa-spin {
-  pointer-events: none;
-}
-
-/* align fa-spin */
-.left-addon .far, .left-addon .fas {
-  left: 0;
-}
-
-.right-addon .far, .right-addon .fas {
-  right: 0;
-}
-
-/* add padding  */
-.left-addon input {
-  padding-left: $spacer * 2.25;
-}
-
-.right-addon input {
-  padding-right: $spacer * 2.25;
-}
-
 .tree-toggle {
   padding:  0.70rem 0.70rem 0 0.70rem ;
 }
 
 .tree-input[readonly]{
   background-color: #fff;
-  cursor: pointer;
 }

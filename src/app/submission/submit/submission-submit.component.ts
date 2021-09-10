@@ -2,17 +2,17 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewContainerRef } fro
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 import { hasValue, isEmpty, isNotNull } from '../../shared/empty.util';
 import { SubmissionDefinitionsModel } from '../../core/config/models/config-submission-definitions.model';
-import { TranslateService } from '@ngx-translate/core';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { SubmissionService } from '../submission.service';
 import { SubmissionObject } from '../../core/submission/models/submission-object.model';
 import { Item } from '../../core/shared/item.model';
 import { WorkspaceitemSectionsObject } from '../../core/submission/models/workspaceitem-sections.model';
 import { SubmissionError } from '../objects/submission-objects.reducer';
-import { MYDSPACE_ROUTE } from '../../+my-dspace-page/my-dspace-page.component';
+import { MYDSPACE_ROUTE } from '../../my-dspace-page/my-dspace-page.component';
 
 /**
  * This component allows to submit a new workspaceitem.

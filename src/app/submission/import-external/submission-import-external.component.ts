@@ -20,7 +20,7 @@ import { fadeIn } from '../../shared/animations/fade';
 import { PageInfo } from '../../core/shared/page-info.model';
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import { getFinishedRemoteData } from '../../core/shared/operators';
-import { MYDSPACE_ROUTE } from '../../+my-dspace-page/my-dspace-page.component';
+import { MYDSPACE_ROUTE } from '../../my-dspace-page/my-dspace-page.component';
 
 /**
  * This component allows to submit a new workspaceitem importing the data from an external source.

@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { EasyOnlineImportPageComponent } from './easy-online-import-page.component';
 import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
-import { ItemPageResolver } from '../+item-page/item-page.resolver';
+import { ItemPageResolver } from '../item-page/item-page.resolver';
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
 import { EasyOnlineImportGuard } from '../core/easy-online-import/easy-online-import.guard';
 

@@ -43,6 +43,9 @@ import { BundleDataService } from './bundle-data.service';
 import { Operation } from 'fast-json-patch';
 import { NoContent } from '../shared/NoContent.model';
 import { Metric } from '../shared/metric.model';
+import { GenericConstructor } from '../shared/generic-constructor';
+import { ResponseParsingService } from './parsing.service';
+import { StatusCodeOnlyResponseParsingService } from './status-code-only-response-parsing.service';
 import { Metadata } from '../shared/metadata.utils';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 import { ErrorResponse } from '../cache/response.models';
@@ -271,7 +274,7 @@ export class ItemDataService extends DataService<Item> {
    * @param itemId
    * @param collection
    */
-  public moveToCollection(itemId: string, collection: Collection): Observable<RemoteData<Collection>> {
+  public moveToCollection(itemId: string, collection: Collection): Observable<RemoteData<any>> {
     const options: HttpOptions = Object.create({});
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'text/uri-list');
@@ -284,9 +287,17 @@ export class ItemDataService extends DataService<Item> {
       find((href: string) => hasValue(href)),
       map((href: string) => {
         const request = new PutRequest(requestId, href, collection._links.self.href, options);
-        this.requestService.send(request);
+        Object.assign(request, {
+          // TODO: for now, the move Item endpoint returns a malformed collection -- only look at the status code
+          getResponseParser(): GenericConstructor<ResponseParsingService> {
+            return StatusCodeOnlyResponseParsingService;
+          }
+        });
+        return request;
       })
-    ).subscribe();
+    ).subscribe((request) => {
+      this.requestService.send(request);
+    });
 
     return this.rdbService.buildFromRequestUUID(requestId);
   }

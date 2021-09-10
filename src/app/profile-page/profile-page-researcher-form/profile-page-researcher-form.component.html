@@ -25,7 +25,8 @@
     <button class="btn btn-primary" [disabled]="!researcherProfile" (click)="viewProfile(researcherProfile)">
       <i class="fas fa-info-circle"></i> {{'researcher.profile.view' | translate}}
     </button>
-    <button *ngFor="let editMode of (getEditModes() | async)" class="btn btn-secondary"
+    <button *ngFor="let editMode of (getEditModes() | async); let i = index" class="btn btn-secondary"
+            [class.ml-1]="i != 0"
             [routerLink]="['/edit-items', researcherProfileItemId + ':' + editMode.name]">
       <i class='fas fa-user-edit'></i>
       {{editMode.label ? (editMode.label | translate) : ('context-menu.actions.edit-item.btn.' + editMode.name | translate)}}

@@ -7,7 +7,7 @@ import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { Community } from '../shared/community.model';
 import { CommunityDataService } from '../data/community-data.service';
 import { BreadcrumbConfig } from '../../breadcrumbs/breadcrumb/breadcrumb-config.model';
-import { COMMUNITY_PAGE_LINKS_TO_FOLLOW } from '../../+community-page/community-page.resolver';
+import { COMMUNITY_PAGE_LINKS_TO_FOLLOW } from '../../community-page/community-page.resolver';
 import { SubprojectBreadcrumbsService } from './subproject-breadcrumbs.service';
 
 /**

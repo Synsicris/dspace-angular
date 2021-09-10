@@ -11,7 +11,7 @@ import { WorkingPlanComponent } from './working-plan.component';
 import { WorkingPlanChartComponent } from './working-plan-chart/working-plan-chart.component';
 import { WorkingPlanChartToolbarComponent } from './working-plan-chart/toolbar/working-plan-chart-toolbar.component';
 import { WorkingPlanChartContainerComponent } from './working-plan-chart/container/working-plan-chart-container.component';
-import { MyDSpacePageModule } from '../+my-dspace-page/my-dspace-page.module';
+import { MyDSpacePageModule } from '../my-dspace-page/my-dspace-page.module';
 import { WorkpackageStatusDirective } from './working-plan-chart/container/workpackage-status.directive';
 import { storeModuleConfig } from '../app.reducer';
 import { WorkingPlanEffects } from './core/working-plan.effects';
