@@ -99,4 +99,10 @@ export function getAccessControlModuleRoute() {
 
 export const EDIT_ITEM_PATH = 'edit-items';
 
+
+export function getSubscriptionsModuleRoute() {
+  return `/${SUBSCRIPTIONS_MODULE_PATH}`;
+}
+export const SUBSCRIPTIONS_MODULE_PATH = 'subscriptions';
+
 export const HELP_PAGE_PATH = 'help';

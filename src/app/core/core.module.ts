@@ -198,6 +198,7 @@ import { SearchConfig } from '../shared/search/search-filters/search-config.mode
 import { EditItemRelationsGuard } from '../edit-item-relationships/guards/edit-item-relationships.guard';
 import { ProfileClaimService } from '../profile-page/profile-claim/profile-claim.service';
 import { SequenceService } from './shared/sequence.service';
+import { Subscription } from '../shared/subscriptions/models/subscription.model';
 import { ItemAuthorityRelationService } from './shared/item-authority-relation.service';
 import { ProjectDataService } from './project/project-data.service';
 import { CollectionSearchResult } from '../shared/object-collection/shared/collection-search-result.model';
@@ -436,6 +437,7 @@ export const models =
     StatisticsCategory,
     Root,
     SearchConfig,
+    Subscription,
     ClaimedTaskSearchResult,
     CollectionSearchResult,
     CommunitySearchResult,
