@@ -18,7 +18,7 @@ export class BrowseMostElementsComponent implements OnInit {
 
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
-  @Input() context: Context;
+  @Input() context: Context = Context.BrowseMostElements;
 
   searchResults: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>;
 
