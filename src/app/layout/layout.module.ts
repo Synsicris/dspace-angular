@@ -35,6 +35,7 @@ import { ValuepairComponent } from './default-layout/boxes/components/valuepair/
 import { CrisLayoutSidebarItemComponent } from './default-layout/sidebar/sidebar-item/cris-layout-sidebar-item.component';
 import { TagComponent } from './default-layout/boxes/components/tag/tag.component';
 import { CrisLayoutHelpBoxComponent } from './custom-layout/help-box/help-box.component';
+import { CrisLayoutPersonProjectsBoxComponent } from './custom-layout/person-projects/person-projects.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -58,6 +59,8 @@ const ENTRY_COMPONENTS = [
   OrcidAuthorizationsComponent,
   TagComponent,
   ValuepairComponent,
+  CrisLayoutHelpBoxComponent,
+  CrisLayoutPersonProjectsBoxComponent
 ];
 @NgModule({
   declarations: [
@@ -90,7 +93,8 @@ const ENTRY_COMPONENTS = [
     CrisLayoutSidebarItemComponent,
     TagComponent,
     ValuepairComponent,
-    CrisLayoutHelpBoxComponent
+    CrisLayoutHelpBoxComponent,
+    CrisLayoutPersonProjectsBoxComponent
   ],
   imports: [
     CommonModule,
