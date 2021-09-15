@@ -32,7 +32,7 @@ export class SubscriptionMenuComponent extends ContextMenuEntryComponent impleme
   /**
    * Whether or not the current user is authorized to edit the DSpaceObject
    */
-  isAuthorized$: Observable<boolean> = observableOf(true);
+  isAuthorized$: Observable<boolean> = observableOf(false);
 
 
   /**
