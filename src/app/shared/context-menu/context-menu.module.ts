@@ -17,8 +17,7 @@ import { EditItemRelationshipsMenuComponent } from './edit-item-relationships/ed
 import { ClaimItemMenuComponent } from './claim-item/claim-item-menu.component';
 import { StatisticsMenuComponent } from './statistics/statistics-menu.component';
 import { SubscriptionMenuComponent } from './subscription/subscription-menu.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../shared.module';
+import { SubscriptionsModule } from '../subscriptions/subscriptions.module';
 import { DeleteProjectMenuComponent } from './delete-project/delete-project-menu.component';
 import { ProjectAdminInvitationMenuComponent } from './project-invitation/project-admin-invitation-menu.component';
 import { ProjectMembersInvitationMenuComponent } from './project-members-invitation/project-members-invitation-menu.component';
@@ -68,12 +67,11 @@ const MODULE = [
   NgbDropdownModule,
   RouterModule,
   TranslateModule,
-  ReactiveFormsModule,
-  SharedModule
+  SubscriptionsModule
 ];
 @NgModule({
   imports: [
-    MODULE
+    MODULE,
   ],
   declarations: [
     COMPONENTS
