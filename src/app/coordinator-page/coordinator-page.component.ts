@@ -14,7 +14,7 @@ import { PaginatedList } from '../core/data/paginated-list.model';
 import { DSONameService } from '../core/breadcrumbs/dso-name.service';
 import { ProjectAuthorizationService } from '../core/project/project-authorization.service';
 import { hasValue } from '../shared/empty.util';
-import { getItemPageRoute } from '../+item-page/item-page-routing-paths';
+import { getItemPageRoute } from '../item-page/item-page-routing-paths';
 import { Item } from '../core/shared/item.model';
 
 @Component({

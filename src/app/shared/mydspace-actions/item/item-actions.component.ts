@@ -11,6 +11,7 @@ import { Item } from '../../../core/shared/item.model';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { RequestService } from '../../../core/data/request.service';
 import { SearchService } from '../../../core/shared/search/search.service';
+import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';

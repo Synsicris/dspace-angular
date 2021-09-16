@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -25,19 +25,8 @@ export class CrisLayoutHelpBoxComponent extends CrisLayoutBoxObj implements OnIn
    */
   helpTextI18nKey = 'layout.box.help-text.';
 
-  /**
-   * Dynamic styling of the component host selector
-   */
-  @HostBinding('style.flex') flex = '0 0 100%';
-
-  /**
-   * Dynamic styling of the component host selector
-   */
-  @HostBinding('style.marginRight') margin = '0px';
-
-
-  constructor(protected translateService: TranslateService) {
-    super(translateService);
+  constructor(protected translateService: TranslateService, protected viewRef: ElementRef) {
+    super(translateService, viewRef);
   }
 
   ngOnInit() {

@@ -51,6 +51,7 @@
               "src/robots.txt"
             ],
             "styles": [
+              "src/styles/startup.scss",
               {
                 "input": "src/styles/base-theme.scss",
                 "inject": false,
@@ -65,6 +66,11 @@
                 "input": "src/themes/dspace/styles/theme.scss",
                 "inject": false,
                 "bundleName": "dspace-theme"
+              },
+              {
+                "input": "src/themes/synsicris/styles/theme.scss",
+                "inject": false,
+                "bundleName": "synsicris-theme"
               }
             ],
             "scripts": []
@@ -222,5 +228,8 @@
       }
     }
   },
-  "defaultProject": "dspace-angular"
+  "defaultProject": "dspace-angular",
+  "cli": {
+    "analytics": false
+  }
 }

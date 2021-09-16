@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -34,8 +35,7 @@ export class ProfilePageResearcherFormComponent implements OnInit {
   /**
    * The user to display the form for.
    */
-  @Input()
-  user: EPerson;
+  @Input() user: EPerson;
 
   /**
    * The researcher profile to show.

@@ -44,6 +44,11 @@ export class FormComponent implements OnDestroy, OnInit {
   @Input() displayCancel = true;
 
   /**
+   * A String that indicate the entity type of the item
+   */
+  @Input() entityType;
+
+  /**
    * A boolean that indicate if to emit a form change event
    */
   @Input() emitChange = true;
@@ -175,15 +180,15 @@ export class FormComponent implements OnDestroy, OnInit {
         map((formState) => formState.errors),
         distinctUntilChanged())
         .subscribe((errors: FormError[]) => {
-          const { formGroup, formModel } = this;
+          const {formGroup, formModel} = this;
           errors
             .filter((error: FormError) => findIndex(this.formErrors, {
               fieldId: error.fieldId,
               fieldIndex: error.fieldIndex
             }) === -1)
             .forEach((error: FormError) => {
-              const { fieldId } = error;
-              const { fieldIndex } = error;
+              const {fieldId} = error;
+              const {fieldIndex} = error;
               let field: AbstractControl;
               if (!!this.parentFormModel) {
                 field = this.formBuilderService.getFormControlById(fieldId, formGroup.parent as FormGroup, formModel, fieldIndex);
@@ -205,8 +210,8 @@ export class FormComponent implements OnDestroy, OnInit {
               fieldIndex: error.fieldIndex
             }) === -1)
             .forEach((error: FormError) => {
-              const { fieldId } = error;
-              const { fieldIndex } = error;
+              const {fieldId} = error;
+              const {fieldIndex} = error;
               let field: AbstractControl;
               if (!!this.parentFormModel) {
                 field = this.formBuilderService.getFormControlById(fieldId, formGroup.parent as FormGroup, formModel, fieldIndex);
@@ -277,11 +282,9 @@ export class FormComponent implements OnDestroy, OnInit {
   onChange(event: DynamicFormControlEvent): void {
     this.formService.changeForm(this.formId, this.formModel);
     this.formGroup.markAsPristine();
-
     if (this.emitChange) {
       this.change.emit(event);
-    }
-  }
+    }}
 
   /**
    * Method called on submit.
@@ -360,7 +363,7 @@ export class FormComponent implements OnDestroy, OnInit {
     }
     const model = context.group[0] as DynamicFormControlModel;
     const control = group.controls[index] as FormControl;
-    return { $event, context, control, group, model, type };
+    return {$event, context, control, group, model, type};
   }
 
 }

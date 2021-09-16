@@ -54,6 +54,20 @@ describe('submissionReducer test suite', () => {
   const itemId = '5dsf6dsf-09a6-4fcf-9c78-5d4fed8f2c8f';
   const submissionDefinition = mockSubmissionDefinitionResponse;
   const selfUrl = mockSubmissionSelfUrl;
+  const metadataSecurityConfiguration = {
+    'uuid': null,
+    'metadataSecurityDefault': [
+      0,
+      1
+    ],
+    'metadataCustomSecurity': {},
+    'type': 'securitysetting',
+    '_links': {
+      'self': {
+        'href': 'http://localhost:8080/server/api/core/securitysettings'
+      }
+    }
+  };
 
   let initState: any;
 
@@ -72,13 +86,13 @@ describe('submissionReducer test suite', () => {
         isLoading: true,
         savePending: false,
         saveDecisionPending: false,
-        depositPending: false
+        depositPending: false,
+        metadataSecurityConfiguration: metadataSecurityConfiguration as any,
       }
     };
 
-    const action = new InitSubmissionFormAction(collectionId, submissionId, selfUrl, submissionDefinition, {}, new Item(), null);
+    const action = new InitSubmissionFormAction(collectionId, submissionId, selfUrl, submissionDefinition, {}, new Item(), null, metadataSecurityConfiguration as any);
     const newState = submissionObjectReducer({}, action);
-
     expect(newState).toEqual(expectedState);
   });
 
@@ -105,13 +119,12 @@ describe('submissionReducer test suite', () => {
         sections: Object.create(null),
         isLoading: true,
         savePending: false,
-        depositPending: false,
+        depositPending: false
       }
     };
 
-    const action = new ResetSubmissionFormAction(collectionId, submissionId, selfUrl, {}, submissionDefinition, new Item());
+    const action = new ResetSubmissionFormAction(collectionId, submissionId, selfUrl, {}, submissionDefinition, new Item(), metadataSecurityConfiguration);
     const newState = submissionObjectReducer(initState, action);
-
     expect(newState).toEqual(expectedState);
   });
 

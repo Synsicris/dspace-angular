@@ -23,6 +23,9 @@ export class TopSectionComponent implements OnInit {
   @Input()
   context: Context = Context.BrowseMostElements;
 
+  @Input()
+  useContainer = true;
+
   paginatedSearchOptions: PaginatedSearchOptions;
 
   ngOnInit() {
@@ -31,7 +34,7 @@ export class TopSectionComponent implements OnInit {
     const sortDirection = order && order.toUpperCase() === 'ASC' ? SortDirection.ASC : SortDirection.DESC;
     const pagination: PaginationComponentOptions = Object.assign(new PaginationComponentOptions(), {
       id: 'search-object-pagination',
-      pageSize: 5,
+      pageSize: this.topSection.pageSize || 5,
       currentPage: 1
     });
 

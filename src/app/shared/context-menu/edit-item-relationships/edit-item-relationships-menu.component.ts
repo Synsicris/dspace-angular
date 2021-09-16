@@ -99,7 +99,7 @@ export class EditItemRelationshipsMenuComponent extends ContextMenuEntryComponen
       getFirstSucceededRemoteListPayload()
     ).subscribe( (tabs) => {
       this.tabs = tabs;
-      this.initBoxes();
+      // this.initBoxes();
     }));
 
   }

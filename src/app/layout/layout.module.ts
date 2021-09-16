@@ -12,8 +12,8 @@ import { RowComponent } from './default-layout/boxes/metadata/row/row.component'
 import { TextComponent } from './default-layout/boxes/components/text/text.component';
 import { HeadingComponent } from './default-layout/boxes/components/heading/heading.component';
 import { CrisLayoutSearchBoxComponent } from './default-layout/boxes/search/cris-layout-search-box.component';
-import { SearchPageModule } from '../+search-page/search-page.module';
-import { MyDSpacePageModule } from '../+my-dspace-page/my-dspace-page.module';
+import { SearchPageModule } from '../search-page/search-page.module';
+import { MyDSpacePageModule } from '../my-dspace-page/my-dspace-page.module';
 import { LongtextComponent } from './default-layout/boxes/components/longtext/longtext.component';
 import { DateComponent } from './default-layout/boxes/components/date/date.component';
 import { DsDatePipe } from './pipes/ds-date.pipe';
@@ -31,8 +31,11 @@ import { ContextMenuModule } from '../shared/context-menu/context-menu.module';
 import { TableComponent } from './default-layout/boxes/components/table/table.component';
 import { InlineComponent } from './default-layout/boxes/components/inline/inline.component';
 import { OrcidComponent } from './default-layout/boxes/components/orcid/orcid.component';
+import { ValuepairComponent } from './default-layout/boxes/components/valuepair/valuepair.component';
 import { CrisLayoutSidebarItemComponent } from './default-layout/sidebar/sidebar-item/cris-layout-sidebar-item.component';
+import { TagComponent } from './default-layout/boxes/components/tag/tag.component';
 import { CrisLayoutHelpBoxComponent } from './custom-layout/help-box/help-box.component';
+import { CrisLayoutPersonProjectsBoxComponent } from './custom-layout/browse-box/browse-box.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -53,7 +56,11 @@ const ENTRY_COMPONENTS = [
   AttachmentComponent,
   OrcidSyncSettingsComponent,
   OrcidSyncQueueComponent,
-  OrcidAuthorizationsComponent
+  OrcidAuthorizationsComponent,
+  TagComponent,
+  ValuepairComponent,
+  CrisLayoutHelpBoxComponent,
+  CrisLayoutPersonProjectsBoxComponent
 ];
 @NgModule({
   declarations: [
@@ -84,7 +91,10 @@ const ENTRY_COMPONENTS = [
     TableComponent,
     InlineComponent,
     CrisLayoutSidebarItemComponent,
-    CrisLayoutHelpBoxComponent
+    TagComponent,
+    ValuepairComponent,
+    CrisLayoutHelpBoxComponent,
+    CrisLayoutPersonProjectsBoxComponent
   ],
   imports: [
     CommonModule,

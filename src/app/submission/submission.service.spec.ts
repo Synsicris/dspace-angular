@@ -45,7 +45,7 @@ import { SubmissionJsonPatchOperationsServiceStub } from '../shared/testing/subm
 import { ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 import { NotificationOptions } from '../shared/notifications/models/notification-options.model';
 import { SubmissionVisibilityValue } from '../core/config/models/config-submission-section.model';
-import { MYDSPACE_ROUTE } from '../+my-dspace-page/my-dspace-page.component';
+import { MYDSPACE_ROUTE } from '../my-dspace-page/my-dspace-page.component';
 
 describe('SubmissionService test suite', () => {
   const collectionId = '43fe1f8c-09a6-4fcf-9c78-5d4fed8f2c8f';

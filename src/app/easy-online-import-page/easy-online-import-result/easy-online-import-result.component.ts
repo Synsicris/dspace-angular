@@ -9,7 +9,7 @@ import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { RemoteData } from '../../core/data/remote-data';
 import { isNotEmpty } from '../../shared/empty.util';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
-import { getItemPageRoute } from '../../+item-page/item-page-routing-paths';
+import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 
 @Component({
   selector: 'ds-easy-online-import-result',
