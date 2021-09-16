@@ -66,6 +66,11 @@
                 "input": "src/themes/dspace/styles/theme.scss",
                 "inject": false,
                 "bundleName": "dspace-theme"
+              },
+              {
+                "input": "src/themes/synsicris/styles/theme.scss",
+                "inject": false,
+                "bundleName": "synsicris-theme"
               }
             ],
             "scripts": []

@@ -330,7 +330,7 @@ export const environment: GlobalConfig = {
 
     {
       // The default dspace theme
-      name: 'dspace'
+      name: 'synsicris'
     },
   ],
   // Whether to enable media viewer for image and/or video Bitstreams (i.e. Bitstreams whose MIME type starts with "image" or "video").
