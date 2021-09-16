@@ -1,13 +1,7 @@
-<div>
-  <div
-    *ngIf="!(available$ | async)"
-    class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">{{ 'submission.sections.general.collection' | translate }}</span>
-    </div>
-    <div class="input-group-append">
-      <span class="input-group-text">{{ selectedCollectionName$ | async }}</span>
-    </div>
+<div [class.mt-1]="!(available$ | async)">
+  <div *ngIf="!(available$ | async)" class="d-flex justify-content-between align-items-center">
+    <span class="collection-heading">{{selectedCollectionName$ | async}}
+    </span>
   </div>
   <div
     ngbDropdown
