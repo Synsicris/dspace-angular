@@ -159,7 +159,7 @@ describe('CollectionItemMapperComponent', () => {
         { provide: HostWindowService, useValue: new HostWindowServiceStub(0) },
         { provide: ObjectSelectService, useValue: new ObjectSelectServiceStub() },
         { provide: RouteService, useValue: routeServiceStub },
-        { provide: AuthorizationDataService, useValue: authorizationDataService }
+        { provide: AuthorizationDataService, useValue: authorizationDataService },
         { provide: DSONameService, useClass: DSONameServiceMock }
       ]
     }).compileComponents();
