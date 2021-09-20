@@ -2,12 +2,12 @@ import {
   RequestAction,
   RequestActionTypes,
   RequestConfigureAction,
+  RequestErrorAction,
   RequestExecuteAction,
   RequestRemoveAction,
-  ResetResponseTimestampsAction,
+  RequestStaleAction,
   RequestSuccessAction,
-  RequestErrorAction,
-  RequestStaleAction
+  ResetResponseTimestampsAction
 } from './request.actions';
 import { RestRequest } from './request.models';
 import { HALLink } from '../shared/hal-link.model';
@@ -277,7 +277,8 @@ function expireRequest(storeState: RequestState, action: RequestStaleAction): Re
       return Object.assign({}, storeState, {
         [action.payload.uuid]: Object.assign({}, prevEntry, {
           state: hasSucceeded(prevEntry.state) ? RequestEntryState.SuccessStale : RequestEntryState.ErrorStale,
-          lastUpdated: action.lastUpdated
+          lastUpdated: action.lastUpdated,
+          responseMsToLive: 0
         })
       });
     }

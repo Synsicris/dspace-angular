@@ -1,7 +1,7 @@
 import { combineLatest as observableCombineLatest, Observable, of as observableOf } from 'rxjs';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, switchMap, take } from 'rxjs/operators';
+import { map, skipWhile, switchMap, take } from 'rxjs/operators';
 import { followLink, FollowLinkConfig } from '../../../shared/utils/follow-link-config.model';
 import { LinkService } from '../../cache/builders/link.service';
 import { PaginatedList } from '../../data/paginated-list.model';
@@ -13,7 +13,7 @@ import { DSpaceObject } from '../dspace-object.model';
 import { GenericConstructor } from '../generic-constructor';
 import { HALEndpointService } from '../hal-endpoint.service';
 import { URLCombiner } from '../../url-combiner/url-combiner';
-import { hasValue, isEmpty, isNotEmpty, hasValueOperator } from '../../../shared/empty.util';
+import { hasValue, hasValueOperator, isEmpty, isNotEmpty } from '../../../shared/empty.util';
 import { SearchOptions } from '../../../shared/search/search-options.model';
 import { SearchFilterConfig } from '../../../shared/search/search-filter-config.model';
 import { SearchResponseParsingService } from '../../data/search-response-parsing.service';
@@ -26,11 +26,7 @@ import { CommunityDataService } from '../../data/community-data.service';
 import { ViewMode } from '../view-mode.model';
 import { DSpaceObjectDataService } from '../../data/dspace-object-data.service';
 import { RemoteDataBuildService } from '../../cache/builders/remote-data-build.service';
-import {
-  getFirstSucceededRemoteData,
-  getFirstCompletedRemoteData,
-  getRemoteDataPayload
-} from '../operators';
+import { getFirstCompletedRemoteData, getFirstSucceededRemoteData, getRemoteDataPayload } from '../operators';
 import { RouteService } from '../../services/route.service';
 import { SearchResult } from '../../../shared/search/search-result.model';
 import { ListableObject } from '../../../shared/object-collection/shared/listable-object.model';
@@ -216,7 +212,12 @@ export class SearchService implements OnDestroy {
     });
 
     const sqr$ = href$.pipe(
-      switchMap((href: string) => this.rdb.buildFromHref<SearchObjects<T>>(href))
+      switchMap((href: string) => this.rdb.buildFromHref<SearchObjects<T>>(href)),
+      // This skip ensures that if a stale object is present in the cache when you do a
+      // call it isn't immediately returned, but we wait until the remote data for the new request
+      // is created. If useCachedVersionIfAvailable is false it also ensures you don't get a
+      // cached completed object
+      skipWhile((rd: RemoteData<SearchObjects<T>>) => useCachedVersionIfAvailable ? rd.isStale : rd.hasCompleted)
     );
 
     return this.directlyAttachIndexableObjects(sqr$, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
