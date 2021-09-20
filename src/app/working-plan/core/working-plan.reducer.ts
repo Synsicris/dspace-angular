@@ -76,6 +76,10 @@ const workpackageInitialState: WorkingPlanState = {
 export function workingPlanReducer(state = workpackageInitialState, action: WorkingPlanActions): WorkingPlanState {
   switch (action.type) {
 
+    case WorkpackageActionTypes.CLEAR_WORKINGPLAN: {
+      return workpackageInitialState;
+    }
+
     case WorkpackageActionTypes.CHANGE_CHART_DATE_VIEW: {
       return Object.assign({}, state, {
         chartDateView: action.payload
@@ -84,7 +88,6 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
 
     case WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS: {
       const lastAddedNodes = (action.payload.lastAddedId) ? [action.payload.lastAddedId] : [];
-      console.log('RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS', lastAddedNodes);
       return Object.assign({}, workpackageInitialState, {
         processing: true,
         lastAddedNodes: lastAddedNodes

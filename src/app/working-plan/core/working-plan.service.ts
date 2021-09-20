@@ -1,20 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
-import {
-  catchError,
-  concatMap,
-  delay,
-  filter,
-  first,
-  map,
-  mapTo,
-  mergeMap,
-  reduce,
-  scan,
-  take,
-  tap
-} from 'rxjs/operators';
+import { catchError, concatMap, delay, filter, map, mapTo, mergeMap, reduce, scan, take, tap } from 'rxjs/operators';
 import { extendMoment } from 'moment-range';
 import * as Moment from 'moment';
 
@@ -46,6 +33,7 @@ import { SubmissionObject } from '../../core/submission/models/submission-object
 import { JsonPatchOperationPathCombiner } from '../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../../core/json-patch/builder/json-patch-operations-builder';
 import {
+  getAllSucceededRemoteData,
   getFinishedRemoteData,
   getFirstSucceededRemoteDataPayload,
   getRemoteDataPayload
@@ -203,6 +191,10 @@ export class WorkingPlanService {
     return this.workingPlanStateService.getLastAddedNodesList();
   }
 
+  invalidateSearchCache(searchConfiguration: string) {
+    this.requestService.setStaleByHrefSubstring(searchConfiguration);
+  }
+
   searchForLinkedWorkingPlanObjects(projectId: string, sortOption: string = environment.workingPlan.workingPlanPlaceMetadata): Observable<WorkpackageSearchItem[]> {
     const searchConfiguration = environment.workingPlan.allLinkedWorkingPlanObjSearchConfigName;
     const paginationOptions: PaginationComponentOptions = new PaginationComponentOptions();
@@ -217,8 +209,8 @@ export class WorkingPlanService {
       scope: projectId
     });
 
-    return this.searchService.search(searchOptions, 0, false).pipe(
-      filter((rd: RemoteData<PaginatedList<SearchResult<any>>>) => rd.hasSucceeded),
+    return this.searchService.search(searchOptions, null, false).pipe(
+      getAllSucceededRemoteData(),
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
           .filter((result) => hasValue(result))
@@ -243,7 +235,7 @@ export class WorkingPlanService {
         return Object.assign(rd, { payload: payload });
       }),
       mergeMap((rd: RemoteData<PaginatedList<Observable<WorkpackageSearchItem>>>) => {
-        this.requestService.setStaleByHrefSubstring(rd.payload._links.self.href);
+        this.invalidateSearchCache(searchConfiguration);
         if (rd.payload.page.length === 0) {
           return observableOf([]);
         } else {
@@ -254,7 +246,8 @@ export class WorkingPlanService {
           );
         }
       }),
-      first((result: WorkpackageSearchItem[]) => isNotUndefined(result))
+      filter((result: WorkpackageSearchItem[]) => isNotUndefined(result)),
+      take(1)
     );
   }
 

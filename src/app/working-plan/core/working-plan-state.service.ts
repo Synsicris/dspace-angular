@@ -6,6 +6,7 @@ import {
   AddWorkpackageAction,
   AddWorkpackageStepAction,
   ChangeChartViewAction,
+  ClearWorkingPlanAction,
   GenerateWorkpackageAction,
   GenerateWorkpackageStepAction,
   MoveWorkpackageAction,
@@ -33,7 +34,6 @@ import {
 import { map, startWith } from 'rxjs/operators';
 import { ChartDateViewType, WorkpackageEntries } from './working-plan.reducer';
 import { Workpackage, WorkpackageStep } from './models/workpackage-step.model';
-import { empty } from 'rxjs';
 
 export interface WpActionPackage {
   workpackageId: string;
@@ -53,6 +53,10 @@ export class WorkingPlanStateService {
 
   constructor(private store: Store<AppState>) {
 
+  }
+
+  public dispatchCleanState() {
+    this.store.dispatch(new ClearWorkingPlanAction());
   }
 
   public dispatchAddWorkpackageStep(
