@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { distinctUntilChanged, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Workpackage } from './core/models/workpackage-step.model';
 import { WorkingPlanStateService } from './core/working-plan-state.service';
@@ -27,9 +27,7 @@ export class WorkingPlanComponent implements OnDestroy {
   }
 
   public getWorkpackages(): Observable<Workpackage[]> {
-    return this.workingPlanStateService.getWorkpackages().pipe(
-      distinctUntilChanged((curr, prev) => curr.length === prev.length)
-    );
+    return this.workingPlanStateService.getWorkpackages();
   }
 
   public isLoading(): Observable<boolean> {
