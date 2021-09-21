@@ -2,9 +2,9 @@
   <div class="sidenav-container" fxFlex fxLayout="row">
     <!-- steps -->
     <div class="sidenav chart-column names" [ngStyle]="sidebarNamesStyle" fxLayout="column"
-         mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'names')">
-      <div class="sidenav-header">
-        <div class="float-left">
+         mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [validateResize]="validateResizeNames" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'names')">
+      <div class="sidenav-header d-flex justify-content-between">
+        <div>
           <div ngbDropdown #sortByDrop="ngbDropdown" class="d-inline-block" (openChange)="resetSortDropdown($event)">
             <button class="btn btn-outline-info btn-xs mr-2" id="sortBy" ngbDropdownToggle>{{'working-plan.chart.column.sortBy' | translate}} {{'working-plan.chart.column.sortBy.option.' + (sortSelected$ | async) | translate}}</button>
             <div ngbDropdownMenu class="block-change-start-date font-size-07 p-2" aria-labelledby="sortBy">
@@ -35,14 +35,18 @@
               </form>
             </div>
           </div>
-          <button type="button" class="btn btn-outline-secondary btn-xs" (click)="treeControl.expandAll()">
-            {{'working-plan.chart.button.expandAll' | translate}}
-          </button>
-          <button type="button" class="btn btn-outline-secondary btn-xs" (click)="treeControl.collapseAll()">
-            {{'working-plan.chart.button.collapseAll' | translate}}
-          </button>
         </div>
-        <div class="float-right">
+        <div class="pr-1">
+          <button type="button" class="btn btn-primary btn-xs"
+                  title="{{'working-plan.chart.button.expandAll' | translate}}"
+                  (click)="treeControl.expandAll()">
+            <i class="fas fa-angle-double-down"></i>
+          </button>
+          <button type="button" class="btn btn-primary btn-xs"
+                  title="{{'working-plan.chart.button.collapseAll' | translate}}"
+                  (click)="treeControl.collapseAll()">
+            <i class="fas fa-angle-double-up"></i>
+          </button>
           <button type="button" class="btn btn-primary btn-xs mr-2{{(this.sidebarResponsibleStatus)?' d-none':''}}" (click)="sidebarStatusToggle()" title="{{'working-plan.chart.column.expand' | translate}}"><i class="fas fa-angle-double-right"></i></button>
         </div>
       </div>
@@ -182,7 +186,7 @@
     </div>
     <!-- dates, organisations and statuses -->
     <div class="sidenav chart-column responsible{{(this.sidebarResponsibleStatus)?'':' d-none'}}" [ngStyle]="sidebarResponsibleStyle" fxLayout="column"
-         mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'responsible')">
+         mwlResizable [resizeEdges]="{right: true}" [validateResize]="validateResizeResponsible" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'responsible')">
       <div class="sidenav-header">
         <div class="float-left">
           <div ngbDropdown #changeAllStartDatesDrop="ngbDropdown" class="d-inline-block">

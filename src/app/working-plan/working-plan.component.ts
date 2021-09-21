@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { WorkingPlanStateService } from './core/working-plan-state.service';
   templateUrl: './working-plan.component.html',
   styleUrls: ['./working-plan.component.scss'],
 })
-export class WorkingPlanComponent {
+export class WorkingPlanComponent implements OnDestroy {
 
   @Input() public projectId: string;
 
@@ -32,6 +32,10 @@ export class WorkingPlanComponent {
 
   public isLoading(): Observable<boolean> {
     return this.workingPlanStateService.isLoading();
+  }
+
+  ngOnDestroy(): void {
+    this.workingPlanStateService.dispatchCleanState();
   }
 
 }

@@ -140,11 +140,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   chartData;
 
+  sidebarNamesMinWidth = 260;
   sidebarNamesStyle = {
-    'min-width': 25 + 'rem'
+    'min-width': this.sidebarNamesMinWidth + 'px'
   };
+
+  sidebarResponsibleMinWidth = 360;
   sidebarResponsibleStyle = {
-    'min-width': 30 + 'rem'
+    'min-width': this.sidebarResponsibleMinWidth + 'px'
   };
   sidebarResponsibleStatus = true;
 
@@ -614,6 +617,16 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     }
   }
 
+  validateResizeNames = (resizeEvent: any) => {
+    const eventWidth = resizeEvent.rectangle.width;
+    return eventWidth >= this.sidebarNamesMinWidth;
+  }
+
+  validateResizeResponsible = (resizeEvent: any) => {
+    const eventWidth = resizeEvent.rectangle.width;
+    return eventWidth >= this.sidebarResponsibleMinWidth;
+  }
+
   buildCalendar() {
     this.dates = [];
     this.datesMonth = [];
@@ -748,7 +761,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<MatTreeFlatDataSource<WorkpackageTreeObject, WorkpacakgeFlatNode>, any>) {
     this.isDragging.next(false);
     this.isDropAllowed.next(false);
     // ignore drops outside of the tree
@@ -928,6 +941,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       dates: dates
     });
 
+    // Update reference in the maps
+    this.updateTreeMap(flatNode, nestedNode);
+
     // rebuild calendar if the root is updated
     if (flatNode.level === 0) {
       this.buildCalendar();
@@ -1085,4 +1101,5 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
     return query;
   }
+
 }

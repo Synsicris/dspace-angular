@@ -69,7 +69,7 @@ export class CrisLayoutDefaultTabComponent extends CrisLayoutTabObj implements O
 
   protected initializeComponent() {
     this.showLoader = true;
-    this.setBoxes(false).subscribe(() => {
+    this.setBoxes().subscribe(() => {
       const viewContainerRef = this.crisLayoutLoader.viewContainerRef;
       viewContainerRef.clear();
       this.boxes.forEach((box, index) => {
@@ -150,7 +150,7 @@ export class CrisLayoutDefaultTabComponent extends CrisLayoutTabObj implements O
     return getCrisLayoutBox(this.item, this.tab.shortname, boxType);
   }
 
-  protected setBoxes(useCachedVersionIfAvailable: boolean): Observable<Box[]> {
+  protected setBoxes(useCachedVersionIfAvailable: boolean = true): Observable<Box[]> {
     return this.boxService.findByItem(this.item.id, this.tab.id, useCachedVersionIfAvailable, followLink('configuration'))
       .pipe(
         getFirstSucceededRemoteListPayload(),

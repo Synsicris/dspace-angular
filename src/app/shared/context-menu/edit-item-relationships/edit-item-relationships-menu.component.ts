@@ -117,7 +117,7 @@ export class EditItemRelationshipsMenuComponent extends ContextMenuEntryComponen
    * If boxes type is equal Relation add them to the list of relations to be managed
    */
   getBox(tab): void {
-    this.subs.push(this.boxService.findByItem(this.contextMenuObject.id, tab.id, true)
+    this.subs.push(this.boxService.findByItem(this.contextMenuObject.id, tab.id)
       .pipe(getFirstSucceededRemoteListPayload())
       .subscribe( (boxes: Box[]) => {
         const relationshipsBoxes = boxes.filter( (box) => box.boxType === 'RELATION');
