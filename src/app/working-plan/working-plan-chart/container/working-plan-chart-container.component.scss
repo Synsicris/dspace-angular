@@ -200,6 +200,7 @@ $highlightBorderColor: #FF9800;
 [mwlResizable] {
   border-right: 1px solid $borderColor;
   box-sizing: border-box;
+  z-index: 1000;
 }
 
 // sidenav header(not calendar)
@@ -220,6 +221,9 @@ $highlightBorderColor: #FF9800;
 
 /** names */
 
+.names {
+  width: 25rem;
+}
 .sidenav.chart-column {
   background-color: #FFFFFF;
   mat-tree.tree {
@@ -264,6 +268,10 @@ $highlightBorderColor: #FF9800;
 }
 
 /** responsible */
+
+.responsible {
+  width: 35rem;
+}
 
 .responsible-field {
   overflow: inherit !important;
