@@ -75,8 +75,9 @@ export class TabDataService {
    * @param useCachedVersionIfAvailable
    * @param linkToFollow
    */
-  findByItem(itemUuid: string, useCachedVersionIfAvailable, linkToFollow?: FollowLinkConfig<Tab>): Observable<RemoteData<PaginatedList<Tab>>> {
+  findByItem(itemUuid: string, useCachedVersionIfAvailable = true, linkToFollow?: FollowLinkConfig<Tab>): Observable<RemoteData<PaginatedList<Tab>>> {
     const options = new FindListOptions();
+    options.elementsPerPage = 100;
     options.searchParams = [new RequestParam('uuid', itemUuid)];
     return this.dataService.searchBy(this.searchFindByItem, options, useCachedVersionIfAvailable);
   }

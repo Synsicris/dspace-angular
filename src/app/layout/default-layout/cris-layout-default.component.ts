@@ -1,6 +1,7 @@
 import {
   ChangeDetectorRef,
-  Component, ComponentFactory,
+  Component,
+  ComponentFactory,
   ComponentFactoryResolver,
   ComponentRef,
   OnDestroy,
@@ -15,10 +16,7 @@ import { map, take, takeUntil, tap } from 'rxjs/operators';
 import { Tab } from '../../core/layout/models/tab.model';
 import { CrisLayoutLoaderDirective } from '../directives/cris-layout-loader.directive';
 import { TabDataService } from '../../core/layout/tab-data.service';
-import {
-  getFirstSucceededRemoteDataPayload,
-  getFirstSucceededRemoteListPayload
-} from '../../core/shared/operators';
+import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../../core/shared/operators';
 import { GenericConstructor } from '../../core/shared/generic-constructor';
 import { getCrisLayoutTab } from '../decorators/cris-layout-tab.decorator';
 import { CrisLayoutPage } from '../decorators/cris-layout-page.decorator';
@@ -98,7 +96,7 @@ export class CrisLayoutDefaultComponent extends CrisLayoutPageObj implements OnI
 
   initializeComponent() {
     // Retrieve tabs by UUID of item
-    this.tabs$ = this.tabService.findByItem(this.item.id, false).pipe(
+    this.tabs$ = this.tabService.findByItem(this.item.id).pipe(
       getFirstSucceededRemoteListPayload()
     );
 
