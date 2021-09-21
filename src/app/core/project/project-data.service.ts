@@ -365,9 +365,9 @@ export class ProjectDataService extends CommunityDataService {
     const sort = new SortOptions('dc.title', SortDirection.ASC);
     const pagination = new PaginationComponentOptions();
     const searchOptions = new PaginatedSearchOptions({
-      configuration: 'userProjectsCommunity',
-      // query: 'search.resourceid:' + id,
-      // dsoTypes: [DSpaceObjectType.COMMUNITY],
+      configuration: 'default',
+      query: 'search.resourceid:' + id,
+      dsoTypes: [DSpaceObjectType.COMMUNITY],
       pagination: pagination,
       sort: sort,
       scope: scope
@@ -417,7 +417,6 @@ export class ProjectDataService extends CommunityDataService {
           return (list.page[0]).pipe(
             map((community: Community) => community),
             mergeMap((community: Community) => this.findById(community.id, true, true, ...linksToFollow).pipe(
-              tap(() => this.requestService.setStaleByHrefSubstring('userProjectsCommunity')),
               tap(() => this.requestService.setStaleByHrefSubstring(community.id))
             )),
             getFirstSucceededRemoteDataPayload()
