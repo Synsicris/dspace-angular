@@ -8579,6 +8579,8 @@
   "working-plan.chart.toggle.expand.btn": "Expand",
 
 
+  "working-plan.chart.toolbar.add-btn": "Add item",
+
   "working-plan.chart.toolbar.date-view.month": "Month",
 
 
@@ -8604,10 +8606,6 @@
 
 
   "working-plan.chart.toolbar.versions": "Versions",
-
-
-  "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
-
 
   "working-plan.task.search.header": "",
 
