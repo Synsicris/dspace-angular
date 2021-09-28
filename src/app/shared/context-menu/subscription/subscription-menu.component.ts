@@ -2,18 +2,17 @@ import { Component, Inject, OnInit } from '@angular/core';
 
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
-import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { AuthService } from '../../../core/auth/auth.service';
-import { EPersonDataService } from '../../../core/eperson/eperson-data.service';
 
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
-import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { EPerson } from '../../../core/eperson/models/eperson.model';
+import { ContextMenuEntryType } from '../context-menu-entry-type';
 
 
 @Component({
@@ -34,11 +33,11 @@ export class SubscriptionMenuComponent extends ContextMenuEntryComponent impleme
    */
   isAuthorized$: Observable<boolean> = observableOf(false);
 
-
   /**
    * Reference to NgbModal
    */
   public modalRef: NgbModalRef;
+
 
   types = [
     {name: 'Content' ,value: 'content'},
@@ -62,15 +61,17 @@ export class SubscriptionMenuComponent extends ContextMenuEntryComponent impleme
    * @param {DSpaceObject} injectedContextMenuObject
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
+   * @param {NgbModal} modalService
+   * @param {AuthService} authService
    */
   constructor(
     @Inject('contextMenuObjectProvider') public injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
     protected authorizationService: AuthorizationDataService,
     private modalService: NgbModal,
-    private authService: AuthService,
+    private authService: AuthService
   ) {
-    super(injectedContextMenuObject, injectedContextMenuObjectType);
+    super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.Subscriptions);
   }
 
   ngOnInit() {
