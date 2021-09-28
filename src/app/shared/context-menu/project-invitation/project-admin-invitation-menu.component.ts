@@ -13,6 +13,7 @@ import { InvitationModalComponent } from '../../invitation-modal/invitation-moda
 import { ProjectGroupService } from '../../../core/project/project-group.service';
 import { Community } from '../../../core/shared/community.model';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
+import { ContextMenuEntryType } from '../context-menu-entry-type';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -25,6 +26,9 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 @rendersContextMenuEntriesForType('SUBPROJECT')
 export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryComponent implements OnInit {
 
+  /**
+   * Representing if the invitation is related to a subproject
+   */
   isSubproject;
 
   /**
@@ -48,7 +52,7 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
     protected modalService: NgbModal,
     protected projectGroupService: ProjectGroupService
   ) {
-    super(injectedContextMenuObject, injectedContextMenuObjectType);
+    super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ProjectAdminInvitation);
   }
 
 

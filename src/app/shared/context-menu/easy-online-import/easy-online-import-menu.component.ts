@@ -11,6 +11,7 @@ import { AuthorizationDataService } from '../../../core/data/feature-authorizati
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { Item } from '../../../core/shared/item.model';
 import { EASY_ONLINE_PATH, getItemPageRoute } from '../../../item-page/item-page-routing-paths';
+import { ContextMenuEntryType } from '../context-menu-entry-type';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -42,7 +43,7 @@ export class EasyOnlineImportMenuComponent extends ContextMenuEntryComponent imp
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: any,
     protected authorizationService: AuthorizationDataService
   ) {
-    super(injectedContextMenuObject, injectedContextMenuObjectType);
+    super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.EasyOnlineImport);
   }
 
   ngOnInit(): void {

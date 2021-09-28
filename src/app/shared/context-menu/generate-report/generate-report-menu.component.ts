@@ -15,6 +15,7 @@ import { AuthorizationDataService } from '../../../core/data/feature-authorizati
 import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { RemoteData } from '../../../core/data/remote-data';
 import { Process } from '../../../process-page/processes/process.model';
+import { ContextMenuEntryType } from '../context-menu-entry-type';
 
 /**
  * This component renders a context menu option that provides to export an item.
@@ -48,7 +49,7 @@ export class GenerateReportMenuComponent extends ContextMenuEntryComponent {
     private scriptService: ScriptDataService,
     private translationService: TranslateService
   ) {
-    super(injectedContextMenuObject, injectedContextMenuObjectType);
+    super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.Report);
   }
 
   /**
