@@ -5,6 +5,7 @@ import { CrisItemPageComponent } from './cris-item-page.component';
 import { ItemBreadcrumbResolver } from '../core/breadcrumbs/item-breadcrumb.resolver';
 import { MenuItemType } from '../shared/menu/initial-menus-state';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
+import { ProjectCommunityResolver } from '../core/project/project-community.resolver';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
     component: CrisItemPageComponent,
     resolve: {
       dso: CrisItemPageResolver,
+      project: ProjectCommunityResolver,
       breadcrumb: ItemBreadcrumbResolver
     },
     data: {
@@ -34,6 +36,7 @@ const routes: Routes = [
     component: CrisItemPageComponent,
     resolve: {
       dso: CrisItemPageResolver,
+      project: ProjectCommunityResolver,
       breadcrumb: ItemBreadcrumbResolver
     },
     data: {
@@ -58,7 +61,8 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [
     CrisItemPageResolver,
-    ItemBreadcrumbResolver
+    ItemBreadcrumbResolver,
+    ProjectCommunityResolver
   ]
 })
 export class CrisItemPageRoutingModule { }

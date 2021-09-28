@@ -57,6 +57,11 @@ import { Item } from '../shared/item.model';
 import { Metadata } from '../shared/metadata.utils';
 import { ItemDataService } from '../data/item-data.service';
 
+export const PARENT_PROJECT_RELATION_METADATA = 'synsicris.relation.parentproject';
+export const PARENT_PROJECT_ENTITY = 'parentproject';
+export const PROJECT_RELATION_METADATA = 'synsicris.relation.project';
+export const PROJECT_ENTITY = 'Project';
+
 export enum ProjectGrantsTypes {
   Project = 'parentproject',
   Subproject = 'project',
@@ -175,6 +180,72 @@ export class ProjectDataService extends CommunityDataService {
           );
         } else {
           throw(new Error('Link to project item is missing.'));
+        }
+      })
+    );
+  }
+
+  /**
+   * Get the project community which the given item belongs to
+   *
+   * @param itemId The project community id
+   * @return the Community as an Observable
+   */
+  getProjectCommunityByItem(itemId: string): Observable<RemoteData<Community>> {
+    return this.getProjectItemByItem(
+      itemId,
+      followLink('owningCollection', {}, followLink('parentCommunity'))
+    ).pipe(
+      getFirstCompletedRemoteData(),
+      mergeMap((projectItemRD: RemoteData<Item>) => {
+        if (projectItemRD.hasSucceeded) {
+          return projectItemRD.payload.owningCollection.pipe(
+            getFirstCompletedRemoteData(),
+            mergeMap((collectionRD) => {
+              if (collectionRD.hasSucceeded) {
+                return collectionRD.payload.parentCommunity;
+              } else {
+                return createFailedRemoteDataObject$<Community>();
+              }
+            })
+          );
+        } else {
+          return createFailedRemoteDataObject$<Community>();
+        }
+      })
+    );
+  }
+
+  /**
+   * Get the project Item which the given item belongs to
+   *
+   * @param itemId         The project community id
+   * @param linksToFollow  List of {@link FollowLinkConfig} that indicate which
+   *                       {@link HALLink}s should be automatically resolved
+   * @return the Community as an Observable
+   */
+  getProjectItemByItem(itemId: string, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
+    return this.itemService.findById(itemId).pipe(
+      getFirstCompletedRemoteData(),
+      mergeMap((itemRD: RemoteData<Item>) => {
+        if (itemRD.hasSucceeded) {
+          if (itemRD.payload.entityType === PARENT_PROJECT_ENTITY) {
+            return this.itemService.findById(itemId, true, true, ...linksToFollow);
+          } else {
+            const metadataValue = Metadata.first(itemRD.payload.metadata, PARENT_PROJECT_RELATION_METADATA);
+            if (isNotEmpty(metadataValue) && isNotEmpty(metadataValue.authority)) {
+              return this.itemService.findById(
+                metadataValue.authority,
+                true,
+                true,
+                ...linksToFollow
+              );
+            } else {
+              return createFailedRemoteDataObject$<Item>();
+            }
+          }
+        } else {
+          return createFailedRemoteDataObject$<Item>();
         }
       })
     );

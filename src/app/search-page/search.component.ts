@@ -100,6 +100,30 @@ export class SearchComponent implements OnInit {
   context: Context;
 
   /**
+   * The entity type for which create an item
+   */
+  @Input()
+  entityType: string;
+
+  /**
+   * The current relevant scope
+   */
+  @Input()
+  scope: string;
+
+  /**
+   * The current context
+   */
+  @Input()
+  showCreate = false;
+
+  /**
+   * The current context
+   */
+  @Input()
+  showExport = true;
+
+  /**
    * Link to the search page
    */
   searchLink: string;

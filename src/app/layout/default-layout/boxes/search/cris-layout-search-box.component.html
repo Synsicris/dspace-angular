@@ -10,7 +10,11 @@
         [configuration]="configuration"
         [configuration$]="configuration$"
         [searchEnabled]="searchEnabled"
-        [sideBarWidth]="sideBarWidth">
+        [sideBarWidth]="sideBarWidth"
+        [entityType]="box.shortname"
+        [scope]="(projectScope$ | async)?.uuid"
+        [showCreate]="true"
+        [showExport]="false">
       </ds-configuration-search-page>
     </ng-template>
   </ngb-panel>
