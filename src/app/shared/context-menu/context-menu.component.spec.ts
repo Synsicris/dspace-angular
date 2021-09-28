@@ -16,6 +16,7 @@ import { TranslateLoaderMock } from '../mocks/translate-loader.mock';
 import { AppState } from '../../app.reducer';
 import { ContextMenuComponent } from './context-menu.component';
 import { rendersContextMenuEntriesForType } from './context-menu.decorator';
+import { of } from 'rxjs';
 
 describe('ContextMenuComponent', () => {
   let component: ContextMenuComponent;
@@ -92,13 +93,13 @@ describe('ContextMenuComponent', () => {
   });
 
   it('should return menu entries', () => {
-    expect(component.getContextMenuEntries().length).toBeGreaterThan(0);
+    expect(component.getContextMenuEntries()).toBeObservable([]);
   });
 
   describe('when has authentication', () => {
 
     beforeEach(() => {
-      spyOn(component, 'getContextMenuEntries').and.returnValue([]);
+      spyOn(component, 'getContextMenuEntries').and.returnValue(of([]));
       fixture.detectChanges();
     });
 
@@ -123,7 +124,7 @@ describe('ContextMenuComponent', () => {
 
     beforeEach(() => {
       store.setState(notAuthState);
-      spyOn(component, 'getContextMenuEntries').and.returnValue([]);
+      spyOn(component, 'getContextMenuEntries').and.returnValue(of([]));
       fixture.detectChanges();
     });
 
