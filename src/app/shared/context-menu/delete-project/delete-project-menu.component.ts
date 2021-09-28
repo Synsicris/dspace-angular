@@ -17,6 +17,7 @@ import { Community } from '../../../core/shared/community.model';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import { ContextMenuEntryType } from '../context-menu-entry-type';
 
 /**
  * This component renders a context menu option that provides to export an item.
@@ -60,7 +61,7 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
     protected router: Router,
     protected translate: TranslateService
   ) {
-    super(injectedContextMenuObject, injectedContextMenuObjectType);
+    super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.DeleteProject);
   }
 
   /**
