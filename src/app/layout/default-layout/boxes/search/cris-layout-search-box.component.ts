@@ -7,7 +7,7 @@ import { CrisLayoutBoxModelComponent as CrisLayoutBoxObj } from '../../../models
 import { Observable, Subscription } from 'rxjs';
 import { hasValue } from '../../../../shared/empty.util';
 import { getFirstSucceededRemoteDataPayload } from '../../../../core/shared/operators';
-import { map, take, tap } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { RemoteData } from '../../../../core/data/remote-data';
 import { Community } from '../../../../core/shared/community.model';
@@ -57,8 +57,7 @@ export class CrisLayoutSearchBoxComponent extends CrisLayoutBoxObj implements On
     this.projectScope$ = this.route.data.pipe(
       map((data) => data.project as RemoteData<Community>),
       map((communityRD) => communityRD.payload),
-      take(1),
-      tap((p) => console.log(p))
+      take(1)
     );
 
     this.searchFilter = `scope=${this.item.id}`;
