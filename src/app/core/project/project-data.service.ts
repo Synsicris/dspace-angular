@@ -61,6 +61,7 @@ export const PARENT_PROJECT_RELATION_METADATA = 'synsicris.relation.parentprojec
 export const PARENT_PROJECT_ENTITY = 'parentproject';
 export const PROJECT_RELATION_METADATA = 'synsicris.relation.project';
 export const PROJECT_ENTITY = 'Project';
+export const PROJECT_ENTITY_METADATA = 'synsicris.relation.entity_project';
 
 export enum ProjectGrantsTypes {
   Project = 'parentproject',
@@ -164,24 +165,32 @@ export class ProjectDataService extends CommunityDataService {
   }
 
   /**
+   * Get the item associated with the project community by synsicris.relation.entity_project metadata
+   *
+   * @param projectCommunity The project community
+   * @return the RestResponse as an Observable
+   */
+  getProjectItemByProjectCommunity(projectCommunity: Community): Observable<RemoteData<Item>> {
+    const metadataValue = Metadata.first(projectCommunity.metadata, PROJECT_ENTITY_METADATA);
+    if (isNotEmpty(metadataValue) && isNotEmpty(metadataValue.authority)) {
+      return this.itemService.findById(metadataValue.authority).pipe(
+        getFirstCompletedRemoteData()
+      );
+    } else {
+      return createFailedRemoteDataObject$<Item>('Link to project item is missing.');
+    }
+  }
+
+  /**
    * Get the item associated with the project by synsicris.relation.entity_project metadata
    *
    * @param projectCommunityId The project community id
    * @return the RestResponse as an Observable
    */
-  getProjectItemByRelation(projectCommunityId: string): Observable<RemoteData<Item>> {
+  getProjectItemByProjectCommunityId(projectCommunityId: string): Observable<RemoteData<Item>> {
     return this.findById(projectCommunityId).pipe(
       getFirstSucceededRemoteDataPayload(),
-      switchMap((community: Community) => {
-        const metadataValue = Metadata.first(community.metadata, 'synsicris.relation.entity_project');
-        if (isNotEmpty(metadataValue) && isNotEmpty(metadataValue.authority)) {
-          return this.itemService.findById(metadataValue.authority).pipe(
-            getFirstCompletedRemoteData()
-          );
-        } else {
-          throw(new Error('Link to project item is missing.'));
-        }
-      })
+      switchMap((community: Community) => this.getProjectItemByProjectCommunity(community))
     );
   }
 
@@ -302,14 +311,11 @@ export class ProjectDataService extends CommunityDataService {
    * @return Observable<Community>
    */
   getCommunityProjects(): Observable<Community> {
-    return this.configurationService.findByPropertyName('project.parent-community-id').pipe(
-      getFirstSucceededRemoteDataPayload(),
-      mergeMap((conf: ConfigurationProperty) => this.searchCommunityById(
-        conf.values[0],
-        '',
-        followLink('parentCommunity'),
-        followLink('subcommunities')
-      )),
+    return this.searchCommunityById(
+      '',
+      followLink('parentCommunity'),
+      followLink('subcommunities')
+    ).pipe(
       map((community) => {
         if (isNotEmpty(community)) {
           return community;
@@ -326,12 +332,9 @@ export class ProjectDataService extends CommunityDataService {
    * @return Observable<Community>
    */
   getSubprojectCommunityByParentProjectUUID(projectId: string): Observable<Community> {
-    return this.configurationService.findByPropertyName('project.subproject-community-name').pipe(
-      getFirstSucceededRemoteDataPayload(),
-      mergeMap((conf: ConfigurationProperty) => this.searchCommunityByName(
-        conf.values[0],
-        projectId
-      )),
+    return this.searchCommunityByName(
+      projectId
+    ).pipe(
       map((community) => {
         if (isNotEmpty(community)) {
           return community;
@@ -432,13 +435,13 @@ export class ProjectDataService extends CommunityDataService {
    *
    * @return Observable<Community>
    */
-  private searchCommunityById(id: string, scope: string = '', ...linksToFollow: FollowLinkConfig<Community>[]): Observable<Community> {
+  private searchCommunityById(scope: string = '', ...linksToFollow: FollowLinkConfig<Community>[]): Observable<Community> {
     const sort = new SortOptions('dc.title', SortDirection.ASC);
     const pagination = new PaginationComponentOptions();
     const searchOptions = new PaginatedSearchOptions({
-      configuration: 'default',
-      query: 'search.resourceid:' + id,
-      dsoTypes: [DSpaceObjectType.COMMUNITY],
+      configuration: 'userProjectsCommunity',
+      // query: 'search.resourceid:' + id,
+      // dsoTypes: [DSpaceObjectType.COMMUNITY],
       pagination: pagination,
       sort: sort,
       scope: scope
@@ -452,13 +455,11 @@ export class ProjectDataService extends CommunityDataService {
    *
    * @return Observable<Community>
    */
-  private searchCommunityByName(name: string, scope: string = '', ...linksToFollow: FollowLinkConfig<Community>[]): Observable<Community> {
+  private searchCommunityByName(scope: string = '', ...linksToFollow: FollowLinkConfig<Community>[]): Observable<Community> {
     const sort = new SortOptions('dc.title', SortDirection.ASC);
     const pagination = new PaginationComponentOptions();
     const searchOptions = new PaginatedSearchOptions({
-      configuration: 'default',
-      query: 'dc.title:' + name,
-      dsoTypes: [DSpaceObjectType.COMMUNITY],
+      configuration: 'subprojectCommunity',
       pagination: pagination,
       sort: sort,
       scope: scope
@@ -488,6 +489,7 @@ export class ProjectDataService extends CommunityDataService {
           return (list.page[0]).pipe(
             map((community: Community) => community),
             mergeMap((community: Community) => this.findById(community.id, true, true, ...linksToFollow).pipe(
+              tap(() => this.requestService.setStaleByHrefSubstring('userProjectsCommunity')),
               tap(() => this.requestService.setStaleByHrefSubstring(community.id))
             )),
             getFirstSucceededRemoteDataPayload()

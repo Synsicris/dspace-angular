@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map, take } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -13,7 +13,7 @@ import { ProjectDataService, ProjectGrantsTypes } from '../../core/project/proje
 import { RemoteData } from '../../core/data/remote-data';
 import { Community } from '../../core/shared/community.model';
 import { RequestService } from '../../core/data/request.service';
-import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { createFailedRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { VocabularyService } from '../../core/submission/vocabularies/vocabulary.service';
 import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
@@ -21,6 +21,9 @@ import { PageInfo } from '../../core/shared/page-info.model';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { environment } from '../../../environments/environment';
+import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
+import { Item } from '../../core/shared/item.model';
+import { isNotEmpty } from '../../shared/empty.util';
 
 /**
  * Component to wrap a form inside a modal
@@ -120,6 +123,7 @@ export class CreateProjectComponent implements OnInit {
    * Close the active modal
    */
   close() {
+    this.processing$.next(false);
     this.createForm.reset();
     this.activeModal.close();
   }
@@ -147,16 +151,9 @@ export class CreateProjectComponent implements OnInit {
         next: (response: RemoteData<Community>) => {
           if (response.hasSucceeded) {
             this.navigate(response.payload);
-            response.payload.parentCommunity.pipe(getFirstSucceededRemoteDataPayload())
-              .subscribe((parent: Community) => {
-                this.notificationService.success(null, this.translate.instant('project.create.success'));
-                this.requestService.removeByHrefSubstring(parent._links.self.href);
-              });
           } else {
             this.notificationService.error(null,  this.translate.instant('project.create.error'));
           }
-          this.processing$.next(false);
-          this.close();
         },
       error: () => {
           this.notificationService.error(null,  this.translate.instant('project.create.error'));
@@ -168,11 +165,18 @@ export class CreateProjectComponent implements OnInit {
    * Navigate to the collection create page
    */
   navigate(dso: DSpaceObject) {
-    if (this.isSubproject) {
-      this.router.navigate(['project-overview', this.parentProjectUUID, 'subproject', dso.id]);
-    } else {
-      this.router.navigate(['project-overview', dso.id]);
-    }
+    this.projectService.getProjectItemByProjectCommunity(dso as Community).pipe(
+      take(1),
+      map((itemRD: RemoteData<Item>) => itemRD.hasSucceeded ? itemRD.payload : null),
+    ).subscribe((projectItem: Item) => {
+      this.close();
+      if (isNotEmpty(projectItem)) {
+        this.router.navigate([getItemPageRoute(projectItem)]);
+      } else {
+        this.notificationService.error(null,  this.translate.instant('project.create.error'));
+      }
+    });
+
   }
 
 }

@@ -97,7 +97,7 @@ export class CoordinatorPageComponent implements OnInit {
    * @param projectCommunityId
    */
   getProjectItemPath(projectCommunityId: string): Observable<string> {
-    return this.projectService.getProjectItemByRelation(projectCommunityId).pipe(
+    return this.projectService.getProjectItemByProjectCommunityId(projectCommunityId).pipe(
       getFirstSucceededRemoteDataPayload(),
       map((item: Item) => getItemPageRoute(item))
     );
