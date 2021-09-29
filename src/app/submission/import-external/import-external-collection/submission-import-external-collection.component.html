@@ -7,6 +7,7 @@
   <div class="modal-body">
     <ds-loading *ngIf="isLoading()"></ds-loading>
     <ds-collection-dropdown [ngClass]="{'d-none': isLoading()}"
+                            [scope]="scope"
                             (selectionChange)="selectObject($event)"
                             (hasChoice)="onHasChoice($event)"
                             (theOnlySelectable)="theOnlySelectable($event)"

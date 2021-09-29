@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CollectionListEntry } from '../../../shared/collection-dropdown/collection-dropdown.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,6 +11,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './submission-import-external-collection.component.html'
 })
 export class SubmissionImportExternalCollectionComponent {
+
+  /**
+   * If present this value is used to filter collection list by community
+   */
+  @Input() scope: string;
+
   /**
    * The event passed by 'ds-collection-dropdown'.
    */
