@@ -14,6 +14,8 @@ import { ProjectGroupService } from '../../../core/project/project-group.service
 import { Community } from '../../../core/shared/community.model';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
+import { Item } from '../../../core/shared/item.model';
+import { PARENT_PROJECT_ENTITY, PROJECT_ENTITY } from '../../../core/project/project-data.service';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -22,8 +24,7 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   selector: 'ds-context-menu-project-invitation',
   templateUrl: './project-members-invitation-menu.component.html'
 })
-@rendersContextMenuEntriesForType('PROJECT')
-@rendersContextMenuEntriesForType('SUBPROJECT')
+@rendersContextMenuEntriesForType(DSpaceObjectType.ITEM)
 export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryComponent implements OnInit {
 
   /**
@@ -58,6 +59,13 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
 
   ngOnInit(): void {
     this.isSubproject = ((this.contextMenuObjectType as any) === 'SUBPROJECT');
+  }
+
+  /**
+   * Check if current Item is a Project or a parentproject
+   */
+  canShow() {
+    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY || (this.contextMenuObject as Item).entityType === PARENT_PROJECT_ENTITY;
   }
 
   /**
