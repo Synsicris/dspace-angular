@@ -11,6 +11,7 @@ import { AlertType } from '../../../shared/alert/aletr-type';
 import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
 import { isNotEmpty } from '../../../shared/empty.util';
+import { SubmissionUploadFilesComponent } from '../../form/submission-upload-files/submission-upload-files.component';
 
 /**
  * This component represents a section that contains the submission license form.
@@ -45,6 +46,12 @@ export class SubmissionSectionContainerComponent implements OnInit {
    * @type {string}
    */
   @Input() submissionId: string;
+
+  /**
+   * The submission uploader
+   * @type {SubmissionUploadFilesComponent}
+   */
+  @Input() submissionUploaderRef: Observable<SubmissionUploadFilesComponent>;
 
   /**
    * The AlertType enumeration
@@ -104,6 +111,7 @@ export class SubmissionSectionContainerComponent implements OnInit {
         {provide: 'sectionDataProvider', useFactory: () => (this.sectionData), deps: []},
         {provide: 'submissionIdProvider', useFactory: () => (this.submissionId), deps: []},
         {provide: 'entityType', useFactory: () => (this.entityType), deps: []},
+        {provide: 'submissionUploaderRefProvider', useFactory: () => (this.submissionUploaderRef), deps: []},
       ],
       parent: this.injector
     });

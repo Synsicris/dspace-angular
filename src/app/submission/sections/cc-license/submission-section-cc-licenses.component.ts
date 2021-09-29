@@ -91,6 +91,7 @@ export class SubmissionSectionCcLicensesComponent extends SectionModelComponent 
       injectedCollectionId,
       injectedSectionData,
       injectedSubmissionId,
+      null
     );
   }
 

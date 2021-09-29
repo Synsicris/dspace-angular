@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, of as observableOf, Subscription } from 'rxjs';
@@ -14,6 +14,7 @@ import parseSectionErrors from '../../utils/parseSectionErrors';
 import { SubmissionJsonPatchOperationsService } from '../../../core/submission/submission-json-patch-operations.service';
 import { WorkspaceItem } from '../../../core/submission/models/workspaceitem.model';
 import { SectionsType } from '../../sections/sections-type';
+import { UploaderComponent } from '../../../shared/uploader/uploader.component';
 
 /**
  * This component represents the drop zone that provides to add files to the submission.
@@ -71,6 +72,11 @@ export class SubmissionUploadFilesComponent implements OnChanges {
    * @type {boolean}
    */
   private uploadEnabled: Observable<boolean> = observableOf(false);
+
+  /**
+   * The SectionsDirective reference
+   */
+  @ViewChild(UploaderComponent) uploader: UploaderComponent;
 
   /**
    * Save submission before to upload a file
