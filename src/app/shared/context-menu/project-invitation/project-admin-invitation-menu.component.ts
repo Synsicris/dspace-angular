@@ -15,7 +15,8 @@ import { Community } from '../../../core/shared/community.model';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { PARENT_PROJECT_ENTITY, PROJECT_ENTITY } from '../../../core/project/project-data.service';
+import { PARENT_PROJECT_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
+import { getRemoteDataPayload } from '../../../core/shared/operators';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -33,6 +34,11 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
   isSubproject;
 
   /**
+   * The parentproject/project community
+   */
+  projectCommunity: Community;
+
+  /**
    * Modal reference
    */
   private modalRef: NgbModalRef;
@@ -45,19 +51,29 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
    * @param {AuthorizationDataService} authorizationService
    * @param {NgbModal} modalService
    * @param {ProjectGroupService} projectGroupService
+   * @param {ProjectDataService} projectService
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: any,
     protected authorizationService: AuthorizationDataService,
     protected modalService: NgbModal,
-    protected projectGroupService: ProjectGroupService
+    protected projectGroupService: ProjectGroupService,
+    protected projectService: ProjectDataService
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ProjectAdminInvitation);
   }
 
   ngOnInit(): void {
-    this.isSubproject = ((this.contextMenuObjectType as any) === 'SUBPROJECT');
+    this.isSubproject = (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
+    if (this.canShow()) {
+      this.projectService.getProjectCommunityByItemId((this.contextMenuObject as Item).uuid).pipe(
+        take(1),
+        getRemoteDataPayload()
+      ).subscribe((projectCommunity: Community) => {
+        this.projectCommunity = projectCommunity;
+      });
+    }
   }
 
   /**
@@ -77,9 +93,9 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
   public openInvitationModal() {
     let groups$: Observable<string[]>;
     if (this.isSubproject) {
-      groups$ = this.projectGroupService.getInvitationSubprojectAdminsGroupsByCommunity(this.contextMenuObject as Community);
+      groups$ = this.projectGroupService.getInvitationSubprojectAdminsGroupsByCommunity(this.projectCommunity);
     } else {
-      groups$ = this.projectGroupService.getInvitationProjectGroupsByCommunity(this.contextMenuObject as Community);
+      groups$ = this.projectGroupService.getInvitationProjectGroupsByCommunity(this.projectCommunity);
     }
 
     groups$.pipe(take(1))

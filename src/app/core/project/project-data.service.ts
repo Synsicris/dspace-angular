@@ -200,7 +200,7 @@ export class ProjectDataService extends CommunityDataService {
    * @param itemId The project community id
    * @return the Community as an Observable
    */
-  getProjectCommunityByItem(itemId: string): Observable<RemoteData<Community>> {
+  getProjectCommunityByItemId(itemId: string): Observable<RemoteData<Community>> {
     return this.getProjectItemByItem(
       itemId,
       followLink('owningCollection', {}, followLink('parentCommunity'))

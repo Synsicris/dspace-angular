@@ -27,7 +27,7 @@ export class ProjectCommunityResolver implements Resolve<RemoteData<Community>> 
    * or an error if something went wrong
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RemoteData<Community>> {
-    return this.projectService.getProjectCommunityByItem(
+    return this.projectService.getProjectCommunityByItemId(
       route.params[this.routeParam]
     ).pipe(
       getFirstCompletedRemoteData()
