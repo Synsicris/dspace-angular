@@ -16,6 +16,8 @@ import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { RemoteData } from '../../../core/data/remote-data';
 import { Process } from '../../../process-page/processes/process.model';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
+import { Item } from '../../../core/shared/item.model';
+import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
 
 /**
  * This component renders a context menu option that provides to export an item.
@@ -24,7 +26,7 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
   selector: 'ds-context-menu-generate-report',
   templateUrl: './generate-report-menu.component.html'
 })
-@rendersContextMenuEntriesForType('SUBPROJECT')
+@rendersContextMenuEntriesForType(DSpaceObjectType.ITEM)
 export class GenerateReportMenuComponent extends ContextMenuEntryComponent {
 
   /**
@@ -50,6 +52,13 @@ export class GenerateReportMenuComponent extends ContextMenuEntryComponent {
     private translationService: TranslateService
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.Report);
+  }
+
+  /**
+   * Check if current Item is a Project
+   */
+  canShow() {
+    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
   }
 
   /**
