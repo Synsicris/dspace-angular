@@ -37,7 +37,7 @@ export class ProjectAuthorizationService {
    * Check if user has permission to create a new sub-project
    */
   canCreateSubproject(parentProjectUUID): Observable<boolean> {
-    return this.projectDataService.getSubprojectCommunityByParentProjectUUID(parentProjectUUID).pipe(
+    return this.projectDataService.getSubprojectRootCommunityByParentProjectUUID(parentProjectUUID).pipe(
       map((community: Community) => community._links.self.href),
       mergeMap((href: string) => combineLatest([this.authorizationService.isAuthorized(
         FeatureID.CanCreateCommunities,

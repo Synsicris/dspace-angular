@@ -633,7 +633,7 @@ export class ImpactPathwayService {
         return Object.assign(rd, { payload: payload });
       }),
       map((rd: RemoteData<PaginatedList<Item>>) => rd.payload),
-      filter((list: PaginatedList<Item>) => list.page.length > 0),
+      // filter((list: PaginatedList<Item>) => list.page.length > 0),
       take(1),
       distinctUntilChanged()
     );

@@ -9,6 +9,7 @@ import { DeleteCollectionPageComponent } from './delete-collection-page/delete-c
 import { EditItemTemplatePageComponent } from './edit-item-template-page/edit-item-template-page.component';
 import { ItemTemplatePageResolver } from './edit-item-template-page/item-template-page.resolver';
 import { ProjectCollectionBreadcrumbResolver } from '../core/breadcrumbs/project-collection-breadcrumb.resolver';
+import { ProjectDsoBreadcrumbsService } from '../core/breadcrumbs/project-dso-breadcrumbs.service';
 import { DSOBreadcrumbsService } from '../core/breadcrumbs/dso-breadcrumbs.service';
 import { LinkService } from '../core/cache/builders/link.service';
 import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
@@ -83,6 +84,7 @@ import { ThemedCollectionPageComponent } from './themed-collection-page.componen
     CollectionPageResolver,
     ItemTemplatePageResolver,
     ProjectCollectionBreadcrumbResolver,
+    ProjectDsoBreadcrumbsService,
     DSOBreadcrumbsService,
     LinkService,
     CreateCollectionPageGuard,

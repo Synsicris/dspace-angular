@@ -7,17 +7,23 @@ import { map } from 'rxjs/operators';
 import { DSOBreadcrumbResolver } from './dso-breadcrumb.resolver';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { ProjectDsoBreadcrumbsService } from './project-dso-breadcrumbs.service';
-import { Community } from '../shared/community.model';
-import { CommunityDataService } from '../data/community-data.service';
 import { BreadcrumbConfig } from '../../breadcrumbs/breadcrumb/breadcrumb-config.model';
 import { getFinishedRemoteData, getRemoteDataPayload } from '../shared/operators';
+import { ProjectDataService } from '../project/project-data.service';
+import { Item } from '../shared/item.model';
+import { ItemDataService } from '../data/item-data.service';
+import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 
 /**
  * The class that resolves the BreadcrumbConfig object for a Project
  */
 @Injectable()
-export class ProjectBreadcrumbResolver extends DSOBreadcrumbResolver<Community> {
-  constructor(protected breadcrumbService: ProjectDsoBreadcrumbsService, protected dataService: CommunityDataService) {
+export class ProjectBreadcrumbResolver extends DSOBreadcrumbResolver<Item> {
+  constructor(
+    protected breadcrumbService: ProjectDsoBreadcrumbsService,
+    protected dataService: ItemDataService,
+    protected projectService: ProjectDataService
+  ) {
     super(breadcrumbService, dataService);
   }
 
@@ -26,7 +32,7 @@ export class ProjectBreadcrumbResolver extends DSOBreadcrumbResolver<Community> 
    * The self links defined in this list are expected to be requested somewhere in the near future
    * Requesting them as embeds will limit the number of requests
    */
-  get followLinks(): FollowLinkConfig<Community>[] {
+  get followLinks(): FollowLinkConfig<Item>[] {
     return [];
   }
 
@@ -36,14 +42,15 @@ export class ProjectBreadcrumbResolver extends DSOBreadcrumbResolver<Community> 
    * @param {RouterStateSnapshot} state The current RouterStateSnapshot
    * @returns BreadcrumbConfig object
    */
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BreadcrumbConfig<Community>> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BreadcrumbConfig<Item>> {
     const uuid = route.params.projectId;
-    return this.dataService.findById(uuid, false, true, ...this.followLinks).pipe(
+    this.projectService.getProjectItemByProjectCommunityId(uuid);
+    return this.projectService.getProjectItemByProjectCommunityId(uuid).pipe(
       getFinishedRemoteData(),
       getRemoteDataPayload(),
-      map((object: Community) => {
-        const fullPath = state.url;
-        const url = fullPath.substr(0, fullPath.indexOf(uuid)) + uuid;
+      map((object: Item) => {
+        const url = getItemPageRoute(object);
+        console.log(url);
         return { provider: this.breadcrumbService, key: object, url: url };
       })
     );
