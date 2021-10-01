@@ -2785,6 +2785,8 @@
   "impact-pathway.breadcrumbs": "Impact pathway",
 
 
+  "impact-pathway.description": "Description",
+
   "impact-pathway.heading": "Impact pathway",
 
 
@@ -2826,6 +2828,10 @@
 
   "impact-pathway.objectives.back-btn": "Back to Impact Pathway",
 
+
+  "impact-pathway.objectives.description.title": "Description",
+
+  "impact-pathway.objectives.edit.btn.title": "Edit objective",
 
   "impact-pathway.objectives.edit.page.title": "Edit objective",
 

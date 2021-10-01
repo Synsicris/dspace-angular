@@ -1,16 +1,12 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
+import { Item } from '../../../core/shared/item.model';
+import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'ipw-editable-textarea',
@@ -18,70 +14,57 @@ import { map } from 'rxjs/operators';
   templateUrl: './editable-textarea.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditableTextareaComponent implements OnInit {
+export class EditableTextareaComponent {
 
-  @Input() public placeholder: string;
-  @Input() public initContent: string;
+  /**
+   * The label to use as edit button's title
+   */
+  @Input() public editTitle: string;
+
+  /**
+   * The form config
+   * @type {Observable<SubmissionFormModel>}
+   */
+  @Input() public formConfig: Observable<SubmissionFormModel>;
+
+  /**
+   * The item's id related to the edit form
+   */
+  @Input() public itemId: string;
+
+  /**
+   * The label to use as field title
+   */
+  @Input() public fieldTitle: string;
+
+  /**
+   * The current value of the field
+   */
+  @Input() public content: string;
+
+  /**
+   * The textarea rows number
+   */
   @Input() public rows = 5;
 
-  savedContent: string;
-
   /**
-   * Emits whether or not this field is currently editable
+   * Emits the edited item when the form is submitted
    */
-  editable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-  @Output() contentChange: EventEmitter<string> = new EventEmitter<string>();
-
+  @Output() contentChange: EventEmitter<Item> = new EventEmitter<Item>();
   @ViewChild('textarea', { static: false }) textarea: ElementRef;
 
-  ngOnInit(): void {
-    this.initContent = this.initContent || '';
-    this.savedContent = this.initContent;
+  constructor(private modalService: NgbModal) {
   }
 
   /**
-   * Check if a user should be allowed to edit this field
-   * @return an observable that emits true when the user should be able to edit this field and false when they should not
+   * Open the modal with edit form
    */
-  canSetEditable() {
-    return this.isEditable().pipe(
-      map((editable) => !editable)
-    );
-  }
-
-  /**
-   * Check if a user should be allowed to undo changes to this field
-   * @return an observable that emits true when the user should be able to undo changes to this field and false when they should not
-   */
-  canUndo(): Observable<boolean> {
-    return this.isEditable().pipe(
-      map((editable: boolean) => (this.textarea && this.textarea.nativeElement.value !== this.savedContent) || editable)
-    );
-  }
-
-  isEditable(): Observable<boolean> {
-    return this.editable$.asObservable();
-  }
-
-  /**
-   * Revert changes
-   */
-  removeChangesFromField() {
-    this.textarea.nativeElement.value = this.savedContent;
-  }
-
-  save(content): void {
-    this.setEditable(false);
-    this.savedContent = content;
-    this.contentChange.emit(this.savedContent);
-  }
-
-  /**
-   * Change editable state for this field
-   * @param editable The new editable state for this field
-   */
-  setEditable(editable: boolean) {
-    this.editable$.next(editable);
+  openEditModal() {
+    const modalRef = this.modalService.open(EditSimpleItemModalComponent, { size: 'lg' });
+    modalRef.componentInstance.formConfig = this.formConfig;
+    modalRef.componentInstance.itemId = this.itemId;
+    modalRef.componentInstance.itemUpdate.pipe(
+      take(1)
+    ).subscribe((item: Item) => this.contentChange.emit(item));
   }
 }

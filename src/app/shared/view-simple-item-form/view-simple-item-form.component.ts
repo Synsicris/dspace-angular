@@ -93,7 +93,6 @@ export class ViewSimpleItemFormComponent implements OnInit {
     );
     observableCombineLatest([item$, this.formConfig]).pipe(take(1))
       .subscribe(([item, formConfig]: [Item, SubmissionFormsModel]) => {
-        console.log(item, formConfig);
         this.formModel = this.formBuilderService.modelFromConfiguration(
           null,
           formConfig,
