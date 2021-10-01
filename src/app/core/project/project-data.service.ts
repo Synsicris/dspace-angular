@@ -527,12 +527,19 @@ export class ProjectDataService extends CommunityDataService {
   }
 
   /**
+   * Invalidate user project result cache hit
+   */
+  public invalidateUserProjectResultsCache() {
+    this.requestService.setStaleByHrefSubstring('configuration=userProjectsCommunity');
+  }
+
+  /**
    * Fetch a search request
    *
    * @return Observable<Community>
    */
   private fetchSearchCommunity(searchOptions: PaginatedSearchOptions, ...linksToFollow: FollowLinkConfig<Community>[]): Observable<Community> {
-    return this.searchService.search(searchOptions).pipe(
+    return this.searchService.search(searchOptions,null, false).pipe(
       getFirstSucceededRemoteData(),
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
@@ -547,7 +554,7 @@ export class ProjectDataService extends CommunityDataService {
           return (list.page[0]).pipe(
             map((community: Community) => community),
             mergeMap((community: Community) => this.findById(community.id, true, true, ...linksToFollow).pipe(
-              tap(() => this.requestService.setStaleByHrefSubstring('userProjectsCommunity')),
+              tap(() => this.invalidateUserProjectResultsCache()),
               tap(() => this.requestService.setStaleByHrefSubstring(community.id))
             )),
             getFirstSucceededRemoteDataPayload()
