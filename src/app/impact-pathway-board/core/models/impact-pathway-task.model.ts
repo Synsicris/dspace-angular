@@ -15,7 +15,8 @@ export class ImpactPathwayTask {
   }
 
   hasDetail() {
-    return this.hasParent() && this.type === environment.impactPathway.projObjectiveEntity;
+    return this.hasParent() && (this.type === environment.impactPathway.projObjectiveEntity ||
+      this.type === environment.impactPathway.iaObjectiveEntity);
   }
 
   hasParent() {

@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-
 import { DSOBreadcrumbResolver } from './dso-breadcrumb.resolver';
-import { followLink, FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
-import { ProjectDsoBreadcrumbsService } from './project-dso-breadcrumbs.service';
 import { Item } from '../shared/item.model';
 import { ItemDataService } from '../data/item-data.service';
+import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+import { ProjectItemBreadcrumbService } from './project-item-breadcrumb.service';
 
 /**
  * The class that resolves the BreadcrumbConfig object for a Collection
  */
 @Injectable()
 export class ProjectItemBreadcrumbResolver extends DSOBreadcrumbResolver<Item> {
-  constructor(protected breadcrumbService: ProjectDsoBreadcrumbsService, protected dataService: ItemDataService) {
+  constructor(protected breadcrumbService: ProjectItemBreadcrumbService, protected dataService: ItemDataService) {
     super(breadcrumbService, dataService);
   }
 
@@ -21,13 +20,6 @@ export class ProjectItemBreadcrumbResolver extends DSOBreadcrumbResolver<Item> {
    * Requesting them as embeds will limit the number of requests
    */
   get followLinks(): FollowLinkConfig<Item>[] {
-    return [
-      followLink('owningCollection', undefined, true, true,true,
-        followLink('parentCommunity', undefined, true,true,true,
-          followLink('parentCommunity'))
-      ),
-      followLink('bundles'),
-      followLink('relationships')
-    ];
+    return [];
   }
 }

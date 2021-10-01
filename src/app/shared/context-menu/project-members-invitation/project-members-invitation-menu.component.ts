@@ -13,6 +13,10 @@ import { InvitationModalComponent } from '../../invitation-modal/invitation-moda
 import { ProjectGroupService } from '../../../core/project/project-group.service';
 import { Community } from '../../../core/shared/community.model';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
+import { ContextMenuEntryType } from '../context-menu-entry-type';
+import { Item } from '../../../core/shared/item.model';
+import { PARENT_PROJECT_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
+import { getRemoteDataPayload } from '../../../core/shared/operators';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -21,11 +25,18 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
   selector: 'ds-context-menu-project-invitation',
   templateUrl: './project-members-invitation-menu.component.html'
 })
-@rendersContextMenuEntriesForType('PROJECT')
-@rendersContextMenuEntriesForType('SUBPROJECT')
+@rendersContextMenuEntriesForType(DSpaceObjectType.ITEM)
 export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryComponent implements OnInit {
 
-  isSubproject;
+  /**
+   * Representing if the invitation is related to a subproject
+   */
+  isSubproject: boolean;
+
+  /**
+   * The parentproject/project community
+   */
+  projectCommunity: Community;
 
   /**
    * Modal reference
@@ -46,14 +57,30 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: any,
     protected authorizationService: AuthorizationDataService,
     protected modalService: NgbModal,
-    protected projectGroupService: ProjectGroupService
+    protected projectGroupService: ProjectGroupService,
+    protected projectService: ProjectDataService
   ) {
-    super(injectedContextMenuObject, injectedContextMenuObjectType);
+    super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ProjectMemberInvitation);
   }
 
 
   ngOnInit(): void {
     this.isSubproject = ((this.contextMenuObjectType as any) === 'SUBPROJECT');
+    if (this.canShow()) {
+      this.projectService.getProjectCommunityByItemId((this.contextMenuObject as Item).uuid).pipe(
+        take(1),
+        getRemoteDataPayload()
+      ).subscribe((projectCommunity: Community) => {
+        this.projectCommunity = projectCommunity;
+      });
+    }
+  }
+
+  /**
+   * Check if current Item is a Project or a parentproject
+   */
+  canShow() {
+    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY || (this.contextMenuObject as Item).entityType === PARENT_PROJECT_ENTITY;
   }
 
   /**
@@ -66,9 +93,9 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
   public openInvitationModal() {
     let groups$: Observable<string[]>;
     if (this.isSubproject) {
-      groups$ = this.projectGroupService.getInvitationSubprojectMembersGroupsByCommunity(this.contextMenuObject as Community);
+      groups$ = this.projectGroupService.getInvitationSubprojectMembersGroupsByCommunity(this.projectCommunity);
     } else {
-      groups$ = this.projectGroupService.getProjectMembersGroupUUIDByCommunity(this.contextMenuObject as Community);
+      groups$ = this.projectGroupService.getProjectMembersGroupUUIDByCommunity(this.projectCommunity);
     }
 
     groups$.pipe(take(1))

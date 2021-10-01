@@ -1,4 +1,4 @@
-<button *ngIf="(canDeleteProject() | async)" class="dropdown-item"
+<button *ngIf="canShow() && (canDeleteProject() | async)" class="dropdown-item"
         (click)="$event.preventDefault();openConfirmationModal(content);">
   {{'project-overview.page.header.delete.btn' | translate}}
 </button>

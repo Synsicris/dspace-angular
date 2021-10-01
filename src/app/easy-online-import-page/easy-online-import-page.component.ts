@@ -38,7 +38,6 @@ export class EasyOnlineImportPageComponent implements OnInit {
   }
 
   updateResults(results: EasyOnlineImport) {
-    console.log('updateResults', results);
     this.importResults.next(results);
   }
 }

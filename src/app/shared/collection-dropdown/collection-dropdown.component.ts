@@ -114,7 +114,6 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
   @Input() entityType: string;
 
   /**
-   * Emit to notify whether collections to choice from are more than one
    * If present this value is used to filter collection list by community
    */
   @Input() scope: string;

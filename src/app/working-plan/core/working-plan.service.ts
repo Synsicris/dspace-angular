@@ -355,40 +355,30 @@ export class WorkingPlanService {
     let end;
     let endMonth;
     let endyear;
+    const dates: any = {};
     const startDate = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateStartMetadata);
-    if (isEmpty(startDate)) {
-      start = moment().format('YYYY-MM-DD');
-      startMonth = moment().format('YYYY-MM');
-      startYear = moment().format('YYYY');
-    } else {
+    if (isNotEmpty(startDate)) {
       start = moment(startDate).format('YYYY-MM-DD');
       startMonth = moment(startDate).format('YYYY-MM');
       startYear = moment(startDate).format('YYYY');
-    }
-
-    const endDate = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateEndMetadata);
-    if (isEmpty(endDate)) {
-      end = moment().add(7, 'days').format('YYYY-MM-DD');
-      endMonth = moment().add(7, 'days').format('YYYY-MM');
-      endyear = moment().add(7, 'days').format('YYYY');
-    } else {
-      end = moment(endDate).format('YYYY-MM-DD');
-      endMonth = moment(endDate).format('YYYY-MM');
-      endyear = moment(endDate).format('YYYY');
-    }
-
-    const dates = {
-      start: {
+      dates.start = {
         full: start,
         month: startMonth,
         year: startYear
-      },
-      end: {
+      };
+    }
+
+    const endDate = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateEndMetadata);
+    if (isNotEmpty(endDate)) {
+      end = moment(endDate).format('YYYY-MM-DD');
+      endMonth = moment(endDate).format('YYYY-MM');
+      endyear = moment(endDate).format('YYYY');
+      dates.end = {
         full: end,
         month: endMonth,
         year: endyear
-      },
-    };
+      };
+    }
 
     return dates;
   }

@@ -19,31 +19,46 @@ import { CrisItemPageTabResolver } from '../cris-item-page/cris-item-page-tab.re
     RouterModule.forChild([
       {
         path: ':id',
-        resolve: {
-          dso: ItemPageResolver,
-          breadcrumb: ItemBreadcrumbResolver,
-          tabs: CrisItemPageTabResolver
-        },
         runGuardsAndResolvers: 'always',
         children: [
           {
             path: '',
+            resolve: {
+              dso: ItemPageResolver,
+              breadcrumb: ItemBreadcrumbResolver,
+              tabs: CrisItemPageTabResolver
+            },
             component: ThemedItemPageComponent,
             pathMatch: 'full',
           },
           {
             path: 'full',
+            resolve: {
+              dso: ItemPageResolver,
+              breadcrumb: ItemBreadcrumbResolver,
+              tabs: CrisItemPageTabResolver
+            },
             component: ThemedFullItemPageComponent,
           },
           {
             path: ITEM_EDIT_PATH,
             loadChildren: () => import('./edit-item-page/edit-item-page.module')
               .then((m) => m.EditItemPageModule),
+            resolve: {
+              dso: ItemPageResolver,
+              breadcrumb: ItemBreadcrumbResolver,
+              tabs: CrisItemPageTabResolver
+            },
             canActivate: [ItemPageAdministratorGuard],
             data: { title: 'submission.edit.title' }
           },
           {
             path: UPLOAD_BITSTREAM_PATH,
+            resolve: {
+              dso: ItemPageResolver,
+              breadcrumb: ItemBreadcrumbResolver,
+              tabs: CrisItemPageTabResolver
+            },
             component: UploadBitstreamComponent,
             canActivate: [AuthenticatedGuard]
           },

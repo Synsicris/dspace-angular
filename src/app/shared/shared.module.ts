@@ -296,6 +296,7 @@ import { InvitationModalComponent } from './invitation-modal/invitation-modal.co
 import { EditItemGrantsModalComponent } from './edit-item-grants-modal/edit-item-grants-modal.component';
 import { EditSimpleItemModalComponent } from './edit-simple-item-modal/edit-simple-item-modal.component';
 import { ViewSimpleItemFormComponent } from './view-simple-item-form/view-simple-item-form.component';
+import { ItemCreateComponent } from './item/item-create/item-create.component';
 
 /**
  * Declaration needed to make sure all decorator functions are called in time
@@ -661,7 +662,8 @@ const ENTRY_COMPONENTS = [
 
 const SHARED_SEARCH_PAGE_COMPONENTS = [
   ConfigurationSearchPageComponent,
-  ThemedConfigurationSearchPageComponent
+  ThemedConfigurationSearchPageComponent,
+  ItemCreateComponent
 ];
 
 const SHARED_ITEM_PAGE_COMPONENTS = [

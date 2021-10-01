@@ -68,7 +68,8 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
   getObjectivesTaskIds(): string[] {
     return this.impactPathwayStep.tasks
-      .filter((task) => task.type === environment.impactPathway.projObjectiveEntity)
+      .filter((task) => (task.type === environment.impactPathway.projObjectiveEntity ||
+        task.type === environment.impactPathway.iaObjectiveEntity))
       .map((task) => task.id);
   }
 

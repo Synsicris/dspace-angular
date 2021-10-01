@@ -98,7 +98,7 @@ export class SubmissionSectionDetectDuplicateComponent extends SectionModelCompo
               @Inject('collectionIdProvider') public injectedCollectionId: string,
               @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
               @Inject('submissionIdProvider') public injectedSubmissionId: string) {
-    super(injectedCollectionId, injectedSectionData, injectedSubmissionId);
+    super(injectedCollectionId, injectedSectionData, injectedSubmissionId, null);
   }
 
   /**

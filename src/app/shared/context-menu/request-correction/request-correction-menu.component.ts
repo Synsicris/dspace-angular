@@ -17,6 +17,7 @@ import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
+import { ContextMenuEntryType } from '../context-menu-entry-type';
 
 /**
  * This component renders a context menu option that provides the request a correction functionality.
@@ -65,7 +66,7 @@ export class RequestCorrectionMenuComponent extends ContextMenuEntryComponent im
     private submissionService: SubmissionService,
     private translate: TranslateService
   ) {
-    super(injectedContextMenuObject, injectedContextMenuObjectType);
+    super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.RequestCorrection);
   }
 
   /**
@@ -140,4 +141,5 @@ export class RequestCorrectionMenuComponent extends ContextMenuEntryComponent im
       this.sub.unsubscribe();
     }
   }
+
 }

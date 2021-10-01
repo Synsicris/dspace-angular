@@ -9,7 +9,7 @@ import { CommunityDataService } from '../data/community-data.service';
 import { getFirstCompletedRemoteData } from '../shared/operators';
 
 /**
- * This class represents a resolver that requests a specific project before the route is activated
+ * This class represents a resolver that requests a specific project community by community id before the route is activated
  */
 @Injectable()
 export class ProjectCommunityResolver implements Resolve<RemoteData<Community>> {
