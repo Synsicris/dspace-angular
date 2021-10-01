@@ -381,7 +381,9 @@
 
   "admin.access-control.epeople.table.edit.buttons.edit": "Edit \"{{name}}\"",
 
+
   "admin.access-control.epeople.table.edit.buttons.edit-disabled": "You are not authorized to edit this group",
+
 
   "admin.access-control.epeople.table.edit.buttons.remove": "Delete \"{{name}}\"",
 
@@ -823,18 +825,21 @@
 
   "auth.messages.expired": "Your session has expired. Please log in again.",
 
+
   "auth.messages.token-refresh-failed": "Refreshing your session token failed. Please log in again.",
 
 
   "bitstream.download.page": "Now downloading {{bitstream}}...",
 
 
-
   "bitstream.edit.authorizations.link": "Edit bitstream's Policies",
+
 
   "bitstream.edit.authorizations.title": "Edit bitstream's Policies",
 
+
   "bitstream.edit.return": "Back",
+
 
   "bitstream.edit.bitstream": "Bitstream: ",
 
@@ -1132,7 +1137,9 @@
 
   "collection.delete.confirm": "Confirm",
 
+
   "collection.delete.processing": "Deleting",
+
 
   "collection.delete.head": "Delete Collection",
 
@@ -1496,7 +1503,9 @@
 
   "community.delete.confirm": "Confirm",
 
+
   "community.delete.processing": "Deleting...",
+
 
   "community.delete.head": "Delete Community",
 
@@ -1797,33 +1806,48 @@
 
   "context-menu.actions.subscription.title": "Subscription",
 
+
   "context-menu.actions.subscription.type": "Subscription Type",
+
 
   "context-menu.actions.subscription.daily": "Daily",
 
+
   "context-menu.actions.subscription.weekly": "Weekly",
+
 
   "context-menu.actions.subscription.monthly": "Monthly",
 
+
   "context-menu.actions.subscription.content": "Content",
+
 
   "context-menu.actions.subscription.statistics": "Statistics",
 
+
   "context-menu.actions.subscription.content+statistics": "Content & Statistics",
+
 
   "context-menu.actions.subscription.confirm.submit": "Save",
 
+
   "context-menu.actions.subscription.delete": "Delete",
+
 
   "context-menu.actions.subscription.frequency.required": "Frequency is required.",
 
+
   "context-menu.actions.subscribe.btn": "Subscribe",
+
 
   "context-menu.actions.edit-subscriptions.btn": "Edit subscriptions",
 
+
   "context-menu.actions.subscription.notification.here-text": "Subscription Summary",
 
+
   "context-menu.actions.subscription.notification.content": "Subscription Updated Successfully, click {{here}} to see subscrition summary.",
+
 
   "RELATION.Person.researchoutputs.search.results.head": "Research Outputs",
 
@@ -2085,13 +2109,17 @@
 
   "confirmation-modal.delete-subscription.header": "Delete Subscription for \"{{ dsoName }}\"",
 
+
   "confirmation-modal.delete-subscription.info": "Are you sure you want to delete subscription for \"{{ dsoName }}\"",
+
 
   "confirmation-modal.delete-subscription.cancel": "Cancel",
 
+
   "confirmation-modal.delete-subscription.confirm": "Delete",
 
-  "dataset.listelement.badge" : "Dataset",
+
+  "dataset.listelement.badge": "Dataset",
 
 
   "easy-online-import.info": "Upload a new file to start the Easy-online import",
@@ -2186,7 +2214,13 @@
 
   "error.validation.fundingInvestigatorOrLeadOrganizationRequired": "At least one investigator or one lead organization is required",
 
-  "event.listelement.badge" : "Event",
+
+  "event.listelement.badge": "Event",
+
+
+  "exploitation-plan.edit.btn.title": "Edit Exploitation Plan",
+
+  "exploitation-plan.description.title": "Description",
 
   "exploitation-plan.info.text": "Info text for the exploitation Plan",
 
@@ -2610,7 +2644,9 @@
 
   "form.discard": "Discard",
 
+
   "form.drag": "Drag",
+
 
   "form.edit": "Edit",
 
@@ -2753,6 +2789,8 @@
   "impact-pathway.breadcrumbs": "Impact pathway",
 
 
+  "impact-pathway.description": "Description",
+
   "impact-pathway.heading": "Impact pathway",
 
 
@@ -2794,6 +2832,10 @@
 
   "impact-pathway.objectives.back-btn": "Back to Impact Pathway",
 
+
+  "impact-pathway.objectives.description.title": "Description",
+
+  "impact-pathway.objectives.edit.btn.title": "Edit objective",
 
   "impact-pathway.objectives.edit.page.title": "Edit objective",
 
@@ -2968,6 +3010,7 @@
 
   "item.bitstreams.upload.title": "Upload bitstream",
 
+  "item-create.modal-launcher.btn": "Create new item",
 
   "item.edit.bitstreams.bundle.edit.buttons.upload": "Upload",
 
@@ -3175,7 +3218,9 @@
 
   "item.edit.metadata.headers.language": "Lang",
 
+
   "item.edit.metadata.headers.security": "Security level",
+
 
   "item.edit.metadata.headers.value": "Value",
 
@@ -3227,7 +3272,9 @@
 
   "item.edit.move.cancel": "Back",
 
+
   "item.edit.move.save-button": "Save",
+
 
   "item.edit.move.discard-button": "Discard",
 
@@ -3683,6 +3730,7 @@
 
 
   "item.page.return": "Back",
+
 
   "item.preview.dc.description": "Summary",
 
@@ -4566,11 +4614,15 @@
   "nav.stop-impersonating": "Stop impersonating EPerson",
 
 
-  "nav.toggle" : "Toggle navigation",
+  "nav.toggle": "Toggle navigation",
+
 
   "nav.user.description": "User profile bar",
 
-"nav.subscriptions" : "Subscriptions",
+
+  "nav.subscriptions": "Subscriptions",
+
+
   "openaire.broker.title": "OpenAIRE Broker",
 
 
@@ -5734,11 +5786,15 @@
 
   "register-page.create-profile.identification.language": "Language",
 
-  "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the ",
+
+  "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the",
+
 
   "register-page.create-profile.end-user-agreement.accept.link": "End User Agreement",
 
+
   "register-page.create-profile.end-user-agreement.error": "Accept end user agreement is required",
+
 
   "register-page.create-profile.security.header": "Security",
 
@@ -6204,14 +6260,18 @@
 
   "search.filters.filter.author.placeholder": "Author name",
 
+
   "search.filters.filter.author.label": "Search author name",
+
 
   "search.filters.filter.birthDate.head": "Birth Date",
 
 
   "search.filters.filter.birthDate.placeholder": "Birth Date",
 
+
   "search.filters.filter.birthDate.label": "Search birth date",
+
 
   "search.filters.filter.collapse": "Collapse filter",
 
@@ -6221,38 +6281,48 @@
 
   "search.filters.filter.creativeDatePublished.placeholder": "Date Published",
 
+
   "search.filters.filter.creativeDatePublished.label": "Search date published",
+
 
   "search.filters.filter.creativeWorkEditor.head": "Editor",
 
 
   "search.filters.filter.creativeWorkEditor.placeholder": "Editor",
 
+
   "search.filters.filter.creativeWorkEditor.label": "Search editor",
+
 
   "search.filters.filter.creativeWorkKeywords.head": "Subject",
 
 
   "search.filters.filter.creativeWorkKeywords.placeholder": "Subject",
 
+
   "search.filters.filter.creativeWorkKeywords.label": "Search subject",
+
 
   "search.filters.filter.creativeWorkPublisher.head": "Publisher",
 
 
   "search.filters.filter.creativeWorkPublisher.placeholder": "Publisher",
 
+
   "search.filters.filter.creativeWorkPublisher.label": "Search publisher",
+
 
   "search.filters.filter.dateIssued.head": "Date",
 
 
   "search.filters.filter.dateIssued.max.placeholder": "Maximum Date",
 
+
   "search.filters.filter.dateIssued.max.label": "End",
 
 
   "search.filters.filter.dateIssued.min.placeholder": "Minimum Date",
+
 
   "search.filters.filter.dateIssued.min.label": "Start",
 
@@ -6262,7 +6332,9 @@
 
   "search.filters.filter.dateSubmitted.placeholder": "Date submitted",
 
+
   "search.filters.filter.dateSubmitted.label": "Search date submitted",
+
 
   "search.filters.filter.discoverable.head": "Private",
 
@@ -6281,7 +6353,9 @@
 
   "search.filters.filter.entityType.placeholder": "Item Type",
 
+
   "search.filters.filter.entityType.label": "Search item type",
+
 
   "search.filters.filter.expand": "Expand filter",
 
@@ -6312,7 +6386,9 @@
 
   "search.filters.filter.itemtype.placeholder": "Type",
 
+
   "search.filters.filter.itemtype.label": "Search type",
+
 
   "search.filters.filter.investigators.head": "Researcher",
 
@@ -6325,12 +6401,15 @@
 
   "search.filters.filter.jobTitle.placeholder": "Job Title",
 
+
   "search.filters.filter.jobTitle.label": "Search job title",
+
 
   "search.filters.filter.knowsLanguage.head": "Known language",
 
 
   "search.filters.filter.knowsLanguage.placeholder": "Known language",
+
 
   "search.filters.filter.knowsLanguage.label": "Search known language",
 
@@ -6352,14 +6431,18 @@
 
   "search.filters.filter.namedresourcetype.placeholder": "Status",
 
+
   "search.filters.filter.namedresourcetype.label": "Search status",
+
 
   "search.filters.filter.objectpeople.head": "People",
 
 
   "search.filters.filter.objectpeople.placeholder": "People",
 
+
   "search.filters.filter.objectpeople.label": "Search people",
+
 
   "search.filters.filter.organization.head": "Organization",
 
@@ -6372,28 +6455,36 @@
 
   "search.filters.filter.organizationAddressCountry.placeholder": "Country",
 
+
   "search.filters.filter.organizationAddressCountry.label": "Search country",
+
 
   "search.filters.filter.organizationAddressLocality.head": "City",
 
 
   "search.filters.filter.organizationAddressLocality.placeholder": "City",
 
+
   "search.filters.filter.organizationAddressLocality.label": "Search city",
+
 
   "search.filters.filter.organizationFoundingDate.head": "Date Founded",
 
 
   "search.filters.filter.organizationFoundingDate.placeholder": "Date Founded",
 
+
   "search.filters.filter.organizationFoundingDate.label": "Search date founded",
+
 
   "search.filters.filter.scope.head": "Scope",
 
 
   "search.filters.filter.scope.placeholder": "Scope filter",
 
+
   "search.filters.filter.scope.label": "Search scope filter",
+
 
   "search.filters.filter.show-less": "Collapse",
 
@@ -6406,12 +6497,15 @@
 
   "search.filters.filter.subject.placeholder": "Subject",
 
+
   "search.filters.filter.subject.label": "Search subject",
+
 
   "search.filters.filter.submitter.head": "Submitter",
 
 
   "search.filters.filter.submitter.placeholder": "Submitter",
+
 
   "search.filters.filter.submitter.label": "Search submitter",
 
@@ -6552,6 +6646,7 @@
 
 
   "search.filters.reset": "Reset filters",
+
 
   "search.filters.search.submit": "Submit",
 
@@ -6858,9 +6953,12 @@
 
   "submission.import-external.source.sherpaJournal": "SHERPA Journals",
 
+
   "submission.import-external.source.sherpaJournalIssn": "SHERPA Journals by ISSN",
 
+
   "submission.import-external.source.sherpaPublisher": "SHERPA Publishers",
+
 
   "submission.import-external.source.orcid": "ORCID",
 
@@ -8035,16 +8133,20 @@
   "submission.sections.submit.progressbar.upload": "Upload files",
 
 
-
   "submission.sections.status.errors.title": "Errors",
+
 
   "submission.sections.status.valid.title": "Valid",
 
+
   "submission.sections.status.warnings.title": "Warnings",
+
 
   "submission.sections.toggle.open": "Open section",
 
+
   "submission.sections.toggle.close": "Close section",
+
 
   "submission.sections.upload.delete.confirm.cancel": "Cancel",
 
@@ -8060,11 +8162,15 @@
 
   "submission.sections.upload.delete.submit": "Delete",
 
+
   "submission.sections.upload.download.title": "Download bitstream",
+
 
   "submission.sections.upload.drop-message": "Drop files to attach them to the item",
 
+
   "submission.sections.upload.edit.title": "Edit bitstream",
+
 
   "submission.sections.upload.form.access-condition-label": "Access condition type",
 
@@ -8221,29 +8327,42 @@
 
   "subscriptions.title": "Subscriptions",
 
+
   "subscriptions.item": "Subscriptions for items",
+
 
   "subscriptions.collection": "Subscriptions for collections",
 
+
   "subscriptions.community": "Subscriptions for communities",
+
 
   "subscriptions.subscription_type": "Subscription type",
 
+
   "subscriptions.frequency": "Subscription frequency",
+
 
   "subscriptions.frequency.D": "Daily",
 
+
   "subscriptions.frequency.M": "Monthly",
+
 
   "subscriptions.frequency.W": "Weekly",
 
+
   "subscriptions.table.dso": "Subject",
+
 
   "subscriptions.table.subscription_type": "Subscription Type",
 
+
   "subscriptions.table.subscription_frequency": "Subscription Frequency",
 
+
   "subscriptions.table.action": "Action",
+
 
   "subscriptions.table.empty.message": "You have not subscribed any notification yet. To subscribe notification about an object please use the contextual menu in the object detail view",
 
@@ -8253,20 +8372,26 @@
 
   "thumbnail.default.alt": "Thumbnail Image",
 
+
   "thumbnail.default.placeholder": "No Thumbnail Available",
+
 
   "thumbnail.project.alt": "Project Logo",
 
+
   "thumbnail.project.placeholder": "Project Placeholder Image",
+
 
   "thumbnail.orgunit.alt": "OrgUnit Logo",
 
+
   "thumbnail.orgunit.placeholder": "OrgUnit Placeholder Image",
+
 
   "thumbnail.person.alt": "Profile Picture",
 
-  "thumbnail.person.placeholder": "No Profile Picture Available",
 
+  "thumbnail.person.placeholder": "No Profile Picture Available",
 
 
   "title": "DSpace Cris",
@@ -8367,6 +8492,7 @@
 
   "uploader.delete.btn-title": "Delete",
 
+
   "uploader.or": ", or",
 
 
@@ -8393,7 +8519,6 @@
 
   "workflow-item.edit.title": "Edit workflowitem",
 
-  "workflow-item.edit.title": "View workflowitem",
 
   "workflow-item.delete.notification.success.title": "Deleted",
 
@@ -8442,16 +8567,21 @@
 
   "workflow-item.send-back.button.confirm": "Send back",
 
+
   "workflow-item.view.breadcrumbs": "Workflow View",
 
 
   "idle-modal.header": "Session will expire soon",
 
+
   "idle-modal.info": "For security reasons, user sessions expire after {{ timeToExpire }} minutes of inactivity. Your session will expire soon. Would you like to extend it or log out?",
+
 
   "idle-modal.log-out": "Log out",
 
+
   "idle-modal.extend-session": "Extend session",
+
 
   "relation.rp.researchoutputs.search.results.head": "Related Publications",
 
@@ -8480,7 +8610,7 @@
   "working-plan.chart.button.remove": "Unlink item",
 
 
-  "working-plan.chart.button.edit": "Edit",
+  "working-plan.chart.button.edit": "Edit item",
 
 
   "working-plan.chart.column.dates": "Dates",
@@ -8567,7 +8697,7 @@
   "working-plan.chart.move.up.btn": "Move up",
 
 
-  "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class=\\\"fas fa-plus-circle\\\"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class=\"fas fa-plus-circle\"></i> button in the work package to assign new or existing work.</p></b></i>",
+  "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class=\"fas fa-plus-circle\"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class=\"fas fa-plus-circle\"></i> button in the work package to assign new or existing work.</p></b></i>\",",
 
 
   "working-plan.page.title": "Working plan",
@@ -8580,6 +8710,7 @@
 
 
   "working-plan.chart.toolbar.add-btn": "Add item",
+
 
   "working-plan.chart.toolbar.date-view.month": "Month",
 
@@ -8607,6 +8738,7 @@
 
   "working-plan.chart.toolbar.versions": "Versions",
 
+
   "working-plan.task.search.header": "",
 
 
@@ -8623,9 +8755,6 @@
 
 
   "cooperation_partner.listelement.badge": "Cooperation partners",
-
-
-  "event.listelement.badge": "Event",
 
 
   "ethic.listelement.badge": "Ethical reflection",
@@ -9023,7 +9152,9 @@
 
   "help-page.content.project": "<a href=\"http://synsicris.disy.net/project/project.html\">Project</a>",
 
+
   "exploitationplanstep.listelement.badge": "Exploitation Plan step",
+
 
   "simple-item-modal.create.btn": "Create new",
 
@@ -9118,6 +9249,9 @@
   "search.filters.entityType.team": "Team member",
 
 
-  "search.filters.entityType.head": "Item Type"
+  "search.filters.entityType.head": "Item Type",
+
+
+  "working-plan.chart.toolbar.workpackage-btn": "Workpackage"
 
 }

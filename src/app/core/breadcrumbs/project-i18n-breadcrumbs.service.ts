@@ -8,9 +8,10 @@ import { Breadcrumb } from '../../breadcrumbs/breadcrumb/breadcrumb.model';
 import { LinkService } from '../cache/builders/link.service';
 import { DSONameService } from './dso-name.service';
 import { ProjectDataService } from '../project/project-data.service';
-import { getFirstSucceededRemoteDataPayload } from '../shared/operators';
-import { Community } from '../shared/community.model';
+import { getFinishedRemoteData, getRemoteDataPayload } from '../shared/operators';
 import { BreadcrumbsProviderService } from './breadcrumbsProviderService';
+import { Item } from '../shared/item.model';
+import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 
 /**
  * The postfix for i18n breadcrumbs
@@ -40,11 +41,13 @@ export class ProjectI18nBreadcrumbsService implements BreadcrumbsProviderService
     let i18nKey = key;
     if (key.includes('::')) {
       [projectId, i18nKey] = key.split('::');
-      return this.projectService.findById(projectId).pipe(
-        getFirstSucceededRemoteDataPayload(),
-        map((project: Community) => {
+      return this.projectService.getProjectItemByProjectCommunityId(projectId).pipe(
+        getFinishedRemoteData(),
+        getRemoteDataPayload(),
+        map((object: Item) => {
+          const itemUrl = getItemPageRoute(object);
           return [
-            new Breadcrumb(this.dsoNameService.getName(project), `/project-overview/${projectId}`),
+            new Breadcrumb(this.dsoNameService.getName(object), itemUrl),
             new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url)
           ];
         })

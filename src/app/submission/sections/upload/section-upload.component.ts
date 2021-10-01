@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 
 import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 
 import { SectionModelComponent } from '../models/section.model';
 import { hasValue, isNotEmpty, isNotUndefined, isUndefined } from '../../../shared/empty.util';
@@ -26,6 +26,7 @@ import { AccessConditionOption } from '../../../core/config/models/config-access
 import { followLink } from '../../../shared/utils/follow-link-config.model';
 import { getFirstSucceededRemoteData } from '../../../core/shared/operators';
 import { SubmissionVisibility } from '../../utils/visibility.util';
+import { SubmissionUploadFilesComponent } from '../../form/submission-upload-files/submission-upload-files.component';
 
 export const POLICY_DEFAULT_NO_LIST = 1; // Banner1
 export const POLICY_DEFAULT_WITH_LIST = 2; // Banner2
@@ -101,6 +102,12 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
   public availableAccessConditionOptions: AccessConditionOption[];  // List of accessConditions that an user can select
 
   /**
+   * i18n message label
+   * @type {string}
+   */
+  public dropMsg = 'submission.sections.upload.drop-message';
+
+  /**
    * Is the upload required
    * @type {boolean}
    */
@@ -125,6 +132,7 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
    * @param {SubmissionUploadsConfigService} uploadsConfigService
    * @param {SectionDataObject} injectedSectionData
    * @param {string} injectedSubmissionId
+   * @param {SubmissionUploadFilesComponent} injectedSubmissionUploaderRef
    */
   constructor(private bitstreamService: SectionUploadService,
               private changeDetectorRef: ChangeDetectorRef,
@@ -135,8 +143,9 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
               private submissionService: SubmissionService,
               private uploadsConfigService: SubmissionUploadsConfigService,
               @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
-              @Inject('submissionIdProvider') public injectedSubmissionId: string) {
-    super(undefined, injectedSectionData, injectedSubmissionId);
+              @Inject('submissionIdProvider') public injectedSubmissionId: string,
+              @Inject('submissionUploaderRefProvider') public injectedSubmissionUploaderRef: Observable<SubmissionUploadFilesComponent>) {
+    super(undefined, injectedSectionData, injectedSubmissionId, injectedSubmissionUploaderRef);
   }
 
   /**
@@ -269,4 +278,16 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
       .forEach((subscription) => subscription.unsubscribe());
   }
 
+  /**
+   * Open file browse dialog
+   *
+   * @param submissionUploaderRef$
+   */
+  browse(submissionUploaderRef$: Observable<SubmissionUploadFilesComponent>) {
+    submissionUploaderRef$.pipe(
+      take(1)
+    ).subscribe((submissionUploaderRef: SubmissionUploadFilesComponent) => {
+      submissionUploaderRef?.uploader?.browseBtn?.nativeElement.click();
+    });
+  }
 }

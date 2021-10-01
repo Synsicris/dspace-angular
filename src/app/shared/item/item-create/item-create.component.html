@@ -1,0 +1,5 @@
+<ng-container *ngIf="(canShow$ | async) as authenticated">
+  <button class="btn btn-outline-primary h-100 ml-4 flex-shrink-0" (click)="openDialog()"><i class="fas fa-plus"></i>
+    <span>{{ 'item-create.modal-launcher.btn' | translate }}</span>
+  </button>
+</ng-container>

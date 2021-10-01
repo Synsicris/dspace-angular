@@ -8,18 +8,12 @@ import { CreateCollectionPageGuard } from './create-collection-page/create-colle
 import { DeleteCollectionPageComponent } from './delete-collection-page/delete-collection-page.component';
 import { EditItemTemplatePageComponent } from './edit-item-template-page/edit-item-template-page.component';
 import { ItemTemplatePageResolver } from './edit-item-template-page/item-template-page.resolver';
-import { CollectionBreadcrumbResolver } from '../core/breadcrumbs/collection-breadcrumb.resolver';
-import { CollectionItemMapperComponent } from './collection-item-mapper/collection-item-mapper.component';
 import { ProjectCollectionBreadcrumbResolver } from '../core/breadcrumbs/project-collection-breadcrumb.resolver';
 import { ProjectDsoBreadcrumbsService } from '../core/breadcrumbs/project-dso-breadcrumbs.service';
 import { DSOBreadcrumbsService } from '../core/breadcrumbs/dso-breadcrumbs.service';
 import { LinkService } from '../core/cache/builders/link.service';
 import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
-import {
-  ITEMTEMPLATE_PATH,
-  COLLECTION_EDIT_PATH,
-  COLLECTION_CREATE_PATH
-} from './collection-page-routing-paths';
+import { COLLECTION_CREATE_PATH, COLLECTION_EDIT_PATH, ITEMTEMPLATE_PATH } from './collection-page-routing-paths';
 import { CollectionPageAdministratorGuard } from './collection-page-administrator.guard';
 import { MenuItemType } from '../shared/menu/initial-menus-state';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';

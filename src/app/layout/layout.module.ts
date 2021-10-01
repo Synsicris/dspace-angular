@@ -36,6 +36,9 @@ import { CrisLayoutSidebarItemComponent } from './default-layout/sidebar/sidebar
 import { TagComponent } from './default-layout/boxes/components/tag/tag.component';
 import { CrisLayoutHelpBoxComponent } from './custom-layout/help-box/help-box.component';
 import { CrisLayoutPersonProjectsBoxComponent } from './custom-layout/browse-box/browse-box.component';
+import { ExploitationPlanBoxComponent } from './custom-layout/exploitation-plan-box/exploitation-plan-box.component';
+import { WorkingPlanBoxComponent } from './custom-layout/working-plan-box/working-plan-box.component';
+import { ImpactPathwaysBoxComponent } from './custom-layout/impact-pathways-box/impact-pathways-box.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -94,7 +97,10 @@ const ENTRY_COMPONENTS = [
     TagComponent,
     ValuepairComponent,
     CrisLayoutHelpBoxComponent,
-    CrisLayoutPersonProjectsBoxComponent
+    CrisLayoutPersonProjectsBoxComponent,
+    ExploitationPlanBoxComponent,
+    WorkingPlanBoxComponent,
+    ImpactPathwaysBoxComponent
   ],
   imports: [
     CommonModule,

@@ -78,7 +78,6 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
     ProjectCollectionBreadcrumbResolver,
     ProjectI18nBreadcrumbsService,
     ProjectDsoBreadcrumbsService,
-    ProjectBreadcrumbResolver,
     ProjectCommunityResolver
   ]
 })

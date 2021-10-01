@@ -1,4 +1,13 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  QueryList,
+  SimpleChanges,
+  ViewChildren
+} from '@angular/core';
 import { combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { AuthService } from '../../core/auth/auth.service';
@@ -19,6 +28,8 @@ import { MetadataSecurityConfiguration } from '../../core/submission/models/meta
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { MetadataSecurityConfigurationService } from '../../core/submission/metadatasecurityconfig-data.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SubmissionUploadFilesComponent } from './submission-upload-files/submission-upload-files.component';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 /**
  * This component represents the submission form.
@@ -125,6 +136,13 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
   protected subs: Subscription[] = [];
 
   /**
+   * The SectionsDirective reference
+   */
+  submissionUploaderRef: BehaviorSubject<SubmissionUploadFilesComponent> = new BehaviorSubject<SubmissionUploadFilesComponent>(null);
+
+  @ViewChildren(SubmissionUploadFilesComponent) childrenComponent: QueryList<SubmissionUploadFilesComponent>;
+
+  /**
    * Initialize instance variables
    *
    * @param {AuthService} authService
@@ -144,6 +162,14 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
     private metadataSecurityConfigDataService: MetadataSecurityConfigurationService,
     private translate: TranslateService) {
     this.isActive = true;
+  }
+
+  ngAfterViewInit() {
+    this.childrenComponent.changes.pipe(
+      map((comps: QueryList<SubmissionUploadFilesComponent>) => comps.last),
+    ).subscribe((comp: SubmissionUploadFilesComponent) => {
+      this.submissionUploaderRef.next(comp);
+    });
   }
 
   /**

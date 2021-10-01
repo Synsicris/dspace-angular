@@ -32,7 +32,8 @@ export class WrapperObjectivesComponent {
   }
 
   getObjectivesTasks() {
-    return this.impactPathwayStep.tasks.filter((task) => task.type === environment.impactPathway.projObjectiveEntity);
+    return this.impactPathwayStep.tasks.filter((task) => (task.type === environment.impactPathway.projObjectiveEntity ||
+      task.type === environment.impactPathway.iaObjectiveEntity));
   }
 
   back() {

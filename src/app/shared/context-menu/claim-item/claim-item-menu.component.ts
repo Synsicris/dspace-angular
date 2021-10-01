@@ -8,12 +8,13 @@ import { DSpaceObject } from '../../../../app/core/shared/dspace-object.model';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { getFirstSucceededRemoteData } from '../../../../app/core/shared/operators';
-import {mergeMap, take} from 'rxjs/operators';
+import { mergeMap, take } from 'rxjs/operators';
 import { RemoteData } from '../../../../app/core/data/remote-data';
 import { ResearcherProfile } from '../../../../app/core/profile/model/researcher-profile.model';
 import { isNotUndefined } from '../../empty.util';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {TranslateService} from '@ngx-translate/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { ContextMenuEntryType } from '../context-menu-entry-type';
 
 @Component({
   selector: 'ds-context-menu-claim-item',
@@ -31,6 +32,9 @@ export class ClaimItemMenuComponent extends ContextMenuEntryComponent implements
    * @param {DSpaceObject} injectedContextMenuObject
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
+   * @param {ResearcherProfileService} researcherProfileService
+   * @param {NotificationsService} notificationsService
+   * @param {TranslateService} translate
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
@@ -40,7 +44,7 @@ export class ClaimItemMenuComponent extends ContextMenuEntryComponent implements
     private notificationsService: NotificationsService,
     private translate: TranslateService
   ) {
-    super(injectedContextMenuObject, injectedContextMenuObjectType);
+    super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.Claim);
   }
 
   ngOnInit() {

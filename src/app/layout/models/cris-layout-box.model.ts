@@ -1,7 +1,7 @@
 import { CrisLayoutPageModelComponent } from './cris-layout-page.model';
 import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
 import { Box } from '../../core/layout/models/box.model';
-import { hasValue } from '../../shared/empty.util';
+import { hasValue, isEmpty } from '../../shared/empty.util';
 import { TranslateService } from '@ngx-translate/core';
 
 /**
@@ -82,8 +82,8 @@ export abstract class CrisLayoutBoxModelComponent extends CrisLayoutPageModelCom
   }
 
   getBoxHeader(): string {
-    const header: string = this.translateService.instant(this.boxHeaderI18nKey);
-    if (header === this.boxHeaderI18nKey ) {
+    const header: string = isEmpty(this.boxHeaderI18nKey) ? null : this.translateService.instant(this.boxHeaderI18nKey);
+    if (isEmpty(header) || header === this.boxHeaderI18nKey) {
       // if translation does not exist return the value present in the header property
       return this.translateService.instant(this.box.header);
     } else {

@@ -1,14 +1,16 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathwayTask } from '../../core/models/impact-pathway-task.model';
 import { ImpactPathwayStep } from '../../core/models/impact-pathway-step.model';
 import { isEmpty } from '../../../shared/empty.util';
 import { ImpactPathwayService } from '../../core/impact-pathway.service';
+import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'ipw-objective',
@@ -30,7 +32,7 @@ export class ObjectiveComponent implements OnInit {
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
 
-  constructor(private impactPathwayService: ImpactPathwayService) {
+  constructor(private impactPathwayService: ImpactPathwayService, private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -63,6 +65,18 @@ export class ObjectiveComponent implements OnInit {
       0,
       value
     );
+  }
+
+  /**
+   * Open dialog box for editing exploitation-plan
+   */
+  openEditModal() {
+    const modalRef = this.modalService.open(EditSimpleItemModalComponent, { size: 'lg' });
+    modalRef.componentInstance.formConfig = this.impactPathwayService.getImpactPathwayTaskEditFormConfig(this.impactPathwayStep.type);
+    modalRef.componentInstance.itemId = this.impactPathwayTask.id;
+
+    modalRef.componentInstance.itemUpdate.pipe(take(1))
+      .subscribe((item: Item) => this.updateImpactPathwayTask(item));
   }
 
   updateImpactPathwayTask(item: Item) {
