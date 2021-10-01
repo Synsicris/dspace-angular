@@ -6752,6 +6752,8 @@
   // TODO New key - Add a translation
   "project.create.name.placeholder": "Enter the name for the new project",
 
+  "subproject.create.name.placeholder": "Name der Organisation und Kurztitel des Teilprojekts",
+
   // "project.create.success": "The new project has been generated successfully.",
   // TODO New key - Add a translation
   "project.create.success": "The new project has been generated successfully.",

@@ -12,7 +12,7 @@
                formControlName="name"
                id="name"
                (click)="$event.stopPropagation();"
-               placeholder="{{'project.create.name.placeholder' | translate }}"
+               placeholder="{{ (!isSubproject ? 'project.create.name.placeholder' : 'subproject.create.name.placeholder') | translate }}"
                dsAutoFocus>
       </div>
       <div *ngIf="isSubproject" class="form-group">
