@@ -5,32 +5,28 @@
 </ng-container>
 <ng-container *ngIf="result">
   <h2>{{'easy-online-import.result-info' | translate}}</h2>
-  <div *ngIf="result?.created?.length > 0">
+  <div *ngIf="(createdItemList | async)?.length > 0">
     <p class="lead">
       {{'easy-online-import.created-info' | translate}}
     </p>
-    <ul class="list-unstyled">
-      <ds-item-search-result-list-element *ngFor="let item of (createdItemList | async); let last = last; trackBy: trackUpdate"
-                                          [showLabel]="true"
-                                          [object]="item"
-                                          [linkType]="linkType"
-                                          [hideMetrics]="true"
-                                          [class.mb-3]="!last"></ds-item-search-result-list-element>
-    </ul>
-
+    <ds-item-search-result-list-element *ngFor="let item of (createdItemList | async); let last = last; trackBy: trackUpdate"
+                                        class="d-block h-100"
+                                        [showLabel]="true"
+                                        [object]="item"
+                                        [linkType]="linkType"
+                                        [hideMetrics]="true"
+                                        [class.mb-3]="!last"></ds-item-search-result-list-element>
   </div>
-  <div *ngIf="result?.modified?.length > 0">
+  <div *ngIf="(modifiedItemList | async)?.length > 0">
     <p class="lead">
       {{'easy-online-import.modified-info' | translate}}
     </p>
-    <ul class="list-unstyled">
-      <ds-item-search-result-list-element *ngFor="let item of (modifiedItemList | async); let last = last; trackBy: trackUpdate"
-                                          [showLabel]="true"
-                                          [object]="item"
-                                          [linkType]="linkType"
-                                          [hideMetrics]="true"
-                                          [class.mb-3]="!last"></ds-item-search-result-list-element>
-    </ul>
-
+    <ds-item-search-result-list-element *ngFor="let item of (modifiedItemList | async); let last = last; trackBy: trackUpdate"
+                                        class="d-block h-100"
+                                        [showLabel]="true"
+                                        [object]="item"
+                                        [linkType]="linkType"
+                                        [hideMetrics]="true"
+                                        [class.mb-3]="!last"></ds-item-search-result-list-element>
   </div>
 </ng-container>
