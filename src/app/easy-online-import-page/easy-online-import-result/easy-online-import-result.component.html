@@ -10,11 +10,12 @@
       {{'easy-online-import.created-info' | translate}}
     </p>
     <ul class="list-unstyled">
-      <li *ngFor="let item of (getItemList(result.created) | async)">
-        <button class="btn btn-link text-left" (click)="navigateToItem(item)">
-          <span class="h5">{{nameService.getName(item)}}</span>
-        </button>
-      </li>
+      <ds-item-search-result-list-element *ngFor="let item of (createdItemList | async); let last = last; trackBy: trackUpdate"
+                                          [showLabel]="true"
+                                          [object]="item"
+                                          [linkType]="linkType"
+                                          [hideMetrics]="true"
+                                          [class.mb-3]="!last"></ds-item-search-result-list-element>
     </ul>
 
   </div>
@@ -23,10 +24,12 @@
       {{'easy-online-import.modified-info' | translate}}
     </p>
     <ul class="list-unstyled">
-      <li *ngFor="let item of (getItemList(result.modified) | async)">
-        <button class="btn btn-link text-left" (click)="navigateToItem(item)">
-          <span class="h5">{{nameService.getName(item)}}</span>
-        </button>
+      <ds-item-search-result-list-element *ngFor="let item of (modifiedItemList | async); let last = last; trackBy: trackUpdate"
+                                          [showLabel]="true"
+                                          [object]="item"
+                                          [linkType]="linkType"
+                                          [hideMetrics]="true"
+                                          [class.mb-3]="!last"></ds-item-search-result-list-element>
     </ul>
 
   </div>

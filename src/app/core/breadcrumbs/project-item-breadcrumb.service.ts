@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DSONameService } from './dso-name.service';
-import { PARENT_PROJECT_RELATION_METADATA, ProjectDataService } from '../project/project-data.service';
+import { ProjectDataService } from '../project/project-data.service';
 import { Breadcrumb } from '../../breadcrumbs/breadcrumb/breadcrumb.model';
 import { find, map, switchMap } from 'rxjs/operators';
 import { Observable, of as observableOf } from 'rxjs';
@@ -36,7 +36,7 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
     const label = this.dsoNameService.getName(key);
     const crumb = new Breadcrumb(label, url);
 
-    return this.projectService.getProjectItemByItem(key.uuid, PARENT_PROJECT_RELATION_METADATA).pipe(
+    return this.projectService.getProjectItemByItemId(key.uuid).pipe(
       find((parentRD: RemoteData<ChildHALResource & DSpaceObject>) => parentRD.hasSucceeded || parentRD.statusCode === 204),
       switchMap((parentRD: RemoteData<ChildHALResource & DSpaceObject>) => {
         if (hasValue(parentRD.payload) && parentRD.payload.uuid !== key.uuid) {

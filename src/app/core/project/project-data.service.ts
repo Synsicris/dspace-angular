@@ -230,12 +230,36 @@ export class ProjectDataService extends CommunityDataService {
    * Get the project Item which the given item belongs to
    *
    * @param itemId           The project community id
+   * @param linksToFollow    List of {@link FollowLinkConfig} that indicate which
+   *                        {@link HALLink}s should be automatically resolved
+   * @return the Community as an Observable
+   */
+  getProjectItemByItemId(itemId: string, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
+    return this.getProjectItemByItem(itemId, PARENT_PROJECT_RELATION_METADATA, ...linksToFollow);
+  }
+
+  /**
+   * Get the project Item which the given item belongs to
+   *
+   * @param itemId           The project community id
+   * @param linksToFollow    List of {@link FollowLinkConfig} that indicate which
+   *                        {@link HALLink}s should be automatically resolved
+   * @return the Community as an Observable
+   */
+  getSubprojectItemByItemId(itemId: string, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
+    return this.getProjectItemByItem(itemId, PROJECT_RELATION_METADATA, ...linksToFollow);
+  }
+
+  /**
+   * Get the project Item which the given item belongs to
+   *
+   * @param itemId           The project community id
    * @param relationMetadata The metadata that contains relation to parentproject/project
    * @param linksToFollow    List of {@link FollowLinkConfig} that indicate which
    *                        {@link HALLink}s should be automatically resolved
    * @return the Community as an Observable
    */
-  getProjectItemByItem(itemId: string, relationMetadata: string, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
+  protected getProjectItemByItem(itemId: string, relationMetadata: string, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
     return this.itemService.findById(itemId).pipe(
       getFirstCompletedRemoteData(),
       mergeMap((itemRD: RemoteData<Item>) => {
