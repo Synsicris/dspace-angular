@@ -6,7 +6,7 @@
        class="d-flex p-2 h-100 flex-wrap task-list-horizontal overlay-hide row"
        [class.overlay-hide]="(isProcessing() | async)"
        cdkDropList
-       cdkDropListOrientation="'horizontal'"
+       cdkDropListOrientation="horizontal"
        [cdkDropListData]="impactPathwayTask"
        [cdkDropListConnectedTo]="connectedToList"
        (cdkDropListEntered)="listEnteredToTask($event)"
