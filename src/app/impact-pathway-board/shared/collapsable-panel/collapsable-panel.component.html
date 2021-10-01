@@ -1,14 +1,16 @@
 <div>
-  <div class="flex-grow-1 p-2">
-    <ng-content select="panelIconTitle"></ng-content>
-    <h5 class="d-inline-block mb-0">{{sidebarPanelTitle}}</h5>
-    <p class="text-muted">{{sidebarPanelDescription}}</p>
-  </div>
-  <div class="d-flex align-items-center px-2">
-    <ng-content select="panelIconStatus"></ng-content>
-    <button class="btn btn-link btn-lg px-0 sidebar-panel-toggle" *ngIf="collapsable" (click)="toggle()">
-      <span class="sidebar-panel-toggle fas" [ngClass]="(isCollapsed() | async) ? 'fa-chevron-down' : 'fa-chevron-up'"></span>
-    </button>
+  <div class="sidebar-panel-name bg-light d-flex bg-light">
+    <div class="flex-grow-1 p-2">
+      <ng-content select="panelIconTitle"></ng-content>
+      <h5 class="d-inline-block mb-0">{{sidebarPanelTitle}}</h5>
+      <p class="text-muted">{{sidebarPanelDescription}}</p>
+    </div>
+    <div class="d-flex align-items-center px-2">
+      <ng-content select="panelIconStatus"></ng-content>
+      <button class="btn btn-link btn-lg px-0 sidebar-panel-toggle" *ngIf="collapsable" (click)="toggle()">
+        <span class="sidebar-panel-toggle fas" [ngClass]="(isCollapsed() | async) ? 'fa-chevron-down' : 'fa-chevron-up'"></span>
+      </button>
+    </div>
   </div>
   <div [@slide]="(isCollapsed() | async) ? 'collapsed' : 'expanded'"
        (@slide.start)="startSlide($event)"
