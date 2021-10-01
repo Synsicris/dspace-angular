@@ -25,7 +25,7 @@ import {
 import { moment, WorkingPlanService, WpMetadata, WpStepMetadata } from '../../core/working-plan.service';
 import { WorkingPlanStateService } from '../../core/working-plan-state.service';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
-import { hasValue, isNotEmpty, isNotNull } from '../../../shared/empty.util';
+import { hasValue, isEmpty, isNotEmpty, isNotNull } from '../../../shared/empty.util';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { ChartDateViewType } from '../../core/working-plan.reducer';
 import { environment } from '../../../../environments/environment';
@@ -83,6 +83,19 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   @Input() public workpackages: Observable<Workpackage[]>;
 
+  private defaultDates: any = {
+    start: {
+      full: moment().format('YYYY-MM-DD'),
+      month: moment().format('YYYY-MM'),
+      year: moment().format('YYYY')
+    },
+    end: {
+      full: moment().add(7, 'days').format('YYYY-MM-DD'),
+      month: moment().add(7, 'days').format('YYYY-MM'),
+      year: moment().add(7, 'days').format('YYYY')
+    },
+  };
+
   dateFormat = 'YYYY-MM-DD';
   dateMonthFormat = 'YYYY-MM';
   dateYearFormat = 'YYYY';
@@ -111,7 +124,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   nestedNodeMap: Map<string, WorkpackageTreeObject> = new Map<string, WorkpackageTreeObject>();
 
   treeControl: FlatTreeControl<WorkpacakgeFlatNode>;
-  // TODO HERE
   treeFlattener: MatTreeFlattener<WorkpackageTreeObject, WorkpacakgeFlatNode>;
   dataSource: MatTreeFlatDataSource<WorkpackageTreeObject, WorkpacakgeFlatNode>;
 
@@ -140,12 +152,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   chartData;
 
-  sidebarNamesMinWidth = 260;
+  sidebarNamesMinWidth = 350;
   sidebarNamesStyle = {
     'min-width': this.sidebarNamesMinWidth + 'px'
   };
 
-  sidebarResponsibleMinWidth = 360;
+  sidebarResponsibleMinWidth = 450;
   sidebarResponsibleStyle = {
     'min-width': this.sidebarResponsibleMinWidth + 'px'
   };
@@ -235,7 +247,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
           // MouseOver Map
           this.chartChangeColorIsOver.set(node.id, false);
           // Milestones border and rhombus
-          if (node.type === 'milestone') {
+          if (node.type === 'milestone' && isNotEmpty(node.dates?.end)) {
             this.milestonesMap.set(node.id, node.dates.end.full);
           }
           if (node.expanded) {
@@ -509,7 +521,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    * @param isOpen boolean
    */
   resetSortDropdown(isOpen: boolean): void {
-    if ( isOpen ) {
+    if (isOpen) {
       this.sortSelectedValue = this.sortSelectedOld;
     }
   }
@@ -632,50 +644,64 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.datesMonth = [];
     this.datesQuarter = [];
     this.datesYear = [];
+    const stepToProcess: any[] = this.dataSource.data
+      .filter((step: Workpackage) => isNotEmpty(step.dates))
+      .map((step: Workpackage) => ({
+        dates: step.dates,
+        type: step.type
+      }));
 
-    this.dataSource.data.forEach((step: Workpackage) => {
-      let start;
-      const end = this.moment(step.dates.end.full, this.dateFormat);
-      if (step.type === 'milestone') {
-        start = this.moment(this.moment(step.dates.end.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
-      } else {
-        start = this.moment(step.dates.start.full, this.dateFormat);
-      }
-      const dateRange = moment.range(start, end);
+    if (stepToProcess.length === 0) {
+      stepToProcess.push({
+        dates: this.defaultDates,
+        type: null
+      });
+    }
 
-      // Moment range sometimes does not include all the months, so use the end of the month to get the correct range
-      const endForMonth = this.moment(step.dates.end.full).endOf('month');
-      const dateRangeForMonth = this.moment.range(start, endForMonth);
+    stepToProcess
+      .forEach((step: any) => {
+        let start;
+        const end = this.moment(step.dates.end.full, this.dateFormat);
+        if (step.type === 'milestone') {
+          start = this.moment(this.moment(step.dates.end.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
+        } else {
+          start = this.moment(step.dates.start.full, this.dateFormat);
+        }
+        const dateRange = moment.range(start, end);
 
-      // Moment range sometimes does not include all the quarters, so use the end of the quarter to get the correct range
-      const endForQuarter = this.moment(step.dates.end.full).endOf('quarter');
-      const dateRangeForQuarter = this.moment.range(start, endForQuarter);
+        // Moment range sometimes does not include all the months, so use the end of the month to get the correct range
+        const endForMonth = this.moment(step.dates.end.full).endOf('month');
+        const dateRangeForMonth = this.moment.range(start, endForMonth);
 
-      // Moment range sometimes does not include all the years, so use the end of the year to get the correct range
-      const endForYear = this.moment(step.dates.end.full, this.dateFormat).endOf('year');
-      const dateRangeForYear = this.moment.range(start, endForYear);
+        // Moment range sometimes does not include all the quarters, so use the end of the quarter to get the correct range
+        const endForQuarter = this.moment(step.dates.end.full).endOf('quarter');
+        const dateRangeForQuarter = this.moment.range(start, endForQuarter);
 
-      const days = Array.from(dateRange.by('days'));
-      const months = Array.from(dateRangeForMonth.by('months'));
-      const quarters = Array.from(dateRangeForQuarter.by('quarters'));
-      const years = Array.from(dateRangeForYear.by('year'));
+        // Moment range sometimes does not include all the years, so use the end of the year to get the correct range
+        const endForYear = this.moment(step.dates.end.full, this.dateFormat).endOf('year');
+        const dateRangeForYear = this.moment.range(start, endForYear);
 
-      this.dates = this.dates.concat(days
-        .map((d) => d.format(this.dateFormat))
-        .filter((d) => !this.dates.includes(d))).sort();
+        const days = Array.from(dateRange.by('days'));
+        const months = Array.from(dateRangeForMonth.by('months'));
+        const quarters = Array.from(dateRangeForQuarter.by('quarters'));
+        const years = Array.from(dateRangeForYear.by('year'));
 
-      this.datesMonth = this.datesMonth.concat(months
-        .map((d) => d.format(this.dateMonthFormat))
-        .filter((d) => !this.datesMonth.includes(d))).sort();
+        this.dates = this.dates.concat(days
+          .map((d) => d.format(this.dateFormat))
+          .filter((d) => !this.dates.includes(d))).sort();
 
-      this.datesQuarter = this.datesQuarter.concat(quarters
-        .map((d) => d.format(this.dateYearFormat) + '-' + d.quarter().toString())
-        .filter((d) => !this.datesQuarter.includes(d))).sort();
+        this.datesMonth = this.datesMonth.concat(months
+          .map((d) => d.format(this.dateMonthFormat))
+          .filter((d) => !this.datesMonth.includes(d))).sort();
 
-      this.datesYear = this.datesYear.concat(years
-        .map((d) => d.format(this.dateYearFormat))
-        .filter((d) => !this.datesYear.includes(d))).sort();
-    });
+        this.datesQuarter = this.datesQuarter.concat(quarters
+          .map((d) => d.format(this.dateYearFormat) + '-' + d.quarter().toString())
+          .filter((d) => !this.datesQuarter.includes(d))).sort();
+
+        this.datesYear = this.datesYear.concat(years
+          .map((d) => d.format(this.dateYearFormat))
+          .filter((d) => !this.datesYear.includes(d))).sort();
+      });
     this.adjustDates();
   }
 
@@ -730,7 +756,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   isDateInsideRange(date: string, node: Workpackage): boolean {
-    if (node.type !== 'milestone') {
+    if (isEmpty(node.dates)) {
+      return false;
+    } else if (node.type !== 'milestone') {
       return date >= node.dates.start.full && date <= node.dates.end.full;
     } else {
       return date === node.dates.end.full;
@@ -1066,7 +1094,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         beforeRangeArray
           .map((d) => d.format(this.dateMonthFormat))
           .filter((d) => this.datesMonth.indexOf(d) === -1)
-        ).sort();
+      ).sort();
       this.datesMonth = this.datesMonth.concat(
         afterRangeArray
           .map((d) => d.format(this.dateMonthFormat))
