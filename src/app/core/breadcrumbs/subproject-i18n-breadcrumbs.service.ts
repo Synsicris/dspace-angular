@@ -8,9 +8,10 @@ import { DSONameService } from './dso-name.service';
 import { LinkService } from '../cache/builders/link.service';
 import { ProjectDataService } from '../project/project-data.service';
 import { getFinishedRemoteData, getRemoteDataPayload } from '../shared/operators';
-import { Community } from '../shared/community.model';
 import { BREADCRUMB_MESSAGE_POSTFIX } from './project-i18n-breadcrumbs.service';
 import { BreadcrumbsProviderService } from './breadcrumbsProviderService';
+import { Item } from '../shared/item.model';
+import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 
 /**
  * Service to calculate DSpaceObject breadcrumbs for a single part of the route including the project path
@@ -36,19 +37,19 @@ export class SubprojectI18nBreadcrumbsService implements BreadcrumbsProviderServ
     let i18nKey = key;
     if (key.includes('::')) {
       [projectId, subprojectId, i18nKey] = key.split('::');
-      const project$: Observable<Community> = this.projectService.findById(projectId).pipe(
+      const project$: Observable<Item> = this.projectService.getProjectItemByProjectCommunityId(projectId).pipe(
         getFinishedRemoteData(),
         getRemoteDataPayload()
       );
-      const subproject$: Observable<Community> = this.projectService.findById(subprojectId).pipe(
+      const subproject$: Observable<Item> = this.projectService.getProjectItemByProjectCommunityId(subprojectId).pipe(
         getFinishedRemoteData(),
         getRemoteDataPayload()
       );
       return combineLatest([project$, subproject$]).pipe(
         take(1),
-        map(([project, subproject]: [Community, Community]) => {
-          const projectUrl = `/project-overview/${projectId}`;
-          const subprojectUrl = projectUrl + `/subproject/${subprojectId}`;
+        map(([project, subproject]: [Item, Item]) => {
+          const projectUrl = getItemPageRoute(project);
+          const subprojectUrl = getItemPageRoute(subproject);
           return [
             new Breadcrumb(this.dsoNameService.getName(project), projectUrl),
             new Breadcrumb(this.dsoNameService.getName(subproject), subprojectUrl),
