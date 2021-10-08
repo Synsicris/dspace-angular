@@ -530,9 +530,11 @@
   // "admin.access-control.epeople.table.edit.buttons.edit": "Edit \"{{name}}\"",
   "admin.access-control.epeople.table.edit.buttons.edit": "Éditer \"{{name}}\"",
   
+  
   // "admin.access-control.epeople.table.edit.buttons.edit-disabled": "You are not authorized to edit this group",
   // TODO New key - Add a translation
   "admin.access-control.epeople.table.edit.buttons.edit-disabled": "You are not authorized to edit this group",
+  
   
   // "admin.access-control.epeople.table.edit.buttons.remove": "Delete \"{{name}}\"",
   "admin.access-control.epeople.table.edit.buttons.remove": "Supprimer \"{{name}}\"",
@@ -1143,6 +1145,7 @@
   // "auth.messages.expired": "Your session has expired. Please log in again.",
   "auth.messages.expired": "Votre session a expiré. Veuillez vous reconnecter.",
   
+  
   // "auth.messages.token-refresh-failed": "Refreshing your session token failed. Please log in again.",
   // TODO New key - Add a translation
   "auth.messages.token-refresh-failed": "Refreshing your session token failed. Please log in again.",
@@ -1153,18 +1156,20 @@
   "bitstream.download.page": "Now downloading {{bitstream}}...",
   
   
-  
   // "bitstream.edit.authorizations.link": "Edit bitstream's Policies",
   // TODO New key - Add a translation
   "bitstream.edit.authorizations.link": "Edit bitstream's Policies",
+  
   
   // "bitstream.edit.authorizations.title": "Edit bitstream's Policies",
   // TODO New key - Add a translation
   "bitstream.edit.authorizations.title": "Edit bitstream's Policies",
   
+  
   // "bitstream.edit.return": "Back",
   // TODO New key - Add a translation
   "bitstream.edit.return": "Back",
+  
   
   // "bitstream.edit.bitstream": "Bitstream: ",
   "bitstream.edit.bitstream": "Bitstream: ",
@@ -1606,9 +1611,11 @@
   // "collection.delete.confirm": "Confirm",
   "collection.delete.confirm": "Valider",
   
+  
   // "collection.delete.processing": "Deleting",
   // TODO New key - Add a translation
   "collection.delete.processing": "Deleting",
+  
   
   // "collection.delete.head": "Delete Collection",
   "collection.delete.head": "Supprimer Collection",
@@ -2116,9 +2123,11 @@
   // "community.delete.confirm": "Confirm",
   "community.delete.confirm": "Confirmer",
   
+  
   // "community.delete.processing": "Deleting...",
   // TODO New key - Add a translation
   "community.delete.processing": "Deleting...",
+  
   
   // "community.delete.head": "Delete Community",
   "community.delete.head": "Supprimer Communauté",
@@ -2558,61 +2567,76 @@
   // TODO New key - Add a translation
   "context-menu.actions.subscription.title": "Subscription",
   
+  
   // "context-menu.actions.subscription.type": "Subscription Type",
   // TODO New key - Add a translation
   "context-menu.actions.subscription.type": "Subscription Type",
+  
   
   // "context-menu.actions.subscription.daily": "Daily",
   // TODO New key - Add a translation
   "context-menu.actions.subscription.daily": "Daily",
   
+  
   // "context-menu.actions.subscription.weekly": "Weekly",
   // TODO New key - Add a translation
   "context-menu.actions.subscription.weekly": "Weekly",
+  
   
   // "context-menu.actions.subscription.monthly": "Monthly",
   // TODO New key - Add a translation
   "context-menu.actions.subscription.monthly": "Monthly",
   
+  
   // "context-menu.actions.subscription.content": "Content",
   // TODO New key - Add a translation
   "context-menu.actions.subscription.content": "Content",
+  
   
   // "context-menu.actions.subscription.statistics": "Statistics",
   // TODO New key - Add a translation
   "context-menu.actions.subscription.statistics": "Statistics",
   
+  
   // "context-menu.actions.subscription.content+statistics": "Content & Statistics",
   // TODO New key - Add a translation
   "context-menu.actions.subscription.content+statistics": "Content & Statistics",
+  
   
   // "context-menu.actions.subscription.confirm.submit": "Save",
   // TODO New key - Add a translation
   "context-menu.actions.subscription.confirm.submit": "Save",
   
+  
   // "context-menu.actions.subscription.delete": "Delete",
   // TODO New key - Add a translation
   "context-menu.actions.subscription.delete": "Delete",
+  
   
   // "context-menu.actions.subscription.frequency.required": "Frequency is required.",
   // TODO New key - Add a translation
   "context-menu.actions.subscription.frequency.required": "Frequency is required.",
   
+  
   // "context-menu.actions.subscribe.btn": "Subscribe",
   // TODO New key - Add a translation
   "context-menu.actions.subscribe.btn": "Subscribe",
+  
   
   // "context-menu.actions.edit-subscriptions.btn": "Edit subscriptions",
   // TODO New key - Add a translation
   "context-menu.actions.edit-subscriptions.btn": "Edit subscriptions",
   
+  
   // "context-menu.actions.subscription.notification.here-text": "Subscription Summary",
   // TODO New key - Add a translation
   "context-menu.actions.subscription.notification.here-text": "Subscription Summary",
   
+  
   // "context-menu.actions.subscription.notification.content": "Subscription Updated Successfully, click {{here}} to see subscrition summary.",
   // TODO New key - Add a translation
   "context-menu.actions.subscription.notification.content": "Subscription Updated Successfully, click {{here}} to see subscrition summary.",
+  
   
   // "RELATION.Person.researchoutputs.search.results.head": "Research Outputs",
   // TODO New key - Add a translation
@@ -2989,22 +3013,33 @@
   // TODO New key - Add a translation
   "confirmation-modal.delete-subscription.header": "Delete Subscription for \"{{ dsoName }}\"",
   
+  
   // "confirmation-modal.delete-subscription.info": "Are you sure you want to delete subscription for \"{{ dsoName }}\"",
   // TODO New key - Add a translation
   "confirmation-modal.delete-subscription.info": "Are you sure you want to delete subscription for \"{{ dsoName }}\"",
+  
   
   // "confirmation-modal.delete-subscription.cancel": "Cancel",
   // TODO New key - Add a translation
   "confirmation-modal.delete-subscription.cancel": "Cancel",
   
+  
   // "confirmation-modal.delete-subscription.confirm": "Delete",
   // TODO New key - Add a translation
   "confirmation-modal.delete-subscription.confirm": "Delete",
   
-  // "dataset.listelement.badge" : "Dataset",
-  // TODO New key - Add a translation
-  "dataset.listelement.badge" : "Dataset",
   
+  // "dataset.listelement.badge": "Dataset",
+  // TODO New key - Add a translation
+  "dataset.listelement.badge": "Dataset",
+  
+  // "easy-online-import.title.breadcrumbs": "Easy-online import",
+  // TODO New key - Add a translation
+  "easy-online-import.title.breadcrumbs": "Easy-online import",
+  
+  // "easy-online-import.title": "Easy-online import",
+  // TODO New key - Add a translation
+  "easy-online-import.title": "Easy-online import",
   
   // "easy-online-import.info": "Upload a new file to start the Easy-online import",
   // TODO New key - Add a translation
@@ -3141,9 +3176,19 @@
   // TODO New key - Add a translation
   "error.validation.fundingInvestigatorOrLeadOrganizationRequired": "At least one investigator or one lead organization is required",
   
-  // "event.listelement.badge" : "Event",
+  
+  // "event.listelement.badge": "Event",
   // TODO New key - Add a translation
-  "event.listelement.badge" : "Event",
+  "event.listelement.badge": "Event",
+  
+  
+  // "exploitation-plan.edit.btn.title": "Edit Exploitation Plan",
+  // TODO New key - Add a translation
+  "exploitation-plan.edit.btn.title": "Edit Exploitation Plan",
+  
+  // "exploitation-plan.description.title": "Description",
+  // TODO New key - Add a translation
+  "exploitation-plan.description.title": "Description",
   
   // "exploitation-plan.info.text": "Info text for the exploitation Plan",
   // TODO New key - Add a translation
@@ -3814,9 +3859,11 @@
   // TODO New key - Add a translation
   "form.discard": "Discard",
   
+  
   // "form.drag": "Drag",
   // TODO New key - Add a translation
   "form.drag": "Drag",
+  
   
   // "form.edit": "Edit",
   "form.edit": "Éditer",
@@ -4037,6 +4084,10 @@
   "impact-pathway.breadcrumbs": "Impact pathway",
   
   
+  // "impact-pathway.description": "Description",
+  // TODO New key - Add a translation
+  "impact-pathway.description": "Description",
+  
   // "impact-pathway.heading": "Impact pathway",
   // TODO New key - Add a translation
   "impact-pathway.heading": "Impact pathway",
@@ -4106,6 +4157,14 @@
   // TODO New key - Add a translation
   "impact-pathway.objectives.back-btn": "Back to Impact Pathway",
   
+  
+  // "impact-pathway.objectives.description.title": "Description",
+  // TODO New key - Add a translation
+  "impact-pathway.objectives.description.title": "Description",
+  
+  // "impact-pathway.objectives.edit.btn.title": "Edit objective",
+  // TODO New key - Add a translation
+  "impact-pathway.objectives.edit.btn.title": "Edit objective",
   
   // "impact-pathway.objectives.edit.page.title": "Edit objective",
   // TODO New key - Add a translation
@@ -4368,6 +4427,9 @@
   // "item.bitstreams.upload.title": "Upload bitstream",
   "item.bitstreams.upload.title": "Ajouter Bitstream",
   
+  // "item-create.modal-launcher.btn": "Create new item",
+  // TODO New key - Add a translation
+  "item-create.modal-launcher.btn": "Create new item",
   
   // "item.edit.bitstreams.bundle.edit.buttons.upload": "Upload",
   "item.edit.bitstreams.bundle.edit.buttons.upload": "Ajouter",
@@ -4646,9 +4708,11 @@
   // "item.edit.metadata.headers.language": "Lang",
   "item.edit.metadata.headers.language": "Langue",
   
+  
   // "item.edit.metadata.headers.security": "Security level",
   // TODO New key - Add a translation
   "item.edit.metadata.headers.security": "Security level",
+  
   
   // "item.edit.metadata.headers.value": "Value",
   "item.edit.metadata.headers.value": "Valeur",
@@ -4718,9 +4782,11 @@
   // TODO Source message changed - Revise the translation
   "item.edit.move.cancel": "Annuler",
   
+  
   // "item.edit.move.save-button": "Save",
   // TODO New key - Add a translation
   "item.edit.move.save-button": "Save",
+  
   
   // "item.edit.move.discard-button": "Discard",
   // TODO New key - Add a translation
@@ -5366,6 +5432,7 @@
   // "item.page.return": "Back",
   // TODO New key - Add a translation
   "item.page.return": "Back",
+  
   
   // "item.preview.dc.description": "Summary",
   // TODO New key - Add a translation
@@ -6658,17 +6725,21 @@
   "nav.stop-impersonating": "Retour à votre propre EPerson",
   
   
-  // "nav.toggle" : "Toggle navigation",
+  // "nav.toggle": "Toggle navigation",
   // TODO New key - Add a translation
-  "nav.toggle" : "Toggle navigation",
+  "nav.toggle": "Toggle navigation",
+  
   
   // "nav.user.description": "User profile bar",
   // TODO New key - Add a translation
   "nav.user.description": "User profile bar",
   
-  // "nav.subscriptions" : "Subscriptions",
+  
+  // "nav.subscriptions": "Subscriptions",
   // TODO New key - Add a translation
-  "nav.subscriptions" : "Subscriptions",
+  "nav.subscriptions": "Subscriptions",
+  
+  
   // "openaire.broker.title": "OpenAIRE Broker",
   // TODO New key - Add a translation
   "openaire.broker.title": "OpenAIRE Broker",
@@ -8154,6 +8225,10 @@
   // TODO New key - Add a translation
   "project.create.name.placeholder": "Enter the name for the new project",
   
+  // "subproject.create.name.placeholder": "Organisation Name and Subproject Short title",
+  // TODO New key - Add a translation
+  "subproject.create.name.placeholder": "Organisation Name and Subproject Short title",
+  
   
   // "project.create.success": "The new project has been generated successfully.",
   // TODO New key - Add a translation
@@ -8505,17 +8580,21 @@
   // "register-page.create-profile.identification.language": "Language",
   "register-page.create-profile.identification.language": "Langue",
   
-  // "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the ",
+  
+  // "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the",
   // TODO New key - Add a translation
-  "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the ",
+  "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the",
+  
   
   // "register-page.create-profile.end-user-agreement.accept.link": "End User Agreement",
   // TODO New key - Add a translation
   "register-page.create-profile.end-user-agreement.accept.link": "End User Agreement",
   
+  
   // "register-page.create-profile.end-user-agreement.error": "Accept end user agreement is required",
   // TODO New key - Add a translation
   "register-page.create-profile.end-user-agreement.error": "Accept end user agreement is required",
+  
   
   // "register-page.create-profile.security.header": "Security",
   "register-page.create-profile.security.header": "Sécurité",
@@ -9182,9 +9261,11 @@
   // "search.filters.filter.author.placeholder": "Author name",
   "search.filters.filter.author.placeholder": "Nom de l'auteur",
   
+  
   // "search.filters.filter.author.label": "Search author name",
   // TODO New key - Add a translation
   "search.filters.filter.author.label": "Search author name",
+  
   
   // "search.filters.filter.birthDate.head": "Birth Date",
   "search.filters.filter.birthDate.head": "Date de naissance",
@@ -9193,9 +9274,11 @@
   // "search.filters.filter.birthDate.placeholder": "Birth Date",
   "search.filters.filter.birthDate.placeholder": "Date de naissance",
   
+  
   // "search.filters.filter.birthDate.label": "Search birth date",
   // TODO New key - Add a translation
   "search.filters.filter.birthDate.label": "Search birth date",
+  
   
   // "search.filters.filter.collapse": "Collapse filter",
   // TODO New key - Add a translation
@@ -9209,9 +9292,11 @@
   // "search.filters.filter.creativeDatePublished.placeholder": "Date Published",
   "search.filters.filter.creativeDatePublished.placeholder": "Date de publication",
   
+  
   // "search.filters.filter.creativeDatePublished.label": "Search date published",
   // TODO New key - Add a translation
   "search.filters.filter.creativeDatePublished.label": "Search date published",
+  
   
   // "search.filters.filter.creativeWorkEditor.head": "Editor",
   "search.filters.filter.creativeWorkEditor.head": "Rédacteur en chef",
@@ -9220,9 +9305,11 @@
   // "search.filters.filter.creativeWorkEditor.placeholder": "Editor",
   "search.filters.filter.creativeWorkEditor.placeholder": "Rédacteur en chef",
   
+  
   // "search.filters.filter.creativeWorkEditor.label": "Search editor",
   // TODO New key - Add a translation
   "search.filters.filter.creativeWorkEditor.label": "Search editor",
+  
   
   // "search.filters.filter.creativeWorkKeywords.head": "Subject",
   "search.filters.filter.creativeWorkKeywords.head": "Sujet",
@@ -9231,9 +9318,11 @@
   // "search.filters.filter.creativeWorkKeywords.placeholder": "Subject",
   "search.filters.filter.creativeWorkKeywords.placeholder": "Sujet",
   
+  
   // "search.filters.filter.creativeWorkKeywords.label": "Search subject",
   // TODO New key - Add a translation
   "search.filters.filter.creativeWorkKeywords.label": "Search subject",
+  
   
   // "search.filters.filter.creativeWorkPublisher.head": "Publisher",
   "search.filters.filter.creativeWorkPublisher.head": "Éditeur",
@@ -9242,9 +9331,11 @@
   // "search.filters.filter.creativeWorkPublisher.placeholder": "Publisher",
   "search.filters.filter.creativeWorkPublisher.placeholder": "Éditeur",
   
+  
   // "search.filters.filter.creativeWorkPublisher.label": "Search publisher",
   // TODO New key - Add a translation
   "search.filters.filter.creativeWorkPublisher.label": "Search publisher",
+  
   
   // "search.filters.filter.dateIssued.head": "Date",
   "search.filters.filter.dateIssued.head": "Date",
@@ -9254,6 +9345,7 @@
   // TODO Source message changed - Revise the translation
   "search.filters.filter.dateIssued.max.placeholder": "Depuis",
   
+  
   // "search.filters.filter.dateIssued.max.label": "End",
   // TODO New key - Add a translation
   "search.filters.filter.dateIssued.max.label": "End",
@@ -9262,6 +9354,7 @@
   // "search.filters.filter.dateIssued.min.placeholder": "Minimum Date",
   // TODO Source message changed - Revise the translation
   "search.filters.filter.dateIssued.min.placeholder": "Jusque",
+  
   
   // "search.filters.filter.dateIssued.min.label": "Start",
   // TODO New key - Add a translation
@@ -9275,9 +9368,11 @@
   // "search.filters.filter.dateSubmitted.placeholder": "Date submitted",
   "search.filters.filter.dateSubmitted.placeholder": "Date de dépôt",
   
+  
   // "search.filters.filter.dateSubmitted.label": "Search date submitted",
   // TODO New key - Add a translation
   "search.filters.filter.dateSubmitted.label": "Search date submitted",
+  
   
   // "search.filters.filter.discoverable.head": "Private",
   "search.filters.filter.discoverable.head": "Privé",
@@ -9304,9 +9399,11 @@
   // "search.filters.filter.entityType.placeholder": "Item Type",
   "search.filters.filter.entityType.placeholder": "Type d'Item",
   
+  
   // "search.filters.filter.entityType.label": "Search item type",
   // TODO New key - Add a translation
   "search.filters.filter.entityType.label": "Search item type",
+  
   
   // "search.filters.filter.expand": "Expand filter",
   // TODO New key - Add a translation
@@ -9354,9 +9451,11 @@
   // "search.filters.filter.itemtype.placeholder": "Type",
   "search.filters.filter.itemtype.placeholder": "Type",
   
+  
   // "search.filters.filter.itemtype.label": "Search type",
   // TODO New key - Add a translation
   "search.filters.filter.itemtype.label": "Search type",
+  
   
   // "search.filters.filter.investigators.head": "Researcher",
   // TODO New key - Add a translation
@@ -9375,9 +9474,11 @@
   // "search.filters.filter.jobTitle.placeholder": "Job Title",
   "search.filters.filter.jobTitle.placeholder": "Fonction",
   
+  
   // "search.filters.filter.jobTitle.label": "Search job title",
   // TODO New key - Add a translation
   "search.filters.filter.jobTitle.label": "Search job title",
+  
   
   // "search.filters.filter.knowsLanguage.head": "Known language",
   "search.filters.filter.knowsLanguage.head": "Langue(s)",
@@ -9385,6 +9486,7 @@
   
   // "search.filters.filter.knowsLanguage.placeholder": "Known language",
   "search.filters.filter.knowsLanguage.placeholder": "Langue(s)",
+  
   
   // "search.filters.filter.knowsLanguage.label": "Search known language",
   // TODO New key - Add a translation
@@ -9418,9 +9520,11 @@
   // "search.filters.filter.namedresourcetype.placeholder": "Status",
   "search.filters.filter.namedresourcetype.placeholder": "Statut",
   
+  
   // "search.filters.filter.namedresourcetype.label": "Search status",
   // TODO New key - Add a translation
   "search.filters.filter.namedresourcetype.label": "Search status",
+  
   
   // "search.filters.filter.objectpeople.head": "People",
   "search.filters.filter.objectpeople.head": "Personne",
@@ -9429,9 +9533,11 @@
   // "search.filters.filter.objectpeople.placeholder": "People",
   "search.filters.filter.objectpeople.placeholder": "Personne",
   
+  
   // "search.filters.filter.objectpeople.label": "Search people",
   // TODO New key - Add a translation
   "search.filters.filter.objectpeople.label": "Search people",
+  
   
   // "search.filters.filter.organization.head": "Organization",
   // TODO New key - Add a translation
@@ -9450,9 +9556,11 @@
   // "search.filters.filter.organizationAddressCountry.placeholder": "Country",
   "search.filters.filter.organizationAddressCountry.placeholder": "Pays",
   
+  
   // "search.filters.filter.organizationAddressCountry.label": "Search country",
   // TODO New key - Add a translation
   "search.filters.filter.organizationAddressCountry.label": "Search country",
+  
   
   // "search.filters.filter.organizationAddressLocality.head": "City",
   "search.filters.filter.organizationAddressLocality.head": "Ville",
@@ -9461,9 +9569,11 @@
   // "search.filters.filter.organizationAddressLocality.placeholder": "City",
   "search.filters.filter.organizationAddressLocality.placeholder": "Ville",
   
+  
   // "search.filters.filter.organizationAddressLocality.label": "Search city",
   // TODO New key - Add a translation
   "search.filters.filter.organizationAddressLocality.label": "Search city",
+  
   
   // "search.filters.filter.organizationFoundingDate.head": "Date Founded",
   "search.filters.filter.organizationFoundingDate.head": "Date de fondation",
@@ -9472,9 +9582,11 @@
   // "search.filters.filter.organizationFoundingDate.placeholder": "Date Founded",
   "search.filters.filter.organizationFoundingDate.placeholder": "Date de fondation",
   
+  
   // "search.filters.filter.organizationFoundingDate.label": "Search date founded",
   // TODO New key - Add a translation
   "search.filters.filter.organizationFoundingDate.label": "Search date founded",
+  
   
   // "search.filters.filter.scope.head": "Scope",
   "search.filters.filter.scope.head": "Scope",
@@ -9483,9 +9595,11 @@
   // "search.filters.filter.scope.placeholder": "Scope filter",
   "search.filters.filter.scope.placeholder": "Scope",
   
+  
   // "search.filters.filter.scope.label": "Search scope filter",
   // TODO New key - Add a translation
   "search.filters.filter.scope.label": "Search scope filter",
+  
   
   // "search.filters.filter.show-less": "Collapse",
   "search.filters.filter.show-less": "Moins",
@@ -9502,9 +9616,11 @@
   // "search.filters.filter.subject.placeholder": "Subject",
   "search.filters.filter.subject.placeholder": "Sujet",
   
+  
   // "search.filters.filter.subject.label": "Search subject",
   // TODO New key - Add a translation
   "search.filters.filter.subject.label": "Search subject",
+  
   
   // "search.filters.filter.submitter.head": "Submitter",
   "search.filters.filter.submitter.head": "Déposant",
@@ -9512,6 +9628,7 @@
   
   // "search.filters.filter.submitter.placeholder": "Submitter",
   "search.filters.filter.submitter.placeholder": "Déposant",
+  
   
   // "search.filters.filter.submitter.label": "Search submitter",
   // TODO New key - Add a translation
@@ -9736,6 +9853,7 @@
   
   // "search.filters.reset": "Reset filters",
   "search.filters.reset": "Réinitialiser filtres",
+  
   
   // "search.filters.search.submit": "Submit",
   // TODO New key - Add a translation
@@ -10196,12 +10314,15 @@
   // "submission.import-external.source.sherpaJournal": "SHERPA Journals",
   "submission.import-external.source.sherpaJournal": "Sherpa Journals",
   
+  
   // "submission.import-external.source.sherpaJournalIssn": "SHERPA Journals by ISSN",
   // TODO New key - Add a translation
   "submission.import-external.source.sherpaJournalIssn": "SHERPA Journals by ISSN",
   
+  
   // "submission.import-external.source.sherpaPublisher": "SHERPA Publishers",
   "submission.import-external.source.sherpaPublisher": "SHERPA Publishers",
+  
   
   // "submission.import-external.source.orcid": "ORCID",
   "submission.import-external.source.orcid": "ORCID",
@@ -12024,26 +12145,30 @@
   "submission.sections.submit.progressbar.upload": "Uploader",
   
   
-  
   // "submission.sections.status.errors.title": "Errors",
   // TODO New key - Add a translation
   "submission.sections.status.errors.title": "Errors",
+  
   
   // "submission.sections.status.valid.title": "Valid",
   // TODO New key - Add a translation
   "submission.sections.status.valid.title": "Valid",
   
+  
   // "submission.sections.status.warnings.title": "Warnings",
   // TODO New key - Add a translation
   "submission.sections.status.warnings.title": "Warnings",
+  
   
   // "submission.sections.toggle.open": "Open section",
   // TODO New key - Add a translation
   "submission.sections.toggle.open": "Open section",
   
+  
   // "submission.sections.toggle.close": "Close section",
   // TODO New key - Add a translation
   "submission.sections.toggle.close": "Close section",
+  
   
   // "submission.sections.upload.delete.confirm.cancel": "Cancel",
   "submission.sections.upload.delete.confirm.cancel": "Annuler",
@@ -12064,16 +12189,20 @@
   // "submission.sections.upload.delete.submit": "Delete",
   "submission.sections.upload.delete.submit": "Supprimer",
   
+  
   // "submission.sections.upload.download.title": "Download bitstream",
   // TODO New key - Add a translation
   "submission.sections.upload.download.title": "Download bitstream",
   
+  
   // "submission.sections.upload.drop-message": "Drop files to attach them to the item",
   "submission.sections.upload.drop-message": "Déposer des fichiers pour les lier à l'Item",
+  
   
   // "submission.sections.upload.edit.title": "Edit bitstream",
   // TODO New key - Add a translation
   "submission.sections.upload.edit.title": "Edit bitstream",
+  
   
   // "submission.sections.upload.form.access-condition-label": "Access condition type",
   "submission.sections.upload.form.access-condition-label": "Niveau d'accès",
@@ -12294,53 +12423,66 @@
   // TODO New key - Add a translation
   "subscriptions.title": "Subscriptions",
   
+  
   // "subscriptions.item": "Subscriptions for items",
   // TODO New key - Add a translation
   "subscriptions.item": "Subscriptions for items",
+  
   
   // "subscriptions.collection": "Subscriptions for collections",
   // TODO New key - Add a translation
   "subscriptions.collection": "Subscriptions for collections",
   
+  
   // "subscriptions.community": "Subscriptions for communities",
   // TODO New key - Add a translation
   "subscriptions.community": "Subscriptions for communities",
+  
   
   // "subscriptions.subscription_type": "Subscription type",
   // TODO New key - Add a translation
   "subscriptions.subscription_type": "Subscription type",
   
+  
   // "subscriptions.frequency": "Subscription frequency",
   // TODO New key - Add a translation
   "subscriptions.frequency": "Subscription frequency",
+  
   
   // "subscriptions.frequency.D": "Daily",
   // TODO New key - Add a translation
   "subscriptions.frequency.D": "Daily",
   
+  
   // "subscriptions.frequency.M": "Monthly",
   // TODO New key - Add a translation
   "subscriptions.frequency.M": "Monthly",
+  
   
   // "subscriptions.frequency.W": "Weekly",
   // TODO New key - Add a translation
   "subscriptions.frequency.W": "Weekly",
   
+  
   // "subscriptions.table.dso": "Subject",
   // TODO New key - Add a translation
   "subscriptions.table.dso": "Subject",
+  
   
   // "subscriptions.table.subscription_type": "Subscription Type",
   // TODO New key - Add a translation
   "subscriptions.table.subscription_type": "Subscription Type",
   
+  
   // "subscriptions.table.subscription_frequency": "Subscription Frequency",
   // TODO New key - Add a translation
   "subscriptions.table.subscription_frequency": "Subscription Frequency",
   
+  
   // "subscriptions.table.action": "Action",
   // TODO New key - Add a translation
   "subscriptions.table.action": "Action",
+  
   
   // "subscriptions.table.empty.message": "You have not subscribed any notification yet. To subscribe notification about an object please use the contextual menu in the object detail view",
   // TODO New key - Add a translation
@@ -12356,34 +12498,40 @@
   // TODO New key - Add a translation
   "thumbnail.default.alt": "Thumbnail Image",
   
+  
   // "thumbnail.default.placeholder": "No Thumbnail Available",
   // TODO New key - Add a translation
   "thumbnail.default.placeholder": "No Thumbnail Available",
+  
   
   // "thumbnail.project.alt": "Project Logo",
   // TODO New key - Add a translation
   "thumbnail.project.alt": "Project Logo",
   
+  
   // "thumbnail.project.placeholder": "Project Placeholder Image",
   // TODO New key - Add a translation
   "thumbnail.project.placeholder": "Project Placeholder Image",
+  
   
   // "thumbnail.orgunit.alt": "OrgUnit Logo",
   // TODO New key - Add a translation
   "thumbnail.orgunit.alt": "OrgUnit Logo",
   
+  
   // "thumbnail.orgunit.placeholder": "OrgUnit Placeholder Image",
   // TODO New key - Add a translation
   "thumbnail.orgunit.placeholder": "OrgUnit Placeholder Image",
+  
   
   // "thumbnail.person.alt": "Profile Picture",
   // TODO New key - Add a translation
   "thumbnail.person.alt": "Profile Picture",
   
+  
   // "thumbnail.person.placeholder": "No Profile Picture Available",
   // TODO New key - Add a translation
   "thumbnail.person.placeholder": "No Profile Picture Available",
-  
   
   
   // "title": "DSpace Cris",
@@ -12542,6 +12690,7 @@
   // TODO New key - Add a translation
   "uploader.delete.btn-title": "Delete",
   
+  
   // "uploader.or": ", or",
   // TODO Source message changed - Revise the translation
   "uploader.or": ", ou ",
@@ -12580,9 +12729,6 @@
   // TODO New key - Add a translation
   "workflow-item.edit.title": "Edit workflowitem",
   
-  // "workflow-item.edit.title": "View workflowitem",
-  // TODO New key - Add a translation
-  "workflow-item.edit.title": "View workflowitem",
   
   // "workflow-item.delete.notification.success.title": "Deleted",
   "workflow-item.delete.notification.success.title": "Supprimé",
@@ -12648,6 +12794,7 @@
   // TODO Source message changed - Revise the translation
   "workflow-item.send-back.button.confirm": "Renvoyer"
   
+  
   // "workflow-item.view.breadcrumbs": "Workflow View",
   // TODO New key - Add a translation
   "workflow-item.view.breadcrumbs": "Workflow View",
@@ -12657,17 +12804,21 @@
   // TODO New key - Add a translation
   "idle-modal.header": "Session will expire soon",
   
+  
   // "idle-modal.info": "For security reasons, user sessions expire after {{ timeToExpire }} minutes of inactivity. Your session will expire soon. Would you like to extend it or log out?",
   // TODO New key - Add a translation
   "idle-modal.info": "For security reasons, user sessions expire after {{ timeToExpire }} minutes of inactivity. Your session will expire soon. Would you like to extend it or log out?",
+  
   
   // "idle-modal.log-out": "Log out",
   // TODO New key - Add a translation
   "idle-modal.log-out": "Log out",
   
+  
   // "idle-modal.extend-session": "Extend session",
   // TODO New key - Add a translation
   "idle-modal.extend-session": "Extend session",
+  
   
   // "relation.rp.researchoutputs.search.results.head": "Related Publications",
   // TODO New key - Add a translation
@@ -12714,9 +12865,9 @@
   "working-plan.chart.button.remove": "Unlink item",
   
   
-  // "working-plan.chart.button.edit": "Edit",
+  // "working-plan.chart.button.edit": "Edit item",
   // TODO New key - Add a translation
-  "working-plan.chart.button.edit": "Edit",
+  "working-plan.chart.button.edit": "Edit item",
   
   
   // "working-plan.chart.column.dates": "Dates",
@@ -12779,9 +12930,9 @@
   "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
   
   
-  // "working-plan.chart.column.responsible": "Responsible project partner(s)",
+  // "working-plan.chart.column.responsible": "Responsible project partner",
   // TODO New key - Add a translation
-  "working-plan.chart.column.responsible": "Responsible project partner(s)",
+  "working-plan.chart.column.responsible": "Responsible project partner",
   
   
   // "working-plan.chart.column.sortBy": "Sort by…",
@@ -12859,9 +13010,9 @@
   "working-plan.chart.move.up.btn": "Move up",
   
   
-  // "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class=\\\"fas fa-plus-circle\\\"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class=\"fas fa-plus-circle\"></i> button in the work package to assign new or existing work.</p></b></i>",
+  // "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class=\"fas fa-plus-circle\"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class=\"fas fa-plus-circle\"></i> button in the work package to assign new or existing work.</p></b></i>\",",
   // TODO New key - Add a translation
-  "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class=\\\"fas fa-plus-circle\\\"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class=\"fas fa-plus-circle\"></i> button in the work package to assign new or existing work.</p></b></i>",
+  "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class=\"fas fa-plus-circle\"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class=\"fas fa-plus-circle\"></i> button in the work package to assign new or existing work.</p></b></i>\",",
   
   
   // "working-plan.page.title": "Working plan",
@@ -12877,6 +13028,11 @@
   // "working-plan.chart.toggle.expand.btn": "Expand",
   // TODO New key - Add a translation
   "working-plan.chart.toggle.expand.btn": "Expand",
+  
+  
+  // "working-plan.chart.toolbar.add-btn": "Add item",
+  // TODO New key - Add a translation
+  "working-plan.chart.toolbar.add-btn": "Add item",
   
   
   // "working-plan.chart.toolbar.date-view.month": "Month",
@@ -12924,11 +13080,6 @@
   "working-plan.chart.toolbar.versions": "Versions",
   
   
-  // "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
-  // TODO New key - Add a translation
-  "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
-  
-  
   // "working-plan.task.search.header": "",
   // TODO New key - Add a translation
   "working-plan.task.search.header": "",
@@ -12957,11 +13108,6 @@
   // "cooperation_partner.listelement.badge": "Cooperation partners",
   // TODO New key - Add a translation
   "cooperation_partner.listelement.badge": "Cooperation partners",
-  
-  
-  // "event.listelement.badge": "Event",
-  // TODO New key - Add a translation
-  "event.listelement.badge": "Event",
   
   
   // "ethic.listelement.badge": "Ethical reflection",
@@ -13624,6 +13770,11 @@
   "help-page.content.project": "<a href=\"http://synsicris.disy.net/project/project.html\">Project</a>",
   
   
+  // "exploitationplanstep.listelement.badge": "Exploitation Plan step",
+  // TODO New key - Add a translation
+  "exploitationplanstep.listelement.badge": "Exploitation Plan step",
+  
+  
   // "simple-item-modal.create.btn": "Create new",
   // TODO New key - Add a translation
   "simple-item-modal.create.btn": "Create new",
@@ -13779,9 +13930,264 @@
   "search.filters.entityType.team": "Team member",
   
   
-  // "search.filters.entityType.head": "Item Type"
+  // "search.filters.entityType.head": "Item Type",
   // TODO New key - Add a translation
-  "search.filters.entityType.head": "Item Type"
+  "search.filters.entityType.head": "Item Type",
+  
+  
+  // "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentproject": "Keywords",
+  // TODO New key - Add a translation
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentproject": "Keywords",
+  
+  
+  // "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
+  // TODO New key - Add a translation
+  "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
+  
+  
+  // "researcher.profile.edit": "Edit",
+  // TODO New key - Add a translation
+  "researcher.profile.edit": "Edit",
+  
+  
+  // "register-page.create-profile.identification.header.info": "Please enter your data.",
+  // TODO New key - Add a translation
+  "register-page.create-profile.identification.header.info": "Please enter your data.",
+  
+  
+  // "register-page.create-profile.security.header.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  // TODO New key - Add a translation
+  "register-page.create-profile.security.header.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  
+  
+  // "profile.card.security.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  // TODO New key - Add a translation
+  "profile.card.security.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  
+  
+  // "layout.tab.header.subproject": "Subproject",
+  // TODO New key - Add a translation
+  "layout.tab.header.subproject": "Subproject",
+  
+  
+  // "layout.tab.header.Funding": "Fundings",
+  // TODO New key - Add a translation
+  "layout.tab.header.Funding": "Fundings",
+  
+  
+  // "layout.tab.header.projectpartner": "Project partners",
+  // TODO New key - Add a translation
+  "layout.tab.header.projectpartner": "Project partners",
+  
+  
+  // "layout.tab.header.subcontractor": "Subcontractors",
+  // TODO New key - Add a translation
+  "layout.tab.header.subcontractor": "Subcontractors",
+  
+  
+  // "layout.tab.header.exploitationplans": "Exploitation plan",
+  // TODO New key - Add a translation
+  "layout.tab.header.exploitationplans": "Exploitation plan",
+  
+  
+  // "layout.tab.header.default": "Joint project",
+  // TODO New key - Add a translation
+  "layout.tab.header.default": "Joint project",
+  
+  
+  // "layout.tab.header.Subprojects & Involved": "Subprojects & Involved",
+  // TODO New key - Add a translation
+  "layout.tab.header.Subprojects & Involved": "Subprojects & Involved",
+  
+  
+  // "layout.tab.header.Subprojects & Involved::proj&partners": "Subprojects & Project partners",
+  // TODO New key - Add a translation
+  "layout.tab.header.Subprojects & Involved::proj&partners": "Subprojects & Project partners",
+  
+  
+  // "layout.tab.header.Subprojects & Involved::subcontractors": "Subcontractors",
+  // TODO New key - Add a translation
+  "layout.tab.header.Subprojects & Involved::subcontractors": "Subcontractors",
+  
+  
+  // "layout.tab.header.Subprojects & Involved::cooperationpartners": "Cooperation partners",
+  // TODO New key - Add a translation
+  "layout.tab.header.Subprojects & Involved::cooperationpartners": "Cooperation partners",
+  
+  
+  // "layout.tab.header.Subprojects & Involved::stakeholder": "Stakeholder groups",
+  // TODO New key - Add a translation
+  "layout.tab.header.Subprojects & Involved::stakeholder": "Stakeholder groups",
+  
+  
+  // "layout.tab.header.Structure": "Structure",
+  // TODO New key - Add a translation
+  "layout.tab.header.Structure": "Structure",
+  
+  
+  // "layout.tab.header.Structure::impactpathway": "Impact Pathway",
+  // TODO New key - Add a translation
+  "layout.tab.header.Structure::impactpathway": "Impact Pathway",
+  
+  
+  // "layout.tab.header.Structure::workingplan": "Workingplan",
+  // TODO New key - Add a translation
+  "layout.tab.header.Structure::workingplan": "Workingplan",
+  
+  
+  // "layout.tab.header.Reflections": "Reflections",
+  // TODO New key - Add a translation
+  "layout.tab.header.Reflections": "Reflections",
+  
+  
+  // "layout.tab.header.Reflections::ethic": "Ethical reflection",
+  // TODO New key - Add a translation
+  "layout.tab.header.Reflections::ethic": "Ethical reflection",
+  
+  
+  // "layout.tab.header.Reflections::gender": "Gender reflection",
+  // TODO New key - Add a translation
+  "layout.tab.header.Reflections::gender": "Gender reflection",
+  
+  
+  // "layout.tab.header.Background": "Background",
+  // TODO New key - Add a translation
+  "layout.tab.header.Background": "Background",
+  
+  
+  // "layout.tab.header.Background::condition": "External conditions",
+  // TODO New key - Add a translation
+  "layout.tab.header.Background::condition": "External conditions",
+  
+  
+  // "layout.tab.header.Background:knowledge": "State of knowledge / problem definition",
+  // TODO New key - Add a translation
+  "layout.tab.header.Background:knowledge": "State of knowledge / problem definition",
+  
+  
+  // "layout.tab.header.Project objectives": "Project objectives",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project objectives": "Project objectives",
+  
+  
+  // "layout.tab.header.Project objectives::research_objective": "Research and development objectives",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project objectives::research_objective": "Research and development objectives",
+  
+  
+  // "layout.tab.header.Project objectives::ia_objective": "Targets for interaction and transfer",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project objectives::ia_objective": "Targets for interaction and transfer",
+  
+  
+  // "layout.tab.header.Project works": "Project works",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project works": "Project works",
+  
+  
+  // "layout.tab.header.Project works::workpackage": "Work packages",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project works::workpackage": "Work packages",
+  
+  
+  // "layout.tab.header.Project works::task": "Tasks",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project works::task": "Tasks",
+  
+  
+  // "layout.tab.header.Project works::process_event": "Cooperations / Participations / Exchange processes",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project works::process_event": "Cooperations / Participations / Exchange processes",
+  
+  
+  // "layout.tab.header.Project works::events": "Events",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project works::events": "Events",
+  
+  
+  // "layout.tab.header.Project works::plan_publication": "Planned publications",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project works::plan_publication": "Planned publications",
+  
+  
+  // "layout.tab.header.Project results": "Project results",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project results": "Project results",
+  
+  
+  // "layout.tab.header.Project Results::publication": "Publications",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project Results::publication": "Publications",
+  
+  
+  // "layout.tab.header.Project Results::physical_object": "Objects / materials",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project Results::physical_object": "Objects / materials",
+  
+  
+  // "layout.tab.header.Project Results::product": "Research data",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project Results::product": "Research data",
+  
+  
+  // "layout.tab.header.Project Results::result": "Research results",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project Results::result": "Research results",
+  
+  
+  // "layout.tab.header.Project Results::unexpected_result": "(Intermediate) results / problems",
+  // TODO New key - Add a translation
+  "layout.tab.header.Project Results::unexpected_result": "(Intermediate) results / problems",
+  
+  
+  // "layout.tab.header.outcomes": "Outcomes",
+  // TODO New key - Add a translation
+  "layout.tab.header.outcomes": "Outcomes",
+  
+  
+  // "layout.tab.header.outcomes::patent": "Patents / utility patents",
+  // TODO New key - Add a translation
+  "layout.tab.header.outcomes::patent": "Patents / utility patents",
+  
+  
+  // "layout.tab.header.outcomes::innovation_potential": "Possible solutions / changes / innovations",
+  // TODO New key - Add a translation
+  "layout.tab.header.outcomes::innovation_potential": "Possible solutions / changes / innovations",
+  
+  
+  // "layout.tab.header.outcomes::idea": "Ideas for the use of project results",
+  // TODO New key - Add a translation
+  "layout.tab.header.outcomes::idea": "Ideas for the use of project results",
+  
+  
+  // "layout.tab.header.outcomes::step": "Works and cooperations after project end",
+  // TODO New key - Add a translation
+  "layout.tab.header.outcomes::step": "Works and cooperations after project end",
+  
+  
+  // "layout.tab.header.outcomes::application": "Applications of a solution / change / innovation",
+  // TODO New key - Add a translation
+  "layout.tab.header.outcomes::application": "Applications of a solution / change / innovation",
+  
+  
+  // "layout.tab.header.outcomes::spinoff": "Spin-offs",
+  // TODO New key - Add a translation
+  "layout.tab.header.outcomes::spinoff": "Spin-offs",
+  
+  
+  // "layout.tab.header.outcomes::award": "Awards",
+  // TODO New key - Add a translation
+  "layout.tab.header.outcomes::award": "Awards",
+  
+  
+  // "layout.tab.header.outcomes::pot_societalimpact": "Expected societal impacts",
+  // TODO New key - Add a translation
+  "layout.tab.header.outcomes::pot_societalimpact": "Expected societal impacts",
+  
+  
+  // "layout.tab.header.other": "Others"
+  // TODO New key - Add a translation
+  "layout.tab.header.other": "Others"
   
   
 
