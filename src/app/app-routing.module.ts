@@ -14,10 +14,10 @@ import {
   FORGOT_PASSWORD_PATH,
   HELP_PAGE_PATH,
   INFO_MODULE_PATH,
+  LEGACY_BITSTREAM_MODULE_PATH,
   PROFILE_MODULE_PATH,
   REGISTER_PATH,
   WORKFLOW_ITEM_MODULE_PATH,
-  LEGACY_BITSTREAM_MODULE_PATH,
 } from './app-routing-paths';
 import { COLLECTION_MODULE_PATH } from './collection-page/collection-page-routing-paths';
 import { COMMUNITY_MODULE_PATH } from './community-page/community-page-routing-paths';
@@ -30,6 +30,7 @@ import { ThemedPageNotFoundComponent } from './pagenotfound/themed-pagenotfound.
 import { ThemedForbiddenComponent } from './forbidden/themed-forbidden.component';
 import { GroupAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/group-administrator.guard';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
+import { ValidTokenGuard } from './invitation/valid-token.guard';
 
 @NgModule({
   imports: [
@@ -246,6 +247,11 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
               .then((m) => m.HelpPageModule),
             canActivate: [AuthenticatedGuard]
           },
+          {
+            path: 'invitation',
+            loadChildren: () => import('./invitation/invitation-routing/invitation-routing.module')
+              .then((m) => m.InvitationRoutingModule),
+            canActivate: [AuthenticatedGuard, ValidTokenGuard]},
           { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
       ]}
     ],{

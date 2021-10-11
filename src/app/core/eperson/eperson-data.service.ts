@@ -10,7 +10,7 @@ import {
 } from '../../access-control/epeople-registry/epeople-registry.actions';
 import { EPeopleRegistryState } from '../../access-control/epeople-registry/epeople-registry.reducers';
 import { AppState } from '../../app.reducer';
-import { hasValue, hasNoValue } from '../../shared/empty.util';
+import { hasNoValue, hasValue } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { dataService } from '../cache/builders/build-decorators';
@@ -19,12 +19,12 @@ import { RequestParam } from '../cache/models/request-param.model';
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { DataService } from '../data/data.service';
 import { DSOChangeAnalyzer } from '../data/dso-change-analyzer.service';
-import { PaginatedList, buildPaginatedList } from '../data/paginated-list.model';
+import { buildPaginatedList, PaginatedList } from '../data/paginated-list.model';
 import { RemoteData } from '../data/remote-data';
 import { FindListOptions, PatchRequest, PostRequest, } from '../data/request.models';
 import { RequestService } from '../data/request.service';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
-import { getRemoteDataPayload, getFirstSucceededRemoteData, } from '../shared/operators';
+import { getFirstSucceededRemoteData, getRemoteDataPayload, } from '../shared/operators';
 import { EPerson } from './models/eperson.model';
 import { EPERSON } from './models/eperson.resource-type';
 import { NoContent } from '../shared/NoContent.model';
@@ -299,7 +299,24 @@ export class EPersonDataService extends DataService<EPerson> {
     return this.rdbService.buildFromRequestUUID(requestId);
 
   }
+  /**
+   * Create a new EPerson using a token
+   * @param epersonId
+   * @param token
+   */
+  public acceptInvitationToJoinGroups(epersonId: string, token: string): Observable<RemoteData<EPerson>> {
+    const requestId = this.requestService.generateRequestId();
+    const hrefObs = this.getBrowseEndpoint().pipe(
+      map((href: string) => `${href}/${epersonId}/groups?token=${token}`));
+    hrefObs.pipe(
+      find((href: string) => hasValue(href)),
+    ).subscribe((href: string) => {
+      const request = new PostRequest(requestId, href);
+      this.requestService.send(request);
+    });
+    return this.rdbService.buildFromRequestUUID(requestId);
 
+  }
   /**
    * Sends a patch request to update an epersons password based on a forgot password token
    * @param uuid      Uuid of the eperson
