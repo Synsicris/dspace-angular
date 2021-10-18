@@ -5471,6 +5471,7 @@
 
   "profile.head": "Update Profile",
 
+  "profile.main.info": "profile.main.info",
 
   "profile.metadata.form.error.firstname.required": "First Name is required",
 
@@ -5491,6 +5492,8 @@
 
 
   "profile.metadata.form.label.phone": "Contact Telephone",
+
+  "profile.metadata.form.info": "rofile.metadata.form.info",
 
 
   "profile.metadata.form.notifications.success.content": "Your changes to the profile were saved.",

@@ -1,4 +1,5 @@
 <div *ngVar="(researcherProfile$ | async) as researcherProfile">
+  <ds-alert class="mb-4" [type]="'alert-info'">{{'profile.main.info' | translate}}</ds-alert>
   <div *ngIf="researcherProfile">
     <p>{{'researcher.profile.associated' | translate}}</p>
     <p>{{'researcher.profile.status' | translate}}
