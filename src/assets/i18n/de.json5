@@ -1746,7 +1746,7 @@
   "collection.page.browse.recent.head": "Neueste Veröffentlichungen",
 
   // "collection.page.browse.recent.empty": "No items to show",
-  "collection.page.browse.recent.empty": "Es gibt keine Ressourcen zum Anzeigen",
+  "collection.page.browse.recent.empty": "Es sind keine Einträge vorhanden",
 
   // "collection.page.edit": "Edit this collection",
   // TODO New key - Add a translation
@@ -2064,7 +2064,7 @@
 
   // "context-menu.actions.generate-report.btn": "Generate project report",
   // TODO New key - Add a translation
-  "context-menu.actions.generate-report.btn": "Generate project report",
+  "context-menu.actions.generate-report.btn": "Projektbericht erstellen",
 
   // "context-menu.actions.generate-report.success": "The project report has been generated successfully.",
   // TODO New key - Add a translation
@@ -2076,7 +2076,7 @@
 
   // "context-menu.actions.btn": "Select an action",
   // TODO New key - Add a translation
-  "context-menu.actions.btn": "Select an action",
+  "context-menu.actions.btn": "Aktion auswählen",
 
   // "context-menu.actions.label": "Options",
   // TODO New key - Add a translation
@@ -2084,27 +2084,27 @@
 
   // "context-menu.actions.easy-online-import.btn": "Import from Easy-Online",
   // TODO New key - Add a translation
-  "context-menu.actions.easy-online-import.btn": "Import from Easy-Online",
+  "context-menu.actions.easy-online-import.btn": "easy-Online Import durchführen",
 
   // "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
   // TODO New key - Add a translation
-  "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
+  "context-menu.actions.edit-item.btn.FULL": "Alle Angaben bearbeiten",
 
   // "context-menu.actions.edit-item.btn.OWNER": "Edit",
   // TODO New key - Add a translation
-  "context-menu.actions.edit-item.btn.OWNER": "Edit",
+  "context-menu.actions.edit-item.btn.OWNER": "Bearbeiten",
 
   // "context-menu.actions.edit-item.btn.CUSTOM": "Edit",
   // TODO New key - Add a translation
-  "context-menu.actions.edit-item.btn.CUSTOM": "Edit",
+  "context-menu.actions.edit-item.btn.CUSTOM": "Bearbeiten",
 
   // "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
   // TODO New key - Add a translation
-  "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
+  "context-menu.actions.edit-item.btn.DIRECTOR": "Bearbeiten",
 
   // "context-menu.actions.edit-item.btn.INVESTIGATOR": "Edit",
   // TODO New key - Add a translation
-  "context-menu.actions.edit-item.btn.INVESTIGATOR": "Edit",
+  "context-menu.actions.edit-item.btn.INVESTIGATOR": "Bearbeiten",
 
   // "context-menu.actions.request-correction.btn": "Request a correction",
   // TODO New key - Add a translation
@@ -2698,10 +2698,10 @@
 
   // "event.listelement.badge" : "Event",
   // TODO New key - Add a translation
-  "event.listelement.badge": "Event",
+  "event.listelement.badge": "Veranstaltung",
 
   // "exploitation-plan.info.text": "Info text for the exploitation Plan",
-  "exploitation-plan.info.text": "<p><b><i>Nehmen Sie zu den folgenden vier Aspekten der Verwertungsplanung Stellung, indem Sie a) über [+] die dazu passenden vorhandenen Einträge zuordnen oder neue Einträge anlegen,  b) im Textfeld kurz die Zusammenhänge zwischen den zusammengestellten Einträgen erläutern und einen realistischen Zeithorizont für die Umsetzung ergänzen.</br>  Falls notwendig, können Sie Inhalte ergänzen, die durch die Einträge nicht abgedeckt sind.</p></b></i> <b><p>Worum es hier geht:</b></br><ul> <li> Verwertung ist die Nutzung der Projektergebnisse für Ihre eigenen Zwecke. Hierfür legt <b>jedes Teilprojekt</b> einen <b>eigenen Verwertungsplan</b> an.</li>  <li> Im <b>Antrag</b> geben Sie an, <b>wie die angestrebten Ergebnisse und Erkenntnisse zukünftig (nach Projektende) verwertet werden können</b>. Der Verwertungsplan ist ein wichtiges Kriterium für die Förderentscheidung, u. a. wird damit der Bezug des Vorhabens zu den förderpolitischen Zielen geprüft.</li> <li> Im <b>Projektverlauf</b> sind Sie verpflichtet, den Verwertungsplan <b>jährlich zu aktualisieren</b>.</li>  <li> Zum Projektende wird der Verwertungsplan festgeschrieben, d. h. die Verwertungsrechte und -pflichten werden verbindlich.</li><br><li> Durch die Verwertungsplanung erhalten Sie das Recht zur uneingeschränkten Nutzung der Projektergebnisse, haben aber auch die Pflicht zur Verwertung. Wenn Sie diese Verwertungspflicht nicht erfüllen, kann Ihnen das Verwertungsrecht vom Förderer auch wieder entzogen werden.</li>  <li> Den <b>Nachweis der Verwertung</b> erbringen Sie, nach Maßgabe des Förderers, in der <b>Regel 2 Jahre nach Projektende</b>.</li></ul></p> <b><p>Wichtige Hinweise:</b></br><ul> <li> Prüfen Sie, ob in den Einträgen alle Details vollständig sind. Wiederholen Sie diese Details nicht im Textfeld.</li> <li> Berücksichtigen Sie, dass die <b>Einträge</b>, die im Verbundprojekt angelegt wurden, von <b>jedem Teilprojekt in der Verwertungsplanung verwendet</b> werden können. Stimmen Sie sich bei Änderungen in den Einträgen ggf. ab. Wenn Sie Informationen ergänzen möchten, die nur für Ihren Verwertungsplan zutreffen oder die Sie nicht mit den anderen Teilprojekten teilen möchten, legen Sie dafür neue (nur von Ihrem Teilprojekt editierbare) Einträge an oder ergänzen Sie diese Informationen im Textfeld.</li> <li> Die Verwertungsplanung ist <b>jedes Jahr fortzuschreiben</b> und anhand der im Projekt gewonnenen Erkenntnisse anzupassen und zu präzisieren. Jede Verwertungsplanung, die Sie dem Förderer zukommen lassen, wird archiviert, sodass Angaben aus vorangegangenen Jahren abrufbar sind.</li>  <li> Für den Antrag konkretisieren Sie die Verwertungsplanung aus der Projektskizze.</li> <li> Im Projektverlauf sollte die Verwertungsplanung immer detaillierter und präziser werden.</li> </ul> <b><p>Tipps:</b></br><ul><li> Hinweise des Förderers [Link]</li></ul>",
+  "exploitation-plan.info.text": "<p><b><i>Nehmen Sie zu den folgenden vier Aspekten der Verwertungsplanung Stellung, indem Sie a) über <i class=\"fas fa-plus-circle\"></i> die dazu passenden vorhandenen Einträge zuordnen oder neue Einträge anlegen,  b) im Textfeld kurz die Zusammenhänge zwischen den zusammengestellten Einträgen erläutern und einen realistischen Zeithorizont für die Umsetzung ergänzen.</br>  Falls notwendig, können Sie Inhalte ergänzen, die durch die Einträge nicht abgedeckt sind.</p></b></i> <b><p>Worum es hier geht:</b></br><ul> <li> Verwertung ist die Nutzung der Projektergebnisse für Ihre eigenen Zwecke. Hierfür legt <b>jedes Teilprojekt</b> einen <b>eigenen Verwertungsplan</b> an.</li>  <li> Im <b>Antrag</b> geben Sie an, <b>wie die angestrebten Ergebnisse und Erkenntnisse zukünftig (nach Projektende) verwertet werden können</b>. Der Verwertungsplan ist ein wichtiges Kriterium für die Förderentscheidung, u. a. wird damit der Bezug des Vorhabens zu den förderpolitischen Zielen geprüft.</li> <li> Im <b>Projektverlauf</b> sind Sie verpflichtet, den Verwertungsplan <b>jährlich zu aktualisieren</b>.</li>  <li> Zum Projektende wird der Verwertungsplan festgeschrieben, d. h. die Verwertungsrechte und -pflichten werden verbindlich.</li><br><li> Durch die Verwertungsplanung erhalten Sie das Recht zur uneingeschränkten Nutzung der Projektergebnisse, haben aber auch die Pflicht zur Verwertung. Wenn Sie diese Verwertungspflicht nicht erfüllen, kann Ihnen das Verwertungsrecht vom Förderer auch wieder entzogen werden.</li>  <li> Den <b>Nachweis der Verwertung</b> erbringen Sie, nach Maßgabe des Förderers, in der <b>Regel 2 Jahre nach Projektende</b>.</li></ul></p> <b><p>Wichtige Hinweise:</b></br><ul> <li> Prüfen Sie, ob in den Einträgen alle Details vollständig sind. Wiederholen Sie diese Details nicht im Textfeld.</li> <li> Berücksichtigen Sie, dass die <b>Einträge</b>, die im Verbundprojekt angelegt wurden, von <b>jedem Teilprojekt in der Verwertungsplanung verwendet</b> werden können. Stimmen Sie sich bei Änderungen in den Einträgen ggf. ab. Wenn Sie Informationen ergänzen möchten, die nur für Ihren Verwertungsplan zutreffen oder die Sie nicht mit den anderen Teilprojekten teilen möchten, legen Sie dafür neue (nur von Ihrem Teilprojekt editierbare) Einträge an oder ergänzen Sie diese Informationen im Textfeld.</li> <li> Die Verwertungsplanung ist <b>jedes Jahr fortzuschreiben</b> und anhand der im Projekt gewonnenen Erkenntnisse anzupassen und zu präzisieren. Jede Verwertungsplanung, die Sie dem Förderer zukommen lassen, wird archiviert, sodass Angaben aus vorangegangenen Jahren abrufbar sind.</li>  <li> Für den Antrag konkretisieren Sie die Verwertungsplanung aus der Projektskizze.</li> <li> Im Projektverlauf sollte die Verwertungsplanung immer detaillierter und präziser werden.</li> </ul> <b><p>Tipps:</b></br><ul><li> Hinweise des Förderers [Link]</li></ul>",
 
   // "exploitation-plan.page.title": "Exploitation Plan",
   "exploitation-plan.page.title": "Verwertungsplan",
@@ -2713,10 +2713,10 @@
   "exploitation-plan.step_type_1.info.text": "<p><b><i>Geben Sie an, ob die angestrebten Ergebnisse als Erfindung mit Schutzrechten (Patent, Gebrauchsmuster) geschützt werden sollen oder bereits geschützt wurden.</p></b></i> <p><b>Bereiche:</b></br> <ul><li>Nutzen Sie hierfür den Bereich <b>Patent oder Gebrauchsmuster</b>.</li><li>Lizenzeinnahmen oder Erlöse aus dem Verkauf von Patenten können im Bereich <b>Anwendung</b> erfasst werden.</li></ul></p>",
 
   // "exploitation-plan.step_type_2.info.text": "Info text for section 2",
-  "exploitation-plan.step_type_2.info.text": "<p><b><i>Beschreiben Sie, welches Ergebnis nach Projektende in welche wirtschaftlich nutzbaren Produkte, Verfahren oder Dienstleistungen umgesetzt werden soll.</p></b></i> <b><p>Bereiche:</b></br><br>Berücksichtigen Sie für diese Angaben die passenden Einträge, z. B. aus den folgenden Bereichen: <ul><li>Forschungsergebnis</li> <li>Idee für eine Nutzung von Projektergebnissen</li> <li>Mögliche Lösung / Veränderung / Innovation</li> <li>Anwendung</li> <li>Ausgründung</li> <li>Arbeiten und Kooperation nach Projektende</li></ul> <b><p>Wichtige Hinweise:</b></br> <ul><li>Konkretisieren Sie, von wem, bis wann, auf welche Art und Weise (z. B. als weitere Forschung und Entwicklung (FuE), Fertigungsaufbau, sonstige Investitionen, oder Personalaufstockung) und zu welchen Kosten diese Umsetzung bewerkstelligt und finanziert werden soll (Gut erfassbar in <b>Arbeiten und Kooperation nach Projektende</b>). <li>Beschreiben Sie unter <b>Angabe eines Zeithorizontes</b>, welcher wirtschaftliche Nutzen oder Erfolg durch die geplante Umsetzung erzielt werden kann, z. B. durch:</ul> <ol> o die Schaffung bzw. Erschließung neuer oder die Sicherung bestehender Märkte</br> o die Stärkung im Wettbewerb durch Wissensvorsprung</br> o die Reduktion von Entwicklungsrisiken oder Produktionskosten</br> o die Schaffung oder Sicherung von Arbeitsplätzen</br> o die Ertrags- und Umsatzsteigerung usw.</ol> <ul><li>Je nach Ausrichtung ist es erforderlich, <b>Angaben zum angestrebten Marktsegment, -potential und -zugang</b>, zu den <b>relevanten Umsatz- und Stückzahlen</b>, zu den <b>Vermarktungsmöglichkeiten</b> oder zur geplanten <b>Markteinführung</b> zu machen, (Gut zu erfassbar in <b>Mögliche Lösung / Veränderung / Innovation</b>).</ul><li>",
+  "exploitation-plan.step_type_2.info.text": "<p><b><i>Beschreiben Sie, welches Ergebnis nach Projektende in welche wirtschaftlich nutzbaren Produkte, Verfahren oder Dienstleistungen umgesetzt werden soll.</p></b></i> <b><p>Bereiche:</b></br><br>Berücksichtigen Sie für diese Angaben die passenden Einträge, z. B. aus den folgenden Bereichen: <ul><li>Forschungsergebnis</li> <li>Idee für eine Nutzung von Projektergebnissen</li> <li>Mögliche Lösung / Veränderung / Innovation</li> <li>Anwendung</li> <li>Ausgründung</li> <li>Arbeiten und Kooperation nach Projektende</li></ul> <b><p>Wichtige Hinweise:</b></br> <ul><li>Konkretisieren Sie, von wem, bis wann, auf welche Art und Weise (z. B. als weitere Forschung und Entwicklung (FuE), Fertigungsaufbau, sonstige Investitionen, oder Personalaufstockung) und zu welchen Kosten diese Umsetzung bewerkstelligt und finanziert werden soll (Gut erfassbar in <b>Arbeiten und Kooperation nach Projektende</b>). <li>Beschreiben Sie unter <b>Angabe eines Zeithorizontes</b>, welcher wirtschaftliche Nutzen oder Erfolg durch die geplante Umsetzung erzielt werden kann, z. B. durch:</ul> <ol> o die Schaffung bzw. Erschließung neuer oder die Sicherung bestehender Märkte</br> o die Stärkung im Wettbewerb durch Wissensvorsprung</br> o die Reduktion von Entwicklungsrisiken oder Produktionskosten</br> o die Schaffung oder Sicherung von Arbeitsplätzen</br> o die Ertrags- und Umsatzsteigerung usw.</ol> <ul><li>Je nach Ausrichtung ist es erforderlich, <b>Angaben zum angestrebten Marktsegment, -potential und -zugang</b>, zu den <b>relevanten Umsatz- und Stückzahlen</b>, zu den <b>Vermarktungsmöglichkeiten</b> oder zur geplanten <b>Markteinführung</b> zu machen, (Gut zu erfassbar in <b>Mögliche Lösung / Veränderung / Innovation</b>).</ul>",
 
   // "exploitation-plan.step_type_3.info.text": "Info text for section 3",
-  "exploitation-plan.step_type_3.info.text": "<p><b><i>Beschreiben Sie, für welche wissenschaftlichen und/oder technischen Arbeiten die angestrebten Projektergebnisse genutzt werden und wie diese Umsetzung konkret erfolgen soll.</p></b></i> <b><p>Bereiche:</b></br> Berücksichtigen Sie für diese Angaben die passenden Einträge, z. B. aus den folgenden Bereichen:</br> <ul><li>Forschungsergebnis</li> <li>Forschungsdaten</li> <li>Geplante Veröffentlichungen</li> <li>Veröffentlichung</li> <li>Gegenstand/Material</li> <li>Arbeiten und Kooperation nach Projektende</li></ul></p> <b><p>Wichtige Hinweise:</b></br> <ul><li>Beschreiben Sie unter <b>Angabe eines Zeithorizontes</b>, für welche wissenschaftlichen und/oder technischen Aufgaben bzw. Arbeiten die angestrebten Projektergebnisse genutzt werden und wie die Umsetzung konkret erfolgen sollen. <li>Zeigen Sie auf, welche <b>notwendigen Rahmenbedingungen und Strukturen</b> für die geplante Umsetzung zur Verfügung stehen bzw. geschaffen werden sollen. <li><b>Wissenschaftliche Erfolgsaussichten</b> können sein:</li></ul></br> <ol>o die Steigerung der wissenschaftlichen Konkurrenzfähigkeit und Kompetenz</br> o die Nutzung der Ergebnisse für Datenbanken, Netzwerke, Transferstellen etc.</br> o die Erschließung neuer FuE-Gebiete</br> o die Ausbildung von wissenschaftlichem Nachwuchs</br> o andere wissenschaftliche Erfolge</ol></br> <ul><li>Unter <b>technische Erfolgsaussichten</b> ist darzustellen, welche weiteren Arbeiten erforderlich und vorgesehen sind, um die Ergebnisse/Erkenntnisse technisch umzusetzen bzw. zu realisieren.</li></ul>",
+  "exploitation-plan.step_type_3.info.text": "<p><b><i>Beschreiben Sie, für welche wissenschaftlichen und/oder technischen Arbeiten die angestrebten Projektergebnisse genutzt werden und wie diese Umsetzung konkret erfolgen soll.</p></b></i> <b><p>Bereiche:</b></br> Berücksichtigen Sie für diese Angaben die passenden Einträge, z. B. aus den folgenden Bereichen:</br> <ul><li>Forschungsergebnis</li> <li>Forschungsdaten</li> <li>Geplante Veröffentlichungen</li> <li>Veröffentlichung</li> <li>Gegenstand / Material</li> <li>Arbeiten und Kooperation nach Projektende</li></ul></p> <b><p>Wichtige Hinweise:</b></br> <ul><li>Beschreiben Sie unter <b>Angabe eines Zeithorizontes</b>, für welche wissenschaftlichen und/oder technischen Aufgaben bzw. Arbeiten die angestrebten Projektergebnisse genutzt werden und wie die Umsetzung konkret erfolgen sollen. <li>Zeigen Sie auf, welche <b>notwendigen Rahmenbedingungen und Strukturen</b> für die geplante Umsetzung zur Verfügung stehen bzw. geschaffen werden sollen. <li><b>Wissenschaftliche Erfolgsaussichten</b> können sein:</li></ul></br> <ol>o die Steigerung der wissenschaftlichen Konkurrenzfähigkeit und Kompetenz</br> o die Nutzung der Ergebnisse für Datenbanken, Netzwerke, Transferstellen etc.</br> o die Erschließung neuer FuE-Gebiete</br> o die Ausbildung von wissenschaftlichem Nachwuchs</br> o andere wissenschaftliche Erfolge</ol></br> <ul><li>Unter <b>technische Erfolgsaussichten</b> ist darzustellen, welche weiteren Arbeiten erforderlich und vorgesehen sind, um die Ergebnisse/Erkenntnisse technisch umzusetzen bzw. zu realisieren.</li></ul>",
 
   // "exploitation-plan.step_type_4.info.text": "Info text for section 4",
   "exploitation-plan.step_type_4.info.text": "<p><b><i>Beschreiben Sie Umsetzungsmöglichkeiten, die über eine reine Weiter- bzw. Fortführung des Projekts und somit auch über die vorgenannten Aspekte 1 bis 3 hinausgehen.</p></b></i> <b><p>Bereiche:</b></br> Für diese Angaben sind insbesondere die Einträge der Bereiche <b>Arbeiten und Kooperation nach Projektende</b> und <b>Idee für eine Nutzung von Projektergebnissen</b> geeignet.<br><b><p>Wichtige Hinweise:</b></br> <ul><li>Im wissenschaftlichen Bereich stehen hier im Vordergrund:</li></ul> <ol>o die Nutzung der Ergebnisse für die Durchführung weiterer Forschungsprojekte (Formulierung von Projektskizzen bzw. -anträgen)</br> o die Übernahme der Erkenntnisse in Forschung und Lehre</br> o die Vertiefung der Ergebnisse in Abschluss- und Promotionsarbeiten</br> o die Übertragung der Erkenntnisse auf angrenzende Wissensgebiete</ol> <ul><li>Für den wirtschaftlichen Bereich geht es darum, welche zusätzlichen Aktivitäten nach Projektende vorgesehen bzw. erforderlich sind, um die erzielten Ergebnisse gewinnbringend umzusetzen. Hierzu kann z. B. auch die Übertragung der Erkenntnisse in angrenzende Produktionen, Verfahren, Dienstleistungen etc. zählen.</ul></li>",
@@ -3160,19 +3160,19 @@
 
   // "forgot-password.title": "Forgot Password",
   // TODO New key - Add a translation
-  "forgot-password.title": "Forgot Password",
+  "forgot-password.title": "Passwort vergessen",
 
   // "forgot-password.form.head": "Forgot Password",
   // TODO New key - Add a translation
-  "forgot-password.form.head": "Forgot Password",
+  "forgot-password.form.head": "Passwort vergessen",
 
   // "forgot-password.form.info": "Enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
   // TODO New key - Add a translation
-  "forgot-password.form.info": "Enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  "forgot-password.form.info": "Geben Sie bitte ein Passwort in das erste Feld ein und bestätigen Sie es, indem Sie es in das zweite Feld erneut eingeben. Es sollte mindestens sechs Zeichen lang sein.",
 
   // "forgot-password.form.card.security": "Security",
   // TODO New key - Add a translation
-  "forgot-password.form.card.security": "Security",
+  "forgot-password.form.card.security": "Sicherheit",
 
   // "forgot-password.form.identification.header": "Identify",
   // TODO New key - Add a translation
@@ -3180,19 +3180,19 @@
 
   // "forgot-password.form.identification.email": "Email address: ",
   // TODO New key - Add a translation
-  "forgot-password.form.identification.email": "Email address: ",
+  "forgot-password.form.identification.email": "E-Mail",
 
   // "forgot-password.form.label.password": "Password",
   // TODO New key - Add a translation
-  "forgot-password.form.label.password": "Password",
+  "forgot-password.form.label.password": "Passwort",
 
   // "forgot-password.form.label.passwordrepeat": "Retype to confirm",
   // TODO New key - Add a translation
-  "forgot-password.form.label.passwordrepeat": "Retype to confirm",
+  "forgot-password.form.label.passwordrepeat": "Zur Bestätigung erneut eingeben",
 
   // "forgot-password.form.error.empty-password": "Please enter a password in the box below.",
   // TODO New key - Add a translation
-  "forgot-password.form.error.empty-password": "Please enter a password in the box below.",
+  "forgot-password.form.error.empty-password": "Bitte geben Sie in das unten stehende Feld ein Passwort ein.",
 
   // "forgot-password.form.error.matching-passwords": "The passwords do not match.",
   // TODO New key - Add a translation
@@ -3200,23 +3200,23 @@
 
   // "forgot-password.form.error.password-length": "The password should be at least 6 characters long.",
   // TODO New key - Add a translation
-  "forgot-password.form.error.password-length": "The password should be at least 6 characters long.",
+  "forgot-password.form.error.password-length": "Das Passwort sollte mindestens 6 Zeichen lang sein.",
 
   // "forgot-password.form.notification.error.title": "Error when trying to submit new password",
   // TODO New key - Add a translation
-  "forgot-password.form.notification.error.title": "Error when trying to submit new password",
+  "forgot-password.form.notification.error.title": "Fehler beim Versuch, ein neues Passwort zu übermitteln",
 
   // "forgot-password.form.notification.success.content": "The password reset was successful. You have been logged in as the created user.",
   // TODO New key - Add a translation
-  "forgot-password.form.notification.success.content": "The password reset was successful. You have been logged in as the created user.",
+  "forgot-password.form.notification.success.content": "Das Zurücksetzen des Passworts war erfolgreich. Sie wurden als der erstellte Benutzer eingeloggt.",
 
   // "forgot-password.form.notification.success.title": "Password reset completed",
   // TODO New key - Add a translation
-  "forgot-password.form.notification.success.title": "Password reset completed",
+  "forgot-password.form.notification.success.title": "Passwort zurücksetzen abgeschlossen",
 
   // "forgot-password.form.submit": "Submit password",
   // TODO New key - Add a translation
-  "forgot-password.form.submit": "Submit password",
+  "forgot-password.form.submit": "Passwort senden",
 
   // "form.add": "Add more",
   // TODO Source message changed - Revise the translation
@@ -3491,7 +3491,7 @@
 
   // "impact-pathway.edit.title": "Edit Impact Pathway",
   // TODO Source message changed - Revise the translation
-  "impact-pathway.edit.title": "Impact Pathway bearbeiten",
+  "impact-pathway.edit.title": "Bezeichnung und Beschreibung bearbeiten",
 
   // "impact-pathway.remove.title": "Delete Impact Pathway",
   "impact-pathway.remove.title": "Impact Pathway löschen",
@@ -3546,7 +3546,7 @@
   "impact-pathway.task.create.success": "Der neue Eintrag wurde erfolgreich erstellt.",
 
   // "impact-pathway.wrapper.info": "<b>Develop the Impact Pathway of the project</b></br><p>The Impact Pathway supports you in the impact-oriented planning and implementation of the project. Please present the most important objectives, activities and intended impacts of the project in a clear and concise manner by means of key messages. Use arrows to illustrate particularly important and non-linear relationships. While the project is progressing, you can update the Impact Pathway and add any results achieved.</p><p>The columns structure the key messages for impact-oriented planning:</br>In <b>Background</b> important preliminary considerations for the project are presented, such as problem definition, state of knowledge and conditions.</br>The <b>Objectives of research and development</b> describe the scientific/technical work objectives of the project. These objectives can be assigned to work packages and tasks on a second level.</br><b>Interactions with partners and groups of actors. Outputs for dissemination</b> reflect all exchange and transfer activities of the project. In a first step, key messages about the purpose and group of actors of the interactions are formulated. These key messages can be assigned to specific activities on a second level.</br>The intended impacts of the project are structured in two columns:</br>In <b>Application (possibilities)</b> the contributions of the project to the application of the project results are presented.</br><b>Expected societal impacts</b> describe what societal effects are expected when the results of projects are applied.</br>In <b>Contribution to funding programme objectives</b>, the funding programme objectives to which the project contributes are selected.</p><p>In each column, you can use [+] to create unlimited items or search for and select previously created items.</br>Each item has a specific detail page (depending on the section selected) in which further information is usually given. You can switch between the Impact Pathway and the detail page of an item at any time.</br>You can start to create items in any column of the Impact Pathway.</br>Via [Edit] below the columns of the Impact Pathway you can add a description to the overall objectives of the project.</p><p><b>Key questions and tips for developing the Impact Pathway:</b> What impacts do you want to achieve with the project? How would you like to contribute to the development of these impacts?<br>It is recommended, to plan the Impact Pathway for the project in terms of the intended impacts and to develop it together with partners in practice and groups of actors.</br></p>",
-  "impact-pathway.wrapper.info": "<p><b><i>Erstellen Sie hier einen Überblick zu den Hintergründen, Arbeiten und Wirkungen des Projektes, indem Sie beliebig viele Einträge in den jeweiligen Säulen des Impact Pathway anlegen.</p></b></i><b>Worum es hier geht:</b><ul><li>Mit dem Impact Pathway beantworten Sie zwei Fragen: „Welche Wirkungen sollen mit dem Projekt erreicht werden?“ und „Was wird/wurde im Projekt getan, um zur Entwicklung dieser Wirkungen beizutragen?“</li><li>Der Impact Pathway soll leicht verständlich darstellen, um was es in dem Projekt geht.</li> <li>Die <p>6 Säulen</p> gliedern die Einträge vom Hintergrund (Säule 1) über die Arbeiten (Säule 2 und 3) bis zu den Wirkungspotenzialen (Säule 4 und 5). In Säule 6 wählen Sie die förderpolitischen Ziele aus, zu denen das Projekt beiträgt.</li><li>Die <p>Säulen 2 und 3</p> stellen in der <p>ersten Ebene</p> die Ziele von Forschung und Entwicklung (Säule 2) sowie die Ziele von Interaktionen und Transfer (Säule 3) dar. In der <p>zweiten Ebene</p> können Sie die spezifischen Arbeiten hinzufügen, die zu dem Ziel beitragen.</li><li>Wenn Sie einen Eintrag anlegen, wählen Sie einen (passenden) <p>Bereich</p> aus, zu dem der Eintrag gehört (z. B. Rahmenbedingung oder Veranstaltung). Damit legen Sie fest, welche weiteren Informationen auf der <p>Detailseite</p> des Eintrags abgefragt werden.</li> <li>Für die <p>Antragstellung</p> verdeutlichen Sie in den Einträgen insbesondere die Ziele des Projektes. Die Abbildung des Impact Pathway und eine kurze Beschreibung ersetzen in der Vorhabenbeschreibung das Kapitel „Gesamtziele des Projektes“.</li><li>Im <p>Projektverlauf</p> aktualisieren und konkretisieren Sie den Impact Pathway und ergänzen die Ergebnisse.</li><li>Mehr Infos und Beispiele zum Impact Pathway [Link Icon]</ul></li><b>Wichtige Hinweise:</b><ul><li>Sie können in jeder beliebigen Säule des Impact Pathway beginnen.</li><li>Über die <b>Schaltfläche</b> <i class=\"fas fa-plus-circle\"></i> in jeder Säule können Sie beliebig viele Einträge <b>neu anlegen</b> oder <b>bereits Vorhandene</b> auswählen. Dort ist auch beschrieben, welche <b>Bereiche</b> zu der Säule gehören und worin sie sich unterscheiden.</li> <li>Alle Einträge können Sie jederzeit <b>aktualisieren</b>. Über [Listen Icon] öffnen Sie die <b>zweite Ebene</b> der eingetragenen Ziele in Säule 2 und 3. Über [Edit Icon] gelangen Sie auf die <b>Detailseite</b> eines Eintrags Dort finden Sie auch weitere Hinweise.</li><li>Über [Ablösen Icon] können Sie den Eintrag aus dem IPW <b>entfernen</b>, er bleibt jedoch im Projekt erhalten. Löschen können Sie einen Eintrag auf der Detailseite.</li><li>Mit <b>drag&drop</b> können Sie die Reihenfolge der Einträge innerhalb einer Säule verändern.</li><li>Nutzen Sie die <b>Pfeile</b>, wenn Sie Zusammenhänge zwischen Einträgen besonders hervorheben wollen.</li><li>Um die Bezeichnung oder die Beschreibung des Impact Pathway zu ändern, müssen Sie die Felder über [Bearbeiten] aktivieren.</ul></li><b>Tipps:</b><ul><li>Empfehlenswert ist es, den Impact Pathway gemeinsam mit Praxispartnern und Akteursgruppen zu entwickeln und das Projekt von den erwünschten Wirkungen her zu planen.</li><li>Ein erstes Brainstorming zur Wirkungsplanung kann auch sehr gut an einer Pinnwand oder mit Hilfe von Haftnotizen stattfinden.</li><li>Verschaffen Sie sich einen Überblick, indem Sie die Detailseiten der einzelnen Bereiche anschauen.</li><li>Arbeiten Sie im Tool schrittweise:</li> <li>Beginnen Sie mit einer groben Planung und ergänzen Sie erst später die Details (z. B. Arbeiten auf der zweiten Ebene von Säule 2 und 3 oder die Informationen auf den Detailseiten der Einträge).</li> <li>Wählen Sie zuerst Arbeitstitel für die Bezeichnung und passen Sie die Formulierungen schrittweise an, wenn mehr Klarheit zur Wirkungsplanung des Projektes vorliegt.</ul></li>",
+  "impact-pathway.wrapper.info": "<p><b><i>Erstellen Sie hier einen Überblick zu den Hintergründen, Arbeiten und Wirkungen des Projektes, indem Sie beliebig viele Einträge in den jeweiligen Säulen des Impact Pathway anlegen.</p></b></i><b>Worum es hier geht:</b><ul><li>Mit dem Impact Pathway beantworten Sie zwei Fragen: „Welche Wirkungen sollen mit dem Projekt erreicht werden?“ und „Was wird/wurde im Projekt getan, um zur Entwicklung dieser Wirkungen beizutragen?“</li><li>Der Impact Pathway soll leicht verständlich darstellen, um was es in dem Projekt geht.</li><li>Die <b>6 Säulen</b> gliedern die Einträge vom Hintergrund (Säule 1) über die Arbeiten (Säule 2 und 3) bis zu den Wirkungspotenzialen (Säule 4 und 5). In Säule 6 wählen Sie die förderpolitischen Ziele aus, zu denen das Projekt beiträgt.</li><li>Die <b>Säulen 2 und 3</b> stellen in der <b>ersten Ebene</b> die Ziele von Forschung und Entwicklung (Säule 2) sowie die Ziele von Interaktionen und Transfer (Säule 3) dar. In der <b>zweiten Ebene</b> können Sie die spezifischen Arbeiten hinzufügen, die zu dem Ziel beitragen.</li><li>Wenn Sie einen Eintrag anlegen, wählen Sie einen (passenden) <b>Bereich</b> aus, zu dem der Eintrag gehört (z. B. Rahmenbedingung oder Veranstaltung). Damit legen Sie fest, welche weiteren Informationen auf der <b>Detailseite</b> des Eintrags abgefragt werden.</li> <li>Für die <b>Antragstellung</b> verdeutlichen Sie in den Einträgen insbesondere die Ziele des Projektes. Die Abbildung des Impact Pathway und eine kurze Beschreibung ersetzen in der Vorhabenbeschreibung das Kapitel „Gesamtziele des Projektes“.</li><li>Im <b>Projektverlauf</b> aktualisieren und konkretisieren Sie den Impact Pathway und ergänzen die Ergebnisse.</li><li>Mehr Infos und Beispiele zum Impact Pathway <i class=\"fas fa-link\"></i></ul></li><b>Wichtige Hinweise:</b><ul><li>Sie können in jeder beliebigen Säule des Impact Pathway beginnen.</li><li>Über die <b>Schaltfläche</b> <i class=\"fas fa-plus-circle\"></i> in jeder Säule können Sie beliebig viele Einträge <b>neu anlegen</b> oder <b>bereits Vorhandene</b> auswählen. Dort ist auch beschrieben, welche <b>Bereiche</b> zu der Säule gehören und worin sie sich unterscheiden.</li> <li>Alle Einträge können Sie jederzeit <b>aktualisieren</b>. Über [Listen Icon] öffnen Sie die <b>zweite Ebene</b> der eingetragenen Ziele in Säule 2 und 3. Über [Edit Icon] gelangen Sie auf die <b>Detailseite</b> eines Eintrags Dort finden Sie auch weitere Hinweise.</li><li>Über [Ablösen Icon] können Sie den Eintrag aus dem IPW <b>entfernen</b>, er bleibt jedoch im Projekt erhalten. Löschen können Sie einen Eintrag auf der Detailseite.</li><li>Mit <b>drag&drop</b> können Sie die Reihenfolge der Einträge innerhalb einer Säule verändern.</li><li>Nutzen Sie die <b>Pfeile</b>, wenn Sie Zusammenhänge zwischen Einträgen besonders hervorheben wollen.</li><li>Um die Bezeichnung oder die Beschreibung des Impact Pathway zu ändern, müssen Sie die Felder über [Bearbeiten] aktivieren.</ul></li><b>Tipps:</b><ul><li>Empfehlenswert ist es, den Impact Pathway gemeinsam mit Praxispartnern und Akteursgruppen zu entwickeln und das Projekt von den erwünschten Wirkungen her zu planen.</li><li>Ein erstes Brainstorming zur Wirkungsplanung kann auch sehr gut an einer Pinnwand oder mit Hilfe von Haftnotizen stattfinden.</li><li>Verschaffen Sie sich einen Überblick, indem Sie die Detailseiten der einzelnen Bereiche anschauen.</li><li>Arbeiten Sie im Tool schrittweise:</li> <li>Beginnen Sie mit einer groben Planung und ergänzen Sie erst später die Details (z. B. Arbeiten auf der zweiten Ebene von Säule 2 und 3 oder die Informationen auf den Detailseiten der Einträge).</li> <li>Wählen Sie zuerst Arbeitstitel für die Bezeichnung und passen Sie die Formulierungen schrittweise an, wenn mehr Klarheit zur Wirkungsplanung des Projektes vorliegt.</ul></li>",
 
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   // TODO New key - Add a translation
@@ -3803,7 +3803,7 @@
   "item.edit.delete.success": "Die Ressource wurde gelöscht",
 
   // "item.edit.head": "Edit Item",
-  "item.edit.head": "Ressource bearbeiten",
+  "item.edit.head": "Eintrag bearbeiten",
 
   // "item.edit.breadcrumbs": "Edit Item",
   "item.edit.breadcrumbs": "Ressource bearbeiten",
@@ -5501,7 +5501,7 @@
 
   // "nav.profile": "Profile",
   // TODO New key - Add a translation
-  "nav.profile": "Profile",
+  "nav.profile": "Profil",
 
   // "nav.search": "Search",
   "nav.search": "Suche",
@@ -6606,7 +6606,7 @@
 
   // "product.listelement.badge": "Product",
   // TODO New key - Add a translation
-  "product.listelement.badge": "Product",
+  "product.listelement.badge": "Forschungsdaten",
 
   // "profile.breadcrumbs": "Update Profile",
   // TODO New key - Add a translation
@@ -6634,43 +6634,43 @@
 
   // "profile.metadata.form.error.firstname.required": "First Name is required",
   // TODO New key - Add a translation
-  "profile.metadata.form.error.firstname.required": "First Name is required",
+  "profile.metadata.form.error.firstname.required": "Pflichtangabe",
 
   // "profile.metadata.form.error.lastname.required": "Last Name is required",
   // TODO New key - Add a translation
-  "profile.metadata.form.error.lastname.required": "Last Name is required",
+  "profile.metadata.form.error.lastname.required": "Pflichtangabe",
 
   // "profile.metadata.form.label.email": "Email Address",
   // TODO New key - Add a translation
-  "profile.metadata.form.label.email": "Email Address",
+  "profile.metadata.form.label.email": "E-Mail",
 
   // "profile.metadata.form.label.firstname": "First Name",
   // TODO New key - Add a translation
-  "profile.metadata.form.label.firstname": "First Name",
+  "profile.metadata.form.label.firstname": "Vorname",
 
   // "profile.metadata.form.label.language": "Language",
   // TODO New key - Add a translation
-  "profile.metadata.form.label.language": "Language",
+  "profile.metadata.form.label.language": "Sprache",
 
   // "profile.metadata.form.label.lastname": "Last Name",
   // TODO New key - Add a translation
-  "profile.metadata.form.label.lastname": "Last Name",
+  "profile.metadata.form.label.lastname": "Nachname",
 
   // "profile.metadata.form.label.phone": "Contact Telephone",
   // TODO New key - Add a translation
-  "profile.metadata.form.label.phone": "Contact Telephone",
+  "profile.metadata.form.label.phone": "Telefon",
 
   // "profile.metadata.form.notifications.success.content": "Your changes to the profile were saved.",
   // TODO New key - Add a translation
-  "profile.metadata.form.notifications.success.content": "Your changes to the profile were saved.",
+  "profile.metadata.form.notifications.success.content": "Ihre Änderungen am Profil wurden gespeichert.",
 
   // "profile.metadata.form.notifications.success.title": "Profile saved",
   // TODO New key - Add a translation
-  "profile.metadata.form.notifications.success.title": "Profile saved",
+  "profile.metadata.form.notifications.success.title": "Passwort gespeichert",
 
   // "profile.notifications.warning.no-changes.content": "No changes were made to the Profile.",
   // TODO New key - Add a translation
-  "profile.notifications.warning.no-changes.content": "No changes were made to the Profile.",
+  "profile.notifications.warning.no-changes.content": "Keine Änderungen",
 
   // "profile.notifications.warning.no-changes.title": "No changes",
   // TODO New key - Add a translation
@@ -6682,39 +6682,39 @@
 
   // "profile.security.form.error.password-length": "The password should be at least 6 characters long.",
   // TODO New key - Add a translation
-  "profile.security.form.error.password-length": "The password should be at least 6 characters long.",
+  "profile.security.form.error.password-length": "Das Passwort sollte mindestens 6 Zeichen lang sein.",
 
   // "profile.security.form.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
   // TODO New key - Add a translation
-  "profile.security.form.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  "profile.security.form.info": "Optional können Sie ein neues Passwort in das erste Feld eingeben und es durch erneute Eingabe in das zweite Feld bestätigen. Es sollte mindestens sechs Zeichen lang sein.",
 
   // "profile.security.form.label.password": "Password",
   // TODO New key - Add a translation
-  "profile.security.form.label.password": "Password",
+  "profile.security.form.label.password": "Passwort",
 
   // "profile.security.form.label.passwordrepeat": "Retype to confirm",
   // TODO New key - Add a translation
-  "profile.security.form.label.passwordrepeat": "Retype to confirm",
+  "profile.security.form.label.passwordrepeat": "Zur Bestätigung erneut eingeben",
 
   // "profile.security.form.notifications.success.content": "Your changes to the password were saved.",
   // TODO New key - Add a translation
-  "profile.security.form.notifications.success.content": "Your changes to the password were saved.",
+  "profile.security.form.notifications.success.content": "Ihre Änderungen am Passwort wurden gespeichert.",
 
   // "profile.security.form.notifications.success.title": "Password saved",
   // TODO New key - Add a translation
-  "profile.security.form.notifications.success.title": "Password saved",
+  "profile.security.form.notifications.success.title": "Passwort gespeichert",
 
   // "profile.security.form.notifications.error.title": "Error changing passwords",
   // TODO New key - Add a translation
-  "profile.security.form.notifications.error.title": "Error changing passwords",
+  "profile.security.form.notifications.error.title": "Fehler beim Ändern von Passwörtern",
 
   // "profile.security.form.notifications.error.not-long-enough": "The password has to be at least 6 characters long.",
   // TODO New key - Add a translation
-  "profile.security.form.notifications.error.not-long-enough": "The password has to be at least 6 characters long.",
+  "profile.security.form.notifications.error.not-long-enough": "Das Passwort muss mindestens 6 Zeichen lang sein.",
 
   // "profile.security.form.notifications.error.not-same": "The provided passwords are not the same.",
   // TODO New key - Add a translation
-  "profile.security.form.notifications.error.not-same": "The provided passwords are not the same.",
+  "profile.security.form.notifications.error.not-same": "Die angegebenen Passwörter sind nicht identisch.",
 
   // "profile.title": "Update Profile",
   // TODO New key - Add a translation
@@ -6793,55 +6793,55 @@
 
   // "project-overview.invitation.btn": "Send invitation",
   // TODO New key - Add a translation
-  "project-overview.invitation.btn": "Send invitation",
+  "project-overview.invitation.btn": "Einladung senden",
 
   // "project-overview.invitation.title": "Invitation",
   // TODO New key - Add a translation
-  "project-overview.invitation.title": "Invitation",
+  "project-overview.invitation.title": "Einladung",
 
   // "project-overview.invitation.email": "Email",
   // TODO New key - Add a translation
-  "project-overview.invitation.email": "Email",
+  "project-overview.invitation.email": "E-Mail",
 
   // "project-overview.invitation-admin.menu.project": "Invite coordinators to the current project",
   // TODO New key - Add a translation
-  "project-overview.invitation-admin.menu.project": "Invite coordinators to the current project",
+  "project-overview.invitation-admin.menu.project": "Koordinator:innen in das Verbundprojekt einladen",
 
   // "project-overview.invitation-members.menu.project": "Invite members to the current project",
   // TODO New key - Add a translation
-  "project-overview.invitation-members.menu.project": "Invite members to the current project",
+  "project-overview.invitation-members.menu.project": "Mitglieder in das Verbundprojekt einladen",
 
   // "project-overview.invitation.project.msg": "Please insert the email address of the person to invite to the project",
   // TODO New key - Add a translation
-  "project-overview.invitation.project.msg": "Please insert the email address of the person to invite to the project",
+  "project-overview.invitation.project.msg": "Bitte geben Sie die E-Mail-Adresse der Person ein, die Sie in das Verbundprojekt einladen möchten",
 
   // "project-overview.invitation.processing": "Processing...",
   // TODO New key - Add a translation
-  "project-overview.invitation.processing": "Processing...",
+  "project-overview.invitation.processing": "In Bearbeitung…",
 
   // "project-overview.invitation.sub-project.msg": "Please insert the email address of the person to invite to the sub-project",
   // TODO New key - Add a translation
-  "project-overview.invitation.sub-project.msg": "Please insert the email address of the person to invite to the sub-project",
+  "project-overview.invitation.sub-project.msg": "Bitte geben Sie die E-Mail-Adresse der Person ein, die Sie in das Teilprojekt einladen möchten",
 
   // "project-overview.invitation.error": "There was an issue when sending the invitation, please try again later.",
   // TODO New key - Add a translation
-  "project-overview.invitation.error": "There was an issue when sending the invitation, please try again later.",
+  "project-overview.invitation.error": "Beim Senden der Einladung ist ein Problem aufgetreten. Bitte versuchen Sie es später noch einmal.",
 
   // "project-overview.invitation.success": "Invitation sent successfully.",
   // TODO New key - Add a translation
-  "project-overview.invitation.success": "Invitation sent successfully.",
+  "project-overview.invitation.success": "Einladung erfolgreich versendet.",
 
   // "project-overview.invitation-admin.menu.subproject": "Invite coordinators to the current subproject",
   // TODO New key - Add a translation
-  "project-overview.invitation-admin.menu.subproject": "Invite coordinators to the current subproject",
+  "project-overview.invitation-admin.menu.subproject": "Koordinator:innen in das Teilprojekt einladen",
 
   // "project-overview.invitation-members.menu.subproject": "Invite members to the current subproject",
   // TODO New key - Add a translation
-  "project-overview.invitation-members.menu.subproject": "Invite members to the current subproject",
+  "project-overview.invitation-members.menu.subproject": "Mitglieder in das Teilprojekt einladen",
 
   // "project-overview.page.header.delete.btn": "Delete project",
   // TODO New key - Add a translation
-  "project-overview.page.header.delete.btn": "Delete project",
+  "project-overview.page.header.delete.btn": "Projekt löschen",
 
   // "project-overview.page.header.delete.confirm.cancel": "Cancel",
   "project-overview.page.header.delete.confirm.cancel": "Abbrechen",
@@ -6854,7 +6854,7 @@
 
   // "project-overview.page.header.delete.confirm.title": "Delete project",
   // TODO New key - Add a translation
-  "project-overview.page.header.delete.confirm.title": "Delete project",
+  "project-overview.page.header.delete.confirm.title": "Projekt löschen",
 
   // "project-overview.page.header.delete.error": "There was an issue when deleting the project, please try again later.",
   // TODO New key - Add a translation
@@ -7033,7 +7033,7 @@
 
   // "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the ",
   // TODO New key - Add a translation
-  "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the",
+  "register-page.create-profile.end-user-agreement.accept.text": "Ich habe die Endnutzer-Vereinbarung gelesen und stimme ihr zu",
 
   // "register-page.create-profile.end-user-agreement.accept.link": "End User Agreement",
   // TODO New key - Add a translation
@@ -7049,7 +7049,7 @@
 
   // "register-page.create-profile.security.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
   // TODO New key - Add a translation
-  "register-page.create-profile.security.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  "register-page.create-profile.security.info": "Geben Sie bitte ein Passwort in das erste Feld ein und bestätigen Sie es, indem Sie es in das zweite Feld erneut eingeben. Es sollte mindestens sechs Zeichen lang sein.",
 
   // "register-page.create-profile.security.label.password": "Password *",
   // TODO New key - Add a translation
@@ -7101,7 +7101,7 @@
 
   // "register-page.registration.email": "Email Address *",
   // TODO New key - Add a translation
-  "register-page.registration.email": "E.Mail *",
+  "register-page.registration.email": "E-Mail *",
 
   // "register-page.registration.email.error.required": "Please fill in an email address",
   // TODO New key - Add a translation
@@ -7228,7 +7228,7 @@
 
   // "researcher.profile.create.fail": "An error occurs during the researcher profile creation",
   // TODO New key - Add a translation
-  "researcher.profile.create.fail": "An error occurs during the researcher profile creation",
+  "researcher.profile.create.fail": "Bei der Erstellung des Personenprofils ist ein Fehler aufgetreten",
 
   // "researcher.profile.delete": "Delete",
   // TODO New key - Add a translation
@@ -7272,15 +7272,15 @@
 
   // "researcherprofile.error.claim.title": "Error",
   // TODO New key - Add a translation
-  "researcherprofile.error.claim.title": "Error",
+  "researcherprofile.error.claim.title": "Fehler",
 
   // "researcherprofile.success.claim.body": "Profile claimed with success",
   // TODO New key - Add a translation
-  "researcherprofile.success.claim.body": "Profile claimed with success",
+  "researcherprofile.success.claim.body": "Profil erfolgreich beansprucht",
 
   // "researcherprofile.success.claim.title": "Success",
   // TODO New key - Add a translation
-  "researcherprofile.success.claim.title": "Success",
+  "researcherprofile.success.claim.title": "Erfolgreich",
 
   // "resource-policies.add.button": "Add",
   // TODO New key - Add a translation
@@ -7736,10 +7736,10 @@
   "search.filters.filter.withdrawn.head": "Withdrawn",
 
   // "search.filters.filter.entityType.head": "Item Type",
-  "search.filters.filter.entityType.head": "Art der Ressource",
+  "search.filters.filter.entityType.head": "Art des Eintrags",
 
   // "search.filters.filter.entityType.placeholder": "Item Type",
-  "search.filters.filter.entityType.placeholder": "Art der Ressource",
+  "search.filters.filter.entityType.placeholder": "Art des Eintrags",
 
   // "search.filters.filter.entityType.label": "Search item type",
   // TODO New key - Add a translation
@@ -9156,7 +9156,7 @@
   "submission.sections.general.deposit_error_notice": "Beim Einreichen der Ressoruce ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.",
 
   // "submission.sections.general.deposit_success_notice": "Submission deposited successfully.",
-  "submission.sections.general.deposit_success_notice": "Veröffentlichung erfolgreich eingereicht",
+  "submission.sections.general.deposit_success_notice": "Eintrag erfolgreich gespeichert.",
 
   // "submission.sections.general.discard_error_notice": "There was an issue when discarding the item, please try again later.",
   "submission.sections.general.discard_error_notice": "Beim Verwerfen der Einreichung ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal",
@@ -9185,7 +9185,7 @@
   "submission.sections.general.save_error_notice": "Beim Speichern der Ressource ist ein Fehler aufgetreten, bitte versuchen Sie es später noch einmal.",
 
   // "submission.sections.general.save_success_notice": "Submission saved successfully.",
-  "submission.sections.general.save_success_notice": "Einreichung erfolgreich gespeichert.",
+  "submission.sections.general.save_success_notice": "Eintrag erfolgreich gespeichert",
 
   // "submission.sections.general.search-collection": "Search for a collection",
   "submission.sections.general.search-collection": "Suche nach einer Sammlung",
@@ -9387,7 +9387,7 @@
   "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "<p><b><i>Legen Sie für die Planung des Projektes die Ziele für Interaktion und Transfer fest. Diesen können in einer zweiten Ebene wie in einem Ordner Aktivitäten hinzugefügt werden, die zu diesen Zielen beitragen.Ergänzen Sie im Projektverlauf ggf. weitere Einträge zu (Zwischen-) Ergebnis / Problem und Sonstiges.</b></i></p><b>Bereiche:</b><ul><li>In <b>Ziel für Interaktion und Transfer</b> formulieren Sie das unmittelbare Ziel für eine Gruppe von Austausch und Transferaktivitäten (z.B. Erfahrungen einer Akteursgruppe in die Entwicklung integrieren). Nachdem Sie den Eintrag angelegt haben, können Sie darin wie in einem Ordner Einträge zu den Arbeiten des Projektes anlegen, die zu diesem Ziel beitragen. (z.B. Workshops, Interviews, Veröffentlichung eines Leitfadens). Erfassen Sie hier auch die Ziele für die Austauschprozesse zwischen den Projektpartnern.</li></br><li><b>(Zwischen-) Ergebnis / Problem</b> können Sie nutzen, wenn im Projektverlauf ein (Zwischen-) Ergebnis oder Problem auftaucht, das erhebliche Veränderungen in den Projektarbeiten oder Wirkungen verursacht.</li></br><li><b>Sonstiges</b> umfasst wichtige Informationen, die sich nicht in die o. g. Bereiche einordnen lassen.</li></ul><b>Tipps:</b><ul><li>Interaktionen und Transfer sind essentiell für die Entwicklung von Wirkungen. Sie umfassen alle Interaktionen zwischen forschenden und nicht-forschenden Akteuren, sowohl direkt, als auch indirekt über Veröffentlichungen oder andere Medien.</li><li>Reflexionsfragen: Mit welchen Zielgruppen, Stakeholdern, Multiplikatoren oder kritischen Akteursgruppen sind Interaktionen erforderlich, um anwendbare Ergebnisse zu erarbeiten und eine Anwendung der Ergebnisse zu fördern?</li> <li>Beispiele für die Formulierung von Zielen [Link].</li></ul>",
 
   // "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "<i>Please select the section from the list and provide a key message. Or select already existing items via the search.</i><p><b>Processes of cooperation, participation and collaboration</b> comprise activities that take place over a longer period of time with the same partners/organisations or groups of actors.</br><b>Events</b>cover individual events with groups of actors that are organised by the project or in which the project participates.</br><b>Publications</b> include e.g. scientific article, practical contribution, video, website of the project. For planning, enter the type and a number in the key message.</br><b>Objects / materials</b> are relevant outputs that serve the transfer and/or can be further used by third parties for transfer, research or teaching, such as exhibits devices, samples, collectibles.</br><b>Tasks</b> are individual work steps that can be assigned to individual work packages in the work plan and are not covered by the above-mentioned areas.</br><b>Others</b> includes important information that should be clarified in the Impact Pathway, but cannot be classified in the above-mentioned areas.</p><p><b>Key questions:</b> At what point in time and with what content are interactions required to contribute to the project objectives? How can continuity in the exchange processes be ensured? Which contents and formats can be used to particularly arouse the interest of a group of actors and, if necessary, to maintain it in the long term? What benefits can a group of actors derive from interaction?</br>Which opportunities exist to reach groups of actors where they have already been informing themselves or exchanging information?",
-  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "<p><b><i>Legen Sie hier die Einträge zu den Arbeiten des Projektes an, mit denen das jeweilige Ziel für Interaktion und Transfer erreicht werden soll.</p></b></i>  <b>Bereiche:</b><ul><li>In <b>Kooperation / Partizipation / Austauschprozess</b> erfassen Sie Aktivitäten des Projektes, die über einen längeren Zeitraum mit den gleichen Partnern/Organisationen oder Akteursgruppen stattfinden.</li></br><li>In <b>Veranstaltung</b> können Sie Einzelveranstaltungen erfassen, die vom Projekt durchgeführt werden oder an denen das Projekt teilnimmt.</li></br><li><b>Geplante Veröffentlichungen</b> erfassen Sie gruppiert, zugehörig zum Ziel für Interaktion und Transfer. Diese Angaben sind ausschließlich in der Projektplanung erforderlich. Bitte nennen Sie in der Bezeichnung Anzahl, Art und Thema der geplanten Veröffentlichungen (z. B. Eintrag 1: 2-3 wissenschaftliche Artikel zu Thema x, Eintrag 2: 1 Praxisbeitrag zum Thema y).</li></br><li>Veröffentlichung</b> nutzen Sie, um z. B. wissenschaftliche Artikel, Praxisbeiträge, Videos oder Webseiten des Projektes zu erfassen. Es ist empfehlenswert, sie über den Zugang auf der Projektseite zu erfassen. Dort stehen Importfunktionen zur Verfügung. Anschließend können Sie die Einträge über die Schaltfläche Vorhandene auswählen in den Impact Pathway einfügen.</li></br> <li>Mit <b>Gegenstand / Material</b> erfassen Sie physische Objekte die im Projekt erstellt wurden und nach Projektende von anderen für Transfer, Forschung oder Lehre weitergenutzt werden können. z. B. Ausstellungsstücke, Geräte, Proben oder Sammelstücke.</li></br> <li><b>Aufgaben</b> nutzen Sie für Arbeiten, die nicht durch die o. g. Bereiche abgedeckt sind.</li></br> <li><b>Sonstiges</b> verwenden Sie nur dann, wenn sich wichtige Informationen, nicht in die oben genannten Bereiche einordnen lassen.</li></ul>",
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "<p><b><i>Legen Sie hier die Einträge zu den Arbeiten des Projektes an, mit denen das jeweilige Ziel für Interaktion und Transfer erreicht werden soll.</p></b></i>  <b>Bereiche:</b><ul><li>In <b>Kooperation / Partizipation / Austauschprozess</b> erfassen Sie Aktivitäten des Projektes, die über einen längeren Zeitraum mit den gleichen Partnern/Organisationen oder Akteursgruppen stattfinden.</li></br><li>In <b>Veranstaltung</b> können Sie Einzelveranstaltungen erfassen, die vom Projekt durchgeführt werden oder an denen das Projekt teilnimmt.</li></br><li><b>Geplante Veröffentlichungen</b> erfassen Sie gruppiert, zugehörig zum Ziel für Interaktion und Transfer. Diese Angaben sind ausschließlich in der Projektplanung erforderlich. Bitte nennen Sie in der Bezeichnung Anzahl, Art und Thema der geplanten Veröffentlichungen (z. B. Eintrag 1: 2-3 wissenschaftliche Artikel zu Thema x, Eintrag 2: 1 Praxisbeitrag zum Thema y).</li></br><li><b>Veröffentlichung</b> nutzen Sie, um z. B. wissenschaftliche Artikel, Praxisbeiträge, Videos oder Webseiten des Projektes zu erfassen. Es ist empfehlenswert, sie über den Zugang auf der Projektseite zu erfassen. Dort stehen Importfunktionen zur Verfügung. Anschließend können Sie die Einträge über die Schaltfläche Vorhandene auswählen in den Impact Pathway einfügen.</li></br> <li>In <b>Forschungsdaten</b> erfassen Sie digitale Daten, die im Projekt entstanden und veröffentlicht sind.</li></br><li>Mit <b>Gegenstand / Material</b> erfassen Sie physische Objekte die im Projekt erstellt wurden und nach Projektende von anderen für Transfer, Forschung oder Lehre weitergenutzt werden können. z. B. Ausstellungsstücke, Geräte, Proben oder Sammelstücke.</li></br> <li><b>Aufgaben</b> nutzen Sie für Arbeiten, die nicht durch die o. g. Bereiche abgedeckt sind.</li></br> <li><b>Sonstiges</b> verwenden Sie nur dann, wenn sich wichtige Informationen, nicht in die oben genannten Bereiche einordnen lassen.</li></ul>",
 
   // "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "<i>Please select a section from the list and give a key message. Or select already existing items via the search.</i></br>Focus on the (possible) application of the project results by the relevant groups of actors. Include also aspects that you consider in the exploitation plan.<p><b>Solutions / changes / innovations</b> describes the solution to practical problems, the change in groups of actors as well as the economic-technical or social innovation that the project aims at or contributes to.</br><b>Ideas for a use of project results</b> include all application possibilities for solutions / changes / innovations that are not very concrete, lie far in the future and are not explicitly pursued in the project. </br><b>Patents and utility patents</b> record information on the registration of property rights.</br><b>(Intermediate) results / problems that bring about change</b> is used to clarify in the impact pathway why changes in the work of the project or the intended application and impact are necessary. (Can be used here for results/problems related to the applications or opportunities for using project results).</br><b>Next steps and cooperation after the end of the project</b> include the steps you plan to take after the end of the project to further apply project results and to continue cooperations.</br><b>Spin-offs (incl. associations)</b> include information on the foundation of transfer and competence spin offs as well as the foundation of associations. </br><b>Application of a solution / change / innovation</b> includes evidence and examples of the use or implementation of solutions / changes / innovations by third parties or partners involved in the project. </br><b>Awards and prizes</b>, which are related to the project and/or its results, can give an indication e.g. of the degree of innovation or a high degree of applicability.</br><b>Others</b> includes important information that should be clarified in the Impact Pathway, but cannot be classified in the above-mentioned areas.",
   // TODO Source message changed - Revise the translation
@@ -9556,7 +9556,7 @@
   "submission.sections.submit.progressbar.describe.persons": "Personenprofil anlegen",
 
   // "submission.sections.submit.progressbar.describe.persons.info": "This section contains personal information that allows you to use the system and provides contact details for the funding agency.",
-  "submission.sections.submit.progressbar.describe.persons.info": "<b>Wichtige Hinweise:</b> <ul><li>Sie können ein Profilbild hinzufügen, indem Sie die Datei in das graue Upload-Feld ziehen oder danach suchen.</li> <li>Mit Websites zu Ihrer Person ermöglichen Sie eine Kontaktaufnahme und erhöhen Ihre Sichtbarkeit, ohne diese Daten in Ihrem Personenprofil eingeben und aktualisieren zu müssen.</li> <li>Durch die Abgabe der ORCID ID und anderer IDs ermöglichen Sie Importfunktionen Ihrer Publikationsdaten in das Monitoring-Tool.</li> <li>Sie können Ihr Profil jederzeit löschen, wenn Sie nicht möchten, dass Ihre personenbezogenen Daten im Monitoring-Tool gespeichert werden. Damit werden auch alle Links zwischen Ihren Personendaten und anderen Datensätzen im Tool deaktiviert. Sie können das Monitoring-Tool weiterhin über Ihre Login Daten nutzen. Verpflichtende öffentliche Informationen, wie die Autorenschaft von Publikationen bleiben im Tool erhalten.</ul></li> <b>Tipps:</b><ul><li>Was ist ORCID? [https://orcid.org/, https://www.orcid-de.org/ ]</li> <li>Was ist Scopus Author ID?[https://www.scopus.com/freelookup/form/author.uri]</li>  <li>Was ist Researcher ID?][http://www.researcherid.com/#rid-for-researchers]</ul></li>",
+  "submission.sections.submit.progressbar.describe.persons.info": "<b>Wichtige Hinweise:</b> <ul><li>Sie können ein Profilbild hinzufügen, indem Sie die Datei in das graue Upload-Feld ziehen oder danach suchen.</li> <li>Mit Websites zu Ihrer Person ermöglichen Sie eine Kontaktaufnahme und erhöhen Ihre Sichtbarkeit, ohne diese Daten in Ihrem Personenprofil eingeben und aktualisieren zu müssen.</li> <li>Durch die Angabe der ORCID ID und anderer IDs ermöglichen Sie Importfunktionen Ihrer Publikationsdaten in das Monitoring-Tool.</li> <li>Sie können Ihr Profil jederzeit löschen, wenn Sie nicht möchten, dass Ihre personenbezogenen Daten im Monitoring-Tool gespeichert werden. Damit werden auch alle Links zwischen Ihren Personendaten und anderen Datensätzen im Tool deaktiviert. Sie können das Monitoring-Tool weiterhin über Ihre Login Daten nutzen. Verpflichtende öffentliche Informationen, wie die Autorenschaft von Publikationen bleiben im Tool erhalten.</ul></li> <b>Tipps:</b><ul><li>Was ist ORCID? [https://orcid.org/, https://www.orcid-de.org/ ]</li> <li>Was ist Scopus Author ID?[https://www.scopus.com/freelookup/form/author.uri]</li>  <li>Was ist Researcher ID?][http://www.researcherid.com/#rid-for-researchers]</ul></li>",
 
   // "submission.sections.submit.progressbar.describe.physical_objects": "Object / material for knowledge transfer and subsequent use in research and teaching",
   "submission.sections.submit.progressbar.describe.physical_objects": "Gegenstand / Material beschreiben",
@@ -9581,10 +9581,10 @@
 
   // "submission.sections.submit.progressbar.describe.projects": "Subproject",
   // TODO Source message changed - Revise the translation
-  "submission.sections.submit.progressbar.describe.projects": "Teilprojekt anlegen",
+  "submission.sections.submit.progressbar.describe.projects": "Informationen zum Teilprojekt ergänzen",
 
   // "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
-  "submission.sections.submit.progressbar.describe.projects.info": "<p><i><b>Ergänzen Sie das Förderkennzeichen, sobald es vorliegt.</p></i></b> Dadurch wird im Projektverlauf eine regelmäßige Aktualisierung der Daten über eine Schnittstelle zum Fördermittelgeber (profi) gewährleistet.",
+  "submission.sections.submit.progressbar.describe.projects.info": "<b>Wichtige Hinweise:</b><ul><li><b>Ergänzen Sie das Förderkennzeichen, sobald es vorliegt</b>. Dadurch wird im Projektverlauf eine regelmäßige Aktualisierung der Daten über eine Schnittstelle zum Fördermittelgeber (profi) gewährleistet.</li><li>Durch die Angabe von <b>Webseiten</b> des Projektes verbessern Sie die <b>Sichtbarkeit</b>.</ul></li>",
 
   // "submission.sections.submit.progressbar.describe.projects_overview": "Project overview",
   "submission.sections.submit.progressbar.describe.projects_overview": "Projektübersicht",
@@ -9667,7 +9667,7 @@
 
   // "submission.sections.submit.progressbar.describe.targetgroups": "Stakeholder group",
   // TODO Source message changed - Revise the translation
-  "submission.sections.submit.progressbar.describe.targetgroups": "<b>Worum es hier geht:</b><ul><li>Eine Akteursgruppe ist eine Gruppe von Organisationen oder Personen aus dem gleichen Tätigkeitsbereich, die das Projekt adressiert.</li>  <li>Eine Akteursgruppe kann relevant sein, um ein Problem zu untersuchen, eine Lösung zu entwickeln, Ergebnisse in die Anwendung zu bringen oder Ergebnisse zu verbreiten.</li>  <li>Denken Sie neben Zielgruppen, Stakeholdern, Nutzergruppen und Multiplikatoren auch an Profiteure, Beeinträchtigte oder Gegner von Veränderungen, die das Projekt anstrebt.</ul></li> <b>Zur Unterscheidung:</b><li>Wirkt eine einzelne Organisation verbindlich und maßgeblich an der Erarbeitung von Projektergebnissen mit, erfassen Sie sie bitte als Unterauftragnehmer oder weiteren Kooperationspartner.</li>  <br><li>Weiterführende Hilfe zur Unterscheidung [<i class=\"fas fa-link\"></i> mit Link zur Hilfeseite].</ul></li>",
+  "submission.sections.submit.progressbar.describe.targetgroups": "Akteursgruppe beschreiben",
 
   // "submission.sections.submit.progressbar.describe.targetgroups.info": "Stakeholder groups in the project are, for example, users, stakeholders, multipliers, profiteers or affected persons. Groups of actors are recorded here in order to assign them to the interactions of the project. This makes it clear which groups of actors are to be involved in the project and in what way, or which groups are to be reached with results.</br>Stakeholder groups can be used to group together a larger number of organisations or persons from the same field of action without naming individual organisations.</br>Please record very closely cooperating actors who play a significant role in the development of project results as organisations.<p><i>Please characterise each stakeholder group in the project separately by filling in this detail page several times.</i></p>",
   "submission.sections.submit.progressbar.describe.targetgroups.info": "<p><b><i>Legen Sie bitte für jede relevante Akteursgruppe des Projektes einen eigenen Eintrag an.</p></b></i><b>Wichtige Hinweise:</b><ul><li>Die hier eingetragenen Akteursgruppen, werden in den Einträgen zu Interaktionen und Anwendung als Auswahlliste bereitgestellt. Damit können Sie jeweils zuordnen, welche Akteursgruppen adressiert werden. Wirkt eine einzelne Organisation verbindlich und maßgeblich an der Erarbeitung von Projektergebnissen mit, erfassen Sie sie bitte als Unterauftragnehmer oder weiteren Kooperationspartner.</ul></li><b>Tpps:</b><ul><li><b>Wie viele Akteursgruppen sollte man anlegen?</b> – Alle Akteursgruppen die im Projekt eingebunden oder adressiert werden. Mindestens eine – bei mehr als 10 könnte es unübersichtlich werden.</li><li>Unterscheiden Sie die Akteursgruppen vor allem nach den jeweiligen Tätigkeitsbereichen.</li> <li><b>Weitere Hilfen</b> [<i class=\"fas fa-link\"></i>, der zur Hilfeseite führt]</ul></li>",
@@ -9703,7 +9703,7 @@
   "submission.sections.submit.progressbar.describe.workpackages": "Arbeitspaket beschreiben",
 
   // "submission.sections.submit.progressbar.describe.workpackages.info": "Describe here only general aspects that do not also arise in the assigned tasks and activities.",
-  "submission.sections.submit.progressbar.describe.workpackages.info": "<p><b><i>Beschreiben Sie hier ein Arbeitspaket, indem Sie auf die übergeordneten Aspekte eingehen, die nicht aus den zugeordneten Arbeiten ersichtlich sind.</i></b></p><p><b>Wichtiger Hinweise:</b></p><br><ul><li>Detaillierte Beschreibungen zu <b>Material und Methoden</b> formulieren Sie bitte, wenn erforderlich, in einem Dokument und laden es auf der Projektseite unter <b>Uploads</b> hoch.</ul></li>",
+  "submission.sections.submit.progressbar.describe.workpackages.info": "<p><b><i>Beschreiben Sie hier ein Arbeitspaket, indem Sie auf die übergeordneten Aspekte eingehen, die nicht aus den zugeordneten Arbeiten ersichtlich sind.</i></b></p><b>Wichtiger Hinweise:</b><br><ul><li>Detaillierte Beschreibungen zu <b>Material und Methoden</b> formulieren Sie bitte, wenn erforderlich, in einem Dokument und laden es auf der Projektseite unter <b>Uploads</b> hoch.</ul></li>",
 
   // "submission.sections.submit.progressbar.describe.workpackages_result": "Reasons for changes in the work package",
   "submission.sections.submit.progressbar.describe.workpackages_result": "Veränderungen im Projektverlauf beschreiben",
@@ -9712,7 +9712,7 @@
   "submission.sections.submit.progressbar.describe.innovationpotentials": "Mögliche Lösung / Veränderung / Innovation benennen und beschreiben",
 
   // "submission.sections.submit.progressbar.describe.innovationpotentials.info": "Here, it is recorded which solutions are to be developed for practical problems, which changes are to be aimed at among relevant groups of actors, or to which economic-technical or social innovations the project results are to contribute.</br>E.g</br>• Goods, services or production and business processes are improved or newly developed.</br>• Knowledge, skills or competencies of certain groups of actors are improved.</br>• Changes in the actions of actors, in organizations or on a political level are targeted.<p>If a contribution of the project to the development of solution / change / innovation is still unclear, far in the future or very uncertain, please use the shortened entry in \"Idea for a use of project results\". (Discard this entry and create a new entry in \"Idea for a use of project results\". Copy your entries before doing this if necessary).</p><i>Please describe here a solution/ change/ innovation to which the project contributes. Create a separate entry for each solution to be displayed in the Impact Pathway. Describe the current state of reflection in the application and update and add information as the project progresses.</i></p>The description of the potential solution/change/innovation is a key element for impact-based planning and implementation. It requires extensive reflection. An exchange with practice partners and groups of actors is very helpful for this. Help for reflection can be found here [Link].",
-  "submission.sections.submit.progressbar.describe.innovationpotentials.info": "<p><i><b>Legen Sie bitte für jede Lösung, Veränderung oder Innovation einen eigenen Eintrag an.</b></i></p><p><b>Wichtige Hinweise:</b></br><ul><li>Anwendungsorientierte Projekte sollten hier mindestens einen Eintrag anlegen.</li><li>Dies ist einer der anspruchsvollsten Bereiche der Dokumentation. Nehmen Sie sich Zeit für Reflexionsschleifen.</li><li>Hier werden <b>adressierte Akteursgruppen</b> zugeordnet. Diese sollten bereits eingetragen sein.</li><li>In der <b>Antragstellung</b> haben Sie möglicherweise <b>nur einen Teil der benötigten Informationen</b>. Ergänzen Sie im Projektverlauf.</li><li>Wenn die mögliche Nutzung der Projektergebnisse noch unklar ist, weit in der Zukunft liegt oder sehr unsicher ist, wechseln Sie bitte in die verkürzte Erfassung im Bereich <b>Idee für eine Nutzung von Projektergebnissen</b></li></ul>.</p><p><b>Tipps:</b></br><ul><li>Ein Austausch mit Praxispartnern und Akteursgruppen ist für die Reflexion sehr hilfreich.</li><li>Hilfen und Beispiele für die Reflexion [Link]</li></br><li>Begriffsverständnis / Hintergrundinfos zu Lösung, Veränderung Innovation [Link]</li></ul></p>",
+  "submission.sections.submit.progressbar.describe.innovationpotentials.info": "<p><i><b>Legen Sie bitte für jede Lösung, Veränderung oder Innovation einen eigenen Eintrag an.</b></i></p><p><b>Wichtige Hinweise:</b></br><ul><li>Anwendungsorientierte Projekte sollten hier mindestens einen Eintrag anlegen.</li><li>Dies ist einer der anspruchsvollsten Bereiche der Dokumentation. Nehmen Sie sich Zeit für Reflexionsschleifen.</li><li>Hier werden <b>adressierte Akteursgruppen</b> zugeordnet. Diese sollten bereits eingetragen sein.</li><li>In der <b>Antragstellung</b> haben Sie möglicherweise <b>nur einen Teil der benötigten Informationen</b>. Ergänzen Sie im Projektverlauf.</li><li>Wenn die mögliche Nutzung der Projektergebnisse noch unklar ist, weit in der Zukunft liegt oder sehr unsicher ist, wechseln Sie bitte in die verkürzte Erfassung im Bereich <b>Idee für eine Nutzung von Projektergebnissen</b></li></ul>.</p><b>Tipps:</b></br><ul><li>Ein Austausch mit Praxispartnern und Akteursgruppen ist für die Reflexion sehr hilfreich.</li><li>Hilfen und Beispiele für die Reflexion <i class=\"fas fa-link\"></i></li><li>Begriffsverständnis / Hintergrundinfos zu Lösung, Veränderung Innovation<i class=\"fas fa-link\"></i></li></ul>",
 
   // "submission.sections.submit.progressbar.describe.innovationpotentials_applicability": "Applicability of the solution / change / innovation",
   "submission.sections.submit.progressbar.describe.innovationpotentials_applicability": "Potenziale und Defizite der Lösung / Veränderung / Innovation reflektieren",
@@ -9886,7 +9886,7 @@
 
   // "submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <b>upload additional files just dragging & dropping them everywhere in the page.</b>",
   // TODO Source message changed - Revise the translation
-  "submission.sections.upload.info": "Hier finden Sie alle Dateien, die aktuell zum Eintrag gehören. Sie können die Metadaten und Zugriffsrechte bearbeiten oder <b>weitere Dateien hinzufügen, indem Sie sie einfach irgendwo auf diese Seite ziehen.</b>",
+  "submission.sections.upload.info": "<p><b><i>Über <i class=\"fas fa-plus-circle\"></i> ergänzen Sie bitte wichtige Angaben zu den Zugriffsrechten und zum Dateityp.</p></b></i><b>Wichtige Hinweise:</b><ul><li>Über den Dateityp wählen Sie aus, ob die Datei als Bild (Logo, Bilddatei) oder als Anhang dargestellt wird.</ul></li>",
 
   // "submission.sections.upload.no-entry": "No",
   "submission.sections.upload.no-entry": "Kein Eintrag",
@@ -10560,7 +10560,7 @@
   "ethic.listelement.badge": "Ethische Reflexion",
 
   // "gender.listelement.badge": "Gender reflection",
-  "gender.listelement.badge": "Reflexion zu Geschlechteraspekten",
+  "gender.listelement.badge": "Reflexion zur Geschlechtergerechtigkeit",
 
   // "impactpathway.listelement.badge": "Impact Pathway",
   // TODO Source message changed - Revise the translation
@@ -10822,7 +10822,7 @@
   "submission.sections.submit.progressbar.describe.projects_import": "Importierte Informationen des Teilprojektes",
 
   // "submission.sections.submit.progressbar.describe.projects_import.info": "This information is generated from the corresponding subprojects. During the proposal preparation phase, the information comes from the easy-online imports of the subprojects. During the project phase, the information is regularly updated from profi.",
-  "submission.sections.submit.progressbar.describe.projects_import.info": "<p><b>Hier sind keine Eingaben erforderlich. Die Informationen kommen aus dem  Import der easy-xml-Datei und werden im Projektverlauf über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert.</p></b><p><b>Wichtige Hinweise:</b></br><ul> <li>Wenn Sie in der Antragsphase fehlerhaften Angaben korrigieren möchten, ändern Sie diese Angaben in easy-online und importieren erneut. </li><li> Im Projektverlauf sollten Sie fehlerhafte Angaben an den Förderer melden. Berücksichtigen Sie dabei, dass Daten aus profi alle 24 Std. aktualisiert werden.</ul> </li></p>",
+  "submission.sections.submit.progressbar.describe.projects_import.info": "<p><b>Hier sind keine Eingaben erforderlich. Die Informationen kommen aus dem  Import der easy-xml-Datei und werden im Projektverlauf über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert.</p></b><p><b>Wichtige Hinweise:</b><ul> <li>Wenn Sie in der Antragsphase fehlerhaften Angaben korrigieren möchten, ändern Sie diese Angaben in easy-online und importieren erneut. </li><li> Im Projektverlauf sollten Sie fehlerhafte Angaben an den Förderer melden. Berücksichtigen Sie dabei, dass Daten aus profi alle 24 Std. aktualisiert werden.</ul> </li></p>",
 
   // "submission.sections.submit.progressbar.describe.projectpartners": "Project partner",
   "submission.sections.submit.progressbar.describe.projectpartners": "Tätigkeitsbereich Ihrer Organisationseinheit beschreiben",
@@ -10846,19 +10846,19 @@
   "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentprojects": "Schlagworte",
 
   // "submission.sections.submit.progressbar.describe.agrovoc_keywords_others": "Keywords",
-  "submission.sections.submit.progressbar.describe.agrovoc_keywords_others": "Schlagworte",
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords_others": "Schlagworte/Keywords anpassen",
 
   // "submission.sections.submit.progressbar.describe.statusacc1": "Status",
-  "submission.sections.submit.progressbar.describe.statusacc1": "Im Projektverlauf Status der Informationen aktualisieren",
+  "submission.sections.submit.progressbar.describe.statusacc1": "Veränderungen im Vergleich zum Antrag kennzeichnen (im Projektverlauf)",
 
   // "submission.sections.submit.progressbar.describe.statusacc2": "Status",
-  "submission.sections.submit.progressbar.describe.statusacc2": "Im Projektverlauf Status der Informationen aktualisieren",
+  "submission.sections.submit.progressbar.describe.statusacc2": "Veränderungen im Vergleich zum Antrag kennzeichnen (im Projektverlauf)",
 
   // "submission.sections.submit.progressbar.describe.statusacc3": "Status",
-  "submission.sections.submit.progressbar.describe.statusacc3": "Im Projektverlauf Status der Informationen aktualisieren",
+  "submission.sections.submit.progressbar.describe.statusacc3": "Veränderungen im Vergleich zum Antrag kennzeichnen (im Projektverlauf)",
 
   // "submission.sections.submit.progressbar.describe.statusacc4": "Status",
-  "submission.sections.submit.progressbar.describe.statusacc4": "Im Projektverlauf Status der Informationen aktualisieren",
+  "submission.sections.submit.progressbar.describe.statusacc4": "Veränderungen im Vergleich zum Antrag kennzeichnen (im Projektverlauf)",
 
   // "cooperation-partners.listelement.badge": "Cooperation partner",
   "cooperation-partners.listelement.badge": "Kooperationspartner",
@@ -11004,10 +11004,10 @@
   "submission.sections.submit.progressbar.describe.spinoffs_result.info": "<p><i>Beschreiben Sie hier bitte die Art der Ausgründung und Informationen zur offiziellen Eintragung ins Registerportal.</p><p>Hinweis: Unterscheiden Sie bei der Ausgründung, ob praxisorientierte Forschungsergebnisse oder neu entwickelte Methoden in die Gründung einfließen <b>(Transfer-Spin-off)</b> oder ob eher besondere Fähigkeiten und Kenntnisse, die sich einer der Gründer angeeignet hat, unverzichtbar für die Ausgründung sind <b>(Kompetenz-Spin-off)</b>.</p>",
 
   // "submission.sections.submit.progressbar.describe.parentprojects.info": "missing",
-  "submission.sections.submit.progressbar.describe.parentprojects.info": "<i><b>Bitte geben Sie hier Informationen zum Verbundprojekt ein.</br>Achten Sie besonders auf die korrekte Auswahl des Förderbereichs bzw. der Bekanntmachung. Damit wird sichergestellt, dass Ihnen die dazugehörigen Förderziele in „Beitrag zu förderpolitischen Zielen“ angezeigt werden.</i>",
+  "submission.sections.submit.progressbar.describe.parentprojects.info": "<b>Worum es hier geht:</b><ul><li>Verbundprojekte sind Projekte, in denen mehrere Organisationen/Antragsteller mit eigenen Teilprojekten zusammenarbeiten.</li><li>Die meisten Informationen werden hier aus den Teilprojekten übertragen.</li><li>Sie ergänzen hier wichtige Angaben, für die Funktion des Monitoring-Tools. Nutzen Sie diese Seite deshalb auch, wenn das Projekt nur von Ihrer Organisation durchgeführt wird.</li><li>Fügen Sie über den Upload ein Projektlogo (falls vorhanden) und die Kapitel zum Stand des Wissens sowie zu Material und Methoden hinzu.</ul></li>  <p><b><i>Bitte geben Sie hier Informationen zum Verbundprojekt ein.</p></b></i><b>Wichtige Hinweise:</b><ul><li>Achten Sie besonders auf die korrekte Auswahl des Förderbereichs bzw. der Bekanntmachung in der Ihr Projekt beantragt wird. Damit wird sichergestellt, dass Ihnen die dazugehörigen Förderziele in „Beitrag zu förderpolitischen Zielen“ angezeigt werden.</ul></li>",
 
   // "submission.sections.submit.progressbar.describe.parentprojects_calc": "missing",
-  "submission.sections.submit.progressbar.describe.parentprojects_calc": "Aggregierte Angaben aus den Teilprojekten",
+  "submission.sections.submit.progressbar.describe.parentprojects_calc": "Zusammengefasste Angaben aus den Teilprojekten",
 
   // "submission.sections.submit.progressbar.describe.parentprojects_calc.info": "missing",
   "submission.sections.submit.progressbar.describe.parentprojects_calc.info": "<p>Hier werden Daten zum Verbundprojekt auf Basis der Teilprojekte automatisch kalkuliert und importiert. Über den Import der easy-xml-Dateien und im Projektverlauf über profi findet eine regelmäßige Aktualisierung statt. Eingaben sind weder erforderlich noch möglich.</p>",
@@ -11073,19 +11073,19 @@
   "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentprojects.info": "<i>Bitte weisen Sie dem Projekt Schlagworte zu.</br>Zur Auswahl steht das kontrollierte Vokabular von Agrovoc. Schlagworte dienen der Suchoptimierung, d. h. mit passenden Schlagworten wird Ihr Projekt leichter von Suchmaschinen gefunden. </i>",
 
   // "submission.sections.submit.progressbar.describe.agrovoc_keywords_others.info": "missing",
-  "submission.sections.submit.progressbar.describe.agrovoc_keywords_others.info": "<i>Hier werden die Schlagworte angezeigt, die Sie dem Projekt zugewiesen haben. Sie können die Schlagworte passend zum Eintrag verändern.</i>",
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords_others.info": "Hier werden die Schlagworte angezeigt, die Sie dem Verbundprojekt zugewiesen haben.<p><b><i>Sie können die Schlagworte anpassen, indem Sie sie löschen oder neue hinzufügen. Geben Sie dafür jeweils einen Begriff oder Teile davon ein. Wählen Sie den passenden Begriff aus der angezeigten Vorschlagsliste.</p></b></i> <b>Wichtige Hinweise:</b><ul><li>Schlagworte dienen der <b>Suchoptimierung</b>, d. h. dadurch werden die Einträge leichter gefunden.</li><li>Die <b>Übertragung</b> der Schlagworte vom Verbundprojekt findet nur <b>einmalig</b> beim Anlegen des Eintrags statt. Die hier zugewiesenen Schlagworte bleiben unverändert, auch wenn die Schlagworte zum Verbundprojekt noch mal geändert werden.</li><li>Verwendet wird hier das kontrollierte Schlagwortverzeichnis für den Agrarbereich der FAO (Agrovoc).</ul></li>",
 
   // "submission.sections.submit.progressbar.describe.statusacc.info": "missing",
-  "submission.sections.submit.progressbar.describe.statusacc.info": "<b><i>Passen Sie bitte hier den Status der Informationen an, wenn sie sich in Bezug auf den Antrag verändert haben.  Damit werden Veränderungen leichter sichtbar. </br>Zur Antragstellung sind keine Angaben erforderlich.</i></b>",
+  "submission.sections.submit.progressbar.describe.statusacc.info": "<p><b><i>Kennzeichnen Sie hier bitte Veränderungen seit der Antragstellung zu diesem Eintrag.</p></b></i>Damit werden Veränderungen in der Planung und der Projektfortschritt leicht sichtbar.",
 
   // "submission.sections.submit.progressbar.describe.statusacc2.info": "missing",
-  "submission.sections.submit.progressbar.describe.statusacc2.info": "<b><i>Passen Sie bitte hier den Status der Informationen an, wenn sie sich in Bezug auf den Antrag verändert haben.  Damit werden Veränderungen leichter sichtbar. </br>Zur Antragstellung sind keine Angaben erforderlich.</i></b>",
+  "submission.sections.submit.progressbar.describe.statusacc2.info": "<p><b><i>Kennzeichnen Sie hier bitte Veränderungen seit der Antragstellung zu diesem Eintrag.</p></b></i>Damit werden Veränderungen in der Planung und der Projektfortschritt leicht sichtbar.",
 
   // "submission.sections.submit.progressbar.describe.statusacc3.info": "missing",
-  "submission.sections.submit.progressbar.describe.statusacc3.info": "<b><i>Passen Sie bitte hier den Status der Informationen an, wenn sie sich in Bezug auf den Antrag verändert haben.  Damit werden Veränderungen leichter sichtbar. </br>Zur Antragstellung sind keine Angaben erforderlich.</i></b>",
+  "submission.sections.submit.progressbar.describe.statusacc3.info": "<p><b><i>Kennzeichnen Sie hier bitte Veränderungen seit der Antragstellung zu diesem Eintrag.</p></b></i>Damit werden Veränderungen in der Planung und der Projektfortschritt leicht sichtbar.",
 
   // "submission.sections.submit.progressbar.describe.statusacc4.info": "missing",
-  "submission.sections.submit.progressbar.describe.statusacc4.info": "<b><i>Passen Sie bitte hier den Status der Informationen an, wenn sie sich in Bezug auf den Antrag verändert haben.  Damit werden Veränderungen leichter sichtbar. </br>Zur Antragstellung sind keine Angaben erforderlich.</i></b>",
+  "submission.sections.submit.progressbar.describe.statusacc4.info": "<p><b><i>Kennzeichnen Sie hier bitte Veränderungen seit der Antragstellung zu diesem Eintrag.</p></b></i>Damit werden Veränderungen in der Planung und der Projektfortschritt leicht sichtbar.",
 
   // "submission.form.unexpected_results.info": "missing",
   "submission.form.unexpected_results.info": "<p><b>Worum es hier geht:</b></br><ul><li>(Zwischen-)Ergebnisse oder Probleme sollen im Impact Pathway leicht erkennbar gemacht werden, um den <b>Grund für Veränderungen in den Projektarbeiten und Wirkungen</b> darzustellen. Damit zeigen Sie die Anpassungsfähigkeit des Projektes.</li><li>Beispiele: Forschungsmethoden erweisen sich als nicht nutzbar, Versuchsvarianten unterscheiden sich nicht signifikant, essentielle Kooperationen lassen sich nicht verwirklichen, Risiken einer Anwendung werden bekannt, Lösungen erweisen sich als wirkungslos.</li><li>Eventuell können diese (Zwischen-) Ergebnisse oder Probleme so gravierend sein, dass sie als sogenannte „Negative Results“ eingestuft werden können. Das sind z. B. nicht-signifikante oder eine Hypothese widerlegende Ergebnisse sowie methodische Probleme die eine Durchführung der Forschungsarbeiten verhindern. Indem Sie diese veröffentlichen, zeigen Sie Integrität und Verantwortungsbewusstsein der Forschung im Projekt. Sie tragen in der wissenschaftlichen Community dazu bei, Methoden weiterzuentwickeln, Risiken wahrzunehmen und Verzerrungen in der Einschätzung von Signifikanzen und Effektgrößen in Reviews und Metaanalysen zu vermeiden. Bei praxisorientierten Ergebnissen tragen Sie dazu bei, die Anwendung unwirksamer oder risikoreicher Maßnahmen zu verhindern.</ul></li></br></p><p><b>Zur Unterscheidung:</b></br><ul><li>Wenn externe Rahmenbedingungen die Ursache für eine Veränderung sind, erfassen Sie diese im Bereich <b>Rahmenbedingung</b>.</li><li>Von <b>Forschungsergebnis</b> unterscheidet sich <b>(Zwischen-) Ergebnis / Problem</b> darin, dass es Veränderungen in den Projektarbeiten und Wirkungen hervorruft.</li><li><b>Aspekte zur Debatte um „Negative Results“ [Link]</ul></li></b></p>",
@@ -11115,10 +11115,10 @@
   "submission.form.gender.info": "<p><b>Worum es hier geht:</b></br><ul><li>Forschung gestaltet maßgeblich Innovation – damit Menschen unabhängig vom Geschlecht davon profitieren können, ist es erforderlich, dass Forschung Fragen der Geschlechtergerechtigkeit einbezieht.</li><li>Da Forschung und Entwicklung öffentlich gefördert werden, sind die wichtigen gesellschaftlichen Ziele der Geschlechtergleichstellung zu berücksichtigen.</li><br><li>Der Erfolg von Forschung und Innovation kann erheblich gesteigert werden, wenn relevante Geschlechteraspekte im Vorfeld identifiziert und im Projekt berücksichtigt werden.</li></ul></p>",
 
   // "submission.sections.submit.progressbar.describe.gender_reflection.info": "missing",
-  "submission.sections.submit.progressbar.describe.gender_reflection.info": "<p><b>Reflektieren Sie bitte hier, inwieweit das Projekt Geschlechteraspekte berücksichtigt. Ergänzen Sie Ihr „ja“ oder „nein“ bei den folgenden Fragen bitte jeweils mit einer kurzen Erläuterung.</p></b><p><b>Wichtiger Hinweis:</b></br><ul><li> Wo Fragen der Geschlechtergerechtigkeit im Projekt relevant sind, ist nicht immer gleich offensichtlich. Reflektieren Sie daher bitte jede Frage und berücksichtigen Sie die Hinweise hinter den [?], um auch nicht direkt offensichtliche Aspekte zu identifizieren.</ul></li></p><p><b>Tipps:</b></br> <ul><li>Hintergrundinformationen (z. B. DFG-Gleichstellungsrichtlinien) und Beispiele [Link]</ul></li></p>",
+  "submission.sections.submit.progressbar.describe.gender_reflection.info": "<p><b>Reflektieren Sie bitte hier, inwieweit das Projekt Geschlechteraspekte berücksichtigt. Ergänzen Sie Ihr „ja“ oder „nein“ bei den folgenden Fragen bitte jeweils mit einer kurzen Erläuterung.</p></b><b>Worum es hier geht:</b><ul><li>Forschung gestaltet maßgeblich Innovation. Damit Menschen unabhängig vom Geschlecht davon profitieren können, ist es erforderlich, dass Forschung Fragen der Geschlechtergerechtigkeit einbezieht.</li><li>Da Forschung und Entwicklung öffentlich gefördert werden, sind die wichtigen gesellschaftlichen Ziele der Geschlechtergleichstellung zu berücksichtigen.</li><li>Der Erfolg von Forschung und Innovation kann erheblich gesteigert werden, wenn relevante Geschlechteraspekte im Vorfeld identifiziert und im Projekt berücksichtigt werden.</ul></li> <b>Wichtiger Hinweis:</b><ul><li> Wo Fragen der Geschlechtergerechtigkeit im Projekt relevant sind, ist nicht immer gleich offensichtlich. Reflektieren Sie daher bitte jede Frage und berücksichtigen Sie die Hinweise hinter den <i class=\"fas fa-question-circle\"></i>, um auch nicht direkt offensichtliche Aspekte zu identifizieren.</ul></li><b>Tipps:</b> <ul><li>Hintergrundinformationen (z. B. DFG-Gleichstellungsrichtlinien) und Beispiele <i class=\"fas fa-link\"></i></ul></li>",
 
   // "submission.sections.submit.progressbar.describe.gender.info": "missing",
-  "submission.sections.submit.progressbar.describe.gender.info": "<p><b><i>Formulieren Sie eine Kernaussage, die das Ergebnis der Reflexion zusammenfassend wiedergibt.</p></b></i> <p><b>Wichtige Hinweise:</b></br><ul><li>Anhand der Kernaussage wird das Ergebnis der Reflexion im Impact Pathway dargestellt. Außerdem wird sie in Übersichten angezeigt.</li><li>Beispiele: „Berücksichtigung von Geschlechterunterschieden sind zentral für die Entwicklung von Wirkungen“, „Unterschiedliche Workshops für die Anforderungserhebung bei Frauen und Männern“, „Geschlechterstereotype werden gezielt hinterfragt“ „Geschlechterbezug ist nur für die Beschäftigten relevant“, „kein spezifischer Geschlechterbezug vorhanden“</li></ul></p>",
+  "submission.sections.submit.progressbar.describe.gender.info": "<p><b><i>Formulieren Sie eine Kernaussage, die das Ergebnis der Reflexion zusammenfassend wiedergibt.</p></b></i><b>Wichtige Hinweise:</b><ul><li>Anhand der Kernaussage wird das Ergebnis der Reflexion im Impact Pathway dargestellt. Außerdem wird sie in Übersichten angezeigt.</li><li>Beispiele: „Berücksichtigung von Geschlechterunterschieden sind zentral für die Entwicklung von Wirkungen“, „Unterschiedliche Workshops für die Anforderungserhebung bei Frauen und Männern“, „Geschlechterstereotype werden gezielt hinterfragt“ „Geschlechterbezug ist nur für die Beschäftigten relevant“, „kein spezifischer Geschlechterbezug vorhanden“</ul></li>",
 
   // "vocabulary-treeview.tree.description.agrovoc": "missing",
   "vocabulary-treeview.tree.description.agrovoc": "<i>Wählen Sie bitte passende Schlagwörter aus.</br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
@@ -11378,22 +11378,52 @@
   "submission.form.steps-edit.info": "<p><b>Worum es hier geht:</b></br><ul><li>Hier erfassen Sie Arbeiten und Kooperationen, die zur <b>Weiterentwicklung bzw. Verwertung der gewonnenen Ergebnisse und Erkenntnisse nach Projektende</b> aufgenommen oder fortgeführt werden sollen.</li><li>Diese können von <b>einem Projektpartner oder von mehreren Beteiligten</b> geplant sein.</li><li>Dazu zählen z. B. Transferaktivitäten oder Folgeprojekte.</li><li>Auch die Aufnahme/Fortführung von Kooperationen z. B. in der Lehre, Kooperationen zur Erschließung bzw. Übertragung in andere Wissensgebiete oder die gemeinsame Nutzung von Ressourcen gehört dazu.</li><li>Dies sind wichtige, in die Zukunft gerichtete Informationen zu Ihrem Projekt, die auch in der <b>Verwertungsplanung</b> darzulegen sind. </ul></li></p>",
 
   // "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentproject": "Keywords",
-  "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentproject": "Schlagworte",
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentproject": "Schlagworte/Keywords zuweisen",
 
   // "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentproject.info": "missing",
-  "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentproject.info": "<i>Bitte weisen Sie dem Projekt Schlagworte zu.</br>Zur Auswahl steht das kontrollierte Vokabular von Agrovoc. Schlagworte dienen der Suchoptimierung, d. h. mit passenden Schlagworten wird Ihr Projekt leichter von Suchmaschinen gefunden. </i>",
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentproject.info": "<p><b><i>Weisen Sie dem Verbundprojekt bitte passende Schlagworte/Keywords zu.</br>Geben Sie dafür jeweils einen Begriff oder Teile davon ein. Wählen Sie den passenden Begriff aus der angezeigten Vorschlagsliste.</p></b></i> <b>Wichtige Hinweise:</b><ul><li>Schlagworte dienen der <b>Suchoptimierung</b>, d. h. dadurch wird das Projekt leichter gefunden.</li> <li>Die hier zugewiesenen Schlagworte werden in andere Einträge (z. B. Publikationen) übertragen und können dort angepasst werden. <b>Vergeben Sie deshalb hier die Schlagworte, bevor Sie weitere Einträge vornehmen.</b></li> <li>Verwendet wird hier das kontrollierte Schlagwortverzeichnis für den Agrarbereich der FAO (Agrovoc).</ul></li>",
 
-  // "impact-pathway.objectives.description.title": "missing",
-  "impact-pathway.objectives.description.title": "Ihre Projektbeschreibung",
+  // "submission.sections.submit.progressbar.describe.exp_societalimpact": "missing",
+  "submission.sections.submit.progressbar.describe.exp_societalimpact": "Erwartete gesellschaftliche Wirkung",
+
+  // "submission.form.exp_societalimpact.info": "missing",
+  "submission.form.exp_societalimpact.info": "<b>Worum es hier geht:</b><ul><li>Hier wird erfasst, welche Wirkungen und eventuelle Nebenwirkungen mit den Projektergebnissen verbunden sein können, wenn die in Säule 4 dargestellte Lösung / Veränderung / Innovation angewendet würde. D.h. es werden erwartete Wirkungen beschrieben, da diese meist noch in der Zukunft liegen.</li><li>Mit den Pfeilen im Impact Pathway können Zusammenhänge zu Einträgen in Säule 4 gezeigt werden.</li><li>Für jede erwartete Wirkung, die im Impact Pathway dargestellt werden soll, ist ein Eintrag anzulegen.</li><li>Die Beschreibung der erwarteten Wirkungen erfolgt anhand von <b>Transformationsbereichen</b> der Deutschen Nachhaltigkeitsstrategie (DNS) und <b>Kernelementen</b> nachhaltiger Entwicklung.</li></ul><b>Wie wird nachhaltige Entwicklung hier verstanden?</b>Nachhaltige Entwicklung ist ein zentrales Anliegen der gesellschaftlichen Transformation zu Beginn des 21. Jahrhunderts. Dafür wurden die 17 Sustainable Development Goals (SDGs) mit ihren <br>Unterzielen global ausgehandelt. Die Deutsche Nachhaltigkeitsstrategie (DNS) 2021 ist das demokratisch legitimierte Steuerungsinstrument zur Umsetzung der SDGs auf nationaler Ebene. Gemäß der Leitprinzipien der DNS bedeutet nachhaltige Entwicklung: <ul><li>gleichermaßen den Bedürfnissen der heutigen sowie künftiger Generationen gerecht zu werden – in Deutschland sowie in allen Teilen der Welt</li> <li>wirtschaftlich leistungsfähige, sozial ausgewogene und ökologisch verträgliche Entwicklung</li><li>Einhaltung der planetaren Grenzen</li><li>Orientierung an einem Leben in Würde für alle (ein Leben ohne Armut und Hunger; ein Leben, indem alle Menschen ihr Potenzial in Würde und Gleichheit voll entfalten können)</ul></li> Die DNS benennt sechs Transformationsbereiche für einen langfristigen Wandel, die jeweils unterschiedliche SDGs adressieren. Als Kernelemente der Nachhaltigkeit wurden Aktivitäten oder Themengebiete herausgearbeitet, durch die zu einer nachhaltigen Entwicklung in den Transformationsbereichen beigetragen wird.",
+
+  // "submission.form.exp_societalimpact-edit.info": "missing",
+  "submission.form.exp_societalimpact-edit.info": "<b>Worum es hier geht:</b><ul><li>Hier wird erfasst, welche Wirkungen und eventuelle Nebenwirkungen mit den Projektergebnissen verbunden sein können, wenn die in Säule 4 dargestellte Lösung / Veränderung / Innovation angewendet würde. D.h. es werden erwartete Wirkungen beschrieben, da diese meist noch in der Zukunft liegen.</li><li>Mit den Pfeilen im Impact Pathway können Zusammenhänge zu Einträgen in Säule 4 gezeigt werden.</li><li>Für jede erwartete Wirkung, die im Impact Pathway dargestellt werden soll, ist ein Eintrag anzulegen.</li><li>Die Beschreibung der erwarteten Wirkungen erfolgt anhand von <b>Transformationsbereichen</b> der Deutschen Nachhaltigkeitsstrategie (DNS) und <b>Kernelementen</b> nachhaltiger Entwicklung.</li></ul><b>Wie wird nachhaltige Entwicklung hier verstanden?</b>Nachhaltige Entwicklung ist ein zentrales Anliegen der gesellschaftlichen Transformation zu Beginn des 21. Jahrhunderts. Dafür wurden die 17 Sustainable Development Goals (SDGs) mit ihren <br>Unterzielen global ausgehandelt. Die Deutsche Nachhaltigkeitsstrategie (DNS) 2021 ist das demokratisch legitimierte Steuerungsinstrument zur Umsetzung der SDGs auf nationaler Ebene. Gemäß der Leitprinzipien der DNS bedeutet nachhaltige Entwicklung: <ul><li>gleichermaßen den Bedürfnissen der heutigen sowie künftiger Generationen gerecht zu werden – in Deutschland sowie in allen Teilen der Welt</li> <li>wirtschaftlich leistungsfähige, sozial ausgewogene und ökologisch verträgliche Entwicklung</li><li>Einhaltung der planetaren Grenzen</li><li>Orientierung an einem Leben in Würde für alle (ein Leben ohne Armut und Hunger; ein Leben, indem alle Menschen ihr Potenzial in Würde und Gleichheit voll entfalten können)</ul></li> Die DNS benennt sechs Transformationsbereiche für einen langfristigen Wandel, die jeweils unterschiedliche SDGs adressieren. Als Kernelemente der Nachhaltigkeit wurden Aktivitäten oder Themengebiete herausgearbeitet, durch die zu einer nachhaltigen Entwicklung in den Transformationsbereichen beigetragen wird.",
+
+  // "submission.sections.submit.progressbar.describe.exp_societalimpact.info": "missing",
+  "submission.sections.submit.progressbar.describe.exp_societalimpact.info": "<p><b><i>Erfassen Sie in jedem Eintrag eine einzelne erwartete Wirkung des Projektes.</p></b></i> <i>Um eine einzelne erwartete Wirkung zu charakterisieren, wählen Sie maximal drei (im Zusammenhang stehende) Kernelemente und Transformationsbereiche der nachhaltigen Entwicklung aus.</i><b>Wichtige Hinweise:</b><ul><li>Wenn kein Transformationsbereich oder Kernelement passend ist, wählen Sie Sonstiges.</li><li>Wenn die erwarteten Wirkungen des Projektes noch unklar sind, reflektieren Sie zunächst anhand der Kernelemente und Transformationsbereiche, bevor Sie entscheiden, wie viele Einträge Sie anlegen möchten und jeweils die Bezeichnung und Beschreibung formulieren.</ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.exp_societalimpact_neg": "missing",
+  "submission.sections.submit.progressbar.describe.exp_societalimpact_neg": "Reflektieren von eventuellen negativen Nebenwirkungen",
+
+  // "submission.sections.submit.progressbar.describe.exp_societalimpact_neg.info": "missing",
+  "submission.sections.submit.progressbar.describe.exp_societalimpact_neg.info": "<p><b><i>Reflektieren Sie hier, ob ggf. negative Nebenwirkungen oder Zielkonflikte zur bereits beschriebenen Nachhaltigkeitswirkung vorliegen.</i></b></p>",
+
+  // "impact-pathway.objectives.description.title": "Description",
+  "impact-pathway.objectives.description.title": "Beschreibung",
+
+  // "impact-pathway.description": "Description",
+  "impact-pathway.description": "Beschreibung",
+
+  // "exploitation-plan.description.title": "Description",
+  "exploitation-plan.description.title": "Beschreibung",
+
+  // "exploitation-plan.edit.btn.title": "Edit description",
+  "exploitation-plan.edit.btn.title": "Beschreibung bearbeiten",
 
   // "layout.box.help-text.Person_h": "missing",
   "layout.box.help-text.Person_h": "<p><b>Herzlich Willkommen im SynSICRIS-Monitoring-Tool!</p></b><b>Erste Schritte:</b><ul><li>Als <b>Koordinator</b> legen Sie über <i class=\"fas fa-plus-circle\"></i> ein neues <b>Verbundprojekt</b> an.</li> <li>Bereits vorhandene <b>Verbundprojekte</b> können Sie zum Bearbeiten <b>auswählen</b>.</li><li>Über <i class=\"far fa-user-circle\"></i> können Sie Ihr Personenprofil und Ihre Anmeldedaten im Monitoring-Tool bearbeiten.</ul></li><b>Worum es im Monitoring-Tool geht:</b><ul><li>Das Monitoring-Tool ersetzt Teile von Anträgen und Berichten.</li> <li>Statt Fließtext (einem Textdokument) zerlegen Sie die Informationen zum Projekt in einzelne Einträge. Jeder Eintrag hat eine Bezeichnung und ein Beschreibungsfeld und je nach Bereich eines Eintrags (z.B. Arbeitspaket oder Veranstaltung) werden weitere Informationen erfragt.</li> <li>Über die Einträge stellen Sie Hintergründe, Ziele, Arbeiten, Ergebnisse und Wirkungen des Projektes dar.</li> <li>Die Einträge strukturieren Sie über die Arbeitsplanung, die Wirkungsplanung mit dem Impact-Pathway und in der Verwertungsplanung.</li> <li>Dadurch können Sie jederzeit von den Übersichten in die Detailseiten der Einträge wechseln.</li><li>Sie arbeiten hier gemeinsam mit allen Projektpartnern an den inhaltlichen Aspekten des Antrags und der Berichte. Für die Verwertungsplanung hat jedes Teilprojekt seinen eigenen Bereich, in dem Sie Einträge erstellen können, die für die anderen Projektpartner nicht sichtbar sind.</li><li>Alle Einträge im Monitoring-Tool werden für den Fördermittelgeber sichtbar, sobald Sie eine Version für den Fördermittelgeber freischalten. (Derzeit noch nicht implementiert.)</li><li>Die öffentliche Sichtbarkeit können Sie für jeden einzelnen Eintrag festlegen. (Derzeit noch nicht implementiert.)</li> <li>Die Nutzung des Monitoring-Tools erstreckt sich von der Antragstellung bis zum Projektabschluss und max. 2 Jahre bis nach Projektende indem Sie die Einträge kontinuierlich aktualisieren. Für die Antragstellung und zu den Berichtszeitpunkten sichern Sie jeweils die aktualisierte Version und geben Sie für den Fördermittelgeber frei.</ul></li> <b>Tipps für die erste Benutzung:</b><ul><li>Lesen Sie ALLE Hilfetexte!</li><li>Mehr Informationen, mit Abbildungen finden Sie jeweils auf den Hilfeseiten [Link]</ul></li>",
 
   // "layout.box.help-text.default_h_1": "missing",
-  "layout.box.help-text.default_h_1": "<b>Bedienungshinweise:</b><ul><li>Über die <b>linke Navigationsleiste</b> gelangen Sie zu vorhandenen Einträgen.</li> <li>In jeder Listenansicht können Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Eintrag hinzufügen.</li><li>Über <b>Aktion auswählen (rechts)</b> können Sie verschiedene Funktionen für die aktuell aufgerufene Seite durchführen.</ul></li> <b>Empfehlenswerte Schritte für die Antragstellung:</b> <ul><li>Laden Sie Projektpartner über <b>Aktion auswählen</b> ein.</li><li>Jeder Projektpartner legt sein Teilprojekt über <i class=\"fas fa-plus-circle\"></i> in der Liste an und bestimmt die Bearbeitungsrechte für die anderen Projektpartner.</li><li>Vervollständigen Sie die Angaben zum Verbundprojekt über Aktion auswählen, nachdem mindestens der Verbundkoordinator sein Teilprojekt angelegt hat.</li><li>Legen Sie die (adressierten/involvierten) Akteursgruppen des Verbundprojektes an.</li> <li>Benennen Sie wichtige Kooperationspartner des Verbundprojektes.</li> <li>Starten Sie die Grobplanung mit dem Impact Pathway und dem Arbeitsplan. (unter structure).</li><li>Reflektieren Sie ethische Aspekte und Gendergerechtigkeit. (unter reflection).</li><li>Die Kapitel zum Stand des Wissens und zu Material und Methoden verfassen Sie als externe (eigene, separate) Textdokumente, die Sie später im Verbundprojekt hochladen können.</li> <li>Finalisieren Sie den Impact Pathway und den Arbeitsplan des Verbundprojektes.</li> <li>Jeder Projektpartner legt für sein Teilprojekt einen Verwertungsplan an.(unter Teilprojekt)</li> <li>Prüfen Sie, ob alle Einträge im Monitoring-Tool vollständig ausgefüllt sind.</li> <li>Überprüfen Sie den Antrag, indem Sie einen PDF-Report erstellen. Passen Sie ggfl. Einträge (Informationen) im Monitoring-Tool an. (Derzeit noch nicht implementiert.)</li><li>Zum Schluss geben Sie die endgültige Antragsversion für die fördernde Einrichtung frei. (Derzeit noch nicht implementiert.)</ul></li><b>Tipps:</b><ul><li>Arbeiten Sie Schrittweise: Legen Sie Einträge mit vorläufigen Bezeichnungen an und ergänzen Sie nach und nach die Details.</li><li>Der Impact Pathway verdeutlicht Hintergründe, Arbeiten und Wirkungen des Projektes, der Arbeitsplan gliedert die Arbeiten, die Verwertungsplanung zeigt die individuelle Verwertung durch die einzelnen Teilprojekte. Mehr zu den Zusammenhängen [Link-Icon – zur Hilfeseite]</li><li>Es ist empfehlenswert, wenn Sie die Einträge im Impact Pathway oder im Arbeitsplan anlegen, da Sie dort mehr Hintergrundinformationen und Hilfen erhalten. Wenn Sie Einträge in der Listenansicht erstellen, müssen sie daran denken, diese dem Impact Pathway oder dem Arbeitsplan später hinzuzufügen.</ul></li> <b>Weitere Hilfen:</b><ul><li>Verbundprojekt und Teilprojekt unterscheiden <i class=\"fas fa-link\"></i></li><li>Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe <i class=\"fas fa-link\"></i></li><li>Bearbeitungsrechte sinnvoll entscheiden <i class=\"fas fa-link\"></i></ul></li>",
+  "layout.box.help-text.default_h_1": "<b>Bedienungshinweise:</b><ul><li>Über die <b>linke Navigationsleiste</b> gelangen Sie zu vorhandenen Einträgen.</li> <li>In jeder Listenansicht können Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Eintrag hinzufügen.</li><li>Über <b>Aktion auswählen (rechts)</b> können Sie verschiedene Funktionen für die aktuell aufgerufene Seite durchführen.</ul></li>",
 
   // "layout.box.help-text.default_h_2": "missing",
-  "layout.box.help-text.default_h_2": "<b>Empfehlenswerte Schritte im laufenden Projekt:</b> <ol><li>Aktualisieren</b>  Sie die Einträge zeitnah. Sie reduzieren damit den Aufwand für die Dokumentation erheblich.</li> <li>Nutzen Sie den <b> Status der Information</b>  um Veränderungen gegenüber dem Antrag zu verdeutlichen.</li><li><b>Veränderungen im Arbeitsplan</b> können Sie sehr gut in den jeweiligen Arbeitspaketen begründen.</li> <li><b>Ursachen für Veränderungen</b> im Projekt können Sie im <b>Impact Pathway</b> sehr gut darstellen, indem Sie Einträge zu <b>Rahmenbedingungen</b> aktualisieren oder hinzufügen oder Einträge zu <b>Zwischenergebnissen/Problemen</b> erfassen.</li><li>Für Zwischen- und Abschlussberichte prüfen Sie, ob alle Einträge dem aktuellen Stand entsprechen.</li><li>Stellen Sie dem Fördermittelgeber Veröffentlichungen und sonstigen Dokumente als Belegexemplare über das Monitoring-Tool zur Verfügung.</ol></li><b>Weitere Hilfen:</b><ul><li>Nutzung des Monitoring-Tools während der Projektdurchführung [<i class=\"fas fa-link\"></i> + Link zur Hilfeseite]</li><li>Hinweise zum Projetabschluss [<i class=\"fas fa-link\"></i> + Link zur Hilfeseite]</ul></li>",
+  "layout.box.help-text.default_h_2": "<b>Empfehlenswerte Schritte für die Antragstellung:</b> <ol><li>Laden Sie Projektpartner über <b>Aktion auswählen</b> ein.</li><li>Jeder Projektpartner legt sein Teilprojekt über <i class=\"fas fa-plus-circle\"></i> in der Liste an und bestimmt die Bearbeitungsrechte für die anderen Projektpartner.</li><li>Vervollständigen Sie die Angaben zum Verbundprojekt über Aktion auswählen, nachdem mindestens der Verbundkoordinator sein Teilprojekt angelegt hat.</li><li>Legen Sie die (adressierten/involvierten) Akteursgruppen des Verbundprojektes an.</li> <li>Benennen Sie wichtige Kooperationspartner des Verbundprojektes.</li> <li>Starten Sie die Grobplanung mit dem Impact Pathway und dem Arbeitsplan. (unter structure).</li><li>Reflektieren Sie ethische Aspekte und Gendergerechtigkeit. (unter reflection).</li><li>Die Kapitel zum Stand des Wissens und zu Material und Methoden verfassen Sie als externe (eigene, separate) Textdokumente, die Sie später im Verbundprojekt hochladen können.</li> <li>Finalisieren Sie den Impact Pathway und den Arbeitsplan des Verbundprojektes.</li> <li>Jeder Projektpartner legt für sein Teilprojekt einen Verwertungsplan an.(unter Teilprojekt)</li> <li>Prüfen Sie, ob alle Einträge im Monitoring-Tool vollständig ausgefüllt sind.</li> <li>Überprüfen Sie den Antrag, indem Sie einen PDF-Report erstellen. Passen Sie ggfl. Einträge (Informationen) im Monitoring-Tool an. (Derzeit noch nicht implementiert.)</li><li>Zum Schluss geben Sie die endgültige Antragsversion für die fördernde Einrichtung frei. (Derzeit noch nicht implementiert.)</ol></li><b>Tipps:</b><ul><li>Arbeiten Sie Schrittweise: Legen Sie Einträge mit vorläufigen Bezeichnungen an und ergänzen Sie nach und nach die Details.</li><li>Der Impact Pathway verdeutlicht Hintergründe, Arbeiten und Wirkungen des Projektes, der Arbeitsplan gliedert die Arbeiten, die Verwertungsplanung zeigt die individuelle Verwertung durch die einzelnen Teilprojekte. Mehr zu den Zusammenhängen [Link-Icon – zur Hilfeseite]</li><li>Es ist empfehlenswert, wenn Sie die Einträge im Impact Pathway oder im Arbeitsplan anlegen, da Sie dort mehr Hintergrundinformationen und Hilfen erhalten. Wenn Sie Einträge in der Listenansicht erstellen, müssen sie daran denken, diese dem Impact Pathway oder dem Arbeitsplan später hinzuzufügen.</ul></li> <b>Weitere Hilfen:</b><ul><li>Verbundprojekt und Teilprojekt unterscheiden <i class=\"fas fa-link\"></i></li><li>Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe <i class=\"fas fa-link\"></i></li><li>Bearbeitungsrechte sinnvoll entscheiden <i class=\"fas fa-link\"></i></ul></li>",
+
+  // "layout.box.help-text.default_h_3": "missing",
+  "layout.box.help-text.default_h_3": "<b>Empfehlenswerte Schritte im laufenden Projekt:</b> <ol><li>Aktualisieren</b>  Sie die Einträge zeitnah. Sie reduzieren damit den Aufwand für die Dokumentation erheblich.</li> <li>Nutzen Sie den <b> Status der Information</b>  um Veränderungen gegenüber dem Antrag zu verdeutlichen.</li><li><b>Veränderungen im Arbeitsplan</b> können Sie sehr gut in den jeweiligen Arbeitspaketen begründen.</li> <li><b>Ursachen für Veränderungen</b> im Projekt können Sie im <b>Impact Pathway</b> sehr gut darstellen, indem Sie Einträge zu <b>Rahmenbedingungen</b> aktualisieren oder hinzufügen oder Einträge zu <b>Zwischenergebnissen/Problemen</b> erfassen.</li><li>Für Zwischen- und Abschlussberichte prüfen Sie, ob alle Einträge dem aktuellen Stand entsprechen.</li><li>Stellen Sie dem Fördermittelgeber Veröffentlichungen und sonstigen Dokumente als Belegexemplare über das Monitoring-Tool zur Verfügung.</ol></li><b>Weitere Hilfen:</b><ul><li>Nutzung des Monitoring-Tools während der Projektdurchführung [<i class=\"fas fa-link\"></i> + Link zur Hilfeseite]</li><li>Hinweise zum Projetabschluss [<i class=\"fas fa-link\"></i> + Link zur Hilfeseite]</ul></li>",
 
   // "layout.box.help-text.Project_h_1": "missing",
   "layout.box.help-text.Project_h_1": "<b>Empfehlenswerte Schritte für die Antragstellung:</b><ul><li>Laden Sie die Mitglieder Ihres Teilprojektes über <b>Aktion auswählen</b> ein und legen die deren Bearbeitungsrechte fest.</li><li>Führen Sie über <b>Aktion auswählen</b> den <b>easy-Online Import</b> durch und vervollständigen Sie die Einträge aus dem Import.</li><li>Legen Sie <b>Unterauftragnehmer</b> an, die wichtige Disziplinen oder Handlungsfelder in das Projekt einbringen.</li><li>Erstellen Sie den <b>Verwertungsplan</b>.</li><li>Überprüfen Sie, ob Ihr Verwertungsplan im Teilprojekt und der Impact Pathway im Verbundprojekt inhaltlich konsistent sind.</ul></li>  <b>Tipps:</b><ul><li>Erfassen Sie alle gemeinsamen Informationen nicht hier, sondern im Verbundprojekt, damit sie für alle Projektpartner zur Verfügung stehen.</li><li>Es ist empfehlenswert, zuerst im Impact Pathway die Säule 4, Anwendung (Möglicheiten), zu planen und dann erst den Verwertungsplan der Teilprojekte auszuarbeiten.</ul></li> <b>Weitere Hilfen:</b><ul><li>Rechte- und Rollenmanagement im Teilprojekt [<i class=\"fas fa-link\"></i> + Link zu den Hilfeseiten]</ul></li>",
@@ -11402,16 +11432,16 @@
   "layout.box.help-text.Project_h_2": "<b>Empfehlenswerte Schritte im laufenden Projekt:</b> <ol><li>Aktualisieren Sie vorhandene und ergänzen Sie neue Einträge zeitnah.</li><li>Aktualisieren Sie den Verwertungsplan mindestens jährlich zum Zwischenbericht.</ol></li>",
 
   // "layout.box.help-text.projectpartner_h": "missing",
-  "layout.box.help-text.projectpartner_h": "<p><b>Projektpartner</b> sind die Organisationseinheit(en) die finanziert über das <b>Teilprojekt ihrer Organisation<b> in einem Verbundprojekt mitwirken.</p><p><b>Zum Bearbeiten wählen Sie Ihre Organisationseinheit aus.</p></b><b>Wichtige Hinweise:</b><ul><li>Wenn Sie den easy-Online Import bereits durchgeführt haben, ist hier der Eintrag zur Organisationseinheit angezeigt, die dort als ausführende Stelle angegeben wurde.</li><li>Wenn in einem Teilprojekt mehrere Organisationseinheiten derselben Organisation mitwirken (z.B. eine Universität mit mehreren Fachgebieten, die am Projekt finanziert mitarbeiten), legen Sie diese zusätzlich als Projektpartner an, damit im Monitoring-Tool deutlich wird, welche Disziplinen zusammenarbeiten.</ul></li> <b>Weitere Hilfen:</b><ul><li>Verbundprojekt und Teilprojekt unterscheiden <i class=\"fas fa-link\"></i></li><li>Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe <i class=\"fas fa-link\"></i></ul></li>",
+  "layout.box.help-text.projectpartner_h": "<p><b>Projektpartner</b> sind die Organisationseinheit(en) die finanziert über das <b>Teilprojekt ihrer Organisation</b> in einem Verbundprojekt mitwirken.</p><p><b>Zum Bearbeiten wählen Sie Ihre Organisationseinheit aus.</p></b><b>Wichtige Hinweise:</b><ul><li>Wenn Sie den easy-Online Import bereits durchgeführt haben, ist hier der Eintrag zur Organisationseinheit angezeigt, die dort als ausführende Stelle angegeben wurde.</li><li>Wenn in einem Teilprojekt mehrere Organisationseinheiten derselben Organisation mitwirken (z.B. eine Universität mit mehreren Fachgebieten, die am Projekt finanziert mitarbeiten), legen Sie diese zusätzlich als Projektpartner an, damit im Monitoring-Tool deutlich wird, welche Disziplinen zusammenarbeiten.</ul></li> <b>Weitere Hilfen:</b><ul><li>Verbundprojekt und Teilprojekt unterscheiden <i class=\"fas fa-link\"></i></li><li>Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe <i class=\"fas fa-link\"></i></ul></li>",
 
   // "layout.box.help-text.subcontractor_h": "missing",
   "layout.box.help-text.subcontractor_h": "<p><b>Hier werden die Unterauftragnehmer erfasst, die maßgeblich</b> an der Erarbeitung von Projektergebnissen <b>mitwirken</b> und <b>wesentliche Disziplinen oder Handlungsfelder</b> in das Projekt einbringen. </p><p><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Unterauftragnehmer an.Zum Bearbeiten wählen Sie einen Eintrag aus und editieren ihn über Aktion auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Unterauftragnehmer, die vorwiegend Zuarbeiten durchführen, müssen hier nicht erfasst werden.</ul></li> <b>Weitere Hilfen:</b><ul><li>Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe <i class=\"fas fa-link\"></i></ul></li>",
 
   // "layout.box.help-text.cooperationpartner_h": "missing",
-  "layout.box.help-text.cooperationpartner_h": "<p><b>Kooperationspartner</b> sind Organisationen, die <b>(meist ohne vertragliche Bindung) maßgeblich</b> an der Erarbeitung von Projektergebnissen <b>mitwirken</b>.<p><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Kooperationspartner an.Zum Bearbeiten wählen Sie einen Eintrag aus und editieren ihn über Aktion auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Organisationen die im Prjekt mitwirken könne entweder einzeln als Kooerpationspartner oder anonym als Akteursgruppe erfasst werden. Weitere Aspekte zur Unterscheidung finden sie hier [<i class=\"fas fa-link\"></i> + Link zur Hilfeseite]</ul></li>",
+  "layout.box.help-text.cooperationpartner_h": "<p><b>Kooperationspartner</b> sind Organisationen, die <b>(meist ohne vertragliche Bindung) maßgeblich</b> an der Erarbeitung von Projektergebnissen <b>mitwirken</b>.<p><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Kooperationspartner an. Zum Bearbeiten wählen Sie einen Eintrag aus und editieren ihn über Aktion auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Organisationen die im Projekt mitwirken könne entweder einzeln als Kooperationspartner oder anonym als Akteursgruppe erfasst werden. Weitere Aspekte zur Unterscheidung finden sie hier [<i class=\"fas fa-link\"></i> + Link zur Hilfeseite]</ul></li>",
 
   // "layout.box.help-text.targetgroup_h": "missing",
-  "layout.box.help-text.targetgroup_h": "<p><b>Akteursgruppen</b> sind Gruppen von Organisationen oder Personen aus dem gleichen Tätigkeitsbereich, <b> die das Projekt adressiert</b>.</p> <p><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> eine neue Akteursgruppe an.Zum Bearbeiten wählen Sie einen Eintrag aus und editieren ihn über Aktion auswählen.</p></b><b>Weitere Hilfen:</b><ul><li>Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe <i class=\"fas fa-link\"></i></ul></li>",
+  "layout.box.help-text.targetgroup_h": "<p><b>Akteursgruppen</b> sind Gruppen von Organisationen oder Personen aus dem gleichen Tätigkeitsbereich, <b> die das Projekt adressiert</b>.</p> <p><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> eine neue Akteursgruppe an. Zum Bearbeiten wählen Sie einen Eintrag aus und editieren ihn über Aktion auswählen.</p></b><b>Weitere Hilfen:</b><ul><li>Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe <i class=\"fas fa-link\"></i></ul></li>",
 
   // "layout.box.help-text.impactpathway_h": "missing",
   "layout.box.help-text.impactpathway_h": "<p>Der <b>Impact Pathway</b> veranschaulicht <b>Hintergründe, Zielstellung, Arbeiten und Wirkungen</b> des Projektes in strukturierter Form.</p> <p><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> den Impact Pathway für das Verbundprojekt an oder wählen Sie den vorhandenen zum Bearbeiten aus.</p></b><b>Wichtige Hinweise:</b><ul><li>Legen Sie für das Verbundprojekt möglichst <b>einen Impact Pathway</b> an.</li> <li>Nur in <b>Ausnahmefällen</b>, z. B. wenn sich Ziele, Arbeiten und Wirkungslogik in Teilprojekten sehr unterscheiden, legen Sie <b>mehrere Impact Pathways</b> an.</li><li><b>Impact Pathway</b> und <b>Arbeitsplan</b> sind die <b>zentralen Bereiche</b>, in denen Sie neue Einträge anlegen und <b>übersichtlich strukturieren</b>.</ul></li> <b>Weitere Hilfen:</b><ul><li>Anleitung zum Arbeiten im Impact Pathway <i class=\"fas fa-link\"></i></ul></li>",
@@ -11432,73 +11462,88 @@
   "layout.box.help-text.proj_objective_h": "<p><b>Wissenschaftlich-technische Arbeitsziele</b> umfassen die im Projekt angestrebten Ziele oder Fragestellungen für Forschung und Entwicklung. Dem jeweiligen Ziel sind Arbeitspakete und Aufgaben zugeordnet. Ziele für Interaktion und Transfer beinhalten unmittelbare Ziele für eine Gruppe von Austausch und Transferaktivitäten (z.B. Erfahrungen einer Akteursgruppe in die Entwicklung integrieren). Dem jeweiligen Ziel sind bestimmte Arbeiten wie z. B. Veranstaltungen oder Veröffentlichungen zugeordnet.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen.</ul></li>",
 
   // "layout.box.help-text.workpackage_h": "missing",
-  "layout.box.help-text.workpackage_h": "<p><b>Arbeitspakete</b> gliedern die Arbeiten des Projektes.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Arbeitspakten</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.workpackage_h": "<p><b>Arbeitspakete</b> gliedern die Arbeiten des Projektes.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
   // "layout.box.help-text.task_h": "missing",
-  "layout.box.help-text.task_h": "<p>Eine <b>Aufgabe</b> um fasst einzelne Arbeitsschritte, die im Arbeitsplan einem Arbeitspaket zugeordnet sind. </p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Arbeitspakten</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.task_h": "<p>Eine <b>Aufgabe</b> um fasst einzelne Arbeitsschritte, die im Arbeitsplan einem Arbeitspaket zugeordnet sind. </p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
   // "layout.box.help-text.process_event_h": "missing",
-  "layout.box.help-text.process_event_h": "<p><b>Kooperation / Partizipation / Austauschprozess</b> beinhaltet vom Verbundprojekt organisierte Aktivitäten die über einen längeren Zeitraum mit den gleichen Beteiligten stattfinden.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Aufgaben</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.process_event_h": "<p><b>Kooperation / Partizipation / Austauschprozess</b> beinhaltet vom Verbundprojekt organisierte Aktivitäten die über einen längeren Zeitraum mit den gleichen Beteiligten stattfinden.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
   // "layout.box.help-text.Event_h": "missing",
-  "layout.box.help-text.Event_h": "<p><b>Veranstaltung</b> umfasst alle Einzelveranstaltungen, die vom Verbundprojekt durchgeführt oder an denen Projektmitarbeitende teilnehmen.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Aufgaben</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.Event_h": "<p><b>Veranstaltung</b> umfasst alle Einzelveranstaltungen, die vom Verbundprojekt durchgeführt oder an denen Projektmitarbeitende teilnehmen.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
   // "layout.box.help-text.plan_publication_h": "missing",
-  "layout.box.help-text.plan_publication_h": "<p><b>Geplante Veröffentlichungen</b> sind im Impact Pathway gruppiert, zugehörig zum Ziel für Interaktion und Transfer. Diese Angaben sind ausschließlich in der Projektplanung erforderlich.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Aufgaben</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.plan_publication_h": "<p><b>Geplante Veröffentlichungen</b> sind im Impact Pathway gruppiert, zugehörig zum Ziel für Interaktion und Transfer. Diese Angaben sind ausschließlich in der Projektplanung erforderlich.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
   // "layout.box.help-text.Publication_h": "missing",
-  "layout.box.help-text.Publication_h": "<p><b>Veröffentlichungen</b> sind z. B. wissenschaftliche Artikel, Praxisbeiträge, Videos oder Webseiten des Projektes.</p> <p><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Eintrag an.<br>Zum Bearbeiten wählen Sie einen Eintrag aus und editieren ihn über Aktion auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Wenn Sie in Ihrem Personenprofil z. B. Ihre OCID-ID hinterlegt haben, erhalten Sie eine Meldung, sobald eine neue Veröffentlichung von Ihnen registriert wurde.</li><li>Sie können dann die Informationen zur Veröffentlichung importieren.</ul></li>",
+  "layout.box.help-text.Publication_h": "<p><b>Veröffentlichungen</b> sind z. B. wissenschaftliche Artikel, Praxisbeiträge, Videos oder Webseiten des Projektes.</p> <p><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Eintrag an.<br>Zum Bearbeiten wählen Sie einen Eintrag aus und editieren ihn über Aktion auswählen. Fügen Sie den Eintrag im Impact Pathway hinzu.</p></b><b>Wichtige Hinweise:</b><ul><li>Wenn Sie in Ihrem Personenprofil z. B. Ihre OCID-ID hinterlegt haben, erhalten Sie eine Meldung, sobald eine neue Veröffentlichung von Ihnen registriert wurde.</li><li>Sie können dann die Informationen zur Veröffentlichung importieren.</ul></li>",
 
   // "layout.box.help-text.physical_object_h": "missing",
-  "layout.box.help-text.physical_object_h": "<p>Ein <b>Gegenstand oder Material</b> ist ein physisches Objekt, das im Verbundprojekt erstellt wird und nach Projektende von anderen für Transfer, Forschung oder Lehre weitergenutzt werden kann.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Aufgaben</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.physical_object_h": "<p>Ein <b>Gegenstand oder Material</b> ist ein physisches Objekt, das im Verbundprojekt erstellt wird und nach Projektende von anderen für Transfer, Forschung oder Lehre weitergenutzt werden kann.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
   // "layout.box.help-text.Product_h": "missing",
-  "layout.box.help-text.Product_h": "<p><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Eintrag an. Zum Bearbeiten wählen Sie einen Eintrag aus und editieren ihn über Aktion auswählen.</p></b>",
+  "layout.box.help-text.Product_h": "<p><b>Forschungsdaten</b> sind (digitale) Daten, die während wissenschaftlicher Tätigkeiten z. B. durch Messungen, Befragungen oder Quellenarbeit entstehen.</p> <p><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Eintrag an. Zum Bearbeiten wählen Sie einen Eintrag aus und editieren ihn über Aktion auswählen Fügen Sie den Eintrag im Impact Pathway hinzu.</p></b><b>Wichtige Hinweise:</b><ul><li>Wenn Sie in Ihrem Personenprofil z. B. Ihre OCID-ID hinterlegt haben, erhalten Sie eine Meldung, sobald eine neue Forschungsdatenpublikation von Ihnen registriert wurde.</li><li>Sie können dann die Informationen importieren und auf eine Veröffentlichung verweisen.</ul></li>",
 
   // "layout.box.help-text.research_result_h": "missing",
-  "layout.box.help-text.research_result_h": "<p><b>Forschungsergebnisse</b> fassen wichtigsten Erkenntnissen kurz zusammen. Die ausführliche Darstellung erfolgt durch Veröffentlichungen und Berichte.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Aufgaben</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.research_result_h": "<p><b>Forschungsergebnisse</b> fassen wichtigsten Erkenntnissen kurz zusammen. Die ausführliche Darstellung erfolgt durch Veröffentlichungen und Berichte.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
   // "layout.box.help-text.Patent_h": "missing",
-  "layout.box.help-text.Patent_h": "<p><b>Patent oder Gebrauchsmuster</b> erfasst Informationen zur Anmeldung von Schutzrechten.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Aufgaben</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.Patent_h": "<p><b>Patent oder Gebrauchsmuster</b> erfasst Informationen zur Anmeldung von Schutzrechten.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
   // "layout.box.help-text.unexpected_result_h": "missing",
-  "layout.box.help-text.unexpected_result_h": "<p><b>(Zwischen-) Ergebnis / Problem</b> dient dazu darzustellen, wenn im Projektverlauf ein (Zwischen-) Ergebnis oder Problem auftaucht, das erhebliche Veränderungen in den Projektarbeiten oder Wirkungen verursacht.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Aufgaben</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.unexpected_result_h": "<p><b>(Zwischen-) Ergebnis / Problem</b> dient dazu darzustellen, wenn im Projektverlauf ein (Zwischen-) Ergebnis oder Problem auftaucht, das erhebliche Veränderungen in den Projektarbeiten oder Wirkungen verursacht.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
   // "layout.box.help-text.innovationpotential_h": "missing",
-  "layout.box.help-text.innovationpotential_h": "<p><b>Mögliche Lösung / Veränderung / Innovation</b> zeigt, welche Lösungen für ein Problem oder welche Veränderungen z. B. von Handlungen, Einstellungen, oder welche Innovationen aus den Projektergebnissen entwickelt werden sollen.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Aufgaben</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.innovationpotential_h": "<p><b>Mögliche Lösung / Veränderung / Innovation</b> zeigt, welche Lösungen für ein Problem oder welche Veränderungen z. B. von Handlungen, Einstellungen, oder welche Innovationen aus den Projektergebnissen entwickelt werden sollen.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
   // "layout.box.help-text.innovationidea_h": "missing",
-  "layout.box.help-text.innovationidea_h": "<p><b>Ideen für eine Nutzung von Projektergebnissen</b> zeigen wenig konkrete, weit in der Zukunft liegende und im Projekt nicht explizit angestrebte Ideen für die Entwicklung von Lösungen, Veränderungen oder Innovationen.</p><p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Aufgaben</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.innovationidea_h": "<p><b>Ideen für eine Nutzung von Projektergebnissen</b> zeigen wenig konkrete, weit in der Zukunft liegende und im Projekt nicht explizit angestrebte Ideen für die Entwicklung von Lösungen, Veränderungen oder Innovationen.</p><p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
   // "layout.box.help-text.step_h": "missing",
-  "layout.box.help-text.step_h": "<p>In <b>Arbeiten und Kooperation nach Projektende</b> werden geplante Schritte nach Projektende erfasst, um Projektergebnisse weiter in die Anwendung zu bringen und Kooperationen fortzusetzen.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Aufgaben</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.step_h": "<p><b>Arbeiten und Kooperation nach Projektende</b> umfasst geplante Schritte nach Projektende, um Projektergebnisse weiter in die Anwendung zu bringen und Kooperationen fortzusetzen.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
   // "layout.box.help-text.application_h": "missing",
-  "layout.box.help-text.application_h": "<p>Erfassen Sie unter <b>Anwendung einer Lösung / Veränderung / Innovation</b>, wenn Projektergebnisse durch Dritte oder am Projekt beteiligte Partner tatsächlich angewendet oder umgesetzt werden.</p> <br><p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Aufgaben</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.application_h": "<p><b>Anwendung einer Lösung / Veränderung / Innovation</b> bedeutet, dass Projektergebnisse durch Dritte oder am Projekt beteiligte Partner tatsächlich angewendet oder umgesetzt werden.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
   // "layout.box.help-text.award_h": "missing",
-  "layout.box.help-text.award_h": "<p><b>Auszeichnung</b> können Sie nutzen, wenn die erhaltene Auszeichnung im Zusammenhang mit dem Projekt und/oder seinen Ergebnissen steht.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die <b>Einträge zu Aufgaben</b> im <b>Impact Pathway</b> oder <b>Arbeitsplan</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
+  "layout.box.help-text.award_h": "<p><b>Auszeichnung</b> umfasst Preise o. ä, die im Zusammenhang mit dem Projekt und/oder seinen Ergebnissen stehen.</p> <p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</p></b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen und <b>vorhandene Einträge dort weiter zu bearbeiten</b>.</ul></li>",
 
-  // "profile.card.researcher.info": "missing",
-  "profile.card.researcher.info": "<ul><li>Hier legen Sie ihr Personenprofil an. Dadurch erhöhen Sie Ihre Sichtbarkeit und ermöglichen den Import von Publikationsdaten in das Monitoring-Tool.</li>  <li>Das Anlegen des Profils ist freiwillig. Die Nutzung des Monitoring-Tools ist auch ohne Personenprofil möglich.</li> <li>Das Personenprofil ist an kein Projekt gebunden, sondern enthält allgemeine Informationen zu Ihrer Person.</ul></li>",
+  // "layout.box.help-text.subproject_h_1": "missing",
+  "layout.box.help-text.subproject_h_1": "<b>Empfehlenswerte Schritte für die Antragstellung:</b><ul><li>Laden Sie die Mitglieder Ihres Teilprojektes über <b>Aktion auswählen</b> ein und legen die deren Bearbeitungsrechte fest.</li><li>Führen Sie über Aktion auswählen den <b>easy-Online Import</b> durch und vervollständigen Sie die Einträge aus dem Import.</li> <li>Legen Sie <b>Unterauftragnehmer</b> an, die wichtige Disziplinen oder Handlungsfelder in das Projekt einbringen.</li><li>Erstellen Sie den <b>Verwertungsplan</b>.</li><li>Überprüfen Sie, ob Ihr Verwertungsplan im Teilprojekt und der Impact Pathway im Verbundprojekt inhaltlich konsistent sind.</ul></li> <b>Tipps:</b><ul><li>Erfassen Sie alle gemeinsamen Informationen nicht hier, sondern im Verbundprojekt, damit sie für alle Projektpartner zur Verfügung stehen.</li><li>Es ist empfehlenswert, zuerst im Impact Pathway die Säule 4, Anwendung (Möglicheiten), zu planen und dann erst den Verwertungsplan der Teilprojekte auszuarbeiten.</ul></li><b>Weitere Hilfen:</b><ul><li>Rechte- und Rollenmanagement im Teilprojekt [<i class=\"fas fa-link\"></i> + Link zu den Hilfeseiten]</ul></li>",
+
+  // "layout.box.help-text.subproject_h_2": "missing",
+  "layout.box.help-text.subproject_h_2": "<b>Empfehlenswerte Schritte im laufenden Projekt:</b> <ol><li>Aktualisieren Sie vorhandene und ergänzen Sie neue Einträge zeitnah.</li><li>Aktualisieren Sie den Verwertungsplan mindestens jährlich zum Zwischenbericht.</ol></li>",
+
+  // "layout.box.help-text.subcontractor_h_project": "missing",
+  "layout.box.help-text.subcontractor_h_project": "<b>Hier werden die Unterauftragnehmer erfasst, die maßgeblich</b> an der Erarbeitung von Projektergebnissen <b>mitwirken</b> und <b>wesentliche Disziplinen oder Handlungsfelder</b> in das Projekt einbringen. <b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Unterauftragnehmer an. Zum Bearbeiten wählen Sie einen Eintrag aus und editieren ihn über Aktion auswählen.</b><b>Wichtige Hinweise:</b><ul><li>Unterauftragnehmer, die vorwiegend Zuarbeiten durchführen, müssen hier nicht erfasst werden.</ul></li>  <b>Weitere Hilfen:</b><ul><li>Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe <i class=\"fas fa-link\"></i></ul></li>",
+
+  // "layout.box.help-text.ia_objective_h": "missing",
+  "layout.box.help-text.ia_objective_h": "<p><b>Ziele für Interaktion und Transfer</b> beinhalten das unmittelbare Ziel für eine Gruppe von Austausch und Transferaktivitäten (z. B. Erfahrungen einer Akteursgruppe in die Entwicklung integrieren).</p><p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen.</ul></li>",
+
+  // "layout.box.help-text.pot_societalimpact_h": "missing",
+  "layout.box.help-text.pot_societalimpact_h": "<p><b>Erwartete gesellschaftliche Wirkung</b> beinhaltet sowohl mögliche positive als auch negative gesellschaftliche Wirkungen des Verbundprojektes.</p><p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen.</ul></li>",
+
+  // "layout.box.help-text.other_h": "missing",
+  "layout.box.help-text.other_h": "<p><b>Sonstiges</b> enthält wichtige Informationen, die in keinen anderen Bereich eingeordnet werden können.</p><p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</b></p> <b>Wichtige Hinweise:</b><ul><li>Da die Einträge im <b>Impact Pathway</b> strukturiert werden, ist es empfehlenswert, <b>neue Einträge direkt dort</b> anzulegen.</ul></li>",
+
+  // "layout.box.help-text.spinoff_h": "missing",
+  "layout.box.help-text.spinoff_h": "<p><b>Ausgründung (inkl. Verein)</b> beinhaltet Gründungen jeglicher Form aus dem Verbundprojekt.</p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</b><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Impact Pathway strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</ul></li>",
+
+  // "layout.box.help-text.contribution_fundingprogramme_h": "missing",
+  "layout.box.help-text.contribution_fundingprogramme_h": "<p><b>Beitrag zu Förderzielen</b> verdeutlicht den Bezug zwischen den Zielen des Verbundprojektes und den Förderzielen.</p><p><b>Überprüfen Sie hier vorhandene Einträge, indem Sie einen Eintrag auswählen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Impact Pathway strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</ul></li>",
+
+  // "profile.main.info": "Here you create your person profile. This increases your visibility and enables you to import publication data into the monitoring tool. Creating the profile is voluntary. The monitoring tool can also be used without a person profile. The person profile is not linked to a project, but contains general information about you.",
+  "profile.main.info": "<ul><li>Hier legen Sie ihr Personenprofil an. Dadurch erhöhen Sie Ihre Sichtbarkeit und ermöglichen den Import von Publikationsdaten in das Monitoring-Tool.</li>  <li>Das Anlegen des Profils ist freiwillig. Die Nutzung des Monitoring-Tools ist auch ohne Personenprofil möglich.</li> <li>Das Personenprofil ist an kein Projekt gebunden, sondern enthält allgemeine Informationen zu Ihrer Person.</ul></li>",
+
+  // "profile.metadata.form.info": "Please complete the details. With this data you are registered as a user in the monitoring tool.",
+  "profile.metadata.form.info": "<b>Vervollständigen Sie bitte die Angaben.</b> Mit diesen Daten sind Sie als Nutzer im Monitoring-Tool registriert.",
 
   // "researcher.profile.edit": "Edit",
   "researcher.profile.edit": "Bearbeiten",
 
-  // "profile.card.identify.info": "missing",
-  "profile.card.identify.info": "<b>Vervollständigen Sie bitte die Angaben.</b> Mit diesen Daten sind Sie als Nutzer im Monitoring-Tool registriert.",
-
-  // "forgot-password.form.identification.header.info": "missing",
-  "forgot-password.form.identification.header.info": "Tragen Sie bitte Ihre Daten ein.",
-
-  // "register-page.create-profile.identification.header.info": "Please enter your data.",
-  "register-page.create-profile.identification.header.info": "<b>Vervollständigen Sie bitte die Angaben.</b> Mit diesen Daten sind Sie als Nutzer im Monitoring-Tool registriert.",
-
-  // "register-page.create-profile.security.header.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
-  "register-page.create-profile.security.header.info": "<b>Geben Sie bitte ein Passwort in das erste Feld ein und bestätigen Sie es, indem Sie es in das zweite Feld erneut eingeben. Es sollte mindestens sechs Zeichen lang sein.</b>",
-
   // "profile.card.security.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
-  "profile.card.security.info": "<b>Optional können Sie ein neues Passwort in das erste Feld eingeben und es durch erneute Eingabe in das zweite Feld bestätigen. Es sollte mindestens sechs Zeichen lang sein.</b>",
+  "profile.card.security.info": "Optional können Sie ein neues Passwort in das erste Feld eingeben und es durch erneute Eingabe in das zweite Feld bestätigen. Es sollte mindestens sechs Zeichen lang sein.",
 
   // "layout.tab.header.subproject": "Subproject",
   "layout.tab.header.subproject": "Teilprojekt",
@@ -11509,6 +11554,9 @@
   // "layout.tab.header.projectpartner": "Project partners",
   "layout.tab.header.projectpartner": "Projektpartner",
 
+  // "layout.box.header.multiple_entities": "Involved",
+  "layout.box.header.multiple_entities": "Beteiligte",
+
   // "layout.tab.header.subcontractor": "Subcontractors",
   "layout.tab.header.subcontractor": "Unterauftragnehmer",
 
@@ -11518,121 +11566,355 @@
   // "layout.tab.header.default": "Joint project",
   "layout.tab.header.default": "Verbundprojekt",
 
-  // "layout.tab.header.Subprojects & Involved": "Subprojects & Involved",
-  "layout.tab.header.Subprojects & Involved": "Teilprojekte & Beteiligte",
+  // "layout.tab.header.Subprojects&Involved": "Subprojects & Involved",
+  "layout.tab.header.Subprojects&Involved": "Teilprojekte & Beteiligte",
 
-  // "layout.tab.header.Subprojects & Involved::proj&partners": "Subprojects & Project partners ",
-  "layout.tab.header.Subprojects & Involved::proj&partners": "Teilprojekte & Projektpartner",
+  // "layout.tab.header.proj&partners": "Subprojects & Involved",
+  "layout.tab.header.proj&partners": "Teilprojekte & Beteiligte",
 
-  // "layout.tab.header.Subprojects & Involved::subcontractors": "Subcontractors",
-  "layout.tab.header.Subprojects & Involved::subcontractors": "Unterauftragnehmer",
+  // "layout.tab.header.subcontractors": "Subcontractors",
+  "layout.tab.header.subcontractors": "Unterauftragnehmer",
 
-  // "layout.tab.header.Subprojects & Involved::cooperationpartners": "Cooperation partners",
-  "layout.tab.header.Subprojects & Involved::cooperationpartners": "Kooperationspartner",
+  // "layout.tab.header.cooperationpartners": "Cooperation partners",
+  "layout.tab.header.cooperationpartners": "Kooperationspartner",
 
-  // "layout.tab.header.Subprojects & Involved::stakeholder": "Stakeholder groups",
-  "layout.tab.header.Subprojects & Involved::stakeholder": "Akteursgruppen",
+  // "layout.tab.header.stakeholder": "Stakeholder groups",
+  "layout.tab.header.stakeholder": "Akteursgruppen",
 
   // "layout.tab.header.Structure": "Structure",
   "layout.tab.header.Structure": "Struktur",
 
-  // "layout.tab.header.Structure::impactpathway": "Impact Pathway",
-  "layout.tab.header.Structure::impactpathway": "Impact Pathway",
+  // "layout.tab.header.impactpathway": "Impact Pathway",
+  "layout.tab.header.impactpathway": "Impact Pathway",
 
-  // "layout.tab.header.Structure::workingplan": "Workingplan",
-  "layout.tab.header.Structure::workingplan": "Arbeitsplan",
+  // "layout.tab.header.workingplan": "Workingplan",
+  "layout.tab.header.workingplan": "Arbeitsplan",
 
-  // "layout.tab.header.Reflections": "Reflections",
-  "layout.tab.header.Reflections": "Reflexionen",
+  // "layout.tab.header.Reflections": "Reflection",
+  "layout.tab.header.Reflections": "Reflexion",
 
-  // "layout.tab.header.Reflections::ethic": "Ethical reflection",
-  "layout.tab.header.Reflections::ethic": "Ethische Reflexion",
+  // "layout.tab.header.ethic": "Ethical reflection",
+  "layout.tab.header.ethic": "Ethische Reflexion",
 
-  // "layout.tab.header.Reflections::gender": "Gender reflection",
-  "layout.tab.header.Reflections::gender": "Reflexion der Geschlechtergerechtigkeit",
+  // "layout.tab.header.gender": "Gender reflection",
+  "layout.tab.header.gender": "Reflexion der Geschlechtergerechtigkeit",
 
   // "layout.tab.header.Background": "Background",
   "layout.tab.header.Background": "Hintergrund",
 
-  // "layout.tab.header.Background::condition": "External conditions",
-  "layout.tab.header.Background::condition": "Rahmenbedingungen",
+  // "layout.tab.header.condition": "External conditions",
+  "layout.tab.header.condition": "Rahmenbedingungen",
 
-  // "layout.tab.header.Background:knowledge": "State of knowledge / problem definition",
-  "layout.tab.header.Background:knowledge": "Stand des Wissens / Problemstellung",
+  // "layout.tab.header.knowledge": "State of knowledge / problem definition",
+  "layout.tab.header.knowledge": "Stand des Wissens / Problemstellung",
 
-  // "layout.tab.header.Project objectives": "Project objectives",
-  "layout.tab.header.Project objectives": "Projektziele",
+  // "layout.tab.header.Projectobjectives": "Project objectives",
+  "layout.tab.header.Projectobjectives": "Projektziele",
 
-  // "layout.tab.header.Project objectives::research_objective": "Research and development objectives",
-  "layout.tab.header.Project objectives::research_objective": "Wissenschaftlich-technische Arbeitsziele",
+  // "layout.tab.header.research_objective": "Research and development objectives",
+  "layout.tab.header.research_objective": "Wissenschaftlich-technische Arbeitsziele",
 
-  // "layout.tab.header.Project objectives::ia_objective": "Targets for interaction and transfer",
-  "layout.tab.header.Project objectives::ia_objective": "Ziele für Interaktion und Transfer",
+  // "layout.tab.header.ia_objective": "Targets for interaction and transfer",
+  "layout.tab.header.ia_objective": "Ziele für Interaktion und Transfer",
 
-  // "layout.tab.header.Project works": "Project works",
-  "layout.tab.header.Project works": "Projektarbeiten",
+  // "layout.tab.header.Projectworks": "Project works",
+  "layout.tab.header.Projectworks": "Projektarbeiten",
 
-  // "layout.tab.header.Project works::workpackage": "Work packages",
-  "layout.tab.header.Project works::workpackage": "Arbeitspakete",
+  // "layout.tab.header.workpackage": "Work packages",
+  "layout.tab.header.workpackage": "Arbeitspakete",
 
-  // "layout.tab.header.Project works::task": "Tasks",
-  "layout.tab.header.Project works::task": "Aufgaben",
+  // "layout.tab.header.task": "Tasks",
+  "layout.tab.header.task": "Aufgaben",
 
-  // "layout.tab.header.Project works::process_event": "Cooperations / Participations / Exchange processes",
-  "layout.tab.header.Project works::process_event": "Kooperationen / Partizipationen / Austauschprozess",
+  // "layout.tab.header.process_event": "Cooperation / Participation / Exchange processes",
+  "layout.tab.header.process_event": "Kooperation / Partizipation / Austauschprozesse",
 
-  // "layout.tab.header.Project works::events": "Events",
-  "layout.tab.header.Project works::events": "Veranstaltungen",
+  // "layout.tab.header.events": "Events",
+  "layout.tab.header.events": "Veranstaltungen",
 
-  // "layout.tab.header.Project works::plan_publication": "Planned publications",
-  "layout.tab.header.Project works::plan_publication": "Geplante Veröffentlichungen",
+  // "layout.tab.header.plan_publication": "Planned publications",
+  "layout.tab.header.plan_publication": "Geplante Veröffentlichungen",
 
-  // "layout.tab.header.Project results": "Project results",
-  "layout.tab.header.Project results": "Projektergebnisse",
+  // "layout.tab.header.Projectresults": "Project results",
+  "layout.tab.header.Projectresults": "Projektergebnisse",
 
-  // "layout.tab.header.Project Results::publication": "Publications",
-  "layout.tab.header.Project Results::publication": "Veröffentlichungen",
+  // "layout.tab.header.publication": "Publications",
+  "layout.tab.header.publication": "Veröffentlichungen",
 
-  // "layout.tab.header.Project Results::physical_object": "Objects / materials",
-  "layout.tab.header.Project Results::physical_object": "Gegenstände / Materialien",
+  // "layout.tab.header.physical_object": "Objects / materials",
+  "layout.tab.header.physical_object": "Gegenstände / Materialien",
 
-  // "layout.tab.header.Project Results::product": "Research data ",
-  "layout.tab.header.Project Results::product": "Forschungsdaten",
+  // "layout.tab.header.product": "Research data ",
+  "layout.tab.header.product": "Forschungsdaten",
 
-  // "layout.tab.header.Project Results::result": "Research results",
-  "layout.tab.header.Project Results::result": "Forschungsergebnisse",
+  // "layout.tab.header.result": "Research results",
+  "layout.tab.header.result": "Forschungsergebnisse",
 
-  // "layout.tab.header.Project Results::unexpected_result": "(Intermediate) results / problems",
-  "layout.tab.header.Project Results::unexpected_result": "(Zwischen-) Ergebnisse / Probleme",
+  // "layout.tab.header.unexpected_result": "(Intermediate) results / problems",
+  "layout.tab.header.unexpected_result": "(Zwischen-) Ergebnisse / Probleme",
 
   // "layout.tab.header.outcomes": "Outcomes",
-  "layout.tab.header.outcomes": "Outcomes",
+  "layout.tab.header.outcomes": "Anwendung & Wirkung",
 
-  // "layout.tab.header.outcomes::patent": "Patents / utility patents",
-  "layout.tab.header.outcomes::patent": "Patente / Gebrauchsmuster",
+  // "layout.tab.header.patent": "Patents / utility patents",
+  "layout.tab.header.patent": "Patente / Gebrauchsmuster",
 
-  // "layout.tab.header.outcomes::innovation_potential": "Possible solutions / changes / innovations",
-  "layout.tab.header.outcomes::innovation_potential": "Mögliche Lösungen / Veränderungen / Innovationen",
+  // "layout.tab.header.innovation_potential": "Possible solutions / changes / innovations",
+  "layout.tab.header.innovation_potential": "Mögliche Lösungen / Veränderungen / Innovationen",
 
-  // "layout.tab.header.outcomes::idea": "Ideas for the use of project results",
-  "layout.tab.header.outcomes::idea": "Ideen für eine Nutzung von Projektergebnissen",
+  // "layout.tab.header.idea": "Ideas for the use of project results",
+  "layout.tab.header.idea": "Ideen für eine Nutzung von Projektergebnissen",
 
-  // "layout.tab.header.outcomes::step": "Works and cooperations after project end",
-  "layout.tab.header.outcomes::step": "Arbeiten und Kooperationen nach Projektende",
+  // "layout.tab.header.step": "Works and cooperations after project end",
+  "layout.tab.header.step": "Arbeiten und Kooperationen nach Projektende",
 
-  // "layout.tab.header.outcomes::application": "Applications of a solution / change / innovation",
-  "layout.tab.header.outcomes::application": "Anwendungen einer Lösung / Veränderung / Innovation",
+  // "layout.tab.header.application": "Applications of a solution / change / innovation",
+  "layout.tab.header.application": "Anwendungen einer Lösung / Veränderung / Innovation",
 
-  // "layout.tab.header.outcomes::spinoff": "Spin-offs",
-  "layout.tab.header.outcomes::spinoff": "Ausgründungen (inkl. Vereine)",
+  // "layout.tab.header.spinoff": "Spin-offs",
+  "layout.tab.header.spinoff": "Ausgründungen (inkl. Vereine)",
 
-  // "layout.tab.header.outcomes::award": "Awards",
-  "layout.tab.header.outcomes::award": "Auszeichnungen",
+  // "layout.tab.header.award": "Awards",
+  "layout.tab.header.award": "Auszeichnungen",
 
-  // "layout.tab.header.outcomes::pot_societalimpact": "Expected societal impacts",
-  "layout.tab.header.outcomes::pot_societalimpact": "Erwartete gesellschaftliche Wirkungen",
+  // "layout.tab.header.pot_societalimpact": "Expected societal impacts",
+  "layout.tab.header.pot_societalimpact": "Erwartete gesellschaftliche Wirkungen",
+
+  // "layout.tab.header.contribution_fundingprogramme": "Contributions to funding objectives",
+  "layout.tab.header.contribution_fundingprogramme": "Beiträge zu Förderzielen",
 
   // "layout.tab.header.other": "Others",
-  "layout.tab.header.other": "Sonstiges"
+  "layout.tab.header.other": "Sonstiges",
+
+  // "item-create.modal-launscher.btn": "Add item",
+  "item-create.modal-launscher.btn": "Eintrag hinzufügen",
+
+  // "layout.box.header.latestParentProjectsPreparation": "Joint projects - in application",
+  "layout.box.header.latestParentProjectsPreparation": "Verbundprojekte - in Beantragung",
+
+  // "layout.box.header.latestParentProjectsImplementation": "Joint projects - ongoing",
+  "layout.box.header.latestParentProjectsImplementation": "Verbundprojekte - laufend",
+
+  // "layout.box.header.latestParentProjectsCompleted": "Joint projects - finished",
+  "layout.box.header.latestParentProjectsCompleted": "Verbundprojekte - abgeschlossen",
+
+  // "layout.box.header.basics": "Primary data",
+  "layout.box.header.basics": "Grunddaten",
+
+  // "layout.box.header.details": "Details",
+  "layout.box.header.details": "Detailangaben",
+
+  // "layout.box.header.Funding": "Funding",
+  "layout.box.header.Funding": "Fördermittel(geber)",
+
+  // "layout.box.header.projectpartner": "Project partners",
+  "layout.box.header.projectpartner": "Projektpartner",
+
+  // "layout.box.header.subcontractor": "Subcontractors",
+  "layout.box.header.subcontractor": "Unterauftragnehmer",
+
+  // "layout.box.header.exploitationplan": "Exploitation plan",
+  "layout.box.header.exploitationplan": "Verwertungsplan",
+
+  // "layout.box.header.Person_m": "Person",
+  "layout.box.header.Person_m": "Person",
+
+  // "layout.box.header.jpbasics": "Primary data",
+  "layout.box.header.jpbasics": "Grunddaten",
+
+  // "layout.box.header.jpdetails": "Details",
+  "layout.box.header.jpdetails": "Detailangaben",
+
+  // "layout.box.header.Project": "Subprojects",
+  "layout.box.header.Project": "Teilprojekte",
+
+  // "layout.box.header.cooperationpartner": "Coorperation partners",
+  "layout.box.header.cooperationpartner": "Kooperationspartner",
+
+  // "layout.box.header.targetgroup": "Stakeholder groups",
+  "layout.box.header.targetgroup": "Akteursgruppen",
+
+  // "layout.box.header.Funding_m": "Funding",
+  "layout.box.header.Funding_m": "Fördermittel(geber)",
+
+  // "layout.box.header.projectpartner_m": "Project partner",
+  "layout.box.header.projectpartner_m": "Projektpartner",
+
+  // "layout.box.header.Projektleitung_m": "Project management",
+  "layout.box.header.Projektleitung_m": "Projektleitung",
+
+  // "layout.box.header.Projektkoordination_m": "Project coordination",
+  "layout.box.header.Projektkoordination_m": "Projektkoordination",
+
+  // "layout.box.header.subcontractor_m": "Subcontractor",
+  "layout.box.header.subcontractor_m": "Unterauftragnehmer",
+
+  // "layout.box.header.cooperationpartner_m": "Coorperation partner",
+  "layout.box.header.cooperationpartner_m": "Kooperationspartner",
+
+  // "layout.box.header.targetgroup_m": "Stakeholder group",
+  "layout.box.header.targetgroup_m": "Akteursgruppe",
+
+  // "layout.box.header.impactpathway": "Impact Pathway",
+  "layout.box.header.impactpathway": "Impact Pathway",
+
+  // "layout.box.header.workingplan": "Working plan",
+  "layout.box.header.workingplan": "Arbeitsplan",
+
+  // "layout.box.header.ethic": "Ethical reflection",
+  "layout.box.header.ethic": "Ethische Reflexion",
+
+  // "layout.box.header.gender": "Gender reflection",
+  "layout.box.header.gender": "Reflexion der Geschlechtergerechtigkeit",
+
+  // "layout.box.header.condition": "External conditions",
+  "layout.box.header.condition": "Rahmenbedingungen",
+
+  // "layout.box.header.stateofart": "State of knowledge / problem definition",
+  "layout.box.header.stateofart": "Stand des Wissens / Problemstellung",
+
+  // "layout.box.header.ethic_m": "Ethical reflection",
+  "layout.box.header.ethic_m": "Ethische Reflexion",
+
+  // "layout.box.header.gender_m": "Gender reflection",
+  "layout.box.header.gender_m": "Reflexion der Geschlechtergerechtigkeit",
+
+  // "layout.box.header.condition_m": "External condition",
+  "layout.box.header.condition_m": "Rahmenbedingung",
+
+  // "layout.box.header.stateofart_m": "State of knowledge / problem definition",
+  "layout.box.header.stateofart_m": "Stand des Wissens / Problemstellung",
+
+  // "layout.box.header.proj_objective": "Research and development objectives",
+  "layout.box.header.proj_objective": "Wissenschaftlich-technische Arbeitsziele",
+
+  // "layout.box.header.ia_objective": "Targets for interaction and transfer",
+  "layout.box.header.ia_objective": "Ziele für Interaktion und Transfer",
+
+  // "layout.box.header.workpackage": "Work packages",
+  "layout.box.header.workpackage": "Arbeitspakete",
+
+  // "layout.box.header.task": "Tasks",
+  "layout.box.header.task": "Aufgaben",
+
+  // "layout.box.header.process_event": "Cooperation / Participation / Exchange processes",
+  "layout.box.header.process_event": "Kooperation / Partizipation / Austauschprozesse",
+
+  // "layout.box.header.Event": "Events",
+  "layout.box.header.Event": "Veranstaltungen",
+
+  // "layout.box.header.plan_publication": "Planned publications",
+  "layout.box.header.plan_publication": "Geplante Veröffentlichungen",
+
+  // "layout.box.header.proj_objective_m": "Research and development objective",
+  "layout.box.header.proj_objective_m": "Wissenschaftlich-technische Arbeitsziel",
+
+  // "layout.box.header.ia_objective_m": "Target for interaction and transfer",
+  "layout.box.header.ia_objective_m": "Ziel für Interaktion und Transfer",
+
+  // "layout.box.header.workpackage_m": "Work package",
+  "layout.box.header.workpackage_m": "Arbeitspaket",
+
+  // "layout.box.header.task_m": "Task",
+  "layout.box.header.task_m": "Aufgabe",
+
+  // "layout.box.header.process_event_m": "Cooperation / Participation / Exchange process",
+  "layout.box.header.process_event_m": "Kooperation / Partizipation / Austauschprozess",
+
+  // "layout.box.header.event_m": "Event",
+  "layout.box.header.event_m": "Veranstaltung",
+
+  // "layout.box.header.plan_publication_m": "Planned publications",
+  "layout.box.header.plan_publication_m": "Geplante Veröffentlichungen",
+
+  // "layout.box.header.Publication": "Publications",
+  "layout.box.header.Publication": "Veröffentlichungen",
+
+  // "layout.box.header.physical_object": "Objects / materials",
+  "layout.box.header.physical_object": "Gegenstände / Materialien",
+
+  // "layout.box.header.Product": "Research data ",
+  "layout.box.header.Product": "Forschungsdaten",
+
+  // "layout.box.header.research_result": "Research results",
+  "layout.box.header.research_result": "Forschungsergebnisse",
+
+  // "layout.box.header.unexpected_result": "(Intermediate) results / problems",
+  "layout.box.header.unexpected_result": "(Zwischen-) Ergebnisse / Probleme",
+
+  // "layout.box.header.Publication_m": "Publication",
+  "layout.box.header.Publication_m": "Veröffentlichung",
+
+  // "layout.box.header.physical_object_m": "Object / material",
+  "layout.box.header.physical_object_m": "Gegenstand / Material",
+
+  // "layout.box.header.Product_m": "Research data ",
+  "layout.box.header.Product_m": "Forschungsdaten",
+
+  // "layout.box.header.research_result_m": "Research result",
+  "layout.box.header.research_result_m": "Forschungsergebniss",
+
+  // "layout.box.header.unexpected_result_m": "(Intermediate) result / problem",
+  "layout.box.header.unexpected_result_m": "(Zwischen-) Ergebniss / Problem",
+
+  // "layout.box.header.Patent": "Patents / utility patents",
+  "layout.box.header.Patent": "Patente / Gebrauchsmuster",
+
+  // "layout.box.header.innovationpotential": "Possible solutions / changes / innovations",
+  "layout.box.header.innovationpotential": "Mögliche Lösungen / Veränderungen / Innovationen",
+
+  // "layout.box.header.innovationidea": "Ideas for the use of project results",
+  "layout.box.header.innovationidea": "Ideen für eine Nutzung von Projektergebnissen",
+
+  // "layout.box.header.step": "Works and cooperations after project end",
+  "layout.box.header.step": "Arbeiten und Kooperationen nach Projektende",
+
+  // "layout.box.header.application": "Applications of a solution / change / innovation",
+  "layout.box.header.application": "Anwendungen einer Lösung / Veränderung / Innovation",
+
+  // "layout.box.header.spinoff": "Spin-offs",
+  "layout.box.header.spinoff": "Ausgründungen (inkl. Vereine)",
+
+  // "layout.box.header.award": "Awards",
+  "layout.box.header.award": "Auszeichnungen",
+
+  // "layout.box.header.pot_societalimpact": "Expected societal impacts",
+  "layout.box.header.pot_societalimpact": "Erwartete gesellschaftliche Wirkungen",
+
+  // "layout.box.header.contribution_fundingprogramme": "Contributions to funding objectives",
+  "layout.box.header.contribution_fundingprogramme": "Beiträge zu Förderzielen",
+
+  // "layout.box.header.other": "Others",
+  "layout.box.header.other": "Sonstiges",
+
+  // "layout.box.header.Patent_m": "Patent / utility patent",
+  "layout.box.header.Patent_m": "Patent / Gebrauchsmuster",
+
+  // "layout.box.header.innovationpotential_m": "Possible solution / change / innovation",
+  "layout.box.header.innovationpotential_m": "Mögliche Lösung / Veränderung / Innovation",
+
+  // "layout.box.header.innovationidea_m": "Idea for the use of project results",
+  "layout.box.header.innovationidea_m": "Idee für eine Nutzung von Projektergebnissen",
+
+  // "layout.box.header.step_m": "Works and cooperation after project end",
+  "layout.box.header.step_m": "Arbeiten und Kooperation nach Projektende",
+
+  // "layout.box.header.application_m": "Application of a solution / change / innovation",
+  "layout.box.header.application_m": "Anwendung einer Lösung / Veränderung / Innovation",
+
+  // "layout.box.header.spinoff_m": "Spin-off",
+  "layout.box.header.spinoff_m": "Ausgründung (inkl. Verein)",
+
+  // "layout.box.header.award_m": "Award",
+  "layout.box.header.award_m": "Auszeichnung",
+
+  // "layout.box.header.pot_societalimpact_m": "Expected societal impact",
+  "layout.box.header.pot_societalimpact_m": "Erwartete gesellschaftliche Wirkung",
+
+  // "layout.box.header.contribution_fundingprogramme_m": "Contribution to funding objectives",
+  "layout.box.header.contribution_fundingprogramme_m": "Beitrag zu Förderzielen",
+
+  // "layout.box.header.other_m": "Other",
+  "layout.box.header.other_m": "Sonstiges"
 
 }
