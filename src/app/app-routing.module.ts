@@ -249,9 +249,10 @@ import { ValidTokenGuard } from './invitation/valid-token.guard';
           },
           {
             path: 'invitation',
-            loadChildren: () => import('./invitation/invitation-routing/invitation-routing.module')
-              .then((m) => m.InvitationRoutingModule),
-            canActivate: [AuthenticatedGuard, ValidTokenGuard]},
+            loadChildren: () => import('./invitation/invitation.module')
+              .then((m) => m.InvitationModule),
+            canActivate: [AuthenticatedGuard, ValidTokenGuard]
+          },
           { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
       ]}
     ],{
