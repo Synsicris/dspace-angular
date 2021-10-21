@@ -21,6 +21,7 @@ import {
 } from '../../core/end-user-agreement/end-user-agreement.service';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { AuthService } from '../../core/auth/auth.service';
+import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 
 /**
  * Component that renders the create profile page to be used by a user registering through a token
@@ -185,15 +186,14 @@ export class CreateProfileComponent implements OnInit {
   }
 
   acceptInvitation(): void {
-      this.registration$.subscribe((registration: Registration) => {
-        this.auth.isAuthenticated().pipe(take(1)).subscribe(res => {
-          if (res) {
-            this.router.navigate(['invitation'], {queryParams: {token: registration.token}});
-          } else {
-            this.auth.setRedirectUrl('/invitation?token=' + registration.token);
-            this.router.navigateByUrl('login');
-          }
-        });
+    combineLatest([this.registration$, this.auth.isAuthenticated().pipe(take(1))])
+      .subscribe(([registration, auth]: [Registration, boolean]) => {
+        if (auth) {
+          this.router.navigate(['invitation'], {queryParams: {registrationToken: registration.token}});
+        } else {
+          this.auth.setRedirectUrl('/invitation?token=' + registration.token);
+          this.router.navigateByUrl('login');
+        }
       });
   }
 }

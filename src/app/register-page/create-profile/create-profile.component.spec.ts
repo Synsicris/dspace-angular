@@ -293,7 +293,7 @@ describe('CreateProfileComponent', () => {
       const invitationButton = fixture.debugElement.queryAll(By.css('a'))[0];
       invitationButton.triggerEventHandler('click', null);
       expect(authService.isAuthenticated).toHaveBeenCalled();
-      expect(router.navigate).toHaveBeenCalledWith(['invitation'], {queryParams: {token: 'test-token'}});
+      expect(router.navigate).toHaveBeenCalledWith(['invitation'], {queryParams: {registrationToken: 'test-token'}});
     });
     it('navigate to login should have been called', () => {
       spyOn(router, 'navigateByUrl');
