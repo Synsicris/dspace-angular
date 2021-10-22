@@ -5974,8 +5974,9 @@
 
   "researcher.profile.private.visibility": "PRIVATE",
 
-
   "researcher.profile.public.visibility": "PUBLIC",
+
+  "researcher.profile.internal.visibility": "INTERNAL",
 
 
   "researcher.profile.status": "Status: ",
