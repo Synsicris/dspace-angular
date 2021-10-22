@@ -55,7 +55,7 @@ describe('DirectAccessGuard', () => {
   });
   describe('based on the response of "searchByToken have', () => {
     it('can activate must return true when registration data includes groups', () => {
-      (guard.canActivate(undefined, {root: {queryParams: {token: '123456789'}}} as any) as any)
+      (guard.canActivate({ params: { registrationToken: '123456789' } } as any, {} as any) as any)
         .subscribe(
           (canActivate) => {
             expect(canActivate).toEqual(true);
@@ -71,7 +71,7 @@ describe('DirectAccessGuard', () => {
           groupNames: []
         });
       epersonRegistrationService.searchByTokenAndHandleError.and.returnValue(observableOf(registrationWithDifferentUsedFromLoggedInt));
-      (guard.canActivate(undefined, {root: {queryParams: {token: '123456789'}}} as any) as any)
+      (guard.canActivate({ params: { registrationToken: '123456789' } } as any, {} as any) as any)
         .subscribe(
           (canActivate) => {
             expect(canActivate).toEqual(false);

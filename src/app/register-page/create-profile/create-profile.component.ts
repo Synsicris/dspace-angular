@@ -20,8 +20,6 @@ import {
   EndUserAgreementService
 } from '../../core/end-user-agreement/end-user-agreement.service';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { AuthService } from '../../core/auth/auth.service';
-import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 
 /**
  * Component that renders the create profile page to be used by a user registering through a token
@@ -51,8 +49,7 @@ export class CreateProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private notificationsService: NotificationsService,
-    private endUserAgreementService: EndUserAgreementService,
-    private auth: AuthService,
+    private endUserAgreementService: EndUserAgreementService
   ) {
 
   }
@@ -61,12 +58,13 @@ export class CreateProfileComponent implements OnInit {
     this.registration$ = this.route.data.pipe(
       map((data) => data.registration as Registration),
     );
-    this.registration$.subscribe((registration: Registration) => {
-      if (registration.groupNames && registration.groupNames.length > 0) {
-        this.hasGroups = true;
-      }
-      this.email = registration.email;
-      this.token = registration.token;
+    this.registration$.pipe(take(1))
+      .subscribe((registration: Registration) => {
+        if (registration.groupNames && registration.groupNames.length > 0) {
+          this.hasGroups = true;
+        }
+        this.email = registration.email;
+        this.token = registration.token;
     });
     this.activeLangs = environment.languages.filter((MyLangConfig) => MyLangConfig.active === true);
 
@@ -185,15 +183,12 @@ export class CreateProfileComponent implements OnInit {
     }
   }
 
-  acceptInvitation(): void {
-    combineLatest([this.registration$, this.auth.isAuthenticated().pipe(take(1))])
-      .subscribe(([registration, auth]: [Registration, boolean]) => {
-        if (auth) {
-          this.router.navigate(['invitation'], {queryParams: {registrationToken: registration.token}});
-        } else {
-          this.auth.setRedirectUrl('/invitation?token=' + registration.token);
-          this.router.navigateByUrl('login');
-        }
-      });
+  /**
+   * Redirect to the invitation page
+   */
+  redirectToInvitationPage(): void {
+    this.registration$.pipe(take(1)).subscribe((registration: Registration) => {
+      this.router.navigate(['invitation', registration.token]);
+    });
   }
 }
