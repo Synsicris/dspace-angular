@@ -59,6 +59,7 @@ import { ItemDataService } from '../data/item-data.service';
 
 export const PARENT_PROJECT_RELATION_METADATA = 'synsicris.relation.parentproject';
 export const PARENT_PROJECT_ENTITY = 'parentproject';
+export const PERSON_ENTITY = 'Person';
 export const PROJECT_RELATION_METADATA = 'synsicris.relation.project';
 export const PROJECT_ENTITY = 'Project';
 export const PROJECT_ENTITY_METADATA = 'synsicris.relation.entity_project';
@@ -160,7 +161,6 @@ export class ProjectDataService extends CommunityDataService {
    * @return the RestResponse as an Observable
    */
   delete(projectId: string): Observable<RemoteData<NoContent>> {
-    const projectGroup = `project_${projectId}`;
     return super.delete(projectId);
   }
 
@@ -531,6 +531,7 @@ export class ProjectDataService extends CommunityDataService {
    */
   public invalidateUserProjectResultsCache() {
     this.requestService.setStaleByHrefSubstring('configuration=userProjectsCommunity');
+    this.requestService.setStaleByHrefSubstring('configuration=BROWSE.Person.');
   }
 
   /**
