@@ -23,9 +23,7 @@
     </div>
     <div class="ml-2">
       <button type="button"
-              class="btn"
-              [class.btn-primary]="(showDeposit | async)"
-              [class.btn-secondary]="!(showDeposit | async)"
+              class="btn btn-secondary"
               id="save"
               [disabled]="(processingSaveStatus | async) || !(hasUnsavedModification | async)"
               (click)="save($event)">
@@ -43,10 +41,10 @@
       </button>
     <button *ngIf="(showDeposit | async)"
               type="button"
-              class="btn btn-success"
+              class="btn btn-primary"
               [disabled]="(submissionIsInvalid | async) || (processingSaveStatus | async) || (processingDepositStatus | async)"
               (click)="deposit($event)">
-        <span><i class="fas fa-plus"></i> {{'submission.general.deposit' | translate}}</span>
+        <span><i class="fas fa-save"></i> {{'submission.general.save-later.edit-item' | translate}}</span>
       </button>
     </div>
   </div>
