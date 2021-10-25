@@ -6,7 +6,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
 import { ResizeEvent } from 'angular-resizable-element';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { findIndex } from 'lodash';
 
@@ -36,7 +36,7 @@ import { EditItemDataService } from '../../../core/submission/edititem-data.serv
 import { EditItem } from '../../../core/submission/models/edititem.model';
 import { SearchConfig } from 'src/app/core/shared/search/search-filters/search-config.model';
 import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
-
+import { NgbDateStructToString, stringToNgbDateStruct } from '../../../shared/date.util';
 
 export const MY_FORMATS = {
   parse: {
@@ -564,7 +564,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.updateAllDateRanges(updateAllMap);
   }
 
-  updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string) {
+  updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string|NgbDate, endDate: string|NgbDate) {
+    console.log(endDate);
+    if (startDate instanceof NgbDate) {
+      startDate = NgbDateStructToString(startDate);
+    }
+    if (endDate instanceof NgbDate) {
+      endDate = NgbDateStructToString(endDate);
+    }
     const nodeData: UpdateData = this._updateDateRangeOperations(flatNode, startDate, endDate);
 
     this.updateField(
@@ -1130,4 +1137,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return query;
   }
 
+  /**
+   * Convert date from string to NgbDateStruct
+   * @param date
+   */
+  getDateStruct(date: string): NgbDateStruct {
+    console.log(stringToNgbDateStruct(date));
+    return isNotEmpty(date) ? stringToNgbDateStruct(date) : null;
+  }
 }
