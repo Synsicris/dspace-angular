@@ -113,3 +113,15 @@ export function dateToString(date: Date | NgbDateStruct): string {
   const dateStr = `${year}-${month}-${day}`;
   return moment.utc(dateStr, 'YYYYMMDD').format('YYYY-MM-DD');
 }
+
+/**
+ * Returns a date in simplified format (YYYY-MM-DD).
+ *
+ * @param date
+ *    The NgbDateStruct to format
+ * @return string
+ *    the formatted date
+ */
+export function NgbDateStructToString(date: NgbDateStruct) {
+  return `${date.year}-${date.month}-${date.day}`;
+}

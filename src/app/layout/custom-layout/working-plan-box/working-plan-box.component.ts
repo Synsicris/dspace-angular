@@ -32,6 +32,7 @@ export class WorkingPlanBoxComponent extends CrisLayoutBoxObj implements OnInit 
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.projectService.getProjectCommunityByItemId(this.item.uuid).pipe(
       getFirstSucceededRemoteDataPayload()
     ).subscribe((projectCommunity: Community) => {

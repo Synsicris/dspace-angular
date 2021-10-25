@@ -80,7 +80,7 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
    * Check if current Item is a Project or a parentproject
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY || (this.contextMenuObject as Item).entityType === PARENT_PROJECT_ENTITY;
+    return (this.contextMenuObject as Item).entityType === PARENT_PROJECT_ENTITY;
   }
 
   /**

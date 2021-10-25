@@ -14,10 +14,10 @@ import {
   FORGOT_PASSWORD_PATH,
   HELP_PAGE_PATH,
   INFO_MODULE_PATH,
+  LEGACY_BITSTREAM_MODULE_PATH,
   PROFILE_MODULE_PATH,
   REGISTER_PATH,
   WORKFLOW_ITEM_MODULE_PATH,
-  LEGACY_BITSTREAM_MODULE_PATH,
 } from './app-routing-paths';
 import { COLLECTION_MODULE_PATH } from './collection-page/collection-page-routing-paths';
 import { COMMUNITY_MODULE_PATH } from './community-page/community-page-routing-paths';
@@ -245,6 +245,11 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             loadChildren: () => import('./help-page/help-page.module')
               .then((m) => m.HelpPageModule),
             canActivate: [AuthenticatedGuard]
+          },
+          {
+            path: 'invitation',
+            loadChildren: () => import('./invitation/invitation.module')
+              .then((m) => m.InvitationModule)
           },
           { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
       ]}
