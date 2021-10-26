@@ -1,6 +1,6 @@
-<ipw-collapsable-panel class="d-block mb-3"
+<ipw-collapsable-panel #ipwCollapse class="d-block mb-3"
                        [sidebarPanelTitle]="impactPathwayTask.title"
-                       [startOpen]="isOpen()">
+                       [startOpen]="!(isCollapsed() | async)">
   <ng-container ngProjectAs="panelIconStatus">
     <button class="btn btn-lg btn-link flex-shrink-1 align-self-center text-primary" [title]="'impact-pathway.objectives.edit.btn.title' | translate">
       <span (click)="openEditModal(); $event.stopImmediatePropagation()"><i class="fas fa-edit"></i></span>

@@ -48,7 +48,8 @@ import {
   impactPathwayStateSelector,
   isImpactPathwayLoadedSelector,
   isImpactPathwayProcessingSelector,
-  isImpactPathwayRemovingSelector
+  isImpactPathwayRemovingSelector,
+  impactPathwaySubTaskCollapsable
 } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
@@ -72,7 +73,9 @@ import {
   RemoveImpactPathwayTaskAction,
   SetImpactPathwayTargetTaskAction,
   UpdateImpactPathwayAction,
-  UpdateImpactPathwayTaskAction
+  UpdateImpactPathwayTaskAction,
+  SetImpactPathwaySubTaskCollapseAction,
+  ClearImpactPathwaySubtaskCollapseAction
 } from './impact-pathway.actions';
 import { ErrorResponse } from '../../core/cache/response.models';
 import {
@@ -301,6 +304,14 @@ export class ImpactPathwayService {
    */
   dispatchUpdateImpactPathwayTask(impactPathwayId: string, stepId: string, taskId: string, task: ImpactPathwayTask): void {
     this.store.dispatch(new UpdateImpactPathwayTaskAction(impactPathwayId, stepId, taskId, task));
+  }
+
+  dispatchSetImpactPathwaySubTaskCollapse(impactPathwayStepId: string, impactPathwayTaskId: string, value: boolean) {
+    this.store.dispatch(new SetImpactPathwaySubTaskCollapseAction(impactPathwayStepId, impactPathwayTaskId, value));
+  }
+
+  dispatchClearCollapsable() {
+    this.store.dispatch(new ClearImpactPathwaySubtaskCollapseAction());
   }
 
   getCreateTaskFormConfigName(stepType: string, isObjectivePage: boolean): string {
@@ -903,6 +914,13 @@ export class ImpactPathwayService {
     if (isNotEmpty(linksList)) {
       this.store.dispatch(new AddImpactPathwayTaskLinksAction(linksList));
     }
+  }
+
+  getCollapsable(impactPathwayStepId: string,impactPathwayTaskId: string) {
+    return this.store.pipe(select(
+        impactPathwaySubTaskCollapsable(impactPathwayStepId, impactPathwayTaskId)
+      )
+    );
   }
 
   private getCollectionIdByProjectAndEntity(projectId: string, entityType: string): Observable<string> {

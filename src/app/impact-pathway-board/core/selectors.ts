@@ -4,6 +4,7 @@ import { ImpactPathwayState } from './impact-pathway.reducer';
 import { AppState } from '../../app.reducer';
 import { isNotEmpty } from '../../shared/empty.util';
 import { ImpactPathway } from './models/impact-pathway.model';
+import { ImpactPathwayTask } from './models/impact-pathway-task.model';
 
 function impactPathwayKeySelector<T>(key: string, selector): MemoizedSelector<AppState, ImpactPathway> {
   return createSelector(selector, (state: ImpactPathwayState) => {
@@ -11,6 +12,15 @@ function impactPathwayKeySelector<T>(key: string, selector): MemoizedSelector<Ap
       return state.objects[key];
     } else {
       return undefined;
+    }
+  });
+}
+function impactPathwaySubTaskCollapsableSelector<T>(key: string, stepId: string, selector): MemoizedSelector<AppState, ImpactPathwayTask> {
+  return createSelector(selector, (state: ImpactPathwayState) => {
+    if (isNotEmpty(state) && isNotEmpty(state.collapsed) && isNotEmpty(state.collapsed[key]) && isNotEmpty(state.collapsed[key][stepId])) {
+      return state.collapsed[key][stepId];
+    } else {
+      return true;
     }
   });
 }
@@ -86,3 +96,13 @@ export function impactPathwayByIDSelector(impactPathwayId: string): MemoizedSele
 export const impactPathwayRelationsSelector = createSelector(_getImpactPathwayState,
   (state: ImpactPathwayState) => state.links
 );
+
+/**
+ * Returns the ImpactPathwayState object.
+ * @function exploitationPlanByIDSelector
+ * @param {string} exploitationPlanId
+ * @return {ImpactPathwayState}
+ */
+export function impactPathwaySubTaskCollapsable(impactPathwayStepId: string, impactPathwayTaskId: string): MemoizedSelector<AppState, ImpactPathwayTask> {
+  return impactPathwaySubTaskCollapsableSelector<ImpactPathwayTask>(impactPathwayStepId, impactPathwayTaskId, impactPathwayStateSelector);
+}
