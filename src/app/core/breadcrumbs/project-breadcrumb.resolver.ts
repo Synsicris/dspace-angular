@@ -50,7 +50,6 @@ export class ProjectBreadcrumbResolver extends DSOBreadcrumbResolver<Item> {
       getRemoteDataPayload(),
       map((object: Item) => {
         const url = getItemPageRoute(object);
-        console.log(url);
         return { provider: this.breadcrumbService, key: object, url: url };
       })
     );

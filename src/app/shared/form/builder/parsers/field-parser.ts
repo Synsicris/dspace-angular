@@ -95,7 +95,6 @@ export abstract class FieldParser {
               model.placeholder = '';
             }
             hasPlaceholder = false;
-            console.log(model);
           }
           setLayout(model, 'element', 'host', 'col');
           if (model.hasLanguages || isNotEmpty(model.relationship) || model.hasSecurityToggle) {

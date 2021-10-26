@@ -36,7 +36,6 @@ export class WorkingPlanBoxComponent extends CrisLayoutBoxObj implements OnInit 
     this.projectService.getProjectCommunityByItemId(this.item.uuid).pipe(
       getFirstSucceededRemoteDataPayload()
     ).subscribe((projectCommunity: Community) => {
-      console.log(projectCommunity);
       this.projectCommunityUUID = projectCommunity.uuid;
     });
   }
