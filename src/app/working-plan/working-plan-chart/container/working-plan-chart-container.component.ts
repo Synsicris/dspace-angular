@@ -582,7 +582,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string|NgbDate, endDate: string|NgbDate) {
-    console.log(endDate);
     if (startDate instanceof NgbDate) {
       startDate = NgbDateStructToString(startDate);
     }
@@ -669,7 +668,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.datesQuarter = [];
     this.datesYear = [];
     const stepToProcess: any[] = this.dataSource.data
-      .filter((step: Workpackage) => isNotEmpty(step.dates))
+      .filter((step: Workpackage) => {
+        if (step.type === 'milestone') {
+          return isNotEmpty(step.dates?.end?.full);
+        } else {
+          return isNotEmpty(step.dates?.start?.full) && isNotEmpty(step.dates?.end?.full);
+        }
+      } )
       .map((step: Workpackage) => ({
         dates: step.dates,
         type: step.type
@@ -783,9 +788,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     if (isEmpty(node.dates)) {
       return false;
     } else if (node.type !== 'milestone') {
-      return date >= node.dates.start.full && date <= node.dates.end.full;
+      return (isNotEmpty(node.dates?.start?.full) && isNotEmpty(node.dates?.end?.full)) ?
+        (date >= node.dates.start.full && date <= node.dates.end.full) : false;
     } else {
-      return date === node.dates.end.full;
+      return isEmpty(node.dates?.end?.full) ? false : (date === node.dates.end.full);
     }
   }
 
@@ -955,32 +961,28 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   private _updateDateRangeOperations(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string): UpdateData {
     // create new dates object
-    let dates;
+    const dates = Object.create({});
     let startMoment;
     let startDateObj: WorkpackageChartDate;
-    const endMoment = this.moment(endDate); // create start moment
-    const endDateObj: WorkpackageChartDate = {
-      full: endMoment.format(this.dateFormat),
-      month: endMoment.format(this.dateMonthFormat),
-      year: endMoment.format(this.dateYearFormat)
-    };
+    let endDateObj: WorkpackageChartDate;
+    if (endDate) {
+      const endMoment = this.moment(endDate); // create start moment
+      endDateObj = {
+        full: endMoment.format(this.dateFormat),
+        month: endMoment.format(this.dateMonthFormat),
+        year: endMoment.format(this.dateYearFormat)
+      };
+      dates.end = endDateObj;
+    }
 
-    if (flatNode.type !== 'milestone') {
+    if (flatNode.type !== 'milestone' && startDate) {
       startMoment = this.moment(startDate); // create start moment
       startDateObj = {
         full: startMoment.format(this.dateFormat),
         month: startMoment.format(this.dateMonthFormat),
         year: startMoment.format(this.dateYearFormat)
       };
-
-      dates = {
-        start: startDateObj,
-        end: endDateObj
-      };
-    } else {
-      dates = {
-        end: endDateObj
-      };
+      dates.start = startDateObj;
     }
 
     // update flat node dates
@@ -1003,9 +1005,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
     let values = [];
     if (nestedNode.type !== 'milestone') {
-      values = [nestedNode.dates.start.full, nestedNode.dates.end.full];
+      values = [nestedNode.dates?.start?.full, nestedNode.dates?.end?.full];
     } else {
-      values = [null, nestedNode.dates.end.full];
+      values = [null, nestedNode.dates?.end?.full];
     }
 
     return {
@@ -1159,7 +1161,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    * @param date
    */
   getDateStruct(date: string): NgbDateStruct {
-    console.log(stringToNgbDateStruct(date));
     return isNotEmpty(date) ? stringToNgbDateStruct(date) : null;
   }
 }
