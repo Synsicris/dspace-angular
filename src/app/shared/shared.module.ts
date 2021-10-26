@@ -297,6 +297,7 @@ import { EditItemGrantsModalComponent } from './edit-item-grants-modal/edit-item
 import { EditSimpleItemModalComponent } from './edit-simple-item-modal/edit-simple-item-modal.component';
 import { ViewSimpleItemFormComponent } from './view-simple-item-form/view-simple-item-form.component';
 import { ItemCreateComponent } from './item/item-create/item-create.component';
+import { AuthorityDropdownComponent } from './authority-dropdown/authority-dropdown.component';
 
 /**
  * Declaration needed to make sure all decorator functions are called in time
@@ -581,6 +582,7 @@ const COMPONENTS = [
   SearchSimpleItemFilterBoxComponent,
   SimpleItemBoxComponent,
   AuthorityTypeaheadComponent,
+  AuthorityDropdownComponent,
   CreateProjectComponent,
   InvitationModalComponent,
   EditItemGrantsModalComponent

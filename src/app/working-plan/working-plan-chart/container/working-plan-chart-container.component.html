@@ -263,12 +263,12 @@
           </div>
           <div class="ml-05 mt-1 font-size-07">
             <p class="font-weight-bold m-0">{{'working-plan.chart.column.responsible' | translate}}</p>
-            <ds-authority-typeahead floatLabel="never" class="min-width-large"
+            <ds-authority-dropdown floatLabel="never" class="min-width-large"
               [fieldId]="'responsible'"
               [fieldName]="'responsible'"
-              [vocabularyOptions]="responsibleVocabularyOptions"
+              [vocabularyOptions]="(node.type != 'milestone') ? workpackageVocabularyOptions : milestoneVocabularyOptions"
               [initValue]="node.responsible"
-              (change)="updateStepResponsible(node, $event.value)"></ds-authority-typeahead>
+              (change)="updateStepResponsible(node, $event)"></ds-authority-dropdown>
           </div>
           <div class="ml-05 mt-1 font-size-07">
             <p class="font-weight-bold m-0">{{'working-plan.chart.column.status' | translate}}</p>

@@ -83,6 +83,16 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   @Input() public workpackages: Observable<Workpackage[]>;
 
+  /**
+   * The collection id for workpackage entity in the given project
+   */
+  @Input() public workPackageCollectionId: string;
+
+  /**
+   * The collection id for milestone entity in the given project
+   */
+  @Input() public milestoneCollectionId: string;
+
   private defaultDates: any = {
     start: {
       full: moment().format('YYYY-MM-DD'),
@@ -108,7 +118,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   today = moment().format(this.dateFormat);
   chartDateView: BehaviorSubject<ChartDateViewType> = new BehaviorSubject<ChartDateViewType>(null);
   ChartDateViewType = ChartDateViewType;
-  responsibleVocabularyOptions: VocabularyOptions;
+  workpackageVocabularyOptions: VocabularyOptions;
+  milestoneVocabularyOptions: VocabularyOptions;
   /**
    * The number of days of the ChangeAllStartDate dropdown.
    */
@@ -198,15 +209,21 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this._isExpandable, this._getChildren);
     this.treeControl = new FlatTreeControl<WorkpacakgeFlatNode>(this._getLevel, this._isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.responsibleVocabularyOptions = new VocabularyOptions(
-      environment.workingPlan.workingPlanStepResponsibleAuthority,
-      environment.workingPlan.workingPlanStepResponsibleMetadata,
-      null,
-      true
-    );
   }
 
   ngOnInit(): void {
+    this.workpackageVocabularyOptions = new VocabularyOptions(
+      environment.workingPlan.workingPlanStepResponsibleAuthority,
+      environment.workingPlan.workingPlanStepResponsibleMetadata,
+      this.workPackageCollectionId,
+      true
+    );
+    this.milestoneVocabularyOptions = new VocabularyOptions(
+      environment.workingPlan.workingPlanStepResponsibleAuthority,
+      environment.workingPlan.workingPlanStepResponsibleMetadata,
+      this.milestoneCollectionId,
+      true
+    );
     this.dragAndDropIsActive = false;
     this.sortSelected$ = this.workingPlanStateService.getWorkpackagesSortOption();
 
@@ -602,9 +619,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.updateField(flatNode, nestedNode, ['dc.title'], [name]);
   }
 
-  updateStepResponsible(flatNode: WorkpacakgeFlatNode, responsible: string) {
+  updateStepResponsible(flatNode: WorkpacakgeFlatNode, responsible: VocabularyEntry) {
     const nestedNode = Object.assign({}, this.nestedNodeMap.get(flatNode.id), {
-      responsible: responsible
+      responsible: responsible.value
     });
     this.updateField(flatNode, nestedNode, [environment.workingPlan.workingPlanStepResponsibleMetadata], [responsible]);
   }
