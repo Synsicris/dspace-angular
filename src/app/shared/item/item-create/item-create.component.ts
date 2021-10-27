@@ -35,7 +35,6 @@ export class ItemCreateComponent implements OnInit {
   constructor(private authService: AuthService, private entityTypeService: EntityTypeService, private modalService: NgbModal, private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.entityType);
     combineLatest([
       this.authService.isAuthenticated(),
       this.entityTypeService.getEntityTypeByLabel(this.entityType).pipe(

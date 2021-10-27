@@ -9,7 +9,7 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
 
 import { EPerson } from '../../core/eperson/models/eperson.model';
-import { ResearcherProfile } from '../../core/profile/model/researcher-profile.model';
+import { ResearcherProfile, ResearcherProfileVisibilityValue } from '../../core/profile/model/researcher-profile.model';
 import { ResearcherProfileService } from '../../core/profile/researcher-profile.service';
 import { VarDirective } from '../../shared/utils/var.directive';
 import { ProfilePageResearcherFormComponent } from './profile-page-researcher-form.component';
@@ -127,15 +127,13 @@ describe('ProfilePageResearcherFormComponent', () => {
   describe('toggleProfileVisibility', () => {
 
     it('should set the profile visibility to true', () => {
-      profile.visible = false;
-      component.toggleProfileVisibility(profile);
-      expect(researcherProfileService.setVisibility).toHaveBeenCalledWith(profile, true);
+      component.toggleProfileVisibility(profile, ResearcherProfileVisibilityValue.PUBLIC);
+      expect(researcherProfileService.setVisibility).toHaveBeenCalledWith(profile, ResearcherProfileVisibilityValue.PUBLIC);
     });
 
     it('should set the profile visibility to false', () => {
-      profile.visible = true;
-      component.toggleProfileVisibility(profile);
-      expect(researcherProfileService.setVisibility).toHaveBeenCalledWith(profile, false);
+      component.toggleProfileVisibility(profile, ResearcherProfileVisibilityValue.PRIVATE);
+      expect(researcherProfileService.setVisibility).toHaveBeenCalledWith(profile, ResearcherProfileVisibilityValue.PRIVATE);
     });
 
   });

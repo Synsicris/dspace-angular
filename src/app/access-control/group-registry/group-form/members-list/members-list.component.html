@@ -1,5 +1,5 @@
 <ng-container>
-  <h3 class="border-bottom pb-2">{{messagePrefix + '.head' | translate}}</h3>
+  <h3 *ngIf="showHeadingTitle" class="border-bottom pb-2">{{messagePrefix + '.head' | translate}}</h3>
 
   <h4 id="search" class="border-bottom pb-2">{{messagePrefix + '.search.head' | translate}}
 
@@ -40,7 +40,7 @@
         <tr>
           <th scope="col">{{messagePrefix + '.table.id' | translate}}</th>
           <th scope="col">{{messagePrefix + '.table.name' | translate}}</th>
-          <th>{{messagePrefix + '.table.edit' | translate}}</th>
+          <th *ngIf="showEditActions || showInvitationAction">{{messagePrefix + '.table.edit' | translate}}</th>
         </tr>
         </thead>
         <tbody>
@@ -48,19 +48,26 @@
           <td>{{ePerson.eperson.id}}</td>
           <td><a (click)="ePersonDataService.startEditingNewEPerson(ePerson.eperson)"
                  [routerLink]="[ePersonDataService.getEPeoplePageRouterLink()]">{{ePerson.eperson.name}}</a></td>
-          <td>
+          <td *ngIf="showEditActions || showInvitationAction">
             <div class="btn-group edit-field">
-              <button *ngIf="(ePerson.memberOfGroup)"
+              <button *ngIf="showEditActions && (ePerson.memberOfGroup)"
                       (click)="deleteMemberFromGroup(ePerson)"
                       class="btn btn-outline-danger btn-sm"
                       title="{{messagePrefix + '.table.edit.buttons.remove' | translate: {name: ePerson.eperson.name} }}">
                 <i class="fas fa-trash-alt fa-fw"></i>
               </button>
 
-              <button *ngIf="!(ePerson.memberOfGroup)"
+              <button *ngIf="showEditActions && !(ePerson.memberOfGroup)"
                       (click)="addMemberToGroup(ePerson)"
                       class="btn btn-outline-primary btn-sm"
                       title="{{messagePrefix + '.table.edit.buttons.add' | translate: {name: ePerson.eperson.name} }}">
+                <i class="fas fa-plus fa-fw"></i>
+              </button>
+
+              <button *ngIf="showInvitationAction && !(ePerson.memberOfGroup)"
+                      (click)="dispatchSendInvitation(ePerson)"
+                      class="btn btn-outline-primary btn-sm"
+                      title="{{messagePrefix + '.table.invitation.buttons.send' | translate: {email: ePerson.eperson.email} }}">
                 <i class="fas fa-plus fa-fw"></i>
               </button>
             </div>
@@ -93,7 +100,7 @@
         <tr>
           <th scope="col">{{messagePrefix + '.table.id' | translate}}</th>
           <th scope="col">{{messagePrefix + '.table.name' | translate}}</th>
-          <th>{{messagePrefix + '.table.edit' | translate}}</th>
+          <th *ngIf="showEditActions">{{messagePrefix + '.table.edit' | translate}}</th>
         </tr>
         </thead>
         <tbody>
@@ -101,7 +108,7 @@
           <td>{{ePerson.eperson.id}}</td>
           <td><a (click)="ePersonDataService.startEditingNewEPerson(ePerson.eperson)"
                  [routerLink]="[ePersonDataService.getEPeoplePageRouterLink()]">{{ePerson.eperson.name}}</a></td>
-          <td>
+          <td *ngIf="showEditActions">
             <div class="btn-group edit-field">
               <button (click)="deleteMemberFromGroup(ePerson)"
                       class="btn btn-outline-danger btn-sm"

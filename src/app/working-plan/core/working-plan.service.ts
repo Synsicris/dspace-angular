@@ -522,19 +522,20 @@ export class WorkingPlanService {
     workpackageId: string,
     workpackage: Workpackage,
     metadataList: string[],
-    valueList: any[],
-    hasAuthority = false
+    valueList: any[]
   ) {
     const metadatumViewList = [];
     metadataList.forEach((metadata, index) => {
-      const value = valueList[index];
+      const entry = valueList[index];
+      const hasAuthority = isNotEmpty(entry?.authority);
+      const value = (isNgbDateStruct(entry)) ? dateToISOFormat(entry) : (hasAuthority ? entry.value : entry);
       metadatumViewList.push(
         {
           key: metadata,
           language: '',
-          value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
+          value: value,
           place: 0,
-          authority: hasAuthority ? value : '',
+          authority: hasAuthority ? entry.authority : '',
           confidence: hasAuthority ? 600 : -1
         } as MetadatumViewModel
       );
@@ -593,19 +594,20 @@ export class WorkingPlanService {
     workpackageStepId: string,
     workpackageStep: WorkpackageStep,
     metadataList: string[],
-    valueList: any[],
-    hasAuthority = false
+    valueList: any[]
   ) {
     const metadatumViewList = [];
     metadataList.forEach((metadata, index) => {
-      const value = valueList[index];
+      const entry = valueList[index];
+      const hasAuthority = isNotEmpty(entry?.authority);
+      const value = (isNgbDateStruct(entry)) ? dateToISOFormat(entry) : (hasAuthority ? entry.value : entry);
       metadatumViewList.push(
         {
           key: metadata,
           language: '',
-          value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
+          value: value,
           place: 0,
-          authority: hasAuthority ? value : '',
+          authority: hasAuthority ? entry.authority : '',
           confidence: hasAuthority ? 600 : -1
         } as MetadatumViewModel
       );

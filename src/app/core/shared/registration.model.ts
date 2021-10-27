@@ -25,9 +25,12 @@ export class Registration implements UnCacheableObject {
    * The token linked to the registration
    */
   token: string;
-
   /**
-   * In case the groups field contains values, then it is interpret as an invitation to register and join these groups
+   * The token linked to the registration
+   */
+  groupNames?: string[];
+  /**
+   * The token linked to the registration
    */
   groups?: string[];
 }

@@ -1,6 +1,6 @@
 <div>
   <div class="modal-header">{{ 'project-overview.invitation.title' | translate }}
-    <button type="button" class="close" (click)="close()" aria-label="Close">
+    <button type="button" class="close" [disabled]="processing$ | async" (click)="close()" aria-label="Close">
       <span aria-hidden="true">×</span>
     </button>
   </div>
@@ -10,6 +10,7 @@
       <input type="search"
              class="form-control"
              formControlName="email"
+             [readonly]="!!email"
              (click)="$event.stopPropagation();"
              placeholder="{{'project-overview.invitation.email' | translate }}"
              dsAutoFocus>

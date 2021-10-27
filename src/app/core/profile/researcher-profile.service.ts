@@ -27,7 +27,7 @@ import {
   getFirstCompletedRemoteData,
   getFirstSucceededRemoteDataPayload
 } from '../shared/operators';
-import { ResearcherProfile } from './model/researcher-profile.model';
+import { ResearcherProfile, ResearcherProfileVisibilityValue } from './model/researcher-profile.model';
 import { RESEARCHER_PROFILE } from './model/researcher-profile.resource-type';
 import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 import { PostRequest } from '../data/request.models';
@@ -138,14 +138,14 @@ export class ResearcherProfileService {
      * Change the visibility of the given researcher profile setting the given value.
      *
      * @param researcherProfile the profile to update
-     * @param visible the visibility value to set
+     * @param visibility the visibility value to set
      */
-    setVisibility(researcherProfile: ResearcherProfile, visible: boolean): Observable<ResearcherProfile> {
+    setVisibility(researcherProfile: ResearcherProfile, visibility: ResearcherProfileVisibilityValue): Observable<ResearcherProfile> {
 
-      const replaceOperation: ReplaceOperation<boolean> = {
-          path: '/visible',
+      const replaceOperation: ReplaceOperation<ResearcherProfileVisibilityValue> = {
+          path: '/visibility',
           op: 'replace',
-          value: visible
+          value: visibility
       };
 
       return this.patch(researcherProfile, [replaceOperation]).pipe (

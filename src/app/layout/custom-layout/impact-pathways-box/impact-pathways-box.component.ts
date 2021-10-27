@@ -67,6 +67,7 @@ export class ImpactPathwaysBoxComponent extends CrisLayoutBoxObj implements OnIn
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.projectService.getProjectCommunityByItemId(this.item.uuid).pipe(
       getFirstSucceededRemoteDataPayload()
     ).subscribe((projectCommunity: Community) => {
