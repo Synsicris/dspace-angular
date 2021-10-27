@@ -95,7 +95,7 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
     if (this.isSubproject) {
       groups$ = this.projectGroupService.getInvitationSubprojectAdminsGroupsByCommunity(this.projectCommunity);
     } else {
-      groups$ = this.projectGroupService.getInvitationProjectGroupsByCommunity(this.projectCommunity);
+      groups$ = this.projectGroupService.getInvitationProjectAllGroupsByCommunity(this.projectCommunity);
     }
 
     groups$.pipe(take(1))
