@@ -34,7 +34,6 @@ export class SubmissionSectionContainerComponent implements OnInit {
 
   @Input() entityType: string;
 
-
   /**
    * The section data
    * @type {SectionDataObject}
@@ -52,6 +51,12 @@ export class SubmissionSectionContainerComponent implements OnInit {
    * @type {SubmissionUploadFilesComponent}
    */
   @Input() submissionUploaderRef: Observable<SubmissionUploadFilesComponent>;
+
+  /**
+   * The uploader enabled
+   * @type {boolean}
+   */
+  @Input() uploadEnabled: boolean;
 
   /**
    * The AlertType enumeration
@@ -112,6 +117,7 @@ export class SubmissionSectionContainerComponent implements OnInit {
         {provide: 'submissionIdProvider', useFactory: () => (this.submissionId), deps: []},
         {provide: 'entityType', useFactory: () => (this.entityType), deps: []},
         {provide: 'submissionUploaderRefProvider', useFactory: () => (this.submissionUploaderRef), deps: []},
+        {provide: 'uploadEnabledProvider', useFactory: () => (this.uploadEnabled), deps: []},
       ],
       parent: this.injector
     });

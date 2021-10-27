@@ -28,6 +28,10 @@ import { getFirstSucceededRemoteData } from '../../../core/shared/operators';
 import { SubmissionVisibility } from '../../utils/visibility.util';
 import { SubmissionUploadFilesComponent } from '../../form/submission-upload-files/submission-upload-files.component';
 
+import { UploaderOptions } from '../../../shared/uploader/uploader-options.model';
+import { AuthService } from '../../../core/auth/auth.service';
+import { HALEndpointService } from '../../../core/shared/hal-endpoint.service';
+
 export const POLICY_DEFAULT_NO_LIST = 1; // Banner1
 export const POLICY_DEFAULT_WITH_LIST = 2; // Banner2
 
@@ -120,6 +124,13 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
   protected subs: Subscription[] = [];
 
   /**
+   * The uploader configuration options
+   * @type {UploaderOptions}
+   */
+  public uploadFilesOptions: UploaderOptions = new UploaderOptions();
+
+
+  /**
    * Initialize instance variables
    *
    * @param {SectionUploadService} bitstreamService
@@ -141,17 +152,21 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
               private resourcePolicyService: ResourcePolicyService,
               protected sectionService: SectionsService,
               private submissionService: SubmissionService,
+              private authService: AuthService,
               private uploadsConfigService: SubmissionUploadsConfigService,
+              private halService: HALEndpointService,
               @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
               @Inject('submissionIdProvider') public injectedSubmissionId: string,
-              @Inject('submissionUploaderRefProvider') public injectedSubmissionUploaderRef: Observable<SubmissionUploadFilesComponent>) {
-    super(undefined, injectedSectionData, injectedSubmissionId, injectedSubmissionUploaderRef);
+              @Inject('submissionUploaderRefProvider') public injectedSubmissionUploaderRef: Observable<SubmissionUploadFilesComponent>,
+              @Inject('uploadEnabledProvider') public injecteduploadEnabled: boolean) {
+    super(undefined, injectedSectionData, injectedSubmissionId, injectedSubmissionUploaderRef, injecteduploadEnabled);
   }
 
   /**
    * Initialize all instance variables and retrieve collection default access conditions
    */
   onSectionInit() {
+
     const config$ = this.uploadsConfigService.findByHref(this.sectionData.config, true, false, followLink('metadata')).pipe(
       getFirstSucceededRemoteData(),
       map((config) => config.payload));
@@ -221,6 +236,16 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
           }
         )
     );
+
+
+    this.halService.getEndpoint(this.submissionService.getSubmissionObjectLinkName()).pipe(
+      filter((href: string) => isNotEmpty(href)),
+      distinctUntilChanged(),
+      take(1))
+      .subscribe((endpointURL) => {
+        this.uploadFilesOptions.authToken = this.authService.buildAuthHeader();
+        this.uploadFilesOptions.url = endpointURL.concat(`/${this.submissionId}`);
+      });
   }
 
   /**
