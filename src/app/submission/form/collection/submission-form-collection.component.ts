@@ -154,7 +154,7 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
 
       this.selectedCollectionName$ = this.collectionDataService.findById(this.currentCollectionId).pipe(
         getFirstSucceededRemoteDataPayload(),
-        map((collection: Collection) => this.nameService.getName(collection))
+        map((collection: Collection) => collection.entityType + '.listelement.badge')
       );
     }
   }
