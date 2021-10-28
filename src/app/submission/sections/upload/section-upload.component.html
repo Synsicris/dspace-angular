@@ -2,7 +2,7 @@
           [dismissible]="true"
           [type]="AlertTypeEnum.Info"></ds-alert>
 
-<!-- <ds-alert [type]="AlertTypeEnum.Info">
+<ds-alert [type]="AlertTypeEnum.Info">
   <p class="text-center m-0 p-0 d-flex justify-content-center align-items-center">
         <span><i class="fas fa-cloud-upload" aria-hidden="true"></i>{{dropMsg | translate}}{{'uploader.or' | translate}}
           <button class="btn btn-link m-0 p-0" (click)="browse(submissionUploaderRef)">
@@ -10,14 +10,7 @@
           </button>
         </span>
   </p>
-</ds-alert> -->
-
-  <div *ngIf="uploadEnabled" class="w-100">
-      <ds-submission-upload-files [submissionId]="submissionId"
-                                  [collectionId]="collectionId"
-                                  [uploadFilesOptions]="uploadFilesOptions"></ds-submission-upload-files>
-      <div class="clearfix"></div>
-  </div>
+</ds-alert>
 
 <ng-container *ngIf="fileList.length == 0">
   <div class="row">
@@ -55,8 +48,7 @@
                                        [fileName]="fileNames[fileList.indexOf(fileEntry)]"
                                        [readOnly]="isReadOnly()"
                                        [sectionId]="sectionData.id"
-                                       [submissionId]="submissionId">
-                                      </ds-submission-upload-section-file>
+                                       [submissionId]="submissionId"></ds-submission-upload-section-file>
     <div class="row">
       <div class="col-md-12">
         <hr/>
