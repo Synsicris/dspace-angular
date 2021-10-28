@@ -47,12 +47,6 @@ export abstract class SectionModelComponent implements OnDestroy, OnInit, Sectio
   submissionUploaderRef: Observable<SubmissionUploadFilesComponent>;
 
   /**
-   * The uploader enabled
-   * @type {boolean}
-   */
-  uploadEnabled: boolean;
-
-  /**
    * A boolean representing if this section is valid
    * @type {boolean}
    */
@@ -75,14 +69,11 @@ export abstract class SectionModelComponent implements OnDestroy, OnInit, Sectio
   public constructor(@Inject('collectionIdProvider') public injectedCollectionId: string,
                      @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
                      @Inject('submissionIdProvider') public injectedSubmissionId: string,
-                     @Inject('submissionUploaderRefProvider') public injectedSubmissionUploaderRef: Observable<SubmissionUploadFilesComponent>,
-                     @Inject('uploadEnabledProvider') public injecteduploadEnabled: boolean = false,
-                     ) {
+                     @Inject('submissionUploaderRefProvider') public injectedSubmissionUploaderRef: Observable<SubmissionUploadFilesComponent>) {
     this.collectionId = injectedCollectionId;
     this.sectionData = injectedSectionData;
     this.submissionId = injectedSubmissionId;
     this.submissionUploaderRef = injectedSubmissionUploaderRef;
-    this.uploadEnabled = injecteduploadEnabled;
   }
 
   /**

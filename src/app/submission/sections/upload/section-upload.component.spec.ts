@@ -39,9 +39,6 @@ import { getMockSectionUploadService } from '../../../shared/mocks/section-uploa
 import { SubmissionUploadsModel } from '../../../core/config/models/config-submission-uploads.model';
 import { buildPaginatedList } from '../../../core/data/paginated-list.model';
 import { PageInfo } from '../../../core/shared/page-info.model';
-import { AuthService } from '../../../core/auth/auth.service';
-import { HALEndpointService } from '../../../core/shared/hal-endpoint.service';
-
 
 function getMockSubmissionUploadsConfigService(): SubmissionFormsConfigService {
   return jasmine.createSpyObj('SubmissionUploadsConfigService', {
@@ -93,18 +90,6 @@ describe('SubmissionSectionUploadComponent test suite', () => {
   let mockCollection: Collection;
   let mockDefaultAccessCondition: ResourcePolicy;
   let prepareComp;
-  const uploadEnabled = false;
-
-  const authServiceStub = {
-    buildAuthHeader() {
-      return `Bearer 123123123123123123`;
-    }
-  };
-  const halServiceStub = {
-    getEndpoint() {
-      return `submission`;
-    }
-  };
 
   beforeEach(waitForAsync(() => {
     sectionObject = {
@@ -197,12 +182,8 @@ describe('SubmissionSectionUploadComponent test suite', () => {
         { provide: SectionsService, useClass: SectionsServiceStub },
         { provide: SubmissionService, useValue: submissionServiceStub },
         { provide: SectionUploadService, useValue: bitstreamService },
-        { provide: AuthService, useValue: authServiceStub },
-        { provide: HALEndpointService, useValue: halServiceStub },
         { provide: 'sectionDataProvider', useValue: sectionObject },
         { provide: 'submissionIdProvider', useValue: submissionId },
-        { provide: 'uploadEnabledProvider', useValue: uploadEnabled },
-
         ChangeDetectorRef,
         SubmissionSectionUploadComponent
       ],
