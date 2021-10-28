@@ -116,6 +116,13 @@ export class Collection extends DSpaceObject implements ChildHALResource {
     return this.firstMetadataValue('dc.description.tableofcontents');
   }
 
+  /**
+   * Method that returns as which entity type this object should collect
+   */
+  get entityType(): string {
+    return this.firstMetadataValue('dspace.entity.type');
+  }
+
   getParentLinkKey(): keyof this['_links'] {
     return 'parentCommunity';
   }

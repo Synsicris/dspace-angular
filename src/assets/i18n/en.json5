@@ -5587,6 +5587,80 @@
   "project.listelement.badge": "Subproject",
 
 
+
+  "project.manage.menu.project": "Manage project members",
+  "project.manage.menu.subproject": "Manage subproject members",
+  "project.manage.breadcrumbs": "Manage project members",
+
+  "project.manage.page.title": "Manage project members",
+
+  "project.manage.members.admin-group": "Manage project coordinators",
+
+  "project.manage.members.members-group": "Manage project members",
+
+  "project.manage.members-list.head": "Manage group",
+
+
+  "project.manage.members-list.search.head": "Search persons",
+
+
+  "project.manage.members-list.button.see-all": "Browse All",
+
+
+  "project.manage.members-list.headMembers": "Current Members",
+
+
+  "project.manage.members-list.search.scope.metadata": "Metadata",
+
+
+  "project.manage.members-list.search.scope.email": "E-mail (exact)",
+
+
+  "project.manage.members-list.search.button": "Search",
+
+
+  "project.manage.members-list.table.id": "ID",
+
+
+  "project.manage.members-list.table.name": "Name",
+
+
+  "project.manage.members-list.table.edit": "Remove / Add",
+
+
+  "project.manage.members-list.table.edit.buttons.remove": "Remove member with name \"{{name}}\"",
+
+  "project.manage.members-list.table.invitation.buttons.send": "Send invitation to \"{{email}}\"",
+
+
+  "project.manage.members-list.notification.success.addMember": "Successfully added member: \"{{name}}\"",
+
+
+  "project.manage.members-list.notification.failure.addMember": "Failed to add member: \"{{name}}\"",
+
+
+  "project.manage.members-list.notification.success.deleteMember": "Successfully deleted member: \"{{name}}\"",
+
+
+  "project.manage.members-list.notification.failure.deleteMember": "Failed to delete member: \"{{name}}\"",
+
+
+  "project.manage.members-list.table.edit.buttons.add": "Add member with name \"{{name}}\"",
+
+
+  "project.manage.members-list.notification.failure.noActiveGroup": "No current active group, submit a name first.",
+
+
+  "project.manage.members-list.no-members-yet": "No members in group yet, search and add.",
+
+
+  "project.manage.members-list.no-items": "No EPeople found in that search",
+
+
+
+
+
+
   "project.page.contributor": "Contributors",
 
 

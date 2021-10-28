@@ -51,6 +51,7 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
    * @param {AuthorizationDataService} authorizationService
    * @param {NgbModal} modalService
    * @param {ProjectGroupService} projectGroupService
+   * @param {ProjectDataService} projectService
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
@@ -95,7 +96,7 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
     if (this.isSubproject) {
       groups$ = this.projectGroupService.getInvitationSubprojectMembersGroupsByCommunity(this.projectCommunity);
     } else {
-      groups$ = this.projectGroupService.getProjectMembersGroupUUIDByCommunity(this.projectCommunity);
+      groups$ = this.projectGroupService.getInvitationProjectMembersGroupsByCommunity(this.projectCommunity);
     }
 
     groups$.pipe(take(1))

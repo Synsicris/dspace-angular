@@ -18,7 +18,15 @@ import { NotificationsService } from '../notifications/notifications.service';
 })
 export class InvitationModalComponent implements OnInit {
 
+  /**
+   * The list og group UUID used for the invitation
+   */
   @Input() groupList: string[];
+
+  /**
+   * if exist the email address to which se invitation
+   */
+  @Input() email: string;
 
   /**
    * The invitation form group
@@ -49,7 +57,7 @@ export class InvitationModalComponent implements OnInit {
    */
   ngOnInit(): void {
     this.invitationForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: [this.email ? this.email : '', [Validators.required, Validators.email]]
     });
   }
 

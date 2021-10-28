@@ -21,4 +21,14 @@ export class WorkingPlanChartComponent {
    */
   @Input() public workpackages: Observable<Workpackage[]>;
 
+  /**
+   * The collection id for workpackage entity in the given project
+   */
+  @Input() public workPackageCollectionId: string;
+
+  /**
+   * The collection id for milestone entity in the given project
+   */
+  @Input() public milestoneCollectionId: string;
+
 }

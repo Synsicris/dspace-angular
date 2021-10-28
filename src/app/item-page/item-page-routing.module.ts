@@ -13,6 +13,7 @@ import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { ThemedItemPageComponent } from './simple/themed-item-page.component';
 import { ThemedFullItemPageComponent } from './full/themed-full-item-page.component';
 import { CrisItemPageTabResolver } from '../cris-item-page/cris-item-page-tab.resolver';
+import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end-user-agreement-current-user.guard';
 
 @NgModule({
   imports: [
@@ -21,6 +22,12 @@ import { CrisItemPageTabResolver } from '../cris-item-page/cris-item-page-tab.re
         path: ':id',
         runGuardsAndResolvers: 'always',
         children: [
+          {
+            path: 'managemembers',
+            loadChildren: () => import('../project-members-page/project-members-page.module')
+              .then((m) => m.ProjectMembersPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
           {
             path: '',
             resolve: {

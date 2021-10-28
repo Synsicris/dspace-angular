@@ -10,7 +10,7 @@ import { ImpactPathwayService } from '../../core/impact-pathway.service';
 import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
-import { take } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, take, skip, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'ipw-objective',
@@ -32,11 +32,39 @@ export class ObjectiveComponent implements OnInit {
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
 
+  /**
+   * Reference to teh ipwCollapse child component
+   */
+  @ViewChild('ipwCollapse') collapsable;
+
   constructor(private impactPathwayService: ImpactPathwayService, private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
     this.formConfig$ = this.impactPathwayService.getImpactPathwayTaskEditFormConfig(this.impactPathwayStep.type);
+  }
+
+  /**
+   * After component view init after 2 times it sets the value, then start setting the state value for step
+   */
+  ngAfterViewInit() {
+    this.collapsable.isCollapsed().pipe(
+      skip(2),
+      distinctUntilChanged()
+    ).subscribe( (val) => {
+      this.impactPathwayService.dispatchSetImpactPathwaySubTaskCollapse(
+        this.impactPathwayStep.id,
+        this.impactPathwayTask.id,
+        val
+      );
+    });
+  }
+
+  /**
+   * Get from selector the previously inserted collapsed value for the specific step
+   */
+  isCollapsed(): Observable<ImpactPathwayTask> {
+    return this.impactPathwayService.getCollapsable(this.impactPathwayStep.id, this.impactPathwayTask.id);
   }
 
   isOpen() {

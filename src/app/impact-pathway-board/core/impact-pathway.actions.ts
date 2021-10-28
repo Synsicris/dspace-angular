@@ -74,6 +74,8 @@ export const ImpactPathwayActionTypes = {
   SAVE_IMPACT_PATHWAY_TASK_LINKS_ERROR: type('dspace/core/impactpathway/SAVE_IMPACT_PATHWAY_TASK_LINKS_ERROR'),
   TOGGLE_IMPACT_PATHWAY_TASK_LINKS_VIEW: type('dspace/core/impactpathway/TOGGLE_IMPACT_PATHWAY_TASK_LINKS_VIEW'),
   SET_IMPACT_PATHWAY_TARGET_TASK: type('dspace/core/impactpathway/SET_IMPACT_PATHWAY_TARGET_TASK'),
+  SET_IMPACT_PATHWAY_SUBTASK_COLLAPSE: type('dspace/impactpathway/SET_IMPACT_PATHWAY_TASK_COLLAPSE'),
+  CLEAR_IMPACT_PATHWAY_SUBTASK_COLLAPSE: type('dspace/impactpathway/CLEAR_IMPACT_PATHWAY_TASK_COLLAPSE'),
 };
 
 /* tslint:disable:max-classes-per-file */
@@ -1377,6 +1379,41 @@ export class NormalizeImpactPathwayObjectsOnRehydrateAction implements Action {
   type = ImpactPathwayActionTypes.NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE;
 }
 
+
+/**
+ * An ngrx action to set step plan collapsed value
+ */
+export class SetImpactPathwaySubTaskCollapseAction implements Action {
+  type = ImpactPathwayActionTypes.SET_IMPACT_PATHWAY_SUBTASK_COLLAPSE;
+  payload: {
+    impactPathwayStepId: string,
+    impactPathwayTaskId: string,
+    value: boolean;
+  };
+
+  /**
+   * Create a new SetExploitationPlanStepCollapseAction
+   *
+   * @param impactPathwayStepId
+   *    the impactPathwayStep's id
+   * @param impactPathwayTaskId
+   *    the impactPathwayTask's id
+   * @param value
+   *    the collapsed value to be updated
+   */
+  constructor(impactPathwayStepId: string, impactPathwayTaskId: string, value: boolean) {
+    this.payload = { impactPathwayStepId, impactPathwayTaskId, value };
+  }
+}
+
+
+/**
+ * An ngrx action to clear all task collapse
+ */
+export class ClearImpactPathwaySubtaskCollapseAction implements Action {
+  type = ImpactPathwayActionTypes.CLEAR_IMPACT_PATHWAY_SUBTASK_COLLAPSE;
+}
+
 /* tslint:enable:max-classes-per-file */
 
 /**
@@ -1441,4 +1478,6 @@ export type ImpactPathwayActions
   | ToggleImpactPathwayTaskLinksViewAction
   | UpdateImpactPathwayAction
   | UpdateImpactPathwayTaskAction
-  | UpdateImpactPathwaySubTaskAction;
+  | UpdateImpactPathwaySubTaskAction
+  | SetImpactPathwaySubTaskCollapseAction
+  | ClearImpactPathwaySubtaskCollapseAction;

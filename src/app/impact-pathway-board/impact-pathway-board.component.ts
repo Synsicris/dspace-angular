@@ -34,5 +34,4 @@ export class ImpactPathwayBoardComponent implements OnInit {
       map((loaded: boolean) => !loaded)
     );
   }
-
 }

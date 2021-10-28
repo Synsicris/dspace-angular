@@ -208,10 +208,8 @@ export class ComColFormComponent<T extends Collection | Community> implements On
             language: inputModel.language
           } as any;
         });
-        console.log(values);
       } else {
         fieldModelName = fieldModel.name;
-        console.log(fieldModel);
         values.push({
           value: fieldModel.value as string,
           language: null

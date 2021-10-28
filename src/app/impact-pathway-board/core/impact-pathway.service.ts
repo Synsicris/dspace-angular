@@ -48,7 +48,8 @@ import {
   impactPathwayStateSelector,
   isImpactPathwayLoadedSelector,
   isImpactPathwayProcessingSelector,
-  isImpactPathwayRemovingSelector
+  isImpactPathwayRemovingSelector,
+  impactPathwaySubTaskCollapsable
 } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
@@ -72,7 +73,9 @@ import {
   RemoveImpactPathwayTaskAction,
   SetImpactPathwayTargetTaskAction,
   UpdateImpactPathwayAction,
-  UpdateImpactPathwayTaskAction
+  UpdateImpactPathwayTaskAction,
+  SetImpactPathwaySubTaskCollapseAction,
+  ClearImpactPathwaySubtaskCollapseAction
 } from './impact-pathway.actions';
 import { ErrorResponse } from '../../core/cache/response.models';
 import {
@@ -303,6 +306,14 @@ export class ImpactPathwayService {
     this.store.dispatch(new UpdateImpactPathwayTaskAction(impactPathwayId, stepId, taskId, task));
   }
 
+  dispatchSetImpactPathwaySubTaskCollapse(impactPathwayStepId: string, impactPathwayTaskId: string, value: boolean) {
+    this.store.dispatch(new SetImpactPathwaySubTaskCollapseAction(impactPathwayStepId, impactPathwayTaskId, value));
+  }
+
+  dispatchClearCollapsable() {
+    this.store.dispatch(new ClearImpactPathwaySubtaskCollapseAction());
+  }
+
   getCreateTaskFormConfigName(stepType: string, isObjectivePage: boolean): string {
     return isObjectivePage ? `impact_pathway_${stepType}_task_objective_form` : `impact_pathway_${stepType}_task_form`;
   }
@@ -519,15 +530,13 @@ export class ImpactPathwayService {
   }
 
   moveSubTask(previousParentTaskId: string, newParentTaskId: string, taskId: string): Observable<Item> {
-    return this.itemAuthorityRelationService.unlinkItemFromParent(
+    return this.itemAuthorityRelationService.removeChildRelationFromParent(
       previousParentTaskId,
       taskId,
-      environment.impactPathway.impactPathwayParentRelationMetadata,
       environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
-      mergeMap(() => this.itemAuthorityRelationService.linkItemToParent(
+      mergeMap(() => this.itemAuthorityRelationService.addLinkedItemToParent(
         newParentTaskId,
         taskId,
-        environment.impactPathway.impactPathwayParentRelationMetadata,
         environment.impactPathway.impactPathwayTaskRelationMetadata))
     );
   }
@@ -903,6 +912,13 @@ export class ImpactPathwayService {
     if (isNotEmpty(linksList)) {
       this.store.dispatch(new AddImpactPathwayTaskLinksAction(linksList));
     }
+  }
+
+  getCollapsable(impactPathwayStepId: string,impactPathwayTaskId: string) {
+    return this.store.pipe(select(
+        impactPathwaySubTaskCollapsable(impactPathwayStepId, impactPathwayTaskId)
+      )
+    );
   }
 
   private getCollectionIdByProjectAndEntity(projectId: string, entityType: string): Observable<string> {
