@@ -530,15 +530,13 @@ export class ImpactPathwayService {
   }
 
   moveSubTask(previousParentTaskId: string, newParentTaskId: string, taskId: string): Observable<Item> {
-    return this.itemAuthorityRelationService.unlinkItemFromParent(
+    return this.itemAuthorityRelationService.removeChildRelationFromParent(
       previousParentTaskId,
       taskId,
-      environment.impactPathway.impactPathwayParentRelationMetadata,
       environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
-      mergeMap(() => this.itemAuthorityRelationService.linkItemToParent(
+      mergeMap(() => this.itemAuthorityRelationService.addLinkedItemToParent(
         newParentTaskId,
         taskId,
-        environment.impactPathway.impactPathwayParentRelationMetadata,
         environment.impactPathway.impactPathwayTaskRelationMetadata))
     );
   }

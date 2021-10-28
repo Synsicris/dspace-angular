@@ -34,8 +34,6 @@
               }" >
         <i *ngIf="(isDragging | async) && (isDropAllowed | async)" class="fas fa-check fa-5x"></i>
         <i *ngIf="(isDragging | async) && !(isDropAllowed | async)" class="fas fa-exclamation fa-5x"></i>
-        {{ (isDragging | async) | json }}
-        {{ (isDropAllowed | async) | json }}
       </div>
         
     </ipw-impact-path-way-task>
