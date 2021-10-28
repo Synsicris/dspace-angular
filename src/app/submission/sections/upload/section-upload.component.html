@@ -2,24 +2,14 @@
           [dismissible]="true"
           [type]="AlertTypeEnum.Info"></ds-alert>
 
-<!-- <ds-alert [type]="AlertTypeEnum.Info">
-  <p class="text-center m-0 p-0 d-flex justify-content-center align-items-center">
-        <span><i class="fas fa-cloud-upload" aria-hidden="true"></i>{{dropMsg | translate}}{{'uploader.or' | translate}}
-          <button class="btn btn-link m-0 p-0" (click)="browse(submissionUploaderRef)">
-            {{'uploader.browse' | translate}}
-          </button>
-        </span>
-  </p>
-</ds-alert> -->
-
 <div class="well ds-base-drop-zone mt-1 mb-3 text-muted">
-    <div class="text-center m-0 p-2 d-flex justify-content-center align-items-center ng-star-inserted">
-      <span><i aria-hidden="true" class="fas fa-upload"></i> {{dropMsg | translate}}{{'uploader.or' | translate}} </span>
-      <button class="btn btn-link ml-2 m-0 p-0" (click)="browse(submissionUploaderRef)">
-        {{'uploader.browse' | translate}}
-      </button>
-    </div>
+  <div class="text-center m-0 p-2 d-flex justify-content-center align-items-center ng-star-inserted">
+    <span><i aria-hidden="true" class="fas fa-upload"></i> {{dropMsg | translate}}{{'uploader.or' | translate}} </span>
+    <button class="btn btn-link ml-2 m-0 p-0" (click)="browse(submissionUploaderRef)">
+      {{'uploader.browse' | translate}}
+    </button>
   </div>
+</div>
 
 <ng-container *ngIf="fileList.length == 0">
   <div class="row">
