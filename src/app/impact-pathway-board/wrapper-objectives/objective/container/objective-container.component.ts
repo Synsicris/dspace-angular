@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 import { Observable, of as observableOf } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +10,8 @@ import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-con
 import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';
 import { environment } from '../../../../../environments/environment';
+
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'ipw-objective-container',
@@ -41,7 +42,6 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
   drop(event: CdkDragDrop<ImpactPathwayTask>) {
     if (event.previousContainer === event.container) {
-/*      moveItemInArray(event.container.data.tasks, event.previousIndex, event.currentIndex);
       const newList = [...event.container.data.tasks];
       moveItemInArray(newList, event.previousIndex, event.currentIndex);
       this.impactPathwayService.dispatchOrderSubTasks(
@@ -50,7 +50,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
         this.impactPathwayTask.id,
         newList,
         event.container.data.tasks
-      );*/
+      );
     } else {
       if (this.canDropOnTask(event.container.data, event.item.data)) {
         this.impactPathwayService.dispatchSetTargetTask('');

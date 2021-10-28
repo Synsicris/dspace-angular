@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 
 import { ObjectiveService } from '../core/objective.service';
 import { ImpactPathwayStep } from '../core/models/impact-pathway-step.model';
@@ -6,13 +6,14 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { isNotEmpty } from '../../shared/empty.util';
 import { environment } from '../../../environments/environment';
+import { ImpactPathwayService } from '../core/impact-pathway.service';
 
 @Component({
   selector: 'ipw-wrapper-objectives',
   styleUrls: ['./wrapper-objectives.component.scss'],
   templateUrl: './wrapper-objectives.component.html'
 })
-export class WrapperObjectivesComponent {
+export class WrapperObjectivesComponent implements OnDestroy {
 
   @Input() public projectId: string;
   @Input() public impactPathwayStep: ImpactPathwayStep;
@@ -23,6 +24,7 @@ export class WrapperObjectivesComponent {
   constructor(
     private objectivesService: ObjectiveService,
     private router: Router,
+    private impactPathwayService: ImpactPathwayService,
     private translate: TranslateService) {
   }
 
@@ -49,4 +51,12 @@ export class WrapperObjectivesComponent {
   getInfoMessage(): string {
     return this.translate.instant('impact-pathway.objectives.' + this.impactPathwayStep.type + '.info.panel');
   }
+
+  /**
+   * When destroy component clear all collapsed values.
+   */
+  ngOnDestroy() {
+    this.impactPathwayService.dispatchClearCollapsable();
+  }
+
 }
