@@ -11,7 +11,12 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { AUTOCOMPLETE_OFF, DynamicFormLayoutService, DynamicFormValidationService } from '@ng-dynamic-forms/core';
+import {
+  AUTOCOMPLETE_OFF,
+  DynamicFormControlCustomEvent,
+  DynamicFormLayoutService,
+  DynamicFormValidationService
+} from '@ng-dynamic-forms/core';
 import { of as observableOf, Subject, Subscription } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { NgbDropdown, NgbModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
@@ -51,6 +56,7 @@ export class AuthorityDropdownComponent extends DsDynamicVocabularyComponent imp
   @Output() blur: EventEmitter<any> = new EventEmitter<any>();
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
   @Output() focus: EventEmitter<any> = new EventEmitter<any>();
+  @Output() customEvent: EventEmitter<DynamicFormControlCustomEvent> = new EventEmitter();
 
   @ViewChild('instance', { static: false }) instance: NgbTypeahead;
 
