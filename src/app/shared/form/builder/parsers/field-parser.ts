@@ -61,6 +61,7 @@ export abstract class FieldParser {
       if (this.configData.input.type === ParserType.Onebox && this.configData?.selectableMetadata?.length > 1) {
         isDraggable = false;
       }
+      let hasPlaceholder = true;
       const config = {
         id: uniqueId() + '_array',
         label: this.configData.label,
@@ -90,6 +91,10 @@ export abstract class FieldParser {
               }
             }
             model = this.modelFactory(fieldValue, false);
+            if (!hasPlaceholder) {
+              model.placeholder = '';
+            }
+            hasPlaceholder = false;
           }
           setLayout(model, 'element', 'host', 'col');
           if (model.hasLanguages || isNotEmpty(model.relationship) || model.hasSecurityToggle) {

@@ -6,6 +6,12 @@ import { ResourceType } from '../../shared/resource-type';
 import { excludeFromEquals } from '../../utilities/equals.decorators';
 import { RESEARCHER_PROFILE } from './researcher-profile.resource-type';
 
+export enum ResearcherProfileVisibilityValue {
+  PRIVATE= 'PRIVATE',
+  INTERNAL = 'INTERNAL',
+  PUBLIC = 'PUBLIC'
+}
+
 /**
  * Class the represents a Researcher Profile.
  */
@@ -34,7 +40,7 @@ export class ResearcherProfile extends CacheableObject {
    * The visibility of this Researcher Profile
    */
   @autoserialize
-  visible: boolean;
+  visibility: ResearcherProfileVisibilityValue;
 
   /**
    * The {@link HALLink}s for this Researcher Profile

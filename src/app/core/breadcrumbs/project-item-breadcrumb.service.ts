@@ -39,7 +39,7 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
     return this.projectService.getProjectItemByItemId(key.uuid).pipe(
       find((parentRD: RemoteData<ChildHALResource & DSpaceObject>) => parentRD.hasSucceeded || parentRD.statusCode === 204),
       switchMap((parentRD: RemoteData<ChildHALResource & DSpaceObject>) => {
-        if (hasValue(parentRD.payload) && parentRD.payload.uuid !== key.uuid) {
+        if (hasValue(parentRD?.payload) && parentRD?.payload?.uuid !== key.uuid) {
           const parent = parentRD.payload;
           return this.getBreadcrumbs(parent, getDSORoute(parent));
         }

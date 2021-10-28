@@ -47,13 +47,18 @@ export class SubprojectItemI18nBreadcrumbsService implements BreadcrumbsProvider
       return combineLatest([project$, subproject$]).pipe(
         take(1),
         map(([project, subproject]: [Item, Item]) => {
-          const projectUrl = getItemPageRoute(project);
-          const subprojectUrl = getItemPageRoute(subproject);
-          return [
-            new Breadcrumb(this.dsoNameService.getName(project), projectUrl),
-            new Breadcrumb(this.dsoNameService.getName(subproject), subprojectUrl),
-            new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url)
-          ];
+          const breadcrumb = [];
+          let itemUrl;
+          if (project) {
+            itemUrl = getItemPageRoute(project);
+            breadcrumb.push(new Breadcrumb(this.dsoNameService.getName(project), itemUrl));
+          }
+          if (subproject && project?.id !== subproject?.id) {
+            itemUrl = getItemPageRoute(subproject);
+            breadcrumb.push(new Breadcrumb(this.dsoNameService.getName(subproject), itemUrl));
+          }
+          breadcrumb.push(new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url));
+          return breadcrumb;
         })
       );
     } else {

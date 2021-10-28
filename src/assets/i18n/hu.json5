@@ -3041,13 +3041,16 @@
   // TODO New key - Add a translation
   "dataset.listelement.badge": "Dataset",
   
+  
   // "easy-online-import.title.breadcrumbs": "Easy-online import",
   // TODO New key - Add a translation
   "easy-online-import.title.breadcrumbs": "Easy-online import",
   
+  
   // "easy-online-import.title": "Easy-online import",
   // TODO New key - Add a translation
   "easy-online-import.title": "Easy-online import",
+  
   
   // "easy-online-import.info": "Upload a new file to start the Easy-online import",
   // TODO New key - Add a translation
@@ -3190,13 +3193,15 @@
   "event.listelement.badge": "Event",
   
   
-  // "exploitation-plan.edit.btn.title": "Edit Exploitation Plan",
+  // "exploitation-plan.edit.btn.title": "Edit description",
   // TODO New key - Add a translation
-  "exploitation-plan.edit.btn.title": "Edit Exploitation Plan",
+  "exploitation-plan.edit.btn.title": "Edit description",
+  
   
   // "exploitation-plan.description.title": "Description",
   // TODO New key - Add a translation
   "exploitation-plan.description.title": "Description",
+  
   
   // "exploitation-plan.info.text": "Info text for the exploitation Plan",
   // TODO New key - Add a translation
@@ -3785,7 +3790,8 @@
   "forgot-password.form.head": "Elfelejtettem a jelszót",
   
   
-  // "forgot-password.form.info": "Enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  // "forgot-password.form.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  // TODO Source message changed - Revise the translation
   "forgot-password.form.info": "Írjon be egy új jelszót a lenti mezőbe, és igazolja a második mezőbe újraírva azt. Legalább hat karakter hosszú kell legyen.",
   
   
@@ -3797,7 +3803,8 @@
   "forgot-password.form.identification.header": "Azonosítás",
   
   
-  // "forgot-password.form.identification.email": "Email address: ",
+  // "forgot-password.form.identification.email": "Email address",
+  // TODO Source message changed - Revise the translation
   "forgot-password.form.identification.email": "E-mail cím: ",
   
   
@@ -4097,6 +4104,7 @@
   // TODO New key - Add a translation
   "impact-pathway.description": "Description",
   
+  
   // "impact-pathway.heading": "Impact pathway",
   // TODO New key - Add a translation
   "impact-pathway.heading": "Impact pathway",
@@ -4171,9 +4179,11 @@
   // TODO New key - Add a translation
   "impact-pathway.objectives.description.title": "Description",
   
-  // "impact-pathway.objectives.edit.btn.title": "Edit objective",
+  
+  // "impact-pathway.objectives.edit.btn.title": "Edit title and description",
   // TODO New key - Add a translation
-  "impact-pathway.objectives.edit.btn.title": "Edit objective",
+  "impact-pathway.objectives.edit.btn.title": "Edit title and description",
+  
   
   // "impact-pathway.objectives.edit.page.title": "Edit objective",
   // TODO New key - Add a translation
@@ -4225,9 +4235,9 @@
   "impact-pathway.remove.processing": "Deleting",
   
   
-  // "impact-pathway.edit.title": "Edit Impact Pathway",
+  // "impact-pathway.edit.title": "Edit title and description",
   // TODO New key - Add a translation
-  "impact-pathway.edit.title": "Edit Impact Pathway",
+  "impact-pathway.edit.title": "Edit title and description",
   
   
   // "impact-pathway.remove.title": "Delete Impact Pathway",
@@ -4436,9 +4446,11 @@
   // "item.bitstreams.upload.title": "Upload bitstream",
   "item.bitstreams.upload.title": "Bitfolyam feltöltése",
   
-  // "item-create.modal-launcher.btn": "Create new item",
+  
+  // "item-create.modal-launcher.btn": "Add item",
   // TODO New key - Add a translation
-  "item-create.modal-launcher.btn": "Create new item",
+  "item-create.modal-launcher.btn": "Add item",
+  
   
   // "item.edit.bitstreams.bundle.edit.buttons.upload": "Upload",
   "item.edit.bitstreams.bundle.edit.buttons.upload": "Feltöltés",
@@ -8081,9 +8093,9 @@
   "patent.listelement.badge": "Patent or utility patent",
   
   
-  // "product.listelement.badge": "Product",
+  // "product.listelement.badge": "Research data",
   // TODO New key - Add a translation
-  "product.listelement.badge": "Product",
+  "product.listelement.badge": "Research data",
   
   
   // "profile.breadcrumbs": "Update Profile",
@@ -8108,6 +8120,11 @@
   
   // "profile.head": "Update Profile",
   "profile.head": "Profil frissítése",
+  
+  
+  // "profile.main.info": "Here you create your person profile. This increases your visibility and enables you to import publication data into the monitoring tool. Creating the profile is voluntary. The monitoring tool can also be used without a person profile. The person profile is not linked to a project, but contains general information about you.",
+  // TODO New key - Add a translation
+  "profile.main.info": "Here you create your person profile. This increases your visibility and enables you to import publication data into the monitoring tool. Creating the profile is voluntary. The monitoring tool can also be used without a person profile. The person profile is not linked to a project, but contains general information about you.",
   
   
   // "profile.metadata.form.error.firstname.required": "First Name is required",
@@ -8138,15 +8155,22 @@
   "profile.metadata.form.label.phone": "Telefonos elérhetőség",
   
   
+  // "profile.metadata.form.info": "Please complete the details. With this data you are registered as a user in the monitoring tool.",
+  // TODO New key - Add a translation
+  "profile.metadata.form.info": "Please complete the details. With this data you are registered as a user in the monitoring tool.",
+  
+  
   // "profile.metadata.form.notifications.success.content": "Your changes to the profile were saved.",
   "profile.metadata.form.notifications.success.content": "Profilmódosítások elmentve.",
   
   
-  // "profile.metadata.form.notifications.success.title": "Profile saved",
+  // "profile.metadata.form.notifications.success.title": "Password saved",
+  // TODO Source message changed - Revise the translation
   "profile.metadata.form.notifications.success.title": "Profil elmentve",
   
   
-  // "profile.notifications.warning.no-changes.content": "No changes were made to the Profile.",
+  // "profile.notifications.warning.no-changes.content": "No changes",
+  // TODO Source message changed - Revise the translation
   "profile.notifications.warning.no-changes.content": "Profil nem módosult.",
   
   
@@ -8236,6 +8260,7 @@
   // "project.create.name.placeholder": "Enter the name for the new project",
   // TODO New key - Add a translation
   "project.create.name.placeholder": "Enter the name for the new project",
+  
   
   // "subproject.create.name.placeholder": "Organisation Name and Subproject Short title",
   // TODO New key - Add a translation
@@ -8593,9 +8618,9 @@
   "register-page.create-profile.identification.language": "Nyelv",
   
   
-  // "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the",
+  // "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the text",
   // TODO New key - Add a translation
-  "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the",
+  "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the text",
   
   
   // "register-page.create-profile.end-user-agreement.accept.link": "End User Agreement",
@@ -8603,9 +8628,9 @@
   "register-page.create-profile.end-user-agreement.accept.link": "End User Agreement",
   
   
-  // "register-page.create-profile.end-user-agreement.error": "Accept end user agreement is required",
+  // "register-page.create-profile.end-user-agreement.error": "Accept End User Agreement is required",
   // TODO New key - Add a translation
-  "register-page.create-profile.end-user-agreement.error": "Accept end user agreement is required",
+  "register-page.create-profile.end-user-agreement.error": "Accept End User Agreement is required",
   
   
   // "register-page.create-profile.security.header": "Security",
@@ -8616,7 +8641,8 @@
   "register-page.create-profile.security.info": "Írjon be egy jelszót a lenti mezőbe, és írja be újra az alatta levőbe. Legalább hat karakter hosszú kell legyen.",
   
   
-  // "register-page.create-profile.security.label.password": "Password *",
+  // "register-page.create-profile.security.label.password": "Password",
+  // TODO Source message changed - Revise the translation
   "register-page.create-profile.security.label.password": "Jelszó *",
   
   
@@ -8655,12 +8681,20 @@
   // "register-page.create-profile.submit.success.head": "Registration completed",
   "register-page.create-profile.submit.success.head": "Sikeres regisztráció",
   
+  // "register-page.registration.existing.user.login-msg": "If you already have an account you can yo can ",
+  // TODO New key - Add a translation
+  "register-page.registration.existing.user.login-msg": "If you already have an account you can yo can ",
+  
+  // "register-page.registration.existing.user.login-link": "Log in here",
+  // TODO New key - Add a translation
+  "register-page.registration.existing.user.login-link": "Log in here",
   
   // "register-page.registration.header": "New user registration",
   "register-page.registration.header": "Új felhasználó regisztrálása",
   
   
-  // "register-page.registration.info": "Register an account to subscribe to collections for email updates, and submit new items to DSpace.",
+  // "register-page.registration.info": "Create Profile",
+  // TODO Source message changed - Revise the translation
   "register-page.registration.info": "Hozzon létre egy felhasználót, hogy feliratkozhasson gyűjtemények e-mail értesítésére, és új elemeket tölthessen fel a DSpace-be.",
   
   
@@ -8688,7 +8722,8 @@
   "register-page.registration.success.head": "Ellenőrző e-mail elküldve",
   
   
-  // "register-page.registration.success.content": "An email has been sent to {{ email }} containing a special URL and further instructions.",
+  // "register-page.registration.success.content": "An email has been sent to {{ email }} containing a special URL and further instruction.",
+  // TODO Source message changed - Revise the translation
   "register-page.registration.success.content": "Egy e-mail elküldve a(z) {{ email }} címre, tartalmaz egy speciális címet a további utasításokhoz.",
   
   
@@ -8849,15 +8884,18 @@
   // TODO New key - Add a translation
   "researcher.profile.private.visibility": "PRIVATE",
   
-  
   // "researcher.profile.public.visibility": "PUBLIC",
   // TODO New key - Add a translation
   "researcher.profile.public.visibility": "PUBLIC",
   
-  
-  // "researcher.profile.status": "Status: ",
+  // "researcher.profile.internal.visibility": "INTERNAL",
   // TODO New key - Add a translation
-  "researcher.profile.status": "Status: ",
+  "researcher.profile.internal.visibility": "INTERNAL",
+  
+  
+  // "researcher.profile.status": "Status",
+  // TODO New key - Add a translation
+  "researcher.profile.status": "Status",
   
   
   // "researcherprofile.claim.not-authorized": "You are not authorized to claim this item. For more details contact the administrator(s).",
@@ -12089,9 +12127,9 @@
   "submission.sections.submit.progressbar.describe.events_involved.info": "<i>Please select here which project partners (if applicable, also other cooperation partners) participated or took part in the event. Select the stakeholder groups that participated in the event.</i></b>The organizations (project partners and other cooperation partners) and stakeholder groups can be selected that have been already entered for the project. If organizations and stakeholder groups that are involved in the process do not yet appear in the list, please enter them in the partner of stakeholder groups area and then assign them to the process.Please select the involved or participating group of actors or create a new group of actors if needed. Add details if necessary.",
   
   
-  // "submission.sections.submit.progressbar.describe.process_events": "Process of cooperation, participation and working together",
+  // "submission.sections.submit.progressbar.describe.process_events": "Decribe process of cooperation, participation and working together",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.process_events": "Process of cooperation, participation and working together",
+  "submission.sections.submit.progressbar.describe.process_events": "Decribe process of cooperation, participation and working together",
   
   
   // "submission.sections.submit.progressbar.describe.process_events.info": "Processes of cooperation, participation and working together are characterized by the fact that they take place over a longer period of time with the same partners/ organizations or stakeholder groups (e.g. in the form of events that build on one another). Please collect individual events under „Event“.</br><p><i>Please characterize the process. Describe your planning in the application and update and add to the information as the project progresses.</i></p>It is advisable to record the project and cooperation partners as well as the relevant stakeholder groups before describing a process.</br>Cooperation, participation and collaboration are essential for the development of impacts. With a good description, the contribution of your project to the development of effects becomes visible.",
@@ -12109,9 +12147,9 @@
   "submission.sections.submit.progressbar.describe.process_events_involved.info": "<i>Please select here which organization(s) and stakeholder group(s) are involved. Also include your own organization and if necessary participating project partners.</i><p>The organizations and stakeholder groups that have already been recorded for the project can be selected. If organizations and stakeholder groups that are involved in the process do not yet appear in the list, please enter them in the partner or stakeholder groups area and the assign them to the process.</p><b>Tip:</b> In complex projects it can be challenging to differentiate between different processes. Please distinguish between the processes mainly based on the organizations/ stakeholder groups involved and do not enter any events twice.",
   
   
-  // "submission.sections.submit.progressbar.describe.process_events_frequency": "Type and frequency of single activites/events in the cooperation or participation/in the process",
+  // "submission.sections.submit.progressbar.describe.process_events_frequency": "Indicate type and frequency of meetings/events within the cooperation, participation or exchange process",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.process_events_frequency": "Type and frequency of single activites/events in the cooperation or participation/in the process",
+  "submission.sections.submit.progressbar.describe.process_events_frequency": "Indicate type and frequency of meetings/events within the cooperation, participation or exchange process",
   
   
   // "submission.sections.submit.progressbar.describe.process_events_frequency.info": "<i>Characterize the process by specifying the type, duration and frequency of individual interactions or events</i>. (Multiple entries possible).</br>The items help to characterize the intensity and continuity of the interaction process.",
@@ -12129,9 +12167,9 @@
   "submission.sections.submit.progressbar.describe.process_events_description.info": "<i>If relevant, add further information on the process that you consider essential.</i></br>For example, topics, specific methods, procedures, special features of the organisations or stakeholder groups involved or the importance of the process for the impact of the project.",
   
   
-  // "submission.sections.submit.progressbar.describe.process_events_date": "Documentation of important events for reporting purposes",
+  // "submission.sections.submit.progressbar.describe.process_events_date": "Record in detail important meetings/events held within the cooperation, participation or exchange process (in the course of the project)",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.process_events_date": "Documentation of important events for reporting purposes",
+  "submission.sections.submit.progressbar.describe.process_events_date": "Record in detail important meetings/events held within the cooperation, participation or exchange process (in the course of the project)",
   
   
   // "submission.sections.submit.progressbar.describe.process_events_date.info": "<i>Please provide here details of important events.</i></br>It is advisable to make these entries directly before or after the respective event.</br>You can do uploads to provide informations to the sponsor about the individual events, and, if necessary, to publish it.",
@@ -12855,10 +12893,21 @@
   // TODO New key - Add a translation
   "layout.i18n.link.default": "link",
   
-  
   // "orcid.badge.tooltip": "Connected to ORCID",
   // TODO New key - Add a translation
   "orcid.badge.tooltip": "Connected to ORCID",
+  
+  // "invitation.group.msg": "You have been invited to join the following groups",
+  // TODO New key - Add a translation
+  "invitation.group.msg": "You have been invited to join the following groups",
+  
+  // "invitation.accept-btn": "Accept",
+  // TODO New key - Add a translation
+  "invitation.accept-btn": "Accept",
+  
+  // "invitation.ignore-btn": "Ignore",
+  // TODO New key - Add a translation
+  "invitation.ignore-btn": "Ignore",
   
   
   // "working-plan.breadcrumbs": "Working plan",
@@ -13196,9 +13245,9 @@
   "Project.listelement.badge": "Subproject",
   
   
-  // "proj_objective.listelement.badge": "Project objective",
+  // "proj_objective.listelement.badge": "Research objective",
   // TODO New key - Add a translation
-  "proj_objective.listelement.badge": "Project objective",
+  "proj_objective.listelement.badge": "Research objective",
   
   
   // "plan_publication.listelement.badge": "Planned publications",
@@ -13971,16 +14020,6 @@
   "researcher.profile.edit": "Edit",
   
   
-  // "register-page.create-profile.identification.header.info": "Please enter your data.",
-  // TODO New key - Add a translation
-  "register-page.create-profile.identification.header.info": "Please enter your data.",
-  
-  
-  // "register-page.create-profile.security.header.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
-  // TODO New key - Add a translation
-  "register-page.create-profile.security.header.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
-  
-  
   // "profile.card.security.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
   // TODO New key - Add a translation
   "profile.card.security.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
@@ -14001,6 +14040,11 @@
   "layout.tab.header.projectpartner": "Project partners",
   
   
+  // "layout.box.header.multiple_entities": "Involved",
+  // TODO New key - Add a translation
+  "layout.box.header.multiple_entities": "Involved",
+  
+  
   // "layout.tab.header.subcontractor": "Subcontractors",
   // TODO New key - Add a translation
   "layout.tab.header.subcontractor": "Subcontractors",
@@ -14016,29 +14060,29 @@
   "layout.tab.header.default": "Joint project",
   
   
-  // "layout.tab.header.Subprojects & Involved": "Subprojects & Involved",
+  // "layout.tab.header.Subprojects&Involved": "Subprojects & Involved",
   // TODO New key - Add a translation
-  "layout.tab.header.Subprojects & Involved": "Subprojects & Involved",
+  "layout.tab.header.Subprojects&Involved": "Subprojects & Involved",
   
   
-  // "layout.tab.header.Subprojects & Involved::proj&partners": "Subprojects & Project partners",
+  // "layout.tab.header.proj&partners": "Subprojects & Involved",
   // TODO New key - Add a translation
-  "layout.tab.header.Subprojects & Involved::proj&partners": "Subprojects & Project partners",
+  "layout.tab.header.proj&partners": "Subprojects & Involved",
   
   
-  // "layout.tab.header.Subprojects & Involved::subcontractors": "Subcontractors",
+  // "layout.tab.header.subcontractors": "Subcontractors",
   // TODO New key - Add a translation
-  "layout.tab.header.Subprojects & Involved::subcontractors": "Subcontractors",
+  "layout.tab.header.subcontractors": "Subcontractors",
   
   
-  // "layout.tab.header.Subprojects & Involved::cooperationpartners": "Cooperation partners",
+  // "layout.tab.header.cooperationpartners": "Cooperation partners",
   // TODO New key - Add a translation
-  "layout.tab.header.Subprojects & Involved::cooperationpartners": "Cooperation partners",
+  "layout.tab.header.cooperationpartners": "Cooperation partners",
   
   
-  // "layout.tab.header.Subprojects & Involved::stakeholder": "Stakeholder groups",
+  // "layout.tab.header.stakeholder": "Stakeholder groups",
   // TODO New key - Add a translation
-  "layout.tab.header.Subprojects & Involved::stakeholder": "Stakeholder groups",
+  "layout.tab.header.stakeholder": "Stakeholder groups",
   
   
   // "layout.tab.header.Structure": "Structure",
@@ -14046,29 +14090,29 @@
   "layout.tab.header.Structure": "Structure",
   
   
-  // "layout.tab.header.Structure::impactpathway": "Impact Pathway",
+  // "layout.tab.header.impactpathway": "Impact Pathway",
   // TODO New key - Add a translation
-  "layout.tab.header.Structure::impactpathway": "Impact Pathway",
+  "layout.tab.header.impactpathway": "Impact Pathway",
   
   
-  // "layout.tab.header.Structure::workingplan": "Workingplan",
+  // "layout.tab.header.workingplan": "Workingplan",
   // TODO New key - Add a translation
-  "layout.tab.header.Structure::workingplan": "Workingplan",
+  "layout.tab.header.workingplan": "Workingplan",
   
   
-  // "layout.tab.header.Reflections": "Reflections",
+  // "layout.tab.header.Reflections": "Reflection",
   // TODO New key - Add a translation
-  "layout.tab.header.Reflections": "Reflections",
+  "layout.tab.header.Reflections": "Reflection",
   
   
-  // "layout.tab.header.Reflections::ethic": "Ethical reflection",
+  // "layout.tab.header.ethic": "Ethical reflection",
   // TODO New key - Add a translation
-  "layout.tab.header.Reflections::ethic": "Ethical reflection",
+  "layout.tab.header.ethic": "Ethical reflection",
   
   
-  // "layout.tab.header.Reflections::gender": "Gender reflection",
+  // "layout.tab.header.gender": "Gender reflection",
   // TODO New key - Add a translation
-  "layout.tab.header.Reflections::gender": "Gender reflection",
+  "layout.tab.header.gender": "Gender reflection",
   
   
   // "layout.tab.header.Background": "Background",
@@ -14076,89 +14120,89 @@
   "layout.tab.header.Background": "Background",
   
   
-  // "layout.tab.header.Background::condition": "External conditions",
+  // "layout.tab.header.condition": "External conditions",
   // TODO New key - Add a translation
-  "layout.tab.header.Background::condition": "External conditions",
+  "layout.tab.header.condition": "External conditions",
   
   
-  // "layout.tab.header.Background:knowledge": "State of knowledge / problem definition",
+  // "layout.tab.header.knowledge": "State of knowledge / problem definition",
   // TODO New key - Add a translation
-  "layout.tab.header.Background:knowledge": "State of knowledge / problem definition",
+  "layout.tab.header.knowledge": "State of knowledge / problem definition",
   
   
-  // "layout.tab.header.Project objectives": "Project objectives",
+  // "layout.tab.header.Projectobjectives": "Project objectives",
   // TODO New key - Add a translation
-  "layout.tab.header.Project objectives": "Project objectives",
+  "layout.tab.header.Projectobjectives": "Project objectives",
   
   
-  // "layout.tab.header.Project objectives::research_objective": "Research and development objectives",
+  // "layout.tab.header.research_objective": "Research and development objectives",
   // TODO New key - Add a translation
-  "layout.tab.header.Project objectives::research_objective": "Research and development objectives",
+  "layout.tab.header.research_objective": "Research and development objectives",
   
   
-  // "layout.tab.header.Project objectives::ia_objective": "Targets for interaction and transfer",
+  // "layout.tab.header.ia_objective": "Targets for interaction and transfer",
   // TODO New key - Add a translation
-  "layout.tab.header.Project objectives::ia_objective": "Targets for interaction and transfer",
+  "layout.tab.header.ia_objective": "Targets for interaction and transfer",
   
   
-  // "layout.tab.header.Project works": "Project works",
+  // "layout.tab.header.Projectworks": "Project works",
   // TODO New key - Add a translation
-  "layout.tab.header.Project works": "Project works",
+  "layout.tab.header.Projectworks": "Project works",
   
   
-  // "layout.tab.header.Project works::workpackage": "Work packages",
+  // "layout.tab.header.workpackage": "Work packages",
   // TODO New key - Add a translation
-  "layout.tab.header.Project works::workpackage": "Work packages",
+  "layout.tab.header.workpackage": "Work packages",
   
   
-  // "layout.tab.header.Project works::task": "Tasks",
+  // "layout.tab.header.task": "Tasks",
   // TODO New key - Add a translation
-  "layout.tab.header.Project works::task": "Tasks",
+  "layout.tab.header.task": "Tasks",
   
   
-  // "layout.tab.header.Project works::process_event": "Cooperations / Participations / Exchange processes",
+  // "layout.tab.header.process_event": "Cooperation / Participation / Exchange processes",
   // TODO New key - Add a translation
-  "layout.tab.header.Project works::process_event": "Cooperations / Participations / Exchange processes",
+  "layout.tab.header.process_event": "Cooperation / Participation / Exchange processes",
   
   
-  // "layout.tab.header.Project works::events": "Events",
+  // "layout.tab.header.events": "Events",
   // TODO New key - Add a translation
-  "layout.tab.header.Project works::events": "Events",
+  "layout.tab.header.events": "Events",
   
   
-  // "layout.tab.header.Project works::plan_publication": "Planned publications",
+  // "layout.tab.header.plan_publication": "Planned publications",
   // TODO New key - Add a translation
-  "layout.tab.header.Project works::plan_publication": "Planned publications",
+  "layout.tab.header.plan_publication": "Planned publications",
   
   
-  // "layout.tab.header.Project results": "Project results",
+  // "layout.tab.header.Projectresults": "Project results",
   // TODO New key - Add a translation
-  "layout.tab.header.Project results": "Project results",
+  "layout.tab.header.Projectresults": "Project results",
   
   
-  // "layout.tab.header.Project Results::publication": "Publications",
+  // "layout.tab.header.publication": "Publications",
   // TODO New key - Add a translation
-  "layout.tab.header.Project Results::publication": "Publications",
+  "layout.tab.header.publication": "Publications",
   
   
-  // "layout.tab.header.Project Results::physical_object": "Objects / materials",
+  // "layout.tab.header.physical_object": "Objects / materials",
   // TODO New key - Add a translation
-  "layout.tab.header.Project Results::physical_object": "Objects / materials",
+  "layout.tab.header.physical_object": "Objects / materials",
   
   
-  // "layout.tab.header.Project Results::product": "Research data",
+  // "layout.tab.header.product": "Research data",
   // TODO New key - Add a translation
-  "layout.tab.header.Project Results::product": "Research data",
+  "layout.tab.header.product": "Research data",
   
   
-  // "layout.tab.header.Project Results::result": "Research results",
+  // "layout.tab.header.result": "Research results",
   // TODO New key - Add a translation
-  "layout.tab.header.Project Results::result": "Research results",
+  "layout.tab.header.result": "Research results",
   
   
-  // "layout.tab.header.Project Results::unexpected_result": "(Intermediate) results / problems",
+  // "layout.tab.header.unexpected_result": "(Intermediate) results / problems",
   // TODO New key - Add a translation
-  "layout.tab.header.Project Results::unexpected_result": "(Intermediate) results / problems",
+  "layout.tab.header.unexpected_result": "(Intermediate) results / problems",
   
   
   // "layout.tab.header.outcomes": "Outcomes",
@@ -14166,49 +14210,444 @@
   "layout.tab.header.outcomes": "Outcomes",
   
   
-  // "layout.tab.header.outcomes::patent": "Patents / utility patents",
+  // "layout.tab.header.patent": "Patents / utility patents",
   // TODO New key - Add a translation
-  "layout.tab.header.outcomes::patent": "Patents / utility patents",
+  "layout.tab.header.patent": "Patents / utility patents",
   
   
-  // "layout.tab.header.outcomes::innovation_potential": "Possible solutions / changes / innovations",
+  // "layout.tab.header.innovation_potential": "Possible solutions / changes / innovations",
   // TODO New key - Add a translation
-  "layout.tab.header.outcomes::innovation_potential": "Possible solutions / changes / innovations",
+  "layout.tab.header.innovation_potential": "Possible solutions / changes / innovations",
   
   
-  // "layout.tab.header.outcomes::idea": "Ideas for the use of project results",
+  // "layout.tab.header.idea": "Ideas for the use of project results",
   // TODO New key - Add a translation
-  "layout.tab.header.outcomes::idea": "Ideas for the use of project results",
+  "layout.tab.header.idea": "Ideas for the use of project results",
   
   
-  // "layout.tab.header.outcomes::step": "Works and cooperations after project end",
+  // "layout.tab.header.step": "Works and cooperations after project end",
   // TODO New key - Add a translation
-  "layout.tab.header.outcomes::step": "Works and cooperations after project end",
+  "layout.tab.header.step": "Works and cooperations after project end",
   
   
-  // "layout.tab.header.outcomes::application": "Applications of a solution / change / innovation",
+  // "layout.tab.header.application": "Application of a solution / change / innovation",
   // TODO New key - Add a translation
-  "layout.tab.header.outcomes::application": "Applications of a solution / change / innovation",
+  "layout.tab.header.application": "Application of a solution / change / innovation",
   
   
-  // "layout.tab.header.outcomes::spinoff": "Spin-offs",
+  // "layout.tab.header.spinoff": "Spin-offs",
   // TODO New key - Add a translation
-  "layout.tab.header.outcomes::spinoff": "Spin-offs",
+  "layout.tab.header.spinoff": "Spin-offs",
   
   
-  // "layout.tab.header.outcomes::award": "Awards",
+  // "layout.tab.header.award": "Awards",
   // TODO New key - Add a translation
-  "layout.tab.header.outcomes::award": "Awards",
+  "layout.tab.header.award": "Awards",
   
   
-  // "layout.tab.header.outcomes::pot_societalimpact": "Expected societal impacts",
+  // "layout.tab.header.pot_societalimpact": "Expected societal impacts",
   // TODO New key - Add a translation
-  "layout.tab.header.outcomes::pot_societalimpact": "Expected societal impacts",
+  "layout.tab.header.pot_societalimpact": "Expected societal impacts",
   
   
-  // "layout.tab.header.other": "Others"
+  // "layout.tab.header.contribution_fundingprogramme": "Contributions to funding objectives",
   // TODO New key - Add a translation
-  "layout.tab.header.other": "Others"
+  "layout.tab.header.contribution_fundingprogramme": "Contributions to funding objectives",
+  
+  
+  // "layout.tab.header.other": "Others",
+  // TODO New key - Add a translation
+  "layout.tab.header.other": "Others",
+  
+  
+  // "item-create.modal-launscher.btn": "Add item",
+  // TODO New key - Add a translation
+  "item-create.modal-launscher.btn": "Add item",
+  
+  
+  // "layout.box.header.latestParentProjectsPreparation": "Joint projects - in application",
+  // TODO New key - Add a translation
+  "layout.box.header.latestParentProjectsPreparation": "Joint projects - in application",
+  
+  
+  // "layout.box.header.latestParentProjectsImplementation": "Joint projects - ongoing",
+  // TODO New key - Add a translation
+  "layout.box.header.latestParentProjectsImplementation": "Joint projects - ongoing",
+  
+  
+  // "layout.box.header.latestParentProjectsCompleted": "Joint projects - finished",
+  // TODO New key - Add a translation
+  "layout.box.header.latestParentProjectsCompleted": "Joint projects - finished",
+  
+  
+  // "layout.box.header.basics": "Primary data",
+  // TODO New key - Add a translation
+  "layout.box.header.basics": "Primary data",
+  
+  
+  // "layout.box.header.details": "Details",
+  // TODO New key - Add a translation
+  "layout.box.header.details": "Details",
+  
+  
+  // "layout.box.header.Funding": "Funding",
+  // TODO New key - Add a translation
+  "layout.box.header.Funding": "Funding",
+  
+  
+  // "layout.box.header.projectpartner": "Project partners",
+  // TODO New key - Add a translation
+  "layout.box.header.projectpartner": "Project partners",
+  
+  
+  // "layout.box.header.subcontractor": "Subcontractors",
+  // TODO New key - Add a translation
+  "layout.box.header.subcontractor": "Subcontractors",
+  
+  
+  // "layout.box.header.exploitationplan": "Exploitation plan",
+  // TODO New key - Add a translation
+  "layout.box.header.exploitationplan": "Exploitation plan",
+  
+  
+  // "layout.box.header.Person_m": "Person",
+  // TODO New key - Add a translation
+  "layout.box.header.Person_m": "Person",
+  
+  
+  // "layout.box.header.jpbasics": "Primary data",
+  // TODO New key - Add a translation
+  "layout.box.header.jpbasics": "Primary data",
+  
+  
+  // "layout.box.header.jpdetails": "Details",
+  // TODO New key - Add a translation
+  "layout.box.header.jpdetails": "Details",
+  
+  
+  // "layout.box.header.Project": "Subprojects",
+  // TODO New key - Add a translation
+  "layout.box.header.Project": "Subprojects",
+  
+  
+  // "layout.box.header.cooperationpartner": "Cooperation partners",
+  // TODO New key - Add a translation
+  "layout.box.header.cooperationpartner": "Cooperation partners",
+  
+  
+  // "layout.box.header.targetgroup": "Stakeholder groups",
+  // TODO New key - Add a translation
+  "layout.box.header.targetgroup": "Stakeholder groups",
+  
+  
+  // "layout.box.header.Funding_m": "Funding",
+  // TODO New key - Add a translation
+  "layout.box.header.Funding_m": "Funding",
+  
+  
+  // "layout.box.header.projectpartner_m": "Project partner",
+  // TODO New key - Add a translation
+  "layout.box.header.projectpartner_m": "Project partner",
+  
+  
+  // "layout.box.header.Projektleitung_m": "Project management",
+  // TODO New key - Add a translation
+  "layout.box.header.Projektleitung_m": "Project management",
+  
+  
+  // "layout.box.header.Projektkoordination_m": "Project coordination",
+  // TODO New key - Add a translation
+  "layout.box.header.Projektkoordination_m": "Project coordination",
+  
+  
+  // "layout.box.header.subcontractor_m": "Subcontractor",
+  // TODO New key - Add a translation
+  "layout.box.header.subcontractor_m": "Subcontractor",
+  
+  
+  // "layout.box.header.cooperationpartner_m": "Coorperation partner",
+  // TODO New key - Add a translation
+  "layout.box.header.cooperationpartner_m": "Coorperation partner",
+  
+  
+  // "layout.box.header.targetgroup_m": "Stakeholder group",
+  // TODO New key - Add a translation
+  "layout.box.header.targetgroup_m": "Stakeholder group",
+  
+  
+  // "layout.box.header.impactpathway": "Impact Pathway",
+  // TODO New key - Add a translation
+  "layout.box.header.impactpathway": "Impact Pathway",
+  
+  
+  // "layout.box.header.workingplan": "Working plan",
+  // TODO New key - Add a translation
+  "layout.box.header.workingplan": "Working plan",
+  
+  
+  // "layout.box.header.ethic": "Ethical reflection",
+  // TODO New key - Add a translation
+  "layout.box.header.ethic": "Ethical reflection",
+  
+  
+  // "layout.box.header.gender": "Gender reflection",
+  // TODO New key - Add a translation
+  "layout.box.header.gender": "Gender reflection",
+  
+  
+  // "layout.box.header.condition": "External conditions",
+  // TODO New key - Add a translation
+  "layout.box.header.condition": "External conditions",
+  
+  
+  // "layout.box.header.stateofart": "State of knowledge / problem definition",
+  // TODO New key - Add a translation
+  "layout.box.header.stateofart": "State of knowledge / problem definition",
+  
+  
+  // "layout.box.header.ethic_m": "Ethical reflection",
+  // TODO New key - Add a translation
+  "layout.box.header.ethic_m": "Ethical reflection",
+  
+  
+  // "layout.box.header.gender_m": "Gender reflection",
+  // TODO New key - Add a translation
+  "layout.box.header.gender_m": "Gender reflection",
+  
+  
+  // "layout.box.header.condition_m": "External condition",
+  // TODO New key - Add a translation
+  "layout.box.header.condition_m": "External condition",
+  
+  
+  // "layout.box.header.stateofart_m": "State of knowledge / problem definition",
+  // TODO New key - Add a translation
+  "layout.box.header.stateofart_m": "State of knowledge / problem definition",
+  
+  
+  // "layout.box.header.proj_objective": "Research and development objectives",
+  // TODO New key - Add a translation
+  "layout.box.header.proj_objective": "Research and development objectives",
+  
+  
+  // "layout.box.header.ia_objective": "Targets for interaction and transfer",
+  // TODO New key - Add a translation
+  "layout.box.header.ia_objective": "Targets for interaction and transfer",
+  
+  
+  // "layout.box.header.workpackage": "Work packages",
+  // TODO New key - Add a translation
+  "layout.box.header.workpackage": "Work packages",
+  
+  
+  // "layout.box.header.task": "Tasks",
+  // TODO New key - Add a translation
+  "layout.box.header.task": "Tasks",
+  
+  
+  // "layout.box.header.process_event": "Cooperation / Participation / Exchange processes",
+  // TODO New key - Add a translation
+  "layout.box.header.process_event": "Cooperation / Participation / Exchange processes",
+  
+  
+  // "layout.box.header.Event": "Events",
+  // TODO New key - Add a translation
+  "layout.box.header.Event": "Events",
+  
+  
+  // "layout.box.header.plan_publication": "Planned publications",
+  // TODO New key - Add a translation
+  "layout.box.header.plan_publication": "Planned publications",
+  
+  
+  // "layout.box.header.proj_objective_m": "Research and development objective",
+  // TODO New key - Add a translation
+  "layout.box.header.proj_objective_m": "Research and development objective",
+  
+  
+  // "layout.box.header.ia_objective_m": "Target for interaction and transfer",
+  // TODO New key - Add a translation
+  "layout.box.header.ia_objective_m": "Target for interaction and transfer",
+  
+  
+  // "layout.box.header.workpackage_m": "Work package",
+  // TODO New key - Add a translation
+  "layout.box.header.workpackage_m": "Work package",
+  
+  
+  // "layout.box.header.task_m": "Task",
+  // TODO New key - Add a translation
+  "layout.box.header.task_m": "Task",
+  
+  
+  // "layout.box.header.process_event_m": "Cooperation / Participation / Exchange process",
+  // TODO New key - Add a translation
+  "layout.box.header.process_event_m": "Cooperation / Participation / Exchange process",
+  
+  
+  // "layout.box.header.event_m": "Event",
+  // TODO New key - Add a translation
+  "layout.box.header.event_m": "Event",
+  
+  
+  // "layout.box.header.plan_publication_m": "Planned publications",
+  // TODO New key - Add a translation
+  "layout.box.header.plan_publication_m": "Planned publications",
+  
+  
+  // "layout.box.header.Publication": "Publications",
+  // TODO New key - Add a translation
+  "layout.box.header.Publication": "Publications",
+  
+  
+  // "layout.box.header.physical_object": "Objects / materials",
+  // TODO New key - Add a translation
+  "layout.box.header.physical_object": "Objects / materials",
+  
+  
+  // "layout.box.header.Product": "Research data",
+  // TODO New key - Add a translation
+  "layout.box.header.Product": "Research data",
+  
+  
+  // "layout.box.header.research_result": "Research results",
+  // TODO New key - Add a translation
+  "layout.box.header.research_result": "Research results",
+  
+  
+  // "layout.box.header.unexpected_result": "(Intermediate) results / problems",
+  // TODO New key - Add a translation
+  "layout.box.header.unexpected_result": "(Intermediate) results / problems",
+  
+  
+  // "layout.box.header.Publication_m": "Publication",
+  // TODO New key - Add a translation
+  "layout.box.header.Publication_m": "Publication",
+  
+  
+  // "layout.box.header.physical_object_m": "Object / material",
+  // TODO New key - Add a translation
+  "layout.box.header.physical_object_m": "Object / material",
+  
+  
+  // "layout.box.header.Product_m": "Research data",
+  // TODO New key - Add a translation
+  "layout.box.header.Product_m": "Research data",
+  
+  
+  // "layout.box.header.research_result_m": "Research result",
+  // TODO New key - Add a translation
+  "layout.box.header.research_result_m": "Research result",
+  
+  
+  // "layout.box.header.unexpected_result_m": "(Intermediate) result / problem",
+  // TODO New key - Add a translation
+  "layout.box.header.unexpected_result_m": "(Intermediate) result / problem",
+  
+  
+  // "layout.box.header.Patent": "Patents / utility patents",
+  // TODO New key - Add a translation
+  "layout.box.header.Patent": "Patents / utility patents",
+  
+  
+  // "layout.box.header.innovationpotential": "Possible solutions / changes / innovations",
+  // TODO New key - Add a translation
+  "layout.box.header.innovationpotential": "Possible solutions / changes / innovations",
+  
+  
+  // "layout.box.header.innovationidea": "Ideas for the use of project results",
+  // TODO New key - Add a translation
+  "layout.box.header.innovationidea": "Ideas for the use of project results",
+  
+  
+  // "layout.box.header.step": "Works and cooperations after project end",
+  // TODO New key - Add a translation
+  "layout.box.header.step": "Works and cooperations after project end",
+  
+  
+  // "layout.box.header.application": "Applications of a solution / change / innovation",
+  // TODO New key - Add a translation
+  "layout.box.header.application": "Applications of a solution / change / innovation",
+  
+  
+  // "layout.box.header.spinoff": "Spin-offs",
+  // TODO New key - Add a translation
+  "layout.box.header.spinoff": "Spin-offs",
+  
+  
+  // "layout.box.header.award": "Awards",
+  // TODO New key - Add a translation
+  "layout.box.header.award": "Awards",
+  
+  
+  // "layout.box.header.pot_societalimpact": "Expected societal impacts",
+  // TODO New key - Add a translation
+  "layout.box.header.pot_societalimpact": "Expected societal impacts",
+  
+  
+  // "layout.box.header.contribution_fundingprogramme": "Contributions to funding objectives",
+  // TODO New key - Add a translation
+  "layout.box.header.contribution_fundingprogramme": "Contributions to funding objectives",
+  
+  
+  // "layout.box.header.other": "Others",
+  // TODO New key - Add a translation
+  "layout.box.header.other": "Others",
+  
+  
+  // "layout.box.header.Patent_m": "Patent / utility patent",
+  // TODO New key - Add a translation
+  "layout.box.header.Patent_m": "Patent / utility patent",
+  
+  
+  // "layout.box.header.innovationpotential_m": "Possible solution / change / innovation",
+  // TODO New key - Add a translation
+  "layout.box.header.innovationpotential_m": "Possible solution / change / innovation",
+  
+  
+  // "layout.box.header.innovationidea_m": "Idea for the use of project results",
+  // TODO New key - Add a translation
+  "layout.box.header.innovationidea_m": "Idea for the use of project results",
+  
+  
+  // "layout.box.header.step_m": "Works and cooperation after project end",
+  // TODO New key - Add a translation
+  "layout.box.header.step_m": "Works and cooperation after project end",
+  
+  
+  // "layout.box.header.application_m": "Application of a solution / change / innovation",
+  // TODO New key - Add a translation
+  "layout.box.header.application_m": "Application of a solution / change / innovation",
+  
+  
+  // "layout.box.header.spinoff_m": "Spin-off",
+  // TODO New key - Add a translation
+  "layout.box.header.spinoff_m": "Spin-off",
+  
+  
+  // "layout.box.header.award_m": "Award",
+  // TODO New key - Add a translation
+  "layout.box.header.award_m": "Award",
+  
+  
+  // "layout.box.header.pot_societalimpact_m": "Expected societal impact",
+  // TODO New key - Add a translation
+  "layout.box.header.pot_societalimpact_m": "Expected societal impact",
+  
+  
+  // "layout.box.header.contribution_fundingprogramme_m": "Contribution to funding objectives",
+  // TODO New key - Add a translation
+  "layout.box.header.contribution_fundingprogramme_m": "Contribution to funding objectives",
+  
+  
+  // "layout.box.header.other_m": "Other",
+  // TODO New key - Add a translation
+  "layout.box.header.other_m": "Other",
+  
+  
+  // "ia_objective.listelement.badge": "Target for interaction and transfer"
+  // TODO New key - Add a translation
+  "ia_objective.listelement.badge": "Target for interaction and transfer"
   
   
 

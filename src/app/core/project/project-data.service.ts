@@ -59,6 +59,7 @@ import { ItemDataService } from '../data/item-data.service';
 
 export const PARENT_PROJECT_RELATION_METADATA = 'synsicris.relation.parentproject';
 export const PARENT_PROJECT_ENTITY = 'parentproject';
+export const PERSON_ENTITY = 'Person';
 export const PROJECT_RELATION_METADATA = 'synsicris.relation.project';
 export const PROJECT_ENTITY = 'Project';
 export const PROJECT_ENTITY_METADATA = 'synsicris.relation.entity_project';
@@ -160,7 +161,6 @@ export class ProjectDataService extends CommunityDataService {
    * @return the RestResponse as an Observable
    */
   delete(projectId: string): Observable<RemoteData<NoContent>> {
-    const projectGroup = `project_${projectId}`;
     return super.delete(projectId);
   }
 
@@ -195,9 +195,42 @@ export class ProjectDataService extends CommunityDataService {
   }
 
   /**
+   * Get the project community which the project item belongs to
+   *
+   * @param itemId The project item id
+   * @return the Community as an Observable
+   */
+  getProjectCommunityByProjectItemId(itemId: string): Observable<RemoteData<Community>> {
+    return this.itemService.findById(
+      itemId,
+      true,
+      true,
+      followLink('owningCollection', {}, followLink('parentCommunity'))
+    ).pipe(
+      getFirstCompletedRemoteData(),
+      mergeMap((projectItemRD: RemoteData<Item>) => {
+        if (projectItemRD.hasSucceeded) {
+          return projectItemRD.payload.owningCollection.pipe(
+            getFirstCompletedRemoteData(),
+            mergeMap((collectionRD) => {
+              if (collectionRD.hasSucceeded) {
+                return collectionRD.payload.parentCommunity;
+              } else {
+                return createFailedRemoteDataObject$<Community>();
+              }
+            })
+          );
+        } else {
+          return createFailedRemoteDataObject$<Community>();
+        }
+      })
+    );
+  }
+
+  /**
    * Get the project community which the given item belongs to
    *
-   * @param itemId The project community id
+   * @param itemId The entity item id
    * @return the Community as an Observable
    */
   getProjectCommunityByItemId(itemId: string): Observable<RemoteData<Community>> {
@@ -531,6 +564,7 @@ export class ProjectDataService extends CommunityDataService {
    */
   public invalidateUserProjectResultsCache() {
     this.requestService.setStaleByHrefSubstring('configuration=userProjectsCommunity');
+    this.requestService.setStaleByHrefSubstring('configuration=BROWSE.Person.');
   }
 
   /**

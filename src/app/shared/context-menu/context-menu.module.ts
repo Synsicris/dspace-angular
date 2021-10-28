@@ -23,6 +23,9 @@ import { ProjectAdminInvitationMenuComponent } from './project-invitation/projec
 import { ProjectMembersInvitationMenuComponent } from './project-members-invitation/project-members-invitation-menu.component';
 import { GenerateReportMenuComponent } from './generate-report/generate-report-menu.component';
 import { EasyOnlineImportMenuComponent } from './easy-online-import/easy-online-import-menu.component';
+import { CreateProjectMenuComponent } from './create-project/create-project-menu.component';
+import { ViewProjectItemsMenuComponent } from './view-project-items/view-project-items-menu.component';
+import { ManageProjectMembersMenuComponent } from './manage-project-members/manage-project-members-menu.component';
 
 const COMPONENTS = [
   BulkImportMenuComponent,
@@ -41,7 +44,10 @@ const COMPONENTS = [
   GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
   ProjectMembersInvitationMenuComponent,
-  EasyOnlineImportMenuComponent
+  EasyOnlineImportMenuComponent,
+  CreateProjectMenuComponent,
+  ViewProjectItemsMenuComponent,
+  ManageProjectMembersMenuComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -59,7 +65,10 @@ const ENTRY_COMPONENTS = [
   GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
   ProjectMembersInvitationMenuComponent,
-  EasyOnlineImportMenuComponent
+  EasyOnlineImportMenuComponent,
+  CreateProjectMenuComponent,
+  ViewProjectItemsMenuComponent,
+  ManageProjectMembersMenuComponent
 ];
 
 const MODULE = [

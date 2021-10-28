@@ -41,7 +41,7 @@ ds-metric-donuts a {
   background-size: contain;
 }
 
-.card-header > button > span {
+.card-header > button > span, .card-header > button > div > span {
   font-size: 22px;
   font-weight: bold;
 }

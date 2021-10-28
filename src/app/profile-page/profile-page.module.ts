@@ -8,6 +8,7 @@ import { ProfilePageSecurityFormComponent } from './profile-page-security-form/p
 import { ProfilePageResearcherFormComponent } from './profile-page-researcher-form/profile-page-researcher-form.component';
 import { ThemedProfilePageComponent } from './themed-profile-page.component';
 import { UiSwitchModule } from 'ngx-ui-switch';
+import { ProfilePageResearcherFormSwitchComponent } from './profile-page-researcher-form/profile-page-researcher-form-switch/profile-page-researcher-form-switch.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { UiSwitchModule } from 'ngx-ui-switch';
     ThemedProfilePageComponent,
     ProfilePageMetadataFormComponent,
     ProfilePageSecurityFormComponent,
-    ProfilePageResearcherFormComponent
+    ProfilePageResearcherFormComponent,
+    ProfilePageResearcherFormSwitchComponent
   ]
 })
 export class ProfilePageModule {

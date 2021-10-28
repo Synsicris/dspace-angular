@@ -1,0 +1,6 @@
+<button *ngIf="canShow() && (isProjectAdmin() | async)" class="dropdown-item"
+        routerLink="../managemembers"
+        (click)="$event.preventDefault();$event.stopImmediatePropagation();">
+  <span *ngIf="!isSubproject">{{'project.manage.menu.project' | translate}}</span>
+  <span *ngIf="isSubproject">{{'project.manage.menu.subproject' | translate}}</span>
+</button>

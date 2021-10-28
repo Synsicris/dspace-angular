@@ -2121,9 +2121,12 @@
 
   "dataset.listelement.badge": "Dataset",
 
+
   "easy-online-import.title.breadcrumbs": "Easy-online import",
 
+
   "easy-online-import.title": "Easy-online import",
+
 
   "easy-online-import.info": "Upload a new file to start the Easy-online import",
 
@@ -2221,9 +2224,11 @@
   "event.listelement.badge": "Event",
 
 
-  "exploitation-plan.edit.btn.title": "Edit Exploitation Plan",
+  "exploitation-plan.edit.btn.title": "Edit description",
+
 
   "exploitation-plan.description.title": "Description",
+
 
   "exploitation-plan.info.text": "Info text for the exploitation Plan",
 
@@ -2794,6 +2799,7 @@
 
   "impact-pathway.description": "Description",
 
+
   "impact-pathway.heading": "Impact pathway",
 
 
@@ -2838,7 +2844,9 @@
 
   "impact-pathway.objectives.description.title": "Description",
 
-  "impact-pathway.objectives.edit.btn.title": "Edit objective",
+
+  "impact-pathway.objectives.edit.btn.title": "Edit title and description",
+
 
   "impact-pathway.objectives.edit.page.title": "Edit objective",
 
@@ -3013,7 +3021,9 @@
 
   "item.bitstreams.upload.title": "Upload bitstream",
 
-  "item-create.modal-launcher.btn": "Create new item",
+
+  "item-create.modal-launcher.btn": "Add item",
+
 
   "item.edit.bitstreams.bundle.edit.buttons.upload": "Upload",
 
@@ -5471,7 +5481,9 @@
 
   "profile.head": "Update Profile",
 
-  "profile.main.info": "profile.main.info",
+
+  "profile.main.info": "Here you create your person profile. This increases your visibility and enables you to import publication data into the monitoring tool. Creating the profile is voluntary. The monitoring tool can also be used without a person profile. The person profile is not linked to a project, but contains general information about you.",
+
 
   "profile.metadata.form.error.firstname.required": "First Name is required",
 
@@ -5493,7 +5505,8 @@
 
   "profile.metadata.form.label.phone": "Contact Telephone",
 
-  "profile.metadata.form.info": "rofile.metadata.form.info",
+
+  "profile.metadata.form.info": "Please complete the details. With this data you are registered as a user in the monitoring tool.",
 
 
   "profile.metadata.form.notifications.success.content": "Your changes to the profile were saved.",
@@ -5564,6 +5577,7 @@
 
   "project.create.name.placeholder": "Enter the name for the new project",
 
+
   "subproject.create.name.placeholder": "Organisation Name and Subproject Short title",
 
 
@@ -5571,6 +5585,80 @@
 
 
   "project.listelement.badge": "Subproject",
+
+
+
+  "project.manage.menu.project": "Manage project members",
+  "project.manage.menu.subproject": "Manage subproject members",
+  "project.manage.breadcrumbs": "Manage project members",
+
+  "project.manage.page.title": "Manage project members",
+
+  "project.manage.members.admin-group": "Manage project coordinators",
+
+  "project.manage.members.members-group": "Manage project members",
+
+  "project.manage.members-list.head": "Manage group",
+
+
+  "project.manage.members-list.search.head": "Search persons",
+
+
+  "project.manage.members-list.button.see-all": "Browse All",
+
+
+  "project.manage.members-list.headMembers": "Current Members",
+
+
+  "project.manage.members-list.search.scope.metadata": "Metadata",
+
+
+  "project.manage.members-list.search.scope.email": "E-mail (exact)",
+
+
+  "project.manage.members-list.search.button": "Search",
+
+
+  "project.manage.members-list.table.id": "ID",
+
+
+  "project.manage.members-list.table.name": "Name",
+
+
+  "project.manage.members-list.table.edit": "Remove / Add",
+
+
+  "project.manage.members-list.table.edit.buttons.remove": "Remove member with name \"{{name}}\"",
+
+  "project.manage.members-list.table.invitation.buttons.send": "Send invitation to \"{{email}}\"",
+
+
+  "project.manage.members-list.notification.success.addMember": "Successfully added member: \"{{name}}\"",
+
+
+  "project.manage.members-list.notification.failure.addMember": "Failed to add member: \"{{name}}\"",
+
+
+  "project.manage.members-list.notification.success.deleteMember": "Successfully deleted member: \"{{name}}\"",
+
+
+  "project.manage.members-list.notification.failure.deleteMember": "Failed to delete member: \"{{name}}\"",
+
+
+  "project.manage.members-list.table.edit.buttons.add": "Add member with name \"{{name}}\"",
+
+
+  "project.manage.members-list.notification.failure.noActiveGroup": "No current active group, submit a name first.",
+
+
+  "project.manage.members-list.no-members-yet": "No members in group yet, search and add.",
+
+
+  "project.manage.members-list.no-items": "No EPeople found in that search",
+
+
+
+
 
 
   "project.page.contributor": "Contributors",
@@ -5801,7 +5889,7 @@
   "register-page.create-profile.end-user-agreement.accept.link": "End User Agreement",
 
 
-  "register-page.create-profile.end-user-agreement.error": "Accept end user agreement is required",
+  "register-page.create-profile.end-user-agreement.error": "Accept End User Agreement is required",
 
 
   "register-page.create-profile.security.header": "Security",
@@ -5810,7 +5898,7 @@
   "register-page.create-profile.security.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
 
 
-  "register-page.create-profile.security.label.password": "Password *",
+  "register-page.create-profile.security.label.password": "Password",
 
 
   "register-page.create-profile.security.label.passwordrepeat": "Retype to confirm *",
@@ -5839,11 +5927,14 @@
 
   "register-page.create-profile.submit.success.head": "Registration completed",
 
+  "register-page.registration.existing.user.login-msg": "If you already have an account you can yo can ",
+
+  "register-page.registration.existing.user.login-link": "Log in here",
 
   "register-page.registration.header": "New user registration",
 
 
-  "register-page.registration.info": "Register an account to subscribe to collections for email updates, and submit new items to DSpace.",
+  "register-page.registration.info": "Create Profile",
 
 
   "register-page.registration.email": "Email Address *",
@@ -5864,7 +5955,7 @@
   "register-page.registration.success.head": "Verification email sent",
 
 
-  "register-page.registration.success.content": "An email has been sent to {{ email }} containing a special URL and further instructions.",
+  "register-page.registration.success.content": "An email has been sent to {{ email }} containing a special URL and further instruction.",
 
 
   "register-page.registration.error.head": "Error when trying to register email",
@@ -5971,11 +6062,12 @@
 
   "researcher.profile.private.visibility": "PRIVATE",
 
-
   "researcher.profile.public.visibility": "PUBLIC",
 
+  "researcher.profile.internal.visibility": "INTERNAL",
 
-  "researcher.profile.status": "Status: ",
+
+  "researcher.profile.status": "Status",
 
 
   "researcherprofile.claim.not-authorized": "You are not authorized to claim this item. For more details contact the administrator(s).",
@@ -8093,7 +8185,7 @@
   "submission.sections.submit.progressbar.describe.events_involved.info": "<i>Please select here which project partners (if applicable, also other cooperation partners) participated or took part in the event. Select the stakeholder groups that participated in the event.</i></b>The organizations (project partners and other cooperation partners) and stakeholder groups can be selected that have been already entered for the project. If organizations and stakeholder groups that are involved in the process do not yet appear in the list, please enter them in the partner of stakeholder groups area and then assign them to the process.Please select the involved or participating group of actors or create a new group of actors if needed. Add details if necessary.",
 
 
-  "submission.sections.submit.progressbar.describe.process_events": "Process of cooperation, participation and working together",
+  "submission.sections.submit.progressbar.describe.process_events": "Decribe process of cooperation, participation and working together",
 
 
   "submission.sections.submit.progressbar.describe.process_events.info": "Processes of cooperation, participation and working together are characterized by the fact that they take place over a longer period of time with the same partners/ organizations or stakeholder groups (e.g. in the form of events that build on one another). Please collect individual events under „Event“.</br><p><i>Please characterize the process. Describe your planning in the application and update and add to the information as the project progresses.</i></p>It is advisable to record the project and cooperation partners as well as the relevant stakeholder groups before describing a process.</br>Cooperation, participation and collaboration are essential for the development of impacts. With a good description, the contribution of your project to the development of effects becomes visible.",
@@ -8105,7 +8197,7 @@
   "submission.sections.submit.progressbar.describe.process_events_involved.info": "<i>Please select here which organization(s) and stakeholder group(s) are involved. Also include your own organization and if necessary participating project partners.</i><p>The organizations and stakeholder groups that have already been recorded for the project can be selected. If organizations and stakeholder groups that are involved in the process do not yet appear in the list, please enter them in the partner or stakeholder groups area and the assign them to the process.</p><b>Tip:</b> In complex projects it can be challenging to differentiate between different processes. Please distinguish between the processes mainly based on the organizations/ stakeholder groups involved and do not enter any events twice.",
 
 
-  "submission.sections.submit.progressbar.describe.process_events_frequency": "Type and frequency of single activites/events in the cooperation or participation/in the process",
+  "submission.sections.submit.progressbar.describe.process_events_frequency": "Indicate type and frequency of meetings/events within the cooperation, participation or exchange process",
 
 
   "submission.sections.submit.progressbar.describe.process_events_frequency.info": "<i>Characterize the process by specifying the type, duration and frequency of individual interactions or events</i>. (Multiple entries possible).</br>The items help to characterize the intensity and continuity of the interaction process.",
@@ -8117,7 +8209,7 @@
   "submission.sections.submit.progressbar.describe.process_events_description.info": "<i>If relevant, add further information on the process that you consider essential.</i></br>For example, topics, specific methods, procedures, special features of the organisations or stakeholder groups involved or the importance of the process for the impact of the project.",
 
 
-  "submission.sections.submit.progressbar.describe.process_events_date": "Documentation of important events for reporting purposes",
+  "submission.sections.submit.progressbar.describe.process_events_date": "Record in detail important meetings/events held within the cooperation, participation or exchange process (in the course of the project)",
 
 
   "submission.sections.submit.progressbar.describe.process_events_date.info": "<i>Please provide here details of important events.</i></br>It is advisable to make these entries directly before or after the respective event.</br>You can do uploads to provide informations to the sponsor about the individual events, and, if necessary, to publish it.",
@@ -8599,8 +8691,13 @@
 
   "layout.i18n.link.default": "link",
 
-
   "orcid.badge.tooltip": "Connected to ORCID",
+
+  "invitation.group.msg": "You have been invited to join the following groups",
+
+  "invitation.accept-btn": "Accept",
+
+  "invitation.ignore-btn": "Ignore",
 
 
   "working-plan.breadcrumbs": "Working plan",
@@ -8804,7 +8901,7 @@
   "Project.listelement.badge": "Subproject",
 
 
-  "proj_objective.listelement.badge": "Project objective",
+  "proj_objective.listelement.badge": "Research objective",
 
 
   "plan_publication.listelement.badge": "Planned publications",
@@ -9266,24 +9363,6 @@
   "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
 
 
-  "impact-pathway.objectives.description.title": "Description",
-
-
-  "impact-pathway.description": "Description",
-
-
-  "exploitation-plan.description.title": "Description",
-
-
-  "exploitation-plan.edit.btn.title": "Edit description",
-
-
-  "profile.main.info": "Here you create your person profile. This increases your visibility and enables you to import publication data into the monitoring tool. Creating the profile is voluntary. The monitoring tool can also be used without a person profile. The person profile is not linked to a project, but contains general information about you.",
-
-
-  "profile.metadata.form.info": "Please complete the details. With this data you are registered as a user in the monitoring tool.",
-
-
   "researcher.profile.edit": "Edit",
 
 
@@ -9413,7 +9492,7 @@
   "layout.tab.header.step": "Works and cooperations after project end",
 
 
-  "layout.tab.header.application": "Applications of a solution / change / innovation",
+  "layout.tab.header.application": "Application of a solution / change / innovation",
 
 
   "layout.tab.header.spinoff": "Spin-offs",
@@ -9473,7 +9552,7 @@
   "layout.box.header.Project": "Subprojects",
 
 
-  "layout.box.header.cooperationpartner": "Coorperation partners",
+  "layout.box.header.cooperationpartner": "Cooperation partners",
 
 
   "layout.box.header.targetgroup": "Stakeholder groups",
@@ -9659,6 +9738,9 @@
   "layout.box.header.contribution_fundingprogramme_m": "Contribution to funding objectives",
 
 
-  "layout.box.header.other_m": "Other"
+  "layout.box.header.other_m": "Other",
+
+
+  "ia_objective.listelement.badge": "Target for interaction and transfer"
 
 }

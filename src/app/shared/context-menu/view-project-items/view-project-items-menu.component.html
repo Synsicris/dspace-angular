@@ -1,0 +1,4 @@
+<button *ngIf="canShow()" class="dropdown-item"
+        (click)="$event.preventDefault();navigateToMyDSpace();">
+  {{'project-overview.page.content.all-items' | translate}}
+</button>
