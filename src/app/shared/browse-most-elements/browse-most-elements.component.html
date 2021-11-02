@@ -1,19 +1,39 @@
 <div class="m-2">
-    <ng-container *ngIf="searchResults">
-        <ul *ngIf="searchResults?.hasSucceeded" class="list-unstyled">
-            <li *ngIf="searchResults?.payload?.page == 0;" class="mt-4 mb-4">
-              <ds-alert>{{'browse.empty' | translate}}</ds-alert>
-            </li>
-            <li *ngFor="let object of searchResults?.payload?.page; let i = index; let last = last" class="mt-4 mb-4 d-flex" [class.border-bottom]="true && !last">
-                <ds-listable-object-component-loader
-                        [object]="object" [viewMode]="paginatedSearchOptions.view" [index]="i" [context]="context"
-                        [listID]="paginatedSearchOptions.configuration"
-                ></ds-listable-object-component-loader>
-            </li>
-        </ul>
-        <div *ngIf="searchResults?.hasFailed">
-            {{ 'remote.error' | translate }}
-        </div>
-    </ng-container>
-    <ds-loading *ngIf="!searchResults"></ds-loading>
+  <ng-container *ngIf="!(loading$ | async)">
+    <ul *ngIf="(searchResults$ | async)?.hasSucceeded" class="list-unstyled">
+      <li *ngIf="(searchResults$ | async)?.payload?.page == 0;" class="mt-4 mb-4">
+        <ds-alert>{{'browse.empty' | translate}}</ds-alert>
+      </li>
+      <li *ngFor="let object of (searchResults$ | async)?.payload?.page; let i = index; let last = last"
+          class="mt-4 mb-4 d-flex" [class.border-bottom]="!last">
+        <ds-listable-object-component-loader
+          [object]="object" [viewMode]="paginatedSearchOptions.view" [index]="i" [context]="context"
+          [listID]="paginatedSearchOptions.configuration"
+        ></ds-listable-object-component-loader>
+      </li>
+    </ul>
+    <div *ngIf="(searchResults$ | async)?.hasFailed">
+      {{ 'remote.error' | translate }}
+    </div>
+    <nav *ngIf="showPagination && (searchResults$ | async)?.payload?.totalPages > 1">
+      <ul class="pagination float-right">
+        <li class="page-item {{ ((searchResults$ | async)?.payload?.currentPage <= 1) ? 'disabled' : ''}}">
+          <button class="page-link" aria-label="Previous"
+                  (click)="retrievePrevResultList()">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">{{'browse.previous.button' | translate}}</span>
+          </button>
+        </li>
+        <li
+          class="page-item {{ ((searchResults$ | async)?.payload?.currentPage >= (searchResults$ | async)?.payload?.totalPages) ? 'disabled' : ''}}">
+          <button class="page-link" aria-label="Next"
+                  (click)="retrieveNextResultList()">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">{{'browse.next.button' | translate}}</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </ng-container>
+  <ds-loading *ngIf="(loading$ | async)"></ds-loading>
 </div>
