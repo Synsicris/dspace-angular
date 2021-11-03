@@ -5573,6 +5573,7 @@
 
 
   "project.create.grants.subproject-option": "Editable by only sub-project members",
+  "project.create.info": "info",
 
 
   "project.create.name.placeholder": "Enter the name for the new project",
@@ -5580,6 +5581,7 @@
 
   "subproject.create.name.placeholder": "Organisation Name and Subproject Short title",
 
+  "subproject.create.info": "info",
 
   "project.create.success": "The new project has been generated successfully.",
 

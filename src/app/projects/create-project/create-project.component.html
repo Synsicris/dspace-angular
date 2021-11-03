@@ -5,6 +5,7 @@
     </button>
   </div>
   <div class="modal-body">
+    <ds-alert [content]="alertMsgKey | translate"></ds-alert>
     <form *ngIf="createForm" (ngSubmit)="create();" [formGroup]="createForm" >
       <div class="form-group">
         <input type="search"

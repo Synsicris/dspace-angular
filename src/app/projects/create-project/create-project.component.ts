@@ -61,6 +61,10 @@ export class CreateProjectComponent implements OnInit {
   public processing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * The i18n key used for alert message
+   */
+  public alertMsgKey: string;
+  /**
    * Initialize instance variables
    *
    * @param {NgbActiveModal} activeModal
@@ -90,6 +94,7 @@ export class CreateProjectComponent implements OnInit {
    */
   ngOnInit(): void {
     if (this.isSubproject) {
+      this.alertMsgKey = 'subproject.create.info';
       this.vocabulary.getVocabularyEntries(
         new VocabularyOptions(environment.projects.projectsGrantsOptionsVocabularyName),
         new PageInfo()
@@ -113,6 +118,7 @@ export class CreateProjectComponent implements OnInit {
         });
       });
     } else {
+      this.alertMsgKey = 'project.create.info';
       this.createForm = this.formBuilder.group({
         name: ['', Validators.required]
       });
