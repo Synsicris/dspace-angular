@@ -563,6 +563,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     const updateAllMap: Map<string, { startDate: string, endDate: string }> = new Map();
 
     this.flatNodeMap.forEach((node: WorkpacakgeFlatNode) => {
+      // skip node if dates has not been set
+      if (node.type === 'milestone' && isEmpty(node.dates?.end?.full)) {
+        return;
+      } else if (isEmpty(node.dates?.start?.full) || isEmpty(node.dates?.end?.full)) {
+        return;
+      }
+
       if (node.type === 'milestone') {
         startDate = this.moment(node.dates.end.full, this.dateFormat);
       } else {
