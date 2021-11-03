@@ -67,6 +67,7 @@ export const PROJECT_ENTITY_METADATA = 'synsicris.relation.entity_project';
 export enum ProjectGrantsTypes {
   Project = 'parentproject',
   Subproject = 'project',
+  OwningCommunity = 'owningproject',
 }
 
 @Injectable()

@@ -55,7 +55,7 @@ export class CreateProjectComponent implements OnInit {
    */
   public grantsOptions = [
     { id: ProjectGrantsTypes.Project, name: 'project.create.grants.project-option' },
-    { id: ProjectGrantsTypes.Subproject, name: 'project.create.grants.subproject-option' }
+    { id: ProjectGrantsTypes.OwningCommunity, name: 'project.create.grants.subproject-option' }
   ];
 
   public processing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -137,7 +137,9 @@ export class CreateProjectComponent implements OnInit {
 
     let create$: Observable<RemoteData<Community>>;
     if (this.isSubproject) {
-      const projectGrants = this.createForm.get('grants').value;
+      // TODO fix in the rest configuration
+      const projectGrants = (this.createForm.get('grants').value === ProjectGrantsTypes.Subproject) ?
+        ProjectGrantsTypes.OwningCommunity : ProjectGrantsTypes.Project;
       create$ = this.projectService.createSubproject(projectName, this.parentProjectUUID, projectGrants);
     } else {
       create$ = this.projectService.createProject(projectName);
