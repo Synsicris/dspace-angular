@@ -1,4 +1,4 @@
 <button *ngIf="canShow()" class="dropdown-item"
+        [innerHTML]="'project-overview.page.content.all-items' | translate"
         (click)="$event.preventDefault();navigateToMyDSpace();">
-  {{'project-overview.page.content.all-items' | translate}}
 </button>
