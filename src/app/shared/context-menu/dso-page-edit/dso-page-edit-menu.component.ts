@@ -45,7 +45,9 @@ export class DsoPageEditMenuComponent extends ContextMenuEntryComponent implemen
   }
 
   ngOnInit() {
-    const isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
+    const isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(
+      map((isAdmin) => this.contextMenuObjectType !== DSpaceObjectType.ITEM || isAdmin)
+    );
     const canEdit$ = this.authorizationService.isAuthorized(FeatureID.CanEditMetadata, this.contextMenuObject.self);
     this.isAuthorized$ = combineLatest([isAdmin$, canEdit$]).pipe(
       map(([isAdmin, canEdit]) => isAdmin && canEdit));
