@@ -66,7 +66,7 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
 
 
   ngOnInit(): void {
-    this.isSubproject = ((this.contextMenuObjectType as any) === 'SUBPROJECT');
+    this.isSubproject = (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
     if (this.canShow()) {
       this.projectService.getProjectCommunityByItemId((this.contextMenuObject as Item).uuid).pipe(
         take(1),
