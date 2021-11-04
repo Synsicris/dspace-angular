@@ -27,13 +27,15 @@
       <button class="btn btn-primary" (click)="updateProfile()"><i class="fas fa-edit"></i> {{'profile.form.submit' | translate}}</button>
     </div>
 
-    <ng-container *ngVar="(groupsRD$ | async)?.payload?.page as groups">
-      <div *ngIf="groups">
-        <h3 class="mt-4">{{'profile.groups.head' | translate}}</h3>
-        <ul class="list-group list-group-flush">
-          <li *ngFor="let group of groups" class="list-group-item">{{group.name}}</li>
-        </ul>
-      </div>
+    <ng-container *ngIf="showGroups">
+      <ng-container *ngVar="(groupsRD$ | async)?.payload?.page as groups">
+        <div *ngIf="groups">
+          <h3 class="mt-4">{{'profile.groups.head' | translate}}</h3>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let group of groups" class="list-group-item">{{group.name}}</li>
+          </ul>
+        </div>
+      </ng-container>
     </ng-container>
   </div>
 </ng-container>

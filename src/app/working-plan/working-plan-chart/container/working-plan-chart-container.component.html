@@ -90,23 +90,15 @@
             <p class="block-ellipsis">{{node.name}}</p>
             <br>
             <span class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
-          </div>
-          <div class="mr-05">
-            <button mat-icon-button *ngIf="canAddChildStep(node)"
-                    class="btn btn-xs btn-link p-0 text-success"
+            <br>
+            <button *ngIf="canAddChildStep(node)"
+                    class="btn btn-xs btn-link p-0"
                     title="{{'working-plan.chart.button.add' | translate}}"
                     (click)="addChildStep(node)">
-              <mat-icon>add</mat-icon>
+              <i class="fas fa-plus-circle"></i>
             </button>
-            <br *ngIf="canAddChildStep(node)">
-            <button *ngIf="(isEditAvailable(node.id) | async)" mat-icon-button
-                    class="btn btn-xs btn-link p-0 text-primary"
-                    [class.ml-1]="node.level !== 0"
-                    title="{{'working-plan.chart.button.edit' | translate}}"
-                    [routerLink]="['/edit-items', node.id + ':' + (getEditModes() | async).get(node.id)[0].name]">
-              <i class="fas fa-edit"></i>
-            </button>
-            <br *ngIf="(isEditAvailable(node.id) | async)">
+          </div>
+          <div class="mr-05 d-flex flex-column justify-content-between">
             <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger"
                     title="{{'working-plan.chart.button.remove' | translate}}"
                     [class.ml-1]="node.level !== 0"
@@ -115,9 +107,16 @@
               <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
               <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
             </button>
+            <button *ngIf="(isEditAvailable(node.id) | async)" mat-icon-button
+                    class="btn btn-xs btn-link p-0 text-primary"
+                    [class.ml-1]="node.level !== 0"
+                    title="{{'working-plan.chart.button.edit' | translate}}"
+                    [routerLink]="['/edit-items', node.id + ':' + (getEditModes() | async).get(node.id)[0].name]">
+              <i class="fas fa-edit"></i>
+            </button>
           </div>
         </mat-tree-node>
-        <mat-tree-node *matTreeNodeDef="let node;when: hasChild"
+<!--        <mat-tree-node *matTreeNodeDef="let node;when: hasChild"
           cdkDrag [cdkDragData]="node"
           [cdkDragDisabled]="!dragAndDropIsActive || (isMoving() | async)"
           class="tree-node-customization"
@@ -180,7 +179,7 @@
               <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
             </button>
           </div>
-        </mat-tree-node>
+        </mat-tree-node>-->
       </mat-tree>
     </div>
     <!-- dates, organisations and statuses -->

@@ -12,7 +12,6 @@ import {
   EDIT_ITEM_PATH,
   FORBIDDEN_PATH,
   FORGOT_PASSWORD_PATH,
-  HELP_PAGE_PATH,
   INFO_MODULE_PATH,
   LEGACY_BITSTREAM_MODULE_PATH,
   PROFILE_MODULE_PATH,
@@ -240,12 +239,12 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
               .then((m) => m.SubscriptionsPageRoutingModule),
             canActivate: [AuthenticatedGuard]
           },
-          {
+/*          {
             path: HELP_PAGE_PATH,
             loadChildren: () => import('./help-page/help-page.module')
               .then((m) => m.HelpPageModule),
             canActivate: [AuthenticatedGuard]
-          },
+          },*/
           {
             path: 'invitation',
             loadChildren: () => import('./invitation/invitation.module')

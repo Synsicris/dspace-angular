@@ -51,7 +51,7 @@ describe('DsoPageEditMenuComponent', () => {
 
   describe('when the user is authorized', () => {
     beforeEach(() => {
-      (authorizationService.isAuthorized as jasmine.Spy).and.returnValue(observableOf(true));
+      (authorizationService.isAuthorized as jasmine.Spy).and.returnValues(observableOf(true), observableOf(true));
       component.ngOnInit();
       fixture.detectChanges();
     });
@@ -64,7 +64,7 @@ describe('DsoPageEditMenuComponent', () => {
 
   describe('when the user is not authorized', () => {
     beforeEach(() => {
-      (authorizationService.isAuthorized as jasmine.Spy).and.returnValue(observableOf(false));
+      (authorizationService.isAuthorized as jasmine.Spy).and.returnValues(observableOf(false), observableOf(false));
       component.ngOnInit();
       fixture.detectChanges();
     });

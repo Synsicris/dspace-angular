@@ -1,4 +1,3 @@
 <button *ngIf="(canMakeImport() | async)" class="dropdown-item"
-        [routerLink]="getImportPageRouterLink()">
-  {{'context-menu.actions.easy-online-import.btn' | translate}}
+        [routerLink]="getImportPageRouterLink()" [innerHTML]="'context-menu.actions.easy-online-import.btn' | translate">
 </button>

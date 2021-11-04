@@ -1,6 +1,5 @@
 <button *ngIf="canShow() && (canDeleteProject() | async)" class="dropdown-item"
-        (click)="$event.preventDefault();openConfirmationModal(content);">
-  {{'project-overview.page.header.delete.btn' | translate}}
+        (click)="$event.preventDefault();openConfirmationModal(content);" [innerHTML]="'project-overview.page.header.delete.btn' | translate">
 </button>
 
 <ng-template #content let-c="close" let-d="dismiss">

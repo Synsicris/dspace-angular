@@ -15,7 +15,7 @@ import { Community } from '../../../core/shared/community.model';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { PARENT_PROJECT_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
+import { PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
 import { getRemoteDataPayload } from '../../../core/shared/operators';
 
 /**
@@ -66,7 +66,7 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
 
 
   ngOnInit(): void {
-    this.isSubproject = ((this.contextMenuObjectType as any) === 'SUBPROJECT');
+    this.isSubproject = (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
     if (this.canShow()) {
       this.projectService.getProjectCommunityByItemId((this.contextMenuObject as Item).uuid).pipe(
         take(1),
@@ -81,7 +81,7 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
    * Check if current Item is a Project or a parentproject
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY || (this.contextMenuObject as Item).entityType === PARENT_PROJECT_ENTITY;
+    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
   }
 
   /**

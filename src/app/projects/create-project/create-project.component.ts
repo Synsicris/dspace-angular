@@ -55,11 +55,15 @@ export class CreateProjectComponent implements OnInit {
    */
   public grantsOptions = [
     { id: ProjectGrantsTypes.Project, name: 'project.create.grants.project-option' },
-    { id: ProjectGrantsTypes.Subproject, name: 'project.create.grants.subproject-option' }
+    { id: ProjectGrantsTypes.OwningCommunity, name: 'project.create.grants.subproject-option' }
   ];
 
   public processing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  /**
+   * The i18n key used for alert message
+   */
+  public alertMsgKey: string;
   /**
    * Initialize instance variables
    *
@@ -90,6 +94,7 @@ export class CreateProjectComponent implements OnInit {
    */
   ngOnInit(): void {
     if (this.isSubproject) {
+      this.alertMsgKey = 'subproject.create.info';
       this.vocabulary.getVocabularyEntries(
         new VocabularyOptions(environment.projects.projectsGrantsOptionsVocabularyName),
         new PageInfo()
@@ -113,6 +118,7 @@ export class CreateProjectComponent implements OnInit {
         });
       });
     } else {
+      this.alertMsgKey = 'project.create.info';
       this.createForm = this.formBuilder.group({
         name: ['', Validators.required]
       });
@@ -137,7 +143,9 @@ export class CreateProjectComponent implements OnInit {
 
     let create$: Observable<RemoteData<Community>>;
     if (this.isSubproject) {
-      const projectGrants = this.createForm.get('grants').value;
+      // TODO fix in the rest configuration
+      const projectGrants = (this.createForm.get('grants').value === ProjectGrantsTypes.Subproject) ?
+        ProjectGrantsTypes.OwningCommunity : ProjectGrantsTypes.Project;
       create$ = this.projectService.createSubproject(projectName, this.parentProjectUUID, projectGrants);
     } else {
       create$ = this.projectService.createProject(projectName);
