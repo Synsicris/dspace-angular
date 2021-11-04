@@ -2932,7 +2932,7 @@
   "impact-pathway.task.create.success": "New item has been created successfully.",
 
 
-  "impact-pathway.wrapper.info": "<a href='/help/pages/de-project-about-entities.html'>here</a> <b>Develop the Impact Pathway of the project</b></br><p>The Impact Pathway supports you in the impact-oriented planning and implementation of the project. Please present the most important objectives, activities and intended impacts of the project in a clear and concise manner by means of key messages. Use arrows to illustrate particularly important and non-linear relationships. While the project is progressing, you can update the Impact Pathway and add any results achieved.</p><p>The columns structure the key messages for impact-oriented planning:</br>In <b>Background</b> important preliminary considerations for the project are presented, such as problem definition, state of knowledge and conditions.</br>The <b>Objectives of research and development</b> describe the scientific/technical work objectives of the project. These objectives can be assigned to work packages and tasks on a second level.</br><b>Interactions with partners and groups of actors. Outputs for dissemination</b> reflect all exchange and transfer activities of the project. In a first step, key messages about the purpose and group of actors of the interactions are formulated. These key messages can be assigned to specific activities on a second level.</br>The intended impacts of the project are structured in two columns:</br>In <b>Application (possibilities)</b> the contributions of the project to the application of the project results are presented.</br><b>Expected societal impacts</b> describe what societal effects are expected when the results of projects are applied.</br>In <b>Contribution to funding programme objectives</b>, the funding programme objectives to which the project contributes are selected.</p><p>In each column, you can use [+] to create unlimited items or search for and select previously created items.</br>Each item has a specific detail page (depending on the section selected) in which further information is usually given. You can switch between the Impact Pathway and the detail page of an item at any time.</br>You can start to create items in any column of the Impact Pathway.</br>Via [Edit] below the columns of the Impact Pathway you can add a description to the overall objectives of the project.</p><p><b>Key questions and tips for developing the Impact Pathway:</b> What impacts do you want to achieve with the project? How would you like to contribute to the development of these impacts?<br>It is recommended, to plan the Impact Pathway for the project in terms of the intended impacts and to develop it together with partners in practice and groups of actors.</br></p>",
+  "impact-pathway.wrapper.info": "<b>Develop the Impact Pathway of the project</b></br><p>The Impact Pathway supports you in the impact-oriented planning and implementation of the project. Please present the most important objectives, activities and intended impacts of the project in a clear and concise manner by means of key messages. Use arrows to illustrate particularly important and non-linear relationships. While the project is progressing, you can update the Impact Pathway and add any results achieved.</p><p>The columns structure the key messages for impact-oriented planning:</br>In <b>Background</b> important preliminary considerations for the project are presented, such as problem definition, state of knowledge and conditions.</br>The <b>Objectives of research and development</b> describe the scientific/technical work objectives of the project. These objectives can be assigned to work packages and tasks on a second level.</br><b>Interactions with partners and groups of actors. Outputs for dissemination</b> reflect all exchange and transfer activities of the project. In a first step, key messages about the purpose and group of actors of the interactions are formulated. These key messages can be assigned to specific activities on a second level.</br>The intended impacts of the project are structured in two columns:</br>In <b>Application (possibilities)</b> the contributions of the project to the application of the project results are presented.</br><b>Expected societal impacts</b> describe what societal effects are expected when the results of projects are applied.</br>In <b>Contribution to funding programme objectives</b>, the funding programme objectives to which the project contributes are selected.</p><p>In each column, you can use [+] to create unlimited items or search for and select previously created items.</br>Each item has a specific detail page (depending on the section selected) in which further information is usually given. You can switch between the Impact Pathway and the detail page of an item at any time.</br>You can start to create items in any column of the Impact Pathway.</br>Via [Edit] below the columns of the Impact Pathway you can add a description to the overall objectives of the project.</p><p><b>Key questions and tips for developing the Impact Pathway:</b> What impacts do you want to achieve with the project? How would you like to contribute to the development of these impacts?<br>It is recommended, to plan the Impact Pathway for the project in terms of the intended impacts and to develop it together with partners in practice and groups of actors.</br></p>",
 
 
   "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
@@ -4549,7 +4549,7 @@
   "mydspace.show.workflow": "All tasks",
 
 
-  "mydspace.show.workspace": "Your Submissions",
+  "mydspace.show.workspace": "Your submissions",
 
 
   "mydspace.status.archived": "Archived",
@@ -5573,6 +5573,7 @@
 
 
   "project.create.grants.subproject-option": "Editable by only sub-project members",
+
   "project.create.info": "info",
 
 
@@ -8903,7 +8904,7 @@
   "Project.listelement.badge": "Subproject",
 
 
-  "proj_objective.listelement.badge": "Research objective",
+  "proj_objective.listelement.badge": "Research and development objective",
 
 
   "plan_publication.listelement.badge": "Planned publications",
@@ -8921,7 +8922,7 @@
   "step.listelement.badge": "Work and cooperation after project end",
 
 
-  "subproject.listelement.badge": "Subprojects",
+  "subproject.listelement.badge": "Subproject",
 
 
   "targetgroup.listelement.badge": "Stakeholder group",
@@ -9305,7 +9306,7 @@
   "search.filters.entityType.process_event": "Cooperation / Participation / Exchange process",
 
 
-  "search.filters.entityType.proj_objective": "Project objective",
+  "search.filters.entityType.proj_objective": "Research and development objective",
 
 
   "search.filters.entityType.parentproject": "Joint project",
@@ -9524,7 +9525,7 @@
   "layout.box.header.latestParentProjectsCompleted": "Joint projects - finished",
 
 
-  "layout.box.header.basics": "Primary data",
+  "layout.box.header.basics": "Primary data - Subproject",
 
 
   "layout.box.header.details": "Details",
@@ -9545,7 +9546,7 @@
   "layout.box.header.Person_m": "Person",
 
 
-  "layout.box.header.jpbasics": "Primary data",
+  "layout.box.header.jpbasics": "Primary data - Joint project",
 
 
   "layout.box.header.jpdetails": "Details",
@@ -9695,7 +9696,7 @@
   "layout.box.header.step": "Works and cooperations after project end",
 
 
-  "layout.box.header.application": "Applications of a solution / change / innovation",
+  "layout.box.header.application": "Application of a solution / change / innovation",
 
 
   "layout.box.header.spinoff": "Spin-offs",
@@ -9743,6 +9744,33 @@
   "layout.box.header.other_m": "Other",
 
 
-  "ia_objective.listelement.badge": "Target for interaction and transfer"
+  "ia_objective.listelement.badge": "Target for interaction and transfer",
+
+
+  "submission.sections.submit.progressbar.describe.ia_objectives": "Target for interaction and transfer",
+
+
+  "submission.sections.submit.progressbar.describe.exp_societalimpact": "Expected societal impact (new)",
+
+
+  "exp_societalimpact.listelement.badge": "Expected societal impact (new)",
+
+
+  "submission.sections.upload.infosubmission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <b>upload additional files just dragging & dropping them everywhere in the page.</b>",
+
+
+  "search.filters.entityType.exp_societalimpact": "Expected societal impact (new)",
+
+
+  "search.filters.entityType.ia_objective": "Target for interaction and transfer",
+
+
+  "layout.tab.header.exp_societalimpact": "Expected societal impacts (new)",
+
+
+  "layout.box.header.exp_societalimpact": "Expected societal impacts (new)",
+
+
+  "layout.box.header.exp_societalimpact_m": "Expected societal impact (new)"
 
 }
