@@ -18,4 +18,5 @@ export interface ImpactPathwayConfig extends Config {
   projObjectiveEntity: string;
   iaObjectiveEntity: string;
   impactPathwaysSearchConfigName: string;
+  contributionFundingprogrammeEntity: string;
 }

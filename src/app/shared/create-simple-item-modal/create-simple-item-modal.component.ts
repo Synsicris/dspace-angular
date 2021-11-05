@@ -69,6 +69,12 @@ export class CreateSimpleItemModalComponent implements OnInit {
   @Input() query: string;
 
   /**
+   * The collection scope used for authority
+   * @type {string}
+   */
+  @Input() authorityScope: string;
+
+  /**
    * The search scope
    * @type {string}
    */
