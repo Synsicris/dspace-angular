@@ -5,7 +5,7 @@ import { Observable, of as observableOf } from 'rxjs';
 import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
 import { DsoPageSingleFeatureGuard } from '../data/feature-authorization/feature-authorization-guard/dso-page-single-feature.guard';
 import { Item } from '../shared/item.model';
-import { ItemPageResolver } from '../../+item-page/item-page.resolver';
+import { ItemPageResolver } from '../../item-page/item-page.resolver';
 import { AuthService } from '../auth/auth.service';
 import { FeatureID } from '../data/feature-authorization/feature-id';
 

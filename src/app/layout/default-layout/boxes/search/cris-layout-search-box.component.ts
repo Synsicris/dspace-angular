@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { CrisLayoutBox } from '../../../decorators/cris-layout-box.decorator';
 import { LayoutPage } from '../../../enums/layout-page.enum';
 import { LayoutTab } from '../../../enums/layout-tab.enum';
@@ -7,8 +7,11 @@ import { CrisLayoutBoxModelComponent as CrisLayoutBoxObj } from '../../../models
 import { Observable, Subscription } from 'rxjs';
 import { hasValue } from '../../../../shared/empty.util';
 import { getFirstSucceededRemoteDataPayload } from '../../../../core/shared/operators';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+import { RemoteData } from '../../../../core/data/remote-data';
+import { Community } from '../../../../core/shared/community.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ds-cris-layout-search-box',
@@ -33,41 +36,29 @@ export class CrisLayoutSearchBoxComponent extends CrisLayoutBoxObj implements On
   searchEnabled = false;
   sideBarWidth = 1;
   configReady = false;
+
+  /**
+   * The project community which the entity belong to
+   */
+  projectScope$: Observable<Community>;
+
   /**
    * List of subscriptions
    */
   subs: Subscription[] = [];
 
-  /**
-   * Variable to understand if the next box clear value
-   */
-  nextBoxClear = true;
-
-  /**
-   * Dynamic styling of the component host selector
-   */
-  @HostBinding('style.flex') flex = '1';
-
-  /**
-   * Dynamic styling of the component host selector
-   */
-  @HostBinding('style.marginRight') margin = '0px';
-
-
-  constructor(public cd: ChangeDetectorRef, protected translateService: TranslateService) {
-    super(translateService);
+  constructor(public cd: ChangeDetectorRef, protected route: ActivatedRoute, protected translateService: TranslateService, protected viewRef: ElementRef) {
+    super(translateService, viewRef);
   }
 
   ngOnInit(): void {
     super.ngOnInit();
 
-    if (this.box.clear) {
-      this.flex = '0 0 100%';
-    }
-
-    if (!this.box.clear && !this.nextBoxClear) {
-      this.margin = '10px';
-    }
+    this.projectScope$ = this.route.data.pipe(
+      map((data) => data.project as RemoteData<Community>),
+      map((communityRD) => communityRD.payload),
+      take(1)
+    );
 
     this.searchFilter = `scope=${this.item.id}`;
     this.configuration$ = this.box.configuration.pipe(

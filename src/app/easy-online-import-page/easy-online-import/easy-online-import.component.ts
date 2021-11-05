@@ -10,7 +10,7 @@ import { EasyOnlineImportService } from '../../core/easy-online-import/easy-onli
 import { RestRequestMethod } from '../../core/data/rest-request-method';
 import { AuthService } from '../../core/auth/auth.service';
 import { UploaderComponent } from '../../shared/uploader/uploader.component';
-import { getItemPageRoute } from '../../+item-page/item-page-routing-paths';
+import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 import { Item } from '../../core/shared/item.model';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { EASY_ONLINE_IMPORT } from '../../core/easy-online-import/models/easy-online-import.resource-type';

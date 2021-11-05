@@ -41,7 +41,7 @@ export class Section extends CacheableObject {
 
 export interface SectionComponent {
   componentType: string;
-  style: string;
+  style?: string;
 }
 
 export interface BrowseSection extends SectionComponent {
@@ -55,6 +55,7 @@ export interface TopSection extends SectionComponent {
   order: string;
   titleKey: string;
   componentType: 'top';
+  pageSize?: 5;
 }
 
 export interface SearchSection extends SectionComponent {

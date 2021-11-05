@@ -8,7 +8,7 @@ import { ProjectEntityListResolver } from './project-entity-list/project-entity-
 import { ProjectI18nBreadcrumbsService } from '../core/breadcrumbs/project-i18n-breadcrumbs.service';
 import { ProjectEntityListBreadcrumbResolver } from '../core/breadcrumbs/project-entity-list-breadcrumb.resolver';
 import { CommunityBreadcrumbResolver } from '../core/breadcrumbs/community-breadcrumb.resolver';
-import { CommunityPageResolver } from '../+community-page/community-page.resolver';
+import { CommunityPageResolver } from '../community-page/community-page.resolver';
 import { ProjectCollectionBreadcrumbResolver } from '../core/breadcrumbs/project-collection-breadcrumb.resolver';
 import { ProjectDsoBreadcrumbsService } from '../core/breadcrumbs/project-dso-breadcrumbs.service';
 import { ProjectBreadcrumbResolver } from '../core/breadcrumbs/project-breadcrumb.resolver';
@@ -38,7 +38,7 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
       },
       {
         path: ':projectId/allitems',
-        loadChildren: () => import('../+my-dspace-page/my-dspace-page.module')
+        loadChildren: () => import('../my-dspace-page/my-dspace-page.module')
           .then((m) => m.MyDSpacePageModule),
         canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
       },
@@ -78,7 +78,6 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
     ProjectCollectionBreadcrumbResolver,
     ProjectI18nBreadcrumbsService,
     ProjectDsoBreadcrumbsService,
-    ProjectBreadcrumbResolver,
     ProjectCommunityResolver
   ]
 })

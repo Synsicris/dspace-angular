@@ -1,7 +1,7 @@
 import { combineLatest as observableCombineLatest, Observable, of as observableOf } from 'rxjs';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, switchMap, take } from 'rxjs/operators';
+import { map, skipWhile, switchMap, take } from 'rxjs/operators';
 import { followLink, FollowLinkConfig } from '../../../shared/utils/follow-link-config.model';
 import { LinkService } from '../../cache/builders/link.service';
 import { PaginatedList } from '../../data/paginated-list.model';
@@ -13,7 +13,7 @@ import { DSpaceObject } from '../dspace-object.model';
 import { GenericConstructor } from '../generic-constructor';
 import { HALEndpointService } from '../hal-endpoint.service';
 import { URLCombiner } from '../../url-combiner/url-combiner';
-import { hasValue, isEmpty, isNotEmpty, hasValueOperator } from '../../../shared/empty.util';
+import { hasValue, hasValueOperator, isEmpty, isNotEmpty } from '../../../shared/empty.util';
 import { SearchOptions } from '../../../shared/search/search-options.model';
 import { SearchFilterConfig } from '../../../shared/search/search-filter-config.model';
 import { SearchResponseParsingService } from '../../data/search-response-parsing.service';
@@ -26,11 +26,7 @@ import { CommunityDataService } from '../../data/community-data.service';
 import { ViewMode } from '../view-mode.model';
 import { DSpaceObjectDataService } from '../../data/dspace-object-data.service';
 import { RemoteDataBuildService } from '../../cache/builders/remote-data-build.service';
-import {
-  getFirstSucceededRemoteData,
-  getFirstCompletedRemoteData,
-  getRemoteDataPayload
-} from '../operators';
+import { getFirstCompletedRemoteData, getFirstSucceededRemoteData, getRemoteDataPayload } from '../operators';
 import { RouteService } from '../../services/route.service';
 import { SearchResult } from '../../../shared/search/search-result.model';
 import { ListableObject } from '../../../shared/object-collection/shared/listable-object.model';
@@ -41,6 +37,43 @@ import { SearchConfig } from './search-filters/search-config.model';
 import { PaginationService } from '../../pagination/pagination.service';
 import { SearchConfigurationService } from './search-configuration.service';
 import { PaginationComponentOptions } from '../../../shared/pagination/pagination-component-options.model';
+import { DataService } from '../../data/data.service';
+import { Store } from '@ngrx/store';
+import { CoreState } from '../../core.reducers';
+import { ObjectCacheService } from '../../cache/object-cache.service';
+import { NotificationsService } from '../../../shared/notifications/notifications.service';
+import { HttpClient } from '@angular/common/http';
+import { DSOChangeAnalyzer } from '../../data/dso-change-analyzer.service';
+
+/* tslint:disable:max-classes-per-file */
+/**
+ * A class that lets us delegate some methods to DataService
+ */
+class DataServiceImpl extends DataService<any> {
+  protected linkPath = 'discover';
+
+  constructor(
+    protected requestService: RequestService,
+    protected rdbService: RemoteDataBuildService,
+    protected store: Store<CoreState>,
+    protected objectCache: ObjectCacheService,
+    protected halService: HALEndpointService,
+    protected notificationsService: NotificationsService,
+    protected http: HttpClient,
+    protected comparator: DSOChangeAnalyzer<any>) {
+    super();
+  }
+
+  /**
+   * Adds the embed options to the link for the request
+   * @param href            The href the params are to be added to
+   * @param args            params for the query string
+   * @param linksToFollow   links we want to embed in query string if shouldEmbed is true
+   */
+  public addEmbedParams(href: string, args: string[], ...linksToFollow: FollowLinkConfig<any>[]) {
+    return super.addEmbedParams(href, args, ...linksToFollow);
+  }
+}
 
 /**
  * Service that performs all general actions that have to do with the search page
@@ -83,6 +116,11 @@ export class SearchService implements OnDestroy {
    */
   private sub;
 
+  /**
+   * Instance of DataServiceImpl that lets us delegate some methods to DataService
+   */
+  private searchDataService: DataServiceImpl;
+
   constructor(private router: Router,
               private routeService: RouteService,
               protected requestService: RequestService,
@@ -94,6 +132,16 @@ export class SearchService implements OnDestroy {
               private paginationService: PaginationService,
               private searchConfigurationService: SearchConfigurationService
   ) {
+    this.searchDataService = new DataServiceImpl(
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined
+    );
   }
 
   /**
@@ -136,7 +184,17 @@ export class SearchService implements OnDestroy {
   search<T extends DSpaceObject>(searchOptions?: PaginatedSearchOptions, responseMsToLive?: number, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<T>[]): Observable<RemoteData<SearchObjects<T>>> {
     const href$ = this.getEndpoint(searchOptions);
 
-    href$.pipe(take(1)).subscribe((url: string) => {
+    href$.pipe(
+      take(1),
+      map((href: string) => {
+        const args = this.searchDataService.addEmbedParams(href, [], ...linksToFollow);
+        if (isNotEmpty(args)) {
+          return new URLCombiner(href, `?${args.join('&')}`).toString();
+        } else {
+          return href;
+        }
+      })
+    ).subscribe((url: string) => {
       const request = new this.request(this.requestService.generateRequestId(), url);
       request.href = request.href + this.formatEmbeddedKeysQueryParams(searchOptions.forcedEmbeddedKeys);
 
@@ -154,11 +212,16 @@ export class SearchService implements OnDestroy {
     });
 
     const sqr$ = href$.pipe(
-      switchMap((href: string) => this.rdb.buildFromHref<SearchObjects<T>>(href))
+      switchMap((href: string) => this.rdb.buildFromHref<SearchObjects<T>>(href)),
+      // This skip ensures that if a stale object is present in the cache when you do a
+      // call it isn't immediately returned, but we wait until the remote data for the new request
+      // is created. If useCachedVersionIfAvailable is false it also ensures you don't get a
+      // cached completed object
+      skipWhile((rd: RemoteData<SearchObjects<T>>) => useCachedVersionIfAvailable ? rd.isStale : rd.hasCompleted)
     );
 
     return this.directlyAttachIndexableObjects(sqr$, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
- }
+  }
 
   /**
    * Method to retrieve request entries for search results from the server
@@ -451,9 +514,9 @@ export class SearchService implements OnDestroy {
         let pageParams = { page: 1 };
         const queryParams = { view: viewMode };
         if (viewMode === ViewMode.DetailedListElement) {
-          pageParams = Object.assign(pageParams, {pageSize: 1});
+          pageParams = Object.assign(pageParams, { pageSize: 1 });
         } else if (config.pageSize === 1) {
-          pageParams = Object.assign(pageParams, {pageSize: 10});
+          pageParams = Object.assign(pageParams, { pageSize: 10 });
         }
         this.paginationService.updateRouteWithUrl(this.searchConfigurationService.paginationID, hasValue(searchLinkParts) ? searchLinkParts : [this.getSearchLink()], pageParams, queryParams);
       });
@@ -465,7 +528,7 @@ export class SearchService implements OnDestroy {
    * @param {string} configurationName the name of the configuration
    * @returns {Observable<RemoteData<SearchConfig[]>>} The found configuration
    */
-  getSearchConfigurationFor(scope?: string, configurationName?: string ): Observable<RemoteData<SearchConfig>> {
+  getSearchConfigurationFor(scope?: string, configurationName?: string): Observable<RemoteData<SearchConfig>> {
     const href$ = this.halService.getEndpoint(this.configurationLinkPath).pipe(
       map((url: string) => this.getConfigUrl(url, scope, configurationName)),
     );

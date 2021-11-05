@@ -1,29 +1,31 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import {
-  Observable,
-  of as observableOf,
-  Subscription,
   BehaviorSubject,
   combineLatest as observableCombineLatest,
+  Observable,
   ObservedValueOf,
+  of as observableOf,
+  Subscription,
 } from 'rxjs';
 import { map, mergeMap, switchMap, take } from 'rxjs/operators';
-import {buildPaginatedList, PaginatedList} from '../../../../core/data/paginated-list.model';
+import { buildPaginatedList, PaginatedList } from '../../../../core/data/paginated-list.model';
 import { RemoteData } from '../../../../core/data/remote-data';
 import { EPersonDataService } from '../../../../core/eperson/eperson-data.service';
 import { GroupDataService } from '../../../../core/eperson/group-data.service';
 import { EPerson } from '../../../../core/eperson/models/eperson.model';
 import { Group } from '../../../../core/eperson/models/group.model';
 import {
+  getAllCompletedRemoteData,
+  getFirstCompletedRemoteData,
   getFirstSucceededRemoteData,
-  getFirstCompletedRemoteData, getAllCompletedRemoteData, getRemoteDataPayload
+  getRemoteDataPayload
 } from '../../../../core/shared/operators';
 import { NotificationsService } from '../../../../shared/notifications/notifications.service';
 import { PaginationComponentOptions } from '../../../../shared/pagination/pagination-component-options.model';
-import {EpersonDtoModel} from '../../../../core/eperson/models/eperson-dto.model';
+import { EpersonDtoModel } from '../../../../core/eperson/models/eperson-dto.model';
 import { PaginationService } from '../../../../core/pagination/pagination.service';
 
 /**
@@ -46,6 +48,21 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   @Input()
   messagePrefix: string;
+
+  /**
+   * Boolean representing if to show the admin edit actions
+   */
+  @Input() showHeadingTitle = true;
+
+  /**
+   * Boolean representing if to show the admin edit actions
+   */
+  @Input() showEditActions = true;
+
+  /**
+   * Boolean representing if to show the send invitation action
+   */
+  @Input() showInvitationAction = false;
 
   /**
    * EPeople being displayed in search result, initially all members, after search result of search
@@ -93,6 +110,10 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   paginationSub: Subscription;
 
+  /**
+   * Event emitted with the email address to which send invitation
+   */
+  @Output() sendInvitation: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private groupDataService: GroupDataService,
               public ePersonDataService: EPersonDataService,
@@ -230,6 +251,14 @@ export class MembersListComponent implements OnInit, OnDestroy {
         this.notificationsService.error(this.translateService.get(this.messagePrefix + '.notification.failure.noActiveGroup'));
       }
     });
+  }
+
+  /**
+   * Dispatch sendInvitation event
+   * @param ePerson
+   */
+  dispatchSendInvitation(ePerson: EpersonDtoModel) {
+    this.sendInvitation.emit(ePerson.eperson.email);
   }
 
   /**

@@ -17,6 +17,7 @@ import { TabDataService } from '../../../core/layout/tab-data.service';
 import { Tab } from '../../../core/layout/models/tab.model';
 import { BoxDataService } from '../../../core/layout/box-data.service';
 import { Box } from '../../../core/layout/models/box.model';
+import { ContextMenuEntryType } from '../context-menu-entry-type';
 
 /**
  * This component renders a context menu option that provides the links to edit item page.
@@ -76,7 +77,7 @@ export class EditItemRelationshipsMenuComponent extends ContextMenuEntryComponen
     protected tabService: TabDataService,
     protected boxService: BoxDataService,
   ) {
-    super(injectedContextMenuObject, injectedContextMenuObjectType);
+    super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.EditRelationships);
   }
   /**
    * Get edit modes from context id
@@ -117,7 +118,7 @@ export class EditItemRelationshipsMenuComponent extends ContextMenuEntryComponen
    * If boxes type is equal Relation add them to the list of relations to be managed
    */
   getBox(tab): void {
-    this.subs.push(this.boxService.findByItem(this.contextMenuObject.id, tab.id, true)
+    this.subs.push(this.boxService.findByItem(this.contextMenuObject.id, tab.id)
       .pipe(getFirstSucceededRemoteListPayload())
       .subscribe( (boxes: Box[]) => {
         const relationshipsBoxes = boxes.filter( (box) => box.boxType === 'RELATION');

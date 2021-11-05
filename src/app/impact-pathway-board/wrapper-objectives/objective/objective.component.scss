@@ -30,7 +30,10 @@
 }
 
 .horizontal-step {
-  border-bottom: 4px solid #{theme-color('dark')};
+  border-bottom: 1px solid #{theme-color('dark')};
   width: 100%;
 }
 
+.bg-step-green {
+  background-color: rgba(38, 153, 0, 0.1);
+}

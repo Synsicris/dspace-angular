@@ -16,11 +16,16 @@ import { BulkImportMenuComponent } from './bulk-import/bulk-import-menu.componen
 import { EditItemRelationshipsMenuComponent } from './edit-item-relationships/edit-item-relationships-menu.component';
 import { ClaimItemMenuComponent } from './claim-item/claim-item-menu.component';
 import { StatisticsMenuComponent } from './statistics/statistics-menu.component';
+import { SubscriptionMenuComponent } from './subscription/subscription-menu.component';
+import { SubscriptionsModule } from '../subscriptions/subscriptions.module';
 import { DeleteProjectMenuComponent } from './delete-project/delete-project-menu.component';
 import { ProjectAdminInvitationMenuComponent } from './project-invitation/project-admin-invitation-menu.component';
 import { ProjectMembersInvitationMenuComponent } from './project-members-invitation/project-members-invitation-menu.component';
 import { GenerateReportMenuComponent } from './generate-report/generate-report-menu.component';
 import { EasyOnlineImportMenuComponent } from './easy-online-import/easy-online-import-menu.component';
+import { CreateProjectMenuComponent } from './create-project/create-project-menu.component';
+import { ViewProjectItemsMenuComponent } from './view-project-items/view-project-items-menu.component';
+import { ManageProjectMembersMenuComponent } from './manage-project-members/manage-project-members-menu.component';
 
 const COMPONENTS = [
   BulkImportMenuComponent,
@@ -34,11 +39,15 @@ const COMPONENTS = [
   RequestCorrectionMenuComponent,
   ClaimItemMenuComponent,
   StatisticsMenuComponent,
+  SubscriptionMenuComponent,
   DeleteProjectMenuComponent,
   GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
   ProjectMembersInvitationMenuComponent,
-  EasyOnlineImportMenuComponent
+  EasyOnlineImportMenuComponent,
+  CreateProjectMenuComponent,
+  ViewProjectItemsMenuComponent,
+  ManageProjectMembersMenuComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -51,22 +60,27 @@ const ENTRY_COMPONENTS = [
   EditItemRelationshipsMenuComponent,
   ClaimItemMenuComponent,
   StatisticsMenuComponent,
+  SubscriptionMenuComponent,
   DeleteProjectMenuComponent,
   GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
   ProjectMembersInvitationMenuComponent,
-  EasyOnlineImportMenuComponent
+  EasyOnlineImportMenuComponent,
+  CreateProjectMenuComponent,
+  ViewProjectItemsMenuComponent,
+  ManageProjectMembersMenuComponent
 ];
 
 const MODULE = [
   CommonModule,
   NgbDropdownModule,
   RouterModule,
-  TranslateModule
+  TranslateModule,
+  SubscriptionsModule
 ];
 @NgModule({
   imports: [
-    MODULE
+    MODULE,
   ],
   declarations: [
     COMPONENTS

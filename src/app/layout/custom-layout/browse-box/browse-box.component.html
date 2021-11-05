@@ -1,0 +1,15 @@
+<ngb-accordion [activeIds]="activeIds">
+  <ngb-panel id="{{box.shortname}}">
+    <ng-template ngbPanelTitle>
+      <span [innerHTML]="getBoxHeader()"></span>
+    </ng-template>
+    <ng-template ngbPanelContent class="p-0">
+      <div class="{{box.style}}">
+        <ds-browse-most-elements [paginatedSearchOptions]="paginatedSearchOptions" [showPagination]="true"></ds-browse-most-elements>
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+
+

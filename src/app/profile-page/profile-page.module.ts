@@ -7,12 +7,15 @@ import { ProfilePageMetadataFormComponent } from './profile-page-metadata-form/p
 import { ProfilePageSecurityFormComponent } from './profile-page-security-form/profile-page-security-form.component';
 import { ProfilePageResearcherFormComponent } from './profile-page-researcher-form/profile-page-researcher-form.component';
 import { ThemedProfilePageComponent } from './themed-profile-page.component';
+import { UiSwitchModule } from 'ngx-ui-switch';
+import { ProfilePageResearcherFormSwitchComponent } from './profile-page-researcher-form/profile-page-researcher-form-switch/profile-page-researcher-form-switch.component';
 
 @NgModule({
   imports: [
     ProfilePageRoutingModule,
     CommonModule,
-    SharedModule
+    SharedModule,
+    UiSwitchModule
   ],
   exports: [
     ProfilePageSecurityFormComponent
@@ -22,7 +25,8 @@ import { ThemedProfilePageComponent } from './themed-profile-page.component';
     ThemedProfilePageComponent,
     ProfilePageMetadataFormComponent,
     ProfilePageSecurityFormComponent,
-    ProfilePageResearcherFormComponent
+    ProfilePageResearcherFormComponent,
+    ProfilePageResearcherFormSwitchComponent
   ]
 })
 export class ProfilePageModule {

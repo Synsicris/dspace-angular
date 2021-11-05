@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { trigger } from '@angular/animations';
 
 import { AlertType } from './aletr-type';
@@ -42,7 +42,7 @@ export class AlertComponent implements OnInit {
   /**
    * The alert type
    */
-  @Input() type: AlertType|string;
+  @Input() type: AlertType|string = 'alert-info';
 
   /**
    * An event fired when alert is dismissed.

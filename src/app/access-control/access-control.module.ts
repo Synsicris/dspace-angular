@@ -24,6 +24,14 @@ import { GroupsRegistryComponent } from './group-registry/groups-registry.compon
     GroupFormComponent,
     SubgroupsListComponent,
     MembersListComponent
+  ],
+  exports: [
+    EPeopleRegistryComponent,
+    EPersonFormComponent,
+    GroupsRegistryComponent,
+    GroupFormComponent,
+    SubgroupsListComponent,
+    MembersListComponent
   ]
 })
 /**

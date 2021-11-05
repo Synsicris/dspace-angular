@@ -1,4 +1,7 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { BehaviorSubject } from 'rxjs';
+
 import { SearchService } from '../../core/shared/search/search.service';
 import { PaginatedSearchOptions } from '../search/paginated-search-options.model';
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
@@ -16,22 +19,77 @@ import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 
 export class BrowseMostElementsComponent implements OnInit {
 
+  /**
+   * The search page options
+   */
   @Input() paginatedSearchOptions: PaginatedSearchOptions;
 
-  @Input() context: Context;
+  /**
+   * The search result context
+   */
+  @Input() context: Context = Context.BrowseMostElements;
 
-  searchResults: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>;
+  /**
+   * The number of subprojects to show per page
+   */
+  @Input() elementsPerPage = 5;
 
-  constructor(private searchService: SearchService, private cdr: ChangeDetectorRef) { /* */ }
+  /**
+   * A boolean representing if show the pagination buttons
+   */
+  @Input() showPagination = false;
+
+  /**
+   * The remote data containing the result list
+   */
+  searchResults$: BehaviorSubject<RemoteData<PaginatedList<SearchResult<DSpaceObject>>>> = new BehaviorSubject<RemoteData<PaginatedList<SearchResult<DSpaceObject>>>>(null);
+
+  /**
+   * A boolean representing if result list is loading
+   */
+  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
+  constructor(private searchService: SearchService) {
+  }
 
   ngOnInit() {
+    this.retrieveResultList(0);
+  }
 
-    this.searchService.search(this.paginatedSearchOptions).pipe(
+  /**
+   * Retrieve the paginated list
+   *
+   * @param page The current page of the paginated list to retrieve
+   */
+  retrieveResultList(page: number = 0): void {
+    this.loading$.next(true);
+    const paginatedSearchOptions = Object.assign(new PaginatedSearchOptions({}), this.paginatedSearchOptions, {
+      pagination: {
+        currentPage: page,
+        pageSize: this.elementsPerPage
+      }
+    });
+
+    this.searchService.search(paginatedSearchOptions).pipe(
       getFirstCompletedRemoteData(),
     ).subscribe((response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
-          this.searchResults = response as any;
-          this.cdr.detectChanges();
-      });
+      this.searchResults$.next(response);
+      this.loading$.next(false);
+    });
+  }
+
+  /**
+   * Retrieve previous page of the paginated list
+   */
+  retrievePrevResultList() {
+    this.retrieveResultList(this.searchResults$.value.payload.currentPage - 1);
+  }
+
+  /**
+   * Retrieve next page of the paginated list
+   */
+  retrieveNextResultList() {
+    this.retrieveResultList(this.searchResults$.value.payload.currentPage + 1);
   }
 
 }

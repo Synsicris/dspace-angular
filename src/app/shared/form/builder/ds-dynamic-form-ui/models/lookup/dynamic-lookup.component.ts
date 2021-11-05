@@ -4,7 +4,11 @@ import { FormGroup } from '@angular/forms';
 import { of as observableOf, Subscription } from 'rxjs';
 import { catchError, distinctUntilChanged } from 'rxjs/operators';
 import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DynamicFormLayoutService, DynamicFormValidationService } from '@ng-dynamic-forms/core';
+import {
+  DynamicFormControlCustomEvent,
+  DynamicFormLayoutService,
+  DynamicFormValidationService
+} from '@ng-dynamic-forms/core';
 
 import { VocabularyService } from '../../../../../../core/submission/vocabularies/vocabulary.service';
 import { hasValue, isEmpty, isNotEmpty } from '../../../../../empty.util';
@@ -13,10 +17,7 @@ import { FormFieldMetadataValueObject } from '../../../models/form-field-metadat
 import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { DynamicLookupNameModel } from './dynamic-lookup-name.model';
 import { ConfidenceType } from '../../../../../../core/shared/confidence-type';
-import {
-  PaginatedList,
-  buildPaginatedList
-} from '../../../../../../core/data/paginated-list.model';
+import { buildPaginatedList, PaginatedList } from '../../../../../../core/data/paginated-list.model';
 import { getFirstSucceededRemoteDataPayload } from '../../../../../../core/shared/operators';
 import { DsDynamicVocabularyComponent } from '../dynamic-vocabulary.component';
 import { FormBuilderService } from '../../../form-builder.service';
@@ -38,6 +39,7 @@ export class DsDynamicLookupComponent extends DsDynamicVocabularyComponent imple
   @Output() blur: EventEmitter<any> = new EventEmitter<any>();
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
   @Output() focus: EventEmitter<any> = new EventEmitter<any>();
+  @Output() customEvent: EventEmitter<DynamicFormControlCustomEvent> = new EventEmitter();
 
   public editMode = false;
   public firstInputValue = '';
@@ -282,7 +284,9 @@ export class DsDynamicLookupComponent extends DsDynamicVocabularyComponent imple
   public setCurrentValue(value: any, init = false) {
     if (init) {
       this.getInitValueFromModel()
-        .subscribe((formValue: FormFieldMetadataValueObject) => this.setDisplayInputValue(formValue.display));
+        .subscribe((formValue: FormFieldMetadataValueObject) => {
+          this.setDisplayInputValue(formValue.display);
+        });
     } else if (hasValue(value)) {
       if (value instanceof FormFieldMetadataValueObject || value instanceof VocabularyEntry) {
         this.setDisplayInputValue(value.display);

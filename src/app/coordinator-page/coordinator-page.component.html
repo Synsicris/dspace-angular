@@ -5,8 +5,7 @@
       <h1>{{'coordinator.page.my-projects' | translate}}</h1>
       <ul class="list-unstyled">
         <li *ngFor="let project of (projectList | async)">
-          <a class="h3" [routerLink]="['/project-overview', project.id]">{{getProjectName(project)}}</a>
-          <a class="h3" routerLink="{{getProjectItemPath(project.id) | async}}">Detail page</a>
+          <a class="h3" routerLink="{{getProjectItemPath(project.id) | async}}">{{getProjectName(project.id) | async}}</a>
         </li>
       </ul>
       <nav *ngIf="(projectsPageInfo | async)?.totalPages > 1">

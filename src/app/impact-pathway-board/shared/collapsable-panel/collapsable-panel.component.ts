@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -33,14 +25,10 @@ export class CollapsablePanelComponent implements OnInit {
 
   @Input() collapsable = true;
 
-  @Input() titleEditable = false;
-
   /**
    * True when the panel is 100% collapsed in the UI
    */
   collapsed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
-
-  @Output() titleChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private cdr: ChangeDetectorRef) { }
 

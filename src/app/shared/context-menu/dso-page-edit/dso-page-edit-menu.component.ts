@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
@@ -8,6 +9,7 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
+import { ContextMenuEntryType } from '../context-menu-entry-type';
 
 @Component({
   selector: 'ds-dso-page-edit-menu',
@@ -39,11 +41,16 @@ export class DsoPageEditMenuComponent extends ContextMenuEntryComponent implemen
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
     protected authorizationService: AuthorizationDataService
   ) {
-    super(injectedContextMenuObject, injectedContextMenuObjectType);
+    super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.EditDSO);
   }
 
   ngOnInit() {
-    this.isAuthorized$ = this.authorizationService.isAuthorized(FeatureID.CanEditMetadata, this.contextMenuObject.self);
+    const isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(
+      map((isAdmin) => this.contextMenuObjectType !== DSpaceObjectType.ITEM || isAdmin)
+    );
+    const canEdit$ = this.authorizationService.isAuthorized(FeatureID.CanEditMetadata, this.contextMenuObject.self);
+    this.isAuthorized$ = combineLatest([isAdmin$, canEdit$]).pipe(
+      map(([isAdmin, canEdit]) => isAdmin && canEdit));
   }
 
   /**

@@ -13,6 +13,7 @@ import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
+import { ContextMenuEntryType } from '../context-menu-entry-type';
 
 /**
  * This component renders a context menu option that provides the links to edit item page.
@@ -23,6 +24,11 @@ import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 })
 @rendersContextMenuEntriesForType(DSpaceObjectType.ITEM)
 export class EditItemMenuComponent extends ContextMenuEntryComponent implements OnInit, OnDestroy {
+
+  /**
+   * The menu entry type
+   */
+  public static menuEntryType: ContextMenuEntryType = ContextMenuEntryType.EditSubmission;
 
   /**
    * A boolean representing if a request operation is pending
@@ -59,7 +65,7 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
     private editItemService: EditItemDataService,
   ) {
-    super(injectedContextMenuObject, injectedContextMenuObjectType);
+    super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.EditSubmission);
   }
 
   ngOnInit(): void {

@@ -1,16 +1,24 @@
-<ipw-collapsable-panel class="d-block mb-3"
+<ipw-collapsable-panel #ipwCollapse class="d-block mb-3"
                        [sidebarPanelTitle]="impactPathwayTask.title"
-                       [sidebarPanelDescription]="impactPathwayTask.description"
-                       [startOpen]="isOpen()">
+                       [startOpen]="!(isCollapsed() | async) || isOpen()">
+  <ng-container ngProjectAs="panelIconStatus">
+    <button class="btn btn-lg btn-link flex-shrink-1 align-self-center text-primary" [title]="'impact-pathway.objectives.edit.btn.title' | translate">
+      <span (click)="openEditModal(); $event.stopImmediatePropagation()"><i class="fas fa-edit"></i></span>
+    </button>
+  </ng-container>
   <ng-container ngProjectAs="panelContent">
-    <ds-view-simple-item-form [formConfig]="formConfig$"
-                              [itemId]="impactPathwayTask.id"
-                              (itemUpdate)="updateImpactPathwayTask($event)"></ds-view-simple-item-form>
-    <div class="d-flex align-items-stretch p-0 m-0">
+    <div class="d-flex align-items-stretch p-0 m-0 bg-step-green">
       <ipw-objective-container class="horizontal-step h-100 horizontal-content"
                                [projectId]="projectId"
                                [impactPathwayStep]="impactPathwayStep"
                                [impactPathwayTask]="impactPathwayTask"></ipw-objective-container>
     </div>
+    <ipw-editable-textarea *ngIf="impactPathwayTask"
+                           [formConfig]="formConfig$"
+                           [itemId]="impactPathwayTask.id"
+                           [editTitle]="'impact-pathway.objectives.edit.btn.title' | translate"
+                           [fieldTitle]="'impact-pathway.objectives.description.title' | translate"
+                           [content]="impactPathwayTask.description"
+                           (contentChange)="updateImpactPathwayTask($event)"></ipw-editable-textarea>
   </ng-container>
 </ipw-collapsable-panel>

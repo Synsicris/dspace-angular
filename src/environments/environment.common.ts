@@ -1,6 +1,6 @@
 import { GlobalConfig } from '../config/global-config.interface';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
-import { BrowseByType } from '../app/+browse-by/+browse-by-switcher/browse-by-decorator';
+import { BrowseByType } from '../app/browse-by/browse-by-switcher/browse-by-decorator';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
 
 export const environment: GlobalConfig = {
@@ -42,6 +42,22 @@ export const environment: GlobalConfig = {
       timePerMethod: {[RestRequestMethod.PATCH]: 3} as any // time in seconds
     }
   },
+  // Authentication settings
+  auth: {
+    // Authentication UI settings
+    ui: {
+      // the amount of time before the idle warning is shown
+      timeUntilIdle: 15 * 60 * 1000, // 15 minutes
+      // the amount of time the user has to react after the idle warning is shown before they are logged out.
+      idleGracePeriod: 5 * 60 * 1000, // 5 minutes
+    },
+    // Authentication REST settings
+    rest: {
+      // If the rest token expires in less than this amount of time, it will be refreshed automatically.
+      // This is independent from the idle warning.
+      timeLeftBeforeTokenRefresh: 2 * 60 * 1000, // 2 minutes
+    },
+  },
   // Form settings
   form: {
     // NOTE: Map server-side validators to comparative Angular form validators
@@ -61,6 +77,7 @@ export const environment: GlobalConfig = {
     // NOTE: 'fade' | 'fromTop' | 'fromRight' | 'fromBottom' | 'fromLeft' | 'rotate' | 'scale'
     animate: NotificationAnimationsType.Scale
   },
+
   // Submission settings
   submission: {
     autosave: {
@@ -158,8 +175,6 @@ export const environment: GlobalConfig = {
     async: true,
     time: false
   },
-  // Log directory
-  logDirectory: '.',
   // NOTE: will log all redux actions and transfers in console
   debug: false,
   // Default Language in which the UI will be rendered if the user's browser language is not an active language
@@ -315,11 +330,9 @@ export const environment: GlobalConfig = {
 
     {
       // The default dspace theme
-      name: 'dspace'
+      name: 'synsicris'
     },
   ],
-  // Whether the UI should rewrite file download URLs to match its domain. Only necessary to enable when running UI and REST API on separate domains
-  rewriteDownloadUrls: false,
   // Whether to enable media viewer for image and/or video Bitstreams (i.e. Bitstreams whose MIME type starts with "image" or "video").
   // For images, this enables a gallery viewer where you can zoom or page through images.
   // For videos, this enables embedded video streaming
@@ -357,6 +370,25 @@ export const environment: GlobalConfig = {
       }
     ]
   },
+  security: {
+    levels: [
+      {
+        value: 0,
+        icon: 'fa fa-globe',
+        color: 'green'
+      },
+      {
+        value: 1,
+        icon: 'fa fa-key',
+        color: 'orange'
+      },
+      {
+        value: 2,
+        icon: 'fa fa-lock',
+        color: 'red'
+      }
+    ]
+  },
   impactPathway: {
     impactPathwaysFormSection: 'impact_pathway_form',
     impactPathwayStepsFormSection: 'impact_pathway_step_form',
@@ -373,7 +405,9 @@ export const environment: GlobalConfig = {
     entityToCollectionMapAuthority: 'impactpathway_entity_to_collection_map',
     entityToCollectionMapAuthorityMetadata: 'impactpathway.entity.map',
     projObjectiveEntity: 'proj_objective',
-    impactPathwaysSearchConfigName: 'allImpactPathways'
+    iaObjectiveEntity: 'ia_objective',
+    impactPathwaysSearchConfigName: 'allImpactPathways',
+    contributionFundingprogrammeEntity: 'contribution_fundingprogramme'
   },
   workingPlan: {
     workingPlanFormName: 'working_plan_workpackage_form',

@@ -2,10 +2,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   HostListener,
   Input,
   Output,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -21,6 +23,7 @@ import { UploaderProperties } from './uploader-properties.model';
 import { HttpXsrfTokenExtractor } from '@angular/common/http';
 import { XSRF_COOKIE, XSRF_REQUEST_HEADER, XSRF_RESPONSE_HEADER } from '../../core/xsrf/xsrf.interceptor';
 import { CookieService } from '../../core/services/cookie.service';
+import { FileUploaderOptions } from 'ng2-file-upload/file-upload/file-uploader.class';
 
 @Component({
   selector: 'ds-uploader',
@@ -82,6 +85,8 @@ export class UploaderComponent {
   public isOverBaseDropZone = observableOf(false);
   public isOverDocumentDropZone = observableOf(false);
 
+  @ViewChild('fileInput') browseBtn: ElementRef;
+
   @HostListener('window:dragover', ['$event'])
   onDragOver(event: any) {
 
@@ -105,7 +110,7 @@ export class UploaderComponent {
   ngOnInit() {
     this.uploaderId = 'ds-drag-and-drop-uploader' + uniqueId();
     this.checkConfig(this.uploadFilesOptions);
-    this.uploader = new FileUploader({
+    const fileUploaderOptions: FileUploaderOptions = {
       url: this.uploadFilesOptions.url,
       authToken: this.uploadFilesOptions.authToken,
       disableMultipart: this.uploadFilesOptions.disableMultipart,
@@ -113,9 +118,13 @@ export class UploaderComponent {
       removeAfterUpload: true,
       autoUpload: this.uploadFilesOptions.autoUpload,
       method: this.uploadFilesOptions.method,
-      queueLimit: this.uploadFilesOptions.maxFileNumber,
-      allowedMimeType: this.uploadFilesOptions.allowedMimeType
-    });
+      queueLimit: this.uploadFilesOptions.maxFileNumber
+    };
+    if (isNotEmpty(this.uploadFilesOptions.allowedMimeType)) {
+      fileUploaderOptions.allowedMimeType = this.uploadFilesOptions.allowedMimeType;
+    }
+
+    this.uploader = new FileUploader(fileUploaderOptions);
 
     if (isUndefined(this.enableDragOverDocument)) {
       this.enableDragOverDocument = false;

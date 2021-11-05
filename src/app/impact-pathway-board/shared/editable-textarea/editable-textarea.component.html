@@ -1,28 +1,17 @@
-<div class="d-flex">
-  <div class="d-inline-block position-relative w-100 h-100">
-    <textarea #textarea class="form-control rounded-0 editor"
-              placeholder="{{placeholder}}"
-              rows="{{rows}}"
-              title="{{placeholder}}"
-              [disabled]="!(isEditable() | async)"
-              [value]="initContent"></textarea>
-
-      <div class="input-group-prepend edit-buttons">
-        <button [disabled]="!(canSetEditable() | async)" *ngIf="!(isEditable() | async)"
-                (click)="setEditable(true)" class="btn btn-outline-primary btn-sm rounded-0"
-                title="{{'item.edit.metadata.edit.buttons.edit' | translate}}">
-          <i class="fas fa-edit fa-fw"></i>
-        </button>
-        <button [disabled]="(canSetEditable() | async)" *ngIf="(isEditable() | async)"
-                (click)="save(textarea.value)" class="btn btn-outline-success btn-sm rounded-0"
-                title="{{'item.edit.metadata.edit.buttons.unedit' | translate}}">
-          <i class="fas fa-check fa-fw"></i>
-        </button>
-        <button [disabled]="!(canUndo() | async)" (click)="removeChangesFromField()"
-                class="btn btn-outline-warning btn-sm rounded-0"
-                title="{{'item.edit.metadata.edit.buttons.undo' | translate}}">
-          <i class="fas fa-undo-alt fa-fw"></i>
-        </button>
-      </div>
+<div class="d-flex flex-column p-2 bg-light rounded">
+  <div class="d-flex justify-content-between">
+    <h5>{{fieldTitle}}</h5>
+    <button class="btn btn-primary btn-sm"
+            (click)="$event.preventDefault();  $event.stopPropagation(); openEditModal();">
+      <span>
+        <i class="far fa-edit"></i> {{editTitle}}
+      </span>
+    </button>
   </div>
+  <div class="clearfix"></div>
+  <textarea #textarea class="mt-2 form-control rounded-0 editor"
+            rows="{{rows}}"
+            title="{{fieldTitle}}"
+            disabled="true"
+            [value]="content || ''"></textarea>
 </div>

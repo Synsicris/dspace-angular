@@ -382,6 +382,9 @@
   "admin.access-control.epeople.table.edit.buttons.edit": "Edit \"{{name}}\"",
 
 
+  "admin.access-control.epeople.table.edit.buttons.edit-disabled": "You are not authorized to edit this group",
+
+
   "admin.access-control.epeople.table.edit.buttons.remove": "Delete \"{{name}}\"",
 
 
@@ -817,20 +820,25 @@
   "alert.toggle.show": "Show more",
 
 
-  "alert.close.aria": "Close",
-
-  "alert.toggle.hide": "Show less",
-
-  "alert.toggle.show": "Show more",
-
-
   "auth.errors.invalid-user": "Invalid email address or password.",
 
 
   "auth.messages.expired": "Your session has expired. Please log in again.",
 
 
+  "auth.messages.token-refresh-failed": "Refreshing your session token failed. Please log in again.",
+
+
   "bitstream.download.page": "Now downloading {{bitstream}}...",
+
+
+  "bitstream.edit.authorizations.link": "Edit bitstream's Policies",
+
+
+  "bitstream.edit.authorizations.title": "Edit bitstream's Policies",
+
+
+  "bitstream.edit.return": "Back",
 
 
   "bitstream.edit.bitstream": "Bitstream: ",
@@ -1128,6 +1136,9 @@
 
 
   "collection.delete.confirm": "Confirm",
+
+
+  "collection.delete.processing": "Deleting",
 
 
   "collection.delete.head": "Delete Collection",
@@ -1493,6 +1504,9 @@
   "community.delete.confirm": "Confirm",
 
 
+  "community.delete.processing": "Deleting...",
+
+
   "community.delete.head": "Delete Community",
 
 
@@ -1693,7 +1707,9 @@
 
   "context-menu.actions.bulk-import.btn": "Import items into collection",
 
+
   "context-menu.actions.claim.btn": "Claim this profile",
+
 
   "context-menu.actions.export-item.btn": "Export",
 
@@ -1712,18 +1728,24 @@
 
   "context-menu.actions.label": "Options",
 
+
   "context-menu.actions.easy-online-import.btn": "Import from Easy-Online",
+
 
   "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
 
+
   "context-menu.actions.edit-item.btn.OWNER": "Edit",
+
 
   "context-menu.actions.edit-item.btn.CUSTOM": "Edit",
 
 
   "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
 
+
   "context-menu.actions.edit-item.btn.INVESTIGATOR": "Edit",
+
 
   "context-menu.actions.request-correction.btn": "Request a correction",
 
@@ -1754,7 +1776,9 @@
 
   "context-menu.actions.dso-page-edit.ITEM.btn": "Administer",
 
+
   "context-menu.actions.edit-item-relationships.btn.fundings": "Manage Fundings",
+
 
   "context-menu.actions.edit-item-relationships.btn.researchoutputs": "Manage Research Outputs",
 
@@ -1773,27 +1797,84 @@
 
   "context-menu.actions.edit-item-relationships.btn.people": "Manage People",
 
+
   "context-menu.actions.edit-item-relationships.btn.projects": "Manage Projects",
+
 
   "context-menu.actions.statistics.btn": "Statistics",
 
-  "RELATION.Person.researchoutputs.search.results.head" : "Research Outputs",
 
-  "RELATION.Person.projects.search.results.head" : "Projects",
+  "context-menu.actions.subscription.title": "Subscription",
 
-  "RELATION.OrgUnit.organizations.search.results.head" : "Organizations",
 
-  "RELATION.OrgUnit.rppublications.search.results.head" : "Researchers Publications",
+  "context-menu.actions.subscription.type": "Subscription Type",
 
-  "RELATION.OrgUnit.publications.search.results.head" : "Publications",
 
-  "RELATION.OrgUnit.rpprojects.search.results.head" : "Researchers Projects",
+  "context-menu.actions.subscription.daily": "Daily",
 
-  "RELATION.OrgUnit.projects.search.results.head" : "Projects",
 
-  "RELATION.Project.researchoutputs.search.results.head" : "Publications",
+  "context-menu.actions.subscription.weekly": "Weekly",
 
-  "RELATION.OrgUnit.people.search.results.head" : "People",
+
+  "context-menu.actions.subscription.monthly": "Monthly",
+
+
+  "context-menu.actions.subscription.content": "Content",
+
+
+  "context-menu.actions.subscription.statistics": "Statistics",
+
+
+  "context-menu.actions.subscription.content+statistics": "Content & Statistics",
+
+
+  "context-menu.actions.subscription.confirm.submit": "Save",
+
+
+  "context-menu.actions.subscription.delete": "Delete",
+
+
+  "context-menu.actions.subscription.frequency.required": "Frequency is required.",
+
+
+  "context-menu.actions.subscribe.btn": "Subscribe",
+
+
+  "context-menu.actions.edit-subscriptions.btn": "Edit subscriptions",
+
+
+  "context-menu.actions.subscription.notification.here-text": "Subscription Summary",
+
+
+  "context-menu.actions.subscription.notification.content": "Subscription Updated Successfully, click {{here}} to see subscrition summary.",
+
+
+  "RELATION.Person.researchoutputs.search.results.head": "Research Outputs",
+
+
+  "RELATION.Person.projects.search.results.head": "Projects",
+
+
+  "RELATION.OrgUnit.organizations.search.results.head": "Organizations",
+
+
+  "RELATION.OrgUnit.rppublications.search.results.head": "Researchers Publications",
+
+
+  "RELATION.OrgUnit.publications.search.results.head": "Publications",
+
+
+  "RELATION.OrgUnit.rpprojects.search.results.head": "Researchers Projects",
+
+
+  "RELATION.OrgUnit.projects.search.results.head": "Projects",
+
+
+  "RELATION.Project.researchoutputs.search.results.head": "Publications",
+
+
+  "RELATION.OrgUnit.people.search.results.head": "People",
+
 
   "datafile.listelement.badge": "Data file",
 
@@ -1941,11 +2022,15 @@
 
   "dso-selector.claim.item.head": "Profile tips",
 
+
   "dso-selector.claim.item.body": "These are existing profiles that may be related to you. If you recognize yourself in one of these profiles, select it and on the detail page, among the options, choose to claim it. Otherwise you can create a new profile from scratch using the button below.",
+
 
   "dso-selector.claim.item.create-from-scratch": "Create a new one",
 
+
   "dso-selector.claim.item.not-mine-label": "None of these are mine",
+
 
   "dso-selector.create.collection.head": "New collection",
 
@@ -1979,7 +2064,9 @@
 
   "dso-selector.edit.item.head": "Edit item",
 
+
   "dso-selector.error.title": "An error occurred searching for a {{ type }}",
+
 
   "dso-selector.export-metadata.dspaceobject.head": "Export metadata from",
 
@@ -2019,25 +2106,57 @@
 
   "confirmation-modal.delete-eperson.confirm": "Delete",
 
+
+  "confirmation-modal.delete-subscription.header": "Delete Subscription for \"{{ dsoName }}\"",
+
+
+  "confirmation-modal.delete-subscription.info": "Are you sure you want to delete subscription for \"{{ dsoName }}\"",
+
+
+  "confirmation-modal.delete-subscription.cancel": "Cancel",
+
+
+  "confirmation-modal.delete-subscription.confirm": "Delete",
+
+
+  "dataset.listelement.badge": "Dataset",
+
+
+  "easy-online-import.title.breadcrumbs": "Easy-online import",
+
+
+  "easy-online-import.title": "Easy-online import",
+
+
   "easy-online-import.info": "Upload a new file to start the Easy-online import",
+
 
   "easy-online-import.result-info": "Import results",
 
-  "easy-online-import.created-info": "Below all the new entities created by the Easy-online import :",
 
-  "easy-online-import.modified-info": "Below all the new entities modified by the Easy-online import :",
+  "easy-online-import.created-info": "Below all the new entities created by the Easy-online import:",
+
+
+  "easy-online-import.modified-info": "Below all the new entities modified by the Easy-online import:",
+
 
   "easy-online-import.submit": "Start import",
 
+
   "easy-online-import.back": "Back",
+
 
   "easy-online-import.processing": "Processing",
 
+
   "easy-online-import.upload": "Drop Easy-online xml files",
+
 
   "easy-online-import.success": "Import has been succeeded",
 
+
   "easy-online-import.error": "There was an issue during import, please check the import file and try again.",
+
 
   "equipment.listelement.badge": "Equipment",
 
@@ -2098,7 +2217,17 @@
 
   "error.validation.filerequired": "The file upload is mandatory",
 
-  "error.validation.fundingInvestigatorOrLeadOrganizationRequired" : "At least one investigator or one lead organization is required",
+
+  "error.validation.fundingInvestigatorOrLeadOrganizationRequired": "At least one investigator or one lead organization is required",
+
+
+  "event.listelement.badge": "Event",
+
+
+  "exploitation-plan.edit.btn.title": "Edit description",
+
+
+  "exploitation-plan.description.title": "Description",
 
 
   "exploitation-plan.info.text": "Info text for the exploitation Plan",
@@ -2121,11 +2250,15 @@
 
   "exploitation-plan.step_type_4.info.text": "Info text for section 4",
 
+
   "exploitation-plan.step_type_1.task_search": "Info text search for section 1",
+
 
   "exploitation-plan.step_type_2.task_search": "Info text search for section 2",
 
+
   "exploitation-plan.step_type_3.task_search": "Info text search for section 3",
+
 
   "exploitation-plan.step_type_4.task_search": "Info text search for section 4",
 
@@ -2153,11 +2286,15 @@
 
   "explore.browse-section.title": "Browse",
 
-  "explore.counters-section.rprofiles" : "People",
 
-  "explore.counters-section.publications" : "Research outputs",
+  "explore.counters-section.rprofiles": "People",
 
-  "explore.counters-section.project_funding" : "Projects",
+
+  "explore.counters-section.publications": "Research outputs",
+
+
+  "explore.counters-section.project_funding": "Projects",
+
 
   "explore.facet-section.title": "Discover",
 
@@ -2170,11 +2307,15 @@
 
   "explore.index.birthDate": "Birthday",
 
-  "explore.index.metric.view" : "Most viewed",
 
-  "explore.index.metric.download" : "Most downloaded",
+  "explore.index.metric.view": "Most viewed",
 
-  "explore.index.metric.scopus.citation" : "Most cited",
+
+  "explore.index.metric.download": "Most downloaded",
+
+
+  "explore.index.metric.scopus.citation": "Most cited",
+
 
   "explore.index.chart.pie.itemtype_filter": "Item Type",
 
@@ -2383,18 +2524,23 @@
   "file-section.error.header": "Error obtaining files for this item",
 
 
-  "footer.built-with":"Built with",
+  "footer.built-with": "Built with",
+
 
   "footer.copyright": "copyright © 2002-{{ year }}",
 
+
   "footer.extension-by": "- Extension maintained and optimized by",
 
+
   "footer.link.4science": "4Science",
+
 
   "footer.link.dspace": "DSpace software",
 
 
   "footer.link.dspace-cris": "DSpace-CRIS software",
+
 
   "footer.link.lyrasis": "LYRASIS",
 
@@ -2447,7 +2593,7 @@
   "forgot-password.form.head": "Forgot Password",
 
 
-  "forgot-password.form.info": "Enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+  "forgot-password.form.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
 
 
   "forgot-password.form.card.security": "Security",
@@ -2456,7 +2602,7 @@
   "forgot-password.form.identification.header": "Identify",
 
 
-  "forgot-password.form.identification.email": "Email address: ",
+  "forgot-password.form.identification.email": "Email address",
 
 
   "forgot-password.form.label.password": "Password",
@@ -2500,9 +2646,14 @@
 
   "form.clear-help": "Click here to remove the selected value",
 
+
   "form.copy": "Copy",
 
+
   "form.discard": "Discard",
+
+
+  "form.drag": "Drag",
 
 
   "form.edit": "Edit",
@@ -2513,7 +2664,9 @@
 
   "form.external.source-help": "Click here to create a new item from this field",
 
+
   "form.external.source.group.btn": "Create entity",
+
 
   "form.external.source.group-help": "Click here to create a new item from this group of fields",
 
@@ -2553,11 +2706,15 @@
 
   "form.other-information.data-oairecerif_editor_affiliation": "Affiliation",
 
+
   "form.other-information.data-person_identifier_orcid": "ORCID iD",
+
 
   "form.other-information.institution-affiliation-name": "Affiliation(s)",
 
+
   "form.other-information.data-dc_relation_grantno": "Grant Number",
+
 
   "form.other-information.not-available": "Not available",
 
@@ -2570,7 +2727,9 @@
 
   "form.save-help": "Save changes",
 
+
   "form.search": "Search",
+
 
   "form.scrollable-input.search": "Search",
 
@@ -2583,9 +2742,11 @@
 
   "form.repeatable.sort.tip": "Drop the item in the new position",
 
+
   "funding.listelement.badge": "Funding",
 
-  "funding.page.titleprefix" : "Funding:",
+
+  "funding.page.titleprefix": "Funding: ",
 
 
   "home.description": "",
@@ -2608,24 +2769,36 @@
 
   "impact-pathway.step_type_1.task_search.info": "",
 
+
   "impact-pathway.step_type_2.task_search.info": "",
+
 
   "impact-pathway.step_type_2.task_objective_search.info": "",
 
+
   "impact-pathway.step_type_3.task_search.info": "",
+
 
   "impact-pathway.step_type_3.task_objective_search.info": "",
 
+
   "impact-pathway.step_type_4.task_search.info": "",
+
 
   "impact-pathway.step_type_5.task_search.info": "",
 
+
   "impact-pathway.step_type_6.task_search.info": "",
+
 
   "impact-pathway.add.btn": "Add item",
 
 
   "impact-pathway.breadcrumbs": "Impact pathway",
+
+
+  "impact-pathway.description": "Description",
+
 
   "impact-pathway.heading": "Impact pathway",
 
@@ -2654,7 +2827,7 @@
   "impact-pathway.create.success": "The impact pathway has been generated successfully.",
 
 
-  "impact-pathway.edit.item.title": "Edit  item",
+  "impact-pathway.edit.item.title": "Edit item",
 
 
   "impact-pathway.edit.page.title": "Edit impact pathway",
@@ -2667,6 +2840,12 @@
 
 
   "impact-pathway.objectives.back-btn": "Back to Impact Pathway",
+
+
+  "impact-pathway.objectives.description.title": "Description",
+
+
+  "impact-pathway.objectives.edit.btn.title": "Edit title and description",
 
 
   "impact-pathway.objectives.edit.page.title": "Edit objective",
@@ -2699,7 +2878,7 @@
   "impact-pathway.remove.processing": "Deleting",
 
 
-  "impact-pathway.edit.title": "Edit Impact Pathway",
+  "impact-pathway.edit.title": "Edit title and description",
 
 
   "impact-pathway.remove.title": "Delete Impact Pathway",
@@ -2732,10 +2911,10 @@
   "impact-pathway.step.label.step_type_1": "1 Background",
 
 
-  "impact-pathway.step.label.step_type_2": "2 Research and development objectives",
+  "impact-pathway.step.label.step_type_2": "2 Research and development",
 
 
-  "impact-pathway.step.label.step_type_3": "3 Interactions with partners and stakeholders. Outputs for dissemination",
+  "impact-pathway.step.label.step_type_3": "3  Interactions and transfer",
 
 
   "impact-pathway.step.label.step_type_4": "4 Application (opportunities)",
@@ -2841,6 +3020,9 @@
 
 
   "item.bitstreams.upload.title": "Upload bitstream",
+
+
+  "item-create.modal-launcher.btn": "Add item",
 
 
   "item.edit.bitstreams.bundle.edit.buttons.upload": "Upload",
@@ -3050,6 +3232,9 @@
   "item.edit.metadata.headers.language": "Lang",
 
 
+  "item.edit.metadata.headers.security": "Security level",
+
+
   "item.edit.metadata.headers.value": "Value",
 
 
@@ -3098,7 +3283,13 @@
   "item.edit.modify.overview.value": "Value",
 
 
-  "item.edit.move.cancel": "Cancel",
+  "item.edit.move.cancel": "Back",
+
+
+  "item.edit.move.save-button": "Save",
+
+
+  "item.edit.move.discard-button": "Discard",
 
 
   "item.edit.move.description": "Select the collection you wish to move this item to. To narrow down the list of displayed collections, you can enter a search query in the box.",
@@ -3298,16 +3489,21 @@
 
   "item.edit.tabs.status.buttons.reinstate.label": "Reinstate item into the repository",
 
+
   "item.edit.tabs.status.buttons.unauthorized": "You're not authorized to perform this action",
+
 
   "item.edit.tabs.status.buttons.withdraw.button": "Withdraw...",
 
 
   "item.edit.tabs.status.buttons.withdraw.label": "Withdraw item from the repository",
 
+
   "item.edit.tabs.status.buttons.unlinkOrcid.button": "Disconnect...",
 
+
   "item.edit.tabs.status.buttons.unlinkOrcid.label": "Disconnect from ORCID",
+
 
   "item.edit.tabs.status.description": "Welcome to the item management page. From here you can withdraw, reinstate, move or delete the item. You may also update or add new metadata / bitstreams on the other tabs.",
 
@@ -3345,20 +3541,26 @@
   "item.edit.tabs.view.title": "Item Edit -  View",
 
 
-
   "item.edit.unlink-orcid.cancel": "Cancel",
+
 
   "item.edit.unlink-orcid.description": "From here you can disconnect the given profile item from the linked ORCID account, if any.",
 
+
   "item.edit.unlink-orcid.head": "Disconnect from ORCID",
 
-  "item.edit.unlink-orcid.not-linked-to-orcid" : "The operation cannot be completed because the given item is not a profile linked to ORCID",
+
+  "item.edit.unlink-orcid.not-linked-to-orcid": "The operation cannot be completed because the given item is not a profile linked to ORCID",
+
 
   "item.edit.unlink-orcid.unlink": "Disconnect",
 
+
   "item.edit.unlink-orcid.unlink.success": "The disconnection between the profile and the ORCID registry was successful",
 
-  "item.edit.unlink-orcid.unlink.error" :"An error occurred while disconnecting between the profile and the ORCID registry. Try again",
+
+  "item.edit.unlink-orcid.unlink.error": "An error occurred while disconnecting between the profile and the ORCID registry. Try again",
+
 
   "item.edit.unlink-orcid.processing": "Processing",
 
@@ -3385,6 +3587,7 @@
 
 
   "item.page.description": "Description",
+
 
   "item.page.journal-issn": "Journal ISSN",
 
@@ -3463,10 +3666,12 @@
 
   "item.page.metric.details": "Details",
 
+
   "item.page.metric.label.altmetrics": "Altmetrics©",
 
 
   "item.page.metric.label.download": "Downloads",
+
 
   "item.page.metric.label.view": "Views",
 
@@ -3536,21 +3741,33 @@
 
   "item.page.filesection.license.bundle": "License bundle",
 
-  "item.preview.dc.description" : "Summary",
+
+  "item.page.return": "Back",
+
+
+  "item.preview.dc.description": "Summary",
+
 
   "item.preview.dc.description.tableOfContents": "Table of Contents",
 
+
   "item.preview.dc.identifier.arxiv": "arXiv ID",
+
 
   "item.preview.dc.identifier.patentno": "Patent Number",
 
+
   "item.preview.dc.subject.ipc": "Subject IPC",
+
 
   "item.preview.dcterms.dateSubmitted": "Registration Date",
 
+
   "item.preview.dc.identifier.doi": "DOI",
 
-  "item.preview.dc.identifier.isi" : "ISI",
+
+  "item.preview.dc.identifier.isi": "ISI",
+
 
   "item.preview.dc.identifier.issn": "ISSN",
 
@@ -3581,7 +3798,9 @@
 
   "item.preview.dc.contributor.author": "Authors: ",
 
+
   "item.preview.dc.contributor.applicant": "Applicant",
+
 
   "item.preview.dc.contributor.editor": "Editors: ",
 
@@ -3642,32 +3861,45 @@
 
   "item.preview.dc.relation.issn": "ISSN",
 
-  "item.preview.oaire.citation.endPage" : "End Page",
+
+  "item.preview.oaire.citation.endPage": "End Page",
+
 
   "item.preview.oaire.citation.edition": "Edition",
 
-  "item.preview.oaire.citation.startPage" : "Start Page",
+
+  "item.preview.oaire.citation.startPage": "Start Page",
+
 
   "item.preview.oaire.citation.issue": "Issue",
 
 
   "item.preview.oaire.citation.volume": "Volume",
 
-  "item.preview.oairecerif.acronym" : "Acronym",
 
-  "item.preview.oairecerif.affiliation.orgunit" : "Affiliation",
+  "item.preview.oairecerif.acronym": "Acronym",
 
-  "item.preview.oairecerif.funder" : "Funder",
 
-  "item.preview.oairecerif.funding.identifier" : "Grant Number / Funding identifier",
+  "item.preview.oairecerif.affiliation.orgunit": "Affiliation",
 
-  "item.preview.oairecerif.funding.endDate" : "End Date",
 
-  "item.preview.oairecerif.funding.startDate" : "Start Date",
+  "item.preview.oairecerif.funder": "Funder",
 
-  "item.preview.oairecerif.fundingParent" : "Funding Program / Call",
 
-  "item.preview.oairecerif.oamandate" : "OA Mandate",
+  "item.preview.oairecerif.funding.identifier": "Grant Number / Funding identifier",
+
+
+  "item.preview.oairecerif.funding.endDate": "End Date",
+
+
+  "item.preview.oairecerif.funding.startDate": "Start Date",
+
+
+  "item.preview.oairecerif.fundingParent": "Funding Program / Call",
+
+
+  "item.preview.oairecerif.oamandate": "OA Mandate",
+
 
   "item.preview.person.familyName": "Surname: ",
 
@@ -3677,7 +3909,9 @@
 
   "item.preview.person.identifier.orcid": "ORCID: ",
 
-  "item.preview.person.identifier.rid": "Researcher ID:",
+
+  "item.preview.person.identifier.rid": "Researcher ID: ",
+
 
   "item.preview.person.identifier.scopus-author-id": "Scopus Author Id",
 
@@ -3756,7 +3990,9 @@
 
   "item-export.form.btn.cancel": "Cancel",
 
+
   "item-export.process.title": "Bulk export item",
+
 
   "journal.listelement.badge": "Journal",
 
@@ -3928,17 +4164,23 @@
 
   "manage.relationships.select": "Select",
 
+
   "manage.relationships.hide": "Hide",
+
 
   "manage.relationships.unselect": "Unselect",
 
+
   "manage.relationships.unhide": "Unhide",
 
-  "manage.relationships.title" : "Selected items",
 
-  "manage.relationships.no.relationships.found" : "Empty selection",
+  "manage.relationships.title": "Selected items",
 
-  "manage.relationships.no.data.found" : "No data found",
+
+  "manage.relationships.no.relationships.found": "Empty selection",
+
+
+  "manage.relationships.no.data.found": "No data found",
 
 
   "menu.header.admin": "Management",
@@ -4144,7 +4386,9 @@
 
   "menu.section.statistics_task": "Statistics Task",
 
+
   "statistics": "Statistics",
+
 
   "menu.section.toggle.access_control": "Toggle Access Control section",
 
@@ -4184,24 +4428,33 @@
 
   "metric-badges.scopusCitation": "Scopus© Citations",
 
+
   "metric-badges.scopus-author-citation-count": "Scopus© Citations",
+
 
   "metric-badges.scopus-author-coauthor-count": "<span class=\"fa fa-users\" title=\"Scopus© Coauthors\">&nbsp;</span>",
 
+
   "metric-badges.scopus-author-document-count": "<span class=\"fa fa-book-open\" title=\"Scopus© Documents\">&nbsp;</span>",
+
 
   "metric-badges.scopus-author-h-index": "Scopus© H-Index",
 
+
   "metric-badges.scopus-author-cited-count": "Scopus© Cited By",
+
 
   "metric-badges.wosCitation": "WOS© Citations",
 
+
   "metric-badges.view": "<span class=\"fa fa-eye\" title=\"View\">&nbsp;</span>",
+
 
   "metric-badges.download": "<span class=\"fa fa-download\" title=\"Downloads\">&nbsp;</span>",
 
 
   "mydspace.breadcrumbs": "All items",
+
 
   "mydspace.description": "",
 
@@ -4296,7 +4549,7 @@
   "mydspace.show.workflow": "All tasks",
 
 
-  "mydspace.show.workspace": "Your Submissions",
+  "mydspace.show.workspace": "Your submissions",
 
 
   "mydspace.status.archived": "Archived",
@@ -4374,7 +4627,13 @@
   "nav.stop-impersonating": "Stop impersonating EPerson",
 
 
+  "nav.toggle": "Toggle navigation",
+
+
   "nav.user.description": "User profile bar",
+
+
+  "nav.subscriptions": "Subscriptions",
 
 
   "openaire.broker.title": "OpenAIRE Broker",
@@ -4634,7 +4893,9 @@
 
   "reciter.suggestion.source.oaire": "OpenAIRE Graph",
 
+
   "reciter.suggestion.source.orcidWorks": "ORCID registry",
+
 
   "reciter.suggestion.from.source": "from the",
 
@@ -4722,15 +4983,21 @@
 
   "person.page.orcid.granted-authorizations": "Granted authorizations",
 
-  "person.page.orcid.grant-authorizations" : "Grant authorizations",
+
+  "person.page.orcid.grant-authorizations": "Grant authorizations",
+
 
   "person.page.orcid.link": "Connect to ORCID ID",
 
+
   "person.page.orcid.orcid-not-linked-message": "The ORCID iD of this profile ({{ orcid }}) has not yet been connected to an account on the ORCID registry or the connection is expired.",
+
 
   "person.page.orcid.unlink": "Disconnect from ORCID",
 
+
   "person.page.orcid.unlink.processing": "Processing...",
+
 
   "person.page.orcid.missing-authorizations": "Missing authorizations",
 
@@ -4795,7 +5062,7 @@
   "person.page.orcid.sync-publications.disabled": "Disabled",
 
 
-  "person.page.orcid.sync-queue.discard" : "Discard the change and do not synchronize with the ORCID registry",
+  "person.page.orcid.sync-queue.discard": "Discard the change and do not synchronize with the ORCID registry",
 
 
   "person.page.orcid.sync-queue.discard.error": "The discarding of the ORCID queue record failed",
@@ -4807,56 +5074,80 @@
   "person.page.orcid.sync-queue.empty-message": "The ORCID queue registry is empty",
 
 
-  "person.page.orcid.sync-queue.description" : "Description",
+  "person.page.orcid.sync-queue.description": "Description",
+
 
   "person.page.orcid.sync-queue.description.affiliation": "Affiliations",
 
+
   "person.page.orcid.sync-queue.description.country": "Country",
+
 
   "person.page.orcid.sync-queue.description.education": "Educations",
 
+
   "person.page.orcid.sync-queue.description.external_ids": "External ids",
+
 
   "person.page.orcid.sync-queue.description.other_names": "Other names",
 
+
   "person.page.orcid.sync-queue.description.qualification": "Qualifications",
+
 
   "person.page.orcid.sync-queue.description.researcher_urls": "Researcher urls",
 
+
   "person.page.orcid.sync-queue.description.keywords": "Keywords",
+
 
   "person.page.orcid.sync-queue.tooltip.insert": "Add a new entry in the ORCID registry",
 
+
   "person.page.orcid.sync-queue.tooltip.update": "Update this entry on the ORCID registry",
+
 
   "person.page.orcid.sync-queue.tooltip.delete": "Remove this entry from the ORCID registry",
 
+
   "person.page.orcid.sync-queue.tooltip.publication": "Publication",
+
 
   "person.page.orcid.sync-queue.tooltip.funding": "Funding",
 
+
   "person.page.orcid.sync-queue.tooltip.affiliation": "Affiliation",
+
 
   "person.page.orcid.sync-queue.tooltip.education": "Education",
 
+
   "person.page.orcid.sync-queue.tooltip.qualification": "Qualification",
+
 
   "person.page.orcid.sync-queue.tooltip.other_names": "Othername",
 
+
   "person.page.orcid.sync-queue.tooltip.country": "Country",
+
 
   "person.page.orcid.sync-queue.tooltip.keywords": "Keyword",
 
+
   "person.page.orcid.sync-queue.tooltip.external_ids": "External identifier",
+
 
   "person.page.orcid.sync-queue.tooltip.researcher_urls": "Researcher url",
 
-  "person.page.orcid.sync-queue.send" : "Synchronize with ORCID registry",
+
+  "person.page.orcid.sync-queue.send": "Synchronize with ORCID registry",
 
 
   "person.page.orcid.sync-queue.send.unauthorized-error.title": "The submission to ORCID failed for missing authorizations.",
 
+
   "person.page.orcid.sync-queue.send.unauthorized-error.content": "Click <a href='{{orcid}}'>here</a> to grant again the required permissions. If the problem persists, contact the administrator",
+
 
   "person.page.orcid.sync-queue.send.bad-request-error": "The submission to ORCID failed because the resource sent to ORCID registry is not valid",
 
@@ -4872,37 +5163,54 @@
 
   "person.page.orcid.sync-queue.send.success": "The submission to ORCID was completed successfully",
 
+
   "person.page.orcid.sync-queue.send.validation-error": "The data that you want to synchronize with ORCID is not valid",
+
 
   "person.page.orcid.sync-queue.send.validation-error.amount-currency.required": "The amount's currency is required",
 
+
   "person.page.orcid.sync-queue.send.validation-error.external-id.required": "The resource to be sent requires at least one identifier",
+
 
   "person.page.orcid.sync-queue.send.validation-error.title.required": "The title is required",
 
+
   "person.page.orcid.sync-queue.send.validation-error.type.required": "The type is required",
+
 
   "person.page.orcid.sync-queue.send.validation-error.start-date.required": "The start date is required",
 
+
   "person.page.orcid.sync-queue.send.validation-error.funder.required": "The funder is required",
+
 
   "person.page.orcid.sync-queue.send.validation-error.organization.required": "The organization is required",
 
+
   "person.page.orcid.sync-queue.send.validation-error.organization.name-required": "The organization's name is required",
+
 
   "person.page.orcid.sync-queue.send.validation-error.organization.address-required": "The organization to be sent requires an address",
 
+
   "person.page.orcid.sync-queue.send.validation-error.organization.city-required": "The address of the organization to be sent requires a city",
+
 
   "person.page.orcid.sync-queue.send.validation-error.organization.country-required": "The address of the organization to be sent requires a country",
 
+
   "person.page.orcid.sync-queue.send.validation-error.disambiguated-organization.required": "An identifier to disambiguate organizations is required. Supported ids are GRID, Ringgold, Legal Entity identifiers (LEIs) and Crossref Funder Registry identifiers",
+
 
   "person.page.orcid.sync-queue.send.validation-error.disambiguated-organization.value-required": "The organization's identifiers requires a value",
 
+
   "person.page.orcid.sync-queue.send.validation-error.disambiguation-source.required": "The organization's identifiers requires a source",
 
+
   "person.page.orcid.sync-queue.send.validation-error.disambiguation-source.invalid": "The source of one of the organization identifiers is invalid. Supported sources are RINGGOLD, GRID, LEI and FUNDREF",
+
 
   "person.page.orcid.synchronization-mode": "Synchronization mode",
 
@@ -4936,9 +5244,12 @@
 
   "person.page.orcid.scope.person-update": "Add/update other information about you",
 
+
   "person.page.orcid.unlink.success": "The disconnection between the profile and the ORCID registry was successful",
 
+
   "person.page.orcid.unlink.error": "An error occurred while disconnecting between the profile and the ORCID registry. Try again",
+
 
   "person.page.staffid": "Staff ID",
 
@@ -4999,9 +5310,12 @@
 
   "process.new.notification.error.content": "An error occurred while creating this process",
 
+
   "process.new.notification.process.processing": "Processing...",
 
+
   "process.new.notification.process.files": "Output Files: ",
+
 
   "process.new.header": "Create a new process",
 
@@ -5147,8 +5461,7 @@
   "patent.listelement.badge": "Patent or utility patent",
 
 
-  "product.listelement.badge": "Product",
-
+  "product.listelement.badge": "Research data",
 
 
   "profile.breadcrumbs": "Update Profile",
@@ -5167,6 +5480,9 @@
 
 
   "profile.head": "Update Profile",
+
+
+  "profile.main.info": "Here you create your person profile. This increases your visibility and enables you to import publication data into the monitoring tool. Creating the profile is voluntary. The monitoring tool can also be used without a person profile. The person profile is not linked to a project, but contains general information about you.",
 
 
   "profile.metadata.form.error.firstname.required": "First Name is required",
@@ -5190,13 +5506,16 @@
   "profile.metadata.form.label.phone": "Contact Telephone",
 
 
+  "profile.metadata.form.info": "Please complete the details. With this data you are registered as a user in the monitoring tool.",
+
+
   "profile.metadata.form.notifications.success.content": "Your changes to the profile were saved.",
 
 
-  "profile.metadata.form.notifications.success.title": "Profile saved",
+  "profile.metadata.form.notifications.success.title": "Password saved",
 
 
-  "profile.notifications.warning.no-changes.content": "No changes were made to the Profile.",
+  "profile.notifications.warning.no-changes.content": "No changes",
 
 
   "profile.notifications.warning.no-changes.title": "No changes",
@@ -5234,6 +5553,7 @@
 
   "profile.title": "Update Profile",
 
+
   "profile.card.researcher": "Researcher Profile",
 
 
@@ -5254,14 +5574,94 @@
 
   "project.create.grants.subproject-option": "Editable by only sub-project members",
 
+  "project.create.info": "info",
+
 
   "project.create.name.placeholder": "Enter the name for the new project",
 
+
+  "subproject.create.name.placeholder": "Organisation Name and Subproject Short title",
+
+  "subproject.create.info": "info",
 
   "project.create.success": "The new project has been generated successfully.",
 
 
   "project.listelement.badge": "Subproject",
+
+
+
+  "project.manage.menu.project": "Manage project members",
+  "project.manage.menu.subproject": "Manage subproject members",
+  "project.manage.breadcrumbs": "Manage project members",
+
+  "project.manage.page.title": "Manage project members",
+
+  "project.manage.members.admin-group": "Manage project coordinators",
+
+  "project.manage.members.members-group": "Manage project members",
+
+  "project.manage.members-list.head": "Manage group",
+
+
+  "project.manage.members-list.search.head": "Search persons",
+
+
+  "project.manage.members-list.button.see-all": "Browse All",
+
+
+  "project.manage.members-list.headMembers": "Current Members",
+
+
+  "project.manage.members-list.search.scope.metadata": "Metadata",
+
+
+  "project.manage.members-list.search.scope.email": "E-mail (exact)",
+
+
+  "project.manage.members-list.search.button": "Search",
+
+
+  "project.manage.members-list.table.id": "ID",
+
+
+  "project.manage.members-list.table.name": "Name",
+
+
+  "project.manage.members-list.table.edit": "Remove / Add",
+
+
+  "project.manage.members-list.table.edit.buttons.remove": "Remove member with name \"{{name}}\"",
+
+  "project.manage.members-list.table.invitation.buttons.send": "Send invitation to \"{{email}}\"",
+
+
+  "project.manage.members-list.notification.success.addMember": "Successfully added member: \"{{name}}\"",
+
+
+  "project.manage.members-list.notification.failure.addMember": "Failed to add member: \"{{name}}\"",
+
+
+  "project.manage.members-list.notification.success.deleteMember": "Successfully deleted member: \"{{name}}\"",
+
+
+  "project.manage.members-list.notification.failure.deleteMember": "Failed to delete member: \"{{name}}\"",
+
+
+  "project.manage.members-list.table.edit.buttons.add": "Add member with name \"{{name}}\"",
+
+
+  "project.manage.members-list.notification.failure.noActiveGroup": "No current active group, submit a name first.",
+
+
+  "project.manage.members-list.no-members-yet": "No members in group yet, search and add.",
+
+
+  "project.manage.members-list.no-items": "No EPeople found in that search",
+
+
+
+
 
 
   "project.page.contributor": "Contributors",
@@ -5486,13 +5886,13 @@
   "register-page.create-profile.identification.language": "Language",
 
 
-  "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the",
+  "register-page.create-profile.end-user-agreement.accept.text": "I have read and I agree to the text",
 
 
   "register-page.create-profile.end-user-agreement.accept.link": "End User Agreement",
 
 
-  "register-page.create-profile.end-user-agreement.error": "Accept end user agreement is required",
+  "register-page.create-profile.end-user-agreement.error": "Accept End User Agreement is required",
 
 
   "register-page.create-profile.security.header": "Security",
@@ -5501,7 +5901,7 @@
   "register-page.create-profile.security.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
 
 
-  "register-page.create-profile.security.label.password": "Password *",
+  "register-page.create-profile.security.label.password": "Password",
 
 
   "register-page.create-profile.security.label.passwordrepeat": "Retype to confirm *",
@@ -5530,11 +5930,14 @@
 
   "register-page.create-profile.submit.success.head": "Registration completed",
 
+  "register-page.registration.existing.user.login-msg": "If you already have an account you can yo can ",
+
+  "register-page.registration.existing.user.login-link": "Log in here",
 
   "register-page.registration.header": "New user registration",
 
 
-  "register-page.registration.info": "Register an account to subscribe to collections for email updates, and submit new items to DSpace.",
+  "register-page.registration.info": "Create Profile",
 
 
   "register-page.registration.email": "Email Address *",
@@ -5555,7 +5958,7 @@
   "register-page.registration.success.head": "Verification email sent",
 
 
-  "register-page.registration.success.content": "An email has been sent to {{ email }} containing a special URL and further instructions.",
+  "register-page.registration.success.content": "An email has been sent to {{ email }} containing a special URL and further instruction.",
 
 
   "register-page.registration.error.head": "Error when trying to register email",
@@ -5638,9 +6041,12 @@
 
   "researcher.profile.create.new": "Create new",
 
+
   "researcher.profile.create.success": "Researcher profile created succcessfully",
 
+
   "researcher.profile.create.fail": "An error occurs during the researcher profile creation",
+
 
   "researcher.profile.delete": "Delete",
 
@@ -5659,20 +6065,27 @@
 
   "researcher.profile.private.visibility": "PRIVATE",
 
-
   "researcher.profile.public.visibility": "PUBLIC",
 
-  "researcher.profile.status": "Status:",
+  "researcher.profile.internal.visibility": "INTERNAL",
+
+
+  "researcher.profile.status": "Status",
+
 
   "researcherprofile.claim.not-authorized": "You are not authorized to claim this item. For more details contact the administrator(s).",
 
-  "researcherprofile.error.claim.body" : "An error occurred while claiming the profile, please try again later",
 
-  "researcherprofile.error.claim.title" : "Error",
+  "researcherprofile.error.claim.body": "An error occurred while claiming the profile, please try again later",
 
-  "researcherprofile.success.claim.body" : "Profile claimed with success",
 
-  "researcherprofile.success.claim.title" : "Success",
+  "researcherprofile.error.claim.title": "Error",
+
+
+  "researcherprofile.success.claim.body": "Profile claimed with success",
+
+
+  "researcherprofile.success.claim.title": "Success",
 
 
   "resource-policies.add.button": "Add",
@@ -5857,20 +6270,27 @@
 
   "search.filters.applied.f.entityType": "Item Type",
 
+
   "search.filters.applied.f.editor": "Editor",
+
 
   "search.filters.applied.f.has_content_in_original_bundle": "Has files",
 
+
   "search.filters.applied.f.investigators": "Investigator",
+
 
   "search.filters.applied.f.itemtype": "Type",
 
 
   "search.filters.applied.f.namedresourcetype": "Status",
 
+
   "search.filters.applied.f.personorgunits": "Organisation",
 
+
   "search.filters.applied.f.projectorgunits": "Organisation",
+
 
   "search.filters.applied.f.subject": "Subject",
 
@@ -5900,6 +6320,7 @@
 
 
   "search.filters.applied.f.graphpubldatetrl": "Public date RTL",
+
 
   "search.filters.applied.f.organization": "Organisation",
 
@@ -5943,10 +6364,16 @@
   "search.filters.filter.author.placeholder": "Author name",
 
 
+  "search.filters.filter.author.label": "Search author name",
+
+
   "search.filters.filter.birthDate.head": "Birth Date",
 
 
   "search.filters.filter.birthDate.placeholder": "Birth Date",
+
+
+  "search.filters.filter.birthDate.label": "Search birth date",
 
 
   "search.filters.filter.collapse": "Collapse filter",
@@ -5958,10 +6385,16 @@
   "search.filters.filter.creativeDatePublished.placeholder": "Date Published",
 
 
+  "search.filters.filter.creativeDatePublished.label": "Search date published",
+
+
   "search.filters.filter.creativeWorkEditor.head": "Editor",
 
 
   "search.filters.filter.creativeWorkEditor.placeholder": "Editor",
+
+
+  "search.filters.filter.creativeWorkEditor.label": "Search editor",
 
 
   "search.filters.filter.creativeWorkKeywords.head": "Subject",
@@ -5970,25 +6403,40 @@
   "search.filters.filter.creativeWorkKeywords.placeholder": "Subject",
 
 
+  "search.filters.filter.creativeWorkKeywords.label": "Search subject",
+
+
   "search.filters.filter.creativeWorkPublisher.head": "Publisher",
 
 
   "search.filters.filter.creativeWorkPublisher.placeholder": "Publisher",
 
 
+  "search.filters.filter.creativeWorkPublisher.label": "Search publisher",
+
+
   "search.filters.filter.dateIssued.head": "Date",
 
 
-  "search.filters.filter.dateIssued.max.placeholder": "Minimum Date",
+  "search.filters.filter.dateIssued.max.placeholder": "Maximum Date",
 
 
-  "search.filters.filter.dateIssued.min.placeholder": "Maximum Date",
+  "search.filters.filter.dateIssued.max.label": "End",
+
+
+  "search.filters.filter.dateIssued.min.placeholder": "Minimum Date",
+
+
+  "search.filters.filter.dateIssued.min.label": "Start",
 
 
   "search.filters.filter.dateSubmitted.head": "Date submitted",
 
 
   "search.filters.filter.dateSubmitted.placeholder": "Date submitted",
+
+
+  "search.filters.filter.dateSubmitted.label": "Search date submitted",
 
 
   "search.filters.filter.discoverable.head": "Private",
@@ -6007,6 +6455,9 @@
 
 
   "search.filters.filter.entityType.placeholder": "Item Type",
+
+
+  "search.filters.filter.entityType.label": "Search item type",
 
 
   "search.filters.filter.expand": "Expand filter",
@@ -6039,6 +6490,9 @@
   "search.filters.filter.itemtype.placeholder": "Type",
 
 
+  "search.filters.filter.itemtype.label": "Search type",
+
+
   "search.filters.filter.investigators.head": "Researcher",
 
 
@@ -6051,10 +6505,16 @@
   "search.filters.filter.jobTitle.placeholder": "Job Title",
 
 
+  "search.filters.filter.jobTitle.label": "Search job title",
+
+
   "search.filters.filter.knowsLanguage.head": "Known language",
 
 
   "search.filters.filter.knowsLanguage.placeholder": "Known language",
+
+
+  "search.filters.filter.knowsLanguage.label": "Search known language",
 
 
   "search.filters.filter.projectOrgUnits.head": "Organizations",
@@ -6075,10 +6535,16 @@
   "search.filters.filter.namedresourcetype.placeholder": "Status",
 
 
+  "search.filters.filter.namedresourcetype.label": "Search status",
+
+
   "search.filters.filter.objectpeople.head": "People",
 
 
   "search.filters.filter.objectpeople.placeholder": "People",
+
+
+  "search.filters.filter.objectpeople.label": "Search people",
 
 
   "search.filters.filter.organization.head": "Organization",
@@ -6093,10 +6559,16 @@
   "search.filters.filter.organizationAddressCountry.placeholder": "Country",
 
 
+  "search.filters.filter.organizationAddressCountry.label": "Search country",
+
+
   "search.filters.filter.organizationAddressLocality.head": "City",
 
 
   "search.filters.filter.organizationAddressLocality.placeholder": "City",
+
+
+  "search.filters.filter.organizationAddressLocality.label": "Search city",
 
 
   "search.filters.filter.organizationFoundingDate.head": "Date Founded",
@@ -6105,10 +6577,16 @@
   "search.filters.filter.organizationFoundingDate.placeholder": "Date Founded",
 
 
+  "search.filters.filter.organizationFoundingDate.label": "Search date founded",
+
+
   "search.filters.filter.scope.head": "Scope",
 
 
   "search.filters.filter.scope.placeholder": "Scope filter",
+
+
+  "search.filters.filter.scope.label": "Search scope filter",
 
 
   "search.filters.filter.show-less": "Collapse",
@@ -6123,10 +6601,16 @@
   "search.filters.filter.subject.placeholder": "Subject",
 
 
+  "search.filters.filter.subject.label": "Search subject",
+
+
   "search.filters.filter.submitter.head": "Submitter",
 
 
   "search.filters.filter.submitter.placeholder": "Submitter",
+
+
+  "search.filters.filter.submitter.label": "Search submitter",
 
 
   "search.filters.entityType.applications_econtech": "Application success for business innovations",
@@ -6171,7 +6655,7 @@
   "search.filters.entityType.inn_pot_social": "Intended social innovation/ change process",
 
 
-  "search.filters.entityType.impactpathway": "Impact pathway",
+  "search.filters.entityType.impactpathway": "Impact Pathway",
 
 
   "search.filters.entityType.impactpathwaystep": "Impact pathway step",
@@ -6186,10 +6670,10 @@
   "search.filters.entityType.participation_events": "Participative process",
 
 
-  "search.filters.entityType.Patent": "Patent or utility patent",
+  "search.filters.entityType.Patent": "Patents or utility patent",
 
 
-  "search.filters.entityType.Person": "Persons",
+  "search.filters.entityType.Person": "Person",
 
 
   "search.filters.entityType.physical_objects": "Object, material",
@@ -6201,7 +6685,7 @@
   "search.filters.entityType.proj_objectives": "Project objective",
 
 
-  "search.filters.entityType.Project": "Research projects",
+  "search.filters.entityType.Project": "Subproject",
 
 
   "search.filters.entityType.Publication": "Publication",
@@ -6213,7 +6697,7 @@
   "search.filters.entityType.spinoffs": "Spin-off (or associations)",
 
 
-  "search.filters.entityType.stateofart": "State of knowledge",
+  "search.filters.entityType.stateofart": "State of knowledge / problem definition",
 
 
   "search.filters.entityType.steps": "Next step or cooperation",
@@ -6240,7 +6724,7 @@
   "search.filters.entityType.JournalVolume": "Journal Volume",
 
 
-  "search.filters.entityType.OrgUnit": "Organizational Unit",
+  "search.filters.entityType.OrgUnit": "Organisation unit",
 
 
   "search.filters.has_content_in_original_bundle.true": "Yes",
@@ -6265,6 +6749,9 @@
 
 
   "search.filters.reset": "Reset filters",
+
+
+  "search.filters.search.submit": "Submit",
 
 
   "search.form.search": "Search",
@@ -6329,11 +6816,15 @@
 
   "search.view-switch.show-list": "Show as list",
 
+
   "simple-item-modal.new.head": "Add item via \"Create new\" or \"Select existing\"",
+
 
   "simple-item-modal.create-btn": "Create new",
 
+
   "simple-item-modal.search-btn": "Select existing",
+
 
   "sorting.ASC": "Ascending",
 
@@ -6370,7 +6861,9 @@
 
   "sorting.lastModified.DESC": "Last modified Descending",
 
+
   "sorting.ownerselection.ASC": "Owner Relevance Ascending",
+
 
   "sorting.ownerselection.DESC": "Owner Relevance Descending",
 
@@ -6410,7 +6903,9 @@
 
   "statistics.table.title.TotalDownloads": "File Visits",
 
+
   "statistics.table.title.TotalVisitsAndDownloads": "Items and file Visits",
+
 
   "statistics.table.title.TopCountries": "Top country views",
 
@@ -6432,7 +6927,9 @@
 
   "statistics.categories.rpprojectsReports.tab": "Researchers Projects Reports",
 
+
   "statistics.categories.publicationsReports.tab": "Publications Reports",
+
 
   "statistics.categories.rppublicationsReports.tab": "Researchers Publication Reports",
 
@@ -6469,9 +6966,12 @@
 
   "submission.general.discard.submit": "Discard",
 
+
   "submission.general.info.saved": "Saved",
 
+
   "submission.general.info.pending-changes": "Unsaved changes",
+
 
   "submission.general.save": "Save",
 
@@ -6481,10 +6981,12 @@
 
   "submission.general.save-later.edit-item": "Save and return",
 
+
   "submission.import-external.page.title": "Import metadata from an external source",
 
 
   "submission.import-external.title": "Import metadata from an external source",
+
 
   "submission.import-external.title.Equipment": "Import an equipment from an external source",
 
@@ -6506,7 +7008,9 @@
 
   "submission.import-external.title.Person": "Import a person from an external source",
 
+
   "submission.import-external.title.Product": "Import a product from an external source",
+
 
   "submission.import-external.title.Project": "Import a project from an external source",
 
@@ -6553,13 +7057,17 @@
   "submission.import-external.source.sherpaJournal": "SHERPA Journals",
 
 
+  "submission.import-external.source.sherpaJournalIssn": "SHERPA Journals by ISSN",
+
+
   "submission.import-external.source.sherpaPublisher": "SHERPA Publishers",
 
-  "submission.import-external.source.sherpaJournalIssn": "SHERPA Journals ISSN",
 
   "submission.import-external.source.orcid": "ORCID",
 
+
   "submission.import-external.source.orcidWorks": "ORCID",
+
 
   "submission.import-external.source.pubmed": "Pubmed",
 
@@ -6569,15 +7077,21 @@
 
   "submission.import-external.source.lcname": "Library of Congress Names",
 
+
   "submission.import-external.source.scielo": "SciELO",
+
 
   "submission.import-external.source.scopus": "Scopus",
 
+
   "submission.import-external.source.vufind": "VuFind",
+
 
   "submission.import-external.source.wos": "Web Of Science",
 
+
   "submission.import-external.source.openaireProject": "OpenAIRE",
+
 
   "submission.import-external.source.openaire": "OpenAIRE by Author",
 
@@ -6586,6 +7100,7 @@
 
 
   "submission.import-external.source.epo": "European Patent Office (EPO)",
+
 
   "submission.import-external.preview.title.Equipment": "Equipment Preview",
 
@@ -6607,7 +7122,9 @@
 
   "submission.import-external.preview.title.Person": "Person Preview",
 
+
   "submission.import-external.preview.title.Product": "Product Preview",
+
 
   "submission.import-external.preview.title.Project": "Project Preview",
 
@@ -7052,9 +7569,12 @@
 
   "submission.sections.describe.relationship-lookup.selection-tab.title.scopus": "Search Results",
 
+
   "submission.sections.describe.relationship-lookup.selection-tab.title.scielo": "Search Results",
 
+
   "submission.sections.describe.relationship-lookup.selection-tab.title.wos": "Search Results",
+
 
   "submission.sections.describe.relationship-lookup.selection-tab.title": "Search Results",
 
@@ -7668,7 +8188,7 @@
   "submission.sections.submit.progressbar.describe.events_involved.info": "<i>Please select here which project partners (if applicable, also other cooperation partners) participated or took part in the event. Select the stakeholder groups that participated in the event.</i></b>The organizations (project partners and other cooperation partners) and stakeholder groups can be selected that have been already entered for the project. If organizations and stakeholder groups that are involved in the process do not yet appear in the list, please enter them in the partner of stakeholder groups area and then assign them to the process.Please select the involved or participating group of actors or create a new group of actors if needed. Add details if necessary.",
 
 
-  "submission.sections.submit.progressbar.describe.process_events": "Process of cooperation, participation and working together",
+  "submission.sections.submit.progressbar.describe.process_events": "Decribe process of cooperation, participation and working together",
 
 
   "submission.sections.submit.progressbar.describe.process_events.info": "Processes of cooperation, participation and working together are characterized by the fact that they take place over a longer period of time with the same partners/ organizations or stakeholder groups (e.g. in the form of events that build on one another). Please collect individual events under „Event“.</br><p><i>Please characterize the process. Describe your planning in the application and update and add to the information as the project progresses.</i></p>It is advisable to record the project and cooperation partners as well as the relevant stakeholder groups before describing a process.</br>Cooperation, participation and collaboration are essential for the development of impacts. With a good description, the contribution of your project to the development of effects becomes visible.",
@@ -7680,7 +8200,7 @@
   "submission.sections.submit.progressbar.describe.process_events_involved.info": "<i>Please select here which organization(s) and stakeholder group(s) are involved. Also include your own organization and if necessary participating project partners.</i><p>The organizations and stakeholder groups that have already been recorded for the project can be selected. If organizations and stakeholder groups that are involved in the process do not yet appear in the list, please enter them in the partner or stakeholder groups area and the assign them to the process.</p><b>Tip:</b> In complex projects it can be challenging to differentiate between different processes. Please distinguish between the processes mainly based on the organizations/ stakeholder groups involved and do not enter any events twice.",
 
 
-  "submission.sections.submit.progressbar.describe.process_events_frequency": "Type and frequency of single activites/events in the cooperation or participation/in the process",
+  "submission.sections.submit.progressbar.describe.process_events_frequency": "Indicate type and frequency of meetings/events within the cooperation, participation or exchange process",
 
 
   "submission.sections.submit.progressbar.describe.process_events_frequency.info": "<i>Characterize the process by specifying the type, duration and frequency of individual interactions or events</i>. (Multiple entries possible).</br>The items help to characterize the intensity and continuity of the interaction process.",
@@ -7692,7 +8212,7 @@
   "submission.sections.submit.progressbar.describe.process_events_description.info": "<i>If relevant, add further information on the process that you consider essential.</i></br>For example, topics, specific methods, procedures, special features of the organisations or stakeholder groups involved or the importance of the process for the impact of the project.",
 
 
-  "submission.sections.submit.progressbar.describe.process_events_date": "Documentation of important events for reporting purposes",
+  "submission.sections.submit.progressbar.describe.process_events_date": "Record in detail important meetings/events held within the cooperation, participation or exchange process (in the course of the project)",
 
 
   "submission.sections.submit.progressbar.describe.process_events_date.info": "<i>Please provide here details of important events.</i></br>It is advisable to make these entries directly before or after the respective event.</br>You can do uploads to provide informations to the sponsor about the individual events, and, if necessary, to publish it.",
@@ -7716,6 +8236,21 @@
   "submission.sections.submit.progressbar.upload": "Upload files",
 
 
+  "submission.sections.status.errors.title": "Errors",
+
+
+  "submission.sections.status.valid.title": "Valid",
+
+
+  "submission.sections.status.warnings.title": "Warnings",
+
+
+  "submission.sections.toggle.open": "Open section",
+
+
+  "submission.sections.toggle.close": "Close section",
+
+
   "submission.sections.upload.delete.confirm.cancel": "Cancel",
 
 
@@ -7731,7 +8266,13 @@
   "submission.sections.upload.delete.submit": "Delete",
 
 
+  "submission.sections.upload.download.title": "Download bitstream",
+
+
   "submission.sections.upload.drop-message": "Drop files to attach them to the item",
+
+
+  "submission.sections.upload.edit.title": "Edit bitstream",
 
 
   "submission.sections.upload.form.access-condition-label": "Access condition type",
@@ -7887,7 +8428,73 @@
   "submission.workflow.tasks.pool.show-detail": "Show detail",
 
 
+  "subscriptions.title": "Subscriptions",
+
+
+  "subscriptions.item": "Subscriptions for items",
+
+
+  "subscriptions.collection": "Subscriptions for collections",
+
+
+  "subscriptions.community": "Subscriptions for communities",
+
+
+  "subscriptions.subscription_type": "Subscription type",
+
+
+  "subscriptions.frequency": "Subscription frequency",
+
+
+  "subscriptions.frequency.D": "Daily",
+
+
+  "subscriptions.frequency.M": "Monthly",
+
+
+  "subscriptions.frequency.W": "Weekly",
+
+
+  "subscriptions.table.dso": "Subject",
+
+
+  "subscriptions.table.subscription_type": "Subscription Type",
+
+
+  "subscriptions.table.subscription_frequency": "Subscription Frequency",
+
+
+  "subscriptions.table.action": "Action",
+
+
+  "subscriptions.table.empty.message": "You have not subscribed any notification yet. To subscribe notification about an object please use the contextual menu in the object detail view",
+
+
   "tasks.listelement.badge": "Task",
+
+
+  "thumbnail.default.alt": "Thumbnail Image",
+
+
+  "thumbnail.default.placeholder": "No Thumbnail Available",
+
+
+  "thumbnail.project.alt": "Project Logo",
+
+
+  "thumbnail.project.placeholder": "Project Placeholder Image",
+
+
+  "thumbnail.orgunit.alt": "OrgUnit Logo",
+
+
+  "thumbnail.orgunit.placeholder": "OrgUnit Placeholder Image",
+
+
+  "thumbnail.person.alt": "Profile Picture",
+
+
+  "thumbnail.person.placeholder": "No Profile Picture Available",
 
 
   "title": "DSpace Cris",
@@ -7987,6 +8594,9 @@
   "uploader.drag-message": "Drag & Drop your files here",
 
 
+  "uploader.delete.btn-title": "Delete",
+
+
   "uploader.or": ", or",
 
 
@@ -8062,19 +8672,43 @@
   "workflow-item.send-back.button.confirm": "Send back",
 
 
+  "workflow-item.view.breadcrumbs": "Workflow View",
+
+
+  "idle-modal.header": "Session will expire soon",
+
+
+  "idle-modal.info": "For security reasons, user sessions expire after {{ timeToExpire }} minutes of inactivity. Your session will expire soon. Would you like to extend it or log out?",
+
+
+  "idle-modal.log-out": "Log out",
+
+
+  "idle-modal.extend-session": "Extend session",
+
+
   "relation.rp.researchoutputs.search.results.head": "Related Publications",
 
 
   "relation.rp.projects.search.results.head": "Related Projects",
 
+
   "layout.i18n.link.default": "link",
 
   "orcid.badge.tooltip": "Connected to ORCID",
 
+  "invitation.group.msg": "You have been invited to join the following groups",
+
+  "invitation.accept-btn": "Accept",
+
+  "invitation.ignore-btn": "Ignore",
+
 
   "working-plan.breadcrumbs": "Working plan",
 
+
   "working-plan.chart.button.expandAll": "Expand all",
+
 
   "working-plan.chart.button.collapseAll": "Collapse all",
 
@@ -8085,20 +8719,26 @@
   "working-plan.chart.button.remove": "Unlink item",
 
 
-  "working-plan.chart.button.edit": "Edit",
+  "working-plan.chart.button.edit": "Edit item",
 
 
   "working-plan.chart.column.dates": "Dates",
 
+
   "working-plan.chart.column.dates.start": "Start date",
+
 
   "working-plan.chart.column.dates.end": "End date",
 
-  "working-plan.chart.column.changeStartDate.input.description": "Difference in days: ",
 
-  "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later: ",
+  "working-plan.chart.column.changeStartDate.input.description": "Difference in days:",
+
+
+  "working-plan.chart.column.changeStartDate.radio.description": "Earlier or later:",
+
 
   "working-plan.chart.column.changeStartDate.radio.earlier": "Earlier",
+
 
   "working-plan.chart.column.changeStartDate.radio.later": "Later",
 
@@ -8108,24 +8748,30 @@
 
   "working-plan.chart.column.changeStartDate.apply": "Apply",
 
-  "working-plan.chart.column.changeStartDate.saving": "saving...",
+
+  "working-plan.chart.column.changeStartDate.saving": "saving…",
+
 
   "working-plan.chart.column.changeStartDateClose": "Close",
+
 
   "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
 
 
-  "working-plan.chart.column.responsible": "Responsible project partner(s)",
+  "working-plan.chart.column.responsible": "Responsible project partner",
 
 
-  "working-plan.chart.column.sortBy": "Sort by...",
+  "working-plan.chart.column.sortBy": "Sort by…",
+
 
   "working-plan.chart.column.sortBy.option.workingplan.place": "Individual order",
 
 
   "working-plan.chart.column.sortBy.option.dc.title": "Title",
 
+
   "working-plan.chart.column.sortBy.option.dspace.entity.type": "Type",
+
 
   "working-plan.chart.column.sortBy.option.synsicris.type.status": "Status",
 
@@ -8135,49 +8781,72 @@
 
   "working-plan.chart.column.sortBy.option.dc.date.start": "Start date",
 
+
   "working-plan.chart.column.sortBy.option.dc.date.end": "End date",
+
 
   "working-plan.chart.column.status": "Status",
 
+
   "working-plan.chart.column.expand": "Expand column",
 
-  "working-plan.chart.column.collapse": "Collapse column",
+
+  "working-plan.chart.column.collapse": "Collpase column",
+
 
   "working-plan.chart.move.down.btn": "Move down",
 
+
   "working-plan.chart.move.error": "There was an issue when moving the item, please try again later.",
+
 
   "working-plan.chart.update.error": "There was an unexpected issue when fetching update, please reload the page to have consistent data.",
 
+
   "working-plan.chart.move.up.btn": "Move up",
 
-  "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class=\\\"fas fa-plus-circle\\\"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class=\"fas fa-plus-circle\"></i> button in the work package to assign new or existing work.</p></b></i>",
+
+  "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class=\"fas fa-plus-circle\"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class=\"fas fa-plus-circle\"></i> button in the work package to assign new or existing work.</p></b></i>\",",
+
 
   "working-plan.page.title": "Working plan",
 
+
   "working-plan.chart.toggle.collapse.btn": "Collapse",
+
 
   "working-plan.chart.toggle.expand.btn": "Expand",
 
+
+  "working-plan.chart.toolbar.add-btn": "Add item",
+
+
   "working-plan.chart.toolbar.date-view.month": "Month",
+
 
   "working-plan.chart.toolbar.date-view.quarter": "Quarter",
 
+
   "working-plan.chart.toolbar.date-view.quarter.first": "First",
+
 
   "working-plan.chart.toolbar.date-view.quarter.fourth": "Fourth",
 
+
   "working-plan.chart.toolbar.date-view.quarter.second": "Second",
+
 
   "working-plan.chart.toolbar.date-view.quarter.third": "Third",
 
+
   "working-plan.chart.toolbar.date-view.year": "Year",
+
 
   "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
 
+
   "working-plan.chart.toolbar.versions": "Versions",
 
-  "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
 
   "working-plan.task.search.header": "",
 
@@ -8191,13 +8860,10 @@
   "condition.listelement.badge": "External condition",
 
 
-  "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objective",
+  "contribution_fundingprogramme.listelement.badge": "Contribution to funding programme objectives",
 
 
   "cooperation_partner.listelement.badge": "Cooperation partners",
-
-
-  "event.listelement.badge": "Event",
 
 
   "ethic.listelement.badge": "Ethical reflection",
@@ -8215,7 +8881,7 @@
   "innovationidea.listelement.badge": "Idea for the use of project results",
 
 
-  "innovationpotential.listelement.badge": "Solution / change / innovation",
+  "innovationpotential.listelement.badge": "Possible solution / change / innovation",
 
 
   "milestone.listelement.badge": "Milestone",
@@ -8223,21 +8889,23 @@
 
   "other.listelement.badge": "Others",
 
+
   "parentproject.listelement.badge": "Joint Project",
+
 
   "pot_societalimpact.listelement.badge": "Expected societal impact",
 
 
-  "process_event.listelement.badge": "Process of cooperation, participation and working together",
+  "process_event.listelement.badge": "Cooperation / Participation / Exchange process",
 
 
-  "physical_object.listelement.badge": "Object / material for knowledge transfer and subsequent use in research and teaching",
+  "physical_object.listelement.badge": "Object / material",
 
 
   "Project.listelement.badge": "Subproject",
 
 
-  "proj_objective.listelement.badge": "Project objective",
+  "proj_objective.listelement.badge": "Research and development objective",
 
 
   "plan_publication.listelement.badge": "Planned publications",
@@ -8252,19 +8920,19 @@
   "spinoff.listelement.badge": "Spin-off (incl. association)",
 
 
-  "step.listelement.badge": "Next steps and cooperation",
+  "step.listelement.badge": "Work and cooperation after project end",
 
 
-  "subproject.listelement.badge": "Subprojects",
+  "subproject.listelement.badge": "Subproject",
 
 
-  "targetgroup.listelement.badge": "Target group",
+  "targetgroup.listelement.badge": "Stakeholder group",
 
 
   "task.listelement.badge": "Task",
 
 
-  "unexpected_result.listelement.badge": "(Intermediate) results / problems that cause change",
+  "unexpected_result.listelement.badge": "(Intermediate) result / problem",
 
 
   "workpackage.listelement.badge": "Work package",
@@ -8485,7 +9153,9 @@
 
   "subcontractor.listelement.badge": "Subcontractor",
 
+
   "Product.listelement.badge": "Research data",
+
 
   "Publication.listelement.badge": "Publication",
 
@@ -8508,10 +9178,10 @@
   "submission.sections.submit.progressbar.describe.fundingobjectives": "Funding objective",
 
 
-  "working-plan.chart.column.change.StartDate.input.description": "Difference in days:",
+  "working-plan.chart.column.change.StartDate.input.description": "Difference in days: ",
 
 
-  "working-plan.chart.column.change.StartDate.radio.description": "Earlier or later:",
+  "working-plan.chart.column.change.StartDate.radio.description": "Earlier or later: ",
 
 
   "working-plan.chart.column.change.StartDate.radio.earlier": "Earlier",
@@ -8580,6 +9250,528 @@
   "call.listelement.badge": "Call",
 
 
-  "fundingobjective.listelement.badge": "Funding objective"
+  "fundingobjective.listelement.badge": "Funding objective",
+
+
+  "impact-pathway.task.create.head": "New item",
+
+
+  "help-page.header.project": "Project",
+
+
+  "help-page.content.project": "<a href=\"http://synsicris.disy.net/project/project.html\">Project</a>",
+
+
+  "exploitationplanstep.listelement.badge": "Exploitation Plan step",
+
+
+  "simple-item-modal.create.btn": "Create new",
+
+
+  "simple-item-modal.search,btn": "Select existing",
+
+
+  "search.filters.entityType.award": "Award",
+
+
+  "search.filters.entityType.application": "Application of a solution / change / innovation",
+
+
+  "search.filters.entityType.cooperationpartner": "Cooperation partner",
+
+
+  "search.filters.entityType.ethic": "Ethical reflection",
+
+
+  "search.filters.entityType.condition": "External condition",
+
+
+  "search.filters.entityType.innovationidea": "Idea for the use of project results",
+
+
+  "search.filters.entityType.milestone": "Milestone",
+
+
+  "search.filters.entityType.step": "Work and cooperation after project end",
+
+
+  "search.filters.entityType.physical_object": "Object /material",
+
+
+  "search.filters.entityType.other": "Others",
+
+
+  "search.filters.entityType.plan_publication": "Planned publications",
+
+
+  "search.filters.entityType.process_event": "Cooperation / Participation / Exchange process",
+
+
+  "search.filters.entityType.proj_objective": "Research and development objective",
+
+
+  "search.filters.entityType.parentproject": "Joint project",
+
+
+  "search.filters.entityType.research_result": "Research result",
+
+
+  "search.filters.entityType.innovationpotential": "Possible solution / change / innovation",
+
+
+  "search.filters.entityType.spinoff": "Spin-off (incl. association)",
+
+
+  "search.filters.entityType.targetgroup": "Stakeholder group",
+
+
+  "search.filters.entityType.task": "Task",
+
+
+  "search.filters.entityType.unexpected_result": "(Intermediate) result / problem",
+
+
+  "search.filters.entityType.workpackage": "Work package",
+
+
+  "search.filters.entityType.projectpartner": "Project partner",
+
+
+  "search.filters.entityType.programme": "Progamme",
+
+
+  "search.filters.entityType.subcontractor": "Subcontractor",
+
+
+  "search.filters.entityType.Product": "Reserach data",
+
+
+  "search.filters.entityType.funding": "Funding",
+
+
+  "search.filters.entityType.call": "Call",
+
+
+  "search.filters.entityType.fundingobjective": "Funding objective",
+
+
+  "search.filters.entityType.team": "Team member",
+
+
+  "search.filters.entityType.head": "Item Type",
+
+
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentproject": "Keywords",
+
+
+  "working-plan.chart.toolbar.workpackage-btn": "Workpackage",
+
+
+  "researcher.profile.edit": "Edit",
+
+
+  "profile.card.security.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
+
+
+  "layout.tab.header.subproject": "Subproject",
+
+
+  "layout.tab.header.Funding": "Fundings",
+
+
+  "layout.tab.header.projectpartner": "Project partners",
+
+
+  "layout.box.header.multiple_entities": "Involved",
+
+
+  "layout.tab.header.subcontractor": "Subcontractors",
+
+
+  "layout.tab.header.exploitationplans": "Exploitation plan",
+
+
+  "layout.tab.header.default": "Joint project",
+
+
+  "layout.tab.header.Subprojects&Involved": "Subprojects & Involved",
+
+
+  "layout.tab.header.proj&partners": "Subprojects & Involved",
+
+
+  "layout.tab.header.subcontractors": "Subcontractors",
+
+
+  "layout.tab.header.cooperationpartners": "Cooperation partners",
+
+
+  "layout.tab.header.stakeholder": "Stakeholder groups",
+
+
+  "layout.tab.header.Structure": "Structure",
+
+
+  "layout.tab.header.impactpathway": "Impact Pathway",
+
+
+  "layout.tab.header.workingplan": "Workingplan",
+
+
+  "layout.tab.header.Reflections": "Reflection",
+
+
+  "layout.tab.header.ethic": "Ethical reflection",
+
+
+  "layout.tab.header.gender": "Gender reflection",
+
+
+  "layout.tab.header.Background": "Background",
+
+
+  "layout.tab.header.condition": "External conditions",
+
+
+  "layout.tab.header.knowledge": "State of knowledge / problem definition",
+
+
+  "layout.tab.header.Projectobjectives": "Project objectives",
+
+
+  "layout.tab.header.research_objective": "Research and development objectives",
+
+
+  "layout.tab.header.ia_objective": "Targets for interaction and transfer",
+
+
+  "layout.tab.header.Projectworks": "Project works",
+
+
+  "layout.tab.header.workpackage": "Work packages",
+
+
+  "layout.tab.header.task": "Tasks",
+
+
+  "layout.tab.header.process_event": "Cooperation / Participation / Exchange processes",
+
+
+  "layout.tab.header.events": "Events",
+
+
+  "layout.tab.header.plan_publication": "Planned publications",
+
+
+  "layout.tab.header.Projectresults": "Project results",
+
+
+  "layout.tab.header.publication": "Publications",
+
+
+  "layout.tab.header.physical_object": "Objects / materials",
+
+
+  "layout.tab.header.product": "Research data",
+
+
+  "layout.tab.header.result": "Research results",
+
+
+  "layout.tab.header.unexpected_result": "(Intermediate) results / problems",
+
+
+  "layout.tab.header.outcomes": "Outcomes",
+
+
+  "layout.tab.header.patent": "Patents / utility patents",
+
+
+  "layout.tab.header.innovation_potential": "Possible solutions / changes / innovations",
+
+
+  "layout.tab.header.idea": "Ideas for the use of project results",
+
+
+  "layout.tab.header.step": "Works and cooperations after project end",
+
+
+  "layout.tab.header.application": "Application of a solution / change / innovation",
+
+
+  "layout.tab.header.spinoff": "Spin-offs",
+
+
+  "layout.tab.header.award": "Awards",
+
+
+  "layout.tab.header.pot_societalimpact": "Expected societal impacts",
+
+
+  "layout.tab.header.contribution_fundingprogramme": "Contributions to funding objectives",
+
+
+  "layout.tab.header.other": "Others",
+
+
+  "item-create.modal-launscher.btn": "Add item",
+
+
+  "layout.box.header.latestParentProjectsPreparation": "Joint projects - in application",
+
+
+  "layout.box.header.latestParentProjectsImplementation": "Joint projects - ongoing",
+
+
+  "layout.box.header.latestParentProjectsCompleted": "Joint projects - finished",
+
+
+  "layout.box.header.basics": "Primary data - Subproject",
+
+
+  "layout.box.header.details": "Details",
+
+
+  "layout.box.header.Funding": "Funding",
+
+
+  "layout.box.header.projectpartner": "Project partners",
+
+
+  "layout.box.header.subcontractor": "Subcontractors",
+
+
+  "layout.box.header.exploitationplan": "Exploitation plan",
+
+
+  "layout.box.header.Person_m": "Person",
+
+
+  "layout.box.header.jpbasics": "Primary data - Joint project",
+
+
+  "layout.box.header.jpdetails": "Details",
+
+
+  "layout.box.header.Project": "Subprojects",
+
+
+  "layout.box.header.cooperationpartner": "Cooperation partners",
+
+
+  "layout.box.header.targetgroup": "Stakeholder groups",
+
+
+  "layout.box.header.Funding_m": "Funding",
+
+
+  "layout.box.header.projectpartner_m": "Project partner",
+
+
+  "layout.box.header.Projektleitung_m": "Project management",
+
+
+  "layout.box.header.Projektkoordination_m": "Project coordination",
+
+
+  "layout.box.header.subcontractor_m": "Subcontractor",
+
+
+  "layout.box.header.cooperationpartner_m": "Coorperation partner",
+
+
+  "layout.box.header.targetgroup_m": "Stakeholder group",
+
+
+  "layout.box.header.impactpathway": "Impact Pathway",
+
+
+  "layout.box.header.workingplan": "Working plan",
+
+
+  "layout.box.header.ethic": "Ethical reflection",
+
+
+  "layout.box.header.gender": "Gender reflection",
+
+
+  "layout.box.header.condition": "External conditions",
+
+
+  "layout.box.header.stateofart": "State of knowledge / problem definition",
+
+
+  "layout.box.header.ethic_m": "Ethical reflection",
+
+
+  "layout.box.header.gender_m": "Gender reflection",
+
+
+  "layout.box.header.condition_m": "External condition",
+
+
+  "layout.box.header.stateofart_m": "State of knowledge / problem definition",
+
+
+  "layout.box.header.proj_objective": "Research and development objectives",
+
+
+  "layout.box.header.ia_objective": "Targets for interaction and transfer",
+
+
+  "layout.box.header.workpackage": "Work packages",
+
+
+  "layout.box.header.task": "Tasks",
+
+
+  "layout.box.header.process_event": "Cooperation / Participation / Exchange processes",
+
+
+  "layout.box.header.Event": "Events",
+
+
+  "layout.box.header.plan_publication": "Planned publications",
+
+
+  "layout.box.header.proj_objective_m": "Research and development objective",
+
+
+  "layout.box.header.ia_objective_m": "Target for interaction and transfer",
+
+
+  "layout.box.header.workpackage_m": "Work package",
+
+
+  "layout.box.header.task_m": "Task",
+
+
+  "layout.box.header.process_event_m": "Cooperation / Participation / Exchange process",
+
+
+  "layout.box.header.event_m": "Event",
+
+
+  "layout.box.header.plan_publication_m": "Planned publications",
+
+
+  "layout.box.header.Publication": "Publications",
+
+
+  "layout.box.header.physical_object": "Objects / materials",
+
+
+  "layout.box.header.Product": "Research data",
+
+
+  "layout.box.header.research_result": "Research results",
+
+
+  "layout.box.header.unexpected_result": "(Intermediate) results / problems",
+
+
+  "layout.box.header.Publication_m": "Publication",
+
+
+  "layout.box.header.physical_object_m": "Object / material",
+
+
+  "layout.box.header.Product_m": "Research data",
+
+
+  "layout.box.header.research_result_m": "Research result",
+
+
+  "layout.box.header.unexpected_result_m": "(Intermediate) result / problem",
+
+
+  "layout.box.header.Patent": "Patents / utility patents",
+
+
+  "layout.box.header.innovationpotential": "Possible solutions / changes / innovations",
+
+
+  "layout.box.header.innovationidea": "Ideas for the use of project results",
+
+
+  "layout.box.header.step": "Works and cooperations after project end",
+
+
+  "layout.box.header.application": "Application of a solution / change / innovation",
+
+
+  "layout.box.header.spinoff": "Spin-offs",
+
+
+  "layout.box.header.award": "Awards",
+
+
+  "layout.box.header.pot_societalimpact": "Expected societal impacts",
+
+
+  "layout.box.header.contribution_fundingprogramme": "Contributions to funding objectives",
+
+
+  "layout.box.header.other": "Others",
+
+
+  "layout.box.header.Patent_m": "Patent / utility patent",
+
+
+  "layout.box.header.innovationpotential_m": "Possible solution / change / innovation",
+
+
+  "layout.box.header.innovationidea_m": "Idea for the use of project results",
+
+
+  "layout.box.header.step_m": "Works and cooperation after project end",
+
+
+  "layout.box.header.application_m": "Application of a solution / change / innovation",
+
+
+  "layout.box.header.spinoff_m": "Spin-off",
+
+
+  "layout.box.header.award_m": "Award",
+
+
+  "layout.box.header.pot_societalimpact_m": "Expected societal impact",
+
+
+  "layout.box.header.contribution_fundingprogramme_m": "Contribution to funding objectives",
+
+
+  "layout.box.header.other_m": "Other",
+
+
+  "ia_objective.listelement.badge": "Target for interaction and transfer",
+
+
+  "submission.sections.submit.progressbar.describe.ia_objectives": "Target for interaction and transfer",
+
+
+  "submission.sections.submit.progressbar.describe.exp_societalimpact": "Expected societal impact (new)",
+
+
+  "exp_societalimpact.listelement.badge": "Expected societal impact (new)",
+
+
+  "submission.sections.upload.infosubmission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <b>upload additional files just dragging & dropping them everywhere in the page.</b>",
+
+
+  "search.filters.entityType.exp_societalimpact": "Expected societal impact (new)",
+
+
+  "search.filters.entityType.ia_objective": "Target for interaction and transfer",
+
+
+  "layout.tab.header.exp_societalimpact": "Expected societal impacts (new)",
+
+
+  "layout.box.header.exp_societalimpact": "Expected societal impacts (new)",
+
+
+  "layout.box.header.exp_societalimpact_m": "Expected societal impact (new)"
 
 }

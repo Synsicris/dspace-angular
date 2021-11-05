@@ -1,20 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
-import {
-  catchError,
-  concatMap,
-  delay,
-  filter,
-  first,
-  map,
-  mapTo,
-  mergeMap,
-  reduce,
-  scan,
-  take,
-  tap
-} from 'rxjs/operators';
+import { catchError, concatMap, delay, filter, map, mapTo, mergeMap, reduce, scan, take, tap } from 'rxjs/operators';
 import { extendMoment } from 'moment-range';
 import * as Moment from 'moment';
 
@@ -46,6 +33,7 @@ import { SubmissionObject } from '../../core/submission/models/submission-object
 import { JsonPatchOperationPathCombiner } from '../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../../core/json-patch/builder/json-patch-operations-builder';
 import {
+  getAllSucceededRemoteData,
   getFinishedRemoteData,
   getFirstSucceededRemoteDataPayload,
   getRemoteDataPayload
@@ -203,6 +191,10 @@ export class WorkingPlanService {
     return this.workingPlanStateService.getLastAddedNodesList();
   }
 
+  invalidateSearchCache(searchConfiguration: string) {
+    this.requestService.setStaleByHrefSubstring(searchConfiguration);
+  }
+
   searchForLinkedWorkingPlanObjects(projectId: string, sortOption: string = environment.workingPlan.workingPlanPlaceMetadata): Observable<WorkpackageSearchItem[]> {
     const searchConfiguration = environment.workingPlan.allLinkedWorkingPlanObjSearchConfigName;
     const paginationOptions: PaginationComponentOptions = new PaginationComponentOptions();
@@ -217,8 +209,8 @@ export class WorkingPlanService {
       scope: projectId
     });
 
-    return this.searchService.search(searchOptions, 0, false).pipe(
-      filter((rd: RemoteData<PaginatedList<SearchResult<any>>>) => rd.hasSucceeded),
+    return this.searchService.search(searchOptions, null, false).pipe(
+      getAllSucceededRemoteData(),
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
           .filter((result) => hasValue(result))
@@ -243,7 +235,7 @@ export class WorkingPlanService {
         return Object.assign(rd, { payload: payload });
       }),
       mergeMap((rd: RemoteData<PaginatedList<Observable<WorkpackageSearchItem>>>) => {
-        this.requestService.setStaleByHrefSubstring(rd.payload._links.self.href);
+        this.invalidateSearchCache(searchConfiguration);
         if (rd.payload.page.length === 0) {
           return observableOf([]);
         } else {
@@ -254,7 +246,8 @@ export class WorkingPlanService {
           );
         }
       }),
-      first((result: WorkpackageSearchItem[]) => isNotUndefined(result))
+      filter((result: WorkpackageSearchItem[]) => isNotUndefined(result)),
+      take(1)
     );
   }
 
@@ -362,40 +355,30 @@ export class WorkingPlanService {
     let end;
     let endMonth;
     let endyear;
+    const dates: any = {};
     const startDate = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateStartMetadata);
-    if (isEmpty(startDate)) {
-      start = moment().format('YYYY-MM-DD');
-      startMonth = moment().format('YYYY-MM');
-      startYear = moment().format('YYYY');
-    } else {
+    if (isNotEmpty(startDate)) {
       start = moment(startDate).format('YYYY-MM-DD');
       startMonth = moment(startDate).format('YYYY-MM');
       startYear = moment(startDate).format('YYYY');
-    }
-
-    const endDate = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateEndMetadata);
-    if (isEmpty(endDate)) {
-      end = moment().add(7, 'days').format('YYYY-MM-DD');
-      endMonth = moment().add(7, 'days').format('YYYY-MM');
-      endyear = moment().add(7, 'days').format('YYYY');
-    } else {
-      end = moment(endDate).format('YYYY-MM-DD');
-      endMonth = moment(endDate).format('YYYY-MM');
-      endyear = moment(endDate).format('YYYY');
-    }
-
-    const dates = {
-      start: {
+      dates.start = {
         full: start,
         month: startMonth,
         year: startYear
-      },
-      end: {
+      };
+    }
+
+    const endDate = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateEndMetadata);
+    if (isNotEmpty(endDate)) {
+      end = moment(endDate).format('YYYY-MM-DD');
+      endMonth = moment(endDate).format('YYYY-MM');
+      endyear = moment(endDate).format('YYYY');
+      dates.end = {
         full: end,
         month: endMonth,
         year: endyear
-      },
-    };
+      };
+    }
 
     return dates;
   }
@@ -539,19 +522,20 @@ export class WorkingPlanService {
     workpackageId: string,
     workpackage: Workpackage,
     metadataList: string[],
-    valueList: any[],
-    hasAuthority = false
+    valueList: any[]
   ) {
     const metadatumViewList = [];
     metadataList.forEach((metadata, index) => {
-      const value = valueList[index];
+      const entry = valueList[index];
+      const hasAuthority = isNotEmpty(entry?.authority);
+      const value = (isNgbDateStruct(entry)) ? dateToISOFormat(entry) : (hasAuthority ? entry.value : entry);
       metadatumViewList.push(
         {
           key: metadata,
           language: '',
-          value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
+          value: value,
           place: 0,
-          authority: hasAuthority ? value : '',
+          authority: hasAuthority ? entry.authority : '',
           confidence: hasAuthority ? 600 : -1
         } as MetadatumViewModel
       );
@@ -610,19 +594,20 @@ export class WorkingPlanService {
     workpackageStepId: string,
     workpackageStep: WorkpackageStep,
     metadataList: string[],
-    valueList: any[],
-    hasAuthority = false
+    valueList: any[]
   ) {
     const metadatumViewList = [];
     metadataList.forEach((metadata, index) => {
-      const value = valueList[index];
+      const entry = valueList[index];
+      const hasAuthority = isNotEmpty(entry?.authority);
+      const value = (isNgbDateStruct(entry)) ? dateToISOFormat(entry) : (hasAuthority ? entry.value : entry);
       metadatumViewList.push(
         {
           key: metadata,
           language: '',
-          value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
+          value: value,
           place: 0,
-          authority: hasAuthority ? value : '',
+          authority: hasAuthority ? entry.authority : '',
           confidence: hasAuthority ? 600 : -1
         } as MetadatumViewModel
       );

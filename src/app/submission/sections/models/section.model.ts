@@ -6,6 +6,7 @@ import { filter, startWith } from 'rxjs/operators';
 import { SectionDataObject } from './section-data.model';
 import { SectionsService } from '../sections.service';
 import { hasValue, isNotUndefined } from '../../../shared/empty.util';
+import { SubmissionUploadFilesComponent } from '../../form/submission-upload-files/submission-upload-files.component';
 
 export interface SectionDataModel {
   sectionData: SectionDataObject;
@@ -40,6 +41,12 @@ export abstract class SectionModelComponent implements OnDestroy, OnInit, Sectio
   submissionId: string;
 
   /**
+   * The submission uploader
+   * @type {SubmissionUploadFilesComponent}
+   */
+  submissionUploaderRef: Observable<SubmissionUploadFilesComponent>;
+
+  /**
    * A boolean representing if this section is valid
    * @type {boolean}
    */
@@ -57,13 +64,16 @@ export abstract class SectionModelComponent implements OnDestroy, OnInit, Sectio
    * @param {string} injectedCollectionId
    * @param {SectionDataObject} injectedSectionData
    * @param {string} injectedSubmissionId
+   * @param {SubmissionUploadFilesComponent} injectedSubmissionUploaderRef
    */
   public constructor(@Inject('collectionIdProvider') public injectedCollectionId: string,
                      @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
-                     @Inject('submissionIdProvider') public injectedSubmissionId: string) {
+                     @Inject('submissionIdProvider') public injectedSubmissionId: string,
+                     @Inject('submissionUploaderRefProvider') public injectedSubmissionUploaderRef: Observable<SubmissionUploadFilesComponent>) {
     this.collectionId = injectedCollectionId;
     this.sectionData = injectedSectionData;
     this.submissionId = injectedSubmissionId;
+    this.submissionUploaderRef = injectedSubmissionUploaderRef;
   }
 
   /**

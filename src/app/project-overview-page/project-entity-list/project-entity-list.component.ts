@@ -6,7 +6,7 @@ import { take } from 'rxjs/operators';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
 import { fadeInOut } from '../../shared/animations/fade';
-import { MYDSPACE_ROUTE } from '../../+my-dspace-page/my-dspace-page.component';
+import { MYDSPACE_ROUTE } from '../../my-dspace-page/my-dspace-page.component';
 
 @Component({
   selector: 'ds-project-entity-list',

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -13,7 +14,7 @@ import { ClaimItemSelectorComponent } from '../../shared/dso-selector/modal-wrap
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { EPerson } from '../../core/eperson/models/eperson.model';
-import { ResearcherProfile } from '../../core/profile/model/researcher-profile.model';
+import { ResearcherProfile, ResearcherProfileVisibilityValue } from '../../core/profile/model/researcher-profile.model';
 import { ResearcherProfileService } from '../../core/profile/researcher-profile.service';
 import { ProfileClaimService } from '../profile-claim/profile-claim.service';
 import { EditItemMode } from '../../core/submission/models/edititem-mode.model';
@@ -34,8 +35,7 @@ export class ProfilePageResearcherFormComponent implements OnInit {
   /**
    * The user to display the form for.
    */
-  @Input()
-  user: EPerson;
+  @Input() user: EPerson;
 
   /**
    * The researcher profile to show.
@@ -147,10 +147,11 @@ export class ProfilePageResearcherFormComponent implements OnInit {
   /**
    * Toggle the visibility of the given researcher profile.
    *
-   * @param researcherProfile the profile to update
+   * @param researcherProfile The profile to update
+   * @param visibility        The new visibility value
    */
-  toggleProfileVisibility(researcherProfile: ResearcherProfile): void {
-    this.researcherProfileService.setVisibility(researcherProfile, !researcherProfile.visible)
+  toggleProfileVisibility(researcherProfile: ResearcherProfile, visibility: ResearcherProfileVisibilityValue): void {
+    this.researcherProfileService.setVisibility(researcherProfile, visibility)
       .subscribe((updatedProfile) => this.researcherProfile$.next(updatedProfile));
   }
 

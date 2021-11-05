@@ -1,6 +1,6 @@
 <div class="border-bottom mb-4 pb-2 d-flex justify-content-between align-items-center">
   <ds-comcol-page-header
-    [name]="'impact-pathway.heading' | translate">
+    [name]="impactPathway.title">
   </ds-comcol-page-header>
   <div class="pl-2">
     <button *ngIf="(canDeleteImpactPathway$ | async)" class="btn btn-danger"
@@ -14,6 +14,17 @@
         <i class="fas fa-circle-notch fa-spin"> {{'impact-pathway.remove.processing' | translate}}</i>
       </span>
     </button>
+    <button class="btn btn-primary"
+            [disabled]="(isProcessingRemove() | async)"
+            title="{{'impact-pathway.edit.title' | translate}}"
+            (click)="$event.preventDefault(); openEditModal(); $event.stopPropagation()">
+      <span *ngIf="!(isProcessingRemove() | async)">
+        <i class="far fa-edit"></i> {{'impact-pathway.edit.title' | translate}}
+      </span>
+      <span *ngIf="(isProcessingRemove() | async)">
+        <i class="fas fa-circle-notch fa-spin"> {{'impact-pathway.remove.processing' | translate}}</i>
+      </span>
+    </button>
   </div>
 </div>
 
@@ -22,10 +33,7 @@
             [type]="'alert-info'"
             [collapsible]="true"
             [content]="'impact-pathway.wrapper.info'"></ds-alert>
-  <ds-view-simple-item-form [formConfig]="formConfig$"
-                            [itemId]="impactPathway.id"
-                            (itemUpdate)="updateImpactPathway($event)"></ds-view-simple-item-form>
-  <div class="d-flex align-items-stretch p-0 m-0 vertical-content border">
+  <div class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
     <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps"
                               ipwStepColor
                               class="vertical-step"
@@ -35,6 +43,13 @@
                               [stepType]="step.type"
                               [allImpactPathwayStepIds]="getImpactPathwayStepIds()"></ipw-impact-path-way-step>
   </div>
+  <ipw-editable-textarea *ngIf="impactPathway"
+                         [formConfig]="formConfig$"
+                         [itemId]="impactPathway.id"
+                         [editTitle]="'impact-pathway.edit.title' | translate"
+                         [fieldTitle]="'impact-pathway.description' | translate"
+                         [content]="impactPathway.description"
+                         (contentChange)="updateImpactPathway($event)"></ipw-editable-textarea>
 </div>
 
 <div *ngIf="(loaded | async)">

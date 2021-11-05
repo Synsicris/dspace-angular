@@ -8,7 +8,7 @@ import { groupRegistryReducer, GroupRegistryState } from './access-control/group
 import {
   metadataRegistryReducer,
   MetadataRegistryState
-} from './+admin/admin-registries/metadata-registry/metadata-registry.reducers';
+} from './admin/admin-registries/metadata-registry/metadata-registry.reducers';
 import { CommunityListReducer, CommunityListState } from './community-list-page/community-list.reducer';
 import { hasValue } from './shared/empty.util';
 import {

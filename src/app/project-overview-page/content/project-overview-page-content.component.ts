@@ -15,14 +15,14 @@ import { Community } from '../../core/shared/community.model';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import { ImpactPathwayService } from '../../impact-pathway-board/core/impact-pathway.service';
 import { PageInfo } from '../../core/shared/page-info.model';
-import { MYDSPACE_PAGE, MYDSPACE_ROUTE } from '../../+my-dspace-page/my-dspace-page.component';
+import { MYDSPACE_PAGE, MYDSPACE_ROUTE } from '../../my-dspace-page/my-dspace-page.component';
 import { PROJECT_PAGE, PROJECT_ROUTE } from '../project-overview-page.component';
 import { AuthService } from '../../core/auth/auth.service';
 import { ProjectAuthorizationService } from '../../core/project/project-authorization.service';
 import { ProjectDataService } from '../../core/project/project-data.service';
 import { CreateProjectComponent } from '../../projects/create-project/create-project.component';
 import { CreateImpactPathwayComponent } from '../../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
-import { getItemPageRoute } from '../../+item-page/item-page-routing-paths';
+import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 
 @Component({
   selector: 'ds-project-overview-page-content',
@@ -229,7 +229,7 @@ export class ProjectOverviewPageContentComponent implements OnInit {
    * @param projectCommunityId
    */
   getProjectItemPath(projectCommunityId: string): Observable<string> {
-    return this.projectService.getProjectItemByRelation(projectCommunityId).pipe(
+    return this.projectService.getProjectItemByProjectCommunityId(projectCommunityId).pipe(
       getFirstSucceededRemoteDataPayload(),
       map((item: Item) => getItemPageRoute(item))
     );

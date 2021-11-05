@@ -6,5 +6,8 @@
   </div>
   <ds-alert [type]="'alert-info'" [content]="'working-plan.chart.page.description'" [collapsible]="true" [collapsed]="true"></ds-alert>
   <ipw-working-plan-chart-toolbar [projectId]="projectId" [workpackages]="workpackages"></ipw-working-plan-chart-toolbar>
-  <ipw-working-plan-chart-container [projectId]="projectId" [workpackages]="workpackages"></ipw-working-plan-chart-container>
+  <ipw-working-plan-chart-container [projectId]="projectId"
+                                    [milestoneCollectionId]="milestoneCollectionId"
+                                    [workPackageCollectionId]="workPackageCollectionId"
+                                    [workpackages]="workpackages"></ipw-working-plan-chart-container>
 </div>

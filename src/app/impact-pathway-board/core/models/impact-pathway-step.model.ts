@@ -17,6 +17,10 @@ export class ImpactPathwayStep {
     return this.type === 'step_type_2' || this.type === 'step_type_3';
   }
 
+  hasScope() {
+    return this.type === 'step_type_6';
+  }
+
   hasTask(taskId: string) {
     return (findIndex(this.tasks, { id: taskId }) !== -1);
   }
@@ -51,8 +55,6 @@ export class ImpactPathwayStep {
   }
 
   getTasksIds(): string[] {
-    const tasksIds: string[] = this.tasks.map((task) => task.id);
-
-    return tasksIds;
+    return this.tasks.map((task) => task.id);
   }
 }

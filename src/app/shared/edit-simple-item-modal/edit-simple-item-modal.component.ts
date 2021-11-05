@@ -123,7 +123,6 @@ export class EditSimpleItemModalComponent implements OnInit {
     );
     observableCombineLatest([item$, this.formConfig])
       .subscribe(([item, formConfig]: [Item, SubmissionFormsModel]) => {
-        console.log(item, formConfig);
         this.formModel = this.formBuilderService.modelFromConfiguration(
           null,
           formConfig,

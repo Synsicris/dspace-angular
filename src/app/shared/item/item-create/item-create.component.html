@@ -1,0 +1,7 @@
+<ng-container *ngIf="(canShow$ | async) as authenticated">
+  <button class="btn btn-link pr-0 open-modal"
+          title="{{'item-create.modal-launcher.btn' | translate}}"
+          (click)="openDialog(); $event.stopPropagation()">
+    <i class="fas fa-plus-circle fa-2x"></i>
+  </button>
+</ng-container>

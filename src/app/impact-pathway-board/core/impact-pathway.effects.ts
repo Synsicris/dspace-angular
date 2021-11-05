@@ -440,7 +440,7 @@ export class ImpactPathwayEffects {
       ).pipe(
         map(() => new MoveImpactPathwaySubTaskSuccessAction()),
         catchError((error: Error) => {
-          console.error(error.message);
+          console.error(error);
           return observableOf(new MoveImpactPathwaySubTaskErrorAction(
             action.payload.impactPathwayId,
             action.payload.stepId,

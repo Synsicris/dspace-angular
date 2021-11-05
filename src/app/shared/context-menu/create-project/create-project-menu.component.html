@@ -1,0 +1,4 @@
+<button *ngIf="canShow() && (canCreateProject() | async)" class="dropdown-item"
+        (click)="$event.preventDefault();openCreateProjectModal();" [innerHTML]="'coordinator.page.new-project'  | translate">
+</button>
+

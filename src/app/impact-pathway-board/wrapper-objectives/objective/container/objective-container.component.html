@@ -6,14 +6,14 @@
        class="d-flex p-2 h-100 flex-wrap task-list-horizontal overlay-hide row"
        [class.overlay-hide]="(isProcessing() | async)"
        cdkDropList
-       cdkDropListOrientation="'horizontal'"
+       cdkDropListOrientation="horizontal"
        [cdkDropListData]="impactPathwayTask"
        [cdkDropListConnectedTo]="connectedToList"
        (cdkDropListEntered)="listEnteredToTask($event)"
        (cdkDropListExited)="listExited($event)"
        (cdkDropListDropped)="listDropped($event)">
     <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
-                              class="mb-sm-1 mb-lg-4 mb-5 mr-2 task-horizontal flex-grow-1 col-2 draggable-task"
+                              class="mb-sm-1 mb-lg-4 mb-5 mr-sm-1 ml-lg-2 mr-lg-2 task-horizontal draggable-task"
                               [projectId]="projectId"
                               [impactPathwayId]="impactPathwayStep.parentId"
                               [impactPathwayStepId]="impactPathwayStep.id"
@@ -22,11 +22,12 @@
                               [cdkDragData]="task"
                               [taskPosition]="i"
                               [isObjectivePage]="true"
+                              (cdkDragStarted)="dragStarted($event)"
                               (cdkDragDropped)="drop($event)"
-                              (cdkDragEntered)="dragEnteredToTask($event)"
+                              (cdkDragEntered)="dragEnteredToStep($event)"
                               (cdkDragExited)="dragExited($event)">
       <div *cdkDragPlaceholder
-           class="task-placeholder d-flex justify-content-center align-items-center mr-sm-1 mr-lg-4"
+           class="task-placeholder task-horizontal draggable-task d-flex justify-content-center align-items-center mr-sm-1 mr-lg-4"
            [ngClass]="{
                 'task-preview-allowed': (isDragging | async) && (isDropAllowed | async),
                 'task-preview-denied': (isDragging | async) && !(isDropAllowed | async)
@@ -34,6 +35,7 @@
         <i *ngIf="(isDragging | async) && (isDropAllowed | async)" class="fas fa-check fa-5x"></i>
         <i *ngIf="(isDragging | async) && !(isDropAllowed | async)" class="fas fa-exclamation fa-5x"></i>
       </div>
+        
     </ipw-impact-path-way-task>
   </div>
   <div class="d-flex justify-content-end"

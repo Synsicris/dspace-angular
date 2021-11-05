@@ -6,7 +6,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
 import { ResizeEvent } from 'angular-resizable-element';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { findIndex } from 'lodash';
 
@@ -25,7 +25,7 @@ import {
 import { moment, WorkingPlanService, WpMetadata, WpStepMetadata } from '../../core/working-plan.service';
 import { WorkingPlanStateService } from '../../core/working-plan-state.service';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
-import { hasValue, isNotEmpty, isNotNull } from '../../../shared/empty.util';
+import { hasValue, isEmpty, isNotEmpty, isNotNull } from '../../../shared/empty.util';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { ChartDateViewType } from '../../core/working-plan.reducer';
 import { environment } from '../../../../environments/environment';
@@ -36,7 +36,7 @@ import { EditItemDataService } from '../../../core/submission/edititem-data.serv
 import { EditItem } from '../../../core/submission/models/edititem.model';
 import { SearchConfig } from 'src/app/core/shared/search/search-filters/search-config.model';
 import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
-
+import { NgbDateStructToString, stringToNgbDateStruct } from '../../../shared/date.util';
 
 export const MY_FORMATS = {
   parse: {
@@ -83,6 +83,29 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   @Input() public workpackages: Observable<Workpackage[]>;
 
+  /**
+   * The collection id for workpackage entity in the given project
+   */
+  @Input() public workPackageCollectionId: string;
+
+  /**
+   * The collection id for milestone entity in the given project
+   */
+  @Input() public milestoneCollectionId: string;
+
+  private defaultDates: any = {
+    start: {
+      full: moment().format('YYYY-MM-DD'),
+      month: moment().format('YYYY-MM'),
+      year: moment().format('YYYY')
+    },
+    end: {
+      full: moment().add(7, 'days').format('YYYY-MM-DD'),
+      month: moment().add(7, 'days').format('YYYY-MM'),
+      year: moment().add(7, 'days').format('YYYY')
+    },
+  };
+
   dateFormat = 'YYYY-MM-DD';
   dateMonthFormat = 'YYYY-MM';
   dateYearFormat = 'YYYY';
@@ -95,7 +118,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   today = moment().format(this.dateFormat);
   chartDateView: BehaviorSubject<ChartDateViewType> = new BehaviorSubject<ChartDateViewType>(null);
   ChartDateViewType = ChartDateViewType;
-  responsibleVocabularyOptions: VocabularyOptions;
+  workpackageVocabularyOptions: VocabularyOptions;
+  milestoneVocabularyOptions: VocabularyOptions;
   /**
    * The number of days of the ChangeAllStartDate dropdown.
    */
@@ -111,7 +135,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   nestedNodeMap: Map<string, WorkpackageTreeObject> = new Map<string, WorkpackageTreeObject>();
 
   treeControl: FlatTreeControl<WorkpacakgeFlatNode>;
-  // TODO HERE
   treeFlattener: MatTreeFlattener<WorkpackageTreeObject, WorkpacakgeFlatNode>;
   dataSource: MatTreeFlatDataSource<WorkpackageTreeObject, WorkpacakgeFlatNode>;
 
@@ -140,11 +163,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   chartData;
 
+  sidebarNamesMinWidth = 350;
   sidebarNamesStyle = {
-    'min-width': 25 + 'rem'
+    'min-width': this.sidebarNamesMinWidth + 'px'
   };
+
+  sidebarResponsibleMinWidth = 450;
   sidebarResponsibleStyle = {
-    'min-width': 30 + 'rem'
+    'min-width': this.sidebarResponsibleMinWidth + 'px'
   };
   sidebarResponsibleStatus = true;
 
@@ -183,15 +209,21 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       this._isExpandable, this._getChildren);
     this.treeControl = new FlatTreeControl<WorkpacakgeFlatNode>(this._getLevel, this._isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.responsibleVocabularyOptions = new VocabularyOptions(
-      environment.workingPlan.workingPlanStepResponsibleAuthority,
-      environment.workingPlan.workingPlanStepResponsibleMetadata,
-      null,
-      true
-    );
   }
 
   ngOnInit(): void {
+    this.workpackageVocabularyOptions = new VocabularyOptions(
+      environment.workingPlan.workingPlanStepResponsibleAuthority,
+      environment.workingPlan.workingPlanStepResponsibleMetadata,
+      this.workPackageCollectionId,
+      true
+    );
+    this.milestoneVocabularyOptions = new VocabularyOptions(
+      environment.workingPlan.workingPlanStepResponsibleAuthority,
+      environment.workingPlan.workingPlanStepResponsibleMetadata,
+      this.milestoneCollectionId,
+      true
+    );
     this.dragAndDropIsActive = false;
     this.sortSelected$ = this.workingPlanStateService.getWorkpackagesSortOption();
 
@@ -232,7 +264,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
           // MouseOver Map
           this.chartChangeColorIsOver.set(node.id, false);
           // Milestones border and rhombus
-          if (node.type === 'milestone') {
+          if (node.type === 'milestone' && isNotEmpty(node.dates?.end)) {
             this.milestonesMap.set(node.id, node.dates.end.full);
           }
           if (node.expanded) {
@@ -506,7 +538,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    * @param isOpen boolean
    */
   resetSortDropdown(isOpen: boolean): void {
-    if ( isOpen ) {
+    if (isOpen) {
       this.sortSelectedValue = this.sortSelectedOld;
     }
   }
@@ -531,6 +563,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     const updateAllMap: Map<string, { startDate: string, endDate: string }> = new Map();
 
     this.flatNodeMap.forEach((node: WorkpacakgeFlatNode) => {
+      // skip node if dates has not been set
+      if (node.type === 'milestone' && isEmpty(node.dates?.end?.full)) {
+        return;
+      } else if (isEmpty(node.dates?.start?.full) || isEmpty(node.dates?.end?.full)) {
+        return;
+      }
+
       if (node.type === 'milestone') {
         startDate = this.moment(node.dates.end.full, this.dateFormat);
       } else {
@@ -549,7 +588,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.updateAllDateRanges(updateAllMap);
   }
 
-  updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string) {
+  updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string|NgbDate, endDate: string|NgbDate) {
+    if (startDate instanceof NgbDate) {
+      startDate = NgbDateStructToString(startDate);
+    }
+    if (endDate instanceof NgbDate) {
+      endDate = NgbDateStructToString(endDate);
+    }
     const nodeData: UpdateData = this._updateDateRangeOperations(flatNode, startDate, endDate);
 
     this.updateField(
@@ -580,9 +625,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.updateField(flatNode, nestedNode, ['dc.title'], [name]);
   }
 
-  updateStepResponsible(flatNode: WorkpacakgeFlatNode, responsible: string) {
+  updateStepResponsible(flatNode: WorkpacakgeFlatNode, responsible: VocabularyEntry) {
     const nestedNode = Object.assign({}, this.nestedNodeMap.get(flatNode.id), {
-      responsible: responsible
+      responsible: responsible.value
     });
     this.updateField(flatNode, nestedNode, [environment.workingPlan.workingPlanStepResponsibleMetadata], [responsible]);
   }
@@ -614,55 +659,85 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     }
   }
 
+  validateResizeNames = (resizeEvent: any) => {
+    const eventWidth = resizeEvent.rectangle.width;
+    return eventWidth >= this.sidebarNamesMinWidth;
+  }
+
+  validateResizeResponsible = (resizeEvent: any) => {
+    const eventWidth = resizeEvent.rectangle.width;
+    return eventWidth >= this.sidebarResponsibleMinWidth;
+  }
+
   buildCalendar() {
     this.dates = [];
     this.datesMonth = [];
     this.datesQuarter = [];
     this.datesYear = [];
+    const stepToProcess: any[] = this.dataSource.data
+      .filter((step: Workpackage) => {
+        if (step.type === 'milestone') {
+          return isNotEmpty(step.dates?.end?.full);
+        } else {
+          return isNotEmpty(step.dates?.start?.full) && isNotEmpty(step.dates?.end?.full);
+        }
+      } )
+      .map((step: Workpackage) => ({
+        dates: step.dates,
+        type: step.type
+      }));
 
-    this.dataSource.data.forEach((step: Workpackage) => {
-      let start;
-      const end = this.moment(step.dates.end.full, this.dateFormat);
-      if (step.type === 'milestone') {
-        start = this.moment(this.moment(step.dates.end.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
-      } else {
-        start = this.moment(step.dates.start.full, this.dateFormat);
-      }
-      const dateRange = moment.range(start, end);
+    if (stepToProcess.length === 0) {
+      stepToProcess.push({
+        dates: this.defaultDates,
+        type: null
+      });
+    }
 
-      // Moment range sometimes does not include all the months, so use the end of the month to get the correct range
-      const endForMonth = this.moment(step.dates.end.full).endOf('month');
-      const dateRangeForMonth = this.moment.range(start, endForMonth);
+    stepToProcess
+      .forEach((step: any) => {
+        let start;
+        const end = this.moment(step.dates.end.full, this.dateFormat);
+        if (step.type === 'milestone') {
+          start = this.moment(this.moment(step.dates.end.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
+        } else {
+          start = this.moment(step.dates.start.full, this.dateFormat);
+        }
+        const dateRange = moment.range(start, end);
 
-      // Moment range sometimes does not include all the quarters, so use the end of the quarter to get the correct range
-      const endForQuarter = this.moment(step.dates.end.full).endOf('quarter');
-      const dateRangeForQuarter = this.moment.range(start, endForQuarter);
+        // Moment range sometimes does not include all the months, so use the end of the month to get the correct range
+        const endForMonth = this.moment(step.dates.end.full).endOf('month');
+        const dateRangeForMonth = this.moment.range(start, endForMonth);
 
-      // Moment range sometimes does not include all the years, so use the end of the year to get the correct range
-      const endForYear = this.moment(step.dates.end.full, this.dateFormat).endOf('year');
-      const dateRangeForYear = this.moment.range(start, endForYear);
+        // Moment range sometimes does not include all the quarters, so use the end of the quarter to get the correct range
+        const endForQuarter = this.moment(step.dates.end.full).endOf('quarter');
+        const dateRangeForQuarter = this.moment.range(start, endForQuarter);
 
-      const days = Array.from(dateRange.by('days'));
-      const months = Array.from(dateRangeForMonth.by('months'));
-      const quarters = Array.from(dateRangeForQuarter.by('quarters'));
-      const years = Array.from(dateRangeForYear.by('year'));
+        // Moment range sometimes does not include all the years, so use the end of the year to get the correct range
+        const endForYear = this.moment(step.dates.end.full, this.dateFormat).endOf('year');
+        const dateRangeForYear = this.moment.range(start, endForYear);
 
-      this.dates = this.dates.concat(days
-        .map((d) => d.format(this.dateFormat))
-        .filter((d) => !this.dates.includes(d))).sort();
+        const days = Array.from(dateRange.by('days'));
+        const months = Array.from(dateRangeForMonth.by('months'));
+        const quarters = Array.from(dateRangeForQuarter.by('quarters'));
+        const years = Array.from(dateRangeForYear.by('year'));
 
-      this.datesMonth = this.datesMonth.concat(months
-        .map((d) => d.format(this.dateMonthFormat))
-        .filter((d) => !this.datesMonth.includes(d))).sort();
+        this.dates = this.dates.concat(days
+          .map((d) => d.format(this.dateFormat))
+          .filter((d) => !this.dates.includes(d))).sort();
 
-      this.datesQuarter = this.datesQuarter.concat(quarters
-        .map((d) => d.format(this.dateYearFormat) + '-' + d.quarter().toString())
-        .filter((d) => !this.datesQuarter.includes(d))).sort();
+        this.datesMonth = this.datesMonth.concat(months
+          .map((d) => d.format(this.dateMonthFormat))
+          .filter((d) => !this.datesMonth.includes(d))).sort();
 
-      this.datesYear = this.datesYear.concat(years
-        .map((d) => d.format(this.dateYearFormat))
-        .filter((d) => !this.datesYear.includes(d))).sort();
-    });
+        this.datesQuarter = this.datesQuarter.concat(quarters
+          .map((d) => d.format(this.dateYearFormat) + '-' + d.quarter().toString())
+          .filter((d) => !this.datesQuarter.includes(d))).sort();
+
+        this.datesYear = this.datesYear.concat(years
+          .map((d) => d.format(this.dateYearFormat))
+          .filter((d) => !this.datesYear.includes(d))).sort();
+      });
     this.adjustDates();
   }
 
@@ -717,10 +792,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   isDateInsideRange(date: string, node: Workpackage): boolean {
-    if (node.type !== 'milestone') {
-      return date >= node.dates.start.full && date <= node.dates.end.full;
+    if (isEmpty(node.dates)) {
+      return false;
+    } else if (node.type !== 'milestone') {
+      return (isNotEmpty(node.dates?.start?.full) && isNotEmpty(node.dates?.end?.full)) ?
+        (date >= node.dates.start.full && date <= node.dates.end.full) : false;
     } else {
-      return date === node.dates.end.full;
+      return isEmpty(node.dates?.end?.full) ? false : (date === node.dates.end.full);
     }
   }
 
@@ -748,7 +826,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<MatTreeFlatDataSource<WorkpackageTreeObject, WorkpacakgeFlatNode>, any>) {
     this.isDragging.next(false);
     this.isDropAllowed.next(false);
     // ignore drops outside of the tree
@@ -890,32 +968,28 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   private _updateDateRangeOperations(flatNode: WorkpacakgeFlatNode, startDate: string, endDate: string): UpdateData {
     // create new dates object
-    let dates;
+    const dates = Object.create({});
     let startMoment;
     let startDateObj: WorkpackageChartDate;
-    const endMoment = this.moment(endDate); // create start moment
-    const endDateObj: WorkpackageChartDate = {
-      full: endMoment.format(this.dateFormat),
-      month: endMoment.format(this.dateMonthFormat),
-      year: endMoment.format(this.dateYearFormat)
-    };
+    let endDateObj: WorkpackageChartDate;
+    if (endDate) {
+      const endMoment = this.moment(endDate); // create start moment
+      endDateObj = {
+        full: endMoment.format(this.dateFormat),
+        month: endMoment.format(this.dateMonthFormat),
+        year: endMoment.format(this.dateYearFormat)
+      };
+      dates.end = endDateObj;
+    }
 
-    if (flatNode.type !== 'milestone') {
+    if (flatNode.type !== 'milestone' && startDate) {
       startMoment = this.moment(startDate); // create start moment
       startDateObj = {
         full: startMoment.format(this.dateFormat),
         month: startMoment.format(this.dateMonthFormat),
         year: startMoment.format(this.dateYearFormat)
       };
-
-      dates = {
-        start: startDateObj,
-        end: endDateObj
-      };
-    } else {
-      dates = {
-        end: endDateObj
-      };
+      dates.start = startDateObj;
     }
 
     // update flat node dates
@@ -928,6 +1002,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       dates: dates
     });
 
+    // Update reference in the maps
+    this.updateTreeMap(flatNode, nestedNode);
+
     // rebuild calendar if the root is updated
     if (flatNode.level === 0) {
       this.buildCalendar();
@@ -935,9 +1012,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
     let values = [];
     if (nestedNode.type !== 'milestone') {
-      values = [nestedNode.dates.start.full, nestedNode.dates.end.full];
+      values = [nestedNode.dates?.start?.full, nestedNode.dates?.end?.full];
     } else {
-      values = [null, nestedNode.dates.end.full];
+      values = [null, nestedNode.dates?.end?.full];
     }
 
     return {
@@ -1050,7 +1127,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         beforeRangeArray
           .map((d) => d.format(this.dateMonthFormat))
           .filter((d) => this.datesMonth.indexOf(d) === -1)
-        ).sort();
+      ).sort();
       this.datesMonth = this.datesMonth.concat(
         afterRangeArray
           .map((d) => d.format(this.dateMonthFormat))
@@ -1084,5 +1161,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     }
 
     return query;
+  }
+
+  /**
+   * Convert date from string to NgbDateStruct
+   * @param date
+   */
+  getDateStruct(date: string): NgbDateStruct {
+    return isNotEmpty(date) ? stringToNgbDateStruct(date) : null;
   }
 }

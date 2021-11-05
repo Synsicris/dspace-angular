@@ -1,14 +1,21 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
-
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  QueryList,
+  SimpleChanges,
+  ViewChildren
+} from '@angular/core';
 import { combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { AuthService } from '../../core/auth/auth.service';
 import { SubmissionDefinitionsModel } from '../../core/config/models/config-submission-definitions.model';
 import { Collection } from '../../core/shared/collection.model';
 import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
 import { SubmissionObject } from '../../core/submission/models/submission-object.model';
 import { WorkspaceitemSectionsObject } from '../../core/submission/models/workspaceitem-sections.model';
-
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import { UploaderOptions } from '../../shared/uploader/uploader-options.model';
 import { SubmissionError, SubmissionObjectEntry } from '../objects/submission-objects.reducer';
@@ -17,7 +24,12 @@ import { SubmissionService } from '../submission.service';
 import { Item } from '../../core/shared/item.model';
 import { SectionsType } from '../sections/sections-type';
 import { SectionsService } from '../sections/sections.service';
+import { MetadataSecurityConfiguration } from '../../core/submission/models/metadata-security-configuration';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { MetadataSecurityConfigurationService } from '../../core/submission/metadatasecurityconfig-data.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SubmissionUploadFilesComponent } from './submission-upload-files/submission-upload-files.component';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 /**
  * This component represents the submission form.
@@ -65,7 +77,11 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * @type {string}
    */
   @Input() submissionId: string;
-
+  /**
+   * The metadata security config based on the entity type
+   * @type {MetadataSecurityConfiguration}
+   */
+  @Input() metadataSecurityConfiguration: MetadataSecurityConfiguration;
   /**
    * The entity type input used to create a new submission
    * @type {string}
@@ -120,6 +136,13 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
   protected subs: Subscription[] = [];
 
   /**
+   * The SectionsDirective reference
+   */
+  submissionUploaderRef: BehaviorSubject<SubmissionUploadFilesComponent> = new BehaviorSubject<SubmissionUploadFilesComponent>(null);
+
+  @ViewChildren(SubmissionUploadFilesComponent) childrenComponent: QueryList<SubmissionUploadFilesComponent>;
+
+  /**
    * Initialize instance variables
    *
    * @param {AuthService} authService
@@ -127,6 +150,7 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    * @param {HALEndpointService} halService
    * @param {SubmissionService} submissionService
    * @param {SectionsService} sectionsService
+   * @param metadataSecurityConfigDataService
    * @param {TranslateService} translate
    */
   constructor(
@@ -135,8 +159,17 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
     private halService: HALEndpointService,
     private submissionService: SubmissionService,
     private sectionsService: SectionsService,
+    private metadataSecurityConfigDataService: MetadataSecurityConfigurationService,
     private translate: TranslateService) {
     this.isActive = true;
+  }
+
+  ngAfterViewInit() {
+    this.childrenComponent.changes.pipe(
+      map((comps: QueryList<SubmissionUploadFilesComponent>) => comps.last),
+    ).subscribe((comp: SubmissionUploadFilesComponent) => {
+      this.submissionUploaderRef.next(comp);
+    });
   }
 
   /**
@@ -182,28 +215,28 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
         map((submission: SubmissionObjectEntry) => submission.isLoading),
         map((isLoading: boolean) => isLoading),
         distinctUntilChanged());
-
       // init submission state
-      this.subs.push(
-        this.halService.getEndpoint(this.submissionService.getSubmissionObjectLinkName()).pipe(
-          filter((href: string) => isNotEmpty(href)),
-          distinctUntilChanged())
-          .subscribe((endpointURL) => {
-            this.uploadFilesOptions.authToken = this.authService.buildAuthHeader();
-            this.uploadFilesOptions.url = endpointURL.concat(`/${this.submissionId}`);
-            this.definitionId = this.submissionDefinition.name;
-            // const { errors } = item;
-            this.submissionService.dispatchInit(
-              this.collectionId,
-              this.submissionId,
-              this.selfUrl,
-              this.submissionDefinition,
-              this.sections,
-              this.item,
-              this.submissionErrors);
-            this.changeDetectorRef.detectChanges();
-          })
-      );
+        this.subs.push(
+          this.halService.getEndpoint(this.submissionService.getSubmissionObjectLinkName()).pipe(
+            filter((href: string) => isNotEmpty(href)),
+            distinctUntilChanged())
+            .subscribe((endpointURL) => {
+              this.uploadFilesOptions.authToken = this.authService.buildAuthHeader();
+              this.uploadFilesOptions.url = endpointURL.concat(`/${this.submissionId}`);
+              this.definitionId = this.submissionDefinition.name;
+              // const { errors } = item;
+              this.submissionService.dispatchInit(
+                this.collectionId,
+                this.submissionId,
+                this.selfUrl,
+                this.submissionDefinition,
+                this.sections,
+                this.item,
+                this.submissionErrors,
+                this.metadataSecurityConfiguration);
+              this.changeDetectorRef.detectChanges();
+            })
+        );
 
       // start auto save
       this.submissionService.startAutoSave(this.submissionId);
@@ -231,21 +264,32 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
    *    new submission object
    */
   onCollectionChange(submissionObject: SubmissionObject) {
-    this.collectionId = (submissionObject.collection as Collection).id;
-    if (this.definitionId !== (submissionObject.submissionDefinition as SubmissionDefinitionsModel).name) {
-      this.sections = submissionObject.sections;
-      this.submissionDefinition = (submissionObject.submissionDefinition as SubmissionDefinitionsModel);
-      this.definitionId = this.submissionDefinition.name;
-      this.submissionService.resetSubmissionObject(
-        this.collectionId,
-        this.submissionId,
-        submissionObject._links.self.href,
-        this.submissionDefinition,
-        this.sections,
-        this.item);
-    } else {
-      this.changeDetectorRef.detectChanges();
+    const metadata = (submissionObject.collection as Collection).metadata ? (submissionObject.collection as Collection).metadata['dspace.entity.type'] : null;
+    if (metadata && metadata[0]) {
+      this.entityType = metadata[0].value;
     }
+    this.metadataSecurityConfigDataService.findById(this.entityType).pipe(
+      getFirstCompletedRemoteData(),
+    ).subscribe(res => {
+      this.metadataSecurityConfiguration   = res.payload;
+      this.collectionId = (submissionObject.collection as Collection).id;
+      if (this.definitionId !== (submissionObject.submissionDefinition as SubmissionDefinitionsModel).name) {
+        this.sections = submissionObject.sections;
+        this.submissionDefinition = (submissionObject.submissionDefinition as SubmissionDefinitionsModel);
+        this.definitionId = this.submissionDefinition.name;
+        this.submissionService.resetSubmissionObject(
+          this.collectionId,
+          this.submissionId,
+          submissionObject._links.self.href,
+          this.submissionDefinition,
+          this.sections,
+          this.item,
+          this.metadataSecurityConfiguration
+         );
+      } else {
+        this.changeDetectorRef.detectChanges();
+      }
+    });
   }
 
   /**
@@ -262,8 +306,6 @@ export class SubmissionFormComponent implements OnChanges, OnDestroy {
     return this.submissionService.getSubmissionSections(this.submissionId).pipe(
       filter((sections: SectionDataObject[]) => isNotEmpty(sections)),
       map((sections: SectionDataObject[]) => sections));
-      
   }
-
 
 }

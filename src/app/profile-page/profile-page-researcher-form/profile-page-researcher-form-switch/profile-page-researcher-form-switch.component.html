@@ -1,0 +1,20 @@
+<div class="btn-group">
+  <div class="switch-container">
+    <div *ngFor="let visibilityOpt of visibilityOptions">
+      <div class="switch-opt" (click)="changeSelectedSecurity(visibilityOpt.value)"
+           [class.bg-white]="visibility == visibilityOpt.value"
+           [class.bg-gray]="visibility != visibilityOpt.value">
+        <i [class]="visibilityOpt.icon + ' ' + visibilityOpt.color"></i>
+      </div>
+    </div>
+
+  </div>
+  <div *ngFor="let visibilityOpt of visibilityOptions">
+    <span *ngIf="visibility == visibilityOpt.value" class="visibility-label ml-2 font-weight-bold" [class]="visibilityOpt.color">
+      {{visibilityOpt.label | translate}}
+    </span>
+  </div>
+</div>
+
+
+

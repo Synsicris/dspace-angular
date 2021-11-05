@@ -8,6 +8,7 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
+import { ContextMenuEntryType } from '../context-menu-entry-type';
 
 @Component({
   selector: 'ds-statistics-menu',
@@ -39,7 +40,7 @@ export class StatisticsMenuComponent extends ContextMenuEntryComponent implement
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
     protected authorizationService: AuthorizationDataService
   ) {
-    super(injectedContextMenuObject, injectedContextMenuObjectType);
+    super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.Statistics);
   }
 
   ngOnInit() {

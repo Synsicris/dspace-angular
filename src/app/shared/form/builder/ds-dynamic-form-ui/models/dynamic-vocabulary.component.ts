@@ -3,6 +3,8 @@ import { FormGroup } from '@angular/forms';
 
 import {
   DynamicFormControlComponent,
+  DynamicFormControlCustomEvent,
+  DynamicFormControlModel,
   DynamicFormLayoutService,
   DynamicFormValidationService
 } from '@ng-dynamic-forms/core';
@@ -38,6 +40,7 @@ export abstract class DsDynamicVocabularyComponent extends DynamicFormControlCom
   @Output() abstract blur: EventEmitter<any> = new EventEmitter<any>();
   @Output() abstract change: EventEmitter<any> = new EventEmitter<any>();
   @Output() abstract focus: EventEmitter<any> = new EventEmitter<any>();
+  @Output() abstract customEvent: EventEmitter<DynamicFormControlCustomEvent> = new EventEmitter();
 
   /**
    * The vocabulary entry
@@ -84,6 +87,7 @@ export abstract class DsDynamicVocabularyComponent extends DynamicFormControlCom
           return new FormFieldMetadataValueObject(
             initEntry.value,
             null,
+            (this.model.value as any).securityLevel,
             initEntry.authority,
             initEntry.display,
             (this.model.value as any).place,
@@ -99,6 +103,7 @@ export abstract class DsDynamicVocabularyComponent extends DynamicFormControlCom
         new FormFieldMetadataValueObject(
           this.model.value.value,
           null,
+          (this.model.value as any).securityLevel,
           this.model.value.authority,
           this.model.value.display,
           0,
@@ -194,9 +199,17 @@ export abstract class DsDynamicVocabularyComponent extends DynamicFormControlCom
    * @param authority
    */
   updateAuthority(authority: string) {
-    const currentValue: string = (this.model.value instanceof FormFieldMetadataValueObject
+      const currentValue: string = (this.model.value instanceof FormFieldMetadataValueObject
       || this.model.value instanceof VocabularyEntry) ? this.model.value.value : this.model.value;
-    const valueWithAuthority: any = new FormFieldMetadataValueObject(currentValue, null, authority);
+    let security = null;
+    if ( this.model.value instanceof VocabularyEntry) {
+       security  = this.model.value.securityLevel;
+    } else {
+      if (this.model.metadataValue) {
+        security  = this.model.metadataValue.securityLevel;
+      }
+    }
+    const valueWithAuthority: any = new FormFieldMetadataValueObject(currentValue, null, security, authority);
     this.model.value = valueWithAuthority;
     this.change.emit(valueWithAuthority);
     setTimeout(() => {
@@ -227,17 +240,30 @@ export abstract class DsDynamicVocabularyComponent extends DynamicFormControlCom
    */
   updateOtherInformation(value: any) {
     if (hasValue(value) &&
-        (value instanceof VocabularyEntry || value instanceof FormFieldMetadataValueObject) ) {
+      (value instanceof VocabularyEntry || value instanceof FormFieldMetadataValueObject)) {
       const otherInformation = value.otherInformation;
       if (hasValue(otherInformation)) {
+        const updatedModels = [];
         for (const key in otherInformation) {
           if (otherInformation.hasOwnProperty(key)) {
             const fieldId = key.replace('data-', '');
             const newValue = this.getOtherInformationValue(otherInformation[key]);
-            this.formBuilderService.updateValue(fieldId, newValue);
+            if (isNotEmpty(newValue)) {
+              const updatedModel = this.formBuilderService.updateValue(fieldId, newValue);
+              if (isNotEmpty(updatedModel)) {
+                updatedModels.push(updatedModel);
+              }
+            }
           }
         }
+        this.createChangeEventOnUpdate(updatedModels);
       }
+    }
+  }
+
+  protected createChangeEventOnUpdate(models: DynamicFormControlModel[]) {
+    if (models.length > 0) {
+      this.onCustomEvent({ updatedModels: models }, 'authorityEnrichment');
     }
   }
 

@@ -22,7 +22,7 @@ export class ProjectCollectionBreadcrumbResolver extends DSOBreadcrumbResolver<C
    */
   get followLinks(): FollowLinkConfig<Collection>[] {
     return [
-      followLink('parentCommunity', undefined, true, true, true,
+      followLink('parentCommunity', {},
         followLink('parentCommunity')
       )
     ];

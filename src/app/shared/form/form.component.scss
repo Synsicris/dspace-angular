@@ -51,4 +51,9 @@ button.ds-form-add-more:focus {
 .isInlineGroupForm-delete {
   margin-bottom: -2.5rem;
   z-index: var(--bs-zindex-dropdown);
+  padding-right: calc(0.5 * var(--bs-spacer));
+}
+
+.white-background{
+  background-color: #fff;
 }

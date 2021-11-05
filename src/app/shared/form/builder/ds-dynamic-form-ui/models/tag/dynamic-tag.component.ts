@@ -1,7 +1,11 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { DynamicFormLayoutService, DynamicFormValidationService } from '@ng-dynamic-forms/core';
+import {
+  DynamicFormControlCustomEvent,
+  DynamicFormLayoutService,
+  DynamicFormValidationService
+} from '@ng-dynamic-forms/core';
 import { Observable, of as observableOf } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, merge, switchMap, tap } from 'rxjs/operators';
 import { NgbModal, NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
@@ -13,10 +17,7 @@ import { Chips } from '../../../../../chips/models/chips.model';
 import { hasValue, isNotEmpty, isUndefined } from '../../../../../empty.util';
 import { environment } from '../../../../../../../environments/environment';
 import { getFirstSucceededRemoteDataPayload } from '../../../../../../core/shared/operators';
-import {
-  PaginatedList,
-  buildPaginatedList
-} from '../../../../../../core/data/paginated-list.model';
+import { buildPaginatedList, PaginatedList } from '../../../../../../core/data/paginated-list.model';
 import { VocabularyEntry } from '../../../../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { PageInfo } from '../../../../../../core/shared/page-info.model';
 import { DsDynamicVocabularyComponent } from '../dynamic-vocabulary.component';
@@ -40,6 +41,7 @@ export class DsDynamicTagComponent extends DsDynamicVocabularyComponent implemen
   @Output() blur: EventEmitter<any> = new EventEmitter<any>();
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
   @Output() focus: EventEmitter<any> = new EventEmitter<any>();
+  @Output() customEvent: EventEmitter<DynamicFormControlCustomEvent> = new EventEmitter();
 
   @ViewChild('instance') instance: NgbTypeahead;
 
@@ -111,11 +113,12 @@ export class DsDynamicTagComponent extends DsDynamicVocabularyComponent implemen
 
     this.chips.chipsItems
       .subscribe((subItems: any[]) => {
-        const items = this.chips.getChipsItems();
-        // Does not emit change if model value is equal to the current value
-        if (!isEqual(items, this.model.value)) {
-          this.dispatchUpdate(items);
-        }
+         const items = this.chips.getChipsItems();
+          // Does not emit change if model value is equal to the current value
+          if (!isEqual(items, this.model.value)) {
+            this.dispatchUpdate(items);
+          }
+
       });
   }
 

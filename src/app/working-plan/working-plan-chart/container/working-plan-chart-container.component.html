@@ -1,10 +1,9 @@
 <div *ngIf="(workpackages | async)?.length > 0" fxLayout="column">
   <div class="sidenav-container" fxFlex fxLayout="row">
     <!-- steps -->
-    <div class="sidenav chart-column names" [ngStyle]="sidebarNamesStyle" fxLayout="column"
-         mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'names')">
-      <div class="sidenav-header">
-        <div class="float-left">
+    <div class="sidenav chart-column names" [ngStyle]="sidebarNamesStyle" fxLayout="column">
+      <div class="sidenav-header d-flex justify-content-between">
+        <div>
           <div ngbDropdown #sortByDrop="ngbDropdown" class="d-inline-block" (openChange)="resetSortDropdown($event)">
             <button class="btn btn-outline-info btn-xs mr-2" id="sortBy" ngbDropdownToggle>{{'working-plan.chart.column.sortBy' | translate}} {{'working-plan.chart.column.sortBy.option.' + (sortSelected$ | async) | translate}}</button>
             <div ngbDropdownMenu class="block-change-start-date font-size-07 p-2" aria-labelledby="sortBy">
@@ -35,14 +34,18 @@
               </form>
             </div>
           </div>
-          <button type="button" class="btn btn-outline-secondary btn-xs" (click)="treeControl.expandAll()">
-            {{'working-plan.chart.button.expandAll' | translate}}
-          </button>
-          <button type="button" class="btn btn-outline-secondary btn-xs" (click)="treeControl.collapseAll()">
-            {{'working-plan.chart.button.collapseAll' | translate}}
-          </button>
         </div>
-        <div class="float-right">
+        <div class="pr-1">
+          <button type="button" class="btn btn-primary btn-xs"
+                  title="{{'working-plan.chart.button.expandAll' | translate}}"
+                  (click)="treeControl.expandAll()">
+            <i class="fas fa-angle-double-down"></i>
+          </button>
+          <button type="button" class="btn btn-primary btn-xs"
+                  title="{{'working-plan.chart.button.collapseAll' | translate}}"
+                  (click)="treeControl.collapseAll()">
+            <i class="fas fa-angle-double-up"></i>
+          </button>
           <button type="button" class="btn btn-primary btn-xs mr-2{{(this.sidebarResponsibleStatus)?' d-none':''}}" (click)="sidebarStatusToggle()" title="{{'working-plan.chart.column.expand' | translate}}"><i class="fas fa-angle-double-right"></i></button>
         </div>
       </div>
@@ -87,23 +90,15 @@
             <p class="block-ellipsis">{{node.name}}</p>
             <br>
             <span class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
-          </div>
-          <div class="mr-05">
-            <button mat-icon-button *ngIf="canAddChildStep(node)"
-                    class="btn btn-xs btn-link p-0 text-success"
+            <br>
+            <button *ngIf="canAddChildStep(node)"
+                    class="btn btn-xs btn-link p-0"
                     title="{{'working-plan.chart.button.add' | translate}}"
                     (click)="addChildStep(node)">
-              <mat-icon>add</mat-icon>
+              <i class="fas fa-plus-circle"></i>
             </button>
-            <br *ngIf="canAddChildStep(node)">
-            <button *ngIf="(isEditAvailable(node.id) | async)" mat-icon-button
-                    class="btn btn-xs btn-link p-0 text-primary"
-                    [class.ml-1]="node.level !== 0"
-                    title="{{'working-plan.chart.button.edit' | translate}}"
-                    [routerLink]="['/edit-items', node.id + ':' + (getEditModes() | async).get(node.id)[0].name]">
-              <i class="fas fa-edit"></i>
-            </button>
-            <br *ngIf="(isEditAvailable(node.id) | async)">
+          </div>
+          <div class="mr-05 d-flex flex-column justify-content-between">
             <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger"
                     title="{{'working-plan.chart.button.remove' | translate}}"
                     [class.ml-1]="node.level !== 0"
@@ -112,9 +107,16 @@
               <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
               <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
             </button>
+            <button *ngIf="(isEditAvailable(node.id) | async)" mat-icon-button
+                    class="btn btn-xs btn-link p-0 text-primary"
+                    [class.ml-1]="node.level !== 0"
+                    title="{{'working-plan.chart.button.edit' | translate}}"
+                    [routerLink]="['/edit-items', node.id + ':' + (getEditModes() | async).get(node.id)[0].name]">
+              <i class="fas fa-edit"></i>
+            </button>
           </div>
         </mat-tree-node>
-        <mat-tree-node *matTreeNodeDef="let node;when: hasChild"
+<!--        <mat-tree-node *matTreeNodeDef="let node;when: hasChild"
           cdkDrag [cdkDragData]="node"
           [cdkDragDisabled]="!dragAndDropIsActive || (isMoving() | async)"
           class="tree-node-customization"
@@ -177,12 +179,11 @@
               <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
             </button>
           </div>
-        </mat-tree-node>
+        </mat-tree-node>-->
       </mat-tree>
     </div>
     <!-- dates, organisations and statuses -->
-    <div class="sidenav chart-column responsible{{(this.sidebarResponsibleStatus)?'':' d-none'}}" [ngStyle]="sidebarResponsibleStyle" fxLayout="column"
-         mwlResizable [resizeEdges]="{right: true}" [enableGhostResize]="true" [resizeSnapGrid]="{right: 1}" (resizeEnd)="onResizeEnd($event, 'responsible')">
+    <div class="sidenav chart-column responsible{{(this.sidebarResponsibleStatus)?'':' d-none'}}" [ngStyle]="sidebarResponsibleStyle" fxLayout="column">
       <div class="sidenav-header">
         <div class="float-left">
           <div ngbDropdown #changeAllStartDatesDrop="ngbDropdown" class="d-inline-block">
@@ -232,35 +233,41 @@
         </div>
       </div>
       <mat-tree class="tree pt-0" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarResponsibleStyle">
-        <mat-tree-node *matTreeNodeDef="let node" class="tree-node-customization" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
+        <mat-tree-node *matTreeNodeDef="let node" class="tree-node-customization"
+                       [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
+                       [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
+                       (mouseover)="chartChangeColor(node.id, true)"
+                       (mouseout)="chartChangeColor(node.id, false)">
           <div class="ml-05 mt-1 font-size-07">
             <p class="font-weight-bold m-0">{{'working-plan.chart.column.dates' | translate}}</p>
             <mat-form-field *ngIf="node.type != 'milestone'" floatLabel="never" appearance="fill" class="p-0">
               <mat-label>{{'working-plan.chart.column.dates.start' | translate}}</mat-label>
-              <input matInput [matDatepicker]="startDate" [min]="node.level > 0 ? getParentStep(node).dates.start.full : null"
-                [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [value]="node.dates.start.full"
-                (dateChange)="updateDateRange(node, $event.value, node.dates.end.full)">
-              <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
-              <mat-datepicker #startDate></mat-datepicker>
+              <input matInput type="text" ngbDatepicker #startDate="ngbDatepicker" (click)="startDate.toggle()" container="body"
+                     [minDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.start?.full) : null"
+                     [maxDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.end?.full) : getDateStruct(node.dates?.end?.full)"
+                     [value]="(node.dates?.start?.full) ? (node.dates?.start?.full) : ''"
+                     (dateSelect)="updateDateRange(node, $event, node.dates?.end?.full)"/>
+              <mat-icon matSuffix (click)="startDate.toggle()" class="cursor-pointer">edit_calendar</mat-icon>
             </mat-form-field>
             <br *ngIf="node.type != 'milestone'">
             <mat-form-field floatLabel="never" appearance="fill" class="p-0">
               <mat-label>{{'working-plan.chart.column.dates.end' | translate}}</mat-label>
-              <input matInput [matDatepicker]="endDate" [min]="node.level > 0 ? getParentStep(node).dates.start.full : null"
-                [max]="node.level > 0 ? getParentStep(node).dates.end.full : null" [value]="node.dates.end.full"
-                (dateChange)="updateDateRange(node, (node.type != 'milestone')?node.dates.start.full:$event.value, $event.value)">
-              <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
-              <mat-datepicker #endDate></mat-datepicker>
+              <input matInput type="text" ngbDatepicker #endDate="ngbDatepicker" (click)="endDate.toggle()" container="body"
+                     [minDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.start?.full) : getDateStruct(node.dates?.start?.full)"
+                     [maxDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.end?.full) : null"
+                     [value]="(node.dates?.end?.full) ? (node.dates?.end?.full) : ''"
+                     (dateSelect)="updateDateRange(node, (node.type != 'milestone')?node.dates?.start?.full:$event, $event)"/>
+              <mat-icon matSuffix (click)="endDate.toggle()" class="cursor-pointer">edit_calendar</mat-icon>
             </mat-form-field>
           </div>
           <div class="ml-05 mt-1 font-size-07">
             <p class="font-weight-bold m-0">{{'working-plan.chart.column.responsible' | translate}}</p>
-            <ds-authority-typeahead floatLabel="never" class="min-width-large"
+            <ds-authority-dropdown floatLabel="never" class="min-width-large"
               [fieldId]="'responsible'"
               [fieldName]="'responsible'"
-              [vocabularyOptions]="responsibleVocabularyOptions"
+              [vocabularyOptions]="(node.type != 'milestone') ? workpackageVocabularyOptions : milestoneVocabularyOptions"
               [initValue]="node.responsible"
-              (change)="updateStepResponsible(node, $event.value)"></ds-authority-typeahead>
+              (change)="updateStepResponsible(node, $event)"></ds-authority-dropdown>
           </div>
           <div class="ml-05 mt-1 font-size-07">
             <p class="font-weight-bold m-0">{{'working-plan.chart.column.status' | translate}}</p>
@@ -287,7 +294,11 @@
         </div>
       </div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
-        <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
+        <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100"
+                       [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
+                       [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
+                       (mouseover)="chartChangeColor(node.id, true)"
+                       (mouseout)="chartChangeColor(node.id, false)">
           <div *ngFor="let date of datesMonth; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(date, 'month'))?' tree-node-end-of-the-year-customization':''}}">
             <div *ngFor="let day of getDaysInMonth(date);" class="d-flex flex-fill calendar-node-customization"
               [class.tree-node-milestone-customization]="chartCheckMilestone(date + '-' + day)">
@@ -312,7 +323,11 @@
         </div>
       </div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
-        <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
+        <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100"
+                       [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
+                       [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
+                       (mouseover)="chartChangeColor(node.id, true)"
+                       (mouseout)="chartChangeColor(node.id, false)">
           <div *ngFor="let quarter of datesQuarter; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(quarter, 'quarter'))?' tree-node-end-of-the-year-customization':''}}">
             <ng-container *ngFor="let month of getMonthInQuarter(quarter);">
               <div *ngFor="let day of getDaysInMonth(getQaurterYear(quarter) + '-' + month);" class="d-flex flex-fill calendar-node-customization"
@@ -334,7 +349,11 @@
         <div *ngFor="let date of datesYear" class="calendar-cell w-100 calendar-head-year-border tree-node-end-of-the-year-customization">{{formatDate(date)}}</div>
       </div>
       <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
-        <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100" (mouseover)="chartChangeColor(node.id, true)" (mouseout)="chartChangeColor(node.id, false)">
+        <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100"
+                       [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
+                       [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
+                       (mouseover)="chartChangeColor(node.id, true)"
+                       (mouseout)="chartChangeColor(node.id, false)">
           <div *ngFor="let year of datesYear; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(year, 'year'))?' tree-node-end-of-the-year-customization':''}}">
             <ng-container *ngFor="let month of getMonthInYear();">
               <div *ngFor="let day of getDaysInMonth(year + '-' + month);" class="d-flex flex-fill calendar-node-customization"

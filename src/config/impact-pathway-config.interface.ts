@@ -16,5 +16,7 @@ export interface ImpactPathwayConfig extends Config {
   entityToCollectionMapAuthority: string;
   entityToCollectionMapAuthorityMetadata: string;
   projObjectiveEntity: string;
+  iaObjectiveEntity: string;
   impactPathwaysSearchConfigName: string;
+  contributionFundingprogrammeEntity: string;
 }

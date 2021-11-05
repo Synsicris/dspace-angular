@@ -24,6 +24,7 @@ import { CollectionDataService } from '../../../core/data/collection-data.servic
 import { CollectionDropdownComponent } from '../../../shared/collection-dropdown/collection-dropdown.component';
 import { SectionsService } from '../../sections/sections.service';
 import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
+import { SectionsType } from '../../sections/sections-type';
 import { SubmissionDefinitionsConfigService } from '../../../core/config/submission-definitions-config.service';
 import { RequestService } from '../../../core/data/request.service';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
@@ -153,7 +154,7 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
 
       this.selectedCollectionName$ = this.collectionDataService.findById(this.currentCollectionId).pipe(
         getFirstSucceededRemoteDataPayload(),
-        map((collection: Collection) => this.nameService.getName(collection))
+        map((collection: Collection) => collection.entityType + '.listelement.badge')
       );
     }
   }
@@ -163,7 +164,7 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
    */
   ngOnInit() {
     this.pathCombiner = new JsonPatchOperationPathCombiner('sections', 'collection');
-    this.available$ = this.sectionsService.isSectionAvailable(this.submissionId, 'collection');
+    this.available$ = this.sectionsService.isSectionTypeAvailable(this.submissionId, SectionsType.collection);
     if (this.entityType) {
       this.metadata = 'dspace.entity.type';
     }

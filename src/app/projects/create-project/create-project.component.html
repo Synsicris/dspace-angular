@@ -5,6 +5,7 @@
     </button>
   </div>
   <div class="modal-body">
+    <ds-alert [content]="alertMsgKey | translate"></ds-alert>
     <form *ngIf="createForm" (ngSubmit)="create();" [formGroup]="createForm" >
       <div class="form-group">
         <input type="search"
@@ -12,7 +13,7 @@
                formControlName="name"
                id="name"
                (click)="$event.stopPropagation();"
-               placeholder="{{'project.create.name.placeholder' | translate }}"
+               placeholder="{{ (!isSubproject ? 'project.create.name.placeholder' : 'subproject.create.name.placeholder') | translate }}"
                dsAutoFocus>
       </div>
       <div *ngIf="isSubproject" class="form-group">
