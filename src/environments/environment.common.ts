@@ -406,7 +406,8 @@ export const environment: GlobalConfig = {
     entityToCollectionMapAuthorityMetadata: 'impactpathway.entity.map',
     projObjectiveEntity: 'proj_objective',
     iaObjectiveEntity: 'ia_objective',
-    impactPathwaysSearchConfigName: 'allImpactPathways'
+    impactPathwaysSearchConfigName: 'allImpactPathways',
+    contributionFundingprogrammeEntity: 'contribution_fundingprogramme'
   },
   workingPlan: {
     workingPlanFormName: 'working_plan_workpackage_form',

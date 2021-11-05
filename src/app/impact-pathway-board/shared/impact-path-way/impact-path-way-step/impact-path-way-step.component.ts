@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-import { find, map, mergeMap, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
+import { find, map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -14,6 +14,12 @@ import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple
 import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';
 import { isNotEmpty } from '../../../../shared/empty.util';
 import { DragAndDropContainerComponent } from '../../drag-and-drop-container.component';
+import { CollectionDataService } from '../../../../core/data/collection-data.service';
+import { environment } from '../../../../../environments/environment';
+import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
+import { RemoteData } from '../../../../core/data/remote-data';
+import { Collection } from '../../../../core/shared/collection.model';
+import { PaginatedList } from '../../../../core/data/paginated-list.model';
 
 @Component({
   selector: 'ipw-impact-path-way-step',
@@ -37,6 +43,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
 
   constructor(
     protected cdr: ChangeDetectorRef,
+    protected collectionService: CollectionDataService,
     protected impactPathwayService: ImpactPathwayService,
     protected modalService: NgbModal,
     protected translate: TranslateService
@@ -77,8 +84,24 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
 
   createTask() {
     this.impactPathwayStep$.pipe(
-      take(1)
-    ).subscribe((impactPathwayStep: ImpactPathwayStep) => {
+      take(1),
+      switchMap((impactPathwayStep: ImpactPathwayStep) => {
+        if (impactPathwayStep.hasScope()) {
+          return this.collectionService.getAuthorizedCollectionByCommunityAndEntityType(this.projectId, environment.impactPathway.contributionFundingprogrammeEntity).pipe(
+            getFirstCompletedRemoteData(),
+            map((collectionRD: RemoteData<PaginatedList<Collection>>) => {
+              if (collectionRD.hasSucceeded && isNotEmpty(collectionRD.payload.page)) {
+                return [impactPathwayStep, collectionRD.payload.page[0].id];
+              } else {
+                return [impactPathwayStep, null];
+              }
+            })
+          );
+        } else {
+          return observableOf([impactPathwayStep, null]);
+        }
+      })
+    ).subscribe(([impactPathwayStep, authorityScopeUUID]: [ImpactPathwayStep, string]) => {
       const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg' });
 
       modalRef.result.then((result) => {
@@ -108,6 +131,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
         false
       );
       modalRef.componentInstance.scope = this.projectId;
+      modalRef.componentInstance.authorityScope = authorityScopeUUID;
       modalRef.componentInstance.query = this.buildExcludedTasksQuery();
 
       modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {

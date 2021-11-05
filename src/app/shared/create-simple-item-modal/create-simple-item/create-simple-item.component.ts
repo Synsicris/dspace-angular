@@ -41,6 +41,12 @@ export class CreateSimpleItemComponent implements OnInit, OnDestroy {
   @Input() processing: Observable<boolean>;
 
   /**
+   * The collection scope used for authority
+   * @type {string}
+   */
+  @Input() authorityScope: string;
+
+  /**
    * EventEmitter that will emit a SimpleItem object
    */
   @Output() createItem: EventEmitter<SimpleItem> = new EventEmitter<SimpleItem>();
@@ -113,7 +119,7 @@ export class CreateSimpleItemComponent implements OnInit, OnDestroy {
         this.formModel = this.formBuilderService.modelFromConfiguration(
           null,
           formConfig,
-          '',
+          this.authorityScope || '',
           null,
           SubmissionScopeType.WorkspaceItem
         );
