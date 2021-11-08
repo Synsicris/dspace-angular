@@ -1714,7 +1714,7 @@
   "context-menu.actions.export-item.btn": "Export",
 
 
-  "context-menu.actions.generate-report.btn": "Generate project report",
+  "context-menu.actions.generate-report.btn": "<i class=\"fas fa-file-export\"></i> Generate project report",
 
 
   "context-menu.actions.generate-report.success": "The project report has been generated successfully.",
@@ -1729,22 +1729,22 @@
   "context-menu.actions.label": "Options",
 
 
-  "context-menu.actions.easy-online-import.btn": "Import from Easy-Online",
+  "context-menu.actions.easy-online-import.btn": "<i class=\"fas fa-file-import\"></i> Import from Easy-Online",
 
 
-  "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
+  "context-menu.actions.edit-item.btn.FULL": "<i class=\"fas fa-edit\"></i> Edit all the details",
 
 
-  "context-menu.actions.edit-item.btn.OWNER": "Edit",
+  "context-menu.actions.edit-item.btn.OWNER": "<i class=\"fas fa-edit\"></i> Edit",
 
 
-  "context-menu.actions.edit-item.btn.CUSTOM": "Edit",
+  "context-menu.actions.edit-item.btn.CUSTOM": "<i class=\"fas fa-edit\"></i> Edit",
 
 
-  "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
+  "context-menu.actions.edit-item.btn.DIRECTOR": "<i class=\"fas fa-edit\"></i> Edit",
 
 
-  "context-menu.actions.edit-item.btn.INVESTIGATOR": "Edit",
+  "context-menu.actions.edit-item.btn.INVESTIGATOR": "<i class=\"fas fa-edit\"></i> Edit",
 
 
   "context-menu.actions.request-correction.btn": "Request a correction",
@@ -5703,7 +5703,7 @@
   "project-overview.invitation.email": "Email",
 
 
-  "project-overview.invitation-admin.menu.project": "Invite coordinators to the current project",
+  "project-overview.invitation-admin.menu.project": "<i class=\"fas fa-user-plus\"></i> Invite coordinators to the current project",
 
 
   "project-overview.invitation-members.menu.project": "Invite members to the current project",
@@ -5727,10 +5727,10 @@
   "project-overview.invitation-admin.menu.subproject": "Invite coordinators to the current subproject",
 
 
-  "project-overview.invitation-members.menu.subproject": "Invite members to the current subproject",
+  "project-overview.invitation-members.menu.subproject": "<i class=\"fas fa-user-plus\"></i> Invite members to the current subproject",
 
 
-  "project-overview.page.header.delete.btn": "Delete project",
+  "project-overview.page.header.delete.btn": "<i class=\"fas fa-trash\"></i> Delete project",
 
 
   "project-overview.page.header.delete.confirm.cancel": "Cancel",
@@ -5760,7 +5760,7 @@
   "project-overview.page.header.project.title": "Project overview : ",
 
 
-  "project-overview.page.content.all-items": "All items",
+  "project-overview.page.content.all-items": "<i class=\"fas fa-history\"></i> All items",
 
 
   "project-overview.page.content.card-project.title": "Project related uploads",
@@ -8757,7 +8757,7 @@
   "working-plan.chart.column.changeStartDate.description": "To shift the whole project by a defined number of days, please provide a number in the input field below.",
 
 
-  "working-plan.chart.column.responsible": "Responsible project partner",
+  "working-plan.chart.column.responsible": "Responsible organisation",
 
 
   "working-plan.chart.column.sortBy": "Sort by…",
@@ -9525,31 +9525,31 @@
   "layout.box.header.latestParentProjectsCompleted": "Joint projects - finished",
 
 
-  "layout.box.header.basics": "Primary data - Subproject",
+  "layout.box.header.basics": "Subproject - Primary data",
 
 
-  "layout.box.header.details": "Details",
+  "layout.box.header.details": "Subprojekt - Details",
 
 
-  "layout.box.header.Funding": "Funding",
+  "layout.box.header.Funding": "Subproject - Funding",
 
 
-  "layout.box.header.projectpartner": "Project partners",
+  "layout.box.header.projectpartner": "Subproject - Project partners",
 
 
-  "layout.box.header.subcontractor": "Subcontractors",
+  "layout.box.header.subcontractor": "Subproject - Subcontractors",
 
 
-  "layout.box.header.exploitationplan": "Exploitation plan",
+  "layout.box.header.exploitationplan": "Subproject - Exploitation plan",
 
 
   "layout.box.header.Person_m": "Person",
 
 
-  "layout.box.header.jpbasics": "Primary data - Joint project",
+  "layout.box.header.jpbasics": "Joint projekt - Primary data",
 
 
-  "layout.box.header.jpdetails": "Details",
+  "layout.box.header.jpdetails": "Joint project - Details",
 
 
   "layout.box.header.Project": "Subprojects",
@@ -9765,12 +9765,24 @@
   "search.filters.entityType.ia_objective": "Target for interaction and transfer",
 
 
+  "layout.tab.header.Subprojects": "Subprojects",
+
+
+  "layout.tab.header.Involved": "Involved",
+
+
   "layout.tab.header.exp_societalimpact": "Expected societal impacts (new)",
 
 
   "layout.box.header.exp_societalimpact": "Expected societal impacts (new)",
 
 
-  "layout.box.header.exp_societalimpact_m": "Expected societal impact (new)"
+  "layout.box.header.exp_societalimpact_m": "Expected societal impact (new)",
+
+
+  "subproject.create.grants.project-option": "Editable by all project members",
+
+
+  "subpproject.create.grants.subproject-option": "Editable by only sub-project members",
 
 }
