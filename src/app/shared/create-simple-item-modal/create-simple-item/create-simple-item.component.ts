@@ -123,6 +123,7 @@ export class CreateSimpleItemComponent implements OnInit, OnDestroy {
           null,
           SubmissionScopeType.WorkspaceItem
         );
+        this.formBuilderService.addFormModel(this.formId, this.formModel);
       });
   }
 
@@ -154,5 +155,6 @@ export class CreateSimpleItemComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.formId = null;
     this.formModel = null;
+    this.formBuilderService.removeFormModel(this.formId);
   }
 }
