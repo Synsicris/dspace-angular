@@ -8430,6 +8430,21 @@
   // TODO New key - Add a translation
   "profile.head": "Profil anpassen",
 
+  // "context-menu.actions.edit-item.btn.FULL": "Edit all the details",
+  "profile.edit-item.btn.FULL": "Alle Angaben bearbeiten",
+
+  // "context-menu.actions.edit-item.btn.OWNER": "Edit",
+  "profile.edit-item.btn.OWNER": "Bearbeiten",
+
+  // "context-menu.actions.edit-item.btn.CUSTOM": "Edit",
+  "profile.edit-item.btn.CUSTOM": "Bearbeiten",
+
+  // "context-menu.actions.edit-item.btn.DIRECTOR": "Edit",
+  "profile.edit-item.btn.DIRECTOR": "Bearbeiten",
+
+  // "context-menu.actions.edit-item.btn.INVESTIGATOR": "Edit",
+  "profile.edit-item.btn.INVESTIGATOR": "Bearbeiten",
+
   // "profile.main.info": "Here you create your person profile. This increases your visibility and enables you to import publication data into the monitoring tool. Creating the profile is voluntary. The monitoring tool can also be used without a person profile. The person profile is not linked to a project, but contains general information about you.",
   "profile.main.info": "Hier legen Sie Ihr Personenprofil an. Dadurch erhöhen Sie Ihre Sichtbarkeit und ermöglichen den Import von Publikationsdaten in das Monitoring-Tool. Das Anlegen des Profils ist freiwillig. Die Nutzung des Monitoring-Tools ist auch ohne Personenprofil möglich. Das Personenprofil ist an kein Projekt gebunden, sondern enthält allgemeine Informationen zu Ihrer Person.",
 

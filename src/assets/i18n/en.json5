@@ -5481,6 +5481,15 @@
 
   "profile.head": "Update Profile",
 
+  "profile.edit-item.btn.FULL": "Edit all the details",
+
+  "profile.edit-item.btn.OWNER": "Edit",
+
+  "profile.edit-item.btn.CUSTOM": "Edit",
+
+  "profile.edit-item.btn.DIRECTOR": "Edit",
+
+  "profile.edit-item.btn.INVESTIGATOR": "Edit",
 
   "profile.main.info": "Here you create your person profile. This increases your visibility and enables you to import publication data into the monitoring tool. Creating the profile is voluntary. The monitoring tool can also be used without a person profile. The person profile is not linked to a project, but contains general information about you.",
 
