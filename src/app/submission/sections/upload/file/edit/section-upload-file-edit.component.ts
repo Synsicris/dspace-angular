@@ -14,6 +14,7 @@ import {
   MATCH_ENABLED,
   OR_OPERATOR
 } from '@ng-dynamic-forms/core';
+import { TranslateService } from '@ngx-translate/core';
 
 import { WorkspaceitemSectionUploadFileObject } from '../../../../../core/submission/models/workspaceitem-section-upload-file.model';
 import { FormBuilderService } from '../../../../../shared/form/builder/form-builder.service';
@@ -130,11 +131,13 @@ export class SubmissionSectionUploadFileEditComponent implements OnChanges {
    * @param {FormBuilderService} formBuilderService
    * @param {FormService} formService
    * @param {SubmissionService} submissionService
+   * @param {TranslateService} translate
    */
   constructor(private cdr: ChangeDetectorRef,
               private formBuilderService: FormBuilderService,
               private formService: FormService,
-              private submissionService: SubmissionService) {
+              private submissionService: SubmissionService,
+              private translate: TranslateService) {
   }
 
   /**
@@ -175,9 +178,12 @@ export class SubmissionSectionUploadFileEditComponent implements OnChanges {
 
     if (this.collectionPolicyType === POLICY_DEFAULT_WITH_LIST) {
       for (const accessCondition of this.availableAccessConditionOptions) {
+        const label18n = 'submission.sections.upload.form.access-condition.' + accessCondition.name;
+        const labelTranslated = this.translate.instant(label18n);
+        const label = labelTranslated === label18n ? accessCondition.name : labelTranslated;
         accessConditionTypeOptions.push(
           {
-            label: accessCondition.name,
+            label: label,
             value: accessCondition.name
           }
         );
