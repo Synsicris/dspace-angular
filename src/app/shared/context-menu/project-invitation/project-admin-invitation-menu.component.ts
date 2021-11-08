@@ -67,7 +67,7 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
   ngOnInit(): void {
     this.isSubproject = (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
     if (this.canShow()) {
-      this.projectService.getProjectCommunityByItemId((this.contextMenuObject as Item).uuid).pipe(
+      this.projectService.getProjectCommunityByProjectItemId((this.contextMenuObject as Item).uuid).pipe(
         take(1),
         getRemoteDataPayload()
       ).subscribe((projectCommunity: Community) => {
@@ -93,6 +93,7 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
   public openInvitationModal() {
     let groups$: Observable<string[]>;
     if (this.isSubproject) {
+      groups$ = this.projectGroupService.getInvitationSubprojectAdminsGroupsByCommunity(this.projectCommunity);
       groups$ = this.projectGroupService.getInvitationSubprojectAdminsGroupsByCommunity(this.projectCommunity);
     } else {
       groups$ = this.projectGroupService.getInvitationProjectAllGroupsByCommunity(this.projectCommunity);

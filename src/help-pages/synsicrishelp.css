@@ -1,0 +1,141 @@
+
+body {
+    display: grid;
+		gap: 0em;
+		font-family: "Arial", "Helvetica", "Courier New", sans-serif;
+}
+
+@media (min-width: 30em) { 
+	/* Breite beträgt mindestens 30em */ 
+	body {
+		grid-template-columns: 1fr 4fr;	
+		grid-template-rows: auto 1fr 100px;
+	}
+}
+
+header,footer {
+	grid-column: 1 / -1;
+}
+
+header {
+	border-bottom-color: #0011cf;
+}
+
+nav {
+background: #ced4da;
+}
+
+main {
+margin: .5em .5em .5em .5em;
+max-width: 800px;
+}
+
+a:link {
+  color: #207698;
+  font-weight: bold;
+}
+a:visited { 
+  color: #134559;
+  font-weight: bold;
+}
+a:focus { 
+  color: #6c757d;
+  font-weight: bold;
+}
+a:hover { 
+  color: #6c757d;
+  font-weight: bold;
+}
+a:active { 
+  color: #6c757d;
+  font-weight: bold;
+}
+
+b {
+	font-weight: bold;
+}
+
+img {
+	width: 100%;
+	max-width: 800px;
+	min-width: 10em;
+	height: auto;
+	border: .25em solid #959595;
+	}
+
+n1 {
+	margin-left: .5em;
+}
+n2 {
+	margin-left: 2em;
+}
+n3 {
+	margin-left: 3.5em;
+}
+
+
+.gridContainer {
+  display: grid;
+  gap: 1em;
+  margin: 0em;
+}
+.gridContainer > .menu {
+  margin: 2em;
+}
+
+
+/*
+element.style {
+}
+body {
+    overflow-x: hidden;
+}
+body {
+    margin: 0;
+    font-family: Nunito,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #444;
+    text-align: left;
+    background-color: #fff;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+body {
+    display: block;
+}
+:root {
+    --blue: #43515f;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #cf4444;
+    --orange: #fd7e14;
+    --yellow: #ec9433;
+    --green: #92c642;
+    --teal: #20c997;
+    --cyan: #207698;
+    --white: #fff;
+    --gray: #959595;
+    --gray-dark: #444;
+    --primary: #43515f;
+    --secondary: #777;
+    --success: #92c642;
+    --info: #207698;
+    --warning: #ec9433;
+    --danger: #cf4444;
+    --light: #e8ebf3;
+    --dark: #43515f;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: "Nunito",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+
+*/
