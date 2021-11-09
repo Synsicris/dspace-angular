@@ -4543,7 +4543,7 @@
   "mydspace.show.allProjectItems": "All items in the project",
 
 
-  "mydspace.search-form.placeholder": "Search in mydspace...",
+  "mydspace.search-form.placeholder": "Search in mydspace…",
 
 
   "mydspace.show.workflow": "All tasks",
@@ -5591,7 +5591,9 @@
 
   "subproject.create.name.placeholder": "Organisation Name and Subproject Short title",
 
-  "subproject.create.info": "info",
+
+  "subproject.create.info": "Info",
+
 
   "project.create.success": "The new project has been generated successfully.",
 
@@ -5599,8 +5601,9 @@
   "project.listelement.badge": "Subproject",
 
 
+  "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Manage project members",
 
-  "project.manage.menu.project": "Manage project members",
+
   "project.manage.menu.subproject": "Manage subproject members",
   "project.manage.breadcrumbs": "Manage project members",
 
@@ -5733,7 +5736,7 @@
   "project-overview.invitation.success": "Invitation sent successfully.",
 
 
-  "project-overview.invitation-admin.menu.subproject": "Invite coordinators to the current subproject",
+  "project-overview.invitation-admin.menu.subproject": "<i class=\"fas fa-user-plus\"></i> Invite coordinators to the current subproject",
 
 
   "project-overview.invitation-members.menu.subproject": "<i class=\"fas fa-user-plus\"></i> Invite members to the current subproject",
@@ -9800,6 +9803,6 @@
   "subproject.create.grants.project-option": "Editable by all project members",
 
 
-  "subpproject.create.grants.subproject-option": "Editable by only sub-project members",
+  "subpproject.create.grants.subproject-option": "Editable by only sub-project members"
 
 }
