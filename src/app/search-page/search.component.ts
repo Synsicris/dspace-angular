@@ -100,10 +100,15 @@ export class SearchComponent implements OnInit {
   context: Context;
 
   /**
+   * The entity type which the target entity type is related
+   */
+  @Input()
+  relatedEntityType: string;
+  /**
    * The entity type for which create an item
    */
   @Input()
-  entityType: string;
+  targetEntityType: string;
 
   /**
    * The current relevant scope

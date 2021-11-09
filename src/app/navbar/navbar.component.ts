@@ -1,4 +1,8 @@
 import { Component, Injector } from '@angular/core';
+
+import { combineLatest } from 'rxjs';
+import { take } from 'rxjs/operators';
+
 import { slideMobileNav } from '../shared/animations/slide';
 import { MenuComponent } from '../shared/menu/menu.component';
 import { MenuService } from '../shared/menu/menu.service';
@@ -8,6 +12,8 @@ import { HostWindowService } from '../shared/host-window.service';
 import { SectionDataService } from '../core/layout/section-data.service';
 import { getFirstSucceededRemoteListPayload } from '../core/shared/operators';
 import { Section } from '../core/layout/models/section.model';
+import { FeatureID } from '../core/data/feature-authorization/feature-id';
+import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 
 /**
  * Component representing the public navbar
@@ -28,7 +34,8 @@ export class NavbarComponent extends MenuComponent {
   constructor(protected menuService: MenuService,
               protected injector: Injector,
               public windowService: HostWindowService,
-              protected sectionDataService: SectionDataService
+              protected sectionDataService: SectionDataService,
+              protected authorizationService: AuthorizationDataService
   ) {
     super(menuService, injector);
   }
@@ -42,6 +49,7 @@ export class NavbarComponent extends MenuComponent {
    * Initialize all menu sections and items for this menu
    */
   createMenu() {
+    const isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(take(1));
     const menuList: any[] = [
       /* Communities & Collections tree */
       {
@@ -57,16 +65,15 @@ export class NavbarComponent extends MenuComponent {
       },
     ];
 
-    menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
-      shouldPersistOnRouteChange: true
-    })));
+    const findAll$ = this.sectionDataService.findAll().pipe( getFirstSucceededRemoteListPayload());
+    combineLatest([isAdmin$, findAll$]).subscribe( ([isAdmin, sections]: [boolean, Section[]]) => {
+      if (isAdmin) {
+        menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
+          shouldPersistOnRouteChange: true
+        })));
 
-    this.sectionDataService.findAll()
-      .pipe( getFirstSucceededRemoteListPayload())
-      .subscribe( (sections: Section[]) => {
-        sections
-          .filter((section) => section.id !== 'site')
-          .forEach( (section) => {
+        sections.filter((section) => section.id !== 'site')
+                .forEach( (section) => {
           const menuSection = {
             id: `explore_${section.id}`,
             active: false,
@@ -81,7 +88,7 @@ export class NavbarComponent extends MenuComponent {
             shouldPersistOnRouteChange: true
           }));
         });
-      });
-
+      }
+    });
   }
 }

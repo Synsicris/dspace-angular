@@ -63,6 +63,8 @@ export const PERSON_ENTITY = 'Person';
 export const PROJECT_RELATION_METADATA = 'synsicris.relation.project';
 export const PROJECT_ENTITY = 'Project';
 export const PROJECT_ENTITY_METADATA = 'synsicris.relation.entity_project';
+export const SUBCONTRACTOR_ENTITY_METADATA = 'subcontractor';
+export const PROJECTPATNER_ENTITY_METADATA = 'projectpartner';
 
 export enum ProjectGrantsTypes {
   Project = 'parentproject',

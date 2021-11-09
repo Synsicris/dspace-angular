@@ -14,12 +14,17 @@ import { MenuServiceStub } from '../shared/testing/menu-service.stub';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SectionDataService } from '../core/layout/section-data.service';
+import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 
 let comp: NavbarComponent;
 let fixture: ComponentFixture<NavbarComponent>;
 
 describe('NavbarComponent', () => {
   const menuService = new MenuServiceStub();
+
+  const authorizationDataServiceMock: any = jasmine.createSpyObj('AuthorizationDataService', {
+    isAuthorized: observableOf(true)
+  });
 
   // waitForAsync beforeEach
   beforeEach(waitForAsync(() => {
@@ -35,7 +40,8 @@ describe('NavbarComponent', () => {
         { provide: MenuService, useValue: menuService },
         { provide: HostWindowService, useValue: new HostWindowServiceStub(800) },
         { provide: ActivatedRoute, useValue: {} },
-        { provide: SectionDataService, useValue: {} }
+        { provide: SectionDataService, useValue: {} },
+        { provide: AuthorizationDataService, useValue: authorizationDataServiceMock }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })

@@ -11,7 +11,8 @@
         [configuration$]="configuration$"
         [searchEnabled]="searchEnabled"
         [sideBarWidth]="sideBarWidth"
-        [entityType]="box.shortname"
+        [relatedEntityType]="item.entityType"
+        [targetEntityType]="box.shortname"
         [scope]="(projectScope$ | async)?.uuid"
         [showCreate]="true"
         [showExport]="false">

@@ -30,7 +30,7 @@
             [class.ml-1]="i != 0"
             [routerLink]="['/edit-items', researcherProfileItemId + ':' + editMode.name]">
       <i class='fas fa-user-edit'></i>
-      {{editMode.label ? (editMode.label | translate) : ('context-menu.actions.edit-item.btn.' + editMode.name | translate)}}
+      {{editMode.label ? (editMode.label | translate) : ('profile.edit-item.btn.' + editMode.name | translate)}}
     </button>
     <button class="btn btn-danger" [disabled]="!researcherProfile" (click)="deleteProfile(researcherProfile)">
             <span *ngIf="(isProcessingDelete() | async)">
