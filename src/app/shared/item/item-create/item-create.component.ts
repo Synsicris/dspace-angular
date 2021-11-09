@@ -12,7 +12,12 @@ import { BehaviorSubject, combineLatest } from 'rxjs';
 import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { isNotEmpty } from '../../empty.util';
 import { CreateProjectComponent } from '../../../projects/create-project/create-project.component';
-import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
+import {
+  PARENT_PROJECT_ENTITY,
+  PROJECT_ENTITY,
+  PROJECTPATNER_ENTITY_METADATA,
+  SUBCONTRACTOR_ENTITY_METADATA
+} from '../../../core/project/project-data.service';
 
 @Component({
   selector: 'ds-item-create',
@@ -22,9 +27,13 @@ import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
 export class ItemCreateComponent implements OnInit {
 
   /**
+   * The entity type which the target entity type is related
+   */
+  @Input() relatedEntityType: string;
+  /**
    * The entity type for which create an item
    */
-  @Input() entityType: string;
+  @Input() targetEntityType: string;
   /**
    * The current relevant scope
    */
@@ -37,11 +46,13 @@ export class ItemCreateComponent implements OnInit {
   ngOnInit(): void {
     combineLatest([
       this.authService.isAuthenticated(),
-      this.entityTypeService.getEntityTypeByLabel(this.entityType).pipe(
+      this.entityTypeService.getEntityTypeByLabel(this.targetEntityType).pipe(
         getFirstSucceededRemoteDataPayload()
       )]
     ).pipe(
-      map(([isAuthenticated, entityType]) => isAuthenticated && isNotEmpty(entityType)),
+      map(([isAuthenticated, entityType]) => isAuthenticated && isNotEmpty(entityType)
+        && !(this.relatedEntityType === PARENT_PROJECT_ENTITY && entityType.label === SUBCONTRACTOR_ENTITY_METADATA)
+        && !(this.relatedEntityType === PARENT_PROJECT_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA)),
       take(1)
     ).subscribe((canShow) => this.canShow$.next(canShow));
   }
@@ -54,7 +65,7 @@ export class ItemCreateComponent implements OnInit {
   }
 
   openDialog() {
-    if (this.entityType === PROJECT_ENTITY) {
+    if (this.targetEntityType === PROJECT_ENTITY) {
       this.createSubproject();
     } else {
       this.createEntity();
@@ -65,7 +76,7 @@ export class ItemCreateComponent implements OnInit {
    */
   createEntity() {
     const modalRef = this.modalService.open(SubmissionImportExternalCollectionComponent);
-    modalRef.componentInstance.entityType = this.entityType;
+    modalRef.componentInstance.entityType = this.targetEntityType;
     modalRef.componentInstance.scope = this.scope;
     modalRef.componentInstance.selectedEvent.pipe(
       take(1)
@@ -76,8 +87,8 @@ export class ItemCreateComponent implements OnInit {
           ['collection']: collectionListEntry.collection.uuid,
         }
       };
-      if (this.entityType) {
-        navigationExtras.queryParams.entityType = this.entityType;
+      if (this.targetEntityType) {
+        navigationExtras.queryParams.entityType = this.targetEntityType;
       }
       this.router.navigate(['/submit'], navigationExtras);
     });
