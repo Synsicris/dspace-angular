@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 import { ImpactPathway } from './core/models/impact-pathway.model';
 import { ImpactPathwayService } from './core/impact-pathway.service';
+import { isNotEmpty } from '../shared/empty.util';
 
 @Component({
   selector: 'ipw-dashboard',
@@ -16,17 +17,24 @@ export class ImpactPathwayBoardComponent implements OnInit {
   @Input() public projectId: string;
   @Input() public impactPathwayId: string;
 
-  private impactPathWay$: Observable<ImpactPathway>;
+  private impactPathWay$: BehaviorSubject<ImpactPathway> = new BehaviorSubject<ImpactPathway>(null);
 
   constructor(private impactPathwayService: ImpactPathwayService) {
   }
 
   ngOnInit(): void {
-    this.impactPathWay$ = this.impactPathwayService.getImpactPathwayById(this.impactPathwayId);
+    combineLatest([
+      this.impactPathwayService.getImpactPathwayById(this.impactPathwayId),
+      this.isLoading()
+    ]).pipe(
+      filter(([ipw, loading]: [ImpactPathway, boolean]) => isNotEmpty(ipw) && !loading)
+    ).subscribe(([ipw, loading]: [ImpactPathway, boolean]) => {
+      this.impactPathWay$.next(ipw);
+    });
   }
 
   getImpactPathway(): Observable<ImpactPathway> {
-    return this.impactPathWay$;
+    return this.impactPathWay$.asObservable();
   }
 
   isLoading(): Observable<boolean> {
