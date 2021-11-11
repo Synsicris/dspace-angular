@@ -46,10 +46,10 @@ import {
   impactPathwayByIDSelector,
   impactPathwayObjectsSelector,
   impactPathwayStateSelector,
+  impactPathwaySubTaskCollapsable,
   isImpactPathwayLoadedSelector,
   isImpactPathwayProcessingSelector,
-  isImpactPathwayRemovingSelector,
-  impactPathwaySubTaskCollapsable
+  isImpactPathwayRemovingSelector
 } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
@@ -60,6 +60,7 @@ import {
   AddImpactPathwaySubTaskAction,
   AddImpactPathwayTaskAction,
   AddImpactPathwayTaskLinksAction,
+  ClearImpactPathwaySubtaskCollapseAction,
   GenerateImpactPathwayAction,
   GenerateImpactPathwaySubTaskAction,
   GenerateImpactPathwayTaskAction,
@@ -71,11 +72,10 @@ import {
   RemoveImpactPathwayAction,
   RemoveImpactPathwaySubTaskAction,
   RemoveImpactPathwayTaskAction,
+  SetImpactPathwaySubTaskCollapseAction,
   SetImpactPathwayTargetTaskAction,
   UpdateImpactPathwayAction,
-  UpdateImpactPathwayTaskAction,
-  SetImpactPathwaySubTaskCollapseAction,
-  ClearImpactPathwaySubtaskCollapseAction
+  UpdateImpactPathwayTaskAction
 } from './impact-pathway.actions';
 import { ErrorResponse } from '../../core/cache/response.models';
 import {
@@ -395,8 +395,7 @@ export class ImpactPathwayService {
   getImpactPathwayById(impactPathwayId: string): Observable<ImpactPathway> {
     return this.store.pipe(
       select(impactPathwayObjectsSelector),
-      map((entries: ImpactPathwayEntries) => entries[impactPathwayId]),
-      take(1)
+      map((entries: ImpactPathwayEntries) => entries[impactPathwayId])
     );
   }
 
