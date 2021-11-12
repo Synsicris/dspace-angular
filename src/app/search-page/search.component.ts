@@ -117,16 +117,22 @@ export class SearchComponent implements OnInit {
   scope: string;
 
   /**
-   * The current context
+   * A boolean representing if show create button
    */
   @Input()
-  showCreate = false;
+  showCreate = true;
 
   /**
-   * The current context
+   * A boolean representing if show export button
    */
   @Input()
   showExport = true;
+
+  /**
+   * A boolean representing if show search sidebar button
+   */
+  @Input()
+  showSidebar = true;
 
   /**
    * Link to the search page
