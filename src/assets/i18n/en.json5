@@ -2686,7 +2686,7 @@
   "form.last-name": "Last name",
 
   
-  "form.loading": "Loading...",
+  "form.loading": "Loading…",
 
   
   "form.lookup": "Lookup",
@@ -4090,7 +4090,7 @@
   "loading.community": "Loading community...",
 
   
-  "loading.default": "Loading...",
+  "loading.default": "Loading…",
 
   
   "loading.item": "Loading item...",
@@ -4102,7 +4102,7 @@
   "loading.mydspace-results": "Loading items...",
 
   
-  "loading.objects": "Loading...",
+  "loading.objects": "Loading…",
 
   
   "loading.recent-submissions": "Loading recent submissions...",
@@ -6949,7 +6949,7 @@
   "statistics.reports.title": "Reports",
 
   
-  "submission.edit.breadcrumbs": "Edit Submission",
+  "submission.edit.breadcrumbs": "Edit Collection",
 
   
   "submission.edit.title": "Edit Submission",
@@ -9811,6 +9811,12 @@
   "submission.sections.upload.form.access-condition.embargo": "embargo",
 
   
-  "submission.sections.upload.form.access-condition.administrator": "administrator"
+  "submission.sections.upload.form.access-condition.administrator": "administrator",
+
+  
+  "Funding.listelement.badge": "Funding",
+
+  
+  "profile.edit-item.btn.OWNER": "Edit"
 
 }

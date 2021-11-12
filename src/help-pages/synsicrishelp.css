@@ -5,10 +5,10 @@ body {
 		font-family: "Arial", "Helvetica", "Courier New", sans-serif;
 }
 
-@media (min-width: 30em) { 
-	/* Breite beträgt mindestens 30em */ 
+@media (min-width: 30em) {
+	/* Breite beträgt mindestens 30em */
 	body {
-		grid-template-columns: 1fr 4fr;	
+		grid-template-columns: 1fr 4fr;
 		grid-template-rows: auto 1fr 100px;
 	}
 }
@@ -34,19 +34,19 @@ a:link {
   color: #207698;
   font-weight: bold;
 }
-a:visited { 
+a:visited {
   color: #134559;
   font-weight: bold;
 }
-a:focus { 
+a:focus {
   color: #6c757d;
   font-weight: bold;
 }
-a:hover { 
+a:hover {
   color: #6c757d;
   font-weight: bold;
 }
-a:active { 
+a:active {
   color: #6c757d;
   font-weight: bold;
 }
@@ -60,7 +60,6 @@ img {
 	max-width: 800px;
 	min-width: 10em;
 	height: auto;
-	border: .25em solid #959595;
 	}
 
 n1 {
