@@ -27,32 +27,38 @@
 	 <h1>&nbsp;</h1>
 	 <!-- Platzhalter deutsch / englisch für Auswahl anderer Sprache -->
       <n1><a href="de-project-about.html">Über_das_Tool</a></n1><br>
-	  <n2><a href="de-project-about-objectives.html">Hintergrund_/_Ziele</a></n2><br>
-	  <n2><a href="de-project-about-difference.html">Tool_ersetzt_Textdokumente</a></n2><br>
-	  <n2><b>Inhalte_unterscheiden</b></n2><br>
-	  <n3><a href="de-project-about-entities-proj.html">Verbundprojekt_/_Teilprojekt</a></n3><br>
-	  <n3><a href="de-project-about-entities-involved.html">Beteiligte</a></n3><br>
-	  <n3><a href="de-project-about-entities-objectives.html">Ziele</a></n3><br>
-	  <n3><a href="de-project-about-entities-events.html">Interaktion</a></n3><br>
-	  <n3><a href="de-project-about-entities-publication.html">Veröffentlichungen</a></n3><br>
-	  <n3><a href="de-project-about-entities-applic.html">Anwendung_(Möglichkeiten)</a></n3><br>
-	  <n3><a href="de-project-about-entities-impact.html">gesell._Wirkung</a></n3><br>
-	  <n2><a href="de-project-about-structure.html">Inhalte_strukturieren</a></n2><br>
       <n1><a href="de-project-use.html">Navigation_/_Funktion</a></n1><br>
       <n1><a href="de-project-funder.html">Förderinformationen</a></n1><br>
 	  <n1><a href="de-project-step.html">Nutzung_im_Projektverlauf</a></n1><br>
+	  <n2><b>Antrag</b></n2><br>
+	  <n2><a href="de-project-step-livetime.html">Projektverlauf</a></n2><br>
+	  <n2><a href="de-project-step-completion.html">Projektabschluss</a></n2><br>
+	  <n2><a href="de-project-step-update.html">Nach_Projektende</a></n2><br>
 	  <n1><a href="de-project-details.html">Details</a></n1>
   </nav>
 	<main>
-      <h1>Inhalte unterscheiden</h1>
 
+    <p> Diese Inhalte werden demnächst bereitgestellt</p>
+<!--
+      <h1>Antrag</h1>
+      <p>Teasertext <b>gesellschaftlichen Transformation</b> Text</p>
 		<article>
-
-		<img src="img/de_project_about_entities_bereiche_nutzen.png">
-
+		<h1>Überschrift</h1>
+		<p>Text</p>
+		<img src="img/xy.png">
+		<p>Text
+		<ul>
+		<li>Text</li>
+		<li>Text</li></ul>
+		</p>
 		</article>
 
+		<article>
+		<h1>Überschrift nächster Abschnitt</h1>
+		<p>Text</p>
+		</article>
 
+  -->
     </main>
 
 
