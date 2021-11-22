@@ -2388,7 +2388,8 @@
   // TODO New key - Add a translation
   "cookies.consent.purpose.statistical": "Statistical",
 
-  // "coordinator.page.new-project": "Create new project",
+  // "coordinator.page.new-project": "<i class=\"fas fa-plus-circle\"></i> Create new project",
+  // TODO Source message changed - Revise the translation
   "coordinator.page.new-project": "<i class=\"fas fa-plus-circle\"></i> Neues Verbundprojekt anlegen",
 
   // "coordinator.page.my-profile": "My profile",
@@ -2480,7 +2481,8 @@
   // TODO New key - Add a translation
   "dso-selector.claim.item.not-mine-label": "None of these are mine",
 
-  // "dso-selector.create.collection.head": "New collection",
+  // "dso-selector.create.collection.head": "New Collection",
+  // TODO Source message changed - Revise the translation
   "dso-selector.create.collection.head": "Neuer Eintrag",
 
   // "dso-selector.create.collection.sub-level": "Create a new collection in",
@@ -2602,9 +2604,12 @@
   // TODO New key - Add a translation
   "easy-online-import.info": "<p><b><i>1. Ziehen Sie die Easy-online xml Datei in das graue Upload-Feld oder suchen die Datei.</br>2. Starten Sie den Import.</p></b></i><b>Worum es hier geht:</b><ul><li>Easy-online ist das Tool der Bundesforschung für die elektronische Antragstellung. Sie geben dort Informationen zu Ihrer Organisation, verantwortlichen Personen und Ihrem Teilprojekt ein, die in einer xml-Datei auf Ihrem Rechner gespeichert werden.</li> <li>Über den Import dieser easy-online-xml-Datei werden automatisch Informationen übernommen, die auch im SynSICRIS-Tool benötigt werden.</li></ul><b>Wichtige Hinweise:</b><ul><li>Im Projektverlauf werden Informationen über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert.</li><li>Informationen zum Projektbudget werden nicht aus der easy-online-xml-Datei übernommen. Sie werden im laufenden Projekt aus profi importiert.</li></ul>",
 
-  // "easy-online-import.result-info": "Import results",
+  // "easy-online-import.result-info": "result info",
+  "easy-online-import.result-info": "<i><b>1. Öffnen Sie die angezeigten neuen oder aktualisierten Einträge. Wenn Sie fehlerhaften Angaben korrigieren möchten, ändern Sie diese Angaben in easy-online und importieren erneut.</br>2. Ergänzen Sie bitte die weiteren Informationen in den Datensätzen.</i>",
+
+  // "easy-online-import.result-title": "Import results",
   // TODO New key - Add a translation
-  "easy-online-import.result-info": "1. Öffnen Sie die angezeigten neuen oder aktualisierten Einträge. Wenn Sie fehlerhaften Angaben korrigieren möchten, ändern Sie diese Angaben in easy-online und importieren erneut. 2. Ergänzen Sie bitte die weiteren Informationen in den Datensätzen.",
+  "easy-online-import.result-title": "Import results",
 
   // "easy-online-import.created-info": "Below all the new entities created by the Easy-online import:",
   // TODO New key - Add a translation
@@ -3298,7 +3303,8 @@
   // "form.last-name": "Last name",
   "form.last-name": "Nachname",
 
-  // "form.loading": "Loading...",
+  // "form.loading": "Loading…",
+  // TODO Source message changed - Revise the translation
   "form.loading": "Lade…",
 
   // "form.lookup": "Lookup",
@@ -4952,7 +4958,8 @@
   // "loading.community": "Loading community...",
   "loading.community": "Bereich am Laden...",
 
-  // "loading.default": "Loading...",
+  // "loading.default": "Loading…",
+  // TODO Source message changed - Revise the translation
   "loading.default": "Lade…",
 
   // "loading.item": "Loading item...",
@@ -4964,7 +4971,8 @@
   // "loading.mydspace-results": "Loading items...",
   "loading.mydspace-results": "Ressourcen am Laden...",
 
-  // "loading.objects": "Loading...",
+  // "loading.objects": "Loading…",
+  // TODO Source message changed - Revise the translation
   "loading.objects": "Lade…",
 
   // "loading.recent-submissions": "Loading recent submissions...",
@@ -5454,14 +5462,15 @@
   // TODO New key - Add a translation
   "mydspace.show.allProjectItems": "Alle archivierten Einträge",
 
-  // "mydspace.search-form.placeholder": "Search in mydspace...",
+  // "mydspace.search-form.placeholder": "Search in mydspace…",
   // TODO New key - Add a translation
   "mydspace.search-form.placeholder": "Suche in allen Einträgen…",
 
   // "mydspace.show.workflow": "All tasks",
   "mydspace.show.workflow": "Alle Aufgaben",
 
-  // "mydspace.show.workspace": "Your Submissions",
+  // "mydspace.show.workspace": "Your submissions",
+  // TODO Source message changed - Revise the translation
   "mydspace.show.workspace": "Meine Einträge",
 
   // "mydspace.status.archived": "Archived",
@@ -6788,12 +6797,14 @@
   // TODO New key - Add a translation
   "project.create.grants.subproject-option": "Bearbeitungsrecht nur für Mitglieder des Teilprojektes",
 
+  // "project.create.info": "Create a new Joint project",
+  "project.create.info": "Legen Sie ein neues Verbundprojekt an.",
+
   // "project.create.name.placeholder": "Enter the name for the new project",
   // TODO New key - Add a translation
   "project.create.name.placeholder": "Geben Sie die Namen des Verbundprojetes ein",
 
   // "subproject.create.name.placeholder": "Organisation Name and Subproject Short title",
-  // TODO New key - Add a translation
   "subproject.create.name.placeholder": "Organisationsname und Akronym des Teilprojektes",
 
   // "project.create.success": "The new project has been generated successfully.",
@@ -6803,6 +6814,108 @@
   // "project.listelement.badge": "Subproject",
   // TODO Source message changed - Revise the translation
   "project.listelement.badge": "Teilprojekt",
+
+  // "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Manage project members",
+  "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Mitgliederverwaltung",
+
+  // "project.manage.menu.subproject": "Manage subproject members",
+  // TODO New key - Add a translation
+  "project.manage.menu.subproject": "Manage subproject members",
+
+  // "project.manage.breadcrumbs": "Manage project members",
+  // TODO New key - Add a translation
+  "project.manage.breadcrumbs": "Manage project members",
+
+  // "project.manage.page.title": "Manage project members",
+  // TODO New key - Add a translation
+  "project.manage.page.title": "Manage project members",
+
+  // "project.manage.members.admin-group": "Manage project coordinators",
+  // TODO New key - Add a translation
+  "project.manage.members.admin-group": "Manage project coordinators",
+
+  // "project.manage.members.members-group": "<i class=\"fas fa-toolbox\"></i> Manage project members",
+  "project.manage.members.members-group": "<i class=\"fas fa-toolbox\"></i> Mitgliederverwaltung",
+
+  // "project.manage.members-list.head": "Manage group",
+  // TODO New key - Add a translation
+  "project.manage.members-list.head": "Manage group",
+
+  // "project.manage.members-list.search.head": "Search persons",
+  // TODO New key - Add a translation
+  "project.manage.members-list.search.head": "Search persons",
+
+  // "project.manage.members-list.button.see-all": "Browse All",
+  // TODO New key - Add a translation
+  "project.manage.members-list.button.see-all": "Browse All",
+
+  // "project.manage.members-list.headMembers": "Current Members",
+  // TODO New key - Add a translation
+  "project.manage.members-list.headMembers": "Current Members",
+
+  // "project.manage.members-list.search.scope.metadata": "Metadata",
+  // TODO New key - Add a translation
+  "project.manage.members-list.search.scope.metadata": "Metadata",
+
+  // "project.manage.members-list.search.scope.email": "E-mail (exact)",
+  // TODO New key - Add a translation
+  "project.manage.members-list.search.scope.email": "E-mail (exact)",
+
+  // "project.manage.members-list.search.button": "Search",
+  // TODO New key - Add a translation
+  "project.manage.members-list.search.button": "Search",
+
+  // "project.manage.members-list.table.id": "ID",
+  // TODO New key - Add a translation
+  "project.manage.members-list.table.id": "ID",
+
+  // "project.manage.members-list.table.name": "Name",
+  // TODO New key - Add a translation
+  "project.manage.members-list.table.name": "Name",
+
+  // "project.manage.members-list.table.edit": "Remove / Add",
+  // TODO New key - Add a translation
+  "project.manage.members-list.table.edit": "Remove / Add",
+
+  // "project.manage.members-list.table.edit.buttons.remove": "Remove member with name \"{{name}}\"",
+  // TODO New key - Add a translation
+  "project.manage.members-list.table.edit.buttons.remove": "Remove member with name \"{{name}}\"",
+
+  // "project.manage.members-list.table.invitation.buttons.send": "Send invitation to \"{{email}}\"",
+  // TODO New key - Add a translation
+  "project.manage.members-list.table.invitation.buttons.send": "Send invitation to \"{{email}}\"",
+
+  // "project.manage.members-list.notification.success.addMember": "Successfully added member: \"{{name}}\"",
+  // TODO New key - Add a translation
+  "project.manage.members-list.notification.success.addMember": "Successfully added member: \"{{name}}\"",
+
+  // "project.manage.members-list.notification.failure.addMember": "Failed to add member: \"{{name}}\"",
+  // TODO New key - Add a translation
+  "project.manage.members-list.notification.failure.addMember": "Failed to add member: \"{{name}}\"",
+
+  // "project.manage.members-list.notification.success.deleteMember": "Successfully deleted member: \"{{name}}\"",
+  // TODO New key - Add a translation
+  "project.manage.members-list.notification.success.deleteMember": "Successfully deleted member: \"{{name}}\"",
+
+  // "project.manage.members-list.notification.failure.deleteMember": "Failed to delete member: \"{{name}}\"",
+  // TODO New key - Add a translation
+  "project.manage.members-list.notification.failure.deleteMember": "Failed to delete member: \"{{name}}\"",
+
+  // "project.manage.members-list.table.edit.buttons.add": "Add member with name \"{{name}}\"",
+  // TODO New key - Add a translation
+  "project.manage.members-list.table.edit.buttons.add": "Add member with name \"{{name}}\"",
+
+  // "project.manage.members-list.notification.failure.noActiveGroup": "No current active group, submit a name first.",
+  // TODO New key - Add a translation
+  "project.manage.members-list.notification.failure.noActiveGroup": "No current active group, submit a name first.",
+
+  // "project.manage.members-list.no-members-yet": "No members in group yet, search and add.",
+  // TODO New key - Add a translation
+  "project.manage.members-list.no-members-yet": "No members in group yet, search and add.",
+
+  // "project.manage.members-list.no-items": "No EPeople found in that search",
+  // TODO New key - Add a translation
+  "project.manage.members-list.no-items": "No EPeople found in that search",
 
   // "project.page.contributor": "Contributors",
   "project.page.contributor": "Beteiligte",
@@ -7135,7 +7248,7 @@
   // TODO New key - Add a translation
   "register-page.create-profile.submit.success.head": "Registrierung abgeschlossen",
 
-  // "register-page.registration.existing.user.login-msg": "If you already have an account you can yo can ",
+  // "register-page.registration.existing.user.login-msg": "If you already have an account you can yo can",
   // TODO New key - Add a translation
   "register-page.registration.existing.user.login-msg": "If you already have an account you can yo can",
 
@@ -8212,6 +8325,11 @@
   // "simple-item-modal.create-btn": "Create new",
   // TODO New key - Add a translation
   "simple-item-modal.create-btn": "Neu anlegen",
+
+
+  // "simple-item-modal.filter-by-btn": "Filter by",
+  // TODO New key - Add a translation
+  "simple-item-modal.filter-by-btn": "Filter by",
 
   // "simple-item-modal.search-btn": "Select existing",
   // TODO New key - Add a translation
@@ -11568,7 +11686,7 @@
   // "layout.box.header.other_m": "Other",
   "layout.box.header.other_m": "Sonstiges",
 
-  // "ia_objective.listelement.badge": "Target for interaction and transfer"
+  // "ia_objective.listelement.badge": "Target for interaction and transfer",
   // TODO Source message changed - Revise the translation
   "ia_objective.listelement.badge": "Ziel für Interaktion und Transfer",
 
@@ -12052,12 +12170,6 @@
   // "layout.box.help-text.Project_h": "missing",
   "layout.box.help-text.Project_h": "Hier werden die Teilprojekte aufgelistet, die am Verbundprojekt mitwirken.</br> Als Koordinator:in eines Teilprojektes, legen Sie hier das Teilprojekt über <i class=\"fas fa-plus-circle\"></i> an. <br>Rufen Sie das Teilprojekt dann über den Link in der Listenansicht auf und führen Sie die dort beschriebenen Schritte durch.",
 
-  // "project.manage.menu.project": "<i class="fas fa-toolbox"></i> Manage project members",
-  "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Mitgliederverwaltung",
-
-  // "project.manage.members.members-group": "<i class="fas fa-toolbox"></i> Manage project members",
-  "project.manage.members.members-group": "<i class=\"fas fa-toolbox\"></i> Mitgliederverwaltung",
-
   // "submission.sections.upload.form.access-condition.openaccess": "open access",
   "submission.sections.upload.form.access-condition.openaccess": "frei zugänglich",
 
@@ -12069,9 +12181,6 @@
 
   // "submission.sections.upload.form.access-condition.administrator": "administrator",
   "submission.sections.upload.form.access-condition.administrator": "Administrator",
-
-  // "project.create.info": "Create a new Joint project",
-  "project.create.info": "Legen Sie ein neues Verbundprojekt an.",
 
   // "submission.form.contribution_fundingprogramme.info": "missing",
   "submission.form.contribution_fundingprogramme.info": "<b>Worum es hier geht:</b><ul><li>Die Einträge dienen dazu, in der Vorhabenbeschreibung das Kapitel „Bezug des Vorhabens zu den förderpolitischen Zielen“ und das Berichtskapitel „Beitrag des Projektes zu den förderpolitischen Zielen“ zu ersetzen.</li></ul>",
@@ -12088,9 +12197,6 @@
   // "vocabulary-treeview.tree.description.countries2": "missing",
   "vocabulary-treeview.tree.description.countries2": "<i>Wählen Sie bitte das Land aus.</br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
 
-  // "easy-online-import.result-info.info": "missing",
-  "easy-online-import.result-info.info": "<i><b>1. Öffnen Sie die angezeigten neuen oder aktualisierten Einträge. Wenn Sie fehlerhaften Angaben korrigieren möchten, ändern Sie diese Angaben in easy-online und importieren erneut.</br>2. Ergänzen Sie bitte die weiteren Informationen in den Datensätzen.</i>",
-
   // "layout.box.help-text.projectpartner_h_project": "missing",
   "layout.box.help-text.projectpartner_h_project": "<p><b>Projektpartner</b> sind die Organisationseinheit(en), die als Antragssteller in den jeweiligen <b>Teilprojekten</b> mitwirken. <b>Zum Bearbeiten wählen Sie Ihre Organisationseinheit aus.</b></p><b>Wichtige Hinweise:</b></br><ul><li>Wenn Sie den easy-Online Import bereits durchgeführt haben, wird hier der Eintrag zur Organisationseinheit angezeigt, die als ausführende Stelle des Teilprojektes angegeben wurde.</li><li>Wenn in einem Teilprojekt mehrere Organisationseinheiten/Abteilungen einer Organisation mitwirken (z. B. eine Universität mit mehreren Fachgebieten, die am Projekt finanziert mitarbeiten), legen Sie diese jeweils einzeln als zusätzlichen Projektpartner an, damit im Monitoring-Tool deutlich wird, welche Disziplinen zusammenarbeiten.</ul></li> <b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-proj.html\"target=_blank\"> Verbundprojekt und Teilprojekt unterscheiden </a></li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></ul></li>",
 
@@ -12098,6 +12204,8 @@
   "layout.box.help-text.subproject_h": "Hier werden die Teilprojekte aufgelistet, die am Verbundprojekt mitwirken.</br> Als Koordinator:in eines Teilprojektes, legen Sie hier das Teilprojekt über <i class=\"fas fa-plus-circle\"></i> an. <br>Rufen Sie das Teilprojekt dann über den Link in der Listenansicht auf und führen Sie die dort beschriebenen Schritte durch.",
 
   // "profile.edit-item.btn.OWNER": "Edit",
-  "profile.edit-item.btn.OWNER": "Bearbeiten"
+  "profile.edit-item.btn.OWNER": "Bearbeiten",
+
+
 
 }
