@@ -14,7 +14,9 @@
 
 .simple-item-focus {
   border-radius: $border-radius;
-  box-shadow: 0 0 0 .2rem rgba(19, 35, 51, 0.3);
+  border-color: var(--bs-link-color);
+  box-shadow: 0 0 0 .2rem var(--bs-link-color);
+  background-color: var(--ds-highlight-backgroud-color);
 }
 
 .simple-item-disabled {
