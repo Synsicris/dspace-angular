@@ -1420,7 +1420,9 @@
 
   "easy-online-import.info": "Upload a new file to start the Easy-online import",
 
-  "easy-online-import.result-info": "Import results",
+  "easy-online-import.result-info": "result info",
+
+  "easy-online-import.result-title": "Import results",
 
   "easy-online-import.created-info": "Below all the new entities created by the Easy-online import:",
 
