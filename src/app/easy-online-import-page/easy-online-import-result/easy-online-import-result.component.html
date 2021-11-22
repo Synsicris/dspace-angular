@@ -1,9 +1,11 @@
 <ng-container *ngIf="!result">
-  <ds-alert [type]="'alert-info'" [dismissible]="false" [content]="'easy-online-import.info' | translate">
+  <ds-alert [type]="'alert-info'" [dismissible]="false" [content]="'easy-online-import.info' | translate" [collapsible]="true">
   </ds-alert>
 </ng-container>
 <ng-container *ngIf="result">
-  <h2>{{'easy-online-import.result-info' | translate}}</h2>
+  <h2>{{'easy-online-import.result-title' | translate}}</h2>
+  <ds-alert [type]="'alert-info'" [dismissible]="false" [content]="'easy-online-import.result-info' | translate" [collapsible]="true">
+  </ds-alert>
   <div *ngIf="(createdItemList | async)?.length > 0">
     <p class="lead">
       {{'easy-online-import.created-info' | translate}}
