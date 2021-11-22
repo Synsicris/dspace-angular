@@ -4556,6 +4556,9 @@
 
   "simple-item-modal.create-btn": "Create new",
 
+
+  "simple-item-modal.filter-by-btn": "Filter by",
+
   "simple-item-modal.search-btn": "Select existing",
 
   "sorting.ASC": "Ascending",

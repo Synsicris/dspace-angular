@@ -1,5 +1,5 @@
 <div ngbDropdown class="d-inline-block" #myDrop="ngbDropdown">
-  <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Filter by {{filterName | titlecase}}</button>
+  <button class="btn btn-outline-primary filter-btn" id="dropdownBasic1" ngbDropdownToggle>{{'simple-item-modal.filter-by-btn' | translate}} {{filterName | titlecase}}</button>
 
       <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
         <li *ngFor="let facetValue of innerFilterFacetValues; trackBy: trackUpdate;" ngbDropdownItem>
