@@ -1,8 +1,15 @@
 import { Config } from './config.interface';
 
+export enum DisplayItemMetadataType {
+  Title = 'title',
+  Text = 'text',
+  Link = 'link',
+  Date = 'date'
+}
+
 export interface Metadata {
   name: string;
-  type: string;
+  type: DisplayItemMetadataType;
 }
 
 export interface ResultViewConfig {
