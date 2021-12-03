@@ -19,6 +19,7 @@ import { ImpactPathwayConfig } from './impact-pathway-config.interface';
 import { WorkingPlanConfig } from './working-plan-config.interface';
 import { ProjectsConfig } from './projects-config.interface';
 import { ExploitationPlanConfig } from './exploitation-plan.config';
+import { DisplayItemSearchResultConfig } from './display-search-result-config.interface';
 
 export interface GlobalConfig extends Config {
   ui: UIServerConfig;
@@ -44,4 +45,5 @@ export interface GlobalConfig extends Config {
   workingPlan: WorkingPlanConfig;
   projects: ProjectsConfig;
   exploitationPlan: ExploitationPlanConfig;
+  displayItemSearchResult?: DisplayItemSearchResultConfig;
 }
