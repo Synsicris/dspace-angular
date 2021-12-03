@@ -442,7 +442,6 @@ export const environment: GlobalConfig = {
   displayItemSearchResult: {
     Publication: [
       {
-        truncable: false,
         metadata: [
           {
             name: 'dc.title',
@@ -451,7 +450,6 @@ export const environment: GlobalConfig = {
         ]
       },
       {
-        truncable: false,
         metadata: [
           {
             name: 'dc.date.issued',
@@ -464,7 +462,6 @@ export const environment: GlobalConfig = {
         ]
       },
       {
-        truncable: false,
         metadata: [
           {
             name: 'dc.type',
@@ -475,7 +472,6 @@ export const environment: GlobalConfig = {
     ],
     Event: [
       {
-        truncable: false,
         metadata: [
           {
             name: 'dc.title',
@@ -484,7 +480,6 @@ export const environment: GlobalConfig = {
         ]
       },
       {
-        truncable: false,
         metadata: [
           {
             name: 'oairecerif.event.startDate',
@@ -501,7 +496,6 @@ export const environment: GlobalConfig = {
         ]
       },
       {
-        truncable: true,
         metadata: [
           {
             name: 'dc.description',
