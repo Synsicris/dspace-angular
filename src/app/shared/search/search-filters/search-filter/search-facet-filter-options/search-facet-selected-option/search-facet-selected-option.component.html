@@ -2,7 +2,7 @@
    [tabIndex]="-1"
    [routerLink]="[searchLink]"
    [queryParams]="removeQueryParams" queryParamsHandling="merge">
-  <label class="mb-0">
+  <label class="mb-0 d-flex">
     <input type="checkbox" [checked]="true" class="my-1 align-self-stretch"/>
     <span class="filter-value pl-1 text-capitalize">
         {{ 'search.filters.' + filterConfig.name + '.' + selectedValue.value | translate: {default: selectedValue.label} }}
