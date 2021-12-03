@@ -2976,6 +2976,8 @@
 
   "mydspace.general.text-here": "here",
 
+  "mydspace.info": "Info",
+
   "mydspace.messages.controller-help": "Select this option to send a message to item's submitter.",
 
   "mydspace.messages.description-placeholder": "Insert your message here...",
