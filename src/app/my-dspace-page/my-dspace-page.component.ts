@@ -112,6 +112,11 @@ export class MyDSpacePageComponent implements OnInit {
    */
   refreshFilters: Subject<any> = new Subject<any>();
 
+  /**
+   * A boolean representing if to show or not the export modal
+   */
+  showExport = false;
+
   constructor(private service: SearchService,
               private sidebarService: SidebarService,
               private windowService: HostWindowService,

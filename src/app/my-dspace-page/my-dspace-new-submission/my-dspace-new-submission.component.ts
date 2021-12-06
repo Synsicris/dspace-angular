@@ -17,6 +17,7 @@ import { SearchResult } from '../../shared/search/search-result.model';
 import { CollectionSelectorComponent } from '../collection-selector/collection-selector.component';
 import { UploaderComponent } from '../../shared/uploader/uploader.component';
 import { UploaderError } from '../../shared/uploader/uploader-error.model';
+import { RoleType } from '../../core/roles/role-types';
 
 /**
  * This component represents the whole mydspace page header
@@ -34,6 +35,11 @@ export class MyDSpaceNewSubmissionComponent implements OnDestroy, OnInit {
    * Output that emits the workspace item when the upload has completed
    */
   @Output() uploadEnd = new EventEmitter<SearchResult<DSpaceObject>[]>();
+
+  /**
+   * Variable for enumeration RoleType
+   */
+  roleTypeEnum = RoleType;
 
   /**
    * The UploaderOptions object

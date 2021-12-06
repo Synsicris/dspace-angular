@@ -2,6 +2,7 @@ import { GlobalConfig } from '../config/global-config.interface';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { BrowseByType } from '../app/browse-by/browse-by-switcher/browse-by-decorator';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
+import { DisplayItemMetadataType } from '../config/display-search-result-config.interface';
 
 export const environment: GlobalConfig = {
   production: true,
@@ -437,5 +438,71 @@ export const environment: GlobalConfig = {
     exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
     exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
     exploitationPlanPartnerMetadata: ''
+  },
+  displayItemSearchResult: {
+    Publication: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.date.issued',
+            type: DisplayItemMetadataType.Date
+          },
+          {
+            name: 'dc.contributor.author',
+            type: DisplayItemMetadataType.Date
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.type',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+    ],
+    Event: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'oairecerif.event.startDate',
+            type: DisplayItemMetadataType.Date
+          },
+          {
+            name: 'dc.type',
+            type: DisplayItemMetadataType.Text
+          },
+          {
+            name: 'synsicris.type.project-contribution',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+    ]
   }
 };
