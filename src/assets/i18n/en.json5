@@ -988,7 +988,7 @@
 
   "communityList.title": "List of Communities",
 
-  "communityList.showMore": "Show More",
+  "communityList.showMore": "Show more",
 
   "community.create.head": "Create a Community",
 
@@ -4560,7 +4560,6 @@
 
   "simple-item-modal.create-btn": "Create new",
 
-
   "simple-item-modal.filter-by-btn": "Filter by",
 
   "simple-item-modal.search-btn": "Select existing",
@@ -4905,7 +4904,7 @@
 
   "submission.sections.describe.relationship-lookup.search-tab.deselect-page": "Deselect page",
 
-  "submission.sections.describe.relationship-lookup.search-tab.loading": "Loading...",
+  "submission.sections.describe.relationship-lookup.search-tab.loading": "Loading…",
 
   "submission.sections.describe.relationship-lookup.search-tab.placeholder": "Search query",
 
