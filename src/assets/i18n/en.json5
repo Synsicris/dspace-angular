@@ -2976,7 +2976,7 @@
 
   "mydspace.general.text-here": "here",
 
-  "mydspace.info": "Info",
+  "mydspace.info": "The workspace is mainly used to find your not completely saved items and to be able to edit them further.</br>To do this, set the status in the filter to \"Workspace\" and your not completely saved items will be listed in chronological order.",
 
   "mydspace.messages.controller-help": "Select this option to send a message to item's submitter.",
 
