@@ -9,6 +9,7 @@ import { CreateItemParentSelectorComponent } from '../../../shared/dso-selector/
 import { map, mergeMap, take } from 'rxjs/operators';
 import { RemoteData } from '../../../core/data/remote-data';
 import { PaginatedList } from '../../../core/data/paginated-list.model';
+import { RequestParam } from '../../../core/cache/models/request-param.model';
 
 /**
  * This component represents the new submission dropdown
@@ -20,6 +21,9 @@ import { PaginatedList } from '../../../core/data/paginated-list.model';
 })
 export class MyDSpaceNewSubmissionDropdownComponent implements OnInit, OnDestroy {
 
+  /**
+   * It's used to limit the search within the scope
+   */
   @Input() scope: string;
 
   /**
@@ -68,7 +72,8 @@ export class MyDSpaceNewSubmissionDropdownComponent implements OnInit, OnDestroy
         if (!response) {
           const findListOptions: FindListOptions = {
             elementsPerPage: 1,
-            currentPage: 1
+            currentPage: 1,
+            searchParams: [new RequestParam('scope', this.scope)]
           };
           return this.entityTypeService.getAllAuthorizedRelationshipType(findListOptions).pipe(
             map((entities: RemoteData<PaginatedList<ItemType>>) => {
