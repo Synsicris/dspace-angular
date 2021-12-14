@@ -5,7 +5,7 @@
         </div>
     </div>
 </div>
-<ds-search-charts [configuration]="configuration$" [inPlaceSearch]="inPlaceSearch"></ds-search-charts>
+<ds-search-charts *ngIf="showSidebar" [configuration]="configuration$" [inPlaceSearch]="inPlaceSearch"></ds-search-charts>
 
 <div *ngIf="!showSidebar">
   <ng-template *ngTemplateOutlet="searchContent"></ng-template>
