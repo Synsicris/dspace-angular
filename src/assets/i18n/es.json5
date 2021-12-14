@@ -1831,9 +1831,9 @@
   // TODO New key - Add a translation
   "communityList.title": "List of Communities",
   
-  // "communityList.showMore": "Show More",
+  // "communityList.showMore": "Show more",
   // TODO New key - Add a translation
-  "communityList.showMore": "Show More",
+  "communityList.showMore": "Show more",
   
   // "community.create.head": "Create a Community",
   "community.create.head": "Crear una Comunidad",
@@ -5504,6 +5504,10 @@
   // TODO Source message changed - Revise the translation
   "mydspace.general.text-here": "AQUÍ",
   
+  // "mydspace.info": "The workspace is mainly used to find your not completely saved items and to be able to edit them further.</br>To do this, set the status in the filter to \"Workspace\" and your not completely saved items will be listed in chronological order.",
+  // TODO New key - Add a translation
+  "mydspace.info": "The workspace is mainly used to find your not completely saved items and to be able to edit them further.</br>To do this, set the status in the filter to \"Workspace\" and your not completely saved items will be listed in chronological order.",
+  
   // "mydspace.messages.controller-help": "Select this option to send a message to item's submitter.",
   "mydspace.messages.controller-help": "Seleccione esta opción para enviar un mensaje al remitente del ítem.",
   
@@ -7944,6 +7948,42 @@
   // TODO New key - Add a translation
   "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
   
+  // "search.filters.applied.charts.RELATION.parentproject.Event.title": "Event graphs",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.parentproject.Event.title": "Event graphs",
+  
+  // "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication ",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication ",
+  
+  // "search.filters.applied.charts.grapheventtype.tab": "Event type",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.grapheventtype.tab": "Event type",
+  
+  // "search.filters.applied.charts.grapheventpurpose.tab": "Event purpose",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.grapheventpurpose.tab": "Event purpose",
+  
+  // "search.filters.applied.charts.grapheventpartner.tab": "Event partner",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.grapheventpartner.tab": "Event partner",
+  
+  // "search.filters.applied.charts.grapheventtarget.tab": "Event target",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.grapheventtarget.tab": "Event target",
+  
+  // "search.filters.applied.charts.grapheventdate.tab": "Event date",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.grapheventdate.tab": "Event date",
+  
+  // "search.filters.applied.charts.grapheventduration.tab": "Event duration",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.grapheventduration.tab": "Event duration",
+  
+  // "search.filters.applied.charts.grapheventparticipant.tab": "Event participant",
+  // TODO New key - Add a translation
+  "search.filters.applied.charts.grapheventparticipant.tab": "Event participant",
+  
   // "search.filters.applied.charts.no.data.found": "No data found",
   // TODO New key - Add a translation
   "search.filters.applied.charts.no.data.found": "No data found",
@@ -8246,6 +8286,66 @@
   // TODO New key - Add a translation
   "search.filters.filter.submitter.label": "Search submitter",
   
+  // "search.filters.filter.synsicristypeprojectcontribution.head": "Project contribution",
+  // TODO New key - Add a translation
+  "search.filters.filter.synsicristypeprojectcontribution.head": "Project contribution",
+  
+  // "search.filters.filter.synsicristypeprojectcontribution.placeholder": "Project contribution",
+  // TODO New key - Add a translation
+  "search.filters.filter.synsicristypeprojectcontribution.placeholder": "Project contribution",
+  
+  // "search.filters.filter.synsicristypeprojectcontribution.label": "Search project contribution",
+  // TODO New key - Add a translation
+  "search.filters.filter.synsicristypeprojectcontribution.label": "Search project contribution",
+  
+  // "search.filters.filter.synsicristypepurpose.head": "Purpose",
+  // TODO New key - Add a translation
+  "search.filters.filter.synsicristypepurpose.head": "Purpose",
+  
+  // "search.filters.filter.synsicristypepurpose.placeholder": "Purpose",
+  // TODO New key - Add a translation
+  "search.filters.filter.synsicristypepurpose.placeholder": "Purpose",
+  
+  // "search.filters.filter.synsicristypepurpose.label": "Search purpose",
+  // TODO New key - Add a translation
+  "search.filters.filter.synsicristypepurpose.label": "Search purpose",
+  
+  // "search.filters.filter.synsicrisrelationpartner.head": "Partener",
+  // TODO New key - Add a translation
+  "search.filters.filter.synsicrisrelationpartner.head": "Partener",
+  
+  // "search.filters.filter.synsicrisrelationpartner.placeholder": "Partener",
+  // TODO New key - Add a translation
+  "search.filters.filter.synsicrisrelationpartner.placeholder": "Partener",
+  
+  // "search.filters.filter.synsicrisrelationpartner.label": "Search partener",
+  // TODO New key - Add a translation
+  "search.filters.filter.synsicrisrelationpartner.label": "Search partener",
+  
+  // "search.filters.filter.synsicrisrelationtargetgroup.head": "Target group",
+  // TODO New key - Add a translation
+  "search.filters.filter.synsicrisrelationtargetgroup.head": "Target group",
+  
+  // "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Target group",
+  // TODO New key - Add a translation
+  "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Target group",
+  
+  // "search.filters.filter.synsicrisrelationtargetgroup.label": "Search target group",
+  // TODO New key - Add a translation
+  "search.filters.filter.synsicrisrelationtargetgroup.label": "Search target group",
+  
+  // "search.filters.filter.oairecerifeventcountry.head": "Event country",
+  // TODO New key - Add a translation
+  "search.filters.filter.oairecerifeventcountry.head": "Event country",
+  
+  // "search.filters.filter.oairecerifeventcountry.placeholder": "Event country",
+  // TODO New key - Add a translation
+  "search.filters.filter.oairecerifeventcountry.placeholder": "Event country",
+  
+  // "search.filters.filter.oairecerifeventcountry.label": "Search event country",
+  // TODO New key - Add a translation
+  "search.filters.filter.oairecerifeventcountry.label": "Search event country",
+  
   // "search.filters.entityType.applications_econtech": "Application success for business innovations",
   // TODO New key - Add a translation
   "search.filters.entityType.applications_econtech": "Application success for business innovations",
@@ -8510,7 +8610,6 @@
   // "simple-item-modal.create-btn": "Create new",
   // TODO New key - Add a translation
   "simple-item-modal.create-btn": "Create new",
-  
   
   // "simple-item-modal.filter-by-btn": "Filter by",
   // TODO New key - Add a translation
@@ -9189,9 +9288,9 @@
   // TODO New key - Add a translation
   "submission.sections.describe.relationship-lookup.search-tab.deselect-page": "Deselect page",
   
-  // "submission.sections.describe.relationship-lookup.search-tab.loading": "Loading...",
+  // "submission.sections.describe.relationship-lookup.search-tab.loading": "Loading…",
   // TODO New key - Add a translation
-  "submission.sections.describe.relationship-lookup.search-tab.loading": "Loading...",
+  "submission.sections.describe.relationship-lookup.search-tab.loading": "Loading…",
   
   // "submission.sections.describe.relationship-lookup.search-tab.placeholder": "Search query",
   // TODO New key - Add a translation

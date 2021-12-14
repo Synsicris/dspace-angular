@@ -988,7 +988,7 @@
 
   "communityList.title": "List of Communities",
 
-  "communityList.showMore": "Show More",
+  "communityList.showMore": "Show more",
 
   "community.create.head": "Create a Community",
 
@@ -2976,6 +2976,8 @@
 
   "mydspace.general.text-here": "here",
 
+  "mydspace.info": "The workspace is mainly used to find your not completely saved items and to be able to edit them further.</br>To do this, set the status in the filter to \"Workspace\" and your not completely saved items will be listed in chronological order.",
+
   "mydspace.messages.controller-help": "Select this option to send a message to item's submitter.",
 
   "mydspace.messages.description-placeholder": "Insert your message here...",
@@ -4246,6 +4248,24 @@
 
   "search.filters.applied.charts.RELATION.Project.fundings.title": "Fundings",
 
+  "search.filters.applied.charts.RELATION.parentproject.Event.title": "Event graphs",
+
+  "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication ",
+
+  "search.filters.applied.charts.grapheventtype.tab": "Event type",
+
+  "search.filters.applied.charts.grapheventpurpose.tab": "Event purpose",
+
+  "search.filters.applied.charts.grapheventpartner.tab": "Event partner",
+
+  "search.filters.applied.charts.grapheventtarget.tab": "Event target",
+
+  "search.filters.applied.charts.grapheventdate.tab": "Event date",
+
+  "search.filters.applied.charts.grapheventduration.tab": "Event duration",
+
+  "search.filters.applied.charts.grapheventparticipant.tab": "Event participant",
+
   "search.filters.applied.charts.no.data.found": "No data found",
 
   "search.filters.filter.author.head": "Author",
@@ -4418,6 +4438,36 @@
 
   "search.filters.filter.submitter.label": "Search submitter",
 
+  "search.filters.filter.synsicristypeprojectcontribution.head": "Project contribution",
+
+  "search.filters.filter.synsicristypeprojectcontribution.placeholder": "Project contribution",
+
+  "search.filters.filter.synsicristypeprojectcontribution.label": "Search project contribution",
+
+  "search.filters.filter.synsicristypepurpose.head": "Purpose",
+
+  "search.filters.filter.synsicristypepurpose.placeholder": "Purpose",
+
+  "search.filters.filter.synsicristypepurpose.label": "Search purpose",
+
+  "search.filters.filter.synsicrisrelationpartner.head": "Partener",
+
+  "search.filters.filter.synsicrisrelationpartner.placeholder": "Partener",
+
+  "search.filters.filter.synsicrisrelationpartner.label": "Search partener",
+
+  "search.filters.filter.synsicrisrelationtargetgroup.head": "Target group",
+
+  "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Target group",
+
+  "search.filters.filter.synsicrisrelationtargetgroup.label": "Search target group",
+
+  "search.filters.filter.oairecerifeventcountry.head": "Event country",
+
+  "search.filters.filter.oairecerifeventcountry.placeholder": "Event country",
+
+  "search.filters.filter.oairecerifeventcountry.label": "Search event country",
+
   "search.filters.entityType.applications_econtech": "Application success for business innovations",
 
   "search.filters.entityType.applications_social": "Application success in social innovations/change processes",
@@ -4557,7 +4607,6 @@
   "simple-item-modal.new.head": "Add item via \"Create new\" or \"Select existing\"",
 
   "simple-item-modal.create-btn": "Create new",
-
 
   "simple-item-modal.filter-by-btn": "Filter by",
 
@@ -4903,7 +4952,7 @@
 
   "submission.sections.describe.relationship-lookup.search-tab.deselect-page": "Deselect page",
 
-  "submission.sections.describe.relationship-lookup.search-tab.loading": "Loading...",
+  "submission.sections.describe.relationship-lookup.search-tab.loading": "Loading…",
 
   "submission.sections.describe.relationship-lookup.search-tab.placeholder": "Search query",
 

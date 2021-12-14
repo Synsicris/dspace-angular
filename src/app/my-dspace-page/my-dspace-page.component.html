@@ -1,6 +1,7 @@
 <div class="container">
   <ds-suggestions-notification></ds-suggestions-notification>
   <ds-my-dspace-new-submission *dsShowOnlyForRole="[roleTypeEnum.Submitter]" [scope]="(scope$ | async)"></ds-my-dspace-new-submission>
+  <ds-alert [content]="'mydspace.info' | translate" [collapsible]="true" [collapsed]="true"></ds-alert>
   <div class="search-page row">
       <ds-search-sidebar *ngIf="!(isXsOrSm$ | async)" class="col-3 sidebar-md-sticky"
                          id="search-sidebar"
@@ -21,7 +22,7 @@
                               [inPlaceSearch]="inPlaceSearch"
                               [searchPlaceholder]="'mydspace.search-form.placeholder' | translate">
               </ds-search-form>
-              <ds-item-export-modal-launcher [searchOptions$]="searchOptions$"></ds-item-export-modal-launcher>
+              <ds-item-export-modal-launcher *ngIf="showExport" [searchOptions$]="searchOptions$"></ds-item-export-modal-launcher>
           </div>
           <ds-search-labels [inPlaceSearch]="inPlaceSearch"></ds-search-labels>
           <div class="row">

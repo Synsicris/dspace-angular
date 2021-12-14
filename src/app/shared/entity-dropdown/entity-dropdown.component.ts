@@ -1,13 +1,24 @@
-import { Component, OnInit, HostListener, ChangeDetectorRef, OnDestroy, Output, EventEmitter, ElementRef, Input } from '@angular/core';
-import { Observable, Subscription, BehaviorSubject } from 'rxjs';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { hasValue } from '../empty.util';
-import { startWith, switchMap, reduce } from 'rxjs/operators';
+import { reduce, startWith, switchMap } from 'rxjs/operators';
 import { RemoteData } from '../../core/data/remote-data';
 import { FindListOptions } from '../../core/data/request.models';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { EntityTypeService } from '../../core/data/entity-type.service';
 import { ItemType } from '../../core/shared/item-relationships/item-type.model';
 import { getFirstSucceededRemoteWithNotEmptyData } from '../../core/shared/operators';
+import { RequestParam } from '../../core/cache/models/request-param.model';
 
 @Component({
   selector: 'ds-entity-dropdown',
@@ -42,6 +53,11 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
    * TRUE if the parent operation is a 'new submission' operation, FALSE otherwise (eg.: is an 'Import metadata from an external source' operation).
    */
   @Input() isSubmission: boolean;
+
+  /**
+   * It's used to limit the search within the scope
+   */
+  @Input() scope: string;
 
   /**
    * The entity to output to the parent component
@@ -144,8 +160,10 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
     // Set the pagination info
     const findOptions: FindListOptions = {
       elementsPerPage: 10,
-      currentPage: page
+      currentPage: page,
+      searchParams: [new RequestParam('scope', this.scope)]
     };
+    console.log(findOptions);
     let searchListEntity$;
     if (this.isSubmission) {
       searchListEntity$ = this.entityTypeService.getAllAuthorizedRelationshipType(findOptions);
