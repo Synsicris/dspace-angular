@@ -1012,11 +1012,11 @@
 
   // "alert.toggle.hide": "Show less",
   // TODO New key - Add a translation
-  "alert.toggle.hide": "Weniger anzeigen",
+  "alert.toggle.hide": "Weniger",
 
   // "alert.toggle.show": "Show more",
   // TODO New key - Add a translation
-  "alert.toggle.show": "Mehr anzeigen",
+  "alert.toggle.show": "Mehr",
 
   // "auth.errors.invalid-user": "Invalid email address or password.",
   "auth.errors.invalid-user": "Password oder E-Mail-Adresse ungültig.",
@@ -1793,7 +1793,7 @@
   "communityList.title": "Liste der Bereiche",
 
   // "communityList.showMore": "Show more",
-  "communityList.showMore": "Mehr anzeigen",
+  "communityList.showMore": "Mehr",
 
   // "community.create.head": "Create a Community",
   "community.create.head": "Sammlung anlegen",
@@ -2832,11 +2832,11 @@
 
   // "explore.index.dateIssued": "Date issued",
   // TODO New key - Add a translation
-  "explore.index.dateIssued": "Date issued",
+  "explore.index.dateIssued": "Datum",
 
   // "explore.index.dateissued": "Date issued",
   // TODO New key - Add a translation
-  "explore.index.dateissued": "Date issued",
+  "explore.index.dateissued": "Datum",
 
   // "explore.index.dc.date.accessioned": "Recent Addition",
   // TODO New key - Add a translation
@@ -3505,7 +3505,7 @@
   "impact-pathway.patch.metadata.error": "Es gab ein Problem beim Speichern der Metadaten. Versuchen Sie es später noch einmal.",
 
   // "impact-pathway.remove.confirm.cancel": "Cancel",
-  "impact-pathway.remove.confirm.cancel": "Löschen",
+  "impact-pathway.remove.confirm.cancel": "Abbrechen",
 
   // "impact-pathway.remove.confirm.info": "This operation can't be undone. Are you sure?",
   "impact-pathway.remove.confirm.info": "Diese Aktion kann nicht rückgängig gemacht werden. Sind Sie sicher?",
@@ -4259,7 +4259,7 @@
   "item.edit.tabs.status.labels.itemPage": "Startseite der Ressource",
 
   // "item.edit.tabs.status.labels.lastModified": "Last Modified",
-  "item.edit.tabs.status.labels.lastModified": "Zuletzt geändert",
+  "item.edit.tabs.status.labels.lastModified": "Letzte Änderung",
 
   // "item.edit.tabs.status.title": "Item Edit -  Status",
   "item.edit.tabs.status.title": "Ressource Bearbeiten -  Status",
@@ -4509,7 +4509,7 @@
 
   // "item.page.bitstreams.view-more": "Show more",
   // TODO New key - Add a translation
-  "item.page.bitstreams.view-more": "Mehr anzeigen",
+  "item.page.bitstreams.view-more": "Mehr",
 
   // "item.page.bitstreams.collapse": "Collapse",
   // TODO New key - Add a translation
@@ -4759,7 +4759,7 @@
   "item.select.confirm": "Auswahl bestätigen",
 
   // "item.select.empty": "No items to show",
-  "item.select.empty": "Es gibt keine Ressourcen dazu",
+  "item.select.empty": "Es gibt keine Einträge dazu",
 
   // "item.select.table.author": "Author",
   "item.select.table.author": "Autor/in",
@@ -4941,7 +4941,7 @@
   "loading.bitstreams": "Loading bitstreams...",
 
   // "loading.browse-by": "Loading items...",
-  "loading.browse-by": "Ressourcen am laden...",
+  "loading.browse-by": "Einträge am Laden…",
 
   // "loading.browse-by-page": "Loading page...",
   "loading.browse-by-page": "Seite am Laden...",
@@ -4963,13 +4963,13 @@
   "loading.default": "Lade…",
 
   // "loading.item": "Loading item...",
-  "loading.item": "Ressource am Laden...",
+  "loading.item": "Eintrag am Laden…",
 
   // "loading.items": "Loading items...",
-  "loading.items": "Ressourcen am Laden...",
+  "loading.items": "Einträge am Laden…",
 
   // "loading.mydspace-results": "Loading items...",
-  "loading.mydspace-results": "Ressourcen am Laden...",
+  "loading.mydspace-results": "Ressourcen am Laden…",
 
   // "loading.objects": "Loading...",
   // TODO Source message changed - Revise the translation
@@ -5367,7 +5367,7 @@
 
   // "mydspace.breadcrumbs": "All items",
   // TODO New key - Add a translation
-  "mydspace.breadcrumbs": "Alle Einträge",
+  "mydspace.breadcrumbs": "Arbeitsbereich",
 
   // "mydspace.description": "",
   "mydspace.description": "",
@@ -5463,7 +5463,7 @@
 
   // "mydspace.show.allProjectItems": "All items in the project",
   // TODO New key - Add a translation
-  "mydspace.show.allProjectItems": "Alle archivierten Einträge",
+  "mydspace.show.allProjectItems": "Alle gespeicherten Einträge",
 
   // "mydspace.search-form.placeholder": "Search in mydspace...",
   // TODO New key - Add a translation
@@ -5477,7 +5477,7 @@
   "mydspace.show.workspace": "Meine Einträge",
 
   // "mydspace.status.archived": "Archived",
-  "mydspace.status.archived": "Archiviert",
+  "mydspace.status.archived": "Gespeichert",
 
   // "mydspace.status.validation": "Validation",
   "mydspace.status.validation": "Validierung",
@@ -7427,7 +7427,7 @@
 
   // "researcher.profile.internal.visibility": "INTERNAL",
   // TODO New key - Add a translation
-  "researcher.profile.internal.visibility": "INTERNAL",
+  "researcher.profile.internal.visibility": "INTERN",
 
   // "researcher.profile.status": "Status",
   // TODO New key - Add a translation
@@ -7755,7 +7755,7 @@
 
   // "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Date Issued",
+  "search.filters.applied.charts.chart.bar.dateIssued.year.tab": "Datum",
 
   // "search.filters.applied.charts.chart.pie.more-value": "More",
   // TODO New key - Add a translation
@@ -7767,11 +7767,11 @@
 
   // "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type",
+  "search.filters.applied.charts.graphitemtype.tab": "Darstellung nach Typ",
 
   // "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date",
+  "search.filters.applied.charts.graphpubldate.tab": "Darstellung nach Datum",
 
   // "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR",
   // TODO New key - Add a translation
@@ -7799,7 +7799,7 @@
 
   // "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication ",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication ",
+  "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication",
 
   // "search.filters.applied.charts.grapheventtype.tab": "Event type",
   // TODO New key - Add a translation
@@ -8378,7 +8378,7 @@
 
   // "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting",
   // TODO Source message changed - Revise the translation
-  "search.results.no-results": "Ihre Suche führte zu keinem Ergebnis. Versuchen Sie es mit",
+  "search.results.no-results": "Keine Einträge vorhanden.",
 
   // "search.results.no-results-link": "quotes around it",
   "search.results.no-results-link": "Anführungszeichen",
@@ -8456,11 +8456,11 @@
 
   // "sorting.dc.date.issued.ASC": "Date Issued Ascending",
   // TODO New key - Add a translation
-  "sorting.dc.date.issued.ASC": "Date Issued Ascending",
+  "sorting.dc.date.issued.ASC": "Datum aufsteigend",
 
   // "sorting.dc.date.issued.DESC": "Date Issued Descending",
   // TODO New key - Add a translation
-  "sorting.dc.date.issued.DESC": "Date Issued Descending",
+  "sorting.dc.date.issued.DESC": "Datum absteigend",
 
   // "sorting.dc.date.accessioned.ASC": "Accessioned Date Ascending",
   // TODO New key - Add a translation
@@ -8472,11 +8472,11 @@
 
   // "sorting.lastModified.ASC": "Last modified Ascending",
   // TODO New key - Add a translation
-  "sorting.lastModified.ASC": "Last modified Ascending",
+  "sorting.lastModified.ASC": "Letzte Änderung aufsteigend",
 
   // "sorting.lastModified.DESC": "Last modified Descending",
   // TODO New key - Add a translation
-  "sorting.lastModified.DESC": "Last modified Descending",
+  "sorting.lastModified.DESC": "Letzte Änderung absteigend",
 
   // "sorting.ownerselection.ASC": "Owner Relevance Ascending",
   // TODO New key - Add a translation
@@ -9453,7 +9453,7 @@
 
   // "submission.sections.general.save_error_notice": "There was an unexpected error when saving the item. Refresh the page and try again. After refreshing unsaved modifications could be lost.",
   // TODO Source message changed - Revise the translation
-  "submission.sections.general.save_error_notice": "Beim Speichern der Ressource ist ein Fehler aufgetreten, bitte versuchen Sie es später noch einmal.",
+  "submission.sections.general.save_error_notice": "Beim Speichern des Eintrags ist ein Fehler aufgetreten, bitte versuchen Sie es später noch einmal.",
 
   // "submission.sections.general.save_success_notice": "Submission saved successfully.",
   "submission.sections.general.save_success_notice": "Eintrag erfolgreich gespeichert",
@@ -9625,7 +9625,7 @@
   "submission.sections.submit.progressbar.describe.events": "Veranstaltung beschreiben",
 
   // "submission.sections.submit.progressbar.describe.events.info": "Events include events carried out by the project as well as participation in third-party events (e.g. individual workshops, lectures, trade fairs). Interactions such as an interview or a test can also be recorded.<p><i>Please record an event or interaction here. Describe your planning in the application and update and add your information during the project progress.</i></p>Events that are part of a long-term process of cooperation, participation or collaboration, enter under \"Process of cooperation, participation and collaboration\". Please register contributions to scientific conferences for which a conference contribution has been made as publication.</br>It is advisable to collect the project and cooperation partners as well as the relevant stakeholder groups in the project before describing an event.",
-  "submission.sections.submit.progressbar.describe.events.info": "<i><b>Erfassen Sie bitte hier, wenn Ihr Projekt eine Veranstaltung durchführt oder Projektmitarbeitende an einer Veranstaltung teilnehmen.</i></b><p><b>Wichtige Hinweise:</b><ul><li> Sie ordnen hier die beteiligten <b>Projektpartner</b>, <b>Unterauftragnehmer</b> und <b>Kooperationspartner</b> sowie <b>Akteursgruppen</b> zu. Diese sollten bereits eingetragen sein. </li> <li>Ergänzen Sie in der <b>Beschreibung</b> bei Bedarf weitere, aus Ihrer Sicht wesentliche Informationen zur Veranstaltung. Beispiele: Spezifische Methoden, Vorgehensweisen oder die Bedeutung der Veranstaltung für die Wirkungen des Projektes.</ul></li></p>",
+  "submission.sections.submit.progressbar.describe.events.info": "<i><b>Erfassen Sie bitte hier, wenn Ihr Projekt eine Veranstaltung durchführt oder Projektmitarbeitende an einer Veranstaltung teilnehmen.</i></b><p><b>Wichtige Hinweise:</b><ul><li> Sie ordnen hier die beteiligten <b>Projektpartner</b>, <b>Unterauftragnehmer</b> und <b>Kooperationspartner</b> sowie <b>Akteursgruppen</b> zu. Diese sollten bereits eingetragen sein.</li><li>Ergänzen Sie in der <b>Beschreibung</b> bei Bedarf weitere, aus Ihrer Sicht wesentliche Informationen zur Veranstaltung. Beispiele: Spezifische Methoden, Vorgehensweisen oder die Bedeutung der Veranstaltung für die Wirkungen des Projektes.</ul></li></p>",
 
   // "submission.sections.submit.progressbar.describe.events_result": "Documentation of the event for reporting purposes",
   "submission.sections.submit.progressbar.describe.events_result": "Veranstaltungsdaten eingeben (im Projektverlauf)",
@@ -9658,7 +9658,7 @@
   "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_form.info": "<p><b><i>Legen Sie für die Planung des Projektes die Ziele für Interaktion und Transfer fest. Diesen können in einer zweiten Ebene wie in einem Ordner Aktivitäten hinzugefügt werden, die zu diesen Zielen beitragen. Ergänzen Sie im Projektverlauf ggf. weitere Einträge zu (Zwischen-) Ergebnis / Problem und Sonstiges.</b></i></p><b>Bereiche:</b><ul><li>In <b>Ziel für Interaktion und Transfer</b> formulieren Sie das unmittelbare Ziel für eine Gruppe von Austausch und Transferaktivitäten (z. B. Erfahrungen einer Akteursgruppe in die Entwicklung integrieren). Nachdem Sie den Eintrag angelegt haben, können Sie darin wie in einem Ordner Einträge zu den Arbeiten des Projektes anlegen, die zu diesem Ziel beitragen. (z. B. Workshops, Interviews, Veröffentlichung eines Leitfadens). Erfassen Sie hier auch die Ziele für die Austauschprozesse zwischen den Projektpartnern.</li><li><b>(Zwischen-) Ergebnis / Problem</b> können Sie nutzen, wenn im Projektverlauf ein (Zwischen-) Ergebnis oder Problem auftaucht, das erhebliche Veränderungen in den Projektarbeiten oder Wirkungen verursacht.</li><li><b>Sonstiges</b> umfasst wichtige Informationen, die sich nicht in die o. g. Bereiche einordnen lassen.</li></ul><b>Tipps:</b><ul><li>Interaktionen und Transfer sind essentiell für die Entwicklung von Wirkungen. Sie umfassen alle Interaktionen zwischen forschenden und nicht-forschenden Akteuren, sowohl direkt, als auch indirekt über Veröffentlichungen oder andere Medien.</li><li>Reflexionsfragen: Mit welchen Zielgruppen, Stakeholdern, Multiplikatoren oder kritischen Akteursgruppen sind Interaktionen erforderlich, um anwendbare Ergebnisse zu erarbeiten und eine Anwendung der Ergebnisse zu fördern?</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-objectives.html\"target=_blank\">Beispiele für die Formulierung von Zielen </a></ul></li>",
 
   // "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "<i>Please select the section from the list and provide a key message. Or select already existing items via the search.</i><p><b>Processes of cooperation, participation and collaboration</b> comprise activities that take place over a longer period of time with the same partners/organisations or groups of actors.</br><b>Events</b>cover individual events with groups of actors that are organised by the project or in which the project participates.</br><b>Publications</b> include e.g. scientific article, practical contribution, video, website of the project. For planning, enter the type and a number in the key message.</br><b>Objects / materials</b> are relevant outputs that serve the transfer and/or can be further used by third parties for transfer, research or teaching, such as exhibits devices, samples, collectibles.</br><b>Tasks</b> are individual work steps that can be assigned to individual work packages in the work plan and are not covered by the above-mentioned areas.</br><b>Others</b> includes important information that should be clarified in the Impact Pathway, but cannot be classified in the above-mentioned areas.</p><p><b>Key questions:</b> At what point in time and with what content are interactions required to contribute to the project objectives? How can continuity in the exchange processes be ensured? Which contents and formats can be used to particularly arouse the interest of a group of actors and, if necessary, to maintain it in the long term? What benefits can a group of actors derive from interaction?</br>Which opportunities exist to reach groups of actors where they have already been informing themselves or exchanging information?",
-  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "<p><b><i>Legen Sie hier die Einträge zu den Arbeiten des Projektes an, mit denen das jeweilige Ziel für Interaktion und Transfer erreicht werden soll.</p></b></i>  <b>Bereiche:</b><ul><li>In <b>Kooperation / Partizipation / Austauschprozess</b> erfassen Sie Aktivitäten des Projektes, die über einen längeren Zeitraum mit den gleichen Partnern/Organisationen oder Akteursgruppen stattfinden.</li></br><li>In <b>Veranstaltung</b> können Sie Einzelveranstaltungen erfassen, die vom Projekt durchgeführt werden oder an denen das Projekt teilnimmt.</li></br><li><b>Geplante Veröffentlichungen</b> erfassen Sie gruppiert, zugehörig zum Ziel für Interaktion und Transfer. Diese Angaben sind ausschließlich in der Projektplanung erforderlich. Bitte nennen Sie in der Bezeichnung Anzahl, Art und Thema der geplanten Veröffentlichungen (z. B. Eintrag 1: 2-3 wissenschaftliche Artikel zu Thema x, Eintrag 2: 1 Praxisbeitrag zum Thema y).</li></br><li><b>Veröffentlichung</b> nutzen Sie, um z. B. wissenschaftliche Artikel, Praxisbeiträge, Videos oder Webseiten des Projektes zu erfassen. Es ist empfehlenswert, sie über den Zugang auf der Projektseite zu erfassen. Dort stehen Importfunktionen zur Verfügung. Anschließend können Sie die Einträge über die Schaltfläche Vorhandene auswählen in den Impact Pathway einfügen.</li></br> <li>In <b>Forschungsdaten</b> erfassen Sie digitale Daten, die im Projekt entstanden und veröffentlicht sind.</li></br><li>Mit <b>Gegenstand / Material</b> erfassen Sie physische Objekte die im Projekt erstellt wurden und nach Projektende von anderen für Transfer, Forschung oder Lehre weitergenutzt werden können. z. B. Ausstellungsstücke, Geräte, Proben oder Sammelstücke.</li></br> <li><b>Aufgaben</b> nutzen Sie für Arbeiten, die nicht durch die o. g. Bereiche abgedeckt sind.</li></br> <li><b>Sonstiges</b> verwenden Sie nur dann, wenn sich wichtige Informationen, nicht in die oben genannten Bereiche einordnen lassen.</li></ul>",
+  "submission.sections.submit.progressbar.impact_pathway_step_type_3_task_objective_form.info": "<p><b><i>Legen Sie hier die Einträge zu den Arbeiten des Projektes an, mit denen das jeweilige Ziel für Interaktion und Transfer erreicht werden soll.</p></b></i> <b>Bereiche:</b><ul><li>In <b>Kooperation / Partizipation / Austauschprozess</b> erfassen Sie Aktivitäten des Projektes, die über einen längeren Zeitraum mit den gleichen Partnern/Organisationen oder Akteursgruppen stattfinden.</li></br><li>In <b>Veranstaltung</b> können Sie Einzelveranstaltungen erfassen, die vom Projekt durchgeführt werden oder an denen das Projekt teilnimmt.</li></br><li><b>Geplante Veröffentlichungen</b> erfassen Sie gruppiert, zugehörig zum Ziel für Interaktion und Transfer. Diese Angaben sind ausschließlich in der Projektplanung erforderlich. Bitte nennen Sie in der Bezeichnung Anzahl, Art und Thema der geplanten Veröffentlichungen (z. B. Eintrag 1: 2-3 wissenschaftliche Artikel zu Thema x, Eintrag 2: 1 Praxisbeitrag zum Thema y).</li></br><li><b>Veröffentlichung</b> nutzen Sie, um z. B. wissenschaftliche Artikel, Praxisbeiträge, Videos oder Webseiten des Projektes zu erfassen. Es ist empfehlenswert, sie über den Zugang auf der Projektseite zu erfassen. Dort stehen Importfunktionen zur Verfügung. Anschließend können Sie die Einträge über die Schaltfläche Vorhandene auswählen in den Impact Pathway einfügen.</li></br> <li>In <b>Forschungsdaten</b> erfassen Sie digitale Daten, die im Projekt entstanden und veröffentlicht sind.</li></br><li>Mit <b>Gegenstand / Material</b> erfassen Sie physische Objekte die im Projekt erstellt wurden und nach Projektende von anderen für Transfer, Forschung oder Lehre weitergenutzt werden können. z. B. Ausstellungsstücke, Geräte, Proben oder Sammelstücke.</li></br> <li><b>Aufgaben</b> nutzen Sie für Arbeiten, die nicht durch die o. g. Bereiche abgedeckt sind.</li></br> <li><b>Sonstiges</b> verwenden Sie nur dann, wenn sich wichtige Informationen, nicht in die oben genannten Bereiche einordnen lassen.</li></ul>",
 
   // "submission.sections.submit.progressbar.impact_pathway_step_type_4_task_form.info": "<i>Please select a section from the list and give a key message. Or select already existing items via the search.</i></br>Focus on the (possible) application of the project results by the relevant groups of actors. Include also aspects that you consider in the exploitation plan.<p><b>Solutions / changes / innovations</b> describes the solution to practical problems, the change in groups of actors as well as the economic-technical or social innovation that the project aims at or contributes to.</br><b>Ideas for a use of project results</b> include all application possibilities for solutions / changes / innovations that are not very concrete, lie far in the future and are not explicitly pursued in the project. </br><b>Patents and utility patents</b> record information on the registration of property rights.</br><b>(Intermediate) results / problems that bring about change</b> is used to clarify in the impact pathway why changes in the work of the project or the intended application and impact are necessary. (Can be used here for results/problems related to the applications or opportunities for using project results).</br><b>Next steps and cooperation after the end of the project</b> include the steps you plan to take after the end of the project to further apply project results and to continue cooperations.</br><b>Spin-offs (incl. associations)</b> include information on the foundation of transfer and competence spin offs as well as the foundation of associations. </br><b>Application of a solution / change / innovation</b> includes evidence and examples of the use or implementation of solutions / changes / innovations by third parties or partners involved in the project. </br><b>Awards and prizes</b>, which are related to the project and/or its results, can give an indication e.g. of the degree of innovation or a high degree of applicability.</br><b>Others</b> includes important information that should be clarified in the Impact Pathway, but cannot be classified in the above-mentioned areas.",
   // TODO Source message changed - Revise the translation
@@ -9814,7 +9814,7 @@
   "submission.sections.submit.progressbar.describe.patents": "Geplantes Patent oder Gebrauchsmuster beschreiben",
 
   // "submission.sections.submit.progressbar.describe.patents.info": "Please document here the industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
-  "submission.sections.submit.progressbar.describe.patents.info": "<i><b>Erfassen Sie hier ein geplantes Patent oder Gebrauchsmuster und die Form der geplanten Nutzung.</b></i><p><b>Wichtige Hinweise:</b><ul><li>Diese Angaben sind <b>nur für den Förderer zugänglich.</b></li><li>Geben Sie eine <b>vorläufige Bezeichnung</b> an und aktualisieren Sie die Bezeichnung, wenn die Anmeldung beim Patentamt erfolgt ist (Bezeichnung aus Anmeldeformular beim Patentamt kopieren).</li><li>Wenn das geplante Patent oder Gebrauchsmuster genutzt wird, erfassen Sie dies im Bereich <b>Anwendung einer Lösung / Veränderung / Innovation</b>.</ul></li></p>",
+  "submission.sections.submit.progressbar.describe.patents.info": "<i><b>Erfassen Sie hier ein geplantes Patent oder Gebrauchsmuster und die Form der geplanten Nutzung.</b></i></br><b>Wichtige Hinweise:</b><ul><li>Diese Angaben sind <b>nur für den Förderer zugänglich.</b></li><li>Geben Sie eine <b>vorläufige Bezeichnung</b> an und aktualisieren Sie die Bezeichnung, wenn die Anmeldung beim Patentamt erfolgt ist (Bezeichnung aus Anmeldeformular beim Patentamt kopieren).</li><li>Wenn das geplante Patent oder Gebrauchsmuster genutzt wird, erfassen Sie dies im Bereich <b>Anwendung einer Lösung / Veränderung / Innovation</b>.</ul></li>",
 
   // "submission.sections.submit.progressbar.describe.patents_result": "Information from application at the Patent Office",
   "submission.sections.submit.progressbar.describe.patents_result": "Daten aus der Anmeldung beim Patentamt übertragen",
@@ -9827,7 +9827,7 @@
   "submission.sections.submit.progressbar.describe.persons": "Personenprofil anlegen",
 
   // "submission.sections.submit.progressbar.describe.persons.info": "This section contains personal information that allows you to use the system and provides contact details for the funding agency.",
-  "submission.sections.submit.progressbar.describe.persons.info": "<b>Wichtige Hinweise:</b> <ul><li>Sie können ein Profilbild hinzufügen, indem Sie die Datei in das graue Upload-Feld ziehen oder danach suchen.</li> <li>Mit Websites zu Ihrer Person ermöglichen Sie eine Kontaktaufnahme und erhöhen Ihre Sichtbarkeit, ohne diese Daten in Ihrem Personenprofil eingeben und aktualisieren zu müssen.</li> <li>Durch die Angabe der ORCID und anderer IDs ermöglichen Sie Importfunktionen Ihrer Publikationsdaten in das Monitoring-Tool.</li> <li>Sie können Ihr Profil jederzeit löschen, wenn Sie nicht möchten, dass Ihre personenbezogenen Daten im Monitoring-Tool gespeichert werden. Damit werden auch alle Links zwischen Ihren Personendaten und anderen Datensätzen im Tool deaktiviert. Sie können das Monitoring-Tool weiterhin über Ihre Login Daten nutzen. Verpflichtende öffentliche Informationen, wie die Autorenschaft von Publikationen bleiben im Tool erhalten.</ul></li> <b>Tipps:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"https://www.orcid-de.org/\"target=_blank\">Was ist ORCID?</a></li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"[https://www.scopus.com/freelookup/form/author.uri\"target=_blank>Was ist Scopus Author ID?</a></li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"http://www.researcherid.com/#rid-for-researchers\"target=_blank\">Was ist Researcher ID?</a></ul></li>",
+  "submission.sections.submit.progressbar.describe.persons.info": "<b>Wichtige Hinweise:</b><ul><li>Sie können ein Profilbild hinzufügen, indem Sie die Datei in das graue Upload-Feld ziehen oder danach suchen.</li> <li>Mit Websites zu Ihrer Person ermöglichen Sie eine Kontaktaufnahme und erhöhen Ihre Sichtbarkeit, ohne diese Daten in Ihrem Personenprofil eingeben und aktualisieren zu müssen.</li> <li>Durch die Angabe der ORCID und anderer IDs ermöglichen Sie Importfunktionen Ihrer Publikationsdaten in das Monitoring-Tool.</li> <li>Sie können Ihr Profil jederzeit löschen, wenn Sie nicht möchten, dass Ihre personenbezogenen Daten im Monitoring-Tool gespeichert werden. Damit werden auch alle Links zwischen Ihren Personendaten und anderen Datensätzen im Tool deaktiviert. Sie können das Monitoring-Tool weiterhin über Ihre Login Daten nutzen. Verpflichtende öffentliche Informationen, wie die Autorenschaft von Publikationen bleiben im Tool erhalten.</ul></li> <b>Tipps:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"https://www.orcid-de.org/\"target=_blank\">Was ist ORCID?</a></li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"[https://www.scopus.com/freelookup/form/author.uri\"target=_blank>Was ist Scopus Author ID?</a></li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"http://www.researcherid.com/#rid-for-researchers\"target=_blank\">Was ist Researcher ID?</a></ul></li>",
 
   // "submission.sections.submit.progressbar.describe.physical_objects": "Object / material for knowledge transfer and subsequent use in research and teaching",
   "submission.sections.submit.progressbar.describe.physical_objects": "Gegenstand / Material beschreiben",
@@ -10969,7 +10969,7 @@
   "vocabulary-treeview.tree.description.coar": "<i>Wählen Sie bitte den passenden Typ für die Veröffentlichung aus.</br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
 
   // "submission.sections.submit.progressbar.describe.plan_publications.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Enter here the information about a planned publication.",
-  "submission.sections.submit.progressbar.describe.plan_publications.info": "<b><i>Erfassen Sie hier bitte im Projekt geplante Veröffentlichungen.</b></i><p><b>Wichtige Hinweis:</b><ul><li>Hierzu gehören z. B. wissenschaftliche Artikel wie Konferenzbeiträge, Beiträge in Fachzeitschriften für Praktiker, Zeitungsbeiträge, Leitfäden oder eine Projekthomepage.</li> <li>Beachten Sie, dass die geplanten Veröffentlichungen nach den Zielen in Säule 3 des Impact Pathway gruppiert werden.</li> <li>Nennen Sie in der Bezeichnung Anzahl, Art und Thema, wie z. B. 2-3 wissenschaftliche Artikel zum Thema x, 1 Praxisbeitrag zum Thema y.</li> <li>In der Beschreibung können Sie das Zielpublikum für die geplante Veröffentlichung ergänzen.</li></ul></p>",
+  "submission.sections.submit.progressbar.describe.plan_publications.info": "<b><i>Erfassen Sie hier bitte im Projekt geplante Veröffentlichungen.</b></i></br><b>Wichtige Hinweis:</b><ul><li>Hierzu gehören z. B. wissenschaftliche Artikel wie Konferenzbeiträge, Beiträge in Fachzeitschriften für Praktiker, Zeitungsbeiträge, Leitfäden oder eine Projekthomepage.</li><li>Beachten Sie, dass die geplanten Veröffentlichungen nach den Zielen in Säule 3 des Impact Pathway gruppiert werden.</li><li>Nennen Sie in der Bezeichnung Anzahl, Art und Thema, wie z. B. 2-3 wissenschaftliche Artikel zum Thema x, 1 Praxisbeitrag zum Thema y.</li> <li>In der Beschreibung können Sie das Zielpublikum für die geplante Veröffentlichung ergänzen.</li></ul>",
 
   // "submission.sections.submit.progressbar.describe.gender_reflection": "Gender reflection",
   "submission.sections.submit.progressbar.describe.gender_reflection": "Fragen der Geschlechtergerechtigkeit reflektieren",
@@ -12118,10 +12118,10 @@
   "search.filters.entityType.ia_objective": "Ziel für Interaktion und Transfer",
 
   // "layout.box.help-text.Person_h": "missing",
-  "layout.box.help-text.Person_h": "<p><b>Herzlich Willkommen im SynSICRIS-Monitoring-Tool!</b></p><b>Erste Schritte:</b><ul><li>Als <b>Koordinator:in</b> legen Sie über <b>Aktion</b>: <b>Neues Verbundprojekt anlegen (oben rechts)</b> ein neues Verbundprojekt an.</li> <li>Bereits <b>vorhandene Verbundprojekte</b> können Sie über die entsprechenden Links aufrufen.</li><li>Über <i class=\"fas fa-user-circle\"></i> können Sie Ihr Personenprofil und Ihre Anmeldedaten im Monitoring-Tool bearbeiten.</li><li>In den <b>blauen Hilfeboxen</b> stehen <b>wichtige Informationen</b>. Lesen Sie diese bitte unbedingt, wenn Sie einen Bereich erstmals bearbeiten.</li> <li>Dort gibt es auch <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-synsicrishelp_index.html\"target=_blank\"><b>Links zu den Hilfeseite mit detaillierteren Informationen und zahlreichen Abbildungen.</a></ul></li></b><b>Worum es im Monitoring-Tool geht:</b></br>Das SynSICRIS-Monitoring-Tool dient dazu, Hintergründe, Ziele, Arbeiten, Ergebnisse und Wirkungen eines Verbundprojektes zu erfassen. Teile von Textdokumenten für Anträge und Berichte für den Fördermittelgeber sollen dadurch ersetzt werden. Anstelle von zusammenhängenden Textdokumenten, erstellen Sie einzelne „Einträge“ (z. B. ein Ziel oder eine Veröffentlichung). Diese können in einer Wirkungsplanung (Impact Pathway), in einem Arbeitsplan und im Verwertungsplan strukturiert werden. Sie erstellen und bearbeiten die Einträge zusammen mit allen Projektpartnern. Für einzelne Einträge, z. B. für die Verwertungsplanung kann die Bearbeitung und Sichtbarkeit der Einträge für andere Projektpartner eingeschränkt werden. Das Tool soll von der Antragstellung bis 2 Jahre nach Projektende genutzt werden, indem Sie die Einträge regelmäßig aktualisieren und ergänzen. Für die Antragstellung und zu allen Berichtszeitpunkten erstellen Sie eine Version für den Fördermittelgeber, in der dieser die Einträge lesen kann (noch in Entwicklung). Außerdem können die Informationen in PDF-Dokumente exportiert werden (noch in Entwicklung).</br><b><p>Weitere Informationen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-objectives.html“=_blank\">Ziele und Hintergründe zum Monitoring-Tool</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-difference.html\"target=_blank\">Unterschied zwischen Monitoring-Tool und Anträgen und Berichten in Textdokumenten</a></ul></li></p>",
+  "layout.box.help-text.Person_h": "<p><b>Herzlich Willkommen im SynSICRIS-Monitoring-Tool!</b></p><b>Erste Schritte:</b><ul><li>Als <b>Koordinator:in</b> legen Sie über <b>Aktion</b>: <b>Neues Verbundprojekt anlegen (oben rechts)</b> ein neues Verbundprojekt an.</li> <li>Bereits <b>vorhandene Verbundprojekte</b> können Sie über die entsprechenden Links aufrufen.</li><li>Über <i class=\"fas fa-user-circle\"></i> können Sie Ihr Personenprofil und Ihre Anmeldedaten im Monitoring-Tool bearbeiten.</li><li>In den <b>blauen Hilfeboxen</b> stehen <b>wichtige Informationen</b>. Lesen Sie diese bitte unbedingt, wenn Sie einen Bereich erstmals bearbeiten.</li> <li>Dort gibt es auch <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-synsicrishelp_index.html\"target=_blank\"><b>Links zu den Hilfeseite mit detaillierteren Informationen und zahlreichen Abbildungen.</a></ul></li></b><b>Worum es im Monitoring-Tool geht:</b></br>Das SynSICRIS-Monitoring-Tool dient dazu, Hintergründe, Ziele, Arbeiten, Ergebnisse und Wirkungen eines Verbundprojektes zu erfassen. Teile von Textdokumenten für Anträge und Berichte für den Fördermittelgeber sollen dadurch ersetzt werden. Anstelle von zusammenhängenden Textdokumenten, erstellen Sie einzelne „Einträge“ (z. B. ein Ziel oder eine Veröffentlichung). Diese können in einer Wirkungsplanung (Impact Pathway), in einem Arbeitsplan und im Verwertungsplan strukturiert werden. Sie erstellen und bearbeiten die Einträge zusammen mit allen Projektpartnern. Für einzelne Einträge, z. B. für die Verwertungsplanung kann die Bearbeitung und Sichtbarkeit der Einträge für andere Projektpartner eingeschränkt werden. Das Tool soll von der Antragstellung bis 2 Jahre nach Projektende genutzt werden, indem Sie die Einträge regelmäßig aktualisieren und ergänzen. Für die Antragstellung und zu allen Berichtszeitpunkten erstellen Sie eine Version für den Fördermittelgeber, in der dieser die Einträge lesen kann (noch in Entwicklung). Außerdem können die Informationen in PDF-Dokumente exportiert werden (noch in Entwicklung).</br><b>Weitere Informationen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-objectives.html“=_blank\">Ziele und Hintergründe zum Monitoring-Tool</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-difference.html\"target=_blank\">Unterschied zwischen Monitoring-Tool und Anträgen und Berichten in Textdokumenten</a></ul></li>",
 
   // "layout.box.help-text.default_h_1": "missing",
-  "layout.box.help-text.default_h_1": "<b><i class=\"fas fa-external-link-alt\"></i><a href=\"help/pages/de/de-project-use.html\"target=_blank\"<b>Bedienungshinweise mit Bild für einen guten Start!</b></a></i></b> <br>Die Hilfeseiten öffnen sich in einem neuen Tab. Wenn Sie diesen <b>Tab in ein zweites Browserfenster ziehen</b> und dieses auf dem Bildschirm neben das Fenster mit dem Monitoring-Tool legen, können Sie <b>die Hilfe</b> am leichtesten <b>parallel</b> nutzen.</br><b>Bedienungshinweise in Kurzform:</b><ul><li>Über die <b>linke Navigationsleiste</b> können Sie die Bereiche aufrufen, um dort neue Einträge vorzunehmen oder vorhandene Einträge anzuschauen.</li><li>Über <b>Aktion (oben rechts)</b> können Sie verschiedene Funktionen für die aktuell aufgerufene Seite auswählen.</ul></li>",
+  "layout.box.help-text.default_h_1": "<b><i class=\"fas fa-external-link-alt\"></i><a href=\"help/pages/de/de-project-use.html\"target=_blank\"<b> Bedienungshinweise mit Bild für einen guten Start!</b></a></i></b></br> Die Hilfeseiten öffnen sich in einem neuen Tab. Wenn Sie diesen <b>Tab in ein zweites Browserfenster ziehen</b> und dieses auf dem Bildschirm neben das Fenster mit dem Monitoring-Tool legen, können Sie <b>die Hilfe</b> am leichtesten <b>parallel</b> nutzen.</br><b>Bedienungshinweise in Kurzform:</b><ul><li>Über die <b>linke Navigationsleiste</b> können Sie die Bereiche aufrufen, um dort neue Einträge vorzunehmen oder vorhandene Einträge anzuschauen.</li><li>Über <b>Aktion (oben rechts)</b> können Sie verschiedene Funktionen für die aktuell aufgerufene Seite auswählen.</ul></li>",
 
   // "layout.box.help-text.default_h_2": "missing",
   "layout.box.help-text.default_h_2": "<i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.html\"target=_blank\"><b>Schritt-für-Schritt-Anleitung für die Antragstellung</b></a></i></br><b>Wichtige Hinweise:</b><ul><li>Arbeiten Sie schrittweise. Sie können jeden Eintrag jederzeit überarbeiten. Für den Start genügt es, wenn Sie vorläufige Bezeichnungen wählen. Ergänzen Sie nach und nach die Details.</li><li>Legen Sie vor Beginn der inhaltlichen Planung die Einträge zu den Teilprojekten und den Beteiligten an. Dafür ist jeweils mindestens die Bezeichnung erforderlich.</li><li>Legen Sie möglichst alle inhaltlichen Einträge im Impact Pathway oder im Arbeitsplan an, da Sie dort mehr Hintergrundinformationen und Hilfen erhalten. Diese Einträge erscheinen automatisch in der Listenansicht. Wenn Sie dagegen Einträge in einer Listenansicht erstellen, müssen Sie daran denken, diese später auch im Impact Pathway und/oder Arbeitsplan hinzuzufügen.</ul></li><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i><a href=\"help/pages/de/de-project-about-entities-proj.html\"target=_blank\">Verbundprojekt und Teilprojekt unterscheiden</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.html\"target=_blank\">Rechte für das Teilprojekt festlegen</a></ul></li>",
@@ -12169,7 +12169,7 @@
   "layout.box.help-text.workpackage_h": "<b>Arbeitspakete</b> gliedern die Arbeiten des Projektes. <p><b>Diese Liste dient der Übersicht.</b> <b>Zum Bearbeiten</b> rufen Sie den Eintrag über seinen <b>Link in der Listenansicht</b> auf und wählen <b>Aktion: <i class=\"fas fa-edit\"></i>Bearbeiten</b>.</p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Impact Pathway strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie den Impact Pathway nicht nutzen oder die Einträge erst später zum Impact Pathway hinzufügen möchten.</ul></li>",
 
   // "layout.box.help-text.task_h": "missing",
-  "layout.box.help-text.task_h": "Eine <b>Aufgabe</b> um fasst einzelne Arbeitsschritte, die im Arbeitsplan einem Arbeitspaket zugeordnet sind. <p><b>Diese Liste dient der Übersicht.</b> <b>Zum Bearbeiten</b> rufen Sie den Eintrag über seinen <b>Link in der Listenansicht</b> auf und wählen <b>Aktion: <i class=\"fas fa-edit\"></i>Bearbeiten</b>.</p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Impact Pathway strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie den Impact Pathway nicht nutzen oder die Einträge erst später zum Impact Pathway hinzufügen möchten.</ul></li>",
+  "layout.box.help-text.task_h": "Eine <b>Aufgabe</b> umfasst einzelne Arbeitsschritte, die im Arbeitsplan einem Arbeitspaket zugeordnet sind. <p><b>Diese Liste dient der Übersicht.</b> <b>Zum Bearbeiten</b> rufen Sie den Eintrag über seinen <b>Link in der Listenansicht</b> auf und wählen <b>Aktion: <i class=\"fas fa-edit\"></i>Bearbeiten</b>.</p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Impact Pathway strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie den Impact Pathway nicht nutzen oder die Einträge erst später zum Impact Pathway hinzufügen möchten.</ul></li>",
 
   // "layout.box.help-text.process_event_h": "missing",
   "layout.box.help-text.process_event_h": "<b>Kooperation / Partizipation / Austauschprozess</b> beinhaltet vom Verbundprojekt organisierte Aktivitäten, die über einen längeren Zeitraum mit den gleichen Beteiligten stattfinden. <p><b>Diese Liste dient der Übersicht.</b> <b>Zum Bearbeiten</b> rufen Sie den Eintrag über seinen <b>Link in der Listenansicht</b> auf und wählen <b>Aktion: <i class=\"fas fa-edit\"></i>Bearbeiten</b>.</p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Impact Pathway strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie den Impact Pathway nicht nutzen oder die Einträge erst später zum Impact Pathway hinzufügen möchten.</ul></li>",
@@ -12306,5 +12306,7 @@
   // "submission.form.contribution_fundingprogramme-edit.info": "missing",
   "submission.form.contribution_fundingprogramme-edit.info": "<b>Worum es hier geht:</b><ul><li>Die Einträge dienen dazu, in der Vorhabenbeschreibung das Kapitel „Bezug des Vorhabens zu den förderpolitischen Zielen“ und das Berichtskapitel „Beitrag des Projektes zu den förderpolitischen Zielen“ zu ersetzen.</li></ul>",
 
+  // "earch.filters.applied.f.itemtype": "Type",
+  "earch.filters.applied.f.itemtype": "Art"
 
 }
