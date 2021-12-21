@@ -34,6 +34,7 @@ export class DynamicListCheckboxGroupModel extends DynamicCheckboxGroupModel {
     this.groupLength = config.groupLength || 5;
     this._value = [];
     this.repeatable = config.repeatable;
+    this.disabled = (config as any).readOnly;
 
     this.valueChanges = new Subject<any>();
     this.valueChanges.subscribe((value: VocabularyEntry | VocabularyEntry[]) => this.value = value);
@@ -54,8 +55,7 @@ export class DynamicListCheckboxGroupModel extends DynamicCheckboxGroupModel {
         this._value = value;
       } else {
         // _value is non extendible so assign it a new array
-        const newValue = (this.value as VocabularyEntry[]).concat([value]);
-        this._value = newValue;
+        this._value = (this.value as VocabularyEntry[]).concat([value]);
       }
     }
   }
