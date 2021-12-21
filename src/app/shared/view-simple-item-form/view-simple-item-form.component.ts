@@ -23,6 +23,16 @@ import { take } from 'rxjs/operators';
 export class ViewSimpleItemFormComponent implements OnInit {
 
   /**
+   * The label to use as edit button's title
+   */
+  @Input() public editTitle: string;
+
+  /**
+   * The label to use as field title
+   */
+  @Input() public fieldTitle: string;
+
+  /**
    * The form config
    * @type {Observable<SubmissionFormModel>}
    */
