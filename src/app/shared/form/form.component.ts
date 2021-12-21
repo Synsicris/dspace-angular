@@ -77,6 +77,7 @@ export class FormComponent implements OnDestroy, OnInit {
   @Input() formLayout = null as DynamicFormLayout;
   @Input() arrayButtonsStyle: string;
   @Input() isInlineGroupForm: boolean;
+  @Input() showContainer = true;
 
   /* tslint:disable:no-output-rename */
   @Output('dfBlur') blur: EventEmitter<DynamicFormControlEvent> = new EventEmitter<DynamicFormControlEvent>();
