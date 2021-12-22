@@ -98,7 +98,7 @@ export class ItemCreateComponent implements OnInit {
    * Open creation sub-project modal
    */
   createSubproject() {
-    const modalRef = this.modalService.open(CreateProjectComponent);
+    const modalRef = this.modalService.open(CreateProjectComponent, { size: 'lg' });
     modalRef.componentInstance.isSubproject = true;
     modalRef.componentInstance.parentProjectUUID = this.scope;
   }

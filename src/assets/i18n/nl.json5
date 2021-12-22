@@ -5064,7 +5064,8 @@
   // TODO New key - Add a translation
   "loading.bitstreams": "Loading bitstreams...",
   
-  // "loading.browse-by": "Loading items...",
+  // "loading.browse-by": "Loading items…",
+  // TODO Source message changed - Revise the translation
   "loading.browse-by": "Items worden ingeladen...",
   
   // "loading.browse-by-page": "Loading page...",
@@ -5093,7 +5094,8 @@
   // "loading.items": "Loading items...",
   "loading.items": "Items worden ingeladen...",
   
-  // "loading.mydspace-results": "Loading items...",
+  // "loading.mydspace-results": "Loading items…",
+  // TODO Source message changed - Revise the translation
   "loading.mydspace-results": "Items worden ingeladen...",
   
   // "loading.objects": "Loading…",
@@ -7950,9 +7952,9 @@
   // TODO New key - Add a translation
   "search.filters.applied.charts.RELATION.parentproject.Event.title": "Event graphs",
   
-  // "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication ",
+  // "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication ",
+  "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication",
   
   // "search.filters.applied.charts.grapheventtype.tab": "Event type",
   // TODO New key - Add a translation
@@ -8512,6 +8514,14 @@
   // TODO New key - Add a translation
   "search.filters.discoverable.false": "Yes",
   
+  // "search.filters.namedresourcetype.Workspace": "Workspace",
+  // TODO New key - Add a translation
+  "search.filters.namedresourcetype.Workspace": "Workspace",
+  
+  // "search.filters.namedresourcetype.Archived": "Archived",
+  // TODO New key - Add a translation
+  "search.filters.namedresourcetype.Archived": "Archived",
+  
   // "search.filters.withdrawn.true": "Yes",
   // TODO New key - Add a translation
   "search.filters.withdrawn.true": "Yes",
@@ -8560,7 +8570,8 @@
   // TODO New key - Add a translation
   "orgunit.search.results.head": "Organizations Search Results",
   
-  // "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting",
+  // "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting\"",
+  // TODO Source message changed - Revise the translation
   "search.results.no-results": "Er waren geen resultaten voor deze zoekopdracht. Kunt u niet vinden wat u zoekt? Probeer het met ",
   
   // "search.results.no-results-link": "quotes around it",
@@ -12513,9 +12524,13 @@
   // TODO New key - Add a translation
   "Funding.listelement.badge": "Funding",
   
-  // "profile.edit-item.btn.OWNER": "Edit"
+  // "profile.edit-item.btn.OWNER": "Edit",
   // TODO New key - Add a translation
-  "profile.edit-item.btn.OWNER": "Edit"
+  "profile.edit-item.btn.OWNER": "Edit",
+  
+  // "earch.filters.applied.f.itemtype": "Type"
+  // TODO New key - Add a translation
+  "earch.filters.applied.f.itemtype": "Type"
   
   
 

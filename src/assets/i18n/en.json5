@@ -4552,6 +4552,10 @@
 
   "search.filters.discoverable.false": "Yes",
 
+  "search.filters.namedresourcetype.Workspace": "Workspace",
+
+  "search.filters.namedresourcetype.Archived": "Archived",
+
   "search.filters.withdrawn.true": "Yes",
 
   "search.filters.withdrawn.false": "No",

@@ -3,6 +3,7 @@ import { isNotEmpty } from '../../../empty.util';
 import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
 import { DynamicListCheckboxGroupModel } from '../ds-dynamic-form-ui/models/list/dynamic-list-checkbox-group.model';
 import { DynamicListRadioGroupModel } from '../ds-dynamic-form-ui/models/list/dynamic-list-radio-group.model';
+import { MetadataValue } from '../../../../core/shared/metadata.models';
 
 export class ListFieldParser extends FieldParser {
 
@@ -18,7 +19,10 @@ export class ListFieldParser extends FieldParser {
         this.getInitGroupValues().forEach((value: any) => {
           if (value instanceof FormFieldMetadataValueObject) {
             listModelConfig.value.push(value);
-          } else {
+          } else if (value instanceof MetadataValue) {
+            const valueObj = new FormFieldMetadataValueObject(value.value, value.language, null, value.authority);
+            listModelConfig.value.push(valueObj);
+          } else  {
             const valueObj = new FormFieldMetadataValueObject(value);
             listModelConfig.value.push(valueObj);
           }
