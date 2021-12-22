@@ -1,14 +1,19 @@
-<div class="pt-2 border">
+<div class="d-flex flex-column p-2 bg-light rounded">
+  <div class="d-flex justify-content-between">
+    <h5>{{fieldTitle}}</h5>
+    <button class="btn btn-primary btn-sm"
+            (click)="$event.preventDefault();  $event.stopPropagation(); openEditModal();">
+      <span>
+        <i class="far fa-edit"></i> {{editTitle}}
+      </span>
+    </button>
+  </div>
+  <div class="clearfix"></div>
   <ds-form *ngIf="formId && formModel?.length > 0" #formRef="formComponent"
            [formId]="formId"
            [formModel]="formModel"
            [formLayout]="formLayout"
            [displaySubmit]="false"
-           [displayCancel]="false">
-    <div class="form-group row">
-      <div class="col text-right">
-        <button class="btn btn-primary" (click)="openEditModal()">{{'form.edit' | translate}}</button>
-      </div>
-    </div>
-  </ds-form>
+           [displayCancel]="false"
+           [showContainer]="false"></ds-form>
 </div>

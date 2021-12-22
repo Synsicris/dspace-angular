@@ -71,7 +71,7 @@ export class CreateProjectMenuComponent extends ContextMenuEntryComponent implem
    * Open creation project modal
    */
   openCreateProjectModal() {
-    this.modalService.open(CreateProjectComponent);
+    this.modalService.open(CreateProjectComponent, { size: 'lg' });
   }
 
   /**

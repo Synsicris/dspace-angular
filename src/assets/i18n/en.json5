@@ -2716,7 +2716,7 @@
 
   "loading.bitstreams": "Loading bitstreams...",
 
-  "loading.browse-by": "Loading items...",
+  "loading.browse-by": "Loading items…",
 
   "loading.browse-by-page": "Loading page...",
 
@@ -2734,7 +2734,7 @@
 
   "loading.items": "Loading items...",
 
-  "loading.mydspace-results": "Loading items...",
+  "loading.mydspace-results": "Loading items…",
 
   "loading.objects": "Loading…",
 
@@ -4250,7 +4250,7 @@
 
   "search.filters.applied.charts.RELATION.parentproject.Event.title": "Event graphs",
 
-  "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication ",
+  "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication",
 
   "search.filters.applied.charts.grapheventtype.tab": "Event type",
 
@@ -4552,6 +4552,10 @@
 
   "search.filters.discoverable.false": "Yes",
 
+  "search.filters.namedresourcetype.Workspace": "Workspace",
+
+  "search.filters.namedresourcetype.Archived": "Archived",
+
   "search.filters.withdrawn.true": "Yes",
 
   "search.filters.withdrawn.false": "No",
@@ -4578,7 +4582,7 @@
 
   "orgunit.search.results.head": "Organizations Search Results",
 
-  "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting",
+  "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting\"",
 
   "search.results.no-results-link": "quotes around it",
 
@@ -6598,6 +6602,8 @@
 
   "Funding.listelement.badge": "Funding",
 
-  "profile.edit-item.btn.OWNER": "Edit"
+  "profile.edit-item.btn.OWNER": "Edit",
+
+  "earch.filters.applied.f.itemtype": "Type"
 
 }
