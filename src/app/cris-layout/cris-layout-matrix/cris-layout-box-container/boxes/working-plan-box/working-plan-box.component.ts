@@ -8,6 +8,7 @@ import { Community } from '../../../../../core/shared/community.model';
 import { ProjectDataService } from '../../../../../core/project/project-data.service';
 import { Item } from '../../../../../core/shared/item.model';
 import { RenderCrisLayoutBoxFor } from '../../../../decorators/cris-layout-box.decorator';
+import { CrisLayoutBox } from '../../../../../core/layout/models/box.model';
 
 @Component({
   selector: 'ds-working-plan-box',

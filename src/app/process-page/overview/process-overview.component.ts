@@ -97,7 +97,7 @@ export class ProcessOverviewComponent implements OnInit {
   }
 
   isProcessCompleted(process: Process): boolean {
-    return process.processStatus.toString() === 'COMPLETED' || process.processStatus.toString() === 'FAILED';
+    return process.processStatus?.toString() === 'COMPLETED' || process.processStatus?.toString() === 'FAILED';
   }
 
   /**
