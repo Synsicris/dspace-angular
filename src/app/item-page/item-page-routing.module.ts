@@ -18,6 +18,8 @@ import { BitstreamRequestACopyPageComponent } from '../shared/bitstream-request-
 import { CrisItemPageTabResolver } from '../cris-item-page/cris-item-page-tab.resolver';
 import { REQUEST_COPY_MODULE_PATH } from '../app-routing-paths';
 import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end-user-agreement-current-user.guard';
+import { ProjectCommunityByItemResolver } from '../core/project/project-community-by-item.resolver';
+import { ProjectItemBreadcrumbResolver } from '../core/breadcrumbs/project-item-breadcrumb.resolver';
 
 @NgModule({
   imports: [
@@ -36,7 +38,8 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
             path: '',
             resolve: {
               dso: ItemPageResolver,
-              breadcrumb: ItemBreadcrumbResolver,
+              project: ProjectCommunityByItemResolver,
+              breadcrumb: ProjectItemBreadcrumbResolver,
               tabs: CrisItemPageTabResolver
             },
             component: ThemedItemPageComponent,
@@ -46,7 +49,8 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
             path: 'full',
             resolve: {
               dso: ItemPageResolver,
-              breadcrumb: ItemBreadcrumbResolver,
+              project: ProjectCommunityByItemResolver,
+              breadcrumb: ProjectItemBreadcrumbResolver,
               tabs: CrisItemPageTabResolver
             },
             component: ThemedFullItemPageComponent,
