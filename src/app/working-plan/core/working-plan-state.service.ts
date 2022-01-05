@@ -20,7 +20,7 @@ import {
   UpdateWorkpackageStepAction
 } from './working-plan.actions';
 import { MetadataMap, MetadatumViewModel } from '../../core/shared/metadata.models';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
 import {
   chartDateViewSelector,
   getLastAddedNodesListSelector,

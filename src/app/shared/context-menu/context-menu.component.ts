@@ -100,10 +100,16 @@ export class ContextMenuComponent implements OnInit {
    * @param menuEntryType
    */
   isDisabled(menuEntryType: ContextMenuEntryType): Observable<boolean> {
-    const property = `context-menu-entry.${menuEntryType}.disabled`;
+    const property = `context-menu-entry.${menuEntryType}.enabled`;
     return this.configurationService.findByPropertyName(property).pipe(
       getFirstCompletedRemoteData(),
-      map((res: RemoteData<ConfigurationProperty>) => res.hasSucceeded && res.payload && isNotEmpty(res.payload.values) && res.payload.values[0].toLowerCase() === 'true')
+      map((res: RemoteData<ConfigurationProperty>) => {
+        return res.hasSucceeded && res.payload && isNotEmpty(res.payload.values) && res.payload.values[0].toLowerCase() === 'false';
+      })
     );
+  }
+
+  isItem(): boolean {
+    return this.contextMenuObjectType === DSpaceObjectType.ITEM;
   }
 }

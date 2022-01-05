@@ -187,41 +187,45 @@ export const environment: GlobalConfig = {
     label: 'English',
     active: true,
   }, {
+    code: 'cs',
+    label: 'Čeština',
+    active: true,
+  }, {
     code: 'de',
     label: 'Deutsch',
     active: true,
   }, {
-    code: 'cs',
-    label: 'Čeština',
-    active: false,
+    code: 'es',
+    label: 'Español',
+    active: true,
+  }, {
+    code: 'fr',
+    label: 'Français',
+    active: true,
+  }, {
+    code: 'lv',
+    label: 'Latviešu',
+    active: true,
+  }, {
+    code: 'hu',
+    label: 'Magyar',
+    active: true,
   }, {
     code: 'nl',
     label: 'Nederlands',
     active: false,
-  },{
-    code: 'pt-BR',
-    label: 'Português do Brasil',
-    active: false,
-  },{
+  }, {
     code: 'pt-PT',
     label: 'Português',
     active: false,
-  }, {
-    code: 'fr',
-    label: 'Français',
-    active: false,
-  }, {
-    code: 'lv',
-    label: 'Latviešu',
-    active: false,
+  },{
+    code: 'pt-BR',
+    label: 'Português do Brasil',
+    active: true,
   },{
     code: 'fi',
     label: 'Suomi',
-    active: false,
-  },{
-    code: 'hu',
-    label: 'magyar',
-    active: false,
+    active: true,
   }],
   // Browse-By Pages
   browseBy: {
@@ -291,6 +295,19 @@ export const environment: GlobalConfig = {
       undoTimeout: 10000 // 10 seconds
     }
   },
+  // When the search results are retrieved, for each item type the metadata with a valid authority value are inspected.
+  // Referenced items will be fetched with a find all by id strategy to avoid individual rest requests
+  // to efficiently display the search results.
+  followAuthorityMetadata: [
+    {
+      type: 'Publication',
+      metadata: ['dc.contributor.author']
+    },
+    {
+      type: 'Product',
+      metadata: ['dc.contributor.author']
+    }
+  ],
   collection: {
     edit: {
       undoTimeout: 10000 // 10 seconds
@@ -321,6 +338,19 @@ export const environment: GlobalConfig = {
     //   uuid: '0958c910-2037-42a9-81c7-dca80e3892b4'
     // },
     // {
+    //   // The extends property specifies an ancestor theme (by name). Whenever a themed component is not found
+    //   // in the current theme, its ancestor theme(s) will be checked recursively before falling back to default.
+    //   name: 'custom-A',
+    //   extends: 'custom-B',
+    //   // Any of the matching properties above can be used
+    //   handle: '10673/34',
+    // },
+    // {
+    //   name: 'custom-B',
+    //   extends: 'custom',
+    //   handle: '10673/12',
+    // },
+    // {
     //   // A theme with only a name will match every route
     //   name: 'custom'
     // },
@@ -341,7 +371,7 @@ export const environment: GlobalConfig = {
     image: false,
     video: false,
   },
-  layout: {
+  crisLayout: {
     urn: [
       {
         name: 'doi',
@@ -369,7 +399,25 @@ export const environment: GlobalConfig = {
         entityType: 'ORGUNIT',
         icon: 'fa fa-university'
       }
-    ]
+    ],
+    itemPage: {
+      Person: {
+          orientation: 'horizontal'
+      },
+      default: {
+          orientation: 'vertical'
+      },
+    },
+    metadataBox: {
+      defaultMetadataLabelColStyle: 'col-3',
+      defaultMetadataValueColStyle: 'col-9'
+    }
+  },
+  layout: {
+    navbar: {
+      // If true, show the "Community and Collections" link in the navbar; otherwise, show it in the admin sidebar
+      showCommunityCollection: true,
+    }
   },
   security: {
     levels: [
@@ -389,6 +437,25 @@ export const environment: GlobalConfig = {
         color: 'red'
       }
     ]
+  },
+  suggestion: [
+    // {
+    //   // Use this configuration to map a suggestion import to a specific collection based on the suggestion type.
+    //   source: 'suggestionSource',
+    //   collectionId: 'collectionUUID'
+    // }
+  ],
+  cms: {
+    metadataList: [
+      'cris.cms.home-header',
+      'cris.cms.home-news',
+      'cris.cms.footer',
+    ]
+  },
+  addThisPlugin: {
+    siteId: '',
+    scriptUrl: 'http://s7.addthis.com/js/300/addthis_widget.js#pubid=',
+    socialNetworksEnabled: false
   },
   impactPathway: {
     impactPathwaysFormSection: 'impact_pathway_form',

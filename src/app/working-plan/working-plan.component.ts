@@ -1,13 +1,12 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Workpackage } from './core/models/workpackage-step.model';
 import { WorkingPlanStateService } from './core/working-plan-state.service';
 import { CollectionDataService } from '../core/data/collection-data.service';
 import { FindListOptions } from '../core/data/request.models';
-import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 import { RemoteData } from '../core/data/remote-data';
 import { PaginatedList } from '../core/data/paginated-list.model';
 import { Collection } from '../core/shared/collection.model';

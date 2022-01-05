@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { ItemPageResolver } from './item-page.resolver';
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
 import { ItemBreadcrumbResolver } from '../core/breadcrumbs/item-breadcrumb.resolver';
+import { VersionResolver } from './version-page/version.resolver';
 import { DSOBreadcrumbsService } from '../core/breadcrumbs/dso-breadcrumbs.service';
 import { LinkService } from '../core/cache/builders/link.service';
 import { UploadBitstreamComponent } from './bitstreams/upload/upload-bitstream.component';
@@ -12,7 +13,10 @@ import { MenuItemType } from '../shared/menu/initial-menus-state';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { ThemedItemPageComponent } from './simple/themed-item-page.component';
 import { ThemedFullItemPageComponent } from './full/themed-full-item-page.component';
+import { VersionPageComponent } from './version-page/version-page/version-page.component';
+import { BitstreamRequestACopyPageComponent } from '../shared/bitstream-request-a-copy-page/bitstream-request-a-copy-page.component';
 import { CrisItemPageTabResolver } from '../cris-item-page/cris-item-page-tab.resolver';
+import { REQUEST_COPY_MODULE_PATH } from '../app-routing-paths';
 import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end-user-agreement-current-user.guard';
 
 @NgModule({
@@ -70,6 +74,10 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
             canActivate: [AuthenticatedGuard]
           },
           {
+            path: REQUEST_COPY_MODULE_PATH,
+            component: BitstreamRequestACopyPageComponent,
+          },
+          {
             path: EASY_ONLINE_PATH,
             loadChildren: () => import('../easy-online-import-page/easy-online-import-page.module')
               .then((m) => m.EasyOnlineImportPageModule)
@@ -88,7 +96,20 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
               } as LinkMenuItemModel,
             }],
           },
+          showSocialButtons: true
         },
+      },
+      {
+        path: 'version',
+        children: [
+          {
+            path: ':id',
+            component: VersionPageComponent,
+            resolve: {
+              dso: VersionResolver,
+            },
+          }
+        ],
       }
     ])
   ],
@@ -98,6 +119,7 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
     DSOBreadcrumbsService,
     LinkService,
     ItemPageAdministratorGuard,
+    VersionResolver,
   ]
 
 })

@@ -12,6 +12,7 @@ import { HostWindowService } from '../shared/host-window.service';
 import { SectionDataService } from '../core/layout/section-data.service';
 import { getFirstSucceededRemoteListPayload } from '../core/shared/operators';
 import { Section } from '../core/layout/models/section.model';
+import { environment } from '../../environments/environment';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 
@@ -50,23 +51,27 @@ export class NavbarComponent extends MenuComponent {
    */
   createMenu() {
     const isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(take(1));
-    const menuList: any[] = [
-      /* Communities & Collections tree */
-      {
-        id: `browse_global_communities_and_collections`,
-        active: false,
-        visible: true,
-        index: 0,
-        model: {
-          type: MenuItemType.LINK,
-          text: `menu.section.communities_and_collections`,
-          link: `/community-list`
-        } as LinkMenuItemModel
-      },
-    ];
+    const menuList: any[] = [];
 
-    const findAll$ = this.sectionDataService.findAll().pipe( getFirstSucceededRemoteListPayload());
-    combineLatest([isAdmin$, findAll$]).subscribe( ([isAdmin, sections]: [boolean, Section[]]) => {
+    /* Communities & Collections tree */
+    const CommunityCollectionMenuItem = {
+      id: `browse_global_communities_and_collections`,
+      active: false,
+      visible: environment.layout.navbar.showCommunityCollection,
+      index: 0,
+      model: {
+        type: MenuItemType.LINK,
+        text: `menu.section.communities_and_collections`,
+        link: `/community-list`
+      } as LinkMenuItemModel
+    };
+
+    if (environment.layout.navbar.showCommunityCollection) {
+      menuList.push(CommunityCollectionMenuItem);
+    }
+
+    const findAllVisible$ = this.sectionDataService.findVisibleSections().pipe( getFirstSucceededRemoteListPayload());
+    combineLatest([isAdmin$, findAllVisible$]).subscribe( ([isAdmin, sections]: [boolean, Section[]]) => {
       if (isAdmin) {
         menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
           shouldPersistOnRouteChange: true
