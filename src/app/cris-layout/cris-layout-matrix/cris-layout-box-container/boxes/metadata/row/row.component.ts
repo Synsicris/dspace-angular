@@ -6,6 +6,7 @@ import {
   MetadataBoxCell,
   MetadataBoxRow
 } from '../../../../../../core/layout/models/box.model';
+import { isEmpty, isNotEmpty } from '../../../../../../shared/empty.util';
 
 /**
  * This component renders the rows of metadata boxes
@@ -30,6 +31,15 @@ export class RowComponent {
    * Current row configuration
    */
   @Input() row: MetadataBoxRow;
+
+  /**
+   * Return the cell style
+   * @param cell
+   */
+  getCellStyle(cell: MetadataBoxCell) {
+    return (isNotEmpty(cell.style) && cell.style.includes('col'))
+      ? cell.style : `col ${cell.style}`;
+  }
 
   trackUpdate(index, field: LayoutField) {
     return field && field.metadata;
