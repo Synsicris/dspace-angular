@@ -290,16 +290,7 @@ import { ExportExcelSelectorComponent } from './dso-selector/modal-wrappers/expo
 import { LogInOidcComponent } from './log-in/methods/oidc/log-in-oidc.component';
 import { MetricPlumxComponent } from './metric/metric-plumx/metric-plumx.component';
 import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
-import { CreateSimpleItemModalComponent } from './create-simple-item-modal/create-simple-item-modal.component';
-import { CreateSimpleItemComponent } from './create-simple-item-modal/create-simple-item/create-simple-item.component';
-import { SimpleItemBoxComponent } from './create-simple-item-modal/simple-item-box/simple-item-box.component';
-import { SearchSimpleItemComponent } from './create-simple-item-modal/search-simple-item/search-simple-item.component';
-import { SearchSimpleItemBoxComponent } from './create-simple-item-modal/search-simple-item/search-header/search-box/search-simple-item-box.component';
-import { SearchSimpleItemHeaderComponent } from './create-simple-item-modal/search-simple-item/search-header/search-simple-item-header.component';
-import { SearchSimpleItemLabelsComponent } from './create-simple-item-modal/search-simple-item/search-header/search-labels/search-simple-item-labels.component';
-import { SearchSimpleItemFilterBoxComponent } from './create-simple-item-modal/search-simple-item/search-header/filter-box/search-simple-item-filter-box.component';
 import { TaskColorDirective } from '../impact-pathway-board/shared/impact-path-way/impact-path-way-task/task.directive';
-import { SearchSimpleItemService } from './create-simple-item-modal/search-simple-item/search-simple-item.service';
 import { AuthorityTypeaheadComponent } from './authority-typeahead/authority-typeahead.component';
 import { MaterialModule } from './material/material.module';
 import { CreateProjectComponent } from '../projects/create-project/create-project.component';
@@ -591,16 +582,8 @@ const COMPONENTS = [
   MetadataLinkViewComponent,
   ExportExcelSelectorComponent,
   CreateImpactPathwayComponent,
-  CreateSimpleItemModalComponent,
-  CreateSimpleItemComponent,
   EditSimpleItemModalComponent,
   ViewSimpleItemFormComponent,
-  SearchSimpleItemComponent,
-  SearchSimpleItemHeaderComponent,
-  SearchSimpleItemLabelsComponent,
-  SearchSimpleItemBoxComponent,
-  SearchSimpleItemFilterBoxComponent,
-  SimpleItemBoxComponent,
   AuthorityTypeaheadComponent,
   AuthorityDropdownComponent,
   CreateProjectComponent,
@@ -720,8 +703,7 @@ const PROVIDERS = [
     useValue: dsDynamicFormControlMapFn
   },
   ResourcePolicyResolver,
-  ResourcePolicyTargetResolver,
-  SearchSimpleItemService
+  ResourcePolicyTargetResolver
 ];
 
 const DIRECTIVES = [

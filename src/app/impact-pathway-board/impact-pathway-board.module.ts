@@ -17,6 +17,7 @@ import { ObjectiveContainerComponent } from './wrapper-objectives/objective/cont
 import { ObjectiveComponent } from './wrapper-objectives/objective/objective.component';
 import { ImpactPathwaySharedModule } from './shared/impact-pathway-shared.module';
 import { ImpactPathwayCoreModule } from './core/impact-pathway-core.module';
+import { CreateSimpleItemModule } from '../shared/create-simple-item-modal/create-simple-item.module';
 
 const MODULES = [
   CommonModule,
@@ -25,7 +26,8 @@ const MODULES = [
   DragDropModule,
   NgxDomarrowModule,
   ImpactPathwaySharedModule,
-  ImpactPathwayCoreModule
+  ImpactPathwayCoreModule,
+  CreateSimpleItemModule
 ];
 
 const COMPONENTS = [
