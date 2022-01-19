@@ -17,7 +17,7 @@ import {
   DynamicFormLayoutService,
   DynamicFormValidationService
 } from '@ng-dynamic-forms/core';
-import { of as observableOf, Subject, Subscription } from 'rxjs';
+import { Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { NgbDropdown, NgbModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 
@@ -32,7 +32,6 @@ import { FormBuilderService } from '../form/builder/form-builder.service';
 import { SubmissionService } from '../../submission/submission.service';
 import { DsDynamicInputModel } from '../form/builder/ds-dynamic-form-ui/models/ds-dynamic-input.model';
 import { isEmpty } from '../empty.util';
-import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'ds-authority-dropdown',

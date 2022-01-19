@@ -5,9 +5,9 @@
   </button>
 </div>
 <div class="modal-body modal-body-height">
-  <ngb-tabset type="pills" [activeId]="startWithSearch ? 'tab-search' : 'tab-create'">
-    <ngb-tab title="{{'simple-item-modal.create-btn' | translate}}" id="tab-create">
-      <ng-template ngbTabContent>
+  <ul ngbNav #nav="ngbNav" class="nav-pills" [activeId]="startWithSearch ? 'tab-search' : 'tab-create'">
+    <li ngbNavItem title="{{'simple-item-modal.create-btn' | translate}}" id="tab-create">
+      <ng-template ngbNavContent>
         <div  class="mt-3 modal-height">
           <ds-create-simple-item
             [authorityScope]="authorityScope"
@@ -17,9 +17,9 @@
             (createItem)="createItem.emit($event)"></ds-create-simple-item>
         </div>
       </ng-template>
-    </ngb-tab>
-    <ngb-tab *ngIf="hasSearch" title="{{'simple-item-modal.search-btn' | translate}}" id="tab-search">
-      <ng-template ngbTabContent>
+    </li>
+    <li ngbNavItem *ngIf="hasSearch" title="{{'simple-item-modal.search-btn' | translate}}" id="tab-search">
+      <ng-template ngbNavContent>
         <div  class="mt-3">
           <ds-search-simple-item [vocabularyName]="vocabularyName"
                                  [processing]="processing"
@@ -32,8 +32,8 @@
                                  (addItems)="addItems.emit($event)"></ds-search-simple-item>
         </div>
       </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
+    </li>
+  </ul>
 
 
 </div>

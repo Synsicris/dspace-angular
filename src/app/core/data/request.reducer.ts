@@ -104,10 +104,19 @@ export const hasCompleted = (state: RequestEntryState) =>
 export const isStale = (state: RequestEntryState) =>
   isSuccessStale(state) || isErrorStale(state);
 
+/**
+ * Interface for rest error associated to a path
+ */
+export interface PathableObjectError {
+  message: string;
+  paths: string[];
+}
+
 export class ResponseState {
   timeCompleted: number;
   statusCode: number;
   errorMessage?: string;
+  errors?: PathableObjectError[];
   payloadLink?: HALLink;
   unCacheableObject?: UnCacheableObject;
 }
@@ -248,6 +257,7 @@ function completeFailedRequest(storeState: RequestState, action: RequestErrorAct
           statusCode: action.payload.statusCode,
           payloadLink: null,
           errorMessage: action.payload.errorMessage,
+          errors: action.payload.errors
         },
         lastUpdated: action.lastUpdated
       })

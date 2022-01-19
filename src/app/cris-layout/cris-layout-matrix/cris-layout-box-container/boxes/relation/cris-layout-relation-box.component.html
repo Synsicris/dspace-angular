@@ -1,0 +1,12 @@
+<ds-configuration-search-page *ngIf="configuration" class="w-100"
+                              [fixedFilterQuery]="searchFilter"
+                              [configuration]="configuration"
+                              [searchEnabled]="searchEnabled"
+                              [sideBarWidth]="sideBarWidth"
+                              [relatedEntityType]="item.entityType"
+                              [targetEntityType]="box.shortname"
+                              [scope]="projectScope.uuid"
+                              [showCreate]="true"
+                              [showExport]="false"
+                              [showSidebar]="true">
+</ds-configuration-search-page>

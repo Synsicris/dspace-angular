@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
-import { Observable, of as observableOf } from 'rxjs';
+import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,7 +10,6 @@ import { SubmissionScopeType } from '../../../core/submission/submission-scope-t
 import { isNotEmpty } from '../../../shared/empty.util';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Item } from '../../../core/shared/item.model';
 
 /**

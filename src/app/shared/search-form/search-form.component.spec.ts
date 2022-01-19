@@ -12,6 +12,8 @@ import { of as observableOf } from 'rxjs';
 import { PaginationService } from '../../core/pagination/pagination.service';
 import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
 import { PaginationServiceStub } from '../testing/pagination-service.stub';
+import { DSpaceObjectDataService } from '../../core/data/dspace-object-data.service';
+import { createSuccessfulRemoteDataObject$ } from '../remote-data.utils';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 
 describe('SearchFormComponent', () => {
@@ -37,6 +39,7 @@ describe('SearchFormComponent', () => {
         },
         { provide: PaginationService, useValue: paginationService },
         { provide: SearchConfigurationService, useValue: searchConfigService },
+        { provide: DSpaceObjectDataService, useValue: { findById: () => createSuccessfulRemoteDataObject$(undefined)} },
         { provide: AuthorizationDataService, useValue: authorizationService }
       ],
       declarations: [SearchFormComponent]
@@ -48,24 +51,6 @@ describe('SearchFormComponent', () => {
     comp = fixture.componentInstance; // SearchFormComponent test instance
     de = fixture.debugElement.query(By.css('form'));
     el = de.nativeElement;
-  });
-
-  it('should display scopes when available with default and all scopes', () => {
-
-    comp.scopes = objects;
-    fixture.detectChanges();
-    const select: HTMLElement = de.query(By.css('select')).nativeElement;
-    expect(select).toBeDefined();
-    const options: HTMLCollection = select.children;
-    const defOption: Element = options.item(0);
-    expect(defOption.getAttribute('value')).toBe('');
-
-    let index = 1;
-    objects.forEach((object) => {
-      expect(options.item(index).textContent).toBe(object.name);
-      expect(options.item(index).getAttribute('value')).toBe(object.uuid);
-      index++;
-    });
   });
 
   it('should not display scopes when empty', () => {
@@ -86,17 +71,17 @@ describe('SearchFormComponent', () => {
   }));
 
   it('should select correct scope option in scope select', fakeAsync(() => {
-    comp.scopes = objects;
-    fixture.detectChanges();
 
+    fixture.detectChanges();
+    comp.showScopeSelector = true;
     const testCommunity = objects[1];
-    comp.scope = testCommunity.id;
+    comp.selectedScope.next(testCommunity);
 
     fixture.detectChanges();
     tick();
-    const scopeSelect = de.query(By.css('select')).nativeElement;
+    const scopeSelect = de.query(By.css('.scope-button')).nativeElement;
 
-    expect(scopeSelect.value).toBe(testCommunity.id);
+    expect(scopeSelect.textContent).toBe(testCommunity.name);
   }));
   // it('should call updateSearch when clicking the submit button with correct parameters', fakeAsync(() => {
   //   comp.query = 'Test String'
@@ -120,7 +105,7 @@ describe('SearchFormComponent', () => {
   //
   //   expect(comp.updateSearch).toHaveBeenCalledWith({ scope: scope, query: query });
   // }));
-});
+   });
 
 export const objects: DSpaceObject[] = [
   Object.assign(new Community(), {
