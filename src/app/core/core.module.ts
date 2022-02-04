@@ -194,6 +194,12 @@ import { EditItemRelationsGuard } from '../edit-item-relationships/guards/edit-i
 import { ProfileClaimService } from '../profile-page/profile-claim/profile-claim.service';
 import { SequenceService } from './shared/sequence.service';
 import { Subscription } from '../shared/subscriptions/models/subscription.model';
+import { WorkflowStepStatisticsService } from './statistics/workflow-step-statistics.service';
+import { WorkflowStepStatistics } from './statistics/models/workflow-step-statistics.model';
+import { WorkflowOwnerStatisticsService } from './statistics/workflow-owner-statistics.service';
+import { WorkflowOwnerStatistics } from './statistics/models/workflow-owner-statistics.model';
+import { LoginStatisticsService } from './statistics/login-statistics.service';
+import { LoginStatistics } from './statistics/models/login-statistics.model';
 import { ItemAuthorityRelationService } from './shared/item-authority-relation.service';
 import { ProjectDataService } from './project/project-data.service';
 import { CollectionSearchResult } from '../shared/object-collection/shared/collection-search-result.model';
@@ -344,7 +350,9 @@ const PROVIDERS = [
   EditItemModeDataService,
   EditItemRelationsGuard,
   SequenceService,
-  ResearcherProfileService,
+  WorkflowStepStatisticsService,
+  WorkflowOwnerStatisticsService,
+  LoginStatisticsService,
   ItemAuthorityRelationService,
   ProjectDataService,
   ProjectAuthorizationService,
@@ -427,6 +435,9 @@ export const models =
     Root,
     SearchConfig,
     Subscription,
+    WorkflowStepStatistics,
+    WorkflowOwnerStatistics,
+    LoginStatistics,
     ClaimedTaskSearchResult,
     CollectionSearchResult,
     CommunitySearchResult,
