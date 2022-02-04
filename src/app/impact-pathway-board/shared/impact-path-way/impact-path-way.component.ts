@@ -91,14 +91,30 @@ export class ImpactPathWayComponent implements OnInit {
   }
 
   /**
+   * Get the edit item mode
+   */
+  getEditMode(): string {
+    return this.impactPathwayService.getImpactPathwaysEditMode();
+  }
+
+  /**
    * Return all impactPathway step ids
    */
   getImpactPathwayStepIds(): string[] {
     return this.impactPathway.steps.map((step: ImpactPathwayStep) => step.id);
   }
 
+  /**
+   * Get the path to metadata section to patch
+   */
+  getSectionName() {
+    return this.impactPathwayService.getImpactPathwaysEditFormSection();
+  }
+
   openEditModal() {
     const modalRef = this.modalService.open(EditSimpleItemModalComponent, { size: 'lg' });
+    modalRef.componentInstance.editMode = this.impactPathwayService.getImpactPathwaysEditMode();
+    modalRef.componentInstance.formSectionName = this.impactPathwayService.getImpactPathwaysEditFormSection();
     modalRef.componentInstance.formConfig = this.impactPathwayService.getImpactPathwayFormConfig();
     modalRef.componentInstance.itemId = this.impactPathway.id;
 

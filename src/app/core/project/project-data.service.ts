@@ -67,7 +67,7 @@ export const SUBCONTRACTOR_ENTITY_METADATA = 'subcontractor';
 export const PROJECTPATNER_ENTITY_METADATA = 'projectpartner';
 
 export enum ProjectGrantsTypes {
-  Project = 'parentproject',
+  Parentproject = 'parentproject',
   Subproject = 'project',
   OwningCommunity = 'owningproject',
 }

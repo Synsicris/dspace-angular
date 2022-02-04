@@ -365,9 +365,6 @@ export const environment: GlobalConfig = {
       }
     ],
     itemPage: {
-      Person: {
-          orientation: 'horizontal'
-      },
       default: {
           orientation: 'vertical'
       },

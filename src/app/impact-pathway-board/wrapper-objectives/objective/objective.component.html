@@ -14,7 +14,9 @@
                                [impactPathwayTask]="impactPathwayTask"></ipw-objective-container>
     </div>
     <ipw-editable-textarea *ngIf="impactPathwayTask"
+                           [editMode]="getEditMode()"
                            [formConfig]="formConfig$"
+                           [formSectionName]="getSectionName()"
                            [itemId]="impactPathwayTask.id"
                            [editTitle]="'impact-pathway.objectives.edit.btn.title' | translate"
                            [fieldTitle]="'impact-pathway.objectives.description.title' | translate"

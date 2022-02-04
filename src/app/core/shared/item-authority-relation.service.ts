@@ -35,6 +35,7 @@ export class ItemAuthorityRelationService {
    * Create a relation between two item by adding authority from parent to child
    *
    * @param patchPath             The path to metadata section to patch
+   * @param editMode              The item edit mode
    * @param parentItemId          The parent item id
    * @param linkedItemId          The linked child item id
    * @param relationMetadataName  The metadata that contains authority from parent to child

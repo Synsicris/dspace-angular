@@ -29,8 +29,6 @@ import {
 } from './models/workpackage-step.model';
 import { WorkpackageEntries } from './working-plan.reducer';
 import { MetadataMap, MetadataValue, MetadatumViewModel } from '../../core/shared/metadata.models';
-import { SubmissionObject } from '../../core/submission/models/submission-object.model';
-import { JsonPatchOperationPathCombiner } from '../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../../core/json-patch/builder/json-patch-operations-builder';
 import {
   getAllSucceededRemoteData,
@@ -94,30 +92,33 @@ export class WorkingPlanService {
   }
 
   generateWorkpackageItem(projectId: string, type: string, metadata: MetadataMap, place: string): Observable<Item> {
-    return this.projectItemService.createWorkspaceItem(projectId, type).pipe(
-      mergeMap((submission: SubmissionObject) => observableOf(submission.item).pipe(
-        tap(() => this.addWSIPatchOperationForImpactPathwayTask(metadata, this.getWorkpackageFormConfigName(), place)),
-        delay(100),
-        mergeMap((item: Item) => this.projectItemService.executeSubmissionPatch(submission.id, this.getWorkpackageFormConfigName()).pipe(
-          mergeMap(() => this.projectItemService.depositWorkspaceItem(submission).pipe(
-            getFirstSucceededRemoteDataPayload()
-          ))
-        ))
-      ))
+    let wpMetadata: MetadataMap;
+    if (isNotNull(place)) {
+      wpMetadata = Object.assign({}, metadata, {
+        [environment.workingPlan.workingPlanPlaceMetadata]: [
+          Object.assign(new MetadataValue(), {
+            value: place
+          })
+        ]
+      });
+    } else {
+      wpMetadata = metadata;
+    }
+
+    return this.projectItemService.generateEntityItemWithinProject(
+      this.getWorkpackageFormConfigName(),
+      projectId,
+      type,
+      wpMetadata
     );
   }
 
   generateWorkpackageStepItem(projectId: string, parentId: string, stepType: string, metadata: MetadataMap): Observable<Item> {
-    return this.projectItemService.createWorkspaceItem(projectId, stepType).pipe(
-      mergeMap((submission: SubmissionObject) => observableOf(submission.item).pipe(
-        tap(() => this.addWSIPatchOperationForImpactPathwayTask(metadata, this.getWorkpackageStepFormConfigName())),
-        delay(100),
-        mergeMap((item: Item) => this.projectItemService.executeSubmissionPatch(submission.id, this.getWorkpackageStepFormConfigName()).pipe(
-          mergeMap(() => this.projectItemService.depositWorkspaceItem(submission).pipe(
-            getFirstSucceededRemoteDataPayload()
-          ))
-        ))
-      ))
+    return this.projectItemService.generateEntityItemWithinProject(
+      this.getWorkpackageStepFormConfigName(),
+      projectId,
+      stepType,
+      metadata
     );
   }
 
@@ -429,7 +430,7 @@ export class WorkingPlanService {
     return result;
   }
 
-  linkWorkingPlanObject(itemId: string, place?: string) {
+  linkWorkingPlanObject(itemId: string, place?: string): Observable<Item> {
     return this.itemService.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload(),
       tap((item: Item) => {
@@ -447,7 +448,8 @@ export class WorkingPlanService {
         }
       }),
       delay(100),
-      mergeMap((taskItem: Item) => this.projectItemService.executeEditItemPatch(itemId, this.getWorkingPlanEditMode(), this.getWorkingPlanEditSectionName()))
+      mergeMap((taskItem: Item) => this.itemService.executeEditItemPatch(itemId, this.getWorkingPlanEditMode(), this.getWorkingPlanEditSectionName())),
+      getRemoteDataPayload()
     );
   }
 
@@ -470,7 +472,7 @@ export class WorkingPlanService {
         }
       }),
       delay(100),
-      mergeMap((taskItem: Item) => this.projectItemService.executeEditItemPatch(
+      mergeMap((taskItem: Item) => this.itemService.executeEditItemPatch(
         itemId,
         this.getWorkingPlanEditMode(),
         this.getWorkingPlanEditSectionName()
@@ -502,7 +504,8 @@ export class WorkingPlanService {
         });
       }),
       delay(100),
-      mergeMap(() => this.projectItemService.executeEditItemPatch(itemId, this.getWorkingPlanEditMode(), this.getWorkingPlanEditSectionName()))
+      mergeMap(() => this.itemService.executeEditItemPatch(itemId, this.getWorkingPlanEditMode(), this.getWorkingPlanEditSectionName())),
+      getRemoteDataPayload()
     );
   }
 
@@ -600,25 +603,6 @@ export class WorkingPlanService {
     this.workingPlanStateService.dispatchUpdateAllWorkpackageAction(wpActionPackage, wpStepActionPackage);
   }
 
-  private generateMetadatumViewList(itemMetadata: WpMetadata|WpStepMetadata): MetadatumViewModel[] {
-    const metadatumViewList = [];
-    itemMetadata.metadata.forEach((metadata, index) => {
-      const value = itemMetadata.values[index] as any;
-      metadatumViewList.push(
-        {
-          key: metadata,
-          language: '',
-          value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
-          place: 0,
-          authority: itemMetadata.hasAuthority ? value : '',
-          confidence: itemMetadata.hasAuthority ? 600 : -1
-        } as MetadatumViewModel
-      );
-    });
-
-    return metadatumViewList;
-  }
-
   updateWorkpackageStepMetadata(
     workpackageId: string,
     workpackageStepId: string,
@@ -651,74 +635,23 @@ export class WorkingPlanService {
     );
   }
 
-/*  updateAllWorkpackageStepMetadata(wpStepMetadata: WpStepMetadata[]) {
-    const wpStepActionPackage: WpStepActionPackage[] = [];
-    let metadatumViewList;
-    wpStepMetadata.forEach((itemMetadata: WpStepMetadata) => {
-      metadatumViewList = [];
-      itemMetadata.metadata.forEach((metadata, index) => {
-        const value = itemMetadata.values[index] as any;
-        metadatumViewList.push(
-          {
-            key: metadata,
-            language: '',
-            value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
-            place: 0,
-            authority: itemMetadata.hasAuthority ? value : '',
-            confidence: itemMetadata.hasAuthority ? 600 : -1
-          } as MetadatumViewModel
-        );
-      });
-      wpStepActionPackage.push({
-        'workpackageId': itemMetadata.parentNestedNodeId,
-        'workpackageStepId': itemMetadata.childNestedNodeId,
-        'workpackageStep': itemMetadata.childNestedNode,
-        'metadatumViewList': metadatumViewList
-      });
+  private generateMetadatumViewList(itemMetadata: WpMetadata | WpStepMetadata): MetadatumViewModel[] {
+    const metadatumViewList = [];
+    itemMetadata.metadata.forEach((metadata, index) => {
+      const value = itemMetadata.values[index] as any;
+      metadatumViewList.push(
+        {
+          key: metadata,
+          language: '',
+          value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
+          place: 0,
+          authority: itemMetadata.hasAuthority ? value : '',
+          confidence: itemMetadata.hasAuthority ? 600 : -1
+        } as MetadatumViewModel
+      );
     });
 
-    this.workingPlanStateService.dispatchUpdateAllWorkpackageStepAction(wpStepActionPackage);
-  }*/
-
-  private addPatchOperationForWorkpackage(metadata: MetadataMap, place: string = null): void {
-
-    const pathCombiner = new JsonPatchOperationPathCombiner(this.getWorkingPlanEditSectionName());
-    Object.keys(metadata)
-      .filter((metadataName) => metadataName !== 'dspace.entity.type')
-      .forEach((metadataName) => {
-        this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
-      });
-    if (isNotNull(place)) {
-      this.operationsBuilder.add(
-        pathCombiner.getPath(environment.workingPlan.workingPlanPlaceMetadata),
-        place,
-        true,
-        true
-      );
-    }
-  }
-
-  private addWSIPatchOperationForImpactPathwayTask(metadata: MetadataMap, pathName: string, place: string = null): void {
-
-    const pathCombiner = new JsonPatchOperationPathCombiner('sections', pathName);
-    Object.keys(metadata)
-      .filter((metadataName) => metadataName !== 'dspace.entity.type')
-      .forEach((metadataName) => {
-        if (metadataName !== 'cris.project.shared') {
-          this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
-        } else {
-          const path = pathCombiner.getPath([metadataName, '0']);
-          this.operationsBuilder.replace(path, metadata[metadataName], true);
-        }
-      });
-    if (isNotNull(place)) {
-      this.operationsBuilder.add(
-        pathCombiner.getPath(environment.workingPlan.workingPlanPlaceMetadata),
-        place,
-        true,
-        true
-      );
-    }
+    return metadatumViewList;
   }
 
 }

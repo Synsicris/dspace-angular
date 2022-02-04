@@ -44,7 +44,9 @@
                               [allImpactPathwayStepIds]="getImpactPathwayStepIds()"></ipw-impact-path-way-step>
   </div>
   <ipw-editable-textarea *ngIf="impactPathway"
+                         [editMode]="getEditMode()"
                          [formConfig]="formConfig$"
+                         [formSectionName]="getSectionName()"
                          [itemId]="impactPathway.id"
                          [editTitle]="'impact-pathway.edit.title' | translate"
                          [fieldTitle]="'impact-pathway.description' | translate"

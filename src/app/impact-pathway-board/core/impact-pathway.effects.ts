@@ -534,6 +534,8 @@ export class ImpactPathwayEffects {
     switchMap((action: PatchImpactPathwayMetadataAction) => {
       return this.itemService.updateItemMetadata(
         action.payload.impactPathwayId,
+        this.impactPathwayService.getImpactPathwaysEditMode(),
+        this.impactPathwayService.getImpactPathwaysEditFormSection(),
         action.payload.metadata,
         action.payload.metadataIndex,
         action.payload.value
@@ -591,6 +593,8 @@ export class ImpactPathwayEffects {
     switchMap((action: PatchImpactPathwayTaskMetadataAction) => {
       return this.itemService.updateItemMetadata(
         action.payload.taskId,
+        this.impactPathwayService.getImpactPathwaysEditMode(),
+        this.impactPathwayService.getImpactPathwaysEditFormSection(),
         action.payload.metadata,
         action.payload.metadataIndex,
         action.payload.value
