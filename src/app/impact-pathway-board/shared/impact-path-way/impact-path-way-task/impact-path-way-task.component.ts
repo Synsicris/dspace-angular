@@ -66,8 +66,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
       map((task: ImpactPathwayTask) => task.id === this.data.id),
     ).subscribe((hasFocus) => this.selectStatus.next(hasFocus));
 
-    this.editItemDataService.searchEditModesByID(this.data.id).pipe(
-      map((editModes: EditItemMode[]) => editModes && editModes.length > 0),
+    this.editItemDataService.checkEditModeByIDAndType(this.data.id, 'CUSTOM').pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEdit$.next(canEdit);
