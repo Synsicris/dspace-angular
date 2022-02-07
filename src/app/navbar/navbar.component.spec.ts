@@ -22,8 +22,8 @@ let fixture: ComponentFixture<NavbarComponent>;
 describe('NavbarComponent', () => {
   const menuService = new MenuServiceStub();
 
-  const authorizationDataServiceMock: any = jasmine.createSpyObj('AuthorizationDataService', {
-    isAuthorized: observableOf(true)
+  const authorizationService = jasmine.createSpyObj('authorizationService', {
+    isAuthorized: jasmine.createSpy('isAuthorized')
   });
 
   // waitForAsync beforeEach
@@ -41,7 +41,7 @@ describe('NavbarComponent', () => {
         { provide: HostWindowService, useValue: new HostWindowServiceStub(800) },
         { provide: ActivatedRoute, useValue: {} },
         { provide: SectionDataService, useValue: {} },
-        { provide: AuthorizationDataService, useValue: authorizationDataServiceMock }
+        { provide: AuthorizationDataService, useValue: authorizationService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })

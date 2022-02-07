@@ -127,7 +127,7 @@ export class CreateProfileComponent implements OnInit {
    */
   submitEperson() {
     if (!(this.userInfoForm.invalid || this.isInValidPassword)) {
-      const values = {
+      let values = {
         metadata: {
           'eperson.firstname': [
             {
@@ -159,11 +159,13 @@ export class CreateProfileComponent implements OnInit {
       // If the End User Agreement cookie is accepted, add end-user agreement metadata to the user
       this.endUserAgreementService.isUserAgreementEnabled().subscribe((isUserAgreementEnabled) => {
         if (isUserAgreementEnabled && this.userAgreementAccept) {
-          values.metadata[END_USER_AGREEMENT_METADATA_FIELD] = [
-            {
-              value: String(true)
-            }
-          ];
+          values = Object.assign({}, values, Object.assign({}, values.metadata, {
+            [END_USER_AGREEMENT_METADATA_FIELD]: [
+              {
+                value: String(true)
+              }
+            ]
+          }));
           this.endUserAgreementService.removeCookieAccepted();
         }
       });

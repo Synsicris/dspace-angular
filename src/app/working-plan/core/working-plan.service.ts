@@ -29,8 +29,6 @@ import {
 } from './models/workpackage-step.model';
 import { WorkpackageEntries } from './working-plan.reducer';
 import { MetadataMap, MetadataValue, MetadatumViewModel } from '../../core/shared/metadata.models';
-import { SubmissionObject } from '../../core/submission/models/submission-object.model';
-import { JsonPatchOperationPathCombiner } from '../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { JsonPatchOperationsBuilder } from '../../core/json-patch/builder/json-patch-operations-builder';
 import {
   getAllSucceededRemoteData,
@@ -94,38 +92,45 @@ export class WorkingPlanService {
   }
 
   generateWorkpackageItem(projectId: string, type: string, metadata: MetadataMap, place: string): Observable<Item> {
-    return this.projectItemService.createWorkspaceItem(projectId, type).pipe(
-      mergeMap((submission: SubmissionObject) => observableOf(submission.item).pipe(
-        tap(() => this.addPatchOperationForWorkpackage(metadata, place)),
-        delay(100),
-        mergeMap((item: Item) => this.projectItemService.executeItemPatch(item.id, 'metadata').pipe(
-          mergeMap(() => this.projectItemService.depositWorkspaceItem(submission).pipe(
-            getFirstSucceededRemoteDataPayload()
-          ))
-        ))
-      ))
+    let wpMetadata: MetadataMap;
+    if (isNotNull(place)) {
+      wpMetadata = Object.assign({}, metadata, {
+        [environment.workingPlan.workingPlanPlaceMetadata]: [
+          Object.assign(new MetadataValue(), {
+            value: place
+          })
+        ]
+      });
+    } else {
+      wpMetadata = metadata;
+    }
+
+    return this.projectItemService.generateEntityItemWithinProject(
+      this.getWorkpackageFormConfigName(),
+      projectId,
+      type,
+      wpMetadata
     );
   }
 
   generateWorkpackageStepItem(projectId: string, parentId: string, stepType: string, metadata: MetadataMap): Observable<Item> {
-    return this.projectItemService.createWorkspaceItem(projectId, stepType).pipe(
-      mergeMap((submission: SubmissionObject) => observableOf(submission.item).pipe(
-        tap(() => this.addPatchOperationForWorkpackage(metadata)),
-        delay(100),
-        mergeMap((item: Item) => this.projectItemService.executeItemPatch(item.id, 'metadata').pipe(
-          mergeMap(() => this.projectItemService.depositWorkspaceItem(submission).pipe(
-            getFirstSucceededRemoteDataPayload()
-          ))
-        ))
-      ))
+    return this.projectItemService.generateEntityItemWithinProject(
+      this.getWorkpackageStepFormConfigName(),
+      projectId,
+      stepType,
+      metadata
     );
   }
 
   getWorkpackageFormConfig(): Observable<SubmissionFormModel> {
     const formName = environment.workingPlan.workingPlanFormName;
-    return this.formConfigService.findByName(formName).pipe(
+    return this.formConfigService.findByName(this.getWorkpackageFormConfigName()).pipe(
       getFirstSucceededRemoteDataPayload()
     ) as Observable<SubmissionFormModel>;
+  }
+
+  getWorkpackageFormConfigName(): string {
+    return environment.workingPlan.workingPlanFormName;
   }
 
   getWorkpackageSortOptions(): Observable<SearchConfig> {
@@ -140,13 +145,25 @@ export class WorkingPlanService {
 
   getWorkpackageStepFormConfig(): Observable<SubmissionFormModel> {
     const formName = environment.workingPlan.workingPlanStepsFormName;
-    return this.formConfigService.findByName(formName).pipe(
+    return this.formConfigService.findByName(this.getWorkpackageStepFormConfigName()).pipe(
       getFirstSucceededRemoteDataPayload()
     ) as Observable<SubmissionFormModel>;
   }
 
+  getWorkpackageStepFormConfigName(): string {
+    return environment.workingPlan.workingPlanStepsFormName;
+  }
+
   getWorkpackageStepFormHeader(): string {
     return environment.workingPlan.workingPlanStepsFormName;
+  }
+
+  getWorkingPlanEditMode(): string {
+    return environment.workingPlan.workingPlanEditMode;
+  }
+
+  getWorkingPlanEditSectionName(): string {
+    return `sections/${environment.workingPlan.workingPlanEditFormSection}`;
   }
 
   getWorkingPlanTaskSearchHeader(): string {
@@ -327,6 +344,8 @@ export class WorkingPlanService {
               if (rd.statusCode === 404) {
                 // NOTE if a task is not found probably it has been deleted without unlinking it from parent step, so unlink it
                 return this.itemAuthorityRelationService.removeChildRelationFromParent(
+                  this.getWorkingPlanEditSectionName(),
+                  this.getWorkingPlanEditMode(),
                   parentItem.id,
                   task.authority,
                   environment.workingPlan.workingPlanStepRelationMetadata
@@ -411,21 +430,26 @@ export class WorkingPlanService {
     return result;
   }
 
-  linkWorkingPlanObject(itemId: string, place?: string) {
+  linkWorkingPlanObject(itemId: string, place?: string): Observable<Item> {
     return this.itemService.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload(),
       tap((item: Item) => {
+        const value = {
+          value: 'linked'
+        };
         this.projectItemService.createReplaceMetadataPatchOp(
+          this.getWorkingPlanEditSectionName(),
           environment.workingPlan.workingPlanLinkMetadata,
           0,
-          'linked'
+          value
         );
         if (isNotEmpty(place)) {
-          this.projectItemService.createAddMetadataPatchOp(environment.workingPlan.workingPlanPlaceMetadata, place);
+          this.projectItemService.createAddMetadataPatchOp(this.getWorkingPlanEditSectionName(), environment.workingPlan.workingPlanPlaceMetadata, place);
         }
       }),
       delay(100),
-      mergeMap((taskItem: Item) => this.projectItemService.executeItemPatch(itemId, 'metadata'))
+      mergeMap((taskItem: Item) => this.itemService.executeEditItemPatch(itemId, this.getWorkingPlanEditMode(), this.getWorkingPlanEditSectionName())),
+      getRemoteDataPayload()
     );
   }
 
@@ -433,18 +457,26 @@ export class WorkingPlanService {
     return this.itemService.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload(),
       tap((item: Item) => {
+        const value = {
+          value: 'unlinked'
+        };
         this.projectItemService.createReplaceMetadataPatchOp(
+          this.getWorkingPlanEditSectionName(),
           environment.workingPlan.workingPlanLinkMetadata,
           0,
-          'unlinked'
+          value
         );
         const place = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateStartMetadata);
         if (isNotEmpty(place)) {
-          this.projectItemService.createRemoveMetadataPatchOp(environment.workingPlan.workingPlanPlaceMetadata, 0);
+          this.projectItemService.createRemoveMetadataPatchOp(this.getWorkingPlanEditSectionName(), environment.workingPlan.workingPlanPlaceMetadata, 0);
         }
       }),
       delay(100),
-      mergeMap((taskItem: Item) => this.projectItemService.executeItemPatch(itemId, 'metadata'))
+      mergeMap((taskItem: Item) => this.itemService.executeEditItemPatch(
+        itemId,
+        this.getWorkingPlanEditMode(),
+        this.getWorkingPlanEditSectionName()
+      ))
     );
   }
 
@@ -465,14 +497,15 @@ export class WorkingPlanService {
           };
           const storedValue = item.firstMetadataValue(metadatumView.key);
           if (isEmpty(storedValue)) {
-            this.projectItemService.createAddMetadataPatchOp(metadatumView.key, value);
+            this.projectItemService.createAddMetadataPatchOp(this.getWorkingPlanEditSectionName(), metadatumView.key, value);
           } else {
-            this.projectItemService.createReplaceMetadataPatchOp(metadatumView.key, metadatumView.place, value);
+            this.projectItemService.createReplaceMetadataPatchOp(this.getWorkingPlanEditSectionName(), metadatumView.key, metadatumView.place, value);
           }
         });
       }),
       delay(100),
-      mergeMap(() => this.projectItemService.executeItemPatch(itemId, 'metadata'))
+      mergeMap(() => this.itemService.executeEditItemPatch(itemId, this.getWorkingPlanEditMode(), this.getWorkingPlanEditSectionName())),
+      getRemoteDataPayload()
     );
   }
 
@@ -570,25 +603,6 @@ export class WorkingPlanService {
     this.workingPlanStateService.dispatchUpdateAllWorkpackageAction(wpActionPackage, wpStepActionPackage);
   }
 
-  private generateMetadatumViewList(itemMetadata: WpMetadata|WpStepMetadata): MetadatumViewModel[] {
-    const metadatumViewList = [];
-    itemMetadata.metadata.forEach((metadata, index) => {
-      const value = itemMetadata.values[index] as any;
-      metadatumViewList.push(
-        {
-          key: metadata,
-          language: '',
-          value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
-          place: 0,
-          authority: itemMetadata.hasAuthority ? value : '',
-          confidence: itemMetadata.hasAuthority ? 600 : -1
-        } as MetadatumViewModel
-      );
-    });
-
-    return metadatumViewList;
-  }
-
   updateWorkpackageStepMetadata(
     workpackageId: string,
     workpackageStepId: string,
@@ -621,51 +635,23 @@ export class WorkingPlanService {
     );
   }
 
-/*  updateAllWorkpackageStepMetadata(wpStepMetadata: WpStepMetadata[]) {
-    const wpStepActionPackage: WpStepActionPackage[] = [];
-    let metadatumViewList;
-    wpStepMetadata.forEach((itemMetadata: WpStepMetadata) => {
-      metadatumViewList = [];
-      itemMetadata.metadata.forEach((metadata, index) => {
-        const value = itemMetadata.values[index] as any;
-        metadatumViewList.push(
-          {
-            key: metadata,
-            language: '',
-            value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
-            place: 0,
-            authority: itemMetadata.hasAuthority ? value : '',
-            confidence: itemMetadata.hasAuthority ? 600 : -1
-          } as MetadatumViewModel
-        );
-      });
-      wpStepActionPackage.push({
-        'workpackageId': itemMetadata.parentNestedNodeId,
-        'workpackageStepId': itemMetadata.childNestedNodeId,
-        'workpackageStep': itemMetadata.childNestedNode,
-        'metadatumViewList': metadatumViewList
-      });
+  private generateMetadatumViewList(itemMetadata: WpMetadata | WpStepMetadata): MetadatumViewModel[] {
+    const metadatumViewList = [];
+    itemMetadata.metadata.forEach((metadata, index) => {
+      const value = itemMetadata.values[index] as any;
+      metadatumViewList.push(
+        {
+          key: metadata,
+          language: '',
+          value: (isNgbDateStruct(value)) ? dateToISOFormat(value) : value,
+          place: 0,
+          authority: itemMetadata.hasAuthority ? value : '',
+          confidence: itemMetadata.hasAuthority ? 600 : -1
+        } as MetadatumViewModel
+      );
     });
 
-    this.workingPlanStateService.dispatchUpdateAllWorkpackageStepAction(wpStepActionPackage);
-  }*/
-
-  private addPatchOperationForWorkpackage(metadata: MetadataMap, place: string = null): void {
-
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
-    Object.keys(metadata)
-      .filter((metadataName) => metadataName !== 'dspace.entity.type')
-      .forEach((metadataName) => {
-        this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
-      });
-    if (isNotNull(place)) {
-      this.operationsBuilder.add(
-        pathCombiner.getPath(environment.workingPlan.workingPlanPlaceMetadata),
-        place,
-        true,
-        true
-      );
-    }
+    return metadatumViewList;
   }
 
 }

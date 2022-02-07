@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { combineLatest as observableCombineLatest, Observable, throwError as observableThrowError } from 'rxjs';
-import { catchError, delay, distinctUntilChanged, filter, flatMap, map, startWith, tap } from 'rxjs/operators';
+import { combineLatest as observableCombineLatest, Observable } from 'rxjs';
+import { delay, distinctUntilChanged, filter, map, mergeMap, startWith, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { difference, findIndex, union } from 'lodash';
 
@@ -27,8 +27,8 @@ import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators'
 import { Item } from '../../core/shared/item.model';
 import { MetadataValue } from '../../core/shared/metadata.models';
 import { JsonPatchOperationPathCombiner } from '../../core/json-patch/builder/json-patch-operation-path-combiner';
-import { ErrorResponse } from '../../core/cache/response.models';
 import { ImpactPathwayLinksMap } from './models/impact-pathway-task-links-map';
+import { ItemAuthorityRelationService } from '../../core/shared/item-authority-relation.service';
 
 @Injectable()
 export class ImpactPathwayLinksService {
@@ -37,6 +37,7 @@ export class ImpactPathwayLinksService {
     private formConfigService: SubmissionFormsConfigService,
     private itemService: ItemDataService,
     private operationsBuilder: JsonPatchOperationsBuilder,
+    private itemAuthorityRelationService: ItemAuthorityRelationService,
     private itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
     private submissionJsonPatchOperationsService: SubmissionJsonPatchOperationsService,
     private rdbService: RemoteDataBuildService,
@@ -193,7 +194,11 @@ export class ImpactPathwayLinksService {
       getFirstSucceededRemoteDataPayload(),
       tap((taskItem: Item) => this.buildPatchOperations(taskItem, toSave, toDelete)),
       delay(100),
-      flatMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata'))
+      mergeMap((taskItem: Item) => this.itemAuthorityRelationService.executeEditItemPatch(
+        taskItem.id,
+        this.getImpactPathwaysLinksEditMode(),
+        this.getImpactPathwaysLinksEditFormSection()
+      ))
     );
   }
 
@@ -258,7 +263,7 @@ export class ImpactPathwayLinksService {
     taskBidirectionalLinkList: MetadataValue[]
   ): void {
 
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    const pathCombiner = new JsonPatchOperationPathCombiner(this.getImpactPathwaysLinksEditFormSection());
     let placeWhereToAddOutcomeLink: number = taskOutcomeLinkList.length;
     let placeWhereToAddBidirectionalLink: number = taskBidirectionalLinkList.length;
 
@@ -289,7 +294,7 @@ export class ImpactPathwayLinksService {
     taskOutcomeLinkList: MetadataValue[],
     taskBidirectionalLinkList: MetadataValue[]
   ): void {
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+    const pathCombiner = new JsonPatchOperationPathCombiner(this.getImpactPathwaysLinksEditFormSection());
     const currentOutcomeLinkList: MetadataValue[] = [...taskOutcomeLinkList];
     const currentBidirectionalLinkList: MetadataValue[] = [...taskBidirectionalLinkList];
 
@@ -315,14 +320,12 @@ export class ImpactPathwayLinksService {
     });
   }
 
-  private executeItemPatch(objectId: string, pathName: string): Observable<Item> {
-    return this.itemJsonPatchOperationsService.jsonPatchByResourceType(
-      'items',
-      objectId,
-      pathName).pipe(
-      tap((item: Item) => this.itemService.update(item)),
-      catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
-    );
+  private getImpactPathwaysLinksEditFormSection(): string {
+    return `sections/${environment.impactPathway.impactPathwaysLinksEditFormSection}`;
+  }
+
+  private getImpactPathwaysLinksEditMode(): string {
+    return environment.impactPathway.impactPathwaysLinkEditMode;
   }
 
 }

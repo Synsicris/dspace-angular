@@ -54,8 +54,8 @@ export class CreateProjectComponent implements OnInit {
    * The grant options available
    */
   public grantsOptions = [
-    { id: ProjectGrantsTypes.Project, name: 'project.create.grants.project-option' },
-    { id: ProjectGrantsTypes.OwningCommunity, name: 'project.create.grants.subproject-option' }
+    { id: ProjectGrantsTypes.Parentproject, name: 'project.create.grants.project-option' },
+    { id: ProjectGrantsTypes.Subproject, name: 'project.create.grants.subproject-option' }
   ];
 
   public processing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -145,7 +145,7 @@ export class CreateProjectComponent implements OnInit {
     if (this.isSubproject) {
       // TODO fix in the rest configuration
       const projectGrants = (this.createForm.get('grants').value === ProjectGrantsTypes.Subproject) ?
-        ProjectGrantsTypes.OwningCommunity : ProjectGrantsTypes.Project;
+        ProjectGrantsTypes.Subproject : ProjectGrantsTypes.Parentproject;
       create$ = this.projectService.createSubproject(projectName, this.parentProjectUUID, projectGrants);
     } else {
       create$ = this.projectService.createProject(projectName);

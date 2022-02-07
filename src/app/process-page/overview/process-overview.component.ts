@@ -15,7 +15,6 @@ import { AuthorizationDataService } from '../../core/data/feature-authorization/
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ProcessStatus } from '../processes/process-status.model';
 
 @Component({
   selector: 'ds-process-overview',
