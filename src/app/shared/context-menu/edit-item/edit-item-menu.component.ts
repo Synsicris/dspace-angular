@@ -101,6 +101,7 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
       this.sub.unsubscribe();
     }
   }
+
   getData(): void {
     this.sub = this.editItemService.findById(this.contextMenuObject.id + ':none', false, true, followLink('modes')).pipe(
       getAllSucceededRemoteDataPayload(),
@@ -109,7 +110,13 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
       ),
       startWith([])
     ).subscribe((editModes: EditItemMode[]) => {
-      this.editModes$.next(editModes);
+      const allowedModes = editModes.filter((mode: EditItemMode) => this.isEditModeAllowed(mode));
+      console.log(allowedModes);
+      this.editModes$.next(allowedModes);
     });
+  }
+
+  private isEditModeAllowed(mode: EditItemMode) {
+    return mode.name === 'FULL' || mode.name === 'CUSTOM' || mode.name === 'OWNER';
   }
 }
