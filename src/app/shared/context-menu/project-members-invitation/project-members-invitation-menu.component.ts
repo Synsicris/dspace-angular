@@ -16,7 +16,7 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
 import { PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
-import { getRemoteDataPayload } from '../../../core/shared/operators';
+import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../../core/shared/operators';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -69,7 +69,7 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
     this.isSubproject = (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
     if (this.canShow()) {
       this.projectService.getProjectCommunityByProjectItemId((this.contextMenuObject as Item).uuid).pipe(
-        take(1),
+        getFirstCompletedRemoteData(),
         getRemoteDataPayload()
       ).subscribe((projectCommunity: Community) => {
         this.projectCommunity = projectCommunity;
@@ -88,7 +88,7 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
    * Check if user is administrator for this project
    */
   isProjectAdmin(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, this.contextMenuObject.self, undefined);
+    return this.authorizationService.isAuthorized(FeatureID.isAdminOfProject, this.contextMenuObject.self, undefined);
   }
 
   public openInvitationModal() {

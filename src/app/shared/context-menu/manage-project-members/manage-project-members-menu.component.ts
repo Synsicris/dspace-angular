@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
@@ -15,7 +14,9 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
 import { PARENT_PROJECT_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
-import { getRemoteDataPayload } from '../../../core/shared/operators';
+import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../../core/shared/operators';
+import { Router } from '@angular/router';
+import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -46,6 +47,7 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
    * @param {NgbModal} modalService
    * @param {ProjectGroupService} projectGroupService
    * @param {ProjectDataService} projectService
+   * @param {Router} routerService
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
@@ -53,7 +55,8 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
     protected authorizationService: AuthorizationDataService,
     protected modalService: NgbModal,
     protected projectGroupService: ProjectGroupService,
-    protected projectService: ProjectDataService
+    protected projectService: ProjectDataService,
+    protected router: Router,
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ManageProjectMembers);
   }
@@ -62,7 +65,7 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
     this.isSubproject = (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
     if (this.canShow()) {
       this.projectService.getProjectCommunityByItemId((this.contextMenuObject as Item).uuid).pipe(
-        take(1),
+        getFirstCompletedRemoteData(),
         getRemoteDataPayload()
       ).subscribe((projectCommunity: Community) => {
         this.projectCommunity = projectCommunity;
@@ -84,6 +87,13 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
     // return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, this.contextMenuObject.self, undefined);
     // temporary show menu only for administrator
     return this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
+  }
+
+  /**
+   * Navigate to manage members page
+   */
+  navigateToManage() {
+    this.router.navigate([getItemPageRoute((this.contextMenuObject as Item)), 'managemembers']);
   }
 
 }

@@ -5,7 +5,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { Community } from '../shared/community.model';
 import { GroupDataService } from '../eperson/group-data.service';
 import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../shared/operators';
-import { map, mergeMap, reduce } from 'rxjs/operators';
+import { map, mergeMap, reduce, tap } from 'rxjs/operators';
 import { Group } from '../eperson/models/group.model';
 import { CommunityDataService } from '../data/community-data.service';
 
@@ -71,6 +71,12 @@ export class ProjectGroupService {
     );
     return combineLatest([subprojectMembers$, projectMembers$]).pipe(
       map(([subprojectMembers, projectMembers]) => [...subprojectMembers, ...projectMembers])
+    );
+  }
+
+  isMembersOfAdminGroup(project: Community): Observable<boolean> {
+    return this.groupService.isMemberOf( this.getProjectAdminsGroupNameByCommunity(project)).pipe(
+      tap((r) => console.log(r))
     );
   }
 

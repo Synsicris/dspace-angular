@@ -1,4 +1,4 @@
-<button *ngIf="canShow()" class="dropdown-item"
+<button *ngIf="canShow() && (canSeeItems() | async)" class="dropdown-item"
         [innerHTML]="'project-overview.page.content.all-items' | translate"
         (click)="$event.preventDefault();navigateToMyDSpace();">
 </button>

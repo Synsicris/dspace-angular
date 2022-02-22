@@ -111,7 +111,6 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
       startWith([])
     ).subscribe((editModes: EditItemMode[]) => {
       const allowedModes = editModes.filter((mode: EditItemMode) => this.isEditModeAllowed(mode));
-      console.log(allowedModes);
       this.editModes$.next(allowedModes);
     });
   }

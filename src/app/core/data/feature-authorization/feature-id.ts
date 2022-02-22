@@ -31,5 +31,7 @@ export enum FeatureID {
   CanSubscribe = 'canSubscribeDso',
   CanCreateCommunities = 'canCreateCommunities',
   CanEditItemGrants = 'canEditedGrants',
-  CanMakeEasyOnlineImport = 'canMakeEasyOnlineImport'
+  CanMakeEasyOnlineImport = 'canMakeEasyOnlineImport',
+  isAdminOfProject = 'isAdminOfProject',
+  isMemberOfProject = 'isMemberOfProject',
 }

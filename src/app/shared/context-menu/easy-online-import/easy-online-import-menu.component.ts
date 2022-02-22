@@ -47,7 +47,7 @@ export class EasyOnlineImportMenuComponent extends ContextMenuEntryComponent imp
   }
 
   ngOnInit(): void {
-    this.authorizationService.isAuthorized(FeatureID.CanMakeEasyOnlineImport, this.contextMenuObject.self).pipe(
+    this.authorizationService.isAuthorized(FeatureID.isMemberOfProject, this.contextMenuObject.self).pipe(
       take(1)
     ).subscribe((canMakeImport) => this.canMakeImport$.next(canMakeImport));
   }
