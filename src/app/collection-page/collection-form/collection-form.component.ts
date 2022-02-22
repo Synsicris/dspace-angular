@@ -38,6 +38,7 @@ import { SubmissionDefinitionsConfigService } from '../../core/config/submission
 import { ConfigObject } from '../../core/config/models/config.model';
 import { NONE_ENTITY_TYPE } from '../../core/shared/item-relationships/item-type.resource-type';
 import { DsDynamicInputModel } from '../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-input.model';
+import { isNotEmpty } from '../../shared/empty.util';
 
 /**
  * Form used for creating and editing collections
@@ -104,18 +105,19 @@ export class CollectionFormComponent extends ComColFormComponent<Collection> imp
     }
 
     const titleModel: DynamicFormArrayModel = new DynamicFormArrayModel(Object.assign({}, collectionTitleArrayConfig, {
-      initialCount: currentTitleValue.length,
+      initialCount: currentTitleValue?.length || 1,
       groupFactory: () => {
         return [new DsDynamicInputModel(titleConfig, collectionTitleLayout)];
       }
     }), collectionTitleArrayLayout);
 
-    currentTitleValue.forEach((metadata: MetadataValue, index: number) => {
-      const model: any = titleModel.get(index).group[0];
-      model.value = metadata.value;
-      model.language = metadata.language;
-      console.log(model);
-    });
+    if (isNotEmpty(currentTitleValue)) {
+      currentTitleValue.forEach((metadata: MetadataValue, index: number) => {
+        const model: any = titleModel.get(index).group[0];
+        model.value = metadata.value;
+        model.language = metadata.language;
+      });
+    }
 
     const entities$: Observable<ItemType[]> = this.entityTypeService.findAll({ elementsPerPage: 100, currentPage: 1 }).pipe(
       getFirstSucceededRemoteListPayload()

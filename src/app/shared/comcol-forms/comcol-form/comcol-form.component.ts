@@ -235,9 +235,9 @@ export class ComColFormComponent<T extends Collection | Community> implements On
       let fieldModelName;
       if (fieldModel.type === DYNAMIC_FORM_CONTROL_TYPE_ARRAY) {
         fieldModelName = fieldModel.groups[0].group[0].name;
-        const metadataValues = this.dso.metadata[fieldModelName];
+        const metadataValues = this.dso?.metadata?.hasOwnProperty(fieldModelName) ? this.dso.metadata[fieldModelName] : [];
         fieldModel.groups.forEach((group: DynamicFormArrayGroupModel, index: number) => {
-          const dsoMetadata = metadataValues[index];
+          const dsoMetadata = metadataValues.length > 0 ? metadataValues[index] : undefined;
           const inputModel: any = group.get(0);
           if (isEmpty(dsoMetadata)) {
             operations.push({
