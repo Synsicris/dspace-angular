@@ -236,8 +236,6 @@ import { MaterialModule } from './material/material.module';
 import { CreateProjectComponent } from '../projects/create-project/create-project.component';
 import { InvitationModalComponent } from './invitation-modal/invitation-modal.component';
 import { EditItemGrantsModalComponent } from './edit-item-grants-modal/edit-item-grants-modal.component';
-import { EditSimpleItemModalComponent } from './edit-simple-item-modal/edit-simple-item-modal.component';
-import { ViewSimpleItemFormComponent } from './view-simple-item-form/view-simple-item-form.component';
 import { ItemCreateComponent } from './item/item-create/item-create.component';
 import { AuthorityDropdownComponent } from './authority-dropdown/authority-dropdown.component';
 
@@ -463,8 +461,6 @@ const COMPONENTS = [
   ThemedTextSectionComponent,
   ThemedBrowseMostElementsComponent,
   CreateImpactPathwayComponent,
-  EditSimpleItemModalComponent,
-  ViewSimpleItemFormComponent,
   AuthorityTypeaheadComponent,
   AuthorityDropdownComponent,
   CreateProjectComponent,
@@ -605,8 +601,7 @@ const DIRECTIVES = [
     ItemVersionsDeleteModalComponent,
     ItemExportAlertComponent,
     MetricPlumxComponent,
-    InvitationModalComponent,
-    EditSimpleItemModalComponent
+    InvitationModalComponent
   ],
   providers: [
     ...PROVIDERS

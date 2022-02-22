@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } 
 import { FormGroup } from '@angular/forms';
 import { DYNAMIC_FORM_CONTROL_TYPE_ARRAY, DynamicFormControlModel, DynamicFormService, DynamicInputModel } from '@ng-dynamic-forms/core';
 import { TranslateService } from '@ngx-translate/core';
-import { DynamicFormArrayGroupModel } from '@ng-dynamic-forms';
+import { DynamicFormArrayGroupModel } from '@ng-dynamic-forms/core';
 import { FileUploader } from 'ng2-file-upload';
 import { BehaviorSubject, combineLatest as observableCombineLatest, Subscription } from 'rxjs';
 import { AuthService } from '../../../../core/auth/auth.service';
@@ -16,7 +16,7 @@ import { Collection } from '../../../../core/shared/collection.model';
 import { Community } from '../../../../core/shared/community.model';
 import { MetadataMap, MetadataValue } from '../../../../core/shared/metadata.models';
 import { ResourceType } from '../../../../core/shared/resource-type';
-import { hasValue, isNotEmpty } from '../../../empty.util';
+import { hasValue, isEmpty, isNotEmpty } from '../../../empty.util';
 import { NotificationsService } from '../../../notifications/notifications.service';
 import { UploaderOptions } from '../../../uploader/uploader-options.model';
 import { UploaderComponent } from '../../../uploader/uploader.component';

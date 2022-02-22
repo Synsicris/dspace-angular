@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CreateSimpleItemComponent } from './create-simple-item/create-simple-item.component';
 import { SharedModule } from '../shared.module';
+import { SearchModule } from '../search/search.module';
+import { FormModule } from '../form/form.module';
 
 const COMPONENTS = [
   CreateSimpleItemModalComponent,
@@ -35,7 +37,8 @@ const COMPONENTS = [
     FormsModule,
     NgbTypeaheadModule,
     TranslateModule,
-    SharedModule
+    SharedModule,
+    FormModule
   ],
   providers: [
     SearchSimpleItemService

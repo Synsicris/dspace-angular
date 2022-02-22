@@ -32,8 +32,8 @@ import { CommunityDataService } from '../data/community-data.service';
 import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 import { SortDirection, SortOptions } from '../cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
-import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
-import { SearchResult } from '../../shared/search/search-result.model';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
+import { SearchResult } from '../../shared/search/models/search-result.model';
 import {
   getFinishedRemoteData,
   getFirstCompletedRemoteData,

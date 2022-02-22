@@ -10,7 +10,7 @@ import { RemoteData } from '../../core/data/remote-data';
 import { isNotEmpty } from '../../shared/empty.util';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
-import { SearchResult } from '../../shared/search/search-result.model';
+import { SearchResult } from '../../shared/search/models/search-result.model';
 import { CollectionElementLinkType } from '../../shared/object-collection/collection-element-link.type';
 
 @Component({

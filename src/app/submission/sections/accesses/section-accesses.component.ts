@@ -136,7 +136,7 @@ export class SubmissionSectionAccessesComponent extends SectionModelComponent {
     private operationsService: SubmissionJsonPatchOperationsService,
     @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
     @Inject('submissionIdProvider') public injectedSubmissionId: string) {
-    super(undefined, injectedSectionData, injectedSubmissionId);
+    super(undefined, injectedSectionData, injectedSubmissionId, null);
   }
 
   /**
