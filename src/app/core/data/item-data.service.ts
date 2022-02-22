@@ -35,7 +35,7 @@ import { PaginatedList } from './paginated-list.model';
 import { RemoteData } from './remote-data';
 import { DeleteRequest, FindListOptions, GetRequest, PostRequest, PutRequest, RestRequest } from './request.models';
 import { RequestService } from './request.service';
-import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { Bundle } from '../shared/bundle.model';
 import { MetadataMap, MetadataValue } from '../shared/metadata.models';
 import { BundleDataService } from './bundle-data.service';

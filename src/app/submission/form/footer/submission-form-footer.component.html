@@ -35,11 +35,11 @@
               [class.btn-secondary]="(showDeposit | async)"
               class="btn"
               id="saveForLater"
-              [disabled]="(submissionIsInvalid | async) || (processingSaveStatus | async) || (processingDepositStatus | async)"
+              [disabled]="(!(showDepositAndDiscard | async) && (submissionIsInvalid | async)) || (processingSaveStatus | async) || (processingDepositStatus | async)"
               (click)="saveLater($event)">
       <span><i class="fas fa-save"></i> {{saveForLaterLabel() | translate}}</span>
       </button>
-    <button *ngIf="(showDeposit | async)"
+      <button *ngIf="(showDeposit | async)"
               type="button"
               class="btn btn-primary"
               [disabled]="(submissionIsInvalid | async) || (processingSaveStatus | async) || (processingDepositStatus | async)"

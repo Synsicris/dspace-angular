@@ -214,7 +214,7 @@ describe('SubmissionFormFooterComponent Component', () => {
       fixture.detectChanges();
       const depositBtn: any = fixture.debugElement.query(By.css('button#deposit'));
 
-      expect(depositBtn.nativeElement.disabled).toBeTruthy();
+      expect(depositBtn.nativeElement.disabled).toBeFalsy();
     });
 
     it('should not have deposit button disabled when submission is valid', () => {

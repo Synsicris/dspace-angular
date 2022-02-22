@@ -7,16 +7,18 @@ import { slideMobileNav } from '../shared/animations/slide';
 import { MenuComponent } from '../shared/menu/menu.component';
 import { MenuService } from '../shared/menu/menu.service';
 import { MenuID, MenuItemType } from '../shared/menu/initial-menus-state';
+import { TextMenuItemModel } from '../shared/menu/menu-item/models/text.model';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { HostWindowService } from '../shared/host-window.service';
-import { SectionDataService } from '../core/layout/section-data.service';
+import { BrowseService } from '../core/browse/browse.service';
 import { getFirstSucceededRemoteListPayload } from '../core/shared/operators';
-import { Section } from '../core/layout/models/section.model';
+import { ActivatedRoute } from '@angular/router';
+import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 import { environment } from '../../environments/environment';
-import { TextMenuItemModel } from '../shared/menu/menu-item/models/text.model';
+import { SectionDataService } from '../core/layout/section-data.service';
 import { Observable } from 'rxjs';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
-import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
+import { Section } from '../core/layout/models/section.model';
 
 /**
  * Component representing the public navbar
@@ -37,10 +39,12 @@ export class NavbarComponent extends MenuComponent {
   constructor(protected menuService: MenuService,
               protected injector: Injector,
               public windowService: HostWindowService,
+              public browseService: BrowseService,
+              public authorizationService: AuthorizationDataService,
               protected sectionDataService: SectionDataService,
-              protected authorizationService: AuthorizationDataService
+              public route: ActivatedRoute
   ) {
-    super(menuService, injector);
+    super(menuService, injector, authorizationService, route);
   }
 
   ngOnInit(): void {

@@ -12,7 +12,7 @@ import {
 } from '@ng-dynamic-forms/core';
 
 import { Collection } from '../../core/shared/collection.model';
-import { ComColFormComponent } from '../../shared/comcol-forms/comcol-form/comcol-form.component';
+import { ComColFormComponent } from '../../shared/comcol/comcol-forms/comcol-form/comcol-form.component';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { CommunityDataService } from '../../core/data/community-data.service';
 import { AuthService } from '../../core/auth/auth.service';
@@ -45,8 +45,8 @@ import { isNotEmpty } from '../../shared/empty.util';
  */
 @Component({
   selector: 'ds-collection-form',
-  styleUrls: ['../../shared/comcol-forms/comcol-form/comcol-form.component.scss'],
-  templateUrl: '../../shared/comcol-forms/comcol-form/comcol-form.component.html'
+  styleUrls: ['../../shared/comcol/comcol-forms/comcol-form/comcol-form.component.scss'],
+  templateUrl: '../../shared/comcol/comcol-forms/comcol-form/comcol-form.component.html'
 })
 export class CollectionFormComponent extends ComColFormComponent<Collection> implements OnInit {
   /**
