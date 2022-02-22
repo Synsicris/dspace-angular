@@ -1860,7 +1860,7 @@
 
   // "context-menu.actions.edit-item.btn.FULL": "<i class=\"fas fa-edit\"></i> Edit all the details",
   // TODO New key - Add a translation
-  "context-menu.actions.edit-item.btn.FULL": "<i class=\"fas fa-edit\"></i> Alle Angaben bearbeiten",
+  "context-menu.actions.edit-item.btn.FULL": "<i class=\"fas fa-edit\"></i> Bearbeiten",
 
   // "context-menu.actions.edit-item.btn.OWNER": "<i class=\"fas fa-edit\"></i> Edit",
   // TODO New key - Add a translation
@@ -2894,47 +2894,47 @@
 
   // "forgot-email.form.header": "Forgot Password",
   // TODO New key - Add a translation
-  "forgot-email.form.header": "Forgot Password",
+  "forgot-email.form.header": "Passwort vergessen",
 
   // "forgot-email.form.info": "Enter Register an account to subscribe to collections for email updates, and submit new items to DSpace.",
   // TODO New key - Add a translation
-  "forgot-email.form.info": "Enter Register an account to subscribe to collections for email updates, and submit new items to DSpace.",
+  "forgot-email.form.info": "Erstellen Sie einen Account.",
 
   // "forgot-email.form.email": "Email Address *",
   // TODO New key - Add a translation
-  "forgot-email.form.email": "Email Address *",
+  "forgot-email.form.email": "E-Mail *",
 
   // "forgot-email.form.email.error.required": "Please fill in an email address",
   // TODO New key - Add a translation
-  "forgot-email.form.email.error.required": "Please fill in an email address",
+  "forgot-email.form.email.error.required": "Geben Sie bitte eine E-Mail Adresse ein",
 
   // "forgot-email.form.email.error.pattern": "Please fill in a valid email address",
   // TODO New key - Add a translation
-  "forgot-email.form.email.error.pattern": "Please fill in a valid email address",
+  "forgot-email.form.email.error.pattern": "Geben Sie bitte eine gültige E-Mail Adresse ein",
 
   // "forgot-email.form.email.hint": "This address will be verified and used as your login name.",
   // TODO New key - Add a translation
-  "forgot-email.form.email.hint": "This address will be verified and used as your login name.",
+  "forgot-email.form.email.hint": "Diese Adresse wird überprüft und als Ihr Anmeldename verwendet.",
 
   // "forgot-email.form.submit": "Save",
   // TODO New key - Add a translation
-  "forgot-email.form.submit": "Save",
+  "forgot-email.form.submit": "Speichern",
 
   // "forgot-email.form.success.head": "Verification email sent",
   // TODO New key - Add a translation
-  "forgot-email.form.success.head": "Verification email sent",
+  "forgot-email.form.success.head": "E-Mail zur Verifizierung gesendet",
 
   // "forgot-email.form.success.content": "An email has been sent to {{ email }} containing a special URL and further instructions.",
   // TODO New key - Add a translation
-  "forgot-email.form.success.content": "An email has been sent to {{ email }} containing a special URL and further instructions.",
+  "forgot-email.form.success.content": "Es wurde eine E-Mail an {{ email }} gesendet, die eine spezielle URL und weitere Anweisungen enthält.",
 
   // "forgot-email.form.error.head": "Error when trying to register email",
   // TODO New key - Add a translation
-  "forgot-email.form.error.head": "Error when trying to register email",
+  "forgot-email.form.error.head": "Fehler beim Versuch, eine E-Mail zu registrieren",
 
   // "forgot-email.form.error.content": "An error occured when registering the following email address: {{ email }}",
   // TODO New key - Add a translation
-  "forgot-email.form.error.content": "An error occured when registering the following email address: {{ email }}",
+  "forgot-email.form.error.content": "Bei der Registrierung der folgenden E-Mail-Adresse ist ein Fehler aufgetreten: {{ email }}",
 
   // "forgot-password.title": "Forgot Password",
   // TODO New key - Add a translation
@@ -3140,7 +3140,7 @@
 
   // "home.breadcrumbs": "Home",
   // TODO New key - Add a translation
-  "home.breadcrumbs": "Home",
+  "home.breadcrumbs": "Startseite",
 
   // "home.search-form.placeholder": "Search the repository ...",
   // TODO New key - Add a translation
@@ -11603,7 +11603,7 @@
   "layout.box.help-text.Person_h": "<p><b>Herzlich Willkommen im SynSICRIS-Monitoring-Tool!</b></p><b>Erste Schritte:</b><ul><li>Als <b>Koordinator:in</b> legen Sie über <b>Aktion</b>: <b>Neues Verbundprojekt anlegen (oben rechts)</b> ein neues Verbundprojekt an.</li> <li>Bereits <b>vorhandene Verbundprojekte</b> können Sie über die entsprechenden Links aufrufen.</li><li>Über <i class=\"fas fa-user-circle\"></i> können Sie Ihr Personenprofil und Ihre Anmeldedaten im Monitoring-Tool bearbeiten.</li><li>In den <b>blauen Hilfeboxen</b> stehen <b>wichtige Informationen</b>. Lesen Sie diese bitte unbedingt, wenn Sie einen Bereich erstmals bearbeiten.</li> <li>Dort gibt es auch <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-synsicrishelp_index.html\"target=_blank\"><b>Links zu den Hilfeseiten mit detaillierteren Informationen und zahlreichen Abbildungen.</a></ul></li></b><b>Worum es im Monitoring-Tool geht:</b></br>Das SynSICRIS-Monitoring-Tool dient dazu, Hintergründe, Ziele, Arbeiten, Ergebnisse und Wirkungen eines Verbundprojektes zu erfassen. Teile von Textdokumenten für Anträge und Berichte für den Fördermittelgeber sollen dadurch ersetzt werden. Anstelle von zusammenhängenden Textdokumenten, erstellen Sie einzelne „Einträge“ (z. B. ein Ziel oder eine Veröffentlichung). Diese können in einer Wirkungsplanung (Impact Pathway), in einem Arbeitsplan und im Verwertungsplan strukturiert werden. Sie erstellen und bearbeiten die Einträge zusammen mit allen Projektpartnern. Für einzelne Einträge, z. B. für die Verwertungsplanung kann die Bearbeitung und Sichtbarkeit der Einträge für andere Projektpartner eingeschränkt werden. Das Tool soll von der Antragstellung bis 2 Jahre nach Projektende genutzt werden, indem Sie die Einträge regelmäßig aktualisieren und ergänzen. Für die Antragstellung und zu allen Berichtszeitpunkten erstellen Sie eine Version für den Fördermittelgeber, in der dieser die Einträge lesen kann (noch in Entwicklung). Außerdem können die Informationen in PDF-Dokumente exportiert werden (noch in Entwicklung).</br><b>Weitere Informationen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-objectives.html“=_blank\">Ziele und Hintergründe zum Monitoring-Tool</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-difference.html\"target=_blank\">Unterschied zwischen Monitoring-Tool und Anträgen und Berichten in Textdokumenten</a></ul></li>",
 
   // "layout.box.help-text.default_h_1": "missing",
-  "layout.box.help-text.default_h_1": "<b><i class=\"fas fa-external-link-alt\"></i><a href=\"help/pages/de/de-project-use.html\"target=_blank\"<b> Bedienungshinweise mit Bild für einen guten Start!</b></a></i></b></br> Die Hilfeseiten öffnen sich in einem neuen Tab. Wenn Sie diesen <b>Tab in ein zweites Browserfenster ziehen</b> und dieses auf dem Bildschirm neben das Fenster mit dem Monitoring-Tool legen, können Sie <b>die Hilfe</b> am leichtesten <b>parallel</b> nutzen.</br><b>Bedienungshinweise in Kurzform:</b><ul><li>Über die <b>linke Navigationsleiste</b> können Sie die Bereiche aufrufen, um dort neue Einträge vorzunehmen oder vorhandene Einträge anzuschauen.</li><li>Über <b>Aktion (oben rechts)</b> können Sie verschiedene Funktionen für die aktuell aufgerufene Seite auswählen.</ul></li>",
+  "layout.box.help-text.default_h_1": "<b><i class=\"fas fa-external-link-alt\"></i><a href=\"help/pages/de/de-project-use.html\"target=_blank\"<b> Bedienungshinweise mit Bild für einen guten Start!</b></a></i></b></br> Die Hilfeseiten öffnen sich in einem neuen Tab. Wenn Sie diesen <b>Tab in ein zweites Browserfenster ziehen</b> und dieses auf dem Bildschirm neben das Fenster mit dem Monitoring-Tool legen, können Sie <b>die Hilfe</b> am leichtesten <b>parallel</b> nutzen.</br><b>Bedienungshinweise in Kurzform:</b><ul><li>Über die <b>linke Navigationsleiste</b> können Sie die Bereiche aufrufen, um dort neue Einträge vorzunehmen oder vorhandene Einträge anzuschauen.</li><li>Über <b>Aktion (oben rechts)</b> können Sie verschiedene Funktionen für die aktuell aufgerufene Seite auswählen.</ul></li><p><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.html\"target=_blank\"><b>Schritt-für-Schritt-Anleitung für die Antragstellung</b></a></i></br><b>Wichtige Hinweise:</b><ul><li>Arbeiten Sie schrittweise. Sie können jeden Eintrag jederzeit überarbeiten. Für den Start genügt es, wenn Sie vorläufige Bezeichnungen wählen. Ergänzen Sie nach und nach die Details.</li><li>Legen Sie vor Beginn der inhaltlichen Planung die Einträge zu den Teilprojekten und den Beteiligten an. Dafür ist jeweils mindestens die Bezeichnung erforderlich.</li><li>Legen Sie möglichst alle inhaltlichen Einträge im Impact Pathway oder im Arbeitsplan an, da Sie dort mehr Hintergrundinformationen und Hilfen erhalten. Diese Einträge erscheinen automatisch in der Listenansicht. Wenn Sie dagegen Einträge in einer Listenansicht erstellen, müssen Sie daran denken, diese später auch im Impact Pathway und/oder Arbeitsplan hinzuzufügen.</ul></li><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i><a href=\"help/pages/de/de-project-about-entities-proj.html\"target=_blank\">Verbundprojekt und Teilprojekt unterscheiden</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-permissions.html\"target=_blank\">Rechte für das Teilprojekt festlegen</a></ul></li></p><p><b>Hinweise für die Arbeit im laufenden Projekt bis nach Projektende:</b></br>Sie nutzen das Monitoring-Tool begleitend im Projekt, um sowohl Änderungen in der Planung als auch den Stand Ihrer Arbeiten und die Entwicklung von Projektwirkungen zu erfassen. Sie erstellen für den Antrag und zu allen Berichtszeitpunkten Versionen, die archiviert werden. Diese können dem Fördermittelgeber zur Ansicht freigegeben werden. (Noch nicht implementiert.)<p><b>Die verschiedenen Möglichkeiten für die Aktualisierung im laufenden Projekt werden</b> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.html\"target=_blank\">erklärt</a>.</p><b>Wichtige Hinweise:</b><ul><li><b>Aktualisieren</b> Sie die Einträge <b>zeitnah</b>. Sie reduzieren damit den Aufwand für die Dokumentation erheblich.</li><li><b>Prüfen</b> Sie für Zwischen- und Abschlussberichte, ob alle Einträge dem <b>aktuellen Stand</b> entsprechen.</li><li>Nutzen Sie den Upload im Bereich Veröffentlichungen, um dem Fördermittelgeber Belegexemplare zur Verfügung zu stellen.</ul></li><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-completion.html\"target=_blank\">Hinweise zum Projektabschluss</a></ul></li></p>",
 
   // "layout.box.help-text.default_h_2": "missing",
   "layout.box.help-text.default_h_2": "<i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.html\"target=_blank\"><b>Schritt-für-Schritt-Anleitung für die Antragstellung</b></a></i></br><b>Wichtige Hinweise:</b><ul><li>Arbeiten Sie schrittweise. Sie können jeden Eintrag jederzeit überarbeiten. Für den Start genügt es, wenn Sie vorläufige Bezeichnungen wählen. Ergänzen Sie nach und nach die Details.</li><li>Legen Sie vor Beginn der inhaltlichen Planung die Einträge zu den Teilprojekten und den Beteiligten an. Dafür ist jeweils mindestens die Bezeichnung erforderlich.</li><li>Legen Sie möglichst alle inhaltlichen Einträge im Impact Pathway oder im Arbeitsplan an, da Sie dort mehr Hintergrundinformationen und Hilfen erhalten. Diese Einträge erscheinen automatisch in der Listenansicht. Wenn Sie dagegen Einträge in einer Listenansicht erstellen, müssen Sie daran denken, diese später auch im Impact Pathway und/oder Arbeitsplan hinzuzufügen.</ul></li><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i><a href=\"help/pages/de/de-project-about-entities-proj.html\"target=_blank\">Verbundprojekt und Teilprojekt unterscheiden</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-permissions.html\"target=_blank\">Rechte für das Teilprojekt festlegen</a></ul></li>",
