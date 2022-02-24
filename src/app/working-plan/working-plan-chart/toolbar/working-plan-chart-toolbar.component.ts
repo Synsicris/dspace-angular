@@ -24,9 +24,9 @@ import { hasValue } from '../../../shared/empty.util';
 export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
 
   /**
-   * The current project'id
+   * The current project community's id
    */
-  @Input() public projectId: string;
+  @Input() public projectCommunityId: string;
 
   /**
    * Array containing a list of Workpackage object
@@ -72,12 +72,12 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.hasSearch = true;
     modalRef.componentInstance.vocabularyName = environment.workingPlan.workpackageTypeAuthority;
     modalRef.componentInstance.searchConfiguration = environment.workingPlan.allUnlinkedWorkingPlanObjSearchConfigName;
-    modalRef.componentInstance.scope = this.projectId;
+    modalRef.componentInstance.scope = this.projectCommunityId;
     this.subs.push(
       modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
         const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
         this.workingPlanStateService.dispatchGenerateWorkpackage(
-          this.projectId,
+          this.projectCommunityId,
           item.type.value,
           metadata,
           this.workpackagesCount.value.toString().padStart(3, '0')
@@ -87,7 +87,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
         let place = this.workpackagesCount.value;
         items.forEach((item) => {
           this.workingPlanStateService.dispatchAddWorkpackageAction(
-            this.projectId,
+            this.projectCommunityId,
             item.id,
             item.workspaceItemId,
             (place++).toString().padStart(3, '0')

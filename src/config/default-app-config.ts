@@ -21,6 +21,8 @@ import { CrisLayoutConfig, LayoutConfig, SuggestionConfig } from './layout-confi
 import { MetadataSecurityConfig } from './metadata-security-config';
 import { FollowAuthorityMetadata } from './search-follow-metadata.interface';
 import { DisplayItemMetadataType } from './display-search-result-config.interface';
+import { WorkingPlanConfig } from './working-plan-config.interface';
+import { ProjectsConfig } from './projects-config.interface';
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
@@ -480,7 +482,8 @@ export class DefaultAppConfig implements AppConfig {
     impactPathwaysSearchConfigName: 'allImpactPathways',
     contributionFundingprogrammeEntity: 'contribution_fundingprogramme'
   };
-  workingPlan = {
+  workingPlan: WorkingPlanConfig = {
+    workingPlanRelationMetadata: 'synsicris.relation.workingplan',
     workingPlanFormName: 'working_plan_form',
     workingPlanStepsFormName: 'working_plan_step_form',
     workingPlanEditMode: 'WORKINGPLAN',
@@ -503,9 +506,11 @@ export class DefaultAppConfig implements AppConfig {
     workingPlanLinkMetadata: 'workingplan.link.status'
   };
 
-  projects = {
-    projectsGrantsOptionsVocabularyName: 'item_shared'
+  projects: ProjectsConfig = {
+    projectsGrantsOptionsVocabularyName: 'item_shared',
+    projectsEntityEditMode: 'CUSTOM'
   };
+
   exploitationPlan = {
     exploitationPlanRelationMetadata: 'dc.relation.exploitationplan',
     exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',

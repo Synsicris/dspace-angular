@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Workpackage } from '../core/models/workpackage-step.model';
+import { Item } from '../../core/shared/item.model';
 
 @Component({
   selector: 'ipw-working-plan-chart',
@@ -12,9 +13,14 @@ import { Workpackage } from '../core/models/workpackage-step.model';
 export class WorkingPlanChartComponent {
 
   /**
-   * The current project'id
+   * The current project community's id
    */
-  @Input() public projectId: string;
+  @Input() public projectCommunityId: string;
+
+  /**
+   * The working Plan item
+   */
+  @Input() workingPlan: Item;
 
   /**
    * Array containing a list of Workpackage object

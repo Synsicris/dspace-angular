@@ -3,9 +3,11 @@ import { RouterModule } from '@angular/router';
 
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
 import { WorkingPlanPageComponent } from './working-plan-page.component';
-import { ProjectI18nBreadcrumbsService } from '../core/breadcrumbs/project-i18n-breadcrumbs.service';
-import { ProjectI18nBreadcrumbResolver } from '../core/breadcrumbs/project-i18n-breadcrumb.resolver';
-import { ProjectCommunityResolver } from '../core/project/project-community.resolver';
+import { WorkingPlanItemResolver } from '../working-plan/core/working-plan-item.resolver';
+import { ProjectItemPageResolver } from '../core/project/project-item-page.resolver';
+import { ProjectCommunityByProjectItemResolver } from '../core/project/project-community-by-project-item.resolver';
+import { ProjectItemI18nBreadcrumbResolver } from '../core/breadcrumbs/project-item-i18n-breadcrumb.resolver';
+import { ProjectItemI18nBreadcrumbsService } from '../core/breadcrumbs/project-item-i18n-breadcrumbs.service';
 
 @NgModule({
   imports: [
@@ -16,17 +18,21 @@ import { ProjectCommunityResolver } from '../core/project/project-community.reso
         component: WorkingPlanPageComponent,
         pathMatch: 'full',
         resolve: {
-          project: ProjectCommunityResolver,
-          breadcrumb: ProjectI18nBreadcrumbResolver
+          workingPlan: WorkingPlanItemResolver,
+          projectItem: ProjectItemPageResolver,
+          projectCommunity: ProjectCommunityByProjectItemResolver,
+          breadcrumb: ProjectItemI18nBreadcrumbResolver
         },
         data: { title: 'working-plan.page.title', breadcrumbKey: 'working-plan', showBreadcrumbsFluid: true }
       },
     ])
   ],
   providers: [
-    ProjectI18nBreadcrumbResolver,
-    ProjectI18nBreadcrumbsService,
-    ProjectCommunityResolver
+    ProjectItemI18nBreadcrumbResolver,
+    ProjectItemI18nBreadcrumbsService,
+    ProjectCommunityByProjectItemResolver,
+    ProjectItemPageResolver,
+    WorkingPlanItemResolver
   ]
 })
 export class WorkingPlanPageRoutingModule {

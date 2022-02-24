@@ -15,6 +15,7 @@ import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
+import { environment } from '../../../../environments/environment';
 
 /**
  * This component renders a context menu option that provides the links to edit item page.
@@ -116,6 +117,6 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
   }
 
   private isEditModeAllowed(mode: EditItemMode) {
-    return mode.name === 'FULL' || mode.name === 'CUSTOM' || mode.name === 'OWNER';
+    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode || mode.name === 'OWNER';
   }
 }

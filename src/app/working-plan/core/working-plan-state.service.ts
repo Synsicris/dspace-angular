@@ -104,8 +104,8 @@ export class WorkingPlanStateService {
     this.store.dispatch(new RemoveWorkpackageStepAction(workpackageId, workpackageStepId, workspaceItemId));
   }
 
-  public dispatchRetrieveAllWorkpackages(projectId: string, sortOption: string): void {
-    this.store.dispatch(new RetrieveAllLinkedWorkingPlanObjectsAction(projectId, sortOption));
+  public dispatchRetrieveAllWorkpackages(projectId: string, workinplanId: string, sortOption: string): void {
+    this.store.dispatch(new RetrieveAllLinkedWorkingPlanObjectsAction(projectId, workinplanId, sortOption));
   }
 
   public dispatchUpdateWorkpackageAction(

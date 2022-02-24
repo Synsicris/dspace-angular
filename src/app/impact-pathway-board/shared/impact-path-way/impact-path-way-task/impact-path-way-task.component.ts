@@ -12,6 +12,7 @@ import { ImpactPathwayLinksService } from '../../../core/impact-pathway-links.se
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { EditItemDataService } from '../../../../core/submission/edititem-data.service';
 import { EditItemMode } from '../../../../core/submission/models/edititem-mode.model';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'ipw-impact-path-way-task',
@@ -66,7 +67,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
       map((task: ImpactPathwayTask) => task.id === this.data.id),
     ).subscribe((hasFocus) => this.selectStatus.next(hasFocus));
 
-    this.editItemDataService.checkEditModeByIDAndType(this.data.id, 'CUSTOM').pipe(
+    this.editItemDataService.checkEditModeByIDAndType(this.data.id, environment.projects.projectsEntityEditMode).pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEdit$.next(canEdit);

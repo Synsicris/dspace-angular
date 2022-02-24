@@ -40,6 +40,7 @@ export interface WorkpackageEntries {
  * The Impact Pathways State
  */
 export interface WorkingPlanState {
+  workingplanId: string;
   workpackages: WorkpackageEntries;
   workpackageToRemove: string;
   workpackageToUpdate: string;
@@ -52,6 +53,7 @@ export interface WorkingPlanState {
 }
 
 const workpackageInitialState: WorkingPlanState = {
+  workingplanId: '',
   workpackages: {},
   workpackageToRemove: '',
   workpackageToUpdate: '',
@@ -89,6 +91,7 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
     case WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS: {
       const lastAddedNodes = (action.payload.lastAddedId) ? [action.payload.lastAddedId] : [];
       return Object.assign({}, workpackageInitialState, {
+        workingplanId: action.payload.workingplanId,
         processing: true,
         lastAddedNodes: lastAddedNodes
       });

@@ -1,4 +1,5 @@
-<div *ngIf="(workpackages | async)?.length > 0" fxLayout="column">
+<ds-loading *ngIf="isProcessingWorkpackage() | async"></ds-loading>
+<div *ngIf="!(isProcessingWorkpackage() | async) && (workpackages | async)?.length > 0" fxLayout="column">
   <div class="sidenav-container" fxFlex fxLayout="row">
     <!-- steps -->
     <div class="sidenav chart-column names" [ngStyle]="sidebarNamesStyle" fxLayout="column">
@@ -371,7 +372,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="(workpackages | async)?.length == 0">
+<div *ngIf="!(isProcessingWorkpackage() | async) && (workpackages | async)?.length == 0">
   <hr>
   <h3 class="text-center text-muted" ><span>{{'working-plan.chart.toolbar.no-workpackages' | translate}}</span></h3>
 </div>

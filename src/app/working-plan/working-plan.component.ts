@@ -12,6 +12,7 @@ import { PaginatedList } from '../core/data/paginated-list.model';
 import { Collection } from '../core/shared/collection.model';
 import { getFirstSucceededRemoteWithNotEmptyData } from '../core/shared/operators';
 import { isEmpty } from '../shared/empty.util';
+import { Item } from '../core/shared/item.model';
 
 @Component({
   selector: 'ipw-working-plan',
@@ -20,7 +21,15 @@ import { isEmpty } from '../shared/empty.util';
 })
 export class WorkingPlanComponent implements OnInit, OnDestroy {
 
-  @Input() public projectId: string;
+  /**
+   * The project community's id
+   */
+  @Input() public projectCommunityId: string;
+
+  /**
+   * The working Plan item
+   */
+  @Input() workingPlan: Item;
 
   workPackageCollectionId: string;
   milestoneCollectionId: string;
@@ -40,7 +49,7 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
     this.workingPlanStateService.isWorkingPlanLoaded().pipe(
       take(1)
     ).subscribe(() => {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectId, environment.workingPlan.workingPlanPlaceMetadata);
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata);
     });
   }
 
@@ -65,7 +74,7 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
     };
     const wpCollId$: Observable<Collection> = this.collectionDataService
       .getAuthorizedCollectionByCommunityAndEntityType(
-        this.projectId,
+        this.projectCommunityId,
         environment.workingPlan.workpackageEntityName,
         findOptions,
         true).pipe(
@@ -76,7 +85,7 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
       );
     const mlCollId$ = this.collectionDataService
       .getAuthorizedCollectionByCommunityAndEntityType(
-        this.projectId,
+        this.projectCommunityId,
         environment.workingPlan.milestoneEntityName,
         findOptions,
         true).pipe(

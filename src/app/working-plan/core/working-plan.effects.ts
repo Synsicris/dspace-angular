@@ -118,6 +118,7 @@ export class WorkingPlanEffects {
     withLatestFrom(this.store$),
     concatMap(([action, state]: [AddWorkpackageAction, any]) => {
       return this.workingPlanService.linkWorkingPlanObject(
+        state.workingplan.workingplanId,
         action.payload.workpackageId,
         action.payload.place
       ).pipe(
@@ -248,8 +249,12 @@ export class WorkingPlanEffects {
    */
   @Effect() removeWorkpackage$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.REMOVE_WORKPACKAGE),
-    switchMap((action: RemoveWorkpackageAction) => {
-      return this.workingPlanService.unlinkWorkingPlanObject(action.payload.workpackageId).pipe(
+    withLatestFrom(this.store$),
+    switchMap(([action, state]: [RemoveWorkpackageAction, any]) => {
+      return this.workingPlanService.unlinkWorkingPlanObject(
+        state.workingplan.workingplanId,
+        action.payload.workpackageId
+      ).pipe(
         map(() => new RemoveWorkpackageSuccessAction(action.payload.workpackageId)),
         catchError((error: Error) => {
           if (error) {
@@ -291,7 +296,7 @@ export class WorkingPlanEffects {
     switchMap((action: RetrieveAllLinkedWorkingPlanObjectsAction) => {
       return this.workingPlanService.searchForLinkedWorkingPlanObjects(action.payload.projectId, action.payload.sortOption).pipe(
         map((items: WorkpackageSearchItem[]) => {
-          return new InitWorkingplanAction(items, action.payload.sortOption);
+          return new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption);
         }),
         catchError((error: Error) => {
           if (error) {
@@ -308,7 +313,7 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.INIT_WORKINGPLAN),
     switchMap((action: InitWorkingplanAction) => {
       return this.workingPlanService.initWorkingPlan(action.payload.items).pipe(
-        map((workpackages: Workpackage[]) => new InitWorkingplanSuccessAction(workpackages, action.payload.sortOption)),
+        map((workpackages: Workpackage[]) => new InitWorkingplanSuccessAction(action.payload.workingplanId, workpackages, action.payload.sortOption)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
@@ -325,6 +330,7 @@ export class WorkingPlanEffects {
     withLatestFrom(this.store$),
     switchMap(([action, state]: [InitWorkingplanSuccessAction, any]) => {
       return this.workingPlanService.updateWorkpackagePlace(
+        action.payload.workingplanId,
         state.workingplan.workpackages,
         action.payload.sortOption);
     }));
@@ -477,6 +483,7 @@ export class WorkingPlanEffects {
     withLatestFrom(this.store$),
     switchMap(([action, state]: [SaveWorkpackageOrderAction, any]) => {
       return this.workingPlanService.updateWorkpackagePlace(
+        state.workingplan.workingplanId,
         state.workingplan.workpackages).pipe(
         map(() => new SaveWorkpackageOrderSuccessAction()),
         catchError((error: Error) => {

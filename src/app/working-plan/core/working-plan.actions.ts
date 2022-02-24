@@ -302,6 +302,7 @@ export class AddWorkpackageStepErrorAction implements Action {
 export class InitWorkingplanAction implements Action {
   type = WorkpackageActionTypes.INIT_WORKINGPLAN;
   payload: {
+    workingplanId: string;
     items: WorkpackageSearchItem[];
     sortOption: string;
   };
@@ -309,13 +310,15 @@ export class InitWorkingplanAction implements Action {
   /**
    * Create a new InitWorkingplanAction
    *
+   * @param workingplanId
+   *    the working-plan id
    * @param items
    *    the list of Item of workpackages
    * @param sortOption
    *    the default sort option value
    */
-  constructor(items: WorkpackageSearchItem[], sortOption: string) {
-    this.payload = { items, sortOption };
+  constructor(workingplanId: string, items: WorkpackageSearchItem[], sortOption: string) {
+    this.payload = { workingplanId, items, sortOption };
   }
 }
 
@@ -325,6 +328,7 @@ export class InitWorkingplanAction implements Action {
 export class InitWorkingplanSuccessAction implements Action {
   type = WorkpackageActionTypes.INIT_WORKINGPLAN_SUCCESS;
   payload: {
+    workingplanId: string;
     workpackages: Workpackage[];
     sortOption: string;
   };
@@ -332,13 +336,15 @@ export class InitWorkingplanSuccessAction implements Action {
   /**
    * Create a new InitWorkingplanSuccessAction
    *
+   * @param workingplanId
+   *    the working-plan id
    * @param workpackages
    *    the list of workpackage objects
    * @param sortOption
    *    the default sort option value
    */
-  constructor(workpackages: Workpackage[], sortOption: string) {
-    this.payload = { workpackages, sortOption };
+  constructor(workingplanId: string,workpackages: Workpackage[], sortOption: string) {
+    this.payload = { workingplanId, workpackages, sortOption };
   }
 }
 
@@ -462,6 +468,7 @@ export class RetrieveAllLinkedWorkingPlanObjectsAction implements Action {
   type = WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS;
   payload: {
     projectId: string;
+    workingplanId: string;
     sortOption: string;
     lastAddedId?: string;
   };
@@ -469,6 +476,8 @@ export class RetrieveAllLinkedWorkingPlanObjectsAction implements Action {
   /**
    * Create a new RetrieveAllLinkedWorkingPlanObjectsAction
    *
+   * @param workingplanId
+   *    the working-plan id
    * @param projectId
    *    the project id
    * @param sortOption
@@ -476,8 +485,8 @@ export class RetrieveAllLinkedWorkingPlanObjectsAction implements Action {
    * @param lastAddedId
    *    the id of the last added element
    */
-  constructor(projectId: string, sortOption: string, lastAddedId?: string) {
-    this.payload = { projectId, sortOption, lastAddedId };
+  constructor(projectId: string, workingplanId: string, sortOption: string, lastAddedId?: string) {
+    this.payload = { projectId, workingplanId, sortOption, lastAddedId };
   }
 }
 

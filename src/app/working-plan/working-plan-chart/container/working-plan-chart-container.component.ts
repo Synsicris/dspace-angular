@@ -33,6 +33,7 @@ import { EditItemDataService } from '../../../core/submission/edititem-data.serv
 import { SearchConfig } from 'src/app/core/shared/search/search-filters/search-config.model';
 import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
 import { NgbDateStructToString, stringToNgbDateStruct } from '../../../shared/date.util';
+import { Item } from '../../../core/shared/item.model';
 
 export const MY_FORMATS = {
   parse: {
@@ -70,9 +71,14 @@ interface UpdateData {
 export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   /**
-   * The current project'id
+   * The current project community's id
    */
-  @Input() public projectId: string;
+  @Input() public projectCommunityId: string;
+
+  /**
+   * The working Plan item
+   */
+  @Input() workingPlan: Item;
 
   /**
    * Array containing a list of Workpackage object
@@ -446,12 +452,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
     modalRef.componentInstance.vocabularyName = this.workingPlanService.getWorkpackageStepTypeAuthorityName();
     modalRef.componentInstance.searchConfiguration = this.workingPlanService.getWorkpackageStepSearchConfigName();
-    modalRef.componentInstance.scope = this.projectId;
+    modalRef.componentInstance.scope = this.projectCommunityId;
     modalRef.componentInstance.query = this.buildExcludedTasksQuery(flatNode);
 
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
-      this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectId, flatNode.id, item.type.value, metadata);
+      this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectCommunityId, flatNode.id, item.type.value, metadata);
       // the 'this.editModes$' map is auto-updated by the ngOnInit subscribe
       if (flatNode.type === 'milestone') {
         this.milestonesMap.set(flatNode.id, flatNode.dates.end.full);
@@ -544,7 +550,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   updateSort() {
     if (this.sortSelectedValue !== this.sortSelectedOld) {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectId, this.sortSelectedValue);
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, this.sortSelectedValue);
     }
   }
 
@@ -914,11 +920,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   hasBeenNowAdded(nodeId): Observable<boolean> {
     return this.workingPlanService.getLastAddedNodesList().pipe(
       map((nodeIdArray: string[]) => {
-        if (nodeIdArray.indexOf(nodeId) > -1) {
-          return true;
-        } else {
-          return false;
-        }
+        return nodeIdArray.indexOf(nodeId) > -1;
       })
     );
   }
@@ -1091,7 +1093,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    * @param nodeId string
    */
   private retrieveEditMode(nodeId: string): void {
-    this.subs.push(this.editItemService.checkEditModeByIDAndType(nodeId, 'CUSTOM').pipe(
+    this.subs.push(this.editItemService.checkEditModeByIDAndType(nodeId, environment.projects.projectsEntityEditMode).pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.editModes$.next(this.editModes$.value.set(nodeId, canEdit));
