@@ -14,11 +14,14 @@
 
   "403.forbidden": "forbidden",
 
-"500.page-internal-server-error": "Service Unavailable",
+  "500.page-internal-server-error": "Service Unavailable",
 
   "500.help": "The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.",
 
-  "500.link.home-page": "Take me to the home page",  "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page.",
+  "500.link.home-page": "Take me to the home page",
+
+
+  "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page. ",
 
   "404.link.home-page": "Take me to the home page",
 
@@ -1728,6 +1731,12 @@
   "error.submission.sections.init-form-error": "An error occurred during section initialize, please check your input-form configuration. Details are below : <br> <br>",
 
   "error.top-level-communities": "Error fetching top-level communities",
+
+  "error.validation.custom-url.conflict": "The custom url has been already used, please try with a new one.",
+
+  "error.validation.custom-url.empty": "The custom url is required and cannot be empty.",
+
+  "error.validation.custom-url.invalid-characters": "The custom url contains invalid characters.",
 
   "error.validation.license.notgranted": "You must grant this license to complete your submission. If you are unable to grant this license at this time you may save your work and return later or remove the submission.",
 
@@ -5889,6 +5898,8 @@
 
   "submission.sections.submit.progressbar.CClicense": "Creative commons license",
 
+  "submission.sections.submit.progressbar.CustomUrlStep": "Custom url",
+
   "submission.sections.submit.progressbar.describe.agrovoc_keywords": "Agrovoc keywords",
 
   "submission.sections.submit.progressbar.describe.applications_econtech": "Successful use of results for change processes",
@@ -6354,6 +6365,10 @@
   "submission.sections.upload.upload-failed": "Upload failed",
 
   "submission.sections.upload.upload-successful": "Upload successful",
+
+  "submission.sections.custom-url.label.previous-urls": "Previous Urls",
+
+  "submission.sections.custom-url.alert.info": "Define here a custom URL which will be used to reach the item instead of using an internal randomly generated UUID identifier. ",
 
   "submission.sections.accesses.form.discoverable-description": "When checked, this item will be discoverable in search/browse. When unchecked, the item will only be available via a direct link and will never appear in search/browse.",
 
