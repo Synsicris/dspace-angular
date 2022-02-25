@@ -92,6 +92,7 @@ export class SubmissionSectionCustomUrlComponent extends SectionModelComponent {
       injectedCollectionId,
       injectedSectionData,
       injectedSubmissionId,
+      null
     );
   }
 
