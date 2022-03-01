@@ -34,6 +34,7 @@ import { SearchConfig } from 'src/app/core/shared/search/search-filters/search-c
 import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
 import { NgbDateStructToString, stringToNgbDateStruct } from '../../../shared/date.util';
 import { Item } from '../../../core/shared/item.model';
+import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 
 export const MY_FORMATS = {
   parse: {
@@ -194,7 +195,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   /**
    * List of Edit Modes available on each node for the current user
    */
-  private editModes$: BehaviorSubject<Map<string, boolean>> = new BehaviorSubject<Map<string, boolean>>(new Map());
+  private editModes$: BehaviorSubject<Map<string, EditItemMode[]>> = new BehaviorSubject<Map<string, EditItemMode[]>>(new Map());
 
   private chartStatusTypeList$: BehaviorSubject<VocabularyEntry[]> = new BehaviorSubject<VocabularyEntry[]>([]);
   private subs: Subscription[] = [];
@@ -385,7 +386,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   isEditAvailable(nodeId): Observable<boolean> {
     return this.editModes$.asObservable().pipe(
-      map((editModes) => isNotEmpty(editModes) && editModes.has(nodeId) && editModes.get(nodeId))
+      map((editModes) => isNotEmpty(editModes) && editModes.has(nodeId) && editModes.get(nodeId).length > 0)
     );
   }
 
@@ -394,7 +395,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    *
    * @returns Observable<Map<string, EditItemMode[]>>
    */
-  getEditModes(): Observable<Map<string, boolean>> {
+  getEditModes(): Observable<Map<string, EditItemMode[]>> {
     return this.editModes$;
   }
 
@@ -1093,10 +1094,11 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    * @param nodeId string
    */
   private retrieveEditMode(nodeId: string): void {
-    this.subs.push(this.editItemService.checkEditModeByIDAndType(nodeId, environment.projects.projectsEntityEditMode).pipe(
+    this.subs.push(this.editItemService.searchEditModesByID(nodeId).pipe(
       take(1)
-    ).subscribe((canEdit: boolean) => {
-      this.editModes$.next(this.editModes$.value.set(nodeId, canEdit));
+    ).subscribe((availableModes: EditItemMode[]) => {
+      const modes = availableModes.filter((mode) => mode.name === environment.projects.projectsEntityEditMode);
+      this.editModes$.next(this.editModes$.value.set(nodeId, modes));
     }));
   }
 

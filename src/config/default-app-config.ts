@@ -512,7 +512,7 @@ export class DefaultAppConfig implements AppConfig {
   };
 
   exploitationPlan = {
-    exploitationPlanRelationMetadata: 'dc.relation.exploitationplan',
+    exploitationPlanRelationMetadata: 'synsicris.relation.exploitationplan',
     exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
     exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
     exploitationPlanPartnerMetadata: '',

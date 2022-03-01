@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from '../../../../core/shared/item.model';
 import { getItemPageRoute } from '../../../../item-page/item-page-routing-paths';
 import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 /**
  * This component render the sidebar of the tabs layout
@@ -106,8 +105,11 @@ export abstract class CrisLayoutTabsComponent {
   setActiveTab(tab) {
     this.activeTab$.next(tab);
     this.emitSelected(tab);
-    this.location.replaceState(getItemPageRoute(this.item) + '/' + tab.shortname);
-    // this.router.navigateByUrl(getItemPageRoute(this.item) + '/' + tab.shortname);
+    if (tab.shortname === 'workingplan' || tab.shortname === 'exploitation') {
+      this.router.navigateByUrl(getItemPageRoute(this.item) + '/' + tab.shortname);
+    } else {
+      this.location.replaceState(getItemPageRoute(this.item) + '/' + tab.shortname);
+    }
   }
 
 }
