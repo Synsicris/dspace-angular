@@ -105,7 +105,7 @@ export abstract class CrisLayoutTabsComponent {
   setActiveTab(tab) {
     this.activeTab$.next(tab);
     this.emitSelected(tab);
-    if (tab.shortname === 'workingplan' || tab.shortname === 'exploitation') {
+    if (tab.shortname === 'workingplan' || tab.shortname === 'exploitationplans') {
       this.router.navigateByUrl(getItemPageRoute(this.item) + '/' + tab.shortname);
     } else {
       this.location.replaceState(getItemPageRoute(this.item) + '/' + tab.shortname);
