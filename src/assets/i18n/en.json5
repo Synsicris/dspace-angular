@@ -95,7 +95,6 @@
 
   "admin.institution.new.title": "Create Institution",
 
-
   "admin.institution.explore.breadcrumbs": "Explore Institutions",
 
   "admin.institution.explore.header": "Explore Institutions",
@@ -111,8 +110,6 @@
   "admin.institution.explore.roles": "Institutional Scoped Roles",
 
   "admin.institution.explore.title": "Explore Institutions",
-
-
 
   "admin.registries.bitstream-formats.breadcrumbs": "Format registry",
 
@@ -377,7 +374,6 @@
   "admin.access-control.epeople.notification.deleted.failure": "Failed to delete EPerson: \"{{name}}\"",
 
   "admin.access-control.epeople.notification.deleted.success": "Successfully deleted EPerson: \"{{name}}\"",
-
 
   "admin.access-control.groups.badge.disabled": "Disabled",
 
@@ -671,8 +667,7 @@
 
   "bitstream.download.page": "Now downloading {{bitstream}}...",
 
-  "bitstream.download.page.back": "Back" ,
-
+  "bitstream.download.page.back": "Back",
 
   "bitstream.edit.authorizations.link": "Edit bitstream's Policies",
 
@@ -731,7 +726,7 @@
 
   "bitstream.edit.title": "Edit bitstream",
 
-  "bitstream-request-a-copy.alert.canDownload1": "You already have access to this file. If you want to download the file, click ",
+  "bitstream-request-a-copy.alert.canDownload1": "You already have access to this file. If you want to download the file, click",
 
   "bitstream-request-a-copy.alert.canDownload2": "here",
 
@@ -740,7 +735,8 @@
   "bitstream-request-a-copy.intro": "Enter the following information to request a copy for the following item: ",
 
   "bitstream-request-a-copy.intro.bitstream.one": "Requesting the following file: ",
-  "bitstream-request-a-copy.intro.bitstream.all": "Requesting all files. ",
+
+  "bitstream-request-a-copy.intro.bitstream.all": "Requesting all files.",
 
   "bitstream-request-a-copy.name.label": "Name *",
 
@@ -768,7 +764,6 @@
 
   "bitstream-request-a-copy.submit.error": "Something went wrong with submitting the item request.",
 
-
   "browse.comcol.by.author": "By Author",
 
   "browse.comcol.by.dateissued": "By Issue Date",
@@ -791,7 +786,7 @@
 
   "browse.comcol.head": "Browse",
 
-  "browse.empty": "No items to show.",
+  "browse.empty": "No items to show",
 
   "browse.metadata.author": "Author",
 
@@ -989,7 +984,6 @@
 
   "collection.edit.item-mapper.tabs.map": "Map new items",
 
-
   "collection.edit.logo.delete.title": "Delete logo",
 
   "collection.edit.logo.delete-undo.title": "Undo delete",
@@ -1154,31 +1148,51 @@
 
   "collection.select.table.title": "Title",
 
-
   "collection.source.controls.head": "Harvest Controls",
-  "collection.source.controls.test.submit.error": "Something went wrong with initiating the testing of the settings",
-  "collection.source.controls.test.failed": "The script to test the settings has failed",
-  "collection.source.controls.test.completed": "The script to test the settings has successfully finished",
-  "collection.source.controls.test.submit": "Test configuration",
-  "collection.source.controls.test.running": "Testing configuration...",
-  "collection.source.controls.import.submit.success": "The import has been successfully initiated",
-  "collection.source.controls.import.submit.error": "Something went wrong with initiating the import",
-  "collection.source.controls.import.submit": "Import now",
-  "collection.source.controls.import.running": "Importing...",
-  "collection.source.controls.import.failed": "An error occurred during the import",
-  "collection.source.controls.import.completed": "The import completed",
-  "collection.source.controls.reset.submit.success": "The reset and reimport has been successfully initiated",
-  "collection.source.controls.reset.submit.error": "Something went wrong with initiating the reset and reimport",
-  "collection.source.controls.reset.failed": "An error occurred during the reset and reimport",
-  "collection.source.controls.reset.completed": "The reset and reimport completed",
-  "collection.source.controls.reset.submit": "Reset and reimport",
-  "collection.source.controls.reset.running": "Resetting and reimporting...",
-  "collection.source.controls.harvest.status": "Harvest status:",
-  "collection.source.controls.harvest.start": "Harvest start time:",
-  "collection.source.controls.harvest.last": "Last time harvested:",
-  "collection.source.controls.harvest.message": "Harvest info:",
-  "collection.source.controls.harvest.no-information": "N/A",
 
+  "collection.source.controls.test.submit.error": "Something went wrong with initiating the testing of the settings",
+
+  "collection.source.controls.test.failed": "The script to test the settings has failed",
+
+  "collection.source.controls.test.completed": "The script to test the settings has successfully finished",
+
+  "collection.source.controls.test.submit": "Test configuration",
+
+  "collection.source.controls.test.running": "Testing configuration...",
+
+  "collection.source.controls.import.submit.success": "The import has been successfully initiated",
+
+  "collection.source.controls.import.submit.error": "Something went wrong with initiating the import",
+
+  "collection.source.controls.import.submit": "Import now",
+
+  "collection.source.controls.import.running": "Importing...",
+
+  "collection.source.controls.import.failed": "An error occurred during the import",
+
+  "collection.source.controls.import.completed": "The import completed",
+
+  "collection.source.controls.reset.submit.success": "The reset and reimport has been successfully initiated",
+
+  "collection.source.controls.reset.submit.error": "Something went wrong with initiating the reset and reimport",
+
+  "collection.source.controls.reset.failed": "An error occurred during the reset and reimport",
+
+  "collection.source.controls.reset.completed": "The reset and reimport completed",
+
+  "collection.source.controls.reset.submit": "Reset and reimport",
+
+  "collection.source.controls.reset.running": "Resetting and reimporting...",
+
+  "collection.source.controls.harvest.status": "Harvest status: ",
+
+  "collection.source.controls.harvest.start": "Harvest start time: ",
+
+  "collection.source.controls.harvest.last": "Last time harvested: ",
+
+  "collection.source.controls.harvest.message": "Harvest info: ",
+
+  "collection.source.controls.harvest.no-information": "N/A",
 
   "collection.source.update.notifications.error.content": "The provided settings have been tested and didn't work.",
 
@@ -1472,7 +1486,7 @@
 
   "cookies.consent.app.title.add-this": "AddThis",
 
-  "cookies.consent.app.description.add-this" : "Allows us to enable sharing via AddThis",
+  "cookies.consent.app.description.add-this": "Allows us to enable sharing via AddThis",
 
   "cookies.consent.update": "There were changes since your last visit, please update your consent.",
 
@@ -1514,7 +1528,6 @@
 
   "cookies.consent.purpose.sharing": "Sharing",
 
-
   "coordinator.page.new-project": "<i class=\"fas fa-plus-circle\"></i> Create new project",
 
   "coordinator.page.my-profile": "My profile",
@@ -1524,7 +1537,6 @@
   "coordinator.page.title": "Coordinator overview",
 
   "cooperation_events.listelement.badge": "Cooperation process",
-
 
   "cris-layout.toggle.open": "Open section",
 
@@ -1562,8 +1574,6 @@
 
   "curation.form.handle.hint": "Hint: Enter [your-handle-prefix]/0 to run a task across entire site (not all tasks may support this capability)",
 
-
-
   "deny-request-copy.email.message": "Dear {{ recipientName }},\nIn response to your request I regret to inform you that it's not possible to send you a copy of the file(s) you have requested, concerning the document: \"{{ itemUrl }}\" ({{ itemName }}), of which I am an author.\n\nBest regards,\n{{ authorName }} <{{ authorEmail }}>",
 
   "deny-request-copy.email.subject": "Request copy of document",
@@ -1575,8 +1585,6 @@
   "deny-request-copy.intro": "This message will be sent to the applicant of the request",
 
   "deny-request-copy.success": "Successfully denied item request",
-
-
 
   "dso.name.untitled": "Untitled",
 
@@ -1632,7 +1640,6 @@
 
   "dso-selector.set-scope.community.input-header": "Search for a community or collection",
 
-
   "dso-selector.export-item.sub-level": "Export to excel items in",
 
   "confirmation-modal.export-metadata.header": "Export metadata for {{ dsoName }}",
@@ -1666,7 +1673,6 @@
   "confirmation-modal.pending-changes.cancel": "Cancel",
 
   "confirmation-modal.pending-changes.confirm": "Leave",
-
 
   "dataset.listelement.badge": "Dataset",
 
@@ -1756,7 +1762,7 @@
 
   "event.listelement.badge": "Event",
 
-  "exploitation-plan.edit.btn.title": "Edit description",
+  "exploitation-plan.edit.btn.title": "Edit",
 
   "exploitation-plan.description.title": "Description",
 
@@ -1810,9 +1816,9 @@
 
   "explore.index.author": "Author",
 
-  "explore.index.graphitemtype" : "Graph by type",
+  "explore.index.graphitemtype": "Graph by type",
 
-  "explore.index.graphpubldate" : "Graph by date",
+  "explore.index.graphpubldate": "Graph by date",
 
   "explore.index.birthDate": "Birthday",
 
@@ -1830,7 +1836,7 @@
 
   "explore.index.dateissued": "Date issued",
 
-  "explore.index.dc.date.accessioned" : "Recent Additions",
+  "explore.index.dc.date.accessioned": "Recent Additions",
 
   "explore.index.dc.title": "Title",
 
@@ -2114,8 +2120,6 @@
 
   "funding.page.titleprefix": "Funding: ",
 
-
-
   "grant-deny-request-copy.deny": "Don't send copy",
 
   "grant-deny-request-copy.email.back": "Back",
@@ -2146,8 +2150,6 @@
 
   "grant-deny-request-copy.processed": "This request has already been processed. You can use the button below to get back to the home page.",
 
-
-
   "grant-request-copy.email.message": "Dear {{ recipientName }},\nIn response to your request I have the pleasure to send you in attachment a copy of the file(s) concerning the document: \"{{ itemUrl }}\" ({{ itemName }}), of which I am an author.\n\nBest regards,\n{{ authorName }} <{{ authorEmail }}>",
 
   "grant-request-copy.email.subject": "Request copy of document",
@@ -2159,8 +2161,6 @@
   "grant-request-copy.intro": "This message will be sent to the applicant of the request. The requested document(s) will be attached.",
 
   "grant-request-copy.success": "Successfully granted item request",
-
-
 
   "home.description": "",
 
@@ -2801,6 +2801,7 @@
   "item.page.link.simple": "Simple item page",
 
   "item.page.metric.acquisition-date": "Acquisition Date",
+
   "item.page.metric.deltaPeriod1": "Last Week",
 
   "item.page.metric.deltaPeriod2": "Last Month",
@@ -2810,7 +2811,6 @@
   "item.page.metric.label.altmetrics": "Altmetrics©",
 
   "item.page.metric.label.check": "Check",
-
 
   "item.page.metric.label.download": "Downloads",
 
@@ -2978,16 +2978,15 @@
 
   "item.preview.person.identifier.orcid": "ORCID: ",
 
-  "item.preview.project.funder.name": "Funder:",
+  "item.preview.project.funder.name": "Funder: ",
 
-  "item.preview.project.funder.identifier": "Funder Identifier:",
+  "item.preview.project.funder.identifier": "Funder Identifier: ",
 
-  "item.preview.oaire.awardNumber": "Funding ID:",
+  "item.preview.oaire.awardNumber": "Funding ID: ",
 
-  "item.preview.dc.coverage.spatial": "Jurisdiction:",
+  "item.preview.dc.coverage.spatial": "Jurisdiction: ",
 
-  "item.preview.oaire.fundingStream": "Funding Stream:",
-
+  "item.preview.oaire.fundingStream": "Funding Stream: ",
 
   "item.preview.person.identifier.rid": "Researcher ID: ",
 
@@ -3043,9 +3042,7 @@
 
   "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
 
-
   "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href='{{destination}}'>here</a>.",
-
 
   "item.version.create.modal.header": "New version",
 
@@ -3065,12 +3062,11 @@
 
   "item.version.create.modal.form.summary.placeholder": "Insert the summary for the new version",
 
-  "item.version.create.notification.success" : "New version has been created with version number {{version}}",
+  "item.version.create.notification.success": "New version has been created with version number {{version}}",
 
-  "item.version.create.notification.failure" : "New version has not been created",
+  "item.version.create.notification.failure": "New version has not been created",
 
-  "item.version.create.notification.inProgress" : "A new version cannot be created because there is an inprogress submission in the version history",
-
+  "item.version.create.notification.inProgress": "A new version cannot be created because there is an inprogress submission in the version history",
 
   "item.version.delete.modal.header": "Delete version",
 
@@ -3084,14 +3080,13 @@
 
   "item.version.delete.modal.button.cancel.tooltip": "Do not delete this version",
 
-  "item.version.delete.notification.success" : "Version number {{version}} has been deleted",
+  "item.version.delete.notification.success": "Version number {{version}} has been deleted",
 
-  "item.version.delete.notification.failure" : "Version number {{version}} has not been deleted",
+  "item.version.delete.notification.failure": "Version number {{version}} has not been deleted",
 
+  "item.version.edit.notification.success": "The summary of version number {{version}} has been changed",
 
-  "item.version.edit.notification.success" : "The summary of version number {{version}} has been changed",
-
-  "item.version.edit.notification.failure" : "The summary of version number {{version}} has not been changed",
+  "item.version.edit.notification.failure": "The summary of version number {{version}} has not been changed",
 
   "item-export.modal-launcher.single.btn": "Export",
 
@@ -3163,7 +3158,6 @@
 
   "journalvolume.page.volume": "Volume",
 
-
   "iiifsearchable.listelement.badge": "Document Media",
 
   "iiifsearchable.page.titleprefix": "Document: ",
@@ -3185,7 +3179,6 @@
   "iiif.page.issue": "Issue: ",
 
   "iiif.page.description": "Description: ",
-
 
   "loading.bitstream": "Loading bitstream...",
 
@@ -3439,23 +3432,23 @@
 
   "statistics.workflow.page.step-table.count": "Performed",
 
-  "statistics.workflow.page.step-table.submit" : "Submit",
+  "statistics.workflow.page.step-table.submit": "Submit",
 
-  "statistics.workflow.page.step-table.reviewstep" : "Review",
+  "statistics.workflow.page.step-table.reviewstep": "Review",
 
-  "statistics.workflow.page.step-table.editstep" : "Edit",
+  "statistics.workflow.page.step-table.editstep": "Edit",
 
-  "statistics.workflow.page.step-table.finaleditstep" : "Final edit",
+  "statistics.workflow.page.step-table.finaleditstep": "Final edit",
 
-  "statistics.workflow.page.step-table.item" : "Archive",
+  "statistics.workflow.page.step-table.item": "Archive",
 
-  "statistics.workflow.page.step-table.workspace" : "Reject",
+  "statistics.workflow.page.step-table.workspace": "Reject",
 
-  "statistics.workflow.page.current-table.reviewstep" : "Review",
+  "statistics.workflow.page.current-table.reviewstep": "Review",
 
-  "statistics.workflow.page.current-table.editstep" : "Edit",
+  "statistics.workflow.page.current-table.editstep": "Edit",
 
-  "statistics.workflow.page.current-table.finaleditstep" : "Final edit",
+  "statistics.workflow.page.current-table.finaleditstep": "Final edit",
 
   "statistics.workflow.page.current-table.step": "Step",
 
@@ -3495,7 +3488,7 @@
 
   "statistics.workflow.page.action-table.reviewaction": "Review",
 
-  "statistics.workflow.page.action-table.claimaction" : "Claim",
+  "statistics.workflow.page.action-table.claimaction": "Claim",
 
   "statistics.workflow.page.no-data-found": "No data found",
 
@@ -3871,8 +3864,7 @@
 
   "reciter.suggestion.totalScore": "Total Score",
 
-"reciter.suggestion.type.oaire": "Publications",
-
+  "reciter.suggestion.type.oaire": "Publications",
 
   "orgunit.listelement.badge": "Organizational unit",
 
@@ -4186,15 +4178,15 @@
 
   "process.detail.create": "Create similar process",
 
-"process.overview.delete.failed" : "An error occurs deleting the process.",
+  "process.overview.delete.failed": "An error occurs deleting the process.",
 
-  "process.overview.delete.success" : "Process deleted with success",  "process.overview.table.finish": "Finish time(UTC)",
+  "process.overview.delete.success": "Process deleted with success\",  \"process.overview.table.finish\": \"Finish time(UTC)",
 
   "process.overview.table.id": "Process ID",
 
   "process.overview.table.name": "Name",
 
-  "process.overview.table.start" : "Start time (UTC)",
+  "process.overview.table.start": "Start time (UTC)",
 
   "process.overview.table.status": "Status",
 
@@ -4680,9 +4672,7 @@
 
   "researcherprofile.success.claim.title": "Success",
 
-
-  "repository.title.prefixDSpace": "DSpace Angular ::",
-
+  "repository.title.prefixDSpace": "DSpace Angular :: ",
 
   "resource-policies.add.button": "Add",
 
@@ -5006,7 +4996,7 @@
 
   "search.filters.filter.personOrgUnits.head": "Organizations",
 
-  "search.filters.filter.personOrgUnits.label" : "Search organizations",
+  "search.filters.filter.personOrgUnits.label": "Search organizations",
 
   "search.filters.filter.personOrgUnits.placeholder": "Organizations",
 
@@ -5206,8 +5196,6 @@
 
   "search.form.scope.all": "All of DSpace",
 
-
-
   "search.results.head": "Search Results",
 
   "default.search.results.head": "Search Results",
@@ -5224,7 +5212,7 @@
 
   "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting\"",
 
-  "search.results.no-results-link": "quotes around it",
+  "search.results.no-results-link": "quotes around it (Anführungszeichen)",
 
   "search.results.empty": "Your search returned no results.",
 
@@ -5784,9 +5772,6 @@
   "submission.sections.describe.relationship-lookup.title.isProjectOfPublication": "Projects",
 
   "submission.sections.describe.relationship-lookup.title.isFundingAgencyOfProject": "Funder of the Project",
-
-
-
 
   "submission.sections.describe.relationship-lookup.selection-tab.search-form.placeholder": "Search...",
 
@@ -6713,15 +6698,9 @@
 
   "lucky.search.multiple.records": "may refer to multiple records",
 
-  "invitation.group.msg": "You have been invited to join the following groups",
-
-  "invitation.accept-btn": "Accept",
-
-  "invitation.ignore-btn": "Ignore",
 
   "authority-confidence.search-label":"Search",
 
-  "orcid.badge.tooltip": "Connected to ORCID",
 
   "invitation.group.msg": "You have been invited to join the following groups",
 
@@ -7155,7 +7134,7 @@
 
   "search.filters.entityType.subcontractor": "Subcontractor",
 
-  "search.filters.entityType.Product": "Reserach data",
+  "search.filters.entityType.Product": "Research data",
 
   "search.filters.entityType.funding": "Funding",
 
@@ -7463,6 +7442,752 @@
 
   "profile.edit-item.btn.OWNER": "Edit",
 
-  "earch.filters.applied.f.itemtype": "Type"
+  "earch.filters.applied.f.itemtype": "Type",
+
+  "layout.field.label.Person.dc.title": "Person",
+
+  "layout.field.label.Person.synsicris.subject.destatis": "Discipline",
+
+  "layout.field.label.Person.person.email": "Email",
+
+  "layout.field.label.Person.oairecerif.identifier.url": "About the Person",
+
+  "layout.field.label.Person.synsicris.person.degree": "Academic degree",
+
+  "layout.field.label.Person.oairecerif.person.gender": "Gender",
+
+  "layout.field.label.Person.person.identifier.orcid": "ORCID",
+
+  "layout.field.label.Person.person.identifier.scopus-author-id": "Scopus Author ID",
+
+  "layout.field.label.Person.person.identifier.rid": "Researcher ID",
+
+  "layout.field.label.parentproject.dc.title": "Joint project:",
+
+  "layout.field.label.parentproject.oairecerif.acronym": "Acronym",
+
+  "layout.field.label.parentproject.oairecerif.project.startDate": "Start date",
+
+  "layout.field.label.parentproject.oairecerif.project.endDate": "End date",
+
+  "layout.field.label.parentproject.synsicris.duration": "Duration (months)",
+
+  "layout.field.label.parentproject.oairecerif.project.status": "Status",
+
+  "layout.field.label.parentproject.synsicris.relation.project": "Coordinating project",
+
+  "layout.field.label.parentproject.oairecerif.fundingParent": "Funding prohramme",
+
+  "layout.field.label.parentproject.synsicris.relation.call": "Call",
+
+  "layout.field.label.parentproject.oairecerif.amount": "Grant Total",
+
+  "layout.field.label.parentproject.synsicris.amount.grantpersonnel": "Grant Personnel",
+
+  "layout.field.label.parentproject.synsicris.amount.budget": "Overall budget of the project",
+
+  "layout.field.label.parentproject.oairecerif.amount.currency": "Currency",
+
+  "layout.field.label.Project.dc.title": "Organisation and short title",
+
+  "layout.field.label.Project.oairecerif.acronym": "Acronym",
+
+  "layout.field.label.Project.oairecerif.internalid": "Funding code",
+
+  "layout.field.label.Project.oairecerif.identifier.url": "Project webpage(s)",
+
+  "layout.field.label.Project.crispj.partnerou": "Project partner",
+
+  "layout.field.label.Project.oairecerif.project.status": "Status",
+
+  "layout.field.label.Project.synsicris.title": "Title",
+
+  "layout.field.label.Project.dc.title.alternative": "Title (english)",
+
+  "layout.field.label.Project.oairecerif.project.startDate": "Start date",
+
+  "layout.field.label.Project.oairecerif.project.endDate": "End date",
+
+  "layout.field.label.Project.dc.description.abstract": "Abstract",
+
+  "layout.field.label.Project.synsicris.description.workplan": "Working plan (abstract)",
+
+  "layout.field.label.Project.dc.description": "File(s)",
+
+  "layout.field.label.Funding.oairecerif.amount": "Grant Total",
+
+  "layout.field.label.Funding.synsicris.amount.grantpersonnel": "Grant Personnel",
+
+  "layout.field.label.Funding.synsicris.amount.budget": "Overall budget",
+
+  "layout.field.label.Funding.oairecerif.amount.currency": "Currency",
+
+  "layout.field.label.Funding.oairecerif.fundingParent": "Funding",
+
+  "layout.field.label.Funding.synsicris.relation.call": "Call",
+
+  "layout.field.label.Funding.synsicris.type.formtype": "Formtype",
+
+  "layout.field.label.projectpartner.dc.title": "Organisation name",
+
+  "layout.field.label.projectpartner.oairecerif.acronym": "Acronym or short name",
+
+  "layout.field.label.projectpartner.synsicris.subject.destatis": "Discipline",
+
+  "layout.field.label.projectpartner.organization.identifier": "Organisation-ID",
+
+  "layout.field.label.projectpartner.synsicris.type.easy-import": "Executing Organisation",
+
+  "layout.field.label.projectpartner.organization.parentOrganization": "Parent organisation",
+
+  "layout.field.label.projectpartner.synsicris.address.addressStreetnamenumber": "Streetname, Building number",
+
+  "layout.field.label.projectpartner.synsicris.address.addressPostcode": "Postcode",
+
+  "layout.field.label.projectpartner.synsicris.address.addressCity": "City",
+
+  "layout.field.label.projectpartner.synsicris.address.addressPostbox": "Postbox",
+
+  "layout.field.label.projectpartner.organization.address.addressCountry": "Country",
+
+  "layout.field.label.projectpartner.oairecerif.identifier.url": "Web adress",
+
+  "layout.field.label.projectpartner.synsicris.orgunits.email": "Email",
+
+  "layout.field.label.projectpartner.synsicris.orgunits.phone": "Phone",
+
+  "layout.field.label.projectpartner.synsicris.type.legalform": "Legal form",
+
+  "layout.field.label.projectpartner.synsicris.type.orgform": "Organisational form",
+
+  "layout.field.label.projectpartner.synsicris.type.publicfunded": "Mainly public funded",
+
+  "layout.field.label.projectpartner.synsicris.type.recipient-stats": "profi (Recipient stats)",
+
+  "layout.field.label.projectpartner.synsicris.subject.nace": "Economic sector of the organisation (NACE)",
+
+  "layout.field.label.projectpartner.synsicris.subject.political": "Adressed policy level(s)",
+
+  "layout.field.label.projectpartner.organization.foundingDate": "Year of foundation",
+
+  "layout.field.label.projectpartner.synsicris.title.registercourt": "Register court",
+
+  "layout.field.label.projectpartner.synsicris.identifier.registernumber": "Registernumber",
+
+  "layout.field.label.projectpartner.dc.relation.project": "Related project",
+
+  "layout.field.label.projectpartner.synsicris.personleader": "Name",
+
+  "layout.field.label.projectpartner.synsicris.personleader.gender": "Gender",
+
+  "layout.field.label.projectpartner.synsicris.personleader.degree": "Academic degree",
+
+  "layout.field.label.projectpartner.synsicris.personleader.phone": "Phone",
+
+  "layout.field.label.projectpartner.synsicris.personleader.email": "Email",
+
+  "layout.field.label.projectpartner.synsicris.personadmin": "Name",
+
+  "layout.field.label.projectpartner.synsicris.personadmin.gender": "Gender",
+
+  "layout.field.label.projectpartner.synsicris.personadmin.degree": "Academic degree",
+
+  "layout.field.label.projectpartner.synsicris.personadmin.phone": "Phone",
+
+  "layout.field.label.projectpartner.synsicris.personadmin.email": "Email",
+
+  "layout.field.label.cooperationpartner.dc.title": "Organisation",
+
+  "layout.field.label.cooperationpartner.oairecerif.acronym": "Acronym or short name",
+
+  "layout.field.label.cooperationpartner.synsicris.subject.destatis": "Discipline",
+
+  "layout.field.label.cooperationpartner.organization.identifier": "Organisation-ID",
+
+  "layout.field.label.cooperationpartner.synsicris.type.easy-import": "Executing Organisation",
+
+  "layout.field.label.cooperationpartner.organization.parentOrganization": "Parent organisation",
+
+  "layout.field.label.cooperationpartner.synsicris.address.addressStreetnamenumber": "Streetname, Building number",
+
+  "layout.field.label.cooperationpartner.synsicris.address.addressPostcode": "Postcode",
+
+  "layout.field.label.cooperationpartner.synsicris.address.addressCity": "City",
+
+  "layout.field.label.cooperationpartner.synsicris.address.addressPostbox": "Postbox",
+
+  "layout.field.label.cooperationpartner.organization.address.addressCountry": "Country",
+
+  "layout.field.label.cooperationpartner.oairecerif.identifier.url": "Web adress",
+
+  "layout.field.label.cooperationpartner.synsicris.orgunits.email": "Email",
+
+  "layout.field.label.cooperationpartner.synsicris.orgunits.phone": "Phone",
+
+  "layout.field.label.cooperationpartner.synsicris.type.legalform": "Legal form",
+
+  "layout.field.label.cooperationpartner.synsicris.type.orgform": "Organisational form",
+
+  "layout.field.label.cooperationpartner.synsicris.type.publicfunded": "The organisation is mainly financed by public funding.",
+
+  "layout.field.label.cooperationpartner.synsicris.type.recipient-stats": "profi (Recipient stats)",
+
+  "layout.field.label.cooperationpartner.synsicris.subject.nace": "Economic sector of the organisation (NACE)",
+
+  "layout.field.label.cooperationpartner.synsicris.subject.political": "Adressed policy level(s)",
+
+  "layout.field.label.cooperationpartner.organization.foundingDate": "Year of foundation",
+
+  "layout.field.label.cooperationpartner.synsicris.title.registercourt": "Register court",
+
+  "layout.field.label.cooperationpartner.synsicris.identifier.registernumber": "Registernumber",
+
+  "layout.field.label.cooperationpartner.dc.relation.project": "Related project",
+
+  "layout.field.label.cooperationpartner.synsicris.personleader.gender": "Gender",
+
+  "layout.field.label.cooperationpartner.synsicris.personleader.degree": "Academic degree",
+
+  "layout.field.label.cooperationpartner.synsicris.personleader": "Name",
+
+  "layout.field.label.cooperationpartner.synsicris.personleader.phone": "Phone",
+
+  "layout.field.label.cooperationpartner.synsicris.personleader.email": "Email",
+
+  "layout.field.label.cooperationpartner.synsicris.personadmin.gender": "Gender",
+
+  "layout.field.label.cooperationpartner.synsicris.personadmin.degree": "Academic degree",
+
+  "layout.field.label.cooperationpartner.synsicris.personadmin": "Name",
+
+  "layout.field.label.cooperationpartner.synsicris.personadmin.phone": "Phone",
+
+  "layout.field.label.cooperationpartner.synsicris.personadmin.email": "Email",
+
+  "layout.field.label.subcontractor.dc.title": "Organisation",
+
+  "layout.field.label.subcontractor.oairecerif.acronym": "Acronym or short name",
+
+  "layout.field.label.subcontractor.synsicris.address.addressStreetnamenumber": "Streetname, Building number",
+
+  "layout.field.label.subcontractor.synsicris.address.addressPostcode": "Postcode",
+
+  "layout.field.label.subcontractor.synsicris.address.addressCity": "City",
+
+  "layout.field.label.subcontractor.synsicris.address.addressPostbox": "Postbox",
+
+  "layout.field.label.subcontractor.organization.address.addressCountry": "Country",
+
+  "layout.field.label.subcontractor.oairecerif.identifier.url": "Web adress",
+
+  "layout.field.label.subcontractor.synsicris.orgunits.email": "Email",
+
+  "layout.field.label.subcontractor.synsicris.orgunits.phone": "Phone",
+
+  "layout.field.label.subcontractor.organization.identifier": "Organisation-ID",
+
+  "layout.field.label.subcontractor.synsicris.type.orgform": "Organisational form",
+
+  "layout.field.label.subcontractor.synsicris.relation.targetgroup": "Related stakeholder group(s)",
+
+  "layout.field.label.subcontractor.synsicris.type": "Societal area",
+
+  "layout.field.label.subcontractor.synsicris.subject.nace": "Economic sector of the organisation (NACE)",
+
+  "layout.field.label.subcontractor.synsicris.subject.political": "Adressed policy level(s)",
+
+  "layout.field.label.subcontractor.synsicris.subject.destatis": "Discipline",
+
+  "layout.field.label.subcontractor.synsicris.cooperation.startDate": "Start date",
+
+  "layout.field.label.subcontractor.synsicris.cooperation.endDate": "End date",
+
+  "layout.field.label.subcontractor.synsicris.description.contribution": "Description of the cooperation",
+
+  "layout.field.label.subcontractor.dc.relation.project": "Related Subproject",
+
+  "layout.field.label.targetgroup.dc.title": "Title",
+
+  "layout.field.label.targetgroup.synsicris.description.targetgroup": "Relevance of stakeholder group",
+
+  "layout.field.label.targetgroup.dc.type": "Societal area",
+
+  "layout.field.label.targetgroup.synsicris.subject.nace": "Economic sector of the organisation (NACE)",
+
+  "layout.field.label.targetgroup.synsicris.subject.political": "Adressed policy level(s)",
+
+  "layout.field.label.targetgroup.synsicris.subject.urban-rural": "Location",
+
+  "layout.field.label.targetgroup.synsicris.subject.enterprise-size": "Company size",
+
+  "layout.field.label.ethic.dc.title": "Key message",
+
+  "layout.field.label.ethic.dc.type": "Aspects",
+
+  "layout.field.label.ethic.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.gender.dc.title": "Key message",
+
+  "layout.field.label.gender.synsicris.type.researchquestion": "1. Gender reference in the problem definition",
+
+  "layout.field.label.gender.synsicris.description.researchquestion": "Explanation",
+
+  "layout.field.label.gender.synsicris.type.stateofart": "2. Gender reference in the state of research",
+
+  "layout.field.label.gender.synsicris.description.stateofart": "Explanation",
+
+  "layout.field.label.gender.synsicris.type.projectdesign": "3. Consideration of gender aspects in the project design",
+
+  "layout.field.label.gender.synsicris.description.projectdesign": "Explanation",
+
+  "layout.field.label.gender.synsicris.type.application": "4. Consideration of gender-specific differences with regard to the application and impact of the project results",
+
+  "layout.field.label.gender.synsicris.description.application": "Explanation",
+
+  "layout.field.label.gender.synsicris.type.project": "5. Implementation of direct interventions to promote gender equality among employees in the project",
+
+  "layout.field.label.gender.synsicris.description.project": "Explanation",
+
+  "layout.field.label.gender.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.condition.dc.title": "Title",
+
+  "layout.field.label.condition.dc.type": "Type of condition",
+
+  "layout.field.label.condition.synsicris.type.influence": "Influence on the impact of the project",
+
+  "layout.field.label.condition.synsicris.date": "Start time of impact",
+
+  "layout.field.label.condition.dc.description": "Description",
+
+  "layout.field.label.stateofart.dc.title": "Title",
+
+  "layout.field.label.stateofart.dc.description": "Description",
+
+  "layout.field.label.stateofart.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.proj_objective.dc.title": "Title",
+
+  "layout.field.label.proj_objective.dc.description": "Description",
+
+  "layout.field.label.proj_objective.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.ia_objective.dc.title": "Title",
+
+  "layout.field.label.ia_objective.dc.description": "Description",
+
+  "layout.field.label.workpackage.dc.title": "Title",
+
+  "layout.field.label.workpackage.dc.description": "Description",
+
+  "layout.field.label.workpackage.synsicris.description.requirements": "Requirements for the fulfilment of the work package",
+
+  "layout.field.label.workpackage.synsicris.description.changes": "Explanation of the change in the course of the project",
+
+  "layout.field.label.workpackage.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.task.dc.title": "Title",
+
+  "layout.field.label.task.dc.description": "Description",
+
+  "layout.field.label.task.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.process_event.dc.title": "Title",
+
+  "layout.field.label.process_event.synsicris.type.purpose": "Aims of the cooperation/participation/exchange process",
+
+  "layout.field.label.process_event.synsicris.relation.partner": "Project partners, subcontractors and cooperation partners involved",
+
+  "layout.field.label.process_event.synsicris.relation.targetgroup": "Stakeholder group(s) involved",
+
+  "layout.field.label.process_event.dc.description": "Description",
+
+  "layout.field.label.process_event.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.process_event.synsicris.type.process-event-frequency": "Frequency",
+
+  "layout.field.label.process_event.synsicris.type.process-event-date": "Data on the meeting/event",
+
+  "layout.field.label.process_event": "Files",
+
+  "layout.field.label.Event.dc.title": "Title",
+
+  "layout.field.label.Event.synsicris.type.project-contribution": "Participation of the project",
+
+  "layout.field.label.Event.dc.type": "Format",
+
+  "layout.field.label.Event.synsicris.type.purpose": "Aims of the event",
+
+  "layout.field.label.Event.dc.description": "Other aims",
+
+  "layout.field.label.Event.synsicris.relation.partner": "Project partners, subcontractors and cooperation partners involved",
+
+  "layout.field.label.Event.synsicris.relation.targetgroup": "Stakeholder group(s) involved",
+
+  "layout.field.label.Event.oairecerif.event.startDate": "Start date",
+
+  "layout.field.label.Event.oairecerif.event.endDate": "End date",
+
+  "layout.field.label.Event.synsicris.duration": "Duration (hours)",
+
+  "layout.field.label.Event.synsicris.participantnumber": "Number of participants",
+
+  "layout.field.label.Event.oairecerif.event.place": "City",
+
+  "layout.field.label.Event.oairecerif.event.country": "Country",
+
+  "layout.field.label.Event": "Files",
+
+  "layout.field.label.plan_publication.dc.title": "Title",
+
+  "layout.field.label.plan_publication.dc.description": "Description",
+
+  "layout.field.label.plan_publication.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.Publication.dc.contributor.author": "Author(s)",
+
+  "layout.field.label.Publication.dc.identifier": "Identifier",
+
+  "layout.field.label.Publication.dc.type": "Type",
+
+  "layout.field.label.Publication.dc.date.issued": "Date issued",
+
+  "layout.field.label.Publication.dc.publisher": "Publisher",
+
+  "layout.field.label.Publication.dc.relation.publication": "In book",
+
+  "layout.field.label.Publication.dc.relation.isbn": "ISBN",
+
+  "layout.field.label.Publication.dc.relation.doi": "DOI",
+
+  "layout.field.label.Publication.dc.relation.ispartof": "In series",
+
+  "layout.field.label.Publication.dc.relation.issn": "ISSN",
+
+  "layout.field.label.Publication.oaire.citation.volume": "Volume",
+
+  "layout.field.label.Publication.oaire.citation.issue": "Issue",
+
+  "layout.field.label.Publication.oaire.citation.startPage": "Start page",
+
+  "layout.field.label.Publication.oaire.citation.endPage": "End page",
+
+  "layout.field.label.Publication.dc.identifier.url": "Publisher link",
+
+  "layout.field.label.Publication.dc.language.iso": "Language",
+
+  "layout.field.label.Publication.dc.subject": "Keywords",
+
+  "layout.field.label.Publication.dc.description.abstract": "Abstract",
+
+  "layout.field.label.Publication.dc.contributor.supervisor": "Supervisor",
+
+  "layout.field.label.Publication.dc.audience": "Target audience",
+
+  "layout.field.label.Publication.dc.relation.product": "Research data",
+
+  "layout.field.label.Publication.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.Publication": "Files",
+
+  "layout.field.label.physical_object.dc.title": "Title",
+
+  "layout.field.label.physical_object.dc.type": "Type of material/object",
+
+  "layout.field.label.physical_object.dc.description": "Description",
+
+  "layout.field.label.physical_object.synsicris.type.functions": "Uses",
+
+  "layout.field.label.physical_object.synsicris.description": "Contact information for enquiries",
+
+  "layout.field.label.physical_object.synsicris.type.access": "open to public",
+
+  "layout.field.label.physical_object.oairecerif.identifier.url": "Website",
+
+  "layout.field.label.physical_object.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.Product.dc.title": "Title",
+
+  "layout.field.label.Product.dc.type": "Type",
+
+  "layout.field.label.Product.dc.contributor.author": "Author(s)",
+
+  "layout.field.label.Product.dc.identifier": "Identifier",
+
+  "layout.field.label.Product.dc.publisher": "Publisher",
+
+  "layout.field.label.Product.dc.date.issued": "Date of issue",
+
+  "layout.field.label.Product.dc.description.abstract": "Abstract",
+
+  "layout.field.label.Product.dc.language.iso": "Language",
+
+  "layout.field.label.Product.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.Product.dc.subject": "Key words",
+
+  "layout.field.label.research_result.dc.title": "Title",
+
+  "layout.field.label.research_result.dc.description": "Description",
+
+  "layout.field.label.unexpected_result.dc.title": "Title",
+
+  "layout.field.label.unexpected_result.dc.description": "Description",
+
+  "layout.field.label.unexpected_result.dc.type": "Publication planned / done",
+
+  "layout.field.label.unexpected_result.synsicris.description.relevance": "Description of the reservations",
+
+  "layout.field.label.unexpected_result.synsicris.relation.publication": "Title",
+
+  "layout.field.label.Patent.dc.title": "Description",
+
+  "layout.field.label.Patent.dc.type": "Type of property right",
+
+  "layout.field.label.Patent.synsicris.type.patentuse": "Form of the intended use",
+
+  "layout.field.label.Patent.synsicris.description.patentuse": "Explanation",
+
+  "layout.field.label.Patent.synsicris.identifier.applicationnumber": "Application number",
+
+  "layout.field.label.Patent.synsicris.date.filled": "Application date",
+
+  "layout.field.label.Patent.dcterms.rightsHolder": "Inventor(s)",
+
+  "layout.field.label.Patent.dc.identifier.patentno": "Patent number",
+
+  "layout.field.label.Patent.dc.date.issued": "Approval date",
+
+  "layout.field.label.Patent.dc.contributor.author": "Rights holder(s)",
+
+  "layout.field.label.Patent.synsicris.subject.ipc": "IPC class",
+
+  "layout.field.label.Patent.dcterms.dateAccepted": "Approval date",
+
+  "layout.field.label.Patent.dc.description.abstract": "Abstract",
+
+  "layout.field.label.Patent.dc.language.iso": "Language",
+
+  "layout.field.label.Patent.oairecerif.identifier.url": "Direct link to document",
+
+  "layout.field.label.Patent.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.innovationpotential.dc.title": "Title",
+
+  "layout.field.label.innovationpotential.dc.type": "Type",
+
+  "layout.field.label.innovationpotential.dc.description": "Description",
+
+  "layout.field.label.innovationpotential.synsicris.description.applicability1": "Degree of novelty",
+
+  "layout.field.label.innovationpotential.synsicris.description.applicability2": "Efficiency",
+
+  "layout.field.label.innovationpotential.synsicris.description.applicability3": "Practicability and connectivity",
+
+  "layout.field.label.innovationpotential.synsicris.description.applicability4": "Necessary preconditions for application",
+
+  "layout.field.label.innovationpotential.synsicris.description.applicability5": "Prospects for establishment / dissemination / transfer",
+
+  "layout.field.label.innovationpotential.synsicris.type.regional-status": "Reference points",
+
+  "layout.field.label.innovationpotential.synsicris.description.regional": "Explanations",
+
+  "layout.field.label.innovationpotential.synsicris.description.rl-start": "Development status at the beginning of the project (start value)",
+
+  "layout.field.label.innovationpotential.synsicris.description.rl-end": "Development status at the end of the project (target value)",
+
+  "layout.field.label.innovationpotential.synsicris.type.rl-status": "Start value/target value",
+
+  "layout.field.label.innovationpotential.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.innovationidea.dc.title": "Title",
+
+  "layout.field.label.innovationidea.dc.description": "Description",
+
+  "layout.field.label.innovationidea.dc.type": "Type of idea",
+
+  "layout.field.label.innovationidea.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.step.dc.title": "Title",
+
+  "layout.field.label.step.dc.description": "Description",
+
+  "layout.field.label.step.synsicris.relation.partner": "Project partners, subcontractors and cooperation partners involved",
+
+  "layout.field.label.step.synsicris.relation.targetgroup": "Stakeholder group(s) involved",
+
+  "layout.field.label.step.dc.type": "Type",
+
+  "layout.field.label.step.synsicris.date": "Time horizon for realisation",
+
+  "layout.field.label.step.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.application.dc.type": "Type of application",
+
+  "layout.field.label.application.synsicris.relation.innovationpotential": "Related solution / change / innovation or patent",
+
+  "layout.field.label.application.synsicris.type.innovation": "Type and using stakeholder group(s) of the solution, change or innovation",
+
+  "layout.field.label.application.synsicris.description.innovation": "Description",
+
+  "layout.field.label.application.synsicris.date.referenceyear": "Reference year",
+
+  "layout.field.label.application.synsicris.type.status": "Status of the information compared to the project application",
+
+  "layout.field.label.application": "Files",
+
+  "layout.field.label.spinoff.synsicris.description": "Description",
+
+  "layout.field.label.spinoff.synsicris.date.reference-year-performance": "Reference year",
+
+  "layout.field.label.spinoff.synsicris.date.reference-year-funding": "Year of funding",
+
+  "layout.field.label.spinoff.dc.description": "Description",
+
+  "layout.field.label.spinoff.synsicris.orgunits.registercourt": "Register court",
+
+  "layout.field.label.spinoff.synsicris.orgunits.registertype": "Register type",
+
+  "layout.field.label.spinoff.synsicris.identifier.registernumber": "Registernumber",
+
+  "layout.field.label.spinoff.organisation.foundingDate": "Registration date",
+
+  "layout.field.label.spinoff.dc.type": "Type",
+
+  "layout.field.label.spinoff.synsicris.subject.nace": "Economic sector of the organisation (NACE)",
+
+  "layout.field.label.spinoff.synsicris.address.addressStreetnamenumber": "Streetname, Building number",
+
+  "layout.field.label.spinoff.synsicris.address.addressPostcode": "Postcode",
+
+  "layout.field.label.spinoff.synsicris.address.addressCity": "City",
+
+  "layout.field.label.spinoff.synsicris.address.addressCountry": "Country",
+
+  "layout.field.label.spinoff.oairecerif.identifier.url": "Homepage",
+
+  "layout.field.label.spinoff.synsicris.relation.partner": "Spin-off organisation(s)",
+
+  "layout.field.label.spinoff": "Files",
+
+  "layout.field.label.award.dc.title": "Title",
+
+  "layout.field.label.award.dc.description": "Description",
+
+  "layout.field.label.award.dc.date.issued": "Date of the award",
+
+  "layout.field.label.award.oairecerif.amount": "Prize money",
+
+  "layout.field.label.award.oairecerif.amount.currency": "Currency",
+
+  "layout.field.label.award.synsicris.relation.person": "Awarded person(s)",
+
+  "layout.field.label.award.synsicris.relation.partner": "Awarded organisation(s)",
+
+  "layout.field.label.award.synsicris.contributor.donor": "Initiator(s)",
+
+  "layout.field.label.award.dc.description.targetgroup": "Actor group of the initiator",
+
+  "layout.field.label.award": "Files",
+
+  "layout.field.label.exp_societalimpact.dc.title": "Title",
+
+  "layout.field.label.exp_societalimpact.dc.description": "Description",
+
+  "layout.field.label.exp_societalimpact.dc.type": "Expected impact",
+
+  "layout.field.label.exp_societalimpact.synsicris.type-n": "Possible expected side effects",
+
+  "layout.field.label.pot_societalimpact.dc.title": "Title",
+
+  "layout.field.label.pot_societalimpact.dc.type": "Type",
+
+  "layout.field.label.pot_societalimpact.synsicris.type.direction": "Direction of impact",
+
+  "layout.field.label.pot_societalimpact.synsicris.type.ecological": "Specific ecological area",
+
+  "layout.field.label.pot_societalimpact.synsicris.relation.targetgroup": "Stakeholder group(s) affected by the impact",
+
+  "layout.field.label.pot_societalimpact.dc.description": "Description",
+
+  "layout.field.label.contribution_fundingprogramme.dc.title": "Title",
+
+  "layout.field.label.contribution_fundingprogramme.synsicris.relation.fundingobjective": "Objective of the funding programme",
+
+  "layout.field.label.contribution_fundingprogramme.dc.description": "Description",
+
+  "layout.field.label.other.dc.title": "Title",
+
+  "layout.field.label.other.dc.description": "Description",
+
+  "layout.field.label.Person.crisrp.site.title": "Title of webpage",
+
+  "layout.field.label.ethic.synsicris.description.aspect": "Actions",
+
+  "layout.field.label.process_event.synsicris.duration": "Average duration (h)",
+
+  "layout.field.label.process_event.synsicris.type.frequency": "Frequency",
+
+  "layout.field.label.process_event.synsicris.type.period": "Period",
+
+  "layout.field.label.process_event.synsicris.title.event": "Title",
+
+  "layout.field.label.process_event.oairecerif.event.startDate": "Start",
+
+  "layout.field.label.process_event.oairecerif.event.endDate": "End",
+
+  "layout.field.label.process_event.synsicris.participantnumber": "Number of participants",
+
+  "layout.field.label.process_event.oairecerif.event.place": "City",
+
+  "layout.field.label.process_event.oairecerif.event.country": "Country",
+
+  "layout.field.label.Publication.oairecerif.author.affiliation": "Organisation",
+
+  "layout.field.label.Product.oairecerif.author.affiliation": "Organisation",
+
+  "layout.field.label.innovationpotential.synsicris.relation.targetgroup": "Stakeholder group(s)",
+
+  "layout.field.label.innovationpotential.synsicris.coverage.regional": "Region",
+
+  "layout.field.label.innovationpotential.synsicris.type.srl-trl": "TRL/SRL",
+
+  "layout.field.label.innovationpotential.synsicris.level.srl-trl": "Readiness Level",
+
+  "layout.field.label.spinoff.synsicris.amount.annual-sales": "Annual turnover",
+
+  "layout.field.label.spinoff.synsicris.amount.currency-annual-sales": "Currency",
+
+  "layout.field.label.spinoff.synsicris.title.funding": "Funding programme",
+
+  "layout.field.label.spinoff.synsicris.amount.funding": "Funding amount",
+
+  "layout.field.label.spinoff.synsicris.amount.currency-funding": "Currency",
+
+  "layout.field.label.spinoff.synsicris.description.nonfinancalsupport": "Non-financial support",
+
+  "layout.field.label.exp_societalimpact.synsicris.type.transform": "Transformation area addressed",
+
+  "layout.field.label.exp_societalimpact.synsicris.type.positive-direction": "Impact intensity",
+
+  "layout.field.label.exp_societalimpact.synsicris.description.pos": "Extent of expected impact",
+
+  "layout.field.label.exp_societalimpact.synsicris.type.transform-n": "Addressed transformation area",
+
+  "layout.field.label.exp_societalimpact.synsicris.type.negative-direction": "Effect intensity - negative",
+
+  "layout.field.label.exp_societalimpact.synsicris.description.neg": "Extent of the negative side effect",
+
+  "layout.field.label.application.synsicris.type.baseline": "Base year",
+
+  "layout.field.label.application.synsicris.coverage.regional": "Region of application",
+
+  "layout.field.label.application.synsicris.type.quantifier": "Unit",
+
+  "layout.field.label.application.synsicris.type.quantifier-own": "Unit",
+
+  "layout.field.label.application.synsicris.quantity": "Quantity / number",
+
+  "layout.field.label.application.synsicris.description.description": "Notes"
 
 }
