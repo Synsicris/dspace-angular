@@ -60,6 +60,15 @@ export const isWorkingPlanLoadedSelector = createSelector(_getWorkingPlanState,
 );
 
 /**
+ * Returns true if the user a operation is initializing.
+ * @function isWorkingPlanProcessingSelector
+ * @return {boolean}
+ */
+export const isWorkingPlanInitializingSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.initializing
+);
+
+/**
  * Returns true if the user a operation is processing.
  * @function isWorkingPlanProcessingSelector
  * @return {boolean}

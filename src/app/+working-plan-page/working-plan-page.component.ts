@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Community } from '../core/shared/community.model';
@@ -63,6 +63,7 @@ export class WorkingPlanPageComponent implements OnInit {
           map((data) => data.workingPlan as RemoteData<Item>),
           redirectOn4xx(this.router, this.authService),
           mergeMap((itemRD: RemoteData<Item>) => this.workingPlanStateService.isWorkingPlanLoaded().pipe(
+            take(1),
             map((loaded) => [itemRD, loaded])
           )),
           tap(([itemRD, loaded]: [RemoteData<Item>, boolean]) => {

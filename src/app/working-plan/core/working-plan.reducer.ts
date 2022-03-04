@@ -3,6 +3,8 @@ import { findIndex, remove } from 'lodash';
 import { Workpackage } from './models/workpackage-step.model';
 import {
   AddWorkpackageStepSuccessAction,
+  InitCompareAction,
+  InitCompareSuccessAction,
   InitWorkingplanSuccessAction,
   MoveWorkpackageAction,
   MoveWorkpackageStepAction,
@@ -41,15 +43,18 @@ export interface WorkpackageEntries {
  */
 export interface WorkingPlanState {
   workingplanId: string;
+  compareWorkingplanId?: string;
   workpackages: WorkpackageEntries;
   workpackageToRemove: string;
   workpackageToUpdate: string;
   loaded: boolean;
+  initializing: boolean;
   processing: boolean;
   lastAddedNodes: string[];
   moving: boolean;
   chartDateView: ChartDateViewType;
   sortOption: string;
+  compareMode: boolean;
 }
 
 const workpackageInitialState: WorkingPlanState = {
@@ -58,11 +63,13 @@ const workpackageInitialState: WorkingPlanState = {
   workpackageToRemove: '',
   workpackageToUpdate: '',
   loaded: false,
+  initializing: true,
   processing: false,
   lastAddedNodes: [],
   moving: false,
   chartDateView: ChartDateViewType.month,
-  sortOption: ''
+  sortOption: '',
+  compareMode: false
 };
 
 /**
@@ -146,6 +153,14 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
         workpackageToRemove: '',
         processing: false
       });
+    }
+
+    case WorkpackageActionTypes.INIT_COMPARE: {
+      return initCompare(state, action as InitCompareAction);
+    }
+
+    case WorkpackageActionTypes.INIT_COMPARE_SUCCESS: {
+      return initWorkpackages(state, action as InitCompareSuccessAction);
     }
 
     case WorkpackageActionTypes.INIT_WORKINGPLAN_SUCCESS: {
@@ -271,7 +286,7 @@ function addWorkpackageStep(state: WorkingPlanState, action: AddWorkpackageStepS
  * @return WorkingPlanState
  *    the new state.
  */
-function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSuccessAction): WorkingPlanState {
+function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSuccessAction|InitCompareSuccessAction): WorkingPlanState {
   const workpackages = {};
   action.payload.workpackages.forEach((workpackage: Workpackage) => {
     workpackages[workpackage.id] = workpackage;
@@ -279,9 +294,10 @@ function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSucces
 
   return Object.assign({}, state, {
     workpackages: workpackages,
+    initializing: false,
     processing: false,
     loaded: true,
-    sortOption: action.payload.sortOption
+    sortOption: (action instanceof InitWorkingplanSuccessAction) ? action.payload.sortOption : state.sortOption
   });
 }
 
@@ -508,5 +524,24 @@ function revertWorkpackageStepOrder(state: WorkingPlanState, action: SaveWorkpac
       [action.payload.workpackageId]: newWorpackage
     }),
     moving: false
+  });
+}
+
+/**
+ * Init state for comparing.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitCompareAction
+ * @return WorkingPlanState
+ *    the new state.
+ */
+function initCompare(state: WorkingPlanState, action: InitCompareAction) {
+  return Object.assign({}, state, {
+    compareWorkingplanId: action.payload.compareWorkingplanId,
+    compareMode: true,
+    initializing: true,
+    loaded: false
   });
 }

@@ -66,6 +66,7 @@ import { CollectionDataService } from '../../core/data/collection-data.service';
 import { RequestService } from '../../core/data/request.service';
 import { ProjectItemService } from '../../core/project/project-item.service';
 import { ProjectDataService } from '../../core/project/project-data.service';
+import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 
 export const moment = extendMoment(Moment);
 
@@ -98,6 +99,7 @@ export class WorkingPlanService {
     private itemService: ItemDataService,
     private projectItemService: ProjectItemService,
     private projectService: ProjectDataService,
+    private projectVersionService: ProjectVersionService,
     private linkService: LinkService,
     private operationsBuilder: JsonPatchOperationsBuilder,
     private requestService: RequestService,
@@ -322,6 +324,31 @@ export class WorkingPlanService {
     };
   }
 
+  public initWorkpackageFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, steps?): WorkpackageStep {
+
+    const dates = this.initWorkpackageDatesFromItem(compareObj.item);
+    const compareDates = compareObj.versionItem ? this.initWorkpackageDatesFromItem(compareObj.versionItem) : null;
+    const responsible = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
+    const status = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
+    const type = compareObj.item.firstMetadataValue('dspace.entity.type');
+
+    return {
+      id: compareObj.item.id,
+      compareId: compareObj.versionItem?.id,
+      parentId: parentId,
+      name: compareObj.item.name,
+      type: type,
+      responsible: responsible,
+      progress: 0,
+      progressDates: [],
+      dates: dates,
+      compareDates: compareDates,
+      compareStatus: compareObj.status,
+      status: status,
+      expanded: false
+    };
+  }
+
   public initWorkpackageStepFromItem(item: Item, workspaceItemId: string, parentId: string): WorkpackageStep {
 
     const dates = this.initWorkpackageDatesFromItem(item);
@@ -342,6 +369,51 @@ export class WorkingPlanService {
       status: status,
       expanded: false
     };
+  }
+
+  initCompareWorkingPlan(compareList: ComparedVersionItem[]): Observable<Workpackage[]> {
+    return observableFrom(compareList).pipe(
+      concatMap((compareItem: ComparedVersionItem) => this.initCompareWorkpackageStepsFromParentItem(
+        compareItem.item.id,
+        compareItem.item,
+        compareItem.versionItem?.id).pipe(
+        map((steps: WorkpackageStep[]) => this.initWorkpackageFromCompareItem(
+          compareItem,
+          null,
+          steps
+        ))
+      )),
+      reduce((acc: any, value: any) => [...acc, value], [])
+    );
+  }
+
+  initCompareWorkpackageStepsFromParentItem(targetWorkpackageId: string, targetItem: Item, versionedWorkpackageId: string): Observable<WorkpackageStep[]> {
+    const relatedTaskMetadata = Metadata.all(targetItem.metadata, environment.workingPlan.workingPlanStepRelationMetadata);
+    if (isEmpty(relatedTaskMetadata) || isEmpty(versionedWorkpackageId)) {
+      return observableOf([]);
+    } else {
+      return this.projectVersionService.compareItemChildrenByMetadata(
+        targetWorkpackageId,
+        versionedWorkpackageId,
+        environment.workingPlan.workingPlanStepRelationMetadata).pipe(
+          mergeMap((compareList: ComparedVersionItem[]) => {
+            console.log('compareList children', compareList);
+            return observableFrom(compareList).pipe(
+              concatMap((compareItem: ComparedVersionItem) => observableOf(this.initWorkpackageFromCompareItem(
+                compareItem,
+                targetWorkpackageId)
+              )),
+              reduce((acc: any, value: any) => {
+                if (isNotNull(value)) {
+                  return [...acc, value];
+                } else {
+                  return acc;
+                }
+              }, [])
+            );
+          })
+      );
+    }
   }
 
   initWorkingPlan(workpackageListItem: WorkpackageSearchItem[]): Observable<Workpackage[]> {

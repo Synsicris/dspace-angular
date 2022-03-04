@@ -909,7 +909,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   isProcessingWorkpackage(): Observable<boolean> {
-    return this.workingPlanService.isProcessingWorkpackage();
+    return this.workingPlanStateService.isInitializing();
   }
 
   /**

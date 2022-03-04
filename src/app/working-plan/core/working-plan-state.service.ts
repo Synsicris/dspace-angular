@@ -9,6 +9,7 @@ import {
   ClearWorkingPlanAction,
   GenerateWorkpackageAction,
   GenerateWorkpackageStepAction,
+  InitCompareAction,
   MoveWorkpackageAction,
   MoveWorkpackageStepAction,
   RemoveWorkpackageAction,
@@ -24,6 +25,7 @@ import { Observable } from 'rxjs';
 import {
   chartDateViewSelector,
   getLastAddedNodesListSelector,
+  isWorkingPlanInitializingSelector,
   isWorkingPlanLoadedSelector,
   isWorkingPlanMovingSelector,
   isWorkingPlanProcessingSelector,
@@ -86,6 +88,10 @@ export class WorkingPlanStateService {
     metadata: MetadataMap
   ): void {
     this.store.dispatch(new GenerateWorkpackageStepAction(projectId, parentId, workpackageStepType, metadata));
+  }
+
+  public dispatchInitCompare(compareWorkingplanId: string) {
+    this.store.dispatch(new InitCompareAction(compareWorkingplanId));
   }
 
   public dispatchMoveWorkpackage(workpackageId: string, oldIndex: number, newIndex: number): void {
@@ -155,6 +161,10 @@ export class WorkingPlanStateService {
 
   public getLastAddedNodesList(): Observable<string[]> {
     return this.store.pipe(select(getLastAddedNodesListSelector));
+  }
+
+  public isInitializing(): Observable<boolean> {
+    return this.store.pipe(select(isWorkingPlanInitializingSelector));
   }
 
   public isProcessing(): Observable<boolean> {

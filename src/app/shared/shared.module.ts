@@ -8,14 +8,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { NouisliderModule } from 'ng2-nouislider';
 import {
-    NgbCollapseModule,
-    NgbDatepickerModule,
-    NgbDropdownModule,
-    NgbNavModule,
-    NgbPaginationModule,
-    NgbTimepickerModule,
-    NgbTooltipModule,
-    NgbTypeaheadModule
+  NgbCollapseModule,
+  NgbDatepickerModule,
+  NgbDropdownModule,
+  NgbNavModule,
+  NgbPaginationModule,
+  NgbTimepickerModule,
+  NgbTooltipModule,
+  NgbTypeaheadModule
 } from '@ng-bootstrap/ng-bootstrap';
 import { MissingTranslationHandler, TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -238,6 +238,7 @@ import { InvitationModalComponent } from './invitation-modal/invitation-modal.co
 import { EditItemGrantsModalComponent } from './edit-item-grants-modal/edit-item-grants-modal.component';
 import { ItemCreateComponent } from './item/item-create/item-create.component';
 import { AuthorityDropdownComponent } from './authority-dropdown/authority-dropdown.component';
+import { ItemVersionListComponent } from './item-version-list/item-version-list.component';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -601,7 +602,8 @@ const DIRECTIVES = [
     ItemVersionsDeleteModalComponent,
     ItemExportAlertComponent,
     MetricPlumxComponent,
-    InvitationModalComponent
+    InvitationModalComponent,
+    ItemVersionListComponent
   ],
   providers: [
     ...PROVIDERS
@@ -612,7 +614,8 @@ const DIRECTIVES = [
     ...COMPONENTS,
     ...SHARED_ITEM_PAGE_COMPONENTS,
     ...DIRECTIVES,
-    TranslateModule
+    TranslateModule,
+    ItemVersionListComponent
   ]
 })
 
