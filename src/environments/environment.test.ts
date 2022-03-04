@@ -2,6 +2,7 @@
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { AppConfig } from '../config/app-config.interface';
+import { DisplayItemMetadataType } from '../config/display-search-result-config.interface';
 
 export const environment: AppConfig = {
   production: false,
@@ -322,5 +323,135 @@ export const environment: AppConfig = {
     siteId: '',
     scriptUrl: 'http://s7.addthis.com/js/300/addthis_widget.js#pubid=',
     socialNetworksEnabled: false
+  },
+  impactPathway: {
+    impactPathwaysFormSection: 'impact_pathway_form',
+    impactPathwayStepsFormSection: 'impact_pathway_step_form',
+    impactPathwayTasksFormSection: 'impact_pathway_task_form',
+    impactPathwaysEditFormSection: 'impact_pathway-edit_form',
+    impactPathwaysLinksEditFormSection: 'impact_pathway-edit_link_form',
+    impactPathwaysEditMode: 'IMPACTPATHWAY',
+    impactPathwaysLinkEditMode: 'CUSTOM',
+    impactPathwayEntity: 'impactpathway',
+    impactPathwayStepEntity: 'impactpathwaystep',
+    impactPathwayParentRelationMetadata: 'impactpathway.relation.parent',
+    impactPathwayStepRelationMetadata: 'impactpathway.relation.step',
+    impactPathwayStepTypeMetadata: 'impactpathway.step.type',
+    impactPathwayTaskRelationMetadata: 'impactpathway.relation.task',
+    impactpathwayOutcomeLinkMetadata: 'impactpathway.outcome.link',
+    impactpathwayBidirectionalLinkMetadata: 'impactpathway.bidirectional.link',
+    impactPathwayStepTypeAuthority: 'impactpathway_step_type',
+    entityToCollectionMapAuthority: 'impactpathway_entity_to_collection_map',
+    entityToCollectionMapAuthorityMetadata: 'impactpathway.entity.map',
+    projObjectiveEntity: 'proj_objective',
+    iaObjectiveEntity: 'ia_objective',
+    impactPathwaysSearchConfigName: 'allImpactPathways',
+    contributionFundingprogrammeEntity: 'contribution_fundingprogramme'
+  },
+  workingPlan: {
+    workingPlanRelationMetadata: 'synsicris.relation.workingplan',
+    workingPlanFormName: 'working_plan_form',
+    workingPlanStepsFormName: 'working_plan_step_form',
+    workingPlanEditMode: 'WORKINGPLAN',
+    workingPlanEditFormSection: 'working_plan-edit_form',
+    workingPlanStepStatusMetadata: 'synsicris.type.status',
+    workingPlanStepResponsibleMetadata: 'synsicris.relation.partner-wp',
+    workingPlanStepResponsibleAuthority: 'PartnerWPAuthority',
+    workingPlanStepRelationMetadata: 'workingplan.relation.step',
+    workingPlanStepDateStartMetadata: 'dc.date.start',
+    workingPlanStepDateEndMetadata: 'dc.date.end',
+    workpackageEntityName: 'workpackage',
+    milestoneEntityName: 'milestone',
+    allLinkedWorkingPlanObjSearchConfigName: 'allLinkedWorkingPlanObj',
+    allUnlinkedWorkingPlanObjSearchConfigName: 'allUnlinkedWorkingPlanObj',
+    workpackageStepsSearchConfigName: 'workpackageSteps',
+    workpackageStatusTypeAuthority: 'stat_col23',
+    workpackageTypeAuthority: 'working_plan_workpackage_type',
+    workpackageStepTypeAuthority: 'working_plan_workpackage_step_type',
+    workingPlanPlaceMetadata: 'workingplan.place',
+    workingPlanLinkMetadata: 'workingplan.link.status'
+  },
+
+  projects: {
+    projectsGrantsOptionsVocabularyName: 'item_shared',
+    projectsEntityEditMode: 'CUSTOM',
+    projectVersionUniqueIdMetadata: 'synsicris.uniqueid'
+  },
+
+  exploitationPlan: {
+    exploitationPlanRelationMetadata: 'synsicris.relation.exploitationplan',
+    exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
+    exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
+    exploitationPlanPartnerMetadata: '',
+    exploitationPlanTaskFormSection: 'exploitation_plan_task_form',
+    exploitationPlanEditFormSection: 'exploitation_plan-edit_form',
+    exploitationPlanEditMode: 'EXPLOITATIONPLAN',
+  },
+
+  displayItemSearchResult: {
+    Publication: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.date.issued',
+            type: DisplayItemMetadataType.Date
+          },
+          {
+            name: 'dc.contributor.author',
+            type: DisplayItemMetadataType.Date
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.type',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+    ],
+    Event: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'oairecerif.event.startDate',
+            type: DisplayItemMetadataType.Date
+          },
+          {
+            name: 'dc.type',
+            type: DisplayItemMetadataType.Text
+          },
+          {
+            name: 'synsicris.type.project-contribution',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+    ]
   }
 };
