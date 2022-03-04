@@ -508,7 +508,8 @@ export class DefaultAppConfig implements AppConfig {
 
   projects: ProjectsConfig = {
     projectsGrantsOptionsVocabularyName: 'item_shared',
-    projectsEntityEditMode: 'CUSTOM'
+    projectsEntityEditMode: 'CUSTOM',
+    projectVersionUniqueIdMetadata: 'synsicris.uniqueid'
   };
 
   exploitationPlan = {
