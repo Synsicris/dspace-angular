@@ -1,0 +1,12 @@
+<div ngbDropdown class="d-inline-block">
+  <button class="btn btn-primary btn-sm" id="versionList" ngbDropdownToggle [disabled]="(versionList$ | async)?.length === 0">{{buttonText | translate}}</button>
+  <div ngbDropdownMenu aria-labelledby="versionList">
+    <button *ngFor="let version of (versionList$ | async); let index = index"
+            class="btn-sm"
+            ngbDropdownItem
+            (click)="onVersionSelected(version)"
+    >
+      {{'Version ' + index}}
+    </button>
+  </div>
+</div>
