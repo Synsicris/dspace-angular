@@ -1,11 +1,11 @@
 import { ItemDataService } from './../../core/data/item-data.service';
-import { Metadata } from '../../core/shared/metadata.utils';
 import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { Item } from 'src/app/core/shared/item.model';
-import { combineAll, merge, mergeAll, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { getFirstCompletedRemoteData, getRemoteDataPayload } from 'src/app/core/shared/operators';
 import { combineLatest } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'ds-compare-item',
@@ -32,7 +32,6 @@ export class CompareItemComponent implements OnInit {
     this.versioneditem$ = this.getSingleItemData(this.versioneditemId);
     this.items$ = this.getItemsData().pipe(
       tap(res => {
-        console.log(res);
         this.getMetaDataKeys(res);
       })
     );
@@ -58,7 +57,9 @@ export class CompareItemComponent implements OnInit {
    * @param items the two items being compared
    */
   getMetaDataKeys(items: Item[]) {
-    const metadatakeys = Object.assign(Object.keys(items[0].metadata), Object.keys(items[1].metadata));
+    const excludedMetadata = !!environment.projects.excludeComparisonMetadata ? environment.projects.excludeComparisonMetadata : [];
+    let metadatakeys = Object.keys(items[0].metadata).concat(Object.keys(items[1].metadata));
+    metadatakeys = metadatakeys.filter((metadata) => excludedMetadata.indexOf(metadata) === -1);
     this.metadataKeys$.next(metadatakeys);
   }
 
@@ -68,8 +69,19 @@ export class CompareItemComponent implements OnInit {
    * @param versionedItemMetadataValues versioned item metadata values
    */
   getClass(baseItemMetadataValues, versionedItemMetadataValues) {
-    console.log(baseItemMetadataValues, versionedItemMetadataValues);
-    return '';
+    if (baseItemMetadataValues.length < versionedItemMetadataValues.length) {
+      return 'table-success';
+    } else if (baseItemMetadataValues.length > versionedItemMetadataValues.length) {
+      return 'table-danger';
+    } else {
+      let cssClass = '';
+      baseItemMetadataValues.forEach((el) => {
+        if (versionedItemMetadataValues.indexOf(el) === -1) {
+          cssClass = 'table-warning';
+        }
+      });
+      return cssClass;
+    }
   }
 
 }

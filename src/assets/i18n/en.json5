@@ -1334,6 +1334,12 @@
 
   "community.sub-community-list.head": "Communities of this Community",
 
+  'compare-item.table.key': 'Metadata',
+
+  'compare-item.table.base-item': 'Base Item',
+
+  'compare-item.table.versioned-item': 'Versioned Item',
+
   "context-menu.actions": "Actions",
 
   "context-menu.actions.audit-item.btn": "Audit",

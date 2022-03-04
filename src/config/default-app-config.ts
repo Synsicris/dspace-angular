@@ -400,7 +400,7 @@ export class DefaultAppConfig implements AppConfig {
     ],
     itemPage: {
       default: {
-          orientation: 'vertical'
+        orientation: 'vertical'
       },
     },
     metadataBox: {
@@ -508,7 +508,8 @@ export class DefaultAppConfig implements AppConfig {
 
   projects: ProjectsConfig = {
     projectsGrantsOptionsVocabularyName: 'item_shared',
-    projectsEntityEditMode: 'CUSTOM'
+    projectsEntityEditMode: 'CUSTOM',
+    excludeComparisonMetadata: ['dspace.entity.type']
   };
 
   exploitationPlan = {
