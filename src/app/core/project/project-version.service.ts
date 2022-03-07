@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, from, Observable, of } from 'rxjs';
 import { concatMap, map, mergeMap, reduce, switchMap } from 'rxjs/operators';
 import { differenceWith, findIndex, unionWith } from 'lodash';
 
@@ -13,8 +13,12 @@ import { Item } from '../shared/item.model';
 import { PaginatedList } from '../data/paginated-list.model';
 import { FindListOptions } from '../data/request.models';
 import { MetadataValue } from '../shared/metadata.models';
-import { from } from 'rxjs/internal/observable/from';
 import { _hasVersionComparator, _isVersionOfComparator, _unionComparator, hasVersion } from './project-version.util';
+import { VersionDataService } from '../data/version-data.service';
+import { Version } from '../shared/version.model';
+import { VersionHistoryDataService } from '../data/version-history-data.service';
+import { isNotEmpty } from '../../shared/empty.util';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 
 export enum ComparedVersionItemStatus {
   Changed = 'changed',
@@ -35,7 +39,10 @@ export interface ComparedVersionItem {
 export class ProjectVersionService {
 
   constructor(protected itemService: ItemDataService,
-              protected relationshipService: RelationshipService) { }
+              protected relationshipService: RelationshipService,
+              protected versionService: VersionDataService,
+              protected versionHistoryService: VersionHistoryDataService,
+              ) { }
 
   /**
    * Retrieve all item version for the given item
@@ -43,7 +50,52 @@ export class ProjectVersionService {
    * @param itemId  The item for which to search the versions available
    * @param options the FindListOptions
    */
-  public getVersionsByItemId(itemId: string, options?: FindListOptions): Observable<Item[]>  {
+  public getVersionsByItemId(itemId: string, options?: PaginatedSearchOptions): Observable<Version[]>  {
+    return this.itemService.findById(itemId, true, true, followLink('version')).pipe(
+      getFirstCompletedRemoteData(),
+      switchMap((itemRD: RemoteData<Item>) => {
+        if (itemRD.hasSucceeded) {
+          return itemRD.payload.version.pipe(
+            getFirstCompletedRemoteData(),
+            switchMap((versionRD: RemoteData<Version>) => {
+              if (versionRD.hasSucceeded) {
+                return this.versionService.getHistoryIdFromVersion(versionRD.payload).pipe(
+                  switchMap((versionHistoryId: string) => {
+                    if (isNotEmpty(versionHistoryId)) {
+                      return this.versionHistoryService.getVersions(versionHistoryId, options, true, true, followLink('item')).pipe(
+                        map((listRD: RemoteData<PaginatedList<Version>>) => {
+                          return listRD.hasSucceeded ? listRD.payload.page : [];
+                        }),
+                        map((list: Version[]) => {
+                          // exclude from the returned list the version regarding the target item itself
+                          return list.filter((entry: Version) => entry.id !== versionRD.payload.id);
+                        })
+                      );
+                    } else {
+                      return  of([]);
+                    }
+                  })
+                );
+              } else {
+                return  of([]);
+              }
+            })
+          );
+        } else {
+          return  of([]);
+        }
+      })
+    );
+
+  }
+
+  /**
+   * Retrieve all item version for the given item by means the `hasVersion` relationship
+   *
+   * @param itemId  The item for which to search the versions available
+   * @param options the FindListOptions
+   */
+  public getRelationVersionsByItemId(itemId: string, options?: FindListOptions): Observable<Item[]>  {
     return this.itemService.findById(itemId, true, true, followLink('relationships')).pipe(
       getFirstCompletedRemoteData(),
       switchMap((itemRD: RemoteData<Item>) => {
@@ -59,7 +111,6 @@ export class ProjectVersionService {
         }
       })
     );
-
   }
 
   /**
