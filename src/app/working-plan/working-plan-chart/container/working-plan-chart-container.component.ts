@@ -5,12 +5,12 @@ import { MatSelectChange } from '@angular/material/select';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { ResizeEvent } from 'angular-resizable-element';
 import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
 import { findIndex } from 'lodash';
-
-import { map, take } from 'rxjs/operators';
 
 import { range } from '../../../shared/array.util';
 import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
@@ -31,7 +31,6 @@ import { ChartDateViewType } from '../../core/working-plan.reducer';
 import { environment } from '../../../../environments/environment';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { SearchConfig } from 'src/app/core/shared/search/search-filters/search-config.model';
-import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
 import { NgbDateStructToString, stringToNgbDateStruct } from '../../../shared/date.util';
 import { Item } from '../../../core/shared/item.model';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
@@ -95,6 +94,11 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    * The collection id for milestone entity in the given project
    */
   @Input() public milestoneCollectionId: string;
+
+  /**
+   * A boolean representing if compare mode is active
+   */
+  @Input() public compareMode: Observable<boolean>;
 
   private defaultDates: any = {
     start: {

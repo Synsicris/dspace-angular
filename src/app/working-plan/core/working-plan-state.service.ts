@@ -25,6 +25,7 @@ import { Observable } from 'rxjs';
 import {
   chartDateViewSelector,
   getLastAddedNodesListSelector,
+  isCompareMode,
   isWorkingPlanInitializingSelector,
   isWorkingPlanLoadedSelector,
   isWorkingPlanMovingSelector,
@@ -141,6 +142,10 @@ export class WorkingPlanStateService {
 
   public getChartDateViewSelector() {
     return this.store.pipe(select(chartDateViewSelector));
+  }
+
+  public isCompareModeActive() {
+    return this.store.pipe(select(isCompareMode));
   }
 
   public getWorkpackages(): Observable<Workpackage[]> {

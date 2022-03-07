@@ -3,15 +3,16 @@
     <span>
       <button class="btn btn-link text-decoration-none"
               title="{{'working-plan.chart.toolbar.add-btn' | translate}}"
+              [disabled]="(compareMode | async)"
               (click)="createWorkpackage()">
         <i class="fas fa-plus-circle fa-2x"></i>
       </button>
     </span>
     <span fxFlex></span>
     <div *ngIf="(workpackages | async)?.length > 0" class="btn-group btn-group-sm mr-2">
-      <ds-item-version-list [buttonText]="'working-plan.chart.toolbar.versions'"
-                            [targetItemId]="workingPlan.id"
-                            (versionSelected)="onVersionSelected($event)" ></ds-item-version-list>
+      <ds-item-version-list [targetItemId]="workingPlan.id"
+                            (versionSelected)="onVersionSelected($event)"
+                            (versionDeselected)="onVersionDeselected()"></ds-item-version-list>
     </div>
     <div *ngIf="(workpackages | async)?.length > 0" class="btn-group btn-group-sm">
       <div

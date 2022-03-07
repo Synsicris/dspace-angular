@@ -37,4 +37,9 @@ export class WorkingPlanChartComponent {
    */
   @Input() public milestoneCollectionId: string;
 
+  /**
+   * A boolean representing if compare mode is active
+   */
+  @Input() public compareMode: Observable<boolean>;
+
 }

@@ -39,6 +39,11 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
    */
   @Input() workingPlan: Item;
 
+  /**
+   * A boolean representing if compare mode is active
+   */
+  @Input() public compareMode: Observable<boolean>;
+
   workpackagesCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   chartDateView: Observable<ChartDateViewType>;
   ChartDateViewType = ChartDateViewType;
@@ -116,7 +121,19 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
       .forEach((sub) => sub.unsubscribe());
   }
 
+  /**
+   * Dispatch initialization of comparing mode
+   *
+   * @param version
+   */
   onVersionSelected(version: Item) {
     this.workingPlanStateService.dispatchInitCompare(version.id);
+  }
+
+  /**
+   * Dispatch cleaning of comparing mode
+   */
+  onVersionDeselected() {
+    this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata);
   }
 }

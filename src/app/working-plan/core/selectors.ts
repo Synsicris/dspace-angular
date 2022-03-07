@@ -105,6 +105,15 @@ export const chartDateViewSelector = createSelector(_getWorkingPlanState,
 );
 
 /**
+ * Returns true if compare mose id active.
+ * @function isCompareMode
+ * @return {boolean}
+ */
+export const isCompareMode = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.compareMode || false
+);
+
+/**
  * Returns the Workpackage object.
  * @function workpackageByIDSelector
  * @param {string} workpackageId

@@ -5,10 +5,12 @@
     </ds-comcol-page-header>
   </div>
   <ds-alert [type]="'alert-info'" [content]="'working-plan.chart.page.description'" [collapsible]="true" [collapsed]="true"></ds-alert>
-  <ipw-working-plan-chart-toolbar [projectCommunityId]="projectCommunityId"
+  <ipw-working-plan-chart-toolbar [compareMode]="compareMode"
+                                  [projectCommunityId]="projectCommunityId"
                                   [workpackages]="workpackages"
                                   [workingPlan]="workingPlan"></ipw-working-plan-chart-toolbar>
-  <ipw-working-plan-chart-container [projectCommunityId]="projectCommunityId"
+  <ipw-working-plan-chart-container [compareMode]="compareMode"
+                                    [projectCommunityId]="projectCommunityId"
                                     [milestoneCollectionId]="milestoneCollectionId"
                                     [workPackageCollectionId]="workPackageCollectionId"
                                     [workpackages]="workpackages"
