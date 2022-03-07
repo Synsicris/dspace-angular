@@ -62,6 +62,8 @@
         [treeControl]="treeControl"
         [ngStyle]="sidebarNamesStyle">
         <mat-tree-node *matTreeNodeDef="let node"
+          [class.compare-node-status-new]="(compareMode | async) && node.compareStatus == ComparedVersionItemStatus.New"
+          [class.compare-node-status-deleted]="(compareMode | async) && node.compareStatus == ComparedVersionItemStatus.Removed"
           cdkDrag [cdkDragData]="node"
           [cdkDragDisabled]="!dragAndDropIsActive || (isMoving() | async)"
           class="tree-node-customization"
@@ -87,7 +89,8 @@
               <i class="fas fa-grip-vertical{{(!dragAndDropIsActive || (isMoving() | async))?' opacity-50':''}}"></i>
             </button>
           </div>
-          <div class="mat-form-field auto-width mt-1{{node.level === 0?' pl-2':''}}">
+          <div class="mat-form-field auto-width mt-1{{node.level === 0?' pl-2':''}}"
+>
             <p class="block-ellipsis">{{node.name}}</p>
             <br>
             <span class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>

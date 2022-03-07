@@ -31,6 +31,7 @@ import { SearchConfig } from '../../../core/shared/search/search-filters/search-
 import { NgbDateStructToString, stringToNgbDateStruct } from '../../../shared/date.util';
 import { Item } from '../../../core/shared/item.model';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
+import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 
 export const MY_FORMATS = {
   parse: {
@@ -188,6 +189,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    * The milestones map used to draw a blue line and a rhombus at the milestone date.
    */
   milestonesMap: Map<string, string> = new Map<string, string>();
+
+  ComparedVersionItemStatus = ComparedVersionItemStatus;
 
   /**
    * List of Edit Modes available on each node for the current user

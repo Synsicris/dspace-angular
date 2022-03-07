@@ -323,3 +323,11 @@ $highlightBorderColor: #FF9800;
 .cursor-pointer {
   cursor: pointer;
 }
+
+.compare-node-status-new {
+  background-color: rgb(146, 198, 66, 0.3);
+}
+
+.compare-node-status-deleted {
+  background-color: rgb(207, 68, 68, 0.3);
+}
