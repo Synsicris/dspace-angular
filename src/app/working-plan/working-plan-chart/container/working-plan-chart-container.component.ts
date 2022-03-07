@@ -11,8 +11,6 @@ import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
 import { findIndex } from 'lodash';
-
-import { range } from '../../../shared/array.util';
 import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
 import { WorkpacakgeFlatNode } from '../../core/models/workpackage-step-flat-node.model';
@@ -27,10 +25,9 @@ import { WorkingPlanStateService } from '../../core/working-plan-state.service';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { hasValue, isEmpty, isNotEmpty, isNotNull } from '../../../shared/empty.util';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
-import { ChartDateViewType } from '../../core/working-plan.reducer';
 import { environment } from '../../../../environments/environment';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
-import { SearchConfig } from 'src/app/core/shared/search/search-filters/search-config.model';
+import { SearchConfig } from '../../../core/shared/search/search-filters/search-config.model';
 import { NgbDateStructToString, stringToNgbDateStruct } from '../../../shared/date.util';
 import { Item } from '../../../core/shared/item.model';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
@@ -116,15 +113,11 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   dateFormat = 'YYYY-MM-DD';
   dateMonthFormat = 'YYYY-MM';
   dateYearFormat = 'YYYY';
-  disableProgress = true;
   moment = moment;
   dates: string[] = []; // all days in chart
   datesMonth: string[] = []; // all months in chart
   datesQuarter: string[] = []; // all quarters in chart
   datesYear: string[] = []; // all years in chart
-  today = moment().format(this.dateFormat);
-  chartDateView: BehaviorSubject<ChartDateViewType> = new BehaviorSubject<ChartDateViewType>(null);
-  ChartDateViewType = ChartDateViewType;
   workpackageVocabularyOptions: VocabularyOptions;
   milestoneVocabularyOptions: VocabularyOptions;
   /**
@@ -234,9 +227,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.dragAndDropIsActive = false;
     this.sortSelected$ = this.workingPlanStateService.getWorkpackagesSortOption();
 
-    this.workingPlanStateService.getChartDateViewSelector()
-      .subscribe((view) => this.chartDateView.next(view));
-
     this.subs.push(
       this.workingPlanService.getWorkpackageStatusTypes()
         .subscribe((statusList: VocabularyEntry[]) => {
@@ -301,84 +291,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   chartChangeColor(nodeId: string, isOver: boolean): void {
     this.chartChangeColorIsOver.set(nodeId, isOver);
-  }
-
-  /**
-   * Returns TRUE or FALSE based on the 'this.chartChangeColorIsOver' variable (used to change the filled row color on MouseOver).
-   *
-   * @param node Workpackage
-   * @param progressDate string
-   * @param rangeDate string
-   *
-   * @returns boolean
-   */
-  chartCheckChangeColor(node: Workpackage, progressDate: string, rangeDate: string): boolean {
-    let response = false;
-    if (this.chartChangeColorIsOver.get(node.id)
-      && !this.isDateInsidePogressRange(progressDate, node)
-      && this.isDateInsideRange(rangeDate, node)) {
-      response = true;
-    }
-    return response;
-  }
-
-  /**
-   * Returns TRUE if the node is the last node of the year (used to draw a red line at the end of the year).
-   *
-   * @param date string
-   * @param type string
-   *
-   * @returns boolean
-   */
-  chartCheckEndOfTheYear(date: string, type: string): boolean {
-    let output = false;
-    let momentDate;
-    if (type === 'month') {
-      momentDate = moment(date, 'YYYY-MM');
-      if (momentDate.format('MM') === '12') {
-        output = true;
-      }
-    } else if (type === 'quarter') {
-      momentDate = date.split('-');
-      if (momentDate[1] === '4') {
-        output = true;
-      }
-    } else {
-      output = true;
-    }
-    return output;
-  }
-
-  /**
-   * Returns TRUE if the node date match a milestone date (used to draw a blue line at the milestone date).
-   *
-   * @param date string
-   *
-   * @returns boolean
-   */
-  chartCheckMilestone(date: string): boolean {
-    const milestoneDates = Array.from(this.milestonesMap.values());
-    let output = false;
-    if (milestoneDates.indexOf(date) !== -1) {
-      output = true;
-    }
-    return output;
-  }
-
-  /**
-   * Returns TRUE if the node id match a milestone id (used to draw a rhombus at the milestone date).
-   *
-   * @param nodeId string
-   * @param date string
-   *
-   * @returns boolean
-   */
-  chartCheckNodeMilestone(nodeId: string, date: string): boolean {
-    let output = false;
-    if (this.milestonesMap.has(nodeId) && this.milestonesMap.get(nodeId) === date) {
-      output = true;
-    }
-    return output;
   }
 
   /**
@@ -671,11 +583,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return eventWidth >= this.sidebarNamesMinWidth;
   }
 
-  validateResizeResponsible = (resizeEvent: any) => {
-    const eventWidth = resizeEvent.rectangle.width;
-    return eventWidth >= this.sidebarResponsibleMinWidth;
-  }
-
   buildCalendar() {
     this.dates = [];
     this.datesMonth = [];
@@ -748,66 +655,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.adjustDates();
   }
 
-  formatDate(date: string): string {
-    if (this.chartDateView.value === ChartDateViewType.day) {
-      return moment(date).format('DD MMM');
-    } else if (this.chartDateView.value === ChartDateViewType.month) {
-      return moment(date).format('MMM');
-    } else if (this.chartDateView.value === ChartDateViewType.quarter) {
-      const parts = date.split('-');
-      return this.getQuarterLabel(parts[1]);
-    } else {
-      return moment(date).format('YYYY');
-    }
-  }
-
-  getQuarterLabel(quarter: string) {
-    let label;
-    switch (quarter) {
-      case '1':
-        label = 'working-plan.chart.toolbar.date-view.quarter.first';
-        break;
-      case '2':
-        label = 'working-plan.chart.toolbar.date-view.quarter.second';
-        break;
-      case '3':
-        label = 'working-plan.chart.toolbar.date-view.quarter.third';
-        break;
-      case '4':
-        label = 'working-plan.chart.toolbar.date-view.quarter.fourth';
-        break;
-    }
-    return this.translate.instant(label);
-  }
-
-  isToday(date): boolean {
-    if (this.chartDateView.value === ChartDateViewType.day) {
-      return date === this.today;
-    } else if (this.chartDateView.value === ChartDateViewType.month) {
-      return moment(date).format(this.dateMonthFormat) === moment(this.today).format(this.dateMonthFormat);
-    } else if (this.chartDateView.value === ChartDateViewType.quarter) {
-      return moment(date).quarter() === moment(this.today).quarter();
-    } else {
-      return moment(date).format(this.dateYearFormat) === moment(this.today).format(this.dateYearFormat);
-    }
-  }
-
   /** other methods */
-
-  isDateInsidePogressRange(date: string, node: Workpackage): boolean {
-    return (node.progressDates.indexOf(date) > -1);
-  }
-
-  isDateInsideRange(date: string, node: Workpackage): boolean {
-    if (isEmpty(node.dates)) {
-      return false;
-    } else if (node.type !== 'milestone') {
-      return (isNotEmpty(node.dates?.start?.full) && isNotEmpty(node.dates?.end?.full)) ?
-        (date >= node.dates.start.full && date <= node.dates.end.full) : false;
-    } else {
-      return isEmpty(node.dates?.end?.full) ? false : (date === node.dates.end.full);
-    }
-  }
 
   isMoving(): Observable<boolean> {
     return this.workingPlanStateService.isWorkingPlanMoving();
@@ -862,46 +710,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     } else {
       this.isDropAllowed.next(false);
     }
-  }
-
-  getMonthInYear() {
-    return range(1, 12)
-      .map((entry: number) => entry.toString().padStart(2, '0'));
-  }
-
-  getMonthInQuarter(date: string) {
-    const [year, quarter] = date.split('-');
-    const start: number = (1 + (3 * (parseInt(quarter, 10) - 1)));
-    const end: number = (3 * parseInt(quarter, 10));
-    return range(start, end)
-      .map((entry: number) => entry.toString().padStart(2, '0'));
-
-  }
-
-  getQaurterYear(date: string) {
-    const [year, quarter] = date.split('-');
-    return year;
-  }
-
-  getQuarterInYear() {
-    return range(1, 4)
-      .map((entry: number) => entry.toString());
-  }
-
-  getDaysInMonth(date: string) {
-    return range(1, moment(date, this.dateMonthFormat).daysInMonth(), 1)
-      .map((entry: number) => entry.toString().padStart(2, '0'));
-  }
-
-  getDaysInQuarter(date: string) {
-    const days: string[] = [];
-    const [year, quarter] = date.split('-');
-    const months = this.getMonthInQuarter(date);
-    months.forEach((month) => {
-      days.push(...this.getDaysInMonth(`${year}-${month}`));
-    });
-
-    return days;
   }
 
   getStatusValues(): Observable<VocabularyEntry[]> {
