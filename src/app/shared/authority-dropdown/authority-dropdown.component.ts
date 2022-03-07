@@ -98,7 +98,6 @@ export class AuthorityDropdownComponent extends DsDynamicVocabularyComponent imp
    * Initialize the component, setting up the init form value
    */
   ngOnInit() {
-    console.log(this.readOnly);
     this.updatePageInfo(this.elementsPerPage, 1);
     this.vocabularyService.getVocabularyEntries(this.vocabularyOptions, this.pageInfo).pipe(
       getFirstSucceededRemoteDataPayload(),

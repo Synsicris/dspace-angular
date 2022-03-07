@@ -322,7 +322,6 @@ export class WorkingPlanEffects {
         action.payload.compareWorkingplanId,
         environment.workingPlan.workingPlanStepRelationMetadata
       ).pipe(
-        tap((c) => console.log('INIT_COMPARE list ', c)),
         switchMap((compareItemList: ComparedVersionItem[]) => this.workingPlanService.initCompareWorkingPlan(compareItemList)),
         map((workpackages: Workpackage[]) => new InitCompareSuccessAction(workpackages)),
         catchError((error: Error) => {

@@ -3,10 +3,12 @@ $toolbarHeight: 64px;
 $nodeWidth: 100px;
 $calendarCellWidth: 60px;
 $nodeHeight: 50px;
-$completeColor: #89b34d;
+$activeColor: #89b34d;
+$versionedColor: #B8BBBD;
 $incompleteColor: #89b34d;
 $overColor: #245016;
 $overGrey: #fffde7;
+$overVersionedColor: #7F8183;
 $recentGrey: #fffef5;
 $borderColor: #BDBDBD;
 $highlightBorderColor: #FF9800;
@@ -40,27 +42,12 @@ $highlightBorderColor: #FF9800;
 
 // completed cell
 ::ng-deep .calendar-cell[date-filled=true][date-inside=true] {
-  background-color: $completeColor;
+  background-color: $activeColor;
 }
 
 // incompleted cell
 ::ng-deep .calendar-cell[date-filled=false][date-inside=true] {
   background-color: $incompleteColor;
-}
-
-// completed inner cell
-.calendar-inner-cell[date-filled=true][date-inside=true] {
-  background-color: $completeColor;
-}
-
-// incompleted inner cell
-.calendar-inner-cell[date-filled=false][date-inside=true] {
-  background-color: $incompleteColor;
-}
-
-// MouseOver effect on the filled cells
-.calendar-inner-cell-over {
-  background-color: $overColor !important;
 }
 
 // MouseOver effect on the title cells on the left
@@ -72,7 +59,6 @@ $highlightBorderColor: #FF9800;
 .calendar-title-cell-now-added {
   background-color: $recentGrey;
 }
-
 
 .calendar-head-border {
   border-bottom: solid 2px $borderColor;
@@ -93,14 +79,61 @@ $highlightBorderColor: #FF9800;
   border-left: none;
 }
 
-.calendar-cell-customization {
-  height: 30px !important;
+.calendar-cell-wrapper {
+  background-color: transparent;
+  height: 50px !important;
+  min-height: 50px;
+  line-height: 50px;
+}
+
+.calendar-inner-cell, .calendar-inner-cell-compare {
   min-height: 30px;
-  line-height: 30px;
+}
+
+.calendar-inner-cell {
+  z-index: 2;
+}
+
+.calendar-inner-cell-compare {
+  z-index: 1;
+  margin-top: -15px;
 }
 
 .calendar-cell-heading {
   border-bottom-width: 2px !important;
+}
+
+// incompleted cell
+::ng-deep .calendar-cell[date-filled=false][date-inside=true] {
+  background-color: $incompleteColor;
+}
+
+// completed inner cell
+.calendar-inner-cell[date-filled=true][date-inside=true] {
+  background-color: $activeColor;
+}
+
+.calendar-inner-cell-compare[date-filled=true][date-inside=true] {
+  background-color: red;
+}
+
+// incompleted inner cell
+.calendar-inner-cell[date-filled=false][date-inside=true] {
+  background-color: $incompleteColor;
+}
+
+.calendar-inner-cell-compare[date-filled=false][date-inside=true] {
+  background-color: $versionedColor;
+}
+
+// MouseOver effect on the filled cells
+.calendar-inner-cell-over {
+  background-color: $overColor !important;
+}
+
+// MouseOver effect on the filled cells
+.calendar-inner-cell-compare-over {
+  background-color: $overVersionedColor !important;
 }
 
 .tree-node-end-of-the-year-customization {

@@ -26,6 +26,13 @@ export class WorkingPlanChartDatesComponent implements OnInit {
    * The map with the MouseOver statuses of the nodes (rows). Used to change the filled row color on MouseOver.
    */
   @Input() chartChangeColorIsOver: Map<string, boolean> = new Map<string, boolean>();
+
+
+  /**
+   * A boolean representing if compare mode is active
+   */
+  @Input() public compareMode: Observable<boolean>;
+
   @Input() datesMonth;
   @Input() datesQuarter;
   @Input() datesYear;
@@ -102,11 +109,11 @@ export class WorkingPlanChartDatesComponent implements OnInit {
    *
    * @returns boolean
    */
-  chartCheckChangeColor(node: Workpackage, progressDate: string, rangeDate: string): boolean {
+  chartCheckChangeColor(node: Workpackage, progressDate: string, rangeDate: string, isCompare = false): boolean {
     let response = false;
     if (this.chartChangeColorIsOver.get(node.id)
       && !this.isDateInsidePogressRange(progressDate, node)
-      && this.isDateInsideRange(rangeDate, node)) {
+      && this.isDateInsideRange(rangeDate, node, isCompare)) {
       response = true;
     }
     return response;
@@ -232,14 +239,18 @@ export class WorkingPlanChartDatesComponent implements OnInit {
     return (node.progressDates.indexOf(date) > -1);
   }
 
-  isDateInsideRange(date: string, node: Workpackage): boolean {
+  isDateInsideRange(date: string, node: Workpackage, isCompare = false): boolean {
     if (isEmpty(node.dates)) {
       return false;
-    } else if (node.type !== 'milestone') {
-      return (isNotEmpty(node.dates?.start?.full) && isNotEmpty(node.dates?.end?.full)) ?
-        (date >= node.dates.start.full && date <= node.dates.end.full) : false;
     } else {
-      return isEmpty(node.dates?.end?.full) ? false : (date === node.dates.end.full);
+      const startDate = isCompare ? node.dates?.compareStart?.full : node.dates?.start?.full;
+      const endDate = isCompare ? node.dates?.compareEnd?.full : node.dates?.end?.full;
+      if (node.type !== 'milestone') {
+        return (isNotEmpty(startDate) && isNotEmpty(endDate)) ?
+          (date >= startDate && date <= endDate) : false;
+      } else {
+        return isEmpty(endDate) ? false : (date === endDate);
+      }
     }
   }
 

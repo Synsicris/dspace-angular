@@ -17,11 +17,18 @@
       <div *ngFor="let date of datesMonth; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(date, 'month'))?' tree-node-end-of-the-year-customization':''}}">
         <div *ngFor="let day of getDaysInMonth(date);" class="d-flex flex-fill calendar-node-customization"
              [class.tree-node-milestone-customization]="chartCheckMilestone(date + '-' + day)">
-          <div class="calendar-inner-cell flex-fill calendar-cell-customization"
-               [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, date + '-' + day)"
-               [class.calendar-inner-cell-over]="!chartCheckNodeMilestone(node.id, date + '-' + day) && chartCheckChangeColor(node, date + '-' + day, date + '-' + day)"
-               [attr.date-filled]="isDateInsidePogressRange(date + '-' + day, node)"
-               [attr.date-inside]="isDateInsideRange(date + '-' + day, node)"></div>
+          <div class="d-flex flex-column flex-fill w-100 justify-content-center calendar-cell-wrapper">
+            <div class="calendar-inner-cell"
+                 [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, date + '-' + day)"
+                 [class.calendar-inner-cell-over]="!chartCheckNodeMilestone(node.id, date + '-' + day) && chartCheckChangeColor(node, date + '-' + day, date + '-' + day)"
+                 [attr.date-filled]="isDateInsidePogressRange(date + '-' + day, node)"
+                 [attr.date-inside]="isDateInsideRange(date + '-' + day, node)"></div>
+            <div *ngIf="(compareMode | async)" class="calendar-inner-cell-compare"
+                 [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, date + '-' + day)"
+                 [class.calendar-inner-cell-compare-over]="!chartCheckNodeMilestone(node.id, date + '-' + day) && chartCheckChangeColor(node, date + '-' + day, date + '-' + day, true)"
+                 [attr.date-filled]="isDateInsidePogressRange(date + '-' + day, node)"
+                 [attr.date-inside]="isDateInsideRange(date + '-' + day, node, true)"></div>
+          </div>
         </div>
       </div>
     </mat-tree-node>
@@ -47,11 +54,18 @@
         <ng-container *ngFor="let month of getMonthInQuarter(quarter);">
           <div *ngFor="let day of getDaysInMonth(getQaurterYear(quarter) + '-' + month);" class="d-flex flex-fill calendar-node-customization"
                [class.tree-node-milestone-customization]="chartCheckMilestone(getQaurterYear(quarter) + '-' + month + '-' + day)">
-            <div class="calendar-inner-cell h-100 flex-fill calendar-cell-customization"
-                 [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, getQaurterYear(quarter) + '-' + month + '-' + day)"
-                 [class.calendar-inner-cell-over]="!chartCheckNodeMilestone(node.id, getQaurterYear(quarter) + '-' + month + '-' + day) && chartCheckChangeColor(node, getQaurterYear(quarter) + '-' + month + '-' + day, getQaurterYear(quarter) + '-' + month + '-' + day)"
-                 [attr.date-filled]="isDateInsidePogressRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"
-                 [attr.date-inside]="isDateInsideRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"></div>
+            <div class="d-flex flex-column flex-fill w-100 justify-content-center calendar-cell-wrapper">
+              <div class="calendar-inner-cell"
+                   [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, getQaurterYear(quarter) + '-' + month + '-' + day)"
+                   [class.calendar-inner-cell-over]="!chartCheckNodeMilestone(node.id, getQaurterYear(quarter) + '-' + month + '-' + day) && chartCheckChangeColor(node, getQaurterYear(quarter) + '-' + month + '-' + day, getQaurterYear(quarter) + '-' + month + '-' + day)"
+                   [attr.date-filled]="isDateInsidePogressRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"
+                   [attr.date-inside]="isDateInsideRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"></div>
+              <div *ngIf="(compareMode | async)" class="calendar-inner-cell-compare"
+                   [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, getQaurterYear(quarter) + '-' + month + '-' + day)"
+                   [class.calendar-inner-cell-compare-over]="!chartCheckNodeMilestone(node.id, getQaurterYear(quarter) + '-' + month + '-' + day) && chartCheckChangeColor(node, getQaurterYear(quarter) + '-' + month + '-' + day, getQaurterYear(quarter) + '-' + month + '-' + day, true)"
+                   [attr.date-filled]="isDateInsidePogressRange(getQaurterYear(quarter) + '-' + month + '-' + day, node)"
+                   [attr.date-inside]="isDateInsideRange(getQaurterYear(quarter) + '-' + month + '-' + day, node, true)"></div>
+            </div>
           </div>
         </ng-container>
       </div>
@@ -73,11 +87,18 @@
         <ng-container *ngFor="let month of getMonthInYear();">
           <div *ngFor="let day of getDaysInMonth(year + '-' + month);" class="d-flex flex-fill calendar-node-customization"
                [class.tree-node-milestone-customization]="chartCheckMilestone(year + '-' + month + '-' + day)">
-            <div class="calendar-inner-cell h-100 flex-fill calendar-cell-customization"
-                 [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, year + '-' + month + '-' + day)"
-                 [class.calendar-inner-cell-over]="!chartCheckNodeMilestone(node.id, year + '-' + month + '-' + day) && chartCheckChangeColor(node, year + '-' + month + '-' + day, year + '-' + month + '-' + day)"
-                 [attr.date-filled]="isDateInsidePogressRange(year + '-' + month + '-' + day, node)"
-                 [attr.date-inside]="isDateInsideRange(year + '-' + month + '-' + day, node)"></div>
+            <div class="d-flex flex-column flex-fill w-100 justify-content-center calendar-cell-wrapper">
+              <div class="calendar-inner-cell"
+                   [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, year + '-' + month + '-' + day)"
+                   [class.calendar-inner-cell-over]="!chartCheckNodeMilestone(node.id, year + '-' + month + '-' + day) && chartCheckChangeColor(node, year + '-' + month + '-' + day, year + '-' + month + '-' + day)"
+                   [attr.date-filled]="isDateInsidePogressRange(year + '-' + month + '-' + day, node)"
+                   [attr.date-inside]="isDateInsideRange(year + '-' + month + '-' + day, node)"></div>
+              <div *ngIf="(compareMode | async)" class="calendar-inner-cell-compare"
+                   [class.tree-node-milestone-rhombus]="chartCheckNodeMilestone(node.id, year + '-' + month + '-' + day)"
+                   [class.calendar-inner-cell-compare-over]="!chartCheckNodeMilestone(node.id, year + '-' + month + '-' + day) && chartCheckChangeColor(node, year + '-' + month + '-' + day, year + '-' + month + '-' + day, true)"
+                   [attr.date-filled]="isDateInsidePogressRange(year + '-' + month + '-' + day, node)"
+                   [attr.date-inside]="isDateInsideRange(year + '-' + month + '-' + day, node, true)"></div>
+            </div>
           </div>
         </ng-container>
       </div>

@@ -137,23 +137,6 @@ $highlightBorderColor: #FF9800;
   border-bottom: solid 1px $borderColor;
 }
 
-.calendar-node-customization {
-  height: 100%;
-  align-items: center;
-  border-top: none;
-  border-left: none;
-}
-
-.calendar-cell-customization {
-  height: 30px !important;
-  min-height: 30px;
-  line-height: 30px;
-}
-
-.calendar-cell-heading {
-  border-bottom-width: 2px !important;
-}
-
 // column adjustment
 .tree-node-customization {
   align-items: normal;
@@ -325,25 +308,7 @@ $highlightBorderColor: #FF9800;
   background-color: $completeColor;
 }
 
-// incompleted cell
-::ng-deep .calendar-cell[date-filled=false][date-inside=true] {
-  background-color: $incompleteColor;
-}
 
-// completed inner cell
-.calendar-inner-cell[date-filled=true][date-inside=true] {
-  background-color: $completeColor;
-}
-
-// incompleted inner cell
-.calendar-inner-cell[date-filled=false][date-inside=true] {
-  background-color: $incompleteColor;
-}
-
-// MouseOver effect on the filled cells
-.calendar-inner-cell-over {
-  background-color: $overColor !important;
-}
 
 // MouseOver effect on the title cells on the left
 .calendar-title-cell-over {

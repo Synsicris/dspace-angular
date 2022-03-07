@@ -8,6 +8,8 @@ export interface WorkpackageSearchItem {
 export interface WorkpackageChartDates {
   start: WorkpackageChartDate;
   end: WorkpackageChartDate;
+  compareStart?: WorkpackageChartDate;
+  compareEnd?: WorkpackageChartDate;
 }
 
 export interface WorkpackageChartDate {
@@ -33,7 +35,6 @@ export interface WorkpackageTreeObject {
   progress: number;
   progressDates: string[];
   dates: WorkpackageChartDates;
-  compareDates?: WorkpackageChartDates;
   compareStatus?: ComparedVersionItemStatus;
   status: string;
   expanded: boolean; // status of expanded

@@ -332,7 +332,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       node.dates,
       (node.steps && node.steps.length !== 0),
       node.steps,
-      node.parentId
+      node.parentId,
+      node.compareId,
+      node.compareStatus
     );
     this.updateTreeMap(flatNode, node);
     return flatNode;
@@ -611,24 +613,40 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     stepToProcess
       .forEach((step: any) => {
         let start;
+        let compareStart;
+        let compareEnd;
         const end = this.moment(step.dates.end.full, this.dateFormat);
+        if (isNotEmpty(step.dates.compareEnd)) {
+          compareEnd = this.moment(step.dates.compareEnd.full, this.dateFormat);
+        }
+
         if (step.type === 'milestone') {
           start = this.moment(this.moment(step.dates.end.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
+          if (isNotEmpty(step.dates.compareStart)) {
+            compareStart = this.moment(this.moment(step.dates.compareEnd.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
+          }
         } else {
           start = this.moment(step.dates.start.full, this.dateFormat);
+          if (isNotEmpty(step.dates.compareStart)) {
+            compareStart = this.moment(step.dates.compareStart.full, this.dateFormat);
+          }
         }
-        const dateRange = moment.range(start, end);
+
+        const rangeMinDate = isNotEmpty(step.dates.compareStart) ? moment.min(start, compareStart) : start;
+        const rangeMaxDate = isNotEmpty(step.dates.compareEnd) ? moment.max(end, compareEnd) : end;
+        const maxEndDate = rangeMaxDate.format(this.dateFormat);
+        const dateRange = moment.range(rangeMinDate, rangeMaxDate);
 
         // Moment range sometimes does not include all the months, so use the end of the month to get the correct range
-        const endForMonth = this.moment(step.dates.end.full).endOf('month');
+        const endForMonth = this.datesMonth.length > 0 ? this.moment(this.datesMonth[this.datesMonth.length - 1]) : this.moment(maxEndDate).endOf('month');
         const dateRangeForMonth = this.moment.range(start, endForMonth);
 
         // Moment range sometimes does not include all the quarters, so use the end of the quarter to get the correct range
-        const endForQuarter = this.moment(step.dates.end.full).endOf('quarter');
+        const endForQuarter = this.moment(maxEndDate).endOf('quarter');
         const dateRangeForQuarter = this.moment.range(start, endForQuarter);
 
         // Moment range sometimes does not include all the years, so use the end of the year to get the correct range
-        const endForYear = this.moment(step.dates.end.full, this.dateFormat).endOf('year');
+        const endForYear = this.moment(maxEndDate, this.dateFormat).endOf('year');
         const dateRangeForYear = this.moment.range(start, endForYear);
 
         const days = Array.from(dateRange.by('days'));
