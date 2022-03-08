@@ -238,6 +238,7 @@ import { InvitationModalComponent } from './invitation-modal/invitation-modal.co
 import { EditItemGrantsModalComponent } from './edit-item-grants-modal/edit-item-grants-modal.component';
 import { ItemCreateComponent } from './item/item-create/item-create.component';
 import { AuthorityDropdownComponent } from './authority-dropdown/authority-dropdown.component';
+import { ItemVersionListComponent } from './item-version-list/item-version-list.component';
 import { CompareItemComponent } from './compare-item/compare-item.component';
 
 const MODULES = [
@@ -603,7 +604,8 @@ const DIRECTIVES = [
     ItemVersionsDeleteModalComponent,
     ItemExportAlertComponent,
     MetricPlumxComponent,
-    InvitationModalComponent
+    InvitationModalComponent,
+    ItemVersionListComponent
   ],
   providers: [
     ...PROVIDERS
@@ -614,7 +616,8 @@ const DIRECTIVES = [
     ...COMPONENTS,
     ...SHARED_ITEM_PAGE_COMPONENTS,
     ...DIRECTIVES,
-    TranslateModule
+    TranslateModule,
+    ItemVersionListComponent
   ]
 })
 

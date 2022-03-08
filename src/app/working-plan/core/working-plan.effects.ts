@@ -31,6 +31,9 @@ import {
   GenerateWorkpackageStepErrorAction,
   GenerateWorkpackageStepSuccessAction,
   GenerateWorkpackageSuccessAction,
+  InitCompareAction,
+  InitCompareErrorAction,
+  InitCompareSuccessAction,
   InitWorkingplanAction,
   InitWorkingplanErrorAction,
   InitWorkingplanSuccessAction,
@@ -71,6 +74,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SubmissionObjectActionTypes } from '../../submission/objects/submission-objects.actions';
 import { environment } from '../../../environments/environment';
 import { WpActionPackage, WpStepActionPackage } from './working-plan-state.service';
+import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -303,6 +307,28 @@ export class WorkingPlanEffects {
             console.error(error.message);
           }
           return observableOf(new RetrieveAllLinkedWorkingPlanObjectsErrorAction());
+        }));
+    }));
+
+  /**
+   * Add workpackages to workingplan state
+   */
+  @Effect() initCompare$ = this.actions$.pipe(
+    ofType(WorkpackageActionTypes.INIT_COMPARE),
+    withLatestFrom(this.store$),
+    switchMap(([action, state]: [InitCompareAction, any]) => {
+      return this.projectVersionService.compareItemChildrenByMetadata(
+        state.workingplan.workingplanId,
+        action.payload.compareWorkingplanId,
+        environment.workingPlan.workingPlanStepRelationMetadata
+      ).pipe(
+        switchMap((compareItemList: ComparedVersionItem[]) => this.workingPlanService.initCompareWorkingPlan(compareItemList)),
+        map((workpackages: Workpackage[]) => new InitCompareSuccessAction(workpackages)),
+        catchError((error: Error) => {
+          if (error) {
+            console.error(error.message);
+          }
+          return observableOf(new InitCompareErrorAction());
         }));
     }));
 
@@ -552,6 +578,7 @@ export class WorkingPlanEffects {
     private itemAuthorityRelationService: ItemAuthorityRelationService,
     private modalService: NgbModal,
     private notificationsService: NotificationsService,
+    private projectVersionService: ProjectVersionService,
     private store$: Store<any>,
     private translate: TranslateService,
     private workingPlanService: WorkingPlanService

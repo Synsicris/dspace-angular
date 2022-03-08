@@ -50,15 +50,13 @@
         </ng-container>
 
         <ng-container *ngSwitchCase="'text'">
-            <span class="text-muted item-list-authors" *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;" >{{metadata.value}}
-                <span *ngIf="!last">; </span>
+            <span class="text-muted item-list-authors" *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;" >
+              {{metadata.value}}<span *ngIf="!last">; </span>
             </span>
         </ng-container>
 
         <ng-container *ngSwitchCase="'date'">
-            (<span class="text-muted item-list-date" *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;" >{{metadata.value}}
-                <span *ngIf="!last">; </span>
-            </span>)
+          <span class="text-muted">(<span class="text-muted item-list-date" *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;" >{{metadata.value}}<span *ngIf="!last">; </span></span>)</span>
         </ng-container>
 
     </ng-container>

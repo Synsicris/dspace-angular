@@ -9,6 +9,7 @@ import {
   ClearWorkingPlanAction,
   GenerateWorkpackageAction,
   GenerateWorkpackageStepAction,
+  InitCompareAction,
   MoveWorkpackageAction,
   MoveWorkpackageStepAction,
   RemoveWorkpackageAction,
@@ -24,6 +25,8 @@ import { Observable } from 'rxjs';
 import {
   chartDateViewSelector,
   getLastAddedNodesListSelector,
+  isCompareMode,
+  isWorkingPlanInitializingSelector,
   isWorkingPlanLoadedSelector,
   isWorkingPlanMovingSelector,
   isWorkingPlanProcessingSelector,
@@ -88,6 +91,10 @@ export class WorkingPlanStateService {
     this.store.dispatch(new GenerateWorkpackageStepAction(projectId, parentId, workpackageStepType, metadata));
   }
 
+  public dispatchInitCompare(compareWorkingplanId: string) {
+    this.store.dispatch(new InitCompareAction(compareWorkingplanId));
+  }
+
   public dispatchMoveWorkpackage(workpackageId: string, oldIndex: number, newIndex: number): void {
     this.store.dispatch(new MoveWorkpackageAction(workpackageId, oldIndex, newIndex));
   }
@@ -137,6 +144,10 @@ export class WorkingPlanStateService {
     return this.store.pipe(select(chartDateViewSelector));
   }
 
+  public isCompareModeActive() {
+    return this.store.pipe(select(isCompareMode));
+  }
+
   public getWorkpackages(): Observable<Workpackage[]> {
     return this.store.pipe(
       select(workpackagesSelector),
@@ -155,6 +166,10 @@ export class WorkingPlanStateService {
 
   public getLastAddedNodesList(): Observable<string[]> {
     return this.store.pipe(select(getLastAddedNodesListSelector));
+  }
+
+  public isInitializing(): Observable<boolean> {
+    return this.store.pipe(select(isWorkingPlanInitializingSelector));
   }
 
   public isProcessing(): Observable<boolean> {

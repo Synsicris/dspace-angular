@@ -30,6 +30,9 @@ export const WorkpackageActionTypes = {
   GENERATE_WORKPACKAGE_STEP: type('dspace/core/workingplan/GENERATE_WORKPACKAGE_STEP'),
   GENERATE_WORKPACKAGE_STEP_ERROR: type('dspace/core/workingplan/GENERATE_WORKPACKAGE_STEP_ERROR'),
   GENERATE_WORKPACKAGE_STEP_SUCCESS: type('dspace/core/workingplan/GENERATE_WORKPACKAGE_STEP_SUCCESS'),
+  INIT_COMPARE: type('dspace/core/workingplan/INIT_COMPARE'),
+  INIT_COMPARE_ERROR: type('dspace/core/workingplan/INIT_COMPARE_ERROR'),
+  INIT_COMPARE_SUCCESS: type('dspace/core/workingplan/INIT_COMPARE_SUCCESS'),
   INIT_WORKINGPLAN: type('dspace/core/workingplan/INIT_WORKINGPLAN'),
   INIT_WORKINGPLAN_ERROR: type('dspace/core/workingplan/INIT_WORKINGPLAN_ERROR'),
   INIT_WORKINGPLAN_SUCCESS: type('dspace/core/workingplan/INIT_WORKINGPLAN_SUCCESS'),
@@ -294,6 +297,53 @@ export class AddWorkpackageStepSuccessAction implements Action {
  */
 export class AddWorkpackageStepErrorAction implements Action {
   type = WorkpackageActionTypes.ADD_WORKPACKAGE_STEP_ERROR;
+}
+
+/**
+ * An ngrx action to init working-plan compare
+ */
+export class InitCompareAction implements Action {
+  type = WorkpackageActionTypes.INIT_COMPARE;
+  payload: {
+    compareWorkingplanId: string;
+  };
+
+  /**
+   * Create a new InitCompareAction
+   *
+   * @param compareWorkingplanId
+   *    the working-plan id to compare with the current one
+   */
+  constructor(compareWorkingplanId: string) {
+    this.payload = { compareWorkingplanId };
+  }
+}
+
+/**
+ * An ngrx action for init error
+ */
+export class InitCompareErrorAction implements Action {
+  type = WorkpackageActionTypes.INIT_COMPARE_ERROR;
+}
+
+/**
+ * An ngrx action for init success
+ */
+export class InitCompareSuccessAction implements Action {
+  type = WorkpackageActionTypes.INIT_COMPARE_SUCCESS;
+  payload: {
+    workpackages: Workpackage[];
+  };
+
+  /**
+   * Create a new InitCompareSuccessAction
+   *
+   * @param workpackages
+   *    the list of workpackage objects
+   */
+  constructor(workpackages: Workpackage[]) {
+    this.payload = { workpackages };
+  }
 }
 
 /**
@@ -983,6 +1033,9 @@ export type WorkingPlanActions
   | GenerateWorkpackageStepAction
   | GenerateWorkpackageStepErrorAction
   | GenerateWorkpackageStepSuccessAction
+  | InitCompareAction
+  | InitCompareErrorAction
+  | InitCompareSuccessAction
   | InitWorkingplanAction
   | InitWorkingplanErrorAction
   | InitWorkingplanSuccessAction

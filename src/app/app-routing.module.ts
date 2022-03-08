@@ -100,6 +100,12 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
           {
+            path: 'entities/project/:id/exploitationplans',
+            loadChildren: () => import('./+exploitation-plan-page/exploitation-plan-page.module')
+              .then((m) => m.ExploitationPlanPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
             path: ITEM_MODULE_PATH,
             loadChildren: () => import('./item-page/item-page.module')
               .then((m) => m.ItemPageModule),

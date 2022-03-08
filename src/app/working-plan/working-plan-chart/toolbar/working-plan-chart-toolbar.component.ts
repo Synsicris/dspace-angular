@@ -12,6 +12,7 @@ import { ChartDateViewType } from '../../core/working-plan.reducer';
 import { Workpackage } from '../../core/models/workpackage-step.model';
 import { environment } from '../../../../environments/environment';
 import { hasValue } from '../../../shared/empty.util';
+import { Item } from '../../../core/shared/item.model';
 
 /**
  * @title Tree with nested nodes
@@ -32,6 +33,16 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
    * Array containing a list of Workpackage object
    */
   @Input() public workpackages: Observable<Workpackage[]>;
+
+  /**
+   * The working Plan item
+   */
+  @Input() workingPlan: Item;
+
+  /**
+   * A boolean representing if compare mode is active
+   */
+  @Input() public compareMode: Observable<boolean>;
 
   workpackagesCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   chartDateView: Observable<ChartDateViewType>;
@@ -110,4 +121,19 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
       .forEach((sub) => sub.unsubscribe());
   }
 
+  /**
+   * Dispatch initialization of comparing mode
+   *
+   * @param version
+   */
+  onVersionSelected(version: Item) {
+    this.workingPlanStateService.dispatchInitCompare(version.id);
+  }
+
+  /**
+   * Dispatch cleaning of comparing mode
+   */
+  onVersionDeselected() {
+    this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata);
+  }
 }

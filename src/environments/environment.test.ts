@@ -2,6 +2,7 @@
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { AppConfig } from '../config/app-config.interface';
+import { DisplayItemMetadataType } from '../config/display-search-result-config.interface';
 
 export const environment: AppConfig = {
   production: false,
@@ -383,5 +384,71 @@ export const environment: AppConfig = {
     exploitationPlanTaskFormSection: 'exploitation_plan_task_form',
     exploitationPlanEditFormSection: 'exploitation_plan-edit_form',
     exploitationPlanEditMode: 'EXPLOITATIONPLAN',
+  },
+  displayItemSearchResult: {
+    Publication: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.date.issued',
+            type: DisplayItemMetadataType.Date
+          },
+          {
+            name: 'dc.contributor.author',
+            type: DisplayItemMetadataType.Date
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.type',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+    ],
+    Event: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'oairecerif.event.startDate',
+            type: DisplayItemMetadataType.Date
+          },
+          {
+            name: 'dc.type',
+            type: DisplayItemMetadataType.Text
+          },
+          {
+            name: 'synsicris.type.project-contribution',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+    ]
   }
 };

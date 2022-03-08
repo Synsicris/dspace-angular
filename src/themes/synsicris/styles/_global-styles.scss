@@ -18,7 +18,8 @@
   }
 
   h5 {
-    font-size: 1.1rem
+    font-size: 1.1rem;
+    text-align: left;
   }
 }
 
@@ -44,6 +45,10 @@ ds-metric-donuts a {
 .card-header > button > span, .card-header > button > div > span {
   font-size: 22px;
   font-weight: bold;
+}
+
+.synsi-list::before {
+  content: '\2022';
 }
 
 

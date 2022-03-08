@@ -3099,6 +3099,14 @@
 
   "item.version.edit.notification.failure" : "The summary of version number {{version}} has not been changed",
 
+  "item.version.list.dropdown-text" : "Compare with...",
+
+  "item.version.list.option-text" : "Version : ",
+
+  "item.version.list.remove-text" : "Remove selection",
+
+  "item.version.list.selected-text" : "Version selected : ",
+
   "item-export.modal-launcher.single.btn": "Export",
 
   "item-export.modal-launcher.multiple.btn": "Export",
@@ -6829,9 +6837,9 @@
 
   "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
 
-  "working-plan.chart.toolbar.versions": "Versions",
-
   "working-plan.task.search.header": "",
+
+
 
   "application.listelement.badge": "Application of a solution / change / innovation",
 
