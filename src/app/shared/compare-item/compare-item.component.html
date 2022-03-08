@@ -2,24 +2,24 @@
     <ng-container *ngIf="!!items">
         <ng-container *ngVar="(metadataKeys$ | async) as metadataKeys">
             <div *ngIf="!!metadataKeys" class="table-container">
-                <table id="groups" class="table table-striped table-hover table-bordered">
+                <table id="metadataValues" class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
                             <th scope="col" class="align-middle">{{'compare-item.table.key' | translate}}</th>
-                            <th scope="col" class="align-middle">{{'compare-item.table.base-item' | translate}}</th>
                             <th scope="col" class="align-middle">{{'compare-item.table.versioned-item' | translate}}</th>
+                            <th scope="col" class="align-middle">{{'compare-item.table.base-item' | translate}}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let metadataKey of metadataKeys" [ngClass]="getClass(items[0].allMetadataValues(metadataKey),items[1].allMetadataValues(metadataKey))">
                             <td class="align-middle">{{metadataKey}}</td>
                             <td class="align-middle">
-                                <div *ngFor="let val of items[0].allMetadataValues(metadataKey)">
+                                <div *ngFor="let val of items[1].allMetadataValues(metadataKey)">
                                     {{val}}
                                 </div>
                             </td>
                             <td class="align-middle">
-                                <div *ngFor="let val of items[1].allMetadataValues(metadataKey)">
+                                <div *ngFor="let val of items[0].allMetadataValues(metadataKey)">
                                     {{val}}
                                 </div>
                             </td>

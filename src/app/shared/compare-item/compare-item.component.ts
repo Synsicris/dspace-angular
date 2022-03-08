@@ -14,37 +14,58 @@ import { environment } from '../../../environments/environment';
 })
 export class CompareItemComponent implements OnInit {
 
+  /**
+   * Base item Id to compare with
+   * @type {String}
+   */
   @Input() baseItemId: string;
+
+  /**
+   * Versioned item id to compare
+   * @type {String}
+   */
   @Input() versioneditemId: string;
 
+  /**
+   * Items that will be compared
+   * @type {Observable<[Item, Item]>}
+   */
   items$: Observable<[Item, Item]>;
-  baseItem$: Observable<Item>;
-  versioneditem$: Observable<Item>;
+
+  /**
+   * Metadata key list that will be compared
+   * @type {BehaviorSubject<string[]>}
+   */
   metadataKeys$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(undefined);
-  // get metadata filtered configuration
-  // metadata comparison
 
   constructor(private itemdataService: ItemDataService) { }
 
+  /**
+   * Initialize component by recieving the two items from api and creating the metadataKey list
+   */
   ngOnInit(): void {
-
-    this.baseItem$ = this.getSingleItemData(this.baseItemId);
-    this.versioneditem$ = this.getSingleItemData(this.versioneditemId);
     this.items$ = this.getItemsData().pipe(
-      tap(res => {
-        this.getMetaDataKeys(res);
+      tap((items: [Item, Item]) => {
+        this.getMetaDataKeys(items);
       })
     );
   }
 
+  /**
+   * Combine both requests of items
+   */
   getItemsData(): Observable<[Item, Item]> {
     const t = combineLatest(
-      this.baseItem$,
-      this.versioneditem$,
+      this.getSingleItemData(this.baseItemId),
+      this.getSingleItemData(this.versioneditemId),
     );
     return t;
   }
 
+  /**
+   * Construct the items api request
+   * @param itemId id of the item
+   */
   getSingleItemData(itemId: string): Observable<Item> {
     return this.itemdataService.findById(itemId).pipe(
       getFirstCompletedRemoteData(),
@@ -69,9 +90,9 @@ export class CompareItemComponent implements OnInit {
    * @param versionedItemMetadataValues versioned item metadata values
    */
   getClass(baseItemMetadataValues, versionedItemMetadataValues) {
-    if (baseItemMetadataValues.length < versionedItemMetadataValues.length) {
+    if (baseItemMetadataValues.length > versionedItemMetadataValues.length) {
       return 'table-success';
-    } else if (baseItemMetadataValues.length > versionedItemMetadataValues.length) {
+    } else if (baseItemMetadataValues.length < versionedItemMetadataValues.length) {
       return 'table-danger';
     } else {
       let cssClass = '';

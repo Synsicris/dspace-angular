@@ -1,9 +1,5 @@
 <div id="cris-layout-loader">
   <div *ngIf="!(windowService.isXsOrSm() | async)" class="vertical-layout">
-    <button class="btn btn-primary" (click)="openModal(modal)">OPEN MODAL</button>
-    <ng-template #modal let-c="close" let-d="dismiss">
-      <ds-compare-item (close)="c('cancel')" [baseItemId]="'df582766-5cdb-4b28-8efc-7001a8f70dac'" [versioneditemId]="'a94167e3-e462-4cd5-8538-b80a75a38847'"></ds-compare-item>
-    </ng-template>
     <ds-cris-layout-sidebar (selectedTabChange)="selectedTabChanged($event)" [showNav]="tabs.length > 1" [tabs]="tabs" [item]="item">
       <div *ngIf="showContextMenu" class="container text-right mb-3" [class.px-0]="tabs?.length > 1">
         <ds-context-menu [contextMenuObject]="item" [contextMenuObjectType]="'ITEM'"></ds-context-menu>
