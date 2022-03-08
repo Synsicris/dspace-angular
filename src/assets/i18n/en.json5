@@ -1334,6 +1334,14 @@
 
   "community.sub-community-list.head": "Communities of this Community",
 
+  "compare-item.header": "Compare difference between versions",
+
+  "compare-item.table.key": "Metadata",
+
+  "compare-item.table.base-item": "Base Item",
+
+  "compare-item.table.versioned-item": "Versioned Item",
+
   "context-menu.actions": "Actions",
 
   "context-menu.actions.audit-item.btn": "Audit",
@@ -6744,6 +6752,8 @@
   "working-plan.chart.button.collapseAll": "Collapse all",
 
   "working-plan.chart.button.add": "Add",
+
+  "working-plan.chart.button.compare": "Show difference",
 
   "working-plan.chart.button.remove": "Unlink item",
 

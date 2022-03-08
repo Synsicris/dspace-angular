@@ -104,7 +104,7 @@
             </button>
           </div>
           <div class="mr-05 d-flex flex-column justify-content-between">
-            <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger"
+            <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end"
                     title="{{'working-plan.chart.button.remove' | translate}}"
                     [class.ml-1]="node.level !== 0"
                     [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async)"
@@ -112,14 +112,23 @@
               <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
               <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
             </button>
-            <button *ngIf="(isEditAvailable(node.id) | async)" mat-icon-button
-                    [disabled]="(compareMode | async)"
-                    class="btn btn-xs btn-link p-0 text-primary"
-                    [class.ml-1]="node.level !== 0"
-                    title="{{'working-plan.chart.button.edit' | translate}}"
-                    [routerLink]="['/edit-items', node.id + ':' + (getEditModes() | async).get(node.id)[0].name]">
-              <i class="fas fa-edit"></i>
-            </button>
+            <div class="d-flex">
+              <button *ngIf="(compareMode | async) && node.compareStatus === ComparedVersionItemStatus.Changed" mat-icon-button
+                      class="btn btn-xs btn-link p-0 text-primary"
+                      [class.ml-1]="node.level !== 0"
+                      title="{{'working-plan.chart.button.compare' | translate}}"
+                      (click)="openCompareModal(node)">
+                <i class="fas fa-not-equal"></i>
+              </button>
+              <button *ngIf="(isEditAvailable(node.id) | async)" mat-icon-button
+                      [disabled]="(compareMode | async)"
+                      class="btn btn-xs btn-link p-0 text-primary"
+                      [class.ml-1]="node.level !== 0"
+                      title="{{'working-plan.chart.button.edit' | translate}}"
+                      [routerLink]="['/edit-items', node.id + ':' + (getEditModes() | async).get(node.id)[0].name]">
+                <i class="fas fa-edit"></i>
+              </button>
+            </div>
           </div>
         </mat-tree-node>
       </mat-tree>
