@@ -5,7 +5,6 @@ import { CrisLayoutTab } from '../../../core/layout/models/tab.model';
 import { Item } from '../../../core/shared/item.model';
 import { BehaviorSubject } from 'rxjs';
 import { HostWindowService } from '../../../shared/host-window.service';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ds-cris-layout-vertical',
@@ -35,29 +34,13 @@ export class CrisLayoutVerticalComponent {
    */
   @Input() leadingTabs: CrisLayoutTab[];
 
-  /**
-   * Reference to NgbModal
-   */
-  public modalRef: NgbModalRef;
-
 
   selectedTab$: BehaviorSubject<CrisLayoutTab> = new BehaviorSubject<CrisLayoutTab>(null);
 
-  constructor(public windowService: HostWindowService, private modalService: NgbModal) {
+  constructor(public windowService: HostWindowService) {
   }
 
   selectedTabChanged(tab: CrisLayoutTab) {
     this.selectedTab$.next(tab);
   }
-
-
-  /**
-   * Open modal
-   *
-   * @param content
-   */
-  public openModal(modal: any) {
-    this.modalRef = this.modalService.open(modal, { size: 'xl' });
-  }
-
 }
