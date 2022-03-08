@@ -62,16 +62,22 @@ export class CompareItemComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private itemService: ItemDataService) {
   }
 
+  /**
+   * Initialize component by recieving the two items from api and creating the metadataKey list
+   */
   ngOnInit(): void {
     this.baseItem$ = this.getSingleItemData(this.baseItemId);
     this.versionedItem$ = this.getSingleItemData(this.versionedItemId);
     this.items$ = this.getItemsData().pipe(
-      tap(res => {
-        this.getMetaDataKeys(res);
+      tap((items: [Item, Item]) => {
+        this.getMetaDataKeys(items);
       })
     );
   }
 
+  /**
+   * Combine both requests of items
+   */
   getItemsData(): Observable<[Item, Item]> {
     return combineLatest([
       this.baseItem$,
@@ -79,6 +85,10 @@ export class CompareItemComponent implements OnInit {
     ]);
   }
 
+  /**
+   * Construct the items api request
+   * @param itemId id of the item
+   */
   getSingleItemData(itemId: string): Observable<Item> {
     return this.itemService.findById(itemId).pipe(
       getFirstCompletedRemoteData(),

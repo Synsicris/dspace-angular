@@ -324,6 +324,11 @@ export const environment: AppConfig = {
     scriptUrl: 'http://s7.addthis.com/js/300/addthis_widget.js#pubid=',
     socialNetworksEnabled: false
   },
+  projects: {
+    projectsGrantsOptionsVocabularyName: 'item_shared',
+    projectsEntityEditMode: 'CUSTOM',
+    excludeComparisonMetadata: ['dspace.entity.type']
+  },
   impactPathway: {
     impactPathwaysFormSection: 'impact_pathway_form',
     impactPathwayStepsFormSection: 'impact_pathway_step_form',
@@ -371,15 +376,8 @@ export const environment: AppConfig = {
     workingPlanPlaceMetadata: 'workingplan.place',
     workingPlanLinkMetadata: 'workingplan.link.status'
   },
-
-  projects: {
-    projectsGrantsOptionsVocabularyName: 'item_shared',
-    projectsEntityEditMode: 'CUSTOM',
-    projectVersionUniqueIdMetadata: 'synsicris.uniqueid'
-  },
-
   exploitationPlan: {
-    exploitationPlanRelationMetadata: 'synsicris.relation.exploitationplan',
+    exploitationPlanRelationMetadata: 'dc.relation.exploitationplan',
     exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
     exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
     exploitationPlanPartnerMetadata: '',
@@ -387,7 +385,6 @@ export const environment: AppConfig = {
     exploitationPlanEditFormSection: 'exploitation_plan-edit_form',
     exploitationPlanEditMode: 'EXPLOITATIONPLAN',
   },
-
   displayItemSearchResult: {
     Publication: [
       {
