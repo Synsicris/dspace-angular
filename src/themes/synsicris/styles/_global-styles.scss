@@ -47,4 +47,8 @@ ds-metric-donuts a {
   font-weight: bold;
 }
 
+.synsi-list::before {
+  content: '\2022';
+}
+
 
