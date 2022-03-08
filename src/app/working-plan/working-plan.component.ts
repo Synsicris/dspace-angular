@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
-import { combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+
 import { environment } from '../../environments/environment';
 import { Workpackage } from './core/models/workpackage-step.model';
 import { WorkingPlanStateService } from './core/working-plan-state.service';
@@ -11,7 +12,7 @@ import { RemoteData } from '../core/data/remote-data';
 import { PaginatedList } from '../core/data/paginated-list.model';
 import { Collection } from '../core/shared/collection.model';
 import { getFirstSucceededRemoteWithNotEmptyData } from '../core/shared/operators';
-import { isEmpty } from '../shared/empty.util';
+import { hasValue, isEmpty } from '../shared/empty.util';
 import { Item } from '../core/shared/item.model';
 
 @Component({
@@ -31,8 +32,16 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
    */
   @Input() workingPlan: Item;
 
+  /**
+   * A boolean representing if compare mode is active
+   */
+  compareMode: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   workPackageCollectionId: string;
+
   milestoneCollectionId: string;
+
+  private subs: Subscription[] = [];
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -43,6 +52,11 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.retrieveCollections();
+
+    this.subs.push(
+      this.workingPlanStateService.isCompareModeActive()
+        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
+    );
   }
 
   ngAfterViewInit(): void {
@@ -65,6 +79,9 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.workingPlanStateService.dispatchCleanState();
+    this.subs
+      .filter((subscription) => hasValue(subscription))
+      .forEach((subscription) => subscription.unsubscribe());
   }
 
   private retrieveCollections(): void {

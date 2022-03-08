@@ -508,7 +508,16 @@ export class DefaultAppConfig implements AppConfig {
 
   projects: ProjectsConfig = {
     projectsGrantsOptionsVocabularyName: 'item_shared',
-    projectsEntityEditMode: 'CUSTOM'
+    projectsEntityEditMode: 'CUSTOM',
+    projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
+    excludeComparisonMetadata: [
+      'cris.policy.group', 'cris.project.shared', 'dc.date.accessioned', 'dc.date.available', 'dspace.entity.type',
+      'synsicris.common-policy.group', 'synsicris.relation.parentproject', 'synsicris.relation.project', 'synsicris.uniqueid',
+      'synsicris.relation.workingplan', 'workingplan.link.status', 'workingplan.place', 'workingplan.relation.step',
+      'impactpathway.relation.parent', 'impactpathway.relation.step', 'impactpathway.relation.task',
+      'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
+      'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
+    ]
   };
 
   exploitationPlan = {

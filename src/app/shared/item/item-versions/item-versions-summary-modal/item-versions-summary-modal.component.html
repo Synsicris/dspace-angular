@@ -1,6 +1,6 @@
 <div>
   <div class="modal-header">{{'item.version.create.modal.header' | translate}}
-    <button type="button" class="close" (click)="onModalClose()" aria-label="Close">
+    <button type="button" class="close" [disabled]="processing$ | async" (click)="onModalClose()" aria-label="Close">
       <span aria-hidden="true">×</span>
     </button>
   </div>
@@ -22,15 +22,22 @@
   <div class="modal-footer">
       <button class="btn btn-outline-secondary btn-sm"
               type="button"
+              [disabled]="processing$ | async"
               (click)="onModalClose()"
               title="{{'item.version.create.modal.button.cancel.tooltip' | translate}}">
         <i class="fas fa-times fa-fw"></i> {{'item.version.create.modal.button.cancel' | translate}}
       </button>
       <button class="btn btn-success btn-sm"
               type="submit"
+              [disabled]="processing$ | async"
               (click)="onModalSubmit()"
               title="{{'item.version.create.modal.button.confirm.tooltip' | translate}}">
-        <i class="fas fa-check fa-fw"></i> {{'item.version.create.modal.button.confirm' | translate}}
+        <span *ngIf="!(processing$ | async)">
+          <i class="fas fa-check fa-fw"></i> {{'item.version.create.modal.button.confirm' | translate}}
+        </span>
+        <span *ngIf="(processing$ | async)">
+          <i class="fas fa-circle-notch fa-spin"></i> {{'item.version.create.modal.button.processing' | translate}}
+        </span>
     </button>
   </div>
 </div>

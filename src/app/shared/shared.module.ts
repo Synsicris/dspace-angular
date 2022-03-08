@@ -8,14 +8,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { NouisliderModule } from 'ng2-nouislider';
 import {
-    NgbCollapseModule,
-    NgbDatepickerModule,
-    NgbDropdownModule,
-    NgbNavModule,
-    NgbPaginationModule,
-    NgbTimepickerModule,
-    NgbTooltipModule,
-    NgbTypeaheadModule
+  NgbCollapseModule,
+  NgbDatepickerModule,
+  NgbDropdownModule,
+  NgbNavModule,
+  NgbPaginationModule,
+  NgbTimepickerModule,
+  NgbTooltipModule,
+  NgbTypeaheadModule
 } from '@ng-bootstrap/ng-bootstrap';
 import { MissingTranslationHandler, TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -238,6 +238,8 @@ import { InvitationModalComponent } from './invitation-modal/invitation-modal.co
 import { EditItemGrantsModalComponent } from './edit-item-grants-modal/edit-item-grants-modal.component';
 import { ItemCreateComponent } from './item/item-create/item-create.component';
 import { AuthorityDropdownComponent } from './authority-dropdown/authority-dropdown.component';
+import { ItemVersionListComponent } from './item-version-list/item-version-list.component';
+import { CompareItemComponent } from './compare-item/compare-item.component';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -465,7 +467,9 @@ const COMPONENTS = [
   AuthorityDropdownComponent,
   CreateProjectComponent,
   InvitationModalComponent,
-  EditItemGrantsModalComponent
+  EditItemGrantsModalComponent,
+  ItemVersionListComponent,
+  CompareItemComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -587,11 +591,11 @@ const DIRECTIVES = [
 ];
 
 @NgModule({
-    imports: [
-        ...MODULES,
-        ...ROOT_MODULES,
-        NgbCollapseModule,
-    ],
+  imports: [
+    ...MODULES,
+    ...ROOT_MODULES,
+    NgbCollapseModule,
+  ],
   declarations: [
     ...PIPES,
     ...COMPONENTS,
@@ -601,7 +605,6 @@ const DIRECTIVES = [
     ItemVersionsDeleteModalComponent,
     ItemExportAlertComponent,
     MetricPlumxComponent,
-    InvitationModalComponent
   ],
   providers: [
     ...PROVIDERS

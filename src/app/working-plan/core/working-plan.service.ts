@@ -66,6 +66,7 @@ import { CollectionDataService } from '../../core/data/collection-data.service';
 import { RequestService } from '../../core/data/request.service';
 import { ProjectItemService } from '../../core/project/project-item.service';
 import { ProjectDataService } from '../../core/project/project-data.service';
+import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 
 export const moment = extendMoment(Moment);
 
@@ -98,6 +99,7 @@ export class WorkingPlanService {
     private itemService: ItemDataService,
     private projectItemService: ProjectItemService,
     private projectService: ProjectDataService,
+    private projectVersionService: ProjectVersionService,
     private linkService: LinkService,
     private operationsBuilder: JsonPatchOperationsBuilder,
     private requestService: RequestService,
@@ -302,7 +304,7 @@ export class WorkingPlanService {
 
   public initWorkpackageFromItem(item: Item, workspaceItemId: string, steps: WorkpackageStep[] = []): Workpackage {
 
-    const dates = this.initWorkpackageDatesFromItem(item);
+    const dates = this.initWorkpackageDates(item);
     const responsible = item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
     const status = item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
     const type = item.firstMetadataValue('dspace.entity.type');
@@ -322,9 +324,55 @@ export class WorkingPlanService {
     };
   }
 
+  public initWorkpackageFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, steps: WorkpackageStep[] = []): WorkpackageStep {
+    const dates = this.initWorkpackageDates(compareObj.item, compareObj.versionItem);
+    const responsible = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
+    const status = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
+    const type = compareObj.item.firstMetadataValue('dspace.entity.type');
+
+    return {
+      id: compareObj.item.id,
+      compareId: compareObj.versionItem?.id,
+      parentId: parentId,
+      name: compareObj.item.name,
+      type: type,
+      responsible: responsible,
+      progress: 0,
+      progressDates: [],
+      dates: dates,
+      compareStatus: compareObj.status,
+      status: status,
+      steps: steps,
+      expanded: (steps && steps.length > 0)
+    };
+  }
+
+  public initWorkpackageStepFromCompareItem(compareObj: ComparedVersionItem, parentId?: string): WorkpackageStep {
+
+    const dates = this.initWorkpackageDates(compareObj.item, compareObj.versionItem);
+    const responsible = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
+    const status = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
+    const type = compareObj.item.firstMetadataValue('dspace.entity.type');
+
+    return {
+      id: compareObj.item.id,
+      compareId: compareObj.versionItem?.id,
+      parentId: parentId,
+      name: compareObj.item.name,
+      type: type,
+      responsible: responsible,
+      progress: 0,
+      progressDates: [],
+      dates: dates,
+      compareStatus: compareObj.status,
+      status: status,
+      expanded: false
+    };
+  }
+
   public initWorkpackageStepFromItem(item: Item, workspaceItemId: string, parentId: string): WorkpackageStep {
 
-    const dates = this.initWorkpackageDatesFromItem(item);
+    const dates = this.initWorkpackageDates(item);
     const responsible = item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
     const status = item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
     const type = item.firstMetadataValue('dspace.entity.type');
@@ -342,6 +390,50 @@ export class WorkingPlanService {
       status: status,
       expanded: false
     };
+  }
+
+  initCompareWorkingPlan(compareList: ComparedVersionItem[]): Observable<Workpackage[]> {
+    return observableFrom(compareList).pipe(
+      concatMap((compareItem: ComparedVersionItem) => this.initCompareWorkpackageStepsFromParentItem(
+        compareItem.item.id,
+        compareItem.item,
+        compareItem.versionItem?.id).pipe(
+        map((steps: WorkpackageStep[]) => this.initWorkpackageFromCompareItem(
+          compareItem,
+          null,
+          steps
+        ))
+      )),
+      reduce((acc: any, value: any) => [...acc, value], [])
+    );
+  }
+
+  initCompareWorkpackageStepsFromParentItem(targetWorkpackageId: string, targetItem: Item, versionedWorkpackageId: string): Observable<WorkpackageStep[]> {
+    const relatedTaskMetadata = Metadata.all(targetItem.metadata, environment.workingPlan.workingPlanStepRelationMetadata);
+    if (isEmpty(relatedTaskMetadata) || isEmpty(versionedWorkpackageId)) {
+      return observableOf([]);
+    } else {
+      return this.projectVersionService.compareItemChildrenByMetadata(
+        targetWorkpackageId,
+        versionedWorkpackageId,
+        environment.workingPlan.workingPlanStepRelationMetadata).pipe(
+          mergeMap((compareList: ComparedVersionItem[]) => {
+            return observableFrom(compareList).pipe(
+              concatMap((compareItem: ComparedVersionItem) => observableOf(this.initWorkpackageStepFromCompareItem(
+                compareItem,
+                targetWorkpackageId)
+              )),
+              reduce((acc: any, value: any) => {
+                if (isNotNull(value)) {
+                  return [...acc, value];
+                } else {
+                  return acc;
+                }
+              }, [])
+            );
+          })
+      );
+    }
   }
 
   initWorkingPlan(workpackageListItem: WorkpackageSearchItem[]): Observable<Workpackage[]> {
@@ -399,7 +491,18 @@ export class WorkingPlanService {
     }
   }
 
-  initWorkpackageDatesFromItem(item: Item): WorkpackageChartDates {
+  initWorkpackageDates(item: Item, versionedItem?: Item): WorkpackageChartDates {
+    const dates = this.retrieveWorkpackageDatesFromItem(item);
+    if (isNotEmpty(versionedItem)) {
+      const compareDates = this.retrieveWorkpackageDatesFromItem(versionedItem);
+      dates.compareStart = compareDates.start;
+      dates.compareEnd = compareDates.end;
+    }
+
+    return dates;
+  }
+
+  retrieveWorkpackageDatesFromItem(item: Item): WorkpackageChartDates {
     let start;
     let startMonth;
     let startYear;

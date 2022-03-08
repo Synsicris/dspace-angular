@@ -1,4 +1,5 @@
 import { Item } from '../../../core/shared/item.model';
+import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 
 export interface WorkpackageSearchItem {
   id: string;
@@ -7,6 +8,8 @@ export interface WorkpackageSearchItem {
 export interface WorkpackageChartDates {
   start: WorkpackageChartDate;
   end: WorkpackageChartDate;
+  compareStart?: WorkpackageChartDate;
+  compareEnd?: WorkpackageChartDate;
 }
 
 export interface WorkpackageChartDate {
@@ -23,7 +26,8 @@ export interface WorkpackageStep extends WorkpackageTreeObject {
 
 export interface WorkpackageTreeObject {
   id: string;
-  workspaceItemId: string;
+  compareId?: string;
+  workspaceItemId?: string;
   parentId?: string;
   name: string;
   type: string;
@@ -31,6 +35,7 @@ export interface WorkpackageTreeObject {
   progress: number;
   progressDates: string[];
   dates: WorkpackageChartDates;
+  compareStatus?: ComparedVersionItemStatus;
   status: string;
   expanded: boolean; // status of expanded
   steps?: WorkpackageTreeObject[];

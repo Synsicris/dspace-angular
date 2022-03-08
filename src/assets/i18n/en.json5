@@ -1348,6 +1348,14 @@
 
   "community.sub-community-list.head": "Communities of this Community",
 
+  "compare-item.header": "Compare difference between versions",
+
+  "compare-item.table.key": "Metadata",
+
+  "compare-item.table.base-item": "Base Item",
+
+  "compare-item.table.versioned-item": "Versioned Item",
+
   "context-menu.actions": "Actions",
 
   "context-menu.actions.audit-item.btn": "Audit",
@@ -3052,6 +3060,8 @@
 
   "item.version.create.modal.button.confirm": "Create",
 
+  "item.version.create.modal.button.processing": "Processing...",
+
   "item.version.create.modal.button.confirm.tooltip": "Create new version",
 
   "item.version.create.modal.button.cancel": "Cancel",
@@ -3087,6 +3097,14 @@
   "item.version.edit.notification.success": "The summary of version number {{version}} has been changed",
 
   "item.version.edit.notification.failure": "The summary of version number {{version}} has not been changed",
+
+  "item.version.list.dropdown-text" : "Compare with...",
+
+  "item.version.list.option-text" : "Version : ",
+
+  "item.version.list.remove-text" : "Remove selection",
+
+  "item.version.list.selected-text" : "Version selected : ",
 
   "item-export.modal-launcher.single.btn": "Export",
 
@@ -6716,6 +6734,8 @@
 
   "working-plan.chart.button.add": "Add",
 
+  "working-plan.chart.button.compare": "Show difference",
+
   "working-plan.chart.button.remove": "Unlink item",
 
   "working-plan.chart.button.edit": "Edit item",
@@ -6802,9 +6822,9 @@
 
   "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
 
-  "working-plan.chart.toolbar.versions": "Versions",
-
   "working-plan.task.search.header": "",
+
+
 
   "application.listelement.badge": "Application of a solution / change / innovation",
 
