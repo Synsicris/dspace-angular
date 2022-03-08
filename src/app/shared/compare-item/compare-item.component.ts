@@ -1,11 +1,16 @@
-import { ItemDataService } from './../../core/data/item-data.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
-import { Item } from 'src/app/core/shared/item.model';
+
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { getFirstCompletedRemoteData, getRemoteDataPayload } from 'src/app/core/shared/operators';
-import { combineLatest } from 'rxjs';
+import { differenceWith, unionWith } from 'lodash';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { ItemDataService } from '../../core/data/item-data.service';
+import { Item } from '../../core/shared/item.model';
+import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../core/shared/operators';
 import { environment } from '../../../environments/environment';
+import { MetadataValue } from '../../core/shared/metadata.models';
+import { _isMetadataEqualComparator } from './compare-item.util';
 
 @Component({
   selector: 'ds-compare-item',
@@ -14,22 +19,52 @@ import { environment } from '../../../environments/environment';
 })
 export class CompareItemComponent implements OnInit {
 
+  /**
+   * The base item for comparison
+   */
   @Input() baseItemId: string;
-  @Input() versioneditemId: string;
 
-  items$: Observable<[Item, Item]>;
-  baseItem$: Observable<Item>;
-  versioneditem$: Observable<Item>;
-  metadataKeys$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(undefined);
-  // get metadata filtered configuration
-  // metadata comparison
+  /**
+   * The versioned item to compare
+   */
+  @Input() versionedItemId: string;
 
-  constructor(private itemdataService: ItemDataService) { }
+  /**
+   * The items to compare
+   */
+  public items$: Observable<[Item, Item]>;
+
+  /**
+   * The list of metadata to show in the comparison
+   */
+  public metadataKeys$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(undefined);
+
+  /**
+   * The base item
+   */
+  protected baseItem$: Observable<Item>;
+
+  /**
+   * The versioned item
+   */
+  protected versionedItem$: Observable<Item>;
+
+  /**
+   * The list of metadata added in the base item
+   */
+  protected metadataAddedList$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(undefined);
+
+  /**
+   * The list of metadata removed in the base item
+   */
+  protected metadataRemovedList$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(undefined);
+
+  constructor(public activeModal: NgbActiveModal, private itemService: ItemDataService) {
+  }
 
   ngOnInit(): void {
-
     this.baseItem$ = this.getSingleItemData(this.baseItemId);
-    this.versioneditem$ = this.getSingleItemData(this.versioneditemId);
+    this.versionedItem$ = this.getSingleItemData(this.versionedItemId);
     this.items$ = this.getItemsData().pipe(
       tap(res => {
         this.getMetaDataKeys(res);
@@ -38,15 +73,14 @@ export class CompareItemComponent implements OnInit {
   }
 
   getItemsData(): Observable<[Item, Item]> {
-    const t = combineLatest(
+    return combineLatest([
       this.baseItem$,
-      this.versioneditem$,
-    );
-    return t;
+      this.versionedItem$
+    ]);
   }
 
   getSingleItemData(itemId: string): Observable<Item> {
-    return this.itemdataService.findById(itemId).pipe(
+    return this.itemService.findById(itemId).pipe(
       getFirstCompletedRemoteData(),
       getRemoteDataPayload()
     );
@@ -58,29 +92,42 @@ export class CompareItemComponent implements OnInit {
    */
   getMetaDataKeys(items: Item[]) {
     const excludedMetadata = !!environment.projects.excludeComparisonMetadata ? environment.projects.excludeComparisonMetadata : [];
-    let metadatakeys = Object.keys(items[0].metadata).concat(Object.keys(items[1].metadata));
-    metadatakeys = metadatakeys.filter((metadata) => excludedMetadata.indexOf(metadata) === -1);
-    this.metadataKeys$.next(metadatakeys);
+    const baseItemMetadataList = Object.keys(items[0].metadata).filter((metadata) => excludedMetadata.indexOf(metadata) === -1);
+    const versionedItemMetadataList = Object.keys(items[1].metadata).filter((metadata) => excludedMetadata.indexOf(metadata) === -1);
+
+    const metadataAddedList = differenceWith(baseItemMetadataList, versionedItemMetadataList);
+    const metadataRemovedList = differenceWith(versionedItemMetadataList, baseItemMetadataList);
+    const unionList = unionWith(baseItemMetadataList, versionedItemMetadataList);
+
+    this.metadataKeys$.next(unionList);
+    this.metadataAddedList$.next(metadataAddedList);
+    this.metadataRemovedList$.next(metadataRemovedList);
   }
 
   /**
-   * Compare metadata values
-   * @param baseItemMetadataValues base item metadata values
-   * @param versionedItemMetadataValues versioned item metadata values
+   * Return the row style based on metadata comparison
+   *
+   * @param metadataName                 The current metadata to show
+   * @param baseItemMetadataValues      The base item metadata values
+   * @param versionedItemMetadataValues The versioned item metadata values
    */
-  getClass(baseItemMetadataValues, versionedItemMetadataValues) {
-    if (baseItemMetadataValues.length < versionedItemMetadataValues.length) {
+  getClass(metadataName: string, baseItemMetadataValues: MetadataValue[], versionedItemMetadataValues: MetadataValue[]): string {
+    console.log(metadataName);
+    if (this.metadataAddedList$.value.includes(metadataName)) {
       return 'table-success';
-    } else if (baseItemMetadataValues.length > versionedItemMetadataValues.length) {
+    }
+
+    if (this.metadataRemovedList$.value.includes(metadataName)) {
       return 'table-danger';
-    } else {
-      let cssClass = '';
-      baseItemMetadataValues.forEach((el) => {
-        if (versionedItemMetadataValues.indexOf(el) === -1) {
-          cssClass = 'table-warning';
-        }
-      });
-      return cssClass;
+    }
+
+    if (baseItemMetadataValues.length !== versionedItemMetadataValues.length) {
+      return 'table-warning';
+    }
+
+    const differenceList = differenceWith(baseItemMetadataValues, versionedItemMetadataValues, _isMetadataEqualComparator);
+    if (differenceList.length > 0) {
+      return 'table-warning';
     }
   }
 

@@ -1334,11 +1334,13 @@
 
   "community.sub-community-list.head": "Communities of this Community",
 
-  'compare-item.table.key': 'Metadata',
+  "compare-item.header": "Compare difference between versions",
 
-  'compare-item.table.base-item': 'Base Item',
+  "compare-item.table.key": "Metadata",
 
-  'compare-item.table.versioned-item': 'Versioned Item',
+  "compare-item.table.base-item": "Base Item",
+
+  "compare-item.table.versioned-item": "Versioned Item",
 
   "context-menu.actions": "Actions",
 
