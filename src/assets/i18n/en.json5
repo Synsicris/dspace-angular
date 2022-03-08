@@ -6753,6 +6753,8 @@
 
   "working-plan.chart.button.add": "Add",
 
+  "working-plan.chart.button.compare": "Show difference",
+
   "working-plan.chart.button.remove": "Unlink item",
 
   "working-plan.chart.button.edit": "Edit item",

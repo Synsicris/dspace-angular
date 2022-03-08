@@ -32,6 +32,7 @@ import { NgbDateStructToString, stringToNgbDateStruct } from '../../../shared/da
 import { Item } from '../../../core/shared/item.model';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
+import { CompareItemComponent } from '../../../shared/compare-item/compare-item.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -998,5 +999,16 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   getDateStruct(date: string): NgbDateStruct {
     return isNotEmpty(date) ? stringToNgbDateStruct(date) : null;
+  }
+
+  /**
+   * Open a modal for item metadata comparison
+   *
+   * @param node
+   */
+  openCompareModal(node: WorkpacakgeFlatNode) {
+    const modalRef = this.modalService.open(CompareItemComponent, { size: 'xl' });
+    (modalRef.componentInstance as CompareItemComponent).baseItemId = node.id;
+    (modalRef.componentInstance as CompareItemComponent).versionedItemId = node.compareId;
   }
 }
