@@ -327,6 +327,7 @@ export const environment: AppConfig = {
   projects: {
     projectsGrantsOptionsVocabularyName: 'item_shared',
     projectsEntityEditMode: 'CUSTOM',
+    projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
     excludeComparisonMetadata: ['dspace.entity.type']
   },
   impactPathway: {

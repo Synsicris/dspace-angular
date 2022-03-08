@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CompareItemComponent } from './compare-item.component';
 import { ItemDataService } from '../../core/data/item-data.service';
@@ -9,15 +9,16 @@ import { of as observableOf } from 'rxjs';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../shared.module';
 import { TranslateLoaderMock } from '../mocks/translate-loader.mock';
-
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 describe('CompareItemComponent', () => {
   let component: CompareItemComponent;
   let fixture: ComponentFixture<CompareItemComponent>;
   let de: DebugElement;
+  const modal = jasmine.createSpyObj('modal', ['close', 'dismiss']);
   const baseItem = Object.assign(new Item(),
     {
       type: 'item',
@@ -53,7 +54,7 @@ describe('CompareItemComponent', () => {
       ],
       providers: [
         { provide: ItemDataService, useValue: itemDataService },
-
+        { provide: NgbActiveModal, useValue: modal },
       ]
     })
       .compileComponents();
@@ -64,7 +65,7 @@ describe('CompareItemComponent', () => {
     component = fixture.componentInstance;
     de = fixture.debugElement;
     component.baseItemId = 'df582766-5cdb-4b28-8efc-7001a8f70dac';
-    component.versioneditemId = 'a94167e3-e462-4cd5-8538-b80a75a38847';
+    component.versionedItemId = 'a94167e3-e462-4cd5-8538-b80a75a38847';
     fixture.detectChanges();
   });
 
