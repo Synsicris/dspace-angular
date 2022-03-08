@@ -324,7 +324,30 @@ export class WorkingPlanService {
     };
   }
 
-  public initWorkpackageFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, steps?): WorkpackageStep {
+  public initWorkpackageFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, steps: WorkpackageStep[] = []): WorkpackageStep {
+    const dates = this.initWorkpackageDates(compareObj.item, compareObj.versionItem);
+    const responsible = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
+    const status = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
+    const type = compareObj.item.firstMetadataValue('dspace.entity.type');
+
+    return {
+      id: compareObj.item.id,
+      compareId: compareObj.versionItem?.id,
+      parentId: parentId,
+      name: compareObj.item.name,
+      type: type,
+      responsible: responsible,
+      progress: 0,
+      progressDates: [],
+      dates: dates,
+      compareStatus: compareObj.status,
+      status: status,
+      steps: steps,
+      expanded: (steps && steps.length > 0)
+    };
+  }
+
+  public initWorkpackageStepFromCompareItem(compareObj: ComparedVersionItem, parentId?: string): WorkpackageStep {
 
     const dates = this.initWorkpackageDates(compareObj.item, compareObj.versionItem);
     const responsible = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
@@ -396,7 +419,7 @@ export class WorkingPlanService {
         environment.workingPlan.workingPlanStepRelationMetadata).pipe(
           mergeMap((compareList: ComparedVersionItem[]) => {
             return observableFrom(compareList).pipe(
-              concatMap((compareItem: ComparedVersionItem) => observableOf(this.initWorkpackageFromCompareItem(
+              concatMap((compareItem: ComparedVersionItem) => observableOf(this.initWorkpackageStepFromCompareItem(
                 compareItem,
                 targetWorkpackageId)
               )),
