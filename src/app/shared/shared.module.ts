@@ -468,6 +468,7 @@ const COMPONENTS = [
   CreateProjectComponent,
   InvitationModalComponent,
   EditItemGrantsModalComponent,
+  ItemVersionListComponent,
   CompareItemComponent
 ];
 
@@ -604,8 +605,6 @@ const DIRECTIVES = [
     ItemVersionsDeleteModalComponent,
     ItemExportAlertComponent,
     MetricPlumxComponent,
-    InvitationModalComponent,
-    ItemVersionListComponent
   ],
   providers: [
     ...PROVIDERS
@@ -616,8 +615,7 @@ const DIRECTIVES = [
     ...COMPONENTS,
     ...SHARED_ITEM_PAGE_COMPONENTS,
     ...DIRECTIVES,
-    TranslateModule,
-    ItemVersionListComponent
+    TranslateModule
   ]
 })
 
