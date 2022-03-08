@@ -23,6 +23,7 @@ import { ProjectItemService } from '../core/project/project-item.service';
 import { CreateSimpleItemModule } from '../shared/create-simple-item-modal/create-simple-item.module';
 import { ComcolModule } from '../shared/comcol/comcol.module';
 import { EditSimpleItemModalModule } from '../shared/edit-simple-item-modal/edit-simple-item-modal.module';
+import { WorkingPlanChartDatesComponent } from './working-plan-chart/container/working-plan-chart-dates/working-plan-chart-dates.component';
 
 const MODULES = [
   CommonModule,
@@ -41,6 +42,7 @@ const COMPONENTS = [
   WorkingPlanComponent,
   WorkingPlanChartComponent,
   WorkingPlanChartContainerComponent,
+  WorkingPlanChartDatesComponent,
   WorkingPlanChartToolbarComponent
 ];
 
@@ -64,7 +66,7 @@ const PROVIDERS = [
   declarations: [
     ...COMPONENTS,
     ...DIRECTIVES,
-    ...ENTRY_COMPONENTS
+    ...ENTRY_COMPONENTS,
   ],
   providers: [
     ...PROVIDERS

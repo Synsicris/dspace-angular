@@ -3,19 +3,16 @@
     <span>
       <button class="btn btn-link text-decoration-none"
               title="{{'working-plan.chart.toolbar.add-btn' | translate}}"
+              [disabled]="(compareMode | async)"
               (click)="createWorkpackage()">
         <i class="fas fa-plus-circle fa-2x"></i>
       </button>
     </span>
     <span fxFlex></span>
     <div *ngIf="(workpackages | async)?.length > 0" class="btn-group btn-group-sm mr-2">
-      <div ngbDropdown class="d-inline-block">
-        <button class="btn btn-primary btn-sm" id="wpVersions" ngbDropdownToggle>{{'working-plan.chart.toolbar.versions' | translate}}</button>
-        <div ngbDropdownMenu aria-labelledby="wpVersions">
-          <button class="btn-sm" ngbDropdownItem>Option1</button>
-          <button class="btn-sm" ngbDropdownItem>Option2</button>
-        </div>
-      </div>
+      <ds-item-version-list [targetItemId]="workingPlan.id"
+                            (versionSelected)="onVersionSelected($event)"
+                            (versionDeselected)="onVersionDeselected()"></ds-item-version-list>
     </div>
     <div *ngIf="(workpackages | async)?.length > 0" class="btn-group btn-group-sm">
       <div

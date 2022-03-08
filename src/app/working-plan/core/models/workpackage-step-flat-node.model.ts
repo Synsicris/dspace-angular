@@ -1,4 +1,5 @@
-import { WorkpackageChartDate } from './workpackage-step.model';
+import { WorkpackageChartDates } from './workpackage-step.model';
+import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 
 /* tslint:disable:max-classes-per-file */
 
@@ -16,13 +17,12 @@ export class WorkpacakgeFlatNode {
     public status: string,
     public progress: number,
     public progressDates: string[],
-    public dates: {
-      start: WorkpackageChartDate;
-      end: WorkpackageChartDate;
-    },
+    public dates: WorkpackageChartDates,
     public expanded: boolean,
     public steps: any[] = [],
-    public parentId: string = ''
+    public parentId: string = '',
+    public compareId?: string,
+    public compareStatus?: ComparedVersionItemStatus,
   ) { }
 }
 

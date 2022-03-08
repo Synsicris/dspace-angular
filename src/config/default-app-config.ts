@@ -400,7 +400,7 @@ export class DefaultAppConfig implements AppConfig {
     ],
     itemPage: {
       default: {
-        orientation: 'vertical'
+          orientation: 'vertical'
       },
     },
     metadataBox: {
@@ -509,11 +509,11 @@ export class DefaultAppConfig implements AppConfig {
   projects: ProjectsConfig = {
     projectsGrantsOptionsVocabularyName: 'item_shared',
     projectsEntityEditMode: 'CUSTOM',
-    excludeComparisonMetadata: ['dspace.entity.type']
+    projectVersionUniqueIdMetadata: 'synsicris.uniqueid'
   };
 
   exploitationPlan = {
-    exploitationPlanRelationMetadata: 'dc.relation.exploitationplan',
+    exploitationPlanRelationMetadata: 'synsicris.relation.exploitationplan',
     exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
     exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
     exploitationPlanPartnerMetadata: '',
