@@ -130,6 +130,7 @@ export class WorkingPlanEffects {
         map((item: Item) => {
           return new RetrieveAllLinkedWorkingPlanObjectsAction(
             action.payload.projectId,
+            state.workingplan.workingplanId,
             state.workingplan.sortOption,
             item.uuid);
         }),
