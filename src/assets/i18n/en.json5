@@ -3063,6 +3063,8 @@
 
   "item.version.create.modal.button.confirm": "Create",
 
+  "item.version.create.modal.button.processing": "Processing...",
+
   "item.version.create.modal.button.confirm.tooltip": "Create new version",
 
   "item.version.create.modal.button.cancel": "Cancel",
