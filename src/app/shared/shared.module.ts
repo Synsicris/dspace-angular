@@ -230,6 +230,7 @@ import { ThemedSearchSectionComponent } from './explore/section-component/search
 import { ThemedTextSectionComponent } from './explore/section-component/text-section/themed-text-section.component';
 import { ThemedBrowseMostElementsComponent } from './browse-most-elements/themed-browse-most-elements.component';
 import { ThemedItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/themed-item-list-preview.component';
+import { SearchChartHorizontalComponent } from './search/search-charts/search-chart/search-chart-horizontal/search-chart-horizontal.component';
 import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { TaskColorDirective } from '../impact-pathway-board/shared/impact-path-way/impact-path-way-task/task.directive';
 import { AuthorityTypeaheadComponent } from './authority-typeahead/authority-typeahead.component';
@@ -464,6 +465,7 @@ const COMPONENTS = [
   ThemedSearchSectionComponent,
   ThemedTextSectionComponent,
   ThemedBrowseMostElementsComponent,
+  SearchChartHorizontalComponent,
   CreateImpactPathwayComponent,
   AuthorityTypeaheadComponent,
   AuthorityDropdownComponent,
@@ -551,6 +553,7 @@ const ENTRY_COMPONENTS = [
   ThemedSearchSectionComponent,
   ThemedTextSectionComponent,
   ThemedBrowseMostElementsComponent,
+  SearchChartHorizontalComponent
 ];
 
 const SHARED_ITEM_PAGE_COMPONENTS = [
