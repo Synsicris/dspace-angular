@@ -31,7 +31,10 @@ import { PaginatedList } from '../../../../core/data/paginated-list.model';
 })
 export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
 
-  @Input() public projectId: string;
+  /**
+   * The project community's id
+   */
+  @Input() public projectCommunityId: string;
   @Input() public impactPathwayId: string;
   @Input() public impactPathwayStepId: string;
   @Input() public allImpactPathwayStepIds: string[];
@@ -87,7 +90,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
       take(1),
       switchMap((impactPathwayStep: ImpactPathwayStep) => {
         if (impactPathwayStep.hasScope()) {
-          return this.collectionService.getAuthorizedCollectionByCommunityAndEntityType(this.projectId, environment.impactPathway.contributionFundingprogrammeEntity).pipe(
+          return this.collectionService.getAuthorizedCollectionByCommunityAndEntityType(this.projectCommunityId, environment.impactPathway.contributionFundingprogrammeEntity).pipe(
             getFirstCompletedRemoteData(),
             map((collectionRD: RemoteData<PaginatedList<Collection>>) => {
               if (collectionRD.hasSucceeded && isNotEmpty(collectionRD.payload.page)) {
@@ -130,13 +133,13 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
         impactPathwayStep.type,
         false
       );
-      modalRef.componentInstance.scope = this.projectId;
+      modalRef.componentInstance.scope = this.projectCommunityId;
       modalRef.componentInstance.authorityScope = authorityScopeUUID;
       modalRef.componentInstance.query = this.buildExcludedTasksQuery();
 
       modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
         this.impactPathwayService.dispatchGenerateImpactPathwayTask(
-          this.projectId,
+          this.projectCommunityId,
           impactPathwayStep.parentId,
           impactPathwayStep.id,
           item.type.value,

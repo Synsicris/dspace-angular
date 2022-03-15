@@ -692,7 +692,7 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.COMPLETE_EDITING_IMPACT_PATHWAY_TASK_LINKS),
     withLatestFrom(this.store$),
     map(([action, currentState]: [CompleteEditingImpactPathwayTaskLinksAction, any]) => {
-      const impactPathwayState: ImpactPathwayState = currentState.core.impactPathway;
+      const impactPathwayState: ImpactPathwayState = currentState.impactPathway;
       const linksMap: ImpactPathwayLinksMap = this.impactPathwayLinksService.createMapOfLinksToFetch(impactPathwayState.links.toSave,
         impactPathwayState.links.toDelete
       );

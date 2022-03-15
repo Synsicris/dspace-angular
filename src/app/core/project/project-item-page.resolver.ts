@@ -29,6 +29,9 @@ export const ITEM_PAGE_LINKS_TO_FOLLOW: FollowLinkConfig<Item>[] = [
  */
 @Injectable()
 export class ProjectItemPageResolver implements Resolve<RemoteData<Item>> {
+
+  routeParam = 'id';
+
   constructor(
     private itemService: ItemDataService,
     private store: Store<any>
@@ -43,7 +46,7 @@ export class ProjectItemPageResolver implements Resolve<RemoteData<Item>> {
    * or an error if something went wrong
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RemoteData<Item>> {
-    const itemRD$ = this.itemService.findById(route.params.id,
+    const itemRD$ = this.itemService.findById(route.params[this.routeParam],
       true,
       false,
       ...ITEM_PAGE_LINKS_TO_FOLLOW

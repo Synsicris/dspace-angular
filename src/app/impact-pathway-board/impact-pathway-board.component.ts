@@ -13,8 +13,10 @@ import { isNotEmpty } from '../shared/empty.util';
   templateUrl: './impact-pathway-board.component.html'
 })
 export class ImpactPathwayBoardComponent implements OnInit {
-
-  @Input() public projectId: string;
+  /**
+   * The project community's id
+   */
+  @Input() public projectCommunityId: string;
   @Input() public impactPathwayId: string;
 
   private impactPathWay$: BehaviorSubject<ImpactPathway> = new BehaviorSubject<ImpactPathway>(null);

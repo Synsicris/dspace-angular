@@ -19,33 +19,9 @@ import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end
   imports: [
     RouterModule.forChild([
       {
-        path: ':projectId/impactpathway',
-        loadChildren: () => import('../+impact-pathway-page/impact-pathway-page.module')
-          .then((m) => m.ImpactPathwayPageModule),
-        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
-      },
-      {
-        path: ':projectId/objectives',
-        loadChildren: () => import('../+objectives-page/objectives-page.module')
-          .then((m) => m.ObjectivesPageModule),
-        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
-      },
-      {
-        path: ':projectId/workingplan',
-        loadChildren: () => import('../+working-plan-page/working-plan-page.module')
-          .then((m) => m.WorkingPlanPageModule),
-        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
-      },
-      {
         path: ':projectId/allitems',
         loadChildren: () => import('../my-dspace-page/my-dspace-page.module')
           .then((m) => m.MyDSpacePageModule),
-        canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
-      },
-      {
-        path: ':projectId/subproject',
-        loadChildren: () => import('../sub-project-page/sub-project-page.module')
-          .then((m) => m.SubProjectPageModule),
         canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
       },
       {

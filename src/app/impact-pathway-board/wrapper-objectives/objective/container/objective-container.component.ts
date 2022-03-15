@@ -20,7 +20,10 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
-  @Input() public projectId: string;
+  /**
+   * The project community's id
+   */
+  @Input() public projectCommunityId: string;
   @Input() public impactPathwayStep: ImpactPathwayStep;
   @Input() public impactPathwayTask: ImpactPathwayTask;
 
@@ -103,12 +106,12 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
       this.impactPathwayStep.type,
       true
     );
-    modalRef.componentInstance.scope = this.projectId;
+    modalRef.componentInstance.scope = this.projectCommunityId;
     modalRef.componentInstance.query = this.buildExcludedTasksQuery();
 
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
       this.impactPathwayService.dispatchGenerateImpactPathwaySubTask(
-        this.projectId,
+        this.projectCommunityId,
         this.impactPathwayStep.parentId,
         this.impactPathwayStep.id,
         this.impactPathwayTask.id,

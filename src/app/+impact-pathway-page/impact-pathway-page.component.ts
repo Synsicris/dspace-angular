@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { filter, flatMap, map, take, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
@@ -33,9 +33,9 @@ export class ImpactPathwayPageComponent implements OnInit {
   itemId$: Observable<string>;
 
   /**
-   * The project's id
+   * The project community's id
    */
-  projectId$: Observable<string>;
+  projectCommunityId$: Observable<string>;
 
   constructor(
     private authService: AuthService,
@@ -51,11 +51,11 @@ export class ImpactPathwayPageComponent implements OnInit {
    */
   ngOnInit(): void {
     this.itemId$ = this.route.data.pipe(
-      map((data) => data.item as RemoteData<Item>),
+      map((data) => data.impactPathwayItem as RemoteData<Item>),
       redirectOn4xx(this.router, this.authService),
       filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && !itemRD.isResponsePending),
       take(1),
-      flatMap((itemRD: RemoteData<Item>) => this.impactPathwayService.isImpactPathwayLoadedById(itemRD.payload.id).pipe(
+      mergeMap((itemRD: RemoteData<Item>) => this.impactPathwayService.isImpactPathwayLoadedById(itemRD.payload.id).pipe(
         map((loaded) => [itemRD, loaded])
       )),
       tap(([itemRD, loaded]: [RemoteData<Item>, boolean]) => {
@@ -66,8 +66,8 @@ export class ImpactPathwayPageComponent implements OnInit {
       map(([itemRD, loaded]: [RemoteData<Item>, boolean]) => itemRD.payload.id)
     );
 
-    this.projectId$ = this.route.data.pipe(
-      map((data) => data.project as RemoteData<Community>),
+    this.projectCommunityId$ = this.route.data.pipe(
+      map((data) => data.projectCommunity as RemoteData<Community>),
       redirectOn4xx(this.router, this.authService),
       getFirstSucceededRemoteDataPayload(),
       map((project: Community) => project.id)

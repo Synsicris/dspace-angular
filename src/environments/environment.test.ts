@@ -337,7 +337,7 @@ export const environment: AppConfig = {
     impactPathwaysEditFormSection: 'impact_pathway-edit_form',
     impactPathwaysLinksEditFormSection: 'impact_pathway-edit_link_form',
     impactPathwaysEditMode: 'IMPACTPATHWAY',
-    impactPathwaysLinkEditMode: 'CUSTOM',
+    impactPathwaysLinkEditMode: 'IMPACTPATHWAY_LINK',
     impactPathwayEntity: 'impactpathway',
     impactPathwayStepEntity: 'impactpathwaystep',
     impactPathwayParentRelationMetadata: 'impactpathway.relation.parent',

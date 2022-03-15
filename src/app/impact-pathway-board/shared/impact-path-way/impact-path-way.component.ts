@@ -22,8 +22,10 @@ import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-m
   templateUrl: './impact-path-way.component.html'
 })
 export class ImpactPathWayComponent implements OnInit {
-
-  @Input() public projectId: string;
+  /**
+   * The project community's id
+   */
+  @Input() public projectCommunityId: string;
   @Input() public impactPathway: ImpactPathway;
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
@@ -77,7 +79,7 @@ export class ImpactPathWayComponent implements OnInit {
     this.modalService.open(content).result.then(
       (result) => {
         if (result === 'ok') {
-          this.impactPathwayService.dispatchRemoveImpactPathwayAction(this.projectId, this.impactPathway.id);
+          this.impactPathwayService.dispatchRemoveImpactPathwayAction(this.projectCommunityId, this.impactPathway.id);
         }
       }
     );

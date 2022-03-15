@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest as combineLatestObservable, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
@@ -21,7 +21,10 @@ import { environment } from '../../../../../environments/environment';
 })
 export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
-  @Input() public projectId: string;
+  /**
+   * The project community's id
+   */
+  @Input() public projectCommunityId: string;
   @Input() public impactPathwayId: string;
   @Input() public impactPathwayStepId: string;
   @Input() public impactPathwayStepType: string;
@@ -52,6 +55,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
     private editItemDataService: EditItemDataService,
     private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
+    private route: ActivatedRoute,
     private router: Router
   ) {
   }
@@ -202,7 +206,8 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   }
 
   public showObjectives() {
-    this.router.navigate(['project-overview', this.projectId, 'objectives', this.data.parentId, 'edit'], { queryParams: { target: this.data.id } });
+    const navExtras = { queryParams: { target: this.data.id }, relativeTo: this.route };
+    this.router.navigate(['objectives', this.data.parentId], navExtras);
   }
 
   private isTaskSelectable() {

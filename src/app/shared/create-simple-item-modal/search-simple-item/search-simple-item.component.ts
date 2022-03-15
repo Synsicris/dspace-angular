@@ -82,7 +82,6 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    */
   @Output() addItems: EventEmitter<SimpleItem[]> = new EventEmitter<SimpleItem[]>();
 
-
   /**
    * A boolean representing if there is an info message to display
    */
