@@ -13,6 +13,8 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { EditItemDataService } from '../../../../core/submission/edititem-data.service';
 import { EditItemMode } from '../../../../core/submission/models/edititem-mode.model';
 import { environment } from '../../../../../environments/environment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ItemDetailPageModalComponent } from '../../../../item-detail-page-modal/item-detail-page-modal.component';
 
 @Component({
   selector: 'ipw-impact-path-way-task',
@@ -55,6 +57,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
     private editItemDataService: EditItemDataService,
     private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
+    private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -220,5 +223,10 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
   canEdit(): Observable<boolean> {
     return this.canEdit$.asObservable();
+  }
+
+  openItemModal() {
+    const modalRef = this.modalService.open(ItemDetailPageModalComponent, { size: 'xl' });
+    (modalRef.componentInstance as any).uuid = this.data.id;
   }
 }
