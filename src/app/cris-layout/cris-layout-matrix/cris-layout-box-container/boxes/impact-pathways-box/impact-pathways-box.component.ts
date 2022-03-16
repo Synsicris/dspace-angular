@@ -17,7 +17,6 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
 import { getFirstSucceededRemoteDataPayload } from '../../../../../core/shared/operators';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
 import { CreateImpactPathwayComponent } from '../../../../../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
-import { PROJECT_PAGE } from '../../../../../project-overview-page/project-overview-page.component';
 import { RenderCrisLayoutBoxFor } from '../../../../decorators/cris-layout-box.decorator';
 import { getItemPageRoute } from '../../../../../item-page/item-page-routing-paths';
 
@@ -106,7 +105,7 @@ export class ImpactPathwaysBoxComponent extends CrisLayoutBoxModelComponent impl
       currentPage: page,
       elementsPerPage: this.elementsPerPage
     });
-    this.impactPathwayService.retrieveImpactPathwaysByProject(this.projectCommunityUUID, pageInfo)
+    this.impactPathwayService.retrieveImpactPathwaysByProject(this.item.id, pageInfo)
       .subscribe((list: PaginatedList<Item>) => {
         this.impactPathwayList.next(list.page);
         this.impactPathwayListPageInfo.next(list.pageInfo);
@@ -134,8 +133,6 @@ export class ImpactPathwaysBoxComponent extends CrisLayoutBoxModelComponent impl
    * @param impactPathway
    */
   navigateToImpactPathway(impactPathway: Item): void {
-    // const url = `${PROJECT_PAGE}/${this.projectCommunityUUID}/impactpathway/${impactPathway.id}/edit`;
-    const url = `${PROJECT_PAGE}/${this.projectCommunityUUID}/impactpathway/${impactPathway.id}/edit`;
     this.router.navigateByUrl(getItemPageRoute(impactPathway));
   }
 
