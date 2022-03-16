@@ -695,8 +695,8 @@ export class ImpactPathwayService {
     );
   }
 
-  redirectToEditPage(projectId: string, impactPathwayId: string) {
-    this.router.navigate(['project-overview', projectId ,'impactpathway', impactPathwayId, 'edit']);
+  redirectToEditPage(impactPathwayId: string) {
+    this.router.navigate(['entities', 'impactpathway', impactPathwayId]);
   }
 
   redirectToProjectPage(projectId: string,) {

@@ -113,7 +113,7 @@ export class ImpactPathwayEffects {
       this.notificationsService.success(null, this.translate.get('impact-pathway.create.success'));
     }),
     tap((action: GenerateImpactPathwaySuccessAction) => {
-      this.impactPathwayService.redirectToEditPage(action.payload.projectId ,action.payload.item.id);
+      this.impactPathwayService.redirectToEditPage(action.payload.item.id);
     }));
 
   /**
