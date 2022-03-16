@@ -11,7 +11,6 @@ import { CreateItemParentSelectorComponent } from '../../shared/dso-selector/mod
 import { EditCollectionSelectorComponent } from '../../shared/dso-selector/modal-wrappers/edit-collection-selector/edit-collection-selector.component';
 import { EditCommunitySelectorComponent } from '../../shared/dso-selector/modal-wrappers/edit-community-selector/edit-community-selector.component';
 import { EditItemSelectorComponent } from '../../shared/dso-selector/modal-wrappers/edit-item-selector/edit-item-selector.component';
-import { ExportMetadataSelectorComponent } from '../../shared/dso-selector/modal-wrappers/export-metadata-selector/export-metadata-selector.component';
 import { MenuID, MenuItemType } from '../../shared/menu/initial-menus-state';
 import { LinkMenuItemModel } from '../../shared/menu/menu-item/models/link.model';
 import { OnClickMenuItemModel } from '../../shared/menu/menu-item/models/onclick.model';
@@ -21,7 +20,7 @@ import { MenuService } from '../../shared/menu/menu.service';
 import { CSSVariableService } from '../../shared/sass-helper/sass-helper.service';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NOTIFICATIONS_RECITER_SUGGESTION_PATH } from '../admin-notifications/admin-notifications-routing-paths';
 import { MenuSection } from '../../shared/menu/menu.reducer';
 import { CreateProjectComponent } from '../../projects/create-project/create-project.component';
@@ -69,13 +68,14 @@ export class AdminSidebarComponent extends MenuComponent implements OnInit {
 
   inFocus$: BehaviorSubject<boolean>;
 
-  constructor(protected menuService: MenuService,
+  constructor(
+    protected menuService: MenuService,
     protected injector: Injector,
-    private variableService: CSSVariableService,
-    private authService: AuthService,
-    private modalService: NgbModal,
+    protected variableService: CSSVariableService,
+    protected authService: AuthService,
+    protected modalService: NgbModal,
     public authorizationService: AuthorizationDataService,
-    private scriptDataService: ScriptDataService,
+    protected scriptDataService: ScriptDataService,
     public route: ActivatedRoute
   ) {
     super(menuService, injector, authorizationService, route);

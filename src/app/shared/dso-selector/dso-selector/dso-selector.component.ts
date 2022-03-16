@@ -132,10 +132,12 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
    */
   public subs: Subscription[] = [];
 
-  constructor(protected searchService: SearchService,
-              protected notifcationsService: NotificationsService,
-              protected translate: TranslateService,
-              public dsoNameService: DSONameService) {
+  constructor(
+    protected searchService: SearchService,
+    protected notifcationsService: NotificationsService,
+    protected translate: TranslateService,
+    protected dsoNameService: DSONameService,
+  ) {
   }
 
   /**
@@ -264,5 +266,9 @@ export class DSOSelectorComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
+  }
+
+  getName(searchResult: SearchResult<DSpaceObject>): string {
+    return this.dsoNameService.getName(searchResult.indexableObject);
   }
 }

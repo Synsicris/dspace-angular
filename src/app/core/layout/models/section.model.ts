@@ -55,7 +55,7 @@ export interface TopSection extends SectionComponent {
   order: string;
   titleKey: string;
   componentType: 'top';
-  pageSize?: 5;
+  numberOfItems?: number;
 }
 
 export interface SearchSection extends SectionComponent {

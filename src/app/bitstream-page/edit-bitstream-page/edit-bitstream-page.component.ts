@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Bitstream } from '../../core/shared/bitstream.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, mergeMap, switchMap } from 'rxjs/operators';
@@ -39,7 +33,7 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 import { BitstreamFormatDataService } from '../../core/data/bitstream-format-data.service';
 import { BitstreamFormat } from '../../core/shared/bitstream-format.model';
 import { BitstreamFormatSupportLevel } from '../../core/shared/bitstream-format-support-level';
-import { hasValue, isNotEmpty, isEmpty } from '../../shared/empty.util';
+import { hasValue, isEmpty, isNotEmpty } from '../../shared/empty.util';
 import { Metadata } from '../../core/shared/metadata.utils';
 import { Location } from '@angular/common';
 import { RemoteData } from '../../core/data/remote-data';
@@ -48,10 +42,9 @@ import { getEntityEditRoute, getItemEditRoute } from '../../item-page/item-page-
 import { Bundle } from '../../core/shared/bundle.model';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import { Item } from '../../core/shared/item.model';
-import {
-  DsDynamicInputModel
-} from '../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-input.model';
+import { DsDynamicInputModel } from '../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-input.model';
 import { DsDynamicTextAreaModel } from '../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-textarea.model';
+import { DynamicScrollableDropdownModel } from '../../shared/form/builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.model';
 
 @Component({
   selector: 'ds-edit-bitstream-page',
@@ -188,6 +181,24 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
   });
 
   /**
+   * The Dynamic Input Model for select a file type
+   */
+  fileTypeModel = new DynamicScrollableDropdownModel({
+    vocabularyOptions: {
+      name: 'bitstream_types',
+      metadata: 'dc.type',
+      scope: '',
+      closed: false,
+    },
+    repeatable: false,
+    metadataFields: [],
+    submissionId: '',
+    hasSelectableMetadata: false,
+    id: 'fileType',
+    name: 'fileType',
+  });
+
+  /**
    * The Dynamic Input Model for the iiif label
    */
   iiifLabelModel = new DsDynamicInputModel({
@@ -266,7 +277,7 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
   /**
    * All input models in a simple array for easier iterations
    */
-  inputModels = [this.fileNameModel, this.primaryBitstreamModel, this.descriptionModel, this.selectedFormatModel,
+  inputModels = [this.fileNameModel, this.primaryBitstreamModel, this.descriptionModel, this.fileTypeModel, this.selectedFormatModel,
     this.newFormatModel];
 
   /**
@@ -289,6 +300,12 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
       id: 'descriptionContainer',
       group: [
         this.descriptionModel
+      ]
+    }),
+    new DynamicFormGroupModel({
+      id: 'fileTypeContainer',
+      group: [
+        this.fileTypeModel
       ]
     }),
     new DynamicFormGroupModel({
@@ -320,6 +337,11 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
       }
     },
     description: {
+      grid: {
+        host: 'col-12 d-inline-block'
+      }
+    },
+    fileType: {
       grid: {
         host: 'col-12 d-inline-block'
       }
@@ -464,6 +486,9 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
       },
       descriptionContainer: {
         description: bitstream.firstMetadataValue('dc.description')
+      },
+      fileTypeContainer: {
+        fileType: bitstream.firstMetadataValue('dc.type')
       },
       formatContainer: {
         newFormat: hasValue(bitstream.firstMetadata('dc.format')) ? bitstream.firstMetadata('dc.format').value : undefined
@@ -619,6 +644,7 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
     const primary = rawForm.fileNamePrimaryContainer.primaryBitstream;
     Metadata.setFirstValue(newMetadata, 'dc.title', rawForm.fileNamePrimaryContainer.fileName);
     Metadata.setFirstValue(newMetadata, 'dc.description', rawForm.descriptionContainer.description);
+    Metadata.setFirstValue(newMetadata, 'dc.type', rawForm.fileTypeContainer.fileType.display);
     if (this.isIIIF) {
       // It's helpful to remove these metadata elements entirely when the form value is empty.
       // This avoids potential issues on the REST side and makes it possible to do things like

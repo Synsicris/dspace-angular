@@ -37,11 +37,13 @@ export class AuthorizedCollectionSelectorComponent extends DSOSelectorComponent 
    */
   @Input() scope: string;
 
-  constructor(protected searchService: SearchService,
-              protected collectionDataService: CollectionDataService,
-              protected notifcationsService: NotificationsService,
-              protected translate: TranslateService,
-              public dsoNameService: DSONameService) {
+  constructor(
+    protected searchService: SearchService,
+    protected collectionDataService: CollectionDataService,
+    protected notifcationsService: NotificationsService,
+    protected translate: TranslateService,
+    public dsoNameService: DSONameService
+  ) {
     super(searchService, notifcationsService, translate, dsoNameService);
   }
 
