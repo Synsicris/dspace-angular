@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DSONameService } from './dso-name.service';
 import { ProjectDataService } from '../project/project-data.service';
 import { Breadcrumb } from '../../breadcrumbs/breadcrumb/breadcrumb.model';
-import { find, map, switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Observable, of as observableOf } from 'rxjs';
 import { ChildHALResource } from '../shared/child-hal-resource.model';
 import { DSpaceObject } from '../shared/dspace-object.model';
@@ -11,6 +11,7 @@ import { hasValue } from '../../shared/empty.util';
 import { getDSORoute } from '../../app-routing-paths';
 import { DSOBreadcrumbsService } from './dso-breadcrumbs.service';
 import { LinkService } from '../cache/builders/link.service';
+import { getFirstCompletedRemoteData } from '../shared/operators';
 
 /**
  * The class that resolves the BreadcrumbConfig object for a Collection
@@ -37,7 +38,7 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
     const crumb = new Breadcrumb(label, url);
 
     return this.projectService.getProjectItemByItemId(key.uuid).pipe(
-      find((parentRD: RemoteData<ChildHALResource & DSpaceObject>) => parentRD.hasSucceeded || parentRD.statusCode === 204),
+      getFirstCompletedRemoteData(),
       switchMap((parentRD: RemoteData<ChildHALResource & DSpaceObject>) => {
         if (hasValue(parentRD?.payload) && parentRD?.payload?.uuid !== key.uuid) {
           const parent = parentRD.payload;

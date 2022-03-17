@@ -1,17 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Observable, of as observableOf } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
-import {
-  COLLECTION_PARENT_PARAMETER,
-  getCollectionCreateRoute
-} from '../../collection-page/collection-page-routing-paths';
-import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { ImpactPathwayService } from '../core/impact-pathway.service';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
 
 /**
  * Component to wrap a form inside a modal
@@ -38,10 +30,7 @@ export class CreateImpactPathwayComponent implements OnInit {
   constructor(
     private activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
-    private impactPathwayService: ImpactPathwayService,
-    private notificationService: NotificationsService,
-    private route: ActivatedRoute,
-    private router: Router) {
+    private impactPathwayService: ImpactPathwayService) {
   }
 
   ngOnInit(): void {
@@ -63,18 +52,6 @@ export class CreateImpactPathwayComponent implements OnInit {
   create() {
     const impactPathwayName = this.createForm.get('name').value;
     this.impactPathwayService.dispatchGenerateImpactPathway(this.projectId, impactPathwayName);
-  }
-
-  /**
-   * Navigate to the collection create page
-   */
-  navigate(dso: DSpaceObject) {
-    const navigationExtras: NavigationExtras = {
-      queryParams: {
-        [COLLECTION_PARENT_PARAMETER]: dso.uuid,
-      }
-    };
-    this.router.navigate([getCollectionCreateRoute()], navigationExtras);
   }
 
 }

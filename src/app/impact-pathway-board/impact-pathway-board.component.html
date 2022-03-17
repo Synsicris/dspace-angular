@@ -2,6 +2,7 @@
 <div *ngIf="!(isLoading() | async) && (getImpactPathway() | async)" class="container-fluid d-flex align-items-stretch mt-3 mb-3">
   <ipw-wrapper-impact-path-way class="wrapper"
                                [projectCommunityId]="projectCommunityId"
+                               [projectItemId]="projectItemId"
                                [impactPathWay]="(getImpactPathway() | async)"
                                [impactPathWayId]="impactPathwayId" ></ipw-wrapper-impact-path-way>
 </div>

@@ -275,6 +275,19 @@ export class ProjectDataService extends CommunityDataService {
   }
 
   /**
+   * Get the project Item it, which the given item belongs to,
+   * by retrieving from the relation metadata
+   *
+   * @param item  The item
+   *
+   * @return The project item's id
+   */
+  getProjectItemIdByRelationMetadata(item: Item): string {
+    const metadataValue = Metadata.first(item.metadata, PARENT_PROJECT_RELATION_METADATA);
+    return metadataValue?.authority;
+  }
+
+  /**
    * Get the project Item which the given item belongs to
    *
    * @param itemId           The project community id

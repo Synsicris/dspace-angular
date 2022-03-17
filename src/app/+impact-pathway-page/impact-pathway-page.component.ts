@@ -6,7 +6,7 @@ import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
-import { getFirstSucceededRemoteDataPayload, redirectOn4xx } from '../core/shared/operators';
+import { getFirstSucceededRemoteDataPayload, getRemoteDataPayload, redirectOn4xx } from '../core/shared/operators';
 import { ImpactPathwayService } from '../impact-pathway-board/core/impact-pathway.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
@@ -28,14 +28,19 @@ export class ImpactPathwayPageComponent implements OnInit {
   id: number;
 
   /**
-   * The item's id
+   * The impact-pathway item's id
    */
-  itemId$: Observable<string>;
+  impactPathwayId$: Observable<string>;
 
   /**
    * The project community's id
    */
   projectCommunityId$: Observable<string>;
+
+  /**
+   * The project item's id
+   */
+  projectItemId$: Observable<string>;
 
   constructor(
     private authService: AuthService,
@@ -50,11 +55,14 @@ export class ImpactPathwayPageComponent implements OnInit {
    * Initialize instance variables
    */
   ngOnInit(): void {
-    this.itemId$ = this.route.data.pipe(
+    const impactPathWayItem$ = this.route.data.pipe(
       map((data) => data.impactPathwayItem as RemoteData<Item>),
       redirectOn4xx(this.router, this.authService),
       filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && !itemRD.isResponsePending),
-      take(1),
+      take(1)
+    );
+
+    this.impactPathwayId$ = impactPathWayItem$.pipe(
       mergeMap((itemRD: RemoteData<Item>) => this.impactPathwayService.isImpactPathwayLoadedById(itemRD.payload.id).pipe(
         map((loaded) => [itemRD, loaded])
       )),
@@ -71,6 +79,11 @@ export class ImpactPathwayPageComponent implements OnInit {
       redirectOn4xx(this.router, this.authService),
       getFirstSucceededRemoteDataPayload(),
       map((project: Community) => project.id)
+    );
+
+    this.projectItemId$ = impactPathWayItem$.pipe(
+      getRemoteDataPayload(),
+      map((item: Item) => this.projectService.getProjectItemIdByRelationMetadata(item))
     );
   }
 }

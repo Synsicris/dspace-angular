@@ -26,6 +26,12 @@ export class ImpactPathWayComponent implements OnInit {
    * The project community's id
    */
   @Input() public projectCommunityId: string;
+
+  /**
+   * The project item's id
+   */
+  @Input() public projectItemId: string;
+
   @Input() public impactPathway: ImpactPathway;
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
@@ -79,7 +85,7 @@ export class ImpactPathWayComponent implements OnInit {
     this.modalService.open(content).result.then(
       (result) => {
         if (result === 'ok') {
-          this.impactPathwayService.dispatchRemoveImpactPathwayAction(this.projectCommunityId, this.impactPathway.id);
+          this.impactPathwayService.dispatchRemoveImpactPathwayAction(this.projectItemId, this.impactPathway.id);
         }
       }
     );

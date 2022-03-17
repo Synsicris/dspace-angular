@@ -11,7 +11,7 @@ import { ProjectDataService } from './project-data.service';
  * This class represents a resolver that retrieve item that describe the project from synsicris.relation.entity_project metadata
  */
 @Injectable()
-export class ProjectRelationItemResolver implements Resolve<RemoteData<Item>> {
+export class ProjectItemByCommunityRelationResolver implements Resolve<RemoteData<Item>> {
 
   routeParam = 'projectId';
 

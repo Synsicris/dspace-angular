@@ -156,6 +156,8 @@ export class InitImpactPathwayAction implements Action {
    *
    * @param item
    *    the Item of the impact pathway generated
+   * @param withTarget
+   *    if impact pathway generated has an item target
    */
   constructor(item: Item, withTarget = false) {
     this.payload = { item, withTarget };
@@ -692,20 +694,20 @@ export class OrderImpactPathwaySubTasksErrorAction implements Action {
 export class RemoveImpactPathwayAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY;
   payload: {
-    projectId: string;
+    projectItemId: string;
     impactPathwayId: string;
   };
 
   /**
    * Create a new RemoveImpactPathwayAction
    *
-   * @param projectId
-   *    the project's id whom the impact pathway belong to
+   * @param projectItemId
+   *    the project item's id whom the impact pathway belong to
    * @param impactPathwayId
    *    the impact pathway's id
    */
-  constructor(projectId: string, impactPathwayId: string) {
-    this.payload = { projectId, impactPathwayId };
+  constructor(projectItemId: string, impactPathwayId: string) {
+    this.payload = { projectItemId, impactPathwayId };
   }
 }
 
@@ -715,20 +717,20 @@ export class RemoveImpactPathwayAction implements Action {
 export class RemoveImpactPathwaySuccessAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUCCESS;
   payload: {
-    projectId: string;
+    projectItemId: string;
     impactPathwayId: string;
   };
 
   /**
    * Create a new RemoveImpactPathwaySuccessAction
    *
-   * @param projectId
-   *    the project's id whom the impact pathway belong to
+   * @param projectItemId
+   *    the project item's id whom the impact pathway belong to
    * @param impactPathwayId
    *    the impact pathway's id
    */
-  constructor(projectId: string, impactPathwayId: string) {
-    this.payload = { projectId, impactPathwayId };
+  constructor(projectItemId: string, impactPathwayId: string) {
+    this.payload = { projectItemId, impactPathwayId };
   }
 }
 
