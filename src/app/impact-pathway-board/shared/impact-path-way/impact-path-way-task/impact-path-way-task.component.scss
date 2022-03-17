@@ -5,7 +5,7 @@
   z-index: 1;
 
   .task-wrap {
-    min-height: 100px;
+    min-height: 154px;
     border-left-width: ($border-width*5) !important;
     border: $border-width solid map-get($theme-colors, dark);
   }
@@ -52,22 +52,21 @@ button.btn:focus {
   box-shadow: none !important;
 }
 
-.task-header {
-
-  height: 70px;
-  margin: 0;
-}
-
 .button-move {
   cursor: move;
 }
 
-.task-title, .task-type {
-  overflow: hidden;
+.task-header {
+  height: 70px;
+  margin: 0;
 }
 
 .task-title p {
   margin: 0;
+}
+
+.task-title, .task-type {
+  overflow: hidden;
 }
 
 .title-clamp {
@@ -78,10 +77,12 @@ button.btn:focus {
 
 .task-content {
   height: 50px;
+  margin: 0;
 }
 
-.task-content p {
+.task-type p {
   font-size: 15px;
+  margin: 0;
 }
 
 .type-clamp {
