@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -29,8 +29,8 @@ import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
  */
 export class AdministeredCollectionSelectorComponent extends DSOSelectorComponent {
 
-  constructor(protected searchService: SearchService,
-              protected collectionDataService: CollectionDataService,
+  constructor(protected collectionDataService: CollectionDataService,
+              protected searchService: SearchService,
               protected notifcationsService: NotificationsService,
               protected translate: TranslateService,
               public dsoNameService: DSONameService) {

@@ -30,7 +30,7 @@
 <div>
   <ds-alert *ngIf="infoShowed | async" [type]="'alert-info'" [collapsible]="true" [content]="'impact-pathway.wrapper.info'"></ds-alert>
   <div class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
-    <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps" ipwStepColor class="vertical-step" [projectId]="projectId"
+    <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps" ipwStepColor class="vertical-step" [projectCommunityId]="projectCommunityId"
       [impactPathwayId]="impactPathway.id" [impactPathwayStepId]="step.id" [stepType]="step.type" [allImpactPathwayStepIds]="getImpactPathwayStepIds()"></ipw-impact-path-way-step>
   </div>
   <ipw-editable-textarea *ngIf="impactPathway" [editMode]="getEditMode()" [formConfig]="formConfig$" [formSectionName]="getSectionName()"

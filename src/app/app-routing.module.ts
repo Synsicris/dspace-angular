@@ -94,6 +94,12 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             canActivate: [EndUserAgreementCurrentUserGuard]
           },
           {
+            path: 'entities/impactpathway',
+            loadChildren: () => import('./+impact-pathway-page/impact-pathway-page.module')
+              .then((m) => m.ImpactPathwayPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
             path: 'entities/parentproject/:id/workingplan',
             loadChildren: () => import('./+working-plan-page/working-plan-page.module')
               .then((m) => m.WorkingPlanPageModule),

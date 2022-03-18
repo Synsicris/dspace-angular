@@ -13,7 +13,7 @@
             [content]="getInfoMessage()"
             [type]="'alert-info'"></ds-alert>
   <ng-container *ngFor="let task of getObjectivesTasks()">
-    <ipw-objective [projectId]="projectId"
+    <ipw-objective [projectCommunityId]="projectCommunityId"
                    [impactPathwayStep]="impactPathwayStep"
                    [impactPathwayTask]="task"
                    [targetImpactPathwayTaskId]="targetImpactPathwayTaskId"

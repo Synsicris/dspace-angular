@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from '../../../../core/shared/item.model';
 import { getItemPageRoute } from '../../../../item-page/item-page-routing-paths';
 import { BehaviorSubject } from 'rxjs';
+import { isNotNull } from '../../../../shared/empty.util';
 
 /**
  * This component render the sidebar of the tabs layout
@@ -52,7 +53,11 @@ export abstract class CrisLayoutTabsComponent {
 
   init(): void {
     if (this.tabs && this.tabs.length > 0) {
-      this.parseTabs(this.route.snapshot.paramMap.get('tab'));
+      if (isNotNull(this.route.snapshot.paramMap.get('tab'))) {
+        this.parseTabs(this.route.snapshot.paramMap.get('tab'));
+      } else {
+        this.parseTabs(this.tabs[0].shortname);
+      }
     }
   }
 
@@ -105,10 +110,12 @@ export abstract class CrisLayoutTabsComponent {
   setActiveTab(tab) {
     this.activeTab$.next(tab);
     this.emitSelected(tab);
-    if (tab.shortname === 'workingplan' || tab.shortname === 'exploitationplans') {
-      this.router.navigateByUrl(getItemPageRoute(this.item) + '/' + tab.shortname);
-    } else {
-      this.location.replaceState(getItemPageRoute(this.item) + '/' + tab.shortname);
+    if (isNotNull(this.route.snapshot.paramMap.get('tab'))) {
+      if (tab.shortname === 'workingplan' || tab.shortname === 'exploitationplans') {
+        this.router.navigateByUrl(getItemPageRoute(this.item) + '/' + tab.shortname);
+      } else {
+        this.location.replaceState(getItemPageRoute(this.item) + '/' + tab.shortname);
+      }
     }
   }
 

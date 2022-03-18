@@ -36,7 +36,6 @@ import { AuthStatus } from './models/auth-status.model';
 import { EPersonMock } from '../../shared/testing/eperson.mock';
 import { AppState, storeModuleConfig } from '../../app.reducer';
 import { StoreActionTypes } from '../../store.actions';
-import { isAuthenticated, isAuthenticatedLoaded } from './selectors';
 import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
 import { Router } from '@angular/router';
 import { RouterStub } from '../../shared/testing/router.stub';
@@ -238,6 +237,9 @@ describe('AuthEffects', () => {
         const expected = cold('--b-', { b: new RetrieveTokenAction() });
 
         expect(authEffects.checkTokenCookie$).toBeObservable(expected);
+        authEffects.checkTokenCookie$.subscribe(() => {
+          expect((authEffects as any).authorizationsService.invalidateAuthorizationsRequestCache).toHaveBeenCalled();
+        });
         done();
       });
 

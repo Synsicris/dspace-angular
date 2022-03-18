@@ -9,12 +9,15 @@
        ipwTaskColor
        [taskType]="data.type"
        (click)="setFocus($event)">
-    <div class="task-header d-flex pl-1 justify-content-between">
-      <div class="task-title title-clamp font-weight-bold">
+    <div class="task-header d-flex pl-1 align-content-between">
+      <button class="btn btn-xs btn-link p-0 text-primary button-move align-self-start" title="Drag & Drop">
+        <i class="fas fa-grip-vertical"></i>
+      </button>
+      <div class="task-title title-clamp ml-1 font-weight-bold">
         <p title="{{data.title}}">{{data.title}}</p>
       </div>
       <button *ngIf="data.hasParent()"
-              class="btn btn-lg btn-link p-0 flex-shrink-1 align-self-start text-danger mr-1"
+              class="btn btn-lg btn-link p-0 flex-shrink-1 align-self-start ml-auto text-danger mr-1"
               title="{{'impact-pathway.remove.item.title' | translate}}"
               [disabled]="(isEditingRelation() | async)"
               (click)="removeTask(); $event.stopPropagation()">
@@ -65,6 +68,14 @@
               <span><i class='far fa-save'></i></span>
             </button>
           </div>
+          <button class="btn btn-lg btn-link p-0 flex-shrink-1 ml-auto mr-1"
+                  title="{{'working-plan.chart.button.compare' | translate}}"
+                  (click)="openItemModal()">
+              <span class="fa-stack ipw-stacked-icons">
+                <i class="far fa-file fa-stack-1x"></i>
+                <i class="fas fa-search fa-stack-1x ipw-stacked-icon "></i>
+              </span>
+          </button>
           <button *ngIf="data.hasDetail()"
                   class="btn btn-lg btn-link p-0 flex-shrink-1 mr-1"
                   title="{{'impact-pathway.objectives.edit.page.title' | translate}}"

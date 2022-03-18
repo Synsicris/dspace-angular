@@ -6,6 +6,7 @@ import { ImpactPathwayPageComponent } from './impact-pathway-page.component';
 import { ImpactPathwayPageRoutingModule } from './impact-pathway-page-routing.module';
 import { ImpactPathwayBoardModule } from '../impact-pathway-board/impact-pathway-board.module';
 import { ImpactPathwayCoreModule } from '../impact-pathway-board/core/impact-pathway-core.module';
+import { ObjectivesPageComponent } from './objectives-page/objectives-page.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { ImpactPathwayCoreModule } from '../impact-pathway-board/core/impact-pat
     ImpactPathwayCoreModule
   ],
   declarations: [
-    ImpactPathwayPageComponent
+    ImpactPathwayPageComponent,
+    ObjectivesPageComponent
   ]
 })
 export class ImpactPathwayPageModule {

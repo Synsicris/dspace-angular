@@ -14,7 +14,10 @@ import { isNotEmpty } from '../shared/empty.util';
 })
 export class ObjectivesBoardComponent implements OnInit {
 
-  @Input() public projectId: string;
+  /**
+   * The project community's id
+   */
+  @Input() public projectCommunityId: string;
   @Input() public impactPathwayStepId: string;
 
   public targetImpactPathwayTaskId$: Observable<string>;

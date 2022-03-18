@@ -244,8 +244,8 @@ export class ImpactPathwayService {
     ));
   }
 
-  dispatchRemoveImpactPathwayAction(projectId: string, impactPathwayId: string) {
-    this.store.dispatch(new RemoveImpactPathwayAction(projectId, impactPathwayId));
+  dispatchRemoveImpactPathwayAction(projectItemId: string, impactPathwayId: string) {
+    this.store.dispatch(new RemoveImpactPathwayAction(projectItemId, impactPathwayId));
   }
 
   dispatchOrderTasks(
@@ -712,6 +712,13 @@ export class ImpactPathwayService {
     );
   }
 
+  /**
+   * Invalidate impact pathway result cache hit
+   */
+  public invalidateImpactPathwaysResultsCache() {
+    this.requestService.setStaleByHrefSubstring(`configuration=${environment.impactPathway.impactPathwaysSearchConfigName}`);
+  }
+
   retrieveImpactPathwaysByProject(projectId: string, options: PageInfo): Observable<PaginatedList<Item>> {
     const sort = new SortOptions('dc.title', SortDirection.ASC);
     const pagination = Object.assign(new PaginationComponentOptions(), {
@@ -737,7 +744,6 @@ export class ImpactPathwayService {
         return Object.assign(rd, { payload: payload });
       }),
       map((rd: RemoteData<PaginatedList<Item>>) => rd.payload),
-      // filter((list: PaginatedList<Item>) => list.page.length > 0),
       take(1),
       distinctUntilChanged()
     );
@@ -783,12 +789,12 @@ export class ImpactPathwayService {
     );
   }
 
-  redirectToEditPage(projectId: string, impactPathwayId: string) {
-    this.router.navigate(['project-overview', projectId, 'impactpathway', impactPathwayId, 'edit']);
+  redirectToEditPage(impactPathwayId: string) {
+    this.router.navigate(['entities', 'impactpathway', impactPathwayId]);
   }
 
-  redirectToProjectPage(projectId: string, ) {
-    this.router.navigate(['project-overview', projectId]);
+  redirectToProjectPage(projectItemId: string, ) {
+    this.router.navigate(['items', projectItemId]);
   }
 
   private createImpactPathwaySteps(projectId: string, impactPathwayId: string): Observable<Item[]> {

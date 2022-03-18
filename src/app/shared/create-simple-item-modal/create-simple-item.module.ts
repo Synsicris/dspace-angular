@@ -8,12 +8,11 @@ import { SearchSimpleItemLabelsComponent } from './search-simple-item/search-hea
 import { SearchSimpleItemBoxComponent } from './search-simple-item/search-header/search-box/search-simple-item-box.component';
 import { SearchSimpleItemFilterBoxComponent } from './search-simple-item/search-header/filter-box/search-simple-item-filter-box.component';
 import { SearchSimpleItemService } from './search-simple-item/search-simple-item.service';
-import { NgbNavModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbNavModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CreateSimpleItemComponent } from './create-simple-item/create-simple-item.component';
 import { SharedModule } from '../shared.module';
-import { SearchModule } from '../search/search.module';
 import { FormModule } from '../form/form.module';
 
 const COMPONENTS = [
@@ -34,6 +33,7 @@ const COMPONENTS = [
   imports: [
     CommonModule,
     NgbNavModule,
+    NgbModalModule,
     FormsModule,
     NgbTypeaheadModule,
     TranslateModule,
