@@ -1,12 +1,12 @@
 <div class="border-bottom mb-4 pb-2 d-flex justify-content-between align-items-center">
-  <ds-comcol-page-header
-    [name]="impactPathway.title">
+  <ds-comcol-page-header [name]="impactPathway.title">
   </ds-comcol-page-header>
   <div class="pl-2">
-    <button *ngIf="(canDeleteImpactPathway$ | async)" class="btn btn-danger"
-            [disabled]="(isProcessingRemove() | async)"
-            title="{{'impact-pathway.remove.title' | translate}}"
-            (click)="$event.preventDefault(); confirmRemove(content); $event.stopPropagation()">
+    <!-- <div *ngIf="(impactPathway.steps | async)?.length > 0" class="btn-group btn-group-sm mr-2"> -->
+    <ds-item-version-list [targetItemId]="impactPathway.id" (versionSelected)="onVersionSelected($event)" (versionDeselected)="onVersionDeselected()"></ds-item-version-list>
+    <!-- </div> -->
+    <button *ngIf="(canDeleteImpactPathway$ | async)" class="btn btn-danger" [disabled]="(isProcessingRemove() | async)" title="{{'impact-pathway.remove.title' | translate}}"
+      (click)="$event.preventDefault(); confirmRemove(content); $event.stopPropagation()">
       <span *ngIf="!(isProcessingRemove() | async)">
         <i class="far fa-trash-alt"></i> {{'impact-pathway.remove.title' | translate}}
       </span>
@@ -14,10 +14,8 @@
         <i class="fas fa-circle-notch fa-spin"> {{'impact-pathway.remove.processing' | translate}}</i>
       </span>
     </button>
-    <button class="btn btn-primary"
-            [disabled]="(isProcessingRemove() | async)"
-            title="{{'impact-pathway.edit.title' | translate}}"
-            (click)="$event.preventDefault(); openEditModal(); $event.stopPropagation()">
+    <button class="btn btn-primary" [disabled]="(isProcessingRemove() | async) || (compareMode | async)" title="{{'impact-pathway.edit.title' | translate}}"
+      (click)="$event.preventDefault(); openEditModal(); $event.stopPropagation()">
       <span *ngIf="!(isProcessingRemove() | async)">
         <i class="far fa-edit"></i> {{'impact-pathway.edit.title' | translate}}
       </span>
@@ -28,40 +26,21 @@
   </div>
 </div>
 
+
 <div>
-  <ds-alert *ngIf="infoShowed | async"
-            [type]="'alert-info'"
-            [collapsible]="true"
-            [content]="'impact-pathway.wrapper.info'"></ds-alert>
+  <ds-alert *ngIf="infoShowed | async" [type]="'alert-info'" [collapsible]="true" [content]="'impact-pathway.wrapper.info'"></ds-alert>
   <div class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
-    <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps"
-                              ipwStepColor
-                              class="vertical-step"
-                              [projectId]="projectId"
-                              [impactPathwayId]="impactPathway.id"
-                              [impactPathwayStepId]="step.id"
-                              [stepType]="step.type"
-                              [allImpactPathwayStepIds]="getImpactPathwayStepIds()"></ipw-impact-path-way-step>
+    <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps" ipwStepColor class="vertical-step" [projectId]="projectId"
+      [impactPathwayId]="impactPathway.id" [impactPathwayStepId]="step.id" [stepType]="step.type" [allImpactPathwayStepIds]="getImpactPathwayStepIds()"></ipw-impact-path-way-step>
   </div>
-  <ipw-editable-textarea *ngIf="impactPathway"
-                         [editMode]="getEditMode()"
-                         [formConfig]="formConfig$"
-                         [formSectionName]="getSectionName()"
-                         [itemId]="impactPathway.id"
-                         [editTitle]="'impact-pathway.edit.title' | translate"
-                         [fieldTitle]="'impact-pathway.description' | translate"
-                         [content]="impactPathway.description"
-                         (contentChange)="updateImpactPathway($event)"></ipw-editable-textarea>
+  <ipw-editable-textarea *ngIf="impactPathway" [editMode]="getEditMode()" [formConfig]="formConfig$" [formSectionName]="getSectionName()"
+    [itemId]="impactPathway.id" [editTitle]="'impact-pathway.edit.title' | translate" [fieldTitle]="'impact-pathway.description' | translate"
+    [content]="impactPathway.description" (contentChange)="updateImpactPathway($event)"></ipw-editable-textarea>
 </div>
 
 <div *ngIf="(loaded | async)">
-  <ngx-domarrow *ngFor="let relation of (getRelations() | async)"
-                [from]="'#' + relation.from"
-                [to]="'#' + relation.to"
-                [head]="relation.twoWay"
-                [tail]="true"
-                [onlyVisible]="true"
-                color="red"></ngx-domarrow>
+  <ngx-domarrow *ngFor="let relation of (getRelations() | async)" [from]="'#' + relation.from" [to]="'#' + relation.to" [head]="relation.twoWay"
+    [tail]="true" [onlyVisible]="true" color="red"></ngx-domarrow>
 </div>
 
 <ng-template #content let-c="close" let-d="dismiss">
@@ -75,16 +54,10 @@
     <p>{{'impact-pathway.remove.confirm.info' | translate}}</p>
   </div>
   <div class="modal-footer">
-    <button type="button"
-            class="btn btn-secondary"
-            title="{{'impact-pathway.remove.confirm.cancel' | translate}}"
-            (click)="c('cancel')">
+    <button type="button" class="btn btn-secondary" title="{{'impact-pathway.remove.confirm.cancel' | translate}}" (click)="c('cancel')">
       {{'impact-pathway.remove.confirm.cancel' | translate}}
     </button>
-    <button type="button"
-            class="btn btn-danger"
-            title="{{'impact-pathway.remove.confirm.submit' | translate}}"
-            (click)="c('ok')">
+    <button type="button" class="btn btn-danger" title="{{'impact-pathway.remove.confirm.submit' | translate}}" (click)="c('ok')">
       {{'impact-pathway.remove.confirm.submit' | translate}}
     </button>
   </div>
