@@ -20,8 +20,7 @@
 
   "500.link.home-page": "Take me to the home page",
 
-
-  "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page. ",
+  "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page.",
 
   "404.link.home-page": "Take me to the home page",
 
@@ -722,7 +721,6 @@
   "bitstream.edit.form.iiifHeight.label": "IIIF Canvas Height",
 
   "bitstream.edit.form.iiifHeight.hint": "The canvas height should usually match the image height.",
-
 
   "bitstream.edit.notifications.saved.content": "Your changes to this bitstream were saved.",
 
@@ -1998,9 +1996,7 @@
 
   "footer.link.end-user-agreement": "End User Agreement",
 
-  "footer.link.feedback":"Send Feedback",
-
-
+  "footer.link.feedback": "Send Feedback",
 
   "forgot-email.form.header": "Forgot Password",
 
@@ -2338,17 +2334,15 @@
 
   "info.feedback.email-label": "Your Email",
 
-  "info.feedback.create.success" : "Feedback Sent Successfully!",
+  "info.feedback.create.success": "Feedback Sent Successfully!",
 
-  "info.feedback.error.email.required" : "A valid email address is required",
+  "info.feedback.error.email.required": "A valid email address is required",
 
-  "info.feedback.error.message.required" : "A comment is required",
+  "info.feedback.error.message.required": "A comment is required",
 
-  "info.feedback.page-label" : "Page",
+  "info.feedback.page-label": "Page",
 
-  "info.feedback.page_help" : "Tha page related to your feedback",
-
-
+  "info.feedback.page_help": "Tha page related to your feedback",
 
   "item.alerts.private": "This item is private",
 
@@ -3102,13 +3096,13 @@
 
   "item.version.edit.notification.failure": "The summary of version number {{version}} has not been changed",
 
-  "item.version.list.dropdown-text" : "Compare with...",
+  "item.version.list.dropdown-text": "Compare with...",
 
-  "item.version.list.option-text" : "Version : ",
+  "item.version.list.option-text": "Version : ",
 
-  "item.version.list.remove-text" : "Remove selection",
+  "item.version.list.remove-text": "Remove selection",
 
-  "item.version.list.selected-text" : "Version selected : ",
+  "item.version.list.selected-text": "Version selected : ",
 
   "item-export.modal-launcher.single.btn": "Export",
 
@@ -3434,10 +3428,9 @@
 
   "menu.section.statistics_task": "Statistics Task",
 
-  "modal.item-detail-page.title" : "Item Page Detail",
+  "modal.item-detail-page.title": "Item Page Detail",
 
-  "modal.item-detail-page.confirm.cancel" : "Close",
-
+  "modal.item-detail-page.confirm.cancel": "Close",
 
   "statistics": "Statistics",
 
@@ -4667,7 +4660,7 @@
 
   "researcher.profile.create.new": "Create new",
 
-  "researcher.profile.create.success": "Researcher profile created successfully",
+  "researcher.profile.create.success": "Researcher profile created succcessfully",
 
   "researcher.profile.create.fail": "An error occurs during the researcher profile creation",
 
@@ -5299,22 +5292,21 @@
 
   "sorting.ownerselection.DESC": "Owner Relevance Descending",
 
-  "sorting.organization.legalName.ASC" : "Legal Name Ascending",
+  "sorting.organization.legalName.ASC": "Legal Name Ascending",
 
-  "sorting.organization.legalName.DESC" : "Legal Name Descending",
+  "sorting.organization.legalName.DESC": "Legal Name Descending",
 
-  "sorting.organisation.address.addressCountry.ASC" : "Country Ascending",
+  "sorting.organisation.address.addressCountry.ASC": "Country Ascending",
 
-  "sorting.organisation.address.addressCountry.DESC" : "Country Descending",
+  "sorting.organisation.address.addressCountry.DESC": "Country Descending",
 
-  "sorting.organisation.address.addressLocality.ASC" : "Locality Ascending",
+  "sorting.organisation.address.addressLocality.ASC": "Locality Ascending",
 
-  "sorting.organisation.address.addressLocality.DESC" : "Locality Descending",
+  "sorting.organisation.address.addressLocality.DESC": "Locality Descending",
 
-  "sorting.organisation.address.foundingDate.ASC" : "Founding Date Ascending",
+  "sorting.organisation.address.foundingDate.ASC": "Founding Date Ascending",
 
-  "sorting.organisation.address.foundingDate.DESC" : "Founding Date Descending",
-
+  "sorting.organisation.address.foundingDate.DESC": "Founding Date Descending",
 
   "statistics.export.csv": "Export CSV",
 
@@ -5954,8 +5946,6 @@
 
   "submission.sections.general.sections_not_valid": "There are incomplete sections.",
 
-
-
   "submission.sections.submit.progressbar.accessCondition": "Item access conditions",
 
   "submission.sections.submit.progressbar.CClicense": "Creative commons license",
@@ -6430,7 +6420,7 @@
 
   "submission.sections.custom-url.label.previous-urls": "Previous Urls",
 
-  "submission.sections.custom-url.alert.info": "Define here a custom URL which will be used to reach the item instead of using an internal randomly generated UUID identifier. ",
+  "submission.sections.custom-url.alert.info": "Define here a custom URL which will be used to reach the item instead of using an internal randomly generated UUID identifier.",
 
   "submission.sections.accesses.form.discoverable-description": "When checked, this item will be discoverable in search/browse. When unchecked, the item will only be available via a direct link and will never appear in search/browse.",
 
@@ -6461,7 +6451,6 @@
   "submission.sections.accesses.form.until-hint": "Select the date until which the related access condition is applied",
 
   "submission.sections.accesses.form.until-placeholder": "Until",
-
 
   "submission.submit.breadcrumbs": "New submission",
 
@@ -6655,15 +6644,11 @@
 
   "virtual-metadata.delete-relationship.modal-head": "Select the items for which you want to save the virtual metadata as real metadata",
 
-
-
   "workspace.search.results.head": "Your submissions",
 
   "workflowAdmin.search.results.head": "Administer Workflow",
 
   "workflow.search.results.head": "Workflow tasks",
-
-
 
   "workflow-item.edit.breadcrumbs": "Edit workflowitem",
 
@@ -6725,9 +6710,7 @@
 
   "lucky.search.multiple.records": "may refer to multiple records",
 
-
-  "authority-confidence.search-label":"Search",
-
+  "authority-confidence.search-label": "Search",
 
   "invitation.group.msg": "You have been invited to join the following groups",
 
@@ -6832,8 +6815,6 @@
   "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
 
   "working-plan.task.search.header": "",
-
-
 
   "application.listelement.badge": "Application of a solution / change / innovation",
 
@@ -7517,7 +7498,7 @@
 
   "layout.field.label.parentproject.oairecerif.amount.currency": "Currency",
 
-  "layout.field.label.Project.dc.title": "Organisation and short title",
+  "layout.field.label.Project.dc.title": "Project:",
 
   "layout.field.label.Project.oairecerif.acronym": "Acronym",
 
@@ -8217,6 +8198,8 @@
 
   "layout.field.label.application.synsicris.quantity": "Quantity / number",
 
-  "layout.field.label.application.synsicris.description.description": "Notes"
+  "layout.field.label.application.synsicris.description.description": "Notes",
+
+  "working-plan.chart.toolbar.versions": "Versions"
 
 }
