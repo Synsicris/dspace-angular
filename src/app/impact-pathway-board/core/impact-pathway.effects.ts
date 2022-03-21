@@ -139,17 +139,13 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY),
     withLatestFrom(this.store$),
     switchMap(([action, state]: [InitCompareAction, any]) => {
-      console.log(action.payload.impactPathwayId,
-        action.payload.compareImpactPathwayId,
-        environment.impactPathway.impactPathwayStepRelationMetadata);
       return this.projectVersionService.compareItemChildrenByMetadata(
         action.payload.impactPathwayId,
         action.payload.compareImpactPathwayId,
         environment.impactPathway.impactPathwayStepRelationMetadata
       ).pipe(
-        tap(res => console.log(res)),
         switchMap((compareItemList: ComparedVersionItem[]) => this.impactPathwayService.initCompareImpactPathwaySteps(compareItemList)),
-        map((steps: ImpactPathwayStep[]) => new InitCompareSuccessAction(steps)),
+        map((steps: ImpactPathwayStep[]) => new InitCompareSuccessAction(action.payload.impactPathwayId, steps)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);

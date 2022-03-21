@@ -15,6 +15,8 @@ import { EditItemMode } from '../../../../core/submission/models/edititem-mode.m
 import { environment } from '../../../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ItemDetailPageModalComponent } from '../../../../item-detail-page-modal/item-detail-page-modal.component';
+import { CompareItemComponent } from '../../../../shared/compare-item/compare-item.component';
+import { ComparedVersionItemStatus } from '../../../../core/project/project-version.service';
 
 @Component({
   selector: 'ipw-impact-path-way-task',
@@ -38,6 +40,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   @Input() public stepHasDetail: boolean;
   @Input() public taskPosition: number;
   @Input() public isObjectivePage: boolean;
+  @Input() public compareMode: boolean;
 
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -53,6 +56,8 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   @Output() public selected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
   @Output() public deselected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
 
+  ComparedVersionItemStatus = ComparedVersionItemStatus;
+  
   constructor(
     private editItemDataService: EditItemDataService,
     private impactPathwayService: ImpactPathwayService,
@@ -103,17 +108,17 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
     return combineLatestObservable(this.impactPathwayLinksService.isEditingLink(),
       this.impactPathwayLinksService.isEditingLinkOnOtherTask(this.taskHTMLDivId),
       this.impactPathwayLinksService.isEditingLinkOnTask(this.taskHTMLDivId)).pipe(
-      map(([isEditing, isEditingOnOtherTask, isEditingOnTask]) => !isEditing ||
-        isEditingOnOtherTask || (isEditingOnTask && this.isTwoWayRelationSelected.value !== isTwoWayRelation))
-    );
+        map(([isEditing, isEditingOnOtherTask, isEditingOnTask]) => !isEditing ||
+          isEditingOnOtherTask || (isEditingOnTask && this.isTwoWayRelationSelected.value !== isTwoWayRelation))
+      );
   }
 
   public canHideRelationButtons(isTwoWayRelation: boolean): Observable<boolean> {
     return combineLatestObservable(this.impactPathwayLinksService.isEditingLinkOnOtherTask(this.taskHTMLDivId),
       this.impactPathwayLinksService.isEditingLinkOnTask(this.taskHTMLDivId)).pipe(
-      map(([isEditingOnOtherTask, isEditingOnTask]) => isEditingOnOtherTask ||
-        (isEditingOnTask && this.isTwoWayRelationSelected.value !== isTwoWayRelation))
-    );
+        map(([isEditingOnOtherTask, isEditingOnTask]) => isEditingOnOtherTask ||
+          (isEditingOnTask && this.isTwoWayRelationSelected.value !== isTwoWayRelation))
+      );
   }
 
   public canShowRelationCheckBox(): Observable<boolean> {
@@ -228,5 +233,16 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   openItemModal() {
     const modalRef = this.modalService.open(ItemDetailPageModalComponent, { size: 'xl' });
     (modalRef.componentInstance as any).uuid = this.data.id;
+  }
+
+  /**
+   * Open a modal for item metadata comparison
+   *
+   * @param node
+   */
+  openCompareModal() {
+    const modalRef = this.modalService.open(CompareItemComponent, { size: 'xl' });
+    (modalRef.componentInstance as CompareItemComponent).baseItemId = this.data.id;
+    (modalRef.componentInstance as CompareItemComponent).versionedItemId = this.data.compareId;
   }
 }

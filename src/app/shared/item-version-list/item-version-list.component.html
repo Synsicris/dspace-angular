@@ -6,12 +6,12 @@
 </a>
 
 <div ngbDropdown class="d-inline-block">
-  <button class="btn btn-primary btn-sm" id="versionList" ngbDropdownToggle [disabled]="(versionList$ | async)?.length === 0">
+  <button class="btn btn-primary {{btnClass}}" id="versionList" ngbDropdownToggle [disabled]="(versionList$ | async)?.length === 0">
     {{'item.version.list.dropdown-text' | translate}}
   </button>
   <div ngbDropdownMenu aria-labelledby="versionList">
     <button *ngFor="let version of (versionList$ | async); let index = index"
-            class="btn-sm"
+            class="{{btnClass}}"
             ngbDropdownItem
             (click)="onVersionSelected(version)">
       {{('item.version.list.option-text' | translate) + (version.created |  date:'medium')}}

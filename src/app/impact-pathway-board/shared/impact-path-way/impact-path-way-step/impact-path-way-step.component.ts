@@ -38,6 +38,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
   @Input() public impactPathwayId: string;
   @Input() public impactPathwayStepId: string;
   @Input() public allImpactPathwayStepIds: string[];
+  @Input() public compareMode: boolean;
 
   public impactPathwayStep$: BehaviorSubject<ImpactPathwayStep> = new BehaviorSubject<ImpactPathwayStep>(null);
 
@@ -50,7 +51,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
     protected impactPathwayService: ImpactPathwayService,
     protected modalService: NgbModal,
     protected translate: TranslateService
-    ) {
+  ) {
     super(impactPathwayService);
   }
 

@@ -66,10 +66,10 @@ export class ImpactPathWayComponent implements OnInit {
       take(1)
     ).subscribe((canDelete) => this.canDeleteImpactPathway$.next(canDelete));
 
-    // this.subs.push(
-    //   this.impactPathwayService.isCompareModeActive()
-    //     .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
-    // );
+    this.subs.push(
+      this.impactPathwayService.isCompareModeActive()
+        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
+    );
 
   }
 
@@ -169,7 +169,7 @@ export class ImpactPathWayComponent implements OnInit {
    * Dispatch cleaning of comparing mode
    */
   onVersionDeselected() {
-    // this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata);
+    this.impactPathwayService.dispatchStopCompare(this.impactPathway.id);
   }
 
   ngOnDestroy(): void {

@@ -26,7 +26,9 @@ import {
   UpdateImpactPathwayTaskAction,
   SetImpactPathwaySubTaskCollapseAction,
   ClearImpactPathwaySubtaskCollapseAction,
-  InitCompareAction
+  InitCompareAction,
+  InitCompareSuccessAction,
+  StopCompareImpactPathwayAction
 } from './impact-pathway.actions';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
@@ -169,6 +171,16 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
 
     case ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY: {
       return initCompare(state, action as InitCompareAction);
+    }
+
+
+    case ImpactPathwayActionTypes.STOP_COMPARE_IMPACT_PATHWAY: {
+      return stopCompare(state, action as StopCompareImpactPathwayAction);
+    }
+
+
+    case ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_SUCCESS: {
+      return replaceImpactPathwaySteps(state, action as InitCompareSuccessAction);
     }
 
 
@@ -931,8 +943,46 @@ function initCompare(state: ImpactPathwayState, action: InitCompareAction) {
   return Object.assign({}, state, {
     compareImpactPathwayId: action.payload.compareImpactPathwayId,
     compareMode: true,
-    initializing: true,
-    loaded: false
   });
+}
+
+/**
+ * Stop state for comparing.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitCompareAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function stopCompare(state: ImpactPathwayState, action: StopCompareImpactPathwayAction) {
+  return Object.assign({}, state, {
+    compareImpactPathwayId: null,
+    compareMode: false,
+  });
+}
+
+
+/**
+ * replace impact pathway steps.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitCompareAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function replaceImpactPathwaySteps(state: ImpactPathwayState, action: InitCompareSuccessAction) {
+
+  const objects = state.objects;
+
+  return Object.assign({}, state, {
+    objects: Object.assign({}, objects, {
+      [action.payload.impactPathwayId]: Object.assign(new ImpactPathway(), objects[action.payload.impactPathwayId], { steps: action.payload.steps })
+    })
+  });
+
 }
 

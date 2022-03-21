@@ -50,7 +50,7 @@ import {
   isImpactPathwayLoadedSelector,
   isImpactPathwayProcessingSelector,
   isImpactPathwayRemovingSelector,
-  isCompareMode
+  isCompareMode,
 } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
@@ -77,7 +77,8 @@ import {
   SetImpactPathwayTargetTaskAction,
   UpdateImpactPathwayAction,
   UpdateImpactPathwayTaskAction,
-  InitCompareAction
+  InitCompareAction,
+  StopCompareImpactPathwayAction
 } from './impact-pathway.actions';
 import { ErrorResponse } from '../../core/cache/response.models';
 import {
@@ -294,18 +295,20 @@ export class ImpactPathwayService {
     this.store.dispatch(new UpdateImpactPathwayAction(impactPathwayId, impactPathway));
   }
 
+  dispatchStopCompare(impactPathwayId: string) {
+    this.store.dispatch(new StopCompareImpactPathwayAction(impactPathwayId));
+  }
 
   initCompareImpactPathwaySteps(compareList: ComparedVersionItem[]): Observable<ImpactPathwayStep[]> {
-    console.log('steps', compareList);
     return observableFrom(compareList).pipe(
       concatMap((compareItem: ComparedVersionItem) => this.initCompareImpactPathwayTasksFromStep(
         compareItem.item.id,
         compareItem.item,
         compareItem.versionItem ?.id).pipe(
-          map((tasks: ImpactPathwayTask[]) => this.initImpactPathwayTaskFromCompareItem(
+          map((steps: ImpactPathwayStep[]) => this.initImpactPathwayStepFromCompareItem(
             compareItem,
             null,
-            tasks
+            steps
           ))
         )),
       reduce((acc: any, value: any) => [...acc, value], [])
@@ -313,60 +316,57 @@ export class ImpactPathwayService {
   }
 
 
-  initCompareImpactPathwayTasksFromStep(targetImpactPathwayStepId: string, targetItem: Item, versionedImpactPathwayStepId: string): Observable<ImpactPathwayTask[]> {
-    // const relatedTaskMetadata = Metadata.all(targetItem.metadata, environment.impactPathway.impactPathwayTaskRelationMetadata);
-    // console.log('relatedTaskMetadata', relatedTaskMetadata);
-    // if (isEmpty(relatedTaskMetadata) || isEmpty(versionedImpactPathwayStepId)) {
-    //   return observableOf([]);
-    // } else {
-    console.log('started', targetImpactPathwayStepId, targetItem, versionedImpactPathwayStepId);
-    return this.projectVersionService.compareItemChildrenByMetadata(
-      targetImpactPathwayStepId,
-      versionedImpactPathwayStepId,
-      environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
-        mergeMap((compareList: ComparedVersionItem[]) => {
-          console.log('compareList2', compareList);
-          return observableFrom(compareList).pipe(
-            concatMap((compareItem: ComparedVersionItem) => observableOf(this.initImpactPathwayTaskFromCompareItem(
-              compareItem,
-              targetImpactPathwayStepId)
-            )),
-            reduce((acc: any, value: any) => {
-              if (isNotNull(value)) {
-                return [...acc, value];
-              } else {
-                return acc;
-              }
-            }, [])
-          );
-        })
-      );
-    // }
+  initCompareImpactPathwayTasksFromStep(targetImpactPathwayStepId: string, targetItem: Item, versionedImpactPathwayStepId: string): Observable<ImpactPathwayStep[]> {
+    const relatedTaskMetadata = Metadata.all(targetItem.metadata, environment.impactPathway.impactPathwayTaskRelationMetadata);
+    if (isEmpty(relatedTaskMetadata) || isEmpty(versionedImpactPathwayStepId)) {
+      return observableOf([]);
+    } else {
+      return this.projectVersionService.compareItemChildrenByMetadata(
+        targetImpactPathwayStepId,
+        versionedImpactPathwayStepId,
+        environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
+          mergeMap((compareList: ComparedVersionItem[]) => {
+            return observableFrom(compareList).pipe(
+              concatMap((compareItem: ComparedVersionItem) => observableOf(this.initImpactPathwayTaskFromCompareItem(
+                compareItem,
+                targetImpactPathwayStepId)
+              )),
+              reduce((acc: any, value: any) => {
+                if (isNotNull(value)) {
+                  return [...acc, value];
+                } else {
+                  return acc;
+                }
+              }, [])
+            );
+          })
+        );
+    }
   }
 
+  public initImpactPathwayStepFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, tasks: ImpactPathwayStep[] | ImpactPathwayTask[] = []): ImpactPathwayStep {
+    const type = compareObj.item.firstMetadataValue(environment.impactPathway.impactPathwayStepTypeMetadata);
+    const parent = compareObj.item.firstMetadataValue(environment.impactPathway.impactPathwayParentRelationMetadata);
+    return Object.assign(new ImpactPathwayStep(), {
+      id: compareObj.item.id,
+      parentId: parent,
+      title: compareObj.item.name,
+      type: type,
+      tasks: tasks,
+    });
+  }
 
   public initImpactPathwayTaskFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, tasks: ImpactPathwayTask[] = []): ImpactPathwayTask {
-    console.log(compareObj);
-    const responsible = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
-    const status = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
     const type = compareObj.item.firstMetadataValue('dspace.entity.type');
-
-    return compareObj;
-    // {
-    //   id: compareObj.item.id,
-    //   // compareId: compareObj.versionItem ?.id,
-    //   parentId: parentId,
-    //   // name: compareObj.item.name,
-    //   type: type,
-    //   // responsible: responsible,
-    //   // progress: 0,
-    //   // progressDates: [],
-    //   // dates: dates,
-    //   // compareStatus: compareObj.status,
-    //   // status: status,
-    //   // steps: steps,
-    //   // expanded: (steps && steps.length > 0)
-    // };
+    return Object.assign(new ImpactPathwayTask(), {
+      id: compareObj.item.id,
+      compareId: compareObj.versionItem ?.id,
+      compareStatus: compareObj.status,
+      parentId: parentId,
+      title: compareObj.item.name,
+      type: type,
+      tasks: tasks,
+    });
   }
 
 
@@ -677,13 +677,13 @@ export class ImpactPathwayService {
     const type = taskItem.firstMetadataValue('dspace.entity.type');
     const description = taskItem.firstMetadataValue('dc.description');
 
-    return new ImpactPathwayTask(taskItem.id, type, parentId, taskItem.name, description, tasks);
+    return new ImpactPathwayTask(taskItem.id, type, parentId, taskItem.name, description, null, null, tasks);
   }
 
   updateImpactPathwayTask(newTaskItem: Item, oldTask: ImpactPathwayTask): ImpactPathwayTask {
     const description = newTaskItem.firstMetadataValue('dc.description');
 
-    return new ImpactPathwayTask(oldTask.id, oldTask.type, oldTask.parentId, newTaskItem.name, description, oldTask.tasks);
+    return new ImpactPathwayTask(oldTask.id, oldTask.type, oldTask.parentId, newTaskItem.name, description, oldTask.compareId, oldTask.compareStatus, oldTask.tasks);
   }
 
   updateImpactPathway(newImpactPathwayItem: Item, oldImpactPathway: ImpactPathway): ImpactPathway {

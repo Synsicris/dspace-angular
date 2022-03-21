@@ -80,6 +80,7 @@ export const ImpactPathwayActionTypes = {
   INIT_COMPARE_IMPACT_PATHWAY: type('dspace/impactpathway/INIT_COMPARE_IMPACT_PATHWAY'),
   INIT_COMPARE_IMPACT_PATHWAY_ERROR: type('dspace/core/workingplan/INIT_COMPARE_IMPACT_PATHWAY_ERROR'),
   INIT_COMPARE_IMPACT_PATHWAY_SUCCESS: type('dspace/core/workingplan/INIT_COMPARE_IMPACT_PATHWAY_SUCCESS'),
+  STOP_COMPARE_IMPACT_PATHWAY: type('dspace/core/workingplan/STOP_COMPARE_IMPACT_PATHWAY'),
 };
 
 /* tslint:disable:max-classes-per-file */
@@ -165,6 +166,28 @@ export class InitImpactPathwayAction implements Action {
    */
   constructor(item: Item, withTarget = false) {
     this.payload = { item, withTarget };
+  }
+}
+
+
+
+/**
+ * An ngrx action for init success
+ */
+export class StopCompareImpactPathwayAction implements Action {
+  type = ImpactPathwayActionTypes.STOP_COMPARE_IMPACT_PATHWAY;
+  payload: {
+    id: string;
+  };
+
+  /**
+   * Create a new InitImpactPathwaySuccessAction
+   *
+   * @param id
+   *    the Item id of the impact pathway generated
+   */
+  constructor(id: string) {
+    this.payload = { id };
   }
 }
 
@@ -1454,6 +1477,7 @@ export class InitCompareErrorAction implements Action {
 export class InitCompareSuccessAction implements Action {
   type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_SUCCESS;
   payload: {
+    impactPathwayId: string;
     steps: ImpactPathwayStep[];
   };
 
@@ -1463,8 +1487,8 @@ export class InitCompareSuccessAction implements Action {
    * @param steps
    *    the list of steps objects
    */
-  constructor(steps: ImpactPathwayStep[]) {
-    this.payload = { steps };
+  constructor(impactPathwayId: string, steps: ImpactPathwayStep[]) {
+    this.payload = { impactPathwayId, steps };
   }
 }
 
@@ -1537,4 +1561,5 @@ export type ImpactPathwayActions
   | ClearImpactPathwaySubtaskCollapseAction
   | InitCompareAction
   | InitCompareErrorAction
-  | InitCompareSuccessAction;
+  | InitCompareSuccessAction
+  | StopCompareImpactPathwayAction;
