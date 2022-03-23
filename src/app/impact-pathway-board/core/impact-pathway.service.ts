@@ -295,10 +295,23 @@ export class ImpactPathwayService {
     this.store.dispatch(new UpdateImpactPathwayAction(impactPathwayId, impactPathway));
   }
 
+
+  /**
+   * Dispatch a new StopCompareImpactPathwayAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   */
   dispatchStopCompare(impactPathwayId: string) {
     this.store.dispatch(new StopCompareImpactPathwayAction(impactPathwayId));
   }
 
+  /**
+   * Initialize to compare the steps that were previously compared
+   *
+   * @param compareList
+   *    the list of compared steps
+   */
   initCompareImpactPathwaySteps(compareList: ComparedVersionItem[]): Observable<ImpactPathwayStep[]> {
     return observableFrom(compareList).pipe(
       concatMap((compareItem: ComparedVersionItem) => this.initCompareImpactPathwayTasksFromStep(
@@ -307,7 +320,6 @@ export class ImpactPathwayService {
         compareItem.versionItem ?.id).pipe(
           map((steps: ImpactPathwayStep[]) => this.initImpactPathwayStepFromCompareItem(
             compareItem,
-            null,
             steps
           ))
         )),
@@ -316,6 +328,16 @@ export class ImpactPathwayService {
   }
 
 
+  /**
+   * Initialize to compare the tasks for a specific step
+   *
+   * @param targetImpactPathwayStepId
+   *    the impact pathway's step id
+   * @param targetItem
+   *    the impact pathway's step compared item
+   * @param versionedImpactPathwayStepId
+   *    the impact pathway's step compared item with
+   */
   initCompareImpactPathwayTasksFromStep(targetImpactPathwayStepId: string, targetItem: Item, versionedImpactPathwayStepId: string): Observable<ImpactPathwayStep[]> {
     const relatedTaskMetadata = Metadata.all(targetItem.metadata, environment.impactPathway.impactPathwayTaskRelationMetadata);
     if (isEmpty(relatedTaskMetadata) || isEmpty(versionedImpactPathwayStepId)) {
@@ -344,7 +366,15 @@ export class ImpactPathwayService {
     }
   }
 
-  public initImpactPathwayStepFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, tasks: ImpactPathwayStep[] | ImpactPathwayTask[] = []): ImpactPathwayStep {
+  /**
+   * Initialize to construct the compared step
+   *
+   * @param compareObj
+   *    the compared object
+   * @param tasks
+   *    the tasks or steps related to the object
+   */
+  public initImpactPathwayStepFromCompareItem(compareObj: ComparedVersionItem, tasks: ImpactPathwayStep[] | ImpactPathwayTask[] = []): ImpactPathwayStep {
     const type = compareObj.item.firstMetadataValue(environment.impactPathway.impactPathwayStepTypeMetadata);
     const parent = compareObj.item.firstMetadataValue(environment.impactPathway.impactPathwayParentRelationMetadata);
     return Object.assign(new ImpactPathwayStep(), {
@@ -356,6 +386,14 @@ export class ImpactPathwayService {
     });
   }
 
+  /**
+   * Initialize to construct the compared step
+   *
+   * @param compareObj
+   *    the compared object
+   * @param tasks
+   *    the tasks or steps related to the object
+   */
   public initImpactPathwayTaskFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, tasks: ImpactPathwayTask[] = []): ImpactPathwayTask {
     const type = compareObj.item.firstMetadataValue('dspace.entity.type');
     return Object.assign(new ImpactPathwayTask(), {
@@ -394,10 +432,24 @@ export class ImpactPathwayService {
     this.store.dispatch(new ClearImpactPathwaySubtaskCollapseAction());
   }
 
+
+
+  /**
+   * Dispatch a new InitCompareAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param compareImpactPathwayId
+   *    the impact pathway's id to compare with
+   */
   public dispatchInitCompare(impactPathwayId: string, compareImpactPathwayId: string) {
     this.store.dispatch(new InitCompareAction(impactPathwayId, compareImpactPathwayId));
   }
 
+
+  /**
+   * Check compareMode is true
+   */
   public isCompareModeActive() {
     return this.store.pipe(select(isCompareMode));
   }

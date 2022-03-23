@@ -44,6 +44,9 @@ export class ImpactPathWayComponent implements OnInit {
   loaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   infoShowed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
+  /**
+   * Array to track all subscriptions and unsubscribe them onDestroy
+   */
   private subs: Subscription[] = [];
 
   /**

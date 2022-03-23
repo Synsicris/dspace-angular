@@ -57,7 +57,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   @Output() public deselected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
 
   ComparedVersionItemStatus = ComparedVersionItemStatus;
-  
+
   constructor(
     private editItemDataService: EditItemDataService,
     private impactPathwayService: ImpactPathwayService,
@@ -237,8 +237,6 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
   /**
    * Open a modal for item metadata comparison
-   *
-   * @param node
    */
   openCompareModal() {
     const modalRef = this.modalService.open(CompareItemComponent, { size: 'xl' });

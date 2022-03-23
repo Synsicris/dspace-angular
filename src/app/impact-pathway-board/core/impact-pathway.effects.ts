@@ -133,7 +133,7 @@ export class ImpactPathwayEffects {
 
 
   /**
-   * Add workpackages to workingplan state
+   * Initialize compare of impact pathway and copares its children
    */
   @Effect() initCompare$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY),
@@ -148,7 +148,7 @@ export class ImpactPathwayEffects {
         map((steps: ImpactPathwayStep[]) => new InitCompareSuccessAction(action.payload.impactPathwayId, steps)),
         catchError((error: Error) => {
           if (error) {
-            console.error(error.message);
+            this.notificationsService.error(null, this.translate.get('impact-pathway.compare.error'));
           }
           return observableOf(new InitCompareErrorAction());
         }));
