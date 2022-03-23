@@ -119,6 +119,7 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
     case WorkpackageActionTypes.ADD_WORKPACKAGE_ERROR:
     case WorkpackageActionTypes.ADD_WORKPACKAGE_STEP_ERROR:
     case WorkpackageActionTypes.GENERATE_WORKPACKAGE_ERROR:
+    case WorkpackageActionTypes.GENERATE_WORKPACKAGE_STEP_ERROR:
     case WorkpackageActionTypes.INIT_WORKINGPLAN_ERROR: {
       return Object.assign({}, state, {
         processing: false
