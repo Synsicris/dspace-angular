@@ -196,8 +196,12 @@ export class WorkingPlanService {
     return environment.workingPlan.workingPlanEditMode;
   }
 
+  getWorkingPlanEditFormName(): string {
+    return environment.workingPlan.workingPlanEditFormSection;
+  }
+
   getWorkingPlanEditSectionName(): string {
-    return `sections/${environment.workingPlan.workingPlanEditFormSection}`;
+    return `sections/${this.getWorkingPlanEditFormName()}`;
   }
 
   getWorkingPlanTaskSearchHeader(): string {
