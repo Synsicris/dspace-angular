@@ -7458,7 +7458,7 @@
 
   "layout.field.label.Person.synsicris.subject.destatis": "Discipline",
 
-  "layout.field.label.Person.person.email": "Email",
+  "layout.field.label.Person.person.email": "<i class=\"fa-solid fa-envelope\"></i>",
 
   "layout.field.label.Person.oairecerif.identifier.url": "About the Person",
 
