@@ -1,7 +1,7 @@
 <div class="d-flex flex-column p-2 bg-light rounded">
   <div class="d-flex justify-content-between">
     <h5>{{fieldTitle}}</h5>
-    <button class="btn btn-primary btn-sm"
+    <button class="btn btn-primary btn-sm" [disabled]="disabled"
             (click)="$event.preventDefault();  $event.stopPropagation(); openEditModal();">
       <span>
         <i class="far fa-edit"></i> {{editTitle}}

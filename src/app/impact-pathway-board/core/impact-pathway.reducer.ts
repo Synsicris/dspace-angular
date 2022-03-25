@@ -943,6 +943,7 @@ function initCompare(state: ImpactPathwayState, action: InitCompareAction) {
   return Object.assign({}, state, {
     compareImpactPathwayId: action.payload.compareImpactPathwayId,
     compareMode: true,
+    processing:true
   });
 }
 
@@ -965,7 +966,7 @@ function stopCompare(state: ImpactPathwayState, action: StopCompareImpactPathway
 
 
 /**
- * replace impact pathway steps.
+ * replace impact pathway steps & tasks.
  *
  * @param state
  *    the current state
@@ -978,7 +979,7 @@ function replaceImpactPathwaySteps(state: ImpactPathwayState, action: InitCompar
 
   const objects = state.objects;
 
-  return Object.assign({}, state, {
+  return Object.assign({}, state, { processing: false }, {
     objects: Object.assign({}, objects, {
       [action.payload.impactPathwayId]: Object.assign(new ImpactPathway(), objects[action.payload.impactPathwayId], { steps: action.payload.steps })
     })
