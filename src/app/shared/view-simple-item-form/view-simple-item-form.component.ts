@@ -67,7 +67,7 @@ export class ViewSimpleItemFormComponent implements OnInit {
    * The textarea disabled
    */
   @Input() public disabled = false;
-  
+
   constructor(
     private cdr: ChangeDetectorRef,
     private formBuilderService: FormBuilderService,
