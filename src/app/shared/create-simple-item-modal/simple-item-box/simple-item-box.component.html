@@ -1,18 +1,17 @@
-<div [class.simple-item-focus]="selectStatus.value">
-  <ng-content></ng-content>
-  <div class="simple-item-wrap d-flex flex-column"
-       [class.simple-item-focus]="(hasFocus$ | async)"
-       ipwTaskColor
-       [taskType]="data.type"
-       (click)="setFocus($event)">
-    <div class="simple-item-header p-1">
-      <div class="simple-item-title title-clamp font-weight-bold">
-        <p title="{{title}}">{{title}}</p>
+<div class="task-container" id="{{taskHTMLDivId}}" [class.task-focus]="(hasFocus$ | async)" ipwTaskColor [taskType]="data.type">
+  <div class="task-right-bar">
+    <div class="task-content">
+      <div class="title">
+        <div class="task-title title-clamp font-weight-bold">
+          <a href="#">{{title}}</a>
+          <i class="bi bi-arrow-90deg-up"></i>
+        </div>
+        <div class="task-checkbox">
+          <input type="checkbox" class="form-check-input" [checked]="(hasFocus$ | async)" (change)="setFocus($event)">
+        </div>
       </div>
-    </div>
-    <div class="simple-item-content p-1 mt-1">
-      <div class="simple-item-type type-clamp">
-        <p title="{{type$ | async}}">{{type$ | async}}</p>
+      <div class="description">
+        <span title="{{type$ | async}}">{{type$ | async}}</span>
       </div>
     </div>
   </div>

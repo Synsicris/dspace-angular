@@ -63,6 +63,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log(this.data);
     this.taskHTMLDivId = this.buildHTMLDivId();
     this.taskType$ = this.impactPathwayService.getImpactPathwayTaskType(
       this.impactPathwayStepType,
@@ -102,17 +103,17 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
     return combineLatestObservable(this.impactPathwayLinksService.isEditingLink(),
       this.impactPathwayLinksService.isEditingLinkOnOtherTask(this.taskHTMLDivId),
       this.impactPathwayLinksService.isEditingLinkOnTask(this.taskHTMLDivId)).pipe(
-      map(([isEditing, isEditingOnOtherTask, isEditingOnTask]) => !isEditing ||
-        isEditingOnOtherTask || (isEditingOnTask && this.isTwoWayRelationSelected.value !== isTwoWayRelation))
-    );
+        map(([isEditing, isEditingOnOtherTask, isEditingOnTask]) => !isEditing ||
+          isEditingOnOtherTask || (isEditingOnTask && this.isTwoWayRelationSelected.value !== isTwoWayRelation))
+      );
   }
 
   public canHideRelationButtons(isTwoWayRelation: boolean): Observable<boolean> {
     return combineLatestObservable(this.impactPathwayLinksService.isEditingLinkOnOtherTask(this.taskHTMLDivId),
       this.impactPathwayLinksService.isEditingLinkOnTask(this.taskHTMLDivId)).pipe(
-      map(([isEditingOnOtherTask, isEditingOnTask]) => isEditingOnOtherTask ||
-        (isEditingOnTask && this.isTwoWayRelationSelected.value !== isTwoWayRelation))
-    );
+        map(([isEditingOnOtherTask, isEditingOnTask]) => isEditingOnOtherTask ||
+          (isEditingOnTask && this.isTwoWayRelationSelected.value !== isTwoWayRelation))
+      );
   }
 
   public canShowRelationCheckBox(): Observable<boolean> {

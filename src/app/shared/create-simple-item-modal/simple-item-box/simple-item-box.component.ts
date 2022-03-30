@@ -39,6 +39,7 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
     this.title = Metadata.firstValue(this.data.metadata, 'dc.title');
     this.vocabularyOptions = new VocabularyOptions(this.vocabularyName);
     this.type$ = this.getItemType();
+    console.log(this.data, this.title);
 
     this.subs.push(this.selectStatus.pipe(
       distinctUntilChanged())
@@ -55,6 +56,7 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
   }
 
   public setFocus(event): void {
+    console.log(this.selectStatus.value);
     if (this.selectStatus.value) {
       this.selectStatus.next(false);
     } else {

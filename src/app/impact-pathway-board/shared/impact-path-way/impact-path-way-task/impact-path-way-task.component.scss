@@ -105,3 +105,50 @@ button.btn:focus {
   left: 0.4rem;
   font-size: 0.8rem;
 }
+
+
+.task-container{
+  display: flex;
+  flex-direction: row;
+  box-shadow: 1px 1px 1px 1px var(--bs-gray-300);
+}
+
+.task-left-bar{
+  background-color: var(--ds-top-footer-bg);
+  width: 30px;
+  padding-top:15px;
+  text-align: center;
+}
+
+.task-right-bar{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .task-content{
+    padding: 15px 10px 10px 10px;
+    flex-basis: 50%;
+    flex-grow: 1;
+    height: auto;
+  }
+
+  .task-actions{
+    border-top:1px solid var(--ds-top-footer-bg);
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    button{
+      display: flex;
+    }
+  }
+  .task-title{
+    height: 60px;
+    font-size: 0.9em;
+    overflow: hidden;
+  }
+  .description{
+    height: 32px;
+    font-size: 0.7em;
+    overflow: hidden;
+  }
+}
