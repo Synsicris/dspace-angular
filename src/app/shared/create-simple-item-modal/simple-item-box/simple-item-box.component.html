@@ -1,18 +1,25 @@
-<div [class.simple-item-focus]="selectStatus.value">
+<div class="task-container simple-item-wrap" [class.task-focus]="selectStatus.value" [class.simple-item-focus]="selectStatus.value">
   <ng-content></ng-content>
-  <div class="simple-item-wrap d-flex flex-column"
-       [class.simple-item-focus]="(hasFocus$ | async)"
-       ipwTaskColor
-       [taskType]="data.type"
-       (click)="setFocus($event)">
-    <div class="simple-item-header p-1">
-      <div class="simple-item-title title-clamp font-weight-bold">
-        <p title="{{title}}">{{title}}</p>
+  <div class="task-right-bar">
+    <div class="p-1">
+      <div class="task-header d-flex justify-content-between">
+        <div class="task-title title-clamp font-weight-bold text-info" (click)="openItemModal()">
+          <p title="{{title}}">{{title}}</p>
+        </div>
+
+        <div class="ml-2 task-checkbox">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="searchCheck{{data.id}}"
+                   [checked]="selectStatus.value" (change)="setFocus($event)">
+            <label class="custom-control-label" for="searchCheck{{data.id}}"></label>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="simple-item-content p-1 mt-1">
-      <div class="simple-item-type type-clamp">
-        <p title="{{type$ | async}}">{{type$ | async}}</p>
+
+      <div class="task-content p-1">
+        <div class="task-type type-clamp">
+          <p title="{{type$ | async}}">{{type$ | async}}</p>
+        </div>
       </div>
     </div>
   </div>
