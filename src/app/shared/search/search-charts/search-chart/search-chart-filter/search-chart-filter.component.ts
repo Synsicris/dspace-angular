@@ -106,7 +106,7 @@ export class SearchChartFilterComponent extends SearchFacetFilterComponent imple
                 (item: FacetValue) =>
                 ({
                   name: item.count.toString(),
-                  value: Number(item.value),
+                  value: parseInt(item.value, 10),
                   extra: item,
                 } as ChartSeries)
               )
