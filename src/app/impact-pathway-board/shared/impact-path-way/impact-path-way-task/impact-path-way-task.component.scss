@@ -124,6 +124,7 @@ button.btn:focus {
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
 
   .task-content{
     padding: 15px 10px 10px 10px;
@@ -139,6 +140,17 @@ button.btn:focus {
     justify-content: space-evenly;
     button{
       display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .span-icon-container{
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      i{
+        text-decoration: none !important;
+      }
     }
   }
   .task-title{

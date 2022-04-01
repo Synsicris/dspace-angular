@@ -1,16 +1,18 @@
-<div class="task-container" [class.task-focus]="(hasFocus$ | async)" ipwTaskColor [taskType]="data.type">
+<div class="task-container simple-item-wrap" [class.task-focus]="selectStatus.value" [class.simple-item-focus]="selectStatus.value"
+  ipwTaskColor [taskType]="data.type">
+  <ng-content></ng-content>
   <div class="task-right-bar">
     <div class="task-content">
       <div class="title">
         <div class="task-title title-clamp font-weight-bold">
-          <a href="#">{{title}}</a>
+          <a href="javascript:;" (click)="openItemModal()">{{title}}</a>
           <i class="bi bi-arrow-90deg-up"></i>
         </div>
         <div class="task-checkbox">
-          <input type="checkbox" class="form-check-input" [checked]="(hasFocus$ | async)" (change)="setFocus($event)">
+          <input type="checkbox" class="form-check-input" [checked]="selectStatus.value" (change)="setFocus($event)">
         </div>
       </div>
-      <div class="description">
+      <div class="description type-clamp">
         <span title="{{type$ | async}}">{{type$ | async}}</span>
       </div>
     </div>

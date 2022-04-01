@@ -9,74 +9,80 @@
     <div class="task-content">
       <div class="title">
         <div class="task-title title-clamp font-weight-bold">
-          <a href="#">{{data.title}}</a>
+          <a href="javascript:;" (click)="openItemModal()">{{data.title}}</a>
           <i class="bi bi-arrow-90deg-up"></i>
         </div>
       </div>
-      <div class="description">
-        {{data.description}}
+      <div class="description type-clamp" [class.task-overlay-hide]="(canShowRelationCheckBox() | async)">
+        <!-- <div class="task-type "> -->
+        <p title="{{taskType$ | async}}">{{taskType$ | async}}</p>
+        <!-- </div> -->
       </div>
     </div>
-    <div class="task-actions">
+    <div class="task-actions" [class.task-overlay-hide]="(canShowRelationCheckBox() | async)">
       <button *ngIf="(canShowRelationButton(true) | async)" class="btn btn-lg btn-link p-0 flex-shrink-1" title="{{'impact-pathway.create.bidirectional-link' | translate}}"
         [disabled]="(canHideRelationButtons(true) | async)" (click)="setEditRelations(true); $event.stopPropagation()">
-        <span>
+        <span class="span-icon-container">
           <i class="fas fa-light fa-arrows-alt-h"></i>
           <!-- <i class="fa-light fa-arrows-left-right"></i> -->
         </span>
       </button>
       <button *ngIf="(isEditingRelationOnTask(true) | async)" class="btn btn-lg btn-link p-0 flex-shrink-1" title="{{'impact-pathway.save.link.title' | translate}}"
         [disabled]="(canHideRelationButtons(true) | async)" (click)="saveRelations(); $event.stopPropagation()">
-        <span>
+        <span class="span-icon-container">
           <i class='far fa-save'></i>
         </span>
       </button>
       <button *ngIf="(canShowRelationButton(false) | async)" class="btn btn-lg btn-link p-0 flex-shrink-1" title="{{'impact-pathway.create.outcome-link' | translate}}"
         [disabled]="(canHideRelationButtons(false) | async)" (click)="setEditRelations(false); $event.stopPropagation()">
-        <span>
+        <span class="span-icon-container">
           <i class="fas fa-long-arrow-alt-right"></i>
         </span>
       </button>
       <button *ngIf="(isEditingRelationOnTask(false) | async)" class="btn btn-lg btn-link p-0 flex-shrink-1" title="{{'impact-pathway.save.link.title' | translate}}"
         [disabled]="(canHideRelationButtons(false) | async)" (click)="saveRelations(); $event.stopPropagation()">
-        <span>
+        <span class="span-icon-container">
           <i class='far fa-save'></i>
-        </span>
-      </button>
-      <button class="btn btn-lg btn-link p-0 flex-shrink-1 mr-1" title="{{'working-plan.chart.button.compare' | translate}}" (click)="openItemModal()">
-        <span class="fa-stack ipw-stacked-icons">
-          <i class="far fa-file fa-stack-1x"></i>
-          <i class="fas fa-search fa-stack-1x ipw-stacked-icon "></i>
         </span>
       </button>
       <button *ngIf="data.hasDetail()" class="btn btn-lg btn-link p-0 flex-shrink-1 mr-1" title="{{'impact-pathway.objectives.edit.page.title' | translate}}"
         [disabled]="(isEditingRelation() | async)" (click)="showObjectives(); $event.stopPropagation()">
-        <i class="far fa-list-alt"></i>
+        <span class="span-icon-container">
+          <i class="far fa-list-alt"></i>
+        </span>
       </button>
       <button *ngIf="!data.hasDetail() && (canEdit() | async)" class="btn btn-lg btn-link p-0 flex-shrink-1" [disabled]="(isEditingRelation() | async)"
         title="{{'impact-pathway.edit.item.title' | translate}}" (click)="navigateToEditItemPage(); $event.stopPropagation()">
-        <span *ngIf="!(isRedirectingToEdit$ | async)">
+        <span *ngIf="!(isRedirectingToEdit$ | async)" class="span-icon-container">
           <i class="fas fa-edit"></i>
         </span>
-        <span *ngIf="(isRedirectingToEdit$ | async)">
+        <span *ngIf="(isRedirectingToEdit$ | async)" class="span-icon-container">
           <i class='fas fa-circle-notch fa-spin'></i>
         </span>
       </button>
       <button *ngIf="(canEdit() | async)" class="btn btn-lg btn-link p-0 flex-shrink-1 text-danger" [disabled]="(isEditingRelation() | async)"
         title="{{'impact-pathway.delete.item.title' | translate}}" (click)="navigateToEditItemPage(); $event.stopPropagation()">
-        <span *ngIf="!(isRedirectingToEdit$ | async)">
+        <span *ngIf="!(isRedirectingToEdit$ | async)" class="span-icon-container">
           <i class="fas fa-trash"></i>
         </span>
       </button>
       <button *ngIf="data.hasParent()" class="btn btn-lg btn-link p-0 text-danger" title="{{'impact-pathway.remove.item.title' | translate}}"
         [disabled]="(isEditingRelation() | async)" (click)="removeTask(); $event.stopPropagation()">
-        <span *ngIf="!(isProcessingRemove() | async)">
+        <span *ngIf="!(isProcessingRemove() | async)" class="span-icon-container">
           <i class="fas fa-thumbtack"></i>
         </span>
-        <span *ngIf="(isProcessingRemove() | async)">
+        <span *ngIf="(isProcessingRemove() | async)" class="span-icon-container">
           <i class='fas fa-circle-notch fa-spin'></i>
         </span>
       </button>
+    </div>
+    <div *ngIf="(canShowRelationCheckBox() | async)" class="task-overlay position-absolute d-flex align-items-center p-1">
+      <div>
+        <mat-checkbox id="taskConnect{{taskHTMLDivId}}" color="primary" [checked]="isTaskPartOfRelation() | async" [labelPosition]="'before'"
+          (change)="onCheckBoxChange($event)">
+          <label class="text-break text-white">{{'impact-pathway.checkbox.link' | translate}} </label>
+        </mat-checkbox>
+      </div>
     </div>
   </div>
 </div>

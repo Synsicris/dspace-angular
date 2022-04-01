@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
@@ -38,10 +38,12 @@ export class ItemDetailPageModalComponent implements OnInit {
 
   itemRD$: Observable<Item>;
 
+  modalRef: NgbModalRef;
+
   constructor(private itemService: ItemDataService,
-              private modalService: NgbModal,
-              private tabService: TabDataService,
-              private router: Router
+    private modalService: NgbModal,
+    private tabService: TabDataService,
+    private router: Router
   ) {
   }
 
@@ -71,11 +73,11 @@ export class ItemDetailPageModalComponent implements OnInit {
         return item;
       }),
       switchMap((item: Item) => this.tabService.findByItem(
-          item.uuid, // Item UUID
-          true
-        ).pipe(
-          getFirstCompletedRemoteData(),
-        )
+        item.uuid, // Item UUID
+        true
+      ).pipe(
+        getFirstCompletedRemoteData(),
+      )
       ));
   }
 
@@ -88,6 +90,10 @@ export class ItemDetailPageModalComponent implements OnInit {
     };
     this.router.navigate([], navExtras);
     this.close.emit(text);
-    this.modalService.dismissAll();
+    if (this.modalRef) {
+      this.modalRef.dismiss();
+    } else {
+      this.modalService.dismissAll();
+    }
   }
 }

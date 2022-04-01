@@ -1,3 +1,4 @@
+import { ItemDetailPageModalComponent } from './../../../item-detail-page-modal/item-detail-page-modal.component';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
@@ -9,6 +10,7 @@ import { Metadata } from '../../../core/shared/metadata.utils';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ds-simple-item-box',
@@ -31,7 +33,9 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
   @Output() public selected: EventEmitter<SimpleItem> = new EventEmitter();
   @Output() public deselected: EventEmitter<SimpleItem> = new EventEmitter();
 
-  constructor(private vocabularyService: VocabularyService) {
+  constructor(
+    private modalService: NgbModal,
+    private vocabularyService: VocabularyService) {
 
   }
 
@@ -39,7 +43,6 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
     this.title = Metadata.firstValue(this.data.metadata, 'dc.title');
     this.vocabularyOptions = new VocabularyOptions(this.vocabularyName);
     this.type$ = this.getItemType();
-    console.log(this.data, this.title);
 
     this.subs.push(this.selectStatus.pipe(
       distinctUntilChanged())
@@ -56,7 +59,6 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
   }
 
   public setFocus(event): void {
-    console.log(this.selectStatus.value);
     if (this.selectStatus.value) {
       this.selectStatus.next(false);
     } else {
@@ -81,5 +83,11 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
       }),
       catchError((error: Error) => observableOf(''))
     );
+  }
+
+  openItemModal() {
+    const modalRef = this.modalService.open(ItemDetailPageModalComponent, { size: 'xl' });
+    (modalRef.componentInstance as any).uuid = this.data.id;
+    (modalRef.componentInstance as any).modalRef = modalRef;
   }
 }

@@ -4,13 +4,22 @@
   background-color: white;
   z-index: 1;
 
+  cursor: auto !important;
+
   .simple-item-wrap {
     min-height: 100px;
-    border-left-width: ($border-width*5) !important;
-    border: $border-width solid map-get($theme-colors, dark);
+    // border-left-width: ($border-width*5) !important;
+    // border: $border-width solid map-get($theme-colors, dark);
   }
 
 }
+
+
+.simple-item-focus {
+  // border-radius: $border-radius !important;
+  box-shadow: 0 0 0 .2rem rgba(19, 35, 51, 0.3) !important;
+}
+
 
 .task-header {
   height: 70px;
@@ -96,6 +105,9 @@
     .task-title{
       display: flex;
       flex:1;
+    }
+    .form-check-input{
+      cursor: pointer;
     }
   }
 }
