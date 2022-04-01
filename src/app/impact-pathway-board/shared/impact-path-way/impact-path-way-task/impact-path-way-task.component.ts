@@ -63,7 +63,6 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
     this.taskHTMLDivId = this.buildHTMLDivId();
     this.taskType$ = this.impactPathwayService.getImpactPathwayTaskType(
       this.impactPathwayStepType,

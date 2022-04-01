@@ -1,19 +1,25 @@
-<div class="task-container simple-item-wrap" [class.task-focus]="selectStatus.value" [class.simple-item-focus]="selectStatus.value"
-  ipwTaskColor [taskType]="data.type">
+<div class="task-container simple-item-wrap" [class.task-focus]="selectStatus.value" [class.simple-item-focus]="selectStatus.value">
   <ng-content></ng-content>
   <div class="task-right-bar">
-    <div class="task-content">
-      <div class="title">
-        <div class="task-title title-clamp font-weight-bold">
-          <a href="javascript:;" (click)="openItemModal()">{{title}}</a>
-          <i class="bi bi-arrow-90deg-up"></i>
+    <div class="p-1">
+      <div class="task-header d-flex justify-content-between">
+        <div class="task-title title-clamp font-weight-bold text-info" (click)="openItemModal()">
+          <p title="{{title}}">{{title}}</p>
         </div>
-        <div class="task-checkbox">
-          <input type="checkbox" class="form-check-input" [checked]="selectStatus.value" (change)="setFocus($event)">
+
+        <div class="ml-2 task-checkbox">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="searchCheck{{data.id}}"
+                   [checked]="selectStatus.value" (change)="setFocus($event)">
+            <label class="custom-control-label" for="searchCheck{{data.id}}"></label>
+          </div>
         </div>
       </div>
-      <div class="description type-clamp">
-        <span title="{{type$ | async}}">{{type$ | async}}</span>
+
+      <div class="task-content p-1">
+        <div class="task-type type-clamp">
+          <p title="{{type$ | async}}">{{type$ | async}}</p>
+        </div>
       </div>
     </div>
   </div>
