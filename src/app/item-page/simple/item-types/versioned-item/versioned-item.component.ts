@@ -47,7 +47,7 @@ export class VersionedItemComponent extends ItemComponent {
     const versionHref = item._links.version.href;
 
     // Open modal
-    const activeModal = this.modalService.open(ItemVersionsSummaryModalComponent);
+    const activeModal = this.modalService.open(ItemVersionsSummaryModalComponent, { keyboard: false, backdrop: 'static' });
 
     // Show current version in modal
     this.versionService.findByHref(versionHref).pipe(getFirstCompletedRemoteData()).subscribe((res: RemoteData<Version>) => {

@@ -362,7 +362,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   addChildStep(flatNode: WorkpacakgeFlatNode) {
     const nestedNode: Workpackage = this.nestedNodeMap.get(flatNode.id) as Workpackage;
-    const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg', keyboard: false, backdrop: 'static' });
 
     modalRef.result.then((result) => {
       if (result) {
