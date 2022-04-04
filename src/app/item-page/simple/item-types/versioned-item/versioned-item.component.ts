@@ -63,6 +63,8 @@ export class VersionedItemComponent extends ItemComponent {
     ).subscribe((res: RemoteData<Version>) => {
       // show success/failure notification
       this.itemVersionShared.notifyCreateNewVersion(res);
+      this.itemService.invalidateItemCache(item.uuid);
+      this.versionHistoryService.invalidateAllVersionHistoryCache();
       this.modalService.dismissAll();
     });
 
