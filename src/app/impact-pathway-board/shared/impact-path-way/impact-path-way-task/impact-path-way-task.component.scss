@@ -3,13 +3,14 @@
 :host {
   background-color: white;
   z-index: 1;
+}
 
-  .task-wrap {
-    min-height: 154px;
-    border-left-width: ($border-width*5) !important;
-    border: $border-width solid map-get($theme-colors, dark);
-  }
+.task-container {
+  box-shadow: 1px 1px 1px 1px var(--bs-gray-300);
+}
 
+.task-detail {
+  min-height: 120px
 }
 
 .task-focus {
@@ -111,13 +112,6 @@ button.btn:focus {
   top: 0.5rem;
   left: 0.4rem;
   font-size: 0.8rem;
-}
-
-
-.task-container{
-  display: flex;
-  flex-direction: row;
-  box-shadow: 1px 1px 1px 1px var(--bs-gray-300);
 }
 
 .task-left-bar{

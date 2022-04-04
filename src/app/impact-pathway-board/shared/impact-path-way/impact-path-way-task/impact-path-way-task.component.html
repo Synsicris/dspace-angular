@@ -1,4 +1,4 @@
-<div class="task-container" id="{{taskHTMLDivId}}" [class.task-focus]="(selectable && selectStatus.value) || (hasFocus$ | async)" [class.bg-gradient-light]="isDisabled()"
+<div class="task-container d-flex" id="{{taskHTMLDivId}}" [class.task-focus]="(selectable && selectStatus.value) || (hasFocus$ | async)" [class.bg-gradient-light]="isDisabled()"
   [class.task-disabled]="isDisabled()" ipwTaskColor [taskType]="data.type" (click)="setFocus($event)">
   <div class="task-left-bar">
     <button class="btn btn-xs btn-link p-0 text-primary button-move align-self-start" title="Drag & Drop">
@@ -6,7 +6,7 @@
     </button>
   </div>
   <div class="task-right-bar">
-    <div class="p-1">
+    <div class="task-detail p-1">
       <div class="task-header">
         <div class="task-title title-clamp font-weight-bold text-info" (click)="openItemModal()">
           <p title="{{data.title}}">{{data.title}}</p>
