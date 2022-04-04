@@ -1,0 +1,30 @@
+<div class="container" *ngIf="searchConfig">
+  <form [formGroup]="searchForm">
+    <div class="mb-2" formArrayName="queryArray"
+      *ngFor="let queryStatement of queryArray.controls; let i = index; let isLast = last">
+      <div class="form-group form-inline" [formGroupName]="i">
+
+        <select #filterDropdown name="filter" id="filter" formControlName="filter"
+          class="form-control col-md-4 mr-3 mb-2" (change)="onFilterChange($event)">
+          <option *ngFor="let filter of searchConfig.filters" [value]="filter.filter">{{'explore.index.' + filter.filter
+            | translate}}</option>
+        </select>
+
+        <select name="operator" id="operator" formControlName="operator" class="form-control col-md-2 mb-2  mr-3">
+          <option *ngFor="let operation of conditionObj.get(filterDropdown.value)" [value]="operation">{{operation}}
+          </option>
+        </select>
+
+        <input type="text" name="value" id="value" formControlName="value" class="form-control col-md-5 mb-2" />
+
+        <select class="form-control col-md-2 mb-2  mr-3" *ngIf="!isLast">
+          <option [value]="operator" *ngFor="let operator of logicalOperators">{{operator | uppercase}}</option>
+        </select>
+
+      </div>
+
+      <button *ngIf="isLast" id="addButton" type="button" class="btn btn-info col-md-2 mb-2"
+        (click)="addQueryStatement()">+</button>
+    </div>
+  </form>
+</div>

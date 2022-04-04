@@ -286,6 +286,11 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             loadChildren: () => import('./invitation/invitation.module')
               .then((m) => m.InvitationModule)
           },
+          {
+            path: 'browse-by-projects',
+            loadChildren: () => import('./+query-builder-page/query-builder.module')
+              .then((m) => m.QueryBuilderModule)
+          },
           { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
         ]
       }
