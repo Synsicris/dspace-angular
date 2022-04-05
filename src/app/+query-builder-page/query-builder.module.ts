@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { QueryBuilderRoutingModule } from './query-builder-routing.module';
 import { QueryBuilderComponent } from './query-builder.component';
 import { QueryConditionGroupComponent } from './query-condition-group/query-condition-group.component';
-import {  ReactiveFormsModule } from '@angular/forms';
+import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     QueryBuilderRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     TranslateModule
   ]

@@ -1,30 +1,36 @@
-<div class="container" *ngIf="searchConfig">
-  <form [formGroup]="searchForm">
-    <div class="mb-2" formArrayName="queryArray"
-      *ngFor="let queryStatement of queryArray.controls; let i = index; let isLast = last">
+<div class="container query-group-container" *ngIf="searchConfig">
+  <form [formGroup]="formGroup">
+    <div class="mb-2" formArrayName="queryGroup"
+      *ngFor="let queryStatement of queryGroup.controls; let i = index; let isLast = last">
       <div class="form-group form-inline" [formGroupName]="i">
-
         <select #filterDropdown name="filter" id="filter" formControlName="filter"
-          class="form-control col-md-4 mr-3 mb-2" (change)="onFilterChange($event)">
-          <option *ngFor="let filter of searchConfig.filters" [value]="filter.filter">{{'explore.index.' + filter.filter
-            | translate}}</option>
+          class="form-control col-md-3 mr-1 mb-1" (change)="onFilterChange($event)">
+          <option *ngFor="let filter of filterList" [value]="filter.filter" [disabled]="filter.disabled">
+            {{'explore.index.' + filter.filter | translate}}</option>
         </select>
 
-        <select name="operator" id="operator" formControlName="operator" class="form-control col-md-2 mb-2  mr-3">
-          <option *ngFor="let operation of conditionObj.get(filterDropdown.value)" [value]="operation">{{operation}}
+        <select name="operator" id="operator" formControlName="operator" class="form-control col-md-2 mb-1 mr-1">
+          <option *ngFor="let operation of conditionObj.get(filterDropdown.value)" [value]="operation">
+            {{operation | translate}}
           </option>
         </select>
 
-        <input type="text" name="value" id="value" formControlName="value" class="form-control col-md-5 mb-2" />
+        <input type="text" name="value" id="value" formControlName="value" class="form-control col-md-3 mb-1" />
 
-        <select class="form-control col-md-2 mb-2  mr-3" *ngIf="!isLast">
+        <select class="form-control col-2 ml-1" *ngIf="!isLast">
           <option [value]="operator" *ngFor="let operator of logicalOperators">{{operator | uppercase}}</option>
         </select>
 
-      </div>
+        <button *ngIf="isLast" id="addButton" type="button" class="btn btn-dark col-md-2 mb-1 ml-1"
+          (click)="addQueryStatement()"> <i class="fa fa-plus"></i> Add Filter</button>
 
-      <button *ngIf="isLast" id="addButton" type="button" class="btn btn-info col-md-2 mb-2"
-        (click)="addQueryStatement()">+</button>
+        <div class="col-1 mr-1" *ngIf="!isLast">
+          <button id="deleteButton" type="button" class="btn btn-danger" (click)="deleteCondition(i)">
+            <i aria-hidden="true" class="fa fa-trash"></i>
+          </button>
+        </div>
+
+      </div>
     </div>
   </form>
 </div>
