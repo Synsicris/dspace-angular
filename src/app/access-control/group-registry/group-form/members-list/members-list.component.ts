@@ -1,3 +1,4 @@
+import { ConfirmWithdrawComponent } from './confirm-withdraw/confirm-withdraw.component';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -27,6 +28,7 @@ import { NotificationsService } from '../../../../shared/notifications/notificat
 import { PaginationComponentOptions } from '../../../../shared/pagination/pagination-component-options.model';
 import { EpersonDtoModel } from '../../../../core/eperson/models/eperson-dto.model';
 import { PaginationService } from '../../../../core/pagination/pagination.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 /**
  * Keys to keep track of specific subscriptions
@@ -39,7 +41,8 @@ enum SubKey {
 
 @Component({
   selector: 'ds-members-list',
-  templateUrl: './members-list.component.html'
+  templateUrl: './members-list.component.html',
+  styleUrls: ['./members-list.component.scss']
 })
 /**
  * The list of members in the edit group page
@@ -63,6 +66,14 @@ export class MembersListComponent implements OnInit, OnDestroy {
    * Boolean representing if to show the send invitation action
    */
   @Input() showInvitationAction = false;
+  /**
+   * Boolean representing if to show the send invitation action
+   */
+  @Input() showWithdrawActions = false;
+  /**
+   * Boolean representing if to show the send invitation action
+   */
+  @Input() showIntivtePersonSection = false;
 
   /**
    * EPeople being displayed in search result, initially all members, after search result of search
@@ -116,12 +127,13 @@ export class MembersListComponent implements OnInit, OnDestroy {
   @Output() sendInvitation: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private groupDataService: GroupDataService,
-              public ePersonDataService: EPersonDataService,
-              private translateService: TranslateService,
-              private notificationsService: NotificationsService,
-              private formBuilder: FormBuilder,
-              private paginationService: PaginationService,
-              private router: Router) {
+    public ePersonDataService: EPersonDataService,
+    private translateService: TranslateService,
+    private notificationsService: NotificationsService,
+    private formBuilder: FormBuilder,
+    private paginationService: PaginationService,
+    private modalService: NgbModal,
+    private router: Router) {
     this.currentSearchQuery = '';
     this.currentSearchScope = 'metadata';
   }
@@ -151,37 +163,37 @@ export class MembersListComponent implements OnInit, OnDestroy {
       this.paginationService.getCurrentPagination(this.config.id, this.config).pipe(
         switchMap((currentPagination) => {
           return this.ePersonDataService.findAllByHref(this.groupBeingEdited._links.epersons.href, {
-              currentPage: currentPagination.currentPage,
-              elementsPerPage: currentPagination.pageSize
-            }
+            currentPage: currentPagination.currentPage,
+            elementsPerPage: currentPagination.pageSize
+          }
           );
         }),
-      getAllCompletedRemoteData(),
-      map((rd: RemoteData<any>) => {
-        if (rd.hasFailed) {
-          this.notificationsService.error(this.translateService.get(this.messagePrefix + '.notification.failure', {cause: rd.errorMessage}));
-        } else {
-          return rd;
-        }
-      }),
-      switchMap((epersonListRD: RemoteData<PaginatedList<EPerson>>) => {
-        const dtos$ = observableCombineLatest(...epersonListRD.payload.page.map((member: EPerson) => {
-          const dto$: Observable<EpersonDtoModel> = observableCombineLatest(
-            this.isMemberOfGroup(member), (isMember: ObservedValueOf<Observable<boolean>>) => {
-              const epersonDtoModel: EpersonDtoModel = new EpersonDtoModel();
-              epersonDtoModel.eperson = member;
-              epersonDtoModel.memberOfGroup = isMember;
-              return epersonDtoModel;
-            });
-          return dto$;
+        getAllCompletedRemoteData(),
+        map((rd: RemoteData<any>) => {
+          if (rd.hasFailed) {
+            this.notificationsService.error(this.translateService.get(this.messagePrefix + '.notification.failure', { cause: rd.errorMessage }));
+          } else {
+            return rd;
+          }
+        }),
+        switchMap((epersonListRD: RemoteData<PaginatedList<EPerson>>) => {
+          const dtos$ = observableCombineLatest(...epersonListRD.payload.page.map((member: EPerson) => {
+            const dto$: Observable<EpersonDtoModel> = observableCombineLatest(
+              this.isMemberOfGroup(member), (isMember: ObservedValueOf<Observable<boolean>>) => {
+                const epersonDtoModel: EpersonDtoModel = new EpersonDtoModel();
+                epersonDtoModel.eperson = member;
+                epersonDtoModel.memberOfGroup = isMember;
+                return epersonDtoModel;
+              });
+            return dto$;
+          }));
+          return dtos$.pipe(map((dtos: EpersonDtoModel[]) => {
+            return buildPaginatedList(epersonListRD.payload.pageInfo, dtos);
+          }));
+        }))
+        .subscribe((paginatedListOfDTOs: PaginatedList<EpersonDtoModel>) => {
+          this.ePeopleMembersOfGroupDtos.next(paginatedListOfDTOs);
         }));
-        return dtos$.pipe(map((dtos: EpersonDtoModel[]) => {
-          return buildPaginatedList(epersonListRD.payload.pageInfo, dtos);
-        }));
-      }))
-      .subscribe((paginatedListOfDTOs: PaginatedList<EpersonDtoModel>) => {
-        this.ePeopleMembersOfGroupDtos.next(paginatedListOfDTOs);
-      }));
   }
 
   /**
@@ -297,7 +309,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
         getAllCompletedRemoteData(),
         map((rd: RemoteData<any>) => {
           if (rd.hasFailed) {
-            this.notificationsService.error(this.translateService.get(this.messagePrefix + '.notification.failure', {cause: rd.errorMessage}));
+            this.notificationsService.error(this.translateService.get(this.messagePrefix + '.notification.failure', { cause: rd.errorMessage }));
           } else {
             return rd;
           }
@@ -360,4 +372,20 @@ export class MembersListComponent implements OnInit, OnDestroy {
     });
     this.search({ query: '' });
   }
+  /**
+   * Open modal
+   *
+   * @param content
+   */
+  public openModal(ePerson: EpersonDtoModel) {
+    const modalRef = this.modalService.open(ConfirmWithdrawComponent);
+    modalRef.componentInstance.ePerson = ePerson;
+    modalRef.componentInstance.messagePrefix = this.messagePrefix;
+
+    modalRef.componentInstance.confirm = () => {
+      this.deleteMemberFromGroup(ePerson);
+    };
+
+  }
+
 }
