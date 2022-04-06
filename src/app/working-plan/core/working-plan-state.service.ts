@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+
 import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { distinctUntilChanged, filter, map, startWith } from 'rxjs/operators';
 
 import { AppState } from '../../app.reducer';
 import {
@@ -21,7 +24,6 @@ import {
   UpdateWorkpackageStepAction
 } from './working-plan.actions';
 import { MetadataMap, MetadatumViewModel } from '../../core/shared/metadata.models';
-import { Observable } from 'rxjs';
 import {
   chartDateViewSelector,
   getLastAddedNodesListSelector,
@@ -30,12 +32,11 @@ import {
   isWorkingPlanLoadedSelector,
   isWorkingPlanMovingSelector,
   isWorkingPlanProcessingSelector,
-  workpackagesSelector,
+  workingPlanStateSelector,
   workpackagesSortOptionSelector,
   workpackageToRemoveSelector
 } from './selectors';
-import { map, startWith } from 'rxjs/operators';
-import { ChartDateViewType, WorkpackageEntries } from './working-plan.reducer';
+import { ChartDateViewType, WorkingPlanState, WorkpackageEntries } from './working-plan.reducer';
 import { Workpackage, WorkpackageStep } from './models/workpackage-step.model';
 
 export interface WpActionPackage {
@@ -150,9 +151,12 @@ export class WorkingPlanStateService {
 
   public getWorkpackages(): Observable<Workpackage[]> {
     return this.store.pipe(
-      select(workpackagesSelector),
+      select(workingPlanStateSelector),
+      filter((workingplanState: WorkingPlanState) => workingplanState.loaded),
+      map((workingplanState: WorkingPlanState) => workingplanState.workpackages),
       map((entries: WorkpackageEntries) => Object.keys(entries).map((key) => entries[key])),
-      startWith([])
+      startWith([]),
+      distinctUntilChanged()
     );
   }
 
