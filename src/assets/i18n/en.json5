@@ -1940,7 +1940,11 @@
 
   "explore.index.title": "Title",
 
-  "explore.index.type": "Type",
+  "explore.index.itemtype": "Item Type",
+
+  "explore.index.types": "Types",
+
+  "explore.index.language": "Language",
 
   "explore.search-section.infrastructure.title": "Infrastructure",
 
