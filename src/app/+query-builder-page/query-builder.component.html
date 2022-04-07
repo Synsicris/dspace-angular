@@ -7,27 +7,38 @@
             let i = index;
             let isLast = last
           ">
-          <ds-query-condition-group [formGroupName]="i" [searchConfig]="searchFilterData">
-          </ds-query-condition-group>
-          <div class="row justify-content-space-between mb-2">
-            <div class="col text-start">
-              <select class="form-control col-3" *ngIf="!isLast" formControlName="1">
-                <option [value]="operator" *ngFor="let operator of logicalOperators">
-                  {{ operator | uppercase }}
-                </option>
-              </select>
+          <!-- if FormGroup -->
+          <ng-container *ngIf="
+              queryStatement | dsControlTypeChecker;
+              else formControlTemplate
+            ">
+            <ds-query-condition-group [formGroupName]="i" [searchConfig]="searchFilterData">
+            </ds-query-condition-group>
+            <div class="row">
+              <div class="col text-right">
+                <button type="button" class="btn btn-inline btn-danger" (click)="deleteGroup(i)"
+                  *ngIf="queryArray.length > 1">
+                  <i class="fa fa-trash"></i> &nbsp; Delete Group above
+                </button>
+                <button type="button" class="mr-2 btn btn-inline btn-dark" *ngIf="isLast" (click)="addGroup()">
+                  <i class="fa fa-plus"></i> &nbsp; Add Filter group
+                </button>
+              </div>
             </div>
+          </ng-container>
 
-            <div class="col-md-5 text-right">
-              <button type="button" class="btn btn-inline btn-danger" (click)="deleteGroup(i)"
-                *ngIf="queryArray.length>1">
-                <i class="fa fa-trash"></i> &nbsp; Delete Group above
-              </button>
-              <button type="button" class="mr-2 btn btn-inline btn-dark" *ngIf="isLast" (click)="addGroup()">
-                <i class="fa fa-plus"></i> &nbsp; Add Filter group
-              </button>
+          <!-- if FormControl -->
+          <ng-template #formControlTemplate>
+            <div class="row mb-2 pl-3" *ngIf="!isLast" >
+              <div class="col-md-2">
+                <select class="form-control"[formControlName]="i">
+                  <option [value]="operator" *ngFor="let operator of logicalOperators">
+                    {{ operator | uppercase }}
+                  </option>
+                </select>
+              </div>
             </div>
-          </div>
+          </ng-template>
         </ng-container>
       </ng-container>
     </form>
@@ -35,7 +46,9 @@
     <hr />
     <div class="row justify-content-center">
       <div class="col-md-2">
-        <button type="button" class="btn btn-block btn-dark" (click)="resetForm()">Reset</button>
+        <button type="button" class="btn btn-block btn-dark" (click)="resetForm()">
+          Reset
+        </button>
       </div>
       <div class="col-md-2">
         <button type="button" class="btn btn-block btn-primary" (click)="filter()">

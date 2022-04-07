@@ -6,7 +6,10 @@ import {
 import { getRemoteDataPayload } from './../core/shared/operators';
 import { SearchService } from './../core/shared/search/search.service';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { hasValue } from '../shared/empty.util';
+import { SearchFilterConfig } from '../shared/search/models/search-filter-config.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ds-query-builder',
@@ -14,14 +17,30 @@ import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./query-builder.component.scss'],
 })
 export class QueryBuilderComponent implements OnInit {
-
+  /**
+   * data for the filter dropdowns
+   */
   searchFilterData: SearchConfig;
-  facetValues: FilterConfig[];
-  logicalOperators: string[] = ['and', 'or'];
 
+  configurationName = 'default';
+
+  /**
+   * logical conditional operator list
+   *
+   * @type {string[]}
+   * @memberof QueryBuilderComponent
+   */
+  logicalOperators: string[] = ['AND', 'OR'];
+
+  /**
+   * initialization of the main form
+   *
+   * @type {FormGroup}
+   * @memberof QueryBuilderComponent
+   */
   searchForm: FormGroup = new FormGroup({
     queryArray: new FormArray([
-     new FormGroup({
+      new FormGroup({
         queryGroup: new FormArray([this.initFormArray()]),
       }),
     ]),
@@ -29,13 +48,17 @@ export class QueryBuilderComponent implements OnInit {
 
   constructor(
     private searchService: SearchService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.getSearchData();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
+  /**
+   * get the search configuration data
+   */
   getSearchData() {
     this.searchService
       .getSearchConfigurationFor()
@@ -47,34 +70,62 @@ export class QueryBuilderComponent implements OnInit {
       });
   }
 
+  /**
+   * get the form array
+   *
+   * @readonly
+   * @memberof QueryBuilderComponent
+   */
   get queryArray() {
     return this.searchForm.controls['queryArray'] as FormArray;
   }
 
+  /**
+   * redirect to search page
+   */
   filter() {
-    console.log(this.searchForm.value, 'formValue');
-
     if (this.searchForm.value.queryArray.length > 0) {
-      this.composeQuery();
+      let fullQuery = this.composeQuery();
+      if (fullQuery) {
+        this.router.navigate([this.searchService.getSearchLink()], {
+          queryParams: {
+            page: 1,
+            configuration: this.configurationName,
+            query: fullQuery,
+          },
+        });
+      }
     }
   }
 
-  composeQuery() {
+  /**
+   * Compose the query string based on given conditions
+   * @returns the full query string
+   */
+  protected composeQuery(): string {
     let fullQuery = '';
     for (const query of this.searchForm.controls['queryArray'].value) {
-      if (query.queryGroup.length > 0) {
+      if (query.queryGroup && query.queryGroup.length > 0) {
         for (const group of query['queryGroup']) {
           if (group.filter && group.operator && group.value) {
             fullQuery =
-              fullQuery + `${group.filter}(${group.value})${group.operator}`;
+              fullQuery + `${group.filter}:(${group.value})${group.operator} `;
+          } else if (hasValue(group) && typeof group === 'string') {
+            fullQuery = fullQuery + `${group} `;
           }
         }
+      } else if (hasValue(query) && typeof query === 'string') {
+        fullQuery = fullQuery + `${query} `;
       }
     }
-    // TODO: call the search service to get the data
+    console.log('fullQuery', fullQuery);
+    return fullQuery;
   }
 
-  initFormArray(): FormGroup {
+  /**
+   * @returns the form array with default values
+   */
+  protected initFormArray(): FormGroup {
     return this.formBuilder.group({
       filter: this.formBuilder.control(''),
       operator: this.formBuilder.control(''),
@@ -82,7 +133,11 @@ export class QueryBuilderComponent implements OnInit {
     });
   }
 
+  /**
+   * add new query group
+   */
   addGroup() {
+    this.queryArray.push(new FormControl(''));
     this.queryArray.push(
       new FormGroup({
         queryGroup: new FormArray([this.initFormArray()]),
@@ -90,12 +145,22 @@ export class QueryBuilderComponent implements OnInit {
     );
   }
 
+  /**
+   * @param index of intended group to be deleted
+   */
   deleteGroup(index: number) {
     if (index > -1) {
+      // remove the query statement
       this.queryArray.removeAt(index);
+      // remove logical operator
+      this.queryArray.removeAt(index - 1);
+      this.queryArray.updateValueAndValidity();
     }
   }
 
+  /**
+   * reset the form
+   */
   resetForm() {
     this.searchForm = new FormGroup({
       queryArray: new FormArray([

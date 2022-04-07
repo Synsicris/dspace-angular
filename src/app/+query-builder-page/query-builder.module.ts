@@ -5,9 +5,10 @@ import { QueryBuilderComponent } from './query-builder.component';
 import { QueryConditionGroupComponent } from './query-condition-group/query-condition-group.component';
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { ControlTypeCheckerPipe } from './control-type-checker.pipe';
 
 @NgModule({
-  declarations: [QueryBuilderComponent, QueryConditionGroupComponent],
+  declarations: [QueryBuilderComponent, QueryConditionGroupComponent, ControlTypeCheckerPipe],
   imports: [
     CommonModule,
     QueryBuilderRoutingModule,

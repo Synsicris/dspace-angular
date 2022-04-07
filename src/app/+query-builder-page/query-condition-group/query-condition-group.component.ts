@@ -4,13 +4,14 @@ import {
   ControlContainer,
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   FormGroupDirective,
 } from '@angular/forms';
 
 export interface FilterOptions {
   disabled: boolean;
-  filter: string
+  filter: string;
 }
 
 @Component({
@@ -22,7 +23,6 @@ export interface FilterOptions {
   ],
 })
 export class QueryConditionGroupComponent implements OnInit {
-
   /**
    * search config object for the current filter
    *
@@ -62,14 +62,16 @@ export class QueryConditionGroupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private rootFormGroup: FormGroupDirective
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.formGroup = (
       this.rootFormGroup.control.get('queryArray') as FormArray
     ).controls[this.formGroupName];
 
-    this.filterList = this.searchConfig.filters.map((x) => { return { disabled: false, filter: x.filter } });
+    this.filterList = this.searchConfig.filters.map((x) => {
+      return { disabled: false, filter: x.filter };
+    });
   }
 
   /**
@@ -83,16 +85,27 @@ export class QueryConditionGroupComponent implements OnInit {
       let operatorsConfig = this.searchConfig.filters.find(
         (x) => x.filter == filterValue
       ).operators;
+      // get operation list per selected filter
       const operators = operatorsConfig.map((x) => x.operator);
       this.conditionObj.set(filterValue, operators);
+      // disable selected filter
       this.filterList.find((x) => x.filter === filterValue).disabled = true;
+      // If a filter was selected before and now is not in use, enable it.
+      let selectedFilters = this.queryGroup.value;
+      this.filterList.map((f) => {
+        if (f.disabled && !selectedFilters.some((x) => x.filter === f.filter)) {
+          f.disabled = false;
+        }
+      });
     }
   }
 
   /**
+   * and the logical opertor formControl and
    * add a new query statement
    */
   addQueryStatement(): void {
+    this.queryGroup.push(new FormControl(''));
     this.queryGroup.push(this.initFormArray());
   }
 
@@ -126,7 +139,15 @@ export class QueryConditionGroupComponent implements OnInit {
   deleteCondition(index: number) {
     if (index > -1) {
       // when a condition is deleted, the filter is enabled again
-      this.filterList.find((x) => x.filter === this.queryGroup.controls[index].get('filter').value).disabled = false;
+      let filter = this.filterList.find(
+        (x) => x.filter === this.queryGroup.controls[index].get('filter').value
+      );
+      if (filter) {
+        filter.disabled = false;
+      }
+      // remove logical operator
+      this.queryGroup.removeAt(index);
+      // remove the query statement
       this.queryGroup.removeAt(index);
     }
   }
