@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import { SearchConfig } from './../../core/shared/search/search-filters/search-config.model';
 import { Component, Input, OnInit } from '@angular/core';
 import {
@@ -82,18 +83,22 @@ export class QueryConditionGroupComponent implements OnInit {
   onFilterChange(event) {
     let filterValue = event.target.value;
     if (filterValue) {
-      let operatorsConfig = this.searchConfig.filters.find(
-        (x) => x.filter == filterValue
+      let operatorsConfig = this.searchConfig.filters.find((x) =>
+        isEqual(x.filter, filterValue)
       ).operators;
       // get operation list per selected filter
       const operators = operatorsConfig.map((x) => x.operator);
       this.conditionObj.set(filterValue, operators);
       // disable selected filter
-      this.filterList.find((x) => x.filter === filterValue).disabled = true;
+      this.filterList.find((x) => isEqual(x.filter, filterValue)).disabled =
+        true;
       // If a filter was selected before and now is not in use, enable it.
       let selectedFilters = this.queryGroup.value;
       this.filterList.map((f) => {
-        if (f.disabled && !selectedFilters.some((x) => x.filter === f.filter)) {
+        if (
+          f.disabled &&
+          !selectedFilters.some((x) => isEqual(x.filter, f.filter))
+        ) {
           f.disabled = false;
         }
       });
@@ -139,8 +144,8 @@ export class QueryConditionGroupComponent implements OnInit {
   deleteCondition(index: number) {
     if (index > -1) {
       // when a condition is deleted, the filter is enabled again
-      let filter = this.filterList.find(
-        (x) => x.filter === this.queryGroup.controls[index].get('filter').value
+      let filter = this.filterList.find((x) =>
+        isEqual(x.filter, this.queryGroup.controls[index].get('filter').value)
       );
       if (filter) {
         filter.disabled = false;

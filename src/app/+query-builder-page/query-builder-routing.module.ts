@@ -1,6 +1,7 @@
 import { QueryBuilderComponent } from './query-builder.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end-user-agreement-current-user.guard';
 
 const routes: Routes = [
   {
@@ -11,7 +12,7 @@ const routes: Routes = [
       breadcrumbKey: 'query-builder',
       showBreadcrumbsFluid: true
     },
-    // canActivate: [EndUserAgreementCurrentUserGuard]
+    canActivate: [EndUserAgreementCurrentUserGuard]
   }
 ];
 

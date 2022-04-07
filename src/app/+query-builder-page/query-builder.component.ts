@@ -10,6 +10,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { hasValue } from '../shared/empty.util';
 import { SearchFilterConfig } from '../shared/search/models/search-filter-config.model';
 import { Router } from '@angular/router';
+import { isEqual } from 'lodash';
 
 @Component({
   selector: 'ds-query-builder',
@@ -152,8 +153,14 @@ export class QueryBuilderComponent implements OnInit {
     if (index > -1) {
       // remove the query statement
       this.queryArray.removeAt(index);
-      // remove logical operator
-      this.queryArray.removeAt(index - 1);
+      if (isEqual(index, 0)) {
+        // remove logical operator
+        console.log(this.queryArray);
+        this.queryArray.removeAt(index);
+      } else {
+        // remove logical operator
+        this.queryArray.removeAt(index - 1);
+      }
       this.queryArray.updateValueAndValidity();
     }
   }
