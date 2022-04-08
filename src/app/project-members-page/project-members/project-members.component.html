@@ -1,3 +1,3 @@
 <ds-members-list *ngIf="groupBeingEdited | async" [messagePrefix]="messagePrefix + '.members-list'"
     [showEditActions]="false" [showWithdrawActions]="true" [showIntivtePersonSection]="true" [showHeadingTitle]="false"
-    [showInvitationAction]="true" (sendInvitation)="sendInvitation($event)"></ds-members-list>
+    [showId]="false" [showInvitationAction]="true" (sendInvitation)="sendInvitation($event)"></ds-members-list>

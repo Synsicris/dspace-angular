@@ -76,6 +76,13 @@ export class MembersListComponent implements OnInit, OnDestroy {
   @Input() showIntivtePersonSection = false;
 
   /**
+   * Boolean representing if to show the send invitation action
+   */
+  @Input() showId = true;
+
+
+
+  /**
    * EPeople being displayed in search result, initially all members, after search result of search
    */
   ePeopleSearchDtos: BehaviorSubject<PaginatedList<EpersonDtoModel>> = new BehaviorSubject<PaginatedList<EpersonDtoModel>>(undefined);
@@ -149,6 +156,8 @@ export class MembersListComponent implements OnInit, OnDestroy {
         this.retrieveMembers(this.config.currentPage);
       }
     }));
+
+
   }
 
   /**
@@ -385,6 +394,14 @@ export class MembersListComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.confirm = () => {
       this.deleteMemberFromGroup(ePerson);
     };
+
+  }
+
+  canShowId() {
+
+  }
+
+  getEmailNetContent() {
 
   }
 

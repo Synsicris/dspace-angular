@@ -4416,6 +4416,8 @@
 
   "project.manage.members-list.table.withdraw.tooltip": "You can withdraw role",
 
+  "project.manage.members-list.table.withdraw.send": "Send Invitation",
+
   "project.page.contributor": "Contributors",
 
   "project.page.description": "Description",
@@ -6733,6 +6735,10 @@
   "invitation.accept-btn": "Accept",
 
   "invitation.ignore-btn": "Ignore",
+
+  "invitation.group.admin": "Coordinators group of",
+
+  "invitation.group.members": "Members group of",
 
   "working-plan.breadcrumbs": "Working plan",
 
