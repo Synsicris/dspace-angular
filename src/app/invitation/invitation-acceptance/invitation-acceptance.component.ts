@@ -1,5 +1,3 @@
-import { getRemoteDataPayload } from './../../core/shared/operators';
-import { CommunityDataService } from './../../core/data/community-data.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Registration } from '../../core/shared/registration.model';
@@ -11,6 +9,8 @@ import { EPerson } from '../../core/eperson/models/eperson.model';
 import { AuthService } from '../../core/auth/auth.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Community } from '../../core/shared/community.model';
+import { CommunityDataService } from './../../core/data/community-data.service';
+import { getRemoteDataPayload } from './../../core/shared/operators';
 
 @Component({
   selector: 'ds-invitation-acceptance',

@@ -1,7 +1,7 @@
 <ng-container>
   <h3 *ngIf="showHeadingTitle" class="border-bottom pb-2">{{messagePrefix + '.head' | translate}}</h3>
 
-  <div class="invite-person-section mb-2">
+  <div *ngIf="showIntivtePersonSection" class="invite-person-section mb-2">
     <div class="title mr-4">
       {{messagePrefix + '.invite' | translate}}
     </div>

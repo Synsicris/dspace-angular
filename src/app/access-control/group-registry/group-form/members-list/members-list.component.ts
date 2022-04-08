@@ -67,20 +67,18 @@ export class MembersListComponent implements OnInit, OnDestroy {
    */
   @Input() showInvitationAction = false;
   /**
-   * Boolean representing if to show the send invitation action
+   * Boolean representing if user can see the withdraw action
    */
   @Input() showWithdrawActions = false;
   /**
-   * Boolean representing if to show the send invitation action
+   * Boolean representing if to show the send invitation section
    */
   @Input() showIntivtePersonSection = false;
 
   /**
-   * Boolean representing if to show the send invitation action
+   * Boolean representing if to show the id column of the tables
    */
   @Input() showId = true;
-
-
 
   /**
    * EPeople being displayed in search result, initially all members, after search result of search
@@ -394,14 +392,6 @@ export class MembersListComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.confirm = () => {
       this.deleteMemberFromGroup(ePerson);
     };
-
-  }
-
-  canShowId() {
-
-  }
-
-  getEmailNetContent() {
 
   }
 
