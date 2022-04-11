@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { EpersonDtoModel } from 'src/app/core/eperson/models/eperson-dto.model';
+import { EpersonDtoModel } from '../../../../../core/eperson/models/eperson-dto.model';
 
 @Component({
   selector: 'ds-confirm-withdraw',

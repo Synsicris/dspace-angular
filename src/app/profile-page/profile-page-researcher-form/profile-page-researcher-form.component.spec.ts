@@ -15,7 +15,7 @@ import { VarDirective } from '../../shared/utils/var.directive';
 import { ProfilePageResearcherFormComponent } from './profile-page-researcher-form.component';
 import { ProfileClaimService } from '../profile-claim/profile-claim.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from 'src/app/core/auth/auth.service';
+import { AuthService } from '../../core/auth/auth.service';
 import { EditItemDataService } from '../../core/submission/edititem-data.service';
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { EditItemMode } from '../../core/submission/models/edititem-mode.model';

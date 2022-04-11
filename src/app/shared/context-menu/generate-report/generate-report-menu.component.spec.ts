@@ -48,14 +48,15 @@ describe('GenerateReportMenuComponent', () => {
       removeByHrefSubstring: jasmine.createSpy('removeByHrefSubstring')
     });
     router = jasmine.createSpyObj('Router', {
-      navigateByUrl: jasmine.createSpy('navigateByUrl')
+      navigateByUrl: jasmine.createSpy('navigateByUrl'),
+      navigate: jasmine.createSpy('navigate')
     });
     scriptDataService = jasmine.createSpyObj('ScriptDataService', {
       invoke: jasmine.createSpy('invoke')
     });
 
     TestBed.configureTestingModule({
-      declarations: [ GenerateReportMenuComponent ],
+      declarations: [GenerateReportMenuComponent],
       imports: [
         TranslateModule.forRoot({
           loader: {

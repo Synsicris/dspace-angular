@@ -10,6 +10,7 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
 import { cloneDeep } from 'lodash';
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { of as observableOf } from 'rxjs';
 
 describe('ProfilePageMetadataFormComponent', () => {
   let component: ProfilePageMetadataFormComponent;
@@ -56,6 +57,7 @@ describe('ProfilePageMetadataFormComponent', () => {
     });
     translate = {
       instant: () => 'translated',
+      get: () => observableOf('translated'),
       onLangChange: new EventEmitter()
     };
 

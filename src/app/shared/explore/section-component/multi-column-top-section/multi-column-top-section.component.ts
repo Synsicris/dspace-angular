@@ -1,5 +1,5 @@
 import { Metadata } from '../../../../core/shared/metadata.utils';
-import { DSpaceObject } from 'src/app/core/shared/dspace-object.model';
+import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { TopSectionColumn } from '../../../../core/layout/models/section.model';
 import { SearchResult } from '../../../search/models/search-result.model';
 import { SearchObjects } from '../../../search/models/search-objects.model';

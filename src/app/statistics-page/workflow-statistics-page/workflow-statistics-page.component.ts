@@ -14,7 +14,7 @@ import { CollectionSelectorComponent } from '../../my-dspace-page/collection-sel
 import { TranslateService } from '@ngx-translate/core';
 import { WorkflowOwnerStatisticsService } from '../../core/statistics/workflow-owner-statistics.service';
 import { WorkflowOwnerStatistics } from '../../core/statistics/models/workflow-owner-statistics.model';
-import { AlertType } from 'src/app/shared/alert/aletr-type';
+import { AlertType } from '../../shared/alert/aletr-type';
 
 /**
  * Component related to the WORKFLOW statistics page.
@@ -48,7 +48,7 @@ export class WorkflowStatisticsPageComponent implements OnInit {
 
   AlertTypeEnum = AlertType;
 
-  constructor( private workflowStepStatisticsService: WorkflowStepStatisticsService,
+  constructor(private workflowStepStatisticsService: WorkflowStepStatisticsService,
     private workflowOwnerStatisticsService: WorkflowOwnerStatisticsService,
     private ngbDateParserFormatter: NgbDateParserFormatter,
     private translateService: TranslateService,
@@ -66,7 +66,7 @@ export class WorkflowStatisticsPageComponent implements OnInit {
    * Perform a search when the search filters change.
    */
   onSearchFilterChange() {
-    this.searchByDateRange(this.parseDate(this.dateFrom),this.parseDate(this.dateTo), this.collectionId, this.max);
+    this.searchByDateRange(this.parseDate(this.dateFrom), this.parseDate(this.dateTo), this.collectionId, this.max);
   }
 
   /**
@@ -74,7 +74,7 @@ export class WorkflowStatisticsPageComponent implements OnInit {
    */
   onCollectionFilterButtonClick() {
     const modalRef = this.modalService.open(CollectionSelectorComponent);
-    modalRef.result.then( (result) => {
+    modalRef.result.then((result) => {
       if (result) {
         this.collectionName = result.name;
         this.collectionId = result.uuid;
@@ -156,7 +156,7 @@ export class WorkflowStatisticsPageComponent implements OnInit {
    * @param dateObject the date to parse
    */
   parseDate(dateObject: NgbDateStruct) {
-    if ( !dateObject ) {
+    if (!dateObject) {
       return null;
     }
     const date: NgbDate = new NgbDate(dateObject.year, dateObject.month, dateObject.day);

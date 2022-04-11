@@ -1,3 +1,4 @@
+import { CommunityDataService } from './../../core/data/community-data.service';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { InvitationAcceptanceComponent } from './invitation-acceptance.component';
@@ -54,16 +55,20 @@ describe('InvitationAcceptanceComponent', () => {
           }
         })
       ],
-      providers: [{provide: Router, useValue: route},
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            paramMap: observableOf(convertToParamMap(paramObject))
-          },
+      providers: [{ provide: Router, useValue: route },
+      {
+        provide: ActivatedRoute,
+        useValue: {
+          paramMap: observableOf(convertToParamMap(paramObject))
         },
-        {provide: EpersonRegistrationService, useValue: epersonRegistrationService},
-        {provide: EPersonDataService, useValue: ePersonDataServiceStub},
-        {provide: AuthService, useValue: authService}
+      },
+      { provide: EpersonRegistrationService, useValue: epersonRegistrationService },
+      { provide: EPersonDataService, useValue: ePersonDataServiceStub },
+      { provide: AuthService, useValue: authService },
+      {
+        provide: CommunityDataService,
+        useValue: { findById: () => observableOf({ payload: { name: 'test' } }) }
+      },
       ]
     })
       .compileComponents();
