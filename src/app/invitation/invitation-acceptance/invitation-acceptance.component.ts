@@ -44,11 +44,13 @@ export class InvitationAcceptanceComponent implements OnInit {
       mergeMap((groupName: string) => {
         const groupNameArray = groupName.split('_');
         const parentId = groupNameArray[1];
+        console.log(this.getCommunity(parentId));
         return this.getCommunity(parentId).pipe(
           map(community => ({ type: groupNameArray[2], community: community }))
         );
       }),
     ).subscribe((communityAndType: any) => {
+      console.log(communityAndType);
       const val: any[] = this.invitationsGroupData$.value;
       val.push(communityAndType);
       this.invitationsGroupData$.next(val);

@@ -1,3 +1,4 @@
+import { Community } from './../../core/shared/community.model';
 import { CommunityDataService } from './../../core/data/community-data.service';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
@@ -25,7 +26,7 @@ describe('InvitationAcceptanceComponent', () => {
       email: 'test@email.org',
       token: 'test-token',
       groups: ['group1UUID', 'group2UUID'],
-      groupNames: ['group1', 'group2']
+      groupNames: ['group1_123123_admin_group', 'group1_1333333_member_group']
     });
   const epersonRegistrationService = jasmine.createSpyObj('epersonRegistrationService', {
     searchByToken: observableOf(registrationWithGroups)
@@ -67,7 +68,7 @@ describe('InvitationAcceptanceComponent', () => {
       { provide: AuthService, useValue: authService },
       {
         provide: CommunityDataService,
-        useValue: { findById: () => observableOf({ payload: { name: 'test' } }) }
+        useValue: { findById: () => observableOf(Object.assign(new Community(), { payload: { name: 'test' } })) }
       },
       ]
     })
@@ -76,12 +77,26 @@ describe('InvitationAcceptanceComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(InvitationAcceptanceComponent);
     component = fixture.componentInstance;
+    component.ngOnInit();
     fixture.detectChanges();
   });
   it('should create component invitation', () => {
     expect(component).toBeTruthy();
   });
   it('should show group names list', () => {
+
+    component.invitationsGroupData$.next([
+      {
+        community: Object.assign(new Community(), { payload: { name: 'test' } }),
+        type: 'admin'
+      },
+      {
+        community: Object.assign(new Community(), { payload: { name: 'test' } }),
+        type: 'member'
+      },
+    ]);
+
+    fixture.detectChanges();
     const subComList = fixture.debugElement.queryAll(By.css('li'));
     expect(subComList).toHaveSize(2);
   });
