@@ -7,10 +7,10 @@ import { ChartType } from '../../../../../charts/models/chart-type';
 import { SearchFacetFilterComponent } from '../../../search-filters/search-filter/search-facet-filter/search-facet-filter.component';
 import { ChartData } from '../../../../../charts/models/chart-data';
 import { ChartSeries } from '../../../../../charts/models/chart-series';
-import { FacetValue } from '../../../facet-value.model';
+import { FacetValue } from '../../../models/facet-value.model';
 import { RemoteData } from '../../../../../core/data/remote-data';
 import { PaginatedList } from '../../../../../core/data/paginated-list.model';
-import { FacetValues } from '../../../facet-values.model';
+import { FacetValues } from '../../../models/facet-values.model';
 import { getAllCompletedRemoteData } from '../../../../../core/shared/operators';
 
 @Component({
@@ -30,34 +30,46 @@ export class SearchChartFilterComponent extends SearchFacetFilterComponent imple
   /**
    * Used to set width and height of the chart
    */
-  view: any[] = null;
+  view: any[] = [];
 
   /**
    * Emits an array of ChartSeries with values found for this chart
    */
   results: Observable<ChartSeries[] | ChartData[]>;
 
+  /**
+   * Set default horizontal chart label i18n key pattern.
+   *
+   * @type {string}
+   * @memberof SearchChartFilterComponent
+   */
+  xAxisLabel = 'search.filters.applied.charts.<facet name>.x_label';
+
+  /**
+   * Set default vertical chart label i18n key pattern.
+   *
+   * @type {string}
+   * @memberof SearchChartFilterComponent
+   */
+  yAxisLabel = 'search.filters.applied.charts.<facet name>.y_label';
+
+  /**
+   * Part of i18n key pattern that will be replaced
+   * @private
+   * @memberof SearchChartFilterComponent
+   */
+  private keyPlaceholder = '<facet name>';
+
+  /**
+   * Used to check if a chart is reversed or not
+   *
+   * @memberof SearchChartFilterComponent
+   */
+  isReverseChart = false;
+
   ngOnInit() {
     super.ngOnInit();
     this.results = this.getInitData();
-  }
-
-  protected getInitData(): Observable<ChartSeries[] | ChartData[]> {
-    return this.filterValues$.pipe(
-      // filter((rd: RemoteData<PaginatedList<FacetValue>[]>) => isNotEmpty(rd.payload)),
-      getAllCompletedRemoteData(),
-      map((facetValues: RemoteData<PaginatedList<FacetValue>[]>) => {
-        const values = [];
-        facetValues.payload.forEach((facetValue: FacetValues) => {
-          values.push(...facetValue.page.map((item: FacetValue) => ({
-            name: item.value,
-            value: item.count,
-            extra: item,
-          } as ChartSeries)));
-        });
-        return values;
-      }),
-    );
   }
 
   /**
@@ -65,7 +77,7 @@ export class SearchChartFilterComponent extends SearchFacetFilterComponent imple
    * @param data
    */
   select(data) {
-    const decoded =  decodeURI(data.extra._links.search.href);
+    const decoded = decodeURI(data.extra._links.search.href);
     const links = decoded.split('?');
     if (links && links.length > 1) {
       const queryParam: any = {};
@@ -78,5 +90,43 @@ export class SearchChartFilterComponent extends SearchFacetFilterComponent imple
         queryParamsHandling: 'merge',
       });
     }
+  }
+
+  protected getInitData(): Observable<ChartSeries[] | ChartData[]> {
+    return this.filterValues$.pipe(
+      getAllCompletedRemoteData(),
+      map((facetValues: RemoteData<PaginatedList<FacetValue>[]>) => {
+        const values = [];
+        facetValues.payload.forEach((facetValue: FacetValues) => {
+          this.xAxisLabel = this.xAxisLabel.replace(this.keyPlaceholder, facetValue.name);
+          this.yAxisLabel = this.yAxisLabel.replace(this.keyPlaceholder, facetValue.name);
+          if (this.isReverseChart) {
+            values.push(
+              ...facetValue.page.map(
+                (item: FacetValue) =>
+                ({
+                  name: item.count.toString(),
+                  value: parseInt(item.value, 10),
+                  extra: item,
+                } as ChartSeries)
+              )
+            );
+          } else {
+            values.push(
+              ...facetValue.page.map(
+                (item: FacetValue) =>
+                  ({
+                    name: item.value,
+                    value: item.count,
+                    extra: item,
+                  } as ChartSeries)
+              )
+            );
+          }
+        });
+
+        return values;
+      }),
+    );
   }
 }

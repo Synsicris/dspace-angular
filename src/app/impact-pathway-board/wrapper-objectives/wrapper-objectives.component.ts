@@ -15,7 +15,10 @@ import { ImpactPathwayService } from '../core/impact-pathway.service';
 })
 export class WrapperObjectivesComponent implements OnDestroy {
 
-  @Input() public projectId: string;
+  /**
+   * The project community's id
+   */
+  @Input() public projectCommunityId: string;
   @Input() public impactPathwayStep: ImpactPathwayStep;
   @Input() public targetImpactPathwayTaskId: string;
 
@@ -39,9 +42,7 @@ export class WrapperObjectivesComponent implements OnDestroy {
   }
 
   back() {
-    this.router.navigate(
-      ['/project-overview', this.projectId, 'impactpathway', this.impactPathwayStep.parentId, 'edit']
-    );
+    this.router.navigate(['entities', 'impactpathway', this.impactPathwayStep.parentId]);
   }
 
   hasInfoMessage(): boolean {

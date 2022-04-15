@@ -125,3 +125,11 @@ export function dateToString(date: Date | NgbDateStruct): string {
 export function NgbDateStructToString(date: NgbDateStruct) {
   return `${date.year}-${date.month}-${date.day}`;
 }
+
+/**
+ * Checks if the given string represents a valid date
+ * @param date the string to be checked
+ */
+export function isValidDate(date: string) {
+  return moment(date).isValid();
+}

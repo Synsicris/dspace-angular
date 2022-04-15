@@ -1,13 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+
 import { of } from 'rxjs';
+
 import { MetricAltmetricComponent } from '../metric-altmetric/metric-altmetric.component';
 import { MetricDimensionsComponent } from '../metric-dimensions/metric-dimensions.component';
 import { MetricGooglescholarComponent } from '../metric-googlescholar/metric-googlescholar.component';
 import { MetricDspacecrisComponent } from '../metric-dspacecris/metric-dspacecris.component';
-import {MetricEmbeddedViewComponent} from '../metric-embedded-view/metric-embedded-view.component';
-import {MetricEmbeddedDownloadComponent} from '../metric-embedded-download/metric-embedded-download.component';
-
-declare var document: any;
+import { MetricEmbeddedViewComponent } from '../metric-embedded-view/metric-embedded-view.component';
+import { MetricEmbeddedDownloadComponent } from '../metric-embedded-download/metric-embedded-download.component';
+import { MetricPlumxComponent } from '../metric-plumx/metric-plumx.component';
 
 interface Script {
   loaded: boolean;
@@ -45,7 +47,13 @@ export const MetricTypesConfig: MetricTypeConf[] = [
     id: 'embedded-download',
     component: MetricEmbeddedDownloadComponent,
     script: null
+  },
+  {
+    id: 'plumX',
+    component: MetricPlumxComponent,
+    script: ''
   }
+
 ];
 
 @Injectable({providedIn: 'root'})
@@ -54,6 +62,10 @@ export class MetricLoaderService {
   protected metricTypesConfig = MetricTypesConfig;
 
   protected scripts: { [metricType: string]: Script } = {};
+
+  constructor(@Inject(DOCUMENT) private document: any) {
+
+  }
 
   /**
    * Load required data for the metricType and then return the Component type.
@@ -93,6 +105,16 @@ export class MetricLoaderService {
     return null;
   }
 
+  /**
+   * Set the Script to run for the metric type.
+   * @param metricType to which is attached the script
+   * @param script to be set in dom
+   */
+  public setScript(metricType: string, script: string): void {
+    this.loadScript(metricType, script);
+
+  }
+
   protected loadScript(metricType: string, src: string): Promise<any> {
     console.log('Loading script of', metricType);
     return new Promise((resolve, reject) => {
@@ -104,7 +126,7 @@ export class MetricLoaderService {
         this.scripts[metricType] = {
           loaded: false, src
         };
-        const script = document.createElement('script');
+        const script = this.document.createElement('script');
         script.type = 'text/javascript';
         script.src = src;
         if (script.readyState) {  // IE
@@ -127,7 +149,7 @@ export class MetricLoaderService {
           console.log('Resolving with status Error');
           resolve({metricType, loaded: false, status: 'Loaded'});
         };
-        document.getElementsByTagName('head')[0].appendChild(script);
+        this.document.getElementsByTagName('head')[0].appendChild(script);
       }
     });
   }

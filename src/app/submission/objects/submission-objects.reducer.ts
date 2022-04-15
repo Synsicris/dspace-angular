@@ -3,6 +3,7 @@ import { differenceWith, findKey, isEqual, uniqWith } from 'lodash';
 
 import {
   ChangeSubmissionCollectionAction,
+  CleanDetectDuplicateAction,
   CompleteInitSubmissionFormAction,
   DeleteSectionErrorsAction,
   DeleteUploadedFileAction,
@@ -11,6 +12,7 @@ import {
   DepositSubmissionSuccessAction,
   DisableSectionAction,
   DisableSectionErrorAction,
+  DiscardSubmissionSuccessAction,
   EditFileDataAction,
   EnableSectionAction,
   InertSectionErrorsAction,
@@ -37,7 +39,8 @@ import {
   SetSectionFormId,
   SubmissionObjectAction,
   SubmissionObjectActionTypes,
-  UpdateSectionDataAction
+  UpdateSectionDataAction,
+  UpdateSectionErrorsAction
 } from './submission-objects.actions';
 import { WorkspaceitemSectionDataType } from '../../core/submission/models/workspaceitem-sections.model';
 import { WorkspaceitemSectionUploadObject } from '../../core/submission/models/workspaceitem-section-upload.model';
@@ -212,6 +215,11 @@ export interface SubmissionObjectEntry {
    * Configurations of security levels for metadatas of an entity type
    */
   metadataSecurityConfiguration?: MetadataSecurityConfiguration;
+
+  /**
+   * A boolean representing if a submission is discarded or not
+   */
+   isDiscarding?: boolean;
 }
 
 /**
@@ -282,7 +290,7 @@ export function submissionObjectReducer(state = initialState, action: Submission
     }
 
     case SubmissionObjectActionTypes.DISCARD_SUBMISSION_SUCCESS: {
-      return initialState;
+      return discardSuccess(state, action as DiscardSubmissionSuccessAction);
     }
 
     case SubmissionObjectActionTypes.DISCARD_SUBMISSION_ERROR: {
@@ -309,6 +317,10 @@ export function submissionObjectReducer(state = initialState, action: Submission
 
     case SubmissionObjectActionTypes.UPDATE_SECTION_DATA: {
       return updateSectionData(state, action as UpdateSectionDataAction);
+    }
+
+    case SubmissionObjectActionTypes.UPDATE_SECTION_ERRORS: {
+      return updateSectionErrors(state, action as UpdateSectionErrorsAction);
     }
 
     case SubmissionObjectActionTypes.DISABLE_SECTION: {
@@ -364,6 +376,10 @@ export function submissionObjectReducer(state = initialState, action: Submission
 
     case SubmissionObjectActionTypes.SET_DUPLICATE_DECISION_ERROR: {
       return endSaveDecision(state, action as SetDuplicateDecisionErrorAction);
+    }
+
+    case SubmissionObjectActionTypes.CLEAN_DETECT_DUPLICATE: {
+      return cleanDetectDuplicateSection(state, action as CleanDetectDuplicateAction);
     }
 
     default: {
@@ -473,7 +489,8 @@ function initSubmission(state: SubmissionObjectState, action: InitSubmissionForm
     savePending: false,
     saveDecisionPending: false,
     depositPending: false,
-    metadataSecurityConfiguration: action.payload.metadataSecurityConfiguration
+    metadataSecurityConfiguration: action.payload.metadataSecurityConfiguration,
+    isDiscarding: false
   };
   return newState;
 }
@@ -516,6 +533,28 @@ function completeInit(state: SubmissionObjectState, action: CompleteInitSubmissi
     return Object.assign({}, state, {
       [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
         isLoading: false
+      })
+    });
+  } else {
+    return state;
+  }
+}
+
+/**
+ * Set submission discard to true.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    a DiscardSubmissionSuccessAction
+ * @return SubmissionObjectState
+ *    the new state, with the discard success.
+ */
+ function discardSuccess(state: SubmissionObjectState, action: DiscardSubmissionSuccessAction): SubmissionObjectState {
+  if (hasValue(state[ action.payload.submissionId ])) {
+    return Object.assign({}, state, {
+      [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
+        isDiscarding: true
       })
     });
   } else {
@@ -763,6 +802,36 @@ function updateSectionData(state: SubmissionObjectState, action: UpdateSectionDa
             metadata: reduceSectionMetadata(action.payload.metadata, state[ action.payload.submissionId ].sections [ action.payload.sectionId ].metadata)
           })
         })
+      })
+    });
+  } else {
+    return state;
+  }
+}
+
+/**
+ * Update section's data.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an UpdateSectionDataAction
+ * @return SubmissionObjectState
+ *    the new state, with the section's data updated.
+ */
+function updateSectionErrors(state: SubmissionObjectState, action: UpdateSectionErrorsAction): SubmissionObjectState {
+  if (isNotEmpty(state[ action.payload.submissionId ])
+    && isNotEmpty(state[ action.payload.submissionId ].sections[ action.payload.sectionId])) {
+    return Object.assign({}, state, {
+      [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
+        sections: Object.assign({}, state[ action.payload.submissionId ].sections, {
+          [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ].sections [ action.payload.sectionId ], {
+            enabled: true,
+            errorsToShow: action.payload.errorsToShow,
+            serverValidationErrors: action.payload.errorsToShow,
+          })
+        }),
+        savePending: false,
       })
     });
   } else {
@@ -1054,6 +1123,23 @@ function endSaveDecision(state: SubmissionObjectState, action: SetDuplicateDecis
     return Object.assign({}, state, {
       [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
         saveDecisionPending: false,
+      })
+    });
+  } else {
+    return state;
+  }
+}
+
+function cleanDetectDuplicateSection(state: SubmissionObjectState, action: CleanDetectDuplicateAction): SubmissionObjectState {
+  if (isNotEmpty(state[ action.payload.submissionId ])) {
+    return Object.assign({}, state, {
+      [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
+        sections: Object.assign({}, state[ action.payload.submissionId ].sections, {
+          [ 'detect-duplicate' ]: Object.assign({}, state[ action.payload.submissionId ].sections [ 'detect-duplicate' ], {
+            enabled: false,
+            data: {}
+          })
+        })
       })
     });
   } else {

@@ -1,0 +1,10 @@
+<div class="{{box.style}}">
+  <div *ngIf="projectCommunityUUID" class="py-4 card-body">
+    <p>
+      <a class="h3 mb-2 text-decoration-none" role="button"
+         [routerLink]="['/project-overview', projectCommunityUUID , 'workingplan']">
+        <span>{{'project-overview.page.content.working-plan' | translate}}</span>
+      </a>
+    </p>
+  </div>
+</div>

@@ -107,10 +107,10 @@ export class SubmissionSectionContainerComponent implements OnInit {
   ngOnInit() {
     this.objectInjector = Injector.create({
       providers: [
-        {provide: 'collectionIdProvider', useFactory: () => (this.collectionId), deps: []},
-        {provide: 'sectionDataProvider', useFactory: () => (this.sectionData), deps: []},
-        {provide: 'submissionIdProvider', useFactory: () => (this.submissionId), deps: []},
-        {provide: 'entityType', useFactory: () => (this.entityType), deps: []},
+        { provide: 'collectionIdProvider', useFactory: () => (this.collectionId), deps: [] },
+        { provide: 'sectionDataProvider', useFactory: () => (this.sectionData), deps: [] },
+        { provide: 'submissionIdProvider', useFactory: () => (this.submissionId), deps: [] },
+        { provide: 'entityType', useFactory: () => (this.entityType), deps: [] },
         {provide: 'submissionUploaderRefProvider', useFactory: () => (this.submissionUploaderRef), deps: []},
       ],
       parent: this.injector
@@ -136,6 +136,9 @@ export class SubmissionSectionContainerComponent implements OnInit {
       this.isRemoving.next(true);
       this.operationsBuilder.remove(this.pathCombiner.getPath());
       this.sectionRef.removeSection(this.submissionId, this.sectionData.id);
+      setTimeout(() => {
+        this.isRemoving.next(false);
+      }, 1000);
     }
   }
 

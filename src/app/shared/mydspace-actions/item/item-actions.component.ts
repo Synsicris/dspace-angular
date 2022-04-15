@@ -11,7 +11,6 @@ import { Item } from '../../../core/shared/item.model';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { RequestService } from '../../../core/data/request.service';
 import { SearchService } from '../../../core/shared/search/search.service';
-import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
@@ -19,6 +18,7 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 import { isNotEmpty } from '../../empty.util';
+import { environment } from '../../../../environments/environment';
 
 /**
  * This component represents mydspace actions related to Item object.
@@ -81,8 +81,7 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
 
 
   ngOnInit(): void {
-    this.editItemDataService.searchEditModesByID(this.object.id).pipe(
-      map((editModes: EditItemMode[]) => editModes && editModes.length > 0),
+    this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEdit$.next(canEdit);

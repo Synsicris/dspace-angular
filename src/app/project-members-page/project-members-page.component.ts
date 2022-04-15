@@ -12,7 +12,7 @@ import { AuthService } from '../core/auth/auth.service';
 import { ProjectGroupService } from '../core/project/project-group.service';
 import { Group } from '../core/eperson/models/group.model';
 import { GroupDataService } from '../core/eperson/group-data.service';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 import { Item } from '../core/shared/item.model';
 import { PARENT_PROJECT_ENTITY } from '../core/project/project-data.service';
 

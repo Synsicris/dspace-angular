@@ -1,3 +1,4 @@
+import { CrisItemPageTabResolver } from './../item-page/cris-item-page-tab.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CrisItemPageResolver } from './cris-item-page.resolver';
@@ -15,8 +16,9 @@ const routes: Routes = [
     component: CrisItemPageComponent,
     resolve: {
       dso: CrisItemPageResolver,
-      project: ProjectCommunityByItemResolver,
-      breadcrumb: ProjectItemBreadcrumbResolver
+      breadcrumb: ProjectItemBreadcrumbResolver,
+      tabs: CrisItemPageTabResolver,
+      project: ProjectCommunityByItemResolver
     },
     data: {
       menu: {
@@ -30,7 +32,8 @@ const routes: Routes = [
             link: 'statistics/items/:id/',
           } as LinkMenuItemModel,
         }],
-      },
+      }
+      , showSocialButtons: true
     }
   },
   { // used for activate specific tab
@@ -38,8 +41,9 @@ const routes: Routes = [
     component: CrisItemPageComponent,
     resolve: {
       dso: CrisItemPageResolver,
-      project: ProjectCommunityByItemResolver,
-      breadcrumb: ProjectItemBreadcrumbResolver
+      breadcrumb: ProjectItemBreadcrumbResolver,
+      tabs: CrisItemPageTabResolver,
+      project: ProjectCommunityByItemResolver
     },
     data: {
       menu: {
@@ -53,7 +57,7 @@ const routes: Routes = [
             link: 'statistics/items/:id/',
           } as LinkMenuItemModel,
         }],
-      },
+      }, showSocialButtons: true
     }
   }
 ];

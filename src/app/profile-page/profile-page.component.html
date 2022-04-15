@@ -4,7 +4,10 @@
     <div class="card mb-4">
       <div class="card-header">{{'profile.card.researcher' | translate}}</div>
       <div class="card-body">
-        <ds-profile-page-researcher-form [user]="user"></ds-profile-page-researcher-form>
+        <div class="mb-4">
+          <ds-profile-page-researcher-form [user]="user"></ds-profile-page-researcher-form>
+        </div>
+        <ds-suggestions-notification></ds-suggestions-notification>
       </div>
     </div>
     <div class="card mb-4">
@@ -13,7 +16,7 @@
         <ds-profile-page-metadata-form [user]="user"></ds-profile-page-metadata-form>
       </div>
     </div>
-    <div class="card mb-4">
+    <div *ngIf="canChangePassword$ | async" class="card mb-4 security-section">
       <div class="card-header">{{'profile.card.security' | translate}}</div>
       <div class="card-body">
         <ds-profile-page-security-form

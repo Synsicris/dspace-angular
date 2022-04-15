@@ -7,10 +7,6 @@ npm-debug.log
 
 /build/
 
-/src/environments/environment.ts
-/src/environments/environment.dev.ts
-/src/environments/environment.prod.ts
-
 /coverage
 
 /dist/
@@ -40,3 +36,9 @@ package-lock.json
 
 .env
 /nbproject/
+
+## files designated as old/backup
+*.old
+*_old
+*.backup
+*_backup

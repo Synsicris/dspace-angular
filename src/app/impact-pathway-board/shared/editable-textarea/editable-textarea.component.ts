@@ -17,6 +17,11 @@ import { take } from 'rxjs/operators';
 export class EditableTextareaComponent {
 
   /**
+   * The item edit mode
+   */
+  @Input() editMode: string;
+
+  /**
    * The label to use as edit button's title
    */
   @Input() public editTitle: string;
@@ -26,6 +31,11 @@ export class EditableTextareaComponent {
    * @type {Observable<SubmissionFormModel>}
    */
   @Input() public formConfig: Observable<SubmissionFormModel>;
+
+  /**
+   * The path to metadata section to patch
+   */
+  @Input() formSectionName: string;
 
   /**
    * The item's id related to the edit form
@@ -61,7 +71,9 @@ export class EditableTextareaComponent {
    */
   openEditModal() {
     const modalRef = this.modalService.open(EditSimpleItemModalComponent, { size: 'lg' });
+    modalRef.componentInstance.editMode = this.editMode;
     modalRef.componentInstance.formConfig = this.formConfig;
+    modalRef.componentInstance.formSectionName = this.formSectionName;
     modalRef.componentInstance.itemId = this.itemId;
     modalRef.componentInstance.itemUpdate.pipe(
       take(1)

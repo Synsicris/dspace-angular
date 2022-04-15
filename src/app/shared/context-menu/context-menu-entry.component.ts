@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 
 import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { DSpaceObjectType } from '../../core/shared/dspace-object-type.model';
+import { Subject } from 'rxjs';
 import { ContextMenuEntryType } from './context-menu-entry-type';
 
 /**
@@ -27,6 +28,11 @@ export abstract class ContextMenuEntryComponent {
    */
   contextMenuObjectType: DSpaceObjectType;
 
+  /**
+   * Subject to notify the rendered context menu in order to refresh shown option
+   */
+  public notifyChangesInContextMenu =  new Subject<any>();
+
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
@@ -36,5 +42,4 @@ export abstract class ContextMenuEntryComponent {
     this.contextMenuObjectType = injectedContextMenuObjectType;
     this.menuEntryType = _menuEntryType;
   }
-
 }

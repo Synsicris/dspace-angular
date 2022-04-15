@@ -29,6 +29,11 @@ export class AuthMethod {
         this.authMethodType = AuthMethodType.Password;
         break;
       }
+      case 'oidc': {
+        this.authMethodType = AuthMethodType.Oidc;
+        this.location = location;
+        break;
+      }
       case 'orcid': {
         this.authMethodType = AuthMethodType.Orcid;
         this.location = location;

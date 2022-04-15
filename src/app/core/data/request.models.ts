@@ -10,6 +10,7 @@ import { TaskResponseParsingService } from '../tasks/task-response-parsing.servi
 import { ContentSourceResponseParsingService } from './content-source-response-parsing.service';
 import { DspaceRestResponseParsingService } from './dspace-rest-response-parsing.service';
 import { environment } from '../../../environments/environment';
+import { PathableObjectError } from './request.reducer';
 
 /* tslint:disable:max-classes-per-file */
 
@@ -20,7 +21,7 @@ export enum IdentifierType {
 }
 
 export abstract class RestRequest {
-  public responseMsToLive =  environment.cache.msToLive.default;
+  public responseMsToLive;
   public isMultipart = false;
 
   constructor(
@@ -30,6 +31,7 @@ export abstract class RestRequest {
     public body?: any,
     public options?: HttpOptions,
   ) {
+    this.responseMsToLive = environment.cache.msToLive.default;
   }
 
   getResponseParser(): GenericConstructor<ResponseParsingService> {
@@ -278,5 +280,6 @@ export class MyDSpaceRequest extends GetRequest {
 export class RequestError extends Error {
   statusCode: number;
   statusText: string;
+  errors?: PathableObjectError[];
 }
 /* tslint:enable:max-classes-per-file */

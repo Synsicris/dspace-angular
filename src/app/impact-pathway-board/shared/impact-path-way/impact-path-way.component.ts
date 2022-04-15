@@ -22,8 +22,16 @@ import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-m
   templateUrl: './impact-path-way.component.html'
 })
 export class ImpactPathWayComponent implements OnInit {
+  /**
+   * The project community's id
+   */
+  @Input() public projectCommunityId: string;
 
-  @Input() public projectId: string;
+  /**
+   * The project item's id
+   */
+  @Input() public projectItemId: string;
+
   @Input() public impactPathway: ImpactPathway;
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
@@ -77,7 +85,7 @@ export class ImpactPathWayComponent implements OnInit {
     this.modalService.open(content).result.then(
       (result) => {
         if (result === 'ok') {
-          this.impactPathwayService.dispatchRemoveImpactPathwayAction(this.projectId, this.impactPathway.id);
+          this.impactPathwayService.dispatchRemoveImpactPathwayAction(this.projectItemId, this.impactPathway.id);
         }
       }
     );
@@ -91,14 +99,30 @@ export class ImpactPathWayComponent implements OnInit {
   }
 
   /**
+   * Get the edit item mode
+   */
+  getEditMode(): string {
+    return this.impactPathwayService.getImpactPathwaysEditMode();
+  }
+
+  /**
    * Return all impactPathway step ids
    */
   getImpactPathwayStepIds(): string[] {
     return this.impactPathway.steps.map((step: ImpactPathwayStep) => step.id);
   }
 
+  /**
+   * Get the path to metadata section to patch
+   */
+  getSectionName() {
+    return this.impactPathwayService.getImpactPathwaysEditFormSection();
+  }
+
   openEditModal() {
     const modalRef = this.modalService.open(EditSimpleItemModalComponent, { size: 'lg' });
+    modalRef.componentInstance.editMode = this.impactPathwayService.getImpactPathwaysEditMode();
+    modalRef.componentInstance.formSectionName = this.impactPathwayService.getImpactPathwaysEditFormSection();
     modalRef.componentInstance.formConfig = this.impactPathwayService.getImpactPathwayFormConfig();
     modalRef.componentInstance.itemId = this.impactPathway.id;
 

@@ -30,7 +30,7 @@ export class Section extends CacheableObject {
   componentRows: SectionComponent[][];
 
   /**
-   * The {@link HALLink}s for this Tab
+   * The {@link HALLink}s for this section
    */
   @deserialize
   _links: {
@@ -55,7 +55,7 @@ export interface TopSection extends SectionComponent {
   order: string;
   titleKey: string;
   componentType: 'top';
-  pageSize?: 5;
+  numberOfItems?: number;
 }
 
 export interface SearchSection extends SectionComponent {

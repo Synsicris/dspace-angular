@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { NgbDropdown, NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { findIndex, uniqueId } from 'lodash';
 
-import { FacetValue } from '../../../../search/facet-value.model';
-import { SearchFilterConfig } from '../../../../search/search-filter-config.model';
+import { FacetValue } from '../../../../search/models/facet-value.model';
+import { SearchFilterConfig } from '../../../../search/models/search-filter-config.model';
 
 /**
  * Enumeration containing all possible types for filters

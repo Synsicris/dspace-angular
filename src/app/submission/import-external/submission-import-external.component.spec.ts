@@ -1,5 +1,5 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { waitForAsync, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { getTestScheduler } from 'jasmine-marbles';
 import { TranslateModule } from '@ngx-translate/core';
@@ -17,7 +17,7 @@ import { createPaginatedList, createTestComponent } from '../../shared/testing/u
 import { RouterStub } from '../../shared/testing/router.stub';
 import { VarDirective } from '../../shared/utils/var.directive';
 import { routeServiceStub } from '../../shared/testing/route-service.stub';
-import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { ExternalSourceEntry } from '../../core/shared/external-source-entry.model';
@@ -122,7 +122,7 @@ describe('SubmissionImportExternalComponent test suite', () => {
 
     it('Should call \'getExternalSourceEntries\' properly', () => {
       spyOn(routeServiceStub, 'getQueryParameterValue').and.callFake((param) => {
-        if (param === 'source') {
+        if (param === 'sourceId') {
           return observableOf('orcidV2');
         } else if (param === 'query') {
           return observableOf('test');

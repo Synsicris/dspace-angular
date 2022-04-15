@@ -1,12 +1,11 @@
+import { CrisItemPageRoutingModule } from './cris-item-page-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 
-import { CrisItemPageRoutingModule } from './cris-item-page-routing.module';
 import { CrisItemPageComponent } from './cris-item-page.component';
-import { LayoutModule } from '../layout/layout.module';
-import { CrisItemPageTabResolver } from './cris-item-page-tab.resolver';
-import {StatisticsModule} from '../statistics/statistics.module';
+import { CrisLayoutModule } from '../cris-layout/cris-layout.module';
+import { StatisticsModule } from '../statistics/statistics.module';
 
 @NgModule({
   declarations: [
@@ -15,15 +14,12 @@ import {StatisticsModule} from '../statistics/statistics.module';
   imports: [
     CommonModule,
     SharedModule,
-    CrisItemPageRoutingModule,
-    LayoutModule,
-    StatisticsModule
+    CrisLayoutModule,
+    StatisticsModule,
+    CrisItemPageRoutingModule
   ],
   exports: [
     CrisItemPageComponent
-  ],
-  providers: [
-    CrisItemPageTabResolver
   ]
 })
 export class CrisItemPageModule { }

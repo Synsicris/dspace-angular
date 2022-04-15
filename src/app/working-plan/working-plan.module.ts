@@ -20,6 +20,11 @@ import { WorkingPlanActions } from './core/working-plan.actions';
 import { WorkingPlanService } from './core/working-plan.service';
 import { WorkingPlanStateService } from './core/working-plan-state.service';
 import { ProjectItemService } from '../core/project/project-item.service';
+import { CreateSimpleItemModule } from '../shared/create-simple-item-modal/create-simple-item.module';
+import { ComcolModule } from '../shared/comcol/comcol.module';
+import { EditSimpleItemModalModule } from '../shared/edit-simple-item-modal/edit-simple-item-modal.module';
+import { WorkingPlanChartDatesComponent } from './working-plan-chart/container/working-plan-chart-dates/working-plan-chart-dates.component';
+import { WorkingPlanChartItemEditButtonComponent } from './working-plan-chart/container/working-plan-chart-item-edit-button/working-plan-chart-item-edit-button.component';
 
 const MODULES = [
   CommonModule,
@@ -29,13 +34,18 @@ const MODULES = [
   ResizableModule,
   StoreModule.forFeature('workingplan', workingPlanReducer, storeModuleConfig as StoreConfig<WorkingPlanState, WorkingPlanActions>),
   EffectsModule.forFeature([WorkingPlanEffects]),
+  CreateSimpleItemModule,
+  EditSimpleItemModalModule,
+  ComcolModule
 ];
 
 const COMPONENTS = [
   WorkingPlanComponent,
   WorkingPlanChartComponent,
   WorkingPlanChartContainerComponent,
-  WorkingPlanChartToolbarComponent
+  WorkingPlanChartDatesComponent,
+  WorkingPlanChartToolbarComponent,
+  WorkingPlanChartItemEditButtonComponent
 ];
 
 const DIRECTIVES = [
@@ -58,7 +68,7 @@ const PROVIDERS = [
   declarations: [
     ...COMPONENTS,
     ...DIRECTIVES,
-    ...ENTRY_COMPONENTS
+    ...ENTRY_COMPONENTS,
   ],
   providers: [
     ...PROVIDERS

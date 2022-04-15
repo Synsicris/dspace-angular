@@ -60,6 +60,15 @@ export const isWorkingPlanLoadedSelector = createSelector(_getWorkingPlanState,
 );
 
 /**
+ * Returns true if the user a operation is initializing.
+ * @function isWorkingPlanProcessingSelector
+ * @return {boolean}
+ */
+export const isWorkingPlanInitializingSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.initializing
+);
+
+/**
  * Returns true if the user a operation is processing.
  * @function isWorkingPlanProcessingSelector
  * @return {boolean}
@@ -93,6 +102,15 @@ export const workpackageToRemoveSelector = createSelector(_getWorkingPlanState,
  */
 export const chartDateViewSelector = createSelector(_getWorkingPlanState,
   (state: WorkingPlanState) => state.chartDateView
+);
+
+/**
+ * Returns true if compare mose id active.
+ * @function isCompareMode
+ * @return {boolean}
+ */
+export const isCompareMode = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.compareMode || false
 );
 
 /**

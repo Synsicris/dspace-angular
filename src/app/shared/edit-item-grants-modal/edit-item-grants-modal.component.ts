@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { NotificationsService } from '../notifications/notifications.service';
 import { ProjectDataService } from '../../core/project/project-data.service';
 import { RemoteData } from '../../core/data/remote-data';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
@@ -120,17 +120,22 @@ export class EditItemGrantsModalComponent implements OnInit {
    */
   editGrants() {
     this.processing$.next(true);
-    const projectGrants = this.editForm.get('grants').value;
+    const projectGrants = {
+      value: this.editForm.get('grants').value
+    };
 
+    // TODO
     this.itemService.updateItemMetadata(
       this.item.uuid,
+      'EDIT_GRANTS',
+      'sections/edit_grants',
       'cris.project.shared',
       0,
       projectGrants
     ).subscribe({
         next: (response: RemoteData<Item>) => {
           if (response.hasSucceeded) {
-            this.currentItemGrantsValue = projectGrants;
+            this.currentItemGrantsValue = projectGrants.value;
             this.notificationService.success(null, this.translate.instant('submission.workflow.generic.edit-grants.success'));
             this.close(response.payload);
           } else {

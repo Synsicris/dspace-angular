@@ -13,7 +13,9 @@ import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
+import { NotificationsService } from '../../notifications/notifications.service';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
+import { environment } from '../../../../environments/environment';
 
 /**
  * This component renders a context menu option that provides the links to edit item page.
@@ -59,25 +61,20 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
    * @param {DSpaceObject} injectedContextMenuObject
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {EditItemDataService} editItemService
+   * @param notificationService
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
     private editItemService: EditItemDataService,
+    public notificationService: NotificationsService
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.EditSubmission);
   }
 
   ngOnInit(): void {
-    // Retrieve edit modes
-    this.sub = this.editItemService.findById(this.contextMenuObject.id + ':none', true, true, followLink('modes')).pipe(
-      getAllSucceededRemoteDataPayload(),
-      mergeMap((editItem: EditItem) => editItem.modes.pipe(
-        getFirstSucceededRemoteListPayload())
-      ),
-      startWith([])
-    ).subscribe((editModes: EditItemMode[]) => {
-      this.editModes$.next(editModes);
+    this.notificationService.claimedProfile.subscribe(() => {
+      this.getData();
     });
   }
 
@@ -104,5 +101,22 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
     if (hasValue(this.sub)) {
       this.sub.unsubscribe();
     }
+  }
+
+  getData(): void {
+    this.sub = this.editItemService.findById(this.contextMenuObject.id + ':none', false, true, followLink('modes')).pipe(
+      getAllSucceededRemoteDataPayload(),
+      mergeMap((editItem: EditItem) => editItem.modes.pipe(
+        getFirstSucceededRemoteListPayload())
+      ),
+      startWith([])
+    ).subscribe((editModes: EditItemMode[]) => {
+      const allowedModes = editModes.filter((mode: EditItemMode) => this.isEditModeAllowed(mode));
+      this.editModes$.next(allowedModes);
+    });
+  }
+
+  private isEditModeAllowed(mode: EditItemMode) {
+    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode || mode.name === 'OWNER';
   }
 }

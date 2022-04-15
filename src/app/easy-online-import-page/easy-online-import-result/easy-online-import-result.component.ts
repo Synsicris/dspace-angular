@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { EasyOnlineImport } from '../../core/easy-online-import/models/easy-online-import.model';
-import { from, Observable } from 'rxjs';
+import { BehaviorSubject, from, Observable } from 'rxjs';
 import { ItemDataService } from '../../core/data/item-data.service';
 import { Router } from '@angular/router';
 import { Item } from '../../core/shared/item.model';
@@ -10,8 +10,7 @@ import { RemoteData } from '../../core/data/remote-data';
 import { isNotEmpty } from '../../shared/empty.util';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
-import { SearchResult } from '../../shared/search/search-result.model';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { SearchResult } from '../../shared/search/models/search-result.model';
 import { CollectionElementLinkType } from '../../shared/object-collection/collection-element-link.type';
 
 @Component({

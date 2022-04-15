@@ -74,6 +74,7 @@ import { MetadataSchema } from './metadata/metadata-schema.model';
 import { MetadataService } from './metadata/metadata.service';
 import { RegistryService } from './registry/registry.service';
 import { RoleService } from './roles/role.service';
+import { FeedbackDataService } from './feedback/feedback-data.service';
 
 import { ApiService } from './services/api.service';
 import { ServerResponseService } from './services/server-response.service';
@@ -140,11 +141,8 @@ import { MetadataSchemaDataService } from './data/metadata-schema-data.service';
 import { MetadataFieldDataService } from './data/metadata-field-data.service';
 import { DsDynamicTypeBindRelationService } from '../shared/form/builder/ds-dynamic-form-ui/ds-dynamic-type-bind-relation.service';
 import { TabDataService } from './layout/tab-data.service';
-import { Tab } from './layout/models/tab.model';
-import { BoxDataService } from './layout/box-data.service';
-import { Box } from './layout/models/box.model';
-import { MetadataComponentsDataService } from './layout/metadata-components-data.service';
-import { MetadataComponent } from './layout/models/metadata-component.model';
+import { CrisLayoutTab } from './layout/models/tab.model';
+import { CrisLayoutBox } from './layout/models/box.model';
 import { TokenResponseParsingService } from './auth/token-response-parsing.service';
 import { SubmissionCcLicenseDataService } from './submission/submission-cc-license-data.service';
 import { SubmissionCcLicence } from './submission/models/submission-cc-license.model';
@@ -164,8 +162,6 @@ import { EndUserAgreementService } from './end-user-agreement/end-user-agreement
 import { SiteRegisterGuard } from './data/feature-authorization/feature-authorization-guard/site-register.guard';
 import { ShortLivedToken } from './auth/models/short-lived-token.model';
 import { UsageReport } from './statistics/models/usage-report.model';
-import { SearchcomponentService } from './layout/searchcomponent.service';
-import { SearchComponent } from './layout/models/search-component.model';
 import { ResearcherProfileService } from './profile/researcher-profile.service';
 import { ResearcherProfile } from './profile/model/researcher-profile.model';
 import { SectionDataService } from './layout/section-data.service';
@@ -198,7 +194,15 @@ import { SearchConfig } from '../shared/search/search-filters/search-config.mode
 import { EditItemRelationsGuard } from '../edit-item-relationships/guards/edit-item-relationships.guard';
 import { ProfileClaimService } from '../profile-page/profile-claim/profile-claim.service';
 import { SequenceService } from './shared/sequence.service';
+import { GroupDataService } from './eperson/group-data.service';
+import { SubmissionAccessesModel } from './config/models/config-submission-accesses.model';
 import { Subscription } from '../shared/subscriptions/models/subscription.model';
+import { WorkflowStepStatisticsService } from './statistics/workflow-step-statistics.service';
+import { WorkflowStepStatistics } from './statistics/models/workflow-step-statistics.model';
+import { WorkflowOwnerStatisticsService } from './statistics/workflow-owner-statistics.service';
+import { WorkflowOwnerStatistics } from './statistics/models/workflow-owner-statistics.model';
+import { LoginStatisticsService } from './statistics/login-statistics.service';
+import { LoginStatistics } from './statistics/models/login-statistics.model';
 import { ItemAuthorityRelationService } from './shared/item-authority-relation.service';
 import { ProjectDataService } from './project/project-data.service';
 import { CollectionSearchResult } from '../shared/object-collection/shared/collection-search-result.model';
@@ -335,13 +339,10 @@ const PROVIDERS = [
   FilteredDiscoveryPageResponseParsingService,
   { provide: NativeWindowService, useFactory: NativeWindowFactory },
   TabDataService,
-  BoxDataService,
-  MetadataComponentsDataService,
   MetricsComponentsDataService,
   MetricService,
   VocabularyService,
   VocabularyTreeviewService,
-  SearchcomponentService,
   ProfileClaimService,
   ResearcherProfileService,
   ItemExportFormatService,
@@ -352,8 +353,11 @@ const PROVIDERS = [
   EditItemModeDataService,
   EditItemRelationsGuard,
   SequenceService,
-  ResearcherProfileService,
-  SearchcomponentService,
+  GroupDataService,
+  FeedbackDataService,
+  WorkflowStepStatisticsService,
+  WorkflowOwnerStatisticsService,
+  LoginStatisticsService,
   ItemAuthorityRelationService,
   ProjectDataService,
   ProjectAuthorizationService,
@@ -409,9 +413,8 @@ export const models =
     Feature,
     Authorization,
     Registration,
-    Tab,
-    Box,
-    MetadataComponent,
+    CrisLayoutTab,
+    CrisLayoutBox,
     MetricsComponent,
     Metric,
     Vocabulary,
@@ -421,7 +424,6 @@ export const models =
     ShortLivedToken,
     Registration,
     UsageReport,
-    SearchComponent,
     ResearcherProfile,
     ItemExportFormat,
     OrcidQueue,
@@ -437,7 +439,11 @@ export const models =
     StatisticsCategory,
     Root,
     SearchConfig,
+    SubmissionAccessesModel,
     Subscription,
+    WorkflowStepStatistics,
+    WorkflowOwnerStatistics,
+    LoginStatistics,
     ClaimedTaskSearchResult,
     CollectionSearchResult,
     CommunitySearchResult,

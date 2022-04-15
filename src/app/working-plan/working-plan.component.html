@@ -1,7 +1,9 @@
 <ds-loading class="container-fluid" *ngIf="(isLoading() | async)"></ds-loading>
 <div *ngIf="!(isLoading() | async)" class="container-fluid" fxLayout="column">
-  <ipw-working-plan-chart [projectId]="projectId"
+  <ipw-working-plan-chart [compareMode]="compareMode.asObservable()"
+                          [projectCommunityId]="projectCommunityId"
                           [milestoneCollectionId]="milestoneCollectionId"
                           [workPackageCollectionId]="workPackageCollectionId"
-                          [workpackages]="getWorkpackages()"></ipw-working-plan-chart>
+                          [workpackages]="getWorkpackages()"
+                          [workingPlan]="workingPlan"></ipw-working-plan-chart>
 </div>

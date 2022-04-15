@@ -36,6 +36,9 @@ import { GoogleAnalyticsService } from './statistics/google-analytics.service';
 import { ThemeService } from './shared/theme-support/theme.service';
 import { getMockThemeService } from './shared/mocks/theme-service.mock';
 import { BreadcrumbsService } from './breadcrumbs/breadcrumbs.service';
+import { of } from 'rxjs';
+import { APP_CONFIG } from '../config/app-config.interface';
+import { environment } from '../environments/environment';
 
 let comp: AppComponent;
 let fixture: ComponentFixture<AppComponent>;
@@ -47,6 +50,7 @@ const initialState = {
 describe('App component', () => {
 
   let breadcrumbsServiceSpy;
+  let routeServiceMock;
 
   function getMockLocaleService(): LocaleService {
     return jasmine.createSpyObj('LocaleService', {
@@ -56,6 +60,9 @@ describe('App component', () => {
 
   const getDefaultTestBedConf = () => {
     breadcrumbsServiceSpy = jasmine.createSpyObj(['listenForRouteChanges']);
+    routeServiceMock = jasmine.createSpyObj('RouterService', {
+      getCurrentUrl: of('/home')
+    });
 
     return {
       imports: [
@@ -83,9 +90,11 @@ describe('App component', () => {
         { provide: LocaleService, useValue: getMockLocaleService() },
         { provide: ThemeService, useValue: getMockThemeService() },
         { provide: BreadcrumbsService, useValue: breadcrumbsServiceSpy },
+        { provide: RouteService, useValue: routeServiceMock },
+        { provide: APP_CONFIG, useValue: environment },
         provideMockStore({ initialState }),
         AppComponent,
-        RouteService
+        // RouteService
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     };
@@ -171,7 +180,8 @@ describe('App component', () => {
       TestBed.configureTestingModule(getDefaultTestBedConf());
       TestBed.overrideProvider(ThemeService, {useValue: getMockThemeService('custom')});
       document = TestBed.inject(DOCUMENT);
-      headSpy = jasmine.createSpyObj('head', ['appendChild']);
+      headSpy = jasmine.createSpyObj('head', ['appendChild', 'getElementsByClassName']);
+      headSpy.getElementsByClassName.and.returnValue([]);
       spyOn(document, 'getElementsByTagName').and.returnValue([headSpy]);
       fixture = TestBed.createComponent(AppComponent);
       comp = fixture.componentInstance;

@@ -37,14 +37,16 @@
     <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps"
                               ipwStepColor
                               class="vertical-step"
-                              [projectId]="projectId"
+                              [projectCommunityId]="projectCommunityId"
                               [impactPathwayId]="impactPathway.id"
                               [impactPathwayStepId]="step.id"
                               [stepType]="step.type"
                               [allImpactPathwayStepIds]="getImpactPathwayStepIds()"></ipw-impact-path-way-step>
   </div>
   <ipw-editable-textarea *ngIf="impactPathway"
+                         [editMode]="getEditMode()"
                          [formConfig]="formConfig$"
+                         [formSectionName]="getSectionName()"
                          [itemId]="impactPathway.id"
                          [editTitle]="'impact-pathway.edit.title' | translate"
                          [fieldTitle]="'impact-pathway.description' | translate"

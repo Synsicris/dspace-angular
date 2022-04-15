@@ -3,8 +3,10 @@ import { Component, Inject } from '@angular/core';
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
-import { ContextMenuEntryType } from '../context-menu-entry-type';
+import { Observable } from 'rxjs';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
+import { ContextMenuEntryType } from '../context-menu-entry-type';
+import { AuthService } from '../../../core/auth/auth.service';
 
 /**
  * This component renders a context menu option that provides to export an item.
@@ -16,17 +18,24 @@ import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 @rendersContextMenuEntriesForType(DSpaceObjectType.ITEM)
 export class AuditItemMenuComponent extends ContextMenuEntryComponent {
 
+  public isAuthenticated: Observable<boolean>;
+
   /**
    * Initialize instance variables
    *
    * @param {DSpaceObject} injectedContextMenuObject
    * @param {DSpaceObjectType} injectedContextMenuObjectType
+   * @param {AuthService} authService
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
-    @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType
+    @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
+    private authService: AuthService
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.Audit);
   }
 
+  ngOnInit(): void {
+    this.isAuthenticated = this.authService.isAuthenticated();
+  }
 }

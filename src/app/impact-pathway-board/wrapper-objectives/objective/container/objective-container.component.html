@@ -14,7 +14,7 @@
        (cdkDropListDropped)="listDropped($event)">
     <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
                               class="mb-sm-1 mb-lg-4 mb-5 mr-sm-1 ml-lg-2 mr-lg-2 task-horizontal draggable-task"
-                              [projectId]="projectId"
+                              [projectCommunityId]="projectCommunityId"
                               [impactPathwayId]="impactPathwayStep.parentId"
                               [impactPathwayStepId]="impactPathwayStep.id"
                               [impactPathwayStepType]="impactPathwayStep.type"
@@ -35,7 +35,7 @@
         <i *ngIf="(isDragging | async) && (isDropAllowed | async)" class="fas fa-check fa-5x"></i>
         <i *ngIf="(isDragging | async) && !(isDropAllowed | async)" class="fas fa-exclamation fa-5x"></i>
       </div>
-        
+
     </ipw-impact-path-way-task>
   </div>
   <div class="d-flex justify-content-end"

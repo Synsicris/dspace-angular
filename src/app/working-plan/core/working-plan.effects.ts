@@ -31,6 +31,9 @@ import {
   GenerateWorkpackageStepErrorAction,
   GenerateWorkpackageStepSuccessAction,
   GenerateWorkpackageSuccessAction,
+  InitCompareAction,
+  InitCompareErrorAction,
+  InitCompareSuccessAction,
   InitWorkingplanAction,
   InitWorkingplanErrorAction,
   InitWorkingplanSuccessAction,
@@ -71,6 +74,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SubmissionObjectActionTypes } from '../../submission/objects/submission-objects.actions';
 import { environment } from '../../../environments/environment';
 import { WpActionPackage, WpStepActionPackage } from './working-plan-state.service';
+import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -118,6 +122,7 @@ export class WorkingPlanEffects {
     withLatestFrom(this.store$),
     concatMap(([action, state]: [AddWorkpackageAction, any]) => {
       return this.workingPlanService.linkWorkingPlanObject(
+        state.workingplan.workingplanId,
         action.payload.workpackageId,
         action.payload.place
       ).pipe(
@@ -125,6 +130,7 @@ export class WorkingPlanEffects {
         map((item: Item) => {
           return new RetrieveAllLinkedWorkingPlanObjectsAction(
             action.payload.projectId,
+            state.workingplan.workingplanId,
             state.workingplan.sortOption,
             item.uuid);
         }),
@@ -206,6 +212,8 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.ADD_WORKPACKAGE_STEP),
     concatMap((action: AddWorkpackageStepAction) => {
       return this.itemAuthorityRelationService.addLinkedItemToParent(
+        this.workingPlanService.getWorkingPlanEditSectionName(),
+        this.workingPlanService.getWorkingPlanEditMode(),
         action.payload.parentId,
         action.payload.workpackageStepId,
         environment.workingPlan.workingPlanStepRelationMetadata).pipe(
@@ -246,8 +254,12 @@ export class WorkingPlanEffects {
    */
   @Effect() removeWorkpackage$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.REMOVE_WORKPACKAGE),
-    switchMap((action: RemoveWorkpackageAction) => {
-      return this.workingPlanService.unlinkWorkingPlanObject(action.payload.workpackageId).pipe(
+    withLatestFrom(this.store$),
+    switchMap(([action, state]: [RemoveWorkpackageAction, any]) => {
+      return this.workingPlanService.unlinkWorkingPlanObject(
+        state.workingplan.workingplanId,
+        action.payload.workpackageId
+      ).pipe(
         map(() => new RemoveWorkpackageSuccessAction(action.payload.workpackageId)),
         catchError((error: Error) => {
           if (error) {
@@ -264,6 +276,8 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.REMOVE_WORKPACKAGE_STEP),
     switchMap((action: RemoveWorkpackageStepAction) => {
       return this.itemAuthorityRelationService.removeChildRelationFromParent(
+        this.workingPlanService.getWorkingPlanEditSectionName(),
+        this.workingPlanService.getWorkingPlanEditMode(),
         action.payload.workpackageId,
         action.payload.workpackageStepId,
         environment.workingPlan.workingPlanStepRelationMetadata
@@ -287,7 +301,7 @@ export class WorkingPlanEffects {
     switchMap((action: RetrieveAllLinkedWorkingPlanObjectsAction) => {
       return this.workingPlanService.searchForLinkedWorkingPlanObjects(action.payload.projectId, action.payload.sortOption).pipe(
         map((items: WorkpackageSearchItem[]) => {
-          return new InitWorkingplanAction(items, action.payload.sortOption);
+          return new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption);
         }),
         catchError((error: Error) => {
           if (error) {
@@ -300,11 +314,33 @@ export class WorkingPlanEffects {
   /**
    * Add workpackages to workingplan state
    */
+  @Effect() initCompare$ = this.actions$.pipe(
+    ofType(WorkpackageActionTypes.INIT_COMPARE),
+    withLatestFrom(this.store$),
+    switchMap(([action, state]: [InitCompareAction, any]) => {
+      return this.projectVersionService.compareItemChildrenByMetadata(
+        state.workingplan.workingplanId,
+        action.payload.compareWorkingplanId,
+        environment.workingPlan.workingPlanStepRelationMetadata
+      ).pipe(
+        switchMap((compareItemList: ComparedVersionItem[]) => this.workingPlanService.initCompareWorkingPlan(compareItemList)),
+        map((workpackages: Workpackage[]) => new InitCompareSuccessAction(workpackages)),
+        catchError((error: Error) => {
+          if (error) {
+            console.error(error.message);
+          }
+          return observableOf(new InitCompareErrorAction());
+        }));
+    }));
+
+  /**
+   * Add workpackages to workingplan state
+   */
   @Effect() init$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.INIT_WORKINGPLAN),
     switchMap((action: InitWorkingplanAction) => {
       return this.workingPlanService.initWorkingPlan(action.payload.items).pipe(
-        map((workpackages: Workpackage[]) => new InitWorkingplanSuccessAction(workpackages, action.payload.sortOption)),
+        map((workpackages: Workpackage[]) => new InitWorkingplanSuccessAction(action.payload.workingplanId, workpackages, action.payload.sortOption)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
@@ -321,6 +357,7 @@ export class WorkingPlanEffects {
     withLatestFrom(this.store$),
     switchMap(([action, state]: [InitWorkingplanSuccessAction, any]) => {
       return this.workingPlanService.updateWorkpackagePlace(
+        action.payload.workingplanId,
         state.workingplan.workpackages,
         action.payload.sortOption);
     }));
@@ -473,6 +510,7 @@ export class WorkingPlanEffects {
     withLatestFrom(this.store$),
     switchMap(([action, state]: [SaveWorkpackageOrderAction, any]) => {
       return this.workingPlanService.updateWorkpackagePlace(
+        state.workingplan.workingplanId,
         state.workingplan.workpackages).pipe(
         map(() => new SaveWorkpackageOrderSuccessAction()),
         catchError((error: Error) => {
@@ -541,6 +579,7 @@ export class WorkingPlanEffects {
     private itemAuthorityRelationService: ItemAuthorityRelationService,
     private modalService: NgbModal,
     private notificationsService: NotificationsService,
+    private projectVersionService: ProjectVersionService,
     private store$: Store<any>,
     private translate: TranslateService,
     private workingPlanService: WorkingPlanService

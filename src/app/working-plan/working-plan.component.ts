@@ -1,18 +1,19 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+
 import { environment } from '../../environments/environment';
 import { Workpackage } from './core/models/workpackage-step.model';
 import { WorkingPlanStateService } from './core/working-plan-state.service';
 import { CollectionDataService } from '../core/data/collection-data.service';
 import { FindListOptions } from '../core/data/request.models';
-import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 import { RemoteData } from '../core/data/remote-data';
 import { PaginatedList } from '../core/data/paginated-list.model';
 import { Collection } from '../core/shared/collection.model';
 import { getFirstSucceededRemoteWithNotEmptyData } from '../core/shared/operators';
-import { isEmpty } from '../shared/empty.util';
+import { hasValue, isEmpty } from '../shared/empty.util';
+import { Item } from '../core/shared/item.model';
 
 @Component({
   selector: 'ipw-working-plan',
@@ -21,10 +22,26 @@ import { isEmpty } from '../shared/empty.util';
 })
 export class WorkingPlanComponent implements OnInit, OnDestroy {
 
-  @Input() public projectId: string;
+  /**
+   * The project community's id
+   */
+  @Input() public projectCommunityId: string;
+
+  /**
+   * The working Plan item
+   */
+  @Input() workingPlan: Item;
+
+  /**
+   * A boolean representing if compare mode is active
+   */
+  compareMode: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   workPackageCollectionId: string;
+
   milestoneCollectionId: string;
+
+  private subs: Subscription[] = [];
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -35,13 +52,18 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.retrieveCollections();
+
+    this.subs.push(
+      this.workingPlanStateService.isCompareModeActive()
+        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
+    );
   }
 
   ngAfterViewInit(): void {
     this.workingPlanStateService.isWorkingPlanLoaded().pipe(
       take(1)
     ).subscribe(() => {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectId, environment.workingPlan.workingPlanPlaceMetadata);
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata);
     });
   }
 
@@ -57,6 +79,9 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.workingPlanStateService.dispatchCleanState();
+    this.subs
+      .filter((subscription) => hasValue(subscription))
+      .forEach((subscription) => subscription.unsubscribe());
   }
 
   private retrieveCollections(): void {
@@ -66,7 +91,7 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
     };
     const wpCollId$: Observable<Collection> = this.collectionDataService
       .getAuthorizedCollectionByCommunityAndEntityType(
-        this.projectId,
+        this.projectCommunityId,
         environment.workingPlan.workpackageEntityName,
         findOptions,
         true).pipe(
@@ -77,7 +102,7 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
       );
     const mlCollId$ = this.collectionDataService
       .getAuthorizedCollectionByCommunityAndEntityType(
-        this.projectId,
+        this.projectCommunityId,
         environment.workingPlan.milestoneEntityName,
         findOptions,
         true).pipe(

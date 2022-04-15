@@ -19,7 +19,7 @@
        (cdkDropListDropped)="listDropped($event)">
     <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
                               class="mb-sm-1 mb-lg-4"
-                              [projectId]="projectId"
+                              [projectCommunityId]="projectCommunityId"
                               [impactPathwayId]="(impactPathwayStep$ | async)?.parentId"
                               [impactPathwayStepId]="(impactPathwayStep$ | async)?.id"
                               [impactPathwayStepType]="(impactPathwayStep$ | async)?.type"

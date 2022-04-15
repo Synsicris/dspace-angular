@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, of, Subscription } from 'rxjs';
@@ -23,6 +23,7 @@ import { CollectionDataService } from '../../core/data/collection-data.service';
 import { MetadataSecurityConfigurationService } from '../../core/submission/metadatasecurityconfig-data.service';
 import { MetadataSecurityConfiguration } from '../../core/submission/models/metadata-security-configuration';
 import { createFailedRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { SubmissionEditCanDeactivateService } from './submission-edit-can-deactivate.service';
 import { MYDSPACE_ROUTE } from '../../my-dspace-page/my-dspace-page.component';
 
 /**
@@ -98,6 +99,8 @@ export class SubmissionEditComponent implements OnDestroy, OnInit {
    */
   public metadataSecurityConfiguration: MetadataSecurityConfiguration;
 
+  private canDeactivate = false;
+
   /**
    * Initialize instance variables
    *
@@ -111,17 +114,27 @@ export class SubmissionEditComponent implements OnDestroy, OnInit {
    * @param {TranslateService} translate
    * @param {SubmissionJsonPatchOperationsService} submissionJsonPatchOperationsService
    * @param metadataSecurityConfigDataService
+   * @param canDeactivateService
    */
-  constructor(private changeDetectorRef: ChangeDetectorRef,
-              private notificationsService: NotificationsService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private itemDataService: ItemDataService,
-              private submissionService: SubmissionService,
-              private collectionDataService: CollectionDataService,
-              private translate: TranslateService,
-              private submissionJsonPatchOperationsService: SubmissionJsonPatchOperationsService,
-              private metadataSecurityConfigDataService: MetadataSecurityConfigurationService) {
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private notificationsService: NotificationsService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private itemDataService: ItemDataService,
+    private submissionService: SubmissionService,
+    private collectionDataService: CollectionDataService,
+    private translate: TranslateService,
+    private submissionJsonPatchOperationsService: SubmissionJsonPatchOperationsService,
+    private metadataSecurityConfigDataService: MetadataSecurityConfigurationService,
+    private canDeactivateService: SubmissionEditCanDeactivateService,
+  ) {
+  }
+
+  // @HostListener allows to also guard against browser refresh, close, etc.
+  @HostListener('window:beforeunload')
+  preventRefresh(): boolean {
+    return this.canDeactivate;
   }
 
   /**
@@ -129,6 +142,11 @@ export class SubmissionEditComponent implements OnDestroy, OnInit {
    */
   ngOnInit() {
     this.subs.push(
+      this.route.paramMap.pipe(
+        switchMap((params: ParamMap) => this.canDeactivateService.canDeactivate(params.get('id')))
+      ).subscribe((res) => {
+        this.canDeactivate = res;
+      }),
       this.route.paramMap.pipe(
         switchMap((params: ParamMap) => this.submissionService.retrieveSubmission(params.get('id')).pipe(
           // NOTE new submission is retrieved on the browser side only, so get null on server side rendering

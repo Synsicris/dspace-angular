@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 import { map } from 'rxjs/operators';
 import { CollectionSearchResult } from '../../../object-collection/shared/collection-search-result.model';
-import { SearchResult } from '../../../search/search-result.model';
+import { SearchResult } from '../../../search/models/search-result.model';
 import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { buildPaginatedList, PaginatedList } from '../../../../core/data/paginated-list.model';
 import { followLink } from '../../../utils/follow-link-config.model';
@@ -37,11 +37,13 @@ export class AuthorizedCollectionSelectorComponent extends DSOSelectorComponent 
    */
   @Input() scope: string;
 
-  constructor(protected searchService: SearchService,
-              protected collectionDataService: CollectionDataService,
-              protected notifcationsService: NotificationsService,
-              protected translate: TranslateService,
-              public dsoNameService: DSONameService) {
+  constructor(
+    protected searchService: SearchService,
+    protected collectionDataService: CollectionDataService,
+    protected notifcationsService: NotificationsService,
+    protected translate: TranslateService,
+    public dsoNameService: DSONameService
+  ) {
     super(searchService, notifcationsService, translate, dsoNameService);
   }
 

@@ -1,8 +1,11 @@
 import { Config } from './config.interface';
 
 export interface WorkingPlanConfig extends Config {
+  workingPlanRelationMetadata: string;
   workingPlanFormName: string;
   workingPlanStepsFormName: string;
+  workingPlanEditMode: string;
+  workingPlanEditFormSection: string;
   workingPlanStepStatusMetadata: string;
   workingPlanStepResponsibleMetadata: string;
   workingPlanStepResponsibleAuthority: string;

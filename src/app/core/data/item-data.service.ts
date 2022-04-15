@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError as observableThrowError } from 'rxjs';
 import {
   catchError,
   delay,
@@ -27,16 +27,15 @@ import { ExternalSourceEntry } from '../shared/external-source-entry.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { Item } from '../shared/item.model';
 import { ITEM } from '../shared/item.resource-type';
-import { getFirstSucceededRemoteDataPayload, sendRequest } from '../shared/operators';
+import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload, sendRequest } from '../shared/operators';
 import { URLCombiner } from '../url-combiner/url-combiner';
-
 import { DataService } from './data.service';
 import { DSOChangeAnalyzer } from './dso-change-analyzer.service';
 import { PaginatedList } from './paginated-list.model';
 import { RemoteData } from './remote-data';
 import { DeleteRequest, FindListOptions, GetRequest, PostRequest, PutRequest, RestRequest } from './request.models';
 import { RequestService } from './request.service';
-import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { Bundle } from '../shared/bundle.model';
 import { MetadataMap, MetadataValue } from '../shared/metadata.models';
 import { BundleDataService } from './bundle-data.service';
@@ -46,6 +45,10 @@ import { Metric } from '../shared/metric.model';
 import { GenericConstructor } from '../shared/generic-constructor';
 import { ResponseParsingService } from './parsing.service';
 import { StatusCodeOnlyResponseParsingService } from './status-code-only-response-parsing.service';
+import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+import { RequestParam } from '../cache/models/request-param.model';
+import { ItemSearchParams } from './item-search-params';
+import { validate as uuidValidate } from 'uuid';
 import { Metadata } from '../shared/metadata.utils';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 import { ErrorResponse } from '../cache/response.models';
@@ -57,6 +60,7 @@ import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject } from 
 @dataService(ITEM)
 export class ItemDataService extends DataService<Item> {
   protected linkPath = 'items';
+  protected searchFindAllByIdPath = 'findAllById';
 
   constructor(
     protected requestService: RequestService,
@@ -70,7 +74,7 @@ export class ItemDataService extends DataService<Item> {
     protected comparator: DSOChangeAnalyzer<Item>,
     protected bundleService: BundleDataService,
     protected operationsBuilder: JsonPatchOperationsBuilder,
-    protected itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
+    protected itemJsonPatchOperationsService: ItemJsonPatchOperationsService
   ) {
     super();
   }
@@ -79,6 +83,7 @@ export class ItemDataService extends DataService<Item> {
    * Get the endpoint for browsing items
    *  (When options.sort.field is empty, the default field to browse by will be 'dc.date.issued')
    * @param {FindListOptions} options
+   * @param linkPath
    * @returns {Observable<string>}
    */
   public getBrowseEndpoint(options: FindListOptions = {}, linkPath: string = this.linkPath): Observable<string> {
@@ -89,7 +94,7 @@ export class ItemDataService extends DataService<Item> {
     return this.bs.getBrowseURLFor(field, linkPath).pipe(
       filter((href: string) => isNotEmpty(href)),
       map((href: string) => new URLCombiner(href, `?scope=${options.scopeID}`).toString()),
-      distinctUntilChanged(),);
+      distinctUntilChanged());
   }
 
   /**
@@ -337,27 +342,116 @@ export class ItemDataService extends DataService<Item> {
     );
   }
 
-  updateItemMetadata(itemId: string, metadataName: string, position: number, value: string): Observable<RemoteData<Item>> {
+  /**
+   * Invalidate the cache of the item
+   * @param itemUUID
+   */
+  invalidateItemCache(itemUUID: string) {
+    this.requestService.setStaleByHrefSubstring('item/' + itemUUID);
+  }
+
+  /**
+   * Search for a list of {@link Item}s using the "findAllById" search endpoint.
+   * @param uuidList                    UUID to the objects to search {@link Item}s for. Required.
+   * @param options                     {@link FindListOptions} to provide pagination and/or additional arguments
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
+   * @param reRequestOnStale            Whether or not the request should automatically be re-
+   *                                    requested after the response becomes stale
+   * @param linksToFollow               List of {@link FollowLinkConfig} that indicate which
+   *                                    {@link HALLink}s should be automatically resolved
+   */
+  findAllById(uuidList: string[], options: FindListOptions = {}, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<PaginatedList<Item>>> {
+    return of(new ItemSearchParams(uuidList)).pipe(
+      switchMap((params: ItemSearchParams) => {
+        return this.searchBy(this.searchFindAllByIdPath,
+          this.createSearchOptionsObjectsFindAllByID(params.uuidList, options), useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+      })
+    );
+  }
+
+  /**
+   * Create {@link FindListOptions} with {@link RequestParam}s containing a "uuid" list
+   * @param uuidList  Required parameter values to add to {@link RequestParam} "id"
+   * @param options     Optional initial {@link FindListOptions} to add parameters to
+   */
+  private createSearchOptionsObjectsFindAllByID(uuidList: string[], options: FindListOptions = {}): FindListOptions {
+    let params = [];
+    if (isNotEmpty(options.searchParams)) {
+      params = [...options.searchParams];
+    }
+    uuidList.forEach((uuid) => {
+      params.push(new RequestParam('id', uuid));
+    });
+    return Object.assign(new FindListOptions(), options, {
+      searchParams: [...params]
+    });
+  }
+
+
+  findById(id: string, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
+
+    if (uuidValidate(id)) {
+      const href$ = this.getIDHrefObs(encodeURIComponent(id), ...linksToFollow);
+      return this.findByHref(href$, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+    } else {
+      return this.findByCustomUrl(id, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+    }
+  }
+
+  /**
+   * Returns an observable of {@link RemoteData} of an object, based on its CustomURL or ID, with a list of
+   * {@link FollowLinkConfig}, to automatically resolve {@link HALLink}s of the object
+   * @param id                          CustomUrl or UUID of object we want to retrieve
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
+   * @param reRequestOnStale            Whether or not the request should automatically be re-
+   *                                    requested after the response becomes stale
+   * @param linksToFollow               List of {@link FollowLinkConfig} that indicate which
+   *                                    {@link HALLink}s should be automatically resolved
+   */
+  private findByCustomUrl(id: string, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
+    const searchHref = 'findByCustomURL';
+
+    const options = Object.assign({}, {
+      searchParams: [
+        new RequestParam('q', id),
+      ]
+    });
+
+    const hrefObs = this.getSearchByHref(searchHref, options, ...linksToFollow);
+
+    return this.findByHref(hrefObs, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+  }
+
+  updateItemMetadata(
+    itemId: string,
+    editMode: string,
+    pathName: string,
+    metadataName: string,
+    position: number,
+    value: any
+  ): Observable<RemoteData<Item>> {
     return this.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload(),
       map((item: Item) => Metadata.first(item.metadata, metadataName)),
       tap((metadataValue: MetadataValue) => {
         if (isNotEmpty(metadataValue)) {
-          this.replaceMetadataPatch(metadataName, position, value);
+          this.replaceMetadataPatch(pathName, metadataName, position, value);
         } else {
-          this.addMetadataPatch(metadataName, value);
+          this.addMetadataPatch(pathName, metadataName, value);
         }
       }),
       delay(200),
-      mergeMap(() => this.executeItemPatch(itemId, 'metadata'))
+      mergeMap(() => this.executeEditItemPatch(itemId, editMode, pathName))
     );
   }
 
-  public updateMultipleItemMetadata(itemId: string, metadata: MetadataMap): Observable<RemoteData<Item>> {
+  public updateMultipleItemMetadata(itemId: string, editMode: string, pathName: string, metadata: MetadataMap): Observable<RemoteData<Item>> {
     return this.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload(),
       tap((item: Item) => {
-        const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+        const pathCombiner = new JsonPatchOperationPathCombiner(pathName);
         Object.keys(metadata)
           .forEach((metadataName) => {
             const metadataValues: MetadataValue[] = metadata[metadataName];
@@ -371,31 +465,47 @@ export class ItemDataService extends DataService<Item> {
                 confidence: metadataValue.confidence
               };
               if (isNotEmpty(itemMetadataValues) && isNotEmpty(itemMetadataValues[place])) {
-                this.replaceMetadataPatch(metadataName, place, valueToSave);
+                this.replaceMetadataPatch(pathName, metadataName, place, valueToSave);
               } else {
-                this.addMetadataPatch(metadataName, valueToSave);
+                this.addMetadataPatch(pathName, metadataName, valueToSave);
               }
             });
           });
       }),
       delay(200),
-      mergeMap(() => this.executeItemPatch(itemId, 'metadata'))
+      mergeMap(() => this.executeEditItemPatch(itemId, editMode, pathName))
     );
   }
 
-  replaceMetadataPatch(metadataName: string, position: number, value: string|MetadataValue): void {
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+  replaceMetadataPatch(pathName: string, metadataName: string, position: number, value: string|MetadataValue): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner(pathName);
     const path = pathCombiner.getPath([metadataName, position.toString()]);
     this.operationsBuilder.replace(path, value, true);
   }
 
-  addMetadataPatch(metadataName: string, value: string|MetadataValue): void {
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+  addMetadataPatch(pathName: string, metadataName: string, value: string|MetadataValue): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner(pathName);
     const path = pathCombiner.getPath([metadataName]);
     this.operationsBuilder.add(path, value, true, true);
   }
 
-  private executeItemPatch(objectId: string, pathName: string): Observable<RemoteData<Item>> {
+  executeEditItemPatch(objectId: string, editMode: string, pathName: string): Observable<RemoteData<Item>> {
+    const editItemId = `${objectId}:${editMode}`;
+    return this.itemJsonPatchOperationsService.jsonPatchByResourceType(
+      'edititems',
+      editItemId,
+      pathName).pipe(
+      take(1),
+      mergeMap(() => this.findById(objectId).pipe(getFirstCompletedRemoteData())),
+      catchError((error: ErrorResponse|string) => {
+        const errMsg: any = (error as ErrorResponse).errorMessage || error;
+        console.error(errMsg);
+        return observableThrowError(new Error(errMsg));
+      })
+    );
+  }
+
+  executeItemPatch(objectId: string, pathName: string): Observable<RemoteData<Item>> {
     return this.itemJsonPatchOperationsService.jsonPatchByResourceType(
       'items',
       objectId,

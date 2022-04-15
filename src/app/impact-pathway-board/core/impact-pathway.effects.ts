@@ -77,6 +77,7 @@ import { MetadataValue } from '../../core/shared/metadata.models';
 import { SubmissionObjectActionTypes } from '../../submission/objects/submission-objects.actions';
 import { ItemDataService } from '../../core/data/item-data.service';
 import { RemoteData } from '../../core/data/remote-data';
+import { ProjectItemService } from '../../core/project/project-item.service';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -112,7 +113,8 @@ export class ImpactPathwayEffects {
       this.notificationsService.success(null, this.translate.get('impact-pathway.create.success'));
     }),
     tap((action: GenerateImpactPathwaySuccessAction) => {
-      this.impactPathwayService.redirectToEditPage(action.payload.projectId ,action.payload.item.id);
+      this.impactPathwayService.invalidateImpactPathwaysResultsCache();
+      this.impactPathwayService.redirectToEditPage(action.payload.item.id);
     }));
 
   /**
@@ -146,9 +148,9 @@ export class ImpactPathwayEffects {
   @Effect() generateTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK),
     switchMap((action: GenerateImpactPathwayTaskAction) => {
-      return this.impactPathwayService.generateImpactPathwayTaskItem(
+      return this.projectItemService.generateEntityItemWithinProject(
+        this.impactPathwayService.getImpactPathwaysTaskFormSection(),
         action.payload.projectId,
-        action.payload.stepId,
         action.payload.taskType,
         action.payload.metadata).pipe(
         map((item: Item) => new GenerateImpactPathwayTaskSuccessAction(
@@ -197,6 +199,8 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK),
     concatMap((action: AddImpactPathwayTaskAction) => {
       return this.itemAuthorityRelationService.addLinkedItemToParent(
+        this.impactPathwayService.getImpactPathwaysEditFormSection(),
+        this.impactPathwayService.getImpactPathwaysEditMode(),
         action.payload.stepId,
         action.payload.taskId,
         environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
@@ -235,9 +239,9 @@ export class ImpactPathwayEffects {
   @Effect() generateSubTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUB_TASK),
     switchMap((action: GenerateImpactPathwaySubTaskAction) => {
-      return this.impactPathwayService.generateImpactPathwayTaskItem(
+      return this.projectItemService.generateEntityItemWithinProject(
+        this.impactPathwayService.getImpactPathwaysTaskFormSection(),
         action.payload.projectId,
-        action.payload.parentTaskId,
         action.payload.taskType,
         action.payload.metadata).pipe(
         map((item: Item) => new GenerateImpactPathwaySubTaskSuccessAction(
@@ -274,6 +278,8 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK),
     concatMap((action: AddImpactPathwaySubTaskAction) => {
       return this.itemAuthorityRelationService.addLinkedItemToParent(
+        this.impactPathwayService.getImpactPathwaysEditFormSection(),
+        this.impactPathwayService.getImpactPathwaysEditMode(),
         action.payload.parentTaskId,
         action.payload.taskId,
         environment.impactPathway.impactPathwayTaskRelationMetadata
@@ -326,7 +332,7 @@ export class ImpactPathwayEffects {
             )
           );
           return [...actions, new RemoveImpactPathwaySuccessAction(
-            action.payload.projectId,
+            action.payload.projectItemId,
             item.self)];
         }),
         catchError((error: Error) => {
@@ -345,7 +351,7 @@ export class ImpactPathwayEffects {
     tap((action: RemoveImpactPathwaySuccessAction) => {
       this.impactPathwayService.removeByHref(action.payload.impactPathwayId);
       this.notificationsService.success(null, this.translate.get('impact-pathway.remove.success'));
-      this.impactPathwayService.redirectToProjectPage(action.payload.projectId);
+      this.impactPathwayService.redirectToProjectPage(action.payload.projectItemId);
     }),
   );
 
@@ -359,6 +365,8 @@ export class ImpactPathwayEffects {
         mergeMap((parentItem: Item) => {
           return observableFrom(parentItem.findMetadataSortedByPlace(environment.impactPathway.impactPathwayTaskRelationMetadata)).pipe(
             concatMap((relationMetadata: MetadataValue) => this.itemAuthorityRelationService.removeParentRelationFromChild(
+              this.impactPathwayService.getImpactPathwaysEditFormSection(),
+              this.impactPathwayService.getImpactPathwaysEditMode(),
               action.payload.stepId,
               relationMetadata.authority,
               environment.impactPathway.impactPathwayParentRelationMetadata
@@ -387,6 +395,8 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK),
     switchMap((action: RemoveImpactPathwayTaskAction) => {
       return this.itemAuthorityRelationService.removeChildRelationFromParent(
+        this.impactPathwayService.getImpactPathwaysEditFormSection(),
+        this.impactPathwayService.getImpactPathwaysEditMode(),
         action.payload.parentId,
         action.payload.taskId,
         environment.impactPathway.impactPathwayTaskRelationMetadata
@@ -410,6 +420,8 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUB_TASK),
     switchMap((action: RemoveImpactPathwaySubTaskAction) => {
       return this.itemAuthorityRelationService.removeChildRelationFromParent(
+        this.impactPathwayService.getImpactPathwaysEditFormSection(),
+        this.impactPathwayService.getImpactPathwaysEditMode(),
         action.payload.parentTaskId,
         action.payload.taskId,
         environment.impactPathway.impactPathwayTaskRelationMetadata
@@ -523,6 +535,8 @@ export class ImpactPathwayEffects {
     switchMap((action: PatchImpactPathwayMetadataAction) => {
       return this.itemService.updateItemMetadata(
         action.payload.impactPathwayId,
+        this.impactPathwayService.getImpactPathwaysEditMode(),
+        this.impactPathwayService.getImpactPathwaysEditFormSection(),
         action.payload.metadata,
         action.payload.metadataIndex,
         action.payload.value
@@ -580,6 +594,8 @@ export class ImpactPathwayEffects {
     switchMap((action: PatchImpactPathwayTaskMetadataAction) => {
       return this.itemService.updateItemMetadata(
         action.payload.taskId,
+        this.impactPathwayService.getImpactPathwaysEditMode(),
+        this.impactPathwayService.getImpactPathwaysEditFormSection(),
         action.payload.metadata,
         action.payload.metadataIndex,
         action.payload.value
@@ -677,7 +693,7 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.COMPLETE_EDITING_IMPACT_PATHWAY_TASK_LINKS),
     withLatestFrom(this.store$),
     map(([action, currentState]: [CompleteEditingImpactPathwayTaskLinksAction, any]) => {
-      const impactPathwayState: ImpactPathwayState = currentState.core.impactPathway;
+      const impactPathwayState: ImpactPathwayState = currentState.impactPathway;
       const linksMap: ImpactPathwayLinksMap = this.impactPathwayLinksService.createMapOfLinksToFetch(impactPathwayState.links.toSave,
         impactPathwayState.links.toDelete
       );
@@ -716,6 +732,7 @@ export class ImpactPathwayEffects {
     private itemService: ItemDataService,
     private modalService: NgbModal,
     private notificationsService: NotificationsService,
+    private projectItemService: ProjectItemService,
     private store$: Store<any>,
     private translate: TranslateService
   ) {

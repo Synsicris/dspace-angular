@@ -85,6 +85,8 @@ describe('ItemDataService', () => {
     });
   }
 
+  let serviceSpy;
+
   function initTestService() {
     return new ItemDataService(
       requestService,
@@ -194,6 +196,28 @@ describe('ItemDataService', () => {
         expect(requestService.send).toHaveBeenCalledWith(jasmine.any(PostRequest));
         done();
       });
+    });
+  });
+
+  describe('when cache is invalidated', () => {
+    beforeEach(() => {
+      service = initTestService();
+    });
+    it('should call setStaleByHrefSubstring', () => {
+      service.invalidateItemCache('uuid');
+      expect(requestService.setStaleByHrefSubstring).toHaveBeenCalled();
+    });
+  });
+
+
+  describe('when id is passed when calling findById', () => {
+    beforeEach(() => {
+      service = initTestService();
+    });
+    it('should call find by href if valid uuid', () => {
+      serviceSpy = spyOn(service, 'findByHref');
+      service.findById('092b59e8-8159-4e70-98b5-93ec60bd3431');
+      expect(service.findByHref).toHaveBeenCalled();
     });
   });
 

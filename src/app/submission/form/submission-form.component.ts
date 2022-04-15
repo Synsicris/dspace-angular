@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   ViewChildren
 } from '@angular/core';
-import { combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { AuthService } from '../../core/auth/auth.service';
 import { SubmissionDefinitionsModel } from '../../core/config/models/config-submission-definitions.model';
@@ -29,7 +29,6 @@ import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { MetadataSecurityConfigurationService } from '../../core/submission/metadatasecurityconfig-data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SubmissionUploadFilesComponent } from './submission-upload-files/submission-upload-files.component';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 /**
  * This component represents the submission form.

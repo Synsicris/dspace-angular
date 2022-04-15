@@ -30,7 +30,9 @@ import { filterReducer, SearchFiltersState } from './shared/search/search-filter
 import { sidebarFilterReducer, SidebarFiltersState } from './shared/sidebar/filter/sidebar-filter.reducer';
 import { sidebarReducer, SidebarState } from './shared/sidebar/sidebar.reducer';
 import { truncatableReducer, TruncatablesState } from './shared/truncatable/truncatable.reducer';
-import { themeReducer, ThemeState } from './shared/theme-support/theme.reducer';
+import { ThemeState, themeReducer } from './shared/theme-support/theme.reducer';
+import { StatisticsReducer, StatisticsState } from './core/statistics/statistics.reducer';
+import { correlationIdReducer } from './correlation-id/correlation-id.reducer';
 
 export interface AppState {
   router: fromRouter.RouterReducerState;
@@ -51,6 +53,8 @@ export interface AppState {
   communityList: CommunityListState;
   epeopleRegistry: EPeopleRegistryState;
   groupRegistry: GroupRegistryState;
+  statistics: StatisticsState;
+  correlationId: string;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -72,6 +76,8 @@ export const appReducers: ActionReducerMap<AppState> = {
   communityList: CommunityListReducer,
   epeopleRegistry: ePeopleRegistryReducer,
   groupRegistry: groupRegistryReducer,
+  statistics: StatisticsReducer,
+  correlationId: correlationIdReducer
 };
 
 export const routerStateSelector = (state: AppState) => state.router;

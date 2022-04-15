@@ -3,6 +3,8 @@ import { findIndex, remove } from 'lodash';
 import { Workpackage } from './models/workpackage-step.model';
 import {
   AddWorkpackageStepSuccessAction,
+  InitCompareAction,
+  InitCompareSuccessAction,
   InitWorkingplanSuccessAction,
   MoveWorkpackageAction,
   MoveWorkpackageStepAction,
@@ -40,27 +42,34 @@ export interface WorkpackageEntries {
  * The Impact Pathways State
  */
 export interface WorkingPlanState {
+  workingplanId: string;
+  compareWorkingplanId?: string;
   workpackages: WorkpackageEntries;
   workpackageToRemove: string;
   workpackageToUpdate: string;
   loaded: boolean;
+  initializing: boolean;
   processing: boolean;
   lastAddedNodes: string[];
   moving: boolean;
   chartDateView: ChartDateViewType;
   sortOption: string;
+  compareMode: boolean;
 }
 
 const workpackageInitialState: WorkingPlanState = {
+  workingplanId: '',
   workpackages: {},
   workpackageToRemove: '',
   workpackageToUpdate: '',
   loaded: false,
+  initializing: true,
   processing: false,
   lastAddedNodes: [],
   moving: false,
   chartDateView: ChartDateViewType.month,
-  sortOption: ''
+  sortOption: '',
+  compareMode: false
 };
 
 /**
@@ -89,6 +98,7 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
     case WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS: {
       const lastAddedNodes = (action.payload.lastAddedId) ? [action.payload.lastAddedId] : [];
       return Object.assign({}, workpackageInitialState, {
+        workingplanId: action.payload.workingplanId,
         processing: true,
         lastAddedNodes: lastAddedNodes
       });
@@ -109,6 +119,7 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
     case WorkpackageActionTypes.ADD_WORKPACKAGE_ERROR:
     case WorkpackageActionTypes.ADD_WORKPACKAGE_STEP_ERROR:
     case WorkpackageActionTypes.GENERATE_WORKPACKAGE_ERROR:
+    case WorkpackageActionTypes.GENERATE_WORKPACKAGE_STEP_ERROR:
     case WorkpackageActionTypes.INIT_WORKINGPLAN_ERROR: {
       return Object.assign({}, state, {
         processing: false
@@ -143,6 +154,14 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
         workpackageToRemove: '',
         processing: false
       });
+    }
+
+    case WorkpackageActionTypes.INIT_COMPARE: {
+      return initCompare(state, action as InitCompareAction);
+    }
+
+    case WorkpackageActionTypes.INIT_COMPARE_SUCCESS: {
+      return initWorkpackages(state, action as InitCompareSuccessAction);
     }
 
     case WorkpackageActionTypes.INIT_WORKINGPLAN_SUCCESS: {
@@ -268,7 +287,7 @@ function addWorkpackageStep(state: WorkingPlanState, action: AddWorkpackageStepS
  * @return WorkingPlanState
  *    the new state.
  */
-function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSuccessAction): WorkingPlanState {
+function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSuccessAction|InitCompareSuccessAction): WorkingPlanState {
   const workpackages = {};
   action.payload.workpackages.forEach((workpackage: Workpackage) => {
     workpackages[workpackage.id] = workpackage;
@@ -276,9 +295,10 @@ function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSucces
 
   return Object.assign({}, state, {
     workpackages: workpackages,
+    initializing: false,
     processing: false,
     loaded: true,
-    sortOption: action.payload.sortOption
+    sortOption: (action instanceof InitWorkingplanSuccessAction) ? action.payload.sortOption : state.sortOption
   });
 }
 
@@ -505,5 +525,24 @@ function revertWorkpackageStepOrder(state: WorkingPlanState, action: SaveWorkpac
       [action.payload.workpackageId]: newWorpackage
     }),
     moving: false
+  });
+}
+
+/**
+ * Init state for comparing.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitCompareAction
+ * @return WorkingPlanState
+ *    the new state.
+ */
+function initCompare(state: WorkingPlanState, action: InitCompareAction) {
+  return Object.assign({}, state, {
+    compareWorkingplanId: action.payload.compareWorkingplanId,
+    compareMode: true,
+    initializing: true,
+    loaded: false
   });
 }
