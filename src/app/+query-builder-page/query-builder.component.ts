@@ -1,6 +1,5 @@
 import {
   SearchConfig,
-  FilterConfig,
 } from './../core/shared/search/search-filters/search-config.model';
 
 import { getRemoteDataPayload } from './../core/shared/operators';
@@ -8,7 +7,6 @@ import { SearchService } from './../core/shared/search/search.service';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { hasValue } from '../shared/empty.util';
-import { SearchFilterConfig } from '../shared/search/models/search-filter-config.model';
 import { Router } from '@angular/router';
 import { isEqual } from 'lodash';
 
@@ -42,6 +40,7 @@ export class QueryBuilderComponent implements OnInit {
   searchForm: FormGroup = new FormGroup({
     queryArray: new FormArray([
       new FormGroup({
+        defaultFilter: new FormControl(null),
         queryGroup: new FormArray([this.initFormArray()]),
       }),
     ]),
@@ -62,7 +61,7 @@ export class QueryBuilderComponent implements OnInit {
    */
   getSearchData() {
     this.searchService
-      .getSearchConfigurationFor()
+      .getSearchConfigurationFor(null , this.configurationName)
       .pipe(getRemoteDataPayload())
       .subscribe((res: SearchConfig) => {
         if (res) {
@@ -99,6 +98,11 @@ export class QueryBuilderComponent implements OnInit {
     }
   }
 
+  asdf(){
+    console.log(this.searchForm.value, 'this.searchForm.value');
+
+  }
+
   /**
    * Compose the query string based on given conditions
    * @returns the full query string
@@ -128,9 +132,8 @@ export class QueryBuilderComponent implements OnInit {
    */
   protected initFormArray(): FormGroup {
     return this.formBuilder.group({
-      filter: this.formBuilder.control(''),
-      operator: this.formBuilder.control(''),
-      value: this.formBuilder.control(''),
+      filter: this.formBuilder.control({value: null , disabled: true}),
+      value: this.formBuilder.control({value: null , disabled: true}),
     });
   }
 
@@ -141,6 +144,7 @@ export class QueryBuilderComponent implements OnInit {
     this.queryArray.push(new FormControl(''));
     this.queryArray.push(
       new FormGroup({
+        defaultFilter: new FormControl(null),
         queryGroup: new FormArray([this.initFormArray()]),
       })
     );
@@ -172,6 +176,7 @@ export class QueryBuilderComponent implements OnInit {
     this.searchForm = new FormGroup({
       queryArray: new FormArray([
         new FormGroup({
+          defaultFilter: new FormControl(null),
           queryGroup: new FormArray([this.initFormArray()]),
         }),
       ]),

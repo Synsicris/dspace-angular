@@ -1,19 +1,20 @@
-import { isEqual } from 'lodash';
+import { SearchOptions } from './../../shared/search/models/search-options.model';
+import { map } from 'rxjs/operators';
+import { SearchService } from './../../core/shared/search/search.service';
+import { FacetValues } from './../../shared/search/models/facet-values.model';
+import { getRemoteDataPayload } from './../../core/shared/operators';
+import { FacetValue } from './../../shared/search/models/facet-value.model';
+import { SearchFilterConfig } from './../../shared/search/models/search-filter-config.model';
 import { SearchConfig } from './../../core/shared/search/search-filters/search-config.model';
 import { Component, Input, OnInit } from '@angular/core';
 import {
   ControlContainer,
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   FormGroupDirective,
 } from '@angular/forms';
-
-export interface FilterOptions {
-  disabled: boolean;
-  filter: string;
-}
+import { isEqual } from 'lodash';
 
 @Component({
   selector: 'ds-query-condition-group',
@@ -42,67 +43,143 @@ export class QueryConditionGroupComponent implements OnInit {
 
   formGroup: FormGroup;
 
-  /**
-   * get the operators list for a selected filter
-   *
-   * @type {Map<string, string[]>}
-   * @memberof QueryConditionGroupComponent
-   */
-  conditionObj: Map<string, string[]> = new Map();
+  // -------------------------------------------------------------------------------------
 
-  logicalOperators: string[] = ['and', 'or'];
+  searchFilterConfigs: SearchFilterConfig[] = [];
 
-  /**
-   * get filter list
-   *
-   * @type {FilterOptions[]}
-   * @memberof QueryConditionGroupComponent
-   */
-  filterList: FilterOptions[] = [];
+  facetValues: FacetValue[] = [];
+
+  firstDefaultFilter = 'itemtype';
+
+  firstDefaultValues: FacetValue[] = [];
+
+  secondColumnFilters: SearchFilterConfig[] = [];
+
+  filterValuesMap: Map<string, FacetValue[]> = new Map<string, FacetValue[]>();
+
+  selectedValuesPerFilter: Map<string, string[]> = new Map<string, string[]>();
 
   constructor(
     private formBuilder: FormBuilder,
-    private rootFormGroup: FormGroupDirective
-  ) {}
+    private rootFormGroup: FormGroupDirective,
+    private searchService: SearchService
+  ) { }
 
   ngOnInit(): void {
     this.formGroup = (
       this.rootFormGroup.control.get('queryArray') as FormArray
     ).controls[this.formGroupName];
 
-    this.filterList = this.searchConfig.filters.map((x) => {
-      return { disabled: false, filter: x.filter };
+    this.getSearchFilterConfigs();
+  }
+
+  getSearchFilterConfigs() {
+    this.searchService
+      .getConfig(null, 'default')
+      .pipe(getRemoteDataPayload())
+      .subscribe((res: SearchFilterConfig[]) => {
+        if (res) {
+          this.searchFilterConfigs = res;
+
+          this.getFirstdefaultValues(this.firstDefaultFilter);
+        }
+      });
+  }
+
+  getFirstdefaultValues(searchFilter: string, page: number = 1) {
+
+    const searchFilterConfig = this.searchFilterConfigs?.find(
+      (x) => x.name == searchFilter
+    );
+    if (searchFilterConfig) {
+      this.searchService
+        .getFacetValuesFor(searchFilterConfig, page)
+        .pipe(getRemoteDataPayload())
+        .subscribe((res: FacetValues) => {
+          if (res) {
+            let filterValues = res.page.map((value) => {
+              return {
+                ...value,
+                disable: false,
+              };
+            });
+            this.filterValuesMap.set(this.firstDefaultFilter, filterValues);
+            this.firstDefaultValues = filterValues;
+          }
+        });
+    }
+  }
+
+  onDefaultValueSelect(selectedValue) {
+    this.searchFilterConfigs.forEach((config) => {
+      this.searchService
+        .getFacetValuesFor(config, 1)
+        .pipe(
+          getRemoteDataPayload(),
+          map((c: FacetValues) => {
+            if (c && c.page.length > 0) {
+              this.secondColumnFilters.push(config);
+              // TODO: disable filter option if no value available
+              this.enableFormControl(0, 'filter');
+              (
+                this.filterValuesMap
+                  .get(this.firstDefaultFilter)
+                  .find((x) => x.value == selectedValue) as any
+              ).disable = true;
+            }
+          })
+        )
+        .subscribe();
     });
   }
 
-  /**
-   * on filter change event get operation list
-   * and disable the filter option
-   * @param event select / change event
-   */
-  onFilterChange(event) {
-    let filterValue = event.target.value;
-    if (filterValue) {
-      let operatorsConfig = this.searchConfig.filters.find((x) =>
-        isEqual(x.filter, filterValue)
-      ).operators;
-      // get operation list per selected filter
-      const operators = operatorsConfig.map((x) => x.operator);
-      this.conditionObj.set(filterValue, operators);
-      // disable selected filter
-      this.filterList.find((x) => isEqual(x.filter, filterValue)).disabled =
-        true;
-      // If a filter was selected before and now is not in use, enable it.
-      let selectedFilters = this.queryGroup.value;
-      this.filterList.map((f) => {
-        if (
-          f.disabled &&
-          !selectedFilters.some((x) => isEqual(x.filter, f.filter))
-        ) {
-          f.disabled = false;
-        }
-      });
+  onFilterSelect(searchFilter: string, page: number = 1, idx: number) {
+    const searchFilterConfig = this.searchFilterConfigs?.find(
+      (x) => x.name == searchFilter
+    );
+    if (searchFilterConfig) {
+      this.searchService
+        .getFacetValuesFor(searchFilterConfig, page)
+        .pipe(getRemoteDataPayload())
+        .subscribe((res: FacetValues) => {
+          if (res.page) {
+            if (!this.filterValuesMap.has(searchFilter)) {
+              let filterValues = res.page.map((value) => {
+                return {
+                  ...value,
+                  disable: false,
+                };
+              });
+              this.filterValuesMap.set(searchFilter, filterValues);
+            }
+            this.enableFormControl(idx, 'value');
+          }
+        });
     }
+  }
+
+  onValueSelect(selectedValue: string, parentFilter: string) {
+    (
+      this.filterValuesMap
+        .get(parentFilter)
+        .find((x) => x.value == selectedValue) as any
+    ).disable = true;
+    let disabledValues = this.filterValuesMap
+      .get(parentFilter)
+      .filter((x: any) => x.disable);
+
+    disabledValues.forEach((x) => {
+      if (
+        !this.queryGroup.value.find((f) => f.value == x.value) &&
+        !isEqual(x.value, this.formGroup.get('defaultFilter').value)
+      ) {
+        (
+          this.filterValuesMap
+            .get(parentFilter)
+            .find((v) => v.value == x.value) as any
+        ).disable = false;
+      }
+    });
   }
 
   /**
@@ -110,7 +187,6 @@ export class QueryConditionGroupComponent implements OnInit {
    * add a new query statement
    */
   addQueryStatement(): void {
-    this.queryGroup.push(new FormControl(''));
     this.queryGroup.push(this.initFormArray());
   }
 
@@ -131,9 +207,8 @@ export class QueryConditionGroupComponent implements OnInit {
    */
   initFormArray(): FormGroup {
     return this.formBuilder.group({
-      filter: this.formBuilder.control(''),
-      operator: this.formBuilder.control(''),
-      value: this.formBuilder.control(''),
+      filter: this.formBuilder.control({ value: null, disabled: false }),
+      value: this.formBuilder.control({ value: null, disabled: true }),
     });
   }
 
@@ -144,16 +219,102 @@ export class QueryConditionGroupComponent implements OnInit {
   deleteCondition(index: number) {
     if (index > -1) {
       // when a condition is deleted, the filter is enabled again
-      let filter = this.filterList.find((x) =>
-        isEqual(x.filter, this.queryGroup.controls[index].get('filter').value)
-      );
-      if (filter) {
-        filter.disabled = false;
-      }
-      // remove logical operator
-      this.queryGroup.removeAt(index);
       // remove the query statement
       this.queryGroup.removeAt(index);
     }
+  }
+
+  enableFormControl(idx: number, name: string) {
+    if (this.queryGroup.get(`${idx}.${name}`).value) {
+      this.queryGroup.get(`${idx}.${name}`).setValue(null);
+    } else {
+      this.queryGroup.get(`${idx}.${name}`).enable();
+    }
+    this.queryGroup.updateValueAndValidity();
+  }
+
+  onFirstDropdownOpen() {
+    // calc disabled fields for first default values
+    if (this.formGroup.get('defaultFilter').value) {
+      let disabledValues = this.filterValuesMap
+        .get(this.firstDefaultFilter)
+        .filter((x: any) => x.disable);
+
+      this.firstDefaultValues.forEach(x => {
+        if (disabledValues.some(v => v.value == x.value)) {
+          (x as any).disable = true;
+        }
+      })
+    }
+  }
+
+  onValuesScroll(searchFilter: string, idx: number) {
+    this.getFacetValues('scroll',searchFilter, idx);
+  }
+
+  private getFacetValues(mode : string, searchFilter: string, page : number = 1, idx?: number , searchOptions?: SearchOptions ) {
+
+    let calPage:number = page;
+
+    if (mode == 'scroll') {
+      if (this.filterValuesMap
+        .get(searchFilter).length > 0) {
+        calPage = this.filterValuesMap
+          .get(searchFilter).length / 10 + 1;
+      }
+    }
+
+
+    const searchFilterConfig = this.searchFilterConfigs?.find(
+      (x) => x.name == searchFilter
+    );
+
+    if (searchFilterConfig) {
+      this.searchService
+        .getFacetValuesFor(searchFilterConfig, calPage, searchOptions)
+        .pipe(getRemoteDataPayload())
+        .subscribe((res: FacetValues) => {
+          if (res && res.page?.length > 0) {
+            let filterValues = res.page.map((value) => {
+              return {
+                ...value,
+                disable: false,
+              };
+            });
+
+            if (!this.filterValuesMap.has(searchFilter)) {
+              this.filterValuesMap.set(searchFilter, filterValues);
+            } else if(calPage > 1 && this.filterValuesMap.has(searchFilter)) {
+              let existingValues = this.filterValuesMap.get(searchFilter);
+              this.filterValuesMap.set(searchFilter, [...filterValues, ...existingValues]);
+            }
+
+            if (idx) {
+               this.enableFormControl(idx, 'value');
+            }
+          }
+        });
+    }
+  }
+
+  searchValue(event) {
+    console.log(event);
+
+    const searchOptions: SearchOptions = new SearchOptions({
+      configuration: ' default',
+      filters: [{
+        values: [event.term],
+        key: `f.${this.firstDefaultFilter}`,
+        operator: 'contains'
+      }]
+    });
+
+    // TODO: search value
+    // https://dspacecris7.4science.cloud/server/api/discover/facets/itemtype?page=0&size=10&configuration=%20default&f.itemtype=other,equals
+
+    // returns values {label , type }
+    // get and bind with label
+
+    this.getFacetValues('search' ,this.firstDefaultFilter, 1, null, searchOptions);
   }
 }

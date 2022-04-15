@@ -29,10 +29,10 @@
 
           <!-- if FormControl -->
           <ng-template #formControlTemplate>
-            <div class="row mb-2 pl-3" *ngIf="!isLast" >
+            <div class="row mb-2 pl-3 operator-row" *ngIf="!isLast" >
               <div class="col-md-2">
                 <select class="form-control"[formControlName]="i">
-                  <option [value]="operator" *ngFor="let operator of logicalOperators">
+                  <option [value]="operator" *ngFor="let operator of logicalOperators" [selected]="operator">
                     {{ operator | uppercase }}
                   </option>
                 </select>
@@ -53,6 +53,10 @@
       <div class="col-md-2">
         <button type="button" class="btn btn-block btn-primary" (click)="filter()">
           Filter
+        </button>
+
+        <button type="button" class="btn btn-block btn-primary" (click)="asdf()">
+          Form
         </button>
       </div>
     </div>

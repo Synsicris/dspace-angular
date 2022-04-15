@@ -6,6 +6,7 @@ import { QueryConditionGroupComponent } from './query-condition-group/query-cond
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ControlTypeCheckerPipe } from './control-type-checker.pipe';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [QueryBuilderComponent, QueryConditionGroupComponent, ControlTypeCheckerPipe],
@@ -14,7 +15,8 @@ import { ControlTypeCheckerPipe } from './control-type-checker.pipe';
     QueryBuilderRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule
+    TranslateModule,
+    NgSelectModule
   ]
 })
 export class QueryBuilderModule { }
