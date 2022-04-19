@@ -100,7 +100,6 @@ export class QueryBuilderComponent implements OnInit {
 
   asdf(){
     console.log(this.searchForm.value, 'this.searchForm.value');
-
   }
 
   /**
@@ -112,11 +111,14 @@ export class QueryBuilderComponent implements OnInit {
     for (const query of this.searchForm.controls['queryArray'].value) {
       if (query.queryGroup && query.queryGroup.length > 0) {
         for (const group of query['queryGroup']) {
-          if (group.filter && group.operator && group.value) {
-            fullQuery =
+          if (group.filter && group.value) {
+            if (query.queryGroup[query.queryGroup - 1]) {
+              fullQuery =
               fullQuery + `${group.filter}:(${group.value})${group.operator} `;
-          } else if (hasValue(group) && typeof group === 'string') {
-            fullQuery = fullQuery + `${group} `;
+            } else {
+              fullQuery =
+              fullQuery + `${group.filter}:(${group.value})${group.operator} AND`;
+            }
           }
         }
       } else if (hasValue(query) && typeof query === 'string') {
@@ -141,7 +143,7 @@ export class QueryBuilderComponent implements OnInit {
    * add new query group
    */
   addGroup() {
-    this.queryArray.push(new FormControl(''));
+    this.queryArray.push(new FormControl('OR'));
     this.queryArray.push(
       new FormGroup({
         defaultFilter: new FormControl(null),
@@ -159,7 +161,6 @@ export class QueryBuilderComponent implements OnInit {
       this.queryArray.removeAt(index);
       if (isEqual(index, 0)) {
         // remove logical operator
-        console.log(this.queryArray);
         this.queryArray.removeAt(index);
       } else {
         // remove logical operator

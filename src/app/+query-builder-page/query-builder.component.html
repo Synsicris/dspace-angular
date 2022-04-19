@@ -12,16 +12,16 @@
               queryStatement | dsControlTypeChecker;
               else formControlTemplate
             ">
-            <ds-query-condition-group [formGroupName]="i" [searchConfig]="searchFilterData">
+            <ds-query-condition-group [formGroupName]="i" [configurationName]="configurationName" [searchConfig]="searchFilterData">
             </ds-query-condition-group>
             <div class="row">
               <div class="col text-right">
                 <button type="button" class="btn btn-inline btn-danger" (click)="deleteGroup(i)"
                   *ngIf="queryArray.length > 1">
-                  <i class="fa fa-trash"></i> &nbsp; Delete Group above
+                  <i  aria-hidden="true" class="fa fa-trash"></i> &nbsp; Delete Group above
                 </button>
                 <button type="button" class="mr-2 btn btn-inline btn-dark" *ngIf="isLast" (click)="addGroup()">
-                  <i class="fa fa-plus"></i> &nbsp; Add Filter group
+                  <i  aria-hidden="true" class="fa fa-plus"></i> &nbsp; Add Filter group
                 </button>
               </div>
             </div>
@@ -51,12 +51,12 @@
         </button>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-block btn-primary" (click)="filter()">
+        <button type="button" class="btn-block btn btn-info" (click)="filter()">
           Filter
         </button>
 
         <button type="button" class="btn btn-block btn-primary" (click)="asdf()">
-          Form
+         Log Form
         </button>
       </div>
     </div>

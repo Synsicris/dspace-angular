@@ -9,7 +9,7 @@
           [clearable]="false"
           placeholder="Select value"
           (change)="onDefaultValueSelect($event)"
-          (open)="onFirstDropdownOpen()"
+          (open)="onFirstDropdownOpen('defaultFilter', 'Default')"
         >
           <ng-option
             *ngFor="let value of firstDefaultValues"
@@ -23,7 +23,7 @@
       <div class="col-md-9">
         <div
           formArrayName="queryGroup"
-          class="row mb-2"
+          class="row mb-3"
           *ngFor="
             let queryStatement of queryGroup.controls;
             let i = index;
@@ -32,18 +32,13 @@
         >
           <!-- FormGroup -->
           <div class="w-100 d-flex" [formGroupName]="i">
-            <!--
-         TODO: search()
-         TODO: (scroll)
-         TODO: loading ??
-        -->
             <ng-select
               formControlName="filter"
               class="col-md-3 px-0 mr-1"
               [virtualScroll]="true"
               [clearable]="false"
-              placeholder="select value"
-              (change)="onFilterSelect($event, 1, i)"
+              placeholder="Select filter"
+              (change)="onFilterSelect($event, i)"
             >
               <ng-option
                 *ngFor="let filter of secondColumnFilters"
@@ -58,12 +53,21 @@
               class="col-md-3 px-0 mr-1"
               [virtualScroll]="true"
               [clearable]="false"
-              placeholder="select value"
+              placeholder="Select value"
               (change)="
                 onValueSelect($event, queryGroup.get(i + '.filter')?.value)
               "
-              (scrollToEnd)="onValuesScroll(queryGroup.get(i + '.filter')?.value, i)"
-              (search)="searchValue($event)"
+              (scrollToEnd)="
+                onValuesScroll(queryGroup.get(i + '.filter')?.value, i)
+              "
+              (search)="
+                searchValue($event, queryGroup.get(i + '.filter')?.value, i)
+              "
+              (open)="
+                calculateSearchValuesSelection(
+                  queryGroup.get(i + '.filter')?.value
+                )
+              "
             >
               <ng-option
                 *ngFor="
@@ -86,7 +90,7 @@
               class="btn btn-dark col-md-2 ml-1"
               (click)="addQueryStatement()"
             >
-              <i class="fa fa-plus"></i> Add Filter
+              <i aria-hidden="true" class="fa fa-plus"></i> Add Filter
             </button>
 
             <div class="col-1 text-right" *ngIf="!isLast">
@@ -98,7 +102,7 @@
                 id="deleteButton"
                 type="button"
                 class="btn btn-danger"
-                (click)="deleteCondition(i)"
+                (click)="deleteCondition(i, queryGroup.get(i + '.value'))"
               >
                 <i aria-hidden="true" class="fa fa-trash"></i>
               </button>
