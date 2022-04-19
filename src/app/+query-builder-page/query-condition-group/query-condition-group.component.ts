@@ -128,7 +128,7 @@ export class QueryConditionGroupComponent implements OnInit {
     (
       this.filterValuesMap
         .get(parentFilter)
-        .find((x) => x.value == selectedValue) as any
+        .find((x) => isEqual(x.value , selectedValue) ) as any
     ).disable = true;
   }
 
@@ -172,7 +172,7 @@ export class QueryConditionGroupComponent implements OnInit {
       (
         this.filterValuesMap
           .get(this.queryGroup.value[index].filter)
-          .find((x) => x.value == selectedValue.value) as any
+          .find((x) => isEqual(x.value , selectedValue.value) ) as any
       ).disable = false;
 
       // remove the query statement
@@ -204,20 +204,20 @@ export class QueryConditionGroupComponent implements OnInit {
       this.formGroup.get(filterLabel).value
     ) {
       this.firstDefaultValues.forEach((x) => {
-        if (disabledValues.some((v) => v.value == x.value)) {
+        if (disabledValues.some((v) => isEqual(v.value, x.value))) {
           (x as any).disable = true;
         }
       });
-    } else if (!defaultOpeningMode) {
+    } else if (!defaultOpeningMode && this.formGroup.get(filterLabel)) {
       disabledValues.forEach((x) => {
         if (
-          !this.queryGroup.value.find((f) => f.value == x.value) &&
+          !this.queryGroup.value.find((f) => isEqual(f.value , x.value) ) &&
           !isEqual(x.value, this.formGroup.get('defaultFilter').value)
         ) {
           (
             this.filterValuesMap
               .get(filterLabel)
-              .find((v) => v.value == x.value) as any
+              .find((v) => isEqual(v.value, x.value)) as any
           ).disable = false;
         }
       });
@@ -261,7 +261,7 @@ export class QueryConditionGroupComponent implements OnInit {
     }
 
     const searchFilterConfig = this.searchFilterConfigs?.find(
-      (x) => x.name == searchFilter
+      (x) => isEqual(x.name , searchFilter)
     );
 
     if (searchFilterConfig) {
@@ -313,7 +313,7 @@ export class QueryConditionGroupComponent implements OnInit {
       this.queryGroup.get(`${idx}.${name}`).enable();
     }
     this.queryGroup.updateValueAndValidity();
-  }
+ }
 }
 
 export enum SearchValueMode {
