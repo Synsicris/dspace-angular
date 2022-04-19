@@ -212,7 +212,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         resolveEndFound = false;
         if (!(currentUrl.startsWith('/edit-items') || currentUrl.startsWith('/workspaceitems') || currentUrl.startsWith(getWorkflowItemModuleRoute()))) {
           this.isRouteLoading$.next(true);
-          // this.isThemeLoading$.next(true);
         }
       } else  if (event instanceof ResolveEnd) {
         resolveEndFound = true;
