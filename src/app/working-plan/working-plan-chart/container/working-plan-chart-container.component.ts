@@ -5,7 +5,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { concatMap, map, mergeMap, take } from 'rxjs/operators';
 import { ResizeEvent } from 'angular-resizable-element';
 import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -33,6 +33,7 @@ import { Item } from '../../../core/shared/item.model';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 import { CompareItemComponent } from '../../../shared/compare-item/compare-item.component';
+import { from } from 'rxjs/internal/observable/from';
 
 export const MY_FORMATS = {
   parse: {
@@ -54,6 +55,14 @@ interface UpdateData {
   nestedNode: WorkpackageTreeObject;
   metadata: string[];
   values: string[];
+}
+
+/**
+ * Defines the UpdateData parameters.
+ */
+interface WorkpackageEditModes {
+  nodeId: string;
+  modes: EditItemMode[];
 }
 
 /**
@@ -258,10 +267,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
         this.dataSource.data = steps;
         this.buildCalendar();
+        // Retrieve edit modes
+        this.retrieveEditMode(this.treeControl.dataNodes);
         /** expand tree based on status */
-        this.treeControl.dataNodes.forEach((node) => {
-          // Retrieve edit modes
-          this.retrieveEditMode(node.id);
+        this.treeControl.dataNodes.forEach((node: WorkpacakgeFlatNode) => {
           // MouseOver Map
           this.chartChangeColorIsOver.set(node.id, false);
           // Milestones border and rhombus
@@ -925,14 +934,18 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   /**
    * Retrieve edit modes.
    *
-   * @param nodeId string
+   * @param nodes string
    */
-  private retrieveEditMode(nodeId: string): void {
-    this.subs.push(this.editItemService.searchEditModesByID(nodeId).pipe(
-      take(1)
-    ).subscribe((availableModes: EditItemMode[]) => {
-      const modes = availableModes.filter((mode) => mode.name === environment.projects.projectsEntityEditMode);
-      this.editModes$.next(this.editModes$.value.set(nodeId, modes));
+  private retrieveEditMode(nodes: WorkpacakgeFlatNode[]): void {
+    this.subs.push(from(nodes).pipe(
+      concatMap((node: WorkpacakgeFlatNode) => this.editItemService.searchEditModesByID(node.id).pipe(
+        map((availableModes: EditItemMode[]) => {
+          const modes = availableModes.filter((mode) => mode.name === environment.projects.projectsEntityEditMode);
+          return {nodeId: node.id, modes};
+        })
+      ))
+    ).subscribe((entry: WorkpackageEditModes) => {
+      this.editModes$.next(this.editModes$.value.set(entry.nodeId, entry.modes));
     }));
   }
 

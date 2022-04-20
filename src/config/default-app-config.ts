@@ -531,6 +531,24 @@ export class DefaultAppConfig implements AppConfig {
   };
 
   displayItemSearchResult = {
+    default: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+    ],
     Publication: [
       {
         metadata: [
@@ -548,7 +566,7 @@ export class DefaultAppConfig implements AppConfig {
           },
           {
             name: 'dc.contributor.author',
-            type: DisplayItemMetadataType.Date
+            type: DisplayItemMetadataType.Text
           }
         ]
       },
