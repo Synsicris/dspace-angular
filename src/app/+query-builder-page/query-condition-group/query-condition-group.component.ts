@@ -5,7 +5,6 @@ import { FacetValues } from './../../shared/search/models/facet-values.model';
 import { getRemoteDataPayload } from './../../core/shared/operators';
 import { FacetValue } from './../../shared/search/models/facet-value.model';
 import { SearchFilterConfig } from './../../shared/search/models/search-filter-config.model';
-import { SearchConfig } from './../../core/shared/search/search-filters/search-config.model';
 import { Component, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -28,13 +27,6 @@ import { SearchFilter } from 'src/app/shared/search/models/search-filter.model';
   ],
 })
 export class QueryConditionGroupComponent implements OnInit {
-  /**
-   * search config object for the current filter
-   *
-   * @type {SearchConfig}
-   * @memberof QueryConditionGroupComponent
-   */
-  @Input() searchConfig: SearchConfig;
 
   /**
    * form group name for the current query group
@@ -44,7 +36,7 @@ export class QueryConditionGroupComponent implements OnInit {
    */
   @Input() formGroupName: string;
 
-  @Input() configurationName: string = 'default';
+  @Input() configurationName = 'default';
 
   formGroup: FormGroup;
 
@@ -71,6 +63,16 @@ export class QueryConditionGroupComponent implements OnInit {
       this.rootFormGroup.control.get('queryArray') as FormArray
     ).controls[this.formGroupName];
     this.getSearchFilterConfigs();
+  }
+  /**
+   * get the query group
+   *
+   * @readonly
+   * @type {FormArray}
+   * @memberof QueryConditionGroupComponent
+   */
+   get queryGroup(): FormArray {
+    return this.formGroup.get('queryGroup') as FormArray;
   }
 
   getSearchFilterConfigs() {
@@ -104,7 +106,7 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param mode
    */
   private calcSearchFilterConfigs(mode?: SearchValueMode) {
-    let searchFilter: SearchFilter[] = [
+    const searchFilter: SearchFilter[] = [
       {
         values: [this.formGroup.get('defaultFilter').value], // selected value
         key: this.firstDefaultFilter, // default filter name
@@ -118,8 +120,8 @@ export class QueryConditionGroupComponent implements OnInit {
       }
 
       if (isNil(mode)) {
-        let filterValues: FilterValue[] = this.queryGroup.getRawValue();
-        let values = filterValues
+        const filterValues: FilterValue[] = this.queryGroup.getRawValue();
+        const values = filterValues
           .filter((x) => isEqual(x.filter, config.name))
           .map((x) => x.value);
 
@@ -162,8 +164,6 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param idx
    */
   onFilterSelect(searchFilter: string, idx: number) {
-    //disable first dropdown
-    this.formGroup.get('defaultFilter').disable();
     this.getFacetValues(searchFilter, 1, SearchValueMode.Select, idx);
   }
 
@@ -173,11 +173,26 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param parentFilter
    */
   onValueSelect(selectedValue: string, parentFilter: string) {
+    // disable last selected value
     (
       this.filterValuesMap
         .get(parentFilter)
         .find((x) => isEqual(x.value, selectedValue)) as any
     ).disable = true;
+
+    let disabledValues = this.filterValuesMap
+      .get(parentFilter)
+      .filter((x: any) => x.disable);
+    // calculate disabled previous selected values
+    disabledValues.forEach((x) => {
+      if (!this.queryGroup.getRawValue().find((f) => isEqual(f.value, x.value))) {
+        (
+          this.filterValuesMap
+            .get(parentFilter)
+            .find((v) => isEqual(v.value, x.value)) as any
+        ).disable = false;
+      }
+    });
   }
 
   /**
@@ -185,21 +200,14 @@ export class QueryConditionGroupComponent implements OnInit {
    * add a new query statement
    */
   addQueryStatement(index: number): void {
+    if (isEqual(index, 0)) {
+      // disable first dropdown
+      this.formGroup.get('defaultFilter').disable();
+    }
     this.disableFormControlOnSelectionChange(index, 'filter');
     this.disableFormControlOnSelectionChange(index, 'value');
     this.queryGroup.push(this.initFormArray());
     this.calcSearchFilterConfigs();
-  }
-
-  /**
-   * get the query group
-   *
-   * @readonly
-   * @type {FormArray}
-   * @memberof QueryConditionGroupComponent
-   */
-  get queryGroup(): FormArray {
-    return this.formGroup.get('queryGroup') as FormArray;
   }
 
   /**
@@ -262,7 +270,7 @@ export class QueryConditionGroupComponent implements OnInit {
         .pipe(getRemoteDataPayload())
         .subscribe((res: FacetValues) => {
           if (res && res.page?.length > 0) {
-            let filterValues = res.page.map((value) => {
+            const filterValues = res.page.map((value) => {
               return {
                 ...value,
                 disable: false,
@@ -278,7 +286,7 @@ export class QueryConditionGroupComponent implements OnInit {
               }
             } else if (calPage > 1 && this.filterValuesMap.has(searchFilter)) {
               // concat data from the next page, if there are any data
-              let existingValues = this.filterValuesMap.get(searchFilter);
+              const existingValues = this.filterValuesMap.get(searchFilter);
               this.filterValuesMap.set(searchFilter, [
                 ...filterValues,
                 ...existingValues,

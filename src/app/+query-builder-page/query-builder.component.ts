@@ -16,10 +16,6 @@ import { isEqual } from 'lodash';
   styleUrls: ['./query-builder.component.scss'],
 })
 export class QueryBuilderComponent implements OnInit {
-  /**
-   * data for the filter dropdowns
-   */
-  searchFilterData: SearchConfig;
 
   configurationName = 'default';
 
@@ -51,24 +47,9 @@ export class QueryBuilderComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router
   ) {
-    this.getSearchData();
   }
 
   ngOnInit(): void {}
-
-  /**
-   * get the search configuration data
-   */
-  getSearchData() {
-    this.searchService
-      .getSearchConfigurationFor(null , this.configurationName)
-      .pipe(getRemoteDataPayload())
-      .subscribe((res: SearchConfig) => {
-        if (res) {
-          this.searchFilterData = res;
-        }
-      });
-  }
 
   /**
    * get the form array
@@ -77,15 +58,15 @@ export class QueryBuilderComponent implements OnInit {
    * @memberof QueryBuilderComponent
    */
   get queryArray() {
-    return this.searchForm.controls['queryArray'] as FormArray;
+    return this.searchForm.controls.queryArray as FormArray;
   }
 
   /**
    * redirect to search page
    */
   filter() {
-    if (this.searchForm.value.queryArray.length > 0) {
-      let fullQuery = this.composeQuery();
+    if (this.searchForm.getRawValue().queryArray.length > 0) {
+      const fullQuery = this.composeQuery();
       if (fullQuery) {
         this.router.navigate([this.searchService.getSearchLink()], {
           queryParams: {
@@ -98,8 +79,8 @@ export class QueryBuilderComponent implements OnInit {
     }
   }
 
-  asdf(){
-    console.log(this.searchForm.value, 'this.searchForm.value');
+  asdf() {
+    console.log(this.searchForm.getRawValue(), 'this.searchForm.value');
   }
 
   /**
@@ -108,9 +89,9 @@ export class QueryBuilderComponent implements OnInit {
    */
   protected composeQuery(): string {
     let fullQuery = '';
-    for (const query of this.searchForm.controls['queryArray'].value) {
+    for (const query of this.searchForm.controls.queryArray.value) {
       if (query.queryGroup && query.queryGroup.length > 0) {
-        for (const group of query['queryGroup']) {
+        for (const group of query.queryGroup) {
           if (group.filter && group.value) {
             if (query.queryGroup[query.queryGroup - 1]) {
               fullQuery =
