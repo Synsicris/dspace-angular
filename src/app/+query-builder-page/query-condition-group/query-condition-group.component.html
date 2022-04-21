@@ -8,8 +8,7 @@
           [virtualScroll]="true"
           [clearable]="false"
           placeholder="Select value"
-          (change)="onDefaultValueSelect($event)"
-          (open)="onFirstDropdownOpen('defaultFilter', 'Default')"
+          (change)="onDefaultValueSelect()"
         >
           <ng-option
             *ngFor="let value of firstDefaultValues"
@@ -60,14 +59,6 @@
               (scrollToEnd)="
                 onValuesScroll(queryGroup.get(i + '.filter')?.value, i)
               "
-              (search)="
-                searchValue($event, queryGroup.get(i + '.filter')?.value, i)
-              "
-              (open)="
-                calculateSearchValuesSelection(
-                  queryGroup.get(i + '.filter')?.value
-                )
-              "
             >
               <ng-option
                 *ngFor="
@@ -88,7 +79,7 @@
               id="addButton"
               type="button"
               class="btn btn-dark col-md-2 ml-1"
-              (click)="addQueryStatement()"
+              (click)="addQueryStatement(i)"
             >
               <i aria-hidden="true" class="fa fa-plus"></i> Add Filter
             </button>
