@@ -235,7 +235,9 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    * @param item
    */
   onTaskSelected(item: SimpleItem) {
-    this.selectedTasks.push(item);
+    if (!this.isAlreadySelected(item)) {
+      this.selectedTasks.push(item);
+    }
   }
 
   private buildSearchQuery(filters: SearchFilter[]) {
@@ -352,4 +354,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
   }
 
+  isAlreadySelected(item: SimpleItem): boolean {
+    return findIndex(this.selectedTasks, { id: item.id }) !== -1;
+  }
 }

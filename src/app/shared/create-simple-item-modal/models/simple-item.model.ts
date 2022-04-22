@@ -4,6 +4,7 @@ import { FormFieldMetadataValueObject } from '../../form/builder/models/form-fie
 export interface SimpleItem {
   id?: string;
   workspaceItemId?: string;
+  title?: string;
   type: FormFieldMetadataValueObject;
   metadata: MetadataMap;
 
