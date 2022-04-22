@@ -41,7 +41,6 @@
         </ng-container>
       </ng-container>
     </form>
-
     <hr />
     <div class="row justify-content-center">
       <div class="col-md-2 mb-1">
@@ -54,5 +53,11 @@
           Filter
         </button>
       </div>
+    </div>
+    <div *ngIf="isFormValid === false" class="row justify-content-center mb-1">
+      <span class="text-muted">Fill out all the fields</span>
+    </div>
+    <div class="row justify-content-center">
+      {{query}}
     </div>
 </div>

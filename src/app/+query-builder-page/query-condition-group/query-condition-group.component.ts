@@ -13,6 +13,7 @@ import {
   FormBuilder,
   FormGroup,
   FormGroupDirective,
+  Validators,
 } from '@angular/forms';
 import { isEqual, isNil } from 'lodash';
 import { isNotEmpty } from 'src/app/shared/empty.util';
@@ -27,7 +28,6 @@ import { SearchFilter } from 'src/app/shared/search/models/search-filter.model';
   ],
 })
 export class QueryConditionGroupComponent implements OnInit {
-
   /**
    * form group name for the current query group
    *
@@ -36,29 +36,66 @@ export class QueryConditionGroupComponent implements OnInit {
    */
   @Input() formGroupName: string;
 
+  /**
+   * Configuration name
+   * @type {string}
+   * @memberof QueryConditionGroupComponent
+   */
   @Input() configurationName = 'default';
 
+  /**
+   * Filter name selected to fill the first dropdown
+   *
+   * @type {string}
+   * @memberof QueryConditionGroupComponent
+   */
   @Input() firstDefaultFilter: string;
 
   formGroup: FormGroup;
 
+  /**
+   * All search filter configurations
+   * @protected
+   * @type {SearchFilterConfig[]}
+   * @memberof QueryConditionGroupComponent
+   */
   protected searchFilterConfigs: SearchFilterConfig[] = [];
 
+  /**
+   * Stores values of the selected default filter
+   * in the first dropdown
+   * @type {FacetValue[]}
+   * @memberof QueryConditionGroupComponent
+   */
   firstDefaultValues: FacetValue[] = [];
 
+  /**
+   * Search filter configurations that do have values
+   * @type {SearchFilterConfig[]}
+   * @memberof QueryConditionGroupComponent
+   */
   secondColumnFilters: SearchFilterConfig[] = [];
 
+  /**
+   * Stores all the filters as key and
+   * facet values of a filter as value
+   * @type {Map<string, FacetValue[]>}
+   * @memberof QueryConditionGroupComponent
+   */
   filterValuesMap: Map<string, FacetValue[]> = new Map<string, FacetValue[]>();
 
-  searchOptQuery = '';
-
-  protected defaultSearchfilter: SearchFilter[];
+  /**
+   * Composed query for the group
+   *
+   * @memberof QueryConditionGroupComponent
+   */
+  public searchOptQuery = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private rootFormGroup: FormGroupDirective,
     private searchService: SearchService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.formGroup = (
@@ -102,18 +139,20 @@ export class QueryConditionGroupComponent implements OnInit {
    * On value selection of first dropdown
    */
   onDefaultValueSelect(selectedValue) {
-    this.defaultSearchfilter = [
+    let defaultSearchfilter = [
       {
         values: [selectedValue], // selected value
         key: this.firstDefaultFilter, // default filter name
         operator: 'equals',
       },
-    ]
-    this.buildSearchQuery(this.defaultSearchfilter)
+    ];
+    this.buildSearchQuery(defaultSearchfilter);
     this.secondColumnFilters = [];
     this.calcSearchFilterConfigs();
     // enable the filter dropdown on the first selection
     this.enableFormControlOnSelectionChange(0, 'filter');
+    // In case of changing the first dropdown nalue
+    // filter and value of first row must be reset
     this.queryGroup.get(`0.filter`).setValue(null);
     this.queryGroup.get(`0.value`).setValue(null);
   }
@@ -163,7 +202,7 @@ export class QueryConditionGroupComponent implements OnInit {
         operator: 'equals',
       });
 
-      this.buildSearchQuery(searchFilter)
+      this.buildSearchQuery(searchFilter);
     });
   }
 
@@ -188,8 +227,14 @@ export class QueryConditionGroupComponent implements OnInit {
    */
   private initFormArray(): FormGroup {
     return this.formBuilder.group({
-      filter: this.formBuilder.control({ value: null, disabled: false }),
-      value: this.formBuilder.control({ value: null, disabled: true }),
+      filter: this.formBuilder.control(
+        { value: null, disabled: false },
+        Validators.required
+      ),
+      value: this.formBuilder.control(
+        { value: null, disabled: true },
+        Validators.required
+      ),
     });
   }
 
@@ -212,23 +257,23 @@ export class QueryConditionGroupComponent implements OnInit {
   }
 
   onValuesScroll(searchFilter: string, idx: number) {
+    // get more values if there are any
     this.getFacetValues(searchFilter, null, SearchValueMode.Scroll, idx);
   }
 
   /**
- * get facet values for each configuration,
- * in order to display only the ones with data
- * @param mode
- */
+   * get facet values for each configuration,
+   * in order to display only the ones with data
+   * @param mode
+   */
   private calcSearchFilterConfigs() {
     this.searchFilterConfigs.forEach((config: SearchFilterConfig) => {
       if (isEqual(config.name, this.firstDefaultFilter)) {
         return;
       }
-
       const searchOptions: SearchOptions = new SearchOptions({
         configuration: this.configurationName,
-        query: this.searchOptQuery,
+        query: encodeURIComponent(this.searchOptQuery),
       });
 
       this.searchService
@@ -325,24 +370,25 @@ export class QueryConditionGroupComponent implements OnInit {
         queries.push(filter.key + ':(' + filter.values.join(' AND ') + ')');
       }
     });
-    this.searchOptQuery = encodeURIComponent(queries.join(' AND '));
+    this.searchOptQuery = queries.join(' AND ');
+    console.log(encodeURIComponent(queries.join(' AND ')));
     return encodeURIComponent(queries.join(' AND '));
   }
 
-  calcValueSelection(parentFilter: string){
+  calcValueSelection(parentFilter: string) {
     let disabledValues = this.filterValuesMap
-    .get(parentFilter)
-    .filter((x: any) => x.disable);
-  // calculate disabled previous selected values
-  disabledValues.forEach((x) => {
-    if (!this.queryGroupValue.find((f) => isEqual(f.value, x.value))) {
-      (
-        this.filterValuesMap
-          .get(parentFilter)
-          .find((v) => isEqual(v.value, x.value)) as any
-      ).disable = false;
-    }
-  });
+      .get(parentFilter)
+      .filter((x: any) => x.disable);
+    // calculate disabled previous selected values
+    disabledValues.forEach((x) => {
+      if (!this.queryGroupValue.find((f) => isEqual(f.value, x.value))) {
+        (
+          this.filterValuesMap
+            .get(parentFilter)
+            .find((v) => isEqual(v.value, x.value)) as any
+        ).disable = false;
+      }
+    });
   }
 }
 

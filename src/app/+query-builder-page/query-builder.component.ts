@@ -1,7 +1,7 @@
 import { QueryConditionGroupComponent } from './query-condition-group/query-condition-group.component';
 import { SearchService } from './../core/shared/search/search.service';
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { isEqual } from 'lodash';
 
@@ -12,12 +12,28 @@ import { isEqual } from 'lodash';
 })
 export class QueryBuilderComponent implements OnInit {
 
-
   @ViewChildren('queryGroup') queryGroups: QueryList<QueryConditionGroupComponent>;
 
+  /**
+   * Configuration name
+   *
+   * @memberof QueryBuilderComponent
+   */
   configurationName = 'default';
 
+  /**
+   * Default filter name
+   *
+   * @memberof QueryBuilderComponent
+   */
   firstDefaultFilter = 'entityType';
+
+  query = '';
+
+  /**
+   * Flag to check form validity
+   */
+  isFormValid: boolean;
 
   /**
    * logical conditional operator list
@@ -49,7 +65,7 @@ export class QueryBuilderComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   /**
    * get the form array
@@ -66,16 +82,23 @@ export class QueryBuilderComponent implements OnInit {
    */
   filter() {
     if (this.searchForm.getRawValue().queryArray.length > 0) {
-      const fullQuery = this.composeQuery();
-      if (fullQuery) {
-        this.router.navigate([this.searchService.getSearchLink()], {
-          queryParams: {
-            page: 1,
-            configuration: this.configurationName,
-            query: fullQuery,
-          },
-        });
+      this.searchForm.markAllAsTouched();
+      if (this.searchForm.valid) {
+        this.isFormValid = true;
+        const fullQuery = this.composeQuery();
+        // if (fullQuery) {
+        //   this.router.navigate([this.searchService.getSearchLink()], {
+        //     queryParams: {
+        //       page: 1,
+        //       configuration: this.configurationName,
+        //       query: fullQuery,
+        //     },
+        //   });
+        // }
+      } else {
+        this.isFormValid = false;
       }
+
     }
   }
 
@@ -85,37 +108,21 @@ export class QueryBuilderComponent implements OnInit {
    */
   composeQuery(): string {
     let fullQuery = '';
-
     if (this.queryGroups && this.queryGroups.toArray().length > 0) {
       for (let index = 0; index < this.queryGroups.toArray().length; index++) {
         const searchOptQuery = this.queryGroups.toArray()[index].searchOptQuery;
-        const operatorIdx = 2 * index + 1;
-        const operator = this.searchForm.getRawValue().queryArray[operatorIdx];
-        fullQuery = fullQuery + searchOptQuery;
-        if (operator && typeof operator === 'string') {
-          fullQuery = fullQuery + ` ${operator} `;
+        if (searchOptQuery) {
+          const operatorIdx = 2 * index + 1;
+          const operator = this.searchForm.getRawValue().queryArray[operatorIdx];
+          fullQuery = `${fullQuery}(${searchOptQuery})`;
+          if (operator && typeof operator === 'string') {
+            fullQuery = `${fullQuery} ${operator} `;
+          }
         }
       }
-      return fullQuery;
+      this.query = encodeURIComponent(fullQuery);
+      return encodeURIComponent(fullQuery);
     }
-
-    // for (const query of this.searchForm.getRawValue().queryArray) {
-    //   if (query.queryGroup && query.queryGroup.length > 0) {
-    //     for (const group of query.queryGroup) {
-    //       if (group.filter && group.value) {
-    //         if (query.queryGroup[query.queryGroup - 1]) {
-    //           fullQuery =
-    //           fullQuery + `${group.filter}:(${group.value})${group.operator} `;
-    //         } else {
-    //           fullQuery =
-    //           fullQuery + `${group.filter}:(${group.value})${group.operator} AND`;
-    //         }
-    //       }
-    //     }
-    //   } else if (hasValue(query) && typeof query === 'string') {
-    //     fullQuery = fullQuery + `${query} `;
-    //   }
-    // }
     return fullQuery;
   }
 
@@ -124,8 +131,8 @@ export class QueryBuilderComponent implements OnInit {
    */
   protected initFormArray(): FormGroup {
     return this.formBuilder.group({
-      filter: this.formBuilder.control({value: null , disabled: true}),
-      value: this.formBuilder.control({value: null , disabled: true}),
+      filter: this.formBuilder.control({ value: null, disabled: true }, Validators.required),
+      value: this.formBuilder.control({ value: null, disabled: true }, Validators.required),
     });
   }
 
@@ -136,7 +143,7 @@ export class QueryBuilderComponent implements OnInit {
     this.queryArray.push(new FormControl('OR'));
     this.queryArray.push(
       new FormGroup({
-        defaultFilter: new FormControl(null),
+        defaultFilter: new FormControl(null, Validators.required),
         queryGroup: new FormArray([this.initFormArray()]),
       })
     );
