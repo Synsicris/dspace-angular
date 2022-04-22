@@ -1,10 +1,10 @@
-import { ItemDetailPageModalComponent } from './../../../item-detail-page-modal/item-detail-page-modal.component';
+import { ItemDetailPageModalComponent } from '../../../item-detail-page-modal/item-detail-page-modal.component';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
 import { catchError, distinctUntilChanged, map } from 'rxjs/operators';
 
-import { hasValue, isNull } from '../../empty.util';
+import { hasValue, isNotEmpty, isNull } from '../../empty.util';
 import { SimpleItem } from '../models/simple-item.model';
 import { Metadata } from '../../../core/shared/metadata.utils';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
@@ -21,6 +21,7 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
 
   @Input() public vocabularyName: string;
   @Input() public data: SimpleItem;
+  @Input() public selectedStatus: boolean;
 
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -37,6 +38,12 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private vocabularyService: VocabularyService) {
 
+  }
+
+  ngAfterContentInit() {
+    if (isNotEmpty(this.selectedStatus)) {
+      this.selectStatus.next(this.selectedStatus);
+    }
   }
 
   ngOnInit(): void {
@@ -90,4 +97,5 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
     (modalRef.componentInstance as any).uuid = this.data.id;
     (modalRef.componentInstance as any).modalRef = modalRef;
   }
+
 }
