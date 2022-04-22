@@ -11,7 +11,7 @@
               queryStatement | dsControlTypeChecker;
               else formControlTemplate
             ">
-            <ds-query-condition-group [formGroupName]="i" [configurationName]="configurationName" >
+            <ds-query-condition-group #queryGroup [formGroupName]="i" [configurationName]="configurationName" [firstDefaultFilter]="firstDefaultFilter">
             </ds-query-condition-group>
             <div class="row">
               <div class="col text-right">
@@ -52,10 +52,6 @@
       <div class="col-md-2 mb-1">
         <button type="button" class="btn-block btn btn-info" (click)="filter()">
           Filter
-        </button>
-
-        <button type="button" class="btn btn-block btn-primary" (click)="asdf()">
-         Log Form
         </button>
       </div>
     </div>

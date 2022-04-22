@@ -1,12 +1,7 @@
-import {
-  SearchConfig,
-} from './../core/shared/search/search-filters/search-config.model';
-
-import { getRemoteDataPayload } from './../core/shared/operators';
+import { QueryConditionGroupComponent } from './query-condition-group/query-condition-group.component';
 import { SearchService } from './../core/shared/search/search.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { hasValue } from '../shared/empty.util';
 import { Router } from '@angular/router';
 import { isEqual } from 'lodash';
 
@@ -17,7 +12,12 @@ import { isEqual } from 'lodash';
 })
 export class QueryBuilderComponent implements OnInit {
 
+
+  @ViewChildren('queryGroup') queryGroups: QueryList<QueryConditionGroupComponent>;
+
   configurationName = 'default';
+
+  firstDefaultFilter = 'entityType';
 
   /**
    * logical conditional operator list
@@ -79,34 +79,43 @@ export class QueryBuilderComponent implements OnInit {
     }
   }
 
-  asdf() {
-    console.log(this.searchForm.getRawValue(), 'this.searchForm.value');
-  }
-
   /**
    * Compose the query string based on given conditions
    * @returns the full query string
    */
-  protected composeQuery(): string {
+  composeQuery(): string {
     let fullQuery = '';
-    for (const query of this.searchForm.controls.queryArray.value) {
-      if (query.queryGroup && query.queryGroup.length > 0) {
-        for (const group of query.queryGroup) {
-          if (group.filter && group.value) {
-            if (query.queryGroup[query.queryGroup - 1]) {
-              fullQuery =
-              fullQuery + `${group.filter}:(${group.value})${group.operator} `;
-            } else {
-              fullQuery =
-              fullQuery + `${group.filter}:(${group.value})${group.operator} AND`;
-            }
-          }
+
+    if (this.queryGroups && this.queryGroups.toArray().length > 0) {
+      for (let index = 0; index < this.queryGroups.toArray().length; index++) {
+        const searchOptQuery = this.queryGroups.toArray()[index].searchOptQuery;
+        const operatorIdx = 2 * index + 1;
+        const operator = this.searchForm.getRawValue().queryArray[operatorIdx];
+        fullQuery = fullQuery + searchOptQuery;
+        if (operator && typeof operator === 'string') {
+          fullQuery = fullQuery + ` ${operator} `;
         }
-      } else if (hasValue(query) && typeof query === 'string') {
-        fullQuery = fullQuery + `${query} `;
       }
+      return fullQuery;
     }
-    console.log('fullQuery', fullQuery);
+
+    // for (const query of this.searchForm.getRawValue().queryArray) {
+    //   if (query.queryGroup && query.queryGroup.length > 0) {
+    //     for (const group of query.queryGroup) {
+    //       if (group.filter && group.value) {
+    //         if (query.queryGroup[query.queryGroup - 1]) {
+    //           fullQuery =
+    //           fullQuery + `${group.filter}:(${group.value})${group.operator} `;
+    //         } else {
+    //           fullQuery =
+    //           fullQuery + `${group.filter}:(${group.value})${group.operator} AND`;
+    //         }
+    //       }
+    //     }
+    //   } else if (hasValue(query) && typeof query === 'string') {
+    //     fullQuery = fullQuery + `${query} `;
+    //   }
+    // }
     return fullQuery;
   }
 

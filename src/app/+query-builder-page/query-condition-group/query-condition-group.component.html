@@ -8,7 +8,7 @@
           [virtualScroll]="true"
           [clearable]="false"
           placeholder="Select value"
-          (change)="onDefaultValueSelect()"
+          (change)="onDefaultValueSelect($event)"
         >
           <ng-option
             *ngFor="let value of firstDefaultValues"
@@ -53,6 +53,7 @@
               [virtualScroll]="true"
               [clearable]="false"
               placeholder="Select value"
+              (open)="calcValueSelection(queryGroup.get(i + '.filter')?.value)"
               (change)="
                 onValueSelect($event, queryGroup.get(i + '.filter')?.value)
               "
