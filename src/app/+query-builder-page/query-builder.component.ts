@@ -1,7 +1,13 @@
 import { QueryConditionGroupComponent } from './query-condition-group/query-condition-group.component';
 import { SearchService } from './../core/shared/search/search.service';
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { isEqual } from 'lodash';
 
@@ -11,8 +17,8 @@ import { isEqual } from 'lodash';
   styleUrls: ['./query-builder.component.scss'],
 })
 export class QueryBuilderComponent implements OnInit {
-
-  @ViewChildren('queryGroup') queryGroups: QueryList<QueryConditionGroupComponent>;
+  @ViewChildren('queryGroup')
+  queryGroups: QueryList<QueryConditionGroupComponent>;
 
   /**
    * Configuration name
@@ -62,10 +68,9 @@ export class QueryBuilderComponent implements OnInit {
     private searchService: SearchService,
     private formBuilder: FormBuilder,
     private router: Router
-  ) {
-  }
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   /**
    * get the form array
@@ -86,19 +91,18 @@ export class QueryBuilderComponent implements OnInit {
       if (this.searchForm.valid) {
         this.isFormValid = true;
         const fullQuery = this.composeQuery();
-        // if (fullQuery) {
-        //   this.router.navigate([this.searchService.getSearchLink()], {
-        //     queryParams: {
-        //       page: 1,
-        //       configuration: this.configurationName,
-        //       query: fullQuery,
-        //     },
-        //   });
-        // }
+        if (fullQuery) {
+          this.router.navigate([this.searchService.getSearchLink()], {
+            queryParams: {
+              page: 1,
+              configuration: this.configurationName,
+              query: fullQuery,
+            },
+          });
+        }
       } else {
         this.isFormValid = false;
       }
-
     }
   }
 
@@ -113,7 +117,8 @@ export class QueryBuilderComponent implements OnInit {
         const searchOptQuery = this.queryGroups.toArray()[index].searchOptQuery;
         if (searchOptQuery) {
           const operatorIdx = 2 * index + 1;
-          const operator = this.searchForm.getRawValue().queryArray[operatorIdx];
+          const operator =
+            this.searchForm.getRawValue().queryArray[operatorIdx];
           fullQuery = `${fullQuery}(${searchOptQuery})`;
           if (operator && typeof operator === 'string') {
             fullQuery = `${fullQuery} ${operator} `;
@@ -131,8 +136,14 @@ export class QueryBuilderComponent implements OnInit {
    */
   protected initFormArray(): FormGroup {
     return this.formBuilder.group({
-      filter: this.formBuilder.control({ value: null, disabled: true }, Validators.required),
-      value: this.formBuilder.control({ value: null, disabled: true }, Validators.required),
+      filter: this.formBuilder.control(
+        { value: null, disabled: true },
+        Validators.required
+      ),
+      value: this.formBuilder.control(
+        { value: null, disabled: true },
+        Validators.required
+      ),
     });
   }
 

@@ -1,63 +1,99 @@
 <div class="container">
-    <form [formGroup]="searchForm">
-      <ng-container formArrayName="queryArray">
-        <ng-container *ngFor="
-            let queryStatement of queryArray.controls;
-            let i = index;
-            let isLast = last
-          ">
-          <!-- if FormGroup -->
-          <ng-container *ngIf="
-              queryStatement | dsControlTypeChecker;
-              else formControlTemplate
-            ">
-            <ds-query-condition-group #queryGroup [formGroupName]="i" [configurationName]="configurationName" [firstDefaultFilter]="firstDefaultFilter">
-            </ds-query-condition-group>
-            <div class="row">
-              <div class="col text-right">
-                <button type="button" class="btn btn-inline btn-danger" (click)="deleteGroup(i)"
-                  *ngIf="queryArray.length > 1">
-                  <i  aria-hidden="true" class="fa fa-trash"></i> &nbsp; Delete Group above
-                </button>
-                <button type="button" class="mr-2 btn btn-inline btn-dark" *ngIf="isLast" (click)="addGroup()">
-                  <i  aria-hidden="true" class="fa fa-plus"></i> &nbsp; Add Filter group
-                </button>
-              </div>
+  <form [formGroup]="searchForm">
+    <ng-container formArrayName="queryArray">
+      <ng-container
+        *ngFor="
+          let queryStatement of queryArray.controls;
+          let i = index;
+          let isLast = last
+        "
+      >
+        <!-- if FormGroup -->
+        <ng-container
+          *ngIf="
+            queryStatement | dsControlTypeChecker;
+            else formControlTemplate
+          "
+        >
+          <ds-query-condition-group
+            #queryGroup
+            [formGroupName]="i"
+            [configurationName]="configurationName"
+            [firstDefaultFilter]="firstDefaultFilter"
+          >
+          </ds-query-condition-group>
+          <div class="row">
+            <div class="col text-right">
+              <button
+                type="button"
+                class="btn btn-inline btn-danger"
+                (click)="deleteGroup(i)"
+                *ngIf="queryArray.length > 1"
+              >
+                <i aria-hidden="true" class="fa fa-trash"></i> &nbsp;
+                {{
+                  "query-builder.synsicris.button.label.delete-group-filter"
+                    | translate
+                }}
+              </button>
+              <button
+                type="button"
+                class="mr-2 btn btn-inline btn-dark"
+                *ngIf="isLast"
+                (click)="addGroup()"
+              >
+                <i aria-hidden="true" class="fa fa-plus"></i> &nbsp;
+                {{
+                  "query-builder.synsicris.button.label.add-group-filter"
+                    | translate
+                }}
+              </button>
             </div>
-          </ng-container>
-
-          <!-- if FormControl -->
-          <ng-template #formControlTemplate>
-            <div class="row mb-2 pl-3 operator-row" *ngIf="!isLast" >
-              <div class="col-md-2">
-                <select class="form-control"[formControlName]="i">
-                  <option [value]="operator" *ngFor="let operator of logicalOperators" [selected]="operator">
-                    {{ operator | uppercase }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </ng-template>
+          </div>
         </ng-container>
+
+        <!-- if FormControl -->
+        <ng-template #formControlTemplate>
+          <div class="row mb-2 pl-3 operator-row" *ngIf="!isLast">
+            <div class="col-md-2">
+              <select class="form-control" [formControlName]="i">
+                <option
+                  [value]="operator"
+                  *ngFor="let operator of logicalOperators"
+                  [selected]="operator"
+                >
+                  {{ operator | uppercase }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </ng-template>
       </ng-container>
-    </form>
-    <hr />
-    <div class="row justify-content-center">
-      <div class="col-md-2 mb-1">
-        <button type="button" class="btn btn-block btn-dark" (click)="resetForm()">
-          Reset
-        </button>
-      </div>
-      <div class="col-md-2 mb-1">
-        <button type="button" class="btn-block btn btn-info" (click)="filter()">
-          Filter
-        </button>
-      </div>
+    </ng-container>
+  </form>
+  <hr />
+  <div class="row justify-content-center">
+    <div class="col-md-2 mb-1">
+      <button
+        type="button"
+        class="btn btn-block btn-dark"
+        (click)="resetForm()"
+      >
+        {{ "query-builder.synsicris.button.label.reset" | translate }}
+      </button>
     </div>
-    <div *ngIf="isFormValid === false" class="row justify-content-center mb-1">
-      <span class="text-muted">Fill out all the fields</span>
+    <div class="col-md-2 mb-1">
+      <button type="button" class="btn-block btn btn-info" (click)="filter()">
+        {{ "query-builder.synsicris.button.label.filter" | translate }}
+      </button>
     </div>
-    <div class="row justify-content-center">
-      {{query}}
-    </div>
+  </div>
+  <div *ngIf="isFormValid === false" class="row justify-content-center mb-1">
+    <span class="text-muted">{{
+      "query-builder.synsicris.message.label.validation" | translate
+    }}</span>
+  </div>
+  <div class="row justify-content-center">
+    {{ query }}
+  </div>
 </div>

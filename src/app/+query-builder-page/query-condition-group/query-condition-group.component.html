@@ -7,7 +7,9 @@
           class="px-0"
           [virtualScroll]="true"
           [clearable]="false"
-          placeholder="Select value"
+          [placeholder]="
+            'query-builder.synsicris.placeholder.select-value' | translate
+          "
           (change)="onDefaultValueSelect($event)"
         >
           <ng-option
@@ -36,7 +38,9 @@
               class="col-md-3 px-0 mr-1"
               [virtualScroll]="true"
               [clearable]="false"
-              placeholder="Select filter"
+              [placeholder]="
+                'query-builder.synsicris.placeholder.select-filter' | translate
+              "
               (change)="onFilterSelect($event, i)"
             >
               <ng-option
@@ -52,7 +56,9 @@
               class="col-md-3 px-0 mr-1"
               [virtualScroll]="true"
               [clearable]="false"
-              placeholder="Select value"
+              [placeholder]="
+                'query-builder.synsicris.placeholder.select-value' | translate
+              "
               (open)="calcValueSelection(queryGroup.get(i + '.filter')?.value)"
               (change)="
                 onValueSelect($event, queryGroup.get(i + '.filter')?.value)
@@ -82,7 +88,10 @@
               class="btn btn-dark col-md-2 ml-1"
               (click)="addQueryStatement(i)"
             >
-              <i aria-hidden="true" class="fa fa-plus"></i> Add Filter
+              <i aria-hidden="true" class="fa fa-plus"></i>
+              {{
+                "query-builder.synsicris.button.label.add-filter" | translate
+              }}
             </button>
 
             <div class="col-1 text-right" *ngIf="!isLast">

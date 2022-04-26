@@ -8221,6 +8221,21 @@
 
   "layout.field.label.application.synsicris.quantity": "Quantity / number",
 
-  "layout.field.label.application.synsicris.description.description": "Notes"
+  "layout.field.label.application.synsicris.description.description": "Notes",
 
+  "query-builder.synsicris.placeholder.select-value": "Select Value",
+
+  "query-builder.synsicris.placeholder.select-filter": "Select Filter",
+
+  "query-builder.synsicris.button.label.add-filter": "Add Filter",
+
+  "query-builder.synsicris.button.label.add-group-filter": "Add Filter Group",
+
+  "query-builder.synsicris.button.label.delete-group-filter": "Delete Group above",
+
+  "query-builder.synsicris.button.label.filter": "Filter",
+
+  "query-builder.synsicris.button.label.reset": "Reset",
+
+  "query-builder.synsicris.message.label.validation": "Fill out all the fields"
 }
