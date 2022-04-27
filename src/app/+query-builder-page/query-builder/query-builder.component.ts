@@ -1,6 +1,5 @@
-import { QueryConditionGroupComponent } from './query-condition-group/query-condition-group.component';
-import { SearchService } from './../core/shared/search/search.service';
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { SearchService } from './../../core/shared/search/search.service';
+import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -10,6 +9,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { isEqual } from 'lodash';
+import { QueryConditionGroupComponent } from '../query-condition-group/query-condition-group.component';
 
 @Component({
   selector: 'ds-query-builder',
@@ -17,23 +17,30 @@ import { isEqual } from 'lodash';
   styleUrls: ['./query-builder.component.scss'],
 })
 export class QueryBuilderComponent implements OnInit {
-  @ViewChildren('queryGroup')
-  queryGroups: QueryList<QueryConditionGroupComponent>;
 
   /**
-   * Configuration name
+   * List of children components
    *
+   * @type {QueryList<QueryConditionGroupComponent>}
    * @memberof QueryBuilderComponent
    */
-  configurationName = 'default';
+  @ViewChildren('queryGroup') queryGroups: QueryList<QueryConditionGroupComponent>;
 
   /**
    * Default filter name
    *
    * @memberof QueryBuilderComponent
    */
-  firstDefaultFilter = 'entityType';
+  @Input() firstDefaultFilter: string;
 
+  /**
+ * Configuration name
+ * @type {string}
+ * @memberof QueryBuilderComponent
+ */
+  @Input() configurationName = 'default';
+
+  // TODO : To be Removed , for test purposes
   query = '';
 
   /**
@@ -92,13 +99,14 @@ export class QueryBuilderComponent implements OnInit {
         this.isFormValid = true;
         const fullQuery = this.composeQuery();
         if (fullQuery) {
-          this.router.navigate([this.searchService.getSearchLink()], {
-            queryParams: {
-              page: 1,
-              configuration: this.configurationName,
-              query: fullQuery,
-            },
-          });
+          // TODO: How will be showen the results
+          // this.router.navigate([this.searchService.getSearchLink()], {
+          //   queryParams: {
+          //     page: 1,
+          //     configuration: this.configurationName,
+          //     query: fullQuery,
+          //   },
+          // });
         }
       } else {
         this.isFormValid = false;

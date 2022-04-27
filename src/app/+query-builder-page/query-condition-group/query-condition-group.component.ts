@@ -6,6 +6,9 @@ import { getRemoteDataPayload } from './../../core/shared/operators';
 import { FacetValue } from './../../shared/search/models/facet-value.model';
 import { SearchFilterConfig } from './../../shared/search/models/search-filter-config.model';
 import { Component, Input, OnInit } from '@angular/core';
+import { isEqual, isNil } from 'lodash';
+import { isNotEmpty } from './../../shared/empty.util';
+import { SearchFilter } from './../../shared/search/models/search-filter.model';
 import {
   AbstractControl,
   ControlContainer,
@@ -15,9 +18,6 @@ import {
   FormGroupDirective,
   Validators,
 } from '@angular/forms';
-import { isEqual, isNil } from 'lodash';
-import { isNotEmpty } from 'src/app/shared/empty.util';
-import { SearchFilter } from 'src/app/shared/search/models/search-filter.model';
 
 @Component({
   selector: 'ds-query-condition-group',
@@ -126,6 +126,8 @@ export class QueryConditionGroupComponent implements OnInit {
       .subscribe((res: SearchFilterConfig[]) => {
         if (res) {
           this.searchFilterConfigs = res;
+          console.log(this.firstDefaultFilter);
+
           this.getFacetValues(
             this.firstDefaultFilter,
             1,
@@ -304,7 +306,7 @@ export class QueryConditionGroupComponent implements OnInit {
       this.filterValuesMap.get(searchFilter).length > 0
     ) {
       // calculate page
-      calPage = this.filterValuesMap.get(searchFilter).length / 10 + 1;
+      calPage = Math.ceil(this.filterValuesMap.get(searchFilter).length / 10) + 1;
     }
 
     const searchFilterConfig = this.searchFilterConfigs?.find((x) =>

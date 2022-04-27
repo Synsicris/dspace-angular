@@ -1,14 +1,15 @@
-import { QueryBuilderComponent } from './query-builder.component';
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end-user-agreement-current-user.guard';
+import { QueryResearchOutputComponent } from './query-research-output/query-research-output.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: QueryBuilderComponent,
+    component: QueryResearchOutputComponent,
     data: {
-      title: 'Query Builder',
+      title: 'Reserch Outputs',
       breadcrumbKey: 'query-builder',
       showBreadcrumbsFluid: true
     },

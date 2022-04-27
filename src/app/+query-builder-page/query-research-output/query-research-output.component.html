@@ -1,0 +1,51 @@
+<div class="container">
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <span>Step 1</span>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <div class="btn-group btn-group-toggle mb-4">
+          <label class="btn-outline-info" ngbButtonLabel>
+            <input
+              type="checkbox"
+              ngbButton
+              [(ngModel)]="searchAll"
+              (change)="onTabSelect(1)"
+            />
+            Search in all projects
+          </label>
+          <label class="btn-outline-info" ngbButtonLabel>
+            <input
+              type="checkbox"
+              ngbButton
+              [(ngModel)]="searchSelected"
+              (change)="onTabSelect(2)"
+            />
+            Search in selected projects
+          </label>
+        </div>
+        <div class="builder-container" *ngIf="searchSelected">
+          <ds-query-builder
+            [firstDefaultFilter]="firstDefaultFilter"
+            [configurationName]="configurationName"
+          ></ds-query-builder>
+        </div>
+        <ng-container *ngIf="searchAll">
+          <p>Search in all projects</p>
+        </ng-container>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <span>Step 2</span>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <ds-themed-search
+          [showCharts]="true"
+          [configuration]="configurationName"
+        ></ds-themed-search>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>

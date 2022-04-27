@@ -80,25 +80,25 @@
               </ng-option>
             </ng-select>
 
-            <button
-              [disabled]="!queryGroup.get(i + '.value')?.value"
-              *ngIf="isLast"
-              id="addButton"
-              type="button"
-              class="btn btn-dark col-md-2 ml-1"
-              (click)="addQueryStatement(i)"
-            >
-              <i aria-hidden="true" class="fa fa-plus"></i>
-              {{
-                "query-builder.synsicris.button.label.add-filter" | translate
-              }}
-            </button>
-
-            <div class="col-1 text-right" *ngIf="!isLast">
+            <div class="col-md-3" *ngIf="isLast">
+              <button
+                [disabled]="!queryGroup.get(i + '.value')?.value"
+                id="addButton"
+                type="button"
+                class="btn btn-dark"
+                (click)="addQueryStatement(i)"
+              >
+                <i aria-hidden="true" class="fa fa-plus"></i>
+                {{
+                  "query-builder.synsicris.button.label.add-filter" | translate
+                }}
+              </button>
+            </div>
+            <div class="col-md-2 p-0 text-center" *ngIf="!isLast">
               <span>AND</span>
             </div>
 
-            <div class="col-1 p-0 text-right" *ngIf="!isLast">
+            <div class="col-md-1 p-0 text-right" *ngIf="!isLast">
               <button
                 id="deleteButton"
                 type="button"
