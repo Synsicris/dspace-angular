@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { QueryBuilderComponent } from './query-builder/query-builder.component';
 import { QueryResearchOutputComponent } from './query-research-output/query-research-output.component';
-import { NgbAccordionModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchModule } from '../shared/search/search.module';
 import { ControlTypeCheckerPipe } from './pipes/control-type-checker.pipe';
 
@@ -25,7 +25,6 @@ import { ControlTypeCheckerPipe } from './pipes/control-type-checker.pipe';
     ReactiveFormsModule,
     TranslateModule,
     NgSelectModule,
-    NgbAccordionModule,
     NgbModule,
     SearchModule
   ],

@@ -126,8 +126,6 @@ export class QueryConditionGroupComponent implements OnInit {
       .subscribe((res: SearchFilterConfig[]) => {
         if (res) {
           this.searchFilterConfigs = res;
-          console.log(this.firstDefaultFilter);
-
           this.getFacetValues(
             this.firstDefaultFilter,
             1,
@@ -149,7 +147,6 @@ export class QueryConditionGroupComponent implements OnInit {
       },
     ];
     this.buildSearchQuery(defaultSearchfilter);
-    this.secondColumnFilters = [];
     this.calcSearchFilterConfigs();
     // enable the filter dropdown on the first selection
     this.enableFormControlOnSelectionChange(0, 'filter');
@@ -269,6 +266,7 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param mode
    */
   private calcSearchFilterConfigs() {
+    this.secondColumnFilters = [];
     this.searchFilterConfigs.forEach((config: SearchFilterConfig) => {
       if (isEqual(config.name, this.firstDefaultFilter)) {
         return;
@@ -356,7 +354,7 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param name
    */
   private enableFormControlOnSelectionChange(idx: number, name: string) {
-    this.queryGroup.get(`${idx}.${name}`).enable();
+    this.queryGroup.get(`${idx}.${name}`)?.enable();
     this.queryGroup.updateValueAndValidity();
   }
 
@@ -373,7 +371,6 @@ export class QueryConditionGroupComponent implements OnInit {
       }
     });
     this.searchOptQuery = queries.join(' AND ');
-    console.log(encodeURIComponent(queries.join(' AND ')));
     return encodeURIComponent(queries.join(' AND '));
   }
 

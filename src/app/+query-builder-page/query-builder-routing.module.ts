@@ -12,8 +12,7 @@ const routes: Routes = [
       title: 'Reserch Outputs',
       breadcrumbKey: 'query-builder',
       showBreadcrumbsFluid: true
-    },
-    canActivate: [EndUserAgreementCurrentUserGuard]
+    }
   }
 ];
 

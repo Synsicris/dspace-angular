@@ -13,24 +13,14 @@ import { Component, OnInit } from '@angular/core';
     },
   ],
 })
-export class QueryResearchOutputComponent implements OnInit {
+export class QueryResearchOutputComponent {
   searchAll = true;
 
   searchSelected = false;
 
   configurationName = 'default';
 
-  /**
-   * Filter name selected to fill the first dropdown
-   * on query builder component
-   *
-   * @type {string}
-   */
-  firstDefaultFilter = 'entityType';
-
   constructor() {}
-
-  ngOnInit(): void {}
 
   onTabSelect(stepNr: number) {
     switch (stepNr) {

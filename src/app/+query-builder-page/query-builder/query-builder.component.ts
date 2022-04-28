@@ -1,3 +1,5 @@
+import { PaginatedSearchOptions } from './../../shared/search/models/paginated-search-options.model';
+import { getRemoteDataPayload } from './../../core/shared/operators';
 import { SearchService } from './../../core/shared/search/search.service';
 import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
 import {
@@ -31,7 +33,7 @@ export class QueryBuilderComponent implements OnInit {
    *
    * @memberof QueryBuilderComponent
    */
-  @Input() firstDefaultFilter: string;
+  @Input() firstDefaultFilter: string = 'entityType';
 
   /**
  * Configuration name
@@ -107,6 +109,17 @@ export class QueryBuilderComponent implements OnInit {
           //     query: fullQuery,
           //   },
           // });
+          let searchOpt : PaginatedSearchOptions = new PaginatedSearchOptions({
+            configuration: this.configurationName,
+            query: fullQuery,
+          });
+
+          this.searchService.getEndpoint(searchOpt)
+
+          .subscribe((res)=>{
+            console.log(res);
+
+          })
         }
       } else {
         this.isFormValid = false;

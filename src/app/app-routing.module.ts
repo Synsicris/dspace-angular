@@ -289,7 +289,8 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
           {
             path: 'browse-by-projects',
             loadChildren: () => import('./+query-builder-page/query-builder.module')
-              .then((m) => m.QueryBuilderModule)
+              .then((m) => m.QueryBuilderModule),
+            canActivate: [AuthenticatedGuard]
           },
           { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
         ]
