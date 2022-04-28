@@ -1,7 +1,5 @@
-import { PaginatedSearchOptions } from './../../shared/search/models/paginated-search-options.model';
-import { getRemoteDataPayload } from './../../core/shared/operators';
-import { SearchService } from './../../core/shared/search/search.service';
-import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
+import { SearchSimpleItemService } from './../../shared/create-simple-item-modal/search-simple-item/search-simple-item.service';
+import { Component, OnInit, ViewChildren, QueryList, Input, Output, EventEmitter } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -9,7 +7,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { isEqual } from 'lodash';
 import { QueryConditionGroupComponent } from '../query-condition-group/query-condition-group.component';
 
@@ -17,6 +14,7 @@ import { QueryConditionGroupComponent } from '../query-condition-group/query-con
   selector: 'ds-query-builder',
   templateUrl: './query-builder.component.html',
   styleUrls: ['./query-builder.component.scss'],
+  providers: [SearchSimpleItemService]
 })
 export class QueryBuilderComponent implements OnInit {
 
@@ -35,15 +33,14 @@ export class QueryBuilderComponent implements OnInit {
    */
   @Input() firstDefaultFilter: string = 'entityType';
 
+  @Output() onQueryCompose: EventEmitter<string> = new EventEmitter();
+
   /**
  * Configuration name
  * @type {string}
  * @memberof QueryBuilderComponent
  */
   @Input() configurationName = 'default';
-
-  // TODO : To be Removed , for test purposes
-  query = '';
 
   /**
    * Flag to check form validity
@@ -74,9 +71,7 @@ export class QueryBuilderComponent implements OnInit {
   });
 
   constructor(
-    private searchService: SearchService,
     private formBuilder: FormBuilder,
-    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -101,25 +96,7 @@ export class QueryBuilderComponent implements OnInit {
         this.isFormValid = true;
         const fullQuery = this.composeQuery();
         if (fullQuery) {
-          // TODO: How will be showen the results
-          // this.router.navigate([this.searchService.getSearchLink()], {
-          //   queryParams: {
-          //     page: 1,
-          //     configuration: this.configurationName,
-          //     query: fullQuery,
-          //   },
-          // });
-          let searchOpt : PaginatedSearchOptions = new PaginatedSearchOptions({
-            configuration: this.configurationName,
-            query: fullQuery,
-          });
-
-          this.searchService.getEndpoint(searchOpt)
-
-          .subscribe((res)=>{
-            console.log(res);
-
-          })
+          this.onQueryCompose.emit(fullQuery);
         }
       } else {
         this.isFormValid = false;
@@ -146,7 +123,7 @@ export class QueryBuilderComponent implements OnInit {
           }
         }
       }
-      this.query = encodeURIComponent(fullQuery);
+
       return encodeURIComponent(fullQuery);
     }
     return fullQuery;

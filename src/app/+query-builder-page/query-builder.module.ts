@@ -10,6 +10,7 @@ import { QueryResearchOutputComponent } from './query-research-output/query-rese
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchModule } from '../shared/search/search.module';
 import { ControlTypeCheckerPipe } from './pipes/control-type-checker.pipe';
+import { SelectedProjectListComponent } from './selected-project-list/selected-project-list.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ControlTypeCheckerPipe } from './pipes/control-type-checker.pipe';
     QueryConditionGroupComponent,
     ControlTypeCheckerPipe,
     QueryResearchOutputComponent,
+    SelectedProjectListComponent,
   ],
   imports: [
     CommonModule,

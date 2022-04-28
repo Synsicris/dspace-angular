@@ -20,6 +20,8 @@ export class QueryResearchOutputComponent {
 
   configurationName = 'default';
 
+  searchQuery: string;
+
   constructor() {}
 
   onTabSelect(stepNr: number) {
@@ -38,8 +40,11 @@ export class QueryResearchOutputComponent {
         break;
     }
   }
-}
 
+  getSearchQuery(query: string) {
+    this.searchQuery = query;
+  }
+}
 export enum CollapsibleSteps {
   StepOne = 1,
   StepTwo = 2,

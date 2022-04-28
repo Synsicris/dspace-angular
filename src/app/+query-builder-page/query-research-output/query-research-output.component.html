@@ -28,10 +28,12 @@
         <div class="builder-container" *ngIf="searchSelected">
           <ds-query-builder
             [configurationName]="configurationName"
+            (onQueryCompose)="getSearchQuery($event)"
           ></ds-query-builder>
         </div>
-        <ng-container *ngIf="searchAll">
-          <p>Search in all projects</p>
+        <ng-container *ngIf="searchAll || (searchSelected && searchQuery)">
+          <ds-selected-project-list [query]="searchQuery" [configuration]="configurationName">
+          </ds-selected-project-list>
         </ng-container>
       </ng-template>
     </ngb-panel>
