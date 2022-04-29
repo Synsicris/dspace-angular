@@ -23,6 +23,7 @@ export class SelectedProjectListComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   getResults() {
+    // TODO: get data
     let searchOpt: PaginatedSearchOptions = new PaginatedSearchOptions({
       configuration: this.configuration,
       query: this.query,

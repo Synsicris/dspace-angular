@@ -80,7 +80,7 @@
               </ng-option>
             </ng-select>
 
-            <div class="col-md-3" *ngIf="isLast">
+            <div class="col-md-3 text-center" *ngIf="isLast">
               <button
                 [disabled]="!queryGroup.get(i + '.value')?.value"
                 id="addButton"
@@ -94,11 +94,11 @@
                 }}
               </button>
             </div>
-            <div class="col-md-2 p-0 text-center" *ngIf="!isLast">
+            <div class="col-md-3 p-0 text-center" *ngIf="!isLast">
               <span>AND</span>
             </div>
 
-            <div class="col-md-1 p-0 text-right" *ngIf="!isLast">
+            <div class="col-md-1 p-0 text-right" *ngIf="queryGroup.length > 1">
               <button
                 id="deleteButton"
                 type="button"

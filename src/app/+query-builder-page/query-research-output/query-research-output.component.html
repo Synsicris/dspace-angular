@@ -7,29 +7,17 @@
       <ng-template ngbPanelContent>
         <div class="btn-group btn-group-toggle mb-4">
           <label class="btn-outline-info" ngbButtonLabel>
-            <input
-              type="checkbox"
-              ngbButton
-              [(ngModel)]="searchAll"
-              (change)="onTabSelect(1)"
-            />
-            Search in all projects
+            <input type="checkbox" ngbButton [(ngModel)]="searchAll" (change)="onTabSelect(1)" />
+            {{"query-builder.synsicris.label.search-all" | translate }}
           </label>
           <label class="btn-outline-info" ngbButtonLabel>
-            <input
-              type="checkbox"
-              ngbButton
-              [(ngModel)]="searchSelected"
-              (change)="onTabSelect(2)"
-            />
-            Search in selected projects
+            <input type="checkbox" ngbButton [(ngModel)]="searchSelected" (change)="onTabSelect(2)" />
+            {{"query-builder.synsicris.label.search-selected" | translate }}
           </label>
         </div>
         <div class="builder-container" *ngIf="searchSelected">
-          <ds-query-builder
-            [configurationName]="configurationName"
-            (onQueryCompose)="getSearchQuery($event)"
-          ></ds-query-builder>
+          <ds-query-builder [configurationName]="configurationName" (onQueryCompose)="getSearchQuery($event)">
+          </ds-query-builder>
         </div>
         <ng-container *ngIf="searchAll || (searchSelected && searchQuery)">
           <ds-selected-project-list [query]="searchQuery" [configuration]="configurationName">
@@ -42,10 +30,7 @@
         <span>Step 2</span>
       </ng-template>
       <ng-template ngbPanelContent>
-        <ds-themed-search
-          [showCharts]="true"
-          [configuration]="configurationName"
-        ></ds-themed-search>
+        <ds-themed-search [showCharts]="true" [configuration]="configurationName"></ds-themed-search>
       </ng-template>
     </ngb-panel>
   </ngb-accordion>

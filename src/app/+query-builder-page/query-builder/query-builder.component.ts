@@ -33,6 +33,12 @@ export class QueryBuilderComponent implements OnInit {
    */
   @Input() firstDefaultFilter: string = 'entityType';
 
+  /**
+   * Emits the value of the query to upper level
+   *
+   * @type {EventEmitter<string>}
+   * @memberof QueryBuilderComponent
+   */
   @Output() onQueryCompose: EventEmitter<string> = new EventEmitter();
 
   /**
@@ -48,7 +54,7 @@ export class QueryBuilderComponent implements OnInit {
   isFormValid: boolean;
 
   /**
-   * logical conditional operator list
+   * Logical conditional operator array
    *
    * @type {string[]}
    * @memberof QueryBuilderComponent
@@ -56,7 +62,7 @@ export class QueryBuilderComponent implements OnInit {
   logicalOperators: string[] = ['AND', 'OR'];
 
   /**
-   * initialization of the main form
+   * Initialization of the main form
    *
    * @type {FormGroup}
    * @memberof QueryBuilderComponent
@@ -70,14 +76,12 @@ export class QueryBuilderComponent implements OnInit {
     ]),
   });
 
-  constructor(
-    private formBuilder: FormBuilder,
-  ) {}
+  constructor( private formBuilder: FormBuilder ) {}
 
   ngOnInit(): void {}
 
   /**
-   * get the form array
+   * Get the form array
    *
    * @readonly
    * @memberof QueryBuilderComponent
@@ -87,12 +91,13 @@ export class QueryBuilderComponent implements OnInit {
   }
 
   /**
-   * redirect to search page
+   * Check form validity
+   * Compose the full query and emits the query value
    */
-  filter() {
+  onFormSubmit() {
     if (this.searchForm.getRawValue().queryArray.length > 0) {
       this.searchForm.markAllAsTouched();
-      if (this.searchForm.valid) {
+      if (this.searchForm.valid || this.searchForm.disabled) {
         this.isFormValid = true;
         const fullQuery = this.composeQuery();
         if (fullQuery) {
@@ -146,7 +151,7 @@ export class QueryBuilderComponent implements OnInit {
   }
 
   /**
-   * add new query group
+   * Add new query group
    */
   addGroup() {
     this.queryArray.push(new FormControl('OR'));
@@ -177,7 +182,7 @@ export class QueryBuilderComponent implements OnInit {
   }
 
   /**
-   * reset the form
+   * Reset the form
    */
   resetForm() {
     this.searchForm = new FormGroup({

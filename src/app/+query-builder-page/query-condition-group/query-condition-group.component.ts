@@ -7,7 +7,7 @@ import { FacetValue } from './../../shared/search/models/facet-value.model';
 import { SearchFilterConfig } from './../../shared/search/models/search-filter-config.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { isEqual, isNil } from 'lodash';
-import { isNotEmpty } from './../../shared/empty.util';
+import { hasValue, isNotEmpty } from './../../shared/empty.util';
 import { SearchFilter } from './../../shared/search/models/search-filter.model';
 import {
   AbstractControl,
@@ -51,6 +51,12 @@ export class QueryConditionGroupComponent implements OnInit {
    */
   @Input() firstDefaultFilter: string;
 
+  /**
+   * Get the reference of the current form group name
+   *
+   * @type {FormGroup}
+   * @memberof QueryConditionGroupComponent
+   */
   formGroup: FormGroup;
 
   /**
@@ -86,7 +92,7 @@ export class QueryConditionGroupComponent implements OnInit {
 
   /**
    * Composed query for the group
-   *
+   * Used to get the value of query in the parent level
    * @memberof QueryConditionGroupComponent
    */
   public searchOptQuery = '';
@@ -105,7 +111,7 @@ export class QueryConditionGroupComponent implements OnInit {
   }
 
   /**
-   * get the query group
+   * The value for the current query group
    *
    * @readonly
    * @type {FormArray}
@@ -115,10 +121,22 @@ export class QueryConditionGroupComponent implements OnInit {
     return this.formGroup.get('queryGroup') as FormArray;
   }
 
+  /**
+   * The aggregate value of the current query group,
+   * including the disabled controls.
+   *
+   * @readonly
+   * @protected
+   * @type {FilterValue[]}
+   * @memberof QueryConditionGroupComponent
+   */
   protected get queryGroupValue(): FilterValue[] {
     return this.queryGroup.getRawValue();
   }
 
+  /**
+   * Gets the Facet Values for the default selected filter
+   */
   protected getSearchFilterConfigs() {
     this.searchService
       .getConfig(null, this.configurationName)
@@ -136,7 +154,9 @@ export class QueryConditionGroupComponent implements OnInit {
   }
 
   /**
-   * On value selection of first dropdown
+   * On value selection of first dropdown :
+   * Compose the query for the applied filters till this moment,
+   * Get Facets to fill the filter dropdown and enables the next in line control
    */
   onDefaultValueSelect(selectedValue) {
     let defaultSearchfilter = [
@@ -162,11 +182,16 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param idx
    */
   onFilterSelect(searchFilter: string, idx: number) {
+    // set value of last dropdown to null, in case it has value
+    // when the filter is changed also the value field should be emptied
+    this.queryGroup.get(`${idx}.value`).setValue(null);
+    // get values for the selected filter
     this.getFacetValues(searchFilter, 1, SearchValueMode.Select, idx);
   }
 
   /**
-   * disable the last selected value
+   * Disable the last selected value
+   * Compose the query for the applied filters till this moment
    * @param selectedValue
    * @param parentFilter
    */
@@ -206,7 +231,7 @@ export class QueryConditionGroupComponent implements OnInit {
   }
 
   /**
-   * disable the last selected filter and value pair
+   * Disable the last selected filter and value pair
    * add a new query statement
    */
   addQueryStatement(index: number): void {
@@ -238,30 +263,36 @@ export class QueryConditionGroupComponent implements OnInit {
   }
 
   /**
-   * delete a query statement and enable the filter option
+   * Delete a query statement and enable the filter option
    * @param index qyery statement index
    */
   deleteCondition(index: number, selectedValue: AbstractControl) {
     if (index > -1) {
       // when a condition is deleted, the filter's selected value is enabled again
-      (
-        this.filterValuesMap
-          .get(this.queryGroupValue[index].filter)
-          .find((x) => isEqual(x.value, selectedValue.value)) as any
-      ).disable = false;
+      if (hasValue(selectedValue.value)) {
+        (
+          this.filterValuesMap
+            .get(this.queryGroupValue[index].filter)
+            .find((x) => isEqual(x.value, selectedValue.value)) as any
+        ).disable = false;
+      }
 
       // remove the query statement
       this.queryGroup.removeAt(index);
     }
   }
 
+  /**
+   * Increase the page and get more values if there are any
+   * @param searchFilter
+   * @param idx
+   */
   onValuesScroll(searchFilter: string, idx: number) {
-    // get more values if there are any
     this.getFacetValues(searchFilter, null, SearchValueMode.Scroll, idx);
   }
 
   /**
-   * get facet values for each configuration,
+   * Get facet values for each configuration,
    * in order to display only the ones with data
    * @param mode
    */
@@ -290,6 +321,14 @@ export class QueryConditionGroupComponent implements OnInit {
     });
   }
 
+  /**
+   * Get facet values for given configs
+   * @param searchFilter filter applied per row
+   * @param page page number
+   * @param mode moment in which the data are needed
+   * @param idx index of the row
+   * @param searchOptions
+   */
   private getFacetValues(
     searchFilter: string,
     page: number = 1,
@@ -349,7 +388,7 @@ export class QueryConditionGroupComponent implements OnInit {
   }
 
   /**
-   * enable the disabled dropdowns
+   * Enable the disabled dropdowns
    * @param idx
    * @param name
    */
@@ -363,6 +402,11 @@ export class QueryConditionGroupComponent implements OnInit {
     this.queryGroup.updateValueAndValidity();
   }
 
+  /**
+   * Compose the query for the applied filters
+   * @param filters applied filters
+   * @returns
+   */
   private buildSearchQuery(filters: SearchFilter[]) {
     const queries = [];
     filters.forEach((filter) => {
@@ -374,6 +418,10 @@ export class QueryConditionGroupComponent implements OnInit {
     return encodeURIComponent(queries.join(' AND '));
   }
 
+  /**
+   * Calculate to enable/disable the values based on previous changes/selections
+   * @param parentFilter selected filter in same row
+   */
   calcValueSelection(parentFilter: string) {
     let disabledValues = this.filterValuesMap
       .get(parentFilter)
@@ -381,6 +429,7 @@ export class QueryConditionGroupComponent implements OnInit {
     // calculate disabled previous selected values
     disabledValues.forEach((x) => {
       if (!this.queryGroupValue.find((f) => isEqual(f.value, x.value))) {
+        // enable the ones that are not found in the form value
         (
           this.filterValuesMap
             .get(parentFilter)

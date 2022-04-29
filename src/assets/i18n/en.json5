@@ -8237,5 +8237,9 @@
 
   "query-builder.synsicris.button.label.reset": "Reset",
 
-  "query-builder.synsicris.message.label.validation": "Fill out all the fields"
+  "query-builder.synsicris.message.label.validation": "Fill out all the fields",
+
+  "query-builder.synsicris.label.search-all": "Search in all projects",
+
+  "query-builder.synsicris.label.search-selected": "Search in selected projects",
 }
