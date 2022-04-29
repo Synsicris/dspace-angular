@@ -1,0 +1,12 @@
+<ng-container *ngIf="projectShared">
+  <span class="badge badge-secondary">
+    <ng-container *ngIf="projectShared === 'parentproject'">
+      <i class="fas fa-lock mr-2-open"></i>
+      {{'item.grant.badge.parentproject' | translate}}
+    </ng-container>
+    <ng-container *ngIf="projectShared === 'project'">
+      <i class="fas fa-lock mr-2"></i>
+      {{'item.grant.badge.project' | translate : 'ORG' }}
+    </ng-container>
+  </span>
+</ng-container>
