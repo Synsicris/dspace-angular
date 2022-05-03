@@ -23,6 +23,8 @@
         </ng-container>
       </div>
 
+      <ds-item-actions [object]="dso" [showEditPermission]="false"></ds-item-actions>
+
     </ds-truncatable>
 
     <ds-metric-badges *ngIf="!hideMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>

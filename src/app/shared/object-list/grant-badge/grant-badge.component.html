@@ -1,4 +1,4 @@
-<ng-container *ngIf="projectShared">
+<ng-container *ngIf="projectShared && (projectShared === 'parentproject' || projectShared === 'project')">
   <span class="badge badge-secondary">
     <ng-container *ngIf="projectShared === 'parentproject'">
       <i class="fas fa-lock mr-2-open"></i>
