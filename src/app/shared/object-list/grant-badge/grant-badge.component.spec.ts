@@ -12,7 +12,7 @@ let fixture: ComponentFixture<GrantBadgeComponent>;
 
 const type = 'authorOfPublication';
 
-const mockItemWithEntityType = Object.assign(new Item(), {
+const mockItem = Object.assign(new Item(), {
   bundles: observableOf({}),
   metadata: {
     'dspace.entity.type': [
@@ -24,13 +24,37 @@ const mockItemWithEntityType = Object.assign(new Item(), {
   }
 });
 
-const mockItemWithoutEntityType = Object.assign(new Item(), {
+const mockItemParentProject = Object.assign(new Item(), {
   bundles: observableOf({}),
   metadata: {
-    'dc.title': [
+    'dspace.entity.type': [
       {
         language: 'en_US',
-        value: 'This is just another title'
+        value: type
+      }
+    ],
+    'cris.project.shared': [
+      {
+        language: 'en_US',
+        value: 'parentproject'
+      }
+    ]
+  }
+});
+
+const mockItemProject = Object.assign(new Item(), {
+  bundles: observableOf({}),
+  metadata: {
+    'dspace.entity.type': [
+      {
+        language: 'en_US',
+        value: type
+      }
+    ],
+    'cris.project.shared': [
+      {
+        language: 'en_US',
+        value: 'project'
       }
     ]
   }
@@ -52,27 +76,55 @@ describe('ItemGrantBadgeComponent', () => {
     comp = fixture.componentInstance;
   }));
 
-  describe('When the item has an entity type', () => {
+  describe('When the item has cris.project.shared is not present', () => {
     beforeEach(() => {
-      comp.object = mockItemWithEntityType;
+      comp.object = mockItem;
       fixture.detectChanges();
     });
 
-    it('should show the entity type badge', () => {
+    it('should not show badge', () => {
       const badge = fixture.debugElement.query(By.css('span.badge'));
-      expect(badge.nativeElement.textContent).toContain(type.toLowerCase());
+      expect(badge).toBeFalsy();
     });
   });
 
-  describe('When the item has no entity type', () => {
+  describe('When the item has cris.project.shared parentproject', () => {
     beforeEach(() => {
-      comp.object = mockItemWithoutEntityType;
+      comp.object = mockItemParentProject;
       fixture.detectChanges();
     });
 
-    it('should show an item badge', () => {
+    it('should show badge', () => {
       const badge = fixture.debugElement.query(By.css('span.badge'));
-      expect(badge.nativeElement.textContent).toContain('item');
+      expect(badge).toBeTruthy();
     });
+
+    it('should show open lock', () => {
+      const badge = fixture.debugElement.query(By.css('.fa-lock-open'));
+      expect(badge).toBeTruthy();
+    });
+
+
   });
+
+  describe('When the item has cris.project.shared project', () => {
+    beforeEach(() => {
+      comp.object = mockItemProject;
+      fixture.detectChanges();
+    });
+
+    it('should show badge', () => {
+      const badge = fixture.debugElement.query(By.css('span.badge'));
+      expect(badge).toBeTruthy();
+    });
+
+    it('should show lock', () => {
+      const badge = fixture.debugElement.query(By.css('.fa-lock'));
+      expect(badge).toBeTruthy();
+    });
+
+  });
+
+
+
 });

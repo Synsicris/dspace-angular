@@ -35,8 +35,9 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    * The Item object
    */
   @Input() object: Item;
+
   /**
-   * The Item object
+   * A boolean representing if edit permission button can be shown
    */
   @Input() showEditPermission = true;
 

@@ -73,6 +73,8 @@
 <div *ngIf="displayConfigurations === null" class="d-flex justify-content-between">
   <div>
     <ds-type-badge class="d-inline-block" *ngIf="showLabel" [object]="dso"></ds-type-badge>
+    <ds-grant-badge class="d-block" [object]="dso"></ds-grant-badge>
+
     <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
       <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
         rel="noopener noreferrer" [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out"
@@ -102,6 +104,9 @@
             [innerHTML]="firstMetadataValue('dc.description.abstract')"></span>
         </ds-truncatable-part>
       </div>
+
+      <ds-item-actions [object]="dso" [showEditPermission]="false"></ds-item-actions>
+
     </ds-truncatable>
     <ds-metric-badges *ngIf="!hideMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
   </div>

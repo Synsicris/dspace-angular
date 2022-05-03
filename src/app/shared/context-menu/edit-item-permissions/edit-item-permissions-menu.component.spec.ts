@@ -1,3 +1,5 @@
+import { ItemDataService } from './../../../core/data/item-data.service';
+import { AuthorizationDataService } from './../../../core/data/feature-authorization/authorization-data.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
@@ -5,37 +7,25 @@ import { Item } from '../../../core/shared/item.model';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
-import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { EditItemPermissionsMenuComponent } from './edit-item-permissions-menu.component';
-import { EditItem } from '../../../core/submission/models/edititem.model';
-import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
-import { createPaginatedList } from '../../testing/utils.test';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
 import { By } from '@angular/platform-browser';
-import { NotificationsService } from '../../notifications/notifications.service';
-import { NotificationsServiceStub } from '../../testing/notifications-service.stub';
+import { of as observableOf } from 'rxjs';
+import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 
 describe('EditItemPermissionsMenuComponent', () => {
   let component: EditItemPermissionsMenuComponent;
   let componentAsAny: any;
   let fixture: ComponentFixture<EditItemPermissionsMenuComponent>;
 
-  let editItemDataService: any;
   let dso: DSpaceObject;
+  let authorizationService: any;
   // tslint:disable-next-line:prefer-const
-  let notificationService = new NotificationsServiceStub();
+  let modalService;
   const editItemMode: EditItemMode = Object.assign(new EditItemMode(), {
     name: 'test',
     label: 'test'
-  });
-
-  const editItem: EditItem = Object.assign(new EditItem(), {
-    modes: createSuccessfulRemoteDataObject$(createPaginatedList([editItemMode]))
-  });
-
-  const noEditItem: EditItem = Object.assign(new EditItem(), {
-    modes: createSuccessfulRemoteDataObject$(createPaginatedList([]))
   });
 
   beforeEach(async(() => {
@@ -45,12 +35,12 @@ describe('EditItemPermissionsMenuComponent', () => {
         self: { href: 'test-item-selflink' }
       }
     });
-    editItemDataService = jasmine.createSpyObj('EditItemDataService', {
-      findById: jasmine.createSpy('findById')
+    authorizationService = jasmine.createSpyObj('authorizationService', {
+      isAuthorized: jasmine.createSpy('isAuthorized')
     });
 
     TestBed.configureTestingModule({
-      declarations: [EditItemPermissionsMenuComponent],
+      declarations: [EditItemPermissionsMenuComponent, EditItemGrantsModalComponent],
       imports: [
         TranslateModule.forRoot({
           loader: {
@@ -60,38 +50,47 @@ describe('EditItemPermissionsMenuComponent', () => {
         }),
         RouterTestingModule.withRoutes([])],
       providers: [
-        { provide: EditItemDataService, useValue: editItemDataService },
         { provide: 'contextMenuObjectProvider', useValue: dso },
         { provide: 'contextMenuObjectTypeProvider', useValue: DSpaceObjectType.ITEM },
-        { provide: NotificationsService, useValue: notificationService }
+        { provide: AuthorizationDataService, useValue: authorizationService },
+        { provide: ItemDataService, useValue: authorizationService },
 
       ]
     }).compileComponents();
   }));
 
-  describe('when edit modes are available', () => {
+  describe('when edit permission is authorized', () => {
     beforeEach(() => {
-      editItemDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(editItem));
+      authorizationService.isAuthorized.and.returnValue(observableOf(true));
       fixture = TestBed.createComponent(EditItemPermissionsMenuComponent);
       component = fixture.componentInstance;
       componentAsAny = fixture.componentInstance;
       component.contextMenuObject = dso;
+
       fixture.detectChanges();
     });
 
-    it('should init edit mode properly', () => {
-      expect(componentAsAny.editModes$.value).toEqual([editItemMode]);
+    it('should authorizationService.isAuthorized to have been called', () => {
+      expect(authorizationService.isAuthorized).toHaveBeenCalled();
     });
 
     it('should render a button', () => {
       const link = fixture.debugElement.query(By.css('button'));
       expect(link).not.toBeNull();
     });
+
+    it('should render a button', () => {
+      spyOn(component, 'openEditGrantsModal');
+      fixture.detectChanges();
+      const link = fixture.debugElement.query(By.css('button'));
+      link.nativeElement.click();
+      expect(component.openEditGrantsModal).toHaveBeenCalled();
+    });
   });
 
-  describe('when no edit modes are available', () => {
+  describe('when edit permission is not authorized', () => {
     beforeEach(() => {
-      editItemDataService.findById.and.returnValue(createSuccessfulRemoteDataObject$(noEditItem));
+      authorizationService.isAuthorized.and.returnValue(observableOf(false));
       fixture = TestBed.createComponent(EditItemPermissionsMenuComponent);
       component = fixture.componentInstance;
       componentAsAny = fixture.componentInstance;
@@ -99,11 +98,11 @@ describe('EditItemPermissionsMenuComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should init edit mode properly', () => {
-      expect(componentAsAny.editModes$.value).toEqual([]);
+    it('should authorizationService.isAuthorized to have been called', () => {
+      expect(authorizationService.isAuthorized).toHaveBeenCalled();
     });
 
-    it('should render a button', () => {
+    it('should not render a button', () => {
       const link = fixture.debugElement.query(By.css('button'));
       expect(link).toBeNull();
     });

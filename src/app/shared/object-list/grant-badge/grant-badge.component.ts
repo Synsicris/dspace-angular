@@ -22,7 +22,6 @@ export class GrantBadgeComponent implements OnInit {
   ngOnInit() {
     if (!isUndefined(this.object.firstMetadataValue('cris.project.shared')) && hasValue(this.object.firstMetadataValue('cris.project.shared'))) {
       this.projectShared = this.object.firstMetadataValue('cris.project.shared');
-      console.log(this.object);
     }
   }
 
