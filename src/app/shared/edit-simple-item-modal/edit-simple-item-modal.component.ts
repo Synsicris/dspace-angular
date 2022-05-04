@@ -1,3 +1,4 @@
+import { MetadataValue } from './../../core/shared/metadata.models';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
@@ -14,6 +15,8 @@ import { Item } from '../../core/shared/item.model';
 import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
 import { SubmissionFormsModel } from '../../core/config/models/config-submission-forms.model';
 import { MetadataMap } from '../../core/shared/metadata.models';
+import { DynamicRowGroupModel } from '../form/builder/ds-dynamic-form-ui/models/ds-dynamic-row-group-model';
+import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-metadata-value.model';
 
 @Component({
   selector: 'ds-edit-simple-item-modal',
@@ -80,6 +83,12 @@ export class EditSimpleItemModalComponent implements OnInit {
    */
   protected subs: Subscription[] = [];
 
+  /**
+   * List of form data on initialization
+   * @type {MetadataMap}
+   */
+  protected allFormData: MetadataMap;
+
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilderService: FormBuilderService,
@@ -94,6 +103,9 @@ export class EditSimpleItemModalComponent implements OnInit {
   ngOnInit(): void {
     this.formId = this.formService.getUniqueId('edit-simple-item');
     this.initFormModel();
+    this.formService.getFormData(this.formId).pipe(take(1)).subscribe((formData: MetadataMap) => {
+      this.allFormData = formData;
+    });
   }
 
   /**
@@ -114,13 +126,14 @@ export class EditSimpleItemModalComponent implements OnInit {
       mergeMap(() => this.formService.getFormData(this.formId)),
       take(1),
       mergeMap((formData: MetadataMap) => {
-        return this.itemService.updateMultipleItemMetadata(this.itemId, this.editMode, this.formSectionName, formData).pipe(
+        console.log(formData, this.formModel);
+        return this.itemService.updateMultipleItemMetadata(this.itemId, this.editMode, this.formSectionName, this.parsedFormData(formData)).pipe(
           getFirstSucceededRemoteDataPayload()
         );
       })
-      ).subscribe((item: Item) => {
-        this.itemUpdate.emit(item);
-      })
+    ).subscribe((item: Item) => {
+      this.itemUpdate.emit(item);
+    })
     );
   }
 
@@ -141,5 +154,20 @@ export class EditSimpleItemModalComponent implements OnInit {
           SubmissionScopeType.WorkspaceItem
         );
       });
+  }
+
+  /**
+   * Check if information is missing from formModel so we can clear it.
+   */
+  private parsedFormData(formData): MetadataMap {
+    if (this.formModel.length > Object.keys(formData).length) {
+      this.formModel.forEach((model: DynamicRowGroupModel) => {
+        if (Object.keys(formData).indexOf(model.group[0].name) === -1) {
+          const addFormData: any = this.allFormData[model.group[0].name];
+          formData = Object.assign({}, formData, { [model.group[0].name]: [Object.assign({}, addFormData[0], { value: null }) as FormFieldMetadataValueObject] });
+        }
+      });
+    }
+    return formData;
   }
 }
