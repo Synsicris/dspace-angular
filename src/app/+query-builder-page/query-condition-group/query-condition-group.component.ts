@@ -323,7 +323,7 @@ export class QueryConditionGroupComponent implements OnInit {
 
   /**
    * Get facet values for given configs
-   * @param searchFilter filter applied per row
+   * @param searchFilter filter label applied per row
    * @param page page number
    * @param mode moment in which the data are needed
    * @param idx index of the row

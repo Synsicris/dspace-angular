@@ -46,16 +46,16 @@ export class QueryResearchOutputComponent {
   constructor() {}
 
   /**
-   * @param stepNr number of the selected tab
+   * @param tabNr number of the selected tab
    */
-  onTabSelect(stepNr: number) {
-    switch (stepNr) {
-      case CollapsibleSteps.StepOne:
+  onTabSelect(tabNr: number) {
+    switch (tabNr) {
+      case CollapsibleTabs.One:
         this.searchSelected = false;
         this.searchAll = true;
         break;
 
-      case CollapsibleSteps.StepTwo:
+      case CollapsibleTabs.Two:
         this.searchAll = false;
         this.searchSelected = true;
         break;
@@ -73,7 +73,7 @@ export class QueryResearchOutputComponent {
   }
 }
 
-export enum CollapsibleSteps {
-  StepOne = 1,
-  StepTwo = 2,
+export enum CollapsibleTabs {
+  One = 1,
+  Two = 2,
 }
