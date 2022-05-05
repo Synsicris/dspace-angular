@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{'item.edit.head' | translate}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body modal-body-height">
+  <ds-loading *ngIf="(processing | async)" [message]="'loading.default' | translate"></ds-loading>
+  <ds-form *ngIf="!(processing | async) && formId && formModel?.length > 0" #formRef="formComponent"
+           [formId]="formId"
+           [formModel]="formModel"
+           [formLayout]="formLayout"
+           [displaySubmit]="displaySubmit"
+           (submitForm)="editTask()"
+           (cancel)="activeModal.dismiss(false)"></ds-form>
+</div>
