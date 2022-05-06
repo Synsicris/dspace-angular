@@ -466,7 +466,7 @@ export class ItemDataService extends DataService<Item> {
                 confidence: metadataValue.confidence
               };
               if (isEmpty(valueToSave.value) || isUndefined(valueToSave.value) || isNull(valueToSave.value)) {
-                this.removeMetadata(pathName, metadataName);
+                this.removeMetadataPatch(pathName, metadataName);
               } else if (isNotEmpty(itemMetadataValues) && isNotEmpty(itemMetadataValues[place])) {
                 this.replaceMetadataPatch(pathName, metadataName, place, valueToSave);
               } else {
@@ -492,7 +492,7 @@ export class ItemDataService extends DataService<Item> {
     this.operationsBuilder.add(path, value, true, true);
   }
 
-  removeMetadata(pathName: string, metadataName: string): void {
+  removeMetadataPatch(pathName: string, metadataName: string): void {
     const pathCombiner = new JsonPatchOperationPathCombiner(pathName);
     const path = pathCombiner.getPath([metadataName]);
     this.operationsBuilder.remove(path);

@@ -1,4 +1,3 @@
-import { MetadataValue } from './../../core/shared/metadata.models';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
@@ -126,7 +125,6 @@ export class EditSimpleItemModalComponent implements OnInit {
       mergeMap(() => this.formService.getFormData(this.formId)),
       take(1),
       mergeMap((formData: MetadataMap) => {
-        console.log(formData, this.formModel);
         return this.itemService.updateMultipleItemMetadata(this.itemId, this.editMode, this.formSectionName, this.parsedFormData(formData)).pipe(
           getFirstSucceededRemoteDataPayload()
         );
@@ -157,7 +155,7 @@ export class EditSimpleItemModalComponent implements OnInit {
   }
 
   /**
-   * Check if information is missing from formModel so we can clear it.
+   * Check if information is missing from formModel, so we can clear it.
    */
   private parsedFormData(formData): MetadataMap {
     if (this.formModel.length > Object.keys(formData).length) {
