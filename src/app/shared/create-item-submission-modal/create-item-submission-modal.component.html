@@ -5,12 +5,26 @@
   </button>
 </div>
 <div class="modal-body modal-body-height">
-  <ds-loading *ngIf="(processing | async)" [message]="'loading.default' | translate"></ds-loading>
-  <ds-form *ngIf="!(processing | async) && formId && formModel?.length > 0" #formRef="formComponent"
-           [formId]="formId"
-           [formModel]="formModel"
-           [formLayout]="formLayout"
-           [displaySubmit]="displaySubmit"
-           (submitForm)="editTask()"
-           (cancel)="activeModal.dismiss(false)"></ds-form>
+
+  <ng-container *ngIf="!selectedCollection;else form;">
+    <ng-container *ngIf="collections.length > 0">
+      <button *ngFor="let collection of collections" class="dropdown-item collection-item p-3"
+        title="{{ collection.name }}" (click)="onSelect(collection)">
+        <ul class="list-unstyled mb-0">
+          <li class="list-item text-truncate text-secondary" *ngFor="let item of collection.communities">
+            {{ item.name}} <i class="fa fa-level-down" aria-hidden="true"></i>
+          </li>
+          <li class="list-item text-truncate text-primary font-weight-bold">{{ collection.name}}</li>
+        </ul>
+      </button>
+    </ng-container>
+  </ng-container>
+
+
+  <ng-template #form>
+    <ds-loading *ngIf="(processing | async)" [message]="'loading.default' | translate"></ds-loading>
+    <ds-form *ngIf="!(processing | async) && formModel?.length > 0" #formRef="formComponent" [formModel]="formModel"
+      [displaySubmit]="true" (submitForm)="submit($event)" (cancel)="activeModal.dismiss(false)">
+    </ds-form>
+  </ng-template>
 </div>

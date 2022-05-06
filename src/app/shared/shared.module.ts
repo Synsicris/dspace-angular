@@ -242,7 +242,6 @@ import { ItemCreateComponent } from './item/item-create/item-create.component';
 import { AuthorityDropdownComponent } from './authority-dropdown/authority-dropdown.component';
 import { ItemVersionListComponent } from './item-version-list/item-version-list.component';
 import { CompareItemComponent } from './compare-item/compare-item.component';
-import { CreateItemSubmissionModalModule } from './create-item-submission-modal/create-item-submission-modal.module';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -269,7 +268,6 @@ const MODULES = [
   ChartsModule,
   MaterialModule,
   FlexLayoutModule,
-  CreateItemSubmissionModalModule
 ];
 
 const ROOT_MODULES = [

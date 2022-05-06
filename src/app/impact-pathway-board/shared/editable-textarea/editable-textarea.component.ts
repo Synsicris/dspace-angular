@@ -1,3 +1,4 @@
+import { CreateItemSubmissionModalComponent } from './../../../shared/create-item-submission-modal/create-item-submission-modal.component';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -69,14 +70,22 @@ export class EditableTextareaComponent {
   /**
    * Open the modal with edit form
    */
+  // openEditModal() {
+  //   const modalRef = this.modalService.open(EditSimpleItemModalComponent, { size: 'lg' });
+  //   modalRef.componentInstance.editMode = this.editMode;
+  //   modalRef.componentInstance.formConfig = this.formConfig;
+  //   modalRef.componentInstance.formSectionName = this.formSectionName;
+  //   modalRef.componentInstance.itemId = this.itemId;
+  //   modalRef.componentInstance.itemUpdate.pipe(
+  //     take(1)
+  //   ).subscribe((item: Item) => this.contentChange.emit(item));
+  // }
+
   openEditModal() {
-    const modalRef = this.modalService.open(EditSimpleItemModalComponent, { size: 'lg' });
-    modalRef.componentInstance.editMode = this.editMode;
-    modalRef.componentInstance.formConfig = this.formConfig;
-    modalRef.componentInstance.formSectionName = this.formSectionName;
-    modalRef.componentInstance.itemId = this.itemId;
-    modalRef.componentInstance.itemUpdate.pipe(
-      take(1)
-    ).subscribe((item: Item) => this.contentChange.emit(item));
+    const modalRef = this.modalService.open(CreateItemSubmissionModalComponent, { size: 'lg' });
+    modalRef.componentInstance.entityType = 'comment';
+    modalRef.componentInstance.collectionId = '10257c5e-9787-44c3-8036-e2fb2ccc6613';
+    modalRef.componentInstance.formName = 'comments';
+
   }
 }
