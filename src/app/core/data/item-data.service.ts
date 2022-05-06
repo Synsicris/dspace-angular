@@ -14,7 +14,7 @@ import {
   take,
   tap
 } from 'rxjs/operators';
-import { hasValue, isNotEmpty, isNotEmptyOperator } from '../../shared/empty.util';
+import { hasValue, isEmpty, isNotEmpty, isNotEmptyOperator, isNull } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { BrowseService } from '../browse/browse.service';
 import { dataService } from '../cache/builders/build-decorators';
@@ -55,6 +55,7 @@ import { ErrorResponse } from '../cache/response.models';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
 import { ItemJsonPatchOperationsService } from './item-json-patch-operations.service';
 import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
+import { isUndefined } from 'lodash';
 
 @Injectable()
 @dataService(ITEM)
@@ -464,7 +465,9 @@ export class ItemDataService extends DataService<Item> {
                 place: metadataValue.place,
                 confidence: metadataValue.confidence
               };
-              if (isNotEmpty(itemMetadataValues) && isNotEmpty(itemMetadataValues[place])) {
+              if (isEmpty(valueToSave.value) || isUndefined(valueToSave.value) || isNull(valueToSave.value)) {
+                this.removeMetadataPatch(pathName, metadataName);
+              } else if (isNotEmpty(itemMetadataValues) && isNotEmpty(itemMetadataValues[place])) {
                 this.replaceMetadataPatch(pathName, metadataName, place, valueToSave);
               } else {
                 this.addMetadataPatch(pathName, metadataName, valueToSave);
@@ -477,16 +480,22 @@ export class ItemDataService extends DataService<Item> {
     );
   }
 
-  replaceMetadataPatch(pathName: string, metadataName: string, position: number, value: string|MetadataValue): void {
+  replaceMetadataPatch(pathName: string, metadataName: string, position: number, value: string | MetadataValue): void {
     const pathCombiner = new JsonPatchOperationPathCombiner(pathName);
     const path = pathCombiner.getPath([metadataName, position.toString()]);
     this.operationsBuilder.replace(path, value, true);
   }
 
-  addMetadataPatch(pathName: string, metadataName: string, value: string|MetadataValue): void {
+  addMetadataPatch(pathName: string, metadataName: string, value: string | MetadataValue): void {
     const pathCombiner = new JsonPatchOperationPathCombiner(pathName);
     const path = pathCombiner.getPath([metadataName]);
     this.operationsBuilder.add(path, value, true, true);
+  }
+
+  removeMetadataPatch(pathName: string, metadataName: string): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner(pathName);
+    const path = pathCombiner.getPath([metadataName]);
+    this.operationsBuilder.remove(path);
   }
 
   executeEditItemPatch(objectId: string, editMode: string, pathName: string): Observable<RemoteData<Item>> {
@@ -495,14 +504,14 @@ export class ItemDataService extends DataService<Item> {
       'edititems',
       editItemId,
       pathName).pipe(
-      take(1),
-      mergeMap(() => this.findById(objectId).pipe(getFirstCompletedRemoteData())),
-      catchError((error: ErrorResponse|string) => {
-        const errMsg: any = (error as ErrorResponse).errorMessage || error;
-        console.error(errMsg);
-        return observableThrowError(new Error(errMsg));
-      })
-    );
+        take(1),
+        mergeMap(() => this.findById(objectId).pipe(getFirstCompletedRemoteData())),
+        catchError((error: ErrorResponse | string) => {
+          const errMsg: any = (error as ErrorResponse).errorMessage || error;
+          console.error(errMsg);
+          return observableThrowError(new Error(errMsg));
+        })
+      );
   }
 
   executeItemPatch(objectId: string, pathName: string): Observable<RemoteData<Item>> {
@@ -510,9 +519,9 @@ export class ItemDataService extends DataService<Item> {
       'items',
       objectId,
       pathName).pipe(
-      tap((item: Item) => this.update(item)),
-      map((item: Item) => createSuccessfulRemoteDataObject<Item>(item)),
-      catchError((error: ErrorResponse) => createFailedRemoteDataObject$<Item>(error.errorMessage))
-    );
+        tap((item: Item) => this.update(item)),
+        map((item: Item) => createSuccessfulRemoteDataObject<Item>(item)),
+        catchError((error: ErrorResponse) => createFailedRemoteDataObject$<Item>(error.errorMessage))
+      );
   }
 }
