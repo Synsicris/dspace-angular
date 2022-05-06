@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { listableObjectComponent } from '../../../../../object-collection/shared/listable-object/listable-object.decorator';
+import {
+  listableObjectComponent
+} from '../../../../../object-collection/shared/listable-object/listable-object.decorator';
 import { ViewMode } from '../../../../../../core/shared/view-mode.model';
 import { ItemSearchResult } from '../../../../../object-collection/shared/item-search-result.model';
 import { SearchResultListElementComponent } from '../../../search-result-list-element.component';
@@ -8,6 +10,7 @@ import { getItemPageRoute } from '../../../../../../item-page/item-page-routing-
 import { Context } from '../../../../../../core/shared/context.model';
 import { TruncatableService } from '../../../../../truncatable/truncatable.service';
 import { DSONameService } from '../../../../../../core/breadcrumbs/dso-name.service';
+import { DisplayItemMetadataType } from '../../../../../../../config/display-search-result-config.interface';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement)
 @listableObjectComponent(ItemSearchResult, ViewMode.ListElement)
@@ -23,6 +26,8 @@ import { DSONameService } from '../../../../../../core/breadcrumbs/dso-name.serv
 export class ItemSearchResultListElementComponent extends SearchResultListElementComponent<ItemSearchResult, Item> {
 
   @Input() hideMetrics = false;
+
+  DisplayItemMetadataType = DisplayItemMetadataType;
 
   public constructor(protected truncatableService: TruncatableService, protected dsoNameService: DSONameService) {
     super(truncatableService, dsoNameService);
