@@ -517,7 +517,8 @@ export class DefaultAppConfig implements AppConfig {
       'impactpathway.relation.parent', 'impactpathway.relation.step', 'impactpathway.relation.task',
       'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
       'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
-    ]
+    ],
+    commentEntityName: 'comment'
   };
 
   exploitationPlan = {
@@ -612,6 +613,57 @@ export class DefaultAppConfig implements AppConfig {
           }
         ]
       },
+    ],
+    comment: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.type',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.date.reminder',
+            type: DisplayItemMetadataType.Date
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.date.creation',
+            type: DisplayItemMetadataType.Date
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.creator',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text,
+            truncatable: true
+          }
+        ]
+      }
     ]
   };
 }
