@@ -14238,8 +14238,8 @@
   // "submission.form.ethics-edit.info": "missing",
   "submission.form.ethics-edit.info": "<b>Worum es hier geht:</b><ul><li>Hier erfolgt eine Reflexion ethischer Aspekte für alle Schritte im Forschungs- und Entwicklungsprozesse (F&E-Prozess) – auch ausgelagerten –  sowie für die Anwendung der Projektergebnisse.</li><li>Durch die angemessene Berücksichtigung möglicherweise problematischer Effekten, Folgen und Risiken kann die gesellschaftliche Relevanz der Forschung erhöht werden.</li><li>Die Forschung zeigt damit ihre Verantwortung für die Einhaltung ethischer Standards.</li><li>Die ethische Reflexion wird einmal für den gesamten Verbund durchgeführt.</ul></li>",
 
-  // "submission.sections.submit.progessbar.describe.comments": "Comment (Funder)",
-  "submission.sections.submit.progessbar.describe.comments": "Kommentar (Förderer)",
+  // "submission.sections.submit.progressbar.describe.comments": "Comment (Funder)",
+  "submission.sections.submit.progressbar.describe.comments": "Kommentar (Förderer)",
 
   // "working-plan.chart.toolbar.versions": "Versions",
   "working-plan.chart.toolbar.versions": "Versionen",
@@ -14490,16 +14490,22 @@
   // "layout.box.help-text.contribution_fundingprogramme_h": "missing",
   "layout.box.help-text.contribution_fundingprogramme_h": "<b>Beitrag zu Förderzielen</b> verdeutlicht den Bezug zwischen den Zielen des Verbundes und den Förderzielen.<p><b>Diese Liste dient der Übersicht.</b> <b>Zum Bearbeiten</b> rufen Sie den Eintrag über seinen <b>Link in der Listenansicht</b> auf und wählen <b>Aktion: <i class=\"fas fa-edit\"></i>Bearbeiten</b>.</p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Impact Pathway strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie den Impact Pathway nicht nutzen oder die Einträge erst später zum Impact Pathway hinzufügen möchten.</ul></li>",
 
-  // "layout.tab.header.Comments": "Comments",
-  "layout.tab.header.Comments": "Kommentare",
+  // "layout.tab.header.comments": "Comments",
+  "layout.tab.header.comments": "Kommentare",
 
-  // "layout.box.header.Comments": "Comments",
-  "layout.box.header.Comments": "Kommentare - Listenansicht",
+  // "layout.box.header.comment": "Comments",
+  "layout.box.header.comment": "Kommentare - Listenansicht",
 
   // "layout.field.label.ethic.dc.type.header": "Overview",
   "layout.field.label.ethic.dc.type.header": "Übersicht zu Aspekten und Maßnahmen",
 
   // "search.filters.filter.organization.label": "Search Organization",
-  "search.filters.filter.organization.label": "Suche Organisation"
+  "search.filters.filter.organization.label": "Suche Organisation",
+
+  // "layout.box.header.comment_m": "Comment",
+  "layout.box.header.comment_m": "Kommentar",
+
+  // "layout.tab.header.details": "Details",
+  "layout.tab.header.details": "Detailinformationen"
 
 }

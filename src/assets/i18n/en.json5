@@ -8218,7 +8218,7 @@
 
   "submission.sections.submit.progressbar.describe.exp_societalimpact_neg": "#1 Reflecting on possible negative side effects",
 
-  "submission.sections.submit.progessbar.describe.comments": "Comment (Funder)",
+  "submission.sections.submit.progressbar.describe.comments": "Comment (Funder)",
 
   "working-plan.chart.toolbar.versions": "Versions",
 
@@ -8238,12 +8238,16 @@
 
   "tree.description.destatis": "Selection Discipline / Subject",
 
-  "layout.tab.header.Comments": "Comments",
+  "layout.tab.header.comments": "Comments",
 
-  "layout.box.header.Comments": "Comments",
+  "layout.box.header.comment": "Comments",
 
   "layout.field.label.ethic.dc.type.header": "Overview",
 
-  "search.filters.filter.organization.label": "Search Organization"
+  "search.filters.filter.organization.label": "Search Organization",
+
+  "layout.box.header.comment_m": "Comment",
+
+  "layout.tab.header.details": "Details"
 
 }
