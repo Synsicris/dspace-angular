@@ -1,3 +1,4 @@
+import { Metadata } from './../shared/metadata.utils';
 import { Injectable } from '@angular/core';
 import { CollectionDataService } from '../data/collection-data.service';
 import { VocabularyService } from '../submission/vocabularies/vocabulary.service';
@@ -12,11 +13,11 @@ import { RequestService } from '../data/request.service';
 import { Router } from '@angular/router';
 import { SearchService } from '../shared/search/search.service';
 import { SubmissionService } from '../../submission/submission.service';
-import { MetadataMap } from '../shared/metadata.models';
+import { MetadataMap, MetadataValue } from '../shared/metadata.models';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 import { SubmissionObject } from '../submission/models/submission-object.model';
-import { catchError, delay, map, mergeMap, take, tap } from 'rxjs/operators';
-import { isEmpty, isNotEmpty, isNotNull } from '../../shared/empty.util';
+import { catchError, delay, map, mergeMap, take, tap, switchMap } from 'rxjs/operators';
+import { isEmpty, isNotEmpty, isNotNull, isNull, isUndefined } from '../../shared/empty.util';
 import { Item } from '../shared/item.model';
 import { ErrorResponse } from '../cache/response.models';
 import { Observable, of as observableOf, throwError as observableThrowError } from 'rxjs';
@@ -24,6 +25,7 @@ import { RemoteData } from '../data/remote-data';
 import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../shared/operators';
 import { Collection } from '../shared/collection.model';
 import { environment } from '../../../environments/environment';
+import { SubmitDataResponseDefinitionObject } from '../shared/submit-data-response-definition.model';
 
 @Injectable()
 export class ProjectItemService {
@@ -97,17 +99,19 @@ export class ProjectItemService {
     );
   }
 
-  executeSubmissionPatch(objectId: string, pathName: string): Observable<SubmissionObject> {
+  executeSubmissionPatch(objectId: string, pathName: string): Observable<SubmitDataResponseDefinitionObject> {
     return this.submissionJsonPatchOperationsService.jsonPatchByResourceID(
       'workspaceitems',
       objectId,
       'sections',
       pathName).pipe(
-      take(1),
-      map((result: SubmissionObject[]) => (result[0] && isEmpty(result[0].errors)) ? result[0] : null),
-      catchError(() => observableOf(null))
-    );
+        take(1),
+        map((result: SubmissionObject[]) => (result[0] && isEmpty(result[0].errors)) ? result[0] : null),
+        catchError(() => observableOf(null))
+      );
   }
+
+
 
   executeEditItemPatch(objectId: string, pathName: string): Observable<SubmissionObject> {
     return this.submissionJsonPatchOperationsService.jsonPatchByResourceID(
@@ -115,10 +119,11 @@ export class ProjectItemService {
       objectId,
       'sections',
       pathName).pipe(
-      take(1),
-      map((result: SubmissionObject[]) => (result[0] && isEmpty(result[0].errors)) ? result[0].item : null),
-      catchError(() => observableOf(null))
-    );
+        take(1),
+        tap((res) => console.log(res)),
+        map((result: SubmissionObject[]) => (result[0] && isEmpty(result[0].errors)) ? result[0].item : null),
+        catchError(() => observableOf(null))
+      );
   }
 
   executeItemPatch(objectId: string, pathName: string): Observable<Item> {
@@ -126,9 +131,9 @@ export class ProjectItemService {
       'items',
       objectId,
       pathName).pipe(
-      tap((item: Item) => this.itemService.update(item)),
-      catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
-    );
+        tap((item: Item) => this.itemService.update(item)),
+        catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
+      );
   }
 
   depositWorkspaceItem(submission: SubmissionObject): Observable<RemoteData<Item>> {
@@ -148,6 +153,37 @@ export class ProjectItemService {
           ))
         ))
       ))
+    );
+  }
+
+  public updateMultipleSubmissionMetadata(submissionObject: SubmissionObject, pathName: string, metadata: MetadataMap): Observable<any> {
+    const pathCombiner = new JsonPatchOperationPathCombiner('sections', pathName);
+    Object.keys(metadata)
+      .forEach((metadataName) => {
+        const metadataValues: MetadataValue[] = metadata[metadataName];
+        metadataValues.forEach((metadataValue, place) => {
+          const itemMetadataValues = Metadata.all(submissionObject.item.metadata, metadataName);
+          const valueToSave: any = {
+            value: metadataValue.value,
+            language: metadataValue.language,
+            authority: metadataValue.authority,
+            place: metadataValue.place,
+            confidence: metadataValue.confidence
+          };
+          if (isEmpty(valueToSave.value) || isUndefined(valueToSave.value) || isNull(valueToSave.value)) {
+            const pathObj = pathCombiner.getPath([metadataName, place.toString()]);
+            this.operationsBuilder.remove(pathObj);
+          } else if (isNotEmpty(itemMetadataValues) && isNotEmpty(itemMetadataValues[place])) {
+            const pathObj = pathCombiner.getPath([metadataName, place.toString()]);
+            this.operationsBuilder.replace(pathObj, valueToSave, true);
+          } else {
+            this.operationsBuilder.add(pathCombiner.getPath(metadataName), valueToSave, true, true);
+          }
+        });
+      });
+    return observableOf({}).pipe(
+      delay(400),
+      switchMap(() => this.executeSubmissionPatch(submissionObject.id, pathName)),
     );
   }
 

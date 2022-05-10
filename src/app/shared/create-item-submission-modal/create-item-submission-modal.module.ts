@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { CreateItemSubmissionModalComponent } from './create-item-submission-modal.component';
 import { FormModule } from '../form/form.module';
 import { SharedModule } from '../shared.module';
+import { SectionsService } from '../../submission/sections/sections.service';
+
 
 @NgModule({
   declarations: [CreateItemSubmissionModalComponent],
@@ -12,6 +14,7 @@ import { SharedModule } from '../shared.module';
     FormModule,
     SharedModule
   ],
-  exports: [CreateItemSubmissionModalComponent]
+  exports: [CreateItemSubmissionModalComponent],
+  providers: [SectionsService]
 })
 export class CreateItemSubmissionModalModule { }

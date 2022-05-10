@@ -3008,6 +3008,10 @@
 
   "item.select.table.title": "Title",
 
+  "item.submission.create": "Create Item",
+
+  "item.submission.create.sucessfully": "Item Created successfully",
+
   "item.version.history.empty": "There are no other versions for this item yet.",
 
   "item.version.history.head": "Version History",

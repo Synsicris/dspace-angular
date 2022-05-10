@@ -1,24 +1,30 @@
-import { ItemDataService } from './../../core/data/item-data.service';
+import { SubmissionSectionError } from './../../submission/objects/submission-objects.reducer';
+import { NotificationsService } from './../notifications/notifications.service';
+import { SectionsService } from './../../submission/sections/sections.service';
+import { MetadataMap } from './../../core/shared/metadata.models';
+import { ProjectItemService } from './../../core/project/project-item.service';
 import { SubmissionService } from './../../submission/submission.service';
-import { getPaginatedListPayload, getFirstCompletedRemoteData } from './../../core/shared/operators';
+import { getFirstCompletedRemoteData, getRemoteDataPayload } from './../../core/shared/operators';
 import { Collection } from './../../core/shared/collection.model';
 import { CollectionDataService } from './../../core/data/collection-data.service';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChildren, QueryList } from '@angular/core';
+import { Component, Input, OnInit, ViewChildren, EventEmitter, Output, Inject } from '@angular/core';
 
-import { BehaviorSubject, Subscription, Observable } from 'rxjs';
-import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, Subscription, Observable, combineLatest, of as observableOf } from 'rxjs';
+import { map, tap, switchMap, filter } from 'rxjs/operators';
 import { DynamicFormControlModel } from '@ng-dynamic-forms/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
 import { FormBuilderService } from '../form/builder/form-builder.service';
-import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
 import { SubmissionFormsModel } from '../../core/config/models/config-submission-forms.model';
 import { SubmissionFormsConfigService } from './../../core/config/submission-forms-config.service';
 import { ConfigObject } from '../../core/config/models/config.model';
 import { RemoteData } from 'src/app/core/data/remote-data';
+import { SubmissionObject, SubmissionObjectError } from 'src/app/core/submission/models/submission-object.model';
 import { FormService } from '../form/form.service';
+import { isNull } from 'lodash';
+import { isUndefined } from '../empty.util';
 
 @Component({
   selector: 'ds-create-item-submission-modal',
@@ -27,20 +33,18 @@ import { FormService } from '../form/form.service';
 })
 export class CreateItemSubmissionModalComponent implements OnInit {
 
-  @ViewChildren('formRef') formRef: any;
-
   /**
-   * The item edit mode
+   * The entity type of the collection of the item
    */
   @Input() entityType: string;
 
   /**
-   * The item edit mode
+   * The collection id that the new item will be created from
    */
   @Input() collectionId: string;
 
   /**
-   * The item edit mode
+   * The submission section form name
    */
   @Input() formName: string;
 
@@ -82,8 +86,20 @@ export class CreateItemSubmissionModalComponent implements OnInit {
    */
   protected subs: Subscription[] = [];
 
-  collections: Collection[] = [];
-  selectedCollection: Collection;
+  /**
+   * Custom metadatas that wont be shown in the form but passed in the patch requests
+   */
+  customMetadata: MetadataMap = {};
+
+  /**
+   * Do evade duplicates we maintain the submission information in case there are server errors
+   */
+  currentSubmission: SubmissionObject;
+
+  /**
+   * An event created when submission is sucessfull so the utilizer of the modal can continue its functionality
+   */
+  @Output() createItemEvent = new EventEmitter();
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -91,84 +107,132 @@ export class CreateItemSubmissionModalComponent implements OnInit {
     private collectionDataService: CollectionDataService,
     private submissionFormsConfigService: SubmissionFormsConfigService,
     private submissionService: SubmissionService,
+    private projectItemService: ProjectItemService,
     private formService: FormService,
-    private itemService: ItemDataService
+    private sectionsService: SectionsService,
+    private notificationsService: NotificationsService
   ) {
   }
 
   /**
-   * Initialize collection get information
+   * Initialize form initialization
    */
   ngOnInit(): void {
-    this.getCollectionsFromEntityType();
-  }
-
-  getCollectionsFromEntityType() {
-    this.collectionDataService.getAuthorizedCollectionByEntityType('', this.entityType)
-      .pipe(
-        getFirstSucceededRemoteDataPayload(),
-        getPaginatedListPayload()
-      )
-      .subscribe((collections: Collection[]) => {
-        console.log(collections);
-        this.collections = collections;
-      });
+    this.initFormModel();
   }
 
   /**
-   * Close modal
+   * Check if submission has errors so you can remove submission before closing modal
+   * or close modal if no errors are found
    */
   closeModal() {
-    this.activeModal.dismiss(false);
+
+    if (!isUndefined(this.currentSubmission) && !isNull(this.currentSubmission) && !isUndefined(this.currentSubmission.errors) && this.currentSubmission.errors.length > 0) {
+      this.removeSubmission().subscribe(() => {
+        this.activeModal.dismiss(false);
+      });
+    } else {
+      this.activeModal.dismiss(false);
+    }
+
+  }
+
+  /**
+   * Discart submission from workspace item
+   */
+  removeSubmission(): Observable<SubmissionObject[]> {
+    return this.submissionService.discardSubmission(this.currentSubmission.id);
   }
 
   /**
    * Patch item with data retrieved from the form
    */
   submit(formData: Observable<any>): void {
-    console.log(this.formRef);
-    // this.submissionService.createSubmission()
-    // let form = this.formRef.first();
-    // formData.subscribe((form: any) => {
-    //   this.submissionService.depositSubmission(form);
-    // });
-    // this.itemService.updateMultipleItemMetadata(null, false, this.formSectionName, formData).pipe(
-    //   getFirstSucceededRemoteDataPayload()
-    // );
+    this.processing.next(true);
+    combineLatest(formData, this.getCurrentSubmissionObject()).pipe(
+      switchMap(([data, submissionObject]) => {
+        return this.projectItemService.updateMultipleSubmissionMetadata(submissionObject, this.formName, Object.assign({}, data, this.customMetadata));
+      }),
+    ).subscribe((submissionObject: SubmissionObject) => {
+      // Save submission object in case an error occurres
+      this.currentSubmission = submissionObject;
+      if (!!submissionObject && submissionObject.errors && submissionObject.errors.length > 0) {
+        this.handleErrors(submissionObject);
+        this.processing.next(false);
+      } else {
+        this.handleDepositWorkspace(submissionObject);
+      }
+    });
+  }
 
-    // formData.pipe(
-    //   take(1),
-    //   filter((isValid) => isValid),
-    //   mergeMap(() => this.formService.getFormData(this.formId)),
-    //   take(1),
-    //   mergeMap((formData: MetadataMap) => {
-    //     return 
-    //   })
-    //   ).subscribe((item: Item) => {
-    //     this.itemUpdate.emit(item);
-    //   })
+  /**
+   * If the submission is present return the submission object
+   * if not present return the submission request creation
+   */
+  getCurrentSubmissionObject(): Observable<SubmissionObject> {
+    if (!isUndefined(this.currentSubmission) && !isNull(this.currentSubmission)) {
+      return observableOf(this.currentSubmission);
+    } else {
+      return this.submissionService.createSubmission(this.collectionId, this.entityType);
+    }
+  }
+
+  /**
+   * show server errors in the form
+   */
+  handleErrors(submissionObject: SubmissionObject) {
+    this.sectionsService.checkSectionErrors(submissionObject.id, submissionObject._links.self.href, this.formId, this.parseErorrs(submissionObject.errors));
+  }
+
+  /**
+   * parse server errors from SubmissionObjectError[] to SubmissionSectionError[] to be handled correctly by sectionService
+   */
+  parseErorrs(errors: SubmissionObjectError[]): SubmissionSectionError[] {
+    const newErrors: SubmissionSectionError[] = [];
+    errors.forEach(error => {
+      error.paths.forEach(path => {
+        newErrors.push({ message: error.message, path: path });
+      });
+    });
+
+    return newErrors;
+  }
+
+  /**
+   * start depositWorkspaceItem and close modal if successfull
+   */
+  handleDepositWorkspace(submissionObject: SubmissionObject) {
+    this.projectItemService.depositWorkspaceItem(submissionObject).subscribe(() => {
+      this.notificationsService.success('item.submission.create.sucessfully');
+      this.createItemEvent.emit();
+      this.closeModal();
+    });
   }
 
   /**
    * Retrieve form configuration and build form model
    */
-  onSelect(collection: Collection) {
-    this.selectedCollection = collection;
-    const definition = collection.firstMetadataValue('cris.submission.definition');
+  initFormModel() {
     this.processing.next(true);
-    this.submissionFormsConfigService.findByName(definition).pipe(
+    this.formId = this.formService.getUniqueId('create-item-submission-modal');
+    this.collectionDataService.findById(this.collectionId).pipe(
       getFirstCompletedRemoteData(),
-      map((configData: RemoteData<ConfigObject>) => configData.payload),
-    )
-      .subscribe((config: SubmissionFormsModel) => {
-        this.formModel = this.formBuilderService.modelFromConfiguration(
-          null,
-          config,
-          '',
-          collection.metadata,
-          SubmissionScopeType.WorkspaceItem
-        );
-        this.processing.next(false);
-      });
+      getRemoteDataPayload(),
+    ).subscribe((collection: Collection) => {
+      this.submissionFormsConfigService.findByName(this.formName).pipe(
+        getFirstCompletedRemoteData(),
+        map((configData: RemoteData<ConfigObject>) => configData.payload),
+      )
+        .subscribe((config: SubmissionFormsModel) => {
+          this.formModel = this.formBuilderService.modelFromConfiguration(
+            null,
+            config,
+            '',
+            collection.metadata,
+            SubmissionScopeType.WorkspaceItem
+          );
+          this.processing.next(false);
+        });
+    });
   }
 }
