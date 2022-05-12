@@ -10,7 +10,7 @@ import { ImpactPathwayService } from '../../core/impact-pathway.service';
 import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
-import { distinctUntilChanged, filter, map, take, skip, tap } from 'rxjs/operators';
+import { distinctUntilChanged, skip, take } from 'rxjs/operators';
 
 @Component({
   selector: 'ipw-objective',
@@ -61,6 +61,20 @@ export class ObjectiveComponent implements OnInit {
   }
 
   /**
+   * Get the edit item mode
+   */
+  getEditMode(): string {
+    return this.impactPathwayService.getImpactPathwaysEditMode();
+  }
+
+  /**
+   * Get the path to metadata section to patch
+   */
+  getSectionName() {
+    return this.impactPathwayService.getImpactPathwaysEditFormSection();
+  }
+
+  /**
    * Get from selector the previously inserted collapsed value for the specific step
    */
   isCollapsed(): Observable<ImpactPathwayTask> {
@@ -100,6 +114,8 @@ export class ObjectiveComponent implements OnInit {
    */
   openEditModal() {
     const modalRef = this.modalService.open(EditSimpleItemModalComponent, { size: 'lg' });
+    modalRef.componentInstance.editMode = this.impactPathwayService.getImpactPathwaysEditMode();
+    modalRef.componentInstance.formSectionName = this.impactPathwayService.getImpactPathwaysEditFormSection();
     modalRef.componentInstance.formConfig = this.impactPathwayService.getImpactPathwayTaskEditFormConfig(this.impactPathwayStep.type);
     modalRef.componentInstance.itemId = this.impactPathwayTask.id;
 

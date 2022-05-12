@@ -10,7 +10,7 @@ import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { findIndex } from 'lodash';
 
-import { map, mergeMap, startWith } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 import { range } from '../../../shared/array.util';
 import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
@@ -29,11 +29,7 @@ import { hasValue, isEmpty, isNotEmpty, isNotNull } from '../../../shared/empty.
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { ChartDateViewType } from '../../core/working-plan.reducer';
 import { environment } from '../../../../environments/environment';
-import { followLink } from '../../../shared/utils/follow-link-config.model';
-import { getAllSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../../../core/shared/operators';
-import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
-import { EditItem } from '../../../core/submission/models/edititem.model';
 import { SearchConfig } from 'src/app/core/shared/search/search-filters/search-config.model';
 import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
 import { NgbDateStructToString, stringToNgbDateStruct } from '../../../shared/date.util';
@@ -192,7 +188,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   /**
    * List of Edit Modes available on each node for the current user
    */
-  private editModes$: BehaviorSubject<Map<string, EditItemMode[]>> = new BehaviorSubject<Map<string, EditItemMode[]>>(new Map());
+  private editModes$: BehaviorSubject<Map<string, boolean>> = new BehaviorSubject<Map<string, boolean>>(new Map());
 
   private chartStatusTypeList$: BehaviorSubject<VocabularyEntry[]> = new BehaviorSubject<VocabularyEntry[]>([]);
   private subs: Subscription[] = [];
@@ -383,7 +379,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   isEditAvailable(nodeId): Observable<boolean> {
     return this.editModes$.asObservable().pipe(
-      map((editModes) => isNotEmpty(editModes) && editModes.has(nodeId) && editModes.get(nodeId).length > 0)
+      map((editModes) => isNotEmpty(editModes) && editModes.has(nodeId) && editModes.get(nodeId))
     );
   }
 
@@ -392,7 +388,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    *
    * @returns Observable<Map<string, EditItemMode[]>>
    */
-  getEditModes(): Observable<Map<string, EditItemMode[]>> {
+  getEditModes(): Observable<Map<string, boolean>> {
     return this.editModes$;
   }
 
@@ -1095,14 +1091,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    * @param nodeId string
    */
   private retrieveEditMode(nodeId: string): void {
-    this.subs.push(this.editItemService.findById(nodeId + ':none', true, true, followLink('modes')).pipe(
-      getAllSucceededRemoteDataPayload(),
-      mergeMap((editItem: EditItem) => editItem.modes.pipe(
-        getFirstSucceededRemoteListPayload())
-      ),
-      startWith([])
-    ).subscribe((editModes: EditItemMode[]) => {
-      this.editModes$.next(this.editModes$.value.set(nodeId, editModes));
+    this.subs.push(this.editItemService.checkEditModeByIDAndType(nodeId, 'CUSTOM').pipe(
+      take(1)
+    ).subscribe((canEdit: boolean) => {
+      this.editModes$.next(this.editModes$.value.set(nodeId, canEdit));
     }));
   }
 

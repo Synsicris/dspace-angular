@@ -16,13 +16,14 @@ import { MetadataMap } from '../shared/metadata.models';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 import { SubmissionObject } from '../submission/models/submission-object.model';
 import { catchError, delay, map, mergeMap, take, tap } from 'rxjs/operators';
-import { isEmpty, isNotEmpty } from '../../shared/empty.util';
+import { isEmpty, isNotEmpty, isNotNull } from '../../shared/empty.util';
 import { Item } from '../shared/item.model';
 import { ErrorResponse } from '../cache/response.models';
 import { Observable, of as observableOf, throwError as observableThrowError } from 'rxjs';
 import { RemoteData } from '../data/remote-data';
 import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../shared/operators';
 import { Collection } from '../shared/collection.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ProjectItemService {
@@ -59,21 +60,21 @@ export class ProjectItemService {
       });
   }
 
-  createAddMetadataPatchOp(metadataName: string, value: any): void {
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+  createAddMetadataPatchOp(path: string, metadataName: string, value: any): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner(path);
     this.operationsBuilder.add(pathCombiner.getPath(metadataName), value, true, true);
   }
 
-  createRemoveMetadataPatchOp(metadataName: string, position: number): void {
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
-    const path = pathCombiner.getPath([metadataName, position.toString()]);
-    this.operationsBuilder.remove(path);
+  createRemoveMetadataPatchOp(path: string, metadataName: string, position: number): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner(path);
+    const pathObj = pathCombiner.getPath([metadataName, position.toString()]);
+    this.operationsBuilder.remove(pathObj);
   }
 
-  createReplaceMetadataPatchOp(metadataName: string, position: number, value: any): void {
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
-    const path = pathCombiner.getPath([metadataName, position.toString()]);
-    this.operationsBuilder.replace(path, value, true);
+  createReplaceMetadataPatchOp(path: string, metadataName: string, position: number, value: any): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner(path);
+    const pathObj = pathCombiner.getPath([metadataName, position.toString()]);
+    this.operationsBuilder.replace(pathObj, value, true);
   }
 
   createWorkspaceItem(projectId: string, taskType: string): Observable<SubmissionObject> {
@@ -96,7 +97,7 @@ export class ProjectItemService {
     );
   }
 
-  private executeSubmissionPatch(objectId: string, pathName: string): Observable<SubmissionObject> {
+  executeSubmissionPatch(objectId: string, pathName: string): Observable<SubmissionObject> {
     return this.submissionJsonPatchOperationsService.jsonPatchByResourceID(
       'workspaceitems',
       objectId,
@@ -104,6 +105,18 @@ export class ProjectItemService {
       pathName).pipe(
       take(1),
       map((result: SubmissionObject[]) => (result[0] && isEmpty(result[0].errors)) ? result[0] : null),
+      catchError(() => observableOf(null))
+    );
+  }
+
+  executeEditItemPatch(objectId: string, pathName: string): Observable<SubmissionObject> {
+    return this.submissionJsonPatchOperationsService.jsonPatchByResourceID(
+      'edititems',
+      objectId,
+      'sections',
+      pathName).pipe(
+      take(1),
+      map((result: SubmissionObject[]) => (result[0] && isEmpty(result[0].errors)) ? result[0].item : null),
       catchError(() => observableOf(null))
     );
   }
@@ -124,18 +137,56 @@ export class ProjectItemService {
     );
   }
 
-  generateProjectItem(projectId: string, taskType: string, metadata: MetadataMap): Observable<Item> {
+  generateEntityItemWithinProject(formSectionName: string, projectId: string, taskType: string, metadata: MetadataMap): Observable<Item> {
     return this.createProjectEntityWorkspaceItem(projectId, taskType).pipe(
       mergeMap((submission: SubmissionObject) => observableOf(submission.item).pipe(
-        tap(() => this.addPatchOperationForItem(metadata)),
+        tap(() => this.addWSIPatchOperationForItem(metadata, formSectionName)),
         delay(100),
-        mergeMap((taskItem: Item) => this.executeItemPatch(taskItem.id, 'metadata').pipe(
+        mergeMap((taskItem: Item) => this.executeSubmissionPatch(submission.id, formSectionName).pipe(
           mergeMap(() => this.depositWorkspaceItem(submission).pipe(
             getFirstSucceededRemoteDataPayload()
           ))
         ))
       ))
     );
+  }
+
+  private addWSIPatchOperationForItem(metadata: MetadataMap, pathName: string): void {
+
+    const pathCombiner = new JsonPatchOperationPathCombiner('sections', pathName);
+    Object.keys(metadata)
+      .filter((metadataName) => metadataName !== 'dspace.entity.type')
+      .forEach((metadataName) => {
+        if (metadataName !== 'cris.project.shared') {
+          this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
+        } else {
+          const path = pathCombiner.getPath([metadataName, '0']);
+          this.operationsBuilder.replace(path, metadata[metadataName], true);
+        }
+      });
+  }
+
+  private addWSIPatchOperationForImpactPathwayTask(metadata: MetadataMap, pathName: string, place: string = null): void {
+
+    const pathCombiner = new JsonPatchOperationPathCombiner('sections', pathName);
+    Object.keys(metadata)
+      .filter((metadataName) => metadataName !== 'dspace.entity.type')
+      .forEach((metadataName) => {
+        if (metadataName !== 'cris.project.shared') {
+          this.operationsBuilder.add(pathCombiner.getPath(metadataName), metadata[metadataName], true, true);
+        } else {
+          const path = pathCombiner.getPath([metadataName, '0']);
+          this.operationsBuilder.replace(path, metadata[metadataName], true);
+        }
+      });
+    if (isNotNull(place)) {
+      this.operationsBuilder.add(
+        pathCombiner.getPath(environment.workingPlan.workingPlanPlaceMetadata),
+        place,
+        true,
+        true
+      );
+    }
   }
 
   private getCollectionIdByProjectAndEntity(projectId: string, entityType: string): Observable<string> {

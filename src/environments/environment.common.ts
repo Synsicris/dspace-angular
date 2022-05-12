@@ -346,6 +346,14 @@ export const environment: GlobalConfig = {
         baseUrl: 'https://hdl.handle.net/'
       },
       {
+        name: 'scopus',
+        baseUrl: 'https://www.scopus.com/authid/detail.uri?authorId='
+      },
+      {
+        name: 'researcherid',
+        baseUrl: 'http://www.researcherid.com/rid/'
+      },
+      {
         name: 'mailto',
         baseUrl: 'mailto:'
       }
@@ -365,9 +373,6 @@ export const environment: GlobalConfig = {
       }
     ],
     itemPage: {
-      Person: {
-          orientation: 'horizontal'
-      },
       default: {
           orientation: 'vertical'
       },
@@ -425,6 +430,10 @@ export const environment: GlobalConfig = {
     impactPathwaysFormSection: 'impact_pathway_form',
     impactPathwayStepsFormSection: 'impact_pathway_step_form',
     impactPathwayTasksFormSection: 'impact_pathway_task_form',
+    impactPathwaysEditFormSection: 'impact_pathway-edit_form',
+    impactPathwaysLinksEditFormSection: 'impact_pathway-edit_link_form',
+    impactPathwaysEditMode: 'IMPACTPATHWAY',
+    impactPathwaysLinkEditMode: 'CUSTOM',
     impactPathwayEntity: 'impactpathway',
     impactPathwayStepEntity: 'impactpathwaystep',
     impactPathwayParentRelationMetadata: 'impactpathway.relation.parent',
@@ -442,8 +451,10 @@ export const environment: GlobalConfig = {
     contributionFundingprogrammeEntity: 'contribution_fundingprogramme'
   },
   workingPlan: {
-    workingPlanFormName: 'working_plan_workpackage_form',
-    workingPlanStepsFormName: 'working_plan_workpackage_step_form',
+    workingPlanFormName: 'working_plan_form',
+    workingPlanStepsFormName: 'working_plan_step_form',
+    workingPlanEditMode: 'WORKINGPLAN',
+    workingPlanEditFormSection: 'working_plan-edit_form',
     workingPlanStepStatusMetadata: 'synsicris.type.status',
     workingPlanStepResponsibleMetadata: 'synsicris.relation.partner-wp',
     workingPlanStepResponsibleAuthority: 'PartnerWPAuthority',
@@ -468,7 +479,10 @@ export const environment: GlobalConfig = {
     exploitationPlanRelationMetadata: 'dc.relation.exploitationplan',
     exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
     exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
-    exploitationPlanPartnerMetadata: ''
+    exploitationPlanPartnerMetadata: '',
+    exploitationPlanTaskFormSection: 'exploitation_plan_task_form',
+    exploitationPlanEditFormSection: 'exploitation_plan-edit_form',
+    exploitationPlanEditMode: 'EXPLOITATIONPLAN',
   },
   displayItemSearchResult: {
     Publication: [

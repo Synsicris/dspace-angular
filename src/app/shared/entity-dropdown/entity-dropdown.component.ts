@@ -163,7 +163,7 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
       currentPage: page,
       searchParams: [new RequestParam('scope', this.scope)]
     };
-    console.log(findOptions);
+
     let searchListEntity$;
     if (this.isSubmission) {
       searchListEntity$ = this.entityTypeService.getAllAuthorizedRelationshipType(findOptions);

@@ -23,6 +23,11 @@ import { MetadataMap } from '../../core/shared/metadata.models';
 export class EditSimpleItemModalComponent implements OnInit {
 
   /**
+   * The item edit mode
+   */
+  @Input() editMode: string;
+
+  /**
    * The form config
    * @type {Observable<SubmissionFormModel>}
    */
@@ -32,6 +37,11 @@ export class EditSimpleItemModalComponent implements OnInit {
    * The item's id related to the edit form
    */
   @Input() itemId: string;
+
+  /**
+   * The path to metadata section to patch
+   */
+  @Input() formSectionName: string;
 
   /**
    * EventEmitter that will emit the updated item
@@ -104,7 +114,7 @@ export class EditSimpleItemModalComponent implements OnInit {
       mergeMap(() => this.formService.getFormData(this.formId)),
       take(1),
       mergeMap((formData: MetadataMap) => {
-        return this.itemService.updateMultipleItemMetadata(this.itemId, formData).pipe(
+        return this.itemService.updateMultipleItemMetadata(this.itemId, this.editMode, this.formSectionName, formData).pipe(
           getFirstSucceededRemoteDataPayload()
         );
       })

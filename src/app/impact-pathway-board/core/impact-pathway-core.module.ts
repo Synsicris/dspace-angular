@@ -11,6 +11,7 @@ import { ImpactPathwayEffects } from './impact-pathway.effects';
 import { StepColorDirective } from '../shared/impact-path-way/impact-path-way-step/step.directive';
 import { storeModuleConfig } from '../../app.reducer';
 import { ImpactPathwayLinksService } from './impact-pathway-links.service';
+import { ProjectItemService } from '../../core/project/project-item.service';
 
 const MODULES = [
   StoreModule.forFeature('impactPathway', impactPathwayReducer, storeModuleConfig as StoreConfig<ImpactPathwayState, ImpactPathwayActions>),
@@ -28,7 +29,8 @@ const ENTRY_COMPONENTS = [];
 const PROVIDERS = [
   ImpactPathwayService,
   ImpactPathwayLinksService,
-  ObjectiveService
+  ObjectiveService,
+  ProjectItemService
 ];
 
 @NgModule({

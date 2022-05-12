@@ -206,6 +206,8 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.ADD_WORKPACKAGE_STEP),
     concatMap((action: AddWorkpackageStepAction) => {
       return this.itemAuthorityRelationService.addLinkedItemToParent(
+        this.workingPlanService.getWorkingPlanEditSectionName(),
+        this.workingPlanService.getWorkingPlanEditMode(),
         action.payload.parentId,
         action.payload.workpackageStepId,
         environment.workingPlan.workingPlanStepRelationMetadata).pipe(
@@ -264,6 +266,8 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.REMOVE_WORKPACKAGE_STEP),
     switchMap((action: RemoveWorkpackageStepAction) => {
       return this.itemAuthorityRelationService.removeChildRelationFromParent(
+        this.workingPlanService.getWorkingPlanEditSectionName(),
+        this.workingPlanService.getWorkingPlanEditMode(),
         action.payload.workpackageId,
         action.payload.workpackageStepId,
         environment.workingPlan.workingPlanStepRelationMetadata

@@ -20,6 +20,7 @@ import { WorkingPlanActions } from './core/working-plan.actions';
 import { WorkingPlanService } from './core/working-plan.service';
 import { WorkingPlanStateService } from './core/working-plan-state.service';
 import { ProjectItemService } from '../core/project/project-item.service';
+import { CreateSimpleItemModule } from '../shared/create-simple-item-modal/create-simple-item.module';
 
 const MODULES = [
   CommonModule,
@@ -29,6 +30,7 @@ const MODULES = [
   ResizableModule,
   StoreModule.forFeature('workingplan', workingPlanReducer, storeModuleConfig as StoreConfig<WorkingPlanState, WorkingPlanActions>),
   EffectsModule.forFeature([WorkingPlanEffects]),
+  CreateSimpleItemModule
 ];
 
 const COMPONENTS = [

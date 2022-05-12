@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError as observableThrowError } from 'rxjs';
 import {
   catchError,
   delay,
@@ -27,9 +27,8 @@ import { ExternalSourceEntry } from '../shared/external-source-entry.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { Item } from '../shared/item.model';
 import { ITEM } from '../shared/item.resource-type';
-import { getFirstSucceededRemoteDataPayload, sendRequest } from '../shared/operators';
+import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload, sendRequest } from '../shared/operators';
 import { URLCombiner } from '../url-combiner/url-combiner';
-
 import { DataService } from './data.service';
 import { DSOChangeAnalyzer } from './dso-change-analyzer.service';
 import { PaginatedList } from './paginated-list.model';
@@ -46,7 +45,6 @@ import { Metric } from '../shared/metric.model';
 import { GenericConstructor } from '../shared/generic-constructor';
 import { ResponseParsingService } from './parsing.service';
 import { StatusCodeOnlyResponseParsingService } from './status-code-only-response-parsing.service';
-import { of } from 'rxjs/internal/observable/of';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { RequestParam } from '../cache/models/request-param.model';
 import { ItemSearchParams } from './item-search-params';
@@ -75,7 +73,7 @@ export class ItemDataService extends DataService<Item> {
     protected comparator: DSOChangeAnalyzer<Item>,
     protected bundleService: BundleDataService,
     protected operationsBuilder: JsonPatchOperationsBuilder,
-    protected itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
+    protected itemJsonPatchOperationsService: ItemJsonPatchOperationsService
   ) {
     super();
   }
@@ -389,28 +387,34 @@ export class ItemDataService extends DataService<Item> {
     });
   }
 
-
-  updateItemMetadata(itemId: string, metadataName: string, position: number, value: string): Observable<RemoteData<Item>> {
+  updateItemMetadata(
+    itemId: string,
+    editMode: string,
+    pathName: string,
+    metadataName: string,
+    position: number,
+    value: any
+  ): Observable<RemoteData<Item>> {
     return this.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload(),
       map((item: Item) => Metadata.first(item.metadata, metadataName)),
       tap((metadataValue: MetadataValue) => {
         if (isNotEmpty(metadataValue)) {
-          this.replaceMetadataPatch(metadataName, position, value);
+          this.replaceMetadataPatch(pathName, metadataName, position, value);
         } else {
-          this.addMetadataPatch(metadataName, value);
+          this.addMetadataPatch(pathName, metadataName, value);
         }
       }),
       delay(200),
-      mergeMap(() => this.executeItemPatch(itemId, 'metadata'))
+      mergeMap(() => this.executeEditItemPatch(itemId, editMode, pathName))
     );
   }
 
-  public updateMultipleItemMetadata(itemId: string, metadata: MetadataMap): Observable<RemoteData<Item>> {
+  public updateMultipleItemMetadata(itemId: string, editMode: string, pathName: string, metadata: MetadataMap): Observable<RemoteData<Item>> {
     return this.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload(),
       tap((item: Item) => {
-        const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+        const pathCombiner = new JsonPatchOperationPathCombiner(pathName);
         Object.keys(metadata)
           .forEach((metadataName) => {
             const metadataValues: MetadataValue[] = metadata[metadataName];
@@ -424,31 +428,47 @@ export class ItemDataService extends DataService<Item> {
                 confidence: metadataValue.confidence
               };
               if (isNotEmpty(itemMetadataValues) && isNotEmpty(itemMetadataValues[place])) {
-                this.replaceMetadataPatch(metadataName, place, valueToSave);
+                this.replaceMetadataPatch(pathName, metadataName, place, valueToSave);
               } else {
-                this.addMetadataPatch(metadataName, valueToSave);
+                this.addMetadataPatch(pathName, metadataName, valueToSave);
               }
             });
           });
       }),
       delay(200),
-      mergeMap(() => this.executeItemPatch(itemId, 'metadata'))
+      mergeMap(() => this.executeEditItemPatch(itemId, editMode, pathName))
     );
   }
 
-  replaceMetadataPatch(metadataName: string, position: number, value: string|MetadataValue): void {
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+  replaceMetadataPatch(pathName: string, metadataName: string, position: number, value: string|MetadataValue): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner(pathName);
     const path = pathCombiner.getPath([metadataName, position.toString()]);
     this.operationsBuilder.replace(path, value, true);
   }
 
-  addMetadataPatch(metadataName: string, value: string|MetadataValue): void {
-    const pathCombiner = new JsonPatchOperationPathCombiner('metadata');
+  addMetadataPatch(pathName: string, metadataName: string, value: string|MetadataValue): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner(pathName);
     const path = pathCombiner.getPath([metadataName]);
     this.operationsBuilder.add(path, value, true, true);
   }
 
-  private executeItemPatch(objectId: string, pathName: string): Observable<RemoteData<Item>> {
+  executeEditItemPatch(objectId: string, editMode: string, pathName: string): Observable<RemoteData<Item>> {
+    const editItemId = `${objectId}:${editMode}`;
+    return this.itemJsonPatchOperationsService.jsonPatchByResourceType(
+      'edititems',
+      editItemId,
+      pathName).pipe(
+      take(1),
+      mergeMap(() => this.findById(objectId).pipe(getFirstCompletedRemoteData())),
+      catchError((error: ErrorResponse|string) => {
+        const errMsg: any = (error as ErrorResponse).errorMessage || error;
+        console.error(errMsg);
+        return observableThrowError(new Error(errMsg));
+      })
+    );
+  }
+
+  executeItemPatch(objectId: string, pathName: string): Observable<RemoteData<Item>> {
     return this.itemJsonPatchOperationsService.jsonPatchByResourceType(
       'items',
       objectId,
