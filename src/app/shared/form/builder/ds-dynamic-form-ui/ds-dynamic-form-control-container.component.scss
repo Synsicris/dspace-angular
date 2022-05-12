@@ -3,6 +3,7 @@
   @import "../../form.component";
 }
 
+// form-groups
 :host {
   display: flex;
   flex-direction: column;
@@ -16,23 +17,99 @@
   appearance: none;
 }
 
+// tooltip-icon
 .hint {
   cursor: pointer;
+  // 220428 rex positioning tooltip-icon - also changed position in the html-code -> before label 
+ // position:absolute;
+  //left:-1rem; 
+  //top:-1rem;
+  //height:3rem;// at least 48px / 3rem sensitive surface for touchscrees
+  //width:100%;
 }
 
-::ng-deep .hint-tooltip .tooltip-inner {
-  background-color: #d2e4ea;
-  color: #113d4f;
-}
+//complete tooltip - new 220421 rex
+::ng-deep .hint-tooltip {
+  /*  more vertical distance from the tooltip-icon and slightly 
+  to the left so that the arrow set to top-left is exactly above the icon. */
+  //top:-0.3rem !important; 
+  //left:-0.8rem !important;
+
+  // background and text-color in tooltip.hints
+  .tooltip-inner {
+    max-width:32rem; // somewhere (not clear, where) the width is defined with max-width:200px, so overwritten here
+    padding:1.2rem;
+    background-color:$help-bgcolor;
+    color: $help-textcolor; // darker text
+    text-align:left;
+    box-shadow: 0 5px 15px $help-boxshadow-color; // shadow behind tooltip
+     //background-color: rgba(228,247,253,1); // background brighter blue 
+     //background-color: #d2e4ea; //old color
+    //color: #113d4f; // old color
+  }
+
+  /* 220421 rex tests with pin-icon
+
+  // pin-button in the tooltip
+  &:before {
+    font-family: 'Font Awesome\ 5 Free';
+    font-size:120%;
+    content:"\f276"; // pin icon
+    font-weight: 900;
+    display:inline-block;
+    float:right;
+    margin:0.5rem 1rem;
+    transform:rotate(15deg);
+    position:relative;
+  }
+
+  // hovering complete tooltip
+  &:hover {
+    .tooltip-inner {
+      background-color:lighten(rgb(228,247,253),3%); // background color change
+      cursor:pointer; // pointig cursor
+    }
+    // PROTOTYPE: changig pin-icon when hovering and in the pinned state - only as prototype.
+    //Will be finalized when the pin behavior of the tooltip is programmed
+    &:before {
+      color:red; 
+      transform:rotate(25deg);
+    } 
+  } // end hovering complete tooltip
+
+  // pinned tooltip - currently simulated by pressed state. Should probably get a class as selector
+  &:active {
+    .tooltip-inner {
+      background-color:rgb(228,247,253);
+    } 
+    &:before {
+      top:-1rem;
+      right:-1rem;
+    } 
+  } // end hovering complete tooltip
+
+*/ // end tests with pin-icon
+
+} // end ::ng-deep .hint-tooltip
+
+
+
+//tooltip-arrow
 ::ng-deep .bs-tooltip-top .arrow::before {
-  border-top-color: #d2e4ea;
+  //border-top-color: #d2e4ea;
+  border-top-color: $help-bgcolor; // rex 220421: brighter blue
 }
 ::ng-deep .bs-tooltip-right .arrow::before {
-  border-right-color: #d2e4ea;
+  //border-right-color: #d2e4ea;
+  border-right-color: $help-bgcolor; // rex 220421: brighter blue
 }
 ::ng-deep .bs-tooltip-left .arrow::before {
-  border-left-color: #d2e4ea;
+  //border-left-color: #d2e4ea;
+  border-left-color: $help-bgcolor; // rex 220421: brighter blue
 }
 ::ng-deep .bs-tooltip-bottom .arrow::before {
-  border-bottom-color: #d2e4ea;
+  //border-bottom-color: #d2e4ea;
+  border-bottom-color: $help-bgcolor; // rex 220421: brighter blue
 }
+
+

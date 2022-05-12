@@ -3,20 +3,41 @@
   [class.d-none]="model.hidden"
   [formGroup]="group"
   [ngClass]="[getClass('element', 'container'), getClass('grid', 'container')]">
-  <label *ngIf="!isCheckbox && hasLabel"
-         [id]="'label_' + model.id"
-         [for]="id"
-         [ngClass]="[getClass('element', 'label'), getClass('grid', 'label')]">
+  
+  <label 
+      *ngIf="!isCheckbox && hasLabel"
+      [id]="'label_' + model.id"
+      [for]="id"
+      [ngClass]="[getClass('element', 'label'), getClass('grid', 'label')]">
+
+      <!-- 
+      i-tag for Tooltip-Icon 
+      rex 220422
+      [autoClose] : "true" -> schliesst sich bei klick überall hin, "false" -> schliesst sich nur bei klick erneut auf icon
+      [placement] : chaged from "['top', 'right', 'bottom']" to "['top-left', 'right', 'bottom']"      
+      -->
+     
+    
+      <!-- complete contents of all forms! -->
       {{(model.required && model.label) ? (model.label | translate) + ' *' : (model.label | translate)}}
-      <i *ngIf="hasHint" class="far fa-question-circle text-info hint"
-         [ngbTooltip]="(model.hint | translate)"
-         [autoClose]="false"
-         tooltipClass="hint-tooltip"
-         triggers="manual"
-         #hint="ngbTooltip"
-         [placement]="['top', 'right', 'bottom']"
-         container="body"
-         (click)="hint.toggle();$event.preventDefault();"></i>
+      
+       <i 
+      *ngIf="hasHint" class="far fa-question-circle text-info hint"
+      [ngbTooltip]="(model.hint | translate)"
+      [autoClose]="false"
+      tooltipClass="hint-tooltip"
+      triggers="manual"
+      #hint="ngbTooltip"
+      [placement]="['top-left', 'right', 'bottom']"
+      container="body"
+      (click)="hint.toggle();$event.preventDefault();"
+      ></i>
+
+      <!-- rex 220428
+       this was the original position of the i-tag / tooltip icon
+       moved it in front of the dyamic content so that the icon is positioned at the beginning of the labels
+      -->
+      
   </label>
   <ng-container *ngTemplateOutlet="startTemplate?.templateRef; context: { $implicit: model };"></ng-container>
   <!--    Should be *ngIf instead of class d-none, but that breaks the #componentViewContainer reference-->
