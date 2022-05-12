@@ -3,6 +3,29 @@
 // imports the base global style
 @import '../../../styles/_global-styles.scss';
 
+/* 
+rex 220505 helps to recognize breakpoints 
+selector in /src/app/header/header.component.html
+https://getbootstrap.com/docs/4.6/layout/overview/
+
+header .helper-rex:after {
+  display:inline-block;
+  position:fixed;
+  top:0;
+  left:20rem;
+  z-index:1000;
+  padding:0.2rem;
+  background-color:white;
+  border:3px solid lime;
+
+  content:"extra small (xs) < 576";
+  @include media-breakpoint-up(sm) {content:"small (sm) ≥ 576px";}
+  @include media-breakpoint-up(md) {content:"medium (md) ≥ 768px";}
+  @include media-breakpoint-up(lg) {content:"large (lg) ≥ 992";}
+  @include media-breakpoint-up(xl) {content:"extra large (xl) ≥ 1200";}
+}
+*/
+
 .facet-filter, .setting-option {
   background-color: var(--bs-light);
   border-radius: var(--bs-border-radius);
