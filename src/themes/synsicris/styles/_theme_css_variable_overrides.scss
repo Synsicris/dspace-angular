@@ -6,5 +6,16 @@
   --ds-banner-background-gradient-width: 300px;
   --ds-home-news-link-color: #{$green};
   --ds-home-news-link-hover-color: #{darken($green, 15%)};
+
+   /* 
+  rex 220415 : increased to 218px (with lines) / 212px (without lines), so that the following line is still visible 
+  in a truncated form, so that the user recognises that more items follow. The previous height specification in pixels, 
+  however, only works with medium font size. To ensure that it also works when the font size is changed, 
+  relative dimensions are used instead, assuming that the root font size is 16px.
+ */ 
+    //--ds-dropdown-menu-max-height: 200px; // origially
+    //--ds-dropdown-menu-max-height: 13.5rem; // rex 220415 with lines between menu items
+    --ds-dropdown-menu-max-height: 13.25rem; // rex 220415 without lines between menu items, see /src/app/shared/form/builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.component.scss
+
 }
 

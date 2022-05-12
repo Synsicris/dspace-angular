@@ -1,14 +1,21 @@
 @import '../../../../form.component';
 
+// background of scrollable dropdown menu
 .scrollable-menu {
   height: auto;
   max-height: var(--ds-dropdown-menu-max-height);
   overflow-x: hidden;
   border-top: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color) !important;
+  background-color:#fff; // rex 220415 background of dropdown menu
 }
 
+// dropdown menu items
 .collection-item {
-  border-bottom: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
+  // border-bottom: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color); // rex 220415
+  /* rex 220415
+  removed lines in the dropdown menu as they are not necessary for orientation and visually clutter, 
+  which can also lead to the scrollbar being overlooked.
+  */
 }
 
 .scrollable-dropdown-loading {
@@ -20,16 +27,20 @@
   bottom: 0;
 }
 
+// background of scrollable dropdown menu INCLUDING the area around the input-field
 .scrollable-dropdown-menu {
   left: 0 !important;
   margin-bottom: var(--bs-spacer);
   z-index: 1000;
+  background-color:$scrollable-dropdown-bgcolor; // rex 220415 background behind input field
 }
 
+// search input field above dropdown-menu
 .scrollable-dropdown-search-input{
   width:96%;
   margin:auto;
   margin-bottom:8px;
+  //margin-bottom:12px; //rex 220415
 }
 
 .scrollable-dropdown-toggle {
