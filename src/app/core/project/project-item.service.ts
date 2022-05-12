@@ -111,7 +111,17 @@ export class ProjectItemService {
       );
   }
 
-
+  executeSubmissionPatchWithErrors(objectId: string, pathName: string): Observable<SubmitDataResponseDefinitionObject> {
+    return this.submissionJsonPatchOperationsService.jsonPatchByResourceID(
+      'workspaceitems',
+      objectId,
+      'sections',
+      pathName).pipe(
+        take(1),
+        map((result: SubmissionObject[]) => (result[0]) ? result[0] : null),
+        catchError(() => observableOf(null))
+      );
+  }
 
   executeEditItemPatch(objectId: string, pathName: string): Observable<SubmissionObject> {
     return this.submissionJsonPatchOperationsService.jsonPatchByResourceID(
@@ -120,7 +130,6 @@ export class ProjectItemService {
       'sections',
       pathName).pipe(
         take(1),
-        tap((res) => console.log(res)),
         map((result: SubmissionObject[]) => (result[0] && isEmpty(result[0].errors)) ? result[0].item : null),
         catchError(() => observableOf(null))
       );
@@ -157,6 +166,7 @@ export class ProjectItemService {
   }
 
   public updateMultipleSubmissionMetadata(submissionObject: SubmissionObject, pathName: string, metadata: MetadataMap): Observable<any> {
+    console.log(submissionObject, pathName, metadata);
     const pathCombiner = new JsonPatchOperationPathCombiner('sections', pathName);
     Object.keys(metadata)
       .forEach((metadataName) => {
@@ -183,7 +193,7 @@ export class ProjectItemService {
       });
     return observableOf({}).pipe(
       delay(400),
-      switchMap(() => this.executeSubmissionPatch(submissionObject.id, pathName)),
+      switchMap(() => this.executeSubmissionPatchWithErrors(submissionObject.id, pathName)),
     );
   }
 

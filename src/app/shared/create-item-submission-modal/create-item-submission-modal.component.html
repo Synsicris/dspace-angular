@@ -7,6 +7,6 @@
 <div class="modal-body modal-body-height">
   <ds-loading *ngIf="(processing | async)" [message]="'loading.default' | translate"></ds-loading>
   <ds-form *ngIf="!(processing | async) && formModel?.length > 0" #formRef="formComponent" [formModel]="formModel"
-    [formId]="formId" [displaySubmit]="true" (submitForm)="submit($event)" (cancel)="closeModal()">
+    [formId]="formId" [displaySubmit]="displaySubmit" (submitForm)="submit($event)" (cancel)="closeModal()">
   </ds-form>
 </div>

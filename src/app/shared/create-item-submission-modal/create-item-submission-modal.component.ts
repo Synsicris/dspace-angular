@@ -7,14 +7,13 @@ import { SubmissionService } from './../../submission/submission.service';
 import { getFirstCompletedRemoteData, getRemoteDataPayload } from './../../core/shared/operators';
 import { Collection } from './../../core/shared/collection.model';
 import { CollectionDataService } from './../../core/data/collection-data.service';
-import { Component, Input, OnInit, ViewChildren, EventEmitter, Output, Inject } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
-import { BehaviorSubject, Subscription, Observable, combineLatest, of as observableOf } from 'rxjs';
-import { map, tap, switchMap, filter } from 'rxjs/operators';
+import { BehaviorSubject, Observable, combineLatest, of as observableOf } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { DynamicFormControlModel } from '@ng-dynamic-forms/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
 import { FormBuilderService } from '../form/builder/form-builder.service';
 import { SubmissionFormsModel } from '../../core/config/models/config-submission-forms.model';
@@ -49,10 +48,9 @@ export class CreateItemSubmissionModalComponent implements OnInit {
   @Input() formName: string;
 
   /**
-   * The form config
-   * @type {SubmissionFormModel}
+   * Custom metadatas that wont be shown in the form but passed in the patch requests
    */
-  formConfig: SubmissionFormModel;
+  @Input() customMetadata: MetadataMap = {};
 
   /**
    * A boolean that indicate if to display form's submit and cancel buttons
@@ -65,11 +63,6 @@ export class CreateItemSubmissionModalComponent implements OnInit {
   public formId: string;
 
   /**
-   * The form layout
-   */
-  public formLayout;
-
-  /**
    * The form model
    */
   public formModel: DynamicFormControlModel[];
@@ -79,17 +72,6 @@ export class CreateItemSubmissionModalComponent implements OnInit {
    * @type {BehaviorSubject<boolean>}
    */
   processing: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-  /**
-   * Array to track all subscriptions and unsubscribe them onDestroy
-   * @type {Array}
-   */
-  protected subs: Subscription[] = [];
-
-  /**
-   * Custom metadatas that wont be shown in the form but passed in the patch requests
-   */
-  customMetadata: MetadataMap = {};
 
   /**
    * Do evade duplicates we maintain the submission information in case there are server errors
@@ -126,7 +108,6 @@ export class CreateItemSubmissionModalComponent implements OnInit {
    * or close modal if no errors are found
    */
   closeModal() {
-
     if (!isUndefined(this.currentSubmission) && !isNull(this.currentSubmission) && !isUndefined(this.currentSubmission.errors) && this.currentSubmission.errors.length > 0) {
       this.removeSubmission().subscribe(() => {
         this.activeModal.dismiss(false);
@@ -134,7 +115,6 @@ export class CreateItemSubmissionModalComponent implements OnInit {
     } else {
       this.activeModal.dismiss(false);
     }
-
   }
 
   /**
@@ -194,12 +174,11 @@ export class CreateItemSubmissionModalComponent implements OnInit {
         newErrors.push({ message: error.message, path: path });
       });
     });
-
     return newErrors;
   }
 
   /**
-   * start depositWorkspaceItem and close modal if successfull
+   * start depositWorkspaceItem and close modal if successful
    */
   handleDepositWorkspace(submissionObject: SubmissionObject) {
     this.projectItemService.depositWorkspaceItem(submissionObject).subscribe(() => {
