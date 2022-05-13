@@ -1324,6 +1324,10 @@
 
   "comcol-role.edit.reviewer.description": "Reviewers are able to accept or reject incoming submissions. However, they are not able to edit the submission's metadata.",
 
+  "comment.search.results.edit": "Edit",
+
+  "comment.search.results.delete": "Delete",
+
   "community.form.abstract": "Short Description",
 
   "community.form.description": "Introductory text (HTML)",
@@ -1675,6 +1679,14 @@
   "confirmation-modal.delete-subscription.cancel": "Cancel",
 
   "confirmation-modal.delete-subscription.confirm": "Delete",
+
+  "confirmation-modal.delete-comment.header": "Delete comment \"{{ dsoName }}\"",
+
+  "confirmation-modal.delete-comment.info": "Are you sure you want to delete comment \"{{ dsoName }}\"",
+
+  "confirmation-modal.delete-comment.cancel": "Cancel",
+
+  "confirmation-modal.delete-comment.confirm": "Delete",
 
   "confirmation-modal.pending-changes.header": "Unsaved changes",
 

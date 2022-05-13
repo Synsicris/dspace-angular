@@ -1,7 +1,5 @@
 import { ResourceType } from 'src/app/core/shared/resource-type';
-import { SubmissionObject } from 'src/app/core/submission/models/submission-object.model';
 import { WorkspaceitemSectionsObject } from 'src/app/core/submission/models/workspaceitem-sections.model';
-import { SubmissionScopeType } from 'src/app/core/submission/submission-scope-type';
 import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-metadata-value.model';
 
 export const submissionObjectMock = Object.assign({}, new WorkspaceitemSectionsObject(), {

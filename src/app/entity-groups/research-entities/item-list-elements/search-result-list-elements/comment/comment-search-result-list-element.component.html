@@ -1,0 +1,46 @@
+<div *ngIf="dso">
+    <ds-type-badge class="d-inline-block" *ngIf="showLabel" [object]="dso"></ds-type-badge>
+    <ds-truncatable-part [id]="dso.id" *ngIf="object !== undefined && object !== null">
+
+
+        <ds-truncatable-part [id]="dso.id">
+            <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
+                rel="noopener noreferrer" [routerLink]="[itemPageRoute]" class="lead item-list-title"
+                [innerHTML]="dsoTitle"></a>
+            <span *ngIf="linkType == linkTypes.None" class="lead item-list-title" [innerHTML]="dsoTitle"></span>
+        </ds-truncatable-part>
+
+        <ds-truncatable-part [id]="dso.id">
+            <span class="text-muted item-list-authors">
+                {{dso.firstMetadataValue('dc.type')}}
+            </span>
+        </ds-truncatable-part>
+
+        <ds-truncatable-part [id]="dso.id">
+            <span class="text-muted">(<span
+                    class="text-muted item-list-date">{{dso.firstMetadataValue('synsicris.date.reminder')}}</span>)</span>
+        </ds-truncatable-part>
+
+        <ds-truncatable-part [id]="dso.id">
+            <span class="text-muted">(<span
+                    class="text-muted item-list-date">{{dso.firstMetadataValue('synsicris.date.creation')}}</span>)</span>
+        </ds-truncatable-part>
+
+        <ds-truncatable-part [id]="dso.id">
+            <span class="badge badge-info">{{dso.firstMetadataValue('synsicris.creator')}}</span>
+        </ds-truncatable-part>
+
+        <ds-truncatable-part [id]="dso.id">
+
+            <button *ngIf="getCanEdit() | async" class="btn btn-primary" (click)="openEditModal()">
+                {{"comment.search.results.edit" | translate}}
+            </button>
+
+            <button *ngIf="getCanDelete() | async" class="btn btn-danger" (click)="openDeleteModal()">
+                {{"comment.search.results.delete" | translate}}
+            </button>
+
+        </ds-truncatable-part>
+
+    </ds-truncatable-part>
+</div>

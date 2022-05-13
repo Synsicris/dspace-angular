@@ -1,3 +1,5 @@
+import { Collection } from './../../../core/shared/collection.model';
+import { Item } from './../../../core/shared/item.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 
@@ -21,6 +23,7 @@ import {
   SUBCONTRACTOR_ENTITY_METADATA
 } from '../../../core/project/project-data.service';
 import { environment } from '../../../../environments/environment';
+import { CreateItemSubmissionModalComponent } from '../../create-item-submission-modal/create-item-submission-modal.component';
 
 @Component({
   selector: 'ds-item-create',
@@ -28,6 +31,11 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./item-create.component.scss']
 })
 export class ItemCreateComponent implements OnInit {
+
+  /**
+   * The entity type which the target entity type is related
+   */
+  @Input() item: Item;
 
   /**
    * The entity type which the target entity type is related
@@ -70,6 +78,8 @@ export class ItemCreateComponent implements OnInit {
   openDialog() {
     if (this.targetEntityType === PROJECT_ENTITY) {
       this.createSubproject();
+    } else if (this.targetEntityType === 'comment') {
+      this.createComment();
     } else {
       this.createEntity();
     }
@@ -104,5 +114,19 @@ export class ItemCreateComponent implements OnInit {
     const modalRef = this.modalService.open(CreateProjectComponent, { size: 'lg' });
     modalRef.componentInstance.isSubproject = true;
     modalRef.componentInstance.parentProjectUUID = this.scope;
+  }
+
+  /**
+   * Open creation sub-project modal
+   */
+  createComment() {
+    this.item.owningCollection.pipe(
+      getFirstSucceededRemoteDataPayload()
+    ).subscribe((colection: Collection) => {
+      const modalRef = this.modalService.open(CreateItemSubmissionModalComponent, { size: 'lg' });
+      modalRef.componentInstance.entityType = this.targetEntityType;
+      modalRef.componentInstance.collectionId = colection.id;
+      modalRef.componentInstance.formName = environment.comment.commentEditFormSection;
+    });
   }
 }

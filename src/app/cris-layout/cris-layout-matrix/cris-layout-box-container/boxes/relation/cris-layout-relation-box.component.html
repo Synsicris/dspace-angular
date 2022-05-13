@@ -1,10 +1,6 @@
-<ds-configuration-search-page *ngIf="configuration" class="w-100"
-                              [fixedFilterQuery]="searchFilter"
-                              [configuration]="configuration"
-                              [searchEnabled]="searchEnabled"
-                              [sideBarWidth]="sideBarWidth"
-                              [showCharts]="true"
-                              [showExport]="false"
-                              [showSidebar]="true">
-  <ds-item-create additionalSearchFormOptions [relatedEntityType]="item.entityType" [targetEntityType]="box.shortname" [scope]="projectScope?.uuid"></ds-item-create>
+<ds-configuration-search-page *ngIf="configuration" class="w-100" [fixedFilterQuery]="searchFilter"
+  [configuration]="configuration" [searchEnabled]="searchEnabled" [sideBarWidth]="sideBarWidth" [showCharts]="true"
+  [showExport]="false" [showSidebar]="true">
+  <ds-item-create additionalSearchFormOptions [item]="item" [relatedEntityType]="item.entityType"
+    [targetEntityType]="box.shortname" [scope]="projectScope?.uuid"></ds-item-create>
 </ds-configuration-search-page>

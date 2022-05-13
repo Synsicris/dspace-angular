@@ -42,20 +42,22 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
   projectScope: Community;
 
   constructor(public cd: ChangeDetectorRef,
-              protected route: ActivatedRoute,
-              protected translateService: TranslateService,
-              @Inject('boxProvider') public boxProvider: CrisLayoutBox,
-              @Inject('itemProvider') public itemProvider: Item) {
+    protected route: ActivatedRoute,
+    protected translateService: TranslateService,
+    @Inject('boxProvider') public boxProvider: CrisLayoutBox,
+    @Inject('itemProvider') public itemProvider: Item) {
     super(translateService, boxProvider, itemProvider);
   }
 
   ngOnInit(): void {
+    console.log(this.item);
     super.ngOnInit();
     this.route.data.pipe(
       map((data) => data.project as RemoteData<Community>),
       map((communityRD) => communityRD.payload),
       take(1)
     ).subscribe((community) => {
+      console.log(community);
       this.projectScope = community;
       this.searchFilter = `scope=${this.item.id}`;
       this.configuration = (this.box.configuration as RelationBoxConfiguration)['discovery-configuration'];

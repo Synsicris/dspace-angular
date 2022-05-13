@@ -400,7 +400,7 @@ export class DefaultAppConfig implements AppConfig {
     ],
     itemPage: {
       default: {
-          orientation: 'vertical'
+        orientation: 'vertical'
       },
     },
     metadataBox: {
@@ -666,4 +666,11 @@ export class DefaultAppConfig implements AppConfig {
       }
     ]
   };
+
+  comment = {
+    commentEditFormSection: 'comments',
+    commentEditMode: 'comment',
+    commentEntityType: 'comment'
+  };
+
 }
