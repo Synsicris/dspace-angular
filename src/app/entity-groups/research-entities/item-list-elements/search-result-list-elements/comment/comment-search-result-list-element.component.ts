@@ -25,8 +25,9 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ConfirmationModalComponent } from './../../../../../shared/confirmation-modal/confirmation-modal.component';
 import { hasValue, isNotEmpty } from './../../../../../shared/empty.util';
 import { TranslateService } from '@ngx-translate/core';
-import { followLink } from 'src/app/shared/utils/follow-link-config.model';
-import { Item } from 'src/app/core/shared/item.model';
+import { followLink } from './../../../../../shared/utils/follow-link-config.model';
+import { Item } from './../../../../../core/shared/item.model';
+import { of } from 'rxjs';
 
 @listableObjectComponent('CommentSearchResult', ViewMode.ListElement)
 @Component({
@@ -128,6 +129,7 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
    * Checks if the user can delete the comment
    */
   getCanDelete(): Observable<boolean> {
+    return of(true);
     return this.authorizationService.isAuthorized(FeatureID.CanDelete, this.dso.self);
   }
 
@@ -135,6 +137,7 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
    * Checks if the user can edit the comment
    */
   getCanEdit(): Observable<boolean> {
+    return of(true);
     return this.editModes$.asObservable().pipe(
       map((editModes) => isNotEmpty(editModes) && editModes.length > 0)
     );

@@ -1696,6 +1696,8 @@
 
   "confirmation-modal.pending-changes.confirm": "Leave",
 
+  "comment.listelement.badge" : "Comment",
+
   "dataset.listelement.badge": "Dataset",
 
   "easy-online-import.title.breadcrumbs": "Easy-online import",

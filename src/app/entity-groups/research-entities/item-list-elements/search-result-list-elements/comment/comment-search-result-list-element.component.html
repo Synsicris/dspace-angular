@@ -32,11 +32,11 @@
 
         <ds-truncatable-part [id]="dso.id">
 
-            <button *ngIf="getCanEdit() | async" class="btn btn-primary" (click)="openEditModal()">
+            <button *ngIf="getCanEdit() | async" class="btn btn-primary mt-2" (click)="openEditModal()">
                 {{"comment.search.results.edit" | translate}}
             </button>
 
-            <button *ngIf="getCanDelete() | async" class="btn btn-danger" (click)="openDeleteModal()">
+            <button *ngIf="getCanDelete() | async" class="btn btn-danger mt-2" (click)=" openDeleteModal()">
                 {{"comment.search.results.delete" | translate}}
             </button>
 
