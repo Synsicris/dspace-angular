@@ -129,7 +129,6 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
    * Checks if the user can delete the comment
    */
   getCanDelete(): Observable<boolean> {
-    return of(true);
     return this.authorizationService.isAuthorized(FeatureID.CanDelete, this.dso.self);
   }
 
@@ -137,7 +136,6 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
    * Checks if the user can edit the comment
    */
   getCanEdit(): Observable<boolean> {
-    return of(true);
     return this.editModes$.asObservable().pipe(
       map((editModes) => isNotEmpty(editModes) && editModes.length > 0)
     );

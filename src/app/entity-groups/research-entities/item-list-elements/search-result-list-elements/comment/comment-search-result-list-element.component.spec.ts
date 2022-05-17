@@ -121,6 +121,10 @@ describe('CommentSearchResultListElementComponent', () => {
     expect(de.query(By.css('.badge-info'))).toBeTruthy();
   });
 
+  it('should show description', () => {
+    expect(de.query(By.css('.description'))).toBeTruthy();
+  });
+
   it('should have called getCanDelete', () => {
     const spyon = spyOn(component, 'getCanDelete');
     fixture.detectChanges();

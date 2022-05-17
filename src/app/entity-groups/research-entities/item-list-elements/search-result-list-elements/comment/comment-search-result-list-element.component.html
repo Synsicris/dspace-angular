@@ -30,6 +30,11 @@
             <span class="badge badge-info">{{dso.firstMetadataValue('synsicris.creator')}}</span>
         </ds-truncatable-part>
 
+
+        <ds-truncatable-part [id]="dso.id" [maxLines]="1"><span class="description"
+                [innerHTML]="firstMetadataValue('dc.description')"></span>
+        </ds-truncatable-part>
+
         <ds-truncatable-part [id]="dso.id">
 
             <button *ngIf="getCanEdit() | async" class="btn btn-primary mt-2" (click)="openEditModal()">
