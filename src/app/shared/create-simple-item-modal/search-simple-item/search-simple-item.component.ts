@@ -10,15 +10,15 @@ import { SortDirection, SortOptions } from '../../../core/cache/models/sort-opti
 import { PaginationComponentOptions } from '../../pagination/pagination-component-options.model';
 import { PageInfo } from '../../../core/shared/page-info.model';
 import { SearchSimpleItemService } from './search-simple-item.service';
-import { SearchFilterConfig } from '../../search/search-filter-config.model';
+import { SearchFilterConfig } from '../../search/models/search-filter-config.model';
 import {
   FilterBox,
   FilterBoxEntry,
   FilterBoxType
 } from './search-header/filter-box/search-simple-item-filter-box.component';
-import { FacetValue } from '../../search/facet-value.model';
-import { SearchFilter } from '../../search/search-filter.model';
-import { FilterType } from '../../search/filter-type.model';
+import { FacetValue } from '../../search/models/facet-value.model';
+import { SearchFilter } from '../../search/models/search-filter.model';
+import { FilterType } from '../../search/models/filter-type.model';
 import { SimpleItem } from '../models/simple-item.model';
 import { PaginationService } from '../../../core/pagination/pagination.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -81,7 +81,6 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    * EventEmitter that will emit an array of SimpleItem object to add
    */
   @Output() addItems: EventEmitter<SimpleItem[]> = new EventEmitter<SimpleItem[]>();
-
 
   /**
    * A boolean representing if there is an info message to display
@@ -236,7 +235,9 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
    * @param item
    */
   onTaskSelected(item: SimpleItem) {
-    this.selectedTasks.push(item);
+    if (!this.isAlreadySelected(item)) {
+      this.selectedTasks.push(item);
+    }
   }
 
   private buildSearchQuery(filters: SearchFilter[]) {
@@ -353,4 +354,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
   }
 
+  isAlreadySelected(item: SimpleItem): boolean {
+    return findIndex(this.selectedTasks, { id: item.id }) !== -1;
+  }
 }

@@ -9,7 +9,15 @@ import { ImpactPathway } from '../core/models/impact-pathway.model';
 })
 export class WrapperImpactPathWayComponent {
 
-  @Input() public projectId: string;
+  /**
+   * The project community's id
+   */
+  @Input() public projectCommunityId: string;
+  /**
+   * The project item's id
+   */
+  @Input() public projectItemId: string;
+
   @Input() public impactPathWay: ImpactPathway;
   @Input() public impactPathWayId: string;
 

@@ -15,6 +15,7 @@ import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
+import { environment } from '../../../../environments/environment';
 
 /**
  * This component renders a context menu option that provides the links to edit item page.
@@ -101,6 +102,7 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
       this.sub.unsubscribe();
     }
   }
+
   getData(): void {
     this.sub = this.editItemService.findById(this.contextMenuObject.id + ':none', false, true, followLink('modes')).pipe(
       getAllSucceededRemoteDataPayload(),
@@ -109,7 +111,12 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
       ),
       startWith([])
     ).subscribe((editModes: EditItemMode[]) => {
-      this.editModes$.next(editModes);
+      const allowedModes = editModes.filter((mode: EditItemMode) => this.isEditModeAllowed(mode));
+      this.editModes$.next(allowedModes);
     });
+  }
+
+  private isEditModeAllowed(mode: EditItemMode) {
+    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode || mode.name === 'OWNER';
   }
 }

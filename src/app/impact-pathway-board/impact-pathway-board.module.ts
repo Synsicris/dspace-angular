@@ -18,6 +18,9 @@ import { ObjectiveComponent } from './wrapper-objectives/objective/objective.com
 import { ImpactPathwaySharedModule } from './shared/impact-pathway-shared.module';
 import { ImpactPathwayCoreModule } from './core/impact-pathway-core.module';
 import { CreateSimpleItemModule } from '../shared/create-simple-item-modal/create-simple-item.module';
+import { ComcolModule } from '../shared/comcol/comcol.module';
+import { EditSimpleItemModalModule } from '../shared/edit-simple-item-modal/edit-simple-item-modal.module';
+import { ItemDetailPageModalModule } from '../item-detail-page-modal/item-detail-page-modal.module';
 
 const MODULES = [
   CommonModule,
@@ -27,7 +30,10 @@ const MODULES = [
   NgxDomarrowModule,
   ImpactPathwaySharedModule,
   ImpactPathwayCoreModule,
-  CreateSimpleItemModule
+  CreateSimpleItemModule,
+  EditSimpleItemModalModule,
+  ComcolModule,
+  ItemDetailPageModalModule
 ];
 
 const COMPONENTS = [

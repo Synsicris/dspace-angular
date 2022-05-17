@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SearchFilterConfig } from '../../../search/search-filter-config.model';
-import { FacetValue } from '../../../search/facet-value.model';
+import { SearchFilterConfig } from '../../../search/models/search-filter-config.model';
+import { FacetValue } from '../../../search/models/facet-value.model';
 import { FilterBox } from './filter-box/search-simple-item-filter-box.component';
 import { SimpleItem } from '../../models/simple-item.model';
 

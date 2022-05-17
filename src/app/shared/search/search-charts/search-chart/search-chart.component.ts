@@ -7,7 +7,7 @@ import { SearchFilterService } from '../../../../core/shared/search/search-filte
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { slide } from '../../../animations/slide';
 import { isNotEmpty } from '../../../empty.util';
-import { SearchFilterConfig } from '../../search-filter-config.model';
+import { SearchFilterConfig } from '../../models/search-filter-config.model';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -71,7 +71,6 @@ export class SearchChartComponent implements OnInit {
     this.caption = this.translate.instant(captionTranslationLabel);
     this.showCaption = this.caption !== captionTranslationLabel;
 
-    // console.log(JSON.stringify(this.filter));
     this.selectedValues$ = this.getSelectedValues();
     this.active$ = this.isActive();
     this.initializeFilter();

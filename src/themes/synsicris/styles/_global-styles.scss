@@ -41,7 +41,8 @@ header .helper-rex:after {
   }
 
   h5 {
-    font-size: 1.1rem
+    font-size: 1.1rem;
+    text-align: left;
   }
 }
 
@@ -69,4 +70,29 @@ ds-metric-donuts a {
   font-weight: bold;
 }
 
+.synsi-list::before {
+  content: '\2022';
+}
+
+.pie-label {
+  font-size: 16px !important;
+}
+
+.hint-tooltip .tooltip-inner {
+  background-color: var(--ds-tooltip-inner-backgroud-color);
+  color: var(--ds-tooltip-inner-color);
+  border: 1px solid var(--ds-tooltip-inner-border-color);
+}
+.bs-tooltip-top .arrow::before {
+  border-top-color: var(--ds-tooltip-inner-color);
+}
+.bs-tooltip-right .arrow::before {
+  border-right-color: var(--ds-tooltip-inner-color);
+}
+.bs-tooltip-left .arrow::before {
+  border-left-color: var(--ds-tooltip-inner-color);
+}
+.bs-tooltip-bottom .arrow::before {
+  border-bottom-color: var(--ds-tooltip-inner-color);
+}
 

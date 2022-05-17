@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+
 import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { distinctUntilChanged, filter, map, startWith } from 'rxjs/operators';
 
 import { AppState } from '../../app.reducer';
 import {
@@ -9,6 +12,7 @@ import {
   ClearWorkingPlanAction,
   GenerateWorkpackageAction,
   GenerateWorkpackageStepAction,
+  InitCompareAction,
   MoveWorkpackageAction,
   MoveWorkpackageStepAction,
   RemoveWorkpackageAction,
@@ -20,19 +24,19 @@ import {
   UpdateWorkpackageStepAction
 } from './working-plan.actions';
 import { MetadataMap, MetadatumViewModel } from '../../core/shared/metadata.models';
-import { Observable } from 'rxjs';
 import {
   chartDateViewSelector,
   getLastAddedNodesListSelector,
+  isCompareMode,
+  isWorkingPlanInitializingSelector,
   isWorkingPlanLoadedSelector,
   isWorkingPlanMovingSelector,
   isWorkingPlanProcessingSelector,
-  workpackagesSelector,
+  workingPlanStateSelector,
   workpackagesSortOptionSelector,
   workpackageToRemoveSelector
 } from './selectors';
-import { map, startWith } from 'rxjs/operators';
-import { ChartDateViewType, WorkpackageEntries } from './working-plan.reducer';
+import { ChartDateViewType, WorkingPlanState, WorkpackageEntries } from './working-plan.reducer';
 import { Workpackage, WorkpackageStep } from './models/workpackage-step.model';
 
 export interface WpActionPackage {
@@ -88,6 +92,10 @@ export class WorkingPlanStateService {
     this.store.dispatch(new GenerateWorkpackageStepAction(projectId, parentId, workpackageStepType, metadata));
   }
 
+  public dispatchInitCompare(compareWorkingplanId: string) {
+    this.store.dispatch(new InitCompareAction(compareWorkingplanId));
+  }
+
   public dispatchMoveWorkpackage(workpackageId: string, oldIndex: number, newIndex: number): void {
     this.store.dispatch(new MoveWorkpackageAction(workpackageId, oldIndex, newIndex));
   }
@@ -104,8 +112,8 @@ export class WorkingPlanStateService {
     this.store.dispatch(new RemoveWorkpackageStepAction(workpackageId, workpackageStepId, workspaceItemId));
   }
 
-  public dispatchRetrieveAllWorkpackages(projectId: string, sortOption: string): void {
-    this.store.dispatch(new RetrieveAllLinkedWorkingPlanObjectsAction(projectId, sortOption));
+  public dispatchRetrieveAllWorkpackages(projectId: string, workinplanId: string, sortOption: string): void {
+    this.store.dispatch(new RetrieveAllLinkedWorkingPlanObjectsAction(projectId, workinplanId, sortOption));
   }
 
   public dispatchUpdateWorkpackageAction(
@@ -137,11 +145,18 @@ export class WorkingPlanStateService {
     return this.store.pipe(select(chartDateViewSelector));
   }
 
+  public isCompareModeActive() {
+    return this.store.pipe(select(isCompareMode));
+  }
+
   public getWorkpackages(): Observable<Workpackage[]> {
     return this.store.pipe(
-      select(workpackagesSelector),
+      select(workingPlanStateSelector),
+      filter((workingplanState: WorkingPlanState) => workingplanState.loaded),
+      map((workingplanState: WorkingPlanState) => workingplanState.workpackages),
       map((entries: WorkpackageEntries) => Object.keys(entries).map((key) => entries[key])),
-      startWith([])
+      startWith([]),
+      distinctUntilChanged()
     );
   }
 
@@ -155,6 +170,10 @@ export class WorkingPlanStateService {
 
   public getLastAddedNodesList(): Observable<string[]> {
     return this.store.pipe(select(getLastAddedNodesListSelector));
+  }
+
+  public isInitializing(): Observable<boolean> {
+    return this.store.pipe(select(isWorkingPlanInitializingSelector));
   }
 
   public isProcessing(): Observable<boolean> {

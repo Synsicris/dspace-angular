@@ -1,7 +1,20 @@
 import { Injectable } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
-import { catchError, concatMap, delay, filter, map, mapTo, mergeMap, reduce, scan, take, tap } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  delay,
+  filter,
+  map,
+  mapTo,
+  mergeMap,
+  reduce,
+  scan,
+  switchMap,
+  take,
+  tap
+} from 'rxjs/operators';
 import { extendMoment } from 'moment-range';
 import * as Moment from 'moment';
 
@@ -10,9 +23,9 @@ import { SubmissionFormsConfigService } from '../../core/config/submission-forms
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
 import { buildPaginatedList, PaginatedList } from '../../core/data/paginated-list.model';
-import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { RemoteData } from '../../core/data/remote-data';
-import { SearchResult } from '../../shared/search/search-result.model';
+import { SearchResult } from '../../shared/search/models/search-result.model';
 import { hasValue, isEmpty, isNotEmpty, isNotNull, isNotUndefined } from '../../shared/empty.util';
 import { followLink } from '../../shared/utils/follow-link-config.model';
 import { Item } from '../../core/shared/item.model';
@@ -33,6 +46,7 @@ import { JsonPatchOperationsBuilder } from '../../core/json-patch/builder/json-p
 import {
   getAllSucceededRemoteData,
   getFinishedRemoteData,
+  getFirstCompletedRemoteData,
   getFirstSucceededRemoteDataPayload,
   getRemoteDataPayload
 } from '../../core/shared/operators';
@@ -51,6 +65,8 @@ import { environment } from '../../../environments/environment';
 import { CollectionDataService } from '../../core/data/collection-data.service';
 import { RequestService } from '../../core/data/request.service';
 import { ProjectItemService } from '../../core/project/project-item.service';
+import { ProjectDataService } from '../../core/project/project-data.service';
+import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 
 export const moment = extendMoment(Moment);
 
@@ -82,6 +98,8 @@ export class WorkingPlanService {
     private itemAuthorityRelationService: ItemAuthorityRelationService,
     private itemService: ItemDataService,
     private projectItemService: ProjectItemService,
+    private projectService: ProjectDataService,
+    private projectVersionService: ProjectVersionService,
     private linkService: LinkService,
     private operationsBuilder: JsonPatchOperationsBuilder,
     private requestService: RequestService,
@@ -119,6 +137,22 @@ export class WorkingPlanService {
       projectId,
       stepType,
       metadata
+    );
+  }
+
+  getWorkingPlanFromProjectId(projectId): Observable<RemoteData<Item>> {
+    return this.itemService.findById(projectId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      switchMap((projectItem: Item) => {
+        const metadataValue = Metadata.first(projectItem.metadata, environment.workingPlan.workingPlanRelationMetadata);
+        if (isNotEmpty(metadataValue) && isNotEmpty(metadataValue.authority)) {
+          return this.itemService.findById(metadataValue.authority).pipe(
+            getFirstCompletedRemoteData()
+          );
+        } else {
+          throw(new Error('Link to working plan item is missing.'));
+        }
+      })
     );
   }
 
@@ -162,8 +196,12 @@ export class WorkingPlanService {
     return environment.workingPlan.workingPlanEditMode;
   }
 
+  getWorkingPlanEditFormName(): string {
+    return environment.workingPlan.workingPlanEditFormSection;
+  }
+
   getWorkingPlanEditSectionName(): string {
-    return `sections/${environment.workingPlan.workingPlanEditFormSection}`;
+    return `sections/${this.getWorkingPlanEditFormName()}`;
   }
 
   getWorkingPlanTaskSearchHeader(): string {
@@ -270,7 +308,7 @@ export class WorkingPlanService {
 
   public initWorkpackageFromItem(item: Item, workspaceItemId: string, steps: WorkpackageStep[] = []): Workpackage {
 
-    const dates = this.initWorkpackageDatesFromItem(item);
+    const dates = this.initWorkpackageDates(item);
     const responsible = item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
     const status = item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
     const type = item.firstMetadataValue('dspace.entity.type');
@@ -290,9 +328,55 @@ export class WorkingPlanService {
     };
   }
 
+  public initWorkpackageFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, steps: WorkpackageStep[] = []): WorkpackageStep {
+    const dates = this.initWorkpackageDates(compareObj.item, compareObj.versionItem);
+    const responsible = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
+    const status = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
+    const type = compareObj.item.firstMetadataValue('dspace.entity.type');
+
+    return {
+      id: compareObj.item.id,
+      compareId: compareObj.versionItem?.id,
+      parentId: parentId,
+      name: compareObj.item.name,
+      type: type,
+      responsible: responsible,
+      progress: 0,
+      progressDates: [],
+      dates: dates,
+      compareStatus: compareObj.status,
+      status: status,
+      steps: steps,
+      expanded: (steps && steps.length > 0)
+    };
+  }
+
+  public initWorkpackageStepFromCompareItem(compareObj: ComparedVersionItem, parentId?: string): WorkpackageStep {
+
+    const dates = this.initWorkpackageDates(compareObj.item, compareObj.versionItem);
+    const responsible = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
+    const status = compareObj.item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
+    const type = compareObj.item.firstMetadataValue('dspace.entity.type');
+
+    return {
+      id: compareObj.item.id,
+      compareId: compareObj.versionItem?.id,
+      parentId: parentId,
+      name: compareObj.item.name,
+      type: type,
+      responsible: responsible,
+      progress: 0,
+      progressDates: [],
+      dates: dates,
+      compareStatus: compareObj.status,
+      status: status,
+      expanded: false
+    };
+  }
+
   public initWorkpackageStepFromItem(item: Item, workspaceItemId: string, parentId: string): WorkpackageStep {
 
-    const dates = this.initWorkpackageDatesFromItem(item);
+    const dates = this.initWorkpackageDates(item);
     const responsible = item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
     const status = item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
     const type = item.firstMetadataValue('dspace.entity.type');
@@ -310,6 +394,50 @@ export class WorkingPlanService {
       status: status,
       expanded: false
     };
+  }
+
+  initCompareWorkingPlan(compareList: ComparedVersionItem[]): Observable<Workpackage[]> {
+    return observableFrom(compareList).pipe(
+      concatMap((compareItem: ComparedVersionItem) => this.initCompareWorkpackageStepsFromParentItem(
+        compareItem.item.id,
+        compareItem.item,
+        compareItem.versionItem?.id).pipe(
+        map((steps: WorkpackageStep[]) => this.initWorkpackageFromCompareItem(
+          compareItem,
+          null,
+          steps
+        ))
+      )),
+      reduce((acc: any, value: any) => [...acc, value], [])
+    );
+  }
+
+  initCompareWorkpackageStepsFromParentItem(targetWorkpackageId: string, targetItem: Item, versionedWorkpackageId: string): Observable<WorkpackageStep[]> {
+    const relatedTaskMetadata = Metadata.all(targetItem.metadata, environment.workingPlan.workingPlanStepRelationMetadata);
+    if (isEmpty(relatedTaskMetadata) || isEmpty(versionedWorkpackageId)) {
+      return observableOf([]);
+    } else {
+      return this.projectVersionService.compareItemChildrenByMetadata(
+        targetWorkpackageId,
+        versionedWorkpackageId,
+        environment.workingPlan.workingPlanStepRelationMetadata).pipe(
+          mergeMap((compareList: ComparedVersionItem[]) => {
+            return observableFrom(compareList).pipe(
+              concatMap((compareItem: ComparedVersionItem) => observableOf(this.initWorkpackageStepFromCompareItem(
+                compareItem,
+                targetWorkpackageId)
+              )),
+              reduce((acc: any, value: any) => {
+                if (isNotNull(value)) {
+                  return [...acc, value];
+                } else {
+                  return acc;
+                }
+              }, [])
+            );
+          })
+      );
+    }
   }
 
   initWorkingPlan(workpackageListItem: WorkpackageSearchItem[]): Observable<Workpackage[]> {
@@ -367,7 +495,18 @@ export class WorkingPlanService {
     }
   }
 
-  initWorkpackageDatesFromItem(item: Item): WorkpackageChartDates {
+  initWorkpackageDates(item: Item, versionedItem?: Item): WorkpackageChartDates {
+    const dates = this.retrieveWorkpackageDatesFromItem(item);
+    if (isNotEmpty(versionedItem)) {
+      const compareDates = this.retrieveWorkpackageDatesFromItem(versionedItem);
+      dates.compareStart = compareDates.start;
+      dates.compareEnd = compareDates.end;
+    }
+
+    return dates;
+  }
+
+  retrieveWorkpackageDatesFromItem(item: Item): WorkpackageChartDates {
     let start;
     let startMonth;
     let startYear;
@@ -430,53 +569,73 @@ export class WorkingPlanService {
     return result;
   }
 
-  linkWorkingPlanObject(itemId: string, place?: string): Observable<Item> {
-    return this.itemService.findById(itemId).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      tap((item: Item) => {
-        const value = {
-          value: 'linked'
-        };
-        this.projectItemService.createReplaceMetadataPatchOp(
-          this.getWorkingPlanEditSectionName(),
-          environment.workingPlan.workingPlanLinkMetadata,
-          0,
-          value
+  linkWorkingPlanObject(workingplanId: string, itemId: string, place?: string): Observable<Item> {
+    return this.itemAuthorityRelationService.addLinkedItemToParent(
+      this.getWorkingPlanEditSectionName(),
+      this.getWorkingPlanEditMode(),
+      workingplanId,
+      itemId,
+      environment.workingPlan.workingPlanStepRelationMetadata
+    ).pipe(
+      switchMap(() => {
+        return this.itemService.findById(itemId).pipe(
+          getFirstSucceededRemoteDataPayload(),
+          tap((item: Item) => {
+            const value = {
+              value: 'linked'
+            };
+            this.projectItemService.createReplaceMetadataPatchOp(
+              this.getWorkingPlanEditSectionName(),
+              environment.workingPlan.workingPlanLinkMetadata,
+              0,
+              value
+            );
+            if (isNotEmpty(place)) {
+              this.projectItemService.createAddMetadataPatchOp(this.getWorkingPlanEditSectionName(), environment.workingPlan.workingPlanPlaceMetadata, place);
+            }
+          }),
+          delay(100),
+          mergeMap((taskItem: Item) => this.itemService.executeEditItemPatch(itemId, this.getWorkingPlanEditMode(), this.getWorkingPlanEditSectionName())),
+          getRemoteDataPayload()
         );
-        if (isNotEmpty(place)) {
-          this.projectItemService.createAddMetadataPatchOp(this.getWorkingPlanEditSectionName(), environment.workingPlan.workingPlanPlaceMetadata, place);
-        }
-      }),
-      delay(100),
-      mergeMap((taskItem: Item) => this.itemService.executeEditItemPatch(itemId, this.getWorkingPlanEditMode(), this.getWorkingPlanEditSectionName())),
-      getRemoteDataPayload()
+      })
     );
   }
 
-  unlinkWorkingPlanObject(itemId: string) {
-    return this.itemService.findById(itemId).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      tap((item: Item) => {
-        const value = {
-          value: 'unlinked'
-        };
-        this.projectItemService.createReplaceMetadataPatchOp(
-          this.getWorkingPlanEditSectionName(),
-          environment.workingPlan.workingPlanLinkMetadata,
-          0,
-          value
+  unlinkWorkingPlanObject(workingplanId: string, itemId: string) {
+    return this.itemAuthorityRelationService.removeChildRelationFromParent(
+      this.getWorkingPlanEditSectionName(),
+      this.getWorkingPlanEditMode(),
+      workingplanId,
+      itemId,
+      environment.workingPlan.workingPlanStepRelationMetadata
+    ).pipe(
+      switchMap(() => {
+        return this.itemService.findById(itemId).pipe(
+          getFirstSucceededRemoteDataPayload(),
+          tap((item: Item) => {
+            const value = {
+              value: 'unlinked'
+            };
+            this.projectItemService.createReplaceMetadataPatchOp(
+              this.getWorkingPlanEditSectionName(),
+              environment.workingPlan.workingPlanLinkMetadata,
+              0,
+              value
+            );
+            const place = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateStartMetadata);
+            if (isNotEmpty(place)) {
+              this.projectItemService.createRemoveMetadataPatchOp(this.getWorkingPlanEditSectionName(), environment.workingPlan.workingPlanPlaceMetadata, 0);
+            }
+          }),
+          delay(100),
+          mergeMap((taskItem: Item) => this.itemService.executeEditItemPatch(
+            itemId,
+            this.getWorkingPlanEditMode(),
+            this.getWorkingPlanEditSectionName()
+          ))
         );
-        const place = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateStartMetadata);
-        if (isNotEmpty(place)) {
-          this.projectItemService.createRemoveMetadataPatchOp(this.getWorkingPlanEditSectionName(), environment.workingPlan.workingPlanPlaceMetadata, 0);
-        }
-      }),
-      delay(100),
-      mergeMap((taskItem: Item) => this.itemService.executeEditItemPatch(
-        itemId,
-        this.getWorkingPlanEditMode(),
-        this.getWorkingPlanEditSectionName()
-      ))
+      })
     );
   }
 
@@ -509,7 +668,7 @@ export class WorkingPlanService {
     );
   }
 
-  updateWorkpackagePlace(workpackages: WorkpackageEntries, sortOption: string = environment.workingPlan.workingPlanPlaceMetadata): Observable<Item[]> {
+  updateWorkpackagePlace(workingPlanId: string, workpackages: WorkpackageEntries, sortOption: string = environment.workingPlan.workingPlanPlaceMetadata): Observable<Item[]> {
     let list: any[];
     if (sortOption === environment.workingPlan.workingPlanPlaceMetadata) {
       list = Object.keys(workpackages)
@@ -530,10 +689,30 @@ export class WorkingPlanService {
       list = [];
     }
 
-    return observableFrom(list).pipe(
+    const stepIds: Partial<MetadataValue>[] = Object.entries(workpackages)
+      .map((entry) => entry[1])
+      .map((wp: Workpackage) => ({
+        value: wp.name,
+        authority: wp.id
+      }));
+    return this.itemAuthorityRelationService.patchArrayOfRelations(
+      this.getWorkingPlanEditSectionName(),
+      this.getWorkingPlanEditMode(),
+      workingPlanId,
+      stepIds,
+      environment.workingPlan.workingPlanStepRelationMetadata
+    ).pipe(
+      switchMap(() => {
+        return observableFrom(list).pipe(
+          concatMap((entry) => this.updateMetadataItem(entry.id, entry.metadataList)),
+          reduce((acc: any, value: any) => [...acc, value], [])
+        );
+      })
+    );
+/*    return observableFrom(list).pipe(
       concatMap((entry) => this.updateMetadataItem(entry.id, entry.metadataList)),
       reduce((acc: any, value: any) => [...acc, value], [])
-    );
+    );*/
   }
 
   updateWorkpackageStepsPlace(workpackageId: string, workpackageSteps: WorkpackageStep[]): Observable<Item> {

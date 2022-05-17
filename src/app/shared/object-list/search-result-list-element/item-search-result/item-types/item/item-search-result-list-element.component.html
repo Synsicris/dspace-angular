@@ -7,7 +7,7 @@
             <div *ngFor="let config of displayConfigurations">
                 <ng-container *ngFor="let metadataConf of config.metadata">
                     <span *ngIf="dso.hasMetadata(metadataConf.name)">
-                      <ds-truncatable-part *ngIf="metadataConf.truncable;else showSimpleTemplate" [id]="dso.id" [minLines]="1">
+                      <ds-truncatable-part *ngIf="metadataConf.truncatable;else showSimpleTemplate" [id]="dso.id" [minLines]="1">
                         <ng-container *ngTemplateOutlet="metadataConfTemplate;context:{metadataConf:metadataConf}"> </ng-container>
                       </ds-truncatable-part>
 
@@ -34,7 +34,7 @@
 <ng-template #metadataConfTemplate let-metadataConf="metadataConf">
     <ng-container [ngSwitch]="metadataConf.type">
 
-        <ng-container *ngSwitchCase="'title'">
+        <ng-container *ngSwitchCase="DisplayItemMetadataType.Title">
             <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'" rel="noopener noreferrer"
                [routerLink]="[itemPageRoute]" class="lead item-list-title"
                [innerHTML]="dsoTitle"></a>
@@ -42,23 +42,21 @@
                   [innerHTML]="dsoTitle"></span>
         </ng-container>
 
-        <ng-container *ngSwitchCase="'link'">
+        <ng-container *ngSwitchCase="DisplayItemMetadataType.Link">
             <span *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;">
                 <ds-metadata-link-view  [item]="dso" [metadata]="metadata"></ds-metadata-link-view>
                 <span *ngIf="!last">; </span>
            </span>
         </ng-container>
 
-        <ng-container *ngSwitchCase="'text'">
-            <span class="text-muted item-list-authors" *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;" >{{metadata.value}}
-                <span *ngIf="!last">; </span>
+        <ng-container *ngSwitchCase="DisplayItemMetadataType.Text">
+            <span class="text-muted item-list-authors" *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;" >
+              {{metadata.value}}<span *ngIf="!last">; </span>
             </span>
         </ng-container>
 
-        <ng-container *ngSwitchCase="'date'">
-            (<span class="text-muted item-list-date" *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;" >{{metadata.value}}
-                <span *ngIf="!last">; </span>
-            </span>)
+        <ng-container *ngSwitchCase="DisplayItemMetadataType.Date">
+          <span class="text-muted">(<span class="text-muted item-list-date" *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;" >{{metadata.value}}<span *ngIf="!last">; </span></span>)</span>
         </ng-container>
 
     </ng-container>
@@ -69,9 +67,9 @@
         <ds-type-badge class="d-inline-block" *ngIf="showLabel" [object]="dso"></ds-type-badge>
         <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
             <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'" rel="noopener noreferrer"
-               [routerLink]="[itemPageRoute]" class="lead item-list-title"
+       [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out"
                [innerHTML]="dsoTitle"></a>
-            <span *ngIf="linkType == linkTypes.None" class="lead item-list-title"
+    <span *ngIf="linkType == linkTypes.None" class="lead item-list-title dont-break-out"
                   [innerHTML]="dsoTitle"></span>
             <span class="text-muted">
       <ds-truncatable-part [id]="dso.id" [minLines]="1">
@@ -81,9 +79,7 @@
         </ng-container>
         <span *ngIf="dso.allMetadataValues(['dc.contributor.author', 'dc.creator', 'dc.contributor.*']).length > 0" class="item-list-authors">
           <span *ngFor="let author of dso.allMetadata(['dc.contributor.author', 'dc.creator', 'dc.contributor.*']); let last=last;">
-              <!-- <span [innerHTML]="author"><span [innerHTML]="author"></span></span> -->
-            <ds-metadata-link-view [item]="dso" [metadata]="author"></ds-metadata-link-view>
-            <span *ngIf="!last">; </span>
+            <ds-metadata-link-view [item]="dso" [metadata]="author"></ds-metadata-link-view><span *ngIf="!last">; </span>
           </span>
         </span>
       </ds-truncatable-part>

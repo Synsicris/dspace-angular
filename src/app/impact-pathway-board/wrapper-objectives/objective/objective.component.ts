@@ -19,7 +19,10 @@ import { distinctUntilChanged, skip, take } from 'rxjs/operators';
 })
 export class ObjectiveComponent implements OnInit {
 
-  @Input() public projectId: string;
+  /**
+   * The project community's id
+   */
+  @Input() public projectCommunityId: string;
   @Input() public impactPathwayStep: ImpactPathwayStep;
   @Input() public impactPathwayTask: ImpactPathwayTask;
   @Input() public targetImpactPathwayTaskId: string;

@@ -12,6 +12,7 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { Item } from '../../../core/shared/item.model';
 import { EASY_ONLINE_PATH, getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
+import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -47,7 +48,7 @@ export class EasyOnlineImportMenuComponent extends ContextMenuEntryComponent imp
   }
 
   ngOnInit(): void {
-    this.authorizationService.isAuthorized(FeatureID.CanMakeEasyOnlineImport, this.contextMenuObject.self).pipe(
+    this.authorizationService.isAuthorized(FeatureID.isMemberOfProject, this.contextMenuObject.self).pipe(
       take(1)
     ).subscribe((canMakeImport) => this.canMakeImport$.next(canMakeImport));
   }
@@ -66,4 +67,10 @@ export class EasyOnlineImportMenuComponent extends ContextMenuEntryComponent imp
     return getItemPageRoute(this.contextMenuObject as Item) + `/${EASY_ONLINE_PATH}`;
   }
 
+  /**
+   * Check if current Item is a Project
+   */
+  canShow() {
+    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
+  }
 }

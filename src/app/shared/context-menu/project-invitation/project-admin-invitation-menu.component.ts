@@ -87,7 +87,7 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
    * Check if user is administrator for this project
    */
   isProjectAdmin(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, this.contextMenuObject.self, undefined);
+    return this.authorizationService.isAuthorized(FeatureID.isAdminOfProject, this.contextMenuObject.self, undefined);
   }
 
   public openInvitationModal() {

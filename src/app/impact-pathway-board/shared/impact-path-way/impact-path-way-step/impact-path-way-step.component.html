@@ -5,8 +5,9 @@
       <p title="{{getStepTitle() | async}}">{{getStepTitle() | async}}</p>
     </div>
     <span class="far fa-question-circle text-info"
-       [ngbTooltip]="(getStepInfoTitle() | async)"
-       container="body"></span>
+          [ngbTooltip]="(getStepInfoTitle() | async)"
+          tooltipClass="hint-tooltip"
+          container="body"></span>
   </div>
   <div id="{{(impactPathwayStep$ | async)?.id}}"
        class="d-flex p-2 h-100 flex-column"
@@ -19,7 +20,7 @@
        (cdkDropListDropped)="listDropped($event)">
     <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
                               class="mb-sm-1 mb-lg-4"
-                              [projectId]="projectId"
+                              [projectCommunityId]="projectCommunityId"
                               [impactPathwayId]="(impactPathwayStep$ | async)?.parentId"
                               [impactPathwayStepId]="(impactPathwayStep$ | async)?.id"
                               [impactPathwayStepType]="(impactPathwayStep$ | async)?.type"

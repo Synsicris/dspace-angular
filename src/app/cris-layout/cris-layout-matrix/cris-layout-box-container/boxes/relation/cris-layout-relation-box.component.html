@@ -3,10 +3,8 @@
                               [configuration]="configuration"
                               [searchEnabled]="searchEnabled"
                               [sideBarWidth]="sideBarWidth"
-                              [relatedEntityType]="item.entityType"
-                              [targetEntityType]="box.shortname"
-                              [scope]="projectScope.uuid"
-                              [showCreate]="true"
+                              [showCharts]="true"
                               [showExport]="false"
                               [showSidebar]="true">
+  <ds-item-create additionalSearchFormOptions [relatedEntityType]="item.entityType" [targetEntityType]="box.shortname" [scope]="projectScope?.uuid"></ds-item-create>
 </ds-configuration-search-page>

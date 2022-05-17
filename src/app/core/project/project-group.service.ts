@@ -74,6 +74,10 @@ export class ProjectGroupService {
     );
   }
 
+  isMembersOfAdminGroup(project: Community): Observable<boolean> {
+    return this.groupService.isMemberOf( this.getProjectAdminsGroupNameByCommunity(project));
+  }
+
   private getGroupsByQuery(query: string): Observable<string[]> {
     return this.groupService.searchGroups(query).pipe(
       getFirstSucceededRemoteListPayload(),

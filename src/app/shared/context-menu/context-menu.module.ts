@@ -1,3 +1,5 @@
+import { SharedModule } from './../shared.module';
+import { Version } from './../../core/shared/version.model';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -18,6 +20,8 @@ import { ClaimItemMenuComponent } from './claim-item/claim-item-menu.component';
 import { StatisticsMenuComponent } from './statistics/statistics-menu.component';
 import { SubscriptionMenuComponent } from './subscription/subscription-menu.component';
 import { SubscriptionsModule } from '../subscriptions/subscriptions.module';
+import { ItemVersionMenuComponent } from './item-version/item-version-menu.component';
+import { ItemVersionContainerComponent } from './item-version/item-version-container/item-version-container.component';
 import { DeleteProjectMenuComponent } from './delete-project/delete-project-menu.component';
 import { ProjectAdminInvitationMenuComponent } from './project-invitation/project-admin-invitation-menu.component';
 import { ProjectMembersInvitationMenuComponent } from './project-members-invitation/project-members-invitation-menu.component';
@@ -40,6 +44,8 @@ const COMPONENTS = [
   ClaimItemMenuComponent,
   StatisticsMenuComponent,
   SubscriptionMenuComponent,
+  ItemVersionMenuComponent,
+  ItemVersionContainerComponent,
   DeleteProjectMenuComponent,
   GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
@@ -62,6 +68,7 @@ const ENTRY_COMPONENTS = [
   ClaimItemMenuComponent,
   StatisticsMenuComponent,
   SubscriptionMenuComponent,
+  ItemVersionMenuComponent,
   DeleteProjectMenuComponent,
   GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
@@ -77,7 +84,8 @@ const MODULE = [
   NgbDropdownModule,
   RouterModule,
   TranslateModule,
-  SubscriptionsModule
+  SubscriptionsModule,
+  SharedModule
 ];
 @NgModule({
   imports: [
@@ -101,7 +109,7 @@ export class ContextMenuModule {
   static withEntryComponents() {
     return {
       ngModule: ContextMenuModule,
-      providers: ENTRY_COMPONENTS.map((component) => ({provide: component}))
+      providers: ENTRY_COMPONENTS.map((component) => ({ provide: component }))
     };
   }
 }

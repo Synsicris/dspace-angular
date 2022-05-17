@@ -12,7 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DefaultChangeAnalyzer } from './default-change-analyzer.service';
 import { FindListOptions, PostRequest, RestRequest } from './request.models';
 import { Observable, of } from 'rxjs';
-import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { RemoteData } from './remote-data';
 import { PaginatedList } from './paginated-list.model';
 import { Version } from '../shared/version.model';
@@ -214,5 +214,13 @@ export class VersionHistoryDataService extends DataService<VersionHistory> {
    */
   invalidateVersionHistoryCache(versionHistoryID: string) {
     this.requestService.setStaleByHrefSubstring('versioning/versionhistories/' + versionHistoryID);
+  }
+
+  /**
+   * Invalidate the cache of all the version history
+   */
+  invalidateAllVersionHistoryCache() {
+    this.requestService.setStaleByHrefSubstring(`versioning/versionhistories`);
+    this.requestService.setStaleByHrefSubstring(`/version`);
   }
 }

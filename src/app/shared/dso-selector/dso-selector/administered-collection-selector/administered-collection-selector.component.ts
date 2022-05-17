@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { DSpaceObject } from '../../../../core/shared/dspace-object.model';
 import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { CollectionSearchResult } from '../../../object-collection/shared/collection-search-result.model';
-import { SearchResult } from '../../../search/search-result.model';
+import { SearchResult } from '../../../search/models/search-result.model';
 import { DSOSelectorComponent } from '../dso-selector.component';
 import { RemoteData } from '../../../../core/data/remote-data';
 import { NotificationsService } from '../../../notifications/notifications.service';
@@ -29,8 +29,8 @@ import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
  */
 export class AdministeredCollectionSelectorComponent extends DSOSelectorComponent {
 
-  constructor(protected searchService: SearchService,
-              protected collectionDataService: CollectionDataService,
+  constructor(protected collectionDataService: CollectionDataService,
+              protected searchService: SearchService,
               protected notifcationsService: NotificationsService,
               protected translate: TranslateService,
               public dsoNameService: DSONameService) {

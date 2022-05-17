@@ -5,7 +5,9 @@ import { map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthService } from '../../../core/auth/auth.service';
-import { SubmissionImportExternalCollectionComponent } from '../../../submission/import-external/import-external-collection/submission-import-external-collection.component';
+import {
+  SubmissionImportExternalCollectionComponent
+} from '../../../submission/import-external/import-external-collection/submission-import-external-collection.component';
 import { CollectionListEntry } from '../../collection-dropdown/collection-dropdown.component';
 import { EntityTypeService } from '../../../core/data/entity-type.service';
 import { BehaviorSubject, combineLatest } from 'rxjs';
@@ -18,6 +20,7 @@ import {
   PROJECTPATNER_ENTITY_METADATA,
   SUBCONTRACTOR_ENTITY_METADATA
 } from '../../../core/project/project-data.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'ds-item-create',
@@ -77,7 +80,7 @@ export class ItemCreateComponent implements OnInit {
   createEntity() {
     const modalRef = this.modalService.open(SubmissionImportExternalCollectionComponent);
     modalRef.componentInstance.entityType = this.targetEntityType;
-    modalRef.componentInstance.scope = this.scope;
+    modalRef.componentInstance.scope = this.targetEntityType === environment.projects.commentEntityName ? null : this.scope;
     modalRef.componentInstance.selectedEvent.pipe(
       take(1)
     ).subscribe((collectionListEntry: CollectionListEntry) => {

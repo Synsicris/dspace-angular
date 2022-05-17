@@ -30,6 +30,9 @@ export const WorkpackageActionTypes = {
   GENERATE_WORKPACKAGE_STEP: type('dspace/core/workingplan/GENERATE_WORKPACKAGE_STEP'),
   GENERATE_WORKPACKAGE_STEP_ERROR: type('dspace/core/workingplan/GENERATE_WORKPACKAGE_STEP_ERROR'),
   GENERATE_WORKPACKAGE_STEP_SUCCESS: type('dspace/core/workingplan/GENERATE_WORKPACKAGE_STEP_SUCCESS'),
+  INIT_COMPARE: type('dspace/core/workingplan/INIT_COMPARE'),
+  INIT_COMPARE_ERROR: type('dspace/core/workingplan/INIT_COMPARE_ERROR'),
+  INIT_COMPARE_SUCCESS: type('dspace/core/workingplan/INIT_COMPARE_SUCCESS'),
   INIT_WORKINGPLAN: type('dspace/core/workingplan/INIT_WORKINGPLAN'),
   INIT_WORKINGPLAN_ERROR: type('dspace/core/workingplan/INIT_WORKINGPLAN_ERROR'),
   INIT_WORKINGPLAN_SUCCESS: type('dspace/core/workingplan/INIT_WORKINGPLAN_SUCCESS'),
@@ -297,11 +300,59 @@ export class AddWorkpackageStepErrorAction implements Action {
 }
 
 /**
+ * An ngrx action to init working-plan compare
+ */
+export class InitCompareAction implements Action {
+  type = WorkpackageActionTypes.INIT_COMPARE;
+  payload: {
+    compareWorkingplanId: string;
+  };
+
+  /**
+   * Create a new InitCompareAction
+   *
+   * @param compareWorkingplanId
+   *    the working-plan id to compare with the current one
+   */
+  constructor(compareWorkingplanId: string) {
+    this.payload = { compareWorkingplanId };
+  }
+}
+
+/**
+ * An ngrx action for init error
+ */
+export class InitCompareErrorAction implements Action {
+  type = WorkpackageActionTypes.INIT_COMPARE_ERROR;
+}
+
+/**
+ * An ngrx action for init success
+ */
+export class InitCompareSuccessAction implements Action {
+  type = WorkpackageActionTypes.INIT_COMPARE_SUCCESS;
+  payload: {
+    workpackages: Workpackage[];
+  };
+
+  /**
+   * Create a new InitCompareSuccessAction
+   *
+   * @param workpackages
+   *    the list of workpackage objects
+   */
+  constructor(workpackages: Workpackage[]) {
+    this.payload = { workpackages };
+  }
+}
+
+/**
  * An ngrx action to init impact pathway's model objects
  */
 export class InitWorkingplanAction implements Action {
   type = WorkpackageActionTypes.INIT_WORKINGPLAN;
   payload: {
+    workingplanId: string;
     items: WorkpackageSearchItem[];
     sortOption: string;
   };
@@ -309,13 +360,15 @@ export class InitWorkingplanAction implements Action {
   /**
    * Create a new InitWorkingplanAction
    *
+   * @param workingplanId
+   *    the working-plan id
    * @param items
    *    the list of Item of workpackages
    * @param sortOption
    *    the default sort option value
    */
-  constructor(items: WorkpackageSearchItem[], sortOption: string) {
-    this.payload = { items, sortOption };
+  constructor(workingplanId: string, items: WorkpackageSearchItem[], sortOption: string) {
+    this.payload = { workingplanId, items, sortOption };
   }
 }
 
@@ -325,6 +378,7 @@ export class InitWorkingplanAction implements Action {
 export class InitWorkingplanSuccessAction implements Action {
   type = WorkpackageActionTypes.INIT_WORKINGPLAN_SUCCESS;
   payload: {
+    workingplanId: string;
     workpackages: Workpackage[];
     sortOption: string;
   };
@@ -332,13 +386,15 @@ export class InitWorkingplanSuccessAction implements Action {
   /**
    * Create a new InitWorkingplanSuccessAction
    *
+   * @param workingplanId
+   *    the working-plan id
    * @param workpackages
    *    the list of workpackage objects
    * @param sortOption
    *    the default sort option value
    */
-  constructor(workpackages: Workpackage[], sortOption: string) {
-    this.payload = { workpackages, sortOption };
+  constructor(workingplanId: string,workpackages: Workpackage[], sortOption: string) {
+    this.payload = { workingplanId, workpackages, sortOption };
   }
 }
 
@@ -462,6 +518,7 @@ export class RetrieveAllLinkedWorkingPlanObjectsAction implements Action {
   type = WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS;
   payload: {
     projectId: string;
+    workingplanId: string;
     sortOption: string;
     lastAddedId?: string;
   };
@@ -469,6 +526,8 @@ export class RetrieveAllLinkedWorkingPlanObjectsAction implements Action {
   /**
    * Create a new RetrieveAllLinkedWorkingPlanObjectsAction
    *
+   * @param workingplanId
+   *    the working-plan id
    * @param projectId
    *    the project id
    * @param sortOption
@@ -476,8 +535,8 @@ export class RetrieveAllLinkedWorkingPlanObjectsAction implements Action {
    * @param lastAddedId
    *    the id of the last added element
    */
-  constructor(projectId: string, sortOption: string, lastAddedId?: string) {
-    this.payload = { projectId, sortOption, lastAddedId };
+  constructor(projectId: string, workingplanId: string, sortOption: string, lastAddedId?: string) {
+    this.payload = { projectId, workingplanId, sortOption, lastAddedId };
   }
 }
 
@@ -974,6 +1033,9 @@ export type WorkingPlanActions
   | GenerateWorkpackageStepAction
   | GenerateWorkpackageStepErrorAction
   | GenerateWorkpackageStepSuccessAction
+  | InitCompareAction
+  | InitCompareErrorAction
+  | InitCompareSuccessAction
   | InitWorkingplanAction
   | InitWorkingplanErrorAction
   | InitWorkingplanSuccessAction

@@ -12,6 +12,7 @@ import { ChartDateViewType } from '../../core/working-plan.reducer';
 import { Workpackage } from '../../core/models/workpackage-step.model';
 import { environment } from '../../../../environments/environment';
 import { hasValue } from '../../../shared/empty.util';
+import { Item } from '../../../core/shared/item.model';
 
 /**
  * @title Tree with nested nodes
@@ -24,14 +25,24 @@ import { hasValue } from '../../../shared/empty.util';
 export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
 
   /**
-   * The current project'id
+   * The current project community's id
    */
-  @Input() public projectId: string;
+  @Input() public projectCommunityId: string;
 
   /**
    * Array containing a list of Workpackage object
    */
   @Input() public workpackages: Observable<Workpackage[]>;
+
+  /**
+   * The working Plan item
+   */
+  @Input() workingPlan: Item;
+
+  /**
+   * A boolean representing if compare mode is active
+   */
+  @Input() public compareMode: Observable<boolean>;
 
   workpackagesCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   chartDateView: Observable<ChartDateViewType>;
@@ -57,7 +68,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
   }
 
   createWorkpackage() {
-    const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg', keyboard: false, backdrop: 'static' });
 
     modalRef.result.then((result) => {
       if (result) {
@@ -72,12 +83,12 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.hasSearch = true;
     modalRef.componentInstance.vocabularyName = environment.workingPlan.workpackageTypeAuthority;
     modalRef.componentInstance.searchConfiguration = environment.workingPlan.allUnlinkedWorkingPlanObjSearchConfigName;
-    modalRef.componentInstance.scope = this.projectId;
+    modalRef.componentInstance.scope = this.projectCommunityId;
     this.subs.push(
       modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
         const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
         this.workingPlanStateService.dispatchGenerateWorkpackage(
-          this.projectId,
+          this.projectCommunityId,
           item.type.value,
           metadata,
           this.workpackagesCount.value.toString().padStart(3, '0')
@@ -87,7 +98,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
         let place = this.workpackagesCount.value;
         items.forEach((item) => {
           this.workingPlanStateService.dispatchAddWorkpackageAction(
-            this.projectId,
+            this.projectCommunityId,
             item.id,
             item.workspaceItemId,
             (place++).toString().padStart(3, '0')
@@ -110,4 +121,19 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
       .forEach((sub) => sub.unsubscribe());
   }
 
+  /**
+   * Dispatch initialization of comparing mode
+   *
+   * @param version
+   */
+  onVersionSelected(version: Item) {
+    this.workingPlanStateService.dispatchInitCompare(version.id);
+  }
+
+  /**
+   * Dispatch cleaning of comparing mode
+   */
+  onVersionDeselected() {
+    this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata);
+  }
 }

@@ -113,7 +113,8 @@ export class ImpactPathwayEffects {
       this.notificationsService.success(null, this.translate.get('impact-pathway.create.success'));
     }),
     tap((action: GenerateImpactPathwaySuccessAction) => {
-      this.impactPathwayService.redirectToEditPage(action.payload.projectId ,action.payload.item.id);
+      this.impactPathwayService.invalidateImpactPathwaysResultsCache();
+      this.impactPathwayService.redirectToEditPage(action.payload.item.id);
     }));
 
   /**
@@ -331,7 +332,7 @@ export class ImpactPathwayEffects {
             )
           );
           return [...actions, new RemoveImpactPathwaySuccessAction(
-            action.payload.projectId,
+            action.payload.projectItemId,
             item.self)];
         }),
         catchError((error: Error) => {
@@ -350,7 +351,7 @@ export class ImpactPathwayEffects {
     tap((action: RemoveImpactPathwaySuccessAction) => {
       this.impactPathwayService.removeByHref(action.payload.impactPathwayId);
       this.notificationsService.success(null, this.translate.get('impact-pathway.remove.success'));
-      this.impactPathwayService.redirectToProjectPage(action.payload.projectId);
+      this.impactPathwayService.redirectToProjectPage(action.payload.projectItemId);
     }),
   );
 
@@ -692,7 +693,7 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.COMPLETE_EDITING_IMPACT_PATHWAY_TASK_LINKS),
     withLatestFrom(this.store$),
     map(([action, currentState]: [CompleteEditingImpactPathwayTaskLinksAction, any]) => {
-      const impactPathwayState: ImpactPathwayState = currentState.core.impactPathway;
+      const impactPathwayState: ImpactPathwayState = currentState.impactPathway;
       const linksMap: ImpactPathwayLinksMap = this.impactPathwayLinksService.createMapOfLinksToFetch(impactPathwayState.links.toSave,
         impactPathwayState.links.toDelete
       );

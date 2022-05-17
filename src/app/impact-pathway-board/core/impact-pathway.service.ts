@@ -91,9 +91,9 @@ import { Collection } from '../../core/shared/collection.model';
 import { RequestService } from '../../core/data/request.service';
 import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
-import { PaginatedSearchOptions } from '../../shared/search/paginated-search-options.model';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { PaginatedList } from '../../core/data/paginated-list.model';
-import { SearchResult } from '../../shared/search/search-result.model';
+import { SearchResult } from '../../shared/search/models/search-result.model';
 import { SearchService } from '../../core/shared/search/search.service';
 import { NoContent } from '../../core/shared/NoContent.model';
 
@@ -240,8 +240,8 @@ export class ImpactPathwayService {
     ));
   }
 
-  dispatchRemoveImpactPathwayAction(projectId: string, impactPathwayId: string) {
-    this.store.dispatch(new RemoveImpactPathwayAction(projectId, impactPathwayId));
+  dispatchRemoveImpactPathwayAction(projectItemId: string, impactPathwayId: string) {
+    this.store.dispatch(new RemoveImpactPathwayAction(projectItemId, impactPathwayId));
   }
 
   dispatchOrderTasks(
@@ -624,6 +624,13 @@ export class ImpactPathwayService {
     );
   }
 
+  /**
+   * Invalidate impact pathway result cache hit
+   */
+  public invalidateImpactPathwaysResultsCache() {
+    this.requestService.setStaleByHrefSubstring(`configuration=${environment.impactPathway.impactPathwaysSearchConfigName}`);
+  }
+
   retrieveImpactPathwaysByProject(projectId: string, options: PageInfo): Observable<PaginatedList<Item>> {
     const sort = new SortOptions('dc.title', SortDirection.ASC);
     const pagination = Object.assign(new PaginationComponentOptions(), {
@@ -649,7 +656,6 @@ export class ImpactPathwayService {
         return Object.assign(rd, { payload: payload });
       }),
       map((rd: RemoteData<PaginatedList<Item>>) => rd.payload),
-      // filter((list: PaginatedList<Item>) => list.page.length > 0),
       take(1),
       distinctUntilChanged()
     );
@@ -695,12 +701,12 @@ export class ImpactPathwayService {
     );
   }
 
-  redirectToEditPage(projectId: string, impactPathwayId: string) {
-    this.router.navigate(['project-overview', projectId ,'impactpathway', impactPathwayId, 'edit']);
+  redirectToEditPage(impactPathwayId: string) {
+    this.router.navigate(['entities', 'impactpathway', impactPathwayId]);
   }
 
-  redirectToProjectPage(projectId: string,) {
-    this.router.navigate(['project-overview', projectId]);
+  redirectToProjectPage(projectItemId: string,) {
+    this.router.navigate(['items', projectItemId]);
   }
 
   private createImpactPathwaySteps(projectId: string, impactPathwayId: string): Observable<Item[]> {

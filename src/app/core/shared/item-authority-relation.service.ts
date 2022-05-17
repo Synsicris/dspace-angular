@@ -288,9 +288,32 @@ export class ItemAuthorityRelationService {
   ): Observable<Item> {
     return this.itemService.findById(parentItemId).pipe(
       getFirstSucceededRemoteDataPayload(),
-      tap((childItem: Item) => this.addAllRelationsPatch(patchPath, childItem, linkedItemIds, relationMetadataName)),
+      tap((childItem: Item) => this.replaceAllRelationsPatch(patchPath, childItem, linkedItemIds, relationMetadataName)),
       delay(100),
       mergeMap((taskItem: Item) => this.executeEditItemPatch(taskItem.id, editMode, patchPath))
+    );
+  }
+
+  /**
+   * Patch an array of relations to an item
+   *
+   * @param patchPath            The path to metadata section to patch
+   * @param editMode             The item edit mode
+   * @param targetItemId         The target item id to patch
+   * @param linkedItems          The list of MetadataValue to patch
+   * @param relationMetadataName The metadata that contains authority from parent to child
+   */
+  patchArrayOfRelations(
+    patchPath: string,
+    editMode: string,
+    targetItemId: string,
+    linkedItems: Partial<MetadataValue>[],
+    relationMetadataName: string
+  ): Observable<Item> {
+    return observableOf(targetItemId).pipe(
+      tap(() => this.addAllRelationsPatch(patchPath, linkedItems, relationMetadataName)),
+      delay(100),
+      mergeMap((itemId: string) => this.executeEditItemPatch(itemId, editMode, patchPath))
     );
   }
 
@@ -313,7 +336,7 @@ export class ItemAuthorityRelationService {
       true);
   }
 
-  private addAllRelationsPatch(patchPath: string, targetItem: Item, relatedItemIds: string[], relation: string): void {
+  private replaceAllRelationsPatch(patchPath: string, targetItem: Item, relatedItemIds: string[], relation: string): void {
     const stepTasks: MetadataValue[] = targetItem.findMetadataSortedByPlace(relation);
     const pathCombiner = new JsonPatchOperationPathCombiner(patchPath);
     relatedItemIds.forEach((relatedItemId: string, index: number) => {
@@ -326,6 +349,22 @@ export class ItemAuthorityRelationService {
       };
       this.operationsBuilder.replace(path, value, true);
     });
+  }
+
+  private addAllRelationsPatch(patchPath: string, relatedItems: Partial<MetadataValue>[], relation: string): void {
+    const pathCombiner = new JsonPatchOperationPathCombiner(patchPath);
+    const value = [];
+    relatedItems.forEach((relatedItem: Partial<MetadataValue>, index: number) => {
+      value.push({
+        value: relatedItem.value,
+        authority: relatedItem.authority,
+        place: index,
+        confidence: 600
+      });
+
+    });
+    const path = pathCombiner.getPath([relation]);
+    this.operationsBuilder.add(path, value, true);
   }
 
   executeEditItemPatch(objectId: string, editMode: string, patchPath: string): Observable<Item> {

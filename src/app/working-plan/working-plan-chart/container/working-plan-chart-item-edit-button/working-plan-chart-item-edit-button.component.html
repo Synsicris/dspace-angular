@@ -1,0 +1,8 @@
+<button *ngIf="(canEdit() | async)" mat-icon-button
+        [disabled]="(compareMode | async)"
+        class="btn btn-xs btn-link p-0 text-primary"
+        [class.ml-1]="node.level !== 0"
+        title="{{'working-plan.chart.button.edit' | translate}}"
+        [routerLink]="getEditItemRoute()">
+  <i class="fas fa-edit"></i>
+</button>

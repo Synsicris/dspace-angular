@@ -13,6 +13,7 @@ import {
   FORBIDDEN_PATH,
   FORGOT_PASSWORD_PATH,
   INFO_MODULE_PATH,
+  INTERNAL_SERVER_ERROR,
   LEGACY_BITSTREAM_MODULE_PATH,
   PROFILE_MODULE_PATH,
   REGISTER_PATH,
@@ -29,15 +30,26 @@ import { SiteRegisterGuard } from './core/data/feature-authorization/feature-aut
 import { ThemedPageNotFoundComponent } from './pagenotfound/themed-pagenotfound.component';
 import { ThemedForbiddenComponent } from './forbidden/themed-forbidden.component';
 import { GroupAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/group-administrator.guard';
+import { ThemedPageInternalServerErrorComponent } from './page-internal-server-error/themed-page-internal-server-error.component';
+import { ServerCheckGuard } from './core/server-check/server-check.guard';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
 
 @NgModule({
   imports: [
-    RouterModule.forRoot([{
-      path: '', canActivate: [AuthBlockingGuard],
+    RouterModule.forRoot([
+      { path: INTERNAL_SERVER_ERROR, component: ThemedPageInternalServerErrorComponent },
+      {
+        path: '',
+        canActivate: [AuthBlockingGuard],
+        canActivateChild: [ServerCheckGuard],
         children: [
           { path: '', redirectTo: '/coordinator-overview', pathMatch: 'full' },
-          { path: 'reload/:rnd', component: ThemedPageNotFoundComponent, pathMatch: 'full', canActivate: [ReloadGuard] },
+          {
+            path: 'reload/:rnd',
+            component: ThemedPageNotFoundComponent,
+            pathMatch: 'full',
+            canActivate: [ReloadGuard]
+          },
           { path: 'home', redirectTo: '/coordinator-overview', pathMatch: 'full' },
           {
             path: 'community-list',
@@ -82,12 +94,31 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             canActivate: [EndUserAgreementCurrentUserGuard]
           },
           {
+            path: 'entities/impactpathway',
+            loadChildren: () => import('./+impact-pathway-page/impact-pathway-page.module')
+              .then((m) => m.ImpactPathwayPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: 'entities/parentproject/:id/workingplan',
+            loadChildren: () => import('./+working-plan-page/working-plan-page.module')
+              .then((m) => m.WorkingPlanPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: 'entities/project/:id/exploitationplans',
+            loadChildren: () => import('./+exploitation-plan-page/exploitation-plan-page.module')
+              .then((m) => m.ExploitationPlanPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
             path: ITEM_MODULE_PATH,
             loadChildren: () => import('./item-page/item-page.module')
               .then((m) => m.ItemPageModule),
             canActivate: [EndUserAgreementCurrentUserGuard]
           },
-          { path: 'entities/:entity-type',
+          {
+            path: 'entities/:entity-type',
             loadChildren: () => import('./item-page/item-page.module')
               .then((m) => m.ItemPageModule),
             canActivate: [EndUserAgreementCurrentUserGuard]
@@ -136,12 +167,12 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
           {
             path: 'login',
             loadChildren: () => import('./login-page/login-page.module')
-              .then((m) => m.LoginPageModule),
+              .then((m) => m.LoginPageModule)
           },
           {
             path: 'logout',
             loadChildren: () => import('./logout-page/logout-page.module')
-              .then((m) => m.LogoutPageModule),
+              .then((m) => m.LogoutPageModule)
           },
           {
             path: 'submit',
@@ -203,7 +234,7 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
           },
           {
             path: INFO_MODULE_PATH,
-            loadChildren: () => import('./info/info.module').then((m) => m.InfoModule),
+            loadChildren: () => import('./info/info.module').then((m) => m.InfoModule)
           },
           {
             path: REQUEST_COPY_MODULE_PATH,
@@ -247,8 +278,8 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
           },
           {
             path: 'lucky-search',
-            loadChildren: () => import('./lucky-search/search-routing.module')
-              .then((m) => m.SearchRoutingModule)
+            loadChildren: () => import('./lucky-search/lucky-search.module')
+              .then((m) => m.LuckySearchModule)
           },
           {
             path: 'invitation',
@@ -256,10 +287,10 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
               .then((m) => m.InvitationModule)
           },
           { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
-      ]}
-    ],{
-    onSameUrlNavigation: 'reload',
-    relativeLinkResolution: 'legacy'
+        ]
+      }
+    ], {
+      onSameUrlNavigation: 'reload',
 })
   ],
   exports: [RouterModule],

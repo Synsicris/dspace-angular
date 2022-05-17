@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RemoteData } from '../data/remote-data';
 import { ItemDataService } from '../data/item-data.service';
 import { Item } from '../shared/item.model';
 import { followLink, FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
-import { FindListOptions } from '../data/request.models';
 import { getFirstCompletedRemoteData } from '../shared/operators';
 import { Store } from '@ngrx/store';
 import { ResolvedAction } from '../resolving/resolver.actions';
@@ -30,10 +29,12 @@ export const ITEM_PAGE_LINKS_TO_FOLLOW: FollowLinkConfig<Item>[] = [
  */
 @Injectable()
 export class ProjectItemPageResolver implements Resolve<RemoteData<Item>> {
+
+  routeParam = 'id';
+
   constructor(
     private itemService: ItemDataService,
-    private store: Store<any>,
-    private router: Router
+    private store: Store<any>
   ) {
   }
 
@@ -45,7 +46,7 @@ export class ProjectItemPageResolver implements Resolve<RemoteData<Item>> {
    * or an error if something went wrong
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RemoteData<Item>> {
-    const itemRD$ = this.itemService.findById(route.params.id,
+    const itemRD$ = this.itemService.findById(route.params[this.routeParam],
       true,
       false,
       ...ITEM_PAGE_LINKS_TO_FOLLOW

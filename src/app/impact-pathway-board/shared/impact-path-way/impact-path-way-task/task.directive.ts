@@ -6,7 +6,7 @@ import { ImpactPathwayTaskType } from '../../../core/models/impact-pathway-task-
 })
 export class TaskColorDirective {
 
-  @Input() taskType: ImpactPathwayTaskType;
+  @Input() taskType: ImpactPathwayTaskType | string;
 
   constructor(
     private elem: ElementRef,

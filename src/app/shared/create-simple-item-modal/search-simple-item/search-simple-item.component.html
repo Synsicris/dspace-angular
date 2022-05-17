@@ -28,6 +28,7 @@
          class="task-list d-flex flex-wrap p-3">
       <ds-simple-item-box *ngFor="let task of (availableTaskList$ | async)"
                           class="mb-sm-1 mb-lg-4 mr-sm-1 mr-lg-4 task-horizontal selectable-task"
+                          [selectedStatus]="isAlreadySelected(task)"
                           [vocabularyName]="vocabularyName"
                           [data]="task"
                           (deselected)="onTaskDeselected($event)"
