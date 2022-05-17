@@ -452,5 +452,10 @@ export const environment: AppConfig = {
         ]
       },
     ]
+  },
+  comment: {
+    commentEditFormSection: 'comments',
+    commentEditMode: 'comment',
+    commentEntityType: 'comment'
   }
 };

@@ -26,6 +26,7 @@ import { ConfirmationModalComponent } from './../../../../../shared/confirmation
 import { hasValue, isNotEmpty } from './../../../../../shared/empty.util';
 import { TranslateService } from '@ngx-translate/core';
 import { followLink } from 'src/app/shared/utils/follow-link-config.model';
+import { Item } from 'src/app/core/shared/item.model';
 
 @listableObjectComponent('CommentSearchResult', ViewMode.ListElement)
 @Component({
@@ -66,27 +67,29 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.getData();
+    this.getEditModes();
   }
 
   /**
-   * Open dialog box for editing exploitation-plan
+   * Open dialog box for editing comment
    */
   openEditModal(): void {
-    console.log(this.dso);
     const modalRef = this.modalService.open(EditSimpleItemModalComponent, { size: 'lg' });
     modalRef.componentInstance.formConfig = this.formConfiguration();
     modalRef.componentInstance.editMode = environment.comment.commentEditMode;
     modalRef.componentInstance.formSectionName = environment.comment.commentEditFormSection;
     modalRef.componentInstance.itemId = this.dso.id;
 
-    // modalRef.componentInstance.itemUpdate.pipe(take(1))
-    //   .subscribe((item: Item) => {
-    //     this.updateExploitationPlanStep(item);
-    //     modalRef.close();
-    //   });
+    modalRef.componentInstance.itemUpdate.pipe(take(1))
+      .subscribe((item: Item) => {
+        this.dso = item;
+        modalRef.close();
+      });
   }
 
+  /**
+   * Open dialog box for deleting comment
+   */
   openDeleteModal(): void {
     const modalRef = this.modalService.open(ConfirmationModalComponent);
     modalRef.componentInstance.dso = this.dso;
@@ -111,6 +114,9 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
     });
   }
 
+  /**
+   * Form configuraton for the comment to construct the formModel for ediging comment
+   */
   formConfiguration(): Observable<SubmissionFormModel> {
     return this.submissionFormsConfigService.findByName(environment.comment.commentEditFormSection).pipe(
       getFirstCompletedRemoteData(),
@@ -118,17 +124,26 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
     ) as Observable<SubmissionFormModel>;
   }
 
-  getCanDelete() {
+  /**
+   * Checks if the user can delete the comment
+   */
+  getCanDelete(): Observable<boolean> {
     return this.authorizationService.isAuthorized(FeatureID.CanDelete, this.dso.self);
   }
 
+  /**
+   * Checks if the user can edit the comment
+   */
   getCanEdit(): Observable<boolean> {
     return this.editModes$.asObservable().pipe(
       map((editModes) => isNotEmpty(editModes) && editModes.length > 0)
     );
   }
 
-  getData(): void {
+  /**
+   * Get the editModes
+   */
+  getEditModes(): void {
     this.sub = this.editItemService.findById(this.dso.id + ':none', false, true, followLink('modes')).pipe(
       getAllSucceededRemoteDataPayload(),
       mergeMap((editItem: EditItem) => editItem.modes.pipe(
@@ -141,8 +156,19 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
     });
   }
 
+  /**
+   * Filtering the edit modes for comment
+   */
   private isEditModeAllowed(mode: EditItemMode) {
-    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode || mode.name === 'OWNER';
+    return mode.name === 'FULL' || mode.name === environment.comment.commentEditMode || mode.name === 'OWNER';
   }
 
+  /**
+   * Destroy subscription on destroy
+   */
+  ngOnDestroy() {
+    if (!!this.sub) {
+      this.sub.unsubscribe();
+    }
+  }
 }
