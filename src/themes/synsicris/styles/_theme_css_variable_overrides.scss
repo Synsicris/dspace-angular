@@ -7,9 +7,10 @@
   --ds-home-news-link-color: #{$green};
   --ds-home-news-link-hover-color: #{darken($green, 15%)};
 
-  --ds-tooltip-inner-backgroud-color: #d2e4ea;
-  --ds-tooltip-inner-color: #113d4f;
-  --ds-tooltip-inner-border-color: #113d4f;
+  --ds-tooltip-inner-backgroud-color: #{$gray-dark};
+  --ds-tooltip-inner-color: #{$blue-dark};
+  --ds-tooltip-inner-border-color: #{$blue-dark};
+  --ds-tooltip-boxshadow-color: rgba(3, 36, 74, 0.7);
 
    /*
   rex 220415 : increased to 218px (with lines) / 212px (without lines), so that the following line is still visible
@@ -19,7 +20,8 @@
  */
     //--ds-dropdown-menu-max-height: 200px; // origially
     //--ds-dropdown-menu-max-height: 13.5rem; // rex 220415 with lines between menu items
-    --ds-dropdown-menu-max-height: 13.25rem; // rex 220415 without lines between menu items, see /src/app/shared/form/builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.component.scss
+  --ds-dropdown-menu-max-height: 13.25rem; // rex 220415 without lines between menu items, see /src/app/shared/form/builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.component.scss
+  --ds-dropdown-menu-background-color: #{$gray-bright};
 
 }
 

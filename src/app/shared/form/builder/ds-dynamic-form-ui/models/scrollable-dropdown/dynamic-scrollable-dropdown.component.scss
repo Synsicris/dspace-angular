@@ -13,7 +13,7 @@
 .collection-item {
   // border-bottom: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color); // rex 220415
   /* rex 220415
-  removed lines in the dropdown menu as they are not necessary for orientation and visually clutter, 
+  removed lines in the dropdown menu as they are not necessary for orientation and visually clutter,
   which can also lead to the scrollbar being overlooked.
   */
 }
@@ -32,7 +32,7 @@
   left: 0 !important;
   margin-bottom: var(--bs-spacer);
   z-index: 1000;
-  background-color:$scrollable-dropdown-bgcolor; // rex 220415 background behind input field
+  background-color: var(--ds-dropdown-menu-background-color); // rex 220415 background behind input field
 }
 
 // search input field above dropdown-menu

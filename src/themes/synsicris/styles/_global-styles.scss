@@ -3,8 +3,8 @@
 // imports the base global style
 @import '../../../styles/_global-styles.scss';
 
-/* 
-rex 220505 helps to recognize breakpoints 
+/*
+rex 220505 helps to recognize breakpoints
 selector in /src/app/header/header.component.html
 https://getbootstrap.com/docs/4.6/layout/overview/
 
@@ -79,6 +79,10 @@ ds-metric-donuts a {
 }
 
 .hint-tooltip .tooltip-inner {
+  max-width:32rem; // somewhere (not clear, where) the width is defined with max-width:200px, so overwritten here
+  padding:1.2rem;
+  text-align:left;
+  box-shadow: 0 5px 15px var(--ds-tooltip-boxshadow-color); // shadow behind tooltip
   background-color: var(--ds-tooltip-inner-backgroud-color);
   color: var(--ds-tooltip-inner-color);
   border: 1px solid var(--ds-tooltip-inner-border-color);
