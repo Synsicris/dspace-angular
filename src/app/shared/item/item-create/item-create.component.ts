@@ -1,3 +1,4 @@
+import { MetadataValue } from './../../../core/shared/metadata.models';
 import { Collection } from './../../../core/shared/collection.model';
 import { Item } from './../../../core/shared/item.model';
 import { Component, Input, OnInit } from '@angular/core';
@@ -78,8 +79,6 @@ export class ItemCreateComponent implements OnInit {
   openDialog() {
     if (this.targetEntityType === PROJECT_ENTITY) {
       this.createSubproject();
-    } else if (this.targetEntityType === 'comment') {
-      this.createComment();
     } else {
       this.createEntity();
     }
@@ -95,15 +94,19 @@ export class ItemCreateComponent implements OnInit {
       take(1)
     ).subscribe((collectionListEntry: CollectionListEntry) => {
       modalRef.close();
-      const navigationExtras: NavigationExtras = {
-        queryParams: {
-          ['collection']: collectionListEntry.collection.uuid,
+      if (this.targetEntityType === 'comment') {
+        this.createComment(collectionListEntry.collection.uuid);
+      } else {
+        const navigationExtras: NavigationExtras = {
+          queryParams: {
+            ['collection']: collectionListEntry.collection.uuid,
+          }
+        };
+        if (this.targetEntityType) {
+          navigationExtras.queryParams.entityType = this.targetEntityType;
         }
-      };
-      if (this.targetEntityType) {
-        navigationExtras.queryParams.entityType = this.targetEntityType;
+        this.router.navigate(['/submit'], navigationExtras);
       }
-      this.router.navigate(['/submit'], navigationExtras);
     });
   }
 
@@ -117,16 +120,21 @@ export class ItemCreateComponent implements OnInit {
   }
 
   /**
-   * Open creation sub-project modal
+   * Open creation comment modal
    */
-  createComment() {
-    this.item.owningCollection.pipe(
-      getFirstSucceededRemoteDataPayload()
-    ).subscribe((colection: Collection) => {
-      const modalRef = this.modalService.open(CreateItemSubmissionModalComponent, { size: 'lg' });
-      modalRef.componentInstance.entityType = this.targetEntityType;
-      modalRef.componentInstance.collectionId = colection.id;
-      modalRef.componentInstance.formName = environment.comment.commentEditFormSection;
-    });
+  createComment(collectionId: string) {
+    const modalRef = this.modalService.open(CreateItemSubmissionModalComponent, { size: 'lg' });
+    modalRef.componentInstance.entityType = this.targetEntityType;
+    modalRef.componentInstance.collectionId = collectionId;
+    modalRef.componentInstance.formName = environment.comment.commentEditFormSection;
+
+    modalRef.componentInstance.customMetadata = {
+      'synsicris.relation.item': [
+        Object.assign({}, new MetadataValue(), {
+          'value': this.item.name,
+          'authority': this.item.id
+        })
+      ]
+    };
   }
 }

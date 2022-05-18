@@ -3,49 +3,51 @@
     <ds-truncatable-part [id]="dso.id" *ngIf="object !== undefined && object !== null">
 
 
-        <ds-truncatable-part [id]="dso.id">
+        <div>
             <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
                 rel="noopener noreferrer" [routerLink]="[itemPageRoute]" class="lead item-list-title"
                 [innerHTML]="dsoTitle"></a>
             <span *ngIf="linkType == linkTypes.None" class="lead item-list-title" [innerHTML]="dsoTitle"></span>
-        </ds-truncatable-part>
+        </div>
 
-        <ds-truncatable-part [id]="dso.id">
+        <div>
             <span class="text-muted item-list-authors">
                 {{dso.firstMetadataValue('dc.type')}}
             </span>
-        </ds-truncatable-part>
+        </div>
 
-        <ds-truncatable-part [id]="dso.id">
+        <div *ngIf="!!dso.firstMetadataValue('synsicris.date.reminder')">
             <span class="text-muted">(<span
                     class="text-muted item-list-date">{{dso.firstMetadataValue('synsicris.date.reminder')}}</span>)</span>
-        </ds-truncatable-part>
+        </div>
 
-        <ds-truncatable-part [id]="dso.id">
+        <div>
             <span class="text-muted">(<span
                     class="text-muted item-list-date">{{dso.firstMetadataValue('synsicris.date.creation')}}</span>)</span>
-        </ds-truncatable-part>
+        </div>
 
-        <ds-truncatable-part [id]="dso.id">
+        <div>
             <span class="badge badge-info">{{dso.firstMetadataValue('synsicris.creator')}}</span>
-        </ds-truncatable-part>
+        </div>
 
 
         <ds-truncatable-part [id]="dso.id" [maxLines]="1"><span class="description"
                 [innerHTML]="firstMetadataValue('dc.description')"></span>
         </ds-truncatable-part>
 
-        <ds-truncatable-part [id]="dso.id">
+        <div>
 
-            <button *ngIf="getCanEdit() | async" class="btn btn-primary mt-2" (click)="openEditModal()">
+            <button class="btn btn-primary mt-2" (click)="openEditModal()">
+                <i class="fa fa-edit"></i>
                 {{"comment.search.results.edit" | translate}}
             </button>
 
-            <button *ngIf="getCanDelete() | async" class="btn btn-danger mt-2" (click)=" openDeleteModal()">
+            <button class="btn btn-danger mt-2" (click)=" openDeleteModal()">
+                <i class="fas fa-trash"></i>
                 {{"comment.search.results.delete" | translate}}
             </button>
 
-        </ds-truncatable-part>
+        </div>
 
     </ds-truncatable-part>
 </div>
