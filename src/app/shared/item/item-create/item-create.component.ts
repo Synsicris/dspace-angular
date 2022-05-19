@@ -1,7 +1,7 @@
 import { MetadataValue } from './../../../core/shared/metadata.models';
 import { Collection } from './../../../core/shared/collection.model';
 import { Item } from './../../../core/shared/item.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 
 import { map, take } from 'rxjs/operators';
@@ -46,12 +46,21 @@ export class ItemCreateComponent implements OnInit {
    * The entity type for which create an item
    */
   @Input() targetEntityType: string;
+
   /**
    * The current relevant scope
    */
   @Input() scope: string;
 
+  /**
+   * The condition to show or hide the button
+   */
   canShow$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * The event emitter to be emitted when we want to refresh the page upon creation
+   */
+  @Output() refresh = new EventEmitter();
 
   constructor(private authService: AuthService, private entityTypeService: EntityTypeService, private modalService: NgbModal, private router: Router) { }
 
@@ -136,5 +145,9 @@ export class ItemCreateComponent implements OnInit {
         })
       ]
     };
+
+    modalRef.componentInstance.createItemEvent.pipe(take(1)).subscribe(() => {
+      this.refresh.emit();
+    });
   }
 }

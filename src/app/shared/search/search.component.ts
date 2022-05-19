@@ -226,6 +226,11 @@ export class SearchComponent implements OnInit {
   sub: Subscription;
 
   /**
+   * Maintains the last search options so it can be used in refresh
+   */
+  lastSearchOptions: PaginatedSearchOptions;
+
+  /**
    * Emits an event with the current search result entries
    */
   @Output() resultFound: EventEmitter<SearchObjects<DSpaceObject>> = new EventEmitter<SearchObjects<DSpaceObject>>();
@@ -246,12 +251,12 @@ export class SearchComponent implements OnInit {
   @Output() customEvent = new EventEmitter<any>();
 
   constructor(protected service: SearchService,
-              protected searchManager: SearchManager,
-              protected sidebarService: SidebarService,
-              protected windowService: HostWindowService,
-              @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-              protected routeService: RouteService,
-              protected router: Router) {
+    protected searchManager: SearchManager,
+    protected sidebarService: SidebarService,
+    protected windowService: HostWindowService,
+    @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
+    protected routeService: RouteService,
+    protected router: Router) {
     this.isXsOrSm$ = this.windowService.isXsOrSm();
   }
 
@@ -313,19 +318,19 @@ export class SearchComponent implements OnInit {
           sort: sortOption || searchOptions.sort,
           forcedEmbeddedKeys: this.forcedEmbeddedKeys
         });
-      const newSearchOptions = new PaginatedSearchOptions(combinedOptions);
+      this.lastSearchOptions = new PaginatedSearchOptions(combinedOptions);
       // check if search options are changed
       // if so retrieve new related results otherwise skip it
-      if (JSON.stringify(newSearchOptions) !== JSON.stringify(this.searchOptions$.value)) {
+      if (JSON.stringify(this.lastSearchOptions) !== JSON.stringify(this.searchOptions$.value)) {
         // Initialize variables
         this.currentConfiguration$.next(configuration);
-        this.currentSortOptions$.next(newSearchOptions.sort);
-        this.currentScope$.next(newSearchOptions.scope);
+        this.currentSortOptions$.next(this.lastSearchOptions.sort);
+        this.currentScope$.next(this.lastSearchOptions.scope);
         this.sortOptionsList$.next(searchSortOptions);
-        this.searchOptions$.next(newSearchOptions);
+        this.searchOptions$.next(this.lastSearchOptions);
         this.initialized$.next(true);
         // retrieve results
-        this.retrieveSearchResults(newSearchOptions);
+        this.retrieveSearchResults(this.lastSearchOptions);
       }
     });
   }
@@ -421,6 +426,16 @@ export class SearchComponent implements OnInit {
       return currentPath(this.router);
     }
     return this.service.getSearchLink();
+  }
+
+  /**
+   * Refreshes the list of search results using the latest serachOptions
+   */
+  refresh(): void {
+    const oldCache = this.useCachedVersionIfAvailable;
+    this.useCachedVersionIfAvailable = false;
+    this.retrieveSearchResults(this.lastSearchOptions);
+    this.useCachedVersionIfAvailable = oldCache;
   }
 
 

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { RenderCrisLayoutBoxFor } from '../../../../decorators/cris-layout-box.decorator';
 import { LayoutBox } from '../../../../enums/layout-box.enum';
 import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-component.model';
@@ -41,6 +41,11 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
    */
   projectScope: Community;
 
+  /**
+   * Reference for configurationSearchPage
+   */
+  @ViewChildren('configurationSearchPage') configurationSearchPage: QueryList<any>;
+
   constructor(public cd: ChangeDetectorRef,
     protected route: ActivatedRoute,
     protected translateService: TranslateService,
@@ -50,18 +55,23 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
   }
 
   ngOnInit(): void {
-    console.log(this.item);
     super.ngOnInit();
     this.route.data.pipe(
       map((data) => data.project as RemoteData<Community>),
       map((communityRD) => communityRD.payload),
       take(1)
     ).subscribe((community) => {
-      console.log(community);
       this.projectScope = community;
       this.searchFilter = `scope=${this.item.id}`;
       this.configuration = (this.box.configuration as RelationBoxConfiguration)['discovery-configuration'];
     });
+  }
+
+  /**
+   * Call the refresh functionality to the reference of the configuration search page
+   */
+  refresh() {
+    this.configurationSearchPage.first.refresh();
   }
 
 }

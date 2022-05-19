@@ -10,7 +10,7 @@ import { CollectionDataService } from './../../core/data/collection-data.service
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
 import { BehaviorSubject, Observable, combineLatest, of as observableOf } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { DynamicFormControlModel } from '@ng-dynamic-forms/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -181,7 +181,7 @@ export class CreateItemSubmissionModalComponent implements OnInit {
    * start depositWorkspaceItem and close modal if successful
    */
   handleDepositWorkspace(submissionObject: SubmissionObject) {
-    this.projectItemService.depositWorkspaceItem(submissionObject).subscribe(() => {
+    this.projectItemService.depositWorkspaceItem(submissionObject).pipe(take(1)).subscribe(() => {
       this.notificationsService.success('item.submission.create.sucessfully');
       this.createItemEvent.emit();
       this.closeModal();
