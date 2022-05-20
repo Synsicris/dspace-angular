@@ -251,12 +251,12 @@ export class SearchComponent implements OnInit {
   @Output() customEvent = new EventEmitter<any>();
 
   constructor(protected service: SearchService,
-    protected searchManager: SearchManager,
-    protected sidebarService: SidebarService,
-    protected windowService: HostWindowService,
-    @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-    protected routeService: RouteService,
-    protected router: Router) {
+              protected searchManager: SearchManager,
+              protected sidebarService: SidebarService,
+              protected windowService: HostWindowService,
+              @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
+              protected routeService: RouteService,
+              protected router: Router) {
     this.isXsOrSm$ = this.windowService.isXsOrSm();
   }
 
@@ -318,19 +318,19 @@ export class SearchComponent implements OnInit {
           sort: sortOption || searchOptions.sort,
           forcedEmbeddedKeys: this.forcedEmbeddedKeys
         });
-      this.lastSearchOptions = new PaginatedSearchOptions(combinedOptions);
+      const newSearchOptions = new PaginatedSearchOptions(combinedOptions);
       // check if search options are changed
       // if so retrieve new related results otherwise skip it
-      if (JSON.stringify(this.lastSearchOptions) !== JSON.stringify(this.searchOptions$.value)) {
+      if (JSON.stringify(newSearchOptions) !== JSON.stringify(this.searchOptions$.value)) {
         // Initialize variables
         this.currentConfiguration$.next(configuration);
-        this.currentSortOptions$.next(this.lastSearchOptions.sort);
-        this.currentScope$.next(this.lastSearchOptions.scope);
+        this.currentSortOptions$.next(newSearchOptions.sort);
+        this.currentScope$.next(newSearchOptions.scope);
         this.sortOptionsList$.next(searchSortOptions);
-        this.searchOptions$.next(this.lastSearchOptions);
+        this.searchOptions$.next(newSearchOptions);
         this.initialized$.next(true);
         // retrieve results
-        this.retrieveSearchResults(this.lastSearchOptions);
+        this.retrieveSearchResults(newSearchOptions);
       }
     });
   }
@@ -384,9 +384,11 @@ export class SearchComponent implements OnInit {
   /**
    * Retrieve search result by the given search options
    * @param searchOptions
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
    * @private
    */
-  private retrieveSearchResults(searchOptions: PaginatedSearchOptions) {
+  private retrieveSearchResults(searchOptions: PaginatedSearchOptions, useCachedVersionIfAvailable?: boolean,) {
     this.resultsRD$.next(null);
 
     if (this.projection) {
@@ -395,10 +397,11 @@ export class SearchComponent implements OnInit {
       });
     }
 
+    this.lastSearchOptions = searchOptions;
     this.searchManager.search(
       searchOptions,
       undefined,
-      this.useCachedVersionIfAvailable,
+      useCachedVersionIfAvailable ?? this.useCachedVersionIfAvailable,
       true,
       followLink<Item>('thumbnail', { isOptional: true })
     ).pipe(getFirstCompletedRemoteData())
@@ -432,10 +435,7 @@ export class SearchComponent implements OnInit {
    * Refreshes the list of search results using the latest serachOptions
    */
   refresh(): void {
-    const oldCache = this.useCachedVersionIfAvailable;
-    this.useCachedVersionIfAvailable = false;
-    this.retrieveSearchResults(this.lastSearchOptions);
-    this.useCachedVersionIfAvailable = oldCache;
+    this.retrieveSearchResults(this.lastSearchOptions, false);
   }
 
 
