@@ -16,6 +16,7 @@ import { SubmissionFormsModel } from '../../core/config/models/config-submission
 import { MetadataMap } from '../../core/shared/metadata.models';
 import { DynamicRowGroupModel } from '../form/builder/ds-dynamic-form-ui/models/ds-dynamic-row-group-model';
 import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-metadata-value.model';
+import { normalizeSectionData } from '../../core/submission/submission-response-parsing.service';
 
 @Component({
   selector: 'ds-edit-simple-item-modal',
@@ -148,7 +149,7 @@ export class EditSimpleItemModalComponent implements OnInit {
           null,
           formConfig,
           '',
-          item.metadata,
+          normalizeSectionData(item.metadata),
           SubmissionScopeType.WorkspaceItem
         );
       });

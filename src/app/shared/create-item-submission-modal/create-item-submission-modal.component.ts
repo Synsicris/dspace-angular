@@ -1,29 +1,28 @@
-import { SubmissionSectionError } from './../../submission/objects/submission-objects.reducer';
-import { NotificationsService } from './../notifications/notifications.service';
-import { SectionsService } from './../../submission/sections/sections.service';
-import { MetadataMap } from './../../core/shared/metadata.models';
-import { ProjectItemService } from './../../core/project/project-item.service';
-import { SubmissionService } from './../../submission/submission.service';
-import { getFirstCompletedRemoteData, getRemoteDataPayload } from './../../core/shared/operators';
-import { Collection } from './../../core/shared/collection.model';
-import { CollectionDataService } from './../../core/data/collection-data.service';
-import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { BehaviorSubject, Observable, combineLatest, of as observableOf } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of as observableOf } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import { DynamicFormControlModel } from '@ng-dynamic-forms/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { SubmissionSectionError } from '../../submission/objects/submission-objects.reducer';
+import { NotificationsService } from '../notifications/notifications.service';
+import { SectionsService } from '../../submission/sections/sections.service';
+import { MetadataMap } from '../../core/shared/metadata.models';
+import { ProjectItemService } from '../../core/project/project-item.service';
+import { SubmissionService } from '../../submission/submission.service';
+import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../core/shared/operators';
+import { Collection } from '../../core/shared/collection.model';
+import { CollectionDataService } from '../../core/data/collection-data.service';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
 import { FormBuilderService } from '../form/builder/form-builder.service';
 import { SubmissionFormsModel } from '../../core/config/models/config-submission-forms.model';
-import { SubmissionFormsConfigService } from './../../core/config/submission-forms-config.service';
+import { SubmissionFormsConfigService } from '../../core/config/submission-forms-config.service';
 import { ConfigObject } from '../../core/config/models/config.model';
 import { RemoteData } from '../../core/data/remote-data';
 import { SubmissionObject, SubmissionObjectError } from '../../core/submission/models/submission-object.model';
 import { FormService } from '../form/form.service';
-import { isNull } from 'lodash';
-import { isUndefined } from '../empty.util';
+import { isNotEmpty } from '../empty.util';
 
 @Component({
   selector: 'ds-create-item-submission-modal',
@@ -43,9 +42,14 @@ export class CreateItemSubmissionModalComponent implements OnInit {
   @Input() collectionId: string;
 
   /**
-   * The submission section form name
+   * The submission form name
    */
   @Input() formName: string;
+
+  /**
+   * The submission form section name
+   */
+  @Input() formSectionName: string;
 
   /**
    * Custom metadatas that wont be shown in the form but passed in the patch requests
@@ -108,7 +112,7 @@ export class CreateItemSubmissionModalComponent implements OnInit {
    * or close modal if no errors are found
    */
   closeModal() {
-    if (!isUndefined(this.currentSubmission) && !isNull(this.currentSubmission) && !isUndefined(this.currentSubmission.errors) && this.currentSubmission.errors.length > 0) {
+    if (this.currentSubmission?.errors?.length > 0) {
       this.removeSubmission().subscribe(() => {
         this.activeModal.dismiss(false);
       });
@@ -131,7 +135,7 @@ export class CreateItemSubmissionModalComponent implements OnInit {
     this.processing.next(true);
     combineLatest(formData, this.getCurrentSubmissionObject()).pipe(
       switchMap(([data, submissionObject]) => {
-        return this.projectItemService.updateMultipleSubmissionMetadata(submissionObject, this.formName, Object.assign({}, data, this.customMetadata));
+        return this.projectItemService.updateMultipleSubmissionMetadata(submissionObject, this.formSectionName, Object.assign({}, data, this.customMetadata));
       }),
     ).subscribe((submissionObject: SubmissionObject) => {
       // Save submission object in case an error occurres
@@ -150,7 +154,7 @@ export class CreateItemSubmissionModalComponent implements OnInit {
    * if not present return the submission request creation
    */
   getCurrentSubmissionObject(): Observable<SubmissionObject> {
-    if (!isUndefined(this.currentSubmission) && !isNull(this.currentSubmission)) {
+    if (isNotEmpty(this.currentSubmission)) {
       return observableOf(this.currentSubmission);
     } else {
       return this.submissionService.createSubmission(this.collectionId, this.entityType);
@@ -207,7 +211,7 @@ export class CreateItemSubmissionModalComponent implements OnInit {
             null,
             config,
             '',
-            collection.metadata,
+            {},
             SubmissionScopeType.WorkspaceItem
           );
           this.processing.next(false);

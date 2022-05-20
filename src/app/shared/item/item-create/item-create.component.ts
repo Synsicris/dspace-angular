@@ -1,5 +1,4 @@
 import { MetadataValue } from './../../../core/shared/metadata.models';
-import { Collection } from './../../../core/shared/collection.model';
 import { Item } from './../../../core/shared/item.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
@@ -24,7 +23,10 @@ import {
   SUBCONTRACTOR_ENTITY_METADATA
 } from '../../../core/project/project-data.service';
 import { environment } from '../../../../environments/environment';
-import { CreateItemSubmissionModalComponent } from '../../create-item-submission-modal/create-item-submission-modal.component';
+import {
+  CreateItemSubmissionModalComponent
+} from '../../create-item-submission-modal/create-item-submission-modal.component';
+import { ConfidenceType } from '../../../core/shared/confidence-type';
 
 @Component({
   selector: 'ds-item-create',
@@ -98,12 +100,12 @@ export class ItemCreateComponent implements OnInit {
   createEntity() {
     const modalRef = this.modalService.open(SubmissionImportExternalCollectionComponent);
     modalRef.componentInstance.entityType = this.targetEntityType;
-    modalRef.componentInstance.scope = this.targetEntityType === environment.projects.commentEntityName ? null : this.scope;
+    modalRef.componentInstance.scope = this.targetEntityType === environment.comments.commentEntityType ? null : this.scope;
     modalRef.componentInstance.selectedEvent.pipe(
       take(1)
     ).subscribe((collectionListEntry: CollectionListEntry) => {
       modalRef.close();
-      if (this.targetEntityType === 'comment') {
+      if (this.targetEntityType === environment.comments.commentEntityType) {
         this.createComment(collectionListEntry.collection.uuid);
       } else {
         const navigationExtras: NavigationExtras = {
@@ -123,7 +125,7 @@ export class ItemCreateComponent implements OnInit {
    * Open creation sub-project modal
    */
   createSubproject() {
-    const modalRef = this.modalService.open(CreateProjectComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(CreateProjectComponent, { keyboard: false, backdrop: 'static', size: 'lg' });
     modalRef.componentInstance.isSubproject = true;
     modalRef.componentInstance.parentProjectUUID = this.scope;
   }
@@ -135,13 +137,15 @@ export class ItemCreateComponent implements OnInit {
     const modalRef = this.modalService.open(CreateItemSubmissionModalComponent, { size: 'lg' });
     modalRef.componentInstance.entityType = this.targetEntityType;
     modalRef.componentInstance.collectionId = collectionId;
-    modalRef.componentInstance.formName = environment.comment.commentEditFormSection;
+    modalRef.componentInstance.formName = environment.comments.commentEditFormName;
+    modalRef.componentInstance.formSectionName = environment.comments.commentEditFormSection;
 
     modalRef.componentInstance.customMetadata = {
-      'synsicris.relation.item': [
+      [environment.comments.commentRelationItemMetadata]: [
         Object.assign({}, new MetadataValue(), {
           'value': this.item.name,
-          'authority': this.item.id
+          'authority': this.item.id,
+          'confidence': ConfidenceType.CF_ACCEPTED
         })
       ]
     };

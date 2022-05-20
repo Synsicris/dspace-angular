@@ -1,5 +1,5 @@
-import { commentItem } from './../../../../../shared/mocks/comment.mock';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { commentItem } from '../../../../../shared/mocks/comment.mock';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { of as observableOf } from 'rxjs';
@@ -126,13 +126,13 @@ describe('CommentSearchResultListElementComponent', () => {
   });
 
   it('should have called getCanDelete', () => {
-    const spyon = spyOn(component, 'getCanDelete');
+    const spyon = spyOn(component, 'canDelete');
     fixture.detectChanges();
     expect(spyon).toHaveBeenCalled();
   });
 
   it('should have called getCanEdit', () => {
-    const spyon = spyOn(component, 'getCanEdit');
+    const spyon = spyOn(component, 'canEdit');
     fixture.detectChanges();
     expect(spyon).toHaveBeenCalled();
   });
@@ -155,7 +155,7 @@ describe('CommentSearchResultListElementComponent', () => {
 
   describe('when user is authorized', () => {
     beforeEach(() => {
-      const spyon = spyOn(component, 'getCanEdit');
+      const spyon = spyOn(component, 'canEdit');
       (authorizationService.isAuthorized as any).and.returnValue(observableOf(true));
       (spyon as any).and.returnValue(observableOf(true));
       fixture.detectChanges();

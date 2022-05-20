@@ -36,12 +36,12 @@
         </ds-truncatable-part>
 
         <div>
-            <button *ngIf="getCanEdit() | async" class="btn btn-primary mt-2" (click)="openEditModal()">
+            <button *ngIf="canEdit() | async" class="btn btn-primary mt-2" (click)="openEditModal()">
                 <i class="fa fa-edit"></i>
                 {{"comment.search.results.edit" | translate}}
             </button>
 
-            <button *ngIf="getCanDelete() | async" class="btn btn-danger mt-2" (click)=" openDeleteModal()">
+            <button *ngIf="canDelete() | async" class="btn btn-danger mt-2" (click)=" openDeleteModal()">
                 <i class="fas fa-trash"></i>
                 {{"comment.search.results.delete" | translate}}
             </button>

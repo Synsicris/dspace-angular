@@ -57,7 +57,7 @@ interface AppConfig extends Config {
   projects: ProjectsConfig;
   exploitationPlan: ExploitationPlanConfig;
   displayItemSearchResult?: DisplayItemSearchResultConfig;
-  comment: CommentConfig;
+  comments: CommentConfig;
 }
 
 const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG');

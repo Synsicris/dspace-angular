@@ -517,8 +517,7 @@ export class DefaultAppConfig implements AppConfig {
       'impactpathway.relation.parent', 'impactpathway.relation.step', 'impactpathway.relation.task',
       'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
       'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
-    ],
-    commentEntityName: 'comment'
+    ]
   };
 
   exploitationPlan = {
@@ -667,10 +666,12 @@ export class DefaultAppConfig implements AppConfig {
     ]
   };
 
-  comment = {
+  comments = {
+    commentEditFormName: 'comments',
     commentEditFormSection: 'comments',
-    commentEditMode: 'comment',
-    commentEntityType: 'comment'
+    commentEditMode: 'CUSTOM',
+    commentEntityType: 'comment',
+    commentRelationItemMetadata: 'synsicris.relation.item'
   };
 
 }

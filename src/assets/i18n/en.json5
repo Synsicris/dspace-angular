@@ -1688,6 +1688,10 @@
 
   "confirmation-modal.delete-comment.confirm": "Delete",
 
+  "confirmation-modal.delete-comment.success": "Comment has been deleted successfully.",
+
+  "confirmation-modal.delete-comment.error": "An error occurred deleting the comment",
+
   "confirmation-modal.pending-changes.header": "Unsaved changes",
 
   "confirmation-modal.pending-changes.info": "There are unsaved changes. Do you want to leave the page?",
