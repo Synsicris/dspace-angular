@@ -2260,19 +2260,19 @@
 
   // "compare-item.header": "Compare difference between versions",
   // TODO New key - Add a translation
-  "compare-item.header": "Compare difference between versions",
+  "compare-item.header": "Vergleich der Unterschiede zwischen den Versionen",
 
   // "compare-item.table.key": "Metadata",
   // TODO New key - Add a translation
-  "compare-item.table.key": "Metadata",
+  "compare-item.table.key": "Metainformationen",
 
   // "compare-item.table.base-item": "Base Item",
   // TODO New key - Add a translation
-  "compare-item.table.base-item": "Base Item",
+  "compare-item.table.base-item": "Basis-Eintrag",
 
   // "compare-item.table.versioned-item": "Versioned Item",
   // TODO New key - Add a translation
-  "compare-item.table.versioned-item": "Versioned Item",
+  "compare-item.table.versioned-item": "versionierter Eintrag",
 
   // "context-menu.actions": "Actions",
   // TODO New key - Add a translation
@@ -5311,7 +5311,7 @@
 
   // "item.version.list.dropdown-text" : "Compare with...",
   // TODO New key - Add a translation
-  "item.version.list.dropdown-text": "Compare with...",
+  "item.version.list.dropdown-text": "Vergleich mit…",
 
   // "item.version.list.option-text" : "Version : ",
   // TODO New key - Add a translation
@@ -14506,6 +14506,6 @@
   "layout.box.header.comment_m": "Kommentar",
 
   // "layout.tab.header.details": "Details",
-  "layout.tab.header.details": "Detailinformationen"
+  "layout.tab.header.details": "Mein Personenprofil"
 
 }
