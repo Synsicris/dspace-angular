@@ -166,6 +166,11 @@ export class SearchComponent implements OnInit {
   @Input() showScopeSelector = false;
 
   /**
+   * Toggle button to Show/Hide filter
+   */
+  @Input() showFilterToggle = false;
+
+  /**
    * The current configuration used during the search
    */
   currentConfiguration$: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -436,6 +441,13 @@ export class SearchComponent implements OnInit {
    */
   refresh(): void {
     this.retrieveSearchResults(this.lastSearchOptions, false);
+  }
+
+  /**
+   * To Toggle the Sidebar
+   */
+  toggleSidebar() {
+    this.showSidebar = !this.showSidebar;
   }
 
 
