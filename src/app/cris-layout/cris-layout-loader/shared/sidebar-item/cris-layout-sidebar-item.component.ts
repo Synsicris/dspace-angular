@@ -4,6 +4,7 @@ import { CrisLayoutTab } from '../../../../core/layout/models/tab.model';
 import { rotate, rotateNavbar } from '../../../../shared/animations/rotate';
 import { slide } from '../../../../shared/animations/slide';
 import { TranslateService } from '@ngx-translate/core';
+import { isEmpty } from '../../../../shared/empty.util';
 
 /**
  * This component defines the default layout for all tabs of DSpace Items.
@@ -75,6 +76,9 @@ export class CrisLayoutSidebarItemComponent {
    * @param key the i18n key
    */
   getTranslation(key: string): string {
+    if (isEmpty(key)) {
+      return null;
+    }
     const value = this.translateService.instant(key);
     return value === key ? null : value;
   }

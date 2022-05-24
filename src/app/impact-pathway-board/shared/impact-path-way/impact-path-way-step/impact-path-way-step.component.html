@@ -5,8 +5,9 @@
       <p title="{{getStepTitle() | async}}">{{getStepTitle() | async}}</p>
     </div>
     <span class="far fa-question-circle text-info"
-       [ngbTooltip]="(getStepInfoTitle() | async)"
-       container="body"></span>
+          [ngbTooltip]="(getStepInfoTitle() | async)"
+          tooltipClass="hint-tooltip"
+          container="body"></span>
   </div>
   <div id="{{(impactPathwayStep$ | async)?.id}}"
        class="d-flex p-2 h-100 flex-column"

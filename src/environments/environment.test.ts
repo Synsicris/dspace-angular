@@ -451,5 +451,12 @@ export const environment: AppConfig = {
         ]
       },
     ]
+  },
+  comments: {
+    commentEditFormName: 'comments',
+    commentEditFormSection: 'comments',
+    commentEditMode: 'CUSTOM',
+    commentEntityType: 'comment',
+    commentRelationItemMetadata: 'synsicris.relation.item'
   }
 };

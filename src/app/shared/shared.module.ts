@@ -268,7 +268,7 @@ const MODULES = [
   CdkTreeModule,
   ChartsModule,
   MaterialModule,
-  FlexLayoutModule
+  FlexLayoutModule,
 ];
 
 const ROOT_MODULES = [

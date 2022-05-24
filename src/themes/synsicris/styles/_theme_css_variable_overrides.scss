@@ -6,5 +6,9 @@
   --ds-banner-background-gradient-width: 300px;
   --ds-home-news-link-color: #{$green};
   --ds-home-news-link-hover-color: #{darken($green, 15%)};
+
+  --ds-tooltip-inner-backgroud-color: #d2e4ea;
+  --ds-tooltip-inner-color: #113d4f;
+  --ds-tooltip-inner-border-color: #113d4f;
 }
 
