@@ -1,5 +1,5 @@
-import { MetadataValue } from './../../../core/shared/metadata.models';
-import { Item } from './../../../core/shared/item.model';
+import { MetadataValue } from '../../../core/shared/metadata.models';
+import { Item } from '../../../core/shared/item.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 
@@ -18,6 +18,7 @@ import { isNotEmpty } from '../../empty.util';
 import { CreateProjectComponent } from '../../../projects/create-project/create-project.component';
 import {
   PARENT_PROJECT_ENTITY,
+  PERSON_ENTITY,
   PROJECT_ENTITY,
   PROJECTPATNER_ENTITY_METADATA,
   SUBCONTRACTOR_ENTITY_METADATA
@@ -75,7 +76,8 @@ export class ItemCreateComponent implements OnInit {
     ).pipe(
       map(([isAuthenticated, entityType]) => isAuthenticated && isNotEmpty(entityType)
         && !(this.relatedEntityType === PARENT_PROJECT_ENTITY && entityType.label === SUBCONTRACTOR_ENTITY_METADATA)
-        && !(this.relatedEntityType === PARENT_PROJECT_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA)),
+        && !(this.relatedEntityType === PARENT_PROJECT_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA)
+        && !(this.relatedEntityType === PERSON_ENTITY && entityType.label === environment.comments.commentEntityType)),
       take(1)
     ).subscribe((canShow) => this.canShow$.next(canShow));
   }
