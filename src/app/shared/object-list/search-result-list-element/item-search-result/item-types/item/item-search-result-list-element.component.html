@@ -1,102 +1,114 @@
 <div *ngIf="!!displayConfigurations && displayConfigurations.length > 0" class="d-flex justify-content-between">
+  <div>
+    <ds-type-badge class="d-inline-block" *ngIf="showLabel" [object]="dso"></ds-type-badge>
+    <ds-grant-badge class="d-block" [object]="dso"></ds-grant-badge>
+
+    <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
+
+      <div *ngFor="let config of displayConfigurations">
+        <ng-container *ngFor="let metadataConf of config.metadata">
+          <span *ngIf="dso.hasMetadata(metadataConf.name)">
+            <ds-truncatable-part *ngIf="metadataConf.truncatable;else showSimpleTemplate" [id]="dso.id" [minLines]="1">
+              <ng-container *ngTemplateOutlet="metadataConfTemplate;context:{metadataConf:metadataConf}">
+              </ng-container>
+            </ds-truncatable-part>
+
+            <ng-template #showSimpleTemplate>
+              <ng-container *ngTemplateOutlet="metadataConfTemplate;context:{metadataConf:metadataConf}">
+              </ng-container>
+            </ng-template>
+
+          </span>
+        </ng-container>
+      </div>
+
+      <ds-item-actions *ngIf="showItemActions" [object]="dso" [showEditPermission]="false"></ds-item-actions>
+
+    </ds-truncatable>
+
+    <ds-metric-badges *ngIf="!hideMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
+
+  </div>
+  <div class="align-self-center">
     <div>
-        <ds-type-badge class="d-inline-block" *ngIf="showLabel" [object]="dso"></ds-type-badge>
-
-        <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
-
-            <div *ngFor="let config of displayConfigurations">
-                <ng-container *ngFor="let metadataConf of config.metadata">
-                    <span *ngIf="dso.hasMetadata(metadataConf.name)">
-                      <ds-truncatable-part *ngIf="metadataConf.truncatable;else showSimpleTemplate" [id]="dso.id" [minLines]="1">
-                        <ng-container *ngTemplateOutlet="metadataConfTemplate;context:{metadataConf:metadataConf}"> </ng-container>
-                      </ds-truncatable-part>
-
-                      <ng-template #showSimpleTemplate>
-                        <ng-container *ngTemplateOutlet="metadataConfTemplate;context:{metadataConf:metadataConf}"> </ng-container>
-                      </ng-template>
-
-                    </span>
-                </ng-container>
-            </div>
-
-        </ds-truncatable>
-
-        <ds-metric-badges *ngIf="!hideMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
-
+      <ds-metric-donuts *ngIf="!hideMetrics" [item]="dso"></ds-metric-donuts>
     </div>
-    <div class="align-self-center">
-        <div>
-            <ds-metric-donuts *ngIf="!hideMetrics" [item]="dso"></ds-metric-donuts>
-        </div>
-    </div>
+  </div>
 </div>
 
 <ng-template #metadataConfTemplate let-metadataConf="metadataConf">
-    <ng-container [ngSwitch]="metadataConf.type">
+  <ng-container [ngSwitch]="metadataConf.type">
 
         <ng-container *ngSwitchCase="DisplayItemMetadataType.Title">
             <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'" rel="noopener noreferrer"
                [routerLink]="[itemPageRoute]" class="lead item-list-title"
-               [innerHTML]="dsoTitle"></a>
-            <span *ngIf="linkType == linkTypes.None" class="lead item-list-title"
-                  [innerHTML]="dsoTitle"></span>
-        </ng-container>
+        [innerHTML]="dsoTitle"></a>
+      <span *ngIf="linkType == linkTypes.None" class="lead item-list-title" [innerHTML]="dsoTitle"></span>
+    </ng-container>
 
         <ng-container *ngSwitchCase="DisplayItemMetadataType.Link">
-            <span *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;">
-                <ds-metadata-link-view  [item]="dso" [metadata]="metadata"></ds-metadata-link-view>
-                <span *ngIf="!last">; </span>
-           </span>
-        </ng-container>
+      <span *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;">
+        <ds-metadata-link-view [item]="dso" [metadata]="metadata"></ds-metadata-link-view>
+        <span *ngIf="!last">; </span>
+      </span>
+    </ng-container>
 
         <ng-container *ngSwitchCase="DisplayItemMetadataType.Text">
             <span class="text-muted item-list-authors" *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;" >
-              {{metadata.value}}<span *ngIf="!last">; </span>
-            </span>
-        </ng-container>
+        {{metadata.value}}<span *ngIf="!last">; </span>
+      </span>
+    </ng-container>
 
         <ng-container *ngSwitchCase="DisplayItemMetadataType.Date">
           <span class="text-muted">(<span class="text-muted item-list-date" *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;" >{{metadata.value}}<span *ngIf="!last">; </span></span>)</span>
-        </ng-container>
-
     </ng-container>
+
+  </ng-container>
 </ng-template>
 
 <div *ngIf="displayConfigurations === null" class="d-flex justify-content-between">
-    <div>
-        <ds-type-badge class="d-inline-block" *ngIf="showLabel" [object]="dso"></ds-type-badge>
-        <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
-            <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'" rel="noopener noreferrer"
-       [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out"
-               [innerHTML]="dsoTitle"></a>
-    <span *ngIf="linkType == linkTypes.None" class="lead item-list-title dont-break-out"
-                  [innerHTML]="dsoTitle"></span>
-            <span class="text-muted">
-      <ds-truncatable-part [id]="dso.id" [minLines]="1">
-        <ng-container *ngIf="dso.firstMetadataValue('dc.publisher') || dso.firstMetadataValue('dc.date.issued')">
-          (<span *ngIf="dso.firstMetadataValue('dc.publisher')" class="item-list-publisher" [innerHTML]="firstMetadataValue('dc.publisher') + ', '"></span>
-          <span *ngIf="dso.firstMetadataValue('dc.date.issued')" class="item-list-date" [innerHTML]="firstMetadataValue('dc.date.issued')"></span>)
-        </ng-container>
-        <span *ngIf="dso.allMetadataValues(['dc.contributor.author', 'dc.creator', 'dc.contributor.*']).length > 0" class="item-list-authors">
-          <span *ngFor="let author of dso.allMetadata(['dc.contributor.author', 'dc.creator', 'dc.contributor.*']); let last=last;">
-            <ds-metadata-link-view [item]="dso" [metadata]="author"></ds-metadata-link-view><span *ngIf="!last">; </span>
+  <div>
+    <ds-type-badge class="d-inline-block" *ngIf="showLabel" [object]="dso"></ds-type-badge>
+    <ds-grant-badge class="d-block" [object]="dso"></ds-grant-badge>
+
+    <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
+      <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
+        rel="noopener noreferrer" [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out"
+        [innerHTML]="dsoTitle"></a>
+      <span *ngIf="linkType == linkTypes.None" class="lead item-list-title dont-break-out"
+        [innerHTML]="dsoTitle"></span>
+      <span class="text-muted">
+        <ds-truncatable-part [id]="dso.id" [minLines]="1">
+          <ng-container *ngIf="dso.firstMetadataValue('dc.publisher') || dso.firstMetadataValue('dc.date.issued')">
+            (<span *ngIf="dso.firstMetadataValue('dc.publisher')" class="item-list-publisher"
+              [innerHTML]="firstMetadataValue('dc.publisher') + ', '"></span>
+            <span *ngIf="dso.firstMetadataValue('dc.date.issued')" class="item-list-date"
+              [innerHTML]="firstMetadataValue('dc.date.issued')"></span>)
+          </ng-container>
+          <span *ngIf="dso.allMetadataValues(['dc.contributor.author', 'dc.creator', 'dc.contributor.*']).length > 0"
+            class="item-list-authors">
+            <span
+              *ngFor="let author of dso.allMetadata(['dc.contributor.author', 'dc.creator', 'dc.contributor.*']); let last=last;">
+              <ds-metadata-link-view [item]="dso" [metadata]="author"></ds-metadata-link-view><span *ngIf="!last">;
+              </span>
+            </span>
           </span>
-        </span>
-      </ds-truncatable-part>
-    </span>
-            <div *ngIf="dso.firstMetadataValue('dc.description.abstract')" class="item-list-abstract">
-                <ds-truncatable-part [id]="dso.id" [minLines]="3"><span
-                        [innerHTML]="firstMetadataValue('dc.description.abstract')"></span>
-                </ds-truncatable-part>
-            </div>
-        </ds-truncatable>
-        <ds-metric-badges *ngIf="!hideMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
+        </ds-truncatable-part>
+      </span>
+      <div *ngIf="dso.firstMetadataValue('dc.description.abstract')" class="item-list-abstract">
+        <ds-truncatable-part [id]="dso.id" [minLines]="3"><span
+            [innerHTML]="firstMetadataValue('dc.description.abstract')"></span>
+        </ds-truncatable-part>
+      </div>
+
+      <ds-item-actions *ngIf="showItemActions" [object]="dso" [showEditPermission]="false"></ds-item-actions>
+
+    </ds-truncatable>
+    <ds-metric-badges *ngIf="!hideMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
+  </div>
+  <div class="align-self-center">
+    <div>
+      <ds-metric-donuts *ngIf="!hideMetrics" [item]="dso"></ds-metric-donuts>
     </div>
-    <div class="align-self-center">
-        <div>
-            <ds-metric-donuts *ngIf="!hideMetrics" [item]="dso"></ds-metric-donuts>
-        </div>
-    </div>
+  </div>
 </div>
-
-

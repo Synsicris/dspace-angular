@@ -24,7 +24,7 @@ import { environment } from '../../../../environments/environment';
   selector: 'ds-context-menu-edit-item',
   templateUrl: './edit-item-menu.component.html'
 })
-@rendersContextMenuEntriesForType(DSpaceObjectType.ITEM)
+@rendersContextMenuEntriesForType(DSpaceObjectType.ITEM, true)
 export class EditItemMenuComponent extends ContextMenuEntryComponent implements OnInit, OnDestroy {
 
   /**

@@ -11,6 +11,7 @@ import { Context } from '../../../../../../core/shared/context.model';
 import { TruncatableService } from '../../../../../truncatable/truncatable.service';
 import { DSONameService } from '../../../../../../core/breadcrumbs/dso-name.service';
 import { DisplayItemMetadataType } from '../../../../../../../config/display-search-result-config.interface';
+import { PARENT_PROJECT_ENTITY, PROJECT_ENTITY } from '../../../../../../core/project/project-data.service';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement)
 @listableObjectComponent(ItemSearchResult, ViewMode.ListElement)
@@ -38,8 +39,14 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    */
   itemPageRoute: string;
 
+  /**
+   * A boolean representing if to show item actions
+   */
+  showItemActions: boolean;
+
   ngOnInit(): void {
     super.ngOnInit();
     this.itemPageRoute = getItemPageRoute(this.dso);
+    this.showItemActions = this.dso.entityType !== PARENT_PROJECT_ENTITY && this.dso.entityType !== PROJECT_ENTITY;
   }
 }

@@ -81,6 +81,26 @@ describe('ItemListElementComponent', () => {
 
   }));
 
+
+
+
+  describe('When the item is set', () => {
+    beforeEach(() => {
+      publicationListElementComponent.object = mockItemWithMetadata;
+      fixture.detectChanges();
+    });
+
+    it('should show grant badge', () => {
+      const grantBadge = fixture.debugElement.query(By.css('ds-grant-badge'));
+      expect(grantBadge).toBeTruthy();
+    });
+
+    it('should show item-actions', () => {
+      const itemActions = fixture.debugElement.query(By.css('ds-item-actions'));
+      expect(itemActions).toBeTruthy();
+    });
+  });
+
   describe('When the item has an author', () => {
     beforeEach(() => {
       publicationListElementComponent.object = mockItemWithMetadata;

@@ -400,7 +400,7 @@ export class DefaultAppConfig implements AppConfig {
     ],
     itemPage: {
       default: {
-          orientation: 'vertical'
+        orientation: 'vertical'
       },
     },
     metadataBox: {
@@ -517,8 +517,7 @@ export class DefaultAppConfig implements AppConfig {
       'impactpathway.relation.parent', 'impactpathway.relation.step', 'impactpathway.relation.task',
       'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
       'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
-    ],
-    commentEntityName: 'comment'
+    ]
   };
 
   exploitationPlan = {
@@ -666,4 +665,13 @@ export class DefaultAppConfig implements AppConfig {
       }
     ]
   };
+
+  comments = {
+    commentEditFormName: 'comments',
+    commentEditFormSection: 'comments',
+    commentEditMode: 'CUSTOM',
+    commentEntityType: 'comment',
+    commentRelationItemMetadata: 'synsicris.relation.item'
+  };
+
 }

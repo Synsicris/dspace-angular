@@ -5,5 +5,4 @@ export interface ProjectsConfig extends Config {
   projectsEntityEditMode: string;
   projectVersionUniqueIdMetadata: string;
   excludeComparisonMetadata: string[];
-  commentEntityName: string;
 }

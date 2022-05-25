@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { MetadataValue } from '../../../core/shared/metadata.models';
+import { Item } from '../../../core/shared/item.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 
 import { map, take } from 'rxjs/operators';
@@ -16,11 +18,16 @@ import { isNotEmpty } from '../../empty.util';
 import { CreateProjectComponent } from '../../../projects/create-project/create-project.component';
 import {
   PARENT_PROJECT_ENTITY,
+  PERSON_ENTITY,
   PROJECT_ENTITY,
   PROJECTPATNER_ENTITY_METADATA,
   SUBCONTRACTOR_ENTITY_METADATA
 } from '../../../core/project/project-data.service';
 import { environment } from '../../../../environments/environment';
+import {
+  CreateItemSubmissionModalComponent
+} from '../../create-item-submission-modal/create-item-submission-modal.component';
+import { ConfidenceType } from '../../../core/shared/confidence-type';
 
 @Component({
   selector: 'ds-item-create',
@@ -32,17 +39,31 @@ export class ItemCreateComponent implements OnInit {
   /**
    * The entity type which the target entity type is related
    */
+  @Input() item: Item;
+
+  /**
+   * The entity type which the target entity type is related
+   */
   @Input() relatedEntityType: string;
   /**
    * The entity type for which create an item
    */
   @Input() targetEntityType: string;
+
   /**
    * The current relevant scope
    */
   @Input() scope: string;
 
+  /**
+   * The condition to show or hide the button
+   */
   canShow$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * The event emitter to be emitted when we want to refresh the page upon creation
+   */
+  @Output() refresh = new EventEmitter();
 
   constructor(private authService: AuthService, private entityTypeService: EntityTypeService, private modalService: NgbModal, private router: Router) { }
 
@@ -55,7 +76,8 @@ export class ItemCreateComponent implements OnInit {
     ).pipe(
       map(([isAuthenticated, entityType]) => isAuthenticated && isNotEmpty(entityType)
         && !(this.relatedEntityType === PARENT_PROJECT_ENTITY && entityType.label === SUBCONTRACTOR_ENTITY_METADATA)
-        && !(this.relatedEntityType === PARENT_PROJECT_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA)),
+        && !(this.relatedEntityType === PARENT_PROJECT_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA)
+        && !(this.relatedEntityType === PERSON_ENTITY && entityType.label === environment.comments.commentEntityType)),
       take(1)
     ).subscribe((canShow) => this.canShow$.next(canShow));
   }
@@ -80,20 +102,24 @@ export class ItemCreateComponent implements OnInit {
   createEntity() {
     const modalRef = this.modalService.open(SubmissionImportExternalCollectionComponent);
     modalRef.componentInstance.entityType = this.targetEntityType;
-    modalRef.componentInstance.scope = this.targetEntityType === environment.projects.commentEntityName ? null : this.scope;
+    modalRef.componentInstance.scope = this.targetEntityType === environment.comments.commentEntityType ? null : this.scope;
     modalRef.componentInstance.selectedEvent.pipe(
       take(1)
     ).subscribe((collectionListEntry: CollectionListEntry) => {
       modalRef.close();
-      const navigationExtras: NavigationExtras = {
-        queryParams: {
-          ['collection']: collectionListEntry.collection.uuid,
+      if (this.targetEntityType === environment.comments.commentEntityType) {
+        this.createComment(collectionListEntry.collection.uuid);
+      } else {
+        const navigationExtras: NavigationExtras = {
+          queryParams: {
+            ['collection']: collectionListEntry.collection.uuid,
+          }
+        };
+        if (this.targetEntityType) {
+          navigationExtras.queryParams.entityType = this.targetEntityType;
         }
-      };
-      if (this.targetEntityType) {
-        navigationExtras.queryParams.entityType = this.targetEntityType;
+        this.router.navigate(['/submit'], navigationExtras);
       }
-      this.router.navigate(['/submit'], navigationExtras);
     });
   }
 
@@ -101,8 +127,33 @@ export class ItemCreateComponent implements OnInit {
    * Open creation sub-project modal
    */
   createSubproject() {
-    const modalRef = this.modalService.open(CreateProjectComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(CreateProjectComponent, { keyboard: false, backdrop: 'static', size: 'lg' });
     modalRef.componentInstance.isSubproject = true;
     modalRef.componentInstance.parentProjectUUID = this.scope;
+  }
+
+  /**
+   * Open creation comment modal
+   */
+  createComment(collectionId: string) {
+    const modalRef = this.modalService.open(CreateItemSubmissionModalComponent, { size: 'lg' });
+    modalRef.componentInstance.entityType = this.targetEntityType;
+    modalRef.componentInstance.collectionId = collectionId;
+    modalRef.componentInstance.formName = environment.comments.commentEditFormName;
+    modalRef.componentInstance.formSectionName = environment.comments.commentEditFormSection;
+
+    modalRef.componentInstance.customMetadata = {
+      [environment.comments.commentRelationItemMetadata]: [
+        Object.assign({}, new MetadataValue(), {
+          'value': this.item.name,
+          'authority': this.item.id,
+          'confidence': ConfidenceType.CF_ACCEPTED
+        })
+      ]
+    };
+
+    modalRef.componentInstance.createItemEvent.pipe(take(1)).subscribe(() => {
+      this.refresh.emit();
+    });
   }
 }

@@ -1324,6 +1324,10 @@
 
   "comcol-role.edit.reviewer.description": "Reviewers are able to accept or reject incoming submissions. However, they are not able to edit the submission's metadata.",
 
+  "comment.search.results.edit": "Edit",
+
+  "comment.search.results.delete": "Delete",
+
   "community.form.abstract": "Short Description",
 
   "community.form.description": "Introductory text (HTML)",
@@ -1676,6 +1680,18 @@
 
   "confirmation-modal.delete-subscription.confirm": "Delete",
 
+  "confirmation-modal.delete-comment.header": "Delete comment \"{{ dsoName }}\"",
+
+  "confirmation-modal.delete-comment.info": "Are you sure you want to delete comment \"{{ dsoName }}\"",
+
+  "confirmation-modal.delete-comment.cancel": "Cancel",
+
+  "confirmation-modal.delete-comment.confirm": "Delete",
+
+  "confirmation-modal.delete-comment.success": "Comment has been deleted successfully.",
+
+  "confirmation-modal.delete-comment.error": "An error occurred deleting the comment",
+
   "confirmation-modal.pending-changes.header": "Unsaved changes",
 
   "confirmation-modal.pending-changes.info": "There are unsaved changes. Do you want to leave the page?",
@@ -1683,6 +1699,8 @@
   "confirmation-modal.pending-changes.cancel": "Cancel",
 
   "confirmation-modal.pending-changes.confirm": "Leave",
+
+  "comment.listelement.badge" : "Comment",
 
   "dataset.listelement.badge": "Dataset",
 
@@ -2752,6 +2770,10 @@
 
   "item.edit.withdraw.success": "The item was withdrawn successfully",
 
+  "item.grant.badge.parentproject": "All",
+
+  "item.grant.badge.project": "Only {{ name }}",
+
   "item.listelement.badge": "Item",
 
   "item.page.description": "Description",
@@ -3007,6 +3029,10 @@
   "item.select.table.collection": "Collection",
 
   "item.select.table.title": "Title",
+
+  "item.submission.create": "Create Item",
+
+  "item.submission.create.sucessfully": "Item Created successfully",
 
   "item.version.history.empty": "There are no other versions for this item yet.",
 

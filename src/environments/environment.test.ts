@@ -328,8 +328,7 @@ export const environment: AppConfig = {
     projectsGrantsOptionsVocabularyName: 'item_shared',
     projectsEntityEditMode: 'CUSTOM',
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
-    excludeComparisonMetadata: ['dspace.entity.type'],
-    commentEntityName: 'comment'
+    excludeComparisonMetadata: ['dspace.entity.type']
   },
   impactPathway: {
     impactPathwaysFormSection: 'impact_pathway_form',
@@ -452,5 +451,12 @@ export const environment: AppConfig = {
         ]
       },
     ]
+  },
+  comments: {
+    commentEditFormName: 'comments',
+    commentEditFormSection: 'comments',
+    commentEditMode: 'CUSTOM',
+    commentEntityType: 'comment',
+    commentRelationItemMetadata: 'synsicris.relation.item'
   }
 };
