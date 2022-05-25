@@ -1,7 +1,5 @@
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end-user-agreement-current-user.guard';
 import { QueryResearchOutputComponent } from './query-research-output/query-research-output.component';
 
 const routes: Routes = [

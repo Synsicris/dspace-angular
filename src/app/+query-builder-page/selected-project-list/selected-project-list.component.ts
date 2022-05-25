@@ -1,6 +1,6 @@
-import { PaginatedSearchOptions } from './../../shared/search/models/paginated-search-options.model';
-import { SearchService } from './../../core/shared/search/search.service';
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
+import { SearchService } from '../../core/shared/search/search.service';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { PaginationComponentOptions } from 'src/app/shared/pagination/pagination-component-options.model';
 
 @Component({

@@ -1,14 +1,14 @@
-import { SearchOptions } from './../../shared/search/models/search-options.model';
+import { SearchOptions } from '../../shared/search/models/search-options.model';
 import { map } from 'rxjs/operators';
-import { SearchService } from './../../core/shared/search/search.service';
-import { FacetValues } from './../../shared/search/models/facet-values.model';
-import { getRemoteDataPayload } from './../../core/shared/operators';
-import { FacetValue } from './../../shared/search/models/facet-value.model';
-import { SearchFilterConfig } from './../../shared/search/models/search-filter-config.model';
+import { SearchService } from '../../core/shared/search/search.service';
+import { FacetValues } from '../../shared/search/models/facet-values.model';
+import { getRemoteDataPayload } from '../../core/shared/operators';
+import { FacetValue } from '../../shared/search/models/facet-value.model';
+import { SearchFilterConfig } from '../../shared/search/models/search-filter-config.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { isEqual, isNil } from 'lodash';
-import { hasValue, isNotEmpty } from './../../shared/empty.util';
-import { SearchFilter } from './../../shared/search/models/search-filter.model';
+import { hasValue, isNotEmpty } from '../../shared/empty.util';
+import { SearchFilter } from '../../shared/search/models/search-filter.model';
 import {
   AbstractControl,
   ControlContainer,
@@ -179,7 +179,7 @@ export class QueryConditionGroupComponent implements OnInit {
     this.calcSearchFilterConfigs();
     // enable the filter dropdown on the first selection
     this.enableFormControlOnSelectionChange(0, 'filter');
-    // In case of changing the first dropdown nalue
+    // In case of changing the first dropdown value
     // filter and value of first row must be reset
     this.queryGroup.get(`0.filter`).setValue(null);
     this.queryGroup.get(`0.value`).setValue(null);
