@@ -143,11 +143,20 @@ export class QueryConditionGroupComponent implements OnInit {
       .pipe(getRemoteDataPayload())
       .subscribe((res: SearchFilterConfig[]) => {
         if (res) {
-          this.searchFilterConfigs = res;
+          this.searchFilterConfigs = res.map((entry) => {
+            return Object.assign(entry, {
+              pageSize: 10
+            });
+          });
+          const options: SearchOptions = new SearchOptions({
+            configuration: this.configurationName
+          });
           this.getFacetValues(
             this.firstDefaultFilter,
             1,
-            SearchValueMode.Default
+            SearchValueMode.Default,
+            null,
+            options
           );
         }
       });
