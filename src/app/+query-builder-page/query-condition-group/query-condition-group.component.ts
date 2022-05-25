@@ -382,6 +382,13 @@ export class QueryConditionGroupComponent implements OnInit {
             } else if (calPage > 1 && this.filterValuesMap.has(searchFilter)) {
               // concat data from the next page, if there are any data
               const existingValues = this.filterValuesMap.get(searchFilter);
+              if (isEqual(searchFilter, this.firstDefaultFilter)) {
+                this.firstDefaultValues = [
+                  ...filterValues,
+                  ...existingValues,
+                ];
+              }
+
               this.filterValuesMap.set(searchFilter, [
                 ...filterValues,
                 ...existingValues,
