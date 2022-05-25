@@ -101,7 +101,7 @@ export class QueryConditionGroupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private rootFormGroup: FormGroupDirective,
     private searchService: SearchService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formGroup = (
@@ -137,7 +137,7 @@ export class QueryConditionGroupComponent implements OnInit {
   /**
    * Gets the Facet Values for the default selected filter
    */
-  protected getSearchFilterConfigs() {
+  getSearchFilterConfigs() {
     this.searchService
       .getConfig(null, this.configurationName)
       .pipe(getRemoteDataPayload())
@@ -151,9 +151,10 @@ export class QueryConditionGroupComponent implements OnInit {
           const options: SearchOptions = new SearchOptions({
             configuration: this.configurationName
           });
+          let pageNr = Math.ceil(this.filterValuesMap.get(this.firstDefaultFilter).length / 10) + 1;
           this.getFacetValues(
             this.firstDefaultFilter,
-            1,
+            pageNr,
             SearchValueMode.Default,
             null,
             options

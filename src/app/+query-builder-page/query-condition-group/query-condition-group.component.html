@@ -11,7 +11,7 @@
             'query-builder.synsicris.placeholder.select-value' | translate
           "
           (change)="onDefaultValueSelect($event)"
-          (scrollToEnd)="onValuesScroll(firstDefaultFilter, 0)"
+          (scrollToEnd)="getSearchFilterConfigs()"
         >
           <ng-option
             *ngFor="let value of firstDefaultValues"
