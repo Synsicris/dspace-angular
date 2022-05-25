@@ -2770,6 +2770,10 @@
 
   "item.edit.withdraw.success": "The item was withdrawn successfully",
 
+  "item.grant.badge.parentproject": "All",
+
+  "item.grant.badge.project": "Only {{ name }}",
+
   "item.listelement.badge": "Item",
 
   "item.page.description": "Description",
