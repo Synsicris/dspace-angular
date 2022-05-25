@@ -1,14 +1,11 @@
-import { SearchSimpleItemService } from './../../shared/create-simple-item-modal/search-simple-item/search-simple-item.service';
-import { Component, OnInit, ViewChildren, QueryList, Input, Output, EventEmitter } from '@angular/core';
 import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+  SearchSimpleItemService
+} from '../../shared/create-simple-item-modal/search-simple-item/search-simple-item.service';
+import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators, } from '@angular/forms';
 import { isEqual } from 'lodash';
 import { QueryConditionGroupComponent } from '../query-condition-group/query-condition-group.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'ds-query-builder',
@@ -31,7 +28,7 @@ export class QueryBuilderComponent implements OnInit {
    *
    * @memberof QueryBuilderComponent
    */
-  @Input() firstDefaultFilter: string = 'entityType';
+  @Input() firstDefaultFilter = environment.projects.projectsFunder.entityTypeFilterName;
 
   /**
    * Emits the value of the query to upper level
@@ -42,10 +39,10 @@ export class QueryBuilderComponent implements OnInit {
   @Output() onQueryCompose: EventEmitter<string> = new EventEmitter();
 
   /**
- * Configuration name
- * @type {string}
- * @memberof QueryBuilderComponent
- */
+   * Configuration name
+   * @type {string}
+   * @memberof QueryBuilderComponent
+   */
   @Input() configurationName = 'default';
 
   /**

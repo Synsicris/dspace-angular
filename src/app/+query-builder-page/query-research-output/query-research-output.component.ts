@@ -1,6 +1,7 @@
-import { SearchConfigurationService } from './../../core/shared/search/search-configuration.service';
-import { SEARCH_CONFIG_SERVICE } from './../../my-dspace-page/my-dspace-page.component';
+import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
+import { SEARCH_CONFIG_SERVICE } from '../../my-dspace-page/my-dspace-page.component';
 import { Component } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'ds-query-research-output',
@@ -33,7 +34,7 @@ export class QueryResearchOutputComponent {
    *
    * @memberof QueryResearchOutputComponent
    */
-  configurationName = 'default';
+  configurationName = environment.projects.projectsFunder.searchProjectConfigurationName;
 
   /**
    * Composed query

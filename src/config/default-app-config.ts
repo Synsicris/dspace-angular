@@ -517,7 +517,11 @@ export class DefaultAppConfig implements AppConfig {
       'impactpathway.relation.parent', 'impactpathway.relation.step', 'impactpathway.relation.task',
       'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
       'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
-    ]
+    ],
+    projectsFunder: {
+      searchProjectConfigurationName: 'searchProjectsForFunder',
+      entityTypeFilterName: 'entityType'
+    }
   };
 
   exploitationPlan = {
