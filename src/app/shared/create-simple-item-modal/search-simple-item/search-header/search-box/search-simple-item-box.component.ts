@@ -3,10 +3,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, merge, switchMap, tap } from 'rxjs/operators';
 import { NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
-import { ImpactPathwayService } from '../../../../../impact-pathway-board/core/impact-pathway.service';
 import { ImpactPathwayTask } from '../../../../../impact-pathway-board/core/models/impact-pathway-task.model';
 import { isNotNull } from '../../../../empty.util';
 import { FilterBox } from '../filter-box/search-simple-item-filter-box.component';
+import { SimpleItem } from '../../../models/simple-item.model';
 
 @Component({
   selector: 'ds-search-simple-item-box',
@@ -18,7 +18,7 @@ export class SearchSimpleItemBoxComponent {
   /**
    * Emits the available tasks
    */
-  @Input() availableTaskList: Observable<ImpactPathwayTask[]>;
+  @Input() availableTaskList: Observable<SimpleItem[]>;
 
   @Input() filterBox: FilterBox;
 
@@ -34,7 +34,6 @@ export class SearchSimpleItemBoxComponent {
   @Output() searchChange: EventEmitter<FilterBox> = new EventEmitter<FilterBox>();
 
   constructor(
-    private service: ImpactPathwayService,
     private typeaheadConfig: NgbTypeaheadConfig,
     private dropdownConfig: NgbDropdownConfig
   ) {
@@ -60,7 +59,7 @@ export class SearchSimpleItemBoxComponent {
         } else {
           return this.availableTaskList.pipe(
             map((list) => list
-              .filter((task: ImpactPathwayTask) => {
+              .filter((task: SimpleItem) => {
                 const regex = new RegExp('(?:^|\\W)' + term.toLocaleLowerCase() + '(?:$|\\W)', 'g');
                 return isNotNull(task.title.toLowerCase().match(regex));
               })

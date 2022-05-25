@@ -89,8 +89,7 @@
               <i class="fas fa-grip-vertical{{(!dragAndDropIsActive || (isMoving() | async))?' opacity-50':''}}"></i>
             </button>
           </div>
-          <div class="mat-form-field auto-width mt-1{{node.level === 0?' pl-2':''}}"
->
+          <div class="mat-form-field auto-width mt-1{{node.level === 0?' pl-2':''}}">
             <p class="block-ellipsis">{{node.name}}</p>
             <br>
             <span class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
@@ -120,14 +119,8 @@
                       (click)="openCompareModal(node)">
                 <i class="fas fa-not-equal"></i>
               </button>
-              <button *ngIf="(isEditAvailable(node.id) | async)" mat-icon-button
-                      [disabled]="(compareMode | async)"
-                      class="btn btn-xs btn-link p-0 text-primary"
-                      [class.ml-1]="node.level !== 0"
-                      title="{{'working-plan.chart.button.edit' | translate}}"
-                      [routerLink]="['/edit-items', node.id + ':' + (getEditModes() | async).get(node.id)[0].name]">
-                <i class="fas fa-edit"></i>
-              </button>
+              <ds-working-plan-chart-item-edit-button [compareMode]="compareMode"
+                                                      [node]="node"></ds-working-plan-chart-item-edit-button>
             </div>
           </div>
         </mat-tree-node>

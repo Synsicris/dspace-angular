@@ -23,6 +23,11 @@ import { take } from 'rxjs/operators';
 export class ViewSimpleItemFormComponent implements OnInit {
 
   /**
+   * The item edit mode
+   */
+  @Input() editMode: string;
+
+  /**
    * The label to use as edit button's title
    */
   @Input() public editTitle: string;
@@ -37,6 +42,11 @@ export class ViewSimpleItemFormComponent implements OnInit {
    * @type {Observable<SubmissionFormModel>}
    */
   @Input() formConfig: Observable<SubmissionFormModel>;
+
+  /**
+   * The path to metadata section to patch
+   */
+  @Input() formSectionName: string;
 
   /**
    * The item's id related to the edit form
@@ -82,7 +92,9 @@ export class ViewSimpleItemFormComponent implements OnInit {
 
   openEditModal() {
     const modalRef = this.modalService.open(EditSimpleItemModalComponent, { size: 'lg' });
+    modalRef.componentInstance.editMode = this.editMode;
     modalRef.componentInstance.formConfig = this.formConfig;
+    modalRef.componentInstance.formSectionName = this.formSectionName;
     modalRef.componentInstance.itemId = this.itemId;
 
     modalRef.componentInstance.itemUpdate.subscribe((item: Item) => {

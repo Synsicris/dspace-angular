@@ -78,7 +78,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
   openModal() {
     this.impactPathwayService.dispatchSetTargetTask(this.impactPathwayTask.id);
-    const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg', keyboard: false, backdrop: 'static' });
 
     modalRef.result.then((result) => {
       if (result) {

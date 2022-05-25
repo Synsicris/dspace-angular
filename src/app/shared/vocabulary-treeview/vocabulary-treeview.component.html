@@ -38,6 +38,7 @@
                     [disabled]="!node.item?.selectable"
                     [ngbTooltip]="node.item?.otherInformation?.note"
                     [openDelay]="500"
+                    tooltipClass="hint-tooltip"
                     placement="bottom"
                     container="body"
                     (click)="onSelect(node.item)">{{node.item.display}}</button>
@@ -57,6 +58,7 @@
                     [disabled]="!node.item?.selectable"
                     [ngbTooltip]="node.item?.otherInformation?.note"
                     [openDelay]="500"
+                    tooltipClass="hint-tooltip"
                     placement="bottom"
                     container="body"
                     (click)="onSelect(node.item)">{{node.item.display}}</button>

@@ -226,6 +226,11 @@ export class SearchComponent implements OnInit {
   sub: Subscription;
 
   /**
+   * Maintains the last search options so it can be used in refresh
+   */
+  lastSearchOptions: PaginatedSearchOptions;
+
+  /**
    * Emits an event with the current search result entries
    */
   @Output() resultFound: EventEmitter<SearchObjects<DSpaceObject>> = new EventEmitter<SearchObjects<DSpaceObject>>();
@@ -379,9 +384,11 @@ export class SearchComponent implements OnInit {
   /**
    * Retrieve search result by the given search options
    * @param searchOptions
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
    * @private
    */
-  private retrieveSearchResults(searchOptions: PaginatedSearchOptions) {
+  private retrieveSearchResults(searchOptions: PaginatedSearchOptions, useCachedVersionIfAvailable?: boolean,) {
     this.resultsRD$.next(null);
 
     if (this.projection) {
@@ -390,10 +397,11 @@ export class SearchComponent implements OnInit {
       });
     }
 
+    this.lastSearchOptions = searchOptions;
     this.searchManager.search(
       searchOptions,
       undefined,
-      this.useCachedVersionIfAvailable,
+      useCachedVersionIfAvailable ?? this.useCachedVersionIfAvailable,
       true,
       followLink<Item>('thumbnail', { isOptional: true })
     ).pipe(getFirstCompletedRemoteData())
@@ -421,6 +429,13 @@ export class SearchComponent implements OnInit {
       return currentPath(this.router);
     }
     return this.service.getSearchLink();
+  }
+
+  /**
+   * Refreshes the list of search results using the latest serachOptions
+   */
+  refresh(): void {
+    this.retrieveSearchResults(this.lastSearchOptions, false);
   }
 
 

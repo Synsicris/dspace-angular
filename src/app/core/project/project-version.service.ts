@@ -63,6 +63,7 @@ export class ProjectVersionService {
                   switchMap((versionHistoryId: string) => {
                     if (isNotEmpty(versionHistoryId)) {
                       return this.versionHistoryService.getVersions(versionHistoryId, options, true, true, followLink('item')).pipe(
+                        getFirstCompletedRemoteData(),
                         map((listRD: RemoteData<PaginatedList<Version>>) => {
                           return listRD.hasSucceeded ? listRD.payload.page : [];
                         }),

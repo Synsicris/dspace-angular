@@ -215,4 +215,12 @@ export class VersionHistoryDataService extends DataService<VersionHistory> {
   invalidateVersionHistoryCache(versionHistoryID: string) {
     this.requestService.setStaleByHrefSubstring('versioning/versionhistories/' + versionHistoryID);
   }
+
+  /**
+   * Invalidate the cache of all the version history
+   */
+  invalidateAllVersionHistoryCache() {
+    this.requestService.setStaleByHrefSubstring(`versioning/versionhistories`);
+    this.requestService.setStaleByHrefSubstring(`/version`);
+  }
 }
