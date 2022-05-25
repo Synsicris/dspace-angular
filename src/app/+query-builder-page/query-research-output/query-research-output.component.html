@@ -16,11 +16,11 @@
           </label>
         </div>
         <div class="builder-container" *ngIf="searchSelected">
-          <ds-query-builder [configurationName]="configurationName" (onQueryCompose)="getSearchQuery($event)">
+          <ds-query-builder [configurationName]="queryBuilderConfigurationName" (onQueryCompose)="getSearchQuery($event)">
           </ds-query-builder>
         </div>
         <ng-container *ngIf="searchAll || (searchSelected && searchQuery)">
-          <ds-selected-project-list [query]="searchQuery" [configuration]="configurationName">
+          <ds-selected-project-list [query]="searchQuery" [configuration]="projectsConfigurationName">
           </ds-selected-project-list>
         </ng-container>
       </ng-template>
@@ -30,7 +30,7 @@
         <span>Step 2</span>
       </ng-template>
       <ng-template ngbPanelContent>
-        <ds-themed-search [showCharts]="true" [configuration]="configurationName"></ds-themed-search>
+        <ds-themed-search [showCharts]="true" [configuration]="projectItemsConfigurationName"></ds-themed-search>
       </ng-template>
     </ngb-panel>
   </ngb-accordion>

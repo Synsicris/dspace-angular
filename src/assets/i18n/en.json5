@@ -8299,4 +8299,9 @@
   "query-builder.synsicris.label.search-all": "Search in all projects",
 
   "query-builder.synsicris.label.search-selected": "Search in selected projects",
+
+  "query-builder.synsicris.project.browse.head": "Projects list: ",
+
+  "query-builder.synsicris.project.browse.empty": "No results"
+
 }

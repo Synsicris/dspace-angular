@@ -34,7 +34,21 @@ export class QueryResearchOutputComponent {
    *
    * @memberof QueryResearchOutputComponent
    */
-  configurationName = environment.projects.projectsFunder.searchProjectConfigurationName;
+  queryBuilderConfigurationName = environment.projects.projectsFunder.searchQueryConfigurationName;
+
+  /**
+   * Configuration name
+   *
+   * @memberof QueryResearchOutputComponent
+   */
+  projectsConfigurationName = environment.projects.projectsFunder.searchProjectConfigurationName;
+
+  /**
+   * Configuration name
+   *
+   * @memberof QueryResearchOutputComponent
+   */
+  projectItemsConfigurationName = environment.projects.projectsFunder.searchProjectItemsConfigurationName;
 
   /**
    * Composed query

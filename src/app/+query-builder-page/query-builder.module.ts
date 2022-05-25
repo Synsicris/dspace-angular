@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchModule } from '../shared/search/search.module';
 import { ControlTypeCheckerPipe } from './pipes/control-type-checker.pipe';
 import { SelectedProjectListComponent } from './selected-project-list/selected-project-list.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SelectedProjectListComponent } from './selected-project-list/selected-p
     TranslateModule,
     NgSelectModule,
     NgbModule,
-    SearchModule
+    SearchModule,
+    SharedModule
   ],
 })
 export class QueryBuilderModule {}

@@ -330,7 +330,9 @@ export const environment: AppConfig = {
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
     excludeComparisonMetadata: ['dspace.entity.type'],
     projectsFunder: {
+      searchQueryConfigurationName: 'searchProjectsForFunder',
       searchProjectConfigurationName: 'searchProjectsForFunder',
+      searchProjectItemsConfigurationName: 'allProjectItems',
       entityTypeFilterName: 'entityType'
     }
   },

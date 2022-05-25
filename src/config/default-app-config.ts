@@ -519,7 +519,9 @@ export class DefaultAppConfig implements AppConfig {
       'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
     ],
     projectsFunder: {
-      searchProjectConfigurationName: 'searchProjectsForFunder',
+      searchQueryConfigurationName: 'searchProjectsForFunder',
+      searchProjectConfigurationName: 'searchAllProjectForFunder',
+      searchProjectItemsConfigurationName: 'allProjectItems',
       entityTypeFilterName: 'entityType'
     }
   };

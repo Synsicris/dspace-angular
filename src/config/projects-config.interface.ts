@@ -1,7 +1,9 @@
 import { Config } from './config.interface';
 
 export interface ProjectsFunderConfig {
+  searchQueryConfigurationName: string;
   searchProjectConfigurationName: string;
+  searchProjectItemsConfigurationName: string;
   entityTypeFilterName: string;
 }
 export interface ProjectsConfig extends Config {
