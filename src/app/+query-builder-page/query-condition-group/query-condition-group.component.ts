@@ -5,7 +5,7 @@ import { FacetValues } from '../../shared/search/models/facet-values.model';
 import { getRemoteDataPayload } from '../../core/shared/operators';
 import { FacetValue } from '../../shared/search/models/facet-value.model';
 import { SearchFilterConfig } from '../../shared/search/models/search-filter-config.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { isEqual, isNil } from 'lodash';
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import { SearchFilter } from '../../shared/search/models/search-filter.model';
@@ -97,10 +97,15 @@ export class QueryConditionGroupComponent implements OnInit {
    */
   public searchOptQuery = '';
 
+  isValueListLoading = false;
+
+  isFilterListLoading = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private rootFormGroup: FormGroupDirective,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private chd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -151,7 +156,10 @@ export class QueryConditionGroupComponent implements OnInit {
           const options: SearchOptions = new SearchOptions({
             configuration: this.configurationName
           });
-          let pageNr = Math.ceil(this.filterValuesMap.get(this.firstDefaultFilter).length / 10) + 1;
+          let pageNr = 1;
+          if (this.filterValuesMap.get(this.firstDefaultFilter)) {
+            pageNr = Math.ceil(this.filterValuesMap.get(this.firstDefaultFilter).length / 10) + 1;
+          }
           this.getFacetValues(
             this.firstDefaultFilter,
             pageNr,
@@ -196,7 +204,11 @@ export class QueryConditionGroupComponent implements OnInit {
     // when the filter is changed also the value field should be emptied
     this.queryGroup.get(`${idx}.value`).setValue(null);
     // get values for the selected filter
-    this.getFacetValues(searchFilter, 1, SearchValueMode.Select, idx);
+    const options: SearchOptions = new SearchOptions({
+      configuration: this.configurationName
+    });
+
+    this.getFacetValues(searchFilter, 1, SearchValueMode.Select, idx, options);
   }
 
   /**
@@ -298,7 +310,11 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param idx
    */
   onValuesScroll(searchFilter: string, idx: number) {
-    this.getFacetValues(searchFilter, null, SearchValueMode.Scroll, idx);
+    const options: SearchOptions = new SearchOptions({
+      configuration: this.configurationName
+    });
+
+    this.getFacetValues(searchFilter, null, SearchValueMode.Scroll, idx, options);
   }
 
   /**
@@ -308,6 +324,7 @@ export class QueryConditionGroupComponent implements OnInit {
    */
   private calcSearchFilterConfigs() {
     this.secondColumnFilters = [];
+    this.isFilterListLoading = true;
     this.searchFilterConfigs.forEach((config: SearchFilterConfig) => {
       if (isEqual(config.name, this.firstDefaultFilter)) {
         return;
@@ -329,6 +346,7 @@ export class QueryConditionGroupComponent implements OnInit {
         )
         .subscribe();
     });
+    this.isFilterListLoading = false;
   }
 
   /**
@@ -347,6 +365,7 @@ export class QueryConditionGroupComponent implements OnInit {
     searchOptions?: SearchOptions
   ) {
     let calPage: number = page;
+    this.isValueListLoading = true;
     if (
       mode &&
       isEqual(mode, SearchValueMode.Scroll) &&
@@ -385,20 +404,23 @@ export class QueryConditionGroupComponent implements OnInit {
               const existingValues = this.filterValuesMap.get(searchFilter);
               if (isEqual(searchFilter, this.firstDefaultFilter)) {
                 this.firstDefaultValues = [
-                  ...filterValues,
                   ...existingValues,
+                  ...filterValues,
                 ];
               }
 
               this.filterValuesMap.set(searchFilter, [
-                ...filterValues,
                 ...existingValues,
+                ...filterValues,
               ]);
+              this.chd.detectChanges();
             }
-
+            this.isValueListLoading = false;
             if (!isNil(idx)) {
               this.enableFormControlOnSelectionChange(idx, 'value');
             }
+          } else if( res &&  isEqual(res.page?.length , 0)) {
+            this.isValueListLoading = false;
           }
         });
     }

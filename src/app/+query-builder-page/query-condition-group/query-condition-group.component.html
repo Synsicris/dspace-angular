@@ -3,10 +3,12 @@
     <div class="row">
       <div class="col-md-3">
         <ng-select
+          #firstSelect
           formControlName="defaultFilter"
           class="px-0"
           [virtualScroll]="true"
           [clearable]="false"
+          [loading]="isValueListLoading && firstSelect.isOpen"
           [placeholder]="
             'query-builder.synsicris.placeholder.select-value' | translate
           "
@@ -39,6 +41,7 @@
               class="col-md-3 px-0 mr-1"
               [virtualScroll]="true"
               [clearable]="false"
+              [loading]="isFilterListLoading"
               [placeholder]="
                 'query-builder.synsicris.placeholder.select-filter' | translate
               "
@@ -53,10 +56,12 @@
             </ng-select>
 
             <ng-select
+              #select
               formControlName="value"
               class="col-md-3 px-0 mr-1"
               [virtualScroll]="true"
               [clearable]="false"
+              [loading]="isValueListLoading && select.isOpen"
               [placeholder]="
                 'query-builder.synsicris.placeholder.select-value' | translate
               "
