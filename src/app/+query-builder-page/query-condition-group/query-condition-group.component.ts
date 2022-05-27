@@ -301,6 +301,22 @@ export class QueryConditionGroupComponent implements OnInit {
 
       // remove the query statement
       this.queryGroup.removeAt(index);
+
+      // enable controls if only one row is left
+      if (isEqual(this.queryGroup.controls.length, 1)) {
+        this.enableFormControlOnSelectionChange(0, 'filter');
+        this.enableFormControlOnSelectionChange(0, 'value');
+        let defaultSearchfilter = [
+          {
+            values: [this.formGroup.get('defaultFilter').value], // selected value
+            key: this.firstDefaultFilter, // default filter name
+            operator: 'equals',
+          },
+        ];
+
+        this.buildSearchQuery(defaultSearchfilter);
+        this.calcSearchFilterConfigs();
+      }
     }
   }
 
@@ -347,6 +363,7 @@ export class QueryConditionGroupComponent implements OnInit {
         .subscribe();
     });
     this.isFilterListLoading = false;
+    this.chd.detectChanges();
   }
 
   /**
@@ -414,7 +431,7 @@ export class QueryConditionGroupComponent implements OnInit {
               ]);
             }
             this.isValueListLoading = false;
-          } else if( res &&  isEqual(res.page?.length , 0)) {
+          } else if (res && isEqual(res.page?.length, 0)) {
             this.isValueListLoading = false;
           }
           if (!isNil(idx)) {
