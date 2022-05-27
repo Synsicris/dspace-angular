@@ -3,7 +3,9 @@ import { RouterModule } from '@angular/router';
 import { AuthBlockingGuard } from './core/auth/auth-blocking.guard';
 
 import { AuthenticatedGuard } from './core/auth/authenticated.guard';
-import { SiteAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/site-administrator.guard';
+import {
+  SiteAdministratorGuard
+} from './core/data/feature-authorization/feature-authorization-guard/site-administrator.guard';
 import {
   ACCESS_CONTROL_MODULE_PATH,
   ADMIN_MODULE_PATH,
@@ -29,8 +31,12 @@ import { EndUserAgreementCurrentUserGuard } from './core/end-user-agreement/end-
 import { SiteRegisterGuard } from './core/data/feature-authorization/feature-authorization-guard/site-register.guard';
 import { ThemedPageNotFoundComponent } from './pagenotfound/themed-pagenotfound.component';
 import { ThemedForbiddenComponent } from './forbidden/themed-forbidden.component';
-import { GroupAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/group-administrator.guard';
-import { ThemedPageInternalServerErrorComponent } from './page-internal-server-error/themed-page-internal-server-error.component';
+import {
+  GroupAdministratorGuard
+} from './core/data/feature-authorization/feature-authorization-guard/group-administrator.guard';
+import {
+  ThemedPageInternalServerErrorComponent
+} from './page-internal-server-error/themed-page-internal-server-error.component';
 import { ServerCheckGuard } from './core/server-check/server-check.guard';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
 
@@ -146,6 +152,12 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             loadChildren: () => import('./search-page/search-page-routing.module')
               .then((m) => m.SearchPageRoutingModule),
             canActivate: [EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: 'browse/projects',
+            loadChildren: () => import('./+query-builder-page/query-builder.module')
+              .then((m) => m.QueryBuilderModule),
+            canActivate: [AuthenticatedGuard]
           },
           {
             path: 'browse',
@@ -285,12 +297,6 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             path: 'invitation',
             loadChildren: () => import('./invitation/invitation.module')
               .then((m) => m.InvitationModule)
-          },
-          {
-            path: 'browse-by-projects',
-            loadChildren: () => import('./+query-builder-page/query-builder.module')
-              .then((m) => m.QueryBuilderModule),
-            canActivate: [AuthenticatedGuard]
           },
           { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
         ]
