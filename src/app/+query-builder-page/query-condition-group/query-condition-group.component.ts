@@ -203,11 +203,11 @@ export class QueryConditionGroupComponent implements OnInit {
     // set value of last dropdown to null, in case it has value
     // when the filter is changed also the value field should be emptied
     this.queryGroup.get(`${idx}.value`).setValue(null);
-    // get values for the selected filter
     const options: SearchOptions = new SearchOptions({
-      configuration: this.configurationName
+      configuration: this.configurationName,
+      query: this.searchOptQuery
     });
-
+    // get values for the selected filter
     this.getFacetValues(searchFilter, 1, SearchValueMode.Select, idx, options);
   }
 
@@ -408,20 +408,19 @@ export class QueryConditionGroupComponent implements OnInit {
                   ...filterValues,
                 ];
               }
-
               this.filterValuesMap.set(searchFilter, [
                 ...existingValues,
                 ...filterValues,
               ]);
-              this.chd.detectChanges();
             }
             this.isValueListLoading = false;
-            if (!isNil(idx)) {
-              this.enableFormControlOnSelectionChange(idx, 'value');
-            }
           } else if( res &&  isEqual(res.page?.length , 0)) {
             this.isValueListLoading = false;
           }
+          if (!isNil(idx)) {
+            this.enableFormControlOnSelectionChange(idx, 'value');
+          }
+          this.chd.detectChanges();
         });
     }
   }
