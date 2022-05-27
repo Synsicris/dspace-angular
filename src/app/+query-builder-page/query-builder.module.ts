@@ -12,6 +12,7 @@ import { SearchModule } from '../shared/search/search.module';
 import { ControlTypeCheckerPipe } from './pipes/control-type-checker.pipe';
 import { SelectedProjectListComponent } from './selected-project-list/selected-project-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { ProjectsScopedSearchComponent } from './projects-scoped-search/projects-scoped-search.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SharedModule } from '../shared/shared.module';
     ControlTypeCheckerPipe,
     QueryResearchOutputComponent,
     SelectedProjectListComponent,
+    ProjectsScopedSearchComponent,
   ],
   imports: [
     CommonModule,

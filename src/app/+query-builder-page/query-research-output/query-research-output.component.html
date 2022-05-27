@@ -30,7 +30,8 @@
         <span>Step 2</span>
       </ng-template>
       <ng-template ngbPanelContent>
-        <ds-themed-search [showCharts]="true" [configuration]="projectItemsConfigurationName"></ds-themed-search>
+        <ds-projects-scoped-search [configuration]="projectItemsConfigurationName"
+                                   [query]="searchQuery"></ds-projects-scoped-search>
       </ng-template>
     </ngb-panel>
   </ngb-accordion>

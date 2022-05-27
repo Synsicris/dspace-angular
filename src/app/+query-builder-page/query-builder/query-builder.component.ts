@@ -1,9 +1,11 @@
+import { Component, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators, } from '@angular/forms';
+
+import { isEqual } from 'lodash';
+
 import {
   SearchSimpleItemService
 } from '../../shared/create-simple-item-modal/search-simple-item/search-simple-item.service';
-import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators, } from '@angular/forms';
-import { isEqual } from 'lodash';
 import { QueryConditionGroupComponent } from '../query-condition-group/query-condition-group.component';
 import { environment } from '../../../environments/environment';
 
@@ -13,7 +15,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./query-builder.component.scss'],
   providers: [SearchSimpleItemService]
 })
-export class QueryBuilderComponent implements OnInit {
+export class QueryBuilderComponent {
 
   /**
    * List of children components
@@ -75,8 +77,6 @@ export class QueryBuilderComponent implements OnInit {
 
   constructor( private formBuilder: FormBuilder ) {}
 
-  ngOnInit(): void {}
-
   /**
    * Get the form array
    *
@@ -126,7 +126,7 @@ export class QueryBuilderComponent implements OnInit {
         }
       }
 
-      return encodeURIComponent(fullQuery);
+      return fullQuery;
     }
     return fullQuery;
   }
@@ -190,5 +190,6 @@ export class QueryBuilderComponent implements OnInit {
         }),
       ]),
     });
+    this.onQueryCompose.emit(null);
   }
 }

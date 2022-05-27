@@ -1,14 +1,4 @@
-import { SearchOptions } from '../../shared/search/models/search-options.model';
-import { map } from 'rxjs/operators';
-import { SearchService } from '../../core/shared/search/search.service';
-import { FacetValues } from '../../shared/search/models/facet-values.model';
-import { getRemoteDataPayload } from '../../core/shared/operators';
-import { FacetValue } from '../../shared/search/models/facet-value.model';
-import { SearchFilterConfig } from '../../shared/search/models/search-filter-config.model';
-import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
-import { isEqual, isNil } from 'lodash';
-import { hasValue, isNotEmpty } from '../../shared/empty.util';
-import { SearchFilter } from '../../shared/search/models/search-filter.model';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
   ControlContainer,
@@ -18,6 +8,19 @@ import {
   FormGroupDirective,
   Validators,
 } from '@angular/forms';
+
+import { map } from 'rxjs/operators';
+import { isEqual, isNil } from 'lodash';
+
+import { SearchOptions } from '../../shared/search/models/search-options.model';
+import { SearchService } from '../../core/shared/search/search.service';
+import { FacetValues } from '../../shared/search/models/facet-values.model';
+import { getRemoteDataPayload } from '../../core/shared/operators';
+import { FacetValue } from '../../shared/search/models/facet-value.model';
+import { SearchFilterConfig } from '../../shared/search/models/search-filter-config.model';
+import { hasValue, isNotEmpty } from '../../shared/empty.util';
+import { SearchFilter } from '../../shared/search/models/search-filter.model';
+import { escapeLucene } from '../utils/query-builder.util';
 
 @Component({
   selector: 'ds-query-condition-group',
@@ -177,9 +180,11 @@ export class QueryConditionGroupComponent implements OnInit {
    * Get Facets to fill the filter dropdown and enables the next in line control
    */
   onDefaultValueSelect(selectedValue) {
-    let defaultSearchfilter = [
+    const escapedValue = escape(selectedValue);
+    console.log(escapedValue);
+    const defaultSearchfilter = [
       {
-        values: [selectedValue], // selected value
+        values: [escapedValue], // selected value
         key: this.firstDefaultFilter, // default filter name
         operator: 'equals',
       },
@@ -240,7 +245,10 @@ export class QueryConditionGroupComponent implements OnInit {
       const filterValues: FilterValue[] = this.queryGroupValue;
       const values = filterValues
         .filter((x) => isEqual(x.filter, config.name))
-        .map((x) => x.value);
+        .map((x) => {
+          console.log(escapeLucene(x.value));
+          return escapeLucene(x.value);
+        });
 
       searchFilter.push({
         values: values, // searched value
@@ -306,7 +314,7 @@ export class QueryConditionGroupComponent implements OnInit {
       if (isEqual(this.queryGroup.controls.length, 1)) {
         this.enableFormControlOnSelectionChange(0, 'filter');
         this.enableFormControlOnSelectionChange(0, 'value');
-        let defaultSearchfilter = [
+        const defaultSearchfilter = [
           {
             values: [this.formGroup.get('defaultFilter').value], // selected value
             key: this.firstDefaultFilter, // default filter name
@@ -478,7 +486,7 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param parentFilter selected filter in same row
    */
   calcValueSelection(parentFilter: string) {
-    let disabledValues = this.filterValuesMap
+    const disabledValues = this.filterValuesMap
       .get(parentFilter)
       .filter((x: any) => x.disable);
     // calculate disabled previous selected values

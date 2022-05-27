@@ -1,6 +1,4 @@
 <div class="container">
-  <p *ngIf="query">Query: {{ query }}</p>
-
   <ng-container *ngVar="(resultListRD$ | async) as resultListRD">
     <div class="mt-4" *ngIf="resultListRD?.hasSucceeded" @fadeIn>
       <h3>{{'query-builder.synsicris.project.browse.head' | translate}}</h3>
