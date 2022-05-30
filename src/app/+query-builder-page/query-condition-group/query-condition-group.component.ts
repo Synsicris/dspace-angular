@@ -231,6 +231,10 @@ export class QueryConditionGroupComponent implements OnInit {
         .find((x) => isEqual(x.value, selectedValue)) as any
     ).disable = true;
 
+    this.buildQueryBasedOnAppliedFilterConfigs();
+  }
+
+  private buildQueryBasedOnAppliedFilterConfigs() {
     const searchFilter: SearchFilter[] = [
       {
         values: [this.formGroup.get('defaultFilter').value], // selected value
@@ -312,15 +316,7 @@ export class QueryConditionGroupComponent implements OnInit {
       if (isEqual(this.queryGroup.controls.length, 1)) {
         this.enableFormControlOnSelectionChange(0, 'filter');
         this.enableFormControlOnSelectionChange(0, 'value');
-        const defaultSearchfilter = [
-          {
-            values: [this.formGroup.get('defaultFilter').value], // selected value
-            key: this.firstDefaultFilter, // default filter name
-            operator: 'equals',
-          },
-        ];
-
-        this.buildSearchQuery(defaultSearchfilter);
+        this.buildQueryBasedOnAppliedFilterConfigs();
         this.calcSearchFilterConfigs();
       }
     }
