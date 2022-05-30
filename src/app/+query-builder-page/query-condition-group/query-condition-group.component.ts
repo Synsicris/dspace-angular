@@ -20,7 +20,7 @@ import { FacetValue } from '../../shared/search/models/facet-value.model';
 import { SearchFilterConfig } from '../../shared/search/models/search-filter-config.model';
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import { SearchFilter } from '../../shared/search/models/search-filter.model';
-import { escapeLucene } from '../utils/query-builder.util';
+import { LocaleService } from '../../core/locale/locale.service';
 
 @Component({
   selector: 'ds-query-condition-group',
@@ -105,6 +105,7 @@ export class QueryConditionGroupComponent implements OnInit {
   isFilterListLoading = false;
 
   constructor(
+    private locale: LocaleService,
     private formBuilder: FormBuilder,
     private rootFormGroup: FormGroupDirective,
     private searchService: SearchService,
@@ -245,10 +246,7 @@ export class QueryConditionGroupComponent implements OnInit {
       const filterValues: FilterValue[] = this.queryGroupValue;
       const values = filterValues
         .filter((x) => isEqual(x.filter, config.name))
-        .map((x) => {
-          console.log(escapeLucene(x.value));
-          return escapeLucene(x.value);
-        });
+        .map((x) => x.value);
 
       searchFilter.push({
         values: values, // searched value
@@ -474,11 +472,14 @@ export class QueryConditionGroupComponent implements OnInit {
     const queries = [];
     filters.forEach((filter) => {
       if (isNotEmpty(filter) && isNotEmpty(filter.values)) {
-        queries.push(filter.key + ':(' + filter.values.join(' AND ') + ')');
+        filter.values.forEach((value) => {
+          const query = `(${filter.key}:"${value}" OR ${this.locale.getCurrentLanguageCode()}_${filter.key}_keyword:"${value}" OR ${filter.key}_keyword:"${value}")`;
+          queries.push(query);
+        });
       }
     });
     this.searchOptQuery = queries.join(' AND ');
-    return encodeURIComponent(queries.join(' AND '));
+    return encodeURIComponent(this.searchOptQuery);
   }
 
   /**
