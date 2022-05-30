@@ -8,9 +8,7 @@ import {
   FormGroupDirective,
   Validators,
 } from '@angular/forms';
-
-import { map } from 'rxjs/operators';
-import { isEqual, isNil } from 'lodash';
+import { isEqual, isNil, isNull } from 'lodash';
 
 import { SearchOptions } from '../../shared/search/models/search-options.model';
 import { SearchService } from '../../core/shared/search/search.service';
@@ -88,10 +86,9 @@ export class QueryConditionGroupComponent implements OnInit {
   /**
    * Stores all the filters as key and
    * facet values of a filter as value
-   * @type {Map<string, FacetValue[]>}
-   * @memberof QueryConditionGroupComponent
+   * @type {Map<string, FacetValue[]>[]}
    */
-  filterValuesMap: Map<string, FacetValue[]> = new Map<string, FacetValue[]>();
+  filterValuesMapArray: Map<string, FacetValue[]>[] = [];
 
   /**
    * Composed query for the group
@@ -110,7 +107,7 @@ export class QueryConditionGroupComponent implements OnInit {
     private rootFormGroup: FormGroupDirective,
     private searchService: SearchService,
     private chd: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.formGroup = (
@@ -128,6 +125,16 @@ export class QueryConditionGroupComponent implements OnInit {
    */
   get queryGroup(): FormArray {
     return this.formGroup.get('queryGroup') as FormArray;
+  }
+
+  filterFacetValues(idx: number): FacetValue[] {
+    if (this.filterValuesMapArray[idx]) {
+      return this.filterValuesMapArray[idx].get(
+        this.queryGroup.get(idx + '.filter')?.value
+      );
+    } else {
+      return [];
+    }
   }
 
   /**
@@ -154,16 +161,18 @@ export class QueryConditionGroupComponent implements OnInit {
         if (res) {
           this.searchFilterConfigs = res.map((entry) => {
             return Object.assign(entry, {
-              pageSize: 10
+              pageSize: 10,
             });
           });
           const options: SearchOptions = new SearchOptions({
-            configuration: this.configurationName
+            configuration: this.configurationName,
           });
           let pageNr = 1;
-          if (this.filterValuesMap.get(this.firstDefaultFilter)) {
-            pageNr = Math.ceil(this.filterValuesMap.get(this.firstDefaultFilter).length / 10) + 1;
+
+          if (this.firstDefaultValues.length > 0) {
+            pageNr = Math.ceil(this.firstDefaultValues.length / 10) + 1;
           }
+
           this.getFacetValues(
             this.firstDefaultFilter,
             pageNr,
@@ -211,7 +220,7 @@ export class QueryConditionGroupComponent implements OnInit {
     this.queryGroup.get(`${idx}.value`).setValue(null);
     const options: SearchOptions = new SearchOptions({
       configuration: this.configurationName,
-      query: this.searchOptQuery
+      query: encodeURIComponent(this.searchOptQuery),
     });
     // get values for the selected filter
     this.getFacetValues(searchFilter, 1, SearchValueMode.Select, idx, options);
@@ -223,13 +232,19 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param selectedValue
    * @param parentFilter
    */
-  onValueSelect(selectedValue: string, parentFilter: string) {
-    // disable last selected value
-    (
-      this.filterValuesMap
-        .get(parentFilter)
-        .find((x) => isEqual(x.value, selectedValue)) as any
-    ).disable = true;
+  onValueSelect(selectedValue: string, parentFilter: string, idx: number) {
+    // disable last selected value for each of the keys that might have that value
+    let appliedFilters = this.filterValuesMapArray.filter((x) =>
+      x.get(parentFilter)
+    );
+
+    appliedFilters.forEach((filterMap) => {
+      (
+        filterMap
+          .get(parentFilter)
+          .find((x) => isEqual(x.value, selectedValue)) as any
+      ).disable = true;
+    });
 
     this.buildQueryBasedOnAppliedFilterConfigs();
   }
@@ -274,6 +289,7 @@ export class QueryConditionGroupComponent implements OnInit {
     this.disableFormControlOnSelectionChange(index, 'filter');
     this.disableFormControlOnSelectionChange(index, 'value');
     this.queryGroup.push(this.initFormArray());
+    // calc filters for the upcoming row
     this.calcSearchFilterConfigs();
   }
 
@@ -300,25 +316,20 @@ export class QueryConditionGroupComponent implements OnInit {
    */
   deleteCondition(index: number, selectedValue: AbstractControl) {
     if (index > -1) {
-      // when a condition is deleted, the filter's selected value is enabled again
-      if (hasValue(selectedValue.value)) {
-        (
-          this.filterValuesMap
-            .get(this.queryGroupValue[index].filter)
-            .find((x) => isEqual(x.value, selectedValue.value)) as any
-        ).disable = false;
-      }
-
       // remove the query statement
       this.queryGroup.removeAt(index);
+      this.filterValuesMapArray.splice(index, 1);
 
       // enable controls if only one row is left
       if (isEqual(this.queryGroup.controls.length, 1)) {
         this.enableFormControlOnSelectionChange(0, 'filter');
         this.enableFormControlOnSelectionChange(0, 'value');
-        this.buildQueryBasedOnAppliedFilterConfigs();
         this.calcSearchFilterConfigs();
       }
+
+      this.buildQueryBasedOnAppliedFilterConfigs();
+      // when a condition is deleted, the filter's selected value is enabled again
+      this.calcValueSelection(selectedValue.value);
     }
   }
 
@@ -329,10 +340,16 @@ export class QueryConditionGroupComponent implements OnInit {
    */
   onValuesScroll(searchFilter: string, idx: number) {
     const options: SearchOptions = new SearchOptions({
-      configuration: this.configurationName
+      configuration: this.configurationName,
     });
 
-    this.getFacetValues(searchFilter, null, SearchValueMode.Scroll, idx, options);
+    this.getFacetValues(
+      searchFilter,
+      null,
+      SearchValueMode.Scroll,
+      idx,
+      options
+    );
   }
 
   /**
@@ -341,8 +358,8 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param mode
    */
   private calcSearchFilterConfigs() {
-    this.secondColumnFilters = [];
     this.isFilterListLoading = true;
+    this.secondColumnFilters = new Array();
     this.searchFilterConfigs.forEach((config: SearchFilterConfig) => {
       if (isEqual(config.name, this.firstDefaultFilter)) {
         return;
@@ -354,15 +371,15 @@ export class QueryConditionGroupComponent implements OnInit {
 
       this.searchService
         .getFacetValuesFor(config, 1, searchOptions)
-        .pipe(
-          getRemoteDataPayload(),
-          map((c: FacetValues) => {
-            if (c && c.page.length > 0) {
+        .pipe(getRemoteDataPayload())
+        .subscribe((fv: FacetValues) => {
+          if (fv && fv.page.length > 0) {
+            if (this.secondColumnFilters.indexOf(config) < 0) {
               this.secondColumnFilters.push(config);
             }
-          })
-        )
-        .subscribe();
+          }
+
+        });
     });
     this.isFilterListLoading = false;
     this.chd.detectChanges();
@@ -388,16 +405,18 @@ export class QueryConditionGroupComponent implements OnInit {
     if (
       mode &&
       isEqual(mode, SearchValueMode.Scroll) &&
-      this.filterValuesMap.get(searchFilter).length > 0
+      !isNull(idx) &&
+      this.filterValuesMapArray[idx].get(searchFilter).length > 0
     ) {
       // calculate page
-      calPage = Math.ceil(this.filterValuesMap.get(searchFilter).length / 10) + 1;
+      calPage =
+        Math.ceil(
+          this.filterValuesMapArray[idx].get(searchFilter).length / 10
+        ) + 1;
     }
-
     const searchFilterConfig = this.searchFilterConfigs?.find((x) =>
       isEqual(x.name, searchFilter)
     );
-
     if (searchFilterConfig) {
       this.searchService
         .getFacetValuesFor(searchFilterConfig, calPage, searchOptions)
@@ -411,27 +430,41 @@ export class QueryConditionGroupComponent implements OnInit {
               };
             });
 
-            if (!this.filterValuesMap.has(searchFilter)) {
-              // in order not to change reference of the key to filterValuesMap
-              this.filterValuesMap.set(searchFilter, filterValues);
-              if (isEqual(mode, SearchValueMode.Default)) {
-                // fill the first values dropdown with data
-                this.firstDefaultValues = filterValues;
-              }
-            } else if (calPage > 1 && this.filterValuesMap.has(searchFilter)) {
+            if (isEqual(mode, SearchValueMode.Default)) {
+              // fill the first values dropdown with data based on page number
+              this.firstDefaultValues = this.firstDefaultValues.concat(
+                ...filterValues
+              );
+            }
+
+            if (this.filterValuesMapArray[idx] && !isNull(idx)) {
+              // set data in the given index, if it exists
+              this.filterValuesMapArray[idx].set(searchFilter, filterValues);
+            } else if (!this.filterValuesMapArray[idx] && !isNull(idx)) {
+              // push new data for selected filter
+              let map = new Map<string, FacetValue[]>();
+              this.filterValuesMapArray.push(
+                map.set(searchFilter, filterValues)
+              );
+            } else if (
+              calPage > 1 &&
+              idx &&
+              this.filterValuesMapArray[idx].has(searchFilter)
+            ) {
               // concat data from the next page, if there are any data
-              const existingValues = this.filterValuesMap.get(searchFilter);
+              const existingValues =
+                this.filterValuesMapArray[idx].get(searchFilter);
+
               if (isEqual(searchFilter, this.firstDefaultFilter)) {
-                this.firstDefaultValues = [
-                  ...existingValues,
-                  ...filterValues,
-                ];
+                this.firstDefaultValues = [...existingValues, ...filterValues];
               }
-              this.filterValuesMap.set(searchFilter, [
+
+              this.filterValuesMapArray[idx].set(searchFilter, [
                 ...existingValues,
                 ...filterValues,
               ]);
             }
+
             this.isValueListLoading = false;
           } else if (res && isEqual(res.page?.length, 0)) {
             this.isValueListLoading = false;
@@ -469,7 +502,11 @@ export class QueryConditionGroupComponent implements OnInit {
     filters.forEach((filter) => {
       if (isNotEmpty(filter) && isNotEmpty(filter.values)) {
         filter.values.forEach((value) => {
-          const query = `(${filter.key}:"${value}" OR ${this.locale.getCurrentLanguageCode()}_${filter.key}_keyword:"${value}" OR ${filter.key}_keyword:"${value}")`;
+          const query = `(${
+            filter.key
+          }:"${value}" OR ${this.locale.getCurrentLanguageCode()}_${
+            filter.key
+          }_keyword:"${value}" OR ${filter.key}_keyword:"${value}")`;
           queries.push(query);
         });
       }
@@ -483,20 +520,25 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param parentFilter selected filter in same row
    */
   calcValueSelection(parentFilter: string) {
-    const disabledValues = this.filterValuesMap
-      .get(parentFilter)
-      .filter((x: any) => x.disable);
     // calculate disabled previous selected values
-    disabledValues.forEach((x) => {
-      if (!this.queryGroupValue.find((f) => isEqual(f.value, x.value))) {
-        // enable the ones that are not found in the form value
-        (
-          this.filterValuesMap
-            .get(parentFilter)
-            .find((v) => isEqual(v.value, x.value)) as any
-        ).disable = false;
+
+    let appliedFilters = this.filterValuesMapArray.filter((x) =>
+      x.get(parentFilter)
+    );
+
+    if (appliedFilters.length > 1) {
+      for (let index = 0; index < appliedFilters.length; index++) {
+        const element = appliedFilters[index].get(parentFilter);
+        element.forEach((val) => {
+          // enable the ones that are not found in the form value
+          if (!this.queryGroupValue.find((f) => isEqual(val.value, f.value))) {
+            (val as any).disable = false;
+          } else {
+            (val as any).disable = true;
+          }
+        });
       }
-    });
+    }
   }
 }
 
