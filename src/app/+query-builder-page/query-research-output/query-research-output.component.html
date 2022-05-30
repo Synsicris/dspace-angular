@@ -1,8 +1,18 @@
 <div class="container">
-  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-    <ngb-panel>
+  <ngb-accordion #accordionRef activeIds="step1">
+    <ngb-panel id="step1">
       <ng-template ngbPanelTitle>
-        <span>Step 1</span>
+        <span class="float-left" [innerHTML]="'query-builder.synsicris.accordion.step1.header' | translate" tabindex="0">Step 1</span>
+        <div class="d-inline-block float-right">
+          <a class="close"
+             tabindex="0"
+             role="button"
+             [attr.aria-label]="(accordionRef.isExpanded('step1') ? 'cris-layout.toggle.aria.close' : 'cris-layout.toggle.aria.open') | translate: {sectionHeader: 'Step 1'}"
+             [title]="(accordionRef.isExpanded('step1') ? 'cris-layout.toggle.close' : 'cris-layout.toggle.open') | translate">
+            <span *ngIf="accordionRef.isExpanded('step1')" class="fas fa-chevron-up fa-fw"></span>
+            <span *ngIf="!accordionRef.isExpanded('step1')" class="fas fa-chevron-down fa-fw"></span>
+          </a>
+        </div>
       </ng-template>
       <ng-template ngbPanelContent>
         <div class="btn-group btn-group-toggle mb-4">
@@ -25,9 +35,19 @@
         </ng-container>
       </ng-template>
     </ngb-panel>
-    <ngb-panel>
+    <ngb-panel id="step2">
       <ng-template ngbPanelTitle>
-        <span>Step 2</span>
+        <span class="float-left" [innerHTML]="'query-builder.synsicris.accordion.step2.header' | translate" tabindex="0"></span>
+        <div class="d-inline-block float-right">
+          <a class="close"
+             tabindex="0"
+             role="button"
+             [attr.aria-label]="(accordionRef.isExpanded('step2') ? 'cris-layout.toggle.aria.close' : 'cris-layout.toggle.aria.open') | translate: {sectionHeader: 'Step 2'}"
+             [title]="(accordionRef.isExpanded('step2') ? 'cris-layout.toggle.close' : 'cris-layout.toggle.open') | translate">
+            <span *ngIf="accordionRef.isExpanded('step2')" class="fas fa-chevron-up fa-fw"></span>
+            <span *ngIf="!accordionRef.isExpanded('step2')" class="fas fa-chevron-down fa-fw"></span>
+          </a>
+        </div>
       </ng-template>
       <ng-template ngbPanelContent>
         <ds-projects-scoped-search [configuration]="projectItemsConfigurationName"
