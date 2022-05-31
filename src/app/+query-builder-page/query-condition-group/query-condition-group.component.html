@@ -67,7 +67,7 @@
               "
               (open)="calcValueSelection(queryGroup.get(i + '.filter')?.value)"
               (change)="
-                onValueSelect($event, queryGroup.get(i + '.filter')?.value)
+                onValueSelect($event, queryGroup.get(i + '.filter')?.value, i)
               "
               (scrollToEnd)="
                 onValuesScroll(queryGroup.get(i + '.filter')?.value, i)
@@ -75,9 +75,7 @@
             >
               <ng-option
                 *ngFor="
-                  let value of filterValuesMap.get(
-                    queryGroup.get(i + '.filter')?.value
-                  )
+                  let value of filterFacetValues(i)
                 "
                 [value]="value.label"
                 [disabled]="value.disable"
