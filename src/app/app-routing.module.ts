@@ -155,8 +155,8 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
           },
           {
             path: 'browse/projects',
-            loadChildren: () => import('./+query-builder-page/query-builder.module')
-              .then((m) => m.QueryBuilderModule),
+            loadChildren: () => import('./browse-by-projects-page/browse-by-projects-page.module')
+              .then((m) => m.BrowseByProjectsPageModule),
             canActivate: [AuthenticatedGuard]
           },
           {

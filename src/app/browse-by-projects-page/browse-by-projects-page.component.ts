@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
-import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
-import { SEARCH_CONFIG_SERVICE } from '../../my-dspace-page/my-dspace-page.component';
-import { environment } from '../../../environments/environment';
+import { SearchConfigurationService } from '../core/shared/search/search-configuration.service';
+import { SEARCH_CONFIG_SERVICE } from '../my-dspace-page/my-dspace-page.component';
+import { environment } from '../../environments/environment';
 
 @Component({
-  selector: 'ds-query-research-output',
-  templateUrl: './query-research-output.component.html',
-  styleUrls: ['./query-research-output.component.scss'],
+  selector: 'ds-browse-by-projects-page',
+  templateUrl: './browse-by-projects-page.component.html',
+  styleUrls: ['./browse-by-projects-page.component.scss'],
   providers: [
     {
       provide: SEARCH_CONFIG_SERVICE,
@@ -15,39 +15,39 @@ import { environment } from '../../../environments/environment';
     },
   ],
 })
-export class QueryResearchOutputComponent {
+export class BrowseByProjectsPageComponent {
   /**
    * First tab checker
    * Set as default opened tab
-   * @memberof QueryResearchOutputComponent
+   * @memberof BrowseByProjectsPageComponent
    */
   searchAll = true;
 
   /**
    * Second tab checker
    *
-   * @memberof QueryResearchOutputComponent
+   * @memberof BrowseByProjectsPageComponent
    */
   searchSelected = false;
 
   /**
    * Configuration name
    *
-   * @memberof QueryResearchOutputComponent
+   * @memberof BrowseByProjectsPageComponent
    */
   queryBuilderConfigurationName = environment.projects.projectsFunder.searchQueryConfigurationName;
 
   /**
    * Configuration name
    *
-   * @memberof QueryResearchOutputComponent
+   * @memberof BrowseByProjectsPageComponent
    */
   projectsConfigurationName = environment.projects.projectsFunder.searchProjectConfigurationName;
 
   /**
    * Configuration name
    *
-   * @memberof QueryResearchOutputComponent
+   * @memberof BrowseByProjectsPageComponent
    */
   projectItemsConfigurationName = environment.projects.projectsFunder.searchProjectItemsConfigurationName;
 
@@ -55,7 +55,7 @@ export class QueryResearchOutputComponent {
    * Composed query
    *
    * @type {string}
-   * @memberof QueryResearchOutputComponent
+   * @memberof BrowseByProjectsPageComponent
    */
   searchQuery: string;
 
@@ -64,12 +64,12 @@ export class QueryResearchOutputComponent {
    */
   onTabSelect(tabNr: number) {
     switch (tabNr) {
-      case CollapsibleTabs.One:
+      case CollapsibleTabs.All:
         this.searchSelected = false;
         this.searchAll = true;
         break;
 
-      case CollapsibleTabs.Two:
+      case CollapsibleTabs.Query:
         this.searchAll = false;
         this.searchSelected = true;
         break;
@@ -88,6 +88,6 @@ export class QueryResearchOutputComponent {
 }
 
 export enum CollapsibleTabs {
-  One = 1,
-  Two = 2,
+  All = 1,
+  Query = 2,
 }

@@ -1962,6 +1962,20 @@
 
   "explore.index.language": "Language",
 
+  "explore.index.fundingParent": "Funding parent",
+
+  "explore.index.synsicrisRelationCall": "Relation call",
+
+  "explore.index.projectStartDate": "Start date",
+
+  "explore.index.projectEndDate": "End date",
+
+  "explore.index.synsicrisSubjectNace": "Subject nace",
+
+  "explore.index.synsicrisSubjectDestatis": "Subject destatis",
+
+  "explore.index.synsicrisTypeProjectContribution": "Project contribution type",
+
   "explore.search-section.infrastructure.title": "Infrastructure",
 
   "explore.search-section.fundings.title": "Search Projects",
@@ -5291,6 +5305,8 @@
   "search.form.scope.all": "All of DSpace",
 
   "search.results.head": "Search Results",
+
+  "allProjectItems.search.results.head": "Search Results",
 
   "default.search.results.head": "Search Results",
 

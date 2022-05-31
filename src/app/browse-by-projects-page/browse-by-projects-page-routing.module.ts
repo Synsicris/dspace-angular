@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { QueryResearchOutputComponent } from './query-research-output/query-research-output.component';
+
+import { BrowseByProjectsPageComponent } from './browse-by-projects-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: QueryResearchOutputComponent,
+    component: BrowseByProjectsPageComponent,
     data: {
       title: 'Reserch Outputs',
       breadcrumbKey: 'query-builder',
@@ -18,4 +19,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class QueryBuilderRoutingModule { }
+export class BrowseByProjectsPageRoutingModule { }
