@@ -148,10 +148,10 @@ export class QueryConditionGroupComponent implements OnInit {
    *
    * @readonly
    * @protected
-   * @type {FilterValue[]}
+   * @type {QueryFilterValue[]}
    * @memberof QueryConditionGroupComponent
    */
-  protected get queryGroupValue(): FilterValue[] {
+  protected get queryGroupValue(): QueryFilterValue[] {
     return this.queryGroup.getRawValue();
   }
 
@@ -181,7 +181,7 @@ export class QueryConditionGroupComponent implements OnInit {
           this.getFacetValues(
             this.firstDefaultFilter,
             pageNr,
-            SearchValueMode.Default,
+            QuerySearchValueMode.Default,
             null,
             options
           );
@@ -226,7 +226,7 @@ export class QueryConditionGroupComponent implements OnInit {
       query: encodeURIComponent(this.searchOptQuery),
     });
     // get values for the selected filter
-    this.getFacetValues(searchFilter, 1, SearchValueMode.Select, idx, options);
+    this.getFacetValues(searchFilter, 1, QuerySearchValueMode.Select, idx, options);
   }
 
   /**
@@ -267,10 +267,10 @@ export class QueryConditionGroupComponent implements OnInit {
       if (isEqual(config.name, this.firstDefaultFilter)) {
         return;
       }
-      const filterValues: FilterValue[] = this.queryGroupValue;
+      const filterValues: QueryFilterValue[] = this.queryGroupValue;
       const values = filterValues
-        .filter((filter: FilterValue) => isEqual(filter.filter, config.name))
-        .map((filter: FilterValue) => filter?.value);
+        .filter((filter: QueryFilterValue) => isEqual(filter.filter, config.name))
+        .map((filter: QueryFilterValue) => filter?.value);
 
       searchFilter.push({
         values: values, // searched value
@@ -352,7 +352,7 @@ export class QueryConditionGroupComponent implements OnInit {
     this.getFacetValues(
       searchFilter,
       null,
-      SearchValueMode.Scroll,
+      QuerySearchValueMode.Scroll,
       idx,
       options
     );
@@ -401,7 +401,7 @@ export class QueryConditionGroupComponent implements OnInit {
   private getFacetValues(
     searchFilter: string,
     page: number = 1,
-    mode?: SearchValueMode,
+    mode?: QuerySearchValueMode,
     idx?: number,
     searchOptions?: SearchOptions
   ) {
@@ -409,7 +409,7 @@ export class QueryConditionGroupComponent implements OnInit {
     this.isValueListLoading = true;
     if (
       mode &&
-      isEqual(mode, SearchValueMode.Scroll) &&
+      isEqual(mode, QuerySearchValueMode.Scroll) &&
       !isNull(idx) &&
       this.filterValuesMapArray[idx].get(searchFilter).length > 0
     ) {
@@ -435,7 +435,7 @@ export class QueryConditionGroupComponent implements OnInit {
               };
             });
 
-            if (isEqual(mode, SearchValueMode.Default)) {
+            if (isEqual(mode, QuerySearchValueMode.Default)) {
               // fill the first values dropdown with data based on page number
               this.firstDefaultValues = this.firstDefaultValues.concat(
                 ...filterValues
@@ -547,21 +547,21 @@ export class QueryConditionGroupComponent implements OnInit {
         const element = item.get(parentFilter);
         element.forEach((val) => {
           // enable the ones that are not found in the form value
-          (val as any).disable = this.queryGroupValue.find((f) => isEqual(val.value, f.value));
+          (val as any).disable = this.queryGroupValue.find((f: QueryFilterValue) => isEqual(val?.value, f?.value?.value));
         });
       }
     }
   }
 }
 
-export enum SearchValueMode {
+export enum QuerySearchValueMode {
   Default = 'Default',
   Scroll = 'Scroll',
   Search = 'Search',
   Select = 'Select',
 }
 
-export interface FilterValue {
+export interface QueryFilterValue {
   filter: string;
   value: FacetValue;
 }
