@@ -59,8 +59,6 @@ export class QueryResearchOutputComponent {
    */
   searchQuery: string;
 
-  constructor() {}
-
   /**
    * @param tabNr number of the selected tab
    */

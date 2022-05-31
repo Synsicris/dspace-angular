@@ -16,9 +16,14 @@ import { FacetValues } from '../../shared/search/models/facet-values.model';
 import { getRemoteDataPayload } from '../../core/shared/operators';
 import { FacetValue } from '../../shared/search/models/facet-value.model';
 import { SearchFilterConfig } from '../../shared/search/models/search-filter-config.model';
-import { hasValue, isNotEmpty } from '../../shared/empty.util';
-import { SearchFilter } from '../../shared/search/models/search-filter.model';
+import { isNotEmpty } from '../../shared/empty.util';
 import { LocaleService } from '../../core/locale/locale.service';
+
+export interface QueryBuilderSearchFilter {
+  key: string;
+  values: FacetValue[];
+  operator: string;
+}
 
 @Component({
   selector: 'ds-query-condition-group',
@@ -189,12 +194,10 @@ export class QueryConditionGroupComponent implements OnInit {
    * Compose the query for the applied filters till this moment,
    * Get Facets to fill the filter dropdown and enables the next in line control
    */
-  onDefaultValueSelect(selectedValue) {
-    const escapedValue = escape(selectedValue);
-    console.log(escapedValue);
+  onDefaultValueSelect(selectedValue: FacetValue) {
     const defaultSearchfilter = [
       {
-        values: [escapedValue], // selected value
+        values: [selectedValue], // selected value
         key: this.firstDefaultFilter, // default filter name
         operator: 'equals',
       },
@@ -231,10 +234,12 @@ export class QueryConditionGroupComponent implements OnInit {
    * Compose the query for the applied filters till this moment
    * @param selectedValue
    * @param parentFilter
+   * @param idx
    */
-  onValueSelect(selectedValue: string, parentFilter: string, idx: number) {
+  onValueSelect(selectedValue: FacetValue, parentFilter: string, idx: number) {
+    console.log(selectedValue);
     // disable last selected value for each of the keys that might have that value
-    let appliedFilters = this.filterValuesMapArray.filter((x) =>
+    const appliedFilters = this.filterValuesMapArray.filter((x) =>
       x.get(parentFilter)
     );
 
@@ -242,7 +247,7 @@ export class QueryConditionGroupComponent implements OnInit {
       (
         filterMap
           .get(parentFilter)
-          .find((x) => isEqual(x.value, selectedValue)) as any
+          .find((x) => isEqual(x.value, selectedValue.value)) as any
       ).disable = true;
     });
 
@@ -250,7 +255,7 @@ export class QueryConditionGroupComponent implements OnInit {
   }
 
   private buildQueryBasedOnAppliedFilterConfigs() {
-    const searchFilter: SearchFilter[] = [
+    const searchFilter: QueryBuilderSearchFilter[] = [
       {
         values: [this.formGroup.get('defaultFilter').value], // selected value
         key: this.firstDefaultFilter, // default filter name
@@ -264,8 +269,8 @@ export class QueryConditionGroupComponent implements OnInit {
       }
       const filterValues: FilterValue[] = this.queryGroupValue;
       const values = filterValues
-        .filter((x) => isEqual(x.filter, config.name))
-        .map((x) => x.value);
+        .filter((filter: FilterValue) => isEqual(filter.filter, config.name))
+        .map((filter: FilterValue) => filter?.value);
 
       searchFilter.push({
         values: values, // searched value
@@ -313,6 +318,7 @@ export class QueryConditionGroupComponent implements OnInit {
   /**
    * Delete a query statement and enable the filter option
    * @param index qyery statement index
+   * @param selectedValue selected field control
    */
   deleteCondition(index: number, selectedValue: AbstractControl) {
     if (index > -1) {
@@ -355,11 +361,10 @@ export class QueryConditionGroupComponent implements OnInit {
   /**
    * Get facet values for each configuration,
    * in order to display only the ones with data
-   * @param mode
    */
   private calcSearchFilterConfigs() {
     this.isFilterListLoading = true;
-    this.secondColumnFilters = new Array();
+    this.secondColumnFilters = [];
     this.searchFilterConfigs.forEach((config: SearchFilterConfig) => {
       if (isEqual(config.name, this.firstDefaultFilter)) {
         return;
@@ -442,7 +447,7 @@ export class QueryConditionGroupComponent implements OnInit {
               this.filterValuesMapArray[idx].set(searchFilter, filterValues);
             } else if (!this.filterValuesMapArray[idx] && !isNull(idx)) {
               // push new data for selected filter
-              let map = new Map<string, FacetValue[]>();
+              const map = new Map<string, FacetValue[]>();
               this.filterValuesMapArray.push(
                 map.set(searchFilter, filterValues)
               );
@@ -497,16 +502,27 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param filters applied filters
    * @returns
    */
-  private buildSearchQuery(filters: SearchFilter[]) {
+  private buildSearchQuery(filters: QueryBuilderSearchFilter[]) {
     const queries = [];
     filters.forEach((filter) => {
       if (isNotEmpty(filter) && isNotEmpty(filter.values)) {
-        filter.values.forEach((value) => {
-          const query = `(${
-            filter.key
-          }:"${value}" OR ${this.locale.getCurrentLanguageCode()}_${
-            filter.key
-          }_keyword:"${value}" OR ${filter.key}_keyword:"${value}")`;
+        filter.values.forEach((facetValue: FacetValue) => {
+          const fieldWithLanguage = `${this.locale.getCurrentLanguageCode()}_${filter.key}`;
+          const field = filter.key;
+          const value = facetValue.value;
+          let authorityQuery = '';
+          if (facetValue.authorityKey) {
+            // TODO use _authority when https://4science.atlassian.net/browse/DSC-625 it's fixed
+            const authorityValue = facetValue.authorityKey;
+            const valueWithAuthority = `${value}###${facetValue.authorityKey}`;
+            authorityQuery = `${fieldWithLanguage}_keyword:"${valueWithAuthority}"` +
+              ` OR ${field}_keyword:"${valueWithAuthority}"` +
+              ` OR ${fieldWithLanguage}_authority:"${authorityValue}"` +
+              ` OR ${field}_keyword:"${authorityValue}" OR `;
+          }
+
+          const query = `(${authorityQuery}${field}:"${value}" OR ${fieldWithLanguage}_keyword:"${value}" OR ${field}_keyword:"${value}")`;
+          console.log(query);
           queries.push(query);
         });
       }
@@ -522,20 +538,16 @@ export class QueryConditionGroupComponent implements OnInit {
   calcValueSelection(parentFilter: string) {
     // calculate disabled previous selected values
 
-    let appliedFilters = this.filterValuesMapArray.filter((x) =>
+    const appliedFilters = this.filterValuesMapArray.filter((x) =>
       x.get(parentFilter)
     );
 
     if (appliedFilters.length > 1) {
-      for (let index = 0; index < appliedFilters.length; index++) {
-        const element = appliedFilters[index].get(parentFilter);
+      for (const item of appliedFilters) {
+        const element = item.get(parentFilter);
         element.forEach((val) => {
           // enable the ones that are not found in the form value
-          if (!this.queryGroupValue.find((f) => isEqual(val.value, f.value))) {
-            (val as any).disable = false;
-          } else {
-            (val as any).disable = true;
-          }
+          (val as any).disable = this.queryGroupValue.find((f) => isEqual(val.value, f.value));
         });
       }
     }
@@ -551,5 +563,5 @@ export enum SearchValueMode {
 
 export interface FilterValue {
   filter: string;
-  value: string;
+  value: FacetValue;
 }

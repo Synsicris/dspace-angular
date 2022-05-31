@@ -17,7 +17,7 @@
         >
           <ng-option
             *ngFor="let value of firstDefaultValues"
-            [value]="value.value"
+            [value]="value"
             [disabled]="value.disable"
           >
             {{ value.label | titlecase }}
@@ -77,7 +77,7 @@
                 *ngFor="
                   let value of filterFacetValues(i)
                 "
-                [value]="value.label"
+                [value]="value"
                 [disabled]="value.disable"
               >
                 {{ value.label | titlecase }}
