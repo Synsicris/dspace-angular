@@ -325,17 +325,26 @@ export class QueryConditionGroupComponent implements OnInit {
       // remove the query statement
       this.queryGroup.removeAt(index);
       this.filterValuesMapArray.splice(index, 1);
+      // when a condition is deleted, the filter's selected value is enabled again
+      this.calcValueSelection(selectedValue.value);
 
       // enable controls if only one row is left
       if (isEqual(this.queryGroup.controls.length, 1)) {
         this.enableFormControlOnSelectionChange(0, 'filter');
         this.enableFormControlOnSelectionChange(0, 'value');
+        const searchFilter: QueryBuilderSearchFilter[] = [
+          {
+            values: [this.formGroup.get('defaultFilter').value], // selected value
+            key: this.firstDefaultFilter, // default filter name
+            operator: 'equals',
+          },
+        ];
+        const query = this.buildSearchQuery(searchFilter, 'on_delete');
+        this.calcSearchFilterConfigs(query);
+      } else {
         this.calcSearchFilterConfigs();
       }
-
       this.buildQueryBasedOnAppliedFilterConfigs();
-      // when a condition is deleted, the filter's selected value is enabled again
-      this.calcValueSelection(selectedValue.value);
     }
   }
 
@@ -362,7 +371,7 @@ export class QueryConditionGroupComponent implements OnInit {
    * Get facet values for each configuration,
    * in order to display only the ones with data
    */
-  private calcSearchFilterConfigs() {
+  private calcSearchFilterConfigs(query?: string) {
     this.isFilterListLoading = true;
     this.secondColumnFilters = [];
     this.searchFilterConfigs.forEach((config: SearchFilterConfig) => {
@@ -371,7 +380,7 @@ export class QueryConditionGroupComponent implements OnInit {
       }
       const searchOptions: SearchOptions = new SearchOptions({
         configuration: this.configurationName,
-        query: encodeURIComponent(this.searchOptQuery),
+        query: isNil(query) ? encodeURIComponent(this.searchOptQuery) : query
       });
 
       this.searchService
@@ -383,7 +392,6 @@ export class QueryConditionGroupComponent implements OnInit {
               this.secondColumnFilters.push(config);
             }
           }
-
         });
     });
     this.isFilterListLoading = false;
@@ -502,7 +510,7 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param filters applied filters
    * @returns
    */
-  private buildSearchQuery(filters: QueryBuilderSearchFilter[]) {
+  private buildSearchQuery(filters: QueryBuilderSearchFilter[], mode?: 'on_delete' ) {
     const queries = [];
     filters.forEach((filter) => {
       if (isNotEmpty(filter) && isNotEmpty(filter.values)) {
@@ -527,8 +535,10 @@ export class QueryConditionGroupComponent implements OnInit {
         });
       }
     });
-    this.searchOptQuery = queries.join(' AND ');
-    return encodeURIComponent(this.searchOptQuery);
+    if(isNil(mode)){
+      this.searchOptQuery = queries.join(' AND ');
+    }
+    return encodeURIComponent(queries.join(' AND '));
   }
 
   /**
@@ -537,18 +547,19 @@ export class QueryConditionGroupComponent implements OnInit {
    */
   calcValueSelection(parentFilter: string) {
     // calculate disabled previous selected values
+    if (parentFilter) {
+      const appliedFilters = this.filterValuesMapArray.filter((x) =>
+        x.get(parentFilter)
+      );
 
-    const appliedFilters = this.filterValuesMapArray.filter((x) =>
-      x.get(parentFilter)
-    );
-
-    if (appliedFilters.length > 1) {
-      for (const item of appliedFilters) {
-        const element = item.get(parentFilter);
-        element.forEach((val) => {
-          // enable the ones that are not found in the form value
-          (val as any).disable = this.queryGroupValue.find((f: QueryFilterValue) => isEqual(val?.value, f?.value?.value));
-        });
+      if (appliedFilters.length > 0) {
+        for (const item of appliedFilters) {
+          const element = item.get(parentFilter);
+          element.forEach((val) => {
+            // enable the ones that are not found in the form value
+            (val as any).disable = this.queryGroupValue.find((f: QueryFilterValue) => isEqual(val?.value, f?.value?.value));
+          });
+        }
       }
     }
   }
