@@ -1,4 +1,4 @@
-<ng-container *ngIf="(isEditPermissionAvailable() | async)">
+<ng-container *ngIf="canShow() && (isEditPermissionAvailable() | async)">
   <button class="btn btn-warning" ngbTooltip="{{'submission.workflow.generic.edit-grants-help' | translate}}"
     (click)="openEditGrantsModal()" role="button">
     <i class="fa fa-edit"></i> {{'submission.workflow.generic.edit-grants' | translate}}

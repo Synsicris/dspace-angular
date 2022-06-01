@@ -1,9 +1,9 @@
 import { Item } from './../../../core/shared/item.model';
 import { AuthorizationDataService } from './../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from './../../../core/data/feature-authorization/feature-id';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
@@ -12,6 +12,7 @@ import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 import { isNotEmpty } from '../../empty.util';
+import { PARENT_PROJECT_ENTITY } from '../../../core/project/project-data.service';
 
 /**
  * This component renders a context menu option that provides the links to edit item page.
@@ -45,8 +46,8 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
    *
    * @param {DSpaceObject} injectedContextMenuObject
    * @param {DSpaceObjectType} injectedContextMenuObjectType
-   * @param {EditItemDataService} editItemService
-   * @param notificationService
+   * @param {AuthorizationDataService} authorizationService
+   * @param {NgbModal} modalService
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
@@ -55,6 +56,13 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
     protected modalService: NgbModal,
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.EditSubmission);
+  }
+
+  /**
+   * Check if current Item is a not Project
+   */
+  canShow() {
+    return (this.contextMenuObject as Item).entityType !== PARENT_PROJECT_ENTITY;
   }
 
   /**
