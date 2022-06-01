@@ -49,7 +49,8 @@ import {
   impactPathwaySubTaskCollapsable,
   isImpactPathwayLoadedSelector,
   isImpactPathwayProcessingSelector,
-  isImpactPathwayRemovingSelector
+  isImpactPathwayRemovingSelector,
+  isCompareMode,
 } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
@@ -75,7 +76,9 @@ import {
   SetImpactPathwaySubTaskCollapseAction,
   SetImpactPathwayTargetTaskAction,
   UpdateImpactPathwayAction,
-  UpdateImpactPathwayTaskAction
+  UpdateImpactPathwayTaskAction,
+  InitCompareAction,
+  StopCompareImpactPathwayAction
 } from './impact-pathway.actions';
 import { ErrorResponse } from '../../core/cache/response.models';
 import {
@@ -96,6 +99,7 @@ import { PaginatedList } from '../../core/data/paginated-list.model';
 import { SearchResult } from '../../shared/search/models/search-result.model';
 import { SearchService } from '../../core/shared/search/search.service';
 import { NoContent } from '../../core/shared/NoContent.model';
+import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 
 @Injectable()
 export class ImpactPathwayService {
@@ -117,6 +121,7 @@ export class ImpactPathwayService {
     private router: Router,
     private searchService: SearchService,
     private submissionService: SubmissionService,
+    private projectVersionService: ProjectVersionService,
     private store: Store<AppState>
   ) {
   }
@@ -264,7 +269,7 @@ export class ImpactPathwayService {
     parentTaskId: string,
     currentTasks: ImpactPathwayTask[],
     previousTasks: ImpactPathwayTask[]
-) {
+  ) {
     this.store.dispatch(new OrderImpactPathwaySubTasksAction(
       impactPathwayId,
       stepId,
@@ -290,6 +295,119 @@ export class ImpactPathwayService {
     this.store.dispatch(new UpdateImpactPathwayAction(impactPathwayId, impactPathway));
   }
 
+
+  /**
+   * Dispatch a new StopCompareImpactPathwayAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   */
+  dispatchStopCompare(impactPathwayId: string) {
+    this.store.dispatch(new StopCompareImpactPathwayAction(impactPathwayId));
+  }
+
+  /**
+   * Initialize to compare the steps that were previously compared
+   *
+   * @param compareList
+   *    the list of compared steps
+   */
+  initCompareImpactPathwaySteps(compareList: ComparedVersionItem[]): Observable<ImpactPathwayStep[]> {
+    return observableFrom(compareList).pipe(
+      concatMap((compareItem: ComparedVersionItem) => this.initCompareImpactPathwayTasksFromStep(
+        compareItem.item.id,
+        compareItem.item,
+        compareItem.versionItem ?.id).pipe(
+          map((steps: ImpactPathwayStep[]) => this.initImpactPathwayStepFromCompareItem(
+            compareItem,
+            steps
+          ))
+        )),
+      reduce((acc: any, value: any) => [...acc, value], [])
+    );
+  }
+
+
+  /**
+   * Initialize to compare the tasks for a specific step
+   *
+   * @param targetImpactPathwayStepId
+   *    the impact pathway's step id
+   * @param targetItem
+   *    the impact pathway's step compared item
+   * @param versionedImpactPathwayStepId
+   *    the impact pathway's step compared item with
+   */
+  initCompareImpactPathwayTasksFromStep(targetImpactPathwayStepId: string, targetItem: Item, versionedImpactPathwayStepId: string): Observable<ImpactPathwayStep[]> {
+    const relatedTaskMetadata = Metadata.all(targetItem.metadata, environment.impactPathway.impactPathwayTaskRelationMetadata);
+    if (isEmpty(relatedTaskMetadata) || isEmpty(versionedImpactPathwayStepId)) {
+      return observableOf([]);
+    } else {
+      return this.projectVersionService.compareItemChildrenByMetadata(
+        targetImpactPathwayStepId,
+        versionedImpactPathwayStepId,
+        environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
+          mergeMap((compareList: ComparedVersionItem[]) => {
+            return observableFrom(compareList).pipe(
+              concatMap((compareItem: ComparedVersionItem) => observableOf(this.initImpactPathwayTaskFromCompareItem(
+                compareItem,
+                targetImpactPathwayStepId)
+              )),
+              reduce((acc: any, value: any) => {
+                if (isNotNull(value)) {
+                  return [...acc, value];
+                } else {
+                  return acc;
+                }
+              }, [])
+            );
+          })
+        );
+    }
+  }
+
+  /**
+   * Initialize to construct the compared step
+   *
+   * @param compareObj
+   *    the compared object
+   * @param tasks
+   *    the tasks or steps related to the object
+   */
+  public initImpactPathwayStepFromCompareItem(compareObj: ComparedVersionItem, tasks: ImpactPathwayStep[] | ImpactPathwayTask[] = []): ImpactPathwayStep {
+    const type = compareObj.item.firstMetadataValue(environment.impactPathway.impactPathwayStepTypeMetadata);
+    const parent = compareObj.item.firstMetadataValue(environment.impactPathway.impactPathwayParentRelationMetadata);
+    return Object.assign(new ImpactPathwayStep(), {
+      id: compareObj.item.id,
+      parentId: parent,
+      title: compareObj.item.name,
+      type: type,
+      tasks: tasks,
+    });
+  }
+
+  /**
+   * Initialize to construct the compared step
+   *
+   * @param compareObj
+   *    the compared object
+   * @param tasks
+   *    the tasks or steps related to the object
+   */
+  public initImpactPathwayTaskFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, tasks: ImpactPathwayTask[] = []): ImpactPathwayTask {
+    const type = compareObj.item.firstMetadataValue('dspace.entity.type');
+    return Object.assign(new ImpactPathwayTask(), {
+      id: compareObj.item.id,
+      compareId: compareObj.versionItem ?.id,
+      compareStatus: compareObj.status,
+      parentId: parentId,
+      title: compareObj.item.name,
+      type: type,
+      tasks: tasks,
+    });
+  }
+
+
   /**
    * Dispatch a new UpdateImpactPathwayTaskAction
    *
@@ -314,6 +432,28 @@ export class ImpactPathwayService {
     this.store.dispatch(new ClearImpactPathwaySubtaskCollapseAction());
   }
 
+
+
+  /**
+   * Dispatch a new InitCompareAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param compareImpactPathwayId
+   *    the impact pathway's id to compare with
+   */
+  public dispatchInitCompare(impactPathwayId: string, compareImpactPathwayId: string) {
+    this.store.dispatch(new InitCompareAction(impactPathwayId, compareImpactPathwayId));
+  }
+
+
+  /**
+   * Check compareMode is true
+   */
+  public isCompareModeActive() {
+    return this.store.pipe(select(isCompareMode));
+  }
+
   getCreateTaskFormConfigName(stepType: string, isObjectivePage: boolean): string {
     return isObjectivePage ? `impact_pathway_${stepType}_task_objective_form` : `impact_pathway_${stepType}_task_form`;
   }
@@ -333,19 +473,19 @@ export class ImpactPathwayService {
     );
   }
 
-/*  generateImpactPathwayTaskItem(projectId: string, taskType: string, metadata: MetadataMap): Observable<Item> {
-    return this.createImpactPathwayTaskWorkspaceItem(projectId, taskType).pipe(
-      mergeMap((submission: SubmissionObject) => observableOf(submission.item).pipe(
-        tap(() => this.addWSIPatchOperationForImpactPathwayTask(metadata, this.getImpactPathwaysTaskFormSection())),
-        delay(100),
-        mergeMap((taskItem: Item) => this.executeSubmissionPatch(submission.id, this.getImpactPathwaysTaskFormSection()).pipe(
-          mergeMap(() => this.depositWorkspaceItem(submission).pipe(
-            getFirstSucceededRemoteDataPayload()
+  /*  generateImpactPathwayTaskItem(projectId: string, taskType: string, metadata: MetadataMap): Observable<Item> {
+      return this.createImpactPathwayTaskWorkspaceItem(projectId, taskType).pipe(
+        mergeMap((submission: SubmissionObject) => observableOf(submission.item).pipe(
+          tap(() => this.addWSIPatchOperationForImpactPathwayTask(metadata, this.getImpactPathwaysTaskFormSection())),
+          delay(100),
+          mergeMap((taskItem: Item) => this.executeSubmissionPatch(submission.id, this.getImpactPathwaysTaskFormSection()).pipe(
+            mergeMap(() => this.depositWorkspaceItem(submission).pipe(
+              getFirstSucceededRemoteDataPayload()
+            ))
           ))
         ))
-      ))
-    );
-  }*/
+      );
+    }*/
 
   getImpactPathwayStepIds(impactPathwayId: string): Observable<string[]> {
     return this.store.pipe(
@@ -498,7 +638,7 @@ export class ImpactPathwayService {
               return this.initImpactPathwayTasksFromParentItem(impactPathwayId, taskItem, false).pipe(
                 tap(() => {
                   if (buildLinks) {
-                this.addImpactPathwayLinksFromTaskItem(taskItem, impactPathwayId, parentItem.id);
+                    this.addImpactPathwayLinksFromTaskItem(taskItem, impactPathwayId, parentItem.id);
                   }
                 }),
                 map((tasks: ImpactPathwayTask[]) => this.initImpactPathwayTask(taskItem, parentItem.id, tasks))
@@ -537,13 +677,13 @@ export class ImpactPathwayService {
       previousParentTaskId,
       taskId,
       environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
-      mergeMap(() => this.itemAuthorityRelationService.addLinkedItemToParent(
-        'metadata',
-        null,
-        newParentTaskId,
-        taskId,
-        environment.impactPathway.impactPathwayTaskRelationMetadata))
-    );
+        mergeMap(() => this.itemAuthorityRelationService.addLinkedItemToParent(
+          'metadata',
+          null,
+          newParentTaskId,
+          taskId,
+          environment.impactPathway.impactPathwayTaskRelationMetadata))
+      );
   }
 
   orderTasks(parentTasksId: string, taskIds: string[]): Observable<Item> {
@@ -589,13 +729,13 @@ export class ImpactPathwayService {
     const type = taskItem.firstMetadataValue('dspace.entity.type');
     const description = taskItem.firstMetadataValue('dc.description');
 
-    return new ImpactPathwayTask(taskItem.id, type, parentId, taskItem.name, description, tasks);
+    return new ImpactPathwayTask(taskItem.id, type, parentId, taskItem.name, description, null, null, tasks);
   }
 
   updateImpactPathwayTask(newTaskItem: Item, oldTask: ImpactPathwayTask): ImpactPathwayTask {
     const description = newTaskItem.firstMetadataValue('dc.description');
 
-    return new ImpactPathwayTask(oldTask.id, oldTask.type, oldTask.parentId, newTaskItem.name, description, oldTask.tasks);
+    return new ImpactPathwayTask(oldTask.id, oldTask.type, oldTask.parentId, newTaskItem.name, description, oldTask.compareId, oldTask.compareStatus, oldTask.tasks);
   }
 
   updateImpactPathway(newImpactPathwayItem: Item, oldImpactPathway: ImpactPathway): ImpactPathway {
@@ -705,7 +845,7 @@ export class ImpactPathwayService {
     this.router.navigate(['entities', 'impactpathway', impactPathwayId]);
   }
 
-  redirectToProjectPage(projectItemId: string,) {
+  redirectToProjectPage(projectItemId: string, ) {
     this.router.navigate(['items', projectItemId]);
   }
 
@@ -767,7 +907,7 @@ export class ImpactPathwayService {
         return [submission, (submission.item as Item).id];
       }));
     return combineLatestObservable(submission$.pipe(
-      mergeMap(([submission, parentId]: [SubmissionObject, string]) => this.createImpactPathwaySteps(projectId,parentId).pipe(
+      mergeMap(([submission, parentId]: [SubmissionObject, string]) => this.createImpactPathwaySteps(projectId, parentId).pipe(
         map((steps) => {
           return [submission, steps];
         })
@@ -847,7 +987,7 @@ export class ImpactPathwayService {
           const path = pathCombiner.getPath([metadataName, '0']);
           this.operationsBuilder.replace(path, metadata[metadataName], true);
         }
-    });
+      });
   }
 
   private addWSIPatchOperationForImpactPathwayTask(metadata: MetadataMap, pathName: string): void {
@@ -871,10 +1011,10 @@ export class ImpactPathwayService {
       objectId,
       'sections',
       pathName).pipe(
-      take(1),
-      map((result: SubmissionObject[]) => (result[0] && isEmpty(result[0].errors)) ? result[0] : null),
-      catchError(() => observableOf(null))
-    );
+        take(1),
+        map((result: SubmissionObject[]) => (result[0] && isEmpty(result[0].errors)) ? result[0] : null),
+        catchError(() => observableOf(null))
+      );
   }
 
   private executeItemPatch(objectId: string, pathName: string): Observable<Item> {
@@ -884,7 +1024,7 @@ export class ImpactPathwayService {
       pathName).pipe(
         tap((item: Item) => this.itemService.update(item)),
         catchError((error: ErrorResponse) => observableThrowError(new Error(error.errorMessage)))
-    );
+      );
   }
 
   private depositWorkspaceItem(submission: SubmissionObject): Observable<RemoteData<Item>> {
@@ -958,10 +1098,10 @@ export class ImpactPathwayService {
     }
   }
 
-  getCollapsable(impactPathwayStepId: string,impactPathwayTaskId: string) {
+  getCollapsable(impactPathwayStepId: string, impactPathwayTaskId: string) {
     return this.store.pipe(select(
-        impactPathwaySubTaskCollapsable(impactPathwayStepId, impactPathwayTaskId)
-      )
+      impactPathwaySubTaskCollapsable(impactPathwayStepId, impactPathwayTaskId)
+    )
     );
   }
 

@@ -328,7 +328,13 @@ export const environment: AppConfig = {
     projectsGrantsOptionsVocabularyName: 'item_shared',
     projectsEntityEditMode: 'CUSTOM',
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
-    excludeComparisonMetadata: ['dspace.entity.type']
+    excludeComparisonMetadata: ['dspace.entity.type'],
+    projectsFunder: {
+      searchQueryConfigurationName: 'searchProjectsForFunder',
+      searchProjectConfigurationName: 'searchProjectsForFunder',
+      searchProjectItemsConfigurationName: 'allProjectItems',
+      entityTypeFilterName: 'entityType'
+    }
   },
   impactPathway: {
     impactPathwaysFormSection: 'impact_pathway_form',

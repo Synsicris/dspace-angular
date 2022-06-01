@@ -30,6 +30,7 @@
                               [taskPosition]="i"
                               [isObjectivePage]="false"
                               [cdkDragData]="task"
+                              [compareMode]="compareMode"
                               (cdkDragStarted)="dragStarted($event)"
                               (cdkDragDropped)="drop($event)"
                               (cdkDragEntered)="dragEnteredToStep($event)"
@@ -49,7 +50,8 @@
   <div class="d-flex justify-content-end">
     <button class="btn btn-link pr-0 open-modal"
             title="{{'impact-pathway.add.btn' | translate}}"
-            (click)="createTask(); $event.stopPropagation()">
+            (click)="createTask(); $event.stopPropagation()"
+            [disabled]="compareMode">
       <i class="fas fa-plus-circle fa-2x"></i>
     </button>
   </div>

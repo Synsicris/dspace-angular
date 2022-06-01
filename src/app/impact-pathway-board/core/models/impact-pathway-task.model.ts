@@ -2,6 +2,7 @@ import { findIndex, remove } from 'lodash';
 
 import { isNotEmpty } from '../../../shared/empty.util';
 import { environment } from '../../../../environments/environment';
+import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 
 export class ImpactPathwayTask {
 
@@ -11,6 +12,8 @@ export class ImpactPathwayTask {
     public parentId?: string,
     public title?: string,
     public description?: string,
+    public compareId?: string,
+    public compareStatus?: ComparedVersionItemStatus,
     public tasks: ImpactPathwayTask[] = []) {
   }
 

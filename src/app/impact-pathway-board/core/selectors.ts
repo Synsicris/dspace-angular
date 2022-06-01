@@ -106,3 +106,13 @@ export const impactPathwayRelationsSelector = createSelector(_getImpactPathwaySt
 export function impactPathwaySubTaskCollapsable(impactPathwayStepId: string, impactPathwayTaskId: string): MemoizedSelector<AppState, ImpactPathwayTask> {
   return impactPathwaySubTaskCollapsableSelector<ImpactPathwayTask>(impactPathwayStepId, impactPathwayTaskId, impactPathwayStateSelector);
 }
+
+/**
+ * Returns true if compare mose id active.
+ * @function isCompareMode
+ * @return {boolean}
+ */
+export const isCompareMode = createSelector(_getImpactPathwayState,
+  (state: ImpactPathwayState) => state.compareMode || false
+);
+

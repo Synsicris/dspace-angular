@@ -59,6 +59,11 @@ export class EditableTextareaComponent {
   @Input() public rows = 5;
 
   /**
+   * The textarea disabled
+   */
+  @Input() public disabled = false;
+
+  /**
    * Emits the edited item when the form is submitted
    */
   @Output() contentChange: EventEmitter<Item> = new EventEmitter<Item>();

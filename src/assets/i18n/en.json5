@@ -1956,7 +1956,25 @@
 
   "explore.index.title": "Title",
 
-  "explore.index.type": "Type",
+  "explore.index.itemtype": "Item Type",
+
+  "explore.index.types": "Types",
+
+  "explore.index.language": "Language",
+
+  "explore.index.fundingParent": "Funding parent",
+
+  "explore.index.synsicrisRelationCall": "Relation call",
+
+  "explore.index.projectStartDate": "Start date",
+
+  "explore.index.projectEndDate": "End date",
+
+  "explore.index.synsicrisSubjectNace": "Subject nace",
+
+  "explore.index.synsicrisSubjectDestatis": "Subject destatis",
+
+  "explore.index.synsicrisTypeProjectContribution": "Project contribution type",
 
   "explore.search-section.infrastructure.title": "Infrastructure",
 
@@ -3331,6 +3349,8 @@
   "menu.section.browse_community_by_issue_date": "By Issue Date",
 
   "menu.section.browse_community_by_title": "By Title",
+
+  "menu.section.browse_by_projects": "Browse by projects",
 
   "menu.section.explore_infrastructure": "Infrastructure",
 
@@ -5080,6 +5100,48 @@
 
   "search.filters.filter.organizationFoundingDate.label": "Search date founded",
 
+  "search.filters.filter.fundingParent.head": "Funding",
+
+  "search.filters.filter.fundingParent.placeholder": "Funding",
+
+  "search.filters.filter.fundingParent.label": "Search funding",
+
+  "search.filters.filter.synsicrisRelationCall.head": "Relation call",
+
+  "search.filters.filter.synsicrisRelationCall.placeholder": "Relation call",
+
+  "search.filters.filter.synsicrisRelationCall.label": "Search relation call",
+
+  "search.filters.filter.projectStartDate.head": "Start date",
+
+  "search.filters.filter.projectStartDate.placeholder": "Start date",
+
+  "search.filters.filter.projectStartDate.label": "Search start date",
+
+  "search.filters.filter.projectEndDate.head": "End date",
+
+  "search.filters.filter.projectEndDate.placeholder": "End date",
+
+  "search.filters.filter.projectEndDate.label": "Search end date",
+
+  "search.filters.filter.synsicrisSubjectNace.head": "Subject nace",
+
+  "search.filters.filter.synsicrisSubjectNace.placeholder": "Subject nace",
+
+  "search.filters.filter.synsicrisSubjectNace.label": "Search subject nace",
+
+  "search.filters.filter.synsicrisSubjectDestatis.head": "Subject destatis",
+
+  "search.filters.filter.synsicrisSubjectDestatis.placeholder": "Subject destatis",
+
+  "search.filters.filter.synsicrisSubjectDestatis.label": "Search subject destatis",
+
+  "search.filters.filter.synsicrisTypeProjectContribution.head": "Project contribution",
+
+  "search.filters.filter.synsicrisTypeProjectContribution.placeholder": "Project contribution",
+
+  "search.filters.filter.synsicrisTypeProjectContribution.label": "Search project contribution",
+
   "search.filters.filter.scope.head": "Scope",
 
   "search.filters.filter.scope.placeholder": "Scope filter",
@@ -5243,6 +5305,8 @@
   "search.form.scope.all": "All of DSpace",
 
   "search.results.head": "Search Results",
+
+  "allProjectItems.search.results.head": "Search Results",
 
   "default.search.results.head": "Search Results",
 
@@ -8274,6 +8338,34 @@
 
   "layout.box.header.comment_m": "Comment",
 
-  "layout.tab.header.details": "Details"
+  "layout.tab.header.details": "Details",
+
+  "query-builder.synsicris.placeholder.select-value": "Select Value",
+
+  "query-builder.synsicris.placeholder.select-filter": "Select Filter",
+
+  "query-builder.synsicris.button.label.add-filter": "Add Filter",
+
+  "query-builder.synsicris.button.label.add-group-filter": "Add Filter Group",
+
+  "query-builder.synsicris.button.label.delete-group-filter": "Delete Group above",
+
+  "query-builder.synsicris.button.label.filter": "Filter",
+
+  "query-builder.synsicris.button.label.reset": "Reset",
+
+  "query-builder.synsicris.message.label.validation": "Fill out all the fields",
+
+  "query-builder.synsicris.label.search-all": "Search in all projects",
+
+  "query-builder.synsicris.label.search-selected": "Search in selected projects",
+
+  "query-builder.synsicris.project.browse.head": "Projects list: ",
+
+  "query-builder.synsicris.project.browse.empty": "No results",
+
+  "query-builder.synsicris.accordion.step1.header": "Step 1",
+
+  "query-builder.synsicris.accordion.step2.header": "Step 2"
 
 }

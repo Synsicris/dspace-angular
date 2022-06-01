@@ -25,7 +25,10 @@ import {
   UpdateImpactPathwaySubTaskAction,
   UpdateImpactPathwayTaskAction,
   SetImpactPathwaySubTaskCollapseAction,
-  ClearImpactPathwaySubtaskCollapseAction
+  ClearImpactPathwaySubtaskCollapseAction,
+  InitCompareAction,
+  InitCompareSuccessAction,
+  StopCompareImpactPathwayAction
 } from './impact-pathway.actions';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
@@ -72,6 +75,7 @@ export interface ImpactPathwayState {
   targetTaskId: string;
   links: ImpactPathwayLinks;
   collapsed: any;
+  compareMode: boolean;
 }
 
 const impactPathwayInitialState: ImpactPathwayState = {
@@ -92,7 +96,8 @@ const impactPathwayInitialState: ImpactPathwayState = {
     toSave: [],
     toDelete: []
   },
-  collapsed: {}
+  collapsed: {},
+  compareMode: false
 };
 
 /**
@@ -162,6 +167,22 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
     case ImpactPathwayActionTypes.INIT_IMPACT_PATHWAY_SUCCESS: {
       return initImpactPathway(state, action as InitImpactPathwaySuccessAction);
     }
+
+
+    case ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY: {
+      return initCompare(state, action as InitCompareAction);
+    }
+
+
+    case ImpactPathwayActionTypes.STOP_COMPARE_IMPACT_PATHWAY: {
+      return stopCompare(state, action as StopCompareImpactPathwayAction);
+    }
+
+
+    case ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_SUCCESS: {
+      return replaceImpactPathwaySteps(state, action as InitCompareSuccessAction);
+    }
+
 
     case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_SUCCESS: {
       return addImpactPathwayTaskToImpactPathwayStep(state, action as AddImpactPathwayTaskSuccessAction);
@@ -858,53 +879,111 @@ function removeImpactPathwayTaskRelation(state: ImpactPathwayState, action: Remo
   });
 }
 
-  /**
-   * Set the step collapsed value
-   *
-   * @param state
-   *    the current state
-   * @param impactPathwayStepId
-   *    the impactPathway step's Id
-   * @param impactPathwayTaskId
-   *    the impactPathway task's Id
-   * @param value
-   *    the value of collapsed
-   * @return ImpactPathwayState
-   *    the new state.
-   */
-  function SetImpactPathwaySubTaskCollapse(
-    state: ImpactPathwayState,
-    impactPathwayStepId: string,
-    impactPathwayTaskId: string,
-    value: boolean
-  ) {
-    const newState = Object.assign({}, state);
-    let collapsed = Object.assign({}, state.collapsed);
+/**
+ * Set the step collapsed value
+ *
+ * @param state
+ *    the current state
+ * @param impactPathwayStepId
+ *    the impactPathway step's Id
+ * @param impactPathwayTaskId
+ *    the impactPathway task's Id
+ * @param value
+ *    the value of collapsed
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function SetImpactPathwaySubTaskCollapse(
+  state: ImpactPathwayState,
+  impactPathwayStepId: string,
+  impactPathwayTaskId: string,
+  value: boolean
+) {
+  const newState = Object.assign({}, state);
+  let collapsed = Object.assign({}, state.collapsed);
 
-    if (!collapsed[impactPathwayStepId]) {
-      collapsed[impactPathwayStepId] = {};
-    }
-
-    const newCollapsedExplotationPlan = Object.assign({}, collapsed[impactPathwayStepId], {
-      [impactPathwayTaskId]:value
-    });
-
-    collapsed = Object.assign({},collapsed,{ [impactPathwayStepId]: newCollapsedExplotationPlan});
-
-    return Object.assign({}, state, { collapsed: collapsed }) as ImpactPathwayState;
+  if (!collapsed[impactPathwayStepId]) {
+    collapsed[impactPathwayStepId] = {};
   }
 
-  /**
-   * Clear the task collapsable
-   *
-   * @param state
-   *    the current state
-   * @return ImpactPathwayState
-   *    the new state.
-   */
-  function clearImpactPathwaySubTaskCollapse(
-    state: ImpactPathwayState,
-  ) {
-    return Object.assign({}, state, { collapsed: {} }) as ImpactPathwayState;
-  }
+  const newCollapsedExplotationPlan = Object.assign({}, collapsed[impactPathwayStepId], {
+    [impactPathwayTaskId]: value
+  });
+
+  collapsed = Object.assign({}, collapsed, { [impactPathwayStepId]: newCollapsedExplotationPlan });
+
+  return Object.assign({}, state, { collapsed: collapsed }) as ImpactPathwayState;
+}
+
+/**
+ * Clear the task collapsable
+ *
+ * @param state
+ *    the current state
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function clearImpactPathwaySubTaskCollapse(
+  state: ImpactPathwayState,
+) {
+  return Object.assign({}, state, { collapsed: {} }) as ImpactPathwayState;
+}
+
+/**
+ * Init state for comparing.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitCompareAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function initCompare(state: ImpactPathwayState, action: InitCompareAction) {
+  return Object.assign({}, state, {
+    compareImpactPathwayId: action.payload.compareImpactPathwayId,
+    compareMode: true,
+    processing:true
+  });
+}
+
+/**
+ * Stop state for comparing.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitCompareAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function stopCompare(state: ImpactPathwayState, action: StopCompareImpactPathwayAction) {
+  return Object.assign({}, state, {
+    compareImpactPathwayId: null,
+    compareMode: false,
+  });
+}
+
+
+/**
+ * replace impact pathway steps & tasks.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitCompareAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function replaceImpactPathwaySteps(state: ImpactPathwayState, action: InitCompareSuccessAction) {
+
+  const objects = state.objects;
+
+  return Object.assign({}, state, { processing: false }, {
+    objects: Object.assign({}, objects, {
+      [action.payload.impactPathwayId]: Object.assign(new ImpactPathway(), objects[action.payload.impactPathwayId], { steps: action.payload.steps })
+    })
+  });
+
+}
 
