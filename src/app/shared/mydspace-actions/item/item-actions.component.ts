@@ -129,12 +129,17 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
     this.isRedirectingToEdit$.next(true);
     this.editItemDataService.searchEditModesByID(this.object.id).pipe(
       filter((editModes: EditItemMode[]) => editModes && editModes.length > 0),
+      map((editModes: EditItemMode[]) => editModes.filter((mode: EditItemMode) => this.isEditModeAllowed(mode))),
       map((editModes: EditItemMode[]) => editModes[0]),
-      take(1)
+      take(1),
     ).subscribe((editMode: EditItemMode) => {
       this.router.navigate(['edit-items', this.object.id + ':' + editMode.name]);
       this.isRedirectingToEdit$.next(false);
     });
+  }
+
+  private isEditModeAllowed(mode: EditItemMode) {
+    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode || mode.name === 'OWNER';
   }
 
   /**
