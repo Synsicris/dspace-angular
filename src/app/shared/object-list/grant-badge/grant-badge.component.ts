@@ -72,14 +72,12 @@ export class GrantBadgeComponent implements OnInit {
     if (isNotEmpty(this.policyGroup)) {
       if (this.projectShared === ProjectGrantsTypes.Parentproject) {
         this.badgeMessage.next(this.translate.instant('item.grant.badge.parentproject'));
-        console.log(this.badgeMessage.value);
       } else {
         const communityId = this.projectGroupService.getCommunityIdByGroupName(this.policyGroup);
         this.projectService.getProjectItemByProjectCommunityId(communityId)
           .subscribe((projectItemRD: RemoteData<Item>) => {
             const projectItemName = (projectItemRD.hasSucceeded) ? projectItemRD.payload?.name : '';
             this.badgeMessage.next(this.translate.instant('item.grant.badge.project',{ name: projectItemName } ));
-            console.log(projectItemRD);
           });
       }
     }
