@@ -2,7 +2,7 @@
    class="badge badge-primary"
    title="{{'item.version.list.remove-text' | translate}}"
    (click)="$event.preventDefault(); $event.stopImmediatePropagation(); onVersionDeselected()">
-  {{('item.version.list.selected-text' | translate) + (currentVersion.value |  date:'medium')}} <i class="fas fa-times"></i>
+  {{('item.version.list.selected-text' | translate) + currentVersion.value.title + ' ' + (currentVersion.value.date |  date:'medium')}} <i class="fas fa-times"></i>
 </a>
 
 <div ngbDropdown class="d-inline-block">
