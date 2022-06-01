@@ -1700,7 +1700,7 @@
 
   "confirmation-modal.pending-changes.confirm": "Leave",
 
-  "comment.listelement.badge" : "Comment",
+  "comment.listelement.badge": "Comment",
 
   "dataset.listelement.badge": "Dataset",
 
@@ -8248,8 +8248,6 @@
 
   "working-plan.chart.toolbar.versions": "Versions",
 
-  "comment.listelement.badge": "Comment",
-
   "tree.description.countries2": "Country selection",
 
   "tree.description.nace": "Industry selection",
@@ -8274,6 +8272,98 @@
 
   "layout.box.header.comment_m": "Comment",
 
-  "layout.tab.header.details": "Details"
+  "layout.tab.header.details": "Details",
+
+  "layout.tab.header.person_projects": "My projects",
+
+  "layout.tab.header.OrgUnit": "Organisations",
+
+  "layout.tab.header.programme": "Programmes",
+
+  "layout.tab.header.call": "Calls",
+
+  "layout.tab.header.fundingobjective": "Funding objectives",
+
+  "layout.box.header.OrgUnit": "Organisations",
+
+  "layout.box.header.programme": "Programmes",
+
+  "layout.box.header.call": "Calls",
+
+  "layout.box.header.fundingobjective": "Funding objectives",
+
+  "layout.box.header.OrgUnit_m": "Organisation",
+
+  "layout.box.header.programme_m": "Programme",
+
+  "layout.box.header.call_m": "Call",
+
+  "layout.box.header.fundingobjective_m": "Funding objective",
+
+  "layout.field.label.OrgUnit.dc.title": "Title",
+
+  "layout.field.label.OrgUnit.organization.identifier": "Organisation-ID",
+
+  "layout.field.label.OrgUnit.organization.parentOrganization": "Parent organisation",
+
+  "layout.field.label.OrgUnit.synsicris.address.addressStreetnamenumber": "Streetname, Building number",
+
+  "layout.field.label.OrgUnit.synsicris.address.addressPostcode": "Postcode",
+
+  "layout.field.label.OrgUnit.synsicris.address.addressCity": "City",
+
+  "layout.field.label.OrgUnit.synsicris.address.addressPostbox": "Postbox",
+
+  "layout.field.label.OrgUnit.organization.address.addressCountry": "Country",
+
+  "layout.field.label.OrgUnit.oairecerif.identifier.url": "Web adress",
+
+  "layout.field.label.OrgUnit.synsicris.orgunits.email": "Email",
+
+  "layout.field.label.OrgUnit.synsicris.orgunits.phone": "Phone",
+
+  "layout.field.label.OrgUnit.synsicris.type.legalform": "Legal form",
+
+  "layout.field.label.OrgUnit.synsicris.type.orgform": "Organisational form",
+
+  "layout.field.label.OrgUnit.synsicris.type.publicfunded": "The organisation is mainly financed by public funding.",
+
+  "layout.field.label.OrgUnit.synsicris.title.registercourt": "Register court",
+
+  "layout.field.label.OrgUnit.synsicris.identifier.registernumber": "Register number",
+
+  "layout.field.label.OrgUnit.dc.type": "Societal area of the organisation",
+
+  "layout.field.label.OrgUnit.synsicris.subject.nace": "Economic sector",
+
+  "layout.field.label.OrgUnit.synsicris.subject.destatis": "Discipline",
+
+  "layout.field.label.OrgUnit.synsicris.subject.political": "Policy level",
+
+  "layout.field.label.programme.dc.description": "Description",
+
+  "layout.field.label.programme.oairecerif.acronym": "Acronym",
+
+  "layout.field.label.programme.dc.title": "Title",
+
+  "layout.field.label.programme.synsicris.title.ressort": "Funding Ministry",
+
+  "layout.field.label.call.dc.title": "Title",
+
+  "layout.field.label.call.oairecerif.acronym": "Acronym",
+
+  "layout.field.label.call.dc.description": "Description",
+
+  "layout.field.label.call.dc.type": "Type",
+
+  "layout.field.label.call.oairecerif.fundingParent": "Related call",
+
+  "layout.field.label.call.synsicris.contact": "Contact information",
+
+  "layout.field.label.call.synsicris.call.startDate": "Start date",
+
+  "layout.field.label.call.synsicris.call.endDate": "End date",
+
+  "layout.field.label.call.oairecerif.identifier.url": "Web adress"
 
 }
