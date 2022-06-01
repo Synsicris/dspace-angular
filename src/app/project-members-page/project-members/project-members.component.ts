@@ -73,7 +73,7 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
     this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
   }
 
-  sendInvitation(email: string) {
+  sendInvitation(email?: string) {
     let groups$: Observable<string[]>;
     if (!this.isSubproject) {
       if (this.isAdminGroup) {

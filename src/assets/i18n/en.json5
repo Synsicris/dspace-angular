@@ -4398,13 +4398,13 @@
 
   "project.manage.menu.subproject": "<i class=\"fas fa-toolbox\"></i> Manage subproject members",
 
-  "project.manage.breadcrumbs": "Manage project members",
+  "project.manage.breadcrumbs": "Invitation and management of project coordinators",
 
-  "project.manage.page.title": "Manage project members",
+  "project.manage.page.title": "Invitation and management of project coordinators",
 
-  "project.manage.members.admin-group": "Manage project coordinators",
+  "project.manage.members.admin-group": "Invitation and management of {{project}} coordinators",
 
-  "project.manage.members.members-group": "<i class=\"fas fa-toolbox\"></i> Manage project members",
+  "project.manage.members.members-group": "Invitation and management of {{project}} members",
 
   "project.manage.members-list.head": "Manage group",
 
@@ -4445,6 +4445,24 @@
   "project.manage.members-list.no-members-yet": "No members in group yet, search and add.",
 
   "project.manage.members-list.no-items": "No EPeople found in that search",
+
+  "project.manage.members-list.invite": "Invite person(s) who are not yet registered",
+
+  "project.manage.members-list.table.email": "E-mail",
+
+  "project.manage.members-list.modal.withdraw.title": "Withdraw role",
+
+  "project.manage.members-list.modal.withdraw.body": "Are you sure?",
+
+  "project.manage.members-list.modal.withdraw.confirm": "Yes, i'm sure",
+
+  "project.manage.members-list.modal.withdraw.close": "Cancel",
+
+  "project.manage.members-list.table.withdraw": "Withdraw role",
+
+  "project.manage.members-list.table.withdraw.tooltip": "You can withdraw role",
+
+  "project.manage.members-list.table.withdraw.send": "Send Invitation",
 
   "project.page.contributor": "Contributors",
 
@@ -6807,6 +6825,10 @@
   "invitation.accept-btn": "Accept",
 
   "invitation.ignore-btn": "Ignore",
+
+  "invitation.group.admin": "Coordinators group of",
+
+  "invitation.group.members": "Members group of",
 
   "working-plan.breadcrumbs": "Working plan",
 

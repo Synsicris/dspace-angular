@@ -1,3 +1,5 @@
+import { NotificationsService } from './../../../shared/notifications/notifications.service';
+import { Observable } from 'rxjs/internal/Observable';
 import { ChangeDetectorRef, Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
@@ -39,6 +41,8 @@ import { getMockSectionUploadService } from '../../../shared/mocks/section-uploa
 import { SubmissionUploadsModel } from '../../../core/config/models/config-submission-uploads.model';
 import { buildPaginatedList } from '../../../core/data/paginated-list.model';
 import { PageInfo } from '../../../core/shared/page-info.model';
+import { SubmissionUploadFilesComponent } from '../../form/submission-upload-files/submission-upload-files.component';
+import { NotificationsServiceStub } from '../../../shared/testing/notifications-service.stub';
 
 function getMockSubmissionUploadsConfigService(): SubmissionFormsConfigService {
   return jasmine.createSpyObj('SubmissionUploadsConfigService', {
@@ -184,6 +188,8 @@ describe('SubmissionSectionUploadComponent test suite', () => {
         { provide: SectionUploadService, useValue: bitstreamService },
         { provide: 'sectionDataProvider', useValue: sectionObject },
         { provide: 'submissionIdProvider', useValue: submissionId },
+        { provide: NotificationsService, useValue: new NotificationsServiceStub() },
+        { provide: 'submissionUploaderRefProvider', useValue: observableOf(TestBed.createComponent(SubmissionUploadFilesComponent)) }, // To be inserted the right mockup
         ChangeDetectorRef,
         SubmissionSectionUploadComponent
       ],

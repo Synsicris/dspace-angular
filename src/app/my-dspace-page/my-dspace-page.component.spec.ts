@@ -24,7 +24,8 @@ describe('MyDSpacePageComponent', () => {
   });
 
   const myDSpaceConfigurationServiceStub: SpyObj<MyDSpaceConfigurationService> = jasmine.createSpyObj('MyDSpaceConfigurationService', {
-    getAvailableConfigurationOptions: jasmine.createSpy('getAvailableConfigurationOptions')
+    getAvailableConfigurationOptions: jasmine.createSpy('getAvailableConfigurationOptions'),
+    getCurrentScope: jasmine.createSpy('getCurrentScope'),
   });
 
   const configurationList = [

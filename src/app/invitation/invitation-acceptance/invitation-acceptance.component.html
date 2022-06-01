@@ -1,4 +1,4 @@
-<div class="container border rounded" >
+<div class="container border rounded">
   <h2 class="font-weight-bold py-3">{{'invitation.group.msg' | translate}}
   </h2>
   <hr>
@@ -6,8 +6,8 @@
     <div class="row">
       <div class="col-12">
         <ul>
-          <li *ngFor="let group of registrationData.groupNames">
-            {{group}}
+          <li *ngFor="let group of invitationsGroupData$ | async; let i = index">
+            {{ 'invitation.group.'+group.type | translate }} {{group.community.firstMetadataValue('dc.title')}}
           </li>
         </ul>
       </div>

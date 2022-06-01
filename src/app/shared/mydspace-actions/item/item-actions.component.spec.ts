@@ -1,3 +1,4 @@
+import { AuthorizationDataService } from './../../../core/data/feature-authorization/authorization-data.service';
 import { ChangeDetectionStrategy, Injector, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
@@ -58,6 +59,10 @@ const searchService = getMockSearchService();
 
 const requestServce = getMockRequestService();
 
+const authorizationDataService: AuthorizationDataService = jasmine.createSpyObj('AuthorizationDataService', {
+  isAuthorized: observableOf(true)
+});
+
 describe('ItemActionsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -76,7 +81,8 @@ describe('ItemActionsComponent', () => {
         { provide: ItemDataService, useValue: mockDataService },
         { provide: NotificationsService, useValue: new NotificationsServiceStub() },
         { provide: SearchService, useValue: searchService },
-        { provide: RequestService, useValue: requestServce }
+        { provide: RequestService, useValue: requestServce },
+        { provide: AuthorizationDataService, useValue: authorizationDataService },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(ItemActionsComponent, {

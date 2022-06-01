@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EditItemDataService } from '../../../../core/submission/edititem-data.service';
 
 import { WorkingPlanChartItemEditButtonComponent } from './working-plan-chart-item-edit-button.component';
 
@@ -6,11 +7,18 @@ describe('WorkingPlanChartItemEditButtonComponent', () => {
   let component: WorkingPlanChartItemEditButtonComponent;
   let fixture: ComponentFixture<WorkingPlanChartItemEditButtonComponent>;
 
+  const editItemDataService = jasmine.createSpyObj('EditItemDataService', {
+    checkEditModeByIDAndType: jasmine.createSpy('checkEditModeByIDAndType'),
+  });
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WorkingPlanChartItemEditButtonComponent ]
+      declarations: [WorkingPlanChartItemEditButtonComponent],
+      providers: [
+        { provide: EditItemDataService, useValue: editItemDataService }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

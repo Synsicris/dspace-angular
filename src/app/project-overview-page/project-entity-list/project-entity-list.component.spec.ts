@@ -1,4 +1,8 @@
+import { TranslateLoaderMock } from './../../shared/testing/translate-loader.mock';
+import { MockActivatedRoute } from './../../shared/mocks/active-router.mock';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { ProjectEntityListComponent } from './project-entity-list.component';
 
@@ -8,9 +12,20 @@ describe('ProjectEntityListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectEntityListComponent ]
+      declarations: [ProjectEntityListComponent],
+      imports: [
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateLoaderMock
+          }
+        }),
+      ],
+      providers: [
+        { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

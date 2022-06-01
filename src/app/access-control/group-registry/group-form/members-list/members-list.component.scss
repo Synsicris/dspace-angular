@@ -1,0 +1,12 @@
+.invite-person-section {
+    display: flex;
+
+    // justify-content: space-between;
+    .title {
+        font-size: 1.4em;
+    }
+}
+
+.fa-user-slash {
+    color: var(--bs-primary);
+}
