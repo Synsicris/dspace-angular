@@ -1,0 +1,58 @@
+<div class="container">
+  <ngb-accordion #accordionRef activeIds="step1">
+    <ngb-panel id="step1">
+      <ng-template ngbPanelTitle>
+        <span class="float-left" [innerHTML]="'query-builder.synsicris.accordion.step1.header' | translate" tabindex="0">Step 1</span>
+        <div class="d-inline-block float-right">
+          <a class="close"
+             tabindex="0"
+             role="button"
+             [attr.aria-label]="(accordionRef.isExpanded('step1') ? 'cris-layout.toggle.aria.close' : 'cris-layout.toggle.aria.open') | translate: {sectionHeader: 'Step 1'}"
+             [title]="(accordionRef.isExpanded('step1') ? 'cris-layout.toggle.close' : 'cris-layout.toggle.open') | translate">
+            <span *ngIf="accordionRef.isExpanded('step1')" class="fas fa-chevron-up fa-fw"></span>
+            <span *ngIf="!accordionRef.isExpanded('step1')" class="fas fa-chevron-down fa-fw"></span>
+          </a>
+        </div>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <div class="btn-group btn-group-toggle mb-4">
+          <label class="btn-outline-info" ngbButtonLabel>
+            <input type="checkbox" ngbButton [(ngModel)]="searchAll" (change)="onTabSelect(1)" />
+            {{"query-builder.synsicris.label.search-all" | translate }}
+          </label>
+          <label class="btn-outline-info" ngbButtonLabel>
+            <input type="checkbox" ngbButton [(ngModel)]="searchSelected" (change)="onTabSelect(2)" />
+            {{"query-builder.synsicris.label.search-selected" | translate }}
+          </label>
+        </div>
+        <div class="builder-container" *ngIf="searchSelected">
+          <ds-query-builder [configurationName]="queryBuilderConfigurationName" (onQueryCompose)="getSearchQuery($event)">
+          </ds-query-builder>
+        </div>
+        <ng-container *ngIf="searchAll || (searchSelected && searchQuery)">
+          <ds-selected-project-list [query]="searchQuery" [configuration]="projectsConfigurationName">
+          </ds-selected-project-list>
+        </ng-container>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel id="step2">
+      <ng-template ngbPanelTitle>
+        <span class="float-left" [innerHTML]="'query-builder.synsicris.accordion.step2.header' | translate" tabindex="0"></span>
+        <div class="d-inline-block float-right">
+          <a class="close"
+             tabindex="0"
+             role="button"
+             [attr.aria-label]="(accordionRef.isExpanded('step2') ? 'cris-layout.toggle.aria.close' : 'cris-layout.toggle.aria.open') | translate: {sectionHeader: 'Step 2'}"
+             [title]="(accordionRef.isExpanded('step2') ? 'cris-layout.toggle.close' : 'cris-layout.toggle.open') | translate">
+            <span *ngIf="accordionRef.isExpanded('step2')" class="fas fa-chevron-up fa-fw"></span>
+            <span *ngIf="!accordionRef.isExpanded('step2')" class="fas fa-chevron-down fa-fw"></span>
+          </a>
+        </div>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <ds-projects-scoped-search [configuration]="projectItemsConfigurationName"
+                                   [query]="searchQuery"></ds-projects-scoped-search>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>

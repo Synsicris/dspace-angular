@@ -68,7 +68,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
   }
 
   createWorkpackage() {
-    const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg', keyboard: false, backdrop: 'static' });
 
     modalRef.result.then((result) => {
       if (result) {

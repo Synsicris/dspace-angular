@@ -1,0 +1,120 @@
+<div class="container query-group-container">
+  <form [formGroup]="formGroup">
+    <div class="row">
+      <div class="col-md-3">
+        <ng-select
+          #firstSelect
+          formControlName="defaultFilter"
+          class="px-0"
+          [virtualScroll]="true"
+          [clearable]="false"
+          [loading]="isValueListLoading && firstSelect.isOpen"
+          [placeholder]="
+            'query-builder.synsicris.placeholder.select-value' | translate
+          "
+          (change)="onDefaultValueSelect($event)"
+          (scrollToEnd)="getSearchFilterConfigs()"
+        >
+          <ng-option
+            *ngFor="let value of firstDefaultValues"
+            [value]="value"
+            [disabled]="value.disable"
+          >
+            {{ value.label | titlecase }}
+          </ng-option>
+        </ng-select>
+      </div>
+      <div class="col-md-9">
+        <div
+          formArrayName="queryGroup"
+          class="row mb-3"
+          *ngFor="
+            let queryStatement of queryGroup.controls;
+            let i = index;
+            let isLast = last
+          "
+        >
+          <!-- FormGroup -->
+          <div class="w-100 d-flex" [formGroupName]="i">
+            <ng-select
+              formControlName="filter"
+              class="col-md-3 px-0 mr-1"
+              [virtualScroll]="true"
+              [clearable]="false"
+              [loading]="isFilterListLoading"
+              [placeholder]="
+                'query-builder.synsicris.placeholder.select-filter' | translate
+              "
+              (change)="onFilterSelect($event, i)"
+            >
+              <ng-option
+                *ngFor="let filter of secondColumnFilters"
+                [value]="filter.name"
+              >
+                {{ "explore.index." + filter.name | translate }}
+              </ng-option>
+            </ng-select>
+
+            <ng-select
+              #select
+              formControlName="value"
+              class="col-md-3 px-0 mr-1"
+              [virtualScroll]="true"
+              [clearable]="false"
+              [loading]="isValueListLoading && select.isOpen"
+              [placeholder]="
+                'query-builder.synsicris.placeholder.select-value' | translate
+              "
+              (open)="calcValueSelection(queryGroup.get(i + '.filter')?.value)"
+              (change)="
+                onValueSelect($event, queryGroup.get(i + '.filter')?.value, i)
+              "
+              (scrollToEnd)="
+                onValuesScroll(queryGroup.get(i + '.filter')?.value, i)
+              "
+            >
+              <ng-option
+                *ngFor="
+                  let value of filterFacetValues(i)
+                "
+                [value]="value"
+                [disabled]="value.disable"
+              >
+                {{ value.label | titlecase }}
+              </ng-option>
+            </ng-select>
+
+            <div class="col-md-3 text-center" *ngIf="isLast">
+              <button
+                [disabled]="!queryGroup.get(i + '.value')?.value"
+                id="addButton"
+                type="button"
+                class="btn btn-dark"
+                (click)="addQueryStatement(i)"
+              >
+                <i aria-hidden="true" class="fa fa-plus"></i>
+                {{
+                  "query-builder.synsicris.button.label.add-filter" | translate
+                }}
+              </button>
+            </div>
+            <div class="col-md-3 p-0 text-center" *ngIf="!isLast">
+              <span>AND</span>
+            </div>
+
+            <div class="col-md-1 p-0 text-right" *ngIf="queryGroup.length > 1">
+              <button
+                id="deleteButton"
+                type="button"
+                class="btn btn-danger"
+                (click)="deleteCondition(i, queryGroup.get(i + '.value'))"
+              >
+                <i aria-hidden="true" class="fa fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

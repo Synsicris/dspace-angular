@@ -106,7 +106,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
         }
       })
     ).subscribe(([impactPathwayStep, authorityScopeUUID]: [ImpactPathwayStep, string]) => {
-      const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg' });
+      const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg', keyboard: false, backdrop: 'static' });
 
       modalRef.result.then((result) => {
         if (result) {

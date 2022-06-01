@@ -41,8 +41,8 @@ export class CoordinatorPageResolver implements Resolve<RemoteData<Item>> {
           return this.authService.getAuthenticatedUserFromStore().pipe(
             switchMap((eperson: EPerson) => {
               return this.researcherProfileService.findById(eperson.id).pipe(
-                take(1),
                 filter((researcherProfile) => isNotEmpty(researcherProfile)),
+                take(1),
                 mergeMap((researcherProfile) => this.researcherProfileService.findRelatedItemId(researcherProfile)),
                 mergeMap((researcherProfileID) => this.itemService.findById(researcherProfileID)),
                 getFirstCompletedRemoteData(),

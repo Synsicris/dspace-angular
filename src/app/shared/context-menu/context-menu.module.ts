@@ -1,3 +1,4 @@
+import { EditItemPermissionsMenuComponent } from './edit-item-permissions/edit-item-permissions-menu.component';
 import { SharedModule } from './../shared.module';
 import { Version } from './../../core/shared/version.model';
 import { NgModule } from '@angular/core';
@@ -53,7 +54,8 @@ const COMPONENTS = [
   EasyOnlineImportMenuComponent,
   CreateProjectMenuComponent,
   ViewProjectItemsMenuComponent,
-  ManageProjectMembersMenuComponent
+  ManageProjectMembersMenuComponent,
+  EditItemPermissionsMenuComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -76,7 +78,8 @@ const ENTRY_COMPONENTS = [
   EasyOnlineImportMenuComponent,
   CreateProjectMenuComponent,
   ViewProjectItemsMenuComponent,
-  ManageProjectMembersMenuComponent
+  ManageProjectMembersMenuComponent,
+  EditItemPermissionsMenuComponent
 ];
 
 const MODULE = [

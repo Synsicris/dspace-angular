@@ -21,6 +21,12 @@ export class ProjectGroupService {
     protected groupService: GroupDataService) {
   }
 
+  getCommunityIdByGroupName(groupName: string): string {
+    const groupNameArray = groupName.split('_');
+
+    return groupNameArray[1];
+  }
+
   getProjectAdminsGroupNameByCommunity(project: Community): string {
     return PROJECT_ADMIN_GROUP_TEMPLATE.replace('%s', project.uuid);
   }

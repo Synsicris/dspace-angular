@@ -1680,6 +1680,13 @@
   dependencies:
     tslib "^2.0.0"
 
+"@ng-select/ng-select@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-6.1.0.tgz#c0575d963a1871dcf72d38186598c7c71d26dd49"
+  integrity sha512-uro/zIjL+TRWzbrzNN9IjIusOeLfhCn9cIr5Bq3AsJyxyU7Gdj9kOD5wVrrQ0NVkaQ1BJMcWmUvmYGBXLI6cnA==
+  dependencies:
+    tslib "^2.0.0"
+
 "@ngrx/effects@^11.1.1":
   version "11.1.1"
   resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-11.1.1.tgz#82abd97df8c1cdf1d9bd0bf720289591230d260c"

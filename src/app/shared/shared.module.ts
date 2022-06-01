@@ -230,6 +230,7 @@ import { ThemedSearchSectionComponent } from './explore/section-component/search
 import { ThemedTextSectionComponent } from './explore/section-component/text-section/themed-text-section.component';
 import { ThemedBrowseMostElementsComponent } from './browse-most-elements/themed-browse-most-elements.component';
 import { ThemedItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/themed-item-list-preview.component';
+import { SearchChartBarHorizontalComponent } from './search/search-charts/search-chart/search-chart-bar-horizontal/search-chart-bar-horizontal.component';
 import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { TaskColorDirective } from '../impact-pathway-board/shared/impact-path-way/impact-path-way-task/task.directive';
 import { AuthorityTypeaheadComponent } from './authority-typeahead/authority-typeahead.component';
@@ -241,6 +242,7 @@ import { ItemCreateComponent } from './item/item-create/item-create.component';
 import { AuthorityDropdownComponent } from './authority-dropdown/authority-dropdown.component';
 import { ItemVersionListComponent } from './item-version-list/item-version-list.component';
 import { CompareItemComponent } from './compare-item/compare-item.component';
+import { GrantBadgeComponent } from './object-list/grant-badge/grant-badge.component';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -266,7 +268,7 @@ const MODULES = [
   CdkTreeModule,
   ChartsModule,
   MaterialModule,
-  FlexLayoutModule
+  FlexLayoutModule,
 ];
 
 const ROOT_MODULES = [
@@ -464,6 +466,7 @@ const COMPONENTS = [
   ThemedSearchSectionComponent,
   ThemedTextSectionComponent,
   ThemedBrowseMostElementsComponent,
+  SearchChartBarHorizontalComponent,
   CreateImpactPathwayComponent,
   AuthorityTypeaheadComponent,
   AuthorityDropdownComponent,
@@ -471,7 +474,8 @@ const COMPONENTS = [
   InvitationModalComponent,
   EditItemGrantsModalComponent,
   ItemVersionListComponent,
-  CompareItemComponent
+  CompareItemComponent,
+  GrantBadgeComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -551,6 +555,7 @@ const ENTRY_COMPONENTS = [
   ThemedSearchSectionComponent,
   ThemedTextSectionComponent,
   ThemedBrowseMostElementsComponent,
+  SearchChartBarHorizontalComponent
 ];
 
 const SHARED_ITEM_PAGE_COMPONENTS = [

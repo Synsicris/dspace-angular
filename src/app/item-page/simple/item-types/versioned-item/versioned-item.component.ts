@@ -47,7 +47,7 @@ export class VersionedItemComponent extends ItemComponent {
     const versionHref = item._links.version.href;
 
     // Open modal
-    const activeModal = this.modalService.open(ItemVersionsSummaryModalComponent);
+    const activeModal = this.modalService.open(ItemVersionsSummaryModalComponent, { keyboard: false, backdrop: 'static' });
 
     // Show current version in modal
     this.versionService.findByHref(versionHref).pipe(getFirstCompletedRemoteData()).subscribe((res: RemoteData<Version>) => {
@@ -63,6 +63,8 @@ export class VersionedItemComponent extends ItemComponent {
     ).subscribe((res: RemoteData<Version>) => {
       // show success/failure notification
       this.itemVersionShared.notifyCreateNewVersion(res);
+      this.itemService.invalidateItemCache(item.uuid);
+      this.versionHistoryService.invalidateAllVersionHistoryCache();
       this.modalService.dismissAll();
     });
 

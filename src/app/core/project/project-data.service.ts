@@ -65,6 +65,8 @@ export const PROJECT_ENTITY = 'Project';
 export const PROJECT_ENTITY_METADATA = 'synsicris.relation.entity_project';
 export const SUBCONTRACTOR_ENTITY_METADATA = 'subcontractor';
 export const PROJECTPATNER_ENTITY_METADATA = 'projectpartner';
+export const POLICY_GROUP_METADATA = 'cris.policy.group';
+export const POLICY_SHARED_METADATA = 'cris.project.shared';
 
 export enum ProjectGrantsTypes {
   Parentproject = 'parentproject',

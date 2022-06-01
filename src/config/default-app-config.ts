@@ -400,7 +400,7 @@ export class DefaultAppConfig implements AppConfig {
     ],
     itemPage: {
       default: {
-          orientation: 'vertical'
+        orientation: 'vertical'
       },
     },
     metadataBox: {
@@ -517,7 +517,13 @@ export class DefaultAppConfig implements AppConfig {
       'impactpathway.relation.parent', 'impactpathway.relation.step', 'impactpathway.relation.task',
       'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
       'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
-    ]
+    ],
+    projectsFunder: {
+      searchQueryConfigurationName: 'searchProjectsForFunder',
+      searchProjectConfigurationName: 'searchAllProjectForFunder',
+      searchProjectItemsConfigurationName: 'allProjectItems',
+      entityTypeFilterName: 'entityType'
+    }
   };
 
   exploitationPlan = {
@@ -531,6 +537,24 @@ export class DefaultAppConfig implements AppConfig {
   };
 
   displayItemSearchResult = {
+    default: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+    ],
     Publication: [
       {
         metadata: [
@@ -548,7 +572,7 @@ export class DefaultAppConfig implements AppConfig {
           },
           {
             name: 'dc.contributor.author',
-            type: DisplayItemMetadataType.Date
+            type: DisplayItemMetadataType.Text
           }
         ]
       },
@@ -594,6 +618,66 @@ export class DefaultAppConfig implements AppConfig {
           }
         ]
       },
+    ],
+    comment: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.type',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.date.reminder',
+            type: DisplayItemMetadataType.Date
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.date.creation',
+            type: DisplayItemMetadataType.Date
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.creator',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text,
+            truncatable: true
+          }
+        ]
+      }
     ]
   };
+
+  comments = {
+    commentEditFormName: 'comments',
+    commentEditFormSection: 'comments',
+    commentEditMode: 'CUSTOM',
+    commentEntityType: 'comment',
+    commentRelationItemMetadata: 'synsicris.relation.item'
+  };
+
 }

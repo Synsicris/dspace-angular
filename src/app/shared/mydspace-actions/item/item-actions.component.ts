@@ -37,6 +37,11 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   @Input() object: Item;
 
   /**
+   * A boolean representing if edit permission button can be shown
+   */
+  @Input() showEditPermission = true;
+
+  /**
    * A boolean representing if component is redirecting to edit page
    * @type {BehaviorSubject<boolean>}
    */
@@ -68,14 +73,14 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    * @param {NgbModal} modalService
    */
   constructor(protected authorizationService: AuthorizationDataService,
-              protected injector: Injector,
-              protected router: Router,
-              protected notificationsService: NotificationsService,
-              protected translate: TranslateService,
-              protected searchService: SearchService,
-              protected requestService: RequestService,
-              protected editItemDataService: EditItemDataService,
-              protected modalService: NgbModal) {
+    protected injector: Injector,
+    protected router: Router,
+    protected notificationsService: NotificationsService,
+    protected translate: TranslateService,
+    protected searchService: SearchService,
+    protected requestService: RequestService,
+    protected editItemDataService: EditItemDataService,
+    protected modalService: NgbModal) {
     super(Item.type, injector, router, notificationsService, translate, searchService, requestService);
   }
 
