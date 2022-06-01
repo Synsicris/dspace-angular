@@ -65,7 +65,7 @@ export class FormBuilderService extends DynamicFormService {
       autoSave: false
     };
     const context: DynamicFormArrayGroupModel = (model?.parent instanceof DynamicFormArrayGroupModel) ? model?.parent : null;
-    return {$event, context, control: control, group: group, model: model, type};
+    return { $event, context, control: control, group: group, model: model, type };
   }
 
   getTypeBindModel() {
@@ -317,10 +317,10 @@ export class FormBuilderService extends DynamicFormService {
   }
 
   modelFromConfiguration(submissionId: string, json: string | SubmissionFormsModel, scopeUUID: string, sectionData: any = {},
-                         submissionScope?: string, readOnly = false, typeBindModel = null,
-                         isInnerForm = false, securityConfig: any = null): DynamicFormControlModel[] | never {
-     let rows: DynamicFormControlModel[] = [];
-     const rawData = typeof json === 'string' ? JSON.parse(json, parseReviver) : json;
+    submissionScope?: string, readOnly = false, typeBindModel = null,
+    isInnerForm = false, securityConfig: any = null): DynamicFormControlModel[] | never {
+    let rows: DynamicFormControlModel[] = [];
+    const rawData = typeof json === 'string' ? JSON.parse(json, parseReviver) : json;
     if (rawData.rows && !isEmpty(rawData.rows)) {
       rawData.rows.forEach((currentRow) => {
         const rowParsed = this.rowParser.parse(submissionId, currentRow, scopeUUID, sectionData, submissionScope, readOnly, isInnerForm, securityConfig);
@@ -586,20 +586,18 @@ export class FormBuilderService extends DynamicFormService {
    * @param formArrayModel formArrayModel model of forms that will be created
    */
   copyFormArrayGroup(index: number, formArray: FormArray, formArrayModel: DynamicFormArrayModel) {
+    const groupModel = formArrayModel.insertGroup(index);
+    const previousGroup = formArray.controls[index] as FormGroup;
+    const newGroup = this.createFormGroup(groupModel.group, null, groupModel);
+    const previousKey = Object.keys(previousGroup.getRawValue())[0];
+    const newKey = Object.keys(newGroup.getRawValue())[0];
 
-      const groupModel = formArrayModel.insertGroup(index);
-      const previousGroup = formArray.controls[index] as FormGroup;
-      const newGroup = this.createFormGroup(groupModel.group, null, groupModel);
-      const previousKey = Object.keys(previousGroup.getRawValue())[0];
-      const newKey = Object.keys(newGroup.getRawValue())[0];
+    if (!isObjectEmpty(previousGroup.getRawValue()[previousKey])) {
+      newGroup.get(newKey).patchValue(previousGroup.getRawValue()[previousKey]);
+    }
 
-      if (!isObjectEmpty(previousGroup.getRawValue()[previousKey])) {
-        newGroup.get(newKey).setValue(previousGroup.getRawValue()[previousKey]);
-      }
-
-      formArray.insert(index, newGroup);
-
-      return newGroup;
+    formArray.insert(index, newGroup);
+    return newGroup;
   }
 
 
