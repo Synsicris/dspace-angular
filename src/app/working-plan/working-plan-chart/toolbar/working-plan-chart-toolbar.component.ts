@@ -4,7 +4,9 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
+import {
+  CreateSimpleItemModalComponent
+} from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
 import { WorkingPlanService } from '../../core/working-plan.service';
 import { WorkingPlanStateService } from '../../core/working-plan-state.service';
@@ -45,6 +47,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
   @Input() public compareMode: Observable<boolean>;
 
   workpackagesCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  currentComparingWorkingPlan: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   chartDateView: Observable<ChartDateViewType>;
   ChartDateViewType = ChartDateViewType;
 
@@ -63,6 +66,10 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
     this.subs.push(this.workpackages.pipe(map((workpackages: Workpackage[]) => workpackages.length))
       .subscribe((count) => {
         this.workpackagesCount.next(count);
+      }),
+      this.workingPlanStateService.getCurrentComparingWorkingPlan().pipe(
+      ).subscribe((compareItemId: string) => {
+        this.currentComparingWorkingPlan.next(compareItemId);
       })
     );
   }
