@@ -535,7 +535,7 @@ export class QueryConditionGroupComponent implements OnInit {
         });
       }
     });
-    if(isNil(mode)){
+    if (isNil(mode)) {
       this.searchOptQuery = queries.join(' AND ');
     }
     return encodeURIComponent(queries.join(' AND '));
