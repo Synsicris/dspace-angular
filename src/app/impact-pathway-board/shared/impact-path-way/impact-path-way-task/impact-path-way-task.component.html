@@ -1,5 +1,10 @@
-<div class="task-container d-flex" id="{{taskHTMLDivId}}" [class.task-focus]="(selectable && selectStatus.value) || (hasFocus$ | async)" [class.bg-gradient-light]="isDisabled()"
-  [class.task-disabled]="isDisabled()" ipwTaskColor [taskType]="data.type" (click)="setFocus($event)">
+<div class="task-container d-flex" id="{{taskHTMLDivId}}"
+     [class.task-focus]="(selectable && selectStatus.value) || (hasFocus$ | async)"
+     [class.bg-gradient-light]="!compareMode && isDisabled()"
+     [class.alert-success]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
+     [class.alert-alert]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed"
+     [class.task-disabled]="!compareMode && isDisabled()"
+     (click)="setFocus($event)">
   <div class="task-left-bar">
     <button class="btn btn-xs btn-link p-0 text-primary button-move align-self-start" title="Drag & Drop">
       <i class="fas fa-grip-vertical"></i>
