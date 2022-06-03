@@ -5196,15 +5196,15 @@
 
   "search.filters.filter.synsicristypepurpose.label": "Search purpose",
 
-  "search.filters.filter.synsicrisrelationpartner.head": "Partener",
+  "search.filters.filter.synsicrisrelationpartner.head": "Partner",
 
-  "search.filters.filter.synsicrisrelationpartner.placeholder": "Partener",
+  "search.filters.filter.synsicrisrelationpartner.placeholder": "Partner",
 
-  "search.filters.filter.synsicrisrelationpartner.label": "Search partener",
+  "search.filters.filter.synsicrisrelationpartner.label": "Search partner",
 
-  "search.filters.filter.synsicrisrelationtargetgroup.head": "Target group",
+  "search.filters.filter.synsicrisrelationtargetgroup.head": "Search Stakeholder group",
 
-  "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Target group",
+  "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Stakeholder group",
 
   "search.filters.filter.synsicrisrelationtargetgroup.label": "Search target group",
 
@@ -7294,7 +7294,7 @@
 
   "layout.tab.header.proj&partners": "Subprojects & Involved",
 
-  "layout.tab.header.subcontractors": "Subcontractors",
+  "layout.tab.header.subcontractors": "Subcontractors / Cooperation partners",
 
   "layout.tab.header.cooperationpartners": "Cooperation partners",
 

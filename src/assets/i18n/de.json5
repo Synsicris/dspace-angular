@@ -7605,7 +7605,7 @@
 
   // "project.manage.members-list.search.button": "Search",
   // TODO New key - Add a translation
-  "project.manage.members-list.search.button": "Search",
+  "project.manage.members-list.search.button": "Suche",
 
   // "project.manage.members-list.table.id": "ID",
   // TODO New key - Add a translation
@@ -8354,7 +8354,7 @@
   "search.filters.applied.f.discoverable": "Privat",
 
   // "search.filters.applied.f.entityType": "Item Type",
-  "search.filters.applied.f.entityType": "Bereich des Eintrags",
+  "search.filters.applied.f.entityType": "Kategorie des Eintrags",
 
   // "search.filters.applied.f.editor": "Editor",
   // TODO New key - Add a translation
@@ -8368,7 +8368,7 @@
   "search.filters.applied.f.investigators": "Investigator",
 
   // "search.filters.applied.f.itemtype": "Type",
-  "search.filters.applied.f.itemtype": "Bereich des Eintrags",
+  "search.filters.applied.f.itemtype": "Typ",
 
   // "search.filters.applied.f.language": "Language",
   // TODO New key - Add a translation
@@ -8855,23 +8855,23 @@
 
   // "search.filters.filter.synsicrisrelationpartner.head": "Partener",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationpartner.head": "Partener",
+  "search.filters.filter.synsicrisrelationpartner.head": "Partner",
 
   // "search.filters.filter.synsicrisrelationpartner.placeholder": "Partener",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationpartner.placeholder": "Partener",
+  "search.filters.filter.synsicrisrelationpartner.placeholder": "Partner",
 
   // "search.filters.filter.synsicrisrelationpartner.label": "Search partener",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationpartner.label": "Search partener",
+  "search.filters.filter.synsicrisrelationpartner.label": "Suche Partner",
 
   // "search.filters.filter.synsicrisrelationtargetgroup.head": "Target group",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationtargetgroup.head": "Target group",
+  "search.filters.filter.synsicrisrelationtargetgroup.head": "Suche Akteursgruppe",
 
   // "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Target group",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Target group",
+  "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Akteusgruppe",
 
   // "search.filters.filter.synsicrisrelationtargetgroup.label": "Search target group",
   // TODO New key - Add a translation
@@ -8919,7 +8919,7 @@
 
   // "search.filters.filter.types.placeholder": "Type",
   // TODO New key - Add a translation
-  "search.filters.filter.types.placeholder": "Type",
+  "search.filters.filter.types.placeholder": "Typ",
 
   // "search.filters.entityType.contribution_fundingprogramme": "Contribution to funding programme objectives",
   "search.filters.entityType.contribution_fundingprogramme": "Beitrag zu förderpolitischen Zielen",
@@ -8970,7 +8970,7 @@
   "search.filters.entityType.pot_societalimpact": "Erwartete gesellschaftliche Wirkung (Var. x)",
 
   // "search.filters.entityType.proj_objectives": "Project objective",
-  "search.filters.entityType.proj_objectives": "Projektziel",
+  "search.filters.entityType.proj_objectives": "Wissenschaftlich-technisches Arbeitsziel",
 
   // "search.filters.entityType.Project": "Subproject",
   // TODO Source message changed - Revise the translation
@@ -9076,7 +9076,7 @@
 
   // "default.search.results.head": "Search Results",
   // TODO New key - Add a translation
-  "default.search.results.head": "Search Results",
+  "default.search.results.head": "Suchergebnisse",
 
   // "defaultConfiguration.search.results.head": "Search Results",
   // TODO New key - Add a translation
@@ -12451,7 +12451,7 @@
   "layout.tab.header.proj&partners": "Projekte & Beteiligte",
 
   // "layout.tab.header.subcontractors": "Subcontractors",
-  "layout.tab.header.subcontractors": "Unterauftragnehmer",
+  "layout.tab.header.subcontractors": "Unterauftragnehmer / Kooperationspartner",
 
   // "layout.tab.header.cooperationpartners": "Cooperation partners",
   "layout.tab.header.cooperationpartners": "Kooperationspartner",
