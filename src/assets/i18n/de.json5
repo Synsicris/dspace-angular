@@ -5219,23 +5219,23 @@
 
   // "item.version.create.modal.header": "New version",
   // TODO New key - Add a translation
-  "item.version.create.modal.header": "New version",
+  "item.version.create.modal.header": "Neue Version",
 
   // "item.version.create.modal.text": "Create a new version for this item",
   // TODO New key - Add a translation
-  "item.version.create.modal.text": "Create a new version for this item",
+  "item.version.create.modal.text": "Eine neue Version erstellen",
 
   // "item.version.create.modal.text.startingFrom": "starting from version {{version}}",
   // TODO New key - Add a translation
-  "item.version.create.modal.text.startingFrom": "starting from version {{version}}",
+  "item.version.create.modal.text.startingFrom": "starten von version {{version}}",
 
   // "item.version.create.modal.button.confirm": "Create",
   // TODO New key - Add a translation
-  "item.version.create.modal.button.confirm": "Create",
+  "item.version.create.modal.button.confirm": "Erstellen",
 
   // "item.version.create.modal.button.processing": "Processing...",
   // TODO New key - Add a translation
-  "item.version.create.modal.button.processing": "Processing...",
+  "item.version.create.modal.button.processing": "In Bearbeitung…",
 
   // "item.version.create.modal.button.confirm.tooltip": "Create new version",
   // TODO New key - Add a translation
@@ -5243,7 +5243,7 @@
 
   // "item.version.create.modal.button.cancel": "Cancel",
   // TODO New key - Add a translation
-  "item.version.create.modal.button.cancel": "Cancel",
+  "item.version.create.modal.button.cancel": "Abbrechen",
 
   // "item.version.create.modal.button.cancel.tooltip": "Do not create new version",
   // TODO New key - Add a translation
@@ -5251,19 +5251,19 @@
 
   // "item.version.create.modal.form.summary.label": "Summary",
   // TODO New key - Add a translation
-  "item.version.create.modal.form.summary.label": "Summary",
+  "item.version.create.modal.form.summary.label": "Zusammenfassung",
 
   // "item.version.create.modal.form.summary.placeholder": "Insert the summary for the new version",
   // TODO New key - Add a translation
-  "item.version.create.modal.form.summary.placeholder": "Insert the summary for the new version",
+  "item.version.create.modal.form.summary.placeholder": "Geben Sie eine Zusammenfassung für die neue Version ein",
 
   // "item.version.create.notification.success": "New version has been created with version number {{version}}",
   // TODO New key - Add a translation
-  "item.version.create.notification.success": "New version has been created with version number {{version}}",
+  "item.version.create.notification.success": "Neue Version erfolgreich erstellt mit Versionsnummer {{version}}",
 
   // "item.version.create.notification.failure": "New version has not been created",
   // TODO New key - Add a translation
-  "item.version.create.notification.failure": "New version has not been created",
+  "item.version.create.notification.failure": "Neue Version wurde nicht erstellt",
 
   // "item.version.create.notification.inProgress": "A new version cannot be created because there is an inprogress submission in the version history",
   // TODO New key - Add a translation
@@ -7566,7 +7566,7 @@
 
   // "project.manage.breadcrumbs": "Manage project members",
   // TODO New key - Add a translation
-  "project.manage.breadcrumbs": "Manage project members",
+  "project.manage.breadcrumbs": "Mitgliederverwaltung",
 
   // "project.manage.page.title": "Manage project members",
   // TODO New key - Add a translation
@@ -7574,10 +7574,10 @@
 
   // "project.manage.members.admin-group": "Manage project coordinators",
   // TODO New key - Add a translation
-  "project.manage.members.admin-group": "Manage project coordinators",
+  "project.manage.members.admin-group": "Einladung und Verwaltung Koordinator:innen",
 
   // "project.manage.members.members-group": "<i class=\"fas fa-toolbox\"></i> Manage project members",
-  "project.manage.members.members-group": "<i class=\"fas fa-toolbox\"></i> Mitgliederverwaltung",
+  "project.manage.members.members-group": "Einladung und Verwaltung Projektmitarbeitende",
 
   // "project.manage.members-list.head": "Manage group",
   // TODO New key - Add a translation
@@ -7585,15 +7585,15 @@
 
   // "project.manage.members-list.search.head": "Search persons",
   // TODO New key - Add a translation
-  "project.manage.members-list.search.head": "Search persons",
+  "project.manage.members-list.search.head": "Personensuche",
 
   // "project.manage.members-list.button.see-all": "Browse All",
   // TODO New key - Add a translation
-  "project.manage.members-list.button.see-all": "Browse All",
+  "project.manage.members-list.button.see-all": "Alle anzeigen",
 
   // "project.manage.members-list.headMembers": "Current Members",
   // TODO New key - Add a translation
-  "project.manage.members-list.headMembers": "Current Members",
+  "project.manage.members-list.headMembers": "Aktuelle Mitglieder",
 
   // "project.manage.members-list.search.scope.metadata": "Metadata",
   // TODO New key - Add a translation
@@ -7605,7 +7605,7 @@
 
   // "project.manage.members-list.search.button": "Search",
   // TODO New key - Add a translation
-  "project.manage.members-list.search.button": "Search",
+  "project.manage.members-list.search.button": "Suche",
 
   // "project.manage.members-list.table.id": "ID",
   // TODO New key - Add a translation
@@ -8354,7 +8354,7 @@
   "search.filters.applied.f.discoverable": "Privat",
 
   // "search.filters.applied.f.entityType": "Item Type",
-  "search.filters.applied.f.entityType": "Bereich des Eintrags",
+  "search.filters.applied.f.entityType": "Kategorie des Eintrags",
 
   // "search.filters.applied.f.editor": "Editor",
   // TODO New key - Add a translation
@@ -8368,7 +8368,7 @@
   "search.filters.applied.f.investigators": "Investigator",
 
   // "search.filters.applied.f.itemtype": "Type",
-  "search.filters.applied.f.itemtype": "Bereich des Eintrags",
+  "search.filters.applied.f.itemtype": "Typ",
 
   // "search.filters.applied.f.language": "Language",
   // TODO New key - Add a translation
@@ -8855,23 +8855,23 @@
 
   // "search.filters.filter.synsicrisrelationpartner.head": "Partener",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationpartner.head": "Partener",
+  "search.filters.filter.synsicrisrelationpartner.head": "Partner",
 
   // "search.filters.filter.synsicrisrelationpartner.placeholder": "Partener",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationpartner.placeholder": "Partener",
+  "search.filters.filter.synsicrisrelationpartner.placeholder": "Partner",
 
   // "search.filters.filter.synsicrisrelationpartner.label": "Search partener",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationpartner.label": "Search partener",
+  "search.filters.filter.synsicrisrelationpartner.label": "Suche Partner",
 
   // "search.filters.filter.synsicrisrelationtargetgroup.head": "Target group",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationtargetgroup.head": "Target group",
+  "search.filters.filter.synsicrisrelationtargetgroup.head": "Suche Akteursgruppe",
 
   // "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Target group",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Target group",
+  "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Akteusgruppe",
 
   // "search.filters.filter.synsicrisrelationtargetgroup.label": "Search target group",
   // TODO New key - Add a translation
@@ -8919,7 +8919,7 @@
 
   // "search.filters.filter.types.placeholder": "Type",
   // TODO New key - Add a translation
-  "search.filters.filter.types.placeholder": "Type",
+  "search.filters.filter.types.placeholder": "Typ",
 
   // "search.filters.entityType.contribution_fundingprogramme": "Contribution to funding programme objectives",
   "search.filters.entityType.contribution_fundingprogramme": "Beitrag zu förderpolitischen Zielen",
@@ -8970,7 +8970,7 @@
   "search.filters.entityType.pot_societalimpact": "Erwartete gesellschaftliche Wirkung (Var. x)",
 
   // "search.filters.entityType.proj_objectives": "Project objective",
-  "search.filters.entityType.proj_objectives": "Projektziel",
+  "search.filters.entityType.proj_objectives": "Wissenschaftlich-technisches Arbeitsziel",
 
   // "search.filters.entityType.Project": "Subproject",
   // TODO Source message changed - Revise the translation
@@ -9076,7 +9076,7 @@
 
   // "default.search.results.head": "Search Results",
   // TODO New key - Add a translation
-  "default.search.results.head": "Search Results",
+  "default.search.results.head": "Suchergebnisse",
 
   // "defaultConfiguration.search.results.head": "Search Results",
   // TODO New key - Add a translation
@@ -12451,7 +12451,7 @@
   "layout.tab.header.proj&partners": "Projekte & Beteiligte",
 
   // "layout.tab.header.subcontractors": "Subcontractors",
-  "layout.tab.header.subcontractors": "Unterauftragnehmer",
+  "layout.tab.header.subcontractors": "Unterauftragnehmer / Kooperationspartner",
 
   // "layout.tab.header.cooperationpartners": "Cooperation partners",
   "layout.tab.header.cooperationpartners": "Kooperationspartner",
@@ -14647,6 +14647,12 @@
   "layout.field.label.call.synsicris.call.endDate": "Enddatum",
 
   // "layout.field.label.call.oairecerif.identifier.url": "Web adress",
-  "layout.field.label.call.oairecerif.identifier.url": "Webadresse"
+  "layout.field.label.call.oairecerif.identifier.url": "Webadresse",
+
+  // "layout.tab.header.Projekttraeger": "Programme and Funding information",
+  "layout.tab.header.Projekttraeger": "Programm- und Förderinformationen",
+
+  // "layout.box.header.subcontractors": "Subproject - Subcontractors / Cooperation partners",
+  "layout.box.header.subcontractors": "Unterauftragnehmer / Kooperationspartner - Listenansicht"
 
 }

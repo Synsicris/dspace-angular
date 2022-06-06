@@ -3102,7 +3102,7 @@
 
   "item.version.create.modal.button.confirm": "Create",
 
-  "item.version.create.modal.button.processing": "Processing...",
+  "item.version.create.modal.button.processing": "Processing…",
 
   "item.version.create.modal.button.confirm.tooltip": "Create new version",
 
@@ -4394,17 +4394,17 @@
 
   "project.listelement.badge": "Subproject",
 
-  "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Manage project members",
+  "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Manage coordinators",
 
   "project.manage.menu.subproject": "<i class=\"fas fa-toolbox\"></i> Manage subproject members",
 
-  "project.manage.breadcrumbs": "Invitation and management of project coordinators",
+  "project.manage.breadcrumbs": "Manage project members",
 
   "project.manage.page.title": "Invitation and management of project coordinators",
 
-  "project.manage.members.admin-group": "Invitation and management of {{project}} coordinators",
+  "project.manage.members.admin-group": "Invitation and Management of project coordinators",
 
-  "project.manage.members.members-group": "Invitation and management of {{project}} members",
+  "project.manage.members.members-group": "Invitation and Management of project members",
 
   "project.manage.members-list.head": "Manage group",
 
@@ -5196,15 +5196,15 @@
 
   "search.filters.filter.synsicristypepurpose.label": "Search purpose",
 
-  "search.filters.filter.synsicrisrelationpartner.head": "Partener",
+  "search.filters.filter.synsicrisrelationpartner.head": "Partner",
 
-  "search.filters.filter.synsicrisrelationpartner.placeholder": "Partener",
+  "search.filters.filter.synsicrisrelationpartner.placeholder": "Partner",
 
-  "search.filters.filter.synsicrisrelationpartner.label": "Search partener",
+  "search.filters.filter.synsicrisrelationpartner.label": "Search partner",
 
-  "search.filters.filter.synsicrisrelationtargetgroup.head": "Target group",
+  "search.filters.filter.synsicrisrelationtargetgroup.head": "Search Stakeholder group",
 
-  "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Target group",
+  "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Stakeholder group",
 
   "search.filters.filter.synsicrisrelationtargetgroup.label": "Search target group",
 
@@ -7294,7 +7294,7 @@
 
   "layout.tab.header.proj&partners": "Subprojects & Involved",
 
-  "layout.tab.header.subcontractors": "Subcontractors",
+  "layout.tab.header.subcontractors": "Subcontractors / Cooperation partners",
 
   "layout.tab.header.cooperationpartners": "Cooperation partners",
 
@@ -8362,7 +8362,7 @@
 
   "layout.tab.header.person_projects": "My projects",
 
-  "layout.tab.header.OrgUnit": "Organisations",
+  "layout.tab.header.OrgUnit": "Organisationen",
 
   "layout.tab.header.programme": "Programmes",
 
@@ -8452,8 +8452,6 @@
 
   "layout.field.label.call.oairecerif.identifier.url": "Web adress",
 
-  "layout.tab.header.details": "Details",
-
   "query-builder.synsicris.placeholder.select-value": "Select Value",
 
   "query-builder.synsicris.placeholder.select-filter": "Select Filter",
@@ -8480,6 +8478,10 @@
 
   "query-builder.synsicris.accordion.step1.header": "Step 1",
 
-  "query-builder.synsicris.accordion.step2.header": "Step 2"
+  "query-builder.synsicris.accordion.step2.header": "Step 2",
+
+  "layout.tab.header.Projekttraeger": "Programme and Funding information",
+
+  "layout.box.header.subcontractors": "Subproject - Subcontractors / Cooperation partners"
 
 }
