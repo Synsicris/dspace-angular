@@ -14,7 +14,7 @@
             class="{{btnClass}}"
             ngbDropdownItem
             (click)="onVersionSelected(version)">
-      {{('item.version.list.option-text' | translate) + (version.created |  date:'medium')}}
+      {{('item.version.list.option-text' | translate) + (version.summary || '') + ' ' + (version.created |  date:'medium')}}
     </button>
   </div>
 </div>
