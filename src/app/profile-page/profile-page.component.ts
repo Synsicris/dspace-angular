@@ -89,8 +89,9 @@ export class ProfilePageComponent implements OnInit {
     );
     if (this.showGroups) {
       this.groupsRD$ = this.user$.pipe(switchMap((user: EPerson) => user.groups));
-    this.canChangePassword$ = this.user$.pipe(switchMap((user: EPerson) => this.authorizationService.isAuthorized(FeatureID.CanChangePassword, user._links.self.href)));
     }
+    this.canChangePassword$ = this.user$.pipe(switchMap((user: EPerson) => this.authorizationService.isAuthorized(FeatureID.CanChangePassword, user._links.self.href)));
+
   }
 
   /**
