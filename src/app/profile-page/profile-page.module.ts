@@ -11,6 +11,7 @@ import { FormModule } from '../shared/form/form.module';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { OpenaireModule } from '../openaire/openaire.module';
 import { ProfilePageResearcherFormSwitchComponent } from './profile-page-researcher-form/profile-page-researcher-form-switch/profile-page-researcher-form-switch.component';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ProfilePageResearcherFormSwitchComponent } from './profile-page-researc
     SharedModule,
     FormModule,
     UiSwitchModule,
-    OpenaireModule
+    OpenaireModule,
+    NgbAccordionModule,
   ],
   exports: [
     ProfilePageComponent,

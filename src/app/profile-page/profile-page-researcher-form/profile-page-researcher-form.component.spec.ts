@@ -115,15 +115,6 @@ describe('ProfilePageResearcherFormComponent', () => {
     expect(researcherProfileService.findById).toHaveBeenCalledWith(user.id);
   });
 
-  describe('createProfile', () => {
-
-    it('should create the profile', () => {
-      component.createProfile();
-      expect(researcherProfileService.create).toHaveBeenCalledWith();
-    });
-
-  });
-
   describe('toggleProfileVisibility', () => {
 
     it('should set the profile visibility to true', () => {
@@ -134,15 +125,6 @@ describe('ProfilePageResearcherFormComponent', () => {
     it('should set the profile visibility to false', () => {
       component.toggleProfileVisibility(profile, ResearcherProfileVisibilityValue.PRIVATE);
       expect(researcherProfileService.setVisibility).toHaveBeenCalledWith(profile, ResearcherProfileVisibilityValue.PRIVATE);
-    });
-
-  });
-
-  describe('deleteProfile', () => {
-
-    it('should delete the profile', () => {
-      component.deleteProfile(profile);
-      expect(researcherProfileService.delete).toHaveBeenCalledWith(profile);
     });
 
   });
