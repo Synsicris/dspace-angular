@@ -3,7 +3,8 @@ import { SearchFilterConfig } from './models/search-filter-config.model';
 import {
   addOperatorToFilterValue,
   escapeRegExp,
-  getFacetValueForType, getFacetValueForTypeAndLabel,
+  getFacetValueForType,
+  getFacetValueForTypeAndLabel,
   stripOperatorFromFilterValue
 } from './search.utils';
 
@@ -88,11 +89,11 @@ describe('Search Utils', () => {
 
   describe('addOperatorToFilterValue', () => {
     it('should add the operator to the value', () => {
-      expect(addOperatorToFilterValue('value', 'operator')).toEqual('value,operator');
+      expect(addOperatorToFilterValue('value', 'equals')).toEqual('value,equals');
     });
 
     it('shouldn\'t add the operator to the value if it already contains the operator', () => {
-      expect(addOperatorToFilterValue('value,operator', 'operator')).toEqual('value,operator');
+      expect(addOperatorToFilterValue('value,equals', 'equals')).toEqual('value,equals');
     });
   });
 

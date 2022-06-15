@@ -49,7 +49,7 @@ import { BASE_THEME_NAME } from './shared/theme-support/theme.constants';
 import { BreadcrumbsService } from './breadcrumbs/breadcrumbs.service';
 import { IdleModalComponent } from './shared/idle-modal/idle-modal.component';
 import { getDefaultThemeConfig } from '../config/config.util';
-import { AppConfig, APP_CONFIG } from '../config/app-config.interface';
+import { APP_CONFIG, AppConfig } from '../config/app-config.interface';
 import { RouteService } from './core/services/route.service';
 import { getWorkflowItemModuleRoute } from './app-routing-paths';
 
@@ -212,7 +212,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         resolveEndFound = false;
         if (!(currentUrl.startsWith('/edit-items') || currentUrl.startsWith('/workspaceitems') || currentUrl.startsWith(getWorkflowItemModuleRoute()))) {
           this.isRouteLoading$.next(true);
-          this.isThemeLoading$.next(true);
+          // this.isThemeLoading$.next(true);
         }
       } else  if (event instanceof ResolveEnd) {
         resolveEndFound = true;
