@@ -216,7 +216,7 @@ describe('ProfilePageComponent', () => {
 
       it('should show the security section on the page', () => {
         fixture.detectChanges();
-        expect(fixture.debugElement.query(By.css('#profile-card-security'))).not.toBeNull();
+        expect(fixture.debugElement.query(By.css('ngb-panel[data-test="profile-security"]'))).not.toBeNull();
       });
     });
 
@@ -231,7 +231,7 @@ describe('ProfilePageComponent', () => {
 
       it('should not show the security section on the page', () => {
         fixture.detectChanges();
-        expect(fixture.debugElement.query(By.css('#profile-card-security'))).toBeNull();
+        expect(fixture.debugElement.query(By.css('ngb-panel[data-test="profile-security"]'))).toBeNull();
       });
     });
   });
