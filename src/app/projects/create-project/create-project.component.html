@@ -1,4 +1,4 @@
-<div>
+<div cdkDrag cdkDragRootElement=".modal-content">
   <div class="modal-header">{{'project.create.head' | translate}}
     <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="(processing$ | async)">
       <span aria-hidden="true">×</span>
@@ -6,15 +6,11 @@
   </div>
   <div class="modal-body">
     <ds-alert [content]="alertMsgKey | translate" [collapsible]="true" [collapsed]="true"></ds-alert>
-    <form *ngIf="createForm" (ngSubmit)="create();" [formGroup]="createForm" >
+    <form *ngIf="createForm" (ngSubmit)="create();" [formGroup]="createForm">
       <div class="form-group">
-        <input type="search"
-               class="form-control"
-               formControlName="name"
-               id="name"
-               (click)="$event.stopPropagation();"
-               placeholder="{{ (!isSubproject ? 'project.create.name.placeholder' : 'subproject.create.name.placeholder') | translate }}"
-               dsAutoFocus>
+        <input type="search" class="form-control" formControlName="name" id="name" (click)="$event.stopPropagation();"
+          placeholder="{{ (!isSubproject ? 'project.create.name.placeholder' : 'subproject.create.name.placeholder') | translate }}"
+          dsAutoFocus>
       </div>
       <div *ngIf="isSubproject" class="form-group">
         <select class="form-control" formControlName="grants" id="grants">
@@ -24,10 +20,10 @@
           </option>
         </select>
       </div>
-      <button class="btn btn-success btn-lg btn-block mt-3"
-              [disabled]="!createForm.valid || (processing$ | async)"
-              type="submit">
-        <span *ngIf="processing$ | async"><i class='fas fa-circle-notch fa-spin'></i> {{'submission.workflow.tasks.generic.processing' | translate}}</span>
+      <button class="btn btn-success btn-lg btn-block mt-3" [disabled]="!createForm.valid || (processing$ | async)"
+        type="submit">
+        <span *ngIf="processing$ | async"><i class='fas fa-circle-notch fa-spin'></i>
+          {{'submission.workflow.tasks.generic.processing' | translate}}</span>
         <span *ngIf="!(processing$ | async)">{{'project.create.btn' | translate}}</span>
       </button>
     </form>
