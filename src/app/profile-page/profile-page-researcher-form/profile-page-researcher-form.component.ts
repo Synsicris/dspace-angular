@@ -43,18 +43,6 @@ export class ProfilePageResearcherFormComponent implements OnInit {
   researcherProfile$: BehaviorSubject<ResearcherProfile> = new BehaviorSubject<ResearcherProfile>(null);
 
   /**
-   * A boolean representing if a delete operation is pending
-   * @type {BehaviorSubject<boolean>}
-   */
-  processingDelete$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-  /**
-   * A boolean representing if a create delete operation is pending
-   * @type {BehaviorSubject<boolean>}
-   */
-  processingCreate$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-  /**
    * If exists The uuid of the item associated to the researcher profile
    */
   researcherProfileItemId: string;
@@ -66,13 +54,13 @@ export class ProfilePageResearcherFormComponent implements OnInit {
   private editModes$: BehaviorSubject<EditItemMode[]> = new BehaviorSubject<EditItemMode[]>([]);
 
   constructor(protected researcherProfileService: ResearcherProfileService,
-              protected profileClaimService: ProfileClaimService,
-              protected translationService: TranslateService,
-              protected notificationService: NotificationsService,
-              protected authService: AuthService,
-              protected router: Router,
-              protected modalService: NgbModal,
-              protected editItemService: EditItemDataService) {
+    protected profileClaimService: ProfileClaimService,
+    protected translationService: TranslateService,
+    protected notificationService: NotificationsService,
+    protected authService: AuthService,
+    protected router: Router,
+    protected modalService: NgbModal,
+    protected editItemService: EditItemDataService) {
 
   }
 
@@ -82,30 +70,6 @@ export class ProfilePageResearcherFormComponent implements OnInit {
   ngOnInit(): void {
     // Retrieve researcherProfile if exists
     this.initResearchProfile();
-  }
-
-  /**
-   * Create a new profile for the current user.
-   */
-  createProfile(): void {
-    this.processingCreate$.next(true);
-
-    this.authService.getAuthenticatedUserFromStore().pipe(
-      switchMap((currentUser) => this.profileClaimService.canClaimProfiles(currentUser)))
-      .subscribe((canClaimProfiles) => {
-
-        if (canClaimProfiles) {
-          this.processingCreate$.next(false);
-          const modal = this.modalService.open(ClaimItemSelectorComponent);
-          modal.componentInstance.dso = this.user;
-          modal.componentInstance.create.pipe(take(1)).subscribe(() => {
-            this.createProfileFromScratch();
-          });
-        } else {
-          this.createProfileFromScratch();
-        }
-
-      });
   }
 
   /**
@@ -127,24 +91,6 @@ export class ProfilePageResearcherFormComponent implements OnInit {
   }
 
   /**
-   * Delete the given researcher profile.
-   *
-   * @param researcherProfile the profile to delete
-   */
-  deleteProfile(researcherProfile: ResearcherProfile): void {
-    this.processingDelete$.next(true);
-    this.researcherProfileService.delete(researcherProfile)
-      .subscribe((deleted) => {
-        if (deleted) {
-          this.researcherProfile$.next(null);
-          this.editModes$.next([]);
-          this.researcherProfileItemId = null;
-        }
-        this.processingDelete$.next(false);
-      });
-  }
-
-  /**
    * Toggle the visibility of the given researcher profile.
    *
    * @param researcherProfile The profile to update
@@ -153,39 +99,6 @@ export class ProfilePageResearcherFormComponent implements OnInit {
   toggleProfileVisibility(researcherProfile: ResearcherProfile, visibility: ResearcherProfileVisibilityValue): void {
     this.researcherProfileService.setVisibility(researcherProfile, visibility)
       .subscribe((updatedProfile) => this.researcherProfile$.next(updatedProfile));
-  }
-
-  /**
-   * Return a boolean representing if a delete operation is pending.
-   *
-   * @return {Observable<boolean>}
-   */
-  isProcessingDelete(): Observable<boolean> {
-    return this.processingDelete$.asObservable();
-  }
-
-  /**
-   * Return a boolean representing if a create operation is pending.
-   *
-   * @return {Observable<boolean>}
-   */
-  isProcessingCreate(): Observable<boolean> {
-    return this.processingCreate$.asObservable();
-  }
-
-  createProfileFromScratch() {
-    this.processingCreate$.next(true);
-    this.researcherProfileService.create().pipe(
-      getFirstCompletedRemoteData()
-    ).subscribe((remoteData) => {
-      this.processingCreate$.next(false);
-      if (remoteData.isSuccess) {
-        this.initResearchProfile();
-        this.notificationService.success(this.translationService.get('researcher.profile.create.success'));
-      } else {
-        this.notificationService.error(this.translationService.get('researcher.profile.create.fail'));
-      }
-    });
   }
 
   private initResearchProfile(): void {

@@ -1,33 +1,88 @@
 <ng-container *ngVar="(user$ | async) as user">
   <div class="container" *ngIf="user">
     <h3 class="mb-4">{{'profile.head' | translate}}</h3>
-    <div class="card mb-4">
-      <div class="card-header">{{'profile.card.researcher' | translate}}</div>
-      <div class="card-body">
-        <div class="mb-4">
-          <ds-profile-page-researcher-form [user]="user"></ds-profile-page-researcher-form>
-        </div>
-        <ds-suggestions-notification></ds-suggestions-notification>
-      </div>
+
+    <div class="mb-4">
+      <ngb-accordion #accordionRefResearcher [activeIds]="activeIds">
+
+        <ngb-panel id="profile-card-researcher">
+          <ng-template ngbPanelTitle>
+            <span class="float-left">{{'profile.card.researcher' | translate}}</span>
+            <div class="d-inline-block float-right">
+              <a class="close" role="button"
+                [attr.aria-label]="(accordionRefResearcher.isExpanded('profile-card-researcher') ? 'cris-layout.toggle.aria.close' : 'cris-layout.toggle.aria.open') | translate: {sectionHeader: 'profile.card.researcher' | translate}"
+                [title]="(accordionRefResearcher.isExpanded('profile-card-researcher') ? 'cris-layout.toggle.close' : 'cris-layout.toggle.open') | translate">
+                <span *ngIf="accordionRefResearcher.isExpanded('profile-card-researcher')"
+                  class="fas fa-chevron-up fa-fw"></span>
+                <span *ngIf="!accordionRefResearcher.isExpanded('profile-card-researcher')"
+                  class="fas fa-chevron-down fa-fw"></span>
+              </a>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="mb-4">
+              <ds-profile-page-researcher-form [user]="user"></ds-profile-page-researcher-form>
+            </div>
+            <ds-suggestions-notification></ds-suggestions-notification>
+          </ng-template>
+        </ngb-panel>
+
+      </ngb-accordion>
+
     </div>
-    <div class="card mb-4">
-      <div class="card-header">{{'profile.card.identify' | translate}}</div>
-      <div class="card-body">
-        <ds-profile-page-metadata-form [user]="user"></ds-profile-page-metadata-form>
-      </div>
+
+    <div class="mb-4">
+      <ngb-accordion #accordionRefIdentify [activeIds]="activeIds">
+        <ngb-panel id="profile-card-identify">
+          <ng-template ngbPanelTitle>
+            <span class="float-left">{{'profile.card.identify' | translate}}</span>
+            <div class="d-inline-block float-right">
+              <a class="close" role="button"
+                [attr.aria-label]="(accordionRefIdentify.isExpanded('profile-card-identify') ? 'cris-layout.toggle.aria.close' : 'cris-layout.toggle.aria.open') | translate: {sectionHeader: 'profile.card.identify' | translate}"
+                [title]="(accordionRefIdentify.isExpanded('profile-card-identify') ? 'cris-layout.toggle.close' : 'cris-layout.toggle.open') | translate">
+                <span *ngIf="accordionRefIdentify.isExpanded('profile-card-identify')"
+                  class="fas fa-chevron-up fa-fw"></span>
+                <span *ngIf="!accordionRefIdentify.isExpanded('profile-card-identify')"
+                  class="fas fa-chevron-down fa-fw"></span>
+              </a>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <ds-profile-page-metadata-form [user]="user"></ds-profile-page-metadata-form>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
     </div>
-    <div *ngIf="canChangePassword$ | async" class="card mb-4 security-section">
-      <div class="card-header">{{'profile.card.security' | translate}}</div>
-      <div class="card-body">
-        <ds-profile-page-security-form
-                [FORM_PREFIX]="'profile.security.form.'"
-                (isInvalid)="setInvalid($event)"
-                (passwordValue)="setPasswordValue($event)"
-        ></ds-profile-page-security-form>
-      </div>
+
+    <div class="mb-4">
+      <ngb-accordion #accordionRefSecurity [activeIds]="activeIds">
+        <ngb-panel id="profile-card-security" *ngIf="canChangePassword$ | async" data-test="profile-security">
+          <ng-template ngbPanelTitle>
+            <span class="float-left">{{'profile.card.security' | translate}}</span>
+            <div class="d-inline-block float-right">
+              <a class="close" role="button"
+                [attr.aria-label]="(accordionRefSecurity.isExpanded('profile-card-security') ? 'cris-layout.toggle.aria.close' : 'cris-layout.toggle.aria.open') | translate: {sectionHeader: 'profile.card.security' | translate}"
+                [title]="(accordionRefSecurity.isExpanded('profile-card-security') ? 'cris-layout.toggle.close' : 'cris-layout.toggle.open') | translate">
+                <span *ngIf="accordionRefSecurity.isExpanded('profile-card-security')"
+                  class="fas fa-chevron-up fa-fw"></span>
+                <span *ngIf="!accordionRefSecurity.isExpanded('profile-card-security')"
+                  class="fas fa-chevron-down fa-fw"></span>
+              </a>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <ds-profile-page-security-form [FORM_PREFIX]="'profile.security.form.'" (isInvalid)="setInvalid($event)"
+              (passwordValue)="setPasswordValue($event)"></ds-profile-page-security-form>
+          </ng-template>
+        </ngb-panel>
+
+      </ngb-accordion>
     </div>
+
+
     <div class="col-12 text-right pr-0">
-      <button class="btn btn-primary" (click)="updateProfile()"><i class="fas fa-edit"></i> {{'profile.form.submit' | translate}}</button>
+      <button class="btn btn-primary" (click)="updateProfile()"><i class="fas fa-edit"></i> {{'profile.form.submit' |
+        translate}}</button>
     </div>
 
     <ng-container *ngIf="showGroups">
