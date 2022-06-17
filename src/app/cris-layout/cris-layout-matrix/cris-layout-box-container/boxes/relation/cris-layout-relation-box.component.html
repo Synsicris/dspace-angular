@@ -1,10 +1,14 @@
 <ds-configuration-search-page #configurationSearchPage *ngIf="configuration" class="w-100"
                               [fixedFilterQuery]="searchFilter"
+                              [collapseCharts]="true"
+                              [collapseFilters]="true"
                               [configuration]="configuration"
                               [searchEnabled]="searchEnabled"
                               [sideBarWidth]="sideBarWidth"
                               [showCharts]="true"
+                              [showChartsToggle]="true"
                               [showExport]="false"
+                              [showFilterToggle]="true"
                               [showSidebar]="true"
                               (customEvent)="refresh()">
   <ds-item-create additionalSearchFormOptions
