@@ -4962,6 +4962,11 @@
 
   "search.filters.applied.charts.no.data.found": "No data found",
 
+  "search.filters.applied.charts.show.hide": "Show/Hide",
+
+
+
+
   "search.filters.filter.author.head": "Author",
 
   "search.filters.filter.author.placeholder": "Author name",
@@ -5357,6 +5362,14 @@
   "search.sidebar.settings.sort-by": "Sort By",
 
   "search.sidebar.settings.title": "Settings",
+
+  "search.sidebar.show.hide": "Show/Hide",
+
+  "search.sidebar.show.hide.filters.tooltip": "Show/Hide filters sidebar",
+
+  "search.sidebar.show.hide.charts.tooltip": "Show/Hide charts",
+
+
 
   "search.view-switch.show-detail": "Show detail",
 

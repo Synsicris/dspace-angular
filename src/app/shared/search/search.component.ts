@@ -86,6 +86,16 @@ export class SearchComponent implements OnInit {
   @Input() useCachedVersionIfAvailable = true;
 
   /**
+   * Defines whether to start as showing the charts collapsed
+   */
+  @Input() collapseCharts = false;
+
+  /**
+   * Defines whether to start as showing the filter sidebar collapsed
+   */
+  @Input() collapseFilters = false;
+
+  /**
    * True when the search component should show results on the current page
    */
   @Input() inPlaceSearch = true;
@@ -161,9 +171,19 @@ export class SearchComponent implements OnInit {
   @Input() viewModeList: ViewMode[];
 
   /**
-   * Defines whether or not to show the scope selector
+   * Defines whether to show the scope selector
    */
   @Input() showScopeSelector = false;
+
+  /**
+   * Defines whether to show the toggle button to Show/Hide filter
+   */
+  @Input() showFilterToggle = false;
+
+  /**
+   * Defines whether to show the toggle button to Show/Hide chart
+   */
+   @Input() showChartsToggle = false;
 
   /**
    * The current configuration used during the search
@@ -436,6 +456,13 @@ export class SearchComponent implements OnInit {
    */
   refresh(): void {
     this.retrieveSearchResults(this.lastSearchOptions, false);
+  }
+
+  /**
+   * To Toggle the Sidebar
+   */
+  toggleSidebar() {
+    this.sidebarService.toggle();
   }
 
 
