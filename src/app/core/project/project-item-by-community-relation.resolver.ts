@@ -26,6 +26,6 @@ export class ProjectItemByCommunityRelationResolver implements Resolve<RemoteDat
    * or an error if something went wrong
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RemoteData<Item>> {
-    return this.projectService.getProjectItemByProjectCommunityId(route.params[this.routeParam]);
+    return this.projectService.getEntityItemByCommunityId(route.params[this.routeParam]);
   }
 }

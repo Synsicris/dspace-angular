@@ -45,7 +45,7 @@ const mockItemParentProject = Object.assign(new Item(), {
     'cris.project.shared': [
       {
         language: 'en_US',
-        value: 'parentproject'
+        value: 'project'
       }
     ]
   }
@@ -69,7 +69,7 @@ const mockItemProject = Object.assign(new Item(), {
     'cris.project.shared': [
       {
         language: 'en_US',
-        value: 'project'
+        value: 'funding'
       }
     ]
   }
@@ -134,7 +134,7 @@ describe('ItemGrantBadgeComponent', () => {
     });
   });
 
-  describe('When the item has cris.project.shared parentproject', () => {
+  describe('When the item has cris.project.shared project', () => {
     beforeEach(() => {
       comp.object = mockItemParentProject;
       fixture.detectChanges();
@@ -153,7 +153,7 @@ describe('ItemGrantBadgeComponent', () => {
 
   });
 
-  describe('When the item has cris.project.shared project', () => {
+  describe('When the item has cris.project.shared funding', () => {
     beforeEach(() => {
       comp.object = mockItemProject;
       projectGroupService.getCommunityIdByGroupName.and.returnValue('groupId');

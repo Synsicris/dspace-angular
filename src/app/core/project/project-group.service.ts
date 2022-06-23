@@ -13,6 +13,10 @@ const PROJECT_GROUP_TEMPLATE = 'project_%s_';
 const PROJECT_ADMIN_GROUP_TEMPLATE = 'project_%s_admin_group';
 const PROJECT_MEMBERS_GROUP_TEMPLATE = 'project_%s_members_group';
 
+const FUNDING_GROUP_TEMPLATE = 'funding_%s_';
+const FUNDING_ADMIN_GROUP_TEMPLATE = 'funding_%s_admin_group';
+const FUNDING_MEMBERS_GROUP_TEMPLATE = 'funding_%s_members_group';
+
 @Injectable()
 export class ProjectGroupService {
 
@@ -25,6 +29,10 @@ export class ProjectGroupService {
     const groupNameArray = groupName.split('_');
 
     return groupNameArray[1];
+  }
+
+  getFundingAdminsGroupNameByCommunity(project: Community): string {
+    return FUNDING_ADMIN_GROUP_TEMPLATE.replace('%s', project.uuid);
   }
 
   getProjectAdminsGroupNameByCommunity(project: Community): string {
@@ -40,6 +48,10 @@ export class ProjectGroupService {
     return PROJECT_MEMBERS_GROUP_TEMPLATE.replace('%s', project.uuid);
   }
 
+  getFundingMembersGroupNameByCommunity(project: Community): string {
+    return FUNDING_MEMBERS_GROUP_TEMPLATE.replace('%s', project.uuid);
+  }
+
   getProjectMembersGroupUUIDByCommunity(project: Community): Observable<string[]> {
     const query = this.getProjectMembersGroupNameByCommunity(project);
     return this.getGroupsByQuery(query);
@@ -49,33 +61,38 @@ export class ProjectGroupService {
     return this.getProjectMembersGroupUUIDByCommunity(project);
   }
 
+  getInvitationFundingAllGroupsByCommunity(funding: Community): Observable<string[]> {
+    const query = FUNDING_GROUP_TEMPLATE.replace('%s', funding.uuid);
+    return this.getGroupsByQuery(query);
+  }
+
   getInvitationProjectAllGroupsByCommunity(project: Community): Observable<string[]> {
     const query = PROJECT_GROUP_TEMPLATE.replace('%s', project.uuid);
     return this.getGroupsByQuery(query);
   }
 
-  getInvitationSubprojectAdminsGroupsByCommunity(subproject: Community): Observable<string[]> {
-    const subprojectMembers$ = this.getInvitationProjectAllGroupsByCommunity(subproject);
-    const projectMembers$ = this.communityService.findByHref(subproject._links.parentCommunity.href).pipe(
+  getInvitationFundingAdminsGroupsByCommunity(funding: Community): Observable<string[]> {
+    const fundingMembers$ = this.getInvitationFundingAllGroupsByCommunity(funding);
+    const projectMembers$ = this.communityService.findByHref(funding._links.parentCommunity.href).pipe(
       getFirstSucceededRemoteDataPayload(),
       mergeMap((subprojectsCommunity: Community) => this.communityService.findByHref(subprojectsCommunity._links.parentCommunity.href)),
       getFirstSucceededRemoteDataPayload(),
       mergeMap((parentProjectCommunity: Community) => this.getInvitationProjectMembersGroupsByCommunity(parentProjectCommunity))
     );
-    return combineLatest([subprojectMembers$, projectMembers$]).pipe(
+    return combineLatest([fundingMembers$, projectMembers$]).pipe(
       map(([subprojectMembers, projectMembers]) => [...subprojectMembers, ...projectMembers])
     );
   }
 
-  getInvitationSubprojectMembersGroupsByCommunity(subproject: Community): Observable<string[]> {
-    const subprojectMembers$ = this.getInvitationProjectMembersGroupsByCommunity(subproject);
-    const projectMembers$ = this.communityService.findByHref(subproject._links.parentCommunity.href).pipe(
+  getInvitationFundingMembersGroupsByCommunity(funding: Community): Observable<string[]> {
+    const fundingMembers$ = this.getInvitationFundingMembersGroupsByCommunity(funding);
+    const projectMembers$ = this.communityService.findByHref(funding._links.parentCommunity.href).pipe(
       getFirstSucceededRemoteDataPayload(),
-      mergeMap((subprojectsCommunity: Community) => this.communityService.findByHref(subprojectsCommunity._links.parentCommunity.href)),
+      mergeMap((fundingCommunity: Community) => this.communityService.findByHref(fundingCommunity._links.parentCommunity.href)),
       getFirstSucceededRemoteDataPayload(),
       mergeMap((parentProjectCommunity: Community) => this.getInvitationProjectMembersGroupsByCommunity(parentProjectCommunity))
     );
-    return combineLatest([subprojectMembers$, projectMembers$]).pipe(
+    return combineLatest([fundingMembers$, projectMembers$]).pipe(
       map(([subprojectMembers, projectMembers]) => [...subprojectMembers, ...projectMembers])
     );
   }

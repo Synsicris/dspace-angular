@@ -12,7 +12,7 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { Item } from '../../../core/shared/item.model';
 import { EASY_ONLINE_PATH, getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
-import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
+import { FUNDING_ENTITY } from '../../../core/project/project-data.service';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -71,6 +71,6 @@ export class EasyOnlineImportMenuComponent extends ContextMenuEntryComponent imp
    * Check if current Item is a Project
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
+    return (this.contextMenuObject as Item).entityType === FUNDING_ENTITY;
   }
 }

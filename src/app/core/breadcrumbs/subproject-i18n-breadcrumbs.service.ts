@@ -37,11 +37,11 @@ export class SubprojectI18nBreadcrumbsService implements BreadcrumbsProviderServ
     let i18nKey = key;
     if (key.includes('::')) {
       [projectId, subprojectId, i18nKey] = key.split('::');
-      const project$: Observable<Item> = this.projectService.getProjectItemByProjectCommunityId(projectId).pipe(
+      const project$: Observable<Item> = this.projectService.getEntityItemByCommunityId(projectId).pipe(
         getFinishedRemoteData(),
         getRemoteDataPayload()
       );
-      const subproject$: Observable<Item> = this.projectService.getProjectItemByProjectCommunityId(subprojectId).pipe(
+      const subproject$: Observable<Item> = this.projectService.getEntityItemByCommunityId(subprojectId).pipe(
         getFinishedRemoteData(),
         getRemoteDataPayload()
       );

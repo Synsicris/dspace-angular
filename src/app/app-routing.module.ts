@@ -106,13 +106,13 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
           {
-            path: 'entities/parentproject/:id/workingplan',
+            path: 'entities/project/:id/workingplan',
             loadChildren: () => import('./+working-plan-page/working-plan-page.module')
               .then((m) => m.WorkingPlanPageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
           {
-            path: 'entities/project/:id/exploitationplans',
+            path: 'entities/funding/:id/exploitationplans',
             loadChildren: () => import('./+exploitation-plan-page/exploitation-plan-page.module')
               .then((m) => m.ExploitationPlanPageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]

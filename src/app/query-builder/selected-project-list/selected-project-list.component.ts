@@ -13,6 +13,7 @@ import { Item } from '../../core/shared/item.model';
 import { PaginationService } from '../../core/pagination/pagination.service';
 import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
 import { fadeIn, fadeInOut } from '../../shared/animations/fade';
+import { PROJECT_RELATION_SOLR } from '../../core/project/project-data.service';
 
 @Component({
   selector: 'ds-selected-project-list',
@@ -88,7 +89,7 @@ export class SelectedProjectListComponent implements OnInit, OnChanges {
 
   private buildQuery(query) {
     if (query) {
-      this.query = `{!join from=synsicris.relation.parentproject_authority to=search.resourceid}${query}`;
+      this.query = `{!join from=${PROJECT_RELATION_SOLR} to=search.resourceid}${query}`;
     } else {
       this.query = '';
     }

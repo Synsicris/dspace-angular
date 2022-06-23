@@ -19,14 +19,14 @@ import { ProjectGroupService } from '../../core/project/project-group.service';
 export class ProjectMembersComponent implements OnInit, OnDestroy {
 
   /**
-   * The project group to manage
+   * The project/funding group to manage
    */
   @Input() targetGroup: Group;
 
   /**
-   * The project community
+   * The project/funding community
    */
-  @Input() projectCommunity: Community;
+  @Input() relatedCommunity: Community;
 
   /**
    * Representing if managing a project admin group or not
@@ -34,9 +34,9 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
   @Input() isAdminGroup: boolean;
 
   /**
-   * Representing if managing members of a subproject
+   * Representing if managing members of a funding
    */
-  @Input() isSubproject: boolean;
+  @Input() isFunding: boolean;
 
   groupBeingEdited: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -75,17 +75,17 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
 
   sendInvitation(email?: string) {
     let groups$: Observable<string[]>;
-    if (!this.isSubproject) {
+    if (!this.isFunding) {
       if (this.isAdminGroup) {
-        groups$ = this.projectGroupService.getInvitationProjectAllGroupsByCommunity(this.projectCommunity);
+        groups$ = this.projectGroupService.getInvitationProjectAllGroupsByCommunity(this.relatedCommunity);
       } else {
-        groups$ = this.projectGroupService.getInvitationProjectMembersGroupsByCommunity(this.projectCommunity);
+        groups$ = this.projectGroupService.getInvitationProjectMembersGroupsByCommunity(this.relatedCommunity);
       }
     } else {
       if (this.isAdminGroup) {
-        groups$ = this.projectGroupService.getInvitationSubprojectAdminsGroupsByCommunity(this.projectCommunity);
+        groups$ = this.projectGroupService.getInvitationFundingAdminsGroupsByCommunity(this.relatedCommunity);
       } else {
-        groups$ = this.projectGroupService.getInvitationSubprojectMembersGroupsByCommunity(this.projectCommunity);
+        groups$ = this.projectGroupService.getInvitationFundingMembersGroupsByCommunity(this.relatedCommunity);
       }
     }
 

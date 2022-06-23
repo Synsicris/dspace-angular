@@ -47,8 +47,8 @@ export class EditItemGrantsModalComponent implements OnInit {
    * The grant options available
    */
   public grantsOptions = [
-    { id: 'parentproject', name: 'project.create.grants.project-option' },
-    { id: 'project', name: 'project.create.grants.subproject-option' }
+    { id: 'project', name: 'project.create.grants.project-option' },
+    { id: 'funding', name: 'project.create.grants.subproject-option' }
   ];
 
   public processing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

@@ -15,7 +15,7 @@ import { Community } from '../../../core/shared/community.model';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
+import { FUNDING_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
 import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../../core/shared/operators';
 
 /**
@@ -34,9 +34,9 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
   isSubproject: boolean;
 
   /**
-   * The parentproject/project community
+   * The project/funding community
    */
-  projectCommunity: Community;
+  relatedCommunity: Community;
 
   /**
    * Modal reference
@@ -66,22 +66,22 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
 
 
   ngOnInit(): void {
-    this.isSubproject = (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
+    this.isSubproject = (this.contextMenuObject as Item).entityType === FUNDING_ENTITY;
     if (this.canShow()) {
       this.projectService.getProjectCommunityByProjectItemId((this.contextMenuObject as Item).uuid).pipe(
         getFirstCompletedRemoteData(),
         getRemoteDataPayload()
       ).subscribe((projectCommunity: Community) => {
-        this.projectCommunity = projectCommunity;
+        this.relatedCommunity = projectCommunity;
       });
     }
   }
 
   /**
-   * Check if current Item is a Project or a parentproject
+   * Check if current Item is a Project or a Funding
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
+    return (this.contextMenuObject as Item).entityType === FUNDING_ENTITY;
   }
 
   /**
@@ -94,9 +94,9 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
   public openInvitationModal() {
     let groups$: Observable<string[]>;
     if (this.isSubproject) {
-      groups$ = this.projectGroupService.getInvitationSubprojectMembersGroupsByCommunity(this.projectCommunity);
+      groups$ = this.projectGroupService.getInvitationFundingMembersGroupsByCommunity(this.relatedCommunity);
     } else {
-      groups$ = this.projectGroupService.getInvitationProjectMembersGroupsByCommunity(this.projectCommunity);
+      groups$ = this.projectGroupService.getInvitationProjectMembersGroupsByCommunity(this.relatedCommunity);
     }
 
     groups$.pipe(take(1))

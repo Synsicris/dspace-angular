@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
+import { PROJECT_RELATION_SOLR } from '../../core/project/project-data.service';
 
 @Component({
   selector: 'ds-projects-scoped-search',
@@ -35,8 +36,8 @@ export class ProjectsScopedSearchComponent implements OnInit, OnChanges {
 
   private buildQuery(query) {
     if (query) {
-      this.query = `query={!join from=search.resourceid to=synsicris.relation.parentproject_authority}` +
-        `{!join from=synsicris.relation.parentproject_authority to=search.resourceid}(${query})`;
+      this.query = `query={!join from=search.resourceid to=${PROJECT_RELATION_SOLR}}` +
+        `{!join from=${PROJECT_RELATION_SOLR} to=search.resourceid}(${query})`;
     } else {
       this.query = '';
     }

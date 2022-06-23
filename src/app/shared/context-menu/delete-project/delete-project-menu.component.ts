@@ -13,7 +13,7 @@ import { RemoteData } from '../../../core/data/remote-data';
 import { NoContent } from '../../../core/shared/NoContent.model';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
-import { PARENT_PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
+import { PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
 import { Community } from '../../../core/shared/community.model';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
@@ -37,7 +37,7 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
   public processing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
-   * The parentproject/project community
+   * The project community
    */
   public projectCommunity$: Observable<Community>;
 
@@ -121,10 +121,10 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
   }
 
   /**
-   * Check if current Item is a parentproject
+   * Check if current Item is a Project
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType === PARENT_PROJECT_ENTITY;
+    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
   }
 
   isProcessing() {

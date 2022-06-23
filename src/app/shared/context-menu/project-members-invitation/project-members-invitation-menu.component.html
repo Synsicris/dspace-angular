@@ -1,4 +1,4 @@
-<button *ngIf="projectCommunity && canShow() && (isProjectAdmin() | async)" class="dropdown-item"
+<button *ngIf="relatedCommunity && canShow() && (isProjectAdmin() | async)" class="dropdown-item"
         [innerHTML]="(isSubproject ? 'project-overview.invitation-members.menu.subproject' : 'project-overview.invitation-members.menu.project') | translate"
         (click)="$event.preventDefault();openInvitationModal();">
 </button>

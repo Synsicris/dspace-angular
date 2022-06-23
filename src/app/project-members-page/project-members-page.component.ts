@@ -14,7 +14,7 @@ import { Group } from '../core/eperson/models/group.model';
 import { GroupDataService } from '../core/eperson/group-data.service';
 import { BehaviorSubject } from 'rxjs';
 import { Item } from '../core/shared/item.model';
-import { PARENT_PROJECT_ENTITY } from '../core/project/project-data.service';
+import { PROJECT_ENTITY } from '../core/project/project-data.service';
 
 @Component({
   selector: 'ds-project-members-page',
@@ -24,28 +24,28 @@ import { PARENT_PROJECT_ENTITY } from '../core/project/project-data.service';
 export class ProjectMembersPageComponent implements OnInit {
 
   /**
-   * The project admin group
+   * The project/funding admin group
    */
-  public projectAdminsGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
+  public adminsGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
   /**
-   * The project edit group
+   * The project/funding edit group
    */
-  public projectMembersGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
+  public membersGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
 
   /**
-   * The project community
+   * The project/funding community
    */
-  public projectCommunity$: BehaviorSubject<Community> = new BehaviorSubject<Community>(null);
+  public relatedCommunity$: BehaviorSubject<Community> = new BehaviorSubject<Community>(null);
 
   /**
-   * The project entity item
+   * The project/funding entity item
    */
-  public projectItem$: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
+  public entityItem$: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
 
   /**
-   * Representing if managing members of a subproject
+   * Representing if managing members of a funding
    */
-  isSubproject: boolean;
+  isFunding: boolean;
 
   constructor(
     protected authService: AuthService,
@@ -61,7 +61,7 @@ export class ProjectMembersPageComponent implements OnInit {
       redirectOn4xx(this.router, this.authService),
       getFirstSucceededRemoteDataPayload()
     ).subscribe((project: Community) => {
-      this.projectCommunity$.next(project);
+      this.relatedCommunity$.next(project);
     });
 
     this.route.data.pipe(
@@ -69,8 +69,8 @@ export class ProjectMembersPageComponent implements OnInit {
       redirectOn4xx(this.router, this.authService),
       getFirstSucceededRemoteDataPayload()
     ).subscribe((project: Item) => {
-      this.projectItem$.next(project);
-      this.isSubproject = project.entityType !== PARENT_PROJECT_ENTITY;
+      this.entityItem$.next(project);
+      this.isFunding = project.entityType !== PROJECT_ENTITY;
     });
 
     this.route.data.pipe(
@@ -83,7 +83,7 @@ export class ProjectMembersPageComponent implements OnInit {
       getFirstCompletedRemoteData()
     ).subscribe((groupRD: RemoteData<Group>) => {
       if (groupRD.hasSucceeded) {
-        this.projectAdminsGroup$.next(groupRD.payload);
+        this.adminsGroup$.next(groupRD.payload);
       }
     });
 
@@ -97,7 +97,7 @@ export class ProjectMembersPageComponent implements OnInit {
       getFirstCompletedRemoteData()
     ).subscribe((groupRD: RemoteData<Group>) => {
       if (groupRD.hasSucceeded) {
-        this.projectMembersGroup$.next(groupRD.payload);
+        this.membersGroup$.next(groupRD.payload);
       }
     });
   }

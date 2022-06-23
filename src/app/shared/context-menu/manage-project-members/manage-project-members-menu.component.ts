@@ -13,7 +13,7 @@ import { Community } from '../../../core/shared/community.model';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { PARENT_PROJECT_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
+import { FUNDING_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
 import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../../core/shared/operators';
 import { Router } from '@angular/router';
 import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
@@ -34,9 +34,9 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
   isSubproject;
 
   /**
-   * The parentproject/project community
+   * The project/funding community
    */
-  projectCommunity: Community;
+  relatedCommunity: Community;
 
   /**
    * Initialize instance variables
@@ -47,7 +47,7 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
    * @param {NgbModal} modalService
    * @param {ProjectGroupService} projectGroupService
    * @param {ProjectDataService} projectService
-   * @param {Router} routerService
+   * @param {Router} router
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
@@ -62,22 +62,22 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
   }
 
   ngOnInit(): void {
-    this.isSubproject = (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
+    this.isSubproject = (this.contextMenuObject as Item).entityType === FUNDING_ENTITY;
     if (this.canShow()) {
       this.projectService.getProjectCommunityByItemId((this.contextMenuObject as Item).uuid).pipe(
         getFirstCompletedRemoteData(),
         getRemoteDataPayload()
       ).subscribe((projectCommunity: Community) => {
-        this.projectCommunity = projectCommunity;
+        this.relatedCommunity = projectCommunity;
       });
     }
   }
 
   /**
-   * Check if current Item is a Project or a parentproject
+   * Check if current Item is a Project or a Funding
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY || (this.contextMenuObject as Item).entityType === PARENT_PROJECT_ENTITY;
+    return (this.contextMenuObject as Item).entityType === FUNDING_ENTITY || (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
   }
 
   /**

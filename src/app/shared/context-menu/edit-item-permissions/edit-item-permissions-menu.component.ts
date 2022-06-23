@@ -12,7 +12,7 @@ import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 import { isNotEmpty } from '../../empty.util';
-import { PARENT_PROJECT_ENTITY } from '../../../core/project/project-data.service';
+import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
 
 /**
  * This component renders a context menu option that provides the links to edit item page.
@@ -62,7 +62,7 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
    * Check if current Item is a not Project
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType !== PARENT_PROJECT_ENTITY;
+    return (this.contextMenuObject as Item).entityType !== PROJECT_ENTITY;
   }
 
   /**

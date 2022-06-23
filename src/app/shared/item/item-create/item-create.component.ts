@@ -17,7 +17,7 @@ import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operato
 import { isNotEmpty } from '../../empty.util';
 import { CreateProjectComponent } from '../../../projects/create-project/create-project.component';
 import {
-  PARENT_PROJECT_ENTITY,
+  FUNDING_ENTITY,
   PERSON_ENTITY,
   PROJECT_ENTITY,
   PROJECTPATNER_ENTITY_METADATA,
@@ -75,8 +75,8 @@ export class ItemCreateComponent implements OnInit {
       )]
     ).pipe(
       map(([isAuthenticated, entityType]) => isAuthenticated && isNotEmpty(entityType)
-        && !(this.relatedEntityType === PARENT_PROJECT_ENTITY && entityType.label === SUBCONTRACTOR_ENTITY_METADATA)
-        && !(this.relatedEntityType === PARENT_PROJECT_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA)
+        && !(this.relatedEntityType === PROJECT_ENTITY && entityType.label === SUBCONTRACTOR_ENTITY_METADATA)
+        && !(this.relatedEntityType === PROJECT_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA)
         && !(this.relatedEntityType === PERSON_ENTITY && entityType.label === environment.comments.commentEntityType)),
       take(1)
     ).subscribe((canShow) => this.canShow$.next(canShow));
@@ -90,7 +90,7 @@ export class ItemCreateComponent implements OnInit {
   }
 
   openDialog() {
-    if (this.targetEntityType === PROJECT_ENTITY) {
+    if (this.targetEntityType === FUNDING_ENTITY) {
       this.createSubproject();
     } else {
       this.createEntity();

@@ -47,12 +47,12 @@ export class GrantBadgeComponent implements OnInit {
   /**
    * Contain the value when policy is open
    */
-  parentProjectPolicy: string = ProjectGrantsTypes.Parentproject;
+  parentProjectPolicy: string = ProjectGrantsTypes.Project;
 
   /**
    * Contain the value when policy is restricted
    */
-  projectPolicy: string = ProjectGrantsTypes.Subproject;
+  projectPolicy: string = ProjectGrantsTypes.Funding;
 
   constructor(
     private projectService: ProjectDataService,
@@ -70,14 +70,14 @@ export class GrantBadgeComponent implements OnInit {
     }
 
     if (isNotEmpty(this.policyGroup)) {
-      if (this.projectShared === ProjectGrantsTypes.Parentproject) {
-        this.badgeMessage.next(this.translate.instant('item.grant.badge.parentproject'));
+      if (this.projectShared === ProjectGrantsTypes.Project) {
+        this.badgeMessage.next(this.translate.instant('item.grant.badge.project'));
       } else {
         const communityId = this.projectGroupService.getCommunityIdByGroupName(this.policyGroup);
-        this.projectService.getProjectItemByProjectCommunityId(communityId)
+        this.projectService.getEntityItemByCommunityId(communityId)
           .subscribe((projectItemRD: RemoteData<Item>) => {
-            const projectItemName = (projectItemRD.hasSucceeded) ? projectItemRD.payload?.name : '';
-            this.badgeMessage.next(this.translate.instant('item.grant.badge.project',{ name: projectItemName } ));
+            const fundingItemName = (projectItemRD.hasSucceeded) ? projectItemRD.payload?.name : '';
+            this.badgeMessage.next(this.translate.instant('item.grant.badge.funding',{ name: fundingItemName } ));
           });
       }
     }

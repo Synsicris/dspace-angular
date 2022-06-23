@@ -512,7 +512,7 @@ export class DefaultAppConfig implements AppConfig {
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
     excludeComparisonMetadata: [
       'cris.policy.group', 'cris.project.shared', 'dc.date.accessioned', 'dc.date.available', 'dspace.entity.type',
-      'synsicris.common-policy.group', 'synsicris.relation.parentproject', 'synsicris.relation.project', 'synsicris.uniqueid',
+      'synsicris.common-policy.group', 'synsicris.relation.project', 'synsicris.relation.funding', 'synsicris.uniqueid',
       'synsicris.relation.workingplan', 'workingplan.link.status', 'workingplan.place', 'workingplan.relation.step',
       'impactpathway.relation.parent', 'impactpathway.relation.step', 'impactpathway.relation.task',
       'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
