@@ -1,16 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+
+import { BehaviorSubject, from, Observable } from 'rxjs';
+import { map, mergeMap, scan, switchMap, take } from 'rxjs/operators';
+
 import { Registration } from '../../core/shared/registration.model';
 import { EpersonRegistrationService } from '../../core/data/eperson-registration.service';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../core/shared/operators';
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
-import { map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { EPerson } from '../../core/eperson/models/eperson.model';
 import { AuthService } from '../../core/auth/auth.service';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Community } from '../../core/shared/community.model';
-import { CommunityDataService } from './../../core/data/community-data.service';
-import { getRemoteDataPayload } from './../../core/shared/operators';
+import { CommunityDataService } from '../../core/data/community-data.service';
+
+export interface InvitationGroupData {
+  groupName: string;
+  type: string;
+  community: Community;
+}
 
 @Component({
   selector: 'ds-invitation-acceptance',
@@ -20,14 +27,14 @@ import { getRemoteDataPayload } from './../../core/shared/operators';
 export class InvitationAcceptanceComponent implements OnInit {
 
   registrationData: Registration;
-  invitationsGroupData$ = new BehaviorSubject([]);
+  invitationsGroupData$: BehaviorSubject<InvitationGroupData[]> = new BehaviorSubject([]);
 
   constructor(private router: Router,
-    private route: ActivatedRoute,
-    private epersonRegistrationService: EpersonRegistrationService,
-    private epersonDataService: EPersonDataService,
-    private communityService: CommunityDataService,
-    private auth: AuthService) {
+              private route: ActivatedRoute,
+              private epersonRegistrationService: EpersonRegistrationService,
+              private epersonDataService: EPersonDataService,
+              private communityService: CommunityDataService,
+              private auth: AuthService) {
   }
 
   ngOnInit(): void {
@@ -36,24 +43,20 @@ export class InvitationAcceptanceComponent implements OnInit {
         const token = paramMap.get('registrationToken');
         return this.epersonRegistrationService.searchByToken(token);
       }),
-      map((registrationData: Registration) => {
+      mergeMap((registrationData: Registration) => {
         this.registrationData = registrationData;
-        return registrationData.groupNames;
+        return from(registrationData.groupNames);
       }),
-      switchMap((groupNames: string[]) => groupNames),
       mergeMap((groupName: string) => {
         const groupNameArray = groupName.split('_');
         const parentId = groupNameArray[1];
-        console.log(this.getCommunity(parentId));
         return this.getCommunity(parentId).pipe(
-          map(community => ({ type: groupNameArray[2], community: community }))
+          map(community => ({ groupName, type: groupNameArray[2], community: community }))
         );
       }),
-    ).subscribe((communityAndType: any) => {
-      console.log(communityAndType);
-      const val: any[] = this.invitationsGroupData$.value;
-      val.push(communityAndType);
-      this.invitationsGroupData$.next(val);
+      scan((acc: any, value: any) => [...acc, value], [])
+    ).subscribe((list: InvitationGroupData[]) => {
+      this.invitationsGroupData$.next(list);
     });
   }
 
@@ -74,13 +77,11 @@ export class InvitationAcceptanceComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-
   getCommunity(parentId): Observable<Community> {
-    return this.communityService.findById(parentId)
-      .pipe(
-        getFirstCompletedRemoteData(),
-        getRemoteDataPayload()
-      );
+    return this.communityService.findById(parentId).pipe(
+      getFirstCompletedRemoteData(),
+      getRemoteDataPayload()
+    );
   }
 
 }
