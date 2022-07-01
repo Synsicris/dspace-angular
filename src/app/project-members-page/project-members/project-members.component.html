@@ -1,3 +1,4 @@
+<ds-alert [content]="helpMessageLabel | translate"></ds-alert>
 <ds-members-list *ngIf="groupBeingEdited | async" [messagePrefix]="messagePrefix + '.members-list'"
-    [showEditActions]="false" [showWithdrawActions]="true" [showIntivtePersonSection]="true" [showHeadingTitle]="false"
+    [showEditActions]="false" [showWithdrawActions]="true" [showInvitationPersonSection]="true" [showHeadingTitle]="false"
     [showId]="false" [showInvitationAction]="true" (sendInvitation)="sendInvitation($event)"></ds-members-list>

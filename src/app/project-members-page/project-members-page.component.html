@@ -1,8 +1,7 @@
 <div class="container">
   <nav ngbNav #nav="ngbNav" class="nav-tabs">
     <ng-container ngbNavItem>
-      <a ngbNavLink><b>{{ 'project.manage.members.admin-group' | translate: { project: isFunding ? 'subproject':
-          'project'} }}</b></a>
+      <a ngbNavLink><b>{{(isFunding ? 'project.manage.members.funding.admin-group' : 'project.manage.members.project.admin-group') | translate }}</b></a>
       <ng-template ngbNavContent>
         <ds-project-members [targetGroup]="(adminsGroup$ | async)"
                             [relatedCommunity]="(relatedCommunity$ | async)" [isAdminGroup]="true" [isFunding]="isFunding">
@@ -10,8 +9,7 @@
       </ng-template>
     </ng-container>
     <ng-container ngbNavItem *ngIf="isFunding">
-      <a ngbNavLink>{{ 'project.manage.members.members-group' | translate: { project: isFunding ? 'subproject':
-        'project'} }}</a>
+      <a ngbNavLink>{{(isFunding ? 'project.manage.members.funding.members-group' : 'project.manage.members.project.members-group') | translate }}</a>
       <ng-template ngbNavContent>
         <ds-project-members [targetGroup]="(membersGroup$ | async)"
                             [relatedCommunity]="(relatedCommunity$ | async)" [isAdminGroup]="false" [isFunding]="isFunding">

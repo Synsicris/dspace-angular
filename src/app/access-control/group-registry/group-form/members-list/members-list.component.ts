@@ -73,7 +73,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
   /**
    * Boolean representing if to show the send invitation section
    */
-  @Input() showIntivtePersonSection = false;
+  @Input() showInvitationPersonSection = false;
 
   /**
    * Boolean representing if to show the id column of the tables

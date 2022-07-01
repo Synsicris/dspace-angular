@@ -41,6 +41,11 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
   groupBeingEdited: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * I18n message key for help box
+   */
+  helpMessageLabel;
+
+  /**
    * I18n message prefix key
    */
   messagePrefix = 'project.manage';
@@ -58,6 +63,11 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (this.isAdminGroup) {
+      this.helpMessageLabel = this.isFunding ? 'project.manage.members.funding.admin-group-help' : 'project.manage.members.project.admin-group-help';
+    } else {
+      this.helpMessageLabel = this.isFunding ? 'project.manage.members.funding.members-group-help' : 'project.manage.members.project.members-group-help';
+    }
     this.groupService.editGroup(this.targetGroup);
     this.subs.push(
       this.groupService.getActiveGroup().subscribe((activeGroup) => {
