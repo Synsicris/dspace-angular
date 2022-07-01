@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -17,7 +17,7 @@ import { PROJECT_ENTITY, ProjectDataService } from '../../../core/project/projec
 import { Community } from '../../../core/shared/community.model';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
-import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../../core/shared/operators';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
 
@@ -40,6 +40,8 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
    * The project community
    */
   public projectCommunity$: Observable<Community>;
+
+  private canDeleteProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * Modal reference
@@ -72,10 +74,18 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
   }
 
   ngOnInit(): void {
-    this.projectCommunity$ = this.projectService.getProjectCommunityByItemId((this.contextMenuObject as Item).uuid).pipe(
-      take(1),
-      getRemoteDataPayload()
-    );
+    this.projectService.getProjectCommunityByItemId((this.contextMenuObject as Item).uuid).pipe(
+      getFirstCompletedRemoteData(),
+      switchMap((projectCommunityRD) => {
+        if (projectCommunityRD.hasSucceeded) {
+          return this.authorizationService.isAuthorized(FeatureID.CanDelete, projectCommunityRD?.payload?.self, undefined);
+        } else {
+          return of(false);
+        }
+      })
+    ).subscribe((canDelete) => {
+      this.canDeleteProject$.next(canDelete);
+    });
   }
 
   /**
@@ -103,6 +113,7 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
   public openConfirmationModal(content) {
     this.modalRef = this.modalService.open(content);
   }
+
   /**
    * Navigate to impact pathway edit page
    */
@@ -115,9 +126,7 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
    * Check if user is administrator for this project
    */
   canDeleteProject(): Observable<boolean> {
-    return this.projectCommunity$.pipe(
-      switchMap((projectCommunity) => this.authorizationService.isAuthorized(FeatureID.CanDelete, projectCommunity.self, undefined))
-    );
+    return this.canDeleteProject$.asObservable();
   }
 
   /**
