@@ -122,7 +122,6 @@ export class CompareItemComponent implements OnInit {
    * @param versionedItemMetadataValues The versioned item metadata values
    */
   getClass(metadataName: string, baseItemMetadataValues: MetadataValue[], versionedItemMetadataValues: MetadataValue[]): string {
-    console.log(metadataName);
     if (this.metadataAddedList$.value.includes(metadataName)) {
       return 'table-success';
     }

@@ -60,7 +60,6 @@ export class SelectedProjectListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log(this.query);
     this.paginationChanges$ = new BehaviorSubject({
       paginationConfig: this.paginationConfig,
       sortConfig: this.sortConfig

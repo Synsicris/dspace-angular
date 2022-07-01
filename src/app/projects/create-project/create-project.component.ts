@@ -157,7 +157,6 @@ export class CreateProjectComponent implements OnInit {
       })
     ).subscribe({
         next: (response: RemoteData<Community>) => {
-          console.log(response);
           if (response.hasSucceeded) {
             this.navigate(response.payload);
           } else {

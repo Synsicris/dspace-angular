@@ -88,7 +88,6 @@ export class ProjectMembersPageComponent implements OnInit {
       switchMap((groupID) => this.groupService.findById(groupID)),
       getFirstCompletedRemoteData()
     ).subscribe((groupRD: RemoteData<Group>) => {
-      console.log(groupRD);
       if (groupRD.hasSucceeded) {
         this.adminsGroup$.next(groupRD.payload);
       }
@@ -109,7 +108,6 @@ export class ProjectMembersPageComponent implements OnInit {
       switchMap((groupID) => this.groupService.findById(groupID)),
       getFirstCompletedRemoteData()
     ).subscribe((groupRD: RemoteData<Group>) => {
-      console.log(groupRD);
       if (groupRD.hasSucceeded) {
         this.membersGroup$.next(groupRD.payload);
       }

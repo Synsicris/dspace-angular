@@ -237,7 +237,6 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param idx
    */
   onValueSelect(selectedValue: FacetValue, parentFilter: string, idx: number) {
-    console.log(selectedValue);
     // disable last selected value for each of the keys that might have that value
     const appliedFilters = this.filterValuesMapArray.filter((x) =>
       x.get(parentFilter)
@@ -530,7 +529,6 @@ export class QueryConditionGroupComponent implements OnInit {
           }
 
           const query = `(${authorityQuery}${field}:"${value}" OR ${fieldWithLanguage}_keyword:"${value}" OR ${field}_keyword:"${value}")`;
-          console.log(query);
           queries.push(query);
         });
       }
