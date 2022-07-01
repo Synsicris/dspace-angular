@@ -4866,7 +4866,7 @@
 
   "search.breadcrumbs": "Search",
 
-  "search.search-form.placeholder": "Search the repository ...",
+  "search.search-form.placeholder": "Search the repository …",
 
   "search.filters.applied.f.author": "Author",
 
@@ -4963,9 +4963,6 @@
   "search.filters.applied.charts.no.data.found": "No data found",
 
   "search.filters.applied.charts.show.hide": "Show/Hide",
-
-
-
 
   "search.filters.filter.author.head": "Author",
 
@@ -5193,13 +5190,13 @@
 
   "search.filters.filter.synsicristypeprojectcontribution.placeholder": "Project contribution",
 
-  "search.filters.filter.synsicristypeprojectcontribution.label": "Search project contribution",
+  "search.filters.filter.synsicristypeprojectcontribution.label": "Search Project contribution",
 
   "search.filters.filter.synsicristypepurpose.head": "Purpose",
 
   "search.filters.filter.synsicristypepurpose.placeholder": "Purpose",
 
-  "search.filters.filter.synsicristypepurpose.label": "Search purpose",
+  "search.filters.filter.synsicristypepurpose.label": "Search Purpose",
 
   "search.filters.filter.synsicrisrelationpartner.head": "Partner",
 
@@ -5368,8 +5365,6 @@
   "search.sidebar.show.hide.filters.tooltip": "Show/Hide filters sidebar",
 
   "search.sidebar.show.hide.charts.tooltip": "Show/Hide charts",
-
-
 
   "search.view-switch.show-detail": "Show detail",
 
@@ -7505,7 +7500,7 @@
 
   "layout.box.header.step": "Works and cooperations after project end",
 
-  "layout.box.header.application": "Application of a solution / change / innovation",
+  "layout.box.header.application": "Applications of a solution / change / innovation",
 
   "layout.box.header.spinoff": "Spin-offs",
 
@@ -7579,7 +7574,7 @@
 
   "earch.filters.applied.f.itemtype": "Type",
 
-  "layout.field.label.Person.dc.title": "Person",
+  "layout.field.label.Person.dc.title": "Name",
 
   "layout.field.label.Person.synsicris.subject.destatis": "Discipline",
 
@@ -8371,7 +8366,7 @@
 
   "layout.box.header.comment_m": "Comment",
 
-  "layout.tab.header.details": "Details",
+  "layout.tab.header.details": "My personal profile",
 
   "layout.tab.header.person_projects": "My projects",
 
@@ -8495,6 +8490,110 @@
 
   "layout.tab.header.Projekttraeger": "Programme and Funding information",
 
-  "layout.box.header.subcontractors": "Subproject - Subcontractors / Cooperation partners"
+  "layout.box.header.subcontractors": "Subproject - Subcontractors / Cooperation partners",
+
+  "submission.sections.submit.progressbar.describe.events_internal": "Internal section (only for consortium)",
+
+  "layout.tab.header.comments_all": "All comments",
+
+  "layout.box.header.basics_comment": "Comments - Subproject",
+
+  "layout.box.header.comment_jp": "Comments - Joint project",
+
+  "layout.box.header.projectpartner_comment": "Comments - Project partner",
+
+  "layout.box.header.subcontractor_comment": "Comments - Subcontractor",
+
+  "layout.box.header.cooperationpartner_comment": "Comments - Cooperation partner",
+
+  "layout.box.header.targetgroup_comment": "Comments - Staheholder group",
+
+  "layout.box.header.ethic_comment": "Comments - Ethical reflection",
+
+  "layout.box.header.gender_comment": "Comments - Gender reflection",
+
+  "layout.box.header.condition_comment": "Comments - Condition",
+
+  "layout.box.header.stateofart_comment": "Comments - State of knowledge / problem definition",
+
+  "layout.box.header.proj_objective_comment": "Commets - Research and development objective",
+
+  "layout.box.header.ia_objective_comment": "Commets - Target for interaction and transfer",
+
+  "layout.box.header.workpackage_comment": "Commets - Workpackage",
+
+  "layout.box.header.task_comment": "Commets - Task",
+
+  "layout.box.header.process_event_comment": "Commets - Cooperation / Participation / Exchange process",
+
+  "layout.box.header.comment_event": "Commets - Event",
+
+  "layout.box.header.plan_publication_comment": "Commets - Planned publications",
+
+  "layout.box.header.Publication_comment": "Commets - Publication",
+
+  "layout.box.header.physical_object_comment": "Commets - Object / Material",
+
+  "layout.box.header.Product_comment": "Commets - Research data",
+
+  "layout.box.header.research_result_comment": "Commets - Research result",
+
+  "layout.box.header.unexpected_result_comment": "Commets - (Intermediate) result / problem",
+
+  "layout.box.header.Patent_comment": "Commets - Patent / utility patent",
+
+  "layout.box.header.innovationpotential_comment": "Commets - Possible solution / change / innovation",
+
+  "layout.box.header.innovationidea_comment": "Commets - Idea for the use of project results",
+
+  "layout.box.header.step_comment": "Commets - Work and cooperation after project end",
+
+  "layout.box.header.application_comment": "Commets - Application of a solution / change / innovation",
+
+  "layout.box.header.spinoff_comment": "Commets - Spin-off",
+
+  "layout.box.header.award_comment": "Commets - Award",
+
+  "layout.box.header.exp_societalimpact_comment": "Commets - Expected societal impact (new)",
+
+  "layout.box.header.pot_societalimpact_comment": "Commets - Expected societal impact",
+
+  "layout.box.header.contribution_fundingprogramme_comment": "Commets - Contribution to funding objectives",
+
+  "layout.box.header.other_comment": "Commets - Others",
+
+  "submission.sections.submit.progressbar.describe.internalacc": "Internal section for consortium",
+
+  "layout.box.header.personheading": "Person profile",
+
+  "layout.field.label.process_event.synsicris.type.process-event-frequency.header": "Frequency",
+
+  "layout.field.label.process_event.synsicris.type.process-event-date.header": "Data on the meeting/event",
+
+  "layout.field.label.Publication.dc.contributor.author.header": "Author(s)",
+
+  "layout.field.label.Product.dc.contributor.author.header": "Author(s)",
+
+  "layout.field.label.innovationpotential.dc.type.header": "Type",
+
+  "layout.field.label.innovationpotential.synsicris.type.regional-status.header": "Reference points",
+
+  "layout.field.label.innovationpotential.synsicris.type.rl-status.header": "Start value/target value",
+
+  "layout.field.label.application.synsicris.date.referenceyear.header": "Reference year",
+
+  "layout.field.label.spinoff.synsicris.date.reference-year-performance.header": "Reference year",
+
+  "layout.field.label.spinoff.synsicris.date.reference-year-funding.header": "Year of funding",
+
+  "layout.field.label.exp_societalimpact.dc.type.header": "Expected impact",
+
+  "layout.field.label.exp_societalimpact.synsicris.type-n.header": "Possible expected side effects",
+
+  "layout.field.label.parentproject.dc.type.attachment": "Attachments",
+
+  "layout.field.label.Event.synsicris.type.internal": "Task",
+
+  "layout.field.label.Event.synsicris.description.internal": "Notes"
 
 }
