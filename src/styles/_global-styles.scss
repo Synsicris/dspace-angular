@@ -44,16 +44,14 @@ ds-admin-sidebar {
   z-index: 0;
 }
 
-.media-viewer
-  .change-gallery
-  .ngx-gallery
-  ngx-gallery-preview.ngx-gallery-active {
+.media-viewer .change-gallery .ngx-gallery ngx-gallery-preview.ngx-gallery-active {
   right: 0;
   left: auto;
   width: calc(100% - 53px);
 }
 
 .ds-submission-reorder-dragging {
+
   .ds-hint,
   button {
     display: none;
@@ -61,6 +59,7 @@ ds-admin-sidebar {
 }
 
 ngb-modal-backdrop {
+
   // ng-bootsrap animates opacity, causing the fully opaque background to flash briefly before the transition starts
   // animating background-color between transparent & a RGBA color instead looks smoother
   &.fade {
@@ -101,10 +100,17 @@ button.switch {
   color: #fff;
   font-weight: 600;
 }
+
 .switch-label-unchecked {
   font-weight: 500;
 }
 
 .authority-confidence-clickable {
   cursor: pointer;
+}
+
+.cdk-drag {
+  .modal-header {
+    cursor: move;
+  }
 }
