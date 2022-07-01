@@ -15,7 +15,7 @@ import { Community } from '../../../core/shared/community.model';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { FUNDING_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
+import { FUNDING_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
 import { getRemoteDataPayload } from '../../../core/shared/operators';
 
 /**
@@ -80,7 +80,8 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
    * Check if current Item is a Project or a Funding
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType === FUNDING_ENTITY || (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
+    // return (this.contextMenuObject as Item).entityType === FUNDING_ENTITY || (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
+    return false;
   }
 
   /**

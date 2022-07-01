@@ -234,16 +234,39 @@ export class ProjectDataService extends CommunityDataService {
   }
 
   /**
+   * Get the funding community which the given item belongs to
+   *
+   * @param itemId The entity item id
+   * @return the Community as an Observable
+   */
+  getFundingCommunityByItemId(itemId: string): Observable<RemoteData<Community>> {
+    return this.getRelatedCommunityByItemId(itemId, FUNDING_RELATION_METADATA, followLink('owningCollection', {}, followLink('parentCommunity')))
+  }
+
+  /**
    * Get the project community which the given item belongs to
    *
    * @param itemId The entity item id
    * @return the Community as an Observable
    */
   getProjectCommunityByItemId(itemId: string): Observable<RemoteData<Community>> {
+    return this.getRelatedCommunityByItemId(itemId, PROJECT_RELATION_METADATA, followLink('owningCollection', {}, followLink('parentCommunity')))
+  }
+
+  /**
+   * Get the project community which the given item belongs to
+   *
+   * @param itemId The entity item id
+   * @param relationMetadata The metadata that contains relation to project/funding
+   * @param linksToFollow    List of {@link FollowLinkConfig} that indicate which
+   *                        {@link HALLink}s should be automatically resolved
+   * @return the Community as an Observable
+   */
+  private getRelatedCommunityByItemId(itemId: string, relationMetadata: string, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Community>> {
     return this.getRelatedEntityItemByItem(
       itemId,
-      PROJECT_RELATION_METADATA,
-      followLink('owningCollection', {}, followLink('parentCommunity'))
+      relationMetadata,
+      ...linksToFollow
     ).pipe(
       getFirstCompletedRemoteData(),
       mergeMap((projectItemRD: RemoteData<Item>) => {

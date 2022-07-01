@@ -77,11 +77,18 @@ export class ProjectMembersPageComponent implements OnInit {
       map((data) => data.projectCommunity as RemoteData<Community>),
       redirectOn4xx(this.router, this.authService),
       getFirstSucceededRemoteDataPayload(),
-      switchMap((project: Community) => this.projectGroupService.getProjectAdminsGroupUUIDByCommunity(project)),
+      switchMap((community: Community) => {
+        if (this.isFunding) {
+          return this.projectGroupService.getInvitationFundingAdminsGroupsByCommunity(community);
+        } else {
+          return this.projectGroupService.getProjectAdminsGroupUUIDByCommunity(community);
+        }
+      }),
       map((groups: string[]) => groups[0]),
       switchMap((groupID) => this.groupService.findById(groupID)),
       getFirstCompletedRemoteData()
     ).subscribe((groupRD: RemoteData<Group>) => {
+      console.log(groupRD);
       if (groupRD.hasSucceeded) {
         this.adminsGroup$.next(groupRD.payload);
       }
@@ -91,11 +98,18 @@ export class ProjectMembersPageComponent implements OnInit {
       map((data) => data.projectCommunity as RemoteData<Community>),
       redirectOn4xx(this.router, this.authService),
       getFirstSucceededRemoteDataPayload(),
-      switchMap((project: Community) => this.projectGroupService.getInvitationProjectMembersGroupsByCommunity(project)),
+      switchMap((community: Community) => {
+        if (this.isFunding) {
+          return this.projectGroupService.getInvitationFundingMembersGroupsByCommunity(community);
+        } else {
+          return this.projectGroupService.getInvitationProjectMembersGroupsByCommunity(community);
+        }
+      }),
       map((groups: string[]) => groups[0]),
       switchMap((groupID) => this.groupService.findById(groupID)),
       getFirstCompletedRemoteData()
     ).subscribe((groupRD: RemoteData<Group>) => {
+      console.log(groupRD);
       if (groupRD.hasSucceeded) {
         this.membersGroup$.next(groupRD.payload);
       }

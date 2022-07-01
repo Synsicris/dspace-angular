@@ -81,7 +81,8 @@ export class ProjectMembersInvitationMenuComponent extends ContextMenuEntryCompo
    * Check if current Item is a Project or a Funding
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType === FUNDING_ENTITY;
+    // return (this.contextMenuObject as Item).entityType === FUNDING_ENTITY;
+    return false;
   }
 
   /**

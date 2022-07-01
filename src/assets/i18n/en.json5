@@ -4498,7 +4498,7 @@
 
   "project-overview.invitation.processing": "Processing...",
 
-  "project-overview.invitation.sub-project.msg": "Please insert the email address of the person to invite to the sub-project",
+  "project-overview.invitation.sub-project.msg": "Please insert the email address of the person to invite to the funding",
 
   "project-overview.invitation.error": "There was an issue when sending the invitation, please try again later.",
 
@@ -6151,7 +6151,7 @@
 
   "submission.sections.submit.progressbar.easy_upload": "Import from easy-Online",
 
-  "submission.sections.submit.progressbar.easy_upload.info": "By uploading your easy-Online application, you import information about the sub-project, the executing agency and the persons involved. You can use this information here as well. The upload can be repeated at any time with an updated xml file from easy-online.",
+  "submission.sections.submit.progressbar.easy_upload.info": "By uploading your easy-Online application, you import information about the funding, the executing agency and the persons involved. You can use this information here as well. The upload can be repeated at any time with an updated xml file from easy-online.",
 
   "submission.sections.submit.progressbar.describe.entity_type_selection": "Selection of the entity type",
 
@@ -7559,7 +7559,7 @@
 
   "subproject.create.grants.project-option": "Editable by all project members",
 
-  "subpproject.create.grants.subproject-option": "Editable by only sub-project members",
+  "subpproject.create.grants.subproject-option": "Editable by only funding members",
 
   "submission.sections.upload.form.access-condition.openaccess": "open access",
 

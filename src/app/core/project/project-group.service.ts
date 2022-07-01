@@ -57,11 +57,16 @@ export class ProjectGroupService {
     return this.getGroupsByQuery(query);
   }
 
+  getFundingMembersGroupUUIDByCommunity(project: Community): Observable<string[]> {
+    const query = this.getFundingMembersGroupNameByCommunity(project);
+    return this.getGroupsByQuery(query);
+  }
+
   getInvitationProjectMembersGroupsByCommunity(project: Community): Observable<string[]> {
     return this.getProjectMembersGroupUUIDByCommunity(project);
   }
 
-  getInvitationFundingAllGroupsByCommunity(funding: Community): Observable<string[]> {
+  getAllFundingGroupsByCommunity(funding: Community): Observable<string[]> {
     const query = FUNDING_GROUP_TEMPLATE.replace('%s', funding.uuid);
     return this.getGroupsByQuery(query);
   }
@@ -72,7 +77,7 @@ export class ProjectGroupService {
   }
 
   getInvitationFundingAdminsGroupsByCommunity(funding: Community): Observable<string[]> {
-    const fundingMembers$ = this.getInvitationFundingAllGroupsByCommunity(funding);
+    const fundingMembers$ = this.getAllFundingGroupsByCommunity(funding);
     const projectMembers$ = this.communityService.findByHref(funding._links.parentCommunity.href).pipe(
       getFirstSucceededRemoteDataPayload(),
       mergeMap((subprojectsCommunity: Community) => this.communityService.findByHref(subprojectsCommunity._links.parentCommunity.href)),
@@ -80,12 +85,12 @@ export class ProjectGroupService {
       mergeMap((parentProjectCommunity: Community) => this.getInvitationProjectMembersGroupsByCommunity(parentProjectCommunity))
     );
     return combineLatest([fundingMembers$, projectMembers$]).pipe(
-      map(([subprojectMembers, projectMembers]) => [...subprojectMembers, ...projectMembers])
+      map(([fundingMembers, projectMembers]) => [...fundingMembers, ...projectMembers])
     );
   }
 
   getInvitationFundingMembersGroupsByCommunity(funding: Community): Observable<string[]> {
-    const fundingMembers$ = this.getInvitationFundingMembersGroupsByCommunity(funding);
+    const fundingMembers$ = this.getFundingMembersGroupUUIDByCommunity(funding);
     const projectMembers$ = this.communityService.findByHref(funding._links.parentCommunity.href).pipe(
       getFirstSucceededRemoteDataPayload(),
       mergeMap((fundingCommunity: Community) => this.communityService.findByHref(fundingCommunity._links.parentCommunity.href)),
@@ -93,7 +98,7 @@ export class ProjectGroupService {
       mergeMap((parentProjectCommunity: Community) => this.getInvitationProjectMembersGroupsByCommunity(parentProjectCommunity))
     );
     return combineLatest([fundingMembers$, projectMembers$]).pipe(
-      map(([subprojectMembers, projectMembers]) => [...subprojectMembers, ...projectMembers])
+      map(([fundingMembers, projectMembers]) => [...fundingMembers, ...projectMembers])
     );
   }
 

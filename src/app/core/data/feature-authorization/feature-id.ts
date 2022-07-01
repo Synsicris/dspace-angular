@@ -37,4 +37,6 @@ export enum FeatureID {
   CanMakeEasyOnlineImport = 'canMakeEasyOnlineImport',
   isAdminOfProject = 'isAdminOfProject',
   isMemberOfProject = 'isMemberOfProject',
+  isAdminOfFunding = 'isAdminOfFunding',
+  isMemberOfFunding = 'isMemberOfFunding',
 }
