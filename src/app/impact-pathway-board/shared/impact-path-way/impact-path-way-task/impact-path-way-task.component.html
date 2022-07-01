@@ -2,7 +2,7 @@
      [class.task-focus]="(selectable && selectStatus.value) || (hasFocus$ | async)"
      [class.bg-gradient-light]="!compareMode && isDisabled()"
      [class.alert-success]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
-     [class.alert-alert]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed"
+     [class.alert-danger]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed"
      [class.task-disabled]="!compareMode && isDisabled()"
      (click)="setFocus($event)">
   <div class="task-left-bar">
