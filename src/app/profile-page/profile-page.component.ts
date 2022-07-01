@@ -75,7 +75,7 @@ export class ProfilePageComponent implements OnInit {
   /**
    * Active tab utilized by accordion
    */
-  activeIds: string[] = ['profile-card-researcher', 'profile-card-security'];
+  activeIds: string[] = ['profile-card-researcher'];
 
 
   constructor(private authService: AuthService,
