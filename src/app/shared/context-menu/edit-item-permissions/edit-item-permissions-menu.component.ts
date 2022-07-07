@@ -1,10 +1,11 @@
-import { Item } from './../../../core/shared/item.model';
-import { AuthorizationDataService } from './../../../core/data/feature-authorization/authorization-data.service';
-import { FeatureID } from './../../../core/data/feature-authorization/feature-id';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+
+import { Item } from '../../../core/shared/item.model';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
@@ -14,6 +15,7 @@ import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-
 import { isNotEmpty } from '../../empty.util';
 import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
 
+
 /**
  * This component renders a context menu option that provides the links to edit item page.
  */
@@ -22,7 +24,7 @@ import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
   templateUrl: './edit-item-permissions-menu.component.html'
 })
 @rendersContextMenuEntriesForType(DSpaceObjectType.ITEM, true)
-export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent {
+export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent implements OnInit {
 
   /**
    * The menu entry type
@@ -40,6 +42,10 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
    */
   public modalRef: NgbModalRef;
 
+  /**
+   * A boolean representing if user can edit grants
+   */
+  private canEditGrants$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * Initialize instance variables
@@ -58,6 +64,13 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.EditSubmission);
   }
 
+  ngOnInit(): void {
+    this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.contextMenuObject.self, undefined)
+      .subscribe((canEdit) => {
+        this.canEditGrants$.next(canEdit);
+      });
+  }
+
   /**
    * Check if current Item is a not Project
    */
@@ -69,7 +82,7 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
    * Check if edit grants is available
    */
   isEditPermissionAvailable(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.contextMenuObject.self, undefined);
+    return this.canEditGrants$.asObservable();
   }
 
   /**
@@ -86,4 +99,5 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
     });
 
   }
+
 }
