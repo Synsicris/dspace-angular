@@ -231,6 +231,11 @@ export class SearchComponent implements OnInit {
   isSidebarCollapsed$: Observable<boolean>;
 
   /**
+   * Observable for whether or not the sidebar is currently collapsed
+   */
+  isSidebarCollapsedXL$: Observable<boolean>;
+
+  /**
    * Emits true if were on a small screen
    */
   isXsOrSm$: Observable<boolean>;
@@ -303,6 +308,7 @@ export class SearchComponent implements OnInit {
     }
 
     this.isSidebarCollapsed$ = this.isSidebarCollapsed();
+    this.isSidebarCollapsedXL$ = this.isSidebarCollapsedXL();
     this.searchLink = this.getSearchLink();
     this.currentContext$.next(this.context);
 
@@ -439,6 +445,14 @@ export class SearchComponent implements OnInit {
    */
   private isSidebarCollapsed(): Observable<boolean> {
     return this.sidebarService.isCollapsed;
+  }
+
+  /**
+   * Check if the sidebar is collapsed
+   * @returns {Observable<boolean>} emits true if the sidebar is currently collapsed, false if it is expanded
+   */
+   private isSidebarCollapsedXL(): Observable<boolean> {
+    return this.sidebarService.isCollapsedInXL;
   }
 
   /**
