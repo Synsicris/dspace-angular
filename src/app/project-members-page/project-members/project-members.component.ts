@@ -1,7 +1,9 @@
+import { NotificationsService } from './../../shared/notifications/notifications.service';
+import { getRemoteDataPayload } from './../../core/shared/operators';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { Group } from '../../core/eperson/models/group.model';
@@ -10,6 +12,7 @@ import { hasValue } from '../../shared/empty.util';
 import { InvitationModalComponent } from '../../shared/invitation-modal/invitation-modal.component';
 import { Community } from '../../core/shared/community.model';
 import { ProjectGroupService } from '../../core/project/project-group.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ds-project-members',
@@ -58,7 +61,12 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
    */
   private modalRef: NgbModalRef;
 
-  constructor(protected groupService: GroupDataService, protected modalService: NgbModal, protected projectGroupService: ProjectGroupService) {
+  constructor(
+    protected groupService: GroupDataService,
+    protected modalService: NgbModal,
+    private translateService: TranslateService,
+    private notificationsService: NotificationsService,
+    protected projectGroupService: ProjectGroupService) {
 
   }
 
@@ -84,6 +92,65 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
   }
 
   sendInvitation(email?: string) {
+
+    this.getGroups().pipe(take(1))
+      .subscribe((groups: string[]) => {
+        this.modalRef = this.modalService.open(InvitationModalComponent);
+        this.modalRef.componentInstance.groupList = groups;
+        this.modalRef.componentInstance.email = email;
+      });
+
+  }
+
+  addMemberToMultipleGroups(ePerson) {
+    this.getGroups().pipe(
+      take(1),
+      switchMap((groups: string[]) => {
+        return this.getGroupsEntity(groups);
+      })
+    )
+      .subscribe((groups: Group[]) => {
+        groups.forEach((group: Group) => {
+          const response = this.groupService.addMemberToGroup(group, ePerson.eperson);
+        });
+
+        this.notificationsService.success(this.translateService.get(this.messagePrefix + '.notification.success.addMember'));
+
+      });
+
+  }
+
+  deleteMemberToMultipleGroups(ePerson) {
+    this.getGroups().pipe(
+      take(1),
+      switchMap((groups: string[]) => {
+        return this.getGroupsEntity(groups);
+      })
+    )
+      .subscribe((groups: Group[]) => {
+        groups.forEach((group: Group) => {
+          const response = this.groupService.deleteMemberFromGroup(group, ePerson.eperson);
+        });
+
+        this.notificationsService.success(this.translateService.get(this.messagePrefix + '.notification.success.deleteMember'));
+
+      });
+
+  }
+
+  getGroupsEntity(groups: string[]): Observable<any[]> {
+    const groupsObs = [];
+    groups.forEach(groupId => {
+      groupsObs.push(
+        this.groupService.findById(groupId).pipe(
+          getRemoteDataPayload()
+        )
+      );
+    });
+    return combineLatest(groupsObs);
+  }
+
+  getGroups(): Observable<string[]> {
     let groups$: Observable<string[]>;
     if (!this.isFunding) {
       if (this.isAdminGroup) {
@@ -99,12 +166,8 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
       }
     }
 
-    groups$.pipe(take(1))
-      .subscribe((groups: string[]) => {
-        this.modalRef = this.modalService.open(InvitationModalComponent);
-        this.modalRef.componentInstance.groupList = groups;
-        this.modalRef.componentInstance.email = email;
-      });
-
+    return groups$;
   }
+
+
 }
