@@ -1,3 +1,5 @@
+import { AuthorizationDataService } from './../../../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from './../../../../core/data/feature-authorization/feature-id';
 import { ConfirmWithdrawComponent } from './confirm-withdraw/confirm-withdraw.component';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -81,6 +83,11 @@ export class MembersListComponent implements OnInit, OnDestroy {
   @Input() showId = true;
 
   /**
+   * Boolean representing if to show the id column of the tables
+   */
+  @Input() isAdmin = false;
+
+  /**
    * EPeople being displayed in search result, initially all members, after search result of search
    */
   ePeopleSearchDtos: BehaviorSubject<PaginatedList<EpersonDtoModel>> = new BehaviorSubject<PaginatedList<EpersonDtoModel>>(undefined);
@@ -127,9 +134,25 @@ export class MembersListComponent implements OnInit, OnDestroy {
   paginationSub: Subscription;
 
   /**
+   * A boolean representing if user is AdministratorOf for the current project/funding
+   */
+  isAdminOf$: Observable<boolean>;
+
+  /**
    * Event emitted with the email address to which send invitation
    */
   @Output() sendInvitation: EventEmitter<string> = new EventEmitter<string>();
+
+  /**
+   * Event emitted with the eperson to which add to groups
+   */
+  @Output() addMemberToMultipleGroups: EventEmitter<EPerson> = new EventEmitter<EPerson>();
+
+
+  /**
+   * Event emitted with the eperson to which delete from the groups
+   */
+  @Output() deleteMemberToMultipleGroups: EventEmitter<EPerson> = new EventEmitter<EPerson>();
 
   constructor(private groupDataService: GroupDataService,
     public ePersonDataService: EPersonDataService,
@@ -138,6 +161,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private paginationService: PaginationService,
     private modalService: NgbModal,
+    protected authorizationService: AuthorizationDataService,
     private router: Router) {
     this.currentSearchQuery = '';
     this.currentSearchScope = 'metadata';
@@ -155,6 +179,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
       }
     }));
 
+    this.isAdminOf$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
 
   }
 
@@ -271,6 +296,27 @@ export class MembersListComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+
+  /**
+   * Dispatch addMemberToMultipleGroups event
+   * @param ePerson
+   */
+  addMemberToAllGroups(ePerson: EpersonDtoModel) {
+    this.addMemberToMultipleGroups.emit(ePerson.eperson);
+    this.retrieveMembers(this.config.currentPage);
+  }
+
+
+  /**
+   * Dispatch deleteMemberToMultipleGroups event
+   * @param ePerson
+   */
+  deleteMemberToAllGroups(ePerson: EpersonDtoModel) {
+    this.deleteMemberToMultipleGroups.emit(ePerson.eperson);
+    this.retrieveMembers(this.config.currentPage);
+  }
+
 
   /**
    * Dispatch sendInvitation event
