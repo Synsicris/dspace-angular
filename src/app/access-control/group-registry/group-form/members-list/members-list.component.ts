@@ -146,13 +146,13 @@ export class MembersListComponent implements OnInit, OnDestroy {
   /**
    * Event emitted with the eperson to which add to groups
    */
-  @Output() addMemberToMultipleGroups: EventEmitter<string> = new EventEmitter<string>();
+  @Output() addMemberToMultipleGroups: EventEmitter<EPerson> = new EventEmitter<EPerson>();
 
 
   /**
    * Event emitted with the eperson to which delete from the groups
    */
-  @Output() deleteMemberToMultipleGroups: EventEmitter<string> = new EventEmitter<string>();
+  @Output() deleteMemberToMultipleGroups: EventEmitter<EPerson> = new EventEmitter<EPerson>();
 
   constructor(private groupDataService: GroupDataService,
     public ePersonDataService: EPersonDataService,
@@ -302,8 +302,9 @@ export class MembersListComponent implements OnInit, OnDestroy {
    * Dispatch addMemberToMultipleGroups event
    * @param ePerson
    */
-  addMemberToAllGroups(ePerson) {
-    this.addMemberToMultipleGroups.emit(ePerson);
+  addMemberToAllGroups(ePerson: EpersonDtoModel) {
+    this.addMemberToMultipleGroups.emit(ePerson.eperson);
+    this.retrieveMembers(this.config.currentPage);
   }
 
 
@@ -311,8 +312,9 @@ export class MembersListComponent implements OnInit, OnDestroy {
    * Dispatch deleteMemberToMultipleGroups event
    * @param ePerson
    */
-  deleteMemberToAllGroups(ePerson) {
-    this.deleteMemberToMultipleGroups.emit(ePerson);
+  deleteMemberToAllGroups(ePerson: EpersonDtoModel) {
+    this.deleteMemberToMultipleGroups.emit(ePerson.eperson);
+    this.retrieveMembers(this.config.currentPage);
   }
 
 
