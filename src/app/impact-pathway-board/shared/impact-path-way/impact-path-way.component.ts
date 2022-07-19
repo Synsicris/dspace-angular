@@ -16,6 +16,8 @@ import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
 import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { hasValue } from '../../../shared/empty.util';
+import { EditItemDataService } from '../../../core/submission/edititem-data.service';
+import { environment } from '../../../../environments/environment';
 
 
 @Component({
@@ -54,12 +56,18 @@ export class ImpactPathWayComponent implements OnInit {
    */
   compareMode: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  /**
+   * A boolean representing if edit/add buttons are active
+   */
+  canEditButton$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
     private authorizationService: AuthorizationDataService,
     private cdr: ChangeDetectorRef,
     private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,
+    protected editItemDataService: EditItemDataService) {
   }
 
   ngOnInit() {
@@ -73,6 +81,12 @@ export class ImpactPathWayComponent implements OnInit {
       this.impactPathwayService.isCompareModeActive()
         .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
     );
+
+    this.editItemDataService.checkEditModeByIDAndType(this.impactPathway.id, environment.impactPathway.impactPathwaysEditMode).pipe(
+      take(1)
+    ).subscribe((canEdit: boolean) => {
+      this.canEditButton$.next(canEdit);
+    });
 
   }
 
