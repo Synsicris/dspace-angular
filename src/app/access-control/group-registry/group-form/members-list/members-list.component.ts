@@ -136,7 +136,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
   /**
    * A boolean representing if user is AdministratorOf for the current project/funding
    */
-  isAdminOf$: Observable<boolean>;
+  isAdmin$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * Event emitted with the email address to which send invitation
@@ -179,7 +179,11 @@ export class MembersListComponent implements OnInit, OnDestroy {
       }
     }));
 
-    this.isAdminOf$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
+    this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(
+      take(1)
+    ).subscribe((isAdmin) => {
+      this.isAdmin$.next(isAdmin);
+    });
 
   }
 
@@ -436,6 +440,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.messagePrefix = this.messagePrefix;
 
     modalRef.componentInstance.confirm = () => {
+      this.modalService.dismissAll();
       this.deleteMemberFromGroup(ePerson);
     };
 

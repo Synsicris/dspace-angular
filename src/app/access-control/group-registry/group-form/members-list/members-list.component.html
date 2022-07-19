@@ -79,27 +79,27 @@
                 </button>
 
                 <button data-test="addMemberToAllGroups"
-                  *ngIf="showInvitationAction && (isAdminOf$ | async) && !(ePerson.memberOfGroup)"
+                  *ngIf="showInvitationAction && (isAdmin$ | async) && !(ePerson.memberOfGroup)"
                   (click)="addMemberToAllGroups(ePerson)" class="btn btn-outline-primary btn-sm"
                   title="{{messagePrefix + '.table.edit.buttons.add' | translate: {name: ePerson.eperson.name} }}">
                   <i class="fas fa-plus fa-fw"></i>
                 </button>
                 <button data-test="deleteMemberToAllGroups"
-                  *ngIf="showInvitationAction && (ePerson.memberOfGroup) && (isAdminOf$ | async)"
+                  *ngIf="showInvitationAction && (ePerson.memberOfGroup) && (isAdmin$ | async)"
                   (click)="deleteMemberToAllGroups(ePerson)" class="btn btn-outline-danger btn-sm"
                   title="{{messagePrefix + '.table.edit.buttons.remove' | translate: {name: ePerson.eperson.name} }}">
                   <i class="fas fa-trash-alt fa-fw"></i>
                 </button>
 
                 <button
-                  *ngIf="showInvitationAction && !(ePerson.memberOfGroup) && !showWithdrawActions && !(isAdminOf$ | async)"
+                  *ngIf="showInvitationAction && !(ePerson.memberOfGroup) && !showWithdrawActions && !(isAdmin$ | async)"
                   (click)="dispatchSendInvitation(ePerson)" class="btn btn-outline-primary btn-sm"
                   title="{{messagePrefix + '.table.invitation.buttons.send' | translate: {email: ePerson.eperson.email} }}">
                   <i class="fas fa-plus fa-fw"></i>
                 </button>
 
                 <button
-                  *ngIf="showInvitationAction && !(ePerson.memberOfGroup) && showWithdrawActions && !(isAdminOf$ | async)"
+                  *ngIf="showInvitationAction && !(ePerson.memberOfGroup) && showWithdrawActions && !(isAdmin$ | async)"
                   (click)="dispatchSendInvitation(ePerson)" class="btn btn-success btn-sm"
                   title="{{messagePrefix + '.table.invitation.buttons.send' | translate: {email: ePerson.eperson.email} }}">
                   {{messagePrefix + '.table.withdraw.send' | translate }}
@@ -154,13 +154,13 @@
               {{messagePrefix + '.table.netid' | translate}}: {{ ePerson.eperson.netid ? ePerson.eperson.netid : '-' }}
             </td>
             <td *ngIf="showEditActions || showWithdrawActions" class="align-middle">
-              <div *ngIf="!showWithdrawActions" class="btn-group edit-field">
+              <div *ngIf="!showWithdrawActions || (isAdmin$ | async)" class="btn-group edit-field">
                 <button (click)="deleteMemberFromGroup(ePerson)" class="btn btn-outline-danger btn-sm"
                   title="{{messagePrefix + '.table.edit.buttons.remove' | translate: {name: ePerson.eperson.name} }}">
                   <i class="fas fa-trash-alt fa-fw"></i>
                 </button>
               </div>
-              <div *ngIf="showWithdrawActions" class="btn-group edit-field">
+              <div *ngIf="showWithdrawActions && !(isAdmin$ | async)" class="btn-group edit-field">
                 <button (click)="openModal(ePerson);" class="btn btn-outline-danger btn-sm"
                   title="{{messagePrefix + '.table.edit.buttons.withdraw' | translate: {name: ePerson.eperson.name} }}">
                   <i class="fas fa-user-slash"></i>
