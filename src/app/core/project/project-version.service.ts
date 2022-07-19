@@ -58,7 +58,7 @@ export class ProjectVersionService {
           return itemRD.payload.version.pipe(
             getFirstCompletedRemoteData(),
             switchMap((versionRD: RemoteData<Version>) => {
-              if (versionRD.hasSucceeded) {
+              if (versionRD.hasSucceeded && versionRD.statusCode === 200) {
                 return this.versionService.getHistoryIdFromVersion(versionRD.payload).pipe(
                   switchMap((versionHistoryId: string) => {
                     if (isNotEmpty(versionHistoryId)) {
@@ -104,7 +104,7 @@ export class ProjectVersionService {
           return this.relationshipService.getRelatedItemsByLabel(itemRD.payload, 'hasVersion', options).pipe(
             getFirstCompletedRemoteData(),
             map((listRD: RemoteData<PaginatedList<Item>>) => {
-              return listRD.hasSucceeded ? listRD.payload.page : [];
+              return listRD.hasSucceeded && listRD.statusCode === 200 ? listRD.payload.page : [];
             })
           );
         } else {
