@@ -3,6 +3,7 @@
   border-bottom: var(--bs-card-border-width) solid  var(--bs-card-border-color) !important;
   border-bottom-left-radius: var(--bs-card-border-radius) !important;
   border-bottom-right-radius: var(--bs-card-border-radius) !important;
+  overflow: inherit;
 }
 
 :host ::ng-deep .card-header button {

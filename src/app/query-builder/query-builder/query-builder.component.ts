@@ -144,6 +144,12 @@ export class QueryBuilderComponent {
         { value: null, disabled: true },
         Validators.required
       ),
+      toDate: this.formBuilder.control(
+        { value: null, disabled: false },
+      ),
+      fromDate: this.formBuilder.control(
+        { value: null, disabled: false },
+      ),
     });
   }
 
