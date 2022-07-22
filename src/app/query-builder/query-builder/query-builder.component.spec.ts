@@ -11,7 +11,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateLoaderMock } from '../../shared/mocks/translate-loader.mock';
 import { ControlTypeCheckerPipe } from '../pipes/control-type-checker.pipe';
 
-fdescribe('QueryBuilderComponent', () => {
+describe('QueryBuilderComponent', () => {
   let component: QueryBuilderComponent;
   let fixture: ComponentFixture<QueryBuilderComponent>;
   let builderService: FormBuilderService;

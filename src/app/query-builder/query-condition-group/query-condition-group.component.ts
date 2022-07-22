@@ -121,8 +121,8 @@ export class QueryConditionGroupComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = (
-      this.rootFormGroup.control.get('queryArray') as FormArray
-    ).controls[this.formGroupName];
+      this.rootFormGroup?.control?.get('queryArray') as FormArray
+    )?.controls[this.formGroupName];
     this.getSearchFilterConfigs();
   }
 
@@ -134,7 +134,7 @@ export class QueryConditionGroupComponent implements OnInit {
    * @memberof QueryConditionGroupComponent
    */
   get queryGroup(): FormArray {
-    return this.formGroup.get('queryGroup') as FormArray;
+    return this.formGroup?.get('queryGroup') as FormArray;
   }
 
   filterFacetValues(idx: number): FacetValue[] {
