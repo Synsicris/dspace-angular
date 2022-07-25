@@ -114,4 +114,7 @@ export class ProjectMembersPageComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.groupService.cancelEditGroup();
+  }
 }

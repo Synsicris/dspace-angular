@@ -92,7 +92,6 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.groupService.cancelEditGroup();
     this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
   }
 
