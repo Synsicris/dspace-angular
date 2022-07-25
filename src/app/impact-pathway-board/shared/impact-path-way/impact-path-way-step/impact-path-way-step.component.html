@@ -51,7 +51,7 @@
     <button class="btn btn-link pr-0 open-modal"
             title="{{'impact-pathway.add.btn' | translate}}"
             (click)="createTask(); $event.stopPropagation()"
-            [disabled]="compareMode">
+            [disabled]="compareMode || !(canEditButton$ | async)">
       <i class="fas fa-plus-circle fa-2x"></i>
     </button>
   </div>
