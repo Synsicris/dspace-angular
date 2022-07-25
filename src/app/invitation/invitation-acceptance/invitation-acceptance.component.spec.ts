@@ -88,10 +88,12 @@ describe('InvitationAcceptanceComponent', () => {
     component.invitationsGroupData$.next([
       {
         community: Object.assign(new Community(), { payload: { name: 'test' } }),
+        groupName: 'test',
         type: 'admin'
       },
       {
         community: Object.assign(new Community(), { payload: { name: 'test' } }),
+        groupName: 'test',
         type: 'member'
       },
     ]);
