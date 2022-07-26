@@ -1370,7 +1370,7 @@
 
   "context-menu.actions.claim.btn": "Claim this profile",
 
-  "context-menu.actions.export-item.btn": "Export",
+  "context-menu.actions.export-item.btn": "<i class=\"fas fa-file-export\"></i> Export information",
 
   "context-menu.actions.generate-report.btn": "<i class=\"fas fa-file-export\"></i> Generate project report",
 
@@ -2160,7 +2160,7 @@
 
   "form.repeatable.sort.tip": "Drop the item in the new position",
 
-  "funding.listelement.badge": "Funding",
+  "funding.listelement.badge": "Project",
 
   "funding.page.titleprefix": "Funding: ",
 
@@ -3364,7 +3364,7 @@
 
   "menu.section.explore_fundings": "Funding",
 
-  "menu.section.explore_fundings_and_projects": "Funding",
+  "menu.section.explore_fundings_and_projects": "Projects",
 
   "menu.section.communities_and_collections": "Communities & Collections",
 
@@ -4380,23 +4380,23 @@
 
   "project.create.grants.project-option": "Editable by all project members",
 
-  "project.create.grants.subproject-option": "Editable by only funding members",
+  "project.create.grants.subproject-option": "Editable by only sub-project members",
 
   "project.create.info": "Create a new Joint project",
 
   "project.create.name.placeholder": "Enter the name for the new project",
 
-  "subproject.create.name.placeholder": "Organisation Name and Funding Short title",
+  "subproject.create.name.placeholder": "Organisation Name and Subproject Short title",
 
   "subproject.create.info": "Info",
 
   "project.create.success": "The new project has been generated successfully.",
 
-  "project.listelement.badge": "Project",
+  "project.listelement.badge": "Consortium",
 
-  "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Manage coordinators",
+  "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Invitation and management coordinators",
 
-  "project.manage.menu.subproject": "<i class=\"fas fa-toolbox\"></i> Manage funding members",
+  "project.manage.menu.subproject": "<i class=\"fas fa-toolbox\"></i> Invitation and management subproject members",
 
   "project.manage.breadcrumbs": "Manage project members",
 
@@ -4410,11 +4410,11 @@
 
   "project.manage.members.project.members-group-help": "Help message here",
 
-  "project.manage.members.funding.admin-group": "Invitation and Management of funding coordinators",
+  "project.manage.members.funding.admin-group": "Invitation and Management of project coordinators",
 
   "project.manage.members.funding.admin-group-help": "Help message here",
 
-  "project.manage.members.funding.members-group": "Invitation and Management of funding members",
+  "project.manage.members.funding.members-group": "Invitation and Management of project members",
 
   "project.manage.members.funding.members-group-help": "Help message here",
 
@@ -4466,7 +4466,7 @@
 
   "project.manage.members-list.modal.withdraw.body": "Are you sure?",
 
-  "project.manage.members-list.modal.withdraw.confirm": "Yes, i'm sure",
+  "project.manage.members-list.modal.withdraw.confirm": "Yes, I'm sure",
 
   "project.manage.members-list.modal.withdraw.close": "Cancel",
 
@@ -4514,15 +4514,15 @@
 
   "project-overview.invitation.processing": "Processing...",
 
-  "project-overview.invitation.sub-project.msg": "Please insert the email address of the person to invite to the funding",
+  "project-overview.invitation.sub-project.msg": "Please insert the email address of the person to invite to the sub-project",
 
   "project-overview.invitation.error": "There was an issue when sending the invitation, please try again later.",
 
   "project-overview.invitation.success": "Invitation sent successfully.",
 
-  "project-overview.invitation-admin.menu.subproject": "<i class=\"fas fa-user-plus\"></i> Invite coordinators to the current funding",
+  "project-overview.invitation-admin.menu.subproject": "<i class=\"fas fa-user-plus\"></i> Invite coordinators to the current subproject",
 
-  "project-overview.invitation-members.menu.subproject": "<i class=\"fas fa-user-plus\"></i> Invite members to the current funding",
+  "project-overview.invitation-members.menu.subproject": "<i class=\"fas fa-user-plus\"></i> Invite members to the current subproject",
 
   "project-overview.page.header.delete.btn": "<i class=\"fas fa-trash\"></i> Delete project",
 
@@ -4574,7 +4574,7 @@
 
   "project-overview.page.subproject.card.title": "Your Funding",
 
-  "project-overview.page.subproject.create.btn": "Create new Funding",
+  "project-overview.page.subproject.create.btn": "Create new Subproject",
 
   "project-overview.page.subproject.none-available": "No funding available",
 
@@ -5256,7 +5256,7 @@
 
   "search.filters.entityType.ethics": "Ethical reflection",
 
-  "search.filters.entityType.Funding": "Funding",
+  "search.filters.entityType.Funding": "Project",
 
   "search.filters.entityType.Event": "Event",
 
@@ -5286,7 +5286,7 @@
 
   "search.filters.entityType.proj_objectives": "Project objective",
 
-  "search.filters.entityType.Project": "Project",
+  "search.filters.entityType.Project": "Consortium",
 
   "search.filters.entityType.Publication": "Publication",
 
@@ -6126,7 +6126,7 @@
 
   "submission.sections.submit.progressbar.describe.cooperation_events_date": "Dates of personal meetings or other central activities",
 
-  "submission.sections.submit.progressbar.describe.funding": "#1 Funding basic information",
+  "submission.sections.submit.progressbar.describe.funding": "#1 Subproject",
 
   "submission.sections.submit.progressbar.describe.journal": "Journal basic information",
 
@@ -6162,7 +6162,7 @@
 
   "submission.sections.submit.progressbar.easy_upload": "Import from easy-Online",
 
-  "submission.sections.submit.progressbar.easy_upload.info": "By uploading your easy-Online application, you import information about the funding, the executing agency and the persons involved. You can use this information here as well. The upload can be repeated at any time with an updated xml file from easy-online.",
+  "submission.sections.submit.progressbar.easy_upload.info": "By uploading your easy-Online application, you import information about the sub-project, the executing agency and the persons involved. You can use this information here as well. The upload can be repeated at any time with an updated xml file from easy-online.",
 
   "submission.sections.submit.progressbar.describe.entity_type_selection": "Selection of the entity type",
 
@@ -6238,7 +6238,7 @@
 
   "submission.sections.submit.progressbar.describe.import_projects": "Projects",
 
-  "submission.sections.submit.progressbar.describe.import_subprojects": "Information on the funding",
+  "submission.sections.submit.progressbar.describe.import_subprojects": "Information on the subproject",
 
   "submission.sections.submit.progressbar.describe.innovationideas": "#1 Idea for the use of project results",
 
@@ -6328,7 +6328,7 @@
 
   "submission.sections.submit.progressbar.describe.proj_objectives": "#1 Project objective",
 
-  "submission.sections.submit.progressbar.describe.projects": "#1 Funding",
+  "submission.sections.submit.progressbar.describe.projects": "#1 Describe join project",
 
   "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the funding access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
 
@@ -6376,7 +6376,7 @@
 
   "submission.sections.submit.progressbar.describe.steps.info": "What steps do you intend after the end of the project to further bring project results into application and to continue cooperation (also with other objectives)?",
 
-  "submission.sections.submit.progressbar.describe.subprojects": "Funding",
+  "submission.sections.submit.progressbar.describe.subprojects": "Sub-projects",
 
   "submission.sections.submit.progressbar.describe.subprojects.info": "During the proposal preparation phase, the information can be entered via the import of the easy-online xml.  During the ongoing project, the information is regularly updated from profi. Please complete the information.",
 
@@ -6964,7 +6964,7 @@
 
   "ethic.listelement.badge": "Ethical reflection",
 
-  "Funding.listelement.badge": "Funding",
+  "Funding.listelement.badge": "Project",
 
   "gender.listelement.badge": "Gender reflection",
 
@@ -6988,7 +6988,7 @@
 
   "physical_object.listelement.badge": "Object / material",
 
-  "Project.listelement.badge": "Project",
+  "Project.listelement.badge": "Consortium",
 
   "proj_objective.listelement.badge": "Research and development objective",
 
@@ -7256,7 +7256,7 @@
 
   "search.filters.entityType.proj_objective": "Research and development objective",
 
-  "search.filters.entityType.parentproject": "Joint project",
+  "search.filters.entityType.parentproject": "Consortium",
 
   "search.filters.entityType.research_result": "Research result",
 
@@ -7298,9 +7298,9 @@
 
   "profile.card.security.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
 
-  "layout.tab.header.subproject": "Funding information",
+  "layout.tab.header.subproject": "Project information",
 
-  "layout.tab.header.Funding": "Funding",
+  "layout.tab.header.Funding": "Participating projects / funding recipients",
 
   "layout.tab.header.projectpartner": "Project partners",
 
@@ -7312,9 +7312,9 @@
 
   "layout.tab.header.default": "Consortium information",
 
-  "layout.tab.header.Subprojects&Involved": "Funding & Involved",
+  "layout.tab.header.Subprojects&Involved": "Subprojects & Involved",
 
-  "layout.tab.header.proj&partners": "Funding & Involved",
+  "layout.tab.header.proj&partners": "Subprojects & Involved",
 
   "layout.tab.header.subcontractors": "Subcontractors / Cooperation partners",
 
@@ -7400,17 +7400,17 @@
 
   "layout.box.header.latestParentProjectsCompleted": "Joint projects - finished",
 
-  "layout.box.header.basics": "Funding - Primary data",
+  "layout.box.header.basics": "Subproject - Primary data",
 
   "layout.box.header.details": "Subprojekt - Details",
 
-  "layout.box.header.Funding": "Funding",
+  "layout.box.header.Funding": "Projects - List view",
 
-  "layout.box.header.projectpartner": "Funding - Project partners",
+  "layout.box.header.projectpartner": "Subproject - Project partners",
 
-  "layout.box.header.subcontractor": "Funding - Subcontractors",
+  "layout.box.header.subcontractor": "Subproject - Subcontractors",
 
-  "layout.box.header.exploitationplan": "Funding - Exploitation plan",
+  "layout.box.header.exploitationplan": "Subproject - Exploitation plan",
 
   "layout.box.header.Person_m": "Person",
 
@@ -7558,7 +7558,7 @@
 
   "search.filters.entityType.ia_objective": "Target for interaction and transfer",
 
-  "layout.tab.header.Subprojects": "Funding / Consortium",
+  "layout.tab.header.Subprojects": "Projects / Consortium",
 
   "layout.tab.header.Involved": "Involved organisations",
 
@@ -7570,7 +7570,7 @@
 
   "subproject.create.grants.project-option": "Editable by all project members",
 
-  "subpproject.create.grants.subproject-option": "Editable by only funding members",
+  "subpproject.create.grants.subproject-option": "Editable by only sub-project members",
 
   "submission.sections.upload.form.access-condition.openaccess": "open access",
 
@@ -7579,8 +7579,6 @@
   "submission.sections.upload.form.access-condition.embargo": "embargo",
 
   "submission.sections.upload.form.access-condition.administrator": "administrator",
-
-  "Funding.listelement.badge": "Funding",
 
   "profile.edit-item.btn.OWNER": "Edit",
 
@@ -7846,7 +7844,7 @@
 
   "layout.field.label.subcontractor.synsicris.description.contribution": "Description of the cooperation",
 
-  "layout.field.label.subcontractor.dc.relation.project": "Related funding",
+  "layout.field.label.subcontractor.dc.relation.project": "Related Subproject",
 
   "layout.field.label.targetgroup.dc.title": "Title",
 
@@ -8002,7 +8000,7 @@
 
   "layout.field.label.Publication.dc.relation.doi": "DOI",
 
-  "layout.field.label.Publication.dc.relation.ispartof": "In series",
+  "layout.field.label.Publication.dc.relation.ispartof": "Journal / series",
 
   "layout.field.label.Publication.dc.relation.issn": "ISSN",
 
@@ -8336,7 +8334,7 @@
 
   "submission.sections.submit.progressbar.describe.parentprojects_calc": "#1 Summarised information from funding",
 
-  "submission.sections.submit.progressbar.describe.projectpartners_import_lead": "#1 Information on the management of funding",
+  "submission.sections.submit.progressbar.describe.projectpartners_import_lead": "#1 Information on the management of subprojects",
 
   "submission.sections.submit.progressbar.describe.projectpartners_import_leadadmin": "#1 Information on the project coordinators an administrators",
 
@@ -8502,15 +8500,15 @@
 
   "layout.tab.header.Projekttraeger": "Programme and Funding information",
 
-  "layout.box.header.subcontractors": "Funding - Subcontractors / Cooperation partners",
+  "layout.box.header.subcontractors": "Subproject - Subcontractors / Cooperation partners",
 
   "submission.sections.submit.progressbar.describe.events_internal": "Internal section (only for consortium)",
 
   "layout.tab.header.comments_all": "All comments",
 
-  "layout.box.header.basics_comment": "Comments - Funding",
+  "layout.box.header.basics_comment": "Comments - Subproject",
 
-  "layout.box.header.comment_jp": "Comments - Project",
+  "layout.box.header.comment_jp": "Comments - Joint project",
 
   "layout.box.header.projectpartner_comment": "Comments - Project partner",
 
@@ -8606,6 +8604,56 @@
 
   "layout.field.label.Event.synsicris.type.internal": "Task",
 
-  "layout.field.label.Event.synsicris.description.internal": "Notes"
+  "layout.field.label.Event.synsicris.description.internal": "Notes",
+
+  "submission.sections.submit.progressbar.describe.projects_calc": "#1 Summarised information from subprojects",
+
+  "submission.sections.submit.progressbar.describe.funding.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
+
+  "submission.sections.submit.progressbar.describe.funding_import": "#1 Project overview",
+
+  "submission.sections.submit.progressbar.describe.funding_import.info": "This information is generated from the corresponding subprojects. During the proposal preparation phase, the information comes from the easy-online imports of the subprojects. During the project phase, the information is regularly updated from profi.",
+
+  "subproject.listelement.badge": "Subproject",
+
+  "s": "Target for interaction and transfer",
+
+  "layout.box.header.Funding_comment": "Comments - Funding",
+
+  "layout.box.header.Project": "Projects",
+
+  "layout.field.label.Person.dspace.entity.type": "Person",
+
+  "test_ethic": "Overview",
+
+  "test_process-event": "Frequency",
+
+  "test_process-event_detail": "Data on the meeting/event",
+
+  "layout.field.label.Publication.dc.identifier.doi": "DOI",
+
+  "test_author": "Author(s)",
+
+  "test_innovationpotential": "Type",
+
+  "test_innovationpotential_regional": "Reference points",
+
+  "test_innovationpotential_status": "Start value/target value",
+
+  "test_application": "Reference year",
+
+  "test_spinoff_performance": "Reference year",
+
+  "test_spinoff_funding": "Year of funding",
+
+  "test_exp_societalimpact": "Expected impact",
+
+  "test_exp_societalimpact_type": "Possible expected side effects",
+
+  "project.manage.members.admin-group": "Invitation and Management of project coordinators",
+
+  "project.manage.members.members-group": "Invitation and Management of project members",
+
+  "item.grant.badge.parentproject": "test"
 
 }

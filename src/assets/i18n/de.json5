@@ -389,7 +389,7 @@
   // "admin.registries.schema.breadcrumbs": "Metadata schema",
   "admin.registries.schema.breadcrumbs": "Metadatenschema",
 
-  // "admin.registries.schema.description": "This is the metadata schema for \"{{namespace}}\".",
+  // "admin.registries.schema.description": "This is the metadata schema for "{{namespace}}".",
   "admin.registries.schema.description": "Dies ist das Metadatenschema für den Namensraum \"{{namespace}}\".",
 
   // "admin.registries.schema.fields.head": "Schema metadata fields",
@@ -425,7 +425,7 @@
   // "admin.registries.schema.head": "Metadata Schema",
   "admin.registries.schema.head": "Metadatenschema",
 
-  // "admin.registries.schema.notification.created": "Successfully created metadata schema \"{{prefix}}\"",
+  // "admin.registries.schema.notification.created": "Successfully created metadata schema "{{prefix}}"",
   "admin.registries.schema.notification.created": "\"{{prefix}}\" wurde erfolgreich angelegt.",
 
   // "admin.registries.schema.notification.deleted.failure": "Failed to delete {{amount}} metadata schemas",
@@ -434,13 +434,13 @@
   // "admin.registries.schema.notification.deleted.success": "Successfully deleted {{amount}} metadata schemas",
   "admin.registries.schema.notification.deleted.success": "{{amount}} Metadatenschema(ta) wurde(n) gelöscht.",
 
-  // "admin.registries.schema.notification.edited": "Successfully edited metadata schema \"{{prefix}}\"",
+  // "admin.registries.schema.notification.edited": "Successfully edited metadata schema "{{prefix}}"",
   "admin.registries.schema.notification.edited": "Das Schema \"{{prefix}}\" wurde erfolgreich bearbeitet.",
 
   // "admin.registries.schema.notification.failure": "Error",
   "admin.registries.schema.notification.failure": "Fehler",
 
-  // "admin.registries.schema.notification.field.created": "Successfully created metadata field \"{{field}}\"",
+  // "admin.registries.schema.notification.field.created": "Successfully created metadata field "{{field}}"",
   "admin.registries.schema.notification.field.created": "Das Feld \"{{field}}\" wurde erfolgreich angelegt.",
 
   // "admin.registries.schema.notification.field.deleted.failure": "Failed to delete {{amount}} metadata fields",
@@ -449,7 +449,7 @@
   // "admin.registries.schema.notification.field.deleted.success": "Successfully deleted {{amount}} metadata fields",
   "admin.registries.schema.notification.field.deleted.success": "{{amount}} Metadatenfeld(er) wurde(n) erfolgreich gelöscht.",
 
-  // "admin.registries.schema.notification.field.edited": "Successfully edited metadata field \"{{field}}\"",
+  // "admin.registries.schema.notification.field.edited": "Successfully edited metadata field "{{field}}"",
   "admin.registries.schema.notification.field.edited": "Das Feld \"{{field}}\" wurde erfolgreich bearbeitet.",
 
   // "admin.registries.schema.notification.success": "Success",
@@ -520,14 +520,14 @@
   // "admin.access-control.epeople.table.edit": "Edit",
   "admin.access-control.epeople.table.edit": "Bearbeiten",
 
-  // "admin.access-control.epeople.table.edit.buttons.edit": "Edit \"{{name}}\"",
+  // "admin.access-control.epeople.table.edit.buttons.edit": "Edit "{{name}}"",
   "admin.access-control.epeople.table.edit.buttons.edit": "\"{{name}}\" bearbeiten",
 
   // "admin.access-control.epeople.table.edit.buttons.edit-disabled": "You are not authorized to edit this group",
   // TODO New key - Add a translation
   "admin.access-control.epeople.table.edit.buttons.edit-disabled": "You are not authorized to edit this group",
 
-  // "admin.access-control.epeople.table.edit.buttons.remove": "Delete \"{{name}}\"",
+  // "admin.access-control.epeople.table.edit.buttons.remove": "Delete "{{name}}"",
   "admin.access-control.epeople.table.edit.buttons.remove": "\"{{name}}\" löschen",
 
   // "admin.access-control.epeople.no-items": "No EPeople to show.",
@@ -564,28 +564,28 @@
   // TODO New key - Add a translation
   "admin.access-control.epeople.form.return": "Back",
 
-  // "admin.access-control.epeople.form.notification.created.success": "Successfully created EPerson \"{{name}}\"",
+  // "admin.access-control.epeople.form.notification.created.success": "Successfully created EPerson "{{name}}"",
   "admin.access-control.epeople.form.notification.created.success": "Person \"{{name}}\" erfolgreich erstellt",
 
-  // "admin.access-control.epeople.form.notification.created.failure": "Failed to create EPerson \"{{name}}\"",
+  // "admin.access-control.epeople.form.notification.created.failure": "Failed to create EPerson "{{name}}"",
   "admin.access-control.epeople.form.notification.created.failure": "Person \"{{name}}\" konnte nicht erstellt werden",
 
-  // "admin.access-control.epeople.form.notification.created.failure.emailInUse": "Failed to create EPerson \"{{name}}\", email \"{{email}}\" already in use.",
+  // "admin.access-control.epeople.form.notification.created.failure.emailInUse": "Failed to create EPerson "{{name}}", email "{{email}}" already in use.",
   "admin.access-control.epeople.form.notification.created.failure.emailInUse": "Person \"{{name}}\" konnte nicht erstellt werden, E-Mail \"{{email}}\" wird bereits verwendet.",
 
-  // "admin.access-control.epeople.form.notification.edited.failure.emailInUse": "Failed to edit EPerson \"{{name}}\", email \"{{email}}\" already in use.",
+  // "admin.access-control.epeople.form.notification.edited.failure.emailInUse": "Failed to edit EPerson "{{name}}", email "{{email}}" already in use.",
   "admin.access-control.epeople.form.notification.edited.failure.emailInUse": "Person \"{{name}}\" konnte nicht bearbeitet werden, E-Mail \"{{email}}\" wird bereits verwendet.",
 
-  // "admin.access-control.epeople.form.notification.edited.success": "Successfully edited EPerson \"{{name}}\"",
+  // "admin.access-control.epeople.form.notification.edited.success": "Successfully edited EPerson "{{name}}"",
   "admin.access-control.epeople.form.notification.edited.success": "Person \"{{name}}\" erfolgreich bearbeitet",
 
-  // "admin.access-control.epeople.form.notification.edited.failure": "Failed to edit EPerson \"{{name}}\"",
+  // "admin.access-control.epeople.form.notification.edited.failure": "Failed to edit EPerson "{{name}}"",
   "admin.access-control.epeople.form.notification.edited.failure": "Person \"{{name}}\" konnte nicht bearbeitet werden",
 
-  // "admin.access-control.epeople.form.notification.deleted.success": "Successfully deleted EPerson \"{{name}}\"",
+  // "admin.access-control.epeople.form.notification.deleted.success": "Successfully deleted EPerson "{{name}}"",
   "admin.access-control.epeople.form.notification.deleted.success": "Person \"{{name}}\" erfolgreich gelöscht",
 
-  // "admin.access-control.epeople.form.notification.deleted.failure": "Failed to delete EPerson \"{{name}}\"",
+  // "admin.access-control.epeople.form.notification.deleted.failure": "Failed to delete EPerson "{{name}}"",
   "admin.access-control.epeople.form.notification.deleted.failure": "Person \"{{name}}\" konnte nicht gelöscht werden",
 
   // "admin.access-control.epeople.form.groupsEPersonIsMemberOf": "Member of these groups: ",
@@ -615,10 +615,10 @@
   // "admin.access-control.epeople.form.goToGroups": "Add to groups",
   "admin.access-control.epeople.form.goToGroups": "Zu Gruppen hinzufügen",
 
-  // "admin.access-control.epeople.notification.deleted.failure": "Failed to delete EPerson: \"{{name}}\"",
+  // "admin.access-control.epeople.notification.deleted.failure": "Failed to delete EPerson: "{{name}}"",
   "admin.access-control.epeople.notification.deleted.failure": "Person: \"{{name}}\" konnte nicht gelöscht werden",
 
-  // "admin.access-control.epeople.notification.deleted.success": "Successfully deleted EPerson: \"{{name}}\"",
+  // "admin.access-control.epeople.notification.deleted.success": "Successfully deleted EPerson: "{{name}}"",
   "admin.access-control.epeople.notification.deleted.success": "Person: \"{{name}}\" erfolgreich gelöscht",
 
   // "admin.access-control.groups.badge.disabled": "Disabled",
@@ -709,11 +709,11 @@
   // "admin.access-control.groups.table.edit": "Edit",
   "admin.access-control.groups.table.edit": "Bearbeiten",
 
-  // "admin.access-control.groups.table.edit.buttons.disable": "Disable \"{{name}}\"",
+  // "admin.access-control.groups.table.edit.buttons.disable": "Disable "{{name}}"",
   // TODO New key - Add a translation
   "admin.access-control.groups.table.edit.buttons.disable": "Disable \"{{name}}\"",
 
-  // "admin.access-control.groups.table.edit.buttons.edit": "Edit \"{{name}}\"",
+  // "admin.access-control.groups.table.edit.buttons.edit": "Edit "{{name}}"",
   "admin.access-control.groups.table.edit.buttons.edit": "\"{{name}}\" bearbeiten",
 
   // "admin.access-control.groups.table.type": "Type",
@@ -727,27 +727,27 @@
   // "admin.access-control.groups.no-items": "No groups found with this in their name or this as UUID",
   "admin.access-control.groups.no-items": "Keine Gruppen gefunden, die dies in ihrem Namen oder als UUID haben",
 
-  // "admin.access-control.groups.notification.deleted.success": "Successfully deleted group \"{{name}}\"",
+  // "admin.access-control.groups.notification.deleted.success": "Successfully deleted group "{{name}}"",
   "admin.access-control.groups.notification.deleted.success": "Gruppe \"{{name}}\" erfolgreich gelöscht",
 
-  // "admin.access-control.groups.notification.deleted.failure.title": "Failed to delete group \"{{name}}\"",
+  // "admin.access-control.groups.notification.deleted.failure.title": "Failed to delete group "{{name}}"",
   "admin.access-control.groups.notification.deleted.failure.title": "Gruppe \"{{name}}\" konnte nicht gelöscht werden",
 
-  // "admin.access-control.groups.notification.deleted.failure.content": "Cause: \"{{cause}}\"",
+  // "admin.access-control.groups.notification.deleted.failure.content": "Cause: "{{cause}}"",
   "admin.access-control.groups.notification.deleted.failure.content": "Ursache: \"{{cause}}\"",
 
-  // "admin.access-control.groups.notification.edit.success": "Successfully edited group \"{{name}}\"",
+  // "admin.access-control.groups.notification.edit.success": "Successfully edited group "{{name}}"",
   // TODO New key - Add a translation
   "admin.access-control.groups.notification.edit.success": "Successfully edited group \"{{name}}\"",
 
-  // "admin.access-control.groups.notification.edit.failure": "Failed to edit group \"{{name}}\"",
+  // "admin.access-control.groups.notification.edit.failure": "Failed to edit group "{{name}}"",
   // TODO New key - Add a translation
   "admin.access-control.groups.notification.edit.failure": "Failed to edit group \"{{name}}\"",
 
   // "admin.access-control.groups.form.alert.permanent": "This group is permanent, so it can't be edited or deleted. You can still add and remove group members using this page.",
   "admin.access-control.groups.form.alert.permanent": "Diese Gruppe ist permanent, das heißt sie kann nicht bearbeitet oder gelöscht werden. Sie können jedoch über diese Seite Gruppenmitglieder hinzufügen und entfernen.",
 
-  // "admin.access-control.groups.form.alert.workflowGroup": "This group can’t be modified or deleted because it corresponds to a role in the submission and workflow process in the \"{{name}}\" {{comcol}}. You can delete it from the <a href='{{comcolEditRolesRoute}}'>\"assign roles\"</a> tab on the edit {{comcol}} page. You can still add and remove group members using this page.",
+  // "admin.access-control.groups.form.alert.workflowGroup": "This group can’t be modified or deleted because it corresponds to a role in the submission and workflow process in the "{{name}}" {{comcol}}. You can delete it from the <a href='{{comcolEditRolesRoute}}'>\"assign roles\"</a> tab on the edit {{comcol}} page. You can still add and remove group members using this page.",
   "admin.access-control.groups.form.alert.workflowGroup": "Diese Gruppe kann nicht geändert oder gelöscht werden, da sie einer Rolle im Einreichungs- und Workflow-Prozess im \"{{name}}\" {{comcol}} zugeordnet ist. Sie können sie über die Registerkarte <a href='{{comcolEditRolesRoute}}'>\"assign roles\"</a> auf der Bearbeitungsseite {{comcol}} löschen. Sie können über diese Seite weiterhin Gruppenmitglieder hinzufügen und entfernen.",
 
   // "admin.access-control.groups.form.head.create": "Create group",
@@ -798,31 +798,31 @@
   // TODO New key - Add a translation
   "admin.access-control.groups.form.groupType.scoped": "Institutional Scoped Role type",
 
-  // "admin.access-control.groups.form.notification.created.success": "Successfully created Group \"{{name}}\"",
+  // "admin.access-control.groups.form.notification.created.success": "Successfully created Group "{{name}}"",
   "admin.access-control.groups.form.notification.created.success": "Gruppe \"{{name}}\" erfolgreich erstellt",
 
-  // "admin.access-control.groups.form.notification.created.failure": "Failed to create Group \"{{name}}\"",
+  // "admin.access-control.groups.form.notification.created.failure": "Failed to create Group "{{name}}"",
   "admin.access-control.groups.form.notification.created.failure": "Gruppe \"{{name}}\" konnte nicht erstellt werden",
 
-  // "admin.access-control.groups.form.notification.created.failure.groupNameInUse": "Failed to create Group with name: \"{{name}}\", make sure the name is not already in use.",
+  // "admin.access-control.groups.form.notification.created.failure.groupNameInUse": "Failed to create Group with name: "{{name}}", make sure the name is not already in use.",
   "admin.access-control.groups.form.notification.created.failure.groupNameInUse": "Die Gruppe mit dem Namen: \"{{name}}\" konnte nicht erstellt werden. Stellen Sie sicher, dass der Name nicht bereits verwendet wird.",
 
-  // "admin.access-control.groups.form.notification.edited.failure": "Failed to edit Group \"{{name}}\"",
+  // "admin.access-control.groups.form.notification.edited.failure": "Failed to edit Group "{{name}}"",
   "admin.access-control.groups.form.notification.edited.failure": "Gruppe \"{{name}}\" konnte nicht bearbeitet werden",
 
-  // "admin.access-control.groups.form.notification.edited.failure.groupNameInUse": "Name \"{{name}}\" already in use!",
+  // "admin.access-control.groups.form.notification.edited.failure.groupNameInUse": "Name "{{name}}" already in use!",
   "admin.access-control.groups.form.notification.edited.failure.groupNameInUse": "Der Name \"{{name}}\" wird bereits verwendet!",
 
-  // "admin.access-control.groups.form.notification.edited.success": "Successfully edited Group \"{{name}}\"",
+  // "admin.access-control.groups.form.notification.edited.success": "Successfully edited Group "{{name}}"",
   "admin.access-control.groups.form.notification.edited.success": "Gruppe \"{{name}}\" erfolgreich bearbeitet",
 
   // "admin.access-control.groups.form.actions.delete": "Delete Group",
   "admin.access-control.groups.form.actions.delete": "Gruppe löschen",
 
-  // "admin.access-control.groups.form.delete-group.modal.header": "Delete Group \"{{ dsoName }}\"",
+  // "admin.access-control.groups.form.delete-group.modal.header": "Delete Group "{{ dsoName }}"",
   "admin.access-control.groups.form.delete-group.modal.header": "Gruppe \"{{ dsoName }}\" löschen",
 
-  // "admin.access-control.groups.form.delete-group.modal.info": "Are you sure you want to delete Group \"{{ dsoName }}\"",
+  // "admin.access-control.groups.form.delete-group.modal.info": "Are you sure you want to delete Group "{{ dsoName }}"",
   "admin.access-control.groups.form.delete-group.modal.info": "Sind Sie sicher, dass Sie die Gruppe \"{{ dsoName }}\" löschen möchten",
 
   // "admin.access-control.groups.form.delete-group.modal.cancel": "Cancel",
@@ -831,13 +831,13 @@
   // "admin.access-control.groups.form.delete-group.modal.confirm": "Delete",
   "admin.access-control.groups.form.delete-group.modal.confirm": "Löschen",
 
-  // "admin.access-control.groups.form.notification.deleted.success": "Successfully deleted group \"{{ name }}\"",
+  // "admin.access-control.groups.form.notification.deleted.success": "Successfully deleted group "{{ name }}"",
   "admin.access-control.groups.form.notification.deleted.success": "Gruppe \"{{ name }}\" erfolgreich gelöscht",
 
-  // "admin.access-control.groups.form.notification.deleted.failure.title": "Failed to delete group \"{{ name }}\"",
+  // "admin.access-control.groups.form.notification.deleted.failure.title": "Failed to delete group "{{ name }}"",
   "admin.access-control.groups.form.notification.deleted.failure.title": "Gruppe \"{{ name }}\" konnte nicht gelöscht werden",
 
-  // "admin.access-control.groups.form.notification.deleted.failure.content": "Cause: \"{{ cause }}\"",
+  // "admin.access-control.groups.form.notification.deleted.failure.content": "Cause: "{{ cause }}"",
   "admin.access-control.groups.form.notification.deleted.failure.content": "Ursache: \"{{ cause }}\"",
 
   // "admin.access-control.groups.form.members-list.head": "EPeople",
@@ -882,22 +882,22 @@
   // "admin.access-control.groups.form.members-list.table.edit": "Remove / Add",
   "admin.access-control.groups.form.members-list.table.edit": "Entfernen / Hinzufügen",
 
-  // "admin.access-control.groups.form.members-list.table.edit.buttons.remove": "Remove member with name \"{{name}}\"",
+  // "admin.access-control.groups.form.members-list.table.edit.buttons.remove": "Remove member with name "{{name}}"",
   "admin.access-control.groups.form.members-list.table.edit.buttons.remove": "Mitglieder mit dem Namen \"{{name}}\" entfernen",
 
-  // "admin.access-control.groups.form.members-list.notification.success.addMember": "Successfully added member: \"{{name}}\"",
+  // "admin.access-control.groups.form.members-list.notification.success.addMember": "Successfully added member: "{{name}}"",
   "admin.access-control.groups.form.members-list.notification.success.addMember": "Mitglied: \"{{name}}\" erfolgreich hinzugefügt",
 
-  // "admin.access-control.groups.form.members-list.notification.failure.addMember": "Failed to add member: \"{{name}}\"",
+  // "admin.access-control.groups.form.members-list.notification.failure.addMember": "Failed to add member: "{{name}}"",
   "admin.access-control.groups.form.members-list.notification.failure.addMember": "Mitglied: \"{{name}}\" konnte nicht hinzugefügt werden",
 
-  // "admin.access-control.groups.form.members-list.notification.success.deleteMember": "Successfully deleted member: \"{{name}}\"",
+  // "admin.access-control.groups.form.members-list.notification.success.deleteMember": "Successfully deleted member: "{{name}}"",
   "admin.access-control.groups.form.members-list.notification.success.deleteMember": "Mitglied: \"{{name}}\" erfolgreich gelöscht",
 
-  // "admin.access-control.groups.form.members-list.notification.failure.deleteMember": "Failed to delete member: \"{{name}}\"",
+  // "admin.access-control.groups.form.members-list.notification.failure.deleteMember": "Failed to delete member: "{{name}}"",
   "admin.access-control.groups.form.members-list.notification.failure.deleteMember": "Mitglied: \"{{name}}\" konnte nicht gelöscht werden",
 
-  // "admin.access-control.groups.form.members-list.table.edit.buttons.add": "Add member with name \"{{name}}\"",
+  // "admin.access-control.groups.form.members-list.table.edit.buttons.add": "Add member with name "{{name}}"",
   "admin.access-control.groups.form.members-list.table.edit.buttons.add": "Mitglied mit dem Namen \"{{name}}\" hinzufügen",
 
   // "admin.access-control.groups.form.members-list.notification.failure.noActiveGroup": "No current active group, submit a name first.",
@@ -909,7 +909,7 @@
   // "admin.access-control.groups.form.members-list.no-items": "No EPeople found in that search",
   "admin.access-control.groups.form.members-list.no-items": "Keine Personen in dieser Suche gefunden",
 
-  // "admin.access-control.groups.form.subgroups-list.notification.failure": "Something went wrong: \"{{cause}}\"",
+  // "admin.access-control.groups.form.subgroups-list.notification.failure": "Something went wrong: "{{cause}}"",
   "admin.access-control.groups.form.subgroups-list.notification.failure": "Etwas ist fehlgeschlagen: \"{{cause}}\"",
 
   // "admin.access-control.groups.form.subgroups-list.head": "Groups",
@@ -940,25 +940,25 @@
   // "admin.access-control.groups.form.subgroups-list.table.edit": "Remove / Add",
   "admin.access-control.groups.form.subgroups-list.table.edit": "Entfernen / Hinzufügen",
 
-  // "admin.access-control.groups.form.subgroups-list.table.edit.buttons.remove": "Remove subgroup with name \"{{name}}\"",
+  // "admin.access-control.groups.form.subgroups-list.table.edit.buttons.remove": "Remove subgroup with name "{{name}}"",
   "admin.access-control.groups.form.subgroups-list.table.edit.buttons.remove": "Untergruppe mit Namen \"{{name}}\" entfernen",
 
-  // "admin.access-control.groups.form.subgroups-list.table.edit.buttons.add": "Add subgroup with name \"{{name}}\"",
+  // "admin.access-control.groups.form.subgroups-list.table.edit.buttons.add": "Add subgroup with name "{{name}}"",
   "admin.access-control.groups.form.subgroups-list.table.edit.buttons.add": "Untergruppe mit Namen \"{{name}}\" hinzufügen",
 
   // "admin.access-control.groups.form.subgroups-list.table.edit.currentGroup": "Current group",
   "admin.access-control.groups.form.subgroups-list.table.edit.currentGroup": "Derzeitige Gruppe",
 
-  // "admin.access-control.groups.form.subgroups-list.notification.success.addSubgroup": "Successfully added subgroup: \"{{name}}\"",
+  // "admin.access-control.groups.form.subgroups-list.notification.success.addSubgroup": "Successfully added subgroup: "{{name}}"",
   "admin.access-control.groups.form.subgroups-list.notification.success.addSubgroup": "Untergruppe: \"{{name}}\" erfolgreich hinzugefügt",
 
-  // "admin.access-control.groups.form.subgroups-list.notification.failure.addSubgroup": "Failed to add subgroup: \"{{name}}\"",
+  // "admin.access-control.groups.form.subgroups-list.notification.failure.addSubgroup": "Failed to add subgroup: "{{name}}"",
   "admin.access-control.groups.form.subgroups-list.notification.failure.addSubgroup": "Untergruppe: \"{{name}}\" konnte nicht hinzugefügt werden",
 
-  // "admin.access-control.groups.form.subgroups-list.notification.success.deleteSubgroup": "Successfully deleted subgroup: \"{{name}}\"",
+  // "admin.access-control.groups.form.subgroups-list.notification.success.deleteSubgroup": "Successfully deleted subgroup: "{{name}}"",
   "admin.access-control.groups.form.subgroups-list.notification.success.deleteSubgroup": "Untergruppe: \"{{name}}\" erfolgreich gelöscht",
 
-  // "admin.access-control.groups.form.subgroups-list.notification.failure.deleteSubgroup": "Failed to delete subgroup: \"{{name}}\"",
+  // "admin.access-control.groups.form.subgroups-list.notification.failure.deleteSubgroup": "Failed to delete subgroup: "{{name}}"",
   "admin.access-control.groups.form.subgroups-list.notification.failure.deleteSubgroup": "Untergruppe: \"{{name}}\" konnte nicht gelöscht werden",
 
   // "admin.access-control.groups.form.subgroups-list.notification.failure.noActiveGroup": "No current active group, submit a name first.",
@@ -1595,7 +1595,7 @@
   // "collection.delete.notification.success": "Successfully deleted collection",
   "collection.delete.notification.success": "Die Sammlung wurde erfolgreich gelöscht",
 
-  // "collection.delete.text": "Are you sure you want to delete collection \"{{ dso }}\"",
+  // "collection.delete.text": "Are you sure you want to delete collection "{{ dso }}"",
   "collection.delete.text": "Sind Sie sicher, dass Sie die Sammlung \"{{ dso }}\" löschen wollen?",
 
   // "collection.edit.delete": "Delete this collection",
@@ -1831,7 +1831,7 @@
   // TODO New key - Add a translation
   "collection.edit.template.error": "An error occurred retrieving the template item",
 
-  // "collection.edit.template.head": "Edit Template Item for Collection \"{{ collection }}\"",
+  // "collection.edit.template.head": "Edit Template Item for Collection "{{ collection }}"",
   "collection.edit.template.head": "Itemvorlage für Sammlung \"{{ collection }}\" bearbeiten",
 
   // "collection.edit.template.label": "Template item",
@@ -2080,7 +2080,7 @@
   // "community.delete.notification.success": "Successfully deleted community",
   "community.delete.notification.success": "Der Bereich wurde erfolgreich gelöscht.",
 
-  // "community.delete.text": "Are you sure you want to delete community \"{{ dso }}\"",
+  // "community.delete.text": "Are you sure you want to delete community "{{ dso }}"",
   "community.delete.text": "Sind Sie sicher, dass Sie den Bereich \"{{ dso }}\" löschen möchten?",
 
   // "community.edit.delete": "Delete this community",
@@ -2281,11 +2281,11 @@
 
   // "compare-item.table.key": "Metadata",
   // TODO New key - Add a translation
-  "compare-item.table.key": "Metainformationen",
+  "compare-item.table.key": "Meta-Informationen",
 
   // "compare-item.table.base-item": "Base Item",
   // TODO New key - Add a translation
-  "compare-item.table.base-item": "Basis-Eintrag",
+  "compare-item.table.base-item": "aktueller Eintrag",
 
   // "compare-item.table.versioned-item": "Versioned Item",
   // TODO New key - Add a translation
@@ -2309,7 +2309,7 @@
 
   // "context-menu.actions.export-item.btn": "Export",
   // TODO New key - Add a translation
-  "context-menu.actions.export-item.btn": "Export",
+  "context-menu.actions.export-item.btn": "<i class=\"fas fa-file-export\"></i> Informationen exportieren",
 
   // "context-menu.actions.generate-report.btn": "<i class=\"fas fa-file-export\"></i> Generate project report",
   // TODO New key - Add a translation
@@ -2698,7 +2698,7 @@
   // "curation.form.handle.hint": "Hint: Enter [your-handle-prefix]/0 to run a task across entire site (not all tasks may support this capability)",
   "curation.form.handle.hint": "Hinweis: Geben Sie [handle-prefix]/0 ein, um eine Aufgabe für die gesamte Seite durchzuführen (nicht alle Aufgaben unterstützen diese Funktion)",
 
-  // "deny-request-copy.email.message": "Dear {{ recipientName }},\nIn response to your request I regret to inform you that it's not possible to send you a copy of the file(s) you have requested, concerning the document: \"{{ itemUrl }}\" ({{ itemName }}), of which I am an author.\n\nBest regards,\n{{ authorName }} <{{ authorEmail }}>",
+  // "deny-request-copy.email.message": "Dear {{ recipientName }},\nIn response to your request I regret to inform you that it's not possible to send you a copy of the file(s) you have requested, concerning the document: "{{ itemUrl }}" ({{ itemName }}), of which I am an author.\n\nBest regards,\n{{ authorName }} <{{ authorEmail }}>",
   // TODO New key - Add a translation
   "deny-request-copy.email.message": "Dear {{ recipientName }},\nIn response to your request I regret to inform you that it's not possible to send you a copy of the file(s) you have requested, concerning the document: \"{{ itemUrl }}\" ({{ itemName }}), of which I am an author.\n\nBest regards,\n{{ authorName }} <{{ authorEmail }}>",
 
@@ -2833,10 +2833,10 @@
   // "confirmation-modal.export-metadata.confirm": "Export",
   "confirmation-modal.export-metadata.confirm": "Exportieren",
 
-  // "confirmation-modal.delete-eperson.header": "Delete EPerson \"{{ dsoName }}\"",
+  // "confirmation-modal.delete-eperson.header": "Delete EPerson "{{ dsoName }}"",
   "confirmation-modal.delete-eperson.header": "Person \"{{ dsoName }}\" löschen",
 
-  // "confirmation-modal.delete-eperson.info": "Are you sure you want to delete EPerson \"{{ dsoName }}\"",
+  // "confirmation-modal.delete-eperson.info": "Are you sure you want to delete EPerson "{{ dsoName }}"",
   "confirmation-modal.delete-eperson.info": "Sind Sie sicher, dass Sie die Person \"{{ dsoName }}\" löschen möchten",
 
   // "confirmation-modal.delete-eperson.cancel": "Cancel",
@@ -2845,11 +2845,11 @@
   // "confirmation-modal.delete-eperson.confirm": "Delete",
   "confirmation-modal.delete-eperson.confirm": "Löschen",
 
-  // "confirmation-modal.delete-subscription.header": "Delete Subscription for \"{{ dsoName }}\"",
+  // "confirmation-modal.delete-subscription.header": "Delete Subscription for "{{ dsoName }}"",
   // TODO New key - Add a translation
   "confirmation-modal.delete-subscription.header": "Delete Subscription for \"{{ dsoName }}\"",
 
-  // "confirmation-modal.delete-subscription.info": "Are you sure you want to delete subscription for \"{{ dsoName }}\"",
+  // "confirmation-modal.delete-subscription.info": "Are you sure you want to delete subscription for "{{ dsoName }}"",
   // TODO New key - Add a translation
   "confirmation-modal.delete-subscription.info": "Are you sure you want to delete subscription for \"{{ dsoName }}\"",
 
@@ -2861,11 +2861,11 @@
   // TODO New key - Add a translation
   "confirmation-modal.delete-subscription.confirm": "Delete",
 
-  // "confirmation-modal.delete-comment.header": "Delete comment \"{{ dsoName }}\"",
+  // "confirmation-modal.delete-comment.header": "Delete comment "{{ dsoName }}"",
   // TODO New key - Add a translation
   "confirmation-modal.delete-comment.header": "Delete comment \"{{ dsoName }}\"",
 
-  // "confirmation-modal.delete-comment.info": "Are you sure you want to delete comment \"{{ dsoName }}\"",
+  // "confirmation-modal.delete-comment.info": "Are you sure you want to delete comment "{{ dsoName }}"",
   // TODO New key - Add a translation
   "confirmation-modal.delete-comment.info": "Are you sure you want to delete comment \"{{ dsoName }}\"",
 
@@ -3739,7 +3739,7 @@
   "form.repeatable.sort.tip": "Drop the item in the new position",
 
   // "funding.listelement.badge": "Funding",
-  "funding.listelement.badge": "Fördermittel",
+  "funding.listelement.badge": "Projekt",
 
   // "funding.page.titleprefix": "Funding: ",
   // TODO New key - Add a translation
@@ -3805,7 +3805,7 @@
   // TODO New key - Add a translation
   "grant-deny-request-copy.processed": "This request has already been processed. You can use the button below to get back to the home page.",
 
-  // "grant-request-copy.email.message": "Dear {{ recipientName }},\nIn response to your request I have the pleasure to send you in attachment a copy of the file(s) concerning the document: \"{{ itemUrl }}\" ({{ itemName }}), of which I am an author.\n\nBest regards,\n{{ authorName }} <{{ authorEmail }}>",
+  // "grant-request-copy.email.message": "Dear {{ recipientName }},\nIn response to your request I have the pleasure to send you in attachment a copy of the file(s) concerning the document: "{{ itemUrl }}" ({{ itemName }}), of which I am an author.\n\nBest regards,\n{{ authorName }} <{{ authorEmail }}>",
   // TODO New key - Add a translation
   "grant-request-copy.email.message": "Dear {{ recipientName }},\nIn response to your request I have the pleasure to send you in attachment a copy of the file(s) concerning the document: \"{{ itemUrl }}\" ({{ itemName }}), of which I am an author.\n\nBest regards,\n{{ authorName }} <{{ authorEmail }}>",
 
@@ -4763,11 +4763,11 @@
 
   // "item.grant.badge.parentproject": "All",
   // TODO New key - Add a translation
-  "item.grant.badge.parentproject": "All",
+  "item.grant.badge.parentproject": "Test",
 
   // "item.grant.badge.project": "Only {{ name }}",
   // TODO New key - Add a translation
-  "item.grant.badge.project": "Only {{ name }}",
+  "item.grant.badge.project": "Alle",
 
   // "item.listelement.badge": "Item",
   "item.listelement.badge": "Item",
@@ -7634,7 +7634,7 @@
 
   // "project.create.head": "New project",
   // TODO New key - Add a translation
-  "project.create.head": "Neues Projekt",
+  "project.create.head": "Neues Projekt anlegen",
 
   // "project.create.grants.placeholder": "Please select editable grants",
   // TODO New key - Add a translation
@@ -7667,15 +7667,15 @@
 
   // "project.listelement.badge": "Subproject",
   // TODO Source message changed - Revise the translation
-  "project.listelement.badge": "Projekt",
+  "project.listelement.badge": "Verbund",
 
   // "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Manage coordinators",
   // TODO Source message changed - Revise the translation
-  "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Verwaltung Koordinator:innen",
+  "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Einladung und Verwaltung Koordinator:innen",
 
   // "project.manage.menu.subproject": "<i class=\"fas fa-toolbox\"></i> Manage subproject members",
   // TODO New key - Add a translation
-  "project.manage.menu.subproject": "<i class=\"fas fa-toolbox\"></i> Verwaltung Projektmitarbeitende",
+  "project.manage.menu.subproject": "<i class=\"fas fa-toolbox\"></i> Einladung und Verwaltung Projektmitarbeitende",
 
   // "project.manage.breadcrumbs": "Manage project members",
   // TODO New key - Add a translation
@@ -7715,7 +7715,7 @@
 
   // "project.manage.members-list.search.scope.email": "E-mail (exact)",
   // TODO New key - Add a translation
-  "project.manage.members-list.search.scope.email": "E-mail (exact)",
+  "project.manage.members-list.search.scope.email": "E-mail (genau)",
 
   // "project.manage.members-list.search.button": "Search",
   // TODO New key - Add a translation
@@ -7731,35 +7731,35 @@
 
   // "project.manage.members-list.table.edit": "Remove / Add",
   // TODO New key - Add a translation
-  "project.manage.members-list.table.edit": "Remove / Add",
+  "project.manage.members-list.table.edit": "Entfernen / Hinzufügen",
 
-  // "project.manage.members-list.table.edit.buttons.remove": "Remove member with name \"{{name}}\"",
+  // "project.manage.members-list.table.edit.buttons.remove": "Remove member with name "{{name}}"",
   // TODO New key - Add a translation
-  "project.manage.members-list.table.edit.buttons.remove": "Remove member with name \"{{name}}\"",
+  "project.manage.members-list.table.edit.buttons.remove": "Mitglied mit Namen \"{{name}}\" entfernen",
 
-  // "project.manage.members-list.table.invitation.buttons.send": "Send invitation to \"{{email}}\"",
+  // "project.manage.members-list.table.invitation.buttons.send": "Send invitation to "{{email}}"",
   // TODO New key - Add a translation
-  "project.manage.members-list.table.invitation.buttons.send": "Send invitation to \"{{email}}\"",
+  "project.manage.members-list.table.invitation.buttons.send": "Einladungsmail senden an  \"{{email}}\"",
 
-  // "project.manage.members-list.notification.success.addMember": "Successfully added member: \"{{name}}\"",
+  // "project.manage.members-list.notification.success.addMember": "Successfully added member: "{{name}}"",
   // TODO New key - Add a translation
-  "project.manage.members-list.notification.success.addMember": "Successfully added member: \"{{name}}\"",
+  "project.manage.members-list.notification.success.addMember": "Mitglied erfolgreich hinzugefügt: \"{{name}}\"",
 
-  // "project.manage.members-list.notification.failure.addMember": "Failed to add member: \"{{name}}\"",
+  // "project.manage.members-list.notification.failure.addMember": "Failed to add member: "{{name}}"",
   // TODO New key - Add a translation
-  "project.manage.members-list.notification.failure.addMember": "Failed to add member: \"{{name}}\"",
+  "project.manage.members-list.notification.failure.addMember": "Mitglied konnte nicht hinzugefügt werden: \"{{name}}\"",
 
-  // "project.manage.members-list.notification.success.deleteMember": "Successfully deleted member: \"{{name}}\"",
+  // "project.manage.members-list.notification.success.deleteMember": "Successfully deleted member: "{{name}}"",
   // TODO New key - Add a translation
-  "project.manage.members-list.notification.success.deleteMember": "Successfully deleted member: \"{{name}}\"",
+  "project.manage.members-list.notification.success.deleteMember": "Mitglied erfolgreich gelöscht: \"{{name}}\"",
 
-  // "project.manage.members-list.notification.failure.deleteMember": "Failed to delete member: \"{{name}}\"",
+  // "project.manage.members-list.notification.failure.deleteMember": "Failed to delete member: "{{name}}"",
   // TODO New key - Add a translation
-  "project.manage.members-list.notification.failure.deleteMember": "Failed to delete member: \"{{name}}\"",
+  "project.manage.members-list.notification.failure.deleteMember": "Mitglied konnte nicht gelöscht werden: \"{{name}}\"",
 
-  // "project.manage.members-list.table.edit.buttons.add": "Add member with name \"{{name}}\"",
+  // "project.manage.members-list.table.edit.buttons.add": "Add member with name "{{name}}"",
   // TODO New key - Add a translation
-  "project.manage.members-list.table.edit.buttons.add": "Add member with name \"{{name}}\"",
+  "project.manage.members-list.table.edit.buttons.add": "Mitglied mit Namen \"{{name}}\" hinzufügen",
 
   // "project.manage.members-list.notification.failure.noActiveGroup": "No current active group, submit a name first.",
   // TODO New key - Add a translation
@@ -7767,7 +7767,7 @@
 
   // "project.manage.members-list.no-members-yet": "No members in group yet, search and add.",
   // TODO New key - Add a translation
-  "project.manage.members-list.no-members-yet": "No members in group yet, search and add.",
+  "project.manage.members-list.no-members-yet": "Noch keine Mitglieder in der Gruppe, suchen und hinzufügen.",
 
   // "project.manage.members-list.no-items": "No EPeople found in that search",
   // TODO New key - Add a translation
@@ -7775,7 +7775,7 @@
 
   // "project.manage.members-list.invite": "Invite person(s) who are not yet registered",
   // TODO New key - Add a translation
-  "project.manage.members-list.invite": "Invite person(s) who are not yet registered",
+  "project.manage.members-list.invite": "Nicht-registrierte Person einladen",
 
   // "project.manage.members-list.table.email": "E-mail",
   // TODO New key - Add a translation
@@ -7783,31 +7783,31 @@
 
   // "project.manage.members-list.modal.withdraw.title": "Withdraw role",
   // TODO New key - Add a translation
-  "project.manage.members-list.modal.withdraw.title": "Withdraw role",
+  "project.manage.members-list.modal.withdraw.title": "Rolle entziehen",
 
   // "project.manage.members-list.modal.withdraw.body": "Are you sure?",
   // TODO New key - Add a translation
-  "project.manage.members-list.modal.withdraw.body": "Are you sure?",
+  "project.manage.members-list.modal.withdraw.body": "Sind Sie sicher?",
 
   // "project.manage.members-list.modal.withdraw.confirm": "Yes, i'm sure",
   // TODO New key - Add a translation
-  "project.manage.members-list.modal.withdraw.confirm": "Yes, i'm sure",
+  "project.manage.members-list.modal.withdraw.confirm": "Ja, ich bin sicher",
 
   // "project.manage.members-list.modal.withdraw.close": "Cancel",
   // TODO New key - Add a translation
-  "project.manage.members-list.modal.withdraw.close": "Cancel",
+  "project.manage.members-list.modal.withdraw.close": "Abbrechen",
 
   // "project.manage.members-list.table.withdraw": "Withdraw role",
   // TODO New key - Add a translation
-  "project.manage.members-list.table.withdraw": "Withdraw role",
+  "project.manage.members-list.table.withdraw": "Rolle entziehen",
 
   // "project.manage.members-list.table.withdraw.tooltip": "You can withdraw role",
   // TODO New key - Add a translation
-  "project.manage.members-list.table.withdraw.tooltip": "You can withdraw role",
+  "project.manage.members-list.table.withdraw.tooltip": "Mit dem Entziehen der Rolle werden die Rechte eingeschränkt",
 
   // "project.manage.members-list.table.withdraw.send": "Send Invitation",
   // TODO New key - Add a translation
-  "project.manage.members-list.table.withdraw.send": "Send Invitation",
+  "project.manage.members-list.table.withdraw.send": "Einladung senden",
 
   // "project.page.contributor": "Contributors",
   "project.page.contributor": "Beteiligte",
@@ -9208,7 +9208,7 @@
 
   // "search.filters.entityType.Project": "Subproject",
   // TODO Source message changed - Revise the translation
-  "search.filters.entityType.Project": "Projekt",
+  "search.filters.entityType.Project": "Verbund",
 
   // "search.filters.entityType.Publication": "Publication",
   "search.filters.entityType.Publication": "Veröffentlichung",
@@ -10527,7 +10527,7 @@
   // TODO New key - Add a translation
   "submission.sections.describe.relationship-lookup.selection-tab.title": "Search Results",
 
-  // "submission.sections.describe.relationship-lookup.name-variant.notification.content": "Would you like to save \"{{ value }}\" as a name variant for this person so you and others can reuse it for future submissions? If you don\'t you can still use it for this submission.",
+  // "submission.sections.describe.relationship-lookup.name-variant.notification.content": "Would you like to save "{{ value }}" as a name variant for this person so you and others can reuse it for future submissions? If you don\'t you can still use it for this submission.",
   "submission.sections.describe.relationship-lookup.name-variant.notification.content": "Möchten Sie \"{{ value }}\" als Namesvariante für diese Person speichern? So können Sie und andere diese bei zukünftigen Veröffentlichungen verwenden. Wenn Sie das nicht tun, können Sie die Variante immer noch für diese Veröffentlichung verwenden.",
 
   // "submission.sections.describe.relationship-lookup.name-variant.notification.confirm": "Save a new name variant",
@@ -10689,7 +10689,7 @@
 
   // "submission.sections.submit.progressbar.describe.funding": "#1 Funding basic information",
   // TODO New key - Add a translation
-  "submission.sections.submit.progressbar.describe.funding": "#1 Förderung beschreiben",
+  "submission.sections.submit.progressbar.describe.funding": "#1 Informationen zum Projekt ergänzen",
 
   // "submission.sections.submit.progressbar.describe.journal": "Journal basic information",
   // TODO New key - Add a translation
@@ -11012,10 +11012,10 @@
 
   // "submission.sections.submit.progressbar.describe.projects": "#1 Subproject",
   // TODO Source message changed - Revise the translation
-  "submission.sections.submit.progressbar.describe.projects": "#1 Informationen zum Projekt ergänzen",
+  "submission.sections.submit.progressbar.describe.projects": "#1 Verbund beschreiben",
 
   // "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
-  "submission.sections.submit.progressbar.describe.projects.info": "<p><i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Projektverlauf.</p><b>Wichtige Hinweise:</b><ul><li><b>Ergänzen Sie das Förderkennzeichen, sobald es vorliegt</b>. Dadurch wird im Projektverlauf eine regelmäßige Aktualisierung der Daten über eine Schnittstelle zum Fördermittelgeber (profi) gewährleistet.</li><li>Durch die Angabe von <b>Webseiten</b> des Projektes verbessern Sie die <b>Sichtbarkeit</b>.</ul></li>",
+  "submission.sections.submit.progressbar.describe.projects.info": "<p><i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Projektverlauf.</p><b>Wichtiger Hinweis:</b><ul><li>Achten Sie besonders auf die korrekte Auswahl des Förderbereichs bzw. der Bekanntmachung in der Ihr Verbund beantragt wird. Damit wird sichergestellt, dass Ihnen die dazugehörigen Förderziele in „Beitrag zu förderpolitischen Zielen“ angezeigt werden.</ul></li>",
 
   // "submission.sections.submit.progressbar.describe.projects_overview": "Project overview",
   "submission.sections.submit.progressbar.describe.projects_overview": "Projektübersicht",
@@ -12174,7 +12174,7 @@
 
   // "Project.listelement.badge": "Subproject",
   // TODO New key - Add a translation
-  "Project.listelement.badge": "Projekt",
+  "Project.listelement.badge": "Verbund",
 
   // "proj_objective.listelement.badge": "Research and development objective",
   // TODO Source message changed - Revise the translation
@@ -12711,7 +12711,7 @@
   "layout.tab.header.subproject": "Projektinformationen",
 
   // "layout.tab.header.Funding": "Fundings",
-  "layout.tab.header.Funding": "Fördermittel",
+  "layout.tab.header.Funding": "Beteiligte Projekte / Zuwendungsempfänger",
 
   // "layout.tab.header.projectpartner": "Project partners",
   "layout.tab.header.projectpartner": "Projektpartner / Ausführende Stelle(n)",
@@ -12877,7 +12877,7 @@
 
   // "layout.box.header.Funding": "Subproject - Funding",
   // TODO Source message changed - Revise the translation
-  "layout.box.header.Funding": "Projekt - Fördermittel(geber)",
+  "layout.box.header.Funding": "Projekte - Listenansicht",
 
   // "layout.box.header.projectpartner": "Subproject - Project partners",
   // TODO Source message changed - Revise the translation
@@ -13159,7 +13159,7 @@
   "submission.sections.upload.form.access-condition.administrator": "Administrator",
 
   // "Funding.listelement.badge": "Funding",
-  "Funding.listelement.badge": "Fördermittel",
+  "Funding.listelement.badge": "Projekt",
 
   // "profile.edit-item.btn.OWNER": "Edit",
   "profile.edit-item.btn.OWNER": "Bearbeiten",
@@ -13803,7 +13803,7 @@
   "layout.field.label.Publication.dc.relation.doi": "DOI",
 
   // "layout.field.label.Publication.dc.relation.ispartof": "In series",
-  "layout.field.label.Publication.dc.relation.ispartof": "In Zeitschrift oder Reihe",
+  "layout.field.label.Publication.dc.relation.ispartof": "Erschienen in",
 
   // "layout.field.label.Publication.dc.relation.issn": "ISSN",
   "layout.field.label.Publication.dc.relation.issn": "ISSN",
@@ -14602,10 +14602,10 @@
   "submission.sections.submit.progressbar.describe.parentprojects_calc.info": "<p>Hier werden Daten zum Verbund auf Basis der Projekte automatisch kalkuliert und importiert. Über den Import der easy-xml-Dateien und im Projektverlauf über profi findet eine regelmäßige Aktualisierung statt. Eingaben sind weder erforderlich noch möglich.</p>",
 
   // "submission.form.projects.info": "missing",
-  "submission.form.projects.info": "<b>Worum es hier geht:</b><ul><li>Wenn mehrere Organisationen in einem Verbund zusammenarbeiten hat jede Organisation ein eigenes Projekt.</li><li>Jedes Projekt hat einen eigenen <b>easy-Online Antrag</b>, und bekommt ein eigenes <b>Förderkennzeichen</b> und einen eigenen <b>Zuwendungsbescheid</b> vom Förderer.</li><li>Die meisten Informationen zum Projekt kommen durch den <b>easy-Online Import</b>.<li><b>Sie ergänzen hier wichtige Angaben, für die Funktion des Monitoring-Tools.</b> </ul></li>",
+  "submission.form.projects.info": "<b>Worum es hier geht:</b><ul><li>In einem Verbund arbeiten mehrere Organisationen/Antragsteller mit eigenen Projekten zusammen.</li><li>Die meisten Informationen werden hier aus den Projekten übertragen.</li><li>Sie ergänzen hier wichtige Angaben, für die Funktion des Monitoring-Tools. Nutzen Sie diese Seite deshalb auch, wenn ein Verbund nur aus einem Projekt besteht.</li><li>Fügen Sie über den Upload ein Projektlogo (falls vorhanden) und die Kapitel zum Stand des Wissens sowie zu Material und Methoden hinzu.</ul></li>",
 
   // "submission.form.projects-edit.info": "missing",
-  "submission.form.projects-edit.info": "<b>Worum es hier geht:</b><ul><li>Wenn mehrere Organisationen in einem Verbund zusammenarbeiten hat jede Organisation ein eigenes Projekt.</li><li>Jedes Projekt hat einen eigenen <b>easy-Online Antrag</b>, und bekommt ein eigenes <b>Förderkennzeichen</b> und einen eigenen <b>Zuwendungsbescheid</b> vom Förderer.</li><li>Die meisten Informationen zum Projekt kommen durch den <b>easy-Online Import</b>.<li><b>Sie ergänzen hier wichtige Angaben, für die Funktion des Monitoring-Tools.</b> </ul></li>",
+  "submission.form.projects-edit.info": "<b>Worum es hier geht:</b><ul><li>In einem Verbund arbeiten mehrere Organisationen/Antragsteller mit eigenen Projekten zusammen.</li><li>Die meisten Informationen werden hier aus den Projekten übertragen.</li><li>Sie ergänzen hier wichtige Angaben, für die Funktion des Monitoring-Tools. Nutzen Sie diese Seite deshalb auch, wenn ein Verbund nur aus einem Projekt besteht.</li><li>Fügen Sie über den Upload ein Projektlogo (falls vorhanden) und die Kapitel zum Stand des Wissens sowie zu Material und Methoden hinzu.</ul></li>",
 
   // "submission.form.events.info": "missing",
   "submission.form.events.info": "<b>Zur Unterscheidung:</b><ul><li><b>Konferenzbeiträge</b> erfassen Sie bitte nur unter <b>Veröffentlichungen</b>. Ein zusätzlicher Eintrag in Veranstaltung ist nicht erforderlich.</li><li><b>Veranstaltungen</b>, die Teil eines über einen längeren Zeitraum andauernden Austauschs mit den gleichen Beteiligten mit widerkehrenden Treffen/Veranstaltungen sind, erfassen Sie bitte im Bereich <b>Kooperation / Partizipation / Austauschprozesse</b>. Entscheiden Sie, welcher Bereich besser passt. Sie sollten keine <b>Veranstaltung</b> doppelt erfassen.</li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-events.html\"target=_blank\">Beispiele</a></li></ul>",
@@ -15184,6 +15184,99 @@
   "layout.field.label.Event.synsicris.type.internal": "Aufgabe",
 
   // "layout.field.label.Event.synsicris.description.internal": "Notes",
-  "layout.field.label.Event.synsicris.description.internal": "Notizen"
+  "layout.field.label.Event.synsicris.description.internal": "Notizen",
+
+  // "submission.sections.submit.progressbar.describe.projects_calc": "#1 Summarised information from subprojects",
+  "submission.sections.submit.progressbar.describe.projects_calc": "#1 Zusammengefasste Angaben aus den Projekten",
+
+  // "submission.sections.submit.progressbar.describe.projects_calc.info": "missing",
+  "submission.sections.submit.progressbar.describe.projects_calc.info": "<p>Hier werden Daten zum Verbund auf Basis der Projekte automatisch kalkuliert und importiert. Über den Import der easy-xml-Dateien und im Projektverlauf über profi findet eine regelmäßige Aktualisierung statt. Eingaben sind weder erforderlich noch möglich.</p>",
+
+  // "submission.form.funding.info": "missing",
+  "submission.form.funding.info": "<b>Worum es hier geht:</b><ul><li>Wenn mehrere Organisationen in einem Verbund zusammenarbeiten hat jede Organisation ein eigenes Projekt.</li><li>Jedes Projekt hat einen eigenen <b>easy-Online Antrag</b>, und bekommt ein eigenes <b>Förderkennzeichen</b> und einen eigenen <b>Zuwendungsbescheid</b> vom Förderer.</li><li>Die meisten Informationen zum Projekt kommen durch den <b>easy-Online Import</b>.<li><b>Sie ergänzen hier wichtige Angaben, für die Funktion des Monitoring-Tools.</b> </ul></li>",
+
+  // "submission.form.funding-edit.info": "missing",
+  "submission.form.funding-edit.info": "<b>Worum es hier geht:</b><ul><li>Wenn mehrere Organisationen in einem Verbund zusammenarbeiten hat jede Organisation ein eigenes Projekt.</li><li>Jedes Projekt hat einen eigenen <b>easy-Online Antrag</b>, und bekommt ein eigenes <b>Förderkennzeichen</b> und einen eigenen <b>Zuwendungsbescheid</b> vom Förderer.</li><li>Die meisten Informationen zum Projekt kommen durch den <b>easy-Online Import</b>.<li><b>Sie ergänzen hier wichtige Angaben, für die Funktion des Monitoring-Tools.</b> </ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.funding.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
+  "submission.sections.submit.progressbar.describe.funding.info": "<p><i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Projektverlauf.</p><b>Wichtige Hinweise:</b><ul><li><b>Ergänzen Sie das Förderkennzeichen, sobald es vorliegt</b>. Dadurch wird im Projektverlauf eine regelmäßige Aktualisierung der Daten über eine Schnittstelle zum Fördermittelgeber (profi) gewährleistet.</li><li>Durch die Angabe von <b>Webseiten</b> des Projektes verbessern Sie die <b>Sichtbarkeit</b>.</ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.funding_import": "#1 Project overview",
+  "submission.sections.submit.progressbar.describe.funding_import": "#1 Importierte Informationen des Projektes",
+
+  // "submission.sections.submit.progressbar.describe.funding_import.info": "This information is generated from the corresponding subprojects. During the proposal preparation phase, the information comes from the easy-online imports of the subprojects. During the project phase, the information is regularly updated from profi.",
+  "submission.sections.submit.progressbar.describe.funding_import.info": "<p><b>Hier sind keine Eingaben erforderlich. Die Informationen kommen aus dem  Import der easy-xml-Datei und werden im Projektverlauf über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert.</p></b><b>Wichtige Hinweise:</b><ul> <li>Wenn Sie in der Antragsphase fehlerhaften Angaben korrigieren möchten, ändern Sie diese Angaben in easy-online und importieren erneut. </li><li> Im Projektverlauf sollten Sie fehlerhafte Angaben an den Förderer melden. Berücksichtigen Sie dabei, dass Daten aus profi alle 24 Std. aktualisiert werden.</ul> </li>",
+
+  // "search.filters.entityType.Funding": "Project",
+  "search.filters.entityType.Funding": "Projekt",
+
+  // "s": "Target for interaction and transfer",
+  "s": "Ziel für Interaktion und Transfer",
+
+  // "layout.box.header.Funding_comment": "Comments - Funding",
+  "layout.box.header.Funding_comment": "Kommentare - Förderung",
+
+  // "layout.field.label.Person.dspace.entity.type": "Person",
+  "layout.field.label.Person.dspace.entity.type": "Person",
+
+  // "test_ethic": "Overview",
+  "test_ethic": "Übersicht zu Aspekten und Maßnahmen",
+
+  // "test_process-event": "Frequency",
+  "test_process-event": "Übersicht zu Art und Häufigkeit der Treffen",
+
+  // "test_process-event_detail": "Data on the meeting/event",
+  "test_process-event_detail": "Details zu einzelnen Treffen/Veranstaltungen",
+
+  // "layout.field.label.Publication.dc.identifier.doi": "DOI",
+  "layout.field.label.Publication.dc.identifier.doi": "DOI",
+
+  // "test_author": "Author(s)",
+  "test_author": "Autor:in(nen)",
+
+  // "test_innovationpotential": "Type ",
+  "test_innovationpotential": "Übersicht zu Art und nutzende(n) Akteursgruppe(n)",
+
+  // "test_innovationpotential_regional": "Reference points",
+  "test_innovationpotential_regional": "Übersicht zur Einsatzregion und späteren Verbreitung",
+
+  // "test_innovationpotential_status": "Start value/target value",
+  "test_innovationpotential_status": "Übersicht zum Entwicklungsstand",
+
+  // "test_application": "Reference year",
+  "test_application": "Übersicht zur Entwicklung und Ausbreitung der Anwendung",
+
+  // "test_spinoff_performance": "Reference year",
+  "test_spinoff_performance": "Übersicht zur wirtschaftliche Entwicklung",
+
+  // "test_spinoff_funding": "Year of funding",
+  "test_spinoff_funding": "Übersicht zu erhaltenen Unterstützungsleistungen",
+
+  // "test_exp_societalimpact": "Expected impact",
+  "test_exp_societalimpact": "Details zur erwarteten Wirkung",
+
+  // "test_exp_societalimpact_type": "Possible expected side effects",
+  "test_exp_societalimpact_type": "Übersicht zu eventuellen Nebenwirkungen",
+
+  // "project.manage.members.funding.admin-group": "Invitation and Management of project coordinators",
+  "project.manage.members.funding.admin-group": "Einladung und Verwaltung Koordinator:innen",
+
+  // "project.manage.members.funding.members-group": "Invitation and Management of project members",
+  "project.manage.members.funding.members-group": "Einladung und Verwaltung Projektmitarbeitende",
+
+  // "item.grant.badge.funding": "Only {{ name }}",
+  "item.grant.badge.funding": "nur Mitglieder {{ name }}",
+
+  // "project.manage.members.project.admin-group-help": "Help message here",
+  "project.manage.members.project.admin-group-help": "Hilfetext hier für admin_group Verbund",
+
+  // "project.manage.members.project.members-group-help": "Help message here",
+  "project.manage.members.project.members-group-help": "Hilfetext hier für members_group Verbund",
+
+  // "project.manage.members.funding.admin-group-help": "Help message here",
+  "project.manage.members.funding.admin-group-help": "Hilfetext hier für admin_group Projekt",
+
+  // "project.manage.members.funding.members-group-help": "Help message here",
+  "project.manage.members.funding.members-group-help": "Hilfetext hier für members_group Projekt"
 
 }
