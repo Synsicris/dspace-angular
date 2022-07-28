@@ -19,6 +19,7 @@ import { SearchFilterConfig } from '../../shared/search/models/search-filter-con
 import { isNotEmpty } from '../../shared/empty.util';
 import { LocaleService } from '../../core/locale/locale.service';
 import { NgbDate, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { dateToString } from '../../shared/date.util';
 
 export interface QueryBuilderSearchFilter {
   key: string;
@@ -288,8 +289,8 @@ export class QueryConditionGroupComponent implements OnInit {
     } else if (this.queryGroup.get(idx + '.fromDate')?.value && !this.queryGroup.get(idx + '.toDate')?.value && date && date.after(this.queryGroup.get(idx + '.fromDate')?.value)) {
       this.queryGroup.get(idx + '.toDate').setValue(date);
       datepicker.toggle();
-      const selectedFromDateString = this.toModel(this.queryGroup.get(idx + '.fromDate')?.value);
-      const selectedToDateString = this.toModel(this.queryGroup.get(idx + '.toDate')?.value);
+      const selectedFromDateString = dateToString(this.queryGroup.get(idx + '.fromDate')?.value);
+      const selectedToDateString = dateToString(this.queryGroup.get(idx + '.toDate')?.value);
       const selectedDateString = selectedFromDateString + ' TO ' + selectedToDateString;
       this.queryGroup.get(idx + '.value').setValue(selectedDateString);
       const dateFacet = new FacetValue();
@@ -610,7 +611,7 @@ export class QueryConditionGroupComponent implements OnInit {
                   ` OR ${fieldWithLanguage}_authority:"${authorityValue}"` +
                   ` OR ${field}_keyword:"${authorityValue}" OR `;
               }
-  
+
               const query = `(${authorityQuery}${field}:"${value}" OR ${fieldWithLanguage}_keyword:"${value}" OR ${field}_keyword:"${value}")`;
               queries.push(query);
             }
@@ -660,11 +661,6 @@ export class QueryConditionGroupComponent implements OnInit {
   isRange(date: NgbDate, idx) {
     return date.equals(this.queryGroup.get(idx + '.fromDate')?.value) || (this.queryGroup.get(idx + '.toDate')?.value
         && date.equals(this.queryGroup.get(idx + '.toDate')?.value)) || this.isInside(date, idx) || this.isHovered(date, idx);
-  }
-
-  toModel(date: NgbDateStruct): string {
-    return date ? date.year + '-' + ('0' + date.month).slice(-2)
-           + '-' + ('0' + date.day).slice(-2) : null;
   }
 }
 
