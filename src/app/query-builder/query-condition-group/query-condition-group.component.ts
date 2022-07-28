@@ -663,8 +663,8 @@ export class QueryConditionGroupComponent implements OnInit {
   }
 
   toModel(date: NgbDateStruct): string {
-    return date ? date.year + '/' + ('0' + date.month).slice(-2)
-           + '/' + ('0' + date.day).slice(-2) : null;
+    return date ? date.year + '-' + ('0' + date.month).slice(-2)
+           + '-' + ('0' + date.day).slice(-2) : null;
   }
 }
 
