@@ -4,3 +4,39 @@
   border-radius: 0.5em;
   margin-bottom: 1em;
 }
+
+.btn-calendar {
+  height: calc(1.5em + 0.75rem + 2px);
+}
+
+.form-group-calendar.hidden, .form-group-calendar .input-group input {
+  width: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+
+.custom-day.range, .custom-day:hover {
+  background-color: rgb(2, 117, 216);
+  color: white;
+}
+
+.custom-day.faded {
+  background-color: rgba(2, 117, 216, 0.5);
+}
+
+.mr-select {
+  margin-right: 117px;
+}

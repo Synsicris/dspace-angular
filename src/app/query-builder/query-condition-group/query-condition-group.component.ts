@@ -18,11 +18,14 @@ import { FacetValue } from '../../shared/search/models/facet-value.model';
 import { SearchFilterConfig } from '../../shared/search/models/search-filter-config.model';
 import { isNotEmpty } from '../../shared/empty.util';
 import { LocaleService } from '../../core/locale/locale.service';
+import { NgbDate, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { dateToString } from '../../shared/date.util';
 
 export interface QueryBuilderSearchFilter {
   key: string;
   values: FacetValue[];
   operator: string;
+  type: string;
 }
 
 @Component({
@@ -106,18 +109,21 @@ export class QueryConditionGroupComponent implements OnInit {
 
   isFilterListLoading = false;
 
+  hoveredDate: NgbDate = null;
+
   constructor(
     private locale: LocaleService,
     private formBuilder: FormBuilder,
     private rootFormGroup: FormGroupDirective,
     private searchService: SearchService,
-    private chd: ChangeDetectorRef
+    private chd: ChangeDetectorRef,
+    public formatter: NgbDateParserFormatter
   ) {}
 
   ngOnInit(): void {
     this.formGroup = (
-      this.rootFormGroup.control.get('queryArray') as FormArray
-    ).controls[this.formGroupName];
+      this.rootFormGroup?.control?.get('queryArray') as FormArray
+    )?.controls[this.formGroupName];
     this.getSearchFilterConfigs();
   }
 
@@ -129,13 +135,13 @@ export class QueryConditionGroupComponent implements OnInit {
    * @memberof QueryConditionGroupComponent
    */
   get queryGroup(): FormArray {
-    return this.formGroup.get('queryGroup') as FormArray;
+    return this.formGroup?.get('queryGroup') as FormArray;
   }
 
   filterFacetValues(idx: number): FacetValue[] {
     if (this.filterValuesMapArray[idx]) {
       return this.filterValuesMapArray[idx].get(
-        this.queryGroup.get(idx + '.filter')?.value
+        this.queryGroup.get(idx + '.filter')?.value?.name
       );
     } else {
       return [];
@@ -200,6 +206,7 @@ export class QueryConditionGroupComponent implements OnInit {
         values: [selectedValue], // selected value
         key: this.firstDefaultFilter, // default filter name
         operator: 'equals',
+        type: 'select'
       },
     ];
     this.buildSearchQuery(defaultSearchfilter);
@@ -210,6 +217,8 @@ export class QueryConditionGroupComponent implements OnInit {
     // filter and value of first row must be reset
     this.queryGroup.get(`0.filter`).setValue(null);
     this.queryGroup.get(`0.value`).setValue(null);
+    this.queryGroup.get(`0.fromDate`).setValue(null);
+    this.queryGroup.get(`0.toDate`).setValue(null);
   }
 
   /**
@@ -217,16 +226,18 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param searchFilter
    * @param idx
    */
-  onFilterSelect(searchFilter: string, idx: number) {
+  onFilterSelect(searchFilter: SearchFilterConfig, idx: number) {
     // set value of last dropdown to null, in case it has value
     // when the filter is changed also the value field should be emptied
     this.queryGroup.get(`${idx}.value`).setValue(null);
+    this.queryGroup.get(`${idx}.fromDate`).setValue(null);
+    this.queryGroup.get(`${idx}.toDate`).setValue(null);
     const options: SearchOptions = new SearchOptions({
       configuration: this.configurationName,
       query: encodeURIComponent(this.searchOptQuery),
     });
     // get values for the selected filter
-    this.getFacetValues(searchFilter, 1, QuerySearchValueMode.Select, idx, options);
+    this.getFacetValues(searchFilter.name, 1, QuerySearchValueMode.Select, idx, options);
   }
 
   /**
@@ -236,7 +247,7 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param parentFilter
    * @param idx
    */
-  onValueSelect(selectedValue: FacetValue, parentFilter: string, idx: number) {
+  onValueSelect(selectedValue: string, parentFilter: string, idx: number) {
     // disable last selected value for each of the keys that might have that value
     const appliedFilters = this.filterValuesMapArray.filter((x) =>
       x.get(parentFilter)
@@ -246,19 +257,60 @@ export class QueryConditionGroupComponent implements OnInit {
       (
         filterMap
           .get(parentFilter)
-          .find((x) => isEqual(x.value, selectedValue.value)) as any
+          .find((x) => isEqual(x.value, selectedValue)) as any
       ).disable = true;
     });
 
     this.buildQueryBasedOnAppliedFilterConfigs();
   }
 
-  private buildQueryBasedOnAppliedFilterConfigs() {
+  /**
+   * Disable the last selected value
+   * Compose the query for the applied filters till this moment
+   * @param date
+   * @param idx
+   * @param parentFilter
+   */
+  onDateSelect(date: NgbDate, idx, parentFilter: string, datepicker: any) {
+    // disable last selected value for each of the keys that might have that value
+    const appliedFilters = this.filterValuesMapArray.filter((x) =>
+      x.get(parentFilter)
+    );
+
+    appliedFilters.forEach((filterMap) => {
+      (
+        filterMap
+          .get(parentFilter)
+          .find((x) => true) as any
+      ).disable = true;
+    });
+    if (!this.queryGroup.get(idx + '.fromDate')?.value && !this.queryGroup.get(idx + '.toDate')?.value) {
+      this.queryGroup.get(idx + '.fromDate').setValue(date);
+    } else if (this.queryGroup.get(idx + '.fromDate')?.value && !this.queryGroup.get(idx + '.toDate')?.value && date && date.after(this.queryGroup.get(idx + '.fromDate')?.value)) {
+      this.queryGroup.get(idx + '.toDate').setValue(date);
+      datepicker.toggle();
+      const selectedFromDateString = dateToString(this.queryGroup.get(idx + '.fromDate')?.value);
+      const selectedToDateString = dateToString(this.queryGroup.get(idx + '.toDate')?.value);
+      const selectedDateString = selectedFromDateString + ' TO ' + selectedToDateString;
+      this.queryGroup.get(idx + '.value').setValue(selectedDateString);
+      const dateFacet = new FacetValue();
+      dateFacet.label = dateFacet.value = selectedDateString;
+      this.buildQueryBasedOnAppliedFilterConfigs(dateFacet);
+    } else if (isEqual(this.queryGroup.get(idx + '.fromDate')?.value, date)) {
+      this.queryGroup.get(idx + '.toDate').setValue(null);
+    } else {
+      this.queryGroup.get(idx + '.toDate').setValue(null);
+      this.queryGroup.get(idx + '.fromDate').setValue(date);
+    }
+  }
+
+  private buildQueryBasedOnAppliedFilterConfigs(dateFacet: FacetValue = null) {
     const searchFilter: QueryBuilderSearchFilter[] = [
       {
         values: [this.formGroup.get('defaultFilter').value], // selected value
         key: this.firstDefaultFilter, // default filter name
         operator: 'equals',
+        type: 'select'
       },
     ];
 
@@ -268,14 +320,30 @@ export class QueryConditionGroupComponent implements OnInit {
       }
       const filterValues: QueryFilterValue[] = this.queryGroupValue;
       const values = filterValues
-        .filter((filter: QueryFilterValue) => isEqual(filter.filter, config.name))
-        .map((filter: QueryFilterValue) => filter?.value);
+        .filter((filter: QueryFilterValue) => isEqual(filter.filter.name, config.name))
+        .map((filter: QueryFilterValue) => {
+          if (filter.filter.filterType === 'date') {
+            return dateFacet;
+          } else {
+            return filter?.value;
+          }
+        });
 
-      searchFilter.push({
-        values: values, // searched value
-        key: config.name, // filter name
-        operator: 'equals',
-      });
+      if (config.filterType === 'date') {
+        searchFilter.push({
+          values: values, // searched value
+          key: config.name, // filter name
+          operator: 'equals',
+          type: 'date'
+        });
+      } else {
+        searchFilter.push({
+          values: values, // searched value
+          key: config.name, // filter name
+          operator: 'equals',
+          type: 'select'
+        });
+      }
 
       this.buildSearchQuery(searchFilter);
     });
@@ -292,6 +360,8 @@ export class QueryConditionGroupComponent implements OnInit {
     }
     this.disableFormControlOnSelectionChange(index, 'filter');
     this.disableFormControlOnSelectionChange(index, 'value');
+    this.disableFormControlOnSelectionChange(index, 'fromDate');
+    this.disableFormControlOnSelectionChange(index, 'toDate');
     this.queryGroup.push(this.initFormArray());
     // calc filters for the upcoming row
     this.calcSearchFilterConfigs();
@@ -310,6 +380,12 @@ export class QueryConditionGroupComponent implements OnInit {
       value: this.formBuilder.control(
         { value: null, disabled: true },
         Validators.required
+      ),
+      toDate: this.formBuilder.control(
+        { value: null, disabled: false },
+      ),
+      fromDate: this.formBuilder.control(
+        { value: null, disabled: false },
       ),
     });
   }
@@ -331,11 +407,14 @@ export class QueryConditionGroupComponent implements OnInit {
       if (isEqual(this.queryGroup.controls.length, 1)) {
         this.enableFormControlOnSelectionChange(0, 'filter');
         this.enableFormControlOnSelectionChange(0, 'value');
+        this.enableFormControlOnSelectionChange(0, 'toDate');
+        this.enableFormControlOnSelectionChange(0, 'fromDate');
         const searchFilter: QueryBuilderSearchFilter[] = [
           {
             values: [this.formGroup.get('defaultFilter').value], // selected value
             key: this.firstDefaultFilter, // default filter name
             operator: 'equals',
+            type: 'select'
           },
         ];
         const query = this.buildSearchQuery(searchFilter, 'on_delete');
@@ -514,22 +593,29 @@ export class QueryConditionGroupComponent implements OnInit {
     filters.forEach((filter) => {
       if (isNotEmpty(filter) && isNotEmpty(filter.values)) {
         filter.values.forEach((facetValue: FacetValue) => {
-          const fieldWithLanguage = `${this.locale.getCurrentLanguageCode()}_${filter.key}`;
-          const field = filter.key;
-          const value = facetValue.value;
-          let authorityQuery = '';
-          if (facetValue.authorityKey) {
-            // TODO use _authority when https://4science.atlassian.net/browse/DSC-625 it's fixed
-            const authorityValue = facetValue.authorityKey;
-            const valueWithAuthority = `${value}###${facetValue.authorityKey}`;
-            authorityQuery = `${fieldWithLanguage}_keyword:"${valueWithAuthority}"` +
-              ` OR ${field}_keyword:"${valueWithAuthority}"` +
-              ` OR ${fieldWithLanguage}_authority:"${authorityValue}"` +
-              ` OR ${field}_keyword:"${authorityValue}" OR `;
-          }
+          if (facetValue) {
+            const fieldWithLanguage = `${this.locale.getCurrentLanguageCode()}_${filter.key}`;
+            const field = filter.key;
+            const value = facetValue.value;
+            let authorityQuery = '';
+            if (filter.type === 'date') {
+              authorityQuery = `(${field}_keyword:[${value}])`;
+              queries.push(authorityQuery);
+            } else {
+              if (facetValue.authorityKey) {
+                // TODO use _authority when https://4science.atlassian.net/browse/DSC-625 it's fixed
+                const authorityValue = facetValue.authorityKey;
+                const valueWithAuthority = `${value}###${facetValue.authorityKey}`;
+                authorityQuery = `${fieldWithLanguage}_keyword:"${valueWithAuthority}"` +
+                  ` OR ${field}_keyword:"${valueWithAuthority}"` +
+                  ` OR ${fieldWithLanguage}_authority:"${authorityValue}"` +
+                  ` OR ${field}_keyword:"${authorityValue}" OR `;
+              }
 
-          const query = `(${authorityQuery}${field}:"${value}" OR ${fieldWithLanguage}_keyword:"${value}" OR ${field}_keyword:"${value}")`;
-          queries.push(query);
+              const query = `(${authorityQuery}${field}:"${value}" OR ${fieldWithLanguage}_keyword:"${value}" OR ${field}_keyword:"${value}")`;
+              queries.push(query);
+            }
+          }
         });
       }
     });
@@ -561,6 +647,21 @@ export class QueryConditionGroupComponent implements OnInit {
       }
     }
   }
+
+  isHovered(date: NgbDate, idx) {
+    return this.queryGroup.get(idx + '.fromDate')?.value && !this.queryGroup.get(idx + '.toDate')?.value
+        && this.hoveredDate && date.after(this.queryGroup.get(idx + '.fromDate')?.value) && date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate, idx) {
+    return this.queryGroup.get(idx + '.toDate')?.value && date.after(this.queryGroup.get(idx + '.fromDate')?.value)
+        && date.before(this.queryGroup.get(idx + '.toDate')?.value);
+  }
+
+  isRange(date: NgbDate, idx) {
+    return date.equals(this.queryGroup.get(idx + '.fromDate')?.value) || (this.queryGroup.get(idx + '.toDate')?.value
+        && date.equals(this.queryGroup.get(idx + '.toDate')?.value)) || this.isInside(date, idx) || this.isHovered(date, idx);
+  }
 }
 
 export enum QuerySearchValueMode {
@@ -571,6 +672,6 @@ export enum QuerySearchValueMode {
 }
 
 export interface QueryFilterValue {
-  filter: string;
+  filter: SearchFilterConfig;
   value: FacetValue;
 }
