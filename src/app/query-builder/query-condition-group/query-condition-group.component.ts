@@ -329,7 +329,7 @@ export class QueryConditionGroupComponent implements OnInit {
           }
         });
 
-      if (dateFacet) {
+      if (config.filterType === 'date') {
         searchFilter.push({
           values: values, // searched value
           key: config.name, // filter name
