@@ -14,7 +14,7 @@
         <i class="fas fa-circle-notch fa-spin"> {{'impact-pathway.remove.processing' | translate}}</i>
       </span>
     </button>
-    <button class="btn btn-primary" [disabled]="(isProcessingRemove() | async) || (compareMode | async)" title="{{'impact-pathway.edit.title' | translate}}"
+    <button class="btn btn-primary" [disabled]="(isProcessingRemove() | async) || (compareMode | async) || !(canEditButton$ | async)" title="{{'impact-pathway.edit.title' | translate}}"
       (click)="$event.preventDefault(); openEditModal(); $event.stopPropagation()">
       <span *ngIf="!(isProcessingRemove() | async)">
         <i class="far fa-edit"></i> {{'impact-pathway.edit.title' | translate}}
@@ -36,7 +36,7 @@
   </div>
   <ipw-editable-textarea *ngIf="impactPathway" [editMode]="getEditMode()" [formConfig]="formConfig$" [formSectionName]="getSectionName()"
     [itemId]="impactPathway.id" [editTitle]="'impact-pathway.edit.title' | translate" [fieldTitle]="'impact-pathway.description' | translate"
-    [content]="impactPathway.description" (contentChange)="updateImpactPathway($event)" [disabled]="(compareMode | async)"></ipw-editable-textarea>
+    [content]="impactPathway.description" (contentChange)="updateImpactPathway($event)" [disabled]="(compareMode | async) || !(canEditButton$ | async)"></ipw-editable-textarea>
 </div>
 
 <div *ngIf="(loaded | async)">

@@ -11,6 +11,15 @@
         <ds-view-mode-switch *ngIf="showViewModes" class="d-none d-md-block"
                              [viewModeList]="viewModeList"
                              (changeViewMode)="changeViewMode.emit($event)"></ds-view-mode-switch>
+        <div *ngIf="!(isXsOrSm$ | async) && showFilterToggle && !showViewModes">
+            <button class="btn btn-outline-secondary mr-3"
+                    ngbTooltip="{{'search.sidebar.show.hide.filters.tooltip' | translate}}"
+                    (click)="toggleSidebar.emit()">
+                <span class="d-flex align-items-center">
+                    <i class="fa fa-filter mr-2"></i>
+                    {{"search.sidebar.show.hide" | translate}}</span>
+            </button>
+        </div>
         <div class="sidebar-content">
             <ds-search-switch-configuration *ngIf="configurationList"
                                             [configurationList]="configurationList"

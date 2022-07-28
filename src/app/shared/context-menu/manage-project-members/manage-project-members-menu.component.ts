@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
@@ -15,6 +15,7 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
 import { FUNDING_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
 import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
+import { map } from 'rxjs/operators';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -94,9 +95,19 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
    */
   private checkIsCoordinator(): Observable<boolean> {
     if (this.isFunding) {
-      return this.authorizationService.isAuthorized(FeatureID.isAdminOfFunding, (this.contextMenuObject as Item).self, undefined);
+      return combineLatest([
+        this.authorizationService.isAuthorized(FeatureID.isAdminOfProject, this.contextMenuObject.self, undefined),
+        this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
+      ).pipe(
+        map(([isAdmin, isAdminstratorOf]) => isAdmin || isAdminstratorOf),
+      );
     } else {
-      return this.authorizationService.isAuthorized(FeatureID.isAdminOfProject, (this.contextMenuObject as Item).self, undefined);
+      return combineLatest([
+        this.authorizationService.isAuthorized(FeatureID.isAdminOfProject, this.contextMenuObject.self, undefined),
+        this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
+      ).pipe(
+        map(([isAdmin, isAdminstratorOf]) => isAdmin || isAdminstratorOf),
+      );
     }
   }
 

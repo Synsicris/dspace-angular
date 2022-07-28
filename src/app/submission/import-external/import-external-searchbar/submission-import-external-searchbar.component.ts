@@ -30,6 +30,7 @@ export interface ExternalSourceData {
   entity: string;
   query: string;
   sourceId: string;
+  scope: string;
 }
 
 /**
@@ -186,7 +187,8 @@ export class SubmissionImportExternalSearchbarComponent implements OnInit, OnDes
       {
         entity: this.initExternalSourceData.entity,
         sourceId: this.selectedElement.id,
-        query: this.searchString
+        query: this.searchString,
+        scope: this.initExternalSourceData.scope
       }
     );
   }

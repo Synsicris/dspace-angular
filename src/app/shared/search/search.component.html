@@ -55,6 +55,8 @@
 
 <ng-template #sidebarContent>
     <ds-search-sidebar id="search-sidebar" *ngIf="!(isXsOrSm$ | async)"
+                       [showFilterToggle]="showFilterToggle"
+                       [isXsOrSm$]="isXsOrSm$"
                        [configurationList]="configurationList"
                        [configuration]="(currentConfiguration$ | async)"
                        [currentScope]="(currentScope$ | async)"
@@ -65,9 +67,12 @@
                        [inPlaceSearch]="inPlaceSearch"
                        [viewModeList]="viewModeList"
                        [showViewModes]="showViewModes"
+                       (toggleSidebar)="closeSidebar()"
                        (changeConfiguration)="changeContext($event.context)"
                        (changeViewMode)="changeViewMode()"></ds-search-sidebar>
     <ds-search-sidebar id="search-sidebar-sm" *ngIf="(isXsOrSm$ | async)"
+                       [showFilterToggle]="showFilterToggle"
+                       [isXsOrSm$]="isXsOrSm$"
                        [configurationList]="configurationList"
                        [configuration]="(currentConfiguration$ | async)"
                        [currentScope]="(currentScope$ | async)"
@@ -85,7 +90,8 @@
 
 <ng-template #searchForm>
     <div class="d-flex justify-content-between">
-        <div *ngIf="!(isXsOrSm$ | async) && showFilterToggle && showSidebar">
+        <div *ngIf="!(isXsOrSm$ | async) && showFilterToggle && showSidebar && ((isSidebarCollapsedXL$ | async)
+                    || (!(isSidebarCollapsedXL$ | async) && showViewModes))">
             <button class="btn btn-outline-secondary mr-3"
                     ngbTooltip="{{'search.sidebar.show.hide.filters.tooltip' | translate}}"
                     (click)="toggleSidebar()">
@@ -94,7 +100,7 @@
                     {{"search.sidebar.show.hide" | translate}}</span>
             </button>
         </div>
-        <ds-search-form *ngIf="searchEnabled" id="search-form" class="flex-grow-1"
+        <ds-search-form *ngIf="searchEnabled" id="search-form" class="flex-grow-1 mr-2"
                         [query]="(searchOptions$ | async)?.query"
                         [scope]="(searchOptions$ | async)?.scope"
                         [currentUrl]="searchLink"
@@ -102,7 +108,9 @@
                         [inPlaceSearch]="inPlaceSearch"
                         [searchPlaceholder]="searchFormPlaceholder | translate">
         </ds-search-form>
-        <ng-content select="[additionalSearchFormOptions]"></ng-content>
+        <div class="ml-auto">
+            <ng-content select="[additionalSearchFormOptions]"></ng-content>
+        </div>
         <ds-item-export-modal-launcher [searchOptions$]="searchOptions$" *ngIf="showExport"></ds-item-export-modal-launcher>
     </div>
     <div class="row mb-3 mb-md-1">

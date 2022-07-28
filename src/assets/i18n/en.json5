@@ -4476,6 +4476,10 @@
 
   "project.manage.members-list.table.withdraw.send": "Send Invitation",
 
+  "project.manage.notification.success.addMember": "Successfully added member",
+
+  "project.manage.notification.success.deleteMember": "Successfully deleted member",
+
   "project.page.contributor": "Contributors",
 
   "project.page.description": "Description",

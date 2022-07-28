@@ -58,3 +58,4 @@ export const ITEM_EDIT_VERSIONHISTORY_PATH = 'versionhistory';
 export const ITEM_VERSION_PATH = 'version';
 export const UPLOAD_BITSTREAM_PATH = 'bitstreams/new';
 export const EASY_ONLINE_PATH = 'easyonlineimport';
+export const MANAGEMEMBERS = 'managemembers';

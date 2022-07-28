@@ -18,6 +18,7 @@ import { PROJECT_ROUTE } from '../../../project-overview-page/project-overview-p
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 
 /**
  * This component renders a context menu option that provides to export an item.
@@ -71,9 +72,11 @@ export class ViewProjectItemsMenuComponent extends ContextMenuEntryComponent {
   }
 
   ngOnInit(): void {
-    this.authorizationService.isAuthorized(FeatureID.isMemberOfProject, this.contextMenuObject.self).pipe(
+    const isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
+    const isMember$ = this.authorizationService.isAuthorized(FeatureID.isMemberOfProject, this.contextMenuObject.self);
+    combineLatest([isMember$, isAdmin$]).pipe(
       take(1)
-    ).subscribe((isMemberOfProject) => this.canSeeItems$.next(isMemberOfProject));
+    ).subscribe(([isMemberOfProject, isAdmin]) => this.canSeeItems$.next(isMemberOfProject || isAdmin));
 
     this.projectCommunity$ = this.projectService.getProjectCommunityByItemId((this.contextMenuObject as Item).uuid).pipe(
       take(1),

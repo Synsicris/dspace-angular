@@ -11,10 +11,8 @@ import { isNotEmpty } from '../../../shared/empty.util';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { Item } from '../../../core/shared/item.model';
-import { RelationshipService } from '../../../core/data/relationship.service';
-import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
-import { RemoteData } from '../../../core/data/remote-data';
-import { PaginatedList } from '../../../core/data/paginated-list.model';
+import { ProjectVersionService } from '../../../core/project/project-version.service';
+import { Version } from '../../../core/shared/version.model';
 
 /**
  * This component represents submission form footer bar.
@@ -100,15 +98,14 @@ export class SubmissionFormFooterComponent implements OnInit, OnChanges {
    */
   constructor(private authorizationService: AuthorizationDataService,
               private modalService: NgbModal,
-              private relationshipService: RelationshipService,
+              private projectVersionService: ProjectVersionService,
               private restService: SubmissionRestService,
               private submissionService: SubmissionService) {
   }
 
   ngOnInit(): void {
-    const hasVersion$ = this.relationshipService.getRelatedItemsByLabel(this.item, 'hasVersion').pipe(
-      getFirstCompletedRemoteData(),
-      map((relRD: RemoteData<PaginatedList<Item>>) => relRD.hasSucceeded && relRD.payload.page.length > 0)
+    const hasVersion$ = this.projectVersionService.getVersionsByItemId(this.item.id).pipe(
+      map((versions: Version[]) => versions.length > 0)
     );
 
     const canDelete$ = this.authorizationService.isAuthorized(FeatureID.CanDelete, this.item.self);

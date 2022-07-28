@@ -25,6 +25,10 @@ export class SubmissionImportExternalPreviewComponent implements OnInit {
    */
   @Input() public externalSourceEntry: ExternalSourceEntry;
   /**
+   * It's used to limit the search within the scope
+   */
+  @Input() scope: string;
+  /**
    * The entry metadata list
    */
   public metadataList: { key: string, value: MetadataValue }[];
@@ -82,6 +86,7 @@ export class SubmissionImportExternalPreviewComponent implements OnInit {
       size: 'lg',
     });
     this.modalRef.componentInstance.entityType = this.labelPrefix;
+    this.modalRef.componentInstance.scope = this.scope;
     this.closeMetadataModal();
 
     this.modalRef.componentInstance.selectedEvent.pipe(

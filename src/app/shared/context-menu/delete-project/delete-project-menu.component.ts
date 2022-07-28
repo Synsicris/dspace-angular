@@ -39,7 +39,7 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
   /**
    * The project community
    */
-  public projectCommunity$: Observable<Community>;
+  public projectCommunity: Community;
 
   private canDeleteProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -78,6 +78,7 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
       getFirstCompletedRemoteData(),
       switchMap((projectCommunityRD) => {
         if (projectCommunityRD.hasSucceeded) {
+          this.projectCommunity = projectCommunityRD.payload;
           return this.authorizationService.isAuthorized(FeatureID.CanDelete, projectCommunityRD?.payload?.self, undefined);
         } else {
           return of(false);
@@ -93,10 +94,8 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
    */
   public confirmDelete() {
     this.processing$.next(true);
-    this.projectCommunity$.pipe(
-      switchMap((projectCommunity) => this.projectService.delete(projectCommunity.id).pipe(
-        getFirstCompletedRemoteData(),
-      ))
+    this.projectService.delete(this.projectCommunity.id).pipe(
+      getFirstCompletedRemoteData(),
     ).subscribe((response: RemoteData<NoContent>) => {
       this.projectService.invalidateUserProjectResultsCache();
       this.processing$.next(false);

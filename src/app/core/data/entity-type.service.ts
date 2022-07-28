@@ -19,6 +19,8 @@ import { PaginatedList } from './paginated-list.model';
 import { ItemType } from '../shared/item-relationships/item-type.model';
 import { getRemoteDataPayload, getFirstSucceededRemoteData, getFirstCompletedRemoteData } from '../shared/operators';
 import { RelationshipTypeService } from './relationship-type.service';
+import { isNotEmpty } from '../../shared/empty.util';
+import { RequestParam } from '../cache/models/request-param.model';
 
 /**
  * Service handling all ItemType requests
@@ -110,11 +112,14 @@ export class EntityTypeService extends DataService<ItemType> {
   /**
    * Used to verify if there are one or more entities available. To use with external source import.
    */
-  hasMoreThanOneAuthorizedImport(): Observable<boolean> {
+  hasMoreThanOneAuthorizedImport(scope?: string): Observable<boolean> {
     const findListOptions: FindListOptions = {
       elementsPerPage: 1,
       currentPage: 1
     };
+    if (isNotEmpty(scope)) {
+      findListOptions.searchParams = [new RequestParam('scope', scope)];
+    }
     return this.getAllAuthorizedRelationshipTypeImport(findListOptions).pipe(
       getFirstCompletedRemoteData(),
       map((result: RemoteData<PaginatedList<ItemType>>) => result.payload.totalElements > 1)

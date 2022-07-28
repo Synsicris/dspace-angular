@@ -50,7 +50,8 @@ export class SubmissionImportExternalComponent implements OnInit, OnDestroy {
   public reload$: BehaviorSubject<ExternalSourceData> = new BehaviorSubject<ExternalSourceData>({
     entity: '',
     query: '',
-    sourceId: ''
+    sourceId: '',
+    scope: ''
   });
   /**
    * Configuration to use for the import buttons
@@ -121,7 +122,7 @@ export class SubmissionImportExternalComponent implements OnInit, OnDestroy {
     this.listId = 'list-submission-external-sources';
     this.context = Context.EntitySearchModalWithNameVariants;
     this.repeatable = false;
-    this.routeData = {entity: '', sourceId: '', query: ''};
+    this.routeData = {entity: '', sourceId: '', query: '', scope: ''};
     this.importConfig = {
       buttonLabel: 'submission.sections.describe.relationship-lookup.external-source.import-button-title.' + this.label
     };
@@ -131,11 +132,12 @@ export class SubmissionImportExternalComponent implements OnInit, OnDestroy {
       [
         this.routeService.getQueryParameterValue('entity'),
         this.routeService.getQueryParameterValue('sourceId'),
-        this.routeService.getQueryParameterValue('query')
+        this.routeService.getQueryParameterValue('query'),
+        this.routeService.getQueryParameterValue('scope')
       ]).pipe(
       take(1)
-    ).subscribe(([entity, sourceId, query]: [string, string, string]) => {
-      this.reload$.next({entity: entity || NONE_ENTITY_TYPE, query: query, sourceId: sourceId});
+    ).subscribe(([entity, sourceId, query, scope]: [string, string, string, string]) => {
+      this.reload$.next({entity: entity || NONE_ENTITY_TYPE, query: query, sourceId: sourceId, scope: scope});
       this.selectLabel(entity);
       this.retrieveExternalSources();
     }));
@@ -167,6 +169,7 @@ export class SubmissionImportExternalComponent implements OnInit, OnDestroy {
     });
     const modalComp = this.modalRef.componentInstance;
     modalComp.externalSourceEntry = entry;
+    modalComp.scope = this.routeData.scope;
     modalComp.labelPrefix = this.label;
   }
 
