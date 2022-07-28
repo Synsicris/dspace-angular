@@ -270,7 +270,7 @@ export class QueryConditionGroupComponent implements OnInit {
    * @param idx
    * @param parentFilter
    */
-  onDateSelect(date: NgbDate, idx, parentFilter: string) {
+  onDateSelect(date: NgbDate, idx, parentFilter: string, datepicker: any) {
     // disable last selected value for each of the keys that might have that value
     const appliedFilters = this.filterValuesMapArray.filter((x) =>
       x.get(parentFilter)
@@ -287,6 +287,7 @@ export class QueryConditionGroupComponent implements OnInit {
       this.queryGroup.get(idx + '.fromDate').setValue(date);
     } else if (this.queryGroup.get(idx + '.fromDate')?.value && !this.queryGroup.get(idx + '.toDate')?.value && date && date.after(this.queryGroup.get(idx + '.fromDate')?.value)) {
       this.queryGroup.get(idx + '.toDate').setValue(date);
+      datepicker.toggle();
       const selectedFromDateString = this.toModel(this.queryGroup.get(idx + '.fromDate')?.value);
       const selectedToDateString = this.toModel(this.queryGroup.get(idx + '.toDate')?.value);
       const selectedDateString = selectedFromDateString + ' TO ' + selectedToDateString;
@@ -591,26 +592,28 @@ export class QueryConditionGroupComponent implements OnInit {
     filters.forEach((filter) => {
       if (isNotEmpty(filter) && isNotEmpty(filter.values)) {
         filter.values.forEach((facetValue: FacetValue) => {
-          const fieldWithLanguage = `${this.locale.getCurrentLanguageCode()}_${filter.key}`;
-          const field = filter.key;
-          const value = facetValue.value;
-          let authorityQuery = '';
-          if (filter.type === 'date') {
-            authorityQuery = `(${field}_keyword:[${value}])`;
-            queries.push(authorityQuery);
-          } else {
-            if (facetValue.authorityKey) {
-              // TODO use _authority when https://4science.atlassian.net/browse/DSC-625 it's fixed
-              const authorityValue = facetValue.authorityKey;
-              const valueWithAuthority = `${value}###${facetValue.authorityKey}`;
-              authorityQuery = `${fieldWithLanguage}_keyword:"${valueWithAuthority}"` +
-                ` OR ${field}_keyword:"${valueWithAuthority}"` +
-                ` OR ${fieldWithLanguage}_authority:"${authorityValue}"` +
-                ` OR ${field}_keyword:"${authorityValue}" OR `;
+          if (facetValue) {
+            const fieldWithLanguage = `${this.locale.getCurrentLanguageCode()}_${filter.key}`;
+            const field = filter.key;
+            const value = facetValue.value;
+            let authorityQuery = '';
+            if (filter.type === 'date') {
+              authorityQuery = `(${field}_keyword:[${value}])`;
+              queries.push(authorityQuery);
+            } else {
+              if (facetValue.authorityKey) {
+                // TODO use _authority when https://4science.atlassian.net/browse/DSC-625 it's fixed
+                const authorityValue = facetValue.authorityKey;
+                const valueWithAuthority = `${value}###${facetValue.authorityKey}`;
+                authorityQuery = `${fieldWithLanguage}_keyword:"${valueWithAuthority}"` +
+                  ` OR ${field}_keyword:"${valueWithAuthority}"` +
+                  ` OR ${fieldWithLanguage}_authority:"${authorityValue}"` +
+                  ` OR ${field}_keyword:"${authorityValue}" OR `;
+              }
+  
+              const query = `(${authorityQuery}${field}:"${value}" OR ${fieldWithLanguage}_keyword:"${value}" OR ${field}_keyword:"${value}")`;
+              queries.push(query);
             }
-
-            const query = `(${authorityQuery}${field}:"${value}" OR ${fieldWithLanguage}_keyword:"${value}" OR ${field}_keyword:"${value}")`;
-            queries.push(query);
           }
         });
       }

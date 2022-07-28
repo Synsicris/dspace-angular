@@ -63,7 +63,7 @@
                        ngbDatepicker
                        #datepicker="ngbDatepicker"
                        [autoClose]="'outside'"
-                       (dateSelect)="onDateSelect($event, i, queryGroup.get(i + '.filter')?.value.name)"
+                       (dateSelect)="onDateSelect($event, i, queryGroup.get(i + '.filter')?.value.name, datepicker)"
                        [displayMonths]="2"
                        [dayTemplate]="t"
                        outsideDays="hidden"
@@ -100,7 +100,8 @@
               </div>
               <div class="input-group col-md-2 px-0 mr-1">
                 <div class="input-group">
-                  <button class="btn btn-outline-secondary btn-calendar" (click)="datepicker.toggle()" type="button">
+                  <button class="btn btn-outline-secondary btn-calendar" (click)="datepicker.toggle()" type="button"
+                          [disabled]="queryGroup.get(i + '.toDate')?.disabled">
                     <i class="fas fa-calendar-alt"></i>
                   </button>
                 </div>
@@ -112,7 +113,7 @@
               data-test="query-condition-select"
               formControlName="value"
               *ngIf="queryGroup.get(i + '.filter')?.value?.filterType !== 'date'"
-              class="col-md-3 px-0 mr-1"
+              class="col-md-3 px-0 mr-select ml-3"
               [virtualScroll]="true"
               [clearable]="false"
               [loading]="isValueListLoading && select.isOpen"
@@ -138,7 +139,7 @@
               </ng-option>
             </ng-select>
 
-            <div class="col-md-3 text-center" *ngIf="isLast">
+            <div class="col-md-3 text-center ml-auto" *ngIf="isLast">
               <button
                 [disabled]="!queryGroup.get(i + '.value')?.value"
                 id="addButton"
@@ -152,13 +153,13 @@
                 }}
               </button>
             </div>
-            <div class="col-md-3 p-0 text-center" *ngIf="!isLast">
+            <div class="col-md-3 p-0 text-center ml-auto" *ngIf="!isLast">
               <span>AND</span>
             </div>
 
-            <div class="col-md-1 p-0" *ngIf="queryGroup.length > 1"
-                 [ngClass]="queryGroup.get(i + '.filter')?.value?.filterType === 'date' ? 'text-center' : 'text-right'">
-              <button
+            <div class="col-md-1 p-0 text-center ml-auto"
+                 [class.mr-n1] = "queryGroup.get(i + '.filter')?.value?.filterType !== 'date'">
+              <button *ngIf="queryGroup.length > 1"
                 id="deleteButton"
                 type="button"
                 class="btn btn-danger"
