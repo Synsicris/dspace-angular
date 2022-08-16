@@ -7280,7 +7280,7 @@
 
   "search.filters.entityType.Product": "Research data",
 
-  "search.filters.entityType.funding": "Funding",
+  "search.filters.entityType.funding": "Project",
 
   "search.filters.entityType.call": "Call",
 
@@ -8654,6 +8654,8 @@
 
   "project.manage.members.members-group": "Invitation and Management of project members",
 
-  "item.grant.badge.parentproject": "test"
+  "item.grant.badge.parentproject": "test",
+
+  "layout.box.header.jpheading": "Workspace for all partners in the consortium:"
 
 }
