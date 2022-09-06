@@ -2810,6 +2810,12 @@
 
   "item.search.title": "Item Search",
 
+  "item.truncatable-part.show-more": "Show more",
+
+  "item.truncatable-part.show-less": "Collapse",
+
+
+
   "item.page.abstract": "Abstract",
 
   "item.page.author": "Authors",
@@ -4954,7 +4960,11 @@
 
   "search.filters.applied.charts.default.title": "Search Output",
 
+  "search.filters.applied.charts.RELATION.Funding.basics_comment.title": "Funding comments",
+
   "search.filters.applied.charts.RELATION.Person.researchoutputs.title": "Research Output",
+
+  "search.filters.applied.charts.RELATION.Project.comment_jp.title": "Project comments",
 
   "search.filters.applied.charts.RELATION.Project.fundings.title": "Funding",
 

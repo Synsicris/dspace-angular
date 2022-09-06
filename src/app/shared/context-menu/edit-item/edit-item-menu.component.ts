@@ -16,6 +16,7 @@ import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { environment } from '../../../../environments/environment';
+import { Item } from '../../../core/shared/item.model';
 
 /**
  * This component renders a context menu option that provides the links to edit item page.
@@ -90,7 +91,7 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
    */
   isEditAvailable(): Observable<boolean> {
     return this.editModes$.asObservable().pipe(
-      map((editModes) => isNotEmpty(editModes) && editModes.length > 0)
+      map((editModes) => (this.contextMenuObject as Item).entityType !== 'Person' && isNotEmpty(editModes) && editModes.length > 0)
     );
   }
 
