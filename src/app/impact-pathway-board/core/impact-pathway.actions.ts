@@ -81,6 +81,10 @@ export const ImpactPathwayActionTypes = {
   INIT_COMPARE_IMPACT_PATHWAY_ERROR: type('dspace/core/workingplan/INIT_COMPARE_IMPACT_PATHWAY_ERROR'),
   INIT_COMPARE_IMPACT_PATHWAY_SUCCESS: type('dspace/core/workingplan/INIT_COMPARE_IMPACT_PATHWAY_SUCCESS'),
   STOP_COMPARE_IMPACT_PATHWAY: type('dspace/core/workingplan/STOP_COMPARE_IMPACT_PATHWAY'),
+  INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK: type('dspace/impactpathway/INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK'),
+  INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_ERROR: type('dspace/core/workingplan/INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_ERROR'),
+  INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_SUCCESS: type('dspace/core/workingplan/INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_SUCCESS'),
+  STOP_COMPARE_IMPACT_PATHWAY_STEP_TASK: type('dspace/core/workingplan/STOP_COMPARE_IMPACT_PATHWAY_STEP_TASK'),
 };
 
 /* tslint:disable:max-classes-per-file */
@@ -110,7 +114,7 @@ export class GenerateImpactPathwayAction implements Action {
    * @param name
    *    the impact pathway's title
    */
-  constructor(projectId: string, name: string, ) {
+  constructor(projectId: string, name: string,) {
     this.payload = { projectId, name };
   }
 }
@@ -1492,6 +1496,95 @@ export class InitCompareSuccessAction implements Action {
   }
 }
 
+export class InitCompareStepTaskAction implements Action {
+  type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK;
+  payload: {
+    impactPathwayId: string;
+    impactPathwayStepId: string;
+    impactPathwayStepTaskId: string;
+    compareimpactPathwayStepTaskId: string;
+  };
+
+  /**
+   * Create a new StopCompareImpactPathwayStepTaskAction
+   *
+   * @param impactPathwayId
+   *    the id of impact pathway that the task belongs to
+   * @param impactPathwayStepId
+   *    the id of impact pathway step that the task belongs to
+   * @param impactPathwayStepTaskId
+   *    the id of impact pathway step task
+   * @param compareimpactPathwayStepTaskId
+   *    the impact pathway step task's id to compare with the current one
+   */
+  constructor(impactPathwayId: string, impactPathwayStepId: string, impactPathwayStepTaskId: string, compareimpactPathwayStepTaskId: string) {
+    this.payload = { impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId, compareimpactPathwayStepTaskId };
+  }
+}
+
+/**
+ * An ngrx action for init StepTask error
+ */
+export class InitCompareStepTaskErrorAction implements Action {
+  type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_ERROR;
+}
+
+/**
+ * An ngrx action for init StepTask success
+ */
+export class InitCompareStepTaskSuccessAction implements Action {
+  type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_SUCCESS;
+  payload: {
+    impactPathwayId: string;
+    impactPathwayStepId: string;
+    impactPathwayStepTaskId: string;
+    tasks: ImpactPathwayTask[];
+  };
+
+  /**
+   * Create a new InitCompareStepTaskSuccessAction
+   *
+   * @param impactPathwayId
+   *    the id of impact pathway that the tasks belong to
+   * @param impactPathwayStepId
+   *    the id of impact pathway step that the tasks belong to
+   * @param impactPathwayStepTaskId
+   *    the id of impact pathway step task that the tasks belong to
+   * @param tasks
+   *    the list of tasks objects
+   */
+  constructor(impactPathwayId: string, impactPathwayStepId: string, impactPathwayStepTaskId: string, tasks: ImpactPathwayTask[]) {
+    this.payload = { impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId, tasks };
+  }
+}
+
+/**
+ * An ngrx action for StepTask init success
+ */
+export class StopCompareImpactPathwayStepTaskAction implements Action {
+  type = ImpactPathwayActionTypes.STOP_COMPARE_IMPACT_PATHWAY_STEP_TASK;
+  payload: {
+    impactPathwayId: string;
+    impactPathwayStepId: string;
+    impactPathwayStepTaskId: string;
+  };
+
+
+  /**
+   * Create a new StopCompareImpactPathwayStepTaskAction
+   *
+   * @param impactPathwayId
+   *    the id of impact pathway that the task belongs to
+   * @param impactPathwayStepId
+   *    the id of impact pathway step that the task belongs to
+   * @param impactPathwayStepTaskId
+   *    the id of impact pathway step task
+   */
+  constructor(impactPathwayId: string, impactPathwayStepId: string, impactPathwayStepTaskId: string) {
+    this.payload = { impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId };
+  }
+}
+
 /* tslint:enable:max-classes-per-file */
 
 /**
@@ -1562,4 +1655,8 @@ export type ImpactPathwayActions
   | InitCompareAction
   | InitCompareErrorAction
   | InitCompareSuccessAction
-  | StopCompareImpactPathwayAction;
+  | StopCompareImpactPathwayAction
+  | InitCompareStepTaskAction
+  | InitCompareStepTaskErrorAction
+  | InitCompareStepTaskSuccessAction
+  | StopCompareImpactPathwayStepTaskAction;

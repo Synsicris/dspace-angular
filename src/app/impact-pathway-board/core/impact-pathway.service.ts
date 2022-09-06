@@ -51,6 +51,7 @@ import {
   isImpactPathwayProcessingSelector,
   isImpactPathwayRemovingSelector,
   isCompareMode,
+  isTaskCompareMode,
 } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
@@ -78,7 +79,9 @@ import {
   UpdateImpactPathwayAction,
   UpdateImpactPathwayTaskAction,
   InitCompareAction,
-  StopCompareImpactPathwayAction
+  StopCompareImpactPathwayAction,
+  InitCompareStepTaskAction,
+  StopCompareImpactPathwayStepTaskAction
 } from './impact-pathway.actions';
 import { ErrorResponse } from '../../core/cache/response.models';
 import {
@@ -317,7 +320,7 @@ export class ImpactPathwayService {
       concatMap((compareItem: ComparedVersionItem) => this.initCompareImpactPathwayTasksFromStep(
         compareItem.item.id,
         compareItem.item,
-        compareItem.versionItem ?.id).pipe(
+        compareItem.versionItem?.id).pipe(
           map((steps: ImpactPathwayStep[]) => this.initImpactPathwayStepFromCompareItem(
             compareItem,
             steps
@@ -398,7 +401,7 @@ export class ImpactPathwayService {
     const type = compareObj.item.firstMetadataValue('dspace.entity.type');
     return Object.assign(new ImpactPathwayTask(), {
       id: compareObj.item.id,
-      compareId: compareObj.versionItem ?.id,
+      compareId: compareObj.versionItem?.id,
       compareStatus: compareObj.status,
       parentId: parentId,
       title: compareObj.item.name,
@@ -407,6 +410,54 @@ export class ImpactPathwayService {
     });
   }
 
+
+  /**
+   * Initialize to compare the steps that were previously compared
+   *
+   * @param compareList
+   *    the list of compared steps
+   */
+  initCompareImpactPathwayTaskSubTasks(compareList: ComparedVersionItem[], parentId?: string): Observable<ImpactPathwayTask[]> {
+    const type = compareList[0].item.firstMetadataValue('dspace.entity.type');
+    return observableFrom(compareList).pipe(
+      concatMap((compareItem: ComparedVersionItem) => {
+        return observableOf(Object.assign({}, new ImpactPathwayTask(), {
+          id: compareItem.item.id,
+          compareId: compareItem.versionItem?.id,
+          compareStatus: compareItem.status,
+          parentId: parentId,
+          title: type,
+          type: compareItem.item.type,
+        }));
+      }),
+      reduce((acc: any, value: any) => [...acc, value], [])
+    );
+
+  }
+
+
+  /**
+   * Dispatch a new InitCompareStepTaskAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param compareImpactPathwayId
+   *    the impact pathway's id to compare with
+   */
+  public initCompareImpactPathwayTask(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId: string, compareImpactPathwayStepTaskId: string) {
+    this.store.dispatch(new InitCompareStepTaskAction(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId, compareImpactPathwayStepTaskId));
+  }
+
+
+  /**
+   * Dispatch a new StopCompareImpactPathwayStepTaskAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   */
+  dispatchStopCompareImpactPathwayTask(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId: string,) {
+    this.store.dispatch(new StopCompareImpactPathwayStepTaskAction(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId));
+  }
 
   /**
    * Dispatch a new UpdateImpactPathwayTaskAction
@@ -452,6 +503,13 @@ export class ImpactPathwayService {
    */
   public isCompareModeActive() {
     return this.store.pipe(select(isCompareMode));
+  }
+
+  /**
+   * Check task compareMode is true
+   */
+  public isTaskCompareModeActive(impactPathwayId: string, impactPathwayStepId: string, impactPathwayTaskId: string) {
+    return this.store.pipe(select(isTaskCompareMode(impactPathwayId, impactPathwayStepId, impactPathwayTaskId)));
   }
 
   getCreateTaskFormConfigName(stepType: string, isObjectivePage: boolean): string {
@@ -845,7 +903,7 @@ export class ImpactPathwayService {
     this.router.navigate(['entities', 'impactpathway', impactPathwayId]);
   }
 
-  redirectToProjectPage(projectItemId: string, ) {
+  redirectToProjectPage(projectItemId: string,) {
     this.router.navigate(['items', projectItemId]);
   }
 

@@ -1,3 +1,4 @@
+import { Item } from './../../core/shared/item.model';
 import { Component, Input, OnDestroy } from '@angular/core';
 
 import { ObjectiveService } from '../core/objective.service';
@@ -58,6 +59,22 @@ export class WrapperObjectivesComponent implements OnDestroy {
    */
   ngOnDestroy() {
     this.impactPathwayService.dispatchClearCollapsable();
+  }
+
+  /**
+   * Dispatch initialization of comparing mode
+   *
+   * @param version
+   */
+  onVersionSelected(version: Item) {
+    this.impactPathwayService.initCompareImpactPathwayTask(this.impactPathwayStep.parentId, this.impactPathwayStep.id, this.targetImpactPathwayTaskId, version.id);
+  }
+
+  /**
+   * Dispatch cleaning of comparing mode
+   */
+  onVersionDeselected() {
+    this.impactPathwayService.dispatchStopCompareImpactPathwayTask(this.impactPathwayStep.parentId, this.impactPathwayStep.id, this.targetImpactPathwayTaskId);
   }
 
 }

@@ -28,7 +28,10 @@ import {
   ClearImpactPathwaySubtaskCollapseAction,
   InitCompareAction,
   InitCompareSuccessAction,
-  StopCompareImpactPathwayAction
+  StopCompareImpactPathwayAction,
+  InitCompareStepTaskAction,
+  StopCompareImpactPathwayStepTaskAction,
+  InitCompareStepTaskSuccessAction
 } from './impact-pathway.actions';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
@@ -176,6 +179,20 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
 
     case ImpactPathwayActionTypes.STOP_COMPARE_IMPACT_PATHWAY: {
       return stopCompare(state, action as StopCompareImpactPathwayAction);
+    }
+
+
+    case ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK: {
+      return initCompareStepTask(state, action as InitCompareStepTaskAction);
+    }
+
+
+    case ImpactPathwayActionTypes.STOP_COMPARE_IMPACT_PATHWAY_STEP_TASK: {
+      return stopCompareStepTask(state, action as StopCompareImpactPathwayStepTaskAction);
+    }
+
+    case ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_SUCCESS: {
+      return replaceImpactPathwayTaskSubtasks(state, action as InitCompareStepTaskSuccessAction);
     }
 
 
@@ -943,7 +960,7 @@ function initCompare(state: ImpactPathwayState, action: InitCompareAction) {
   return Object.assign({}, state, {
     compareImpactPathwayId: action.payload.compareImpactPathwayId,
     compareMode: true,
-    processing:true
+    processing: true
   });
 }
 
@@ -982,6 +999,145 @@ function replaceImpactPathwaySteps(state: ImpactPathwayState, action: InitCompar
   return Object.assign({}, state, { processing: false }, {
     objects: Object.assign({}, objects, {
       [action.payload.impactPathwayId]: Object.assign(new ImpactPathway(), objects[action.payload.impactPathwayId], { steps: action.payload.steps })
+    })
+  });
+
+}
+
+
+
+/**
+ * Init state for comparing.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitCompareStepTaskAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function initCompareStepTask(state: ImpactPathwayState, action: InitCompareStepTaskAction) {
+
+  let step = state.objects[action.payload.impactPathwayId].getStep(action.payload.impactPathwayStepId);
+
+  const tasks = step.tasks.map(stepTask => {
+    if (stepTask.id === action.payload.impactPathwayStepTaskId) {
+      return Object.assign({}, step.getTask(action.payload.impactPathwayStepTaskId), { compareMode: true });
+    }
+    return stepTask;
+  });
+
+  step = Object.assign({}, step, { tasks: tasks }) as ImpactPathwayStep;
+
+  let impactPathway = state.objects[action.payload.impactPathwayId];
+
+  impactPathway = Object.assign({}, impactPathway, {
+    steps: impactPathway.steps.map((istep: ImpactPathwayStep) => {
+      if (istep.id === step.id) {
+        return Object.assign(new ImpactPathwayStep(), step);
+      }
+      return istep;
+    })
+  });
+
+  const objects = state.objects;
+
+  return Object.assign({}, state, {
+    objects: Object.assign({}, objects, {
+      [action.payload.impactPathwayId]: Object.assign(new ImpactPathway(), impactPathway)
+    })
+  });
+}
+
+/**
+ * Stop state for comparing.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an StopCompareImpactPathwayStepTaskAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function stopCompareStepTask(state: ImpactPathwayState, action: StopCompareImpactPathwayStepTaskAction) {
+  let step = state.objects[action.payload.impactPathwayId].getStep(action.payload.impactPathwayStepId);
+
+  const tasks = step.tasks.map(stepTask => {
+    if (stepTask.id === action.payload.impactPathwayStepTaskId) {
+      return Object.assign({}, step.getTask(action.payload.impactPathwayStepTaskId), { compareMode: false });
+    }
+    return stepTask;
+  });
+
+  step = Object.assign({}, step, { tasks: tasks }) as ImpactPathwayStep;
+
+  let impactPathway = state.objects[action.payload.impactPathwayId];
+
+  impactPathway = Object.assign({}, impactPathway, {
+    steps: impactPathway.steps.map((istep: ImpactPathwayStep) => {
+      if (istep.id === step.id) {
+        return Object.assign(new ImpactPathwayStep(), step);
+      }
+      return istep;
+    })
+  });
+
+  const objects = state.objects;
+
+  return Object.assign({}, state, {
+    objects: Object.assign({}, objects, {
+      [action.payload.impactPathwayId]: Object.assign(new ImpactPathway(), impactPathway)
+    })
+  });
+}
+
+
+/**
+ * replace impact pathway steps & tasks.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitCompareStepTaskSuccessAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function replaceImpactPathwayTaskSubtasks(state: ImpactPathwayState, action: InitCompareStepTaskSuccessAction) {
+
+  let step = state.objects[action.payload.impactPathwayId].getStep(action.payload.impactPathwayStepId);
+
+  const tasks = step.tasks.map(stepTask => {
+    if (stepTask.id === action.payload.impactPathwayStepTaskId) {
+
+      const newTask = Object.assign({}, step.getTask(action.payload.impactPathwayStepTaskId),
+        {
+          tasks: action.payload.tasks.map((task) => {
+            return Object.assign(new ImpactPathwayTask(), task);
+          })
+        });
+      return Object.assign(new ImpactPathwayTask(), newTask, { compareMode: true }) as ImpactPathwayTask;
+    }
+    return stepTask as ImpactPathwayTask;
+  });
+
+  step = Object.assign({}, step, { tasks: tasks }) as ImpactPathwayStep;
+
+  let impactPathway = state.objects[action.payload.impactPathwayId];
+
+  impactPathway = Object.assign({}, impactPathway, {
+    steps: impactPathway.steps.map((istep: ImpactPathwayStep) => {
+      if (istep.id === step.id) {
+        return Object.assign(new ImpactPathwayStep(), step);
+      }
+      return istep;
+    })
+  });
+
+  const objects = state.objects;
+
+  return Object.assign({}, state, {
+    objects: Object.assign({}, objects, {
+      [action.payload.impactPathwayId]: Object.assign(new ImpactPathway(), impactPathway)
     })
   });
 

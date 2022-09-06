@@ -25,6 +25,17 @@ function impactPathwaySubTaskCollapsableSelector<T>(key: string, stepId: string,
   });
 }
 
+function impactPathwayStepTaskCompareModeSelector<T>(impactPathwayId: string, stepId: string, taskId: string, selector): MemoizedSelector<AppState, ImpactPathwayTask | boolean> {
+  return createSelector(selector, (state: ImpactPathwayState) => {
+    if (isNotEmpty(state) && isNotEmpty(state.objects) && isNotEmpty(state.objects[impactPathwayId]) && isNotEmpty(state.objects[impactPathwayId].steps)) {
+      const step = state.objects[impactPathwayId].getStep(stepId);
+      return step.getTask(taskId).compareMode || false;
+    } else {
+      return false;
+    }
+  });
+}
+
 /**
  * Returns the imapct pathway state.
  * @function _getImpactPathwayState
@@ -115,4 +126,13 @@ export function impactPathwaySubTaskCollapsable(impactPathwayStepId: string, imp
 export const isCompareMode = createSelector(_getImpactPathwayState,
   (state: ImpactPathwayState) => state.compareMode || false
 );
+
+/**
+ * Returns true if compare mode of task is active.
+ * @function isCompareMode
+ * @return {boolean}
+ */
+export function isTaskCompareMode(impactPathwayId: string, impactPathwayStepId: string, impactPathwayTaskId: string) {
+  return impactPathwayStepTaskCompareModeSelector(impactPathwayId, impactPathwayStepId, impactPathwayTaskId, impactPathwayStateSelector);
+}
 

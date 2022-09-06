@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 
-import { Observable, of as observableOf } from 'rxjs';
+import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathwayTask } from '../../../core/models/impact-pathway-task.model';
@@ -28,6 +28,11 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
   @Input() public impactPathwayTask: ImpactPathwayTask;
   @Input() public canEditButton: boolean;
 
+  /**
+   * A boolean representing if compare mode is active
+   */
+  compareMode: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   private processing$: Observable<boolean> = observableOf(false);
 
   constructor(
@@ -42,6 +47,13 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
   ngOnInit(): void {
     this.connectedToList = this.getObjectivesTaskIds();
     this.processing$ = this.impactPathwayService.isProcessing();
+
+
+    this.subs.push(
+      this.impactPathwayService.isTaskCompareModeActive(this.impactPathwayStep.parentId, this.impactPathwayStep.id, this.impactPathwayTask.id)
+        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
+    );
+
   }
 
   drop(event: CdkDragDrop<ImpactPathwayTask>) {
