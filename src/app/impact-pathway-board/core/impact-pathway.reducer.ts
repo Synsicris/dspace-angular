@@ -182,6 +182,10 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
     }
 
 
+    case ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_SUCCESS: {
+      return replaceImpactPathwaySteps(state, action as InitCompareSuccessAction);
+    }
+
     case ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK: {
       return initCompareStepTask(state, action as InitCompareStepTaskAction);
     }
@@ -194,12 +198,6 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
     case ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_SUCCESS: {
       return replaceImpactPathwayTaskSubtasks(state, action as InitCompareStepTaskSuccessAction);
     }
-
-
-    case ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_SUCCESS: {
-      return replaceImpactPathwaySteps(state, action as InitCompareSuccessAction);
-    }
-
 
     case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_SUCCESS: {
       return addImpactPathwayTaskToImpactPathwayStep(state, action as AddImpactPathwayTaskSuccessAction);

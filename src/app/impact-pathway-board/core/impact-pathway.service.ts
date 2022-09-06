@@ -418,7 +418,7 @@ export class ImpactPathwayService {
    *    the list of compared steps
    */
   initCompareImpactPathwayTaskSubTasks(compareList: ComparedVersionItem[], parentId?: string): Observable<ImpactPathwayTask[]> {
-    const type = compareList[0].item.firstMetadataValue('dspace.entity.type');
+    const type = compareList[0]?.item?.firstMetadataValue('dspace.entity.type');
     return observableFrom(compareList).pipe(
       concatMap((compareItem: ComparedVersionItem) => {
         return observableOf(Object.assign({}, new ImpactPathwayTask(), {
@@ -432,7 +432,6 @@ export class ImpactPathwayService {
       }),
       reduce((acc: any, value: any) => [...acc, value], [])
     );
-
   }
 
 
