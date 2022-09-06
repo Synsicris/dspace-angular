@@ -7290,7 +7290,7 @@
 
   "search.filters.entityType.Product": "Research data",
 
-  "search.filters.entityType.funding": "Funding",
+  "search.filters.entityType.funding": "Project",
 
   "search.filters.entityType.call": "Call",
 
@@ -8665,6 +8665,7 @@
   "project.manage.members.members-group": "Invitation and Management of project members",
 
   "item.grant.badge.parentproject": "test",
-   "layout.box.help-text.Person_h": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet vehicula orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Interdum et malesuada fames ac ante ipsum primis in faucibus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pretium pulvinar neque ut tempor. Donec ipsum enim, commodo eu luctus id, pharetra eget ex. Sed et magna sit amet massa bibendum fringilla vitae eget lectus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque nunc metus, volutpat eu volutpat et, tristique vel erat. Aliquam erat volutpat. Phasellus blandit nulla a ligula molestie condimentum. Nam sed blandit nunc. Donec laoreet turpis ut nunc tristique sagittis.\n\nUt ac mi in sapien lobortis lacinia. Aenean suscipit laoreet tempus. Suspendisse egestas vel nisl in imperdiet. Maecenas consectetur eros in lorem mollis pellentesque. Sed convallis erat eget mauris consectetur hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempor vitae arcu quis dapibus. Nullam in efficitur dolor. Duis ullamcorper purus at justo mollis semper. Pellentesque augue dolor, dictum ac sagittis ac, fermentum eget quam.\n\nInteger suscipit, odio in pellentesque elementum, lectus nunc convallis odio, eget finibus tellus massa eu justo. Donec ac laoreet sem. Vivamus et vehicula nibh, at euismod est. Nulla mauris ipsum, placerat sed sagittis eu, ornare eget urna. Suspendisse aliquam placerat urna, vitae facilisis dolor tempor quis. Nullam dignissim, ex eget pulvinar auctor, libero quam luctus leo, eu dictum leo quam sit amet velit. In posuere ipsum in nibh fermentum interdum. Aliquam sed risus malesuada, sollicitudin nibh nec, pharetra nisi."
+
+  "layout.box.header.jpheading": "Workspace for all partners in the consortium:"
 
 }

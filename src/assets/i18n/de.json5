@@ -12679,7 +12679,7 @@
   "search.filters.entityType.Product": "Forschungsdaten",
 
   // "search.filters.entityType.funding": "Funding",
-  "search.filters.entityType.funding": "Fördermittel",
+  "search.filters.entityType.funding": "Projekt",
 
   // "search.filters.entityType.call": "Call",
   "search.filters.entityType.call": "Bekanntmachung",
@@ -15277,6 +15277,9 @@
   "project.manage.members.funding.admin-group-help": "Hilfetext hier für admin_group Projekt",
 
   // "project.manage.members.funding.members-group-help": "Help message here",
-  "project.manage.members.funding.members-group-help": "Hilfetext hier für members_group Projekt"
+  "project.manage.members.funding.members-group-help": "Hilfetext hier für members_group Projekt",
+
+  // "layout.box.header.jpheading": "Workspace for all partners in the consortium:",
+  "layout.box.header.jpheading": "Arbeitsbereich für alle Partner im Verbund:"
 
 }
