@@ -1,3 +1,4 @@
+import { FeatureID } from './../../core/data/feature-authorization/feature-id';
 import { Injectable } from '@angular/core';
 
 import { from as observableFrom, of as observableOf } from 'rxjs';
@@ -47,6 +48,7 @@ import {
   RemoveWorkpackageSuccessAction,
   RetrieveAllLinkedWorkingPlanObjectsAction,
   RetrieveAllLinkedWorkingPlanObjectsErrorAction,
+  SaveWorkingplanItemsAction,
   SaveWorkpackageOrderAction,
   SaveWorkpackageOrderErrorAction,
   SaveWorkpackageOrderSuccessAction,
@@ -75,6 +77,9 @@ import { SubmissionObjectActionTypes } from '../../submission/objects/submission
 import { environment } from '../../../environments/environment';
 import { WpActionPackage, WpStepActionPackage } from './working-plan-state.service';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
+import { ItemDataService } from '../../core/data/item-data.service';
+import { getFirstSucceededRemoteListPayload } from '../../core/shared/operators';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -93,16 +98,16 @@ export class WorkingPlanEffects {
         action.payload.entityType,
         action.payload.metadata,
         action.payload.place).pipe(
-        map((searchItem: Item) => new GenerateWorkpackageSuccessAction(
-          action.payload.projectId,
-          searchItem,
-          searchItem.id)),
-        catchError((error: Error) => {
-          if (error) {
-            console.error(error.message);
-          }
-          return observableOf(new GenerateWorkpackageErrorAction());
-        }));
+          map((searchItem: Item) => new GenerateWorkpackageSuccessAction(
+            action.payload.projectId,
+            searchItem,
+            searchItem.id)),
+          catchError((error: Error) => {
+            if (error) {
+              console.error(error.message);
+            }
+            return observableOf(new GenerateWorkpackageErrorAction());
+          }));
     }));
 
   /**
@@ -111,7 +116,7 @@ export class WorkingPlanEffects {
   @Effect() generateWorkpackageSuccess$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.GENERATE_WORKPACKAGE_SUCCESS),
     map((action: GenerateWorkpackageSuccessAction) => {
-      return new AddWorkpackageAction(action.payload.projectId,  action.payload.item.id, action.payload.workspaceItemId);
+      return new AddWorkpackageAction(action.payload.projectId, action.payload.item.id, action.payload.workspaceItemId);
     }));
 
   /**
@@ -181,16 +186,16 @@ export class WorkingPlanEffects {
         action.payload.parentId,
         action.payload.workpackageStepType,
         action.payload.metadata).pipe(
-        map((searchItem: Item) => new GenerateWorkpackageStepSuccessAction(
-          action.payload.parentId,
-          searchItem,
-          searchItem.id)),
-        catchError((error: Error) => {
-          if (error) {
-            console.error(error.message);
-          }
-          return observableOf(new GenerateWorkpackageStepErrorAction());
-        }));
+          map((searchItem: Item) => new GenerateWorkpackageStepSuccessAction(
+            action.payload.parentId,
+            searchItem,
+            searchItem.id)),
+          catchError((error: Error) => {
+            if (error) {
+              console.error(error.message);
+            }
+            return observableOf(new GenerateWorkpackageStepErrorAction());
+          }));
     }));
 
   /**
@@ -217,24 +222,24 @@ export class WorkingPlanEffects {
         action.payload.parentId,
         action.payload.workpackageStepId,
         environment.workingPlan.workingPlanStepRelationMetadata).pipe(
-        map((taskItem: Item) => {
-          return this.workingPlanService.initWorkpackageStepFromItem(
-            taskItem,
-            action.payload.workspaceItemId,
-            action.payload.parentId
-          );
-        }),
-        map((step: WorkpackageStep) => {
-          return new AddWorkpackageStepSuccessAction(
-            action.payload.parentId,
-            step);
-        }),
-        catchError((error: Error) => {
-          if (error) {
-            console.error(error.message);
-          }
-          return observableOf(new AddWorkpackageStepErrorAction());
-        }));
+          map((taskItem: Item) => {
+            return this.workingPlanService.initWorkpackageStepFromItem(
+              taskItem,
+              action.payload.workspaceItemId,
+              action.payload.parentId
+            );
+          }),
+          map((step: WorkpackageStep) => {
+            return new AddWorkpackageStepSuccessAction(
+              action.payload.parentId,
+              step);
+          }),
+          catchError((error: Error) => {
+            if (error) {
+              console.error(error.message);
+            }
+            return observableOf(new AddWorkpackageStepErrorAction());
+          }));
     }));
 
   /**
@@ -301,7 +306,26 @@ export class WorkingPlanEffects {
     switchMap((action: RetrieveAllLinkedWorkingPlanObjectsAction) => {
       return this.workingPlanService.searchForLinkedWorkingPlanObjects(action.payload.projectId, action.payload.sortOption).pipe(
         map((items: WorkpackageSearchItem[]) => {
-          return new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption);
+          return new SaveWorkingplanItemsAction(action.payload.workingplanId, items, action.payload.sortOption);
+        }),
+        catchError((error: Error) => {
+          if (error) {
+            console.error(error.message);
+          }
+          return observableOf(new RetrieveAllLinkedWorkingPlanObjectsErrorAction());
+        }));
+    }));
+
+  /**
+   * Retrieve all workpackages for this workingplan
+   */
+  @Effect() saveWorkingplanItems$ = this.actions$.pipe(
+    ofType(WorkpackageActionTypes.SAVE_WORKINGPLAN_ITEMS),
+    switchMap((action: SaveWorkingplanItemsAction) => {
+      return this.authorizationDataService.searchByObjects([FeatureID.isItemEditable], action.payload.items.map(item => item.item.id), 'core.item').pipe(
+        getFirstSucceededRemoteListPayload(),
+        map(() => {
+          return new InitWorkingplanAction(action.payload.workingplanId, action.payload.items, action.payload.sortOption);
         }),
         catchError((error: Error) => {
           if (error) {
@@ -352,7 +376,7 @@ export class WorkingPlanEffects {
   /**
    * Init workingplan objects place
    */
-  @Effect({dispatch: false}) initSuccess$ = this.actions$.pipe(
+  @Effect({ dispatch: false }) initSuccess$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.INIT_WORKINGPLAN_SUCCESS),
     withLatestFrom(this.store$),
     switchMap(([action, state]: [InitWorkingplanSuccessAction, any]) => {
@@ -477,7 +501,7 @@ export class WorkingPlanEffects {
   /**
    * Init workingplan objects place
    */
-  @Effect({dispatch: false}) updateError$ = this.actions$.pipe(
+  @Effect({ dispatch: false }) updateError$ = this.actions$.pipe(
     ofType(
       WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_ERROR,
       WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP_ERROR,
@@ -488,7 +512,7 @@ export class WorkingPlanEffects {
       this.notificationsService.error(
         null,
         this.translate.get('working-plan.chart.update.error'),
-        {timeOut: 0, clickToClose: false}
+        { timeOut: 0, clickToClose: false }
       );
     }));
 
@@ -512,13 +536,13 @@ export class WorkingPlanEffects {
       return this.workingPlanService.updateWorkpackagePlace(
         state.workingplan.workingplanId,
         state.workingplan.workpackages).pipe(
-        map(() => new SaveWorkpackageOrderSuccessAction()),
-        catchError((error: Error) => {
-          if (error) {
-            console.error(error.message);
-          }
-          return observableOf(new SaveWorkpackageOrderErrorAction(action.payload.oldWorkpackageEntries));
-        }));
+          map(() => new SaveWorkpackageOrderSuccessAction()),
+          catchError((error: Error) => {
+            if (error) {
+              console.error(error.message);
+            }
+            return observableOf(new SaveWorkpackageOrderErrorAction(action.payload.oldWorkpackageEntries));
+          }));
     }));
 
   /**
@@ -582,7 +606,9 @@ export class WorkingPlanEffects {
     private projectVersionService: ProjectVersionService,
     private store$: Store<any>,
     private translate: TranslateService,
-    private workingPlanService: WorkingPlanService
+    private workingPlanService: WorkingPlanService,
+    private itemDataService: ItemDataService,
+    private authorizationDataService: AuthorizationDataService,
   ) {
   }
 

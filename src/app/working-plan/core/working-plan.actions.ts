@@ -65,6 +65,7 @@ export const WorkpackageActionTypes = {
   SAVE_WORKPACKAGE_STEPS_ORDER_SUCCESS: type('dspace/core/workingplan/SAVE_WORKPACKAGE_STEPS_ORDER_SUCCESS'),
   SAVE_WORKPACKAGE_STEPS_ORDER_ERROR: type('dspace/core/workingplan/SAVE_WORKPACKAGE_STEPS_ORDER_ERROR'),
   NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE: type('dspace/core/workingplan/NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE'),
+  SAVE_WORKINGPLAN_ITEMS: type('dspace/core/workingplan/SAVE_WORKINGPLAN_ITEMS'),
 };
 
 /* tslint:disable:max-classes-per-file */
@@ -127,7 +128,7 @@ export class GenerateWorkpackageSuccessAction implements Action {
    *    the workspaceItem's id generated
    */
   constructor(projectId: string, item: Item, workspaceItemId: string) {
-    this.payload = {projectId, item, workspaceItemId };
+    this.payload = { projectId, item, workspaceItemId };
   }
 }
 
@@ -349,6 +350,33 @@ export class InitCompareSuccessAction implements Action {
 /**
  * An ngrx action to init impact pathway's model objects
  */
+export class SaveWorkingplanItemsAction implements Action {
+  type = WorkpackageActionTypes.SAVE_WORKINGPLAN_ITEMS;
+  payload: {
+    workingplanId: string;
+    items: WorkpackageSearchItem[];
+    sortOption: string;
+  };
+
+  /**
+   * Create a new InitWorkingplanAction
+   *
+   * @param workingplanId
+   *    the working-plan id
+   * @param items
+   *    the list of Item of workpackages
+   * @param sortOption
+   *    the default sort option value
+   */
+  constructor(workingplanId: string, items: WorkpackageSearchItem[], sortOption: string) {
+    this.payload = { workingplanId, items, sortOption };
+  }
+}
+
+
+/**
+ * An ngrx action to init impact pathway's model objects
+ */
 export class InitWorkingplanAction implements Action {
   type = WorkpackageActionTypes.INIT_WORKINGPLAN;
   payload: {
@@ -393,7 +421,7 @@ export class InitWorkingplanSuccessAction implements Action {
    * @param sortOption
    *    the default sort option value
    */
-  constructor(workingplanId: string,workpackages: Workpackage[], sortOption: string) {
+  constructor(workingplanId: string, workpackages: Workpackage[], sortOption: string) {
     this.payload = { workingplanId, workpackages, sortOption };
   }
 }
@@ -594,7 +622,7 @@ export class UpdateWorkpackageAction implements Action {
 /**
  * An ngrx action to update all the workpackage's object
  */
- export class UpdateAllWorkpackageAction implements Action {
+export class UpdateAllWorkpackageAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE;
   payload: {
     wpActionPackage: WpActionPackage[];
@@ -617,7 +645,7 @@ export class UpdateWorkpackageAction implements Action {
 /**
  * An ngrx action to update all the workpackage's object
  */
- export class UpdateAllWorkpackageSuccessAction implements Action {
+export class UpdateAllWorkpackageSuccessAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_SUCCESS;
   payload: {
     wpActionPackage: WpActionPackage[];
@@ -686,7 +714,7 @@ export class UpdateWorkpackageErrorAction implements Action {
 /**
  * An ngrx action to update all the workpackage's object
  */
- export class UpdateAllWorkpackageErrorAction implements Action {
+export class UpdateAllWorkpackageErrorAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_ERROR;
   payload: {
     wpActionPackage: WpActionPackage[];
@@ -735,7 +763,7 @@ export class UpdateWorkpackageStepAction implements Action {
 /**
  * An ngrx action to update all the workpackage's object
  */
- export class UpdateAllWorkpackageStepAction implements Action {
+export class UpdateAllWorkpackageStepAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP;
   payload: {
     wpStepActionPackage: WpStepActionPackage[];
@@ -755,7 +783,7 @@ export class UpdateWorkpackageStepAction implements Action {
 /**
  * An ngrx action to retrieve all working plan's workpackages
  */
- export class UpdateAllWorkpackageStepSuccessAction implements Action {
+export class UpdateAllWorkpackageStepSuccessAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP_SUCCESS;
   payload: {
     wpStepActionPackage: WpStepActionPackage[];
@@ -775,7 +803,7 @@ export class UpdateWorkpackageStepAction implements Action {
 /**
  * An ngrx action to retrieve all working plan's workpackages
  */
- export class UpdateWorkpackageStepSuccessAction implements Action {
+export class UpdateWorkpackageStepSuccessAction implements Action {
   type = WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP_SUCCESS;
   payload: {
     workpackageId: string;
@@ -827,7 +855,7 @@ export class UpdateWorkpackageStepErrorAction implements Action {
 /**
  * An ngrx action to retrieve all working plan's workpackages
  */
- export class UpdateAllWorkpackageStepErrorAction implements Action {
+export class UpdateAllWorkpackageStepErrorAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP_ERROR;
   payload: {
     wpStepActionPackage: WpStepActionPackage[];
@@ -1067,4 +1095,5 @@ export type WorkingPlanActions
   | UpdateWorkpackageStepSuccessAction
   | UpdateAllWorkpackageStepAction
   | UpdateAllWorkpackageStepSuccessAction
-  | UpdateAllWorkpackageStepErrorAction;
+  | UpdateAllWorkpackageStepErrorAction
+  | SaveWorkingplanItemsAction;

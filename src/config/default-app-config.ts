@@ -245,7 +245,15 @@ export class DefaultAppConfig implements AppConfig {
     {
       type: 'Product',
       metadata: ['dc.contributor.author']
-    }
+    },
+    {
+      type: 'workpackage',
+      metadata: ['workingplan.relation.step']
+    },
+    {
+      type: 'milestone',
+      metadata: ['workingplan.relation.step']
+    },
   ];
 
   // Collection Page Config

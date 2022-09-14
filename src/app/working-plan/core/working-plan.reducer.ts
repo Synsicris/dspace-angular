@@ -1,4 +1,4 @@
-import { findIndex, remove } from 'lodash';
+import { constant, findIndex, remove } from 'lodash';
 
 import { Workpackage } from './models/workpackage-step.model';
 import {
@@ -12,6 +12,7 @@ import {
   RemoveWorkpackageStepAction,
   RemoveWorkpackageStepSuccessAction,
   RemoveWorkpackageSuccessAction,
+  SaveWorkingplanItemsAction,
   SaveWorkpackageStepsOrderErrorAction,
   UpdateAllWorkpackageStepSuccessAction,
   UpdateAllWorkpackageSuccessAction,
@@ -45,6 +46,7 @@ export interface WorkingPlanState {
   workingplanId: string;
   compareWorkingplanId?: string;
   workpackages: WorkpackageEntries;
+  items: string[];
   workpackageToRemove: string;
   workpackageToUpdate: string;
   loaded: boolean;
@@ -60,6 +62,7 @@ export interface WorkingPlanState {
 const workpackageInitialState: WorkingPlanState = {
   workingplanId: '',
   workpackages: {},
+  items: [],
   workpackageToRemove: '',
   workpackageToUpdate: '',
   loaded: false,
@@ -243,6 +246,11 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
       return revertWorkpackageStepOrder(state, action as SaveWorkpackageStepsOrderErrorAction);
     }
 
+
+    case WorkpackageActionTypes.SAVE_WORKINGPLAN_ITEMS: {
+      return saveWorkingplanItems(state, action as SaveWorkingplanItemsAction);
+    }
+
     case WorkpackageActionTypes.NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE: {
       return state;
     }
@@ -287,7 +295,7 @@ function addWorkpackageStep(state: WorkingPlanState, action: AddWorkpackageStepS
  * @return WorkingPlanState
  *    the new state.
  */
-function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSuccessAction|InitCompareSuccessAction): WorkingPlanState {
+function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSuccessAction | InitCompareSuccessAction): WorkingPlanState {
   const workpackages = {};
   action.payload.workpackages.forEach((workpackage: Workpackage) => {
     workpackages[workpackage.id] = workpackage;
@@ -428,7 +436,7 @@ function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackag
  * @return WorkingPlanState
  *    the new state.
  */
- function updateAllWorkpackageStep(state: WorkingPlanState, action: UpdateAllWorkpackageStepSuccessAction): WorkingPlanState {
+function updateAllWorkpackageStep(state: WorkingPlanState, action: UpdateAllWorkpackageStepSuccessAction): WorkingPlanState {
   let steps;
   let stepIndex;
   action.payload.wpStepActionPackage.forEach((wp: WpStepActionPackage) => {
@@ -527,6 +535,29 @@ function revertWorkpackageStepOrder(state: WorkingPlanState, action: SaveWorkpac
     moving: false
   });
 }
+
+
+/**
+ * Revert items.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an SaveWorkpackageStepsOrderErrorAction
+ * @return WorkingPlanState
+ *    the new state.
+ */
+function saveWorkingplanItems(state: WorkingPlanState, action: SaveWorkingplanItemsAction): WorkingPlanState {
+  const items = [];
+
+  action.payload.items.forEach(item => {
+    items.push(item.item.id);
+    items.push(...item.item.allMetadata('workingplan.relation.step').map((step) => step.authority));
+  });
+
+  return Object.assign({}, state, { items: items });
+}
+
 
 /**
  * Init state for comparing.
