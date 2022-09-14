@@ -109,28 +109,6 @@ export class AuthorizationDataService extends DataService<Authorization> {
     );
   }
 
-  /**
-   * Search for a list of {@link Authorization}s using the "objects" search endpoint and providing optional objects url,
-   * {@link EPerson} uuid and/or {@link Feature} id
-   * @param featureId                   ID of the {@link Feature} to search {@link Authorization}s for. Required.
-   * @param objectsUr                   URL to the objects to search {@link Authorization}s for. Required.
-   * @param ePersonUuid                 UUID of the {@link EPerson} to search {@link Authorization}s for.
-   *                                    If not provided, the UUID of the currently authenticated {@link EPerson} will be used.
-   * @param options                     {@link FindListOptions} to provide pagination and/or additional arguments
-   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
-   *                                    no valid cached version. Defaults to true
-   * @param reRequestOnStale            Whether or not the request should automatically be re-
-   *                                    requested after the response becomes stale
-   * @param linksToFollow               List of {@link FollowLinkConfig} that indicate which
-   *                                    {@link HALLink}s should be automatically resolved
-   */
-  searchByObjects(featureIds: FeatureID[], objectsUrl: string[], ePersonUuid?: string, options: FindListOptions = {}, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Authorization>[]): Observable<RemoteData<PaginatedList<Authorization>>> {
-    return observableOf(new AuthorizationObjectsSearchParams(objectsUrl, featureIds, ePersonUuid)).pipe(
-      switchMap((params: AuthorizationObjectsSearchParams) => {
-        return this.searchBy(this.searchByObjectsPath, this.createSearchOptionsObjects(params.objectsUrl,  params.featureIds, options, params.ePersonUuid), useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
-      })
-    );
-  }
 
   /**
    * Create {@link FindListOptions} with {@link RequestParam}s containing a "uri", "feature" and/or "eperson" parameter
@@ -156,24 +134,53 @@ export class AuthorizationDataService extends DataService<Authorization> {
     });
   }
 
+
+  /**
+   * Search for a list of {@link Authorization}s using the "objects" search endpoint and providing optional objects url,
+   * {@link EPerson} uuid and/or {@link Feature} id
+   * @param featureId                   ID of the {@link Feature} to search {@link Authorization}s for. Required.
+   * @param objectsUr                   URL to the objects to search {@link Authorization}s for. Required.
+   * @param type                        Represents the type of resource(s) (i.e. "core.item", "workflow.workflowitem",...) on which authorizations are checked. Required.
+   * @param ePersonUuid                 UUID of the {@link EPerson} to search {@link Authorization}s for.
+   *                                    If not provided, the UUID of the currently authenticated {@link EPerson} will be used.
+   * @param options                     {@link FindListOptions} to provide pagination and/or additional arguments
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
+   * @param reRequestOnStale            Whether or not the request should automatically be re-
+   *                                    requested after the response becomes stale
+   * @param linksToFollow               List of {@link FollowLinkConfig} that indicate which
+   *                                    {@link HALLink}s should be automatically resolved
+   */
+  searchByObjects(featureIds: FeatureID[], ids: string[], type: string, ePersonUuid?: string, options: FindListOptions = {}, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Authorization>[]): Observable<RemoteData<PaginatedList<Authorization>>> {
+    return observableOf(new AuthorizationObjectsSearchParams(ids, featureIds, type, ePersonUuid)).pipe(
+      switchMap((params: AuthorizationObjectsSearchParams) => {
+        return this.searchBy(this.searchByObjectsPath, this.createSearchOptionsObjects(params.ids, params.featureIds, params.type, options, params.ePersonUuid), useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+      })
+    );
+  }
+
   /**
    * Create {@link FindListOptions} with {@link RequestParam}s containing a "uri" list, "feature" and/or "eperson" parameter
-   * @param objectsUrl  Required parameter values to add to {@link RequestParam} "uri"
+   * @param ids  Required parameter values to add to {@link RequestParam} "uri"
    * @param featureIds  Required parameter values to add to {@link RequestParam} "feature"
+   * @param type        Required parameter values to add to {@link RequestParam} "type"
    * @param options     Optional initial {@link FindListOptions} to add parameters to
    * @param ePersonUuid Optional parameter value to add to {@link RequestParam} "eperson"
    */
-  private createSearchOptionsObjects(objectsUrl: string[],  featureIds: FeatureID[], options: FindListOptions = {}, ePersonUuid?: string): FindListOptions {
+  private createSearchOptionsObjects(ids: string[], featureIds: FeatureID[], type: string, options: FindListOptions = {}, ePersonUuid?: string): FindListOptions {
     let params = [];
     if (isNotEmpty(options.searchParams)) {
       params = [...options.searchParams];
     }
-    objectsUrl.forEach((objectUrl) => {
-      params.push(new RequestParam('uri', objectUrl));
+    ids.forEach((id) => {
+      params.push(new RequestParam('uuid', id));
     });
     featureIds.forEach((featureId) => {
       params.push(new RequestParam('feature', featureId));
     });
+    if (hasValue(type)) {
+      params.push(new RequestParam('type', type));
+    }
     if (hasValue(ePersonUuid)) {
       params.push(new RequestParam('eperson', ePersonUuid));
     }
