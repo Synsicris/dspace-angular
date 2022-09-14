@@ -200,6 +200,18 @@ export const environment: AppConfig = {
     {
       type: 'Publication',
       metadata: ['dc.contributor.author']
+    },
+    {
+      type: 'Product',
+      metadata: ['dc.contributor.author']
+    },
+    {
+      type: 'workpackage',
+      metadata: ['workingplan.relation.step']
+    },
+    {
+      type: 'milestone',
+      metadata: ['workingplan.relation.step']
     }
   ],
   item: {

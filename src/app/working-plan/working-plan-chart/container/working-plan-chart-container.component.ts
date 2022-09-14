@@ -347,7 +347,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       node.steps,
       node.parentId,
       node.compareId,
-      node.compareStatus
+      node.compareStatus,
+      node.selfUrl
     );
     this.updateTreeMap(flatNode, node);
     return flatNode;
@@ -522,7 +523,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.updateAllDateRanges(updateAllMap);
   }
 
-  updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string|NgbDate, endDate: string|NgbDate) {
+  updateDateRange(flatNode: WorkpacakgeFlatNode, startDate: string | NgbDate, endDate: string | NgbDate) {
     if (startDate instanceof NgbDate) {
       startDate = NgbDateStructToString(startDate);
     }
@@ -610,7 +611,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         } else {
           return isNotEmpty(step.dates?.start?.full) && isNotEmpty(step.dates?.end?.full);
         }
-      } )
+      })
       .map((step: Workpackage) => ({
         dates: step.dates,
         type: step.type
@@ -941,7 +942,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       concatMap((node: WorkpacakgeFlatNode) => this.editItemService.searchEditModesByID(node.id).pipe(
         map((availableModes: EditItemMode[]) => {
           const modes = availableModes.filter((mode) => mode.name === environment.projects.projectsEntityEditMode);
-          return {nodeId: node.id, modes};
+          return { nodeId: node.id, modes };
         })
       ))
     ).subscribe((entry: WorkpackageEditModes) => {

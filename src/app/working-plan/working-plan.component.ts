@@ -1,3 +1,4 @@
+import { ItemDataService } from './../core/data/item-data.service';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
@@ -95,22 +96,22 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
         environment.workingPlan.workpackageEntityName,
         findOptions,
         true).pipe(
-        getFirstSucceededRemoteWithNotEmptyData(),
-        map((collections: RemoteData<PaginatedList<Collection>>) => {
-          return collections.payload.page[0];
-        })
-      );
+          getFirstSucceededRemoteWithNotEmptyData(),
+          map((collections: RemoteData<PaginatedList<Collection>>) => {
+            return collections.payload.page[0];
+          })
+        );
     const mlCollId$ = this.collectionDataService
       .getAuthorizedCollectionByCommunityAndEntityType(
         this.projectCommunityId,
         environment.workingPlan.milestoneEntityName,
         findOptions,
         true).pipe(
-        getFirstSucceededRemoteWithNotEmptyData(),
-        map((collections: RemoteData<PaginatedList<Collection>>) => {
-          return collections.payload.page[0];
-        })
-      );
+          getFirstSucceededRemoteWithNotEmptyData(),
+          map((collections: RemoteData<PaginatedList<Collection>>) => {
+            return collections.payload.page[0];
+          })
+        );
     combineLatest([wpCollId$, mlCollId$]).subscribe(([wpColl, mlColl]) => {
       this.workPackageCollectionId = wpColl.id;
       this.milestoneCollectionId = mlColl.id;
