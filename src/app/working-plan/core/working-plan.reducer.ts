@@ -12,7 +12,6 @@ import {
   RemoveWorkpackageStepAction,
   RemoveWorkpackageStepSuccessAction,
   RemoveWorkpackageSuccessAction,
-  SaveWorkingplanItemsAction,
   SaveWorkpackageStepsOrderErrorAction,
   UpdateAllWorkpackageStepSuccessAction,
   UpdateAllWorkpackageSuccessAction,
@@ -244,11 +243,6 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
 
     case WorkpackageActionTypes.SAVE_WORKPACKAGE_STEPS_ORDER_ERROR: {
       return revertWorkpackageStepOrder(state, action as SaveWorkpackageStepsOrderErrorAction);
-    }
-
-
-    case WorkpackageActionTypes.SAVE_WORKINGPLAN_ITEMS: {
-      return saveWorkingplanItems(state, action as SaveWorkingplanItemsAction);
     }
 
     case WorkpackageActionTypes.NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE: {
@@ -535,29 +529,6 @@ function revertWorkpackageStepOrder(state: WorkingPlanState, action: SaveWorkpac
     moving: false
   });
 }
-
-
-/**
- * Revert items.
- *
- * @param state
- *    the current state
- * @param action
- *    an SaveWorkpackageStepsOrderErrorAction
- * @return WorkingPlanState
- *    the new state.
- */
-function saveWorkingplanItems(state: WorkingPlanState, action: SaveWorkingplanItemsAction): WorkingPlanState {
-  const items = [];
-
-  action.payload.items.forEach(item => {
-    items.push(item.item.id);
-    items.push(...item.item.allMetadata('workingplan.relation.step').map((step) => step.authority));
-  });
-
-  return Object.assign({}, state, { items: items });
-}
-
 
 /**
  * Init state for comparing.
