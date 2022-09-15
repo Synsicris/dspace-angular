@@ -48,7 +48,6 @@ import {
   RemoveWorkpackageSuccessAction,
   RetrieveAllLinkedWorkingPlanObjectsAction,
   RetrieveAllLinkedWorkingPlanObjectsErrorAction,
-  SaveWorkingplanItemsAction,
   SaveWorkpackageOrderAction,
   SaveWorkpackageOrderErrorAction,
   SaveWorkpackageOrderSuccessAction,
@@ -305,33 +304,18 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS),
     switchMap((action: RetrieveAllLinkedWorkingPlanObjectsAction) => {
       return this.workingPlanService.searchForLinkedWorkingPlanObjects(action.payload.projectId, action.payload.sortOption).pipe(
-        map((items: WorkpackageSearchItem[]) => {
-          return new SaveWorkingplanItemsAction(action.payload.workingplanId, items, action.payload.sortOption);
-        }),
-        catchError((error: Error) => {
-          if (error) {
-            console.error(error.message);
-          }
-          return observableOf(new RetrieveAllLinkedWorkingPlanObjectsErrorAction());
-        }));
-    }));
-
-  /**
-   * Retrieve all workpackages for this workingplan
-   */
-  @Effect() saveWorkingplanItems$ = this.actions$.pipe(
-    ofType(WorkpackageActionTypes.SAVE_WORKINGPLAN_ITEMS),
-    switchMap((action: SaveWorkingplanItemsAction) => {
-      return this.authorizationDataService.searchByObjects([FeatureID.isItemEditable], action.payload.items.map(item => item.item.id), 'core.item').pipe(
-        getFirstSucceededRemoteListPayload(),
-        map(() => {
-          return new InitWorkingplanAction(action.payload.workingplanId, action.payload.items, action.payload.sortOption);
-        }),
-        catchError((error: Error) => {
-          if (error) {
-            console.error(error.message);
-          }
-          return observableOf(new RetrieveAllLinkedWorkingPlanObjectsErrorAction());
+        switchMap((items: WorkpackageSearchItem[]) => {
+          return this.authorizationDataService.searchByObjects([FeatureID.isItemEditable], items.map(item => item.item.id), 'core.item').pipe(
+            getFirstSucceededRemoteListPayload(),
+            map(() => {
+              return new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption);
+            }),
+            catchError((error: Error) => {
+              if (error) {
+                console.error(error.message);
+              }
+              return observableOf(new RetrieveAllLinkedWorkingPlanObjectsErrorAction());
+            }));
         }));
     }));
 

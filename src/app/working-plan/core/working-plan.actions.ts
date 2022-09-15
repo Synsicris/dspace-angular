@@ -65,7 +65,6 @@ export const WorkpackageActionTypes = {
   SAVE_WORKPACKAGE_STEPS_ORDER_SUCCESS: type('dspace/core/workingplan/SAVE_WORKPACKAGE_STEPS_ORDER_SUCCESS'),
   SAVE_WORKPACKAGE_STEPS_ORDER_ERROR: type('dspace/core/workingplan/SAVE_WORKPACKAGE_STEPS_ORDER_ERROR'),
   NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE: type('dspace/core/workingplan/NORMALIZE_WORKPACKAGE_OBJECTS_ON_REHYDRATE'),
-  SAVE_WORKINGPLAN_ITEMS: type('dspace/core/workingplan/SAVE_WORKINGPLAN_ITEMS'),
 };
 
 /* tslint:disable:max-classes-per-file */
@@ -346,33 +345,6 @@ export class InitCompareSuccessAction implements Action {
     this.payload = { workpackages };
   }
 }
-
-/**
- * An ngrx action to init impact pathway's model objects
- */
-export class SaveWorkingplanItemsAction implements Action {
-  type = WorkpackageActionTypes.SAVE_WORKINGPLAN_ITEMS;
-  payload: {
-    workingplanId: string;
-    items: WorkpackageSearchItem[];
-    sortOption: string;
-  };
-
-  /**
-   * Create a new InitWorkingplanAction
-   *
-   * @param workingplanId
-   *    the working-plan id
-   * @param items
-   *    the list of Item of workpackages
-   * @param sortOption
-   *    the default sort option value
-   */
-  constructor(workingplanId: string, items: WorkpackageSearchItem[], sortOption: string) {
-    this.payload = { workingplanId, items, sortOption };
-  }
-}
-
 
 /**
  * An ngrx action to init impact pathway's model objects
@@ -1095,5 +1067,4 @@ export type WorkingPlanActions
   | UpdateWorkpackageStepSuccessAction
   | UpdateAllWorkpackageStepAction
   | UpdateAllWorkpackageStepSuccessAction
-  | UpdateAllWorkpackageStepErrorAction
-  | SaveWorkingplanItemsAction;
+  | UpdateAllWorkpackageStepErrorAction;
