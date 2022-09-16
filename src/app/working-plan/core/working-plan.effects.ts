@@ -305,7 +305,7 @@ export class WorkingPlanEffects {
     switchMap((action: RetrieveAllLinkedWorkingPlanObjectsAction) => {
       return this.workingPlanService.searchForLinkedWorkingPlanObjects(action.payload.projectId, action.payload.sortOption).pipe(
         switchMap((items: WorkpackageSearchItem[]) => {
-          return this.authorizationDataService.searchByObjects([FeatureID.isItemEditable], items.map(item => item.item.id), 'core.item').pipe(
+          return this.authorizationDataService.searchByObjects([FeatureID.isItemEditable], this.workingPlanService.getItemsFromWorkpackages(items), 'core.item').pipe(
             getFirstSucceededRemoteListPayload(),
             map(() => {
               return new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption);

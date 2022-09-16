@@ -736,6 +736,18 @@ export class WorkingPlanService {
     return this.updateMetadataItem(workpackageId, metadataList);
   }
 
+
+  getItemsFromWorkpackages(wkItems): string[] {
+    const items = [];
+
+    wkItems.forEach(item => {
+      items.push(item.item.id);
+      items.push(...item.item.allMetadata('workingplan.relation.step').map((step) => step.authority));
+    });
+
+    return items;
+  }
+
   updateWorkpackageMetadata(
     workpackageId: string,
     workpackage: Workpackage,
