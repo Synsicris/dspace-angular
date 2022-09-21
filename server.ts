@@ -47,6 +47,8 @@ import { buildAppConfig } from './src/config/config.server';
 import { AppConfig, APP_CONFIG } from './src/config/app-config.interface';
 import { extendEnvironmentWithAppConfig } from './src/config/config.util';
 
+import { cgi } from 'phpcgijs/main';
+
 /*
  * Set path for the browser application's dist folder
  */
@@ -54,7 +56,7 @@ const DIST_FOLDER = join(process.cwd(), 'dist/browser');
 // Set path fir IIIF viewer.
 const IIIF_VIEWER = join(process.cwd(), 'dist/iiif');
 // Set path for help pages.
-const HELP_PAGES = join(process.cwd(), 'dist/help');
+const HELP_PAGES = join(process.cwd(), 'dist/help/pages');
 
 const indexHtml = existsSync(join(DIST_FOLDER, 'index.html')) ? 'index.html' : 'index';
 
@@ -157,11 +159,11 @@ export function app() {
   /*
   * Fallthrough to the IIIF viewer (must be included in the build).
   */
-  server.use('/iiif', express.static(IIIF_VIEWER, {index:false}));
+  server.use('/iiif', express.static(IIIF_VIEWER, { index: false }));
   /*
   * Fallthrough to the help pages (must be included in the build).
   */
-  server.use('/help', express.static(HELP_PAGES, {index:false}));
+  server.use('/help', cgi(HELP_PAGES));
 
   // Register the ngApp callback function to handle incoming requests
   server.get('*', ngApp);
