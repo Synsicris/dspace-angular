@@ -6868,9 +6868,13 @@
 
   "invitation.ignore-btn": "Ignore",
 
-  "invitation.group.admin": "Coordinators group of",
+  "invitation.group.project.admin": "Coordinators group for project : ",
 
-  "invitation.group.members": "Members group of",
+  "invitation.group.project.members": "Members group for project : ",
+
+  "invitation.group.funding.admin": "Coordinators group for funding: ",
+
+  "invitation.group.funding.members": "Members group for funding: ",
 
   "working-plan.breadcrumbs": "Working plan",
 

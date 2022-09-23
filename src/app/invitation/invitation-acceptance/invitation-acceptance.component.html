@@ -7,10 +7,10 @@
       <div class="col-12">
         <ul>
           <li *ngFor="let entry of invitationsGroupData$ | async; let i = index">
-            <ng-container *ngIf="entry.community">
-              {{ 'invitation.group.' + (entry.type | translate) }} {{entry.community.firstMetadataValue('dc.title')}}
+            <ng-container *ngIf="entry.communityName">
+              {{ 'invitation.group.' + entry.type + '.' + entry.role | translate }} {{entry.communityName}}
             </ng-container>
-            <ng-container *ngIf="!entry.community">
+            <ng-container *ngIf="!entry.communityName">
               {{entry.groupName}}
             </ng-container>
           </li>
