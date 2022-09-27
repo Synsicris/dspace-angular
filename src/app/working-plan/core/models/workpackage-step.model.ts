@@ -39,4 +39,5 @@ export interface WorkpackageTreeObject {
   status: string;
   expanded: boolean; // status of expanded
   steps?: WorkpackageTreeObject[];
+  selfUrl: string;
 }

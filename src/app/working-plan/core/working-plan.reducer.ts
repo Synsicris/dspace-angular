@@ -1,4 +1,4 @@
-import { findIndex, remove } from 'lodash';
+import { constant, findIndex, remove } from 'lodash';
 
 import { Workpackage } from './models/workpackage-step.model';
 import {
@@ -45,6 +45,7 @@ export interface WorkingPlanState {
   workingplanId: string;
   compareWorkingplanId?: string;
   workpackages: WorkpackageEntries;
+  items: string[];
   workpackageToRemove: string;
   workpackageToUpdate: string;
   loaded: boolean;
@@ -60,6 +61,7 @@ export interface WorkingPlanState {
 const workpackageInitialState: WorkingPlanState = {
   workingplanId: '',
   workpackages: {},
+  items: [],
   workpackageToRemove: '',
   workpackageToUpdate: '',
   loaded: false,
@@ -287,7 +289,7 @@ function addWorkpackageStep(state: WorkingPlanState, action: AddWorkpackageStepS
  * @return WorkingPlanState
  *    the new state.
  */
-function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSuccessAction|InitCompareSuccessAction): WorkingPlanState {
+function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSuccessAction | InitCompareSuccessAction): WorkingPlanState {
   const workpackages = {};
   action.payload.workpackages.forEach((workpackage: Workpackage) => {
     workpackages[workpackage.id] = workpackage;
@@ -428,7 +430,7 @@ function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackag
  * @return WorkingPlanState
  *    the new state.
  */
- function updateAllWorkpackageStep(state: WorkingPlanState, action: UpdateAllWorkpackageStepSuccessAction): WorkingPlanState {
+function updateAllWorkpackageStep(state: WorkingPlanState, action: UpdateAllWorkpackageStepSuccessAction): WorkingPlanState {
   let steps;
   let stepIndex;
   action.payload.wpStepActionPackage.forEach((wp: WpStepActionPackage) => {

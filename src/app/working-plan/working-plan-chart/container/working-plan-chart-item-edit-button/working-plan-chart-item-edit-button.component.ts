@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { take } from 'rxjs/operators';
-import { EditItemDataService } from '../../../../core/submission/edititem-data.service';
+
+import { Observable } from 'rxjs';
+
 import { WorkpacakgeFlatNode } from '../../../core/models/workpackage-step-flat-node.model';
 import { environment } from '../../../../../environments/environment';
-import { Observable } from 'rxjs/internal/Observable';
+import { FeatureID } from '../../../../core/data/feature-authorization/feature-id';
+import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 
 @Component({
   selector: 'ds-working-plan-chart-item-edit-button',
@@ -23,23 +24,22 @@ export class WorkingPlanChartItemEditButtonComponent implements OnInit {
    */
   @Input() node: WorkpacakgeFlatNode;
 
-  private canEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  /**
+   * Check if canEdit
+   */
+  private canEdit$: Observable<boolean>;
 
-  constructor(private editItemDataService: EditItemDataService) { }
+  constructor(private authorizationService: AuthorizationDataService) { }
 
   ngOnInit(): void {
-    this.editItemDataService.checkEditModeByIDAndType(this.node.id, environment.projects.projectsEntityEditMode).pipe(
-      take(1)
-    ).subscribe((canEdit: boolean) => {
-      this.canEdit$.next(canEdit);
-    });
+    this.canEdit$ = this.authorizationService.isAuthorized(FeatureID.isItemEditable, this.node.selfUrl);
   }
 
   /**
    * Check if the current node is editable
    */
   canEdit(): Observable<boolean> {
-    return this.canEdit$.asObservable();
+    return this.canEdit$;
   }
 
   /**

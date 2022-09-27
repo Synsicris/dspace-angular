@@ -39,4 +39,5 @@ export enum FeatureID {
   isMemberOfProject = 'isMemberOfProject',
   isAdminOfFunding = 'isAdminOfFunding',
   isMemberOfFunding = 'isMemberOfFunding',
+  isItemEditable = 'isItemEditable',
 }
