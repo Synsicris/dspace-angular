@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { BehaviorSubject, from, Observable } from 'rxjs';
-import { map, mergeMap, scan, switchMap, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
 
 import { Registration } from '../../core/shared/registration.model';
 import { EpersonRegistrationService } from '../../core/data/eperson-registration.service';
@@ -16,7 +16,8 @@ import { CommunityDataService } from '../../core/data/community-data.service';
 export interface InvitationGroupData {
   groupName: string;
   type: string;
-  community: Community;
+  role: string;
+  communityName: string;
 }
 
 @Component({
@@ -43,18 +44,18 @@ export class InvitationAcceptanceComponent implements OnInit {
         const token = paramMap.get('registrationToken');
         return this.epersonRegistrationService.searchByToken(token);
       }),
-      mergeMap((registrationData: Registration) => {
+      map((registrationData: Registration) => {
         this.registrationData = registrationData;
-        return from(registrationData.groupNames);
-      }),
-      mergeMap((groupName: string) => {
-        const groupNameArray = groupName.split('_');
-        const parentId = groupNameArray[1];
-        return this.getCommunity(parentId).pipe(
-          map(community => ({ groupName, type: groupNameArray[2], community: community }))
-        );
-      }),
-      scan((acc: any, value: any) => [...acc, value], [])
+        return registrationData.groupNames.map((groupName, index) => {
+          const groupNameArray = groupName.split('_');
+          return {
+            groupName,
+            type: groupName.startsWith('project_') ? 'project' : 'funding',
+            role: groupNameArray[2],
+            communityName: registrationData.dspaceObjectNames[index]
+          } as InvitationGroupData;
+        });
+      })
     ).subscribe((list: InvitationGroupData[]) => {
       this.invitationsGroupData$.next(list);
     });
