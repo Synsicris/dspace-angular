@@ -1,4 +1,3 @@
-import { FeatureID } from './../../core/data/feature-authorization/feature-id';
 import { Injectable } from '@angular/core';
 
 import { from as observableFrom, of as observableOf } from 'rxjs';
@@ -79,6 +78,8 @@ import { ComparedVersionItem, ProjectVersionService } from '../../core/project/p
 import { ItemDataService } from '../../core/data/item-data.service';
 import { getFirstSucceededRemoteListPayload } from '../../core/shared/operators';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
+import { isEmpty } from '../../shared/empty.util';
+import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -305,17 +306,23 @@ export class WorkingPlanEffects {
     switchMap((action: RetrieveAllLinkedWorkingPlanObjectsAction) => {
       return this.workingPlanService.searchForLinkedWorkingPlanObjects(action.payload.projectId, action.payload.sortOption).pipe(
         switchMap((items: WorkpackageSearchItem[]) => {
-          return this.authorizationDataService.searchByObjects([FeatureID.isItemEditable], this.workingPlanService.getItemsFromWorkpackages(items), 'core.item').pipe(
-            getFirstSucceededRemoteListPayload(),
-            map(() => {
-              return new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption);
-            }),
-            catchError((error: Error) => {
-              if (error) {
-                console.error(error.message);
-              }
-              return observableOf(new RetrieveAllLinkedWorkingPlanObjectsErrorAction());
-            }));
+          const itemIds = this.workingPlanService.getItemsFromWorkpackages(items);
+          if (isEmpty(itemIds)) {
+            return observableOf(new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption));
+          } else {
+            return this.authorizationDataService.searchByObjects([FeatureID.isItemEditable], itemIds, 'core.item').pipe(
+              getFirstSucceededRemoteListPayload(),
+              map(() => {
+                return new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption);
+              }),
+              catchError((error: Error) => {
+                if (error) {
+                  console.error(error.message);
+                }
+                return observableOf(new RetrieveAllLinkedWorkingPlanObjectsErrorAction());
+              }));
+          }
+
         }));
     }));
 
