@@ -2822,8 +2822,6 @@
 
   "item.truncatable-part.show-less": "Collapse",
 
-
-
   "item.page.abstract": "Abstract",
 
   "item.page.author": "Authors",
@@ -7362,7 +7360,7 @@
 
   "layout.tab.header.knowledge": "State of knowledge / problem definition",
 
-  "layout.tab.header.Projectobjectives": "Project objectives",
+  "layout.tab.header.Projectobjectives": "<i class=\"fal fa-bullseye-arrow\"></i><span class=„bla“>Projektziele</span>",
 
   "layout.tab.header.research_objective": "Research and development objectives",
 
@@ -8678,6 +8676,32 @@
 
   "item.grant.badge.parentproject": "test",
 
-  "layout.box.header.jpheading": "Workspace for all partners in the consortium:"
+  "layout.box.header.jpheading": "Workspace for all partners in the consortium:",
+
+  "layout.box.header.event_internalacc": "Internal Information (only members of consortium)",
+
+  "layout.field.label.parentproject.oairecerif.identifier.url": "Identifier",
+
+  "layout.field.label.parentproject.synsicris.type.jointproject": "Type of consortium",
+
+  "layout.field.label.Funding.synsicris.type.research": "Research type",
+
+  "layout.field.label.Funding.synsicris.type.relevance-development": "Relevanz für die Entwicklungszusammenarbeit",
+
+  "layout.field.label.Funding.synsicris.subject.development-countries": "Relevante Länder Entwicklungszusammenarbeit",
+
+  "layout.field.label.ethic.synsicris.type.ethic-docs": "Additional documents available",
+
+  "synsicris.type.balance": "6. Gender balance among employees in the project",
+
+  "synsicris.description.balance": "Explanation",
+
+  "layout.field.label.innovationpotential.synsicris.synsicris.level.rl-start": "Readinesslevel at project start (initial value)",
+
+  "layout.field.label.innovationpotential.synsicris.synsicris.level.rl-end": "Readinesslevel at project end (target value)",
+
+  "layout.field.label.innovationpotential.synsicris.coverage.regional-primary": "Primary field of application",
+
+  "layout.field.label.innovationpotential.synsicris.coverage.regional-secondary": "Later dissemination"
 
 }
