@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { take } from 'rxjs/operators';
-import { EditItemDataService } from '../../../../core/submission/edititem-data.service';
+
+import { Observable } from 'rxjs';
+
 import { WorkpacakgeFlatNode } from '../../../core/models/workpackage-step-flat-node.model';
 import { environment } from '../../../../../environments/environment';
-import { Observable } from 'rxjs/internal/Observable';
 import { FeatureID } from '../../../../core/data/feature-authorization/feature-id';
 import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
 

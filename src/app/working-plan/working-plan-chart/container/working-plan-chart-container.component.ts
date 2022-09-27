@@ -5,13 +5,15 @@ import { MatSelectChange } from '@angular/material/select';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
-import { concatMap, map, mergeMap, take } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ResizeEvent } from 'angular-resizable-element';
 import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
 import { findIndex } from 'lodash';
-import { CreateSimpleItemModalComponent } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
+import {
+  CreateSimpleItemModalComponent
+} from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
 import { WorkpacakgeFlatNode } from '../../core/models/workpackage-step-flat-node.model';
 import {
@@ -33,7 +35,6 @@ import { Item } from '../../../core/shared/item.model';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 import { CompareItemComponent } from '../../../shared/compare-item/compare-item.component';
-import { from } from 'rxjs/internal/observable/from';
 
 export const MY_FORMATS = {
   parse: {
@@ -202,11 +203,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   ComparedVersionItemStatus = ComparedVersionItemStatus;
 
-  /**
-   * List of Edit Modes available on each node for the current user
-   */
-  private editModes$: BehaviorSubject<Map<string, EditItemMode[]>> = new BehaviorSubject<Map<string, EditItemMode[]>>(new Map());
-
   private chartStatusTypeList$: BehaviorSubject<VocabularyEntry[]> = new BehaviorSubject<VocabularyEntry[]>([]);
   private subs: Subscription[] = [];
 
@@ -267,8 +263,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
         this.dataSource.data = steps;
         this.buildCalendar();
-        // Retrieve edit modes
-        this.retrieveEditMode(this.treeControl.dataNodes);
         /** expand tree based on status */
         this.treeControl.dataNodes.forEach((node: WorkpacakgeFlatNode) => {
           // MouseOver Map
@@ -304,28 +298,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   chartChangeColor(nodeId: string, isOver: boolean): void {
     this.chartChangeColorIsOver.set(nodeId, isOver);
-  }
-
-  /**
-   * Check if edit mode is available.
-   *
-   * @param nodeId string
-   *
-   * @returns Observable<boolean>
-   */
-  isEditAvailable(nodeId): Observable<boolean> {
-    return this.editModes$.asObservable().pipe(
-      map((editModes) => isNotEmpty(editModes) && editModes.has(nodeId) && editModes.get(nodeId).length > 0)
-    );
-  }
-
-  /**
-   * Returns the edit modes.
-   *
-   * @returns Observable<Map<string, EditItemMode[]>>
-   */
-  getEditModes(): Observable<Map<string, EditItemMode[]>> {
-    return this.editModes$;
   }
 
   /** utils of building tree */
@@ -416,9 +388,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       const childNode: WorkpackageStep = this.nestedNodeMap.get(flatNode.id);
       this.workingPlanStateService.dispatchRemoveWorkpackageStep(parentNode.id, childNode.id, childNode.workspaceItemId);
     }
-    // We use 'next' to be sure that the event is emitted
-    this.editModes$.value.delete(flatNode.id);
-    this.editModes$.next(this.editModes$.value);
     // MouseOver map update
     this.chartChangeColorIsOver.delete(flatNode.id);
     // Milestones map update
@@ -930,24 +899,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     if (wpMetadata.length !== 0 || wpStepMetadata.length !== 0) {
       this.workingPlanService.updateAllWorkpackageMetadata(wpMetadata, wpStepMetadata);
     }
-  }
-
-  /**
-   * Retrieve edit modes.
-   *
-   * @param nodes string
-   */
-  private retrieveEditMode(nodes: WorkpacakgeFlatNode[]): void {
-    this.subs.push(from(nodes).pipe(
-      concatMap((node: WorkpacakgeFlatNode) => this.editItemService.searchEditModesByID(node.id).pipe(
-        map((availableModes: EditItemMode[]) => {
-          const modes = availableModes.filter((mode) => mode.name === environment.projects.projectsEntityEditMode);
-          return { nodeId: node.id, modes };
-        })
-      ))
-    ).subscribe((entry: WorkpackageEditModes) => {
-      this.editModes$.next(this.editModes$.value.set(entry.nodeId, entry.modes));
-    }));
   }
 
   /**
