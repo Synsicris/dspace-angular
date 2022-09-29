@@ -85,10 +85,10 @@
                   <i class="fas fa-plus fa-fw"></i>
                 </button>
                 <button data-test="deleteMemberToAllGroups"
-                  *ngIf="showInvitationAction && (ePerson.memberOfGroup) && (isAdmin$ | async)"
-                  (click)="deleteMemberToAllGroups(ePerson)" class="btn btn-outline-danger btn-sm"
-                  title="{{messagePrefix + '.table.edit.buttons.remove' | translate: {name: ePerson.eperson.name} }}">
-                  <i class="fas fa-trash-alt fa-fw"></i>
+                        *ngIf="showWithdrawActions && (ePerson.memberOfGroup) && (isAdmin$ | async)"
+                        (click)="openModal(ePerson);" class="btn btn-outline-danger btn-sm"
+                        title="{{messagePrefix + '.table.edit.buttons.withdraw' | translate: {name: ePerson.eperson.name} }}">
+                  <i class="fas fa-user-slash"></i>
                 </button>
 
                 <button
@@ -154,13 +154,13 @@
               {{messagePrefix + '.table.netid' | translate}}: {{ ePerson.eperson.netid ? ePerson.eperson.netid : '-' }}
             </td>
             <td *ngIf="showEditActions || showWithdrawActions" class="align-middle">
-              <div *ngIf="!showWithdrawActions || (isAdmin$ | async)" class="btn-group edit-field">
+              <div *ngIf="!showWithdrawActions" class="btn-group edit-field">
                 <button (click)="deleteMemberFromGroup(ePerson)" class="btn btn-outline-danger btn-sm"
                   title="{{messagePrefix + '.table.edit.buttons.remove' | translate: {name: ePerson.eperson.name} }}">
                   <i class="fas fa-trash-alt fa-fw"></i>
                 </button>
               </div>
-              <div *ngIf="showWithdrawActions && !(isAdmin$ | async)" class="btn-group edit-field">
+              <div *ngIf="showWithdrawActions" class="btn-group edit-field">
                 <button (click)="openModal(ePerson);" class="btn btn-outline-danger btn-sm"
                   title="{{messagePrefix + '.table.edit.buttons.withdraw' | translate: {name: ePerson.eperson.name} }}">
                   <i class="fas fa-user-slash"></i>

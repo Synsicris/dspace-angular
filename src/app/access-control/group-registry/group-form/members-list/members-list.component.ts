@@ -441,7 +441,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
     modalRef.componentInstance.confirm = () => {
       this.modalService.dismissAll();
-      this.deleteMemberFromGroup(ePerson);
+      this.deleteMemberToAllGroups(ePerson);
     };
 
   }

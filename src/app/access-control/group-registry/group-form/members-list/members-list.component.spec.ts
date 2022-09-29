@@ -251,6 +251,7 @@ describe('MembersListComponent', () => {
 
         beforeEach(() => {
           component.showInvitationAction = true;
+          component.showWithdrawActions = true;
           fixture.detectChanges();
         });
 
