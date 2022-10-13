@@ -1,0 +1,9 @@
+<div class="container">
+    <ds-alert [content]="helpMessageLabel | translate"></ds-alert>
+    <ds-members-list *ngIf="groupBeingEdited != null" [overrideAdmin]="true" [showEditActions]="false"
+        [showWithdrawActions]="true" [showInvitationPersonSection]="true" [showHeadingTitle]="false" [showId]="false"
+        [showInvitationAction]="true" [messagePrefix]="messagePrefix + '.members-list'"
+        (addMemberToMultipleGroups)="addMemberToGroup($event)"
+        (deleteMemberToMultipleGroups)="deleteMemberToGroup($event)" (sendInvitation)="sendInvitation($event)">
+    </ds-members-list>
+</div>

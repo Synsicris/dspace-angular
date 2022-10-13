@@ -588,6 +588,8 @@
 
   "admin.access-control.groups.form.return": "Back",
 
+  "admin.access-control.groups.project-managers-group.breadcrumbs": "Project Managers Group",
+
   "admin.notifications.openairebroker.breadcrumbs": "OpenAIRE Broker",
 
   "admin.notifications.openairebroker.page.title": "OpenAIRE Broker",
@@ -1461,6 +1463,8 @@
   "context-menu.actions.subscription.notification.here-text": "Subscription Summary",
 
   "context-menu.actions.subscription.notification.content": "Subscription Updated Successfully, click {{here}} to see subscrition summary.",
+
+  "context-menu.actions.project-managers-group": "<i class=\"fas fa-user-friends\"></i> Project Managers Group",
 
   "RELATION.Person.researchoutputs.search.results.head": "Research Outputs",
 

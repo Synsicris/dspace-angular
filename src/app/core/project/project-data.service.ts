@@ -240,7 +240,7 @@ export class ProjectDataService extends CommunityDataService {
    * @return the Community as an Observable
    */
   getFundingCommunityByItemId(itemId: string): Observable<RemoteData<Community>> {
-    return this.getRelatedCommunityByItemId(itemId, FUNDING_RELATION_METADATA, followLink('owningCollection', {}, followLink('parentCommunity')))
+    return this.getRelatedCommunityByItemId(itemId, FUNDING_RELATION_METADATA, followLink('owningCollection', {}, followLink('parentCommunity')));
   }
 
   /**
@@ -250,7 +250,7 @@ export class ProjectDataService extends CommunityDataService {
    * @return the Community as an Observable
    */
   getProjectCommunityByItemId(itemId: string): Observable<RemoteData<Community>> {
-    return this.getRelatedCommunityByItemId(itemId, PROJECT_RELATION_METADATA, followLink('owningCollection', {}, followLink('parentCommunity')))
+    return this.getRelatedCommunityByItemId(itemId, PROJECT_RELATION_METADATA, followLink('owningCollection', {}, followLink('parentCommunity')));
   }
 
   /**
@@ -339,7 +339,7 @@ export class ProjectDataService extends CommunityDataService {
       getFirstCompletedRemoteData(),
       mergeMap((itemRD: RemoteData<Item>) => {
         if (itemRD.hasSucceeded) {
-          if (itemRD.payload.entityType === PROJECT_ENTITY || (itemRD.payload.entityType === FUNDING_ENTITY && relationMetadata === FUNDING_RELATION_METADATA) ) {
+          if (itemRD.payload.entityType === PROJECT_ENTITY || (itemRD.payload.entityType === FUNDING_ENTITY && relationMetadata === FUNDING_RELATION_METADATA)) {
             return this.itemService.findById(itemId, true, true, ...linksToFollow);
           } else {
             const metadataValue = Metadata.first(itemRD.payload.metadata, relationMetadata);
@@ -615,7 +615,7 @@ export class ProjectDataService extends CommunityDataService {
    * @return Observable<Community>
    */
   private fetchSearchCommunity(searchOptions: PaginatedSearchOptions, ...linksToFollow: FollowLinkConfig<Community>[]): Observable<Community> {
-    return this.searchService.search(searchOptions,null, false).pipe(
+    return this.searchService.search(searchOptions, null, false).pipe(
       getFirstSucceededRemoteData(),
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
