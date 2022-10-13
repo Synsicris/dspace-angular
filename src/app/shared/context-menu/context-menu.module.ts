@@ -31,7 +31,7 @@ import { EasyOnlineImportMenuComponent } from './easy-online-import/easy-online-
 import { CreateProjectMenuComponent } from './create-project/create-project-menu.component';
 import { ViewProjectItemsMenuComponent } from './view-project-items/view-project-items-menu.component';
 import { ManageProjectMembersMenuComponent } from './manage-project-members/manage-project-members-menu.component';
-import { ProjectManagersGroupMenuComponent } from './project-managers-group/project-managers-group-menu.component';
+import { ManageGroupMenuComponent } from './manage-group/manage-group-menu.component';
 
 const COMPONENTS = [
   BulkImportMenuComponent,
@@ -57,7 +57,7 @@ const COMPONENTS = [
   ViewProjectItemsMenuComponent,
   ManageProjectMembersMenuComponent,
   EditItemPermissionsMenuComponent,
-  ProjectManagersGroupMenuComponent
+  ManageGroupMenuComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -82,7 +82,7 @@ const ENTRY_COMPONENTS = [
   ViewProjectItemsMenuComponent,
   ManageProjectMembersMenuComponent,
   EditItemPermissionsMenuComponent,
-  ProjectManagersGroupMenuComponent
+  ManageGroupMenuComponent
 ];
 
 const MODULE = [

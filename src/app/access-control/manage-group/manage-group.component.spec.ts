@@ -21,7 +21,6 @@ describe('ManageGroupComponent', () => {
   let fixture: ComponentFixture<ManageGroupComponent>;
   let mockGroups;
   let notificationService: NotificationsServiceStub = new NotificationsServiceStub();
-  let spyGetGroups;
   let modalService;
   let scheduler;
 
@@ -59,7 +58,9 @@ describe('ManageGroupComponent', () => {
   const mockEperson: EPerson = new EPerson();
 
   const route = {
-    params: of({ id: 'publications' })
+    paramMap: of({
+      params: { id: GroupMock.id }
+    })
   };
 
   beforeEach(async () => {
@@ -91,12 +92,8 @@ describe('ManageGroupComponent', () => {
     scheduler = getTestScheduler();
     fixture = TestBed.createComponent(ManageGroupComponent);
     component = fixture.componentInstance;
-    component.targetGroup = GroupMock;
-    component.relatedCommunity = mockCommunity;
-    mockGroupDataService.getActiveGroup.and.returnValue(of(GroupMock));
+    mockGroupDataService.findById.and.returnValue(of(GroupMock));
 
-    spyGetGroups = spyOn((component as any), 'getGroups');
-    spyGetGroups.and.returnValue(of([GroupMock.id, GroupMock2.id]));
     fixture.detectChanges();
   });
 
@@ -105,39 +102,34 @@ describe('ManageGroupComponent', () => {
   });
 
   it('when sendInvitation is called should call getGroups and modal open', () => {
+    component.targetGroup = GroupMock;
+    fixture.detectChanges();
     modalService = (component as any).modalService;
     spyOn(modalService, 'open').and.returnValue(Object.assign({ componentInstance: Object.assign({ response: of(true) }) }));
     component.sendInvitation('test@test.com');
     fixture.detectChanges();
-    expect(spyGetGroups).toHaveBeenCalled();
     expect(modalService.open).toHaveBeenCalled();
   });
 
   it('when addMemberToGroup is called should call getGroupEntity and addMemberToGroup', () => {
-    spyOn((component as any), 'getGroupEntity').and.returnValues(
-      createSuccessfulRemoteDataObject$(mockGroups[0]), createSuccessfulRemoteDataObject$(mockGroups[1]));
     spyOn((component as any), 'refreshGroupsMembers');
     mockGroupDataService.addMemberToGroup.and.returnValues(createNoContentRemoteDataObject$(), createNoContentRemoteDataObject$());
     scheduler.schedule(() => component.addMemberToGroup(mockEperson));
     scheduler.flush();
 
-    expect((component as any).getGroupEntity).toHaveBeenCalledTimes(2);
-    expect(mockGroupDataService.addMemberToGroup).toHaveBeenCalledTimes(2);
+    expect(mockGroupDataService.addMemberToGroup).toHaveBeenCalled();
     expect((component as any).refreshGroupsMembers).toHaveBeenCalled();
     expect(notificationService.success).toHaveBeenCalled();
   });
 
 
   it('when deleteMemberToGroup is called should call getGroupEntity and deleteMemberFromGroup', () => {
-    spyOn((component as any), 'getGroupEntity').and.returnValues(
-      createSuccessfulRemoteDataObject$(mockGroups[0]), createSuccessfulRemoteDataObject$(mockGroups[1]));
     spyOn((component as any), 'refreshGroupsMembers');
     mockGroupDataService.deleteMemberFromGroup.and.returnValues(createNoContentRemoteDataObject$(), createNoContentRemoteDataObject$());
     scheduler.schedule(() => component.deleteMemberToGroup(mockEperson));
     scheduler.flush();
 
-    expect((component as any).getGroupEntity).toHaveBeenCalledTimes(2);
-    expect(mockGroupDataService.deleteMemberFromGroup).toHaveBeenCalledTimes(2);
+    expect(mockGroupDataService.deleteMemberFromGroup).toHaveBeenCalled();
     expect((component as any).refreshGroupsMembers).toHaveBeenCalled();
     expect(notificationService.success).toHaveBeenCalled();
   });

@@ -3,33 +3,53 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TestScheduler } from 'rxjs/testing';
-import { getTestScheduler } from 'jasmine-marbles';
 
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
 import { Item } from '../../../core/shared/item.model';
-import { ProjectManagersGroupMenuComponent } from './project-managers-group-menu.component';
+import { ManageGroupMenuComponent } from './manage-group-menu.component';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { of } from 'rxjs';
+import { ConfigurationDataService } from 'src/app/core/data/configuration-data.service';
+import { createSuccessfulRemoteDataObject } from '../../remote-data.utils';
+import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
+import { CONFIG_PROPERTY } from '../../../core/shared/config-property.resource-type';
 
-describe('AuditItemMenuComponent', () => {
-  let component: ProjectManagersGroupMenuComponent;
+describe('ManageGroupMenuComponent', () => {
+  let component: ManageGroupMenuComponent;
   let componentAsAny: any;
-  let fixture: ComponentFixture<ProjectManagersGroupMenuComponent>;
-  let scheduler: TestScheduler;
+  let fixture: ComponentFixture<ManageGroupMenuComponent>;
+  let authorizationService: AuthorizationDataService;
+
+  const config = Object.assign({}, new ConfigurationProperty(), {
+    id: '12312312312',
+    type: CONFIG_PROPERTY,
+    values: ['123332211']
+  });
+
+  const configurationDataService: ConfigurationDataService = jasmine.createSpyObj('configurationDataService', {
+    findByPropertyName: createSuccessfulRemoteDataObject(config)
+  });
 
   let dso: DSpaceObject;
 
   beforeEach(async(() => {
     dso = Object.assign(new Item(), {
       id: 'test-item',
+      entityType: 'Person',
       _links: {
         self: { href: 'test-item-selflink' }
       }
     });
 
+    authorizationService = jasmine.createSpyObj('authorizationService', {
+      isAuthorized: of(true),
+    });
+
+
     TestBed.configureTestingModule({
-      declarations: [ProjectManagersGroupMenuComponent],
+      declarations: [ManageGroupMenuComponent],
       imports: [
         RouterTestingModule.withRoutes([]),
         TranslateModule.forRoot({
@@ -42,16 +62,18 @@ describe('AuditItemMenuComponent', () => {
       providers: [
         { provide: 'contextMenuObjectProvider', useValue: dso },
         { provide: 'contextMenuObjectTypeProvider', useValue: DSpaceObjectType.ITEM },
+        { provide: AuthorizationDataService, useValue: authorizationService },
+        { provide: ConfigurationDataService, useValue: configurationDataService },
       ]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    scheduler = getTestScheduler();
-    fixture = TestBed.createComponent(ProjectManagersGroupMenuComponent);
+    fixture = TestBed.createComponent(ManageGroupMenuComponent);
     component = fixture.componentInstance;
     componentAsAny = fixture.componentInstance;
     component.contextMenuObject = dso;
+    fixture.detectChanges();
   });
 
   it('should create', () => {

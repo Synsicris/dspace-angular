@@ -1,21 +1,17 @@
-import { PERSON_ENTITY } from './../../../core/project/project-data.service';
+import { PERSON_ENTITY } from '../../../core/project/project-data.service';
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
-import { ProjectGroupService } from '../../../core/project/project-group.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { ProjectDataService } from '../../../core/project/project-data.service';
-import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
 import { getFirstSucceededRemoteDataPayload } from 'src/app/core/shared/operators';
 import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
@@ -24,11 +20,11 @@ import { ConfigurationProperty } from '../../../core/shared/configuration-proper
  * This component renders a context menu option that provides to send invitation to a project.
  */
 @Component({
-  selector: 'ds-context-project-managers-group',
-  templateUrl: './project-managers-group-menu.component.html'
+  selector: 'ds-context-manage-group',
+  templateUrl: './manage-group-menu.component.html'
 })
 @rendersContextMenuEntriesForType(DSpaceObjectType.ITEM)
-export class ProjectManagersGroupMenuComponent extends ContextMenuEntryComponent {
+export class ManageGroupMenuComponent extends ContextMenuEntryComponent {
 
   /**
    * Representing if the invitation is related to a funding
@@ -46,18 +42,12 @@ export class ProjectManagersGroupMenuComponent extends ContextMenuEntryComponent
    * @param {DSpaceObject} injectedContextMenuObject
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
-   * @param {NgbModal} modalService
-   * @param {ProjectGroupService} projectGroupService
-   * @param {ProjectDataService} projectService
    * @param {Router} router
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: any,
     protected authorizationService: AuthorizationDataService,
-    protected modalService: NgbModal,
-    protected projectGroupService: ProjectGroupService,
-    protected projectService: ProjectDataService,
     protected router: Router,
     protected configurationDataService: ConfigurationDataService
   ) {

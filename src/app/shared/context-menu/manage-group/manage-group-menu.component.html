@@ -1,4 +1,4 @@
 <button *ngIf="canShow() && (isFunderOrganizationalManager() | async)" class="dropdown-item"
-        [innerHTML]="'context-menu.actions.project-managers-group' | translate"
+        [innerHTML]="'context-menu.actions.manage-group' | translate"
         (click)="navigateToManage();$event.preventDefault();$event.stopImmediatePropagation();">
 </button>

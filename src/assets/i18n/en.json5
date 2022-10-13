@@ -588,7 +588,7 @@
 
   "admin.access-control.groups.form.return": "Back",
 
-  "admin.access-control.groups.project-managers-group.breadcrumbs": "Project Managers Group",
+  "admin.access-control.groups.project-managers-group.breadcrumbs": "Manage Group Members",
 
   "admin.notifications.openairebroker.breadcrumbs": "OpenAIRE Broker",
 
@@ -1464,7 +1464,7 @@
 
   "context-menu.actions.subscription.notification.content": "Subscription Updated Successfully, click {{here}} to see subscrition summary.",
 
-  "context-menu.actions.project-managers-group": "<i class=\"fas fa-user-friends\"></i> Project Managers Group",
+  "context-menu.actions.manage-group": "<i class=\"fas fa-user-friends\"></i> Manage Group Members",
 
   "RELATION.Person.researchoutputs.search.results.head": "Research Outputs",
 
@@ -4491,6 +4491,10 @@
   "project.manage.members-list.table.withdraw.tooltip": "You can withdraw role",
 
   "project.manage.members-list.table.withdraw.send": "Send Invitation",
+
+  "project.manage.members-list.table.identity": "Identity",
+
+  "project.manage.members-group-help": "Help message here",
 
   "project.manage.notification.success.addMember": "Successfully added member",
 
