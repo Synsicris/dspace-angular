@@ -1,6 +1,6 @@
 import { getFirstSucceededRemoteData, getRemoteDataPayload } from './../../core/shared/operators';
 import { Group } from './../../core/eperson/models/group.model';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -17,7 +17,7 @@ import { EPerson } from '../../core/eperson/models/eperson.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'ds-manage-group',
+  selector: 'ds-manage-project-funders-group',
   templateUrl: './manage-group.component.html',
   styleUrls: ['./manage-group.component.scss']
 })

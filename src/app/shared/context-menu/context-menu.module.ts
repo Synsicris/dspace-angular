@@ -1,6 +1,5 @@
 import { EditItemPermissionsMenuComponent } from './edit-item-permissions/edit-item-permissions-menu.component';
 import { SharedModule } from './../shared.module';
-import { Version } from './../../core/shared/version.model';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -25,13 +24,17 @@ import { ItemVersionMenuComponent } from './item-version/item-version-menu.compo
 import { ItemVersionContainerComponent } from './item-version/item-version-container/item-version-container.component';
 import { DeleteProjectMenuComponent } from './delete-project/delete-project-menu.component';
 import { ProjectAdminInvitationMenuComponent } from './project-invitation/project-admin-invitation-menu.component';
-import { ProjectMembersInvitationMenuComponent } from './project-members-invitation/project-members-invitation-menu.component';
+import {
+  ProjectMembersInvitationMenuComponent
+} from './project-members-invitation/project-members-invitation-menu.component';
 import { GenerateReportMenuComponent } from './generate-report/generate-report-menu.component';
 import { EasyOnlineImportMenuComponent } from './easy-online-import/easy-online-import-menu.component';
 import { CreateProjectMenuComponent } from './create-project/create-project-menu.component';
 import { ViewProjectItemsMenuComponent } from './view-project-items/view-project-items-menu.component';
 import { ManageProjectMembersMenuComponent } from './manage-project-members/manage-project-members-menu.component';
-import { ManageGroupMenuComponent } from './manage-group/manage-group-menu.component';
+import {
+  ManageProjectFundersGroupMenuComponent
+} from './manage-project-funders-group/manage-project-funders-group-menu.component';
 
 const COMPONENTS = [
   BulkImportMenuComponent,
@@ -57,7 +60,7 @@ const COMPONENTS = [
   ViewProjectItemsMenuComponent,
   ManageProjectMembersMenuComponent,
   EditItemPermissionsMenuComponent,
-  ManageGroupMenuComponent
+  ManageProjectFundersGroupMenuComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -82,7 +85,7 @@ const ENTRY_COMPONENTS = [
   ViewProjectItemsMenuComponent,
   ManageProjectMembersMenuComponent,
   EditItemPermissionsMenuComponent,
-  ManageGroupMenuComponent
+  ManageProjectFundersGroupMenuComponent
 ];
 
 const MODULE = [

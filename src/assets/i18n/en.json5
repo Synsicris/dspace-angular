@@ -1464,7 +1464,7 @@
 
   "context-menu.actions.subscription.notification.content": "Subscription Updated Successfully, click {{here}} to see subscrition summary.",
 
-  "context-menu.actions.manage-group": "<i class=\"fas fa-user-friends\"></i> Manage Group Members",
+  "context-menu.actions.manage-project-funders-group": "<i class=\"fas fa-user-friends\"></i> Manage project funders",
 
   "RELATION.Person.researchoutputs.search.results.head": "Research Outputs",
 
