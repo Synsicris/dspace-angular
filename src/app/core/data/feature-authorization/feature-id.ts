@@ -35,9 +35,11 @@ export enum FeatureID {
   CanCreateCommunities = 'canCreateCommunities',
   CanEditItemGrants = 'canEditedGrants',
   CanMakeEasyOnlineImport = 'canMakeEasyOnlineImport',
-  isAdminOfProject = 'isAdminOfProject',
+  isCoordinatorOfProject = 'isCoordinatorOfProject',
+  isCoordinatorOfFunding = 'isCoordinatorOfFunding',
   isMemberOfProject = 'isMemberOfProject',
-  isAdminOfFunding = 'isAdminOfFunding',
   isMemberOfFunding = 'isMemberOfFunding',
+  isFunderOfProject = 'isFunderOfProject',
+  isReaderOfProject = 'isReaderOfProject',
   isItemEditable = 'isItemEditable',
 }

@@ -190,13 +190,13 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
     let groups$: Observable<string[]>;
     if (!this.isFunding) {
       if (this.isAdminGroup) {
-        groups$ = this.projectGroupService.getInvitationProjectAllGroupsByCommunity(this.relatedCommunity);
+        groups$ = this.projectGroupService.getInvitationProjectCoordinatorsAndMembersGroupsByCommunity(this.relatedCommunity);
       } else {
         groups$ = this.projectGroupService.getInvitationProjectMembersGroupsByCommunity(this.relatedCommunity);
       }
     } else {
       if (this.isAdminGroup) {
-        groups$ = this.projectGroupService.getInvitationFundingAdminsGroupsByCommunity(this.relatedCommunity);
+        groups$ = this.projectGroupService.getInvitationFundingCoordinatorsAndMembersGroupsByCommunity(this.relatedCommunity);
       } else {
         groups$ = this.projectGroupService.getInvitationFundingMembersGroupsByCommunity(this.relatedCommunity);
       }
