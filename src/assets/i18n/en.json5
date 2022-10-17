@@ -6874,9 +6874,13 @@
 
   "invitation.ignore-btn": "Ignore",
 
-  "invitation.group.project.admin": "Coordinators group for project : ",
+  "invitation.group.project.coordinators": "Coordinators group for project : ",
+
+  "invitation.group.project.funders": "Funders group for project : ",
 
   "invitation.group.project.members": "Members group for project : ",
+
+  "invitation.group.project.readers": "Readers group for project : ",
 
   "invitation.group.funding.admin": "Coordinators group for funding: ",
 
