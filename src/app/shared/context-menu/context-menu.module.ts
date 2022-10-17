@@ -32,6 +32,7 @@ import { CreateProjectMenuComponent } from './create-project/create-project-menu
 import { ViewProjectItemsMenuComponent } from './view-project-items/view-project-items-menu.component';
 import { ManageProjectMembersMenuComponent } from './manage-project-members/manage-project-members-menu.component';
 import { ManageGroupMenuComponent } from './manage-group/manage-group-menu.component';
+import { ManageProgrammeGroupMenuComponent } from './manage-programme-group/manage-programme-group-menu.component';
 
 const COMPONENTS = [
   BulkImportMenuComponent,
@@ -57,7 +58,8 @@ const COMPONENTS = [
   ViewProjectItemsMenuComponent,
   ManageProjectMembersMenuComponent,
   EditItemPermissionsMenuComponent,
-  ManageGroupMenuComponent
+  ManageGroupMenuComponent,
+  ManageProgrammeGroupMenuComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -82,7 +84,8 @@ const ENTRY_COMPONENTS = [
   ViewProjectItemsMenuComponent,
   ManageProjectMembersMenuComponent,
   EditItemPermissionsMenuComponent,
-  ManageGroupMenuComponent
+  ManageGroupMenuComponent,
+  ManageProgrammeGroupMenuComponent,
 ];
 
 const MODULE = [

@@ -68,6 +68,7 @@ export const SUBCONTRACTOR_ENTITY_METADATA = 'subcontractor';
 export const PROJECTPATNER_ENTITY_METADATA = 'projectpartner';
 export const POLICY_GROUP_METADATA = 'cris.policy.group';
 export const POLICY_SHARED_METADATA = 'cris.project.shared';
+export const PROGRAMME_ENTITY = 'programme';
 
 export enum ProjectGrantsTypes {
   Project = 'project',
