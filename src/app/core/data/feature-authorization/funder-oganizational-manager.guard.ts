@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable, of as observableOf } from 'rxjs';
-import { FeatureID } from '../../core/data/feature-authorization/feature-id';
-import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
-import { AuthService } from '../../core/auth/auth.service';
-import { HALEndpointService } from '../../core/shared/hal-endpoint.service';
-import { map } from 'rxjs/operators';
-import { SingleFeatureAuthorizationGuard } from '../../core/data/feature-authorization/feature-authorization-guard/single-feature-authorization.guard';
+import { FeatureID } from './feature-id';
+import { AuthorizationDataService } from './authorization-data.service';
+import { AuthService } from '../../auth/auth.service';
+import { SingleFeatureAuthorizationGuard } from './feature-authorization-guard/single-feature-authorization.guard';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ManageGroupsGuard extends SingleFeatureAuthorizationGuard {
+export class FunderOrganizationalGuard extends SingleFeatureAuthorizationGuard {
 
   constructor(
     protected authorizationService: AuthorizationDataService,

@@ -59,7 +59,7 @@ export class ManageProjectFundersGroupMenuComponent extends ContextMenuEntryComp
         this.isFunderOrganizationalManager$.next(isCoordinator);
       });
 
-      this.configurationDataService.findByPropertyName('funder-organisational-managers.group').pipe(
+      this.configurationDataService.findByPropertyName('funders-project-managers.group').pipe(
         getFirstSucceededRemoteDataPayload(),
         map((configProperty: ConfigurationProperty) => configProperty?.values?.length > 0 ? configProperty.values[0] : null)
       ).subscribe((groupId: string) => {
