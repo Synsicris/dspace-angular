@@ -1,8 +1,8 @@
-import { PERSON_ENTITY } from '../../../core/project/project-data.service';
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
@@ -13,28 +13,26 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
 import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
-import { getFirstSucceededRemoteDataPayload } from 'src/app/core/shared/operators';
+import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
+import { PERSON_ENTITY } from '../../../core/project/project-data.service';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
  */
 @Component({
-  selector: 'ds-context-manage-group',
-  templateUrl: './manage-group-menu.component.html'
+  selector: 'ds-context-manage-project-funders-group',
+  templateUrl: './manage-project-funders-group-menu.component.html'
 })
 @rendersContextMenuEntriesForType(DSpaceObjectType.ITEM)
-export class ManageGroupMenuComponent extends ContextMenuEntryComponent {
+export class ManageProjectFundersGroupMenuComponent extends ContextMenuEntryComponent {
 
   /**
-   * Representing if the invitation is related to a funding
+   * A boolean representing if user is an organizational funder
    */
-  isFunding;
+  protected isFunderOrganizationalManager$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  /**
-   * A boolean representing if user is coordinator for the current project/funding
-   */
-  protected isCoordinator$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  protected funderGroupId: string;
 
   /**
    * Initialize instance variables
@@ -43,6 +41,7 @@ export class ManageGroupMenuComponent extends ContextMenuEntryComponent {
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
    * @param {Router} router
+   * @param {ConfigurationDataService} configurationDataService
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
@@ -54,6 +53,20 @@ export class ManageGroupMenuComponent extends ContextMenuEntryComponent {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ManageProjectManagers);
   }
 
+  ngOnInit(): void {
+    if (this.canShow()) {
+      this.checkIsFunderOrganizationalManager().subscribe((isCoordinator: boolean) => {
+        this.isFunderOrganizationalManager$.next(isCoordinator);
+      });
+
+      this.configurationDataService.findByPropertyName('funders-project-managers.group').pipe(
+        getFirstSucceededRemoteDataPayload(),
+        map((configProperty: ConfigurationProperty) => configProperty?.values?.length > 0 ? configProperty.values[0] : null)
+      ).subscribe((groupId: string) => {
+        this.funderGroupId = groupId;
+      });
+    }
+  }
 
   /**
    * Check if current Item is a Project or a Funding
@@ -63,26 +76,29 @@ export class ManageGroupMenuComponent extends ContextMenuEntryComponent {
   }
 
   /**
+   * Check if user is coordinator for this project/funding
+   */
+  isFunderOrganizationalManager(): Observable<boolean> {
+    return this.isFunderOrganizationalManager$.asObservable();
+  }
+
+  /**
    * Navigate to manage members page
    */
   navigateToManage() {
-    this.configurationDataService.findByPropertyName('funder-organisational-managers.group').pipe(
-      getFirstSucceededRemoteDataPayload(),
-    ).subscribe((configProperty: ConfigurationProperty) => {
-      if (configProperty.values?.length > 0) {
-        this.router.navigate([this.getGroupRegistryRouterLink(), configProperty.values[0], 'managemembers']);
-      }
-    });
+    if (this.funderGroupId) {
+      this.router.navigate([this.getGroupRegistryRouterLink(), this.funderGroupId, 'managemembers']);
+    }
   }
 
   /**
    * Check if user is coordinator for this project/funding
    */
-  isFunderOrganizationalManager(): Observable<boolean> {
+  private checkIsFunderOrganizationalManager(): Observable<boolean> {
     return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager);
   }
 
-  public getGroupRegistryRouterLink(): string {
+  private getGroupRegistryRouterLink(): string {
     return '/access-control/groups';
   }
 

@@ -6,9 +6,14 @@ import { GroupsRegistryComponent } from './group-registry/groups-registry.compon
 import { GROUP_EDIT_PATH } from './access-control-routing-paths';
 import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
 import { GroupPageGuard } from './group-registry/group-page.guard';
-import { GroupAdministratorGuard } from '../core/data/feature-authorization/feature-authorization-guard/group-administrator.guard';
-import { SiteAdministratorGuard } from '../core/data/feature-authorization/feature-authorization-guard/site-administrator.guard';
+import {
+  GroupAdministratorGuard
+} from '../core/data/feature-authorization/feature-authorization-guard/group-administrator.guard';
+import {
+  SiteAdministratorGuard
+} from '../core/data/feature-authorization/feature-authorization-guard/site-administrator.guard';
 import { ManageGroupComponent } from './manage-group/manage-group.component';
+import { FunderOrganizationalGuard } from '../core/data/feature-authorization/funder-oganizational-manager.guard';
 
 @NgModule({
   imports: [
@@ -56,7 +61,7 @@ import { ManageGroupComponent } from './manage-group/manage-group.component';
           breadcrumb: I18nBreadcrumbResolver
         },
         data: { title: 'admin.access-control.groups.title.project-managers-group', breadcrumbKey: 'admin.access-control.groups.project-managers-group' },
-        // canActivate: [GroupPageGuard]
+        canActivate: [FunderOrganizationalGuard]
       }
     ])
   ]
