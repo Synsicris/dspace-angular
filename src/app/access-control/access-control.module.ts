@@ -11,6 +11,7 @@ import { SubgroupsListComponent } from './group-registry/group-form/subgroup-lis
 import { GroupsRegistryComponent } from './group-registry/groups-registry.component';
 import { FormModule } from '../shared/form/form.module';
 import { ConfirmWithdrawComponent } from './group-registry/group-form/members-list/confirm-withdraw/confirm-withdraw.component';
+import { ManageGroupComponent } from './manage-group/manage-group.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ConfirmWithdrawComponent } from './group-registry/group-form/members-li
     GroupFormComponent,
     SubgroupsListComponent,
     MembersListComponent,
-    ConfirmWithdrawComponent
+    ConfirmWithdrawComponent,
+    ManageGroupComponent
   ],
   exports: [
     EPeopleRegistryComponent,
@@ -35,7 +37,8 @@ import { ConfirmWithdrawComponent } from './group-registry/group-form/members-li
     GroupsRegistryComponent,
     GroupFormComponent,
     SubgroupsListComponent,
-    MembersListComponent
+    MembersListComponent,
+    ManageGroupComponent
   ]
 })
 /**
