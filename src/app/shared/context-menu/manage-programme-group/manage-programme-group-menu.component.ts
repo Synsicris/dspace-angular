@@ -13,8 +13,9 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
 import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
-import { getFirstSucceededRemoteDataPayload } from 'src/app/core/shared/operators';
-import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
+import { getFirstSucceededRemoteListPayload } from '../../../core/shared/operators';
+import { GroupDataService } from '../../../core/eperson/group-data.service';
+import { Group } from '../../../core/eperson/models/group.model';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -49,7 +50,8 @@ export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: any,
     protected authorizationService: AuthorizationDataService,
     protected router: Router,
-    protected configurationDataService: ConfigurationDataService
+    protected configurationDataService: ConfigurationDataService,
+    protected groupDataService: GroupDataService,
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ManageProjectManagers);
   }
@@ -66,11 +68,11 @@ export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent
    * Navigate to manage members page
    */
   navigateToManage() {
-    this.configurationDataService.findByPropertyName('funder-organisational-managers.group').pipe(
-      getFirstSucceededRemoteDataPayload(),
-    ).subscribe((configProperty: ConfigurationProperty) => {
-      if (configProperty.values?.length > 0) {
-        this.router.navigate([this.getGroupRegistryRouterLink(), configProperty.values[0], 'managemembers']);
+    this.groupDataService.searchGroups(`programme_${this.injectedContextMenuObject.id}_group`).pipe(
+      getFirstSucceededRemoteListPayload(),
+    ).subscribe((groups: Group[]) => {
+      if (groups?.length > 0) {
+        this.router.navigate([this.getGroupRegistryRouterLink(), groups[0].id, 'managemembers']);
       }
     });
   }
