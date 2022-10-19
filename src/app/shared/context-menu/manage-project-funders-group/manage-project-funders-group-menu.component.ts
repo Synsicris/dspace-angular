@@ -9,13 +9,13 @@ import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model'
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
-import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
 import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
 import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
 import { PERSON_ENTITY } from '../../../core/project/project-data.service';
+import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -46,7 +46,7 @@ export class ManageProjectFundersGroupMenuComponent extends ContextMenuEntryComp
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: any,
-    protected authorizationService: AuthorizationDataService,
+    protected authorizationService: ProjectAuthorizationService,
     protected router: Router,
     protected configurationDataService: ConfigurationDataService
   ) {
@@ -95,7 +95,7 @@ export class ManageProjectFundersGroupMenuComponent extends ContextMenuEntryComp
    * Check if user is coordinator for this project/funding
    */
   private checkIsFunderOrganizationalManager(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager);
+    return this.authorizationService.isFunderOrganizationalManager();
   }
 
   private getGroupRegistryRouterLink(): string {
