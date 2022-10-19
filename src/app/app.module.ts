@@ -60,6 +60,7 @@ import { PageInternalServerErrorComponent } from './page-internal-server-error/p
 import { ThemedAdminSidebarComponent } from './admin/admin-sidebar/themed-admin-sidebar.component';
 import { APP_CONFIG, AppConfig } from '../config/app-config.interface';
 import { SocialComponent } from './social/social.component';
+import { ProjectManageVersionComponent } from './project-manage-version/project-manage-version.component';
 
 export function getConfig() {
   return environment;
@@ -206,7 +207,8 @@ const EXPORTS = [
     ...PROVIDERS
   ],
   declarations: [
-    ...DECLARATIONS
+    ...DECLARATIONS,
+    ProjectManageVersionComponent
   ],
   exports: [
     ...EXPORTS,

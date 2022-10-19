@@ -228,12 +228,14 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
               .then((m) => m.ProcessPageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
-          { path: SUGGESTION_MODULE_PATH,
+          {
+            path: SUGGESTION_MODULE_PATH,
             loadChildren: () => import('./suggestions-page/suggestions-page.module')
               .then((m) => m.SuggestionsPageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
-          { path: 'auditlogs',
+          {
+            path: 'auditlogs',
             loadChildren: () => import('./audit-page/audit-page.module')
               .then((m) => m.AuditPageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
@@ -257,7 +259,8 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             path: FORBIDDEN_PATH,
             component: ThemedForbiddenComponent
           },
-          { path: 'coordinator-overview',
+          {
+            path: 'coordinator-overview',
             loadChildren: () => import('./coordinator-page/coordinator-page.module')
               .then((m) => m.CoordinatorPageModule)
           },
@@ -298,12 +301,18 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             loadChildren: () => import('./invitation/invitation.module')
               .then((m) => m.InvitationModule)
           },
+          {
+            path: 'entities/project/:id/manageversions',
+            loadChildren: () => import('./+working-plan-page/working-plan-page.module')
+              .then((m) => m.WorkingPlanPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
           { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
         ]
       }
     ], {
       onSameUrlNavigation: 'reload',
-})
+    })
   ],
   exports: [RouterModule],
 })
