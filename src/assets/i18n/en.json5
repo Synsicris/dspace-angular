@@ -1464,7 +1464,9 @@
 
   "context-menu.actions.subscription.notification.content": "Subscription Updated Successfully, click {{here}} to see subscrition summary.",
 
-  "context-menu.actions.manage-group": "<i class=\"fas fa-user-friends\"></i> Manage Group Members",
+  "context-menu.actions.manage-project-funders-group": "<i class=\"fas fa-user-friends\"></i> Manage project funders",
+
+  "context-menu.actions.manage-programme-group": "<i class=\"fas fa-user-friends\"></i> Manage programme members",
 
   "RELATION.Person.researchoutputs.search.results.head": "Research Outputs",
 
@@ -6874,9 +6876,13 @@
 
   "invitation.ignore-btn": "Ignore",
 
-  "invitation.group.project.admin": "Coordinators group for project : ",
+  "invitation.group.project.coordinators": "Coordinators group for project : ",
+
+  "invitation.group.project.funders": "Funders group for project : ",
 
   "invitation.group.project.members": "Members group for project : ",
+
+  "invitation.group.project.readers": "Readers group for project : ",
 
   "invitation.group.funding.admin": "Coordinators group for funding: ",
 

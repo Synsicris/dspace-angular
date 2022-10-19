@@ -88,14 +88,14 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
    * Check if user is administrator for this project
    */
   isProjectAdmin(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.isAdminOfProject, this.contextMenuObject.self, undefined);
+    return this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self, undefined);
   }
 
   public openInvitationModal() {
     let groups$: Observable<string[]>;
     if (this.isSubproject) {
-      groups$ = this.projectGroupService.getInvitationFundingAdminsGroupsByCommunity(this.relatedCommunity);
-      groups$ = this.projectGroupService.getInvitationFundingAdminsGroupsByCommunity(this.relatedCommunity);
+      groups$ = this.projectGroupService.getInvitationFundingCoordinatorsAndMembersGroupsByCommunity(this.relatedCommunity);
+      groups$ = this.projectGroupService.getInvitationFundingCoordinatorsAndMembersGroupsByCommunity(this.relatedCommunity);
     } else {
       groups$ = this.projectGroupService.getInvitationProjectAllGroupsByCommunity(this.relatedCommunity);
     }

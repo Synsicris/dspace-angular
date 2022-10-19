@@ -96,17 +96,18 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
   private checkIsCoordinator(): Observable<boolean> {
     if (this.isFunding) {
       return combineLatest([
-        this.authorizationService.isAuthorized(FeatureID.isAdminOfProject, this.contextMenuObject.self, undefined),
+        this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self, undefined),
         this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
       ).pipe(
-        map(([isAdmin, isAdminstratorOf]) => isAdmin || isAdminstratorOf),
+        map(([isCoordinator, isAdminstratorOf]) => isCoordinator || isAdminstratorOf),
       );
     } else {
       return combineLatest([
-        this.authorizationService.isAuthorized(FeatureID.isAdminOfProject, this.contextMenuObject.self, undefined),
+        this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, this.contextMenuObject.self, undefined),
+        this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self, undefined),
         this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
       ).pipe(
-        map(([isAdmin, isAdminstratorOf]) => isAdmin || isAdminstratorOf),
+        map(([isFunder, isCoordinator, isAdminstratorOf]) => isFunder || isCoordinator || isAdminstratorOf),
       );
     }
   }

@@ -79,9 +79,9 @@ export class ProjectMembersPageComponent implements OnInit {
       getFirstSucceededRemoteDataPayload(),
       switchMap((community: Community) => {
         if (this.isFunding) {
-          return this.projectGroupService.getInvitationFundingAdminsGroupsByCommunity(community);
+          return this.projectGroupService.getInvitationFundingCoordinatorsAndMembersGroupsByCommunity(community);
         } else {
-          return this.projectGroupService.getProjectAdminsGroupUUIDByCommunity(community);
+          return this.projectGroupService.getProjectCoordinatorsGroupUUIDByCommunity(community);
         }
       }),
       map((groups: string[]) => groups[0]),

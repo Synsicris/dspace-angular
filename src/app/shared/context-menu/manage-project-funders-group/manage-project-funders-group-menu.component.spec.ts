@@ -8,7 +8,7 @@ import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
 import { Item } from '../../../core/shared/item.model';
-import { ManageGroupMenuComponent } from './manage-group-menu.component';
+import { ManageProjectFundersGroupMenuComponent } from './manage-project-funders-group-menu.component';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { of } from 'rxjs';
 import { ConfigurationDataService } from 'src/app/core/data/configuration-data.service';
@@ -16,10 +16,10 @@ import { createSuccessfulRemoteDataObject } from '../../remote-data.utils';
 import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
 import { CONFIG_PROPERTY } from '../../../core/shared/config-property.resource-type';
 
-describe('ManageGroupMenuComponent', () => {
-  let component: ManageGroupMenuComponent;
+describe('ManageProjectFundersGroupMenuComponent', () => {
+  let component: ManageProjectFundersGroupMenuComponent;
   let componentAsAny: any;
-  let fixture: ComponentFixture<ManageGroupMenuComponent>;
+  let fixture: ComponentFixture<ManageProjectFundersGroupMenuComponent>;
   let authorizationService: AuthorizationDataService;
 
   const config = Object.assign({}, new ConfigurationProperty(), {
@@ -49,7 +49,7 @@ describe('ManageGroupMenuComponent', () => {
 
 
     TestBed.configureTestingModule({
-      declarations: [ManageGroupMenuComponent],
+      declarations: [ManageProjectFundersGroupMenuComponent],
       imports: [
         RouterTestingModule.withRoutes([]),
         TranslateModule.forRoot({
@@ -69,7 +69,7 @@ describe('ManageGroupMenuComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ManageGroupMenuComponent);
+    fixture = TestBed.createComponent(ManageProjectFundersGroupMenuComponent);
     component = fixture.componentInstance;
     componentAsAny = fixture.componentInstance;
     component.contextMenuObject = dso;
