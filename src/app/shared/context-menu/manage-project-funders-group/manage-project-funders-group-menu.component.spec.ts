@@ -12,7 +12,7 @@ import { ManageProjectFundersGroupMenuComponent } from './manage-project-funders
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { of } from 'rxjs';
 import { ConfigurationDataService } from 'src/app/core/data/configuration-data.service';
-import { createSuccessfulRemoteDataObject } from '../../remote-data.utils';
+import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
 import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
 import { CONFIG_PROPERTY } from '../../../core/shared/config-property.resource-type';
 
@@ -29,7 +29,7 @@ describe('ManageProjectFundersGroupMenuComponent', () => {
   });
 
   const configurationDataService: ConfigurationDataService = jasmine.createSpyObj('configurationDataService', {
-    findByPropertyName: createSuccessfulRemoteDataObject(config)
+    findByPropertyName: createSuccessfulRemoteDataObject$(config)
   });
 
   let dso: DSpaceObject;

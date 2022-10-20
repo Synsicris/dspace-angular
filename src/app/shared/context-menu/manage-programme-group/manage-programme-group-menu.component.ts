@@ -12,7 +12,6 @@ import { AuthorizationDataService } from '../../../core/data/feature-authorizati
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
 import { getFirstSucceededRemoteListPayload } from '../../../core/shared/operators';
 import { GroupDataService } from '../../../core/eperson/group-data.service';
 import { Group } from '../../../core/eperson/models/group.model';
@@ -45,7 +44,6 @@ export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: any,
     protected authorizationService: AuthorizationDataService,
     protected router: Router,
-    protected configurationDataService: ConfigurationDataService,
     protected groupDataService: GroupDataService,
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ManageProjectManagers);

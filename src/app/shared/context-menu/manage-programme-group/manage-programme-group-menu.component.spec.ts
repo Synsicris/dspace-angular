@@ -15,6 +15,8 @@ import { ConfigurationDataService } from 'src/app/core/data/configuration-data.s
 import { createSuccessfulRemoteDataObject } from '../../remote-data.utils';
 import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
 import { CONFIG_PROPERTY } from '../../../core/shared/config-property.resource-type';
+import { mockGroup } from '../../mocks/submission.mock';
+import { GroupDataService } from '../../../core/eperson/group-data.service';
 
 describe('ManageProgrammeGroupMenuComponent', () => {
   let component: ManageProgrammeGroupMenuComponent;
@@ -28,8 +30,8 @@ describe('ManageProgrammeGroupMenuComponent', () => {
     values: ['123332211']
   });
 
-  const configurationDataService: ConfigurationDataService = jasmine.createSpyObj('configurationDataService', {
-    findByPropertyName: createSuccessfulRemoteDataObject(config)
+  const groupDataService = jasmine.createSpyObj('groupDataService', {
+    searchGroups: createSuccessfulRemoteDataObject([mockGroup])
   });
 
   let dso: DSpaceObject;
@@ -63,7 +65,7 @@ describe('ManageProgrammeGroupMenuComponent', () => {
         { provide: 'contextMenuObjectProvider', useValue: dso },
         { provide: 'contextMenuObjectTypeProvider', useValue: DSpaceObjectType.ITEM },
         { provide: AuthorizationDataService, useValue: authorizationService },
-        { provide: ConfigurationDataService, useValue: configurationDataService },
+        { provide: GroupDataService, useValue: groupDataService },
       ]
     }).compileComponents();
   }));
