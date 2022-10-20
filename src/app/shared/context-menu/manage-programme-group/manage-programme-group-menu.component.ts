@@ -18,7 +18,7 @@ import { GroupDataService } from '../../../core/eperson/group-data.service';
 import { Group } from '../../../core/eperson/models/group.model';
 
 /**
- * This component renders a context menu option that provides to send invitation to a project.
+ * This component renders a context menu option that provides to manage group of a Programme.
  */
 @Component({
   selector: 'ds-context-manage-programme-group',
@@ -28,12 +28,7 @@ import { Group } from '../../../core/eperson/models/group.model';
 export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent {
 
   /**
-   * Representing if the invitation is related to a funding
-   */
-  isFunding;
-
-  /**
-   * A boolean representing if user is coordinator for the current project/funding
+   * A boolean representing if user is isFunderOrganizationalManager for the current Programme
    */
   protected isCoordinator$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -58,7 +53,7 @@ export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent
 
 
   /**
-   * Check if current Item is a Project or a Funding
+   * Check if current Item is a Programme
    */
   canShow() {
     return (this.contextMenuObject as Item).entityType === PROGRAMME_ENTITY;
