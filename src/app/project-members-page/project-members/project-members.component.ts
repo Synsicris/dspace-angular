@@ -36,9 +36,14 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
   @Input() relatedCommunity: Community;
 
   /**
-   * Representing if managing a project admin group or not
+   * Representing if managing a project coordinators group or not
    */
-  @Input() isAdminGroup: boolean;
+  @Input() isCoordinatorsGroup: boolean;
+
+  /**
+   * Representing if managing a project funders group or not
+   */
+  @Input() isFundersGroup: boolean;
 
   /**
    * Representing if managing members of a funding
@@ -76,8 +81,10 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.isAdminGroup) {
-      this.helpMessageLabel = this.isFunding ? 'project.manage.members.funding.admin-group-help' : 'project.manage.members.project.admin-group-help';
+    if (this.isFundersGroup) {
+      this.helpMessageLabel = 'project.manage.members.project.funders-group-help';
+    } else if (this.isCoordinatorsGroup) {
+      this.helpMessageLabel = this.isFunding ? 'project.manage.members.funding.coordinators-group-help' : 'project.manage.members.project.coordinators-group-help';
     } else {
       this.helpMessageLabel = this.isFunding ? 'project.manage.members.funding.members-group-help' : 'project.manage.members.project.members-group-help';
     }
@@ -166,11 +173,9 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
         reduce((acc: any, value: any) => [...acc, value], []),
       )),
     ).subscribe((groups: RemoteData<Group>[]) => {
-      console.log(groups);
       const successfulReq = groups.filter((groupRD: RemoteData<Group>) => groupRD.hasSucceeded);
 
       if (successfulReq.length === groups.length) {
-        console.log(groups);
         this.notificationsService.success(this.translateService.get(this.messagePrefix + '.notification.success.deleteMember'));
         this.refreshGroupsMembers(processedGroups);
       } else {
@@ -189,13 +194,15 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
   private getGroups(): Observable<string[]> {
     let groups$: Observable<string[]>;
     if (!this.isFunding) {
-      if (this.isAdminGroup) {
+      if (this.isFundersGroup) {
+        groups$ = this.projectGroupService.getInvitationProjectFundersGroupsByCommunity(this.relatedCommunity);
+      } else if (this.isCoordinatorsGroup) {
         groups$ = this.projectGroupService.getInvitationProjectCoordinatorsAndMembersGroupsByCommunity(this.relatedCommunity);
       } else {
         groups$ = this.projectGroupService.getInvitationProjectMembersGroupsByCommunity(this.relatedCommunity);
       }
     } else {
-      if (this.isAdminGroup) {
+      if (this.isCoordinatorsGroup) {
         groups$ = this.projectGroupService.getInvitationFundingCoordinatorsAndMembersGroupsByCommunity(this.relatedCommunity);
       } else {
         groups$ = this.projectGroupService.getInvitationFundingMembersGroupsByCommunity(this.relatedCommunity);

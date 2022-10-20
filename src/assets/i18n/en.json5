@@ -4420,17 +4420,21 @@
 
   "project.manage.page.title": "Invitation and management of project coordinators",
 
-  "project.manage.members.project.admin-group": "Invitation and Management of project coordinators",
+  "project.manage.members.project.coordinators-group": "Invitation and Management of project coordinators",
 
-  "project.manage.members.project.admin-group-help": "Help message here",
+  "project.manage.members.project.coordinators-group-help": "Help message here",
+
+  "project.manage.members.project.funders-group": "Invitation and Management of project funders",
+
+  "project.manage.members.project.funders-group-help": "Help message here",
 
   "project.manage.members.project.members-group": "Invitation and Management of project members",
 
   "project.manage.members.project.members-group-help": "Help message here",
 
-  "project.manage.members.funding.admin-group": "Invitation and Management of project coordinators",
+  "project.manage.members.funding.coordinators-group": "Invitation and Management of project coordinators",
 
-  "project.manage.members.funding.admin-group-help": "Help message here",
+  "project.manage.members.funding.coordinators-group-help": "Help message here",
 
   "project.manage.members.funding.members-group": "Invitation and Management of project members",
 

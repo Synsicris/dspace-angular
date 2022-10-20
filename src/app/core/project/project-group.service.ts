@@ -82,6 +82,10 @@ export class ProjectGroupService {
     return this.getGroupsByQuery(query);
   }
 
+  getInvitationProjectFundersGroupsByCommunity(project: Community): Observable<string[]> {
+    return this.getProjectFundersGroupUUIDByCommunity(project);
+  }
+
   getInvitationProjectMembersGroupsByCommunity(project: Community): Observable<string[]> {
     return this.getProjectMembersGroupUUIDByCommunity(project);
   }

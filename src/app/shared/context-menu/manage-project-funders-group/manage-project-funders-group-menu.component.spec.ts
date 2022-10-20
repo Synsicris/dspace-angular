@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -11,10 +11,11 @@ import { Item } from '../../../core/shared/item.model';
 import { ManageProjectFundersGroupMenuComponent } from './manage-project-funders-group-menu.component';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { of } from 'rxjs';
-import { ConfigurationDataService } from 'src/app/core/data/configuration-data.service';
-import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
+import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
 import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
 import { CONFIG_PROPERTY } from '../../../core/shared/config-property.resource-type';
+import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
+import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
 
 describe('ManageProjectFundersGroupMenuComponent', () => {
   let component: ManageProjectFundersGroupMenuComponent;
@@ -34,7 +35,7 @@ describe('ManageProjectFundersGroupMenuComponent', () => {
 
   let dso: DSpaceObject;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     dso = Object.assign(new Item(), {
       id: 'test-item',
       entityType: 'Person',
@@ -43,8 +44,8 @@ describe('ManageProjectFundersGroupMenuComponent', () => {
       }
     });
 
-    authorizationService = jasmine.createSpyObj('authorizationService', {
-      isAuthorized: of(true),
+    authorizationService = jasmine.createSpyObj('ProjectAuthorizationService', {
+      isFunderOrganizationalManager: of(true),
     });
 
 
@@ -62,7 +63,7 @@ describe('ManageProjectFundersGroupMenuComponent', () => {
       providers: [
         { provide: 'contextMenuObjectProvider', useValue: dso },
         { provide: 'contextMenuObjectTypeProvider', useValue: DSpaceObjectType.ITEM },
-        { provide: AuthorizationDataService, useValue: authorizationService },
+        { provide: ProjectAuthorizationService, useValue: authorizationService },
         { provide: ConfigurationDataService, useValue: configurationDataService },
       ]
     }).compileComponents();
