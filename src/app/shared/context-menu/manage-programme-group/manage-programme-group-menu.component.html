@@ -1,4 +1,4 @@
-<button *ngIf="canShow() && (isFunderOrganizationalManager() | async)" class="dropdown-item"
+<button *ngIf="(canShow$  | async)" class="dropdown-item"
         [innerHTML]="'context-menu.actions.manage-programme-group' | translate"
         (click)="navigateToManage();$event.preventDefault();$event.stopImmediatePropagation();">
 </button>

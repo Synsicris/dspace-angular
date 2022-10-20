@@ -1,8 +1,7 @@
-import { PROGRAMME_ENTITY } from '../../../core/project/project-data.service';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
@@ -15,6 +14,8 @@ import { Item } from '../../../core/shared/item.model';
 import { getFirstSucceededRemoteListPayload } from '../../../core/shared/operators';
 import { GroupDataService } from '../../../core/eperson/group-data.service';
 import { Group } from '../../../core/eperson/models/group.model';
+import { map } from 'rxjs/operators';
+import { PROGRAMME_ENTITY } from '../../../core/project/project-data.service';
 
 /**
  * This component renders a context menu option that provides to manage group of a Programme.
@@ -24,12 +25,17 @@ import { Group } from '../../../core/eperson/models/group.model';
   templateUrl: './manage-programme-group-menu.component.html'
 })
 @rendersContextMenuEntriesForType(DSpaceObjectType.ITEM)
-export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent {
+export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent implements OnInit {
 
   /**
-   * A boolean representing if user is isFunderOrganizationalManager for the current Programme
+   * Observable to check if we can show button
    */
-  protected isCoordinator$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  canShow$: Observable<boolean>;
+
+  /**
+   * Group id of the programme group
+   */
+  targetGroupId: string;
 
   /**
    * Initialize instance variables
@@ -51,31 +57,39 @@ export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent
   }
 
 
+  ngOnInit() {
+    this.canShow$ = this.canShow();
+  }
+
   /**
-   * Check if current Item is a Programme
+   * Check if current Item is a Programme, if has isFunderOrganizationalManager authorization & has groups
    */
-  canShow() {
-    return (this.contextMenuObject as Item).entityType === PROGRAMME_ENTITY;
+  canShow(): Observable<boolean> {
+    const contextItem = (this.contextMenuObject as Item);
+    return combineLatest([
+      of(contextItem.entityType === PROGRAMME_ENTITY),
+      this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager),
+      this.groupDataService.searchGroups(this.groupDataService.getGroupName(contextItem, this.injectedContextMenuObject)).pipe(
+        getFirstSucceededRemoteListPayload(),
+        map((groups: Group[]) => {
+          if (groups?.length > 0) {
+            this.targetGroupId = groups[0].id;
+          }
+          return groups?.length > 0;
+        })
+      )
+    ]).pipe(
+      map((results) => {
+        return results.find((res) => res === false) !== false;
+      })
+    );
   }
 
   /**
    * Navigate to manage members page
    */
   navigateToManage() {
-    this.groupDataService.searchGroups(`programme_${this.injectedContextMenuObject.id}_group`).pipe(
-      getFirstSucceededRemoteListPayload(),
-    ).subscribe((groups: Group[]) => {
-      if (groups?.length > 0) {
-        this.router.navigate([this.getGroupRegistryRouterLink(), groups[0].id, 'managemembers']);
-      }
-    });
-  }
-
-  /**
-   * Check if user is coordinator for this project/funding
-   */
-  isFunderOrganizationalManager(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager);
+    this.router.navigate([this.getGroupRegistryRouterLink(), this.targetGroupId, 'managemembers']);
   }
 
   public getGroupRegistryRouterLink(): string {

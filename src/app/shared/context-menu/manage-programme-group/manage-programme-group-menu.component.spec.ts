@@ -11,12 +11,11 @@ import { Item } from '../../../core/shared/item.model';
 import { ManageProgrammeGroupMenuComponent } from './manage-programme-group-menu.component';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { of } from 'rxjs';
-import { ConfigurationDataService } from 'src/app/core/data/configuration-data.service';
-import { createSuccessfulRemoteDataObject } from '../../remote-data.utils';
-import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
-import { CONFIG_PROPERTY } from '../../../core/shared/config-property.resource-type';
+import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
 import { mockGroup } from '../../mocks/submission.mock';
 import { GroupDataService } from '../../../core/eperson/group-data.service';
+import { buildPaginatedList } from '../../../core/data/paginated-list.model';
+import { PageInfo } from '../../../core/shared/page-info.model';
 
 describe('ManageProgrammeGroupMenuComponent', () => {
   let component: ManageProgrammeGroupMenuComponent;
@@ -24,14 +23,14 @@ describe('ManageProgrammeGroupMenuComponent', () => {
   let fixture: ComponentFixture<ManageProgrammeGroupMenuComponent>;
   let authorizationService: AuthorizationDataService;
 
-  const config = Object.assign({}, new ConfigurationProperty(), {
-    id: '12312312312',
-    type: CONFIG_PROPERTY,
-    values: ['123332211']
-  });
-
   const groupDataService = jasmine.createSpyObj('groupDataService', {
-    searchGroups: createSuccessfulRemoteDataObject([mockGroup])
+    searchGroups: createSuccessfulRemoteDataObject$(buildPaginatedList(new PageInfo({
+      elementsPerPage: 2,
+      totalElements: 1,
+      totalPages: 1,
+      currentPage: 1
+    }), [mockGroup])),
+    getGroupName: 'programme_test-item_group'
   });
 
   let dso: DSpaceObject;
