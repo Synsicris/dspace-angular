@@ -38,6 +38,7 @@ export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
    * @param {Router} router
+   * @param {GroupDataService} groupDataService
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
