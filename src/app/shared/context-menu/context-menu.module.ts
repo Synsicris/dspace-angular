@@ -35,6 +35,7 @@ import { ManageProjectMembersMenuComponent } from './manage-project-members/mana
 import {
   ManageProjectFundersGroupMenuComponent
 } from './manage-project-funders-group/manage-project-funders-group-menu.component';
+import { ManageProgrammeGroupMenuComponent } from './manage-programme-group/manage-programme-group-menu.component';
 
 const COMPONENTS = [
   BulkImportMenuComponent,
@@ -60,7 +61,8 @@ const COMPONENTS = [
   ViewProjectItemsMenuComponent,
   ManageProjectMembersMenuComponent,
   EditItemPermissionsMenuComponent,
-  ManageProjectFundersGroupMenuComponent
+  ManageProjectFundersGroupMenuComponent,
+  ManageProgrammeGroupMenuComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -85,7 +87,8 @@ const ENTRY_COMPONENTS = [
   ViewProjectItemsMenuComponent,
   ManageProjectMembersMenuComponent,
   EditItemPermissionsMenuComponent,
-  ManageProjectFundersGroupMenuComponent
+  ManageProjectFundersGroupMenuComponent,
+  ManageProgrammeGroupMenuComponent,
 ];
 
 const MODULE = [

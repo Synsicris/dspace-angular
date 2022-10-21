@@ -21,6 +21,9 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './manage-group.component.html',
   styleUrls: ['./manage-group.component.scss']
 })
+/**
+ * The component that will display the members of the group currently being managed.
+ */
 export class ManageGroupComponent implements OnInit {
 
   /**
@@ -91,7 +94,7 @@ export class ManageGroupComponent implements OnInit {
   }
 
   /**
-   * Add eperson to all groups needed for the current role
+   * Add eperson to the group needed for the current role
    * @param ePerson
    */
   addMemberToGroup(ePerson: EPerson): void {

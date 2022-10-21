@@ -18,7 +18,7 @@ import { PERSON_ENTITY } from '../../../core/project/project-data.service';
 import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
 
 /**
- * This component renders a context menu option that provides to send invitation to a project.
+ * This component renders a context menu option that provides to manage group of a Person.
  */
 @Component({
   selector: 'ds-context-manage-project-funders-group',
@@ -69,14 +69,14 @@ export class ManageProjectFundersGroupMenuComponent extends ContextMenuEntryComp
   }
 
   /**
-   * Check if current Item is a Project or a Funding
+   * Check if current Item is a Person
    */
   canShow() {
     return (this.contextMenuObject as Item).entityType === PERSON_ENTITY;
   }
 
   /**
-   * Check if user is coordinator for this project/funding
+   * Check if user is Funder or Organizational Manager for this Person group
    */
   isFunderOrganizationalManager(): Observable<boolean> {
     return this.isFunderOrganizationalManager$.asObservable();
@@ -92,7 +92,7 @@ export class ManageProjectFundersGroupMenuComponent extends ContextMenuEntryComp
   }
 
   /**
-   * Check if user is coordinator for this project/funding
+   * A boolean representing if user is isFunderOrganizationalManager for the current Person group
    */
   private checkIsFunderOrganizationalManager(): Observable<boolean> {
     return this.authorizationService.isFunderOrganizationalManager();

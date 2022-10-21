@@ -8,6 +8,7 @@ import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload 
 import { map, mergeMap, reduce } from 'rxjs/operators';
 import { Group } from '../eperson/models/group.model';
 import { CommunityDataService } from '../data/community-data.service';
+import { Item } from '../shared/item.model';
 
 const PROJECT_GROUP_TEMPLATE = 'project_%s_';
 const PROJECT_COORDINATORS_GROUP_TEMPLATE = 'project_%s_coordinators_group';
@@ -18,6 +19,8 @@ const PROJECT_READERS_GROUP_TEMPLATE = 'project_%s_readers_group';
 const FUNDING_GROUP_TEMPLATE = 'funding_%s_';
 const FUNDING_COORDINATORS_GROUP_TEMPLATE = 'funding_%s_coordinators_group';
 const FUNDING_MEMBERS_GROUP_TEMPLATE = 'funding_%s_members_group';
+
+const PROGRAMME_GROUP_TEMPLATE = 'programme_%s_group';
 
 @Injectable()
 export class ProjectGroupService {
@@ -31,6 +34,10 @@ export class ProjectGroupService {
     const groupNameArray = groupName.split('_');
 
     return groupNameArray[1];
+  }
+
+  getProgrammeGroupNameByItem(project: Item): string {
+    return PROGRAMME_GROUP_TEMPLATE.replace('%s', project.uuid);
   }
 
   getFundingAdminsGroupNameByCommunity(project: Community): string {

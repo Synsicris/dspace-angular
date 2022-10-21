@@ -1466,6 +1466,8 @@
 
   "context-menu.actions.manage-project-funders-group": "<i class=\"fas fa-user-friends\"></i> Manage project funders",
 
+  "context-menu.actions.manage-programme-group": "<i class=\"fas fa-user-friends\"></i> Manage programme members",
+
   "RELATION.Person.researchoutputs.search.results.head": "Research Outputs",
 
   "RELATION.Person.projects.search.results.head": "Projects",
