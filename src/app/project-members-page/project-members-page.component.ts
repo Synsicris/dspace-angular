@@ -104,10 +104,12 @@ export class ProjectMembersPageComponent implements OnInit {
       this.projectAuthorizationService.isAdmin(),
       this.projectAuthorizationService.isFunderOrganizationalManager()
     ]).pipe(
-      filter(([community, isAdmin, isFunderOrganizationalManager]) => {
-        if (this.isFunding) {
+      tap(([community, isAdmin, isFunderOrganizationalManager]) => {
+        if (this.isFunding || !(isAdmin || isFunderOrganizationalManager)) {
           this.fundersGroupInit$.next(true);
         }
+      }),
+      filter(([community, isAdmin, isFunderOrganizationalManager]) => {
         return !this.isFunding && (isAdmin || isFunderOrganizationalManager);
       }),
       map(([community, isAdmin, isFunderOrganizationalManager]) => community),
