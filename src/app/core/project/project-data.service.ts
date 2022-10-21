@@ -220,7 +220,7 @@ export class ProjectDataService extends CommunityDataService {
           return projectItemRD.payload.owningCollection.pipe(
             getFirstCompletedRemoteData(),
             mergeMap((collectionRD) => {
-              if (collectionRD.hasSucceeded) {
+              if (collectionRD.hasSucceeded && isNotEmpty(collectionRD.payload)) {
                 return collectionRD.payload.parentCommunity;
               } else {
                 return createFailedRemoteDataObject$<Community>();
@@ -275,7 +275,7 @@ export class ProjectDataService extends CommunityDataService {
           return projectItemRD.payload.owningCollection.pipe(
             getFirstCompletedRemoteData(),
             mergeMap((collectionRD) => {
-              if (collectionRD.hasSucceeded) {
+              if (collectionRD.hasSucceeded && isNotEmpty(collectionRD.payload)) {
                 return collectionRD.payload.parentCommunity;
               } else {
                 return createFailedRemoteDataObject$<Community>();
