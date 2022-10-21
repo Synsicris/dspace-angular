@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Observable, combineLatest, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
@@ -11,11 +12,13 @@ import { AuthorizationDataService } from '../../../core/data/feature-authorizati
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { getFirstSucceededRemoteListPayload } from '../../../core/shared/operators';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { GroupDataService } from '../../../core/eperson/group-data.service';
 import { Group } from '../../../core/eperson/models/group.model';
-import { map } from 'rxjs/operators';
 import { PROGRAMME_ENTITY } from '../../../core/project/project-data.service';
+import { ProjectGroupService } from '../../../core/project/project-group.service';
+import { RemoteData } from '../../../core/data/remote-data';
+import { PaginatedList } from '../../../core/data/paginated-list.model';
 
 /**
  * This component renders a context menu option that provides to manage group of a Programme.
@@ -30,7 +33,7 @@ export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent
   /**
    * Observable to check if we can show button
    */
-  canShow$: Observable<boolean>;
+  canShow$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * Group id of the programme group
@@ -45,6 +48,7 @@ export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent
    * @param {AuthorizationDataService} authorizationService
    * @param {Router} router
    * @param {GroupDataService} groupDataService
+   * @param {ProjectGroupService} projectGroupService
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
@@ -52,13 +56,19 @@ export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent
     protected authorizationService: AuthorizationDataService,
     protected router: Router,
     protected groupDataService: GroupDataService,
+    protected projectGroupService: ProjectGroupService,
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ManageProjectManagers);
   }
 
-
   ngOnInit() {
-    this.canShow$ = this.canShow();
+    console.log('ManageProgrammeGroupMenuComponent');
+    if ((this.contextMenuObject as Item).entityType === PROGRAMME_ENTITY) {
+      this.canShow().subscribe((canShow) => {
+        this.canShow$.next(canShow);
+      });
+    }
+
   }
 
   /**
@@ -66,21 +76,25 @@ export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent
    */
   canShow(): Observable<boolean> {
     const contextItem = (this.contextMenuObject as Item);
+    const groupName = this.projectGroupService.getProgrammeGroupNameByItem(contextItem);
     return combineLatest([
-      of(contextItem.entityType === PROGRAMME_ENTITY),
       this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager),
-      this.groupDataService.searchGroups(this.groupDataService.getGroupName(contextItem, this.injectedContextMenuObject)).pipe(
-        getFirstSucceededRemoteListPayload(),
-        map((groups: Group[]) => {
-          if (groups?.length > 0) {
-            this.targetGroupId = groups[0].id;
+      this.groupDataService.searchGroups(groupName).pipe(
+        getFirstCompletedRemoteData(),
+        map((groupRD: RemoteData<PaginatedList<Group>>) => {
+          console.log(groupRD);
+          if (groupRD.hasSucceeded && groupRD.payload?.page?.length > 0) {
+            this.targetGroupId = groupRD.payload?.page[0].uuid;
+            return true;
+          } else {
+            return false;
           }
-          return groups?.length > 0;
         })
       )
     ]).pipe(
-      map((results) => {
-        return results.find((res) => res === false) !== false;
+      tap(console.log),
+      map(([isFunderOrganizationalManager, groupExists]) => {
+        return isFunderOrganizationalManager && groupExists;
       })
     );
   }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { createSelector, select, Store } from '@ngrx/store';
 import { Observable, of as observableOf } from 'rxjs';
-import { catchError, filter, map, take } from 'rxjs/operators';
+import { catchError, map, take } from 'rxjs/operators';
 
 import {
   GroupRegistryCancelGroupAction,
@@ -34,8 +34,6 @@ import { DSONameService } from '../breadcrumbs/dso-name.service';
 import { Community } from '../shared/community.model';
 import { Collection } from '../shared/collection.model';
 import { NoContent } from '../shared/NoContent.model';
-import { DSpaceObject } from '../shared/dspace-object.model';
-import { Item } from '../shared/item.model';
 
 const groupRegistryStateSelector = (state: AppState) => state.groupRegistry;
 const editGroupSelector = createSelector(groupRegistryStateSelector, (groupRegistryState: GroupRegistryState) => groupRegistryState.editGroup);
@@ -264,7 +262,7 @@ export class GroupDataService extends DataService<Group> {
    * @param role        The name of the role for which to create a group
    * @param link        The REST endpoint to create the group
    */
-  createComcolGroup(dso: Community | Collection, role: string, link: string): Observable<RemoteData<Group>> {
+  createComcolGroup(dso: Community|Collection, role: string, link: string): Observable<RemoteData<Group>> {
 
     const requestId = this.requestService.generateRequestId();
     const group = Object.assign(new Group(), {
@@ -324,10 +322,4 @@ export class GroupDataService extends DataService<Group> {
 
     return responseRD$;
   }
-
-  getGroupName(item: Item, dso: DSpaceObject) {
-    return `${item.entityType}_${dso.id}_group`;
-  }
-
-
 }
