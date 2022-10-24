@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
@@ -62,7 +62,6 @@ export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent
   }
 
   ngOnInit() {
-    console.log('ManageProgrammeGroupMenuComponent');
     if ((this.contextMenuObject as Item).entityType === PROGRAMME_ENTITY) {
       this.canShow().subscribe((canShow) => {
         this.canShow$.next(canShow);
@@ -82,7 +81,6 @@ export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent
       this.groupDataService.searchGroups(groupName).pipe(
         getFirstCompletedRemoteData(),
         map((groupRD: RemoteData<PaginatedList<Group>>) => {
-          console.log(groupRD);
           if (groupRD.hasSucceeded && groupRD.payload?.page?.length > 0) {
             this.targetGroupId = groupRD.payload?.page[0].uuid;
             return true;
@@ -92,7 +90,6 @@ export class ManageProgrammeGroupMenuComponent extends ContextMenuEntryComponent
         })
       )
     ]).pipe(
-      tap(console.log),
       map(([isFunderOrganizationalManager, groupExists]) => {
         return isFunderOrganizationalManager && groupExists;
       })
