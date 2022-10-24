@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, from, Observable, Subscription } from 'rxjs';
-import { mergeMap, reduce, take, tap } from 'rxjs/operators';
+import { mergeMap, reduce, take } from 'rxjs/operators';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -17,6 +17,7 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
 import { EPerson } from '../../core/eperson/models/eperson.model';
+import { ProjectAuthorizationService } from '../../core/project/project-authorization.service';
 
 @Component({
   selector: 'ds-project-members',
@@ -53,6 +54,11 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
   groupBeingEdited: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * A Boolean representing if user is a Funder Organizational Manager
+   */
+  isFunderOrganizationalManager$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * I18n message key for help box
    */
   helpMessageLabel;
@@ -76,11 +82,17 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
     protected modalService: NgbModal,
     protected translateService: TranslateService,
     protected notificationsService: NotificationsService,
-    protected projectGroupService: ProjectGroupService) {
+    protected projectAuthService: ProjectAuthorizationService,
+    protected projectGroupService: ProjectGroupService
+  ) {
 
   }
 
   ngOnInit(): void {
+    this.projectAuthService.isFunderOrganizationalManager().subscribe((isFunderOrganizationalManager) => {
+      this.isFunderOrganizationalManager$.next(isFunderOrganizationalManager);
+    });
+
     if (this.isFundersGroup) {
       this.helpMessageLabel = 'project.manage.members.project.funders-group-help';
     } else if (this.isCoordinatorsGroup) {
@@ -157,10 +169,8 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
     this.getGroups().pipe(
       take(1),
       mergeMap((groups: string[]) => from(groups).pipe(
-        tap((g) => console.log(g)),
         mergeMap((groupId: string) => this.getGroupEntity(groupId)),
         mergeMap((groupRD: RemoteData<Group>) => {
-          console.log(groupRD);
           if (groupRD.hasSucceeded) {
             processedGroups.push(groupRD.payload);
             return this.groupService.deleteMemberFromGroup(groupRD.payload, ePerson).pipe(
@@ -212,7 +222,7 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
     return groups$;
   }
 
-  private refreshGroupsMembers(processedGroups: Group[] ): void {
+  private refreshGroupsMembers(processedGroups: Group[]): void {
     processedGroups.forEach((groupRD: Group) => {
       this.epersonService.clearLinkRequests(groupRD._links.epersons.href);
     });
