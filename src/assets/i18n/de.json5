@@ -869,7 +869,7 @@
 
   // "admin.access-control.groups.form.members-list.table.identity": "Identity",
   // TODO New key - Add a translation
-  "admin.access-control.groups.form.members-list.table.identity": "Identity",
+  "admin.access-control.groups.form.members-list.table.identity": "E-Mail / interne ID",
 
   // "admin.access-control.groups.form.members-list.table.email": "Email",
   // TODO New key - Add a translation
@@ -4032,7 +4032,7 @@
   "impact-pathway.task.create.success": "Der neue Eintrag wurde erfolgreich erstellt.",
 
   // "impact-pathway.wrapper.info": "<b>Develop the Impact Pathway of the project</b></br><p>The Impact Pathway supports you in the impact-oriented planning and implementation of the project. Please present the most important objectives, activities and intended impacts of the project in a clear and concise manner by means of key messages. Use arrows to illustrate particularly important and non-linear relationships. While the project is progressing, you can update the Impact Pathway and add any results achieved.</p><p>The columns structure the key messages for impact-oriented planning:</br>In <b>Background</b> important preliminary considerations for the project are presented, such as problem definition, state of knowledge and conditions.</br>The <b>Objectives of research and development</b> describe the scientific/technical work objectives of the project. These objectives can be assigned to work packages and tasks on a second level.</br><b>Interactions with partners and groups of actors. Outputs for dissemination</b> reflect all exchange and transfer activities of the project. In a first step, key messages about the purpose and group of actors of the interactions are formulated. These key messages can be assigned to specific activities on a second level.</br>The intended impacts of the project are structured in two columns:</br>In <b>Application (possibilities)</b> the contributions of the project to the application of the project results are presented.</br><b>Expected societal impacts</b> describe what societal effects are expected when the results of projects are applied.</br>In <b>Contribution to funding programme objectives</b>, the funding programme objectives to which the project contributes are selected.</p><p>In each column, you can use [+] to create unlimited items or search for and select previously created items.</br>Each item has a specific detail page (depending on the section selected) in which further information is usually given. You can switch between the Impact Pathway and the detail page of an item at any time.</br>You can start to create items in any column of the Impact Pathway.</br>Via [Edit] below the columns of the Impact Pathway you can add a description to the overall objectives of the project.</p><p><b>Key questions and tips for developing the Impact Pathway:</b> What impacts do you want to achieve with the project? How would you like to contribute to the development of these impacts?<br>It is recommended, to plan the Impact Pathway for the project in terms of the intended impacts and to develop it together with partners in practice and groups of actors.</br></p>",
-  "impact-pathway.wrapper.info": "<p><b><i>Erstellen Sie hier einen Überblick zu den Hintergründen, Arbeiten und Wirkungen des Projektes, indem Sie beliebig viele Einträge in den jeweiligen Säulen des Impact Pathway anlegen.</p></b></i><b>Worum es hier geht:</b><ul><li>Mit dem Impact Pathway beantworten Sie zwei Fragen: „Welche Wirkungen sollen mit dem Projekt erreicht werden?“ und „Was wird/wurde im Projekt getan, um zur Entwicklung dieser Wirkungen beizutragen?“</li><li>Der Impact Pathway soll leicht verständlich darstellen, um was es in dem Projekt geht.</li><li>Die <b>6 Säulen</b> gliedern die Einträge vom Hintergrund (Säule 1) über die Arbeiten (Säule 2 und 3) bis zu den Wirkungspotenzialen (Säule 4 und 5). In Säule 6 wählen Sie die förderpolitischen Ziele aus, zu denen das Projekt beiträgt.</li><li>Die <b>Säulen 2 und 3</b> stellen in der <b>ersten Ebene</b> die Ziele von Forschung und Entwicklung (Säule 2) sowie die Ziele von Interaktionen und Transfer (Säule 3) dar. In der <b>zweiten Ebene</b> können Sie die spezifischen Arbeiten hinzufügen, die zu dem Ziel beitragen.</li><li>Wenn Sie einen Eintrag anlegen, wählen Sie einen (passenden) <b>Bereich</b> aus, zu dem der Eintrag gehört (z. B. Rahmenbedingung oder Veranstaltung). Damit legen Sie fest, welche weiteren Informationen auf der <b>Detailseite</b> des Eintrags abgefragt werden.</li> <li>Für die <b>Antragstellung</b> verdeutlichen Sie in den Einträgen insbesondere die Ziele des Projektes. Die Abbildung des Impact Pathway und eine kurze Beschreibung ersetzen in der Vorhabenbeschreibung das Kapitel „Gesamtziele des Projektes“.</li><li>Im <b>Projektverlauf</b> aktualisieren und konkretisieren Sie den Impact Pathway und ergänzen die Ergebnisse.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de//de-project-about-structure.html\"target=_blank\">Mehr Informationen zur Strukturierung von Einträgen</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-ipw-ipwhelp.html\"target=_blank\">Wie Sie im Impact Pathway vorgehen</a></li></ul><b>Wichtige Hinweise:</b><ul><li>Sie können in jeder beliebigen Säule des Impact Pathway beginnen.</li><li>Über die <b>Schaltfläche</b> <i class=\"fas fa-plus-circle\"></i> in jeder Säule können Sie beliebig viele Einträge <b>neu anlegen</b> oder <b>bereits vorhandene</b> Einträge auswählen. Dort ist auch beschrieben, welche <b>Bereiche</b> zu der Säule gehören und worin sie sich unterscheiden.</li> <li>Alle Einträge können Sie jederzeit <b>aktualisieren</b>. Über <i class=\"fas fa-list\"></i> öffnen Sie die <b>zweite Ebene</b> der eingetragenen Ziele in Säule 2 und 3. Über <i class=\"fas fa-edit\"></i> gelangen Sie auf die <b>Detailseite</b> eines Eintrags. Dort finden Sie auch weitere Hinweise.</li><li>Über <i class=\"fas fa-unlink\"></i> können Sie den Eintrag aus dem IPW <b>entfernen</b>, er bleibt jedoch im Projekt erhalten. Löschen können Sie einen Eintrag auf der Detailseite.</li><li>Mit <b>Drag&Drop</b> können Sie die Reihenfolge der Einträge innerhalb einer Säule verändern.</li><li>Nutzen Sie die <b>Pfeile</b>, wenn Sie Zusammenhänge zwischen Einträgen besonders hervorheben wollen.</li><li>Um die Bezeichnung oder die Beschreibung des Impact Pathway zu ändern, müssen Sie die Felder über <b>Bezeichung und Beschreibung bearbeiten</b> aktivieren.</ul></li><b>Tipps:</b><ul><li>Empfehlenswert ist es, den Impact Pathway gemeinsam mit Praxispartnern und Akteursgruppen zu entwickeln und das Projekt von den erwünschten Wirkungen her zu planen.</li><li>Ein erstes Brainstorming zur Wirkungsplanung kann auch sehr gut an einer Pinnwand oder mit Hilfe von Haftnotizen stattfinden.</li><li>Verschaffen Sie sich einen Überblick, indem Sie die Detailseiten der einzelnen Bereiche anschauen.</li><li>Arbeiten Sie im Tool schrittweise:</li> <li>Beginnen Sie mit einer groben Planung und ergänzen Sie erst später die Details (z. B. Arbeiten auf der zweiten Ebene von Säule 2 und 3 oder die Informationen auf den Detailseiten der Einträge).</li> <li>Wählen Sie zuerst Arbeitstitel für die Bezeichnung und passen Sie die Formulierungen schrittweise an, wenn mehr Klarheit zur Wirkungsplanung des Projektes vorliegt.</ul></li>",
+  "impact-pathway.wrapper.info": "<p><b><i>Erstellen Sie hier einen Überblick zu den Hintergründen, Arbeiten und Wirkungen des Projektes, indem Sie beliebig viele Einträge in den jeweiligen Säulen des Impact Pathway anlegen.</p></b></i><b>Worum es hier geht:</b><ul><li>Mit dem Impact Pathway beantworten Sie zwei Fragen: „Welche Wirkungen sollen mit dem Projekt erreicht werden?“ und „Was wird/wurde im Projekt getan, um zur Entwicklung dieser Wirkungen beizutragen?“</li><li>Der Impact Pathway soll leicht verständlich darstellen, um was es in dem Projekt geht.</li><li>Die <b>6 Säulen</b> gliedern die Einträge vom Hintergrund (Säule 1) über die Arbeiten (Säule 2 und 3) bis zu den Wirkungspotenzialen (Säule 4 und 5). In Säule 6 wählen Sie die förderpolitischen Ziele aus, zu denen das Projekt beiträgt.</li><li>Die <b>Säulen 2 und 3</b> stellen in der <b>ersten Ebene</b> die Ziele von Forschung und Entwicklung (Säule 2) sowie die Ziele von Interaktionen und Transfer (Säule 3) dar. In der <b>zweiten Ebene</b> können Sie die spezifischen Arbeiten hinzufügen, die zu dem Ziel beitragen.</li><li>Wenn Sie einen Eintrag anlegen, wählen Sie einen (passenden) <b>Bereich</b> aus, zu dem der Eintrag gehört (z. B. Rahmenbedingung oder Veranstaltung). Damit legen Sie fest, welche weiteren Informationen auf der <b>Detailseite</b> des Eintrags abgefragt werden.</li> <li>Für die <b>Antragstellung</b> verdeutlichen Sie in den Einträgen insbesondere die Ziele des Projektes. Die Abbildung des Impact Pathway und eine kurze Beschreibung ersetzen in der Vorhabenbeschreibung das Kapitel „Gesamtziele des Projektes“.</li><li>Im <b>Projektverlauf</b> aktualisieren und konkretisieren Sie den Impact Pathway und ergänzen die Ergebnisse.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.php\"target=_blank\">Mehr Informationen zur Strukturierung von Einträgen</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-ipw-ipwhelp.html\"target=_blank\">Wie Sie im Impact Pathway vorgehen</a></li></ul><b>Wichtige Hinweise:</b><ul><li>Sie können in jeder beliebigen Säule des Impact Pathway beginnen.</li><li>Über die <b>Schaltfläche</b> <i class=\"fas fa-plus-circle\"></i> in jeder Säule können Sie beliebig viele Einträge <b>neu anlegen</b> oder <b>bereits vorhandene</b> Einträge auswählen. Dort ist auch beschrieben, welche <b>Bereiche</b> zu der Säule gehören und worin sie sich unterscheiden.</li> <li>Alle Einträge können Sie jederzeit <b>aktualisieren</b>. Über <i class=\"fas fa-list\"></i> öffnen Sie die <b>zweite Ebene</b> der eingetragenen Ziele in Säule 2 und 3. Über <i class=\"fas fa-edit\"></i> gelangen Sie auf die <b>Detailseite</b> eines Eintrags. Dort finden Sie auch weitere Hinweise.</li><li>Über <i class=\"fas fa-unlink\"></i> können Sie den Eintrag aus dem IPW <b>entfernen</b>, er bleibt jedoch im Projekt erhalten. Löschen können Sie einen Eintrag auf der Detailseite.</li><li>Mit <b>Drag&Drop</b> können Sie die Reihenfolge der Einträge innerhalb einer Säule verändern.</li><li>Nutzen Sie die <b>Pfeile</b>, wenn Sie Zusammenhänge zwischen Einträgen besonders hervorheben wollen.</li><li>Um die Bezeichnung oder die Beschreibung des Impact Pathway zu ändern, müssen Sie die Felder über <b>Bezeichung und Beschreibung bearbeiten</b> aktivieren.</ul></li><b>Tipps:</b><ul><li>Empfehlenswert ist es, den Impact Pathway gemeinsam mit Praxispartnern und Akteursgruppen zu entwickeln und das Projekt von den erwünschten Wirkungen her zu planen.</li><li>Ein erstes Brainstorming zur Wirkungsplanung kann auch sehr gut an einer Pinnwand oder mit Hilfe von Haftnotizen stattfinden.</li><li>Verschaffen Sie sich einen Überblick, indem Sie die Detailseiten der einzelnen Bereiche anschauen.</li><li>Arbeiten Sie im Tool schrittweise:</li> <li>Beginnen Sie mit einer groben Planung und ergänzen Sie erst später die Details (z. B. Arbeiten auf der zweiten Ebene von Säule 2 und 3 oder die Informationen auf den Detailseiten der Einträge).</li> <li>Wählen Sie zuerst Arbeitstitel für die Bezeichnung und passen Sie die Formulierungen schrittweise an, wenn mehr Klarheit zur Wirkungsplanung des Projektes vorliegt.</ul></li>",
 
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   "info.end-user-agreement.accept": "Ich habe die Endnutzer-Vereinbarung gelesen und stimme ihr zu",
@@ -12708,7 +12708,7 @@
 
   // "layout.tab.header.subproject": "Project information",
   // TODO Source message changed - Revise the translation
-  "layout.tab.header.subproject": "Projektinformationen",
+  "layout.tab.header.subproject": "Projekt-Informationen",
 
   // "layout.tab.header.Funding": "Fundings",
   "layout.tab.header.Funding": "Beteiligte Projekte / Zuwendungsempfänger",
@@ -12742,7 +12742,7 @@
   "layout.tab.header.subcontractors": "Unterauftragnehmer / Kooperationspartner",
 
   // "layout.tab.header.cooperationpartners": "Cooperation partners",
-  "layout.tab.header.cooperationpartners": "Kooperationspartner",
+  "layout.tab.header.cooperationpartners": "Kooperationspartner / Unterauftragnehmer",
 
   // "layout.tab.header.stakeholder": "Stakeholder groups",
   "layout.tab.header.stakeholder": "Akteursgruppen",
@@ -12889,7 +12889,7 @@
 
   // "layout.box.header.exploitationplan": "Subproject - Exploitation plan",
   // TODO Source message changed - Revise the translation
-  "layout.box.header.exploitationplan": "Projekt - Verwertungsplan",
+  "layout.box.header.exploitationplan": "Verwertungsplan",
 
   // "layout.box.header.Person_m": "Person",
   "layout.box.header.Person_m": "Mein Personenprofil",
@@ -13112,13 +13112,13 @@
   "submission.sections.submit.progressbar.describe.exp_societalimpact": "#1 Erwartete Nachhaltigkeitswirkung erfassen",
 
   // "exp_societalimpact.listelement.badge": "Expected societal impact (new)",
-  "exp_societalimpact.listelement.badge": "Erwartete gesellschaftliche Wirkung (Var. y)",
+  "exp_societalimpact.listelement.badge": "Erwartete gesellschaftliche Wirkung",
 
   // "submission.sections.upload.infosubmission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <b>upload additional files just dragging & dropping them everywhere in the page.</b>",
   "submission.sections.upload.infosubmission.sections.upload.info": "Hier erfassen Sie alle Dateien, die zu diesem Eintrag gehören.<b><i>Über <i class=\"fas fa-edit\"></i> ergänzen Sie bitte wichtige Angaben zu den Zugriffsrechten und zum Dateityp.</br></br></b></i><b>Wichtige Hinweise:</b><ul><li>Über den Dateityp wählen Sie aus, ob die Datei als Bild (Logo, Bilddatei) oder als Anhang dargestellt wird.</li><ul>",
 
   // "search.filters.entityType.exp_societalimpact": "Expected societal impact (new)",
-  "search.filters.entityType.exp_societalimpact": "Erwartete gesellschaftliche Wirkung (Var. y)",
+  "search.filters.entityType.exp_societalimpact": "Erwartete gesellschaftliche Wirkung",
 
   // "search.filters.entityType.ia_objective": "Target for interaction and transfer",
   "search.filters.entityType.ia_objective": "Ziel für Interaktion und Transfer",
@@ -13132,13 +13132,13 @@
   "layout.tab.header.Involved": "Beteiligte Organisationen",
 
   // "layout.tab.header.exp_societalimpact": "Expected societal impacts (new)",
-  "layout.tab.header.exp_societalimpact": "Erwartete gesellschaftliche Wirkungen (Var. y)",
+  "layout.tab.header.exp_societalimpact": "Erwartete gesellschaftliche Wirkungen",
 
   // "layout.box.header.exp_societalimpact": "Expected societal impacts (new)",
-  "layout.box.header.exp_societalimpact": "Erwartete gesellschaftliche Wirkungen (Var. y) - Listenansicht",
+  "layout.box.header.exp_societalimpact": "Erwartete gesellschaftliche Wirkungen - Listenansicht",
 
   // "layout.box.header.exp_societalimpact_m": "Expected societal impact (new)",
-  "layout.box.header.exp_societalimpact_m": "Erwartete gesellschaftliche Wirkung (Var. y)",
+  "layout.box.header.exp_societalimpact_m": "Erwartete gesellschaftliche Wirkung",
 
   // "subproject.create.grants.project-option": "Editable by all project members",
   "subproject.create.grants.project-option": "A: Unbeschränkte Bearbeitungsrechte für alle Mitglieder des Verbundes",
@@ -13239,7 +13239,7 @@
 
   // "layout.field.label.Project.dc.title": "Workspace of the project / grant recipient:",
   // TODO New key - Add a translation
-  "layout.field.label.Project.dc.title": "Arbeitsbereich für alle Partner im Verbund:",
+  "layout.field.label.Project.dc.title": "<i class=\"fas fa-shekel-sign\"></i> Arbeitsbereich Verbund:",
 
   // "layout.field.label.Project.oairecerif.acronym": "Acronym",
   "layout.field.label.Project.oairecerif.acronym": "Akronym",
@@ -13248,7 +13248,7 @@
   "layout.field.label.Project.oairecerif.internalid": "Förderkennzeichen",
 
   // "layout.field.label.Project.oairecerif.identifier.url": "Project webpage(s)",
-  "layout.field.label.Project.oairecerif.identifier.url": "Internetseite(n) zum Projekt",
+  "layout.field.label.Project.oairecerif.identifier.url": "Internetseite(n) zum Verbund",
 
   // "layout.field.label.Project.crispj.partnerou": "Project partner",
   "layout.field.label.Project.crispj.partnerou": "Projektpartner",
@@ -13260,7 +13260,7 @@
   "layout.field.label.Project.synsicris.title": "Name",
 
   // "layout.field.label.Project.dc.title.alternative": "Title (english)",
-  "layout.field.label.Project.dc.title.alternative": "Name (englisch)",
+  "layout.field.label.Project.dc.title.alternative": "Bezeichnung in englisch",
 
   // "layout.field.label.Project.oairecerif.project.startDate": "Start date",
   "layout.field.label.Project.oairecerif.project.startDate": "Startdatum",
@@ -14887,7 +14887,7 @@
   "layout.box.help-text.Person_details_h": "Über <i class=\"fas fa-user-circle\"></i> können Sie Ihr Personenprofil bearbeiten und die Sichtbarkeit festlegen. Außerdem können Sie dort Ihre Anmeldedaten anpassen.",
 
   // "layout.box.help-text.default_h_1": "missing",
-  "layout.box.help-text.default_h_1": "<b>Wichtige Hinweise für diesen Arbeitsbereich</b></br></br><b>Bedienungshinweise:</b><ul><li>Es gibt eine <i class=\"fas fa-external-link-alt\"></i> Hilfeseite mit Abbildungen. Sie öffnet sich in einem neuen Tab und lässt sich am leichtesten nutzen, wenn Sie sie in ein zweites Browserfenster ziehen und neben das Fenster mit dem Monitoring-Tool legen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use.html\"target=_blank\">Bedienungshinweise kurz und knapp</a></li></ul><b>Erste Schritte:</b><ul><li>Als <b>Koordinator:in des Verbundes</b> laden Sie über <b>Aktion: <i class=\"fas fa-toolbox\"></i> Verwaltung Koordinator:innen</b> die Koordinator:innen der beteiligten Projekte/Zuwendungsempfänger ein.</li><li>Arbeiten Sie anschließend entlang der Nummerierung in der Navigationsleiste..</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.html\"target=_blank\">Schritt-für-Schritt-Anleitung für die Antragstellung</a></li></ul><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.html\"target=_blank\">Tipps für die Aktualisierung im laufenden Projekt</a></li><li>Tipps für den Projektabschluss</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-proj.html\"target=_blank\">Verbund und beteiligte Projekte unterscheiden</a></li></ul>",
+  "layout.box.help-text.default_h_1": "<b>Wichtige Hinweise für diesen Arbeitsbereich</b></br></br><b>Bedienungshinweise:</b><ul><li>Es gibt eine <i class=\"fas fa-external-link-alt\"></i> Hilfeseite mit Abbildungen. Sie öffnet sich in einem neuen Tab und lässt sich am leichtesten nutzen, wenn Sie sie in ein zweites Browserfenster ziehen und neben das Fenster mit dem Monitoring-Tool legen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use.php\"target=_blank\">Bedienungshinweise kurz und knapp</a></li></ul><b>Erste Schritte:</b><ul><li>Als <b>Koordinator:in des Verbundes</b> laden Sie über <b>Aktion: <i class=\"fas fa-toolbox\"></i> Verwaltung Koordinator:innen</b> die Koordinator:innen der beteiligten Projekte/Zuwendungsempfänger ein.</li><li>Arbeiten Sie anschließend entlang der Nummerierung in der Navigationsleiste..</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.php\"target=_blank\">Schritt-für-Schritt-Anleitung für die Antragstellung</a></li></ul><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.html\"target=_blank\">Tipps für die Aktualisierung im laufenden Projekt</a></li><li>Tipps für den Projektabschluss</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-proj.html\"target=_blank\">Verbund und beteiligte Projekte unterscheiden</a></li></ul>",
 
   // "layout.box.help-text.default_h_2": "missing",
   "layout.box.help-text.default_h_2": "<i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.html\"target=_blank\"><b>Schritt-für-Schritt-Anleitung für die Antragstellung</b></a></i></br><b>Wichtige Hinweise:</b><ul><li>Arbeiten Sie schrittweise. Sie können jeden Eintrag jederzeit überarbeiten. Für den Start genügt es, wenn Sie vorläufige Bezeichnungen wählen. Ergänzen Sie nach und nach die Details.</li><li>Legen Sie vor Beginn der inhaltlichen Planung die Einträge zu den Projekten und den Beteiligten an. Dafür ist jeweils mindestens die Bezeichnung erforderlich.</li><li>Legen Sie möglichst alle inhaltlichen Einträge im Impact Pathway oder im Arbeitsplan an, da Sie dort mehr Hintergrundinformationen und Hilfen erhalten. Diese Einträge erscheinen automatisch in der Listenansicht. Wenn Sie dagegen Einträge in einer Listenansicht erstellen, müssen Sie daran denken, diese später auch im Impact Pathway und/oder Arbeitsplan hinzuzufügen.</ul></li><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i><a href=\"help/pages/de/de-project-about-entities-proj.html\"target=_blank\">Verbund und Projekt unterscheiden</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-permissions.html\"target=_blank\">Rechte für das Projekt festlegen</a></ul></li>",
@@ -15121,7 +15121,7 @@
   "layout.box.header.award_comment": "Kommentare - Auszeichnung",
 
   // "layout.box.header.exp_societalimpact_comment": "Commets - Expected societal impact (new)",
-  "layout.box.header.exp_societalimpact_comment": "Kommentare - Erwartete gesellschaftliche Wirkung (Var. X)",
+  "layout.box.header.exp_societalimpact_comment": "Kommentare - Erwartete gesellschaftliche Wirkung",
 
   // "layout.box.header.pot_societalimpact_comment": "Commets - Expected societal impact",
   "layout.box.header.pot_societalimpact_comment": "Kommentare - Erwartete gesellschaftliche Wirkung (Var. Y)",
@@ -15373,7 +15373,7 @@
   "layout.field.label.project.synsicris.type.jointproject": "Art des Verbundes",
 
   // "layout.field.label.Funding.dc.title": "Workspace of the project / grant recipient:",
-  "layout.field.label.Funding.dc.title": "Arbeitsbereich des Projektes / Zuwendungsempfängers:",
+  "layout.field.label.Funding.dc.title": "<i class=\"fas fa-cube\"></i> Arbeitsbereich Projekt:",
 
   // "layout.field.label.Funding.oairecerif.acronym": "Acronym",
   "layout.field.label.Funding.oairecerif.acronym": "Akronym",
@@ -15481,6 +15481,108 @@
   "layout.field.label.Funding.synsicris.acronym.profi-call": "Acronym Förderbereich",
 
   // "layout.field.label.Funding.synsicris.internalid.profi-call": "profi-ID call",
-  "layout.field.label.Funding.synsicris.internalid.profi-call": "profi-ID Förderbereich"
+  "layout.field.label.Funding.synsicris.internalid.profi-call": "profi-ID Förderbereich",
+
+  // "layout.field.label.Project.synsicris.duration": "Duration (months)",
+  "layout.field.label.Project.synsicris.duration": "Dauer (Monate)",
+
+  // "layout.field.label.Project.synsicris.relation.project": "Coordinating project",
+  "layout.field.label.Project.synsicris.relation.project": "Koordinierendes Projekt",
+
+  // "layout.field.label.Project.oairecerif.fundingParent": "Funding programme",
+  "layout.field.label.Project.oairecerif.fundingParent": "Förderprogramm",
+
+  // "layout.field.label.Project.synsicris.relation.call": "Call",
+  "layout.field.label.Project.synsicris.relation.call": "Förderbereich",
+
+  // "layout.field.label.Project.oairecerif.amount": "Grant Total",
+  "layout.field.label.Project.oairecerif.amount": "Zuwendung gesamt",
+
+  // "layout.field.label.Project.synsicris.amount.grantpersonnel": "Grant Personnel",
+  "layout.field.label.Project.synsicris.amount.grantpersonnel": "Zuwendung Personal",
+
+  // "layout.field.label.Project.synsicris.amount.budget": "Overall budget of the project",
+  "layout.field.label.Project.synsicris.amount.budget": "Gesamtsumme des Vorhabens",
+
+  // "layout.field.label.Project.oairecerif.amount.currency": "Currency",
+  "layout.field.label.Project.oairecerif.amount.currency": "Währung",
+
+  // "layout.field.label.Project.dc.type.attachment": "Attachments",
+  "layout.field.label.Project.dc.type.attachment": "Anhang",
+
+  // "layout.field.label.Project.synsicris.type.jointproject": "Type of consortium",
+  "layout.field.label.Project.synsicris.type.jointproject": "Art des Verbundes",
+
+  // "layout.field.label.Project.synsicris.type.project": "Type of project",
+  "layout.field.label.Project.synsicris.type.project": "Art des Vorhabens",
+
+  // "submission.sections.submit.progressbar.describe.neg_sideffect": "#1 Possible negative side effect",
+  "submission.sections.submit.progressbar.describe.neg_sideffect": "#1 Mögliche negative Nebenwirkung erfassen",
+
+  // "neg_sideffect.listelement.badge": "Negative side effect",
+  "neg_sideffect.listelement.badge": "Negative Nebenwirkung",
+
+  // "open_researchquestion.listelement.badge": "Open research questions",
+  "open_researchquestion.listelement.badge": "Offene Forschungsfragen",
+
+  // "search.filters.entityType.neg_sideffect": "Possible negative side effects",
+  "search.filters.entityType.neg_sideffect": "Mögliche negative Nebenwirkungen",
+
+  // "search.filters.entityType.open_researchquestion": "Open research questions",
+  "search.filters.entityType.open_researchquestion": "Offene Forschungsfragen",
+
+  // "search.filters.entityType.exp_ia_objective": "Target for interaction and transfer",
+  "search.filters.entityType.exp_ia_objective": "Ziel für Interaktion und Transfer",
+
+  // "layout.tab.header.open_researchquestions": "Open research questions",
+  "layout.tab.header.open_researchquestions": "Offene Forschungsfragen",
+
+  // "layout.tab.header.neg_sideffect": "Possible negative side effects",
+  "layout.tab.header.neg_sideffect": "Mögliche negative Nebenwirkungen",
+
+  // "layout.box.header.open_researchquestions_comment": "Comments - Open research questions",
+  "layout.box.header.open_researchquestions_comment": "Kommentare - Offene Forschungsfragen",
+
+  // "layout.box.header.neg_sideffect_comment": "Commets - Possible negative side effect",
+  "layout.box.header.neg_sideffect_comment": "Kommentare - Mögliche negative Nebenwirkung",
+
+  // "layout.box.header.event_status": "missing",
+  "layout.box.header.event_status": "What's here?",
+
+  // "layout.box.header.open_researchquestions": "Open research questions",
+  "layout.box.header.open_researchquestions": "Offene Forschungsfragen - Listenansicht",
+
+  // "layout.box.header.open_researchquestions_m": "Open research questions",
+  "layout.box.header.open_researchquestions_m": "Offene Forschungsfragen",
+
+  // "layout.box.header.neg_sideffect": "Possible negative side effects ",
+  "layout.box.header.neg_sideffect": "Mögliche negative Nebenwirkungen - Listenansicht",
+
+  // "layout.box.header.neg_sideffect_m": "Possible negative side effects ",
+  "layout.box.header.neg_sideffect_m": "Mögliche negative Nebenwirkungen",
+
+  // "layout.field.label.open_researchquestions.dc.title": "Title",
+  "layout.field.label.open_researchquestions.dc.title": "Bezeichnung",
+
+  // "layout.field.label.open_researchquestions.dc.description": "Description",
+  "layout.field.label.open_researchquestions.dc.description": "Beschreibung",
+
+  // "layout.field.label.neg_sideeffect.dc.title": "Title",
+  "layout.field.label.neg_sideeffect.dc.title": "Bezeichnung",
+
+  // "layout.field.label.neg_sideeffect.dc.description": "Description",
+  "layout.field.label.neg_sideeffect.dc.description": "Beschreibung",
+
+  // "layout.field.label.neg_sideeffect.synsicris.type.transform": "Transformation area addressed",
+  "layout.field.label.neg_sideeffect.synsicris.type.transform": "Adressierter Transformationsbereich",
+
+  // "layout.field.label.neg_sideeffect.dc.type": "Type",
+  "layout.field.label.neg_sideeffect.dc.type": "Art",
+
+  // "layout.field.label.neg_sideeffect.synsicris.type.negative-direction": "Impact intensity",
+  "layout.field.label.neg_sideeffect.synsicris.type.negative-direction": "Wirkungsintensität",
+
+  // "layout.field.label.neg_sideeffect.synsicris.description.neg": "Extent of possible negative side effect",
+  "layout.field.label.neg_sideeffect.synsicris.description.neg": "Umfang der möglichen negativen Nebenwirkung"
 
 }

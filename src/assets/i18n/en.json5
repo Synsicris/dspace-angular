@@ -7318,7 +7318,7 @@
 
   "profile.card.security.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
 
-  "layout.tab.header.subproject": "Projektinformation",
+  "layout.tab.header.subproject": "Project information",
 
   "layout.tab.header.Funding": "Participating projects / funding recipients",
 
@@ -7338,7 +7338,7 @@
 
   "layout.tab.header.subcontractors": "Subcontractors / Cooperation partners",
 
-  "layout.tab.header.cooperationpartners": "Cooperation partners",
+  "layout.tab.header.cooperationpartners": "Cooperation partners / Subcontractors",
 
   "layout.tab.header.stakeholder": "Stakeholder groups",
 
@@ -7426,11 +7426,11 @@
 
   "layout.box.header.Funding": "Projects - List view",
 
-  "layout.box.header.projectpartner": "Subproject - Project partners",
+  "layout.box.header.projectpartner": "Project partners - List view",
 
   "layout.box.header.subcontractor": "Subproject - Subcontractors",
 
-  "layout.box.header.exploitationplan": "Subproject - Exploitation plan",
+  "layout.box.header.exploitationplan": "Exploitation plan",
 
   "layout.box.header.Person_m": "Person",
 
@@ -7570,11 +7570,11 @@
 
   "submission.sections.submit.progressbar.describe.exp_societalimpact": "#1 Expected societal impact (new)",
 
-  "exp_societalimpact.listelement.badge": "Expected societal impact (new)",
+  "exp_societalimpact.listelement.badge": "Expected societal impact",
 
   "submission.sections.upload.infosubmission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <b>upload additional files just dragging & dropping them everywhere in the page.</b>",
 
-  "search.filters.entityType.exp_societalimpact": "Expected societal impact (new)",
+  "search.filters.entityType.exp_societalimpact": "Expected societal impact",
 
   "search.filters.entityType.ia_objective": "Target for interaction and transfer",
 
@@ -7582,7 +7582,7 @@
 
   "layout.tab.header.Involved": "Involved organisations",
 
-  "layout.tab.header.exp_societalimpact": "Expected societal impacts (new)",
+  "layout.tab.header.exp_societalimpact": "Expected societal impacts",
 
   "layout.box.header.exp_societalimpact": "Expected societal impacts (new)",
 
@@ -7648,13 +7648,13 @@
 
   "layout.field.label.parentproject.oairecerif.amount.currency": "Currency",
 
-  "layout.field.label.Project.dc.title": "Workspace for all partners in the consortium:",
+  "layout.field.label.Project.dc.title": "<i class=\"fas fa-shekel-sign\"></i> Workspace Consortium:",
 
   "layout.field.label.Project.oairecerif.acronym": "Acronym",
 
   "layout.field.label.Project.oairecerif.internalid": "Funding code",
 
-  "layout.field.label.Project.oairecerif.identifier.url": "Project webpage(s)",
+  "layout.field.label.Project.oairecerif.identifier.url": "Consortium webpage(s)",
 
   "layout.field.label.Project.crispj.partnerou": "Project partner",
 
@@ -7662,7 +7662,7 @@
 
   "layout.field.label.Project.synsicris.title": "Title",
 
-  "layout.field.label.Project.dc.title.alternative": "Title (english)",
+  "layout.field.label.Project.dc.title.alternative": "Ttle in other language",
 
   "layout.field.label.Project.oairecerif.project.startDate": "Start date",
 
@@ -8254,7 +8254,7 @@
 
   "layout.field.label.exp_societalimpact.dc.description": "Description",
 
-  "layout.field.label.exp_societalimpact.dc.type": "Expected impact",
+  "layout.field.label.exp_societalimpact.dc.type": "Type",
 
   "layout.field.label.exp_societalimpact.synsicris.type-n": "Possible expected side effects",
 
@@ -8584,7 +8584,7 @@
 
   "layout.box.header.award_comment": "Commets - Award",
 
-  "layout.box.header.exp_societalimpact_comment": "Commets - Expected societal impact (new)",
+  "layout.box.header.exp_societalimpact_comment": "Commets - Expected societal impact",
 
   "layout.box.header.pot_societalimpact_comment": "Commets - Expected societal impact",
 
@@ -8738,7 +8738,7 @@
 
   "layout.field.label.project.synsicris.type.jointproject": "Type of consortium",
 
-  "layout.field.label.Funding.dc.title": "Workspace of the project / grant recipient:",
+  "layout.field.label.Funding.dc.title": "<i class=\"fas fa-cube\"></i> Workspace Project:",
 
   "layout.field.label.Funding.oairecerif.acronym": "Acronym",
 
@@ -8814,6 +8814,72 @@
 
   "layout.field.label.Funding.synsicris.acronym.profi-call": "Acronym call",
 
-  "layout.field.label.Funding.synsicris.internalid.profi-call": "profi-ID call"
+  "layout.field.label.Funding.synsicris.internalid.profi-call": "profi-ID call",
+
+  "layout.field.label.Project.synsicris.duration": "Duration (months)",
+
+  "layout.field.label.Project.synsicris.relation.project": "Coordinating project",
+
+  "layout.field.label.Project.oairecerif.fundingParent": "Funding programme",
+
+  "layout.field.label.Project.synsicris.relation.call": "Call",
+
+  "layout.field.label.Project.oairecerif.amount": "Grant Total",
+
+  "layout.field.label.Project.synsicris.amount.grantpersonnel": "Grant Personnel",
+
+  "layout.field.label.Project.synsicris.amount.budget": "Overall budget of the project",
+
+  "layout.field.label.Project.oairecerif.amount.currency": "Currency",
+
+  "layout.field.label.Project.dc.type.attachment": "Attachments",
+
+  "layout.field.label.Project.synsicris.type.jointproject": "Type of consortium",
+
+  "layout.field.label.Project.synsicris.type.project": "Type of project",
+
+  "submission.sections.submit.progressbar.describe.neg_sideffect": "#1 Possible negative side effect",
+
+  "neg_sideffect.listelement.badge": "Negative side effect",
+
+  "open_researchquestion.listelement.badge": "Open research questions",
+
+  "search.filters.entityType.neg_sideffect": "Possible negative side effects",
+
+  "search.filters.entityType.open_researchquestion": "Open research questions",
+
+  "search.filters.entityType.exp_ia_objective": "Target for interaction and transfer",
+
+  "layout.tab.header.open_researchquestions": "Open research questions",
+
+  "layout.tab.header.neg_sideffect": "Possible negative side effects",
+
+  "layout.box.header.open_researchquestions_comment": "Comments - Open research questions",
+
+  "layout.box.header.neg_sideffect_comment": "Commets - Possible negative side effect",
+
+  "layout.box.header.open_researchquestions": "Open research questions",
+
+  "layout.box.header.open_researchquestions_m": "Open research questions",
+
+  "layout.box.header.neg_sideffect": "Possible negative side effects",
+
+  "layout.box.header.neg_sideffect_m": "Possible negative side effects",
+
+  "layout.field.label.open_researchquestions.dc.title": "Title",
+
+  "layout.field.label.open_researchquestions.dc.description": "Description",
+
+  "layout.field.label.neg_sideeffect.dc.title": "Title",
+
+  "layout.field.label.neg_sideeffect.dc.description": "Description",
+
+  "layout.field.label.neg_sideeffect.synsicris.type.transform": "Transformation area addressed",
+
+  "layout.field.label.neg_sideeffect.dc.type": "Type",
+
+  "layout.field.label.neg_sideeffect.synsicris.type.negative-direction": "Impact intensity",
+
+  "layout.field.label.neg_sideeffect.synsicris.description.neg": "Extent of possible negative side effect"
 
 }
