@@ -41,7 +41,7 @@ export class ProjectI18nBreadcrumbsService implements BreadcrumbsProviderService
     let i18nKey = key;
     if (key.includes('::')) {
       [projectId, i18nKey] = key.split('::');
-      return this.projectService.getProjectItemByProjectCommunityId(projectId).pipe(
+      return this.projectService.getEntityItemByCommunityId(projectId).pipe(
         getFinishedRemoteData(),
         getRemoteDataPayload(),
         map((object: Item) => {

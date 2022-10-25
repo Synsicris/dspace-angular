@@ -1,3 +1,4 @@
+import { CreateItemSubmissionModalComponent } from './../../../shared/create-item-submission-modal/create-item-submission-modal.component';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -56,6 +57,11 @@ export class EditableTextareaComponent {
    * The textarea rows number
    */
   @Input() public rows = 5;
+
+  /**
+   * The textarea disabled
+   */
+  @Input() public disabled = false;
 
   /**
    * Emits the edited item when the form is submitted

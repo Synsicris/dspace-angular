@@ -5,6 +5,8 @@ import { distinctUntilChanged } from 'rxjs/operators';
 
 import { RoleType } from './role-types';
 import { CollectionDataService } from '../data/collection-data.service';
+import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../data/feature-authorization/feature-id';
 
 /**
  * A service that provides methods to identify user role.
@@ -15,9 +17,12 @@ export class RoleService {
   /**
    * Initialize instance variables
    *
+   * @param {AuthorizationDataService} authorizationService
    * @param {CollectionDataService} collectionService
    */
-  constructor(private collectionService: CollectionDataService) {
+  constructor(
+    private authorizationService: AuthorizationDataService,
+    private collectionService: CollectionDataService) {
   }
 
   /**
@@ -41,8 +46,7 @@ export class RoleService {
    * Check if current user is an admin
    */
   isAdmin(): Observable<boolean> {
-    // TODO find a way to check if user is an admin
-    return observableOf(false);
+    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
   }
 
   /**

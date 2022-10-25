@@ -1,17 +1,12 @@
 <div class="d-flex flex-column p-2 bg-light rounded">
   <div class="d-flex justify-content-between">
     <h5>{{fieldTitle}}</h5>
-    <button class="btn btn-primary btn-sm"
-            (click)="$event.preventDefault();  $event.stopPropagation(); openEditModal();">
+    <button class="btn btn-primary btn-sm" [disabled]="disabled" (click)="$event.preventDefault();  $event.stopPropagation(); openEditModal();">
       <span>
         <i class="far fa-edit"></i> {{editTitle}}
       </span>
     </button>
   </div>
   <div class="clearfix"></div>
-  <textarea #textarea class="mt-2 form-control rounded-0 editor"
-            rows="{{rows}}"
-            title="{{fieldTitle}}"
-            disabled="true"
-            [value]="content || ''"></textarea>
+  <textarea #textarea class="mt-2 form-control rounded-0 editor" rows="{{rows}}" title="{{fieldTitle}}" disabled="true" [value]="content || ''"></textarea>
 </div>

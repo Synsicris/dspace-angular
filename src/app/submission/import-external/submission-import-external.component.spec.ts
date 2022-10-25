@@ -21,7 +21,9 @@ import { PaginatedSearchOptions } from '../../shared/search/models/paginated-sea
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { ExternalSourceEntry } from '../../core/shared/external-source-entry.model';
-import { SubmissionImportExternalPreviewComponent } from './import-external-preview/submission-import-external-preview.component';
+import {
+  SubmissionImportExternalPreviewComponent
+} from './import-external-preview/submission-import-external-preview.component';
 
 describe('SubmissionImportExternalComponent test suite', () => {
   let comp: SubmissionImportExternalComponent;
@@ -102,17 +104,17 @@ describe('SubmissionImportExternalComponent test suite', () => {
 
     it('Should init component properly (without route data)', () => {
       const expectedEntries = createSuccessfulRemoteDataObject(createPaginatedList([]));
-      comp.routeData = {entity: '', sourceId: '', query: '' };
+      comp.routeData = {entity: '', sourceId: '', query: '', scope: '' };
       spyOn(compAsAny.routeService, 'getQueryParameterValue').and.returnValue(observableOf(''));
       fixture.detectChanges();
 
-      expect(comp.routeData).toEqual({entity: '', sourceId: '', query: '' });
+      expect(comp.routeData).toEqual({entity: '', sourceId: '', query: '', scope: '' });
       expect(comp.isLoading$.value).toBe(false);
       expect(comp.entriesRD$.value).toEqual(expectedEntries);
     });
 
     it('Should init component properly (with route data)', () => {
-      comp.routeData = {entity: '', sourceId: '', query: '' };
+      comp.routeData = {entity: '', sourceId: '', query: '', scope: '' };
       spyOn(compAsAny, 'retrieveExternalSources');
       spyOn(compAsAny.routeService, 'getQueryParameterValue').and.returnValues(observableOf('entity'), observableOf('source'), observableOf('dummy'));
       fixture.detectChanges();
@@ -138,15 +140,15 @@ describe('SubmissionImportExternalComponent test suite', () => {
     });
 
     it('Should call \'router.navigate\'', () => {
-      comp.routeData = {entity: 'Person', sourceId: '', query: '' };
+      comp.routeData = {entity: 'Person', sourceId: '', query: '', scope: '' };
       spyOn(compAsAny, 'retrieveExternalSources').and.callFake(() => null);
       compAsAny.router.navigate.and.returnValue( new Promise(() => {return;}));
-      const event = {entity: 'Person', sourceId: 'orcidV2', query: 'dummy' };
+      const event = {entity: 'Person', sourceId: 'orcidV2', query: 'dummy', scope: '' };
 
       scheduler.schedule(() => comp.getExternalSourceData(event));
       scheduler.flush();
 
-      expect(compAsAny.router.navigate).toHaveBeenCalledWith([], { queryParams: { entity: event.entity, sourceId: event.sourceId, query: event.query }, replaceUrl: true });
+      expect(compAsAny.router.navigate).toHaveBeenCalledWith([], { queryParams: { entity: event.entity, sourceId: event.sourceId, query: event.query, scope: event.scope }, replaceUrl: true });
     });
 
     it('Entry should be passed to the component loaded inside the modal', () => {

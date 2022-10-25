@@ -1,12 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 
 import { ProjectVersionService } from '../../core/project/project-version.service';
 import { Item } from '../../core/shared/item.model';
 import { Version } from '../../core/shared/version.model';
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { RemoteData } from '../../core/data/remote-data';
+import { concatMap, map, mergeMap, reduce } from 'rxjs/operators';
+
+interface VersionDescription {
+  title: string;
+  date: string;
+}
 
 @Component({
   selector: 'ds-item-version-list',
@@ -16,14 +22,24 @@ import { RemoteData } from '../../core/data/remote-data';
 export class ItemVersionListComponent implements OnInit {
 
   /**
+   * The id of the current version item selected
+   */
+  @Input() currentVersionSelected: string;
+
+  /**
    * The item id to search versions for
    */
   @Input() targetItemId: string;
 
   /**
+   * Class of btn, default sm
+   */
+  @Input() btnClass = 'btn-sm';
+
+  /**
    * The current version selected
    */
-  currentVersion: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  currentVersion: BehaviorSubject<VersionDescription> = new BehaviorSubject<VersionDescription>(null);
 
   /**
    * The list of versioned items available for the given target
@@ -44,7 +60,25 @@ export class ItemVersionListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.projectVersionService.getVersionsByItemId(this.targetItemId).subscribe((list: Version[]) => {
+    this.projectVersionService.getVersionsByItemId(this.targetItemId).pipe(
+      concatMap((versions: Version[]) => versions),
+      mergeMap(((version: Version) => {
+        if (this.currentVersionSelected) {
+          return version.item.pipe(
+            getFirstCompletedRemoteData(),
+            map((itemRD: RemoteData<Item>) => {
+              if (itemRD.hasSucceeded && itemRD.payload.id === this.currentVersionSelected) {
+                this.currentVersion.next(this.getVersionDescription(version));
+              }
+              return version;
+            })
+          );
+        } else {
+          return of(version);
+        }
+      })),
+      reduce((acc: Version[], value: Version) => [...acc, value], []),
+    ).subscribe((list: Version[]) => {
       this.versionList$.next(list);
     });
   }
@@ -59,7 +93,7 @@ export class ItemVersionListComponent implements OnInit {
     ).subscribe((itemRD: RemoteData<Item>) => {
       if (itemRD.hasSucceeded) {
         this.versionSelected.emit(itemRD.payload);
-        this.currentVersion.next(version.created.toString());
+        this.currentVersion.next(this.getVersionDescription(version));
       }
     });
   }
@@ -68,7 +102,14 @@ export class ItemVersionListComponent implements OnInit {
    * Emit an event when a version is deselected
    */
   onVersionDeselected() {
-    this.currentVersion.next('');
+    this.currentVersion.next(null);
     this.versionDeselected.emit();
+  }
+
+  private getVersionDescription(version: Version): VersionDescription {
+    return {
+      title: version?.summary || '',
+      date: version?.created?.toString() || ''
+    };
   }
 }

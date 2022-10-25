@@ -8,7 +8,7 @@ import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
-import { PARENT_PROJECT_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
+import { FUNDING_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
 import { Community } from '../../../core/shared/community.model';
 import { getRemoteDataPayload } from '../../../core/shared/operators';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
@@ -18,6 +18,7 @@ import { PROJECT_ROUTE } from '../../../project-overview-page/project-overview-p
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 
 /**
  * This component renders a context menu option that provides to export an item.
@@ -30,7 +31,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 export class ViewProjectItemsMenuComponent extends ContextMenuEntryComponent {
 
   /**
-   * The parentproject/project community
+   * The project community
    */
   public projectCommunity$: Observable<Community>;
 
@@ -71,9 +72,11 @@ export class ViewProjectItemsMenuComponent extends ContextMenuEntryComponent {
   }
 
   ngOnInit(): void {
-    this.authorizationService.isAuthorized(FeatureID.isMemberOfProject, this.contextMenuObject.self).pipe(
+    const isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
+    const isMember$ = this.authorizationService.isAuthorized(FeatureID.isMemberOfProject, this.contextMenuObject.self);
+    combineLatest([isMember$, isAdmin$]).pipe(
       take(1)
-    ).subscribe((isMemberOfProject) => this.canSeeItems$.next(isMemberOfProject));
+    ).subscribe(([isMemberOfProject, isAdmin]) => this.canSeeItems$.next(isMemberOfProject || isAdmin));
 
     this.projectCommunity$ = this.projectService.getProjectCommunityByItemId((this.contextMenuObject as Item).uuid).pipe(
       take(1),
@@ -82,10 +85,10 @@ export class ViewProjectItemsMenuComponent extends ContextMenuEntryComponent {
   }
 
   /**
-   * Check if current Item is a parentproject
+   * Check if current Item is a Project or a Funding
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY || (this.contextMenuObject as Item).entityType === PARENT_PROJECT_ENTITY;
+    return (this.contextMenuObject as Item).entityType === FUNDING_ENTITY || (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
   }
 
   /**

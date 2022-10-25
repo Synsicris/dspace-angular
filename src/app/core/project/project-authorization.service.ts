@@ -37,7 +37,7 @@ export class ProjectAuthorizationService {
    * Check if user has permission to create a new sub-project
    */
   canCreateSubproject(parentProjectUUID): Observable<boolean> {
-    return this.projectDataService.getSubprojectRootCommunityByParentProjectUUID(parentProjectUUID).pipe(
+    return this.projectDataService.getFundingRootCommunityByProjectUUID(parentProjectUUID).pipe(
       map((community: Community) => community._links.self.href),
       mergeMap((href: string) => combineLatest([this.authorizationService.isAuthorized(
         FeatureID.CanCreateCommunities,
@@ -49,5 +49,19 @@ export class ProjectAuthorizationService {
       map(([isCommunityAdmin, isAdmin]) => isCommunityAdmin || isAdmin),
       distinctUntilChanged()
     );
+  }
+
+  /**
+   * Check if user is an administrator
+   */
+  isAdmin(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
+  }
+
+  /**
+   * Check if user is a funder organizational manager
+   */
+  isFunderOrganizationalManager(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager);
   }
 }

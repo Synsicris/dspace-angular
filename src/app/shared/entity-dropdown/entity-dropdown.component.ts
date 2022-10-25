@@ -10,7 +10,7 @@ import {
   Output
 } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { hasValue } from '../empty.util';
+import { hasValue, isNotEmpty } from '../empty.util';
 import { reduce, startWith, switchMap } from 'rxjs/operators';
 import { RemoteData } from '../../core/data/remote-data';
 import { FindListOptions } from '../../core/data/request.models';
@@ -160,9 +160,11 @@ export class EntityDropdownComponent implements OnInit, OnDestroy {
     // Set the pagination info
     const findOptions: FindListOptions = {
       elementsPerPage: 10,
-      currentPage: page,
-      searchParams: [new RequestParam('scope', this.scope)]
+      currentPage: page
     };
+    if (isNotEmpty(this.scope)) {
+      findOptions.searchParams = [new RequestParam('scope', this.scope)];
+    }
 
     let searchListEntity$;
     if (this.isSubmission) {

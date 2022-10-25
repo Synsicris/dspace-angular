@@ -95,7 +95,6 @@ describe('CompareItemComponent', () => {
     });
 
     it('should show table', () => {
-      console.log(de.queryAll(By.css('tr')));
       expect(de.query(By.css('table'))).toBeTruthy();
     });
 

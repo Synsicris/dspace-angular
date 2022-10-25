@@ -26,6 +26,7 @@ import {
 import { MetadataMap, MetadatumViewModel } from '../../core/shared/metadata.models';
 import {
   chartDateViewSelector,
+  comparingVersionSelector,
   getLastAddedNodesListSelector,
   isCompareMode,
   isWorkingPlanInitializingSelector,
@@ -147,6 +148,15 @@ export class WorkingPlanStateService {
 
   public isCompareModeActive() {
     return this.store.pipe(select(isCompareMode));
+  }
+
+  /**
+   * Returns the current working plan selected for comparison.
+   *
+   * @return {Observable<string>}
+   */
+  public getCurrentComparingWorkingPlan(): Observable<string> {
+    return this.store.pipe(select(comparingVersionSelector));
   }
 
   public getWorkpackages(): Observable<Workpackage[]> {

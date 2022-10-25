@@ -2,6 +2,8 @@
   <ng-container *ngIf="status">
     <ds-mydspace-item-status [status]="status"></ds-mydspace-item-status>
   </ng-container>
+  <ds-type-badge [object]="item"></ds-type-badge>
+  <ds-grant-badge class="d-block" [object]="item"></ds-grant-badge>
   <div *ngIf="item">
     <h2 class="item-page-title-field">
       <ds-metadata-values *ngIf="item.hasMetadata('dc.title')" [mdValues]="item?.allMetadata('dc.title')"></ds-metadata-values>

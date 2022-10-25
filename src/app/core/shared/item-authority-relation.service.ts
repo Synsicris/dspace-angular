@@ -388,7 +388,6 @@ export class ItemAuthorityRelationService {
       patchPath).pipe(
       tap((item: Item) => this.itemService.update(item)),
       catchError((error: ErrorResponse) => {
-        console.log(error.errorMessage);
         return observableThrowError(new Error(error.errorMessage));
       })
     );

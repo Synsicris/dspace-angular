@@ -37,7 +37,7 @@ describe('ProfilePageComponent', () => {
     user = Object.assign(new EPerson(), {
       id: 'userId',
       groups: createSuccessfulRemoteDataObject$(createPaginatedList([])),
-      _links: {self: {href: 'test.com/uuid/1234567654321'}}
+      _links: { self: { href: 'test.com/uuid/1234567654321' } }
     });
     initialState = {
       core: {
@@ -216,7 +216,7 @@ describe('ProfilePageComponent', () => {
 
       it('should show the security section on the page', () => {
         fixture.detectChanges();
-        expect(fixture.debugElement.query(By.css('.security-section'))).not.toBeNull();
+        expect(fixture.debugElement.query(By.css('ngb-panel[data-test="profile-security"]'))).not.toBeNull();
       });
     });
 
@@ -231,7 +231,7 @@ describe('ProfilePageComponent', () => {
 
       it('should not show the security section on the page', () => {
         fixture.detectChanges();
-        expect(fixture.debugElement.query(By.css('.security-section'))).toBeNull();
+        expect(fixture.debugElement.query(By.css('ngb-panel[data-test="profile-security"]'))).toBeNull();
       });
     });
   });

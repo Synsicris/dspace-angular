@@ -114,6 +114,15 @@ export const isCompareMode = createSelector(_getWorkingPlanState,
 );
 
 /**
+ * Returns the current working plan selected for comparison.
+ * @function comparingVersionSelector
+ * @return {string}
+ */
+export const comparingVersionSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.compareWorkingplanId || null
+);
+
+/**
  * Returns the Workpackage object.
  * @function workpackageByIDSelector
  * @param {string} workpackageId

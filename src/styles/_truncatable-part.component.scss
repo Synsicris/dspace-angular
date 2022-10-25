@@ -26,12 +26,40 @@
 
 }
 
+@mixin clamp-transparent($lines, $size-factor: 1, $line-height: $line-height-base) {
+  $height: $line-height * $font-size-base * $size-factor;
+  &.fixedHeight {
+    height: $lines * $height;
+  }
+  .content {
+    max-height: $lines * $height;
+    position: relative;
+    overflow: hidden;
+    line-height: $line-height;
+    overflow-wrap: break-word;
+    &:after {
+      content: "";
+      position: absolute;
+      padding-right: 15px;
+      top: ($lines - 1) * $height;
+      right: 0;
+      width: 30%;
+      min-width: 75px;
+      max-width: 150px;
+      height: $height;
+      background: none;
+      pointer-events: none;
+    }
+  }
+
+}
 @mixin min($lines, $size-factor: 1, $line-height: $line-height-base) {
   $height: $line-height * $font-size-base * $size-factor;
   min-height: $lines * $height;
 }
 
 $h4-factor: strip-unit($h4-font-size);
+$clamp-bg-info-color: #d0e4ea00;
 
 @mixin clamp-with-titles($i, $bg) {
   transition: height 1s;
@@ -41,6 +69,17 @@ $h4-factor: strip-unit($h4-font-size);
   }
   &.h4 {
     @include clamp($i, $bg, $h4-factor, $headings-line-height);
+  }
+}
+
+@mixin clamp-transparent-with-titles($i) {
+  transition: height 1s;
+  @include clamp-transparent($i);
+  &.title {
+    @include clamp-transparent($i, 1.25);
+  }
+  &.h4 {
+    @include clamp-transparent($i, $h4-factor, $headings-line-height);
   }
 }
 
@@ -69,6 +108,15 @@ $h4-factor: strip-unit($h4-font-size);
   :focus .clamp-light-#{$i},
   .ds-hover .clamp-light-#{$i} {
     @include clamp-with-titles($i, darken($light, 10%));
+  }
+
+  .clamp-transparent-#{$i} {
+    @include clamp-transparent-with-titles($i);
+  }
+
+  :focus .clamp-transparent-#{$i},
+  .ds-hover .clamp-transparent-#{$i} {
+    @include clamp-transparent-with-titles($i);
   }
 }
 

@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
-import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of as observableOf } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,6 +11,8 @@ import { isNotEmpty } from '../../../shared/empty.util';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { Item } from '../../../core/shared/item.model';
+import { ProjectVersionService } from '../../../core/project/project-version.service';
+import { Version } from '../../../core/shared/version.model';
 
 /**
  * This component represents submission form footer bar.
@@ -96,14 +98,21 @@ export class SubmissionFormFooterComponent implements OnInit, OnChanges {
    */
   constructor(private authorizationService: AuthorizationDataService,
               private modalService: NgbModal,
+              private projectVersionService: ProjectVersionService,
               private restService: SubmissionRestService,
               private submissionService: SubmissionService) {
   }
 
   ngOnInit(): void {
-    this.authorizationService.isAuthorized(FeatureID.CanDelete, this.item.self)
-      .subscribe((canDelete) => {
-        this.canDelete$.next(this.submissionService.getSubmissionScope() === SubmissionScopeType.EditItem && canDelete);
+    const hasVersion$ = this.projectVersionService.getVersionsByItemId(this.item.id).pipe(
+      map((versions: Version[]) => versions.length > 0)
+    );
+
+    const canDelete$ = this.authorizationService.isAuthorized(FeatureID.CanDelete, this.item.self);
+
+    combineLatest([canDelete$, hasVersion$])
+      .subscribe(([canDelete, hasVersion]) => {
+        this.canDelete$.next(this.submissionService.getSubmissionScope() === SubmissionScopeType.EditItem && canDelete && !hasVersion);
       });
   }
 

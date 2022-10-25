@@ -4,8 +4,8 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { of as observableOf, of } from 'rxjs';
-import { NotificationsService } from 'src/app/shared/notifications/notifications.service';
-import { NotificationsServiceStub } from 'src/app/shared/testing/notifications-service.stub';
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { ProcessDataService } from '../../core/data/processes/process-data.service';
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
@@ -167,14 +167,14 @@ describe('ProcessOverviewComponent', () => {
       it('should display the start time in the fourth column', () => {
         rowElements.forEach((rowElement, index) => {
           const el = rowElement.query(By.css('td:nth-child(4)')).nativeElement;
-        expect(el.textContent).toContain(pipe.transform(adminProcesses[index].startTime, component.dateFormat, 'UTC'));
+          expect(el.textContent).toContain(pipe.transform(adminProcesses[index].startTime, component.dateFormat, 'UTC'));
         });
       });
 
       it('should display the end time in the fifth column', () => {
         rowElements.forEach((rowElement, index) => {
           const el = rowElement.query(By.css('td:nth-child(5)')).nativeElement;
-        expect(el.textContent).toContain(pipe.transform(adminProcesses[index].endTime, component.dateFormat, 'UTC'));
+          expect(el.textContent).toContain(pipe.transform(adminProcesses[index].endTime, component.dateFormat, 'UTC'));
         });
       });
 

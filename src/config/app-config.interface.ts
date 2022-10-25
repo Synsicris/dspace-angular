@@ -25,6 +25,7 @@ import { WorkingPlanConfig } from './working-plan-config.interface';
 import { ProjectsConfig } from './projects-config.interface';
 import { ExploitationPlanConfig } from './exploitation-plan.config';
 import { DisplayItemSearchResultConfig } from './display-search-result-config.interface';
+import { CommentConfig } from './comment.config';
 
 interface AppConfig extends Config {
   ui: UIServerConfig;
@@ -56,6 +57,7 @@ interface AppConfig extends Config {
   projects: ProjectsConfig;
   exploitationPlan: ExploitationPlanConfig;
   displayItemSearchResult?: DisplayItemSearchResultConfig;
+  comments: CommentConfig;
 }
 
 const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG');

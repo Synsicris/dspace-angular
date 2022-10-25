@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { createSelector, select, Store } from '@ngrx/store';
 import { Observable, of as observableOf } from 'rxjs';
-import { catchError, filter, map, take } from 'rxjs/operators';
+import { catchError, map, take } from 'rxjs/operators';
 
 import {
   GroupRegistryCancelGroupAction,

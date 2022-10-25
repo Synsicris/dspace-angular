@@ -1,3 +1,4 @@
+import { AuthorizationDataService } from './../../../../core/data/feature-authorization/authorization-data.service';
 import { CommonModule } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
@@ -42,6 +43,7 @@ describe('MembersListComponent', () => {
   let epersonMembers;
   let subgroupMembers;
   let paginationService;
+  let authorizationService: AuthorizationDataService;
 
   beforeEach(waitForAsync(() => {
     activeGroup = GroupMock;
@@ -116,6 +118,9 @@ describe('MembersListComponent', () => {
     };
     builderService = getMockFormBuilderService();
     translateService = getMockTranslateService();
+    authorizationService = jasmine.createSpyObj('authorizationService', {
+      isAuthorized: observableOf(true)
+    });
 
     paginationService = new PaginationServiceStub();
     TestBed.configureTestingModule({
@@ -135,6 +140,7 @@ describe('MembersListComponent', () => {
         { provide: FormBuilderService, useValue: builderService },
         { provide: Router, useValue: new RouterMock() },
         { provide: PaginationService, useValue: paginationService },
+        { provide: AuthorizationDataService, useValue: authorizationService },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -240,6 +246,25 @@ describe('MembersListComponent', () => {
           });
         });
       });
+
+      describe('if user is admin', () => {
+
+        beforeEach(() => {
+          component.showInvitationAction = true;
+          component.showWithdrawActions = true;
+          fixture.detectChanges();
+        });
+
+        it('should show addMemberToAllGroups button', () => {
+          expect(fixture.debugElement.query(By.css('button[data-test="addMemberToAllGroups"]'))).toBeTruthy();
+        });
+
+        it('should show deleteMemberToAllGroups button', () => {
+          expect(fixture.debugElement.query(By.css('button[data-test="deleteMemberToAllGroups"]'))).toBeTruthy();
+        });
+
+      });
+
     });
   });
 

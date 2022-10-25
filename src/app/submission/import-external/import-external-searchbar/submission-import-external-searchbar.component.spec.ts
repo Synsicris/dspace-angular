@@ -104,7 +104,7 @@ describe('SubmissionImportExternalSearchbarComponent test suite', () => {
     });
 
     it('Should init component properly (without initExternalSourceData)', () => {
-      comp.initExternalSourceData = { entity: 'Publication', sourceId: '', query: '' };
+      comp.initExternalSourceData = { entity: 'Publication', sourceId: '', query: '', scope: '' };
       scheduler.schedule(() => fixture.detectChanges());
       scheduler.flush();
 
@@ -114,7 +114,7 @@ describe('SubmissionImportExternalSearchbarComponent test suite', () => {
     });
 
     it('Should init component properly (with initExternalSourceData populated)', () => {
-      comp.initExternalSourceData = { entity: 'Publication', query: 'dummy', sourceId: 'ciencia' };
+      comp.initExternalSourceData = { entity: 'Publication', query: 'dummy', sourceId: 'ciencia', scope: null };
       scheduler.schedule(() => fixture.detectChanges());
       scheduler.flush();
 
@@ -130,7 +130,7 @@ describe('SubmissionImportExternalSearchbarComponent test suite', () => {
     });
 
     it('Should load additional external sources', () => {
-      comp.initExternalSourceData = { entity: 'Publication', query: 'dummy', sourceId: 'ciencia' };
+      comp.initExternalSourceData = { entity: 'Publication', query: 'dummy', sourceId: 'ciencia', scope: '' };
       comp.sourceListLoading = false;
       compAsAny.pageInfo = new PageInfo({
         elementsPerPage: 3,
@@ -155,10 +155,10 @@ describe('SubmissionImportExternalSearchbarComponent test suite', () => {
     });
 
     it('The \'search\' method should call \'emit\'', () => {
-      comp.initExternalSourceData = { entity: 'Publication', query: 'dummy', sourceId: 'ciencia' };
+      comp.initExternalSourceData = { entity: 'Publication', query: 'dummy', sourceId: 'ciencia', scope: '' };
       comp.selectedElement = { id: 'orcidV2', name: 'orcidV2' };
       comp.searchString = 'dummy';
-      const expected = { entity: 'Publication', sourceId: comp.selectedElement.id, query: comp.searchString };
+      const expected = { entity: 'Publication', sourceId: comp.selectedElement.id, query: comp.searchString, scope: '' };
       spyOn(comp.externalSourceData, 'emit');
       comp.search();
 
