@@ -16,7 +16,7 @@ import { SubmissionService } from '../../submission/submission.service';
 import { MetadataMap, MetadataValue } from '../shared/metadata.models';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 import { SubmissionObject } from '../submission/models/submission-object.model';
-import { catchError, delay, map, mergeMap, take, tap, switchMap } from 'rxjs/operators';
+import { catchError, delay, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 import { isEmpty, isNotEmpty, isNotNull, isNull, isUndefined } from '../../shared/empty.util';
 import { Item } from '../shared/item.model';
 import { ErrorResponse } from '../cache/response.models';
@@ -166,7 +166,6 @@ export class ProjectItemService {
   }
 
   public updateMultipleSubmissionMetadata(submissionObject: SubmissionObject, pathName: string, metadata: MetadataMap): Observable<any> {
-    console.log(submissionObject, pathName, metadata);
     const pathCombiner = new JsonPatchOperationPathCombiner('sections', pathName);
     Object.keys(metadata)
       .forEach((metadataName) => {

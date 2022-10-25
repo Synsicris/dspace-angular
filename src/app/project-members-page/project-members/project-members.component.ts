@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, from, Observable, Subscription } from 'rxjs';
-import { mergeMap, reduce, take, tap } from 'rxjs/operators';
+import { mergeMap, reduce, take } from 'rxjs/operators';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -17,6 +17,7 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
 import { EPerson } from '../../core/eperson/models/eperson.model';
+import { ProjectAuthorizationService } from '../../core/project/project-authorization.service';
 
 @Component({
   selector: 'ds-project-members',
@@ -36,9 +37,14 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
   @Input() relatedCommunity: Community;
 
   /**
-   * Representing if managing a project admin group or not
+   * Representing if managing a project coordinators group or not
    */
-  @Input() isAdminGroup: boolean;
+  @Input() isCoordinatorsGroup: boolean;
+
+  /**
+   * Representing if managing a project funders group or not
+   */
+  @Input() isFundersGroup: boolean;
 
   /**
    * Representing if managing members of a funding
@@ -46,6 +52,11 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
   @Input() isFunding: boolean;
 
   groupBeingEdited: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * A Boolean representing if user is a Funder Organizational Manager
+   */
+  isFunderOrganizationalManager$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * I18n message key for help box
@@ -71,13 +82,21 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
     protected modalService: NgbModal,
     protected translateService: TranslateService,
     protected notificationsService: NotificationsService,
-    protected projectGroupService: ProjectGroupService) {
+    protected projectAuthService: ProjectAuthorizationService,
+    protected projectGroupService: ProjectGroupService
+  ) {
 
   }
 
   ngOnInit(): void {
-    if (this.isAdminGroup) {
-      this.helpMessageLabel = this.isFunding ? 'project.manage.members.funding.admin-group-help' : 'project.manage.members.project.admin-group-help';
+    this.projectAuthService.isFunderOrganizationalManager().subscribe((isFunderOrganizationalManager) => {
+      this.isFunderOrganizationalManager$.next(isFunderOrganizationalManager);
+    });
+
+    if (this.isFundersGroup) {
+      this.helpMessageLabel = 'project.manage.members.project.funders-group-help';
+    } else if (this.isCoordinatorsGroup) {
+      this.helpMessageLabel = this.isFunding ? 'project.manage.members.funding.coordinators-group-help' : 'project.manage.members.project.coordinators-group-help';
     } else {
       this.helpMessageLabel = this.isFunding ? 'project.manage.members.funding.members-group-help' : 'project.manage.members.project.members-group-help';
     }
@@ -150,10 +169,8 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
     this.getGroups().pipe(
       take(1),
       mergeMap((groups: string[]) => from(groups).pipe(
-        tap((g) => console.log(g)),
         mergeMap((groupId: string) => this.getGroupEntity(groupId)),
         mergeMap((groupRD: RemoteData<Group>) => {
-          console.log(groupRD);
           if (groupRD.hasSucceeded) {
             processedGroups.push(groupRD.payload);
             return this.groupService.deleteMemberFromGroup(groupRD.payload, ePerson).pipe(
@@ -166,11 +183,9 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
         reduce((acc: any, value: any) => [...acc, value], []),
       )),
     ).subscribe((groups: RemoteData<Group>[]) => {
-      console.log(groups);
       const successfulReq = groups.filter((groupRD: RemoteData<Group>) => groupRD.hasSucceeded);
 
       if (successfulReq.length === groups.length) {
-        console.log(groups);
         this.notificationsService.success(this.translateService.get(this.messagePrefix + '.notification.success.deleteMember'));
         this.refreshGroupsMembers(processedGroups);
       } else {
@@ -189,14 +204,16 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
   private getGroups(): Observable<string[]> {
     let groups$: Observable<string[]>;
     if (!this.isFunding) {
-      if (this.isAdminGroup) {
-        groups$ = this.projectGroupService.getInvitationProjectAllGroupsByCommunity(this.relatedCommunity);
+      if (this.isFundersGroup) {
+        groups$ = this.projectGroupService.getInvitationProjectFundersGroupsByCommunity(this.relatedCommunity);
+      } else if (this.isCoordinatorsGroup) {
+        groups$ = this.projectGroupService.getInvitationProjectCoordinatorsAndMembersGroupsByCommunity(this.relatedCommunity);
       } else {
         groups$ = this.projectGroupService.getInvitationProjectMembersGroupsByCommunity(this.relatedCommunity);
       }
     } else {
-      if (this.isAdminGroup) {
-        groups$ = this.projectGroupService.getInvitationFundingAdminsGroupsByCommunity(this.relatedCommunity);
+      if (this.isCoordinatorsGroup) {
+        groups$ = this.projectGroupService.getInvitationFundingCoordinatorsAndMembersGroupsByCommunity(this.relatedCommunity);
       } else {
         groups$ = this.projectGroupService.getInvitationFundingMembersGroupsByCommunity(this.relatedCommunity);
       }
@@ -205,7 +222,7 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
     return groups$;
   }
 
-  private refreshGroupsMembers(processedGroups: Group[] ): void {
+  private refreshGroupsMembers(processedGroups: Group[]): void {
     processedGroups.forEach((groupRD: Group) => {
       this.epersonService.clearLinkRequests(groupRD._links.epersons.href);
     });

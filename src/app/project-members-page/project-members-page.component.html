@@ -1,23 +1,41 @@
 <div class="container">
-  <nav ngbNav #nav="ngbNav" class="nav-tabs">
-    <ng-container ngbNavItem>
-      <a ngbNavLink><b>{{(isFunding ? 'project.manage.members.funding.admin-group' : 'project.manage.members.project.admin-group') | translate }}</b></a>
+  <nav ngbNav #nav="ngbNav" class="nav-tabs" [activeId]="(fundersGroup$ | async) ? 'funders' : 'coordinators'">
+    <ng-container ngbNavItem="funders" *ngIf="(fundersGroup$ | async)">
+      <a ngbNavLink><b>{{'project.manage.members.project.funders-group' | translate }}</b></a>
       <ng-template ngbNavContent>
-        <ds-project-members [targetGroup]="(adminsGroup$ | async)"
-                            [relatedCommunity]="(relatedCommunity$ | async)" [isAdminGroup]="true" [isFunding]="isFunding">
+        <ds-project-members [targetGroup]="(fundersGroup$ | async)"
+                            [relatedCommunity]="(relatedCommunity$ | async)"
+                            [isFundersGroup]="true"
+                            [isCoordinatorsGroup]="false"
+                            [isFunding]="isFunding">
         </ds-project-members>
       </ng-template>
     </ng-container>
-    <ng-container ngbNavItem *ngIf="isFunding">
+    <ng-container ngbNavItem="coordinators">
+      <a ngbNavLink><b>{{(isFunding ? 'project.manage.members.funding.coordinators-group' : 'project.manage.members.project.coordinators-group') | translate }}</b></a>
+      <ng-template ngbNavContent>
+        <ds-project-members [targetGroup]="(coordinatorsGroup$ | async)"
+                            [relatedCommunity]="(relatedCommunity$ | async)"
+                            [isFundersGroup]="false"
+                            [isCoordinatorsGroup]="true"
+                            [isFunding]="isFunding">
+        </ds-project-members>
+      </ng-template>
+    </ng-container>
+    <ng-container ngbNavItem="members" *ngIf="isFunding">
       <a ngbNavLink>{{(isFunding ? 'project.manage.members.funding.members-group' : 'project.manage.members.project.members-group') | translate }}</a>
       <ng-template ngbNavContent>
         <ds-project-members [targetGroup]="(membersGroup$ | async)"
-                            [relatedCommunity]="(relatedCommunity$ | async)" [isAdminGroup]="false" [isFunding]="isFunding">
+                            [relatedCommunity]="(relatedCommunity$ | async)"
+                            [isFundersGroup]="false"
+                            [isCoordinatorsGroup]="false"
+                            [isFunding]="isFunding">
         </ds-project-members>
       </ng-template>
     </ng-container>
   </nav>
 
-  <div *ngIf="(adminsGroup$ | async) && (membersGroup$ | async)" [ngbNavOutlet]="nav" class="mt-5"></div>
+  <div *ngIf="(fundersGroupInit$ | async) && (coordinatorsGroup$ | async) && (membersGroup$ | async)"
+       [ngbNavOutlet]="nav" class="mt-5"></div>
 
 </div>

@@ -50,4 +50,18 @@ export class ProjectAuthorizationService {
       distinctUntilChanged()
     );
   }
+
+  /**
+   * Check if user is an administrator
+   */
+  isAdmin(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
+  }
+
+  /**
+   * Check if user is a funder organizational manager
+   */
+  isFunderOrganizationalManager(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager);
+  }
 }

@@ -5,6 +5,7 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/ro
 import { AuthService } from '../../../auth/auth.service';
 import { Observable, of as observableOf } from 'rxjs';
 import { FeatureID } from '../feature-id';
+import { SomeFeatureAuthorizationGuard } from './some-feature-authorization.guard';
 
 /**
  * Prevent unauthorized activating and loading of routes when the current authenticated user doesn't have group
@@ -13,7 +14,7 @@ import { FeatureID } from '../feature-id';
 @Injectable({
   providedIn: 'root'
 })
-export class GroupAdministratorGuard extends SingleFeatureAuthorizationGuard {
+export class GroupAdministratorGuard extends SomeFeatureAuthorizationGuard {
   constructor(protected authorizationService: AuthorizationDataService, protected router: Router, protected authService: AuthService) {
     super(authorizationService, router, authService);
   }
@@ -21,7 +22,7 @@ export class GroupAdministratorGuard extends SingleFeatureAuthorizationGuard {
   /**
    * Check group management rights
    */
-  getFeatureID(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FeatureID> {
-    return observableOf(FeatureID.CanManageGroups);
+  getFeatureIDs(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FeatureID[]> {
+    return observableOf([FeatureID.CanManageGroups, FeatureID.isFunderOrganizationalManager]);
   }
 }

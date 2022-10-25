@@ -588,6 +588,8 @@
 
   "admin.access-control.groups.form.return": "Back",
 
+  "admin.access-control.groups.project-managers-group.breadcrumbs": "Manage Group Members",
+
   "admin.notifications.openairebroker.breadcrumbs": "OpenAIRE Broker",
 
   "admin.notifications.openairebroker.page.title": "OpenAIRE Broker",
@@ -1461,6 +1463,10 @@
   "context-menu.actions.subscription.notification.here-text": "Subscription Summary",
 
   "context-menu.actions.subscription.notification.content": "Subscription Updated Successfully, click {{here}} to see subscrition summary.",
+
+  "context-menu.actions.manage-project-funders-group": "<i class=\"fas fa-user-friends\"></i> Manage project funders",
+
+  "context-menu.actions.manage-programme-group": "<i class=\"fas fa-user-friends\"></i> Manage programme members",
 
   "RELATION.Person.researchoutputs.search.results.head": "Research Outputs",
 
@@ -4414,17 +4420,21 @@
 
   "project.manage.page.title": "Invitation and management of project coordinators",
 
-  "project.manage.members.project.admin-group": "Invitation and Management of project coordinators",
+  "project.manage.members.project.coordinators-group": "Invitation and Management of project coordinators",
 
-  "project.manage.members.project.admin-group-help": "Help message here",
+  "project.manage.members.project.coordinators-group-help": "Help message here",
+
+  "project.manage.members.project.funders-group": "Invitation and Management of project funders",
+
+  "project.manage.members.project.funders-group-help": "Help message here",
 
   "project.manage.members.project.members-group": "Invitation and Management of project members",
 
   "project.manage.members.project.members-group-help": "Help message here",
 
-  "project.manage.members.funding.admin-group": "Invitation and Management of project coordinators",
+  "project.manage.members.funding.coordinators-group": "Invitation and Management of project coordinators",
 
-  "project.manage.members.funding.admin-group-help": "Help message here",
+  "project.manage.members.funding.coordinators-group-help": "Help message here",
 
   "project.manage.members.funding.members-group": "Invitation and Management of project members",
 
@@ -4487,6 +4497,10 @@
   "project.manage.members-list.table.withdraw.tooltip": "You can withdraw role",
 
   "project.manage.members-list.table.withdraw.send": "Send Invitation",
+
+  "project.manage.members-list.table.identity": "Identity",
+
+  "project.manage.members-group-help": "Help message here",
 
   "project.manage.notification.success.addMember": "Successfully added member",
 
@@ -6866,9 +6880,13 @@
 
   "invitation.ignore-btn": "Ignore",
 
-  "invitation.group.project.admin": "Coordinators group for project : ",
+  "invitation.group.project.coordinators": "Coordinators group for project : ",
+
+  "invitation.group.project.funders": "Funders group for project : ",
 
   "invitation.group.project.members": "Members group for project : ",
+
+  "invitation.group.project.readers": "Readers group for project : ",
 
   "invitation.group.funding.admin": "Coordinators group for funding: ",
 

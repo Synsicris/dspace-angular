@@ -229,7 +229,6 @@ export class WorkingPlanChartDatesComponent implements OnInit {
   }
 
   getDatesMonthByYear(year: string): string[] {
-    console.log('getDatesMonthByYear');
     return this.datesMonth.filter((date) => {
       const dateYear = moment(date).format('YYYY');
       return dateYear === year;
