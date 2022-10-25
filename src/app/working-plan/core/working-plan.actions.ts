@@ -127,7 +127,7 @@ export class GenerateWorkpackageSuccessAction implements Action {
    *    the workspaceItem's id generated
    */
   constructor(projectId: string, item: Item, workspaceItemId: string) {
-    this.payload = {projectId, item, workspaceItemId };
+    this.payload = { projectId, item, workspaceItemId };
   }
 }
 
@@ -393,7 +393,7 @@ export class InitWorkingplanSuccessAction implements Action {
    * @param sortOption
    *    the default sort option value
    */
-  constructor(workingplanId: string,workpackages: Workpackage[], sortOption: string) {
+  constructor(workingplanId: string, workpackages: Workpackage[], sortOption: string) {
     this.payload = { workingplanId, workpackages, sortOption };
   }
 }
@@ -594,7 +594,7 @@ export class UpdateWorkpackageAction implements Action {
 /**
  * An ngrx action to update all the workpackage's object
  */
- export class UpdateAllWorkpackageAction implements Action {
+export class UpdateAllWorkpackageAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE;
   payload: {
     wpActionPackage: WpActionPackage[];
@@ -617,7 +617,7 @@ export class UpdateWorkpackageAction implements Action {
 /**
  * An ngrx action to update all the workpackage's object
  */
- export class UpdateAllWorkpackageSuccessAction implements Action {
+export class UpdateAllWorkpackageSuccessAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_SUCCESS;
   payload: {
     wpActionPackage: WpActionPackage[];
@@ -686,7 +686,7 @@ export class UpdateWorkpackageErrorAction implements Action {
 /**
  * An ngrx action to update all the workpackage's object
  */
- export class UpdateAllWorkpackageErrorAction implements Action {
+export class UpdateAllWorkpackageErrorAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_ERROR;
   payload: {
     wpActionPackage: WpActionPackage[];
@@ -735,7 +735,7 @@ export class UpdateWorkpackageStepAction implements Action {
 /**
  * An ngrx action to update all the workpackage's object
  */
- export class UpdateAllWorkpackageStepAction implements Action {
+export class UpdateAllWorkpackageStepAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP;
   payload: {
     wpStepActionPackage: WpStepActionPackage[];
@@ -755,7 +755,7 @@ export class UpdateWorkpackageStepAction implements Action {
 /**
  * An ngrx action to retrieve all working plan's workpackages
  */
- export class UpdateAllWorkpackageStepSuccessAction implements Action {
+export class UpdateAllWorkpackageStepSuccessAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP_SUCCESS;
   payload: {
     wpStepActionPackage: WpStepActionPackage[];
@@ -775,7 +775,7 @@ export class UpdateWorkpackageStepAction implements Action {
 /**
  * An ngrx action to retrieve all working plan's workpackages
  */
- export class UpdateWorkpackageStepSuccessAction implements Action {
+export class UpdateWorkpackageStepSuccessAction implements Action {
   type = WorkpackageActionTypes.UPDATE_WORKPACKAGE_STEP_SUCCESS;
   payload: {
     workpackageId: string;
@@ -827,7 +827,7 @@ export class UpdateWorkpackageStepErrorAction implements Action {
 /**
  * An ngrx action to retrieve all working plan's workpackages
  */
- export class UpdateAllWorkpackageStepErrorAction implements Action {
+export class UpdateAllWorkpackageStepErrorAction implements Action {
   type = WorkpackageActionTypes.UPDATE_ALL_WORKPACKAGE_STEP_ERROR;
   payload: {
     wpStepActionPackage: WpStepActionPackage[];

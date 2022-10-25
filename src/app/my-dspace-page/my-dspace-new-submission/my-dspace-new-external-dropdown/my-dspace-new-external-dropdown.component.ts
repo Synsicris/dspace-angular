@@ -78,7 +78,7 @@ export class MyDSpaceNewExternalDropdownComponent implements OnInit, OnDestroy {
           if (isNotEmpty(this.scope)) {
             findListOptions.searchParams = [new RequestParam('scope', this.scope)];
           }
-          console.log(findListOptions);
+
           return this.entityTypeService.getAllAuthorizedRelationshipTypeImport(findListOptions).pipe(
             map((entities: RemoteData<PaginatedList<ItemType>>) => {
               this.initialized$ = observableOf(true);

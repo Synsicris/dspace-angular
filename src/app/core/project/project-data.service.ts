@@ -68,6 +68,8 @@ export const SUBCONTRACTOR_ENTITY_METADATA = 'subcontractor';
 export const PROJECTPATNER_ENTITY_METADATA = 'projectpartner';
 export const POLICY_GROUP_METADATA = 'cris.policy.group';
 export const POLICY_SHARED_METADATA = 'cris.project.shared';
+export const PROGRAMME_ENTITY = 'programme';
+export const VERSION_UNIQUE_ID = 'synsicris.uniqueid';
 
 export enum ProjectGrantsTypes {
   Project = 'project',
@@ -219,7 +221,7 @@ export class ProjectDataService extends CommunityDataService {
           return projectItemRD.payload.owningCollection.pipe(
             getFirstCompletedRemoteData(),
             mergeMap((collectionRD) => {
-              if (collectionRD.hasSucceeded) {
+              if (collectionRD.hasSucceeded && isNotEmpty(collectionRD.payload)) {
                 return collectionRD.payload.parentCommunity;
               } else {
                 return createFailedRemoteDataObject$<Community>();
@@ -240,7 +242,7 @@ export class ProjectDataService extends CommunityDataService {
    * @return the Community as an Observable
    */
   getFundingCommunityByItemId(itemId: string): Observable<RemoteData<Community>> {
-    return this.getRelatedCommunityByItemId(itemId, FUNDING_RELATION_METADATA, followLink('owningCollection', {}, followLink('parentCommunity')))
+    return this.getRelatedCommunityByItemId(itemId, FUNDING_RELATION_METADATA, followLink('owningCollection', {}, followLink('parentCommunity')));
   }
 
   /**
@@ -250,7 +252,7 @@ export class ProjectDataService extends CommunityDataService {
    * @return the Community as an Observable
    */
   getProjectCommunityByItemId(itemId: string): Observable<RemoteData<Community>> {
-    return this.getRelatedCommunityByItemId(itemId, PROJECT_RELATION_METADATA, followLink('owningCollection', {}, followLink('parentCommunity')))
+    return this.getRelatedCommunityByItemId(itemId, PROJECT_RELATION_METADATA, followLink('owningCollection', {}, followLink('parentCommunity')));
   }
 
   /**
@@ -274,7 +276,7 @@ export class ProjectDataService extends CommunityDataService {
           return projectItemRD.payload.owningCollection.pipe(
             getFirstCompletedRemoteData(),
             mergeMap((collectionRD) => {
-              if (collectionRD.hasSucceeded) {
+              if (collectionRD.hasSucceeded && isNotEmpty(collectionRD.payload)) {
                 return collectionRD.payload.parentCommunity;
               } else {
                 return createFailedRemoteDataObject$<Community>();
@@ -339,7 +341,7 @@ export class ProjectDataService extends CommunityDataService {
       getFirstCompletedRemoteData(),
       mergeMap((itemRD: RemoteData<Item>) => {
         if (itemRD.hasSucceeded) {
-          if (itemRD.payload.entityType === PROJECT_ENTITY || (itemRD.payload.entityType === FUNDING_ENTITY && relationMetadata === FUNDING_RELATION_METADATA) ) {
+          if (itemRD.payload.entityType === PROJECT_ENTITY || (itemRD.payload.entityType === FUNDING_ENTITY && relationMetadata === FUNDING_RELATION_METADATA)) {
             return this.itemService.findById(itemId, true, true, ...linksToFollow);
           } else {
             const metadataValue = Metadata.first(itemRD.payload.metadata, relationMetadata);
@@ -615,7 +617,7 @@ export class ProjectDataService extends CommunityDataService {
    * @return Observable<Community>
    */
   private fetchSearchCommunity(searchOptions: PaginatedSearchOptions, ...linksToFollow: FollowLinkConfig<Community>[]): Observable<Community> {
-    return this.searchService.search(searchOptions,null, false).pipe(
+    return this.searchService.search(searchOptions, null, false).pipe(
       getFirstSucceededRemoteData(),
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page

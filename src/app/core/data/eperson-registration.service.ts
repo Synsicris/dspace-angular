@@ -120,7 +120,8 @@ export class EpersonRegistrationService {
         return Object.assign(new Registration(), {
           email: restResponse.payload.email, token: token, user: restResponse.payload.user,
           groupNames: restResponse.payload.groupNames ? restResponse.payload.groupNames : [],
-          groups: restResponse.payload.groups ? restResponse.payload.groups : []
+          groups: restResponse.payload.groups ? restResponse.payload.groups : [],
+          dspaceObjectNames: restResponse.payload.dspaceObjectNames ? restResponse.payload.dspaceObjectNames : []
 
         });
       }),

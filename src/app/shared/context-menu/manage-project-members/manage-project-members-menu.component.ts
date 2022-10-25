@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
@@ -15,7 +16,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
 import { FUNDING_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
 import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
-import { map } from 'rxjs/operators';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -96,17 +96,28 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
   private checkIsCoordinator(): Observable<boolean> {
     if (this.isFunding) {
       return combineLatest([
-        this.authorizationService.isAuthorized(FeatureID.isAdminOfProject, this.contextMenuObject.self, undefined),
+        this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self, undefined),
+        this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfFunding, this.contextMenuObject.self, undefined),
         this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
       ).pipe(
-        map(([isAdmin, isAdminstratorOf]) => isAdmin || isAdminstratorOf),
+        map(([
+               isCoordinatorOfProject,
+               isCoordinatorOfFunding,
+               isAdminstrator]) => isCoordinatorOfProject || isCoordinatorOfFunding || isAdminstrator),
       );
     } else {
       return combineLatest([
-        this.authorizationService.isAuthorized(FeatureID.isAdminOfProject, this.contextMenuObject.self, undefined),
+        this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager),
+        this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, this.contextMenuObject.self, undefined),
+        this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self, undefined),
         this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
       ).pipe(
-        map(([isAdmin, isAdminstratorOf]) => isAdmin || isAdminstratorOf),
+        map(([
+               isFunderOrganizational,
+               isFunderProject,
+               isCoordinatorOfProject,
+               isAdminstrator
+             ]) => isFunderOrganizational || isFunderProject || isCoordinatorOfProject || isAdminstrator),
       );
     }
   }

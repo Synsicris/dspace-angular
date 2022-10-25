@@ -85,7 +85,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
   /**
    * Boolean representing if to show the id column of the tables
    */
-  @Input() isAdmin = false;
+  @Input() overrideAdmin = false;
 
   /**
    * EPeople being displayed in search result, initially all members, after search result of search
@@ -441,7 +441,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
     modalRef.componentInstance.confirm = () => {
       this.modalService.dismissAll();
-      this.deleteMemberFromGroup(ePerson);
+      this.deleteMemberToAllGroups(ePerson);
     };
 
   }

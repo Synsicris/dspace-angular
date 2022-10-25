@@ -19,6 +19,8 @@ import { Version } from '../shared/version.model';
 import { VersionHistoryDataService } from '../data/version-history-data.service';
 import { isNotEmpty } from '../../shared/empty.util';
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
+import { Metadata } from '../shared/metadata.utils';
+import { VERSION_UNIQUE_ID } from './project-data.service';
 
 export enum ComparedVersionItemStatus {
   Changed = 'changed',
@@ -189,6 +191,16 @@ export class ProjectVersionService {
         status: status
       };
     });
+  }
+
+  /**
+   * Check if the item is version of an item by looking for "synsicris.uniqueid" metadata
+   *
+   * @param item
+   */
+  public isVersionOfAnItem(item: Item): boolean {
+    const metadata = Metadata.allValues(item.metadata, VERSION_UNIQUE_ID);
+    return isNotEmpty(metadata);
   }
 }
 

@@ -26,7 +26,8 @@ describe('InvitationAcceptanceComponent', () => {
       email: 'test@email.org',
       token: 'test-token',
       groups: ['group1UUID', 'group2UUID'],
-      groupNames: ['group1_123123_admin_group', 'group1_1333333_member_group']
+      groupNames: ['group1_123123_admin_group', 'group1_1333333_member_group'],
+      dspaceObjectNames: ['test', 'test'],
     });
   const epersonRegistrationService = jasmine.createSpyObj('epersonRegistrationService', {
     searchByToken: observableOf(registrationWithGroups)
@@ -87,14 +88,16 @@ describe('InvitationAcceptanceComponent', () => {
 
     component.invitationsGroupData$.next([
       {
-        community: Object.assign(new Community(), { payload: { name: 'test' } }),
+        communityName: 'test',
         groupName: 'test',
-        type: 'admin'
+        role: 'admin',
+        type: 'project'
       },
       {
-        community: Object.assign(new Community(), { payload: { name: 'test' } }),
+        communityName: 'test',
         groupName: 'test',
-        type: 'member'
+        role: 'member',
+        type: 'project'
       },
     ]);
 
