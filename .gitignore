@@ -37,8 +37,10 @@ package-lock.json
 .env
 /nbproject/
 
-## files designated as old/backup
+## files designated as old/backup/tmp
 *.old
 *_old
 *.backup
 *_backup
+*.TMP
+*.tmp

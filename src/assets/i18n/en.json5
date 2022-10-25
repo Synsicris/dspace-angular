@@ -588,6 +588,8 @@
 
   "admin.access-control.groups.form.return": "Back",
 
+  "admin.access-control.groups.project-managers-group.breadcrumbs": "Manage Group Members",
+
   "admin.notifications.openairebroker.breadcrumbs": "OpenAIRE Broker",
 
   "admin.notifications.openairebroker.page.title": "OpenAIRE Broker",
@@ -1461,6 +1463,10 @@
   "context-menu.actions.subscription.notification.here-text": "Subscription Summary",
 
   "context-menu.actions.subscription.notification.content": "Subscription Updated Successfully, click {{here}} to see subscrition summary.",
+
+  "context-menu.actions.manage-project-funders-group": "<i class=\"fas fa-user-friends\"></i> Manage project funders",
+
+  "context-menu.actions.manage-programme-group": "<i class=\"fas fa-user-friends\"></i> Manage programme members",
 
   "RELATION.Person.researchoutputs.search.results.head": "Research Outputs",
 
@@ -4414,17 +4420,21 @@
 
   "project.manage.page.title": "Invitation and management of project coordinators",
 
-  "project.manage.members.project.admin-group": "Invitation and Management of project coordinators",
+  "project.manage.members.project.coordinators-group": "Invitation and Management of project coordinators",
 
-  "project.manage.members.project.admin-group-help": "Help message here",
+  "project.manage.members.project.coordinators-group-help": "Help message here",
+
+  "project.manage.members.project.funders-group": "Invitation and Management of project funders",
+
+  "project.manage.members.project.funders-group-help": "Help message here",
 
   "project.manage.members.project.members-group": "Invitation and Management of project members",
 
   "project.manage.members.project.members-group-help": "Help message here",
 
-  "project.manage.members.funding.admin-group": "Invitation and Management of project coordinators",
+  "project.manage.members.funding.coordinators-group": "Invitation and Management of project coordinators",
 
-  "project.manage.members.funding.admin-group-help": "Help message here",
+  "project.manage.members.funding.coordinators-group-help": "Help message here",
 
   "project.manage.members.funding.members-group": "Invitation and Management of project members",
 
@@ -4487,6 +4497,10 @@
   "project.manage.members-list.table.withdraw.tooltip": "You can withdraw role",
 
   "project.manage.members-list.table.withdraw.send": "Send Invitation",
+
+  "project.manage.members-list.table.identity": "Identity",
+
+  "project.manage.members-group-help": "Help message here",
 
   "project.manage.notification.success.addMember": "Successfully added member",
 
@@ -6866,9 +6880,13 @@
 
   "invitation.ignore-btn": "Ignore",
 
-  "invitation.group.project.admin": "Coordinators group for project : ",
+  "invitation.group.project.coordinators": "Coordinators group for project : ",
+
+  "invitation.group.project.funders": "Funders group for project : ",
 
   "invitation.group.project.members": "Members group for project : ",
+
+  "invitation.group.project.readers": "Readers group for project : ",
 
   "invitation.group.funding.admin": "Coordinators group for funding: ",
 
@@ -7338,7 +7356,7 @@
 
   "layout.tab.header.subcontractors": "Subcontractors / Cooperation partners",
 
-  "layout.tab.header.cooperationpartners": "Cooperation partners",
+  "layout.tab.header.cooperationpartners": "Cooperation partners / Subcontractors",
 
   "layout.tab.header.stakeholder": "Stakeholder groups",
 
@@ -7360,7 +7378,7 @@
 
   "layout.tab.header.knowledge": "State of knowledge / problem definition",
 
-  "layout.tab.header.Projectobjectives": "<i class=\"fal fa-bullseye-arrow\"></i><span class=„bla“>Projektziele</span>",
+  "layout.tab.header.Projectobjectives": "<i class=\"fas fa-bullseye\"></i> Objectives",
 
   "layout.tab.header.research_objective": "Research and development objectives",
 
@@ -7426,11 +7444,11 @@
 
   "layout.box.header.Funding": "Projects - List view",
 
-  "layout.box.header.projectpartner": "Subproject - Project partners",
+  "layout.box.header.projectpartner": "Project partners - List view",
 
   "layout.box.header.subcontractor": "Subproject - Subcontractors",
 
-  "layout.box.header.exploitationplan": "Subproject - Exploitation plan",
+  "layout.box.header.exploitationplan": "Exploitation plan",
 
   "layout.box.header.Person_m": "Person",
 
@@ -7570,11 +7588,11 @@
 
   "submission.sections.submit.progressbar.describe.exp_societalimpact": "#1 Expected societal impact (new)",
 
-  "exp_societalimpact.listelement.badge": "Expected societal impact (new)",
+  "exp_societalimpact.listelement.badge": "Expected societal impact",
 
   "submission.sections.upload.infosubmission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <b>upload additional files just dragging & dropping them everywhere in the page.</b>",
 
-  "search.filters.entityType.exp_societalimpact": "Expected societal impact (new)",
+  "search.filters.entityType.exp_societalimpact": "Expected societal impact",
 
   "search.filters.entityType.ia_objective": "Target for interaction and transfer",
 
@@ -7582,7 +7600,7 @@
 
   "layout.tab.header.Involved": "Involved organisations",
 
-  "layout.tab.header.exp_societalimpact": "Expected societal impacts (new)",
+  "layout.tab.header.exp_societalimpact": "Expected societal impacts",
 
   "layout.box.header.exp_societalimpact": "Expected societal impacts (new)",
 
@@ -7622,7 +7640,7 @@
 
   "layout.field.label.Person.person.identifier.rid": "Researcher ID",
 
-  "layout.field.label.parentproject.dc.title": "Workspace for all partners in the consortium:",
+  "layout.field.label.parentproject.dc.title": "Workspace for all partners in the consortium: ",
 
   "layout.field.label.parentproject.oairecerif.acronym": "Acronym",
 
@@ -7648,13 +7666,13 @@
 
   "layout.field.label.parentproject.oairecerif.amount.currency": "Currency",
 
-  "layout.field.label.Project.dc.title": "Workspace of the project / grant recipient:",
+  "layout.field.label.Project.dc.title": "<i class=\"fas fa-shekel-sign\"></i> Workspace Consortium:",
 
   "layout.field.label.Project.oairecerif.acronym": "Acronym",
 
   "layout.field.label.Project.oairecerif.internalid": "Funding code",
 
-  "layout.field.label.Project.oairecerif.identifier.url": "Project webpage(s)",
+  "layout.field.label.Project.oairecerif.identifier.url": "Consortium webpage(s)",
 
   "layout.field.label.Project.crispj.partnerou": "Project partner",
 
@@ -7662,7 +7680,7 @@
 
   "layout.field.label.Project.synsicris.title": "Title",
 
-  "layout.field.label.Project.dc.title.alternative": "Title (english)",
+  "layout.field.label.Project.dc.title.alternative": "Ttle in other language",
 
   "layout.field.label.Project.oairecerif.project.startDate": "Start date",
 
@@ -8254,7 +8272,7 @@
 
   "layout.field.label.exp_societalimpact.dc.description": "Description",
 
-  "layout.field.label.exp_societalimpact.dc.type": "Expected impact",
+  "layout.field.label.exp_societalimpact.dc.type": "Type",
 
   "layout.field.label.exp_societalimpact.synsicris.type-n": "Possible expected side effects",
 
@@ -8584,7 +8602,7 @@
 
   "layout.box.header.award_comment": "Commets - Award",
 
-  "layout.box.header.exp_societalimpact_comment": "Commets - Expected societal impact (new)",
+  "layout.box.header.exp_societalimpact_comment": "Commets - Expected societal impact",
 
   "layout.box.header.pot_societalimpact_comment": "Commets - Expected societal impact",
 
@@ -8686,9 +8704,9 @@
 
   "layout.field.label.Funding.synsicris.type.research": "Research type",
 
-  "layout.field.label.Funding.synsicris.type.relevance-development": "Relevanz für die Entwicklungszusammenarbeit",
+  "layout.field.label.Funding.synsicris.type.relevance-development": "Relevance for development cooperation",
 
-  "layout.field.label.Funding.synsicris.subject.development-countries": "Relevante Länder Entwicklungszusammenarbeit",
+  "layout.field.label.Funding.synsicris.subject.development-countries": "Relevant countries for development cooperation",
 
   "layout.field.label.ethic.synsicris.type.ethic-docs": "Additional documents available",
 
@@ -8702,6 +8720,184 @@
 
   "layout.field.label.innovationpotential.synsicris.coverage.regional-primary": "Primary field of application",
 
-  "layout.field.label.innovationpotential.synsicris.coverage.regional-secondary": "Later dissemination"
+  "layout.field.label.innovationpotential.synsicris.coverage.regional-secondary": "Later dissemination",
+
+  "layout.field.label.project.dc.title": "Workspace for all partners in the consortium: ",
+
+  "layout.field.label.project.oairecerif.acronym": "Acronym",
+
+  "layout.field.label.project.dc.title.alternative": "Ttle in other language",
+
+  "layout.field.label.project.oairecerif.project.startDate": "Start date",
+
+  "layout.field.label.project.oairecerif.project.endDate": "End date",
+
+  "layout.field.label.project.synsicris.duration": "Duration (months)",
+
+  "layout.field.label.project.oairecerif.project.status": "Status",
+
+  "layout.field.label.project.synsicris.relation.project": "Coordinating project",
+
+  "layout.field.label.project.oairecerif.fundingParent": "Funding programme",
+
+  "layout.field.label.project.synsicris.relation.call": "Call",
+
+  "layout.field.label.project.oairecerif.amount": "Grant Total",
+
+  "layout.field.label.project.synsicris.amount.grantpersonnel": "Grant Personnel",
+
+  "layout.field.label.project.synsicris.amount.budget": "Overall budget of the project",
+
+  "layout.field.label.project.oairecerif.amount.currency": "Currency",
+
+  "layout.field.label.project.dc.type.attachment": "Attachments",
+
+  "layout.field.label.project.oairecerif.identifier.url": "Consortium webpage(s)",
+
+  "layout.field.label.project.synsicris.type.jointproject": "Type of consortium",
+
+  "layout.field.label.Funding.dc.title": "<i class=\"fas fa-cube\"></i> Workspace Project:",
+
+  "layout.field.label.Funding.oairecerif.acronym": "Acronym",
+
+  "layout.field.label.Funding.oairecerif.internalid": "Funding code",
+
+  "layout.field.label.Funding.crispj.partnerou": "Project partner",
+
+  "layout.field.label.Funding.oairecerif.project.status": "Status",
+
+  "layout.field.label.Funding.synsicris.title": "Title",
+
+  "layout.field.label.Funding.oairecerif.project.startDate": "Start date",
+
+  "layout.field.label.Funding.oairecerif.project.endDate": "End date",
+
+  "layout.field.label.Funding.dc.description.abstract": "Abstract",
+
+  "layout.field.label.Funding.synsicris.relation.funding": "Type of funding",
+
+  "layout.field.label.Funding.dc.description": "File(s)",
+
+  "layout.field.label.Funding.synsicris.title.alternative": "Title in other language",
+
+  "layout.field.label.Funding.synsicris.description.alternative": "Project description (english)",
+
+  "layout.field.label.Funding.synsicris.subject.prog": "Progamme classification funding body",
+
+  "layout.field.label.Funding.synsicris.subject.researchfocus": "Focus of research",
+
+  "layout.field.label.Funding.synsicris.subject.nace-use": "Potential application",
+
+  "layout.field.label.Funding.synsicris.type.finance": "Type of finance",
+
+  "layout.field.label.Funding.synsicris.amount.proportion": "Proportion of funding",
+
+  "layout.field.label.Funding.synsicris.amount.own": "Own funds of the grantee",
+
+  "layout.field.label.Funding.synsicris.amount.external": "Third party funds",
+
+  "layout.field.label.Funding.synsicris.type.project": "Type of Project",
+
+  "layout.field.label.Funding.synsicris.type.jointproject": "Type of consortium",
+
+  "layout.field.label.Funding.synsicris.type.application": "Type of application",
+
+  "layout.field.label.Funding.oairecerif.funder": "Funder (ministry)",
+
+  "layout.field.label.Funding.synsicris.funder.unit": "Funder Department (ministry)",
+
+  "layout.field.label.Funding.synsicris.fundingagency": "Funding body",
+
+  "layout.field.label.Funding.synsicris.fundingagency.detail": "Funding body (detail)",
+
+  "layout.field.label.Funding.synsicris.fundingagency.unit": "Funding body department",
+
+  "layout.field.label.Funding.synsicris.subject.sort-primary": "Keyword Primary-Sorter",
+
+  "layout.field.label.Funding.synsicris.subject.sort": "All keywords Sorter",
+
+  "layout.field.label.Funding.synsicris.description.sort": "Individual keywords",
+
+  "layout.box.header.funding_import": "Subproject - Information from Import",
+
+  "invitation.group.admin": "Coordinators group of",
+
+  "invitation.group.members": "Members group of",
+
+  "layout.field.label.project.synsicris.type.project": "Type of project",
+
+  "layout.field.label.Funding.synsicris.internalid.profi-fundingParent": "profi-ID funding programme",
+
+  "layout.field.label.Funding.synsicris.acronym.profi-fundingParent": "Acronym funding programme",
+
+  "layout.field.label.Funding.synsicris.acronym.profi-call": "Acronym call",
+
+  "layout.field.label.Funding.synsicris.internalid.profi-call": "profi-ID call",
+
+  "layout.field.label.Project.synsicris.duration": "Duration (months)",
+
+  "layout.field.label.Project.synsicris.relation.project": "Coordinating project",
+
+  "layout.field.label.Project.oairecerif.fundingParent": "Funding programme",
+
+  "layout.field.label.Project.synsicris.relation.call": "Call",
+
+  "layout.field.label.Project.oairecerif.amount": "Grant Total",
+
+  "layout.field.label.Project.synsicris.amount.grantpersonnel": "Grant Personnel",
+
+  "layout.field.label.Project.synsicris.amount.budget": "Overall budget of the project",
+
+  "layout.field.label.Project.oairecerif.amount.currency": "Currency",
+
+  "layout.field.label.Project.dc.type.attachment": "Attachments",
+
+  "layout.field.label.Project.synsicris.type.jointproject": "Type of consortium",
+
+  "layout.field.label.Project.synsicris.type.project": "Type of project",
+
+  "submission.sections.submit.progressbar.describe.neg_sideffect": "#1 Possible negative side effect",
+
+  "neg_sideffect.listelement.badge": "Negative side effect",
+
+  "open_researchquestion.listelement.badge": "Open research questions",
+
+  "search.filters.entityType.neg_sideffect": "Possible negative side effects",
+
+  "search.filters.entityType.open_researchquestion": "Open research questions",
+
+  "search.filters.entityType.exp_ia_objective": "Target for interaction and transfer",
+
+  "layout.tab.header.open_researchquestions": "Open research questions",
+
+  "layout.tab.header.neg_sideffect": "Possible negative side effects",
+
+  "layout.box.header.open_researchquestions_comment": "Comments - Open research questions",
+
+  "layout.box.header.neg_sideffect_comment": "Commets - Possible negative side effect",
+
+  "layout.box.header.open_researchquestions": "Open research questions",
+
+  "layout.box.header.open_researchquestions_m": "Open research questions",
+
+  "layout.box.header.neg_sideffect": "Possible negative side effects",
+
+  "layout.box.header.neg_sideffect_m": "Possible negative side effects",
+
+  "layout.field.label.open_researchquestions.dc.title": "Title",
+
+  "layout.field.label.open_researchquestions.dc.description": "Description",
+
+  "layout.field.label.neg_sideeffect.dc.title": "Title",
+
+  "layout.field.label.neg_sideeffect.dc.description": "Description",
+
+  "layout.field.label.neg_sideeffect.synsicris.type.transform": "Transformation area addressed",
+
+  "layout.field.label.neg_sideeffect.dc.type": "Type",
+
+  "layout.field.label.neg_sideeffect.synsicris.type.negative-direction": "Impact intensity",
+
+  "layout.field.label.neg_sideeffect.synsicris.description.neg": "Extent of possible negative side effect"
 
 }
