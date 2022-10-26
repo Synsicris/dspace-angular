@@ -3,28 +3,6 @@
 // imports the base global style
 @import '../../../styles/_global-styles.scss';
 
-/*
-rex 220505 helps to recognize breakpoints
-selector in /src/app/header/header.component.html
-https://getbootstrap.com/docs/4.6/layout/overview/
-
-header .helper-rex:after {
-  display:inline-block;
-  position:fixed;
-  top:0;
-  left:20rem;
-  z-index:1000;
-  padding:0.2rem;
-  background-color:white;
-  border:3px solid lime;
-
-  content:"extra small (xs) < 576";
-  @include media-breakpoint-up(sm) {content:"small (sm) ≥ 576px";}
-  @include media-breakpoint-up(md) {content:"medium (md) ≥ 768px";}
-  @include media-breakpoint-up(lg) {content:"large (lg) ≥ 992";}
-  @include media-breakpoint-up(xl) {content:"extra large (xl) ≥ 1200";}
-}
-*/
 
 .facet-filter, .setting-option {
   background-color: var(--bs-light);
@@ -78,6 +56,30 @@ ds-metric-donuts a {
   font-size: 16px !important;
 }
 
+/* ----------------- HELPER TO SHOW THE CURRENT WINDOW SIZE (rex 220505) */
+/* rex 220505: helps to recognize breakpoints
+Span-Tag is in src/themes/synsicris/app/header/header.component.html */
+
+/*
+header .helper-windowsize-rex:after {
+  display:inline-block;
+  position:fixed;
+  top:0;
+  left:20rem;
+  z-index:1000;
+  padding:0.2rem;
+  background-color:white;
+  border:3px solid lime;
+
+  content:"extra small (xs) < 576";
+  @include media-breakpoint-up(sm) {content:"small (sm) ≥ 576px";}
+  @include media-breakpoint-up(md) {content:"medium (md) ≥ 768px";}
+  @include media-breakpoint-up(lg) {content:"large (lg) ≥ 992";}
+  @include media-breakpoint-up(xl) {content:"extra large (xl) ≥ 1200";}
+}
+*/
+  /* ----------------- TOOLTIP (rex 221021) */
+
 .hint-tooltip .tooltip-inner {
   max-width:32rem; // somewhere (not clear, where) the width is defined with max-width:200px, so overwritten here
   padding:1.2rem;
@@ -85,18 +87,13 @@ ds-metric-donuts a {
   box-shadow: 0 5px 15px var(--ds-tooltip-boxshadow-color); // shadow behind tooltip
   background-color: var(--ds-tooltip-inner-backgroud-color);
   color: var(--ds-tooltip-inner-color);
-  border: 1px solid var(--ds-tooltip-inner-border-color);
 }
-.bs-tooltip-top .arrow::before {
-  border-top-color: var(--ds-tooltip-inner-color);
-}
-.bs-tooltip-right .arrow::before {
-  border-right-color: var(--ds-tooltip-inner-color);
-}
-.bs-tooltip-left .arrow::before {
-  border-left-color: var(--ds-tooltip-inner-color);
-}
+
+/* arrow gets same color as the bubble background */
+.bs-tooltip-top .arrow::before,
+.bs-tooltip-right .arrow::before,
+.bs-tooltip-left .arrow::before,
 .bs-tooltip-bottom .arrow::before {
-  border-bottom-color: var(--ds-tooltip-inner-color);
+  border-top-color: var(--ds-tooltip-inner-backgroud-color);
 }
 
