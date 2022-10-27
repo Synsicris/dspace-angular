@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
-import { Observable, of as observableOf } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { combineLatest, Observable, of as observableOf } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 import { ItemPageResolver } from '../item-page/item-page.resolver';
@@ -39,7 +39,21 @@ export class ProjectMembersPageGuard implements CanActivate {
       redirectOn4xx(this.router, this.authService),
       switchMap((projectCommunityRD: RemoteData<Community>) => {
         if (projectCommunityRD.hasSucceeded) {
-          return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, projectCommunityRD.payload.self, undefined);
+          return combineLatest([
+            this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager),
+            this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, projectCommunityRD.payload.self, undefined),
+            this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, projectCommunityRD.payload.self, undefined),
+            this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfFunding, projectCommunityRD.payload.self, undefined),
+            this.authorizationService.isAuthorized(FeatureID.AdministratorOf)
+          ]).pipe(
+            map(([
+                   isFunderOrganizationalManager,
+                   isFunderOfProject,
+                   isCoordinatorOfProject,
+                   isCoordinatorOfFunding,
+                   isAdministrator
+                 ]) => isFunderOrganizationalManager || isFunderOfProject || isCoordinatorOfProject || isCoordinatorOfFunding || isAdministrator)
+          );
         } else {
           return observableOf(false);
         }

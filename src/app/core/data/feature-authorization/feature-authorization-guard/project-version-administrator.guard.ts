@@ -34,10 +34,6 @@ export class ProjectVersionAdministratorGuard extends SomeFeatureAuthorizationGu
   }
 
   getObjectUrl(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<string> {
-    this.aroute.data.subscribe((data) => {
-      console.log(data);
-    });
-
     return this.itemService.findById(route.params.id).pipe(
       getRemoteDataPayload(),
       map((project: Item) => {

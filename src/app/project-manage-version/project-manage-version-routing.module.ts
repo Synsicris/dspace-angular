@@ -17,7 +17,7 @@ import { ProjectVersionAdministratorGuard } from '../core/data/feature-authoriza
         resolve: {
           item: ItemResolver
         },
-        // canActivate: [ProjectVersionAdministratorGuard]
+        canActivate: [ProjectVersionAdministratorGuard]
       }
     ])
   ],

@@ -17,6 +17,7 @@ import { NotificationsService } from '../../notifications/notifications.service'
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { environment } from '../../../../environments/environment';
 import { Item } from '../../../core/shared/item.model';
+import { ProjectVersionService } from '../../../core/project/project-version.service';
 
 /**
  * This component renders a context menu option that provides the links to edit item page.
@@ -68,7 +69,8 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
     private editItemService: EditItemDataService,
-    public notificationService: NotificationsService
+    public notificationService: NotificationsService,
+    public projectVersion: ProjectVersionService
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.EditSubmission);
   }
@@ -91,7 +93,10 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
    */
   isEditAvailable(): Observable<boolean> {
     return this.editModes$.asObservable().pipe(
-      map((editModes) => (this.contextMenuObject as Item).entityType !== 'Person' && isNotEmpty(editModes) && editModes.length > 0)
+      map((editModes) => {
+        const isVersion = this.projectVersion.isVersionOfAnItem((this.contextMenuObject as Item));
+        return !isVersion && (this.contextMenuObject as Item).entityType !== 'Person' && isNotEmpty(editModes) && editModes.length > 0;
+      })
     );
   }
 
