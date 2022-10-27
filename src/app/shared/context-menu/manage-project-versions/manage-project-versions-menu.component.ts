@@ -1,7 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
@@ -14,6 +14,8 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
 import { PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
 import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
+import { FeatureID } from 'src/app/core/data/feature-authorization/feature-id';
+import { map } from 'rxjs/operators';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -23,17 +25,16 @@ import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
   templateUrl: './manage-project-versions-menu.component.html'
 })
 @rendersContextMenuEntriesForType(DSpaceObjectType.ITEM)
-export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponent {
+export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponent implements OnInit {
 
   /**
-   * Representing if the invitation is related to a funding
+   * A boolean representing if user is coordinator or founder for the current project
    */
-  isFunding;
-
+  public isCoordinatorOfProject$: Observable<boolean>;
   /**
-   * A boolean representing if user is coordinator for the current project/funding
+   * A boolean representing if user is coordinator or founder for the current project
    */
-  protected isCoordinator$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isFounderOfProject$: Observable<boolean>;
 
   /**
    * Initialize instance variables
@@ -58,18 +59,17 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ManageProjectVersions);
   }
 
+  ngOnInit() {
+    console.log(this.contextMenuObject);
+    this.isCoordinatorOfProject$ = this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self);
+    this.isFounderOfProject$ = this.authorizationService.isAuthorized(FeatureID.isFundersOfProject, this.contextMenuObject.self);
+  }
+
   /**
    * Check if current Item is a Project or a Funding
    */
   canShow() {
     return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
-  }
-
-  /**
-   * Return if user is coordinator for this project/funding
-   */
-  isCoordinator(): Observable<boolean> {
-    return this.isCoordinator$.asObservable();
   }
 
   /**

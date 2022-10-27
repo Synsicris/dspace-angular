@@ -346,7 +346,9 @@ export const environment: AppConfig = {
       searchProjectConfigurationName: 'searchProjectsForFunder',
       searchProjectItemsConfigurationName: 'allProjectItems',
       entityTypeFilterName: 'entityType'
-    }
+    },
+    versioningEditMode: 'VERSIONING',
+    versioningEditFormSection: 'projects_versioning',
   },
   impactPathway: {
     impactPathwaysFormSection: 'impact_pathway_form',

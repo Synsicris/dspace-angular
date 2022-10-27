@@ -1,4 +1,4 @@
-<button *ngIf="canShow() && (isCoordinator() | async)" class="dropdown-item"
-        [innerHTML]="(isFunding ? 'project.manage.menu.subproject' : 'project.manage.menu.project') | translate"
+<button *ngIf="canShow() && ((isCoordinatorOfProject$ | async) || (isFounderOfProject$| async))" class="dropdown-item"
+        [innerHTML]="'project.versions.menu.project' | translate"
         (click)="navigateToManage();$event.preventDefault();$event.stopImmediatePropagation();">
 </button>

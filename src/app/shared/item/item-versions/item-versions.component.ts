@@ -1,3 +1,5 @@
+import { JsonPatchOperationPathCombiner } from './../../../core/json-patch/builder/json-patch-operation-path-combiner';
+import { environment } from './../../../../environments/environment';
 import { Component, Input, OnInit } from '@angular/core';
 import { Item } from '../../../core/shared/item.model';
 import { Version } from '../../../core/shared/version.model';
@@ -167,20 +169,23 @@ export class ItemVersionsComponent implements OnInit {
   canCreateVersion$: Observable<boolean>;
   createVersionTitle$: Observable<string>;
 
-  constructor(private versionHistoryService: VersionHistoryDataService,
-              private versionService: VersionDataService,
-              private itemService: ItemDataService,
-              private paginationService: PaginationService,
-              private formBuilder: FormBuilder,
-              private modalService: NgbModal,
-              private notificationsService: NotificationsService,
-              private translateService: TranslateService,
-              private router: Router,
-              private itemVersionShared: ItemVersionsSharedService,
-              private authorizationService: AuthorizationDataService,
-              private workspaceItemDataService: WorkspaceitemDataService,
-              private workflowItemDataService: WorkflowItemDataService,
-              private configurationService: ConfigurationDataService,
+  versioningEditMode = environment.projects.versioningEditMode;
+  versioningEditFormSection = environment.projects.versioningEditFormSection;
+
+  constructor(protected versionHistoryService: VersionHistoryDataService,
+    protected versionService: VersionDataService,
+    protected itemService: ItemDataService,
+    protected paginationService: PaginationService,
+    protected formBuilder: FormBuilder,
+    protected modalService: NgbModal,
+    protected notificationsService: NotificationsService,
+    protected translateService: TranslateService,
+    protected router: Router,
+    protected itemVersionShared: ItemVersionsSharedService,
+    protected authorizationService: AuthorizationDataService,
+    protected workspaceItemDataService: WorkspaceitemDataService,
+    protected workflowItemDataService: WorkflowItemDataService,
+    protected configurationService: ConfigurationDataService,
   ) {
   }
 
@@ -238,19 +243,19 @@ export class ItemVersionsComponent implements OnInit {
       getFirstSucceededRemoteData(),
       switchMap((findRes: RemoteData<Version>) => {
         const payload = findRes.payload;
-        const summary = {summary: this.versionBeingEditedSummary,};
+        const summary = { summary: this.versionBeingEditedSummary, };
         const updatedVersion = Object.assign({}, payload, summary);
         return this.versionService.update(updatedVersion).pipe(getFirstCompletedRemoteData<Version>());
       }),
     ).subscribe((updatedVersionRD: RemoteData<Version>) => {
-        if (updatedVersionRD.hasSucceeded) {
-          this.notificationsService.success(null, this.translateService.get(successMessageKey, {'version': this.versionBeingEditedNumber}));
-          this.getAllVersions(this.versionHistory$);
-        } else {
-          this.notificationsService.warning(null, this.translateService.get(failureMessageKey, {'version': this.versionBeingEditedNumber}));
-        }
-        this.disableVersionEditing();
+      if (updatedVersionRD.hasSucceeded) {
+        this.notificationsService.success(null, this.translateService.get(successMessageKey, { 'version': this.versionBeingEditedNumber }));
+        this.getAllVersions(this.versionHistory$);
+      } else {
+        this.notificationsService.warning(null, this.translateService.get(failureMessageKey, { 'version': this.versionBeingEditedNumber }));
       }
+      this.disableVersionEditing();
+    }
     );
   }
 
@@ -312,9 +317,9 @@ export class ItemVersionsComponent implements OnInit {
       ).subscribe(([deleteHasSucceeded, newLatestVersionItem]: [boolean, Item]) => {
         // Notify operation result and redirect to latest item
         if (deleteHasSucceeded) {
-          this.notificationsService.success(null, this.translateService.get(successMessageKey, {'version': versionNumber}));
+          this.notificationsService.success(null, this.translateService.get(successMessageKey, { 'version': versionNumber }));
         } else {
-          this.notificationsService.error(null, this.translateService.get(failureMessageKey, {'version': versionNumber}));
+          this.notificationsService.error(null, this.translateService.get(failureMessageKey, { 'version': versionNumber }));
         }
         if (redirectToLatest) {
           const path = getItemEditVersionhistoryRoute(newLatestVersionItem);
@@ -423,7 +428,7 @@ export class ItemVersionsComponent implements OnInit {
     combineLatest([versionHistory$, currentPagination]).pipe(
       switchMap(([versionHistory, options]: [VersionHistory, PaginationComponentOptions]) => {
         return this.versionHistoryService.getVersions(versionHistory.id,
-          new PaginatedSearchOptions({pagination: Object.assign({}, options, {currentPage: options.currentPage})}),
+          new PaginatedSearchOptions({ pagination: Object.assign({}, options, { currentPage: options.currentPage }) }),
           false, true, followLink('item'), followLink('eperson'));
       }),
       getFirstCompletedRemoteData(),
@@ -449,7 +454,7 @@ export class ItemVersionsComponent implements OnInit {
       map((item: Item) => item.uuid),
       switchMap((itemUuid: string) => this.workspaceItemDataService.findByItem(itemUuid, true)),
       getFirstCompletedRemoteData<WorkspaceItem>(),
-      map((res: RemoteData<WorkspaceItem>) => res?.payload?.id ),
+      map((res: RemoteData<WorkspaceItem>) => res?.payload?.id),
     );
   }
 
@@ -463,7 +468,7 @@ export class ItemVersionsComponent implements OnInit {
       map((item: Item) => item.uuid),
       switchMap((itemUuid: string) => this.workflowItemDataService.findByItem(itemUuid, true)),
       getFirstCompletedRemoteData<WorkspaceItem>(),
-      map((res: RemoteData<WorkspaceItem>) => res?.payload?.id ),
+      map((res: RemoteData<WorkspaceItem>) => res?.payload?.id),
     );
   }
 
@@ -537,6 +542,29 @@ export class ItemVersionsComponent implements OnInit {
    */
   cleanupSubscribes() {
     this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
+  }
+
+
+  toggleVisibility(versionItem) {
+    console.log(versionItem);
+
+
+    this.itemService.updateItemMetadata(
+      versionItem.id,
+      this.versioningEditMode,
+      this.getVersionPath(),
+      'synsicris.version.visible',
+      0,
+      { value: !versionItem.firstMetadataValue('synsicris.version.visible') }
+    ).subscribe((item) => {
+      console.log(item);
+    });
+
+  }
+
+
+  getVersionPath(): string {
+    return ['sections', this.versioningEditFormSection].join('/');
   }
 
 }

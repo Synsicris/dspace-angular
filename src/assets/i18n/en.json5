@@ -4594,6 +4594,8 @@
 
   "project-overview.page.working-plan": "Working plan",
 
+  "project.versions.menu.project": "<i class=\"fas fa-sync\"></i> Manage Project Versions",
+  
   "publication.listelement.badge": "Publication",
 
   "publication.page.description": "Description",

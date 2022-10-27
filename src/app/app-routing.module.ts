@@ -39,7 +39,6 @@ import {
 } from './page-internal-server-error/themed-page-internal-server-error.component';
 import { ServerCheckGuard } from './core/server-check/server-check.guard';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
-
 @NgModule({
   imports: [
     RouterModule.forRoot([
@@ -109,6 +108,12 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             path: 'entities/project/:id/workingplan',
             loadChildren: () => import('./+working-plan-page/working-plan-page.module')
               .then((m) => m.WorkingPlanPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: 'entities/project/:id/manageversions',
+            loadChildren: () => import('./project-manage-version/project-manage-version.module')
+              .then((m) => m.ProjectManageVersionModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
           {
@@ -300,12 +305,6 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             path: 'invitation',
             loadChildren: () => import('./invitation/invitation.module')
               .then((m) => m.InvitationModule)
-          },
-          {
-            path: 'entities/project/:id/manageversions',
-            loadChildren: () => import('./+working-plan-page/working-plan-page.module')
-              .then((m) => m.WorkingPlanPageModule),
-            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
           { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
         ]
