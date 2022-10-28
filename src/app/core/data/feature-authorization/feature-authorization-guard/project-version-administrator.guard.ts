@@ -1,4 +1,4 @@
-import { getRemoteDataPayload } from './../../../shared/operators';
+import { getFirstSucceededRemoteDataPayload, getRemoteDataPayload } from './../../../shared/operators';
 import { Item } from './../../../shared/item.model';
 import { ItemDataService } from './../../item-data.service';
 import { Injectable } from '@angular/core';
@@ -35,7 +35,7 @@ export class ProjectVersionAdministratorGuard extends SomeFeatureAuthorizationGu
 
   getObjectUrl(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<string> {
     return this.itemService.findById(route.params.id).pipe(
-      getRemoteDataPayload(),
+      getFirstSucceededRemoteDataPayload(),
       map((project: Item) => {
         return project._links.self.href;
       })

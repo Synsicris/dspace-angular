@@ -546,8 +546,6 @@ export class ItemVersionsComponent implements OnInit {
 
 
   toggleVisibility(versionItem) {
-    console.log(versionItem);
-
 
     this.itemService.updateItemMetadata(
       versionItem.id,
@@ -555,7 +553,7 @@ export class ItemVersionsComponent implements OnInit {
       this.getVersionPath(),
       'synsicris.version.visible',
       0,
-      { value: !versionItem.firstMetadataValue('synsicris.version.visible') }
+      { value: !Boolean(versionItem.firstMetadataValue('synsicris.version.visible')) }
     ).subscribe((item) => {
       console.log(item);
     });

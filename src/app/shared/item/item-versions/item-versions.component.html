@@ -93,7 +93,7 @@
                       (click)="toggleVisibility(versionItem)"
                       title="{{'item.version.history.table.action.toggleVisibility' | translate}}">
                       <i class="fas"
-                        [ngClass]="{'fa-eye': !versionItem.firstMetadataValue('synsicris.version.visible'), 'fa-eye-slash': !!versionItem.firstMetadataValue('synsicris.version.visible')}"></i>
+                        [ngClass]="{'fa-eye': (versionItem.firstMetadataValue('synsicris.version.visible') === 'false' || !versionItem.firstMetadataValue('synsicris.version.visible') ), 'fa-eye-slash': versionItem.firstMetadataValue('synsicris.version.visible') === 'true'}"></i>
                     </button>
                   </ng-container>
 
