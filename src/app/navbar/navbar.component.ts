@@ -1,7 +1,7 @@
 import { Component, Injector } from '@angular/core';
 
-import { combineLatest, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { forkJoin, merge, Observable, Subject } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
 
 import { slideMobileNav } from '../shared/animations/slide';
 import { MenuComponent } from '../shared/menu/menu.component';
@@ -55,7 +55,7 @@ export class NavbarComponent extends MenuComponent {
    * Initialize all menu sections and items for this menu
    */
   createMenu() {
-    const isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(take(1));
+    const isAdmin$ = this.checkAuthorization(FeatureID.AdministratorOf);
     const menuList: any[] = [];
 
     /* Communities & Collections tree */
@@ -75,11 +75,47 @@ export class NavbarComponent extends MenuComponent {
       menuList.push(CommunityCollectionMenuItem);
     }
 
+    const isFundingOrAdmin$ = new Subject<boolean>();
+    const findAllVisible$ = this.sectionDataService.findVisibleSections().pipe(getFirstSucceededRemoteListPayload());
+    forkJoin([isFundingOrAdmin$, findAllVisible$])
+      .subscribe(([isFundingOrAdmin, sections]: [boolean, Section[]]) => {
+        if (isFundingOrAdmin) {
+          menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
+            shouldPersistOnRouteChange: true
+          })));
 
-    this.isCurrentUserAdmin().subscribe(((isAdmin) => {
+          sections.filter((section) => section.id !== 'site')
+            .forEach((section) => {
+              const menuSection = {
+                id: `explore_${section.id}`,
+                active: false,
+                visible: true,
+                model: {
+                  type: MenuItemType.LINK,
+                  text: `menu.section.explore_${section.id}`,
+                  link: `/explore/${section.id}`
+                } as LinkMenuItemModel
+              };
+              this.menuService.addSection(this.menuID, Object.assign(menuSection, {
+                shouldPersistOnRouteChange: true
+              }));
+            });
+        }
+      });
 
-        if (isAdmin) {
-
+    merge(
+      isAdmin$,
+      this.isCurrentUserFundingMember(),
+      this.isCurrentUserFunderOfProject(),
+      this.isCurrentUserFundingCoordinator(),
+      this.isCurrentUserFunderOrganizationalManager()
+    )
+      .pipe(
+        filter(Boolean),
+        take(1)
+      )
+      .subscribe(
+        (fundingOrAdmin: boolean) => {
           menuList.push({
             id: 'browse_by_projects',
             active: false,
@@ -90,6 +126,24 @@ export class NavbarComponent extends MenuComponent {
               link: '/browse/projects'
             } as LinkMenuItemModel
           });
+          isFundingOrAdmin$.next(fundingOrAdmin);
+          isFundingOrAdmin$.complete();
+        },
+        () => {
+          isFundingOrAdmin$.next(false);
+          isFundingOrAdmin$.complete();
+        },
+        () => {
+          if (!isFundingOrAdmin$.isStopped) {
+            isFundingOrAdmin$.next(false);
+            isFundingOrAdmin$.complete();
+          }
+        }
+      );
+
+    isAdmin$.subscribe(((isAdmin) => {
+
+        if (isAdmin) {
 
           menuList.push(
             {
@@ -110,11 +164,11 @@ export class NavbarComponent extends MenuComponent {
             active: false,
             visible: true,
             model: {
-            type: MenuItemType.LINK,
+              type: MenuItemType.LINK,
               text: 'menu.section.statistics.site',
               link: '/statistics'
-          } as LinkMenuItemModel
-        });
+            } as LinkMenuItemModel
+          });
 
           menuList.push({
             id: 'statistics_login',
@@ -141,41 +195,34 @@ export class NavbarComponent extends MenuComponent {
           });
         }
       }
-
     ));
-
-    const findAllVisible$ = this.sectionDataService.findVisibleSections().pipe( getFirstSucceededRemoteListPayload());
-    combineLatest([isAdmin$, findAllVisible$]).subscribe( ([isAdmin, sections]: [boolean, Section[]]) => {
-      if (isAdmin) {
-        menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
-          shouldPersistOnRouteChange: true
-        })));
-
-        sections.filter((section) => section.id !== 'site')
-                .forEach( (section) => {
-          const menuSection = {
-            id: `explore_${section.id}`,
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: `menu.section.explore_${section.id}`,
-              link: `/explore/${section.id}`
-            } as LinkMenuItemModel
-          };
-          this.menuService.addSection(this.menuID, Object.assign(menuSection, {
-            shouldPersistOnRouteChange: true
-          }));
-        });
-      }
-    });
 
   }
 
-  isCurrentUserAdmin(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, undefined, undefined)
+  private checkAuthorization(featureId: FeatureID): Observable<boolean> {
+    return this.authorizationService.isAuthorized(featureId)
       .pipe(
         take(1)
       );
+  }
+
+  isCurrentUserAdmin(): Observable<boolean> {
+    return this.checkAuthorization(FeatureID.AdministratorOf);
+  }
+
+  isCurrentUserFundingMember(): Observable<boolean> {
+    return this.checkAuthorization(FeatureID.isMemberOfFunding);
+  }
+
+  isCurrentUserFundingCoordinator(): Observable<boolean> {
+    return this.checkAuthorization(FeatureID.isCoordinatorOfFunding);
+  }
+
+  isCurrentUserFunderOfProject(): Observable<boolean> {
+    return this.checkAuthorization(FeatureID.isFunderOfProject);
+  }
+
+  isCurrentUserFunderOrganizationalManager(): Observable<boolean> {
+    return this.checkAuthorization(FeatureID.isFunderOrganizationalManager);
   }
 }
