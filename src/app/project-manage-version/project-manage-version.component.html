@@ -1,3 +1,5 @@
 <div class="container">
-    <ds-item-versions [item]="item" [displayActions]="true"></ds-item-versions>
+    <ds-item-versions [item]="item" [isCoordinator]="isCoordinatorOfProject$ | async"
+        [isFounder]="isFounderOfProject$ | async" [displayActions]="true" [canShowCreateVersion]="true">
+    </ds-item-versions>
 </div>

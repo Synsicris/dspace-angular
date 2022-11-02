@@ -14,8 +14,8 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
 import { PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
 import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
-import { FeatureID } from 'src/app/core/data/feature-authorization/feature-id';
-import { map } from 'rxjs/operators';
+import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
+import { ProjectVersionService } from '../../../core/project/project-version.service';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -35,6 +35,10 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
    * A boolean representing if user is coordinator or founder for the current project
    */
   public isFounderOfProject$: Observable<boolean>;
+  /**
+   * A boolean representing if user is coordinator or founder for the current project
+   */
+  public mainVersion: Item;
 
   /**
    * Initialize instance variables
@@ -55,12 +59,18 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
     protected projectGroupService: ProjectGroupService,
     protected projectService: ProjectDataService,
     protected router: Router,
+    protected projectVersionService: ProjectVersionService,
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ManageProjectVersions);
   }
 
   ngOnInit() {
-    console.log(this.contextMenuObject);
+    this.mainVersion = this.contextMenuObject as Item;
+
+    this.projectVersionService.getParentRelationVersionsByItemId(this.contextMenuObject.id).subscribe((items: Item[]) => {
+      this.mainVersion = items[0];
+    });
+
     this.isCoordinatorOfProject$ = this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self);
     this.isFounderOfProject$ = this.authorizationService.isAuthorized(FeatureID.isFundersOfProject, this.contextMenuObject.self);
   }
@@ -69,14 +79,14 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
    * Check if current Item is a Project or a Funding
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
+    return (this.mainVersion as Item).entityType === PROJECT_ENTITY;
   }
 
   /**
    * Navigate to manage versions page
    */
   navigateToManage() {
-    this.router.navigate([getItemPageRoute((this.contextMenuObject as Item)), 'manageversions']);
+    this.router.navigate([getItemPageRoute((this.mainVersion as Item)), 'manageversions']);
   }
 
 }

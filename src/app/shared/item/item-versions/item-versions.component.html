@@ -13,8 +13,13 @@
             <tr>
               <th scope="col">{{"item.version.history.table.version" | translate}}</th>
               <th scope="col" *ngIf="(showSubmitter() | async)">{{"item.version.history.table.editor" | translate}}</th>
-              <th scope="col">{{"item.version.history.table.visibility" | translate}}</th>
-              <th scope="col">{{"item.version.history.table.official" | translate}}</th>
+
+              <ng-container *ngIf="isCoordinator || isFounder">
+                <th data-test="visibility-column" scope="col">{{"item.version.history.table.visibility" | translate}}
+                </th>
+                <th data-test="official-column" scope="col">{{"item.version.history.table.official" | translate}}</th>
+              </ng-container>
+
               <th scope="col">{{"item.version.history.table.date" | translate}}</th>
               <th scope="col">{{"item.version.history.table.summary" | translate}}</th>
             </tr>
@@ -32,9 +37,9 @@
                     <div class="left-column">
 
                       <span
-                        *ngIf="(workspaceId$ | async) || (workflowId$ | async); then versionNumberWithoutLink else versionNumberWithLink"></span>
+                        *ngIf="( ((workspaceId$ | async) || (workflowId$ | async)) || (isFounder && !!version?.item && !(isVisible(version.item) | async))); then versionNumberWithoutLink else versionNumberWithLink"></span>
                       <ng-template #versionNumberWithLink>
-                        <a [routerLink]="getVersionRoute(version.id)">{{version.version}}</a>
+                        <a data-test="version-link" [routerLink]="getVersionRoute(version.id)">{{version.version}}</a>
                       </ng-template>
                       <ng-template #versionNumberWithoutLink>
                         {{version.version}}
@@ -60,18 +65,22 @@
                           <i class="fas fa-pencil-alt fa-fw"></i>
                         </button>
                         <!--CREATE-->
-                        <ng-container *ngIf="canCreateVersion$ | async">
+                        <ng-container *ngIf="(canCreateVersion$ | async) && canShowCreateVersion">
                           <button class="btn btn-outline-primary btn-sm version-row-element-create"
+                            [attr.data-test]="'create-'+version.id"
                             [disabled]="isAnyBeingEdited() || (hasDraftVersion$ | async)"
                             (click)="createNewVersion(version)" title="{{createVersionTitle$ | async | translate }}">
                             <i class="fas fa-code-branch fa-fw"></i>
                           </button>
                         </ng-container>
                         <!--DELETE-->
-                        <ng-container *ngIf="canDeleteVersion$(version) | async">
-                          <button class="btn btn-sm version-row-element-delete"
+                        <ng-container
+                          *ngIf="(canDeleteVersion$(version) | async) && 
+                          ( (isCoordinator && !(isVisible(version.item)|async)) || isFounder && !(isOfficial(version.item)|async))">
+                          <button class="btn btn-sm version-row-element-delete" [attr.data-test]="'delete-'+version.id"
                             [ngClass]="isAnyBeingEdited() ? 'btn-outline-primary' : 'btn-outline-danger'"
-                            [disabled]="isAnyBeingEdited()" (click)="deleteVersion(version, version.id==itemVersion.id)"
+                            [disabled]="isAnyBeingEdited() || (isCoordinator && (isOfficial(version.item)|async))"
+                            (click)="deleteVersion(version, version.id==itemVersion.id)"
                             title="{{'item.version.history.table.action.deleteVersion' | translate}}">
                             <i class="fas fa-trash fa-fw"></i>
                           </button>
@@ -84,28 +93,31 @@
                 </ng-container>
               </td>
 
-              <td class="version-row-element-editor">
-                <span class="text-light ml-3">
-                  {{ "item.version.history.table.visibility" | translate }}
+              <ng-container *ngIf="isCoordinator || isFounder">
+                <td class="version-row-element">
 
                   <ng-container *ngVar="(version.item | async)?.payload as versionItem">
-                    <button class="btn btn-sm version-row-element-delete btn-outline-primary"
-                      (click)="toggleVisibility(versionItem)"
-                      title="{{'item.version.history.table.action.toggleVisibility' | translate}}">
-                      <i class="fas"
-                        [ngClass]="{'fa-eye': (versionItem.firstMetadataValue('synsicris.version.visible') === 'false' || !versionItem.firstMetadataValue('synsicris.version.visible') ), 'fa-eye-slash': versionItem.firstMetadataValue('synsicris.version.visible') === 'true'}"></i>
-                    </button>
+                    <span
+                      [attr.data-test]="versionItem.firstMetadataValue('synsicris.version.visible') === 'true' ? 'visible-'+version.id : 'non-visible-'+version.id">
+                      {{ (versionItem.firstMetadataValue('synsicris.version.visible') === 'true' ?
+                      'item.version.synsicris.version.visible' :
+                      'item.version.synsicris.version.invisible') | translate}}
+                    </span>
                   </ng-container>
+                </td>
 
-                </span>
-              </td>
+                <td class="version-row-element">
+                  <ng-container *ngVar="(version.item | async)?.payload as versionItem">
+                    <span
+                      [attr.data-test]="versionItem.firstMetadataValue('synsicris.version.official') === 'true' ? 'official-'+version.id : 'non-official-'+version.id">
+                      {{ (versionItem.firstMetadataValue('synsicris.version.official') === 'true' ?
+                      'item.version.synsicris.version.official' :
+                      'item.version.synsicris.version.not_official') | translate}}
+                    </span>
+                  </ng-container>
+                </td>
 
-              <td class="version-row-element-editor">
-                <span class="text-light ml-3">
-                  {{ "item.version.history.table.official" | translate }}
-                </span>
-              </td>
-
+              </ng-container>
 
               <td class="version-row-element-editor" *ngIf="(showSubmitter() | async)">
                 {{version?.submitterName}}
@@ -147,6 +159,40 @@
                       <i class="fas fa-check fa-fw"></i>
                     </button>
                   </ng-container>
+
+                  <ng-container *ngIf="isCoordinator">
+                    <ng-container *ngVar="(version.item | async)?.payload as versionItem">
+                      <button class="btn btn-sm version-row-element-delete btn-outline-primary"
+                        (click)="toggleItemByMetadata(versionItem,'synsicris.version.visible')"
+                        title="{{'item.version.history.table.action.toggleVisibility' | translate}}"
+                        [attr.data-test]="versionItem.firstMetadataValue('synsicris.version.visible') === 'true' ? 'visible-'+version.id : 'non-visible-'+version.id">
+                        <i class="fas"
+                          [ngClass]="{'fa-eye': (versionItem.firstMetadataValue('synsicris.version.visible') === 'false' || !versionItem.firstMetadataValue('synsicris.version.visible') ), 'fa-eye-slash': versionItem.firstMetadataValue('synsicris.version.visible') === 'true'}"></i>
+                      </button>
+                    </ng-container>
+                  </ng-container>
+
+                  <ng-container *ngIf="isCoordinator || isFounder">
+                    <ng-container *ngVar="(version.item | async)?.payload as versionItem">
+                      <button *ngIf="isCoordinator" class="btn btn-sm version-row-element-delete btn-outline-primary"
+                        (click)="toggleItemByMetadata(versionItem,'synsicris.version.official')"
+                        [disabled]="(isVisible(version.item)|async) && (isOfficial(version.item)|async)"
+                        title="{{'item.version.history.table.action.toggleOfficial' | translate}}"
+                        [attr.data-test]="versionItem.firstMetadataValue('synsicris.version.official') === 'true' ? 'official-'+version.id : 'non-official-'+version.id">
+                        <i class="fas"
+                          [ngClass]="{'fa-check': (versionItem.firstMetadataValue('synsicris.version.official') === 'false' || !versionItem.firstMetadataValue('synsicris.version.official') ), 'fa-times': versionItem.firstMetadataValue('synsicris.version.official') === 'true'}"></i>
+                      </button>
+                      <button
+                        *ngIf="isFounder && versionItem.firstMetadataValue('synsicris.version.official') === 'true'"
+                        class="btn btn-sm version-row-element-delete btn-outline-primary"
+                        (click)="setNonofficial(versionItem)"
+                        title="{{'item.version.history.table.action.toggleOfficial' | translate}}"
+                        [attr.data-test]="'non-official-'+version.id">
+                        <i class="fas"
+                          [ngClass]="{'fa-check': (versionItem.firstMetadataValue('synsicris.version.official') === 'false' || !versionItem.firstMetadataValue('synsicris.version.official') ), 'fa-times': versionItem.firstMetadataValue('synsicris.version.official') === 'true'}"></i>
+                      </button>
+                    </ng-container>
+                  </ng-container>
                 </div>
 
 
@@ -154,7 +200,12 @@
             </tr>
           </tbody>
         </table>
-        <div>*&nbsp;{{"item.version.history.selected" | translate}}</div>
+        <div *ngIf="!isCoordinator && !isFounder;else official">*&nbsp;{{"item.version.history.selected" | translate}}
+        </div>
+        <ng-template #official>
+          <div>*&nbsp;{{"item.version.history.official" | translate}}</div>
+        </ng-template>
+
       </ds-pagination>
       <ds-alert *ngIf="!itemVersion || versions?.page?.length === 0" [content]="'item.version.history.empty'"
         [type]="AlertTypeEnum.Info"></ds-alert>

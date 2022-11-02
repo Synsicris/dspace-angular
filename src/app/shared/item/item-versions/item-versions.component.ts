@@ -50,6 +50,7 @@ import { WorkspaceItem } from '../../../core/submission/models/workspaceitem.mod
 import { WorkspaceitemDataService } from '../../../core/submission/workspaceitem-data.service';
 import { WorkflowItemDataService } from '../../../core/submission/workflowitem-data.service';
 import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
+import { ConfirmationModalComponent } from '../../confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'ds-item-versions',
@@ -83,6 +84,21 @@ export class ItemVersionsComponent implements OnInit {
    * Whether or not to display the action buttons (delete/create/edit version)
    */
   @Input() displayActions: boolean;
+
+  /**
+   * Whether user is coordinator
+   */
+  @Input() isCoordinator = false;
+
+  /**
+   * Whether user is founder
+   */
+  @Input() isFounder = false;
+
+  /**
+   * Whether user is founder
+   */
+  @Input() canShowCreateVersion = false;
 
   /**
    * Array of active subscriptions
@@ -169,7 +185,13 @@ export class ItemVersionsComponent implements OnInit {
   canCreateVersion$: Observable<boolean>;
   createVersionTitle$: Observable<string>;
 
+  /**
+   * Get version edit mode from envoirment
+   */
   versioningEditMode = environment.projects.versioningEditMode;
+  /**
+   * Get version edit form section from envoirment
+   */
   versioningEditFormSection = environment.projects.versioningEditFormSection;
 
   constructor(protected versionHistoryService: VersionHistoryDataService,
@@ -544,25 +566,80 @@ export class ItemVersionsComponent implements OnInit {
     this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
   }
 
-
-  toggleVisibility(versionItem) {
-
+  /**
+   * Toggles the versionItem metadata
+   * @param versionItem the version item which metadata belongs to
+   * @param metadata the metadata being toggled
+   */
+  toggleItemByMetadata(versionItem, metadata) {
     this.itemService.updateItemMetadata(
       versionItem.id,
       this.versioningEditMode,
       this.getVersionPath(),
-      'synsicris.version.visible',
+      metadata,
       0,
-      { value: !Boolean(versionItem.firstMetadataValue('synsicris.version.visible')) }
+      { value: versionItem.firstMetadataValue(metadata) !== 'true' }
     ).subscribe((item) => {
-      console.log(item);
+      this.notificationsService.success(null, this.translateService.get('Updated successfully'));
     });
-
   }
 
-
+  /**
+   * Get the path of version to send section information
+   */
   getVersionPath(): string {
     return ['sections', this.versioningEditFormSection].join('/');
+  }
+
+  /**
+   * Button shown only when the versionItem official metadata is true for funder so he can set NonOfficial
+   * @param versionItem the version item which metadata belongs to
+   */
+  setNonofficial(versionItem) {
+    if (this.isFounder) {
+      const modalRef = this.modalService.open(ConfirmationModalComponent);
+      modalRef.componentInstance.dso = versionItem;
+      modalRef.componentInstance.headerLabel = 'confirmation-modal.version.official.header';
+      modalRef.componentInstance.infoLabel = 'confirmation-modal.version.official.info';
+      modalRef.componentInstance.cancelLabel = 'confirmation-modal.version.official.cancel';
+      modalRef.componentInstance.confirmLabel = 'confirmation-modal.version.official.confirm';
+      modalRef.componentInstance.confirmIcon = 'fas fa-check';
+      const resp$ = modalRef.componentInstance.response.pipe(map((confirm: boolean) => {
+        if (confirm) {
+          return this.toggleItemByMetadata(versionItem, 'synsicris.version.official');
+        } else {
+          return null;
+        }
+      }));
+      resp$.subscribe();
+      this.subs.push(resp$);
+    }
+  }
+
+  /**
+   * Check if the version Item is visible
+   * @param versionItem the version item which metadata belongs to
+   */
+  isVisible(versionItem): Observable<boolean> {
+    return versionItem.pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((item: Item) => {
+        return item.firstMetadataValue('synsicris.version.visible') === 'true';
+      })
+    );
+  }
+
+  /**
+   * Check if the version Item is official
+   * @param versionItem the version item which metadata belongs to
+   */
+  isOfficial(versionItem): Observable<boolean> {
+    return versionItem.pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((item: Item) => {
+        return item.firstMetadataValue('synsicris.version.official') === 'true';
+      })
+    );
   }
 
 }
