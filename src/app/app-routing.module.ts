@@ -17,6 +17,7 @@ import {
   INFO_MODULE_PATH,
   INTERNAL_SERVER_ERROR,
   LEGACY_BITSTREAM_MODULE_PATH,
+  MANAGEMEMBERS,
   PROFILE_MODULE_PATH,
   REGISTER_PATH,
   REQUEST_COPY_MODULE_PATH,
@@ -109,6 +110,18 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             path: 'entities/project/:id/workingplan',
             loadChildren: () => import('./+working-plan-page/working-plan-page.module')
               .then((m) => m.WorkingPlanPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: `entities/project/:id/${MANAGEMEMBERS}`,
+            loadChildren: () => import('./project-members-page/project-members-page.module')
+              .then((m) => m.ProjectMembersPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: `entities/programme/:id/${MANAGEMEMBERS}`,
+            loadChildren: () => import('./programme-members-page/programme-members-page.module')
+              .then((m) => m.ProgrammeMembersPageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
           {
