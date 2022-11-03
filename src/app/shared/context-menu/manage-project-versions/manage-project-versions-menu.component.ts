@@ -16,6 +16,7 @@ import { PROJECT_ENTITY, ProjectDataService } from '../../../core/project/projec
 import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ProjectVersionService } from '../../../core/project/project-version.service';
+import { map } from 'rxjs/operators';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -39,6 +40,10 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
    * A boolean representing if user is coordinator or founder for the current project
    */
   public mainVersion: Item;
+  /**
+   * A boolean representing if user is coordinator or founder for the current project
+   */
+  public hasVersions$: Observable<boolean>;
 
   /**
    * Initialize instance variables
@@ -71,8 +76,12 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
       this.mainVersion = items[0];
     });
 
+    this.hasVersions$ = this.projectVersionService.getRelationVersionsByItemId(this.contextMenuObject.id).pipe(
+      map((items: Item[]) => items.length > 0));
+
+
     this.isCoordinatorOfProject$ = this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self);
-    this.isFounderOfProject$ = this.authorizationService.isAuthorized(FeatureID.isFundersOfProject, this.contextMenuObject.self);
+    this.isFounderOfProject$ = this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, this.contextMenuObject.self);
   }
 
   /**

@@ -3088,7 +3088,7 @@
 
   "item.version.history.selected.alert": "You are currently viewing version {{version}} of the item.",
 
-  "item.version.history.official": "Official version",
+  "item.version.history.official": "Current version",
 
   "item.version.history.table.version": "Version",
 
@@ -3124,7 +3124,7 @@
 
   "item.version.history.table.official": "Official",
 
-  "item.version.history.table.toggleOfficial": "Toggle Visibility",
+  "item.version.history.table.toggleVisibility": "Toggle Visibility",
 
   "item.version.history.table.toggleOfficial": "Toggle Official",
 
@@ -3175,6 +3175,20 @@
   "item.version.edit.notification.success": "The summary of version number {{version}} has been changed",
 
   "item.version.edit.notification.failure": "The summary of version number {{version}} has not been changed",
+
+  "item.version.visibility.modal.header": "Visibility version",
+
+  "item.version.visibility.modal.text": "Do you want to make version {{version}} visible?",
+
+  "item.version.visibility.modal.button.confirm": "Visibile",
+
+  "item.version.visibility.modal.button.confirm.tooltip": "Make visible this version",
+
+  "item.version.visibility.modal.button.cancel": "Cancel",
+
+  "item.version.visibility.modal.button.cancel.tooltip": "Do not visibility this version",
+
+  "item.version.visibility.modal.official.label": "Set version as official?",
 
   "item.version.list.dropdown-text": "Compare with...",
 

@@ -51,6 +51,7 @@ import { WorkspaceitemDataService } from '../../../core/submission/workspaceitem
 import { WorkflowItemDataService } from '../../../core/submission/workflowitem-data.service';
 import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
 import { ConfirmationModalComponent } from '../../confirmation-modal/confirmation-modal.component';
+import { ItemVersionsVisibilityModalComponent } from './item-versions-visibility-modal/item-versions-visibility-modal.component';
 
 @Component({
   selector: 'ds-item-versions',
@@ -571,15 +572,16 @@ export class ItemVersionsComponent implements OnInit {
    * @param versionItem the version item which metadata belongs to
    * @param metadata the metadata being toggled
    */
-  toggleItemByMetadata(versionItem, metadata) {
+  updateItemByMetadata(versionItem: Item, version, metadata, value) {
     this.itemService.updateItemMetadata(
       versionItem.id,
       this.versioningEditMode,
       this.getVersionPath(),
       metadata,
       0,
-      { value: versionItem.firstMetadataValue(metadata) !== 'true' }
+      { value: value }
     ).subscribe((item) => {
+      version.isLoading = false;
       this.notificationsService.success(null, this.translateService.get('Updated successfully'));
     });
   }
@@ -595,8 +597,30 @@ export class ItemVersionsComponent implements OnInit {
    * Button shown only when the versionItem official metadata is true for funder so he can set NonOfficial
    * @param versionItem the version item which metadata belongs to
    */
-  setNonofficial(versionItem) {
+  setVisible(versionItem: Item, version) {
+    version.isLoading = true;
+    const modalRef = this.modalService.open(ItemVersionsVisibilityModalComponent);
+    modalRef.componentInstance.versionItem = versionItem;
+    modalRef.result.then((data: any) => {
+      if (confirm) {
+        if (data.official) {
+          this.updateItemByMetadata(versionItem, version, 'synsicris.version.official', true);
+        }
+        return this.updateItemByMetadata(versionItem, version, 'synsicris.version.visible', true);
+      } else {
+        version.isLoading = false;
+        return null;
+      }
+    });
+  }
+
+  /**
+   * Button shown only when the versionItem official metadata is true for funder so he can set NonOfficial
+   * @param versionItem the version item which metadata belongs to
+   */
+  setNonofficial(versionItem: Item, version) {
     if (this.isFounder) {
+      version.isLoading = true;
       const modalRef = this.modalService.open(ConfirmationModalComponent);
       modalRef.componentInstance.dso = versionItem;
       modalRef.componentInstance.headerLabel = 'confirmation-modal.version.official.header';
@@ -606,8 +630,9 @@ export class ItemVersionsComponent implements OnInit {
       modalRef.componentInstance.confirmIcon = 'fas fa-check';
       const resp$ = modalRef.componentInstance.response.pipe(map((confirm: boolean) => {
         if (confirm) {
-          return this.toggleItemByMetadata(versionItem, 'synsicris.version.official');
+          return this.updateItemByMetadata(versionItem, version, 'synsicris.version.official', false);
         } else {
+          version.isLoading = false;
           return null;
         }
       }));

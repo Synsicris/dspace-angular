@@ -38,7 +38,7 @@ export class ProjectManageVersionComponent implements OnInit {
     this.router.data.subscribe(data => {
       this.item = data.item.payload;
       this.isCoordinatorOfProject$ = this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.item.self);
-      this.isFounderOfProject$ = this.authorizationService.isAuthorized(FeatureID.isFundersOfProject, this.item.self);
+      this.isFounderOfProject$ = this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, this.item.self);
     });
   }
 

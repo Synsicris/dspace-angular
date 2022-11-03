@@ -247,7 +247,9 @@ describe('ItemVersionsComponent', () => {
     de = fixture.debugElement;
     component.item = item1;
     component.displayActions = true;
+    versionHistoryServiceSpy.getVersions.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(versions)));
     fixture.detectChanges();
+
   });
 
   it(`should display ${versions.length} rows`, () => {
@@ -377,6 +379,7 @@ describe('ItemVersionsComponent', () => {
       component.isCoordinator = true;
       component.isFounder = false;
       component.canShowCreateVersion = true;
+      component.displayActions = true;
       versionHistoryServiceSpy.getVersions.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([version1, version2, version3, version4])));
       fixture.detectChanges();
     });
@@ -405,8 +408,24 @@ describe('ItemVersionsComponent', () => {
       expect(de.query(By.css('span[data-test="official-2"]'))).toBeTruthy();
     });
 
+    it('When create button click should call createNewVersion with version 2', () => {
+      console.log(de.query(By.css('button[data-test="create-2"]')));
+      const button = de.query(By.css('button[data-test="create-2"]'));
+      jasmine.createSpyObj('component', ['createNewVersion']);
+      button.nativeElement.click();
+      fixture.detectChanges();
+      expect(component.createNewVersion).toHaveBeenCalledOnceWith(version2);
+    });
 
     describe('when isCoordinator is true', () => {
+
+      beforeEach(() => {
+        component.isCoordinator = false;
+        component.isFounder = true;
+        component.canShowCreateVersion = true;
+        fixture.detectChanges();
+      });
+
       // Should show create button
       it('Should show official for version 3', () => {
         expect(de.query(By.css('button[data-test="create-1"]'))).toBeTruthy();
@@ -423,19 +442,15 @@ describe('ItemVersionsComponent', () => {
         expect(de.query(By.css('button[data-test="official-3"]')).nativeElement.disabled).toBe(true);
       });
 
-      // Should  be called
-      it('Should  be called for version 2', () => {
-        expect(de.query(By.css('button[data-test="official-2"]')).nativeElement.disabled).toBe(true);
-      });
-      // When official and visible should not delete
+
       it('When official and visible should not delete for version 3', () => {
-        expect(de.query(By.css('button[data-test="delete-3"]'))).toBeTruthy();
+        expect(de.query(By.css('button[data-test="delete-3"]'))).toBeFalsy();
       });
-      // When official and visible should not change visibility
-      it('When official and visible should not change visibility for version 3', () => {
-        expect(de.query(By.css('button[data-test="delete-3"]')).nativeElement.disabled).toBe(true);
+
+      it('When official and visible should not change official for version 3', () => {
+        expect(de.query(By.css('button[data-test="official-3"]')).nativeElement.disabled).toBe(true);
       });
-      // Should show version links
+
       it('Should show version links for all version', () => {
         expect(de.queryAll(By.css('a[data-test="version-link"]')).length).toEqual(4);
       });
