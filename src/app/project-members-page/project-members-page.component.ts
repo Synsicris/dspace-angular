@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest } from 'rxjs';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Community } from '../core/shared/community.model';
@@ -27,6 +27,11 @@ import { ProjectAuthorizationService } from '../core/project/project-authorizati
 export class ProjectMembersPageComponent implements OnInit {
 
   /**
+   * the active tab id
+   */
+  public activeId = 'coordinators';
+
+  /**
    * The project/funding coordinators group
    */
   public coordinatorsGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
@@ -40,6 +45,21 @@ export class ProjectMembersPageComponent implements OnInit {
    * A boolean representing if funders group is initialized
    */
   public fundersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * A boolean representing if coordinators group is initialized
+   */
+  public coordinatorsGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * A boolean representing if members group is initialized
+   */
+  public membersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * A boolean representing if all groups are initialized
+   */
+  public allGroupsInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * The project/funding edit group
@@ -123,6 +143,7 @@ export class ProjectMembersPageComponent implements OnInit {
       this.fundersGroupInit$.next(true);
       if (groupRD.hasSucceeded) {
         this.fundersGroup$.next(groupRD.payload);
+        this.activeId = 'funders';
       }
     });
 
@@ -140,6 +161,7 @@ export class ProjectMembersPageComponent implements OnInit {
     ).subscribe((groupRD: RemoteData<Group>) => {
       if (groupRD.hasSucceeded) {
         this.coordinatorsGroup$.next(groupRD.payload);
+        this.coordinatorsGroupInit$.next(true);
       }
     });
 
@@ -157,7 +179,21 @@ export class ProjectMembersPageComponent implements OnInit {
     ).subscribe((groupRD: RemoteData<Group>) => {
       if (groupRD.hasSucceeded) {
         this.membersGroup$.next(groupRD.payload);
+        this.membersGroupInit$.next(true);
       }
+    });
+
+    combineLatest([
+      this.fundersGroupInit$.asObservable(),
+      this.coordinatorsGroupInit$.asObservable(),
+      this.membersGroupInit$.asObservable()
+    ]).pipe(
+      map(([fundersInit, coordinatorsInit, membersInit]) => {
+        return fundersInit && coordinatorsInit && membersInit;
+      }),
+      distinctUntilChanged()
+    ).subscribe((isInit) => {
+      this.allGroupsInit$.next(isInit);
     });
   }
 
