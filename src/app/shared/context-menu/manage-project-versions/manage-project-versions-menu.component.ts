@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { combineLatest, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
@@ -44,6 +44,10 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
    * A boolean representing if user is coordinator or founder for the current project
    */
   public hasVersions$: Observable<boolean>;
+  /**
+   * A boolean representing if the context object is a version
+   */
+  public isVersionOf: boolean;
 
   /**
    * Initialize instance variables
@@ -55,6 +59,7 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
    * @param {ProjectGroupService} projectGroupService
    * @param {ProjectDataService} projectService
    * @param {Router} router
+   * @param {ProjectVersionService} projectVersionService
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
@@ -76,8 +81,12 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
       this.mainVersion = items[0];
     });
 
-    this.hasVersions$ = this.projectVersionService.getRelationVersionsByItemId(this.contextMenuObject.id).pipe(
-      map((items: Item[]) => items.length > 0));
+    if (this.projectVersionService.isVersionOfAnItem(this.contextMenuObject as Item)) {
+      this.isVersionOf = true;
+    } else {
+      this.hasVersions$ = this.projectVersionService.getRelationVersionsByItemId(this.contextMenuObject.id).pipe(
+        map((items: Item[]) => items.length > 0));
+    }
 
 
     this.isCoordinatorOfProject$ = this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self);
