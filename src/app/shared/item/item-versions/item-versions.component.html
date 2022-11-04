@@ -2,7 +2,7 @@
   <div *ngVar="(versionRD$ | async)?.payload as itemVersion">
     <div class="mb-2" *ngIf="versions?.page?.length > 0 || displayWhenEmpty">
       <h2 *ngIf="displayTitle">{{"item.version.history.head" | translate}}</h2>
-      <ds-alert [type]="AlertTypeEnum.Info" *ngIf="itemVersion">
+      <ds-alert [type]="AlertTypeEnum.Info" *ngIf="displayAlert && itemVersion">
         {{ "item.version.history.selected.alert" | translate : {version: itemVersion.version} }}
       </ds-alert>
       <ds-pagination *ngIf="versions?.page?.length > 0" (paginationChange)="onPageChange()" [hideGear]="true"
@@ -37,7 +37,7 @@
                     <div class="left-column">
 
                       <span
-                        *ngIf="( ((workspaceId$ | async) || (workflowId$ | async)) || (isFounder && !!version?.item && !(isVisible(version.item) | async))); then versionNumberWithoutLink else versionNumberWithLink"></span>
+                        *ngIf="( ((workspaceId$ | async) || (workflowId$ | async)) || (isFounder && !!version?.item && !(isVisible(version.item) | async) && version?.id !== itemVersion?.id)); then versionNumberWithoutLink else versionNumberWithLink"></span>
                       <ng-template #versionNumberWithLink>
                         <a data-test="version-link" [routerLink]="getVersionRoute(version.id)">{{version.version}}</a>
                       </ng-template>
@@ -74,7 +74,7 @@
                           </button>
                         </ng-container>
                         <!--DELETE-->
-                        <ng-container *ngIf="(canDeleteVersion$(version) | async) && 
+                        <ng-container *ngIf="(canDeleteVersion$(version) | async) &&
                           ( (isCoordinator && !(isVisible(version.item)|async)) || isFounder && !(isOfficial(version.item)|async))
                            && version?.id !== itemVersion?.id">
                           <button class="btn btn-sm version-row-element-delete" [attr.data-test]="'delete-'+version.id"
@@ -162,7 +162,7 @@
 
                   <ng-container *ngIf="isCoordinator">
                     <ng-container *ngVar="(version.item | async)?.payload as versionItem">
-                      <button *ngIf="versionItem.firstMetadataValue('synsicris.version.visible') === 'false'"
+                      <button *ngIf="(versionItem.firstMetadataValue('synsicris.version.visible') === 'false' || !versionItem.firstMetadataValue('synsicris.version.visible'))"
                         class="btn btn-sm version-row-element-delete btn-outline-primary"
                         (click)="setVisible(versionItem,version)"
                         title="{{'item.version.history.table.toggleVisibility' | translate}}"

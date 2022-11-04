@@ -5,10 +5,10 @@
     </button>
   </div>
   <div class="modal-body">
-    <p class="pb-2">{{ "item.version.visibility.modal.text" | translate : {version: versionItem.name} }}</p>
-    <div>
-      <label for="official">{{ "item.version.visibility.modal.official.label" | translate}}</label>
-      <input id="official" type="checkbox" [(ngModel)]="official">
+    <p class="pb-2">{{ "item.version.visibility.modal.text" | translate : {version: version.summary} }}</p>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="official" [(ngModel)]="official">
+      <label class="custom-control-label" for="official">{{ "item.version.visibility.modal.official.label" | translate}}</label>
     </div>
   </div>
   <div class="modal-footer">

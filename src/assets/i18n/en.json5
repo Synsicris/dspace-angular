@@ -1708,7 +1708,7 @@
 
   "confirmation-modal.version.official.header": "Version Official Managment",
 
-  "confirmation-modal.version.official.info": "Are you sure you want to make \"{{ dsoName }}\" version nonofficial?",
+  "confirmation-modal.version.official.info": "Are you sure you want to make \"{{ dsoName }}\" version as not-official?",
 
   "confirmation-modal.version.official.cancel": "Cancel",
 
@@ -3088,7 +3088,7 @@
 
   "item.version.history.selected.alert": "You are currently viewing version {{version}} of the item.",
 
-  "item.version.history.official": "Current version",
+  "item.version.history.official": "Active working project",
 
   "item.version.history.table.version": "Version",
 
@@ -3124,9 +3124,13 @@
 
   "item.version.history.table.official": "Official",
 
-  "item.version.history.table.toggleVisibility": "Toggle Visibility",
+  "item.version.history.table.toggleVisibility": "Set as visible",
 
-  "item.version.history.table.toggleOfficial": "Toggle Official",
+  "item.version.history.table.toggleOfficial": "Mark as not-official",
+
+  "version-history.breadcrumbs": "Version History",
+
+  "item.version.history.title": "Version History",
 
   "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href='{{destination}}'>here</a>.",
 
@@ -3188,7 +3192,7 @@
 
   "item.version.visibility.modal.button.cancel.tooltip": "Do not visibility this version",
 
-  "item.version.visibility.modal.official.label": "Set version as official?",
+  "item.version.visibility.modal.official.label": "Set version as official",
 
   "item.version.list.dropdown-text": "Compare with...",
 
@@ -3201,7 +3205,7 @@
   "item.version.synsicris.version.invisible": "Not Visible",
 
   "item.version.synsicris.version.visible": "Visible",
-  
+
   "item.version.synsicris.version.official": "Official",
 
   "item.version.synsicris.version.not_official": "Not Official",
@@ -4649,7 +4653,7 @@
   "project-overview.page.working-plan": "Working plan",
 
   "project.versions.menu.project": "<i class=\"fas fa-sync\"></i> Manage Project Versions",
-  
+
   "publication.listelement.badge": "Publication",
 
   "publication.page.description": "Description",
