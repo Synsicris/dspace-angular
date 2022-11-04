@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { BehaviorSubject, from, Observable, of, Subscription } from 'rxjs';
 import { mergeMap, reduce, take } from 'rxjs/operators';
@@ -63,7 +63,6 @@ export class ProgrammeMembersComponent implements OnInit {
   private modalRef: NgbModalRef;
 
   constructor(
-    protected cdr: ChangeDetectorRef,
     protected epersonService: EPersonDataService,
     protected groupService: GroupDataService,
     protected modalService: NgbModal,
@@ -175,6 +174,5 @@ export class ProgrammeMembersComponent implements OnInit {
   private refreshGroupsMembers(): void {
     this.epersonService.clearLinkRequests(this.targetGroup._links.epersons.href);
   }
-
 
 }

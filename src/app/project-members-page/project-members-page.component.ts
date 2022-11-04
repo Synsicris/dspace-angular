@@ -91,15 +91,6 @@ export class ProjectMembersPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.data.pipe(
-      map((data) => data.projectItem as RemoteData<Item>),
-      redirectOn4xx(this.router, this.authService),
-      getFirstSucceededRemoteDataPayload()
-    ).subscribe((project: Item) => {
-      this.entityItem$.next(project);
-      this.isFunding = project.entityType !== PROJECT_ENTITY;
-    });
-
     const projectCommunity$ = this.route.data.pipe(
       map((data) => data.projectItem as RemoteData<Item>),
       redirectOn4xx(this.router, this.authService),
