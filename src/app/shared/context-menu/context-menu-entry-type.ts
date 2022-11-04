@@ -19,6 +19,7 @@ export enum ContextMenuEntryType {
   ProjectMemberInvitation = 'projectamembervitation',
   ViewProjectItems = 'viewprojectitems',
   ManageProjectMembers = 'manageprojectmembers',
+  ManageProjectVersions = 'manageprojectversions',
   ManageProjectManagers = 'manageprojectmanagers',
   ManageProgrammeManagers = 'manageprogrammemanagers',
 

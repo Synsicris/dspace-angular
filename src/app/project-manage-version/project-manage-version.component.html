@@ -1,0 +1,10 @@
+<div class="container">
+    <ds-item-versions [item]="item"
+                      [isCoordinator]="isCoordinatorOfProject$ | async"
+                      [isFounder]="isFounderOfProject$ | async"
+                      [displayActions]="true"
+                      [displayAlert]="false"
+                      [displayWhenEmpty]="false"
+                      [canShowCreateVersion]="false">
+    </ds-item-versions>
+</div>

@@ -131,6 +131,12 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
           {
+            path: 'entities/project/:id/manageversions',
+            loadChildren: () => import('./project-manage-version/project-manage-version.module')
+              .then((m) => m.ProjectManageVersionModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
             path: 'entities/funding/:id/exploitationplans',
             loadChildren: () => import('./+exploitation-plan-page/exploitation-plan-page.module')
               .then((m) => m.ExploitationPlanPageModule),
@@ -276,7 +282,8 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             path: FORBIDDEN_PATH,
             component: ThemedForbiddenComponent
           },
-          { path: 'coordinator-overview',
+          {
+            path: 'coordinator-overview',
             loadChildren: () => import('./coordinator-page/coordinator-page.module')
               .then((m) => m.CoordinatorPageModule)
           },
@@ -322,7 +329,7 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
       }
     ], {
       onSameUrlNavigation: 'reload',
-})
+    })
   ],
   exports: [RouterModule],
 })

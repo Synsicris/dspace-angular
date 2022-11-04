@@ -12,4 +12,6 @@ export interface ProjectsConfig extends Config {
   projectVersionUniqueIdMetadata: string;
   excludeComparisonMetadata: string[];
   projectsFunder: ProjectsFunderConfig;
+  versioningEditMode: string;
+  versioningEditFormSection: string;
 }

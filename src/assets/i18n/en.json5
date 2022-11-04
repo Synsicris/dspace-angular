@@ -1706,6 +1706,14 @@
 
   "confirmation-modal.pending-changes.confirm": "Leave",
 
+  "confirmation-modal.version.official.header": "Version Official Managment",
+
+  "confirmation-modal.version.official.info": "Are you sure you want to make \"{{ dsoName }}\" version as not-official?",
+
+  "confirmation-modal.version.official.cancel": "Cancel",
+
+  "confirmation-modal.version.official.confirm": "Yes",
+
   "comment.listelement.badge": "Comment",
 
   "dataset.listelement.badge": "Dataset",
@@ -3080,6 +3088,8 @@
 
   "item.version.history.selected.alert": "You are currently viewing version {{version}} of the item.",
 
+  "item.version.history.official": "Active working project",
+
   "item.version.history.table.version": "Version",
 
   "item.version.history.table.item": "Item",
@@ -3109,6 +3119,18 @@
   "item.version.history.table.action.deleteVersion": "Delete version",
 
   "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
+
+  "item.version.history.table.visibility": "Visibility",
+
+  "item.version.history.table.official": "Official",
+
+  "item.version.history.table.toggleVisibility": "Set as visible",
+
+  "item.version.history.table.toggleOfficial": "Mark as not-official",
+
+  "version-history.breadcrumbs": "Version History",
+
+  "item.version.history.title": "Version History",
 
   "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href='{{destination}}'>here</a>.",
 
@@ -3158,6 +3180,20 @@
 
   "item.version.edit.notification.failure": "The summary of version number {{version}} has not been changed",
 
+  "item.version.visibility.modal.header": "Visibility version",
+
+  "item.version.visibility.modal.text": "Do you want to make version {{version}} visible?",
+
+  "item.version.visibility.modal.button.confirm": "Visibile",
+
+  "item.version.visibility.modal.button.confirm.tooltip": "Make visible this version",
+
+  "item.version.visibility.modal.button.cancel": "Cancel",
+
+  "item.version.visibility.modal.button.cancel.tooltip": "Do not visibility this version",
+
+  "item.version.visibility.modal.official.label": "Set version as official",
+
   "item.version.list.dropdown-text": "Compare with...",
 
   "item.version.list.option-text": "Version : ",
@@ -3165,6 +3201,14 @@
   "item.version.list.remove-text": "Remove selection",
 
   "item.version.list.selected-text": "Version selected : ",
+
+  "item.version.synsicris.version.invisible": "Not Visible",
+
+  "item.version.synsicris.version.visible": "Visible",
+
+  "item.version.synsicris.version.official": "Official",
+
+  "item.version.synsicris.version.not_official": "Not Official",
 
   "item-export.modal-launcher.single.btn": "Export",
 
@@ -4684,6 +4728,8 @@
   "project-overview.page.title": "Project overview",
 
   "project-overview.page.working-plan": "Working plan",
+
+  "project.versions.menu.project": "<i class=\"fas fa-sync\"></i> Manage Project Versions",
 
   "publication.listelement.badge": "Publication",
 
