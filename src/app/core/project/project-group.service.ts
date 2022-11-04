@@ -5,10 +5,12 @@ import { combineLatest, Observable } from 'rxjs';
 import { Community } from '../shared/community.model';
 import { GroupDataService } from '../eperson/group-data.service';
 import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../shared/operators';
-import { map, mergeMap, reduce } from 'rxjs/operators';
+import { map, mergeMap, reduce, tap } from 'rxjs/operators';
 import { Group } from '../eperson/models/group.model';
 import { CommunityDataService } from '../data/community-data.service';
 import { Item } from '../shared/item.model';
+import { ConfigurationDataService } from '../data/configuration-data.service';
+import { ConfigurationProperty } from '../shared/configuration-property.model';
 
 const PROJECT_GROUP_TEMPLATE = 'project_%s_';
 const PROJECT_COORDINATORS_GROUP_TEMPLATE = 'project_%s_coordinators_group';
@@ -20,13 +22,15 @@ const FUNDING_GROUP_TEMPLATE = 'funding_%s_';
 const FUNDING_COORDINATORS_GROUP_TEMPLATE = 'funding_%s_coordinators_group';
 const FUNDING_MEMBERS_GROUP_TEMPLATE = 'funding_%s_members_group';
 
-const PROGRAMME_GROUP_TEMPLATE = 'programme_%s_group';
+const PROGRAMME_MANAGERS_GROUP_TEMPLATE = 'programme_%s_managers_group';
+const PROGRAMME_MEMBERS_GROUP_TEMPLATE = 'programme_%s_members_group';
 
 @Injectable()
 export class ProjectGroupService {
 
   constructor(
     protected communityService: CommunityDataService,
+    protected configService: ConfigurationDataService,
     protected groupService: GroupDataService) {
   }
 
@@ -37,7 +41,25 @@ export class ProjectGroupService {
   }
 
   getProgrammeGroupNameByItem(project: Item): string {
-    return PROGRAMME_GROUP_TEMPLATE.replace('%s', project.uuid);
+    return PROGRAMME_MEMBERS_GROUP_TEMPLATE.replace('%s', project.uuid);
+  }
+
+  getProgrammeManagersGroupNameByItem(programme: Item): string {
+    return PROGRAMME_MANAGERS_GROUP_TEMPLATE.replace('%s', programme.uuid);
+  }
+
+  getProgrammeManagersGroupUUIDByItem(programme: Item): Observable<string[]> {
+    const query = this.getProgrammeManagersGroupNameByItem(programme);
+    return this.getGroupsByQuery(query);
+  }
+
+  getProgrammeMembersGroupNameByItem(project: Item): string {
+    return PROGRAMME_MEMBERS_GROUP_TEMPLATE.replace('%s', project.uuid);
+  }
+
+  getProgrammeMembersGroupUUIDByItem(programme: Item): Observable<string[]> {
+    const query = this.getProgrammeMembersGroupNameByItem(programme);
+    return this.getGroupsByQuery(query);
   }
 
   getFundingAdminsGroupNameByCommunity(project: Community): string {
@@ -138,6 +160,31 @@ export class ProjectGroupService {
     );
     return combineLatest([fundingMembers$, projectMembers$]).pipe(
       map(([fundingMembers, projectMembers]) => [...fundingMembers, ...projectMembers])
+    );
+  }
+
+  getInvitationProgrammeFunderOrganizationalManagersGroupByItem(programme: Item): Observable<string[]> {
+    const fundersManagers$ = this.getFunderOrganizationalManagersGroupId();
+    const fundersProgrammeManagers$ = this.getProgrammeManagersGroupUUIDByItem(programme);
+
+    return combineLatest([fundersManagers$, fundersProgrammeManagers$]).pipe(
+      tap(console.log),
+      map(([fundingMembers, projectMembers]) => [fundingMembers, ...projectMembers]),
+      tap(console.log),
+    );
+  }
+
+  getFunderOrganizationalManagersGroupId(): Observable<string> {
+    return this.configService.findByPropertyName('funder-organisational-managers.group').pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((configProperty: ConfigurationProperty) => configProperty?.values?.length > 0 ? configProperty.values[0] : null)
+    );
+  }
+
+  getFunderProjectManagersGroupId(): Observable<string> {
+    return this.configService.findByPropertyName('funders-project-managers.group').pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((configProperty: ConfigurationProperty) => configProperty?.values?.length > 0 ? configProperty.values[0] : null)
     );
   }
 

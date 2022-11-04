@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { combineLatest, from, Observable, of } from 'rxjs';
-import { concatMap, map, mergeMap, reduce, switchMap } from 'rxjs/operators';
+import { concatMap, map, mergeMap, reduce, switchMap, tap } from 'rxjs/operators';
 import { differenceWith, findIndex, unionWith } from 'lodash';
 
 import { RelationshipService } from '../data/relationship.service';
@@ -41,10 +41,10 @@ export interface ComparedVersionItem {
 export class ProjectVersionService {
 
   constructor(protected itemService: ItemDataService,
-              protected relationshipService: RelationshipService,
-              protected versionService: VersionDataService,
-              protected versionHistoryService: VersionHistoryDataService,
-              ) { }
+    protected relationshipService: RelationshipService,
+    protected versionService: VersionDataService,
+    protected versionHistoryService: VersionHistoryDataService,
+  ) { }
 
   /**
    * Retrieve all item version for the given item
@@ -52,7 +52,7 @@ export class ProjectVersionService {
    * @param itemId  The item for which to search the versions available
    * @param options the FindListOptions
    */
-  public getVersionsByItemId(itemId: string, options?: PaginatedSearchOptions): Observable<Version[]>  {
+  public getVersionsByItemId(itemId: string, options?: PaginatedSearchOptions): Observable<Version[]> {
     return this.itemService.findById(itemId, true, true, followLink('version')).pipe(
       getFirstCompletedRemoteData(),
       switchMap((itemRD: RemoteData<Item>) => {
@@ -75,17 +75,17 @@ export class ProjectVersionService {
                         })
                       );
                     } else {
-                      return  of([]);
+                      return of([]);
                     }
                   })
                 );
               } else {
-                return  of([]);
+                return of([]);
               }
             })
           );
         } else {
-          return  of([]);
+          return of([]);
         }
       })
     );
@@ -98,7 +98,7 @@ export class ProjectVersionService {
    * @param itemId  The item for which to search the versions available
    * @param options the FindListOptions
    */
-  public getRelationVersionsByItemId(itemId: string, options?: FindListOptions): Observable<Item[]>  {
+  public getRelationVersionsByItemId(itemId: string, options?: FindListOptions): Observable<Item[]> {
     return this.itemService.findById(itemId, true, true, followLink('relationships')).pipe(
       getFirstCompletedRemoteData(),
       switchMap((itemRD: RemoteData<Item>) => {
@@ -110,7 +110,7 @@ export class ProjectVersionService {
             })
           );
         } else {
-          return  of([]);
+          return of([]);
         }
       })
     );
@@ -202,6 +202,34 @@ export class ProjectVersionService {
     const metadata = Metadata.allValues(item.metadata, VERSION_UNIQUE_ID);
     return isNotEmpty(metadata);
   }
+
+
+
+  /**
+   * Retrieve all item version for the given item by means the `hasVersion` relationship
+   *
+   * @param itemId  The item for which to search the versions available
+   * @param options the FindListOptions
+   */
+  public getParentRelationVersionsByItemId(itemId: string, options?: FindListOptions): Observable<Item[]> {
+    return this.itemService.findById(itemId, true, true, followLink('relationships')).pipe(
+      getFirstCompletedRemoteData(),
+      switchMap((itemRD: RemoteData<Item>) => {
+        if (itemRD.hasSucceeded) {
+          return this.relationshipService.getRelatedItemsByLabel(itemRD.payload, 'isVersionOf', options).pipe(
+            tap((res) => console.log(res)),
+            getFirstCompletedRemoteData(),
+            map((listRD: RemoteData<PaginatedList<Item>>) => {
+              return listRD.hasSucceeded && listRD.statusCode === 200 ? listRD.payload.page : [];
+            })
+          );
+        } else {
+          return of([]);
+        }
+      })
+    );
+  }
+
 }
 
 

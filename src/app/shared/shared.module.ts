@@ -243,6 +243,7 @@ import { AuthorityDropdownComponent } from './authority-dropdown/authority-dropd
 import { ItemVersionListComponent } from './item-version-list/item-version-list.component';
 import { CompareItemComponent } from './compare-item/compare-item.component';
 import { GrantBadgeComponent } from './object-list/grant-badge/grant-badge.component';
+import { ItemVersionsVisibilityModalComponent } from './item/item-versions/item-versions-visibility-modal/item-versions-visibility-modal.component';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -476,6 +477,7 @@ const COMPONENTS = [
   ItemVersionListComponent,
   CompareItemComponent,
   GrantBadgeComponent,
+  ItemVersionsVisibilityModalComponent,
 ];
 
 const ENTRY_COMPONENTS = [

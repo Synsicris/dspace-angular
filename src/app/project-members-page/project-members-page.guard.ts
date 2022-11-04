@@ -5,7 +5,6 @@ import { combineLatest, Observable, of as observableOf } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
-import { ItemPageResolver } from '../item-page/item-page.resolver';
 import { AuthService } from '../core/auth/auth.service';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
 import { getFirstCompletedRemoteData, redirectOn4xx } from '../core/shared/operators';
@@ -20,8 +19,7 @@ import { getPageNotFoundRoute } from '../app-routing-paths';
  */
 @Injectable()
 export class ProjectMembersPageGuard implements CanActivate {
-  constructor(protected resolver: ItemPageResolver,
-              protected authorizationService: AuthorizationDataService,
+  constructor(protected authorizationService: AuthorizationDataService,
               protected router: Router,
               protected authService: AuthService,
               protected projectService: ProjectDataService) {
