@@ -119,6 +119,12 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
           {
+            path: `entities/funding/:id/${MANAGEMEMBERS}`,
+            loadChildren: () => import('./project-members-page/project-members-page.module')
+              .then((m) => m.ProjectMembersPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
             path: `entities/programme/:id/${MANAGEMEMBERS}`,
             loadChildren: () => import('./programme-members-page/programme-members-page.module')
               .then((m) => m.ProgrammeMembersPageModule),
