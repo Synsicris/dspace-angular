@@ -24,16 +24,6 @@
   }
 }
 
-header {
-  li > .navbar-section,
-  li > .expandable-navbar-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-  }
-}
-
 ds-metric-donuts a, ds-metric-donuts a img {
   height: 3.5rem !important;
   width: 3.5rem !important;
@@ -56,37 +46,240 @@ ds-metric-donuts a {
   font-size: 16px !important;
 }
 
-/* ----------------- HELPER TO SHOW THE CURRENT WINDOW SIZE (rex 220505) */
-/* rex 220505: helps to recognize breakpoints
-Span-Tag is in src/themes/synsicris/app/header/header.component.html  Tralala */
+/* ----------------------------------------------------------- 
+COLOR-VARIABLES (rex) 
+----------------------------------------------------------- */
+
+// Variables didn't work in the footer here i global-styles.scss
+$s-body-background: hsl(0, 0, 98) !default;               // basic background color of cotent area (didn't find a variable for this)
+$s-synsicris-logo-magenta: hsl(335, 86, 42)  !default;    // CI Magenta Uni Kassel, Synsicris Logo
+$s-synsicris-logo-gray: hsl(0, 0, 36)   !default;   
+
+
+
+/* ----------------------------------------------------------- 
+LAYOUT 
+----------------------------------------------------------- */
+
+.outer-wrapper {
+  .inner-wrapper {                  // Content area
+    background-color:$s-body-background;             // basic background color of cotent area (didn't find the place and the variable where it was defined)
+    } // end .inner-wrapper
+  } // end .outer-wrapper
+
+/* TESTS TO IDENTIFY LAYOUT AREAS (rex) */
+/*
+.outer-wrapper {
+  border:5px solid red !important;
+  .inner-wrapper {
+    border:5px solid blue !important;
+    &.ng-trigger-slideSidebarPadding { }                // probably for the black Admin-Sidebar (to be tested with differet login / einloggen as shared ist am 4.11. nicht möglich)
+    .ds-themed-header-navbar-wrapper {
+      border:5px solid orange !important;
+      }
+    } // end .inner-wrapper
+  } // end .outer-wrapper
+
+  .notifications-wrapper {                               // for notification with fixed position top-right and bottom-right
+    border:1px solid lime !important;
+    } // end .notifications-wrapper
+*/
+
+/* HELPER TO SHOW THE CURRENT WINDOW SIZE (rex 220505) */
+/* helps to recognize breakpoints
+Span-Tag is in src/themes/synsicris/app/header/header.component.html */
 
 /*
 header .display-dev-infos:after {
+  color:hsl(0, 0, 36);
+  rotate:-90deg;
   display:inline-block;
   position:fixed;
-  top:0;
-  left:20rem;
+  top:13rem;
+  left:0;
   z-index:1000;
-  padding:0.2rem;
-  background-color:white;
-  border:3px solid lime;
+  padding-top:0.1rem;
+  border-top:3px solid transparent;
+  background-color:rgba(255,255,255,0.4);
 
-  content:"extra small (xs) < 576";
-  @include media-breakpoint-up(sm) {content:"small (sm) ≥ 576px";}
-  @include media-breakpoint-up(md) {content:"medium (md) ≥ 768px";}
-  @include media-breakpoint-up(lg) {content:"large (lg) ≥ 992";}
-  @include media-breakpoint-up(xl) {content:"extra large (xl) ≥ 1200";}
+  content:"extra small (xs) < 576"; border-color:orange;
+  @include media-breakpoint-up(sm) {content:"Mediaquery: small (sm) ≥ 576px";border-color:rgb(237, 7, 107);}
+  @include media-breakpoint-up(md) {content:"Mediaquery: medium (md) ≥ 768px";border-color:rgb(207, 243, 97);}
+  @include media-breakpoint-up(lg) {content:"Mediaquery: large (lg) ≥ 992";border-color:rgb(12, 206, 224);}
+  @include media-breakpoint-up(xl) {content:"Mediaquery: extra large (xl) ≥ 1200";border-color:rgb(41, 75, 223);}
 }
 */
 
-  /* ----------------- TOOLTIP (rex 221021) */
+/* ----------------------------------------------------------- 
+HEADER with horizontal navbar 
+----------------------------------------------------------- */
+ /* Attention: the navbar with logo exists twice: 
+from mediaquery md in navbar.component.html, but for mediaquery-sm with hamburger-button in header.component.html. 
+HTML code must therefore always be adapted in both, and styles are defined here and not in the specific scss-files
+in order to avoid the same duplication as in the HTML code. */
+
+header {
+
+  li > .navbar-section,
+  li > .expandable-navbar-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  nav.navbar {
+
+    border-bottom: 1px var(--ds-header-navbar-border-bottom-color) solid !important; // replaces green line
+    
+    /* SYNSICRIS LOGO */
+    .navbar-brand .synsicris-logo {
+      font-weight:700;
+      font-size:1.8rem;
+      letter-spacing:.01rem;
+      color:$s-synsicris-logo-gray;
+      span {
+        text-transform: uppercase;
+        span { color:$s-synsicris-logo-magenta; }
+        }
+      } // end .navbar-brand
+
+    /* space between menu items and make them smaller */
+    .container .navbar-nav {
+
+      margin:0 0.4rem;
+      font-size:0.85rem;
+
+      /* provisional contact link until it is integrated by development (rex 221028),
+      therefore the style here is only provisionally adapted to the other buttons,
+      margin-right in order to give it the same distance to the following icon even without a dropdown arrow. */
+      a.header-contact {
+        i {color: var(--ds-header-icon-color) !important;}
+        span {display:none;} // make lable invisible
+        margin-right:0.6rem;
+      }
+
+    } // end .container .navbar-nav  
+
+  } // end nav.navbar
+  
+} // end header
+
+
+  /* ----------------------------------------------------------- 
+  FOOTER (rex 221104) 
+  ----------------------------------------------------------- */
+  /* the two footer-rows of synsicris are only in .bottom-footer, top-footer is not visible
+  class .text-white is in footer.component.html hardcoded and not changeable at the moment (rex 221104) 
+  ------------
+  VARIABLES DIDN'T WORK IN THE FOOTER (neither css nor scss), so I was forced to use real colors 
+  ------------ */
+
+  footer .bottom-footer {
+
+    //dspacecris logo
+    &:before {
+      display:inline-block;
+      content:'';
+      height:3.5rem;
+      width:3.5rem;
+      background:url("../../../assets/images/dspace-cris-logo.png") no-repeat left top;
+      background-size:contain;
+      margin-right:1.2rem;
+    }
+
+    // normal text in footer
+    &, .text-white { 
+      color:rgba(72, 79, 86, 1) !important; 
+      font-weight:600;
+      font-size:105%; // enlarge the first row
+    }
+
+    // make the white logo-4science-small.png dark
+    a img {
+      filter: invert(100%) opacity(.5); 
+      -webkit-filter: invert(100%) opacity(.5);
+      margin-left:0.3rem;
+    }
+
+    // links in footer (didn't work with any --bs or --ds variable)   
+    ul, ul.footer-info, ul.text-white {
+
+      margin-top:0.5rem;                      // more distance to the 4Sciece-Logo
+      font-size:80%;                          // because of enlargement of the first row
+
+      li {
+
+        a, a:link, a:visited, a.text-white {
+
+          color:rgb(0,121,168) !important;    // link-color
+          font-weight:700 !important;           // make thin font thicker
+          padding:0 0.8rem 0 0.8rem !important; // space between links
+          white-space: nowrrap;                 // prevents breaking links
+          
+          &[href*="javascript:void(0);"] {       // cog-icon before Cookie Settings
+            &:before {
+              font-family: 'Font Awesome 5 Free';
+              content:"\f013";
+              margin-right:0.4rem;
+            }       
+          } // end before-construct for cog-icon
+
+        } // end a
+
+        // divider
+        &:not(:last-child) { &:after {
+            border-right: 2px solid rgba(216, 217, 218, 1) !important; // solution with border-right, does't look good with linebreaks
+          }}
+
+      } // end li    
+    } // end ul
+
+    a, a.text-white {
+      color:hsl(197,65,38) !important;
+      font-weight:700 !important;
+    }
+  
+  } // end footer
+
+
+/* -----------------------------------------------------------
+BREADCRUMB (rex 221028) 
+----------------------------------------------------------- */
+ds-breadcrumbs nav.nav-breadcrumb {   // complete bar
+
+    /* WORKAROUND WITH BOX-SHADOW, BECAUSE BORDER-BOTTOM DOESN'T WORK
+    because ol.breadcrumb moves inside v.nav.breadcrumb as soon as a border is used. 
+    Therefore border-top for breadcrumb bar IS in navbar.component.scss in nav.navbar, 
+    and border-bottom here as shadow */
+    box-shadow: 0 1px 0 var(--ds-header-navbar-border-bottom-color);
+
+    ol.breadcrumb {                   
+
+      background-color:transparent; // Breadcrumb-Links had a background-color, that is not needed
+
+      li.breadcrumb-item {
+        font-size:1.1rem; 
+        font-weight:600;
+        a:link, a:hover, a:focus, a:visited {color:var(--ds-breadcrumb-link-color) !important; }
+        &+ .breadcrumb-item::before { content: quote("/") !important; }
+      } // end li.breadcrumb-item
+
+    } // end ol.breadcrumb
+
+} // end ds-breadcrumbs nav.nav-breadcrumb
+
+
+  /* ----------------------------------------------------------- 
+  TOOLTIP (rex 221021) 
+  ----------------------------------------------------------- */
 
 .hint-tooltip .tooltip-inner {
   max-width:32rem; // somewhere (not clear, where) the width is defined with max-width:200px, so overwritten here
   padding:1.2rem;
   text-align:left;
   box-shadow: 0 5px 15px var(--ds-tooltip-boxshadow-color); // shadow behind tooltip
-  background-color: var(--ds-tooltip-inner-background-color);
+  background-color: var(--ds-tooltip-inner-backgroud-color);
   color: var(--ds-tooltip-inner-color);
 }
 
@@ -95,6 +288,5 @@ header .display-dev-infos:after {
 .bs-tooltip-right .arrow::before,
 .bs-tooltip-left .arrow::before,
 .bs-tooltip-bottom .arrow::before {
-  border-top-color: var(--ds-tooltip-inner-background-color);
+border-top-color: var(--ds-tooltip-inner-backgroud-color);
 }
-

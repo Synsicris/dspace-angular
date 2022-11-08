@@ -1,8 +1,14 @@
 <nav [ngClass]="{'open': !(menuCollapsed | async)}" [@slideMobileNav]="!(windowService.isXsOrSm() | async) ? 'default' : ((menuCollapsed | async) ? 'collapsed' : 'expanded')"
-  class="navbar navbar-expand-md navbar-light p-0 navbar-container" role="navigation" [attr.aria-label]="'nav.main.description' | translate">
+  class="navbar navbar-expand-sm navbar-light p-0 navbar-container" role="navigation" [attr.aria-label]="'nav.main.description' | translate">
+  
   <div class="container h-100">
+   
     <a class="navbar-brand my-2" routerLink="/home">
-      <img src="assets/images/dspace-cris-logo.png" [attr.alt]="'menu.header.image.logo' | translate" />
+      <!-- DSpace-Logo replaced by Synsicris logo (rex 221028) -->
+      <!-- <img src="assets/images/dspace-cris-logo.png" [attr.alt]="'menu.header.image.logo' | translate" /> -->  
+      <span class="synsicris-logo">
+        Syn<span><span>si</span>cris</span>
+      </span>
     </a>
 
     <div id="collapsingNav" class="w-100 h-100">
@@ -12,9 +18,25 @@
         </ng-container>
       </ul>
     </div>
-    <ds-search-navbar class="navbar-collapsed"></ds-search-navbar>
-    <ds-lang-switch class="navbar-collapsed"></ds-lang-switch>
-    <ds-auth-nav-menu class="navbar-collapsed"></ds-auth-nav-menu>
-    <ds-impersonate-navbar class="navbar-collapsed"></ds-impersonate-navbar>
+
+      <!-- Search function shall be removed from header (birge wolf 220929) (rex 221028) -->
+      <!-- <ds-search-navbar class="navbar-search"></ds-search-navbar> -->
+
+      <!-- provisional contact-link, until it is integrated by development,
+      into a div-tag just like <ds-lang-switch> so that it gets the same dimensions -->
+      <div class="navbar-nav">
+        <a routerLink="/info/feedback" class="header-contact navbar-collapsed" >
+          <i class="fas fa-envelope fa-lg fa-fw"></i><span>Contact</span>
+        </a>
+      </div>
+
+      <!-- please replace "fa-globe-asia" with "fa-globe" in src/app/shared/lang-switch/lang-switch.component.html
+        and add the dropdown-arrow (Unfortunately, I don't know how this can be done within the synsicris directory. rex 221028) -->
+      <ds-lang-switch class="navbar-collapsed"></ds-lang-switch>
+
+      <ds-auth-nav-menu class="navbar-collapsed"></ds-auth-nav-menu>
+      <ds-impersonate-navbar class="navbar-collapsed"></ds-impersonate-navbar>
+
   </div>
+
 </nav>
