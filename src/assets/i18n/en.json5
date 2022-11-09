@@ -1390,7 +1390,11 @@
 
   "context-menu.actions.edit-item.btn.OWNER": "<i class=\"fas fa-edit\"></i> Edit",
 
+  "context-menu.actions.edit-item.btn.ADMIN_EDIT": "<i class=\"fas fa-edit\"></i> Edit",
+
   "context-menu.actions.edit-item.btn.CUSTOM": "<i class=\"fas fa-edit\"></i> Edit",
+
+  "context-menu.actions.edit-item.btn.FUNDER_EDIT": "<i class=\"fas fa-edit\"></i> Edit",
 
   "context-menu.actions.edit-item.btn.DIRECTOR": "<i class=\"fas fa-edit\"></i> Edit",
 

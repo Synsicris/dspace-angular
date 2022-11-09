@@ -9,6 +9,8 @@ export interface ProjectsFunderConfig {
 export interface ProjectsConfig extends Config {
   projectsGrantsOptionsVocabularyName: string;
   projectsEntityEditMode: string;
+  projectsEntityAdminEditMode: string;
+  projectsEntityFunderEditMode: string;
   projectVersionUniqueIdMetadata: string;
   excludeComparisonMetadata: string[];
   projectsFunder: ProjectsFunderConfig;
