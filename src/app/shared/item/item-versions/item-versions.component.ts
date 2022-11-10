@@ -1,16 +1,9 @@
-import { JsonPatchOperationPathCombiner } from './../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { environment } from './../../../../environments/environment';
 import { Component, Input, OnInit } from '@angular/core';
 import { Item } from '../../../core/shared/item.model';
 import { Version } from '../../../core/shared/version.model';
 import { RemoteData } from '../../../core/data/remote-data';
-import {
-  BehaviorSubject,
-  combineLatest,
-  Observable,
-  of,
-  Subscription,
-} from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, Subscription, } from 'rxjs';
 import { VersionHistory } from '../../../core/shared/version-history.model';
 import {
   getAllSucceededRemoteData,
@@ -51,7 +44,9 @@ import { WorkspaceitemDataService } from '../../../core/submission/workspaceitem
 import { WorkflowItemDataService } from '../../../core/submission/workflowitem-data.service';
 import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
 import { ConfirmationModalComponent } from '../../confirmation-modal/confirmation-modal.component';
-import { ItemVersionsVisibilityModalComponent } from './item-versions-visibility-modal/item-versions-visibility-modal.component';
+import {
+  ItemVersionsVisibilityModalComponent
+} from './item-versions-visibility-modal/item-versions-visibility-modal.component';
 
 @Component({
   selector: 'ds-item-versions',
@@ -68,6 +63,10 @@ export class ItemVersionsComponent implements OnInit {
    * The item to display a version history for
    */
   @Input() item: Item;
+  /**
+   * Whether or not to display the alert box
+   */
+  @Input() displayAlert = true;
 
   /**
    * An option to display the list of versions, even when there aren't any.
@@ -598,20 +597,20 @@ export class ItemVersionsComponent implements OnInit {
    * Button shown only when the versionItem official metadata is true for funder so he can set NonOfficial
    * @param versionItem the version item which metadata belongs to
    */
-  setVisible(versionItem: Item, version) {
+  setVisible(versionItem: Item, version): void {
+    console.log(version);
     version.isLoading = true;
     const modalRef = this.modalService.open(ItemVersionsVisibilityModalComponent);
-    modalRef.componentInstance.versionItem = versionItem;
-    modalRef.result.then((data: any) => {
-      if (confirm) {
-        if (data.official) {
+    modalRef.componentInstance.version = version;
+    modalRef.result.then((result) => {
+      if (result) {
+        if (result.official) {
           this.updateItemByMetadata(versionItem, version, 'synsicris.version.official', true);
         }
-        return this.updateItemByMetadata(versionItem, version, 'synsicris.version.visible', true);
-      } else {
-        version.isLoading = false;
-        return null;
+        this.updateItemByMetadata(versionItem, version, 'synsicris.version.visible', true);
       }
+    }, () => {
+      version.isLoading = false;
     });
   }
 

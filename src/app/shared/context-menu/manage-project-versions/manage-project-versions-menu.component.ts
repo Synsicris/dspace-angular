@@ -42,6 +42,10 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
    * A boolean representing if user is coordinator or founder for the current project
    */
   public hasVersions$: Observable<boolean>;
+  /**
+   * A boolean representing if the context object is a version
+   */
+  public isVersionOf: boolean;
 
   /**
    * Initialize instance variables
@@ -50,6 +54,7 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
    * @param {Router} router
+   * @param {ProjectVersionService} projectVersionService
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
@@ -68,9 +73,12 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
       this.mainVersion = items[0];
     });
 
-    this.hasVersions$ = this.projectVersionService.getRelationVersionsByItemId(this.contextMenuObject.id).pipe(
-      tap((items) => console.log(items)),
-      map((items: Item[]) => items.length > 0));
+    if (this.projectVersionService.isVersionOfAnItem(this.contextMenuObject as Item)) {
+      this.isVersionOf = true;
+    } else {
+      this.hasVersions$ = this.projectVersionService.getRelationVersionsByItemId(this.contextMenuObject.id).pipe(
+        map((items: Item[]) => items.length > 0));
+    }
 
 
     this.isCoordinatorOfProject$ = this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self);

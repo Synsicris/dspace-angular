@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Item } from './../../../../core/shared/item.model';
+
+import { Version } from '../../../../core/shared/version.model';
 
 @Component({
   selector: 'ds-item-versions-visibility-modal',
@@ -9,7 +10,7 @@ import { Item } from './../../../../core/shared/item.model';
 })
 export class ItemVersionsVisibilityModalComponent {
 
-  versionItem: Item;
+  version: Version;
 
   official = false;
 

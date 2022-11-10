@@ -17,6 +17,7 @@ import {
   INFO_MODULE_PATH,
   INTERNAL_SERVER_ERROR,
   LEGACY_BITSTREAM_MODULE_PATH,
+  MANAGEMEMBERS,
   PROFILE_MODULE_PATH,
   REGISTER_PATH,
   REQUEST_COPY_MODULE_PATH,
@@ -39,6 +40,7 @@ import {
 } from './page-internal-server-error/themed-page-internal-server-error.component';
 import { ServerCheckGuard } from './core/server-check/server-check.guard';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
+
 @NgModule({
   imports: [
     RouterModule.forRoot([
@@ -108,6 +110,24 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             path: 'entities/project/:id/workingplan',
             loadChildren: () => import('./+working-plan-page/working-plan-page.module')
               .then((m) => m.WorkingPlanPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: `entities/project/:id/${MANAGEMEMBERS}`,
+            loadChildren: () => import('./project-members-page/project-members-page.module')
+              .then((m) => m.ProjectMembersPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: `entities/funding/:id/${MANAGEMEMBERS}`,
+            loadChildren: () => import('./project-members-page/project-members-page.module')
+              .then((m) => m.ProjectMembersPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: `entities/programme/:id/${MANAGEMEMBERS}`,
+            loadChildren: () => import('./programme-members-page/programme-members-page.module')
+              .then((m) => m.ProgrammeMembersPageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
           {
@@ -233,14 +253,12 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
               .then((m) => m.ProcessPageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
-          {
-            path: SUGGESTION_MODULE_PATH,
+          { path: SUGGESTION_MODULE_PATH,
             loadChildren: () => import('./suggestions-page/suggestions-page.module')
               .then((m) => m.SuggestionsPageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
-          {
-            path: 'auditlogs',
+          { path: 'auditlogs',
             loadChildren: () => import('./audit-page/audit-page.module')
               .then((m) => m.AuditPageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
