@@ -245,7 +245,15 @@ export class DefaultAppConfig implements AppConfig {
     {
       type: 'Product',
       metadata: ['dc.contributor.author']
-    }
+    },
+    {
+      type: 'workpackage',
+      metadata: ['workingplan.relation.step']
+    },
+    {
+      type: 'milestone',
+      metadata: ['workingplan.relation.step']
+    },
   ];
 
   // Collection Page Config
@@ -400,7 +408,7 @@ export class DefaultAppConfig implements AppConfig {
     ],
     itemPage: {
       default: {
-          orientation: 'vertical'
+        orientation: 'vertical'
       },
     },
     metadataBox: {
@@ -465,7 +473,7 @@ export class DefaultAppConfig implements AppConfig {
     impactPathwaysEditFormSection: 'impact_pathway-edit_form',
     impactPathwaysLinksEditFormSection: 'impact_pathway-edit_link_form',
     impactPathwaysEditMode: 'IMPACTPATHWAY',
-    impactPathwaysLinkEditMode: 'CUSTOM',
+    impactPathwaysLinkEditMode: 'IMPACTPATHWAY_LINK',
     impactPathwayEntity: 'impactpathway',
     impactPathwayStepEntity: 'impactpathwaystep',
     impactPathwayParentRelationMetadata: 'impactpathway.relation.parent',
@@ -512,13 +520,18 @@ export class DefaultAppConfig implements AppConfig {
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
     excludeComparisonMetadata: [
       'cris.policy.group', 'cris.project.shared', 'dc.date.accessioned', 'dc.date.available', 'dspace.entity.type',
-      'synsicris.common-policy.group', 'synsicris.relation.parentproject', 'synsicris.relation.project', 'synsicris.uniqueid',
+      'synsicris.common-policy.group', 'synsicris.relation.project', 'synsicris.relation.funding', 'synsicris.uniqueid',
       'synsicris.relation.workingplan', 'workingplan.link.status', 'workingplan.place', 'workingplan.relation.step',
       'impactpathway.relation.parent', 'impactpathway.relation.step', 'impactpathway.relation.task',
       'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
       'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
     ],
-    commentEntityName: 'comment'
+    projectsFunder: {
+      searchQueryConfigurationName: 'searchProjectsForFunder',
+      searchProjectConfigurationName: 'searchAllProjectForFunder',
+      searchProjectItemsConfigurationName: 'allProjectItems',
+      entityTypeFilterName: 'entityType'
+    }
   };
 
   exploitationPlan = {
@@ -666,4 +679,13 @@ export class DefaultAppConfig implements AppConfig {
       }
     ]
   };
+
+  comments = {
+    commentEditFormName: 'comments',
+    commentEditFormSection: 'comments',
+    commentEditMode: 'CUSTOM',
+    commentEntityType: 'comment',
+    commentRelationItemMetadata: 'synsicris.relation.item'
+  };
+
 }

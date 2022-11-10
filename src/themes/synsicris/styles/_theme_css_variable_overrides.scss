@@ -8,23 +8,35 @@
   --ds-home-news-link-color: #{$green};
   --ds-home-news-link-hover-color: #{darken($green, 15%)};
 
+<<<<<<< HEAD
   /* ------- FOOTER (rex 221104) */
    //--ds-footer-logo-height: 50px;
    --ds-footer-bg: white;
    --ds-footer-border: 1px solid rgba(161, 175, 184, 1);
    --ds-footer-padding:2.0rem 1.25rem 2.0rem 1.25rem !important;
 
+=======
+>>>>>>> 380e8d8ce252b62cd5b4285e372a74066d83a61e
   /* ----------------- TOOLTIP (rex 221021) */
   --ds-tooltip-inner-background-color: rgba(228,247,253,1); // background of bubble ad arrow color bright blue
   --ds-tooltip-inner-color: #{$blue-dark}; // text color dark blue
   --ds-tooltip-boxshadow-color: rgba(3, 36, 74, 0.7); // shadow
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 380e8d8ce252b62cd5b4285e372a74066d83a61e
    /* ----------------- DROPDOWN (rex 220415) */
    /* rex 220415 : increased to 218px (with lines) / 212px (without lines), so that the following line is still visible
   in a truncated form, so that the user recognises that more items follow. The previous height specification in pixels,
   however, only works with medium font size. To ensure that it also works when the font size is changed,
   relative dimensions are used instead, assuming that the root font size is 16px. */
+<<<<<<< HEAD
     //--ds-dropdown-menu-max-height: 200px; // originally
+=======
+
+    //--ds-dropdown-menu-max-height: 200px; // origially
+>>>>>>> 380e8d8ce252b62cd5b4285e372a74066d83a61e
     //--ds-dropdown-menu-max-height: 13.5rem; // rex 220415 with lines between menu items
   --ds-dropdown-menu-max-height: 13.25rem; // rex 220415 without lines between menu items, see /src/app/shared/form/builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.component.scss
   --ds-dropdown-menu-background-color: #{$gray-bright};

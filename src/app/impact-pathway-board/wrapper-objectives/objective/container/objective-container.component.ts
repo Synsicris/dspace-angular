@@ -26,6 +26,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
   @Input() public projectCommunityId: string;
   @Input() public impactPathwayStep: ImpactPathwayStep;
   @Input() public impactPathwayTask: ImpactPathwayTask;
+  @Input() public canEditButton: boolean;
 
   private processing$: Observable<boolean> = observableOf(false);
 

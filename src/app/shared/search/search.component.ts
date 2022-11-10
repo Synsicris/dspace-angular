@@ -86,6 +86,16 @@ export class SearchComponent implements OnInit {
   @Input() useCachedVersionIfAvailable = true;
 
   /**
+   * Defines whether to start as showing the charts collapsed
+   */
+  @Input() collapseCharts = false;
+
+  /**
+   * Defines whether to start as showing the filter sidebar collapsed
+   */
+  @Input() collapseFilters = false;
+
+  /**
    * True when the search component should show results on the current page
    */
   @Input() inPlaceSearch = true;
@@ -161,9 +171,19 @@ export class SearchComponent implements OnInit {
   @Input() viewModeList: ViewMode[];
 
   /**
-   * Defines whether or not to show the scope selector
+   * Defines whether to show the scope selector
    */
   @Input() showScopeSelector = false;
+
+  /**
+   * Defines whether to show the toggle button to Show/Hide filter
+   */
+  @Input() showFilterToggle = false;
+
+  /**
+   * Defines whether to show the toggle button to Show/Hide chart
+   */
+   @Input() showChartsToggle = false;
 
   /**
    * The current configuration used during the search
@@ -211,6 +231,11 @@ export class SearchComponent implements OnInit {
   isSidebarCollapsed$: Observable<boolean>;
 
   /**
+   * Observable for whether or not the sidebar is currently collapsed
+   */
+  isSidebarCollapsedXL$: Observable<boolean>;
+
+  /**
    * Emits true if were on a small screen
    */
   isXsOrSm$: Observable<boolean>;
@@ -224,6 +249,11 @@ export class SearchComponent implements OnInit {
    * Subscription to unsubscribe from
    */
   sub: Subscription;
+
+  /**
+   * Maintains the last search options so it can be used in refresh
+   */
+  lastSearchOptions: PaginatedSearchOptions;
 
   /**
    * Emits an event with the current search result entries
@@ -278,6 +308,7 @@ export class SearchComponent implements OnInit {
     }
 
     this.isSidebarCollapsed$ = this.isSidebarCollapsed();
+    this.isSidebarCollapsedXL$ = this.isSidebarCollapsedXL();
     this.searchLink = this.getSearchLink();
     this.currentContext$.next(this.context);
 
@@ -379,9 +410,11 @@ export class SearchComponent implements OnInit {
   /**
    * Retrieve search result by the given search options
    * @param searchOptions
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
    * @private
    */
-  private retrieveSearchResults(searchOptions: PaginatedSearchOptions) {
+  private retrieveSearchResults(searchOptions: PaginatedSearchOptions, useCachedVersionIfAvailable?: boolean,) {
     this.resultsRD$.next(null);
 
     if (this.projection) {
@@ -390,10 +423,11 @@ export class SearchComponent implements OnInit {
       });
     }
 
+    this.lastSearchOptions = searchOptions;
     this.searchManager.search(
       searchOptions,
       undefined,
-      this.useCachedVersionIfAvailable,
+      useCachedVersionIfAvailable ?? this.useCachedVersionIfAvailable,
       true,
       followLink<Item>('thumbnail', { isOptional: true })
     ).pipe(getFirstCompletedRemoteData())
@@ -414,6 +448,14 @@ export class SearchComponent implements OnInit {
   }
 
   /**
+   * Check if the sidebar is collapsed
+   * @returns {Observable<boolean>} emits true if the sidebar is currently collapsed, false if it is expanded
+   */
+   private isSidebarCollapsedXL(): Observable<boolean> {
+    return this.sidebarService.isCollapsedInXL;
+  }
+
+  /**
    * @returns {string} The base path to the search page, or the current page when inPlaceSearch is true
    */
   private getSearchLink(): string {
@@ -421,6 +463,20 @@ export class SearchComponent implements OnInit {
       return currentPath(this.router);
     }
     return this.service.getSearchLink();
+  }
+
+  /**
+   * Refreshes the list of search results using the latest serachOptions
+   */
+  refresh(): void {
+    this.retrieveSearchResults(this.lastSearchOptions, false);
+  }
+
+  /**
+   * To Toggle the Sidebar
+   */
+  toggleSidebar() {
+    this.sidebarService.toggle();
   }
 
 

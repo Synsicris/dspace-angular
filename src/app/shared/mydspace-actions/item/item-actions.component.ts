@@ -37,6 +37,11 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   @Input() object: Item;
 
   /**
+   * A boolean representing if edit permission button can be shown
+   */
+  @Input() showEditPermission = true;
+
+  /**
    * A boolean representing if component is redirecting to edit page
    * @type {BehaviorSubject<boolean>}
    */
@@ -68,14 +73,14 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    * @param {NgbModal} modalService
    */
   constructor(protected authorizationService: AuthorizationDataService,
-              protected injector: Injector,
-              protected router: Router,
-              protected notificationsService: NotificationsService,
-              protected translate: TranslateService,
-              protected searchService: SearchService,
-              protected requestService: RequestService,
-              protected editItemDataService: EditItemDataService,
-              protected modalService: NgbModal) {
+    protected injector: Injector,
+    protected router: Router,
+    protected notificationsService: NotificationsService,
+    protected translate: TranslateService,
+    protected searchService: SearchService,
+    protected requestService: RequestService,
+    protected editItemDataService: EditItemDataService,
+    protected modalService: NgbModal) {
     super(Item.type, injector, router, notificationsService, translate, searchService, requestService);
   }
 
@@ -124,12 +129,17 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
     this.isRedirectingToEdit$.next(true);
     this.editItemDataService.searchEditModesByID(this.object.id).pipe(
       filter((editModes: EditItemMode[]) => editModes && editModes.length > 0),
+      map((editModes: EditItemMode[]) => editModes.filter((mode: EditItemMode) => this.isEditModeAllowed(mode))),
       map((editModes: EditItemMode[]) => editModes[0]),
-      take(1)
+      take(1),
     ).subscribe((editMode: EditItemMode) => {
       this.router.navigate(['edit-items', this.object.id + ':' + editMode.name]);
       this.isRedirectingToEdit$.next(false);
     });
+  }
+
+  private isEditModeAllowed(mode: EditItemMode) {
+    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode || mode.name === 'OWNER';
   }
 
   /**

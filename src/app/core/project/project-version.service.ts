@@ -19,6 +19,8 @@ import { Version } from '../shared/version.model';
 import { VersionHistoryDataService } from '../data/version-history-data.service';
 import { isNotEmpty } from '../../shared/empty.util';
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
+import { Metadata } from '../shared/metadata.utils';
+import { VERSION_UNIQUE_ID } from './project-data.service';
 
 export enum ComparedVersionItemStatus {
   Changed = 'changed',
@@ -58,7 +60,7 @@ export class ProjectVersionService {
           return itemRD.payload.version.pipe(
             getFirstCompletedRemoteData(),
             switchMap((versionRD: RemoteData<Version>) => {
-              if (versionRD.hasSucceeded) {
+              if (versionRD.hasSucceeded && versionRD.statusCode === 200) {
                 return this.versionService.getHistoryIdFromVersion(versionRD.payload).pipe(
                   switchMap((versionHistoryId: string) => {
                     if (isNotEmpty(versionHistoryId)) {
@@ -104,7 +106,7 @@ export class ProjectVersionService {
           return this.relationshipService.getRelatedItemsByLabel(itemRD.payload, 'hasVersion', options).pipe(
             getFirstCompletedRemoteData(),
             map((listRD: RemoteData<PaginatedList<Item>>) => {
-              return listRD.hasSucceeded ? listRD.payload.page : [];
+              return listRD.hasSucceeded && listRD.statusCode === 200 ? listRD.payload.page : [];
             })
           );
         } else {
@@ -189,6 +191,16 @@ export class ProjectVersionService {
         status: status
       };
     });
+  }
+
+  /**
+   * Check if the item is version of an item by looking for "synsicris.uniqueid" metadata
+   *
+   * @param item
+   */
+  public isVersionOfAnItem(item: Item): boolean {
+    const metadata = Metadata.allValues(item.metadata, VERSION_UNIQUE_ID);
+    return isNotEmpty(metadata);
   }
 }
 

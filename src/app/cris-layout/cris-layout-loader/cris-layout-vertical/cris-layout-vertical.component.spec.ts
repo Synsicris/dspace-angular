@@ -8,7 +8,7 @@ import { By } from '@angular/platform-browser';
 import { HostWindowService } from '../../../shared/host-window.service';
 import { HostWindowServiceStub } from '../../../shared/testing/host-window-service.stub';
 import { loaderTabs } from '../../../shared/testing/layout-tab.mocks';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 
 describe('CrisLayoutVerticalComponent', () => {
   let component: CrisLayoutVerticalComponent;

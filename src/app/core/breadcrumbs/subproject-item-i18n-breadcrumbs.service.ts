@@ -40,7 +40,7 @@ export class SubprojectItemI18nBreadcrumbsService implements BreadcrumbsProvider
         getFinishedRemoteData(),
         getRemoteDataPayload()
       );
-      const subproject$: Observable<Item> = this.projectService.getSubprojectItemByItemId(subprojectId).pipe(
+      const subproject$: Observable<Item> = this.projectService.getFundingItemByItemId(subprojectId).pipe(
         getFinishedRemoteData(),
         getRemoteDataPayload()
       );

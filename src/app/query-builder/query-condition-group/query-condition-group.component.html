@@ -1,0 +1,176 @@
+<div class="container query-group-container">
+  <form [formGroup]="formGroup" *ngIf="formGroup">
+    <div class="row">
+      <div class="col-md-3">
+        <ng-select
+          #firstSelect
+          formControlName="defaultFilter"
+          class="px-0"
+          [virtualScroll]="true"
+          [clearable]="false"
+          [loading]="isValueListLoading && firstSelect.isOpen"
+          [placeholder]="
+            'query-builder.synsicris.placeholder.select-value' | translate
+          "
+          (change)="onDefaultValueSelect($event)"
+          (scrollToEnd)="getSearchFilterConfigs()"
+        >
+          <ng-option
+            *ngFor="let value of firstDefaultValues"
+            [value]="value"
+            [disabled]="value.disable"
+          >
+            {{ value.label | titlecase }}
+          </ng-option>
+        </ng-select>
+      </div>
+      <div class="col-md-9">
+        <div
+          formArrayName="queryGroup"
+          class="row mb-3"
+          *ngFor="
+            let queryStatement of queryGroup.controls;
+            let i = index;
+            let isLast = last
+          "
+        >
+          <!-- FormGroup -->
+          <div class="w-100 d-flex" [formGroupName]="i">
+            <ng-select
+              formControlName="filter"
+              class="col-md-3 px-0 mr-1"
+              [virtualScroll]="true"
+              [clearable]="false"
+              [loading]="isFilterListLoading"
+              [placeholder]="
+                'query-builder.synsicris.placeholder.select-filter' | translate
+              "
+              (change)="onFilterSelect($event, i)"
+            >
+              <ng-option
+                *ngFor="let filter of secondColumnFilters"
+                [value]="filter"
+              >
+                {{ "explore.index." + filter.name | translate }}
+              </ng-option>
+            </ng-select>
+
+            <!-- Range popup DatePicket -->
+            <div class="form-group-calendar hidden">
+              <div class="input-group">
+                <input name="datepicker"
+                       class="form-control"
+                       ngbDatepicker
+                       #datepicker="ngbDatepicker"
+                       [autoClose]="'outside'"
+                       (dateSelect)="onDateSelect($event, i, queryGroup.get(i + '.filter')?.value.name, datepicker)"
+                       [displayMonths]="2"
+                       [dayTemplate]="t"
+                       outsideDays="hidden"
+                       [startDate]="queryGroup.get(i + '.fromDate')?.value!"
+                       tabindex="-1">
+                <ng-template #t let-date let-focused="focused">
+                  <span class="custom-day"
+                        [class.focused]="focused"
+                        [class.range]="isRange(date, i)"
+                        [class.faded]="isHovered(date, i) || isInside(date, i)"
+                        (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null">
+                    {{ date.day }}
+                  </span>
+                </ng-template>
+              </div>
+            </div>
+            <div class="d-flex col-md-5" *ngIf="queryGroup.get(i + '.filter')?.value?.filterType === 'date'"
+                 data-test="query-condition-date">
+              <div class="input-group col-md-5 px-0 mr-1">
+                <input #dpFromDate
+                        class="form-control" placeholder="yyyy-mm-dd"
+                        name="dpFromDate"
+                        formControlName="fromDate"
+                        [value]="formatter.format(queryGroup.get(i + '.fromDate')?.value)">
+              </div>
+              <div class="input-group col-md-5 px-0 mr-1">
+                <input #dpToDate
+                        class="form-control" placeholder="yyyy-mm-dd"
+                        name="dpToDate"
+                        formControlName="toDate"
+                        [value]="formatter.format(queryGroup.get(i + '.toDate')?.value)"
+                        (change)="datepicker.toggle()">
+              </div>
+              <div class="input-group col-md-2 px-0 mr-1">
+                <div class="input-group">
+                  <button class="btn btn-outline-secondary btn-calendar" (click)="datepicker.toggle()" type="button"
+                          [disabled]="queryGroup.get(i + '.toDate')?.disabled">
+                    <i class="fas fa-calendar-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <ng-select
+              #select
+              data-test="query-condition-select"
+              formControlName="value"
+              *ngIf="queryGroup.get(i + '.filter')?.value?.filterType !== 'date'"
+              class="col-md-3 px-0 mr-select ml-3"
+              [virtualScroll]="true"
+              [clearable]="false"
+              [loading]="isValueListLoading && select.isOpen"
+              [placeholder]="
+                'query-builder.synsicris.placeholder.select-value' | translate
+              "
+              (open)="calcValueSelection(queryGroup.get(i + '.filter')?.value.name)"
+              (change)="
+                onValueSelect($event.value, queryGroup.get(i + '.filter')?.value.name, i)
+              "
+              (scrollToEnd)="
+                onValuesScroll(queryGroup.get(i + '.filter')?.value.name, i)
+              "
+            >
+              <ng-option
+                *ngFor="
+                  let value of filterFacetValues(i)
+                "
+                [value]="value"
+                [disabled]="value.disable"
+              >
+                {{ value.label | titlecase }}
+              </ng-option>
+            </ng-select>
+
+            <div class="col-md-3 text-center ml-auto" *ngIf="isLast">
+              <button
+                [disabled]="!queryGroup.get(i + '.value')?.value"
+                id="addButton"
+                type="button"
+                class="btn btn-dark"
+                (click)="addQueryStatement(i)"
+              >
+                <i aria-hidden="true" class="fa fa-plus"></i>
+                {{
+                  "query-builder.synsicris.button.label.add-filter" | translate
+                }}
+              </button>
+            </div>
+            <div class="col-md-3 p-0 text-center ml-auto" *ngIf="!isLast">
+              <span>AND</span>
+            </div>
+
+            <div class="col-md-1 p-0 text-center ml-auto"
+                 [class.mr-n1] = "queryGroup.get(i + '.filter')?.value?.filterType !== 'date'">
+              <button *ngIf="queryGroup.length > 1"
+                id="deleteButton"
+                type="button"
+                class="btn btn-danger"
+                (click)="deleteCondition(i, queryGroup.get(i + '.value'))"
+              >
+                <i aria-hidden="true" class="fa fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

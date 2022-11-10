@@ -152,6 +152,7 @@ export class AuthEffects {
   @Effect()
   public checkToken$: Observable<Action> = this.actions$.pipe(ofType(AuthActionTypes.CHECK_AUTHENTICATION_TOKEN),
     switchMap(() => {
+      this.authorizationsService.invalidateAuthorizationsRequestCache();
       return this.authService.hasValidAuthenticationToken().pipe(
         map((token: AuthTokenInfo) => new AuthenticatedAction(token)),
         catchError((error) => observableOf(new CheckAuthenticationTokenCookieAction()))

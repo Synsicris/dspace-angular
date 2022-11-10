@@ -23,6 +23,7 @@ export class WorkpacakgeFlatNode {
     public parentId: string = '',
     public compareId?: string,
     public compareStatus?: ComparedVersionItemStatus,
+    public selfUrl?: string,
   ) { }
 }
 

@@ -30,9 +30,10 @@ import { PersonSidebarSearchListElementComponent } from './item-list-elements/si
 import { ProjectSidebarSearchListElementComponent } from './item-list-elements/sidebar-search-list-elements/project/project-sidebar-search-list-element.component';
 import { ItemSharedModule } from '../../item-page/item-shared.module';
 import { ContextMenuModule } from '../../shared/context-menu/context-menu.module';
+import { CommentSearchResultListElementComponent } from './item-list-elements/search-result-list-elements/comment/comment-search-result-list-element.component';
 
 const ENTRY_COMPONENTS = [
-// put only entry components that use custom decorator
+  // put only entry components that use custom decorator
   OrgUnitComponent,
   PersonComponent,
   ProjectComponent,
@@ -57,6 +58,7 @@ const ENTRY_COMPONENTS = [
   OrgUnitSidebarSearchListElementComponent,
   PersonSidebarSearchListElementComponent,
   ProjectSidebarSearchListElementComponent,
+  CommentSearchResultListElementComponent
 ];
 
 const COMPONENTS = [

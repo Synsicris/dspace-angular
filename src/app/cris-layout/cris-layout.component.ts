@@ -1,14 +1,14 @@
-import { PaginatedList } from './../core/data/paginated-list.model';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { Item } from '../core/shared/item.model';
 import { TabDataService } from '../core/layout/tab-data.service';
 import { CrisLayoutTab } from '../core/layout/models/tab.model';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
-
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { PaginatedList } from '../core/data/paginated-list.model';
 import { getFirstSucceededRemoteData, getPaginatedListPayload, getRemoteDataPayload } from '../core/shared/operators';
 import { isNotEmpty } from '../shared/empty.util';
-import { ActivatedRoute } from '@angular/router';
 import { RemoteData } from '../core/data/remote-data';
 
 /**
@@ -82,7 +82,7 @@ export class CrisLayoutComponent implements OnInit {
 
     this.hasLeadingTab().pipe(
       filter((result) => isNotEmpty(result)),
-      take(1),
+      distinctUntilChanged(),
     ).subscribe((result) => {
       this.hasLeadingTab$.next(result);
     });

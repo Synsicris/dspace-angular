@@ -17,7 +17,7 @@ import { RemoteData } from '../../../core/data/remote-data';
 import { Process } from '../../../process-page/processes/process.model';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
+import { FUNDING_ENTITY } from '../../../core/project/project-data.service';
 
 /**
  * This component renders a context menu option that provides to export an item.
@@ -58,7 +58,7 @@ export class GenerateReportMenuComponent extends ContextMenuEntryComponent {
    * Check if current Item is a Project
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
+    return (this.contextMenuObject as Item).entityType === FUNDING_ENTITY;
   }
 
   /**

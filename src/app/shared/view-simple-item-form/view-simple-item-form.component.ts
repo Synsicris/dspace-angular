@@ -73,6 +73,11 @@ export class ViewSimpleItemFormComponent implements OnInit {
    */
   @Output() itemUpdate: EventEmitter<Item> = new EventEmitter<Item>();
 
+  /**
+   * The textarea disabled
+   */
+  @Input() public disabled = false;
+
   constructor(
     private cdr: ChangeDetectorRef,
     private formBuilderService: FormBuilderService,

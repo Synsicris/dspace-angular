@@ -15,7 +15,7 @@ import { VarDirective } from '../../shared/utils/var.directive';
 import { ProfilePageResearcherFormComponent } from './profile-page-researcher-form.component';
 import { ProfileClaimService } from '../profile-claim/profile-claim.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from 'src/app/core/auth/auth.service';
+import { AuthService } from '../../core/auth/auth.service';
 import { EditItemDataService } from '../../core/submission/edititem-data.service';
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { EditItemMode } from '../../core/submission/models/edititem-mode.model';
@@ -115,15 +115,6 @@ describe('ProfilePageResearcherFormComponent', () => {
     expect(researcherProfileService.findById).toHaveBeenCalledWith(user.id);
   });
 
-  describe('createProfile', () => {
-
-    it('should create the profile', () => {
-      component.createProfile();
-      expect(researcherProfileService.create).toHaveBeenCalledWith();
-    });
-
-  });
-
   describe('toggleProfileVisibility', () => {
 
     it('should set the profile visibility to true', () => {
@@ -134,15 +125,6 @@ describe('ProfilePageResearcherFormComponent', () => {
     it('should set the profile visibility to false', () => {
       component.toggleProfileVisibility(profile, ResearcherProfileVisibilityValue.PRIVATE);
       expect(researcherProfileService.setVisibility).toHaveBeenCalledWith(profile, ResearcherProfileVisibilityValue.PRIVATE);
-    });
-
-  });
-
-  describe('deleteProfile', () => {
-
-    it('should delete the profile', () => {
-      component.deleteProfile(profile);
-      expect(researcherProfileService.delete).toHaveBeenCalledWith(profile);
     });
 
   });

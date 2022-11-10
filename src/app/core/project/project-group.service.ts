@@ -8,10 +8,19 @@ import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload 
 import { map, mergeMap, reduce } from 'rxjs/operators';
 import { Group } from '../eperson/models/group.model';
 import { CommunityDataService } from '../data/community-data.service';
+import { Item } from '../shared/item.model';
 
 const PROJECT_GROUP_TEMPLATE = 'project_%s_';
-const PROJECT_ADMIN_GROUP_TEMPLATE = 'project_%s_admin_group';
+const PROJECT_COORDINATORS_GROUP_TEMPLATE = 'project_%s_coordinators_group';
+const PROJECT_FUNDERS_GROUP_TEMPLATE = 'project_%s_funders_group';
 const PROJECT_MEMBERS_GROUP_TEMPLATE = 'project_%s_members_group';
+const PROJECT_READERS_GROUP_TEMPLATE = 'project_%s_readers_group';
+
+const FUNDING_GROUP_TEMPLATE = 'funding_%s_';
+const FUNDING_COORDINATORS_GROUP_TEMPLATE = 'funding_%s_coordinators_group';
+const FUNDING_MEMBERS_GROUP_TEMPLATE = 'funding_%s_members_group';
+
+const PROGRAMME_GROUP_TEMPLATE = 'programme_%s_group';
 
 @Injectable()
 export class ProjectGroupService {
@@ -21,12 +30,35 @@ export class ProjectGroupService {
     protected groupService: GroupDataService) {
   }
 
-  getProjectAdminsGroupNameByCommunity(project: Community): string {
-    return PROJECT_ADMIN_GROUP_TEMPLATE.replace('%s', project.uuid);
+  getCommunityIdByGroupName(groupName: string): string {
+    const groupNameArray = groupName.split('_');
+
+    return groupNameArray[1];
   }
 
-  getProjectAdminsGroupUUIDByCommunity(project: Community): Observable<string[]> {
-    const query = this.getProjectAdminsGroupNameByCommunity(project);
+  getProgrammeGroupNameByItem(project: Item): string {
+    return PROGRAMME_GROUP_TEMPLATE.replace('%s', project.uuid);
+  }
+
+  getFundingAdminsGroupNameByCommunity(project: Community): string {
+    return FUNDING_COORDINATORS_GROUP_TEMPLATE.replace('%s', project.uuid);
+  }
+
+  getProjectCoordinatorsGroupNameByCommunity(project: Community): string {
+    return PROJECT_COORDINATORS_GROUP_TEMPLATE.replace('%s', project.uuid);
+  }
+
+  getProjectCoordinatorsGroupUUIDByCommunity(project: Community): Observable<string[]> {
+    const query = this.getProjectCoordinatorsGroupNameByCommunity(project);
+    return this.getGroupsByQuery(query);
+  }
+
+  getProjectFundersGroupNameByCommunity(project: Community): string {
+    return PROJECT_FUNDERS_GROUP_TEMPLATE.replace('%s', project.uuid);
+  }
+
+  getProjectFundersGroupUUIDByCommunity(project: Community): Observable<string[]> {
+    const query = this.getProjectFundersGroupNameByCommunity(project);
     return this.getGroupsByQuery(query);
   }
 
@@ -34,13 +66,40 @@ export class ProjectGroupService {
     return PROJECT_MEMBERS_GROUP_TEMPLATE.replace('%s', project.uuid);
   }
 
+  getProjectReadersGroupNameByCommunity(project: Community): string {
+    return PROJECT_READERS_GROUP_TEMPLATE.replace('%s', project.uuid);
+  }
+
+  getProjectReadersGroupUUIDByCommunity(project: Community): Observable<string[]> {
+    const query = this.getProjectReadersGroupNameByCommunity(project);
+    return this.getGroupsByQuery(query);
+  }
+
+  getFundingMembersGroupNameByCommunity(project: Community): string {
+    return FUNDING_MEMBERS_GROUP_TEMPLATE.replace('%s', project.uuid);
+  }
+
   getProjectMembersGroupUUIDByCommunity(project: Community): Observable<string[]> {
     const query = this.getProjectMembersGroupNameByCommunity(project);
     return this.getGroupsByQuery(query);
   }
 
+  getFundingMembersGroupUUIDByCommunity(project: Community): Observable<string[]> {
+    const query = this.getFundingMembersGroupNameByCommunity(project);
+    return this.getGroupsByQuery(query);
+  }
+
+  getInvitationProjectFundersGroupsByCommunity(project: Community): Observable<string[]> {
+    return this.getProjectFundersGroupUUIDByCommunity(project);
+  }
+
   getInvitationProjectMembersGroupsByCommunity(project: Community): Observable<string[]> {
     return this.getProjectMembersGroupUUIDByCommunity(project);
+  }
+
+  getAllFundingGroupsByCommunity(funding: Community): Observable<string[]> {
+    const query = FUNDING_GROUP_TEMPLATE.replace('%s', funding.uuid);
+    return this.getGroupsByQuery(query);
   }
 
   getInvitationProjectAllGroupsByCommunity(project: Community): Observable<string[]> {
@@ -48,34 +107,42 @@ export class ProjectGroupService {
     return this.getGroupsByQuery(query);
   }
 
-  getInvitationSubprojectAdminsGroupsByCommunity(subproject: Community): Observable<string[]> {
-    const subprojectMembers$ = this.getInvitationProjectAllGroupsByCommunity(subproject);
-    const projectMembers$ = this.communityService.findByHref(subproject._links.parentCommunity.href).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      mergeMap((subprojectsCommunity: Community) => this.communityService.findByHref(subprojectsCommunity._links.parentCommunity.href)),
-      getFirstSucceededRemoteDataPayload(),
-      mergeMap((parentProjectCommunity: Community) => this.getInvitationProjectMembersGroupsByCommunity(parentProjectCommunity))
-    );
-    return combineLatest([subprojectMembers$, projectMembers$]).pipe(
-      map(([subprojectMembers, projectMembers]) => [...subprojectMembers, ...projectMembers])
+  getInvitationProjectCoordinatorsAndMembersGroupsByCommunity(project: Community): Observable<string[]> {
+    const projectCoordinators$ = this.getProjectCoordinatorsGroupUUIDByCommunity(project);
+    const projectMembers$ = this.getProjectMembersGroupUUIDByCommunity(project);
+    return combineLatest([projectCoordinators$, projectMembers$]).pipe(
+      map(([projectCoordinators, projectMembers]) => [...projectCoordinators, ...projectMembers])
     );
   }
 
-  getInvitationSubprojectMembersGroupsByCommunity(subproject: Community): Observable<string[]> {
-    const subprojectMembers$ = this.getInvitationProjectMembersGroupsByCommunity(subproject);
-    const projectMembers$ = this.communityService.findByHref(subproject._links.parentCommunity.href).pipe(
+  getInvitationFundingCoordinatorsAndMembersGroupsByCommunity(funding: Community): Observable<string[]> {
+    const fundingMembers$ = this.getAllFundingGroupsByCommunity(funding);
+    const projectMembers$ = this.communityService.findByHref(funding._links.parentCommunity.href).pipe(
       getFirstSucceededRemoteDataPayload(),
       mergeMap((subprojectsCommunity: Community) => this.communityService.findByHref(subprojectsCommunity._links.parentCommunity.href)),
       getFirstSucceededRemoteDataPayload(),
       mergeMap((parentProjectCommunity: Community) => this.getInvitationProjectMembersGroupsByCommunity(parentProjectCommunity))
     );
-    return combineLatest([subprojectMembers$, projectMembers$]).pipe(
-      map(([subprojectMembers, projectMembers]) => [...subprojectMembers, ...projectMembers])
+    return combineLatest([fundingMembers$, projectMembers$]).pipe(
+      map(([fundingMembers, projectMembers]) => [...fundingMembers, ...projectMembers])
+    );
+  }
+
+  getInvitationFundingMembersGroupsByCommunity(funding: Community): Observable<string[]> {
+    const fundingMembers$ = this.getFundingMembersGroupUUIDByCommunity(funding);
+    const projectMembers$ = this.communityService.findByHref(funding._links.parentCommunity.href).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      mergeMap((fundingCommunity: Community) => this.communityService.findByHref(fundingCommunity._links.parentCommunity.href)),
+      getFirstSucceededRemoteDataPayload(),
+      mergeMap((parentProjectCommunity: Community) => this.getInvitationProjectMembersGroupsByCommunity(parentProjectCommunity))
+    );
+    return combineLatest([fundingMembers$, projectMembers$]).pipe(
+      map(([fundingMembers, projectMembers]) => [...fundingMembers, ...projectMembers])
     );
   }
 
   isMembersOfAdminGroup(project: Community): Observable<boolean> {
-    return this.groupService.isMemberOf( this.getProjectAdminsGroupNameByCommunity(project));
+    return this.groupService.isMemberOf( this.getProjectCoordinatorsGroupNameByCommunity(project));
   }
 
   private getGroupsByQuery(query: string): Observable<string[]> {

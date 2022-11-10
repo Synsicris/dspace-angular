@@ -242,6 +242,7 @@ import { ItemCreateComponent } from './item/item-create/item-create.component';
 import { AuthorityDropdownComponent } from './authority-dropdown/authority-dropdown.component';
 import { ItemVersionListComponent } from './item-version-list/item-version-list.component';
 import { CompareItemComponent } from './compare-item/compare-item.component';
+import { GrantBadgeComponent } from './object-list/grant-badge/grant-badge.component';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -267,7 +268,7 @@ const MODULES = [
   CdkTreeModule,
   ChartsModule,
   MaterialModule,
-  FlexLayoutModule
+  FlexLayoutModule,
 ];
 
 const ROOT_MODULES = [
@@ -473,7 +474,8 @@ const COMPONENTS = [
   InvitationModalComponent,
   EditItemGrantsModalComponent,
   ItemVersionListComponent,
-  CompareItemComponent
+  CompareItemComponent,
+  GrantBadgeComponent,
 ];
 
 const ENTRY_COMPONENTS = [

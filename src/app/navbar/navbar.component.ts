@@ -1,6 +1,6 @@
 import { Component, Injector } from '@angular/core';
 
-import { combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { slideMobileNav } from '../shared/animations/slide';
@@ -16,7 +16,6 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 import { environment } from '../../environments/environment';
 import { SectionDataService } from '../core/layout/section-data.service';
-import { Observable } from 'rxjs';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
 import { Section } from '../core/layout/models/section.model';
 
@@ -80,6 +79,17 @@ export class NavbarComponent extends MenuComponent {
     this.isCurrentUserAdmin().subscribe(((isAdmin) => {
 
         if (isAdmin) {
+
+          menuList.push({
+            id: 'browse_by_projects',
+            active: false,
+            visible: true,
+            model: {
+              type: MenuItemType.LINK,
+              text: 'menu.section.browse_by_projects',
+              link: '/browse/projects'
+            } as LinkMenuItemModel
+          });
 
           menuList.push(
             {

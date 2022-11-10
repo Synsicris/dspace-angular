@@ -10,7 +10,8 @@
     </span>
     <span fxFlex></span>
     <div *ngIf="(workpackages | async)?.length > 0" class="btn-group btn-group-sm mr-2">
-      <ds-item-version-list [targetItemId]="workingPlan.id"
+      <ds-item-version-list [currentVersionSelected]="(currentComparingWorkingPlan | async)"
+                            [targetItemId]="workingPlan.id"
                             (versionSelected)="onVersionSelected($event)"
                             (versionDeselected)="onVersionDeselected()"></ds-item-version-list>
     </div>

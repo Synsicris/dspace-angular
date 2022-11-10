@@ -15,7 +15,7 @@ import { Community } from '../../../core/shared/community.model';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { PARENT_PROJECT_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
+import { FUNDING_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
 import { getRemoteDataPayload } from '../../../core/shared/operators';
 
 /**
@@ -34,9 +34,9 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
   isSubproject;
 
   /**
-   * The parentproject/project community
+   * The project/funding community
    */
-  projectCommunity: Community;
+  relatedCommunity: Community;
 
   /**
    * Modal reference
@@ -65,38 +65,39 @@ export class ProjectAdminInvitationMenuComponent extends ContextMenuEntryCompone
   }
 
   ngOnInit(): void {
-    this.isSubproject = (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
+    this.isSubproject = (this.contextMenuObject as Item).entityType === FUNDING_ENTITY;
     if (this.canShow()) {
       this.projectService.getProjectCommunityByProjectItemId((this.contextMenuObject as Item).uuid).pipe(
         take(1),
         getRemoteDataPayload()
       ).subscribe((projectCommunity: Community) => {
-        this.projectCommunity = projectCommunity;
+        this.relatedCommunity = projectCommunity;
       });
     }
   }
 
   /**
-   * Check if current Item is a Project or a parentproject
+   * Check if current Item is a Project or a Funding
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType === PROJECT_ENTITY || (this.contextMenuObject as Item).entityType === PARENT_PROJECT_ENTITY;
+    // return (this.contextMenuObject as Item).entityType === FUNDING_ENTITY || (this.contextMenuObject as Item).entityType === PROJECT_ENTITY;
+    return false;
   }
 
   /**
    * Check if user is administrator for this project
    */
   isProjectAdmin(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.isAdminOfProject, this.contextMenuObject.self, undefined);
+    return this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self, undefined);
   }
 
   public openInvitationModal() {
     let groups$: Observable<string[]>;
     if (this.isSubproject) {
-      groups$ = this.projectGroupService.getInvitationSubprojectAdminsGroupsByCommunity(this.projectCommunity);
-      groups$ = this.projectGroupService.getInvitationSubprojectAdminsGroupsByCommunity(this.projectCommunity);
+      groups$ = this.projectGroupService.getInvitationFundingCoordinatorsAndMembersGroupsByCommunity(this.relatedCommunity);
+      groups$ = this.projectGroupService.getInvitationFundingCoordinatorsAndMembersGroupsByCommunity(this.relatedCommunity);
     } else {
-      groups$ = this.projectGroupService.getInvitationProjectAllGroupsByCommunity(this.projectCommunity);
+      groups$ = this.projectGroupService.getInvitationProjectAllGroupsByCommunity(this.relatedCommunity);
     }
 
     groups$.pipe(take(1))

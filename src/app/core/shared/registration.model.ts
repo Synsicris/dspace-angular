@@ -26,11 +26,15 @@ export class Registration implements UnCacheableObject {
    */
   token: string;
   /**
-   * The token linked to the registration
+   * The group names linked to the registration
    */
   groupNames?: string[];
   /**
-   * The token linked to the registration
+   * The group ids linked to the registration
    */
   groups?: string[];
+  /**
+   * The dso names linked to the registration
+   */
+  dspaceObjectNames?: string[];
 }

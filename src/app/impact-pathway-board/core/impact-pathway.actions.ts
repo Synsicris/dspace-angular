@@ -6,6 +6,7 @@ import { ImpactPathway } from './models/impact-pathway.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
 import { MetadataMap } from '../../core/shared/metadata.models';
 import { ImpactPathwayLink } from './impact-pathway.reducer';
+import { ImpactPathwayStep } from './models/impact-pathway-step.model';
 
 /**
  * For each action type in an action group, make a simple
@@ -76,6 +77,10 @@ export const ImpactPathwayActionTypes = {
   SET_IMPACT_PATHWAY_TARGET_TASK: type('dspace/core/impactpathway/SET_IMPACT_PATHWAY_TARGET_TASK'),
   SET_IMPACT_PATHWAY_SUBTASK_COLLAPSE: type('dspace/impactpathway/SET_IMPACT_PATHWAY_TASK_COLLAPSE'),
   CLEAR_IMPACT_PATHWAY_SUBTASK_COLLAPSE: type('dspace/impactpathway/CLEAR_IMPACT_PATHWAY_TASK_COLLAPSE'),
+  INIT_COMPARE_IMPACT_PATHWAY: type('dspace/impactpathway/INIT_COMPARE_IMPACT_PATHWAY'),
+  INIT_COMPARE_IMPACT_PATHWAY_ERROR: type('dspace/core/workingplan/INIT_COMPARE_IMPACT_PATHWAY_ERROR'),
+  INIT_COMPARE_IMPACT_PATHWAY_SUCCESS: type('dspace/core/workingplan/INIT_COMPARE_IMPACT_PATHWAY_SUCCESS'),
+  STOP_COMPARE_IMPACT_PATHWAY: type('dspace/core/workingplan/STOP_COMPARE_IMPACT_PATHWAY'),
 };
 
 /* tslint:disable:max-classes-per-file */
@@ -105,7 +110,7 @@ export class GenerateImpactPathwayAction implements Action {
    * @param name
    *    the impact pathway's title
    */
-  constructor(projectId: string, name: string,) {
+  constructor(projectId: string, name: string, ) {
     this.payload = { projectId, name };
   }
 }
@@ -161,6 +166,28 @@ export class InitImpactPathwayAction implements Action {
    */
   constructor(item: Item, withTarget = false) {
     this.payload = { item, withTarget };
+  }
+}
+
+
+
+/**
+ * An ngrx action for init success
+ */
+export class StopCompareImpactPathwayAction implements Action {
+  type = ImpactPathwayActionTypes.STOP_COMPARE_IMPACT_PATHWAY;
+  payload: {
+    id: string;
+  };
+
+  /**
+   * Create a new InitImpactPathwaySuccessAction
+   *
+   * @param id
+   *    the Item id of the impact pathway generated
+   */
+  constructor(id: string) {
+    this.payload = { id };
   }
 }
 
@@ -414,7 +441,7 @@ export class AddImpactPathwaySubTaskAction implements Action {
    *    the Item id of the impact pathway task to add
    */
   constructor(impactPathwayId: string, stepId: string, parentTaskId: string, taskId: string) {
-    this.payload = { impactPathwayId, stepId, parentTaskId, taskId};
+    this.payload = { impactPathwayId, stepId, parentTaskId, taskId };
   }
 }
 
@@ -488,7 +515,7 @@ export class MoveImpactPathwaySubTaskAction implements Action {
     newParentTaskId: string,
     taskId: string
   ) {
-    this.payload = { impactPathwayId, stepId, parentTaskId, newParentTaskId, taskId};
+    this.payload = { impactPathwayId, stepId, parentTaskId, newParentTaskId, taskId };
   }
 }
 
@@ -533,7 +560,7 @@ export class MoveImpactPathwaySubTaskErrorAction implements Action {
     currentParentTaskId: string,
     taskId: string
   ) {
-    this.payload = { impactPathwayId, stepId, previousParentTaskId, currentParentTaskId, taskId};
+    this.payload = { impactPathwayId, stepId, previousParentTaskId, currentParentTaskId, taskId };
   }
 }
 
@@ -568,7 +595,7 @@ export class OrderImpactPathwayTasksAction implements Action {
     currentTasks: ImpactPathwayTask[],
     previousTasks: ImpactPathwayTask[]
   ) {
-    this.payload = { impactPathwayId, stepId, currentTasks, previousTasks};
+    this.payload = { impactPathwayId, stepId, currentTasks, previousTasks };
   }
 }
 
@@ -605,7 +632,7 @@ export class OrderImpactPathwayTasksErrorAction implements Action {
     stepId: string,
     previousTasks: ImpactPathwayTask[]
   ) {
-    this.payload = { impactPathwayId, stepId, previousTasks};
+    this.payload = { impactPathwayId, stepId, previousTasks };
   }
 }
 
@@ -643,7 +670,7 @@ export class OrderImpactPathwaySubTasksAction implements Action {
     currentTasks: ImpactPathwayTask[],
     previousTasks: ImpactPathwayTask[]
   ) {
-    this.payload = { impactPathwayId, stepId, parentTaskId, currentTasks, previousTasks};
+    this.payload = { impactPathwayId, stepId, parentTaskId, currentTasks, previousTasks };
   }
 }
 
@@ -684,7 +711,7 @@ export class OrderImpactPathwaySubTasksErrorAction implements Action {
     parentTaskId: string,
     previousTasks: ImpactPathwayTask[]
   ) {
-    this.payload = { impactPathwayId, stepId, parentTaskId, previousTasks};
+    this.payload = { impactPathwayId, stepId, parentTaskId, previousTasks };
   }
 }
 
@@ -950,7 +977,7 @@ export class PatchImpactPathwayMetadataAction implements Action {
     metadata: string,
     metadataIndex: number,
     value: string) {
-    this.payload = { impactPathwayId, oldImpactPathway, metadata, metadataIndex, value};
+    this.payload = { impactPathwayId, oldImpactPathway, metadata, metadataIndex, value };
   }
 }
 
@@ -979,7 +1006,7 @@ export class PatchImpactPathwayMetadataSuccessAction implements Action {
     impactPathwayId: string,
     oldImpactPathway: ImpactPathway,
     item: Item) {
-    this.payload = { impactPathwayId, oldImpactPathway, item};
+    this.payload = { impactPathwayId, oldImpactPathway, item };
   }
 }
 
@@ -1035,7 +1062,7 @@ export class PatchImpactPathwayTaskMetadataAction implements Action {
     metadataIndex: number,
     value: string,
     parentTaskId?: string) {
-    this.payload = { impactPathwayId, stepId, taskId, oldTask, metadata, metadataIndex, value, parentTaskId};
+    this.payload = { impactPathwayId, stepId, taskId, oldTask, metadata, metadataIndex, value, parentTaskId };
   }
 }
 
@@ -1076,7 +1103,7 @@ export class PatchImpactPathwayTaskMetadataSuccessAction implements Action {
     oldTask: ImpactPathwayTask,
     item: Item,
     parentTaskId?: string) {
-    this.payload = { impactPathwayId, stepId, taskId, oldTask, item, parentTaskId};
+    this.payload = { impactPathwayId, stepId, taskId, oldTask, item, parentTaskId };
   }
 }
 
@@ -1416,6 +1443,55 @@ export class ClearImpactPathwaySubtaskCollapseAction implements Action {
   type = ImpactPathwayActionTypes.CLEAR_IMPACT_PATHWAY_SUBTASK_COLLAPSE;
 }
 
+/**
+ * An ngrx action to init impact pathway's compare
+ */
+export class InitCompareAction implements Action {
+  type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY;
+  payload: {
+    impactPathwayId: string;
+    compareImpactPathwayId: string;
+  };
+
+  /**
+   * Create a new InitCompareAction
+   *
+   * @param compareImpactPathwayId
+   *    the impact pathway's id to compare with the current one
+   */
+  constructor(impactPathwayId: string, compareImpactPathwayId: string) {
+    this.payload = { impactPathwayId, compareImpactPathwayId };
+  }
+}
+
+/**
+ * An ngrx action for init error
+ */
+export class InitCompareErrorAction implements Action {
+  type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_ERROR;
+}
+
+/**
+ * An ngrx action for init success
+ */
+export class InitCompareSuccessAction implements Action {
+  type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_SUCCESS;
+  payload: {
+    impactPathwayId: string;
+    steps: ImpactPathwayStep[];
+  };
+
+  /**
+   * Create a new InitCompareSuccessAction
+   *
+   * @param steps
+   *    the list of steps objects
+   */
+  constructor(impactPathwayId: string, steps: ImpactPathwayStep[]) {
+    this.payload = { impactPathwayId, steps };
+  }
+}
+
 /* tslint:enable:max-classes-per-file */
 
 /**
@@ -1482,4 +1558,8 @@ export type ImpactPathwayActions
   | UpdateImpactPathwayTaskAction
   | UpdateImpactPathwaySubTaskAction
   | SetImpactPathwaySubTaskCollapseAction
-  | ClearImpactPathwaySubtaskCollapseAction;
+  | ClearImpactPathwaySubtaskCollapseAction
+  | InitCompareAction
+  | InitCompareErrorAction
+  | InitCompareSuccessAction
+  | StopCompareImpactPathwayAction;

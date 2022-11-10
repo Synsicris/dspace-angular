@@ -1,4 +1,4 @@
-<div class="container border rounded" >
+<div class="container border rounded">
   <h2 class="font-weight-bold py-3">{{'invitation.group.msg' | translate}}
   </h2>
   <hr>
@@ -6,8 +6,13 @@
     <div class="row">
       <div class="col-12">
         <ul>
-          <li *ngFor="let group of registrationData.groupNames">
-            {{group}}
+          <li *ngFor="let entry of invitationsGroupData$ | async; let i = index">
+            <ng-container *ngIf="entry.communityName">
+              {{ 'invitation.group.' + entry.type + '.' + entry.role | translate }} {{entry.communityName}}
+            </ng-container>
+            <ng-container *ngIf="!entry.communityName">
+              {{entry.groupName}}
+            </ng-container>
           </li>
         </ul>
       </div>

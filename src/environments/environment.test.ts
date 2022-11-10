@@ -200,6 +200,18 @@ export const environment: AppConfig = {
     {
       type: 'Publication',
       metadata: ['dc.contributor.author']
+    },
+    {
+      type: 'Product',
+      metadata: ['dc.contributor.author']
+    },
+    {
+      type: 'workpackage',
+      metadata: ['workingplan.relation.step']
+    },
+    {
+      type: 'milestone',
+      metadata: ['workingplan.relation.step']
     }
   ],
   item: {
@@ -329,7 +341,12 @@ export const environment: AppConfig = {
     projectsEntityEditMode: 'CUSTOM',
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
     excludeComparisonMetadata: ['dspace.entity.type'],
-    commentEntityName: 'comment'
+    projectsFunder: {
+      searchQueryConfigurationName: 'searchProjectsForFunder',
+      searchProjectConfigurationName: 'searchProjectsForFunder',
+      searchProjectItemsConfigurationName: 'allProjectItems',
+      entityTypeFilterName: 'entityType'
+    }
   },
   impactPathway: {
     impactPathwaysFormSection: 'impact_pathway_form',
@@ -452,5 +469,12 @@ export const environment: AppConfig = {
         ]
       },
     ]
+  },
+  comments: {
+    commentEditFormName: 'comments',
+    commentEditFormSection: 'comments',
+    commentEditMode: 'CUSTOM',
+    commentEntityType: 'comment',
+    commentRelationItemMetadata: 'synsicris.relation.item'
   }
 };

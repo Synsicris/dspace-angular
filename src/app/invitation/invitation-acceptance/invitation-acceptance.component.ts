@@ -1,12 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
+
 import { Registration } from '../../core/shared/registration.model';
 import { EpersonRegistrationService } from '../../core/data/eperson-registration.service';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../core/shared/operators';
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
-import { switchMap, take } from 'rxjs/operators';
 import { EPerson } from '../../core/eperson/models/eperson.model';
 import { AuthService } from '../../core/auth/auth.service';
+import { Community } from '../../core/shared/community.model';
+import { CommunityDataService } from '../../core/data/community-data.service';
+
+export interface InvitationGroupData {
+  groupName: string;
+  type: string;
+  role: string;
+  communityName: string;
+}
 
 @Component({
   selector: 'ds-invitation-acceptance',
@@ -16,11 +28,13 @@ import { AuthService } from '../../core/auth/auth.service';
 export class InvitationAcceptanceComponent implements OnInit {
 
   registrationData: Registration;
+  invitationsGroupData$: BehaviorSubject<InvitationGroupData[]> = new BehaviorSubject([]);
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private epersonRegistrationService: EpersonRegistrationService,
               private epersonDataService: EPersonDataService,
+              private communityService: CommunityDataService,
               private auth: AuthService) {
   }
 
@@ -29,9 +43,21 @@ export class InvitationAcceptanceComponent implements OnInit {
       switchMap((paramMap: ParamMap) => {
         const token = paramMap.get('registrationToken');
         return this.epersonRegistrationService.searchByToken(token);
+      }),
+      map((registrationData: Registration) => {
+        this.registrationData = registrationData;
+        return registrationData.groupNames.map((groupName, index) => {
+          const groupNameArray = groupName.split('_');
+          return {
+            groupName,
+            type: groupName.startsWith('project_') ? 'project' : 'funding',
+            role: groupNameArray[2],
+            communityName: registrationData.dspaceObjectNames[index]
+          } as InvitationGroupData;
+        });
       })
-    ).subscribe((registrationData: Registration) => {
-      this.registrationData = registrationData;
+    ).subscribe((list: InvitationGroupData[]) => {
+      this.invitationsGroupData$.next(list);
     });
   }
 
@@ -39,7 +65,7 @@ export class InvitationAcceptanceComponent implements OnInit {
     this.auth.getAuthenticatedUserFromStore().pipe(
       take(1),
       switchMap((eperson: EPerson) =>
-         this.epersonDataService.acceptInvitationToJoinGroups(eperson.id, this.registrationData.token).pipe(
+        this.epersonDataService.acceptInvitationToJoinGroups(eperson.id, this.registrationData.token).pipe(
           getFirstCompletedRemoteData()
         )
       )
@@ -51,4 +77,15 @@ export class InvitationAcceptanceComponent implements OnInit {
   navigateToHome() {
     this.router.navigate(['/home']);
   }
+
+  getCommunity(parentId): Observable<Community> {
+    return this.communityService.findById(parentId).pipe(
+      getFirstCompletedRemoteData(),
+      getRemoteDataPayload()
+    );
+  }
+
 }
+
+
+

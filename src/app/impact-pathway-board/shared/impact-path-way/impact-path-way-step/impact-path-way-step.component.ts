@@ -20,6 +20,7 @@ import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 import { RemoteData } from '../../../../core/data/remote-data';
 import { Collection } from '../../../../core/shared/collection.model';
 import { PaginatedList } from '../../../../core/data/paginated-list.model';
+import { EditItemDataService } from '../../../../core/submission/edititem-data.service';
 
 @Component({
   selector: 'ipw-impact-path-way-step',
@@ -38,19 +39,26 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
   @Input() public impactPathwayId: string;
   @Input() public impactPathwayStepId: string;
   @Input() public allImpactPathwayStepIds: string[];
+  @Input() public compareMode: boolean;
+  @Input() public editMode: boolean;
 
   public impactPathwayStep$: BehaviorSubject<ImpactPathwayStep> = new BehaviorSubject<ImpactPathwayStep>(null);
 
   private title$: Observable<string>;
   private info$: Observable<string>;
+  /**
+   * A boolean representing if edit/add buttons are active
+   */
+  canEditButton$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     protected cdr: ChangeDetectorRef,
     protected collectionService: CollectionDataService,
     protected impactPathwayService: ImpactPathwayService,
     protected modalService: NgbModal,
-    protected translate: TranslateService
-    ) {
+    protected translate: TranslateService,
+    protected editItemDataService: EditItemDataService
+  ) {
     super(impactPathwayService);
   }
 
@@ -61,6 +69,13 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
         this.impactPathwayStep$.next(step);
       })
     );
+
+    this.editItemDataService.checkEditModeByIDAndType(this.impactPathwayStepId, environment.impactPathway.impactPathwaysEditMode).pipe(
+      take(1)
+    ).subscribe((canEdit: boolean) => {
+      this.canEditButton$.next(canEdit);
+    });
+
     this.title$ = this.impactPathwayStep$.pipe(
       find((impactPathwayStep: ImpactPathwayStep) => isNotEmpty(impactPathwayStep)),
       map((impactPathwayStep: ImpactPathwayStep) => `impact-pathway.step.label.${impactPathwayStep.type}`),

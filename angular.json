@@ -52,6 +52,7 @@
             ],
             "styles": [
               "src/styles/startup.scss",
+              "src/themes/synsicris/styles/theme.scss",
               {
                 "input": "src/styles/base-theme.scss",
                 "inject": false,
