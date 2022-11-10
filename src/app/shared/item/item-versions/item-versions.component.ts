@@ -582,7 +582,8 @@ export class ItemVersionsComponent implements OnInit {
       { value: value }
     ).subscribe((item) => {
       version.isLoading = false;
-      this.notificationsService.success(null, this.translateService.get('Updated successfully'));
+      const type = this.translateService.get(metadata);
+      this.notificationsService.success(null, this.translateService.get('item.version.history.table.successfull', { type: type }));
     });
   }
 
