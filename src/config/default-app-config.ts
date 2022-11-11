@@ -531,7 +531,9 @@ export class DefaultAppConfig implements AppConfig {
       searchProjectConfigurationName: 'searchAllProjectForFunder',
       searchProjectItemsConfigurationName: 'allProjectItems',
       entityTypeFilterName: 'entityType'
-    }
+    },
+    versioningEditMode: 'VERSIONING',
+    versioningEditFormSection: 'projects_versioning',
   };
 
   exploitationPlan = {

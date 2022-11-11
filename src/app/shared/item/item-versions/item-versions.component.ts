@@ -1,14 +1,9 @@
+import { environment } from './../../../../environments/environment';
 import { Component, Input, OnInit } from '@angular/core';
 import { Item } from '../../../core/shared/item.model';
 import { Version } from '../../../core/shared/version.model';
 import { RemoteData } from '../../../core/data/remote-data';
-import {
-  BehaviorSubject,
-  combineLatest,
-  Observable,
-  of,
-  Subscription,
-} from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, Subscription, } from 'rxjs';
 import { VersionHistory } from '../../../core/shared/version-history.model';
 import {
   getAllSucceededRemoteData,
@@ -48,6 +43,10 @@ import { WorkspaceItem } from '../../../core/submission/models/workspaceitem.mod
 import { WorkspaceitemDataService } from '../../../core/submission/workspaceitem-data.service';
 import { WorkflowItemDataService } from '../../../core/submission/workflowitem-data.service';
 import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
+import { ConfirmationModalComponent } from '../../confirmation-modal/confirmation-modal.component';
+import {
+  ItemVersionsVisibilityModalComponent
+} from './item-versions-visibility-modal/item-versions-visibility-modal.component';
 
 @Component({
   selector: 'ds-item-versions',
@@ -64,6 +63,10 @@ export class ItemVersionsComponent implements OnInit {
    * The item to display a version history for
    */
   @Input() item: Item;
+  /**
+   * Whether or not to display the alert box
+   */
+  @Input() displayAlert = true;
 
   /**
    * An option to display the list of versions, even when there aren't any.
@@ -81,6 +84,21 @@ export class ItemVersionsComponent implements OnInit {
    * Whether or not to display the action buttons (delete/create/edit version)
    */
   @Input() displayActions: boolean;
+
+  /**
+   * Whether user is coordinator
+   */
+  @Input() isCoordinator = false;
+
+  /**
+   * Whether user is founder
+   */
+  @Input() isFounder = false;
+
+  /**
+   * Whether user is founder
+   */
+  @Input() canShowCreateVersion = false;
 
   /**
    * Array of active subscriptions
@@ -167,20 +185,29 @@ export class ItemVersionsComponent implements OnInit {
   canCreateVersion$: Observable<boolean>;
   createVersionTitle$: Observable<string>;
 
-  constructor(private versionHistoryService: VersionHistoryDataService,
-              private versionService: VersionDataService,
-              private itemService: ItemDataService,
-              private paginationService: PaginationService,
-              private formBuilder: FormBuilder,
-              private modalService: NgbModal,
-              private notificationsService: NotificationsService,
-              private translateService: TranslateService,
-              private router: Router,
-              private itemVersionShared: ItemVersionsSharedService,
-              private authorizationService: AuthorizationDataService,
-              private workspaceItemDataService: WorkspaceitemDataService,
-              private workflowItemDataService: WorkflowItemDataService,
-              private configurationService: ConfigurationDataService,
+  /**
+   * Get version edit mode from envoirment
+   */
+  versioningEditMode = environment.projects.versioningEditMode;
+  /**
+   * Get version edit form section from envoirment
+   */
+  versioningEditFormSection = environment.projects.versioningEditFormSection;
+
+  constructor(protected versionHistoryService: VersionHistoryDataService,
+    protected versionService: VersionDataService,
+    protected itemService: ItemDataService,
+    protected paginationService: PaginationService,
+    protected formBuilder: FormBuilder,
+    protected modalService: NgbModal,
+    protected notificationsService: NotificationsService,
+    protected translateService: TranslateService,
+    protected router: Router,
+    protected itemVersionShared: ItemVersionsSharedService,
+    protected authorizationService: AuthorizationDataService,
+    protected workspaceItemDataService: WorkspaceitemDataService,
+    protected workflowItemDataService: WorkflowItemDataService,
+    protected configurationService: ConfigurationDataService,
   ) {
   }
 
@@ -238,19 +265,19 @@ export class ItemVersionsComponent implements OnInit {
       getFirstSucceededRemoteData(),
       switchMap((findRes: RemoteData<Version>) => {
         const payload = findRes.payload;
-        const summary = {summary: this.versionBeingEditedSummary,};
+        const summary = { summary: this.versionBeingEditedSummary, };
         const updatedVersion = Object.assign({}, payload, summary);
         return this.versionService.update(updatedVersion).pipe(getFirstCompletedRemoteData<Version>());
       }),
     ).subscribe((updatedVersionRD: RemoteData<Version>) => {
-        if (updatedVersionRD.hasSucceeded) {
-          this.notificationsService.success(null, this.translateService.get(successMessageKey, {'version': this.versionBeingEditedNumber}));
-          this.getAllVersions(this.versionHistory$);
-        } else {
-          this.notificationsService.warning(null, this.translateService.get(failureMessageKey, {'version': this.versionBeingEditedNumber}));
-        }
-        this.disableVersionEditing();
+      if (updatedVersionRD.hasSucceeded) {
+        this.notificationsService.success(null, this.translateService.get(successMessageKey, { 'version': this.versionBeingEditedNumber }));
+        this.getAllVersions(this.versionHistory$);
+      } else {
+        this.notificationsService.warning(null, this.translateService.get(failureMessageKey, { 'version': this.versionBeingEditedNumber }));
       }
+      this.disableVersionEditing();
+    }
     );
   }
 
@@ -312,9 +339,9 @@ export class ItemVersionsComponent implements OnInit {
       ).subscribe(([deleteHasSucceeded, newLatestVersionItem]: [boolean, Item]) => {
         // Notify operation result and redirect to latest item
         if (deleteHasSucceeded) {
-          this.notificationsService.success(null, this.translateService.get(successMessageKey, {'version': versionNumber}));
+          this.notificationsService.success(null, this.translateService.get(successMessageKey, { 'version': versionNumber }));
         } else {
-          this.notificationsService.error(null, this.translateService.get(failureMessageKey, {'version': versionNumber}));
+          this.notificationsService.error(null, this.translateService.get(failureMessageKey, { 'version': versionNumber }));
         }
         if (redirectToLatest) {
           const path = getItemEditVersionhistoryRoute(newLatestVersionItem);
@@ -423,7 +450,7 @@ export class ItemVersionsComponent implements OnInit {
     combineLatest([versionHistory$, currentPagination]).pipe(
       switchMap(([versionHistory, options]: [VersionHistory, PaginationComponentOptions]) => {
         return this.versionHistoryService.getVersions(versionHistory.id,
-          new PaginatedSearchOptions({pagination: Object.assign({}, options, {currentPage: options.currentPage})}),
+          new PaginatedSearchOptions({ pagination: Object.assign({}, options, { currentPage: options.currentPage }) }),
           false, true, followLink('item'), followLink('eperson'));
       }),
       getFirstCompletedRemoteData(),
@@ -449,7 +476,7 @@ export class ItemVersionsComponent implements OnInit {
       map((item: Item) => item.uuid),
       switchMap((itemUuid: string) => this.workspaceItemDataService.findByItem(itemUuid, true)),
       getFirstCompletedRemoteData<WorkspaceItem>(),
-      map((res: RemoteData<WorkspaceItem>) => res?.payload?.id ),
+      map((res: RemoteData<WorkspaceItem>) => res?.payload?.id),
     );
   }
 
@@ -463,7 +490,7 @@ export class ItemVersionsComponent implements OnInit {
       map((item: Item) => item.uuid),
       switchMap((itemUuid: string) => this.workflowItemDataService.findByItem(itemUuid, true)),
       getFirstCompletedRemoteData<WorkspaceItem>(),
-      map((res: RemoteData<WorkspaceItem>) => res?.payload?.id ),
+      map((res: RemoteData<WorkspaceItem>) => res?.payload?.id),
     );
   }
 
@@ -537,6 +564,106 @@ export class ItemVersionsComponent implements OnInit {
    */
   cleanupSubscribes() {
     this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
+  }
+
+  /**
+   * Toggles the versionItem metadata
+   * @param versionItem the version item which metadata belongs to
+   * @param metadata the metadata being toggled
+   */
+  updateItemByMetadata(versionItem: Item, version, metadata, value) {
+    this.itemService.updateItemMetadata(
+      versionItem.id,
+      this.versioningEditMode,
+      this.getVersionPath(),
+      metadata,
+      0,
+      { value: value }
+    ).subscribe((item) => {
+      version.isLoading = false;
+      this.notificationsService.success(null, this.translateService.get('Updated successfully'));
+    });
+  }
+
+  /**
+   * Get the path of version to send section information
+   */
+  getVersionPath(): string {
+    return ['sections', this.versioningEditFormSection].join('/');
+  }
+
+  /**
+   * Button shown only when the versionItem official metadata is true for funder so he can set NonOfficial
+   * @param versionItem the version item which metadata belongs to
+   */
+  setVisible(versionItem: Item, version): void {
+    console.log(version);
+    version.isLoading = true;
+    const modalRef = this.modalService.open(ItemVersionsVisibilityModalComponent);
+    modalRef.componentInstance.version = version;
+    modalRef.result.then((result) => {
+      if (result) {
+        if (result.official) {
+          this.updateItemByMetadata(versionItem, version, 'synsicris.version.official', true);
+        }
+        this.updateItemByMetadata(versionItem, version, 'synsicris.version.visible', true);
+      }
+    }, () => {
+      version.isLoading = false;
+    });
+  }
+
+  /**
+   * Button shown only when the versionItem official metadata is true for funder so he can set NonOfficial
+   * @param versionItem the version item which metadata belongs to
+   */
+  setNonofficial(versionItem: Item, version) {
+    if (this.isFounder) {
+      version.isLoading = true;
+      const modalRef = this.modalService.open(ConfirmationModalComponent);
+      modalRef.componentInstance.dso = versionItem;
+      modalRef.componentInstance.headerLabel = 'confirmation-modal.version.official.header';
+      modalRef.componentInstance.infoLabel = 'confirmation-modal.version.official.info';
+      modalRef.componentInstance.cancelLabel = 'confirmation-modal.version.official.cancel';
+      modalRef.componentInstance.confirmLabel = 'confirmation-modal.version.official.confirm';
+      modalRef.componentInstance.confirmIcon = 'fas fa-check';
+      const resp$ = modalRef.componentInstance.response.pipe(map((confirm: boolean) => {
+        if (confirm) {
+          return this.updateItemByMetadata(versionItem, version, 'synsicris.version.official', false);
+        } else {
+          version.isLoading = false;
+          return null;
+        }
+      }));
+      resp$.subscribe();
+      this.subs.push(resp$);
+    }
+  }
+
+  /**
+   * Check if the version Item is visible
+   * @param versionItem the version item which metadata belongs to
+   */
+  isVisible(versionItem): Observable<boolean> {
+    return versionItem.pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((item: Item) => {
+        return item.firstMetadataValue('synsicris.version.visible') === 'true';
+      })
+    );
+  }
+
+  /**
+   * Check if the version Item is official
+   * @param versionItem the version item which metadata belongs to
+   */
+  isOfficial(versionItem): Observable<boolean> {
+    return versionItem.pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((item: Item) => {
+        return item.firstMetadataValue('synsicris.version.official') === 'true';
+      })
+    );
   }
 
 }

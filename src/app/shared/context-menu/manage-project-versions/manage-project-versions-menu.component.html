@@ -1,0 +1,4 @@
+<button *ngIf="canShow() && (isVersionOf || (hasVersions$|async)) && ((isCoordinatorOfProject$ | async) || (isFounderOfProject$| async))"
+        class="dropdown-item" [innerHTML]="'project.versions.menu.project' | translate"
+        (click)="navigateToManage();$event.preventDefault();$event.stopImmediatePropagation();">
+</button>

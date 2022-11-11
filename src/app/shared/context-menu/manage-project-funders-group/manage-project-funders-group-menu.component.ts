@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
@@ -11,11 +10,9 @@ import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
-import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
-import { ConfigurationProperty } from '../../../core/shared/configuration-property.model';
 import { PERSON_ENTITY } from '../../../core/project/project-data.service';
 import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
+import { ProjectGroupService } from '../../../core/project/project-group.service';
 
 /**
  * This component renders a context menu option that provides to manage group of a Person.
@@ -41,14 +38,14 @@ export class ManageProjectFundersGroupMenuComponent extends ContextMenuEntryComp
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
    * @param {Router} router
-   * @param {ConfigurationDataService} configurationDataService
+   * @param {ProjectGroupService} projectGroupService
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: any,
     protected authorizationService: ProjectAuthorizationService,
     protected router: Router,
-    protected configurationDataService: ConfigurationDataService
+    protected projectGroupService: ProjectGroupService
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ManageProjectManagers);
   }
@@ -59,10 +56,7 @@ export class ManageProjectFundersGroupMenuComponent extends ContextMenuEntryComp
         this.isFunderOrganizationalManager$.next(isCoordinator);
       });
 
-      this.configurationDataService.findByPropertyName('funders-project-managers.group').pipe(
-        getFirstSucceededRemoteDataPayload(),
-        map((configProperty: ConfigurationProperty) => configProperty?.values?.length > 0 ? configProperty.values[0] : null)
-      ).subscribe((groupId: string) => {
+      this.projectGroupService.getFunderProjectManagersGroupId().subscribe((groupId: string) => {
         this.funderGroupId = groupId;
       });
     }
