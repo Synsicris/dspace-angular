@@ -47,12 +47,18 @@ import { SearchModule } from '../../app/shared/search/search.module';
 import { ResourcePoliciesModule } from '../../app/shared/resource-policies/resource-policies.module';
 import { ComcolModule } from '../../app/shared/comcol/comcol.module';
 import { MiradorViewerModule } from '../../app/item-page/mirador-viewer/mirador-viewer.module';
+import { AdminSidebarComponent } from './app/admin/admin-sidebar/admin-sidebar.component';
+import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
+import { FooterComponent } from './app/footer/footer.component';
 
 const DECLARATIONS = [
   HomeNewsComponent,
   HeaderComponent,
   HeaderNavbarWrapperComponent,
-  NavbarComponent
+  NavbarComponent,
+  AdminSidebarComponent,
+  BreadcrumbsComponent,
+  FooterComponent
 ];
 
 @NgModule({
