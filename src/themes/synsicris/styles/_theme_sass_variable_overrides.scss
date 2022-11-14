@@ -27,8 +27,6 @@ $blue-dark: rgb(5,44,59) !default; //helptext and tooltips #052C3B
 $gray-dark: #43515f !default; // dark gray for primary
 $gray-bright: #F8F9FA !default; // bright gray for components
 
-
-
 $theme-colors: (
   primary: $gray-dark
 );
@@ -40,14 +38,12 @@ $table-hover-bg: $gray-400 !default;    // Bootstrap $gray-400
 
 $yiq-contrasted-threshold:  170 !default;
 
-<<<<<<< HEAD
-/* ----------------- TOOLTIP (rex) */
-/* rex 220422 set tooltip non-transparent */
-$tooltip-opacity: 1.0; 
+  /* ----------------- TOOLTIP (rex) */
+  /* rex 220422 set tooltip non-transparent */
+$tooltip-opacity: 1.0;
 
 $body-background: lime !default;        // 221104 rex
 =======
   /* ----------------- TOOLTIP (rex) */
   /* rex 220422 set tooltip non-transparent */
-$tooltip-opacity: 1.0; 
->>>>>>> 380e8d8ce252b62cd5b4285e372a74066d83a61e
+$tooltip-opacity: 1.0;

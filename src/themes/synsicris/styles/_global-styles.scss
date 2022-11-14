@@ -24,6 +24,16 @@
   }
 }
 
+header {
+  li > .navbar-section,
+  li > .expandable-navbar-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+}
+
 ds-metric-donuts a, ds-metric-donuts a img {
   height: 3.5rem !important;
   width: 3.5rem !important;
@@ -46,20 +56,19 @@ ds-metric-donuts a {
   font-size: 16px !important;
 }
 
-<<<<<<< HEAD
-/* ----------------------------------------------------------- 
-COLOR-VARIABLES (rex) 
+/* -----------------------------------------------------------
+COLOR-VARIABLES (rex)
 ----------------------------------------------------------- */
 
 // Variables didn't work in the footer here i global-styles.scss
 $s-body-background: hsl(0, 0, 98) !default;               // basic background color of cotent area (didn't find a variable for this)
 $s-synsicris-logo-magenta: hsl(335, 86, 42)  !default;    // CI Magenta Uni Kassel, Synsicris Logo
-$s-synsicris-logo-gray: hsl(0, 0, 36)   !default;   
+$s-synsicris-logo-gray: hsl(0, 0, 36)   !default;
 
 
 
-/* ----------------------------------------------------------- 
-LAYOUT 
+/* -----------------------------------------------------------
+LAYOUT
 ----------------------------------------------------------- */
 
 .outer-wrapper {
@@ -111,11 +120,11 @@ header .display-dev-infos:after {
 }
 */
 
-/* ----------------------------------------------------------- 
-HEADER with horizontal navbar 
+/* -----------------------------------------------------------
+HEADER with horizontal navbar
 ----------------------------------------------------------- */
- /* Attention: the navbar with logo exists twice: 
-from mediaquery md in navbar.component.html, but for mediaquery-sm with hamburger-button in header.component.html. 
+ /* Attention: the navbar with logo exists twice:
+from mediaquery md in navbar.component.html, but for mediaquery-sm with hamburger-button in header.component.html.
 HTML code must therefore always be adapted in both, and styles are defined here and not in the specific scss-files
 in order to avoid the same duplication as in the HTML code. */
 
@@ -132,7 +141,7 @@ header {
   nav.navbar {
 
     border-bottom: 1px var(--ds-header-navbar-border-bottom-color) solid !important; // replaces green line
-    
+
     /* SYNSICRIS LOGO */
     .navbar-brand .synsicris-logo {
       font-weight:700;
@@ -160,20 +169,20 @@ header {
         margin-right:0.6rem;
       }
 
-    } // end .container .navbar-nav  
+    } // end .container .navbar-nav
 
   } // end nav.navbar
-  
+
 } // end header
 
 
-  /* ----------------------------------------------------------- 
-  FOOTER (rex 221104) 
+  /* -----------------------------------------------------------
+  FOOTER (rex 221104)
   ----------------------------------------------------------- */
   /* the two footer-rows of synsicris are only in .bottom-footer, top-footer is not visible
-  class .text-white is in footer.component.html hardcoded and not changeable at the moment (rex 221104) 
+  class .text-white is in footer.component.html hardcoded and not changeable at the moment (rex 221104)
   ------------
-  VARIABLES DIDN'T WORK IN THE FOOTER (neither css nor scss), so I was forced to use real colors 
+  VARIABLES DIDN'T WORK IN THE FOOTER (neither css nor scss), so I was forced to use real colors
   ------------ */
 
   footer .bottom-footer {
@@ -190,20 +199,20 @@ header {
     }
 
     // normal text in footer
-    &, .text-white { 
-      color:rgba(72, 79, 86, 1) !important; 
+    &, .text-white {
+      color:rgba(72, 79, 86, 1) !important;
       font-weight:600;
       font-size:105%; // enlarge the first row
     }
 
     // make the white logo-4science-small.png dark
     a img {
-      filter: invert(100%) opacity(.5); 
+      filter: invert(100%) opacity(.5);
       -webkit-filter: invert(100%) opacity(.5);
       margin-left:0.3rem;
     }
 
-    // links in footer (didn't work with any --bs or --ds variable)   
+    // links in footer (didn't work with any --bs or --ds variable)
     ul, ul.footer-info, ul.text-white {
 
       margin-top:0.5rem;                      // more distance to the 4Sciece-Logo
@@ -213,17 +222,17 @@ header {
 
         a, a:link, a:visited, a.text-white {
 
-          color:rgb(0,121,168) !important;    // link-color
+          color:rgb(0,121,168) !important;      // link-color
           font-weight:700 !important;           // make thin font thicker
           padding:0 0.8rem 0 0.8rem !important; // space between links
-          white-space: nowrrap;                 // prevents breaking links
-          
+          white-space: nowrap;                  // prevents breaking links
+
           &[href*="javascript:void(0);"] {       // cog-icon before Cookie Settings
             &:before {
               font-family: 'Font Awesome 5 Free';
               content:"\f013";
               margin-right:0.4rem;
-            }       
+            }
           } // end before-construct for cog-icon
 
         } // end a
@@ -233,34 +242,34 @@ header {
             border-right: 2px solid rgba(216, 217, 218, 1) !important; // solution with border-right, does't look good with linebreaks
           }}
 
-      } // end li    
+      } // end li
     } // end ul
 
     a, a.text-white {
       color:hsl(197,65,38) !important;
       font-weight:700 !important;
     }
-  
+
   } // end footer
 
 
 /* -----------------------------------------------------------
-BREADCRUMB (rex 221028) 
+BREADCRUMB (rex 221028)
 ----------------------------------------------------------- */
 ds-breadcrumbs nav.nav-breadcrumb {   // complete bar
 
     /* WORKAROUND WITH BOX-SHADOW, BECAUSE BORDER-BOTTOM DOESN'T WORK
-    because ol.breadcrumb moves inside v.nav.breadcrumb as soon as a border is used. 
-    Therefore border-top for breadcrumb bar IS in navbar.component.scss in nav.navbar, 
+    because ol.breadcrumb moves inside v.nav.breadcrumb as soon as a border is used.
+    Therefore border-top for breadcrumb bar IS in navbar.component.scss in nav.navbar,
     and border-bottom here as shadow */
     box-shadow: 0 1px 0 var(--ds-header-navbar-border-bottom-color);
 
-    ol.breadcrumb {                   
+    ol.breadcrumb {
 
       background-color:transparent; // Breadcrumb-Links had a background-color, that is not needed
 
       li.breadcrumb-item {
-        font-size:1.1rem; 
+        font-size:1.1rem;
         font-weight:600;
         a:link, a:hover, a:focus, a:visited {color:var(--ds-breadcrumb-link-color) !important; }
         &+ .breadcrumb-item::before { content: quote("/") !important; }
@@ -271,8 +280,8 @@ ds-breadcrumbs nav.nav-breadcrumb {   // complete bar
 } // end ds-breadcrumbs nav.nav-breadcrumb
 
 
-  /* ----------------------------------------------------------- 
-  TOOLTIP (rex 221021) 
+  /* -----------------------------------------------------------
+  TOOLTIP (rex 221021)
   ----------------------------------------------------------- */
 =======
 /* ----------------- HELPER TO SHOW THE CURRENT WINDOW SIZE (rex 220505) */
@@ -298,7 +307,6 @@ header .helper-windowsize-rex:after {
 }
 */
   /* ----------------- TOOLTIP (rex 221021) */
->>>>>>> 380e8d8ce252b62cd5b4285e372a74066d83a61e
 
 .hint-tooltip .tooltip-inner {
   max-width:32rem; // somewhere (not clear, where) the width is defined with max-width:200px, so overwritten here
@@ -307,8 +315,6 @@ header .helper-windowsize-rex:after {
   box-shadow: 0 5px 15px var(--ds-tooltip-boxshadow-color); // shadow behind tooltip
   background-color: var(--ds-tooltip-inner-background-color);
   color: var(--ds-tooltip-inner-color);
-<<<<<<< HEAD
-=======
 }
 
 /* arrow gets same color as the bubble background */
@@ -317,13 +323,5 @@ header .helper-windowsize-rex:after {
 .bs-tooltip-left .arrow::before,
 .bs-tooltip-bottom .arrow::before {
   border-top-color: var(--ds-tooltip-inner-background-color);
->>>>>>> 380e8d8ce252b62cd5b4285e372a74066d83a61e
 }
 
-/* arrow gets same color as the bubble background */
-.bs-tooltip-top .arrow::before,
-.bs-tooltip-right .arrow::before,
-.bs-tooltip-left .arrow::before,
-.bs-tooltip-bottom .arrow::before {
-border-top-color: var(--ds-tooltip-inner-backgroud-color);
-}
