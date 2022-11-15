@@ -13,6 +13,7 @@ import { Item } from '../../../core/shared/item.model';
 import { EASY_ONLINE_PATH, getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { FUNDING_ENTITY } from '../../../core/project/project-data.service';
+import { ActivatedRoute } from '@angular/router';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -33,21 +34,35 @@ export class EasyOnlineImportMenuComponent extends ContextMenuEntryComponent imp
   private canMakeImport$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * A boolean representing if item is a version of original item
+   */
+  private isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * Initialize instance variables
    *
    * @param {DSpaceObject} injectedContextMenuObject
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
+   * @param {ActivatedRoute} aroute
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: any,
+    protected aroute: ActivatedRoute,
     protected authorizationService: AuthorizationDataService
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.EasyOnlineImport);
   }
 
   ngOnInit(): void {
+
+    this.aroute.data.subscribe((data) => {
+      if (data.isVersionOfAnItem !== undefined) {
+        this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
+      }
+    });
+
     this.authorizationService.isAuthorized(FeatureID.isMemberOfFunding, this.contextMenuObject.self).pipe(
       take(1)
     ).subscribe((canMakeImport) => this.canMakeImport$.next(canMakeImport));
@@ -58,6 +73,13 @@ export class EasyOnlineImportMenuComponent extends ContextMenuEntryComponent imp
    */
   canMakeImport(): Observable<boolean> {
     return this.canMakeImport$.asObservable();
+  }
+
+  /**
+   * Check if current item is version of an item
+   */
+  isVersionOfAnItem(): Observable<boolean> {
+    return this.isVersionOfAnItem$.asObservable();
   }
 
   /**

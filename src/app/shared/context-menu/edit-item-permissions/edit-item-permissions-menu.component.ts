@@ -14,6 +14,7 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 import { isNotEmpty } from '../../empty.util';
 import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 /**
@@ -48,23 +49,37 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
   private canEditGrants$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * A boolean representing if item is a version of original item
+   */
+  private isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * Initialize instance variables
    *
    * @param {DSpaceObject} injectedContextMenuObject
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
    * @param {NgbModal} modalService
+   * @param {ActivatedRoute} aroute
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
     protected authorizationService: AuthorizationDataService,
     protected modalService: NgbModal,
+    protected aroute: ActivatedRoute,
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.EditSubmission);
   }
 
   ngOnInit(): void {
+
+    this.aroute.data.subscribe((data) => {
+      if (data.isVersionOfAnItem !== undefined) {
+        this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
+      }
+    });
+
     this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.contextMenuObject.self, undefined)
       .subscribe((canEdit) => {
         this.canEditGrants$.next(canEdit);
@@ -84,6 +99,14 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
   isEditPermissionAvailable(): Observable<boolean> {
     return this.canEditGrants$.asObservable();
   }
+
+  /**
+   * Check if current item is version of an item
+   */
+  isVersionOfAnItem(): Observable<boolean> {
+    return this.isVersionOfAnItem$.asObservable();
+  }
+
 
   /**
    * Open edit grants modal

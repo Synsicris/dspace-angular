@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -38,6 +38,11 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
   protected isCoordinator$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * A boolean representing if item is a version of original item
+   */
+  private isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * Initialize instance variables
    *
    * @param {DSpaceObject} injectedContextMenuObject
@@ -47,6 +52,7 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
    * @param {ProjectGroupService} projectGroupService
    * @param {ProjectDataService} projectService
    * @param {Router} router
+   * @param {ActivatedRoute} aroute
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
@@ -56,11 +62,19 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
     protected projectGroupService: ProjectGroupService,
     protected projectService: ProjectDataService,
     protected router: Router,
+    protected aroute: ActivatedRoute,
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ManageProjectMembers);
   }
 
   ngOnInit(): void {
+
+    this.aroute.data.subscribe((data) => {
+      if (data.isVersionOfAnItem !== undefined) {
+        this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
+      }
+    });
+
     this.isFunding = (this.contextMenuObject as Item).entityType === FUNDING_ENTITY;
     if (this.canShow()) {
       this.checkIsCoordinator().subscribe((isCoordinator: boolean) => {
@@ -84,6 +98,13 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
   }
 
   /**
+   * Check if current item is version of an item
+   */
+  isVersionOfAnItem(): Observable<boolean> {
+    return this.isVersionOfAnItem$.asObservable();
+  }
+
+  /**
    * Navigate to manage members page
    */
   navigateToManage() {
@@ -100,8 +121,8 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
         this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
       ).pipe(
         map(([
-               isCoordinatorOfFunding,
-               isAdminstrator]) => isCoordinatorOfFunding || isAdminstrator),
+          isCoordinatorOfFunding,
+          isAdminstrator]) => isCoordinatorOfFunding || isAdminstrator),
       );
     } else {
       return combineLatest([
@@ -111,11 +132,11 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
         this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
       ).pipe(
         map(([
-               isFunderOrganizational,
-               isFunderProject,
-               isCoordinatorOfProject,
-               isAdminstrator
-             ]) => isFunderOrganizational || isFunderProject || isCoordinatorOfProject || isAdminstrator),
+          isFunderOrganizational,
+          isFunderProject,
+          isCoordinatorOfProject,
+          isAdminstrator
+        ]) => isFunderOrganizational || isFunderProject || isCoordinatorOfProject || isAdminstrator),
       );
     }
   }
