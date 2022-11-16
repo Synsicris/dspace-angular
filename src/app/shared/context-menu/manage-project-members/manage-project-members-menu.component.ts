@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
@@ -69,7 +69,7 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
 
   ngOnInit(): void {
 
-    this.aroute.data.subscribe((data) => {
+    this.aroute.data.pipe(take(1)).subscribe((data) => {
       if (data.isVersionOfAnItem !== undefined) {
         this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
       }

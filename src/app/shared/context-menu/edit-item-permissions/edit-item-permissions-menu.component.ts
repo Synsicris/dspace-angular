@@ -15,6 +15,7 @@ import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-
 import { isNotEmpty } from '../../empty.util';
 import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
 import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 
 /**
@@ -74,7 +75,7 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
 
   ngOnInit(): void {
 
-    this.aroute.data.subscribe((data) => {
+    this.aroute.data.pipe(take(1)).subscribe((data) => {
       if (data.isVersionOfAnItem !== undefined) {
         this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
       }

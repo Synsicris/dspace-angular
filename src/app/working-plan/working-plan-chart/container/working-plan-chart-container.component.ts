@@ -5,7 +5,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { ResizeEvent } from 'angular-resizable-element';
 import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -35,6 +35,7 @@ import { Item } from '../../../core/shared/item.model';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 import { CompareItemComponent } from '../../../shared/compare-item/compare-item.component';
+import { ActivatedRoute } from '@angular/router';
 
 export const MY_FORMATS = {
   parse: {
@@ -206,6 +207,11 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   private chartStatusTypeList$: BehaviorSubject<VocabularyEntry[]> = new BehaviorSubject<VocabularyEntry[]>([]);
   private subs: Subscription[] = [];
 
+  /**
+   * A boolean representing if item is a version of original item
+   */
+  public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(
     protected cdr: ChangeDetectorRef,
     private modalService: NgbModal,
@@ -213,6 +219,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     private workingPlanService: WorkingPlanService,
     private workingPlanStateService: WorkingPlanStateService,
     private editItemService: EditItemDataService,
+    private aroute: ActivatedRoute,
   ) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
       this._isExpandable, this._getChildren);
@@ -221,6 +228,13 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.aroute.data.pipe(take(1)).subscribe((data) => {
+      if (data.isVersionOfAnItem !== undefined) {
+        this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
+      }
+    });
+
     this.workpackageVocabularyOptions = new VocabularyOptions(
       environment.workingPlan.workingPlanStepResponsibleAuthority,
       environment.workingPlan.workingPlanStepResponsibleMetadata,

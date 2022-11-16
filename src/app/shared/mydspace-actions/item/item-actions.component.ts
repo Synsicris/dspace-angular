@@ -1,5 +1,5 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -60,6 +60,11 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   private canEditGrants$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * A boolean representing if item is a version of original item
+   */
+  private isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * Initialize instance variables
    *
    * @param {AuthorizationDataService} authorizationService
@@ -75,6 +80,7 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   constructor(protected authorizationService: AuthorizationDataService,
     protected injector: Injector,
     protected router: Router,
+    protected aroute: ActivatedRoute,
     protected notificationsService: NotificationsService,
     protected translate: TranslateService,
     protected searchService: SearchService,
@@ -96,6 +102,12 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEditGrants$.next(canEdit);
+    });
+
+    this.aroute.data.pipe(take(1)).subscribe((data) => {
+      if (data.isVersionOfAnItem !== undefined) {
+        this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
+      }
     });
   }
 
@@ -120,6 +132,13 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    */
   canEditGrants(): Observable<boolean> {
     return this.canEditGrants$.asObservable();
+  }
+
+  /**
+   * Check if current item is version of an item
+   */
+  isVersionOfAnItem(): Observable<boolean> {
+    return this.isVersionOfAnItem$.asObservable();
   }
 
   /**

@@ -25,9 +25,15 @@ export class WorkingPlanChartItemEditButtonComponent implements OnInit {
   @Input() node: WorkpacakgeFlatNode;
 
   /**
+   * A boolean representing if item is a version of original item
+   */
+  @Input() isVersionOfAnItem = false;
+
+  /**
    * Check if canEdit
    */
   private canEdit$: Observable<boolean>;
+
 
   constructor(private authorizationService: AuthorizationDataService) { }
 

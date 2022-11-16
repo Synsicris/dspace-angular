@@ -18,6 +18,7 @@ import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-m
 import { hasValue } from '../../../shared/empty.util';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { environment } from '../../../../environments/environment';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -61,12 +62,18 @@ export class ImpactPathWayComponent implements OnInit {
    */
   canEditButton$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  /**
+   * A boolean representing if item is a version of original item
+   */
+  public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
     private authorizationService: AuthorizationDataService,
     private cdr: ChangeDetectorRef,
     private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
     private modalService: NgbModal,
+    protected aroute: ActivatedRoute,
     protected editItemDataService: EditItemDataService) {
   }
 
@@ -88,6 +95,12 @@ export class ImpactPathWayComponent implements OnInit {
       this.canEditButton$.next(canEdit);
     });
 
+    this.aroute.data.pipe(take(1)).subscribe((data) => {
+      console.log(data);
+      if (data.isVersionOfAnItem !== undefined) {
+        this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
+      }
+    });
   }
 
   ngAfterContentChecked() {

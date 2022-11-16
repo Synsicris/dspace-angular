@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -82,7 +82,7 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
 
   ngOnInit(): void {
 
-    this.aroute.data.subscribe((data) => {
+    this.aroute.data.pipe(take(1)).subscribe((data) => {
       if (data.isVersionOfAnItem !== undefined) {
         this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
       }

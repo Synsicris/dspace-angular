@@ -10,6 +10,7 @@ import { ProjectObjectivesItemResolver } from '../core/project/project-objective
 import { ProjectItemBreadcrumbResolver } from '../core/breadcrumbs/project-item-breadcrumb.resolver';
 import { ProjectItemBreadcrumbService } from '../core/breadcrumbs/project-item-breadcrumb.service';
 import { ProjectItemByItemRelationResolver } from '../core/project/project-item-by-item-relation.resolver';
+import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.resolver';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { ProjectItemByItemRelationResolver } from '../core/project/project-item-
             resolve: {
               impactPathwayItem: ProjectItemPageResolver,
               projectCommunity: ProjectCommunityByItemResolver,
+              isVersionOfAnItem: VersionOfAnItemResolver,
               breadcrumb: ProjectItemBreadcrumbResolver
             },
           },
@@ -56,7 +58,8 @@ import { ProjectItemByItemRelationResolver } from '../core/project/project-item-
     ProjectItemBreadcrumbResolver,
     ProjectItemBreadcrumbService,
     ProjectCommunityByItemResolver,
-    ProjectObjectivesItemResolver
+    ProjectObjectivesItemResolver,
+    VersionOfAnItemResolver
   ]
 })
 export class ImpactPathwayPageRoutingModule {

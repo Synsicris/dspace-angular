@@ -37,6 +37,11 @@ export class ItemVersionListComponent implements OnInit {
   @Input() btnClass = 'btn-sm';
 
   /**
+   * Class of btn, default sm
+   */
+  @Input() disabled = false;
+
+  /**
    * The current version selected
    */
   currentVersion: BehaviorSubject<VersionDescription> = new BehaviorSubject<VersionDescription>(null);

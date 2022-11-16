@@ -57,7 +57,7 @@ export class EasyOnlineImportMenuComponent extends ContextMenuEntryComponent imp
 
   ngOnInit(): void {
 
-    this.aroute.data.subscribe((data) => {
+    this.aroute.data.pipe(take(1)).subscribe((data) => {
       if (data.isVersionOfAnItem !== undefined) {
         this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
       }
