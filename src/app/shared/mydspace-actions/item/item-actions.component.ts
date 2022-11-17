@@ -104,10 +104,12 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
       this.canEditGrants$.next(canEdit);
     });
 
-    this.aroute.data.pipe(take(1)).subscribe((data) => {
-      if (data.isVersionOfAnItem !== undefined) {
-        this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
-      }
+    this.aroute.data.pipe(
+      map((data) => data.isVersionOfAnItem),
+      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
+      take(1)
+    ).subscribe((isVersionOfAnItem: boolean) => {
+      this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
   }
 

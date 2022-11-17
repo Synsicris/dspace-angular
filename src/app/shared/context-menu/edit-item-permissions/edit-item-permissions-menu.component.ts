@@ -15,7 +15,7 @@ import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-
 import { isNotEmpty } from '../../empty.util';
 import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 
 
 /**
@@ -75,10 +75,13 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
 
   ngOnInit(): void {
 
-    this.aroute.data.pipe(take(1)).subscribe((data) => {
-      if (data.isVersionOfAnItem !== undefined) {
-        this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
-      }
+
+    this.aroute.data.pipe(
+      map((data) => data.isVersionOfAnItem),
+      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
+      take(1)
+    ).subscribe((isVersionOfAnItem: boolean) => {
+      this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
 
     this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.contextMenuObject.self, undefined)

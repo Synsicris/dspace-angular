@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { mergeMap, take } from 'rxjs/operators';
+import { filter, map, mergeMap, take } from 'rxjs/operators';
 import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../core/models/impact-pathway.model';
@@ -95,12 +95,15 @@ export class ImpactPathWayComponent implements OnInit {
       this.canEditButton$.next(canEdit);
     });
 
-    this.aroute.data.pipe(take(1)).subscribe((data) => {
-      console.log(data);
-      if (data.isVersionOfAnItem !== undefined) {
-        this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
-      }
+
+    this.aroute.data.pipe(
+      map((data) => data.isVersionOfAnItem),
+      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
+      take(1)
+    ).subscribe((isVersionOfAnItem: boolean) => {
+      this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
+
   }
 
   ngAfterContentChecked() {

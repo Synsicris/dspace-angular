@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Community } from '../../../../../core/shared/community.model';
 import { ActivatedRoute } from '@angular/router';
 import { RemoteData } from '../../../../../core/data/remote-data';
-import { map, take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'ds-cris-layout-search-box',
@@ -72,10 +72,12 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
     });
 
 
-    this.route.data.pipe(take(1)).subscribe((data) => {
-      if (data.isVersionOfAnItem !== undefined) {
-        this.isVersionOfAnItem$.next(data.isVersionOfAnItem);
-      }
+    this.route.data.pipe(
+      map((data) => data.isVersionOfAnItem),
+      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
+      take(1)
+    ).subscribe((isVersionOfAnItem: boolean) => {
+      this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
 
   }

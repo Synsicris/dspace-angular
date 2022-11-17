@@ -46,11 +46,16 @@ export class ObjectiveComponent implements OnInit {
    */
   @ViewChild('ipwCollapse') collapsable;
 
+  /**
+   * A boolean representing if item is a version of original item
+   */
+  @Input() isVersionOfAnItem = false;
+
   constructor(
     private impactPathwayService: ImpactPathwayService,
     private modalService: NgbModal,
     protected editItemDataService: EditItemDataService
-    ) {
+  ) {
   }
 
   ngOnInit(): void {
@@ -69,7 +74,7 @@ export class ObjectiveComponent implements OnInit {
     this.collapsable.isCollapsed().pipe(
       skip(2),
       distinctUntilChanged()
-    ).subscribe( (val) => {
+    ).subscribe((val) => {
       this.impactPathwayService.dispatchSetImpactPathwaySubTaskCollapse(
         this.impactPathwayStep.id,
         this.impactPathwayTask.id,

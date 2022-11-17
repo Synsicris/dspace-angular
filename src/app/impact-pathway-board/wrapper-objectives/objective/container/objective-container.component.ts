@@ -30,6 +30,11 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
   private processing$: Observable<boolean> = observableOf(false);
 
+  /**
+   * A boolean representing if item is a version of original item
+   */
+  @Input() isVersionOfAnItem = false;
+
   constructor(
     protected cdr: ChangeDetectorRef,
     protected impactPathwayService: ImpactPathwayService,
