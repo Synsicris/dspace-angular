@@ -4528,11 +4528,15 @@
 
   "programme.manage.notification.success.deleteMember": "Successfully deleted member",
 
-  "programme.manage.members.project.funders-group": "Invitation and management of programme managers",
+  "programme.manage.members.project.funders-group": "Invitation and management of programme project funders",
+
+  "programme.manage.members.project.managers-group": "Invitation and management of programme managers",
 
   "programme.manage.members.project.members-group": "Invitation and management of programme members",
 
   "programme.manage.members.funders-group-help": "Help message here",
+
+  "programme.manage.members.managers-group-help": "Help message here",
 
   "programme.manage.members.members-group-help": "Help message here",
 
