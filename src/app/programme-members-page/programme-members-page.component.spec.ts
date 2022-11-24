@@ -34,6 +34,7 @@ describe('ProgrammeMembersPageComponent', () => {
   });
   const projectGroupServiceMock = jasmine.createSpyObj('ProjectGroupService', {
     getProgrammeManagersGroupUUIDByItem: jasmine.createSpy('getProgrammeManagersGroupUUIDByItem'),
+    getProgrammeProjectFundersGroupUUIDByItem: jasmine.createSpy('getProgrammeProjectFundersGroupUUIDByItem'),
     getProgrammeMembersGroupUUIDByItem: jasmine.createSpy('getProgrammeMembersGroupUUIDByItem')
   });
 
@@ -64,12 +65,17 @@ describe('ProgrammeMembersPageComponent', () => {
     name: 'programme_fake-id_managers_group',
     uuid: 'gruop1uuid',
   });
+  const mockGroupFunders = Object.assign(new Group(), {
+    name: 'programme_fake-id_funders_group',
+    uuid: 'gruop2uuid',
+  });
   const mockGroupMembers = Object.assign(new Group(), {
     name: 'programme_fake-id_members_group',
-    uuid: 'gruop2uuid',
+    uuid: 'gruop3uuid',
   });
 
   const mockGroupManagersRD = createSuccessfulRemoteDataObject$(mockGroupManagers);
+  const mockGroupFundersRD = createSuccessfulRemoteDataObject$(mockGroupFunders);
   const mockGroupMembersRD = createSuccessfulRemoteDataObject$(mockGroupMembers);
 
   beforeEach(async () => {
@@ -106,8 +112,9 @@ describe('ProgrammeMembersPageComponent', () => {
       component = fixture.componentInstance;
       authorizationServiceMock.isAuthorized.and.returnValue(of(true));
       projectGroupServiceMock.getProgrammeManagersGroupUUIDByItem.and.returnValue(of(['gruop1uuid']));
-      projectGroupServiceMock.getProgrammeMembersGroupUUIDByItem.and.returnValue(of(['gruop2uuid']));
-      groupServiceMock.findById.and.returnValues(mockGroupManagersRD, mockGroupMembersRD);
+      projectGroupServiceMock.getProgrammeProjectFundersGroupUUIDByItem.and.returnValue(of(['gruop2uuid']));
+      projectGroupServiceMock.getProgrammeMembersGroupUUIDByItem.and.returnValue(of(['gruop3uuid']));
+      groupServiceMock.findById.and.returnValues(mockGroupManagersRD, mockGroupFundersRD, mockGroupMembersRD);
       fixture.detectChanges();
     });
 
@@ -116,10 +123,12 @@ describe('ProgrammeMembersPageComponent', () => {
     });
 
 
-    it('should show funders and members nav tabs', fakeAsync(() => {
+    it('should show all nav tabs', fakeAsync(() => {
       flush();
+      const managersTab: DebugElement = fixture.debugElement.query(By.css('a[data-test="managers"]'));
       const fundersTab: DebugElement = fixture.debugElement.query(By.css('a[data-test="funders"]'));
       const membersTab: DebugElement = fixture.debugElement.query(By.css('a[data-test="members"]'));
+      expect(managersTab).toBeTruthy();
       expect(fundersTab).toBeTruthy();
       expect(membersTab).toBeTruthy();
     }));
@@ -131,8 +140,9 @@ describe('ProgrammeMembersPageComponent', () => {
       component = fixture.componentInstance;
       authorizationServiceMock.isAuthorized.and.returnValue(of(false));
       projectGroupServiceMock.getProgrammeManagersGroupUUIDByItem.and.returnValue(of(['gruop1uuid']));
-      projectGroupServiceMock.getProgrammeMembersGroupUUIDByItem.and.returnValue(of(['gruop2uuid']));
-      groupServiceMock.findById.and.returnValue(mockGroupMembersRD);
+      projectGroupServiceMock.getProgrammeProjectFundersGroupUUIDByItem.and.returnValue(of(['gruop2uuid']));
+      projectGroupServiceMock.getProgrammeMembersGroupUUIDByItem.and.returnValue(of(['gruop3uuid']));
+      groupServiceMock.findById.and.returnValues(mockGroupFundersRD, mockGroupMembersRD);
       fixture.detectChanges();
     });
 
@@ -141,11 +151,13 @@ describe('ProgrammeMembersPageComponent', () => {
     });
 
 
-    it('should show funders and members nav tabs', fakeAsync(() => {
+    it('should show only funders and members nav tabs', fakeAsync(() => {
       flush();
+      const managersTab: DebugElement = fixture.debugElement.query(By.css('a[data-test="managers"]'));
       const fundersTab: DebugElement = fixture.debugElement.query(By.css('a[data-test="funders"]'));
       const membersTab: DebugElement = fixture.debugElement.query(By.css('a[data-test="members"]'));
-      expect(fundersTab).toBeFalsy();
+      expect(managersTab).toBeFalsy();
+      expect(fundersTab).toBeTruthy();
       expect(membersTab).toBeTruthy();
     }));
   });

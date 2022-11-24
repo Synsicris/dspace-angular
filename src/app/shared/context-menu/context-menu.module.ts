@@ -33,9 +33,6 @@ import { CreateProjectMenuComponent } from './create-project/create-project-menu
 import { ViewProjectItemsMenuComponent } from './view-project-items/view-project-items-menu.component';
 import { ManageProjectMembersMenuComponent } from './manage-project-members/manage-project-members-menu.component';
 import { ManageProjectVersionsMenuComponent } from './manage-project-versions/manage-project-versions-menu.component';
-import {
-  ManageProjectFundersGroupMenuComponent
-} from './manage-project-funders-group/manage-project-funders-group-menu.component';
 import { ManageProgrammeGroupMenuComponent } from './manage-programme-group/manage-programme-group-menu.component';
 
 const COMPONENTS = [
@@ -63,7 +60,6 @@ const COMPONENTS = [
   ManageProjectMembersMenuComponent,
   EditItemPermissionsMenuComponent,
   ManageProjectVersionsMenuComponent,
-  ManageProjectFundersGroupMenuComponent,
   ManageProgrammeGroupMenuComponent,
 ];
 
@@ -90,7 +86,6 @@ const ENTRY_COMPONENTS = [
   ManageProjectMembersMenuComponent,
   EditItemPermissionsMenuComponent,
   ManageProjectVersionsMenuComponent,
-  ManageProjectFundersGroupMenuComponent,
   ManageProgrammeGroupMenuComponent,
 ];
 
