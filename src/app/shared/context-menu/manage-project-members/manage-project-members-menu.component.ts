@@ -10,11 +10,10 @@ import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model'
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
-import { ProjectGroupService } from '../../../core/project/project-group.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { FUNDING_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
+import { FUNDING_ENTITY, PROJECT_ENTITY } from '../../../core/project/project-data.service';
 import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 
 /**
@@ -49,8 +48,6 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
    * @param {NgbModal} modalService
-   * @param {ProjectGroupService} projectGroupService
-   * @param {ProjectDataService} projectService
    * @param {Router} router
    * @param {ActivatedRoute} aroute
    */
@@ -59,8 +56,6 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: any,
     protected authorizationService: AuthorizationDataService,
     protected modalService: NgbModal,
-    protected projectGroupService: ProjectGroupService,
-    protected projectService: ProjectDataService,
     protected router: Router,
     protected aroute: ActivatedRoute,
   ) {
@@ -68,7 +63,6 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
   }
 
   ngOnInit(): void {
-
     this.aroute.data.pipe(
       map((data) => data.isVersionOfAnItem),
       filter((isVersionOfAnItem) => isVersionOfAnItem === true),

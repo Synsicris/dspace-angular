@@ -7,7 +7,7 @@
 
 <div ngbDropdown class="d-inline-block">
   <button class="btn btn-primary {{btnClass}}" id="versionList" ngbDropdownToggle
-    [disabled]="(versionList$ | async)?.length === 0 || disabled">
+    [disabled]="(versionList$ | async)?.length === 0 || disabled" data-test="version-disabled">
     {{'item.version.list.dropdown-text' | translate}}
   </button>
   <div ngbDropdownMenu aria-labelledby="versionList">

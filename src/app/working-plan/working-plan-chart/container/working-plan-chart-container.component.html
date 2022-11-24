@@ -90,14 +90,14 @@
             <span class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type
               + '.listelement.badge') | translate}}</span>
             <br>
-            <button *ngIf="canAddChildStep(node)" class="btn btn-xs btn-link p-0"
+            <button *ngIf="canAddChildStep(node)" class="btn btn-xs btn-link p-0" data-test="add-child-step"
               title="{{'working-plan.chart.button.add' | translate}}"
               [disabled]="(compareMode | async) || (isVersionOfAnItem$ | async)" (click)="addChildStep(node)">
               <i class="fas fa-plus-circle"></i>
             </button>
           </div>
           <div class="mr-05 d-flex flex-column justify-content-between">
-            <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end"
+            <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end" data-test="remove-step"
               title="{{'working-plan.chart.button.remove' | translate}}" [class.ml-1]="node.level !== 0"
               [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || (isVersionOfAnItem$ | async)"
               (click)="deleteStep(node); $event.stopPropagation()">
