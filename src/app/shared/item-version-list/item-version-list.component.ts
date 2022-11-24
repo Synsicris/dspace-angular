@@ -37,7 +37,7 @@ export class ItemVersionListComponent implements OnInit {
   @Input() btnClass = 'btn-sm';
 
   /**
-   * Class of btn, default sm
+   * The attribute to display dropdown disabled
    */
   @Input() disabled = false;
 

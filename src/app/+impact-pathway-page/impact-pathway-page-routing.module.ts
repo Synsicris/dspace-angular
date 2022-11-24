@@ -45,6 +45,7 @@ import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.reso
             resolve: {
               impactPathwayItem: ProjectItemPageResolver,
               projectCommunity: ProjectCommunityByItemResolver,
+              isVersionOfAnItem: VersionOfAnItemResolver,
               objectivesItem: ProjectObjectivesItemResolver
             },
           },
