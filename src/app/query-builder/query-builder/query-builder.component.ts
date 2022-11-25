@@ -30,7 +30,7 @@ export class QueryBuilderComponent {
    *
    * @memberof QueryBuilderComponent
    */
-  @Input() firstDefaultFilter = environment.projects.projectsFunder.entityTypeFilterName;
+  @Input() firstDefaultFilter = environment.projects.projectsBrowse.entityTypeFilterName;
 
   /**
    * Emits the value of the query to upper level

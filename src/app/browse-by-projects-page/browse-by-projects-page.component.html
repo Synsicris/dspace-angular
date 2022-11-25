@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="initialized$ | async">
   <ngb-accordion #accordionRef activeIds="step1">
     <ngb-panel id="step1">
       <ng-template ngbPanelTitle>

@@ -1,8 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { combineLatest } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { SearchConfigurationService } from '../core/shared/search/search-configuration.service';
 import { SEARCH_CONFIG_SERVICE } from '../my-dspace-page/my-dspace-page.component';
 import { environment } from '../../environments/environment';
+import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../core/data/feature-authorization/feature-id';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Component({
   selector: 'ds-browse-by-projects-page',
@@ -15,7 +21,9 @@ import { environment } from '../../environments/environment';
     },
   ],
 })
-export class BrowseByProjectsPageComponent {
+export class BrowseByProjectsPageComponent implements OnInit {
+  initialized$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   /**
    * First tab checker
    * Set as default opened tab
@@ -35,21 +43,21 @@ export class BrowseByProjectsPageComponent {
    *
    * @memberof BrowseByProjectsPageComponent
    */
-  queryBuilderConfigurationName = environment.projects.projectsFunder.searchQueryConfigurationName;
+  queryBuilderConfigurationName: string;
 
   /**
    * Configuration name
    *
    * @memberof BrowseByProjectsPageComponent
    */
-  projectsConfigurationName = environment.projects.projectsFunder.searchProjectConfigurationName;
+  projectsConfigurationName: string;
 
   /**
    * Configuration name
    *
    * @memberof BrowseByProjectsPageComponent
    */
-  projectItemsConfigurationName = environment.projects.projectsFunder.searchProjectItemsConfigurationName;
+  projectItemsConfigurationName: string;
 
   /**
    * Composed query
@@ -58,6 +66,34 @@ export class BrowseByProjectsPageComponent {
    * @memberof BrowseByProjectsPageComponent
    */
   searchQuery: string;
+
+  constructor(private authorizationService: AuthorizationDataService) {
+  }
+
+  ngOnInit(): void {
+    const isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
+    const isFunderOrganizationalManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager);
+    const isFunderProjectManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderProjectManager);
+    combineLatest([
+      isAdmin$,
+      isFunderOrganizationalManager$,
+      isFunderProjectManager$
+    ]).pipe(
+      take(1)
+    ).subscribe(([isAdmin, isFunderOrganizationalManager, isFunderProjectManager]) => {
+      if (isAdmin || isFunderOrganizationalManager || isFunderProjectManager) {
+        this.queryBuilderConfigurationName = environment.projects.projectsBrowse.adminAndFunders.searchQueryConfigurationName;
+        this.projectsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.searchProjectConfigurationName;
+        this.projectItemsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.searchProjectItemsConfigurationName;
+      } else {
+        this.queryBuilderConfigurationName = environment.projects.projectsBrowse.members.searchQueryConfigurationName;
+        this.projectsConfigurationName = environment.projects.projectsBrowse.members.searchProjectConfigurationName;
+        this.projectItemsConfigurationName = environment.projects.projectsBrowse.members.searchProjectItemsConfigurationName;
+      }
+
+      this.initialized$.next(true);
+    });
+  }
 
   /**
    * @param tabNr number of the selected tab
@@ -85,6 +121,8 @@ export class BrowseByProjectsPageComponent {
   getSearchQuery(query: string) {
     this.searchQuery = query;
   }
+
+
 }
 
 export enum CollapsibleTabs {
