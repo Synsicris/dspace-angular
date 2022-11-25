@@ -1,7 +1,7 @@
 import { Component, Injector } from '@angular/core';
 
-import { forkJoin, merge, Observable, Subject } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { combineLatest, Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { slideMobileNav } from '../shared/animations/slide';
 import { MenuComponent } from '../shared/menu/menu.component';
@@ -55,174 +55,111 @@ export class NavbarComponent extends MenuComponent {
    * Initialize all menu sections and items for this menu
    */
   createMenu() {
-    const isAdmin$ = this.checkAuthorization(FeatureID.AdministratorOf);
+    const isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(take(1));
     const menuList: any[] = [];
 
-    /* Communities & Collections tree */
-    const CommunityCollectionMenuItem = {
-      id: `browse_global_communities_and_collections`,
-      active: false,
-      visible: environment.layout.navbar.showCommunityCollection,
-      index: 0,
-      model: {
-        type: MenuItemType.LINK,
-        text: `menu.section.communities_and_collections`,
-        link: `/community-list`
-      } as LinkMenuItemModel
-    };
-
-    if (environment.layout.navbar.showCommunityCollection) {
-      menuList.push(CommunityCollectionMenuItem);
-    }
-
-    const isFundingOrAdmin$ = new Subject<boolean>();
     const findAllVisible$ = this.sectionDataService.findVisibleSections().pipe(getFirstSucceededRemoteListPayload());
-    forkJoin([isFundingOrAdmin$, findAllVisible$])
-      .subscribe(([isFundingOrAdmin, sections]: [boolean, Section[]]) => {
-        if (isFundingOrAdmin) {
-          menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
-            shouldPersistOnRouteChange: true
-          })));
+    combineLatest([isAdmin$, findAllVisible$]).subscribe(([isAdmin, sections]: [boolean, Section[]]) => {
+      if (isAdmin) {
 
-          sections.filter((section) => section.id !== 'site')
-            .forEach((section) => {
-              const menuSection = {
-                id: `explore_${section.id}`,
-                active: false,
-                visible: true,
-                model: {
-                  type: MenuItemType.LINK,
-                  text: `menu.section.explore_${section.id}`,
-                  link: `/explore/${section.id}`
-                } as LinkMenuItemModel
-              };
-              this.menuService.addSection(this.menuID, Object.assign(menuSection, {
-                shouldPersistOnRouteChange: true
-              }));
-            });
+        /* Communities & Collections tree */
+        const CommunityCollectionMenuItem = {
+          id: `browse_global_communities_and_collections`,
+          active: false,
+          visible: environment.layout.navbar.showCommunityCollection,
+          index: 0,
+          model: {
+            type: MenuItemType.LINK,
+            text: `menu.section.communities_and_collections`,
+            link: `/community-list`
+          } as LinkMenuItemModel
+        };
+
+        if (environment.layout.navbar.showCommunityCollection) {
+          menuList.push(CommunityCollectionMenuItem);
         }
-      });
 
-    merge(
-      isAdmin$,
-      this.isCurrentUserFundingMember(),
-      this.isCurrentUserFunderOfProject(),
-      this.isCurrentUserFundingCoordinator(),
-      this.isCurrentUserFunderOrganizationalManager()
-    )
-      .pipe(
-        filter(Boolean),
-        take(1)
-      )
-      .subscribe(
-        (fundingOrAdmin: boolean) => {
-          menuList.push({
-            id: 'browse_by_projects',
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.browse_by_projects',
-              link: '/browse/projects'
-            } as LinkMenuItemModel
-          });
-          isFundingOrAdmin$.next(fundingOrAdmin);
-          isFundingOrAdmin$.complete();
-        },
-        () => {
-          isFundingOrAdmin$.next(false);
-          isFundingOrAdmin$.complete();
-        },
-        () => {
-          if (!isFundingOrAdmin$.isStopped) {
-            isFundingOrAdmin$.next(false);
-            isFundingOrAdmin$.complete();
-          }
-        }
-      );
-
-    isAdmin$.subscribe(((isAdmin) => {
-
-        if (isAdmin) {
-
-          menuList.push(
-            {
-              id: 'statistics',
+        sections.filter((section) => section.id !== 'site')
+          .forEach((section) => {
+            const menuSection = {
+              id: `explore_${section.id}`,
               active: false,
               visible: true,
-              index: 1,
               model: {
-                type: MenuItemType.TEXT,
-                text: 'menu.section.statistics'
-              } as TextMenuItemModel,
-            }
-          );
+                type: MenuItemType.LINK,
+                text: `menu.section.explore_${section.id}`,
+                link: `/explore/${section.id}`
+              } as LinkMenuItemModel
+            };
 
-          menuList.push({
-            id: 'statistics_site',
-            parentID: 'statistics',
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.statistics.site',
-              link: '/statistics'
-            } as LinkMenuItemModel
-          });
+            menuList.push(menuSection);
 
-          menuList.push({
-            id: 'statistics_login',
-            parentID: 'statistics',
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.statistics.login',
-              link: '/statistics/login'
-            } as LinkMenuItemModel
-          });
+            menuList.push(
+              {
+                id: 'statistics',
+                active: false,
+                visible: true,
+                index: 1,
+                model: {
+                  type: MenuItemType.TEXT,
+                  text: 'menu.section.statistics'
+                } as TextMenuItemModel,
+              }
+            );
 
-          menuList.push({
-            id: 'statistics_workflow',
-            parentID: 'statistics',
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.statistics.workflow',
-              link: '/statistics/workflow'
-            } as LinkMenuItemModel
+            menuList.push({
+              id: 'statistics_site',
+              parentID: 'statistics',
+              active: false,
+              visible: true,
+              model: {
+                type: MenuItemType.LINK,
+                text: 'menu.section.statistics.site',
+                link: '/statistics'
+              } as LinkMenuItemModel
+            });
+
+            menuList.push({
+              id: 'statistics_login',
+              parentID: 'statistics',
+              active: false,
+              visible: true,
+              model: {
+                type: MenuItemType.LINK,
+                text: 'menu.section.statistics.login',
+                link: '/statistics/login'
+              } as LinkMenuItemModel
+            });
+
+            menuList.push({
+              id: 'statistics_workflow',
+              parentID: 'statistics',
+              active: false,
+              visible: true,
+              model: {
+                type: MenuItemType.LINK,
+                text: 'menu.section.statistics.workflow',
+                link: '/statistics/workflow'
+              } as LinkMenuItemModel
+            });
           });
-        }
       }
-    ));
 
-  }
+      menuList.push({
+        id: 'browse_by_projects',
+        active: false,
+        visible: true,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.browse_by_projects',
+          link: '/browse/projects'
+        } as LinkMenuItemModel
+      });
 
-  private checkAuthorization(featureId: FeatureID): Observable<boolean> {
-    return this.authorizationService.isAuthorized(featureId)
-      .pipe(
-        take(1)
-      );
-  }
+      menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
+        shouldPersistOnRouteChange: true
+      })));
+    });
 
-  isCurrentUserAdmin(): Observable<boolean> {
-    return this.checkAuthorization(FeatureID.AdministratorOf);
-  }
-
-  isCurrentUserFundingMember(): Observable<boolean> {
-    return this.checkAuthorization(FeatureID.isMemberOfFunding);
-  }
-
-  isCurrentUserFundingCoordinator(): Observable<boolean> {
-    return this.checkAuthorization(FeatureID.isCoordinatorOfFunding);
-  }
-
-  isCurrentUserFunderOfProject(): Observable<boolean> {
-    return this.checkAuthorization(FeatureID.isFunderOfProject);
-  }
-
-  isCurrentUserFunderOrganizationalManager(): Observable<boolean> {
-    return this.checkAuthorization(FeatureID.isFunderOrganizationalManager);
   }
 }
