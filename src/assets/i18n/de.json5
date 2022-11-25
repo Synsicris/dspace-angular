@@ -3069,7 +3069,7 @@
   "exploitation-plan.description.title": "Angaben über [Bearbeiten] ergänzen",
 
   // "exploitation-plan.info.text": "Info text for the exploitation Plan",
-  "exploitation-plan.info.text": "<b>Worum es hier geht:</b><ul><li>Verwertung ist die Nutzung von Projektergebnissen.</li><li>Hier im Verwertungsplan legen Sie dar:<ul><li>wie Ergebnisse genutzt werden können,</li><li>ob Sie planen, die Ergebnisse selbst zu nutzen und/oder für Dritte nutzbar zu machen,</li><li>ob Schutzrechte angemeldet oder Ergebnisse frei verfügbar gemacht werden sollen,</li><li>durch welche Aktivitäten Sie zur Nutzung beitragen und</li><li>welche Vorteile und positiven Wirkungen für Sie und/oder Dritte durch die Nutzung erzielt werden können.</li></ul><li>Hintergrund des Verwertungsplans sind rechtliche Vorschriften: als Zuwendungsempfänger wird Ihnen die Urheberschaft der Ergebnisse zuerkannt, Sie müssen jedoch dafür Sorge tragen, dass die Ergebnisse genutzt, also „verwertet“ werden können.<ul><li>Welche konkreten Verwertungsrechte und/oder -pflichten für Sie gelten, kann unterschiedlich sein. Beachten Sie dazu die Informationen Ihres Fördermittelgebers (z. B. in der Bekanntmachung oder im Zuwendungsbescheid).</ul><li>Wenn Sie einen Verwertungsplan erstellen müssen, ist dieser ein wichtiger Teil des Antrags und muss jedes Jahr (mit dem Zwischenbericht) aktualisiert und weiter konkretisiert werden.</li></ul><p><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/dede-project-details-ep-ephelp.html\"target=_blank\">Mehr Informationen zum Verwertungsplan</a></p><b>Zusammenhang von Verwertungsplan und Impact Pathway:</b><ul><li>Im Impact Pathway und in der Verwertungsplanung können die gleichen Einträge verwendet werden, um die Nutzung der Ergebnisse und die Wirkung des Projektes etc. darzulegen.</li><li>Der Impact Pathway erfolgt für den Verbund und gibt einen Überblick zur Wirkungsplanung. Dagegen wird der <b>Verwertungsplan separat von jedem Zuwendungsempfänger (Projekt)</b> erstellt und ist damit spezifischer.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-proj.html\"target=_blank\">Verbund und Projekt unterscheiden</a></br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-structure.html\"target=_blank\">Zusammenhänge zwischen Impact Pathway, Arbeitsplan und Verwertungsplan</a></li><li>Im Verwertungsplan können Sie Inhalte eintragen, die Sie nicht mit den anderen Projektnehmern/Projekten im Verbund teilen. Stellen Sie in diesem Fall das Projekt auf „geschlossen“.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-permissions.html\"target=_blank\">Bearbeitungsrechte festlegen</a></li></ul><b>Tipps zur Arbeitsweise:</b><ul><li>Der Verwertungsplan ist in vier Aspekte unterteilt. Grundsätzlich sind alle <b>4 Aspekte</b> zu bearbeiten. Je nach Thema des Projektes und Arbeitsbereich Ihrer Organisation können jedoch Prioritäten gesetzt werden.</li><li>Zu jedem Aspekt können Sie neue oder vorhandene Einträge hinzufügen und in einem Textfeld weiteres erläutern.</li> <li>Erfassen Sie möglichst viele Informationen in einzelnen Einträgen, da Sie dann leichter an anderen Stellen des Monitoring-Tools verwendet werden können.</li><li>Wenn Sie vorhandene, gemeinsame Einträge verändern, berücksichtigen Sie, dass diese auch an anderen Stellen des Monitoring-Tools verwendet werden.</li><li>Lesen Sie zunächst jeden Hilfetext, um sich einen Überblick über die vier Aspekte zu verschaffen.</li></ul>",
+  "exploitation-plan.info.text": "<b>Worum es hier geht:</b><ul><li>Verwertung ist die Nutzung von Projektergebnissen.</li><li>Hier im Verwertungsplan legen Sie dar:<ul><li>wie Ergebnisse genutzt werden können,</li><li>ob Sie planen, die Ergebnisse selbst zu nutzen und/oder für Dritte nutzbar zu machen,</li><li>ob Schutzrechte angemeldet oder Ergebnisse frei verfügbar gemacht werden sollen,</li><li>durch welche Aktivitäten Sie zur Nutzung beitragen und</li><li>welche Vorteile und positiven Wirkungen für Sie und/oder Dritte durch die Nutzung erzielt werden können.</li></ul><li>Hintergrund des Verwertungsplans sind rechtliche Vorschriften: als Zuwendungsempfänger wird Ihnen die Urheberschaft der Ergebnisse zuerkannt, Sie müssen jedoch dafür Sorge tragen, dass die Ergebnisse genutzt, also „verwertet“ werden können.<ul><li>Welche konkreten Verwertungsrechte und/oder -pflichten für Sie gelten, kann unterschiedlich sein. Beachten Sie dazu die Informationen Ihres Fördermittelgebers (z. B. in der Bekanntmachung oder im Zuwendungsbescheid).</ul><li>Wenn Sie einen Verwertungsplan erstellen müssen, ist dieser ein wichtiger Teil des Antrags und muss jedes Jahr (mit dem Zwischenbericht) aktualisiert und weiter konkretisiert werden.</li></ul><p><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-ep-epabout.php\"target=_blank\">Mehr Informationen zum Verwertungsplan</a></p><b>Zusammenhang von Verwertungsplan und Impact Pathway:</b><ul><li>Im Impact Pathway und in der Verwertungsplanung können die gleichen Einträge verwendet werden, um die Nutzung der Ergebnisse und die Wirkung des Projektes etc. darzulegen.</li><li>Der Impact Pathway erfolgt für den Verbund und gibt einen Überblick zur Wirkungsplanung. Dagegen wird der <b>Verwertungsplan separat von jedem Zuwendungsempfänger (Projekt)</b> erstellt und ist damit spezifischer.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-proj.html\"target=_blank\">Verbund und Projekt unterscheiden</a></br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-structure.html\"target=_blank\">Zusammenhänge zwischen Impact Pathway, Arbeitsplan und Verwertungsplan</a></li><li>Im Verwertungsplan können Sie Inhalte eintragen, die Sie nicht mit den anderen Projektnehmern/Projekten im Verbund teilen. Stellen Sie in diesem Fall das Projekt auf „geschlossen“.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-permissions.html\"target=_blank\">Bearbeitungsrechte festlegen</a></li></ul><b>Tipps zur Arbeitsweise:</b><ul><li>Der Verwertungsplan ist in vier Aspekte unterteilt. Grundsätzlich sind alle <b>4 Aspekte</b> zu bearbeiten. Je nach Thema des Projektes und Arbeitsbereich Ihrer Organisation können jedoch Prioritäten gesetzt werden.</li><li>Zu jedem Aspekt können Sie neue oder vorhandene Einträge hinzufügen und in einem Textfeld weiteres erläutern.</li> <li>Erfassen Sie möglichst viele Informationen in einzelnen Einträgen, da Sie dann leichter an anderen Stellen des Monitoring-Tools verwendet werden können.</li><li>Wenn Sie vorhandene, gemeinsame Einträge verändern, berücksichtigen Sie, dass diese auch an anderen Stellen des Monitoring-Tools verwendet werden.</li><li>Lesen Sie zunächst jeden Hilfetext, um sich einen Überblick über die vier Aspekte zu verschaffen.</li></ul>",
 
   // "exploitation-plan.page.title": "Exploitation Plan",
   "exploitation-plan.page.title": "Verwertungsplan",
@@ -7659,7 +7659,7 @@
   "subproject.create.name.placeholder": "Organisationsname - Projekt-Akronym und Nr.",
 
   // "subproject.create.info": "Info",
-  "subproject.create.info": "<b>Schritt 1. Benennen Sie Ihr Projekt mit dem Namen oder Akronym Ihrer Organisation und dem Projekt-Akronym und nummerieren Sie es.</b></br></br><b>Schritt 2. Wählen Sie die Bearbeitungsrechte aus.</b></br></br>Mit den Bearbeitungsrechten legen Sie fest:<ul><li>Wer in Ihre Projekt-Seite navigieren, dort Aktionen durchführen darf und den Verwertungsplan einsehen kann</li><li>Wer Einträge bearbeiten darf</li></ul><b>Wichtige Hinweise:</b><ul><li>Unanhängig von den Bearbeitungsrechten sind Einträge und deren Inhalte für alle Mitglieder des Verbundes sichtbar.</li><li>Die Bearbeitungsrechte einzelner Einträge lassen sich ändern (freigeben oder einschränken).</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-permissions.html\"target=_blank\">Mehr Informationen zu Bearbeitungsrechten</a></li></ul>",
+  "subproject.create.info": "<i><b>1. Benennen Sie Ihr Projekt mit dem Namen oder Akronym Ihrer Organisation und dem Projekt-Akronym sowie der Teilprojekt-Nummer.</br></br>2. Wählen Sie die Bearbeitungsrechte aus.</i></b></br>Mit den Bearbeitungsrechten legen Sie als Koordinator:in fest, wie offen der Zugang zum Arbeitsbereich ihres Projektes ist und ob die Bearbeitungsrechte von Einträgen per Voreinstellung eingeschränkt werden oder nicht.</br></br><b>A: Unbeschränkte Bearbeitungsrechte für alle Mitglieder des Verbundes</b><ul><li>Alle Mitglieder des Verbundes können im Arbeitsbereich Ihres Projektes Aktionen durchführen und den Verwertungsplan einsehen.</li><li>Einträge, die von Mitgliedern Ihres Projektes erstellt werden, sind standardmäßig für alle Mitglieder des Verbundes editierbar. Diese Standardeinstellung lässt sich für jeden einzelnen Eintrag verändern.</li></ul><b>B: Bearbeitungsrechte beschränkt auf Mitglieder des Projektes</b><ul><li>Nur Mitglieder Ihres Teilprojektes können im Arbeitsbereich Ihres Projektes Aktionen durchführen und den Verwertungsplan einsehen.</li><li>Einträge, die von Mitgliedern Ihres Projektes erstellt werden, sind standardmäßig nur für diese editierbar. Diese Standardeinstellung lässt sich für jeden einzelnen Eintrag verändern.</li></ul></br>Lesen Sie bei Unsicherheiten die Hilfeseite, da die Auswahl von A oder B für ein Projekt einmalig und unveränderlich ist.</br>Wenn Sie im <b>Verbund</b> einen <b>gemeinsamen Verwertungsplan</b> erstellen, wählen Sie für das koordinierende Projekt die Einstellung <b>A: Unbeschränkte Bearbeitungsrechte für alle Mitglieder des Verbundes</b> und erstellen dort den Verwertungsplan.</b></br></br><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-permissions.php\"target=_blank\">Bearbeitungsrechte einstellen</a></li></ul>",
 
   // "project.create.success": "The new project has been generated successfully.",
   // TODO New key - Add a translation
@@ -7691,7 +7691,7 @@
 
   // "project.manage.members.members-group": "Invitation and Management of project members",
   // TODO Source message changed - Revise the translation
-  "project.manage.members.members-group": "Einladung und Verwaltung Projektmitarbeitende",
+  "project.manage.members.members-group": "Einladung und Verwaltung aller Mitlgieder im Verbund",
 
   // "project.manage.members-list.head": "Manage group",
   // TODO New key - Add a translation
@@ -7979,10 +7979,6 @@
   // "project-overview.page.subproject.card.title": "Your Subprojects",
   // TODO New key - Add a translation
   "project-overview.page.subproject.card.title": "Your Subprojects",
-
-  // "project-overview.page.subproject.create.btn": "Create new Subproject",
-  // TODO New key - Add a translation
-  "project-overview.page.subproject.create.btn": "Neues Projekt anlegen",
 
   // "project-overview.page.subproject.none-available": "No subproject available",
   // TODO New key - Add a translation
@@ -9199,9 +9195,6 @@
 
   // "search.filters.entityType.physical_objects": "Object, material",
   "search.filters.entityType.physical_objects": "Objekt, Material",
-
-  // "search.filters.entityType.pot_societalimpact": "Expected societal impact",
-  "search.filters.entityType.pot_societalimpact": "Erwartete gesellschaftliche Wirkung (Var. x)",
 
   // "search.filters.entityType.proj_objectives": "Project objective",
   "search.filters.entityType.proj_objectives": "Wissenschaftlich-technisches Arbeitsziel",
@@ -10990,21 +10983,14 @@
   "submission.sections.submit.progressbar.describe.physical_objects": "#1 Gegenstand / Material beschreiben",
 
   // "submission.sections.submit.progressbar.describe.physical_objects.info": "<i>Please record here if objects or materials are created in the project that serve the transfer of knowledge or can be used by third parties for research or teaching.</i></br>Do not record any kind of publication (e.g. text, image, sound or software) here. In case of trial and demonstration sites that can be visited, please use the \"Events\" section.",
-  "submission.sections.submit.progressbar.describe.physical_objects.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Projektverlauf.</br></br><i><b>Erfassen Sie hier bitte einen Gegenstand oder ein Material (physisches Objekt), das im Projekt erstellt wird und nach Projektende von anderen weitergenutzt werden kann.</i></b></br></br><b>Wichtige Hinweise:</b><ul><li>Text-, Bild- und Tondokumente sowie Software sind im Bereich <b>Veröffentlichung</b> zu erfassen.</li><li>Versuchs- und Demonstrationsstandorte, die besucht werden können, sind im Bereich <b>Veranstaltung</b> zu dokumentieren.</ul></li>",
+  "submission.sections.submit.progressbar.describe.physical_objects.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br><i><b>Erfassen Sie hier bitte einen Gegenstand, Material oder Objekt, das von anderen weitergenutzt werden kann.</b></i></br></br><b>Wichtige Hinweise:</b><ul><li>Alle Arten von Text-, Bild- und Tondokumenten sowie  Software sind in der Kategorie <b>Veröffentlichung</b> zu erfassen.</li><li>Versuchs- und Demonstrationsstandorte für Besichtigungen sind in der Kategorie <b>Veranstaltung</b> zu dokumentieren.</li></ul>",
 
   // "submission.sections.submit.progressbar.describe.physical_objects_result": "#2 Use and accessibilityl for third parties",
   // TODO Source message changed - Revise the translation
   "submission.sections.submit.progressbar.describe.physical_objects_result": "#1 Verwendung und Zugänglichkeit für Dritte angeben",
 
   // "submission.sections.submit.progressbar.describe.physical_objects_result.info": "<i>Please add here in which form the object can be used by third parties and whom interested parties can contact.</i></br>With the information on the possible uses, you contribute to the subsequent use of your project work.",
-  "submission.sections.submit.progressbar.describe.physical_objects_result.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Projektverlauf.</br></br><i><b>Wählen Sie bitte aus, für welche Zwecke das Objekt von Dritten verwendet werden kann, und geben Sie einen Kontakt für Anfragen an.</i></b>",
-
-  // "submission.sections.submit.progressbar.describe.pot_societalimpact": "#1 Expected societal impact",
-  // TODO Source message changed - Revise the translation
-  "submission.sections.submit.progressbar.describe.pot_societalimpact": "#1 Erwartete gesellschaftliche Wirkung erfassen",
-
-  // "submission.sections.submit.progressbar.describe.pot_societalimpact.info": "The focus is on describing which ecological, economic or social-cultural effects can be associated with an application of the project results. By documenting possible positive as well as negative impacts, you demonstrate the awareness of side effects of your research work and contribute to orienting further innovation processes towards positive impacts and the reduction of side effects.",
-  "submission.sections.submit.progressbar.describe.pot_societalimpact.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Projektverlauf.</br></br>Hier wird erfasst, welche positiven und negativen gesellschaftlichen Wirkungen mit einer Anwendung der Projektergebnisse verbunden sein können.</br></br><i><i>Bitte beschreiben Sie hier eine erwartete gesellschaftliche Wirkung, zu der das Projekt beiträgt. Legen Sie für jede Wirkung, die im Impact Pathway angezeigt werden soll, einen eigenen Eintrag an. Alle Angaben können im Projektverlauf aktualisiert werden.</p>Tipp: Durch die Dokumentation sowohl positiver als auch negativer Wirkungen unterstreichen Sie die verantwortungsvolle Arbeitsweise im Projekt.</i>",
+  "submission.sections.submit.progressbar.describe.physical_objects_result.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br><i><b>Wählen Sie bitte aus, für welche Zwecke das Objekt von Dritten verwendet werden kann und geben Sie einen Kontakt für Anfragen an.</i></b>",
 
   // "submission.sections.submit.progressbar.describe.proj_objectives": "#1 Project objective",
   // TODO Source message changed - Revise the translation
@@ -11104,7 +11090,7 @@
   "submission.sections.submit.progressbar.describe.targetgroups": "#1 Akteursgruppe beschreiben",
 
   // "submission.sections.submit.progressbar.describe.targetgroups.info": "Stakeholder groups in the project are, for example, users, stakeholders, multipliers, profiteers or affected persons. Groups of actors are recorded here in order to assign them to the interactions of the project. This makes it clear which groups of actors are to be involved in the project and in what way, or which groups are to be reached with results.</br>Stakeholder groups can be used to group together a larger number of organisations or persons from the same field of action without naming individual organisations.</br>Please record very closely cooperating actors who play a significant role in the development of project results as organisations.<p><i>Please characterise each stakeholder group in the project separately by filling in this detail page several times.</i></p>",
-  "submission.sections.submit.progressbar.describe.targetgroups.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Projektverlauf.</br></br></b></i><b>Wichtige Hinweise:</b><ul><li>Die hier eingetragenen Akteursgruppen, werden in den Einträgen zu Interaktionen und Anwendung als Auswahlliste bereitgestellt. Damit können Sie jeweils zuordnen, welche Akteursgruppen adressiert werden. Wirkt eine einzelne Organisation verbindlich und maßgeblich an der Erarbeitung von Projektergebnissen mit, erfassen Sie sie bitte als Unterauftragnehmer oder weiteren Kooperationspartner.</ul></li><b>Tipps:</b><ul><li><b>Wie viele Akteursgruppen sollte man anlegen?</b> – Alle Akteursgruppen die im Projekt eingebunden oder adressiert werden. Mindestens eine – bei mehr als 10 könnte es unübersichtlich werden.</li><li>Unterscheiden Sie die Akteursgruppen vor allem nach den jeweiligen Tätigkeitsbereichen.</li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-pages-actor.html\"target=_blank\">Weitere Hilfe</a></li>",
+  "submission.sections.submit.progressbar.describe.targetgroups.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Projektverlauf.</br></br></b></i><b>Wichtige Hinweise:</b><ul><li>Die hier eingetragenen Akteursgruppen, werden in den Einträgen zu Interaktionen und Anwendung als Auswahlliste bereitgestellt. Damit können Sie jeweils zuordnen, welche Akteursgruppen adressiert werden. Wirkt eine einzelne Organisation verbindlich und maßgeblich an der Erarbeitung von Projektergebnissen mit, erfassen Sie sie bitte als Unterauftragnehmer oder weiteren Kooperationspartner.</ul></li><b>Tipps:</b><ul><li><b>Wie viele Akteursgruppen sollte man anlegen?</b> Alle Akteursgruppen die im Projekt eingebunden oder adressiert werden. Mindestens eine – bei mehr als 10 könnte es unübersichtlich werden.</li><li>Unterscheiden Sie die Akteursgruppen vor allem nach den jeweiligen Tätigkeitsbereichen.</li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-pages-actor.html\"target=_blank\">Weitere Hilfe</a></li>",
 
   // "submission.sections.submit.progressbar.describe.tasks": "#1 Task",
   // TODO Source message changed - Revise the translation
@@ -12064,7 +12050,7 @@
 
   // "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class=\"fas fa-plus-circle\"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class=\"fas fa-plus-circle\"></i> button in the work package to assign new or existing work.</p></b></i>\",",
   // TODO Source message changed - Revise the translation
-  "working-plan.chart.page.description": "<b><i>Sie erstellen hier eine Arbeitsplanung mit Balkenplan und Meilensteinplanung für die Vorhabenbeschreibung.</br></br></b></i> </br></br><b><i>Strukturieren Sie die Arbeiten des Projektes mit Arbeitspaketen und den dazugehörigen Arbeiten. Legen Sie Zeiträume und Verantwortlichkeiten fest. Über Meilensteine definieren Sie wichtige Zeitpunkte im Projektverlauf.</br></br></b></i><b><i>Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> oberhalb des Arbeitsplans fügen Sie neue (oder vorhandene) Arbeitspakete und Meilensteine hinzu. Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> im Arbeitspaket ordnen Sie neue oder vorhandene Arbeiten hinzu.</br></br></b></i><b>Wichtige Hinweise:</b><ul><li>Arbeitspakete, die bereits im Impact Pathway oder anderer Stelle angelegt wurden, werden hier direkt angezeigt.</li><li><b>Meilensteine</b> können <b>auf Ebene von Arbeitspaketen</b> und auf <b>Ebene von Arbeiten</b> angelegt werden.</li> <li><b>Datumsangaben</b> und <b>verantwortliche Partner</b> sind Pflichtangaben für Arbeitspakete und Meilensteine. Bei den zugordneten Arbeiten sind die Angaben wahlweise.</li> <li>Über <i class=\"fas fa-unlink\"></i> können Sie Einträge aus dem Arbeitsplan entfernen. Diese können über <i class=\"fas fa-plus-circle\"></i> wieder hinzugefügt werden.</li> <li>Über <i class=\"fas fa-edit\"></i> gelangen Sie auf die <b>Detailseite</b> eines Eintrags.</ul></li><b>Darstellungsmöglichkeiten:</b><ul><li>Mit <i class=\"fas fa-grip-vertical\"></i> können Sie Einträge verschieben und damit individuell anordnen.</li> <li>Über <b>Sortiert nach</b> können Sie die Einträge unterhalb der Arbeitspakete nach verschiedenen Merkmalen sortieren. Die individuelle Anordnung lässt sich jederzeit wieder aufrufen.</li> <li>Mit <b>Monat, Quartal und Jahr</b> passen Sie die Darstellung der Zeitachse an.</ul></li>Im <b>Projektverlauf</b> aktualisieren Sie die Arbeitsplanung regelmäßig, z. B. für den Zwischenbericht oder genehmigte Änderungsanträge:</b><ul><li>Über <b>Status</b> zeigen Sie die <b>Veränderung im Vergleich zum Antrag</b> an.</li> <li>Über die Schaltfläche <b>Startdatum verschieben</b> können Sie den Zeitraum für alle Einträge anpassen, wenn der Projektbeginn von der Antragstellung abweicht.</li><li>Über die Schaltfläche <b>Versionen</b> können Sie den aktuellen Stand des Projektes mit einer älteren Version (z. B. der Antragsversion) vergleichen.</ul></li> <b>Tipps:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-structure.html\"target=_blank\"> Grundsätzliche Funktionsweisen zum Monitoring-Tool</a><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-wp-wphelp.html\"target=_blank\"> Hilfe zum Arbeitsplan</a></ul></li>",
+  "working-plan.chart.page.description": "<b><i>Sie erstellen hier eine Arbeitsplanung mit Balkenplan und Meilensteinplanung für die Vorhabenbeschreibung.</br></br></b></i> </br></br><b><i>Strukturieren Sie die Arbeiten des Projektes mit Arbeitspaketen und den dazugehörigen Arbeiten. Legen Sie Zeiträume und Verantwortlichkeiten fest. Über Meilensteine definieren Sie wichtige Zeitpunkte im Projektverlauf.</br></b></i><b><i>Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> oberhalb des Arbeitsplans fügen Sie neue (oder vorhandene) Arbeitspakete und Meilensteine hinzu. Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> im Arbeitspaket ordnen Sie neue oder vorhandene Arbeiten hinzu.</br></br></b></i><b>Wichtige Hinweise:</b><ul><li>Arbeitspakete, die bereits im Impact Pathway oder anderer Stelle angelegt wurden, werden hier direkt angezeigt.</li><li><b>Meilensteine</b> können <b>auf Ebene von Arbeitspaketen</b> und auf <b>Ebene von Arbeiten</b> angelegt werden.</li> <li><b>Datumsangaben</b> und <b>verantwortliche Partner</b> sind Pflichtangaben für Arbeitspakete und Meilensteine. Bei den zugordneten Arbeiten sind die Angaben wahlweise.</li> <li>Über <i class=\"fas fa-unlink\"></i> können Sie Einträge aus dem Arbeitsplan entfernen. Diese können über <i class=\"fas fa-plus-circle\"></i> wieder hinzugefügt werden.</li> <li>Über <i class=\"fas fa-edit\"></i> gelangen Sie auf die <b>Detailseite</b> eines Eintrags.</ul></li><b>Darstellungsmöglichkeiten:</b><ul><li>Mit <i class=\"fas fa-grip-vertical\"></i> können Sie Einträge verschieben und damit individuell anordnen.</li> <li>Über <b>Sortiert nach</b> können Sie die Einträge unterhalb der Arbeitspakete nach verschiedenen Merkmalen sortieren. Die individuelle Anordnung lässt sich jederzeit wieder aufrufen.</li> <li>Mit <b>Monat, Quartal und Jahr</b> passen Sie die Darstellung der Zeitachse an.</ul></li>Im <b>Projektverlauf</b> aktualisieren Sie die Arbeitsplanung regelmäßig, z. B. für den Zwischenbericht oder genehmigte Änderungsanträge:</b><ul><li>Über <b>Status</b> zeigen Sie die <b>Veränderung im Vergleich zum Antrag</b> an.</li> <li>Über die Schaltfläche <b>Startdatum verschieben</b> können Sie den Zeitraum für alle Einträge anpassen, wenn der Projektbeginn von der Antragstellung abweicht.</li><li>Über die Schaltfläche <b>Versionen</b> können Sie den aktuellen Stand des Projektes mit einer älteren Version (z. B. der Antragsversion) vergleichen.</ul></li> <b>Tipps:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-structure.html\"target=_blank\"> Grundsätzliche Funktionsweisen zum Monitoring-Tool</a><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-wp-wphelp.html\"target=_blank\"> Hilfe zum Arbeitsplan</a></ul></li>",
 
   // "working-plan.page.title": "Working plan",
   "working-plan.page.title": "Arbeitsplan",
@@ -12107,7 +12093,7 @@
 
   // "working-plan.task.search.header": "",
   // TODO New key - Add a translation
-  "working-plan.task.search.header": "</br></br><b><i>Klicken Sie die Einträge an, die Sie dem Arbeitspaket zuordnen wollen (Mehrfachauswahl möglich).Über die Filterfunktion und das Suchfeld und können Sie die Auswahl eingrenzen. Mit <i class=\"fas fa-edit\"></i> passen Sie die Anzahl der angezeigten Einträge an.</br></br></b></i>",
+  "working-plan.task.search.header": "<i><b>Klicken Sie die Einträge an, die Sie dem Arbeitspaket zuordnen wollen (Mehrfachauswahl möglich).</b></i></br>Über die Filterfunktion und das Suchfeld und können Sie die Auswahl eingrenzen.</br>Mit <i class=\"fas fa-edit\"></i> passen Sie die Anzahl der angezeigten Einträge an.",
 
   // "application.listelement.badge": "Application of a solution / change / innovation",
   // TODO Source message changed - Revise the translation
@@ -12153,16 +12139,9 @@
   // TODO Source message changed - Revise the translation
   "milestone.listelement.badge": "Meilenstein",
 
-  // "other.listelement.badge": "Others",
-  "other.listelement.badge": "Sonstiges",
-
   // "parentproject.listelement.badge": "Joint Project",
   // TODO New key - Add a translation
   "parentproject.listelement.badge": "Verbund",
-
-  // "pot_societalimpact.listelement.badge": "Expected societal impact",
-  // TODO Source message changed - Revise the translation
-  "pot_societalimpact.listelement.badge": "Erwartete gesellschaftliche Wirkung (Var. x)",
 
   // "process_event.listelement.badge": "Cooperation / Participation / Exchange process",
   // TODO Source message changed - Revise the translation
@@ -12410,10 +12389,6 @@
   // TODO Source message changed - Revise the translation
   "submission.sections.submit.progressbar.describe.projectpartners_import": "#1 Informationen zu Ihrer Organisationseinheit",
 
-  // "submission.sections.submit.progressbar.describe.subcontractors_orgunit": "#1 Subcontractor",
-  // TODO Source message changed - Revise the translation
-  "submission.sections.submit.progressbar.describe.subcontractors_orgunit": "#1 Unterauftragnehmer eintragen",
-
   // "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit": "#1 Cooperation partner",
   // TODO Source message changed - Revise the translation
   "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit": "#1 Kooperationspartner erfassen",
@@ -12465,10 +12440,6 @@
   // "team.listelement.badge": "Team member",
   // TODO Source message changed - Revise the translation
   "team.listelement.badge": "Teammitglied",
-
-  // "subcontractor.listelement.badge": "Subcontractor",
-  // TODO New key - Add a translation
-  "subcontractor.listelement.badge": "Unterauftragnehmer",
 
   // "Product.listelement.badge": "Research data",
   // TODO New key - Add a translation
@@ -12540,10 +12511,6 @@
 
   // "working-plan.task.create.head": "New item",
   "working-plan.task.create.head": "Eintrag hinzufügen über \"Neu anlegen\" oder \"Vorhandene auswählen\"",
-
-  // "subcontractors.listelement.badge": "Subcontractor",
-  // TODO Source message changed - Revise the translation
-  "subcontractors.listelement.badge": "Unterauftragnehmer",
 
   // "cooperationpartners.listelement.badge": "Cooperation partner",
   // TODO Source message changed - Revise the translation
@@ -12628,9 +12595,6 @@
   // "search.filters.entityType.physical_object": "Object /material",
   "search.filters.entityType.physical_object": "Gegenstand / Material",
 
-  // "search.filters.entityType.other": "Others",
-  "search.filters.entityType.other": "Sonstiges",
-
   // "search.filters.entityType.plan_publication": "Planned publications",
   "search.filters.entityType.plan_publication": "Geplante Veröffentlichungen",
 
@@ -12670,9 +12634,6 @@
 
   // "search.filters.entityType.programme": "Progamme",
   "search.filters.entityType.programme": "Förderprogramm",
-
-  // "search.filters.entityType.subcontractor": "Subcontractor",
-  "search.filters.entityType.subcontractor": "Unterauftragnehmer",
 
   // "search.filters.entityType.Product": "Research data",
   // TODO Source message changed - Revise the translation
@@ -12720,9 +12681,6 @@
   // TODO Source message changed - Revise the translation
   "layout.box.header.multiple_entities": "Beteiligte Organisationen",
 
-  // "layout.tab.header.subcontractor": "Subcontractors",
-  "layout.tab.header.subcontractor": "Unterauftragnehmer",
-
   // "layout.tab.header.exploitationplans": "Exploitation plan",
   "layout.tab.header.exploitationplans": "Verwertungsplan",
 
@@ -12732,14 +12690,6 @@
 
   // "layout.tab.header.Subprojects&Involved": "Subprojects & Involved",
   "layout.tab.header.Subprojects&Involved": "Projekte & Beteiligte",
-
-  // "layout.tab.header.proj&partners": "Subprojects & Involved",
-  // TODO Source message changed - Revise the translation
-  "layout.tab.header.proj&partners": "Projekte & Beteiligte",
-
-  // "layout.tab.header.subcontractors": "Subcontractors / Cooperation partners",
-  // TODO Source message changed - Revise the translation
-  "layout.tab.header.subcontractors": "Unterauftragnehmer / Kooperationspartner",
 
   // "layout.tab.header.cooperationpartners": "Cooperation partners",
   "layout.tab.header.cooperationpartners": "Kooperationspartner / Unterauftragnehmer",
@@ -12845,15 +12795,8 @@
   // "layout.tab.header.award": "Awards",
   "layout.tab.header.award": "Auszeichnungen",
 
-  // "layout.tab.header.pot_societalimpact": "Expected societal impacts",
-  "layout.tab.header.pot_societalimpact": "Erwartete gesellschaftliche Wirkungen (Var. x)",
-
   // "layout.tab.header.contribution_fundingprogramme": "Contributions to funding objectives",
   "layout.tab.header.contribution_fundingprogramme": "Beiträge zu Förderzielen",
-
-  // "layout.tab.header.other": "Others",
-  // TODO Source message changed - Revise the translation
-  "layout.tab.header.other": "Sonstiges",
 
   // "item-create.modal-launscher.btn": "Add item",
   "item-create.modal-launscher.btn": "Eintrag hinzufügen",
@@ -12883,10 +12826,6 @@
   // TODO Source message changed - Revise the translation
   "layout.box.header.projectpartner": "Projektpartner - Listenansicht",
 
-  // "layout.box.header.subcontractor": "Subproject - Subcontractors",
-  // TODO Source message changed - Revise the translation
-  "layout.box.header.subcontractor": "Unterauftragnehmer - Listenansicht",
-
   // "layout.box.header.exploitationplan": "Subproject - Exploitation plan",
   // TODO Source message changed - Revise the translation
   "layout.box.header.exploitationplan": "Verwertungsplan",
@@ -12913,9 +12852,6 @@
   // "layout.box.header.targetgroup": "Stakeholder groups",
   "layout.box.header.targetgroup": "Akteursgruppen - Listenansicht",
 
-  // "layout.box.header.Funding_m": "Funding",
-  "layout.box.header.Funding_m": "Fördermittel(geber)",
-
   // "layout.box.header.projectpartner_m": "Project partner",
   "layout.box.header.projectpartner_m": "Projektpartner",
 
@@ -12924,9 +12860,6 @@
 
   // "layout.box.header.Projektkoordination_m": "Project coordination",
   "layout.box.header.Projektkoordination_m": "Projektkoordination",
-
-  // "layout.box.header.subcontractor_m": "Subcontractor",
-  "layout.box.header.subcontractor_m": "Unterauftragnehmer",
 
   // "layout.box.header.cooperationpartner_m": "Coorperation partner",
   "layout.box.header.cooperationpartner_m": "Kooperationspartner",
@@ -13060,9 +12993,6 @@
   // "layout.box.header.award": "Awards",
   "layout.box.header.award": "Auszeichnungen - Listenansicht",
 
-  // "layout.box.header.pot_societalimpact": "Expected societal impacts",
-  "layout.box.header.pot_societalimpact": "Erwartete gesellschaftliche Wirkungen (Var. x) - Listenansicht",
-
   // "layout.box.header.contribution_fundingprogramme": "Contributions to funding objectives",
   "layout.box.header.contribution_fundingprogramme": "Beiträge zu Förderzielen - Listenansicht",
 
@@ -13089,9 +13019,6 @@
 
   // "layout.box.header.award_m": "Award",
   "layout.box.header.award_m": "Auszeichnung",
-
-  // "layout.box.header.pot_societalimpact_m": "Expected societal impact",
-  "layout.box.header.pot_societalimpact_m": "Erwartete gesellschaftliche Wirkung (Var. x)",
 
   // "layout.box.header.contribution_fundingprogramme_m": "Contribution to funding objectives",
   "layout.box.header.contribution_fundingprogramme_m": "Beitrag zu Förderzielen",
@@ -13502,69 +13429,6 @@
 
   // "layout.field.label.cooperationpartner.synsicris.personadmin.email": "Email",
   "layout.field.label.cooperationpartner.synsicris.personadmin.email": "E-Mail",
-
-  // "layout.field.label.subcontractor.dc.title": "Organisation",
-  "layout.field.label.subcontractor.dc.title": "Organisation",
-
-  // "layout.field.label.subcontractor.oairecerif.acronym": "Acronym or short name",
-  "layout.field.label.subcontractor.oairecerif.acronym": "Akronym oder Kurzname",
-
-  // "layout.field.label.subcontractor.synsicris.address.addressStreetnamenumber": "Streetname, Building number",
-  "layout.field.label.subcontractor.synsicris.address.addressStreetnamenumber": "Straße, Hausnummer",
-
-  // "layout.field.label.subcontractor.synsicris.address.addressPostcode": "Postcode",
-  "layout.field.label.subcontractor.synsicris.address.addressPostcode": "Postleitzahl",
-
-  // "layout.field.label.subcontractor.synsicris.address.addressCity": "City",
-  "layout.field.label.subcontractor.synsicris.address.addressCity": "Ort",
-
-  // "layout.field.label.subcontractor.synsicris.address.addressPostbox": "Postbox",
-  "layout.field.label.subcontractor.synsicris.address.addressPostbox": "Postfach",
-
-  // "layout.field.label.subcontractor.organization.address.addressCountry": "Country",
-  "layout.field.label.subcontractor.organization.address.addressCountry": "Land",
-
-  // "layout.field.label.subcontractor.oairecerif.identifier.url": "Web adress",
-  "layout.field.label.subcontractor.oairecerif.identifier.url": "Webadresse",
-
-  // "layout.field.label.subcontractor.synsicris.orgunits.email": "Email",
-  "layout.field.label.subcontractor.synsicris.orgunits.email": "E-Mail",
-
-  // "layout.field.label.subcontractor.synsicris.orgunits.phone": "Phone",
-  "layout.field.label.subcontractor.synsicris.orgunits.phone": "Telefon",
-
-  // "layout.field.label.subcontractor.organization.identifier": "Organisation-ID",
-  "layout.field.label.subcontractor.organization.identifier": "Organisations-ID",
-
-  // "layout.field.label.subcontractor.synsicris.type.orgform": "Organisational form",
-  "layout.field.label.subcontractor.synsicris.type.orgform": "Organisationsform",
-
-  // "layout.field.label.subcontractor.synsicris.relation.targetgroup": "Related stakeholder group(s)",
-  "layout.field.label.subcontractor.synsicris.relation.targetgroup": "Entsprechende Akteursgruppe(n)",
-
-  // "layout.field.label.subcontractor.synsicris.type": "Societal area",
-  "layout.field.label.subcontractor.synsicris.type": "Gesellschaftsbereich",
-
-  // "layout.field.label.subcontractor.synsicris.subject.nace": "Economic sector of the organisation (NACE)",
-  "layout.field.label.subcontractor.synsicris.subject.nace": "Wirtschaftszweig",
-
-  // "layout.field.label.subcontractor.synsicris.subject.political": "Adressed policy level(s)",
-  "layout.field.label.subcontractor.synsicris.subject.political": "Adressierte Politikebene(n)",
-
-  // "layout.field.label.subcontractor.synsicris.subject.destatis": "Discipline",
-  "layout.field.label.subcontractor.synsicris.subject.destatis": "Disziplin / Fachgebiet",
-
-  // "layout.field.label.subcontractor.synsicris.cooperation.startDate": "Start date",
-  "layout.field.label.subcontractor.synsicris.cooperation.startDate": "Startdatum",
-
-  // "layout.field.label.subcontractor.synsicris.cooperation.endDate": "End date",
-  "layout.field.label.subcontractor.synsicris.cooperation.endDate": "Enddatum",
-
-  // "layout.field.label.subcontractor.synsicris.description.contribution": "Description of the cooperation",
-  "layout.field.label.subcontractor.synsicris.description.contribution": "Beschreibung der Zusammenarbeit",
-
-  // "layout.field.label.subcontractor.dc.relation.project": "Related Subproject",
-  "layout.field.label.subcontractor.dc.relation.project": "Zugehöriges Projekt",
 
   // "layout.field.label.targetgroup.dc.title": "Title",
   "layout.field.label.targetgroup.dc.title": "Bezeichnung",
@@ -14163,24 +14027,6 @@
   // "layout.field.label.exp_societalimpact.synsicris.type-n": "Possible expected side effects",
   "layout.field.label.exp_societalimpact.synsicris.type-n": "Art der eventuellen Nebenwirkung",
 
-  // "layout.field.label.pot_societalimpact.dc.title": "Title",
-  "layout.field.label.pot_societalimpact.dc.title": "Bezeichnung",
-
-  // "layout.field.label.pot_societalimpact.dc.type": "Type",
-  "layout.field.label.pot_societalimpact.dc.type": "Art der Wirkung",
-
-  // "layout.field.label.pot_societalimpact.synsicris.type.direction": "Direction of impact",
-  "layout.field.label.pot_societalimpact.synsicris.type.direction": "Wirkungsrichtung",
-
-  // "layout.field.label.pot_societalimpact.synsicris.type.ecological": "Specific ecological area",
-  "layout.field.label.pot_societalimpact.synsicris.type.ecological": "Spezifischer ökologischer Bereich",
-
-  // "layout.field.label.pot_societalimpact.synsicris.relation.targetgroup": "Stakeholder group(s) affected by the impact",
-  "layout.field.label.pot_societalimpact.synsicris.relation.targetgroup": "Von der Wirkung betroffene Akteursgruppe(n)",
-
-  // "layout.field.label.pot_societalimpact.dc.description": "Description",
-  "layout.field.label.pot_societalimpact.dc.description": "Beschreibung",
-
   // "layout.field.label.contribution_fundingprogramme.dc.title": "Title",
   "layout.field.label.contribution_fundingprogramme.dc.title": "Bezeichnung",
 
@@ -14314,9 +14160,6 @@
 
   // "submission.sections.submit.progressbar.describe.projectpartners_import_leadadmin": "#1 Information on the project coordinators an administrators",
   "submission.sections.submit.progressbar.describe.projectpartners_import_leadadmin": "#1 Informationen zur Projektkoordination/-administration",
-
-  // "submission.sections.submit.progressbar.describe.subcontractors": "#1 Add information on the subcontractor's field of activity",
-  "submission.sections.submit.progressbar.describe.subcontractors": "#1 Angaben zum Tätigkeitsbereich des Unterauftragnehmers ergänzen",
 
   // "submission.sections.submit.progressbar.describe.cooperationpartners": "#1 Add information on the cooperationpartner field of activity",
   "submission.sections.submit.progressbar.describe.cooperationpartners": "#1 Angaben zum Tätigkeitsbereich des Kooperationspartners ergänzen",
@@ -14573,10 +14416,6 @@
   // "layout.tab.header.Projekttraeger": "Programme and Funding information",
   "layout.tab.header.Projekttraeger": "Programm- und Förderinformationen",
 
-  // "layout.box.header.subcontractors": "Subproject - Subcontractors / Cooperation partners"
-  // TODO Source message changed - Revise the translation
-  "layout.box.header.subcontractors": "Unterauftragnehmer / Kooperationspartner - Listenansicht",
-
   // "submission.sections.submit.progressbar.describe.patents_result_import.info": "missing",
   "submission.sections.submit.progressbar.describe.patents_result_import.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Projektverlauf ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Hier sind zwei Eingaben erforderlich. Alle anderen Angaben werden aus der Patentdatenbank übernommen. </br>Wählen Sie die Sprache aus und fügen den Direktlink auf das Dokument ein.</i></b>",
 
@@ -14584,10 +14423,10 @@
   "submission.sections.submit.progressbar.describe.spinoffs_result.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Projektverlauf ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Ergänzen Sie bitte die Angaben aus der Anmeldung und vervollständigen Sie die weiteren Angaben.</b></i>",
 
   // "submission.form.physical_objects.info": "missing",
-  "submission.form.physical_objects.info": "<b>Worum es hier geht:</b><ul><li>Beschreiben Sie hier <b>physische Objekte</b>, wie z. B. Ausstellungsstücke, Anschauungsmaterialien (Pflanzen und Tiere, konservierte Überreste, Bodenprofile etc.), oder sonstige Gegenstände, die auch nach Projektende für den Wissenstransfer oder für Forschung und Lehre weiterverwendet werden können.</ul></li>",
+  "submission.form.physical_objects.info": "<b>Worum es hier geht:</b><ul><li>Beschreiben Sie hier Gegenstände bzw. physische Objekte, wie z. B. Ausstellungsstücke, Anschauungsmaterialien von Pflanzen und Tieren, konservierte Überreste, Bodenprofile etc., die auch nach Ende des Vorhabens für den Wissenstransfer oder für Forschung und Lehre weiterverwendet werden können.</li></ul>",
 
   // "submission.form.physical_objects-edit.info": "missing",
-  "submission.form.physical_objects-edit.info": "<b>Worum es hier geht:</b><ul><li>Beschreiben Sie hier <b>physische Objekte</b>, wie z. B. Ausstellungsstücke, Anschauungsmaterialien (Pflanzen und Tiere, konservierte Überreste, Bodenprofile etc.), oder sonstige Gegenstände, die auch nach Projektende für den Wissenstransfer oder für Forschung und Lehre weiterverwendet werden können.</ul></li>",
+  "submission.form.physical_objects-edit.info": "<b>Worum es hier geht:</b><ul><li>Beschreiben Sie hier Gegenstände bzw. physische Objekte, wie z. B. Ausstellungsstücke, Anschauungsmaterialien von Pflanzen und Tieren, konservierte Überreste, Bodenprofile etc., die auch nach Ende des Vorhabens für den Wissenstransfer oder für Forschung und Lehre weiterverwendet werden können.</li></ul>",
 
   // "submission.form.parentprojects.info": "missing",
   "submission.form.parentprojects.info": "<b>Worum es hier geht:</b><ul><li>In einem Verbund arbeiten mehrere Organisationen/Antragsteller mit eigenen Projekten zusammen.</li><li>Die meisten Informationen werden hier aus den Projekten übertragen.</li><li>Sie ergänzen hier wichtige Angaben, für die Funktion des Monitoring-Tools. Nutzen Sie diese Seite deshalb auch, wenn ein Verbund nur aus einem Projekt besteht.</li><li>Fügen Sie über den Upload ein Projektlogo (falls vorhanden) und die Kapitel zum Stand des Wissens sowie zu Material und Methoden hinzu.</ul></li>",
@@ -14633,18 +14472,6 @@
 
   // "submission.sections.submit.progressbar.describe.projectpartners_import_leadadmin.info": "missing",
   "submission.sections.submit.progressbar.describe.projectpartners_import_leadadmin.info": "<b>Die Informationen stammen aus dem Import der easy-xml-Datei und werden im Projektverlauf über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert. In easy-Online heißt dies „Administrative Ansprechperson (im Falle einer Bewilligung)“. Für zusätzliche Organisationseinheiten/Abteilungen sind hier keine Einträge vorzunehmen.</b>",
-
-  // "submission.form.subcontractors.info": "missing",
-  "submission.form.subcontractors.info": "<b>Worum es hier geht:</b><ul><li>Hier erfassen Sie Unterauftragnehmer Ihres Projektes, die <b>maßgeblich</b> an der Erarbeitung von Ergebnissen <b>mitwirken</b> und für das Projekt <b>wesentliche Disziplinen oder Handlungsfelder einbringen</b>. (D.h. Unterauftragnehmer, die vorwiegend Zuarbeiten durchführen, müssen Sie nicht erfassen.)</ul></li><b>Zur Unterscheidung:</b><ul><li>Organisationen, die <b>ohne Unterauftrag</b> mitwirken, erfassen Sie bitte als <b>Kooperationspartner</b> ausgehend von der Verbundübersicht.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></li>",
-
-  // "submission.form.subcontractors-edit.info": "missing",
-  "submission.form.subcontractors-edit.info": "<b>Worum es hier geht:</b><ul><li>Hier erfassen Sie Unterauftragnehmer Ihres Projektes, die <b>maßgeblich</b> an der Erarbeitung von Ergebnissen <b>mitwirken</b> und für das Projekt <b>wesentliche Disziplinen oder Handlungsfelder einbringen</b>. (D.h. Unterauftragnehmer, die vorwiegend Zuarbeiten durchführen, müssen Sie nicht erfassen.)</ul></li><b>Zur Unterscheidung:</b><ul><li>Organisationen, die <b>ohne Unterauftrag</b> mitwirken, erfassen Sie bitte als <b>Kooperationspartner</b> ausgehend von der Verbundübersicht.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></li>",
-
-  // "submission.sections.submit.progressbar.describe.subcontractors_orgunit.info": "missing",
-  "submission.sections.submit.progressbar.describe.subcontractors_orgunit.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Projektverlauf.</br></br><b><i>Über „Suche des Unterauftragnehmers“ können Sie suchen, ob bereits Informationen im Monitoring-Tool vorliegen, die Sie importieren können. Geben Sie dafür den Organisationsnamen des Unterauftragnehmers ein (oder Teile des Namens) und klicken Sie auf „Suchen“. Es öffnet sich nun eine Liste, in der Sie die entsprechende Organisation auswählen können. Anschließend werden die Informationen automatisch in die nachfolgenden Felder importiert. Wenn Sie die Organisation nicht finden können, lassen Sie das Suchfeld frei und geben bitte alle nachfolgenden Informationen manuell ein. Über [Bearbeiten] können Sie den angezeigten Namen ändern. Dieser wird nur hier geändert.</br></br></b></i>",
-
-  // "submission.sections.submit.progressbar.describe.subcontractors.info": "missing",
-  "submission.sections.submit.progressbar.describe.subcontractors.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Projektverlauf.</br></br>Diese Informationen dienen dazu, die <b>Einbindung relevanter Disziplinen und Handlungsfelder</b> im Projekt einzuschätzen.",
 
   // "submission.form.cooperationpartners.info": "missing",
   "submission.form.cooperationpartners.info": "<b>Worum es hier geht:</b><ul><li>Hier können Sie Organisationen erfassen, die (meist ohne vertragliche Bindung und ohne finanzielle Vergütung) <b>maßgeblich an der Erarbeitung von Ergebnissen</b> im Projekt <b>mitwirken</b>.</li><li>D. h. hier erfassen Sie Kooperationspartner des Projektes, die weder Projektpartner/Verbundpartner im Projekt noch Unterauftragnehmer sind.</li><li>Erfassen Sie hier nur Kooperationspartner, die damit <b>einverstanden</b> sind.</ul></li> <b>Zur Unterscheidung:</b><ul><li>Kooperationspartner, die anonym bleiben wollen, oder größere Gruppen von Kooperationspartnern können Sie über Akteursgruppen erfassen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></li>",
@@ -14869,40 +14696,25 @@
   "submission.sections.submit.progressbar.describe.others.info": "<b><i>Legen Sie bitte einen Eintrag an und beschreiben Sie, worum es geht.</br></br></b></i></br></br><b>Tipps:</br></br></b></br><ul><li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"/help/pages/de/de-project-about-entities.html\" target=\"_blank\">Welche Inhalte gehören in welche Bereiche</a></li></ul>",
 
   // "submission.form.products.info": "missing",
-  "submission.form.products.info": "<b>Worum es hier geht:</b><ul><li>Hier werden Forschungsdaten erfasst, die im Projekt entstanden und (über Datenbanken/Identifier öffentlich) zugänglich sind</li> <li>Forschungsdaten sind (digitale) Daten, die während wissenschaftlicher Tätigkeiten z. B. durch Messungen, Befragungen oder Quellenarbeit entstehen.</li><li>Sie bilden die Grundlage wissenschaftlicher Arbeit und dokumentieren deren Ergebnisse.</li></ul>",
+  "submission.form.products.info": "<b>Worum es hier geht:</b><ul><li>Forschungsdaten sind (digitale) Daten, die während wissenschaftlicher Tätigkeiten z. B. durch Messungen, Befragungen oder Quellenarbeit entstehen.</li><li>Sie bilden die Grundlage wissenschaftlicher Arbeit und dokumentieren deren Ergebnisse.</li></ul>",
 
   // "submission.form.products-edit.info": "missing",
-  "submission.form.products-edit.info": "<b>Worum es hier geht:</b><ul><li>Hier werden Forschungsdaten erfasst, die im Projekt entstanden und (über Datenbanken/Identifier öffentlich) zugänglich sind</li> <li>Forschungsdaten sind (digitale) Daten, die während wissenschaftlicher Tätigkeiten z. B. durch Messungen, Befragungen oder Quellenarbeit entstehen.</li><li>Sie bilden die Grundlage wissenschaftlicher Arbeit und dokumentieren deren Ergebnisse.</li></ul>",
+  "submission.form.products-edit.info": "<b>Worum es hier geht:</b><ul><li>Forschungsdaten sind (digitale) Daten, die während wissenschaftlicher Tätigkeiten z. B. durch Messungen, Befragungen oder Quellenarbeit entstehen.</li><li>Sie bilden die Grundlage wissenschaftlicher Arbeit und dokumentieren deren Ergebnisse.</li></ul>",
 
   // "submission.sections.submit.progressbar.describe.products.info": "missing",
-  "submission.sections.submit.progressbar.describe.products.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Projektverlauf ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Erfassen Sie hier bitte einen Datensatz. Dafür wählen Sie den Identifier aus und geben die Kennung in das nachfolgende Feld ein. Anschließend ergänzen Sie den Titel.</i></br></br><b>Wichtiger Hinweis:</b><ul><li>Über den Identifier wie z. B. DOI können viele Eingabedaten direkt importiert werden.</ul></li>",
+  "submission.sections.submit.progressbar.describe.products.info": "<i class=\"fas fa-exclamation-triangle\"></i> Geben Sie diese Informationen im Verlauf des Vorhabens ein.</br></br><b><i>Erfassen Sie hier bitte einen Datensatz, der in einem Repositorium abgelegt und öffentlich zugänglich ist.</i>",
 
   // "submission.sections.submit.progressbar.describe.products_references.info": "missing",
   "submission.sections.submit.progressbar.describe.products_references.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Projektverlauf ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Verweisen Sie gegebenenfalls auf bereits erfasste Veröffentlichungen.</i></b>",
 
   // "layout.box.help-text.Person_h": "missing",
-  "layout.box.help-text.Person_h": "<b>Herzlich Willkommen im SynSICRIS-Monitoring-Tool!</br>…machen Sie es sich leicht und lesen Sie bei der ersten Benutzung immer die Hilfe in den blauen Boxen.</b></br></br><b>Generelle Infos zum Tool:</b><ul><li>Im SynSICRIS-Monitoring-Tool erfassen Sie Hintergründe, Ziele, Arbeiten, Ergebnisse und Wirkungspotenziale eines Verbundes.</li><li>Sie erstellen im Tool gemeinsam mit Ihren Projektpartnern die Vorhabenbeschreibung und aktualisieren im Projektverlauf die Informationen bis nach Projektabschluss.</li><li><b>Wichtig:</b> Das Tool ersetzt Teile der Vorhabensbeschreibung und Berichtsdokumente. Dafür legen Sie einzelne Einträge zu verschiedenen Kategorien an (z. B. Arbeitspakete, erwartete Wirkungen, Veröffentlichungen), die Sie auf „Pinnwänden“ zur Wirkungsplanung, Arbeitsplanung und Verwertungsplanung strukturiert anpinnen können.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-objectives.html“=_blank\"> Mehr zum Hintergrund </a></li></ul><b>Erste Schritte:</b><ul><li>Als <b>Koordinator:in</b> starten Sie mit <i class=\"fas fa-plus-circle\"></i> <b>Neuen Verbund</b> anlegen (Projekte werden genauso angelegt).</li></ul>",
+  "layout.box.help-text.Person_h": "<b>Herzlich Willkommen im SynSICRIS-Monitoring-Tool!</br>…machen Sie es sich leicht und lesen Sie bei der ersten Benutzung immer die Hilfe in den blauen Boxen.</b></br></br><b>Generelle Infos zum Tool:</b><ul><li>Im SynSICRIS-Monitoring-Tool erfassen Sie Hintergründe, Ziele, Arbeiten, Ergebnisse und Wirkungspotenziale eines Verbundes.</li><li>Sie erstellen im Tool gemeinsam mit Ihren Projektpartnern die Vorhabenbeschreibung und aktualisieren im Projektverlauf die Informationen bis nach Projektabschluss.</li><li><b>Wichtig:</b> Das Tool ersetzt Teile der Vorhabensbeschreibung und Berichtsdokumente. Dafür legen Sie einzelne Einträge zu verschiedenen Kategorien an (z. B. Arbeitspakete, erwartete Wirkungen, Veröffentlichungen), die Sie auf „Pinnwänden“ zur Wirkungsplanung, Arbeitsplanung und Verwertungsplanung strukturiert anpinnen können.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-objectives.php“=_blank\">Hintergrund des Monitoring-Tools</a></li></ul><b>Erste Schritte:</b><ul><li>Als <b>Koordinator:in</b> starten Sie mit <i class=\"fas fa-plus-circle\"></i> <b>Neuen Verbund</b> anlegen (Projekte werden genauso angelegt).</li></ul>",
 
   // "layout.box.help-text.Person_details_h": "missing",
   "layout.box.help-text.Person_details_h": "Über <i class=\"fas fa-user-circle\"></i> können Sie Ihr Personenprofil bearbeiten und die Sichtbarkeit festlegen. Außerdem können Sie dort Ihre Anmeldedaten anpassen.",
 
   // "layout.box.help-text.default_h_1": "missing",
-  "layout.box.help-text.default_h_1": "<b>Wichtige Hinweise für diesen Arbeitsbereich</b></br></br><b>Bedienungshinweise:</b><ul><li>Es gibt eine <i class=\"fas fa-external-link-alt\"></i> Hilfeseite mit Abbildungen. Sie öffnet sich in einem neuen Tab und lässt sich am leichtesten nutzen, wenn Sie sie in ein zweites Browserfenster ziehen und neben das Fenster mit dem Monitoring-Tool legen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use.php\"target=_blank\">Bedienungshinweise kurz und knapp</a></li></ul><b>Erste Schritte:</b><ul><li>Als <b>Koordinator:in des Verbundes</b> laden Sie über <b>Aktion: <i class=\"fas fa-toolbox\"></i> Verwaltung Koordinator:innen</b> die Koordinator:innen der beteiligten Projekte/Zuwendungsempfänger ein.</li><li>Arbeiten Sie anschließend entlang der Nummerierung in der Navigationsleiste..</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.php\"target=_blank\">Schritt-für-Schritt-Anleitung für die Antragstellung</a></li></ul><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.html\"target=_blank\">Tipps für die Aktualisierung im laufenden Projekt</a></li><li>Tipps für den Projektabschluss</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-proj.html\"target=_blank\">Verbund und beteiligte Projekte unterscheiden</a></li></ul>",
-
-  // "layout.box.help-text.default_h_2": "missing",
-  "layout.box.help-text.default_h_2": "<i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.html\"target=_blank\"><b>Schritt-für-Schritt-Anleitung für die Antragstellung</b></a></i></br><b>Wichtige Hinweise:</b><ul><li>Arbeiten Sie schrittweise. Sie können jeden Eintrag jederzeit überarbeiten. Für den Start genügt es, wenn Sie vorläufige Bezeichnungen wählen. Ergänzen Sie nach und nach die Details.</li><li>Legen Sie vor Beginn der inhaltlichen Planung die Einträge zu den Projekten und den Beteiligten an. Dafür ist jeweils mindestens die Bezeichnung erforderlich.</li><li>Legen Sie möglichst alle inhaltlichen Einträge im Impact Pathway oder im Arbeitsplan an, da Sie dort mehr Hintergrundinformationen und Hilfen erhalten. Diese Einträge erscheinen automatisch in der Listenansicht. Wenn Sie dagegen Einträge in einer Listenansicht erstellen, müssen Sie daran denken, diese später auch im Impact Pathway und/oder Arbeitsplan hinzuzufügen.</ul></li><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i><a href=\"help/pages/de/de-project-about-entities-proj.html\"target=_blank\">Verbund und Projekt unterscheiden</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-permissions.html\"target=_blank\">Rechte für das Projekt festlegen</a></ul></li>",
-
-  // "layout.box.help-text.default_h_3": "missing",
-  "layout.box.help-text.default_h_3": "<b>Hinweise für die Arbeit im laufenden Projekt bis nach Projektende:</b></br>Sie nutzen das Monitoring-Tool begleitend im Projekt, um sowohl Änderungen in der Planung als auch den Stand Ihrer Arbeiten und die Entwicklung von Projektwirkungen zu erfassen. Sie erstellen für den Antrag und zu allen Berichtszeitpunkten Versionen, die archiviert werden. Diese können dem Fördermittelgeber zur Ansicht freigegeben werden. (Noch nicht implementiert.)<b>Die verschiedenen Möglichkeiten für die Aktualisierung im laufenden Projekt werden</b> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.html\"target=_blank\">erklärt</a>.</br></br><b>Wichtige Hinweise:</b><ul><li><b>Aktualisieren</b> Sie die Einträge <b>zeitnah</b>. Sie reduzieren damit den Aufwand für die Dokumentation erheblich.</li><li><b>Prüfen</b> Sie für Zwischen- und Abschlussberichte, ob alle Einträge dem <b>aktuellen Stand</b> entsprechen.</li><li>Nutzen Sie den Upload im Bereich Veröffentlichungen, um dem Fördermittelgeber Belegexemplare zur Verfügung zu stellen.</ul></li><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-completion.html\"target=_blank\">Hinweise zum Projektabschluss</a></ul></li>",
-
-  // "layout.box.help-text.Project_h": "missing",
-  "layout.box.help-text.Project_h": "Hier werden die Projekte aufgelistet, die im Verbund mitwirken.</br> Als Koordinator:in eines Projektes, legen Sie hier das Projekt über <i class=\"fas fa-plus-circle\"></i> an. <br>Rufen Sie das Projekt dann über den Link in der Listenansicht auf und führen Sie die dort beschriebenen Schritte durch.",
-
-  // "layout.box.help-text.Project_h_1": "missing",
-  "layout.box.help-text.Project_h_1": "<b>Wichtige Hinweise für den Arbeitsbereich des Projektes / Zuwendungsempfängers: Antragstellung – Arbeit im laufenden Projekt</b></br></br><b>Tipps für die Antragstellung:</b><ul><li>Sie schaffen hier die Voraussetzungen für die gemeinsame inhaltliche Arbeit im Verbund, indem Sie <b>Mitarbeitende einladen</b>, über den <b>easy-Online Import</b> Informationen zu Ihrem Projekt und zu Ihrer Organisationseinheit hinzufügen sowie ggf. wichtige am Projekt mitwirkende <b>Unterauftragnehmer erfassen</b>. Folgen Sie dafür Schritt 3a) – d) in der <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.html \"target=_blank\"> <b>Schritt-für-Schritt-Anleitung für die Antragstellung</b></a></li><li>Nach der inhaltlichen Arbeit im Arbeitsbereich des Verbundes legen Sie hier den <b>Verwertungsplan</b> an.</li><li><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-proj.html \"target=_blank\"> Verbund und beteiligte Projekte unterscheiden </a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppen</a></ul></li></ul></br><br><b>Tipps für die Arbeit im laufenden Projekt bis nach Projektende:</b><ul><li>Fügen Sie im Projektverlauf neue Unterauftragnehmer hinzu und aktualisieren Sie jährlich zum Zwischenbericht den Verwertungsplan.</li><li><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.html\"target=_blank\">Möglichkeiten für die Aktualisierung im laufenden Projekt</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-completion.html\"target=_blank\">Hinweise zum Projektabschluss</a></li></ul></ul></br>",
-
-  // "layout.box.help-text.Project_h_2": "missing",
-  "layout.box.help-text.Project_h_2": "<b>Hinweise für die Arbeit im laufenden Projekt bis nach Projektende:</b></br>Sie nutzen das Monitoring-Tool begleitend im Projekt, um sowohl Änderungen in der Planung als auch den Stand Ihrer Arbeiten und die Entwicklung von Projektwirkungen zu erfassen. Sie erstellen für den Antrag und zu allen Berichtszeitpunkten Versionen, die archieviert werden. Diese können dem Fördermittelgeber zur Ansicht freigegeben werden. (Noch nicht implementiert.)</br><b>Die verschiedenen Möglichkeiten für die Aktualisierung im laufenden Projekt werden</b> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.html\"target=_blank\">erklärt</a></br><b>Wichtige Hinweise:</b></br> <ul><li><b>Aktualisieren</b> Sie die Einträge <b>zeitnah</b>. Sie reduzieren damit den Aufwand für die Dokumentation erheblich.</li><li><b>Prüfen</b> Sie für Zwischen- und Abschlussberichte, ob alle Einträge dem <b>aktuellen Stand</b> entsprechen.</li><li>Nutzen Sie den Upload im Bereich Veröffentlichungen, um dem Fördermittelgeber Belegexemplare zur Verfügung zu stellen.</ul></li><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-completion.html\"target=_blank\">Hinweise zum Projektabschluss</a></ul></li>",
+  "layout.box.help-text.default_h_1": "<b>Wichtige Hinweise für diesen Arbeitsbereich</b></br></br><b>Bedienungshinweise:</b><ul><li>Es gibt eine <i class=\"fas fa-external-link-alt\"></i> Hilfeseite mit Abbildungen. Sie öffnet sich in einem neuen Tab und lässt sich am leichtesten nutzen, wenn Sie sie in ein zweites Browserfenster ziehen und neben das Fenster mit dem Monitoring-Tool legen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use.php\"target=_blank\">Bedienungshinweise kurz und knapp</a></li></ul><b>Erste Schritte:</b><ul><li>Als <b>Koordinator:in des Verbundes</b> laden Sie über <b>Aktion: <i class=\"fas fa-toolbox\"></i> Verwaltung Koordinator:innen</b> die Koordinator:innen der beteiligten Projekte/Zuwendungsempfänger ein.</li><li>Arbeiten Sie anschließend entlang der Nummerierung in der Navigationsleiste.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.php\"target=_blank\">Schritt-für-Schritt-Anleitung für die Antragstellung</a></li></ul><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.html\"target=_blank\">Tipps für die Aktualisierung im laufenden Projekt</a></li><li>Tipps für den Projektabschluss</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-proj.html\"target=_blank\">Verbund und beteiligte Projekte unterscheiden</a></li></ul>",
 
   // "layout.box.help-text.projectpartner_h": "missing",
   "layout.box.help-text.projectpartner_h": "<b>Projektpartner</b>  sind die Organisationseinheit(en), die als Antragssteller in den jeweiligen <b> Projekten</b> mitwirken.</br></br><b>Diese Liste dient nur der Übersicht. Legen Sie die Projektpartner ausschließlich in den jeweiligen Projekten an. </br>Zum Bearbeiten wählen Sie Ihre Organisationseinheit aus.</b>",
@@ -14910,23 +14722,14 @@
   // "layout.box.help-text.projectpartner_h_project": "missing",
   "layout.box.help-text.projectpartner_h_project": "<b>Projektpartner</b> sind die Organisationseinheit(en), die als Antragssteller in den jeweiligen <b>Projekten</b> mitwirken. <b>Zum Bearbeiten wählen Sie Ihre Organisationseinheit aus.</b></br></br><b>Wichtige Hinweise:</b></br><ul><li>Wenn Sie den easy-Online Import bereits durchgeführt haben, wird hier der Eintrag zur Organisationseinheit angezeigt, die als ausführende Stelle des Projektes angegeben wurde.</li><li>Wenn in einem Projekt mehrere Organisationseinheiten/Abteilungen einer Organisation mitwirken (z. B. eine Universität mit mehreren Fachgebieten, die am Projekt finanziert mitarbeiten), legen Sie diese jeweils einzeln als zusätzlichen Projektpartner an, damit im Monitoring-Tool deutlich wird, welche Disziplinen zusammenarbeiten.</ul></li> <b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-proj.html\"target=_blank\"> Verbund und Projekt unterscheiden </a></li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></ul></li>",
 
-  // "layout.box.help-text.subcontractor_h": "missing",
-  "layout.box.help-text.subcontractor_h": "<b>Unterauftragnehmer übernehmen Arbeiten und Aktivitäten innerhalb eines Projektes. Sie werden erfasst, wenn sie maßgeblich an der Erarbeitung</b> von Projektergebnissen <b>mitwirken</b> und <b>wesentliche Disziplinen oder Handlungsfelder</b> in das Projekt einbringen.</br></br><b>Diese Liste dient nur der Übersicht. Legen Sie Unterauftragnehmer ausschließlich in den jeweiligen Projekten an.</br>Zum Bearbeiten wählen Sie einen Unterauftragnehmer aus.</b>",
-
   // "layout.box.help-text.subproject_h": "missing",
-  "layout.box.help-text.subproject_h": "Hier werden die Projekte/ Zuwendungsempfänger : innen des Verbundes aufgelistet, die am Verbund mitwirken.</br> Als Koordinator:in eines Projektes, legen Sie hier das Projekt über <i class=\"fas fa-plus-circle\"></i> an. Rufen Sie das Projekt dann über den Link in der Listenansicht auf und führen Sie die dort beschriebenen Schritte durch.",
+  "layout.box.help-text.subproject_h": "Hier werden die Projekte/Zuwendungsempfänger:innen des Verbundes aufgelistet, die am Verbund mitwirken.</br> Als Koordinator:in eines Projektes, legen Sie hier das Projekt über <i class=\"fas fa-plus-circle\"></i> an. Rufen Sie das Projekt dann über den Link in der Listenansicht auf und führen Sie die dort beschriebenen Schritte durch.",
 
   // "layout.box.help-text.subproject_h_1": "missing",
   "layout.box.help-text.subproject_h_1": "<b>Wichtige Hinweise für diesen Arbeitsbereich</b></br></br><b>Erste Schritte:</b></br>Sie schaffen hier die Voraussetzungen für die gemeinsame inhaltliche Arbeit im Verbund:<ul><li>Über <b>Aktion: <i class=\"fas fa-toolbox\"></i> Verwaltung Projektmitarbeitende</b> laden Sie Mitarbeitende Ihrer Organisationseinheit in den Verbund ein.</li><li>Über <b>Aktion: <i class=\"fas fa-file-import\"></i> easy-Online Import durchführen</b> übernehmen Sie Daten zu Ihrem Projekt und zu Ihrer Organisationseinheit. Ergänzen Sie anschließend diese Angaben.</li><li>Erfassen Sie wichtige Unterauftragnehmer und weitere Kooperationspartner.</li><li>Mehr Details in <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.html\"target=_blank\"> Schritt 3a) – d) in der Schritt-für-Schritt-Anleitung für die Antragstellung.</a></li><li>Nach der inhaltlichen Arbeit im Arbeitsbereich des Verbundes legen Sie hier den Verwertungsplan an, wenn dies vom Fördermittelgeber gefordert ist.</li></ul><b>Weitere Hilfen:</b><ul><li>Verbund und beteiligte Projekte unterscheiden</li><li>Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppen</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.html\"target=_blank\">Tipps für die Arbeit im laufenden Projekt</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/ de-project-step-completion.html \"target=_blank\"> Hinweise zum Projektabschluss </a></li></ul>",
 
-  // "layout.box.help-text.subproject_h_2": "missing",
-  "layout.box.help-text.subproject_h_2": "<b>Hinweise für die Arbeit im laufenden Projekt bis nach Projektende:</b></br>Sie nutzen das Monitoring-Tool begleitend im Projekt, um sowohl Änderungen in der Planung als auch den Stand Ihrer Arbeiten und die Entwicklung von Projektwirkungen zu erfassen. Sie erstellen für den Antrag und zu allen Berichtszeitpunkten Versionen, die archieviert werden. Diese können dem Fördermittelgeber zur Ansicht freigegeben werden. (Noch nicht implementiert.)</br><b>Die verschiedenen Möglichkeiten für die Aktualisierung im laufenden Projekt werden hier </b> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.html\"target=_blank\">erklärt.</a></br></br><b>Wichtige Hinweise:</b><ul><li><b>Aktualisieren</b> Sie die Einträge <b>zeitnah</b>. Sie reduzieren damit den Aufwand für die Dokumentation erheblich.</li><li><b>Prüfen</b> Sie für Zwischen- und Abschlussberichte, ob alle Einträge dem <b>aktuellen Stand</b> entsprechen.</li><li>Nutzen Sie den Upload im Bereich Veröffentlichungen, um dem Fördermittelgeber Belegexemplare zur Verfügung zu stellen.</ul></li><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-completion.html\"target=_blank\">Hinweise zum Projektabschluss</a></ul></li>",
-
-  // "layout.box.help-text.subcontractor_h_project": "missing",
-  "layout.box.help-text.subcontractor_h_project": "<b>Unterauftragnehmer übernehmen Arbeiten und Aktivitäten innerhalb eines Projektes. Sie werden erfasst, wenn sie maßgeblich an der Erarbeitung</b> von Projektergebnissen <b>mitwirken</b> und <b>wesentliche Disziplinen oder Handlungsfelder</b> in das Projekt einbringen.</br><br><b>Legen Sie über</b> <i class=\"fas fa-plus-circle\"></i> <b>einen neuen Unterauftragnehmer an</b>.</br> Zum <b>Bearbeiten</b> rufen Sie einen Eintrag über seinen <b>Link in der Listenansicht</b> auf und wählen <b>Aktion: Bearbeiten.</b></br><b>Wichtiger Hinweis:</b><ul><li>Unterauftragnehmer, die vorwiegend Zuarbeiten durchführen, müssen hier nicht erfasst werden.</ul></li><b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></ul></li></p>",
-
   // "layout.box.help-text.cooperationpartner_h": "missing",
-  "layout.box.help-text.cooperationpartner_h": "<b>Kooperationspartner</b> sind Organisationen, die <b>(meist ohne vertragliche Bindung) maßgeblich</b> an der Erarbeitung von Projektergebnissen <b>mitwirken</b>.</br></br><b>Legen Sie über</b> <i class=\"fas fa-plus-circle\"></i> <b>einen neuen Kooperationspartner an</b>. Zum <b>Bearbeiten</b> rufen Sie einen Eintrag über seinen <b>Link</b> in der Listenansicht auf und wählen </b>Aktion: Bearbeiten</b>.</br></br> <b>Wichtiger Hinweis:</b><ul><li>Organisationen, die im Projekt mitwirken, können entweder einzeln als Kooperationspartner oder anonym als Akteursgruppe erfasst werden.</ul></li> <b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></ul></li>",
+  "layout.box.help-text.cooperationpartner_h": "<b>Kooperationspartner</b> sind Organisationen, die <b>(meist ohne vertragliche Bindung) maßgeblich</b> an der Erarbeitung von Projektergebnissen <b>mitwirken</b>.</br></br><b>Legen Sie über</b> <i class=\"fas fa-plus-circle\"></i> <b>einen neuen Kooperationspartner an</b>. Zum <b>Bearbeiten</b> rufen Sie einen Eintrag über seinen <b>Link</b> in der Listenansicht auf und wählen </b>Aktion: Bearbeiten</b>.</br></br> <b>Wichtiger Hinweis:</b><ul><li>Organisationen, die im Projekt mitwirken, können entweder einzeln als Kooperationspartner oder anonym als Akteursgruppe erfasst werden.</ul></li> <b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></li></ul>",
 
   // "layout.box.help-text.targetgroup_h": "missing",
   "layout.box.help-text.targetgroup_h": "<b>Akteursgruppen</b> sind Gruppen von Organisationen oder Personen aus dem gleichen Tätigkeitsbereich, <b>die das Projekt adressiert</b>. </br></br><b>Legen Sie über</b> <i class=\"fas fa-plus-circle\"></i> <b>eine neue Akteursgruppe an</b>. Zum <b>Bearbeiten</b> rufen Sie einen Eintrag über seinen <b>Link</b> in der Listenansicht auf und wählen <b>Aktion: Bearbeiten</b>.</br></br> <b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-entities-involved.html\"target=_blank\">Projektbeteiligte unterscheiden: Projektpartner, Unterauftragnehmer, Kooperationspartner, Akteursgruppe</a></ul></li>",
@@ -14971,10 +14774,10 @@
   "layout.box.help-text.Publication_h": "<b>Veröffentlichungen</b> sind z. B. wissenschaftliche Artikel, Praxisbeiträge, Videos oder Webseiten des Projektes. </br></br>><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Eintrag an. <b>Zum Bearbeiten</b> wählen Sie einen Eintrag aus und editieren ihn über <b>Aktion: <i class=\"fas fa-edit\"></i>Bearbeiten</b>.<b>Fügen Sie den Eintrag im Impact Pathway hinzu.</br></br></b><b>Wichtige Hinweise:</b><ul><li>Wenn Sie in Ihrem Personenprofil z. B. Ihre OCID-ID hinterlegt haben, erhalten Sie eine Meldung, sobald eine neue Veröffentlichung von Ihnen registriert wurde.</li><li>Sie können dann die Informationen zur Veröffentlichung importieren.</ul></li>",
 
   // "layout.box.help-text.physical_object_h": "missing",
-  "layout.box.help-text.physical_object_h": "Ein <b>Gegenstand oder Material</b> ist ein physisches Objekt, das im Verbund erstellt wird und nach Projektende von anderen für Transfer, Forschung oder Lehre weitergenutzt werden kann. </br></br><b>Diese Liste dient der Übersicht.</b> <b>Zum Bearbeiten</b> rufen Sie den Eintrag über seinen <b>Link in der Listenansicht</b> auf und wählen <b>Aktion: <i class=\"fas fa-edit\"></i>Bearbeiten</b>.</br></br><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Impact Pathway strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie den Impact Pathway nicht nutzen oder die Einträge erst später zum Impact Pathway hinzufügen möchten.</ul></li>",
+  "layout.box.help-text.physical_object_h": "Ein <b>Gegenstand oder Material</b> ist ein physisches Objekt, das von anderen für Transfer, Forschung oder Lehre weitergenutzt werden kann.</br></br><b>Diese Liste dient der Übersicht.</b> Zum Bearbeiten rufen Sie den Eintrag über seinen <b>Link in der Listenansicht</b> auf.",
 
   // "layout.box.help-text.Product_h": "missing",
-  "layout.box.help-text.Product_h": "<b>Forschungsdaten</b> sind hier zu erfassen, wenn Sie in anderen Forschungsdatenbanken veröffentlicht werden.</br></br><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Eintrag an. <b>Zum Bearbeiten</b> wählen Sie einen Eintrag aus und editieren ihn über <b>Aktion: <i class=\"fas fa-edit\"></i>Bearbeiten</b>. <b>Fügen Sie den Eintrag im Impact Pathway hinzu..</br></br></b><b>Wichtige Hinweise:</b><ul><li>Wenn Sie in Ihrem Personenprofil z. B. Ihre OCID-ID hinterlegt haben, erhalten Sie eine Meldung, sobald eine neue Forschungsdatenpublikation von Ihnen registriert wurde.</li><li>Sie können dann die Informationen importieren und auf eine Veröffentlichung verweisen.</ul></li>",
+  "layout.box.help-text.Product_h": "Erfassen Sie hier <b>Forschungsdaten</b>, die in öffentlichen Forschungsdatenbanken abgelegt sind.<br></br><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Eintrag an.</b>",
 
   // "layout.box.help-text.research_result_h": "missing",
   "layout.box.help-text.research_result_h": "<b>Forschungsergebnisse</b> fassen die wichtigsten Erkenntnissen kurz zusammen. Die ausführliche Darstellung erfolgt durch Veröffentlichungen und Berichte. <p><b>Diese Liste dient der Übersicht.</b> <b>Zum Bearbeiten</b> rufen Sie den Eintrag über seinen <b>Link in der Listenansicht</b> auf und wählen <b>Aktion: <i class=\"fas fa-edit\"></i>Bearbeiten</b>.</p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Impact Pathway strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie den Impact Pathway nicht nutzen oder die Einträge erst später zum Impact Pathway hinzufügen möchten.</ul></li>",
@@ -15002,12 +14805,6 @@
 
   // "layout.box.help-text.exp_societalimpact_h": "missing",
   "layout.box.help-text.exp_societalimpact_h": "<b>Erwartete gesellschaftliche Wirkung</b> beinhaltet zukünftige Wirkungen und eventuelle Nebenwirkungen, die mit den Projektergebnissen verbunden sein können. </br></br><b>Diese Liste dient der Übersicht.</b> <b>Zum Bearbeiten</b> rufen Sie den Eintrag über seinen <b>Link in der Listenansicht</b> auf und wählen <b>Aktion: <i class=\"fas fa-edit\"></i>Bearbeiten</b>.</br></br><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Impact Pathway strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie den Impact Pathway nicht nutzen oder die Einträge erst später zum Impact Pathway hinzufügen möchten.</ul></li>",
-
-  // "layout.box.help-text.pot_societalimpact_h": "missing",
-  "layout.box.help-text.pot_societalimpact_h": "<b>Erwartete gesellschaftliche Wirkung</b> beinhaltet sowohl mögliche positive als auch negative gesellschaftliche Wirkungen des Verbundes. </br></br><b>Diese Liste dient der Übersicht.</b> <b>Zum Bearbeiten</b> rufen Sie den Eintrag über seinen <b>Link in der Listenansicht</b> auf und wählen <b>Aktion: <i class=\"fas fa-edit\"></i>Bearbeiten</b>.</br></br><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Impact Pathway strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie den Impact Pathway nicht nutzen oder die Einträge erst später zum Impact Pathway hinzufügen möchten.</ul></li>",
-
-  // "layout.box.help-text.other_h": "missing",
-  "layout.box.help-text.other_h": "<b>Sonstiges</b> enthält wichtige Informationen, die in keinen anderen Bereich eingeordnet werden können. </br></br><b>Diese Liste dient der Übersicht.</b> <b>Zum Bearbeiten</b> rufen Sie den Eintrag über seinen <b>Link in der Listenansicht</b> auf und wählen <b>Aktion: <i class=\"fas fa-edit\"></i>Bearbeiten</b>.</br></br><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Impact Pathway strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie den Impact Pathway nicht nutzen oder die Einträge erst später zum Impact Pathway hinzufügen möchten.</ul></li>",
 
   // "layout.box.help-text.spinoff_h": "missing",
   "layout.box.help-text.spinoff_h": "<b>Ausgründung (inkl. Verein)</b> beinhaltet Gründungen jeglicher Form aus dem Verbund. </br></br><b>Diese Liste dient der Übersicht.</b> <b>Zum Bearbeiten</b> rufen Sie den Eintrag über seinen <b>Link in der Listenansicht</b> auf und wählen <b>Aktion: <i class=\"fas fa-edit\"></i>Bearbeiten</b>.</br></br><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Impact Pathway strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie den Impact Pathway nicht nutzen oder die Einträge erst später zum Impact Pathway hinzufügen möchten.</ul></li>",
@@ -15041,9 +14838,6 @@
 
   // "layout.box.header.projectpartner_comment": "Comments - Project partner",
   "layout.box.header.projectpartner_comment": "Kommentare - Projektpartner",
-
-  // "layout.box.header.subcontractor_comment": "Comments - Subcontractor",
-  "layout.box.header.subcontractor_comment": "Kommentare - Unterauftragnehmer",
 
   // "layout.box.header.cooperationpartner_comment": "Comments - Cooperation partner",
   "layout.box.header.cooperationpartner_comment": "Kommentare - Kooperationspartner",
@@ -15122,9 +14916,6 @@
 
   // "layout.box.header.exp_societalimpact_comment": "Commets - Expected societal impact (new)",
   "layout.box.header.exp_societalimpact_comment": "Kommentare - Erwartete gesellschaftliche Wirkung",
-
-  // "layout.box.header.pot_societalimpact_comment": "Commets - Expected societal impact",
-  "layout.box.header.pot_societalimpact_comment": "Kommentare - Erwartete gesellschaftliche Wirkung (Var. Y)",
 
   // "layout.box.header.contribution_fundingprogramme_comment": "Commets - Contribution to funding objectives",
   "layout.box.header.contribution_fundingprogramme_comment": "Kommentare - Beitrag zu Förderzielen",
@@ -15259,7 +15050,7 @@
   "test_exp_societalimpact_type": "Übersicht zu eventuellen Nebenwirkungen",
 
   // "project.manage.members.funding.admin-group": "Invitation and Management of project coordinators",
-  "project.manage.members.funding.admin-group": "Einladung und Verwaltung Koordinator:innen",
+  "project.manage.members.funding.admin-group": "Einladung und Verwaltung Projetmitarbeitende mit Koordinator:innen-Rolle",
 
   // "project.manage.members.funding.members-group": "Invitation and Management of project members",
   "project.manage.members.funding.members-group": "Einladung und Verwaltung Projektmitarbeitende",
@@ -15277,7 +15068,7 @@
   "project.manage.members.funding.admin-group-help": "Hilfetext hier für admin_group Projekt",
 
   // "project.manage.members.funding.members-group-help": "Help message here",
-  "project.manage.members.funding.members-group-help": "Hilfetext hier für members_group Projekt",
+  "project.manage.members.funding.members-group-help": "<b>Laden Sie hier Personen ein, die im Projekt die Projektmitarbeitende-Rolle erhalten sollen.</b><ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen mit Projektitarbeitenden-Rolle im Projekt gelistet. Die Projektmitarbeitenden-Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Verbund geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
 
   // "layout.box.header.jpheading": "Workspace for all partners in the consortium:",
   "layout.box.header.jpheading": "Arbeitsbereich für alle Partner im Verbund:",
@@ -15547,7 +15338,7 @@
   "layout.box.header.neg_sideffect_comment": "Kommentare - Mögliche negative Nebenwirkung",
 
   // "layout.box.header.event_status": "missing",
-  "layout.box.header.event_status": "What's here?",
+  "layout.box.header.event_status": "Veränderung seit der Antragstellung",
 
   // "layout.box.header.open_researchquestions": "Open research questions",
   "layout.box.header.open_researchquestions": "Offene Forschungsfragen - Listenansicht",
@@ -15583,6 +15374,147 @@
   "layout.field.label.neg_sideeffect.synsicris.type.negative-direction": "Wirkungsintensität",
 
   // "layout.field.label.neg_sideeffect.synsicris.description.neg": "Extent of possible negative side effect",
-  "layout.field.label.neg_sideeffect.synsicris.description.neg": "Umfang der möglichen negativen Nebenwirkung"
+  "layout.field.label.neg_sideeffect.synsicris.description.neg": "Umfang der möglichen negativen Nebenwirkung",
+
+  // "submission.sections.submit.progressbar.describe.projects_funder": "missing",
+  "submission.sections.submit.progressbar.describe.projects_funder": "Verbund beschreiben",
+
+  // "submission.sections.submit.progressbar.describe.pot_societalimpact.info": "to be deleted",
+  "submission.sections.submit.progressbar.describe.pot_societalimpact.info": "to be deleted",
+
+  // "submission.form.neg_sideeffect.info": "missing",
+  "submission.form.neg_sideeffect.info": "Text noch nicht verfügbar",
+
+  // "submission.form.neg_sideeffect-edit.info": "missing",
+  "submission.form.neg_sideeffect-edit.info": "Text noch nicht verfügbar",
+
+  // "submission.sections.submit.progressbar.describe.neg_sideeffect": "#1 Reflecting on possible negative side effects",
+  "submission.sections.submit.progressbar.describe.neg_sideeffect": "#1 Reflektieren von eventuellen negativen Nebenwirkungen",
+
+  // "submission.sections.submit.progressbar.describe.neg_sideeffect.info": "missing",
+  "submission.sections.submit.progressbar.describe.neg_sideeffect.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Projektverlauf.</br></br><b><i>Reflektieren Sie hier, ob ggf. negative Nebenwirkungen oder Zielkonflikte zur bereits beschriebenen Nachhaltigkeitswirkung vorliegen.</i></b>",
+
+  // "layout.box.help-text.subcontractor_h": "to be deleted",
+  "layout.box.help-text.subcontractor_h": "to be deleted",
+
+  // "layout.box.help-text.subcontractor_h_project": "to be deleted",
+  "layout.box.help-text.subcontractor_h_project": "to be deleted",
+
+  // "layout.box.help-text.pot_societalimpact_h": "to be deleted",
+  "layout.box.help-text.pot_societalimpact_h": "to be deleted",
+
+  // "layout.box.help-text.neg_sideeffect_h": "missing",
+  "layout.box.help-text.neg_sideeffect_h": "Text noch nicht verfügbar",
+
+  // "layout.tab.header.multiple_entities": "Multiple entities",
+  "layout.tab.header.multiple_entities": "Multiple entities",
+
+  // "layout.tab.header.neg_sideeffect": "Possible negative side effects",
+  "layout.tab.header.neg_sideeffect": "Mögliche negative Nebenwirkungen",
+
+  // "layout.box.header.neg_sideeffect": "Possible negative side effects",
+  "layout.box.header.neg_sideeffect": "Mögliche negative Nebenwirkungen - Listenansicht",
+
+  // "layout.box.header.neg_sideeffect_m": "Possible negative side effects",
+  "layout.box.header.neg_sideeffect_m": "Mögliche negative Nebenwirkungen",
+
+  // "layout.field.label.subcontractor.dc.title": "Organisation",
+  "layout.field.label.subcontractor.dc.title": "Organisation",
+
+  // "layout.field.label.subcontractor.oairecerif.acronym": "Acronym or short name",
+  "layout.field.label.subcontractor.oairecerif.acronym": "Akronym oder Kurzname",
+
+  // "layout.field.label.subcontractor.synsicris.address.addressStreetnamenumber": "Streetname, Building number",
+  "layout.field.label.subcontractor.synsicris.address.addressStreetnamenumber": "Straße, Hausnummer",
+
+  // "layout.field.label.subcontractor.synsicris.address.addressPostcode": "Postcode",
+  "layout.field.label.subcontractor.synsicris.address.addressPostcode": "Postleitzahl",
+
+  // "layout.field.label.subcontractor.synsicris.address.addressCity": "City",
+  "layout.field.label.subcontractor.synsicris.address.addressCity": "Ort",
+
+  // "layout.field.label.subcontractor.synsicris.address.addressPostbox": "Postbox",
+  "layout.field.label.subcontractor.synsicris.address.addressPostbox": "Postfach",
+
+  // "layout.field.label.subcontractor.organization.address.addressCountry": "Country",
+  "layout.field.label.subcontractor.organization.address.addressCountry": "Land",
+
+  // "layout.field.label.subcontractor.oairecerif.identifier.url": "Web adress",
+  "layout.field.label.subcontractor.oairecerif.identifier.url": "Webadresse",
+
+  // "layout.field.label.subcontractor.synsicris.orgunits.email": "Email",
+  "layout.field.label.subcontractor.synsicris.orgunits.email": "E-Mail",
+
+  // "layout.field.label.subcontractor.synsicris.orgunits.phone": "Phone",
+  "layout.field.label.subcontractor.synsicris.orgunits.phone": "Telefon",
+
+  // "layout.field.label.subcontractor.organization.identifier": "Organisation-ID",
+  "layout.field.label.subcontractor.organization.identifier": "Organisations-ID",
+
+  // "layout.field.label.subcontractor.synsicris.type.orgform": "Organisational form",
+  "layout.field.label.subcontractor.synsicris.type.orgform": "Organisationsform",
+
+  // "layout.field.label.subcontractor.synsicris.relation.targetgroup": "Related stakeholder group(s)",
+  "layout.field.label.subcontractor.synsicris.relation.targetgroup": "Entsprechende Akteursgruppe(n)",
+
+  // "layout.field.label.subcontractor.synsicris.type": "Societal area",
+  "layout.field.label.subcontractor.synsicris.type": "Gesellschaftsbereich",
+
+  // "layout.field.label.subcontractor.synsicris.subject.nace": "Economic sector of the organisation (NACE)",
+  "layout.field.label.subcontractor.synsicris.subject.nace": "Wirtschaftszweig",
+
+  // "layout.field.label.subcontractor.synsicris.subject.political": "Adressed policy level(s)",
+  "layout.field.label.subcontractor.synsicris.subject.political": "Adressierte Politikebene(n)",
+
+  // "layout.field.label.subcontractor.synsicris.subject.destatis": "Discipline",
+  "layout.field.label.subcontractor.synsicris.subject.destatis": "Disziplin / Fachgebiet",
+
+  // "layout.field.label.subcontractor.synsicris.cooperation.startDate": "Start date",
+  "layout.field.label.subcontractor.synsicris.cooperation.startDate": "Startdatum",
+
+  // "layout.field.label.subcontractor.synsicris.cooperation.endDate": "End date",
+  "layout.field.label.subcontractor.synsicris.cooperation.endDate": "Enddatum",
+
+  // "layout.field.label.subcontractor.synsicris.description.contribution": "Description of the cooperation",
+  "layout.field.label.subcontractor.synsicris.description.contribution": "Beschreibung der Zusammenarbeit",
+
+  // "layout.field.label.subcontractor.dc.relation.project": "Related Subproject",
+  "layout.field.label.subcontractor.dc.relation.project": "Zugehöriges Projekt",
+
+  // "project.manage.members-list.table.identity": "Identity",
+  "project.manage.members-list.table.identity": "E-Mail / interne ID",
+
+  // "programme.manage.members-list.table.identity": "Identity",
+  "programme.manage.members-list.table.identity": "E-Mail / interne ID",
+
+  // "search.filters.applied.charts.RELATION.Project.Publication.title": "missing",
+  "search.filters.applied.charts.RELATION.Project.Publication.title": "Veröffentlichungen - Grafik",
+
+  // "search.filters.applied.charts.RELATION.Project.Event.title": "missing",
+  "search.filters.applied.charts.RELATION.Project.Event.title": "Veranstaltungen - Grafik",
+
+  // "project.manage.members.project.coordinators-group": "Invitation and Management Coordinators",
+  "project.manage.members.project.coordinators-group": "Einladung und Verwaltung Koordinator:innen im Verbund",
+
+  // "project.manage.members.project.coordinators-group-help": "Help Coordinators",
+  "project.manage.members.project.coordinators-group-help": "<b>Laden Sie hier für jedes beteiligte Projekt (Zuwendungsempfänger) ausschließlich einen Koordinator:in ein.</b></br> Weitere Einladungen und Rollenvergabe erfolgen innerhalb der Arbeitsbereiche von Projekten.<ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle <b>Personen mit Koordinator:innen-Rolle im Verbund</b> gelistet. Die Koordinator:innen-Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Verbund geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
+
+  // "project.manage.members.funding.coordinators-group": "Invitation and Management Project members with Coordinator-Role",
+  "project.manage.members.funding.coordinators-group": "Einladung und Verwaltung Projektmitarbeitende mit Kooordinator:innen-Rolle",
+
+  // "project.manage.members.funding.coordinators-group-help": "Help Project members with Coordinator-Role",
+  "project.manage.members.funding.coordinators-group-help": "<b>Laden Sie hier Personen ein, die im Projekt neben Ihnen auch die Koordinator:innen-Rolle erhalten sollen.</b></br>Wenn Sie Projektmitarbeitende ohne  Koordinator:innen-Rolle einladen möchten, wechseln Sie in <b>Einladung und Verwaltung Projektmitarbeitende</b>.<ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle <b>Personen mit Koordinator:innen-Rolle im Projekt</b> gelistet. Die Koordinator:innen-Rolle kann über <b>Rolle entziehen</b> jederzeit auf die <b>Projektmitarbeitenden-Rolle begrenzt</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
+
+  // "project.manage.members.project.funders-group": "Invitation and Management Funder manager",
+  "project.manage.members.project.funders-group": "Einladung und Verwaltung PT-Projektmanager",
+
+  // "project.manage.members.project.funders-group-help": "Help Funder manager",
+  "project.manage.members.project.funders-group-help": "Hilfetext Einladung und Verwaltung PT-Projektmanager",
+
+  // "project.manage.members-list.table.edit.buttons.withdraw": "Withdraw role",
+  "project.manage.members-list.table.edit.buttons.withdraw": "Rolle entziehen",
+
+  // "project.versions.menu.project": "<i class="fas fa-sync"></i> Manage Project Versions",
+  "project.versions.menu.project": "<i class=\"fas fa-sync\"></i> Versionen verwalten"
 
 }
