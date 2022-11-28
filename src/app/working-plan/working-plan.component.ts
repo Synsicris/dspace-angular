@@ -1,4 +1,3 @@
-import { ItemDataService } from './../core/data/item-data.service';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
@@ -15,6 +14,7 @@ import { Collection } from '../core/shared/collection.model';
 import { getFirstSucceededRemoteWithNotEmptyData } from '../core/shared/operators';
 import { hasValue, isEmpty } from '../shared/empty.util';
 import { Item } from '../core/shared/item.model';
+import { ProjectVersionService } from '../core/project/project-version.service';
 
 @Component({
   selector: 'ipw-working-plan',
@@ -22,6 +22,11 @@ import { Item } from '../core/shared/item.model';
   styleUrls: ['./working-plan.component.scss'],
 })
 export class WorkingPlanComponent implements OnInit, OnDestroy {
+
+  /**
+   * If the working-plan given is a version item
+   */
+  @Input() isVersionOf: boolean;
 
   /**
    * The project community's id
@@ -47,6 +52,7 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
   constructor(
     private cdr: ChangeDetectorRef,
     private collectionDataService: CollectionDataService,
+    private projectVersionService: ProjectVersionService,
     private workingPlanStateService: WorkingPlanStateService
   ) {
   }
@@ -64,7 +70,7 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
     this.workingPlanStateService.isWorkingPlanLoaded().pipe(
       take(1)
     ).subscribe(() => {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata);
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata, this.isVersionOf);
     });
   }
 

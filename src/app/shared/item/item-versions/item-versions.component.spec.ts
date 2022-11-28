@@ -37,6 +37,7 @@ describe('ItemVersionsComponent', () => {
   let versionService: VersionDataService;
   let configurationService: ConfigurationDataService;
   let de: DebugElement;
+  let modalService;
 
   const versionHistory = Object.assign(new VersionHistory(), {
     id: '1',
@@ -161,7 +162,7 @@ describe('ItemVersionsComponent', () => {
     }
   });
   const item4 = Object.assign(new Item(), {
-    uuid: 'item-identifier-3',
+    uuid: 'item-identifier-4',
     handle: '123456789/3',
     metadata: {
       'synsicris.version.official': [
@@ -178,7 +179,7 @@ describe('ItemVersionsComponent', () => {
     version: createSuccessfulRemoteDataObject$(version4),
     _links: {
       self: {
-        href: '/items/item-identifier-2'
+        href: '/items/item-identifier-4'
       }
     }
   });
@@ -210,6 +211,10 @@ describe('ItemVersionsComponent', () => {
     findByPropertyName: of(true),
   });
 
+  const itemService = jasmine.createSpyObj('ItemDataService', {
+    updateItemMetadata: of(true)
+  });
+
   beforeEach(waitForAsync(() => {
 
     TestBed.configureTestingModule({
@@ -222,7 +227,7 @@ describe('ItemVersionsComponent', () => {
         { provide: AuthService, useValue: authenticationServiceSpy },
         { provide: AuthorizationDataService, useValue: authorizationServiceSpy },
         { provide: VersionHistoryDataService, useValue: versionHistoryServiceSpy },
-        { provide: ItemDataService, useValue: {} },
+        { provide: ItemDataService, useValue: itemService },
         { provide: VersionDataService, useValue: versionServiceSpy },
         { provide: WorkspaceitemDataService, useValue: workspaceItemDataServiceSpy },
         { provide: WorkflowItemDataService, useValue: workflowItemDataServiceSpy },
@@ -381,6 +386,7 @@ describe('ItemVersionsComponent', () => {
       component.canShowCreateVersion = true;
       component.displayActions = true;
       versionHistoryServiceSpy.getVersions.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([version1, version2, version3, version4])));
+      component.ngOnInit();
       fixture.detectChanges();
     });
 
@@ -408,51 +414,80 @@ describe('ItemVersionsComponent', () => {
       expect(de.query(By.css('span[data-test="official-2"]'))).toBeTruthy();
     });
 
-    it('When create button click should call createNewVersion with version 2', () => {
-      console.log(de.query(By.css('button[data-test="create-2"]')));
-      const button = de.query(By.css('button[data-test="create-2"]'));
-      jasmine.createSpyObj('component', ['createNewVersion']);
-      button.nativeElement.click();
-      fixture.detectChanges();
-      expect(component.createNewVersion).toHaveBeenCalledOnceWith(version2);
+    it('Should not show create buttons for any version', () => {
+      expect(de.queryAll(By.css('button[data-test="create-button"]')).length).toEqual(0);
     });
+
 
     describe('when isCoordinator is true', () => {
 
       beforeEach(() => {
-        component.isCoordinator = false;
-        component.isFounder = true;
+        component.isCoordinator = true;
+        component.isFounder = false;
         component.canShowCreateVersion = true;
+
+        modalService = (component as any).modalService;
+        spyOn(modalService, 'open').and.returnValue(Object.assign({ componentInstance: Object.assign({ response: observableOf(true) }) }));
+
         fixture.detectChanges();
       });
 
-      // Should show create button
-      it('Should show official for version 3', () => {
-        expect(de.query(By.css('button[data-test="create-1"]'))).toBeTruthy();
+      describe('When Visible and not Official', () => {
+
+        it('Should not show set visible for version 1', () => {
+          expect(de.query(By.css('button[data-test="visible-1"]'))).toBeFalsy();
+        });
+
+        it('Should not show set non official for version 1', () => {
+          expect(de.query(By.css('button[data-test="non-official-1"]'))).toBeFalsy();
+        });
+
+        it('Should not show delete for version 1', () => {
+          expect(de.query(By.css('button[data-test="delete-1"]'))).toBeFalsy();
+        });
+      });
+
+      describe('When Visible and Official', () => {
+
+        it('Should not show set visible for version 3', () => {
+          expect(de.query(By.css('button[data-test="visible-3"]'))).toBeFalsy();
+        });
+
+        it('Should not show set non official for version 3', () => {
+          expect(de.query(By.css('button[data-test="non-official-3"]'))).toBeFalsy();
+        });
+
+        it('Should not show delete for version 3', () => {
+          expect(de.query(By.css('button[data-test="delete-3"]'))).toBeFalsy();
+        });
       });
 
 
-      // Should delete version if not visible
-      it('Should show official for version 3', () => {
-        expect(de.query(By.css('button[data-test="create-3"]'))).toBeTruthy();
+      describe('When Non Visible and Non Official', () => {
+
+        it('Should show set visible for version 4', () => {
+          expect(de.query(By.css('button[data-test="visible-4"]'))).toBeTruthy();
+        });
+
+        it('Should not show set non official for version 4', () => {
+          expect(de.query(By.css('button[data-test="non-official-4"]'))).toBeFalsy();
+        });
+
+        it('Should show delete for version 4', () => {
+          expect(de.query(By.css('button[data-test="delete-4"]'))).toBeTruthy();
+        });
       });
 
-      // Should not change official
-      it('Should not change official for version 3', () => {
-        expect(de.query(By.css('button[data-test="official-3"]')).nativeElement.disabled).toBe(true);
-      });
-
-
-      it('When official and visible should not delete for version 3', () => {
-        expect(de.query(By.css('button[data-test="delete-3"]'))).toBeFalsy();
-      });
-
-      it('When official and visible should not change official for version 3', () => {
-        expect(de.query(By.css('button[data-test="official-3"]')).nativeElement.disabled).toBe(true);
-      });
 
       it('Should show version links for all version', () => {
         expect(de.queryAll(By.css('a[data-test="version-link"]')).length).toEqual(4);
+      });
+
+      it('Should call modal service when making visible version 4', () => {
+        const button = de.query(By.css('button[data-test="visible-4"]')).nativeElement;
+        button.click();
+        fixture.detectChanges();
+        expect(modalService.open).toHaveBeenCalled();
       });
 
     });
@@ -462,13 +497,74 @@ describe('ItemVersionsComponent', () => {
       beforeEach(() => {
         component.isCoordinator = false;
         component.isFounder = true;
-        component.canShowCreateVersion = true;
+        versionHistoryServiceSpy.getVersions.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([version1, version2, version3, version4])));
+
+        modalService = (component as any).modalService;
+        spyOn(modalService, 'open').and.returnValue(Object.assign({ componentInstance: Object.assign({ response: observableOf(true) }) }));
+
+        component.ngOnInit();
         fixture.detectChanges();
       });
-      // Should change official to non-official
-      // When setting non-official version should show modal
-      // Should show delete for non-official version
-      // Should show version link only if isVisible
+
+      describe('When Visible and not Official', () => {
+
+        it('Should not show set visible for version 1', () => {
+          expect(de.query(By.css('button[data-test="visible-1"]'))).toBeFalsy();
+        });
+
+        it('Should not show set non official for version 1', () => {
+          expect(de.query(By.css('button[data-test="non-official-1"]'))).toBeFalsy();
+        });
+
+        it('Should not show delete for version 1 since its selected', () => {
+          expect(de.query(By.css('button[data-test="delete-1"]'))).toBeFalsy();
+        });
+      });
+
+      describe('When Visible and Official', () => {
+
+        it('Should not show set visible for version 3', () => {
+          expect(de.query(By.css('button[data-test="visible-3"]'))).toBeFalsy();
+        });
+
+        it('Should show set non official for version 3', () => {
+          expect(de.query(By.css('button[data-test="non-official-3"]'))).toBeTruthy();
+        });
+
+        it('Should not show delete for version 3', () => {
+          expect(de.query(By.css('button[data-test="delete-3"]'))).toBeFalsy();
+        });
+      });
+
+
+      describe('When Non Visible and Non Official', () => {
+
+        it('Should not show set visible for version 4', () => {
+          expect(de.query(By.css('button[data-test="visible-4"]'))).toBeFalsy();
+        });
+
+        it('Should not show set non official for version 4', () => {
+          expect(de.query(By.css('button[data-test="non-official-4"]'))).toBeFalsy();
+        });
+
+        it('Should show delete for version 4', () => {
+          expect(de.query(By.css('button[data-test="delete-4"]'))).toBeTruthy();
+        });
+      });
+
+
+      it('Should show version links for all version', () => {
+        expect(de.queryAll(By.css('a[data-test="version-link"]')).length).toEqual(2);
+      });
+
+
+      it('Should call modal service when making non official version 3', () => {
+        const button = de.query(By.css('button[data-test="non-official-3"]')).nativeElement;
+        button.click();
+        fixture.detectChanges();
+        expect(modalService.open).toHaveBeenCalled();
+      });
+
     });
 
   });

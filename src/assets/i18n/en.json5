@@ -3128,9 +3128,15 @@
 
   "item.version.history.table.official": "Official",
 
-  "item.version.history.table.toggleVisibility": "Set as visible",
+  "item.version.history.table.setVisibility": "Set as visible",
 
-  "item.version.history.table.toggleOfficial": "Mark as not-official",
+  "item.version.history.table.setNonOfficial": "Mark as not-official",
+
+  "item.version.history.table.successfull" : "Successfully Updated {{type}}",
+
+  "synsicris.version.visible": "Visibility",
+
+  "synsicris.version.official": "Official",
 
   "version-history.breadcrumbs": "Version History",
 

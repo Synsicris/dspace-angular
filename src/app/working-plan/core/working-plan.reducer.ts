@@ -1,4 +1,4 @@
-import { constant, findIndex, remove } from 'lodash';
+import { findIndex, remove } from 'lodash';
 
 import { Workpackage } from './models/workpackage-step.model';
 import {
@@ -56,6 +56,7 @@ export interface WorkingPlanState {
   chartDateView: ChartDateViewType;
   sortOption: string;
   compareMode: boolean;
+  readMode: boolean;
 }
 
 const workpackageInitialState: WorkingPlanState = {
@@ -71,7 +72,8 @@ const workpackageInitialState: WorkingPlanState = {
   moving: false,
   chartDateView: ChartDateViewType.month,
   sortOption: '',
-  compareMode: false
+  compareMode: false,
+  readMode: false
 };
 
 /**
@@ -300,7 +302,8 @@ function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSucces
     initializing: false,
     processing: false,
     loaded: true,
-    sortOption: (action instanceof InitWorkingplanSuccessAction) ? action.payload.sortOption : state.sortOption
+    sortOption: (action instanceof InitWorkingplanSuccessAction) ? action.payload.sortOption : state.sortOption,
+    readMode: (action instanceof InitWorkingplanSuccessAction) ? action.payload.readMode : true
   });
 }
 

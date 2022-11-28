@@ -2,21 +2,19 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
-import { ProjectGroupService } from '../../../core/project/project-group.service';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
 import { PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
 import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ProjectVersionService } from '../../../core/project/project-version.service';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -55,9 +53,6 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
    * @param {DSpaceObject} injectedContextMenuObject
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
-   * @param {NgbModal} modalService
-   * @param {ProjectGroupService} projectGroupService
-   * @param {ProjectDataService} projectService
    * @param {Router} router
    * @param {ProjectVersionService} projectVersionService
    */
@@ -65,9 +60,6 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: any,
     protected authorizationService: AuthorizationDataService,
-    protected modalService: NgbModal,
-    protected projectGroupService: ProjectGroupService,
-    protected projectService: ProjectDataService,
     protected router: Router,
     protected projectVersionService: ProjectVersionService,
   ) {
