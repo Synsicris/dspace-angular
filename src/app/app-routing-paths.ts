@@ -132,3 +132,5 @@ export function getSubscriptionsModuleRoute() {
 export const SUBSCRIPTIONS_MODULE_PATH = 'subscriptions';
 
 export const HELP_PAGE_PATH = 'help';
+
+export const MANAGEMEMBERS = 'managemembers';

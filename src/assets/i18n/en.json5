@@ -1390,7 +1390,11 @@
 
   "context-menu.actions.edit-item.btn.OWNER": "<i class=\"fas fa-edit\"></i> Edit",
 
+  "context-menu.actions.edit-item.btn.ADMIN_EDIT": "<i class=\"fas fa-edit\"></i> Edit",
+
   "context-menu.actions.edit-item.btn.CUSTOM": "<i class=\"fas fa-edit\"></i> Edit",
+
+  "context-menu.actions.edit-item.btn.FUNDER_EDIT": "<i class=\"fas fa-edit\"></i> Edit",
 
   "context-menu.actions.edit-item.btn.DIRECTOR": "<i class=\"fas fa-edit\"></i> Edit",
 
@@ -1705,6 +1709,14 @@
   "confirmation-modal.pending-changes.cancel": "Cancel",
 
   "confirmation-modal.pending-changes.confirm": "Leave",
+
+  "confirmation-modal.version.official.header": "Version Official Managment",
+
+  "confirmation-modal.version.official.info": "Are you sure you want to make \"{{ dsoName }}\" version as not-official?",
+
+  "confirmation-modal.version.official.cancel": "Cancel",
+
+  "confirmation-modal.version.official.confirm": "Yes",
 
   "comment.listelement.badge": "Comment",
 
@@ -3080,6 +3092,8 @@
 
   "item.version.history.selected.alert": "You are currently viewing version {{version}} of the item.",
 
+  "item.version.history.official": "Active working project",
+
   "item.version.history.table.version": "Version",
 
   "item.version.history.table.item": "Item",
@@ -3109,6 +3123,18 @@
   "item.version.history.table.action.deleteVersion": "Delete version",
 
   "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
+
+  "item.version.history.table.visibility": "Visibility",
+
+  "item.version.history.table.official": "Official",
+
+  "item.version.history.table.toggleVisibility": "Set as visible",
+
+  "item.version.history.table.toggleOfficial": "Mark as not-official",
+
+  "version-history.breadcrumbs": "Version History",
+
+  "item.version.history.title": "Version History",
 
   "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href='{{destination}}'>here</a>.",
 
@@ -3158,6 +3184,20 @@
 
   "item.version.edit.notification.failure": "The summary of version number {{version}} has not been changed",
 
+  "item.version.visibility.modal.header": "Visibility version",
+
+  "item.version.visibility.modal.text": "Do you want to make version {{version}} visible?",
+
+  "item.version.visibility.modal.button.confirm": "Visibile",
+
+  "item.version.visibility.modal.button.confirm.tooltip": "Make visible this version",
+
+  "item.version.visibility.modal.button.cancel": "Cancel",
+
+  "item.version.visibility.modal.button.cancel.tooltip": "Do not visibility this version",
+
+  "item.version.visibility.modal.official.label": "Set version as official",
+
   "item.version.list.dropdown-text": "Compare with...",
 
   "item.version.list.option-text": "Version : ",
@@ -3165,6 +3205,14 @@
   "item.version.list.remove-text": "Remove selection",
 
   "item.version.list.selected-text": "Version selected : ",
+
+  "item.version.synsicris.version.invisible": "Not Visible",
+
+  "item.version.synsicris.version.visible": "Visible",
+
+  "item.version.synsicris.version.official": "Official",
+
+  "item.version.synsicris.version.not_official": "Not Official",
 
   "item-export.modal-launcher.single.btn": "Export",
 
@@ -4412,6 +4460,87 @@
 
   "project.listelement.badge": "Consortium",
 
+  "programme.manage.breadcrumbs": "Manage programme members",
+
+  "programme.manage.members-list.head": "Manage group",
+
+  "programme.manage.members-list.search.head": "Search persons",
+
+  "programme.manage.members-list.button.see-all": "Browse All",
+
+  "programme.manage.members-list.headMembers": "Current Members",
+
+  "programme.manage.members-list.search.scope.metadata": "Metadata",
+
+  "programme.manage.members-list.search.scope.email": "E-mail (exact)",
+
+  "programme.manage.members-list.search.button": "Search",
+
+  "programme.manage.members-list.table.id": "ID",
+
+  "programme.manage.members-list.table.name": "Name",
+
+  "programme.manage.members-list.table.edit": "Remove / Add",
+
+  "programme.manage.members-list.table.edit.buttons.remove": "Remove member with name \"{{name}}\"",
+
+  "programme.manage.members-list.table.invitation.buttons.send": "Send invitation to \"{{email}}\"",
+
+  "programme.manage.members-list.notification.success.addMember": "Successfully added member: \"{{name}}\"",
+
+  "programme.manage.members-list.notification.failure.addMember": "Failed to add member: \"{{name}}\"",
+
+  "programme.manage.members-list.notification.success.deleteMember": "Successfully deleted member: \"{{name}}\"",
+
+  "programme.manage.members-list.notification.failure.deleteMember": "Failed to delete member: \"{{name}}\"",
+
+  "programme.manage.members-list.table.edit.buttons.add": "Add member with name \"{{name}}\"",
+
+  "programme.manage.members-list.notification.failure.noActiveGroup": "No current active group, submit a name first.",
+
+  "programme.manage.members-list.no-members-yet": "No members in group yet, search and add.",
+
+  "programme.manage.members-list.no-items": "No EPeople found in that search",
+
+  "programme.manage.members-list.invite": "Invite person(s) who are not yet registered",
+
+  "programme.manage.members-list.table.email": "E-mail",
+
+  "programme.manage.members-list.modal.withdraw.title": "Withdraw role",
+
+  "programme.manage.members-list.modal.withdraw.body": "Are you sure?",
+
+  "programme.manage.members-list.modal.withdraw.confirm": "Yes, I'm sure",
+
+  "programme.manage.members-list.modal.withdraw.close": "Cancel",
+
+  "programme.manage.members-list.table.withdraw": "Withdraw role",
+
+  "programme.manage.members-list.table.withdraw.tooltip": "You can withdraw role",
+
+  "programme.manage.members-list.table.withdraw.send": "Send Invitation",
+
+  "programme.manage.members-list.table.identity": "Identity",
+
+  "programme.manage.members-group-help": "Help message here",
+
+  "programme.manage.notification.success.addMember": "Successfully added member",
+
+  "programme.manage.notification.success.deleteMember": "Successfully deleted member",
+
+  "programme.manage.members.project.funders-group": "Invitation and management of programme project funders",
+
+  "programme.manage.members.project.managers-group": "Invitation and management of programme managers",
+
+  "programme.manage.members.project.members-group": "Invitation and management of programme members",
+
+  "programme.manage.members.funders-group-help": "Help message here",
+
+  "programme.manage.members.managers-group-help": "Help message here",
+
+  "programme.manage.members.members-group-help": "Help message here",
+
+
   "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Invitation and management coordinators",
 
   "project.manage.menu.subproject": "<i class=\"fas fa-toolbox\"></i> Invitation and management subproject members",
@@ -4607,6 +4736,8 @@
   "project-overview.page.title": "Project overview",
 
   "project-overview.page.working-plan": "Working plan",
+
+  "project.versions.menu.project": "<i class=\"fas fa-sync\"></i> Manage Project Versions",
 
   "publication.listelement.badge": "Publication",
 
