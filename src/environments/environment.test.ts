@@ -358,6 +358,7 @@ export const environment: AppConfig = {
     },
     versioningEditMode: 'VERSIONING',
     versioningEditFormSection: 'projects_versioning',
+    lastVersionDiscoveryConfig: 'RELATION.last_visible_version'
   },
   impactPathway: {
     impactPathwaysFormSection: 'impact_pathway_form',

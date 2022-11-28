@@ -546,6 +546,7 @@ export class DefaultAppConfig implements AppConfig {
     },
     versioningEditMode: 'VERSIONING',
     versioningEditFormSection: 'projects_versioning',
+    lastVersionDiscoveryConfig: 'RELATION.last_visible_version'
   };
 
   exploitationPlan = {

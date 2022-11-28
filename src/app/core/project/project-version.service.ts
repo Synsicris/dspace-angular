@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { combineLatest, from, Observable, of } from 'rxjs';
-import { concatMap, map, mergeMap, reduce, switchMap, tap } from 'rxjs/operators';
+import { concatMap, filter, map, mergeMap, reduce, switchMap, tap } from 'rxjs/operators';
 import { differenceWith, findIndex, unionWith } from 'lodash';
 
 import { RelationshipService } from '../data/relationship.service';
@@ -21,6 +21,10 @@ import { isNotEmpty } from '../../shared/empty.util';
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { Metadata } from '../shared/metadata.utils';
 import { VERSION_UNIQUE_ID } from './project-data.service';
+import { SearchService } from '../shared/search/search.service';
+import { environment } from '../../../environments/environment';
+import { SearchResult } from '../../shared/search/models/search-result.model';
+import { createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
 
 export enum ComparedVersionItemStatus {
   Changed = 'changed',
@@ -40,11 +44,37 @@ export interface ComparedVersionItem {
 })
 export class ProjectVersionService {
 
+  /**
+   * Discovery configuration for searching the last visible version of an entity
+   * @protected
+   */
+  protected lastVersionDiscoveryConfig = environment.projects.lastVersionDiscoveryConfig;
+
   constructor(protected itemService: ItemDataService,
     protected relationshipService: RelationshipService,
+    protected searchService: SearchService,
     protected versionService: VersionDataService,
     protected versionHistoryService: VersionHistoryDataService,
   ) { }
+
+  public findLastVisibleVersionByItemID(itemId: string): Observable<RemoteData<Item>> {
+    const searchOptions = new PaginatedSearchOptions({
+      configuration: this.lastVersionDiscoveryConfig,
+      scope: itemId
+    });
+
+    return this.searchService.search(searchOptions).pipe(
+      getFirstCompletedRemoteData(),
+      map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
+        if (rd.hasFailed || rd.payload.totalElements === 0) {
+          console.log(rd);
+          return null;
+        } else {
+          return createSuccessfulRemoteDataObject<Item>(rd.payload.page[0].indexableObject);
+        }
+      })
+    );
+  }
 
   /**
    * Retrieve all item version for the given item

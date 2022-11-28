@@ -22,4 +22,5 @@ export interface ProjectsConfig extends Config {
   projectsBrowse: ProjectsBrowseConfig;
   versioningEditMode: string;
   versioningEditFormSection: string;
+  lastVersionDiscoveryConfig: string;
 }
