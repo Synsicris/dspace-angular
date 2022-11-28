@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { from as observableFrom, of as observableOf } from 'rxjs';
+import { EMPTY, from as observableFrom, of as observableOf } from 'rxjs';
 import {
   catchError,
   concatMap,
@@ -137,6 +137,7 @@ export class WorkingPlanEffects {
             action.payload.projectId,
             state.workingplan.workingplanId,
             state.workingplan.sortOption,
+            state.workingplan.readMode,
             item.uuid);
         }),
         tap(() => {
@@ -308,12 +309,12 @@ export class WorkingPlanEffects {
         switchMap((items: WorkpackageSearchItem[]) => {
           const itemIds = this.workingPlanService.getItemsFromWorkpackages(items);
           if (isEmpty(itemIds)) {
-            return observableOf(new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption));
+            return observableOf(new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption, action.payload.readMode));
           } else {
             return this.authorizationDataService.searchByObjects([FeatureID.isItemEditable], itemIds, 'core.item').pipe(
               getFirstSucceededRemoteListPayload(),
               map(() => {
-                return new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption);
+                return new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption, action.payload.readMode);
               }),
               catchError((error: Error) => {
                 if (error) {
@@ -333,9 +334,19 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.INIT_COMPARE),
     withLatestFrom(this.store$),
     switchMap(([action, state]: [InitCompareAction, any]) => {
+      let workingItemId;
+      let versionItemId;
+      if (action.payload.isVersionOf) {
+        workingItemId = action.payload.compareWorkingplanId;
+        versionItemId = state.workingplan.workingplanId;
+      } else {
+        workingItemId = state.workingplan.workingplanId;
+        versionItemId = action.payload.compareWorkingplanId;
+      }
+
       return this.projectVersionService.compareItemChildrenByMetadata(
-        state.workingplan.workingplanId,
-        action.payload.compareWorkingplanId,
+        workingItemId,
+        versionItemId,
         environment.workingPlan.workingPlanStepRelationMetadata
       ).pipe(
         switchMap((compareItemList: ComparedVersionItem[]) => this.workingPlanService.initCompareWorkingPlan(compareItemList)),
@@ -355,7 +366,7 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.INIT_WORKINGPLAN),
     switchMap((action: InitWorkingplanAction) => {
       return this.workingPlanService.initWorkingPlan(action.payload.items).pipe(
-        map((workpackages: Workpackage[]) => new InitWorkingplanSuccessAction(action.payload.workingplanId, workpackages, action.payload.sortOption)),
+        map((workpackages: Workpackage[]) => new InitWorkingplanSuccessAction(action.payload.workingplanId, workpackages, action.payload.sortOption, action.payload.readMode)),
         catchError((error: Error) => {
           if (error) {
             console.error(error.message);
@@ -371,10 +382,14 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.INIT_WORKINGPLAN_SUCCESS),
     withLatestFrom(this.store$),
     switchMap(([action, state]: [InitWorkingplanSuccessAction, any]) => {
-      return this.workingPlanService.updateWorkpackagePlace(
-        action.payload.workingplanId,
-        state.workingplan.workpackages,
-        action.payload.sortOption);
+      if (!action.payload.readMode) {
+        return this.workingPlanService.updateWorkpackagePlace(
+          action.payload.workingplanId,
+          state.workingplan.workpackages,
+          action.payload.sortOption);
+      } else {
+        return EMPTY;
+      }
     }));
 
   /**

@@ -25,6 +25,10 @@ import { Item } from '../../../core/shared/item.model';
   styleUrls: ['./working-plan-chart-toolbar.component.scss']
 })
 export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
+  /**
+   * If the working-plan given is a version item
+   */
+  @Input() isVersionOf: boolean;
 
   /**
    * The current project community's id
@@ -134,13 +138,13 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
    * @param version
    */
   onVersionSelected(version: Item) {
-    this.workingPlanStateService.dispatchInitCompare(version.id);
+    this.workingPlanStateService.dispatchInitCompare(version.id, this.isVersionOf);
   }
 
   /**
    * Dispatch cleaning of comparing mode
    */
   onVersionDeselected() {
-    this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata);
+    this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata, this.isVersionOf);
   }
 }

@@ -116,7 +116,7 @@
                       class="btn btn-xs btn-link p-0 text-primary"
                       [class.ml-1]="node.level !== 0"
                       title="{{'working-plan.chart.button.compare' | translate}}"
-                      (click)="openCompareModal(node)">
+                      (click)="openCompareModal(node); $event.stopImmediatePropagation();">
                 <i class="fas fa-not-equal"></i>
               </button>
               <ds-working-plan-chart-item-edit-button [compareMode]="compareMode"
