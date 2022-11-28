@@ -516,20 +516,32 @@ export class DefaultAppConfig implements AppConfig {
 
   projects: ProjectsConfig = {
     projectsGrantsOptionsVocabularyName: 'item_shared',
+    projectsEntityAdminEditMode: 'ADMIN_EDIT',
     projectsEntityEditMode: 'CUSTOM',
+    projectsEntityFunderEditMode: 'FUNDER_EDIT',
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
     excludeComparisonMetadata: [
       'cris.policy.group', 'cris.project.shared', 'dc.date.accessioned', 'dc.date.available', 'dspace.entity.type',
-      'synsicris.common-policy.group', 'synsicris.relation.project', 'synsicris.relation.funding', 'synsicris.uniqueid',
+      'synsicris.funder-policy.group', 'synsicris.coordinator-policy.group', 'synsicris.member-policy.group',
+      'synsicris.reader-policy.group', 'synsicris.relation.project', 'synsicris.relation.funding',
+      'synsicris.versioning-edit-policy.group', 'synsicris.versioning-read-policy.group','synsicris.uniqueid',
       'synsicris.relation.workingplan', 'workingplan.link.status', 'workingplan.place', 'workingplan.relation.step',
       'impactpathway.relation.parent', 'impactpathway.relation.step', 'impactpathway.relation.task',
       'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
       'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
+      'synsicris.isLastVersion','synsicris.isLastVersion.visible', 'synsicris.version'
     ],
-    projectsFunder: {
-      searchQueryConfigurationName: 'searchProjectsForFunder',
-      searchProjectConfigurationName: 'searchAllProjectForFunder',
-      searchProjectItemsConfigurationName: 'allProjectItems',
+    projectsBrowse: {
+      adminAndFunders: {
+        searchQueryConfigurationName: 'searchProjectsForAdminAndFunders',
+        searchProjectConfigurationName: 'searchAllProjectForAdminAndFunders',
+        searchProjectItemsConfigurationName: 'allProjectItemsForAdminAndFunders',
+      },
+      members: {
+        searchQueryConfigurationName: 'searchProjectsForMembers',
+        searchProjectConfigurationName: 'searchAllProjectForMembers',
+        searchProjectItemsConfigurationName: 'allProjectItems',
+      },
       entityTypeFilterName: 'entityType'
     },
     versioningEditMode: 'VERSIONING',

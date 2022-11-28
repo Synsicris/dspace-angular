@@ -338,13 +338,22 @@ export const environment: AppConfig = {
   },
   projects: {
     projectsGrantsOptionsVocabularyName: 'item_shared',
+    projectsEntityAdminEditMode: 'ADMIN_EDIT',
     projectsEntityEditMode: 'CUSTOM',
+    projectsEntityFunderEditMode: 'FUNDER_EDIT',
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
     excludeComparisonMetadata: ['dspace.entity.type'],
-    projectsFunder: {
-      searchQueryConfigurationName: 'searchProjectsForFunder',
-      searchProjectConfigurationName: 'searchProjectsForFunder',
-      searchProjectItemsConfigurationName: 'allProjectItems',
+    projectsBrowse: {
+      adminAndFunders: {
+        searchQueryConfigurationName: 'searchProjectsForAdminAndFunders',
+        searchProjectConfigurationName: 'searchAllProjectForAdminAndFunders',
+        searchProjectItemsConfigurationName: 'allProjectItemsForAdminAndFunders',
+      },
+      members: {
+        searchQueryConfigurationName: 'searchProjectsForMembers',
+        searchProjectConfigurationName: 'searchAllProjectForMembers',
+        searchProjectItemsConfigurationName: 'allProjectItems',
+      },
       entityTypeFilterName: 'entityType'
     },
     versioningEditMode: 'VERSIONING',

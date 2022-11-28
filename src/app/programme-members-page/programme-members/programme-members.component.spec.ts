@@ -41,7 +41,8 @@ describe('ProgrammeMembersComponent', () => {
   const projectGroupServiceMock = jasmine.createSpyObj('ProjectGroupService', {
     getProgrammeManagersGroupUUIDByItem: jasmine.createSpy('getProgrammeManagersGroupUUIDByItem'),
     getProgrammeMembersGroupUUIDByItem: jasmine.createSpy('getProgrammeMembersGroupUUIDByItem'),
-    getInvitationProgrammeFunderOrganizationalManagersGroupByItem: jasmine.createSpy('getInvitationProgrammeFunderOrganizationalManagersGroupByItem')
+    getInvitationProgrammeFunderOrganizationalManagersGroupByItem: jasmine.createSpy('getInvitationProgrammeFunderOrganizationalManagersGroupByItem'),
+    getInvitationProgrammeProjectFundersGroupByItem: jasmine.createSpy('getInvitationProgrammeProjectFundersGroupByItem')
   });
 
   const mockItem = Object.assign(new Item(), {
@@ -111,10 +112,27 @@ describe('ProgrammeMembersComponent', () => {
     component.relatedItem = mockItem;
   });
 
+  describe('when is manager group', () => {
+
+    beforeEach(() => {
+      component.isFundersGroup = false;
+      component.isManagersGroup = true;
+      component.targetGroup = mockGroupManagers;
+      groupServiceMock.getActiveGroup.and.returnValue(of(mockGroupManagers));
+      fixture.detectChanges();
+    });
+
+    it('should create', () => {
+      expect(component).toBeTruthy();
+      expect(component.helpMessageLabel).toBe('programme.manage.members.managers-group-help');
+    });
+  });
+
   describe('when is funder group', () => {
 
     beforeEach(() => {
       component.isFundersGroup = true;
+      component.isManagersGroup = false;
       component.targetGroup = mockGroupManagers;
       groupServiceMock.getActiveGroup.and.returnValue(of(mockGroupManagers));
       fixture.detectChanges();
