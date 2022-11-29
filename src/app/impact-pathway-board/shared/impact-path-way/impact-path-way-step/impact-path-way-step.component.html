@@ -15,15 +15,18 @@
        cdkDropListOrientation="vertical"
        [cdkDropListData]="(impactPathwayStep$ | async)"
        [cdkDropListConnectedTo]="connectedToList"
+
        (cdkDropListEntered)="listEnteredToStep($event)"
        (cdkDropListExited)="listExited($event)"
        (cdkDropListDropped)="listDropped($event)">
     <ipw-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
                               class="mb-sm-1 mb-lg-4"
+                              [cdkDragDisabled]="isVersionOfAnItem || compareMode"
                               [projectCommunityId]="projectCommunityId"
                               [impactPathwayId]="(impactPathwayStep$ | async)?.parentId"
                               [impactPathwayStepId]="(impactPathwayStep$ | async)?.id"
                               [impactPathwayStepType]="(impactPathwayStep$ | async)?.type"
+                              [isVersionOfAnItem]="isVersionOfAnItem"
                               [data]="task"
                               [selectable]="false"
                               [stepHasDetail]="(impactPathwayStep$ | async)?.hasDetail()"

@@ -16,9 +16,12 @@ import { Community } from '../../../../../core/shared/community.model';
 import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-component.model';
 import { getFirstSucceededRemoteDataPayload } from '../../../../../core/shared/operators';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
-import { CreateImpactPathwayComponent } from '../../../../../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
+import {
+  CreateImpactPathwayComponent
+} from '../../../../../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { RenderCrisLayoutBoxFor } from '../../../../decorators/cris-layout-box.decorator';
 import { getItemPageRoute } from '../../../../../item-page/item-page-routing-paths';
+import { ProjectVersionService } from '../../../../../core/project/project-version.service';
 
 @Component({
   selector: 'ds-impact-pathways-box',
@@ -44,6 +47,11 @@ export class ImpactPathwaysBoxComponent extends CrisLayoutBoxModelComponent impl
   impactPathwayListPageInfo: BehaviorSubject<PageInfo> = new BehaviorSubject<PageInfo>(null);
 
   /**
+   * If the working-plan given is a version item
+   */
+  isVersionOf: boolean;
+
+  /**
    * A boolean representing if subproject list is loading
    */
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
@@ -58,6 +66,7 @@ export class ImpactPathwaysBoxComponent extends CrisLayoutBoxModelComponent impl
     protected modalService: NgbModal,
     protected nameService: DSONameService,
     protected projectService: ProjectDataService,
+    protected projectVersionService: ProjectVersionService,
     protected router: Router,
     protected translateService: TranslateService,
     @Inject('boxProvider') public boxProvider: CrisLayoutBox,
@@ -68,6 +77,7 @@ export class ImpactPathwaysBoxComponent extends CrisLayoutBoxModelComponent impl
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.isVersionOf = this.projectVersionService.isVersionOfAnItem(this.item);
     this.projectService.getProjectCommunityByItemId(this.item.uuid).pipe(
       getFirstSucceededRemoteDataPayload()
     ).subscribe((projectCommunity: Community) => {

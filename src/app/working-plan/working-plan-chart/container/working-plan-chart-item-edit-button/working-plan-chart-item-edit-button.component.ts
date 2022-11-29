@@ -6,6 +6,7 @@ import { WorkpacakgeFlatNode } from '../../../core/models/workpackage-step-flat-
 import { environment } from '../../../../../environments/environment';
 import { FeatureID } from '../../../../core/data/feature-authorization/feature-id';
 import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
+import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   selector: 'ds-working-plan-chart-item-edit-button',
@@ -38,7 +39,11 @@ export class WorkingPlanChartItemEditButtonComponent implements OnInit {
   constructor(private authorizationService: AuthorizationDataService) { }
 
   ngOnInit(): void {
-    this.canEdit$ = this.authorizationService.isAuthorized(FeatureID.isItemEditable, this.node.selfUrl);
+    if (this.isVersionOfAnItem) {
+      this.canEdit$ = of(false);
+    } else {
+      this.canEdit$ = this.authorizationService.isAuthorized(FeatureID.isItemEditable, this.node.selfUrl);
+    }
   }
 
   /**

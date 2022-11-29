@@ -1,5 +1,5 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -19,6 +19,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 import { isNotEmpty } from '../../empty.util';
 import { environment } from '../../../../environments/environment';
+import { ProjectVersionService } from '../../../core/project/project-version.service';
 
 /**
  * This component represents mydspace actions related to Item object.
@@ -75,18 +76,19 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    * @param {SearchService} searchService
    * @param {RequestService} requestService
    * @param {EditItemDataService} editItemDataService
+   * @param {ProjectVersionService} projectVersionService
    * @param {NgbModal} modalService
    */
   constructor(protected authorizationService: AuthorizationDataService,
-    protected injector: Injector,
-    protected router: Router,
-    protected aroute: ActivatedRoute,
-    protected notificationsService: NotificationsService,
-    protected translate: TranslateService,
-    protected searchService: SearchService,
-    protected requestService: RequestService,
-    protected editItemDataService: EditItemDataService,
-    protected modalService: NgbModal) {
+              protected injector: Injector,
+              protected router: Router,
+              protected notificationsService: NotificationsService,
+              protected translate: TranslateService,
+              protected searchService: SearchService,
+              protected requestService: RequestService,
+              protected editItemDataService: EditItemDataService,
+              protected projectVersionService: ProjectVersionService,
+              protected modalService: NgbModal) {
     super(Item.type, injector, router, notificationsService, translate, searchService, requestService);
   }
 
@@ -104,13 +106,7 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
       this.canEditGrants$.next(canEdit);
     });
 
-    this.aroute.data.pipe(
-      map((data) => data.isVersionOfAnItem),
-      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
-      take(1)
-    ).subscribe((isVersionOfAnItem: boolean) => {
-      this.isVersionOfAnItem$.next(isVersionOfAnItem);
-    });
+    this.isVersionOfAnItem$.next(this.projectVersionService.isVersionOfAnItem(this.object));
   }
 
   /**

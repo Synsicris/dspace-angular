@@ -5,7 +5,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ResizeEvent } from 'angular-resizable-element';
 import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -211,11 +211,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   private chartStatusTypeList$: BehaviorSubject<VocabularyEntry[]> = new BehaviorSubject<VocabularyEntry[]>([]);
   private subs: Subscription[] = [];
 
-  /**
-   * A boolean representing if item is a version of original item
-   */
-  public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   constructor(
     protected cdr: ChangeDetectorRef,
     private modalService: NgbModal,
@@ -232,15 +227,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
-    this.aroute.data.pipe(
-      map((data) => data.isVersionOfAnItem),
-      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
-      take(1)
-    ).subscribe((isVersionOfAnItem: boolean) => {
-      this.isVersionOfAnItem$.next(isVersionOfAnItem);
-    });
-
     this.workpackageVocabularyOptions = new VocabularyOptions(
       environment.workingPlan.workingPlanStepResponsibleAuthority,
       environment.workingPlan.workingPlanStepResponsibleMetadata,

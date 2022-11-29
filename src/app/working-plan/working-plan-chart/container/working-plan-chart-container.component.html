@@ -65,7 +65,7 @@
           [class.compare-node-status-new]="(compareMode | async) && node.compareStatus == ComparedVersionItemStatus.New"
           [class.compare-node-status-deleted]="(compareMode | async) && node.compareStatus == ComparedVersionItemStatus.Removed"
           cdkDrag [cdkDragData]="node"
-          [cdkDragDisabled]="!dragAndDropIsActive || (isMoving() | async)"
+          [cdkDragDisabled]="!dragAndDropIsActive || isVersionOf || (isMoving() | async)"
           class="tree-node-customization"
           [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
           [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
@@ -85,7 +85,7 @@
           </div>
           <div [class.root-node-style]="node.level === 0">
             <button mat-icon-button matTreeNodeToggle
-                    [disabled]="(compareMode | async) || !dragAndDropIsActive || (isMoving() | async)" cdkDragHandle
+                    [disabled]="(compareMode | async) || isVersionOf || !dragAndDropIsActive || (isMoving() | async)" cdkDragHandle
                     class="btn btn-xs btn-link p-0 text-primary button-move" title="Drag & Drop">
               <i class="fas fa-grip-vertical{{(!dragAndDropIsActive || (isMoving() | async))?' opacity-50':''}}"></i>
             </button>
@@ -98,7 +98,7 @@
             <button *ngIf="canAddChildStep(node)" data-test="add-child-step"
                     class="btn btn-xs btn-link p-0"
                     title="{{'working-plan.chart.button.add' | translate}}"
-                    [disabled]="(compareMode | async) || (isVersionOfAnItem$ | async)"
+                    [disabled]="(compareMode | async) || isVersionOf"
                     (click)="addChildStep(node)">
               <i class="fas fa-plus-circle"></i>
             </button>
@@ -107,7 +107,7 @@
             <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end" data-test="remove-step"
                     title="{{'working-plan.chart.button.remove' | translate}}"
                     [class.ml-1]="node.level !== 0"
-                    [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || (isVersionOfAnItem$ | async)"
+                    [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf"
                     (click)="deleteStep(node); $event.stopPropagation()">
               <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
               <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
@@ -121,7 +121,7 @@
                 <i class="fas fa-not-equal"></i>
               </button>
               <ds-working-plan-chart-item-edit-button [compareMode]="compareMode"
-                                                      [isVersionOfAnItem]="(isVersionOfAnItem$ | async)">
+                                                      [isVersionOfAnItem]="isVersionOf">
                                                       [node]="node"></ds-working-plan-chart-item-edit-button>
             </div>
           </div>
@@ -133,9 +133,13 @@
       <div class="sidenav-header">
         <div class="float-left">
           <div ngbDropdown #changeAllStartDatesDrop="ngbDropdown" class="d-inline-block">
-            <button [disabled]="(compareMode | async)" class="btn btn-outline-secondary btn-xs mr-2 ml-2" id="changeAllStartDate" ngbDropdownToggle>{{'working-plan.chart.column.changeStartDate' | translate}}</button>
+            <button class="btn btn-outline-secondary btn-xs mr-2 ml-2" id="changeAllStartDate" ngbDropdownToggle
+                    [disabled]="(compareMode | async) || isVersionOf">
+              {{'working-plan.chart.column.changeStartDate' | translate}}
+            </button>
             <div ngbDropdownMenu class="block-change-start-date font-size-07 p-2" aria-labelledby="changeAllStartDate">
-              <button type="button" class="close" data-dismiss="alert" attr.aria-label="{{'working-plan.chart.column.changeStartDateClose' | translate}}" (click)="changeAllStartDatesDrop.close()">
+              <button type="button" class="close" data-dismiss="alert" attr.aria-label="{{'working-plan.chart.column.changeStartDateClose' | translate}}"
+                      (click)="changeAllStartDatesDrop.close()">
                 <span aria-hidden="true">&times;</span>
               </button>
               <div class="font-weight-bold mb-1">{{'working-plan.chart.column.changeStartDate' | translate}}</div>
@@ -188,29 +192,33 @@
             <p class="font-weight-bold m-0">{{'working-plan.chart.column.dates' | translate}}</p>
             <mat-form-field *ngIf="node.type != 'milestone'" floatLabel="never" appearance="fill" class="p-0">
               <mat-label>{{'working-plan.chart.column.dates.start' | translate}}</mat-label>
-              <input [disabled]="(compareMode | async) || (isVersionOfAnItem$ | async)" matInput type="text" ngbDatepicker #startDate="ngbDatepicker" (click)="startDate.toggle()" container="body"
+              <input [disabled]="(compareMode | async) || isVersionOf" matInput type="text" ngbDatepicker #startDate="ngbDatepicker" (click)="startDate.toggle()" container="body"
                      [minDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.start?.full) : null"
                      [maxDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.end?.full) : getDateStruct(node.dates?.end?.full)"
                      [value]="(node.dates?.start?.full) ? (node.dates?.start?.full) : ''"
                      (dateSelect)="updateDateRange(node, $event, node.dates?.end?.full)"/>
-              <mat-icon *ngIf="!(compareMode | async)" matSuffix (click)="startDate.toggle()" class="cursor-pointer">edit_calendar</mat-icon>
+              <mat-icon *ngIf="!(compareMode | async) && !isVersionOf"
+                        matSuffix (click)="startDate.toggle()"
+                        class="cursor-pointer">edit_calendar</mat-icon>
             </mat-form-field>
             <br *ngIf="node.type != 'milestone'">
             <mat-form-field floatLabel="never" appearance="fill" class="p-0">
               <mat-label>{{'working-plan.chart.column.dates.end' | translate}}</mat-label>
               <input matInput type="text" ngbDatepicker #endDate="ngbDatepicker" (click)="endDate.toggle()" container="body"
-                     [disabled]="(compareMode | async) || (isVersionOfAnItem$ | async)"
+                     [disabled]="(compareMode | async) || isVersionOf"
                      [minDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.start?.full) : getDateStruct(node.dates?.start?.full)"
                      [maxDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.end?.full) : null"
                      [value]="(node.dates?.end?.full) ? (node.dates?.end?.full) : ''"
                      (dateSelect)="updateDateRange(node, (node.type != 'milestone')?node.dates?.start?.full:$event, $event)"/>
-              <mat-icon *ngIf="!(compareMode | async)" matSuffix (click)="endDate.toggle()" class="cursor-pointer">edit_calendar</mat-icon>
+              <mat-icon *ngIf="!(compareMode | async) && !isVersionOf"
+                        matSuffix (click)="endDate.toggle()"
+                        class="cursor-pointer">edit_calendar</mat-icon>
             </mat-form-field>
           </div>
           <div class="ml-05 mt-1 font-size-07">
             <p class="font-weight-bold m-0">{{'working-plan.chart.column.responsible' | translate}}</p>
             <ds-authority-dropdown floatLabel="never" class="min-width-large"
-                                   [readOnly]="(compareMode | async) || (isVersionOfAnItem$ | async)"
+                                   [readOnly]="(compareMode | async) || isVersionOf"
                                    [fieldId]="'responsible'"
                                    [fieldName]="'responsible'"
                                    [vocabularyOptions]="(node.type != 'milestone') ? workpackageVocabularyOptions : milestoneVocabularyOptions"
@@ -220,7 +228,7 @@
           <div class="ml-05 mt-1 font-size-07">
             <p class="font-weight-bold m-0">{{'working-plan.chart.column.status' | translate}}</p>
             <mat-form-field appearance="fill" floatLabel="never" class="mr-05 min-width-small">
-              <mat-select [disabled]="(compareMode | async) || (isVersionOfAnItem$ | async)" class="text-center" (selectionChange)="updateStepStatus(node, $event)" [(value)]="node.status">
+              <mat-select [disabled]="(compareMode | async) || isVersionOf" class="text-center" (selectionChange)="updateStepStatus(node, $event)" [(value)]="node.status">
                 <mat-select-trigger>
                   <span><i ipwWorkpackageStatusIcon [status]="node?.status"></i> {{getStatusTypeLabel(node?.status)}}</span>
                 </mat-select-trigger>

@@ -3,7 +3,6 @@
   </ds-comcol-page-header>
   <div class="pl-2">
     <ds-item-version-list [btnClass]="'btn-md'"
-                          [disabled]="(isVersionOfAnItem$| async)"
                           [targetItemId]="impactPathway.id"
                           (versionSelected)="onVersionSelected($event)"
                           (versionDeselected)="onVersionDeselected()">

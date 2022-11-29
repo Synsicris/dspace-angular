@@ -3,7 +3,7 @@
     <span>
       <button class="btn btn-link text-decoration-none"
               title="{{'working-plan.chart.toolbar.add-btn' | translate}}"
-              [disabled]="(compareMode | async) || (isVersionOfAnItem$ | async)"
+              [disabled]="(compareMode | async) || isVersionOf"
               (click)="createWorkpackage()">
         <i class="fas fa-plus-circle fa-2x"></i>
       </button>
@@ -11,7 +11,6 @@
     <span fxFlex></span>
     <div *ngIf="(workpackages | async)?.length > 0" class="btn-group btn-group-sm mr-2">
       <ds-item-version-list [currentVersionSelected]="(currentComparingWorkingPlan | async)"
-                            [disabled]="(isVersionOfAnItem$ | async)"
                             [targetItemId]="workingPlan.id"
                             (versionSelected)="onVersionSelected($event)"
                             (versionDeselected)="onVersionDeselected()"></ds-item-version-list>

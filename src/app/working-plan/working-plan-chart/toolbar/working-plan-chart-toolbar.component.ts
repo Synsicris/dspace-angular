@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import {
@@ -58,11 +58,6 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
 
   subs: Subscription[] = [];
 
-  /**
-   * A boolean representing if item is a version of original item
-   */
-  public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   constructor(
     private cdr: ChangeDetectorRef,
     private modalService: NgbModal,
@@ -84,13 +79,6 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
       })
     );
 
-    this.aroute.data.pipe(
-      map((data) => data.isVersionOfAnItem),
-      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
-      take(1)
-    ).subscribe((isVersionOfAnItem: boolean) => {
-      this.isVersionOfAnItem$.next(isVersionOfAnItem);
-    });
   }
 
   createWorkpackage() {
