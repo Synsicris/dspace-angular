@@ -1,6 +1,5 @@
 <button *ngIf="canShow() && (canDeleteProject() | async) && !(isVersionOfAnItem() | async)" class="dropdown-item"
-  (click)="$event.preventDefault();openConfirmationModal(content);"
-  [innerHTML]="'project-overview.page.header.delete.btn' | translate">
+        (click)="$event.preventDefault();openConfirmationModal(content);" [innerHTML]="'project-overview.page.header.delete.btn' | translate">
 </button>
 
 <ng-template #content let-c="close" let-d="dismiss">
@@ -16,16 +15,19 @@
     <p>{{'project-overview.page.header.delete.confirm.info' | translate}}</p>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary"
-      title="{{'project-overview.page.header.delete.confirm.cancel' | translate}}" [disabled]="(processing$ | async)"
-      (click)="c('cancel')">
+    <button type="button"
+            class="btn btn-secondary"
+            title="{{'project-overview.page.header.delete.confirm.cancel' | translate}}"
+            [disabled]="(processing$ | async)"
+            (click)="c('cancel')">
       {{'project-overview.page.header.delete.confirm.cancel' | translate}}
     </button>
-    <button type="button" class="btn btn-danger"
-      title="{{'project-overview.page.header.delete.confirm.submit' | translate}}" [disabled]="(processing$ | async)"
-      (click)="confirmDelete()">
-      <span *ngIf="processing$ | async"><i class='fas fa-circle-notch fa-spin'></i>
-        {{'submission.workflow.tasks.generic.processing' | translate}}</span>
+    <button type="button"
+            class="btn btn-danger"
+            title="{{'project-overview.page.header.delete.confirm.submit' | translate}}"
+            [disabled]="(processing$ | async)"
+            (click)="confirmDelete()">
+      <span *ngIf="processing$ | async"><i class='fas fa-circle-notch fa-spin'></i> {{'submission.workflow.tasks.generic.processing' | translate}}</span>
       <span *ngIf="!(processing$ | async)">{{'project-overview.page.header.delete.confirm.submit' | translate}}</span>
     </button>
   </div>
