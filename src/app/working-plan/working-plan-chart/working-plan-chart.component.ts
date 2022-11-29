@@ -11,6 +11,10 @@ import { Item } from '../../core/shared/item.model';
   styleUrls: ['./working-plan-chart.component.scss'],
 })
 export class WorkingPlanChartComponent {
+  /**
+   * If the working-plan given is a version item
+   */
+  @Input() isVersionOf: boolean;
 
   /**
    * The current project community's id

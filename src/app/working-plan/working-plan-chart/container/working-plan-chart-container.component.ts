@@ -79,6 +79,10 @@ interface WorkpackageEditModes {
   ]
 })
 export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
+  /**
+   * If the working-plan given is a version item
+   */
+  @Input() isVersionOf: boolean;
 
   /**
    * The current project community's id
@@ -468,7 +472,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   updateSort() {
     if (this.sortSelectedValue !== this.sortSelectedOld) {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, this.sortSelectedValue);
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, this.sortSelectedValue, this.isVersionOf);
     }
   }
 
@@ -989,7 +993,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   openCompareModal(node: WorkpacakgeFlatNode) {
     const modalRef = this.modalService.open(CompareItemComponent, { size: 'xl' });
-    (modalRef.componentInstance as CompareItemComponent).baseItemId = node.id;
-    (modalRef.componentInstance as CompareItemComponent).versionedItemId = node.compareId;
+    if (this.isVersionOf) {
+      (modalRef.componentInstance as CompareItemComponent).baseItemId = node.compareId;
+      (modalRef.componentInstance as CompareItemComponent).versionedItemId = node.id;
+    } else {
+      (modalRef.componentInstance as CompareItemComponent).baseItemId = node.id;
+      (modalRef.componentInstance as CompareItemComponent).versionedItemId = node.compareId;
+    }
   }
 }

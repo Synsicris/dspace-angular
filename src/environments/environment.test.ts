@@ -343,14 +343,22 @@ export const environment: AppConfig = {
     projectsEntityFunderEditMode: 'FUNDER_EDIT',
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
     excludeComparisonMetadata: ['dspace.entity.type'],
-    projectsFunder: {
-      searchQueryConfigurationName: 'searchProjectsForFunder',
-      searchProjectConfigurationName: 'searchProjectsForFunder',
-      searchProjectItemsConfigurationName: 'allProjectItems',
+    projectsBrowse: {
+      adminAndFunders: {
+        searchQueryConfigurationName: 'searchProjectsForAdminAndFunders',
+        searchProjectConfigurationName: 'searchAllProjectForAdminAndFunders',
+        searchProjectItemsConfigurationName: 'allProjectItemsForAdminAndFunders',
+      },
+      members: {
+        searchQueryConfigurationName: 'searchProjectsForMembers',
+        searchProjectConfigurationName: 'searchAllProjectForMembers',
+        searchProjectItemsConfigurationName: 'allProjectItems',
+      },
       entityTypeFilterName: 'entityType'
     },
     versioningEditMode: 'VERSIONING',
     versioningEditFormSection: 'projects_versioning',
+    lastVersionDiscoveryConfig: 'RELATION.last_visible_version'
   },
   impactPathway: {
     impactPathwaysFormSection: 'impact_pathway_form',

@@ -67,7 +67,7 @@
                         <!--CREATE-->
                         <ng-container *ngIf="(canCreateVersion$ | async) && canShowCreateVersion">
                           <button class="btn btn-outline-primary btn-sm version-row-element-create"
-                            [attr.data-test]="'create-'+version.id"
+                            data-test="create-button"
                             [disabled]="isAnyBeingEdited() || (hasDraftVersion$ | async) || version.isLoading"
                             (click)="createNewVersion(version)" title="{{createVersionTitle$ | async | translate }}">
                             <i class="fas fa-code-branch fa-fw"></i>
@@ -100,7 +100,7 @@
               <ng-container *ngIf="isCoordinator || isFounder">
                 <td class="version-row-element">
 
-                  <ng-container *ngVar="(version.item | async)?.payload as versionItem">
+                  <ng-container *ngIf="(version.item | async)?.payload as versionItem">
                     <span
                       [attr.data-test]="versionItem.firstMetadataValue('synsicris.version.visible') === 'true' ? 'visible-'+version.id : 'non-visible-'+version.id">
                       {{ (versionItem.firstMetadataValue('synsicris.version.visible') === 'true' ?
@@ -162,28 +162,26 @@
 
                   <ng-container *ngIf="isCoordinator">
                     <ng-container *ngVar="(version.item | async)?.payload as versionItem">
-                      <button *ngIf="(versionItem.firstMetadataValue('synsicris.version.visible') === 'false' || !versionItem.firstMetadataValue('synsicris.version.visible'))"
+                      <button
+                        *ngIf="versionItem.firstMetadataValue('synsicris.version.visible') === 'false' || !versionItem.firstMetadataValue('synsicris.version.visible')"
                         class="btn btn-sm version-row-element-delete btn-outline-primary"
                         (click)="setVisible(versionItem,version)"
-                        title="{{'item.version.history.table.toggleVisibility' | translate}}"
-                        [disabled]="version.isLoading"
-                        [attr.data-test]="versionItem.firstMetadataValue('synsicris.version.visible') === 'true' ? 'visible-'+version.id : 'non-visible-'+version.id">
-                        <i class="fas"
-                          [ngClass]="{'fa-eye': (versionItem.firstMetadataValue('synsicris.version.visible') === 'false' || !versionItem.firstMetadataValue('synsicris.version.visible') ), 'fa-eye-slash': versionItem.firstMetadataValue('synsicris.version.visible') === 'true'}"></i>
+                        title="{{'item.version.history.table.setVisibility' | translate}}"
+                        [disabled]="version.isLoading" [attr.data-test]="'visible-'+version.id">
+                        <i class="fas fa-eye"></i>
                       </button>
                     </ng-container>
                   </ng-container>
 
-                  <ng-container *ngIf="isCoordinator || isFounder">
+                  <ng-container *ngIf="isFounder">
                     <ng-container *ngVar="(version.item | async)?.payload as versionItem">
                       <button
                         *ngIf="isFounder && versionItem.firstMetadataValue('synsicris.version.official') === 'true'"
                         class="btn btn-sm version-row-element-delete btn-outline-primary" [disabled]="version.isLoading"
                         (click)="setNonofficial(versionItem,version)"
-                        title="{{'item.version.history.table.toggleOfficial' | translate}}"
+                        title="{{'item.version.history.table.setNonOfficial' | translate}}"
                         [attr.data-test]="'non-official-'+version.id">
-                        <i class="fas"
-                          [ngClass]="{'fa-check': (versionItem.firstMetadataValue('synsicris.version.official') === 'false' || !versionItem.firstMetadataValue('synsicris.version.official') ), 'fa-times': versionItem.firstMetadataValue('synsicris.version.official') === 'true'}"></i>
+                        <i class="fas fa-times"></i>
                       </button>
                     </ng-container>
                   </ng-container>
