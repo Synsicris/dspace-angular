@@ -8,6 +8,7 @@ import { ProjectItemPageResolver } from '../core/project/project-item-page.resol
 import { ProjectCommunityByProjectItemResolver } from '../core/project/project-community-by-project-item.resolver';
 import { ProjectItemI18nBreadcrumbResolver } from '../core/breadcrumbs/project-item-i18n-breadcrumb.resolver';
 import { ProjectItemI18nBreadcrumbsService } from '../core/breadcrumbs/project-item-i18n-breadcrumbs.service';
+import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.resolver';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { ProjectItemI18nBreadcrumbsService } from '../core/breadcrumbs/project-i
           workingPlan: WorkingPlanItemResolver,
           projectItem: ProjectItemPageResolver,
           projectCommunity: ProjectCommunityByProjectItemResolver,
+          isVersionOfAnItem: VersionOfAnItemResolver,
           breadcrumb: ProjectItemI18nBreadcrumbResolver
         },
         data: { title: 'working-plan.page.title', breadcrumbKey: 'working-plan', showBreadcrumbsFluid: true }
@@ -32,7 +34,8 @@ import { ProjectItemI18nBreadcrumbsService } from '../core/breadcrumbs/project-i
     ProjectItemI18nBreadcrumbsService,
     ProjectCommunityByProjectItemResolver,
     ProjectItemPageResolver,
-    WorkingPlanItemResolver
+    WorkingPlanItemResolver,
+    VersionOfAnItemResolver
   ]
 })
 export class WorkingPlanPageRoutingModule {
