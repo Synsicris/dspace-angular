@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { mergeMap, take } from 'rxjs/operators';
+import { filter, map, mergeMap, take } from 'rxjs/operators';
 import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../core/models/impact-pathway.model';
@@ -18,6 +18,7 @@ import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-m
 import { hasValue } from '../../../shared/empty.util';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { environment } from '../../../../environments/environment';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -61,12 +62,18 @@ export class ImpactPathWayComponent implements OnInit {
    */
   canEditButton$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  /**
+   * A boolean representing if item is a version of original item
+   */
+  public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
     private authorizationService: AuthorizationDataService,
     private cdr: ChangeDetectorRef,
     private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
     private modalService: NgbModal,
+    protected aroute: ActivatedRoute,
     protected editItemDataService: EditItemDataService) {
   }
 
@@ -86,6 +93,15 @@ export class ImpactPathWayComponent implements OnInit {
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEditButton$.next(canEdit);
+    });
+
+
+    this.aroute.data.pipe(
+      map((data) => data.isVersionOfAnItem),
+      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
+      take(1)
+    ).subscribe((isVersionOfAnItem: boolean) => {
+      this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
 
   }

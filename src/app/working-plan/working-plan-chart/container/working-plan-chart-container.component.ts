@@ -35,6 +35,7 @@ import { Item } from '../../../core/shared/item.model';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 import { CompareItemComponent } from '../../../shared/compare-item/compare-item.component';
+import { ActivatedRoute } from '@angular/router';
 
 export const MY_FORMATS = {
   parse: {
@@ -217,6 +218,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     private workingPlanService: WorkingPlanService,
     private workingPlanStateService: WorkingPlanStateService,
     private editItemService: EditItemDataService,
+    private aroute: ActivatedRoute,
   ) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
       this._isExpandable, this._getChildren);

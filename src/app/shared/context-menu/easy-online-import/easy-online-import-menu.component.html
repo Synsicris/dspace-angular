@@ -1,3 +1,4 @@
-<button *ngIf="canShow() && (canMakeImport() | async)" class="dropdown-item"
-        [routerLink]="getImportPageRouterLink()" [innerHTML]="'context-menu.actions.easy-online-import.btn' | translate">
+<button *ngIf="canShow() && (canMakeImport() | async) && !(isVersionOfAnItem() | async)" class="dropdown-item"
+        [routerLink]="getImportPageRouterLink()"
+        [innerHTML]="'context-menu.actions.easy-online-import.btn' | translate">
 </button>

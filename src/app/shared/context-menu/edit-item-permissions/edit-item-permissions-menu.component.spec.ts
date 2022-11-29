@@ -109,4 +109,25 @@ describe('EditItemPermissionsMenuComponent', () => {
 
   });
 
+  describe('when is version of an item', () => {
+
+    beforeEach(() => {
+      authorizationService.isAuthorized.and.returnValue(observableOf(true));
+      fixture = TestBed.createComponent(EditItemPermissionsMenuComponent);
+      component = fixture.componentInstance;
+      componentAsAny = fixture.componentInstance;
+      component.contextMenuObject = dso;
+      fixture.detectChanges();
+      spyOn(component, 'isVersionOfAnItem');
+      (component.isVersionOfAnItem as jasmine.Spy).and.returnValue(observableOf(true));
+      fixture.detectChanges();
+    });
+
+    it('should not render a button', () => {
+      const link = fixture.debugElement.query(By.css('button'));
+      expect(link).toBeNull();
+    });
+
+  });
+
 });

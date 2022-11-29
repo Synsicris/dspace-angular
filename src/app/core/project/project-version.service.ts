@@ -247,7 +247,6 @@ export class ProjectVersionService {
       switchMap((itemRD: RemoteData<Item>) => {
         if (itemRD.hasSucceeded) {
           return this.relationshipService.getRelatedItemsByLabel(itemRD.payload, 'isVersionOf', options).pipe(
-            tap((res) => console.log(res)),
             getFirstCompletedRemoteData(),
             map((listRD: RemoteData<PaginatedList<Item>>) => {
               return listRD.hasSucceeded && listRD.statusCode === 200 ? listRD.payload.page : [];
