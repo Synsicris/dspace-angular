@@ -365,7 +365,12 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.query = this.buildExcludedTasksQuery(flatNode);
 
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
-      const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
+      const metadata = Object.assign(
+        {},
+        this.workingPlanService.setDefaultForStatusMetadata(item.metadata),
+        item?.type?.value === 'milestone' ?
+            this.workingPlanService.setChildWorkingplanLinkStatusMetadata(item.metadata) : {}
+      );
       this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectCommunityId, flatNode.id, item.type.value, metadata);
       // the 'this.editModes$' map is auto-updated by the ngOnInit subscribe
       if (flatNode.type === 'milestone') {

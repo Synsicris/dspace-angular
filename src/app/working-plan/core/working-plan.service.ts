@@ -575,6 +575,24 @@ export class WorkingPlanService {
     return result;
   }
 
+  setChildWorkingplanLinkStatusMetadata(metadata: MetadataMap): MetadataMap {
+    let result: MetadataMap = metadata;
+    if (!metadata.hasOwnProperty(environment.workingPlan.workingPlanLinkMetadata)
+      || isEmpty(metadata[environment.workingPlan.workingPlanLinkMetadata])) {
+      result = Object.assign({}, metadata, {
+        [environment.workingPlan.workingPlanLinkMetadata]: [{
+          authority: null,
+          confidence: -1,
+          language: null,
+          place: 0,
+          value: 'unlinked'
+        }]
+      });
+    }
+
+    return result;
+  }
+
   linkWorkingPlanObject(workingplanId: string, itemId: string, place?: string): Observable<Item> {
     return this.itemAuthorityRelationService.addLinkedItemToParent(
       this.getWorkingPlanEditSectionName(),
