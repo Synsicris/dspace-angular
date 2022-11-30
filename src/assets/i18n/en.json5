@@ -7114,7 +7114,13 @@
 
   "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
 
-  "working-plan.task.search.header": "",
+  "working-plan.search.header": "Search help-box",
+
+  "working-plan.task.search.header": "Search tasks help-box",
+
+  "submission.sections.submit.progressbar.working_plan_form.info": "Create help-box",
+
+  "submission.sections.submit.progressbar.working_plan_step_form.info": "Create tasks help-box",
 
   "application.listelement.badge": "Application of a solution / change / innovation",
 

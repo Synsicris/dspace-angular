@@ -210,6 +210,10 @@ export class WorkingPlanService {
     return `working-plan.task.search.header`;
   }
 
+  getWorkingPlanSearchHeader(): string {
+    return `working-plan.search.header`;
+  }
+
   getWorkpackageItemById(itemId): Observable<Item> {
     return this.itemService.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload()
