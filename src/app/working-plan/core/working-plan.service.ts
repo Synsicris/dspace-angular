@@ -585,7 +585,7 @@ export class WorkingPlanService {
           confidence: -1,
           language: null,
           place: 0,
-          value: 'unlinked'
+          value: 'nested'
         }]
       });
     }
