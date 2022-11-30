@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { WorkpacakgeFlatNode } from '../../../core/models/workpackage-step-flat-node.model';
 import { environment } from '../../../../../environments/environment';
 import { FeatureID } from '../../../../core/data/feature-authorization/feature-id';
 import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
-import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   selector: 'ds-working-plan-chart-item-edit-button',
