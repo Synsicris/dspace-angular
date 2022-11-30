@@ -1708,7 +1708,9 @@
 
   "confirmation-modal.version.official.header": "Version Official Managment",
 
-  "confirmation-modal.version.official.info": "Are you sure you want to make \"{{ dsoName }}\" version as not-official?",
+  "confirmation-modal.version.official.info.official": "Are you sure you want to make \"{{ dsoName }}\" version as official?",
+
+  "confirmation-modal.version.official.info.not-official": "Are you sure you want to make \"{{ dsoName }}\" version as not-official?",
 
   "confirmation-modal.version.official.cancel": "Cancel",
 
@@ -3129,6 +3131,12 @@
   "item.version.history.table.setNonOfficial": "Mark as not-official",
 
   "item.version.history.table.successfull" : "Successfully Updated {{type}}",
+
+  "item.version.history.table.clickToOpen" : "Click here to open",
+
+  "item.version.history.table.activeVersion" : "Active Instance",
+
+  "item.version.history.table.notes" : "Notes",
 
   "synsicris.version.visible": "Visibility",
 

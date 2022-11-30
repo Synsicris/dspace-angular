@@ -182,6 +182,12 @@ export class ItemVersionsComponent implements OnInit {
    */
   versionBeingEditedSummary: string;
 
+
+  /**
+   * The note currently being edited
+   */
+  versionBeingEditedNote: string;
+
   canCreateVersion$: Observable<boolean>;
   createVersionTitle$: Observable<string>;
 
@@ -298,11 +304,12 @@ export class ItemVersionsComponent implements OnInit {
    * @param version the version to be deleted
    * @param redirectToLatest force the redirect to the latest version in the history
    */
-  deleteVersion(version: Version, redirectToLatest: boolean): void {
+  deleteVersion(version, redirectToLatest: boolean): void {
     const successMessageKey = 'item.version.delete.notification.success';
     const failureMessageKey = 'item.version.delete.notification.failure';
     const versionNumber = version.version;
     const versionItem$ = version.item;
+    version.isLoading = true;
 
     // Open modal
     const activeModal = this.modalService.open(ItemVersionsDeleteModalComponent);
@@ -333,6 +340,7 @@ export class ItemVersionsComponent implements OnInit {
           this.versionHistoryService.getLatestVersionItemFromHistory$(versionHistory).pipe(
             tap(() => {
               this.getAllVersions(of(versionHistory));
+              version.isLoading = false;
             }),
           )
         ])),
@@ -581,7 +589,7 @@ export class ItemVersionsComponent implements OnInit {
       { value: value }
     ).subscribe((item) => {
       version.isLoading = false;
-      const type = this.translateService.get(metadata);
+      const type = this.translateService.instant(metadata);
       this.notificationsService.success(null, this.translateService.get('item.version.history.table.successfull', { type: type }));
     });
   }
@@ -618,19 +626,23 @@ export class ItemVersionsComponent implements OnInit {
    * Button shown only when the versionItem official metadata is true for funder so he can set NonOfficial
    * @param versionItem the version item which metadata belongs to
    */
-  setNonofficial(versionItem: Item, version) {
+  toggleOfficial(versionItem: Item, version) {
+
+    const value = versionItem.firstMetadataValue('synsicris.version.official') !== 'true';
+    const info = versionItem.firstMetadataValue('synsicris.version.official') === 'true' ? 'not-official' : 'official';
+
     if (this.isFounder) {
       version.isLoading = true;
       const modalRef = this.modalService.open(ConfirmationModalComponent);
       modalRef.componentInstance.dso = versionItem;
       modalRef.componentInstance.headerLabel = 'confirmation-modal.version.official.header';
-      modalRef.componentInstance.infoLabel = 'confirmation-modal.version.official.info';
+      modalRef.componentInstance.infoLabel = 'confirmation-modal.version.official.info.' + info;
       modalRef.componentInstance.cancelLabel = 'confirmation-modal.version.official.cancel';
       modalRef.componentInstance.confirmLabel = 'confirmation-modal.version.official.confirm';
       modalRef.componentInstance.confirmIcon = 'fas fa-check';
       const resp$ = modalRef.componentInstance.response.pipe(map((confirm: boolean) => {
         if (confirm) {
-          return this.updateItemByMetadata(versionItem, version, 'synsicris.version.official', false);
+          return this.updateItemByMetadata(versionItem, version, 'synsicris.version.official', value);
         } else {
           version.isLoading = false;
           return null;
@@ -665,6 +677,39 @@ export class ItemVersionsComponent implements OnInit {
         return item.firstMetadataValue('synsicris.version.official') === 'true';
       })
     );
+  }
+
+  /**
+   * Applies changes to note currently being edited
+   */
+  onNoteSubmit(versionItem, version) {
+    console.log(versionItem, version, 'synsicris.version.notes', this.versionBeingEditedNote);
+    this.updateItemByMetadata(versionItem, version, 'synsicris.version.notes', this.versionBeingEditedNote);
+    this.disableNoteEditing();
+  }
+
+  /**
+   * True if the specified note is being edited
+   * (used to show input field and to change buttons for specified note)
+   */
+  isNoteBeingEdited(versionItem: Item, version: Version): boolean {
+    return this.versionBeingEditedNote !== undefined && this.versionBeingEditedNumber === version.version;
+  }
+
+  /**
+   * Enables editing for the specified note
+   */
+  enableNoteEditing(versionItem: Item, version: Version): void {
+    this.versionBeingEditedNumber = version.version;
+    this.versionBeingEditedNote = !!versionItem.firstMetadataValue('synsicris.version.notes') ? versionItem.firstMetadataValue('synsicris.version.notes') : '';
+  }
+
+  /**
+   * Disables editing for the specified note and discards all pending changes
+   */
+  disableNoteEditing(): void {
+    this.versionBeingEditedNumber = undefined;
+    this.versionBeingEditedNote = undefined;
   }
 
 }
