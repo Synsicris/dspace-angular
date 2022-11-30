@@ -5,11 +5,11 @@ import { CrisLayoutBoxModelComponent } from '../../../../models/cris-layout-box-
 import { TranslateService } from '@ngx-translate/core';
 import { CrisLayoutBox, RelationBoxConfiguration } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Community } from '../../../../../core/shared/community.model';
 import { ActivatedRoute } from '@angular/router';
 import { RemoteData } from '../../../../../core/data/remote-data';
-import { map, take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'ds-cris-layout-search-box',
@@ -42,6 +42,11 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
   projectScope: Community;
 
   /**
+   * A boolean representing if item is a version of original item
+   */
+  public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * Reference for configurationSearchPage
    */
   @ViewChildren('configurationSearchPage') configurationSearchPage: QueryList<any>;
@@ -65,6 +70,16 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
       this.searchFilter = `scope=${this.item.id}`;
       this.configuration = (this.box.configuration as RelationBoxConfiguration)['discovery-configuration'];
     });
+
+
+    this.route.data.pipe(
+      map((data) => data.isVersionOfAnItem),
+      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
+      take(1)
+    ).subscribe((isVersionOfAnItem: boolean) => {
+      this.isVersionOfAnItem$.next(isVersionOfAnItem);
+    });
+
   }
 
   /**

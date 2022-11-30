@@ -81,7 +81,8 @@ export class SelectedProjectListComponent implements OnInit, OnChanges {
           pagination: currentPagination,
           sort: currentSort,
           forcedEmbeddedKeys: ['metrics']
-        })).pipe(toDSpaceObjectListRD()) as Observable<RemoteData<PaginatedList<Item>>>
+        }), null, false)
+        .pipe(toDSpaceObjectListRD()) as Observable<RemoteData<PaginatedList<Item>>>
       )
     );
   }

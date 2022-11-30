@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { ViewSimpleItemFormComponent } from './view-simple-item-form.component';
 
@@ -8,9 +9,9 @@ describe('ViewSimpleItemFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewSimpleItemFormComponent ]
+      declarations: [ViewSimpleItemFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +22,15 @@ describe('ViewSimpleItemFormComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('when disabled is true', () => {
+
+    it('should disable button', () => {
+      component.disabled = true;
+      fixture.detectChanges();
+      expect(fixture.debugElement.query(By.css('button[data-test="version-disabled"]')).nativeElement.disabled).toBeTrue();
+    });
+
   });
 });

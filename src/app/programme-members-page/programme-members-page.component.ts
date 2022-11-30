@@ -27,7 +27,7 @@ export class ProgrammeMembersPageComponent implements OnInit {
   /**
    * the active tab id
    */
-  public activeId = 'members';
+  public activeId = 'funders';
 
   /**
    * A boolean representing if all groups are initialized
@@ -58,6 +58,16 @@ export class ProgrammeMembersPageComponent implements OnInit {
    * A boolean representing if members group is initialized
    */
   public membersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * The programme project funders group
+   */
+  public projectFundersGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
+
+  /**
+   * A boolean representing if project funders group is initialized
+   */
+  public projectFundersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     protected authService: AuthService,
@@ -92,9 +102,21 @@ export class ProgrammeMembersPageComponent implements OnInit {
       getFirstCompletedRemoteData()
     ).subscribe((groupRD: RemoteData<Group>) => {
       if (groupRD.hasSucceeded) {
-        this.activeId = 'funders';
+        this.activeId = 'managers';
         this.managersGroup$.next(groupRD.payload);
         this.managersGroupInit$.next(true);
+      }
+    });
+
+    item$.pipe(
+      switchMap((item: Item) => this.projectGroupService.getProgrammeProjectFundersGroupUUIDByItem(item)),
+      map((groups: string[]) => groups[0]),
+      switchMap((groupID) => this.groupService.findById(groupID)),
+      getFirstCompletedRemoteData()
+    ).subscribe((groupRD: RemoteData<Group>) => {
+      if (groupRD.hasSucceeded) {
+        this.projectFundersGroup$.next(groupRD.payload);
+        this.membersGroupInit$.next(true);
       }
     });
 
@@ -106,17 +128,17 @@ export class ProgrammeMembersPageComponent implements OnInit {
     ).subscribe((groupRD: RemoteData<Group>) => {
       if (groupRD.hasSucceeded) {
         this.membersGroup$.next(groupRD.payload);
-        this.membersGroupInit$.next(true);
+        this.projectFundersGroupInit$.next(true);
       }
     });
 
-
     combineLatest([
       this.managersGroupInit$.asObservable(),
+      this.projectFundersGroupInit$.asObservable(),
       this.membersGroupInit$.asObservable()
     ]).pipe(
-      map(([managersInit, membersInit]) => {
-        return managersInit && membersInit;
+      map(([managersInit, fundersInit, membersInit]) => {
+        return managersInit && fundersInit && membersInit;
       }),
       distinctUntilChanged()
     ).subscribe((isInit) => {

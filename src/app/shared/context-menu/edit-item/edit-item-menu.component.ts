@@ -123,6 +123,9 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
   }
 
   private isEditModeAllowed(mode: EditItemMode) {
-    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode || mode.name === 'OWNER';
+    return mode.name === environment.projects.projectsEntityAdminEditMode ||
+      mode.name === environment.projects.projectsEntityEditMode ||
+      mode.name === environment.projects.projectsEntityFunderEditMode ||
+      mode.name === 'OWNER';
   }
 }

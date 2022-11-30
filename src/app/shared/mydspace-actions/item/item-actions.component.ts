@@ -19,6 +19,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 import { isNotEmpty } from '../../empty.util';
 import { environment } from '../../../../environments/environment';
+import { ProjectVersionService } from '../../../core/project/project-version.service';
 
 /**
  * This component represents mydspace actions related to Item object.
@@ -60,6 +61,11 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   private canEditGrants$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * A boolean representing if item is a version of original item
+   */
+  private isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * Initialize instance variables
    *
    * @param {AuthorizationDataService} authorizationService
@@ -70,17 +76,19 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    * @param {SearchService} searchService
    * @param {RequestService} requestService
    * @param {EditItemDataService} editItemDataService
+   * @param {ProjectVersionService} projectVersionService
    * @param {NgbModal} modalService
    */
   constructor(protected authorizationService: AuthorizationDataService,
-    protected injector: Injector,
-    protected router: Router,
-    protected notificationsService: NotificationsService,
-    protected translate: TranslateService,
-    protected searchService: SearchService,
-    protected requestService: RequestService,
-    protected editItemDataService: EditItemDataService,
-    protected modalService: NgbModal) {
+              protected injector: Injector,
+              protected router: Router,
+              protected notificationsService: NotificationsService,
+              protected translate: TranslateService,
+              protected searchService: SearchService,
+              protected requestService: RequestService,
+              protected editItemDataService: EditItemDataService,
+              protected projectVersionService: ProjectVersionService,
+              protected modalService: NgbModal) {
     super(Item.type, injector, router, notificationsService, translate, searchService, requestService);
   }
 
@@ -97,6 +105,8 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
     ).subscribe((canEdit: boolean) => {
       this.canEditGrants$.next(canEdit);
     });
+
+    this.isVersionOfAnItem$.next(this.projectVersionService.isVersionOfAnItem(this.object));
   }
 
   /**
@@ -120,6 +130,13 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    */
   canEditGrants(): Observable<boolean> {
     return this.canEditGrants$.asObservable();
+  }
+
+  /**
+   * Check if current item is version of an item
+   */
+  isVersionOfAnItem(): Observable<boolean> {
+    return this.isVersionOfAnItem$.asObservable();
   }
 
   /**

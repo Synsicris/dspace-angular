@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync, fakeAsync, tick } from '@angular/core/testing';
 
 import { CrisLayoutRelationBoxComponent } from './cris-layout-relation-box.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -9,6 +9,10 @@ import { Item } from '../../../../../core/shared/item.model';
 import { of } from 'rxjs';
 import { CrisLayoutBox } from '../../../../../core/layout/models/box.model';
 import { TranslateLoaderMock } from '../../../../../shared/mocks/translate-loader.mock';
+import { By } from '@angular/platform-browser';
+import { of as observableOf } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { createSuccessfulRemoteDataObject$ } from '../../../../../shared/remote-data.utils';
 
 describe('CrisLayoutRelationBoxComponent', () => {
   let component: CrisLayoutRelationBoxComponent;
@@ -20,6 +24,8 @@ describe('CrisLayoutRelationBoxComponent', () => {
     metadata: {}
   });
 
+  let aroute;
+
   const testBox = Object.assign(new CrisLayoutBox(), {
     id: '1',
     collapsed: false,
@@ -28,7 +34,13 @@ describe('CrisLayoutRelationBoxComponent', () => {
     configuration: of({ configuration: 'box-configuration-id' })
   });
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async () => {
+
+    aroute = {
+      data: observableOf({ isVersionOfAnItem: observableOf(false) }),
+      project: createSuccessfulRemoteDataObject$(testItem)
+    };
+
     TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot({
@@ -40,15 +52,16 @@ describe('CrisLayoutRelationBoxComponent', () => {
         CommonModule,
         SharedModule
       ],
-      declarations: [ CrisLayoutRelationBoxComponent ],
+      declarations: [CrisLayoutRelationBoxComponent],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
-        { provide: 'boxProvider', useClass: testBox },
-        { provide: 'itemProvider', useClass: testItem },
+        { provide: ActivatedRoute, useValue: aroute },
+        { provide: 'boxProvider', useValue: testBox },
+        { provide: 'itemProvider', useValue: testItem },
       ]
     })
-    .compileComponents();
-  }));
+      .compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CrisLayoutRelationBoxComponent);
@@ -58,7 +71,27 @@ describe('CrisLayoutRelationBoxComponent', () => {
     fixture.detectChanges();
   });
 
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
   xit('should have set scope in searchFilter', () => {
     expect(component.searchFilter).toContain('scope=' + testItem.id);
   });
+
+  describe('when is version of an item', () => {
+
+    beforeEach(() => {
+      component.isVersionOfAnItem$.next(true);
+      fixture.detectChanges();
+    });
+
+    it('should not render a button', fakeAsync(() => {
+      tick();
+      const link = fixture.debugElement.query(By.css('button'));
+      expect(link).toBeNull();
+    }));
+
+  });
+
 });

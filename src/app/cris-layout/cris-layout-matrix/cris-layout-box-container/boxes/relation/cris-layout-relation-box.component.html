@@ -11,8 +11,9 @@
                               [showFilterToggle]="true"
                               [showSidebar]="true"
                               [showViewModes]="false"
+                              [useCachedVersionIfAvailable]="false"
                               (customEvent)="refresh()">
-  <ds-item-create additionalSearchFormOptions
+  <ds-item-create additionalSearchFormOptions *ngIf="!(isVersionOfAnItem$|async)"
                   [item]="item"
                   [relatedEntityType]="item.entityType"
                   [targetEntityType]="box.shortname"

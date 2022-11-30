@@ -51,6 +51,11 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
    */
   canEditButton$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  /**
+   * A boolean representing if item is a version of original item
+   */
+  @Input() isVersionOfAnItem = false;
+
   constructor(
     protected cdr: ChangeDetectorRef,
     protected collectionService: CollectionDataService,

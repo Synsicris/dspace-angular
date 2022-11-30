@@ -41,6 +41,11 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   @Input() public isObjectivePage: boolean;
   @Input() public compareMode: boolean;
 
+  /**
+   * A boolean representing if item is a version of original item
+   */
+  @Input() isVersionOfAnItem = false;
+
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isRedirectingToEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
