@@ -408,7 +408,7 @@ export const environment: AppConfig = {
     workingPlanLinkMetadata: 'workingplan.link.status'
   },
   exploitationPlan: {
-    exploitationPlanRelationMetadata: 'dc.relation.exploitationplan',
+    exploitationPlanRelationMetadata: 'synsicris.relation.exploitationplan',
     exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
     exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
     exploitationPlanPartnerMetadata: '',
