@@ -3,8 +3,9 @@ import { RouterModule } from '@angular/router';
 
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
 import { ThemedSubmissionEditComponent } from '../submission/edit/themed-submission-edit.component';
-import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
 import { PendingChangesGuard } from '../submission/edit/pending-changes/pending-changes.guard';
+import { WorkspaceItemsEditPageBreadrumbResolver } from './workspace-items-edit-page-breadrumb-resolver.service';
+import { WorkspaceItemsEditPageBreadcumbService } from './workspace-items-edit-page-breadcumb.service';
 
 @NgModule({
   imports: [
@@ -16,11 +17,15 @@ import { PendingChangesGuard } from '../submission/edit/pending-changes/pending-
         path: ':id/edit',
         component: ThemedSubmissionEditComponent,
         resolve: {
-          breadcrumb: I18nBreadcrumbResolver
+         breadcrumb: WorkspaceItemsEditPageBreadrumbResolver
         },
         data: { title: 'submission.edit.title', breadcrumbKey: 'submission.edit' }
       }
     ])
+  ],
+  providers: [
+    WorkspaceItemsEditPageBreadrumbResolver,
+    WorkspaceItemsEditPageBreadcumbService
   ]
 })
 /**

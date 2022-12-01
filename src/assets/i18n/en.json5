@@ -768,6 +768,20 @@
 
   "bitstream-request-a-copy.submit.error": "Something went wrong with submitting the item request.",
 
+  "breadcrumb.entity-type.impactpathway": "Impact Pathway",
+
+  "breadcrumb.entity-type.Person": "Person",
+
+  "breadcrumb.entity-type.Project": "Project",
+
+  "breadcrumb.entity-type.projectpartner": "Project Partner",
+
+  "breadcrumb.entity-type.programme": "Programme",
+
+  "breadcrumb.entity-type.WorkingPlan": "Working Plan",
+
+  "breadcrumb.entity-type.Funding": "Funding",
+
   "browse.comcol.by.author": "By Author",
 
   "browse.comcol.by.dateissued": "By Issue Date",
