@@ -100,16 +100,21 @@
                           </button>
                         </ng-container>
                         <!--DELETE-->
-                        <ng-container *ngIf="(canDeleteVersion$(version) | async) &&
-                          ( (isCoordinator && !(isVisible(version.item)|async)) || isFounder && !(isOfficial(version.item)|async))
-                           && version?.id !== itemVersion?.id">
-                          <button class="btn btn-sm version-row-element-delete" [attr.data-test]="'delete-'+version.id"
-                            [ngClass]="isAnyBeingEdited() ? 'btn-outline-primary' : 'btn-outline-danger'"
-                            [disabled]="isAnyBeingEdited() || (isCoordinator && (isOfficial(version.item)|async)) || version.isLoading"
-                            (click)="deleteVersion(version, version.id==itemVersion.id)"
-                            title="{{'item.version.history.table.action.deleteVersion' | translate}}">
-                            <i class="fas fa-trash fa-fw"></i>
-                          </button>
+                        <ng-container *ngIf="(canDeleteVersion$(version) | async) && version?.id !== itemVersion?.id">
+
+                          <ng-container *ngIf="(!isCoordinator && !isFounder) || 
+                            ( (isCoordinator && !(isVisible(version.item)|async)) || 
+                            isFounder && !(isOfficial(version.item)|async))">
+                            <button class="btn btn-sm version-row-element-delete"
+                              [attr.data-test]="'delete-'+version.id"
+                              [ngClass]="isAnyBeingEdited() ? 'btn-outline-primary' : 'btn-outline-danger'"
+                              [disabled]="isAnyBeingEdited() || (isCoordinator && (isOfficial(version.item)|async)) || version.isLoading"
+                              (click)="deleteVersion(version, version.id==itemVersion.id)"
+                              title="{{'item.version.history.table.action.deleteVersion' | translate}}">
+                              <i *ngIf="!version.isLoading" class="fas fa-trash fa-fw"></i>
+                              <i *ngIf="version.isLoading" class="fa fa-spinner fa-spin fa-fw"></i>
+                            </button>
+                          </ng-container>
                         </ng-container>
                       </div>
 
@@ -161,7 +166,7 @@
 
                 <div *ngIf="!isCoordinator && !isFounder;else noteColumn" class="float-left">
                   <ng-container *ngIf="isThisBeingEdited(version); then editSummary else showSummary"></ng-container>
-                  <ng-template #showSummary>{{version?.summary}}</ng-template>
+                  <ng-template #showSummary> <span data-test="show-summary">{{version?.summary}}</span> </ng-template>
                   <ng-template #editSummary>
                     <input class="form-control" type="text" [(ngModel)]="versionBeingEditedSummary"
                       (keyup.enter)="onSummarySubmit()" />
@@ -172,7 +177,11 @@
                   <ng-container *ngVar="(version.item | async)?.payload as versionItem">
                     <ng-container *ngIf="isNoteBeingEdited(versionItem,version); then editNote else showNote">
                     </ng-container>
-                    <ng-template #showNote>{{versionItem.firstMetadataValue('synsicris.version.notes')}}</ng-template>
+                    <ng-template #showNote>
+                      <span data-test="show-note">
+                        {{versionItem.firstMetadataValue('synsicris.version.notes')}}
+                      </span>
+                    </ng-template>
                     <ng-template #editNote>
                       <input class="form-control" type="text" [(ngModel)]="versionBeingEditedNote"
                         (keyup.enter)="onNoteSubmit(versionItem,version)" />
@@ -182,7 +191,7 @@
 
                 <div class="float-right btn-group edit-field" *ngIf="displayActions && version?.id !== itemVersion?.id">
 
-                  <ng-container *ngIf="isCoordinator || isFounder">
+                  <ng-container *ngIf="isFounder">
                     <ng-container *ngVar="(version.item | async)?.payload as versionItem">
                       <ng-container *ngIf="isNoteBeingEdited(versionItem,version)">
                         <button class="btn btn-sm"
@@ -194,7 +203,7 @@
                       </ng-container>
                       <!--EDIT / SAVE-->
                       <ng-container>
-                        <button class="btn btn-outline-primary btn-sm version-row-element-edit"
+                        <button class="btn btn-outline-primary btn-sm version-row-element-edit" data-test="edit-note"
                           *ngIf="!isNoteBeingEdited(versionItem,version)"
                           [disabled]="isAnyBeingEdited() || version.isLoading"
                           (click)="enableNoteEditing(versionItem,version)"
@@ -222,7 +231,7 @@
                     </ng-container>
                     <!--EDIT / SAVE-->
                     <ng-container *ngIf="canEditVersion$(version) | async">
-                      <button class="btn btn-outline-primary btn-sm version-row-element-edit"
+                      <button class="btn btn-outline-primary btn-sm version-row-element-edit" data-test="edit-summary"
                         *ngIf="!isThisBeingEdited(version) && !isCoordinator && !isFounder"
                         [disabled]="isAnyBeingEdited() || version.isLoading" (click)="enableVersionEditing(version)"
                         title="{{'item.version.history.table.action.editSummary' | translate}}">
@@ -255,7 +264,7 @@
                       <button class="btn btn-sm version-row-element-delete btn-outline-primary"
                         (click)="toggleOfficial(versionItem,version)" [disabled]="version.isLoading"
                         title="{{'item.version.history.table.action.toggleOfficial' | translate}}"
-                        [attr.data-test]="!!versionItem.firstMetadataValue('synsicris.version.official') && versionItem.firstMetadataValue('synsicris.version.official') === 'true' ? 'official-'+version.id : 'non-official-'+version.id">
+                        [attr.data-test]="!!versionItem.firstMetadataValue('synsicris.version.official') && versionItem.firstMetadataValue('synsicris.version.official') === 'true' ?  'set-non-official-'+version.id :'set-official-'+version.id">
                         <i class="fas"
                           [ngClass]="{'fa-check': (versionItem.firstMetadataValue('synsicris.version.official') === 'false' || !versionItem.firstMetadataValue('synsicris.version.official') ), 'fa-times': versionItem.firstMetadataValue('synsicris.version.official') === 'true'}"></i>
                       </button>

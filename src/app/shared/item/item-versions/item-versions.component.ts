@@ -309,7 +309,6 @@ export class ItemVersionsComponent implements OnInit {
     const failureMessageKey = 'item.version.delete.notification.failure';
     const versionNumber = version.version;
     const versionItem$ = version.item;
-    version.isLoading = true;
 
     // Open modal
     const activeModal = this.modalService.open(ItemVersionsDeleteModalComponent);
@@ -317,7 +316,9 @@ export class ItemVersionsComponent implements OnInit {
     activeModal.componentInstance.firstVersion = false;
 
     // On modal submit/dismiss
-    activeModal.result.then(() => {
+    activeModal.result.then((result) => {
+
+      version.isLoading = true;
       versionItem$.pipe(
         getFirstSucceededRemoteDataPayload<Item>(),
         // Retrieve version history and invalidate cache

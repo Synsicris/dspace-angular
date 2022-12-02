@@ -108,7 +108,6 @@ describe('WorkingPlanChartContainerComponent', () => {
   describe('when is version of an item', () => {
 
     beforeEach(() => {
-      component.isVersionOfAnItem$.next(true);
       fixture.detectChanges();
     });
 

@@ -254,12 +254,25 @@ describe('ItemVersionsComponent', () => {
     component.displayActions = true;
     versionHistoryServiceSpy.getVersions.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(versions)));
     fixture.detectChanges();
-
   });
 
   it(`should display ${versions.length} rows`, () => {
     const rows = fixture.debugElement.queryAll(By.css('tbody tr'));
     expect(rows.length).toBe(versions.length);
+  });
+
+  it('Should show edit summary button', () => {
+    spyOn(component, 'canEditVersion$').and.returnValue(of(true));
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('button[data-test="edit-summary"]')).length).toEqual(1);
+  });
+
+  it('Should show show-summary info', () => {
+    expect(de.queryAll(By.css('span[data-test="show-summary"]')).length).toEqual(2);
+  });
+
+  it('Should not show show-note info', () => {
+    expect(de.queryAll(By.css('span[data-test="show-note"]')).length).toEqual(0);
   });
 
   versions.forEach((version: Version, index: number) => {
@@ -419,6 +432,14 @@ describe('ItemVersionsComponent', () => {
     });
 
 
+    it('Should not show show-summary info', () => {
+      expect(de.queryAll(By.css('span[data-test="show-summary"]')).length).toEqual(0);
+    });
+
+    it('Should show show-note info', () => {
+      expect(de.queryAll(By.css('span[data-test="show-note"]')).length).toEqual(4);
+    });
+
     describe('when isCoordinator is true', () => {
 
       beforeEach(() => {
@@ -474,6 +495,8 @@ describe('ItemVersionsComponent', () => {
         });
 
         it('Should show delete for version 4', () => {
+          spyOn(component, 'canDeleteVersion$').and.returnValue(of(true));
+          fixture.detectChanges();
           expect(de.query(By.css('button[data-test="delete-4"]'))).toBeTruthy();
         });
       });
@@ -506,6 +529,11 @@ describe('ItemVersionsComponent', () => {
         fixture.detectChanges();
       });
 
+
+      it('Should show edit note button', () => {
+        expect(de.queryAll(By.css('button[data-test="edit-note"]')).length).toEqual(3);
+      });
+
       describe('When Visible and not Official', () => {
 
         it('Should not show set visible for version 1', () => {
@@ -528,7 +556,7 @@ describe('ItemVersionsComponent', () => {
         });
 
         it('Should show set non official for version 3', () => {
-          expect(de.query(By.css('button[data-test="non-official-3"]'))).toBeTruthy();
+          expect(de.query(By.css('button[data-test="set-non-official-3"]'))).toBeTruthy();
         });
 
         it('Should not show delete for version 3', () => {
@@ -548,6 +576,8 @@ describe('ItemVersionsComponent', () => {
         });
 
         it('Should show delete for version 4', () => {
+          spyOn(component, 'canDeleteVersion$').and.returnValue(of(true));
+          fixture.detectChanges();
           expect(de.query(By.css('button[data-test="delete-4"]'))).toBeTruthy();
         });
       });
@@ -559,7 +589,7 @@ describe('ItemVersionsComponent', () => {
 
 
       it('Should call modal service when making non official version 3', () => {
-        const button = de.query(By.css('button[data-test="non-official-3"]')).nativeElement;
+        const button = de.query(By.css('button[data-test="set-non-official-3"]')).nativeElement;
         button.click();
         fixture.detectChanges();
         expect(modalService.open).toHaveBeenCalled();
