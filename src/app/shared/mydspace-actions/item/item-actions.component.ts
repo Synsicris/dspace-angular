@@ -40,7 +40,7 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   /**
    * A boolean representing if edit permission button can be shown
    */
-  @Input() showEditPermission = true;
+  @Input() showEditPermission = false;
 
   /**
    * A boolean representing if component is redirecting to edit page
@@ -59,11 +59,6 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    * @type {BehaviorSubject<boolean>}
    */
   private canEditGrants$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-  /**
-   * A boolean representing if item is a version of original item
-   */
-  private isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * Initialize instance variables
@@ -94,19 +89,22 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
 
 
   ngOnInit(): void {
-    this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
-      take(1)
-    ).subscribe((canEdit: boolean) => {
-      this.canEdit$.next(canEdit);
-    });
+    if (this.projectVersionService.isVersionOfAnItem(this.object)) {
+      this.canEdit$.next(false);
+      this.canEditGrants$.next(false);
+    } else {
+      this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
+        take(1)
+      ).subscribe((canEdit: boolean) => {
+        this.canEdit$.next(canEdit);
+      });
 
-    this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.object.self, undefined).pipe(
-      take(1)
-    ).subscribe((canEdit: boolean) => {
-      this.canEditGrants$.next(canEdit);
-    });
-
-    this.isVersionOfAnItem$.next(this.projectVersionService.isVersionOfAnItem(this.object));
+      this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.object.self, undefined).pipe(
+        take(1)
+      ).subscribe((canEdit: boolean) => {
+        this.canEditGrants$.next(canEdit);
+      });
+    }
   }
 
   /**
@@ -130,13 +128,6 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    */
   canEditGrants(): Observable<boolean> {
     return this.canEditGrants$.asObservable();
-  }
-
-  /**
-   * Check if current item is version of an item
-   */
-  isVersionOfAnItem(): Observable<boolean> {
-    return this.isVersionOfAnItem$.asObservable();
   }
 
   /**
