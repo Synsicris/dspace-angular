@@ -3132,7 +3132,7 @@
 
   "item.version.history.table.setNonOfficial": "Mark as not-official",
 
-  "item.version.history.table.successfull" : "Successfully Updated {{type}}",
+  "item.version.history.table.successfull": "Successfully Updated {{type}}",
 
   "synsicris.version.visible": "Visibility",
 
@@ -8834,8 +8834,6 @@
 
   "layout.box.help-text.subcontractor_h_project": "to be deleted",
 
-  "layout.box.help-text.pot_societalimpact_h": "to be deleted",
-
   "layout.tab.header.multiple_entities": "Multiple entities",
 
   "layout.tab.header.cooperationpartners": "Cooperation partners / Subcontractors",
@@ -8960,126 +8958,20 @@
 
   "layout.tab.header.open_researchquestion": "Open research questions",
 
-  "layout.box.header.Funding_comment": "to be deleted",
-
   "layout.box.header.open_researchquestion_comment": "Comments - Open research questions",
 
-  "layout.box.header.jpbasics": "to be deleted",
+  "layout.box.header.jpbasics": "Consortium information",
 
-  "layout.box.header.Project": "to be deleted",
+  "layout.box.header.Project": "box.header.Projects",
 
   "layout.box.header.open_researchquestion": "Open research questions",
 
   "layout.box.header.open_researchquestion_m": "Open research questions",
 
-  "layout.field.label.projectpartner.synsicris.type.publicfunded": "to be deleted",
+  "submission.sections.submit.progressbar.describe.open_researchquestions": "Open research questions",
 
-  "layout.field.label.cooperationpartner.synsicris.type.publicfunded": "to be deleted",
+  "layout.box.header.multiple_involved": "Involved organisations",
 
-  "layout.field.label.workpackage.synsicris.description.changes": "to be deleted",
-
-  "layout.field.label.Publication.dc.relation.isbn": "to be deleted",
-
-  "layout.field.label.Publication.dc.relation.doi": "to be deleted",
-
-  "layout.field.label.Publication.dc.relation.issn": "to be deleted",
-
-  "layout.field.label.Publication.dc.identifier.url": "to be deleted",
-
-  "layout.field.label.innovationpotential.synsicris.coverage.regional-primary": "to be deleted",
-
-  "layout.field.label.innovationpotential.synsicris.coverage.regional-secondary": "to be deleted",
-
-  "layout.field.label.application.synsicris.type.innovation": "to be deleted",
-
-  "layout.field.label.application.synsicris.description.innovation": "to be deleted",
-
-  "layout.field.label.Person.crisrp.site.title": "to be deleted",
-
-  "layout.field.label.ethic.dc.type": "to be deleted",
-
-  "layout.field.label.ethic.synsicris.description.aspect": "to be deleted",
-
-  "layout.field.label.process_event.synsicris.type.frequency": "to be deleted",
-
-  "layout.field.label.process_event.synsicris.type.period": "to be deleted",
-
-  "layout.field.label.process_event.synsicris.title.event": "to be deleted",
-
-  "layout.field.label.process_event.oairecerif.event.startDate": "to be deleted",
-
-  "layout.field.label.process_event.oairecerif.event.endDate": "to be deleted",
-
-  "layout.field.label.process_event.synsicris.duration": "to be deleted",
-
-  "layout.field.label.process_event.synsicris.participantnumber": "to be deleted",
-
-  "layout.field.label.process_event.oairecerif.event.place": "to be deleted",
-
-  "layout.field.label.process_event.oairecerif.event.country": "to be deleted",
-
-  "layout.field.label.Publication.oairecerif.author.affiliation": "to be deleted",
-
-  "layout.field.label.Product.oairecerif.author.affiliation": "to be deleted",
-
-  "layout.field.label.innovationpotential.synsicris.relation.targetgroup": "to be deleted",
-
-  "layout.field.label.innovationpotential.synsicris.type.regional-status": "to be deleted",
-
-  "layout.field.label.innovationpotential.synsicris.coverage.regional": "to be deleted",
-
-  "layout.field.label.innovationpotential.synsicris.type.rl-status": "to be deleted",
-
-  "layout.field.label.innovationpotential.synsicris.type.srl-trl": "to be deleted",
-
-  "layout.field.label.innovationpotential.synsicris.level.srl-trl": "to be deleted",
-
-  "layout.field.label.spinoff.synsicris.amount.annual-sales": "to be deleted",
-
-  "layout.field.label.spinoff.synsicris.amount.currency-annual-sales": "to be deleted",
-
-  "layout.field.label.spinoff.synsicris.amount.funding": "to be deleted",
-
-  "layout.field.label.spinoff.synsicris.amount.currency-funding": "to be deleted",
-
-  "layout.field.label.exp_societalimpact.synsicris.type.positive-direction": "to be deleted",
-
-  "layout.field.label.exp_societalimpact.synsicris.description.pos": "to be deleted",
-
-  "layout.field.label.exp_societalimpact.synsicris.type-n": "to be deleted",
-
-  "layout.field.label.exp_societalimpact.synsicris.type.transform-n": "to be deleted",
-
-  "layout.field.label.exp_societalimpact.synsicris.type.negative-direction": "to be deleted",
-
-  "layout.field.label.exp_societalimpact.synsicris.description.neg": "to be deleted",
-
-  "layout.field.label.application.synsicris.type.baseline": "to be deleted",
-
-  "layout.field.label.application.synsicris.coverage.regional": "to be deleted",
-
-  "layout.field.label.application.synsicris.type.quantifier": "to be deleted",
-
-  "layout.field.label.application.synsicris.type.quantifier-own": "to be deleted",
-
-  "layout.field.label.application.synsicris.quantity": "to be deleted",
-
-  "layout.field.label.application.synsicris.description.description": "to be deleted",
-
-  "layout.field.label.parentproject.dc.type.attachment": "to be deleted",
-
-  "layout.field.label.OrgUnit.synsicris.type.publicfunded": "to be deleted",
-
-  "layout.field.label.programme.dc.description": "to be deleted",
-
-  "layout.field.label.call.dc.description": "to be deleted",
-
-  "layout.field.label.call.dc.type": "to be deleted",
-
-  "layout.field.label.call.synsicris.call.startDate": "to be deleted",
-
-  "layout.field.label.call.synsicris.call.endDate": "to be deleted",
-
-  "layout.field.label.call.oairecerif.identifier.url": "to be deleted"
+  "project-overview.page.subproject.create.btn": "to be deleted"
 
 }
