@@ -53,16 +53,24 @@ export class DSONameService {
    * @param dso  The {@link DSpaceObject} you want a name for
    */
   getName(dso: DSpaceObject): string {
-    const types = dso.getRenderTypes();
-    const match = types
-      .filter((type) => typeof type === 'string')
-      .find((type: string) => Object.keys(this.factories).includes(type)) as string;
+    const match = this.getEntityType(dso, (type: string) => Object.keys(this.factories).includes(type));
 
     if (hasValue(match)) {
       return this.factories[match](dso);
     } else {
       return  this.factories.Default(dso);
     }
+  }
+
+  /**
+   * Get the entity type for the given dso {@link DSpaceObject} and applies
+   * the target predicate to evaluate for the dso entityType.
+   *
+   * @param dso  The {@link DSpaceObject} you want a name for
+   * @param predicate  The predicate that the entity needs to validate
+   */
+  getEntityType(dso: DSpaceObject, predicate: (string) => boolean = () => true): string {
+    return dso.getRenderTypes().find(type => typeof type === 'string' && predicate(type)) as string;
   }
 
 }
