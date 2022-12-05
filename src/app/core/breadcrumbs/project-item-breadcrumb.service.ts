@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
+
+import { map, switchMap, take } from 'rxjs/operators';
+import { combineLatest, Observable, of as observableOf } from 'rxjs';
+
 import { DSONameService } from './dso-name.service';
 import {
   FUNDING_ENTITY,
-  FUNDING_RELATION_METADATA, PROJECT_ENTITY,
+  FUNDING_RELATION_METADATA,
+  PROJECT_ENTITY,
   PROJECT_RELATION_METADATA,
   ProjectDataService
 } from '../project/project-data.service';
 import { Breadcrumb } from '../../breadcrumbs/breadcrumb/breadcrumb.model';
-import { map, switchMap, take, withLatestFrom } from 'rxjs/operators';
-import { BehaviorSubject, combineLatest, Observable, of, of as observableOf } from 'rxjs';
+
 import { ChildHALResource } from '../shared/child-hal-resource.model';
 import { DSpaceObject } from '../shared/dspace-object.model';
 import { RemoteData } from '../data/remote-data';
@@ -43,21 +47,26 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
   getBreadcrumbs(key: ChildHALResource & DSpaceObject, url: string): Observable<Breadcrumb[]> {
     const label = this.dsoNameService.getName(key);
     const entityType: string = this.dsoNameService.getEntityType(key);
-    const crumbs$ = of(
-      [].concat(entityType && [new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, null)] || [])
-        .concat([new Breadcrumb(label, url)])
-    );
 
     const relatedProject = Metadata.first(key.metadata, PROJECT_RELATION_METADATA);
     const relatedFunding = Metadata.first(key.metadata, FUNDING_RELATION_METADATA);
-    let fundingCrumbs$ = of([]), projectCrumbs$ = of([]);
+    let fundingCrumbs$ = observableOf([]);
+    let projectCrumbs$ = observableOf([]);
+    let crumbs$ = observableOf([]);
+    let parentUrl;
     if (entityType !== FUNDING_ENTITY && hasValue(relatedFunding?.authority)) {
       fundingCrumbs$ = this.projectService.getFundingItemByItemId(key.uuid).pipe(
         getFirstCompletedRemoteData(),
         switchMap((parentRD: RemoteData<ChildHALResource & DSpaceObject>) => {
           if (hasValue(parentRD?.payload) && parentRD?.payload?.uuid !== key.uuid) {
             const parent = parentRD.payload;
-            return this.getBreadcrumbs(parent, getDSORoute(parent));
+            parentUrl = getDSORoute(parent);
+            return this.getBreadcrumbs(parent, parentUrl).pipe(
+              map((breadcrumbs: Breadcrumb[]) => {
+                return breadcrumbs.concat(entityType && [new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, `${parentUrl}/${entityType}`)] || [])
+                  .concat([new Breadcrumb(label, url)]);
+              })
+            );
           }
           return observableOf([]);
         })
@@ -68,10 +77,21 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
         switchMap((parentRD: RemoteData<ChildHALResource & DSpaceObject>) => {
           if (hasValue(parentRD?.payload) && parentRD?.payload?.uuid !== key.uuid) {
             const parent = parentRD.payload;
-            return this.getBreadcrumbs(parent, getDSORoute(parent));
+            parentUrl = getDSORoute(parent);
+            return this.getBreadcrumbs(parent, parentUrl).pipe(
+              map((breadcrumbs: Breadcrumb[]) => {
+                return breadcrumbs.concat(entityType && [new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, `${parentUrl}/${entityType}`)] || [])
+                  .concat([new Breadcrumb(label, url)]);
+              })
+            );
           }
           return observableOf([]);
         })
+      );
+    } else {
+      crumbs$ = observableOf(
+        [].concat(entityType && [new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, null)] || [])
+          .concat([new Breadcrumb(label, url)])
       );
     }
 
