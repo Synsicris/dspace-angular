@@ -768,6 +768,102 @@
 
   "bitstream-request-a-copy.submit.error": "Something went wrong with submitting the item request.",
 
+
+
+  "breadcrumb.entity-type.Person": "Person",
+
+  "breadcrumb.entity-type.Project": "Project",
+
+  "breadcrumb.entity-type.Funding": "Funding",
+
+  "breadcrumb.entity-type.OrgUnit": "OrgUnit",
+
+  "breadcrumb.entity-type.Journal": "Journal",
+
+  "breadcrumb.entity-type.Publication": "Publication",
+
+  "breadcrumb.entity-type.Product": "Product",
+
+  "breadcrumb.entity-type.Patent": "Patent",
+
+  "breadcrumb.entity-type.Event": "Event",
+
+  "breadcrumb.entity-type.Equipment": "Equipment",
+
+  "breadcrumb.entity-type.impactpathway": "impactpathway",
+
+  "breadcrumb.entity-type.award": "award",
+
+  "breadcrumb.entity-type.contribution_fundingprogramme": "contribution_fundingprogramme",
+
+  "breadcrumb.entity-type.cooperationpartner": "cooperationpartner",
+
+  "breadcrumb.entity-type.ethic": "ethic",
+
+  "breadcrumb.entity-type.exp_societalimpact": "exp_societalimpact",
+
+  "breadcrumb.entity-type.condition": "condition",
+
+  "breadcrumb.entity-type.gender": "gender",
+
+  "breadcrumb.entity-type.innovationidea": "innovationidea",
+
+  "breadcrumb.entity-type.milestone": "milestone",
+
+  "breadcrumb.entity-type.step": "step",
+
+  "breadcrumb.entity-type.physical_object": "physical_object",
+
+  "breadcrumb.entity-type.proj_objective": "proj_objective",
+
+  "breadcrumb.entity-type.research_result": "research_result",
+
+  "breadcrumb.entity-type.spinoff": "spinoff",
+
+  "breadcrumb.entity-type.stateofart": "stateofart",
+
+  "breadcrumb.entity-type.targetgroup": "targetgroup",
+
+  "breadcrumb.entity-type.task": "task",
+
+  "breadcrumb.entity-type.unexpected_result": "unexpected_result",
+
+  "breadcrumb.entity-type.workpackage": "workpackage",
+
+  "breadcrumb.entity-type.process_event": "process_event",
+
+  "breadcrumb.entity-type.innovationpotential": "innovationpotential",
+
+  "breadcrumb.entity-type.application": "application",
+
+  "breadcrumb.entity-type.plan_publication": "plan_publication",
+
+  "breadcrumb.entity-type.exploitationplan": "exploitationplan",
+
+  "breadcrumb.entity-type.projectpartner": "projectpartner",
+
+  "breadcrumb.entity-type.programme": "programme",
+
+  "breadcrumb.entity-type.call": "call",
+
+  "breadcrumb.entity-type.fundingobjective": "fundingobjective",
+
+  "breadcrumb.entity-type.ia_objective": "ia_objective",
+
+  "breadcrumb.entity-type.workingplan": "workingplan",
+
+  "breadcrumb.entity-type.WorkingPlan": "Working Plan",
+
+  "breadcrumb.entity-type.comment": "comment",
+
+  "breadcrumb.entity-type.neg_sideeffect": "neg_sideeffect",
+
+  "breadcrumb.entity-type.open_researchquestion": "open_researchquestion",
+
+  "breadcrumb.entity-type.interim_report": "interim_report",
+
+
+
   "browse.comcol.by.author": "By Author",
 
   "browse.comcol.by.dateissued": "By Issue Date",

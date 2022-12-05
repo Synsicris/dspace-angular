@@ -29,14 +29,17 @@ export abstract class DSOBreadcrumbResolver<T extends ChildHALResource & DSpaceO
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BreadcrumbConfig<T>> {
     const uuid = route.params.id;
+    return this.resolveByUUID(uuid, state.url);
+  }
+
+  protected resolveByUUID(uuid: string, fullPath: string): Observable<BreadcrumbConfig<T> | undefined> {
     return this.dataService.findById(uuid, true, false, ...this.followLinks).pipe(
       getFirstCompletedRemoteData(),
       getRemoteDataPayload(),
       map((object: T) => {
         if (hasValue(object)) {
-          const fullPath = state.url;
           const url = fullPath.substr(0, fullPath.indexOf(uuid)) + uuid;
-          return {provider: this.breadcrumbService, key: object, url: url};
+          return { provider: this.breadcrumbService, key: object, url: url };
         } else {
           return undefined;
         }
