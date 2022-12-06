@@ -56,6 +56,7 @@ import { PageInfo } from '../shared/page-info.model';
 import { Item } from '../shared/item.model';
 import { Metadata } from '../shared/metadata.utils';
 import { ItemDataService } from '../data/item-data.service';
+import { CollectionDataService } from '../data/collection-data.service';
 
 export const PROJECT_RELATION_METADATA = 'synsicris.relation.project';
 export const PROJECT_RELATION_SOLR = 'synsicris.relation.project_authority';
@@ -95,6 +96,8 @@ export class ProjectDataService extends CommunityDataService {
     protected configurationService: ConfigurationDataService,
     protected groupDataService: GroupDataService,
     protected itemService: ItemDataService,
+    protected collectionService: CollectionDataService,
+    protected commService: CommunityDataService,
   ) {
     super(requestService, rdbService, store, objectCache, halService, notificationsService, bitstreamDataService, http, comparator);
   }
@@ -268,6 +271,8 @@ export class ProjectDataService extends CommunityDataService {
     return this.getRelatedEntityItemByItem(
       itemId,
       relationMetadata,
+      true,
+      true,
       ...linksToFollow
     ).pipe(
       getFirstCompletedRemoteData(),
@@ -299,7 +304,7 @@ export class ProjectDataService extends CommunityDataService {
    * @return the Community as an Observable
    */
   getProjectItemByItemId(itemId: string, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
-    return this.getRelatedEntityItemByItem(itemId, PROJECT_RELATION_METADATA, ...linksToFollow);
+    return this.getRelatedEntityItemByItem(itemId, PROJECT_RELATION_METADATA, true, true, ...linksToFollow);
   }
 
   /**
@@ -324,7 +329,7 @@ export class ProjectDataService extends CommunityDataService {
    * @return the Community as an Observable
    */
   getFundingItemByItemId(itemId: string, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
-    return this.getRelatedEntityItemByItem(itemId, FUNDING_RELATION_METADATA, ...linksToFollow);
+    return this.getRelatedEntityItemByItem(itemId, FUNDING_RELATION_METADATA, true, true, ...linksToFollow);
   }
 
   /**
@@ -336,7 +341,7 @@ export class ProjectDataService extends CommunityDataService {
    *                        {@link HALLink}s should be automatically resolved
    * @return the Community as an Observable
    */
-  protected getRelatedEntityItemByItem(itemId: string, relationMetadata: string, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
+  protected getRelatedEntityItemByItem(itemId: string, relationMetadata: string, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
     return this.itemService.findById(itemId).pipe(
       getFirstCompletedRemoteData(),
       mergeMap((itemRD: RemoteData<Item>) => {
@@ -439,16 +444,23 @@ export class ProjectDataService extends CommunityDataService {
     return this.getRelatedEntityItemByItem(
       itemId,
       FUNDING_RELATION_METADATA,
+      false,
+      true,
       followLink('owningCollection', {}, followLink('parentCommunity'))
     ).pipe(
       getFirstCompletedRemoteData(),
       mergeMap((projectItemRD: RemoteData<Item>) => {
         if (projectItemRD.hasSucceeded) {
-          return projectItemRD.payload.owningCollection.pipe(
+          return this.collectionService.findByHref(
+            projectItemRD.payload._links.owningCollection.href,
+            false,
+            true,
+            followLink('parentCommunity')
+          ).pipe(
             getFirstCompletedRemoteData(),
             mergeMap((collectionRD) => {
-              if (collectionRD.hasSucceeded) {
-                return collectionRD.payload.parentCommunity;
+              if (collectionRD.hasSucceeded && collectionRD?.payload) {
+                return collectionRD?.payload?.parentCommunity;
               } else {
                 return createFailedRemoteDataObject$<Community>();
               }
