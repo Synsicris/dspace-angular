@@ -4660,7 +4660,11 @@
 
   "project.manage.members.project.members-group": "Invitation and Management of project members",
 
+  "project.manage.members.project.readers-group": "Invitation and Management of project readers",
+
   "project.manage.members.project.members-group-help": "Help message here",
+
+  "project.manage.members.project.readers-group-help": "Help message here",
 
   "project.manage.members.funding.coordinators-group": "Invitation and Management Project members with Coordinator-Role",
 
