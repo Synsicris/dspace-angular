@@ -14,6 +14,7 @@ import { Collection } from '../core/shared/collection.model';
 import { getFirstSucceededRemoteWithNotEmptyData } from '../core/shared/operators';
 import { hasValue, isEmpty } from '../shared/empty.util';
 import { Item } from '../core/shared/item.model';
+import { ProjectVersionService } from '../core/project/project-version.service';
 
 @Component({
   selector: 'ipw-working-plan',
@@ -21,6 +22,11 @@ import { Item } from '../core/shared/item.model';
   styleUrls: ['./working-plan.component.scss'],
 })
 export class WorkingPlanComponent implements OnInit, OnDestroy {
+
+  /**
+   * If the working-plan given is a version item
+   */
+  @Input() isVersionOf: boolean;
 
   /**
    * The project community's id
@@ -46,6 +52,7 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
   constructor(
     private cdr: ChangeDetectorRef,
     private collectionDataService: CollectionDataService,
+    private projectVersionService: ProjectVersionService,
     private workingPlanStateService: WorkingPlanStateService
   ) {
   }
@@ -63,7 +70,7 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
     this.workingPlanStateService.isWorkingPlanLoaded().pipe(
       take(1)
     ).subscribe(() => {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata);
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata, this.isVersionOf);
     });
   }
 
@@ -95,22 +102,22 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
         environment.workingPlan.workpackageEntityName,
         findOptions,
         true).pipe(
-        getFirstSucceededRemoteWithNotEmptyData(),
-        map((collections: RemoteData<PaginatedList<Collection>>) => {
-          return collections.payload.page[0];
-        })
-      );
+          getFirstSucceededRemoteWithNotEmptyData(),
+          map((collections: RemoteData<PaginatedList<Collection>>) => {
+            return collections.payload.page[0];
+          })
+        );
     const mlCollId$ = this.collectionDataService
       .getAuthorizedCollectionByCommunityAndEntityType(
         this.projectCommunityId,
         environment.workingPlan.milestoneEntityName,
         findOptions,
         true).pipe(
-        getFirstSucceededRemoteWithNotEmptyData(),
-        map((collections: RemoteData<PaginatedList<Collection>>) => {
-          return collections.payload.page[0];
-        })
-      );
+          getFirstSucceededRemoteWithNotEmptyData(),
+          map((collections: RemoteData<PaginatedList<Collection>>) => {
+            return collections.payload.page[0];
+          })
+        );
     combineLatest([wpCollId$, mlCollId$]).subscribe(([wpColl, mlColl]) => {
       this.workPackageCollectionId = wpColl.id;
       this.milestoneCollectionId = mlColl.id;

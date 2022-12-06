@@ -6,15 +6,17 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectMembersComponent } from './project-members/project-members.component';
 import { AccessControlModule } from '../access-control/access-control.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [ProjectMembersPageComponent, ProjectMembersComponent],
-  imports: [
-    CommonModule,
-    AccessControlModule,
-    ProjectMembersPageRoutingModule,
-    NgbNavModule,
-    TranslateModule
-  ]
+    imports: [
+        CommonModule,
+        AccessControlModule,
+        ProjectMembersPageRoutingModule,
+        NgbNavModule,
+        TranslateModule,
+        SharedModule
+    ]
 })
 export class ProjectMembersPageModule { }

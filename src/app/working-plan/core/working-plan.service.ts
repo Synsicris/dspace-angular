@@ -1,3 +1,4 @@
+import { SearchManager } from './../../core/browse/search-manager';
 import { Injectable } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
@@ -104,7 +105,8 @@ export class WorkingPlanService {
     private operationsBuilder: JsonPatchOperationsBuilder,
     private requestService: RequestService,
     private searchService: SearchService,
-    private workingPlanStateService: WorkingPlanStateService
+    private workingPlanStateService: WorkingPlanStateService,
+    private searchManager: SearchManager,
   ) {
     this.searchService.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
   }
@@ -150,7 +152,7 @@ export class WorkingPlanService {
             getFirstCompletedRemoteData()
           );
         } else {
-          throw(new Error('Link to working plan item is missing.'));
+          throw (new Error('Link to working plan item is missing.'));
         }
       })
     );
@@ -206,6 +208,10 @@ export class WorkingPlanService {
 
   getWorkingPlanTaskSearchHeader(): string {
     return `working-plan.task.search.header`;
+  }
+
+  getWorkingPlanSearchHeader(): string {
+    return `working-plan.search.header`;
   }
 
   getWorkpackageItemById(itemId): Observable<Item> {
@@ -264,7 +270,7 @@ export class WorkingPlanService {
       scope: projectId
     });
 
-    return this.searchService.search(searchOptions, null, false).pipe(
+    return this.searchManager.search(searchOptions, null, false).pipe(
       getAllSucceededRemoteData(),
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
@@ -324,7 +330,8 @@ export class WorkingPlanService {
       dates: dates,
       status: status,
       steps: steps,
-      expanded: (steps && steps.length > 0)
+      expanded: (steps && steps.length > 0),
+      selfUrl: item._links.self.href
     };
   }
 
@@ -347,7 +354,8 @@ export class WorkingPlanService {
       compareStatus: compareObj.status,
       status: status,
       steps: steps,
-      expanded: (steps && steps.length > 0)
+      expanded: (steps && steps.length > 0),
+      selfUrl: compareObj.item._links.self.href
     };
   }
 
@@ -370,7 +378,8 @@ export class WorkingPlanService {
       dates: dates,
       compareStatus: compareObj.status,
       status: status,
-      expanded: false
+      expanded: false,
+      selfUrl: compareObj.item._links.self.href
     };
   }
 
@@ -392,7 +401,8 @@ export class WorkingPlanService {
       progressDates: [],
       dates: dates,
       status: status,
-      expanded: false
+      expanded: false,
+      selfUrl: item._links.self.href
     };
   }
 
@@ -402,12 +412,12 @@ export class WorkingPlanService {
         compareItem.item.id,
         compareItem.item,
         compareItem.versionItem?.id).pipe(
-        map((steps: WorkpackageStep[]) => this.initWorkpackageFromCompareItem(
-          compareItem,
-          null,
-          steps
-        ))
-      )),
+          map((steps: WorkpackageStep[]) => this.initWorkpackageFromCompareItem(
+            compareItem,
+            null,
+            steps
+          ))
+        )),
       reduce((acc: any, value: any) => [...acc, value], [])
     );
   }
@@ -436,7 +446,7 @@ export class WorkingPlanService {
               }, [])
             );
           })
-      );
+        );
     }
   }
 
@@ -446,12 +456,12 @@ export class WorkingPlanService {
         searchItem.item.id,
         searchItem.item,
         searchItem.id).pipe(
-        map((steps: WorkpackageStep[]) => this.initWorkpackageFromItem(
-          searchItem.item,
-          searchItem.id,
-          steps
-        ))
-      )),
+          map((steps: WorkpackageStep[]) => this.initWorkpackageFromItem(
+            searchItem.item,
+            searchItem.id,
+            steps
+          ))
+        )),
       reduce((acc: any, value: any) => [...acc, value], [])
     );
   }
@@ -562,6 +572,24 @@ export class WorkingPlanService {
           language: null,
           place: 0,
           value: 'not_done'
+        }]
+      });
+    }
+
+    return result;
+  }
+
+  setChildWorkingplanLinkStatusMetadata(metadata: MetadataMap): MetadataMap {
+    let result: MetadataMap = metadata;
+    if (!metadata.hasOwnProperty(environment.workingPlan.workingPlanLinkMetadata)
+      || isEmpty(metadata[environment.workingPlan.workingPlanLinkMetadata])) {
+      result = Object.assign({}, metadata, {
+        [environment.workingPlan.workingPlanLinkMetadata]: [{
+          authority: null,
+          confidence: -1,
+          language: null,
+          place: 0,
+          value: 'nested'
         }]
       });
     }
@@ -709,10 +737,10 @@ export class WorkingPlanService {
         );
       })
     );
-/*    return observableFrom(list).pipe(
-      concatMap((entry) => this.updateMetadataItem(entry.id, entry.metadataList)),
-      reduce((acc: any, value: any) => [...acc, value], [])
-    );*/
+    /*    return observableFrom(list).pipe(
+          concatMap((entry) => this.updateMetadataItem(entry.id, entry.metadataList)),
+          reduce((acc: any, value: any) => [...acc, value], [])
+        );*/
   }
 
   updateWorkpackageStepsPlace(workpackageId: string, workpackageSteps: WorkpackageStep[]): Observable<Item> {
@@ -728,6 +756,18 @@ export class WorkingPlanService {
         } as MetadatumViewModel));
 
     return this.updateMetadataItem(workpackageId, metadataList);
+  }
+
+
+  getItemsFromWorkpackages(wkItems): string[] {
+    const items = [];
+
+    wkItems.forEach(item => {
+      items.push(item.item.id);
+      items.push(...item.item.allMetadata('workingplan.relation.step').map((step) => step.authority));
+    });
+
+    return items;
   }
 
   updateWorkpackageMetadata(

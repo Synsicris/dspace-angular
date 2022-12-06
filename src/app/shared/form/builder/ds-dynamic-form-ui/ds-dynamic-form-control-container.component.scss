@@ -3,6 +3,7 @@
   @import "../../form.component";
 }
 
+// form-groups
 :host {
   display: flex;
   flex-direction: column;
@@ -16,6 +17,7 @@
   appearance: none;
 }
 
+// tooltip-icon
 .hint {
   cursor: pointer;
 }

@@ -9,7 +9,7 @@ import { ProjectDataService } from './project-data.service';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 
 /**
- * This class represents a resolver that retrieve item that describe the project from synsicris.relation.parentproject metadata
+ * This class represents a resolver that retrieve item that describe the project from synsicris.relation.project metadata
  */
 @Injectable()
 export class ProjectItemByItemRelationResolver implements Resolve<RemoteData<Item>> {

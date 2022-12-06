@@ -72,11 +72,17 @@ export class ProfilePageComponent implements OnInit {
   private currentUser: EPerson;
   canChangePassword$: Observable<boolean>;
 
+  /**
+   * Active tab utilized by accordion
+   */
+  activeIds: string[] = ['profile-card-researcher'];
+
+
   constructor(private authService: AuthService,
-              private notificationsService: NotificationsService,
-              private translate: TranslateService,
-              private epersonService: EPersonDataService,
-              private authorizationService: AuthorizationDataService) {
+    private notificationsService: NotificationsService,
+    private translate: TranslateService,
+    private epersonService: EPersonDataService,
+    private authorizationService: AuthorizationDataService) {
   }
 
   ngOnInit(): void {
@@ -89,8 +95,9 @@ export class ProfilePageComponent implements OnInit {
     );
     if (this.showGroups) {
       this.groupsRD$ = this.user$.pipe(switchMap((user: EPerson) => user.groups));
-    this.canChangePassword$ = this.user$.pipe(switchMap((user: EPerson) => this.authorizationService.isAuthorized(FeatureID.CanChangePassword, user._links.self.href)));
     }
+    this.canChangePassword$ = this.user$.pipe(switchMap((user: EPerson) => this.authorizationService.isAuthorized(FeatureID.CanChangePassword, user._links.self.href)));
+
   }
 
   /**
@@ -133,7 +140,7 @@ export class ProfilePageComponent implements OnInit {
       this.notificationsService.error(this.translate.instant(this.PASSWORD_NOTIFICATIONS_PREFIX + 'error.general'));
     }
     if (!this.invalidSecurity && passEntered) {
-      const operation = {op: 'add', path: '/password', value: this.password} as Operation;
+      const operation = { op: 'add', path: '/password', value: this.password } as Operation;
       this.epersonService.patch(this.currentUser, [operation]).pipe(
         getFirstCompletedRemoteData()
       ).subscribe((response: RemoteData<EPerson>) => {

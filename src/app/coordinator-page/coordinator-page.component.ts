@@ -88,7 +88,7 @@ export class CoordinatorPageComponent implements OnInit {
    * @param projectCommunityId
    */
   getProjectName(projectCommunityId: string): Observable<string> {
-    return this.projectService.getProjectItemByProjectCommunityId(projectCommunityId).pipe(
+    return this.projectService.getEntityItemByCommunityId(projectCommunityId).pipe(
       getFirstSucceededRemoteDataPayload(),
       map((item: Item) => this.nameService.getName(item))
     );
@@ -99,7 +99,7 @@ export class CoordinatorPageComponent implements OnInit {
    * @param projectCommunityId
    */
   getProjectItemPath(projectCommunityId: string): Observable<string> {
-    return this.projectService.getProjectItemByProjectCommunityId(projectCommunityId).pipe(
+    return this.projectService.getEntityItemByCommunityId(projectCommunityId).pipe(
       getFirstSucceededRemoteDataPayload(),
       map((item: Item) => getItemPageRoute(item))
     );

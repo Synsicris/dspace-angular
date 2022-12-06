@@ -10,7 +10,7 @@ export enum DisplayItemMetadataType {
 export interface Metadata {
   name: string;
   type: DisplayItemMetadataType;
-  truncable?: boolean;
+  truncatable?: boolean;
 }
 
 export interface ResultViewConfig {

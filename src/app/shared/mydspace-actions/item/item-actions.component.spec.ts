@@ -1,8 +1,10 @@
+import { EditItemDataService } from './../../../core/submission/edititem-data.service';
+import { AuthorizationDataService } from './../../../core/data/feature-authorization/authorization-data.service';
 import { ChangeDetectionStrategy, Injector, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { of as observableOf } from 'rxjs';
+import { of as observableOf, of } from 'rxjs';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
@@ -16,6 +18,7 @@ import { RequestService } from '../../../core/data/request.service';
 import { getMockSearchService } from '../../mocks/search-service.mock';
 import { getMockRequestService } from '../../mocks/request.service.mock';
 import { SearchService } from '../../../core/shared/search/search.service';
+import { By } from '@angular/platform-browser';
 
 let component: ItemActionsComponent;
 let fixture: ComponentFixture<ItemActionsComponent>;
@@ -51,6 +54,9 @@ mockObject = Object.assign(new Item(), {
         value: '2015-06-26'
       }
     ]
+  },
+  _links: {
+    self: 'http://localhost:8000'
   }
 });
 
@@ -58,8 +64,25 @@ const searchService = getMockSearchService();
 
 const requestServce = getMockRequestService();
 
+const authorizationDataService: AuthorizationDataService = jasmine.createSpyObj('AuthorizationDataService', {
+  isAuthorized: observableOf(true)
+});
+let editItemDataService: EditItemDataService;
+
+let aroute;
+const eiResult = 'eiResult' as any;
+
 describe('ItemActionsComponent', () => {
   beforeEach(waitForAsync(() => {
+
+    aroute = {
+      data: observableOf({ isVersionOfAnItem: observableOf(false) }),
+    };
+
+    editItemDataService = jasmine.createSpyObj('EditItemDataService', {
+      checkEditModeByIDAndType: observableOf(eiResult)
+    });
+
     TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot({
@@ -76,7 +99,10 @@ describe('ItemActionsComponent', () => {
         { provide: ItemDataService, useValue: mockDataService },
         { provide: NotificationsService, useValue: new NotificationsServiceStub() },
         { provide: SearchService, useValue: searchService },
-        { provide: RequestService, useValue: requestServce }
+        { provide: RequestService, useValue: requestServce },
+        { provide: AuthorizationDataService, useValue: authorizationDataService },
+        { provide: ActivatedRoute, useValue: aroute },
+        { provide: EditItemDataService, useValue: editItemDataService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(ItemActionsComponent, {
@@ -102,5 +128,24 @@ describe('ItemActionsComponent', () => {
 
     expect(component.object).toEqual(mockObject);
   });
+
+  describe('when is version of an item', () => {
+
+    beforeEach(() => {
+      spyOn(component, 'isVersionOfAnItem').and.returnValue(of(true));
+      fixture.detectChanges();
+    });
+
+    it('should not render edit button', () => {
+      const link = fixture.debugElement.query(By.css('button[data-test="edit"]'));
+      expect(link).toBeNull();
+    });
+    it('should not render edit grants button', () => {
+      const link = fixture.debugElement.query(By.css('button[data-test="edit-grants"]'));
+      expect(link).toBeNull();
+    });
+
+  });
+
 
 });

@@ -3,7 +3,9 @@ import { RouterModule } from '@angular/router';
 import { AuthBlockingGuard } from './core/auth/auth-blocking.guard';
 
 import { AuthenticatedGuard } from './core/auth/authenticated.guard';
-import { SiteAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/site-administrator.guard';
+import {
+  SiteAdministratorGuard
+} from './core/data/feature-authorization/feature-authorization-guard/site-administrator.guard';
 import {
   ACCESS_CONTROL_MODULE_PATH,
   ADMIN_MODULE_PATH,
@@ -15,6 +17,7 @@ import {
   INFO_MODULE_PATH,
   INTERNAL_SERVER_ERROR,
   LEGACY_BITSTREAM_MODULE_PATH,
+  MANAGEMEMBERS,
   PROFILE_MODULE_PATH,
   REGISTER_PATH,
   REQUEST_COPY_MODULE_PATH,
@@ -29,8 +32,12 @@ import { EndUserAgreementCurrentUserGuard } from './core/end-user-agreement/end-
 import { SiteRegisterGuard } from './core/data/feature-authorization/feature-authorization-guard/site-register.guard';
 import { ThemedPageNotFoundComponent } from './pagenotfound/themed-pagenotfound.component';
 import { ThemedForbiddenComponent } from './forbidden/themed-forbidden.component';
-import { GroupAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/group-administrator.guard';
-import { ThemedPageInternalServerErrorComponent } from './page-internal-server-error/themed-page-internal-server-error.component';
+import {
+  GroupAdministratorGuard
+} from './core/data/feature-authorization/feature-authorization-guard/group-administrator.guard';
+import {
+  ThemedPageInternalServerErrorComponent
+} from './page-internal-server-error/themed-page-internal-server-error.component';
 import { ServerCheckGuard } from './core/server-check/server-check.guard';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
 
@@ -100,13 +107,37 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
           {
-            path: 'entities/parentproject/:id/workingplan',
+            path: 'entities/project/:id/workingplan',
             loadChildren: () => import('./+working-plan-page/working-plan-page.module')
               .then((m) => m.WorkingPlanPageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
           {
-            path: 'entities/project/:id/exploitationplans',
+            path: `entities/project/:id/${MANAGEMEMBERS}`,
+            loadChildren: () => import('./project-members-page/project-members-page.module')
+              .then((m) => m.ProjectMembersPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: `entities/funding/:id/${MANAGEMEMBERS}`,
+            loadChildren: () => import('./project-members-page/project-members-page.module')
+              .then((m) => m.ProjectMembersPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: `entities/programme/:id/${MANAGEMEMBERS}`,
+            loadChildren: () => import('./programme-members-page/programme-members-page.module')
+              .then((m) => m.ProgrammeMembersPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: 'entities/project/:id/manageversions',
+            loadChildren: () => import('./project-manage-version/project-manage-version.module')
+              .then((m) => m.ProjectManageVersionModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: 'entities/funding/:id/exploitationplans',
             loadChildren: () => import('./+exploitation-plan-page/exploitation-plan-page.module')
               .then((m) => m.ExploitationPlanPageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
@@ -146,6 +177,12 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             loadChildren: () => import('./search-page/search-page-routing.module')
               .then((m) => m.SearchPageRoutingModule),
             canActivate: [EndUserAgreementCurrentUserGuard]
+          },
+          {
+            path: 'browse/projects',
+            loadChildren: () => import('./browse-by-projects-page/browse-by-projects-page.module')
+              .then((m) => m.BrowseByProjectsPageModule),
+            canActivate: [AuthenticatedGuard]
           },
           {
             path: 'browse',
@@ -245,7 +282,8 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             path: FORBIDDEN_PATH,
             component: ThemedForbiddenComponent
           },
-          { path: 'coordinator-overview',
+          {
+            path: 'coordinator-overview',
             loadChildren: () => import('./coordinator-page/coordinator-page.module')
               .then((m) => m.CoordinatorPageModule)
           },
@@ -291,7 +329,7 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
       }
     ], {
       onSameUrlNavigation: 'reload',
-})
+    })
   ],
   exports: [RouterModule],
 })

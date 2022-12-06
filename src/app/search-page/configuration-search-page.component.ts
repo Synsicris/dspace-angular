@@ -29,12 +29,16 @@ import { SearchManager } from '../core/browse/search-manager';
 
 export class ConfigurationSearchPageComponent extends SearchComponent {
   constructor(protected service: SearchService,
-              protected searchManager: SearchManager,
-              protected sidebarService: SidebarService,
-              protected windowService: HostWindowService,
-              @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
-              protected routeService: RouteService,
-              protected router: Router) {
+    protected searchManager: SearchManager,
+    protected sidebarService: SidebarService,
+    protected windowService: HostWindowService,
+    @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
+    protected routeService: RouteService,
+    protected router: Router) {
     super(service, searchManager, sidebarService, windowService, searchConfigService, routeService, router);
+  }
+
+  refresh() {
+    super.refresh();
   }
 }

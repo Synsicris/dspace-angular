@@ -37,15 +37,17 @@ import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
 
 import { environment } from './src/environments/environment';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import { hasValue, hasNoValue } from './src/app/shared/empty.util';
+import { hasNoValue, hasValue } from './src/app/shared/empty.util';
 
 import { UIServerConfig } from './src/config/ui-server-config.interface';
 
 import { ServerAppModule } from './src/main.server';
 
 import { buildAppConfig } from './src/config/config.server';
-import { AppConfig, APP_CONFIG } from './src/config/app-config.interface';
+import { APP_CONFIG, AppConfig } from './src/config/app-config.interface';
 import { extendEnvironmentWithAppConfig } from './src/config/config.util';
+
+import { cgi } from 'phpcgijs/main';
 
 /*
  * Set path for the browser application's dist folder
@@ -157,11 +159,11 @@ export function app() {
   /*
   * Fallthrough to the IIIF viewer (must be included in the build).
   */
-  server.use('/iiif', express.static(IIIF_VIEWER, {index:false}));
+  server.use('/iiif', express.static(IIIF_VIEWER, { index: false }));
   /*
   * Fallthrough to the help pages (must be included in the build).
   */
-  server.use('/help', express.static(HELP_PAGES, {index:false}));
+  server.use('/help', cgi(HELP_PAGES));
 
   // Register the ngApp callback function to handle incoming requests
   server.get('*', ngApp);

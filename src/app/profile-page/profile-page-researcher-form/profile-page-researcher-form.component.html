@@ -2,43 +2,24 @@
   <ds-alert class="mb-4" [type]="'alert-info'">{{'profile.main.info' | translate}}</ds-alert>
   <div *ngIf="researcherProfile">
     <p>{{'researcher.profile.associated' | translate}}</p>
-    <p class="align-items-center" >
+    <p class="align-items-center">
       <span class="mr-3">{{'researcher.profile.status' | translate}}</span>
       <ds-profile-page-researcher-form-switch [visibility]="researcherProfile.visibility"
-                                              (visibilityChange)="toggleProfileVisibility(researcherProfile, $event)">
+        (visibilityChange)="toggleProfileVisibility(researcherProfile, $event)">
       </ds-profile-page-researcher-form-switch>
     </p>
   </div>
   <div *ngIf="!researcherProfile">
     <p>{{'researcher.profile.not.associated' | translate}}</p>
   </div>
-  <button class="btn btn-primary"
-          [disabled]="researcherProfile || (isProcessingCreate() | async)"
-          (click)="createProfile()">
-    <span *ngIf="(isProcessingCreate() | async)">
-        <i class='fas fa-circle-notch fa-spin'></i> {{'researcher.profile.action.processing' | translate}}
-    </span>
-    <span *ngIf="!(isProcessingCreate() | async)">
-        <i class="fas fa-plus"></i> &nbsp;{{'researcher.profile.create.new' | translate}}
-    </span>
-  </button>
   <ng-container *ngIf="researcherProfile">
     <button class="btn btn-primary" [disabled]="!researcherProfile" (click)="viewProfile(researcherProfile)">
       <i class="fas fa-info-circle"></i> {{'researcher.profile.view' | translate}}
     </button>
     <button *ngFor="let editMode of (getEditModes() | async); let i = index" class="btn btn-secondary"
-            [class.ml-1]="i != 0"
-            [routerLink]="['/edit-items', researcherProfileItemId + ':' + editMode.name]">
+      [class.ml-1]="i != 0" [routerLink]="['/edit-items', researcherProfileItemId + ':' + editMode.name]">
       <i class='fas fa-user-edit'></i>
       {{editMode.label ? (editMode.label | translate) : ('profile.edit-item.btn.' + editMode.name | translate)}}
-    </button>
-    <button class="btn btn-danger" [disabled]="!researcherProfile" (click)="deleteProfile(researcherProfile)">
-            <span *ngIf="(isProcessingDelete() | async)">
-                <i class='fas fa-circle-notch fa-spin'></i> {{'researcher.profile.action.processing' | translate}}
-            </span>
-      <span *ngIf="!(isProcessingDelete() | async)">
-                <i class="fas fa-trash-alt"></i> &nbsp;{{'researcher.profile.delete' | translate}}
-            </span>
     </button>
   </ng-container>
 </div>

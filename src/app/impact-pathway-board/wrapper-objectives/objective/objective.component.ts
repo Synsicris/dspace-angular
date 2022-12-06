@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathwayTask } from '../../core/models/impact-pathway-task.model';
@@ -11,6 +11,8 @@ import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-m
 import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
 import { distinctUntilChanged, skip, take } from 'rxjs/operators';
+import { EditItemDataService } from 'src/app/core/submission/edititem-data.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'ipw-objective',
@@ -32,6 +34,10 @@ export class ObjectiveComponent implements OnInit {
    * @type {Observable<SubmissionFormModel>}
    */
   formConfig$: Observable<SubmissionFormModel>;
+  /**
+   * A boolean representing if edit/add buttons are active
+   */
+  canEditButton$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
 
@@ -40,11 +46,25 @@ export class ObjectiveComponent implements OnInit {
    */
   @ViewChild('ipwCollapse') collapsable;
 
-  constructor(private impactPathwayService: ImpactPathwayService, private modalService: NgbModal) {
+  /**
+   * A boolean representing if item is a version of original item
+   */
+  @Input() isVersionOfAnItem = false;
+
+  constructor(
+    private impactPathwayService: ImpactPathwayService,
+    private modalService: NgbModal,
+    protected editItemDataService: EditItemDataService
+  ) {
   }
 
   ngOnInit(): void {
     this.formConfig$ = this.impactPathwayService.getImpactPathwayTaskEditFormConfig(this.impactPathwayStep.type);
+    this.editItemDataService.checkEditModeByIDAndType(this.impactPathwayTask.id, environment.projects.projectsEntityEditMode).pipe(
+      take(1)
+    ).subscribe((canEdit: boolean) => {
+      this.canEditButton$.next(canEdit);
+    });
   }
 
   /**
@@ -54,7 +74,7 @@ export class ObjectiveComponent implements OnInit {
     this.collapsable.isCollapsed().pipe(
       skip(2),
       distinctUntilChanged()
-    ).subscribe( (val) => {
+    ).subscribe((val) => {
       this.impactPathwayService.dispatchSetImpactPathwaySubTaskCollapse(
         this.impactPathwayStep.id,
         this.impactPathwayTask.id,

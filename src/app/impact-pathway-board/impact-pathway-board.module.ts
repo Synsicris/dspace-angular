@@ -1,3 +1,4 @@
+import { CreateItemSubmissionModalModule } from './../shared/create-item-submission-modal/create-item-submission-modal.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -33,7 +34,8 @@ const MODULES = [
   CreateSimpleItemModule,
   EditSimpleItemModalModule,
   ComcolModule,
-  ItemDetailPageModalModule
+  ItemDetailPageModalModule,
+  CreateItemSubmissionModalModule
 ];
 
 const COMPONENTS = [

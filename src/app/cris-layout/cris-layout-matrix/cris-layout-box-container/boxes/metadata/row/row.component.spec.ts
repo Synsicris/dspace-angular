@@ -6,7 +6,7 @@ import { TranslateLoaderMock } from '../../../../../../shared/mocks/translate-lo
 import { TextComponent } from '../rendering-types/text/text.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Item } from '../../../../../../core/shared/item.model';
-import { metadataBoxConfigurationMock } from 'src/app/shared/testing/box-configurations.mock';
+import { metadataBoxConfigurationMock } from '../../../../../../shared/testing/box-configurations.mock';
 import { By } from '@angular/platform-browser';
 
 class TestItem {

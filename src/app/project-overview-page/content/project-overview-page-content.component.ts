@@ -21,7 +21,9 @@ import { AuthService } from '../../core/auth/auth.service';
 import { ProjectAuthorizationService } from '../../core/project/project-authorization.service';
 import { ProjectDataService } from '../../core/project/project-data.service';
 import { CreateProjectComponent } from '../../projects/create-project/create-project.component';
-import { CreateImpactPathwayComponent } from '../../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
+import {
+  CreateImpactPathwayComponent
+} from '../../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 
 @Component({
@@ -185,7 +187,7 @@ export class ProjectOverviewPageContentComponent implements OnInit {
       elementsPerPage: this.elementsPerPage
     });
 
-    this.projectService.retrieveSubprojectsByParentProjectUUID(this.projectUUID, pageInfo)
+    this.projectService.retrieveAllFundingByProjectUUID(this.projectUUID, pageInfo)
       .subscribe((subprojects: PaginatedList<Community>) => {
       this.loading$.next(false);
       this.subprojectList$.next(subprojects.page);
@@ -229,7 +231,7 @@ export class ProjectOverviewPageContentComponent implements OnInit {
    * @param projectCommunityId
    */
   getProjectItemPath(projectCommunityId: string): Observable<string> {
-    return this.projectService.getProjectItemByProjectCommunityId(projectCommunityId).pipe(
+    return this.projectService.getEntityItemByCommunityId(projectCommunityId).pipe(
       getFirstSucceededRemoteDataPayload(),
       map((item: Item) => getItemPageRoute(item))
     );

@@ -245,7 +245,15 @@ export class DefaultAppConfig implements AppConfig {
     {
       type: 'Product',
       metadata: ['dc.contributor.author']
-    }
+    },
+    {
+      type: 'workpackage',
+      metadata: ['workingplan.relation.step']
+    },
+    {
+      type: 'milestone',
+      metadata: ['workingplan.relation.step']
+    },
   ];
 
   // Collection Page Config
@@ -400,7 +408,7 @@ export class DefaultAppConfig implements AppConfig {
     ],
     itemPage: {
       default: {
-          orientation: 'vertical'
+        orientation: 'vertical'
       },
     },
     metadataBox: {
@@ -465,7 +473,7 @@ export class DefaultAppConfig implements AppConfig {
     impactPathwaysEditFormSection: 'impact_pathway-edit_form',
     impactPathwaysLinksEditFormSection: 'impact_pathway-edit_link_form',
     impactPathwaysEditMode: 'IMPACTPATHWAY',
-    impactPathwaysLinkEditMode: 'CUSTOM',
+    impactPathwaysLinkEditMode: 'IMPACTPATHWAY_LINK',
     impactPathwayEntity: 'impactpathway',
     impactPathwayStepEntity: 'impactpathwaystep',
     impactPathwayParentRelationMetadata: 'impactpathway.relation.parent',
@@ -508,16 +516,37 @@ export class DefaultAppConfig implements AppConfig {
 
   projects: ProjectsConfig = {
     projectsGrantsOptionsVocabularyName: 'item_shared',
+    projectsEntityAdminEditMode: 'ADMIN_EDIT',
     projectsEntityEditMode: 'CUSTOM',
+    projectsEntityFunderEditMode: 'FUNDER_EDIT',
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
     excludeComparisonMetadata: [
       'cris.policy.group', 'cris.project.shared', 'dc.date.accessioned', 'dc.date.available', 'dspace.entity.type',
-      'synsicris.common-policy.group', 'synsicris.relation.parentproject', 'synsicris.relation.project', 'synsicris.uniqueid',
+      'synsicris.funder-policy.group', 'synsicris.coordinator-policy.group', 'synsicris.member-policy.group',
+      'synsicris.reader-policy.group', 'synsicris.relation.project', 'synsicris.relation.funding',
+      'synsicris.versioning-edit-policy.group', 'synsicris.versioning-read-policy.group','synsicris.uniqueid',
       'synsicris.relation.workingplan', 'workingplan.link.status', 'workingplan.place', 'workingplan.relation.step',
       'impactpathway.relation.parent', 'impactpathway.relation.step', 'impactpathway.relation.task',
       'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
       'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
-    ]
+      'synsicris.isLastVersion','synsicris.isLastVersion.visible', 'synsicris.version'
+    ],
+    projectsBrowse: {
+      adminAndFunders: {
+        searchQueryConfigurationName: 'searchProjectsForAdminAndFunders',
+        searchProjectConfigurationName: 'searchAllProjectForAdminAndFunders',
+        searchProjectItemsConfigurationName: 'allProjectItemsForAdminAndFunders',
+      },
+      members: {
+        searchQueryConfigurationName: 'searchProjectsForMembers',
+        searchProjectConfigurationName: 'searchAllProjectForMembers',
+        searchProjectItemsConfigurationName: 'allProjectItems',
+      },
+      entityTypeFilterName: 'entityType'
+    },
+    versioningEditMode: 'VERSIONING',
+    versioningEditFormSection: 'projects_versioning',
+    lastVersionDiscoveryConfig: 'RELATION.last_visible_version'
   };
 
   exploitationPlan = {
@@ -612,6 +641,66 @@ export class DefaultAppConfig implements AppConfig {
           }
         ]
       },
+    ],
+    comment: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.type',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.date.reminder',
+            type: DisplayItemMetadataType.Date
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.date.creation',
+            type: DisplayItemMetadataType.Date
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.creator',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text,
+            truncatable: true
+          }
+        ]
+      }
     ]
   };
+
+  comments = {
+    commentEditFormName: 'comments',
+    commentEditFormSection: 'comments',
+    commentEditMode: 'CUSTOM',
+    commentEntityType: 'comment',
+    commentRelationItemMetadata: 'synsicris.relation.item'
+  };
+
 }

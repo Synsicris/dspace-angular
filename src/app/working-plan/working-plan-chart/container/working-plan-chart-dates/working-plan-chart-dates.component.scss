@@ -139,3 +139,9 @@ $highlightBorderColor: #FF9800;
 .tree-node-end-of-the-year-customization {
   border-right: solid 2px #666666 !important;
 }
+
+// table content
+:host {
+  height: fit-content;
+  overflow-x: auto;
+}

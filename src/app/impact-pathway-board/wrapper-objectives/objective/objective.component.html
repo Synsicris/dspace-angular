@@ -2,16 +2,20 @@
                        [sidebarPanelTitle]="impactPathwayTask.title"
                        [startOpen]="!(isCollapsed() | async) || isOpen()">
   <ng-container ngProjectAs="panelIconStatus">
-    <button class="btn btn-lg btn-link flex-shrink-1 align-self-center text-primary" [title]="'impact-pathway.objectives.edit.btn.title' | translate">
+    <button class="btn btn-lg btn-link flex-shrink-1 align-self-center text-primary"
+            [disabled]="!(canEditButton$ | async) || isVersionOfAnItem"
+            [title]="'impact-pathway.objectives.edit.btn.title' | translate">
       <span (click)="openEditModal(); $event.stopImmediatePropagation()"><i class="fas fa-edit"></i></span>
     </button>
   </ng-container>
   <ng-container ngProjectAs="panelContent">
     <div class="d-flex align-items-stretch p-0 m-0 bg-step-green">
       <ipw-objective-container class="horizontal-step h-100 horizontal-content"
-                               [projectCommunityId]="projectCommunityId"
+                               [canEditButton]="canEditButton$ | async"
                                [impactPathwayStep]="impactPathwayStep"
-                               [impactPathwayTask]="impactPathwayTask"></ipw-objective-container>
+                               [impactPathwayTask]="impactPathwayTask"
+                               [isVersionOfAnItem]="isVersionOfAnItem"
+                               [projectCommunityId]="projectCommunityId"></ipw-objective-container>
     </div>
     <ipw-editable-textarea *ngIf="impactPathwayTask"
                            [editMode]="getEditMode()"
@@ -21,6 +25,7 @@
                            [editTitle]="'impact-pathway.objectives.edit.btn.title' | translate"
                            [fieldTitle]="'impact-pathway.objectives.description.title' | translate"
                            [content]="impactPathwayTask.description"
+                           [disabled]="!(canEditButton$ | async) || isVersionOfAnItem"
                            (contentChange)="updateImpactPathwayTask($event)"></ipw-editable-textarea>
   </ng-container>
 </ipw-collapsable-panel>

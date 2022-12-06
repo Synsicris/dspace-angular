@@ -26,8 +26,14 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
   @Input() public projectCommunityId: string;
   @Input() public impactPathwayStep: ImpactPathwayStep;
   @Input() public impactPathwayTask: ImpactPathwayTask;
+  @Input() public canEditButton: boolean;
 
   private processing$: Observable<boolean> = observableOf(false);
+
+  /**
+   * A boolean representing if item is a version of original item
+   */
+  @Input() isVersionOfAnItem = false;
 
   constructor(
     protected cdr: ChangeDetectorRef,

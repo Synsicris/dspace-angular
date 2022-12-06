@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { combineLatest, from, Observable, of } from 'rxjs';
-import { concatMap, map, mergeMap, reduce, switchMap } from 'rxjs/operators';
+import { concatMap, filter, map, mergeMap, reduce, switchMap, tap } from 'rxjs/operators';
 import { differenceWith, findIndex, unionWith } from 'lodash';
 
 import { RelationshipService } from '../data/relationship.service';
@@ -19,6 +19,12 @@ import { Version } from '../shared/version.model';
 import { VersionHistoryDataService } from '../data/version-history-data.service';
 import { isNotEmpty } from '../../shared/empty.util';
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
+import { Metadata } from '../shared/metadata.utils';
+import { VERSION_UNIQUE_ID } from './project-data.service';
+import { SearchService } from '../shared/search/search.service';
+import { environment } from '../../../environments/environment';
+import { SearchResult } from '../../shared/search/models/search-result.model';
+import { createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
 
 export enum ComparedVersionItemStatus {
   Changed = 'changed',
@@ -38,11 +44,37 @@ export interface ComparedVersionItem {
 })
 export class ProjectVersionService {
 
+  /**
+   * Discovery configuration for searching the last visible version of an entity
+   * @protected
+   */
+  protected lastVersionDiscoveryConfig = environment.projects.lastVersionDiscoveryConfig;
+
   constructor(protected itemService: ItemDataService,
-              protected relationshipService: RelationshipService,
-              protected versionService: VersionDataService,
-              protected versionHistoryService: VersionHistoryDataService,
-              ) { }
+    protected relationshipService: RelationshipService,
+    protected searchService: SearchService,
+    protected versionService: VersionDataService,
+    protected versionHistoryService: VersionHistoryDataService,
+  ) { }
+
+  public findLastVisibleVersionByItemID(itemId: string): Observable<RemoteData<Item>> {
+    const searchOptions = new PaginatedSearchOptions({
+      configuration: this.lastVersionDiscoveryConfig,
+      scope: itemId
+    });
+
+    return this.searchService.search(searchOptions).pipe(
+      getFirstCompletedRemoteData(),
+      map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
+        if (rd.hasFailed || rd.payload.totalElements === 0) {
+          console.log(rd);
+          return null;
+        } else {
+          return createSuccessfulRemoteDataObject<Item>(rd.payload.page[0].indexableObject);
+        }
+      })
+    );
+  }
 
   /**
    * Retrieve all item version for the given item
@@ -50,7 +82,7 @@ export class ProjectVersionService {
    * @param itemId  The item for which to search the versions available
    * @param options the FindListOptions
    */
-  public getVersionsByItemId(itemId: string, options?: PaginatedSearchOptions): Observable<Version[]>  {
+  public getVersionsByItemId(itemId: string, options?: PaginatedSearchOptions): Observable<Version[]> {
     return this.itemService.findById(itemId, true, true, followLink('version')).pipe(
       getFirstCompletedRemoteData(),
       switchMap((itemRD: RemoteData<Item>) => {
@@ -58,7 +90,7 @@ export class ProjectVersionService {
           return itemRD.payload.version.pipe(
             getFirstCompletedRemoteData(),
             switchMap((versionRD: RemoteData<Version>) => {
-              if (versionRD.hasSucceeded) {
+              if (versionRD.hasSucceeded && versionRD.statusCode === 200) {
                 return this.versionService.getHistoryIdFromVersion(versionRD.payload).pipe(
                   switchMap((versionHistoryId: string) => {
                     if (isNotEmpty(versionHistoryId)) {
@@ -73,17 +105,17 @@ export class ProjectVersionService {
                         })
                       );
                     } else {
-                      return  of([]);
+                      return of([]);
                     }
                   })
                 );
               } else {
-                return  of([]);
+                return of([]);
               }
             })
           );
         } else {
-          return  of([]);
+          return of([]);
         }
       })
     );
@@ -96,7 +128,7 @@ export class ProjectVersionService {
    * @param itemId  The item for which to search the versions available
    * @param options the FindListOptions
    */
-  public getRelationVersionsByItemId(itemId: string, options?: FindListOptions): Observable<Item[]>  {
+  public getRelationVersionsByItemId(itemId: string, options?: FindListOptions): Observable<Item[]> {
     return this.itemService.findById(itemId, true, true, followLink('relationships')).pipe(
       getFirstCompletedRemoteData(),
       switchMap((itemRD: RemoteData<Item>) => {
@@ -104,11 +136,11 @@ export class ProjectVersionService {
           return this.relationshipService.getRelatedItemsByLabel(itemRD.payload, 'hasVersion', options).pipe(
             getFirstCompletedRemoteData(),
             map((listRD: RemoteData<PaginatedList<Item>>) => {
-              return listRD.hasSucceeded ? listRD.payload.page : [];
+              return listRD.hasSucceeded && listRD.statusCode === 200 ? listRD.payload.page : [];
             })
           );
         } else {
-          return  of([]);
+          return of([]);
         }
       })
     );
@@ -190,6 +222,43 @@ export class ProjectVersionService {
       };
     });
   }
+
+  /**
+   * Check if the item is version of an item by looking for "synsicris.uniqueid" metadata
+   *
+   * @param item
+   */
+  public isVersionOfAnItem(item: Item): boolean {
+    const metadata = Metadata.allValues(item.metadata, VERSION_UNIQUE_ID);
+    return isNotEmpty(metadata);
+  }
+
+
+
+  /**
+   * Retrieve all item version for the given item by means the `hasVersion` relationship
+   *
+   * @param itemId  The item for which to search the versions available
+   * @param options the FindListOptions
+   */
+  public getParentRelationVersionsByItemId(itemId: string, options?: FindListOptions): Observable<Item[]> {
+    return this.itemService.findById(itemId, true, true, followLink('relationships')).pipe(
+      getFirstCompletedRemoteData(),
+      switchMap((itemRD: RemoteData<Item>) => {
+        if (itemRD.hasSucceeded) {
+          return this.relationshipService.getRelatedItemsByLabel(itemRD.payload, 'isVersionOf', options).pipe(
+            getFirstCompletedRemoteData(),
+            map((listRD: RemoteData<PaginatedList<Item>>) => {
+              return listRD.hasSucceeded && listRD.statusCode === 200 ? listRD.payload.page : [];
+            })
+          );
+        } else {
+          return of([]);
+        }
+      })
+    );
+  }
+
 }
 
 

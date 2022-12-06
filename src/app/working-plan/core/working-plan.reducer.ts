@@ -45,6 +45,7 @@ export interface WorkingPlanState {
   workingplanId: string;
   compareWorkingplanId?: string;
   workpackages: WorkpackageEntries;
+  items: string[];
   workpackageToRemove: string;
   workpackageToUpdate: string;
   loaded: boolean;
@@ -55,11 +56,13 @@ export interface WorkingPlanState {
   chartDateView: ChartDateViewType;
   sortOption: string;
   compareMode: boolean;
+  readMode: boolean;
 }
 
 const workpackageInitialState: WorkingPlanState = {
   workingplanId: '',
   workpackages: {},
+  items: [],
   workpackageToRemove: '',
   workpackageToUpdate: '',
   loaded: false,
@@ -69,7 +72,8 @@ const workpackageInitialState: WorkingPlanState = {
   moving: false,
   chartDateView: ChartDateViewType.month,
   sortOption: '',
-  compareMode: false
+  compareMode: false,
+  readMode: false
 };
 
 /**
@@ -287,7 +291,7 @@ function addWorkpackageStep(state: WorkingPlanState, action: AddWorkpackageStepS
  * @return WorkingPlanState
  *    the new state.
  */
-function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSuccessAction|InitCompareSuccessAction): WorkingPlanState {
+function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSuccessAction | InitCompareSuccessAction): WorkingPlanState {
   const workpackages = {};
   action.payload.workpackages.forEach((workpackage: Workpackage) => {
     workpackages[workpackage.id] = workpackage;
@@ -298,7 +302,8 @@ function initWorkpackages(state: WorkingPlanState, action: InitWorkingplanSucces
     initializing: false,
     processing: false,
     loaded: true,
-    sortOption: (action instanceof InitWorkingplanSuccessAction) ? action.payload.sortOption : state.sortOption
+    sortOption: (action instanceof InitWorkingplanSuccessAction) ? action.payload.sortOption : state.sortOption,
+    readMode: (action instanceof InitWorkingplanSuccessAction) ? action.payload.readMode : true
   });
 }
 
@@ -428,7 +433,7 @@ function updateWorkpackageStep(state: WorkingPlanState, action: UpdateWorkpackag
  * @return WorkingPlanState
  *    the new state.
  */
- function updateAllWorkpackageStep(state: WorkingPlanState, action: UpdateAllWorkpackageStepSuccessAction): WorkingPlanState {
+function updateAllWorkpackageStep(state: WorkingPlanState, action: UpdateAllWorkpackageStepSuccessAction): WorkingPlanState {
   let steps;
   let stepIndex;
   action.payload.wpStepActionPackage.forEach((wp: WpStepActionPackage) => {

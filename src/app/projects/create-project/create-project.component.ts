@@ -54,8 +54,8 @@ export class CreateProjectComponent implements OnInit {
    * The grant options available
    */
   public grantsOptions = [
-    { id: ProjectGrantsTypes.Parentproject, name: 'project.create.grants.project-option' },
-    { id: ProjectGrantsTypes.Subproject, name: 'project.create.grants.subproject-option' }
+    { id: ProjectGrantsTypes.Project, name: 'project.create.grants.project-option' },
+    { id: ProjectGrantsTypes.Funding, name: 'project.create.grants.subproject-option' }
   ];
 
   public processing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -144,9 +144,9 @@ export class CreateProjectComponent implements OnInit {
     let create$: Observable<RemoteData<Community>>;
     if (this.isSubproject) {
       // TODO fix in the rest configuration
-      const projectGrants = (this.createForm.get('grants').value === ProjectGrantsTypes.Subproject) ?
-        ProjectGrantsTypes.Subproject : ProjectGrantsTypes.Parentproject;
-      create$ = this.projectService.createSubproject(projectName, this.parentProjectUUID, projectGrants);
+      const projectGrants = (this.createForm.get('grants').value === ProjectGrantsTypes.Funding) ?
+        ProjectGrantsTypes.Funding : ProjectGrantsTypes.Project;
+      create$ = this.projectService.createFunding(projectName, this.parentProjectUUID, projectGrants);
     } else {
       create$ = this.projectService.createProject(projectName);
     }
@@ -163,7 +163,8 @@ export class CreateProjectComponent implements OnInit {
             this.notificationService.error(null,  this.translate.instant('project.create.error'));
           }
         },
-      error: () => {
+      error: (err) => {
+          console.error(err);
           this.notificationService.error(null,  this.translate.instant('project.create.error'));
         }
       });
@@ -173,7 +174,7 @@ export class CreateProjectComponent implements OnInit {
    * Navigate to the collection create page
    */
   navigate(dso: DSpaceObject) {
-    this.projectService.getProjectItemByProjectCommunity(dso as Community).pipe(
+    this.projectService.getEntityItemByCommunity(dso as Community).pipe(
       take(1),
       map((itemRD: RemoteData<Item>) => itemRD.hasSucceeded ? itemRD.payload : null),
     ).subscribe((projectItem: Item) => {

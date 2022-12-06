@@ -2,7 +2,7 @@
    <div class="{{field.styleValue}}">
     <ds-truncatable [id]="truncableId">
       <ds-truncatable-part [id]="truncableId" [minLines]="3">
-        {{metadataValue.value}}
+        <span [innerHTML]="metadataValue.value"></span>
       </ds-truncatable-part>
     </ds-truncatable>
   </div>

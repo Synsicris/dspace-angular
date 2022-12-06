@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-import { mergeMap, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { filter, map, mergeMap, take } from 'rxjs/operators';
 import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../core/models/impact-pathway.model';
@@ -15,6 +15,11 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
 import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
+import { hasValue } from '../../../shared/empty.util';
+import { EditItemDataService } from '../../../core/submission/edititem-data.service';
+import { environment } from '../../../../environments/environment';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'ipw-impact-path-way',
@@ -42,12 +47,34 @@ export class ImpactPathWayComponent implements OnInit {
   loaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   infoShowed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
+  /**
+   * Array to track all subscriptions and unsubscribe them onDestroy
+   */
+  private subs: Subscription[] = [];
+
+  /**
+   * A boolean representing if compare mode is active
+   */
+  compareMode: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * A boolean representing if edit/add buttons are active
+   */
+  canEditButton$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * A boolean representing if item is a version of original item
+   */
+  public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
-              private authorizationService: AuthorizationDataService,
-              private cdr: ChangeDetectorRef,
-              private impactPathwayService: ImpactPathwayService,
-              private impactPathwayLinksService: ImpactPathwayLinksService,
-              private modalService: NgbModal) {
+    private authorizationService: AuthorizationDataService,
+    private cdr: ChangeDetectorRef,
+    private impactPathwayService: ImpactPathwayService,
+    private impactPathwayLinksService: ImpactPathwayLinksService,
+    private modalService: NgbModal,
+    protected aroute: ActivatedRoute,
+    protected editItemDataService: EditItemDataService) {
   }
 
   ngOnInit() {
@@ -56,6 +83,27 @@ export class ImpactPathWayComponent implements OnInit {
       mergeMap((item: Item) => this.authorizationService.isAuthorized(FeatureID.CanDelete, item.self, undefined)),
       take(1)
     ).subscribe((canDelete) => this.canDeleteImpactPathway$.next(canDelete));
+
+    this.subs.push(
+      this.impactPathwayService.isCompareModeActive()
+        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
+    );
+
+    this.editItemDataService.checkEditModeByIDAndType(this.impactPathway.id, environment.impactPathway.impactPathwaysEditMode).pipe(
+      take(1)
+    ).subscribe((canEdit: boolean) => {
+      this.canEditButton$.next(canEdit);
+    });
+
+
+    this.aroute.data.pipe(
+      map((data) => data.isVersionOfAnItem),
+      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
+      take(1)
+    ).subscribe((isVersionOfAnItem: boolean) => {
+      this.isVersionOfAnItem$.next(isVersionOfAnItem);
+    });
+
   }
 
   ngAfterContentChecked() {
@@ -140,4 +188,27 @@ export class ImpactPathWayComponent implements OnInit {
       this.impactPathway
     );
   }
+
+  /**
+   * Dispatch initialization of comparing mode
+   *
+   * @param version
+   */
+  onVersionSelected(version: Item) {
+    this.impactPathwayService.dispatchInitCompare(this.impactPathway.id, version.id);
+  }
+
+  /**
+   * Dispatch cleaning of comparing mode
+   */
+  onVersionDeselected() {
+    this.impactPathwayService.dispatchStopCompare(this.impactPathway.id);
+  }
+
+  ngOnDestroy(): void {
+    this.subs
+      .filter((subscription) => hasValue(subscription))
+      .forEach((subscription) => subscription.unsubscribe());
+  }
+
 }

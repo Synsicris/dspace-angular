@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Observable, of as observableOf, Subscription } from 'rxjs';
@@ -7,9 +7,10 @@ import { map, mergeMap, take } from 'rxjs/operators';
 import { EntityTypeService } from '../../../core/data/entity-type.service';
 import { ItemType } from '../../../core/shared/item-relationships/item-type.model';
 import { FindListOptions } from '../../../core/data/request.models';
-import { hasValue } from '../../../shared/empty.util';
+import { hasValue, isNotEmpty } from '../../../shared/empty.util';
 import { RemoteData } from '../../../core/data/remote-data';
 import { PaginatedList } from '../../../core/data/paginated-list.model';
+import { RequestParam } from '../../../core/cache/models/request-param.model';
 
 /**
  * This component represents the 'Import metadata from external source' dropdown menu
@@ -20,6 +21,11 @@ import { PaginatedList } from '../../../core/data/paginated-list.model';
   templateUrl: './my-dspace-new-external-dropdown.component.html'
 })
 export class MyDSpaceNewExternalDropdownComponent implements OnInit, OnDestroy {
+
+  /**
+   * It's used to limit the search within the scope
+   */
+  @Input() scope: string;
 
   /**
    * Used to verify if there are one or more entities available
@@ -61,7 +67,7 @@ export class MyDSpaceNewExternalDropdownComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.initialized$ = observableOf(false);
-    this.moreThanOne$ = this.entityTypeService.hasMoreThanOneAuthorizedImport();
+    this.moreThanOne$ = this.entityTypeService.hasMoreThanOneAuthorizedImport(this.scope);
     this.singleEntity$ = this.moreThanOne$.pipe(
       mergeMap((response: boolean) => {
         if (!response) {
@@ -69,6 +75,10 @@ export class MyDSpaceNewExternalDropdownComponent implements OnInit, OnDestroy {
             elementsPerPage: 1,
             currentPage: 1
           };
+          if (isNotEmpty(this.scope)) {
+            findListOptions.searchParams = [new RequestParam('scope', this.scope)];
+          }
+
           return this.entityTypeService.getAllAuthorizedRelationshipTypeImport(findListOptions).pipe(
             map((entities: RemoteData<PaginatedList<ItemType>>) => {
               this.initialized$ = observableOf(true);
@@ -95,6 +105,9 @@ export class MyDSpaceNewExternalDropdownComponent implements OnInit, OnDestroy {
     const params = Object.create({});
     if (entity) {
       params.entity = entity.label;
+    }
+    if (this.scope) {
+      params.scope = this.scope;
     }
     this.router.navigate(['/import-external'], { queryParams: params });
   }

@@ -19,6 +19,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 import { isNotEmpty } from '../../empty.util';
 import { environment } from '../../../../environments/environment';
+import { ProjectVersionService } from '../../../core/project/project-version.service';
 
 /**
  * This component represents mydspace actions related to Item object.
@@ -35,6 +36,11 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    * The Item object
    */
   @Input() object: Item;
+
+  /**
+   * A boolean representing if edit permission button can be shown
+   */
+  @Input() showEditPermission = false;
 
   /**
    * A boolean representing if component is redirecting to edit page
@@ -65,6 +71,7 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    * @param {SearchService} searchService
    * @param {RequestService} requestService
    * @param {EditItemDataService} editItemDataService
+   * @param {ProjectVersionService} projectVersionService
    * @param {NgbModal} modalService
    */
   constructor(protected authorizationService: AuthorizationDataService,
@@ -75,23 +82,29 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
               protected searchService: SearchService,
               protected requestService: RequestService,
               protected editItemDataService: EditItemDataService,
+              protected projectVersionService: ProjectVersionService,
               protected modalService: NgbModal) {
     super(Item.type, injector, router, notificationsService, translate, searchService, requestService);
   }
 
 
   ngOnInit(): void {
-    this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
-      take(1)
-    ).subscribe((canEdit: boolean) => {
-      this.canEdit$.next(canEdit);
-    });
+    if (this.projectVersionService.isVersionOfAnItem(this.object)) {
+      this.canEdit$.next(false);
+      this.canEditGrants$.next(false);
+    } else {
+      this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
+        take(1)
+      ).subscribe((canEdit: boolean) => {
+        this.canEdit$.next(canEdit);
+      });
 
-    this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.object.self, undefined).pipe(
-      take(1)
-    ).subscribe((canEdit: boolean) => {
-      this.canEditGrants$.next(canEdit);
-    });
+      this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.object.self, undefined).pipe(
+        take(1)
+      ).subscribe((canEdit: boolean) => {
+        this.canEditGrants$.next(canEdit);
+      });
+    }
   }
 
   /**
@@ -124,12 +137,17 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
     this.isRedirectingToEdit$.next(true);
     this.editItemDataService.searchEditModesByID(this.object.id).pipe(
       filter((editModes: EditItemMode[]) => editModes && editModes.length > 0),
+      map((editModes: EditItemMode[]) => editModes.filter((mode: EditItemMode) => this.isEditModeAllowed(mode))),
       map((editModes: EditItemMode[]) => editModes[0]),
-      take(1)
+      take(1),
     ).subscribe((editMode: EditItemMode) => {
       this.router.navigate(['edit-items', this.object.id + ':' + editMode.name]);
       this.isRedirectingToEdit$.next(false);
     });
+  }
+
+  private isEditModeAllowed(mode: EditItemMode) {
+    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode || mode.name === 'OWNER';
   }
 
   /**

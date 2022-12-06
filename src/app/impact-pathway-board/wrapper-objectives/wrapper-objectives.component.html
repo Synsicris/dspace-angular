@@ -10,12 +10,14 @@
   <hr/>
   <ds-alert *ngIf="hasInfoMessage()" class="bg-light"
             [dismissible]="false"
+            [collapsible]="true"
             [content]="getInfoMessage()"
             [type]="'alert-info'"></ds-alert>
   <ng-container *ngFor="let task of getObjectivesTasks()">
     <ipw-objective [projectCommunityId]="projectCommunityId"
                    [impactPathwayStep]="impactPathwayStep"
                    [impactPathwayTask]="task"
+                   [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"
                    [targetImpactPathwayTaskId]="targetImpactPathwayTaskId"
     ></ipw-objective>
   </ng-container>

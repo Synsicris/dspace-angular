@@ -1,4 +1,4 @@
-import { CrisItemPageTabResolver } from './../item-page/cris-item-page-tab.resolver';
+import { CrisItemPageTabResolver } from '../item-page/cris-item-page-tab.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CrisItemPageResolver } from './cris-item-page.resolver';
@@ -9,6 +9,8 @@ import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { ProjectItemBreadcrumbResolver } from '../core/breadcrumbs/project-item-breadcrumb.resolver';
 import { ProjectItemBreadcrumbService } from '../core/breadcrumbs/project-item-breadcrumb.service';
 import { ProjectCommunityByItemResolver } from '../core/project/project-community-by-item.resolver';
+import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.resolver';
+import { FundingCommunityByItemResolver } from '../core/project/funding-community-by-item.resolver';
 
 const routes: Routes = [
   {
@@ -18,7 +20,9 @@ const routes: Routes = [
       dso: CrisItemPageResolver,
       breadcrumb: ProjectItemBreadcrumbResolver,
       tabs: CrisItemPageTabResolver,
-      project: ProjectCommunityByItemResolver
+      project: ProjectCommunityByItemResolver,
+      isVersionOfAnItem: VersionOfAnItemResolver,
+      funding: FundingCommunityByItemResolver
     },
     data: {
       menu: {
@@ -43,7 +47,9 @@ const routes: Routes = [
       dso: CrisItemPageResolver,
       breadcrumb: ProjectItemBreadcrumbResolver,
       tabs: CrisItemPageTabResolver,
-      project: ProjectCommunityByItemResolver
+      project: ProjectCommunityByItemResolver,
+      isVersionOfAnItem: VersionOfAnItemResolver,
+      funding: FundingCommunityByItemResolver
     },
     data: {
       menu: {
@@ -70,7 +76,9 @@ const routes: Routes = [
     ItemBreadcrumbResolver,
     ProjectCommunityByItemResolver,
     ProjectItemBreadcrumbResolver,
-    ProjectItemBreadcrumbService
+    ProjectItemBreadcrumbService,
+    VersionOfAnItemResolver,
+    FundingCommunityByItemResolver
   ]
 })
 export class CrisItemPageRoutingModule { }

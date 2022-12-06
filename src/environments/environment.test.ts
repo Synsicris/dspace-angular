@@ -200,6 +200,18 @@ export const environment: AppConfig = {
     {
       type: 'Publication',
       metadata: ['dc.contributor.author']
+    },
+    {
+      type: 'Product',
+      metadata: ['dc.contributor.author']
+    },
+    {
+      type: 'workpackage',
+      metadata: ['workingplan.relation.step']
+    },
+    {
+      type: 'milestone',
+      metadata: ['workingplan.relation.step']
     }
   ],
   item: {
@@ -326,9 +338,27 @@ export const environment: AppConfig = {
   },
   projects: {
     projectsGrantsOptionsVocabularyName: 'item_shared',
+    projectsEntityAdminEditMode: 'ADMIN_EDIT',
     projectsEntityEditMode: 'CUSTOM',
+    projectsEntityFunderEditMode: 'FUNDER_EDIT',
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
-    excludeComparisonMetadata: ['dspace.entity.type']
+    excludeComparisonMetadata: ['dspace.entity.type'],
+    projectsBrowse: {
+      adminAndFunders: {
+        searchQueryConfigurationName: 'searchProjectsForAdminAndFunders',
+        searchProjectConfigurationName: 'searchAllProjectForAdminAndFunders',
+        searchProjectItemsConfigurationName: 'allProjectItemsForAdminAndFunders',
+      },
+      members: {
+        searchQueryConfigurationName: 'searchProjectsForMembers',
+        searchProjectConfigurationName: 'searchAllProjectForMembers',
+        searchProjectItemsConfigurationName: 'allProjectItems',
+      },
+      entityTypeFilterName: 'entityType'
+    },
+    versioningEditMode: 'VERSIONING',
+    versioningEditFormSection: 'projects_versioning',
+    lastVersionDiscoveryConfig: 'RELATION.last_visible_version'
   },
   impactPathway: {
     impactPathwaysFormSection: 'impact_pathway_form',
@@ -378,7 +408,7 @@ export const environment: AppConfig = {
     workingPlanLinkMetadata: 'workingplan.link.status'
   },
   exploitationPlan: {
-    exploitationPlanRelationMetadata: 'dc.relation.exploitationplan',
+    exploitationPlanRelationMetadata: 'synsicris.relation.exploitationplan',
     exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
     exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
     exploitationPlanPartnerMetadata: '',
@@ -451,5 +481,12 @@ export const environment: AppConfig = {
         ]
       },
     ]
+  },
+  comments: {
+    commentEditFormName: 'comments',
+    commentEditFormSection: 'comments',
+    commentEditMode: 'CUSTOM',
+    commentEntityType: 'comment',
+    commentRelationItemMetadata: 'synsicris.relation.item'
   }
 };

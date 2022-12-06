@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ChartDateViewType } from '../../../core/working-plan.reducer';
@@ -33,9 +33,9 @@ export class WorkingPlanChartDatesComponent implements OnInit {
    */
   @Input() public compareMode: Observable<boolean>;
 
-  @Input() datesMonth;
-  @Input() datesQuarter;
-  @Input() datesYear;
+  @Input() datesMonth: string[];
+  @Input() datesQuarter: string[];
+  @Input() datesYear: string[];
   @Input() dataSource;
   /**
    * The milestones map used to draw a blue line and a rhombus at the milestone date.
@@ -50,6 +50,13 @@ export class WorkingPlanChartDatesComponent implements OnInit {
   dateMonthFormat = 'YYYY-MM';
   dateYearFormat = 'YYYY';
 
+  monthDatesByYear: Map<string, string[]> = new Map<string, string[]>();
+  daysByMonth: Map<string, string[]> = new Map<string, string[]>();
+
+  quarterDatesByYear: Map<string, string[]> = new Map<string, string[]>();
+  monthsByQuarter: Map<string, string[]> = new Map<string, string[]>();
+  daysByMonthAndQuarter: Map<string, string[]> = new Map<string, string[]>();
+
   today = moment().format(this.dateFormat);
 
   constructor(
@@ -60,8 +67,52 @@ export class WorkingPlanChartDatesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.workingPlanStateService.getChartDateViewSelector()
-      .subscribe((view) => this.chartDateView.next(view));
+    this.workingPlanStateService.getChartDateViewSelector().pipe(
+      distinctUntilChanged()
+    ).subscribe((view) => {
+      this.chartDateView.next(view);
+      this.initDates();
+    });
+  }
+
+  /**
+   * Calculate date range values
+   * @private
+   */
+  private initDates(): void {
+
+    // month view mode
+    if (this.chartDateView.value === ChartDateViewType.month) {
+      this.datesYear.forEach((year) => {
+        this.monthDatesByYear.set(year, this.getDatesMonthByYear(year));
+      });
+      this.datesMonth.forEach((month) => {
+        this.daysByMonth.set(month, this.getDaysInMonth(month));
+      });
+    }
+
+    // quarter view mode
+    if (this.chartDateView.value === ChartDateViewType.quarter) {
+      this.datesYear.forEach((month) => {
+        this.quarterDatesByYear.set(month, this.getDatesQuarterByYear(month));
+      });
+
+      this.datesQuarter.forEach((quarter) => {
+        const months = this.getMonthInQuarter(quarter);
+        this.monthsByQuarter.set(quarter, months);
+        months.forEach((month) => {
+          const key = this.getQaurterYear(quarter) + '-' + month;
+          this.daysByMonthAndQuarter.set(key, this.getDaysInMonth(key));
+        });
+      });
+    }
+
+    // year view mode
+    if (this.chartDateView.value === ChartDateViewType.year) {
+      this.getMonthInYear().forEach((month) => {
+        this.daysByMonth.set(month, this.getDaysInMonth(month));
+      });
+    }
   }
   /**
    * Set the map with the nodes (rows) ids (used to change the filled row color on MouseOver).
@@ -106,6 +157,7 @@ export class WorkingPlanChartDatesComponent implements OnInit {
    * @param node Workpackage
    * @param progressDate string
    * @param rangeDate string
+   * @param isCompare boolean
    *
    * @returns boolean
    */

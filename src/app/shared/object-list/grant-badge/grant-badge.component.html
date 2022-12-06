@@ -1,0 +1,9 @@
+<ng-container *ngIf="projectShared && (projectShared === parentProjectPolicy || projectShared === projectPolicy) && (badgeMessage | async)">
+  <span class="badge badge-content text-truncate"
+        [ngClass]="{ 'badge-success': projectShared === parentProjectPolicy, 'badge-warning': projectShared === projectPolicy }"
+        [title]="(badgeMessage | async)">
+      <i *ngIf="projectShared === parentProjectPolicy" class="fas fa-lock-open mr-2"></i>
+      <i *ngIf="projectShared === projectPolicy" class="fas fa-lock mr-2"></i>
+    {{badgeMessage | async}}
+  </span>
+</ng-container>
