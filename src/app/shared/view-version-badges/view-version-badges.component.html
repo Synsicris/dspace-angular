@@ -1,0 +1,6 @@
+<span *ngIf="!!version" class="badge badge-pill" [ngClass]="{ 'badge-primary': withinWeek, 'badge-info': !withinWeek }">
+    {{ !!version.summary ? version.summary : 'No summary' }}, {{ version.created | date:'dd MMM y' }}
+</span>
+<span *ngIf="!!version && !!item" class="badge badge-pill badge-info">
+    {{ item.firstMetadataValue('synsicris.version.official') === 'true' ? 'Official' : 'Non Official' }}
+</span>

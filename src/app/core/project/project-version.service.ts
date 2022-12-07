@@ -67,7 +67,6 @@ export class ProjectVersionService {
       getFirstCompletedRemoteData(),
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         if (rd.hasFailed || rd.payload.totalElements === 0) {
-          console.log(rd);
           return null;
         } else {
           return createSuccessfulRemoteDataObject<Item>(rd.payload.page[0].indexableObject);
@@ -76,6 +75,26 @@ export class ProjectVersionService {
     );
   }
 
+
+  public getLastVisibleVersionByItemID(itemId: string): Observable<RemoteData<Version>> {
+    const searchOptions = new PaginatedSearchOptions({
+      configuration: this.lastVersionDiscoveryConfig,
+      forcedEmbeddedKeys: ['version'],
+      scope: itemId
+    });
+
+    return this.searchService.search(searchOptions).pipe(
+      getFirstCompletedRemoteData(),
+      map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
+
+        if (rd.hasFailed || rd.payload.totalElements === 0) {
+          return createSuccessfulRemoteDataObject<Version>(null);
+        } else {
+          return createSuccessfulRemoteDataObject<Version>(rd.payload.page[0]._embedded.indexableObject._embedded.version);
+        }
+      })
+    );
+  }
   /**
    * Retrieve all item version for the given item
    *
