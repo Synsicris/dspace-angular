@@ -6964,6 +6964,12 @@
 
   "treeview.load-more": "Load more",
 
+  "view.version.badges.official": "Official",
+
+  "view.version.badges.nonOfficial": "Non Official",
+
+  "view.version.badges.noSummary": "No Summary",
+
   "vocabulary.import-external.preview.title.Product": "Product Preview",
 
   "vocabulary.import-external.preview.title.Equipment": "Equipment Preview",

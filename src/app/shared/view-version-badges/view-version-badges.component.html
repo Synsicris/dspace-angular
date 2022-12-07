@@ -1,6 +1,12 @@
 <span *ngIf="!!version" class="badge badge-pill" [ngClass]="{ 'badge-primary': withinWeek, 'badge-info': !withinWeek }">
-    {{ !!version.summary ? version.summary : 'No summary' }}, {{ version.created | date:'dd MMM y' }}
+    <span *ngIf="!!version.summary;else noSummary">
+        {{ version.summary }}
+    </span> , {{ version.created | date:'dd MMM y' }}
 </span>
+<ng-template #noSummary>
+    {{ 'view.version.badges.noSummary' | translate }}
+</ng-template>
 <span *ngIf="!!version && !!item" class="badge badge-pill badge-info">
-    {{ item.firstMetadataValue('synsicris.version.official') === 'true' ? 'Official' : 'Non Official' }}
+    {{ item.firstMetadataValue('synsicris.version.official') === 'true' ? 'view.version.badges.official' :
+    'view.version.badges.nonOfficial' | translate }}
 </span>
