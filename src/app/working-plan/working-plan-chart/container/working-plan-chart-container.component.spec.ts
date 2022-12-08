@@ -107,11 +107,6 @@ describe('WorkingPlanChartContainerComponent', () => {
 
   describe('when is version of an item', () => {
 
-    beforeEach(() => {
-      component.isVersionOfAnItem$.next(true);
-      fixture.detectChanges();
-    });
-
     it('should not render add-child button', () => {
       const link = fixture.debugElement.query(By.css('button[data-test="add-child-step"'));
       expect(link).toBeNull();
