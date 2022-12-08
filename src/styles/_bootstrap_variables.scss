@@ -22,16 +22,21 @@ $cyan:   #006666 !default;
 $yellow: #ec9433 !default;
 $red:    #CF4444 !default;
 $dark:   darken($blue, 17%) !default;
+/* Basic Colors (COLOR NAMES PROVISIONAL- the naming-syntax still needs to be understood!! )*/
+$blue-bright: rgb(228,247,253) !default; //helptext and tooltips
+$blue-dark: rgb(5,44,59) !default; //helptext and tooltips #052C3B
+$gray-dark: #43515f !default; // dark gray for primary
+$gray-bright: #F8F9FA !default; // bright gray for components
 
 $theme-colors: (
-        primary: $blue,
-        secondary: $gray-700,
-        success: $green,
-        info: $cyan,
-        warning: $yellow,
-        danger: $red,
-        light: $gray-100,
-        dark: $dark
+  primary: $gray-dark,
+  secondary: $gray-700,
+  success: $green,
+  info: $cyan,
+  warning: $yellow,
+  danger: $red,
+  light: $gray-100,
+  dark: $dark
 ) !default;
 /* Fonts */
 $link-color: map-get($theme-colors, info) !default;

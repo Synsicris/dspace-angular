@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { WorkpacakgeFlatNode } from '../../../core/models/workpackage-step-flat-node.model';
 import { environment } from '../../../../../environments/environment';
@@ -25,14 +25,24 @@ export class WorkingPlanChartItemEditButtonComponent implements OnInit {
   @Input() node: WorkpacakgeFlatNode;
 
   /**
+   * A boolean representing if item is a version of original item
+   */
+  @Input() isVersionOfAnItem = false;
+
+  /**
    * Check if canEdit
    */
   private canEdit$: Observable<boolean>;
 
+
   constructor(private authorizationService: AuthorizationDataService) { }
 
   ngOnInit(): void {
-    this.canEdit$ = this.authorizationService.isAuthorized(FeatureID.isItemEditable, this.node.selfUrl);
+    if (this.isVersionOfAnItem) {
+      this.canEdit$ = of(false);
+    } else {
+      this.canEdit$ = this.authorizationService.isAuthorized(FeatureID.isItemEditable, this.node.selfUrl);
+    }
   }
 
   /**

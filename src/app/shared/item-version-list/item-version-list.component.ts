@@ -37,6 +37,11 @@ export class ItemVersionListComponent implements OnInit {
   @Input() btnClass = 'btn-sm';
 
   /**
+   * The attribute to display dropdown disabled
+   */
+  @Input() disabled = false;
+
+  /**
    * The current version selected
    */
   currentVersion: BehaviorSubject<VersionDescription> = new BehaviorSubject<VersionDescription>(null);

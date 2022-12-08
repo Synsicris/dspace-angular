@@ -13,8 +13,9 @@ import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
 import { Item } from '../../../core/shared/item.model';
 import { EasyOnlineImportMenuComponent } from './easy-online-import-menu.component';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { ActivatedRoute } from '@angular/router';
 
-describe('AuditItemMenuComponent', () => {
+describe('EasyOnlineImportMenuComponent', () => {
   let component: EasyOnlineImportMenuComponent;
   let componentAsAny: any;
   let fixture: ComponentFixture<EasyOnlineImportMenuComponent>;
@@ -22,10 +23,12 @@ describe('AuditItemMenuComponent', () => {
 
   let dso: DSpaceObject;
   let authorizationService: any;
+  let aroute;
 
   beforeEach(waitForAsync(() => {
     dso = Object.assign(new Item(), {
       id: 'test-item',
+      entityType: 'Funding',
       _links: {
         self: { href: 'test-item-selflink' }
       }
@@ -33,8 +36,14 @@ describe('AuditItemMenuComponent', () => {
     authorizationService = jasmine.createSpyObj('authorizationService', {
       isAuthorized: jasmine.createSpy('isAuthorized')
     });
+
+    aroute = {
+      data: observableOf({ isVersionOfAnItem: observableOf(false) }),
+    };
+
+
     TestBed.configureTestingModule({
-      declarations: [ EasyOnlineImportMenuComponent ],
+      declarations: [EasyOnlineImportMenuComponent],
       imports: [
         RouterTestingModule.withRoutes([]),
         TranslateModule.forRoot({
@@ -48,6 +57,7 @@ describe('AuditItemMenuComponent', () => {
         { provide: 'contextMenuObjectProvider', useValue: dso },
         { provide: 'contextMenuObjectTypeProvider', useValue: DSpaceObjectType.ITEM },
         { provide: AuthorizationDataService, useValue: authorizationService },
+        { provide: ActivatedRoute, useValue: aroute },
       ]
     }).compileComponents();
   }));
@@ -89,4 +99,19 @@ describe('AuditItemMenuComponent', () => {
     });
   });
 
+  describe('when is version of an item', () => {
+
+    beforeEach(() => {
+      authorizationService.isAuthorized.and.returnValue(observableOf(true));
+      spyOn(component, 'isVersionOfAnItem');
+      (component.isVersionOfAnItem as jasmine.Spy).and.returnValue(observableOf(true));
+      fixture.detectChanges();
+    });
+
+    it('should not render a button', () => {
+      const link = fixture.debugElement.query(By.css('button'));
+      expect(link).toBeNull();
+    });
+
+  });
 });

@@ -36,8 +36,9 @@ package-lock.json
 
 .env
 /nbproject/
+.vscode/
 
-## files designated as old/backup/tmp
+## files designated as old/backup
 *.old
 *_old
 *.backup

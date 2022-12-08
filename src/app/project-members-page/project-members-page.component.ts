@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest } from 'rxjs';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Community } from '../core/shared/community.model';
@@ -27,6 +27,11 @@ import { ProjectAuthorizationService } from '../core/project/project-authorizati
 export class ProjectMembersPageComponent implements OnInit {
 
   /**
+   * the active tab id
+   */
+  public activeId = 'coordinators';
+
+  /**
    * The project/funding coordinators group
    */
   public coordinatorsGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
@@ -42,9 +47,34 @@ export class ProjectMembersPageComponent implements OnInit {
   public fundersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * A boolean representing if coordinators group is initialized
+   */
+  public coordinatorsGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * A boolean representing if members group is initialized
+   */
+  public membersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * A boolean representing if readers group is initialized
+   */
+  public readersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * A boolean representing if all groups are initialized
+   */
+  public allGroupsInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * The project/funding edit group
    */
   public membersGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
+
+  /**
+   * The project readers group
+   */
+  public readersGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
 
   /**
    * The project/funding community
@@ -71,15 +101,6 @@ export class ProjectMembersPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.data.pipe(
-      map((data) => data.projectItem as RemoteData<Item>),
-      redirectOn4xx(this.router, this.authService),
-      getFirstSucceededRemoteDataPayload()
-    ).subscribe((project: Item) => {
-      this.entityItem$.next(project);
-      this.isFunding = project.entityType !== PROJECT_ENTITY;
-    });
-
     const projectCommunity$ = this.route.data.pipe(
       map((data) => data.projectItem as RemoteData<Item>),
       redirectOn4xx(this.router, this.authService),
@@ -123,6 +144,7 @@ export class ProjectMembersPageComponent implements OnInit {
       this.fundersGroupInit$.next(true);
       if (groupRD.hasSucceeded) {
         this.fundersGroup$.next(groupRD.payload);
+        this.activeId = 'funders';
       }
     });
 
@@ -140,6 +162,7 @@ export class ProjectMembersPageComponent implements OnInit {
     ).subscribe((groupRD: RemoteData<Group>) => {
       if (groupRD.hasSucceeded) {
         this.coordinatorsGroup$.next(groupRD.payload);
+        this.coordinatorsGroupInit$.next(true);
       }
     });
 
@@ -157,7 +180,36 @@ export class ProjectMembersPageComponent implements OnInit {
     ).subscribe((groupRD: RemoteData<Group>) => {
       if (groupRD.hasSucceeded) {
         this.membersGroup$.next(groupRD.payload);
+        this.membersGroupInit$.next(true);
       }
+    });
+
+    projectCommunity$.pipe(
+      switchMap((community: Community) => {
+        return this.projectGroupService.getInvitationProjectReadersGroupsByCommunity(community);
+      }),
+      map((groups: string[]) => groups[0]),
+      switchMap((groupID) => this.groupService.findById(groupID)),
+      getFirstCompletedRemoteData()
+    ).subscribe((groupRD: RemoteData<Group>) => {
+      if (groupRD.hasSucceeded) {
+        this.readersGroup$.next(groupRD.payload);
+        this.readersGroupInit$.next(true);
+      }
+    });
+
+    combineLatest([
+      this.fundersGroupInit$.asObservable(),
+      this.coordinatorsGroupInit$.asObservable(),
+      this.membersGroupInit$.asObservable(),
+      this.readersGroupInit$.asObservable()
+    ]).pipe(
+      map(([fundersInit, coordinatorsInit, membersInit, readersInit ]) => {
+        return fundersInit && coordinatorsInit && membersInit && readersInit;
+      }),
+      distinctUntilChanged()
+    ).subscribe((isInit) => {
+      this.allGroupsInit$.next(isInit);
     });
   }
 

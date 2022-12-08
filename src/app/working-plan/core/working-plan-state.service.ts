@@ -93,8 +93,8 @@ export class WorkingPlanStateService {
     this.store.dispatch(new GenerateWorkpackageStepAction(projectId, parentId, workpackageStepType, metadata));
   }
 
-  public dispatchInitCompare(compareWorkingplanId: string) {
-    this.store.dispatch(new InitCompareAction(compareWorkingplanId));
+  public dispatchInitCompare(compareWorkingplanId: string, isVersionOf: boolean) {
+    this.store.dispatch(new InitCompareAction(compareWorkingplanId, isVersionOf));
   }
 
   public dispatchMoveWorkpackage(workpackageId: string, oldIndex: number, newIndex: number): void {
@@ -113,8 +113,8 @@ export class WorkingPlanStateService {
     this.store.dispatch(new RemoveWorkpackageStepAction(workpackageId, workpackageStepId, workspaceItemId));
   }
 
-  public dispatchRetrieveAllWorkpackages(projectId: string, workinplanId: string, sortOption: string): void {
-    this.store.dispatch(new RetrieveAllLinkedWorkingPlanObjectsAction(projectId, workinplanId, sortOption));
+  public dispatchRetrieveAllWorkpackages(projectId: string, workinplanId: string, sortOption: string, readMode: boolean): void {
+    this.store.dispatch(new RetrieveAllLinkedWorkingPlanObjectsAction(projectId, workinplanId, sortOption, readMode));
   }
 
   public dispatchUpdateWorkpackageAction(

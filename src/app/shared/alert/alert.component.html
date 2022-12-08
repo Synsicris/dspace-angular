@@ -4,8 +4,8 @@
   </button>
   <div class="d-flex justify-content-between flex-column">
     <div *ngIf="collapsible">
-      <ds-truncatable>
-        <ds-truncatable-part [minLines]="3" [background]="'transparent'">
+      <ds-truncatable [id]="truncatableId">
+        <ds-truncatable-part [minLines]="3" [background]="'transparent'" [id]="truncatableId">
           <span *ngIf="content" [innerHTML]="content | translate"></span>
           <ng-content></ng-content>
         </ds-truncatable-part>

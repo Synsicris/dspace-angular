@@ -1,0 +1,14 @@
+<ds-alert [content]="helpMessageLabel | translate"></ds-alert>
+<ds-members-list *ngIf="groupBeingEdited | async"
+                 [messagePrefix]="messagePrefix + '.members-list'"
+                 [overrideAdmin]="true"
+                 [showEditActions]="false"
+                 [showWithdrawActions]="true"
+                 [showInvitationPersonSection]="true"
+                 [showHeadingTitle]="false"
+                 [showId]="false"
+                 [showInvitationAction]="true"
+                 (addMemberToMultipleGroups)="addMemberToMultipleGroups($event)"
+                 (deleteMemberToMultipleGroups)="deleteMemberToGroup($event)"
+                 (sendInvitation)="sendInvitation($event)">
+</ds-members-list>

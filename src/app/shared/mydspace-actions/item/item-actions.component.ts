@@ -19,6 +19,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 import { isNotEmpty } from '../../empty.util';
 import { environment } from '../../../../environments/environment';
+import { ProjectVersionService } from '../../../core/project/project-version.service';
 
 /**
  * This component represents mydspace actions related to Item object.
@@ -39,7 +40,7 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   /**
    * A boolean representing if edit permission button can be shown
    */
-  @Input() showEditPermission = true;
+  @Input() showEditPermission = false;
 
   /**
    * A boolean representing if component is redirecting to edit page
@@ -70,33 +71,40 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    * @param {SearchService} searchService
    * @param {RequestService} requestService
    * @param {EditItemDataService} editItemDataService
+   * @param {ProjectVersionService} projectVersionService
    * @param {NgbModal} modalService
    */
   constructor(protected authorizationService: AuthorizationDataService,
-    protected injector: Injector,
-    protected router: Router,
-    protected notificationsService: NotificationsService,
-    protected translate: TranslateService,
-    protected searchService: SearchService,
-    protected requestService: RequestService,
-    protected editItemDataService: EditItemDataService,
-    protected modalService: NgbModal) {
+              protected injector: Injector,
+              protected router: Router,
+              protected notificationsService: NotificationsService,
+              protected translate: TranslateService,
+              protected searchService: SearchService,
+              protected requestService: RequestService,
+              protected editItemDataService: EditItemDataService,
+              protected projectVersionService: ProjectVersionService,
+              protected modalService: NgbModal) {
     super(Item.type, injector, router, notificationsService, translate, searchService, requestService);
   }
 
 
   ngOnInit(): void {
-    this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
-      take(1)
-    ).subscribe((canEdit: boolean) => {
-      this.canEdit$.next(canEdit);
-    });
+    if (this.projectVersionService.isVersionOfAnItem(this.object)) {
+      this.canEdit$.next(false);
+      this.canEditGrants$.next(false);
+    } else {
+      this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
+        take(1)
+      ).subscribe((canEdit: boolean) => {
+        this.canEdit$.next(canEdit);
+      });
 
-    this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.object.self, undefined).pipe(
-      take(1)
-    ).subscribe((canEdit: boolean) => {
-      this.canEditGrants$.next(canEdit);
-    });
+      this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.object.self, undefined).pipe(
+        take(1)
+      ).subscribe((canEdit: boolean) => {
+        this.canEditGrants$.next(canEdit);
+      });
+    }
   }
 
   /**
