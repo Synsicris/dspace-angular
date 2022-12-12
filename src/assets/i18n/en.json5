@@ -768,6 +768,102 @@
 
   "bitstream-request-a-copy.submit.error": "Something went wrong with submitting the item request.",
 
+
+
+  "breadcrumb.entity-type.Person": "Person",
+
+  "breadcrumb.entity-type.Project": "Project",
+
+  "breadcrumb.entity-type.Funding": "Funding",
+
+  "breadcrumb.entity-type.OrgUnit": "OrgUnit",
+
+  "breadcrumb.entity-type.Journal": "Journal",
+
+  "breadcrumb.entity-type.Publication": "Publication",
+
+  "breadcrumb.entity-type.Product": "Product",
+
+  "breadcrumb.entity-type.Patent": "Patent",
+
+  "breadcrumb.entity-type.Event": "Event",
+
+  "breadcrumb.entity-type.Equipment": "Equipment",
+
+  "breadcrumb.entity-type.impactpathway": "impactpathway",
+
+  "breadcrumb.entity-type.award": "award",
+
+  "breadcrumb.entity-type.contribution_fundingprogramme": "contribution_fundingprogramme",
+
+  "breadcrumb.entity-type.cooperationpartner": "cooperationpartner",
+
+  "breadcrumb.entity-type.ethic": "ethic",
+
+  "breadcrumb.entity-type.exp_societalimpact": "exp_societalimpact",
+
+  "breadcrumb.entity-type.condition": "condition",
+
+  "breadcrumb.entity-type.gender": "gender",
+
+  "breadcrumb.entity-type.innovationidea": "innovationidea",
+
+  "breadcrumb.entity-type.milestone": "milestone",
+
+  "breadcrumb.entity-type.step": "step",
+
+  "breadcrumb.entity-type.physical_object": "physical_object",
+
+  "breadcrumb.entity-type.proj_objective": "proj_objective",
+
+  "breadcrumb.entity-type.research_result": "research_result",
+
+  "breadcrumb.entity-type.spinoff": "spinoff",
+
+  "breadcrumb.entity-type.stateofart": "stateofart",
+
+  "breadcrumb.entity-type.targetgroup": "targetgroup",
+
+  "breadcrumb.entity-type.task": "task",
+
+  "breadcrumb.entity-type.unexpected_result": "unexpected_result",
+
+  "breadcrumb.entity-type.workpackage": "workpackage",
+
+  "breadcrumb.entity-type.process_event": "process_event",
+
+  "breadcrumb.entity-type.innovationpotential": "innovationpotential",
+
+  "breadcrumb.entity-type.application": "application",
+
+  "breadcrumb.entity-type.plan_publication": "plan_publication",
+
+  "breadcrumb.entity-type.exploitationplan": "exploitationplan",
+
+  "breadcrumb.entity-type.projectpartner": "projectpartner",
+
+  "breadcrumb.entity-type.programme": "programme",
+
+  "breadcrumb.entity-type.call": "call",
+
+  "breadcrumb.entity-type.fundingobjective": "fundingobjective",
+
+  "breadcrumb.entity-type.ia_objective": "ia_objective",
+
+  "breadcrumb.entity-type.workingplan": "workingplan",
+
+  "breadcrumb.entity-type.WorkingPlan": "Working Plan",
+
+  "breadcrumb.entity-type.comment": "comment",
+
+  "breadcrumb.entity-type.neg_sideeffect": "neg_sideeffect",
+
+  "breadcrumb.entity-type.open_researchquestion": "open_researchquestion",
+
+  "breadcrumb.entity-type.interim_report": "interim_report",
+
+
+
   "browse.comcol.by.author": "By Author",
 
   "browse.comcol.by.dateissued": "By Issue Date",
@@ -1390,7 +1486,11 @@
 
   "context-menu.actions.edit-item.btn.OWNER": "<i class=\"fas fa-edit\"></i> Edit",
 
+  "context-menu.actions.edit-item.btn.ADMIN_EDIT": "<i class=\"fas fa-edit\"></i> Edit",
+
   "context-menu.actions.edit-item.btn.CUSTOM": "<i class=\"fas fa-edit\"></i> Edit",
+
+  "context-menu.actions.edit-item.btn.FUNDER_EDIT": "<i class=\"fas fa-edit\"></i> Edit",
 
   "context-menu.actions.edit-item.btn.DIRECTOR": "<i class=\"fas fa-edit\"></i> Edit",
 
@@ -3124,9 +3224,15 @@
 
   "item.version.history.table.official": "Official",
 
-  "item.version.history.table.toggleVisibility": "Set as visible",
+  "item.version.history.table.setVisibility": "Set as visible",
 
-  "item.version.history.table.toggleOfficial": "Mark as not-official",
+  "item.version.history.table.setNonOfficial": "Mark as not-official",
+
+  "item.version.history.table.successfull": "Successfully Updated {{type}}",
+
+  "synsicris.version.visible": "Visibility",
+
+  "synsicris.version.official": "Official",
 
   "version-history.breadcrumbs": "Version History",
 
@@ -4524,14 +4630,17 @@
 
   "programme.manage.notification.success.deleteMember": "Successfully deleted member",
 
-  "programme.manage.members.project.funders-group": "Invitation and management of programme managers",
+  "programme.manage.members.project.funders-group": "Invitation and management of programme project funders",
+
+  "programme.manage.members.project.managers-group": "Invitation and management of programme managers",
 
   "programme.manage.members.project.members-group": "Invitation and management of programme members",
 
   "programme.manage.members.funders-group-help": "Help message here",
 
-  "programme.manage.members.members-group-help": "Help message here",
+  "programme.manage.members.managers-group-help": "Help message here",
 
+  "programme.manage.members.members-group-help": "Help message here",
 
   "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Invitation and management coordinators",
 
@@ -4541,25 +4650,29 @@
 
   "project.manage.page.title": "Invitation and management of project coordinators",
 
-  "project.manage.members.project.coordinators-group": "Invitation and Management of project coordinators",
+  "project.manage.members.project.coordinators-group": "Invitation and Management Coordinators",
 
-  "project.manage.members.project.coordinators-group-help": "Help message here",
+  "project.manage.members.project.coordinators-group-help": "Help Coordinators",
 
-  "project.manage.members.project.funders-group": "Invitation and Management of project funders",
+  "project.manage.members.project.funders-group": "Invitation and Management Funder manager",
 
-  "project.manage.members.project.funders-group-help": "Help message here",
+  "project.manage.members.project.funders-group-help": "Help Funder manager",
 
   "project.manage.members.project.members-group": "Invitation and Management of project members",
 
+  "project.manage.members.project.readers-group": "Invitation and Management of project readers",
+
   "project.manage.members.project.members-group-help": "Help message here",
 
-  "project.manage.members.funding.coordinators-group": "Invitation and Management of project coordinators",
+  "project.manage.members.project.readers-group-help": "Help message here",
 
-  "project.manage.members.funding.coordinators-group-help": "Help message here",
+  "project.manage.members.funding.coordinators-group": "Invitation and Management Project members with Coordinator-Role",
 
-  "project.manage.members.funding.members-group": "Invitation and Management of project members",
+  "project.manage.members.funding.coordinators-group-help": "Help Project members with Coordinator-Role",
 
-  "project.manage.members.funding.members-group-help": "Help message here",
+  "project.manage.members.funding.members-group": "Invitation and Management Project members",
+
+  "project.manage.members.funding.members-group-help": "Help Project members",
 
   "project.manage.members-list.head": "Manage group",
 
@@ -4720,8 +4833,6 @@
   "project-overview.page.new-impact-pathway": "Create new impact pathway",
 
   "project-overview.page.subproject.card.title": "Your Funding",
-
-  "project-overview.page.subproject.create.btn": "Create new Subproject",
 
   "project-overview.page.subproject.none-available": "No funding available",
 
@@ -5434,8 +5545,6 @@
   "search.filters.entityType.Person": "Person",
 
   "search.filters.entityType.physical_objects": "Object, material",
-
-  "search.filters.entityType.pot_societalimpact": "Expected societal impact",
 
   "search.filters.entityType.proj_objectives": "Project objective",
 
@@ -6471,17 +6580,13 @@
 
   "submission.sections.submit.progressbar.describe.physical_objects.info": "<i>Please record here if objects or materials are created in the project that serve the transfer of knowledge or can be used by third parties for research or teaching.</i></br>Do not record any kind of publication (e.g. text, image, sound or software) here. In case of trial and demonstration sites that can be visited, please use the \"Events\" section.",
 
-  "submission.sections.submit.progressbar.describe.physical_objects_result": "#2 Use and accessibilityl for third parties",
+  "submission.sections.submit.progressbar.describe.physical_objects_result": "#1 Use and accessibilityl for third parties",
 
   "submission.sections.submit.progressbar.describe.physical_objects_result.info": "<i>Please add here in which form the object can be used by third parties and whom interested parties can contact.</i></br>With the information on the possible uses, you contribute to the subsequent use of your project work.",
 
-  "submission.sections.submit.progressbar.describe.pot_societalimpact": "#1 Expected societal impact",
-
-  "submission.sections.submit.progressbar.describe.pot_societalimpact.info": "The focus is on describing which ecological, economic or social-cultural effects can be associated with an application of the project results. By documenting possible positive as well as negative impacts, you demonstrate the awareness of side effects of your research work and contribute to orienting further innovation processes towards positive impacts and the reduction of side effects.",
-
   "submission.sections.submit.progressbar.describe.proj_objectives": "#1 Project objective",
 
-  "submission.sections.submit.progressbar.describe.projects": "#1 Describe join project",
+  "submission.sections.submit.progressbar.describe.projects": "#1 Describe Consortium",
 
   "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the funding access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
 
@@ -6584,8 +6689,6 @@
   "submission.sections.submit.progressbar.describe.applications_quant.info": "Application stands for use or implementation of solutions / changes / innovations to which the project has contributed. This can take place at project partners or third parties and in unchanged or further developed form. Application can show up in a broad spectrum, such as testing, production figures, pilot projects as well as using households, organizations or municipalities.<p><i>Please record the application of a solution / change / innovation here. You can use a time series to show how the application has developed.</i></p><i>Please describe the scope and development of the application over time. Start with the base value before the project had an impact. (This value can be 0 if something new is applied or have a value if change was contributed to).</br>Include evidence, if available, as an upload or link.<i></br>If you cannot provide information on scope but have evidence of an application, at a minimum use the description field and include the reference year.",
 
   "submission.sections.submit.progressbar.describe.research_results": "Research result",
-
-  "submission.sections.submit.progressbar.describe.others": "Others",
 
   "submission.sections.submit.progressbar.describe.events_involved": "Participants in the event",
 
@@ -7111,7 +7214,13 @@
 
   "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
 
-  "working-plan.task.search.header": "",
+  "working-plan.search.header": "Search help-box",
+
+  "working-plan.task.search.header": "Search tasks help-box",
+
+  "submission.sections.submit.progressbar.working_plan_form.info": "Create help-box",
+
+  "submission.sections.submit.progressbar.working_plan_step_form.info": "Create tasks help-box",
 
   "application.listelement.badge": "Application of a solution / change / innovation",
 
@@ -7139,11 +7248,7 @@
 
   "milestone.listelement.badge": "Milestone",
 
-  "other.listelement.badge": "Others",
-
   "parentproject.listelement.badge": "Joint Project",
-
-  "pot_societalimpact.listelement.badge": "Expected societal impact",
 
   "process_event.listelement.badge": "Cooperation / Participation / Exchange process",
 
@@ -7279,8 +7384,6 @@
 
   "submission.sections.submit.progressbar.describe.projectpartners_import": "#1 Information from import",
 
-  "submission.sections.submit.progressbar.describe.subcontractors_orgunit": "#1 Subcontractor",
-
   "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit": "#1 Cooperation partner",
 
   "submission.sections.submit.progressbar.describe.cooperationpartners_orgunit.info": "This area serves to map the cooperation within a project. Cooperation is understood to be the agreed collaboration with other organisations, companies or institutions. Collaboration partners, subcontractors and contractual partners already specified in the easy-online proposal are imported and you only need to add information. Please add informal cooperation partners and all project partners joining after the beginning of the project so that a comprehensive picture of the cooperation partners of the project is available. If desired or required, contracts, letters of intent or similar evidence of cooperation can be uploaded. They will not be published and can only be viewed by the funder.",
@@ -7310,8 +7413,6 @@
   "Person.listelement.badge": "Person",
 
   "team.listelement.badge": "Team member",
-
-  "subcontractor.listelement.badge": "Subcontractor",
 
   "Product.listelement.badge": "Research data",
 
@@ -7356,8 +7457,6 @@
   "working-plan.chart.column.changeStartDate.Close": "Close",
 
   "working-plan.task.create.head": "New item",
-
-  "subcontractors.listelement.badge": "Subcontractor",
 
   "cooperationpartners.listelement.badge": "Cooperation partner",
 
@@ -7409,8 +7508,6 @@
 
   "search.filters.entityType.physical_object": "Object /material",
 
-  "search.filters.entityType.other": "Others",
-
   "search.filters.entityType.plan_publication": "Planned publications",
 
   "search.filters.entityType.process_event": "Cooperation / Participation / Exchange process",
@@ -7436,8 +7533,6 @@
   "search.filters.entityType.projectpartner": "Project partner",
 
   "search.filters.entityType.programme": "Progamme",
-
-  "search.filters.entityType.subcontractor": "Subcontractor",
 
   "search.filters.entityType.Product": "Research data",
 
@@ -7467,19 +7562,11 @@
 
   "layout.box.header.multiple_entities": "Involved organisations",
 
-  "layout.tab.header.subcontractor": "Subcontractors",
-
   "layout.tab.header.exploitationplans": "Exploitation plan",
 
   "layout.tab.header.default": "Consortium information",
 
   "layout.tab.header.Subprojects&Involved": "Subprojects & Involved",
-
-  "layout.tab.header.proj&partners": "Subprojects & Involved",
-
-  "layout.tab.header.subcontractors": "Subcontractors / Cooperation partners",
-
-  "layout.tab.header.cooperationpartners": "Cooperation partners / Subcontractors",
 
   "layout.tab.header.stakeholder": "Stakeholder groups",
 
@@ -7495,13 +7582,13 @@
 
   "layout.tab.header.gender": "Gender reflection",
 
-  "layout.tab.header.Background": "Background",
+  "layout.tab.header.Background": "Backgroud",
 
   "layout.tab.header.condition": "External conditions",
 
   "layout.tab.header.knowledge": "State of knowledge / problem definition",
 
-  "layout.tab.header.Projectobjectives": "<i class=\"fas fa-bullseye\"></i> Objectives",
+  "layout.tab.header.Projectobjectives": "Objectives",
 
   "layout.tab.header.research_objective": "Research and development objectives",
 
@@ -7547,8 +7634,6 @@
 
   "layout.tab.header.award": "Awards",
 
-  "layout.tab.header.pot_societalimpact": "Expected societal impacts",
-
   "layout.tab.header.contribution_fundingprogramme": "Contributions to funding objectives",
 
   "layout.tab.header.other": "Others",
@@ -7569,13 +7654,9 @@
 
   "layout.box.header.projectpartner": "Project partners - List view",
 
-  "layout.box.header.subcontractor": "Subproject - Subcontractors",
-
   "layout.box.header.exploitationplan": "Exploitation plan",
 
   "layout.box.header.Person_m": "Person",
-
-  "layout.box.header.jpbasics": "Joint projekt - Primary data",
 
   "layout.box.header.jpdetails": "Joint project - Details",
 
@@ -7583,15 +7664,11 @@
 
   "layout.box.header.targetgroup": "Stakeholder groups",
 
-  "layout.box.header.Funding_m": "Funding",
-
   "layout.box.header.projectpartner_m": "Project partner",
 
   "layout.box.header.Projektleitung_m": "Project management",
 
   "layout.box.header.Projektkoordination_m": "Project coordination",
-
-  "layout.box.header.subcontractor_m": "Subcontractor",
 
   "layout.box.header.cooperationpartner_m": "Coorperation partner",
 
@@ -7679,8 +7756,6 @@
 
   "layout.box.header.award": "Awards",
 
-  "layout.box.header.pot_societalimpact": "Expected societal impacts",
-
   "layout.box.header.contribution_fundingprogramme": "Contributions to funding objectives",
 
   "layout.box.header.other": "Others",
@@ -7698,8 +7773,6 @@
   "layout.box.header.spinoff_m": "Spin-off",
 
   "layout.box.header.award_m": "Award",
-
-  "layout.box.header.pot_societalimpact_m": "Expected societal impact",
 
   "layout.box.header.contribution_fundingprogramme_m": "Contribution to funding objectives",
 
@@ -7861,8 +7934,6 @@
 
   "layout.field.label.projectpartner.synsicris.type.orgform": "Organisational form",
 
-  "layout.field.label.projectpartner.synsicris.type.publicfunded": "Mainly public funded",
-
   "layout.field.label.projectpartner.synsicris.type.recipient-stats": "profi (Recipient stats)",
 
   "layout.field.label.projectpartner.synsicris.subject.nace": "Economic sector of the organisation (NACE)",
@@ -7929,8 +8000,6 @@
 
   "layout.field.label.cooperationpartner.synsicris.type.orgform": "Organisational form",
 
-  "layout.field.label.cooperationpartner.synsicris.type.publicfunded": "The organisation is mainly financed by public funding.",
-
   "layout.field.label.cooperationpartner.synsicris.type.recipient-stats": "profi (Recipient stats)",
 
   "layout.field.label.cooperationpartner.synsicris.subject.nace": "Economic sector of the organisation (NACE)",
@@ -7965,48 +8034,6 @@
 
   "layout.field.label.cooperationpartner.synsicris.personadmin.email": "Email",
 
-  "layout.field.label.subcontractor.dc.title": "Organisation",
-
-  "layout.field.label.subcontractor.oairecerif.acronym": "Acronym or short name",
-
-  "layout.field.label.subcontractor.synsicris.address.addressStreetnamenumber": "Streetname, Building number",
-
-  "layout.field.label.subcontractor.synsicris.address.addressPostcode": "Postcode",
-
-  "layout.field.label.subcontractor.synsicris.address.addressCity": "City",
-
-  "layout.field.label.subcontractor.synsicris.address.addressPostbox": "Postbox",
-
-  "layout.field.label.subcontractor.organization.address.addressCountry": "Country",
-
-  "layout.field.label.subcontractor.oairecerif.identifier.url": "Web adress",
-
-  "layout.field.label.subcontractor.synsicris.orgunits.email": "Email",
-
-  "layout.field.label.subcontractor.synsicris.orgunits.phone": "Phone",
-
-  "layout.field.label.subcontractor.organization.identifier": "Organisation-ID",
-
-  "layout.field.label.subcontractor.synsicris.type.orgform": "Organisational form",
-
-  "layout.field.label.subcontractor.synsicris.relation.targetgroup": "Related stakeholder group(s)",
-
-  "layout.field.label.subcontractor.synsicris.type": "Societal area",
-
-  "layout.field.label.subcontractor.synsicris.subject.nace": "Economic sector of the organisation (NACE)",
-
-  "layout.field.label.subcontractor.synsicris.subject.political": "Adressed policy level(s)",
-
-  "layout.field.label.subcontractor.synsicris.subject.destatis": "Discipline",
-
-  "layout.field.label.subcontractor.synsicris.cooperation.startDate": "Start date",
-
-  "layout.field.label.subcontractor.synsicris.cooperation.endDate": "End date",
-
-  "layout.field.label.subcontractor.synsicris.description.contribution": "Description of the cooperation",
-
-  "layout.field.label.subcontractor.dc.relation.project": "Related Subproject",
-
   "layout.field.label.targetgroup.dc.title": "Title",
 
   "layout.field.label.targetgroup.synsicris.description.targetgroup": "Relevance of stakeholder group",
@@ -8022,8 +8049,6 @@
   "layout.field.label.targetgroup.synsicris.subject.enterprise-size": "Company size",
 
   "layout.field.label.ethic.dc.title": "Key message",
-
-  "layout.field.label.ethic.dc.type": "ethical(r) aspects",
 
   "layout.field.label.ethic.synsicris.type.status": "Status of the information compared to the project application",
 
@@ -8082,8 +8107,6 @@
   "layout.field.label.workpackage.dc.description": "Description",
 
   "layout.field.label.workpackage.synsicris.description.requirements": "Requirements for the fulfilment of the work package",
-
-  "layout.field.label.workpackage.synsicris.description.changes": "Explanation of the change in the course of the project",
 
   "layout.field.label.workpackage.synsicris.type.status": "Status of the information compared to the project application",
 
@@ -8157,13 +8180,7 @@
 
   "layout.field.label.Publication.dc.relation.publication": "In book",
 
-  "layout.field.label.Publication.dc.relation.isbn": "ISBN",
-
-  "layout.field.label.Publication.dc.relation.doi": "DOI",
-
   "layout.field.label.Publication.dc.relation.ispartof": "Journal / series",
-
-  "layout.field.label.Publication.dc.relation.issn": "ISSN",
 
   "layout.field.label.Publication.oaire.citation.volume": "Volume",
 
@@ -8172,8 +8189,6 @@
   "layout.field.label.Publication.oaire.citation.startPage": "Start page",
 
   "layout.field.label.Publication.oaire.citation.endPage": "End page",
-
-  "layout.field.label.Publication.dc.identifier.url": "Publisher link",
 
   "layout.field.label.Publication.dc.language.iso": "Language",
 
@@ -8289,15 +8304,11 @@
 
   "layout.field.label.innovationpotential.synsicris.description.applicability5": "Prospects for establishment / dissemination / transfer",
 
-  "layout.field.label.innovationpotential.synsicris.type.regional-status": "Reference point",
-
   "layout.field.label.innovationpotential.synsicris.description.regional": "Explanations",
 
   "layout.field.label.innovationpotential.synsicris.description.rl-start": "Development status at the beginning of the project (start value)",
 
   "layout.field.label.innovationpotential.synsicris.description.rl-end": "Development status at the end of the project (target value)",
-
-  "layout.field.label.innovationpotential.synsicris.type.rl-status": "Start value/target value",
 
   "layout.field.label.innovationpotential.synsicris.type.status": "Status of the information compared to the project application",
 
@@ -8326,10 +8337,6 @@
   "layout.field.label.application.dc.type": "Type of application",
 
   "layout.field.label.application.synsicris.relation.innovationpotential": "Related solution / change / innovation or patent",
-
-  "layout.field.label.application.synsicris.type.innovation": "Type and using stakeholder group(s) of the solution, change or innovation",
-
-  "layout.field.label.application.synsicris.description.innovation": "Description",
 
   "layout.field.label.application.synsicris.date.referenceyear": "Reference year",
 
@@ -8397,20 +8404,6 @@
 
   "layout.field.label.exp_societalimpact.dc.type": "Type",
 
-  "layout.field.label.exp_societalimpact.synsicris.type-n": "Possible expected side effects",
-
-  "layout.field.label.pot_societalimpact.dc.title": "Title",
-
-  "layout.field.label.pot_societalimpact.dc.type": "Type",
-
-  "layout.field.label.pot_societalimpact.synsicris.type.direction": "Direction of impact",
-
-  "layout.field.label.pot_societalimpact.synsicris.type.ecological": "Specific ecological area",
-
-  "layout.field.label.pot_societalimpact.synsicris.relation.targetgroup": "Stakeholder group(s) affected by the impact",
-
-  "layout.field.label.pot_societalimpact.dc.description": "Description",
-
   "layout.field.label.contribution_fundingprogramme.dc.title": "Title",
 
   "layout.field.label.contribution_fundingprogramme.synsicris.relation.fundingobjective": "Objective of the funding programme",
@@ -8421,75 +8414,11 @@
 
   "layout.field.label.other.dc.description": "Description",
 
-  "layout.field.label.Person.crisrp.site.title": "Title of webpage",
-
-  "layout.field.label.ethic.synsicris.description.aspect": "Actions",
-
-  "layout.field.label.process_event.synsicris.duration": "Duration (hours)",
-
-  "layout.field.label.process_event.synsicris.type.frequency": "Frequency",
-
-  "layout.field.label.process_event.synsicris.type.period": "Period",
-
-  "layout.field.label.process_event.synsicris.title.event": "Title",
-
-  "layout.field.label.process_event.oairecerif.event.startDate": "Start",
-
-  "layout.field.label.process_event.oairecerif.event.endDate": "End",
-
-  "layout.field.label.process_event.synsicris.participantnumber": "Number of participants",
-
-  "layout.field.label.process_event.oairecerif.event.place": "City",
-
-  "layout.field.label.process_event.oairecerif.event.country": "Country",
-
-  "layout.field.label.Publication.oairecerif.author.affiliation": "Organisation",
-
-  "layout.field.label.Product.oairecerif.author.affiliation": "Organisation",
-
-  "layout.field.label.innovationpotential.synsicris.relation.targetgroup": "Stakeholder group(s)",
-
-  "layout.field.label.innovationpotential.synsicris.coverage.regional": "Region",
-
-  "layout.field.label.innovationpotential.synsicris.type.srl-trl": "TRL/SRL",
-
-  "layout.field.label.innovationpotential.synsicris.level.srl-trl": "Readiness Level",
-
-  "layout.field.label.spinoff.synsicris.amount.annual-sales": "Annual turnover",
-
-  "layout.field.label.spinoff.synsicris.amount.currency-annual-sales": "Currency",
-
   "layout.field.label.spinoff.synsicris.title.funding": "Funding programme",
-
-  "layout.field.label.spinoff.synsicris.amount.funding": "Funding amount",
-
-  "layout.field.label.spinoff.synsicris.amount.currency-funding": "Currency",
 
   "layout.field.label.spinoff.synsicris.description.nonfinancalsupport": "Non-financial support",
 
   "layout.field.label.exp_societalimpact.synsicris.type.transform": "Transformation area addressed",
-
-  "layout.field.label.exp_societalimpact.synsicris.type.positive-direction": "Impact intensity",
-
-  "layout.field.label.exp_societalimpact.synsicris.description.pos": "Extent of expected impact",
-
-  "layout.field.label.exp_societalimpact.synsicris.type.transform-n": "Addressed transformation area",
-
-  "layout.field.label.exp_societalimpact.synsicris.type.negative-direction": "Effect intensity - negative",
-
-  "layout.field.label.exp_societalimpact.synsicris.description.neg": "Extent of the negative side effect",
-
-  "layout.field.label.application.synsicris.type.baseline": "Base year",
-
-  "layout.field.label.application.synsicris.coverage.regional": "Region of application",
-
-  "layout.field.label.application.synsicris.type.quantifier": "Unit",
-
-  "layout.field.label.application.synsicris.type.quantifier-own": "Unit",
-
-  "layout.field.label.application.synsicris.quantity": "Quantity / number",
-
-  "layout.field.label.application.synsicris.description.description": "Notes",
 
   "submission.sections.submit.progressbar.describe.patents_result_import": "#2 Import patent data",
 
@@ -8498,8 +8427,6 @@
   "submission.sections.submit.progressbar.describe.projectpartners_import_lead": "#1 Information on the management of subprojects",
 
   "submission.sections.submit.progressbar.describe.projectpartners_import_leadadmin": "#1 Information on the project coordinators an administrators",
-
-  "submission.sections.submit.progressbar.describe.subcontractors": "#1 Add information on the subcontractor's field of activity",
 
   "submission.sections.submit.progressbar.describe.cooperationpartners": "#1 Add information on the cooperationpartner field of activity",
 
@@ -8520,10 +8447,6 @@
   "tree.description.trl": "Technology readiness level selection",
 
   "tree.description.srl": "Solution readiness level selection",
-
-  "tree.description.coar2": "Document type",
-
-  "tree.description.coar3": "Document type",
 
   "tree.description.destatis": "Selection Discipline / Subject",
 
@@ -8591,8 +8514,6 @@
 
   "layout.field.label.OrgUnit.synsicris.type.orgform": "Organisational form",
 
-  "layout.field.label.OrgUnit.synsicris.type.publicfunded": "The organisation is mainly financed by public funding.",
-
   "layout.field.label.OrgUnit.synsicris.title.registercourt": "Register court",
 
   "layout.field.label.OrgUnit.synsicris.identifier.registernumber": "Register number",
@@ -8605,8 +8526,6 @@
 
   "layout.field.label.OrgUnit.synsicris.subject.political": "Policy level",
 
-  "layout.field.label.programme.dc.description": "Description",
-
   "layout.field.label.programme.oairecerif.acronym": "Acronym",
 
   "layout.field.label.programme.dc.title": "Title",
@@ -8617,19 +8536,9 @@
 
   "layout.field.label.call.oairecerif.acronym": "Acronym",
 
-  "layout.field.label.call.dc.description": "Description",
-
-  "layout.field.label.call.dc.type": "Type",
-
   "layout.field.label.call.oairecerif.fundingParent": "Related call",
 
   "layout.field.label.call.synsicris.contact": "Contact information",
-
-  "layout.field.label.call.synsicris.call.startDate": "Start date",
-
-  "layout.field.label.call.synsicris.call.endDate": "End date",
-
-  "layout.field.label.call.oairecerif.identifier.url": "Web adress",
 
   "query-builder.synsicris.placeholder.select-value": "Select Value",
 
@@ -8661,8 +8570,6 @@
 
   "layout.tab.header.Projekttraeger": "Programme and Funding information",
 
-  "layout.box.header.subcontractors": "Subproject - Subcontractors / Cooperation partners",
-
   "submission.sections.submit.progressbar.describe.events_internal": "Internal section (only for consortium)",
 
   "layout.tab.header.comments_all": "All comments",
@@ -8672,8 +8579,6 @@
   "layout.box.header.comment_jp": "Comments - Joint project",
 
   "layout.box.header.projectpartner_comment": "Comments - Project partner",
-
-  "layout.box.header.subcontractor_comment": "Comments - Subcontractor",
 
   "layout.box.header.cooperationpartner_comment": "Comments - Cooperation partner",
 
@@ -8727,8 +8632,6 @@
 
   "layout.box.header.exp_societalimpact_comment": "Commets - Expected societal impact",
 
-  "layout.box.header.pot_societalimpact_comment": "Commets - Expected societal impact",
-
   "layout.box.header.contribution_fundingprogramme_comment": "Commets - Contribution to funding objectives",
 
   "layout.box.header.other_comment": "Commets - Others",
@@ -8761,13 +8664,11 @@
 
   "layout.field.label.exp_societalimpact.synsicris.type-n.header": "Possible expected side effects",
 
-  "layout.field.label.parentproject.dc.type.attachment": "Attachments",
-
   "layout.field.label.Event.synsicris.type.internal": "Task",
 
   "layout.field.label.Event.synsicris.description.internal": "Notes",
 
-  "submission.sections.submit.progressbar.describe.projects_calc": "#1 Summarised information from subprojects",
+  "submission.sections.submit.progressbar.describe.projects_calc": "#1 Summarised information from Projects",
 
   "submission.sections.submit.progressbar.describe.funding.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
 
@@ -8778,10 +8679,6 @@
   "subproject.listelement.badge": "Subproject",
 
   "s": "Target for interaction and transfer",
-
-  "layout.box.header.Funding_comment": "Comments - Funding",
-
-  "layout.box.header.Project": "Projects",
 
   "layout.field.label.Person.dspace.entity.type": "Person",
 
@@ -8811,9 +8708,9 @@
 
   "test_exp_societalimpact_type": "Possible expected side effects",
 
-  "project.manage.members.admin-group": "Invitation and Management of project coordinators",
+  "project.manage.members.admin-group": "Invitation and Management of Project coordinators",
 
-  "project.manage.members.members-group": "Invitation and Management of project members",
+  "project.manage.members.members-group": "Invitation and Management of Members of consortium",
 
   "item.grant.badge.parentproject": "test",
 
@@ -8840,10 +8737,6 @@
   "layout.field.label.innovationpotential.synsicris.synsicris.level.rl-start": "Readinesslevel at project start (initial value)",
 
   "layout.field.label.innovationpotential.synsicris.synsicris.level.rl-end": "Readinesslevel at project end (target value)",
-
-  "layout.field.label.innovationpotential.synsicris.coverage.regional-primary": "Primary field of application",
-
-  "layout.field.label.innovationpotential.synsicris.coverage.regional-secondary": "Later dissemination",
 
   "layout.field.label.project.dc.title": "Workspace for all partners in the consortium: ",
 
@@ -9021,6 +8914,164 @@
 
   "layout.field.label.neg_sideeffect.synsicris.type.negative-direction": "Impact intensity",
 
-  "layout.field.label.neg_sideeffect.synsicris.description.neg": "Extent of possible negative side effect"
+  "layout.field.label.neg_sideeffect.synsicris.description.neg": "Extent of possible negative side effect",
+
+  "submission.sections.submit.progressbar.describe.neg_sideeffect": "#1 Reflecting on possible negative side effects",
+
+  "layout.box.help-text.default_h_2": "to be deleted",
+
+  "layout.box.help-text.default_h_3": "to be deleted",
+
+  "layout.box.help-text.Project_h": "to be deleted",
+
+  "layout.box.help-text.Project_h_1": "to be deleted",
+
+  "layout.box.help-text.Project_h_2": "to be deleted",
+
+  "layout.box.help-text.subcontractor_h": "to be deleted",
+
+  "layout.box.help-text.subproject_h_2": "to be deleted",
+
+  "layout.box.help-text.subcontractor_h_project": "to be deleted",
+
+  "layout.tab.header.multiple_entities": "Multiple entities",
+
+  "layout.tab.header.cooperationpartners": "Cooperation partners / Subcontractors",
+
+  "layout.tab.header.neg_sideeffect": "Possible negative side effects",
+
+  "layout.box.header.neg_sideeffect": "Possible negative side effects",
+
+  "layout.box.header.neg_sideeffect_m": "Possible negative side effects",
+
+  "layout.field.label.subcontractor.dc.title": "Organisation",
+
+  "layout.field.label.subcontractor.oairecerif.acronym": "Acronym or short name",
+
+  "layout.field.label.subcontractor.synsicris.address.addressStreetnamenumber": "Streetname, Building number",
+
+  "layout.field.label.subcontractor.synsicris.address.addressPostcode": "Postcode",
+
+  "layout.field.label.subcontractor.synsicris.address.addressCity": "City",
+
+  "layout.field.label.subcontractor.synsicris.address.addressPostbox": "Postbox",
+
+  "layout.field.label.subcontractor.organization.address.addressCountry": "Country",
+
+  "layout.field.label.subcontractor.oairecerif.identifier.url": "Web adress",
+
+  "layout.field.label.subcontractor.synsicris.orgunits.email": "Email",
+
+  "layout.field.label.subcontractor.synsicris.orgunits.phone": "Phone",
+
+  "layout.field.label.subcontractor.organization.identifier": "Organisation-ID",
+
+  "layout.field.label.subcontractor.synsicris.type.orgform": "Organisational form",
+
+  "layout.field.label.subcontractor.synsicris.relation.targetgroup": "Related stakeholder group(s)",
+
+  "layout.field.label.subcontractor.synsicris.type": "Societal area",
+
+  "layout.field.label.subcontractor.synsicris.subject.nace": "Economic sector of the organisation (NACE)",
+
+  "layout.field.label.subcontractor.synsicris.subject.political": "Adressed policy level(s)",
+
+  "layout.field.label.subcontractor.synsicris.subject.destatis": "Discipline",
+
+  "layout.field.label.subcontractor.synsicris.cooperation.startDate": "Start date",
+
+  "layout.field.label.subcontractor.synsicris.cooperation.endDate": "End date",
+
+  "layout.field.label.subcontractor.synsicris.description.contribution": "Description of the cooperation",
+
+  "layout.field.label.subcontractor.dc.relation.project": "Related Subproject",
+
+  "project.manage.members.funding.admin-group": "Invitation and Management of Project members with Coordinator-role",
+
+  "project.manage.members.project.admin-group-help": "Help message here",
+
+  "project.manage.members.funding.admin-group-help": "Help message here",
+
+  "project.manage.members-list.table.edit.buttons.withdraw": "Withdraw role",
+
+  "vocabulary-treeview.tree.description.coar2": "to be deleted",
+
+  "vocabulary-treeview.tree.description.coar3": "to be deleted",
+
+  "submission.form.others.info": "to be deleted",
+
+  "submission.form.others-edit.info": "to be deleted",
+
+  "submission.sections.submit.progressbar.describe.others.info": "to be deleted",
+
+  "layout.tab.header.person_leading": "What is the text here?",
+
+  "layout.tab.header.multiple_involved": "Beteiligte",
+
+  "layout.box.header.neg_sideeffect_comment": "Commets - Possible negative side effect",
+
+  "layout.field.label.projectpartner.synsicris.municipality": "Municipality",
+
+  "layout.field.label.cooperationpartner.synsicris.lastmodifiedprofi": "Last modified from profi",
+
+  "layout.field.label.gender.synsicris.type.balance": "6. Gender balance among employees in the project",
+
+  "layout.field.label.gender.synsicris.description.balance": "Explanation",
+
+  "layout.field.label.open_researchquestions.synsicris.type.evidence": "Evidence type",
+
+  "layout.field.label.neg_sideeffect.synsicris.type.evidence": "Evidence type",
+
+  "layout.field.label.OrgUnit.synsicris.lastmodified.profi": "Last modified from profi",
+
+  "layout.field.label.OrgUnit.synsicris.internalid.profi-name": "Name from profi",
+
+  "layout.field.label.OrgUnit.synsicris.internalid.profi-address": "Adress from profi",
+
+  "layout.field.label.OrgUnit.synsicris.internalid.profi-name-parentOrganization": "Adress of Parent organization from profi",
+
+  "layout.field.label.OrgUnit.synsicris.address.addressPostcodePostbox": "Postcode",
+
+  "layout.field.label.OrgUnit.synsicris.address.addressCityPostbox": "City",
+
+  "layout.field.label.OrgUnit.synsicris.address.countryclassification": "Country",
+
+  "layout.field.label.OrgUnit.synsicris.identifier.municipality": "Municipality",
+
+  "layout.field.label.programme.oairecerif.internalid": "Internal ID",
+
+  "layout.field.label.programme.synsicris.type.visibility": "Visibility type",
+
+  "layout.field.label.programme.synsicris.relation.funding-guideline": "Funding guideline",
+
+  "layout.field.label.comment.dc.title": "Title",
+
+  "layout.field.label.comment.dc.type": "Type",
+
+  "layout.field.label.comment.synsicris.date.creation": "Creation date",
+
+  "layout.field.label.comment.synsicris.date.reminder": "Reminder date",
+
+  "layout.field.label.comment.synsicris.creator": "Creation by",
+
+  "layout.field.label.comment.synsicris.description": "Description",
+
+  "layout.tab.header.open_researchquestion": "Open research questions",
+
+  "layout.box.header.open_researchquestion_comment": "Comments - Open research questions",
+
+  "layout.box.header.jpbasics": "Consortium information",
+
+  "layout.box.header.Project": "box.header.Projects",
+
+  "layout.box.header.open_researchquestion": "Open research questions",
+
+  "layout.box.header.open_researchquestion_m": "Open research questions",
+
+  "submission.sections.submit.progressbar.describe.open_researchquestions": "Open research questions",
+
+  "layout.box.header.multiple_involved": "Involved organisations",
+
+  "project-overview.page.subproject.create.btn": "to be deleted"
 
 }

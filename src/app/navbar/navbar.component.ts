@@ -58,124 +58,108 @@ export class NavbarComponent extends MenuComponent {
     const isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(take(1));
     const menuList: any[] = [];
 
-    /* Communities & Collections tree */
-    const CommunityCollectionMenuItem = {
-      id: `browse_global_communities_and_collections`,
-      active: false,
-      visible: environment.layout.navbar.showCommunityCollection,
-      index: 0,
-      model: {
-        type: MenuItemType.LINK,
-        text: `menu.section.communities_and_collections`,
-        link: `/community-list`
-      } as LinkMenuItemModel
-    };
-
-    if (environment.layout.navbar.showCommunityCollection) {
-      menuList.push(CommunityCollectionMenuItem);
-    }
-
-
-    this.isCurrentUserAdmin().subscribe(((isAdmin) => {
-
-        if (isAdmin) {
-
-          menuList.push({
-            id: 'browse_by_projects',
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.browse_by_projects',
-              link: '/browse/projects'
-            } as LinkMenuItemModel
-          });
-
-          menuList.push(
-            {
-              id: 'statistics',
-              active: false,
-              visible: true,
-              index: 1,
-              model: {
-                type: MenuItemType.TEXT,
-                text: 'menu.section.statistics'
-              } as TextMenuItemModel,
-            }
-          );
-
-          menuList.push({
-            id: 'statistics_site',
-            parentID: 'statistics',
-            active: false,
-            visible: true,
-            model: {
-            type: MenuItemType.LINK,
-              text: 'menu.section.statistics.site',
-              link: '/statistics'
-          } as LinkMenuItemModel
-        });
-
-          menuList.push({
-            id: 'statistics_login',
-            parentID: 'statistics',
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.statistics.login',
-              link: '/statistics/login'
-            } as LinkMenuItemModel
-          });
-
-          menuList.push({
-            id: 'statistics_workflow',
-            parentID: 'statistics',
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.statistics.workflow',
-              link: '/statistics/workflow'
-            } as LinkMenuItemModel
-          });
-        }
-      }
-
-    ));
-
-    const findAllVisible$ = this.sectionDataService.findVisibleSections().pipe( getFirstSucceededRemoteListPayload());
-    combineLatest([isAdmin$, findAllVisible$]).subscribe( ([isAdmin, sections]: [boolean, Section[]]) => {
+    const findAllVisible$ = this.sectionDataService.findVisibleSections().pipe(getFirstSucceededRemoteListPayload());
+    combineLatest([isAdmin$, findAllVisible$]).subscribe(([isAdmin, sections]: [boolean, Section[]]) => {
       if (isAdmin) {
-        menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
-          shouldPersistOnRouteChange: true
-        })));
+
+        /* Communities & Collections tree */
+        const CommunityCollectionMenuItem = {
+          id: `browse_global_communities_and_collections`,
+          active: false,
+          visible: environment.layout.navbar.showCommunityCollection,
+          index: 0,
+          model: {
+            type: MenuItemType.LINK,
+            text: `menu.section.communities_and_collections`,
+            link: `/community-list`
+          } as LinkMenuItemModel
+        };
+
+        if (environment.layout.navbar.showCommunityCollection) {
+          menuList.push(CommunityCollectionMenuItem);
+        }
 
         sections.filter((section) => section.id !== 'site')
-                .forEach( (section) => {
-          const menuSection = {
-            id: `explore_${section.id}`,
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: `menu.section.explore_${section.id}`,
-              link: `/explore/${section.id}`
-            } as LinkMenuItemModel
-          };
-          this.menuService.addSection(this.menuID, Object.assign(menuSection, {
-            shouldPersistOnRouteChange: true
-          }));
-        });
+          .forEach((section) => {
+            const menuSection = {
+              id: `explore_${section.id}`,
+              active: false,
+              visible: true,
+              model: {
+                type: MenuItemType.LINK,
+                text: `menu.section.explore_${section.id}`,
+                link: `/explore/${section.id}`
+              } as LinkMenuItemModel
+            };
+
+            menuList.push(menuSection);
+
+            menuList.push(
+              {
+                id: 'statistics',
+                active: false,
+                visible: true,
+                index: 1,
+                model: {
+                  type: MenuItemType.TEXT,
+                  text: 'menu.section.statistics'
+                } as TextMenuItemModel,
+              }
+            );
+
+            menuList.push({
+              id: 'statistics_site',
+              parentID: 'statistics',
+              active: false,
+              visible: true,
+              model: {
+                type: MenuItemType.LINK,
+                text: 'menu.section.statistics.site',
+                link: '/statistics'
+              } as LinkMenuItemModel
+            });
+
+            menuList.push({
+              id: 'statistics_login',
+              parentID: 'statistics',
+              active: false,
+              visible: true,
+              model: {
+                type: MenuItemType.LINK,
+                text: 'menu.section.statistics.login',
+                link: '/statistics/login'
+              } as LinkMenuItemModel
+            });
+
+            menuList.push({
+              id: 'statistics_workflow',
+              parentID: 'statistics',
+              active: false,
+              visible: true,
+              model: {
+                type: MenuItemType.LINK,
+                text: 'menu.section.statistics.workflow',
+                link: '/statistics/workflow'
+              } as LinkMenuItemModel
+            });
+          });
       }
+
+      menuList.push({
+        id: 'browse_by_projects',
+        active: false,
+        visible: true,
+        model: {
+          type: MenuItemType.LINK,
+          text: 'menu.section.browse_by_projects',
+          link: '/browse/projects'
+        } as LinkMenuItemModel
+      });
+
+      menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
+        shouldPersistOnRouteChange: true
+      })));
     });
 
-  }
-
-  isCurrentUserAdmin(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf, undefined, undefined)
-      .pipe(
-        take(1)
-      );
   }
 }

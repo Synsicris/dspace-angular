@@ -210,6 +210,10 @@ export class WorkingPlanService {
     return `working-plan.task.search.header`;
   }
 
+  getWorkingPlanSearchHeader(): string {
+    return `working-plan.search.header`;
+  }
+
   getWorkpackageItemById(itemId): Observable<Item> {
     return this.itemService.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload()
@@ -568,6 +572,24 @@ export class WorkingPlanService {
           language: null,
           place: 0,
           value: 'not_done'
+        }]
+      });
+    }
+
+    return result;
+  }
+
+  setChildWorkingplanLinkStatusMetadata(metadata: MetadataMap): MetadataMap {
+    let result: MetadataMap = metadata;
+    if (!metadata.hasOwnProperty(environment.workingPlan.workingPlanLinkMetadata)
+      || isEmpty(metadata[environment.workingPlan.workingPlanLinkMetadata])) {
+      result = Object.assign({}, metadata, {
+        [environment.workingPlan.workingPlanLinkMetadata]: [{
+          authority: null,
+          confidence: -1,
+          language: null,
+          place: 0,
+          value: 'nested'
         }]
       });
     }

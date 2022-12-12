@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -44,6 +44,11 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
   private canDeleteProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * A boolean representing if item is a version of original item
+   */
+  private isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * Modal reference
    */
   private modalRef: NgbModalRef;
@@ -58,6 +63,7 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
    * @param {NotificationsService} notificationsService
    * @param {ProjectDataService} projectService
    * @param {Router} router
+   * @param {ActivatedRoute} aroute
    * @param {TranslateService} translate
    */
   constructor(
@@ -68,12 +74,23 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
     protected notificationsService: NotificationsService,
     protected projectService: ProjectDataService,
     protected router: Router,
+    protected aroute: ActivatedRoute,
     protected translate: TranslateService
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.DeleteProject);
   }
 
   ngOnInit(): void {
+
+
+    this.aroute.data.pipe(
+      map((data) => data.isVersionOfAnItem),
+      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
+      take(1)
+    ).subscribe((isVersionOfAnItem: boolean) => {
+      this.isVersionOfAnItem$.next(isVersionOfAnItem);
+    });
+
     this.projectService.getProjectCommunityByItemId((this.contextMenuObject as Item).uuid).pipe(
       getFirstCompletedRemoteData(),
       switchMap((projectCommunityRD) => {
@@ -126,6 +143,13 @@ export class DeleteProjectMenuComponent extends ContextMenuEntryComponent {
    */
   canDeleteProject(): Observable<boolean> {
     return this.canDeleteProject$.asObservable();
+  }
+
+  /**
+   * Check if current item is version of an item
+   */
+  isVersionOfAnItem(): Observable<boolean> {
+    return this.isVersionOfAnItem$.asObservable();
   }
 
   /**

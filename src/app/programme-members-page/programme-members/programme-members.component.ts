@@ -40,6 +40,11 @@ export class ProgrammeMembersComponent implements OnInit {
    */
   @Input() isFundersGroup: boolean;
 
+  /**
+   * Representing if managing a programme organizational manager group or not
+   */
+  @Input() isManagersGroup: boolean;
+
   groupBeingEdited: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
@@ -74,7 +79,9 @@ export class ProgrammeMembersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.isFundersGroup) {
+    if (this.isManagersGroup) {
+      this.helpMessageLabel = this.messagePrefix + '.members.managers-group-help';
+    } else if (this.isFundersGroup) {
       this.helpMessageLabel = this.messagePrefix + '.members.funders-group-help';
     } else {
       this.helpMessageLabel = this.messagePrefix + '.members.members-group-help';
@@ -156,8 +163,10 @@ export class ProgrammeMembersComponent implements OnInit {
 
   private getGroups(): Observable<string[]> {
     let groups$: Observable<string[]>;
-    if (this.isFundersGroup) {
+    if (this.isManagersGroup) {
       groups$ = this.projectGroupService.getInvitationProgrammeFunderOrganizationalManagersGroupByItem(this.relatedItem);
+    } else if (this.isFundersGroup) {
+      groups$ = this.projectGroupService.getInvitationProgrammeProjectFundersGroupByItem(this.relatedItem);
     } else {
       groups$ = of([this.targetGroup.uuid]);
     }

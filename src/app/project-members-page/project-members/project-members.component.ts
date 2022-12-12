@@ -47,6 +47,11 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
   @Input() isFundersGroup: boolean;
 
   /**
+   * Representing if managing a project members group or not
+   */
+  @Input() isMembersGroup: boolean;
+
+  /**
    * Representing if managing members of a funding
    */
   @Input() isFunding: boolean;
@@ -97,8 +102,10 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
       this.helpMessageLabel = 'project.manage.members.project.funders-group-help';
     } else if (this.isCoordinatorsGroup) {
       this.helpMessageLabel = this.isFunding ? 'project.manage.members.funding.coordinators-group-help' : 'project.manage.members.project.coordinators-group-help';
-    } else {
+    } else if (this.isMembersGroup) {
       this.helpMessageLabel = this.isFunding ? 'project.manage.members.funding.members-group-help' : 'project.manage.members.project.members-group-help';
+    } else {
+      this.helpMessageLabel = 'project.manage.members.project.readers-group-help';
     }
     this.groupService.editGroup(this.targetGroup);
     this.subs.push(
@@ -208,8 +215,10 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
         groups$ = this.projectGroupService.getInvitationProjectFundersGroupsByCommunity(this.relatedCommunity);
       } else if (this.isCoordinatorsGroup) {
         groups$ = this.projectGroupService.getInvitationProjectCoordinatorsAndMembersGroupsByCommunity(this.relatedCommunity);
-      } else {
+      } else if (this.isMembersGroup) {
         groups$ = this.projectGroupService.getInvitationProjectMembersGroupsByCommunity(this.relatedCommunity);
+      } else {
+        groups$ = this.projectGroupService.getInvitationProjectReadersGroupsByCommunity(this.relatedCommunity);
       }
     } else {
       if (this.isCoordinatorsGroup) {

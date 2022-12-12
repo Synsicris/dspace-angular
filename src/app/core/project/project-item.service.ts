@@ -11,7 +11,6 @@ import { SubmissionJsonPatchOperationsService } from '../submission/submission-j
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { RequestService } from '../data/request.service';
 import { Router } from '@angular/router';
-import { SearchService } from '../shared/search/search.service';
 import { SubmissionService } from '../../submission/submission.service';
 import { MetadataMap, MetadataValue } from '../shared/metadata.models';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
@@ -42,7 +41,6 @@ export class ProjectItemService {
     private rdbService: RemoteDataBuildService,
     private requestService: RequestService,
     private router: Router,
-    private searchService: SearchService,
     private submissionService: SubmissionService
   ) {
   }
