@@ -60,7 +60,7 @@ export class ObjectiveComponent implements OnInit {
 
   ngOnInit(): void {
     this.formConfig$ = this.impactPathwayService.getImpactPathwayTaskEditFormConfig(this.impactPathwayStep.type);
-    this.editItemDataService.checkEditModeByIDAndType(this.impactPathwayTask.id, environment.projects.projectsEntityEditMode).pipe(
+    this.editItemDataService.checkEditModeByIDAndType(this.impactPathwayTask.id, environment.impactPathway.impactPathwaysEditMode).pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEditButton$.next(canEdit);
