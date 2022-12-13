@@ -444,7 +444,8 @@ export class ItemDataService extends DataService<Item> {
         }
       }),
       delay(200),
-      mergeMap(() => this.executeEditItemPatch(itemId, editMode, pathName))
+      mergeMap(() => this.executeEditItemPatch(itemId, editMode, pathName)),
+      catchError((err) => createFailedRemoteDataObject$<Item>(err))
     );
   }
 
@@ -476,7 +477,8 @@ export class ItemDataService extends DataService<Item> {
           });
       }),
       delay(200),
-      mergeMap(() => this.executeEditItemPatch(itemId, editMode, pathName))
+      mergeMap(() => this.executeEditItemPatch(itemId, editMode, pathName)),
+      catchError((err) => createFailedRemoteDataObject$<Item>(err))
     );
   }
 
