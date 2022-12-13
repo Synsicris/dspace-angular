@@ -1,7 +1,13 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { BehaviorSubject, combineLatest as combineLatestObservable, Observable, Subscription } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest as combineLatestObservable,
+  combineLatest,
+  Observable,
+  Subscription
+} from 'rxjs';
 import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatCheckboxChange } from '@angular/material/checkbox';
@@ -56,6 +62,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
   private isTwoWayRelationSelected: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private canEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private projectsEntityEditMode: string;
 
   @Output() public selected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
   @Output() public deselected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
@@ -83,10 +90,21 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
       map((task: ImpactPathwayTask) => task.id === this.data.id),
     ).subscribe((hasFocus) => this.selectStatus.next(hasFocus));
 
-    this.editItemDataService.checkEditModeByIDAndType(this.data.id, environment.projects.projectsEntityEditMode).pipe(
+    const adminEdit$ = this.editItemDataService.checkEditModeByIDAndType(this.data.id, environment.projects.projectsEntityAdminEditMode).pipe(
       take(1)
-    ).subscribe((canEdit: boolean) => {
-      this.canEdit$.next(canEdit);
+    );
+    const userEdit$ = this.editItemDataService.checkEditModeByIDAndType(this.data.id, environment.projects.projectsEntityEditMode).pipe(
+      take(1)
+    );
+
+    combineLatest([adminEdit$, userEdit$])  .subscribe(([canAdminEdit, canUserEdit]: [boolean, boolean]) => {
+      if (canUserEdit) {
+        this.projectsEntityEditMode = environment.projects.projectsEntityEditMode;
+      } else if (canAdminEdit) {
+        this.projectsEntityEditMode = environment.projects.projectsEntityAdminEditMode;
+      }
+
+      this.canEdit$.next(canAdminEdit || canUserEdit);
     });
 
     this.subs.push(this.selectStatus.pipe(
@@ -173,7 +191,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
   public navigateToEditItemPage(): void {
     this.isRedirectingToEdit$.next(true);
-    this.router.navigate(['edit-items', this.data.id + ':' + environment.projects.projectsEntityEditMode]);
+    this.router.navigate(['edit-items', this.data.id + ':' + this.projectsEntityEditMode]);
     this.isRedirectingToEdit$.next(false);
   }
 

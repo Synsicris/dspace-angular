@@ -30,6 +30,24 @@ describe('ItemVersionsVisibilityModalComponent', () => {
     },
   });
 
+  const versionHistory = Object.assign(new VersionHistory(), {
+    id: '1',
+    draftVersion: true,
+  });
+
+  const version1 = Object.assign(new Version(), {
+    id: '1',
+    version: 1,
+    created: new Date(2020, 1, 1),
+    summary: 'first version',
+    versionhistory: createSuccessfulRemoteDataObject$(versionHistory),
+    _links: {
+      self: {
+        href: 'version2-url',
+      },
+    },
+  });
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ItemVersionsVisibilityModalComponent],
