@@ -185,6 +185,14 @@ export class ProjectMembersPageComponent implements OnInit {
     });
 
     projectCommunity$.pipe(
+      tap(() => {
+        if (this.isFunding) {
+          this.readersGroupInit$.next(true);
+        }
+      }),
+      filter(() => {
+        return !this.isFunding;
+      }),
       switchMap((community: Community) => {
         return this.projectGroupService.getInvitationProjectReadersGroupsByCommunity(community);
       }),
