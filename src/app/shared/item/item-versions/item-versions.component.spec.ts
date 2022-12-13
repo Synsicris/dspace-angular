@@ -395,7 +395,7 @@ describe('ItemVersionsComponent', () => {
 
     beforeEach(() => {
       component.isCoordinator = true;
-      component.isFounder = false;
+      component.isFunder = false;
       component.canShowCreateVersion = true;
       component.displayActions = true;
       versionHistoryServiceSpy.getVersions.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([version1, version2, version3, version4])));
@@ -444,7 +444,7 @@ describe('ItemVersionsComponent', () => {
 
       beforeEach(() => {
         component.isCoordinator = true;
-        component.isFounder = false;
+        component.isFunder = false;
         component.canShowCreateVersion = true;
 
         modalService = (component as any).modalService;
@@ -519,7 +519,7 @@ describe('ItemVersionsComponent', () => {
     describe('when isFounder is true', () => {
       beforeEach(() => {
         component.isCoordinator = false;
-        component.isFounder = true;
+        component.isFunder = true;
         versionHistoryServiceSpy.getVersions.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([version1, version2, version3, version4])));
 
         modalService = (component as any).modalService;

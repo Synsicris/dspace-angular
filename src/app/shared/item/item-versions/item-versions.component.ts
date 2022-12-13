@@ -20,7 +20,7 @@ import { VersionHistoryDataService } from '../../../core/data/version-history-da
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
 import { AlertType } from '../../alert/aletr-type';
 import { followLink } from '../../utils/follow-link-config.model';
-import { hasValue, hasValueOperator } from '../../empty.util';
+import { hasValue, hasValueOperator, isNull, isUndefined } from '../../empty.util';
 import { PaginationService } from '../../../core/pagination/pagination.service';
 import {
   getItemEditVersionhistoryRoute,
@@ -47,6 +47,7 @@ import { ConfirmationModalComponent } from '../../confirmation-modal/confirmatio
 import {
   ItemVersionsVisibilityModalComponent
 } from './item-versions-visibility-modal/item-versions-visibility-modal.component';
+import { MetadataMap, MetadataValue } from '../../../core/shared/metadata.models';
 
 @Component({
   selector: 'ds-item-versions',
@@ -91,9 +92,9 @@ export class ItemVersionsComponent implements OnInit {
   @Input() isCoordinator = false;
 
   /**
-   * Whether user is founder
+   * Whether user is funder
    */
-  @Input() isFounder = false;
+  @Input() isFunder = false;
 
   /**
    * Whether user is founder
@@ -191,6 +192,8 @@ export class ItemVersionsComponent implements OnInit {
   canCreateVersion$: Observable<boolean>;
   createVersionTitle$: Observable<string>;
 
+  processingEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  processingDelete$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   /**
    * Get version edit mode from envoirment
    */
@@ -305,6 +308,7 @@ export class ItemVersionsComponent implements OnInit {
    * @param redirectToLatest force the redirect to the latest version in the history
    */
   deleteVersion(version, redirectToLatest: boolean): void {
+    this.processingDelete$.next(true);
     const successMessageKey = 'item.version.delete.notification.success';
     const failureMessageKey = 'item.version.delete.notification.failure';
     const versionNumber = version.version;
@@ -318,7 +322,7 @@ export class ItemVersionsComponent implements OnInit {
     // On modal submit/dismiss
     activeModal.result.then((result) => {
 
-      version.isLoading = true;
+      version.isLoadingDelete = true;
       versionItem$.pipe(
         getFirstSucceededRemoteDataPayload<Item>(),
         // Retrieve version history and invalidate cache
@@ -341,7 +345,7 @@ export class ItemVersionsComponent implements OnInit {
           this.versionHistoryService.getLatestVersionItemFromHistory$(versionHistory).pipe(
             tap(() => {
               this.getAllVersions(of(versionHistory));
-              version.isLoading = false;
+              version.isLoadingDelete = false;
             }),
           )
         ])),
@@ -352,6 +356,7 @@ export class ItemVersionsComponent implements OnInit {
         } else {
           this.notificationsService.error(null, this.translateService.get(failureMessageKey, { 'version': versionNumber }));
         }
+        this.processingDelete$.next(false);
         if (redirectToLatest) {
           const path = getItemEditVersionhistoryRoute(newLatestVersionItem);
           this.router.navigateByUrl(path);
@@ -580,18 +585,21 @@ export class ItemVersionsComponent implements OnInit {
    * @param versionItem the version item which metadata belongs to
    * @param metadata the metadata being toggled
    */
-  updateItemByMetadata(versionItem: Item, version, metadata, value) {
-    this.itemService.updateItemMetadata(
+  updateItemByMetadata(versionItem: Item, version, metadata: MetadataMap) {
+    this.itemService.updateMultipleItemMetadata(
       versionItem.id,
       this.versioningEditMode,
       this.getVersionPath(),
-      metadata,
-      0,
-      { value: value }
-    ).subscribe((item) => {
-      version.isLoading = false;
-      const type = this.translateService.instant(metadata);
-      this.notificationsService.success(null, this.translateService.get('item.version.history.table.successfull', { type: type }));
+      metadata
+    ).subscribe((itemRD: RemoteData<Item>) => {
+      if (itemRD.hasSucceeded) {
+        this.notificationsService.success(null, this.translateService.get('item.version.history.table.success'));
+      } else {
+        this.notificationsService.error(null, this.translateService.get('item.version.history.table.error'));
+      }
+      version.isLoadingVisible = false;
+      version.isLoadingOfficial = false;
+
     });
   }
 
@@ -607,20 +615,52 @@ export class ItemVersionsComponent implements OnInit {
    * @param versionItem the version item which metadata belongs to
    */
   setVisible(versionItem: Item, version): void {
-    console.log(version);
-    version.isLoading = true;
+
     const modalRef = this.modalService.open(ItemVersionsVisibilityModalComponent);
     modalRef.componentInstance.version = version;
     modalRef.result.then((result) => {
       if (result) {
+        version.isLoadingVisible = true;
+        const metadataMap = Object.create({});
+        metadataMap['synsicris.version.visible'] = [
+          Object.assign(new MetadataValue(), { value: true })
+        ];
+
         if (result.official) {
-          this.updateItemByMetadata(versionItem, version, 'synsicris.version.official', true);
+          metadataMap['synsicris.version.official'] = [
+            Object.assign(new MetadataValue(), { value: true })
+          ];
         }
-        this.updateItemByMetadata(versionItem, version, 'synsicris.version.visible', true);
+        this.updateItemByMetadata(versionItem, version, metadataMap);
       }
     }, () => {
-      version.isLoading = false;
+      version.isLoadingVisible = false;
     });
+  }
+
+  /**
+   * Check if the version Item is visible
+   * @param versionItem the version item which metadata belongs to
+   */
+  isVersionVisible(versionItem: Item): boolean {
+    return versionItem?.firstMetadataValue('synsicris.version.visible') === 'true';
+  }
+
+  /**
+   * Check if the version Item is official
+   * @param versionItem the version item which metadata belongs to
+   */
+  isVersionOfficial(versionItem: Item): boolean {
+    return versionItem?.firstMetadataValue('synsicris.version.official') === 'true';
+  }
+
+  /**
+   * Check if the official metadata is not already set
+   * @param versionItem the version item which metadata belongs to
+   */
+  hasNoOfficialMetadata(versionItem: Item): boolean {
+    return isUndefined(versionItem?.firstMetadataValue('synsicris.version.official'))
+      || isNull(versionItem?.firstMetadataValue('synsicris.version.official'));
   }
 
   /**
@@ -632,8 +672,7 @@ export class ItemVersionsComponent implements OnInit {
     const value = versionItem.firstMetadataValue('synsicris.version.official') !== 'true';
     const info = versionItem.firstMetadataValue('synsicris.version.official') === 'true' ? 'not-official' : 'official';
 
-    if (this.isFounder) {
-      version.isLoading = true;
+    if (this.isFunder) {
       const modalRef = this.modalService.open(ConfirmationModalComponent);
       modalRef.componentInstance.dso = versionItem;
       modalRef.componentInstance.headerLabel = 'confirmation-modal.version.official.header';
@@ -641,11 +680,17 @@ export class ItemVersionsComponent implements OnInit {
       modalRef.componentInstance.cancelLabel = 'confirmation-modal.version.official.cancel';
       modalRef.componentInstance.confirmLabel = 'confirmation-modal.version.official.confirm';
       modalRef.componentInstance.confirmIcon = 'fas fa-check';
+      modalRef.componentInstance.brandColor = 'warning';
       const resp$ = modalRef.componentInstance.response.pipe(map((confirm: boolean) => {
         if (confirm) {
-          return this.updateItemByMetadata(versionItem, version, 'synsicris.version.official', value);
+          version.isLoadingOfficial = true;
+          const metadataMap = Object.create({});
+          metadataMap['synsicris.version.official'] = [
+            Object.assign(new MetadataValue(), { value: value })
+          ];
+          return this.updateItemByMetadata(versionItem, version, metadataMap);
         } else {
-          version.isLoading = false;
+          version.isLoadingOfficial = false;
           return null;
         }
       }));
@@ -655,37 +700,14 @@ export class ItemVersionsComponent implements OnInit {
   }
 
   /**
-   * Check if the version Item is visible
-   * @param versionItem the version item which metadata belongs to
-   */
-  isVisible(versionItem): Observable<boolean> {
-    return versionItem.pipe(
-      getFirstSucceededRemoteDataPayload(),
-      map((item: Item) => {
-        return item.firstMetadataValue('synsicris.version.visible') === 'true';
-      })
-    );
-  }
-
-  /**
-   * Check if the version Item is official
-   * @param versionItem the version item which metadata belongs to
-   */
-  isOfficial(versionItem): Observable<boolean> {
-    return versionItem.pipe(
-      getFirstSucceededRemoteDataPayload(),
-      map((item: Item) => {
-        return item.firstMetadataValue('synsicris.version.official') === 'true';
-      })
-    );
-  }
-
-  /**
    * Applies changes to note currently being edited
    */
   onNoteSubmit(versionItem, version) {
-    console.log(versionItem, version, 'synsicris.version.notes', this.versionBeingEditedNote);
-    this.updateItemByMetadata(versionItem, version, 'synsicris.version.notes', this.versionBeingEditedNote);
+    const metadataMap = Object.create({});
+    metadataMap['synsicris.version.notes'] = [
+      Object.assign(new MetadataValue(), { value: this.versionBeingEditedNote })
+    ];
+    this.updateItemByMetadata(versionItem, version, metadataMap);
     this.disableNoteEditing();
   }
 
