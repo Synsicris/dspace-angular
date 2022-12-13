@@ -57,6 +57,11 @@ export class ProjectMembersPageComponent implements OnInit {
   public membersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * A boolean representing if readers group is initialized
+   */
+  public readersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * A boolean representing if all groups are initialized
    */
   public allGroupsInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -65,6 +70,11 @@ export class ProjectMembersPageComponent implements OnInit {
    * The project/funding edit group
    */
   public membersGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
+
+  /**
+   * The project readers group
+   */
+  public readersGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
 
   /**
    * The project/funding community
@@ -174,13 +184,36 @@ export class ProjectMembersPageComponent implements OnInit {
       }
     });
 
+    projectCommunity$.pipe(
+      tap(() => {
+        if (this.isFunding) {
+          this.readersGroupInit$.next(true);
+        }
+      }),
+      filter(() => {
+        return !this.isFunding;
+      }),
+      switchMap((community: Community) => {
+        return this.projectGroupService.getInvitationProjectReadersGroupsByCommunity(community);
+      }),
+      map((groups: string[]) => groups[0]),
+      switchMap((groupID) => this.groupService.findById(groupID)),
+      getFirstCompletedRemoteData()
+    ).subscribe((groupRD: RemoteData<Group>) => {
+      if (groupRD.hasSucceeded) {
+        this.readersGroup$.next(groupRD.payload);
+        this.readersGroupInit$.next(true);
+      }
+    });
+
     combineLatest([
       this.fundersGroupInit$.asObservable(),
       this.coordinatorsGroupInit$.asObservable(),
-      this.membersGroupInit$.asObservable()
+      this.membersGroupInit$.asObservable(),
+      this.readersGroupInit$.asObservable()
     ]).pipe(
-      map(([fundersInit, coordinatorsInit, membersInit]) => {
-        return fundersInit && coordinatorsInit && membersInit;
+      map(([fundersInit, coordinatorsInit, membersInit, readersInit ]) => {
+        return fundersInit && coordinatorsInit && membersInit && readersInit;
       }),
       distinctUntilChanged()
     ).subscribe((isInit) => {

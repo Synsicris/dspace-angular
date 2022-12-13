@@ -129,6 +129,10 @@ export class ProjectGroupService {
     return this.getProjectMembersGroupUUIDByCommunity(project);
   }
 
+  getInvitationProjectReadersGroupsByCommunity(project: Community): Observable<string[]> {
+    return this.getProjectReadersGroupUUIDByCommunity(project);
+  }
+
   getAllFundingGroupsByCommunity(funding: Community): Observable<string[]> {
     const query = FUNDING_GROUP_TEMPLATE.replace('%s', funding.uuid);
     return this.getGroupsByQuery(query);

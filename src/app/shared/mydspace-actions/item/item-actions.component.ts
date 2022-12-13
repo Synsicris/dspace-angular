@@ -1,7 +1,7 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -40,7 +40,7 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   /**
    * A boolean representing if edit permission button can be shown
    */
-  @Input() showEditPermission = true;
+  @Input() showEditPermission = false;
 
   /**
    * A boolean representing if component is redirecting to edit page
@@ -61,9 +61,9 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   private canEditGrants$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
-   * A boolean representing if item is a version of original item
+   * The edit mode to use
    */
-  private isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private projectsEntityEditMode: string;
 
   /**
    * Initialize instance variables
@@ -94,19 +94,33 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
 
 
   ngOnInit(): void {
-    this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
-      take(1)
-    ).subscribe((canEdit: boolean) => {
-      this.canEdit$.next(canEdit);
-    });
+    if (this.projectVersionService.isVersionOfAnItem(this.object)) {
+      this.canEdit$.next(false);
+      this.canEditGrants$.next(false);
+    } else {
+      const adminEdit$ = this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityAdminEditMode).pipe(
+        take(1)
+      );
+      const userEdit$ = this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
+        take(1)
+      );
 
-    this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.object.self, undefined).pipe(
-      take(1)
-    ).subscribe((canEdit: boolean) => {
-      this.canEditGrants$.next(canEdit);
-    });
+      combineLatest([adminEdit$, userEdit$])  .subscribe(([canAdminEdit, canUserEdit]: [boolean, boolean]) => {
+        if (canUserEdit) {
+          this.projectsEntityEditMode = environment.projects.projectsEntityEditMode;
+        } else if (canAdminEdit) {
+          this.projectsEntityEditMode = environment.projects.projectsEntityAdminEditMode;
+        }
 
-    this.isVersionOfAnItem$.next(this.projectVersionService.isVersionOfAnItem(this.object));
+        this.canEdit$.next(canAdminEdit || canUserEdit);
+      });
+
+      this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.object.self, undefined).pipe(
+        take(1)
+      ).subscribe((canEdit: boolean) => {
+        this.canEditGrants$.next(canEdit);
+      });
+    }
   }
 
   /**
@@ -133,13 +147,6 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   }
 
   /**
-   * Check if current item is version of an item
-   */
-  isVersionOfAnItem(): Observable<boolean> {
-    return this.isVersionOfAnItem$.asObservable();
-  }
-
-  /**
    * Navigate to edit item page
    */
   public navigateToEditItemPage(): void {
@@ -156,7 +163,8 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   }
 
   private isEditModeAllowed(mode: EditItemMode) {
-    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode || mode.name === 'OWNER';
+    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode
+      || mode.name === environment.projects.projectsEntityAdminEditMode || mode.name === 'OWNER';
   }
 
   /**

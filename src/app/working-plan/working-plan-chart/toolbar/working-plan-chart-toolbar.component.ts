@@ -91,7 +91,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
     }, () => null);
     modalRef.componentInstance.formConfig = this.workingPlanService.getWorkpackageFormConfig();
     modalRef.componentInstance.formHeader = this.workingPlanService.getWorkpackageFormHeader();
-    modalRef.componentInstance.searchMessageInfoKey = this.workingPlanService.getWorkingPlanTaskSearchHeader();
+    modalRef.componentInstance.searchMessageInfoKey = this.workingPlanService.getWorkingPlanSearchHeader();
     modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
     modalRef.componentInstance.excludeListId = [];
     modalRef.componentInstance.hasSearch = true;

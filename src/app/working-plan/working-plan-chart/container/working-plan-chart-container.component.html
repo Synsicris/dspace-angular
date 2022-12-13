@@ -99,7 +99,7 @@
                     class="btn btn-xs btn-link p-0"
                     title="{{'working-plan.chart.button.add' | translate}}"
                     [disabled]="(compareMode | async) || isVersionOf"
-                    (click)="addChildStep(node)">
+                    (click)="addChildStep(node); $event.stopImmediatePropagation();">
               <i class="fas fa-plus-circle"></i>
             </button>
           </div>
@@ -121,7 +121,7 @@
                 <i class="fas fa-not-equal"></i>
               </button>
               <ds-working-plan-chart-item-edit-button [compareMode]="compareMode"
-                                                      [isVersionOfAnItem]="isVersionOf">
+                                                      [isVersionOfAnItem]="isVersionOf"
                                                       [node]="node"></ds-working-plan-chart-item-edit-button>
             </div>
           </div>
