@@ -47,6 +47,7 @@ describe('ViewVersionBadgesComponent', () => {
   const item1 = Object.assign(new Item(), {
     uuid: 'item-identifier-3',
     handle: '123456789/3',
+    entityType: 'Project',
     metadata: {
       'synsicris.version.visible': [
         {
@@ -64,6 +65,7 @@ describe('ViewVersionBadgesComponent', () => {
   const item2 = Object.assign(new Item(), {
     uuid: 'item-identifier-3',
     handle: '123456789/3',
+    entityType: 'Project',
     metadata: {
       'synsicris.version.official': [
         {
@@ -101,7 +103,6 @@ describe('ViewVersionBadgesComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewVersionBadgesComponent);
     component = fixture.componentInstance;
-    component.version = null;
     component.item = null;
     fixture.detectChanges();
   });
@@ -123,7 +124,6 @@ describe('ViewVersionBadgesComponent', () => {
   describe('When version and item are present', () => {
 
     beforeEach(() => {
-      component.version = version1;
       component.item = item1;
       fixture.detectChanges();
     });
@@ -136,9 +136,6 @@ describe('ViewVersionBadgesComponent', () => {
     });
 
     it('When Version is within 4 weeks Should show class badge-primary', () => {
-      component.version = version2;
-      component.ngOnChanges({ version: { currentValue: version2 } });
-      fixture.detectChanges();
       const infoBadge = fixture.debugElement.query(By.css('span[data-test="version-info-badge"]'));
       const arrClass = [...infoBadge.nativeElement.classList];
       expect(arrClass.includes('badge-primary')).toBeTruthy();
@@ -146,9 +143,6 @@ describe('ViewVersionBadgesComponent', () => {
     });
 
     it('When Version is not within 4 weeks Should show class badge-info', () => {
-      component.version = version1;
-      component.ngOnChanges({ version: { currentValue: version1 } });
-      fixture.detectChanges();
       const infoBadge = fixture.debugElement.query(By.css('span[data-test="version-info-badge"]'));
       const arrClass = [...infoBadge.nativeElement.classList];
       expect(arrClass.includes('badge-info')).toBeTruthy();

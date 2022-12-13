@@ -39,6 +39,11 @@ export class ImpactPathWayComponent implements OnInit {
 
   @Input() public impactPathway: ImpactPathway;
 
+  /**
+   * The impact-pathway item
+   */
+  @Input() impactPathWayItem: Item;
+
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
 
   formConfig$: Observable<SubmissionFormModel>;

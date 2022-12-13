@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { combineLatest, from, Observable, of } from 'rxjs';
-import { concatMap, filter, map, mergeMap, reduce, switchMap, tap } from 'rxjs/operators';
+import { concatMap, map, mergeMap, reduce, switchMap } from 'rxjs/operators';
 import { differenceWith, findIndex, unionWith } from 'lodash';
 
 import { RelationshipService } from '../data/relationship.service';
@@ -24,7 +24,7 @@ import { VERSION_UNIQUE_ID } from './project-data.service';
 import { SearchService } from '../shared/search/search.service';
 import { environment } from '../../../environments/environment';
 import { SearchResult } from '../../shared/search/models/search-result.model';
-import { createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
+import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
 
 export enum ComparedVersionItemStatus {
   Changed = 'changed',
@@ -57,9 +57,10 @@ export class ProjectVersionService {
     protected versionHistoryService: VersionHistoryDataService,
   ) { }
 
-  public findLastVisibleVersionByItemID(itemId: string): Observable<RemoteData<Item>> {
+  public findLastVisibleItemVersionByItemID(itemId: string): Observable<RemoteData<Item>> {
     const searchOptions = new PaginatedSearchOptions({
       configuration: this.lastVersionDiscoveryConfig,
+      forcedEmbeddedKeys: ['version'],
       scope: itemId
     });
 
@@ -76,7 +77,7 @@ export class ProjectVersionService {
   }
 
 
-  public getLastVisibleVersionByItemID(itemId: string): Observable<RemoteData<Version>> {
+  public findLastVisibleVersionByItemID(itemId: string): Observable<RemoteData<Version>> {
     const searchOptions = new PaginatedSearchOptions({
       configuration: this.lastVersionDiscoveryConfig,
       forcedEmbeddedKeys: ['version'],
@@ -95,6 +96,20 @@ export class ProjectVersionService {
       })
     );
   }
+
+  public getVersionByItemId(itemId: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<RemoteData<Version>> {
+    return this.itemService.findById(itemId, useCachedVersionIfAvailable, reRequestOnStale, followLink('version')).pipe(
+      getFirstCompletedRemoteData(),
+      switchMap((itemRD) => {
+        if (itemRD.hasSucceeded) {
+          return itemRD.payload.version;
+        } else {
+          return createFailedRemoteDataObject$<Version>(null);
+        }
+      })
+    );
+  }
+
   /**
    * Retrieve all item version for the given item
    *

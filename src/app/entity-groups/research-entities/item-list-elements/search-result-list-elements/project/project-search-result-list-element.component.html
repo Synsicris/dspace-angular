@@ -6,7 +6,8 @@
     <span *ngIf="linkType == linkTypes.None" class="lead item-list-title dont-break-out d-block"
         [innerHTML]="dsoTitle"></span>
 
-    <ds-view-version-badges [version]="(getLastVisibleVersionByItemID() | async)" [item]="dso"></ds-view-version-badges>
+    <ds-view-version-badges *ngIf="(item$ | async)"
+                            [item]="(item$ | async)"></ds-view-version-badges>
 
     <!--<span class="text-muted">-->
     <!--<ds-truncatable-part [id]="dso.id" [minLines]="1">-->

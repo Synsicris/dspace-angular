@@ -6982,11 +6982,15 @@
 
   "treeview.load-more": "Load more",
 
+  "view.version.badges.date": "Date",
+
   "view.version.badges.official": "Official",
 
   "view.version.badges.nonOfficial": "Non Official",
 
   "view.version.badges.noSummary": "No Summary",
+
+  "view.version.badges.version": "Version",
 
   "vocabulary.import-external.preview.title.Product": "Product Preview",
 

@@ -33,6 +33,11 @@ export class ImpactPathwayPageComponent implements OnInit {
   impactPathwayId$: Observable<string>;
 
   /**
+   * The impact-pathway item
+   */
+  impactPathWayItem$: Observable<Item>;
+
+  /**
    * The project community's id
    */
   projectCommunityId$: Observable<string>;
@@ -60,6 +65,10 @@ export class ImpactPathwayPageComponent implements OnInit {
       redirectOn4xx(this.router, this.authService),
       filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && !itemRD.isResponsePending),
       take(1)
+    );
+
+    this.impactPathWayItem$ = impactPathWayItem$.pipe(
+      map((itemRD: RemoteData<Item>) => itemRD.payload)
     );
 
     this.impactPathwayId$ = impactPathWayItem$.pipe(
