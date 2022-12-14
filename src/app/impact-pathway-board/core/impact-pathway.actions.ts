@@ -86,14 +86,14 @@ export const ImpactPathwayActionTypes = {
 /* tslint:disable:max-classes-per-file */
 
 /**
- * An ngrx action to clear the impact pathway state
+ * A ngrx action to clear the impact pathway state
  */
 export class ClearImpactPathwayAction implements Action {
   type = ImpactPathwayActionTypes.CLEAR_IMPACT_PATHWAY;
 }
 
 /**
- * An ngrx action to generate a impact pathway objects
+ * A ngrx action to generate a impact pathway objects
  */
 export class GenerateImpactPathwayAction implements Action {
   type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY;
@@ -116,7 +116,7 @@ export class GenerateImpactPathwayAction implements Action {
 }
 
 /**
- * An ngrx action for generate success
+ * A ngrx action for generate success
  */
 export class GenerateImpactPathwaySuccessAction implements Action {
   type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUCCESS;
@@ -139,7 +139,7 @@ export class GenerateImpactPathwaySuccessAction implements Action {
 }
 
 /**
- * An ngrx action for generate error
+ * A ngrx action for generate error
  */
 export class GenerateImpactPathwayErrorAction implements Action {
   type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_ERROR;
@@ -147,7 +147,7 @@ export class GenerateImpactPathwayErrorAction implements Action {
 }
 
 /**
- * An ngrx action to init impact pathway's model objects
+ * A ngrx action to init impact pathway's model objects
  */
 export class InitImpactPathwayAction implements Action {
   type = ImpactPathwayActionTypes.INIT_IMPACT_PATHWAY;
@@ -172,7 +172,7 @@ export class InitImpactPathwayAction implements Action {
 
 
 /**
- * An ngrx action for init success
+ * A ngrx action for init success
  */
 export class StopCompareImpactPathwayAction implements Action {
   type = ImpactPathwayActionTypes.STOP_COMPARE_IMPACT_PATHWAY;
@@ -192,7 +192,7 @@ export class StopCompareImpactPathwayAction implements Action {
 }
 
 /**
- * An ngrx action for init success
+ * A ngrx action for init success
  */
 export class InitImpactPathwaySuccessAction implements Action {
   type = ImpactPathwayActionTypes.INIT_IMPACT_PATHWAY_SUCCESS;
@@ -215,14 +215,14 @@ export class InitImpactPathwaySuccessAction implements Action {
 }
 
 /**
- * An ngrx action for init error
+ * A ngrx action for init error
  */
 export class InitImpactPathwayErrorAction implements Action {
   type = ImpactPathwayActionTypes.INIT_IMPACT_PATHWAY_ERROR;
 }
 
 /**
- * An ngrx action to generate a impact pathway objects
+ * A ngrx action to generate a impact pathway objects
  */
 export class GenerateImpactPathwayTaskAction implements Action {
   type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK;
@@ -254,7 +254,7 @@ export class GenerateImpactPathwayTaskAction implements Action {
 }
 
 /**
- * An ngrx action for generate success
+ * A ngrx action for generate success
  */
 export class GenerateImpactPathwayTaskSuccessAction implements Action {
   type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK_SUCCESS;
@@ -280,14 +280,14 @@ export class GenerateImpactPathwayTaskSuccessAction implements Action {
 }
 
 /**
- * An ngrx action for generate error
+ * A ngrx action for generate error
  */
 export class GenerateImpactPathwayTaskErrorAction implements Action {
   type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK_ERROR;
 }
 
 /**
- * An ngrx action to generate a impact pathway objects
+ * A ngrx action to generate a impact pathway objects
  */
 export class GenerateImpactPathwaySubTaskAction implements Action {
   type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUB_TASK;
@@ -329,7 +329,7 @@ export class GenerateImpactPathwaySubTaskAction implements Action {
 }
 
 /**
- * An ngrx action for generate success
+ * A ngrx action for generate success
  */
 export class GenerateImpactPathwaySubTaskSuccessAction implements Action {
   type = ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUB_TASK_SUCCESS;
@@ -358,7 +358,7 @@ export class GenerateImpactPathwaySubTaskSuccessAction implements Action {
 }
 
 /**
- * An ngrx action for generate success
+ * A ngrx action for generate success
  */
 export class AddImpactPathwayTaskAction implements Action {
   type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK;
@@ -384,7 +384,7 @@ export class AddImpactPathwayTaskAction implements Action {
 }
 
 /**
- * An ngrx action for generate success
+ * A ngrx action for generate success
  */
 export class AddImpactPathwayTaskSuccessAction implements Action {
   type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_SUCCESS;
@@ -410,14 +410,14 @@ export class AddImpactPathwayTaskSuccessAction implements Action {
 }
 
 /**
- * An ngrx action for generate error
+ * A ngrx action for generate error
  */
 export class AddImpactPathwayTaskErrorAction implements Action {
   type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_ERROR;
 }
 
 /**
- * An ngrx action for generate success
+ * A ngrx action for generate success
  */
 export class AddImpactPathwaySubTaskAction implements Action {
   type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK;
@@ -446,7 +446,7 @@ export class AddImpactPathwaySubTaskAction implements Action {
 }
 
 /**
- * An ngrx action for generate success
+ * A ngrx action for generate success
  */
 export class AddImpactPathwaySubTaskSuccessAction implements Action {
   type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS;
@@ -475,14 +475,14 @@ export class AddImpactPathwaySubTaskSuccessAction implements Action {
 }
 
 /**
- * An ngrx action for generate error
+ * A ngrx action for generate error
  */
 export class AddImpactPathwaySubTaskErrorAction implements Action {
   type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK_ERROR;
 }
 
 /**
- * An ngrx action for moving task
+ * A ngrx action for moving task
  */
 export class MoveImpactPathwaySubTaskAction implements Action {
   type = ImpactPathwayActionTypes.MOVE_IMPACT_PATHWAY_SUB_TASK;
@@ -520,14 +520,14 @@ export class MoveImpactPathwaySubTaskAction implements Action {
 }
 
 /**
- * An ngrx action for move success
+ * A ngrx action for move success
  */
 export class MoveImpactPathwaySubTaskSuccessAction implements Action {
   type = ImpactPathwayActionTypes.MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS;
 }
 
 /**
- * An ngrx action to restore task moving
+ * A ngrx action to restore task moving
  */
 export class MoveImpactPathwaySubTaskErrorAction implements Action {
   type = ImpactPathwayActionTypes.MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR;
@@ -566,7 +566,7 @@ export class MoveImpactPathwaySubTaskErrorAction implements Action {
 
 
 /**
- * An ngrx action for ordering tasks
+ * A ngrx action for ordering tasks
  */
 export class OrderImpactPathwayTasksAction implements Action {
   type = ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_TASKS;
@@ -600,14 +600,14 @@ export class OrderImpactPathwayTasksAction implements Action {
 }
 
 /**
- * An ngrx action for ordering success
+ * A ngrx action for ordering success
  */
 export class OrderImpactPathwayTasksSuccessAction implements Action {
   type = ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_TASKS_SUCCESS;
 }
 
 /**
- * An ngrx action for ordering tasks error
+ * A ngrx action for ordering tasks error
  */
 export class OrderImpactPathwayTasksErrorAction implements Action {
   type = ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_TASKS_ERROR;
@@ -637,7 +637,7 @@ export class OrderImpactPathwayTasksErrorAction implements Action {
 }
 
 /**
- * An ngrx action for ordering subtasks
+ * A ngrx action for ordering subtasks
  */
 export class OrderImpactPathwaySubTasksAction implements Action {
   type = ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_SUB_TASKS;
@@ -675,14 +675,14 @@ export class OrderImpactPathwaySubTasksAction implements Action {
 }
 
 /**
- * An ngrx action for ordering success
+ * A ngrx action for ordering success
  */
 export class OrderImpactPathwaySubTasksSuccessAction implements Action {
   type = ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_SUB_TASKS_SUCCESS;
 }
 
 /**
- * An ngrx action for ordering tasks error
+ * A ngrx action for ordering tasks error
  */
 export class OrderImpactPathwaySubTasksErrorAction implements Action {
   type = ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_SUB_TASKS_ERROR;
@@ -716,7 +716,7 @@ export class OrderImpactPathwaySubTasksErrorAction implements Action {
 }
 
 /**
- * An ngrx action for removing task
+ * A ngrx action for removing task
  */
 export class RemoveImpactPathwayAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY;
@@ -739,7 +739,7 @@ export class RemoveImpactPathwayAction implements Action {
 }
 
 /**
- * An ngrx action for remove success
+ * A ngrx action for remove success
  */
 export class RemoveImpactPathwaySuccessAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUCCESS;
@@ -762,14 +762,14 @@ export class RemoveImpactPathwaySuccessAction implements Action {
 }
 
 /**
- * An ngrx action for remove error
+ * A ngrx action for remove error
  */
 export class RemoveImpactPathwayErrorAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_ERROR;
 }
 
 /**
- * An ngrx action for removing task
+ * A ngrx action for removing task
  */
 export class RemoveImpactPathwayStepAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_STEP;
@@ -792,7 +792,7 @@ export class RemoveImpactPathwayStepAction implements Action {
 }
 
 /**
- * An ngrx action for remove success
+ * A ngrx action for remove success
  */
 export class RemoveImpactPathwayStepSuccessAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_STEP_SUCCESS;
@@ -815,14 +815,14 @@ export class RemoveImpactPathwayStepSuccessAction implements Action {
 }
 
 /**
- * An ngrx action for remove error
+ * A ngrx action for remove error
  */
 export class RemoveImpactPathwayStepErrorAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_STEP_ERROR;
 }
 
 /**
- * An ngrx action for removing task
+ * A ngrx action for removing task
  */
 export class RemoveImpactPathwayTaskAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK;
@@ -851,7 +851,7 @@ export class RemoveImpactPathwayTaskAction implements Action {
 }
 
 /**
- * An ngrx action for remove success
+ * A ngrx action for remove success
  */
 export class RemoveImpactPathwayTaskSuccessAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_SUCCESS;
@@ -877,14 +877,14 @@ export class RemoveImpactPathwayTaskSuccessAction implements Action {
 }
 
 /**
- * An ngrx action for remove error
+ * A ngrx action for remove error
  */
 export class RemoveImpactPathwayTaskErrorAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_ERROR;
 }
 
 /**
- * An ngrx action for removing task
+ * A ngrx action for removing task
  */
 export class RemoveImpactPathwaySubTaskAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUB_TASK;
@@ -916,7 +916,7 @@ export class RemoveImpactPathwaySubTaskAction implements Action {
 }
 
 /**
- * An ngrx action for remove success
+ * A ngrx action for remove success
  */
 export class RemoveImpactPathwaySubTaskSuccessAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS;
@@ -945,7 +945,7 @@ export class RemoveImpactPathwaySubTaskSuccessAction implements Action {
 }
 
 /**
- * An ngrx action to patch a ImpactPathway's metadata
+ * A ngrx action to patch a ImpactPathway's metadata
  */
 export class PatchImpactPathwayMetadataAction implements Action {
   type = ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_METADATA;
@@ -982,7 +982,7 @@ export class PatchImpactPathwayMetadataAction implements Action {
 }
 
 /**
- * An ngrx action to patch a ImpactPathway's metadata
+ * A ngrx action to patch a ImpactPathway's metadata
  */
 export class PatchImpactPathwayMetadataSuccessAction implements Action {
   type = ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_METADATA_SUCCESS;
@@ -1011,14 +1011,14 @@ export class PatchImpactPathwayMetadataSuccessAction implements Action {
 }
 
 /**
- * An ngrx action for patch error
+ * A ngrx action for patch error
  */
 export class PatchImpactPathwayMetadataErrorAction implements Action {
   type = ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_METADATA_ERROR;
 }
 
 /**
- * An ngrx action to patch a task's metadata
+ * A ngrx action to patch a task's metadata
  */
 export class PatchImpactPathwayTaskMetadataAction implements Action {
   type = ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_TASK_METADATA;
@@ -1067,7 +1067,7 @@ export class PatchImpactPathwayTaskMetadataAction implements Action {
 }
 
 /**
- * An ngrx action to patch a task's metadata
+ * A ngrx action to patch a task's metadata
  */
 export class PatchImpactPathwayTaskMetadataSuccessAction implements Action {
   type = ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_TASK_METADATA_SUCCESS;
@@ -1108,14 +1108,14 @@ export class PatchImpactPathwayTaskMetadataSuccessAction implements Action {
 }
 
 /**
- * An ngrx action for patch error
+ * A ngrx action for patch error
  */
 export class PatchImpactPathwayTaskMetadataErrorAction implements Action {
   type = ImpactPathwayActionTypes.PATCH_IMPACT_PATHWAY_TASK_METADATA_ERROR;
 }
 
 /**
- * An ngrx action to update a task
+ * A ngrx action to update a task
  */
 export class UpdateImpactPathwayAction implements Action {
   type = ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY;
@@ -1138,7 +1138,7 @@ export class UpdateImpactPathwayAction implements Action {
 }
 
 /**
- * An ngrx action to update a task
+ * A ngrx action to update a task
  */
 export class UpdateImpactPathwayTaskAction implements Action {
   type = ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY_TASK;
@@ -1167,7 +1167,7 @@ export class UpdateImpactPathwayTaskAction implements Action {
 }
 
 /**
- * An ngrx action to update a task
+ * A ngrx action to update a task
  */
 export class UpdateImpactPathwaySubTaskAction implements Action {
   type = ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY_SUB_TASK;
@@ -1199,7 +1199,7 @@ export class UpdateImpactPathwaySubTaskAction implements Action {
 }
 
 /**
- * An ngrx action to enable editing of relation between task
+ * A ngrx action to enable editing of relation between task
  */
 export class AddImpactPathwayTaskLinksAction implements Action {
   type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_LINKS;
@@ -1219,7 +1219,7 @@ export class AddImpactPathwayTaskLinksAction implements Action {
 }
 
 /**
- * An ngrx action to enable editing of relation between task
+ * A ngrx action to enable editing of relation between task
  */
 export class AddImpactPathwayTaskLinkAction implements Action {
   type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_LINK;
@@ -1263,7 +1263,7 @@ export class AddImpactPathwayTaskLinkAction implements Action {
 }
 
 /**
- * An ngrx action to enable editing of relation between task
+ * A ngrx action to enable editing of relation between task
  */
 export class RemoveImpactPathwayTaskLinkAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_LINK;
@@ -1286,7 +1286,7 @@ export class RemoveImpactPathwayTaskLinkAction implements Action {
 }
 
 /**
- * An ngrx action to enable editing of relation between task
+ * A ngrx action to enable editing of relation between task
  */
 export class EditImpactPathwayTaskLinksAction implements Action {
   type = ImpactPathwayActionTypes.EDIT_IMPACT_PATHWAY_TASK_LINKS;
@@ -1324,7 +1324,7 @@ export class EditImpactPathwayTaskLinksAction implements Action {
 }
 
 /**
- * An ngrx action to complete editing relation between task
+ * A ngrx action to complete editing relation between task
  */
 export class CompleteEditingImpactPathwayTaskLinksAction implements Action {
   type = ImpactPathwayActionTypes.COMPLETE_EDITING_IMPACT_PATHWAY_TASK_LINKS;
@@ -1332,7 +1332,7 @@ export class CompleteEditingImpactPathwayTaskLinksAction implements Action {
 }
 
 /**
- * An ngrx action to change the state of the visualization of relations
+ * A ngrx action to change the state of the visualization of relations
  */
 export class ToggleImpactPathwayTaskLinksViewAction implements Action {
   type = ImpactPathwayActionTypes.TOGGLE_IMPACT_PATHWAY_TASK_LINKS_VIEW;
@@ -1340,7 +1340,7 @@ export class ToggleImpactPathwayTaskLinksViewAction implements Action {
 }
 
 /**
- * An ngrx action to enable editing of relation between task
+ * A ngrx action to enable editing of relation between task
  */
 export class SaveImpactPathwayTaskLinksAction implements Action {
   type = ImpactPathwayActionTypes.SAVE_IMPACT_PATHWAY_TASK_LINKS;
@@ -1366,7 +1366,7 @@ export class SaveImpactPathwayTaskLinksAction implements Action {
 }
 
 /**
- * An ngrx action to confirm links save
+ * A ngrx action to confirm links save
  */
 export class SaveImpactPathwayTaskLinksSuccessAction implements Action {
   type = ImpactPathwayActionTypes.SAVE_IMPACT_PATHWAY_TASK_LINKS_SUCCESS;
@@ -1374,7 +1374,7 @@ export class SaveImpactPathwayTaskLinksSuccessAction implements Action {
 }
 
 /**
- * An ngrx action for save links error
+ * A ngrx action for save links error
  */
 export class SaveImpactPathwayTaskLinksErrorAction implements Action {
   type = ImpactPathwayActionTypes.SAVE_IMPACT_PATHWAY_TASK_LINKS_ERROR;
@@ -1382,7 +1382,7 @@ export class SaveImpactPathwayTaskLinksErrorAction implements Action {
 }
 
 /**
- * An ngrx action to set target task id
+ * A ngrx action to set target task id
  */
 export class SetImpactPathwayTargetTaskAction implements Action {
   type = ImpactPathwayActionTypes.SET_IMPACT_PATHWAY_TARGET_TASK;
@@ -1402,7 +1402,7 @@ export class SetImpactPathwayTargetTaskAction implements Action {
 }
 
 /**
- * An ngrx action to normalize state object on rehydrate
+ * A ngrx action to normalize state object on rehydrate
  */
 export class NormalizeImpactPathwayObjectsOnRehydrateAction implements Action {
   type = ImpactPathwayActionTypes.NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE;
@@ -1410,7 +1410,7 @@ export class NormalizeImpactPathwayObjectsOnRehydrateAction implements Action {
 
 
 /**
- * An ngrx action to set step plan collapsed value
+ * A ngrx action to set step plan collapsed value
  */
 export class SetImpactPathwaySubTaskCollapseAction implements Action {
   type = ImpactPathwayActionTypes.SET_IMPACT_PATHWAY_SUBTASK_COLLAPSE;
@@ -1437,42 +1437,47 @@ export class SetImpactPathwaySubTaskCollapseAction implements Action {
 
 
 /**
- * An ngrx action to clear all task collapse
+ * A ngrx action to clear all task collapse
  */
 export class ClearImpactPathwaySubtaskCollapseAction implements Action {
   type = ImpactPathwayActionTypes.CLEAR_IMPACT_PATHWAY_SUBTASK_COLLAPSE;
 }
 
 /**
- * An ngrx action to init impact pathway's compare
+ * A ngrx action to init impact pathway's compare
  */
 export class InitCompareAction implements Action {
   type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY;
   payload: {
     impactPathwayId: string;
     compareImpactPathwayId: string;
+    isVersionOf: boolean;
   };
 
   /**
    * Create a new InitCompareAction
    *
-   * @param compareImpactPathwayId
+   * @param impactPathwayId
+   *    the base impact pathway's id to compare
+   *  @param compareImpactPathwayId
    *    the impact pathway's id to compare with the current one
+   * @param isVersionOf
+   *    whether the impact pathway's id to compare is a version of item
    */
-  constructor(impactPathwayId: string, compareImpactPathwayId: string) {
-    this.payload = { impactPathwayId, compareImpactPathwayId };
+  constructor(impactPathwayId: string, compareImpactPathwayId: string, isVersionOf: boolean) {
+    this.payload = { impactPathwayId, compareImpactPathwayId, isVersionOf };
   }
 }
 
 /**
- * An ngrx action for init error
+ * A ngrx action for init error
  */
 export class InitCompareErrorAction implements Action {
   type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_ERROR;
 }
 
 /**
- * An ngrx action for init success
+ * A ngrx action for init success
  */
 export class InitCompareSuccessAction implements Action {
   type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_SUCCESS;
@@ -1484,6 +1489,8 @@ export class InitCompareSuccessAction implements Action {
   /**
    * Create a new InitCompareSuccessAction
    *
+   * @param impactPathwayId
+   *    the base impact pathway's id to compare
    * @param steps
    *    the list of steps objects
    */
