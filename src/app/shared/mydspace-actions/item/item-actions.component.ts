@@ -105,7 +105,7 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
         take(1)
       );
 
-      combineLatest([adminEdit$, userEdit$])  .subscribe(([canAdminEdit, canUserEdit]: [boolean, boolean]) => {
+      combineLatest([adminEdit$, userEdit$]).subscribe(([canAdminEdit, canUserEdit]: [boolean, boolean]) => {
         if (canUserEdit) {
           this.projectsEntityEditMode = environment.projects.projectsEntityEditMode;
         } else if (canAdminEdit) {

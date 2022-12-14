@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ItemComponent } from '../shared/item.component';
-import { ItemVersionsSummaryModalComponent } from '../../../../shared/item/item-versions/item-versions-summary-modal/item-versions-summary-modal.component';
+import {
+  ItemVersionsSummaryModalComponent
+} from '../../../../shared/item/item-versions/item-versions-summary-modal/item-versions-summary-modal.component';
 import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 import { RemoteData } from '../../../../core/data/remote-data';
 import { Version } from '../../../../core/shared/version.model';
@@ -10,7 +12,7 @@ import { VersionHistoryDataService } from '../../../../core/data/version-history
 import { TranslateService } from '@ngx-translate/core';
 import { VersionDataService } from '../../../../core/data/version-data.service';
 import { ItemVersionsSharedService } from '../../../../shared/item/item-versions/item-versions-shared.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WorkspaceitemDataService } from '../../../../core/submission/workspaceitem-data.service';
 import { SearchService } from '../../../../core/shared/search/search.service';
 import { ItemDataService } from '../../../../core/data/item-data.service';
@@ -33,6 +35,7 @@ export class VersionedItemComponent extends ItemComponent {
     private workspaceItemDataService: WorkspaceitemDataService,
     private searchService: SearchService,
     private itemService: ItemDataService,
+    protected activatedRoute: ActivatedRoute,
     protected routeService: RouteService
   ) {
     super(routeService);
@@ -66,6 +69,7 @@ export class VersionedItemComponent extends ItemComponent {
       this.itemService.invalidateItemCache(item.uuid);
       this.versionHistoryService.invalidateAllVersionHistoryCache();
       this.modalService.dismissAll();
+      this.router.navigate(['..', 'manageversions'], {relativeTo: this.activatedRoute});
     });
 
   }

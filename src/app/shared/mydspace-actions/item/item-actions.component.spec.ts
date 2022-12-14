@@ -1,10 +1,9 @@
-import { EditItemDataService } from './../../../core/submission/edititem-data.service';
-import { AuthorizationDataService } from './../../../core/data/feature-authorization/authorization-data.service';
 import { ChangeDetectionStrategy, Injector, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
+import { By } from '@angular/platform-browser';
 
-import { of as observableOf, of } from 'rxjs';
+import { of as observableOf } from 'rxjs';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
@@ -18,7 +17,10 @@ import { RequestService } from '../../../core/data/request.service';
 import { getMockSearchService } from '../../mocks/search-service.mock';
 import { getMockRequestService } from '../../mocks/request.service.mock';
 import { SearchService } from '../../../core/shared/search/search.service';
-import { By } from '@angular/platform-browser';
+import { ProjectVersionService } from '../../../core/project/project-version.service';
+import { EditItemDataService } from '../../../core/submission/edititem-data.service';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import SpyObj = jasmine.SpyObj;
 
 let component: ItemActionsComponent;
 let fixture: ComponentFixture<ItemActionsComponent>;
@@ -67,10 +69,14 @@ const requestServce = getMockRequestService();
 const authorizationDataService: AuthorizationDataService = jasmine.createSpyObj('AuthorizationDataService', {
   isAuthorized: observableOf(true)
 });
-let editItemDataService: EditItemDataService;
+
+const projectVersionService = jasmine.createSpyObj('ProjectVersionService', {
+  isVersionOfAnItem: jasmine.createSpy('isVersionOfAnItem'),
+  getVersionByItemId: jasmine.createSpy('getVersionByItemId')
+});
+let editItemDataService: SpyObj<EditItemDataService>;
 
 let aroute;
-const eiResult = 'eiResult' as any;
 
 describe('ItemActionsComponent', () => {
   beforeEach(waitForAsync(() => {
@@ -80,7 +86,7 @@ describe('ItemActionsComponent', () => {
     };
 
     editItemDataService = jasmine.createSpyObj('EditItemDataService', {
-      checkEditModeByIDAndType: observableOf(eiResult)
+      checkEditModeByIDAndType: jasmine.createSpy('checkEditModeByIDAndType')
     });
 
     TestBed.configureTestingModule({
@@ -102,7 +108,8 @@ describe('ItemActionsComponent', () => {
         { provide: RequestService, useValue: requestServce },
         { provide: AuthorizationDataService, useValue: authorizationDataService },
         { provide: ActivatedRoute, useValue: aroute },
-        { provide: EditItemDataService, useValue: editItemDataService }
+        { provide: EditItemDataService, useValue: editItemDataService },
+        { provide: ProjectVersionService, useValue: projectVersionService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(ItemActionsComponent, {
@@ -114,7 +121,7 @@ describe('ItemActionsComponent', () => {
     fixture = TestBed.createComponent(ItemActionsComponent);
     component = fixture.componentInstance;
     component.object = mockObject;
-    fixture.detectChanges();
+
   });
 
   afterEach(() => {
@@ -122,17 +129,31 @@ describe('ItemActionsComponent', () => {
     component = null;
   });
 
-  it('should init object properly', () => {
-    component.object = null;
-    component.initObjects(mockObject);
+  describe('when is version of an item', () => {
+    beforeEach(() => {
+      projectVersionService.isVersionOfAnItem.and.returnValue(false);
+      editItemDataService.checkEditModeByIDAndType.and.returnValues(observableOf(false), observableOf(true));
+      fixture.detectChanges();
+    });
 
-    expect(component.object).toEqual(mockObject);
+    it('should init object properly', () => {
+      component.object = null;
+      component.initObjects(mockObject);
+
+      expect(component.object).toEqual(mockObject);
+    });
+
+    it('should not render edit button', () => {
+      const link = fixture.debugElement.query(By.css('button[data-test="edit"]'));
+      expect(link).toBeTruthy();
+    });
   });
+
 
   describe('when is version of an item', () => {
 
     beforeEach(() => {
-      spyOn(component, 'isVersionOfAnItem').and.returnValue(of(true));
+      projectVersionService.isVersionOfAnItem.and.returnValue(true);
       fixture.detectChanges();
     });
 
