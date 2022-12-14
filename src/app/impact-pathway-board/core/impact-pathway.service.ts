@@ -50,7 +50,7 @@ import {
   isCompareMode,
   isImpactPathwayLoadedSelector,
   isImpactPathwayProcessingSelector,
-  isImpactPathwayRemovingSelector,
+  isImpactPathwayRemovingSelector
 } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
@@ -66,6 +66,7 @@ import {
   GenerateImpactPathwaySubTaskAction,
   GenerateImpactPathwayTaskAction,
   InitCompareAction,
+  InitCompareStepTaskAction,
   MoveImpactPathwaySubTaskAction,
   OrderImpactPathwaySubTasksAction,
   OrderImpactPathwayTasksAction,
@@ -77,6 +78,7 @@ import {
   SetImpactPathwaySubTaskCollapseAction,
   SetImpactPathwayTargetTaskAction,
   StopCompareImpactPathwayAction,
+  StopCompareImpactPathwayStepTaskAction,
   UpdateImpactPathwayAction,
   UpdateImpactPathwayTaskAction
 } from './impact-pathway.actions';
@@ -317,7 +319,7 @@ export class ImpactPathwayService {
       concatMap((compareItem: ComparedVersionItem) => this.initCompareImpactPathwayTasksFromStep(
         compareItem.item.id,
         compareItem.item,
-        compareItem.versionItem ?.id).pipe(
+        compareItem.versionItem?.id).pipe(
           map((steps: ImpactPathwayStep[]) => this.initImpactPathwayStepFromCompareItem(
             compareItem,
             steps
@@ -327,6 +329,29 @@ export class ImpactPathwayService {
     );
   }
 
+  /**
+   * Initialize to compare the steps that were previously compared
+   *
+   * @param impactPathwayStepId
+   *    the step id
+   * @param compareList
+   *    the list of compared steps
+   */
+  initCompareImpactPathwayStepTasks(impactPathwayStepId: string, compareList: ComparedVersionItem[]): Observable<ImpactPathwayTask[]> {
+    return observableFrom(compareList).pipe(
+      concatMap((compareItem: ComparedVersionItem) => this.initCompareImpactPathwayTasksFromTask(
+        compareItem.item.id,
+        compareItem.item,
+        compareItem.versionItem?.id).pipe(
+        map((tasks: ImpactPathwayTask[]) => this.initImpactPathwayTaskFromCompareItem(
+          compareItem,
+          impactPathwayStepId,
+          tasks
+        ))
+      )),
+      reduce((acc: any, value: any) => [...acc, value], [])
+    );
+  }
 
   /**
    * Initialize to compare the tasks for a specific step
@@ -367,6 +392,45 @@ export class ImpactPathwayService {
   }
 
   /**
+   * Initialize to compare the tasks for a specific step
+   *
+   * @param targetImpactPathwayTaskId
+   *    the impact pathway's step id
+   * @param targetItem
+   *    the impact pathway's step compared item
+   * @param versionedImpactPathwayTaskId
+   *    the impact pathway's step compared item with
+   */
+  initCompareImpactPathwayTasksFromTask(targetImpactPathwayTaskId: string, targetItem: Item, versionedImpactPathwayTaskId: string): Observable<ImpactPathwayTask[]> {
+    const relatedTaskMetadata = Metadata.all(targetItem.metadata, environment.impactPathway.impactPathwayTaskRelationMetadata);
+    // if (isEmpty(relatedTaskMetadata) || isEmpty(versionedImpactPathwayTaskId)) {
+    if (isEmpty(relatedTaskMetadata)) {
+      return observableOf([]);
+    } else {
+      return this.projectVersionService.compareItemChildrenByMetadata(
+        targetImpactPathwayTaskId,
+        versionedImpactPathwayTaskId,
+        environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
+        mergeMap((compareList: ComparedVersionItem[]) => {
+          return observableFrom(compareList).pipe(
+            concatMap((compareItem: ComparedVersionItem) => observableOf(this.initImpactPathwayTaskFromCompareItem(
+              compareItem,
+              targetImpactPathwayTaskId)
+            )),
+            reduce((acc: any, value: any) => {
+              if (isNotNull(value)) {
+                return [...acc, value];
+              } else {
+                return acc;
+              }
+            }, [])
+          );
+        })
+      );
+    }
+  }
+
+  /**
    * Initialize to construct the compared step
    *
    * @param compareObj
@@ -398,7 +462,7 @@ export class ImpactPathwayService {
     const type = compareObj.item.firstMetadataValue('dspace.entity.type');
     return Object.assign(new ImpactPathwayTask(), {
       id: compareObj.item.id,
-      compareId: compareObj.versionItem ?.id,
+      compareId: compareObj.versionItem?.id,
       compareStatus: compareObj.status,
       parentId: parentId,
       title: compareObj.item.name,
@@ -407,6 +471,30 @@ export class ImpactPathwayService {
     });
   }
 
+  /**
+   * Dispatch a new InitCompareStepTaskAction
+   *
+   * @param impactPathwayId
+   *    the id of impact pathway that the task belongs to
+   * @param impactPathwayStepId
+   *    the id of impact pathway step that the task belongs to
+   * @param compareImpactPathwayStepId
+   *    the impact pathway step's id to compare with the current one
+   */
+  public initCompareImpactPathwayTask(impactPathwayId: string, impactPathwayStepId: string, compareImpactPathwayStepId: string) {
+    this.store.dispatch(new InitCompareStepTaskAction(impactPathwayId, impactPathwayStepId, compareImpactPathwayStepId));
+  }
+
+
+  /**
+   * Dispatch a new StopCompareImpactPathwayStepTaskAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   */
+  dispatchStopCompareImpactPathwayTask(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId: string,) {
+    this.store.dispatch(new StopCompareImpactPathwayStepTaskAction(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId));
+  }
 
   /**
    * Dispatch a new UpdateImpactPathwayTaskAction
@@ -431,8 +519,6 @@ export class ImpactPathwayService {
   dispatchClearCollapsable() {
     this.store.dispatch(new ClearImpactPathwaySubtaskCollapseAction());
   }
-
-
 
   /**
    * Dispatch a new InitCompareAction
@@ -847,7 +933,7 @@ export class ImpactPathwayService {
     this.router.navigate(['entities', 'impactpathway', impactPathwayId]);
   }
 
-  redirectToProjectPage(projectItemId: string, ) {
+  redirectToProjectPage(projectItemId: string,) {
     this.router.navigate(['items', projectItemId]);
   }
 

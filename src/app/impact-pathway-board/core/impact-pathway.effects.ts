@@ -26,6 +26,8 @@ import {
   ImpactPathwayActionTypes,
   InitCompareAction,
   InitCompareErrorAction,
+  InitCompareStepTaskAction,
+  InitCompareStepTaskSuccessAction,
   InitCompareSuccessAction,
   InitImpactPathwayAction,
   InitImpactPathwayErrorAction,
@@ -156,6 +158,29 @@ export class ImpactPathwayEffects {
       ).pipe(
         switchMap((compareItemList: ComparedVersionItem[]) => this.impactPathwayService.initCompareImpactPathwaySteps(compareItemList)),
         map((steps: ImpactPathwayStep[]) => new InitCompareSuccessAction(action.payload.impactPathwayId, steps)),
+        catchError((error: Error) => {
+          if (error) {
+            this.notificationsService.error(null, this.translate.get('impact-pathway.compare.error'));
+          }
+          return observableOf(new InitCompareErrorAction());
+        }));
+    }));
+
+
+  /**
+   * Initialize compare of impact pathway step task and compares its children
+   */
+  @Effect() initStepTaskCompare$ = this.actions$.pipe(
+    ofType(ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK),
+    withLatestFrom(this.store$),
+    switchMap(([action, state]: [InitCompareStepTaskAction, any]) => {
+      return this.projectVersionService.compareItemChildrenByMetadata(
+        action.payload.impactPathwayStepId,
+        action.payload.compareImpactPathwayStepId,
+        environment.impactPathway.impactPathwayTaskRelationMetadata
+      ).pipe(
+        switchMap((compareItemList: ComparedVersionItem[]) => this.impactPathwayService.initCompareImpactPathwayStepTasks(action.payload.impactPathwayStepId, compareItemList)),
+        map((tasks: ImpactPathwayTask[]) => new InitCompareStepTaskSuccessAction(action.payload.impactPathwayId, action.payload.impactPathwayStepId, tasks)),
         catchError((error: Error) => {
           if (error) {
             this.notificationsService.error(null, this.translate.get('impact-pathway.compare.error'));

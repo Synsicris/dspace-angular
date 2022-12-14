@@ -17,70 +17,74 @@ import { ImpactPathwayStep } from './models/impact-pathway-step.model';
  * action types in the application are unique.
  */
 export const ImpactPathwayActionTypes = {
-  GENERATE_IMPACT_PATHWAY: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY'),
-  GENERATE_IMPACT_PATHWAY_SUCCESS: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_SUCCESS'),
-  GENERATE_IMPACT_PATHWAY_ERROR: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_ERROR'),
-  CLEAR_IMPACT_PATHWAY: type('dspace/core/impactpathway/CLEAR_IMPACT_PATHWAY'),
-  INIT_IMPACT_PATHWAY: type('dspace/core/impactpathway/INIT_IMPACT_PATHWAY'),
-  INIT_IMPACT_PATHWAY_SUCCESS: type('dspace/core/impactpathway/INIT_IMPACT_PATHWAY_SUCCESS'),
-  INIT_IMPACT_PATHWAY_ERROR: type('dspace/core/impactpathway/INIT_IMPACT_PATHWAY_ERROR'),
-  GENERATE_IMPACT_PATHWAY_TASK: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_TASK'),
-  GENERATE_IMPACT_PATHWAY_TASK_SUCCESS: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_TASK_SUCCESS'),
-  GENERATE_IMPACT_PATHWAY_TASK_ERROR: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_TASK_ERROR'),
-  GENERATE_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_SUB_TASK'),
-  GENERATE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/core/impactpathway/GENERATE_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
-  ADD_IMPACT_PATHWAY_TASK: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_TASK'),
-  ADD_IMPACT_PATHWAY_TASK_SUCCESS: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_TASK_SUCCESS'),
-  ADD_IMPACT_PATHWAY_TASK_ERROR: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_TASK_ERROR'),
-  ADD_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK'),
-  ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
-  ADD_IMPACT_PATHWAY_SUB_TASK_ERROR: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK_ERROR'),
-  MOVE_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/MOVE_IMPACT_PATHWAY_SUB_TASK'),
-  MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/core/impactpathway/MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
-  MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR: type('dspace/core/impactpathway/MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR'),
-  NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE: type('dspace/core/impactpathway/NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE'),
-  ORDER_IMPACT_PATHWAY_TASKS: type('dspace/core/impactpathway/ORDER_IMPACT_PATHWAY_TASKS'),
-  ORDER_IMPACT_PATHWAY_TASKS_SUCCESS: type('dspace/core/impactpathway/ORDER_IMPACT_PATHWAY_TASKS_SUCCESS'),
-  ORDER_IMPACT_PATHWAY_TASKS_ERROR: type('dspace/core/impactpathway/ORDER_IMPACT_PATHWAY_TASKS_ERROR'),
-  ORDER_IMPACT_PATHWAY_SUB_TASKS: type('dspace/core/impactpathway/ORDER_IMPACT_PATHWAY_SUB_TASKS'),
-  ORDER_IMPACT_PATHWAY_SUB_TASKS_SUCCESS: type('dspace/core/impactpathway/ORDER_IMPACT_PATHWAY_SUB_TASKS_SUCCESS'),
-  ORDER_IMPACT_PATHWAY_SUB_TASKS_ERROR: type('dspace/core/impactpathway/ORDER_IMPACT_PATHWAY_SUB_TASKS_ERROR'),
-  REMOVE_IMPACT_PATHWAY: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY'),
-  REMOVE_IMPACT_PATHWAY_SUCCESS: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_SUCCESS'),
-  REMOVE_IMPACT_PATHWAY_ERROR: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_ERROR'),
-  REMOVE_IMPACT_PATHWAY_STEP: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_STEP'),
-  REMOVE_IMPACT_PATHWAY_STEP_SUCCESS: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_STEP_SUCCESS'),
-  REMOVE_IMPACT_PATHWAY_STEP_ERROR: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_STEP_ERROR'),
-  REMOVE_IMPACT_PATHWAY_TASK: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_TASK'),
-  REMOVE_IMPACT_PATHWAY_TASK_SUCCESS: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_SUCCESS'),
-  REMOVE_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_SUB_TASK'),
-  REMOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
-  REMOVE_IMPACT_PATHWAY_TASK_ERROR: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_ERROR'),
-  PATCH_IMPACT_PATHWAY_METADATA: type('dspace/core/impactpathway/PATCH_IMPACT_PATHWAY_METADATA'),
-  PATCH_IMPACT_PATHWAY_METADATA_SUCCESS: type('dspace/core/impactpathway/PATCH_IMPACT_PATHWAY_METADATA_SUCCESS'),
-  PATCH_IMPACT_PATHWAY_METADATA_ERROR: type('dspace/core/impactpathway/PATCH_IMPACT_PATHWAY_METADATA_ERROR'),
-  PATCH_IMPACT_PATHWAY_TASK_METADATA: type('dspace/core/impactpathway/PATCH_IMPACT_PATHWAY_TASK_METADATA'),
-  PATCH_IMPACT_PATHWAY_TASK_METADATA_SUCCESS: type('dspace/core/impactpathway/PATCH_IMPACT_PATHWAY_TASK_METADATA_SUCCESS'),
-  PATCH_IMPACT_PATHWAY_TASK_METADATA_ERROR: type('dspace/core/impactpathway/PATCH_IMPACT_PATHWAY_TASK_METADATA_ERROR'),
-  UPDATE_IMPACT_PATHWAY: type('dspace/core/impactpathway/UPDATE_IMPACT_PATHWAY'),
-  UPDATE_IMPACT_PATHWAY_TASK: type('dspace/core/impactpathway/UPDATE_IMPACT_PATHWAY_TASK'),
-  UPDATE_IMPACT_PATHWAY_SUB_TASK: type('dspace/core/impactpathway/UPDATE_IMPACT_PATHWAY_SUB_TASK'),
-  ADD_IMPACT_PATHWAY_TASK_LINKS: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_TASK_LINKS'),
-  ADD_IMPACT_PATHWAY_TASK_LINK: type('dspace/core/impactpathway/ADD_IMPACT_PATHWAY_TASK_LINK'),
-  REMOVE_IMPACT_PATHWAY_TASK_LINK: type('dspace/core/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_LINK'),
-  EDIT_IMPACT_PATHWAY_TASK_LINKS: type('dspace/core/impactpathway/EDIT_IMPACT_PATHWAY_TASK_LINKS'),
-  COMPLETE_EDITING_IMPACT_PATHWAY_TASK_LINKS: type('dspace/core/impactpathway/COMPLETE_EDITING_IMPACT_PATHWAY_TASK_LINKS'),
-  SAVE_IMPACT_PATHWAY_TASK_LINKS: type('dspace/core/impactpathway/SAVE_IMPACT_PATHWAY_TASK_LINKS'),
-  SAVE_IMPACT_PATHWAY_TASK_LINKS_SUCCESS: type('dspace/core/impactpathway/SAVE_IMPACT_PATHWAY_TASK_LINKS_SUCCESS'),
-  SAVE_IMPACT_PATHWAY_TASK_LINKS_ERROR: type('dspace/core/impactpathway/SAVE_IMPACT_PATHWAY_TASK_LINKS_ERROR'),
-  TOGGLE_IMPACT_PATHWAY_TASK_LINKS_VIEW: type('dspace/core/impactpathway/TOGGLE_IMPACT_PATHWAY_TASK_LINKS_VIEW'),
-  SET_IMPACT_PATHWAY_TARGET_TASK: type('dspace/core/impactpathway/SET_IMPACT_PATHWAY_TARGET_TASK'),
-  SET_IMPACT_PATHWAY_SUBTASK_COLLAPSE: type('dspace/impactpathway/SET_IMPACT_PATHWAY_TASK_COLLAPSE'),
-  CLEAR_IMPACT_PATHWAY_SUBTASK_COLLAPSE: type('dspace/impactpathway/CLEAR_IMPACT_PATHWAY_TASK_COLLAPSE'),
+  GENERATE_IMPACT_PATHWAY: type('dspace/impactpathway/GENERATE_IMPACT_PATHWAY'),
+  GENERATE_IMPACT_PATHWAY_SUCCESS: type('dspace/impactpathway/GENERATE_IMPACT_PATHWAY_SUCCESS'),
+  GENERATE_IMPACT_PATHWAY_ERROR: type('dspace/impactpathway/GENERATE_IMPACT_PATHWAY_ERROR'),
+  CLEAR_IMPACT_PATHWAY: type('dspace/impactpathway/CLEAR_IMPACT_PATHWAY'),
+  INIT_IMPACT_PATHWAY: type('dspace/impactpathway/INIT_IMPACT_PATHWAY'),
+  INIT_IMPACT_PATHWAY_SUCCESS: type('dspace/impactpathway/INIT_IMPACT_PATHWAY_SUCCESS'),
+  INIT_IMPACT_PATHWAY_ERROR: type('dspace/impactpathway/INIT_IMPACT_PATHWAY_ERROR'),
+  GENERATE_IMPACT_PATHWAY_TASK: type('dspace/impactpathway/GENERATE_IMPACT_PATHWAY_TASK'),
+  GENERATE_IMPACT_PATHWAY_TASK_SUCCESS: type('dspace/impactpathway/GENERATE_IMPACT_PATHWAY_TASK_SUCCESS'),
+  GENERATE_IMPACT_PATHWAY_TASK_ERROR: type('dspace/impactpathway/GENERATE_IMPACT_PATHWAY_TASK_ERROR'),
+  GENERATE_IMPACT_PATHWAY_SUB_TASK: type('dspace/impactpathway/GENERATE_IMPACT_PATHWAY_SUB_TASK'),
+  GENERATE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/impactpathway/GENERATE_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
+  ADD_IMPACT_PATHWAY_TASK: type('dspace/impactpathway/ADD_IMPACT_PATHWAY_TASK'),
+  ADD_IMPACT_PATHWAY_TASK_SUCCESS: type('dspace/impactpathway/ADD_IMPACT_PATHWAY_TASK_SUCCESS'),
+  ADD_IMPACT_PATHWAY_TASK_ERROR: type('dspace/impactpathway/ADD_IMPACT_PATHWAY_TASK_ERROR'),
+  ADD_IMPACT_PATHWAY_SUB_TASK: type('dspace/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK'),
+  ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
+  ADD_IMPACT_PATHWAY_SUB_TASK_ERROR: type('dspace/impactpathway/ADD_IMPACT_PATHWAY_SUB_TASK_ERROR'),
+  MOVE_IMPACT_PATHWAY_SUB_TASK: type('dspace/impactpathway/MOVE_IMPACT_PATHWAY_SUB_TASK'),
+  MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/impactpathway/MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
+  MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR: type('dspace/impactpathway/MOVE_IMPACT_PATHWAY_SUB_TASK_ERROR'),
+  NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE: type('dspace/impactpathway/NORMALIZE_IMPACT_PATHWAY_OBJECTS_ON_REHYDRATE'),
+  ORDER_IMPACT_PATHWAY_TASKS: type('dspace/impactpathway/ORDER_IMPACT_PATHWAY_TASKS'),
+  ORDER_IMPACT_PATHWAY_TASKS_SUCCESS: type('dspace/impactpathway/ORDER_IMPACT_PATHWAY_TASKS_SUCCESS'),
+  ORDER_IMPACT_PATHWAY_TASKS_ERROR: type('dspace/impactpathway/ORDER_IMPACT_PATHWAY_TASKS_ERROR'),
+  ORDER_IMPACT_PATHWAY_SUB_TASKS: type('dspace/impactpathway/ORDER_IMPACT_PATHWAY_SUB_TASKS'),
+  ORDER_IMPACT_PATHWAY_SUB_TASKS_SUCCESS: type('dspace/impactpathway/ORDER_IMPACT_PATHWAY_SUB_TASKS_SUCCESS'),
+  ORDER_IMPACT_PATHWAY_SUB_TASKS_ERROR: type('dspace/impactpathway/ORDER_IMPACT_PATHWAY_SUB_TASKS_ERROR'),
+  REMOVE_IMPACT_PATHWAY: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY'),
+  REMOVE_IMPACT_PATHWAY_SUCCESS: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_SUCCESS'),
+  REMOVE_IMPACT_PATHWAY_ERROR: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_ERROR'),
+  REMOVE_IMPACT_PATHWAY_STEP: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_STEP'),
+  REMOVE_IMPACT_PATHWAY_STEP_SUCCESS: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_STEP_SUCCESS'),
+  REMOVE_IMPACT_PATHWAY_STEP_ERROR: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_STEP_ERROR'),
+  REMOVE_IMPACT_PATHWAY_TASK: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_TASK'),
+  REMOVE_IMPACT_PATHWAY_TASK_SUCCESS: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_SUCCESS'),
+  REMOVE_IMPACT_PATHWAY_SUB_TASK: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_SUB_TASK'),
+  REMOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
+  REMOVE_IMPACT_PATHWAY_TASK_ERROR: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_ERROR'),
+  PATCH_IMPACT_PATHWAY_METADATA: type('dspace/impactpathway/PATCH_IMPACT_PATHWAY_METADATA'),
+  PATCH_IMPACT_PATHWAY_METADATA_SUCCESS: type('dspace/impactpathway/PATCH_IMPACT_PATHWAY_METADATA_SUCCESS'),
+  PATCH_IMPACT_PATHWAY_METADATA_ERROR: type('dspace/impactpathway/PATCH_IMPACT_PATHWAY_METADATA_ERROR'),
+  PATCH_IMPACT_PATHWAY_TASK_METADATA: type('dspace/impactpathway/PATCH_IMPACT_PATHWAY_TASK_METADATA'),
+  PATCH_IMPACT_PATHWAY_TASK_METADATA_SUCCESS: type('dspace/impactpathway/PATCH_IMPACT_PATHWAY_TASK_METADATA_SUCCESS'),
+  PATCH_IMPACT_PATHWAY_TASK_METADATA_ERROR: type('dspace/impactpathway/PATCH_IMPACT_PATHWAY_TASK_METADATA_ERROR'),
+  UPDATE_IMPACT_PATHWAY: type('dspace/impactpathway/UPDATE_IMPACT_PATHWAY'),
+  UPDATE_IMPACT_PATHWAY_TASK: type('dspace/impactpathway/UPDATE_IMPACT_PATHWAY_TASK'),
+  UPDATE_IMPACT_PATHWAY_SUB_TASK: type('dspace/impactpathway/UPDATE_IMPACT_PATHWAY_SUB_TASK'),
+  ADD_IMPACT_PATHWAY_TASK_LINKS: type('dspace/impactpathway/ADD_IMPACT_PATHWAY_TASK_LINKS'),
+  ADD_IMPACT_PATHWAY_TASK_LINK: type('dspace/impactpathway/ADD_IMPACT_PATHWAY_TASK_LINK'),
+  REMOVE_IMPACT_PATHWAY_TASK_LINK: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_LINK'),
+  EDIT_IMPACT_PATHWAY_TASK_LINKS: type('dspace/impactpathway/EDIT_IMPACT_PATHWAY_TASK_LINKS'),
+  COMPLETE_EDITING_IMPACT_PATHWAY_TASK_LINKS: type('dspace/impactpathway/COMPLETE_EDITING_IMPACT_PATHWAY_TASK_LINKS'),
+  SAVE_IMPACT_PATHWAY_TASK_LINKS: type('dspace/impactpathway/SAVE_IMPACT_PATHWAY_TASK_LINKS'),
+  SAVE_IMPACT_PATHWAY_TASK_LINKS_SUCCESS: type('dspace/impactpathway/SAVE_IMPACT_PATHWAY_TASK_LINKS_SUCCESS'),
+  SAVE_IMPACT_PATHWAY_TASK_LINKS_ERROR: type('dspace/impactpathway/SAVE_IMPACT_PATHWAY_TASK_LINKS_ERROR'),
+  TOGGLE_IMPACT_PATHWAY_TASK_LINKS_VIEW: type('dspace/impactpathway/TOGGLE_IMPACT_PATHWAY_TASK_LINKS_VIEW'),
+  SET_IMPACT_PATHWAY_TARGET_TASK: type('dspace/impactpathway/SET_IMPACT_PATHWAY_TARGET_TASK'),
+  SET_IMPACT_PATHWAY_TASK_COLLAPSE: type('dspace/impactpathway/SET_IMPACT_PATHWAY_TASK_COLLAPSE'),
+  CLEAR_IMPACT_PATHWAY_TASK_COLLAPSE: type('dspace/impactpathway/CLEAR_IMPACT_PATHWAY_TASK_COLLAPSE'),
   INIT_COMPARE_IMPACT_PATHWAY: type('dspace/impactpathway/INIT_COMPARE_IMPACT_PATHWAY'),
-  INIT_COMPARE_IMPACT_PATHWAY_ERROR: type('dspace/core/workingplan/INIT_COMPARE_IMPACT_PATHWAY_ERROR'),
-  INIT_COMPARE_IMPACT_PATHWAY_SUCCESS: type('dspace/core/workingplan/INIT_COMPARE_IMPACT_PATHWAY_SUCCESS'),
-  STOP_COMPARE_IMPACT_PATHWAY: type('dspace/core/workingplan/STOP_COMPARE_IMPACT_PATHWAY'),
+  INIT_COMPARE_IMPACT_PATHWAY_ERROR: type('dspace/impactpathway/INIT_COMPARE_IMPACT_PATHWAY_ERROR'),
+  INIT_COMPARE_IMPACT_PATHWAY_SUCCESS: type('dspace/impactpathway/INIT_COMPARE_IMPACT_PATHWAY_SUCCESS'),
+  STOP_COMPARE_IMPACT_PATHWAY: type('dspace/impactpathway/STOP_COMPARE_IMPACT_PATHWAY'),
+  INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK: type('dspace/impactpathway/INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK'),
+  INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_ERROR: type('dspace/impactpathway/INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_ERROR'),
+  INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_SUCCESS: type('dspace/impactpathway/INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_SUCCESS'),
+  STOP_COMPARE_IMPACT_PATHWAY_STEP_TASK: type('dspace/impactpathway/STOP_COMPARE_IMPACT_PATHWAY_STEP_TASK'),
 };
 
 /* tslint:disable:max-classes-per-file */
@@ -110,7 +114,7 @@ export class GenerateImpactPathwayAction implements Action {
    * @param name
    *    the impact pathway's title
    */
-  constructor(projectId: string, name: string, ) {
+  constructor(projectId: string, name: string) {
     this.payload = { projectId, name };
   }
 }
@@ -1413,7 +1417,7 @@ export class NormalizeImpactPathwayObjectsOnRehydrateAction implements Action {
  * A ngrx action to set step plan collapsed value
  */
 export class SetImpactPathwaySubTaskCollapseAction implements Action {
-  type = ImpactPathwayActionTypes.SET_IMPACT_PATHWAY_SUBTASK_COLLAPSE;
+  type = ImpactPathwayActionTypes.SET_IMPACT_PATHWAY_TASK_COLLAPSE;
   payload: {
     impactPathwayStepId: string,
     impactPathwayTaskId: string,
@@ -1440,7 +1444,7 @@ export class SetImpactPathwaySubTaskCollapseAction implements Action {
  * A ngrx action to clear all task collapse
  */
 export class ClearImpactPathwaySubtaskCollapseAction implements Action {
-  type = ImpactPathwayActionTypes.CLEAR_IMPACT_PATHWAY_SUBTASK_COLLAPSE;
+  type = ImpactPathwayActionTypes.CLEAR_IMPACT_PATHWAY_TASK_COLLAPSE;
 }
 
 /**
@@ -1496,6 +1500,89 @@ export class InitCompareSuccessAction implements Action {
    */
   constructor(impactPathwayId: string, steps: ImpactPathwayStep[]) {
     this.payload = { impactPathwayId, steps };
+  }
+}
+
+export class InitCompareStepTaskAction implements Action {
+  type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK;
+  payload: {
+    impactPathwayId: string;
+    impactPathwayStepId: string;
+    compareImpactPathwayStepId: string;
+  };
+
+  /**
+   * Create a new StopCompareImpactPathwayStepTaskAction
+   *
+   * @param impactPathwayId
+   *    the id of impact pathway that the task belongs to
+   * @param impactPathwayStepId
+   *    the id of impact pathway step that the task belongs to
+   * @param compareImpactPathwayStepId
+   *    the impact pathway step's id to compare with the current one
+   */
+  constructor(impactPathwayId: string, impactPathwayStepId: string, compareImpactPathwayStepId: string) {
+    this.payload = { impactPathwayId, impactPathwayStepId, compareImpactPathwayStepId };
+  }
+}
+
+/**
+ * An ngrx action for init StepTask error
+ */
+export class InitCompareStepTaskErrorAction implements Action {
+  type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_ERROR;
+}
+
+/**
+ * An ngrx action for init StepTask success
+ */
+export class InitCompareStepTaskSuccessAction implements Action {
+  type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_SUCCESS;
+  payload: {
+    impactPathwayId: string;
+    impactPathwayStepId: string;
+    tasks: ImpactPathwayTask[];
+  };
+
+  /**
+   * Create a new InitCompareStepTaskSuccessAction
+   *
+   * @param impactPathwayId
+   *    the id of impact pathway that the tasks belong to
+   * @param impactPathwayStepId
+   *    the id of impact pathway step that the tasks belong to
+   * @param tasks
+   *    the list of tasks objects
+   */
+  constructor(impactPathwayId: string, impactPathwayStepId: string, tasks: ImpactPathwayTask[]) {
+    this.payload = { impactPathwayId, impactPathwayStepId, tasks };
+  }
+}
+
+/**
+ * An ngrx action for StepTask init success
+ */
+export class StopCompareImpactPathwayStepTaskAction implements Action {
+  type = ImpactPathwayActionTypes.STOP_COMPARE_IMPACT_PATHWAY_STEP_TASK;
+  payload: {
+    impactPathwayId: string;
+    impactPathwayStepId: string;
+    impactPathwayStepTaskId: string;
+  };
+
+
+  /**
+   * Create a new StopCompareImpactPathwayStepTaskAction
+   *
+   * @param impactPathwayId
+   *    the id of impact pathway that the task belongs to
+   * @param impactPathwayStepId
+   *    the id of impact pathway step that the task belongs to
+   * @param impactPathwayStepTaskId
+   *    the id of impact pathway step task
+   */
+  constructor(impactPathwayId: string, impactPathwayStepId: string, impactPathwayStepTaskId: string) {
+    this.payload = { impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId };
   }
 }
 
@@ -1569,4 +1656,8 @@ export type ImpactPathwayActions
   | InitCompareAction
   | InitCompareErrorAction
   | InitCompareSuccessAction
-  | StopCompareImpactPathwayAction;
+  | StopCompareImpactPathwayAction
+  | InitCompareStepTaskAction
+  | InitCompareStepTaskErrorAction
+  | InitCompareStepTaskSuccessAction
+  | StopCompareImpactPathwayStepTaskAction;
