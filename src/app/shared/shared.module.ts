@@ -244,6 +244,7 @@ import { ItemVersionListComponent } from './item-version-list/item-version-list.
 import { CompareItemComponent } from './compare-item/compare-item.component';
 import { GrantBadgeComponent } from './object-list/grant-badge/grant-badge.component';
 import { ItemVersionsVisibilityModalComponent } from './item/item-versions/item-versions-visibility-modal/item-versions-visibility-modal.component';
+import { ViewVersionBadgesComponent } from './view-version-badges/view-version-badges.component';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -478,6 +479,7 @@ const COMPONENTS = [
   CompareItemComponent,
   GrantBadgeComponent,
   ItemVersionsVisibilityModalComponent,
+  ViewVersionBadgesComponent,
 ];
 
 const ENTRY_COMPONENTS = [

@@ -4,43 +4,37 @@ import { ItemVersionsVisibilityModalComponent } from './item-versions-visibility
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Item } from '../../../../core/shared/item.model';
 import { VersionHistory } from '../../../../core/shared/version-history.model';
 import { Version } from '../../../../core/shared/version.model';
 import { createSuccessfulRemoteDataObject$ } from '../../../../shared/remote-data.utils';
 
-describe('ItemVersionsVisibilityModalComponent', () => {
+fdescribe('ItemVersionsVisibilityModalComponent', () => {
   let component: ItemVersionsVisibilityModalComponent;
   let fixture: ComponentFixture<ItemVersionsVisibilityModalComponent>;
-
-  const item = Object.assign(new Item(), {
-    uuid: 'item-identifier-3',
-    handle: '123456789/3',
-    metadata: {
-      'synsicris.version.official': [
-        {
-          value: 'false'
-        }
-      ],
-      'synsicris.version.visible': [
-        {
-          value: 'false'
-        },
-      ],
-    },
-    _links: {
-      self: {
-        href: '/items/item-identifier-2'
-      }
-    }
-  });
-
   const versionHistory = Object.assign(new VersionHistory(), {
     id: '1',
     draftVersion: true,
   });
 
   const version1 = Object.assign(new Version(), {
+    id: '1',
+    version: 1,
+    created: new Date(2020, 1, 1),
+    summary: 'first version',
+    versionhistory: createSuccessfulRemoteDataObject$(versionHistory),
+    _links: {
+      self: {
+        href: 'version2-url',
+      },
+    },
+  });
+
+  const versionHistory2 = Object.assign(new VersionHistory(), {
+    id: '1',
+    draftVersion: true,
+  });
+
+  const version2 = Object.assign(new Version(), {
     id: '1',
     version: 1,
     created: new Date(2020, 1, 1),
