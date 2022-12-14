@@ -8,7 +8,7 @@
   <ng-template #noSummary>
     {{'view.version.badges.version' | translate}}&nbsp;:&nbsp;{{ 'view.version.badges.noSummary' | translate }}
   </ng-template>
-  <span class="badge badge-pill" [ngClass]="{ 'badge-primary': withinWeek, 'badge-info': !withinWeek }"
+  <span class="badge badge-pill" [ngClass]="{ 'badge-primary': withinWeek, 'badge-warning': !withinWeek }"
         data-test="version-date-badge">
       {{'view.version.badges.date' | translate}}&nbsp;:&nbsp;{{ version$.value.created | date:'dd MMM y' }}
   </span>

@@ -44,7 +44,7 @@ export class ViewVersionBadgesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.projectVersionService.isVersionOfAnItem(this.item)) {
+    if (this.item && this.projectVersionService.isVersionOfAnItem(this.item)) {
       let itemId;
       if (this.item.entityType === PROJECT_ENTITY) {
         itemId = this.item.id;
@@ -79,8 +79,8 @@ export class ViewVersionBadgesComponent implements OnInit {
    * Checks the difference between the dates to understand if its within 4 weeks
    */
   isYoungerThanFourWeeks(version: Version) {
-    const startDate: number = new Date(version.created).getDate();
-    const endDate: number = new Date().getDate();
+    const startDate: any = new Date(version.created);
+    const endDate: any = new Date();
     return Math.ceil(Math.abs(startDate - endDate) / (1000 * 60 * 60 * 24)) <= 28;
   }
 
