@@ -5,7 +5,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditItemDataService } from '../../../../core/submission/edititem-data.service';
 
 import { WorkingPlanChartItemDeleteButtonComponent } from './working-plan-chart-item-delete-button.component';
-import { of as observableOf } from 'rxjs';
+import { of as observableOf, of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
@@ -22,6 +22,9 @@ describe('WorkingPlanChartItemDeleteButtonComponent', () => {
   });
 
   beforeEach(async () => {
+
+    editItemDataService.checkEditModeByIDAndType.and.returnValue(of(true));
+
     await TestBed.configureTestingModule({
       declarations: [WorkingPlanChartItemDeleteButtonComponent],
       imports: [
@@ -58,9 +61,22 @@ describe('WorkingPlanChartItemDeleteButtonComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should not render edit button', () => {
+    it('should render delete button', () => {
+      const link = fixture.debugElement.query(By.css('button[data-test="delete-btn"'));
+      expect(link).toBeTruthy();
+    });
+
+    it('should disable delete button', () => {
       const link = fixture.debugElement.query(By.css('button[data-test="delete-btn"'));
       expect(link.nativeElement.disabled).toBeTruthy();
+    });
+
+
+    it('should not render delete button', () => {
+      spyOn(component, 'canEdit').and.returnValue(of(false));
+      fixture.detectChanges();
+      const link = fixture.debugElement.query(By.css('button[data-test="delete-btn"'));
+      expect(link).toBeFalsy();
     });
 
 
