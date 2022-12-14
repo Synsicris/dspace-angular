@@ -1,7 +1,7 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -61,6 +61,11 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   private canEditGrants$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * The edit mode to use
+   */
+  private projectsEntityEditMode: string;
+
+  /**
    * Initialize instance variables
    *
    * @param {AuthorizationDataService} authorizationService
@@ -93,10 +98,21 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
       this.canEdit$.next(false);
       this.canEditGrants$.next(false);
     } else {
-      this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
+      const adminEdit$ = this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityAdminEditMode).pipe(
         take(1)
-      ).subscribe((canEdit: boolean) => {
-        this.canEdit$.next(canEdit);
+      );
+      const userEdit$ = this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
+        take(1)
+      );
+
+      combineLatest([adminEdit$, userEdit$]).subscribe(([canAdminEdit, canUserEdit]: [boolean, boolean]) => {
+        if (canUserEdit) {
+          this.projectsEntityEditMode = environment.projects.projectsEntityEditMode;
+        } else if (canAdminEdit) {
+          this.projectsEntityEditMode = environment.projects.projectsEntityAdminEditMode;
+        }
+
+        this.canEdit$.next(canAdminEdit || canUserEdit);
       });
 
       this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.object.self, undefined).pipe(
@@ -147,7 +163,8 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   }
 
   private isEditModeAllowed(mode: EditItemMode) {
-    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode || mode.name === 'OWNER';
+    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode
+      || mode.name === environment.projects.projectsEntityAdminEditMode || mode.name === 'OWNER';
   }
 
   /**

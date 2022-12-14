@@ -1808,7 +1808,9 @@
 
   "confirmation-modal.version.official.header": "Version Official Managment",
 
-  "confirmation-modal.version.official.info": "Are you sure you want to make \"{{ dsoName }}\" version as not-official?",
+  "confirmation-modal.version.official.info.official": "Are you sure you want to make \"{{ dsoName }}\" version as official?",
+
+  "confirmation-modal.version.official.info.not-official": "Are you sure you want to make \"{{ dsoName }}\" version as non-official?",
 
   "confirmation-modal.version.official.cancel": "Cancel",
 
@@ -3188,6 +3190,8 @@
 
   "item.version.history.selected.alert": "You are currently viewing version {{version}} of the item.",
 
+  "item.version.history.info.alert": "version info",
+
   "item.version.history.official": "Active working project",
 
   "item.version.history.table.version": "Version",
@@ -3220,15 +3224,25 @@
 
   "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
 
+  "item.version.history.table.action.toggleOfficial": "Mark as non-official",
+
   "item.version.history.table.visibility": "Visibility",
 
   "item.version.history.table.official": "Official",
 
   "item.version.history.table.setVisibility": "Set as visible",
 
-  "item.version.history.table.setNonOfficial": "Mark as not-official",
+  "item.version.history.table.setNonOfficial": "Mark as non-official",
 
-  "item.version.history.table.successfull": "Successfully Updated {{type}}",
+  "item.version.history.table.success": "Operation successful",
+
+  "item.version.history.table.error": "An error occurs during the operation",
+
+  "item.version.history.table.clickToOpen" : "Click here to open",
+
+  "item.version.history.table.activeVersion" : "Active Instance",
+
+  "item.version.history.table.notes" : "Notes",
 
   "synsicris.version.visible": "Visibility",
 
@@ -3238,7 +3252,7 @@
 
   "item.version.history.title": "Version History",
 
-  "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href='{{destination}}'>here</a>.",
+  "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href=\'{{destination}}\'>here</a>.",
 
   "item.version.create.modal.header": "New version",
 
@@ -6967,6 +6981,16 @@
   "treeview.search.no-result": "There were no items to show",
 
   "treeview.load-more": "Load more",
+
+  "view.version.badges.date": "Date",
+
+  "view.version.badges.official": "Official",
+
+  "view.version.badges.nonOfficial": "Non Official",
+
+  "view.version.badges.noSummary": "No Summary",
+
+  "view.version.badges.version": "Version",
 
   "vocabulary.import-external.preview.title.Product": "Product Preview",
 

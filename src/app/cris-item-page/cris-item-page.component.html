@@ -1,3 +1,8 @@
 <ds-view-tracker [object]="(itemRD$ | async)?.payload"></ds-view-tracker>
 <ds-loading *ngIf="(itemRD$ | async)?.isLoading" message="{{'loading.item' | translate}}"></ds-loading>
+
+<div class="container" *ngVar="(itemRD$ | async).payload as item" [class.version-badge]="(isVersionOfAnItem$ | async)">
+  <ds-view-version-badges *ngIf="item" [item]="item"></ds-view-version-badges>
+</div>
+
 <ds-cris-layout [item]="(itemRD$ | async)?.payload"></ds-cris-layout>
