@@ -272,7 +272,7 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
       );
     }
 
-    case ImpactPathwayActionTypes.SET_IMPACT_PATHWAY_SUBTASK_COLLAPSE: {
+    case ImpactPathwayActionTypes.SET_IMPACT_PATHWAY_TASK_COLLAPSE: {
       return SetImpactPathwaySubTaskCollapse(
         state,
         (action as SetImpactPathwaySubTaskCollapseAction).payload.impactPathwayStepId,

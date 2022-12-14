@@ -75,7 +75,7 @@ export const ImpactPathwayActionTypes = {
   SAVE_IMPACT_PATHWAY_TASK_LINKS_ERROR: type('dspace/impactpathway/SAVE_IMPACT_PATHWAY_TASK_LINKS_ERROR'),
   TOGGLE_IMPACT_PATHWAY_TASK_LINKS_VIEW: type('dspace/impactpathway/TOGGLE_IMPACT_PATHWAY_TASK_LINKS_VIEW'),
   SET_IMPACT_PATHWAY_TARGET_TASK: type('dspace/impactpathway/SET_IMPACT_PATHWAY_TARGET_TASK'),
-  SET_IMPACT_PATHWAY_SUBTASK_COLLAPSE: type('dspace/impactpathway/SET_IMPACT_PATHWAY_TASK_COLLAPSE'),
+  SET_IMPACT_PATHWAY_TASK_COLLAPSE: type('dspace/impactpathway/SET_IMPACT_PATHWAY_TASK_COLLAPSE'),
   CLEAR_IMPACT_PATHWAY_TASK_COLLAPSE: type('dspace/impactpathway/CLEAR_IMPACT_PATHWAY_TASK_COLLAPSE'),
   INIT_COMPARE_IMPACT_PATHWAY: type('dspace/impactpathway/INIT_COMPARE_IMPACT_PATHWAY'),
   INIT_COMPARE_IMPACT_PATHWAY_ERROR: type('dspace/impactpathway/INIT_COMPARE_IMPACT_PATHWAY_ERROR'),
@@ -114,7 +114,7 @@ export class GenerateImpactPathwayAction implements Action {
    * @param name
    *    the impact pathway's title
    */
-  constructor(projectId: string, name: string,) {
+  constructor(projectId: string, name: string) {
     this.payload = { projectId, name };
   }
 }
@@ -1417,7 +1417,7 @@ export class NormalizeImpactPathwayObjectsOnRehydrateAction implements Action {
  * A ngrx action to set step plan collapsed value
  */
 export class SetImpactPathwaySubTaskCollapseAction implements Action {
-  type = ImpactPathwayActionTypes.SET_IMPACT_PATHWAY_SUBTASK_COLLAPSE;
+  type = ImpactPathwayActionTypes.SET_IMPACT_PATHWAY_TASK_COLLAPSE;
   payload: {
     impactPathwayStepId: string,
     impactPathwayTaskId: string,
