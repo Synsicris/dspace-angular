@@ -203,20 +203,23 @@ export class ProjectVersionService {
       })
     );
 
-    const versionedChildrenItems$: Observable<Item[]> = this.itemService.findById(versionedItemId).pipe(
-      getFirstCompletedRemoteData(),
-      getRemoteDataPayload(),
-      mergeMap((versionedItem: Item) => {
-        const versionedChildrenMetadata: MetadataValue[] = versionedItem.findMetadataSortedByPlace(metadataName);
-        return from(versionedChildrenMetadata).pipe(
-          concatMap((metadata: MetadataValue) => this.itemService.findById(metadata?.authority).pipe(
-            getFirstCompletedRemoteData(),
-            getRemoteDataPayload()
-          )),
-          reduce((acc: any, value: any) => [...acc, value], []),
-        );
-      })
-    );
+    let versionedChildrenItems$: Observable<Item[]> = of([]);
+    if (isNotEmpty(versionedItemId)) {
+      versionedChildrenItems$ = this.itemService.findById(versionedItemId).pipe(
+        getFirstCompletedRemoteData(),
+        getRemoteDataPayload(),
+        mergeMap((versionedItem: Item) => {
+          const versionedChildrenMetadata: MetadataValue[] = versionedItem.findMetadataSortedByPlace(metadataName);
+          return from(versionedChildrenMetadata).pipe(
+            concatMap((metadata: MetadataValue) => this.itemService.findById(metadata?.authority).pipe(
+              getFirstCompletedRemoteData(),
+              getRemoteDataPayload()
+            )),
+            reduce((acc: any, value: any) => [...acc, value], []),
+          );
+        })
+      );
+    }
 
     return combineLatest([targetChildrenItems$, versionedChildrenItems$]).pipe(
       map(([targetChildrenItems, versionedChildrenItems]) => {

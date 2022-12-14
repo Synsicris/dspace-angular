@@ -83,7 +83,7 @@ export class WrapperObjectivesComponent implements OnDestroy {
    * @param version
    */
   onVersionSelected(version: Item) {
-    this.impactPathwayService.initCompareImpactPathwayTask(this.impactPathwayStep.parentId, this.impactPathwayStep.id, this.targetImpactPathwayTaskId, version.id);
+    this.impactPathwayService.initCompareImpactPathwayTask(this.impactPathwayStep.parentId, this.impactPathwayStep.id, version.id);
   }
 
   /**

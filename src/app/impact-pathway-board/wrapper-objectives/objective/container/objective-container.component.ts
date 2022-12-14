@@ -7,7 +7,9 @@ import { ImpactPathwayTask } from '../../../core/models/impact-pathway-task.mode
 import { ImpactPathwayStep } from '../../../core/models/impact-pathway-step.model';
 import { ImpactPathwayService } from '../../../core/impact-pathway.service';
 import { DragAndDropContainerComponent } from '../../../shared/drag-and-drop-container.component';
-import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
+import {
+  CreateSimpleItemModalComponent
+} from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';
 import { environment } from '../../../../../environments/environment';
 
@@ -55,7 +57,7 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
 
 
     this.subs.push(
-      this.impactPathwayService.isTaskCompareModeActive(this.impactPathwayStep.parentId, this.impactPathwayStep.id, this.impactPathwayTask.id)
+      this.impactPathwayService.isCompareModeActive()
         .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
     );
 

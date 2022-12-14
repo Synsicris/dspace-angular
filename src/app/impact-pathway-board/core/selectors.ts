@@ -127,12 +127,3 @@ export const isCompareMode = createSelector(_getImpactPathwayState,
   (state: ImpactPathwayState) => state.compareMode || false
 );
 
-/**
- * Returns true if compare mode of task is active.
- * @function isCompareMode
- * @return {boolean}
- */
-export function isTaskCompareMode(impactPathwayId: string, impactPathwayStepId: string, impactPathwayTaskId: string) {
-  return impactPathwayStepTaskCompareModeSelector(impactPathwayId, impactPathwayStepId, impactPathwayTaskId, impactPathwayStateSelector);
-}
-

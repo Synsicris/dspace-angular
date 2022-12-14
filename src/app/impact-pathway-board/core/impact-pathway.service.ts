@@ -50,8 +50,7 @@ import {
   isCompareMode,
   isImpactPathwayLoadedSelector,
   isImpactPathwayProcessingSelector,
-  isImpactPathwayRemovingSelector,
-  isTaskCompareMode,
+  isImpactPathwayRemovingSelector
 } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
@@ -67,6 +66,7 @@ import {
   GenerateImpactPathwaySubTaskAction,
   GenerateImpactPathwayTaskAction,
   InitCompareAction,
+  InitCompareStepTaskAction,
   MoveImpactPathwaySubTaskAction,
   OrderImpactPathwaySubTasksAction,
   OrderImpactPathwayTasksAction,
@@ -78,10 +78,9 @@ import {
   SetImpactPathwaySubTaskCollapseAction,
   SetImpactPathwayTargetTaskAction,
   StopCompareImpactPathwayAction,
+  StopCompareImpactPathwayStepTaskAction,
   UpdateImpactPathwayAction,
-  UpdateImpactPathwayTaskAction,
-  InitCompareStepTaskAction,
-  StopCompareImpactPathwayStepTaskAction
+  UpdateImpactPathwayTaskAction
 } from './impact-pathway.actions';
 import { ErrorResponse } from '../../core/cache/response.models';
 import {
@@ -330,6 +329,29 @@ export class ImpactPathwayService {
     );
   }
 
+  /**
+   * Initialize to compare the steps that were previously compared
+   *
+   * @param impactPathwayStepId
+   *    the step id
+   * @param compareList
+   *    the list of compared steps
+   */
+  initCompareImpactPathwayStepTasks(impactPathwayStepId: string, compareList: ComparedVersionItem[]): Observable<ImpactPathwayTask[]> {
+    return observableFrom(compareList).pipe(
+      concatMap((compareItem: ComparedVersionItem) => this.initCompareImpactPathwayTasksFromTask(
+        compareItem.item.id,
+        compareItem.item,
+        compareItem.versionItem?.id).pipe(
+        map((tasks: ImpactPathwayTask[]) => this.initImpactPathwayTaskFromCompareItem(
+          compareItem,
+          impactPathwayStepId,
+          tasks
+        ))
+      )),
+      reduce((acc: any, value: any) => [...acc, value], [])
+    );
+  }
 
   /**
    * Initialize to compare the tasks for a specific step
@@ -366,6 +388,45 @@ export class ImpactPathwayService {
             );
           })
         );
+    }
+  }
+
+  /**
+   * Initialize to compare the tasks for a specific step
+   *
+   * @param targetImpactPathwayTaskId
+   *    the impact pathway's step id
+   * @param targetItem
+   *    the impact pathway's step compared item
+   * @param versionedImpactPathwayTaskId
+   *    the impact pathway's step compared item with
+   */
+  initCompareImpactPathwayTasksFromTask(targetImpactPathwayTaskId: string, targetItem: Item, versionedImpactPathwayTaskId: string): Observable<ImpactPathwayTask[]> {
+    const relatedTaskMetadata = Metadata.all(targetItem.metadata, environment.impactPathway.impactPathwayTaskRelationMetadata);
+    // if (isEmpty(relatedTaskMetadata) || isEmpty(versionedImpactPathwayTaskId)) {
+    if (isEmpty(relatedTaskMetadata)) {
+      return observableOf([]);
+    } else {
+      return this.projectVersionService.compareItemChildrenByMetadata(
+        targetImpactPathwayTaskId,
+        versionedImpactPathwayTaskId,
+        environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
+        mergeMap((compareList: ComparedVersionItem[]) => {
+          return observableFrom(compareList).pipe(
+            concatMap((compareItem: ComparedVersionItem) => observableOf(this.initImpactPathwayTaskFromCompareItem(
+              compareItem,
+              targetImpactPathwayTaskId)
+            )),
+            reduce((acc: any, value: any) => {
+              if (isNotNull(value)) {
+                return [...acc, value];
+              } else {
+                return acc;
+              }
+            }, [])
+          );
+        })
+      );
     }
   }
 
@@ -410,41 +471,18 @@ export class ImpactPathwayService {
     });
   }
 
-
-  /**
-   * Initialize to compare the steps that were previously compared
-   *
-   * @param compareList
-   *    the list of compared steps
-   */
-  initCompareImpactPathwayTaskSubTasks(compareList: ComparedVersionItem[], parentId?: string): Observable<ImpactPathwayTask[]> {
-    const type = compareList[0]?.item?.firstMetadataValue('dspace.entity.type');
-    return observableFrom(compareList).pipe(
-      concatMap((compareItem: ComparedVersionItem) => {
-        return observableOf(Object.assign({}, new ImpactPathwayTask(), {
-          id: compareItem.item.id,
-          compareId: compareItem.versionItem?.id,
-          compareStatus: compareItem.status,
-          parentId: parentId,
-          title: type,
-          type: compareItem.item.type,
-        }));
-      }),
-      reduce((acc: any, value: any) => [...acc, value], [])
-    );
-  }
-
-
   /**
    * Dispatch a new InitCompareStepTaskAction
    *
    * @param impactPathwayId
-   *    the impact pathway's id
-   * @param compareImpactPathwayId
-   *    the impact pathway's id to compare with
+   *    the id of impact pathway that the task belongs to
+   * @param impactPathwayStepId
+   *    the id of impact pathway step that the task belongs to
+   * @param compareImpactPathwayStepId
+   *    the impact pathway step's id to compare with the current one
    */
-  public initCompareImpactPathwayTask(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId: string, compareImpactPathwayStepTaskId: string) {
-    this.store.dispatch(new InitCompareStepTaskAction(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId, compareImpactPathwayStepTaskId));
+  public initCompareImpactPathwayTask(impactPathwayId: string, impactPathwayStepId: string, compareImpactPathwayStepId: string) {
+    this.store.dispatch(new InitCompareStepTaskAction(impactPathwayId, impactPathwayStepId, compareImpactPathwayStepId));
   }
 
 
@@ -482,8 +520,6 @@ export class ImpactPathwayService {
     this.store.dispatch(new ClearImpactPathwaySubtaskCollapseAction());
   }
 
-
-
   /**
    * Dispatch a new InitCompareAction
    *
@@ -504,13 +540,6 @@ export class ImpactPathwayService {
    */
   public isCompareModeActive() {
     return this.store.pipe(select(isCompareMode));
-  }
-
-  /**
-   * Check task compareMode is true
-   */
-  public isTaskCompareModeActive(impactPathwayId: string, impactPathwayStepId: string, impactPathwayTaskId: string) {
-    return this.store.pipe(select(isTaskCompareMode(impactPathwayId, impactPathwayStepId, impactPathwayTaskId)));
   }
 
   getCreateTaskFormConfigName(stepType: string, isObjectivePage: boolean): string {

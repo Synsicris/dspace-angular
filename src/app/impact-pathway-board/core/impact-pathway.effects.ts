@@ -26,6 +26,8 @@ import {
   ImpactPathwayActionTypes,
   InitCompareAction,
   InitCompareErrorAction,
+  InitCompareStepTaskAction,
+  InitCompareStepTaskSuccessAction,
   InitCompareSuccessAction,
   InitImpactPathwayAction,
   InitImpactPathwayErrorAction,
@@ -62,9 +64,7 @@ import {
   SaveImpactPathwayTaskLinksSuccessAction,
   UpdateImpactPathwayAction,
   UpdateImpactPathwaySubTaskAction,
-  UpdateImpactPathwayTaskAction,
-  InitCompareStepTaskAction,
-  InitCompareStepTaskSuccessAction
+  UpdateImpactPathwayTaskAction
 } from './impact-pathway.actions';
 import { ImpactPathwayService } from './impact-pathway.service';
 import { Item } from '../../core/shared/item.model';
@@ -175,12 +175,12 @@ export class ImpactPathwayEffects {
     withLatestFrom(this.store$),
     switchMap(([action, state]: [InitCompareStepTaskAction, any]) => {
       return this.projectVersionService.compareItemChildrenByMetadata(
-        action.payload.impactPathwayStepTaskId,
-        action.payload.compareimpactPathwayStepTaskId,
+        action.payload.impactPathwayStepId,
+        action.payload.compareImpactPathwayStepId,
         environment.impactPathway.impactPathwayTaskRelationMetadata
       ).pipe(
-        switchMap((compareItemList: ComparedVersionItem[]) => this.impactPathwayService.initCompareImpactPathwayTaskSubTasks(compareItemList, action.payload.impactPathwayStepId)),
-        map((tasks: ImpactPathwayTask[]) => new InitCompareStepTaskSuccessAction(action.payload.impactPathwayId, action.payload.impactPathwayStepId, action.payload.impactPathwayStepTaskId, tasks)),
+        switchMap((compareItemList: ComparedVersionItem[]) => this.impactPathwayService.initCompareImpactPathwayStepTasks(action.payload.impactPathwayStepId, compareItemList)),
+        map((tasks: ImpactPathwayTask[]) => new InitCompareStepTaskSuccessAction(action.payload.impactPathwayId, action.payload.impactPathwayStepId, tasks)),
         catchError((error: Error) => {
           if (error) {
             this.notificationsService.error(null, this.translate.get('impact-pathway.compare.error'));

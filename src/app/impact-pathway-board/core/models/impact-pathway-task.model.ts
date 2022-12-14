@@ -14,8 +14,7 @@ export class ImpactPathwayTask {
     public description?: string,
     public compareId?: string,
     public compareStatus?: ComparedVersionItemStatus,
-    public tasks: ImpactPathwayTask[] = [],
-    public compareMode: boolean = false) {
+    public tasks: ImpactPathwayTask[] = []) {
   }
 
   hasDetail() {
