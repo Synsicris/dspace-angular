@@ -47,10 +47,10 @@ import {
   impactPathwayObjectsSelector,
   impactPathwayStateSelector,
   impactPathwaySubTaskCollapsable,
+  isCompareMode,
   isImpactPathwayLoadedSelector,
   isImpactPathwayProcessingSelector,
   isImpactPathwayRemovingSelector,
-  isCompareMode,
   isTaskCompareMode,
 } from './selectors';
 import { AppState } from '../../app.reducer';
@@ -66,6 +66,7 @@ import {
   GenerateImpactPathwayAction,
   GenerateImpactPathwaySubTaskAction,
   GenerateImpactPathwayTaskAction,
+  InitCompareAction,
   MoveImpactPathwaySubTaskAction,
   OrderImpactPathwaySubTasksAction,
   OrderImpactPathwayTasksAction,
@@ -76,10 +77,9 @@ import {
   RemoveImpactPathwayTaskAction,
   SetImpactPathwaySubTaskCollapseAction,
   SetImpactPathwayTargetTaskAction,
+  StopCompareImpactPathwayAction,
   UpdateImpactPathwayAction,
   UpdateImpactPathwayTaskAction,
-  InitCompareAction,
-  StopCompareImpactPathwayAction,
   InitCompareStepTaskAction,
   StopCompareImpactPathwayStepTaskAction
 } from './impact-pathway.actions';
@@ -491,9 +491,11 @@ export class ImpactPathwayService {
    *    the impact pathway's id
    * @param compareImpactPathwayId
    *    the impact pathway's id to compare with
+   * @param isVersionOf
+   *    whether the impact pathway's id to compare is a version of item
    */
-  public dispatchInitCompare(impactPathwayId: string, compareImpactPathwayId: string) {
-    this.store.dispatch(new InitCompareAction(impactPathwayId, compareImpactPathwayId));
+  public dispatchInitCompare(impactPathwayId: string, compareImpactPathwayId: string, isVersionOf: boolean) {
+    this.store.dispatch(new InitCompareAction(impactPathwayId, compareImpactPathwayId, isVersionOf));
   }
 
 

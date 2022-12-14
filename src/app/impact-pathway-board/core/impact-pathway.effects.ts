@@ -24,6 +24,9 @@ import {
   GenerateImpactPathwayTaskErrorAction,
   GenerateImpactPathwayTaskSuccessAction,
   ImpactPathwayActionTypes,
+  InitCompareAction,
+  InitCompareErrorAction,
+  InitCompareSuccessAction,
   InitImpactPathwayAction,
   InitImpactPathwayErrorAction,
   InitImpactPathwaySuccessAction,
@@ -60,9 +63,6 @@ import {
   UpdateImpactPathwayAction,
   UpdateImpactPathwaySubTaskAction,
   UpdateImpactPathwayTaskAction,
-  InitCompareAction,
-  InitCompareSuccessAction,
-  InitCompareErrorAction,
   InitCompareStepTaskAction,
   InitCompareStepTaskSuccessAction
 } from './impact-pathway.actions';
@@ -141,9 +141,19 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY),
     withLatestFrom(this.store$),
     switchMap(([action, state]: [InitCompareAction, any]) => {
+      let impactPathwayId;
+      let versionItemId;
+      if (action.payload.isVersionOf) {
+        versionItemId = action.payload.impactPathwayId;
+        impactPathwayId = action.payload.compareImpactPathwayId;
+      } else {
+        impactPathwayId = action.payload.impactPathwayId;
+        versionItemId = action.payload.compareImpactPathwayId;
+      }
+
       return this.projectVersionService.compareItemChildrenByMetadata(
-        action.payload.impactPathwayId,
-        action.payload.compareImpactPathwayId,
+        impactPathwayId,
+        versionItemId,
         environment.impactPathway.impactPathwayStepRelationMetadata
       ).pipe(
         switchMap((compareItemList: ComparedVersionItem[]) => this.impactPathwayService.initCompareImpactPathwaySteps(compareItemList)),
