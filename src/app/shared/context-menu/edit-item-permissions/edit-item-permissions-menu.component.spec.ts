@@ -1,17 +1,18 @@
-import { ItemDataService } from './../../../core/data/item-data.service';
-import { AuthorizationDataService } from './../../../core/data/feature-authorization/authorization-data.service';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
+
+import { of as observableOf } from 'rxjs';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { Item } from '../../../core/shared/item.model';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { RouterTestingModule } from '@angular/router/testing';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
 import { EditItemPermissionsMenuComponent } from './edit-item-permissions-menu.component';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
-import { By } from '@angular/platform-browser';
-import { of as observableOf } from 'rxjs';
+import { ItemDataService } from '../../../core/data/item-data.service';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 
 describe('EditItemPermissionsMenuComponent', () => {
@@ -28,7 +29,7 @@ describe('EditItemPermissionsMenuComponent', () => {
     label: 'test'
   });
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     dso = Object.assign(new Item(), {
       id: 'test-item',
       _links: {
@@ -118,16 +119,12 @@ describe('EditItemPermissionsMenuComponent', () => {
       componentAsAny = fixture.componentInstance;
       component.contextMenuObject = dso;
       fixture.detectChanges();
-      spyOn(component, 'isVersionOfAnItem');
-      (component.isVersionOfAnItem as jasmine.Spy).and.returnValue(observableOf(true));
-      fixture.detectChanges();
     });
 
     it('should not render a button', () => {
       const link = fixture.debugElement.query(By.css('button'));
       expect(link).toBeNull();
     });
-
   });
 
 });
