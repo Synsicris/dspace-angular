@@ -655,6 +655,14 @@ export class ItemVersionsComponent implements OnInit {
   }
 
   /**
+   * Check if the version Item is the last official one
+   * @param versionItem the version item which metadata belongs to
+   */
+  isLastVersionVisible(versionItem: Item): boolean {
+    return versionItem?.firstMetadataValue('synsicris.isLastVersion.visible') === 'true';
+  }
+
+  /**
    * Check if the official metadata is not already set
    * @param versionItem the version item which metadata belongs to
    */
