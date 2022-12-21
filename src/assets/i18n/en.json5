@@ -768,8 +768,6 @@
 
   "bitstream-request-a-copy.submit.error": "Something went wrong with submitting the item request.",
 
-
-
   "breadcrumb.entity-type.Person": "Person",
 
   "breadcrumb.entity-type.Project": "Project",
@@ -790,79 +788,77 @@
 
   "breadcrumb.entity-type.Equipment": "Equipment",
 
-  "breadcrumb.entity-type.impactpathway": "impactpathway",
+  "breadcrumb.entity-type.impactpathway": "Impact Pathway",
 
-  "breadcrumb.entity-type.award": "award",
+  "breadcrumb.entity-type.award": "Award",
 
-  "breadcrumb.entity-type.contribution_fundingprogramme": "contribution_fundingprogramme",
+  "breadcrumb.entity-type.contribution_fundingprogramme": "Contribution to Funding objective",
 
-  "breadcrumb.entity-type.cooperationpartner": "cooperationpartner",
+  "breadcrumb.entity-type.cooperationpartner": "Cooperationpartner",
 
-  "breadcrumb.entity-type.ethic": "ethic",
+  "breadcrumb.entity-type.ethic": "Ethic",
 
-  "breadcrumb.entity-type.exp_societalimpact": "exp_societalimpact",
+  "breadcrumb.entity-type.exp_societalimpact": "Expected societal impact",
 
-  "breadcrumb.entity-type.condition": "condition",
+  "breadcrumb.entity-type.condition": "Condition",
 
-  "breadcrumb.entity-type.gender": "gender",
+  "breadcrumb.entity-type.gender": "Gender",
 
-  "breadcrumb.entity-type.innovationidea": "innovationidea",
+  "breadcrumb.entity-type.innovationidea": "Idea for the use of project results",
 
-  "breadcrumb.entity-type.milestone": "milestone",
+  "breadcrumb.entity-type.milestone": "Milestone",
 
-  "breadcrumb.entity-type.step": "step",
+  "breadcrumb.entity-type.step": "Works and cooperation after project end",
 
-  "breadcrumb.entity-type.physical_object": "physical_object",
+  "breadcrumb.entity-type.physical_object": "Object / material",
 
-  "breadcrumb.entity-type.proj_objective": "proj_objective",
+  "breadcrumb.entity-type.proj_objective": "Objective",
 
-  "breadcrumb.entity-type.research_result": "research_result",
+  "breadcrumb.entity-type.research_result": "Research result",
 
-  "breadcrumb.entity-type.spinoff": "spinoff",
+  "breadcrumb.entity-type.spinoff": "Spin-off",
 
-  "breadcrumb.entity-type.stateofart": "stateofart",
+  "breadcrumb.entity-type.stateofart": "State of knowledge / problem definition",
 
-  "breadcrumb.entity-type.targetgroup": "targetgroup",
+  "breadcrumb.entity-type.targetgroup": "Stakeholder group",
 
-  "breadcrumb.entity-type.task": "task",
+  "breadcrumb.entity-type.task": "Task",
 
-  "breadcrumb.entity-type.unexpected_result": "unexpected_result",
+  "breadcrumb.entity-type.unexpected_result": "(Intermediate) result / problem",
 
-  "breadcrumb.entity-type.workpackage": "workpackage",
+  "breadcrumb.entity-type.workpackage": "Work package",
 
-  "breadcrumb.entity-type.process_event": "process_event",
+  "breadcrumb.entity-type.process_event": "Cooperation / Participation / Exchange process",
 
-  "breadcrumb.entity-type.innovationpotential": "innovationpotential",
+  "breadcrumb.entity-type.innovationpotential": "Possible solution / change / innovation",
 
-  "breadcrumb.entity-type.application": "application",
+  "breadcrumb.entity-type.application": "Application of a solution / change / innovation",
 
-  "breadcrumb.entity-type.plan_publication": "plan_publication",
+  "breadcrumb.entity-type.plan_publication": "Planned publications",
 
-  "breadcrumb.entity-type.exploitationplan": "exploitationplan",
+  "breadcrumb.entity-type.exploitationplan": "Exploitation plan",
 
-  "breadcrumb.entity-type.projectpartner": "projectpartner",
+  "breadcrumb.entity-type.projectpartner": "Project partner",
 
-  "breadcrumb.entity-type.programme": "programme",
+  "breadcrumb.entity-type.programme": "Programme",
 
-  "breadcrumb.entity-type.call": "call",
+  "breadcrumb.entity-type.call": "Call",
 
-  "breadcrumb.entity-type.fundingobjective": "fundingobjective",
+  "breadcrumb.entity-type.fundingobjective": "Funding objective",
 
-  "breadcrumb.entity-type.ia_objective": "ia_objective",
+  "breadcrumb.entity-type.ia_objective": "Target for interaction and transfer",
 
-  "breadcrumb.entity-type.workingplan": "workingplan",
+  "breadcrumb.entity-type.workingplan": "Working plan",
 
-  "breadcrumb.entity-type.WorkingPlan": "Working Plan",
+  "breadcrumb.entity-type.WorkingPlan": "Working plan",
 
-  "breadcrumb.entity-type.comment": "comment",
+  "breadcrumb.entity-type.comment": "Comment",
 
-  "breadcrumb.entity-type.neg_sideeffect": "neg_sideeffect",
+  "breadcrumb.entity-type.neg_sideeffect": "Possible negative side effect",
 
-  "breadcrumb.entity-type.open_researchquestion": "open_researchquestion",
+  "breadcrumb.entity-type.open_researchquestion": "Open research questions",
 
-  "breadcrumb.entity-type.interim_report": "interim_report",
-
-
+  "breadcrumb.entity-type.interim_report": "Interim report",
 
   "browse.comcol.by.author": "By Author",
 
@@ -3240,11 +3236,11 @@
 
   "item.version.history.table.error": "An error occurs during the operation",
 
-  "item.version.history.table.clickToOpen" : "Click here to open",
+  "item.version.history.table.clickToOpen": "Click here to open",
 
-  "item.version.history.table.activeVersion" : "Active Instance",
+  "item.version.history.table.activeVersion": "Active Instance",
 
-  "item.version.history.table.notes" : "Notes",
+  "item.version.history.table.notes": "Notes",
 
   "synsicris.version.visible": "Visibility",
 
@@ -4578,7 +4574,7 @@
 
   "project.listelement.badge": "Consortium",
 
-  "programme.manage.breadcrumbs": "Manage programme members",
+  "programme.manage.breadcrumbs": "Mangage programme members",
 
   "programme.manage.members-list.head": "Manage group",
 
@@ -4652,11 +4648,11 @@
 
   "programme.manage.members.project.members-group": "Invitation and management of programme members",
 
-  "programme.manage.members.funders-group-help": "Help message here",
+  "programme.manage.members.funders-group-help": "Help PT-Programme project funders",
 
-  "programme.manage.members.managers-group-help": "Help message here",
+  "programme.manage.members.managers-group-help": "Help PT-Programme manager",
 
-  "programme.manage.members.members-group-help": "Help message here",
+  "programme.manage.members.members-group-help": "Help PT-Read",
 
   "project.manage.menu.project": "<i class=\"fas fa-toolbox\"></i> Invitation and management coordinators",
 
@@ -4676,11 +4672,11 @@
 
   "project.manage.members.project.members-group": "Invitation and Management of project members",
 
-  "project.manage.members.project.readers-group": "Invitation and Management of project readers",
+  "project.manage.members.project.readers-group": "Invitation and Managment Persons with Read-Role",
 
   "project.manage.members.project.members-group-help": "Help message here",
 
-  "project.manage.members.project.readers-group-help": "Help message here",
+  "project.manage.members.project.readers-group-help": "Help Read-Role",
 
   "project.manage.members.funding.coordinators-group": "Invitation and Management Project members with Coordinator-Role",
 
@@ -4688,7 +4684,7 @@
 
   "project.manage.members.funding.members-group": "Invitation and Management Project members",
 
-  "project.manage.members.funding.members-group-help": "Help Project members",
+  "project.manage.members.funding.members-group-help": "Help message here",
 
   "project.manage.members-list.head": "Manage group",
 
@@ -4838,7 +4834,7 @@
 
   "project-overview.page.content.impact-pathways": "Impact Pathway",
 
-  "project-overview.page.content.new-impact-pathway": "Create new impact pathway",
+  "project-overview.page.content.new-impact-pathway": "Create new Impact Pathway",
 
   "project-overview.page.content.reports": "Reports / export",
 
@@ -6700,10 +6696,6 @@
 
   "submission.sections.submit.progressbar.describe.applications.info": "Application stands for use or implementation of solutions / changes / innovations to which the project has contributed. This can take place at project partners or third parties and in unchanged or further developed form. Application can show up in a broad spectrum, such as testing, production figures, pilot projects as well as using households, organizations or municipalities.<p><i>Please record the application of a solution / change / innovation here. You can use a time series to show how the application has developed.</i>",
 
-  "submission.sections.submit.progressbar.describe.applications_quant": "Information on the scope and temporal development of the application (as far as possible)",
-
-  "submission.sections.submit.progressbar.describe.applications_quant.info": "Application stands for use or implementation of solutions / changes / innovations to which the project has contributed. This can take place at project partners or third parties and in unchanged or further developed form. Application can show up in a broad spectrum, such as testing, production figures, pilot projects as well as using households, organizations or municipalities.<p><i>Please record the application of a solution / change / innovation here. You can use a time series to show how the application has developed.</i></p><i>Please describe the scope and development of the application over time. Start with the base value before the project had an impact. (This value can be 0 if something new is applied or have a value if change was contributed to).</br>Include evidence, if available, as an upload or link.<i></br>If you cannot provide information on scope but have evidence of an application, at a minimum use the description field and include the reference year.",
-
   "submission.sections.submit.progressbar.describe.research_results": "Research result",
 
   "submission.sections.submit.progressbar.describe.events_involved": "Participants in the event",
@@ -7602,7 +7594,7 @@
 
   "layout.tab.header.workingplan": "Workingplan",
 
-  "layout.tab.header.Reflections": "Reflection",
+  "layout.tab.header.Reflections": "Reflections",
 
   "layout.tab.header.ethic": "Ethical reflection",
 
@@ -7614,7 +7606,7 @@
 
   "layout.tab.header.knowledge": "State of knowledge / problem definition",
 
-  "layout.tab.header.Projectobjectives": "Objectives",
+  "layout.tab.header.Projectobjectives": "<span class=\"entry-with-space-before-to-divide-sidebar\" alt=\"Lists\"></span><span class=\"entry-with-space-before-label\">Objectives</span>",
 
   "layout.tab.header.research_objective": "Research and development objectives",
 
@@ -7672,7 +7664,7 @@
 
   "layout.box.header.latestParentProjectsCompleted": "Joint projects - finished",
 
-  "layout.box.header.basics": "Subproject - Primary data",
+  "layout.box.header.basics": "Project information",
 
   "layout.box.header.details": "Subprojekt - Details",
 
@@ -7818,7 +7810,7 @@
 
   "search.filters.entityType.ia_objective": "Target for interaction and transfer",
 
-  "layout.tab.header.Subprojects": "Projects / Consortium",
+  "layout.tab.header.Subprojects": "Participating projects / grantees",
 
   "layout.tab.header.Involved": "Involved organisations",
 
@@ -7844,7 +7836,7 @@
 
   "earch.filters.applied.f.itemtype": "Type",
 
-  "layout.field.label.Person.dc.title": "Name",
+  "layout.field.label.Person.dc.title": "<span class=\"headline-workspace\">Personal Workspace",
 
   "layout.field.label.Person.synsicris.subject.destatis": "Discipline",
 
@@ -7888,7 +7880,7 @@
 
   "layout.field.label.parentproject.oairecerif.amount.currency": "Currency",
 
-  "layout.field.label.Project.dc.title": "<i class=\"fas fa-shekel-sign\"></i> Workspace Consortium:",
+  "layout.field.label.Project.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-shekel-sign\"> Workspace Consortium:",
 
   "layout.field.label.Project.oairecerif.acronym": "Acronym",
 
@@ -8706,7 +8698,7 @@
 
   "s": "Target for interaction and transfer",
 
-  "layout.field.label.Person.dspace.entity.type": "Person",
+  "layout.field.label.Person.dspace.entity.type": "<span class=\"headline-workspace\">Personal Workspace",
 
   "test_ethic": "Overview",
 
@@ -8798,7 +8790,7 @@
 
   "layout.field.label.project.synsicris.type.jointproject": "Type of consortium",
 
-  "layout.field.label.Funding.dc.title": "<i class=\"fas fa-cube\"></i> Workspace Project:",
+  "layout.field.label.Funding.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-cube\"></i> Workspace Project:",
 
   "layout.field.label.Funding.oairecerif.acronym": "Acronym",
 
@@ -9098,6 +9090,126 @@
 
   "layout.box.header.multiple_involved": "Involved organisations",
 
-  "project-overview.page.subproject.create.btn": "to be deleted"
+  "submission.sections.submit.progressbar.describe.internalacc.info": "new help text",
+
+  "neg_sideeffect.listelement.badge": "Negative side effect",
+
+  "layout.box.help-text.pot_societalimpact_h": "to be deleted",
+
+  "layout.tab.header.targetgroup": "Stakeholder groups",
+
+  "layout.tab.header.stateofart": "State of knowledge / problem definition",
+
+  "layout.tab.header.proj_objective": "Research and development objectives",
+
+  "layout.tab.header.Event": "Events",
+
+  "layout.tab.header.Publication": "Publications",
+
+  "layout.tab.header.Product": "Research data",
+
+  "layout.tab.header.research_result": "Research results",
+
+  "layout.tab.header.Patent": "Patents / utility patents",
+
+  "layout.tab.header.innovationpotential": "Possible solutions / changes / innovations",
+
+  "layout.tab.header.innovation_idea": "Ideas for the use of project results",
+
+  "layout.box.header.Funding_comment": "to be deleted",
+
+  "layout.box.header.workpackage_internalacc": "Internal Information (only members of consortium)",
+
+  "layout.box.header.task_internalacc": "Internal Information (only members of consortium)",
+
+  "layout.box.header.process_event_internalacc": "Internal Information (only members of consortium)",
+
+  "layout.box.header.plan_publication_internalacc": "Internal Information (only members of consortium)",
+
+  "layout.field.label.projectpartner.synsicris.type.publicfunded": "to be deleted",
+
+  "layout.field.label.cooperationpartner.synsicris.type.publicfunded": "to be deleted",
+
+  "layout.field.label.workpackage.synsicris.description.changes": "to be deleted",
+
+  "layout.field.label.Publication.dc.relation.isbn": "to be deleted",
+
+  "layout.field.label.Publication.dc.relation.doi": "to be deleted",
+
+  "layout.field.label.Publication.dc.relation.issn": "to be deleted",
+
+  "layout.field.label.Publication.dc.identifier.url": "to be deleted",
+
+  "layout.field.label.Person.crisrp.site.title": "Title of webpage",
+
+  "layout.field.label.ethic.dc.type": "Ethical aspects",
+
+  "layout.field.label.ethic.synsicris.description.aspect": "Actions",
+
+  "layout.field.label.process_event.synsicris.type.frequency": "Frequency",
+
+  "layout.field.label.process_event.synsicris.type.period": "Period",
+
+  "layout.field.label.process_event.synsicris.title.event": "Title",
+
+  "layout.field.label.process_event.oairecerif.event.startDate": "Start",
+
+  "layout.field.label.process_event.oairecerif.event.endDate": "End",
+
+  "layout.field.label.process_event.synsicris.duration": "Duration (hours)",
+
+  "layout.field.label.process_event.synsicris.participantnumber": "Number of participants",
+
+  "layout.field.label.process_event.oairecerif.event.place": "City",
+
+  "layout.field.label.process_event.oairecerif.event.country": "Country",
+
+  "layout.field.label.Publication.oairecerif.author.affiliation": "Organisation",
+
+  "layout.field.label.Product.oairecerif.author.affiliation": "Organisation",
+
+  "layout.field.label.innovationpotential.synsicris.relation.targetgroup": "Stakeholder group(s)",
+
+  "layout.field.label.spinoff.synsicris.amount.annual-sales": "Annual turnover",
+
+  "layout.field.label.spinoff.synsicris.amount.currency-annual-sales": "Currency",
+
+  "layout.field.label.spinoff.synsicris.amount.funding": "Funding amount",
+
+  "layout.field.label.spinoff.synsicris.amount.currency-funding": "Currency",
+
+  "layout.field.label.exp_societalimpact.synsicris.type.positive-direction": "Impact intensity",
+
+  "layout.field.label.exp_societalimpact.synsicris.description.pos": "Extent of expected impact",
+
+  "layout.field.label.application.synsicris.type.baseline": "to be deleted",
+
+  "layout.field.label.application.synsicris.coverage.regional": "Region of application",
+
+  "layout.field.label.application.synsicris.type.quantifier": "to be deleted",
+
+  "layout.field.label.application.synsicris.type.quantifier-own": "to be deleted",
+
+  "layout.field.label.application.synsicris.quantity": "Quantity / number",
+
+  "layout.field.label.application.synsicris.description.description": "Notes",
+
+  "layout.field.label.parentproject.dc.type.attachment": "to be deleted",
+
+  "layout.field.label.OrgUnit.synsicris.type.publicfunded": "to be deleted",
+
+  "layout.field.label.programme.dc.description": "to be deleted",
+
+  "layout.field.label.call.dc.description": "to be deleted",
+
+  "layout.field.label.call.dc.type": "to be deleted",
+
+  "layout.field.label.call.synsicris.call.startDate": "to be deleted",
+
+  "layout.field.label.call.synsicris.call.endDate": "to be deleted",
+
+  "layout.field.label.call.oairecerif.identifier.url": "to be deleted",
+
+  "programme.manage.notification.success.deleteMembe": "Successfully deleted member"
 
 }
