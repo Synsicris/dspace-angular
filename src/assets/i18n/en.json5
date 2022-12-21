@@ -9094,8 +9094,6 @@
 
   "neg_sideeffect.listelement.badge": "Negative side effect",
 
-  "layout.box.help-text.pot_societalimpact_h": "to be deleted",
-
   "layout.tab.header.targetgroup": "Stakeholder groups",
 
   "layout.tab.header.stateofart": "State of knowledge / problem definition",
@@ -9116,8 +9114,6 @@
 
   "layout.tab.header.innovation_idea": "Ideas for the use of project results",
 
-  "layout.box.header.Funding_comment": "to be deleted",
-
   "layout.box.header.workpackage_internalacc": "Internal Information (only members of consortium)",
 
   "layout.box.header.task_internalacc": "Internal Information (only members of consortium)",
@@ -9125,20 +9121,6 @@
   "layout.box.header.process_event_internalacc": "Internal Information (only members of consortium)",
 
   "layout.box.header.plan_publication_internalacc": "Internal Information (only members of consortium)",
-
-  "layout.field.label.projectpartner.synsicris.type.publicfunded": "to be deleted",
-
-  "layout.field.label.cooperationpartner.synsicris.type.publicfunded": "to be deleted",
-
-  "layout.field.label.workpackage.synsicris.description.changes": "to be deleted",
-
-  "layout.field.label.Publication.dc.relation.isbn": "to be deleted",
-
-  "layout.field.label.Publication.dc.relation.doi": "to be deleted",
-
-  "layout.field.label.Publication.dc.relation.issn": "to be deleted",
-
-  "layout.field.label.Publication.dc.identifier.url": "to be deleted",
 
   "layout.field.label.Person.crisrp.site.title": "Title of webpage",
 
@@ -9182,17 +9164,39 @@
 
   "layout.field.label.exp_societalimpact.synsicris.description.pos": "Extent of expected impact",
 
-  "layout.field.label.application.synsicris.type.baseline": "to be deleted",
-
   "layout.field.label.application.synsicris.coverage.regional": "Region of application",
-
-  "layout.field.label.application.synsicris.type.quantifier": "to be deleted",
-
-  "layout.field.label.application.synsicris.type.quantifier-own": "to be deleted",
 
   "layout.field.label.application.synsicris.quantity": "Quantity / number",
 
   "layout.field.label.application.synsicris.description.description": "Notes",
+
+  "programme.manage.notification.success.deleteMembe": "Successfully deleted member",
+
+  "layout.tab.header.innovationidea": "Ideas for the use of project results",
+
+  "layout.box.help-text.pot_societalimpact_h": "to be deleted",
+
+  "layout.box.header.Funding_comment": "to be deleted",
+
+  "layout.field.label.projectpartner.synsicris.type.publicfunded": "to be deleted",
+
+  "layout.field.label.cooperationpartner.synsicris.type.publicfunded": "to be deleted",
+
+  "layout.field.label.workpackage.synsicris.description.changes": "to be deleted",
+
+  "layout.field.label.Publication.dc.relation.isbn": "to be deleted",
+
+  "layout.field.label.Publication.dc.relation.doi": "to be deleted",
+
+  "layout.field.label.Publication.dc.relation.issn": "to be deleted",
+
+  "layout.field.label.Publication.dc.identifier.url": "to be deleted",
+
+  "layout.field.label.application.synsicris.type.baseline": "to be deleted",
+
+  "layout.field.label.application.synsicris.type.quantifier": "to be deleted",
+
+  "layout.field.label.application.synsicris.type.quantifier-own": "to be deleted",
 
   "layout.field.label.parentproject.dc.type.attachment": "to be deleted",
 
@@ -9208,8 +9212,6 @@
 
   "layout.field.label.call.synsicris.call.endDate": "to be deleted",
 
-  "layout.field.label.call.oairecerif.identifier.url": "to be deleted",
-
-  "programme.manage.notification.success.deleteMembe": "Successfully deleted member"
+  "layout.field.label.call.oairecerif.identifier.url": "to be deleted"
 
 }
