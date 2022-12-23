@@ -7501,7 +7501,8 @@
 
   "layout.tab.header.knowledge": "State of knowledge / problem definition",
 
-  "layout.tab.header.Projectobjectives": "<i class=\"fas fa-bullseye\"></i> Objectives",
+  //"layout.tab.header.Projectobjectives": "Objectives",
+  "layout.tab.header.Projectobjectives": "<span class=\"entry-with-space-before-to-divide-sidebar\" alt=\"Lists\"></span><span class=\"entry-with-space-before-label\">Objectives</span>",
 
   "layout.tab.header.research_objective": "Research and development objectives",
 
@@ -7789,7 +7790,8 @@
 
   "layout.field.label.parentproject.oairecerif.amount.currency": "Currency",
 
-  "layout.field.label.Project.dc.title": "<i class=\"fas fa-shekel-sign\"></i> Workspace Consortium:",
+  //"layout.field.label.Project.dc.title": "<i class=\"fas fa-shekel-sign\"></i> Workspace Consortium:",
+  "layout.field.label.Project.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-shekel-sign\"></i> Workspace Cosortium:</span>",
 
   "layout.field.label.Project.oairecerif.acronym": "Acronym",
 
@@ -8783,7 +8785,8 @@
 
   "layout.box.header.Project": "Projects",
 
-  "layout.field.label.Person.dspace.entity.type": "Person",
+  //"layout.field.label.Person.dspace.entity.type": "Person",
+  "layout.field.label.Person.dspace.entity.type": "<span class=\"headline-workspace\">Person</span>",
 
   "test_ethic": "Overview",
 
@@ -8879,7 +8882,8 @@
 
   "layout.field.label.project.synsicris.type.jointproject": "Type of consortium",
 
-  "layout.field.label.Funding.dc.title": "<i class=\"fas fa-cube\"></i> Workspace Project:",
+  //"layout.field.label.Funding.dc.title": "<i class=\"fas fa-cube\"></i> Workspace Project:",
+  "layout.field.label.Funding.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-cube\"></i> Workspace Project:</span>",
 
   "layout.field.label.Funding.oairecerif.acronym": "Acronym",
 

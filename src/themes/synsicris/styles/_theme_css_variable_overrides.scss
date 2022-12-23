@@ -1,65 +1,151 @@
 // Override or add CSS variables for your theme here
 
 :root {
-  --ds-header-logo-height: 40px;
-  --ds-banner-text-background: rgba(0, 0, 0, 0.45);
-  --ds-banner-background-gradient-width: 300px;
-  --ds-home-news-link-color: #{$green};
-  --ds-home-news-link-hover-color: #{darken($green, 15%)};
 
-  /* ------- FOOTER (rex 221104) */
-  //--ds-footer-logo-height: 50px;
-  --ds-footer-bg: white;
-  --ds-footer-border: 1px solid rgba(161, 175, 184, 1);
-  --ds-footer-padding: 2.0rem 1.25rem 2.0rem 1.25rem !important;
+  // --ds-header-logo-height: 40px;                         // deprecated, because the SynSICRIS-logo is made with text
+  --ds-banner-text-background: rgba(0, 0, 0, 0.45);       // which banner?
+  --ds-banner-background-gradient-width: 300px;             // which banner?
+  --ds-home-news-link-color: #{$green};                     // ?
+  --ds-home-news-link-hover-color: #{darken($green, 15%)};  // ?
+  // variables up to here were'nt from rex, function is not clear
+
+  /* ----------------- BASIC COLOUR PALETTE ---------------------------- */
+
+  --sy-color-blue-13:      rgb(5, 44, 59);        // #052C3B hsl(197,84,13)   $blue-dark tooltip text
+  --sy-color-blue-29:      rgb(18,100,132);       // #126484 hsl(197,76,29)   sidebar links
+  --sy-color-blue-33:      rgb(0, 121, 168);      // #0087A8 hsl(192,100,33)  links in breadcrumb
+  --sy-color-blue-94:      rgb(228, 247, 253);    // #E4F7FD hsl(194,86,94)   tooltip bg of bubble and arrow (bright blue)
+  --sy-color-blue-95:      rgb(239,244,247);      // #EFF4F7 hsl(203,33,95)   direct linktabs in sidebar bg
+
+  --sy-color-bluegray-31:  rgb(72,79,86);         // #484F56 hsl(210,9,31)    sidebar text colour of the active item
+ 
+  --sy-color-gray-36:      rgb(91,91,91);         // #5B5B5B hsl(0,0,36)      synsicris-logo gray
+  --sy-color-grey-48:      rgb(115,123,132);      // #737B84 hsl(212,7,48)    tooltip shadow
+  --sy-color-gray-68:      rgb(161,175,184);      // #A1AFB8 hsl(202,14,68)   level 1 (person) headerbox and breadcrumb-tags icon and border, horizontal borders of footer, breadcrumb, header
+  --sy-color-gray-85:      rgb(216, 217, 218);    // #D8D9DA hsl(210,3,85)    footer dividers between textgroups
+  --sy-color-gray-90:      rgb(230,230,230);      // #E6E6E6 hsl(60,0,90)     sidebar borders of tabs
+  --sy-color-gray-95:      rgb(244,245,246);      // #F1F2F4 hsl(210,10,95)   level 1 (person) headerbox bg, sidebar expandible tabs bg
+  --sy-color-gray-96:      rgb(251,251,251);      // #F4F5F6 hsl(210,11,96)   basic background color of content area
+  --sy-color-gray-98:      rgb(248,249,250);      // #F8F9FA hsl(210,17,98)   dropdown menu bg - TO BE CHECKED, IF NECCESSARY (no access to the specific forms actually 221209)
+  --sy-color-gray-100:     rgb(255,255,255);      // #fff hsl(0,0,100)        bg footer, active and hover sidebar item
+  
+  --sy-color-green-49:     rgb(117,200,52);       // #75C834 hsl(94.59,49)    level 2 (project) headerbox and breadcrumb-tags icon and border
+  --sy-color-green-97:     rgb(247,252,243);      // #F7FCF3 hsl(93,60,97)    level 2 (project) headerbox bg
+ 
+  --sy-color-magenta-42:   rgb(199,15,92);        // #C70F5C hsl(335,86,42)   ci magenta uni kassel, synsicris-logo magenta
+  
+  --sy-color-yellow-46:    rgb(234,183,2);        // #EAB702 hsl(47,98,46)    level 3 (funding) headerbox and breadcrumb-tags icon and border
+  --sy-color-yellow-98:    rgb(255,253,245);      // #FFFDF5 hsl(48,100,98)   level 3 (funding) headerbox bg
+  
+
+   /* ----------------- COLORS FOR RECURRING LAYOUT ELEMENTS ---------------------------- */
+  
+  --sy-links-color:                      var(--sy-color-blue-33);
+  --sy-body-background-color:            var(--sy-color-gray-96);            // basic background color of content area (didn't find a variable for this)
+
+  /* ------- SynSICRIS-Logo */
+  --sy-synsicris-logo-color-magenta:     var(--sy-color-magenta-42);
+  --sy-synsicris-logo-color-gray:        var(--sy-color-gray-36);
+
+  /* ------- different levels with different sidebar-navigations */
+
+  // level 1 (gray))
+  --sy-level-person-background-color:    var(--sy-color-gray-95);
+  --sy-level-person-icon-color:          var(--sy-color-gray-68);
+  --sy-level-person-border-color:        var(--sy-color-gray-68);
+
+  // level 2 (green)
+  --sy-level-project-background-color:   var(--sy-color-green-97);
+  --sy-level-project-icon-color:         var(--sy-color-green-49);
+  --sy-level-project-border-color:       var(--sy-color-green-49);
+
+  // level 3 (yellow)
+  --sy-level-funding-background-color:   var(--sy-color-yellow-98);
+  --sy-level-funding-icon-color:         var(--sy-color-yellow-46);
+  --sy-level-funding-border-color:       var(--sy-color-yellow-46);
 
 
-  /* ----------------- TOOLTIP (rex 221021) */
-  --ds-tooltip-inner-background-color: rgba(228, 247, 253, 1); // background of bubble ad arrow color bright blue
-  --ds-tooltip-inner-color: #{$blue-dark}; // text color dark blue
-  --ds-tooltip-boxshadow-color: rgba(3, 36, 74, 0.7); // shadow
+   /* ----------------- FOOTER ---------------------------- */
+  --sy-footer-4science-logo-height:     1.6rem;
+  --sy-footer-dspacecris-logo-height:   3rem;
+  --ds-footer-bg:                       var(--sy-color-gray-100);
+  --ds-footer-border:                   1px solid var(--sy-color-gray-68);  // border-top
+  --ds-footer-padding:                  0.4rem 0 1.4rem 0 !important;
+  --sy-footer-divider:                  2px solid var(--sy-color-gray-85);
+  
+
+  /* ----------------- TOOLTIP ---------------------------- */
+  --ds-tooltip-inner-background-color:  var(--sy-color-blue-94);  // tooltip bg of bubble and arrow (bright blue)
+  --ds-tooltip-inner-color:             var(--sy-color-blue-13);  // text color (dark blue)
+  --ds-tooltip-boxshadow-color:         var(--sy-color-grey-48);  // shadow
 
 
-  /* ----------------- DROPDOWN (rex 220415) */
-  /* rex 220415 : increased to 218px (with lines) / 212px (without lines), so that the following line is still visible
+  /* ----------------- DROPDOWN ---------------------------- */
+  /* rex 220415 increased to 218px (with lines) / 212px (without lines), so that the following line is still visible
  in a truncated form, so that the user recognises that more items follow. The previous height specification in pixels,
  however, only works with medium font size. To ensure that it also works when the font size is changed,
  relative dimensions are used instead, assuming that the root font size is 16px. */
 
-  //--ds-dropdown-menu-max-height: 200px; // origially
-  //--ds-dropdown-menu-max-height: 13.5rem; // rex 220415 with lines between menu items
-  --ds-dropdown-menu-max-height: 13.25rem; // rex 220415 without lines between menu items, see /src/app/shared/form/builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.component.scss
-  --ds-dropdown-menu-background-color: #{$gray-bright};
+  //--ds-dropdown-menu-max-height:      13.5rem;                  // with lines between menu items, origially 200px
+  --ds-dropdown-menu-max-height:        13.25rem;                 // without lines between menu items, see /src/app/shared/form/builder/ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.component.scss
+  --ds-dropdown-menu-background-color:  var(--sy-color-gray-98);  //#{$gray-bright}; 
 
-  /* ----------------- BREADCRUMB (rex 221028) */
-  --ds-breadcrumb-bg: rgb(246, 246, 246) !important;
-  --ds-breadcrumb-link-color: rgb(0, 121, 168) !important;
 
-  /* ----------------- HEADER (rex 221104) */
-  --ds-header-navbar-border-top-color: #{$white};
-  --ds-header-navbar-border-bottom-color: rgba(161, 175, 184, 1);
+  /* ----------------- BREADCRUMB ---------------------------- */
+  --ds-breadcrumb-bg:                   var(--sy-color-gray-96)!important; //"!important" is important to override the existing color, gray-95 would also be o.k.
+  --ds-breadcrumb-link-color:           var(--sy-links-color);
 
-  /* ----------------- SIDEBAR (rex preparation) */
-  /*
-  --ds-sidebar-items-width: #{$sidebar-items-width};
-  --ds-total-sidebar-width: #{$total-sidebar-width};
 
-  --ds-cris-layout-sidebar-width: 350px;
-  --ds-cris-layout-sidebar-background-color: #{$gray-200};
-  --ds-cris-layout-sidebar-link-color: rgba(0,0,0,.8);
-  --ds-cris-layout-sidebar-link-color-active: #000000;
-  --ds-cris-layout-sidebar-menu-background: #207698;
-  --ds-cris-layout-sidebar-menu-color: #fff;
-  --ds-cris-layout-sidebar-link-border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  --ds-cris-layout-sidebar-entry-height: 40px;
-  --ds-cris-layout-sidebar-entry-width: 40px;
-  --ds-cris-layout-sidebar-border-color: #207698;
-  --ds-cris-layout-sidebar-hover-focus-background-color: #207698;
-  --ds-cris-layout-sidebar-hover-focus-border-color: #207698;
-  --ds-cris-layout-sidebar-menu-active-color: #{$cyan};
-  --ds-cris-layout-sidebar-menu-active-background: #{theme-color('light')};
-  --ds-cris-layout-sidebar-tab-color-hover : #{theme-color('light')};
-  */
+  /* ----------------- HEADER ---------------------------- */
+  --ds-header-navbar-border-top-color:    transparent;              // border-top is not needed in header
+  --ds-header-navbar-border-bottom-color: var(--sy-color-gray-68);   // border-bottom is the border-top of the breadcrumb bar
+
+
+  /* ----------------- SIDEBAR ---------------------------- */
+  
+  /* sidebar units
+  ---------------- */
+  --ds-cris-layout-sidebar-width:         22rem;  // Width of the sidebar, originally defined in pixels (350px), extended from 22 to 23rem, also used for the width of the items
+
+  /* sidebar background colors
+  ---------------------------- */
+  /* About color structure of sidebar:
+  originally the color comes from the sidebar bg. the links themselves are transparent, so this determines the background colour of all menu items except the active ones. 
+  However, this means that the sidebar area at the bottom without links has the same colour as clickable items, which is confusing.
+  Moreover, this does not allow for a more differentiated design of the various menu levels. Therefore, set to transparent and coloured the LI items themselves instead. */
+
+  --ds-cris-layout-sidebar-background-color:        transparent;                // bg of complete sidebar, disabled due to colour distinction between direct and expandable tabs, see explanation above
+  --ds-cris-layout-sidebar-menu-active-background:  var(--sy-color-gray-100);   // white bg of the active item
+  --ds-cris-layout-sidebar-tab-color-hover:         var(--sy-color-gray-100);   // white bg of all items of all levels at hover
+  --sy-cris-layout-sidebar-tab-direct-color:        var(--sy-color-blue-95);    // light blue bg of tabs with direct links
+  --sy-cris-layout-sidebar-tab-expandable-color:    var(--sy-color-gray-95);    // light gray bg of expandable tabs
+
+  /* sidebar text colors
+  ---------------------- */
+  --sy-cris-layout-sidebar-link-text-color:         var(--sy-color-blue-29);     // darker blue instead of middle lik blue var(--sy-links-color), because its better readible
+  --ds-cris-layout-sidebar-menu-active-color:       var(--sy-color-bluegray-31); // dark bluegrey text colour of the active item - both the link itself and the expandable item above it
+
+  /* sidebar borders
+  ------------------ */
+  --ds-cris-layout-sidebar-link-border-bottom:            none;                     // Lines between the top level menu items, not the second level items - therefore not used, as needed for both levels.
+  --sy-cris-layout-sidebar-tab-border-top-color:          var(--sy-color-gray-90);  // light gray top border of tabs
+  --sy-cris-layout-sidebar-tab-border-bottom-color:       var(--sy-color-gray-100); // white bottom border of tabs
+  --sy-cris-layout-sidebar-first-child-border-top-color:  var(--sy-color-gray-90);  // light gray top border of the complete sidebar
+
+  /* existing sidebar variables with no detectable function
+  ---------------------------------------------------------
+  --ds-cris-layout-sidebar-entry-height:                  100rem;
+  --ds-cris-layout-sidebar-menu-background:               red;
+  --ds-cris-layout-sidebar-hover-focus-background-color:  red !important; // With focus, the items get a blue border, but this does not come from these variables
+  --ds-cris-layout-sidebar-menu-color:                    blue !important;
+  --ds-cris-layout-sidebar-link-color:                    yellow !important;
+  --ds-cris-layout-sidebar-link-color-active:             magenta !important;
+  --ds-cris-layout-sidebar-border-color:                  red !important;
+  --ds-cris-layout-sidebar-hover-focus-border-color:      lime !important;   // With focus, the items get a blue border, but this does not come from these variables
+  --ds-sidebar-items-width:                               3000px !important;
+  --ds-total-sidebar-width:                               3000px !important;
+  --ds-cris-layout-sidebar-entry-height:                  400px !important;
+  --ds-cris-layout-sidebar-entry-width:                   400px !important;
+  */ 
 
 }
-

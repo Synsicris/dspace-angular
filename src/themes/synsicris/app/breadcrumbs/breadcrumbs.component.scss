@@ -1,0 +1,38 @@
+/* -----------------------------------------------------------
+BREADCRUMB (rex 221028)
+disabled here because it is currently still in src/themes/synsicris/styles/_global-styles.scsss 
+because it probably doesn't work yet due to cascading if it is in src/themes/synsicris/app/breadcrumbs/breadcrumbs.component.scss. 
+Must look at then in connection with the extension of the Bradcrumb functionality.
+----------------------------------------------------------- */
+/*
+ds-breadcrumbs nav.nav-breadcrumb { // complete bar
+
+  //display:none !important;
+
+  // WORKAROUND WITH BOX-SHADOW, BECAUSE BORDER-BOTTOM DOESN'T WORK
+  // because ol.breadcrumb moves inside v.nav.breadcrumb as soon as a border is used.
+  // Therefore border-top for breadcrumb bar IS in navbar.component.scss in nav.navbar,
+  // and border-bottom here as shadow
+  box-shadow: 0 1px 0 var(--ds-header-navbar-border-bottom-color);
+
+  ol.breadcrumb {
+
+    background-color: transparent; // Breadcrumb-Links had a background-color, that is not needed
+
+    li.breadcrumb-item {
+      font-size: 1.1rem;
+      font-weight: 600 !important;
+
+      a:link, a:hover, a:focus, a:visited {
+        color: var(--ds-breadcrumb-link-color) !important;
+      }
+
+      & + .breadcrumb-item::before {
+        content: quote("/") !important;
+      }
+    } // end li.breadcrumb-item
+
+  } // end ol.breadcrumb
+
+} // end ds-breadcrumbs nav.nav-breadcrumb
+*/

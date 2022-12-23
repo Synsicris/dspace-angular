@@ -56,60 +56,165 @@ ds-metric-donuts a {
   font-size: 16px !important;
 }
 
+// from here on rex
 /* -----------------------------------------------------------
-COLOR-VARIABLES (rex)
------------------------------------------------------------ */
-
-// Variables didn't work in the footer here i global-styles.scss
-$s-body-background: hsl(0, 0, 98) !default; // basic background color of cotent area (didn't find a variable for this)
-$s-synsicris-logo-magenta: hsl(335, 86, 42) !default; // CI Magenta Uni Kassel, Synsicris Logo
-$s-synsicris-logo-gray: hsl(0, 0, 36) !default;
-
-
-/* -----------------------------------------------------------
-LAYOUT
+BASIC LAYOUT
 ----------------------------------------------------------- */
 
 .outer-wrapper {
-  .inner-wrapper { // Content area
-    background-color: $s-body-background; // basic background color of cotent area (didn't find the place and the variable where it was defined)
-  }
 
-  // end .inner-wrapper
-}
+  // Content area
+  .inner-wrapper { 
 
-// end .outer-wrapper
+    background-color: var(--sy-body-background-color); // basic background color of content area (found --bsbody-bg and --bs-body-color, but they didn't show an effect)
 
-/* TESTS TO IDENTIFY LAYOUT AREAS (rex) */
+    main.main-content {
+      padding-top:0 !important;
+
+      .cris-layout {
+
+        /* this tag gets the specific colors for the level
+        Therefore the classes "Person", "Project" and "Funding" were added in 
+        src/app/cris-layout/cris-layout-leading/cris-layout-leading.component.html
+        with class="{{'existing-css ' + item.entityType}}" */
+      
+        #cris-layout-leading { 
+
+          margin-top:1.1rem !important; // covers otherwise breadcrumb
+
+          // level 1 (person)
+          &.Person {
+            background-color:var(--sy-level-person-background-color);
+            border-bottom:1px solid var(--sy-level-person-border-color);
+            .headerbox {
+              i.fas {color:var(--sy-level-person-icon-color)}
+            }
+          } // end &.Person
+
+          // level 2 (project)    
+          &.Project {
+            background-color:var(--sy-level-project-background-color);
+            border-bottom:1px solid var(--sy-level-project-border-color);
+            .headerbox {
+              i.fas {color:var(--sy-level-project-icon-color)}
+            }
+          } // end &.Project
+
+          // level 3 (funding)
+          &.Funding {
+            background-color:var(--sy-level-funding-background-color);
+            border-bottom:1px solid var(--sy-level-funding-border-color);
+            .headerbox {
+              i.fas {color:var(--sy-level-funding-icon-color)}
+            }
+          }  // end &.Funding  
+
+          // box with buttons
+          div.container.text-right.context-menu { padding-top:0.4rem; }
+
+          /*  221126 rex: can't figure out where the inner padding of the headerbox comes from, especially the padding-bottom is much too high
+          lower height of headerbox could be enforced with height:2rem !important; to make the unnecessarily high headerbox narrower, but then the two-line header might be cut off. */
+          .headerbox { 
+
+            // 1. headline with Icon
+            .headline-workspace {
+              font-size:1.3rem;
+            }
+            // 2. headline 
+            .h4 .text-value {
+              font-size:1.8rem !important;
+              margin-top:-0.2rem;
+            }
+
+          } // end headerbox ...
+
+        } // end #cris-layout-leading
+      } // end .cris-layout
+    } // end main.main-content
+
+  } // end .inner-wrapper
+} // end .outer-wrapper
+
+
+
+/* -----------------------------------------------------------
+TESTS TO IDENTIFY LAYOUT AREAS (rex)
+----------------------------------------------------------- */
 /*
 .outer-wrapper {
-  border:5px solid red !important;
+  //border:2px solid red !important;
+
   .inner-wrapper {
-    border:5px solid blue !important;
-    &.ng-trigger-slideSidebarPadding { }                // probably for the black Admin-Sidebar (to be tested with differet login / einloggen as shared ist am 4.11. nicht möglich)
-    .ds-themed-header-navbar-wrapper {
-      border:5px solid orange !important;
-      }
+    //border:2px solid blue !important;
+
+    // box unter header, seltsamerweise nicht mit border-top
+    // wird vo beadcrumb ueberschnitte
+    main.main-content {           //tag, keine Klasse!
+      border:10px solid blue !important;
+      background-color:blue !important;
+      display:block !important;
+    
+      ds-themed-breadcrumbs {     //tag, keine Klasse!
+        border:2px solid red !important;
+        background-color:red !important;
+        display:block !important;
+        
+        ds-breadcrumbs {     //tag, keine Klasse!
+          background-color:pink !important;
+          border:5px solid pink !important;
+        } // end ds-breadcrumbs
+
+      } // end ds-themed-breadcrumbs
+
+      // gesamter Inhalt unterhalb breadcrumb
+      .cris-layout {
+        border:5px solid yellow !important;
+        display:block;
+
+        // xxx
+        .ds-cris-layout-leading {
+          border:5px solid lime !important;
+          display:block !important;
+        }
+
+        // box um headerbox
+        #cris-layout-leading {
+          border:5px solid orange !important;
+          display:block;
+
+          .headerbox_level_1,
+          .headerbox_level_2,
+          .headerbox_level_3 { border:5px solid violet !important; }
+
+        } // ed #cris-layout-leading
+
+      } // end .cris-layout
+
+    } // end main.main-content
+     
+      //&.ng-trigger-slideSidebarPadding { } // probably for the black Admin-Sidebar (to be tested with differet login / einloggen as shared ist am 4.11. nicht möglich)
+      //.ds-themed-header-navbar-wrapper { //border:2px solid orange !important; 
+
     } // end .inner-wrapper
   } // end .outer-wrapper
 
-  .notifications-wrapper {                               // for notification with fixed position top-right and bottom-right
-    border:1px solid lime !important;
-    } // end .notifications-wrapper
-*/
+  .notifications-wrapper { } // for notification with fixed position top-right and bottom-right
+ */
 
-/* HELPER TO SHOW THE CURRENT WINDOW SIZE (rex 220505) */
-/* helps to recognize breakpoints
-Span-Tag is in src/themes/synsicris/app/header/header.component.html */
 
+/* -----------------------------------------------------------
+HELPER TO SHOW THE CURRENT WINDOW SIZE (rex 220505)
+helps to recognize breakpoints
+Span-Tag is in src/themes/synsicris/app/header/header.component.html
+----------------------------------------------------------- */
 /*
 header .display-dev-infos:after {
   color:hsl(0, 0, 36);
   rotate:-90deg;
   display:inline-block;
   position:fixed;
-  top:13rem;
-  left:0;
+  top:30rem;
+  left:-2rem;
   z-index:1000;
   padding-top:0.1rem;
   border-top:3px solid transparent;
@@ -125,12 +230,14 @@ header .display-dev-infos:after {
 
 /* -----------------------------------------------------------
 HEADER with horizontal navbar
------------------------------------------------------------ */
-/* Attention: the navbar with logo exists twice:
-from mediaquery md in navbar.component.html, but for mediaquery-sm with hamburger-button in header.component.html.
-HTML code must therefore always be adapted in both, and styles are defined here and not in the specific scss-files
-in order to avoid the same duplication as in the HTML code. */
 
+ATTENTION
+Styles for the header are defined in src/themes/synsicris/styles/_global-styles.scss
+in order to avoid the same duplication as in the HTML code
+because the navbar with logo exists twice: 
+- <= mediaquery-sm with hamburger-button in header.component.html
+- >= mediaquery md in navbar.component.html 
+----------------------------------------------------------- */
 header {
 
   li > .navbar-section,
@@ -139,6 +246,25 @@ header {
     flex-direction: column;
     justify-content: center;
     height: 100%;
+  }
+
+   /* from here defined from rex */
+
+  /* Icons in header. Needs to be defined outside nav.navbar, because the code differs in header.component.html 
+  and navbar.component.html. 
+  provisional contact link until it is integrated by development (rex 221028),
+  therefore the style here is only provisionally adapted to the other buttons,
+  margin-right in order to give it the same distance to the following icon even without a dropdown arrow. 
+  */
+  a.header-contact {      
+    span { display: none; } // make label invisible
+    margin-right: 1.2rem;
+  }
+  // Icos in Header and Hamburger Icon
+  a.navbar-collapsed i.fas, 
+  a.navbar-collapsed span,
+  button.navbar-toggler span.fas {     
+    color: var(--ds-header-icon-color) !important;  
   }
 
   nav.navbar {
@@ -150,152 +276,41 @@ header {
       font-weight: 700;
       font-size: 1.8rem;
       letter-spacing: .01rem;
-      color: $s-synsicris-logo-gray;
-
+      color: var(--sy-synsicris-logo-color-gray);
       span {
         text-transform: uppercase;
-
-        span {
-          color: $s-synsicris-logo-magenta;
-        }
+        span { color: var(--sy-synsicris-logo-color-magenta); }
       }
-    }
+    } // end .navbar-brand
 
-    // end .navbar-brand
-
-    /* space between menu items and make them smaller */
-    .container .navbar-nav {
-
+    /* Elements in header on the right side of the Synsicris-Logo, space between menu items and make them smaller */
+    .navbar-nav {
       margin: 0 0.4rem;
       font-size: 0.85rem;
+      /* Icons in header - twice because of differet code */
+      a:link, a:visited { i.fas, span {color: var(--ds-header-icon-color) !important;} }
+    } // end .container .navbar-nav
 
-      /* provisional contact link until it is integrated by development (rex 221028),
-      therefore the style here is only provisionally adapted to the other buttons,
-      margin-right in order to give it the same distance to the following icon even without a dropdown arrow. */
-      a.header-contact {
-        i {
-          color: var(--ds-header-icon-color) !important;
-        }
+  } // end nav.navbar
 
-        span {
-          display: none;
-        }
+} // end header
 
-        // make lable invisible
-        margin-right: 0.6rem;
-      }
-
-    }
-
-    // end .container .navbar-nav
-
-  }
-
-  // end nav.navbar
-
-}
-
-// end header
-
-
-/* -----------------------------------------------------------
-FOOTER (rex 221104)
------------------------------------------------------------ */
-/* the two footer-rows of synsicris are only in .bottom-footer, top-footer is not visible
-class .text-white is in footer.component.html hardcoded and not changeable at the moment (rex 221104)
-------------
-VARIABLES DIDN'T WORK IN THE FOOTER (neither css nor scss), so I was forced to use real colors
------------- */
-
-footer .bottom-footer {
-
-  //dspacecris logo
-  &:before {
-    display: inline-block;
-    content: '';
-    height: 3.5rem;
-    width: 3.5rem;
-    background: url("../../../assets/images/dspace-cris-logo.png") no-repeat left top;
-    background-size: contain;
-    margin-right: 1.2rem;
-  }
-
-  // normal text in footer
-  &, .text-white {
-    color: rgba(72, 79, 86, 1) !important;
-    font-weight: 600;
-    font-size: 105%; // enlarge the first row
-  }
-
-  // make the white logo-4science-small.png dark
-  a img {
-    filter: invert(100%) opacity(.5);
-    -webkit-filter: invert(100%) opacity(.5);
-    margin-left: 0.3rem;
-  }
-
-  // links in footer (didn't work with any --bs or --ds variable)
-  ul, ul.footer-info, ul.text-white {
-
-    margin-top: 0.5rem; // more distance to the 4Sciece-Logo
-    font-size: 80%; // because of enlargement of the first row
-
-    li {
-
-      a, a:link, a:visited, a.text-white {
-
-        color: rgb(0, 121, 168) !important; // link-color
-        font-weight: 700 !important; // make thin font thicker
-        padding: 0 0.8rem 0 0.8rem !important; // space between links
-        white-space: nowrap; // prevents breaking links
-
-        &[href*="javascript:void(0);"] { // cog-icon before Cookie Settings
-          &:before {
-            font-family: 'Font Awesome 5 Free';
-            content: "\f013";
-            margin-right: 0.4rem;
-          }
-        }
-
-        // end before-construct for cog-icon
-
-      }
-
-      // end a
-
-      // divider
-      &:not(:last-child) {
-        &:after {
-          border-right: 2px solid rgba(216, 217, 218, 1) !important; // solution with border-right, does't look good with linebreaks
-        }
-      }
-
-    }
-
-    // end li
-  }
-
-  // end ul
-
-  a, a.text-white {
-    color: hsl(197, 65, 38) !important;
-    font-weight: 700 !important;
-  }
-
-}
-
-// end footer
 
 
 /* -----------------------------------------------------------
 BREADCRUMB (rex 221028)
+Must be swapped out in src/themes/synsicris/app/breadcrumbs/breadcrumbs.component.scss 
+in connection with the extension of the Bradcrumb functionality.
 ----------------------------------------------------------- */
+
 ds-breadcrumbs nav.nav-breadcrumb { // complete bar
 
-  /* WORKAROUND WITH BOX-SHADOW, BECAUSE BORDER-BOTTOM DOESN'T WORK
-  because ol.breadcrumb moves inside v.nav.breadcrumb as soon as a border is used.
-  Therefore border-top for breadcrumb bar IS in navbar.component.scss in nav.navbar,
-  and border-bottom here as shadow */
+  //display:none !important;
+
+  // WORKAROUND WITH BOX-SHADOW, BECAUSE BORDER-BOTTOM DOESN'T WORK
+  // because ol.breadcrumb moves inside v.nav.breadcrumb as soon as a border is used.
+  // Therefore border-top for breadcrumb bar IS in navbar.component.scss in nav.navbar,
+  // and border-bottom here as shadow
   box-shadow: 0 1px 0 var(--ds-header-navbar-border-bottom-color);
 
   ol.breadcrumb {
@@ -304,7 +319,7 @@ ds-breadcrumbs nav.nav-breadcrumb { // complete bar
 
     li.breadcrumb-item {
       font-size: 1.1rem;
-      font-weight: 600;
+      font-weight: 600 !important;
 
       a:link, a:hover, a:focus, a:visited {
         color: var(--ds-breadcrumb-link-color) !important;
@@ -313,45 +328,180 @@ ds-breadcrumbs nav.nav-breadcrumb { // complete bar
       & + .breadcrumb-item::before {
         content: quote("/") !important;
       }
-    }
+    } // end li.breadcrumb-item
 
-    // end li.breadcrumb-item
+  } // end ol.breadcrumb
 
+} // end ds-breadcrumbs nav.nav-breadcrumb
+
+
+
+/* -----------------------------------------------------------
+SIDEBAR (rex 221201)
+Sidebar is noth themeable, and only a few of the existing variables in 
+_theme_css_variable_overrides.scss affect the current design. 
+
+ATTETION: in case of misrepresentations in the sidebar very often mistakes in the language files are the cause!
+----------------------------------------------------------- */
+
+// Hide sidebar collapse button
+button.menu-toggle {display:none;}
+
+#sidebar {
+
+  /* Basic Styles Sidebar
+  --------------------- */
+  // Distance sidebar top and bottom
+  margin:0.9rem auto;
+  // similar border-radius as helptext-box
+  border-radius:5px;
+
+  // Top finish Sidebar
+  & ul:first-child ds-cris-layout-sidebar-item:first-child li {
+    border-top:1px solid var(--sy-cris-layout-sidebar-first-child-border-top-color); // Grey border as with fold-out elements #DFDFDF
   }
 
-  // end ol.breadcrumb
+  /* basic styles of all lists of all areas
+  -------------------------------------- */
+  // all list elements - both direct links and with another expandable ul level
+  li.sidebar-section {
 
-}
+    background-color:var(--sy-cris-layout-sidebar-tab-direct-color) !important;      // Standard light blue for menu items #EFF4F7
+    &:hover {background-color:var(--ds-cris-layout-sidebar-tab-color-hover);}
+    border-bottom: 2px solid var(--sy-cris-layout-sidebar-tab-border-bottom-color);  // white
+    border-top:1px solid var(--sy-cris-layout-sidebar-tab-border-top-color);         // light grey
+    position:relative;
 
-// end ds-breadcrumbs nav.nav-breadcrumb
+    // General formatting for links
+    a.nav-item, a span.section-header-text {
+      text-decoration:none !important;
+      color:var(--sy-cris-layout-sidebar-link-text-color);
+      }
+    
+    // contains the pop-up group ul second layer
+    div.sidebar-collapsible {
+
+      background-color:var(--sy-body-background-color); // otherwise the background remains visible behind the li of the second layer.
+      // Background of the pop-up menu items only, not the items underneath.
+      & a.nav-item:first-child {
+        background-color:var(--sy-cris-layout-sidebar-tab-expandable-color);        // light gray
+        &:hover {background-color:var(--ds-cris-layout-sidebar-tab-color-hover);}   // white
+      } 
+      
+      // second level
+      ul.sidebar-sub-level-items {
+        position:relative;
+        margin-top:0.15rem; // Distance from fold-out link
+        left:0.5rem;  // Indentation of the entire second level
+        li a.nav-item {
+          background-color:var(--sy-cris-layout-sidebar-tab-direct-color) !important; // Standard light blue of the direct link-tabs
+          &:hover {background-color:var(--ds-cris-layout-sidebar-tab-color-hover) !important;}
+          border-bottom: 2px solid var(--sy-body-background-color); // bright border
+          padding-left:0.6rem !important; // by default, 1.5rem padding was left, but this is too much with indented lists
+        
+        }
+        //* Highlight must be defined separately here */
+        li.active a.nav-item {
+          background-color:var(--ds-cris-layout-sidebar-menu-active-background) !important;
+        }
+      } // end ul.sidebar-sub-level-items
+
+      /* Fold-out links with arrows
+      arranges the unfolding arrows at the bottom instead of in the middle so that it fits the special solution 
+      of the subdivided sideba in the Level Project */
+      a.nav-item {
+        -webkit-box-align:flex-end;
+        box-align:flex-end;
+        align-items:flex-end;
+
+        /* Text labels only of the expandable meu items as well as the contained sub-items, but not of the simple links of the first level!
+        The simple links are directly in a and in no span-tag */
+        span.section-header-text {    
+          /* limits the label width, so that it is not pulled into the width by the extraordinary before-box in #sidebar.project 
+          is pulled into the width and thus the arrow is not pushed outside the sidebar!!! */
+          max-width:calc(var(--ds-cris-layout-sidebar-width) - 4.5rem);
+          
+          // Folding arrow
+          i.fas.fa-chevron-right { }
+
+        } //end span.section-header-text
+      } // end a.a.nav-item
+    } // end div.sidebar-collapsable
+  } // end li.sidebar-section
+
+
+/* STYLES FOR LEVEL 1 (Person)
+--------------------------- */
+&.Person {
+  // level-hightlight-border
+  li.active:not(.expanded) {
+  border-left:4px solid var(--sy-level-person-border-color) !important;
+  }
+} // end &.Person
+
+/* STYLES FOR LEVEL 2 (Project)
+----------------------------- */
+&.Project {
+  
+  // concerns first level lists (.sidebar-section) and second level, therefore outside the li below
+  li.active:not(.expanded) {
+  border-left:4px solid var(--sy-level-project-border-color);    // Highlight-border-left
+  //span.section-header-text { margin-left:-20px; }        // Ausgleich Ruckeln durch Highlight-Border
+  }
+
+  li.sidebar-section {
+    div.sidebar-collapsible {
+      a.nav-item {
+
+        /* .section-header-text#sidebarName-2153 is the id with the list block above it */
+        span.section-header-text {    
+
+          /* content reads out the content of the alt attribute in the language file:
+          "layout.tab.header.Projectobjectives": "<span class=\"entry-with-space-before-to-divide-sidebar\" alt=\"Listen\">Ziele des Vorhabens</span>",  
+          https://www.heise.de/select/ix/2017/3/1487591950470172 */
+          .entry-with-space-before-to-divide-sidebar {
+
+            &:after {
+              content: "  "attr(alt)" ";
+              display:block; 
+              width:calc(var(--ds-cris-layout-sidebar-width) + 0.5rem);
+              background-color: var(--sy-body-background-color) !important;
+              // zieht Lückenraum nach links
+              margin:-0.65rem 0 1rem -2rem;
+              padding:0.6rem 0 0.6rem 0.5rem;  
+              font-weight:800;
+              font-family:"Nunito", sans-serif;
+              color: var(--ds-cris-layout-sidebar-menu-active-color); // dunkelgrau
+            } // end &:before
+
+          } // end .entry-with-space-before-to-divide-sidebar:before
+
+          .entry-with-space-before-label { }
+
+          // Aufklapppfeil
+          i.fas.fa-chevron-right { }
+
+        } //end span.section-header-text
+      } // end a.a.nav-item
+    } // end div.sidebar-collapsable
+  } // end li.sidebar-section
+} // end &.Project
+
+
+/* STYLES FOR LEVEL 3 (Funding)
+---------------------------- */
+&.Funding {
+  // level-hightlight-border
+  li.active:not(.expanded) {border-left:4px solid var(--sy-level-funding-border-color) !important;}
+  } // end &.Funding
+
+
+} // end #sidebar
 
 
 /* -----------------------------------------------------------
 TOOLTIP (rex 221021)
 ----------------------------------------------------------- */
-/* ----------------- HELPER TO SHOW THE CURRENT WINDOW SIZE (rex 220505) */
-/* rex 220505: helps to recognize breakpoints
-Span-Tag is in src/themes/synsicris/app/header/header.component.html */
-
-/*
-header .helper-windowsize-rex:after {
-  display:inline-block;
-  position:fixed;
-  top:0;
-  left:20rem;
-  z-index:1000;
-  padding:0.2rem;
-  background-color:white;
-  border:3px solid lime;
-
-  content:"extra small (xs) < 576";
-  @include media-breakpoint-up(sm) {content:"small (sm) ≥ 576px";}
-  @include media-breakpoint-up(md) {content:"medium (md) ≥ 768px";}
-  @include media-breakpoint-up(lg) {content:"large (lg) ≥ 992";}
-  @include media-breakpoint-up(xl) {content:"extra large (xl) ≥ 1200";}
-}
-*/
-/* ----------------- TOOLTIP (rex 221021) */
 
 .hint-tooltip .tooltip-inner {
   max-width: 32rem; // somewhere (not clear, where) the width is defined with max-width:200px, so overwritten here
@@ -369,4 +519,3 @@ header .helper-windowsize-rex:after {
 .bs-tooltip-bottom .arrow::before {
   border-top-color: var(--ds-tooltip-inner-background-color);
 }
-

@@ -12775,7 +12775,7 @@
   "layout.tab.header.knowledge": "Stand des Wissens / Problemstellung",
 
   // "layout.tab.header.Projectobjectives": "Project objectives",
-  "layout.tab.header.Projectobjectives": "<i class=\"fas fa-bullseye\"></i> Ziele des Vorhabens",
+  "layout.tab.header.Projectobjectives": "<span class=\"entry-with-space-before-to-divide-sidebar\" alt=\"Listen\"></span><span class=\"entry-with-space-before-label\">Ziele des Vorhabens</span>",
 
   // "layout.tab.header.research_objective": "Research and development objectives",
   "layout.tab.header.research_objective": "Wissenschaftlich-technische Arbeitsziele",
@@ -13239,7 +13239,7 @@
 
   // "layout.field.label.Project.dc.title": "Workspace of the project / grant recipient:",
   // TODO New key - Add a translation
-  "layout.field.label.Project.dc.title": "<i class=\"fas fa-shekel-sign\"></i> Arbeitsbereich Verbund:",
+  "layout.field.label.Project.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-shekel-sign\"></i> Arbeitsbereich Verbund:</span>",
 
   // "layout.field.label.Project.oairecerif.acronym": "Acronym",
   "layout.field.label.Project.oairecerif.acronym": "Akronym",
@@ -15373,7 +15373,7 @@
   "layout.field.label.project.synsicris.type.jointproject": "Art des Verbundes",
 
   // "layout.field.label.Funding.dc.title": "Workspace of the project / grant recipient:",
-  "layout.field.label.Funding.dc.title": "<i class=\"fas fa-cube\"></i> Arbeitsbereich Projekt:",
+  "layout.field.label.Funding.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-cube\"></i> Arbeitsbereich Projekt:</span>",
 
   // "layout.field.label.Funding.oairecerif.acronym": "Acronym",
   "layout.field.label.Funding.oairecerif.acronym": "Akronym",
