@@ -536,11 +536,13 @@ export class DefaultAppConfig implements AppConfig {
         searchQueryConfigurationName: 'searchProjectsForAdminAndFunders',
         searchProjectConfigurationName: 'searchAllProjectForAdminAndFunders',
         searchProjectItemsConfigurationName: 'allProjectItemsForAdminAndFunders',
+        searchProjectItemsWithQueryConfigurationName: 'filteredProjectItemsForAdminAndFunders',
       },
       members: {
         searchQueryConfigurationName: 'searchProjectsForMembers',
         searchProjectConfigurationName: 'searchAllProjectForMembers',
         searchProjectItemsConfigurationName: 'allProjectItems',
+        searchProjectItemsWithQueryConfigurationName: 'filteredProjectItems',
       },
       entityTypeFilterName: 'entityType'
     },
