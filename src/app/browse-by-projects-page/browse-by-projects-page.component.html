@@ -50,8 +50,7 @@
         </div>
       </ng-template>
       <ng-template ngbPanelContent>
-        <ds-projects-scoped-search [configurationWithoutQuery]="projectItemsConfigurationName"
-                                   [configurationWithQuery]="projectItemsWithQueryConfigurationName"
+        <ds-projects-scoped-search [configuration]="projectItemsConfigurationName"
                                    [query]="searchQuery"></ds-projects-scoped-search>
       </ng-template>
     </ngb-panel>

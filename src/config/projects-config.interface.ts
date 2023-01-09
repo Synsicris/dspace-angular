@@ -4,7 +4,6 @@ export interface ProjectBrowseDiscoveryConfig {
   searchQueryConfigurationName: string;
   searchProjectConfigurationName: string;
   searchProjectItemsConfigurationName: string;
-  searchProjectItemsWithQueryConfigurationName: string;
 }
 
 export interface ProjectsBrowseConfig {

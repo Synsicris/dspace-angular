@@ -60,13 +60,6 @@ export class BrowseByProjectsPageComponent implements OnInit {
   projectItemsConfigurationName: string;
 
   /**
-   * Configuration name
-   *
-   * @memberof BrowseByProjectsPageComponent
-   */
-  projectItemsWithQueryConfigurationName: string;
-
-  /**
    * Composed query
    *
    * @type {string}
@@ -92,12 +85,10 @@ export class BrowseByProjectsPageComponent implements OnInit {
         this.queryBuilderConfigurationName = environment.projects.projectsBrowse.adminAndFunders.searchQueryConfigurationName;
         this.projectsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.searchProjectConfigurationName;
         this.projectItemsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.searchProjectItemsConfigurationName;
-        this.projectItemsWithQueryConfigurationName = environment.projects.projectsBrowse.adminAndFunders.searchProjectItemsWithQueryConfigurationName;
       } else {
         this.queryBuilderConfigurationName = environment.projects.projectsBrowse.members.searchQueryConfigurationName;
         this.projectsConfigurationName = environment.projects.projectsBrowse.members.searchProjectConfigurationName;
         this.projectItemsConfigurationName = environment.projects.projectsBrowse.members.searchProjectItemsConfigurationName;
-        this.projectItemsWithQueryConfigurationName = environment.projects.projectsBrowse.members.searchProjectItemsWithQueryConfigurationName;
       }
 
       this.initialized$.next(true);

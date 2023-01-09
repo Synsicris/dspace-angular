@@ -14,19 +14,10 @@ export class ProjectsScopedSearchComponent implements OnInit, OnChanges {
   @Input() query: string;
 
   /**
-   * Configuration name to use for the search when no further query is given
+   * Configuration name to use for the search
    */
-  @Input() configurationWithoutQuery = 'default';
+  @Input() configuration = 'default';
 
-  /**
-   * Configuration name to use for the search when further query is given
-   */
-  @Input() configurationWithQuery = 'default';
-
-  /**
-   * Configuration name to use for the search component
-   */
-  configuration;
   /**
    * Reference for configurationSearchPage
    */
@@ -45,11 +36,9 @@ export class ProjectsScopedSearchComponent implements OnInit, OnChanges {
 
   private buildQuery(query) {
     if (query) {
-      this.configuration = this.configurationWithQuery;
       this.query = `query={!join from=search.resourceid to=${PROJECT_RELATION_SOLR}}` +
         `{!join from=${PROJECT_RELATION_SOLR} to=search.resourceid}(${query})`;
     } else {
-      this.configuration = this.configurationWithoutQuery;
       this.query = '';
     }
 
