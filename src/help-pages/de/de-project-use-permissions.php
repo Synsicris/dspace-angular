@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
- 
+
   <body class="use" id="use-permissions">
-  
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-	
+
 	 <?php /* Alte Navigation kann geloescht werden.
 	 <h1>&nbsp;</h1>
 	 <!-- Platzhalter deutsch / englisch für Auswahl anderer Sprache -->
@@ -31,7 +31,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n1><a href="de-project-step.php">Nutzung_im_Projektverlauf</a></n1><br> <!-- geprueft, unterschiedliche Titel -->
 	  <n1><a href="de-project-details.php">Details</a></n1> <!-- Datei fehlt -->
 	  */ ?>
-  
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
 	<main>
 
@@ -43,7 +43,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 		<p>Wenn Sie ein Teilprojekt anlegen, können Sie zwischen zwei Optionen von Bearbeitungsrechten auswählen. Diese Bearbeitungsrechte gelten für Inhalte, die von den Mitgliedern Ihres Teilprojektes angelegt wurden:
         <ul>
           <li><strong>Option A:</strong> unbeschränkte Bearbeitungsrechte für <strong>alle Mitglieder</strong> des Verbundprojektes</li>
-          <li><strong>Option B:</strong> Bearbeitungsrechte <strong>beschränkt auf Mitglieder des Teilprojektes</strong></li>
+          <li><strong>Option B:</strong> Bearbeitungsrechte <strong>beschränkt auf Mitglieder des Verbundes</strong></li>
         </ul>
 
     </p>
@@ -71,7 +71,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 <br>
 
     <article>
-    <img src="img/de_project_use_permissions_Zugriff.png">
+    <img src="img/de_project_use_permissions_Zugriff_Projekt.png">
 
     </article>
     <br>
@@ -82,10 +82,11 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 		</article>
     <br>
 
+
     </main>
 
 
 	<?php include("includes/footer.inc.php"); echo "\n";?>
-    
+
   </body>
 </html>

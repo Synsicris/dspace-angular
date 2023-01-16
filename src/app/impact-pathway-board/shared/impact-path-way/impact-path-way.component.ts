@@ -39,6 +39,11 @@ export class ImpactPathWayComponent implements OnInit {
 
   @Input() public impactPathway: ImpactPathway;
 
+  /**
+   * The impact-pathway item
+   */
+  @Input() impactPathWayItem: Item;
+
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
 
   formConfig$: Observable<SubmissionFormModel>;
@@ -195,7 +200,7 @@ export class ImpactPathWayComponent implements OnInit {
    * @param version
    */
   onVersionSelected(version: Item) {
-    this.impactPathwayService.dispatchInitCompare(this.impactPathway.id, version.id);
+    this.impactPathwayService.dispatchInitCompare(this.impactPathway.id, version.id, this.isVersionOfAnItem$.value);
   }
 
   /**

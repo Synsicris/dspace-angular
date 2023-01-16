@@ -8,7 +8,7 @@
   <div class="task-left-bar">
     <button class="btn btn-xs btn-link p-0 text-primary  align-self-start" title="Drag & Drop"
             [class.button-move]="!isVersionOfAnItem"
-            [disabled]="isVersionOfAnItem">
+            [disabled]="isVersionOfAnItem || compareMode">
       <i class="fas fa-grip-vertical"></i>
     </button>
   </div>

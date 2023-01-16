@@ -82,13 +82,13 @@ export class BrowseByProjectsPageComponent implements OnInit {
       take(1)
     ).subscribe(([isAdmin, isFunderOrganizationalManager, isFunderProjectManager]) => {
       if (isAdmin || isFunderOrganizationalManager || isFunderProjectManager) {
-        this.queryBuilderConfigurationName = environment.projects.projectsBrowse.adminAndFunders.searchQueryConfigurationName;
-        this.projectsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.searchProjectConfigurationName;
-        this.projectItemsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.searchProjectItemsConfigurationName;
+        this.queryBuilderConfigurationName = environment.projects.projectsBrowse.adminAndFunders.firstStepSearchQueryConfigurationName;
+        this.projectsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.firstStepSearchAllProjectConfigurationName;
+        this.projectItemsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.secondSearchProjectItemsConfigurationName;
       } else {
-        this.queryBuilderConfigurationName = environment.projects.projectsBrowse.members.searchQueryConfigurationName;
-        this.projectsConfigurationName = environment.projects.projectsBrowse.members.searchProjectConfigurationName;
-        this.projectItemsConfigurationName = environment.projects.projectsBrowse.members.searchProjectItemsConfigurationName;
+        this.queryBuilderConfigurationName = environment.projects.projectsBrowse.members.firstStepSearchQueryConfigurationName;
+        this.projectsConfigurationName = environment.projects.projectsBrowse.members.firstStepSearchAllProjectConfigurationName;
+        this.projectItemsConfigurationName = environment.projects.projectsBrowse.members.secondSearchProjectItemsConfigurationName;
       }
 
       this.initialized$.next(true);
