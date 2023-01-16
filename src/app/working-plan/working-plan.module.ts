@@ -25,6 +25,7 @@ import { ComcolModule } from '../shared/comcol/comcol.module';
 import { EditSimpleItemModalModule } from '../shared/edit-simple-item-modal/edit-simple-item-modal.module';
 import { WorkingPlanChartDatesComponent } from './working-plan-chart/container/working-plan-chart-dates/working-plan-chart-dates.component';
 import { WorkingPlanChartItemEditButtonComponent } from './working-plan-chart/container/working-plan-chart-item-edit-button/working-plan-chart-item-edit-button.component';
+import { WorkingPlanChartItemDeleteButtonComponent } from './working-plan-chart/container/working-plan-chart-item-delete-button/working-plan-chart-item-delete-button.component';
 
 const MODULES = [
   CommonModule,
@@ -45,7 +46,8 @@ const COMPONENTS = [
   WorkingPlanChartContainerComponent,
   WorkingPlanChartDatesComponent,
   WorkingPlanChartToolbarComponent,
-  WorkingPlanChartItemEditButtonComponent
+  WorkingPlanChartItemEditButtonComponent,
+  WorkingPlanChartItemDeleteButtonComponent
 ];
 
 const DIRECTIVES = [
