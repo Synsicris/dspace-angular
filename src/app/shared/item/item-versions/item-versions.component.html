@@ -144,7 +144,7 @@
                 <!-- SUMMARY -->
                 <td class="version-row-element-summary">
                   <div class="float-left">
-                    <ng-container *ngIf="isThisBeingEdited(version) && ((!isFunder && !isCoordinator) || (isCoordinator && isVersionOfficial(versionItem))); then editSummary else showSummary"></ng-container>
+                    <ng-container *ngIf="isThisBeingEdited(version) && ((!isFunder && !isCoordinator) || (isCoordinator && isVersionNotVisible(versionItem) && version?.id !== itemVersion?.id)); then editSummary else showSummary"></ng-container>
                     <ng-template #showSummary>{{version?.summary}}</ng-template>
                     <ng-template #editSummary>
                       <input class="form-control" type="text" [(ngModel)]="versionBeingEditedSummary"
@@ -154,7 +154,7 @@
 
                   <div class="float-right btn-group edit-field space-children-mr" *ngIf="displayActions">
                     <!--DISCARD EDIT -->
-                    <ng-container *ngIf="(canEditVersion$(version) | async) && isThisBeingEdited(version) && ((!isFunder && !isCoordinator) || (isCoordinator && isLastVersionVisible(versionItem)))">
+                    <ng-container *ngIf="(canEditVersion$(version) | async) && isThisBeingEdited(version) && ((!isFunder && !isCoordinator) || (isCoordinator && isVersionNotVisible(versionItem) && version?.id !== itemVersion?.id))">
                       <button class="btn btn-sm"
                               [ngClass]="isThisBeingEdited(version) ? 'btn-outline-warning' : 'btn-outline-primary'"
                               (click)="disableVersionEditing()"
@@ -163,7 +163,7 @@
                       </button>
                     </ng-container>
                     <!--EDIT / SAVE-->
-                    <ng-container *ngIf="(canEditVersion$(version) | async) && ((!isFunder && !isCoordinator) || (isCoordinator && isVersionOfficial(versionItem)))">
+                    <ng-container *ngIf="(canEditVersion$(version) | async) && ((!isFunder && !isCoordinator) || (isCoordinator && isVersionNotVisible(versionItem) && version?.id !== itemVersion?.id))">
                       <button class="btn btn-outline-primary btn-sm version-row-element-edit"
                               *ngIf="!isThisBeingEdited(version)"
                               [disabled]="isAnyBeingEdited()"

@@ -1,4 +1,4 @@
-import { environment } from './../../../../environments/environment';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { Item } from '../../../core/shared/item.model';
 import { Version } from '../../../core/shared/version.model';
@@ -20,7 +20,7 @@ import { VersionHistoryDataService } from '../../../core/data/version-history-da
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
 import { AlertType } from '../../alert/aletr-type';
 import { followLink } from '../../utils/follow-link-config.model';
-import { hasValue, hasValueOperator, isNull, isUndefined } from '../../empty.util';
+import { hasValue, hasValueOperator, isEmpty, isNull, isUndefined } from '../../empty.util';
 import { PaginationService } from '../../../core/pagination/pagination.service';
 import {
   getItemEditVersionhistoryRoute,
@@ -48,6 +48,7 @@ import {
   ItemVersionsVisibilityModalComponent
 } from './item-versions-visibility-modal/item-versions-visibility-modal.component';
 import { MetadataMap, MetadataValue } from '../../../core/shared/metadata.models';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'ds-item-versions',
@@ -644,6 +645,14 @@ export class ItemVersionsComponent implements OnInit {
    */
   isVersionVisible(versionItem: Item): boolean {
     return versionItem?.firstMetadataValue('synsicris.version.visible') === 'true';
+  }
+
+  /**
+   * Check if the version Item is not visible
+   * @param versionItem the version item which metadata belongs to
+   */
+  isVersionNotVisible(versionItem: Item): boolean {
+    return isEmpty(versionItem?.firstMetadataValue('synsicris.version.visible')) || versionItem?.firstMetadataValue('synsicris.version.visible') === 'false';
   }
 
   /**
