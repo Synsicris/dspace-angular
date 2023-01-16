@@ -1,9 +1,9 @@
 import { Config } from './config.interface';
 
 export interface ProjectBrowseDiscoveryConfig {
-  searchQueryConfigurationName: string;
-  searchProjectConfigurationName: string;
-  searchProjectItemsConfigurationName: string;
+  firstStepSearchQueryConfigurationName: string;
+  firstStepSearchAllProjectConfigurationName: string;
+  secondSearchProjectItemsConfigurationName: string;
 }
 
 export interface ProjectsBrowseConfig {

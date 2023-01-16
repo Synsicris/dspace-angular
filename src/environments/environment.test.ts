@@ -345,14 +345,14 @@ export const environment: AppConfig = {
     excludeComparisonMetadata: ['dspace.entity.type'],
     projectsBrowse: {
       adminAndFunders: {
-        searchQueryConfigurationName: 'searchProjectsForAdminAndFunders',
-        searchProjectConfigurationName: 'searchAllProjectForAdminAndFunders',
-        searchProjectItemsConfigurationName: 'allProjectItemsForAdminAndFunders',
+        firstStepSearchQueryConfigurationName: 'firstStepSearchProjectsForAdminAndFunders',
+        firstStepSearchAllProjectConfigurationName: 'firstStepSearchAllProjectForAdminAndFunders',
+        secondSearchProjectItemsConfigurationName: 'secondStepSearchProjectItemsForAdminAndFunders',
       },
       members: {
-        searchQueryConfigurationName: 'searchProjectsForMembers',
-        searchProjectConfigurationName: 'searchAllProjectForMembers',
-        searchProjectItemsConfigurationName: 'allProjectItems',
+        firstStepSearchQueryConfigurationName: 'firstStepSearchProjectsForMembers',
+        firstStepSearchAllProjectConfigurationName: 'firstStepSearchAllProjectForMembers',
+        secondSearchProjectItemsConfigurationName: 'secondStepSearchProjectItems',
       },
       entityTypeFilterName: 'entityType'
     },
