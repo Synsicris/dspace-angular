@@ -3314,6 +3314,8 @@
 
   "item.version.list.dropdown-text": "Compare with...",
 
+  "item.version.list.active-option-text": "Active instance : ",
+
   "item.version.list.option-text": "Version : ",
 
   "item.version.list.remove-text": "Remove selection",

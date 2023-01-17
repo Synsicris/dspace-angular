@@ -17,7 +17,7 @@ import { _hasVersionComparator, _isVersionOfComparator, _unionComparator, hasVer
 import { VersionDataService } from '../data/version-data.service';
 import { Version } from '../shared/version.model';
 import { VersionHistoryDataService } from '../data/version-history-data.service';
-import { isNotEmpty } from '../../shared/empty.util';
+import { isEmpty, isNotEmpty, isNull, isUndefined } from '../../shared/empty.util';
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { Metadata } from '../shared/metadata.utils';
 import { VERSION_UNIQUE_ID } from './project-data.service';
@@ -178,6 +178,55 @@ export class ProjectVersionService {
         }
       })
     );
+  }
+
+  /**
+   * Check if the version Item is relative to the active working instance of the project
+   * @param versionItem the version item which metadata belongs to
+   */
+  isActiveWorkingInstance(versionItem: Item): boolean {
+    return isEmpty(versionItem?.firstMetadataValue('synsicris.uniqueid'));
+  }
+
+  /**
+   * Check if the version Item is visible
+   * @param versionItem the version item which metadata belongs to
+   */
+  isVersionVisible(versionItem: Item): boolean {
+    return versionItem?.firstMetadataValue('synsicris.version.visible') === 'true';
+  }
+
+  /**
+   * Check if the version Item is not visible
+   * @param versionItem the version item which metadata belongs to
+   */
+  isVersionNotVisible(versionItem: Item): boolean {
+    return isEmpty(versionItem?.firstMetadataValue('synsicris.version.visible')) || versionItem?.firstMetadataValue('synsicris.version.visible') === 'false';
+  }
+
+  /**
+   * Check if the version Item is official
+   * @param versionItem the version item which metadata belongs to
+   */
+  isVersionOfficial(versionItem: Item): boolean {
+    return versionItem?.firstMetadataValue('synsicris.version.official') === 'true';
+  }
+
+  /**
+   * Check if the version Item is the last official one
+   * @param versionItem the version item which metadata belongs to
+   */
+  isLastVersionVisible(versionItem: Item): boolean {
+    return versionItem?.firstMetadataValue('synsicris.isLastVersion.visible') === 'true';
+  }
+
+  /**
+   * Check if the official metadata is not already set
+   * @param versionItem the version item which metadata belongs to
+   */
+  hasNoOfficialMetadata(versionItem: Item): boolean {
+    return isUndefined(versionItem?.firstMetadataValue('synsicris.version.official'))
+      || isNull(versionItem?.firstMetadataValue('synsicris.version.official'));
   }
 
   /**
