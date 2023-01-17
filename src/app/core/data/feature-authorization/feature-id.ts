@@ -46,4 +46,5 @@ export enum FeatureID {
   isFunderProjectManager = 'isFunderProjectManager',
   CanManageProgrammeMembers = 'canManageProgrammeMembers',
   HasEditGrantsOnItem = 'hasEditGrantsOnItem',
+  HasVersioningReadGrantsOnItem = 'hasVersioningReadGrantsOnItem',
 }
