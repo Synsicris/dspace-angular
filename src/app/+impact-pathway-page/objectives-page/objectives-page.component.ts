@@ -28,7 +28,7 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
    * The item's id
    */
   id: number;
-
+  isFunder$: Observable<boolean>;
   /**
    * The objectives item's id
    */
@@ -58,6 +58,10 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
    * Initialize instance variables
    */
   ngOnInit(): void {
+    this.isFunder$ = this.route.data.pipe(
+      map((data) => data.isFunder as boolean)
+    );
+
     const targetItemId$ = this.route.queryParams.pipe(
       take(1),
       map((params) => params.target)

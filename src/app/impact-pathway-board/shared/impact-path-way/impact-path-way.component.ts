@@ -28,6 +28,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ImpactPathWayComponent implements OnInit {
   /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  @Input() isFunder: boolean;
+
+  /**
    * The project community's id
    */
   @Input() public projectCommunityId: string;

@@ -22,6 +22,11 @@ export class WorkingPlanPageComponent implements OnInit {
   initialized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  isFunder: boolean;
+
+  /**
    * If the working-plan given is a version item
    */
   isVersionOf: boolean;
@@ -53,6 +58,12 @@ export class WorkingPlanPageComponent implements OnInit {
    * Initialize instance variables
    */
   ngOnInit(): void {
+
+
+    const isFunder$ = this.route.data.pipe(
+      map((data) => data.isFunder as boolean)
+    );
+
     const projectItemId$ = this.route.data.pipe(
       map((data) => data.projectItem as RemoteData<Item>),
       redirectOn4xx(this.router, this.authService),
@@ -87,11 +98,13 @@ export class WorkingPlanPageComponent implements OnInit {
       })
     );
 
-    combineLatest([projectItemId$, projectCommunityId$, workingPlanRD$]).pipe(take(1))
-      .subscribe(([projectItemId, projectCommunityId, workingPlanRD]) => {
+    combineLatest([projectItemId$, projectCommunityId$, workingPlanRD$, isFunder$]).pipe(take(1))
+      .subscribe(([projectItemId, projectCommunityId, workingPlanRD, isFunder]) => {
         this.projectItemId = projectItemId;
         this.projectCommunityId = projectCommunityId;
         this.workingPlanRD = workingPlanRD;
+        console.log('isFunder',isFunder);
+        this.isFunder = isFunder;
         this.initialized.next(true);
       });
   }

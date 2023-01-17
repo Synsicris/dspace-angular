@@ -25,6 +25,11 @@ export class ImpactPathwayBoardComponent implements OnInit {
   @Input() impactPathWayItem: Item;
 
   /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  @Input() isFunder: boolean;
+
+  /**
    * The project item's id
    */
   @Input() public projectItemId: string;

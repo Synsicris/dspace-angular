@@ -26,6 +26,12 @@ import { Item } from '../../../core/shared/item.model';
   styleUrls: ['./working-plan-chart-toolbar.component.scss']
 })
 export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
+
+  /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  @Input() isFunder: boolean;
+
   /**
    * If the working-plan given is a version item
    */

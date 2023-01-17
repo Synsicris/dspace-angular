@@ -1,3 +1,4 @@
 <ipw-objectives-board *ngIf="(objectivesItemId$ | async) && (projectCommunityId$ | async)"
+                      [isFunder]="(isFunder$ | async)"
                       [projectCommunityId]="(projectCommunityId$ | async)"
                       [impactPathwayStepId]="(objectivesItemId$ | async)"></ipw-objectives-board>
