@@ -12,6 +12,7 @@ export interface DynamicListModelConfig extends DynamicRadioGroupModelConfig<any
   groupLength?: number;
   repeatable: boolean;
   value?: any;
+  hint?: string;
 }
 
 export class DynamicListRadioGroupModel extends DynamicRadioGroupModel<any> {
@@ -28,6 +29,7 @@ export class DynamicListRadioGroupModel extends DynamicRadioGroupModel<any> {
     this.groupLength = config.groupLength || 5;
     this.repeatable = config.repeatable;
     this.value = config.value;
+    this.hint = config.hint;
   }
 
   get hasAuthority(): boolean {
