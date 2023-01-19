@@ -14229,6 +14229,166 @@
   // TODO New key - Add a translation
   "query-builder.synsicris.accordion.step2.header": "Step 2",
 
+  // "query-builder.synsicris.label.entityType.Person": "Person",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Person": "Person",
+
+  // "query-builder.synsicris.label.entityType.Project": "Project",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Project": "Project",
+
+  // "query-builder.synsicris.label.entityType.Funding": "Funding",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Funding": "Funding",
+
+  // "query-builder.synsicris.label.entityType.OrgUnit": "OrgUnit",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.OrgUnit": "OrgUnit",
+
+  // "query-builder.synsicris.label.entityType.Journal": "Journal",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Journal": "Journal",
+
+  // "query-builder.synsicris.label.entityType.Publication": "Publication",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Publication": "Publication",
+
+  // "query-builder.synsicris.label.entityType.Product": "Product",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Product": "Product",
+
+  // "query-builder.synsicris.label.entityType.Patent": "Patent",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Patent": "Patent",
+
+  // "query-builder.synsicris.label.entityType.Event": "Event",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Event": "Event",
+
+  // "query-builder.synsicris.label.entityType.Equipment": "Equipment",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Equipment": "Equipment",
+
+  // "query-builder.synsicris.label.entityType.award": "award",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.award": "award",
+
+  // "query-builder.synsicris.label.entityType.contribution_fundingprogramme": "contribution_fundingprogramme",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.contribution_fundingprogramme": "contribution_fundingprogramme",
+
+  // "query-builder.synsicris.label.entityType.cooperationpartner": "cooperationpartner",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.cooperationpartner": "cooperationpartner",
+
+  // "query-builder.synsicris.label.entityType.ethic": "ethic",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.ethic": "ethic",
+
+  // "query-builder.synsicris.label.entityType.exp_societalimpact": "exp_societalimpact",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.exp_societalimpact": "exp_societalimpact",
+
+  // "query-builder.synsicris.label.entityType.condition": "condition",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.condition": "condition",
+
+  // "query-builder.synsicris.label.entityType.gender": "gender",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.gender": "gender",
+
+  // "query-builder.synsicris.label.entityType.innovationidea": "innovationidea",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.innovationidea": "innovationidea",
+
+  // "query-builder.synsicris.label.entityType.milestone": "milestone",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.milestone": "milestone",
+
+  // "query-builder.synsicris.label.entityType.step": "step",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.step": "step",
+
+  // "query-builder.synsicris.label.entityType.physical_object": "physical_object",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.physical_object": "physical_object",
+
+  // "query-builder.synsicris.label.entityType.proj_objective": "proj_objective",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.proj_objective": "proj_objective",
+
+  // "query-builder.synsicris.label.entityType.research_result": "research_result",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.research_result": "research_result",
+
+  // "query-builder.synsicris.label.entityType.spinoff": "spinoff",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.spinoff": "spinoff",
+
+  // "query-builder.synsicris.label.entityType.stateofart": "stateofart",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.stateofart": "stateofart",
+
+  // "query-builder.synsicris.label.entityType.targetgroup": "targetgroup",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.targetgroup": "targetgroup",
+
+  // "query-builder.synsicris.label.entityType.task": "task",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.task": "task",
+
+  // "query-builder.synsicris.label.entityType.unexpected_result": "unexpected_result",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.unexpected_result": "unexpected_result",
+
+  // "query-builder.synsicris.label.entityType.workpackage": "workpackage",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.workpackage": "workpackage",
+
+  // "query-builder.synsicris.label.entityType.process_event": "process_event",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.process_event": "process_event",
+
+  // "query-builder.synsicris.label.entityType.innovationpotential": "innovationpotential",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.innovationpotential": "innovationpotential",
+
+  // "query-builder.synsicris.label.entityType.application": "application",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.application": "application",
+
+  // "query-builder.synsicris.label.entityType.plan_publication": "plan_publication",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.plan_publication": "plan_publication",
+
+  // "query-builder.synsicris.label.entityType.projectpartner": "projectpartner",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.projectpartner": "projectpartner",
+
+  // "query-builder.synsicris.label.entityType.programme": "programme",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.programme": "programme",
+
+  // "query-builder.synsicris.label.entityType.call": "call",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.call": "call",
+
+  // "query-builder.synsicris.label.entityType.fundingobjective": "fundingobjective",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.fundingobjective": "fundingobjective",
+
+  // "query-builder.synsicris.label.entityType.ia_objective": "ia_objective",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.ia_objective": "ia_objective",
+
+  // "query-builder.synsicris.label.entityType.neg_sideeffect": "neg_sideeffect",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.neg_sideeffect": "neg_sideeffect",
+
+  // "query-builder.synsicris.label.entityType.open_researchquestion": "open_researchquestion",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.open_researchquestion": "open_researchquestion",
+
   // "layout.tab.header.Projekttraeger": "Programme and Funding information",
   "layout.tab.header.Projekttraeger": "Programm- und Förderinformationen",
 

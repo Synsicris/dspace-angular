@@ -20,7 +20,7 @@
             [value]="value"
             [disabled]="value.disable"
           >
-            {{ value.label | titlecase }}
+            {{ value.label | translate | titlecase }}
           </ng-option>
         </ng-select>
       </div>
@@ -135,7 +135,7 @@
                 [value]="value"
                 [disabled]="value.disable"
               >
-                {{ value.label | titlecase }}
+                {{ value.label | translate | titlecase }}
               </ng-option>
             </ng-select>
 

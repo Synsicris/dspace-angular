@@ -8588,6 +8588,86 @@
 
   "query-builder.synsicris.accordion.step2.header": "Step 2",
 
+  "query-builder.synsicris.label.entityType.Person": "Person",
+
+  "query-builder.synsicris.label.entityType.Project": "Project",
+
+  "query-builder.synsicris.label.entityType.Funding": "Funding",
+
+  "query-builder.synsicris.label.entityType.OrgUnit": "OrgUnit",
+
+  "query-builder.synsicris.label.entityType.Journal": "Journal",
+
+  "query-builder.synsicris.label.entityType.Publication": "Publication",
+
+  "query-builder.synsicris.label.entityType.Product": "Product",
+
+  "query-builder.synsicris.label.entityType.Patent": "Patent",
+
+  "query-builder.synsicris.label.entityType.Event": "Event",
+
+  "query-builder.synsicris.label.entityType.Equipment": "Equipment",
+
+  "query-builder.synsicris.label.entityType.award": "award",
+
+  "query-builder.synsicris.label.entityType.contribution_fundingprogramme": "contribution_fundingprogramme",
+
+  "query-builder.synsicris.label.entityType.cooperationpartner": "cooperationpartner",
+
+  "query-builder.synsicris.label.entityType.ethic": "ethic",
+
+  "query-builder.synsicris.label.entityType.exp_societalimpact": "exp_societalimpact",
+
+  "query-builder.synsicris.label.entityType.condition": "condition",
+
+  "query-builder.synsicris.label.entityType.gender": "gender",
+
+  "query-builder.synsicris.label.entityType.innovationidea": "innovationidea",
+
+  "query-builder.synsicris.label.entityType.milestone": "milestone",
+
+  "query-builder.synsicris.label.entityType.step": "step",
+
+  "query-builder.synsicris.label.entityType.physical_object": "physical_object",
+
+  "query-builder.synsicris.label.entityType.proj_objective": "proj_objective",
+
+  "query-builder.synsicris.label.entityType.research_result": "research_result",
+
+  "query-builder.synsicris.label.entityType.spinoff": "spinoff",
+
+  "query-builder.synsicris.label.entityType.stateofart": "stateofart",
+
+  "query-builder.synsicris.label.entityType.targetgroup": "targetgroup",
+
+  "query-builder.synsicris.label.entityType.task": "task",
+
+  "query-builder.synsicris.label.entityType.unexpected_result": "unexpected_result",
+
+  "query-builder.synsicris.label.entityType.workpackage": "workpackage",
+
+  "query-builder.synsicris.label.entityType.process_event": "process_event",
+
+  "query-builder.synsicris.label.entityType.innovationpotential": "innovationpotential",
+
+  "query-builder.synsicris.label.entityType.application": "application",
+
+  "query-builder.synsicris.label.entityType.plan_publication": "plan_publication",
+
+  "query-builder.synsicris.label.entityType.projectpartner": "projectpartner",
+
+  "query-builder.synsicris.label.entityType.programme": "programme",
+
+  "query-builder.synsicris.label.entityType.call": "call",
+
+  "query-builder.synsicris.label.entityType.fundingobjective": "fundingobjective",
+
+  "query-builder.synsicris.label.entityType.ia_objective": "ia_objective",
+
+  "query-builder.synsicris.label.entityType.neg_sideeffect": "neg_sideeffect",
+
+  "query-builder.synsicris.label.entityType.open_researchquestion": "open_researchquestion",
+
   "layout.tab.header.Projekttraeger": "Programme and Funding information",
 
   "submission.sections.submit.progressbar.describe.events_internal": "Internal section (only for consortium)",
