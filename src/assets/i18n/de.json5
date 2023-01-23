@@ -3069,7 +3069,7 @@
   "exploitation-plan.description.title": "Angaben über [Bearbeiten] ergänzen",
 
   // "exploitation-plan.info.text": "Info text for the exploitation Plan",
-  "exploitation-plan.info.text": "<b>Worum es hier geht:</b><ul><li>Verwertung ist die Nutzung von Ergebnissen.</li><li>Hier im Verwertungsplan legen Sie dar:<ul><li>wie Ergebnisse des Vorhabens genutzt werden können,</li><li>ob Sie planen, die Ergebnisse selbst zu nutzen und/oder für Dritte nutzbar zu machen,</li><li>ob Schutzrechte angemeldet oder Ergebnisse frei verfügbar gemacht werden sollen,</li><li>durch welche Aktivitäten Sie zur Nutzung beitragen und</li><li>welche Vorteile und positiven Wirkungen für Sie und/oder Dritte durch die Nutzung erzielt werden können.</li></ul><li>Hintergrund des Verwertungsplans sind rechtliche Vorschriften: als Zuwendungsempfänger wird Ihnen die Urheberschaft der Ergebnisse zuerkannt, Sie müssen jedoch dafür Sorge tragen, dass die Ergebnisse genutzt, also „verwertet“ werden können.<ul><li>Welche konkreten Verwertungsrechte und/oder -pflichten für Sie gelten, kann unterschiedlich sein. Beachten Sie dazu die Informationen Ihres Fördermittelgebers (z. B. in der Bekanntmachung oder im Zuwendungsbescheid).</ul><li>Wenn Sie einen Verwertungsplan erstellen müssen, ist dieser ein wichtiger Teil des Antrags und muss jedes Jahr (mit dem Zwischenbericht) aktualisiert und weiter konkretisiert werden.</li></ul><p><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-ep-epabout.php\"target=_blank\">Mehr Informationen zum Verwertungsplan</a></p><b>Zusammenhang von Verwertungsplan und Wirkungspfad:</b><ul><li>Im Wirkungspfad und in der Verwertungsplanung können die gleichen Einträge verwendet werden, um die Nutzung der Ergebnisse und die Wirkungen des Verbundes etc. darzulegen.</li><li>Der Wirkungspfad gilt für den Verbund und gibt einen Überblick zur Wirkungsplanung. Dagegen wird der <b>Verwertungsplan separat von jedem Zuwendungsempfänger (Projekt)</b> erstellt und ist damit spezifischer.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-proj.php\"target=_blank\">Verbund und beteiligte Projekte unterscheiden</a></br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.php\"target=_blank\">Einträge strukturieren - Pinwandprinzip</a></li><li>Im Verwertungsplan können Sie Inhalte eintragen, die Sie nicht mit den anderen Projektnehmern/Projekten im Verbund teilen. Stellen Sie in diesem Fall das Projekt auf „geschlossen“.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-permissions.php\"target=_blank\">Bearbeitungsrechte einstellen</a></li></ul><b>Tipps zur Arbeitsweise:</b><ul><li>Der Verwertungsplan ist in vier Aspekte unterteilt. Grundsätzlich sind alle <b>4 Aspekte</b> zu bearbeiten. Je nach Thema des Vorhabens und Arbeitsbereichs Ihrer Organisation können jedoch Prioritäten gesetzt werden.</li><li>Zu jedem Aspekt können Sie neue oder vorhandene Einträge hinzufügen und in einem Textfeld weiteres erläutern.</li> <li>Erfassen Sie möglichst viele Informationen in einzelnen Einträgen, da Sie dann leichter an anderen Stellen des Monitoring-Tools verwendet werden können.</li><li>Wenn Sie vorhandene, gemeinsame Einträge verändern, berücksichtigen Sie, dass diese auch an anderen Stellen des Monitoring-Tools verwendet werden.</li><li>Lesen Sie zunächst jeden Hilfetext, um sich einen Überblick über die vier Aspekte zu verschaffen.</li></ul>",
+  "exploitation-plan.info.text": "<b>Worum es hier geht:</b><ul><li>Verwertung ist die Nutzung von Ergebnissen.</li><li>Hier im Verwertungsplan legen Sie dar:<ul><li>wie Ergebnisse des Vorhabens genutzt werden können,</li><li>ob Sie planen, die Ergebnisse selbst zu nutzen und/oder für Dritte nutzbar zu machen,</li><li>ob Schutzrechte angemeldet oder Ergebnisse frei verfügbar gemacht werden sollen,</li><li>durch welche Aktivitäten Sie zur Nutzung beitragen und</li><li>welche Vorteile und positiven Wirkungen für Sie und/oder Dritte durch die Nutzung erzielt werden können.</li></ul><li>Hintergrund des Verwertungsplans sind rechtliche Vorschriften: als Zuwendungsempfänger wird Ihnen die Urheberschaft der Ergebnisse zuerkannt, Sie müssen jedoch dafür Sorge tragen, dass die Ergebnisse genutzt, also „verwertet“ werden können.<ul><li>Welche konkreten Verwertungsrechte und/oder -pflichten für Sie gelten, kann unterschiedlich sein. Beachten Sie dazu die Informationen Ihres Fördermittelgebers (z. B. in der Bekanntmachung oder im Zuwendungsbescheid).</ul><li>Wenn Sie einen Verwertungsplan erstellen müssen, ist dieser ein wichtiger Teil des Antrags und muss jedes Jahr (mit dem Zwischenbericht) aktualisiert und weiter konkretisiert werden.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-ep-about.php\"target=_blank\">Hintergrund zum Verwertungsplan</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-ep-help.php\"target=_blank\">Beispiele zur Verwertung</a></li></ul><br><b>Zusammenhang von Verwertungsplan und Wirkungspfad:</b><ul><li>Im Wirkungspfad und in der Verwertungsplanung können die gleichen Einträge verwendet werden, um die Nutzung der Ergebnisse und die Wirkungen des Verbundes etc. darzulegen.</li><li>Der Wirkungspfad gilt für den Verbund und gibt einen Überblick zur Wirkungsplanung. Dagegen wird der <b>Verwertungsplan separat von jedem Zuwendungsempfänger (Projekt)</b> erstellt und ist damit spezifischer.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-proj.php\"target=_blank\">Verbund und beteiligte Projekte unterscheiden</a></br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.php\"target=_blank\">Einträge strukturieren - Pinwandprinzip</a></li><li>Im Verwertungsplan können Sie Inhalte eintragen, die Sie nicht mit den anderen Projektnehmern/Projekten im Verbund teilen. Stellen Sie in diesem Fall das Projekt auf „geschlossen“.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-permissions.php\"target=_blank\">Bearbeitungsrechte einstellen</a></li></ul><b>Tipps zur Arbeitsweise:</b><ul><li>Der Verwertungsplan ist in vier Aspekte unterteilt. Grundsätzlich sind alle <b>4 Aspekte</b> zu bearbeiten. Je nach Thema des Vorhabens und Arbeitsbereichs Ihrer Organisation können jedoch Prioritäten gesetzt werden.</li><li>Zu jedem Aspekt können Sie neue oder vorhandene Einträge hinzufügen und in einem Textfeld weiteres erläutern.</li> <li>Erfassen Sie möglichst viele Informationen in einzelnen Einträgen, da Sie dann leichter an anderen Stellen des Monitoring-Tools verwendet werden können.</li><li>Wenn Sie vorhandene, gemeinsame Einträge verändern, berücksichtigen Sie, dass diese auch an anderen Stellen des Monitoring-Tools verwendet werden.</li><li>Lesen Sie zunächst jeden Hilfetext, um sich einen Überblick über die vier Aspekte zu verschaffen.</li></ul>",
 
   // "exploitation-plan.page.title": "Exploitation Plan",
   "exploitation-plan.page.title": "Verwertungsplan",
@@ -3395,23 +3395,23 @@
 
   // "explore.index.synsicrisRelationCall": "Relation call",
   // TODO New key - Add a translation
-  "explore.index.synsicrisRelationCall": "Relation call",
+  "explore.index.synsicrisRelationCall": "Förderbereich/Bekanntmachung",
 
   // "explore.index.projectStartDate": "Start date",
   // TODO New key - Add a translation
-  "explore.index.projectStartDate": "Start date",
+  "explore.index.projectStartDate": "Startdatum",
 
   // "explore.index.projectEndDate": "End date",
   // TODO New key - Add a translation
-  "explore.index.projectEndDate": "End date",
+  "explore.index.projectEndDate": "Enddatum",
 
   // "explore.index.synsicrisSubjectNace": "Subject nace",
   // TODO New key - Add a translation
-  "explore.index.synsicrisSubjectNace": "Subject nace",
+  "explore.index.synsicrisSubjectNace": "Wirtschaftszweig",
 
   // "explore.index.synsicrisSubjectDestatis": "Subject destatis",
   // TODO New key - Add a translation
-  "explore.index.synsicrisSubjectDestatis": "Subject destatis",
+  "explore.index.synsicrisSubjectDestatis": "Disziplin / Fachgebiet",
 
   // "explore.index.synsicrisTypeProjectContribution": "Project contribution type",
   // TODO New key - Add a translation
@@ -4032,7 +4032,7 @@
   "impact-pathway.task.create.success": "Der neue Eintrag wurde erfolgreich erstellt.",
 
   // "impact-pathway.wrapper.info": "<b>Develop the Impact Pathway of the project</b></br><p>The Impact Pathway supports you in the impact-oriented planning and implementation of the project. Please present the most important objectives, activities and intended impacts of the project in a clear and concise manner by means of key messages. Use arrows to illustrate particularly important and non-linear relationships. While the project is progressing, you can update the Impact Pathway and add any results achieved.</p><p>The columns structure the key messages for impact-oriented planning:</br>In <b>Background</b> important preliminary considerations for the project are presented, such as problem definition, state of knowledge and conditions.</br>The <b>Objectives of research and development</b> describe the scientific/technical work objectives of the project. These objectives can be assigned to work packages and tasks on a second level.</br><b>Interactions with partners and groups of actors. Outputs for dissemination</b> reflect all exchange and transfer activities of the project. In a first step, key messages about the purpose and group of actors of the interactions are formulated. These key messages can be assigned to specific activities on a second level.</br>The intended impacts of the project are structured in two columns:</br>In <b>Application (possibilities)</b> the contributions of the project to the application of the project results are presented.</br><b>Expected societal impacts</b> describe what societal effects are expected when the results of projects are applied.</br>In <b>Contribution to funding programme objectives</b>, the funding programme objectives to which the project contributes are selected.</p><p>In each column, you can use [+] to create unlimited items or search for and select previously created items.</br>Each item has a specific detail page (depending on the section selected) in which further information is usually given. You can switch between the Impact Pathway and the detail page of an item at any time.</br>You can start to create items in any column of the Impact Pathway.</br>Via [Edit] below the columns of the Impact Pathway you can add a description to the overall objectives of the project.</p><p><b>Key questions and tips for developing the Impact Pathway:</b> What impacts do you want to achieve with the project? How would you like to contribute to the development of these impacts?<br>It is recommended, to plan the Impact Pathway for the project in terms of the intended impacts and to develop it together with partners in practice and groups of actors.</br></p>",
-  "impact-pathway.wrapper.info": "<i><b>Erstellen Sie hier einen Überblick zu den Hintergründen, Arbeiten und Wirkungen des Vorhabens.</b></i><br> <i><b>Im Wirkungspfad können Sie Einträge wie an einer Pinnwand anpinnen und so übersichtlich darstellen, um was es in dem Verbund geht.</b></i></br></br><b>Worum es hier geht:</b><br> <ul><li>Mit dem Wirkungspfad beantworten Sie zwei Fragen: „Welche Wirkungen sollen mit dem Vorhaben erreicht werden?“ und „Was wird/wurde getan, um zur Entwicklung dieser Wirkungen beizutragen?“ </li><li>Für die <b>Antragstellung</b> verdeutlichen Sie in den Einträgen insbesondere die Ziele des Verbundes. Die Abbildung des Wirkungspfades und eine kurze Beschreibung ersetzen in der Vorhabenbeschreibung das Kapitel „Gesamtziele des Vorhabens“. </li><li>Im <b>Verlauf des Vorhabens</b> aktualisieren und konkretisieren Sie den Wirkungspfad und ergänzen die Ergebnisse. </li><li>Die <b>6 Säulen</b> gliedern den Wirkungspfad. Je nach Säule können Einträge unterschiedlicher <b>Kategorien</b> (z.B. Rahmenbedingung oder erwartete gesellschaftliche Wirkung) angepinnt werden. Im Wirkungspfad wird jeweils nur die Bezeichnung des Eintrags und die Kategorie angezeigt. Zu jedem Eintrag gehört ein Eingabeformular, in dem weitere, je nach Kategorie unterschiedliche, Informationen abgefragt werden. </li></ul><b>Arbeitsschritte:</b><br> <ol><li>Nutzen Sie vor der ersten Verwendung diese Hilfen: <br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.php\"target=_blank\">Einträge strukturieren - Pinwandprinzip</a> <br>[Hilfe-Link Wirkungspfad Details] </li><li>Sie können in jeder beliebigen Säule des Wirkungspfades beginnen. Alle Einträge lassen sich jederzeit ändern, abpinnen und wieder anpinnen und über <i class=\"fas fa-grip-vertical\"></i> innerhalb einer Säule verschieben. </li><li>Über <i class=\"fas fa-plus-circle\"></i><b> </b>in jeder Säule können Sie beliebig viele Einträge <b>Neu anlegen</b> oder bereits <b>Vorhandene auswählen</b>. </li><li>Ergänzen Sie über <i class=\"fas fa-edit\"></i> weitere Informationen zum Eintrag. </li><li>Die Ziele in Säule 2 und 3 haben eine zweite Ebene, in der Sie die Arbeiten hinzufügen/anpinnen, die zu dem Ziel beitragen. Die zweite Ebene öffnen Sie über <i class=\"far fa-list-alt\"></i>. </li><li>Nutzen Sie die <i class=\"fas fa-long-arrow-alt-right\"></i> nur, wenn Sie besonders wichtige Zusammenhänge zwischen Einträgen hervorheben wollen. </li><li><a></a> Ergänzen Sie <b>unterhalb des Wirkungspfades</b> eine<b> Beschreibung</b> zu den <b>Gesamtzielen</b> des Vorhabens. Dafür müssen Sie die Felder über <i class=\"fas fa-edit\"></i> aktivieren. Dort können Sie auch die Bezeichnung ändern. </li></ol>",
+  "impact-pathway.wrapper.info": "<i><b>Erstellen Sie hier einen Überblick zu den Hintergründen, Arbeiten und Wirkungen des Vorhabens.</b></i><br> <i><b>Im Wirkungspfad können Sie Einträge wie an einer Pinnwand anpinnen und so übersichtlich darstellen, um was es in dem Verbund geht.</b></i></br></br><b>Worum es hier geht:</b><br> <ul><li>Mit dem Wirkungspfad beantworten Sie zwei Fragen: „Welche Wirkungen sollen mit dem Vorhaben erreicht werden?“ und „Was wird/wurde getan, um zur Entwicklung dieser Wirkungen beizutragen?“ </li><li>Für die <b>Antragstellung</b> verdeutlichen Sie in den Einträgen insbesondere die Ziele des Verbundes. Die Abbildung des Wirkungspfades und eine kurze Beschreibung ersetzen in der Vorhabenbeschreibung das Kapitel „Gesamtziele des Vorhabens“. </li><li>Im <b>Verlauf des Vorhabens</b> aktualisieren und konkretisieren Sie den Wirkungspfad und ergänzen die Ergebnisse. </li><li>Die <b>6 Säulen</b> gliedern den Wirkungspfad. Je nach Säule können Einträge unterschiedlicher <b>Kategorien</b> (z.B. Rahmenbedingung oder erwartete gesellschaftliche Wirkung) angepinnt werden. Im Wirkungspfad wird jeweils nur die Bezeichnung des Eintrags und die Kategorie angezeigt. Zu jedem Eintrag gehört ein Eingabeformular, in dem weitere, je nach Kategorie unterschiedliche, Informationen abgefragt werden. </li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-ipw-about.php\"target=_blank\">Hintergrund zum Wirkungspfad</a></li></ul><b>Arbeitsschritte:</b><br> <ol><li>Nutzen Sie vor der ersten Verwendung diese Hilfen: <br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.php\"target=_blank\">Einträge strukturieren - Pinwandprinzip</a> <br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-ipw-help.php\"target=_blank\">Tipps und Beispiel zum Wirkungspfad</a></br> </li><li>Sie können in jeder beliebigen Säule des Wirkungspfades beginnen. Alle Einträge lassen sich jederzeit ändern, abpinnen und wieder anpinnen und über <i class=\"fas fa-grip-vertical\"></i> innerhalb einer Säule verschieben. </li><li>Über <i class=\"fas fa-plus-circle\"></i><b> </b>in jeder Säule können Sie beliebig viele Einträge <b>Neu anlegen</b> oder bereits <b>Vorhandene auswählen</b>. </li><li>Ergänzen Sie über <i class=\"fas fa-edit\"></i> weitere Informationen zum Eintrag. </li><li>Die Ziele in Säule 2 und 3 haben eine zweite Ebene, in der Sie die Arbeiten hinzufügen/anpinnen, die zu dem Ziel beitragen. Die zweite Ebene öffnen Sie über <i class=\"far fa-list-alt\"></i>. </li><li>Nutzen Sie die <i class=\"fas fa-long-arrow-alt-right\"></i> nur, wenn Sie besonders wichtige Zusammenhänge zwischen Einträgen hervorheben wollen. </li><li><a></a> Ergänzen Sie <b>unterhalb des Wirkungspfades</b> eine<b> Beschreibung</b> zu den <b>Gesamtzielen</b> des Vorhabens. Dafür müssen Sie die Felder über <i class=\"fas fa-edit\"></i> aktivieren. Dort können Sie auch die Bezeichnung ändern. </li></ol>",
 
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   "info.end-user-agreement.accept": "Ich habe die Endnutzer-Vereinbarung gelesen und stimme ihr zu",
@@ -5247,7 +5247,7 @@
   "item.version.history.head": "Versionsgeschichte",
 
   // "item.version.history.return": "Back",
-  "item.version.history.return": "Back",
+  "item.version.history.return": "Zurück",
 
   // "item.version.history.selected": "Selected version",
   "item.version.history.selected": "Ausgewählte Version",
@@ -5281,7 +5281,7 @@
 
   // "item.version.history.table.actions": "Action",
   // TODO New key - Add a translation
-  "item.version.history.table.actions": "Action",
+  "item.version.history.table.actions": "Aktion",
 
   // "item.version.history.table.action.editWorkspaceItem": "Edit workspace item",
   // TODO New key - Add a translation
@@ -5289,27 +5289,27 @@
 
   // "item.version.history.table.action.editSummary": "Edit summary",
   // TODO New key - Add a translation
-  "item.version.history.table.action.editSummary": "Edit summary",
+  "item.version.history.table.action.editSummary": "Zusammenfassung bearbeiten",
 
   // "item.version.history.table.action.saveSummary": "Save summary edits",
   // TODO New key - Add a translation
-  "item.version.history.table.action.saveSummary": "Save summary edits",
+  "item.version.history.table.action.saveSummary": "Bearbeitung speichern",
 
   // "item.version.history.table.action.discardSummary": "Discard summary edits",
   // TODO New key - Add a translation
-  "item.version.history.table.action.discardSummary": "Discard summary edits",
+  "item.version.history.table.action.discardSummary": "Bearbeitung verwerfen",
 
   // "item.version.history.table.action.newVersion": "Create new version from this one",
   // TODO New key - Add a translation
-  "item.version.history.table.action.newVersion": "Create new version from this one",
+  "item.version.history.table.action.newVersion": "Neue Version von diesem Stand erstellen",
 
   // "item.version.history.table.action.deleteVersion": "Delete version",
   // TODO New key - Add a translation
-  "item.version.history.table.action.deleteVersion": "Delete version",
+  "item.version.history.table.action.deleteVersion": "Version löschen",
 
   // "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
   // TODO New key - Add a translation
-  "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
+  "item.version.history.table.action.hasDraft": "Eine neue Version kann nicht erstellt werden, da in der Versionshistorie eine laufende Übermittlung vorhanden ist",
 
   // "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href='{{destination}}'>here</a>.",
   "item.version.notice": "Dies ist nicht die neueste Version dieses Items. Die neueste Version finden Sie unter <a href='{{destination}}'>hier</a>.",
@@ -5629,7 +5629,7 @@
   "loading.objects": "Lade…",
 
   // "loading.recent-submissions": "Loading recent submissions...",
-  "loading.recent-submissions": "Aktuellste Veröffentlichungen am Laden...",
+  "loading.recent-submissions": "Aktuellste Einträge am Laden...",
 
   // "loading.search-results": "Loading search results...",
   "loading.search-results": "Suchergebnisse am Laden...",
@@ -5772,7 +5772,7 @@
 
   // "menu.section.browse_by_projects": "Browse by projects",
   // TODO New key - Add a translation
-  "menu.section.browse_by_projects": "Browse by projects",
+  "menu.section.browse_by_projects": "Suche nach Verbünden",
 
   // "menu.section.explore_infrastructure": "Infrastructure",
   // TODO New key - Add a translation
@@ -5978,7 +5978,7 @@
 
   // "modal.item-detail-page.title": "Item Page Detail",
   // TODO New key - Add a translation
-  "modal.item-detail-page.title": "Item Page Detail",
+  "modal.item-detail-page.title": "eingetragende Informationen/Daten",
 
   // "modal.item-detail-page.confirm.cancel": "Close",
   // TODO New key - Add a translation
@@ -7634,7 +7634,7 @@
 
   // "project.create.head": "New project",
   // TODO New key - Add a translation
-  "project.create.head": "Neues Projekt anlegen",
+  "project.create.head": "Neuen Verbund anlegen",
 
   // "project.create.grants.placeholder": "Please select editable grants",
   // TODO New key - Add a translation
@@ -7663,7 +7663,7 @@
 
   // "project.create.success": "The new project has been generated successfully.",
   // TODO New key - Add a translation
-  "project.create.success": "Neues Projekt wurde erfolgreich angelegt",
+  "project.create.success": "Neuer Verbund wurde erfolgreich angelegt",
 
   // "project.listelement.badge": "Subproject",
   // TODO Source message changed - Revise the translation
@@ -7731,7 +7731,7 @@
 
   // "project.manage.members-list.table.edit": "Remove / Add",
   // TODO New key - Add a translation
-  "project.manage.members-list.table.edit": "Entfernen / Hinzufügen",
+  "project.manage.members-list.table.edit": "Hinzufügen / Entfernen",
 
   // "project.manage.members-list.table.edit.buttons.remove": "Remove member with name "{{name}}"",
   // TODO New key - Add a translation
@@ -8624,11 +8624,11 @@
 
   // "search.filters.applied.charts.grapheventtype.tab": "Event type",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.grapheventtype.tab": "Darstellung nach Format",
+  "search.filters.applied.charts.grapheventtype.tab": "...nach Format",
 
   // "search.filters.applied.charts.grapheventpurpose.tab": "Event prupose",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.grapheventpurpose.tab": "Darstellung nach Ziel",
+  "search.filters.applied.charts.grapheventpurpose.tab": "...nach Ziel",
 
   // "search.filters.applied.charts.grapheventpartner.tab": "Event partner",
   // TODO New key - Add a translation
@@ -8636,19 +8636,19 @@
 
   // "search.filters.applied.charts.grapheventtarget.tab": "Event target",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.grapheventtarget.tab": "Darstellung nach Zielgruppe",
+  "search.filters.applied.charts.grapheventtarget.tab": "...Zielgruppe",
 
   // "search.filters.applied.charts.grapheventdate.tab": "Event date",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.grapheventdate.tab": "Darstellung nach Jahr",
+  "search.filters.applied.charts.grapheventdate.tab": "...nach Jahr",
 
   // "search.filters.applied.charts.grapheventduration.tab": "Event duration",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.grapheventduration.tab": "Darstellung nach Dauer",
+  "search.filters.applied.charts.grapheventduration.tab": "...nach Dauer",
 
   // "search.filters.applied.charts.grapheventparticipant.tab": "Event participant",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.grapheventparticipant.tab": "Darstellung nach Anzahl Teilnehmende",
+  "search.filters.applied.charts.grapheventparticipant.tab": "...nach Anzahl Teilnehmende",
 
   // "search.filters.applied.charts.no.data.found": "No data found",
   // TODO New key - Add a translation
@@ -8811,7 +8811,7 @@
   "search.filters.filter.itemtype.head": "Typ",
 
   // "search.filters.filter.itemtype.placeholder": "Type",
-  "search.filters.filter.itemtype.placeholder": "Typ",
+  "search.filters.filter.itemtype.placeholder": "Kategorie",
 
   // "search.filters.filter.itemtype.label": "Search type",
   // TODO New key - Add a translation
@@ -9303,7 +9303,7 @@
 
   // "allProjectItems.search.results.head": "Search Results",
   // TODO New key - Add a translation
-  "allProjectItems.search.results.head": "Search Results",
+  "allProjectItems.search.results.head": "Suchergebnisse",
 
   // "default.search.results.head": "Search Results",
   // TODO New key - Add a translation
@@ -12041,7 +12041,7 @@
 
   // "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class=\"fas fa-plus-circle\"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class=\"fas fa-plus-circle\"></i> button in the work package to assign new or existing work.</p></b></i>\",",
   // TODO Source message changed - Revise the translation
-  "working-plan.chart.page.description": "Der Arbeitsplan enthält alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes.</br></br><b><i>Erstellen Sie hier den Arbeitsplan mit Arbeitspaketen und den dazugehörigen Arbeiten sowie Meilensteinen und legen Sie Zeiträume und Verantwortlichkeiten fest.</br>Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> oberhalb des Arbeitsplans fügen Sie neue Arbeitspakete und Meilensteine hinzu. Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> im Arbeitspaket ordnen Sie neue oder vorhandene Arbeiten hinzu.</i></b></br></br><b>Wichtige Hinweise:</b><ul><li><b>Arbeitspakete</b>, die bereits im Wirkungspfad oder anderer Stelle angelegt wurden, werden <b>hier direkt angezeigt</b>.</li><li><b>Meilensteine</b> können auf <b>Ebene von Arbeitspaketen</b> und auf <b>Ebene von Arbeiten</b> angelegt werden.</li><li>Über <i class=\"fas fa-thumbtack\"></i> können <b>Einträge</b> aus dem Arbeitsplan <b>entfernt</b> werden. Diese können über <i class=\"fas fa-plus-circle\"></i> wieder <b>hinzugefügt</b> werden.</li><li>Über <i class=\"fas fa-edit\"></i> wird die <b>Detailseite eines Eintrags</b> aufgerufen.</li></ul><b>Darstellungsmöglichkeiten:</b><ul><li>Mit <i class=\"fas fa-grip-vertical\"></i> können <b>Einträge verschoben</b> und damit individuell angeordnet werden.</li><li>Über <b>Sortiert nach</b> können Einträge unterhalb der Arbeitspakete nach verschiedenen Merkmalen sortiert weden. Die Sortierung lässt sich jederzeit wieder auf die <b>indivduelle Anordnung zurücksetzen</b>.</li><li>Über <b>Monat</b>, <b>Quartal</b> und <b>Jahr</b> kann die Darstellung der Zeitachse angepasst werden.</li></ul>Im <b>Verlauf des Vorhabens</b> ist die Arbeitsplanung regelmäßig zu aktualisieren, z. B. für den Zwischenbericht oder genehmigte Änderungsanträge:<ul><li>Über <b>Status</b> können Veränderungen im Arbeitsplan gekennzeichnet werden, die im Verlauf des Vorhabens eingetreten sind.</li><li>Über <b>Zeitraum verschieben</b> kann das Startdatum für alle Einträge angepasst, wenn der Beginn von der Antragstellung abweicht.</li><li>Über <b>Vergleich mit</b> läßt sich der aktuelle Stand mit einer älteren Version (z. B. der Antragsversion) vergleichen.</li></ul><b>Tipps:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.php\"target=_blank\">Einträge strukturieren - Pinwandprinzip</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-wp-wphelp.php\"target=_blank\">Tipps und Beispiel zum Arbeitsplan</a></li></ul>",
+  "working-plan.chart.page.description": "Der Arbeitsplan enthält alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes.</br></br><b><i>Erstellen Sie hier den Arbeitsplan mit Arbeitspaketen und den dazugehörigen Arbeiten sowie Meilensteinen und legen Sie Zeiträume und Verantwortlichkeiten fest.</br>Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> oberhalb des Arbeitsplans fügen Sie neue Arbeitspakete und Meilensteine hinzu. Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> im Arbeitspaket ordnen Sie neue oder vorhandene Arbeiten hinzu.</i></b></br></br><b>Wichtige Hinweise:</b><ul><li><b>Arbeitspakete</b>, die bereits im Wirkungspfad oder anderer Stelle angelegt wurden, werden <b>hier direkt angezeigt</b>.</li><li><b>Meilensteine</b> können auf <b>Ebene von Arbeitspaketen</b> und auf <b>Ebene von Arbeiten</b> angelegt werden.</li><li>Über <i class=\"fas fa-thumbtack\"></i> können <b>Einträge</b> aus dem Arbeitsplan <b>entfernt</b> werden. Diese können über <i class=\"fas fa-plus-circle\"></i> wieder <b>hinzugefügt</b> werden.</li><li>Über <i class=\"fas fa-edit\"></i> wird die <b>Detailseite eines Eintrags</b> aufgerufen.</li></ul><b>Darstellungsmöglichkeiten:</b><ul><li>Mit <i class=\"fas fa-grip-vertical\"></i> können <b>Einträge verschoben</b> und damit individuell angeordnet werden.</li><li>Über <b>Sortiert nach</b> können Einträge unterhalb der Arbeitspakete nach verschiedenen Merkmalen sortiert weden. Die Sortierung lässt sich jederzeit wieder auf die <b>indivduelle Anordnung zurücksetzen</b>.</li><li>Über <b>Monat</b>, <b>Quartal</b> und <b>Jahr</b> kann die Darstellung der Zeitachse angepasst werden.</li></ul>Im <b>Verlauf des Vorhabens</b> ist die Arbeitsplanung regelmäßig zu aktualisieren, z. B. für den Zwischenbericht oder genehmigte Änderungsanträge:<ul><li>Über <b>Status</b> können Veränderungen im Arbeitsplan gekennzeichnet werden, die im Verlauf des Vorhabens eingetreten sind.</li><li>Über <b>Zeitraum verschieben</b> kann das Startdatum für alle Einträge angepasst, wenn der Beginn von der Antragstellung abweicht.</li><li>Über <b>Vergleich mit</b> läßt sich der aktuelle Stand mit einer älteren Version (z. B. der Antragsversion) vergleichen.</li></ul><b>Tipps:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.php\"target=_blank\">Einträge strukturieren - Pinwandprinzip</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-wp-help.php\"target=_blank\">Tipps und Beispiel zum Arbeitsplan</a></li></ul>",
 
   // "working-plan.page.title": "Working plan",
   "working-plan.page.title": "Arbeitsplan",
@@ -12208,7 +12208,7 @@
   "tree.description.units": "Einheit (Auswahlliste)",
 
   // "vocabulary-treeview.tree.description.units": "Please select a suitable unit. If no unit fits, please use the next field.",
-  "vocabulary-treeview.tree.description.units": "<i>Wählen Sie bitte eine passende Einheit aus. </br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe. Falls keine Einheit passt, nutzen Sie bitte das nächste Feld.</i>",
+  "vocabulary-treeview.tree.description.units": "<i>Wählen Sie bitte eine passende Einheit aus. </br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
 
   // "tree.description.event-type": "Type of event/interaction",
   "tree.description.event-type": "Auswahl Format der Veranstaltung oder Art der Interaktion",
@@ -14175,59 +14175,59 @@
 
   // "query-builder.synsicris.placeholder.select-value": "Select Value",
   // TODO New key - Add a translation
-  "query-builder.synsicris.placeholder.select-value": "Select Value",
+  "query-builder.synsicris.placeholder.select-value": "Wert auswählen",
 
   // "query-builder.synsicris.placeholder.select-filter": "Select Filter",
   // TODO New key - Add a translation
-  "query-builder.synsicris.placeholder.select-filter": "Select Filter",
+  "query-builder.synsicris.placeholder.select-filter": "Filter auswählen",
 
   // "query-builder.synsicris.button.label.add-filter": "Add Filter",
   // TODO New key - Add a translation
-  "query-builder.synsicris.button.label.add-filter": "Add Filter",
+  "query-builder.synsicris.button.label.add-filter": "Filter hinzufügen",
 
   // "query-builder.synsicris.button.label.add-group-filter": "Add Filter Group",
   // TODO New key - Add a translation
-  "query-builder.synsicris.button.label.add-group-filter": "Add Filter Group",
+  "query-builder.synsicris.button.label.add-group-filter": "Filtergruppe hinzufügen",
 
   // "query-builder.synsicris.button.label.delete-group-filter": "Delete Group above",
   // TODO New key - Add a translation
-  "query-builder.synsicris.button.label.delete-group-filter": "Delete Group above",
+  "query-builder.synsicris.button.label.delete-group-filter": "Gruppe oben löschen",
 
   // "query-builder.synsicris.button.label.filter": "Filter",
   // TODO New key - Add a translation
-  "query-builder.synsicris.button.label.filter": "Filter",
+  "query-builder.synsicris.button.label.filter": "Filtern",
 
   // "query-builder.synsicris.button.label.reset": "Reset",
   // TODO New key - Add a translation
-  "query-builder.synsicris.button.label.reset": "Reset",
+  "query-builder.synsicris.button.label.reset": "Zurücksetzen",
 
   // "query-builder.synsicris.message.label.validation": "Fill out all the fields",
   // TODO New key - Add a translation
-  "query-builder.synsicris.message.label.validation": "Fill out all the fields",
+  "query-builder.synsicris.message.label.validation": "Füllen Sie alle Felder aus",
 
   // "query-builder.synsicris.label.search-all": "Search in all projects",
   // TODO New key - Add a translation
-  "query-builder.synsicris.label.search-all": "Search in all projects",
+  "query-builder.synsicris.label.search-all": "Suche in allen Einträgen",
 
   // "query-builder.synsicris.label.search-selected": "Search in selected projects",
   // TODO New key - Add a translation
-  "query-builder.synsicris.label.search-selected": "Search in selected projects",
+  "query-builder.synsicris.label.search-selected": "Suche in ausgewählten Verbünden",
 
   // "query-builder.synsicris.project.browse.head": "Projects list: ",
   // TODO New key - Add a translation
-  "query-builder.synsicris.project.browse.head": "Projects list: ",
+  "query-builder.synsicris.project.browse.head": "Liste der Verbünde:",
 
   // "query-builder.synsicris.project.browse.empty": "No results",
   // TODO New key - Add a translation
-  "query-builder.synsicris.project.browse.empty": "No results",
+  "query-builder.synsicris.project.browse.empty": "Keine Ergebnisse",
 
   // "query-builder.synsicris.accordion.step1.header": "Step 1",
   // TODO New key - Add a translation
-  "query-builder.synsicris.accordion.step1.header": "Step 1",
+  "query-builder.synsicris.accordion.step1.header": "Schritt 1",
 
   // "query-builder.synsicris.accordion.step2.header": "Step 2",
   // TODO New key - Add a translation
-  "query-builder.synsicris.accordion.step2.header": "Step 2",
+  "query-builder.synsicris.accordion.step2.header": "Schritt 2",
 
   // "layout.tab.header.Projekttraeger": "Programme and Funding information",
   "layout.tab.header.Projekttraeger": "Programm- und Förderinformationen",
@@ -14290,10 +14290,10 @@
   "submission.sections.submit.progressbar.describe.projectpartners_import_leadadmin.info": "<b>Die Informationen stammen aus dem Import der easy-xml-Datei und werden im Verlauf des Vorhabens über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert. In easy-Online heißt dies „Administrative Ansprechperson (im Falle einer Bewilligung)“. Für zusätzliche Organisationseinheiten/Abteilungen sind hier keine Einträge vorzunehmen.</b>",
 
   // "submission.form.cooperationpartners.info": "missing",
-  "submission.form.cooperationpartners.info": "<b>Worum es hier geht:</b><ul><li>Hier können Sie Organisationen erfassen, die (meist ohne vertragliche Bindung und ohne finanzielle Vergütung) <b>maßgeblich an der Erarbeitung von Ergebnissen</b> im Verbund <b>mitwirken</b>.</li><li>Erfassen Sie hier nur Kooperationspartner / Unterauftragnehmer, die damit <b>einverstanden</b> sind.</ul></li> <b>Zur Unterscheidung:</b><ul><li>Kooperationspartner, die anonym bleiben wollen, oder größere Gruppen von Kooperationspartnern können Sie über Akteursgruppen erfassen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-involved.php\"target=_blank\">Projektbeteiligte unterscheiden</a></li>",
+  "submission.form.cooperationpartners.info": "<b>Worum es hier geht:</b><ul><li>Hier können Sie Organisationen erfassen, die <b>maßgeblich an der Erarbeitung von Ergebnissen</b> im Verbund <b>mitwirken</b>.</li><li>Erfassen Sie hier nur Kooperationspartner / Unterauftragnehmer, die damit <b>einverstanden</b> sind.</ul></li> <b>Zur Unterscheidung:</b><ul><li>Kooperationspartner, die anonym bleiben wollen, oder größere Gruppen von Kooperationspartnern können Sie über Akteursgruppen erfassen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-involved.php\"target=_blank\">Projektbeteiligte unterscheiden</a></li>",
 
   // "submission.form.cooperationpartners-edit.info": "missing",
-  "submission.form.cooperationpartners-edit.info": "<b>Worum es hier geht:</b><ul><li>Hier können Sie Organisationen erfassen, die (meist ohne vertragliche Bindung und ohne finanzielle Vergütung) <b>maßgeblich an der Erarbeitung von Ergebnissen</b> im Verbund <b>mitwirken</b>.</li><li>Erfassen Sie hier nur Kooperationspartner / Unterauftragnehmer, die damit <b>einverstanden</b> sind.</ul></li> <b>Zur Unterscheidung:</b><ul><li>Kooperationspartner, die anonym bleiben wollen, oder größere Gruppen von Kooperationspartnern können Sie über Akteursgruppen erfassen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-involved.php\"target=_blank\">Projektbeteiligte unterscheiden</a></li>",
+  "submission.form.cooperationpartners-edit.info": "<b>Worum es hier geht:</b><ul><li>Hier können Sie Organisationen erfassen, die <b>maßgeblich an der Erarbeitung von Ergebnissen</b> im Verbund <b>mitwirken</b>.</li><li>Erfassen Sie hier nur Kooperationspartner / Unterauftragnehmer, die damit <b>einverstanden</b> sind.</ul></li> <b>Zur Unterscheidung:</b><ul><li>Kooperationspartner, die anonym bleiben wollen, oder größere Gruppen von Kooperationspartnern können Sie über Akteursgruppen erfassen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-involved.php\"target=_blank\">Projektbeteiligte unterscheiden</a></li>",
 
   // "submission.sections.submit.progressbar.describe.cooperationpartners.info": "missing",
   "submission.sections.submit.progressbar.describe.cooperationpartners.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br>Diese Informationen dienen dazu, <b>die Einbindung relevanter Disziplinen und Handlungsfelder</b> im Verbund einzuschätzen.",
@@ -14341,16 +14341,16 @@
   "submission.sections.submit.progressbar.describe.agrovoc_keywords_others.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br>Hier werden die Schlagworte angezeigt, die Sie dem Verbund zugewiesen haben.</br></br><b><i>Sie können die Schlagworte anpassen, indem Sie sie löschen oder neue hinzufügen. Geben Sie dafür jeweils einen Begriff oder Teile davon ein. Wählen Sie den passenden Begriff aus der angezeigten Vorschlagsliste.</br></br></b></i> <b>Wichtige Hinweise:</b><ul><li>Schlagworte dienen der <b>Suchoptimierung</b>, d. h. dadurch werden die Einträge leichter gefunden.</li><li>Die <b>Übertragung</b> der Schlagworte vom Verbund findet nur <b>einmalig</b> beim Anlegen des Eintrags statt. Die hier zugewiesenen Schlagworte bleiben unverändert, auch wenn die Schlagworte zum Verbund noch mal geändert werden.</li><li>Verwendet wird hier das kontrollierte Schlagwortverzeichnis für den Agrarbereich der FAO (Agrovoc).</ul></li>",
 
   // "submission.sections.submit.progressbar.describe.statusacc1.info": "missing",
-  "submission.sections.submit.progressbar.describe.statusacc1.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Kennzeichnen Sie hier bitte Veränderungen seit der Antragstellung zu diesem Eintrag.</br></br></i>Damit werden Veränderungen in der Planung und der Projektfortschritt leicht sichtbar.",
+  "submission.sections.submit.progressbar.describe.statusacc1.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br>Beim Anlegen eines Eintrags wird dieser Wert automatisch auf \"geplant\" gesetzt.</br><b>Kennzeichnen Sie im Verlauf des Vorhabens bitte die Veränderung seit der Antragstellung.</b> Damit werden Veränderungen in der Planung und der Fortschritt des Vorhabens leicht sichtbar.",
 
   // "submission.sections.submit.progressbar.describe.statusacc2.info": "missing",
-  "submission.sections.submit.progressbar.describe.statusacc2.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Kennzeichnen Sie hier bitte Veränderungen seit der Antragstellung zu diesem Eintrag.</br></br></b></i>Damit werden Veränderungen in der Planung und der Projektfortschritt leicht sichtbar.",
+  "submission.sections.submit.progressbar.describe.statusacc2.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br>Beim Anlegen eines Eintrags wird dieser Wert automatisch auf \"geplant\" gesetzt.</br><b>Kennzeichnen Sie im Verlauf des Vorhabens bitte die Veränderung seit der Antragstellung.</b> Damit werden Veränderungen in der Planung und der Fortschritt des Vorhabens leicht sichtbar.",
 
   // "submission.sections.submit.progressbar.describe.statusacc3.info": "missing",
-  "submission.sections.submit.progressbar.describe.statusacc3.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Kennzeichnen Sie hier bitte Veränderungen seit der Antragstellung zu diesem Eintrag.</br></br></b></i>Damit werden Veränderungen in der Planung und der Projektfortschritt leicht sichtbar.",
+  "submission.sections.submit.progressbar.describe.statusacc3.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br>Beim Anlegen eines Eintrags wird dieser Wert automatisch auf \"geplant\" gesetzt.</br><b>Kennzeichnen Sie im Verlauf des Vorhabens bitte die Veränderung seit der Antragstellung.</b> Damit werden Veränderungen in der Planung und der Fortschritt des Vorhabens leicht sichtbar.",
 
   // "submission.sections.submit.progressbar.describe.statusacc4.info": "missing",
-  "submission.sections.submit.progressbar.describe.statusacc4.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Kennzeichnen Sie hier bitte Veränderungen seit der Antragstellung zu diesem Eintrag.</br></br></b></i>Damit werden Veränderungen in der Planung und der Projektfortschritt leicht sichtbar.",
+  "submission.sections.submit.progressbar.describe.statusacc4.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br>Beim Anlegen eines Eintrags wird dieser Wert automatisch auf \"geplant\" gesetzt.</br><b>Kennzeichnen Sie im Verlauf des Vorhabens bitte die Veränderung seit der Antragstellung.</b> Damit werden Veränderungen in der Planung und der Fortschritt des Vorhabens leicht sichtbar.",
 
   // "submission.form.unexpected_results.info": "missing",
   "submission.form.unexpected_results.info": "<b>Worum es hier geht:</b><ul><li>(Zwischen-)Ergebnisse oder Probleme sollen im Wirkungspfad leicht erkennbar gemacht werden, um den <b>Grund für Veränderungen in den Arbeiten und Wirkungen</b> darzustellen. Damit zeigen Sie die Anpassungsfähigkeit des Verbundes.</li><li>Beispiele: Forschungsmethoden erweisen sich als nicht nutzbar, Versuchsvarianten unterscheiden sich nicht signifikant, essentielle Kooperationen lassen sich nicht verwirklichen, Risiken einer Anwendung werden bekannt, Lösungen erweisen sich als wirkungslos.</li><li>Eventuell können diese (Zwischen-) Ergebnisse oder Probleme so gravierend sein, dass sie als sogenannte „Negative Results“ eingestuft werden können. Das sind z. B. nicht-signifikante oder eine Hypothese widerlegende Ergebnisse sowie methodische Probleme die eine Durchführung der Forschungsarbeiten verhindern. Indem Sie diese veröffentlichen, zeigen Sie Integrität und Verantwortungsbewusstsein der Forschung im Verbund. Sie tragen in der wissenschaftlichen Community dazu bei, Methoden weiterzuentwickeln, Risiken wahrzunehmen und Verzerrungen in der Einschätzung von Signifikanzen und Effektgrößen in Reviews und Metaanalysen zu vermeiden. Bei praxisorientierten Ergebnissen tragen Sie dazu bei, die Anwendung unwirksamer oder risikoreicher Maßnahmen zu verhindern.</ul></li><b>Zur Unterscheidung:</b><ul><li>Wenn externe Rahmenbedingungen die Ursache für eine Veränderung sind, erfassen Sie diese in der Kategorie <b>Rahmenbedingung</b></li><li>Von <b>Forschungsergebnis</b> unterscheidet sich <b>(Zwischen-) Ergebnis / Problem</b> darin, dass es Veränderungen in den Arbeiten und Wirkungen hervorruft.</li></ul>",
@@ -14530,16 +14530,16 @@
   "layout.box.help-text.subproject_h": "<b>Hier werden die (Teil-)Projekte/Zuwendungsempfänger des Verbundes aufgelistet.</b><br>Als <b>Koordinator:in eines (Teil-)Projektes</b>, legen Sie hier den <b>Arbeitsbereich für ihr (Teil-)Projekt </b>/ ihre Organisation über <i class=\"fas fa-plus-circle\"></i> an. Über den<b> Link</b> rufen Sie das <b>(Teil-)Projekt</b> auf, um weitere Schritte durchzuführen.<br>Auch für ein Einzelprojekt legen Sie hier einen Eintrag an, um die Daten Ihrer Organisation zu erfassen.<br><br>",
 
   // "layout.box.help-text.subproject_h_1": "missing",
-  "layout.box.help-text.subproject_h_1": "<b>Hier schaffen Sie die Voraussetzungen für die gemeinsame inhaltliche Arbeit im Verbund:</b><ul><li> Als<b> Koordinator:in</b> laden Sie über <b>Aktion: <i class=\"fas fa-toolbox\"></i> Mitarbeitende verwalten</b> weitere Personen Ihrer Organisation in den Verbund und in das (Teil-)Projekt ein und können verschiedene Rollen vergeben. </li><li> Über <b>Aktion: <i class=\"fas fa-file-import\"></i> easy-Online Import durchführen</b> übernehmen Sie Daten zu Ihrem Projekt und zu Ihrer Organisationseinheit. Ergänzen Sie anschließend die Angaben aus dem Import. Wenn Sie easy-Online nicht nutzen, geben Sie die Informationen manuell ein. </li><li> Nach der inhaltlichen Arbeit im Arbeitsbereich des Verbundes legen Sie hier den <b>Verwertungsplan</b> an, wenn dies vom Fördermittelgeber gefordert ist. </li><li> Im <b>Verlauf des Vorhabens</b> erstellen Sie den geforderten Zwischenbericht und aktualisieren den Verwertungsplan.</li></ul><b>Weitere Hilfen:</b><ul><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-proj.php\"target=_blank\">Verbund und beteiligte Projekte unterscheiden</a> </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.php\"target=_blank\">Schritt-für-Schritt-Anleitung für die Antragstellung</a></li></ul>",
+  "layout.box.help-text.subproject_h_1": "<b>Hier schaffen Sie die Voraussetzungen für die gemeinsame inhaltliche Arbeit im Verbund:</b><ul><li> Als<b> Koordinator:in</b> laden Sie über <b>Aktion: <i class=\"fas fa-toolbox\"></i> Projektmitarbeitende verwalten</b> weitere Personen Ihrer Organisation in den Verbund und in das (Teil-)Projekt ein und können verschiedene Rollen vergeben. </li><li> Über <b>Aktion: <i class=\"fas fa-file-import\"></i> easy-Online Import durchführen</b> übernehmen Sie Daten zu Ihrem Projekt und zu Ihrer Organisationseinheit. Ergänzen Sie anschließend die Angaben aus dem Import. Wenn Sie easy-Online nicht nutzen, geben Sie die Informationen manuell ein. </li><li> Nach der inhaltlichen Arbeit im Arbeitsbereich des Verbundes legen Sie hier den <b>Verwertungsplan</b> an, wenn dies vom Fördermittelgeber gefordert ist. </li><li> Im <b>Verlauf des Vorhabens</b> erstellen Sie den geforderten Zwischenbericht und aktualisieren den Verwertungsplan.</li></ul><b>Weitere Hilfen:</b><ul><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-proj.php\"target=_blank\">Verbund und beteiligte Projekte unterscheiden</a> </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.php\"target=_blank\">Schritt-für-Schritt-Anleitung für die Antragstellung</a></li></ul>",
 
   // "layout.box.help-text.cooperationpartner_h": "missing",
-  "layout.box.help-text.cooperationpartner_h": "<b>Kooperationspartner / Unterauftragnehmer</b> sind Organisationen, die <b>(meist ohne vertragliche Bindung) maßgeblich</b> an der Erarbeitung von Ergebnissen <b>mitwirken</b>.</br></br><b>Legen Sie über</b> <i class=\"fas fa-plus-circle\"></i> <b>einen neuen Kooperationspartner / Unterauftragnehmer an</b>. Zum <b>Bearbeiten</b> rufen Sie einen Eintrag über seinen <b>Link</b> in der Listenansicht auf und wählen </b>Aktion: Bearbeiten</b>.</br></br> <b>Wichtiger Hinweis:</b><ul><li>Organisationen, die im Projekt mitwirken, können entweder einzeln als Kooperationspartner oder anonym als Akteursgruppe erfasst werden.</ul></li> <b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-involved.php\"target=_blank\">Projektbeteiligte unterscheiden</a></li></ul>",
+  "layout.box.help-text.cooperationpartner_h": "<b>Kooperationspartner / Unterauftragnehmer</b> sind Organisationen, die <b>maßgeblich</b> an der Erarbeitung von Ergebnissen <b>mitwirken</b>.</br></br><b>Legen Sie über</b> <i class=\"fas fa-plus-circle\"></i> <b>einen neuen Kooperationspartner / Unterauftragnehmer an</b>. Zum <b>Bearbeiten</b> rufen Sie einen Eintrag über seinen <b>Link</b> in der Listenansicht auf und wählen </b>Aktion: Bearbeiten</b>.</br></br> <b>Wichtiger Hinweis:</b><ul><li>Organisationen, die im Projekt mitwirken, können entweder einzeln als Kooperationspartner oder anonym als Akteursgruppe erfasst werden.</ul></li> <b>Weitere Hilfen:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-involved.php\"target=_blank\">Projektbeteiligte unterscheiden</a></li></ul>",
 
   // "layout.box.help-text.targetgroup_h": "missing",
   "layout.box.help-text.targetgroup_h": "<i class=\"fas fa-exclamation-triangle\"></i> <b>Legen Sie relevante Akteursgruppen an, bevor Sie den Wirkungspfad oder den Arbeitsplan bearbeiten.</b><br><b>Warum?</b> Weil Sie in den Einträgen zu Interaktionen jeweils zuordnen, welche Akteursgruppe eingebunden wird.<br></br><b>Worum es hier geht:</b><ul><li>Relevante Akteursgruppen sind: Zielgruppen, Stakeholder, Nutzergruppen und Multiplikatoren, die im Vorhaben <b>eingebunden</b> oder <b>erreicht</b> werden sollen. Aber auch: Beeinträchtigte von Wirkungen oder Gegner von Veränderungen, die das Vorhaben anstrebt.</li><li>Akteursgruppen sind somit Gruppen von Organisationen und Personen, die nicht genauer benannt werden und im Verlauf des Vorhabens in ihrer Zusammensetzung auch wechseln können.</li><li>Welche und wieviele Akteursgruppen relevant sind, hängt vom Verbund ab. Es ist hilfreich, sie nach Handlungsfeldern zu unterscheiden: z.B. Beratung, Schulen, Konsumenten, Landwirtschaftliche Betriebe bestimmte Wirtschaftsbereiche oder politische Entscheidungsträger.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-involved.php\"target=_blank\">Projektbeteiligte unterscheiden</a></li></ul>",
 
   // "layout.box.help-text.impactpathway_h": "missing",
-  "layout.box.help-text.impactpathway_h": "Der <b>Wirkungspfad</b> veranschaulicht <b>Hintergründe, Ziele, Arbeiten und Wirkungen</b> des Verbundes in strukturierter Forrm.</br>Beginnen Sie <b>hier oder im Arbeitsplan</b> mit der inhaltlichen Planung des Vorhabens.</br></br><i><b>Legen Sie über </b><i class=\"fas fa-plus-circle\"></i><b> einen Wirkungspfad an oder wählen Sie den vorhandenen zum Bearbeiten aus.</i></b></br></br><b>Wichtige Hinweise:</b><ul><li>Legen Sie möglichst nur <b>einen Wirkungspfad</b> für den gesamten Verbund an </li><li>Nur in <b>Ausnahmefällen</b>, z. B. wenn sich Ziele, Arbeiten und Wirkungslogik in den einzelnen Projekten sehr unterscheiden, legen Sie <b>mehrere Wirkungspfade</b> an. </li><li>Idealerweise sind <b>vorher</b> bereits die beteiligten <b>Projektpartner</b> in den einzelnen Projekten des Verbundes und die <b>wichtigsten Kooperationspartner / Unterauftragnehmer</b> und<b> Akteursgruppen</b> erfasst. Spätestens wenn Sie die einzelnen Einträge detaillierter planen, werden diese Informationen benötigt. </li></ul>",
+  "layout.box.help-text.impactpathway_h": "Der <b>Wirkungspfad</b> veranschaulicht <b>Hintergründe, Ziele, Arbeiten und Wirkungen</b> des Verbundes in strukturierter Forrm.</br>Beginnen Sie <b>hier oder im Arbeitsplan</b> mit der inhaltlichen Planung des Vorhabens.</br></br><i><b>Legen Sie über </b><i class=\"fas fa-plus-circle\"></i><b> einen Wirkungspfad an oder wählen Sie den vorhandenen zum Bearbeiten aus.</i></b></br></br><b>Wichtige Hinweise:</b><ul><li>Legen Sie möglichst nur <b>einen Wirkungspfad</b> für den gesamten Verbund an. </li><li>Nur in <b>Ausnahmefällen</b>, z. B. wenn sich Ziele, Arbeiten und Wirkungslogik in den einzelnen Projekten sehr unterscheiden, legen Sie <b>mehrere Wirkungspfade</b> an. </li><li>Idealerweise sind <b>vorher</b> bereits die beteiligten <b>Projektpartner</b> in den einzelnen Projekten des Verbundes und die <b>wichtigsten Kooperationspartner / Unterauftragnehmer</b> und<b> Akteursgruppen</b> erfasst. Spätestens wenn Sie die einzelnen Einträge detaillierter planen, werden diese Informationen benötigt. </li></ul>",
 
   // "layout.box.help-text.ethic_h": "missing",
   "layout.box.help-text.ethic_h": "Die <b>ethische Reflexion</b> dient dazu, Aspekte zu identifizieren, die für eine verantwortungsvolle Durchführung des Vorhabens und für die Entwicklung von Wirkungen wichtig sind. Sie wird im Verbund nur einmal durchgeführt, d. h. es gibt hier nur einen Eintrag.<p><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> einen Eintrag an, falls noch keiner vorhanden ist</b>. <br>Wenn ethische Aspekte für die Entwicklung von Wirkungen <b>relevant</b> sind, fügen Sie den Eintrag in Säule 1 im <b>Wirkungspfad</b> hinzu.",
@@ -14560,16 +14560,16 @@
   "layout.box.help-text.ia_objective_h": "<b>Ziele für Interaktion und Transfer</b> beinhalten die unmittelbaren Zieel für eine Gruppe von Austausch- und Transferaktivitäten (z. B. Erfahrungen einer Akteursgruppe in die Entwicklung integrieren).</br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
 
   // "layout.box.help-text.workpackage_h": "missing",
-  "layout.box.help-text.workpackage_h": "<b>Arbeitspakete</b> gliedern die Arbeiten des Verbundes. </br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
+  "layout.box.help-text.workpackage_h": "<b>Arbeitspakete</b> gliedern die Arbeiten des Verbundes. </br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></br></br><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
 
   // "layout.box.help-text.task_h": "missing",
-  "layout.box.help-text.task_h": "<b>Aufgaben</b> umfassen einzelne Arbeitsschritte, die im Arbeitsplan einem Arbeitspaket zugeordnet sind. </br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
+  "layout.box.help-text.task_h": "<b>Aufgaben</b> umfassen einzelne Arbeitsschritte, die im Arbeitsplan einem Arbeitspaket zugeordnet sind. </br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></br></br><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
 
   // "layout.box.help-text.process_event_h": "missing",
-  "layout.box.help-text.process_event_h": "<b>Kooperation / Partizipation / Austauschprozess</b> beinhalten vom Verbund organisierte Aktivitäten, die über einen längeren Zeitraum mit den gleichen Beteiligten stattfinden. </br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
+  "layout.box.help-text.process_event_h": "<b>Kooperation / Partizipation / Austauschprozesse</b> beinhalten vom Verbund organisierte Aktivitäten, die über einen längeren Zeitraum mit den gleichen Beteiligten stattfinden. </br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
 
   // "layout.box.help-text.Event_h": "missing",
-  "layout.box.help-text.Event_h": "<b>Veranstaltungen</b> umfasst alle Einzelveranstaltungen, die vom Verbund durchgeführt oder an denen Verbundmitglieder teilnehmen. </br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
+  "layout.box.help-text.Event_h": "<b>Veranstaltungen</b> umfassen alle Einzelveranstaltungen, die vom Verbund durchgeführt werden oder an denen Verbundmitglieder teilnehmen. </br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
 
   // "layout.box.help-text.plan_publication_h": "missing",
   "layout.box.help-text.plan_publication_h": "<b>Geplante Veröffentlichungen</b> sind im Wirkungspfad als Sammeleintrag einem jeweiligen Ziel für Interaktion und Transfer zugeordnet. Diese <b>Angaben</b> sind <b>zur Antragsplanung erforderlich</b> und können im Verlauf des Vorhabens aktualisiert werden.</br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p>.<b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
@@ -14584,7 +14584,7 @@
   "layout.box.help-text.Product_h": "<b>Forschungsdaten</b> sind (digitale) Daten, die während wissenschaftlicher Tätigkeiten z. B. durch Messungen, Befragungen oder Quellenarbeit entstehen und in öffentlichen Datenbanken abgelegt sind. Diese <b>Angaben</b> sind <b>im Verlauf des Vorhabens zu ergänzen.</b></br></br><b>Legen Sie über <i class=\"fas fa-plus-circle\"></i> einen neuen Eintrag an und fügen ihn anschließend im Wirkungspfad hinzu.</b>",
 
   // "layout.box.help-text.research_result_h": "missing",
-  "layout.box.help-text.research_result_h": "<b>Forschungsergebnisse</b> fassen die wichtigsten Erkenntnissen kurz zusammen. Die ausführliche Darstellung erfolgt durch Veröffentlichungen und Berichte. </br><<b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
+  "layout.box.help-text.research_result_h": "<b>Forschungsergebnisse</b> fassen die wichtigsten Erkenntnissen kurz zusammen. Die ausführliche Darstellung erfolgt durch Veröffentlichungen und Berichte. </br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
 
   // "layout.box.help-text.Patent_h": "missing",
   "layout.box.help-text.Patent_h": "<b>Patente / Gebrauchsmuster</b> enhalten Informationen zur Anmeldung von Schutzrechten. </br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
@@ -14614,7 +14614,7 @@
   "layout.box.help-text.spinoff_h": "<b>Ausgründungen (inkl. Vereine)</b> beinhalten Gründungen jeglicher Form aus dem Verbund. </br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
 
   // "layout.box.help-text.contribution_fundingprogramme_h": "missing",
-  "layout.box.help-text.contribution_fundingprogramme_h": "<b>Beiträge zu Förderzielen</b> verdeutlichen den Bezug zwischen den Zielen des Verbundes und den Förderzielen.</br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
+  "layout.box.help-text.contribution_fundingprogramme_h": "<b>Beiträge zu Förderzielen</b> verdeutlichen den Bezug zwischen den Zielen des Verbundes und den Förderzielen.</br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></br></br><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
 
   // "layout.box.help-text.programme_h": "missing",
   "layout.box.help-text.programme_h": "Dies ist ein Test",
@@ -14851,7 +14851,7 @@
   "project.manage.members.funding.admin-group": "Einladung und Verwaltung Projetmitarbeitende mit Koordinator:innen-Rolle",
 
   // "project.manage.members.funding.members-group": "Invitation and Management of project members",
-  "project.manage.members.funding.members-group": "Einladung und Verwaltung Projektmitarbeitende",
+  "project.manage.members.funding.members-group": "Projektmitarbeitende",
 
   // "item.grant.badge.funding": "Only {{ name }}",
   "item.grant.badge.funding": "nur Mitglieder {{ name }}",
@@ -15190,7 +15190,7 @@
   "layout.box.help-text.subcontractor_h_project": "to be deleted",
 
   // "layout.box.help-text.neg_sideeffect_h": "missing",
-  "layout.box.help-text.neg_sideeffect_h": "<b>Mögliche negative Nebenwirkungen> beinhalten, welche nicht-intendierten negativen (Neben-)Wirkungen mit einer Anwendung der Ergebnisse verbunden sein können.</br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
+  "layout.box.help-text.neg_sideeffect_h": "<b>Mögliche negative Nebenwirkungen</b> beinhalten, welche nicht-intendierten negativen (Neben-)Wirkungen mit einer Anwendung der Ergebnisse verbunden sein können.</br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></p><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
 
   // "layout.tab.header.multiple_entities": "Multiple entities",
   "layout.tab.header.multiple_entities": "Multiple entities",
@@ -15274,28 +15274,28 @@
   "programme.manage.members-list.table.identity": "E-Mail / interne ID",
 
   // "search.filters.applied.charts.RELATION.Project.Publication.title": "missing",
-  "search.filters.applied.charts.RELATION.Project.Publication.title": "Veröffentlichungen - Grafik",
+  "search.filters.applied.charts.RELATION.Project.Publication.title": "Grafik",
 
   // "search.filters.applied.charts.RELATION.Project.Event.title": "missing",
-  "search.filters.applied.charts.RELATION.Project.Event.title": "Veranstaltungen - Grafik",
+  "search.filters.applied.charts.RELATION.Project.Event.title": "Grafik",
 
   // "project.manage.members.project.coordinators-group": "Invitation and Management Coordinators",
-  "project.manage.members.project.coordinators-group": "Einladung und Verwaltung Koordinator:innen im Verbund",
+  "project.manage.members.project.coordinators-group": "Koordinator:innen im Verbund",
 
   // "project.manage.members.project.coordinators-group-help": "Help Coordinators",
-  "project.manage.members.project.coordinators-group-help": "<b>Laden Sie hier für jedes beteiligte Projekt (Zuwendungsempfänger) ausschließlich einen Koordinator:in ein.</b></br> Weitere Einladungen mit Rollenvergabe erfolgen innerhalb der Arbeitsbereiche von Projekten.<ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle <b>Personen mit Koordinator:innen-Rolle im Verbund</b> gelistet. Die Koordinator:innen-Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Verbund geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
+  "project.manage.members.project.coordinators-group-help": "<b>Laden Sie hier für jedes beteiligte Projekt (Zuwendungsempfänger) ausschließlich einen Koordinator:in ein.</b></br> Hiermit weisen Sie der eingeladenen Person ebenfalls die Koordinator:innen-Rolle zu. Wenn Sie der Person eine andere Rolle zuweisen möchten, wechseln Sie in den Reiter <b>Personen mit Lese-Rolle</b>. </br> Weitere Einladungen mit Rollenvergabe erfolgen innerhalb der Arbeitsbereiche von Projekten.<ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle <b>Personen mit Koordinator:innen-Rolle im Verbund</b> gelistet. Die Koordinator:innen-Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Verbund geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
 
   // "project.manage.members.funding.coordinators-group": "Invitation and Management Project members with Coordinator-Role",
-  "project.manage.members.funding.coordinators-group": "Einladung und Verwaltung Projektmitarbeitende mit Kooordinator:innen-Rolle",
+  "project.manage.members.funding.coordinators-group": "Projektmitarbeitende mit Kooordinator:innen-Rolle",
 
   // "project.manage.members.funding.coordinators-group-help": "Help Project members with Coordinator-Role",
-  "project.manage.members.funding.coordinators-group-help": "<b>Laden Sie hier Personen ein, die im Projekt neben Ihnen auch die Koordinator:innen-Rolle erhalten sollen.</b></br>Wenn Sie Projektmitarbeitende ohne  Koordinator:innen-Rolle einladen möchten, wechseln Sie in <b>Einladung und Verwaltung Projektmitarbeitende</b>.<ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle <b>Personen mit Koordinator:innen-Rolle im Projekt</b> gelistet. Die Koordinator:innen-Rolle kann über <b>Rolle entziehen</b> jederzeit auf die <b>Projektmitarbeitenden-Rolle begrenzt</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
+  "project.manage.members.funding.coordinators-group-help": "<b>Laden Sie hier Personen ein, die im Projekt neben Ihnen auch die Koordinator:innen-Rolle erhalten sollen.</b></br>Wenn Sie Projektmitarbeitende ohne  Koordinator:innen-Rolle einladen möchten, wechseln Sie in den Reiter <b>Projektmitarbeitende</b>.<ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle <b>Personen mit Koordinator:innen-Rolle im Projekt</b> gelistet. Die Koordinator:innen-Rolle kann über <b>Rolle entziehen</b> jederzeit auf die <b>Projektmitarbeitenden-Rolle begrenzt</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
 
   // "project.manage.members.project.funders-group": "Invitation and Management Funder manager",
   "project.manage.members.project.funders-group": "Einladung und Verwaltung PT-Projektbetreuer:innen",
 
   // "project.manage.members.project.funders-group-help": "Help Funder manager",
-  "project.manage.members.project.funders-group-help": "Hilfetext Einladung und Verwaltung PT-Projektbetreuer:innen",
+  "project.manage.members.project.funders-group-help": "<b>Laden Sie hier Personen ein, die für den Verbund die Rolle der PT-Betreuenden erhalten sollen.</b><ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen gelistet, die im Verbund die PT-Betreuenden-Rolle haben. Die Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Verbund geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
 
   // "project.manage.members-list.table.edit.buttons.withdraw": "Withdraw role",
   "project.manage.members-list.table.edit.buttons.withdraw": "Rolle entziehen",
@@ -15640,28 +15640,28 @@
   "programme.manage.notification.success.deleteMembe": "Mitglied erfolgreich gelöscht",
 
   // "project.manage.members.project.readers-group": "Invitation and Managment Persons with Read-Role",
-  "project.manage.members.project.readers-group": "Einladung und Verwaltung Personen mit Lese-Rolle",
+  "project.manage.members.project.readers-group": "Personen mit Lese-Rolle für Verbund",
 
   // "project.manage.members.project.readers-group-help": "Help Read-Role",
-  "project.manage.members.project.readers-group-help": "Hilfetext für Lesende-Rolle",
+  "project.manage.members.project.readers-group-help": "<b>Laden Sie hier Personen ein, die für den Verbund eine Lese-Rolle erhalten sollen.</b></br>Hiermit kann die eingeladene Person alle Informationen zum Verbund exportieren und lesen. Wenn Sie der Person eine andere Rolle zuweisen möchten, wechseln Sie in den Reiter <b>Koordinator:innen im Verbund</b>.<ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen gelistet, die die Lese-Rolle im Verbund haben. Die Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Verbund geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
 
   // "programme.manage.members.project.funders-group": "Invitation and management of programme project funders",
-  "programme.manage.members.project.funders-group": "Einladung und Verwaltung PT-Projetbeteuer:innen",
+  "programme.manage.members.project.funders-group": "Einladung und Verwaltung PT-Verbundbeteuer:innen",
 
   // "programme.manage.members.funders-group-help": "Help PT-Programme project funders",
-  "programme.manage.members.funders-group-help": "Hilfe PT-Projektbetreuer:innen",
+  "programme.manage.members.funders-group-help": "<b>Laden Sie hier Personen ein, die für das Programm die Rolle der Verbundbetreuenden erhalten sollen.</b><ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen gelistet, die im Programm Verbünde anlegen und verwalten können. Die Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Programm geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
 
   // "programme.manage.members.project.managers-group": "Invitation and management of programme managers",
-  "programme.manage.members.project.managers-group": "Einladung und Verwaltung PT-Programmanager:innen",
+  "programme.manage.members.project.managers-group": "Einladung und Verwaltung PT-Programmmanager:innen",
 
   // "programme.manage.members.managers-group-help": "Help PT-Programme manager",
-  "programme.manage.members.managers-group-help": "Hilfe PT-Programmmananger",
+  "programme.manage.members.managers-group-help": "<b>Laden Sie hier Personen ein, die für das Programm die Rolle des PT-Programmanager:in erhalten sollen.</b><ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen gelistet, die die Rolle PT-Programmmanager:in haben. Die Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Programm geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
 
   // "programme.manage.members.project.members-group": "Invitation and management of programme members",
   "programme.manage.members.project.members-group": "Einladung und Verwaltung PT-Mitarbeitende mit Lese-Rechten",
 
   // "programme.manage.members.members-group-help": "Help PT-Read",
-  "programme.manage.members.members-group-help": "Hilfe PT-Lese-Rechte",
+  "programme.manage.members.members-group-help": "<b>Laden Sie hier Personen ein, die für alle Verbünde des Programms eine Lese-Rolle erhalten sollen.</b><ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen gelistet, die die Lese-Rolle im Programm haben. Die Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Programm geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
 
   // "item.truncatable-part.show-more": "Show more",
   "item.truncatable-part.show-more": "Mehr anzeigen",
@@ -15673,10 +15673,10 @@
   "programme.manage.breadcrumbs": "Mitgliederverwaltung",
 
   // "breadcrumb.entity-type.Project": "Project",
-  "breadcrumb.entity-type.Project": "Verbund",
+  "breadcrumb.entity-type.Project": "<i class=\"fas fa-shekel-sign\"></i> Verbund",
 
   // "breadcrumb.entity-type.Funding": "Funding",
-  "breadcrumb.entity-type.Funding": "Projekt",
+  "breadcrumb.entity-type.Funding": "<i class=\"fas fa-cubes\"></i> Projekt",
 
   // "breadcrumb.entity-type.impactpathway": "Impact Pathway",
   "breadcrumb.entity-type.impactpathway": "Wirkungspfad",
@@ -15859,6 +15859,384 @@
   "layout.field.label.call.synsicris.call.endDate": "to be deleted",
 
   // "layout.field.label.call.oairecerif.identifier.url": "to be deleted",
-  "layout.field.label.call.oairecerif.identifier.url": "to be deleted"
+  "layout.field.label.call.oairecerif.identifier.url": "to be deleted",
+
+  // "layout.field.label.Funding.synsicris.type.development": "Relevance for development cooperation",
+  "layout.field.label.Funding.synsicris.type.development": "Relevanz für die Entwicklungszusammenarbeit (ODA-Relevanz)",
+
+  // "layout.field.label.Funding.synsicris.subject.countries": "Relevant countries for development cooperation",
+  "layout.field.label.Funding.synsicris.subject.countries": "Relevante Länder Entwicklungszusammenarbeit",
+
+  // "layout.field.label.Funding.synsicris.subject.nace": "Potential application",
+  "layout.field.label.Funding.synsicris.subject.nace": "Anwendungspotenzial",
+
+  // "layout.field.label.Funding.synsicris.subject.sortprimary": "Keyword Primary-Sorter",
+  "layout.field.label.Funding.synsicris.subject.sortprimary": "Schlagwort Primär-Sorter",
+
+  // "layout.field.label.Funding.synsicris.internalid.fundingParent": "profi-ID funding programme",
+  "layout.field.label.Funding.synsicris.internalid.fundingParent": "profi-ID Fördermaßnahme/Förderprogramm",
+
+  // "layout.field.label.Funding.synsicris.acronym.fundingParent": "Acronym funding programme",
+  "layout.field.label.Funding.synsicris.acronym.fundingParent": "Akronym Fördermaßnahme/Förderprogramm",
+
+  // "layout.field.label.Funding.synsicris.acronym.call": "Acronym call",
+  "layout.field.label.Funding.synsicris.acronym.call": "Acronym Förderbereich",
+
+  // "layout.field.label.Funding.synsicris.internalid.call": "profi-ID call",
+  "layout.field.label.Funding.synsicris.internalid.call": "profi-ID Förderbereich",
+
+  // "layout.field.label.projectpartner.synsicris.type.easyimport": "Executing Organisation",
+  "layout.field.label.projectpartner.synsicris.type.easyimport": "Ausführende Stelle",
+
+  // "layout.field.label.targetgroup.synsicris.subject.urbanrural": "Location",
+  "layout.field.label.targetgroup.synsicris.subject.urbanrural": "Verortung",
+
+  // "layout.field.label.targetgroup.synsicris.subject.enterprise": "Company size",
+  "layout.field.label.targetgroup.synsicris.subject.enterprise": "Unternehmensgröße",
+
+  // "layout.field.label.ethic.synsicris.type.docs": "Additional documents available",
+  "layout.field.label.ethic.synsicris.type.docs": "Weitergehende Dokumente vorhanden",
+
+  // "layout.field.label.Event.synsicris.type.contribution": "Participation of the project",
+  "layout.field.label.Event.synsicris.type.contribution": "Beteiligung des Projektes",
+
+  // "layout.field.label.innovationpotential.synsicris.description.start": "Development status at the beginning of the project (start value)",
+  "layout.field.label.innovationpotential.synsicris.description.start": "Entwicklungsstand zum Projektbeginn (Startwert)",
+
+  // "layout.field.label.innovationpotential.synsicris.description.end": "Development status at the end of the project (target value)",
+  "layout.field.label.innovationpotential.synsicris.description.end": "Entwicklungsstand zum Projektende (Zielwert)",
+
+  // "layout.field.label.innovationpotential.synsicris.level.start": "Readinesslevel at project start (initial value)",
+  "layout.field.label.innovationpotential.synsicris.level.start": "Reifegrad der Lösung / Innovation zum Projektbeginn (Startwert)",
+
+  // "layout.field.label.innovationpotential.synsicris.level.end": "Readinesslevel at project end (target value)",
+  "layout.field.label.innovationpotential.synsicris.level.end": "Reifegrad der Lösung / Innovation zum Projektende (Zieltwert)",
+
+  // "layout.field.label.process_event.dc.type": "Type",
+  "layout.field.label.process_event.dc.type": "Art",
+
+  // "layout.field.label.process_event.synsicris.type": "Type",
+  "layout.field.label.process_event.synsicris.type": "Art",
+
+  // "layout.field.label.spinoff.synsicris.date.performance": "Reference year",
+  "layout.field.label.spinoff.synsicris.date.performance": "Wirtschaftliche Entwicklung",
+
+  // "layout.field.label.spinoff.synsicris.amount.performance": "Annual turnover",
+  "layout.field.label.spinoff.synsicris.amount.performance": "Jahresumsatz",
+
+  // "layout.field.label.spinoff.synsicris.amount.currencyperformance": "Currency",
+  "layout.field.label.spinoff.synsicris.amount.currencyperformance": "Währung",
+
+  // "layout.field.label.spinoff.synsicris.date.funding": "Year of funding",
+  "layout.field.label.spinoff.synsicris.date.funding": "Unterstützungsleistungen",
+
+  // "layout.field.label.spinoff.synsicris.amount.currencyfunding": "Currency",
+  "layout.field.label.spinoff.synsicris.amount.currencyfunding": "Währung",
+
+  // "layout.field.label.exp_societalimpact.synsicris.type.intensity": "Impact intensity",
+  "layout.field.label.exp_societalimpact.synsicris.type.intensity": "Wirkungsintensität",
+
+  // "layout.field.label.neg_sideeffect.synsicris.type.intensity": "Impact intensity",
+  "layout.field.label.neg_sideeffect.synsicris.type.intensity": "Wirkungsintensität",
+
+  // "layout.field.label.programme.synsicris.relation.guideline": "Funding guideline",
+  "layout.field.label.programme.synsicris.relation.guideline": "Richtlinie",
+
+  // "search.filters.applied.charts.RELATION.Project.cooperationpartner.title": "missing",
+  "search.filters.applied.charts.RELATION.Project.cooperationpartner.title": "Grafik",
+
+  // "search.filters.applied.charts.graphcoopparttype.tab": "missing",
+  "search.filters.applied.charts.graphcoopparttype.tab": "...nach Art",
+
+  // "search.filters.applied.charts.graphcooppartnace.tab": "missing",
+  "search.filters.applied.charts.graphcooppartnace.tab": "...nach Wirtschaftszweig",
+
+  // "search.filters.applied.charts.graphcooppartdestatis.tab": "missing",
+  "search.filters.applied.charts.graphcooppartdestatis.tab": "...nach Disziplin/Fachgebiet",
+
+  // "search.filters.applied.charts.graphcooppartaddressCountry.tab": "missing",
+  "search.filters.applied.charts.graphcooppartaddressCountry.tab": "...nach Land",
+
+  // "search.filters.applied.charts.RELATION.Project.projectpartner.title": "missing",
+  "search.filters.applied.charts.RELATION.Project.projectpartner.title": "Grafik",
+
+  // "search.filters.applied.charts.graphprojparttype.tab": "missing",
+  "search.filters.applied.charts.graphprojparttype.tab": "…nach Tätigkeitsbereich",
+
+  // "search.filters.applied.charts.graphprojpartnace.tab": "missing",
+  "search.filters.applied.charts.graphprojpartnace.tab": "…nach Wirtschaftszweig",
+
+  // "search.filters.applied.charts.graphprojpartorgform.tab": "missing",
+  "search.filters.applied.charts.graphprojpartorgform.tab": "…nach Organisationsform",
+
+  // "search.filters.applied.charts.graphprojpartdestatis.tab": "missing",
+  "search.filters.applied.charts.graphprojpartdestatis.tab": "…nach Disziplin/Fachgebiet",
+
+  // "search.filters.applied.charts.graphprojpartaddressCountry.tab": "missing",
+  "search.filters.applied.charts.graphprojpartaddressCountry.tab": "…nach Land",
+
+  // "search.filters.applied.charts.graphprojpartpersGender.tab": "missing",
+  "search.filters.applied.charts.graphprojpartpersGender.tab": "…nach Geschlecht Projektkoordination/-administration",
+
+  // "search.filters.applied.charts.graphprojpartpersadminGender.tab": "missing",
+  "search.filters.applied.charts.graphprojpartpersadminGender.tab": "…nach Geschlecht Projektleitung",
+
+  // "search.filters.applied.charts.RELATION.Project.targetgroup.title": "missing",
+  "search.filters.applied.charts.RELATION.Project.targetgroup.title": "Grafik",
+
+  // "search.filters.applied.charts.graphtargetgrouptype.tab": "missing",
+  "search.filters.applied.charts.graphtargetgrouptype.tab": "…nach Tätigkeitsbereich",
+
+  // "search.filters.applied.charts.graphtargetgroupnace.tab": "missing",
+  "search.filters.applied.charts.graphtargetgroupnace.tab": "…nach Wirtschaftszweig",
+
+  // "search.filters.applied.charts.graphtargetgroupenterprise.tab": "missing",
+  "search.filters.applied.charts.graphtargetgroupenterprise.tab": "…nach Unternehmensgröße",
+
+  // "search.filters.applied.charts.graphtargetgrouppolitical.tab": "missing",
+  "search.filters.applied.charts.graphtargetgrouppolitical.tab": "…nach Politikebene",
+
+  // "search.filters.applied.charts.graphtargetgroupurbanrural.tab": "missing",
+  "search.filters.applied.charts.graphtargetgroupurbanrural.tab": "…nach Standort",
+
+  // "search.filters.applied.charts.RELATION.Project.condition.title": "missing",
+  "search.filters.applied.charts.RELATION.Project.condition.title": "Grafik",
+
+  // "search.filters.applied.charts.graphcondtype.tab": "missing",
+  "search.filters.applied.charts.graphcondtype.tab": "…nach Art",
+
+  // "search.filters.applied.charts.RELATION.Project.process_event.title": "missing",
+  "search.filters.applied.charts.RELATION.Project.process_event.title": "Grafik",
+
+  // "search.filters.applied.charts.graphproceventpartner.tab": "missing",
+  "search.filters.applied.charts.graphproceventpartner.tab": "…nach beteiligten Partnern",
+
+  // "search.filters.applied.charts.graphproceventtargetgroup.tab": "missing",
+  "search.filters.applied.charts.graphproceventtargetgroup.tab": "…nach beteiligten Akteursgruppen",
+
+  // "search.filters.applied.charts.graphproceventpurpose.tab": "missing",
+  "search.filters.applied.charts.graphproceventpurpose.tab": "…nach Zweck",
+
+  // "search.filters.applied.charts.graphproceventtype.tab": "missing",
+  "search.filters.applied.charts.graphproceventtype.tab": "…nach Art",
+
+  // "search.filters.applied.charts.RELATION.Project.physical_object.title": "missing",
+  "search.filters.applied.charts.RELATION.Project.physical_object.title": "Grafik",
+
+  // "search.filters.applied.charts.graphphyobjtype.tab": "missing",
+  "search.filters.applied.charts.graphphyobjtype.tab": "…nach Typ",
+
+  // "search.filters.applied.charts.graphphyobjtypeaccess.tab": "missing",
+  "search.filters.applied.charts.graphphyobjtypeaccess.tab": "…nach Zugänglichkeit",
+
+  // "search.filters.applied.charts.RELATION.Project.innovationpotential.title": "missing",
+  "search.filters.applied.charts.RELATION.Project.innovationpotential.title": "Grafik",
+
+  // "search.filters.applied.charts.graphinnpottype.tab": "missing",
+  "search.filters.applied.charts.graphinnpottype.tab": "…nach Art",
+
+  // "search.filters.applied.charts.graphinnpottarget.tab": "missing",
+  "search.filters.applied.charts.graphinnpottarget.tab": "…nach nutzenden Akteursgruppe(n)",
+
+  // "search.filters.applied.charts.RELATION.Project.innovationidea.title": "missing",
+  "search.filters.applied.charts.RELATION.Project.innovationidea.title": "Grafik",
+
+  // "search.filters.applied.charts.graphinnideatype.tab": "missing",
+  "search.filters.applied.charts.graphinnideatype.tab": "…nach Art",
+
+  // "search.filters.applied.charts.RELATION.Project.step.title": "missing",
+  "search.filters.applied.charts.RELATION.Project.step.title": "Grafik",
+
+  // "search.filters.applied.charts.graphsteptype.tab": "missing",
+  "search.filters.applied.charts.graphsteptype.tab": "…nach Art",
+
+  // "search.filters.applied.charts.RELATION.Project.exp_societalimpact.title": "missing",
+  "search.filters.applied.charts.RELATION.Project.exp_societalimpact.title": "Grafik",
+
+  // "search.filters.applied.charts.graphexpsocimptype.tab": "missing",
+  "search.filters.applied.charts.graphexpsocimptype.tab": "…nach Kernelementen",
+
+  // "search.filters.applied.charts.graphexpsocimptransform.tab": "missing",
+  "search.filters.applied.charts.graphexpsocimptransform.tab": "…nach adressiertem Transformationsbereich",
+
+  // "search.filters.applied.charts.graphexpsocimpintensity.tab": "missing",
+  "search.filters.applied.charts.graphexpsocimpintensity.tab": "…nach Wirkungsintensität",
+
+  // "search.filters.applied.charts.RELATION.Project.multiple_involved.title": "missing",
+  "search.filters.applied.charts.RELATION.Project.multiple_involved.title": "Grafik",
+
+  // "programme.manage.members-list.table.edit.buttons.withdraw": "Withdraw role",
+  "programme.manage.members-list.table.edit.buttons.withdraw": "Rolle entziehen",
+
+  // "programme.manage.members-list.invite": "Invite person(s) who are not yet registered",
+  "programme.manage.members-list.invite": "Nicht-registrierte Person einladen",
+
+  // "item.version.history.table.success": "Operation successful",
+  "item.version.history.table.success": "Vorgang erfolgreich",
+
+  // "item.version.history.table.visibility": "Visibility",
+  "item.version.history.table.visibility": "Sichtbarkeit",
+
+  // "item.version.history.table.setVisibility": "Set as visible",
+  "item.version.history.table.setVisibility": "Sichtbar schalten",
+
+  // "item.version.history.table.setNonOfficial": "Mark as non-official",
+  "item.version.history.table.setNonOfficial": "Als nicht-offiziell kennzeichnen",
+
+  // "item.version.history.table.action.toggleOfficial": "Mark as non-official",
+  "item.version.history.table.action.toggleOfficial": "Als nicht-offiziell kennzeichnen",
+
+  // "item.version.history.table.official": "Official",
+  "item.version.history.table.official": "Offiziell",
+
+  // "item.version.synsicris.version.official": "Official",
+  "item.version.synsicris.version.official": "Offiziell",
+
+  // "item.version.synsicris.version.not_official": "Not Official",
+  "item.version.synsicris.version.not_official": "Nicht-offiziell",
+
+  // "item.version.history.table.error": "An error occurs during the operation",
+  "item.version.history.table.error": "Während des Vorgangs ist ein Fehler aufgetreten",
+
+  // "item.version.history.table.clickToOpen": "Click here to open",
+  "item.version.history.table.clickToOpen": "Zum Öffnen hier klicken",
+
+  // "item.version.history.table.activeVersion": "Active Instance",
+  "item.version.history.table.activeVersion": "Aktive Instanz",
+
+  // "item.version.history.table.notes": "Notes",
+  "item.version.history.table.notes": "Anmerkungen",
+
+  // "item.version.history.title": "Version History",
+  "item.version.history.title": "Versionsgeschichte",
+
+  // "item.version.synsicris.version.invisible": "Not Visible",
+  "item.version.synsicris.version.invisible": "Nicht sichtbar",
+
+  // "item.version.synsicris.version.visible": "Visible",
+  "item.version.synsicris.version.visible": "Sichtbar",
+
+  // "impact-pathway.delete.item.title": "Delete item",
+  "impact-pathway.delete.item.title": "Eintrag löschen",
+
+  // "explore.index.synsicrisTypePurpose": "Purpose",
+  "explore.index.synsicrisTypePurpose": "Zweck",
+
+  // "explore.index.synsicrisrelationtargetgroup": "Targetgroup",
+  "explore.index.synsicrisrelationtargetgroup": "Akteursgruppe",
+
+  // "explore.index.synsicrisTypeContribution": "Type of participation of the consortium",
+  "explore.index.synsicrisTypeContribution": "Art der Beteiligung des Vorhabens",
+
+  // "explore.index.synsicrisSubjectAgrovoc": "Keyword Agrovoc",
+  "explore.index.synsicrisSubjectAgrovoc": "Schlagwort Agrovoc",
+
+  // "explore.index.searchFilterDcAudience": "Audience",
+  "explore.index.searchFilterDcAudience": "Zielpublikum",
+
+  // "explore.index.synsicrisTypePatentuse": "Type of use",
+  "explore.index.synsicrisTypePatentuse": "Art der Verwertung",
+
+  // "explore.index.synsicrisDuration": "Duration",
+  "explore.index.synsicrisDuration": "Dauer",
+
+  // "explore.index.synsicrisProjectStatus": "Status",
+  "explore.index.synsicrisProjectStatus": "Stauts (Bearbeitung)",
+
+  // "explore.index.oairecerifFundingParent": "Related call",
+  "explore.index.oairecerifFundingParent": "Zugehöriges Programm / Fördermaßnahme",
+
+  // "explore.index.synsicrisSubjectSort": "Keywords Sorter",
+  "explore.index.synsicrisSubjectSort": "Schlagworte aller Sorter",
+
+  // "explore.index.synsicrisSubjectSortprimary": "Keywords primary Sorter",
+  "explore.index.synsicrisSubjectSortprimary": "Schlagwort Primärsorter",
+
+  // "explore.index.synsicrisTypeFormtype": "Type of form",
+  "explore.index.synsicrisTypeFormtype": "Formulartyp",
+
+  // "explore.index.synsicrisAddressCountryclassification": "profi - national category",
+  "explore.index.synsicrisAddressCountryclassification": "profi - Landeskennung",
+
+  // "explore.index.organizationAddressAddresscountry": "Country",
+  "explore.index.organizationAddressAddresscountry": "Land",
+
+  // "explore.index.synsicrisAddressAddresscountry": "Country",
+  "explore.index.synsicrisAddressAddresscountry": "Land",
+
+  // "explore.index.synsicrisSubjectEnterprise": "missing",
+  "explore.index.synsicrisSubjectEnterprise": "Unternehemsgröße",
+
+  // "explore.index.synsicrisSubjectPolitical": "Policy level",
+  "explore.index.synsicrisSubjectPolitical": "Poltikebene",
+
+  // "explore.index.synsicrisSubjectUrbanrural": "missing",
+  "explore.index.synsicrisSubjectUrbanrural": "Standort",
+
+  // "explore.index.synsicrisTypeTransform": "Area of transition",
+  "explore.index.synsicrisTypeTransform": "Transformationsbereich",
+
+  // "explore.index.synsicrisTypeInfluence": "Identification of  influence",
+  "explore.index.synsicrisTypeInfluence": "Einfluss der Rahmenbedingung auf die Wirkung",
+
+  // "explore.index.synsicrisTypeIntensity": "Intensity of impact",
+  "explore.index.synsicrisTypeIntensity": "Wirkungsintensität",
+
+  // "explore.index.synsicrisOairecerifEventCountry": "Country",
+  "explore.index.synsicrisOairecerifEventCountry": "Land",
+
+  // "explore.index.synsicrisParticipantnumber": "Number of participants",
+  "explore.index.synsicrisParticipantnumber": "Anzahl Teilnehmende",
+
+  // "explore.index.synsicrisOairecerifEventStartdate": "Start date",
+  "explore.index.synsicrisOairecerifEventStartdate": "Startdatum",
+
+  // "explore.index.synsicrisRelationPartner": "Involved",
+  "explore.index.synsicrisRelationPartner": "Beteiligte",
+
+  // "explore.index.synsicrisCoverageRegionalprimary": "Regional localisation/ outreach",
+  "explore.index.synsicrisCoverageRegionalprimary": "Region der Anwendung",
+
+  // "explore.index.synsicrisLevelStart": "Readyness level at Start",
+  "explore.index.synsicrisLevelStart": "Reifegrad zum Start",
+
+  // "explore.index.synsicrisOrgunitsRegistercourt": "Registercourt",
+  "explore.index.synsicrisOrgunitsRegistercourt": "Registergericht",
+
+  // "explore.index.synsicrisTitleRegistercourt": "Registercourt",
+  "explore.index.synsicrisTitleRegistercourt": "Registergericht",
+
+  // "explore.index.synsicrisTypeRecipient": "Recipient (from profi)",
+  "explore.index.synsicrisTypeRecipient": "Empfängerstatistik (aus profi)",
+
+  // "explore.index.synsicrisTypeOrgform": "Organisational form",
+  "explore.index.synsicrisTypeOrgform": "Organisationsform",
+
+  // "explore.index.synsicrisTypeLegalform": "Legal form",
+  "explore.index.synsicrisTypeLegalform": "Rechtsform",
+
+  // "explore.index.synsicrisDcContributorAuthor": "Author",
+  "explore.index.synsicrisDcContributorAuthor": "Autor:in",
+
+  // "explore.index.synsicrisOairecerifAuthorAffiliation": "Affiliation",
+  "explore.index.synsicrisOairecerifAuthorAffiliation": "zugehörige Einrichtung",
+
+  // "explore.index.synsicrisDcSubject": "Subject",
+  "explore.index.synsicrisDcSubject": "Thema",
+
+  // "explore.index.synsicrisDateFilled": "Date of Filling",
+  "explore.index.synsicrisDateFilled": "Datum der Eintragung",
+
+  // "explore.index.dctermsDateaccepted": "Date of Acceptance",
+  "explore.index.dctermsDateaccepted": "Datum der Zulassung",
+
+  // "explore.index.synsicrisTypeEasyimport": "Executing Organisation",
+  "explore.index.synsicrisTypeEasyimport": "Ausführende Stelle",
+
+  // "explore.index.synsicrisAddressAddresspostcode": "Postcode",
+  "explore.index.synsicrisAddressAddresspostcode": "Postleitzahl",
+
+  // "explore.index.synsicrisAddressAddresscity": "City",
+  "explore.index.synsicrisAddressAddresscity": "Ort"
 
 }

@@ -770,9 +770,9 @@
 
   "breadcrumb.entity-type.Person": "Person",
 
-  "breadcrumb.entity-type.Project": "Project",
+  "breadcrumb.entity-type.Project": "<i class=\"fas fa-shekel-sign\"></i> Consortium",
 
-  "breadcrumb.entity-type.Funding": "Funding",
+  "breadcrumb.entity-type.Funding": "<i class=\"fas fa-cubes\"></i> Project",
 
   "breadcrumb.entity-type.OrgUnit": "OrgUnit",
 
@@ -2076,15 +2076,15 @@
 
   "explore.index.fundingParent": "Funding parent",
 
-  "explore.index.synsicrisRelationCall": "Relation call",
+  "explore.index.synsicrisRelationCall": "Call",
 
   "explore.index.projectStartDate": "Start date",
 
   "explore.index.projectEndDate": "End date",
 
-  "explore.index.synsicrisSubjectNace": "Subject nace",
+  "explore.index.synsicrisSubjectNace": "Economic sector",
 
-  "explore.index.synsicrisSubjectDestatis": "Subject destatis",
+  "explore.index.synsicrisSubjectDestatis": "Discipline",
 
   "explore.index.synsicrisTypeProjectContribution": "Project contribution type",
 
@@ -3220,7 +3220,7 @@
 
   "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
 
-  "item.version.history.table.action.toggleOfficial": "Mark as official",
+  "item.version.history.table.action.toggleOfficial": "Mark as non-official",
 
   "item.version.history.table.action.toggleNonOfficial": "Mark as non-official",
 
@@ -3448,7 +3448,7 @@
 
   "loading.objects": "Loading…",
 
-  "loading.recent-submissions": "Loading recent submissions...",
+  "loading.recent-submissions": "Loading recent submissions…",
 
   "loading.search-results": "Loading search results...",
 
@@ -4706,7 +4706,7 @@
 
   "project.manage.members-list.table.name": "Name",
 
-  "project.manage.members-list.table.edit": "Remove / Add",
+  "project.manage.members-list.table.edit": "Add / Remove",
 
   "project.manage.members-list.table.edit.buttons.remove": "Remove member with name \"{{name}}\"",
 
@@ -8580,7 +8580,7 @@
 
   "query-builder.synsicris.label.search-selected": "Search in selected projects",
 
-  "query-builder.synsicris.project.browse.head": "Projects list: ",
+  "query-builder.synsicris.project.browse.head": "Projects list:",
 
   "query-builder.synsicris.project.browse.empty": "No results",
 
@@ -9214,6 +9214,140 @@
 
   "layout.field.label.call.synsicris.call.endDate": "to be deleted",
 
-  "layout.field.label.call.oairecerif.identifier.url": "to be deleted"
+  "layout.field.label.call.oairecerif.identifier.url": "to be deleted",
+
+  "layout.field.label.Funding.synsicris.type.development": "Relevance for development cooperation",
+
+  "layout.field.label.Funding.synsicris.subject.countries": "Relevant countries for development cooperation",
+
+  "layout.field.label.Funding.synsicris.subject.nace": "Potential application",
+
+  "layout.field.label.Funding.synsicris.subject.sortprimary": "Keyword Primary-Sorter",
+
+  "layout.field.label.Funding.synsicris.internalid.fundingParent": "profi-ID funding programme",
+
+  "layout.field.label.Funding.synsicris.acronym.fundingParent": "Acronym funding programme",
+
+  "layout.field.label.Funding.synsicris.acronym.call": "Acronym call",
+
+  "layout.field.label.Funding.synsicris.internalid.call": "profi-ID call",
+
+  "layout.field.label.projectpartner.synsicris.type.easyimport": "Executing Organisation",
+
+  "layout.field.label.targetgroup.synsicris.subject.urbanrural": "Location",
+
+  "layout.field.label.targetgroup.synsicris.subject.enterprise": "Company size",
+
+  "layout.field.label.ethic.synsicris.type.docs": "Additional documents available",
+
+  "layout.field.label.Event.synsicris.type.contribution": "Participation of the project",
+
+  "layout.field.label.innovationpotential.synsicris.description.start": "Development status at the beginning of the project (start value)",
+
+  "layout.field.label.innovationpotential.synsicris.description.end": "Development status at the end of the project (target value)",
+
+  "layout.field.label.innovationpotential.synsicris.level.start": "Readinesslevel at project start (initial value)",
+
+  "layout.field.label.innovationpotential.synsicris.level.end": "Readinesslevel at project end (target value)",
+
+  "layout.field.label.process_event.dc.type": "Type",
+
+  "layout.field.label.process_event.synsicris.type": "Type",
+
+  "layout.field.label.spinoff.synsicris.date.performance": "Reference year",
+
+  "layout.field.label.spinoff.synsicris.amount.performance": "Annual turnover",
+
+  "layout.field.label.spinoff.synsicris.amount.currencyperformance": "Currency",
+
+  "layout.field.label.spinoff.synsicris.date.funding": "Year of funding",
+
+  "layout.field.label.spinoff.synsicris.amount.currencyfunding": "Currency",
+
+  "layout.field.label.exp_societalimpact.synsicris.type.intensity": "Impact intensity",
+
+  "layout.field.label.neg_sideeffect.synsicris.type.intensity": "Impact intensity",
+
+  "layout.field.label.programme.synsicris.relation.guideline": "Funding guideline",
+
+  "programme.manage.members-list.table.edit.buttons.withdraw": "Withdraw role",
+
+  "impact-pathway.delete.item.title": "Delete item",
+
+  "explore.index.synsicrisTypePurpose": "Purpose",
+
+  "explore.index.synsicrisrelationtargetgroup": "Targetgroup",
+
+  "explore.index.synsicrisTypeContribution": "Type of participation of the consortium",
+
+  "explore.index.synsicrisSubjectAgrovoc": "Keyword Agrovoc",
+
+  "explore.index.searchFilterDcAudience": "Audience",
+
+  "explore.index.synsicrisTypePatentuse": "Type of use",
+
+  "explore.index.synsicrisDuration": "Duration",
+
+  "explore.index.synsicrisProjectStatus": "Status",
+
+  "explore.index.oairecerifFundingParent": "Related call",
+
+  "explore.index.synsicrisSubjectSort": "Keywords Sorter",
+
+  "explore.index.synsicrisSubjectSortprimary": "Keywords primary Sorter",
+
+  "explore.index.synsicrisTypeFormtype": "Type of form",
+
+  "explore.index.synsicrisAddressCountryclassification": "profi - national category",
+
+  "explore.index.organizationAddressAddresscountry": "Country",
+
+  "explore.index.synsicrisAddressAddresscountry": "Country",
+
+  "explore.index.synsicrisSubjectPolitical": "Policy level",
+
+  "explore.index.synsicrisTypeTransform": "Area of transition",
+
+  "explore.index.synsicrisTypeInfluence": "Identification of  influence",
+
+  "explore.index.synsicrisTypeIntensity": "Intensity of impact",
+
+  "explore.index.synsicrisOairecerifEventCountry": "Country",
+
+  "explore.index.synsicrisParticipantnumber": "Number of participants",
+
+  "explore.index.synsicrisOairecerifEventStartdate": "Start date",
+
+  "explore.index.synsicrisRelationPartner": "Involved",
+
+  "explore.index.synsicrisCoverageRegionalprimary": "Regional localisation/ outreach",
+
+  "explore.index.synsicrisLevelStart": "Readyness level at Start",
+
+  "explore.index.synsicrisOrgunitsRegistercourt": "Registercourt",
+
+  "explore.index.synsicrisTitleRegistercourt": "Registercourt",
+
+  "explore.index.synsicrisTypeRecipient": "Recipient (from profi)",
+
+  "explore.index.synsicrisTypeOrgform": "Organisational form",
+
+  "explore.index.synsicrisTypeLegalform": "Legal form",
+
+  "explore.index.synsicrisDcContributorAuthor": "Author",
+
+  "explore.index.synsicrisOairecerifAuthorAffiliation": "Affiliation",
+
+  "explore.index.synsicrisDcSubject": "Subject",
+
+  "explore.index.synsicrisDateFilled": "Date of Filling",
+
+  "explore.index.dctermsDateaccepted": "Date of Acceptance",
+
+  "explore.index.synsicrisTypeEasyimport": "Executing Organisation",
+
+  "explore.index.synsicrisAddressAddresspostcode": "Postcode",
+
+  "explore.index.synsicrisAddressAddresscity": "City"
 
 }
