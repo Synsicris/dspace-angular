@@ -59,12 +59,12 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
   /**
    * Fallback minimum for the range
    */
-  min = 1950;
+  min: number | string = 1950;
 
   /**
    * Fallback maximum for the range
    */
-  max = new Date().getUTCFullYear();
+  max: number | string = new Date().getUTCFullYear();
 
   /**
    * The current range of the filter
