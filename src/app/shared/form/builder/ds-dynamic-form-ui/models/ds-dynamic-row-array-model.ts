@@ -20,6 +20,7 @@ export interface DynamicRowArrayModelConfig extends DynamicFormArrayModelConfig 
   showButtons: boolean;
   typeBindRelations?: DynamicFormControlRelation[];
   isInlineGroupArray?: boolean;
+  hint?: string;
 }
 
 export class DynamicRowArrayModel extends DynamicFormArrayModel {
@@ -34,6 +35,7 @@ export class DynamicRowArrayModel extends DynamicFormArrayModel {
   @serializable() showButtons = true;
   @serializable() typeBindRelations: DynamicFormControlRelation[];
   @serializable() toggleSecurityVisibility?: boolean;
+  @serializable() hint?: string;
   isRowArray = true;
   isInlineGroupArray = false;
 
@@ -57,6 +59,7 @@ export class DynamicRowArrayModel extends DynamicFormArrayModel {
     this.typeBindRelations = config.typeBindRelations ? config.typeBindRelations : [];
     this.isInlineGroupArray = config.isInlineGroupArray ? config.isInlineGroupArray : false;
     this.toggleSecurityVisibility = false;
+    this.hint = config.hint;
   }
 
 }

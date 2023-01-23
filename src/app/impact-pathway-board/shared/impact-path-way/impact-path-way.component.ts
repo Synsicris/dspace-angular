@@ -28,6 +28,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ImpactPathWayComponent implements OnInit {
   /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  @Input() isFunder: boolean;
+
+  /**
    * The project community's id
    */
   @Input() public projectCommunityId: string;
@@ -38,6 +43,11 @@ export class ImpactPathWayComponent implements OnInit {
   @Input() public projectItemId: string;
 
   @Input() public impactPathway: ImpactPathway;
+
+  /**
+   * The impact-pathway item
+   */
+  @Input() impactPathWayItem: Item;
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
 
@@ -195,7 +205,7 @@ export class ImpactPathWayComponent implements OnInit {
    * @param version
    */
   onVersionSelected(version: Item) {
-    this.impactPathwayService.dispatchInitCompare(this.impactPathway.id, version.id);
+    this.impactPathwayService.dispatchInitCompare(this.impactPathway.id, version.id, this.isVersionOfAnItem$.value);
   }
 
   /**

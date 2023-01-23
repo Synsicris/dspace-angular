@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
@@ -22,6 +22,7 @@ import { AuthService } from '../core/auth/auth.service';
 export class CrisItemPageComponent implements OnInit {
 
   itemRD$: Observable<RemoteData<Item>>;
+  isVersionOfAnItem$: Observable<boolean>;
 
   constructor(
     private authService: AuthService,
@@ -36,6 +37,11 @@ export class CrisItemPageComponent implements OnInit {
       redirectOn4xx(this.router, this.authService)
     );
 
+    this.isVersionOfAnItem$ = this.route.data.pipe(
+      map((data) => data.isVersionOfAnItem),
+      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
+      take(1)
+    );
   }
 
 }

@@ -9,6 +9,7 @@ import { ProjectCommunityByProjectItemResolver } from '../core/project/project-c
 import { ProjectItemI18nBreadcrumbResolver } from '../core/breadcrumbs/project-item-i18n-breadcrumb.resolver';
 import { ProjectItemI18nBreadcrumbsService } from '../core/breadcrumbs/project-item-i18n-breadcrumbs.service';
 import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.resolver';
+import { IsFunderResolver } from '../core/project/is-funder.resolver';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.reso
           projectItem: ProjectItemPageResolver,
           projectCommunity: ProjectCommunityByProjectItemResolver,
           isVersionOfAnItem: VersionOfAnItemResolver,
+          isFunder: IsFunderResolver,
           breadcrumb: ProjectItemI18nBreadcrumbResolver
         },
         data: { title: 'working-plan.page.title', breadcrumbKey: 'working-plan', showBreadcrumbsFluid: true }
@@ -30,6 +32,7 @@ import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.reso
     ])
   ],
   providers: [
+    IsFunderResolver,
     ProjectItemI18nBreadcrumbResolver,
     ProjectItemI18nBreadcrumbsService,
     ProjectCommunityByProjectItemResolver,

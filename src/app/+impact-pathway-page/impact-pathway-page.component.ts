@@ -33,6 +33,16 @@ export class ImpactPathwayPageComponent implements OnInit {
   impactPathwayId$: Observable<string>;
 
   /**
+   * The impact-pathway item
+   */
+  impactPathWayItem$: Observable<Item>;
+
+  /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  isFunder$: Observable<boolean>;
+
+  /**
    * The project community's id
    */
   projectCommunityId$: Observable<string>;
@@ -55,11 +65,19 @@ export class ImpactPathwayPageComponent implements OnInit {
    * Initialize instance variables
    */
   ngOnInit(): void {
+    this.isFunder$ = this.route.data.pipe(
+      map((data) => data.isFunder as boolean)
+    );
+
     const impactPathWayItem$ = this.route.data.pipe(
       map((data) => data.impactPathwayItem as RemoteData<Item>),
       redirectOn4xx(this.router, this.authService),
       filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && !itemRD.isResponsePending),
       take(1)
+    );
+
+    this.impactPathWayItem$ = impactPathWayItem$.pipe(
+      map((itemRD: RemoteData<Item>) => itemRD.payload)
     );
 
     this.impactPathwayId$ = impactPathWayItem$.pipe(

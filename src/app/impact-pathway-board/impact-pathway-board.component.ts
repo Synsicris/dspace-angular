@@ -6,6 +6,7 @@ import { filter, map } from 'rxjs/operators';
 import { ImpactPathway } from './core/models/impact-pathway.model';
 import { ImpactPathwayService } from './core/impact-pathway.service';
 import { isNotEmpty } from '../shared/empty.util';
+import { Item } from '../core/shared/item.model';
 
 @Component({
   selector: 'ipw-dashboard',
@@ -17,6 +18,16 @@ export class ImpactPathwayBoardComponent implements OnInit {
    * The project community's id
    */
   @Input() public projectCommunityId: string;
+
+  /**
+   * The impact-pathway item
+   */
+  @Input() impactPathWayItem: Item;
+
+  /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  @Input() isFunder: boolean;
 
   /**
    * The project item's id
