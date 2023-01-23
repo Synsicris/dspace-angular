@@ -75,7 +75,7 @@ export class EditItemDataService extends IdentifiableDataService<EditItem> {
     return this.searchEditModesById(id).pipe(
       getAllSucceededRemoteDataPayload(),
       getPaginatedListPayload(),
-      map((modes: EditItemMode[]) => modes.filter((mode: EditItemMode) => mode.name === editMode)),
+      map((modes: EditItemMode[]) => modes.filter((mode: EditItemMode) => mode.name === editModeId)),
       map((modes: EditItemMode[]) => modes.length > 0)
     );
   }

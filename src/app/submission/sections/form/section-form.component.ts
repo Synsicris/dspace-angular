@@ -161,7 +161,7 @@ export class SubmissionSectionFormComponent extends SectionModelComponent implem
               @Inject('entityType') public entityType: string,
               @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
               @Inject('submissionIdProvider') public injectedSubmissionId: string) {
-    super(injectedCollectionId, injectedSectionData, injectedSubmissionId, null);
+    super(injectedCollectionId, injectedSectionData, injectedSubmissionId);
   }
 
   /**

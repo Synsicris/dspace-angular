@@ -11,12 +11,16 @@ import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { RequestService } from '../data/request.service';
 import { PageInfo } from '../shared/page-info.model';
 import { buildPaginatedList } from '../data/paginated-list.model';
-import { createNoContentRemoteDataObject$, createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import {
+  createNoContentRemoteDataObject$,
+  createSuccessfulRemoteDataObject,
+  createSuccessfulRemoteDataObject$
+} from '../../shared/remote-data.utils';
 import { RestResponse } from '../cache/response.models';
 import { RequestEntry } from '../data/request-entry.model';
 import { ResearcherProfileDataService } from './researcher-profile-data.service';
 import { RouterMock } from '../../shared/mocks/router.mock';
-import { ResearcherProfile } from './model/researcher-profile.model';
+import { ResearcherProfile, ResearcherProfileVisibilityValue } from './model/researcher-profile.model';
 import { Item } from '../shared/item.model';
 import { ReplaceOperation } from 'fast-json-patch';
 import { HttpOptions } from '../dspace-rest/dspace-rest.service';
@@ -355,13 +359,13 @@ describe('ResearcherProfileService', () => {
     });
 
     it('should proxy the call to patchData.patch', () => {
-      const replaceOperation: ReplaceOperation<boolean> = {
+      const replaceOperation: ReplaceOperation<ResearcherProfileVisibilityValue> = {
         path: '/visible',
         op: 'replace',
-        value: true,
+        value: ResearcherProfileVisibilityValue.INTERNAL
       };
 
-      scheduler.schedule(() => service.setVisibility(researcherProfile, true));
+      scheduler.schedule(() => service.setVisibility(researcherProfile, ResearcherProfileVisibilityValue.INTERNAL));
       scheduler.flush();
 
       expect((service as any).patchData.patch).toHaveBeenCalledWith(researcherProfile, [replaceOperation]);

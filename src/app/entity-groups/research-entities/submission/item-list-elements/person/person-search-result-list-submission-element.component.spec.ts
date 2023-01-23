@@ -26,7 +26,9 @@ import { SelectableListService } from '../../../../../shared/object-list/selecta
 import { createSuccessfulRemoteDataObject$ } from '../../../../../shared/remote-data.utils';
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { TruncatePipe } from '../../../../../shared/utils/truncate.pipe';
-import { PersonSearchResultListSubmissionElementComponent } from './person-search-result-list-submission-element.component';
+import {
+  PersonSearchResultListSubmissionElementComponent
+} from './person-search-result-list-submission-element.component';
 import { APP_CONFIG } from '../../../../../../config/app-config.interface';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
 import { DSONameServiceMock } from '../../../../../shared/mocks/dso-name.service.mock';
@@ -124,7 +126,7 @@ describe('PersonSearchResultListElementSubmissionComponent', () => {
         { provide: DSOChangeAnalyzer, useValue: {} },
         { provide: DefaultChangeAnalyzer, useValue: {} },
         { provide: BitstreamDataService, useValue: mockBitstreamDataService },
-        { provide: APP_CONFIG, useValue: environmentUseThumbs }
+        { provide: APP_CONFIG, useValue: environmentUseThumbs },
         { provide: DSONameService, useValue: DSONameServiceMock },
       ],
 

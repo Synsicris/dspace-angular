@@ -82,10 +82,6 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
 
   @Input() trackStatistics = false;
 
-  @Input() showFilterToggle = false;
-
-  @Input() showChartsToggle = false;
-
   @Output() resultFound: EventEmitter<SearchObjects<DSpaceObject>> = new EventEmitter<SearchObjects<DSpaceObject>>();
 
   @Output() deselectObject: EventEmitter<ListableObject> = new EventEmitter<ListableObject>();

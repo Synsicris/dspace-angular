@@ -54,7 +54,7 @@ import {
 } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
-import { SubmissionFormsConfigService } from '../../core/config/submission-forms-config.service';
+import { SubmissionFormsConfigDataService } from '../../core/config/submission-forms-config-data.service';
 import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
 import { ItemJsonPatchOperationsService } from '../../core/data/item-json-patch-operations.service';
 import {
@@ -102,6 +102,7 @@ import { SearchResult } from '../../shared/search/models/search-result.model';
 import { SearchService } from '../../core/shared/search/search.service';
 import { NoContent } from '../../core/shared/NoContent.model';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
+import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
 @Injectable()
 export class ImpactPathwayService {
@@ -112,7 +113,7 @@ export class ImpactPathwayService {
   constructor(
     private collectionService: CollectionDataService,
     private vocabularyService: VocabularyService,
-    private formConfigService: SubmissionFormsConfigService,
+    private formConfigService: SubmissionFormsConfigDataService,
     private itemService: ItemDataService,
     private operationsBuilder: JsonPatchOperationsBuilder,
     private itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
@@ -994,13 +995,13 @@ export class ImpactPathwayService {
       map((submission: SubmissionObject) => {
         return [submission, (submission.item as Item).id];
       }));
-    return combineLatestObservable(submission$.pipe(
+    return forkJoin([submission$.pipe(
       mergeMap(([submission, parentId]: [SubmissionObject, string]) => this.createImpactPathwaySteps(projectId, parentId).pipe(
         map((steps) => {
           return [submission, steps];
         })
       ))),
-      this.getImpactPathwaysFormSection()
+      this.getImpactPathwaysFormSection()]
     ).pipe(
       tap(([objects, sectionName]: [any[], string]) => {
         this.addPatchOperationForImpactPathway(sectionName, impactPathwayName, impactPathwayDescription, objects[1]);

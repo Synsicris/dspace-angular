@@ -65,8 +65,8 @@ export class SubmissionRestService {
    *    The base endpoint for the type of object
    * @param resourceID
    *    The identifier for the object
-   * @param fullProjection
-   *    If true add the full projection parameter to the url
+   * @param projections
+   *    The projection parameters to attach to the url
    * @param collectionId
    *    The owning collection for the object
    */
@@ -77,13 +77,14 @@ export class SubmissionRestService {
       projections.forEach((projection, index) => {
         url = new URLCombiner(url, ((index === 0) ? '?' : '&') + 'projection=' + projection).toString();
       });
-    } else {
-      url = new URLCombiner(url, '?projection=full').toString();
+
+      if (collectionId) {
+        url = new URLCombiner(url, `&owningCollection=${collectionId}`).toString();
+      }
+    } else if (collectionId) {
+      url = new URLCombiner(url, `?owningCollection=${collectionId}`).toString();
     }
 
-    if (collectionId) {
-      url = new URLCombiner(url, `&owningCollection=${collectionId}`).toString();
-    }
     return url;
   }
 
@@ -94,17 +95,17 @@ export class SubmissionRestService {
    *    The submission Object to be removed
    * @param linkName
    *    The endpoint link name
-   * @param fullProjection
-   *    If true use full projection to make request
+   * @param projections
+   *    The projection parameters to attach to the url
    * @return Observable<SubmitDataResponseDefinitionObject>
    *     server response
    */
-  public deleteById(scopeId: string, linkName?: string, fullProjection = false): Observable<SubmitDataResponseDefinitionObject> {
+  public deleteById(scopeId: string, linkName?: string, projections: string[] = []): Observable<SubmitDataResponseDefinitionObject> {
     const requestId = this.requestService.generateRequestId();
     return this.halService.getEndpoint(linkName || this.linkPath).pipe(
       filter((href: string) => isNotEmpty(href)),
       distinctUntilChanged(),
-      map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId, fullProjection)),
+      map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId, null, projections)),
       map((endpointURL: string) => new SubmissionDeleteRequest(requestId, endpointURL)),
       tap((request: DeleteRequest) => this.requestService.send(request)),
       mergeMap(() => this.fetchRequest(requestId)),
@@ -118,8 +119,8 @@ export class SubmissionRestService {
    *    The endpoint link name
    * @param id
    *    The submission Object to retrieve
-   * @param fullProjection
-   *    If true use full projection to make request
+   * @param projections
+   *    The projection parameters to attach to the url
    * @return Observable<SubmitDataResponseDefinitionObject>
    *     server response
    */
@@ -152,8 +153,8 @@ export class SubmissionRestService {
    *     server response
    * @param collectionId
    *    The owning collection id
-   * @param fullProjection
-   *    If true use full projection to make request
+   * @param projections
+   *    The projection parameters to attach to the url
    * @return Observable<SubmitDataResponseDefinitionObject>
    *     server response
    */
@@ -163,13 +164,13 @@ export class SubmissionRestService {
     scopeId?: string,
     options?: HttpOptions,
     collectionId?: string,
-    fullProjection = true
+    projections: string[] = []
   ): Observable<SubmitDataResponseDefinitionObject> {
 
     const requestId = this.requestService.generateRequestId();
     return this.halService.getEndpoint(linkName).pipe(
       filter((href: string) => isNotEmpty(href)),
-      map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId, fullProjection, collectionId)),
+      map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId, collectionId, projections )),
       distinctUntilChanged(),
       map((endpointURL: string) => new SubmissionPostRequest(requestId, endpointURL, body, options)),
       tap((request: PostRequest) => this.requestService.send(request)),
@@ -186,16 +187,16 @@ export class SubmissionRestService {
    *    The post request body
    * @param scopeId
    *    The submission Object id
-   * @param fullProjection
-   *    If true use full projection to make request
+   * @param projections
+   *    The projection parameters to attach to the url
    * @return Observable<SubmitDataResponseDefinitionObject>
    *     server response
    */
-  public patchToEndpoint(linkName: string, body: any, scopeId?: string, fullProjection = true): Observable<SubmitDataResponseDefinitionObject> {
+  public patchToEndpoint(linkName: string, body: any, scopeId?: string, projections: string[] = []): Observable<SubmitDataResponseDefinitionObject> {
     const requestId = this.requestService.generateRequestId();
     return this.halService.getEndpoint(linkName).pipe(
       filter((href: string) => isNotEmpty(href)),
-      map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId, fullProjection)),
+      map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, scopeId, null, projections)),
       distinctUntilChanged(),
       map((endpointURL: string) => new SubmissionPatchRequest(requestId, endpointURL, body)),
       tap((request: PostRequest) => this.requestService.send(request)),

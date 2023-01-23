@@ -14,7 +14,7 @@ describe('WorkingPlanChartItemEditButtonComponent', () => {
   let fixture: ComponentFixture<WorkingPlanChartItemEditButtonComponent>;
 
   const editItemDataService = jasmine.createSpyObj('EditItemDataService', {
-    checkEditModeByIDAndType: jasmine.createSpy('checkEditModeByIDAndType'),
+    checkEditModeByIdAndType: jasmine.createSpy('checkEditModeByIdAndType'),
   });
 
   const authorizationService: AuthorizationDataService = jasmine.createSpyObj('authorizationService', {

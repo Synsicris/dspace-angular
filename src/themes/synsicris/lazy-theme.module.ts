@@ -28,7 +28,6 @@ import { StatisticsModule } from '../../app/statistics/statistics.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { TranslateModule } from '@ngx-translate/core';
-import { HomeNewsComponent } from './app/home-page/home-news/home-news.component';
 import { HomePageModule } from '../../app/home-page/home-page.module';
 import { AppModule } from '../../app/app.module';
 import { ItemPageModule } from '../../app/item-page/item-page.module';
@@ -40,19 +39,17 @@ import { CommunityPageModule } from '../../app/community-page/community-page.mod
 import { CollectionPageModule } from '../../app/collection-page/collection-page.module';
 import { SubmissionModule } from '../../app/submission/submission.module';
 import { MyDSpacePageModule } from '../../app/my-dspace-page/my-dspace-page.module';
-import { NavbarComponent } from './app/navbar/navbar.component';
-import { HeaderComponent } from './app/header/header.component';
-import { HeaderNavbarWrapperComponent } from './app/header-nav-wrapper/header-navbar-wrapper.component';
 import { SearchModule } from '../../app/shared/search/search.module';
 import { ResourcePoliciesModule } from '../../app/shared/resource-policies/resource-policies.module';
 import { ComcolModule } from '../../app/shared/comcol/comcol.module';
+import { RootModule } from '../../app/root.module';
 import { MiradorViewerModule } from '../../app/item-page/mirador-viewer/mirador-viewer.module';
+import { ExploreModule } from '../../app/shared/explore/explore.module';
+import { FooterModule } from '../../app/footer/footer.module';
+import { ContextMenuModule } from '../../app/shared/context-menu/context-menu.module';
+import { SocialModule } from '../../app/social/social.module';
 
 const DECLARATIONS = [
-  HomeNewsComponent,
-  HeaderComponent,
-  HeaderNavbarWrapperComponent,
-  NavbarComponent
 ];
 
 @NgModule({
@@ -61,6 +58,7 @@ const DECLARATIONS = [
     AdminSearchModule,
     AdminWorkflowModuleModule,
     AppModule,
+    RootModule,
     BitstreamFormatsModule,
     BrowseByModule,
     CollectionFormModule,
@@ -102,17 +100,21 @@ const DECLARATIONS = [
     FormsModule,
     ResourcePoliciesModule,
     ComcolModule,
+    ContextMenuModule,
     MiradorViewerModule,
+    FooterModule,
+    ExploreModule,
+    SocialModule
   ],
-  declarations: DECLARATIONS
+  declarations: DECLARATIONS,
 })
 
-  /**
-   * This module serves as an index for all the components in this theme.
-   * It should import all other modules, so the compiler knows where to find any components referenced
-   * from a component in this theme
-   * It is purposefully not exported, it should never be imported anywhere else, its only purpose is
-   * to give lazily loaded components a context in which they can be compiled successfully
-   */
-class ThemeModule {
+/**
+ * This module serves as an index for all the components in this theme.
+ * It should import all other modules, so the compiler knows where to find any components referenced
+ * from a component in this theme
+ * It is purposefully not exported, it should never be imported anywhere else, its only purpose is
+ * to give lazily loaded components a context in which they can be compiled successfully
+ */
+class LazyThemeModule {
 }

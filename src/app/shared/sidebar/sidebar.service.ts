@@ -53,18 +53,6 @@ export class SidebarService {
   }
 
   /**
-   * Checks if the sidebar should currently be collapsed
-   * @returns {Observable<boolean>} Emits true if the user's screen size is mobile or when the state in the store is currently collapsed
-   */
-   get isCollapsedInXL(): Observable<boolean> {
-    return observableCombineLatest(
-      this.isCollapsedInStore
-    ).pipe(
-      map(([store]) => store)
-    );
-  }
-
-  /**
    * Dispatches a collapse action to the store
    */
   public collapse(): void {

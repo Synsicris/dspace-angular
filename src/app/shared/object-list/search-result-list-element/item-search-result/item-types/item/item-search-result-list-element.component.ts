@@ -33,10 +33,6 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
 
   DisplayItemMetadataType = DisplayItemMetadataType;
 
-  public constructor(protected truncatableService: TruncatableService, protected dsoNameService: DSONameService) {
-    super(truncatableService, dsoNameService);
-  }
-
   /**
    * Route to the item's page
    */
@@ -46,6 +42,10 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    * A boolean representing if to show item actions
    */
   showItemActions: boolean;
+
+  public constructor(protected truncatableService: TruncatableService, protected dsoNameService: DSONameService) {
+    super(truncatableService, dsoNameService);
+  }
 
   ngOnInit(): void {
     super.ngOnInit();

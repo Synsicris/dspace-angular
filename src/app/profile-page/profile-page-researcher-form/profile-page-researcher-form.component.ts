@@ -11,7 +11,7 @@ import { ProfileClaimItemModalComponent } from '../profile-claim-item-modal/prof
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { EPerson } from '../../core/eperson/models/eperson.model';
-import { ResearcherProfile } from '../../core/profile/model/researcher-profile.model';
+import { ResearcherProfile, ResearcherProfileVisibilityValue } from '../../core/profile/model/researcher-profile.model';
 import { ResearcherProfileDataService } from '../../core/profile/researcher-profile-data.service';
 import { ProfileClaimService } from '../profile-claim/profile-claim.service';
 import { RemoteData } from '../../core/data/remote-data';
@@ -21,6 +21,7 @@ import { ConfirmationModalComponent } from '../../shared/confirmation-modal/conf
 import { NoContent } from '../../core/shared/NoContent.model';
 import { EditItemMode } from '../../core/submission/models/edititem-mode.model';
 import { EditItemDataService } from '../../core/submission/edititem-data.service';
+import { PaginatedList } from '../../core/data/paginated-list.model';
 
 @Component({
   selector: 'ds-profile-page-researcher-form',
@@ -163,8 +164,13 @@ export class ProfilePageResearcherFormComponent implements OnInit {
    * @param visibility        The new visibility value
    */
   toggleProfileVisibility(researcherProfile: ResearcherProfile, visibility: ResearcherProfileVisibilityValue): void {
-    this.researcherProfileService.setVisibility(researcherProfile, visibility)
-      .subscribe((updatedProfile) => this.researcherProfile$.next(updatedProfile));
+    this.researcherProfileService.setVisibility(researcherProfile, visibility).pipe(
+      getFirstCompletedRemoteData()
+    ).subscribe((updatedProfileRD) => {
+      if (updatedProfileRD.hasSucceeded) {
+        this.researcherProfile$.next(updatedProfileRD.payload);
+      }
+    });
   }
 
   /**
@@ -216,15 +222,12 @@ export class ProfilePageResearcherFormComponent implements OnInit {
           this.researcherProfileItemId = itemId;
         }
       }),
-      mergeMap((itemId: string) => this.editItemService.searchEditModesById(itemId).pipe(
-        getAllSucceededRemoteDataPayload(),
-        mergeMap((editItem: EditItem) => editItem.modes.pipe(
-          getFirstSucceededRemoteListPayload())
-        ),
-        startWith([]))
-      )
-    ).subscribe((editModes: EditItemMode[]) => {
-      this.editModes$.next(editModes);
+      mergeMap((itemId: string) => this.editItemService.searchEditModesById(itemId)),
+      getFirstCompletedRemoteData()
+    ).subscribe((editModesRD: RemoteData<PaginatedList<EditItemMode>>) => {
+      if (editModesRD.hasSucceeded) {
+        this.editModes$.next(editModesRD.payload.page);
+      }
     });
   }
 

@@ -224,16 +224,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   chartReg = new RegExp(/^chart./, 'i');
 
   /**
-   * Defines whether to show the toggle button to Show/Hide filter
-   */
-  @Input() showFilterToggle = false;
-
-  /**
-   * Defines whether to show the toggle button to Show/Hide chart
-   */
-   @Input() showChartsToggle = false;
-
-  /**
    * The current configuration used during the search
    */
   currentConfiguration$: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -317,11 +307,6 @@ export class SearchComponent implements OnInit, OnDestroy {
    * Subscription to unsubscribe from
    */
   sub: Subscription;
-
-  /**
-   * Maintains the last search options so it can be used in refresh
-   */
-  lastSearchOptions: PaginatedSearchOptions;
 
   /**
    * Emits an event with the current search result entries

@@ -117,7 +117,7 @@ export class SubmissionSectionLicenseComponent extends SectionModelComponent {
               @Inject('collectionIdProvider') public injectedCollectionId: string,
               @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
               @Inject('submissionIdProvider') public injectedSubmissionId: string) {
-    super(injectedCollectionId, injectedSectionData, injectedSubmissionId, null);
+    super(injectedCollectionId, injectedSectionData, injectedSubmissionId );
   }
 
   /**

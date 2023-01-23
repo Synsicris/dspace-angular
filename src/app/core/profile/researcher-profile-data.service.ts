@@ -15,7 +15,7 @@ import { RequestService } from '../data/request.service';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { NoContent } from '../shared/NoContent.model';
 import { getFirstCompletedRemoteData } from '../shared/operators';
-import { ResearcherProfile } from './model/researcher-profile.model';
+import { ResearcherProfile, ResearcherProfileVisibilityValue } from './model/researcher-profile.model';
 import { RESEARCHER_PROFILE } from './model/researcher-profile.resource-type';
 import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 import { PostRequest } from '../data/request.models';
@@ -94,13 +94,13 @@ export class ResearcherProfileDataService extends IdentifiableDataService<Resear
    * Change the visibility of the given researcher profile setting the given value.
    *
    * @param researcherProfile the profile to update
-   * @param visible the visibility value to set
+   * @param visibility the visibility value to set
    */
-  public setVisibility(researcherProfile: ResearcherProfile, visible: boolean): Observable<RemoteData<ResearcherProfile>> {
-    const replaceOperation: ReplaceOperation<boolean> = {
+  public setVisibility(researcherProfile: ResearcherProfile, visibility: ResearcherProfileVisibilityValue): Observable<RemoteData<ResearcherProfile>> {
+    const replaceOperation: ReplaceOperation<ResearcherProfileVisibilityValue> = {
       path: '/visible',
       op: 'replace',
-      value: visible
+      value: visibility
     };
 
     return this.patch(researcherProfile, [replaceOperation]);

@@ -107,7 +107,7 @@ describe('ItemTemplateDataService', () => {
   });
 
   describe('composition', () => {
-    const initService = () => new ItemTemplateDataService(null, null, null, null, null, null, null, null, null);
+    const initService = () => new ItemTemplateDataService(null, null, null, null, null, null, null, null, null, null, null);
     testCreateDataImplementation(initService);
     testPatchDataImplementation(initService);
     testDeleteDataImplementation(initService);

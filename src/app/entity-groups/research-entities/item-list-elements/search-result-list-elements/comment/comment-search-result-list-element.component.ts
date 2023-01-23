@@ -15,7 +15,7 @@ import { AuthorizationDataService } from '../../../../../core/data/feature-autho
 import { FeatureID } from '../../../../../core/data/feature-authorization/feature-id';
 import { SubmissionFormModel } from '../../../../../core/config/models/config-submission-form.model';
 import { RemoteData } from '../../../../../core/data/remote-data';
-import { SubmissionFormsConfigService } from '../../../../../core/config/submission-forms-config.service';
+import { SubmissionFormsConfigDataService } from '../../../../../core/config/submission-forms-config-data.service';
 import { environment } from '../../../../../../environments/environment';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
 import {
@@ -70,7 +70,7 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
   constructor(
     protected truncatableService: TruncatableService,
     protected dsoNameService: DSONameService,
-    private submissionFormsConfigService: SubmissionFormsConfigService,
+    private submissionFormsConfigService: SubmissionFormsConfigDataService,
     private authorizationService: AuthorizationDataService,
     private itemDataService: ItemDataService,
     private notificationsService: NotificationsService,

@@ -8,7 +8,7 @@ import { ProjectDataService } from '../core/project/project-data.service';
 import { getFirstSucceededRemoteDataPayload } from '../core/shared/operators';
 import { Community } from '../core/shared/community.model';
 import { CreateProjectComponent } from '../projects/create-project/create-project.component';
-import { FindListOptions } from '../core/data/request.models';
+import { FindListOptions } from '../core/data/find-list-options.model';
 import { PageInfo } from '../core/shared/page-info.model';
 import { PaginatedList } from '../core/data/paginated-list.model';
 import { DSONameService } from '../core/breadcrumbs/dso-name.service';

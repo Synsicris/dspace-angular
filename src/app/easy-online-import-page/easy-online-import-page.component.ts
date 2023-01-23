@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
-import { redirectOn4xx } from '../core/shared/operators';
+import { redirectOn4xx } from '../core/shared/authorized.operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../core/auth/auth.service';

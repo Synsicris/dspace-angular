@@ -21,10 +21,7 @@ import {
   SaveSubmissionSectionFormAction,
   SetActiveSectionAction
 } from './objects/submission-objects.actions';
-import {
-  SubmissionObjectEntry,
-  SubmissionSectionEntry
-} from './objects/submission-objects.reducer';
+import { SubmissionObjectEntry, SubmissionSectionEntry } from './objects/submission-objects.reducer';
 import { securityConfigurationObjectFromIdSelector, submissionObjectFromIdSelector } from './selectors';
 import { HttpOptions } from '../core/dspace-rest/dspace-rest.service';
 import { SubmissionRestService } from '../core/submission/submission-rest.service';
@@ -215,7 +212,7 @@ export class SubmissionService {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'text/uri-list');
     options.headers = headers;
-    return this.restService.postToEndpoint(this.workflowLinkPath, selfUrl, null, options, null, false) as Observable<SubmissionObject[]>;
+    return this.restService.postToEndpoint(this.workflowLinkPath, selfUrl, null, options) as Observable<SubmissionObject[]>;
   }
 
   /**

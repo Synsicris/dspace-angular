@@ -40,6 +40,7 @@ import { AuthorizationDataService } from '../data/feature-authorization/authoriz
 import { Router } from '@angular/router';
 import { RouterStub } from '../../shared/testing/router.stub';
 import { take } from 'rxjs/operators';
+import { isAuthenticated, isAuthenticatedLoaded } from './selectors';
 
 describe('AuthEffects', () => {
   let authEffects: AuthEffects;

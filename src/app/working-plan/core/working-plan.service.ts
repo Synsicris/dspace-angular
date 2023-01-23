@@ -20,7 +20,7 @@ import { extendMoment } from 'moment-range';
 import * as Moment from 'moment';
 
 import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
-import { SubmissionFormsConfigService } from '../../core/config/submission-forms-config.service';
+import { SubmissionFormsConfigDataService } from '../../core/config/submission-forms-config-data.service';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
 import { buildPaginatedList, PaginatedList } from '../../core/data/paginated-list.model';
@@ -68,6 +68,7 @@ import { RequestService } from '../../core/data/request.service';
 import { ProjectItemService } from '../../core/project/project-item.service';
 import { ProjectDataService } from '../../core/project/project-data.service';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
+import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
 
 export const moment = extendMoment(Moment);
 
@@ -94,7 +95,7 @@ export class WorkingPlanService {
   constructor(
     private collectionService: CollectionDataService,
     private vocabularyService: VocabularyService,
-    private formConfigService: SubmissionFormsConfigService,
+    private formConfigService: SubmissionFormsConfigDataService,
     private itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
     private itemAuthorityRelationService: ItemAuthorityRelationService,
     private itemService: ItemDataService,
@@ -104,6 +105,7 @@ export class WorkingPlanService {
     private linkService: LinkService,
     private operationsBuilder: JsonPatchOperationsBuilder,
     private requestService: RequestService,
+    private searchConfigurationService: SearchConfigurationService,
     private searchService: SearchService,
     private workingPlanStateService: WorkingPlanStateService,
     private searchManager: SearchManager,
@@ -170,7 +172,7 @@ export class WorkingPlanService {
   }
 
   getWorkpackageSortOptions(): Observable<SearchConfig> {
-    return this.searchService.getSearchConfigurationFor(null, 'allLinkedWorkingPlanObj').pipe(
+    return this.searchConfigurationService.getSearchConfigurationFor(null, 'allLinkedWorkingPlanObj').pipe(
       getFirstSucceededRemoteDataPayload()
     ) as Observable<SearchConfig>;
   }

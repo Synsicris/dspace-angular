@@ -14,7 +14,7 @@ import { RemoteDataBuildService } from '../../core/cache/builders/remote-data-bu
 import { impactPathwayRelationsSelector } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayLink, ImpactPathwayLinks } from './impact-pathway.reducer';
-import { SubmissionFormsConfigService } from '../../core/config/submission-forms-config.service';
+import { SubmissionFormsConfigDataService } from '../../core/config/submission-forms-config-data.service';
 import { ItemJsonPatchOperationsService } from '../../core/data/item-json-patch-operations.service';
 import {
   AddImpactPathwayTaskLinkAction,
@@ -34,7 +34,7 @@ import { ItemAuthorityRelationService } from '../../core/shared/item-authority-r
 export class ImpactPathwayLinksService {
 
   constructor(
-    private formConfigService: SubmissionFormsConfigService,
+    private formConfigService: SubmissionFormsConfigDataService,
     private itemService: ItemDataService,
     private operationsBuilder: JsonPatchOperationsBuilder,
     private itemAuthorityRelationService: ItemAuthorityRelationService,

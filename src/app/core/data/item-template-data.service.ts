@@ -84,9 +84,9 @@ export class ItemTemplateDataService extends BaseItemDataService {
     protected operationsBuilder: JsonPatchOperationsBuilder,
     protected itemJsonPatchOperationsService: ItemJsonPatchOperationsService
   ) {
-    super('itemtemplates', requestService, rdbService, objectCache, halService, notificationsService, comparator, browseService, bundleService);
+    super('itemtemplates', requestService, rdbService, objectCache, halService, notificationsService, comparator, browseService, bundleService, operationsBuilder, itemJsonPatchOperationsService);
 
-    this.byCollection = new CollectionItemTemplateDataService(requestService, rdbService, objectCache, halService, notificationsService, collectionService);
+    this.byCollection = new CollectionItemTemplateDataService(requestService, rdbService, objectCache, halService, notificationsService, collectionService, operationsBuilder, itemJsonPatchOperationsService);
   }
 
   /**

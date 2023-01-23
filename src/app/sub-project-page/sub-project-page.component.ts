@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
-import { getFirstSucceededRemoteDataPayload, redirectOn4xx } from '../core/shared/operators';
+import { redirectOn4xx } from '../core/shared/authorized.operators';
+import { getFirstSucceededRemoteDataPayload } from '../core/shared/operators';
 import { Community } from '../core/shared/community.model';
 import { AuthService } from '../core/auth/auth.service';
 
