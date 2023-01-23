@@ -7,18 +7,20 @@ import { VersionResolver } from './version-page/version.resolver';
 import { DSOBreadcrumbsService } from '../core/breadcrumbs/dso-breadcrumbs.service';
 import { LinkService } from '../core/cache/builders/link.service';
 import { UploadBitstreamComponent } from './bitstreams/upload/upload-bitstream.component';
-import { EASY_ONLINE_PATH, ITEM_EDIT_PATH, UPLOAD_BITSTREAM_PATH } from './item-page-routing-paths';
+import { EASY_ONLINE_PATH, ITEM_EDIT_PATH, ORCID_PATH, UPLOAD_BITSTREAM_PATH } from './item-page-routing-paths';
 import { ItemPageAdministratorGuard } from './item-page-administrator.guard';
-import { MenuItemType } from '../shared/menu/initial-menus-state';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { ThemedItemPageComponent } from './simple/themed-item-page.component';
 import { ThemedFullItemPageComponent } from './full/themed-full-item-page.component';
+import { MenuItemType } from '../shared/menu/menu-item-type.model';
 import { VersionPageComponent } from './version-page/version-page/version-page.component';
 import {
   BitstreamRequestACopyPageComponent
 } from '../shared/bitstream-request-a-copy-page/bitstream-request-a-copy-page.component';
-import { CrisItemPageTabResolver } from './cris-item-page-tab.resolver';
+import { CrisItemPageTabResolver } from '../item-page/cris-item-page-tab.resolver';
 import { REQUEST_COPY_MODULE_PATH } from '../app-routing-paths';
+import { OrcidPageComponent } from './orcid-page/orcid-page.component';
+import { OrcidPageGuard } from './orcid-page/orcid-page.guard';
 import { ProjectCommunityByItemResolver } from '../core/project/project-community-by-item.resolver';
 import { ProjectItemBreadcrumbResolver } from '../core/breadcrumbs/project-item-breadcrumb.resolver';
 
@@ -77,6 +79,11 @@ import { ProjectItemBreadcrumbResolver } from '../core/breadcrumbs/project-item-
             component: BitstreamRequestACopyPageComponent,
           },
           {
+            path: ORCID_PATH,
+            component: OrcidPageComponent,
+            canActivate: [AuthenticatedGuard, OrcidPageGuard]
+          },
+          {
             path: EASY_ONLINE_PATH,
             loadChildren: () => import('../easy-online-import-page/easy-online-import-page.module')
               .then((m) => m.EasyOnlineImportPageModule)
@@ -119,6 +126,7 @@ import { ProjectItemBreadcrumbResolver } from '../core/breadcrumbs/project-item-
     LinkService,
     ItemPageAdministratorGuard,
     VersionResolver,
+    OrcidPageGuard,
     CrisItemPageTabResolver
   ]
 

@@ -33,6 +33,8 @@ export class DSONameService {
       const givenName = dso.firstMetadataValue('person.givenName');
       if (isEmpty(familyName) && isEmpty(givenName)) {
         return dso.firstMetadataValue('dc.title') || dso.name;
+      } else if (isEmpty(familyName) || isEmpty(givenName)) {
+        return familyName || givenName;
       } else {
         return `${familyName}, ${givenName}`;
       }
@@ -55,11 +57,14 @@ export class DSONameService {
   getName(dso: DSpaceObject): string {
     const match = this.getEntityType(dso, (type: string) => Object.keys(this.factories).includes(type));
 
+    let name;
     if (hasValue(match)) {
-      return this.factories[match](dso);
-    } else {
-      return  this.factories.Default(dso);
+      name = this.factories[match](dso);
     }
+    if (isEmpty(name)) {
+      name = this.factories.Default(dso);
+    }
+    return name;
   }
 
   /**

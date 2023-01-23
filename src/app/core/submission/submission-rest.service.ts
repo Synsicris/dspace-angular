@@ -8,7 +8,6 @@ import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import {
   DeleteRequest,
   PostRequest,
-  RestRequest,
   SubmissionDeleteRequest,
   SubmissionPatchRequest,
   SubmissionPostRequest,
@@ -22,6 +21,7 @@ import { getFirstCompletedRemoteData } from '../shared/operators';
 import { URLCombiner } from '../url-combiner/url-combiner';
 import { RemoteData } from '../data/remote-data';
 import { SubmissionResponse } from './submission-response.model';
+import { RestRequest } from '../data/rest-request.model';
 
 /**
  * The service handling all submission REST requests
@@ -70,20 +70,20 @@ export class SubmissionRestService {
    * @param collectionId
    *    The owning collection for the object
    */
-  protected getEndpointByIDHref(endpoint, resourceID, fullProjection, collectionId?: string): string {
+  protected getEndpointByIDHref(endpoint, resourceID, collectionId?: string, projections: string[] = []): string {
     let url = isNotEmpty(resourceID) ? `${endpoint}/${resourceID}` : `${endpoint}`;
-    const params: string[] = [];
-    if (fullProjection) {
-      params.push('projection=full');
+
+    if (projections?.length > 0) {
+      projections.forEach((projection, index) => {
+        url = new URLCombiner(url, ((index === 0) ? '?' : '&') + 'projection=' + projection).toString();
+      });
     } else {
-      params.push('embed=submitter&embed=submissionDefinition&embed=item&embed=sections');
+      url = new URLCombiner(url, '?projection=full').toString();
     }
+
     if (collectionId) {
-      params.push(`owningCollection=${collectionId}`);
+      url = new URLCombiner(url, `&owningCollection=${collectionId}`).toString();
     }
-    params.forEach((param, index) => {
-      url = new URLCombiner(url, ((index === 0) ? '?' : '&') + param).toString();
-    });
     return url;
   }
 
@@ -123,10 +123,10 @@ export class SubmissionRestService {
    * @return Observable<SubmitDataResponseDefinitionObject>
    *     server response
    */
-  public getDataById(linkName: string, id: string, fullProjection = true): Observable<SubmitDataResponseDefinitionObject> {
+  public getDataById(linkName: string, id: string, projections: string[] = []): Observable<SubmitDataResponseDefinitionObject> {
     const requestId = this.requestService.generateRequestId();
     return this.halService.getEndpoint(linkName).pipe(
-      map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, id, fullProjection)),
+      map((endpointURL: string) => this.getEndpointByIDHref(endpointURL, id, null, projections)),
       filter((href: string) => isNotEmpty(href)),
       distinctUntilChanged(),
       map((endpointURL: string) => new SubmissionRequest(requestId, endpointURL)),

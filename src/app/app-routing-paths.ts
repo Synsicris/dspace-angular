@@ -70,6 +70,12 @@ export function getWorkflowItemModuleRoute() {
   return `/${WORKFLOW_ITEM_MODULE_PATH}`;
 }
 
+export const WORKSPACE_ITEM_MODULE_PATH = 'workspaceitems';
+
+export function getWorkspaceItemModuleRoute() {
+  return `/${WORKSPACE_ITEM_MODULE_PATH}`;
+}
+
 export const BULK_IMPORT_PATH = 'bulk-import';
 
 export function getBulkImportRoute(collection: Collection): string {
@@ -107,6 +113,8 @@ export function getPageInternalServerErrorRoute() {
   return `/${INTERNAL_SERVER_ERROR}`;
 }
 
+export const ERROR_PAGE = 'error';
+
 export const INFO_MODULE_PATH = 'info';
 export function getInfoModulePath() {
   return `/${INFO_MODULE_PATH}`;
@@ -123,8 +131,13 @@ export function getRequestCopyModulePath() {
   return `/${REQUEST_COPY_MODULE_PATH}`;
 }
 
+export const HEALTH_PAGE_PATH = 'health';
+
 export const EDIT_ITEM_PATH = 'edit-items';
 
+export function getEditItemPageRoute() {
+  return `/${EDIT_ITEM_PATH}`;
+}
 
 export function getSubscriptionsModuleRoute() {
   return `/${SUBSCRIPTIONS_MODULE_PATH}`;

@@ -26,7 +26,10 @@ import { FUNDING_ENTITY, PROJECT_ENTITY } from '../../../../../../core/project/p
  */
 export class ItemSearchResultListElementComponent extends SearchResultListElementComponent<ItemSearchResult, Item> {
 
-  @Input() hideMetrics = false;
+  /**
+   * Whether to show the metrics badges
+   */
+  @Input() showMetrics = true;
 
   DisplayItemMetadataType = DisplayItemMetadataType;
 
@@ -46,6 +49,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
     this.itemPageRoute = getItemPageRoute(this.dso);
     this.showItemActions = this.dso.entityType !== PROJECT_ENTITY && this.dso.entityType !== FUNDING_ENTITY;
   }

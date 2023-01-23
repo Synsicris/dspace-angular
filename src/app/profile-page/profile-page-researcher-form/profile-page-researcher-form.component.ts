@@ -4,31 +4,30 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, mergeMap, startWith, switchMap, take, tap } from 'rxjs/operators';
-import {
-  getAllSucceededRemoteDataPayload,
-  getFirstCompletedRemoteData,
-  getFirstSucceededRemoteListPayload
-} from '../../core/shared/operators';
-import { ClaimItemSelectorComponent } from '../../shared/dso-selector/modal-wrappers/claim-item-selector/claim-item-selector.component';
+import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+
+import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
+import { ProfileClaimItemModalComponent } from '../profile-claim-item-modal/profile-claim-item-modal.component';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { EPerson } from '../../core/eperson/models/eperson.model';
-import { ResearcherProfile, ResearcherProfileVisibilityValue } from '../../core/profile/model/researcher-profile.model';
-import { ResearcherProfileService } from '../../core/profile/researcher-profile.service';
+import { ResearcherProfile } from '../../core/profile/model/researcher-profile.model';
+import { ResearcherProfileDataService } from '../../core/profile/researcher-profile-data.service';
 import { ProfileClaimService } from '../profile-claim/profile-claim.service';
+import { RemoteData } from '../../core/data/remote-data';
+import { isNotEmpty } from '../../shared/empty.util';
+import { followLink } from '../../shared/utils/follow-link-config.model';
+import { ConfirmationModalComponent } from '../../shared/confirmation-modal/confirmation-modal.component';
+import { NoContent } from '../../core/shared/NoContent.model';
 import { EditItemMode } from '../../core/submission/models/edititem-mode.model';
 import { EditItemDataService } from '../../core/submission/edititem-data.service';
-import { followLink } from '../../shared/utils/follow-link-config.model';
-import { EditItem } from '../../core/submission/models/edititem.model';
-import { isNotEmpty } from '../../shared/empty.util';
 
 @Component({
   selector: 'ds-profile-page-researcher-form',
-  templateUrl: './profile-page-researcher-form.component.html'
+  templateUrl: './profile-page-researcher-form.component.html',
 })
 /**
- * Component for a user to create/delete or change his researcher profile.
+ * Component for a user to create/delete or change their researcher profile.
  */
 export class ProfilePageResearcherFormComponent implements OnInit {
 
@@ -43,6 +42,18 @@ export class ProfilePageResearcherFormComponent implements OnInit {
   researcherProfile$: BehaviorSubject<ResearcherProfile> = new BehaviorSubject<ResearcherProfile>(null);
 
   /**
+   * A boolean representing if a delete operation is pending
+   * @type {BehaviorSubject<boolean>}
+   */
+  processingDelete$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * A boolean representing if a create delete operation is pending
+   * @type {BehaviorSubject<boolean>}
+   */
+  processingCreate$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * If exists The uuid of the item associated to the researcher profile
    */
   researcherProfileItemId: string;
@@ -53,14 +64,14 @@ export class ProfilePageResearcherFormComponent implements OnInit {
    */
   private editModes$: BehaviorSubject<EditItemMode[]> = new BehaviorSubject<EditItemMode[]>([]);
 
-  constructor(protected researcherProfileService: ResearcherProfileService,
-    protected profileClaimService: ProfileClaimService,
-    protected translationService: TranslateService,
-    protected notificationService: NotificationsService,
-    protected authService: AuthService,
-    protected router: Router,
-    protected modalService: NgbModal,
-    protected editItemService: EditItemDataService) {
+  constructor(protected researcherProfileService: ResearcherProfileDataService,
+              protected profileClaimService: ProfileClaimService,
+              protected translationService: TranslateService,
+              protected notificationService: NotificationsService,
+              protected authService: AuthService,
+              protected router: Router,
+              protected modalService: NgbModal,
+              protected editItemService: EditItemDataService) {
 
   }
 
@@ -70,6 +81,31 @@ export class ProfilePageResearcherFormComponent implements OnInit {
   ngOnInit(): void {
     // Retrieve researcherProfile if exists
     this.initResearchProfile();
+  }
+
+  /**
+   * Create a new profile for the current user.
+   */
+  createProfile(): void {
+    this.processingCreate$.next(true);
+
+    this.authService.getAuthenticatedUserFromStore().pipe(
+      take(1),
+      switchMap((currentUser) => this.profileClaimService.hasProfilesToSuggest(currentUser)))
+      .subscribe((hasProfilesToSuggest) => {
+
+        if (hasProfilesToSuggest) {
+          this.processingCreate$.next(false);
+          const modal = this.modalService.open(ProfileClaimItemModalComponent);
+          modal.componentInstance.dso = this.user;
+          modal.componentInstance.create.pipe(take(1)).subscribe(() => {
+            this.createProfileFromScratch();
+          });
+        } else {
+          this.createProfileFromScratch();
+        }
+
+      });
   }
 
   /**
@@ -91,6 +127,36 @@ export class ProfilePageResearcherFormComponent implements OnInit {
   }
 
   /**
+   * Delete the given researcher profile.
+   *
+   * @param researcherProfile the profile to delete
+   */
+  deleteProfile(researcherProfile: ResearcherProfile): void {
+    const modalRef = this.modalService.open(ConfirmationModalComponent);
+    modalRef.componentInstance.headerLabel = 'confirmation-modal.delete-profile.header';
+    modalRef.componentInstance.infoLabel = 'confirmation-modal.delete-profile.info';
+    modalRef.componentInstance.cancelLabel = 'confirmation-modal.delete-profile.cancel';
+    modalRef.componentInstance.confirmLabel = 'confirmation-modal.delete-profile.confirm';
+    modalRef.componentInstance.brandColor = 'danger';
+    modalRef.componentInstance.confirmIcon = 'fas fa-trash';
+    modalRef.componentInstance.response.pipe(take(1)).subscribe((confirm: boolean) => {
+      if (confirm) {
+        this.processingDelete$.next(true);
+        this.researcherProfileService.delete(researcherProfile.id).pipe(
+          getFirstCompletedRemoteData(),
+          map((response: RemoteData<NoContent>) => response.isSuccess),
+        ).subscribe((deleted) => {
+          if (deleted) {
+            this.researcherProfile$.next(null);
+            this.researcherProfileItemId = null;
+          }
+          this.processingDelete$.next(false);
+        });
+      }
+    });
+  }
+
+  /**
    * Toggle the visibility of the given researcher profile.
    *
    * @param researcherProfile The profile to update
@@ -101,14 +167,56 @@ export class ProfilePageResearcherFormComponent implements OnInit {
       .subscribe((updatedProfile) => this.researcherProfile$.next(updatedProfile));
   }
 
+  /**
+   * Return a boolean representing if a delete operation is pending.
+   *
+   * @return {Observable<boolean>}
+   */
+  isProcessingDelete(): Observable<boolean> {
+    return this.processingDelete$.asObservable();
+  }
+
+  /**
+   * Return a boolean representing if a create operation is pending.
+   *
+   * @return {Observable<boolean>}
+   */
+  isProcessingCreate(): Observable<boolean> {
+    return this.processingCreate$.asObservable();
+  }
+
+  /**
+   * Create a new profile related to the current user from scratch.
+   */
+  createProfileFromScratch() {
+    this.processingCreate$.next(true);
+    this.researcherProfileService.create().pipe(
+      getFirstCompletedRemoteData()
+    ).subscribe((remoteData) => {
+      this.processingCreate$.next(false);
+      if (remoteData.isSuccess) {
+        this.initResearchProfile();
+        this.notificationService.success(null, this.translationService.get('researcher.profile.create.success'));
+      } else {
+        this.notificationService.error(null, this.translationService.get('researcher.profile.create.fail'));
+      }
+    });
+  }
+
+  /**
+   * Initializes the researcherProfile and researcherProfileItemId attributes using the profile of the current user.
+   */
   private initResearchProfile(): void {
-    this.researcherProfileService.findById(this.user.id).pipe(
-      take(1),
-      filter((researcherProfile) => isNotEmpty(researcherProfile)),
+    this.researcherProfileService.findById(this.user.id, false, true, followLink('item')).pipe(
+      getFirstSucceededRemoteDataPayload(),
       tap((researcherProfile) => this.researcherProfile$.next(researcherProfile)),
       mergeMap((researcherProfile) => this.researcherProfileService.findRelatedItemId(researcherProfile)),
-      tap((itemId: string) => this.researcherProfileItemId = itemId),
-      mergeMap((itemId: string) => this.editItemService.findById(itemId + ':none', true, true, followLink('modes')).pipe(
+      tap((itemId: string) => {
+        if (isNotEmpty(itemId)) {
+          this.researcherProfileItemId = itemId;
+        }
+      }),
+      mergeMap((itemId: string) => this.editItemService.searchEditModesById(itemId).pipe(
         getAllSucceededRemoteDataPayload(),
         mergeMap((editItem: EditItem) => editItem.modes.pipe(
           getFirstSucceededRemoteListPayload())

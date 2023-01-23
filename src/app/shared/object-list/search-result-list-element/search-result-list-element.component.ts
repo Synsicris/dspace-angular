@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { SearchResult } from '../../search/models/search-result.model';
@@ -8,7 +8,7 @@ import { AbstractListableElementComponent } from '../../object-collection/shared
 import { TruncatableService } from '../../truncatable/truncatable.service';
 import { Metadata } from '../../../core/shared/metadata.utils';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
-import { environment } from '../../../../environments/environment';
+import { APP_CONFIG, AppConfig } from '../../../../config/app-config.interface';
 import { ResultViewConfig } from '../../../../config/display-search-result-config.interface';
 
 @Component({
@@ -27,7 +27,9 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
    */
   displayConfigurations: ResultViewConfig[];
 
-  public constructor(protected truncatableService: TruncatableService, protected dsoNameService: DSONameService) {
+  public constructor(protected truncatableService: TruncatableService,
+                     protected dsoNameService: DSONameService,
+                     @Inject(APP_CONFIG) protected appConfig?: AppConfig) {
     super();
   }
 
@@ -42,10 +44,10 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
       const itemType = this.firstMetadataValue('dspace.entity.type');
       const def = 'default';
 
-      if ( !!environment.displayItemSearchResult && !!environment.displayItemSearchResult[itemType] ) {
-        this.displayConfigurations = environment.displayItemSearchResult[itemType];
-      } else if ( !!environment.displayItemSearchResult[def] ) {
-        this.displayConfigurations = environment.displayItemSearchResult[def];
+      if ( !!this.appConfig.displayItemSearchResult && !!this.appConfig.displayItemSearchResult[itemType] ) {
+        this.displayConfigurations = this.appConfig.displayItemSearchResult[itemType];
+      } else if ( !!this.appConfig.displayItemSearchResult[def] ) {
+        this.displayConfigurations = this.appConfig.displayItemSearchResult[def];
       } else {
         this.displayConfigurations = null;
       }
