@@ -206,15 +206,17 @@ export class ItemCreateComponent implements OnInit {
   }
 
   private generateOriginalRelationMetadata(entryKey: string, item: Item) {
-    const splittedUniqueId = this.item.firstMetadata(VERSION_UNIQUE_ID)?.value?.split('_');
+    let splittedUniqueId = this.item.firstMetadata(VERSION_UNIQUE_ID)?.value?.split('_');
+    // if is not versioned, is the original item itself.
     if (!hasValue(splittedUniqueId) || !isNotEmpty(splittedUniqueId) || !hasValue(splittedUniqueId[0])) {
-      return {};
+      splittedUniqueId = [item.id];
     }
+    const authority = splittedUniqueId[0];
     return {
       [entryKey]: [
         Object.assign({}, new MetadataValue(), {
           value: `${item.entityType} - ${item.name}`,
-          authority: `${splittedUniqueId[0]}`,
+          authority: authority,
           confidence: ConfidenceType.CF_ACCEPTED
         })
       ]

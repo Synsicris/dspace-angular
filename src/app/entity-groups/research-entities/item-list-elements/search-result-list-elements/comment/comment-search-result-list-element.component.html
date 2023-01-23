@@ -1,9 +1,5 @@
 <div *ngIf="dso">
   <ds-type-badge class="d-inline-block" *ngIf="showLabel" [object]="dso"></ds-type-badge>
-  <ds-view-version-badges
-    [item]="dso"
-    [projectRelationMetadata]="RELATION_PROJECT"
-  ></ds-view-version-badges>
   <ds-truncatable-part [id]="dso.id" *ngIf="object !== undefined && object !== null">
 
 
@@ -51,6 +47,10 @@
          [routerLink]="[getRelateItemPageRoute(relatedItem)]">
         {{relatedItem.value}}
       </a>
+    </div>
+
+    <div>
+      <ds-view-version-badges [item]="dso" [projectRelationMetadata]="RELATION_PROJECT"></ds-view-version-badges>
     </div>
 
     <div>
