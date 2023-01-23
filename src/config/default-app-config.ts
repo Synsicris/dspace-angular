@@ -1229,7 +1229,10 @@ export class DefaultAppConfig implements AppConfig {
     commentEditFormSection: 'comments',
     commentEditMode: 'CUSTOM',
     commentEntityType: 'comment',
-    commentRelationItemMetadata: 'synsicris.relation.item'
+    commentRelationItemMetadata: 'synsicris.relation.commentItem',
+    commentRelationItemVersionMetadata: 'synsicris.relation.commentItemVersion',
+    commentRelationProjectMetadata: 'synsicris.relation.commentProject',
+    commentRelationProjectVersionMetadata: 'synsicris.relation.commentProjectVersion',
   };
 
 }

@@ -15374,28 +15374,23 @@
 
   // "layout.field.label.comment.dc.type": "Type",
   "layout.field.label.comment.dc.type": "Art",
-
   // "layout.field.label.comment.synsicris.date.creation": "Creation date",
   "layout.field.label.comment.synsicris.date.creation": "Erstellt am",
-
   // "layout.field.label.comment.synsicris.date.reminder": "Reminder date",
   "layout.field.label.comment.synsicris.date.reminder": "Erinnerung am",
-
   // "layout.field.label.comment.synsicris.creator": "Creation by",
   "layout.field.label.comment.synsicris.creator": "Erstellt von",
-
   // "layout.field.label.comment.synsicris.description": "Description",
   "layout.field.label.comment.synsicris.description": "Beschreibung",
-
+  "layout.field.label.comment.synsicris.related.item": "Bezug Hinzufügen",
+  "layout.field.label.comment.synsicris.related.project": "Bezug Projekt",
+  "layout.field.label.comment.synsicris.related.version": "Bezug zur Version",
   // "layout.tab.header.open_researchquestion": "Open research questions",
   "layout.tab.header.open_researchquestion": "Offene Forschungsfragen",
-
   // "layout.box.header.open_researchquestion_comment": "Comments - Open research questions",
   "layout.box.header.open_researchquestion_comment": "Kommentare - Offene Forschungsfragen",
-
   // "layout.box.header.jpbasics": "to be deleted",
   "layout.box.header.jpbasics": "Verbundinformationen",
-
   // "layout.box.header.Project": "to be deleted",
   "layout.box.header.Project": "box.header.Project (to be deleted)",
 

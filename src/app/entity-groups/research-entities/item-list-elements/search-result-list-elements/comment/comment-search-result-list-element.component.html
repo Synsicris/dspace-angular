@@ -1,51 +1,69 @@
 <div *ngIf="dso">
-    <ds-type-badge class="d-inline-block" *ngIf="showLabel" [object]="dso"></ds-type-badge>
-    <ds-truncatable-part [id]="dso.id" *ngIf="object !== undefined && object !== null">
+  <ds-type-badge class="d-inline-block" *ngIf="showLabel" [object]="dso"></ds-type-badge>
+  <ds-view-version-badges
+    [item]="dso"
+    [projectRelationMetadata]="RELATION_PROJECT"
+  ></ds-view-version-badges>
+  <ds-truncatable-part [id]="dso.id" *ngIf="object !== undefined && object !== null">
 
 
-        <div>
-            <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
-                rel="noopener noreferrer" [routerLink]="[itemPageRoute]" class="lead item-list-title"
-                [innerHTML]="dsoTitle"></a>
-            <span *ngIf="linkType == linkTypes.None" class="lead item-list-title" [innerHTML]="dsoTitle"></span>
-        </div>
+    <div>
+      <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
+         rel="noopener noreferrer" [routerLink]="[itemPageRoute]" class="lead item-list-title"
+         [innerHTML]="dsoTitle"></a>
+      <span *ngIf="linkType == linkTypes.None" class="lead item-list-title" [innerHTML]="dsoTitle"></span>
+    </div>
 
-        <div>
+    <div>
             <span class="text-muted item-list-authors">
                 {{dso.firstMetadataValue('dc.type')}}
             </span>
-        </div>
+    </div>
 
-        <div *ngIf="!!dso.firstMetadataValue('synsicris.date.reminder')">
-            <span class="text-muted">(<span
-                    class="text-muted item-list-date">{{dso.firstMetadataValue('synsicris.date.reminder')}}</span>)</span>
-        </div>
-
-        <div>
-            <span class="text-muted">(<span
-                    class="text-muted item-list-date">{{dso.firstMetadataValue('synsicris.date.creation')}}</span>)</span>
-        </div>
-
-        <div>
-            <span class="badge badge-info">{{dso.firstMetadataValue('synsicris.creator')}}</span>
-        </div>
-
-
-        <ds-truncatable-part [id]="dso.id" [maxLines]="1"><span class="description"
-                [innerHTML]="firstMetadataValue('dc.description')"></span>
-        </ds-truncatable-part>
-
-        <div>
-            <button *ngIf="canEdit() | async" class="btn btn-primary mt-2" (click)="openEditModal()">
-                <i class="fa fa-edit"></i>
-                {{"comment.search.results.edit" | translate}}
-            </button>
-
-            <button *ngIf="canDelete() | async" class="btn btn-danger mt-2" (click)=" openDeleteModal()">
-                <i class="fas fa-trash"></i>
-                {{"comment.search.results.delete" | translate}}
-            </button>
-        </div>
-
+    <ds-truncatable-part [id]="dso.id" [maxLines]="1"><span class="description"
+                                                            [innerHTML]="firstMetadataValue('dc.description')"></span>
     </ds-truncatable-part>
+
+    <div *ngIf="dso.firstMetadataValue('synsicris.date.reminder') as reminderDate">
+      <span class="text-muted">{{'layout.field.label.comment.synsicris.date.reminder' | translate}}:</span>
+      <span class="text-muted item-list-date ml-1">{{reminderDate}}</span>
+    </div>
+
+    <div *ngIf="dso.firstMetadataValue('synsicris.creator') as creator">
+      <span class="text-muted">{{'layout.field.label.comment.synsicris.creator' | translate}}:</span>
+      <span class="text-muted item-list-date ml-1">{{creator}}</span>
+      <ng-container *ngIf="dso.firstMetadataValue('synsicris.date.creation') as creationDate">
+        <span class="text-muted item-list-date">at {{creationDate}}</span>
+      </ng-container>
+    </div>
+
+    <div *ngIf="dso.firstMetadata('synsicris.relation.commentProject') as project">
+      <span class="text-muted">{{'layout.field.label.comment.synsicris.related.project' | translate}}:</span>
+      <a target="_self" rel="noopener noreferrer" class="item-list-title"
+         [routerLink]="[getRelateItemPageRoute(project)]">
+        {{project.value}}
+      </a>
+    </div>
+
+    <div *ngIf="dso.firstMetadata('synsicris.relation.commentItem') as relatedItem">
+      <span class="text-muted">{{'layout.field.label.comment.synsicris.related.item' | translate}}:</span>
+      <a target="_self" rel="noopener noreferrer" class="item-list-title"
+         [routerLink]="[getRelateItemPageRoute(relatedItem)]">
+        {{relatedItem.value}}
+      </a>
+    </div>
+
+    <div>
+      <button *ngIf="canEdit() | async" class="btn btn-primary mt-2" (click)="openEditModal()">
+        <i class="fa fa-edit"></i>
+        {{"comment.search.results.edit" | translate}}
+      </button>
+
+      <button *ngIf="canDelete() | async" class="btn btn-danger mt-2" (click)=" openDeleteModal()">
+        <i class="fas fa-trash"></i>
+        {{"comment.search.results.delete" | translate}}
+      </button>
+    </div>
+
+  </ds-truncatable-part>
 </div>

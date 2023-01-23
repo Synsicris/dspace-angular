@@ -26,6 +26,11 @@ export class ViewVersionBadgesComponent implements OnInit {
   @Input() item: Item;
 
   /**
+   * The relation used to map the project
+   */
+  @Input() projectRelationMetadata = PROJECT_RELATION_METADATA;
+
+  /**
    * The project's item which the given item belong to
    */
   projectItem$: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
@@ -44,13 +49,13 @@ export class ViewVersionBadgesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.item && this.projectVersionService.isVersionOfAnItem(this.item)) {
+    if (this.item) {
       let itemId;
       if (this.item.entityType === PROJECT_ENTITY) {
         itemId = this.item.id;
         this.projectItem$.next(this.item);
       } else {
-        itemId = this.item.firstMetadata(PROJECT_RELATION_METADATA)?.authority;
+        itemId = this.item.firstMetadata(this.projectRelationMetadata)?.authority;
         this.itemService.findById(itemId).pipe(
           getFirstCompletedRemoteData()
         ).subscribe((itemRD: RemoteData<Item>) => {

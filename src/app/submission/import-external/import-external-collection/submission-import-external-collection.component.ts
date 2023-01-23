@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CollectionListEntry } from '../../../shared/collection-dropdown/collection-dropdown.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject } from 'rxjs';
 
 /**
  * Wrap component for 'ds-collection-dropdown'.
@@ -30,7 +31,15 @@ export class SubmissionImportExternalCollectionComponent {
   /**
    * If collection searching is pending or not
    */
-  public loading = true;
+  public get loading() {
+    return this._loading$.value;
+  }
+
+  public set loading(value: boolean) {
+    this._loading$.next(value);
+  }
+
+  private _loading$ = new BehaviorSubject<boolean>(false);
 
   /**
    * Initialize the component variables.
@@ -38,7 +47,8 @@ export class SubmissionImportExternalCollectionComponent {
    */
   constructor(
     private activeModal: NgbActiveModal
-  ) { }
+  ) {
+  }
 
   /**
    * This method populates the 'selectedEvent' variable.
@@ -63,8 +73,7 @@ export class SubmissionImportExternalCollectionComponent {
   }
 
   /**
-   * Set the hasChoice state
-   * @param hasChoice
+   * Marks the status to **not loading**
    */
   public searchComplete() {
     this.loading = false;

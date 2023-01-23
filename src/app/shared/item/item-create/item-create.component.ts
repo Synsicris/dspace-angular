@@ -1,9 +1,9 @@
-import { MetadataValue } from '../../../core/shared/metadata.models';
+import { MetadataMap, MetadataValue } from '../../../core/shared/metadata.models';
 import { Item } from '../../../core/shared/item.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 
-import { map, take } from 'rxjs/operators';
+import { filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthService } from '../../../core/auth/auth.service';
@@ -12,22 +12,25 @@ import {
 } from '../../../submission/import-external/import-external-collection/submission-import-external-collection.component';
 import { CollectionListEntry } from '../../collection-dropdown/collection-dropdown.component';
 import { EntityTypeService } from '../../../core/data/entity-type.service';
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest, forkJoin, Observable, of } from 'rxjs';
 import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
-import { isNotEmpty } from '../../empty.util';
+import { hasValue, isNotEmpty } from '../../empty.util';
 import { CreateProjectComponent } from '../../../projects/create-project/create-project.component';
 import {
   FUNDING_ENTITY,
   PERSON_ENTITY,
   PROJECT_ENTITY,
+  PROJECT_RELATION_METADATA,
   PROJECTPATNER_ENTITY_METADATA,
-  SUBCONTRACTOR_ENTITY_METADATA
+  SUBCONTRACTOR_ENTITY_METADATA,
+  VERSION_UNIQUE_ID
 } from '../../../core/project/project-data.service';
 import { environment } from '../../../../environments/environment';
 import {
   CreateItemSubmissionModalComponent
 } from '../../create-item-submission-modal/create-item-submission-modal.component';
 import { ConfidenceType } from '../../../core/shared/confidence-type';
+import { ItemDataService } from '../../../core/data/item-data.service';
 
 @Component({
   selector: 'ds-item-create',
@@ -65,7 +68,14 @@ export class ItemCreateComponent implements OnInit {
    */
   @Output() refresh = new EventEmitter();
 
-  constructor(private authService: AuthService, private entityTypeService: EntityTypeService, private modalService: NgbModal, private router: Router) { }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly entityTypeService: EntityTypeService,
+    private readonly modalService: NgbModal,
+    private readonly router: Router,
+    private readonly itemService: ItemDataService,
+  ) {
+  }
 
   ngOnInit(): void {
     combineLatest([
@@ -74,12 +84,27 @@ export class ItemCreateComponent implements OnInit {
         getFirstSucceededRemoteDataPayload()
       )]
     ).pipe(
-      map(([isAuthenticated, entityType]) => isAuthenticated && isNotEmpty(entityType)
-        && !(this.relatedEntityType === PROJECT_ENTITY && entityType.label === SUBCONTRACTOR_ENTITY_METADATA)
-        && !(this.relatedEntityType === PROJECT_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA)
-        && !(this.relatedEntityType === PERSON_ENTITY && entityType.label === environment.comments.commentEntityType)),
+      map(([isAuthenticated, entityType]) =>
+        isAuthenticated &&
+        isNotEmpty(entityType) &&
+        this.canCreateSubContractor(entityType) &&
+        this.canCreateProjectPartner(entityType) &&
+        this.canCreateComment(entityType)
+      ),
       take(1)
     ).subscribe((canShow) => this.canShow$.next(canShow));
+  }
+
+  protected canCreateComment(entityType) {
+    return !(this.relatedEntityType === PERSON_ENTITY && entityType.label === environment.comments.commentEntityType);
+  }
+
+  protected canCreateProjectPartner(entityType) {
+    return !(this.relatedEntityType === PROJECT_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA);
+  }
+
+  protected canCreateSubContractor(entityType) {
+    return !(this.relatedEntityType === PROJECT_ENTITY && entityType.label === SUBCONTRACTOR_ENTITY_METADATA);
   }
 
   /**
@@ -136,24 +161,98 @@ export class ItemCreateComponent implements OnInit {
    * Open creation comment modal
    */
   createComment(collectionId: string) {
-    const modalRef = this.modalService.open(CreateItemSubmissionModalComponent, { size: 'lg' });
-    modalRef.componentInstance.entityType = this.targetEntityType;
-    modalRef.componentInstance.collectionId = collectionId;
-    modalRef.componentInstance.formName = environment.comments.commentEditFormName;
-    modalRef.componentInstance.formSectionName = environment.comments.commentEditFormSection;
+    forkJoin({
+      entityType: of(this.targetEntityType),
+      collectionId: of(collectionId),
+      formName: of(environment.comments.commentEditFormName),
+      formSectionName: of(environment.comments.commentEditFormSection),
+      customMetadata: this.getCustomCommentMetadataMap(),
+    })
+      .pipe(
+        switchMap(({ entityType, collectionId, formName, formSectionName, customMetadata }) => {
+          const modalRef = this.modalService.open(CreateItemSubmissionModalComponent, { size: 'lg' });
+          let submissionModal = modalRef.componentInstance as CreateItemSubmissionModalComponent;
+          submissionModal.entityType = entityType;
+          submissionModal.collectionId = collectionId;
+          submissionModal.formName = formName;
+          submissionModal.formSectionName = formSectionName;
+          submissionModal.customMetadata = customMetadata;
+          return submissionModal.createItemEvent;
+        }),
+        take(1)
+      ).subscribe(() => this.refresh.emit());
+  }
 
-    modalRef.componentInstance.customMetadata = {
-      [environment.comments.commentRelationItemMetadata]: [
+  private getCustomCommentMetadataMap(): Observable<MetadataMap> {
+    const customMetadata =
+      Object.assign({}, new MetadataMap(), {
+        ...this.generateVersionMetadata(environment.comments.commentRelationItemVersionMetadata, this.item),
+        ...this.generateOriginalRelationMetadata(environment.comments.commentRelationItemMetadata, this.item)
+      });
+    let metadataMap$ = of(customMetadata).pipe(withLatestFrom(of(this.item)));
+    const isRelatedToProject = this.relatedEntityType === PROJECT_ENTITY;
+    if (!isRelatedToProject) {
+      metadataMap$ =
+        this.getMetadataMapWithRelatedProject$(customMetadata, this.item.firstMetadata(PROJECT_RELATION_METADATA));
+    }
+    return metadataMap$
+      .pipe(
+        map(([metadataMap, item]) =>
+          Object.assign({}, metadataMap, {
+            ...this.generateOriginalRelationMetadata(environment.comments.commentRelationProjectMetadata, item),
+            ...this.generateVersionMetadata(environment.comments.commentRelationProjectVersionMetadata, item),
+          }))
+      );
+  }
+
+  private generateOriginalRelationMetadata(entryKey: string, item: Item) {
+    const splittedUniqueId = this.item.firstMetadata(VERSION_UNIQUE_ID)?.value?.split('_');
+    if (!hasValue(splittedUniqueId) || !isNotEmpty(splittedUniqueId) || !hasValue(splittedUniqueId[0])) {
+      return {};
+    }
+    return {
+      [entryKey]: [
         Object.assign({}, new MetadataValue(), {
-          'value': this.item.name,
-          'authority': this.item.id,
-          'confidence': ConfidenceType.CF_ACCEPTED
+          value: `${item.entityType} - ${item.name}`,
+          authority: `${splittedUniqueId[0]}`,
+          confidence: ConfidenceType.CF_ACCEPTED
         })
       ]
-    };
+    }
+  }
 
-    modalRef.componentInstance.createItemEvent.pipe(take(1)).subscribe(() => {
-      this.refresh.emit();
-    });
+  private generateVersionMetadata(entryKey: string, item: Item) {
+    return {
+      [entryKey]: [
+        Object.assign({}, new MetadataValue(), {
+          value: `${item.entityType} - ${item.name}`,
+          authority: item.id,
+          confidence: ConfidenceType.CF_ACCEPTED
+        })
+      ]
+    }
+  }
+
+  private getMetadataMapWithRelatedProject$(
+    customMetadata: MetadataMap,
+    relatedProjectMetadata: MetadataValue
+  ): Observable<[MetadataMap, Item]> {
+    return of(customMetadata)
+      .pipe(
+        withLatestFrom(
+          of(relatedProjectMetadata)
+            .pipe(
+              filter(hasValue),
+              switchMap(metadata =>
+                this.itemService.findById(
+                  metadata.authority,
+                  true,
+                  true
+                )
+                  .pipe(getFirstSucceededRemoteDataPayload())
+              ),
+            )
+        )
+      );
   }
 }

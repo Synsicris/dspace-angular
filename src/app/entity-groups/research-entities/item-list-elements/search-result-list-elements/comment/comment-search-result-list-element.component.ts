@@ -39,6 +39,8 @@ import { ConfirmationModalComponent } from '../../../../../shared/confirmation-m
 import { hasValue, isNotEmpty } from '../../../../../shared/empty.util';
 import { followLink } from '../../../../../shared/utils/follow-link-config.model';
 import { Item } from '../../../../../core/shared/item.model';
+import { getEntityPageRoute } from '../../../../../item-page/item-page-routing-paths';
+import { MetadataValue } from '../../../../../core/shared/metadata.models';
 
 @listableObjectComponent('CommentSearchResult', ViewMode.ListElement)
 @Component({
@@ -50,6 +52,8 @@ import { Item } from '../../../../../core/shared/item.model';
  * The component for displaying a list element for an item search result of the type Project
  */
 export class CommentSearchResultListElementComponent extends ItemSearchResultListElementComponent implements OnInit {
+
+  public readonly RELATION_PROJECT = environment.comments.commentRelationProjectVersionMetadata;
 
   /**
    * List of Edit Modes available on this item
@@ -179,6 +183,22 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
    */
   private isEditModeAllowed(mode: EditItemMode) {
     return mode.name === 'FULL' || mode.name === environment.comments.commentEditMode || mode.name === 'OWNER';
+  }
+
+  /**
+   * Returns the route to the related item page.
+   * We are assuming that {@see MetadataValue#value} is made with this format:
+   * `{itemType} - {description}`.
+   *
+   * @param metadataValue
+   */
+  getRelateItemPageRoute(metadataValue: MetadataValue) {
+    if (!hasValue(metadataValue == null) || !hasValue(metadataValue.value) || !hasValue(metadataValue.authority)) {
+      return null;
+    }
+    const typeValue = metadataValue.value;
+    const type = (typeValue.split('-')[0] || '').trim();
+    return getEntityPageRoute(type, metadataValue.authority);
   }
 
   /**
