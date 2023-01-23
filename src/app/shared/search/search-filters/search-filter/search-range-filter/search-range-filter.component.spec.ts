@@ -25,6 +25,8 @@ import { SEARCH_CONFIG_SERVICE } from '../../../../../my-dspace-page/my-dspace-p
 import { SearchConfigurationServiceStub } from '../../../../testing/search-configuration-service.stub';
 import { createSuccessfulRemoteDataObject$ } from '../../../../remote-data.utils';
 import { RouteService } from '../../../../../core/services/route.service';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDatepickerModule, NgbDateStruct, NgbPeriod } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from './../../../../../../environments/environment';
 
 describe('SearchRangeFilterComponent', () => {
   let comp: SearchRangeFilterComponent;
@@ -32,7 +34,8 @@ describe('SearchRangeFilterComponent', () => {
   const minSuffix = '.min';
   const maxSuffix = '.max';
   const dateFormats = ['YYYY', 'YYYY-MM', 'YYYY-MM-DD'];
-  const filterName1 = 'test name';
+  const filterName1 = 'filterName1';
+  const filterName2 = 'filterName2';
   const value1 = '2000 - 2012';
   const value2 = '1992 - 2000';
   const value3 = '1990 - 1992';
@@ -84,8 +87,27 @@ describe('SearchRangeFilterComponent', () => {
       }
     }
   ];
+  const date: NgbDateStruct = {
+    day: 20,
+    month: 2,
+    year: 2020
+  };
+
+  let formatterStub = {
+    format: (d: NgbDateStruct) => '2020-2-20',
+    parse: (input: string) => date
+  };
+
+
+  let calendarStub = {
+    getPrev: (d: NgbDate, period?: NgbPeriod, number?: number) => NgbDate.from(date),
+    getNext: (d: NgbDate, period?: NgbPeriod, number?: number) => NgbDate.from(date),
+    getToday: () => NgbDate.from(date)
+  };
+
 
   const searchLink = '/search';
+  const searchUrl = '/search/path';
   const selectedValues = observableOf([value1]);
   let filterService;
   let searchService;
@@ -93,9 +115,9 @@ describe('SearchRangeFilterComponent', () => {
   const page = observableOf(0);
 
   const mockValues = createSuccessfulRemoteDataObject$(buildPaginatedList(new PageInfo(), values));
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), NoopAnimationsModule, FormsModule],
+  beforeEach(waitForAsync(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot(), NoopAnimationsModule, FormsModule, NgbDatepickerModule],
       declarations: [SearchRangeFilterComponent],
       providers: [
         { provide: SearchService, useValue: new SearchServiceStub(searchLink) },
@@ -118,7 +140,9 @@ describe('SearchRangeFilterComponent', () => {
             }
             /* eslint-enable no-empty, @typescript-eslint/no-empty-function */
           }
-        }
+        },
+        { provide: NgbDateParserFormatter, useValue: formatterStub },
+        { provide: NgbCalendar, useValue: calendarStub },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).overrideComponent(SearchRangeFilterComponent, {
@@ -131,28 +155,62 @@ describe('SearchRangeFilterComponent', () => {
     comp = fixture.componentInstance; // SearchPageComponent test instance
     filterService = (comp as any).filterService;
     searchService = (comp as any).searchService;
+
     spyOn(searchService, 'getFacetValuesFor').and.returnValue(mockValues);
+    spyOn(comp, 'getSearchLink').and.returnValue(searchUrl);
     router = (comp as any).router;
     fixture.detectChanges();
   });
 
-  describe('when the onSubmit method is called with data', () => {
-    const searchUrl = '/search/path';
-    // const data = { [mockFilterConfig.paramName + minSuffix]: '1900', [mockFilterConfig.paramName + maxSuffix]: '1950' };
-    beforeEach(() => {
-      comp.range = [1900, 1950];
-      spyOn(comp, 'getSearchLink').and.returnValue(searchUrl);
-      comp.onSubmit();
+  describe('if configuration includes the name of the date filter that should use the datepicker', () => {
+    beforeEach(async () => {
+      comp.fromDate = NgbDate.from({
+        day: 2,
+        month: 1,
+        year: 2000
+      });
+
+      comp.toDate = NgbDate.from({
+        day: 20,
+        month: 2,
+        year: 2020
+      });
+      await comp.onDateSelection(comp.fromDate);
+      fixture.detectChanges();
     });
 
-    it('should call navigate on the router with the right searchlink and parameters', () => {
-      expect(router.navigate).toHaveBeenCalledWith(searchUrl.split('/'), {
-        queryParams: {
-          [mockFilterConfig.paramName + minSuffix]: [1900],
-          [mockFilterConfig.paramName + maxSuffix]: [1950]
-        },
-        queryParamsHandling: 'merge'
+    if (environment.layout.navbar.search.filters.datepicker.includes(filterName1)) {
+      it('should call navigate on the router with the right searchlink and parameters', () => {
+        (comp as any).search(comp.fromDate, comp.toDate);
+        expect(router.navigate).toHaveBeenCalledWith(searchUrl.split('/'), {
+          queryParams: {
+            [mockFilterConfig.paramName + minSuffix]: comp.fromDate,
+            [mockFilterConfig.paramName + maxSuffix]: comp.toDate
+          },
+          queryParamsHandling: 'merge'
+        });
       });
-    });
+    }
+  });
+
+  describe('when the onSubmit method is called with data', () => {
+    if (!environment.layout.navbar.search.filters.datepicker.includes(filterName2)) {
+      // const data = { [mockFilterConfig.paramName + minSuffix]: '1900', [mockFilterConfig.paramName + maxSuffix]: '1950' };
+      beforeEach(async () => {
+        comp.range = [1900, 1950];
+        (comp as any).search(1900, 1950);
+        await comp.onSubmit();
+      });
+
+      it('should call navigate on the router with the right searchlink and parameters', () => {
+        expect(router.navigate).toHaveBeenCalledWith(searchUrl.split('/'), {
+          queryParams: {
+            [mockFilterConfig.paramName + minSuffix]: [1900],
+            [mockFilterConfig.paramName + maxSuffix]: [1950]
+          },
+          queryParamsHandling: 'merge'
+        });
+      });
+    }
   });
 });
