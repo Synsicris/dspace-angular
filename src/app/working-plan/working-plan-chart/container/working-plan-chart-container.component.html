@@ -91,7 +91,7 @@
             </button>
           </div>
           <div class="mat-form-field auto-width mt-1{{node.level === 0?' pl-2':''}}">
-            <p class="block-ellipsis">{{node.name}}</p>
+            <p class="block-ellipsis" (click)="openItemModal(node); $event.stopImmediatePropagation();">{{node.name}}</p>
             <br>
             <span class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
             <br>

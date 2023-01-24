@@ -16,6 +16,11 @@
   text-overflow: ellipsis;
 }
 
+.block-ellipsis:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .block-change-start-date {
   width: 300px;
   line-height: 1.15;
