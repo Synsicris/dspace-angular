@@ -2,6 +2,15 @@
   <fieldset class="d-flex justify-content-start">
     <legend [id]="'legend_' + model.id" [ngClass]="[getClass('element', 'label'), getClass('grid', 'label')]">
       {{model.placeholder}} <span *ngIf="model.required">*</span>
+      <i *ngIf="hasHint" class="far fa-question-circle text-info hint"
+         [ngbTooltip]="(model.hint | translate)"
+         [autoClose]="false"
+         tooltipClass="hint-tooltip"
+         triggers="manual"
+         #hintTooltip="ngbTooltip"
+         [placement]="['top-left', 'right', 'bottom']"
+         container="body"
+         (click)="hintTooltip.toggle();$event.preventDefault();"></i>
     </legend>
     <ds-number-picker
       tabindex="1"

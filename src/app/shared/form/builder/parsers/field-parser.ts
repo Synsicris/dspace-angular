@@ -66,6 +66,7 @@ export abstract class FieldParser {
       const config = {
         id: uniqueId() + '_array',
         label: this.configData.label,
+        hint: this.configData.hints,
         initialCount: this.getInitArrayIndex(),
         notRepeatable: !this.configData.repeatable,
         relationshipConfig: this.configData.selectableRelationship,
