@@ -103,7 +103,6 @@ export class WorkingPlanPageComponent implements OnInit {
         this.projectItemId = projectItemId;
         this.projectCommunityId = projectCommunityId;
         this.workingPlanRD = workingPlanRD;
-        console.log('isFunder',isFunder);
         this.isFunder = isFunder;
         this.initialized.next(true);
       });

@@ -14,17 +14,22 @@
   </div>
   <div class="task-right-bar">
     <div class="task-detail p-1">
-      <div class="task-header">
+      <div class="task-header pr-1 d-flex justify-content-between">
         <div class="task-title title-clamp font-weight-bold text-info" (click)="openItemModal()">
           <p title="{{data.title}}">{{data.title}}</p>
         </div>
+        <span *ngIf="editItemStatusValue" class="status-icon">
+          <i dsItemMetadataStatus [status]="editItemStatusValue"></i>
+        </span>
       </div>
 
-      <div class="task-content p-1" [class.task-overlay-hide]="(canShowRelationCheckBox() | async)">
+      <div class="task-content p-1 d-flex justify-content-between" [class.task-overlay-hide]="(canShowRelationCheckBox() | async)">
         <div class="task-type type-clamp">
           <p title="{{taskType$ | async}}">{{taskType$ | async}}</p>
         </div>
-
+        <span class="status-icon" *ngIf="editItemInternalValue">
+          <i dsItemMetadataInternal [status]="editItemInternalValue"></i>
+        </span>
       </div>
 
     </div>

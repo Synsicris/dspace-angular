@@ -245,6 +245,9 @@ import { CompareItemComponent } from './compare-item/compare-item.component';
 import { GrantBadgeComponent } from './object-list/grant-badge/grant-badge.component';
 import { ItemVersionsVisibilityModalComponent } from './item/item-versions/item-versions-visibility-modal/item-versions-visibility-modal.component';
 import { ViewVersionBadgesComponent } from './view-version-badges/view-version-badges.component';
+import { GetItemMetadataValuePipe } from './ipw-helpers/get-item-metadata-value.pipe';
+import { IpwItemMetadataStatusDirective } from './ipw-helpers/ipw-item-metadata-status.directive';
+import { IpwItemMetadataInternalDirective } from './ipw-helpers/ipw-item-metadata-internal.directive';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -292,7 +295,8 @@ const PIPES = [
   ObjectKeysPipe,
   ObjectValuesPipe,
   ConsolePipe,
-  ObjNgFor
+  ObjNgFor,
+  GetItemMetadataValuePipe,
 ];
 
 const COMPONENTS = [
@@ -598,7 +602,9 @@ const DIRECTIVES = [
   NgForTrackByIdDirective,
   MetadataFieldValidator,
   HoverClassDirective,
-  TaskColorDirective
+  TaskColorDirective,
+  IpwItemMetadataStatusDirective,
+  IpwItemMetadataInternalDirective
 ];
 
 @NgModule({

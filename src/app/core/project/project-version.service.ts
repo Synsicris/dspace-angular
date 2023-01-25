@@ -30,7 +30,9 @@ export enum ComparedVersionItemStatus {
   Changed = 'changed',
   New = 'new',
   Removed = 'removed',
-  Equal = 'equal'
+  Equal = 'equal',
+  Canceled = 'canceled',
+  Done = 'done'
 }
 
 export interface ComparedVersionItem {

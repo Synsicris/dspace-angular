@@ -1,3 +1,4 @@
+import { EditItem } from './../../../../core/submission/models/edititem.model';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -64,6 +65,9 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   private canEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private projectsEntityEditMode: string;
 
+  public editItemStatusValue: string;
+  public editItemInternalValue: string;
+
   @Output() public selected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
   @Output() public deselected: EventEmitter<ImpactPathwayTask> = new EventEmitter();
 
@@ -120,6 +124,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
         }
       })
     );
+    this.getMetadataValues();
   }
 
   public buildHTMLDivId() {
@@ -258,5 +263,18 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(CompareItemComponent, { size: 'xl' });
     (modalRef.componentInstance as CompareItemComponent).baseItemId = this.data.id;
     (modalRef.componentInstance as CompareItemComponent).versionedItemId = this.data.compareId;
+  }
+
+  /**
+   * Retrieve metadata values for status & internal
+   */
+  getMetadataValues() {
+    this.editItemDataService.searchEditMetadataByID(this.data.id).pipe(
+      filter((item: EditItem) => hasValue(item.metadata)),
+      take(1)
+    ).subscribe((item: EditItem ) => {
+      this.editItemStatusValue = item.firstMetadataValue('synsicris.type.status');
+      this.editItemInternalValue = item.firstMetadataValue('synsicris.type.internal');
+    });
   }
 }

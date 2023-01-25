@@ -137,7 +137,6 @@ export class ItemVersionListComponent implements OnInit {
     return version.item.pipe(
       getFirstCompletedRemoteData(),
       map((itemRD: RemoteData<Item>) => {
-        console.log(itemRD);
         if (itemRD.hasSucceeded) {
           return this.projectVersionService.isActiveWorkingInstance(itemRD.payload) || this.projectVersionService.isVersionVisible(itemRD.payload);
         } else {

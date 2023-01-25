@@ -15,10 +15,16 @@ import { followLink } from '../../shared/utils/follow-link-config.model';
 import { Observable } from 'rxjs';
 import { EditItemMode } from './models/edititem-mode.model';
 import { getFirstCompletedRemoteData } from '../shared/operators';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, concatMap } from 'rxjs/operators';
 import { RemoteData } from '../data/remote-data';
 import { PaginatedList } from '../data/paginated-list.model';
 import { of } from 'rxjs/internal/observable/of';
+
+export enum InternalItemStatus {
+  Edit = 'edit',
+  Exchange = 'exchange',
+  Done = 'done'
+}
 
 /**
  * A service that provides methods to make REST requests with edititems endpoint.
@@ -54,6 +60,28 @@ export class EditItemDataService extends DataService<EditItem> {
           return editItemRD.payload.modes.pipe(
             getFirstCompletedRemoteData(),
             map((editItemModesRD: RemoteData<PaginatedList<EditItemMode>>) => editItemModesRD.hasSucceeded ? editItemModesRD.payload.page : [])
+          );
+        } else {
+          return of([]);
+        }
+      })
+    );
+  }
+
+  /**
+   * Retrieve item's metadata values for the given item id
+   *
+   * @param itemId
+   */
+  searchEditMetadataByID(itemId: string) {
+    return this.findById(`${itemId}:none`, false, true, followLink('item')).pipe(
+      getFirstCompletedRemoteData(),
+      concatMap((editItemRD: RemoteData<EditItem>) => {
+        if (editItemRD.hasSucceeded) {
+          return editItemRD.payload?.item.pipe(
+            getFirstCompletedRemoteData(),
+            map((editItemModesRD: RemoteData<EditItemMode>) => {
+              return editItemModesRD.hasSucceeded ? editItemModesRD.payload : []})
           );
         } else {
           return of([]);
