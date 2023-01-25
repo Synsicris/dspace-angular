@@ -3383,7 +3383,7 @@
 
   // "explore.index.types": "Types",
   // TODO New key - Add a translation
-  "explore.index.types": "Types",
+  "explore.index.types": "Art",
 
   // "explore.index.language": "Language",
   // TODO New key - Add a translation
@@ -5772,7 +5772,7 @@
 
   // "menu.section.browse_by_projects": "Browse by projects",
   // TODO New key - Add a translation
-  "menu.section.browse_by_projects": "Suche nach Verbünden",
+  "menu.section.browse_by_projects": "Suche in allen Einträgen",
 
   // "menu.section.explore_infrastructure": "Infrastructure",
   // TODO New key - Add a translation
@@ -11340,7 +11340,7 @@
 
   // "submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <b>upload additional files just dragging & dropping them everywhere in the page.</b>",
   // TODO Source message changed - Revise the translation
-  "submission.sections.upload.info": "Hier laden Sie alle Dokumente hoch, die zu diesem Eintrag gehören.<b><i>Über <i class=\"fas fa-edit\"></i> können Sie Datei-Angaben anpassen. Ergänzen Sie bitte wichtige Angaben zu den Zugriffsrechten und zum Dateityp.</br></br></b></i><b>Wichtige Hinweise:</b><ul><li>Über den Dateityp wählen Sie aus, ob die Datei als Bild (Logo, Bilddatei) oder als Anhang dargestellt wird.</li><ul>",
+  "submission.sections.upload.info": "<b>Hier laden Sie alle Dokumente hoch, die zu diesem Eintrag gehören. <i>Über <i class=\"fas fa-edit\"></i> können Sie Datei-Angaben anpassen. Ergänzen Sie bitte wichtige Angaben zu den Zugriffsrechten und zum Dateityp.</br></br></b></i><b>Wichtige Hinweise:</b><ul><li>Über den Dateityp wählen Sie aus, ob die Datei als Bild (Logo, Bilddatei) oder als Anhang dargestellt wird.</li><ul>",
 
   // "submission.sections.upload.no-entry": "No",
   "submission.sections.upload.no-entry": "Kein Eintrag",
@@ -13431,9 +13431,6 @@
   // "layout.field.label.ethic.dc.title": "Key message",
   "layout.field.label.ethic.dc.title": "Bezeichnung",
 
-  // "layout.field.label.ethic.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.ethic.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
-
   // "layout.field.label.gender.dc.title": "Key message",
   "layout.field.label.gender.dc.title": "Kernaussage",
 
@@ -13466,9 +13463,6 @@
 
   // "layout.field.label.gender.synsicris.description.project": "Explanation",
   "layout.field.label.gender.synsicris.description.project": "Erläuterung",
-
-  // "layout.field.label.gender.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.gender.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
 
   // "layout.field.label.condition.dc.title": "Title",
   "layout.field.label.condition.dc.title": "Bezeichnung",
@@ -13527,9 +13521,6 @@
   // "layout.field.label.task.dc.description": "Description",
   "layout.field.label.task.dc.description": "Beschreibung",
 
-  // "layout.field.label.task.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.task.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
-
   // "layout.field.label.process_event.dc.title": "Title",
   "layout.field.label.process_event.dc.title": "Bezeichnung",
 
@@ -13544,9 +13535,6 @@
 
   // "layout.field.label.process_event.dc.description": "Description",
   "layout.field.label.process_event.dc.description": "Beschreibung",
-
-  // "layout.field.label.process_event.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.process_event.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
 
   // "layout.field.label.process_event.synsicris.type.process-event-frequency": "Type",
   // TODO Source message changed - Revise the translation
@@ -13663,9 +13651,6 @@
   // TODO Source message changed - Revise the translation
   "layout.field.label.Publication.dc.relation.product": "Forschungsdaten",
 
-  // "layout.field.label.Publication.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.Publication.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
-
   // "layout.field.label.Publication": "Files",
   "layout.field.label.Publication": "Dateien",
 
@@ -13690,9 +13675,6 @@
   // "layout.field.label.physical_object.oairecerif.identifier.url": "Website",
   "layout.field.label.physical_object.oairecerif.identifier.url": "Link zu einer Webseite",
 
-  // "layout.field.label.physical_object.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.physical_object.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
-
   // "layout.field.label.Product.dc.title": "Title",
   "layout.field.label.Product.dc.title": "Titel",
 
@@ -13716,9 +13698,6 @@
 
   // "layout.field.label.Product.dc.language.iso": "Language",
   "layout.field.label.Product.dc.language.iso": "Sprache",
-
-  // "layout.field.label.Product.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.Product.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
 
   // "layout.field.label.Product.dc.subject": "Key words",
   "layout.field.label.Product.dc.subject": "Schlagworte",
@@ -13789,9 +13768,6 @@
   // "layout.field.label.Patent.oairecerif.identifier.url": "Direct link to document",
   "layout.field.label.Patent.oairecerif.identifier.url": "Direktlink zum Dokument",
 
-  // "layout.field.label.Patent.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.Patent.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
-
   // "layout.field.label.innovationpotential.dc.title": "Title",
   "layout.field.label.innovationpotential.dc.title": "Bezeichnung",
 
@@ -13826,9 +13802,6 @@
   // "layout.field.label.innovationpotential.synsicris.description.rl-end": "Development status at the end of the project (target value)",
   "layout.field.label.innovationpotential.synsicris.description.rl-end": "Entwicklungsstand zum Projektende (Zielwert)",
 
-  // "layout.field.label.innovationpotential.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.innovationpotential.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
-
   // "layout.field.label.innovationidea.dc.title": "Title",
   "layout.field.label.innovationidea.dc.title": "Bezeichnung",
 
@@ -13837,9 +13810,6 @@
 
   // "layout.field.label.innovationidea.dc.type": "Type of idea",
   "layout.field.label.innovationidea.dc.type": "Art der Idee",
-
-  // "layout.field.label.innovationidea.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.innovationidea.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
 
   // "layout.field.label.step.dc.title": "Title",
   "layout.field.label.step.dc.title": "Bezeichnung",
@@ -13859,9 +13829,6 @@
   // "layout.field.label.step.synsicris.date": "Time horizon for realisation",
   "layout.field.label.step.synsicris.date": "Zeithorizont für die Realisierung",
 
-  // "layout.field.label.step.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.step.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
-
   // "layout.field.label.application.dc.type": "Type of application",
   "layout.field.label.application.dc.type": "Art der Anwendung",
 
@@ -13870,9 +13837,6 @@
 
   // "layout.field.label.application.synsicris.date.referenceyear": "Reference year",
   "layout.field.label.application.synsicris.date.referenceyear": "Referenzjahr",
-
-  // "layout.field.label.application.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.application.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
 
   // "layout.field.label.application": "Files",
   "layout.field.label.application": "Dateien",
@@ -14175,7 +14139,7 @@
 
   // "query-builder.synsicris.placeholder.select-value": "Select Value",
   // TODO New key - Add a translation
-  "query-builder.synsicris.placeholder.select-value": "Wert auswählen",
+  "query-builder.synsicris.placeholder.select-value": "Kategorie auswählen",
 
   // "query-builder.synsicris.placeholder.select-filter": "Select Filter",
   // TODO New key - Add a translation
@@ -14518,7 +14482,7 @@
   "layout.box.help-text.Person_details_h": "Über <i class=\"fas fa-user-circle\"></i> können Sie Ihr Personenprofil bearbeiten und die Sichtbarkeit festlegen. Außerdem können Sie dort Ihre Anmeldedaten anpassen.",
 
   // "layout.box.help-text.default_h_1": "missing",
-  "layout.box.help-text.default_h_1": "<b>Bedienung - Erste Schritte zur Antragstellung - Weiteres Vorgehen im Verlauf des Vorhabens</b></br>Alles, was Sie zur der Dateneingabe wissen sollten, finden Sie hier.</br></br>Es gibt eine <b>Hilfe mit Abbildungen</b>. Sie öffnet sich in einem neuen Tab und lässt sich am leichtesten nutzen, wenn Sie sie in ein zweites Browserfenster ziehen und neben das Fenster mit dem Monitoring-Tool legen.<ul><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use.php\"target=_blank\">Bedienungshinweise kurz und knapp</a></li></ul><b>Erste Schritte:</b><ul><li> Als <b>Koordinator:</b><b>in des Verbundes</b> laden Sie über <b>Aktion: <i class=\"fas fa-toolbox\"></i> Koordinator:innen verwalten</b> die Koordinator:innen der beteiligten (Teil-)Projekte/Zuwendungsempfänger ein. Alle weiteren Personen werden von diesen Koordinator:innen im Arbeitsbereich der jeweiligen (Teil-)Projekte/Zuwendungsempfänger eingeladen. </li><li>Arbeiten Sie anschließend entlang der Reihenfolge in der Navigationsleiste. </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.php\"target=_blank\">Schritt-für-Schritt-Anleitung für die Antragstellung</a> </li></ul><b>Weitere Hilfen:</b><ul><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-proj.php\"target=_blank\">Verbund und beteiligte Projekte unterscheiden</a> </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.php\"target=_blank\"> Aktualisierung im laufenden Vorhaben</a> </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-completion.php\"target=_blank\">Abschluß des Vorhabens</a> </li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-update.php\"target=_blank\">Aktualisierung nach Abschluß des Vorhabens</a> </li></ul>",
+  "layout.box.help-text.default_h_1": "<b>Bedienung - Erste Schritte zur Antragstellung - Weiteres Vorgehen im Verlauf des Vorhabens</b></br>Alles, was Sie zur der Dateneingabe wissen sollten, finden Sie hier.</br></br>Es gibt eine <b>Hilfe mit Abbildungen</b>. Sie öffnet sich in einem neuen Tab und lässt sich am leichtesten nutzen, wenn Sie sie in ein zweites Browserfenster ziehen und neben das Fenster mit dem Monitoring-Tool legen.<ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about.php“=_blank\"> Das Monitoring-Tool </a></li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use.php\"target=_blank\">Bedienungshinweise kurz und knapp</a></li></ul><b>Erste Schritte:</b><ul><li> Als <b>Koordinator:</b><b>in des Verbundes</b> laden Sie über <b>Aktion: <i class=\"fas fa-toolbox\"></i> Koordinator:innen verwalten</b> die Koordinator:innen der beteiligten (Teil-)Projekte/Zuwendungsempfänger ein. Alle weiteren Personen werden von diesen Koordinator:innen im Arbeitsbereich der jeweiligen (Teil-)Projekte/Zuwendungsempfänger eingeladen. </li><li>Arbeiten Sie anschließend entlang der Reihenfolge in der Navigationsleiste. </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.php\"target=_blank\">Schritt-für-Schritt-Anleitung für die Antragstellung</a> </li></ul><b>Weitere Hilfen:</b><ul><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-proj.php\"target=_blank\">Verbund und beteiligte Projekte unterscheiden</a> </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.php\"target=_blank\"> Aktualisierung im laufenden Vorhaben</a> </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-completion.php\"target=_blank\">Abschluß des Vorhabens</a> </li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-update.php\"target=_blank\">Aktualisierung nach Abschluß des Vorhabens</a> </li></ul>",
 
   // "layout.box.help-text.projectpartner_h": "missing",
   "layout.box.help-text.projectpartner_h": "<b>Projektpartner</b>  sind die Organisationseinheit(en), die als Antragssteller in den jeweiligen <b> Projekten</b> mitwirken.</br></br><b>Diese Liste dient nur der Übersicht. Legen Sie die Projektpartner ausschließlich in den jeweiligen Projekten an. </br>Zum Bearbeiten wählen Sie Ihre Organisationseinheit aus.</b>",
@@ -14617,13 +14581,13 @@
   "layout.box.help-text.contribution_fundingprogramme_h": "<b>Beiträge zu Förderzielen</b> verdeutlichen den Bezug zwischen den Zielen des Verbundes und den Förderzielen.</br><b>Diese Liste dient der Übersicht und zum Bearbeiten von Einträgen.</b></br></br><b>Wichtige Hinweise:</b><ul><li>Da die Einträge im Wirkungsfpad strukturiert werden, ist es empfehlenswert, neue Einträge direkt dort anzulegen.</li><li>Legen Sie über <i class=\"fas fa-plus-circle\"></i> hier nur dann neue Einträge an, wenn Sie sie erst später zum Wirkungspfad hinzufügen möchten.</ul></li>",
 
   // "layout.box.help-text.programme_h": "missing",
-  "layout.box.help-text.programme_h": "Dies ist ein Test",
+  "layout.box.help-text.programme_h": "Die Ihnen zugewiesenen Programme können Sie über <b>Bearbeiten</b> direkt vervollständigen. Nach Anklicken des Titels können Sie über <b>Aktion: PT-Mitarbeitende verwalten</b> und ihnen unterschiedliche Rollen zuweisen. <p><b>Wichtige Hinweise:</b><ul><li>Förderprogramme können nur vom Administrator angelegt und einer Person die Rolle des PT-Programmanager:in zugewiesen werden.</li><li>Wenden Sie sich an den Administrator, wenn ein neues Förderprogramm für Ihren Programmbereich erstellt werden soll oder wenn Sie für ein gelistetes Programm als Programmanager:in zuständig sind.</li></ul>",
 
   // "layout.box.help-text.call_h": "missing",
-  "layout.box.help-text.call_h": "Dies ist ein Test",
+  "layout.box.help-text.call_h": "Die Ihrem Programmbereich zugeordneten Bekanntmachungen können Sie über <b>Bearbeiten</b> direkt vervollständigen. <p><b>Wichtige Hinweise:</b><ul><li>Bekanntmachungen können nur vom Administrator angelegt und einem Programmbereich zugeordnet werden.</li><li>Wenden Sie sich an den Administrator, wenn eine neue Bekanntmachung für Ihren Programmbereich erschienen ist oder wenn Sie für eine gelistete Bekanntmachung als Programmanager:in zuständig sind.</li></ul>",
 
   // "layout.box.help-text.fundingobjective_h": "missing",
-  "layout.box.help-text.fundingobjective_h": "Dies ist ein Test",
+  "layout.box.help-text.fundingobjective_h": "Legen Sie über <b><i class=\"fas fa-plus-circle\"></i> Eintrag hinzufügen</b> ein Förderziel an und vervollständigen anschließend die Angaben über <b>Bearbeiten</b>.<p><b>Wichtige Hinweise:</b><ul><li>Das Förderziel ist einer Bekanntmachung zuzuordnen, die Zuordnung zu einem Programm erfolgt später (bei er Aktualisierung über profi?).</li><li>Die korrekte Zuordnung der Förderziele zu einer Bekanntmachung ist erforderlich, weil Antragstellende direkt darauf zugreifen müssen.</li></ul>",
 
   // "layout.box.help-text.OrgUnit_h": "missing",
   "layout.box.help-text.OrgUnit_h": "Dies ist ein Test",
@@ -15646,19 +15610,19 @@
   "project.manage.members.project.readers-group-help": "<b>Laden Sie hier Personen ein, die für den Verbund eine Lese-Rolle erhalten sollen.</b></br>Hiermit kann die eingeladene Person alle Informationen zum Verbund exportieren und lesen. Wenn Sie der Person eine andere Rolle zuweisen möchten, wechseln Sie in den Reiter <b>Koordinator:innen im Verbund</b>.<ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen gelistet, die die Lese-Rolle im Verbund haben. Die Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Verbund geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
 
   // "programme.manage.members.project.funders-group": "Invitation and management of programme project funders",
-  "programme.manage.members.project.funders-group": "Einladung und Verwaltung PT-Verbundbeteuer:innen",
+  "programme.manage.members.project.funders-group": "PT-Verbundbeteuer:innen",
 
   // "programme.manage.members.funders-group-help": "Help PT-Programme project funders",
   "programme.manage.members.funders-group-help": "<b>Laden Sie hier Personen ein, die für das Programm die Rolle der Verbundbetreuenden erhalten sollen.</b><ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen gelistet, die im Programm Verbünde anlegen und verwalten können. Die Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Programm geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
 
   // "programme.manage.members.project.managers-group": "Invitation and management of programme managers",
-  "programme.manage.members.project.managers-group": "Einladung und Verwaltung PT-Programmmanager:innen",
+  "programme.manage.members.project.managers-group": "PT-Programmmanager:innen",
 
   // "programme.manage.members.managers-group-help": "Help PT-Programme manager",
   "programme.manage.members.managers-group-help": "<b>Laden Sie hier Personen ein, die für das Programm die Rolle des PT-Programmanager:in erhalten sollen.</b><ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen gelistet, die die Rolle PT-Programmmanager:in haben. Die Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Programm geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
 
   // "programme.manage.members.project.members-group": "Invitation and management of programme members",
-  "programme.manage.members.project.members-group": "Einladung und Verwaltung PT-Mitarbeitende mit Lese-Rechten",
+  "programme.manage.members.project.members-group": "PT-Mitarbeitende mit Lese-Rechten",
 
   // "programme.manage.members.members-group-help": "Help PT-Read",
   "programme.manage.members.members-group-help": "<b>Laden Sie hier Personen ein, die für alle Verbünde des Programms eine Lese-Rolle erhalten sollen.</b><ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen gelistet, die die Lese-Rolle im Programm haben. Die Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Programm geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\"target=_blank\">Rollen und Rechte verwalten</a></li></ul>",
@@ -16237,6 +16201,174 @@
   "explore.index.synsicrisAddressAddresspostcode": "Postleitzahl",
 
   // "explore.index.synsicrisAddressAddresscity": "City",
-  "explore.index.synsicrisAddressAddresscity": "Ort"
+  "explore.index.synsicrisAddressAddresscity": "Ort",
+
+  // "layout.box.header.ethic_status": "missing",
+  "layout.box.header.ethic_status": "Veränderung seit der Antragstellung",
+
+  // "layout.box.header.ethic_internalacc": "missing",
+  "layout.box.header.ethic_internalacc": "Interne Informationen (nur für Mitglieder des Verbundes)",
+
+  // "layout.field.label.ethic.synsicris.type.internal": "missing",
+  "layout.field.label.ethic.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.ethic.synsicris.description.internal": "missing",
+  "layout.field.label.ethic.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.ethic.status": "Status",
+  "layout.field.label.ethic.status": "Status",
+
+  // "layout.box.header.gender_status": "missing",
+  "layout.box.header.gender_status": "Veränderung seit der Antragstellung",
+
+  // "layout.box.header.gender_internalacc": "missing",
+  "layout.box.header.gender_internalacc": "Interne Informationen (nur für Mitglieder des Verbundes)",
+
+  // "layout.field.label.gender.synsicris.type.internal": "missing",
+  "layout.field.label.gender.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.gender.synsicris.description.internal": "missing",
+  "layout.field.label.gender.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.gender.status": "missing",
+  "layout.field.label.gender.status": "Status",
+
+  // "layout.box.header.condition_status": "missing",
+  "layout.box.header.condition_status": "Veränderung seit der Antragstellung",
+
+  // "layout.box.header.condition_internalacc": "missing",
+  "layout.box.header.condition_internalacc": "Interne Informationen (nur für Mitglieder des Verbundes)",
+
+  // "layout.field.label.condition.synsicris.type.internal": "missing",
+  "layout.field.label.condition.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.condition.synsicris.description.internal": "missing",
+  "layout.field.label.condition.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.condition.status": "missing",
+  "layout.field.label.condition.status": "Status",
+
+  // "layout.field.label.Event.status": "Status",
+  "layout.field.label.Event.status": "Status",
+
+  // "layout.box.header.physical_object_status": "Change since proposal submission ",
+  "layout.box.header.physical_object_status": "Veränderung seit der Antragstellung",
+
+  // "layout.box.header.physical_object_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.physical_object_internalacc": "Interne Informationen (nur für Mitglieder des Verbundes)",
+
+  // "layout.field.label.physical_object.synsicris.type.internal": "Task",
+  "layout.field.label.physical_object.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.physical_object.synsicris.description.internal": "Notes",
+  "layout.field.label.physical_object.synsicris.description.internal": "Notizen",
+
+  // "layout.field.label.physical_object.status": "Status",
+  "layout.field.label.physical_object.status": "Status",
+
+  // "layout.box.header.Patent_status": "Change since proposal submission ",
+  "layout.box.header.Patent_status": "Veränderung seit der Antragstellung",
+
+  // "layout.box.header.Patent_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.Patent_internalacc": "Interne Informationen (nur für Mitglieder des Verbundes)",
+
+  // "layout.field.label.Patent.synsicris.type.internal": "Task",
+  "layout.field.label.Patent.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.Patent.synsicris.description.internal": "Notes",
+  "layout.field.label.Patent.synsicris.description.internal": "Notizen",
+
+  // "layout.field.label.Patent.status": "Status",
+  "layout.field.label.Patent.status": "Status",
+
+  // "layout.box.header.innovationpotential_status": "Change since proposal submission ",
+  "layout.box.header.innovationpotential_status": "Veränderung seit der Antragstellung",
+
+  // "layout.box.header.innovationpotential_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.innovationpotential_internalacc": "Interne Informationen (nur für Mitglieder des Verbundes)",
+
+  // "layout.field.label.innovationpotential.synsicris.type.internal": "Task",
+  "layout.field.label.innovationpotential.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.innovationpotential.synsicris.description.internal": "Notes",
+  "layout.field.label.innovationpotential.synsicris.description.internal": "Notizen",
+
+  // "layout.field.label.innovationpotential.status": "Status",
+  "layout.field.label.innovationpotential.status": "Status",
+
+  // "layout.box.header.innovationidea_status": "Change since proposal submission ",
+  "layout.box.header.innovationidea_status": "Veränderung seit der Antragstellung",
+
+  // "layout.box.header.innovationidea_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.innovationidea_internalacc": "Interne Informationen (nur für Mitglieder des Verbundes)",
+
+  // "layout.field.label.innovationidea.synsicris.type.internal": "Task",
+  "layout.field.label.innovationidea.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.innovationidea.synsicris.description.internal": "Notes",
+  "layout.field.label.innovationidea.synsicris.description.internal": "Notizen",
+
+  // "layout.field.label.innovationidea.status": "Status",
+  "layout.field.label.innovationidea.status": "Status",
+
+  // "layout.box.header.step_status": "Change since proposal submission ",
+  "layout.box.header.step_status": "Veränderung seit der Antragstellung",
+
+  // "layout.box.header.step_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.step_internalacc": "Interne Informationen (nur für Mitglieder des Verbundes)",
+
+  // "layout.field.label.step.synsicris.type.internal": "Task",
+  "layout.field.label.step.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.step.synsicris.description.internal": "Notes",
+  "layout.field.label.step.synsicris.description.internal": "Notizen",
+
+  // "layout.field.label.step.status": "Status",
+  "layout.field.label.step.status": "Status",
+
+  // "layout.box.header.spinoff_status": "Change since proposal submission ",
+  "layout.box.header.spinoff_status": "Veränderung seit der Antragstellung",
+
+  // "layout.box.header.spinoff_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.spinoff_internalacc": "Interne Informationen (nur für Mitglieder des Verbundes)",
+
+  // "layout.field.label.spinoff.synsicris.type.internal": "Task",
+  "layout.field.label.spinoff.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.spinoff.synsicris.description.internal": "Notes",
+  "layout.field.label.spinoff.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.spinoff.status": "Status",
+  "layout.field.label.spinoff.status": "Status",
+
+  // "layout.box.header.exp_societalimpact_status": "Change since proposal submission ",
+  "layout.box.header.exp_societalimpact_status": "Veränderung seit der Antragstellung",
+
+  // "layout.box.header.exp_societalimpact_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.exp_societalimpact_internalacc": "Interne Informationen (nur für Mitglieder des Verbundes)",
+
+  // "layout.field.label.exp_societalimpact.synsicris.type.internal": "Task",
+  "layout.field.label.exp_societalimpact.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.exp_societalimpact.synsicris.description.internal": "Notes",
+  "layout.field.label.exp_societalimpact.synsicris.description.internal": "Notizen",
+
+  // "layout.field.label.exp_societalimpact.status": "Status",
+  "layout.field.label.exp_societalimpact.status": "Status",
+
+  // "layout.box.header.neg_sideeffect_status": "Change since proposal submission ",
+  "layout.box.header.neg_sideeffect_status": "Veränderung seit der Antragstellung",
+
+  // "layout.box.header.neg_sideeffect_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.neg_sideeffect_internalacc": "Interne Informationen (nur für Mitglieder des Verbundes)",
+
+  // "layout.field.label.neg_sideeffect.synsicris.type.internal": "Task",
+  "layout.field.label.neg_sideeffect.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.neg_sideeffect.synsicris.description.internal": "Notes",
+  "layout.field.label.neg_sideeffect.synsicris.description.internal": "Notizen",
+
+  // "layout.field.label.neg_sideeffect.status": "Status",
+  "layout.field.label.neg_sideeffect.status": "Status"
 
 }
