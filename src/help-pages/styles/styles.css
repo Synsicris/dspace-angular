@@ -1,55 +1,55 @@
 
-/* ************************************************************************  
-Webfonts 
-************************************************************************ */  
+/* ************************************************************************
+Webfonts
+************************************************************************ */
 
 /* Nunito */
 @font-face {
 	font-family: 'Nunito-ExtraLight';
-	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');	
-	src: url("../styles/fonts/nunito/Nunito-ExtraLight.ttf") format('truetype');				
+	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');
+	src: url("../styles/fonts/nunito/Nunito-ExtraLight.ttf") format('truetype');
 	font-weight: 200;
 	font-style: normal;
 	}
 @font-face {
 	font-family: 'Nunito-Light';
-	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');	
-	src: url("../styles/fonts/nunito/Nunito-Light.ttf") format('truetype');				
+	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');
+	src: url("../styles/fonts/nunito/Nunito-Light.ttf") format('truetype');
 	font-weight: 300;
 	font-style: normal;
 	}
 @font-face {
 	font-family: 'Nunito-Regular';
-	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');	
-	src: url("../styles/fonts/nunito/Nunito-Regular.ttf") format('truetype');				
+	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');
+	src: url("../styles/fonts/nunito/Nunito-Regular.ttf") format('truetype');
 	font-weight: 400;
 	font-style: normal;
 	}
 @font-face {
 	font-family: 'Nunito-Medium';
-	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');	
-	src: url("../styles/fonts/nunito/Nunito-Medium.ttf") format('truetype');				
+	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');
+	src: url("../styles/fonts/nunito/Nunito-Medium.ttf") format('truetype');
 	font-weight: 500;
 	font-style: normal;
 	}
 @font-face {
 	font-family: 'Nunito-SemiBold';
-	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');	
-	src: url("../styles/fonts/nunito/Nunito-SemiBold.ttf") format('truetype');				
+	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');
+	src: url("../styles/fonts/nunito/Nunito-SemiBold.ttf") format('truetype');
 	font-weight: 600;
 	font-style: normal;
 	}
 @font-face {
 	font-family: 'Nunito-Bold';
-	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');	
-	src: url("../styles/fonts/nunito/Nunito-Bold.ttf") format('truetype');				
+	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');
+	src: url("../styles/fonts/nunito/Nunito-Bold.ttf") format('truetype');
 	font-weight: 700;
 	font-style: normal;
 	}
 @font-face {
 	font-family: 'Nunito-Black';
-	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');	
-	src: url("../styles/fonts/nunito/Nunito-Black.ttf") format('truetype');				
+	src: url("../styles/fonts/nunito/Nunito-VariableFont_wght.ttf") format('truetype');
+	src: url("../styles/fonts/nunito/Nunito-Black.ttf") format('truetype');
 	font-weight: 900;
 	font-style: normal;
 	}
@@ -57,13 +57,13 @@ Webfonts
 /* Nunito Italic */
 @font-face {
 	font-family: 'Nunito-Italic';
-	src: url("../styles/fonts/nunito/Nunito-Italic.ttf") format('truetype');				
+	src: url("../styles/fonts/nunito/Nunito-Italic.ttf") format('truetype');
 	font-weight: 400;
 	font-style: normal;
 	}
 @font-face {
 	font-family: 'Nunito-MediumItalic';
-	src: url("../styles/fonts/nunito/Nunito-MediumItalic.ttf") format('truetype');				
+	src: url("../styles/fonts/nunito/Nunito-MediumItalic.ttf") format('truetype');
 	font-weight: 500;
 	font-style: normal;
 	}
@@ -76,23 +76,23 @@ Webfonts
  @font-face {
 	font-family: 'FontAwesome';
 	src: url('../styles/fonts/fontawesome/fontawesome-webfont.eot?v=4.3.0');
-	src: url('../styles/fonts/fontawesome/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'), 
-	url('../styles/fonts/fontawesome/fontawesome-webfont.woff2?v=4.3.0') format('woff2'), 
-	url('../styles/fonts/fontawesome/fontawesome-webfont.woff?v=4.3.0') format('woff'), 
-	url('../styles/styles/fonts/fontawesome/fontawesome-webfont.ttf?v=4.3.0') format('truetype'), 
+	src: url('../styles/fonts/fontawesome/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'),
+	url('../styles/fonts/fontawesome/fontawesome-webfont.woff2?v=4.3.0') format('woff2'),
+	url('../styles/fonts/fontawesome/fontawesome-webfont.woff?v=4.3.0') format('woff'),
+	url('../styles/styles/fonts/fontawesome/fontawesome-webfont.ttf?v=4.3.0') format('truetype'),
 	url('../styles/fonts/fontawesome/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
 	font-weight: normal;
 	font-style: normal
 }
 
 :root {
-	
-/* ************************************************************************  
+
+/* ************************************************************************
 Variablen : Grund-Farbpalette
 HSL-Werte, die dann zu hsl- oder, mit Alphakanal, hsla-Werten zusammengesetzt werden koennen
 Die Namen beziehen sich auf den Lightness-Wert von HSL. Z. B. ist das hellste Grau gray-100 mit dem Helligkeiteswert 100%
 Da man beim Zusammenstellen von Farbpaletten immer dach Grundfarben und Helligkeitsabstufungen sortiert, muss man sich keine Gedanken um die Einsortierung machen.
-************************************************************************ */  
+************************************************************************ */
 
 	/* GRAU */
 	--s-gray-100: 	0,0%,100%; 		/* #FFFFFF / hsl(0,0%,100%) 	/ rgb(255,255,255) / weiss */
@@ -100,71 +100,71 @@ Da man beim Zusammenstellen von Farbpaletten immer dach Grundfarben und Helligke
 	--s-gray-93: 	210,16%,93%; 	/* #E9ECEF / hsl(210,16%,93%) 	/ rgb(233,236,239) / mittelhelles Grau - Hintergrund Sidebar-Navigation `*/
 	--s-gray-85: 	210,3%,85%;		/* #d9dadb / hsl(210,3%,85%) 	/ rgb(217,218,219)  / mittleres Grau - border hover Sidebar-Navigation, backgroud header und footer */
 	--s-gray-31: 	210,9%,31%; 	/* #495057 / hsl(210,9%,31%) 	/ rgb(73,80,87) / sehr dunkles Grau - Bereiche, die dezenter, aber noch gut lesbar sein sollen */
-	
+
 	/* GRUEN */
 	--s-green-52: 	84,54%,52%; 	/* #92c642 / hsl(84,54%,52%) 	/ rgb(146,198,66) / frisches gruen - Linien Header, Footer und Navigation */
 	--s-green-37: 	84,49%,37%; 	/* #688D30 / hsl(84,49%,37%) 	/ rgb(104,141,48) /  dunkleres gruen - Links in Sidebar Navigation*/
-	
+
 	/* BLAU */
 	--s-blue-38: 	197,65%,38%; 	/* #207698 / hsl(197,65%,38%) 	/ rgb(32,118,152) / mittleres tuerkisenes blau - Links */
 	/* --s-blue-30: 	198,66%,30%; 	#1A6281 / hsl(198,66%,30%) 	/ rgb(26,98,129) / dunkleres tuerkisenes blau - DERZEIT NICHT VERWENDET */
 	--s-blue-21: 	197,65%,21%; 	/* #134559 / hsl(210,25%,7%) 	/ rgb(19,69,89) / schwaerzliches Blau - Sidebar Navigation default */
-	
 
-/* ************************************************************************   	
-Variablen : Farb-Zuordnungen zu einzelnen Elementen 
-************************************************************************ */  
-	
-	/* Header/Footer/Main/Sidebar */	
+
+/* ************************************************************************
+Variablen : Farb-Zuordnungen zu einzelnen Elementen
+************************************************************************ */
+
+/* Header/Footer/Main/Sidebar */
 	--s-col-header-text: 					hsla(var(--s-blue-21),0.8);
-	--s-col-header-and-footer-background: 	hsla(var(--s-gray-96),0.8);
+	--s-col-header-and-footer-background: 	hsla(var(--s-gray-100));
 	--s-col-header-border: 					hsl(var(--s-green-52));
-	
+
 	--s-col-footer-border: 					hsl(var(--s-green-52));
 	--s-col-main-background: 				hsl(var(--s-gray-100));
 	--s-col-sidebar-background: 			hsla(var(--s-gray-96),0.4);
-	
-	/* Navigation */	
+
+	/* Navigation */
 	--s-col-nav-default-text: 				hsl(var(--s-blue-21));
 	--s-col-nav-default-background: 		hsl(var(--s-gray-93));
 	--s-col-nav-default-border: 			hsl(var(--s-gray-85));
-	
+
 	--s-col-nav-hover-background: 			hsl(var(--s-gray-96));
 	--s-col-nav-hover-border: 				hsl(var(--s-gray-85));
-	
+
 	--s-col-nav-active-text: 				hsl(var(--s-green-37));
 	--s-col-nav-active-background: 			hsl(var(--s-gray-100));
 	--s-col-nav-active-border: 				hsl(var(--s-green-52));
-	
+
 	/* Links (ausserhalb Sidebar) */
 	--s-col-a-default: 						hsl(var(--s-blue-38));
-	
+
 	/* Sonstige Elemente */
 	--s-col-h1: 							hsl(var(--s-green-37));
 	--s-col-h2: 							hsl(var(--s-green-37));
-	
+
 	--s-col-arbeitsstand-text: 				hsla(var(--s-gray-31),0.7);
-	
-	
-/* ************************************************************************  
+
+
+/* ************************************************************************
 Variablen : Groessenangaben
-********************************************************************************************* */ 
-	
+********************************************************************************************* */
+
 	/* BITTE VORERST MANUELL ANPASSEN, so dass der Footer optimal unten "klebt"
 	und kein unnoetiger Scrollbalken entsteht! */
-	--s-height-main: 						calc(100vh - 15.7rem); 
-	
+	--s-height-main: 						calc(100vh - 15.7rem);
+
 } /* Ende root fuer Variablen
 
 
-/* ************************************************************************  
+/* ************************************************************************
 Styles : grundlegende HTML-Elemente
-************************************************************************ */  
+************************************************************************ */
 
 html {
 	height:100vh;
 	}
-	
+
 body {
 	font-family: 'Nunito-Regular', Arial, Helvetica, sans-serif;
 	font-size:16px;
@@ -174,15 +174,15 @@ body {
 /* (alt)
 Breite beträgt mindestens 30em
 @media (min-width: 30em) {
-	
+
 	body {
 		grid-template-columns: 1fr 4fr;
 		grid-template-rows: auto 1fr 100px;
 	}
 }
  */
- 
- 
+
+
 a:link,
 a:hover,
 a:focus,
@@ -190,13 +190,13 @@ a:visited {
   	color: var(--s-col-a-default);
 	text-decoration:none;
 	font-family: 'Nunito-Medium', Arial, Helvetica, sans-serif;
-}	
+}
 a:hover {
 	text-decoration:underline;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Nunito-SemiBold', Arial, Helvetica, sans-serif;	
+	font-family: 'Nunito-SemiBold', Arial, Helvetica, sans-serif;
 	}
 h1 {
 	font-family: 'Nunito-Bold', Arial, Helvetica, sans-serif;
@@ -222,10 +222,10 @@ img {
 	min-width: 10em;
 	height: auto;
 	}
-		
-/* ************************************************************************ 
+
+/* ************************************************************************
 Styles : Layout-Elemente
-************************************************************************ */  
+************************************************************************ */
 header, footer {
 	/* (alt) grid-column: 1 / -1; */
 	background-color:var(--s-col-header-and-footer-background);
@@ -238,7 +238,7 @@ header {
 	padding:1rem 0 1rem 0;
 	}
 /* h1 in Kopfzeile */
-header h1 {	
+header h1 {
 	text-align:center;
 	margin:0;
 	font-size:1.8rem;
@@ -259,21 +259,21 @@ footer {
 	position:relative;
 	z-index:2;
 	}
-	
+
 main {
 	max-width: 50rem; 						/* entspricht bei 16px Schriftgroesse 800px */
 	min-height:var(--s-height-main); 		/* dieser Wert wird in den Variablen vorerst manuell angepasst) */
 	padding:1.5rem 2rem 4rem 19rem;
-	
+
 	background-image: linear-gradient(		/* graue Spalte hinter Navigation */
-		to right, 
-		var(--s-col-main-background) 2rem, 
-		var(--s-col-sidebar-background) 2rem, 
-		var(--s-col-sidebar-background) 16.5rem, 
+		to right,
+		var(--s-col-main-background) 2rem,
+		var(--s-col-sidebar-background) 2rem,
+		var(--s-col-sidebar-background) 16.5rem,
 		var(--s-col-main-background) 16.5rem
 		);
 	}
-	
+
 .arbeitsstand {
 	font-size:0.9rem;
 	text-align:right;
@@ -281,16 +281,16 @@ main {
 	color:var(--s-col-arbeitsstand-text);
 	}
 
-/* ************************************************************************ 
+/* ************************************************************************
 Styles : Sidebar mit Navigation
-************************************************************************ */ 
+************************************************************************ */
 #sidebar {
 	padding-top:2.8rem;
 	margin-left:0.6rem;
 	position:fixed;
 	z-index:5;
 	}
-	
+
 /* Grundeinstellungen Navigationsleiste */
 #sidebar ul {
 	margin:0;
@@ -306,7 +306,7 @@ Styles : Sidebar mit Navigation
 	margin:0;
 	padding:0;
 	display:inline;
-	
+
 	}
 #sidebar ul li a {
 	color: var(--s-col-nav-default-text);
@@ -335,17 +335,17 @@ Styles : Sidebar mit Navigation
 	padding-left:2.2rem;
 	position:relative;
 	}
-/* Verzeichnis-Links mit Pfeilen */	
+/* Verzeichnis-Links mit Pfeilen */
 #sidebar ul.nav1 li a.folder span:before {
 	font-family: 'FontAwesome';
 	/* content:"\f0da"; gefuellter Pfeil */
 	content:"\f105";
 	position:absolute;
 	display:inline-block;
-	margin-left:-1rem; 
+	margin-left:-1rem;
 	margin-top:0.15rem;
 	}
-	
+
 /* 2. Ebene	*/
 #sidebar ul.nav2 li a {
 	border-radius:0;
@@ -356,7 +356,7 @@ Styles : Sidebar mit Navigation
 #sidebar ul.nav2 li a span:before {
 	content:"";
 	}
-	
+
 /* 3. Ebene	- die aber erst mal im HTML deaktiviert ist, da unklar, warum notwendig
 #sidebar ul.nav3 li a {
 	border-radius:0;
@@ -368,7 +368,7 @@ Styles : Sidebar mit Navigation
 /* Seitennavigation Aufklapp-Verhalten */
 #sidebar ul.nav2 {
 	display:none;
-	}	
+	}
 body.about #sidebar ul.about,
 body.content #sidebar ul.content,
 body.ipw #sidebar ul.ipw,
@@ -376,12 +376,12 @@ body.wp #sidebar ul.wp,
 body.ep #sidebar ul.ep,
 body.use #sidebar ul.use,
 body.step #sidebar ul.step,
-body.pages #sidebar ul.pages { 
-	display:block; 
+body.pages #sidebar ul.pages {
+	display:block;
 	margin-bottom: 2px;
 	}
-	
-/* augeklappte Pfeile */	
+
+/* augeklappte Pfeile */
 body.about #sidebar ul.nav1 a#nav-about span:before,
 body.content #sidebar ul.nav1 a#nav-content span:before,
 body.ipw #sidebar ul.nav1 a#nav-ipw span:before,
@@ -389,16 +389,16 @@ body.wp #sidebar ul.nav1 a#nav-wp span:before,
 body.ep #sidebar ul.nav1 a#nav-ep span:before,
 body.use #sidebar ul.nav1 a#nav-use span:before,
 body.step #sidebar ul.nav1 a#nav-step span:before,
-body.pages #sidebar ul.nav1 a#nav-pages span:before { 
+body.pages #sidebar ul.nav1 a#nav-pages span:before {
 	font-family: 'FontAwesome';
 	/* content:"\f0d7"; gefuellter Pfeil */
 	content:"\f107";
 	margin-top:0.2rem;
 	color: var(--s-col-nav-default-text);
 }
-	
 
-	
+
+
 /* Seitennavigation Highlight */
 body#index #sidebar #nav-index,
 
@@ -430,6 +430,7 @@ body#ep-help #sidebar #nav-ep-help,
 
 body#use #sidebar #nav-use,
 body#use-items #sidebar #nav-use-items,
+body#use-role #sidebar #nav-use-role,
 body#use-permissions #sidebar #nav-use-permissions,
 body#use-versioning #sidebar #nav-use-versioning,
 body#use-export #sidebar #nav-use-export,
@@ -445,9 +446,10 @@ body#pages-actor #sidebar #nav-pages-actor,
 body#pages-ethics #sidebar #nav-pages-ethics,
 body#pages-impacts #sidebar #nav-pages-impacts,
 body#pages-gender #sidebar #nav-pages-gender,
+body#pages-publication #sidebar #nav-pages-publication,
 body#pages-solution #sidebar #nav-pages-solution,
 
-body#funder #sidebar #nav-funder { 
+body#funder #sidebar #nav-funder {
 	background-color:var(--s-col-nav-active-background);
 	border-left:5px solid var(--s-col-nav-active-border);
 	color: var(--s-col-nav-active-text);
@@ -455,14 +457,14 @@ body#funder #sidebar #nav-funder {
 /* Linie fuer obersten Link */
 body#index #sidebar #nav-index {
 	border-top:1px solid var(--s-col-nav-default-border);
-	}	
+	}
 
 /* Gestaltung von visisted links, noch nicht weiter ausgefuehrt
 https://css-tricks.com/almanac/selectors/v/visited/
 http://stelian.firez.be/post/pushing-the-limits-of-visited-with-css-blend-modes/ */
 #sidebar ul li a:visited { }
-	
-	
+
+
 /* (alt) diese Tags gibt es in den Dateien nicht !?
 .gridContainer {
   display: grid;

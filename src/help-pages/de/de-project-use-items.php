@@ -98,7 +98,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
   <footer align="center">
      <p>Kontakt: <a href="mailto:support@synsicris.de">support@synsicris.de</a> </p>
-     <p>© 2021 by SynSICRIS: Universität Kassel & Disy Informationssysteme GmbH</p>
+     <p>© 2023 by SynSICRIS: Universität Kassel & Disy Informationssysteme GmbH</p>
   </footer>
   </body>
 </html>

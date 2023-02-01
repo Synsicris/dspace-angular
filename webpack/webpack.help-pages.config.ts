@@ -14,7 +14,7 @@ const copyWebpackOptions = {
 module.exports = {
   mode: 'production',
   entry: {
-    'help': './src/help-pages/de/de-synsicrishelp_index.html'
+    'help': './src/help-pages/empty.html'
   },
   output: {
     path: path.resolve(__dirname, '..' , 'dist/help/pages'),

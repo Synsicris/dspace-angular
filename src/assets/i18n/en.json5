@@ -3220,7 +3220,7 @@
 
   "item.version.history.table.action.hasDraft": "A new version cannot be created because there is an inprogress submission in the version history",
 
-  "item.version.history.table.action.toggleOfficial": "Mark as non-official",
+  "item.version.history.table.action.toggleOfficial": "Mark as official",
 
   "item.version.history.table.action.toggleNonOfficial": "Mark as non-official",
 
@@ -4685,8 +4685,6 @@
   "project.manage.members.funding.coordinators-group-help": "Help Project members with Coordinator-Role",
 
   "project.manage.members.funding.members-group": "Invitation and Management Project members",
-
-  "project.manage.members.funding.members-group-help": "Help message here",
 
   "project.manage.members-list.head": "Manage group",
 
@@ -9408,6 +9406,38 @@
 
   "layout.field.label.neg_sideeffect.synsicris.description.internal": "Notes",
 
-  "layout.field.label.neg_sideeffect.status": "Status"
+  "layout.field.label.neg_sideeffect.status": "Status",
+
+  "submission.sections.submit.progressbar.describe.projects_funder": "Describe Consortium",
+
+  "submission.sections.submit.progressbar.describe.projects_funder.info": "Indo for funder",
+
+  "submission.sections.submit.progressbar.describe.programmes.info": "Help",
+
+  "submission.sections.submit.progressbar.describe.calls.info": "Help",
+
+  "submission.sections.submit.progressbar.describe.fundingobjectives.info": "Help",
+
+  "layout.box.header.task_status": "Change since proposal submission",
+
+  "layout.box.header.process_event_status": "Change since proposal submission",
+
+  "layout.box.header.event_status": "Change since proposal submission",
+
+  "layout.box.header.plan_publication_status": "Change since proposal submission",
+
+  "layout.box.header.ethic_status": "Change since proposal submission",
+
+  "layout.box.header.gender_status": "Change since proposal submission",
+
+  "layout.field.label.gender.status": "Status",
+
+  "layout.box.header.condition_status": "Change since proposal submission",
+
+  "layout.field.label.condition.status": "Status",
+
+  "project.manage.members.funding.members-group-help": "Help Project members",
+
+  "item.version.create.modal.info": "Test"
 
 }
