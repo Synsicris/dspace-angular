@@ -32,11 +32,37 @@
   </div>
 </div>
 
-
 <div>
   <ds-alert *ngIf="infoShowed | async" [type]="'alert-info'" [collapsible]="true"
     [content]="'impact-pathway.wrapper.info'"></ds-alert>
-  <div class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
+    <div class="mb-3">
+      <ngb-accordion
+        #accordionRef
+        [destroyOnHide]="false"
+        [closeOthers]="false"
+        activeIds=""
+      >
+        <ngb-panel id="panel-0">
+          <ng-template ngbPanelHeader let-opened="opened">
+            <span> Comments </span>
+            <div class="d-inline-block float-right">
+              <button ngbPanelToggle class="btn btn-outline-light">
+                <i *ngIf="opened" class="fa fa-chevron-up text-dark"></i>
+                <i *ngIf="!opened" class="fa fa-chevron-down text-dark"></i>
+              </button>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="row" *ngIf="(formConfig$ | async)?.name">
+              <div class="col p-0" *ngFor="let uuid of getImpactPathwayStepIds()">
+                <ds-comment-list [itemUUID]="uuid" [boxType]="(formConfig$ | async).name"></ds-comment-list>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+   <div class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
     <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps" ipwStepColor class="vertical-step"
                               [projectCommunityId]="projectCommunityId"
                               [impactPathwayId]="impactPathway.id"

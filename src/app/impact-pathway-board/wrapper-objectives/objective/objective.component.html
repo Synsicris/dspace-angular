@@ -27,5 +27,8 @@
                            [content]="impactPathwayTask.description"
                            [disabled]="!(canEditButton$ | async) || isVersionOfAnItem"
                            (contentChange)="updateImpactPathwayTask($event)"></ipw-editable-textarea>
+      <div class="col-md-2 comment-box-position p-0" *ngIf="(formConfig$ | async)?.name">
+        <ds-comment-list [itemUUID]="impactPathwayTask.id" [boxType]="(formConfig$ | async).name"></ds-comment-list>
+      </div>
   </ng-container>
 </ipw-collapsable-panel>

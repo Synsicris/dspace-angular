@@ -1,3 +1,4 @@
+import { CrisLayoutModule } from './../../cris-layout/cris-layout.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -12,7 +13,8 @@ const MODULES = [
   CommonModule,
   SharedModule,
   CoreModule.forRoot(),
-  DragDropModule
+  DragDropModule,
+  CrisLayoutModule,
 ];
 
 const COMPONENTS = [

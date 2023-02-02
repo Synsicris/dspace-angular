@@ -6,6 +6,13 @@
     <ds-view-version-badges *ngIf="workingPlan" [item]="workingPlan"></ds-view-version-badges>
   </div>
   <ds-alert [type]="'alert-info'" [content]="'working-plan.chart.page.description'" [collapsible]="true" [collapsed]="true"></ds-alert>
+
+  <div class="row">
+    <div class="col">
+      <ds-comment-list [itemUUID]="workingPlan.uuid" [boxType]="workingPlan.entityType"></ds-comment-list>
+    </div>
+  </div>
+
   <ipw-working-plan-chart-toolbar [compareMode]="compareMode"
                                   [isFunder]="isFunder"
                                   [isVersionOf]="isVersionOf"

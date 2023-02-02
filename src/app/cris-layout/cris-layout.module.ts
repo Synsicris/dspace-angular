@@ -117,6 +117,7 @@ import {
 import {
   CrisLayoutCommentBoxComponent
 } from './cris-layout-matrix/cris-layout-box-container/boxes/comment/cris-layout-comment-box.component';
+import { CommentListComponent } from './cris-layout-matrix/cris-layout-box-container/boxes/comment-list-box/comment-list.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -171,6 +172,7 @@ const ENTRY_COMPONENTS = [
     MetadataContainerComponent,
     MetadataRenderComponent,
     FileDownloadButtonComponent,
+    CommentListComponent,
   ],
   imports: [
     CommonModule,
@@ -184,6 +186,8 @@ const ENTRY_COMPONENTS = [
   ],
   exports: [
     CrisLayoutComponent,
+    CommentListComponent,
+    NgbAccordionModule
   ]
 })
 export class CrisLayoutModule {

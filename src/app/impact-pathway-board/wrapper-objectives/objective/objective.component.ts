@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -16,7 +17,7 @@ import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'ipw-objective',
-  styleUrls: ['./objective.component.scss'],
+  styleUrls: ['./objective.component.scss', './../../../cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/comment-list-box/comment-list.component.scss'],
   templateUrl: './objective.component.html'
 })
 export class ObjectiveComponent implements OnInit {
@@ -51,6 +52,8 @@ export class ObjectiveComponent implements OnInit {
    */
   @Input() isVersionOfAnItem = false;
 
+  configurationName:string;
+
   constructor(
     private impactPathwayService: ImpactPathwayService,
     private modalService: NgbModal,
@@ -59,6 +62,12 @@ export class ObjectiveComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if ( isEqual(this.impactPathwayStep.type, 'step_type_2')) {
+      this.configurationName = 'RELATION.proj_objective.comment';
+    } else if(isEqual(this.impactPathwayStep.type, 'step_type_3')) {
+      this.configurationName = 'RELATION.ia_objective.comment';
+    }
+
     this.formConfig$ = this.impactPathwayService.getImpactPathwayTaskEditFormConfig(this.impactPathwayStep.type);
     this.editItemDataService.checkEditModeByIdAndType(this.impactPathwayTask.id, environment.impactPathway.impactPathwaysEditMode).pipe(
       take(1)
