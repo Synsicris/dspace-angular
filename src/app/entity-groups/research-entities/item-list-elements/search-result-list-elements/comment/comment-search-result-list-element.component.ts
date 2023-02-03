@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map, mergeMap, startWith, take } from 'rxjs/operators';
@@ -39,6 +39,7 @@ import { ConfirmationModalComponent } from '../../../../../shared/confirmation-m
 import { hasValue, isNotEmpty } from '../../../../../shared/empty.util';
 import { followLink } from '../../../../../shared/utils/follow-link-config.model';
 import { Item } from '../../../../../core/shared/item.model';
+import { APP_CONFIG, AppConfig } from '../../../../../../config/app-config.interface';
 
 @listableObjectComponent('CommentSearchResult', ViewMode.ListElement)
 @Component({
@@ -76,9 +77,10 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
     private notificationsService: NotificationsService,
     private translateService: TranslateService,
     private editItemService: EditItemDataService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    @Inject(APP_CONFIG) protected appConfig: AppConfig
   ) {
-    super(truncatableService, dsoNameService);
+    super(truncatableService, dsoNameService, appConfig);
   }
 
   ngOnInit(): void {

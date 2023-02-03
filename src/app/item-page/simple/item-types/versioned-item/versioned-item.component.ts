@@ -69,6 +69,7 @@ export class VersionedItemComponent extends ItemComponent {
       this.itemService.invalidateItemCache(item.uuid);
       this.versionHistoryService.invalidateAllVersionHistoryCache();
       this.modalService.dismissAll();
+      activeModal.close();
       this.router.navigate(['..', 'manageversions'], {relativeTo: this.activatedRoute});
     });
 

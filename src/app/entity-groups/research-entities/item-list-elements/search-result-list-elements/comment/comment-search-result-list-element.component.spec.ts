@@ -105,7 +105,6 @@ describe('CommentSearchResultListElementComponent', () => {
   });
 
   it('should show item-list-title', () => {
-    console.log(de.query(By.css('item-list-title')));
     expect(de.query(By.css('.item-list-title'))).toBeTruthy();
   });
 

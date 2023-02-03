@@ -20,7 +20,6 @@ import { EditItemDataService } from '../../../core/submission/edititem-data.serv
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'ipw-impact-path-way',
   styleUrls: ['./impact-path-way.component.scss'],

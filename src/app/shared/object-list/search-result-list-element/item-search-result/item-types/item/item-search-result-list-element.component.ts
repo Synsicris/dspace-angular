@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import {
   listableObjectComponent
 } from '../../../../../object-collection/shared/listable-object/listable-object.decorator';
@@ -10,8 +10,12 @@ import { getItemPageRoute } from '../../../../../../item-page/item-page-routing-
 import { Context } from '../../../../../../core/shared/context.model';
 import { TruncatableService } from '../../../../../truncatable/truncatable.service';
 import { DSONameService } from '../../../../../../core/breadcrumbs/dso-name.service';
-import { DisplayItemMetadataType } from '../../../../../../../config/display-search-result-config.interface';
+import {
+  DisplayItemMetadataType,
+  ResultViewConfig
+} from '../../../../../../../config/display-search-result-config.interface';
 import { FUNDING_ENTITY, PROJECT_ENTITY } from '../../../../../../core/project/project-data.service';
+import { APP_CONFIG, AppConfig } from '../../../../../../../config/app-config.interface';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement)
 @listableObjectComponent(ItemSearchResult, ViewMode.ListElement)
@@ -31,6 +35,11 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    */
   @Input() showMetrics = true;
 
+  /**
+   * Display configurations for the item search result
+   */
+  displayConfigurations: ResultViewConfig[];
+
   DisplayItemMetadataType = DisplayItemMetadataType;
 
   /**
@@ -43,8 +52,8 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    */
   showItemActions: boolean;
 
-  public constructor(protected truncatableService: TruncatableService, protected dsoNameService: DSONameService) {
-    super(truncatableService, dsoNameService);
+  public constructor(protected truncatableService: TruncatableService, protected dsoNameService: DSONameService, @Inject(APP_CONFIG) protected appConfig: AppConfig) {
+    super(truncatableService, dsoNameService, appConfig);
   }
 
   ngOnInit(): void {
@@ -52,5 +61,14 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
     this.showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
     this.itemPageRoute = getItemPageRoute(this.dso);
     this.showItemActions = this.dso.entityType !== PROJECT_ENTITY && this.dso.entityType !== FUNDING_ENTITY;
+
+    const itemType = this.firstMetadataValue('dspace.entity.type');
+    if ( !!this.appConfig.displayItemSearchResult && !!this.appConfig.displayItemSearchResult[itemType] ) {
+      this.displayConfigurations = this.appConfig.displayItemSearchResult[itemType];
+    } else if ( !!this.appConfig.displayItemSearchResult['default'] ) {
+      this.displayConfigurations = this.appConfig.displayItemSearchResult['default'];
+    } else {
+      this.displayConfigurations = null;
+    }
   }
 }

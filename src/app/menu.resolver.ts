@@ -117,6 +117,18 @@ export class MenuResolver implements Resolve<boolean> {
       menuList.push(CommunityCollectionMenuItem);
     }
 
+    menuList.push({
+      id: 'browse_by_projects',
+      active: false,
+      visible: true,
+      index: 1,
+      model: {
+        type: MenuItemType.LINK,
+        text: 'menu.section.browse_by_projects',
+        link: '/browse/projects'
+      } as LinkMenuItemModel
+    });
+
     // Read the different Browse-By types from config and add them to the browse menu
     this.sectionDataService.findVisibleSections().pipe(
       getFirstCompletedRemoteData()
@@ -201,8 +213,8 @@ export class MenuResolver implements Resolve<boolean> {
           {
             id: 'statistics',
             active: false,
-            visible: true,
-            index: 1,
+            visible: false,
+            index: 2,
             model: {
               type: MenuItemType.TEXT,
               text: 'menu.section.statistics'
@@ -243,7 +255,7 @@ export class MenuResolver implements Resolve<boolean> {
         {
           id: 'new',
           active: false,
-          visible: isCollectionAdmin || isCommunityAdmin || isSiteAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.TEXT,
             text: 'menu.section.new'
@@ -318,7 +330,7 @@ export class MenuResolver implements Resolve<boolean> {
         {
           id: 'edit',
           active: false,
-          visible: isCollectionAdmin || isCommunityAdmin || isSiteAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.TEXT,
             text: 'menu.section.edit'
@@ -796,7 +808,7 @@ export class MenuResolver implements Resolve<boolean> {
         {
           id: 'access_control',
           active: false,
-          visible: canManageGroups || isSiteAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.TEXT,
             text: 'menu.section.access_control'

@@ -371,7 +371,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       if (item?.type?.value === 'milestone') {
         metadata = Object.assign(metadata, this.workingPlanService.setChildWorkingplanLinkStatusMetadata(item.metadata));
       }
-      console.log(metadata);
+
       this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectCommunityId, flatNode.id, item.type.value, metadata);
       // the 'this.editModes$' map is auto-updated by the ngOnInit subscribe
       if (flatNode.type === 'milestone') {

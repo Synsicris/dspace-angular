@@ -1,4 +1,3 @@
-import { SearchManager } from './../../core/browse/search-manager';
 import { Injectable } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
@@ -69,6 +68,7 @@ import { ProjectItemService } from '../../core/project/project-item.service';
 import { ProjectDataService } from '../../core/project/project-data.service';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
+import { SearchManager } from '../../core/browse/search-manager';
 
 export const moment = extendMoment(Moment);
 
@@ -569,8 +569,8 @@ export class WorkingPlanService {
       || isEmpty(metadata[environment.workingPlan.workingPlanStepStatusMetadata])) {
       result = Object.assign({}, metadata, {
         [environment.workingPlan.workingPlanStepStatusMetadata]: [{
-          authority: 'not_done',
-          confidence: 600,
+          authority: null,
+          confidence: -1,
           language: null,
           place: 0,
           value: 'not_done'
@@ -678,11 +678,11 @@ export class WorkingPlanService {
       tap((item: Item) => {
         metadatumViewList.forEach((metadatumView) => {
           const value = {
-            language: metadatumView.language,
-            value: metadatumView.value,
+            language: metadatumView.language || null,
+            value: metadatumView.value || null,
             place: 0,
-            authority: metadatumView.authority,
-            confidence: metadatumView.confidence
+            authority: metadatumView.authority || null,
+            confidence: metadatumView.confidence || null
           };
           const storedValue = item.firstMetadataValue(metadatumView.key);
           if (isEmpty(storedValue)) {

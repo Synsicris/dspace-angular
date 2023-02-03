@@ -105,7 +105,6 @@ describe('ProfilePageAccessTokenComponent', () => {
           componentAsAny.authService.createMachineToken.and.returnValue(createSuccessfulRemoteDataObject$(machineTokenMock));
           scheduler.schedule(() => componentAsAny.processTokenGeneration());
           scheduler.flush();
-          console.log('test');
           expect(component.generatedToken.value).toBe(machineTokenMock.value);
           expect(component.tokenAlreadyExists.value).toBeTrue();
         }));

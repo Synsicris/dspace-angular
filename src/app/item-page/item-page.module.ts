@@ -48,6 +48,7 @@ import { OrcidPageComponent } from './orcid-page/orcid-page.component';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrcidSyncSettingsComponent } from './orcid-page/orcid-sync-settings/orcid-sync-settings.component';
 import { OrcidQueueComponent } from './orcid-page/orcid-queue/orcid-queue.component';
+import { ImpactPathwayCoreModule } from '../impact-pathway-board/core/impact-pathway-core.module';
 
 
 const ENTRY_COMPONENTS = [
@@ -99,6 +100,7 @@ const DECLARATIONS = [
     CrisItemPageModule,
     ContextMenuModule.withEntryComponents(),
     MiradorViewerModule,
+    ImpactPathwayCoreModule
   ],
   declarations: [
     ...DECLARATIONS,

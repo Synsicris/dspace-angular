@@ -10,12 +10,16 @@ import {
 } from '../../item-page/simple/item-types/shared/item-relationships-utils';
 import { AppState, keySelector } from '../../app.reducer';
 import { hasValue, hasValueOperator, isNotEmpty, isNotEmptyOperator } from '../../shared/empty.util';
-import { ReorderableRelationship } from '../../shared/form/builder/ds-dynamic-form-ui/existing-metadata-list-element/existing-metadata-list-element.component';
+import {
+  ReorderableRelationship
+} from '../../shared/form/builder/ds-dynamic-form-ui/existing-metadata-list-element/existing-metadata-list-element.component';
 import {
   RemoveNameVariantAction,
   SetNameVariantAction
 } from '../../shared/form/builder/ds-dynamic-form-ui/relation-lookup-modal/name-variant.actions';
-import { NameVariantListState } from '../../shared/form/builder/ds-dynamic-form-ui/relation-lookup-modal/name-variant.reducer';
+import {
+  NameVariantListState
+} from '../../shared/form/builder/ds-dynamic-form-ui/relation-lookup-modal/name-variant.reducer';
 import { followLink, FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { RequestParam } from '../cache/models/request-param.model';
@@ -286,7 +290,7 @@ export class RelationshipDataService extends IdentifiableDataService<Relationshi
    * @param options
    */
   getRelatedItemsByLabel(item: Item, label: string, options?: FindListOptions): Observable<RemoteData<PaginatedList<Item>>> {
-    let linksToFollow: FollowLinkConfig<Relationship>[] = itemLinksToFollow(options.fetchThumbnail);
+    let linksToFollow: FollowLinkConfig<Relationship>[] = itemLinksToFollow(options?.fetchThumbnail || false);
     linksToFollow.push(followLink('relationshipType'));
 
     return this.getItemRelationshipsByLabel(item, label, options, true, true, ...linksToFollow).pipe(this.paginatedRelationsToItems(item.uuid));
