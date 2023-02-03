@@ -962,7 +962,7 @@ export class ImpactPathwayService {
 
   private createImpactPathwayStepWorkspaceItem(projectId: string, impactPathwayId: string, impactPathwayStepType: string, impactPathwayStepName: string): Observable<SubmissionObject> {
     const submission$ = this.getCollectionIdByProjectAndEntity(projectId, environment.impactPathway.impactPathwayStepEntity).pipe(
-      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, environment.impactPathway.impactPathwayStepEntity, false)),
+      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, environment.impactPathway.impactPathwayStepEntity)),
       mergeMap((submission: SubmissionObject) =>
         (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
       ));
@@ -988,7 +988,7 @@ export class ImpactPathwayService {
 
   private createImpactPathwayWorkspaceItem(projectId: string, impactPathwayName: string, impactPathwayDescription: string): Observable<SubmissionObject> {
     const submission$ = this.getCollectionIdByProjectAndEntity(projectId, environment.impactPathway.impactPathwayEntity).pipe(
-      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, environment.impactPathway.impactPathwayEntity, false)),
+      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, environment.impactPathway.impactPathwayEntity)),
       mergeMap((submission: SubmissionObject) =>
         (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
       ),
@@ -1013,7 +1013,7 @@ export class ImpactPathwayService {
 
   private createImpactPathwayTaskWorkspaceItem(projectId: string, taskType: string): Observable<SubmissionObject> {
     return this.getCollectionIdByProjectAndEntity(projectId, taskType).pipe(
-      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType, false).pipe(
+      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType).pipe(
         mergeMap((submission: SubmissionObject) =>
           (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
         )

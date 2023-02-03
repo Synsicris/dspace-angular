@@ -91,7 +91,7 @@ export class ProjectItemService {
 
   private createProjectEntityWorkspaceItem(projectId: string, taskType: string): Observable<SubmissionObject> {
     return this.getCollectionIdByProjectAndEntity(projectId, taskType).pipe(
-      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType, false).pipe(
+      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType).pipe(
         mergeMap((submission: SubmissionObject) =>
           (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
         )

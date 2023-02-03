@@ -1283,6 +1283,8 @@
 
   "collection.form.title": "Name",
 
+  "collection.form.titleArray": "Name",
+
   "collection.form.entityType": "Entity Type",
 
   "collection.form.errors.entityType.required": "Please choose an entity type for this collection",
@@ -7714,7 +7716,8 @@
 
   "curation-task.task.iiifallowfiledownload.label": "Allow file download for files uploaded on image server",
 
-  "curation-task.task.iiifpdfmultipages.label": "Create multipages PDF from IIIF images"
+  "curation-task.task.iiifpdfmultipages.label": "Create multipages PDF from IIIF images",
+
   "invitation.group.project.coordinators": "Coordinators group for project : ",
 
   "invitation.group.project.funders": "Funders group for project : ",
