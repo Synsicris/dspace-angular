@@ -824,9 +824,9 @@
 
   "breadcrumb.entity-type.Person": "Person",
 
-  "breadcrumb.entity-type.Project": "Project",
+  "breadcrumb.entity-type.Project": "<i class=\"fas fa-shekel-sign\"></i> Consortium",
 
-  "breadcrumb.entity-type.Funding": "Funding",
+  "breadcrumb.entity-type.Funding": "<i class=\"fas fa-cubes\"></i> Project",
 
   "breadcrumb.entity-type.OrgUnit": "OrgUnit",
 
@@ -2223,21 +2223,21 @@
 
   "explore.index.itemtype": "Item Type",
 
-  "explore.index.types": "Types",
+  "explore.index.types": "Typ",
 
   "explore.index.language": "Language",
 
   "explore.index.fundingParent": "Funding parent",
 
-  "explore.index.synsicrisRelationCall": "Relation call",
+  "explore.index.synsicrisRelationCall": "Call",
 
   "explore.index.projectStartDate": "Start date",
 
   "explore.index.projectEndDate": "End date",
 
-  "explore.index.synsicrisSubjectNace": "Subject nace",
+  "explore.index.synsicrisSubjectNace": "Economic sector",
 
-  "explore.index.synsicrisSubjectDestatis": "Subject destatis",
+  "explore.index.synsicrisSubjectDestatis": "Discipline",
 
   "explore.index.synsicrisTypeProjectContribution": "Project contribution type",
 
@@ -3668,7 +3668,7 @@
 
   "loading.objects": "Loading…",
 
-  "loading.recent-submissions": "Loading recent submissions...",
+  "loading.recent-submissions": "Loading recent submissions…",
 
   "loading.search-results": "Loading search results...",
 
@@ -4844,8 +4844,6 @@
 
   "project.manage.members.funding.members-group": "Invitation and Management Project members",
 
-  "project.manage.members.funding.members-group-help": "Help message here",
-
   "project.manage.members-list.head": "Manage group",
 
   "project.manage.members-list.search.head": "Search persons",
@@ -4864,7 +4862,7 @@
 
   "project.manage.members-list.table.name": "Name",
 
-  "project.manage.members-list.table.edit": "Remove / Add",
+  "project.manage.members-list.table.edit": "Add / Remove",
 
   "project.manage.members-list.table.edit.buttons.remove": "Remove member with name \"{{name}}\"",
 
@@ -8662,8 +8660,6 @@
 
   "layout.field.label.ethic.dc.title": "Key message",
 
-  "layout.field.label.ethic.synsicris.type.status": "Status of the information compared to the project application",
-
   "layout.field.label.gender.dc.title": "Key message",
 
   "layout.field.label.gender.synsicris.type.researchquestion": "1. Gender reference in the problem definition",
@@ -8685,8 +8681,6 @@
   "layout.field.label.gender.synsicris.type.project": "5. Implementation of direct interventions to promote gender equality among employees in the project",
 
   "layout.field.label.gender.synsicris.description.project": "Explanation",
-
-  "layout.field.label.gender.synsicris.type.status": "Status of the information compared to the project application",
 
   "layout.field.label.condition.dc.title": "Title",
 
@@ -8726,8 +8720,6 @@
 
   "layout.field.label.task.dc.description": "Description",
 
-  "layout.field.label.task.synsicris.type.status": "Status of the information compared to the project application",
-
   "layout.field.label.process_event.dc.title": "Title",
 
   "layout.field.label.process_event.synsicris.type.purpose": "Aims of the cooperation/participation/exchange process",
@@ -8737,8 +8729,6 @@
   "layout.field.label.process_event.synsicris.relation.targetgroup": "Stakeholder group(s) involved",
 
   "layout.field.label.process_event.dc.description": "Description",
-
-  "layout.field.label.process_event.synsicris.type.status": "Status of the information compared to the project application",
 
   "layout.field.label.process_event.synsicris.type.process-event-frequency": "Type",
 
@@ -8814,8 +8804,6 @@
 
   "layout.field.label.Publication.dc.relation.product": "Research data",
 
-  "layout.field.label.Publication.synsicris.type.status": "Status of the information compared to the project application",
-
   "layout.field.label.Publication": "Files",
 
   "layout.field.label.physical_object.dc.title": "Title",
@@ -8832,8 +8820,6 @@
 
   "layout.field.label.physical_object.oairecerif.identifier.url": "Website",
 
-  "layout.field.label.physical_object.synsicris.type.status": "Status of the information compared to the project application",
-
   "layout.field.label.Product.dc.title": "Title",
 
   "layout.field.label.Product.dc.type": "Type",
@@ -8849,8 +8835,6 @@
   "layout.field.label.Product.dc.description.abstract": "Abstract",
 
   "layout.field.label.Product.dc.language.iso": "Language",
-
-  "layout.field.label.Product.synsicris.type.status": "Status of the information compared to the project application",
 
   "layout.field.label.Product.dc.subject": "Key words",
 
@@ -8898,8 +8882,6 @@
 
   "layout.field.label.Patent.oairecerif.identifier.url": "Direct link to document",
 
-  "layout.field.label.Patent.synsicris.type.status": "Status of the information compared to the project application",
-
   "layout.field.label.innovationpotential.dc.title": "Title",
 
   "layout.field.label.innovationpotential.dc.type": "Type",
@@ -8922,15 +8904,11 @@
 
   "layout.field.label.innovationpotential.synsicris.description.rl-end": "Development status at the end of the project (target value)",
 
-  "layout.field.label.innovationpotential.synsicris.type.status": "Status of the information compared to the project application",
-
   "layout.field.label.innovationidea.dc.title": "Title",
 
   "layout.field.label.innovationidea.dc.description": "Description",
 
   "layout.field.label.innovationidea.dc.type": "Type of idea",
-
-  "layout.field.label.innovationidea.synsicris.type.status": "Status of the information compared to the project application",
 
   "layout.field.label.step.dc.title": "Title",
 
@@ -8944,15 +8922,11 @@
 
   "layout.field.label.step.synsicris.date": "Time horizon for realisation",
 
-  "layout.field.label.step.synsicris.type.status": "Status of the information compared to the project application",
-
   "layout.field.label.application.dc.type": "Type of application",
 
   "layout.field.label.application.synsicris.relation.innovationpotential": "Related solution / change / innovation or patent",
 
   "layout.field.label.application.synsicris.date.referenceyear": "Reference year",
-
-  "layout.field.label.application.synsicris.type.status": "Status of the information compared to the project application",
 
   "layout.field.label.application": "Files",
 
@@ -9172,7 +9146,7 @@
 
   "query-builder.synsicris.label.search-selected": "Search in selected projects",
 
-  "query-builder.synsicris.project.browse.head": "Projects list: ",
+  "query-builder.synsicris.project.browse.head": "Projects list:",
 
   "query-builder.synsicris.project.browse.empty": "No results",
 
@@ -9806,6 +9780,256 @@
 
   "layout.field.label.call.synsicris.call.endDate": "to be deleted",
 
-  "layout.field.label.call.oairecerif.identifier.url": "to be deleted"
+  "layout.field.label.call.oairecerif.identifier.url": "to be deleted",
+
+  "layout.field.label.Funding.synsicris.type.development": "Relevance for development cooperation",
+
+  "layout.field.label.Funding.synsicris.subject.countries": "Relevant countries for development cooperation",
+
+  "layout.field.label.Funding.synsicris.subject.nace": "Potential application",
+
+  "layout.field.label.Funding.synsicris.subject.sortprimary": "Keyword Primary-Sorter",
+
+  "layout.field.label.Funding.synsicris.internalid.fundingParent": "profi-ID funding programme",
+
+  "layout.field.label.Funding.synsicris.acronym.fundingParent": "Acronym funding programme",
+
+  "layout.field.label.Funding.synsicris.acronym.call": "Acronym call",
+
+  "layout.field.label.Funding.synsicris.internalid.call": "profi-ID call",
+
+  "layout.field.label.projectpartner.synsicris.type.easyimport": "Executing Organisation",
+
+  "layout.field.label.targetgroup.synsicris.subject.urbanrural": "Location",
+
+  "layout.field.label.targetgroup.synsicris.subject.enterprise": "Company size",
+
+  "layout.field.label.ethic.synsicris.type.docs": "Additional documents available",
+
+  "layout.field.label.Event.synsicris.type.contribution": "Participation of the project",
+
+  "layout.field.label.innovationpotential.synsicris.description.start": "Development status at the beginning of the project (start value)",
+
+  "layout.field.label.innovationpotential.synsicris.description.end": "Development status at the end of the project (target value)",
+
+  "layout.field.label.innovationpotential.synsicris.level.start": "Readinesslevel at project start (initial value)",
+
+  "layout.field.label.innovationpotential.synsicris.level.end": "Readinesslevel at project end (target value)",
+
+  "layout.field.label.process_event.dc.type": "Type",
+
+  "layout.field.label.process_event.synsicris.type": "Type",
+
+  "layout.field.label.spinoff.synsicris.date.performance": "Reference year",
+
+  "layout.field.label.spinoff.synsicris.amount.performance": "Annual turnover",
+
+  "layout.field.label.spinoff.synsicris.amount.currencyperformance": "Currency",
+
+  "layout.field.label.spinoff.synsicris.date.funding": "Year of funding",
+
+  "layout.field.label.spinoff.synsicris.amount.currencyfunding": "Currency",
+
+  "layout.field.label.exp_societalimpact.synsicris.type.intensity": "Impact intensity",
+
+  "layout.field.label.neg_sideeffect.synsicris.type.intensity": "Impact intensity",
+
+  "layout.field.label.programme.synsicris.relation.guideline": "Funding guideline",
+
+  "programme.manage.members-list.table.edit.buttons.withdraw": "Withdraw role",
+
+  "impact-pathway.delete.item.title": "Delete item",
+
+  "explore.index.synsicrisTypePurpose": "Purpose",
+
+  "explore.index.synsicrisrelationtargetgroup": "Targetgroup",
+
+  "explore.index.synsicrisTypeContribution": "Type of participation of the consortium",
+
+  "explore.index.synsicrisSubjectAgrovoc": "Keyword Agrovoc",
+
+  "explore.index.searchFilterDcAudience": "Audience",
+
+  "explore.index.synsicrisTypePatentuse": "Type of use",
+
+  "explore.index.synsicrisDuration": "Duration",
+
+  "explore.index.synsicrisProjectStatus": "Status",
+
+  "explore.index.oairecerifFundingParent": "Related call",
+
+  "explore.index.synsicrisSubjectSort": "Keywords Sorter",
+
+  "explore.index.synsicrisSubjectSortprimary": "Keywords primary Sorter",
+
+  "explore.index.synsicrisTypeFormtype": "Type of form",
+
+  "explore.index.synsicrisAddressCountryclassification": "profi - national category",
+
+  "explore.index.organizationAddressAddresscountry": "Country",
+
+  "explore.index.synsicrisAddressAddresscountry": "Country",
+
+  "explore.index.synsicrisSubjectPolitical": "Policy level",
+
+  "explore.index.synsicrisTypeTransform": "Area of transition",
+
+  "explore.index.synsicrisTypeInfluence": "Identification of  influence",
+
+  "explore.index.synsicrisTypeIntensity": "Intensity of impact",
+
+  "explore.index.synsicrisOairecerifEventCountry": "Country",
+
+  "explore.index.synsicrisParticipantnumber": "Number of participants",
+
+  "explore.index.synsicrisOairecerifEventStartdate": "Start date",
+
+  "explore.index.synsicrisRelationPartner": "Involved",
+
+  "explore.index.synsicrisCoverageRegionalprimary": "Regional localisation/ outreach",
+
+  "explore.index.synsicrisLevelStart": "Readyness level at Start",
+
+  "explore.index.synsicrisOrgunitsRegistercourt": "Registercourt",
+
+  "explore.index.synsicrisTitleRegistercourt": "Registercourt",
+
+  "explore.index.synsicrisTypeRecipient": "Recipient (from profi)",
+
+  "explore.index.synsicrisTypeOrgform": "Organisational form",
+
+  "explore.index.synsicrisTypeLegalform": "Legal form",
+
+  "explore.index.synsicrisDcContributorAuthor": "Author",
+
+  "explore.index.synsicrisOairecerifAuthorAffiliation": "Affiliation",
+
+  "explore.index.synsicrisDcSubject": "Subject",
+
+  "explore.index.synsicrisDateFilled": "Date of Filling",
+
+  "explore.index.dctermsDateaccepted": "Date of Acceptance",
+
+  "explore.index.synsicrisTypeEasyimport": "Executing Organisation",
+
+  "explore.index.synsicrisAddressAddresspostcode": "Postcode",
+
+  "explore.index.synsicrisAddressAddresscity": "City",
+
+  "layout.field.label.ethic.status": "Status",
+
+  "layout.field.label.Event.status": "Status",
+
+  "layout.box.header.physical_object_status": "Change since proposal submission",
+
+  "layout.box.header.physical_object_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.physical_object.synsicris.type.internal": "Task",
+
+  "layout.field.label.physical_object.synsicris.description.internal": "Notes",
+
+  "layout.field.label.physical_object.status": "Status",
+
+  "layout.box.header.Patent_status": "Change since proposal submission",
+
+  "layout.box.header.Patent_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.Patent.synsicris.type.internal": "Task",
+
+  "layout.field.label.Patent.synsicris.description.internal": "Notes",
+
+  "layout.field.label.Patent.status": "Status",
+
+  "layout.box.header.innovationpotential_status": "Change since proposal submission",
+
+  "layout.box.header.innovationpotential_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.innovationpotential.synsicris.type.internal": "Task",
+
+  "layout.field.label.innovationpotential.synsicris.description.internal": "Notes",
+
+  "layout.field.label.innovationpotential.status": "Status",
+
+  "layout.box.header.innovationidea_status": "Change since proposal submission",
+
+  "layout.box.header.innovationidea_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.innovationidea.synsicris.type.internal": "Task",
+
+  "layout.field.label.innovationidea.synsicris.description.internal": "Notes",
+
+  "layout.field.label.innovationidea.status": "Status",
+
+  "layout.box.header.step_status": "Change since proposal submission",
+
+  "layout.box.header.step_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.step.synsicris.type.internal": "Task",
+
+  "layout.field.label.step.synsicris.description.internal": "Notes",
+
+  "layout.field.label.step.status": "Status",
+
+  "layout.box.header.spinoff_status": "Change since proposal submission",
+
+  "layout.box.header.spinoff_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.spinoff.synsicris.type.internal": "Task",
+
+  "layout.field.label.spinoff.synsicris.description.internal": "Notes",
+
+  "layout.field.label.spinoff.status": "Status",
+
+  "layout.box.header.exp_societalimpact_status": "Change since proposal submission",
+
+  "layout.box.header.exp_societalimpact_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.exp_societalimpact.synsicris.type.internal": "Task",
+
+  "layout.field.label.exp_societalimpact.synsicris.description.internal": "Notes",
+
+  "layout.field.label.exp_societalimpact.status": "Status",
+
+  "layout.box.header.neg_sideeffect_status": "Change since proposal submission",
+
+  "layout.box.header.neg_sideeffect_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.neg_sideeffect.synsicris.type.internal": "Task",
+
+  "layout.field.label.neg_sideeffect.synsicris.description.internal": "Notes",
+
+  "layout.field.label.neg_sideeffect.status": "Status",
+
+  "submission.sections.submit.progressbar.describe.projects_funder": "Describe Consortium",
+
+  "submission.sections.submit.progressbar.describe.projects_funder.info": "Indo for funder",
+
+  "submission.sections.submit.progressbar.describe.programmes.info": "Help",
+
+  "submission.sections.submit.progressbar.describe.calls.info": "Help",
+
+  "submission.sections.submit.progressbar.describe.fundingobjectives.info": "Help",
+
+  "layout.box.header.task_status": "Change since proposal submission",
+
+  "layout.box.header.process_event_status": "Change since proposal submission",
+
+  "layout.box.header.event_status": "Change since proposal submission",
+
+  "layout.box.header.plan_publication_status": "Change since proposal submission",
+
+  "layout.box.header.ethic_status": "Change since proposal submission",
+
+  "layout.box.header.gender_status": "Change since proposal submission",
+
+  "layout.field.label.gender.status": "Status",
+
+  "layout.box.header.condition_status": "Change since proposal submission",
+
+  "layout.field.label.condition.status": "Status",
+
+  "project.manage.members.funding.members-group-help": "Help Project members",
+
+  "item.version.create.modal.info": "Test"
 
 }

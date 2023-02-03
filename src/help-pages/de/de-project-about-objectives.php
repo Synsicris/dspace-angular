@@ -56,18 +56,18 @@ Beide Elemente sollen innerhalb von Forschungsförderprozessen eingesetzt werden
 
 		<article>
 
-	<img src="img/de_about_objectives_was_erarbeitet_synsicris.png">
+	<img src="img/de_project_about_objectives_was_erarbeitet_synsicris.png">
   </article>
 </br>
 
 <article>
-  	<img src="img/de_about_objectives_wie_und_zu_welchem_zweck.png">
+  	<img src="img/de_project_about_objectives_wie_und_zu_welchem_zweck.png">
   </article>
 
 </br>
 
 <article>
-    	<img src="img/de_about_objectives_erwartete_wirkungen.png">
+    	<img src="img/de_project_about_objectives_erwartete_wirkungen.png">
     </article>
 
   </br>
@@ -98,14 +98,14 @@ Beide Elemente sollen innerhalb von Forschungsförderprozessen eingesetzt werden
     <article>
 
 
-      	<img src="img/de_about_objectives_wie_wirkungen_wahrscheinlich_werden.png">
+      	<img src="img/de_project_about_objectives_wie_wirkungen_wahrscheinlich_werden.png">
 
     </article>
     </br>
 
     <article>
 
-      	<img src="img/de_about_objectives_multidimensionales_Kriterien_Set.png">
+      	<img src="img/de_project_about_objectives_multidimensionales_Kriterien_Set.png">
 
     </article>
   </br>
