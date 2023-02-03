@@ -1,17 +1,19 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
+import { ModalBeforeDismiss } from '../../../interfaces/modal-before-dismiss.interface';
 
 @Component({
   selector: 'ds-item-versions-summary-modal',
   templateUrl: './item-versions-summary-modal.component.html',
   styleUrls: ['./item-versions-summary-modal.component.scss']
 })
-export class ItemVersionsSummaryModalComponent {
+export class ItemVersionsSummaryModalComponent implements OnInit, ModalBeforeDismiss {
 
   versionNumber: number;
   newVersionSummary: string;
   firstVersion = true;
+  submitted$: BehaviorSubject<boolean>;
 
   processing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -22,13 +24,25 @@ export class ItemVersionsSummaryModalComponent {
   ) {
   }
 
+  ngOnInit() {
+    this.submitted$ = new BehaviorSubject<boolean>(false);
+  }
+
   onModalClose() {
     this.activeModal.dismiss();
+  }
+
+  beforeDismiss(): boolean | Promise<boolean> {
+    // prevent the modal from being dismissed after version creation is initiated
+    return !this.submitted$.getValue();
   }
 
   onModalSubmit() {
     this.processing$.next(true);
     this.createVersionEvent.emit(this.newVersionSummary);
+    this.submitted$.next(true);
+    // NOTE: the caller of this modal is responsible for closing it,
+    //       e.g. after the version creation POST request completed.
   }
 
 }

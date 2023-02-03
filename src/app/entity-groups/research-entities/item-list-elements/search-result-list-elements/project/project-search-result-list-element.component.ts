@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -15,6 +15,7 @@ import { ProjectVersionService } from '../../../../../core/project/project-versi
 import { getFirstCompletedRemoteData } from '../../../../../core/shared/operators';
 import { RemoteData } from '../../../../../core/data/remote-data';
 import { Item } from 'src/app/core/shared/item.model';
+import { APP_CONFIG, AppConfig } from '../../../../../../config/app-config.interface';
 
 @listableObjectComponent('ProjectSearchResult', ViewMode.ListElement)
 @Component({
@@ -37,8 +38,9 @@ export class ProjectSearchResultListElementComponent extends ItemSearchResultLis
   constructor(
     protected projectVersion: ProjectVersionService,
     protected truncatableService: TruncatableService,
-    protected dsoNameService: DSONameService) {
-    super(truncatableService, dsoNameService);
+    protected dsoNameService: DSONameService,
+    @Inject(APP_CONFIG) protected appConfig: AppConfig) {
+    super(truncatableService, dsoNameService, appConfig);
   }
 
   ngOnInit(): void {

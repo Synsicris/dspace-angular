@@ -18,8 +18,9 @@ import { FacetValue } from '../../shared/search/models/facet-value.model';
 import { SearchFilterConfig } from '../../shared/search/models/search-filter-config.model';
 import { isNotEmpty } from '../../shared/empty.util';
 import { LocaleService } from '../../core/locale/locale.service';
-import { NgbDate, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { dateToString } from '../../shared/date.util';
+import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
 
 export interface QueryBuilderSearchFilter {
   key: string;
@@ -115,6 +116,7 @@ export class QueryConditionGroupComponent implements OnInit {
     private locale: LocaleService,
     private formBuilder: FormBuilder,
     private rootFormGroup: FormGroupDirective,
+    private searchConfigurationService: SearchConfigurationService,
     private searchService: SearchService,
     private chd: ChangeDetectorRef,
     public formatter: NgbDateParserFormatter
@@ -165,8 +167,7 @@ export class QueryConditionGroupComponent implements OnInit {
    * Gets the Facet Values for the default selected filter
    */
   getSearchFilterConfigs() {
-    this.searchService
-      .getConfig(null, this.configurationName)
+    this.searchConfigurationService.getConfig(null, this.configurationName)
       .pipe(getRemoteDataPayload())
       .subscribe((res: SearchFilterConfig[]) => {
         if (res) {

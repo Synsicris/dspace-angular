@@ -44,6 +44,8 @@ export class InvitationAcceptanceComponent implements OnInit {
         const token = paramMap.get('registrationToken');
         return this.epersonRegistrationService.searchByToken(token);
       }),
+      getFirstCompletedRemoteData(),
+      getRemoteDataPayload(),
       map((registrationData: Registration) => {
         this.registrationData = registrationData;
         return registrationData.groupNames.map((groupName, index) => {

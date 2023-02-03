@@ -6,11 +6,8 @@ import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operator
 
 import { RemoteData } from '../core/data/remote-data';
 import { Community } from '../core/shared/community.model';
-import {
-  getFirstCompletedRemoteData,
-  getFirstSucceededRemoteDataPayload,
-  redirectOn4xx
-} from '../core/shared/operators';
+import { redirectOn4xx } from '../core/shared/authorized.operators';
+import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from '../core/shared/operators';
 import { AuthService } from '../core/auth/auth.service';
 import { ProjectGroupService } from '../core/project/project-group.service';
 import { Group } from '../core/eperson/models/group.model';

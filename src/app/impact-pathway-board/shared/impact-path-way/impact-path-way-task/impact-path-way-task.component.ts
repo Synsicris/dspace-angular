@@ -90,10 +90,10 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
       map((task: ImpactPathwayTask) => task.id === this.data.id),
     ).subscribe((hasFocus) => this.selectStatus.next(hasFocus));
 
-    const adminEdit$ = this.editItemDataService.checkEditModeByIDAndType(this.data.id, environment.projects.projectsEntityAdminEditMode).pipe(
+    const adminEdit$ = this.editItemDataService.checkEditModeByIdAndType(this.data.id, environment.projects.projectsEntityAdminEditMode).pipe(
       take(1)
     );
-    const userEdit$ = this.editItemDataService.checkEditModeByIDAndType(this.data.id, environment.projects.projectsEntityEditMode).pipe(
+    const userEdit$ = this.editItemDataService.checkEditModeByIdAndType(this.data.id, environment.projects.projectsEntityEditMode).pipe(
       take(1)
     );
 
