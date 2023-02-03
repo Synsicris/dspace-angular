@@ -434,19 +434,19 @@
     glob "7.2.0"
     yargs "^17.2.1"
 
-"@angular/material-moment-adapter@~11.2.13":
-  version "11.2.13"
-  resolved "https://registry.yarnpkg.com/@angular/material-moment-adapter/-/material-moment-adapter-11.2.13.tgz#b597cb84ec219847c171e0df790f64b54ab0e842"
-  integrity sha512-KDD7QcfePpwvPG3HYy4kA8Ju222fUZeoyGXxFVE98KgaIIHrTRIGPFLHbpzxIl+AYVgJcW2OiIXKLI09FiYirg==
+"@angular/material-moment-adapter@~13.2.6":
+  version "13.2.6"
+  resolved "https://registry.yarnpkg.com/@angular/material-moment-adapter/-/material-moment-adapter-13.2.6.tgz#62461ae77ac3bcc61aec068151e726f8e4d4ce21"
+  integrity sha512-mlp+890uL8nr/ufiAw9axEkr4z5Xv4rvyq1bBDUBjrLhODS4gOyo3XC5vO57Ycf4zhSpHPjmDAU/BTFtmNLw4A==
   dependencies:
-    tslib "^2.0.0"
+    tslib "^2.3.0"
 
-"@angular/material@~11.2.13":
-  version "11.2.13"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-11.2.13.tgz#99960316d3ce58aac7497d7bb8b0c05468f502b9"
-  integrity sha512-FqFdGSkOtqsmeLyTSousodDGUy2NqbtxCIKv2rwbsIRwHNKB0KpR/UQhA2gMRuGa5hxhMJ0DW0Tf9neMRuLCTg==
+"@angular/material@~13.2.6":
+  version "13.2.6"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-13.2.6.tgz#615ad63453cd4122ab1775b077e8122c932cab06"
+  integrity sha512-/h5wa/tXE0DMIIEQX+rozFkUWHYUWg1Xf1R2tXUFLslLQ0KRCGyNo225Sv/1wrxXHxfrML787lA9ex4p90Feqw==
   dependencies:
-    tslib "^2.0.0"
+    tslib "^2.3.0"
 
 "@angular/platform-browser-dynamic@~13.2.6":
   version "13.2.7"
@@ -13193,12 +13193,14 @@ sass@1.49.9:
     immutable "^4.0.0"
     source-map-js ">=0.6.2 <2.0.0"
 
-sass@~1.32.6:
-  version "1.32.13"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.32.13.tgz#8d29c849e625a415bce71609c7cf95e15f74ed00"
-  integrity sha512-dEgI9nShraqP7cXQH+lEXVf73WOPCse0QlFzSD8k+1TcOxCMwVXfQlr0jtoluZysQOyJGnfr21dLvYKDJq8HkA==
+sass@^1.33.0:
+  version "1.58.0"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.58.0.tgz#ee8aea3ad5ea5c485c26b3096e2df6087d0bb1cc"
+  integrity sha512-PiMJcP33DdKtZ/1jSjjqVIKihoDc6yWmYr9K/4r3fVVIEDAluD0q7XZiRKrNJcPK3qkLRF/79DND1H5q1LBjgg==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
+    immutable "^4.0.0"
+    source-map-js ">=0.6.2 <2.0.0"
 
 saucelabs@^1.5.0:
   version "1.5.0"
