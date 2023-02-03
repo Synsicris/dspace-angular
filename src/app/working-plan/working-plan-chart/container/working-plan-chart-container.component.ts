@@ -324,7 +324,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       node.parentId,
       node.compareId,
       node.compareStatus,
-      node.selfUrl
+      node.selfUrl,
+      node.internalStatus
     );
     this.updateTreeMap(flatNode, node);
     return flatNode;
@@ -730,6 +731,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   isProcessingWorkpackage(): Observable<boolean> {
     return this.workingPlanStateService.isInitializing();
+  }
+
+  isProcessingWorkingpPlan() {
+    return this.workingPlanStateService.isProcessing();
   }
 
   /**

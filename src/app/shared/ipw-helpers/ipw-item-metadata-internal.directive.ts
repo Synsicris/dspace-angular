@@ -31,8 +31,6 @@ export class IpwItemMetadataInternalDirective implements OnChanges {
           iconClasses = [];
           break;
         case InternalItemStatus.Edit:
-          iconClasses = ['fas', 'fa-info-circle', 'text-warning'];
-          break;
         case InternalItemStatus.Exchange:
           iconClasses = ['fas', 'fa-info-circle', 'text-warning'];
           break;

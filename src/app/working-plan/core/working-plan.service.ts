@@ -318,6 +318,7 @@ export class WorkingPlanService {
     const responsible = item.firstMetadataValue(environment.workingPlan.workingPlanStepResponsibleMetadata);
     const status = item.firstMetadataValue(environment.workingPlan.workingPlanStepStatusMetadata);
     const type = item.firstMetadataValue('dspace.entity.type');
+    const internalStatus = item.firstMetadataValue('synsicris.type.internal');
 
     return {
       id: item.id,
@@ -331,7 +332,8 @@ export class WorkingPlanService {
       status: status,
       steps: steps,
       expanded: (steps && steps.length > 0),
-      selfUrl: item._links.self.href
+      selfUrl: item._links.self.href,
+      internalStatus
     };
   }
 

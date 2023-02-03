@@ -29,18 +29,19 @@ export class IpwItemMetadataStatusDirective implements OnChanges  {
     if (this.status) {
       switch (this.status) {
         case ComparedVersionItemStatus.New:
-          iconClasses = ['far', 'fa-plus-square', 'text-warning'];
+          iconClasses = ['far', 'fa-plus-square'];
           break;
         case ComparedVersionItemStatus.Changed:
-          iconClasses = ['fas', 'fa-redo-alt', 'text-warning'];
+          iconClasses = ['fas', 'fa-redo-alt'];
           break;
         case ComparedVersionItemStatus.Done:
-          iconClasses = ['far', 'fa-check-circle', 'text-warning'];
+          iconClasses = ['far', 'fa-check-circle'];
           break;
         case ComparedVersionItemStatus.Canceled:
-          iconClasses = ['fas', 'fa-ban', 'text-warning'];
+          iconClasses = ['fas', 'fa-ban'];
           break;
       }
+      iconClasses = iconClasses.concat('text-warning');
     }
     return iconClasses;
   }

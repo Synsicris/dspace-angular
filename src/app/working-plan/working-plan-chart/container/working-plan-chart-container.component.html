@@ -105,23 +105,23 @@
           </div>
           <div class="mr-05 d-flex flex-column justify-content-between">
             <div class="d-flex justify-content-end">
-              <span *ngIf="node.id | dsGetItemMetadataValue: 'synsicris.type.status' | async">
-                <i dsItemMetadataStatus [status]="node.id | dsGetItemMetadataValue: 'synsicris.type.status' | async"></i>
+              <span>
+                <i dsItemMetadataStatus [status]="node?.status"></i>
               </span>
               <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end" data-test="remove-step"
-                title="{{'working-plan.chart.button.remove' | translate}}"
-                [class.ml-1]="node.level !== 0"
-                [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf"
-                (click)="deleteStep(node); $event.stopPropagation()">
+                      title="{{'working-plan.chart.button.remove' | translate}}"
+                      [class.ml-1]="node.level !== 0"
+                      [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf"
+                      (click)="deleteStep(node); $event.stopPropagation()">
                 <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
                 <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
               </button>
             </div>
 
             <div class="d-flex justify-content-end">
-            <span class="pr-1" *ngIf="node.id | dsGetItemMetadataValue: 'synsicris.type.internal' | async">
-                <i dsItemMetadataInternal [status]="node.id | dsGetItemMetadataValue: 'synsicris.type.internal' | async"></i>
-              </span>
+              <span class="pr-1">
+                  <i dsItemMetadataInternal [status]="node?.internalStatus"></i>
+                </span>
             </div>
 
             <div class="d-flex">
