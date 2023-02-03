@@ -11,7 +11,7 @@ import { TruncatableService } from '../../../../../shared/truncatable/truncatabl
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
 import { DSONameServiceMock } from '../../../../../shared/mocks/dso-name.service.mock';
 import { By } from '@angular/platform-browser';
-import { SubmissionFormsConfigService } from '../../../../../core/config/submission-forms-config.service';
+import { SubmissionFormsConfigDataService } from '../../../../../core/config/submission-forms-config-data.service';
 import { AuthorizationDataService } from '../../../../../core/data/feature-authorization/authorization-data.service';
 import { ItemDataService } from '../../../../../core/data/item-data.service';
 import { NotificationsService } from '../../../../../shared/notifications/notifications.service';
@@ -23,7 +23,7 @@ import { followLink } from '../../../../../shared/utils/follow-link-config.model
 let component: CommentSearchResultListElementComponent;
 let fixture: ComponentFixture<CommentSearchResultListElementComponent>;
 let de: DebugElement;
-let submissionConfigurationStub: SubmissionFormsConfigService;
+let submissionConfigurationStub: SubmissionFormsConfigDataService;
 let authorizationService: AuthorizationDataService;
 let itemDataServiceStub: ItemDataService;
 let editItemDataService: EditItemDataService;
@@ -36,7 +36,7 @@ const commentItemObjectMock: ItemSearchResult = Object.assign(
 
 const eiResult = 'eiResult' as any;
 
-function getMockSubmissionFormsConfigService(): SubmissionFormsConfigService {
+function getMockSubmissionFormsConfigService(): SubmissionFormsConfigDataService {
   return jasmine.createSpyObj('SubmissionFormsConfigService', {
     findByName: jasmine.createSpy('findByName'),
   });
@@ -71,7 +71,7 @@ describe('CommentSearchResultListElementComponent', () => {
       providers: [
         { provide: TruncatableService, useValue: {} },
         { provide: DSONameService, useClass: DSONameServiceMock },
-        { provide: SubmissionFormsConfigService, useValue: submissionConfigurationStub },
+        { provide: SubmissionFormsConfigDataService, useValue: submissionConfigurationStub },
         { provide: AuthorizationDataService, useValue: authorizationService },
         { provide: ItemDataService, useValue: itemDataServiceStub },
         { provide: NotificationsService, useValue: new NotificationsServiceStub() },
@@ -105,7 +105,6 @@ describe('CommentSearchResultListElementComponent', () => {
   });
 
   it('should show item-list-title', () => {
-    console.log(de.query(By.css('item-list-title')));
     expect(de.query(By.css('.item-list-title'))).toBeTruthy();
   });
 

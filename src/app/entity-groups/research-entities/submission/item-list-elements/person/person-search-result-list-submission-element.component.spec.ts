@@ -14,7 +14,7 @@ import { DefaultChangeAnalyzer } from '../../../../../core/data/default-change-a
 import { DSOChangeAnalyzer } from '../../../../../core/data/dso-change-analyzer.service';
 import { ItemDataService } from '../../../../../core/data/item-data.service';
 import { buildPaginatedList } from '../../../../../core/data/paginated-list.model';
-import { RelationshipService } from '../../../../../core/data/relationship.service';
+import { RelationshipDataService } from '../../../../../core/data/relationship-data.service';
 import { RemoteData } from '../../../../../core/data/remote-data';
 import { Bitstream } from '../../../../../core/shared/bitstream.model';
 import { HALEndpointService } from '../../../../../core/shared/hal-endpoint.service';
@@ -26,7 +26,10 @@ import { SelectableListService } from '../../../../../shared/object-list/selecta
 import { createSuccessfulRemoteDataObject$ } from '../../../../../shared/remote-data.utils';
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { TruncatePipe } from '../../../../../shared/utils/truncate.pipe';
-import { PersonSearchResultListSubmissionElementComponent } from './person-search-result-list-submission-element.component';
+import {
+  PersonSearchResultListSubmissionElementComponent
+} from './person-search-result-list-submission-element.component';
+import { APP_CONFIG } from '../../../../../../config/app-config.interface';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
 import { DSONameServiceMock } from '../../../../../shared/mocks/dso-name.service.mock';
 
@@ -38,6 +41,18 @@ let mockItemWithoutMetadata: ItemSearchResult;
 
 let nameVariant;
 let mockRelationshipService;
+
+const environmentUseThumbs = {
+  browseBy: {
+    showThumbnails: true
+  }
+};
+
+const enviromentNoThumbs = {
+  browseBy: {
+    showThumbnails: false
+  }
+};
 
 function init() {
   mockItemWithMetadata = Object.assign(
@@ -95,7 +110,7 @@ describe('PersonSearchResultListElementSubmissionComponent', () => {
       declarations: [PersonSearchResultListSubmissionElementComponent, TruncatePipe],
       providers: [
         { provide: TruncatableService, useValue: {} },
-        { provide: RelationshipService, useValue: mockRelationshipService },
+        { provide: RelationshipDataService, useValue: mockRelationshipService },
         { provide: NotificationsService, useValue: {} },
         { provide: TranslateService, useValue: {} },
         { provide: NgbModal, useValue: {} },
@@ -111,6 +126,7 @@ describe('PersonSearchResultListElementSubmissionComponent', () => {
         { provide: DSOChangeAnalyzer, useValue: {} },
         { provide: DefaultChangeAnalyzer, useValue: {} },
         { provide: BitstreamDataService, useValue: mockBitstreamDataService },
+        { provide: APP_CONFIG, useValue: environmentUseThumbs },
         { provide: DSONameService, useValue: DSONameServiceMock },
       ],
 
@@ -147,6 +163,74 @@ describe('PersonSearchResultListElementSubmissionComponent', () => {
     it('should not show the job title span', () => {
       const jobTitleField = fixture.debugElement.query(By.css('span.item-list-job-title'));
       expect(jobTitleField).toBeNull();
+    });
+  });
+
+  describe('When the environment is set to show thumbnails', () => {
+    beforeEach(() => {
+      personListElementComponent.object = mockItemWithoutMetadata;
+      fixture.detectChanges();
+    });
+
+    it('should add the ds-thumbnail element', () => {
+      const thumbnail = fixture.debugElement.query(By.css('ds-thumbnail'));
+      expect(thumbnail).toBeTruthy();
+    });
+  });
+});
+
+describe('PersonSearchResultListElementSubmissionComponent', () => {
+  const mockBitstreamDataService = {
+    getThumbnailFor(item: Item): Observable<RemoteData<Bitstream>> {
+      return createSuccessfulRemoteDataObject$(new Bitstream());
+    }
+  };
+  beforeEach(waitForAsync(() => {
+    init();
+    TestBed.configureTestingModule({
+      declarations: [PersonSearchResultListSubmissionElementComponent, TruncatePipe],
+      providers: [
+        { provide: TruncatableService, useValue: {} },
+        { provide: RelationshipDataService, useValue: mockRelationshipService },
+        { provide: NotificationsService, useValue: {} },
+        { provide: TranslateService, useValue: {} },
+        { provide: NgbModal, useValue: {} },
+        { provide: ItemDataService, useValue: {} },
+        { provide: SelectableListService, useValue: {} },
+        { provide: Store, useValue: {}},
+        { provide: ObjectCacheService, useValue: {} },
+        { provide: UUIDService, useValue: {} },
+        { provide: RemoteDataBuildService, useValue: {} },
+        { provide: CommunityDataService, useValue: {} },
+        { provide: HALEndpointService, useValue: {} },
+        { provide: HttpClient, useValue: {} },
+        { provide: DSOChangeAnalyzer, useValue: {} },
+        { provide: DefaultChangeAnalyzer, useValue: {} },
+        { provide: BitstreamDataService, useValue: mockBitstreamDataService },
+        { provide: APP_CONFIG, useValue: enviromentNoThumbs }
+      ],
+
+      schemas: [NO_ERRORS_SCHEMA]
+    }).overrideComponent(PersonSearchResultListSubmissionElementComponent, {
+      set: { changeDetection: ChangeDetectionStrategy.Default }
+    }).compileComponents();
+  }));
+
+  beforeEach(waitForAsync(() => {
+    fixture = TestBed.createComponent(PersonSearchResultListSubmissionElementComponent);
+    personListElementComponent = fixture.componentInstance;
+
+  }));
+
+  describe('When the environment is not set to show thumbnails', () => {
+    beforeEach(() => {
+      personListElementComponent.object = mockItemWithoutMetadata;
+      fixture.detectChanges();
+    });
+
+    it('should not add the ds-thumbnail element', () => {
+      const thumbnail = fixture.debugElement.query(By.css('ds-thumbnail'));
+      expect(thumbnail).toBeNull();
     });
   });
 });

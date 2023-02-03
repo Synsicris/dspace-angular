@@ -9,11 +9,8 @@ import { GroupDataService } from '../core/eperson/group-data.service';
 import { ProjectGroupService } from '../core/project/project-group.service';
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
-import {
-  getFirstCompletedRemoteData,
-  getFirstSucceededRemoteDataPayload,
-  redirectOn4xx
-} from '../core/shared/operators';
+import { redirectOn4xx } from '../core/shared/authorized.operators';
+import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from '../core/shared/operators';
 import { Group } from '../core/eperson/models/group.model';
 import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../core/data/feature-authorization/feature-id';

@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
- 
+
   <body class="ipw" id="ipw">
-  
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-	
+
 	 <?php /* Alte Navigation kann geloescht werden.
 	 <h1>&nbsp;</h1>
 	 <!-- Platzhalter deutsch / englisch für Auswahl anderer Sprache -->
@@ -31,36 +31,27 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n2><a href="de-project-details-ep.php">Verwertungsplan</a></n2><br> <!-- Datei fehlt -->
 	  <n2><a href="de-project-details-pages.php">Bereiche</a></n2> <!-- Datei fehlt -->
 	  */ ?>
-  
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
-  
-	<main>
 
-    <p> Diese Inhalte werden demnächst bereitgestellt</p>
-<!--
-      <h1>Impact Pathway</h1>
-      <p>Teasertext <strong>gesellschaftlichen Transformation</strong> Text</p>
-		<article>
-		<h1>Überschrift</h1>
-		<p>Text</p>
-		<img src="img/xy.png">
-		<p>Text
-		<ul>
-		<li>Text</li>
-		<li>Text</li></ul>
-		</p>
-		</article>
+  <main>
 
-		<article>
-		<h1>Überschrift nächster Abschnitt</h1>
-		<p>Text</p>
-		</article>
 
--->
-    </main>
+        <h1>Impact Pathway</h1>
+
+  		<article>
+        <p>Wirkungspfade visualisieren und strukturieren die <strong>Zusammenhänge von Inputs, Outputs und Outcomes sowie die beabsichtigten Wirkungen</strong> eines Projekts mit Karten und Pfeilen an einer Pinnwand oder digital über Textfelder.</p>  
+
+
+  		<img src="img/de_project_ipw_zentrales_element.png">
+
+  		</article>
+
+
+      </main>
 
 
 	<?php include("includes/footer.inc.php"); echo "\n";?>
-    
+
   </body>
 </html>

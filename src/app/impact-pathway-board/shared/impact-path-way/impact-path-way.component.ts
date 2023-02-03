@@ -20,7 +20,6 @@ import { EditItemDataService } from '../../../core/submission/edititem-data.serv
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'ipw-impact-path-way',
   styleUrls: ['./impact-path-way.component.scss'],
@@ -99,7 +98,7 @@ export class ImpactPathWayComponent implements OnInit {
         .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
     );
 
-    this.editItemDataService.checkEditModeByIDAndType(this.impactPathway.id, environment.impactPathway.impactPathwaysEditMode).pipe(
+    this.editItemDataService.checkEditModeByIdAndType(this.impactPathway.id, environment.impactPathway.impactPathwaysEditMode).pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEditButton$.next(canEdit);

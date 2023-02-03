@@ -85,7 +85,7 @@
 
                       <div class="right-column">
 
-                        <div class="btn-group edit-field" *ngIf="displayActions && version?.id !== itemVersion?.id">
+                        <div class="btn-group edit-field space-children-mr" *ngIf="displayActions && version?.id !== itemVersion?.id">
                           <!--EDIT WORKSPACE ITEM-->
                           <button class="btn btn-outline-primary btn-sm version-row-element-edit"
                             *ngIf="(workspaceId$ | async)" (click)="editWorkspaceItem(workspaceId$)"

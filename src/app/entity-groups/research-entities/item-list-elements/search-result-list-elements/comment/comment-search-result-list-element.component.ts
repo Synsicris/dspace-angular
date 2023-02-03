@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map, mergeMap, startWith, take } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { AuthorizationDataService } from '../../../../../core/data/feature-autho
 import { FeatureID } from '../../../../../core/data/feature-authorization/feature-id';
 import { SubmissionFormModel } from '../../../../../core/config/models/config-submission-form.model';
 import { RemoteData } from '../../../../../core/data/remote-data';
-import { SubmissionFormsConfigService } from '../../../../../core/config/submission-forms-config.service';
+import { SubmissionFormsConfigDataService } from '../../../../../core/config/submission-forms-config-data.service';
 import { environment } from '../../../../../../environments/environment';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
 import {
@@ -39,6 +39,7 @@ import { ConfirmationModalComponent } from '../../../../../shared/confirmation-m
 import { hasValue, isNotEmpty } from '../../../../../shared/empty.util';
 import { followLink } from '../../../../../shared/utils/follow-link-config.model';
 import { Item } from '../../../../../core/shared/item.model';
+import { APP_CONFIG, AppConfig } from '../../../../../../config/app-config.interface';
 import { getEntityPageRoute } from '../../../../../item-page/item-page-routing-paths';
 import { MetadataValue } from '../../../../../core/shared/metadata.models';
 
@@ -74,15 +75,16 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
   constructor(
     protected truncatableService: TruncatableService,
     protected dsoNameService: DSONameService,
-    private submissionFormsConfigService: SubmissionFormsConfigService,
+    private submissionFormsConfigService: SubmissionFormsConfigDataService,
     private authorizationService: AuthorizationDataService,
     private itemDataService: ItemDataService,
     private notificationsService: NotificationsService,
     private translateService: TranslateService,
     private editItemService: EditItemDataService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    @Inject(APP_CONFIG) protected appConfig: AppConfig
   ) {
-    super(truncatableService, dsoNameService);
+    super(truncatableService, dsoNameService, appConfig);
   }
 
   ngOnInit(): void {

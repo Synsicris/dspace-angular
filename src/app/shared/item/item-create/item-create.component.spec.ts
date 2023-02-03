@@ -5,7 +5,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ItemCreateComponent } from './item-create.component';
 import { AuthServiceMock } from '../../mocks/auth.service.mock';
-import { EntityTypeService } from '../../../core/data/entity-type.service';
+import { EntityTypeDataService } from '../../../core/data/entity-type-data.service';
 import { of as observableOf } from 'rxjs';
 
 describe('ItemCreateComponent', () => {
@@ -21,7 +21,7 @@ describe('ItemCreateComponent', () => {
       declarations: [ItemCreateComponent],
       providers: [
         { provide: AuthService, useValue: new AuthServiceMock() },
-        { provide: EntityTypeService, useValue: entityTypeService },
+        { provide: EntityTypeDataService, useValue: entityTypeService },
         { provide: Router, useValue: new RouterMock() }
       ]
     })

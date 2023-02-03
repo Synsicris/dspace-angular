@@ -2,22 +2,23 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
 
 import { of as observableOf } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
-
 import { EPerson } from '../../core/eperson/models/eperson.model';
 import { ResearcherProfile, ResearcherProfileVisibilityValue } from '../../core/profile/model/researcher-profile.model';
-import { ResearcherProfileService } from '../../core/profile/researcher-profile.service';
+import { ResearcherProfileDataService } from '../../core/profile/researcher-profile-data.service';
 import { VarDirective } from '../../shared/utils/var.directive';
 import { ProfilePageResearcherFormComponent } from './profile-page-researcher-form.component';
 import { ProfileClaimService } from '../profile-claim/profile-claim.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../core/auth/auth.service';
+import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { followLink } from '../../shared/utils/follow-link-config.model';
 import { EditItemDataService } from '../../core/submission/edititem-data.service';
-import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { EditItemMode } from '../../core/submission/models/edititem-mode.model';
 import { EditItem } from '../../core/submission/models/edititem.model';
 import { createPaginatedList } from '../../shared/testing/utils.test';
@@ -31,13 +32,13 @@ describe('ProfilePageResearcherFormComponent', () => {
   let user: EPerson;
   let profile: ResearcherProfile;
 
-  let researcherProfileService: ResearcherProfileService;
+  let researcherProfileService: jasmine.SpyObj<ResearcherProfileDataService>;
 
   let notificationsServiceStub: NotificationsServiceStub;
 
-  let profileClaimService: ProfileClaimService;
+  let profileClaimService: jasmine.SpyObj<ProfileClaimService>;
 
-  let authService: AuthService;
+  let authService: jasmine.SpyObj<AuthService>;
 
   let editItemDataService: any;
 
@@ -67,9 +68,9 @@ describe('ProfilePageResearcherFormComponent', () => {
     });
 
     researcherProfileService = jasmine.createSpyObj('researcherProfileService', {
-      findById: observableOf(profile),
+      findById: createSuccessfulRemoteDataObject$(profile),
       create: observableOf(profile),
-      setVisibility: observableOf(profile),
+      setVisibility: jasmine.createSpy('setVisibility'),
       delete: observableOf(true),
       findRelatedItemId: observableOf('a42557ca-cbb8-4442-af9c-3bb5cad2d075')
     });
@@ -77,7 +78,7 @@ describe('ProfilePageResearcherFormComponent', () => {
     notificationsServiceStub = new NotificationsServiceStub();
 
     profileClaimService = jasmine.createSpyObj('profileClaimService', {
-      canClaimProfiles: observableOf(false),
+      hasProfilesToSuggest: observableOf(false),
     });
 
     editItemDataService = jasmine.createSpyObj('EditItemDataService', {
@@ -93,7 +94,7 @@ describe('ProfilePageResearcherFormComponent', () => {
       imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([])],
       providers: [
         NgbModal,
-        { provide: ResearcherProfileService, useValue: researcherProfileService },
+        { provide: ResearcherProfileDataService, useValue: researcherProfileService },
         { provide: NotificationsService, useValue: notificationsServiceStub },
         { provide: ProfileClaimService, useValue: profileClaimService },
         { provide: AuthService, useValue: authService },
@@ -112,19 +113,66 @@ describe('ProfilePageResearcherFormComponent', () => {
   });
 
   it('should search the researcher profile for the current user', () => {
-    expect(researcherProfileService.findById).toHaveBeenCalledWith(user.id);
+    expect(researcherProfileService.findById).toHaveBeenCalledWith(user.id, false, true, followLink('item'));
   });
 
   describe('toggleProfileVisibility', () => {
 
-    it('should set the profile visibility to true', () => {
-      component.toggleProfileVisibility(profile, ResearcherProfileVisibilityValue.PUBLIC);
-      expect(researcherProfileService.setVisibility).toHaveBeenCalledWith(profile, ResearcherProfileVisibilityValue.PUBLIC);
+    describe('', () => {
+
+      beforeEach(() => {
+        researcherProfileService.setVisibility.and.returnValue(createSuccessfulRemoteDataObject$(profile));
+      });
+
+      it('should set the profile visibility to true', () => {
+        component.toggleProfileVisibility(profile, ResearcherProfileVisibilityValue.PUBLIC);
+        expect(researcherProfileService.setVisibility).toHaveBeenCalledWith(profile, ResearcherProfileVisibilityValue.PUBLIC);
+      });
+
+      it('should set the profile visibility to false', () => {
+        component.toggleProfileVisibility(profile, ResearcherProfileVisibilityValue.PRIVATE);
+        expect(researcherProfileService.setVisibility).toHaveBeenCalledWith(profile, ResearcherProfileVisibilityValue.PRIVATE);
+      });
     });
 
-    it('should set the profile visibility to false', () => {
-      component.toggleProfileVisibility(profile, ResearcherProfileVisibilityValue.PRIVATE);
-      expect(researcherProfileService.setVisibility).toHaveBeenCalledWith(profile, ResearcherProfileVisibilityValue.PRIVATE);
+    describe('on successful', () => {
+      beforeEach(() => {
+        researcherProfileService.setVisibility.and.returnValue(createSuccessfulRemoteDataObject$(profile));
+      });
+
+      it('should update the profile properly', () => {
+        component.toggleProfileVisibility(profile, ResearcherProfileVisibilityValue.PRIVATE);
+        expect(component.researcherProfile$.value).toEqual(profile);
+      });
+
+    });
+
+    describe('on error', () => {
+      beforeEach(() => {
+        researcherProfileService.setVisibility.and.returnValue(createFailedRemoteDataObject$());
+      });
+
+      it('should update the profile properly', () => {
+        const unchangedProfile = profile;
+        component.toggleProfileVisibility(profile, ResearcherProfileVisibilityValue.PRIVATE);
+        expect(component.researcherProfile$.value).toEqual(unchangedProfile);
+        expect((component as any).notificationService.error).toHaveBeenCalled();
+      });
+
+    });
+  });
+
+  describe('deleteProfile', () => {
+    beforeEach(() => {
+      const modalService = (component as any).modalService;
+      spyOn(modalService, 'open').and.returnValue(Object.assign({ componentInstance: Object.assign({ response: observableOf(true) }) }));
+      component.deleteProfile(profile);
+      fixture.detectChanges();
+    });
+
+    it('should delete the profile', () => {
+
+      expect(researcherProfileService.delete).toHaveBeenCalledWith(profile.id);
     });
 
   });
