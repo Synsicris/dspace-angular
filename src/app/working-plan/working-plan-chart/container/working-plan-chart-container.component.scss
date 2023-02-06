@@ -16,7 +16,7 @@
   text-overflow: ellipsis;
 }
 
-.block-ellipsis:hover {
+.block-ellipsis > span:hover {
   text-decoration: underline;
   cursor: pointer;
 }
