@@ -91,9 +91,12 @@
             </button>
           </div>
           <div class="mat-form-field auto-width mt-1{{node.level === 0?' pl-2':''}}">
-            <p class="block-ellipsis">{{node.name}}</p>
+            <p class="block-ellipsis">
+              <span (click)="openItemModal(node); $event.stopImmediatePropagation();">{{node.name}}</span>
+            </p>
             <br>
-            <span class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
+            <span
+              class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
             <br>
             <button *ngIf="canAddChildStep(node)" data-test="add-child-step"
                     class="btn btn-xs btn-link p-0"

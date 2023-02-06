@@ -35,6 +35,7 @@ import { EditItemMode } from '../../../core/submission/models/edititem-mode.mode
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 import { CompareItemComponent } from '../../../shared/compare-item/compare-item.component';
 import { ActivatedRoute } from '@angular/router';
+import { ItemDetailPageModalComponent } from 'src/app/item-detail-page-modal/item-detail-page-modal.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -993,4 +994,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       (modalRef.componentInstance as CompareItemComponent).versionedItemId = node.compareId;
     }
   }
+
+  openItemModal(node: WorkpacakgeFlatNode) {
+    const modalRef = this.modalService.open(ItemDetailPageModalComponent, { size: 'xl' });
+    (modalRef.componentInstance as any).uuid = node.id;
+  }
+
 }

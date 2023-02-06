@@ -26,6 +26,7 @@ import { EditSimpleItemModalModule } from '../shared/edit-simple-item-modal/edit
 import { WorkingPlanChartDatesComponent } from './working-plan-chart/container/working-plan-chart-dates/working-plan-chart-dates.component';
 import { WorkingPlanChartItemEditButtonComponent } from './working-plan-chart/container/working-plan-chart-item-edit-button/working-plan-chart-item-edit-button.component';
 import { WorkingPlanChartItemDeleteButtonComponent } from './working-plan-chart/container/working-plan-chart-item-delete-button/working-plan-chart-item-delete-button.component';
+import { ItemDetailPageModalModule } from '../item-detail-page-modal/item-detail-page-modal.module';
 
 const MODULES = [
   CommonModule,
@@ -37,7 +38,8 @@ const MODULES = [
   EffectsModule.forFeature([WorkingPlanEffects]),
   CreateSimpleItemModule,
   EditSimpleItemModalModule,
-  ComcolModule
+  ComcolModule,
+  ItemDetailPageModalModule
 ];
 
 const COMPONENTS = [
