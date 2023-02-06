@@ -3486,7 +3486,7 @@
 
   "item.version.create.modal.submitted.header": "Creating new version...",
 
-  "item.version.create.modal.submitted.text": "The new version is being created. This may take some time if the item has a lot of relationships.",
+  "item.version.create.modal.submitted.text": "The new version is being created. This may take some time if the project has a lot of items.",
 
   "item.version.create.notification.success": "New version has been created with version number {{version}}",
 
