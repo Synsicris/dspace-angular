@@ -1,8 +1,13 @@
-import { Metadata } from './../shared/metadata.utils';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Observable, of as observableOf, throwError as observableThrowError } from 'rxjs';
+import { catchError, delay, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+
+import { Metadata } from '../shared/metadata.utils';
 import { CollectionDataService } from '../data/collection-data.service';
 import { VocabularyService } from '../submission/vocabularies/vocabulary.service';
-import { SubmissionFormsConfigService } from '../config/submission-forms-config.service';
+import { SubmissionFormsConfigDataService } from '../config/submission-forms-config-data.service';
 import { ItemDataService } from '../data/item-data.service';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
 import { ItemJsonPatchOperationsService } from '../data/item-json-patch-operations.service';
@@ -10,16 +15,13 @@ import { ItemAuthorityRelationService } from '../shared/item-authority-relation.
 import { SubmissionJsonPatchOperationsService } from '../submission/submission-json-patch-operations.service';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { RequestService } from '../data/request.service';
-import { Router } from '@angular/router';
 import { SubmissionService } from '../../submission/submission.service';
 import { MetadataMap, MetadataValue } from '../shared/metadata.models';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 import { SubmissionObject } from '../submission/models/submission-object.model';
-import { catchError, delay, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 import { isEmpty, isNotEmpty, isNotNull, isNull, isUndefined } from '../../shared/empty.util';
 import { Item } from '../shared/item.model';
 import { ErrorResponse } from '../cache/response.models';
-import { Observable, of as observableOf, throwError as observableThrowError } from 'rxjs';
 import { RemoteData } from '../data/remote-data';
 import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../shared/operators';
 import { Collection } from '../shared/collection.model';
@@ -32,7 +34,7 @@ export class ProjectItemService {
   constructor(
     private collectionService: CollectionDataService,
     private vocabularyService: VocabularyService,
-    private formConfigService: SubmissionFormsConfigService,
+    private formConfigService: SubmissionFormsConfigDataService,
     private itemService: ItemDataService,
     private operationsBuilder: JsonPatchOperationsBuilder,
     private itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
@@ -89,7 +91,7 @@ export class ProjectItemService {
 
   private createProjectEntityWorkspaceItem(projectId: string, taskType: string): Observable<SubmissionObject> {
     return this.getCollectionIdByProjectAndEntity(projectId, taskType).pipe(
-      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType, false).pipe(
+      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType).pipe(
         mergeMap((submission: SubmissionObject) =>
           (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
         )
@@ -104,7 +106,7 @@ export class ProjectItemService {
       'sections',
       pathName).pipe(
         take(1),
-        map((result: SubmissionObject[]) => (result[0] && isEmpty(result[0].errors)) ? result[0] : null),
+        map((result: any[]) => (result[0] && isEmpty(result[0].errors)) ? result[0] : null),
         catchError(() => observableOf(null))
       );
   }
@@ -116,7 +118,7 @@ export class ProjectItemService {
       'sections',
       pathName).pipe(
         take(1),
-        map((result: SubmissionObject[]) => (result[0]) ? result[0] : null),
+        map((result: any[]) => (result[0]) ? result[0] : null),
         catchError(() => observableOf(null))
       );
   }

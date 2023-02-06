@@ -6,7 +6,8 @@ import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
-import { getFirstSucceededRemoteDataPayload, getRemoteDataPayload, redirectOn4xx } from '../core/shared/operators';
+import { redirectOn4xx } from '../core/shared/authorized.operators';
+import { getFirstSucceededRemoteDataPayload, getRemoteDataPayload } from '../core/shared/operators';
 import { ImpactPathwayService } from '../impact-pathway-board/core/impact-pathway.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';

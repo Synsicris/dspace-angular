@@ -1,4 +1,3 @@
-import { SearchManager } from './../../core/browse/search-manager';
 import { Injectable } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
@@ -20,7 +19,7 @@ import { extendMoment } from 'moment-range';
 import * as Moment from 'moment';
 
 import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
-import { SubmissionFormsConfigService } from '../../core/config/submission-forms-config.service';
+import { SubmissionFormsConfigDataService } from '../../core/config/submission-forms-config-data.service';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { SortDirection, SortOptions } from '../../core/cache/models/sort-options.model';
 import { buildPaginatedList, PaginatedList } from '../../core/data/paginated-list.model';
@@ -68,6 +67,8 @@ import { RequestService } from '../../core/data/request.service';
 import { ProjectItemService } from '../../core/project/project-item.service';
 import { ProjectDataService } from '../../core/project/project-data.service';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
+import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
+import { SearchManager } from '../../core/browse/search-manager';
 
 export const moment = extendMoment(Moment);
 
@@ -94,7 +95,7 @@ export class WorkingPlanService {
   constructor(
     private collectionService: CollectionDataService,
     private vocabularyService: VocabularyService,
-    private formConfigService: SubmissionFormsConfigService,
+    private formConfigService: SubmissionFormsConfigDataService,
     private itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
     private itemAuthorityRelationService: ItemAuthorityRelationService,
     private itemService: ItemDataService,
@@ -104,6 +105,7 @@ export class WorkingPlanService {
     private linkService: LinkService,
     private operationsBuilder: JsonPatchOperationsBuilder,
     private requestService: RequestService,
+    private searchConfigurationService: SearchConfigurationService,
     private searchService: SearchService,
     private workingPlanStateService: WorkingPlanStateService,
     private searchManager: SearchManager,
@@ -170,7 +172,7 @@ export class WorkingPlanService {
   }
 
   getWorkpackageSortOptions(): Observable<SearchConfig> {
-    return this.searchService.getSearchConfigurationFor(null, 'allLinkedWorkingPlanObj').pipe(
+    return this.searchConfigurationService.getSearchConfigurationFor(null, 'allLinkedWorkingPlanObj').pipe(
       getFirstSucceededRemoteDataPayload()
     ) as Observable<SearchConfig>;
   }
@@ -569,8 +571,8 @@ export class WorkingPlanService {
       || isEmpty(metadata[environment.workingPlan.workingPlanStepStatusMetadata])) {
       result = Object.assign({}, metadata, {
         [environment.workingPlan.workingPlanStepStatusMetadata]: [{
-          authority: 'not_done',
-          confidence: 600,
+          authority: null,
+          confidence: -1,
           language: null,
           place: 0,
           value: 'not_done'
@@ -678,11 +680,11 @@ export class WorkingPlanService {
       tap((item: Item) => {
         metadatumViewList.forEach((metadatumView) => {
           const value = {
-            language: metadatumView.language,
-            value: metadatumView.value,
+            language: metadatumView.language || null,
+            value: metadatumView.value || null,
             place: 0,
-            authority: metadatumView.authority,
-            confidence: metadatumView.confidence
+            authority: metadatumView.authority || null,
+            confidence: metadatumView.confidence || null
           };
           const storedValue = item.firstMetadataValue(metadatumView.key);
           if (isEmpty(storedValue)) {

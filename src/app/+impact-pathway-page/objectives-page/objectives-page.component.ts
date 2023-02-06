@@ -7,7 +7,8 @@ import { Store } from '@ngrx/store';
 
 import { RemoteData } from '../../core/data/remote-data';
 import { Item } from '../../core/shared/item.model';
-import { getFirstSucceededRemoteDataPayload, redirectOn4xx } from '../../core/shared/operators';
+import { redirectOn4xx } from '../../core/shared/authorized.operators';
+import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
 import { ImpactPathwayService } from '../../impact-pathway-board/core/impact-pathway.service';
 import { AppState } from '../../app.reducer';
 import { InitImpactPathwayAction } from '../../impact-pathway-board/core/impact-pathway.actions';

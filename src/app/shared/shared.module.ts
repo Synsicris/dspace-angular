@@ -11,6 +11,7 @@ import {
   NgbCollapseModule,
   NgbDatepickerModule,
   NgbDropdownModule,
+  NgbModule,
   NgbNavModule,
   NgbPaginationModule,
   NgbTimepickerModule,
@@ -21,12 +22,17 @@ import { MissingTranslationHandler, TranslateModule } from '@ngx-translate/core'
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FileUploadModule } from 'ng2-file-upload';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { TextMaskModule } from 'angular2-text-mask';
 import { MomentModule } from 'ngx-moment';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 import {
   ExportMetadataSelectorComponent
 } from './dso-selector/modal-wrappers/export-metadata-selector/export-metadata-selector.component';
+import {
+  ExportBatchSelectorComponent
+} from './dso-selector/modal-wrappers/export-batch-selector/export-batch-selector.component';
+import {
+  ImportBatchSelectorComponent
+} from './dso-selector/modal-wrappers/import-batch-selector/import-batch-selector.component';
 import { FileDropzoneNoUploaderComponent } from './file-dropzone-no-uploader/file-dropzone-no-uploader.component';
 import { ItemListElementComponent } from './object-list/item-list-element/item-types/item/item-list-element.component';
 import { EnumKeysPipe } from './utils/enum-keys-pipe';
@@ -45,6 +51,7 @@ import { ObjectListComponent } from './object-list/object-list.component';
 import {
   CollectionGridElementComponent
 } from './object-grid/collection-grid-element/collection-grid-element.component';
+import { ThemedObjectListComponent } from './object-list/themed-object-list.component';
 import { CommunityGridElementComponent } from './object-grid/community-grid-element/community-grid-element.component';
 import {
   AbstractListableElementComponent
@@ -62,6 +69,7 @@ import {
 import { ViewModeSwitchComponent } from './view-mode-switch/view-mode-switch.component';
 import { VarDirective } from './utils/var.directive';
 import { AuthNavMenuComponent } from './auth-nav-menu/auth-nav-menu.component';
+import { ThemedAuthNavMenuComponent } from './auth-nav-menu/themed-auth-nav-menu.component';
 import { LogOutComponent } from './log-out/log-out.component';
 import { DragClickDirective } from './utils/drag-click.directive';
 import { TruncatePipe } from './utils/truncate.pipe';
@@ -127,11 +135,20 @@ import {
   CreateCommunityParentSelectorComponent
 } from './dso-selector/modal-wrappers/create-community-parent-selector/create-community-parent-selector.component';
 import {
+    ThemedCreateCommunityParentSelectorComponent
+} from './dso-selector/modal-wrappers/create-community-parent-selector/themed-create-community-parent-selector.component';
+import {
   CreateItemParentSelectorComponent
 } from './dso-selector/modal-wrappers/create-item-parent-selector/create-item-parent-selector.component';
 import {
+    ThemedCreateItemParentSelectorComponent
+} from './dso-selector/modal-wrappers/create-item-parent-selector/themed-create-item-parent-selector.component';
+import {
   CreateCollectionParentSelectorComponent
 } from './dso-selector/modal-wrappers/create-collection-parent-selector/create-collection-parent-selector.component';
+import {
+    ThemedCreateCollectionParentSelectorComponent
+} from './dso-selector/modal-wrappers/create-collection-parent-selector/themed-create-collection-parent-selector.component';
 import {
   CommunitySearchResultListElementComponent
 } from './object-list/search-result-list-element/community-search-result/community-search-result-list-element.component';
@@ -142,11 +159,20 @@ import {
   EditItemSelectorComponent
 } from './dso-selector/modal-wrappers/edit-item-selector/edit-item-selector.component';
 import {
+    ThemedEditItemSelectorComponent
+} from './dso-selector/modal-wrappers/edit-item-selector/themed-edit-item-selector.component';
+import {
   EditCommunitySelectorComponent
 } from './dso-selector/modal-wrappers/edit-community-selector/edit-community-selector.component';
 import {
+    ThemedEditCommunitySelectorComponent
+} from './dso-selector/modal-wrappers/edit-community-selector/themed-edit-community-selector.component';
+import {
   EditCollectionSelectorComponent
 } from './dso-selector/modal-wrappers/edit-collection-selector/edit-collection-selector.component';
+import {
+    ThemedEditCollectionSelectorComponent
+} from './dso-selector/modal-wrappers/edit-collection-selector/themed-edit-collection-selector.component';
 import {
   ItemListPreviewComponent
 } from './object-list/my-dspace-result-list-element/item-list-preview/item-list-preview.component';
@@ -183,6 +209,7 @@ import {
 } from './input-suggestions/dso-input-suggestions/dso-input-suggestions.component';
 import { ItemGridElementComponent } from './object-grid/item-grid-element/item-types/item/item-grid-element.component';
 import { TypeBadgeComponent } from './object-list/type-badge/type-badge.component';
+import { AccessStatusBadgeComponent } from './object-list/access-status-badge/access-status-badge.component';
 import {
   MetadataRepresentationLoaderComponent
 } from './metadata-representation/metadata-representation-loader.component';
@@ -272,7 +299,6 @@ import { RelatedItemsComponent } from '../item-page/simple/related-items/related
 import { LinkMenuItemComponent } from './menu/menu-item/link-menu-item.component';
 import { OnClickMenuItemComponent } from './menu/menu-item/onclick-menu-item.component';
 import { TextMenuItemComponent } from './menu/menu-item/text-menu-item.component';
-import { ItemExportComponent } from './item-export/item-export/item-export.component';
 import { SearchChartsComponent } from './search/search-charts/search-charts.component';
 import {
   SearchChartBarComponent
@@ -298,16 +324,8 @@ import {
   SearchChartFilterComponent
 } from './search/search-charts/search-chart/search-chart-filter/search-chart-filter.component';
 import { VocabularyExternalSourceComponent } from './vocabulary-external-source/vocabulary-external-source.component';
-import { ItemExportAlertComponent } from './item-export/item-export-alert/item-export-alert.component';
-import {
-  ItemExportModalLauncherComponent
-} from './item-export/item-export-modal-launcher/item-export-modal-launcher.component';
-import {
-  BulkImportSelectorComponent
-} from './dso-selector/modal-wrappers/bulk-import-collection-selector/bulk-import-collection-selector.component';
-import {
-  AdministeredCollectionSelectorComponent
-} from './dso-selector/dso-selector/administered-collection-selector/administered-collection-selector.component';
+import { BulkImportSelectorComponent } from './dso-selector/modal-wrappers/bulk-import-collection-selector/bulk-import-collection-selector.component';
+import { AdministeredCollectionSelectorComponent } from './dso-selector/dso-selector/administered-collection-selector/administered-collection-selector.component';
 import { RelationshipsListComponent } from './object-list/relationships-list/relationships-list.component';
 import {
   RelationshipsItemsActionsComponent
@@ -316,6 +334,7 @@ import {
   RelationshipsItemsListPreviewComponent
 } from './object-list/relationships-list/relationships-items-list-preview/relationships-items-list-preview.component';
 import { SearchNavbarComponent } from '../search-navbar/search-navbar.component';
+import { ThemedSearchNavbarComponent } from '../search-navbar/themed-search-navbar.component';
 import {
   ItemVersionsSummaryModalComponent
 } from './item/item-versions/item-versions-summary-modal/item-versions-summary-modal.component';
@@ -329,52 +348,37 @@ import {
 import { DsSelectComponent } from './ds-select/ds-select.component';
 import { LogInOidcComponent } from './log-in/methods/oidc/log-in-oidc.component';
 import { LogInOrcidComponent } from './log-in/methods/orcid/log-in-orcid.component';
-import {
-  ClaimItemSelectorComponent
-} from './dso-selector/modal-wrappers/claim-item-selector/claim-item-selector.component';
-import { MetricBadgesComponent } from './object-list/metric-badges/metric-badges.component';
-import { MetricLoaderComponent } from './metric/metric-loader/metric-loader.component';
-import { MetricAltmetricComponent } from './metric/metric-altmetric/metric-altmetric.component';
-import { MetricDimensionsComponent } from './metric/metric-dimensions/metric-dimensions.component';
-import { MetricDspacecrisComponent } from './metric/metric-dspacecris/metric-dspacecris.component';
-import { MetricGooglescholarComponent } from './metric/metric-googlescholar/metric-googlescholar.component';
-import { MetricEmbeddedViewComponent } from './metric/metric-embedded-view/metric-embedded-view.component';
-import { MetricEmbeddedDownloadComponent } from './metric/metric-embedded-download/metric-embedded-download.component';
-import { MetricDonutsComponent } from './object-list/metric-donuts/metric-donuts.component';
+import { ClaimItemSelectorComponent } from './dso-selector/modal-wrappers/claim-item-selector/claim-item-selector.component';
 import { BrowseMostElementsComponent } from './browse-most-elements/browse-most-elements.component';
-import { BrowseSectionComponent } from './explore/section-component/browse-section/browse-section.component';
-import {
-  ThemedBrowseSectionComponent
-} from './explore/section-component/browse-section/themed-browse-section.component';
-import { TopSectionComponent } from './explore/section-component/top-section/top-section.component';
-import { ThemedTopSectionComponent } from './explore/section-component/top-section/themed-top-section.component';
-import { FacetSectionComponent } from './explore/section-component/facet-section/facet-section.component';
-import { SearchSectionComponent } from './explore/section-component/search-section/search-section.component';
-import { TextSectionComponent } from './explore/section-component/text-section/text-section.component';
-import { CountersSectionComponent } from './explore/section-component/counters-section/counters-section.component';
-import {
-  ThemedCountersSectionComponent
-} from './explore/section-component/counters-section/themed-counters-section.component';
-import {
-  MultiColumnTopSectionComponent
-} from './explore/section-component/multi-column-top-section/multi-column-top-section.component';
-import {
-  EditMetadataSecurityComponent
-} from '../item-page/edit-item-page/edit-metadata-security/edit-metadata-security.component';
+import { EditMetadataSecurityComponent } from '../item-page/edit-item-page/edit-metadata-security/edit-metadata-security.component';
 import { MetadataLinkViewComponent } from './metadata-link-view/metadata-link-view.component';
 import {
   ExportExcelSelectorComponent
 } from './dso-selector/modal-wrappers/export-excel-selector/export-excel-selector.component';
-import { MetricPlumxComponent } from './metric/metric-plumx/metric-plumx.component';
-import { ThemedFacetSectionComponent } from './explore/section-component/facet-section/themed-facet-section.component';
-import {
-  ThemedMultiColumnTopSectionComponent
-} from './explore/section-component/multi-column-top-section/themed-multi-column-top-section.component';
-import {
-  ThemedSearchSectionComponent
-} from './explore/section-component/search-section/themed-search-section.component';
-import { ThemedTextSectionComponent } from './explore/section-component/text-section/themed-text-section.component';
 import { ThemedBrowseMostElementsComponent } from './browse-most-elements/themed-browse-most-elements.component';
+import { RSSComponent } from './rss-feed/rss.component';
+import { ExternalLinkMenuItemComponent } from './menu/menu-item/external-link-menu-item.component';
+import { DsoPageOrcidButtonComponent } from './dso-page/dso-page-orcid-button/dso-page-orcid-button.component';
+import { BrowserOnlyPipe } from './utils/browser-only.pipe';
+import { ThemedLoadingComponent } from './loading/themed-loading.component';
+import { PersonPageClaimButtonComponent } from './dso-page/person-page-claim-button/person-page-claim-button.component';
+import { SearchExportCsvComponent } from './search/search-export-csv/search-export-csv.component';
+import {
+  ItemPageTitleFieldComponent
+} from '../item-page/simple/field-components/specific-field/title/item-page-title-field.component';
+import { MarkdownPipe } from './utils/markdown.pipe';
+import { GoogleRecaptchaModule } from '../core/google-recaptcha/google-recaptcha.module';
+import { ItemCorrectionComponent } from './object-collection/shared/mydspace-item-correction/item-correction.component';
+import { MetricsModule } from './metric/metrics.module';
+import { ThumbnailService } from './thumbnail/thumbnail.service';
+import { EpersonGroupListComponent } from './resource-policies/form/eperson-group-list/eperson-group-list.component';
+import {
+  EpersonSearchBoxComponent
+} from './resource-policies/form/eperson-group-list/eperson-search-box/eperson-search-box.component';
+import {
+  GroupSearchBoxComponent
+} from './resource-policies/form/eperson-group-list/group-search-box/group-search-box.component';
+import { EntityIconDirective } from './entity-icon/entity-icon.directive';
 import {
   ThemedItemListPreviewComponent
 } from './object-list/my-dspace-result-list-element/item-list-preview/themed-item-list-preview.component';
@@ -403,7 +407,6 @@ import { IpwItemMetadataStatusDirective } from './ipw-helpers/ipw-item-metadata-
 import { IpwItemMetadataInternalDirective } from './ipw-helpers/ipw-item-metadata-internal.directive';
 
 const MODULES = [
-  // Do NOT include UniversalModule, HttpModule, or JsonpModule here
   CommonModule,
   SortablejsModule,
   FileUploadModule,
@@ -421,9 +424,11 @@ const MODULES = [
   RouterModule,
   NouisliderModule,
   MomentModule,
-  TextMaskModule,
   DragDropModule,
   CdkTreeModule,
+  GoogleRecaptchaModule,
+  MetricsModule,
+  NgbModule,
   ChartsModule,
   MaterialModule,
   FlexLayoutModule,
@@ -431,10 +436,13 @@ const MODULES = [
 
 const ROOT_MODULES = [
   TranslateModule.forChild({
-    missingTranslationHandler: { provide: MissingTranslationHandler, useClass: MissingTranslationHelper },
-    useDefaultLang: true
+    missingTranslationHandler: {
+      provide: MissingTranslationHandler,
+      useClass: MissingTranslationHelper,
+    },
+    useDefaultLang: true,
   }),
-  ChartsModule.withEntryComponents()
+  ChartsModule.withEntryComponents(),
 ];
 
 const PIPES = [
@@ -449,12 +457,15 @@ const PIPES = [
   ObjectValuesPipe,
   ConsolePipe,
   ObjNgFor,
+  BrowserOnlyPipe,
+  MarkdownPipe,
 ];
 
 const COMPONENTS = [
   // put shared components here
   AlertComponent,
   AuthNavMenuComponent,
+  ThemedAuthNavMenuComponent,
   UserMenuComponent,
   ChipsComponent,
   DsSelectComponent,
@@ -462,15 +473,18 @@ const COMPONENTS = [
   FileSectionComponent,
   LangSwitchComponent,
   LoadingComponent,
+  ThemedLoadingComponent,
   LogInComponent,
   LogOutComponent,
   NumberPickerComponent,
   ObjectListComponent,
+  ThemedObjectListComponent,
   ObjectDetailComponent,
   ObjectGridComponent,
   AbstractListableElementComponent,
   ObjectCollectionComponent,
   PaginationComponent,
+  RSSComponent,
   SearchFormComponent,
   PageWithSidebarComponent,
   SidebarDropdownComponent,
@@ -482,6 +496,7 @@ const COMPONENTS = [
   ItemListPreviewComponent,
   ThemedItemListPreviewComponent,
   MyDSpaceItemStatusComponent,
+  ItemCorrectionComponent,
   ItemSubmitterComponent,
   ItemDetailPreviewComponent,
   ItemDetailPreviewFieldComponent,
@@ -505,34 +520,36 @@ const COMPONENTS = [
   DsoInputSuggestionsComponent,
   DSOSelectorComponent,
   CreateCommunityParentSelectorComponent,
+  ThemedCreateCommunityParentSelectorComponent,
   CreateCollectionParentSelectorComponent,
+  ThemedCreateCollectionParentSelectorComponent,
   CreateItemParentSelectorComponent,
+  ThemedCreateItemParentSelectorComponent,
   BulkImportSelectorComponent,
   EditCommunitySelectorComponent,
+  ThemedEditCommunitySelectorComponent,
   EditCollectionSelectorComponent,
+  ThemedEditCollectionSelectorComponent,
   EditItemSelectorComponent,
+  ThemedEditItemSelectorComponent,
   ClaimItemSelectorComponent,
   CommunitySearchResultListElementComponent,
   CollectionSearchResultListElementComponent,
-  BrowseByComponent,
-
   CollectionSearchResultGridElementComponent,
   CommunitySearchResultGridElementComponent,
+  SearchExportCsvComponent,
   PageSizeSelectorComponent,
   ListableObjectComponentLoaderComponent,
   CollectionListElementComponent,
   CommunityListElementComponent,
   CollectionGridElementComponent,
   CommunityGridElementComponent,
-  BrowseByComponent,
   AbstractTrackableComponent,
   ComcolMetadataComponent,
   TypeBadgeComponent,
-  MetricBadgesComponent,
-  MetricDonutsComponent,
+  AccessStatusBadgeComponent,
   BrowseByComponent,
   AbstractTrackableComponent,
-
   ItemSelectComponent,
   CollectionSelectComponent,
   MetadataRepresentationLoaderComponent,
@@ -556,6 +573,8 @@ const COMPONENTS = [
   CollectionDropdownComponent,
   EntityDropdownComponent,
   ExportMetadataSelectorComponent,
+  ImportBatchSelectorComponent,
+  ExportBatchSelectorComponent,
   ConfirmationModalComponent,
   VocabularyTreeviewComponent,
   AuthorizedCollectionSelectorComponent,
@@ -581,9 +600,8 @@ const COMPONENTS = [
   CommunitySidebarSearchListElementComponent,
   SearchNavbarComponent,
   ScopeSelectorModalComponent,
-  ItemExportComponent,
-  ItemExportAlertComponent,
-  ItemExportModalLauncherComponent,
+  ItemPageTitleFieldComponent,
+  ThemedSearchNavbarComponent,
   SearchChartsComponent,
   SearchChartBarComponent,
   SearchChartBarToLeftComponent,
@@ -598,33 +616,15 @@ const COMPONENTS = [
   RelationshipsListComponent,
   RelationshipsItemsActionsComponent,
   RelationshipsItemsListPreviewComponent,
-  MetricLoaderComponent,
-  MetricAltmetricComponent,
-  MetricDimensionsComponent,
-  MetricDspacecrisComponent,
-  MetricGooglescholarComponent,
-  MetricEmbeddedViewComponent,
-  MetricEmbeddedDownloadComponent,
   BrowseMostElementsComponent,
-  ThemedBrowseSectionComponent,
-  BrowseSectionComponent,
-  TopSectionComponent,
-  ThemedTopSectionComponent,
-  FacetSectionComponent,
-  ThemedFacetSectionComponent,
-  SearchSectionComponent,
-  TextSectionComponent,
-  CountersSectionComponent,
-  ThemedCountersSectionComponent,
-  MultiColumnTopSectionComponent,
   EditMetadataSecurityComponent,
   MetadataLinkViewComponent,
   ExportExcelSelectorComponent,
-  ThemedMultiColumnTopSectionComponent,
-  ThemedSearchSectionComponent,
-  ThemedTextSectionComponent,
   ThemedBrowseMostElementsComponent,
   SearchChartBarHorizontalComponent,
+  EpersonGroupListComponent,
+  EpersonSearchBoxComponent,
+  GroupSearchBoxComponent,
   CreateImpactPathwayComponent,
   AuthorityTypeaheadComponent,
   AuthorityDropdownComponent,
@@ -659,13 +659,19 @@ const ENTRY_COMPONENTS = [
   StartsWithDateComponent,
   StartsWithTextComponent,
   CreateCommunityParentSelectorComponent,
+  ThemedCreateCommunityParentSelectorComponent,
   CreateCollectionParentSelectorComponent,
+  ThemedCreateCollectionParentSelectorComponent,
   CreateItemParentSelectorComponent,
+  ThemedCreateItemParentSelectorComponent,
   BulkImportSelectorComponent,
   ClaimItemSelectorComponent,
   EditCommunitySelectorComponent,
+  ThemedEditCommunitySelectorComponent,
   EditCollectionSelectorComponent,
+  ThemedEditCollectionSelectorComponent,
   EditItemSelectorComponent,
+  ThemedEditItemSelectorComponent,
   PlainTextMetadataListElementComponent,
   ItemMetadataListElementComponent,
   MetadataRepresentationListElementComponent,
@@ -685,6 +691,8 @@ const ENTRY_COMPONENTS = [
   BitstreamRequestACopyPageComponent,
   CurationFormComponent,
   ExportMetadataSelectorComponent,
+  ImportBatchSelectorComponent,
+  ExportBatchSelectorComponent,
   ConfirmationModalComponent,
   VocabularyTreeviewComponent,
   SidebarSearchListElementComponent,
@@ -695,26 +703,14 @@ const ENTRY_COMPONENTS = [
   OnClickMenuItemComponent,
   TextMenuItemComponent,
   ScopeSelectorModalComponent,
-  ThemedBrowseSectionComponent,
-  BrowseSectionComponent,
-  TopSectionComponent,
-  ThemedTopSectionComponent,
-  FacetSectionComponent,
-  ThemedFacetSectionComponent,
-  SearchSectionComponent,
-  TextSectionComponent,
-  CountersSectionComponent,
-  ThemedCountersSectionComponent,
-  MultiColumnTopSectionComponent,
+  ExternalLinkMenuItemComponent,
   SearchChartBarComponent,
   SearchChartBarToLeftComponent,
   SearchChartBarToRightComponent,
   SearchChartPieComponent,
   SearchChartLineComponent,
-  ThemedMultiColumnTopSectionComponent,
-  ThemedSearchSectionComponent,
-  ThemedTextSectionComponent,
   ThemedBrowseMostElementsComponent,
+  RelationshipsListComponent,
   SearchChartBarHorizontalComponent
 ];
 
@@ -723,17 +719,20 @@ const SHARED_ITEM_PAGE_COMPONENTS = [
   MetadataValuesComponent,
   DsoPageEditButtonComponent,
   DsoPageVersionButtonComponent,
+  PersonPageClaimButtonComponent,
   ItemAlertsComponent,
   GenericItemPageFieldComponent,
   MetadataRepresentationListComponent,
   RelatedItemsComponent,
+  DsoPageOrcidButtonComponent,
   ItemCreateComponent
 ];
 
 const PROVIDERS = [
   TruncatableService,
   MockAdminGuard,
-  AbstractTrackableComponent
+  AbstractTrackableComponent,
+  ThumbnailService
 ];
 
 const DIRECTIVES = [
@@ -754,6 +753,7 @@ const DIRECTIVES = [
   NgForTrackByIdDirective,
   MetadataFieldValidator,
   HoverClassDirective,
+  EntityIconDirective,
   TaskColorDirective,
   IpwItemMetadataStatusDirective,
   IpwItemMetadataInternalDirective
@@ -772,8 +772,6 @@ const DIRECTIVES = [
     ...SHARED_ITEM_PAGE_COMPONENTS,
     ItemVersionsSummaryModalComponent,
     ItemVersionsDeleteModalComponent,
-    ItemExportAlertComponent,
-    MetricPlumxComponent,
   ],
   providers: [
     ...PROVIDERS

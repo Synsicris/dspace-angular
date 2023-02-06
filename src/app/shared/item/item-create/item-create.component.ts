@@ -11,7 +11,7 @@ import {
   SubmissionImportExternalCollectionComponent
 } from '../../../submission/import-external/import-external-collection/submission-import-external-collection.component';
 import { CollectionListEntry } from '../../collection-dropdown/collection-dropdown.component';
-import { EntityTypeService } from '../../../core/data/entity-type.service';
+import { EntityTypeDataService } from '../../../core/data/entity-type-data.service';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { isNotEmpty } from '../../empty.util';
@@ -65,7 +65,7 @@ export class ItemCreateComponent implements OnInit {
    */
   @Output() refresh = new EventEmitter();
 
-  constructor(private authService: AuthService, private entityTypeService: EntityTypeService, private modalService: NgbModal, private router: Router) { }
+  constructor(private authService: AuthService, private entityTypeService: EntityTypeDataService, private modalService: NgbModal, private router: Router) { }
 
   ngOnInit(): void {
     combineLatest([

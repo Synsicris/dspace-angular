@@ -19,8 +19,10 @@ import { PaginationComponentOptions } from '../../../pagination/pagination-compo
 import { buildPaginatedList } from '../../../../core/data/paginated-list.model';
 import { PageInfo } from '../../../../core/shared/page-info.model';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { SortDirection, SortOptions } from '../../../../core/cache/models/sort-options.model';
 import { PaginationService } from '../../../../core/pagination/pagination.service';
 import { PaginationServiceStub } from '../../../testing/pagination-service.stub';
+import { FindListOptions } from '../../../../core/data/find-list-options.model';
 import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
 import { DSONameServiceMock } from '../../../mocks/dso-name.service.mock';
 

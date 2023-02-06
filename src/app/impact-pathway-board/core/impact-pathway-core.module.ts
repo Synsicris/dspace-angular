@@ -45,9 +45,6 @@ const PROVIDERS = [
   providers: [
     ...PROVIDERS
   ],
-  entryComponents: [
-    ...ENTRY_COMPONENTS
-  ],
   exports: [
     ...COMPONENTS,
     ...DIRECTIVES

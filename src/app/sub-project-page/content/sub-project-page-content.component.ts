@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SearchService } from '../../core/shared/search/search.service';
 import { LinkService } from '../../core/cache/builders/link.service';
-import { DsoRedirectDataService } from '../../core/data/dso-redirect-data.service';
+import { DsoRedirectService } from '../../core/data/dso-redirect.service';
 import { Community } from '../../core/shared/community.model';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
 import { ImpactPathwayService } from '../../impact-pathway-board/core/impact-pathway.service';
@@ -33,7 +33,7 @@ export class SubProjectPageContentComponent {
   public projectRoute = PROJECT_ROUTE;
 
   constructor(
-    protected dsoService: DsoRedirectDataService,
+    protected dsoService: DsoRedirectService,
     protected impactPathwayService: ImpactPathwayService,
     protected linkService: LinkService,
     protected modalService: NgbModal,

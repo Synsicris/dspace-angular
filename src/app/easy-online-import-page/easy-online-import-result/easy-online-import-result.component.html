@@ -15,7 +15,7 @@
                                         [showLabel]="true"
                                         [object]="item"
                                         [linkType]="linkType"
-                                        [hideMetrics]="true"
+                                        [showMetrics]="false"
                                         [class.mb-3]="!last"></ds-item-search-result-list-element>
   </div>
   <div *ngIf="(modifiedItemList | async)?.length > 0" class="mt-5">
@@ -27,7 +27,7 @@
                                         [showLabel]="true"
                                         [object]="item"
                                         [linkType]="linkType"
-                                        [hideMetrics]="true"
+                                        [showMetrics]="false"
                                         [class.mb-3]="!last"></ds-item-search-result-list-element>
   </div>
 </ng-container>

@@ -5,7 +5,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { Community } from '../shared/community.model';
 import { GroupDataService } from '../eperson/group-data.service';
 import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../shared/operators';
-import { map, mergeMap, reduce, tap } from 'rxjs/operators';
+import { map, mergeMap, reduce } from 'rxjs/operators';
 import { Group } from '../eperson/models/group.model';
 import { CommunityDataService } from '../data/community-data.service';
 import { Item } from '../shared/item.model';
@@ -182,9 +182,7 @@ export class ProjectGroupService {
     const fundersProgrammeManagers$ = this.getProgrammeManagersGroupUUIDByItem(programme);
 
     return combineLatest([fundersManagers$, fundersProgrammeManagers$]).pipe(
-      tap(console.log),
-      map(([fundingMembers, projectMembers]) => [fundingMembers, ...projectMembers]),
-      tap(console.log),
+      map(([fundingMembers, projectMembers]) => [fundingMembers, ...projectMembers])
     );
   }
 
@@ -193,9 +191,7 @@ export class ProjectGroupService {
     const programmeProjectFunders$ = this.getProgrammeProjectFundersGroupUUIDByItem(programme);
 
     return combineLatest([projectFunders$, programmeProjectFunders$]).pipe(
-      tap(console.log),
-      map(([fundingMembers, projectMembers]) => [fundingMembers, ...projectMembers]),
-      tap(console.log),
+      map(([fundingMembers, projectMembers]) => [fundingMembers, ...projectMembers])
     );
   }
 

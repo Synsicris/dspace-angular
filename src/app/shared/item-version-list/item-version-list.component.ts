@@ -82,7 +82,6 @@ export class ItemVersionListComponent implements OnInit {
                 this.currentVersion.next(this.getVersionDescription(version));
               }
               if (itemRD.hasSucceeded && this.projectVersionService.isActiveWorkingInstance(itemRD.payload)) {
-                console.log(itemRD.payload.id);
                 this.activeProjectInstanceVersion.next(version.id);
               }
               return version;

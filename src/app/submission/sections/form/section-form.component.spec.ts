@@ -19,7 +19,7 @@ import { getMockFormOperationsService } from '../../../shared/mocks/form-operati
 import { SectionFormOperationsService } from './section-form-operations.service';
 import { getMockFormService } from '../../../shared/mocks/form-service.mock';
 import { FormService } from '../../../shared/form/form.service';
-import { SubmissionFormsConfigService } from '../../../core/config/submission-forms-config.service';
+import { SubmissionFormsConfigDataService } from '../../../core/config/submission-forms-config-data.service';
 import { SectionDataObject } from '../models/section-data.model';
 import { SectionsType } from '../sections-type';
 import {
@@ -35,7 +35,6 @@ import { FormFieldModel } from '../../../shared/form/builder/models/form-field.m
 import { FormFieldMetadataValueObject } from '../../../shared/form/builder/models/form-field-metadata-value.model';
 import { DynamicRowGroupModel } from '../../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-row-group-model';
 import { DsDynamicInputModel } from '../../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-input.model';
-import { SubmissionSectionError } from '../../objects/submission-objects.reducer';
 import { DynamicFormControlEvent, DynamicFormControlEventType } from '@ng-dynamic-forms/core';
 import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { FormRowModel } from '../../../core/config/models/config-submission-form.model';
@@ -46,13 +45,14 @@ import { RequestService } from '../../../core/data/request.service';
 import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
 import { cold } from 'jasmine-marbles';
 import { WorkflowItem } from '../../../core/submission/models/workflowitem.model';
+import { SubmissionSectionError } from '../../objects/submission-section-error.model';
 import {
   SubmissionVisibilityType,
   SubmissionVisibilityValue
 } from '../../../core/config/models/config-submission-section.model';
 import { SubmissionScopeType } from '../../../core/submission/submission-scope-type';
 
-function getMockSubmissionFormsConfigService(): SubmissionFormsConfigService {
+function getMockSubmissionFormsConfigService(): SubmissionFormsConfigDataService {
   return jasmine.createSpyObj('FormOperationsService', {
     getConfigAll: jasmine.createSpy('getConfigAll'),
     getConfigByHref: jasmine.createSpy('getConfigByHref'),
@@ -182,7 +182,7 @@ describe('SubmissionSectionFormComponent test suite', () => {
         { provide: FormBuilderService, useValue: getMockFormBuilderService() },
         { provide: SectionFormOperationsService, useValue: getMockFormOperationsService() },
         { provide: FormService, useValue: formService },
-        { provide: SubmissionFormsConfigService, useValue: formConfigService },
+        { provide: SubmissionFormsConfigDataService, useValue: formConfigService },
         { provide: NotificationsService, useClass: NotificationsServiceStub },
         { provide: SectionsService, useValue: sectionsServiceStub },
         { provide: SubmissionService, useClass: SubmissionServiceStub },
@@ -372,7 +372,7 @@ describe('SubmissionSectionFormComponent test suite', () => {
       describe('in workspace scope', () => {
         beforeEach(() => {
           // @ts-ignore
-          comp.submissionObject = { type: WorkspaceItem.type };
+          comp.submissionObject = { type: WorkspaceItem.type.value };
           submissionServiceStub.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkspaceItem);
         });
 
@@ -392,7 +392,7 @@ describe('SubmissionSectionFormComponent test suite', () => {
       describe('in workflow scope', () => {
         beforeEach(() => {
           // @ts-ignore
-          comp.submissionObject = { type: WorkflowItem.type };
+          comp.submissionObject = { type: WorkflowItem.type.value };
           submissionServiceStub.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkflowItem);
         });
 

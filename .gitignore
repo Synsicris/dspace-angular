@@ -1,3 +1,4 @@
+/.angular/cache
 /__build__
 /__server_build__
 /node_modules
@@ -45,3 +46,5 @@ package-lock.json
 *_backup
 *.TMP
 *.tmp
+
+junit.xml

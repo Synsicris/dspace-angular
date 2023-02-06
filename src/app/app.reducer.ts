@@ -4,35 +4,58 @@ import {
   ePeopleRegistryReducer,
   EPeopleRegistryState
 } from './access-control/epeople-registry/epeople-registry.reducers';
-import { groupRegistryReducer, GroupRegistryState } from './access-control/group-registry/group-registry.reducers';
+import {
+  groupRegistryReducer,
+  GroupRegistryState
+} from './access-control/group-registry/group-registry.reducers';
 import {
   metadataRegistryReducer,
   MetadataRegistryState
 } from './admin/admin-registries/metadata-registry/metadata-registry.reducers';
-import { CommunityListReducer, CommunityListState } from './community-list-page/community-list.reducer';
+import {
+  CommunityListReducer,
+  CommunityListState
+} from './community-list-page/community-list.reducer';
 import { hasValue } from './shared/empty.util';
 import {
   NameVariantListsState,
   nameVariantReducer
 } from './shared/form/builder/ds-dynamic-form-ui/relation-lookup-modal/name-variant.reducer';
 import { formReducer, FormState } from './shared/form/form.reducer';
-import { menusReducer, MenusState } from './shared/menu/menu.reducer';
-import { notificationsReducer, NotificationsState } from './shared/notifications/notifications.reducers';
+import { menusReducer} from './shared/menu/menu.reducer';
+import {
+  notificationsReducer,
+  NotificationsState
+} from './shared/notifications/notifications.reducers';
 import {
   selectableListReducer,
   SelectableListsState
 } from './shared/object-list/selectable-list/selectable-list.reducer';
-import { ObjectSelectionListState, objectSelectionReducer } from './shared/object-select/object-select.reducer';
+import {
+  ObjectSelectionListState,
+  objectSelectionReducer
+} from './shared/object-select/object-select.reducer';
 import { cssVariablesReducer, CSSVariablesState } from './shared/sass-helper/sass-helper.reducer';
 
 import { hostWindowReducer, HostWindowState } from './shared/search/host-window.reducer';
-import { filterReducer, SearchFiltersState } from './shared/search/search-filters/search-filter/search-filter.reducer';
-import { sidebarFilterReducer, SidebarFiltersState } from './shared/sidebar/filter/sidebar-filter.reducer';
+import {
+  filterReducer,
+  SearchFiltersState
+} from './shared/search/search-filters/search-filter/search-filter.reducer';
+import {
+  sidebarFilterReducer,
+  SidebarFiltersState
+} from './shared/sidebar/filter/sidebar-filter.reducer';
 import { sidebarReducer, SidebarState } from './shared/sidebar/sidebar.reducer';
 import { truncatableReducer, TruncatablesState } from './shared/truncatable/truncatable.reducer';
 import { ThemeState, themeReducer } from './shared/theme-support/theme.reducer';
+import { MenusState } from './shared/menu/menus-state.model';
 import { StatisticsReducer, StatisticsState } from './core/statistics/statistics.reducer';
 import { correlationIdReducer } from './correlation-id/correlation-id.reducer';
+import {
+  editItemRelationshipsReducer,
+  EditItemRelationshipsState
+} from './edit-item-relationships/edit-item-relationships.reducer';
 
 export interface AppState {
   router: fromRouter.RouterReducerState;
@@ -55,6 +78,7 @@ export interface AppState {
   groupRegistry: GroupRegistryState;
   statistics: StatisticsState;
   correlationId: string;
+  editItemRelationships: EditItemRelationshipsState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -77,7 +101,8 @@ export const appReducers: ActionReducerMap<AppState> = {
   epeopleRegistry: ePeopleRegistryReducer,
   groupRegistry: groupRegistryReducer,
   statistics: StatisticsReducer,
-  correlationId: correlationIdReducer
+  correlationId: correlationIdReducer,
+  editItemRelationships: editItemRelationshipsReducer
 };
 
 export const routerStateSelector = (state: AppState) => state.router;
