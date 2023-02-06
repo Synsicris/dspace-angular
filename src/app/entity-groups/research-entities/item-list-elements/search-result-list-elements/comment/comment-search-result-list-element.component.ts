@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { map, mergeMap, startWith, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EditItemDataService } from '../../../../../core/submission/edititem-data.service';
 import { EditItemMode } from '../../../../../core/submission/models/edititem-mode.model';
-import { EditItem } from '../../../../../core/submission/models/edititem.model';
 import { NotificationsService } from '../../../../../shared/notifications/notifications.service';
 import { NoContent } from '../../../../../core/shared/NoContent.model';
 import { ItemDataService } from '../../../../../core/data/item-data.service';
@@ -29,19 +28,15 @@ import {
   EditSimpleItemModalComponent
 } from '../../../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
-import {
-  getAllSucceededRemoteDataPayload,
-  getFirstCompletedRemoteData,
-  getFirstSucceededRemoteListPayload
-} from '../../../../../core/shared/operators';
+import { getFirstCompletedRemoteData } from '../../../../../core/shared/operators';
 import { ConfigObject } from '../../../../../core/config/models/config.model';
 import { ConfirmationModalComponent } from '../../../../../shared/confirmation-modal/confirmation-modal.component';
 import { hasValue, isNotEmpty } from '../../../../../shared/empty.util';
-import { followLink } from '../../../../../shared/utils/follow-link-config.model';
 import { Item } from '../../../../../core/shared/item.model';
 import { APP_CONFIG, AppConfig } from '../../../../../../config/app-config.interface';
 import { getEntityPageRoute } from '../../../../../item-page/item-page-routing-paths';
 import { MetadataValue } from '../../../../../core/shared/metadata.models';
+import { PaginatedList } from '../../../../../core/data/paginated-list.model';
 
 @listableObjectComponent('CommentSearchResult', ViewMode.ListElement)
 @Component({
@@ -168,12 +163,11 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
    * Get the editModes
    */
   getEditModes(): void {
-    this.sub = this.editItemService.findById(this.dso.id + ':none', false, true, followLink('modes')).pipe(
-      getAllSucceededRemoteDataPayload(),
-      mergeMap((editItem: EditItem) => editItem.modes.pipe(
-        getFirstSucceededRemoteListPayload())
-      ),
-      startWith([])
+    this.editItemService.searchEditModesById(this.dso.id).pipe(
+      getFirstCompletedRemoteData(),
+      map((modesRD: RemoteData<PaginatedList<EditItemMode>>) => {
+        return modesRD.hasSucceeded ? modesRD.payload.page : []
+      })
     ).subscribe((editModes: EditItemMode[]) => {
       const allowedModes = editModes.filter((mode: EditItemMode) => this.isEditModeAllowed(mode));
       this.editModes$.next(allowedModes);

@@ -160,4 +160,7 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
     this.canCreateItems$.complete();
   }
 
+  getTargetEntity() {
+    return this.box.shortname;
+  }
 }

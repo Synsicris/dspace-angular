@@ -30,6 +30,7 @@ import {
 } from './simple/abstract-incremental-list/abstract-incremental-list.component';
 import { UntypedItemComponent } from './simple/item-types/untyped-item/untyped-item.component';
 import { CrisItemPageModule } from '../cris-item-page/cris-item-page.module';
+import { SubmissionModule } from '../submission/submission.module';
 import { ContextMenuModule } from '../shared/context-menu/context-menu.module';
 import { JournalEntitiesModule } from '../entity-groups/journal-entities/journal-entities.module';
 import { ResearchEntitiesModule } from '../entity-groups/research-entities/research-entities.module';
@@ -98,6 +99,7 @@ const DECLARATIONS = [
     NgxGalleryModule,
     NgbAccordionModule,
     CrisItemPageModule,
+    SubmissionModule,
     ContextMenuModule.withEntryComponents(),
     MiradorViewerModule,
     ImpactPathwayCoreModule
