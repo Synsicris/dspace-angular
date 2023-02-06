@@ -48,10 +48,10 @@ import {
   SearchResultListElementComponent
 } from './object-list/search-result-list-element/search-result-list-element.component';
 import { ObjectListComponent } from './object-list/object-list.component';
-import { ThemedObjectListComponent } from './object-list/themed-object-list.component';
 import {
   CollectionGridElementComponent
 } from './object-grid/collection-grid-element/collection-grid-element.component';
+import { ThemedObjectListComponent } from './object-list/themed-object-list.component';
 import { CommunityGridElementComponent } from './object-grid/community-grid-element/community-grid-element.component';
 import {
   AbstractListableElementComponent
@@ -300,21 +300,39 @@ import { LinkMenuItemComponent } from './menu/menu-item/link-menu-item.component
 import { OnClickMenuItemComponent } from './menu/menu-item/onclick-menu-item.component';
 import { TextMenuItemComponent } from './menu/menu-item/text-menu-item.component';
 import { SearchChartsComponent } from './search/search-charts/search-charts.component';
-import { SearchChartBarComponent } from './search/search-charts/search-chart/search-chart-bar/search-chart-bar.component';
-import { SearchChartBarToLeftComponent } from './search/search-charts/search-chart/search-chart-bar-to-left/search-chart-bar-to-left.component';
-import { SearchChartBarToRightComponent } from './search/search-charts/search-chart/search-chart-bar-to-right/search-chart-bar-to-right.component';
-import { SearchChartPieComponent } from './search/search-charts/search-chart/search-chart-pie/search-chart-pie.component';
-import { SearchChartLineComponent } from './search/search-charts/search-chart/search-chart-line/search-chart-line.component';
-import { SearchChartFilterWrapperComponent } from './search/search-charts/search-chart/search-chart-wrapper/search-chart-wrapper.component';
+import {
+  SearchChartBarComponent
+} from './search/search-charts/search-chart/search-chart-bar/search-chart-bar.component';
+import {
+  SearchChartBarToLeftComponent
+} from './search/search-charts/search-chart/search-chart-bar-to-left/search-chart-bar-to-left.component';
+import {
+  SearchChartBarToRightComponent
+} from './search/search-charts/search-chart/search-chart-bar-to-right/search-chart-bar-to-right.component';
+import {
+  SearchChartPieComponent
+} from './search/search-charts/search-chart/search-chart-pie/search-chart-pie.component';
+import {
+  SearchChartLineComponent
+} from './search/search-charts/search-chart/search-chart-line/search-chart-line.component';
+import {
+  SearchChartFilterWrapperComponent
+} from './search/search-charts/search-chart/search-chart-wrapper/search-chart-wrapper.component';
 import { SearchChartComponent } from './search/search-charts/search-chart/search-chart.component';
 import { ChartsModule } from '../charts/charts.module';
-import { SearchChartFilterComponent } from './search/search-charts/search-chart/search-chart-filter/search-chart-filter.component';
+import {
+  SearchChartFilterComponent
+} from './search/search-charts/search-chart/search-chart-filter/search-chart-filter.component';
 import { VocabularyExternalSourceComponent } from './vocabulary-external-source/vocabulary-external-source.component';
 import { BulkImportSelectorComponent } from './dso-selector/modal-wrappers/bulk-import-collection-selector/bulk-import-collection-selector.component';
 import { AdministeredCollectionSelectorComponent } from './dso-selector/dso-selector/administered-collection-selector/administered-collection-selector.component';
 import { RelationshipsListComponent } from './object-list/relationships-list/relationships-list.component';
-import { RelationshipsItemsActionsComponent } from './object-list/relationships-list/relationships-items-actions/relationships-items-actions.component';
-import { RelationshipsItemsListPreviewComponent } from './object-list/relationships-list/relationships-items-list-preview/relationships-items-list-preview.component';
+import {
+  RelationshipsItemsActionsComponent
+} from './object-list/relationships-list/relationships-items-actions/relationships-items-actions.component';
+import {
+  RelationshipsItemsListPreviewComponent
+} from './object-list/relationships-list/relationships-items-list-preview/relationships-items-list-preview.component';
 import { SearchNavbarComponent } from '../search-navbar/search-navbar.component';
 import { ThemedSearchNavbarComponent } from '../search-navbar/themed-search-navbar.component';
 import {
@@ -334,9 +352,10 @@ import { ClaimItemSelectorComponent } from './dso-selector/modal-wrappers/claim-
 import { BrowseMostElementsComponent } from './browse-most-elements/browse-most-elements.component';
 import { EditMetadataSecurityComponent } from '../item-page/edit-item-page/edit-metadata-security/edit-metadata-security.component';
 import { MetadataLinkViewComponent } from './metadata-link-view/metadata-link-view.component';
-import { ExportExcelSelectorComponent } from './dso-selector/modal-wrappers/export-excel-selector/export-excel-selector.component';
+import {
+  ExportExcelSelectorComponent
+} from './dso-selector/modal-wrappers/export-excel-selector/export-excel-selector.component';
 import { ThemedBrowseMostElementsComponent } from './browse-most-elements/themed-browse-most-elements.component';
-import { ThemedItemListPreviewComponent } from './object-list/my-dspace-result-list-element/item-list-preview/themed-item-list-preview.component';
 import { RSSComponent } from './rss-feed/rss.component';
 import { ExternalLinkMenuItemComponent } from './menu/menu-item/external-link-menu-item.component';
 import { DsoPageOrcidButtonComponent } from './dso-page/dso-page-orcid-button/dso-page-orcid-button.component';
@@ -351,13 +370,7 @@ import { MarkdownPipe } from './utils/markdown.pipe';
 import { GoogleRecaptchaModule } from '../core/google-recaptcha/google-recaptcha.module';
 import { ItemCorrectionComponent } from './object-collection/shared/mydspace-item-correction/item-correction.component';
 import { MetricsModule } from './metric/metrics.module';
-import { SearchChartBarHorizontalComponent } from './search/search-charts/search-chart/search-chart-bar-horizontal/search-chart-bar-horizontal.component';
 import { ThumbnailService } from './thumbnail/thumbnail.service';
-import { ItemExportAlertComponent } from './search/item-export/item-export-alert/item-export-alert.component';
-import {
-  ItemExportModalLauncherComponent
-} from './search/item-export/item-export-modal-launcher/item-export-modal-launcher.component';
-import { ItemExportComponent } from './search/item-export/item-export/item-export.component';
 import { EpersonGroupListComponent } from './resource-policies/form/eperson-group-list/eperson-group-list.component';
 import {
   EpersonSearchBoxComponent
@@ -366,8 +379,15 @@ import {
   GroupSearchBoxComponent
 } from './resource-policies/form/eperson-group-list/group-search-box/group-search-box.component';
 import { EntityIconDirective } from './entity-icon/entity-icon.directive';
-import { ItemExportListComponent } from './search/item-export/item-export/item-export-list/item-export-list.component';
-import { CreateImpactPathwayComponent } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
+import {
+  ThemedItemListPreviewComponent
+} from './object-list/my-dspace-result-list-element/item-list-preview/themed-item-list-preview.component';
+import {
+  SearchChartBarHorizontalComponent
+} from './search/search-charts/search-chart/search-chart-bar-horizontal/search-chart-bar-horizontal.component';
+import {
+  CreateImpactPathwayComponent
+} from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { TaskColorDirective } from '../impact-pathway-board/shared/impact-path-way/impact-path-way-task/task.directive';
 import { AuthorityTypeaheadComponent } from './authority-typeahead/authority-typeahead.component';
 import { MaterialModule } from './material/material.module';
@@ -379,8 +399,12 @@ import { AuthorityDropdownComponent } from './authority-dropdown/authority-dropd
 import { ItemVersionListComponent } from './item-version-list/item-version-list.component';
 import { CompareItemComponent } from './compare-item/compare-item.component';
 import { GrantBadgeComponent } from './object-list/grant-badge/grant-badge.component';
-import { ItemVersionsVisibilityModalComponent } from './item/item-versions/item-versions-visibility-modal/item-versions-visibility-modal.component';
+import {
+  ItemVersionsVisibilityModalComponent
+} from './item/item-versions/item-versions-visibility-modal/item-versions-visibility-modal.component';
 import { ViewVersionBadgesComponent } from './view-version-badges/view-version-badges.component';
+import { IpwItemMetadataStatusDirective } from './ipw-helpers/ipw-item-metadata-status.directive';
+import { IpwItemMetadataInternalDirective } from './ipw-helpers/ipw-item-metadata-internal.directive';
 
 const MODULES = [
   CommonModule,
@@ -601,7 +625,6 @@ const COMPONENTS = [
   EpersonGroupListComponent,
   EpersonSearchBoxComponent,
   GroupSearchBoxComponent,
-  SearchChartBarHorizontalComponent,
   CreateImpactPathwayComponent,
   AuthorityTypeaheadComponent,
   AuthorityDropdownComponent,
@@ -687,7 +710,6 @@ const ENTRY_COMPONENTS = [
   SearchChartPieComponent,
   SearchChartLineComponent,
   ThemedBrowseMostElementsComponent,
-  SearchChartBarHorizontalComponent,
   RelationshipsListComponent,
   SearchChartBarHorizontalComponent
 ];
@@ -732,7 +754,9 @@ const DIRECTIVES = [
   MetadataFieldValidator,
   HoverClassDirective,
   EntityIconDirective,
-  TaskColorDirective
+  TaskColorDirective,
+  IpwItemMetadataStatusDirective,
+  IpwItemMetadataInternalDirective
 ];
 
 @NgModule({
