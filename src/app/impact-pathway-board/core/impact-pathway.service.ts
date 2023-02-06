@@ -54,13 +54,14 @@ import {
 } from './selectors';
 import { AppState } from '../../app.reducer';
 import { ImpactPathwayEntries, ImpactPathwayLink, ImpactPathwayState } from './impact-pathway.reducer';
-import { SubmissionFormsConfigService } from '../../core/config/submission-forms-config.service';
+import { SubmissionFormsConfigDataService } from '../../core/config/submission-forms-config-data.service';
 import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
 import { ItemJsonPatchOperationsService } from '../../core/data/item-json-patch-operations.service';
 import {
   AddImpactPathwaySubTaskAction,
   AddImpactPathwayTaskAction,
   AddImpactPathwayTaskLinksAction,
+  ClearImpactPathwayAction,
   ClearImpactPathwaySubtaskCollapseAction,
   GenerateImpactPathwayAction,
   GenerateImpactPathwaySubTaskAction,
@@ -102,6 +103,7 @@ import { SearchResult } from '../../shared/search/models/search-result.model';
 import { SearchService } from '../../core/shared/search/search.service';
 import { NoContent } from '../../core/shared/NoContent.model';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
+import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
 @Injectable()
 export class ImpactPathwayService {
@@ -112,7 +114,7 @@ export class ImpactPathwayService {
   constructor(
     private collectionService: CollectionDataService,
     private vocabularyService: VocabularyService,
-    private formConfigService: SubmissionFormsConfigService,
+    private formConfigService: SubmissionFormsConfigDataService,
     private itemService: ItemDataService,
     private operationsBuilder: JsonPatchOperationsBuilder,
     private itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
@@ -816,14 +818,40 @@ export class ImpactPathwayService {
   initImpactPathwayTask(taskItem: Item, parentId?: string, tasks: ImpactPathwayTask[] = []): ImpactPathwayTask {
     const type = taskItem.firstMetadataValue('dspace.entity.type');
     const description = taskItem.firstMetadataValue('dc.description');
+    const internalStatus = taskItem.firstMetadataValue('synsicris.type.internal');
+    const status = taskItem.firstMetadataValue('synsicris.type.status');
 
-    return new ImpactPathwayTask(taskItem.id, type, parentId, taskItem.name, description, null, null, tasks);
+    return new ImpactPathwayTask(
+      taskItem.id,
+      type,
+      parentId,
+      taskItem.name,
+      description,
+      null,
+      null,
+      tasks,
+      status,
+      internalStatus
+    );
   }
 
   updateImpactPathwayTask(newTaskItem: Item, oldTask: ImpactPathwayTask): ImpactPathwayTask {
     const description = newTaskItem.firstMetadataValue('dc.description');
+    const internalStatus = newTaskItem.firstMetadataValue('synsicris.type.internal');
+    const status = newTaskItem.firstMetadataValue('synsicris.type.status');
 
-    return new ImpactPathwayTask(oldTask.id, oldTask.type, oldTask.parentId, newTaskItem.name, description, oldTask.compareId, oldTask.compareStatus, oldTask.tasks);
+    return new ImpactPathwayTask(
+      oldTask.id,
+      oldTask.type,
+      oldTask.parentId,
+      newTaskItem.name,
+      description,
+      oldTask.compareId,
+      oldTask.compareStatus,
+      oldTask.tasks,
+      status,
+      internalStatus
+    );
   }
 
   updateImpactPathway(newImpactPathwayItem: Item, oldImpactPathway: ImpactPathway): ImpactPathway {
@@ -961,7 +989,7 @@ export class ImpactPathwayService {
 
   private createImpactPathwayStepWorkspaceItem(projectId: string, impactPathwayId: string, impactPathwayStepType: string, impactPathwayStepName: string): Observable<SubmissionObject> {
     const submission$ = this.getCollectionIdByProjectAndEntity(projectId, environment.impactPathway.impactPathwayStepEntity).pipe(
-      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, environment.impactPathway.impactPathwayStepEntity, false)),
+      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, environment.impactPathway.impactPathwayStepEntity)),
       mergeMap((submission: SubmissionObject) =>
         (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
       ));
@@ -987,20 +1015,20 @@ export class ImpactPathwayService {
 
   private createImpactPathwayWorkspaceItem(projectId: string, impactPathwayName: string, impactPathwayDescription: string): Observable<SubmissionObject> {
     const submission$ = this.getCollectionIdByProjectAndEntity(projectId, environment.impactPathway.impactPathwayEntity).pipe(
-      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, environment.impactPathway.impactPathwayEntity, false)),
+      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, environment.impactPathway.impactPathwayEntity)),
       mergeMap((submission: SubmissionObject) =>
         (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
       ),
       map((submission: SubmissionObject) => {
         return [submission, (submission.item as Item).id];
       }));
-    return combineLatestObservable(submission$.pipe(
+    return forkJoin([submission$.pipe(
       mergeMap(([submission, parentId]: [SubmissionObject, string]) => this.createImpactPathwaySteps(projectId, parentId).pipe(
         map((steps) => {
           return [submission, steps];
         })
       ))),
-      this.getImpactPathwaysFormSection()
+      this.getImpactPathwaysFormSection()]
     ).pipe(
       tap(([objects, sectionName]: [any[], string]) => {
         this.addPatchOperationForImpactPathway(sectionName, impactPathwayName, impactPathwayDescription, objects[1]);
@@ -1012,7 +1040,7 @@ export class ImpactPathwayService {
 
   private createImpactPathwayTaskWorkspaceItem(projectId: string, taskType: string): Observable<SubmissionObject> {
     return this.getCollectionIdByProjectAndEntity(projectId, taskType).pipe(
-      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType, false).pipe(
+      mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, taskType).pipe(
         mergeMap((submission: SubmissionObject) =>
           (isNotEmpty(submission)) ? observableOf(submission) : observableThrowError(null)
         )
@@ -1200,5 +1228,9 @@ export class ImpactPathwayService {
       map((collection: Collection) => isNotEmpty(collection) ? collection.id : null),
       tap(() => this.requestService.removeByHrefSubstring('findSubmitAuthorizedByCommunityAndMetadata'))
     );
+  }
+
+  public clearImpactPathway() {
+    this.store.dispatch(new ClearImpactPathwayAction());
   }
 }

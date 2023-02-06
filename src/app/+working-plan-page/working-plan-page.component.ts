@@ -6,7 +6,8 @@ import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Community } from '../core/shared/community.model';
-import { getFirstSucceededRemoteDataPayload, redirectOn4xx } from '../core/shared/operators';
+import { redirectOn4xx } from '../core/shared/authorized.operators';
+import { getFirstSucceededRemoteDataPayload } from '../core/shared/operators';
 import { AuthService } from '../core/auth/auth.service';
 import { Item } from '../core/shared/item.model';
 import { WorkingPlanStateService } from '../working-plan/core/working-plan-state.service';
@@ -103,7 +104,6 @@ export class WorkingPlanPageComponent implements OnInit {
         this.projectItemId = projectItemId;
         this.projectCommunityId = projectCommunityId;
         this.workingPlanRD = workingPlanRD;
-        console.log('isFunder',isFunder);
         this.isFunder = isFunder;
         this.initialized.next(true);
       });

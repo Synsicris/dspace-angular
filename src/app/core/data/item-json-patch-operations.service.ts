@@ -6,7 +6,7 @@ import { RequestService } from './request.service';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { JsonPatchOperationsService } from '../json-patch/json-patch-operations.service';
 import { PatchRequest } from './request.models';
-import { CoreState } from '../core.reducers';
+import { CoreState } from '../core-state.model';
 import { Item } from '../shared/item.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';

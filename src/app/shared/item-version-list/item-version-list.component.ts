@@ -82,7 +82,6 @@ export class ItemVersionListComponent implements OnInit {
                 this.currentVersion.next(this.getVersionDescription(version));
               }
               if (itemRD.hasSucceeded && this.projectVersionService.isActiveWorkingInstance(itemRD.payload)) {
-                console.log(itemRD.payload.id);
                 this.activeProjectInstanceVersion.next(version.id);
               }
               return version;
@@ -137,7 +136,6 @@ export class ItemVersionListComponent implements OnInit {
     return version.item.pipe(
       getFirstCompletedRemoteData(),
       map((itemRD: RemoteData<Item>) => {
-        console.log(itemRD);
         if (itemRD.hasSucceeded) {
           return this.projectVersionService.isActiveWorkingInstance(itemRD.payload) || this.projectVersionService.isVersionVisible(itemRD.payload);
         } else {

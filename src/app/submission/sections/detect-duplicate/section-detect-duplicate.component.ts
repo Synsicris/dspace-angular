@@ -15,7 +15,9 @@ import { SubmissionScopeType } from '../../../core/submission/submission-scope-t
 import { AlertType } from '../../../shared/alert/aletr-type';
 import { DetectDuplicateService } from './detect-duplicate.service';
 import { SectionsService } from '../sections.service';
-import { WorkspaceitemSectionDetectDuplicateObject } from '../../../core/submission/models/workspaceitem-section-deduplication.model';
+import {
+  WorkspaceitemSectionDetectDuplicateObject
+} from '../../../core/submission/models/workspaceitem-section-deduplication.model';
 import { PaginationService } from '../../../core/pagination/pagination.service';
 import { SubmissionVisibility } from '../../utils/visibility.util';
 
@@ -98,7 +100,7 @@ export class SubmissionSectionDetectDuplicateComponent extends SectionModelCompo
               @Inject('collectionIdProvider') public injectedCollectionId: string,
               @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
               @Inject('submissionIdProvider') public injectedSubmissionId: string) {
-    super(injectedCollectionId, injectedSectionData, injectedSubmissionId, null);
+    super(injectedCollectionId, injectedSectionData, injectedSubmissionId);
   }
 
   /**

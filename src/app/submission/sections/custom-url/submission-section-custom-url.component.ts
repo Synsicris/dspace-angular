@@ -10,12 +10,15 @@ import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder
 import { hasValue, isEmpty, isNotEmpty } from '../../../shared/empty.util';
 import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
 import { DynamicFormControlEvent, DynamicFormControlModel, DynamicInputModel } from '@ng-dynamic-forms/core';
-import { WorkspaceitemSectionCustomUrlObject } from '../../../core/submission/models/workspaceitem-section-custom-url.model';
+import {
+  WorkspaceitemSectionCustomUrlObject
+} from '../../../core/submission/models/workspaceitem-section-custom-url.model';
 import { SectionFormOperationsService } from '../form/section-form-operations.service';
 import { URLCombiner } from '../../../core/url-combiner/url-combiner';
 import { SubmissionService } from '../../submission.service';
 import { SubmissionScopeType } from '../../../core/submission/submission-scope-type';
-import { SubmissionSectionError, SubmissionSectionObject } from '../../objects/submission-objects.reducer';
+import { SubmissionSectionError } from '../../objects/submission-section-error.model';
+import { SubmissionSectionObject } from '../../objects/submission-section-object.model';
 import { FormService } from '../../../shared/form/form.service';
 
 /**
@@ -91,8 +94,7 @@ export class SubmissionSectionCustomUrlComponent extends SectionModelComponent {
     super(
       injectedCollectionId,
       injectedSectionData,
-      injectedSubmissionId,
-      null
+      injectedSubmissionId
     );
   }
 

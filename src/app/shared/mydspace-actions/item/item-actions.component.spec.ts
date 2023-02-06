@@ -86,7 +86,7 @@ describe('ItemActionsComponent', () => {
     };
 
     editItemDataService = jasmine.createSpyObj('EditItemDataService', {
-      checkEditModeByIDAndType: jasmine.createSpy('checkEditModeByIDAndType')
+      checkEditModeByIdAndType: jasmine.createSpy('checkEditModeByIdAndType')
     });
 
     TestBed.configureTestingModule({
@@ -132,7 +132,7 @@ describe('ItemActionsComponent', () => {
   describe('when is version of an item', () => {
     beforeEach(() => {
       projectVersionService.isVersionOfAnItem.and.returnValue(false);
-      editItemDataService.checkEditModeByIDAndType.and.returnValues(observableOf(false), observableOf(true));
+      editItemDataService.checkEditModeByIdAndType.and.returnValues(observableOf(false), observableOf(true));
       fixture.detectChanges();
     });
 

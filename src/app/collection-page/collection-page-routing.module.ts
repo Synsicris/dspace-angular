@@ -6,7 +6,7 @@ import { CreateCollectionPageComponent } from './create-collection-page/create-c
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
 import { CreateCollectionPageGuard } from './create-collection-page/create-collection-page.guard';
 import { DeleteCollectionPageComponent } from './delete-collection-page/delete-collection-page.component';
-import { EditItemTemplatePageComponent } from './edit-item-template-page/edit-item-template-page.component';
+import { ThemedEditItemTemplatePageComponent } from './edit-item-template-page/themed-edit-item-template-page.component';
 import { ItemTemplatePageResolver } from './edit-item-template-page/item-template-page.resolver';
 import { ProjectCollectionBreadcrumbResolver } from '../core/breadcrumbs/project-collection-breadcrumb.resolver';
 import { ProjectDsoBreadcrumbsService } from '../core/breadcrumbs/project-dso-breadcrumbs.service';
@@ -15,9 +15,10 @@ import { LinkService } from '../core/cache/builders/link.service';
 import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
 import { COLLECTION_CREATE_PATH, COLLECTION_EDIT_PATH, ITEMTEMPLATE_PATH } from './collection-page-routing-paths';
 import { CollectionPageAdministratorGuard } from './collection-page-administrator.guard';
-import { MenuItemType } from '../shared/menu/initial-menus-state';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { ThemedCollectionPageComponent } from './themed-collection-page.component';
+import { MenuItemType } from '../shared/menu/menu-item-type.model';
+import { EditCollectionResolver } from '../core/shared/resolvers/edit-collection.resolver';
 
 @NgModule({
   imports: [
@@ -36,6 +37,9 @@ import { ThemedCollectionPageComponent } from './themed-collection-page.componen
         runGuardsAndResolvers: 'always',
         children: [
           {
+            resolve: {
+              dso: EditCollectionResolver,
+            },
             path: COLLECTION_EDIT_PATH,
             loadChildren: () => import('./edit-collection-page/edit-collection-page.module')
               .then((m) => m.EditCollectionPageModule),
@@ -49,7 +53,7 @@ import { ThemedCollectionPageComponent } from './themed-collection-page.componen
           },
           {
             path: ITEMTEMPLATE_PATH,
-            component: EditItemTemplatePageComponent,
+            component: ThemedEditItemTemplatePageComponent,
             canActivate: [AuthenticatedGuard],
             resolve: {
               item: ItemTemplatePageResolver,
@@ -88,7 +92,8 @@ import { ThemedCollectionPageComponent } from './themed-collection-page.componen
     DSOBreadcrumbsService,
     LinkService,
     CreateCollectionPageGuard,
-    CollectionPageAdministratorGuard
+    CollectionPageAdministratorGuard,
+    EditCollectionResolver
   ]
 })
 export class CollectionPageRoutingModule {

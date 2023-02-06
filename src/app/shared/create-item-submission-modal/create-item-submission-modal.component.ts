@@ -5,7 +5,7 @@ import { map, switchMap, take } from 'rxjs/operators';
 import { DynamicFormControlModel } from '@ng-dynamic-forms/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { SubmissionSectionError } from '../../submission/objects/submission-objects.reducer';
+import { SubmissionSectionError } from '../../submission/objects/submission-section-error.model';
 import { NotificationsService } from '../notifications/notifications.service';
 import { SectionsService } from '../../submission/sections/sections.service';
 import { MetadataMap } from '../../core/shared/metadata.models';
@@ -17,7 +17,7 @@ import { CollectionDataService } from '../../core/data/collection-data.service';
 import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
 import { FormBuilderService } from '../form/builder/form-builder.service';
 import { SubmissionFormsModel } from '../../core/config/models/config-submission-forms.model';
-import { SubmissionFormsConfigService } from '../../core/config/submission-forms-config.service';
+import { SubmissionFormsConfigDataService } from '../../core/config/submission-forms-config-data.service';
 import { ConfigObject } from '../../core/config/models/config.model';
 import { RemoteData } from '../../core/data/remote-data';
 import { SubmissionObject, SubmissionObjectError } from '../../core/submission/models/submission-object.model';
@@ -91,7 +91,7 @@ export class CreateItemSubmissionModalComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private formBuilderService: FormBuilderService,
     private collectionDataService: CollectionDataService,
-    private submissionFormsConfigService: SubmissionFormsConfigService,
+    private submissionFormsConfigService: SubmissionFormsConfigDataService,
     private submissionService: SubmissionService,
     private projectItemService: ProjectItemService,
     private formService: FormService,

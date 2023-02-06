@@ -8,20 +8,25 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 import { BrowseService } from '../browse/browse.service';
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { RestResponse } from '../cache/response.models';
-import { CoreState } from '../core.reducers';
 import { ExternalSourceEntry } from '../shared/external-source-entry.model';
 import { ItemDataService } from './item-data.service';
-import { DeleteRequest, FindListOptions, PostRequest } from './request.models';
-import { RequestEntry } from './request.reducer';
+import { DeleteRequest, PostRequest } from './request.models';
 import { RequestService } from './request.service';
 import { getMockRemoteDataBuildService } from '../../shared/mocks/remote-data-build.service.mock';
+import { CoreState } from '../core-state.model';
+import { RequestEntry } from './request-entry.model';
+import { FindListOptions } from './find-list-options.model';
+import { HALEndpointServiceStub } from 'src/app/shared/testing/hal-endpoint-service.stub';
+import { testCreateDataImplementation } from './base/create-data.spec';
+import { testPatchDataImplementation } from './base/patch-data.spec';
+import { testDeleteDataImplementation } from './base/delete-data.spec';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
 import { ItemJsonPatchOperationsService } from './item-json-patch-operations.service';
 
 describe('ItemDataService', () => {
   let scheduler: TestScheduler;
   let service: ItemDataService;
-  let bs: BrowseService;
+  let browseService: BrowseService;
   const requestService = Object.assign(getMockRequestService(), {
     generateRequestId(): string {
       return scopeID;
@@ -37,13 +42,11 @@ describe('ItemDataService', () => {
   }) as RequestService;
   const rdbService = getMockRemoteDataBuildService();
 
-  const itemEndpoint = 'https://rest.api/core/items';
+  const itemEndpoint = 'https://rest.api/core';
 
   const store = {} as Store<CoreState>;
   const objectCache = {} as ObjectCacheService;
-  const halEndpointService = jasmine.createSpyObj('halService', {
-    getEndpoint: observableOf(itemEndpoint)
-  });
+  const halEndpointService: any = new HALEndpointServiceStub(itemEndpoint);
   const bundleService = jasmine.createSpyObj('bundleService', {
     findByHref: {}
   });
@@ -91,18 +94,23 @@ describe('ItemDataService', () => {
     return new ItemDataService(
       requestService,
       rdbService,
-      store,
-      bs,
       objectCache,
       halEndpointService,
       notificationsService,
-      http,
       comparator,
+      browseService,
       bundleService,
       jsonPatchOperationsBuilder,
       itemJsonPatchOperationsService
     );
   }
+
+  describe('composition', () => {
+    const initService = () => new ItemDataService(null, null, null, null, null, null, null, null);
+    testCreateDataImplementation(initService);
+    testPatchDataImplementation(initService);
+    testDeleteDataImplementation(initService);
+  });
 
   describe('getBrowseEndpoint', () => {
     beforeEach(() => {
@@ -110,7 +118,7 @@ describe('ItemDataService', () => {
     });
 
     it('should return the endpoint to fetch Items within the given scope and starting with the given string', () => {
-      bs = initMockBrowseService(true);
+      browseService = initMockBrowseService(true);
       service = initTestService();
 
       const result = service.getBrowseEndpoint(options);
@@ -121,7 +129,7 @@ describe('ItemDataService', () => {
 
     describe('if the dc.date.issue browse isn\'t configured for items', () => {
       beforeEach(() => {
-        bs = initMockBrowseService(false);
+        browseService = initMockBrowseService(false);
         service = initTestService();
       });
       it('should throw an error', () => {

@@ -5,7 +5,7 @@ import { typedObject } from '../../cache/builders/build-decorators';
 import { HALLink } from '../../shared/hal-link.model';
 import { excludeFromEquals } from '../../utilities/equals.decorators';
 import { ResourceType } from '../../shared/resource-type';
-import { CacheableObject } from '../../cache/object-cache.reducer';
+import { CacheableObject } from '../../cache/cacheable-object.model';
 
 /**
  * Model class for a VocabularyEntry
