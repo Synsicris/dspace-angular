@@ -61,6 +61,7 @@ import {
   AddImpactPathwaySubTaskAction,
   AddImpactPathwayTaskAction,
   AddImpactPathwayTaskLinksAction,
+  ClearImpactPathwayAction,
   ClearImpactPathwaySubtaskCollapseAction,
   GenerateImpactPathwayAction,
   GenerateImpactPathwaySubTaskAction,
@@ -816,14 +817,40 @@ export class ImpactPathwayService {
   initImpactPathwayTask(taskItem: Item, parentId?: string, tasks: ImpactPathwayTask[] = []): ImpactPathwayTask {
     const type = taskItem.firstMetadataValue('dspace.entity.type');
     const description = taskItem.firstMetadataValue('dc.description');
+    const internalStatus = taskItem.firstMetadataValue('synsicris.type.internal');
+    const status = taskItem.firstMetadataValue('synsicris.type.status');
 
-    return new ImpactPathwayTask(taskItem.id, type, parentId, taskItem.name, description, null, null, tasks);
+    return new ImpactPathwayTask(
+      taskItem.id,
+      type,
+      parentId,
+      taskItem.name,
+      description,
+      null,
+      null,
+      tasks,
+      status,
+      internalStatus
+    );
   }
 
   updateImpactPathwayTask(newTaskItem: Item, oldTask: ImpactPathwayTask): ImpactPathwayTask {
     const description = newTaskItem.firstMetadataValue('dc.description');
+    const internalStatus = newTaskItem.firstMetadataValue('synsicris.type.internal');
+    const status = newTaskItem.firstMetadataValue('synsicris.type.status');
 
-    return new ImpactPathwayTask(oldTask.id, oldTask.type, oldTask.parentId, newTaskItem.name, description, oldTask.compareId, oldTask.compareStatus, oldTask.tasks);
+    return new ImpactPathwayTask(
+      oldTask.id,
+      oldTask.type,
+      oldTask.parentId,
+      newTaskItem.name,
+      description,
+      oldTask.compareId,
+      oldTask.compareStatus,
+      oldTask.tasks,
+      status,
+      internalStatus
+    );
   }
 
   updateImpactPathway(newImpactPathwayItem: Item, oldImpactPathway: ImpactPathway): ImpactPathway {
@@ -1200,5 +1227,9 @@ export class ImpactPathwayService {
       map((collection: Collection) => isNotEmpty(collection) ? collection.id : null),
       tap(() => this.requestService.removeByHrefSubstring('findSubmitAuthorizedByCommunityAndMetadata'))
     );
+  }
+
+  public clearImpactPathway() {
+    this.store.dispatch(new ClearImpactPathwayAction());
   }
 }
