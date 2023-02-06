@@ -1,12 +1,11 @@
+::ng-deep .comment-box-position div.card-body {
+  overflow-y: auto;
+  overflow-x: clip;
 
-.comment-box-position {
-  top: 0;
-  bottom: 0;
-  right: 0;
-  height: inherit;
-  position: absolute;
-}
-
-:host::ng-deep .sidebar-panel-content {
-  position: relative !important;
+  .add-section {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+  }
 }

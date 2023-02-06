@@ -54,8 +54,14 @@
           </ng-template>
           <ng-template ngbPanelContent>
             <div class="row" *ngIf="(formConfig$ | async)?.name">
-              <div class="col p-0" *ngFor="let uuid of getImpactPathwayStepIds()">
-                <ds-comment-list [itemUUID]="uuid" [boxType]="(formConfig$ | async).name"></ds-comment-list>
+              <div class="col-2 p-0" *ngFor="let data of getImpactPathwayStepIdAndTitle()">
+                <ds-comment-list
+                [item]="impactPathWayItem"
+                [itemUuid]="data.id"
+                [title]="data.title"
+                [projectCommunityId]="projectCommunityId"
+                [type]="(formConfig$ | async).name">
+              </ds-comment-list>
               </div>
             </div>
           </ng-template>

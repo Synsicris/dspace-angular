@@ -169,6 +169,16 @@ export class ImpactPathWayComponent implements OnInit {
     return this.impactPathway.steps.map((step: ImpactPathwayStep) => step.id);
   }
 
+  getImpactPathwayStepIdAndTitle(): ImpactPathwayStepIdAndTitle[] {
+    return this.impactPathway.steps.map((step: ImpactPathwayStep) => {
+      const data: ImpactPathwayStepIdAndTitle = {
+        id: step.id,
+        title: `impact-pathway.step.label.${step.type}`
+      };
+      return data;
+    });
+  }
+
   /**
    * Get the path to metadata section to patch
    */
@@ -220,4 +230,9 @@ export class ImpactPathWayComponent implements OnInit {
       .forEach((subscription) => subscription.unsubscribe());
   }
 
+}
+
+export interface ImpactPathwayStepIdAndTitle {
+  id: string;
+  title:string;
 }

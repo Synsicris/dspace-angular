@@ -52,4 +52,14 @@ export class WorkingPlanChartComponent {
    */
   @Input() public compareMode: Observable<boolean>;
 
+  /**
+   * A boolean representing the showing or not of the accordion toggle button
+   */
+  @Input() public showAccordionPanelToggle = true;
+
+  /**
+   * Set the accordion opened by default if the toggle button will not be shown
+   * @type {string[]}
+   */
+  public activeIds:string[] = !this.showAccordionPanelToggle? ['panel-0'] : [];
 }

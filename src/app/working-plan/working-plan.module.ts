@@ -28,6 +28,7 @@ import { WorkingPlanChartItemEditButtonComponent } from './working-plan-chart/co
 import { WorkingPlanChartItemDeleteButtonComponent } from './working-plan-chart/container/working-plan-chart-item-delete-button/working-plan-chart-item-delete-button.component';
 import { ItemDetailPageModalModule } from '../item-detail-page-modal/item-detail-page-modal.module';
 import { CrisLayoutModule } from '../cris-layout/cris-layout.module';
+import { SectionsService } from '../submission/sections/sections.service';
 
 const MODULES = [
   CommonModule,
@@ -64,7 +65,8 @@ const ENTRY_COMPONENTS = [
 const PROVIDERS = [
   WorkingPlanService,
   WorkingPlanStateService,
-  ProjectItemService
+  ProjectItemService,
+  SectionsService
 ];
 
 @NgModule({

@@ -1,4 +1,5 @@
-import { isEqual } from 'lodash';
+import { getRemoteDataPayload } from './../../../core/shared/operators';
+import { ActivatedRoute, Data } from '@angular/router';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -11,7 +12,7 @@ import { ImpactPathwayService } from '../../core/impact-pathway.service';
 import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
-import { distinctUntilChanged, skip, take } from 'rxjs/operators';
+import { distinctUntilChanged, map, skip, take } from 'rxjs/operators';
 import { EditItemDataService } from 'src/app/core/submission/edititem-data.service';
 import { environment } from '../../../../environments/environment';
 
@@ -52,28 +53,28 @@ export class ObjectiveComponent implements OnInit {
    */
   @Input() isVersionOfAnItem = false;
 
-  configurationName:string;
+  objectiveItem$: Observable<Item>;
 
   constructor(
     private impactPathwayService: ImpactPathwayService,
     private modalService: NgbModal,
-    protected editItemDataService: EditItemDataService
+    protected editItemDataService: EditItemDataService,
+    protected route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
-    if ( isEqual(this.impactPathwayStep.type, 'step_type_2')) {
-      this.configurationName = 'RELATION.proj_objective.comment';
-    } else if(isEqual(this.impactPathwayStep.type, 'step_type_3')) {
-      this.configurationName = 'RELATION.ia_objective.comment';
-    }
-
     this.formConfig$ = this.impactPathwayService.getImpactPathwayTaskEditFormConfig(this.impactPathwayStep.type);
     this.editItemDataService.checkEditModeByIdAndType(this.impactPathwayTask.id, environment.impactPathway.impactPathwaysEditMode).pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEditButton$.next(canEdit);
     });
+    this.objectiveItem$ = this.route.data.pipe(
+      map((data: Data)=> data.objectivesItem ),
+      take(1),
+      getRemoteDataPayload()
+    )
   }
 
   /**
