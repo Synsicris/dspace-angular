@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
@@ -21,7 +21,7 @@ import { AuthService } from '../core/auth/auth.service';
   styleUrls: ['./impact-pathway-page.component.scss'],
   templateUrl: './impact-pathway-page.component.html'
 })
-export class ImpactPathwayPageComponent implements OnInit {
+export class ImpactPathwayPageComponent implements OnInit, OnDestroy {
 
   /**
    * The item's id
@@ -104,5 +104,9 @@ export class ImpactPathwayPageComponent implements OnInit {
       getRemoteDataPayload(),
       map((item: Item) => this.projectService.getProjectItemIdByRelationMetadata(item))
     );
+  }
+
+  ngOnDestroy(): void {
+    this.impactPathwayService.clearImpactPathway();
   }
 }

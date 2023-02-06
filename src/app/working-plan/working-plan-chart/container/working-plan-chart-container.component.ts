@@ -28,7 +28,6 @@ import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vo
 import { hasValue, isEmpty, isNotEmpty, isNotNull } from '../../../shared/empty.util';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { environment } from '../../../../environments/environment';
-import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { SearchConfig } from '../../../core/shared/search/search-filters/search-config.model';
 import { NgbDateStructToString, stringToNgbDateStruct } from '../../../shared/date.util';
 import { Item } from '../../../core/shared/item.model';
@@ -217,7 +216,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private workingPlanService: WorkingPlanService,
     private workingPlanStateService: WorkingPlanStateService,
-    private editItemService: EditItemDataService,
     private aroute: ActivatedRoute,
   ) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
@@ -326,7 +324,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       node.parentId,
       node.compareId,
       node.compareStatus,
-      node.selfUrl
+      node.selfUrl,
+      node.internalStatus
     );
     this.updateTreeMap(flatNode, node);
     return flatNode;
@@ -371,7 +370,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       if (item?.type?.value === 'milestone') {
         metadata = Object.assign(metadata, this.workingPlanService.setChildWorkingplanLinkStatusMetadata(item.metadata));
       }
-
       this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectCommunityId, flatNode.id, item.type.value, metadata);
       // the 'this.editModes$' map is auto-updated by the ngOnInit subscribe
       if (flatNode.type === 'milestone') {
@@ -733,6 +731,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   isProcessingWorkpackage(): Observable<boolean> {
     return this.workingPlanStateService.isInitializing();
+  }
+
+  isProcessingWorkingpPlan() {
+    return this.workingPlanStateService.isProcessing();
   }
 
   /**

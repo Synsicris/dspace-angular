@@ -10,7 +10,7 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 import { RequestService } from '../data/request.service';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../cache/object-cache.service';
-import { getAllSucceededRemoteDataPayload, getPaginatedListPayload } from '../shared/operators';
+import { getAllSucceededRemoteDataPayload, getFirstCompletedRemoteData, getPaginatedListPayload } from '../shared/operators';
 import { EditItemMode } from './models/edititem-mode.model';
 import { RemoteData } from '../data/remote-data';
 import { PaginatedList } from '../data/paginated-list.model';
@@ -18,6 +18,12 @@ import { IdentifiableDataService } from '../data/base/identifiable-data.service'
 import { SearchDataImpl } from '../data/base/search-data';
 import { DeleteDataImpl } from '../data/base/delete-data';
 import { FindListOptions } from '../data/find-list-options.model';
+
+export enum InternalItemStatus {
+  Edit = 'edit',
+  Exchange = 'exchange',
+  Done = 'done'
+}
 
 /**
  * A service that provides methods to make REST requests with edititems endpoint.
