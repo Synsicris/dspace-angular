@@ -19,13 +19,17 @@ import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder
 import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
 import { SubmissionService } from '../../submission.service';
 import { SubmissionObject } from '../../../core/submission/models/submission-object.model';
-import { SubmissionJsonPatchOperationsService } from '../../../core/submission/submission-json-patch-operations.service';
+import {
+  SubmissionJsonPatchOperationsService
+} from '../../../core/submission/submission-json-patch-operations.service';
 import { CollectionDataService } from '../../../core/data/collection-data.service';
 import { CollectionDropdownComponent } from '../../../shared/collection-dropdown/collection-dropdown.component';
 import { SectionsService } from '../../sections/sections.service';
 import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { SectionsType } from '../../sections/sections-type';
-import { SubmissionDefinitionsConfigService } from '../../../core/config/submission-definitions-config.service';
+import {
+  SubmissionDefinitionsConfigDataService
+} from '../../../core/config/submission-definitions-config-data.service';
 import { RequestService } from '../../../core/data/request.service';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 
@@ -141,7 +145,7 @@ export class SubmissionFormCollectionComponent implements OnChanges, OnInit {
               private requestService: RequestService,
               private sectionsService: SectionsService,
               private submissionService: SubmissionService,
-              private submissionDefinitionsService: SubmissionDefinitionsConfigService) {
+              private submissionDefinitionsService: SubmissionDefinitionsConfigDataService) {
   }
 
   /**

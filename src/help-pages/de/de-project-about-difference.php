@@ -56,11 +56,18 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 
 		</article>
+
+
+
+  <article>
+
+
+
+        <p><img src="img/de_project_about_difference_Teile_ersetzen.png"></p>
+
+
+      </article>
   </br>
-
-
-
-
 
   <p>
     <article>
@@ -98,21 +105,28 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 
 
-      <p><img src="img/de_project_about_difference_Teile_ersetzen.png"></p>
+      <p><img src="img/de_project_about_difference_Nutzung_Informationen.png"></p>
 
 
     </article>
 
     <br>
+    <article>
 
 
+
+          <p><img src="img/de_project_about_difference_Informationen_Formen.png"></p>
+
+
+        </article>
+  </br>
 
     </main>
 
 
   <footer align="center">
      <p>Kontakt: <a href="mailto:support@synsicris.de">support@synsicris.de</a> </p>
-     <p>© 2021 by SynSICRIS: Universität Kassel & Disy Informationssysteme GmbH</p>
+     <p>© 2023 by SynSICRIS: Universität Kassel & Disy Informationssysteme GmbH</p>
   </footer>
   </body>
 </html>

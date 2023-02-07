@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
@@ -6,7 +6,8 @@ import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
-import { getFirstSucceededRemoteDataPayload, getRemoteDataPayload, redirectOn4xx } from '../core/shared/operators';
+import { redirectOn4xx } from '../core/shared/authorized.operators';
+import { getFirstSucceededRemoteDataPayload, getRemoteDataPayload } from '../core/shared/operators';
 import { ImpactPathwayService } from '../impact-pathway-board/core/impact-pathway.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
@@ -20,7 +21,7 @@ import { AuthService } from '../core/auth/auth.service';
   styleUrls: ['./impact-pathway-page.component.scss'],
   templateUrl: './impact-pathway-page.component.html'
 })
-export class ImpactPathwayPageComponent implements OnInit {
+export class ImpactPathwayPageComponent implements OnInit, OnDestroy {
 
   /**
    * The item's id
@@ -103,5 +104,9 @@ export class ImpactPathwayPageComponent implements OnInit {
       getRemoteDataPayload(),
       map((item: Item) => this.projectService.getProjectItemIdByRelationMetadata(item))
     );
+  }
+
+  ngOnDestroy(): void {
+    this.impactPathwayService.clearImpactPathway();
   }
 }

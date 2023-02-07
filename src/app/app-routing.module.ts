@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, NoPreloading } from '@angular/router';
 import { AuthBlockingGuard } from './core/auth/auth-blocking.guard';
 
 import { AuthenticatedGuard } from './core/auth/authenticated.guard';
@@ -10,10 +10,12 @@ import {
   ACCESS_CONTROL_MODULE_PATH,
   ADMIN_MODULE_PATH,
   BITSTREAM_MODULE_PATH,
+  ERROR_PAGE,
   BULK_IMPORT_PATH,
   EDIT_ITEM_PATH,
   FORBIDDEN_PATH,
   FORGOT_PASSWORD_PATH,
+  HEALTH_PAGE_PATH,
   INFO_MODULE_PATH,
   INTERNAL_SERVER_ERROR,
   LEGACY_BITSTREAM_MODULE_PATH,
@@ -39,16 +41,21 @@ import {
   ThemedPageInternalServerErrorComponent
 } from './page-internal-server-error/themed-page-internal-server-error.component';
 import { ServerCheckGuard } from './core/server-check/server-check.guard';
+import { MenuResolver } from './menu.resolver';
+import { ThemedPageErrorComponent } from './page-error/themed-page-error.component';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
+import { StatisticsAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/statistics-administrator.guard';
 
 @NgModule({
   imports: [
     RouterModule.forRoot([
       { path: INTERNAL_SERVER_ERROR, component: ThemedPageInternalServerErrorComponent },
+      { path: ERROR_PAGE , component: ThemedPageErrorComponent },
       {
         path: '',
         canActivate: [AuthBlockingGuard],
         canActivateChild: [ServerCheckGuard],
+        resolve: [MenuResolver],
         children: [
           { path: '', redirectTo: '/coordinator-overview', pathMatch: 'full' },
           {
@@ -192,8 +199,8 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
           },
           {
             path: 'explore',
-            loadChildren: () => import('./+explore/explore.module')
-              .then((m) => m.ExploreModule),
+            loadChildren: () => import('./explore-page/explore-page.module')
+              .then((m) => m.ExplorePageModule),
           },
           {
             path: ADMIN_MODULE_PATH,
@@ -296,7 +303,11 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             path: 'statistics',
             loadChildren: () => import('./statistics-page/statistics-page-routing.module')
               .then((m) => m.StatisticsPageRoutingModule),
-            canActivate: [SiteAdministratorGuard]
+          },
+          {
+            path: HEALTH_PAGE_PATH,
+            loadChildren: () => import('./health-page/health-page.module')
+              .then((m) => m.HealthPageModule)
           },
           {
             path: ACCESS_CONTROL_MODULE_PATH,
@@ -328,6 +339,12 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
         ]
       }
     ], {
+      // enableTracing: true,
+      useHash: false,
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
+      initialNavigation: 'enabledBlocking',
+      preloadingStrategy: NoPreloading,
       onSameUrlNavigation: 'reload',
     })
   ],

@@ -15,6 +15,7 @@ export interface DynamicListCheckboxGroupModelConfig extends DynamicFormGroupMod
   groupLength?: number;
   repeatable: boolean;
   value?: any;
+  hint?: string;
 }
 
 export class DynamicListCheckboxGroupModel extends DynamicCheckboxGroupModel {
@@ -26,6 +27,7 @@ export class DynamicListCheckboxGroupModel extends DynamicCheckboxGroupModel {
   @serializable() toggleSecurityVisibility = false;
   isListGroup = true;
   valueChanges: Subject<any>;
+  hint?: string;
 
   constructor(config: DynamicListCheckboxGroupModelConfig, layout?: DynamicFormControlLayout) {
     super(config, layout);
@@ -39,6 +41,7 @@ export class DynamicListCheckboxGroupModel extends DynamicCheckboxGroupModel {
     this.valueChanges = new Subject<any>();
     this.valueChanges.subscribe((value: VocabularyEntry | VocabularyEntry[]) => this.value = value);
     this.valueChanges.next(config.value);
+    this.hint = config.hint;
   }
 
   get hasAuthority(): boolean {

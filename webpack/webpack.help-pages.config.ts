@@ -1,11 +1,10 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const pathHelp = require('path');
+const CopyWebpackPluginHelp = require('copy-webpack-plugin');
 
 const copyWebpackOptions = {
   patterns: [
     {
-      from: path.join(__dirname, '..', 'src', 'help-pages'),
+      from: pathHelp.join(__dirname, '..', 'src', 'help-pages'),
       to: './',
     },
   ]
@@ -14,10 +13,10 @@ const copyWebpackOptions = {
 module.exports = {
   mode: 'production',
   entry: {
-    'help': './src/help-pages/de/de-synsicrishelp_index.html'
+    'help': './src/help-pages/empty.html'
   },
   output: {
-    path: path.resolve(__dirname, '..' , 'dist/help/pages'),
+    path: pathHelp.resolve(__dirname, '..' , 'dist/help/pages'),
     filename: '[name].js'
   },
   module: {
@@ -36,6 +35,6 @@ module.exports = {
     contentBase: '../dist/help/pages',
   },
   plugins: [
-    new CopyWebpackPlugin(copyWebpackOptions),
+    new CopyWebpackPluginHelp(copyWebpackOptions),
   ]
 };

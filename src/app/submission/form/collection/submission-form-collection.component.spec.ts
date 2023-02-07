@@ -14,8 +14,12 @@ import { mockSubmissionId, mockSubmissionRestResponse } from '../../../shared/mo
 import { SubmissionService } from '../../submission.service';
 import { SubmissionFormCollectionComponent } from './submission-form-collection.component';
 import { CommunityDataService } from '../../../core/data/community-data.service';
-import { SubmissionJsonPatchOperationsService } from '../../../core/submission/submission-json-patch-operations.service';
-import { SubmissionJsonPatchOperationsServiceStub } from '../../../shared/testing/submission-json-patch-operations-service.stub';
+import {
+  SubmissionJsonPatchOperationsService
+} from '../../../core/submission/submission-json-patch-operations.service';
+import {
+  SubmissionJsonPatchOperationsServiceStub
+} from '../../../shared/testing/submission-json-patch-operations-service.stub';
 import { JsonPatchOperationsBuilder } from '../../../core/json-patch/builder/json-patch-operations-builder';
 import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
 import { createTestComponent } from '../../../shared/testing/utils.test';
@@ -25,7 +29,9 @@ import { Collection } from '../../../core/shared/collection.model';
 import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
 import { getMockRequestService } from '../../../shared/mocks/request.service.mock';
 import { RequestService } from '../../../core/data/request.service';
-import { SubmissionDefinitionsConfigService } from '../../../core/config/submission-definitions-config.service';
+import {
+  SubmissionDefinitionsConfigDataService
+} from '../../../core/config/submission-definitions-config-data.service';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
 import { DSONameServiceMock } from '../../../shared/mocks/dso-name.service.mock';
 
@@ -158,7 +164,7 @@ describe('SubmissionFormCollectionComponent Component', () => {
         { provide: Store, useValue: store },
         { provide: SectionsService, useValue: sectionsService },
         { provide: RequestService, useValue: requestServce },
-        { provide: SubmissionDefinitionsConfigService, useValue: submissionDefinitionsConfigService },
+        { provide: SubmissionDefinitionsConfigDataService, useValue: submissionDefinitionsConfigService },
         { provide: DSONameService, useClass: DSONameServiceMock },
         ChangeDetectorRef,
         SubmissionFormCollectionComponent

@@ -11,7 +11,7 @@ import { createPaginatedList } from '../../../testing/utils.test';
 import { VarDirective } from '../../../utils/var.directive';
 import { AdministeredCollectionSelectorComponent } from './administered-collection-selector.component';
 import { NotificationsService } from '../../../notifications/notifications.service';
-import { FindListOptions } from '../../../../core/data/request.models';
+import { FindListOptions } from '../../../../core/data/find-list-options.model';
 import { DSONameService } from '../../../../core/breadcrumbs/dso-name.service';
 import { DSONameServiceMock } from '../../../mocks/dso-name.service.mock';
 

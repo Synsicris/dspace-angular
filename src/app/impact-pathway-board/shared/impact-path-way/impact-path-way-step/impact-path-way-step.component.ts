@@ -10,7 +10,9 @@ import { ImpactPathwayStep } from '../../../core/models/impact-pathway-step.mode
 import { ImpactPathwayService } from '../../../core/impact-pathway.service';
 import { fadeInOut } from '../../../../shared/animations/fade';
 import { ImpactPathwayTask } from '../../../core/models/impact-pathway-task.model';
-import { CreateSimpleItemModalComponent } from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
+import {
+  CreateSimpleItemModalComponent
+} from '../../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { SimpleItem } from '../../../../shared/create-simple-item-modal/models/simple-item.model';
 import { isNotEmpty } from '../../../../shared/empty.util';
 import { DragAndDropContainerComponent } from '../../drag-and-drop-container.component';
@@ -75,7 +77,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
       })
     );
 
-    this.editItemDataService.checkEditModeByIDAndType(this.impactPathwayStepId, environment.impactPathway.impactPathwaysEditMode).pipe(
+    this.editItemDataService.checkEditModeByIdAndType(this.impactPathwayStepId, environment.impactPathway.impactPathwaysEditMode).pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEditButton$.next(canEdit);

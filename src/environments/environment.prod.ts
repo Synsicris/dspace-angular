@@ -1,34 +1,19 @@
 export const environment = {
-  /**
-   * TODO add the sections from environment.common.ts you want to override here
-   * e.g.
-   * rest: {
-   *   host: 'rest.api',
-   *   nameSpace: '/rest',
-   * }
-   */
-  production: true,
-  // Angular Universal server settings.
-  // NOTE: these must be "synced" with the 'dspace.ui.url' setting in your backend's local.cfg.
   ui: {
     ssl: false,
     host: 'localhost',
-    port: 3000,
+    port: 4000,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
-    nameSpace: '/',
-    // The rateLimiter settings limit each IP to a "max" of 500 requests per "windowMs" (1 minute).
-    rateLimiter: {
-      windowMs: 1 * 60 * 1000,   // 1 minute
-      max: 500 // limit each IP to 500 requests per windowMs
-    }
-  },
-  // The REST API server settings.
-  // NOTE: these must be "synced" with the 'dspace.server.url' setting in your backend's local.cfg.
-  rest: {
-    ssl: true,
-    host: 'dspacecris1.disy.net',
-    port: 443,
+    nameSpace: '/'
+},
+// This example is valid if your Backend is publicly available at https://api.mydspace.edu/server/
+// The REST settings MUST correspond to the primary URL of the backend. Usually, this means they must be kept in sync
+// with the value of "dspace.server.url" in the backend's local.cfg
+rest: {
+    ssl: false,
+    host: 'localhost',
+    port: 8080,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
-    nameSpace: '/server',
-  }
+    nameSpace: '/server'
+}
 };

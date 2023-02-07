@@ -1,18 +1,18 @@
-import { submissionObjectMock, submissionObjectWithErrors } from './../mocks/submission-object.mock';
-import { SubmissionScopeType } from './../../core/submission/submission-scope-type';
-import { ProjectItemService } from './../../core/project/project-item.service';
-import { SectionsService } from './../../submission/sections/sections.service';
-import { SubmissionService } from './../../submission/submission.service';
+import { submissionObjectMock, submissionObjectWithErrors } from '../mocks/submission-object.mock';
+import { SubmissionScopeType } from '../../core/submission/submission-scope-type';
+import { ProjectItemService } from '../../core/project/project-item.service';
+import { SectionsService } from '../../submission/sections/sections.service';
+import { SubmissionService } from '../../submission/submission.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateItemSubmissionModalComponent } from './create-item-submission-modal.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilderService } from '../../shared/form/builder/form-builder.service';
-import { getMockFormBuilderService } from '../../shared/mocks/form-builder-service.mock';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
+import { FormBuilderService } from '../form/builder/form-builder.service';
+import { getMockFormBuilderService } from '../mocks/form-builder-service.mock';
+import { NotificationsService } from '../notifications/notifications.service';
+import { NotificationsServiceStub } from '../testing/notifications-service.stub';
 import { CollectionDataService } from '../../core/data/collection-data.service';
-import { SubmissionFormsConfigService } from './../../core/config/submission-forms-config.service';
+import { SubmissionFormsConfigDataService } from '../../core/config/submission-forms-config-data.service';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
@@ -25,7 +25,7 @@ import { TranslateLoaderMock } from '../mocks/translate-loader.mock';
 import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-metadata-value.model';
 import { submissionConfiguration } from '../mocks/create-item-submission-configuration.mock';
 import { createSuccessfulRemoteDataObject$ } from '../remote-data.utils';
-import { Collection } from './../../core/shared/collection.model';
+import { Collection } from '../../core/shared/collection.model';
 import { SharedModule } from '../shared.module';
 import { DebugElement } from '@angular/core';
 
@@ -36,7 +36,7 @@ describe('CreateItemSubmissionModalComponent', () => {
   let de: DebugElement;
   let modal;
   let builderService: FormBuilderService;
-  let submissionConfigurationStub: SubmissionFormsConfigService;
+  let submissionConfigurationStub: SubmissionFormsConfigDataService;
 
   const mockCollection: Collection = Object.assign(new Collection(), {
     id: 'ce41d451-97ed-4a9c-94a1-7de34f16a9f4',
@@ -78,7 +78,7 @@ describe('CreateItemSubmissionModalComponent', () => {
 
   const sectionsServiceStub: any = new SectionsServiceStub();
 
-  function getMockSubmissionFormsConfigService(): SubmissionFormsConfigService {
+  function getMockSubmissionFormsConfigService(): SubmissionFormsConfigDataService {
     return jasmine.createSpyObj('SubmissionFormsConfigService', {
       findByName: jasmine.createSpy('findByName'),
     });
@@ -109,7 +109,7 @@ describe('CreateItemSubmissionModalComponent', () => {
         { provide: FormBuilderService, useValue: builderService },
         { provide: NotificationsService, useValue: new NotificationsServiceStub() },
         { provide: CollectionDataService, useValue: collectionDataServiceStub },
-        { provide: SubmissionFormsConfigService, useValue: submissionConfigurationStub },
+        { provide: SubmissionFormsConfigDataService, useValue: submissionConfigurationStub },
         { provide: SubmissionService, useValue: submissionServiceStub },
         { provide: FormService, useValue: getMockFormService() },
         { provide: SectionsService, useValue: sectionsServiceStub },

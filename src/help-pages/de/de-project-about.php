@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
- 
+
   <body class="about" id="about">
-  
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-  
+
 	 <?php /* Alte Navigation kann geloescht werden.
       <n1><strong>Über_das_Tool</strong></n1><br>
 	  <n2><a href="de-project-about-objectives.php">Hintergrund_/_Ziele</a></n2><br> <!-- geprueft, unterschiedliche Titel -->
@@ -27,36 +27,22 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n1><a href="de-project-step.php">Nutzung_im_Projektverlauf</a></n1><br> <!-- geprueft, unterschiedliche Titel -->
 	  <n1><a href="de-project-details.php">Details</a></n1> <!-- Datei fehlt -->
 	  */ ?>
- 
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
-  
+
 	<main>
 <h1>Das Monitoring-Tool</h1>
-    <p> Diese Inhalte werden demnächst bereitgestellt</p>
-<!--
 
-      <p>Teasertext <strong>gesellschaftlichen Transformation</strong> Text</p>
-		<article>
-		<h2>Überschrift</h2>
-		<p>Text</p>
-		<img src="img/xy.png">
-		<p>Text
-		<ul>
-		<li>Text</li>
-		<li>Text</li></ul>
-		</p>
-		</article>
+    <h2>Worum es im Monitoring-Tool geht:</h2>
+    <p>Das SynSICRIS-Monitoring-Tool dient dazu, Hintergründe, Ziele, Arbeiten, Ergebnisse und Wirkungspotenziale eines Verbundes oder Einzelprojektes zu erfassen. Teile von Textdokumenten für Anträge und Berichte für den Fördermittelgeber sollen dadurch ersetzt werden. Anstatt zusammenhängender Textdokumente erstellen Sie einzelne „Einträge“ (z. B. ein Ziel oder eine Veröffentlichung). Diese Einträge können strukturiert werden, indem Sie sie in einem Wirkungspfad, in Ihrem Arbeitsplan und im Verwertungsplan wie an einer Pinnwand anpinnen.</p>
+    <p>Sie erstellen und bearbeiten die Einträge zusammen mit allen Projektpartnern.</p>
+    <p>Das Tool soll Sie von der Antragstellung bis 2 Jahre nach Projektende begleiten, indem Sie die Einträge regelmäßig aktualisieren und ergänzen. Für die Antragstellung und zu allen Berichtszeitpunkten erstellen Sie eine Version für den Fördermittelgeber, in welcher er die Einträge lesen kann.  Außerdem können Sie die Informationen in PDF-Dokumente exportieren.</p>
 
-		<article>
-		<h2>Überschrift nächster Abschnitt</h2>
-		<p>Text</p>
-		</article>
 
--->
     </main>
 
 
 	<?php include("includes/footer.inc.php"); echo "\n";?>
-    
+
   </body>
 </html>

@@ -1,13 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { map, mergeMap, startWith, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EditItemDataService } from '../../../../../core/submission/edititem-data.service';
 import { EditItemMode } from '../../../../../core/submission/models/edititem-mode.model';
-import { EditItem } from '../../../../../core/submission/models/edititem.model';
 import { NotificationsService } from '../../../../../shared/notifications/notifications.service';
 import { NoContent } from '../../../../../core/shared/NoContent.model';
 import { ItemDataService } from '../../../../../core/data/item-data.service';
@@ -15,7 +14,7 @@ import { AuthorizationDataService } from '../../../../../core/data/feature-autho
 import { FeatureID } from '../../../../../core/data/feature-authorization/feature-id';
 import { SubmissionFormModel } from '../../../../../core/config/models/config-submission-form.model';
 import { RemoteData } from '../../../../../core/data/remote-data';
-import { SubmissionFormsConfigService } from '../../../../../core/config/submission-forms-config.service';
+import { SubmissionFormsConfigDataService } from '../../../../../core/config/submission-forms-config-data.service';
 import { environment } from '../../../../../../environments/environment';
 import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
 import {
@@ -29,16 +28,15 @@ import {
   EditSimpleItemModalComponent
 } from '../../../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
-import {
-  getAllSucceededRemoteDataPayload,
-  getFirstCompletedRemoteData,
-  getFirstSucceededRemoteListPayload
-} from '../../../../../core/shared/operators';
+import { getFirstCompletedRemoteData } from '../../../../../core/shared/operators';
 import { ConfigObject } from '../../../../../core/config/models/config.model';
 import { ConfirmationModalComponent } from '../../../../../shared/confirmation-modal/confirmation-modal.component';
 import { hasValue, isNotEmpty } from '../../../../../shared/empty.util';
-import { followLink } from '../../../../../shared/utils/follow-link-config.model';
 import { Item } from '../../../../../core/shared/item.model';
+import { APP_CONFIG, AppConfig } from '../../../../../../config/app-config.interface';
+import { getEntityPageRoute } from '../../../../../item-page/item-page-routing-paths';
+import { MetadataValue } from '../../../../../core/shared/metadata.models';
+import { PaginatedList } from '../../../../../core/data/paginated-list.model';
 
 @listableObjectComponent('CommentSearchResult', ViewMode.ListElement)
 @Component({
@@ -50,6 +48,8 @@ import { Item } from '../../../../../core/shared/item.model';
  * The component for displaying a list element for an item search result of the type Project
  */
 export class CommentSearchResultListElementComponent extends ItemSearchResultListElementComponent implements OnInit {
+
+  public readonly RELATION_PROJECT = environment.comments.commentRelationProjectVersionMetadata;
 
   /**
    * List of Edit Modes available on this item
@@ -70,15 +70,16 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
   constructor(
     protected truncatableService: TruncatableService,
     protected dsoNameService: DSONameService,
-    private submissionFormsConfigService: SubmissionFormsConfigService,
+    private submissionFormsConfigService: SubmissionFormsConfigDataService,
     private authorizationService: AuthorizationDataService,
     private itemDataService: ItemDataService,
     private notificationsService: NotificationsService,
     private translateService: TranslateService,
     private editItemService: EditItemDataService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    @Inject(APP_CONFIG) protected appConfig: AppConfig
   ) {
-    super(truncatableService, dsoNameService);
+    super(truncatableService, dsoNameService, appConfig);
   }
 
   ngOnInit(): void {
@@ -162,12 +163,11 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
    * Get the editModes
    */
   getEditModes(): void {
-    this.sub = this.editItemService.findById(this.dso.id + ':none', false, true, followLink('modes')).pipe(
-      getAllSucceededRemoteDataPayload(),
-      mergeMap((editItem: EditItem) => editItem.modes.pipe(
-        getFirstSucceededRemoteListPayload())
-      ),
-      startWith([])
+    this.editItemService.searchEditModesById(this.dso.id).pipe(
+      getFirstCompletedRemoteData(),
+      map((modesRD: RemoteData<PaginatedList<EditItemMode>>) => {
+        return modesRD.hasSucceeded ? modesRD.payload.page : []
+      })
     ).subscribe((editModes: EditItemMode[]) => {
       const allowedModes = editModes.filter((mode: EditItemMode) => this.isEditModeAllowed(mode));
       this.editModes$.next(allowedModes);
@@ -179,6 +179,22 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
    */
   private isEditModeAllowed(mode: EditItemMode) {
     return mode.name === 'FULL' || mode.name === environment.comments.commentEditMode || mode.name === 'OWNER';
+  }
+
+  /**
+   * Returns the route to the related item page.
+   * We are assuming that {@see MetadataValue#value} is made with this format:
+   * `{itemType} - {description}`.
+   *
+   * @param metadataValue
+   */
+  getRelateItemPageRoute(metadataValue: MetadataValue) {
+    if (!hasValue(metadataValue == null) || !hasValue(metadataValue.value) || !hasValue(metadataValue.authority)) {
+      return null;
+    }
+    const typeValue = metadataValue.value;
+    const type = (typeValue.split('-')[0] || '').trim();
+    return getEntityPageRoute(type, metadataValue.authority);
   }
 
   /**
