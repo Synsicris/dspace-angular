@@ -69,7 +69,7 @@ export class ViewVersionBadgesComponent implements OnInit {
         this.projectVersionService.getVersionByItemId(itemId).pipe(
           getFirstCompletedRemoteData()
         ).subscribe((versionRD: RemoteData<Version>) => {
-          if (versionRD.hasSucceeded) {
+          if (versionRD.hasSucceeded && !versionRD.hasNoContent) {
             this.version$.next(versionRD.payload);
             if (this.isYoungerThanFourWeeks(versionRD.payload)) {
               this.withinWeek = true;
