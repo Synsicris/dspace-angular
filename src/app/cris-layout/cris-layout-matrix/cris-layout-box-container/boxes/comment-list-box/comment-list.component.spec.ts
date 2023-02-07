@@ -2,6 +2,10 @@ import { Item } from './../../../../../core/shared/item.model';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommentListComponent } from './comment-list.component';
+import { ActivatedRoute } from '@angular/router';
+import { MockActivatedRoute } from '../../../../../shared/mocks/active-router.mock';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('CommentListComponent', () => {
   let component: CommentListComponent;
@@ -10,7 +14,13 @@ describe('CommentListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CommentListComponent]
+      imports: [TranslateModule.forRoot()],
+      declarations: [CommentListComponent],
+      providers: [
+        { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
+        TranslateService
+      ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
   });
@@ -41,17 +51,18 @@ describe('CommentListComponent', () => {
 
   it('should render card header title when Input Title has value', () => {
     component.title = `impact-pathway.step.label.${stepType}`;
+    fixture.detectChanges();
     const value = fixture.debugElement.nativeElement.querySelector('.card-header > span');
     expect(value.innerText).toEqual('impact-pathway.step.label.step_type_1');
   });
 
   it('should not show card header when showCardHeader is set to false', () => {
     component.showCardHeader = false;
+    fixture.detectChanges();
     const value = fixture.debugElement.nativeElement.querySelector('.card-header');
-    expect(value).not.toBeDefined();
+    expect(value).toBeNull();
   });
 });
-
 
 
 const impactPathWayItemMock = {
