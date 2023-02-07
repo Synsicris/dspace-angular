@@ -39,13 +39,13 @@ export class ImpactPathWayComponent implements OnInit {
   /**
    * The project item's id
    */
-  @Input() public projectItemId: string;
+ @Input() public projectItemId: string;
 
-  @Input() public impactPathway: ImpactPathway;
+ @Input() public impactPathway: ImpactPathway;
 
-  /**
-   * The impact-pathway item
-   */
+ /**
+  * The impact-pathway item
+  */
   @Input() impactPathWayItem: Item;
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
@@ -59,35 +59,35 @@ export class ImpactPathWayComponent implements OnInit {
   /**
    * Array to track all subscriptions and unsubscribe them onDestroy
    */
-  private subs: Subscription[] = [];
+ private subs: Subscription[] = [];
 
-  /**
-   * A boolean representing if compare mode is active
-   */
-  compareMode: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+ /**
+  * A boolean representing if compare mode is active
+  */
+compareMode: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  /**
-   * A boolean representing if edit/add buttons are active
-   */
-  canEditButton$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+/**
+ * A boolean representing if edit/add buttons are active
+ */
+canEditButton$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  /**
-   * A boolean representing if item is a version of original item
-   */
-  public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+/**
+ * A boolean representing if item is a version of original item
+ */
+public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
-    private authorizationService: AuthorizationDataService,
-    private cdr: ChangeDetectorRef,
-    private impactPathwayService: ImpactPathwayService,
-    private impactPathwayLinksService: ImpactPathwayLinksService,
-    private modalService: NgbModal,
-    protected aroute: ActivatedRoute,
-    protected editItemDataService: EditItemDataService) {
-  }
+constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
+private authorizationService: AuthorizationDataService,
+private cdr: ChangeDetectorRef,
+private impactPathwayService: ImpactPathwayService,
+private impactPathwayLinksService: ImpactPathwayLinksService,
+private modalService: NgbModal,
+protected aroute: ActivatedRoute,
+protected editItemDataService: EditItemDataService) {
+}
 
-  ngOnInit() {
-    this.formConfig$ = this.impactPathwayService.getImpactPathwayFormConfig();
+ngOnInit() {
+  this.formConfig$ = this.impactPathwayService.getImpactPathwayFormConfig();
     this.impactPathwayService.retrieveObjectItem(this.impactPathway.id).pipe(
       mergeMap((item: Item) => this.authorizationService.isAuthorized(FeatureID.CanDelete, item.self, undefined)),
       take(1)
@@ -169,6 +169,9 @@ export class ImpactPathWayComponent implements OnInit {
     return this.impactPathway.steps.map((step: ImpactPathwayStep) => step.id);
   }
 
+  /**
+   * Get all impactPathway step ids and titles
+   */
   getImpactPathwayStepIdAndTitle(): ImpactPathwayStepIdAndTitle[] {
     return this.impactPathway.steps.map((step: ImpactPathwayStep) => {
       const data: ImpactPathwayStepIdAndTitle = {
@@ -234,5 +237,5 @@ export class ImpactPathWayComponent implements OnInit {
 
 export interface ImpactPathwayStepIdAndTitle {
   id: string;
-  title:string;
+  title: string;
 }

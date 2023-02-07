@@ -71,10 +71,10 @@ export class ObjectiveComponent implements OnInit {
       this.canEditButton$.next(canEdit);
     });
     this.objectiveItem$ = this.route.data.pipe(
-      map((data: Data)=> data.objectivesItem ),
+      map((data: Data) => data.objectivesItem ),
       take(1),
       getRemoteDataPayload()
-    )
+    );
   }
 
   /**

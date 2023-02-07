@@ -61,5 +61,5 @@ export class WorkingPlanChartComponent {
    * Set the accordion opened by default if the toggle button will not be shown
    * @type {string[]}
    */
-  public activeIds:string[] = !this.showAccordionPanelToggle? ['panel-0'] : [];
+  public activeIds: string[] = !this.showAccordionPanelToggle ? ['panel-0'] : [];
 }

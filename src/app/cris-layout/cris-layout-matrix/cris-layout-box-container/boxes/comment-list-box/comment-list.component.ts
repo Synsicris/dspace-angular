@@ -19,7 +19,6 @@ export class CommentListComponent implements OnInit {
 
   /**
    * The project community's id
-   * @type {string}
    */
   @Input() projectCommunityId: string;
 
