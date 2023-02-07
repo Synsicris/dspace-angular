@@ -14836,6 +14836,483 @@
   // "layout.field.label.comment.dc.title": "Title",
   "layout.field.label.comment.dc.title": "Bezeichnung",
 
+  // "query-builder.synsicris.placeholder.select-value": "Select Value",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.placeholder.select-value": "Select Value",
+
+  // "query-builder.synsicris.placeholder.select-filter": "Select Filter",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.placeholder.select-filter": "Select Filter",
+
+  // "query-builder.synsicris.button.label.add-filter": "Add Filter",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.button.label.add-filter": "Add Filter",
+
+  // "query-builder.synsicris.button.label.add-group-filter": "Add Filter Group",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.button.label.add-group-filter": "Add Filter Group",
+
+  // "query-builder.synsicris.button.label.delete-group-filter": "Delete Group above",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.button.label.delete-group-filter": "Delete Group above",
+
+  // "query-builder.synsicris.button.label.filter": "Filter",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.button.label.filter": "Filter",
+
+  // "query-builder.synsicris.button.label.reset": "Reset",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.button.label.reset": "Reset",
+
+  // "query-builder.synsicris.message.label.validation": "Fill out all the fields",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.message.label.validation": "Fill out all the fields",
+
+  // "query-builder.synsicris.label.search-all": "Search in all projects",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.search-all": "Search in all projects",
+
+  // "query-builder.synsicris.label.search-selected": "Search in selected projects",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.search-selected": "Search in selected projects",
+
+  // "query-builder.synsicris.project.browse.head": "Projects list: ",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.project.browse.head": "Projects list: ",
+
+  // "query-builder.synsicris.project.browse.empty": "No results",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.project.browse.empty": "No results",
+
+  // "query-builder.synsicris.accordion.step1.header": "Step 1",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.accordion.step1.header": "Step 1",
+
+  // "query-builder.synsicris.accordion.step2.header": "Step 2",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.accordion.step2.header": "Step 2",
+
+  // "query-builder.synsicris.label.entityType.Person": "Person",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Person": "Person",
+
+  // "query-builder.synsicris.label.entityType.Project": "Project",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Project": "Project",
+
+  // "query-builder.synsicris.label.entityType.Funding": "Funding",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Funding": "Funding",
+
+  // "query-builder.synsicris.label.entityType.OrgUnit": "OrgUnit",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.OrgUnit": "OrgUnit",
+
+  // "query-builder.synsicris.label.entityType.Journal": "Journal",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Journal": "Journal",
+
+  // "query-builder.synsicris.label.entityType.Publication": "Publication",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Publication": "Publication",
+
+  // "query-builder.synsicris.label.entityType.Product": "Product",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Product": "Product",
+
+  // "query-builder.synsicris.label.entityType.Patent": "Patent",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Patent": "Patent",
+
+  // "query-builder.synsicris.label.entityType.Event": "Event",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Event": "Event",
+
+  // "query-builder.synsicris.label.entityType.Equipment": "Equipment",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.Equipment": "Equipment",
+
+  // "query-builder.synsicris.label.entityType.award": "award",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.award": "award",
+
+  // "query-builder.synsicris.label.entityType.contribution_fundingprogramme": "contribution_fundingprogramme",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.contribution_fundingprogramme": "contribution_fundingprogramme",
+
+  // "query-builder.synsicris.label.entityType.cooperationpartner": "cooperationpartner",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.cooperationpartner": "cooperationpartner",
+
+  // "query-builder.synsicris.label.entityType.ethic": "ethic",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.ethic": "ethic",
+
+  // "query-builder.synsicris.label.entityType.exp_societalimpact": "exp_societalimpact",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.exp_societalimpact": "exp_societalimpact",
+
+  // "query-builder.synsicris.label.entityType.condition": "condition",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.condition": "condition",
+
+  // "query-builder.synsicris.label.entityType.gender": "gender",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.gender": "gender",
+
+  // "query-builder.synsicris.label.entityType.innovationidea": "innovationidea",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.innovationidea": "innovationidea",
+
+  // "query-builder.synsicris.label.entityType.milestone": "milestone",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.milestone": "milestone",
+
+  // "query-builder.synsicris.label.entityType.step": "step",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.step": "step",
+
+  // "query-builder.synsicris.label.entityType.physical_object": "physical_object",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.physical_object": "physical_object",
+
+  // "query-builder.synsicris.label.entityType.proj_objective": "proj_objective",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.proj_objective": "proj_objective",
+
+  // "query-builder.synsicris.label.entityType.research_result": "research_result",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.research_result": "research_result",
+
+  // "query-builder.synsicris.label.entityType.spinoff": "spinoff",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.spinoff": "spinoff",
+
+  // "query-builder.synsicris.label.entityType.stateofart": "stateofart",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.stateofart": "stateofart",
+
+  // "query-builder.synsicris.label.entityType.targetgroup": "targetgroup",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.targetgroup": "targetgroup",
+
+  // "query-builder.synsicris.label.entityType.task": "task",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.task": "task",
+
+  // "query-builder.synsicris.label.entityType.unexpected_result": "unexpected_result",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.unexpected_result": "unexpected_result",
+
+  // "query-builder.synsicris.label.entityType.workpackage": "workpackage",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.workpackage": "workpackage",
+
+  // "query-builder.synsicris.label.entityType.process_event": "process_event",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.process_event": "process_event",
+
+  // "query-builder.synsicris.label.entityType.innovationpotential": "innovationpotential",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.innovationpotential": "innovationpotential",
+
+  // "query-builder.synsicris.label.entityType.application": "application",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.application": "application",
+
+  // "query-builder.synsicris.label.entityType.plan_publication": "plan_publication",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.plan_publication": "plan_publication",
+
+  // "query-builder.synsicris.label.entityType.projectpartner": "projectpartner",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.projectpartner": "projectpartner",
+
+  // "query-builder.synsicris.label.entityType.programme": "programme",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.programme": "programme",
+
+  // "query-builder.synsicris.label.entityType.call": "call",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.call": "call",
+
+  // "query-builder.synsicris.label.entityType.fundingobjective": "fundingobjective",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.fundingobjective": "fundingobjective",
+
+  // "query-builder.synsicris.label.entityType.ia_objective": "ia_objective",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.ia_objective": "ia_objective",
+
+  // "query-builder.synsicris.label.entityType.neg_sideeffect": "neg_sideeffect",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.neg_sideeffect": "neg_sideeffect",
+
+  // "query-builder.synsicris.label.entityType.open_researchquestion": "open_researchquestion",
+  // TODO New key - Add a translation
+  "query-builder.synsicris.label.entityType.open_researchquestion": "open_researchquestion",
+
+  // "layout.tab.header.Projekttraeger": "Programme and Funding information",
+  "layout.tab.header.Projekttraeger": "Programm- und Förderinformationen",
+
+  // "submission.sections.submit.progressbar.describe.patents_result_import.info": "missing",
+  "submission.sections.submit.progressbar.describe.patents_result_import.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Hier sind zwei Eingaben erforderlich. Alle anderen Angaben werden aus der Patentdatenbank übernommen. </br>Wählen Sie die Sprache aus und fügen den Direktlink auf das Dokument ein.</i></b>",
+
+  // "submission.sections.submit.progressbar.describe.spinoffs_result.info": "missing",
+  "submission.sections.submit.progressbar.describe.spinoffs_result.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Ergänzen Sie bitte die Angaben aus der Anmeldung und vervollständigen Sie die weiteren Angaben.</b></i>",
+
+  // "submission.form.physical_objects.info": "missing",
+  "submission.form.physical_objects.info": "<b>Worum es hier geht:</b><ul><li>Beschreiben Sie hier Gegenstände bzw. physische Objekte, wie z. B. Ausstellungsstücke, Anschauungsmaterialien von Pflanzen und Tieren, konservierte Überreste, Bodenprofile etc., die auch nach Ende des Vorhabens für den Wissenstransfer oder für Forschung und Lehre weiterverwendet werden können.</li></ul>",
+
+  // "submission.form.physical_objects-edit.info": "missing",
+  "submission.form.physical_objects-edit.info": "<b>Worum es hier geht:</b><ul><li>Beschreiben Sie hier Gegenstände bzw. physische Objekte, wie z. B. Ausstellungsstücke, Anschauungsmaterialien von Pflanzen und Tieren, konservierte Überreste, Bodenprofile etc., die auch nach Ende des Vorhabens für den Wissenstransfer oder für Forschung und Lehre weiterverwendet werden können.</li></ul>",
+
+  // "submission.form.parentprojects.info": "missing",
+  "submission.form.parentprojects.info": "<b>Worum es hier geht:</b><ul><li>In einem Verbund arbeiten mehrere Organisationen/Antragsteller mit eigenen Projekten zusammen.</li><li>Die meisten Informationen werden hier aus den Projekten übertragen.</li><li>Sie ergänzen hier wichtige Angaben, für die Funktion des Monitoring-Tools. Nutzen Sie diese Seite deshalb auch, wenn ein Verbund nur aus einem Projekt besteht.</li><li>Fügen Sie über den Upload ein Projektlogo (falls vorhanden) und die Kapitel zum Stand des Wissens sowie zu Material und Methoden hinzu.</ul></li>",
+
+  // "submission.form.parentprojects-edit.info": "missing",
+  "submission.form.parentprojects-edit.info": "<b>Worum es hier geht:</b><ul><li>In einem Verbund arbeiten mehrere Organisationen/Antragsteller mit eigenen Projekten zusammen.</li><li>Die meisten Informationen werden hier aus den Projekten übertragen.</li><li>Sie ergänzen hier wichtige Angaben, für die Funktion des Monitoring-Tools. Nutzen Sie diese Seite deshalb auch, wenn ein Verbund nur aus einem Projekt besteht.</li><li>Fügen Sie über den Upload ein Projektlogo (falls vorhanden) und die Kapitel zum Stand des Wissens sowie zu Material und Methoden hinzu.</ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.parentprojects.info": "missing",
+  "submission.sections.submit.progressbar.describe.parentprojects.info": "<p><i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Projektverlauf.</p><b>Wichtiger Hinweis:</b><ul><li>Achten Sie besonders auf die korrekte Auswahl des Förderbereichs bzw. der Bekanntmachung in der Ihr Verbund beantragt wird. Damit wird sichergestellt, dass Ihnen die dazugehörigen Förderziele in „Beitrag zu förderpolitischen Zielen“ angezeigt werden.</ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.parentprojects_calc.info": "missing",
+  "submission.sections.submit.progressbar.describe.parentprojects_calc.info": "<p>Hier werden Daten zum Verbund auf Basis der Projekte automatisch kalkuliert und importiert. Über den Import der easy-xml-Dateien und im Projektverlauf über profi findet eine regelmäßige Aktualisierung statt. Eingaben sind weder erforderlich noch möglich.</p>",
+
+  // "submission.form.projects.info": "missing",
+  "submission.form.projects.info": "<b>Worum es hier geht:</b><ul><li>In einem Verbund arbeiten mehrere Organisationen/Antragsteller mit eigenen Projekten zusammen.</li><li>Die meisten Informationen werden hier aus den Projekten übertragen.</li><li>Sie ergänzen hier wichtige Angaben für die Funktion des Monitoring-Tools. Nutzen Sie diese Seite deshalb auch, wenn ein Verbund nur aus einem Projekt besteht.</li></ul><b>Dateien hochladen:</b><ul><li>Fügen Sie in diesem Bereich ein <b>Projektlogo</b> (falls vorhanden) und die Kapitel zum <b>Stand des Wissens inkl. eigener Vorarbeiten</b> sowie zu <b>Material und Methoden</b> hinzu.</li></ul>",
+
+  // "submission.form.projects-edit.info": "missing",
+  "submission.form.projects-edit.info": "<b>Worum es hier geht:</b><ul><li>In einem Verbund arbeiten mehrere Organisationen/Antragsteller mit eigenen Projekten zusammen.</li><li>Die meisten Informationen werden hier aus den Projekten übertragen.</li><li>Sie ergänzen hier wichtige Angaben für die Funktion des Monitoring-Tools. Nutzen Sie diese Seite deshalb auch, wenn ein Verbund nur aus einem Projekt besteht.</li></ul><b>Dateien hochladen:</b><ul><li>Fügen Sie in diesem Bereich ein <b>Projektlogo</b> (falls vorhanden) und die Kapitel zum <b>Stand des Wissens inkl. eigener Vorarbeiten</b> sowie zu <b>Material und Methoden</b> hinzu.</li></ul>",
+
+  // "submission.form.events.info": "missing",
+  "submission.form.events.info": "<b>Zur Unterscheidung:</b><ul><li><b>Konferenzbeiträge</b> erfassen Sie bitte nur unter <b>Veröffentlichungen</b>. Ein zusätzlicher Eintrag in Veranstaltung ist nicht erforderlich.</li><li><b>Veranstaltungen</b>, die Teil eines über einen längeren Zeitraum andauernden Austauschs mit den gleichen Beteiligten mit widerkehrenden Treffen/Veranstaltungen sind, erfassen Sie bitte in der Kategorie <b>Kooperation / Partizipation / Austauschprozesse</b>. Entscheiden Sie, welche Kategorie besser passt. Sie sollten keine <b>Veranstaltung</b> doppelt erfassen.</li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-events.php\"target=_blank\">Veranstaltungen und Kooperation / Partizipation / Austauschprozesse unterscheiden</a></li></ul>",
+
+  // "submission.form.events-edit.info": "missing",
+  "submission.form.events-edit.info": "<b>Zur Unterscheidung:</b><ul><li><b>Konferenzbeiträge</b> erfassen Sie bitte nur unter <b>Veröffentlichungen</b>. Ein zusätzlicher Eintrag in Veranstaltung ist nicht erforderlich.</li><li><b>Veranstaltungen</b>, die Teil eines über einen längeren Zeitraum andauernden Austauschs mit den gleichen Beteiligten mit widerkehrenden Treffen/Veranstaltungen sind, erfassen Sie bitte in der Kategorie <b>Kooperation / Partizipation / Austauschprozesse</b>. Entscheiden Sie, welche Kategorie besser passt. Sie sollten keine <b>Veranstaltung</b> doppelt erfassen.</li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-events.php\"target=_blank\">Veranstaltungen und Kooperation / Partizipation / Austauschprozesse unterscheiden</a></li></ul>",
+
+  // "submission.sections.submit.progressbar.describe.events_internal": "Internal section (only for consortium)",
+  "submission.sections.submit.progressbar.describe.events_internal": "Interner Bereich (nur für Verbund)",
+
+  // "submission.form.projectpartners.info": "missing",
+  "submission.form.projectpartners.info": "<b>Worum es hier geht:</b><ul><li>Hier erfasst jeder Projektpartner die Informationen zu seiner Organisationseinheit. Projektpartner sind Antragsteller/ausführenden Stellen eines Projektes.</li><li>Diese Informationen müssen Sie für einen Projektantrag für Bundesmittel ohnehin mit easy-Online erfassen (s. <i class=\"fas fa-external-link-alt\"></i> <a href=\"https://foerderportal.bund.de/easyonline/nutzungsbedingungen.jsf?redirectFrom=/easyonline/easyOnline.jsf\"target=\"_blank\">Antragsysstem easy-Online</a>. Indem Sie den easy-Online Import durchführen, übernehmen Sie die relevanten Informationen.</li> <li>Zusätzlich geben Sie hier Informationen zum Tätigkeitsbereich ein, um die Einbindung relevanter Disziplinen und Handlungsfelder im Vorhaben einzuschätzen.</ul></li> <b>Zur Unterscheidung:</b><ul><li>Hier geben die Projektpartner jeweils die Informationen zu ihrer Organisationseinheit ein. Zusätzlich können Sie im Arbeitsbereich des Verbundes auch Kooperationspartner / Unterauftragnehmer und Akteursgruppen, die im Verbund mitwirken, erfassen.</li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-involved.php\"target=_blank\">Projektbeteiligte unterscheiden</a></li></ul>",
+
+  // "submission.form.projectpartners-edit.info": "missing",
+  "submission.form.projectpartners-edit.info": "<b>Worum es hier geht:</b><ul><li>Hier erfasst jeder Projektpartner die Informationen zu seiner Organisationseinheit. Projektpartner sind Antragsteller/ausführenden Stellen eines Projektes.</li><li>Diese Informationen müssen Sie für einen Projektantrag für Bundesmittel ohnehin mit easy-Online erfassen (s. <i class=\"fas fa-external-link-alt\"></i> <a href=\"https://foerderportal.bund.de/easyonline/nutzungsbedingungen.jsf?redirectFrom=/easyonline/easyOnline.jsf\"target=\"_blank\">Antragsysstem easy-Online</a>. Indem Sie den easy-Online Import durchführen, übernehmen Sie die relevanten Informationen.</li> <li>Zusätzlich geben Sie hier Informationen zum Tätigkeitsbereich ein, um die Einbindung relevanter Disziplinen und Handlungsfelder im Vorhaben einzuschätzen.</ul></li> <b>Zur Unterscheidung:</b><ul><li>Hier geben die Projektpartner jeweils die Informationen zu ihrer Organisationseinheit ein. Zusätzlich können Sie im Arbeitsbereich des Verbundes auch Kooperationspartner / Unterauftragnehmer und Akteursgruppen, die im Verbund mitwirken, erfassen.</li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-involved.php\"target=_blank\">Projektbeteiligte unterscheiden</a></li></ul>",
+
+  // "submission.sections.submit.progressbar.describe.projectpartners.info": "missing",
+  "submission.sections.submit.progressbar.describe.projectpartners.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br><b><i>Ergänzen Sie bitte die folgenden Angaben, um den Tätigkeitsbereich Ihrer Organisation zu beschreiben. </i></b></br></br><b>Wichtige Hinweise:</b><ul><li>Organisationseinheit meint hier den Bereich oder die Abteilung, welche die Arbeiten im Projekt ausführt, z. B. innerhalb einer Universität das Fachgebiet oder Institut, welches die Forschungsarbeiten durchführt.</li> <li>Wenn Sie den <b>easy-Online Import erst später</b> durchführen möchten, aber in der Arbeitsplanung bereits die Zuordnung zu Ihrer Organisation vornehmen möchten, geben Sie mindestens das <b>Akronym</b> und den <b>Namen der Organisationseinheit</b> ein. Wählen Sie für „<b>Ausführende Stelle</b> im offiziellen Antrag (easy-Online)“ <b>„ja“</b>, wenn dies zutrifft. Damit wird sichergestellt, dass die Informationen beim späteren easy-Online Import in diesem Eintrag zu Ihrer Organisationseinheit ergänzt werden.</li><li>In easy-online kann jeweils nur eine ausführende Stelle angegeben werden. Wenn <b>weitere Organisationseinheiten</b> aus Ihrer Organisation über das Projekt finanziert werden, legen Sie für diese bitte einen eigenen Eintrag an. (z. B. wenn mehrere Fachgebiete derselben Universität in einem Projekt zusammenarbeiten). Wählen Sie in diesem Fall für „<b>Ausführende Stelle</b> im offiziellen Antrag (easy-online)“ <b>„nein“</b>.</ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.projectpartners_import.info": "missing",
+  "submission.sections.submit.progressbar.describe.projectpartners_import.info": "<b>Hier sind in der Regel keine Eingaben erforderlich. Die Informationen stammen aus dem easy-Online Import und werden im Verlauf des Vorhabens über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert. Manuelle Eingaben müssen Sie nur tätigen, wenn Sie hier eine zusätzliche Organisationseinheit/Abteilung aus Ihrer Organisation eintragen möchten.</b> Dies kann der Fall sein, wenn mehrere Fachgebiete derselben Universität in einem Projekt zusammenarbeiten, jedoch nur ein Fachgebiet als ausführende Stelle in easy-Online eingetragen werden konnte. Es genügt dann die Adresse anzugeben.</br></br><b>Wichtige Hinweise:</b><ul><li>Ein Import aus easy-Online oder profi überschreibt die bisherigen Informationen.</li><li>Wenn Sie in der Antragsphase fehlerhafte Angaben korrigieren möchten, ändern Sie diese Angaben in easy-online und importieren erneut.</li><li>Im Verlauf des Vorhabens sollten Sie fehlerhafte Angaben an den Förderer melden, damit diese in profi geändert werden können. Berücksichtigen Sie, dass Daten aus profi alle 24 Std. aktualisiert werden.</ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.projectpartners_import_lead.info": "missing",
+  "submission.sections.submit.progressbar.describe.projectpartners_import_lead.info": "<b>Die Informationen stammen aus dem Import der easy-xml-Datei und werden im Verlauf des Vorhabens über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert. Für zusätzliche Organisationseinheiten/Abteilungen sind hier keine Einträge vorzunehmen.</b>",
+
+  // "submission.sections.submit.progressbar.describe.projectpartners_import_leadadmin.info": "missing",
+  "submission.sections.submit.progressbar.describe.projectpartners_import_leadadmin.info": "<b>Die Informationen stammen aus dem Import der easy-xml-Datei und werden im Verlauf des Vorhabens über die Schnittstelle des Fördermittelgebers (profi) regelmäßig aktualisiert. In easy-Online heißt dies „Administrative Ansprechperson (im Falle einer Bewilligung)“. Für zusätzliche Organisationseinheiten/Abteilungen sind hier keine Einträge vorzunehmen.</b>",
+
+  // "submission.form.cooperationpartners.info": "missing",
+  "submission.form.cooperationpartners.info": "<b>Worum es hier geht:</b><ul><li>Hier können Sie Organisationen erfassen, die (meist ohne vertragliche Bindung und ohne finanzielle Vergütung) <b>maßgeblich an der Erarbeitung von Ergebnissen</b> im Verbund <b>mitwirken</b>.</li><li>Erfassen Sie hier nur Kooperationspartner / Unterauftragnehmer, die damit <b>einverstanden</b> sind.</ul></li> <b>Zur Unterscheidung:</b><ul><li>Kooperationspartner, die anonym bleiben wollen, oder größere Gruppen von Kooperationspartnern können Sie über Akteursgruppen erfassen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-involved.php\"target=_blank\">Projektbeteiligte unterscheiden</a></li>",
+
+  // "submission.form.cooperationpartners-edit.info": "missing",
+  "submission.form.cooperationpartners-edit.info": "<b>Worum es hier geht:</b><ul><li>Hier können Sie Organisationen erfassen, die (meist ohne vertragliche Bindung und ohne finanzielle Vergütung) <b>maßgeblich an der Erarbeitung von Ergebnissen</b> im Verbund <b>mitwirken</b>.</li><li>Erfassen Sie hier nur Kooperationspartner / Unterauftragnehmer, die damit <b>einverstanden</b> sind.</ul></li> <b>Zur Unterscheidung:</b><ul><li>Kooperationspartner, die anonym bleiben wollen, oder größere Gruppen von Kooperationspartnern können Sie über Akteursgruppen erfassen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-involved.php\"target=_blank\">Projektbeteiligte unterscheiden</a></li>",
+
+  // "submission.sections.submit.progressbar.describe.cooperationpartners.info": "missing",
+  "submission.sections.submit.progressbar.describe.cooperationpartners.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br>Diese Informationen dienen dazu, <b>die Einbindung relevanter Disziplinen und Handlungsfelder</b> im Verbund einzuschätzen.",
+
+  // "submission.form.process_events.info": "missing",
+  "submission.form.process_events.info": "<b>Worum es hier geht:</b><ul><li>Kooperation / Partizipation / Austauschprozess ist ein vom Verbund organisierter, <b>kontinuierlicher Austausch zwischen den gleichen Beteiligten</b>, wie z. B. die Zusammenarbeit zwischen Projektpartnern oder eine Workshopreihe mit einer Akteursgruppe.</li><li>Der Austausch findet über mehrere, wiederkehrende Treffen/Veranstaltungen statt.</li><li>Die Informationen dienen dazu, eingebundene Disziplinen und Handlungsfelder und die Intensität und Kontinuität des Austauschs einzuschätzen.</li><li><b>Im Verlauf des Vorhabens</b> können Sie die <b>wichtigsten Treffen</b> detaillierter beschreiben.</li></ul><b>Zur Unterscheidung:</b><ul><li><b>Kooperation, Partizipation oder Austausch</b> besteht aus mehreren Treffen/Veranstaltungen. Unter <b>Veranstaltung</b> werden dagegen einzelne Veranstaltungen erfasst, die nicht zusammenhängen oder nicht mit den gleichen beteiligten Organisationen oder Akteursgruppen stattfinden.</li><li> Entscheiden Sie, welche Kategorie besser passt. Sie sollten keine <b>Treffen/Veranstaltungen doppelt</b> erfassen.</li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-events.php\"target=_blank\">Veranstaltungen und Kooperation / Partizipation / Austauschprozesse unterscheiden</a></li></ul>",
+
+  // "submission.form.process_events-edit.info": "missing",
+  "submission.form.process_events-edit.info": "<b>Worum es hier geht:</b><ul><li>Kooperation / Partizipation / Austauschprozess ist ein vom Verbund organisierter, <b>kontinuierlicher Austausch zwischen den gleichen Beteiligten</b>, wie z. B. die Zusammenarbeit zwischen Projektpartnern oder eine Workshopreihe mit einer Akteursgruppe.</li><li>Der Austausch findet über mehrere, wiederkehrende Treffen/Veranstaltungen statt.</li><li>Die Informationen dienen dazu, eingebundene Disziplinen und Handlungsfelder und die Intensität und Kontinuität des Austauschs einzuschätzen.</li><li><b>Im Verlauf des Vorhabens</b> können Sie die <b>wichtigsten Treffen</b> detaillierter beschreiben.</li></ul><b>Zur Unterscheidung:</b><ul><li><b>Kooperation, Partizipation oder Austausch</b> besteht aus mehreren Treffen/Veranstaltungen. Unter <b>Veranstaltung</b> werden dagegen einzelne Veranstaltungen erfasst, die nicht zusammenhängen oder nicht mit den gleichen beteiligten Organisationen oder Akteursgruppen stattfinden.</li><li> Entscheiden Sie, welche Kategorie besser passt. Sie sollten keine <b>Treffen/Veranstaltungen doppelt</b> erfassen.</li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-events.php\"target=_blank\">Veranstaltungen und Kooperation / Partizipation / Austauschprozesse unterscheiden</a></li></ul>",
+
+  // "submission.sections.submit.progressbar.describe.team.info": "missing",
+  "submission.sections.submit.progressbar.describe.team.info": "<b>Geben Sie hier bitte im Projektverlauf, spätestens jedoch zum Projektende, alle Beschäftigten mit einem relevanten Beschäftigungsumfang des Teilprojektes ein.</b></br>Ein relevanter Beschäftigungsumfang beginnt ab einem Stellenanteil von 25 % oder ab einer Beschäftigungsdauer von mindestens 25 % der Projektlaufzeit mit höherem Stellenanteil. Es steht Ihnen frei, auch Beschäftigte mit geringerem Stellenumfang oder geringerer Beschäftigungsdauer einzutragen.</br></br><b>Worum es hier geht:</b></br><ul><li>Die Informationen dienen dazu, die Disziplinen übergreifende Arbeitsweise des Projektes einzuschätzen und die Umsetzung der geschlechterunabhängigen Gleichstellung auf projektübergreifend auszuwerten.</ul></li></br></br><b>Wichtige Hinweise:</b></br><ul><li>Sie können einen Teil der Informationen importieren, wenn die Beschäftigten ein Personenprofil angelegt haben.</li><li>Wenn Personen sich entscheiden, ihr Profil zu löschen, werden damit auch alle Links zu anderen Datensätzen im System deaktiviert. Beschäftigte ohne Personenprofil werden hier anonym erfasst.</ul></li>",
+
+  // "submission.form.publications.info": "missing",
+  "submission.form.publications.info": "<b>Worum es hier geht:</b><ul><li>Hier erfassen Sie alle Veröffentlichungen, die im Projekt erstellt wurden.</li><li>Dazu gehören alle Arten von Text-, Bild- oder Tondokumenten sowie Webseiten.</li><li>Nutzen Sie die Einträge für einen Abgleich mit den geplanten Veröffentlichungen.</li><li>Somit können Sie dem Fördergeber die Veröffentlichung nachweisen und hier Belegexemplare zur Verfügung stellen.</li><li>Später können Sie entscheiden, ob und welche Veröffentlichungen für Dritte zugänglich sind.</li></ul>",
+
+  // "submission.form.publications-edit.info": "missing",
+  "submission.form.publications-edit.info": "<b>Worum es hier geht:</b><ul><li>Hier erfassen Sie alle Veröffentlichungen, die im Projekt erstellt wurden.</li><li>Dazu gehören alle Arten von Text-, Bild- oder Tondokumenten sowie Webseiten.</li><li>Nutzen Sie die Einträge für einen Abgleich mit den geplanten Veröffentlichungen.</li><li>Somit können Sie dem Fördergeber die Veröffentlichung nachweisen und hier Belegexemplare zur Verfügung stellen.</li><li>Später können Sie entscheiden, ob und welche Veröffentlichungen für Dritte zugänglich sind.</li></ul>",
+
+  // "submission.sections.submit.progressbar.describe.publications_references.info": "missing",
+  "submission.sections.submit.progressbar.describe.publications_references.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Ergänzen Sie bitte nachfolgend das Zielpublikum der Veröffentlichung und verweisen gegebenenfalls auf im Tool erfasste Forschungsdaten, die zu der Veröffentlichung gehören.</b></i>",
+
+  // "submission.form.awards.info": "missing",
+  "submission.form.awards.info": "<b>Worum es hier geht:</b><ul><li>Eine Auszeichnung ist eine Ehrung oder auch Preisverleihung an Personen oder Organisationen für herausragende Leistungen.</li><li>Stiftungen, Vereine, Unternehmen oder Einzelpersonen vergeben solche Auszeichnungen, z. B. als Preis für besondere wissenschaftliche Leistungen oder Projekte.</li><li>Formulieren Sie in der <b>Beschreibung</b>, für welche Leistungen die Auszeichnung verliehen wurde und deren Bezug zum Verbund.</li></ul><b>Dateien hochladen:</b><ul><li>Fügen Sie in diesem Bereich <b>Begleitdokumente zur Auszeichnung</b> (z. B. eine Pressemeldung, falls vorhanden) hinzu.</li></ul>",
+
+  // "submission.form.awards-edit.info": "missing",
+  "submission.form.awards-edit.info": "<b>Worum es hier geht:</b><ul><li>Eine Auszeichnung ist eine Ehrung oder auch Preisverleihung an Personen oder Organisationen für herausragende Leistungen.</li><li>Stiftungen, Vereine, Unternehmen oder Einzelpersonen vergeben solche Auszeichnungen, z. B. als Preis für besondere wissenschaftliche Leistungen oder Projekte.</li><li>Formulieren Sie in der <b>Beschreibung</b>, für welche Leistungen die Auszeichnung verliehen wurde und deren Bezug zum Verbund.</li></ul><b>Dateien hochladen:</b><ul><li>Fügen Sie in diesem Bereich <b>Begleitdokumente zur Auszeichnung</b> (z. B. eine Pressemeldung, falls vorhanden) hinzu.</li></ul>",
+
+  // "submission.form.steps.info": "missing",
+  "submission.form.steps.info": "<b>Worum es hier geht:</b><ul><li>Hier erfassen Sie Arbeiten und Kooperationen, die zur <b>Weiterentwicklung bzw. Verwertung der gewonnenen Ergebnisse und Erkenntnisse nach Projektende</b> aufgenommen oder fortgeführt werden sollen.</li><li>Diese können von <b>einem Projektpartner oder von mehreren Beteiligten</b> geplant sein.</li><li>Dazu zählen z. B. Transferaktivitäten oder Folgeprojekte.</li><li>Auch die Aufnahme/Fortführung von Kooperationen z. B. in der Lehre, Kooperationen zur Erschließung bzw. Übertragung in andere Wissensgebiete oder die gemeinsame Nutzung von Ressourcen gehört dazu.</li><li>Dies sind wichtige, in die Zukunft gerichtete Informationen zu Ihrem Projekt, die auch in der <b>Verwertungsplanung</b> darzulegen sind.</ul></li>",
+
+  // "submission.form.steps-edit.info": "missing",
+  "submission.form.steps-edit.info": "<b>Worum es hier geht:</b><ul><li>Hier erfassen Sie Arbeiten und Kooperationen, die zur <b>Weiterentwicklung bzw. Verwertung der gewonnenen Ergebnisse und Erkenntnisse nach Projektende</b> aufgenommen oder fortgeführt werden sollen.</li><li>Diese können von <b>einem Projektpartner oder von mehreren Beteiligten</b> geplant sein.</li><li>Dazu zählen z. B. Transferaktivitäten oder Folgeprojekte.</li><li>Auch die Aufnahme/Fortführung von Kooperationen z. B. in der Lehre, Kooperationen zur Erschließung bzw. Übertragung in andere Wissensgebiete oder die gemeinsame Nutzung von Ressourcen gehört dazu.</li><li>Dies sind wichtige, in die Zukunft gerichtete Informationen zu Ihrem Projekt, die auch in der <b>Verwertungsplanung</b> darzulegen sind. </ul></li>",
+
+  // "submission.form.innovationideas.info": "missing",
+  "submission.form.innovationideas.info": "<b>Worum es hier geht:</b><ul><li>Beschreiben Sie hier Ideen, wie Ihre Ergebnisse genutzt werden könnten, um zu möglichen Lösungen, Veränderungen oder Innovationen beizutragen.</li><li>Ideen sind noch wenig konkret, weit in der Zukunft liegend, in den Erfolgsaussichten unsicher oder imVorhaben derzeit nicht explizit angestrebte Möglichkeiten</ul></li>",
+
+  // "submission.form.innovationideas-edit.info": "missing",
+  "submission.form.innovationideas-edit.info": "<b>Worum es hier geht:</b><ul><li>Beschreiben Sie hier Ideen, wie Ihre Ergebnisse genutzt werden könnten, um zu möglichen Lösungen, Veränderungen oder Innovationen beizutragen.</li><li>Ideen sind noch wenig konkret, weit in der Zukunft liegend, in den Erfolgsaussichten unsicher oder imVorhaben derzeit nicht explizit angestrebte Möglichkeiten.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-applic.php\"target=_blank\">Kategorien zum Thema Anwendung  unterscheiden</a></ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentproject.info": "missing",
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentproject.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br><b><i>Weisen Sie dem Verbund bitte passende Schlagworte/Keywords zu.</br>Geben Sie dafür jeweils einen Begriff oder Teile davon ein. Wählen Sie den passenden Begriff aus der angezeigten Vorschlagsliste.</br></br></i> <b>Wichtige Hinweise:</b><ul><li>Schlagworte dienen der <b>Suchoptimierung</b>, d. h. dadurch wird der Verbund leichter gefunden.</li> <li>Die hier zugewiesenen Schlagworte werden in andere Einträge (z. B. Veröffentlichungen) übertragen und können dort angepasst werden. <b>Vergeben Sie deshalb hier die Schlagworte, bevor Sie weitere Einträge vornehmen.</b></li> <li>Verwendet wird hier das kontrollierte Schlagwortverzeichnis für den Agrarbereich der FAO (Agrovoc).</ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.agrovoc_keywords_others.info": "missing",
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords_others.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br>Hier werden die Schlagworte angezeigt, die Sie dem Verbund zugewiesen haben.</br></br><b><i>Sie können die Schlagworte anpassen, indem Sie sie löschen oder neue hinzufügen. Geben Sie dafür jeweils einen Begriff oder Teile davon ein. Wählen Sie den passenden Begriff aus der angezeigten Vorschlagsliste.</br></br></b></i> <b>Wichtige Hinweise:</b><ul><li>Schlagworte dienen der <b>Suchoptimierung</b>, d. h. dadurch werden die Einträge leichter gefunden.</li><li>Die <b>Übertragung</b> der Schlagworte vom Verbund findet nur <b>einmalig</b> beim Anlegen des Eintrags statt. Die hier zugewiesenen Schlagworte bleiben unverändert, auch wenn die Schlagworte zum Verbund noch mal geändert werden.</li><li>Verwendet wird hier das kontrollierte Schlagwortverzeichnis für den Agrarbereich der FAO (Agrovoc).</ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.statusacc1.info": "missing",
+  "submission.sections.submit.progressbar.describe.statusacc1.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Kennzeichnen Sie hier bitte Veränderungen seit der Antragstellung zu diesem Eintrag.</br></br></i>Damit werden Veränderungen in der Planung und der Projektfortschritt leicht sichtbar.",
+
+  // "submission.sections.submit.progressbar.describe.statusacc2.info": "missing",
+  "submission.sections.submit.progressbar.describe.statusacc2.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Kennzeichnen Sie hier bitte Veränderungen seit der Antragstellung zu diesem Eintrag.</br></br></b></i>Damit werden Veränderungen in der Planung und der Projektfortschritt leicht sichtbar.",
+
+  // "submission.sections.submit.progressbar.describe.statusacc3.info": "missing",
+  "submission.sections.submit.progressbar.describe.statusacc3.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Kennzeichnen Sie hier bitte Veränderungen seit der Antragstellung zu diesem Eintrag.</br></br></b></i>Damit werden Veränderungen in der Planung und der Projektfortschritt leicht sichtbar.",
+
+  // "submission.sections.submit.progressbar.describe.statusacc4.info": "missing",
+  "submission.sections.submit.progressbar.describe.statusacc4.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Kennzeichnen Sie hier bitte Veränderungen seit der Antragstellung zu diesem Eintrag.</br></br></b></i>Damit werden Veränderungen in der Planung und der Projektfortschritt leicht sichtbar.",
+
+  // "submission.form.unexpected_results.info": "missing",
+  "submission.form.unexpected_results.info": "<b>Worum es hier geht:</b><ul><li>(Zwischen-)Ergebnisse oder Probleme sollen im Wirkungspfad leicht erkennbar gemacht werden, um den <b>Grund für Veränderungen in den Arbeiten und Wirkungen</b> darzustellen. Damit zeigen Sie die Anpassungsfähigkeit des Verbundes.</li><li>Beispiele: Forschungsmethoden erweisen sich als nicht nutzbar, Versuchsvarianten unterscheiden sich nicht signifikant, essentielle Kooperationen lassen sich nicht verwirklichen, Risiken einer Anwendung werden bekannt, Lösungen erweisen sich als wirkungslos.</li><li>Eventuell können diese (Zwischen-) Ergebnisse oder Probleme so gravierend sein, dass sie als sogenannte „Negative Results“ eingestuft werden können. Das sind z. B. nicht-signifikante oder eine Hypothese widerlegende Ergebnisse sowie methodische Probleme die eine Durchführung der Forschungsarbeiten verhindern. Indem Sie diese veröffentlichen, zeigen Sie Integrität und Verantwortungsbewusstsein der Forschung im Verbund. Sie tragen in der wissenschaftlichen Community dazu bei, Methoden weiterzuentwickeln, Risiken wahrzunehmen und Verzerrungen in der Einschätzung von Signifikanzen und Effektgrößen in Reviews und Metaanalysen zu vermeiden. Bei praxisorientierten Ergebnissen tragen Sie dazu bei, die Anwendung unwirksamer oder risikoreicher Maßnahmen zu verhindern.</ul></li><b>Zur Unterscheidung:</b><ul><li>Wenn externe Rahmenbedingungen die Ursache für eine Veränderung sind, erfassen Sie diese in der Kategorie <b>Rahmenbedingung</b></li><li>Von <b>Forschungsergebnis</b> unterscheidet sich <b>(Zwischen-) Ergebnis / Problem</b> darin, dass es Veränderungen in den Arbeiten und Wirkungen hervorruft.</li></ul>",
+
+  // "submission.form.unexpected_results-edit.info": "missing",
+  "submission.form.unexpected_results-edit.info": "<b>Worum es hier geht:</b><ul><li>(Zwischen-)Ergebnisse oder Probleme sollen im Wirkungspfad leicht erkennbar gemacht werden, um den <b>Grund für Veränderungen in den Arbeiten und Wirkungen</b> darzustellen. Damit zeigen Sie die Anpassungsfähigkeit des Verbundes.</li><li>Beispiele: Forschungsmethoden erweisen sich als nicht nutzbar, Versuchsvarianten unterscheiden sich nicht signifikant, essentielle Kooperationen lassen sich nicht verwirklichen, Risiken einer Anwendung werden bekannt, Lösungen erweisen sich als wirkungslos.</li><li>Eventuell können diese (Zwischen-) Ergebnisse oder Probleme so gravierend sein, dass sie als sogenannte „Negative Results“ eingestuft werden können. Das sind z. B. nicht-signifikante oder eine Hypothese widerlegende Ergebnisse sowie methodische Probleme die eine Durchführung der Forschungsarbeiten verhindern. Indem Sie diese veröffentlichen, zeigen Sie Integrität und Verantwortungsbewusstsein der Forschung im Verbund. Sie tragen in der wissenschaftlichen Community dazu bei, Methoden weiterzuentwickeln, Risiken wahrzunehmen und Verzerrungen in der Einschätzung von Signifikanzen und Effektgrößen in Reviews und Metaanalysen zu vermeiden. Bei praxisorientierten Ergebnissen tragen Sie dazu bei, die Anwendung unwirksamer oder risikoreicher Maßnahmen zu verhindern.</ul></li><b>Zur Unterscheidung:</b><ul><li>Wenn externe Rahmenbedingungen die Ursache für eine Veränderung sind, erfassen Sie diese in der Kategorie <b>Rahmenbedingung</b></li><li>Von <b>Forschungsergebnis</b> unterscheidet sich <b>(Zwischen-) Ergebnis / Problem</b> darin, dass es Veränderungen in den Arbeiten und Wirkungen hervorruft.</li></ul>",
+
+  // "submission.sections.submit.progressbar.describe.unexpected_results_publication.info": "missing",
+  "submission.sections.submit.progressbar.describe.unexpected_results_publication.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Geben Sie hier an, ob das (Zwischen-) Ergebniss / Problem eine solche Relevanz im Sinne von „Negative Results“ hat, dass eine Veröffentlichung sinnvoll ist.</b></i> <b></br></br>Wichtiger Hinweis:</b><ul><li>Eine bereits erfolgte Veröffentlichung tragen Sie sie zuerst in der Kategorie <b>Veröffentlichung</b> ein. Danach kann sie hier zugeordnet werden.</ul></li>",
+
+  // "submission.form.workpackages.info": "missing",
+  "submission.form.workpackages.info": "<b>Worum es hier geht:</b><ul><li>Über Arbeitspakete gliedern Sie die Arbeiten des Verbundes. Im Arbeitsplan können Sie dem Arbeitspaket Aufgaben und andere Aktivitäten zuordnen.</ul></li>",
+
+  // "submission.form.workpackages-edit.info": "missing",
+  "submission.form.workpackages-edit.info": "<b>Worum es hier geht:</b><ul><li>Über Arbeitspakete gliedern Sie die Arbeiten des Verbundes. Im Arbeitsplan können Sie dem Arbeitspaket Aufgaben und andere Aktivitäten zuordnen.</ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.workpackages_result.info": "missing",
+  "submission.sections.submit.progressbar.describe.workpackages_result.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Geben Sie diese Informationen erst im Verlauf des Vorhabens ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><b><i>Beschreiben und begründen Sie bitte hier Veränderung im Verlauf des Vorhabens.</b></i></br></br><b>Wichtiger Hinweis:</b><ul><li>Im Wirkungspfad können wichtige Ursachen für eine Veränderung über Einträge unter <b>Rahmenbedingung</b> und <b>(Zwischen-) Ergebnis / Problem</b> dargestellt werden.</ul></li>",
+
+  // "submission.form.stateofart.info": "missing",
+  "submission.form.stateofart.info": "<b>Worum es hier geht:</b><ul><li>Mit den Einträgen legen Sie die wichtigsten Aspekte zur Problemstellung und zum Stand des Wissens dar, um die Ausgangslage für die Antragstellung im Wirkungspfad abzubilden.</ul></li>",
+
+  // "submission.form.stateofart-edit.info": "missing",
+  "submission.form.stateofart-edit.info": "<b>Worum es hier geht:</b><ul><li>Mit den Einträgen legen Sie die wichtigsten Aspekte zur Problemstellung und zum Stand des Wissens dar, um die Ausgangslage für die Antragstellung im Wirkungspfad abzubilden.</ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.milestones.info": "missing",
+  "submission.sections.submit.progressbar.describe.milestones.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br><b><i>Erfassen Sie hier bitte einen Meilenstein.</i></b></br></br><b>Worum es hier geht:</b><ul><li>Über Meilensteine kennzeichnen Sie wichtige Etappen des Projektes. Im Arbeitsplan bekommen sie einen Zeitpunkt zugewiesen.</ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.proj_objectives.info": "missing",
+  "submission.sections.submit.progressbar.describe.proj_objectives.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br><b><i>Benennen und beschreiben Sie für die Planung des Vorhabens das wissenschaftlich-technische Arbeitsziel.</b></i>",
+
+  // "submission.sections.submit.progressbar.describe.ia_objectives.info": "missing",
+  "submission.sections.submit.progressbar.describe.ia_objectives.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br><b><i>Benennen und beschreiben Sie für die Planung des Vorhabens das Ziel für Interaktion und Transfer.</b></i>",
+
+  // "submission.form.conditions.info": "missing",
+  "submission.form.conditions.info": "<b>Worum es hier geht:</b><ul><li>Rahmenbedingungen sind externe, vom Verbund nicht (oder nur minimal) steuerbare Einflussfaktoren, welche die Entwicklung von Wirkungen fördern oder hemmen.</li><li>Beispiele: Das derzeitige Konsumverhalten der Verbraucher fördert die Markteinführung des geplanten Produktes. Durch einen zukünftig veränderten Rechtsrahmen muss die Entwicklung der Lösung erheblich angepasst werden.</li><li>Zur Antragstellung verdeutlichen Sie mit den Einträgen, dass Sie die maßgeblichen Rahmenbedingungen kennen und damit angemessen umgehen.</li><li>Im Verlauf des Vorhabend können Sie durch aktualisierte oder neue Einträge darlegen, ob veränderte oder neue Rahmenbedingungen auftreten und wie sie die Forschungsarbeit und/oder die Wirkungen beeinflussen.</li></ul><b>Zur Unterscheidung:</b><ul><li>Wenn Ergebnisse oder Probleme innerhalb des Verbundes die Ursache für Veränderungen in Arbeiten oder Wirkungen sind, erfassen Sie diese bitte in der Kategorie <b>(Zwischen-) Ergebnis / Problem.</b></ul></li>",
+
+  // "submission.form.conditions-edit.info": "missing",
+  "submission.form.conditions-edit.info": "<b>Worum es hier geht:</b><ul><li>Rahmenbedingungen sind externe, vom Verbund nicht (oder nur minimal) steuerbare Einflussfaktoren, welche die Entwicklung von Wirkungen fördern oder hemmen.</li><li>Beispiele: Das derzeitige Konsumverhalten der Verbraucher fördert die Markteinführung des geplanten Produktes. Durch einen zukünftig veränderten Rechtsrahmen muss die Entwicklung der Lösung erheblich angepasst werden.</li><li>Zur Antragstellung verdeutlichen Sie mit den Einträgen, dass Sie die maßgeblichen Rahmenbedingungen kennen und damit angemessen umgehen.</li><li>Im Verlauf des Vorhabend können Sie durch aktualisierte oder neue Einträge darlegen, ob veränderte oder neue Rahmenbedingungen auftreten und wie sie die Forschungsarbeit und/oder die Wirkungen beeinflussen.</li></ul><b>Zur Unterscheidung:</b><ul><li>Wenn Ergebnisse oder Probleme innerhalb des Verbundes die Ursache für Veränderungen in Arbeiten oder Wirkungen sind, erfassen Sie diese bitte in der Kategorie <b>(Zwischen-) Ergebnis / Problem.</b></ul></li>",
+
+  // "submission.form.contribution_fundingprogramme.info": "missing",
+  "submission.form.contribution_fundingprogramme.info": "<b>Worum es hier geht:</b><ul><li>Die Einträge dienen dazu, in der Vorhabenbeschreibung das Kapitel „Bezug des Vorhabens zu den förderpolitischen Zielen“ und das Berichtskapitel „Beitrag des Projektes zu den förderpolitischen Zielen“ zu ersetzen.</li></ul>",
+
+  // "submission.form.contribution_fundingprogramme-edit.info": "missing",
+  "submission.form.contribution_fundingprogramme-edit.info": "<b>Worum es hier geht:</b><ul><li>Die Einträge dienen dazu, in der Vorhabenbeschreibung das Kapitel „Bezug des Vorhabens zu den förderpolitischen Zielen“ und das Berichtskapitel „Beitrag des Projektes zu den förderpolitischen Zielen“ zu ersetzen.</li></ul>",
+
+  // "submission.form.targetgroups.info": "missing",
+  "submission.form.targetgroups.info": "<b>Worum es hier geht:</b><ul><li>Relevante Akteursgruppen sind: Zielgruppen, Stakeholder, Nutzergruppen und Multiplikatoren, die im Vorhaben <b>eingebunden</b> oder <b>erreicht</b> werden sollen. Aber auch: Beeinträchtigte von Wirkungen oder Gegner von Veränderungen, die das Vorhaben anstrebt.</li><li>Akteursgruppen sind somit Gruppen von Organisationen und Personen, die nicht genauer benannt werden und im Verlauf des Vorhabens in ihrer Zusammensetzung auch wechseln können.</li><li>Welche und wieviele Akteursgruppen relevant sind, hängt vom Verbund ab. Es ist hilfreich, sie nach Handlungsfeldern zu unterscheiden: z. B. Beratung, Schulen, Konsumenten, Landwirtschaftliche Betriebe, bestimmte Wirtschaftsbereiche oder politische Entscheidungsträger.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-involved.php\"target=_blank\">Projektbeteiligte unterscheiden</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-pages-actor.php\"target=_blank\">Wieviele und welche Akteursgruppen anlegen</a></li></ul>",
+
+  // "submission.form.targetgroups-edit.info": "missing",
+  "submission.form.targetgroups-edit.info": "<b>Worum es hier geht:</b><ul><li>Relevante Akteursgruppen sind: Zielgruppen, Stakeholder, Nutzergruppen und Multiplikatoren, die im Vorhaben <b>eingebunden</b> oder <b>erreicht</b> werden sollen. Aber auch: Beeinträchtigte von Wirkungen oder Gegner von Veränderungen, die das Vorhaben anstrebt.</li><li>Akteursgruppen sind somit Gruppen von Organisationen und Personen, die nicht genauer benannt werden und im Verlauf des Vorhabens in ihrer Zusammensetzung auch wechseln können.</li><li>Welche und wieviele Akteursgruppen relevant sind, hängt vom Verbund ab. Es ist hilfreich, sie nach Handlungsfeldern zu unterscheiden: z.B. Beratung, Schulen, Konsumenten, Landwirtschaftliche Betriebe bestimmte Wirtschaftsbereiche oder politische Entscheidungsträger.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-involved.php\"target=_blank\">Projektbeteiligte unterscheiden</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-pages-actor.php\"target=_blank\">Wieviele und welche Akteursgruppen anlegen</a></li></ul>",
+
+  // "submission.form.exp_societalimpact.info": "missing",
+  "submission.form.exp_societalimpact.info": "<b>Worum es hier geht:</b><ul><li>Hier wird erfasst, welche positiven Wirkungen mit den Ergebissen verbunden sein können, wenn sie angewendet würden. (So wie Sie es in Säule 4 des Wirkungspfades unter anderem, in Lösung / Veränderung / Innovation dargestellt haben.)</li><li>Es geht hier um erwartete gesellschaftliche Wirkungen, die über den unmittelbaren Nutzen für Anwender:innen hinausreichen.</li><li>Für jede erwartete Wirkung, die im Wirkungspfad dargestellt werden soll, ist ein Eintrag anzulegen.</li><li>Die Charakterisierung erfolgt anhand der <b>Transformationsbereiche</b> der Deutschen Nachhaltigkeitsstrategie (DNS) und <b>Kernelementen</b> nachhaltiger Entwicklung und dient der verbundübergreifenden Auswertung.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-pages-impacts.php\"target=_blank\">Hintergrund zur Nachhaltigkeit</a></li></ul>",
+
+  // "submission.form.exp_societalimpact-edit.info": "missing",
+  "submission.form.exp_societalimpact-edit.info": "<b>Worum es hier geht:</b><ul><li>Hier wird erfasst, welche positiven Wirkungen mit den Ergebissen verbunden sein können, wenn sie angewendet würden. (So wie Sie es in Säule 4 des Wirkungspfades unter anderem, in Lösung / Veränderung / Innovation dargestellt haben.)</li><li>Es geht hier um erwartete gesellschaftliche Wirkungen, die über den unmittelbaren Nutzen für Anwender:innen hinausreichen.</li><li>Für jede erwartete Wirkung, die im Wirkungspfad dargestellt werden soll, ist ein Eintrag anzulegen.</li><li>Die Charakterisierung erfolgt anhand der <b>Transformationsbereiche</b> der Deutschen Nachhaltigkeitsstrategie (DNS) und <b>Kernelementen</b> nachhaltiger Entwicklung und dient der verbundübergreifenden Auswertung.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-pages-impacts.php\"target=_blank\">Hintergrund zur Nachhaltigkeit</a></li></ul>",
+
+  // "submission.sections.submit.progressbar.describe.exp_societalimpact.info": "missing",
+  "submission.sections.submit.progressbar.describe.exp_societalimpact.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br><b><i>Benennen und beschreiben Sie jede erwartete gesellschaftliche Wirkung präzise. Nutzen Sie die Liste der Transformationsbereich und Kernelemente auch als Hilfestellung, um gesellschaftliche Wirkungen zu identifizieren.</b></i></br></br><b>Wichtiger Hinweis:</b><ul><li>Wenn die erwarteten Wirkungen noch unklar sind, reflektieren Sie zunächst anhand der Kernelemente und Transformationsbereiche, bevor Sie entscheiden, wie viele Einträge Sie anlegen möchten und jeweils die Bezeichnung und Beschreibung formulieren.</li></ul>",
+
+  // "submission.sections.submit.progressbar.describe.exp_societalimpact_neg.info": "missing",
+  "submission.sections.submit.progressbar.describe.exp_societalimpact_neg.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Projektverlauf.</br></br><b><i>Reflektieren Sie hier, ob ggf. negative Nebenwirkungen oder Zielkonflikte zur bereits beschriebenen Nachhaltigkeitswirkung vorliegen.</i></b>",
+
+  // "submission.form.gender.info": "missing",
+  "submission.form.gender.info": "<b>Worum es hier geht:</b><ul><li>Forschung gestaltet maßgeblich Innovation. Damit Menschen unabhängig vom Geschlecht davon profitieren können, ist es erforderlich, dass Forschung Fragen der Geschlechtergerechtigkeit einbezieht.</li><li>Da Forschung und Entwicklung öffentlich gefördert werden, sind die wichtigen gesellschaftlichen Ziele der Geschlechtergleichstellung zu berücksichtigen.</li><li>Der Erfolg von Forschung und Innovation kann erheblich gesteigert werden, wenn relevante Geschlechteraspekte im Vorfeld identifiziert und im Projekt berücksichtigt werden.</ul></li>",
+
+  // "submission.form.gender-edit.info": "missing",
+  "submission.form.gender-edit.info": "<b>Worum es hier geht:</b><ul><li>Forschung gestaltet maßgeblich Innovation. Damit Menschen unabhängig vom Geschlecht davon profitieren können, ist es erforderlich, dass Forschung Fragen der Geschlechtergerechtigkeit einbezieht.</li><li>Da Forschung und Entwicklung öffentlich gefördert werden, sind die wichtigen gesellschaftlichen Ziele der Geschlechtergleichstellung zu berücksichtigen.</li><li>Der Erfolg von Forschung und Innovation kann erheblich gesteigert werden, wenn relevante Geschlechteraspekte im Vorfeld identifiziert und im Projekt berücksichtigt werden.</ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.gender_reflection.info": "missing",
+  "submission.sections.submit.progressbar.describe.gender_reflection.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br><b>Reflektieren Sie bitte hier, inwieweit das Projekt Geschlechteraspekte berücksichtigt. Ergänzen Sie Ihr „ja“ oder „nein“ bei den folgenden Fragen bitte jeweils mit einer kurzen Erläuterung.</br></br></b> <b>Wichtiger Hinweis:</b><ul><li> Wo Fragen der Geschlechtergerechtigkeit im Projekt relevant sind, ist nicht immer gleich offensichtlich. Reflektieren Sie daher bitte jede Frage und berücksichtigen Sie die Hinweise hinter den <i class=\"fas fa-question-circle\"></i>, um auch nicht direkt offensichtliche Aspekte zu identifizieren.</ul></li><b>Tipps:</b> <ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-pages-gender.html\"target=_blank\">Weitere Hilfe</a></ul></li>",
+
+  // "submission.sections.submit.progressbar.describe.gender.info": "missing",
+  "submission.sections.submit.progressbar.describe.gender.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br><b><i>Formulieren Sie eine Kernaussage, die das Ergebnis der Reflexion zusammenfassend wiedergibt.</br></br></b></i><b>Wichtige Hinweise:</b><ul><li>Anhand der Kernaussage wird das Ergebnis der Reflexion im Wirkungspfad dargestellt. Außerdem wird sie in Übersichten angezeigt.</li><li>Beispiele: „Berücksichtigung von Geschlechterunterschieden sind zentral für die Entwicklung von Wirkungen“, „Unterschiedliche Workshops für die Anforderungserhebung bei Frauen und Männern“, „Geschlechterstereotype werden gezielt hinterfragt“ „Geschlechterbezug ist nur für die Beschäftigten relevant“, „kein spezifischer Geschlechterbezug vorhanden“</ul></li>",
+
+  // "submission.form.ethics.info": "missing",
+  "submission.form.ethics.info": "<b>Worum es hier geht:</b><ul><li> Hier erfolgt eine Reflexion ethischer Aspekte für alle Schritte im Forschungs- und Entwicklungsprozess (F/E-Prozess) – auch ausgelagerten – sowie für die Anwendung der Ergebnisse. Der Verbund zeigt damit seine Verantwortung für die Einhaltung ethischer Standards. <br></li><li>Durch die angemessene Berücksichtigung relevanter ethischer Aspekte, können negative Folgen und Risiken vermindert und die gesellschaftliche Relevanz der Forschung erhöht werden. <br></li></ul><br><b>Wichtiger Hinweis:</b><br><ul><li>Diese Reflexion ist nur für Personen aus dem Verbund mit Zugang zum Monitoring-Tool und dem Förderer zugänglich. Sie <b>kann nicht öffentlich gestellt werden</b>.</li></ul><br><b>Zur Unterscheidung:</b><ul><li> Hier liegt der Fokus auf der Reflexion ggf. problematischer ethischer Aspekte des Forschungsvorhabens, um ihre angemessene Berücksichtigung sicherzustellen. </li><li> Mögliche positive Wirkungen des Vorhabens, die ebenfalls ethischer Natur sein können, erfassen Sie bitte in <b>Erwartete gesellschaftliche Wirkungen</b>. </li><li> In <b>Mögliche negative Nebenwirkungen</b> werden Risiken der Nutzung der F/E-Ergebnisse vertieft reflektiert und gehen über die hier fokussierten „Dual Use Güter“ und „Grenzbereiche der ethischen Akzeptanz“ hinaus.</li></ul><b>Dateien hochladen:</b><ul><li>Fügen Sie in diesem Bereich <b>weitergehende Dokumente</b> (falls vorhanden) hinzu.</li></ul>",
+
+  // "submission.form.ethics-edit.info": "missing",
+  "submission.form.ethics-edit.info": "<b>Worum es hier geht:</b><ul><li> Hier erfolgt eine Reflexion ethischer Aspekte für alle Schritte im Forschungs- und Entwicklungsprozess (F/E-Prozess) – auch ausgelagerten – sowie für die Anwendung der Ergebnisse. Der Verbund zeigt damit seine Verantwortung für die Einhaltung ethischer Standards. <br></li><li>Durch die angemessene Berücksichtigung relevanter ethischer Aspekte, können negative Folgen und Risiken vermindert und die gesellschaftliche Relevanz der Forschung erhöht werden. <br></li></ul><br><b>Wichtiger Hinweis:</b><br><ul><li>Diese Reflexion ist nur für Personen aus dem Verbund mit Zugang zum Monitoring-Tool und dem Förderer zugänglich. Sie <b>kann nicht öffentlich gestellt werden</b>.</li></ul><br><b>Zur Unterscheidung:</b><ul><li> Hier liegt der Fokus auf der Reflexion ggf. problematischer ethischer Aspekte des Forschungsvorhabens, um ihre angemessene Berücksichtigung sicherzustellen. </li><li> Mögliche positive Wirkungen des Vorhabens, die ebenfalls ethischer Natur sein können, erfassen Sie bitte in <b>Erwartete gesellschaftliche Wirkungen</b>. </li><li> In <b>Mögliche negative Nebenwirkungen</b> werden Risiken der Nutzung der F/E-Ergebnisse vertieft reflektiert und gehen über die hier fokussierten „Dual Use Güter“ und „Grenzbereiche der ethischen Akzeptanz“ hinaus.</li></ul><b>Dateien hochladen:</b><ul><li>Fügen Sie in diesem Bereich <b>weitergehende Dokumente</b> (falls vorhanden) hinzu.</li></ul>",
+
+  // "tree.description.core": "missing",
+  "tree.description.core": "Kernelement der Nachhaltigkeit (Auswahlliste)",
+
+  // "vocabulary-treeview.tree.description.core": "missing",
+  "vocabulary-treeview.tree.description.core": "<i>Wählen Sie bitte einen Aspekt aus.</br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
+
+  // "tree.description.transform": "missing",
+  "tree.description.transform": "Transformationsbereich (Auswahlliste)",
+
+  // "vocabulary-treeview.tree.description.transform": "missing",
+  "vocabulary-treeview.tree.description.transform": "<i>Wählen Sie bitte einen Bereich aus.</br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</i>",
+
+  // "vocabulary-treeview.tree.description.agrovoc": "missing",
+  "vocabulary-treeview.tree.description.agrovoc": "<i>Wählen Sie bitte passende Schlagwörter aus.</br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
+
+  // "vocabulary-treeview.tree.description.countries2": "missing",
+  "vocabulary-treeview.tree.description.countries2": "<i>Wählen Sie bitte das Land aus.</br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
+
+  // "vocabulary-treeview.tree.description.nace": "missing",
+  "vocabulary-treeview.tree.description.nace": "<i>Wählen Sie den Wirtschaftszweig bitte so spezifisch wie möglich aus.</br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein. </br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i></br>Die Liste umfasst die Wirtschaftszweige gemäß der Statistischen Systematik der Europäischen Gemeinschaft (NACE).",
+
+  // "vocabulary-treeview.tree.description.trl": "missing",
+  "vocabulary-treeview.tree.description.trl": "<i>Wählen Sie bitte den Technology Readiness Level.</i>",
+
+  // "vocabulary-treeview.tree.description.srl": "missing",
+  "vocabulary-treeview.tree.description.srl": "<i>Wählen Sie bitte den Solution Readiness Level.</i>",
+
+  // "vocabulary-treeview.tree.description.destatis": "missing",
+  "vocabulary-treeview.tree.description.destatis": "<i>Wählen Sie das Fachgebiet bitte so spezifisch wie möglich aus. </br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
+
+  // "submission.sections.submit.progressbar.exploitation_plan_step_type_1_task_form.info": "Help is missing",
+  "submission.sections.submit.progressbar.exploitation_plan_step_type_1_task_form.info": "<b><i>Legen Sie hier erst dann neue Einträge an, nachdem Sie unter „Vorhandene auswählen“ überprüft haben, ob die passenden Einträge bereits vorhanden sind.</i></b></br></br><b>Bereiche:</b><ul><li>Besonders relevant sind die Einträge zu <b>Patent oder Gebrauchsmuster</b>.</li><li>Wenn bereits Lizenzeinnahmen oder Erlöse aus dem Verkauf erzielt werden, wird dies in <b>Anwendung</b> erfasst.</li><li></b>Schutzrechtsanmeldungen Anderer</b>, die einer Verwertung durch die Antragsteller entgegenstehen, sind in <b>Rahmenbedingung</b> zu erfassen.</li><li>Einträge aus <b>weiterenKategorien</b> können ebenfalls relevant sein, wenn sie direkt mit der Anmeldung des Schutzrechtes im Zusammenhang stehen.</li></ul>",
+
+  // "submission.sections.submit.progressbar.exploitation_plan_step_type_2_task_form.info": "Help is missing",
+  "submission.sections.submit.progressbar.exploitation_plan_step_type_2_task_form.info": "<b><i> Legen Sie hier erst dann neue Einträge an, nachdem Sie unter „Vorhandene auswählen“ überprüft haben, ob die passenden Einträge bereits vorhanden sind.</i></b></br></br><b>Kategorien:</b><ul><li>Mit <b>Mögliche Lösung / Veränderung / Innovation</b> beschreiben Sie, wie die Ergebnisse von Ihnen oder Dritten genutzt werden sollen und welche Vorteile Sie davon haben.</li><li>In <b>Arbeiten und Kooperation nach Projektende</b> dokumentieren Sie geplante Schritte nach Ende, um Ergebnisse weiter in die Anwendung zu bringen und Kooperationen fortzusetzen.</li><li><b>Ausgründung (inkl. Verein)</b> nutzen Sie, für Gründungen jeglicher Form, die sich aus dem Verbund ergeben.</li><li>In <b>Rahmenbedingung</b> erfassen Sie Faktoren, die die Verwertung beeinflussen.</li><li>In <b>Anwendung einer Lösung / Veränderung / Innovation</b>, erfassen Sie die tatsächliche Anwendung der Ergebnisse durch Sie oder Dritte.</li><li>In <b>Erwartete gesellschaftliche Wirkungen und Beitrag zu förderpolitischen Zielen</b> können Sie den volkswirtschaftlichen/gesellschaftlichen Nutzen erfassen.</li><li>Falls Arbeiten im Verlauf des Vorhabens bereits auf die Förderung der Nutzung nach Ende abzielen oder Sie auf spezifische Ergebnisse oder Probleme verweisen möchten, können Sie auch Einträge aus <b>weiteren Kategorien</b> verwenden.</li></ul>",
+
+  // "submission.sections.submit.progressbar.exploitation_plan_step_type_3_task_form.info": "Help is missing",
+  "submission.sections.submit.progressbar.exploitation_plan_step_type_3_task_form.info": "<i><b>Legen Sie hier erst dann neue Einträge an, nachdem Sie unter „Vorhandene auswählen“ überprüft haben, ob die passenden Einträge bereits vorhanden sind.</i></b></br></br><b>KAtegorien:</b><ul><li><b>Geplante Veröffentlichungen</b>, um ihre Veröffentlichungs- und Kommunikationsstrategie für ein bestimmtes Ziel darzulegen.</li><li><b>Veröffentlichung und Forschungsdaten</b>, wenn eine Veröffentlichung bereits erfolgt ist.</li><li><b>Forschungsergebnis</b> ist sinnvoll, um auf bestimmte Ergebnisse zu verweisen, insbesondere, wenn sich die Verwertung einzelner Ergebnisse stark unterscheidet.</li><li><b>Gegenstand/Material</b>, wenn eine weitere wissenschaftliche oder technische Verwendung dieses Objektes erfolgen kann.</li><li><b>Arbeiten und Kooperation nach Projektende</b>, für alle wissenschaftlichen und technischen Arbeiten zur Verwertung der Ergebnisse.</li><li>Falls Arbeiten im Verlauf des Vorhabens bereits auf die Förderung der Nutzung nach Ende abzielen oder Sie auf spezifische Ergebnisse oder Probleme verweisen möchten, können Sie auch Einträge aus <b>weiteren Kategorien</b> verwenden.</li></ul>",
+
+  // "submission.sections.submit.progressbar.exploitation_plan_step_type_4_task_form.info": "Help is missing",
+  "submission.sections.submit.progressbar.exploitation_plan_step_type_4_task_form.info": "<i><b>Legen Sie hier erst dann neue Einträge an, nachdem Sie unter „Vorhandene auswählen“ überprüft haben, ob die passenden Einträge bereits vorhanden sind.</i></b></br></br><b>Bereiche:</b><ul><li><b>Ideen für die Nutzung von Projektergebnissen</b>, um weitere wirtschaftliche oder volkswirtschaftliche Nutzungsmöglichkeiten der Ergebnisse zu erfassen.</li><li><b>Arbeiten und Kooperationen nach Projektende</b>, für konkrete Schritte zur Förderung der wissenschaftlichen und wirtschaftlichen Anschlussfähigkeit.</li><li></b>Beitrag zu förderpolitischen Zielen</b>, um zu verdeutlichen, welche Ziele mit der Anschlussfähigkeit in Verbindung stehen.</li></ul>",
+
+  // "submission.form.innovationpotentials.info": "missing",
+  "submission.form.innovationpotentials.info": "<b>Worum es hier geht:</b><ul><li>Hier beschreiben Sie: „Welche Lösung für ein Problem, oder welche Veränderung z. B. von Handlungen, Einstellungen, oder welche Innovation soll aus den Ergebnissen entwickelt werden?\"</li><li>Dabei geht es darum die mögliche Lösung / Veränderung / Innovation, so zu beschreiben, dass ihr Entwicklungspotenzial deutlich wird.</li></ul><b>Zur Unterscheidung:</b><ul><li>Wenn die mögliche Nutzung der Ergebnisse noch unklar ist, weit in der Zukunft liegt oder sehr unsicher ist, wechseln Sie bitte in die verkürzte Erfassung in der Kategorie <b>Idee für eine Nutzung von Projektergebnissen</b>.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-applic.php\"target=_blank\">Kategorien zum Thema Anwendung  unterscheiden</a></li></ul>",
+
+  // "submission.form.innovationpotentials-edit.info": "missing",
+  "submission.form.innovationpotentials-edit.info": "<b>Worum es hier geht:</b><ul><li>Hier beschreiben Sie: „Welche Lösung für ein Problem, oder welche Veränderung z. B. von Handlungen, Einstellungen, oder welche Innovation soll aus den Ergebnissen entwickelt werden?\"</li><li>Dabei geht es darum die mögliche Lösung / Veränderung / Innovation, so zu beschreiben, dass ihr Entwicklungspotenzial deutlich wird.</li></ul><b>Zur Unterscheidung:</b><ul><li>Wenn die mögliche Nutzung der Ergebnisse noch unklar ist, weit in der Zukunft liegt oder sehr unsicher ist, wechseln Sie bitte in die verkürzte Erfassung in der Kategorie <b>Idee für eine Nutzung von Projektergebnissen</b>.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-applic.php\"target=_blank\">Kategorien zum Thema Anwendung  unterscheiden</a></li></ul>",
+
+  // "submission.form.applications.info": "missing",
+  "submission.form.applications.info": "<b>Worum es hier geht:</b><ul><li>Die Umsetzung von Ergebnissen kann bei Projektpartnern oder Dritten in unveränderter oder auch weiterentwickelter Form erfolgen.</li><li>Die Umsetzung von Ergebnissen ist eine unmittelbare Wirkung des Verbundes.</li><li>Sie beschreiben hier die (zahlenmäßige) Steigerung und die Verbreitung der Anwendung durch eine Zeitreihe.</li></ul><b>Zur Unterscheidung:</b><ul><li>In <b> Mögliche Lösung / Veränderung / Innovation</b> verdeutlichen Sie u.a. das Entwicklungspotenzial einer Anwendung.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-applic.php\"target=_blank\">Kategorien zum Thema Anwendung unterscheiden</a></li></ul>",
+
+  // "submission.form.applications-edit.info": "missing",
+  "submission.form.applications-edit.info": "<b>Worum es hier geht:</b><ul><li>Die Umsetzung von Ergebnissen kann bei Projektpartnern oder Dritten in unveränderter oder auch weiterentwickelter Form erfolgen.</li><li>Die Umsetzung von Ergebnissen ist eine unmittelbare Wirkung des Verbundes.</li><li>Sie beschreiben hier die (zahlenmäßige) Steigerung und die Verbreitung der Anwendung durch eine Zeitreihe.</li></ul><b>Zur Unterscheidung:</b><ul><li>In <b> Mögliche Lösung / Veränderung / Innovation</b> verdeutlichen Sie u.a. das Entwicklungspotenzial einer Anwendung.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-applic.php\"target=_blank\">Kategorien zum Thema Anwendung  unterscheiden</a></li></ul>",
+
+  // "submission.form.research_results.info": "missing",
+  "submission.form.research_results.info": "<b>Worum es hier geht:</b><ul><li>Hier stellen Sie sehr kurz und prägnant die wichtigsten Ergebnisse für den Förderer da.</li><li>Ergebnisse sind alle wissenschaftlichen und technischen Erkenntnisse, die im Vorhaben gewonnen wurden.</li><li>Diese Kategorie ersetzt nicht die ausführliche Darstellung von Ergebnissen in Berichten für die fördernde Einrichtung, Veröffentlichungen und anderen Textdokumenten. Diese werden in der Kategorie <b>Veröffentlichung</b> erfasst und hochgeladen.</li></ul><b>Zur Unterscheidung:</b><ul><li>Wenn Ergebnisse zu erheblichen Veränderungen in den Arbeiten oder Wirkungen führen, erfassen Sie diese bitte in der Kategorie <b>(Zwischen-) Ergebnis / Problem</b></li></ul>",
+
   // "layout.field.label.comment.dc.type": "Type",
   "layout.field.label.comment.dc.type": "Art",
 
