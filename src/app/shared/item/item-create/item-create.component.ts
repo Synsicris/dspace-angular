@@ -1,8 +1,8 @@
-import { MetadataValue } from '../../../core/shared/metadata.models';
 import { Item } from '../../../core/shared/item.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,22 +12,16 @@ import {
 } from '../../../submission/import-external/import-external-collection/submission-import-external-collection.component';
 import { CollectionListEntry } from '../../collection-dropdown/collection-dropdown.component';
 import { EntityTypeDataService } from '../../../core/data/entity-type-data.service';
-import { BehaviorSubject, combineLatest } from 'rxjs';
 import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { isNotEmpty } from '../../empty.util';
 import { CreateProjectComponent } from '../../../projects/create-project/create-project.component';
 import {
   FUNDING_ENTITY,
-  PERSON_ENTITY,
   PROJECT_ENTITY,
-  PROJECTPATNER_ENTITY_METADATA,
-  SUBCONTRACTOR_ENTITY_METADATA
+  PROJECTPATNER_ENTITY_METADATA
 } from '../../../core/project/project-data.service';
 import { environment } from '../../../../environments/environment';
-import {
-  CreateItemSubmissionModalComponent
-} from '../../create-item-submission-modal/create-item-submission-modal.component';
-import { ConfidenceType } from '../../../core/shared/confidence-type';
+import { ItemDataService } from '../../../core/data/item-data.service';
 
 @Component({
   selector: 'ds-item-create',
@@ -65,7 +59,15 @@ export class ItemCreateComponent implements OnInit {
    */
   @Output() refresh = new EventEmitter();
 
-  constructor(private authService: AuthService, private entityTypeService: EntityTypeDataService, private modalService: NgbModal, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private itemService: ItemDataService,
+    private entityTypeService: EntityTypeDataService,
+    private modalService: NgbModal,
+    private router: Router
+  ) {
+
+  }
 
   ngOnInit(): void {
     combineLatest([
@@ -74,12 +76,17 @@ export class ItemCreateComponent implements OnInit {
         getFirstSucceededRemoteDataPayload()
       )]
     ).pipe(
-      map(([isAuthenticated, entityType]) => isAuthenticated && isNotEmpty(entityType)
-        && !(this.relatedEntityType === PROJECT_ENTITY && entityType.label === SUBCONTRACTOR_ENTITY_METADATA)
-        && !(this.relatedEntityType === PROJECT_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA)
-        && !(this.relatedEntityType === PERSON_ENTITY && entityType.label === environment.comments.commentEntityType)),
+      map(([isAuthenticated, entityType]) =>
+        isAuthenticated &&
+        isNotEmpty(entityType) &&
+        this.canCreateProjectPartner(entityType)
+      ),
       take(1)
     ).subscribe((canShow) => this.canShow$.next(canShow));
+  }
+
+  protected canCreateProjectPartner(entityType) {
+    return !(this.relatedEntityType === PROJECT_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA);
   }
 
   /**
@@ -107,19 +114,15 @@ export class ItemCreateComponent implements OnInit {
       take(1)
     ).subscribe((collectionListEntry: CollectionListEntry) => {
       modalRef.close();
-      if (this.targetEntityType === environment.comments.commentEntityType) {
-        this.createComment(collectionListEntry.collection.uuid);
-      } else {
-        const navigationExtras: NavigationExtras = {
-          queryParams: {
-            ['collection']: collectionListEntry.collection.uuid,
-          }
-        };
-        if (this.targetEntityType) {
-          navigationExtras.queryParams.entityType = this.targetEntityType;
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+          ['collection']: collectionListEntry.collection.uuid,
         }
-        this.router.navigate(['/submit'], navigationExtras);
+      };
+      if (this.targetEntityType) {
+        navigationExtras.queryParams.entityType = this.targetEntityType;
       }
+      this.router.navigate(['/submit'], navigationExtras);
     });
   }
 
@@ -132,28 +135,4 @@ export class ItemCreateComponent implements OnInit {
     modalRef.componentInstance.parentProjectUUID = this.scope;
   }
 
-  /**
-   * Open creation comment modal
-   */
-  createComment(collectionId: string) {
-    const modalRef = this.modalService.open(CreateItemSubmissionModalComponent, { size: 'lg' });
-    modalRef.componentInstance.entityType = this.targetEntityType;
-    modalRef.componentInstance.collectionId = collectionId;
-    modalRef.componentInstance.formName = environment.comments.commentEditFormName;
-    modalRef.componentInstance.formSectionName = environment.comments.commentEditFormSection;
-
-    modalRef.componentInstance.customMetadata = {
-      [environment.comments.commentRelationItemMetadata]: [
-        Object.assign({}, new MetadataValue(), {
-          'value': this.item.name,
-          'authority': this.item.id,
-          'confidence': ConfidenceType.CF_ACCEPTED
-        })
-      ]
-    };
-
-    modalRef.componentInstance.createItemEvent.pipe(take(1)).subscribe(() => {
-      this.refresh.emit();
-    });
-  }
 }

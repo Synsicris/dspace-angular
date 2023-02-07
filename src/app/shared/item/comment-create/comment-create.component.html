@@ -1,4 +1,4 @@
-<ng-container *ngIf="(canShow$ | async) as authenticated">
+<ng-container *ngIf="(canCreateComment$ | async)">
   <button class="btn btn-outline-primary open-modal" title="{{'item-create.modal-launcher.btn' | translate}}"
     (click)="openDialog(); $event.stopPropagation()">
     <i class="fas fa-plus-circle"></i>

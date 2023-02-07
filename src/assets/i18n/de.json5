@@ -5301,9 +5301,9 @@
   // TODO New key - Add a translation
   "item.submission.create": "Create Item",
 
-  // "item.submission.create.sucessfully": "Item Created successfully",
+  // "item.submission.create.successfully": "Item Created successfully",
   // TODO New key - Add a translation
-  "item.submission.create.sucessfully": "Item Created successfully",
+  "item.submission.create.successfully": "Item Created successfully",
 
   // "item.version.history.empty": "There are no other versions for this item yet.",
   "item.version.history.empty": "Dieses Item hat noch keine anderen Versionen.",

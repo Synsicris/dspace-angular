@@ -3386,7 +3386,7 @@
 
   "item.submission.create": "Create Item",
 
-  "item.submission.create.sucessfully": "Item Created successfully",
+  "item.submission.create.successfully": "Item Created successfully",
 
   "item.version.history.empty": "There are no other versions for this item yet.",
 
@@ -9621,39 +9621,25 @@
   "layout.field.label.OrgUnit.synsicris.address.addressCityPostbox": "City",
 
   "layout.field.label.OrgUnit.synsicris.address.countryclassification": "Country",
-
   "layout.field.label.OrgUnit.synsicris.identifier.municipality": "Municipality",
-
   "layout.field.label.programme.oairecerif.internalid": "Internal ID",
-
   "layout.field.label.programme.synsicris.type.visibility": "Visibility type",
-
   "layout.field.label.programme.synsicris.relation.funding-guideline": "Funding guideline",
-
   "layout.field.label.comment.dc.title": "Title",
-
   "layout.field.label.comment.dc.type": "Type",
-
   "layout.field.label.comment.synsicris.date.creation": "Creation date",
-
   "layout.field.label.comment.synsicris.date.reminder": "Reminder date",
-
-  "layout.field.label.comment.synsicris.creator": "Creation by",
-
+  "layout.field.label.comment.synsicris.creator": "Created by",
   "layout.field.label.comment.synsicris.description": "Description",
-
+  "layout.field.label.comment.synsicris.related.item": "Related Item",
+  "layout.field.label.comment.synsicris.related.project": "Related Project",
+  "layout.field.label.comment.synsicris.related.version": "Related Version",
   "layout.tab.header.open_researchquestion": "Open research questions",
-
   "layout.box.header.open_researchquestion_comment": "Comments - Open research questions",
-
   "layout.box.header.jpbasics": "Consortium information",
-
   "layout.box.header.Project": "box.header.Projects",
-
   "layout.box.header.open_researchquestion": "Open research questions",
-
   "layout.box.header.open_researchquestion_m": "Open research questions",
-
   "submission.sections.submit.progressbar.describe.open_researchquestions": "Open research questions",
 
   "layout.box.header.multiple_involved": "Involved organisations",
