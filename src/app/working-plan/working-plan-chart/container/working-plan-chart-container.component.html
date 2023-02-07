@@ -91,9 +91,12 @@
             </button>
           </div>
           <div class="mat-form-field auto-width mt-1{{node.level === 0?' pl-2':''}}">
-            <p class="block-ellipsis">{{node.name}}</p>
+            <p class="block-ellipsis">
+              <span (click)="openItemModal(node); $event.stopImmediatePropagation();">{{node.name}}</span>
+            </p>
             <br>
-            <span class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
+            <span
+              class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
             <br>
             <button *ngIf="canAddChildStep(node)" data-test="add-child-step"
                     class="btn btn-xs btn-link p-0"
@@ -104,28 +107,45 @@
             </button>
           </div>
           <div class="mr-05 d-flex flex-column justify-content-between">
-            <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end" data-test="remove-step"
-                    title="{{'working-plan.chart.button.remove' | translate}}"
-                    [class.ml-1]="node.level !== 0"
-                    [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf"
-                    (click)="deleteStep(node); $event.stopPropagation()">
-              <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
-              <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
-            </button>
+            <div class="d-flex justify-content-end">
+              <span>
+                <i dsItemMetadataStatus [status]="node?.status"></i>
+              </span>
+              <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end" data-test="remove-step"
+                      title="{{'working-plan.chart.button.remove' | translate}}"
+                      [class.ml-1]="node.level !== 0"
+                      [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf"
+                      (click)="deleteStep(node); $event.stopPropagation()">
+                <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
+                <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
+              </button>
+            </div>
+
+            <div class="d-flex justify-content-end">
+              <span class="pr-1">
+                  <i dsItemMetadataInternal [status]="node?.internalStatus"></i>
+                </span>
+            </div>
+
             <div class="d-flex">
-              <button *ngIf="(compareMode | async) && node.compareStatus === ComparedVersionItemStatus.Changed" mat-icon-button
+              <button *ngIf="(compareMode | async) && node.compareStatus === ComparedVersionItemStatus.Changed"
+                      mat-icon-button
                       class="btn btn-xs btn-link p-0 text-primary"
                       [class.ml-1]="node.level !== 0"
                       title="{{'working-plan.chart.button.compare' | translate}}"
                       (click)="openCompareModal(node); $event.stopImmediatePropagation();">
                 <i class="fas fa-not-equal"></i>
               </button>
-              <ds-working-plan-chart-item-edit-button [compareMode]="compareMode"
-                                                      [isVersionOfAnItem]="isVersionOf"
-                                                      [node]="node"></ds-working-plan-chart-item-edit-button>
-              <ds-working-plan-chart-item-delete-button [compareMode]="compareMode"
-                                                        [isVersionOfAnItem]="isVersionOf"
-                                                        [node]="node"></ds-working-plan-chart-item-delete-button>
+              <ds-working-plan-chart-item-edit-button
+                [compareMode]="compareMode"
+                [isVersionOfAnItem]="isVersionOf"
+                [node]="node"
+              ></ds-working-plan-chart-item-edit-button>
+              <ds-working-plan-chart-item-delete-button
+                [compareMode]="compareMode"
+                [isVersionOfAnItem]="isVersionOf"
+                [node]="node"
+              ></ds-working-plan-chart-item-delete-button>
             </div>
           </div>
         </mat-tree-node>
