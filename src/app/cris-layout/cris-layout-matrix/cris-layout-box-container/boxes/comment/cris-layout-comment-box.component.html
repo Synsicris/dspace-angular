@@ -14,7 +14,7 @@
                               [showViewModes]="false"
                               [useCachedVersionIfAvailable]="false"
                               (customEvent)="refresh()">
-  <ds-comment-create additionalSearchFormOptions
+  <ds-comment-create additionalSearchFormOptions *ngIf="canCreateItems$ | async"
                   [itemId]="item.id"
                   [relatedEntityType]="item.entityType"
                   [targetEntityType]="getTargetEntity()"

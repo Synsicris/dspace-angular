@@ -23,6 +23,7 @@ import { RemoteData } from '../../core/data/remote-data';
 import { SubmissionObject, SubmissionObjectError } from '../../core/submission/models/submission-object.model';
 import { FormService } from '../form/form.service';
 import { isNotEmpty } from '../empty.util';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ds-create-item-submission-modal',
@@ -96,7 +97,8 @@ export class CreateItemSubmissionModalComponent implements OnInit {
     private projectItemService: ProjectItemService,
     private formService: FormService,
     private sectionsService: SectionsService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private translate: TranslateService
   ) {
   }
 
@@ -186,7 +188,7 @@ export class CreateItemSubmissionModalComponent implements OnInit {
    */
   handleDepositWorkspace(submissionObject: SubmissionObject) {
     this.projectItemService.depositWorkspaceItem(submissionObject).pipe(take(1)).subscribe(() => {
-      this.notificationsService.success('item.submission.create.sucessfully');
+      this.notificationsService.success(null, this.translate.get('item.submission.create.successfully'));
       this.createItemEvent.emit();
       this.closeModal();
     });

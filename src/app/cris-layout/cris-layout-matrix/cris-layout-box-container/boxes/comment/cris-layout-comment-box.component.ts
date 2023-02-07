@@ -7,17 +7,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { CrisLayoutBox } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
 import { Observable, of } from 'rxjs';
-import { Community } from '../../../../../core/shared/community.model';
 import { ProjectDataService, VERSION_UNIQUE_ID } from '../../../../../core/project/project-data.service';
 import { hasValue } from '../../../../../shared/empty.util';
 import { environment } from '../../../../../../environments/environment';
-import { filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
-import { getFirstCompletedRemoteData } from '../../../../../core/shared/operators';
-import { RemoteData } from '../../../../../core/data/remote-data';
 import { ItemDataService } from '../../../../../core/data/item-data.service';
 import { AuthorizationDataService } from '../../../../../core/data/feature-authorization/authorization-data.service';
-import { FeatureID } from '../../../../../core/data/feature-authorization/feature-id';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Component({
   selector: 'ds-cris-layout-comment-box',
@@ -25,10 +19,19 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
   styleUrls: ['../relation/cris-layout-relation-box.component.scss']
 })
 @RenderCrisLayoutBoxFor(LayoutBox.COMMENT)
+@RenderCrisLayoutBoxFor(LayoutBox.COMMENT_ALL)
 export class CrisLayoutCommentBoxComponent extends CrisLayoutRelationBoxComponent implements OnInit, OnDestroy {
 
-  canCreateComment$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
+  /**
+   * @param authorizationService
+   * @param cd
+   * @param itemService
+   * @param projectService
+   * @param route
+   * @param translateService
+   * @param boxProvider
+   * @param itemProvider
+   */
   constructor(
     public readonly authorizationService: AuthorizationDataService,
     public readonly cd: ChangeDetectorRef,
@@ -43,41 +46,20 @@ export class CrisLayoutCommentBoxComponent extends CrisLayoutRelationBoxComponen
   }
 
   ngOnInit(): void {
-    const isVersionOfAnItem$ = this.route.data.pipe(
-      map((data) => data.isVersionOfAnItem),
-      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
-      take(1)
-    );
-
-    this.projectService.getProjectItemByItemId(this.item.id).pipe(
-      getFirstCompletedRemoteData(),
-      withLatestFrom(isVersionOfAnItem$),
-      switchMap(([projectItemRD, isVersionOfAnItem]: [RemoteData<Item>, boolean]) => {
-        if (!isVersionOfAnItem) {
-          return of(false);
-        } else {
-          const uniqueId = projectItemRD.payload.firstMetadataValue(VERSION_UNIQUE_ID);
-          const projectId = uniqueId.split('_')[0];
-          return this.itemService.findById(projectId).pipe(
-            getFirstCompletedRemoteData(),
-            switchMap((projectItemRD: RemoteData<Item>) => this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, projectItemRD.payload.self))
-          )
-        }
-      })
-    ).subscribe((canCreateComment) => {
-      this.canCreateComment$.next(canCreateComment);
-    });
-
-
     super.ngOnInit();
   }
 
+  /**
+   * Activates / Deactivates the creation of an item {@link ItemCreateComponent}, depending
+   * on the value emitted from this observable.
+   * The Observable will emit:
+   *   - `true` to enable the item creation
+   *   - `false` to disable the item creation
+   *
+   * @protected
+   */
   protected initCanCreateItems$(): Observable<boolean> {
-    return this.canCreateComment$.asObservable();
-  }
-
-  protected getProjectScope$(): Observable<Community> {
-    return super.getProjectScope$();
+    return of(this.box.boxType === LayoutBox.COMMENT);
   }
 
   protected initSearchFilter(item: Item) {

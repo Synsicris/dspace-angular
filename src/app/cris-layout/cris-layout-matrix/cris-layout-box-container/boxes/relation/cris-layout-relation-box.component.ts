@@ -57,7 +57,7 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
    *
    * @protected
    */
-  protected subscription: Subscription = new Subscription();
+  protected subscriptions: Subscription[] = [];
 
   constructor(public cd: ChangeDetectorRef,
               protected route: ActivatedRoute,
@@ -70,7 +70,7 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
   ngOnInit(): void {
     super.ngOnInit();
 
-    this.subscription.add(
+    this.subscriptions.push(
       this.getProjectScope$()
         .subscribe(communityScope => {
           this.projectScope = communityScope;
@@ -79,7 +79,7 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
         })
     );
 
-    this.subscription.add(
+    this.subscriptions.push(
       this.initCanCreateItems$()
         .subscribe((isVersionOfAnItem: boolean) => {
           this.canCreateItems$.next(isVersionOfAnItem);
@@ -156,7 +156,9 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscriptions
+      .filter((subscription) => hasValue(subscription))
+      .forEach((subscription) => subscription.unsubscribe());
     this.canCreateItems$.complete();
   }
 
