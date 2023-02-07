@@ -20,7 +20,7 @@
             [value]="value"
             [disabled]="value.disable"
           >
-            {{ value.label | translate | titlecase }}
+            {{ 'query-builder.synsicris.label.' + firstDefaultFilter + '.' + value.label | translate | titlecase }}
           </ng-option>
         </ng-select>
       </div>
@@ -135,7 +135,7 @@
                 [value]="value"
                 [disabled]="value.disable"
               >
-                {{ value.label | translate | titlecase }}
+                {{ value.label | titlecase }}
               </ng-option>
             </ng-select>
 
