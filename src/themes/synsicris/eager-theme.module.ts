@@ -10,6 +10,9 @@ import { SearchModule } from '../../app/shared/search/search.module';
 import { RootModule } from '../../app/root.module';
 import { NavbarModule } from '../../app/navbar/navbar.module';
 import { ExploreModule } from '../../app/shared/explore/explore.module';
+import { AdminSidebarComponent } from './app/admin/admin-sidebar/admin-sidebar.component';
+import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
+import { FooterComponent } from './app/footer/footer.component';
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
@@ -23,6 +26,9 @@ const DECLARATIONS = [
   HeaderComponent,
   HeaderNavbarWrapperComponent,
   NavbarComponent,
+  AdminSidebarComponent,
+  BreadcrumbsComponent,
+  FooterComponent
 ];
 
 @NgModule({
