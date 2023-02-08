@@ -1,3 +1,4 @@
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { CollectionDataService } from './../../core/data/collection-data.service';
 import { EditItemDataService } from './../../core/submission/edititem-data.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -39,7 +40,8 @@ describe('WorkingPlanChartComponent', () => {
             provide: TranslateLoader,
             useClass: TranslateLoaderMock
           }
-        })
+        }),
+        NgbAccordionModule
       ],
       providers: [
         { provide: EditItemDataService, useValue: editItemDataService },
