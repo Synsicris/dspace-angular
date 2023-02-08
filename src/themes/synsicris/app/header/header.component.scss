@@ -1,3 +1,9 @@
+/* (rex) Styles for the header are defied in src/themes/synsicris/styles/_global-styles.scss
+in order to avoid the same duplication as in the HTML code
+because the navbar with logo exists twice: 
+from mediaquery md in navbar.component.html, 
+but for mediaquery-sm with hamburger-button in header.component.html */
+
 @media screen and (min-width: map-get($grid-breakpoints, md)) {
   nav.navbar {
     display: none;

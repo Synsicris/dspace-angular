@@ -13465,11 +13465,11 @@
   // "submission.sections.upload.edit.title": "Edit bitstream",
   "submission.sections.upload.edit.title": "Angaben bearbeiten",
 
-  // "layout.field.label.Person.dspace.entity.type": "<span class="headline-workspace">Personal Workspace",
-  "layout.field.label.Person.dspace.entity.type": "<span class=\"headline-workspace\">Persönlicher Arbeitsbereich",
+  // "layout.field.label.Person.dspace.entity.type": "Personal Workspace",
+  "layout.field.label.Person.dspace.entity.type": "Persönlicher Arbeitsbereich",
 
-  // "layout.field.label.Person.dc.title": "<span class="headline-workspace">Personal Workspace",
-  "layout.field.label.Person.dc.title": "<span class=\"headline-workspace\">Persönlicher Arbeitsbereich",
+  // "layout.field.label.Person.dc.title": "Personal Workspace",
+  "layout.field.label.Person.dc.title": "Persönlicher Arbeitsbereich",
 
   // "layout.field.label.Person.synsicris.subject.destatis": "Discipline",
   "layout.field.label.Person.synsicris.subject.destatis": "Disziplin / Fachgebiet",
@@ -13492,8 +13492,8 @@
   // "layout.field.label.Person.person.identifier.rid": "Researcher ID",
   "layout.field.label.Person.person.identifier.rid": "Researcher ID",
 
-  // "layout.field.label.Project.dc.title": "<span class="headline-workspace"><i class="fas fa-shekel-sign"> Workspace Consortium:",
-  "layout.field.label.Project.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-shekel-sign\"></i> Arbeitsbereich Verbund:",
+  // "layout.field.label.Project.dc.title": "<i class="fas fa-shekel-sign"></i> Workspace Consortium:",
+  "layout.field.label.Project.dc.title": "<i class=\"fas fa-shekel-sign\"></i> Arbeitsbereich Verbund:",
 
   // "layout.field.label.Project.oairecerif.acronym": "Acronym",
   "layout.field.label.Project.oairecerif.acronym": "Akronym",
@@ -13546,8 +13546,8 @@
   // "layout.field.label.Project.synsicris.type.project": "Type of project",
   "layout.field.label.Project.synsicris.type.project": "Art des Vorhabens",
 
-  // "layout.field.label.Funding.dc.title": "<span class="headline-workspace"><i class="fas fa-cube"></i> Workspace Project:",
-  "layout.field.label.Funding.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-cube\"></i> Arbeitsbereich Projekt/Zuwendungsempfänger:",
+  // "layout.field.label.Funding.dc.title": "<i class="fas fa-cube"></i> Workspace Project:",
+  "layout.field.label.Funding.dc.title": "<i class=\"fas fa-cube\"></i> Arbeitsbereich Projekt/Zuwendungsempfänger:",
 
   // "layout.field.label.Funding.oairecerif.acronym": "Acronym",
   "layout.field.label.Funding.oairecerif.acronym": "Akronym",
@@ -15771,6 +15771,9 @@
 
   // "breadcrumb.entity-type.milestone": "Milestone",
   "breadcrumb.entity-type.milestone": "Meilenstein",
+
+  // "layout.field.label.Funding.dc.title": "Workspace of the project / grant recipient:",
+  "layout.field.label.Funding.dc.title": "<i class=\"fas fa-cube\"></i> Arbeitsbereich Projekt:",
 
   // "breadcrumb.entity-type.step": "Works and cooperation after project end",
   "breadcrumb.entity-type.step": "Arbeiten und Kooperation nach Projektende",

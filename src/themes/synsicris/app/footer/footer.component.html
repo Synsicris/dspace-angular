@@ -1,0 +1,39 @@
+<!-- deleted top-footer, because it is not used in Synsicris (rx 221117) -->
+<footer class="text-lg-start">
+
+  <!-- Copyright -->
+
+  
+
+  <div class="bottom-footer p-1 d-flex justify-content-center align-items-center">
+
+    <div class="content-container">
+
+      <p class="m-0">
+
+        <a target="_blank" class="logo-dspacecris" href="https://wiki.lyrasis.org/display/DSPACECRIS/">
+          <img src="assets/images/dspace-cris-logo.png" alt="DSpace-CRIS" />
+        </a>
+
+        {{ 'footer.built-with' | translate }}
+        <a target="_blank" href="https://wiki.lyrasis.org/display/DSPACECRIS/">{{ 'footer.link.dspace-cris' | translate}}</a>
+        {{ 'footer.extension-by' | translate }}
+        
+        <a class="logo-4science" target="_blank" href="https://www.4science.it/en/">
+         <!--  <img src="assets/images/logo-4science-small.png" alt="{{ 'footer.link.4science' | translate}}" /> --> <!-- (replacd white 4Science-Logo rx 221209)-->
+          <img src="assets/images/logo_4science_blue.png" alt="{{ 'footer.link.4science' | translate}}" />
+        </a>
+
+      </p>
+
+      <ul class="footer-info list-unstyled small d-flex justify-content-center mb-0">   
+        <li><a routerLink="info/privacy">{{ 'footer.link.privacy-policy' | translate}}</a></li>
+        <li><a routerLink="info/end-user-agreement">{{ 'footer.link.end-user-agreement' | translate}}</a></li>
+        <li><a href="javascript:void(0);" (click)="showCookieSettings()"><i class="fas fa-cog"></i>{{ 'footer.link.cookies' | translate}}</a> </li>
+        <!-- <li><a routerLink="info/feedback">{{ 'footer.link.feedback' | translate}}</a></li> --><!-- (Feedback-Link is now in the header rx 221209)-->
+      </ul>
+
+    </div>
+  </div>
+
+</footer>

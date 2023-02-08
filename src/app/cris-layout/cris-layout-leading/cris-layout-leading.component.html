@@ -1,4 +1,8 @@
-<div id="cris-layout-leading" class="d-flex flex-column mt-5 mb-3">
+<!--
+  original version, changed in order to get entity classes to style the sidebar individually (rex 221125)
+  <div id="cris-layout-leading" class="d-flex flex-column mt-5 mb-3">
+  -->
+<div id="cris-layout-leading" class="{{'d-flex flex-column mt-5 mb-3 ' + item.entityType}}">
   <div class="container text-right mb-3 context-menu">
     <ds-context-menu *ngIf="showContextMenu" [contextMenuObject]="item" [contextMenuObjectType]="'ITEM'"></ds-context-menu>
   </div>

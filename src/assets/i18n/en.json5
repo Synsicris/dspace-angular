@@ -8428,7 +8428,7 @@
 
   "earch.filters.applied.f.itemtype": "Type",
 
-  "layout.field.label.Person.dc.title": "<span class=\"headline-workspace\">Personal Workspace",
+  "layout.field.label.Person.dc.title": "Personal Workspace",
 
   "layout.field.label.Person.synsicris.subject.destatis": "Discipline",
 
@@ -8472,7 +8472,7 @@
 
   "layout.field.label.parentproject.oairecerif.amount.currency": "Currency",
 
-  "layout.field.label.Project.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-shekel-sign\"> Workspace Consortium:",
+  "layout.field.label.Project.dc.title": "<i class=\"fas fa-shekel-sign\"></i> Workspace Cosortium:",
 
   "layout.field.label.Project.oairecerif.acronym": "Acronym",
 
@@ -9346,7 +9346,7 @@
 
   "s": "Target for interaction and transfer",
 
-  "layout.field.label.Person.dspace.entity.type": "<span class=\"headline-workspace\">Personal Workspace",
+  "layout.field.label.Person.dspace.entity.type": "Person",
 
   "test_ethic": "Overview",
 
@@ -9438,7 +9438,7 @@
 
   "layout.field.label.project.synsicris.type.jointproject": "Type of consortium",
 
-  "layout.field.label.Funding.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-cube\"></i> Workspace Project:",
+  "layout.field.label.Funding.dc.title": "<i class=\"fas fa-cube\"></i> Workspace Project:",
 
   "layout.field.label.Funding.oairecerif.acronym": "Acronym",
 
