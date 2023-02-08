@@ -1,0 +1,39 @@
+<ipw-collapsable-panel #ipwCollapse class="d-block mb-3"
+                       [sidebarPanelTitle]="getStepTitle()"
+                       [startOpen]="!(isCollapsed() | async)"
+                       [collapsable]="true">
+  <ng-container ngProjectAs="panelIconTitle">
+    <i ipwQuestionsBoardIcon [exploitationPlanType]="exploitationPlanStep?.type"></i>
+  </ng-container>
+  <ng-container ngProjectAs="panelContent">
+    <div class="p-2">
+    <ds-alert [type]="'alert-info'" [content]="'exploitation-plan.' + exploitationPlanStep?.type + '.info.text'" [collapsible]="true"></ds-alert>
+    <div class="p-0 m-0 mb-2 bg-light rounded">
+      <ds-questions-board-step-container [exploitationPlanStep]="exploitationPlanStep"
+                                            [isVersionOfAnItem]="isVersionOfAnItem"
+                                            [projectCommunityId]="projectCommunityId"
+                                            [fundingCommunity]="fundingCommunity"
+                                            [compareMode]="compareMode"></ds-questions-board-step-container>
+    </div>
+    <ds-view-simple-item-form *ngIf="hasCheckbox && exploitationPlanStep"
+                              [editMode]="getEditMode()"
+                              [editTitle]="'exploitation-plan.edit.btn.title' | translate"
+                              [fieldTitle]="'exploitation-plan.description.title' | translate"
+                              [formConfig]="formConfig$"
+                              [formSectionName]="getSectionName()"
+                              [itemId]="exploitationPlanStep.id"
+                              [disabled]="compareMode || isVersionOfAnItem"
+                              (itemUpdate)="updateExploitationPlanStep($event)"></ds-view-simple-item-form>
+    <ipw-editable-textarea *ngIf="!hasCheckbox && exploitationPlanStep"
+                           [editMode]="getEditMode()"
+                           [formConfig]="formConfig$"
+                           [formSectionName]="getSectionName()"
+                           [itemId]="exploitationPlanStep.id"
+                           [editTitle]="'exploitation-plan.edit.btn.title' | translate"
+                           [fieldTitle]="'exploitation-plan.description.title' | translate"
+                           [content]="exploitationPlanStep.description"
+                           [disabled]="compareMode || isVersionOfAnItem"
+                           (contentChange)="updateExploitationPlanStep($event)"></ipw-editable-textarea>
+    </div>
+  </ng-container>
+</ipw-collapsable-panel>

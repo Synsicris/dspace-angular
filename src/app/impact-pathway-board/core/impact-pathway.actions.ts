@@ -1425,7 +1425,7 @@ export class SetImpactPathwaySubTaskCollapseAction implements Action {
   };
 
   /**
-   * Create a new SetExploitationPlanStepCollapseAction
+   * Create a new SetImpactPathwaySubTaskCollapseAction
    *
    * @param impactPathwayStepId
    *    the impactPathwayStep's id
