@@ -11,6 +11,12 @@ import { Item } from '../../core/shared/item.model';
   styleUrls: ['./working-plan-chart.component.scss'],
 })
 export class WorkingPlanChartComponent {
+
+  /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  @Input() isFunder: boolean;
+
   /**
    * If the working-plan given is a version item
    */

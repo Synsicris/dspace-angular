@@ -6,7 +6,8 @@ import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Community } from '../core/shared/community.model';
-import { getFirstSucceededRemoteDataPayload, redirectOn4xx } from '../core/shared/operators';
+import { redirectOn4xx } from '../core/shared/authorized.operators';
+import { getFirstSucceededRemoteDataPayload } from '../core/shared/operators';
 import { AuthService } from '../core/auth/auth.service';
 import { Item } from '../core/shared/item.model';
 import { WorkingPlanStateService } from '../working-plan/core/working-plan-state.service';
@@ -20,6 +21,11 @@ import { ProjectVersionService } from '../core/project/project-version.service';
 export class WorkingPlanPageComponent implements OnInit {
 
   initialized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  isFunder: boolean;
 
   /**
    * If the working-plan given is a version item
@@ -53,6 +59,12 @@ export class WorkingPlanPageComponent implements OnInit {
    * Initialize instance variables
    */
   ngOnInit(): void {
+
+
+    const isFunder$ = this.route.data.pipe(
+      map((data) => data.isFunder as boolean)
+    );
+
     const projectItemId$ = this.route.data.pipe(
       map((data) => data.projectItem as RemoteData<Item>),
       redirectOn4xx(this.router, this.authService),
@@ -87,11 +99,12 @@ export class WorkingPlanPageComponent implements OnInit {
       })
     );
 
-    combineLatest([projectItemId$, projectCommunityId$, workingPlanRD$]).pipe(take(1))
-      .subscribe(([projectItemId, projectCommunityId, workingPlanRD]) => {
+    combineLatest([projectItemId$, projectCommunityId$, workingPlanRD$, isFunder$]).pipe(take(1))
+      .subscribe(([projectItemId, projectCommunityId, workingPlanRD, isFunder]) => {
         this.projectItemId = projectItemId;
         this.projectCommunityId = projectCommunityId;
         this.workingPlanRD = workingPlanRD;
+        this.isFunder = isFunder;
         this.initialized.next(true);
       });
   }

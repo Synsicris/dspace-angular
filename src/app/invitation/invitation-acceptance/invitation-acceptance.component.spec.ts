@@ -30,7 +30,7 @@ describe('InvitationAcceptanceComponent', () => {
       dspaceObjectNames: ['test', 'test'],
     });
   const epersonRegistrationService = jasmine.createSpyObj('epersonRegistrationService', {
-    searchByToken: observableOf(registrationWithGroups)
+    searchByToken: createSuccessfulRemoteDataObject$(registrationWithGroups)
   });
   const ePersonDataServiceStub = {
     acceptInvitationToJoinGroups(person: EPerson): Observable<RemoteData<EPerson>> {

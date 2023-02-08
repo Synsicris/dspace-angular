@@ -1,0 +1,6 @@
+<button *ngIf="(canEdit() | async)" data-test="delete-btn" mat-icon-button
+  [disabled]="(compareMode | async) || isVersionOfAnItem" class="btn btn-xs btn-link p-0 text-danger"
+  [class.ml-1]="node.level !== 0" title="{{'working-plan.chart.button.delete' | translate}}"
+  [routerLink]="getEditItemRoute()">
+  <i class="fas fa-trash"></i>
+</button>

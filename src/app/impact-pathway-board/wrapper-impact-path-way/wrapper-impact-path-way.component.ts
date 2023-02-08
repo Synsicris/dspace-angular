@@ -9,7 +9,10 @@ import { Item } from '../../core/shared/item.model';
   templateUrl: './wrapper-impact-path-way.component.html'
 })
 export class WrapperImpactPathWayComponent {
-
+  /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  @Input() isFunder: boolean;
   /**
    * The project community's id
    */

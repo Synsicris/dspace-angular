@@ -4,20 +4,20 @@ import { combineLatest, from, Observable, of } from 'rxjs';
 import { concatMap, map, mergeMap, reduce, switchMap } from 'rxjs/operators';
 import { differenceWith, findIndex, unionWith } from 'lodash';
 
-import { RelationshipService } from '../data/relationship.service';
+import { RelationshipDataService } from '../data/relationship-data.service';
 import { ItemDataService } from '../data/item-data.service';
 import { followLink } from '../../shared/utils/follow-link-config.model';
 import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../shared/operators';
 import { RemoteData } from '../data/remote-data';
 import { Item } from '../shared/item.model';
 import { PaginatedList } from '../data/paginated-list.model';
-import { FindListOptions } from '../data/request.models';
+import { FindListOptions } from '../data/find-list-options.model';
 import { MetadataValue } from '../shared/metadata.models';
 import { _hasVersionComparator, _isVersionOfComparator, _unionComparator, hasVersion } from './project-version.util';
 import { VersionDataService } from '../data/version-data.service';
 import { Version } from '../shared/version.model';
 import { VersionHistoryDataService } from '../data/version-history-data.service';
-import { isNotEmpty } from '../../shared/empty.util';
+import { isEmpty, isNotEmpty, isNull, isUndefined } from '../../shared/empty.util';
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { Metadata } from '../shared/metadata.utils';
 import { VERSION_UNIQUE_ID } from './project-data.service';
@@ -30,7 +30,9 @@ export enum ComparedVersionItemStatus {
   Changed = 'changed',
   New = 'new',
   Removed = 'removed',
-  Equal = 'equal'
+  Equal = 'equal',
+  Canceled = 'canceled',
+  Done = 'done'
 }
 
 export interface ComparedVersionItem {
@@ -51,7 +53,7 @@ export class ProjectVersionService {
   protected lastVersionDiscoveryConfig = environment.projects.lastVersionDiscoveryConfig;
 
   constructor(protected itemService: ItemDataService,
-    protected relationshipService: RelationshipService,
+    protected relationshipService: RelationshipDataService,
     protected searchService: SearchService,
     protected versionService: VersionDataService,
     protected versionHistoryService: VersionHistoryDataService,
@@ -178,6 +180,55 @@ export class ProjectVersionService {
         }
       })
     );
+  }
+
+  /**
+   * Check if the version Item is relative to the active working instance of the project
+   * @param versionItem the version item which metadata belongs to
+   */
+  isActiveWorkingInstance(versionItem: Item): boolean {
+    return isEmpty(versionItem?.firstMetadataValue('synsicris.uniqueid'));
+  }
+
+  /**
+   * Check if the version Item is visible
+   * @param versionItem the version item which metadata belongs to
+   */
+  isVersionVisible(versionItem: Item): boolean {
+    return versionItem?.firstMetadataValue('synsicris.version.visible') === 'true';
+  }
+
+  /**
+   * Check if the version Item is not visible
+   * @param versionItem the version item which metadata belongs to
+   */
+  isVersionNotVisible(versionItem: Item): boolean {
+    return isEmpty(versionItem?.firstMetadataValue('synsicris.version.visible')) || versionItem?.firstMetadataValue('synsicris.version.visible') === 'false';
+  }
+
+  /**
+   * Check if the version Item is official
+   * @param versionItem the version item which metadata belongs to
+   */
+  isVersionOfficial(versionItem: Item): boolean {
+    return versionItem?.firstMetadataValue('synsicris.version.official') === 'true';
+  }
+
+  /**
+   * Check if the version Item is the last official one
+   * @param versionItem the version item which metadata belongs to
+   */
+  isLastVersionVisible(versionItem: Item): boolean {
+    return versionItem?.firstMetadataValue('synsicris.isLastVersion.visible') === 'true';
+  }
+
+  /**
+   * Check if the official metadata is not already set
+   * @param versionItem the version item which metadata belongs to
+   */
+  hasNoOfficialMetadata(versionItem: Item): boolean {
+    return isUndefined(versionItem?.firstMetadataValue('synsicris.version.official'))
+      || isNull(versionItem?.firstMetadataValue('synsicris.version.official'));
   }
 
   /**

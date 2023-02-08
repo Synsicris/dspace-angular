@@ -5,10 +5,8 @@
   <ds-type-badge [object]="item"></ds-type-badge>
   <ds-grant-badge class="d-block" [object]="item"></ds-grant-badge>
   <div *ngIf="item">
-    <h2 class="item-page-title-field">
-      <ds-metadata-values *ngIf="item.hasMetadata('dc.title')" [mdValues]="item?.allMetadata('dc.title')"></ds-metadata-values>
-      <span class="text-muted" *ngIf="!item.hasMetadata('dc.title')">{{('mydspace.results.no-title' | translate)}}</span>
-    </h2>
+    <ds-item-page-title-field [item]="item">
+    </ds-item-page-title-field>
     <div class="row mb-1">
       <div class="col-xs-12 col-md-4">
         <ds-metadata-field-wrapper [hideIfNoTextContent]="false">

@@ -1,4 +1,4 @@
-import { environment } from './../../../../environments/environment';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { Item } from '../../../core/shared/item.model';
 import { Version } from '../../../core/shared/version.model';
@@ -20,7 +20,7 @@ import { VersionHistoryDataService } from '../../../core/data/version-history-da
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
 import { AlertType } from '../../alert/aletr-type';
 import { followLink } from '../../utils/follow-link-config.model';
-import { hasValue, hasValueOperator, isNull, isUndefined } from '../../empty.util';
+import { hasValue, hasValueOperator, isEmpty, isNull, isUndefined } from '../../empty.util';
 import { PaginationService } from '../../../core/pagination/pagination.service';
 import {
   getItemEditVersionhistoryRoute,
@@ -48,6 +48,7 @@ import {
   ItemVersionsVisibilityModalComponent
 } from './item-versions-visibility-modal/item-versions-visibility-modal.component';
 import { MetadataMap, MetadataValue } from '../../../core/shared/metadata.models';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'ds-item-versions',
@@ -320,31 +321,27 @@ export class ItemVersionsComponent implements OnInit {
     activeModal.componentInstance.firstVersion = false;
 
     // On modal submit/dismiss
-    activeModal.result.then((result) => {
-
-      version.isLoadingDelete = true;
-      versionItem$.pipe(
-        getFirstSucceededRemoteDataPayload<Item>(),
-        // Retrieve version history and invalidate cache
-        mergeMap((item: Item) => combineLatest([
-          of(item),
-          this.versionHistoryService.getVersionHistoryFromVersion$(version).pipe(
-            tap((versionHistory: VersionHistory) => {
-              this.versionHistoryService.invalidateVersionHistoryCache(versionHistory.id);
-            })
-          )
-        ])),
-        // Delete item
-        mergeMap(([item, versionHistory]: [Item, VersionHistory]) => combineLatest([
-          this.deleteItemAndGetResult$(item),
-          of(versionHistory)
-        ])),
-        // Retrieve new latest version
-        mergeMap(([deleteItemResult, versionHistory]: [boolean, VersionHistory]) => combineLatest([
-          of(deleteItemResult),
-          this.versionHistoryService.getLatestVersionItemFromHistory$(versionHistory).pipe(
-            tap(() => {
-              this.getAllVersions(of(versionHistory));
+    activeModal.componentInstance.response.pipe(take(1)).subscribe((ok) => {
+      if (ok) {
+        version.isLoadingDelete = true;
+        versionItem$.pipe(
+          getFirstSucceededRemoteDataPayload<Item>(),
+          // Retrieve version history
+          mergeMap((item: Item) => combineLatest([
+            of(item),
+            this.versionHistoryService.getVersionHistoryFromVersion$(version)
+          ])),
+          // Delete item
+          mergeMap(([item, versionHistory]: [Item, VersionHistory]) => combineLatest([
+            this.deleteItemAndGetResult$(item),
+            of(versionHistory)
+          ])),
+          // Retrieve new latest version
+          mergeMap(([deleteItemResult, versionHistory]: [boolean, VersionHistory]) => combineLatest([
+            of(deleteItemResult),
+            this.versionHistoryService.getLatestVersionItemFromHistory$(versionHistory).pipe(
+              tap(() => {
+                this.getAllVersions(of(versionHistory));
               version.isLoadingDelete = false;
             }),
           )
@@ -357,11 +354,12 @@ export class ItemVersionsComponent implements OnInit {
           this.notificationsService.error(null, this.translateService.get(failureMessageKey, { 'version': versionNumber }));
         }
         this.processingDelete$.next(false);
-        if (redirectToLatest) {
-          const path = getItemEditVersionhistoryRoute(newLatestVersionItem);
-          this.router.navigateByUrl(path);
-        }
-      });
+          if (redirectToLatest) {
+            const path = getItemEditVersionhistoryRoute(newLatestVersionItem);
+            this.router.navigateByUrl(path);
+          }
+        });
+      }
     });
   }
 
@@ -383,6 +381,9 @@ export class ItemVersionsComponent implements OnInit {
         version.item.pipe(getFirstSucceededRemoteDataPayload())
       ])),
       mergeMap(([summary, item]: [string, Item]) => this.versionHistoryService.createVersion(item._links.self.href, summary)),
+      getFirstCompletedRemoteData(),
+      // close model (should be displaying loading/waiting indicator) when version creation failed/succeeded
+      tap(() => activeModal.close()),
       // show success/failure notification
       tap((newVersionRD: RemoteData<Version>) => {
         this.itemVersionShared.notifyCreateNewVersion(newVersionRD);
@@ -644,6 +645,14 @@ export class ItemVersionsComponent implements OnInit {
    */
   isVersionVisible(versionItem: Item): boolean {
     return versionItem?.firstMetadataValue('synsicris.version.visible') === 'true';
+  }
+
+  /**
+   * Check if the version Item is not visible
+   * @param versionItem the version item which metadata belongs to
+   */
+  isVersionNotVisible(versionItem: Item): boolean {
+    return isEmpty(versionItem?.firstMetadataValue('synsicris.version.visible')) || versionItem?.firstMetadataValue('synsicris.version.visible') === 'false';
   }
 
   /**

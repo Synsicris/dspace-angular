@@ -17,12 +17,21 @@ import { filter, map, take } from 'rxjs/operators';
   templateUrl: './wrapper-objectives.component.html'
 })
 export class WrapperObjectivesComponent implements OnDestroy {
+  /**
+   * The impact pathway step id
+   */
+  @Input() public impactPathwayStep: ImpactPathwayStep;
+
+  /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  @Input() isFunder: boolean;
 
   /**
    * The project community's id
    */
   @Input() public projectCommunityId: string;
-  @Input() public impactPathwayStep: ImpactPathwayStep;
+
   @Input() public targetImpactPathwayTaskId: string;
 
   public stepTitle: string;

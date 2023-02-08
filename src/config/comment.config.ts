@@ -6,5 +6,8 @@ export interface CommentConfig extends Config {
   commentEditMode: string;
   commentEntityType: string;
   commentRelationItemMetadata: string;
+  commentRelationItemVersionMetadata?: string;
+  commentRelationProjectMetadata?: string;
+  commentRelationProjectVersionMetadata?: string;
 }
 

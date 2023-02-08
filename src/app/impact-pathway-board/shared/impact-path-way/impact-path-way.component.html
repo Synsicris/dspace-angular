@@ -2,8 +2,9 @@
   <ds-comcol-page-header [name]="impactPathway.title">
   </ds-comcol-page-header>
   <ds-view-version-badges *ngIf="impactPathWayItem" [item]="impactPathWayItem"></ds-view-version-badges>
-  <div class="pl-2">
+  <div class="pl-2 space-children-mr">
     <ds-item-version-list [btnClass]="'btn-md'"
+                          [showOnlyVisible]="isFunder"
                           [targetItemId]="impactPathway.id"
                           (versionSelected)="onVersionSelected($event)"
                           (versionDeselected)="onVersionDeselected()">

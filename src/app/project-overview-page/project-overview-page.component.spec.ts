@@ -1,5 +1,5 @@
 import { TranslateLoaderMock } from './../shared/testing/translate-loader.mock';
-import { DsoRedirectDataService } from './../core/data/dso-redirect-data.service';
+import { DsoRedirectService } from '../core/data/dso-redirect.service';
 import { RouterMock } from './../shared/mocks/router.mock';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -7,10 +7,9 @@ import { ProjectOverviewPageComponent } from './project-overview-page.component'
 import { ActivatedRoute, Router } from '@angular/router';
 import { MockActivatedRoute } from '../shared/mocks/active-router.mock';
 import { AuthService } from '../core/auth/auth.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { getMockTranslateService } from '../shared/mocks/translate.service.mock';
 import { DSONameService } from '../core/breadcrumbs/dso-name.service';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 describe('ProjectOverviewPageComponent', () => {
   let component: ProjectOverviewPageComponent;
@@ -48,7 +47,7 @@ describe('ProjectOverviewPageComponent', () => {
         { provide: Router, useValue: route },
         { provide: TranslateService, useValue: translateService },
         { provide: DSONameService, useValue: dsoNameService },
-        { provide: DsoRedirectDataService, useValue: {} },
+        { provide: DsoRedirectService, useValue: {} },
       ]
     })
       .compileComponents();

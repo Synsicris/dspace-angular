@@ -1,5 +1,5 @@
 <a href="#" *ngIf="(currentVersion | async)"
-   class="badge badge-primary"
+   class="badge badge-primary mr-1"
    title="{{'item.version.list.remove-text' | translate}}"
    (click)="$event.preventDefault(); $event.stopImmediatePropagation(); onVersionDeselected()">
   {{('item.version.list.selected-text' | translate) + currentVersion.value.title + ' ' + (currentVersion.value.date |  date:'medium')}} <i class="fas fa-times"></i>
@@ -15,7 +15,7 @@
             class="{{btnClass}}"
             ngbDropdownItem
             (click)="onVersionSelected(version)">
-      {{('item.version.list.option-text' | translate) + (version.summary || '') + ' ' + (version.created |  date:'medium')}}
+      {{((isActiveInstance(version) ? 'item.version.list.active-option-text' : 'item.version.list.option-text') | translate) + (version.summary || '') + ' ' + (version.created |  date:'medium')}}
     </button>
   </div>
 </div>

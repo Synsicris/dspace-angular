@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { SearchResult } from '../../search/models/search-result.model';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { hasValue } from '../../empty.util';
-import { AbstractListableElementComponent } from '../../object-collection/shared/object-collection-element/abstract-listable-element.component';
+import {
+  AbstractListableElementComponent
+} from '../../object-collection/shared/object-collection-element/abstract-listable-element.component';
 import { TruncatableService } from '../../truncatable/truncatable.service';
 import { Metadata } from '../../../core/shared/metadata.utils';
 import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
-import { environment } from '../../../../environments/environment';
-import { ResultViewConfig } from '../../../../config/display-search-result-config.interface';
+import { APP_CONFIG, AppConfig } from '../../../../config/app-config.interface';
 
 @Component({
   selector: 'ds-search-result-list-element',
@@ -22,33 +23,19 @@ export class SearchResultListElementComponent<T extends SearchResult<K>, K exten
   dso: K;
   dsoTitle: string;
 
-  /**
-   * Display configurations for the item search result
-   */
-  displayConfigurations: ResultViewConfig[];
-
-  public constructor(protected truncatableService: TruncatableService, protected dsoNameService: DSONameService) {
+  public constructor(protected truncatableService: TruncatableService,
+                     protected dsoNameService: DSONameService,
+                     @Inject(APP_CONFIG) protected appConfig?: AppConfig) {
     super();
   }
 
   /**
-   * Retrieve the dso from the search result and set the display configuration of the dso informations
+   * Retrieve the dso from the search result
    */
   ngOnInit(): void {
     if (hasValue(this.object)) {
       this.dso = this.object.indexableObject;
       this.dsoTitle = this.dsoNameService.getName(this.dso);
-
-      const itemType = this.firstMetadataValue('dspace.entity.type');
-      const def = 'default';
-
-      if ( !!environment.displayItemSearchResult && !!environment.displayItemSearchResult[itemType] ) {
-        this.displayConfigurations = environment.displayItemSearchResult[itemType];
-      } else if ( !!environment.displayItemSearchResult[def] ) {
-        this.displayConfigurations = environment.displayItemSearchResult[def];
-      } else {
-        this.displayConfigurations = null;
-      }
     }
   }
 

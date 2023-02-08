@@ -11,6 +11,7 @@ import { ProjectItemBreadcrumbResolver } from '../core/breadcrumbs/project-item-
 import { ProjectItemBreadcrumbService } from '../core/breadcrumbs/project-item-breadcrumb.service';
 import { ProjectItemByItemRelationResolver } from '../core/project/project-item-by-item-relation.resolver';
 import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.resolver';
+import { IsFunderResolver } from '../core/project/is-funder.resolver';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.reso
             },
             resolve: {
               impactPathwayItem: ProjectItemPageResolver,
+              isFunder: IsFunderResolver,
               projectCommunity: ProjectCommunityByItemResolver,
               isVersionOfAnItem: VersionOfAnItemResolver,
               breadcrumb: ProjectItemBreadcrumbResolver
@@ -54,6 +56,7 @@ import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.reso
     ])
   ],
   providers: [
+    IsFunderResolver,
     ProjectItemByItemRelationResolver,
     ProjectItemPageResolver,
     ProjectItemBreadcrumbResolver,

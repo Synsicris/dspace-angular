@@ -12,6 +12,8 @@ export enum ContextMenuEntryType {
   Subscriptions = 'subscriptions',
   Report = 'report',
   ItemVersion = 'itemversion',
+  FullItem = 'fullitem',
+  OrcidView = 'orcidview',
   CreateProject = 'createproject',
   DeleteProject = 'deleteproject',
   EasyOnlineImport = 'easyonlineimport',

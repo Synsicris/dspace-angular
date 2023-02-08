@@ -1,10 +1,12 @@
 // This configuration is only used for unit tests, end-to-end tests use environment.production.ts
+import { BuildConfig } from 'src/config/build-config.interface';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
+import { AdvancedAttachmentElementType } from '../config/advanced-attachment-rendering.config';
 import { AppConfig } from '../config/app-config.interface';
 import { DisplayItemMetadataType } from '../config/display-search-result-config.interface';
 
-export const environment: AppConfig = {
+export const environment: BuildConfig = {
   production: false,
 
   // Angular Universal settings
@@ -26,7 +28,8 @@ export const environment: AppConfig = {
     rateLimiter: {
       windowMs: 1 * 60 * 1000, // 1 minute
       max: 500 // limit each IP to 500 requests per windowMs
-    }
+    },
+    useProxies: true,
   },
 
   // The REST API server settings.
@@ -37,6 +40,10 @@ export const environment: AppConfig = {
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/api',
     baseUrl: 'https://rest.com/api'
+  },
+
+  actuators: {
+    endpointPath: '/actuator/health'
   },
 
   // Caching settings
@@ -100,6 +107,9 @@ export const environment: AppConfig = {
       metadata: ['dc.title', 'dc.identifier.doi', 'dc.identifier.pmid', 'dc.identifier.arxiv'],
       // NOTE: every how many minutes submission is saved automatically
       timer: 5
+    },
+    typeBind: {
+      field: 'dc.type'
     },
     icons: {
       metadata: [
@@ -185,6 +195,14 @@ export const environment: AppConfig = {
     code: 'lv',
     label: 'Latviešu',
     active: true,
+  }, {
+    code: 'bn',
+    label: 'বাংলা',
+    active: true,
+  }, {
+    code: 'el',
+    label: 'Ελληνικά',
+    active: true,
   }],
 
   // Browse-By Pages
@@ -195,6 +213,25 @@ export const environment: AppConfig = {
     fiveYearLimit: 30,
     // The absolute lowest year to display in the dropdown (only used when no lowest date can be found for all items)
     defaultLowerLimit: 1900,
+    // Whether to add item thumbnail images to BOTH browse and search result lists.
+    showThumbnails: true,
+    // The number of entries in a paginated browse results list.
+    // Rounded to the nearest size in the list of selectable sizes on the
+    // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
+    pageSize: 20,
+  },
+  communityList: {
+    pageSize: 20
+  },
+  homePage: {
+    recentSubmissions: {
+      pageSize: 5,
+      // sort record of recent submission
+      sortField: 'dc.date.accessioned',
+    },
+    topLevelCommunityList: {
+      pageSize: 5
+    }
   },
   followAuthorityMetadata: [
     {
@@ -217,7 +254,9 @@ export const environment: AppConfig = {
   item: {
     edit: {
       undoTimeout: 10000 // 10 seconds
-    }
+    },
+    // Show the item access status label in items lists
+    showAccessStatuses: false
   },
   collection: {
     edit: {
@@ -249,9 +288,20 @@ export const environment: AppConfig = {
       name: 'base',
     },
   ],
+  bundle: {
+    standardBundles: ['ORIGINAL', 'THUMBNAIL', 'LICENSE'],
+  },
   mediaViewer: {
     image: true,
     video: true
+  },
+  info: {
+    enableEndUserAgreement: true,
+    enablePrivacyStatement: true,
+  },
+  markdown: {
+    enabled: false,
+    mathjax: false,
   },
   crisLayout: {
     urn: [
@@ -271,17 +321,41 @@ export const environment: AppConfig = {
     crisRef: [
       {
         entityType: 'DEFAULT',
-        icon: 'fa fa-info'
+        entityStyle: {
+          default: {
+            icon: 'fa fa-user',
+            style: 'text-success'
+          }
+        }
       },
       {
         entityType: 'PERSON',
-        icon: 'fa fa-user'
+        entityStyle: {
+          person: {
+            icon: 'fa fa-user',
+            style: 'text-success'
+          },
+          personStaff: {
+            icon: 'fa fa-user',
+            style: 'text-primary'
+          },
+          default: {
+            icon: 'fa fa-user',
+            style: 'text-success'
+          }
+        }
       },
       {
         entityType: 'ORGUNIT',
-        icon: 'fa fa-university'
+        entityStyle: {
+          default: {
+            icon: 'fa fa-university',
+            style: 'text-success'
+          }
+        }
       }
     ],
+    crisRefStyleMetadata: 'cris.entity.style',
     itemPage: {
       Person: {
         orientation: 'horizontal'
@@ -301,7 +375,7 @@ export const environment: AppConfig = {
   layout: {
     navbar: {
       // If true, show the "Community and Collections" link in the navbar; otherwise, show it in the admin sidebar
-      showCommunityCollection: false,
+      showCommunityCollection: true,
     }
   },
   security: {
@@ -335,6 +409,91 @@ export const environment: AppConfig = {
     siteId: '',
     scriptUrl: 'http://s7.addthis.com/js/300/addthis_widget.js#pubid=',
     socialNetworksEnabled: false
+  },
+  metricVisualizationConfig: [
+    {
+      type: 'altmetric',
+      icon: null,
+      class: 'alert-light',
+    },
+    {
+      type: 'plumX',
+      icon: null,
+      class: null,
+    },
+    {
+      type: 'dimensions',
+      icon: 'fa fa-cubes',
+      class: 'alert-secondary',
+    },
+    {
+      type: 'google-scholar',
+      icon: '/assets/images/google-scholar.svg',
+      class: 'alert-info',
+    },
+    {
+      type: 'embedded-view',
+      icon: 'fa fa-eye',
+      class: 'alert-success'
+    },
+    {
+      type: 'embedded-download',
+      icon: 'fa fa-cloud-download-alt',
+      class: 'alert-danger',
+    },
+    {
+      type: 'view',
+      icon: 'fa fa-eye',
+      class: 'alert-success',
+    },
+    {
+      type: 'download',
+      icon: 'fa fa-cloud-download-alt',
+      class: 'alert-danger',
+    },
+  ],
+
+  attachmentRendering: {
+    pagination: {
+      enabled: true,
+      elementsPerPage: 2
+    },
+  },
+
+  advancedAttachmentRendering: {
+    pagination: {
+      enabled: true,
+      elementsPerPage: 2
+    },
+    metadata: [
+      {
+        name: 'dc.title',
+        type: AdvancedAttachmentElementType.Metadata,
+        truncatable: false
+      },
+      {
+        name: 'dc.type',
+        type: AdvancedAttachmentElementType.Metadata,
+        truncatable: false
+      },
+      {
+        name: 'dc.description',
+        type: AdvancedAttachmentElementType.Metadata,
+        truncatable: true
+      },
+      {
+        name: 'size',
+        type: AdvancedAttachmentElementType.Attribute,
+      },
+      {
+        name: 'format',
+        type: AdvancedAttachmentElementType.Attribute,
+      },
+      {
+        name: 'checksum',
+        type: AdvancedAttachmentElementType.Attribute,
+      }
+    ]
   },
   projects: {
     projectsGrantsOptionsVocabularyName: 'item_shared',

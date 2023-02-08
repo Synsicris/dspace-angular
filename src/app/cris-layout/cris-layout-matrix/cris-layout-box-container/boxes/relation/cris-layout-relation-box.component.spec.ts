@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { CrisLayoutRelationBoxComponent } from './cris-layout-relation-box.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -6,11 +6,10 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { Item } from '../../../../../core/shared/item.model';
-import { of } from 'rxjs';
+import { of, of as observableOf } from 'rxjs';
 import { CrisLayoutBox } from '../../../../../core/layout/models/box.model';
 import { TranslateLoaderMock } from '../../../../../shared/mocks/translate-loader.mock';
 import { By } from '@angular/platform-browser';
-import { of as observableOf } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { createSuccessfulRemoteDataObject$ } from '../../../../../shared/remote-data.utils';
 
@@ -82,7 +81,7 @@ describe('CrisLayoutRelationBoxComponent', () => {
   describe('when is version of an item', () => {
 
     beforeEach(() => {
-      component.isVersionOfAnItem$.next(true);
+      component.canCreateItems$.next(true);
       fixture.detectChanges();
     });
 

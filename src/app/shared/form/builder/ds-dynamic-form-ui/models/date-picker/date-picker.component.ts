@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DynamicDsDatePickerModel } from './date-picker.model';
-import { hasValue } from '../../../../../empty.util';
+import { hasValue, isNotEmpty } from '../../../../../empty.util';
 import {
   DynamicFormControlComponent,
   DynamicFormLayoutService,
@@ -174,4 +174,7 @@ export class DsDatePickerComponent extends DynamicFormControlComponent implement
     return date.getDate();
   }
 
+  get hasHint(): boolean {
+    return isNotEmpty(this.model.hint) && this.model.hint !== '&nbsp;';
+  }
 }

@@ -89,7 +89,7 @@ export class SubmissionUploadFilesComponent implements OnChanges {
       .subscribe();
     this.subs.push(sub);
     return sub;
-  }
+  };
 
   /**
    * Initialize instance variables

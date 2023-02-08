@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { getTestScheduler } from 'jasmine-marbles';
 import { TestScheduler } from 'rxjs/testing';
 
-import { CoreState } from '../core.reducers';
+import { CoreState } from '../core-state.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { RequestService } from './request.service';
 import { PatchRequest } from './request.models';

@@ -20,6 +20,11 @@ import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-
 import { isNotEmpty } from '../../empty.util';
 import { environment } from '../../../../environments/environment';
 import { ProjectVersionService } from '../../../core/project/project-version.service';
+import {
+  getFirstCompletedRemoteData,
+  getPaginatedListPayload,
+  getRemoteDataPayload
+} from '../../../core/shared/operators';
 
 /**
  * This component represents mydspace actions related to Item object.
@@ -92,16 +97,15 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
     super(Item.type, injector, router, notificationsService, translate, searchService, requestService);
   }
 
-
   ngOnInit(): void {
     if (this.projectVersionService.isVersionOfAnItem(this.object)) {
       this.canEdit$.next(false);
       this.canEditGrants$.next(false);
     } else {
-      const adminEdit$ = this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityAdminEditMode).pipe(
+      const adminEdit$ = this.editItemDataService.checkEditModeByIdAndType(this.object.id, environment.projects.projectsEntityAdminEditMode).pipe(
         take(1)
       );
-      const userEdit$ = this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
+      const userEdit$ = this.editItemDataService.checkEditModeByIdAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
         take(1)
       );
 
@@ -151,7 +155,10 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    */
   public navigateToEditItemPage(): void {
     this.isRedirectingToEdit$.next(true);
-    this.editItemDataService.searchEditModesByID(this.object.id).pipe(
+    this.editItemDataService.searchEditModesById(this.object.id).pipe(
+      getFirstCompletedRemoteData(),
+      getRemoteDataPayload(),
+      getPaginatedListPayload(),
       filter((editModes: EditItemMode[]) => editModes && editModes.length > 0),
       map((editModes: EditItemMode[]) => editModes.filter((mode: EditItemMode) => this.isEditModeAllowed(mode))),
       map((editModes: EditItemMode[]) => editModes[0]),
