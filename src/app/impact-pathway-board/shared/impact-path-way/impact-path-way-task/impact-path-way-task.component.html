@@ -6,30 +6,38 @@
      [class.task-disabled]="!compareMode && isDisabled()"
      (click)="setFocus($event)">
   <div class="task-left-bar">
-    <button class="btn btn-xs btn-link p-0 text-primary button-move align-self-start" title="Drag & Drop">
+    <button class="btn btn-xs btn-link p-0 text-primary  align-self-start" title="Drag & Drop"
+            [class.button-move]="!isVersionOfAnItem"
+            [disabled]="isVersionOfAnItem || compareMode">
       <i class="fas fa-grip-vertical"></i>
     </button>
   </div>
   <div class="task-right-bar">
     <div class="task-detail p-1">
-      <div class="task-header">
+      <div class="task-header pr-1 d-flex justify-content-between">
         <div class="task-title title-clamp font-weight-bold text-info" (click)="openItemModal()">
           <p title="{{data.title}}">{{data.title}}</p>
         </div>
+        <span *ngIf="data?.status" class="status-icon">
+          <i dsItemMetadataStatus [status]="data.status"></i>
+        </span>
       </div>
 
-      <div class="task-content p-1" [class.task-overlay-hide]="(canShowRelationCheckBox() | async)">
+      <div class="task-content p-1 d-flex justify-content-between"
+           [class.task-overlay-hide]="(canShowRelationCheckBox() | async)">
         <div class="task-type type-clamp">
           <p title="{{taskType$ | async}}">{{taskType$ | async}}</p>
         </div>
-
+        <span class="status-icon" *ngIf="data?.internalStatus">
+          <i dsItemMetadataInternal [status]="data.internalStatus"></i>
+        </span>
       </div>
 
     </div>
     <div class="task-actions" [class.task-overlay-hide]="(canShowRelationCheckBox() | async)">
       <button *ngIf="(canShowRelationButton(true) | async)" class="btn btn-lg btn-link p-0 flex-shrink-1"
               title="{{'impact-pathway.create.bidirectional-link' | translate}}"
-              [disabled]="(canHideRelationButtons(true) | async)  || compareMode"
+              [disabled]="(canHideRelationButtons(true) | async) || compareMode || isVersionOfAnItem"
               (click)="setEditRelations(true); $event.stopPropagation()">
         <span class="span-icon-container">
           <i class="fas fa-light fa-arrows-alt-h"></i>
@@ -37,7 +45,7 @@
       </button>
       <button *ngIf="(isEditingRelationOnTask(true) | async)" class="btn btn-lg btn-link p-0 flex-shrink-1"
               title="{{'impact-pathway.save.link.title' | translate}}"
-              [disabled]="(canHideRelationButtons(true) | async) || compareMode"
+              [disabled]="(canHideRelationButtons(true) | async) || compareMode || isVersionOfAnItem"
               (click)="saveRelations(); $event.stopPropagation()">
         <span class="span-icon-container">
           <i class='far fa-save'></i>
@@ -45,7 +53,7 @@
       </button>
       <button *ngIf="(canShowRelationButton(false) | async)" class="btn btn-lg btn-link p-0 flex-shrink-1"
               title="{{'impact-pathway.create.outcome-link' | translate}}"
-              [disabled]="(canHideRelationButtons(false) | async) || compareMode"
+              [disabled]="(canHideRelationButtons(false) | async) || compareMode || isVersionOfAnItem"
               (click)="setEditRelations(false); $event.stopPropagation()">
         <span class="span-icon-container">
           <i class="fas fa-long-arrow-alt-right"></i>
@@ -53,7 +61,7 @@
       </button>
       <button *ngIf="(isEditingRelationOnTask(false) | async)" class="btn btn-lg btn-link p-0 flex-shrink-1"
               title="{{'impact-pathway.save.link.title' | translate}}"
-              [disabled]="(canHideRelationButtons(false) | async) || compareMode"
+              [disabled]="(canHideRelationButtons(false) | async) || compareMode || isVersionOfAnItem"
               (click)="saveRelations(); $event.stopPropagation()">
         <span class="span-icon-container">
           <i class='far fa-save'></i>
@@ -73,7 +81,7 @@
       </button>
       <button *ngIf="!data.hasDetail() && (canEdit() | async)" class="btn btn-lg btn-link p-0 flex-shrink-1"
               title="{{'impact-pathway.edit.item.title' | translate}}"
-              [disabled]="(isEditingRelation() | async) || compareMode"
+              [disabled]="(isEditingRelation() | async) || compareMode || isVersionOfAnItem"
               (click)="navigateToEditItemPage(); $event.stopPropagation()">
         <span *ngIf="!(isRedirectingToEdit$ | async)" class="span-icon-container">
           <i class="fas fa-edit"></i>
@@ -84,7 +92,7 @@
       </button>
       <button *ngIf="(canEdit() | async)" class="btn btn-lg btn-link p-0 flex-shrink-1 text-danger"
               title="{{'impact-pathway.delete.item.title' | translate}}"
-              [disabled]="(isEditingRelation() | async) || compareMode"
+              [disabled]="(isEditingRelation() | async) || compareMode || isVersionOfAnItem"
               (click)="navigateToEditItemPage(); $event.stopPropagation()">
         <span *ngIf="!(isRedirectingToEdit$ | async)" class="span-icon-container">
           <i class="fas fa-trash"></i>
@@ -92,7 +100,7 @@
       </button>
       <button *ngIf="data.hasParent()" class="btn btn-lg btn-link p-0 text-danger"
               title="{{'impact-pathway.remove.item.title' | translate}}"
-              [disabled]="(isEditingRelation() | async) || compareMode"
+              [disabled]="(isEditingRelation() | async) || compareMode || isVersionOfAnItem"
               (click)="removeTask(); $event.stopPropagation()">
         <span *ngIf="!(isProcessingRemove() | async)" class="span-icon-container">
           <i class="fas fa-thumbtack"></i>

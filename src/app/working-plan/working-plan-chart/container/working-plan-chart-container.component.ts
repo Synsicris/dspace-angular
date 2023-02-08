@@ -28,13 +28,14 @@ import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vo
 import { hasValue, isEmpty, isNotEmpty, isNotNull } from '../../../shared/empty.util';
 import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { environment } from '../../../../environments/environment';
-import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { SearchConfig } from '../../../core/shared/search/search-filters/search-config.model';
 import { NgbDateStructToString, stringToNgbDateStruct } from '../../../shared/date.util';
 import { Item } from '../../../core/shared/item.model';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 import { CompareItemComponent } from '../../../shared/compare-item/compare-item.component';
+import { ActivatedRoute } from '@angular/router';
+import { ItemDetailPageModalComponent } from 'src/app/item-detail-page-modal/item-detail-page-modal.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -78,6 +79,10 @@ interface WorkpackageEditModes {
   ]
 })
 export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
+  /**
+   * If the working-plan given is a version item
+   */
+  @Input() isVersionOf: boolean;
 
   /**
    * The current project community's id
@@ -212,7 +217,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private workingPlanService: WorkingPlanService,
     private workingPlanStateService: WorkingPlanStateService,
-    private editItemService: EditItemDataService,
+    private aroute: ActivatedRoute,
   ) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
       this._isExpandable, this._getChildren);
@@ -320,7 +325,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       node.parentId,
       node.compareId,
       node.compareStatus,
-      node.selfUrl
+      node.selfUrl,
+      node.internalStatus
     );
     this.updateTreeMap(flatNode, node);
     return flatNode;
@@ -361,7 +367,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.query = this.buildExcludedTasksQuery(flatNode);
 
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
-      const metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
+      let metadata = this.workingPlanService.setDefaultForStatusMetadata(item.metadata);
+      if (item?.type?.value === 'milestone') {
+        metadata = Object.assign(metadata, this.workingPlanService.setChildWorkingplanLinkStatusMetadata(item.metadata));
+      }
       this.workingPlanStateService.dispatchGenerateWorkpackageStep(this.projectCommunityId, flatNode.id, item.type.value, metadata);
       // the 'this.editModes$' map is auto-updated by the ngOnInit subscribe
       if (flatNode.type === 'milestone') {
@@ -452,7 +461,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   updateSort() {
     if (this.sortSelectedValue !== this.sortSelectedOld) {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, this.sortSelectedValue);
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, this.sortSelectedValue, this.isVersionOf);
     }
   }
 
@@ -725,6 +734,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     return this.workingPlanStateService.isInitializing();
   }
 
+  isProcessingWorkingpPlan() {
+    return this.workingPlanStateService.isProcessing();
+  }
+
   /**
    * Check, inside the state, if the node has been added in the last operation.
    *
@@ -973,7 +986,18 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   openCompareModal(node: WorkpacakgeFlatNode) {
     const modalRef = this.modalService.open(CompareItemComponent, { size: 'xl' });
-    (modalRef.componentInstance as CompareItemComponent).baseItemId = node.id;
-    (modalRef.componentInstance as CompareItemComponent).versionedItemId = node.compareId;
+    if (this.isVersionOf) {
+      (modalRef.componentInstance as CompareItemComponent).baseItemId = node.compareId;
+      (modalRef.componentInstance as CompareItemComponent).versionedItemId = node.id;
+    } else {
+      (modalRef.componentInstance as CompareItemComponent).baseItemId = node.id;
+      (modalRef.componentInstance as CompareItemComponent).versionedItemId = node.compareId;
+    }
   }
+
+  openItemModal(node: WorkpacakgeFlatNode) {
+    const modalRef = this.modalService.open(ItemDetailPageModalComponent, { size: 'xl' });
+    (modalRef.componentInstance as any).uuid = node.id;
+  }
+
 }

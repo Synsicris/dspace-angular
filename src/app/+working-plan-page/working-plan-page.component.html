@@ -1,3 +1,5 @@
-<ipw-working-plan *ngIf="(projectCommunityId$ | async)"
-                  [projectCommunityId]="(projectCommunityId$ | async)"
-                  [workingPlan]="(workingPlanRD$ | async)?.payload" ></ipw-working-plan>
+<ipw-working-plan *ngIf="(initialized | async)"
+                  [isFunder]="isFunder"
+                  [isVersionOf]="isVersionOf"
+                  [projectCommunityId]="projectCommunityId"
+                  [workingPlan]="workingPlanRD.payload" ></ipw-working-plan>

@@ -3,13 +3,17 @@
     <ds-comcol-page-header
       [name]="'working-plan.page.title' | translate">
     </ds-comcol-page-header>
+    <ds-view-version-badges *ngIf="workingPlan" [item]="workingPlan"></ds-view-version-badges>
   </div>
   <ds-alert [type]="'alert-info'" [content]="'working-plan.chart.page.description'" [collapsible]="true" [collapsed]="true"></ds-alert>
   <ipw-working-plan-chart-toolbar [compareMode]="compareMode"
+                                  [isFunder]="isFunder"
+                                  [isVersionOf]="isVersionOf"
                                   [projectCommunityId]="projectCommunityId"
                                   [workpackages]="workpackages"
                                   [workingPlan]="workingPlan"></ipw-working-plan-chart-toolbar>
   <ipw-working-plan-chart-container [compareMode]="compareMode"
+                                    [isVersionOf]="isVersionOf"
                                     [projectCommunityId]="projectCommunityId"
                                     [milestoneCollectionId]="milestoneCollectionId"
                                     [workPackageCollectionId]="workPackageCollectionId"

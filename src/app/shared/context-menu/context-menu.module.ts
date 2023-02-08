@@ -1,4 +1,3 @@
-import { EditItemPermissionsMenuComponent } from './edit-item-permissions/edit-item-permissions-menu.component';
 import { SharedModule } from './../shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -22,6 +21,8 @@ import { SubscriptionMenuComponent } from './subscription/subscription-menu.comp
 import { SubscriptionsModule } from '../subscriptions/subscriptions.module';
 import { ItemVersionMenuComponent } from './item-version/item-version-menu.component';
 import { ItemVersionContainerComponent } from './item-version/item-version-container/item-version-container.component';
+import { FullItemMenuComponent } from './full-item/full-item-menu.component';
+import { OrcidViewPageMenuComponent } from './orcid-view-page/orcid-view-page-menu.component';
 import { DeleteProjectMenuComponent } from './delete-project/delete-project-menu.component';
 import { ProjectAdminInvitationMenuComponent } from './project-invitation/project-admin-invitation-menu.component';
 import {
@@ -33,10 +34,8 @@ import { CreateProjectMenuComponent } from './create-project/create-project-menu
 import { ViewProjectItemsMenuComponent } from './view-project-items/view-project-items-menu.component';
 import { ManageProjectMembersMenuComponent } from './manage-project-members/manage-project-members-menu.component';
 import { ManageProjectVersionsMenuComponent } from './manage-project-versions/manage-project-versions-menu.component';
-import {
-  ManageProjectFundersGroupMenuComponent
-} from './manage-project-funders-group/manage-project-funders-group-menu.component';
 import { ManageProgrammeGroupMenuComponent } from './manage-programme-group/manage-programme-group-menu.component';
+import { EditItemPermissionsMenuComponent } from './edit-item-permissions/edit-item-permissions-menu.component';
 
 const COMPONENTS = [
   BulkImportMenuComponent,
@@ -53,6 +52,8 @@ const COMPONENTS = [
   SubscriptionMenuComponent,
   ItemVersionMenuComponent,
   ItemVersionContainerComponent,
+  FullItemMenuComponent,
+  OrcidViewPageMenuComponent,
   DeleteProjectMenuComponent,
   GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
@@ -63,7 +64,6 @@ const COMPONENTS = [
   ManageProjectMembersMenuComponent,
   EditItemPermissionsMenuComponent,
   ManageProjectVersionsMenuComponent,
-  ManageProjectFundersGroupMenuComponent,
   ManageProgrammeGroupMenuComponent,
 ];
 
@@ -80,6 +80,8 @@ const ENTRY_COMPONENTS = [
   StatisticsMenuComponent,
   SubscriptionMenuComponent,
   ItemVersionMenuComponent,
+  FullItemMenuComponent,
+  OrcidViewPageMenuComponent,
   DeleteProjectMenuComponent,
   GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
@@ -90,7 +92,6 @@ const ENTRY_COMPONENTS = [
   ManageProjectMembersMenuComponent,
   EditItemPermissionsMenuComponent,
   ManageProjectVersionsMenuComponent,
-  ManageProjectFundersGroupMenuComponent,
   ManageProgrammeGroupMenuComponent,
 ];
 

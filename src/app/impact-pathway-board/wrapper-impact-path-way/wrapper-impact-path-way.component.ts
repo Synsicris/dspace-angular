@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { ImpactPathway } from '../core/models/impact-pathway.model';
+import { Item } from '../../core/shared/item.model';
 
 @Component({
   selector: 'ipw-wrapper-impact-path-way',
@@ -8,7 +9,10 @@ import { ImpactPathway } from '../core/models/impact-pathway.model';
   templateUrl: './wrapper-impact-path-way.component.html'
 })
 export class WrapperImpactPathWayComponent {
-
+  /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  @Input() isFunder: boolean;
   /**
    * The project community's id
    */
@@ -17,7 +21,10 @@ export class WrapperImpactPathWayComponent {
    * The project item's id
    */
   @Input() public projectItemId: string;
-
+  /**
+   * The impact-pathway item
+   */
+  @Input() impactPathWayItem: Item;
   @Input() public impactPathWay: ImpactPathway;
   @Input() public impactPathWayId: string;
 

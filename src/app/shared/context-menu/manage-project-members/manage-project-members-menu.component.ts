@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
@@ -10,11 +10,10 @@ import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model'
 import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
-import { ProjectGroupService } from '../../../core/project/project-group.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { FUNDING_ENTITY, PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
+import { FUNDING_ENTITY, PROJECT_ENTITY } from '../../../core/project/project-data.service';
 import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 
 /**
@@ -38,29 +37,40 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
   protected isCoordinator$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * A boolean representing if item is a version of original item
+   */
+  private isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * Initialize instance variables
    *
    * @param {DSpaceObject} injectedContextMenuObject
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
    * @param {NgbModal} modalService
-   * @param {ProjectGroupService} projectGroupService
-   * @param {ProjectDataService} projectService
    * @param {Router} router
+   * @param {ActivatedRoute} aroute
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: any,
     protected authorizationService: AuthorizationDataService,
     protected modalService: NgbModal,
-    protected projectGroupService: ProjectGroupService,
-    protected projectService: ProjectDataService,
     protected router: Router,
+    protected aroute: ActivatedRoute,
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ManageProjectMembers);
   }
 
   ngOnInit(): void {
+    this.aroute.data.pipe(
+      map((data) => data.isVersionOfAnItem),
+      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
+      take(1)
+    ).subscribe((isVersionOfAnItem: boolean) => {
+      this.isVersionOfAnItem$.next(isVersionOfAnItem);
+    });
+
     this.isFunding = (this.contextMenuObject as Item).entityType === FUNDING_ENTITY;
     if (this.canShow()) {
       this.checkIsCoordinator().subscribe((isCoordinator: boolean) => {
@@ -84,6 +94,13 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
   }
 
   /**
+   * Check if current item is version of an item
+   */
+  isVersionOfAnItem(): Observable<boolean> {
+    return this.isVersionOfAnItem$.asObservable();
+  }
+
+  /**
    * Navigate to manage members page
    */
   navigateToManage() {
@@ -100,8 +117,8 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
         this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
       ).pipe(
         map(([
-               isCoordinatorOfFunding,
-               isAdminstrator]) => isCoordinatorOfFunding || isAdminstrator),
+          isCoordinatorOfFunding,
+          isAdminstrator]) => isCoordinatorOfFunding || isAdminstrator),
       );
     } else {
       return combineLatest([
@@ -111,11 +128,11 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
         this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
       ).pipe(
         map(([
-               isFunderOrganizational,
-               isFunderProject,
-               isCoordinatorOfProject,
-               isAdminstrator
-             ]) => isFunderOrganizational || isFunderProject || isCoordinatorOfProject || isAdminstrator),
+          isFunderOrganizational,
+          isFunderProject,
+          isCoordinatorOfProject,
+          isAdminstrator
+        ]) => isFunderOrganizational || isFunderProject || isCoordinatorOfProject || isAdminstrator),
       );
     }
   }

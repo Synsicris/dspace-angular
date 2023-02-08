@@ -1,5 +1,7 @@
 import { ItemVersionsComponent } from './item-versions.component';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {
+  ComponentFixture, TestBed, waitForAsync
+} from '@angular/core/testing';
 import { VarDirective } from '../../utils/var.directive';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -8,7 +10,7 @@ import { Item } from '../../../core/shared/item.model';
 import { Version } from '../../../core/shared/version.model';
 import { VersionHistory } from '../../../core/shared/version-history.model';
 import { VersionHistoryDataService } from '../../../core/data/version-history-data.service';
-import { By } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
 import { createPaginatedList } from '../../testing/utils.test';
 import { EMPTY, of, of as observableOf } from 'rxjs';
@@ -17,7 +19,7 @@ import { PaginationServiceStub } from '../../testing/pagination-service.stub';
 import { AuthService } from '../../../core/auth/auth.service';
 import { VersionDataService } from '../../../core/data/version-data.service';
 import { ItemDataService } from '../../../core/data/item-data.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { NotificationsServiceStub } from '../../testing/notifications-service.stub';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
@@ -25,6 +27,9 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { WorkspaceitemDataService } from '../../../core/submission/workspaceitem-data.service';
 import { WorkflowItemDataService } from '../../../core/submission/workflowitem-data.service';
 import { ConfigurationDataService } from '../../../core/data/configuration-data.service';
+import { Router } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
 
 describe('ItemVersionsComponent', () => {
   let component: ItemVersionsComponent;
@@ -37,6 +42,7 @@ describe('ItemVersionsComponent', () => {
   let versionService: VersionDataService;
   let configurationService: ConfigurationDataService;
   let de: DebugElement;
+  let modalService;
 
   const versionHistory = Object.assign(new VersionHistory(), {
     id: '1',
@@ -95,6 +101,7 @@ describe('ItemVersionsComponent', () => {
   versionHistory.versions = createSuccessfulRemoteDataObject$(createPaginatedList(versions));
 
   const item1 = Object.assign(new Item(), { // is a workspace item
+    id: 'item-identifier-1',
     uuid: 'item-identifier-1',
     handle: '123456789/1',
     metadata: {
@@ -117,6 +124,7 @@ describe('ItemVersionsComponent', () => {
     }
   });
   const item2 = Object.assign(new Item(), {
+    id: 'item-identifier-2',
     uuid: 'item-identifier-2',
     handle: '123456789/2',
     metadata: {
@@ -161,7 +169,7 @@ describe('ItemVersionsComponent', () => {
     }
   });
   const item4 = Object.assign(new Item(), {
-    uuid: 'item-identifier-3',
+    uuid: 'item-identifier-4',
     handle: '123456789/3',
     metadata: {
       'synsicris.version.official': [
@@ -178,7 +186,7 @@ describe('ItemVersionsComponent', () => {
     version: createSuccessfulRemoteDataObject$(version4),
     _links: {
       self: {
-        href: '/items/item-identifier-2'
+        href: '/items/item-identifier-4'
       }
     }
   });
@@ -190,12 +198,16 @@ describe('ItemVersionsComponent', () => {
 
   const versionHistoryServiceSpy = jasmine.createSpyObj('versionHistoryService', {
     getVersions: createSuccessfulRemoteDataObject$(createPaginatedList(versions)),
+    getVersionHistoryFromVersion$: of(versionHistory),
+    getLatestVersionItemFromHistory$: of(item1),  // called when version2 is deleted
   });
   const authenticationServiceSpy = jasmine.createSpyObj('authenticationService', {
     isAuthenticated: observableOf(true),
     setRedirectUrl: {}
   });
-  const authorizationServiceSpy = jasmine.createSpyObj('authorizationService', ['isAuthorized']);
+  const authorizationServiceSpy = jasmine.createSpyObj('authorizationService', {
+    isAuthorized: observableOf(true)
+  });
   const workspaceItemDataServiceSpy = jasmine.createSpyObj('workspaceItemDataService', {
     findByItem: EMPTY,
   });
@@ -210,11 +222,20 @@ describe('ItemVersionsComponent', () => {
     findByPropertyName: of(true),
   });
 
+  const itemDataServiceSpy = jasmine.createSpyObj('itemDataService', {
+    delete: createSuccessfulRemoteDataObject$({}),
+    updateItemMetadata: of(true)
+  });
+
+  const routerSpy = jasmine.createSpyObj('router', {
+    navigateByUrl: null,
+  });
+
   beforeEach(waitForAsync(() => {
 
     TestBed.configureTestingModule({
       declarations: [ItemVersionsComponent, VarDirective],
-      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([])],
+      imports: [TranslateModule.forRoot(), CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule],
       providers: [
         { provide: PaginationService, useValue: new PaginationServiceStub() },
         { provide: FormBuilder, useValue: new FormBuilder() },
@@ -222,11 +243,12 @@ describe('ItemVersionsComponent', () => {
         { provide: AuthService, useValue: authenticationServiceSpy },
         { provide: AuthorizationDataService, useValue: authorizationServiceSpy },
         { provide: VersionHistoryDataService, useValue: versionHistoryServiceSpy },
-        { provide: ItemDataService, useValue: {} },
+        {provide: ItemDataService, useValue: itemDataServiceSpy},
         { provide: VersionDataService, useValue: versionServiceSpy },
         { provide: WorkspaceitemDataService, useValue: workspaceItemDataServiceSpy },
         { provide: WorkflowItemDataService, useValue: workflowItemDataServiceSpy },
         { provide: ConfigurationDataService, useValue: configurationServiceSpy },
+        { provide: Router, useValue: routerSpy },
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -249,12 +271,25 @@ describe('ItemVersionsComponent', () => {
     component.displayActions = true;
     versionHistoryServiceSpy.getVersions.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(versions)));
     fixture.detectChanges();
-
   });
 
   it(`should display ${versions.length} rows`, () => {
     const rows = fixture.debugElement.queryAll(By.css('tbody tr'));
     expect(rows.length).toBe(versions.length);
+  });
+
+  it('Should show edit summary button', () => {
+    spyOn(component, 'canEditVersion$').and.returnValue(of(true));
+    fixture.detectChanges();
+    expect(de.queryAll(By.css('button[data-test="edit-summary"]')).length).toEqual(1);
+  });
+
+  it('Should show show-summary info', () => {
+    expect(de.queryAll(By.css('span[data-test="show-summary"]')).length).toEqual(2);
+  });
+
+  it('Should not show show-note info', () => {
+    expect(de.queryAll(By.css('span[data-test="show-note"]')).length).toEqual(0);
   });
 
   versions.forEach((version: Version, index: number) => {
@@ -373,14 +408,54 @@ describe('ItemVersionsComponent', () => {
     });
   });
 
+  describe('when deleting a version', () => {
+    let deleteButton;
+
+    beforeEach(() => {
+      const canDelete = (featureID: FeatureID, url: string ) => of(featureID === FeatureID.CanDeleteVersion);
+      authorizationServiceSpy.isAuthorized.and.callFake(canDelete);
+
+      fixture.detectChanges();
+
+      // delete the last version in the table (version2 → item2)
+      deleteButton = fixture.debugElement.queryAll(By.css('.version-row-element-delete'))[1].nativeElement;
+
+      itemDataServiceSpy.delete.calls.reset();
+    });
+
+    describe('if confirmed via modal', () => {
+      beforeEach(waitForAsync(() => {
+        deleteButton.click();
+        fixture.detectChanges();
+        (document as any).querySelector('.modal-footer .confirm').click();
+      }));
+
+      it('should call ItemService.delete', () => {
+        expect(itemDataServiceSpy.delete).toHaveBeenCalledWith(item2.id);
+      });
+    });
+
+    describe('if canceled via modal', () => {
+      beforeEach(waitForAsync(() => {
+        deleteButton.click();
+        fixture.detectChanges();
+        (document as any).querySelector('.modal-footer .cancel').click();
+      }));
+
+      it('should not call ItemService.delete', () => {
+        expect(itemDataServiceSpy.delete).not.toHaveBeenCalled();
+      });
+    });
+  });
   describe('When component is being utilized by Project Manage Version', () => {
 
     beforeEach(() => {
       component.isCoordinator = true;
-      component.isFounder = false;
+      component.isFunder = false;
       component.canShowCreateVersion = true;
       component.displayActions = true;
       versionHistoryServiceSpy.getVersions.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([version1, version2, version3, version4])));
+      component.ngOnInit();
       fixture.detectChanges();
     });
 
@@ -408,51 +483,90 @@ describe('ItemVersionsComponent', () => {
       expect(de.query(By.css('span[data-test="official-2"]'))).toBeTruthy();
     });
 
-    it('When create button click should call createNewVersion with version 2', () => {
-      console.log(de.query(By.css('button[data-test="create-2"]')));
-      const button = de.query(By.css('button[data-test="create-2"]'));
-      jasmine.createSpyObj('component', ['createNewVersion']);
-      button.nativeElement.click();
-      fixture.detectChanges();
-      expect(component.createNewVersion).toHaveBeenCalledOnceWith(version2);
+    it('Should not show create buttons for any version', () => {
+      expect(de.queryAll(By.css('button[data-test="create-button"]')).length).toEqual(0);
+    });
+
+
+    it('Should not show show-summary info', () => {
+      expect(de.queryAll(By.css('span[data-test="show-summary"]')).length).toEqual(0);
+    });
+
+    it('Should show show-note info', () => {
+      expect(de.queryAll(By.css('span[data-test="show-note"]')).length).toEqual(4);
     });
 
     describe('when isCoordinator is true', () => {
 
       beforeEach(() => {
-        component.isCoordinator = false;
-        component.isFounder = true;
+        component.isCoordinator = true;
+        component.isFunder = false;
         component.canShowCreateVersion = true;
+
+        modalService = (component as any).modalService;
+        spyOn(modalService, 'open').and.returnValue(Object.assign({ componentInstance: Object.assign({ response: observableOf(true) }) }));
+
         fixture.detectChanges();
       });
 
-      // Should show create button
-      it('Should show official for version 3', () => {
-        expect(de.query(By.css('button[data-test="create-1"]'))).toBeTruthy();
+      describe('When Visible and not Official', () => {
+
+        it('Should not show set visible for version 1', () => {
+          expect(de.query(By.css('button[data-test="visible-1"]'))).toBeFalsy();
+        });
+
+        it('Should not show set non official for version 1', () => {
+          expect(de.query(By.css('button[data-test="non-official-1"]'))).toBeFalsy();
+        });
+
+        it('Should not show delete for version 1', () => {
+          expect(de.query(By.css('button[data-test="delete-1"]'))).toBeFalsy();
+        });
+      });
+
+      describe('When Visible and Official', () => {
+
+        it('Should not show set visible for version 3', () => {
+          expect(de.query(By.css('button[data-test="visible-3"]'))).toBeFalsy();
+        });
+
+        it('Should not show set non official for version 3', () => {
+          expect(de.query(By.css('button[data-test="non-official-3"]'))).toBeFalsy();
+        });
+
+        it('Should not show delete for version 3', () => {
+          expect(de.query(By.css('button[data-test="delete-3"]'))).toBeFalsy();
+        });
       });
 
 
-      // Should delete version if not visible
-      it('Should show official for version 3', () => {
-        expect(de.query(By.css('button[data-test="create-3"]'))).toBeTruthy();
+      describe('When Non Visible and Non Official', () => {
+
+        it('Should show set visible for version 4', () => {
+          expect(de.query(By.css('button[data-test="visible-4"]'))).toBeTruthy();
+        });
+
+        it('Should not show set non official for version 4', () => {
+          expect(de.query(By.css('button[data-test="non-official-4"]'))).toBeFalsy();
+        });
+
+        it('Should show delete for version 4', () => {
+          spyOn(component, 'canDeleteVersion$').and.returnValue(of(true));
+          fixture.detectChanges();
+          expect(de.query(By.css('button[data-test="delete-4"]'))).toBeTruthy();
+        });
       });
 
-      // Should not change official
-      it('Should not change official for version 3', () => {
-        expect(de.query(By.css('button[data-test="official-3"]')).nativeElement.disabled).toBe(true);
-      });
-
-
-      it('When official and visible should not delete for version 3', () => {
-        expect(de.query(By.css('button[data-test="delete-3"]'))).toBeFalsy();
-      });
-
-      it('When official and visible should not change official for version 3', () => {
-        expect(de.query(By.css('button[data-test="official-3"]')).nativeElement.disabled).toBe(true);
-      });
 
       it('Should show version links for all version', () => {
         expect(de.queryAll(By.css('a[data-test="version-link"]')).length).toEqual(4);
+      });
+
+      it('Should call modal service when making visible version 4', () => {
+        const button = de.query(By.css('button[data-test="visible-4"]')).nativeElement;
+        button.click();
+        fixture.detectChanges();
+        expect(modalService.open).toHaveBeenCalled();
       });
 
     });
@@ -461,14 +575,82 @@ describe('ItemVersionsComponent', () => {
     describe('when isFounder is true', () => {
       beforeEach(() => {
         component.isCoordinator = false;
-        component.isFounder = true;
-        component.canShowCreateVersion = true;
+        component.isFunder = true;
+        versionHistoryServiceSpy.getVersions.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([version1, version2, version3, version4])));
+
+        modalService = (component as any).modalService;
+        spyOn(modalService, 'open').and.returnValue(Object.assign({ componentInstance: Object.assign({ response: observableOf(true) }) }));
+
+        component.ngOnInit();
         fixture.detectChanges();
       });
-      // Should change official to non-official
-      // When setting non-official version should show modal
-      // Should show delete for non-official version
-      // Should show version link only if isVisible
+
+
+      it('Should show edit note button', () => {
+        expect(de.queryAll(By.css('button[data-test="edit-note"]')).length).toEqual(3);
+      });
+
+      describe('When Visible and not Official', () => {
+
+        it('Should not show set visible for version 1', () => {
+          expect(de.query(By.css('button[data-test="visible-1"]'))).toBeFalsy();
+        });
+
+        it('Should not show set non official for version 1', () => {
+          expect(de.query(By.css('button[data-test="non-official-1"]'))).toBeFalsy();
+        });
+
+        it('Should not show delete for version 1 since its selected', () => {
+          expect(de.query(By.css('button[data-test="delete-1"]'))).toBeFalsy();
+        });
+      });
+
+      describe('When Visible and Official', () => {
+
+        it('Should not show set visible for version 3', () => {
+          expect(de.query(By.css('button[data-test="visible-3"]'))).toBeFalsy();
+        });
+
+        it('Should show set non official for version 3', () => {
+          expect(de.query(By.css('button[data-test="set-non-official-3"]'))).toBeTruthy();
+        });
+
+        it('Should not show delete for version 3', () => {
+          expect(de.query(By.css('button[data-test="delete-3"]'))).toBeFalsy();
+        });
+      });
+
+
+      describe('When Non Visible and Non Official', () => {
+
+        it('Should not show set visible for version 4', () => {
+          expect(de.query(By.css('button[data-test="visible-4"]'))).toBeFalsy();
+        });
+
+        it('Should not show set non official for version 4', () => {
+          expect(de.query(By.css('button[data-test="non-official-4"]'))).toBeFalsy();
+        });
+
+        it('Should show delete for version 4', () => {
+          spyOn(component, 'canDeleteVersion$').and.returnValue(of(true));
+          fixture.detectChanges();
+          expect(de.query(By.css('button[data-test="delete-4"]'))).toBeTruthy();
+        });
+      });
+
+
+      it('Should show version links for all version', () => {
+        expect(de.queryAll(By.css('a[data-test="version-link"]')).length).toEqual(2);
+      });
+
+
+      it('Should call modal service when making non official version 3', () => {
+        const button = de.query(By.css('button[data-test="set-non-official-3"]')).nativeElement;
+        button.click();
+        fixture.detectChanges();
+        expect(modalService.open).toHaveBeenCalled();
+      });
+
     });
 
   });

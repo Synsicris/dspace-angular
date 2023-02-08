@@ -10,6 +10,8 @@ import { ProjectObjectivesItemResolver } from '../core/project/project-objective
 import { ProjectItemBreadcrumbResolver } from '../core/breadcrumbs/project-item-breadcrumb.resolver';
 import { ProjectItemBreadcrumbService } from '../core/breadcrumbs/project-item-breadcrumb.service';
 import { ProjectItemByItemRelationResolver } from '../core/project/project-item-by-item-relation.resolver';
+import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.resolver';
+import { IsFunderResolver } from '../core/project/is-funder.resolver';
 
 @NgModule({
   imports: [
@@ -28,7 +30,9 @@ import { ProjectItemByItemRelationResolver } from '../core/project/project-item-
             },
             resolve: {
               impactPathwayItem: ProjectItemPageResolver,
+              isFunder: IsFunderResolver,
               projectCommunity: ProjectCommunityByItemResolver,
+              isVersionOfAnItem: VersionOfAnItemResolver,
               breadcrumb: ProjectItemBreadcrumbResolver
             },
           },
@@ -43,6 +47,7 @@ import { ProjectItemByItemRelationResolver } from '../core/project/project-item-
             resolve: {
               impactPathwayItem: ProjectItemPageResolver,
               projectCommunity: ProjectCommunityByItemResolver,
+              isVersionOfAnItem: VersionOfAnItemResolver,
               objectivesItem: ProjectObjectivesItemResolver
             },
           },
@@ -51,12 +56,14 @@ import { ProjectItemByItemRelationResolver } from '../core/project/project-item-
     ])
   ],
   providers: [
+    IsFunderResolver,
     ProjectItemByItemRelationResolver,
     ProjectItemPageResolver,
     ProjectItemBreadcrumbResolver,
     ProjectItemBreadcrumbService,
     ProjectCommunityByItemResolver,
-    ProjectObjectivesItemResolver
+    ProjectObjectivesItemResolver,
+    VersionOfAnItemResolver
   ]
 })
 export class ImpactPathwayPageRoutingModule {

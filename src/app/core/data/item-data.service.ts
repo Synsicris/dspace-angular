@@ -1,39 +1,31 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+/**
+ * The contents of this file are subject to the license and copyright
+ * detailed in the LICENSE and NOTICE files at the root of the source
+ * tree and available online at
+ *
+ * http://www.dspace.org/license/
+ */
+/* eslint-disable max-classes-per-file */
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable, of, throwError as observableThrowError } from 'rxjs';
-import {
-  catchError,
-  delay,
-  distinctUntilChanged,
-  filter,
-  find,
-  map,
-  mergeMap,
-  switchMap,
-  take,
-  tap
-} from 'rxjs/operators';
-import { hasValue, isEmpty, isNotEmpty, isNotEmptyOperator, isNull } from '../../shared/empty.util';
+import { catchError, delay, distinctUntilChanged, filter, find, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+import { hasValue, isEmpty, isNotEmpty, isNotEmptyOperator, isNull, isUndefined } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { BrowseService } from '../browse/browse.service';
-import { dataService } from '../cache/builders/build-decorators';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../cache/object-cache.service';
-import { CoreState } from '../core.reducers';
 import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 import { Collection } from '../shared/collection.model';
 import { ExternalSourceEntry } from '../shared/external-source-entry.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { Item } from '../shared/item.model';
 import { ITEM } from '../shared/item.resource-type';
-import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload, sendRequest } from '../shared/operators';
 import { URLCombiner } from '../url-combiner/url-combiner';
-import { DataService } from './data.service';
 import { DSOChangeAnalyzer } from './dso-change-analyzer.service';
 import { PaginatedList } from './paginated-list.model';
 import { RemoteData } from './remote-data';
-import { DeleteRequest, FindListOptions, GetRequest, PostRequest, PutRequest, RestRequest } from './request.models';
+import { DeleteRequest, GetRequest, PostRequest, PutRequest } from './request.models';
 import { RequestService } from './request.service';
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { Bundle } from '../shared/bundle.model';
@@ -45,39 +37,60 @@ import { Metric } from '../shared/metric.model';
 import { GenericConstructor } from '../shared/generic-constructor';
 import { ResponseParsingService } from './parsing.service';
 import { StatusCodeOnlyResponseParsingService } from './status-code-only-response-parsing.service';
-import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+import { sendRequest } from '../shared/request.operators';
+import { RestRequest } from './rest-request.model';
+import { FindListOptions } from './find-list-options.model';
+import { ConstructIdEndpoint, IdentifiableDataService } from './base/identifiable-data.service';
+import { PatchData, PatchDataImpl } from './base/patch-data';
+import { DeleteData, DeleteDataImpl } from './base/delete-data';
+import { RestRequestMethod } from './rest-request-method';
+import { CreateData, CreateDataImpl } from './base/create-data';
 import { RequestParam } from '../cache/models/request-param.model';
+import { dataService } from './base/data-service.decorator';
+import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { ItemSearchParams } from './item-search-params';
 import { validate as uuidValidate } from 'uuid';
-import { Metadata } from '../shared/metadata.utils';
-import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
-import { ErrorResponse } from '../cache/response.models';
+import { SearchDataImpl } from './base/search-data';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
 import { ItemJsonPatchOperationsService } from './item-json-patch-operations.service';
+import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from '../shared/operators';
 import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
-import { isUndefined } from 'lodash';
+import { Metadata } from '../shared/metadata.utils';
+import { ErrorResponse } from '../cache/response.models';
+import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 
-@Injectable()
-@dataService(ITEM)
-export class ItemDataService extends DataService<Item> {
-  protected linkPath = 'items';
+/**
+ * An abstract service for CRUD operations on Items
+ * Doesn't specify an endpoint because multiple endpoints support Item-like functionality (e.g. items, itemtemplates)
+ * Extend this class to implement data services for Items
+ */
+export abstract class BaseItemDataService extends IdentifiableDataService<Item> implements CreateData<Item>, PatchData<Item>, DeleteData<Item> {
+  private createData: CreateData<Item>;
+  private patchData: PatchData<Item>;
+  private deleteData: DeleteData<Item>;
+  private searchData: SearchDataImpl<Item>;
   protected searchFindAllByIdPath = 'findAllById';
 
-  constructor(
+  protected constructor(
+    protected linkPath,
     protected requestService: RequestService,
     protected rdbService: RemoteDataBuildService,
-    protected store: Store<CoreState>,
-    protected bs: BrowseService,
     protected objectCache: ObjectCacheService,
     protected halService: HALEndpointService,
     protected notificationsService: NotificationsService,
-    protected http: HttpClient,
     protected comparator: DSOChangeAnalyzer<Item>,
+    protected browseService: BrowseService,
     protected bundleService: BundleDataService,
     protected operationsBuilder: JsonPatchOperationsBuilder,
-    protected itemJsonPatchOperationsService: ItemJsonPatchOperationsService
+    protected itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
+    protected constructIdEndpoint: ConstructIdEndpoint = (endpoint, resourceID) => `${endpoint}/${resourceID}`,
   ) {
-    super();
+    super(linkPath, requestService, rdbService, objectCache, halService, undefined, constructIdEndpoint);
+
+    this.createData = new CreateDataImpl(this.linkPath, requestService, rdbService, objectCache, halService, notificationsService, this.responseMsToLive);
+    this.patchData = new PatchDataImpl<Item>(this.linkPath, requestService, rdbService, objectCache, halService, comparator, this.responseMsToLive, this.constructIdEndpoint);
+    this.deleteData = new DeleteDataImpl(this.linkPath, requestService, rdbService, objectCache, halService, notificationsService, this.responseMsToLive, this.constructIdEndpoint);
+    this.searchData = new SearchDataImpl(this.linkPath, requestService, rdbService, objectCache, halService, this.responseMsToLive);
   }
 
   /**
@@ -92,10 +105,11 @@ export class ItemDataService extends DataService<Item> {
     if (options.sort && options.sort.field) {
       field = options.sort.field;
     }
-    return this.bs.getBrowseURLFor(field, linkPath).pipe(
+    return this.browseService.getBrowseURLFor(field, linkPath).pipe(
       filter((href: string) => isNotEmpty(href)),
       map((href: string) => new URLCombiner(href, `?scope=${options.scopeID}`).toString()),
-      distinctUntilChanged());
+      distinctUntilChanged()
+    );
   }
 
   /**
@@ -107,7 +121,7 @@ export class ItemDataService extends DataService<Item> {
   public getMappedCollectionsEndpoint(itemId: string, collectionId?: string): Observable<string> {
     return this.halService.getEndpoint(this.linkPath).pipe(
       map((endpoint: string) => this.getIDHref(endpoint, itemId)),
-      map((endpoint: string) => `${endpoint}/mappedCollections${collectionId ? `/${collectionId}` : ''}`)
+      map((endpoint: string) => `${endpoint}/mappedCollections${collectionId ? `/${collectionId}` : ''}`),
     );
   }
 
@@ -271,7 +285,7 @@ export class ItemDataService extends DataService<Item> {
   public getMoveItemEndpoint(itemId: string): Observable<string> {
     return this.halService.getEndpoint(this.linkPath).pipe(
       map((endpoint: string) => this.getIDHref(endpoint, itemId)),
-      map((endpoint: string) => `${endpoint}/owningCollection`)
+      map((endpoint: string) => `${endpoint}/owningCollection`),
     );
   }
 
@@ -352,6 +366,76 @@ export class ItemDataService extends DataService<Item> {
   }
 
   /**
+   * Commit current object changes to the server
+   * @param method The RestRequestMethod for which de server sync buffer should be committed
+   */
+  public commitUpdates(method?: RestRequestMethod): void {
+    this.patchData.commitUpdates(method);
+  }
+
+  /**
+   * Send a patch request for a specified object
+   * @param {T} object The object to send a patch request for
+   * @param {Operation[]} operations The patch operations to be performed
+   */
+  public patch(object: Item, operations: Operation[]): Observable<RemoteData<Item>> {
+    return this.patchData.patch(object, operations);
+  }
+
+  /**
+   * Add a new patch to the object cache
+   * The patch is derived from the differences between the given object and its version in the object cache
+   * @param {DSpaceObject} object The given object
+   */
+  public update(object: Item): Observable<RemoteData<Item>> {
+    return this.patchData.update(object);
+  }
+
+  /**
+   * Return a list of operations representing the difference between an object and its latest value in the cache.
+   * @param object  the object to resolve to a list of patch operations
+   */
+  public createPatchFromCache(object: Item): Observable<Operation[]> {
+    return this.patchData.createPatchFromCache(object);
+  }
+
+  /**
+   * Delete an existing object on the server
+   * @param   objectId The id of the object to be removed
+   * @param   copyVirtualMetadata (optional parameter) the identifiers of the relationship types for which the virtual
+   *                            metadata should be saved as real metadata
+   * @return  A RemoteData observable with an empty payload, but still representing the state of the request: statusCode,
+   *          errorMessage, timeCompleted, etc
+   */
+  public delete(objectId: string, copyVirtualMetadata?: string[]): Observable<RemoteData<NoContent>> {
+    return this.deleteData.delete(objectId, copyVirtualMetadata);
+  }
+
+  /**
+   * Delete an existing object on the server
+   * @param   href The self link of the object to be removed
+   * @param   copyVirtualMetadata (optional parameter) the identifiers of the relationship types for which the virtual
+   *                            metadata should be saved as real metadata
+   * @return  A RemoteData observable with an empty payload, but still representing the state of the request: statusCode,
+   *          errorMessage, timeCompleted, etc
+   *          Only emits once all request related to the DSO has been invalidated.
+   */
+  public deleteByHref(href: string, copyVirtualMetadata?: string[]): Observable<RemoteData<NoContent>> {
+    return this.deleteData.deleteByHref(href, copyVirtualMetadata);
+  }
+
+  /**
+   * Create a new object on the server, and store the response in the object cache
+   *
+   * @param object    The object to create
+   * @param params    Array with additional params to combine with query string
+   */
+  public create(object: Item, ...params: RequestParam[]): Observable<RemoteData<Item>> {
+    return this.createData.create(object, ...params);
+  }
+
+
+  /**
    * Search for a list of {@link Item}s using the "findAllById" search endpoint.
    * @param uuidList                    UUID to the objects to search {@link Item}s for. Required.
    * @param options                     {@link FindListOptions} to provide pagination and/or additional arguments
@@ -365,7 +449,7 @@ export class ItemDataService extends DataService<Item> {
   findAllById(uuidList: string[], options: FindListOptions = {}, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<PaginatedList<Item>>> {
     return of(new ItemSearchParams(uuidList)).pipe(
       switchMap((params: ItemSearchParams) => {
-        return this.searchBy(this.searchFindAllByIdPath,
+        return this.searchData.searchBy(this.searchFindAllByIdPath,
           this.createSearchOptionsObjectsFindAllByID(params.uuidList, options), useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
       })
     );
@@ -396,9 +480,32 @@ export class ItemDataService extends DataService<Item> {
       const href$ = this.getIDHrefObs(encodeURIComponent(id), ...linksToFollow);
       return this.findByHref(href$, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
     } else {
-      return this.findByCustomUrl(id, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+      return this.findByCustomUrl(id, useCachedVersionIfAvailable, reRequestOnStale, linksToFollow);
     }
   }
+
+  /**
+   * Returns an observable of {@link RemoteData} of an object, based on its CustomURL or ID, with a list of
+   * {@link FollowLinkConfig}, to automatically resolve {@link HALLink}s of the object
+   * @param id                          CustomUrl or UUID of object we want to retrieve
+   * @param projections                 Array of string of projections to be added to the parameters
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
+   * @param reRequestOnStale            Whether or not the request should automatically be re-
+   *                                    requested after the response becomes stale
+   * @param linksToFollow               List of {@link FollowLinkConfig} that indicate which
+   *                                    {@link HALLink}s should be automatically resolved
+   * @param projections                 List of {@link projections} used to pass as parameters
+   */
+  findByIdWithProjections(id: string, projections: string[], useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
+
+    if (uuidValidate(id)) {
+      return super.findByIdWithProjections(id, projections, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
+    } else {
+      return this.findByCustomUrl(id, useCachedVersionIfAvailable, reRequestOnStale, linksToFollow, projections);
+    }
+  }
+
 
   /**
    * Returns an observable of {@link RemoteData} of an object, based on its CustomURL or ID, with a list of
@@ -410,8 +517,9 @@ export class ItemDataService extends DataService<Item> {
    *                                    requested after the response becomes stale
    * @param linksToFollow               List of {@link FollowLinkConfig} that indicate which
    *                                    {@link HALLink}s should be automatically resolved
+   * @param projections                 List of {@link projections} used to pass as parameters
    */
-  private findByCustomUrl(id: string, useCachedVersionIfAvailable = true, reRequestOnStale = true, ...linksToFollow: FollowLinkConfig<Item>[]): Observable<RemoteData<Item>> {
+  private findByCustomUrl(id: string, useCachedVersionIfAvailable = true, reRequestOnStale = true, linksToFollow: FollowLinkConfig<Item>[], projections: string[] = []): Observable<RemoteData<Item>> {
     const searchHref = 'findByCustomURL';
 
     const options = Object.assign({}, {
@@ -420,11 +528,25 @@ export class ItemDataService extends DataService<Item> {
       ]
     });
 
-    const hrefObs = this.getSearchByHref(searchHref, options, ...linksToFollow);
+    projections.forEach((projection) => {
+      options.searchParams.push(new RequestParam('projection', projection));
+    });
+
+    const hrefObs = this.searchData.getSearchByHref(searchHref, options, ...linksToFollow);
 
     return this.findByHref(hrefObs, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow);
   }
 
+  /**
+   * Create patch operation by using the given metadata and execute the patch request
+   *
+   * @param itemId        The item's id to patch
+   * @param editMode      The item edit mode to use for the patch operation
+   * @param pathName      The metadata path to use for the patch operation
+   * @param metadataName  The metadata to patch
+   * @param position      The metadata place
+   * @param value         The metadata value
+   */
   updateItemMetadata(
     itemId: string,
     editMode: string,
@@ -444,10 +566,19 @@ export class ItemDataService extends DataService<Item> {
         }
       }),
       delay(200),
-      mergeMap(() => this.executeEditItemPatch(itemId, editMode, pathName))
+      mergeMap(() => this.executeEditItemPatch(itemId, editMode, pathName)),
+      catchError((err) => createFailedRemoteDataObject$<Item>(err))
     );
   }
 
+  /**
+   * Create patch operation by using the given metadata map and execute the patch request
+   *
+   * @param itemId        The item's id to patch
+   * @param editMode      The item edit mode to use for the patch operation
+   * @param pathName      The metadata path to use for the patch operation
+   * @param metadata      A map containing all the metadata to patch
+   */
   public updateMultipleItemMetadata(itemId: string, editMode: string, pathName: string, metadata: MetadataMap): Observable<RemoteData<Item>> {
     return this.findById(itemId).pipe(
       getFirstSucceededRemoteDataPayload(),
@@ -476,7 +607,8 @@ export class ItemDataService extends DataService<Item> {
           });
       }),
       delay(200),
-      mergeMap(() => this.executeEditItemPatch(itemId, editMode, pathName))
+      mergeMap(() => this.executeEditItemPatch(itemId, editMode, pathName)),
+      catchError((err) => createFailedRemoteDataObject$<Item>(err))
     );
   }
 
@@ -504,14 +636,14 @@ export class ItemDataService extends DataService<Item> {
       'edititems',
       editItemId,
       pathName).pipe(
-        take(1),
-        mergeMap(() => this.findById(objectId).pipe(getFirstCompletedRemoteData())),
-        catchError((error: ErrorResponse | string) => {
-          const errMsg: any = (error as ErrorResponse).errorMessage || error;
-          console.error(errMsg);
-          return observableThrowError(new Error(errMsg));
-        })
-      );
+      take(1),
+      mergeMap(() => this.findById(objectId).pipe(getFirstCompletedRemoteData())),
+      catchError((error: ErrorResponse | string) => {
+        const errMsg: any = (error as ErrorResponse).errorMessage || error;
+        console.error(errMsg);
+        return observableThrowError(new Error(errMsg));
+      })
+    );
   }
 
   executeItemPatch(objectId: string, pathName: string): Observable<RemoteData<Item>> {
@@ -519,9 +651,32 @@ export class ItemDataService extends DataService<Item> {
       'items',
       objectId,
       pathName).pipe(
-        tap((item: Item) => this.update(item)),
-        map((item: Item) => createSuccessfulRemoteDataObject<Item>(item)),
-        catchError((error: ErrorResponse) => createFailedRemoteDataObject$<Item>(error.errorMessage))
-      );
+      tap((item: Item) => this.update(item)),
+      map((item: Item) => createSuccessfulRemoteDataObject<Item>(item)),
+      catchError((error: ErrorResponse) => createFailedRemoteDataObject$<Item>(error.errorMessage))
+    );
+  }
+
+}
+
+/**
+ * A service for CRUD operations on Items
+ */
+@Injectable()
+@dataService(ITEM)
+export class ItemDataService extends BaseItemDataService {
+  constructor(
+    protected requestService: RequestService,
+    protected rdbService: RemoteDataBuildService,
+    protected objectCache: ObjectCacheService,
+    protected halService: HALEndpointService,
+    protected notificationsService: NotificationsService,
+    protected comparator: DSOChangeAnalyzer<Item>,
+    protected browseService: BrowseService,
+    protected bundleService: BundleDataService,
+    protected operationsBuilder: JsonPatchOperationsBuilder,
+    protected itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
+  ) {
+    super('items', requestService, rdbService, objectCache, halService, notificationsService, comparator, browseService, bundleService, operationsBuilder, itemJsonPatchOperationsService);
   }
 }

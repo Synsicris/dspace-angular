@@ -17,6 +17,7 @@ import { ItemDataService } from '../data/item-data.service';
  * The postfix for i18n breadcrumbs
  */
 export const BREADCRUMB_MESSAGE_POSTFIX = '.breadcrumbs';
+export const BREADCRUMB_ENTITY_PREFIX = 'breadcrumb.entity-type.';
 
 /**
  * Service to calculate i18n breadcrumbs for a single part of the route including the project path
@@ -46,10 +47,12 @@ export class ProjectItemI18nBreadcrumbsService implements BreadcrumbsProviderSer
         getRemoteDataPayload(),
         map((object: Item) => {
           const itemUrl = getItemPageRoute(object);
-          return [
-            new Breadcrumb(this.dsoNameService.getName(object), itemUrl),
-            new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url)
-          ];
+          const entityType: string = this.dsoNameService.getEntityType(object);
+          return (entityType && [new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType)] || [])
+            .concat([
+              new Breadcrumb(this.dsoNameService.getName(object), itemUrl),
+              new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url)
+            ]);
         })
       );
     } else {

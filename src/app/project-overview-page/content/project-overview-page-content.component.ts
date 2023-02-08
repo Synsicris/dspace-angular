@@ -9,7 +9,7 @@ import { PaginatedList } from '../../core/data/paginated-list.model';
 import { Item } from '../../core/shared/item.model';
 import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
 import { LinkService } from '../../core/cache/builders/link.service';
-import { DsoRedirectDataService } from '../../core/data/dso-redirect-data.service';
+import { DsoRedirectService } from '../../core/data/dso-redirect.service';
 import { IdentifierType } from '../../core/data/request.models';
 import { Community } from '../../core/shared/community.model';
 import { DSONameService } from '../../core/breadcrumbs/dso-name.service';
@@ -91,7 +91,7 @@ export class ProjectOverviewPageContentComponent implements OnInit {
   subprojectListPageInfo$: BehaviorSubject<PageInfo> = new BehaviorSubject<PageInfo>(null);
 
   constructor(
-    protected dsoService: DsoRedirectDataService,
+    protected dsoService: DsoRedirectService,
     protected impactPathwayService: ImpactPathwayService,
     protected linkService: LinkService,
     protected authService: AuthService,

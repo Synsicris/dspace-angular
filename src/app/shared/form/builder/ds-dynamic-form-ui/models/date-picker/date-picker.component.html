@@ -2,9 +2,19 @@
   <fieldset class="d-flex justify-content-start">
     <legend [id]="'legend_' + model.id" [ngClass]="[getClass('element', 'label'), getClass('grid', 'label')]">
       {{model.placeholder}} <span *ngIf="model.required">*</span>
+      <i *ngIf="hasHint" class="far fa-question-circle text-info hint"
+         [ngbTooltip]="(model.hint | translate)"
+         [autoClose]="false"
+         tooltipClass="hint-tooltip"
+         triggers="manual"
+         #hintTooltip="ngbTooltip"
+         [placement]="['top-left', 'right', 'bottom']"
+         container="body"
+         (click)="hintTooltip.toggle();$event.preventDefault();"></i>
     </legend>
     <ds-number-picker
       tabindex="1"
+      [id]="model.id + '_year'"
       [disabled]="model.disabled"
       [min]="minYear"
       [max]="maxYear"
@@ -22,6 +32,7 @@
 
   <ds-number-picker class="date-month"
       tabindex="2"
+      [id]="model.id + '_month'"
       [min]="minMonth"
       [max]="maxMonth"
       [name]="'month'"
@@ -38,6 +49,7 @@
 
   <ds-number-picker class="date-day"
       tabindex="3"
+      [id]="model.id + '_day'"
       [min]="minDay"
       [max]="maxDay"
       [name]="'day'"

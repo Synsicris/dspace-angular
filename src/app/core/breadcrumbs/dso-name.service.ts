@@ -33,6 +33,8 @@ export class DSONameService {
       const givenName = dso.firstMetadataValue('person.givenName');
       if (isEmpty(familyName) && isEmpty(givenName)) {
         return dso.firstMetadataValue('dc.title') || dso.name;
+      } else if (isEmpty(familyName) || isEmpty(givenName)) {
+        return familyName || givenName;
       } else {
         return `${familyName}, ${givenName}`;
       }
@@ -53,16 +55,27 @@ export class DSONameService {
    * @param dso  The {@link DSpaceObject} you want a name for
    */
   getName(dso: DSpaceObject): string {
-    const types = dso.getRenderTypes();
-    const match = types
-      .filter((type) => typeof type === 'string')
-      .find((type: string) => Object.keys(this.factories).includes(type)) as string;
+    const match = this.getEntityType(dso, (type: string) => Object.keys(this.factories).includes(type));
 
+    let name;
     if (hasValue(match)) {
-      return this.factories[match](dso);
-    } else {
-      return  this.factories.Default(dso);
+      name = this.factories[match](dso);
     }
+    if (isEmpty(name)) {
+      name = this.factories.Default(dso);
+    }
+    return name;
+  }
+
+  /**
+   * Get the entity type for the given dso {@link DSpaceObject} and applies
+   * the target predicate to evaluate for the dso entityType.
+   *
+   * @param dso  The {@link DSpaceObject} you want a name for
+   * @param predicate  The predicate that the entity needs to validate
+   */
+  getEntityType(dso: DSpaceObject, predicate: (string) => boolean = () => true): string {
+    return dso.getRenderTypes().find(type => typeof type === 'string' && predicate(type)) as string;
   }
 
 }

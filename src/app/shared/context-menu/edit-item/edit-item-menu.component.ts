@@ -1,13 +1,11 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { map, mergeMap, startWith } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { hasValue, isNotEmpty } from '../../empty.util';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
-import { followLink } from '../../utils/follow-link-config.model';
-import { getAllSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../../../core/shared/operators';
-import { EditItem } from '../../../core/submission/models/edititem.model';
+import { getAllSucceededRemoteDataPayload, getPaginatedListPayload } from '../../../core/shared/operators';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
@@ -15,6 +13,7 @@ import { ContextMenuEntryComponent } from '../context-menu-entry.component';
 import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
+import { getEditItemPageRoute } from '../../../app-routing-paths';
 import { environment } from '../../../../environments/environment';
 import { Item } from '../../../core/shared/item.model';
 import { ProjectVersionService } from '../../../core/project/project-version.service';
@@ -110,11 +109,9 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
   }
 
   getData(): void {
-    this.sub = this.editItemService.findById(this.contextMenuObject.id + ':none', false, true, followLink('modes')).pipe(
+    this.sub = this.editItemService.searchEditModesById(this.contextMenuObject.id).pipe(
       getAllSucceededRemoteDataPayload(),
-      mergeMap((editItem: EditItem) => editItem.modes.pipe(
-        getFirstSucceededRemoteListPayload())
-      ),
+      getPaginatedListPayload(),
       startWith([])
     ).subscribe((editModes: EditItemMode[]) => {
       const allowedModes = editModes.filter((mode: EditItemMode) => this.isEditModeAllowed(mode));
@@ -122,7 +119,14 @@ export class EditItemMenuComponent extends ContextMenuEntryComponent implements 
     });
   }
 
+  getEditItemRoute() {
+    return getEditItemPageRoute();
+  }
+
   private isEditModeAllowed(mode: EditItemMode) {
-    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode || mode.name === 'OWNER';
+    return mode.name === environment.projects.projectsEntityAdminEditMode ||
+      mode.name === environment.projects.projectsEntityEditMode ||
+      mode.name === environment.projects.projectsEntityFunderEditMode ||
+      mode.name === 'OWNER';
   }
 }

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { mergeMap, take } from 'rxjs/operators';
+import { filter, map, mergeMap, take } from 'rxjs/operators';
 import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../core/models/impact-pathway.model';
@@ -18,7 +18,7 @@ import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-m
 import { hasValue } from '../../../shared/empty.util';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { environment } from '../../../../environments/environment';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ipw-impact-path-way',
@@ -26,6 +26,11 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './impact-path-way.component.html'
 })
 export class ImpactPathWayComponent implements OnInit {
+  /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  @Input() isFunder: boolean;
+
   /**
    * The project community's id
    */
@@ -37,6 +42,11 @@ export class ImpactPathWayComponent implements OnInit {
   @Input() public projectItemId: string;
 
   @Input() public impactPathway: ImpactPathway;
+
+  /**
+   * The impact-pathway item
+   */
+  @Input() impactPathWayItem: Item;
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
 
@@ -61,12 +71,18 @@ export class ImpactPathWayComponent implements OnInit {
    */
   canEditButton$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  /**
+   * A boolean representing if item is a version of original item
+   */
+  public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
     private authorizationService: AuthorizationDataService,
     private cdr: ChangeDetectorRef,
     private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
     private modalService: NgbModal,
+    protected aroute: ActivatedRoute,
     protected editItemDataService: EditItemDataService) {
   }
 
@@ -82,10 +98,19 @@ export class ImpactPathWayComponent implements OnInit {
         .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
     );
 
-    this.editItemDataService.checkEditModeByIDAndType(this.impactPathway.id, environment.impactPathway.impactPathwaysEditMode).pipe(
+    this.editItemDataService.checkEditModeByIdAndType(this.impactPathway.id, environment.impactPathway.impactPathwaysEditMode).pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEditButton$.next(canEdit);
+    });
+
+
+    this.aroute.data.pipe(
+      map((data) => data.isVersionOfAnItem),
+      filter((isVersionOfAnItem) => isVersionOfAnItem === true),
+      take(1)
+    ).subscribe((isVersionOfAnItem: boolean) => {
+      this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
 
   }
@@ -179,7 +204,7 @@ export class ImpactPathWayComponent implements OnInit {
    * @param version
    */
   onVersionSelected(version: Item) {
-    this.impactPathwayService.dispatchInitCompare(this.impactPathway.id, version.id);
+    this.impactPathwayService.dispatchInitCompare(this.impactPathway.id, version.id, this.isVersionOfAnItem$.value);
   }
 
   /**

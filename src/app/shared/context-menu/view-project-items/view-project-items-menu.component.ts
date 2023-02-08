@@ -19,6 +19,7 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { combineLatest } from 'rxjs/internal/observable/combineLatest';
+import { ProjectVersionService } from '../../../core/project/project-version.service';
 
 /**
  * This component renders a context menu option that provides to export an item.
@@ -29,6 +30,11 @@ import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 })
 @rendersContextMenuEntriesForType(DSpaceObjectType.ITEM)
 export class ViewProjectItemsMenuComponent extends ContextMenuEntryComponent {
+
+  /**
+   * A boolean representing if item is a version of original item
+   */
+  private isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * The project community
@@ -59,6 +65,7 @@ export class ViewProjectItemsMenuComponent extends ContextMenuEntryComponent {
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
    * @param {ProjectDataService} projectService
+   * @param {ProjectVersionService} projectVersionService
    * @param {Router} router
    */
   constructor(
@@ -66,6 +73,7 @@ export class ViewProjectItemsMenuComponent extends ContextMenuEntryComponent {
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
     protected authorizationService: AuthorizationDataService,
     protected projectService: ProjectDataService,
+    protected projectVersionService: ProjectVersionService,
     protected router: Router
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.ViewProjectItems);
@@ -76,7 +84,10 @@ export class ViewProjectItemsMenuComponent extends ContextMenuEntryComponent {
     const isMember$ = this.authorizationService.isAuthorized(FeatureID.isMemberOfProject, this.contextMenuObject.self);
     combineLatest([isMember$, isAdmin$]).pipe(
       take(1)
-    ).subscribe(([isMemberOfProject, isAdmin]) => this.canSeeItems$.next(isMemberOfProject || isAdmin));
+    ).subscribe(([isMemberOfProject, isAdmin]) => {
+      const isVersionOfAnItem = this.projectVersionService.isVersionOfAnItem((this.contextMenuObject as Item));
+      this.canSeeItems$.next(!isVersionOfAnItem && (isMemberOfProject || isAdmin));
+    });
 
     this.projectCommunity$ = this.projectService.getProjectCommunityByItemId((this.contextMenuObject as Item).uuid).pipe(
       take(1),

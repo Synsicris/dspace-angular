@@ -5,7 +5,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { Community } from '../shared/community.model';
 import { GroupDataService } from '../eperson/group-data.service';
 import { getFirstSucceededRemoteDataPayload, getFirstSucceededRemoteListPayload } from '../shared/operators';
-import { map, mergeMap, reduce, tap } from 'rxjs/operators';
+import { map, mergeMap, reduce } from 'rxjs/operators';
 import { Group } from '../eperson/models/group.model';
 import { CommunityDataService } from '../data/community-data.service';
 import { Item } from '../shared/item.model';
@@ -24,6 +24,7 @@ const FUNDING_MEMBERS_GROUP_TEMPLATE = 'funding_%s_members_group';
 
 const PROGRAMME_MANAGERS_GROUP_TEMPLATE = 'programme_%s_managers_group';
 const PROGRAMME_MEMBERS_GROUP_TEMPLATE = 'programme_%s_members_group';
+const PROGRAMME_PROJECT_FUNDERS_GROUP_TEMPLATE = 'programme_%s_funders_group';
 
 @Injectable()
 export class ProjectGroupService {
@@ -57,8 +58,17 @@ export class ProjectGroupService {
     return PROGRAMME_MEMBERS_GROUP_TEMPLATE.replace('%s', project.uuid);
   }
 
+  getProgrammeProjectFundersGroupNameByItem(project: Item): string {
+    return PROGRAMME_PROJECT_FUNDERS_GROUP_TEMPLATE.replace('%s', project.uuid);
+  }
+
   getProgrammeMembersGroupUUIDByItem(programme: Item): Observable<string[]> {
     const query = this.getProgrammeMembersGroupNameByItem(programme);
+    return this.getGroupsByQuery(query);
+  }
+
+  getProgrammeProjectFundersGroupUUIDByItem(programme: Item): Observable<string[]> {
+    const query = this.getProgrammeProjectFundersGroupNameByItem(programme);
     return this.getGroupsByQuery(query);
   }
 
@@ -119,6 +129,10 @@ export class ProjectGroupService {
     return this.getProjectMembersGroupUUIDByCommunity(project);
   }
 
+  getInvitationProjectReadersGroupsByCommunity(project: Community): Observable<string[]> {
+    return this.getProjectReadersGroupUUIDByCommunity(project);
+  }
+
   getAllFundingGroupsByCommunity(funding: Community): Observable<string[]> {
     const query = FUNDING_GROUP_TEMPLATE.replace('%s', funding.uuid);
     return this.getGroupsByQuery(query);
@@ -168,9 +182,16 @@ export class ProjectGroupService {
     const fundersProgrammeManagers$ = this.getProgrammeManagersGroupUUIDByItem(programme);
 
     return combineLatest([fundersManagers$, fundersProgrammeManagers$]).pipe(
-      tap(console.log),
-      map(([fundingMembers, projectMembers]) => [fundingMembers, ...projectMembers]),
-      tap(console.log),
+      map(([fundingMembers, projectMembers]) => [fundingMembers, ...projectMembers])
+    );
+  }
+
+  getInvitationProgrammeProjectFundersGroupByItem(programme: Item): Observable<string[]> {
+    const projectFunders$ = this.getFunderProjectManagersGroupId();
+    const programmeProjectFunders$ = this.getProgrammeProjectFundersGroupUUIDByItem(programme);
+
+    return combineLatest([projectFunders$, programmeProjectFunders$]).pipe(
+      map(([fundingMembers, projectMembers]) => [fundingMembers, ...projectMembers])
     );
   }
 

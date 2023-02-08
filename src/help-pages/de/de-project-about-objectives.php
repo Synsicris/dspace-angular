@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
- 
+
   <body class="about" id="about-objectives">
-  
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-  
+
 	  <?php /* Alte Navigation kann geloescht werden.
       <n1><a href="de-project-about.php">Über_das_Tool</a></n1><br> <!-- geprueft, unterschiedliche Titel --><!-- anderer Titel -->
 	  <n2><strong>Hintergrund_/_Ziele</strong></n2><br>
@@ -27,9 +27,9 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n1><a href="de-project-step.php">Nutzung_im_Projektverlauf</a></n1><br> <!-- geprueft, unterschiedliche Titel -->
 	  <n1><a href="de-project-details.php">Details</a></n1> <!-- Datei fehlt -->
 	  */ ?>
-      
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
-  
+
 	<main>
       <h1>Hintergrund</h1>
 
@@ -56,18 +56,18 @@ Beide Elemente sollen innerhalb von Forschungsförderprozessen eingesetzt werden
 
 		<article>
 
-	<img src="img/de_about_objectives_was_erarbeitet_synsicris.png">
+	<img src="img/de_project_about_objectives_was_erarbeitet_synsicris.png">
   </article>
 </br>
 
 <article>
-  	<img src="img/de_about_objectives_wie_und_zu_welchem_zweck.png">
+  	<img src="img/de_project_about_objectives_wie_und_zu_welchem_zweck.png">
   </article>
 
 </br>
 
 <article>
-    	<img src="img/de_about_objectives_erwartete_wirkungen.png">
+    	<img src="img/de_project_about_objectives_erwartete_wirkungen.png">
     </article>
 
   </br>
@@ -98,14 +98,14 @@ Beide Elemente sollen innerhalb von Forschungsförderprozessen eingesetzt werden
     <article>
 
 
-      	<img src="img/de_about_objectives_wie_wirkungen_wahrscheinlich_werden.png">
+      	<img src="img/de_project_about_objectives_wie_wirkungen_wahrscheinlich_werden.png">
 
     </article>
     </br>
 
     <article>
 
-      	<img src="img/de_about_objectives_multidimensionales_Kriterien_Set.png">
+      	<img src="img/de_project_about_objectives_multidimensionales_Kriterien_Set.png">
 
     </article>
   </br>
@@ -114,7 +114,8 @@ Beide Elemente sollen innerhalb von Forschungsförderprozessen eingesetzt werden
       <h2>Mehr zum SynSICRIS-Projekt</h2>
       <p>Pdf vom Infobrief
       </br>
-https://www.uni-kassel.de/forschung/synsicris/ueber-das-projekt
+      <a href="https://www.uni-kassel.de/forschung/synsicris/ueber-das-projekt">Homepage des SynSICRIS-Projekts</a>
+
 </p>
 
     </article>
@@ -123,6 +124,6 @@ https://www.uni-kassel.de/forschung/synsicris/ueber-das-projekt
 
 
 	<?php include("includes/footer.inc.php"); echo "\n";?>
-    
+
   </body>
 </html>

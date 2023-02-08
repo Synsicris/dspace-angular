@@ -1,0 +1,21 @@
+<ng-container *ngIf="(version$ | async) && (projectItem$ | async)">
+  <div class="space-children-mr">
+    <span class="badge badge-pill badge-primary"
+        data-test="version-info-badge">
+        <span *ngIf="!!version$.value.summary;else noSummary">
+          {{'view.version.badges.version' | translate}}&nbsp;:&nbsp;{{ version$.value.summary }}
+        </span>
+    </span>
+    <ng-template #noSummary>
+      {{'view.version.badges.version' | translate}}&nbsp;:&nbsp;{{ 'view.version.badges.noSummary' | translate }}
+    </ng-template>
+    <span class="badge badge-pill" [ngClass]="{ 'badge-primary': withinWeek, 'badge-warning': !withinWeek }"
+          data-test="version-date-badge">
+        {{'view.version.badges.date' | translate}}&nbsp;:&nbsp;{{ version$.value.created | date:'dd MMM y' }}
+    </span>
+    <span class="badge badge-pill badge-info" data-test="official-badge">
+        {{ (projectItem$.value.firstMetadataValue('synsicris.version.official') === 'true' ? 'view.version.badges.official' :
+        'view.version.badges.nonOfficial') | translate }}
+    </span>
+  </div>
+</ng-container>

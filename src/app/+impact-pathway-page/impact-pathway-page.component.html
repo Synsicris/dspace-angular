@@ -1,3 +1,6 @@
-<ipw-dashboard [projectCommunityId]="(projectCommunityId$ | async)"
+<ipw-dashboard *ngIf="(impactPathWayItem$ | async)"
+               [isFunder]="(isFunder$ | async)"
+               [projectCommunityId]="(projectCommunityId$ | async)"
                [projectItemId]="(projectItemId$ | async)"
-               [impactPathwayId]="(impactPathwayId$ | async)"></ipw-dashboard>
+               [impactPathwayId]="(impactPathwayId$ | async)"
+               [impactPathWayItem]="(impactPathWayItem$ | async)"></ipw-dashboard>

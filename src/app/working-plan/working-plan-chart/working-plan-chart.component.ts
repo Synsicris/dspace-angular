@@ -13,6 +13,16 @@ import { Item } from '../../core/shared/item.model';
 export class WorkingPlanChartComponent {
 
   /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  @Input() isFunder: boolean;
+
+  /**
+   * If the working-plan given is a version item
+   */
+  @Input() isVersionOf: boolean;
+
+  /**
    * The current project community's id
    */
   @Input() public projectCommunityId: string;

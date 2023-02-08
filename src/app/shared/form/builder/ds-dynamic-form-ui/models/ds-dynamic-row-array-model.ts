@@ -6,7 +6,7 @@ import {
   serializable
 } from '@ng-dynamic-forms/core';
 import { RelationshipOptions } from '../../models/relationship-options.model';
-import { isNotUndefined } from '../../../../empty.util';
+import { hasValue } from '../../../../empty.util';
 
 export interface DynamicRowArrayModelConfig extends DynamicFormArrayModelConfig {
   notRepeatable: boolean;
@@ -20,6 +20,7 @@ export interface DynamicRowArrayModelConfig extends DynamicFormArrayModelConfig 
   showButtons: boolean;
   typeBindRelations?: DynamicFormControlRelation[];
   isInlineGroupArray?: boolean;
+  hint?: string;
 }
 
 export class DynamicRowArrayModel extends DynamicFormArrayModel {
@@ -34,18 +35,19 @@ export class DynamicRowArrayModel extends DynamicFormArrayModel {
   @serializable() showButtons = true;
   @serializable() typeBindRelations: DynamicFormControlRelation[];
   @serializable() toggleSecurityVisibility?: boolean;
+  @serializable() hint?: string;
   isRowArray = true;
   isInlineGroupArray = false;
 
   constructor(config: DynamicRowArrayModelConfig, layout?: DynamicFormControlLayout) {
     super(config, layout);
-    if (isNotUndefined(config.notRepeatable)) {
+    if (hasValue(config.notRepeatable)) {
       this.notRepeatable = config.notRepeatable;
     }
-    if (isNotUndefined(config.required)) {
+    if (hasValue(config.required)) {
       this.required = config.required;
     }
-    if (isNotUndefined(config.showButtons)) {
+    if (hasValue(config.showButtons)) {
       this.showButtons = config.showButtons;
     }
     this.submissionId = config.submissionId;
@@ -57,6 +59,7 @@ export class DynamicRowArrayModel extends DynamicFormArrayModel {
     this.typeBindRelations = config.typeBindRelations ? config.typeBindRelations : [];
     this.isInlineGroupArray = config.isInlineGroupArray ? config.isInlineGroupArray : false;
     this.toggleSecurityVisibility = false;
+    this.hint = config.hint;
   }
 
 }

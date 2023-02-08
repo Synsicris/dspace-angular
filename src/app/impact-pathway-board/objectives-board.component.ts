@@ -20,6 +20,11 @@ export class ObjectivesBoardComponent implements OnInit {
   @Input() public projectCommunityId: string;
   @Input() public impactPathwayStepId: string;
 
+  /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  @Input() isFunder: boolean;
+
   public targetImpactPathwayTaskId$: Observable<string>;
 
   private impactPathWayStep$: Observable<ImpactPathwayStep>;

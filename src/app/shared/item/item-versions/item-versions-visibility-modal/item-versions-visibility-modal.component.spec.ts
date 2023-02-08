@@ -4,10 +4,48 @@ import { ItemVersionsVisibilityModalComponent } from './item-versions-visibility
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { VersionHistory } from '../../../../core/shared/version-history.model';
+import { Version } from '../../../../core/shared/version.model';
+import { createSuccessfulRemoteDataObject$ } from '../../../../shared/remote-data.utils';
 
-describe('ItemVersionsVisibilityModalComponent', () => {
+fdescribe('ItemVersionsVisibilityModalComponent', () => {
   let component: ItemVersionsVisibilityModalComponent;
   let fixture: ComponentFixture<ItemVersionsVisibilityModalComponent>;
+  const versionHistory = Object.assign(new VersionHistory(), {
+    id: '1',
+    draftVersion: true,
+  });
+
+  const version1 = Object.assign(new Version(), {
+    id: '1',
+    version: 1,
+    created: new Date(2020, 1, 1),
+    summary: 'first version',
+    versionhistory: createSuccessfulRemoteDataObject$(versionHistory),
+    _links: {
+      self: {
+        href: 'version2-url',
+      },
+    },
+  });
+
+  const versionHistory2 = Object.assign(new VersionHistory(), {
+    id: '1',
+    draftVersion: true,
+  });
+
+  const version2 = Object.assign(new Version(), {
+    id: '1',
+    version: 1,
+    created: new Date(2020, 1, 1),
+    summary: 'first version',
+    versionhistory: createSuccessfulRemoteDataObject$(versionHistory),
+    _links: {
+      self: {
+        href: 'version2-url',
+      },
+    },
+  });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,6 +60,7 @@ describe('ItemVersionsVisibilityModalComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ItemVersionsVisibilityModalComponent);
     component = fixture.componentInstance;
+    component.version = version1;
     fixture.detectChanges();
   });
 

@@ -7,7 +7,8 @@ import { Store } from '@ngrx/store';
 
 import { RemoteData } from '../../core/data/remote-data';
 import { Item } from '../../core/shared/item.model';
-import { getFirstSucceededRemoteDataPayload, redirectOn4xx } from '../../core/shared/operators';
+import { redirectOn4xx } from '../../core/shared/authorized.operators';
+import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
 import { ImpactPathwayService } from '../../impact-pathway-board/core/impact-pathway.service';
 import { AppState } from '../../app.reducer';
 import { InitImpactPathwayAction } from '../../impact-pathway-board/core/impact-pathway.actions';
@@ -28,7 +29,7 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
    * The item's id
    */
   id: number;
-
+  isFunder$: Observable<boolean>;
   /**
    * The objectives item's id
    */
@@ -58,6 +59,10 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
    * Initialize instance variables
    */
   ngOnInit(): void {
+    this.isFunder$ = this.route.data.pipe(
+      map((data) => data.isFunder as boolean)
+    );
+
     const targetItemId$ = this.route.queryParams.pipe(
       take(1),
       map((params) => params.target)

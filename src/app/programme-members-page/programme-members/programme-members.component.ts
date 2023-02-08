@@ -40,6 +40,11 @@ export class ProgrammeMembersComponent implements OnInit {
    */
   @Input() isFundersGroup: boolean;
 
+  /**
+   * Representing if managing a programme organizational manager group or not
+   */
+  @Input() isManagersGroup: boolean;
+
   groupBeingEdited: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
@@ -74,7 +79,9 @@ export class ProgrammeMembersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.isFundersGroup) {
+    if (this.isManagersGroup) {
+      this.helpMessageLabel = this.messagePrefix + '.members.managers-group-help';
+    } else if (this.isFundersGroup) {
       this.helpMessageLabel = this.messagePrefix + '.members.funders-group-help';
     } else {
       this.helpMessageLabel = this.messagePrefix + '.members.members-group-help';
@@ -116,7 +123,6 @@ export class ProgrammeMembersComponent implements OnInit {
 
       if (successfulReq.length === groups.length) {
         this.notificationsService.success(this.translateService.get(this.messagePrefix + '.members-list.notification.success.addMember'));
-        this.refreshGroupsMembers();
       } else {
         this.notificationsService.error(this.translateService.get(this.messagePrefix + '.members-list.notification.failure.noActiveGroup'));
       }
@@ -134,7 +140,6 @@ export class ProgrammeMembersComponent implements OnInit {
     ).subscribe((group: RemoteData<Group>) => {
       if (group.hasSucceeded) {
         this.notificationsService.success(this.translateService.get(this.messagePrefix + '.members-list.notification.success.deleteMember'));
-        this.refreshGroupsMembers();
       } else {
         this.notificationsService.error(this.translateService.get(this.messagePrefix + '.members-list.notification.failure.noActiveGroup'));
       }
@@ -144,7 +149,6 @@ export class ProgrammeMembersComponent implements OnInit {
   ngOnDestroy(): void {
     this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
   }
-
   sendInvitation(email?: string) {
     this.getGroups().pipe(take(1))
       .subscribe((groups: string[]) => {
@@ -156,8 +160,10 @@ export class ProgrammeMembersComponent implements OnInit {
 
   private getGroups(): Observable<string[]> {
     let groups$: Observable<string[]>;
-    if (this.isFundersGroup) {
+    if (this.isManagersGroup) {
       groups$ = this.projectGroupService.getInvitationProgrammeFunderOrganizationalManagersGroupByItem(this.relatedItem);
+    } else if (this.isFundersGroup) {
+      groups$ = this.projectGroupService.getInvitationProgrammeProjectFundersGroupByItem(this.relatedItem);
     } else {
       groups$ = of([this.targetGroup.uuid]);
     }
@@ -169,10 +175,6 @@ export class ProgrammeMembersComponent implements OnInit {
     return this.groupService.findById(groupId).pipe(
       getFirstCompletedRemoteData()
     );
-  }
-
-  private refreshGroupsMembers(): void {
-    this.epersonService.clearLinkRequests(this.targetGroup._links.epersons.href);
   }
 
 }

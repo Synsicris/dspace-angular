@@ -1,7 +1,7 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -19,6 +19,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 import { isNotEmpty } from '../../empty.util';
 import { environment } from '../../../../environments/environment';
+import { ProjectVersionService } from '../../../core/project/project-version.service';
+import {
+  getFirstCompletedRemoteData,
+  getPaginatedListPayload,
+  getRemoteDataPayload
+} from '../../../core/shared/operators';
 
 /**
  * This component represents mydspace actions related to Item object.
@@ -39,7 +45,7 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   /**
    * A boolean representing if edit permission button can be shown
    */
-  @Input() showEditPermission = true;
+  @Input() showEditPermission = false;
 
   /**
    * A boolean representing if component is redirecting to edit page
@@ -60,6 +66,11 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   private canEditGrants$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * The edit mode to use
+   */
+  private projectsEntityEditMode: string;
+
+  /**
    * Initialize instance variables
    *
    * @param {AuthorizationDataService} authorizationService
@@ -70,33 +81,50 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    * @param {SearchService} searchService
    * @param {RequestService} requestService
    * @param {EditItemDataService} editItemDataService
+   * @param {ProjectVersionService} projectVersionService
    * @param {NgbModal} modalService
    */
   constructor(protected authorizationService: AuthorizationDataService,
-    protected injector: Injector,
-    protected router: Router,
-    protected notificationsService: NotificationsService,
-    protected translate: TranslateService,
-    protected searchService: SearchService,
-    protected requestService: RequestService,
-    protected editItemDataService: EditItemDataService,
-    protected modalService: NgbModal) {
+              protected injector: Injector,
+              protected router: Router,
+              protected notificationsService: NotificationsService,
+              protected translate: TranslateService,
+              protected searchService: SearchService,
+              protected requestService: RequestService,
+              protected editItemDataService: EditItemDataService,
+              protected projectVersionService: ProjectVersionService,
+              protected modalService: NgbModal) {
     super(Item.type, injector, router, notificationsService, translate, searchService, requestService);
   }
 
-
   ngOnInit(): void {
-    this.editItemDataService.checkEditModeByIDAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
-      take(1)
-    ).subscribe((canEdit: boolean) => {
-      this.canEdit$.next(canEdit);
-    });
+    if (this.projectVersionService.isVersionOfAnItem(this.object)) {
+      this.canEdit$.next(false);
+      this.canEditGrants$.next(false);
+    } else {
+      const adminEdit$ = this.editItemDataService.checkEditModeByIdAndType(this.object.id, environment.projects.projectsEntityAdminEditMode).pipe(
+        take(1)
+      );
+      const userEdit$ = this.editItemDataService.checkEditModeByIdAndType(this.object.id, environment.projects.projectsEntityEditMode).pipe(
+        take(1)
+      );
 
-    this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.object.self, undefined).pipe(
-      take(1)
-    ).subscribe((canEdit: boolean) => {
-      this.canEditGrants$.next(canEdit);
-    });
+      combineLatest([adminEdit$, userEdit$]).subscribe(([canAdminEdit, canUserEdit]: [boolean, boolean]) => {
+        if (canUserEdit) {
+          this.projectsEntityEditMode = environment.projects.projectsEntityEditMode;
+        } else if (canAdminEdit) {
+          this.projectsEntityEditMode = environment.projects.projectsEntityAdminEditMode;
+        }
+
+        this.canEdit$.next(canAdminEdit || canUserEdit);
+      });
+
+      this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.object.self, undefined).pipe(
+        take(1)
+      ).subscribe((canEdit: boolean) => {
+        this.canEditGrants$.next(canEdit);
+      });
+    }
   }
 
   /**
@@ -127,7 +155,10 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
    */
   public navigateToEditItemPage(): void {
     this.isRedirectingToEdit$.next(true);
-    this.editItemDataService.searchEditModesByID(this.object.id).pipe(
+    this.editItemDataService.searchEditModesById(this.object.id).pipe(
+      getFirstCompletedRemoteData(),
+      getRemoteDataPayload(),
+      getPaginatedListPayload(),
       filter((editModes: EditItemMode[]) => editModes && editModes.length > 0),
       map((editModes: EditItemMode[]) => editModes.filter((mode: EditItemMode) => this.isEditModeAllowed(mode))),
       map((editModes: EditItemMode[]) => editModes[0]),
@@ -139,7 +170,8 @@ export class ItemActionsComponent extends MyDSpaceActionsComponent<Item, ItemDat
   }
 
   private isEditModeAllowed(mode: EditItemMode) {
-    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode || mode.name === 'OWNER';
+    return mode.name === 'FULL' || mode.name === environment.projects.projectsEntityEditMode
+      || mode.name === environment.projects.projectsEntityAdminEditMode || mode.name === 'OWNER';
   }
 
   /**

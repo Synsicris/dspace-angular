@@ -8,6 +8,15 @@
     </button>
   </h1>
   <hr/>
+  <div class="w-100 mb-2 d-flex justify-content-end">
+    <ds-item-version-list class="float-right"
+                          [btnClass]="'btn-md'"
+                          [showOnlyVisible]="isFunder"
+                          [targetItemId]="impactPathwayStep.id"
+                          (versionSelected)="onVersionSelected($event)"
+                          (versionDeselected)="onVersionDeselected()">
+    </ds-item-version-list>
+  </div>
   <ds-alert *ngIf="hasInfoMessage()" class="bg-light"
             [dismissible]="false"
             [collapsible]="true"
@@ -17,6 +26,7 @@
     <ipw-objective [projectCommunityId]="projectCommunityId"
                    [impactPathwayStep]="impactPathwayStep"
                    [impactPathwayTask]="task"
+                   [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"
                    [targetImpactPathwayTaskId]="targetImpactPathwayTaskId"
     ></ipw-objective>
   </ng-container>

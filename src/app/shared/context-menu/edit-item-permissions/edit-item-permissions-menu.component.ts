@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { Item } from '../../../core/shared/item.model';
@@ -13,7 +13,9 @@ import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 import { isNotEmpty } from '../../empty.util';
-import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
+import { FUNDING_ENTITY } from '../../../core/project/project-data.service';
+import { ActivatedRoute } from '@angular/router';
+import { filter, map, take } from 'rxjs/operators';
 
 
 /**
@@ -43,9 +45,9 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
   public modalRef: NgbModalRef;
 
   /**
-   * A boolean representing if user can edit grants
+   * A boolean representing if the menu entry can be shown
    */
-  private canEditGrants$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private canShow$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * Initialize instance variables
@@ -54,35 +56,41 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
    * @param {DSpaceObjectType} injectedContextMenuObjectType
    * @param {AuthorizationDataService} authorizationService
    * @param {NgbModal} modalService
+   * @param {ActivatedRoute} aroute
    */
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
     protected authorizationService: AuthorizationDataService,
     protected modalService: NgbModal,
+    protected aroute: ActivatedRoute,
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.EditSubmission);
   }
 
   ngOnInit(): void {
-    this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.contextMenuObject.self, undefined)
-      .subscribe((canEdit) => {
-        this.canEditGrants$.next(canEdit);
-      });
+
+    if ((this.contextMenuObject as Item).entityType === FUNDING_ENTITY) {
+      const isVersionOfAnItem$ = this.aroute.data.pipe(
+        map((data) => data.isVersionOfAnItem),
+        filter((isVersionOfAnItem) => isVersionOfAnItem === true),
+        take(1)
+      );
+
+      const canEdit$ = this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.contextMenuObject.self, undefined);
+
+      combineLatest([isVersionOfAnItem$, canEdit$])
+        .subscribe(([isVersionOfAnItem, canEdit]: [boolean, boolean]) => {
+          this.canShow$.next(!isVersionOfAnItem && canEdit);
+        });
+    }
   }
 
   /**
-   * Check if current Item is a not Project
+   * Check if current menu entry can be shown
    */
   canShow() {
-    return (this.contextMenuObject as Item).entityType !== PROJECT_ENTITY;
-  }
-
-  /**
-   * Check if edit grants is available
-   */
-  isEditPermissionAvailable(): Observable<boolean> {
-    return this.canEditGrants$.asObservable();
+    return this.canShow$.asObservable();
   }
 
   /**

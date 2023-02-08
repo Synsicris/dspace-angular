@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
 
   <body class="about" id="about-difference">
-  
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-  
+
 	 <?php /* Alte Navigation kann geloescht werden.
 	 <h1>&nbsp;</h1>
 	 <!-- Platzhalter deutsch / englisch für Auswahl anderer Sprache -->
@@ -29,7 +29,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n1><a href="de-project-step.php">Nutzung_im_Projektverlauf</a></n1><br> <!-- geprueft, unterschiedliche Titel -->
 	  <n1><a href="de-project-details.php">Details</a></n1> <!-- Datei fehlt -->
 	 */ ?>
-  
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
 	<main>
       <h1>Ziele und Nutzen für Forschende</h1>
@@ -40,15 +40,14 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
         <ul>
               <li>Statt Fließtext in einem Textdokument zu einem bestimmten Gliederungspunkt
                 der Vorhabensbeschreibung zu schreiben, zerlegen Sie <strong>die Informationen zum
-                Projekt in einzelne Einträge</strong>. Jeder Eintrag gehört zu einem bestimmten Bereich
+                Projekt in einzelne Einträge</strong>. Jeder Eintrag gehört zu einer bestimmten Kategorie
                 (z.B. Arbeitspaket oder Veranstaltung).</li>
-              <li>Über die Einträge in den verschiedenen Bereichen stellen Sie <strong> Hintergründe,
+              <li>Über die Einträge in den verschiedenen Kategorien stellen Sie <strong> Hintergründe,
                 Ziele, Arbeiten, Ergebnisse und Wirkungen des Projektes </strong>dar. </li>
               <li>Jeder Eintrag hat eine Bezeichnung und ein Beschreibungsfeld und je nach
-                Bereich eines Eintrags werden weitere Informationen erfragt. </li>
-              <li>Im Tool finden Sie einen Arbeitsplan, den Impact-Pathway für die Wirkungsplanung
-                und den Verwertungsplan, in denen Sie die einzelnen Einträge anlegen und strukturiert
-                darstellen können. </li>
+                Kategorie eines Eintrags werden weitere Informationen erfragt. </li>
+              <li>Im Tool finden Sie einen Arbeitsplan, den Wirkungspfad
+                und den Verwertungsplan, in denen Sie die einzelnen Einträge wie an einer Pinnwand an- und abpinnen können, um sie zu strukturieren. </li>
               <li>Durch diese Strukturierung des Tools können Sie jederzeit von den Übersichten in die Detailseiten der Einträge wechseln.</li>
 
         </ul>
@@ -57,11 +56,18 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 
 		</article>
+
+
+
+  <article>
+
+
+
+        <p><img src="img/de_project_about_difference_Teile_ersetzen.png"></p>
+
+
+      </article>
   </br>
-
-
-
-
 
   <p>
     <article>
@@ -105,20 +111,22 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
     </article>
 
     <br>
+    <article>
 
-<p>
-      <article>
-          <img src="img/de_project_about_difference_Informationen_Formen.png">
-      </article>
-</p>
-    </br>
+
+
+          <p><img src="img/de_project_about_difference_Informationen_Formen.png"></p>
+
+
+        </article>
+  </br>
 
     </main>
 
 
   <footer align="center">
      <p>Kontakt: <a href="mailto:support@synsicris.de">support@synsicris.de</a> </p>
-     <p>© 2021 by SynSICRIS: Universität Kassel & Disy Informationssysteme GmbH</p>
+     <p>© 2023 by SynSICRIS: Universität Kassel & Disy Informationssysteme GmbH</p>
   </footer>
   </body>
 </html>

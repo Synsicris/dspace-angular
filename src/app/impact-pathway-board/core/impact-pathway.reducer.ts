@@ -9,6 +9,10 @@ import {
   EditImpactPathwayTaskLinksAction,
   ImpactPathwayActions,
   ImpactPathwayActionTypes,
+  InitCompareAction,
+  InitCompareStepTaskAction,
+  InitCompareStepTaskSuccessAction,
+  InitCompareSuccessAction,
   InitImpactPathwaySuccessAction,
   MoveImpactPathwaySubTaskAction,
   MoveImpactPathwaySubTaskErrorAction,
@@ -20,15 +24,13 @@ import {
   RemoveImpactPathwaySuccessAction,
   RemoveImpactPathwayTaskLinkAction,
   RemoveImpactPathwayTaskSuccessAction,
+  SetImpactPathwaySubTaskCollapseAction,
   SetImpactPathwayTargetTaskAction,
+  StopCompareImpactPathwayAction,
+  StopCompareImpactPathwayStepTaskAction,
   UpdateImpactPathwayAction,
   UpdateImpactPathwaySubTaskAction,
-  UpdateImpactPathwayTaskAction,
-  SetImpactPathwaySubTaskCollapseAction,
-  ClearImpactPathwaySubtaskCollapseAction,
-  InitCompareAction,
-  InitCompareSuccessAction,
-  StopCompareImpactPathwayAction
+  UpdateImpactPathwayTaskAction
 } from './impact-pathway.actions';
 import { ImpactPathwayStep } from './models/impact-pathway-step.model';
 import { ImpactPathwayTask } from './models/impact-pathway-task.model';
@@ -69,6 +71,7 @@ export interface ImpactPathwayLinks {
  */
 export interface ImpactPathwayState {
   objects: ImpactPathwayEntries;
+  objectsBeforeCompare: ImpactPathwayEntries;
   loaded: boolean;
   processing: boolean;
   removing: boolean;
@@ -76,10 +79,13 @@ export interface ImpactPathwayState {
   links: ImpactPathwayLinks;
   collapsed: any;
   compareMode: boolean;
+  compareImpactPathwayId: string;
+  compareImpactPathwayStepId: string;
 }
 
 const impactPathwayInitialState: ImpactPathwayState = {
   objects: {},
+  objectsBeforeCompare: {},
   loaded: false,
   processing: false,
   removing: false,
@@ -97,7 +103,9 @@ const impactPathwayInitialState: ImpactPathwayState = {
     toDelete: []
   },
   collapsed: {},
-  compareMode: false
+  compareMode: false,
+  compareImpactPathwayId: '',
+  compareImpactPathwayStepId: ''
 };
 
 /**
@@ -183,6 +191,18 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
       return replaceImpactPathwaySteps(state, action as InitCompareSuccessAction);
     }
 
+    case ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK: {
+      return initCompareStepTask(state, action as InitCompareStepTaskAction);
+    }
+
+
+    case ImpactPathwayActionTypes.STOP_COMPARE_IMPACT_PATHWAY_STEP_TASK: {
+      return stopCompareStepTask(state, action as StopCompareImpactPathwayStepTaskAction);
+    }
+
+    case ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY_STEP_TASK_SUCCESS: {
+      return replaceImpactPathwayTaskSubtasks(state, action as InitCompareStepTaskSuccessAction);
+    }
 
     case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_SUCCESS: {
       return addImpactPathwayTaskToImpactPathwayStep(state, action as AddImpactPathwayTaskSuccessAction);
@@ -252,7 +272,7 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
       );
     }
 
-    case ImpactPathwayActionTypes.SET_IMPACT_PATHWAY_SUBTASK_COLLAPSE: {
+    case ImpactPathwayActionTypes.SET_IMPACT_PATHWAY_TASK_COLLAPSE: {
       return SetImpactPathwaySubTaskCollapse(
         state,
         (action as SetImpactPathwaySubTaskCollapseAction).payload.impactPathwayStepId,
@@ -261,10 +281,8 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
       );
     }
 
-    case ImpactPathwayActionTypes.CLEAR_IMPACT_PATHWAY_SUBTASK_COLLAPSE: {
-      return clearImpactPathwaySubTaskCollapse(
-        state
-      );
+    case ImpactPathwayActionTypes.CLEAR_IMPACT_PATHWAY_TASK_COLLAPSE: {
+      return clearImpactPathwaySubTaskCollapse(state);
     }
 
     case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_LINK: {
@@ -363,7 +381,7 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
 }
 
 /**
- * Init a impact pathway object.
+ * Init an impact pathway object.
  *
  * @param state
  *    the current state
@@ -383,7 +401,7 @@ function initImpactPathway(state: ImpactPathwayState, action: InitImpactPathwayS
 }
 
 /**
- * Remove a impact pathway object.
+ * Remove an impact pathway object.
  *
  * @param state
  *    the current state
@@ -407,7 +425,7 @@ function removeImpactPathway(state: ImpactPathwayState, action: RemoveImpactPath
 }
 
 /**
- * Init a impact pathway object.
+ * Init an impact pathway object.
  *
  * @param state
  *    the current state
@@ -464,7 +482,7 @@ function normalizeImpactPathwayObjectsOnRehydrate(state: ImpactPathwayState) {
 }
 
 /**
- * Init a impact pathway sub-task to parent.
+ * Init an impact pathway sub-task to parent.
  *
  * @param state
  *    the current state
@@ -572,7 +590,7 @@ function RemoveImpactPathwaySubTaskFromImpactPathwayTask(state: ImpactPathwaySta
 }
 
 /**
- * Init a impact pathway object.
+ * Init an impact pathway object.
  *
  * @param state
  *    the current state
@@ -591,7 +609,7 @@ function replaceImpactPathway(state: ImpactPathwayState, action: UpdateImpactPat
 }
 
 /**
- * Init a impact pathway object.
+ * Init an impact pathway object.
  *
  * @param state
  *    the current state
@@ -775,6 +793,8 @@ function setImpactPathwayTasks(
  *    the impactPathway's Id
  * @param stepId
  *    the impactPathway step's Id
+ * @param parentTaskId
+ *    the impactPathway task parent id
  * @param previousParentTasks
  *    the impactPathway task list to revert
  * @return ImpactPathwayState
@@ -899,7 +919,6 @@ function SetImpactPathwaySubTaskCollapse(
   impactPathwayTaskId: string,
   value: boolean
 ) {
-  const newState = Object.assign({}, state);
   let collapsed = Object.assign({}, state.collapsed);
 
   if (!collapsed[impactPathwayStepId]) {
@@ -943,7 +962,7 @@ function initCompare(state: ImpactPathwayState, action: InitCompareAction) {
   return Object.assign({}, state, {
     compareImpactPathwayId: action.payload.compareImpactPathwayId,
     compareMode: true,
-    processing:true
+    processing: true
   });
 }
 
@@ -958,7 +977,10 @@ function initCompare(state: ImpactPathwayState, action: InitCompareAction) {
  *    the new state.
  */
 function stopCompare(state: ImpactPathwayState, action: StopCompareImpactPathwayAction) {
+  const objectsBeforeCompare = Object.assign({}, state.objectsBeforeCompare);
   return Object.assign({}, state, {
+    objects: objectsBeforeCompare,
+    objectsBeforeCompare: {},
     compareImpactPathwayId: null,
     compareMode: false,
   });
@@ -978,12 +1000,84 @@ function stopCompare(state: ImpactPathwayState, action: StopCompareImpactPathway
 function replaceImpactPathwaySteps(state: ImpactPathwayState, action: InitCompareSuccessAction) {
 
   const objects = state.objects;
+  const objectsBeforeCompare = Object.assign({}, state.objects);
 
   return Object.assign({}, state, { processing: false }, {
     objects: Object.assign({}, objects, {
       [action.payload.impactPathwayId]: Object.assign(new ImpactPathway(), objects[action.payload.impactPathwayId], { steps: action.payload.steps })
-    })
+    }),
+    objectsBeforeCompare
   });
 
+}
+
+
+
+/**
+ * Init state for comparing.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitCompareStepTaskAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function initCompareStepTask(state: ImpactPathwayState, action: InitCompareStepTaskAction) {
+  return Object.assign({}, state, {
+    compareImpactPathwayStepId: action.payload.compareImpactPathwayStepId,
+    compareMode: true
+  });
+}
+
+/**
+ * Stop state for comparing.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an StopCompareImpactPathwayStepTaskAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function stopCompareStepTask(state: ImpactPathwayState, action: StopCompareImpactPathwayStepTaskAction) {
+  const objectsBeforeCompare = Object.assign({}, state.objectsBeforeCompare);
+  return Object.assign({}, state, {
+    objects: objectsBeforeCompare,
+    objectsBeforeCompare: {},
+    compareImpactPathwayId: null,
+    compareMode: false,
+  });
+}
+
+/**
+ * replace impact pathway steps & tasks.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an InitCompareStepTaskSuccessAction
+ * @return ImpactPathwayState
+ *    the new state.
+ */
+function replaceImpactPathwayTaskSubtasks(state: ImpactPathwayState, action: InitCompareStepTaskSuccessAction) {
+  const objectsBeforeCompare = Object.assign({}, state.objects);
+  const newState = Object.assign({}, state);
+  const step: ImpactPathwayStep = newState.objects[action.payload.impactPathwayId].getStep(action.payload.impactPathwayStepId);
+  const stepIndex: number = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.impactPathwayStepId);
+  const newStep = Object.assign(new ImpactPathwayStep(), step, {
+    tasks: [...action.payload.tasks]
+  });
+  const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[action.payload.impactPathwayId], {
+    steps: newState.objects[action.payload.impactPathwayId].steps.map((stepEntry, index) => {
+      return (index === stepIndex) ? newStep : stepEntry;
+    })
+  });
+  return Object.assign({}, state, {
+    objects: Object.assign({}, state.objects, {
+      [action.payload.impactPathwayId]: newImpactPathway
+    }),
+    objectsBeforeCompare
+  });
 }
 
