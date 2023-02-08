@@ -41,7 +41,7 @@ const MODULES = [
   CreateSimpleItemModule,
   EditSimpleItemModalModule,
   ComcolModule,
-  ItemDetailPageModalModule
+  ItemDetailPageModalModule,
   CrisLayoutModule,
 ];
 
