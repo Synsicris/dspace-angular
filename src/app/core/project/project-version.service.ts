@@ -4,14 +4,14 @@ import { combineLatest, from, Observable, of } from 'rxjs';
 import { concatMap, map, mergeMap, reduce, switchMap } from 'rxjs/operators';
 import { differenceWith, findIndex, unionWith } from 'lodash';
 
-import { RelationshipService } from '../data/relationship.service';
+import { RelationshipDataService } from '../data/relationship-data.service';
 import { ItemDataService } from '../data/item-data.service';
 import { followLink } from '../../shared/utils/follow-link-config.model';
 import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../shared/operators';
 import { RemoteData } from '../data/remote-data';
 import { Item } from '../shared/item.model';
 import { PaginatedList } from '../data/paginated-list.model';
-import { FindListOptions } from '../data/request.models';
+import { FindListOptions } from '../data/find-list-options.model';
 import { MetadataValue } from '../shared/metadata.models';
 import { _hasVersionComparator, _isVersionOfComparator, _unionComparator, hasVersion } from './project-version.util';
 import { VersionDataService } from '../data/version-data.service';
@@ -30,7 +30,9 @@ export enum ComparedVersionItemStatus {
   Changed = 'changed',
   New = 'new',
   Removed = 'removed',
-  Equal = 'equal'
+  Equal = 'equal',
+  Canceled = 'canceled',
+  Done = 'done'
 }
 
 export interface ComparedVersionItem {
@@ -51,7 +53,7 @@ export class ProjectVersionService {
   protected lastVersionDiscoveryConfig = environment.projects.lastVersionDiscoveryConfig;
 
   constructor(protected itemService: ItemDataService,
-    protected relationshipService: RelationshipService,
+    protected relationshipService: RelationshipDataService,
     protected searchService: SearchService,
     protected versionService: VersionDataService,
     protected versionHistoryService: VersionHistoryDataService,

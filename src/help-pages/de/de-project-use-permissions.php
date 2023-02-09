@@ -33,57 +33,52 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  */ ?>
 
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
-	<main>
+  <main>
 
 
-      <h1>Bearbeitungsrechte festlegen</h1>
+        <h1>Bearbeitungsrechte festlegen</h1>
 
-		<article>
-		<h1>Bearbeitungsrechte beim Anlegen eines Teilprojektes festlegen</h1>
-		<p>Wenn Sie ein Teilprojekt anlegen, können Sie zwischen zwei Optionen von Bearbeitungsrechten auswählen. Diese Bearbeitungsrechte gelten für Inhalte, die von den Mitgliedern Ihres Teilprojektes angelegt wurden:
-        <ul>
-          <li><strong>Option A:</strong> unbeschränkte Bearbeitungsrechte für <strong>alle Mitglieder</strong> des Verbundprojektes</li>
-          <li><strong>Option B:</strong> Bearbeitungsrechte <strong>beschränkt auf Mitglieder des Verbundes</strong></li>
-        </ul>
+  		<article>
+  		<h2>Bearbeitungsrechte beim Anlegen eines Teilprojektes festlegen</h1>
+  		<p>Wenn Sie ein Teilprojekt anlegen, können Sie zwischen zwei Optionen von Bearbeitungsrechten auswählen. Diese Bearbeitungsrechte gelten für Inhalte, die von den Mitgliedern Ihres Teilprojektes angelegt wurden:
+          <ul>
+            <li><strong>Option A:</strong> unbeschränkte Bearbeitungsrechte für <strong>alle Mitglieder</strong> des Verbundprojektes</li>
+            <li><strong>Option B:</strong> Bearbeitungsrechte <strong>beschränkt auf Mitglieder des Verbundes</strong></li>
+          </ul>
 
-    </p>
+      </p>
 
-    <br>
+      <br>
 
-    <p>Die gewählten Bearbeitungsrechte wirken sich auf zwei Aspekte aus:
-        <ul>
-          <li>Wer (A oder B) in Ihre Teilprojekt-Seite navigieren, dort Aktionen durchführen und den Verwertungsplan einsehen darf</li>
-          <li>Wer (A oder B) Einträge von Mitgliedern Ihres Teilprojektes bearbeiten darf</li>
-        </ul>
+      <p>Die gewählten Bearbeitungsrechte wirken sich auf zwei Aspekte aus:
+          <ul>
+            <li>Wer (A oder B) in Ihre Teilprojekt-Seite navigieren, dort Aktionen durchführen und den Verwertungsplan einsehen darf</li>
+            <li>Wer (A oder B) Einträge von Mitgliedern Ihres Teilprojektes bearbeiten darf</li>
+          </ul>
 
-    </p>
+      </p>
 
-    <br>
+      <br>
 
-    <p><strong>Wichtig:</strong>
-        <ul>
-          <li>Einträge und deren Inhalte sind für alle Mitglieder des Verbundprojektes <strong>sichtbar</strong>, unabhängig davon, ob Option A oder B gewählt wurde.</li>
-          <li>Die Bearbeitungsrechte einzelner Einträge lassen sich ändern (freigeben oder einschränken).</li>
-        </ul>
+      <p><strong>Wichtig:</strong>
 
-    </p>
-</article>
-<br>
-
-    <article>
-    <img src="img/de_project_use_permissions_Zugriff_Projekt.png">
-
-    </article>
-    <br>
-
-    <article>
-		<img src="img/de_project_use_permissions_Bearbeitungsrechte_Eintraege.png">
-
-		</article>
-    <br>
+          Einträge und deren Inhalte sind für alle Mitglieder des Verbundprojektes <strong>sichtbar</strong>, unabhängig davon, ob Option A oder B gewählt wurde.
 
 
-    </main>
+      </p>
+  </article>
+  <br>
+
+      <article>
+      <img src="img/de_project_use_permissions_Zugriff_Projekt.png">
+
+      </article>
+      <br>
+
+
+
+
+      </main>
 
 
 	<?php include("includes/footer.inc.php"); echo "\n";?>

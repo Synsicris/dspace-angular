@@ -7,8 +7,8 @@ import { BreadcrumbConfig } from '../../breadcrumbs/breadcrumb/breadcrumb-config
 import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../shared/operators';
 import { switchMap, take } from 'rxjs/operators';
 import { DSOBreadcrumbsService } from './dso-breadcrumbs.service';
-import { DataService } from '../data/data.service';
-import { CacheableObject } from '../cache/object-cache.reducer';
+import { IdentifiableDataService } from '../data/base/identifiable-data.service';
+import { CacheableObject } from '../cache/cacheable-object.model';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 
@@ -19,8 +19,8 @@ export abstract class DSOPropertyBreadcrumbResolver<S extends ChildHALResource &
 
   protected constructor(
     protected breadcrumbService: DSOBreadcrumbsService,
-    protected dataService: DataService<S>,
-    protected dataServiceT: DataService<T>
+    protected dataService: IdentifiableDataService<S>,
+    protected dataServiceT: IdentifiableDataService<T>
   ) {
     super(breadcrumbService, dataService);
   }

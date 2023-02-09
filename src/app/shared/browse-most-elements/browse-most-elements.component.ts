@@ -35,9 +35,21 @@ export class BrowseMostElementsComponent implements OnInit {
   @Input() elementsPerPage = 5;
 
   /**
+   * Whether to show the metrics badges
+   */
+  @Input() showMetrics;
+
+  /**
    * A boolean representing if show the pagination buttons
    */
   @Input() showPagination = false;
+
+  /**
+   * Whether to show the thumbnail preview
+   */
+  @Input() showThumbnails;
+
+  searchResults: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>;
 
   /**
    * The remote data containing the result list

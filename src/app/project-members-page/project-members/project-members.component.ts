@@ -159,7 +159,6 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
 
       if (successfulReq.length === groups.length) {
         this.notificationsService.success(this.translateService.get(this.messagePrefix + '.notification.success.addMember'));
-        this.refreshGroupsMembers(processedGroups);
       } else {
         this.notificationsService.error(this.translateService.get(this.messagePrefix + '.notification.failure.noActiveGroup'));
       }
@@ -194,7 +193,6 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
 
       if (successfulReq.length === groups.length) {
         this.notificationsService.success(this.translateService.get(this.messagePrefix + '.notification.success.deleteMember'));
-        this.refreshGroupsMembers(processedGroups);
       } else {
         this.notificationsService.error(this.translateService.get(this.messagePrefix + '.notification.failure.noActiveGroup'));
       }
@@ -229,12 +227,6 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
     }
 
     return groups$;
-  }
-
-  private refreshGroupsMembers(processedGroups: Group[]): void {
-    processedGroups.forEach((groupRD: Group) => {
-      this.epersonService.clearLinkRequests(groupRD._links.epersons.href);
-    });
   }
 
 }

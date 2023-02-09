@@ -1,8 +1,10 @@
-<ds-view-tracker [object]="(itemRD$ | async)?.payload"></ds-view-tracker>
-<ds-loading *ngIf="(itemRD$ | async)?.isLoading" message="{{'loading.item' | translate}}"></ds-loading>
-
-<div class="container" *ngVar="(itemRD$ | async).payload as item" [class.version-badge]="(isVersionOfAnItem$ | async)">
-  <ds-view-version-badges *ngIf="item" [item]="item"></ds-view-version-badges>
-</div>
-
-<ds-cris-layout [item]="(itemRD$ | async)?.payload"></ds-cris-layout>
+<ds-themed-loading *ngIf="(itemRD$ | async)?.isLoading" message="{{'loading.item' | translate}}"></ds-themed-loading>
+<ng-container *ngIf="((itemRD$ | async)?.hasSucceeded && !(itemRD$ | async)?.hasNoContent)">
+  <div class="container">
+    <ds-item-alerts [item]="(itemRD$ | async)?.payload"></ds-item-alerts>
+    <ds-view-version-badges *ngIf="(itemRD$ | async)?.payload" [item]="(itemRD$ | async)?.payload"></ds-view-version-badges>
+  </div>
+  <ds-view-tracker [object]="(itemRD$ | async)?.payload"></ds-view-tracker>
+  <ds-cris-layout *ngIf="!((itemRD$ | async)?.payload?.isWithdrawn) || (isAdmin$|async)"
+                  [item]="(itemRD$ | async)?.payload"></ds-cris-layout>
+</ng-container>

@@ -42,7 +42,7 @@ export class SidebarSearchListElementComponent<T extends SearchResult<K>, K exte
                      protected linkService: LinkService,
                      protected dsoNameService: DSONameService
   ) {
-    super(truncatableService, dsoNameService);
+    super(truncatableService, dsoNameService, null);
   }
 
   /**
@@ -52,7 +52,6 @@ export class SidebarSearchListElementComponent<T extends SearchResult<K>, K exte
     super.ngOnInit();
     if (hasValue(this.dso)) {
       this.parentTitle$ = this.getParentTitle();
-      this.title = this.getTitle();
       this.description = this.getDescription();
     }
   }
@@ -71,7 +70,7 @@ export class SidebarSearchListElementComponent<T extends SearchResult<K>, K exte
   getParentTitle(): Observable<string> {
     return this.getParent().pipe(
       map((parentRD: RemoteData<DSpaceObject>) => {
-        return hasValue(parentRD) && hasValue(parentRD.payload) ? parentRD.payload.firstMetadataValue('dc.title') : undefined;
+        return hasValue(parentRD) && hasValue(parentRD.payload) ? this.dsoNameService.getName(parentRD.payload) : undefined;
       })
     );
   }

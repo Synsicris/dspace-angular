@@ -1,7 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { Store } from '@ngrx/store';
 import { combineLatest, Observable, of as observableOf } from 'rxjs';
 import {
   catchError,
@@ -20,13 +18,13 @@ import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../cache/object-cache.service';
-import { CoreState } from '../core.reducers';
 import { Community } from '../shared/community.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { DSOChangeAnalyzer } from '../data/dso-change-analyzer.service';
 import { PaginatedList } from '../data/paginated-list.model';
 import { RemoteData } from '../data/remote-data';
-import { FindListOptions, PostRequest } from '../data/request.models';
+import { FindListOptions } from '../data/find-list-options.model';
+import { PostRequest } from '../data/request.models';
 import { RequestService } from '../data/request.service';
 import { CommunityDataService } from '../data/community-data.service';
 import { HttpOptions } from '../dspace-rest/dspace-rest.service';
@@ -38,8 +36,7 @@ import {
   getFinishedRemoteData,
   getFirstCompletedRemoteData,
   getFirstSucceededRemoteData,
-  getFirstSucceededRemoteDataPayload,
-  sendRequest
+  getFirstSucceededRemoteDataPayload
 } from '../shared/operators';
 import { DSpaceObjectType } from '../shared/dspace-object-type.model';
 import { SearchService } from '../shared/search/search.service';
@@ -57,6 +54,7 @@ import { Item } from '../shared/item.model';
 import { Metadata } from '../shared/metadata.utils';
 import { ItemDataService } from '../data/item-data.service';
 import { CollectionDataService } from '../data/collection-data.service';
+import { sendRequest } from '../shared/request.operators';
 
 export const PROJECT_RELATION_METADATA = 'synsicris.relation.project';
 export const PROJECT_RELATION_SOLR = 'synsicris.relation.project_authority';
@@ -84,13 +82,11 @@ export class ProjectDataService extends CommunityDataService {
   constructor(
     protected requestService: RequestService,
     protected rdbService: RemoteDataBuildService,
-    protected store: Store<CoreState>,
     protected objectCache: ObjectCacheService,
     protected halService: HALEndpointService,
+    protected comparator: DSOChangeAnalyzer<Community>,
     protected notificationsService: NotificationsService,
     protected bitstreamDataService: BitstreamDataService,
-    protected http: HttpClient,
-    protected comparator: DSOChangeAnalyzer<Community>,
     protected searchService: SearchService,
     protected linkService: LinkService,
     protected configurationService: ConfigurationDataService,
@@ -99,7 +95,7 @@ export class ProjectDataService extends CommunityDataService {
     protected collectionService: CollectionDataService,
     protected commService: CommunityDataService,
   ) {
-    super(requestService, rdbService, store, objectCache, halService, notificationsService, bitstreamDataService, http, comparator);
+    super(requestService, rdbService, objectCache, halService, comparator, notificationsService, bitstreamDataService);
   }
 
   /**
@@ -538,7 +534,7 @@ export class ProjectDataService extends CommunityDataService {
    */
   findAllAuthorizedProjects(findListOptions: FindListOptions = {}): Observable<RemoteData<PaginatedList<Community>>> {
     return this.getCommunityProjects().pipe(
-      mergeMap((projects) => this.findAllByHref(projects._links.subcommunities.href, findListOptions))
+      mergeMap((projects) => this.findListByHref(projects._links.subcommunities.href, findListOptions))
     );
   }
 

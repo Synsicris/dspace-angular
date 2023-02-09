@@ -25,12 +25,14 @@ import { VocabularyOptions } from '../../../core/submission/vocabularies/models/
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
 import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
+import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
 
 @Injectable()
 export class SearchSimpleItemService {
 
   constructor(
     private linkService: LinkService,
+    private searchConfigService: SearchConfigurationService,
     private searchService: SearchService,
     private vocabularyService: VocabularyService) {
     this.searchService.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
@@ -52,7 +54,7 @@ export class SearchSimpleItemService {
       scope: scope
     });
 
-    return this.searchService.getConfig(scope, searchConfiguration).pipe(
+    return this.searchConfigService.getConfig(scope, searchConfiguration).pipe(
       getFirstSucceededRemoteDataPayload(),
       map((configFilters: SearchFilterConfig[]) => {
         let filterFound: SearchFilterConfig;

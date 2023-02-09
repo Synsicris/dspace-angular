@@ -53,10 +53,10 @@ export class WorkingPlanChartItemDeleteButtonComponent implements OnInit {
         this.canEdit$.next(canEdit);
       });
 
-      const adminEdit$ = this.editItemDataService.checkEditModeByIDAndType(this.node.id, environment.projects.projectsEntityAdminEditMode).pipe(
+      const adminEdit$ = this.editItemDataService.checkEditModeByIdAndType(this.node.id, environment.projects.projectsEntityAdminEditMode).pipe(
         take(1)
       );
-      const userEdit$ = this.editItemDataService.checkEditModeByIDAndType(this.node.id, environment.projects.projectsEntityEditMode).pipe(
+      const userEdit$ = this.editItemDataService.checkEditModeByIdAndType(this.node.id, environment.projects.projectsEntityEditMode).pipe(
         take(1)
       );
 

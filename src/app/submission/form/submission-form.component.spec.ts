@@ -76,6 +76,7 @@ describe('SubmissionFormComponent Component', () => {
         { provide: SectionsService, useValue:
           {
             isSectionTypeAvailable: () => observableOf(true),
+            isSectionReadOnlyByType: () => observableOf(true),
             isSectionReadOnly: () => observableOf(false)
           }
         },

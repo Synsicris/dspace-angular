@@ -14,7 +14,7 @@ describe('WorkingPlanChartItemDeleteButtonComponent', () => {
   let fixture: ComponentFixture<WorkingPlanChartItemDeleteButtonComponent>;
 
   const editItemDataService = jasmine.createSpyObj('EditItemDataService', {
-    checkEditModeByIDAndType: jasmine.createSpy('checkEditModeByIDAndType'),
+    checkEditModeByIdAndType: jasmine.createSpy('checkEditModeByIdAndType'),
   });
 
   const authorizationService: AuthorizationDataService = jasmine.createSpyObj('authorizationService', {
@@ -23,7 +23,7 @@ describe('WorkingPlanChartItemDeleteButtonComponent', () => {
 
   beforeEach(async () => {
 
-    editItemDataService.checkEditModeByIDAndType.and.returnValue(of(true));
+    editItemDataService.checkEditModeByIdAndType.and.returnValue(of(true));
 
     await TestBed.configureTestingModule({
       declarations: [WorkingPlanChartItemDeleteButtonComponent],
