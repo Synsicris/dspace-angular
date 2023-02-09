@@ -22,44 +22,48 @@ export class CommentListComponent implements OnInit {
    */
   @Input() projectCommunityId: string;
 
-  @Input() item: Item;
+  /**
+   * The related entity type
+   */
+  @Input() relatedEntityType: string;
 
   /**
    * Item's identifier
-   */
-  @Input() itemUuid: string;
+  */
+ @Input() itemUuid: string;
 
-  /**
-   * Type of plan
-   */
-  @Input() type: string;
+ /**
+  * Type of plan
+ */
+@Input() type: string;
 
-  /**
-   * Flag to define if the card header should be displayd or not
-   */
-  @Input() showCardHeader = true;
+/**
+ * Flag to define if the card header should be displayd or not
+*/
+@Input() showCardHeader = true;
 
   /**
    * Title of card header
-   */
-  @Input() title?: string;
+  */
+ @Input() title?: string;
 
   /**
    * The PaginatedSearchOptions
-   */
-  paginatedSearchOptions: PaginatedSearchOptions;
+  */
+ paginatedSearchOptions: PaginatedSearchOptions;
 
-  /**
-   * Reference for configurationSearchPage
-   */
-  @ViewChildren('configurationSearchPage')  configurationSearchPage: QueryList<any>;
+ /**
+  * Reference for configurationSearchPage
+ */
+@ViewChildren('configurationSearchPage')  configurationSearchPage: QueryList<any>;
 
-  constructor(
-    protected route: ActivatedRoute,
+constructor(
+  protected route: ActivatedRoute,
   ) {
   }
 
   ngOnInit(): void {
+    console.log('🚀 ~ file: comment-list.component.ts:29 ~ CommentListComponent ~ relatedEntityType', this.relatedEntityType);
     const pagination: PaginationComponentOptions = Object.assign(
       new PaginationComponentOptions(),
       {
@@ -72,7 +76,7 @@ export class CommentListComponent implements OnInit {
     this.paginatedSearchOptions = new PaginatedSearchOptions({
       configuration: this.getConfiguration,
       pagination: pagination,
-      scope: this.item?.uuid,
+      scope: this.itemUuid,
       sort: new SortOptions('lastModified', SortDirection.DESC),
     });
   }

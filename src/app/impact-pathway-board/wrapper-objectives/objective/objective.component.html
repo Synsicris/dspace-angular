@@ -32,10 +32,10 @@
       </div>
       <div class="col-3 pl-0 comment-box-position" [ngStyle]="{'height.px': taskSection.clientHeight}" *ngIf="(formConfig$ | async)?.name">
         <ds-comment-list
-        [item]="this.objectiveItem$ | async"
-        [itemUuid]="impactPathwayStep.id"
-        [projectCommunityId]="projectCommunityId"
-        [type]="(formConfig$ | async).name">
+          [relatedEntityType]="(this.objectiveItem$ | async).entityType"
+          [itemUuid]="impactPathwayStep.id"
+          [projectCommunityId]="projectCommunityId"
+          [type]="(formConfig$ | async).name">
       </ds-comment-list>
     </div>
     </div>

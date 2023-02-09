@@ -27,11 +27,11 @@
         <div class="row">
           <div class="col-12 p-0">
             <ds-comment-list
-            [item]="workingPlan"
-            [itemUuid]="workingPlan.uuid"
-            [showCardHeader]="false"
-            [projectCommunityId]="projectCommunityId"
-            [type]="workingPlan.entityType">
+              [relatedEntityType]="workingPlan.entityType"
+              [itemUuid]="workingPlan.uuid"
+              [showCardHeader]="false"
+              [projectCommunityId]="projectCommunityId"
+              [type]="workingPlan.entityType">
           </ds-comment-list>
           </div>
         </div>

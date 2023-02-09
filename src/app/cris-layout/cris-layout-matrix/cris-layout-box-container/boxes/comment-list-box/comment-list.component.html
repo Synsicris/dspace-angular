@@ -8,14 +8,13 @@
   <div class="card-body">
     <div class="row justify-content-end add-section">
       <div class="pr-3">
-        <ds-item-create
-          additionalSearchFormOptions
-          [item]="item"
-          [relatedEntityType]="item.entityType"
+        <ds-comment-create
+          [itemId]="itemUuid"
+          [relatedEntityType]="relatedEntityType"
           [targetEntityType]="'comment'"
           [scope]="projectCommunityId"
-          (refresh)="refresh()"
-        ></ds-item-create>
+        >
+        </ds-comment-create>
       </div>
     </div>
     <ds-browse-most-elements
