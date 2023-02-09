@@ -1,3 +1,4 @@
+import { CommentsModule } from './../shared/comments/comments.module';
 import { SharedModule } from '../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -27,7 +28,6 @@ import { WorkingPlanChartDatesComponent } from './working-plan-chart/container/w
 import { WorkingPlanChartItemEditButtonComponent } from './working-plan-chart/container/working-plan-chart-item-edit-button/working-plan-chart-item-edit-button.component';
 import { WorkingPlanChartItemDeleteButtonComponent } from './working-plan-chart/container/working-plan-chart-item-delete-button/working-plan-chart-item-delete-button.component';
 import { ItemDetailPageModalModule } from '../item-detail-page-modal/item-detail-page-modal.module';
-import { CrisLayoutModule } from '../cris-layout/cris-layout.module';
 import { SectionsService } from '../submission/sections/sections.service';
 
 const MODULES = [
@@ -42,7 +42,7 @@ const MODULES = [
   EditSimpleItemModalModule,
   ComcolModule,
   ItemDetailPageModalModule,
-  CrisLayoutModule,
+  CommentsModule
 ];
 
 const COMPONENTS = [

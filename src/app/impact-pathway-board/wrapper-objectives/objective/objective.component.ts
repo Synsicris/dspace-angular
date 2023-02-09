@@ -13,12 +13,12 @@ import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-m
 import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
 import { distinctUntilChanged, map, skip, take } from 'rxjs/operators';
-import { EditItemDataService } from 'src/app/core/submission/edititem-data.service';
+import { EditItemDataService } from './../../../core/submission/edititem-data.service';
 import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'ipw-objective',
-  styleUrls: ['./objective.component.scss', './../../../cris-layout/cris-layout-matrix/cris-layout-box-container/boxes/comment-list-box/comment-list.component.scss'],
+  styleUrls: ['./objective.component.scss', './../../../shared/comments/comment-list-box/comment-list.component.scss'],
   templateUrl: './objective.component.html'
 })
 export class ObjectiveComponent implements OnInit {

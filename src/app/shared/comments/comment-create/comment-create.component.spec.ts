@@ -1,6 +1,6 @@
-import { RouterMock } from './../../mocks/router.mock';
+import { RouterMock } from '../../mocks/router.mock';
 import { Router } from '@angular/router';
-import { AuthService } from './../../../core/auth/auth.service';
+import { AuthService } from '../../../core/auth/auth.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommentCreateComponent } from './comment-create.component';

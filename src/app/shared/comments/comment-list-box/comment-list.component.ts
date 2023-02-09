@@ -1,12 +1,11 @@
-import { Item } from 'src/app/core/shared/item.model';
-import { LayoutBox } from './../../../../enums/layout-box.enum';
+import { LayoutBox } from '../../../cris-layout/enums/layout-box.enum';
 import { isEqual } from 'lodash';
 import {
   SortDirection,
   SortOptions,
-} from './../../../../../core/cache/models/sort-options.model';
-import { PaginationComponentOptions } from './../../../../../shared/pagination/pagination-component-options.model';
-import { PaginatedSearchOptions } from './../../../../../shared/search/models/paginated-search-options.model';
+} from '../../../core/cache/models/sort-options.model';
+import { PaginationComponentOptions } from '../../pagination/pagination-component-options.model';
+import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
 import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -63,7 +62,6 @@ constructor(
   }
 
   ngOnInit(): void {
-    console.log('🚀 ~ file: comment-list.component.ts:29 ~ CommentListComponent ~ relatedEntityType', this.relatedEntityType);
     const pagination: PaginationComponentOptions = Object.assign(
       new PaginationComponentOptions(),
       {
@@ -86,7 +84,7 @@ constructor(
    * @readonly
    */
   get getConfiguration() {
-    let configName = `${LayoutBox.RELATION}.`;
+    let configName = `${LayoutBox.COMMENT}.`;
     if (isEqual(this.type, 'impact_pathway_form')) {
       configName = configName.concat('impactpathwaystep');
     } else if (this.type.includes('exploitation_plan_step')) {
@@ -104,7 +102,7 @@ constructor(
         'impact_pathway_step_type_3_task_objective_edit_form'
       )
     ) {
-      configName = configName.concat('RELATION.ia_objective');
+      configName = configName.concat('ia_objective');
     }
 
     configName = configName.concat('.comment');

@@ -405,7 +405,6 @@ import {
 import { ViewVersionBadgesComponent } from './view-version-badges/view-version-badges.component';
 import { IpwItemMetadataStatusDirective } from './ipw-helpers/ipw-item-metadata-status.directive';
 import { IpwItemMetadataInternalDirective } from './ipw-helpers/ipw-item-metadata-internal.directive';
-import { CommentCreateComponent } from './item/comment-create/comment-create.component';
 
 const MODULES = [
   CommonModule,
@@ -726,8 +725,7 @@ const SHARED_ITEM_PAGE_COMPONENTS = [
   MetadataRepresentationListComponent,
   RelatedItemsComponent,
   DsoPageOrcidButtonComponent,
-  ItemCreateComponent,
-  CommentCreateComponent
+  ItemCreateComponent
 ];
 
 const PROVIDERS = [

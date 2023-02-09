@@ -22,7 +22,7 @@ import { CreateSimpleItemModule } from '../shared/create-simple-item-modal/creat
 import { ComcolModule } from '../shared/comcol/comcol.module';
 import { EditSimpleItemModalModule } from '../shared/edit-simple-item-modal/edit-simple-item-modal.module';
 import { ItemDetailPageModalModule } from '../item-detail-page-modal/item-detail-page-modal.module';
-import { CrisLayoutModule } from '../cris-layout/cris-layout.module';
+import { CommentsModule } from '../shared/comments/comments.module';
 
 const MODULES = [
   CommonModule,
@@ -37,7 +37,7 @@ const MODULES = [
   ComcolModule,
   ItemDetailPageModalModule,
   CreateItemSubmissionModalModule,
-  CrisLayoutModule
+  CommentsModule
 ];
 
 const COMPONENTS = [

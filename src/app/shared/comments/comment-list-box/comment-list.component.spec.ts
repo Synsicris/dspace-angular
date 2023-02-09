@@ -1,9 +1,9 @@
-import { Item } from './../../../../../core/shared/item.model';
+import { Item } from '../../../core/shared/item.model';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommentListComponent } from './comment-list.component';
 import { ActivatedRoute } from '@angular/router';
-import { MockActivatedRoute } from '../../../../../shared/mocks/active-router.mock';
+import { MockActivatedRoute } from '../../mocks/active-router.mock';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
