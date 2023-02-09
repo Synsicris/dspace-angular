@@ -86,26 +86,25 @@ constructor(
   get getConfiguration() {
     let configName = `${LayoutBox.COMMENT}.`;
     if (isEqual(this.type, 'impact_pathway_form')) {
-      configName = configName.concat('impactpathwaystep');
+      configName = configName.concat('impactpathwaystep.comment');
     } else if (this.type.includes('exploitation_plan_step')) {
-      configName = configName.concat('exploitationplanstep');
+      configName = configName.concat('exploitationplanstep.comment');
     } else if (isEqual(this.type, 'workingplan')) {
-      configName = configName.concat('workingplan');
+      configName = configName.concat('workingplan.comment');
     } else if (isEqual(
         this.type,
         'impact_pathway_step_type_2_task_objective_edit_form'
       )) {
-      configName = configName.concat('proj_objective');
+      configName = configName.concat('proj_objective_comment');
     } else if (
       isEqual(
         this.type,
         'impact_pathway_step_type_3_task_objective_edit_form'
       )
     ) {
-      configName = configName.concat('ia_objective');
+      configName = configName.concat('ia_objective_comment');
     }
 
-    configName = configName.concat('.comment');
     return configName;
   }
 
