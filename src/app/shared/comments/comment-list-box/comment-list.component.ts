@@ -75,7 +75,7 @@ constructor(
       configuration: this.getConfiguration,
       pagination: pagination,
       scope: this.itemUuid,
-      sort: new SortOptions('lastModified', SortDirection.DESC),
+      sort: new SortOptions('synsicris.date.creation', SortDirection.DESC),
     });
   }
 
@@ -95,14 +95,14 @@ constructor(
         this.type,
         'impact_pathway_step_type_2_task_objective_edit_form'
       )) {
-      configName = configName.concat('proj_objective_comment');
+      configName = configName.concat('proj_objective.proj_objective_comment');
     } else if (
       isEqual(
         this.type,
         'impact_pathway_step_type_3_task_objective_edit_form'
       )
     ) {
-      configName = configName.concat('ia_objective_comment');
+      configName = configName.concat('ia_objective.ia_objective_comment');
     }
 
     return configName;
