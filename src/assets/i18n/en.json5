@@ -5588,25 +5588,18 @@
   "search.filters.filter.synsicrisRelationCall.label": "Search relation call",
 
   "search.filters.filter.projectStartDate.head": "Start date",
-
   "search.filters.filter.projectStartDate.placeholder": "Start date",
-
   "search.filters.filter.projectStartDate.label": "Search start date",
-
   "search.filters.filter.projectEndDate.head": "End date",
-
   "search.filters.filter.projectEndDate.placeholder": "End date",
-
   "search.filters.filter.projectEndDate.label": "Search end date",
-
+  "search.filters.filter.dateReminder.head": "Reminder Date",
+  "search.filters.filter.dateReminder.min.label": "Start Reminder Date",
+  "search.filters.filter.dateReminder.max.label": "End Reminder Date",
   "search.filters.filter.synsicrisSubjectNace.head": "Subject nace",
-
   "search.filters.filter.synsicrisSubjectNace.placeholder": "Subject nace",
-
   "search.filters.filter.synsicrisSubjectNace.label": "Search subject nace",
-
   "search.filters.filter.synsicrisSubjectDestatis.head": "Subject destatis",
-
   "search.filters.filter.synsicrisSubjectDestatis.placeholder": "Subject destatis",
 
   "search.filters.filter.synsicrisSubjectDestatis.label": "Search subject destatis",
