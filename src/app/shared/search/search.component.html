@@ -40,22 +40,23 @@
                 </button>
             </div>
             <ds-themed-search-results [searchResults]="resultsRD$ | async"
-                               [searchConfig]="searchOptions$ | async"
-                               [configuration]="(currentConfiguration$ | async)"
-                               [disableHeader]="!searchEnabled"
-                               [linkType]="linkType"
-                               [notFoundMessageKey]="notFoundMessageKey"
-                               [context]="(currentContext$ | async)"
-                               [searchResultNotice]="searchResultNotice"
-                               [searchResultNoticeType]="searchResultNoticeType"
-                               [selectable]="selectable"
-                               [selectionConfig]="selectionConfig"
-                               [showSearchResultNotice]="showSearchResultNotice"
-                               [customData]="customData"
-                               (contentChange)="onContentChange($event)"
-                               (customEvent)="customEvent.emit($event)"
-                               (deselectObject)="deselectObject.emit($event)"
-                               (selectObject)="selectObject.emit($event)"></ds-themed-search-results>
+                                      [searchConfig]="searchOptions$ | async"
+                                      [configuration]="(currentConfiguration$ | async)"
+                                      [disableHeader]="!searchEnabled"
+                                      [linkType]="linkType"
+                                      [notFoundMessageKey]="notFoundMessageKey"
+                                      [context]="(currentContext$ | async)"
+                                      [searchResultNotice]="searchResultNotice"
+                                      [searchResultNoticeType]="searchResultNoticeType"
+                                      [selectable]="selectable"
+                                      [selectionConfig]="selectionConfig"
+                                      [showCsvExport]="showCsvExport"
+                                      [showSearchResultNotice]="showSearchResultNotice"
+                                      [customData]="customData"
+                                      (contentChange)="onContentChange($event)"
+                                      (customEvent)="customEvent.emit($event)"
+                                      (deselectObject)="deselectObject.emit($event)"
+                                      (selectObject)="selectObject.emit($event)"></ds-themed-search-results>
         </div>
     </div>
 </ng-template>

@@ -59,6 +59,11 @@ export class SearchResultsComponent {
   @Input() searchConfig: PaginatedSearchOptions;
 
   /**
+   * A boolean representing if show csv export button
+   */
+  @Input() showCsvExport = false;
+
+  /**
    * The current sorting configuration of the search
    */
   @Input() sortConfig: SortOptions;
@@ -82,7 +87,7 @@ export class SearchResultsComponent {
   /**
    * Custom message if no result
    */
-  @Input() notFoundMessageKey: string = 'search.results.no-results';
+  @Input() notFoundMessageKey = 'search.results.no-results';
 
   /**
    * A boolean representing if result entries are selectable

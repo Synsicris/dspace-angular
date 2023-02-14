@@ -67,7 +67,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   /**
    * Custom message if no result
    */
-  @Input() notFoundMessageKey: string = 'search.results.no-results';
+  @Input() notFoundMessageKey = 'search.results.no-results';
 
   /**
    * The current context
@@ -162,6 +162,11 @@ export class SearchComponent implements OnInit, OnDestroy {
    * A boolean representing if show search charts
    */
   @Input() showCharts = false;
+
+  /**
+   * A boolean representing if show csv export button
+   */
+  @Input() showCsvExport = false;
 
   /**
    * A boolean representing if show export button
