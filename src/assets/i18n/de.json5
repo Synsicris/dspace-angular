@@ -15318,22 +15318,20 @@
 
   // "layout.field.label.comment.synsicris.date.creation": "Creation date",
   "layout.field.label.comment.synsicris.date.creation": "Erstellt am",
-
   // "layout.field.label.comment.synsicris.date.reminder": "Reminder date",
   "layout.field.label.comment.synsicris.date.reminder": "Erinnerung am",
-
   // "layout.field.label.comment.synsicris.creator": "Creation by",
   "layout.field.label.comment.synsicris.creator": "Erstellt von",
-
   // "layout.field.label.comment.synsicris.description": "Description",
   "layout.field.label.comment.synsicris.description": "Beschreibung",
-
+  //"layout.field.label.comment.synsicris.related.item": "Related Item",
+  "layout.field.label.comment.synsicris.related.item": "Zugehöriger Eintrag",
+  //"layout.field.label.comment.synsicris.related.project": "Related Project",
+  "layout.field.label.comment.synsicris.related.project": "Zugehöriges Vorhaben",
   // "search.filters.applied.charts.RELATION.Project.cooperationpartner.title": "missing",
   "search.filters.applied.charts.RELATION.Project.cooperationpartner.title": "Grafik",
-
   // "search.filters.applied.charts.graphcoopparttype.tab": "missing",
   "search.filters.applied.charts.graphcoopparttype.tab": "...nach Art",
-
   // "search.filters.applied.charts.graphcooppartnace.tab": "missing",
   "search.filters.applied.charts.graphcooppartnace.tab": "...nach Wirtschaftszweig",
 
