@@ -59,7 +59,7 @@ export class CommentCreateComponent implements OnInit {
   @Input() scope: string;
 
   /**
-   * Flag determining wather to show only add icon or the icon with text
+   * Flag determining whether to show only add icon or the icon with text
    */
   @Input() showIconOnly = false;
 
