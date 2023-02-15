@@ -1,11 +1,11 @@
 ::ng-deep .comment-box-position div.card-body {
   overflow-y: auto;
   overflow-x: clip;
+  position: relative;
 
   .add-section {
-    position: sticky;
-    top: 0;
-    background: white;
-    z-index: 1;
-  }
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+   }
 }

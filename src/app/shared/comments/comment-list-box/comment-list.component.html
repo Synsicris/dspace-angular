@@ -1,27 +1,26 @@
 <div class="card h-100">
   <ng-container *ngIf="showCardHeader">
-    <div class="card-header">
+    <div class="card-header" [ngClass]="{'h-100': type == 'impact_pathway_form'}">
       <span *ngIf="title"> {{title | translate}} </span>
       <span *ngIf="!title"> {{'comment-list.header' | translate}} </span>
     </div>
   </ng-container>
   <div class="card-body">
-    <div class="row justify-content-end add-section">
-      <div class="pr-3">
-        <ds-comment-create
-          [itemId]="itemUuid"
-          [relatedEntityType]="relatedEntityType"
-          [targetEntityType]="'comment'"
-          [scope]="projectCommunityId"
-        >
-        </ds-comment-create>
-      </div>
-    </div>
-    <ds-browse-most-elements
+      <ds-browse-most-elements
       #configurationSearchPage
       [paginatedSearchOptions]="paginatedSearchOptions"
       [showPagination]="true"
     ></ds-browse-most-elements>
+    <div class="row justify-content-end add-section">
+      <ds-comment-create
+        [itemId]="itemUuid"
+        [relatedEntityType]="relatedEntityType"
+        [targetEntityType]="'comment'"
+        [scope]="projectCommunityId"
+        [showIconOnly]="true"
+      >
+      </ds-comment-create>
+    </div>
   </div>
 </div>
 

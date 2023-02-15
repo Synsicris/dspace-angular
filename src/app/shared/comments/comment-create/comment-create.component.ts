@@ -59,6 +59,11 @@ export class CommentCreateComponent implements OnInit {
   @Input() scope: string;
 
   /**
+   * Flag determining wather to show only add icon or the icon with text
+   */
+  @Input() showIconOnly = false;
+
+  /**
    * The condition to show or hide the button
    */
   canCreateComment$: BehaviorSubject<boolean> = new BehaviorSubject(false);
