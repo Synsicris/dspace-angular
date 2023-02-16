@@ -6,8 +6,9 @@ import {
 } from '../../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
-import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BrowseMostElementsComponent } from '../../browse-most-elements/browse-most-elements.component';
 
 @Component({
   selector: 'ds-comment-list',
@@ -54,7 +55,7 @@ export class CommentListComponent implements OnInit {
  /**
   * Reference for configurationSearchPage
  */
-@ViewChildren('configurationSearchPage')  configurationSearchPage: QueryList<any>;
+@ViewChild(BrowseMostElementsComponent) configurationSearchPage: BrowseMostElementsComponent;
 
 constructor(
   protected route: ActivatedRoute,
@@ -80,7 +81,7 @@ constructor(
   }
 
   /**
-   * Get configuratio name based on plan type
+   * Get configuration name based on plan type
    * @readonly
    */
   get getConfiguration() {
@@ -113,7 +114,7 @@ constructor(
    */
   refresh() {
     setTimeout(() => {
-      this.configurationSearchPage.first.retrieveResultList(0);
+      this.configurationSearchPage.refresh();
     });
   }
 }

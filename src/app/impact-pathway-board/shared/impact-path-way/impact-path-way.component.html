@@ -55,7 +55,7 @@
             </ng-template>
             <ng-template ngbPanelContent>
               <div class="row" *ngIf="(formConfig$ | async)?.name">
-                <div class="col-2 p-0" *ngFor="let data of getImpactPathwayStepIdAndTitle()">
+                <div class="col-2 p-0" *ngFor="let data of impactPathway.steps | dsGetIpwData">
                   <ds-comment-list
                     [relatedEntityType]="entityType"
                     [itemUuid]="data.id"

@@ -18,6 +18,7 @@
         [targetEntityType]="'comment'"
         [scope]="projectCommunityId"
         [showIconOnly]="true"
+        (refresh)="refresh()"
       >
       </ds-comment-create>
     </div>
