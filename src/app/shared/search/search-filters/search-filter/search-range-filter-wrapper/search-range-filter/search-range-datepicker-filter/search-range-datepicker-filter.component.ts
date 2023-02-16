@@ -121,6 +121,14 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
     this.scheduleSearch$.complete();
   }
 
+  protected initMin() {
+    this.min = null;
+  }
+
+  protected initMax() {
+    this.max = null;
+  }
+
   protected initRange(minmax: [string, string]) {
     this.range[0] = this.mapFromDate(minmax[0]);
     this.range[1] = this.mapToDate(minmax[1]);
