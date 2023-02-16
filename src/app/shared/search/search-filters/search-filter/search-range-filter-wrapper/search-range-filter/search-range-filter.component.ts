@@ -1,5 +1,5 @@
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, from, Observable, of, Subscription, switchMap } from 'rxjs';
+import { map, take, withLatestFrom } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { RemoteDataBuildService } from '../../../../../../core/cache/builders/remote-data-build.service';
@@ -14,11 +14,11 @@ import {
   SearchFilterService
 } from '../../../../../../core/shared/search/search-filter.service';
 import { SearchService } from '../../../../../../core/shared/search/search.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as moment from 'moment';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-page.component';
 import { SearchConfigurationService } from '../../../../../../core/shared/search/search-configuration.service';
-import { hasValue } from '../../../../../empty.util';
+import { hasValue, isNotEmpty } from '../../../../../empty.util';
 
 /**
  * The suffix for a range filters' minimum in the frontend URL
@@ -182,15 +182,26 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
    * @protected
    */
   protected search(minDate, maxDate) {
-    this.router.navigate(this.getSearchLinkParts(), {
-      queryParams:
-        {
-          [this.filterConfig.paramName + RANGE_FILTER_MIN_SUFFIX]: minDate,
-          [this.filterConfig.paramName + RANGE_FILTER_MAX_SUFFIX]: maxDate
-        },
-      queryParamsHandling: 'merge'
-    });
-    this.filter = '';
+    of(
+      {
+        ...this.getFilterParam(minDate, RANGE_FILTER_MIN_SUFFIX),
+        ...this.getFilterParam(maxDate, RANGE_FILTER_MAX_SUFFIX)
+      }
+    ).pipe(
+      withLatestFrom(this.route.queryParams),
+      map(([newParams, queryParams]) => Object.assign({}, queryParams, newParams)),
+      map(params =>
+        Object.keys(params)
+          .filter((k) => hasValue(params[k]) && isNotEmpty(params[k]))
+          .reduce((a, k) => ({ ...a, [k]: params[k] }), {})
+      ),
+      switchMap(queryParams => from(this.router.navigate(this.getSearchLinkParts(), { queryParams }))),
+      take(1)
+    ).subscribe(() => this.filter = '');
+  }
+
+  private getFilterParam(date, filterSuffix: string): Params | null {
+    return { [this.filterConfig.paramName + filterSuffix]: date };
   }
 
   /**

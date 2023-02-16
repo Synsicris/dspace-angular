@@ -229,7 +229,17 @@ export class SearchRangeDatepickerFilterComponent extends SearchRangeFilterCompo
    */
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
     const parsed = this.formatter.parse(input);
-    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+    if (
+      parsed == null &&
+      (
+        currentValue === this.fromDate && this.toDate != null ||
+        currentValue === this.toDate && this.fromDate != null
+      )
+    ) {
+      return null;
+    }
+    const ngbDate = NgbDate.from(parsed);
+    return this.calendar.isValid(ngbDate) ? ngbDate : currentValue;
   }
 
   /**

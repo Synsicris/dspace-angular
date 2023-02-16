@@ -21,6 +21,7 @@ import {
 } from '../../../../../../config/layout-config.utils';
 import { merge } from 'lodash';
 import { flattenObject } from '../../../../../shared/object.util';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ds-cris-layout-comment-box',
@@ -38,6 +39,7 @@ export class CrisLayoutCommentBoxComponent extends CrisLayoutRelationBoxComponen
    * @param projectService
    * @param route
    * @param router
+   * @param location
    * @param translateService
    * @param boxProvider
    * @param itemProvider
@@ -49,6 +51,7 @@ export class CrisLayoutCommentBoxComponent extends CrisLayoutRelationBoxComponen
     public readonly projectService: ProjectDataService,
     protected readonly route: ActivatedRoute,
     protected readonly router: Router,
+    private readonly location: Location,
     protected readonly translateService: TranslateService,
     @Inject('boxProvider') public boxProvider: CrisLayoutBox,
     @Inject('itemProvider') public itemProvider: Item
@@ -77,9 +80,8 @@ export class CrisLayoutCommentBoxComponent extends CrisLayoutRelationBoxComponen
         switchMap(params =>
           from(
             this.router.navigate(
-              [],
+              this.location.path()?.split('/'),
               {
-                relativeTo: this.route,
                 queryParams: params,
                 queryParamsHandling: 'merge'
               }
