@@ -1,38 +1,135 @@
 /* -----------------------------------------------------------
-BREADCRUMB (rex 221028)
-disabled here because it is currently still in src/themes/synsicris/styles/_global-styles.scsss 
-because it probably doesn't work yet due to cascading if it is in src/themes/synsicris/app/breadcrumbs/breadcrumbs.component.scss. 
-Must look at then in connection with the extension of the Bradcrumb functionality.
+revised rex (230210)
 ----------------------------------------------------------- */
-/*
-ds-breadcrumbs nav.nav-breadcrumb { // complete bar
+/* these two webfonts are pvorisorily included directly, 
+because I haven't found a way to include them only via font-family. */
 
-  //display:none !important;
+/* Webfonts
+----------------------------------------------- */
+/* Nunito Italic */
+@font-face {
+	font-family: 'Nunito-MediumItalic';
+	src: url("../../../../help-pages/styles/fonts/nunito/Nunito-MediumItalic.ttf") format('truetype');
+	font-weight: 500;
+	font-style: normal;
+	}
 
+/* As long as the inclusion of icons via the language file does not work, they are included here via CSS. 
+In case it will work, the icons and the fontawesome webfont in this file can be removed.*/
+
+ @font-face {
+	font-family: 'Font Awesome 5 Free';
+	src: url('../../../../help-pages/styles/fonts/fontawesome/fontawesome-webfont.eot?v=4.3.0');
+	src: url('../../../../help-pages/styles/fonts/fontawesome/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'),
+	url('../../../../help-pages/styles/fonts/fontawesome/fontawesome-webfont.woff2?v=4.3.0') format('woff2'),
+	url('../../../../help-pages/styles/fonts/fontawesome/fontawesome-webfont.woff?v=4.3.0') format('woff'),
+	url('../../../../help-pages/styles/fonts/fontawesome/fontawesome-webfont.ttf?v=4.3.0') format('truetype'),
+	url('../../../../help-pages/styles/fonts/fontawesome/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
+	font-weight: normal;
+	font-style: normal
+}
+
+// complete bar
+nav.nav-breadcrumb {   
+  background-color: var(--ds-breadcrumb-bg);
   // WORKAROUND WITH BOX-SHADOW, BECAUSE BORDER-BOTTOM DOESN'T WORK
   // because ol.breadcrumb moves inside v.nav.breadcrumb as soon as a border is used.
   // Therefore border-top for breadcrumb bar IS in navbar.component.scss in nav.navbar,
   // and border-bottom here as shadow
   box-shadow: 0 1px 0 var(--ds-header-navbar-border-bottom-color);
+}
 
-  ol.breadcrumb {
+ol.breadcrumb {
+  border-radius: 0;
+  margin-top: calc(-1 * var(--ds-content-spacing));
+  padding-bottom: var(--ds-content-spacing / 3);
+  padding-top: var(--ds-content-spacing / 3);
+  background-color: transparent; // Breadcrumb-Links had a background-color, that is not needed
+}
 
-    background-color: transparent; // Breadcrumb-Links had a background-color, that is not needed
+li.breadcrumb-item {
+  display: flex;
+}
 
-    li.breadcrumb-item {
-      font-size: 1.1rem;
-      font-weight: 600 !important;
+.breadcrumb-item-limiter {
+  display: inline-block;
+  max-width: var(--ds-breadcrumb-max-length); //truncating too long words
+  > * {
+    max-width: 100%;
+    display: block;
+  }
+}
 
-      a:link, a:hover, a:focus, a:visited {
-        color: var(--ds-breadcrumb-link-color) !important;
+.breadcrumb-item+ .breadcrumb-item::before {
+  color:var(--sy-breadcrumb-divider-color);
+  padding-top:2px; // so that the "/" appears in the same line with the links
+}
+
+li.breadcrumb-item {
+
+  a:link, a:hover, a:focus, a:visited, a.active {
+
+    color: var(--ds-breadcrumb-link-color) !important;
+    padding:2px 0 4px 0;
+
+    /* Entity-tags appear on the left side of a breadcrumb link and contain the name of the entity type.
+    For project and subproject they also contain an icon and they are designed in the color scheme 
+    of these layers. Entity-tags are set invisible basically.
+    Only the ones you explicitly choose below (the selection here is not final) will be displayed
+
+    */
+    & span {display:none;}
+
+    &[href*="/entities/project/"] span,         // Verbundprojekt (Icon "shekel-sign")
+    &[href*="/entities/funding/"] span,         // Teilprojekt (Icon "cube")
+    &[href*="/entities/impactpathway"] span,    // Impact Pathway
+    &[href*="/entities/targetgroup"] span       // Akteursgruppe
+    { 														
+      border:1px solid var(--sy-breadcrumb-tag-border-color);
+      padding:0 8px 0 8px;
+      margin:0 6px 0 0;
+      background-color:var(--sy-breadcrumb-tag-background);
+      border-radius:10px 0 0 10px;
+      color:var(--sy-breadcrumb-tag-color);
+      // font-style:italic; looks ugly
+      font-family:'Nunito-MediumItalic';
+      display:inline-block;
+
+      &:before {						
+        font-family: 'Font Awesome 5 Free';
+        position:absolute;
+        display:inline-block;
+        margin-left:-1rem; 
+        } // end span:before for fontawesome icon
+       
+      } // end span
+
+    // Tag Verbundprojekt
+    &[href*="/entities/project/"] span { 									
+      padding-left:1.6rem;	
+      &:before {
+        content:"\f20b"; // Icon "shekel-sign"
+        color:var(--sy-level-project-icon-color);
+        }
       }
 
-      & + .breadcrumb-item::before {
-        content: quote("/") !important;
+    // Tag Teilprojekt
+    &[href*="/entities/funding/"] span { 											
+      padding-left:1.7rem;
+      &:before { 
+        content:"\f1b2"; // Icon "cube"
+        margin-left:-1.2rem; 
+        color:var(--sy-level-funding-icon-color);
+        }
       }
-    } // end li.breadcrumb-item
 
-  } // end ol.breadcrumb
+    } // end a:link, a:hover, a:focus, a:visited
 
-} // end ds-breadcrumbs nav.nav-breadcrumb
-*/
+   /* the last item in the breadcrumb must be a link too in order to be able to read the URL via CSS to recognize the entity, but is styled like as a non-link. */
+  &.active a {
+    color: var(--ds-breadcrumb-link-active-color) !important;
+    text-decoration:none;
+    cursor:default;
+  }
+
+}

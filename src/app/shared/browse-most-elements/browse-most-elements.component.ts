@@ -69,11 +69,22 @@ export class BrowseMostElementsComponent implements OnInit {
   }
 
   /**
+   * Refreshes the list of search results using the latest serachOptions
+   */
+  refresh(): void {
+    this.retrieveResultList(this.searchResults$.value.payload.currentPage, false);
+  }
+
+  /**
    * Retrieve the paginated list
    *
    * @param page The current page of the paginated list to retrieve
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
+   * @param reRequestOnStale Whether or not the request should automatically be re-requested after
+   *                         the response becomes stale
    */
-  retrieveResultList(page: number = 0): void {
+  retrieveResultList(page: number = 0, useCachedVersionIfAvailable = true, reRequestOnStale = true): void {
     this.loading$.next(true);
     const paginatedSearchOptions = Object.assign(new PaginatedSearchOptions({}), this.paginatedSearchOptions, {
       pagination: {
@@ -82,7 +93,7 @@ export class BrowseMostElementsComponent implements OnInit {
       }
     });
 
-    this.searchService.search(paginatedSearchOptions).pipe(
+    this.searchService.search(paginatedSearchOptions, null, useCachedVersionIfAvailable, reRequestOnStale).pipe(
       getFirstCompletedRemoteData(),
     ).subscribe((response: RemoteData<PaginatedList<SearchResult<DSpaceObject>>>) => {
       this.searchResults$.next(response);

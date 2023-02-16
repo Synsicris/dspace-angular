@@ -118,12 +118,14 @@ BASIC LAYOUT
 
             // 1. headline with Icon
             .headline-workspace {
-              font-size:1.3rem;
+              font-size:1.2rem;
+              font-weight: 600 !important;
             }
             // 2. headline 
-            .h4 .text-value {
-              font-size:1.8rem !important;
+            .h4 {
+              margin-bottom:0.8rem !important;
               margin-top:-0.2rem;
+              font-size:1.6rem !important;
             }
 
           } // end headerbox ...
@@ -273,7 +275,7 @@ header {
 
     /* SYNSICRIS LOGO */
     .navbar-brand .synsicris-logo {
-      font-weight: 700;
+      font-weight: 600;
       font-size: 1.8rem;
       letter-spacing: .01rem;
       color: var(--sy-synsicris-logo-color-gray);
@@ -298,11 +300,12 @@ header {
 
 
 /* -----------------------------------------------------------
-BREADCRUMB (rex 221028)
-Must be swapped out in src/themes/synsicris/app/breadcrumbs/breadcrumbs.component.scss 
-in connection with the extension of the Bradcrumb functionality.
+BREADCRUMB (rex 230210)
+ATTENTION: in src/themes/synsicris/app/breadcrumbs/breadcrumbs.component.scss are already the final stylesheets 
+for breadcrumbs with entity tag according to 
+https://github.com/Synsicris/Userinterface1a/issues/52#issuecomment-1241349651 !
 ----------------------------------------------------------- */
-
+/* */
 ds-breadcrumbs nav.nav-breadcrumb { // complete bar
 
   //display:none !important;
@@ -318,8 +321,6 @@ ds-breadcrumbs nav.nav-breadcrumb { // complete bar
     background-color: transparent; // Breadcrumb-Links had a background-color, that is not needed
 
     li.breadcrumb-item {
-      font-size: 1.1rem;
-      font-weight: 600 !important;
 
       a:link, a:hover, a:focus, a:visited {
         color: var(--ds-breadcrumb-link-color) !important;
@@ -341,7 +342,7 @@ SIDEBAR (rex 221201)
 Sidebar is noth themeable, and only a few of the existing variables in 
 _theme_css_variable_overrides.scss affect the current design. 
 
-ATTETION: in case of misrepresentations in the sidebar very often mistakes in the language files are the cause!
+ATTENTION: in case of misrepresentations in the sidebar very often mistakes in the language files are the cause!
 ----------------------------------------------------------- */
 
 // Hide sidebar collapse button
@@ -369,13 +370,14 @@ button.menu-toggle {display:none;}
     background-color:var(--sy-cris-layout-sidebar-tab-direct-color) !important;      // Standard light blue for menu items #EFF4F7
     &:hover {background-color:var(--ds-cris-layout-sidebar-tab-color-hover);}
     border-bottom: 2px solid var(--sy-cris-layout-sidebar-tab-border-bottom-color);  // white
-    border-top:1px solid var(--sy-cris-layout-sidebar-tab-border-top-color);         // light grey
+    //border-top:1px solid var(--sy-cris-layout-sidebar-tab-border-top-color);         // light grey
     position:relative;
 
     // General formatting for links
     a.nav-item, a span.section-header-text {
       text-decoration:none !important;
       color:var(--sy-cris-layout-sidebar-link-text-color);
+      font-weight:400;
       }
     
     // contains the pop-up group ul second layer
@@ -439,14 +441,14 @@ button.menu-toggle {display:none;}
   }
 } // end &.Person
 
-/* STYLES FOR LEVEL 2 (Project)
------------------------------ */
+/* STYLES FOR LEVEL 2 (Project) WITH SPECIAL SOLUTION FOR SIDEBAR INTERHEAD
+------------------------------------------------------------------------ */
 &.Project {
   
   // concerns first level lists (.sidebar-section) and second level, therefore outside the li below
   li.active:not(.expanded) {
   border-left:4px solid var(--sy-level-project-border-color);    // Highlight-border-left
-  //span.section-header-text { margin-left:-20px; }        // Ausgleich Ruckeln durch Highlight-Border
+  //span.section-header-text { margin-left:-20px; }              // Compensation jerking due to highlight border
   }
 
   li.sidebar-section {
@@ -459,25 +461,23 @@ button.menu-toggle {display:none;}
           /* content reads out the content of the alt attribute in the language file:
           "layout.tab.header.Projectobjectives": "<span class=\"entry-with-space-before-to-divide-sidebar\" alt=\"Listen\">Ziele des Vorhabens</span>",  
           https://www.heise.de/select/ix/2017/3/1487591950470172 */
-          .entry-with-space-before-to-divide-sidebar {
+          .sidebar-interhead {
 
             &:after {
               content: "  "attr(alt)" ";
               display:block; 
               width:calc(var(--ds-cris-layout-sidebar-width) + 0.5rem);
               background-color: var(--sy-body-background-color) !important;
-              // zieht Lückenraum nach links
-              margin:-0.65rem 0 1rem -2rem;
+              margin:-0.65rem 0 1rem -2rem;     // pulls gap space to the left
               padding:0.6rem 0 0.6rem 0.5rem;  
               font-weight:800;
               font-family:"Nunito", sans-serif;
-              color: var(--ds-cris-layout-sidebar-menu-active-color); // dunkelgrau
-            } // end &:before
+              color: var(--ds-cris-layout-sidebar-menu-active-color); // dark grey
+            } // end &:after
 
-          } // end .entry-with-space-before-to-divide-sidebar:before
+          } // end .sidebar-interhead
 
-          .entry-with-space-before-label { }
-
+          
           // Aufklapppfeil
           i.fas.fa-chevron-right { }
 
