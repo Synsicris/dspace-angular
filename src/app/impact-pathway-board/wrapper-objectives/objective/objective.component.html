@@ -9,8 +9,8 @@
     </button>
   </ng-container>
   <ng-container ngProjectAs="panelContent">
-    <div class="row">
-      <div #taskSection class="col-9 pr-0">
+    <div class="d-flex">
+      <div #taskSection class="pr-0 w-100">
         <div class="d-flex align-items-stretch p-0 m-0 bg-step-green">
           <ipw-objective-container class="horizontal-step h-100 horizontal-content"
                                    [canEditButton]="canEditButton$ | async"
@@ -30,16 +30,14 @@
                                [disabled]="!(canEditButton$ | async) || isVersionOfAnItem"
                                (contentChange)="updateImpactPathwayTask($event)"></ipw-editable-textarea>
       </div>
-      <ng-container *ngIf="isVersionOfAnItem">
-        <div class="col-3 pl-0 comment-box-position" [ngStyle]="{'height.px': taskSection.clientHeight}" *ngIf="(formConfig$ | async)?.name">
-          <ds-comment-list
-            [relatedEntityType]="(this.objectiveItem$ | async).entityType"
-            [itemUuid]="impactPathwayStep.id"
-            [projectCommunityId]="projectCommunityId"
-            [type]="(formConfig$ | async).name">
-          </ds-comment-list>
-        </div>
-      </ng-container>
+      <div *ngIf="isVersionOfAnItem && isFunder && (formConfig$ | async)?.name" class="comment-box" [ngStyle]="{'height.px': taskSection.clientHeight}">
+        <ds-comment-list
+          [relatedEntityType]="(this.objectiveItem$ | async).entityType"
+          [itemUuid]="impactPathwayStep.id"
+          [projectCommunityId]="projectCommunityId"
+          [type]="(formConfig$ | async).name">
+        </ds-comment-list>
+      </div>
     </div>
   </ng-container>
 </ipw-collapsable-panel>

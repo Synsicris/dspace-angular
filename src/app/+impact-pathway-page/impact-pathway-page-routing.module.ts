@@ -46,9 +46,10 @@ import { IsFunderResolver } from '../core/project/is-funder.resolver';
             },
             resolve: {
               impactPathwayItem: ProjectItemPageResolver,
-              projectCommunity: ProjectCommunityByItemResolver,
               isVersionOfAnItem: VersionOfAnItemResolver,
-              objectivesItem: ProjectObjectivesItemResolver
+              isFunder: IsFunderResolver,
+              objectivesItem: ProjectObjectivesItemResolver,
+              projectCommunity: ProjectCommunityByItemResolver,
             },
           },
         ]

@@ -317,11 +317,8 @@ export class ProjectVersionService {
    * @param item
    */
   public isVersionOfAnItem(item: Item): boolean {
-    const metadata = Metadata.allValues(item.metadata, VERSION_UNIQUE_ID);
-    return isNotEmpty(metadata);
+    return isNotEmpty(Metadata.allValues(item.metadata, VERSION_UNIQUE_ID));
   }
-
-
 
   /**
    * Retrieve all item version for the given item by means the `hasVersion` relationship
