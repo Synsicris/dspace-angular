@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
-import { FeatureID } from '../core/data/feature-authorization/feature-id';
+
+import { BehaviorSubject } from 'rxjs';
+
 import { Item } from '../core/shared/item.model';
+import { ProjectAuthorizationService } from '../core/project/project-authorization.service';
 
 @Component({
   selector: 'ds-project-manage-version',
@@ -23,22 +24,30 @@ export class ProjectManageVersionComponent implements OnInit {
   /**
    * A boolean representing if user is coordinator or founder for the current project
    */
-  public isCoordinatorOfProject$: Observable<boolean>;
+  public isCoordinatorOfProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   /**
    * A boolean representing if user is coordinator or founder for the current project
    */
-  public isFounderOfProject$: Observable<boolean>;
+  public isFounderOfProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
-    protected authorizationService: AuthorizationDataService,
+    protected authorizationService: ProjectAuthorizationService,
     protected router: ActivatedRoute) {
 
   }
   ngOnInit(): void {
     this.router.data.subscribe(data => {
       this.item = data.item.payload;
-      this.isCoordinatorOfProject$ = this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.item.self);
-      this.isFounderOfProject$ = this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, this.item.self);
+
+      this.authorizationService.isCoordinator(this.item)
+        .subscribe((isCoord: boolean) => {
+          this.isCoordinatorOfProject$.next(isCoord);
+        });
+
+      this.authorizationService.isFunder(this.item)
+        .subscribe((isCoord: boolean) => {
+          this.isFounderOfProject$.next(isCoord);
+        });
     });
   }
 
