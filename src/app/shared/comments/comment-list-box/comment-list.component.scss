@@ -3,27 +3,10 @@
   overflow-x: clip;
 
   .add-section {
-    bottom: 0;
-
-    ds-comment-create > span > button {
-      background: white;
-    }
+    position: sticky;
+    top: 0;
+    background: white;
   }
-}
-
-.card {
-  position: relative;
-}
-
-.add-section {
-  left: 1rem;
-  position: absolute;
-  z-index: 1;
-}
-
-.add-btn-ipw {
-  bottom: 1.8rem;
-  background: white;
 }
 
 .card-header-height {
