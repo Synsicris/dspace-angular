@@ -5,8 +5,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <ds-alert [type]="'alert-info'">
-      {{ "item.version.create.modal.text" | translate }}
+    <ds-alert [type]="'alert-info'" [content]="'item.version.create.modal.text' | translate">
     </ds-alert>
     <div class="form-group">
       <label for="summary">{{'item.version.create.modal.form.summary.label' | translate }}:</label>

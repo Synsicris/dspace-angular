@@ -2,13 +2,13 @@
   <div *ngVar="(versionRD$ | async)?.payload as itemVersion">
     <div class="mb-2" *ngIf="versions?.page?.length > 0 || displayWhenEmpty">
       <h2 *ngIf="displayTitle">{{"item.version.history.head" | translate}}</h2>
-      <ds-alert [type]="AlertTypeEnum.Info" *ngIf="displayAlert && itemVersion">
-        <span *ngIf="isFunder">
-          {{ "item.version.history.info.alert.funder" | translate }}
-        </span>
-        <span *ngIf="isCoordinator">
-          {{ "item.version.history.info.alert.coordinator" | translate }}
-        </span>
+      <ds-alert *ngIf="displayAlert && itemVersion && isFunder"
+                [type]="AlertTypeEnum.Info"
+                [content]="'item.version.history.info.alert.funder'">
+      </ds-alert>
+      <ds-alert *ngIf="displayAlert && itemVersion && isCoordinator"
+                [type]="AlertTypeEnum.Info"
+                [content]="'item.version.history.info.alert.coordinator'">
       </ds-alert>
       <ds-pagination *ngIf="versions?.page?.length > 0" (paginationChange)="onPageChange()" [hideGear]="true"
         [hidePagerWhenSinglePage]="true" [paginationOptions]="options" [pageInfoState]="versions"
