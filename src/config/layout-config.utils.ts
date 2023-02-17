@@ -22,12 +22,12 @@ export function getDiscoveryConfiguration(configuration: RelationBoxConfiguratio
   return environment.layout.search.filters.discoveryConfig[configuration['discovery-configuration']];
 }
 
-export function groupRangeFilters(filters: DefaultSearchFiltersConfig<DefaultSearchFiltersConfigs>): RangeFilterGroup {
+export function groupRangeFilters(filters: DefaultSearchFiltersConfig<DefaultSearchFiltersConfigs> = {}): RangeFilterGroup {
   return Object.keys(filters)
     .filter(key => filters[key]?.filterType === 'range')
     .map(key => ({ key, filter: filters[key] as DefaultRangeSearchFilterConfig }))
     .map(({ key, filter }) => createRangeFilterGroup(key, filter))
-    .reduce((previousValue, currentValue) => Object.assign({}, previousValue, currentValue));
+    .reduce((previousValue, currentValue) => Object.assign({}, previousValue, currentValue), {});
 }
 
 export function isConfigParam(confParam: RangeFilterGroup, fkey: string) {
