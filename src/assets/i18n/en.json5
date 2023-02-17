@@ -3400,6 +3400,10 @@
 
   "item.version.history.info.alert": "version info",
 
+  "item.version.history.info.alert.funder": "Is Funder",
+
+  "item.version.history.info.alert.coordinator": "Is Coordinator",
+
   "item.version.history.official": "Active working project",
 
   "item.version.history.table.version": "Version",

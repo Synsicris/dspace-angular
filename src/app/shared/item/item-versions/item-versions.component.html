@@ -3,7 +3,12 @@
     <div class="mb-2" *ngIf="versions?.page?.length > 0 || displayWhenEmpty">
       <h2 *ngIf="displayTitle">{{"item.version.history.head" | translate}}</h2>
       <ds-alert [type]="AlertTypeEnum.Info" *ngIf="displayAlert && itemVersion">
-        {{ "item.version.history.info.alert" | translate }}
+        <span *ngIf="isFunder">
+          {{ "item.version.history.info.alert.funder" | translate }}
+        </span>
+        <span *ngIf="isCoordinator">
+          {{ "item.version.history.info.alert.coordinator" | translate }}
+        </span>
       </ds-alert>
       <ds-pagination *ngIf="versions?.page?.length > 0" (paginationChange)="onPageChange()" [hideGear]="true"
         [hidePagerWhenSinglePage]="true" [paginationOptions]="options" [pageInfoState]="versions"

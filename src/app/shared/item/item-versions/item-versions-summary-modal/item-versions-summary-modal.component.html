@@ -5,12 +5,12 @@
     </button>
   </div>
   <div class="modal-body">
-    <p class="pb-2">
+    <ds-alert>
       {{ "item.version.create.modal.text" | translate }}
       <span *ngIf="!firstVersion">
         {{ "item.version.create.modal.text.startingFrom" | translate : {version: versionNumber} }}
       </span>
-    </p>
+    </ds-alert>
     <div class="form-group">
       <label for="summary">{{'item.version.create.modal.form.summary.label' | translate }}:</label>
       <input type="text" id="summary" class="form-control" [(ngModel)]="newVersionSummary"
