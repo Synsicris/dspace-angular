@@ -1,7 +1,7 @@
 <div class="border-bottom mb-4 pb-2 d-flex justify-content-between align-items-center">
   <ds-comcol-page-header [name]="impactPathway.title">
   </ds-comcol-page-header>
-  <ds-view-version-badges *ngIf="impactPathWayItem" [item]="impactPathWayItem"></ds-view-version-badges>
+  <ds-view-version-badges *ngIf="impactPathWayItem && (isVersionOfAnItem$ | async)" [item]="impactPathWayItem"></ds-view-version-badges>
   <div class="pl-2 space-children-mr">
     <ds-item-version-list [btnClass]="'btn-md'"
                           [showOnlyVisible]="isFunder"
@@ -35,7 +35,7 @@
 <div>
   <ds-alert *ngIf="infoShowed | async" [type]="'alert-info'" [collapsible]="true"
     [content]="'impact-pathway.wrapper.info'"></ds-alert>
-    <ng-container *ngIf="(isVersionOfAnItem$ | async)">
+    <ng-container *ngIf="(isVersionOfAnItem$ | async) && isFunder">
       <div class="mb-3">
         <ngb-accordion
           #accordionRef

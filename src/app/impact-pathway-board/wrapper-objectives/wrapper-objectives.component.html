@@ -8,14 +8,18 @@
     </button>
   </h1>
   <hr/>
-  <div class="w-100 mb-2 d-flex justify-content-end">
-    <ds-item-version-list class="float-right"
-                          [btnClass]="'btn-md'"
-                          [showOnlyVisible]="isFunder"
-                          [targetItemId]="impactPathwayStep.id"
-                          (versionSelected)="onVersionSelected($event)"
-                          (versionDeselected)="onVersionDeselected()">
-    </ds-item-version-list>
+  <div class="d-flex justify-content-between">
+    <ds-view-version-badges *ngIf="impactPathwayStepItem && (isVersionOfAnItem$ | async)"
+                            [item]="impactPathwayStepItem"></ds-view-version-badges>
+    <div class="mb-2 d-flex justify-content-end">
+      <ds-item-version-list class="float-right"
+                            [btnClass]="'btn-md'"
+                            [showOnlyVisible]="isFunder"
+                            [targetItemId]="impactPathwayStep.id"
+                            (versionSelected)="onVersionSelected($event)"
+                            (versionDeselected)="onVersionDeselected()">
+      </ds-item-version-list>
+    </div>
   </div>
   <ds-alert *ngIf="hasInfoMessage()" class="bg-light"
             [dismissible]="false"
@@ -27,8 +31,8 @@
                    [impactPathwayStep]="impactPathwayStep"
                    [impactPathwayTask]="task"
                    [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"
-                   [targetImpactPathwayTaskId]="targetImpactPathwayTaskId"
-    ></ipw-objective>
+                   [isFunder]="isFunder"
+                   [targetImpactPathwayTaskId]="targetImpactPathwayTaskId"></ipw-objective>
   </ng-container>
 
 </div>

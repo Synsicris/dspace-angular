@@ -3,10 +3,10 @@
     <ds-comcol-page-header
       [name]="'working-plan.page.title' | translate">
     </ds-comcol-page-header>
-    <ds-view-version-badges *ngIf="workingPlan" [item]="workingPlan"></ds-view-version-badges>
+    <ds-view-version-badges *ngIf="workingPlan && isVersionOf" [item]="workingPlan"></ds-view-version-badges>
   </div>
   <ds-alert [type]="'alert-info'" [content]="'working-plan.chart.page.description'" [collapsible]="true" [collapsed]="true"></ds-alert>
-  <ng-container *ngIf="isVersionOf">
+  <ng-container *ngIf="isVersionOf && isFunder">
     <ngb-accordion
       #accordionRef
       [destroyOnHide]="false"
