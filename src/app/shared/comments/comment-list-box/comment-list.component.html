@@ -6,11 +6,10 @@
     </div>
   </ng-container>
   <div class="card-body">
-      <ds-browse-most-elements
+    <ds-browse-most-elements *ngIf="paginatedSearchOptions"
       #configurationSearchPage
       [paginatedSearchOptions]="paginatedSearchOptions"
-      [showPagination]="true"
-    ></ds-browse-most-elements>
+      [showPagination]="true"></ds-browse-most-elements>
     <div class="row justify-content-end add-section">
       <ds-comment-create
         [itemId]="itemUuid"
@@ -18,8 +17,7 @@
         [targetEntityType]="'comment'"
         [scope]="projectCommunityId"
         [showIconOnly]="true"
-        (refresh)="refresh()"
-      >
+        (refresh)="refresh()">
       </ds-comment-create>
     </div>
   </div>
