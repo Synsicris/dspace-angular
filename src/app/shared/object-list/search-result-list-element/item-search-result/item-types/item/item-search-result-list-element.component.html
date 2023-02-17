@@ -17,6 +17,7 @@
         <div class="d-flex">
           <ds-type-badge *ngIf="showLabel" [object]="dso"></ds-type-badge>
           <ds-access-status-badge [item]="dso" class="pl-1"></ds-access-status-badge>
+          <ds-grant-badge [object]="dso"></ds-grant-badge>
         </div>
         <div *ngIf="!!displayConfigurations && displayConfigurations.length > 0">
           <div *ngFor="let config of displayConfigurations">
@@ -69,6 +70,7 @@
           </div>
         </ds-truncatable>
         <ds-metric-badges *ngIf="showMetrics" class="d-block clearfix" [item]="dso"></ds-metric-badges>
+        <ds-item-actions *ngIf="showItemActions" [object]="dso" [showEditPermission]="true"></ds-item-actions>
       </div>
       <div class="align-self-center" *ngIf="showMetrics">
         <ds-metric-donuts [item]="dso"></ds-metric-donuts>
