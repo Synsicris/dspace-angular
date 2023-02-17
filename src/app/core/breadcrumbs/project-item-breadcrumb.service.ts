@@ -23,6 +23,7 @@ import { LinkService } from '../cache/builders/link.service';
 import { getFirstCompletedRemoteData } from '../shared/operators';
 import { BREADCRUMB_ENTITY_PREFIX } from './project-item-i18n-breadcrumbs.service';
 import { Metadata } from '../shared/metadata.utils';
+import { Item } from '../shared/item.model';
 
 /**
  * The class that resolves the BreadcrumbConfig object for a Collection
@@ -47,47 +48,22 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
   getBreadcrumbs(key: ChildHALResource & DSpaceObject, url: string): Observable<Breadcrumb[]> {
     const label = this.dsoNameService.getName(key);
     const entityType: string = this.dsoNameService.getEntityType(key);
-
     const relatedProject = Metadata.first(key.metadata, PROJECT_RELATION_METADATA);
     const relatedFunding = Metadata.first(key.metadata, FUNDING_RELATION_METADATA);
     let fundingCrumbs$ = observableOf([]);
     let projectCrumbs$ = observableOf([]);
     let crumbs$ = observableOf([]);
-    let parentUrl;
+    let parentUrl = null;
     if (entityType !== FUNDING_ENTITY && hasValue(relatedFunding?.authority)) {
-      fundingCrumbs$ = this.projectService.getFundingItemByItemId(key.uuid).pipe(
-        getFirstCompletedRemoteData(),
-        switchMap((parentRD: RemoteData<ChildHALResource & DSpaceObject>) => {
-          if (hasValue(parentRD?.payload) && parentRD?.payload?.uuid !== key.uuid) {
-            const parent = parentRD.payload;
-            parentUrl = getDSORoute(parent);
-            return this.getBreadcrumbs(parent, parentUrl).pipe(
-              map((breadcrumbs: Breadcrumb[]) => {
-                return breadcrumbs.concat(entityType && [new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, `${parentUrl}/${entityType}`)] || [])
-                  .concat([new Breadcrumb(label, url)]);
-              })
-            );
-          }
-          return observableOf([]);
-        })
-      );
+      fundingCrumbs$ =
+        this.getNestedBreadcrumb(
+          this.projectService.getFundingItemByItemId(key.uuid), key, parentUrl, entityType, label, url
+        );
     } else if (entityType !== PROJECT_ENTITY && hasValue(relatedProject?.authority)) {
-      projectCrumbs$ = this.projectService.getProjectItemByItemId(key.uuid).pipe(
-        getFirstCompletedRemoteData(),
-        switchMap((parentRD: RemoteData<ChildHALResource & DSpaceObject>) => {
-          if (hasValue(parentRD?.payload) && parentRD?.payload?.uuid !== key.uuid) {
-            const parent = parentRD.payload;
-            parentUrl = getDSORoute(parent);
-            return this.getBreadcrumbs(parent, parentUrl).pipe(
-              map((breadcrumbs: Breadcrumb[]) => {
-                return breadcrumbs.concat(entityType && [new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, `${parentUrl}/${entityType}`)] || [])
-                  .concat([new Breadcrumb(label, url)]);
-              })
-            );
-          }
-          return observableOf([]);
-        })
-      );
+      projectCrumbs$ =
+        this.getNestedBreadcrumb(
+          this.projectService.getProjectItemByItemId(key.uuid), key, parentUrl, entityType, label, url
+        );
     } else {
       crumbs$ = observableOf(
         [].concat(entityType && [new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, null)] || [])
@@ -102,6 +78,34 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
     ]).pipe(
       take(1),
       map(([crumb, fundingCrumb, projectCrumb]) => [].concat(...projectCrumb, ...fundingCrumb, ...crumb))
+    );
+  }
+
+  private getNestedBreadcrumb(
+    remoteItem$: Observable<RemoteData<Item>>,
+    key: ChildHALResource & DSpaceObject,
+    parentUrl: string,
+    entityType: string,
+    label: string,
+    url: string
+  ): Observable<Breadcrumb[]> {
+    return remoteItem$.pipe(
+      getFirstCompletedRemoteData(),
+      switchMap((parentRD: RemoteData<ChildHALResource & DSpaceObject>) => {
+        if (hasValue(parentRD?.payload) && parentRD?.payload?.uuid !== key.uuid) {
+          const parent = parentRD.payload;
+          parentUrl = getDSORoute(parent);
+          return this.getBreadcrumbs(parent, parentUrl).pipe(
+            map((breadcrumbs: Breadcrumb[]) => {
+              return breadcrumbs.concat(
+                entityType && [new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, `${parentUrl}/${entityType}`)] || [],
+                new Breadcrumb(label, url)
+              );
+            })
+          );
+        }
+        return observableOf([]);
+      })
     );
   }
 }

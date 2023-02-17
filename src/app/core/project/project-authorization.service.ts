@@ -64,4 +64,19 @@ export class ProjectAuthorizationService {
   isFunderOrganizationalManager(): Observable<boolean> {
     return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager);
   }
+
+  /**
+   * Check if user is a Coordinator of project
+   */
+  isCoordinator(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject);
+  }
+
+  /**
+   * Check if user is a Funder
+   */
+  isFunder(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderProjectManager);
+  }
+
 }
