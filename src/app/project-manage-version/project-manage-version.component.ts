@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 import { Item } from '../core/shared/item.model';
 import { ProjectAuthorizationService } from '../core/project/project-authorization.service';
@@ -19,36 +20,42 @@ export class ProjectManageVersionComponent implements OnInit {
   /**
    * A boolean representing the item version of the project entity being managed
    */
-  item: Item;
+  item$: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
 
   /**
    * A boolean representing if user is coordinator or founder for the current project
    */
-  public isCoordinatorOfProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isCoordinatorOfProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+
   /**
    * A boolean representing if user is coordinator or founder for the current project
    */
-  public isFounderOfProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isFounderOfProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
 
   constructor(
     protected authorizationService: ProjectAuthorizationService,
     protected router: ActivatedRoute) {
 
   }
+
   ngOnInit(): void {
-    this.router.data.subscribe(data => {
-      this.item = data.item.payload;
+    const item$ = this.router.data.pipe(
+      map((data: Params) => data.item.payload)
+    );
+    const isCoordinator$ = item$.pipe(
+      switchMap((item: Item) => this.authorizationService.isCoordinator(item))
+    );
+    const isFunderOfProject$ = item$.pipe(
+      switchMap((item: Item) => this.authorizationService.isFunderProjectManager(item))
+    );
 
-      this.authorizationService.isCoordinator(this.item)
-        .subscribe((isCoord: boolean) => {
-          this.isCoordinatorOfProject$.next(isCoord);
-        });
-
-      this.authorizationService.isFunder(this.item)
-        .subscribe((isCoord: boolean) => {
-          this.isFounderOfProject$.next(isCoord);
-        });
-    });
+    combineLatest([item$, isCoordinator$, isFunderOfProject$])
+      .subscribe(([item, isCoordinator, isFunderOfProject]) => {
+        console.log(item, isCoordinator, isFunderOfProject);
+        this.item$.next(item);
+        this.isCoordinatorOfProject$.next(isCoordinator);
+        this.isFounderOfProject$.next(isFunderOfProject);
+      });
   }
 
 }

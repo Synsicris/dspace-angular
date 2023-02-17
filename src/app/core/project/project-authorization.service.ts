@@ -74,10 +74,17 @@ export class ProjectAuthorizationService {
   }
 
   /**
-   * Check if user is a Funder
+   * Check if user is a Funder project manager for any project
    */
-  isFunder(item: Item): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.isFunderProjectManager, item.self);
+  isFunderManager(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderProjectManager);
+  }
+
+  /**
+   * Check if user is a Funder for a given project
+   */
+  isFunderProjectManager(item: Item): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, item.self);
   }
 
 }
