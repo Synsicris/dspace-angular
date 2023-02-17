@@ -1,6 +1,6 @@
 <div class="card h-100">
   <ng-container *ngIf="showCardHeader">
-    <div class="card-header" [ngClass]="{'h-100': type == 'impact_pathway_form'}">
+    <div class="card-header" [ngClass]="{'card-header-height': type == 'impact_pathway_form'}">
       <span *ngIf="title"> {{title | translate}} </span>
       <span *ngIf="!title"> {{'comment-list.header' | translate}} </span>
     </div>
@@ -10,7 +10,7 @@
       #configurationSearchPage
       [paginatedSearchOptions]="paginatedSearchOptions"
       [showPagination]="true"></ds-browse-most-elements>
-    <div class="row justify-content-end add-section">
+    <div class="row justify-content-start add-section"  [ngClass]="{' add-btn-ipw': type == 'impact_pathway_form'}">
       <ds-comment-create
         [itemId]="itemUuid"
         [relatedEntityType]="relatedEntityType"
