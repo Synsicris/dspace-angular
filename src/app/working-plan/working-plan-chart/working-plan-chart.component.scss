@@ -151,3 +151,13 @@ $highlightBorderColor: #FF9800;
 .calendar-inner-cell[date-filled=false][date-inside=true] {
   background-color: $incompleteColor;
 }
+
+:host ::ng-deep {
+  ngb-accordion > div.card {
+    border-bottom: 1px solid #dee2e6 !important;
+  }
+
+  #panel-0 > div.card-body {
+    padding: 0 !important;
+  }
+}

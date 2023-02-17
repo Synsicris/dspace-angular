@@ -6,6 +6,40 @@
     <ds-view-version-badges *ngIf="workingPlan" [item]="workingPlan"></ds-view-version-badges>
   </div>
   <ds-alert [type]="'alert-info'" [content]="'working-plan.chart.page.description'" [collapsible]="true" [collapsed]="true"></ds-alert>
+  <ng-container *ngIf="isVersionOf">
+    <ngb-accordion
+      #accordionRef
+      [destroyOnHide]="false"
+      [closeOthers]="false"
+      [activeIds]="activeIds"
+      >
+      <ngb-panel id="panel-0">
+        <ng-template ngbPanelHeader let-opened="opened">
+          <span> {{'comment-list.header' | translate}} </span>
+          <div class="d-inline-block float-right" *ngIf="showAccordionPanelToggle">
+            <button ngbPanelToggle class="btn btn-outline-light">
+              <i *ngIf="opened" class="fa fa-chevron-up text-dark"></i>
+              <i *ngIf="!opened" class="fa fa-chevron-down text-dark"></i>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div class="row m-0">
+            <div class="col-12 p-0">
+              <ds-comment-list
+                [relatedEntityType]="workingPlan.entityType"
+                [itemUuid]="workingPlan.uuid"
+                [showCardHeader]="false"
+                [projectCommunityId]="projectCommunityId"
+                [type]="workingPlan.entityType">
+            </ds-comment-list>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </ng-container>
+
   <ipw-working-plan-chart-toolbar [compareMode]="compareMode"
                                   [isFunder]="isFunder"
                                   [isVersionOf]="isVersionOf"

@@ -1,3 +1,4 @@
+import { CommentsModule } from './../shared/comments/comments.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -181,6 +182,7 @@ const ENTRY_COMPONENTS = [
     NgbAccordionModule,
     ComcolModule,
     MiradorViewerModule,
+    CommentsModule
   ],
   exports: [
     CrisLayoutComponent,

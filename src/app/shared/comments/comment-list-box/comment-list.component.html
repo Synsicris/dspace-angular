@@ -1,0 +1,25 @@
+<div class="card h-100">
+  <ng-container *ngIf="showCardHeader">
+    <div class="card-header" [ngClass]="{'card-header-height': type == 'impact_pathway_form'}">
+        <span *ngIf="title"> {{title | translate}} </span>
+        <span *ngIf="!title"> {{'comment-list.header' | translate}} </span>
+    </div>
+  </ng-container>
+  <div class="card-body pt-0">
+    <div class="row justify-content-end add-section ml-1">
+      <ds-comment-create
+        [itemId]="itemUuid"
+        [relatedEntityType]="relatedEntityType"
+        [targetEntityType]="'comment'"
+        [scope]="projectCommunityId"
+        [showIconOnly]="true"
+        (refresh)="refresh()">
+      </ds-comment-create>
+    </div>
+    <ds-browse-most-elements *ngIf="paginatedSearchOptions"
+      #configurationSearchPage
+      [paginatedSearchOptions]="paginatedSearchOptions"
+      [showPagination]="true"></ds-browse-most-elements>
+  </div>
+</div>
+

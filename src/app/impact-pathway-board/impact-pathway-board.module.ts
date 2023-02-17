@@ -22,6 +22,8 @@ import { CreateSimpleItemModule } from '../shared/create-simple-item-modal/creat
 import { ComcolModule } from '../shared/comcol/comcol.module';
 import { EditSimpleItemModalModule } from '../shared/edit-simple-item-modal/edit-simple-item-modal.module';
 import { ItemDetailPageModalModule } from '../item-detail-page-modal/item-detail-page-modal.module';
+import { CommentsModule } from '../shared/comments/comments.module';
+import { GetIpwDataPipe } from './shared/impact-path-way/impact-path-way-task/get-ipw-data.pipe';
 
 const MODULES = [
   CommonModule,
@@ -35,7 +37,8 @@ const MODULES = [
   EditSimpleItemModalModule,
   ComcolModule,
   ItemDetailPageModalModule,
-  CreateItemSubmissionModalModule
+  CreateItemSubmissionModalModule,
+  CommentsModule
 ];
 
 const COMPONENTS = [
@@ -56,6 +59,8 @@ const ENTRY_COMPONENTS = [];
 
 const PROVIDERS = [];
 
+const PIPES = [GetIpwDataPipe];
+
 @NgModule({
   imports: [
     ...MODULES
@@ -63,7 +68,8 @@ const PROVIDERS = [];
   declarations: [
     ...COMPONENTS,
     ...DIRECTIVES,
-    ...ENTRY_COMPONENTS
+    ...ENTRY_COMPONENTS,
+    ...PIPES
   ],
   providers: [
     ...PROVIDERS
