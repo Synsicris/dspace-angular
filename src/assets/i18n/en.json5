@@ -704,7 +704,6 @@
 
   "admin.batch-import.page.remove": "remove",
 
-
   "alert.close.aria": "Close",
 
   "alert.toggle.hide": "Show less",
@@ -722,7 +721,6 @@
   "bitstream.download.page.back": "Back",
 
   "bitstream.download.page.close": "Close",
-
 
   "bitstream.edit.authorizations.link": "Edit bitstream's Policies",
 
@@ -913,7 +911,6 @@
   "breadcrumb.entity-type.open_researchquestion": "Open research questions",
 
   "breadcrumb.entity-type.interim_report": "Interim report",
-
 
   "browse.back.all-results": "All browse results",
 
@@ -1295,8 +1292,6 @@
 
   "collection.form.correctionSubmissionDefinition": "Submission definition for correction request",
 
-
-
   "collection.listelement.badge": "Collection",
 
   "collection.page.browse.recent.head": "Recent Submissions",
@@ -1461,7 +1456,6 @@
 
   "comcol-role.edit.delete.error.title": "Failed to delete the '{{ role }}' role's group",
 
-
   "comcol-role.edit.community-admin.name": "Administrators",
 
   "comcol-role.edit.collection-admin.name": "Administrators",
@@ -1556,7 +1550,7 @@
 
   "context-menu.actions.label": "Options",
 
-  "context-menu.actions.show-all-metadata": "Show all metadata (technical view)",
+  "context-menu.actions.show-all-metadata": "<i class=\"fas fa-ellipsis-v\"></i> Show all metadata (technical view)",
 
   "context-menu.actions.easy-online-import.btn": "<i class=\"fas fa-file-import\"></i> Import from Easy-Online",
 
@@ -1670,7 +1664,6 @@
 
   "datapackage.listelement.badge": "Data package",
 
-
   "checksum-tooltip.info.MD5": "The <b>MD5 message-digest algorithm</b> can be used to verify the integrity of the file that you have uploaded. You can calculate its value locally via tools that are generally available in each operative system like <b>md5sum</b>",
 
   "cookies.consent.accept-all": "Accept all",
@@ -1727,13 +1720,9 @@
 
   "cookies.consent.app.description.google-analytics": "Allows us to track statistical data",
 
-
-
   "cookies.consent.app.title.google-recaptcha": "Google reCaptcha",
 
   "cookies.consent.app.description.google-recaptcha": "We use google reCAPTCHA service during registration and password recovery",
-
-
 
   "cookies.consent.purpose.functional": "Functional",
 
@@ -1753,9 +1742,7 @@
 
   "cooperation_events.listelement.badge": "Cooperation process",
 
-
-  "curation-task.task.citationpage.label":  "Generate Citation Page",
-
+  "curation-task.task.citationpage.label": "Generate Citation Page",
 
   "cris-layout.toggle.open": "Open section",
 
@@ -1795,7 +1782,7 @@
 
   "curation-task.task.profileformats.label": "Profile Bitstream Formats",
 
-   "curation-task.task.registerdoi.label": "Mint DOI",
+  "curation-task.task.registerdoi.label": "Mint DOI",
 
   "curation-task.task.requiredmetadata.label": "Check for Required Metadata",
 
@@ -1834,8 +1821,6 @@
   "deny-request-copy.success": "Successfully denied item request",
 
   "dso.name.untitled": "Untitled",
-
-
 
   "dso-selector.create.collection.head": "New collection",
 
@@ -2275,9 +2260,7 @@
 
   "explore.title": "Explore section",
 
-
   "feed.description": "Syndication feed",
-
 
   "file-section.error.header": "Error obtaining files for this item",
 
@@ -2305,7 +2288,7 @@
 
   "forgot-email.form.header": "Forgot Password",
 
-  "forgot-email.form.info": "Enter the email address associated with the account.",
+  "forgot-email.form.info": "Enter Register an account to subscribe to collections for email updates, and submit new items to DSpace.",
 
   "forgot-email.form.email": "Email Address *",
 
@@ -2313,23 +2296,23 @@
 
   "forgot-email.form.email.error.pattern": "Please fill in a valid email address",
 
-  "forgot-email.form.email.hint": "An email will be sent to this address with a further instructions.",
+  "forgot-email.form.email.hint": "This address will be verified and used as your login name.",
 
-  "forgot-email.form.submit": "Reset password",
+  "forgot-email.form.submit": "Save",
 
-  "forgot-email.form.success.head": "Password reset email sent",
+  "forgot-email.form.success.head": "Verification email sent",
 
   "forgot-email.form.success.content": "An email has been sent to {{ email }} containing a special URL and further instructions.",
 
-  "forgot-email.form.error.head": "Error when trying to reset password",
+  "forgot-email.form.error.head": "Error when trying to register email",
 
-  "forgot-email.form.error.content": "An error occured when attempting to reset the password for the account associated with the following email address: {{ email }}",
+  "forgot-email.form.error.content": "An error occured when registering the following email address: {{ email }}",
 
   "forgot-password.title": "Forgot Password",
 
   "forgot-password.form.head": "Forgot Password",
 
-  "forgot-password.form.info": "Please enter a password in the box below, and confirm it by typing it again into the second box.",
+  "forgot-password.form.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
 
   "forgot-password.form.card.security": "Security",
 
@@ -2352,7 +2335,6 @@
   "forgot-password.form.notification.success.title": "Password reset completed",
 
   "forgot-password.form.submit": "Submit password",
-
 
   "form.add": "Add more",
 
@@ -2482,14 +2464,13 @@
 
   "grant-request-copy.success": "Successfully granted item request",
 
-
   "health.breadcrumbs": "Health",
 
-  "health-page.heading" : "Health",
+  "health-page.heading": "Health",
 
-  "health-page.info-tab" : "Info",
+  "health-page.info-tab": "Info",
 
-  "health-page.status-tab" : "Status",
+  "health-page.status-tab": "Status",
 
   "health-page.error.msg": "The health check service is temporarily unavailable",
 
@@ -2522,7 +2503,6 @@
   "health-page.title": "Health",
 
   "health-page.section.no-issues": "No issues detected",
-
 
   "home.description": "",
 
@@ -2647,6 +2627,8 @@
   "impact-pathway.task.create.success": "New item has been created successfully.",
 
   "impact-pathway.wrapper.info": "<b>Develop the Impact Pathway of the project</b></br><p>The Impact Pathway supports you in the impact-oriented planning and implementation of the project. Please present the most important objectives, activities and intended impacts of the project in a clear and concise manner by means of key messages. Use arrows to illustrate particularly important and non-linear relationships. While the project is progressing, you can update the Impact Pathway and add any results achieved.</p><p>The columns structure the key messages for impact-oriented planning:</br>In <b>Background</b> important preliminary considerations for the project are presented, such as problem definition, state of knowledge and conditions.</br>The <b>Objectives of research and development</b> describe the scientific/technical work objectives of the project. These objectives can be assigned to work packages and tasks on a second level.</br><b>Interactions with partners and groups of actors. Outputs for dissemination</b> reflect all exchange and transfer activities of the project. In a first step, key messages about the purpose and group of actors of the interactions are formulated. These key messages can be assigned to specific activities on a second level.</br>The intended impacts of the project are structured in two columns:</br>In <b>Application (possibilities)</b> the contributions of the project to the application of the project results are presented.</br><b>Expected societal impacts</b> describe what societal effects are expected when the results of projects are applied.</br>In <b>Contribution to funding programme objectives</b>, the funding programme objectives to which the project contributes are selected.</p><p>In each column, you can use [+] to create unlimited items or search for and select previously created items.</br>Each item has a specific detail page (depending on the section selected) in which further information is usually given. You can switch between the Impact Pathway and the detail page of an item at any time.</br>You can start to create items in any column of the Impact Pathway.</br>Via [Edit] below the columns of the Impact Pathway you can add a description to the overall objectives of the project.</p><p><b>Key questions and tips for developing the Impact Pathway:</b> What impacts do you want to achieve with the project? How would you like to contribute to the development of these impacts?<br>It is recommended, to plan the Impact Pathway for the project in terms of the intended impacts and to develop it together with partners in practice and groups of actors.</br></p>",
+
+  "comment-list.header":"Comments",
 
   "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
 
@@ -3134,8 +3116,6 @@
 
   "item.truncatable-part.show-less": "Collapse",
 
-
-
   "item.page.abstract": "Abstract",
 
   "item.page.author": "Authors",
@@ -3266,7 +3246,7 @@
 
   "item.preview.dc.identifier.issn": "ISSN",
 
-  "item.preview.dc.identifier.scopus" : "Scopus ID",
+  "item.preview.dc.identifier.scopus": "Scopus ID",
 
   "item.preview.dc.publisher": "Publisher",
 
@@ -3294,7 +3274,7 @@
 
   "item.preview.dc.identifier.other": "Other identifier: ",
 
-  "item.preview.dc.identifier.pmid" : "Pubmed ID",
+  "item.preview.dc.identifier.pmid": "Pubmed ID",
 
   "item.preview.dc.language.iso": "Language: ",
 
@@ -3310,23 +3290,23 @@
 
   "item.preview.dc.type": "Type: ",
 
-  "item.preview.oaire.citation.issue" : "Issue",
+  "item.preview.oaire.citation.issue": "Issue",
 
-  "item.preview.oaire.citation.volume" : "Volume",
+  "item.preview.oaire.citation.volume": "Volume",
 
-  "item.preview.dc.relation.issn" : "ISSN",
+  "item.preview.dc.relation.issn": "ISSN",
 
-  "item.preview.dc.identifier.isbn" : "ISBN",
+  "item.preview.dc.identifier.isbn": "ISBN",
 
   "item.preview.dc.identifier": "Identifier: ",
 
-  "item.preview.dc.relation.ispartof" : "Journal or Serie",
+  "item.preview.dc.relation.ispartof": "Journal or Serie",
 
-  "item.preview.dc.identifier.doi" : "DOI",
+  "item.preview.dc.identifier.doi": "DOI",
 
-  "item.preview.dc.title.alternative" : "Alternative Title",
+  "item.preview.dc.title.alternative": "Alternative Title",
 
-  "item.preview.dc.type.version" : "Version",
+  "item.preview.dc.type.version": "Version",
 
   "item.preview.dc.source": "Source: ",
 
@@ -3399,6 +3379,10 @@
   "item.version.history.selected.alert": "You are currently viewing version {{version}} of the item.",
 
   "item.version.history.info.alert": "version info",
+
+  "item.version.history.info.alert.funder": "Is Funder",
+
+  "item.version.history.info.alert.coordinator": "Is Coordinator",
 
   "item.version.history.official": "Active working project",
 
@@ -3716,26 +3700,25 @@
 
   "manage.relationships.unhide": "Unhide",
 
-  "manage.relationships.search-list.title" : "All your items",
+  "manage.relationships.search-list.title": "All your items",
 
-  "manage.relationships.selected-list.title" : "Selected items",
+  "manage.relationships.selected-list.title": "Selected items",
 
   "manage.relationships.no.relationships.found": "Empty selection",
 
   "manage.relationships.no.data.found": "No data found",
 
-  "manage.relationships.error.select" : "An unexpected error occurs while selecting the entity.",
+  "manage.relationships.error.select": "An unexpected error occurs while selecting the entity.",
 
-  "manage.relationships.error.unselect" : "An unexpected error occurs while unselecting the entity.",
+  "manage.relationships.error.unselect": "An unexpected error occurs while unselecting the entity.",
 
-  "manage.relationships.error.hide" : "An unexpected error occurs while hiding the entity.",
+  "manage.relationships.error.hide": "An unexpected error occurs while hiding the entity.",
 
-  "manage.relationships.error.unhide" : "An unexpected error occurs while exposing the entity.",
+  "manage.relationships.error.unhide": "An unexpected error occurs while exposing the entity.",
 
-  "manage.relationships.error.sort" : "An unexpected error occurs while sorting entities.",
+  "manage.relationships.error.sort": "An unexpected error occurs while sorting entities.",
 
-  "manage.relationships.hidden-related-items-alert" : "Please note that hidden related items will always be visible among Item’s relations to administrators and owner of the Item",
-
+  "manage.relationships.hidden-related-items-alert": "Please note that hidden related items will always be visible among Item’s relations to administrators and owner of the Item",
 
   "menu.header.admin": "Management",
 
@@ -3813,8 +3796,6 @@
 
   "menu.section.import_from_excel": "Import from excel",
 
-  "menu.section.export_batch": "Batch Export (ZIP)",
-
   "menu.section.export_to_excel": "Export to excel",
 
   "menu.section.icon.access_control": "Access Control menu section",
@@ -3882,8 +3863,6 @@
   "menu.section.processes": "Processes",
 
   "menu.section.health": "Health",
-
-
 
   "menu.section.registries": "Registries",
 
@@ -4005,7 +3984,7 @@
 
   "statistics.login.page.no-data-found": "No data found",
 
-  "statistics.login.title statistics.workflow.title" : "Login Statistics",
+  "statistics.login.title statistics.workflow.title": "Login Statistics",
 
   "manage.relations": "Manage Relations",
 
@@ -4033,13 +4012,11 @@
 
   "menu.section.workflow": "Administer Workflow",
 
-
   "metadata-export-search.tooltip": "Export search results as CSV",
 
   "metadata-export-search.submit.success": "The export was started successfully",
 
   "metadata-export-search.submit.error": "Starting the export has failed",
-
 
   "metric-badges.scopusCitation": "Scopus© Citations",
 
@@ -4121,7 +4098,7 @@
 
   "mydspace.results.is-correction": "Is a request of correction",
 
-  "mydspace.search-form.placeholder": "Search in mydspace...",
+  "mydspace.search-form.placeholder": "Search in mydspace…",
 
   "mydspace.show.allProjectItems": "All items in the project",
 
@@ -4169,7 +4146,7 @@
 
   "nav.user-profile-menu-and-logout": "User profile menu and Log Out",
 
-  "nav.logout": "Log Out",
+  "nav.logout": "User profile menu and Log Out",
 
   "nav.main.description": "Main navigation bar",
 
@@ -4375,8 +4352,7 @@
 
   "reciter.suggestion.type.oaire": "Publications",
 
-"reciter.suggestion.type.orcidWorks": "Publications",
-
+  "reciter.suggestion.type.orcidWorks": "Publications",
 
   "orgunit.listelement.badge": "Organizational unit",
 
@@ -4564,11 +4540,9 @@
 
   "process.bulk.delete.error.head": "Error on deleteing process",
 
-  "process.bulk.delete.error.body": "The process with ID {{processId}} could not be deleted. The remaining processes will continue being deleted. ",
+  "process.bulk.delete.error.body": "The process with ID {{processId}} could not be deleted. The remaining processes will continue being deleted.",
 
   "process.bulk.delete.success": "{{count}} process(es) have been succesfully deleted",
-
-
 
   "audit.overview.title": "Audit Logs Overview",
 
@@ -4686,7 +4660,7 @@
 
   "profile.security.form.error.matching-passwords": "The passwords do not match.",
 
-  "profile.security.form.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box.",
+  "profile.security.form.info": "Optionally, you can enter a new password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
 
   "profile.security.form.label.password": "Password",
 
@@ -5070,7 +5044,7 @@
 
   "register-page.create-profile.security.header": "Security",
 
-  "register-page.create-profile.security.info": "Please enter a password in the box below, and confirm it by typing it again into the second box.",
+  "register-page.create-profile.security.info": "Please enter a password in the box below, and confirm it by typing it again into the second box. It should be at least six characters long.",
 
   "register-page.create-profile.security.label.password": "Password",
 
@@ -5177,7 +5151,6 @@
   "repository.image.logo": "Repository logo",
 
   "repository.title.prefix": "DSpace Cris Angular :: ",
-
 
   "repository.title.prefixDSpace": "DSpace Angular :: ",
 
@@ -5407,8 +5380,6 @@
 
   "search.filters.applied.charts.show.hide": "Show/Hide",
 
-
-
   "search.filters.filter.author.head": "Author",
 
   "search.filters.filter.author.placeholder": "Author name",
@@ -5555,7 +5526,7 @@
 
   "search.filters.filter.organization.placeholder": "Organization",
 
-  "search.filters.filter.organization.label": "Search organization",
+  "search.filters.filter.organization.label": "Search Organization",
 
   "search.filters.filter.organizationAddressCountry.head": "Country",
 
@@ -5597,9 +5568,9 @@
   "search.filters.filter.synsicrisSubjectNace.head": "Subject nace",
   "search.filters.filter.synsicrisSubjectNace.placeholder": "Subject nace",
   "search.filters.filter.synsicrisSubjectNace.label": "Search subject nace",
-  "search.filters.filter.synsicrisSubjectDestatis.head": "Subject destatis",
-  "search.filters.filter.synsicrisSubjectDestatis.placeholder": "Subject destatis",
-  "search.filters.filter.synsicrisSubjectDestatis.label": "Search subject destatis",
+  "search.filters.filter.synsicrisSubjectDestatis.head": "Discipline",
+  "search.filters.filter.synsicrisSubjectDestatis.placeholder": "Discipline",
+  "search.filters.filter.synsicrisSubjectDestatis.label": "Search Subject destatis",
   "search.filters.filter.synsicrisTypeProjectContribution.head": "Project contribution",
 
   "search.filters.filter.synsicrisTypeProjectContribution.placeholder": "Project contribution",
@@ -5794,7 +5765,6 @@
 
   "search.results.response.500": "An error occurred during query execution, please try again later",
 
-
   "search.sidebar.close": "Back to results",
 
   "search.sidebar.filters.title": "Filters",
@@ -5837,17 +5807,17 @@
 
   "sorting.dc.title.DESC": "Title Descending",
 
-  "sorting.metric.view.ASC" : "Views Ascending",
+  "sorting.metric.view.ASC": "Views Ascending",
 
-  "sorting.metric.view.DESC" : "Views Descending",
+  "sorting.metric.view.DESC": "Views Descending",
 
-  "sorting.metric.download.ASC" : "Downloads Ascending",
+  "sorting.metric.download.ASC": "Downloads Ascending",
 
-  "sorting.metric.download.DESC" : "Downloads Descending",
+  "sorting.metric.download.DESC": "Downloads Descending",
 
-  "sorting.metric.scopus.citation.ASC" : "Citations Ascending",
+  "sorting.metric.scopus.citation.ASC": "Citations Ascending",
 
-  "sorting.metric.scopus.citation.DESC" : "Citations Descending",
+  "sorting.metric.scopus.citation.DESC": "Citations Descending",
 
   "sorting.score.ASC": "Least Relevant",
 
@@ -6181,8 +6151,6 @@
 
   "submission.import-external.preview.error.import.body": "An error occurs during the external source entry import process.",
 
-
-
   "submission.sections.correction.bitstream.operation.add": "Bitstream added",
 
   "submission.sections.correction.bitstream.operation.modify": "Bitstream modified",
@@ -6204,8 +6172,6 @@
   "submission.sections.correction.column.policy": "Policy",
 
   "submission.sections.submit.progressbar.correction": "Correction details",
-
-
 
   "submission.sections.detect-duplicate.clear-decision": "Undo",
 
@@ -6261,7 +6227,7 @@
 
   "submission.sections.describe.relationship-lookup.external-source.import-button-title.none": "Import remote item",
 
-    "submission.sections.describe.relationship-lookup.external-source.import-modal.isProjectOfPublication.added.new-entity": "New Entity Added!",
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.isProjectOfPublication.added.new-entity": "New Entity Added!",
 
   "submission.sections.describe.relationship-lookup.external-source.import-modal.isProjectOfPublication.title": "Project",
 
@@ -6963,8 +6929,6 @@
 
   "submission.sections.submit.progressbar.correction-step": "Corrections",
 
-
-
   "submission.sections.sherpa-policy.title-empty": "No publisher policy information available. If your work has an associated ISSN, please enter it above to see any related publisher open access policies.",
 
   "submission.sections.status.errors.title": "Errors",
@@ -7091,8 +7055,7 @@
 
   "submission.sections.license.required": "You must accept the license",
 
-  "submission.sections.license.notgranted":  "You must accept the license",
-
+  "submission.sections.license.notgranted": "You must accept the license",
 
   "submission.sections.sherpa.publication.information": "Publication information",
 
@@ -7114,7 +7077,7 @@
 
   "submission.sections.sherpa.publisher.policy.openaccess": "Open Access pathways permitted by this journal's policy are listed below by article version. Click on a pathway for a more detailed view",
 
-  "submission.sections.sherpa.publisher.policy.more.information": "For more information, please see the following links:",
+  "submission.sections.sherpa.publisher.policy.more.information": "For more information, please see the following links: ",
 
   "submission.sections.sherpa.publisher.policy.version": "Version",
 
@@ -7145,8 +7108,6 @@
   "submission.sections.sherpa.record.information.uri": "URI",
 
   "submission.sections.sherpa.error.message": "There was an error retrieving sherpa informations",
-
-
 
   "submission.submit.breadcrumbs": "New submission",
 
@@ -7219,8 +7180,6 @@
   "submission.workspace.generic.view": "View",
 
   "submission.workspace.generic.view-help": "Select this option to view the item's metadata.",
-
-
 
   "subscriptions.title": "Subscriptions",
 
@@ -7356,8 +7315,6 @@
 
   "virtual-metadata.delete-relationship.modal-head": "Select the items for which you want to save the virtual metadata as real metadata",
 
-
-
   "otherworkspace.search.results.head": "Workspace submissions",
 
   "workspace.search.results.head": "Your submissions",
@@ -7416,7 +7373,7 @@
 
   "idle-modal.extend-session": "Extend session",
 
-  "researcher.profile.action.processing" : "Processing...",
+  "researcher.profile.action.processing": "Processing...",
 
   "researcher.profile.associated": "Researcher profile associated",
 
@@ -7424,7 +7381,7 @@
 
   "researcher.profile.create.new": "Create new",
 
-  "researcher.profile.create.success": "Researcher profile created successfully",
+  "researcher.profile.create.success": "Researcher profile created succcessfully",
 
   "researcher.profile.create.fail": "An error occurs during the researcher profile creation",
 
@@ -7440,27 +7397,27 @@
 
   "researcher.profile.internal.visibility": "INTERNAL",
 
-  "researcher.profile.private.visibility" : "PRIVATE",
+  "researcher.profile.private.visibility": "PRIVATE",
 
-  "researcher.profile.public.visibility" : "PUBLIC",
+  "researcher.profile.public.visibility": "PUBLIC",
 
-  "researcher.profile.status": "Status:",
+  "researcher.profile.status": "Status",
 
   "researcherprofile.claim.not-authorized": "You are not authorized to claim this item. For more details contact the administrator(s).",
 
-  "researcherprofile.error.claim.body" : "An error occurred while claiming the profile, please try again later",
+  "researcherprofile.error.claim.body": "An error occurred while claiming the profile, please try again later",
 
-  "researcherprofile.error.claim.title" : "Error",
+  "researcherprofile.error.claim.title": "Error",
 
-  "researcherprofile.success.claim.body" : "Profile claimed with success",
+  "researcherprofile.success.claim.body": "Profile claimed with success",
 
-  "researcherprofile.success.claim.title" : "Success",
+  "researcherprofile.success.claim.title": "Success",
 
   "person.page.orcid.create": "Create an ORCID ID",
 
   "person.page.orcid.granted-authorizations": "Granted authorizations",
 
-  "person.page.orcid.grant-authorizations" : "Grant authorizations",
+  "person.page.orcid.grant-authorizations": "Grant authorizations",
 
   "person.page.orcid.link": "Connect to ORCID ID",
 
@@ -7476,7 +7433,7 @@
 
   "person.page.orcid.missing-authorizations": "Missing authorizations",
 
-  "person.page.orcid.missing-authorizations-message": "The following authorizations are missing:",
+  "person.page.orcid.missing-authorizations-message": "The following authorizations are missing: ",
 
   "person.page.orcid.no-missing-authorizations-message": "Great! This box is empty, so you have granted all access rights to use all functions offers by your institution.",
 
@@ -7492,31 +7449,31 @@
 
   "person.page.orcid.save.preference.changes": "Update settings",
 
-  "person.page.orcid.sync-profile.affiliation" : "Affiliation",
+  "person.page.orcid.sync-profile.affiliation": "Affiliation",
 
-  "person.page.orcid.sync-profile.biographical" : "Biographical data",
+  "person.page.orcid.sync-profile.biographical": "Biographical data",
 
-  "person.page.orcid.sync-profile.education" : "Education",
+  "person.page.orcid.sync-profile.education": "Education",
 
-  "person.page.orcid.sync-profile.identifiers" : "Identifiers",
+  "person.page.orcid.sync-profile.identifiers": "Identifiers",
 
-  "person.page.orcid.sync-fundings.all" : "All fundings",
+  "person.page.orcid.sync-fundings.all": "All fundings",
 
-  "person.page.orcid.sync-fundings.mine" : "My fundings",
+  "person.page.orcid.sync-fundings.mine": "My fundings",
 
-  "person.page.orcid.sync-fundings.my_selected" : "Selected fundings",
+  "person.page.orcid.sync-fundings.my_selected": "Selected fundings",
 
-  "person.page.orcid.sync-fundings.disabled" : "Disabled",
+  "person.page.orcid.sync-fundings.disabled": "Disabled",
 
-  "person.page.orcid.sync-publications.all" : "All publications",
+  "person.page.orcid.sync-publications.all": "All publications",
 
-  "person.page.orcid.sync-publications.mine" : "My publications",
+  "person.page.orcid.sync-publications.mine": "My publications",
 
-  "person.page.orcid.sync-publications.my_selected" : "Selected publications",
+  "person.page.orcid.sync-publications.my_selected": "Selected publications",
 
-  "person.page.orcid.sync-publications.disabled" : "Disabled",
+  "person.page.orcid.sync-publications.disabled": "Disabled",
 
-  "person.page.orcid.sync-queue.discard" : "Discard the change and do not synchronize with the ORCID registry",
+  "person.page.orcid.sync-queue.discard": "Discard the change and do not synchronize with the ORCID registry",
 
   "person.page.orcid.sync-queue.discard.error": "The discarding of the ORCID queue record failed",
 
@@ -7524,11 +7481,11 @@
 
   "person.page.orcid.sync-queue.empty-message": "The ORCID queue registry is empty",
 
-  "person.page.orcid.sync-queue.table.header.type" : "Type",
+  "person.page.orcid.sync-queue.table.header.type": "Type",
 
-  "person.page.orcid.sync-queue.table.header.description" : "Description",
+  "person.page.orcid.sync-queue.table.header.description": "Description",
 
-  "person.page.orcid.sync-queue.table.header.action" : "Action",
+  "person.page.orcid.sync-queue.table.header.action": "Action",
 
   "person.page.orcid.sync-queue.description.affiliation": "Affiliations",
 
@@ -7572,7 +7529,7 @@
 
   "person.page.orcid.sync-queue.tooltip.researcher_urls": "Researcher url",
 
-  "person.page.orcid.sync-queue.send" : "Synchronize with ORCID registry",
+  "person.page.orcid.sync-queue.send": "Synchronize with ORCID registry",
 
   "person.page.orcid.sync-queue.send.unauthorized-error.title": "The submission to ORCID failed for missing authorizations.",
 
@@ -7608,7 +7565,7 @@
 
   "person.page.orcid.sync-queue.send.validation-error.organization.name-required": "The organization's name is required",
 
-  "person.page.orcid.sync-queue.send.validation-error.publication.date-invalid" : "The publication date must be one year after 1900",
+  "person.page.orcid.sync-queue.send.validation-error.publication.date-invalid": "The publication date must be one year after 1900",
 
   "person.page.orcid.sync-queue.send.validation-error.organization.address-required": "The organization to be sent requires an address",
 
@@ -7661,6 +7618,7 @@
   "person.orcid.registry.queue": "ORCID Registry Queue",
 
   "person.orcid.registry.auth": "ORCID Authorizations",
+
   "home.recent-submissions.head": "Recent Submissions",
 
   "relation.rp.researchoutputs.search.results.head": "Related Publications",
@@ -7684,8 +7642,6 @@
   "invitation.accept-btn": "Accept",
 
   "invitation.ignore-btn": "Ignore",
-
-  "authority-confidence.search-label":"Search",
 
   "curation-task.task.hocr.label": "Extract text (HOCR) from images",
 
@@ -8181,13 +8137,13 @@
 
   "layout.tab.header.gender": "Gender reflection",
 
-  "layout.tab.header.Background": "Backgroud",
+  "layout.tab.header.Background": "<span class=\"entry-with-space-before-to-divide-sidebar\" alt=\"Lists\"></span><span class=\"entry-with-space-before-label\">Background</span>",
 
   "layout.tab.header.condition": "External conditions",
 
   "layout.tab.header.knowledge": "State of knowledge / problem definition",
 
-  "layout.tab.header.Projectobjectives": "<span class=\"entry-with-space-before-to-divide-sidebar\" alt=\"Lists\"></span><span class=\"entry-with-space-before-label\">Objectives</span>",
+  "layout.tab.header.Projectobjectives": "Objectives",
 
   "layout.tab.header.research_objective": "Research and development objectives",
 
@@ -8417,7 +8373,7 @@
 
   "earch.filters.applied.f.itemtype": "Type",
 
-  "layout.field.label.Person.dc.title": "Personal Workspace",
+  "layout.field.label.Person.dc.title": "<span class=\"headline-workspace\">Personal Workspace",
 
   "layout.field.label.Person.synsicris.subject.destatis": "Discipline",
 
@@ -8461,7 +8417,7 @@
 
   "layout.field.label.parentproject.oairecerif.amount.currency": "Currency",
 
-  "layout.field.label.Project.dc.title": "<i class=\"fas fa-shekel-sign\"></i> Workspace Cosortium:",
+  "layout.field.label.Project.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-shekel-sign\"> Workspace Consortium:",
 
   "layout.field.label.Project.oairecerif.acronym": "Acronym",
 
@@ -9031,8 +8987,6 @@
 
   "layout.field.label.ethic.dc.type.header": "Overview",
 
-  "search.filters.filter.organization.label": "Search Organization",
-
   "layout.box.header.comment_m": "Comment",
 
   "layout.tab.header.details": "My personal profile",
@@ -9163,65 +9117,65 @@
 
   "query-builder.synsicris.label.entityType.Equipment": "Equipment",
 
-  "query-builder.synsicris.label.entityType.award": "award",
+  "query-builder.synsicris.label.entityType.award": "Award",
 
-  "query-builder.synsicris.label.entityType.contribution_fundingprogramme": "contribution_fundingprogramme",
+  "query-builder.synsicris.label.entityType.contribution_fundingprogramme": "Contribution to funding programme objectives",
 
-  "query-builder.synsicris.label.entityType.cooperationpartner": "cooperationpartner",
+  "query-builder.synsicris.label.entityType.cooperationpartner": "Cooperation partner",
 
-  "query-builder.synsicris.label.entityType.ethic": "ethic",
+  "query-builder.synsicris.label.entityType.ethic": "Ethical reflection",
 
-  "query-builder.synsicris.label.entityType.exp_societalimpact": "exp_societalimpact",
+  "query-builder.synsicris.label.entityType.exp_societalimpact": "Expected societal impact",
 
-  "query-builder.synsicris.label.entityType.condition": "condition",
+  "query-builder.synsicris.label.entityType.condition": "External condition",
 
-  "query-builder.synsicris.label.entityType.gender": "gender",
+  "query-builder.synsicris.label.entityType.gender": "Gender reflection",
 
-  "query-builder.synsicris.label.entityType.innovationidea": "innovationidea",
+  "query-builder.synsicris.label.entityType.innovationidea": "Idea for the use of project results",
 
-  "query-builder.synsicris.label.entityType.milestone": "milestone",
+  "query-builder.synsicris.label.entityType.milestone": "Milestone",
 
-  "query-builder.synsicris.label.entityType.step": "step",
+  "query-builder.synsicris.label.entityType.step": "Work and cooperation after project end",
 
-  "query-builder.synsicris.label.entityType.physical_object": "physical_object",
+  "query-builder.synsicris.label.entityType.physical_object": "Object / material",
 
-  "query-builder.synsicris.label.entityType.proj_objective": "proj_objective",
+  "query-builder.synsicris.label.entityType.proj_objective": "Research and development objective",
 
-  "query-builder.synsicris.label.entityType.research_result": "research_result",
+  "query-builder.synsicris.label.entityType.research_result": "Research result",
 
-  "query-builder.synsicris.label.entityType.spinoff": "spinoff",
+  "query-builder.synsicris.label.entityType.spinoff": "Spin-off",
 
-  "query-builder.synsicris.label.entityType.stateofart": "stateofart",
+  "query-builder.synsicris.label.entityType.stateofart": "State of knowledge / problem definition",
 
-  "query-builder.synsicris.label.entityType.targetgroup": "targetgroup",
+  "query-builder.synsicris.label.entityType.targetgroup": "Stakeholder group",
 
-  "query-builder.synsicris.label.entityType.task": "task",
+  "query-builder.synsicris.label.entityType.task": "Task",
 
-  "query-builder.synsicris.label.entityType.unexpected_result": "unexpected_result",
+  "query-builder.synsicris.label.entityType.unexpected_result": "(Intermediate) result / problem",
 
-  "query-builder.synsicris.label.entityType.workpackage": "workpackage",
+  "query-builder.synsicris.label.entityType.workpackage": "Workpackage",
 
-  "query-builder.synsicris.label.entityType.process_event": "process_event",
+  "query-builder.synsicris.label.entityType.process_event": "Cooperation / Participation / Exchange process",
 
-  "query-builder.synsicris.label.entityType.innovationpotential": "innovationpotential",
+  "query-builder.synsicris.label.entityType.innovationpotential": "Possible solution / change / innovation",
 
-  "query-builder.synsicris.label.entityType.application": "application",
+  "query-builder.synsicris.label.entityType.application": "Application of a solution / change / innovation",
 
-  "query-builder.synsicris.label.entityType.plan_publication": "plan_publication",
+  "query-builder.synsicris.label.entityType.plan_publication": "Planned publications",
 
-  "query-builder.synsicris.label.entityType.projectpartner": "projectpartner",
+  "query-builder.synsicris.label.entityType.projectpartner": "Project partner",
 
-  "query-builder.synsicris.label.entityType.programme": "programme",
+  "query-builder.synsicris.label.entityType.programme": "Programme",
 
-  "query-builder.synsicris.label.entityType.call": "call",
+  "query-builder.synsicris.label.entityType.call": "Call",
 
-  "query-builder.synsicris.label.entityType.fundingobjective": "fundingobjective",
+  "query-builder.synsicris.label.entityType.fundingobjective": "Funding objective",
 
-  "query-builder.synsicris.label.entityType.ia_objective": "ia_objective",
+  "query-builder.synsicris.label.entityType.ia_objective": "Target for interaction and transfer",
 
-  "query-builder.synsicris.label.entityType.neg_sideeffect": "neg_sideeffect",
+  "query-builder.synsicris.label.entityType.neg_sideeffect": "Negative side effect",
 
-  "query-builder.synsicris.label.entityType.open_researchquestion": "open_researchquestion",
+  "query-builder.synsicris.label.entityType.open_researchquestion": "Open research questions",
 
   "layout.tab.header.Projekttraeger": "Programme and Funding information",
 
@@ -9335,7 +9289,7 @@
 
   "s": "Target for interaction and transfer",
 
-  "layout.field.label.Person.dspace.entity.type": "Person",
+  "layout.field.label.Person.dspace.entity.type": "<span class=\"headline-workspace\">Personal Workspace",
 
   "test_ethic": "Overview",
 
@@ -9427,7 +9381,7 @@
 
   "layout.field.label.project.synsicris.type.jointproject": "Type of consortium",
 
-  "layout.field.label.Funding.dc.title": "<i class=\"fas fa-cube\"></i> Workspace Project:",
+  "layout.field.label.Funding.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-cube\"></i> Workspace Project:",
 
   "layout.field.label.Funding.oairecerif.acronym": "Acronym",
 
@@ -9690,25 +9644,45 @@
   "layout.field.label.OrgUnit.synsicris.address.addressCityPostbox": "City",
 
   "layout.field.label.OrgUnit.synsicris.address.countryclassification": "Country",
+
   "layout.field.label.OrgUnit.synsicris.identifier.municipality": "Municipality",
+
   "layout.field.label.programme.oairecerif.internalid": "Internal ID",
+
   "layout.field.label.programme.synsicris.type.visibility": "Visibility type",
+
   "layout.field.label.programme.synsicris.relation.funding-guideline": "Funding guideline",
+
   "layout.field.label.comment.dc.title": "Title",
+
   "layout.field.label.comment.dc.type": "Type",
+
   "layout.field.label.comment.synsicris.date.creation": "Creation date",
+
   "layout.field.label.comment.synsicris.date.reminder": "Reminder date",
-  "layout.field.label.comment.synsicris.creator": "Created by",
+
+  "layout.field.label.comment.synsicris.creator": "Creation by",
+
   "layout.field.label.comment.synsicris.description": "Description",
+
   "layout.field.label.comment.synsicris.related.item": "Related Item",
+
   "layout.field.label.comment.synsicris.related.project": "Related Project",
+
   "layout.field.label.comment.synsicris.related.version": "Related Version",
+
   "layout.tab.header.open_researchquestion": "Open research questions",
+
   "layout.box.header.open_researchquestion_comment": "Comments - Open research questions",
+
   "layout.box.header.jpbasics": "Consortium information",
+
   "layout.box.header.Project": "box.header.Projects",
+
   "layout.box.header.open_researchquestion": "Open research questions",
+
   "layout.box.header.open_researchquestion_m": "Open research questions",
+
   "submission.sections.submit.progressbar.describe.open_researchquestions": "Open research questions",
 
   "layout.box.header.multiple_involved": "Involved organisations",
@@ -10085,6 +10059,80 @@
 
   "project.manage.members.funding.members-group-help": "Help Project members",
 
-  "item.version.create.modal.info": "Test"
+  "item.version.create.modal.info": "Test",
+
+  "search.filters.entityType.neg_sideeffect": "Possible negative side effects",
+
+  "register-page.create-profile.security.error.password-length": "The password should be at least 6 characters long.",
+
+  "forgot-password.form.error.password-length": "The password should be at least 6 characters long.",
+
+  "profile.security.form.error.password-length": "The password should be at least 6 characters long.",
+
+  "profile.security.form.notifications.error.not-long-enough": "The password has to be at least 6 characters long.",
+
+  "explore.index.synsicrisSubjectEnterprise": "Company size",
+
+  "explore.index.synsicrisSubjectUrbanrural": "Location",
+
+  "search.filters.filter.synsicrisTypeEasyimport.head": "Executing Organisation (easy-Online)",
+
+  "search.filters.filter.synsicrisTypeEasyimport.placeholder": "Executing Organisation (easy-Online)",
+
+  "search.filters.filter.synsicrisTypeEasyimport.Label": "Search Executing Organisation (easy-Online)",
+
+  "search.filters.filter.synsicrisAdressAdresspostcode.head": "Postcode",
+
+  "search.filters.filter.synsicrisAdressAdresspostcode.placeholder": "Postcode",
+
+  "search.filters.filter.synsicrisAdressAdresspostcode.Label": "Search Postcode",
+
+  "search.filters.filter.synsicrisAdressAdresscity.head": "City",
+
+  "search.filters.filter.synsicrisAdressAdresscity.placeholder": "City",
+
+  "search.filters.filter.synsicrisAdressAdresscity.Label": "Search City",
+
+  "search.filters.filter.synsicrisAdressAdresscountry.head": "Country/Federal state",
+
+  "search.filters.filter.synsicrisAdressAdresscountry.placeholder": "Country/Federal state",
+
+  "search.filters.filter.synsicrisAdressAdresscountry.Label": "Search Country/Federal state",
+
+  "search.filters.filter.synsicrisTypeLegalform.head": "Legal form",
+
+  "search.filters.filter.synsicrisTypeLegalform.placeholder": "Legal form",
+
+  "search.filters.filter.synsicrisTypeLegalform.Label": "Search Legal form",
+
+  "search.filters.filter.synsicrisTypeOrgform.head": "Type of Organisation",
+
+  "search.filters.filter.synsicrisTypeOrgform.placeholder": "Type of Organisation",
+
+  "search.filters.filter.synsicrisTypeOrgform.Label": "Suche Type of Organisation",
+
+  "search.filters.filter.synsicrisSubjectEnterprise.head": "Size of business",
+
+  "search.filters.filter.synsicrisSubjectEnterprise.placeholder": "Size of business",
+
+  "search.filters.filter.synsicrisSubjectEnterprise.label": "Search Size of business",
+
+  "search.filters.filter.synsicrisSubjectUrbanrural.head": "Locating",
+
+  "search.filters.filter.synsicrisSubjectUrbanrural.placeholder": "Locating",
+
+  "search.filters.filter.synsicrisSubjectUrbanrural.label": "Search Locating",
+
+  "search.filters.filter.synsicrisTypeTransform.head": "Area of transition",
+
+  "search.filters.filter.synsicrisTypeTransform.placeholder": "Area of transition",
+
+  "search.filters.filter.synsicrisTypeTransform.Label": "Search Area of transition",
+
+  "search.filters.filter.synsicrisTypeInfluence.head": "Influence on the impact",
+
+  "search.filters.filter.synsicrisTypeInfluence.placeholder": "Influence on the impact",
+
+  "search.filters.filter.synsicrisTypeInfluence.Label": "Search Influence on the impact"
 
 }

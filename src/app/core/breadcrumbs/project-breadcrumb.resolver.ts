@@ -44,7 +44,6 @@ export class ProjectBreadcrumbResolver extends DSOBreadcrumbResolver<Item> {
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BreadcrumbConfig<Item>> {
     const uuid = route.params.projectId;
-    this.projectService.getEntityItemByCommunityId(uuid);
     return this.projectService.getEntityItemByCommunityId(uuid).pipe(
       getFinishedRemoteData(),
       getRemoteDataPayload(),

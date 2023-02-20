@@ -30,6 +30,12 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
    */
   id: number;
   isFunder$: Observable<boolean>;
+
+  /**
+   * The objectives item
+   */
+  objectivesItem$: Observable<Item>
+
   /**
    * The objectives item's id
    */
@@ -75,16 +81,16 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
       getFirstSucceededRemoteDataPayload()
     );
 
-    const objectivesItemId$ = this.route.data.pipe(
+    const objectivesItem$ = this.route.data.pipe(
       take(1),
       map((data) => data.objectivesItem as RemoteData<Item>),
       redirectOn4xx(this.router, this.authService),
       getFirstSucceededRemoteDataPayload()
     );
 
-    this.objectivesItemId$ = combineLatest([
+    this.objectivesItem$ = combineLatest([
       impactPathwayItem$,
-      objectivesItemId$,
+      objectivesItem$,
       targetItemId$
     ]).pipe(
       mergeMap(([impactPathwayItem, objectivesItem, targetItemId]: [Item, Item, string]) => this.impactPathwayService.isImpactPathwayLoadedById(impactPathwayItem.id).pipe(
@@ -96,7 +102,7 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
         }
         this.impactPathwayService.dispatchSetTargetTask(targetItemId);
       }),
-      map(([impactPathwayItem, objectivesItem, targetItemId, loaded]: [Item, Item, string, boolean]) => objectivesItem.id)
+      map(([impactPathwayItem, objectivesItem, targetItemId, loaded]: [Item, Item, string, boolean]) => objectivesItem)
     );
 
     this.projectCommunityId$ = this.route.data.pipe(

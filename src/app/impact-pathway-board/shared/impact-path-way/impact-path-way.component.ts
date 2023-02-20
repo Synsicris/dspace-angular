@@ -76,6 +76,8 @@ export class ImpactPathWayComponent implements OnInit {
    */
   public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  public entityType: string;
+
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
     private authorizationService: AuthorizationDataService,
     private cdr: ChangeDetectorRef,
@@ -113,6 +115,7 @@ export class ImpactPathWayComponent implements OnInit {
       this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
 
+    this.entityType = this.impactPathWayItem.entityType;
   }
 
   ngAfterContentChecked() {

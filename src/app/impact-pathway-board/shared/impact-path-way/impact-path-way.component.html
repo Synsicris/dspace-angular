@@ -1,7 +1,7 @@
 <div class="border-bottom mb-4 pb-2 d-flex justify-content-between align-items-center">
   <ds-comcol-page-header [name]="impactPathway.title">
   </ds-comcol-page-header>
-  <ds-view-version-badges *ngIf="impactPathWayItem" [item]="impactPathWayItem"></ds-view-version-badges>
+  <ds-view-version-badges *ngIf="impactPathWayItem && (isVersionOfAnItem$ | async)" [item]="impactPathWayItem"></ds-view-version-badges>
   <div class="pl-2 space-children-mr">
     <ds-item-version-list [btnClass]="'btn-md'"
                           [showOnlyVisible]="isFunder"
@@ -32,11 +32,45 @@
   </div>
 </div>
 
-
 <div>
   <ds-alert *ngIf="infoShowed | async" [type]="'alert-info'" [collapsible]="true"
     [content]="'impact-pathway.wrapper.info'"></ds-alert>
-  <div class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
+    <ng-container *ngIf="(isVersionOfAnItem$ | async) && isFunder">
+      <div class="mb-3">
+        <ngb-accordion
+          #accordionRef
+          [destroyOnHide]="false"
+          [closeOthers]="false"
+          activeIds=""
+        >
+          <ngb-panel id="panel-0">
+            <ng-template ngbPanelHeader let-opened="opened">
+              <span> {{'comment-list.header' | translate}} </span>
+              <div class="d-inline-block float-right">
+                <button ngbPanelToggle class="btn btn-outline-light">
+                  <i *ngIf="opened" class="fa fa-chevron-up text-dark"></i>
+                  <i *ngIf="!opened" class="fa fa-chevron-down text-dark"></i>
+                </button>
+              </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <div class="row m-0" *ngIf="(formConfig$ | async)?.name">
+                <div class="col-2 p-0" *ngFor="let data of impactPathway.steps | dsGetIpwData">
+                  <ds-comment-list
+                    [relatedEntityType]="entityType"
+                    [itemUuid]="data.id"
+                    [title]="data.title"
+                    [projectCommunityId]="projectCommunityId"
+                    [type]="(formConfig$ | async).name">
+                 </ds-comment-list>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
+    </ng-container>
+   <div class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
     <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps" ipwStepColor class="vertical-step"
                               [projectCommunityId]="projectCommunityId"
                               [impactPathwayId]="impactPathway.id"

@@ -1,6 +1,11 @@
 <div class="container">
-    <ds-item-versions [item]="item" [isCoordinator]="isCoordinatorOfProject$ | async"
-        [isFunder]="isFounderOfProject$ | async" [displayActions]="true" [displayAlert]="true"
-        [displayWhenEmpty]="false" [canShowCreateVersion]="false">
+    <ds-item-versions *ngIf="item$ | async"
+                      [item]="item$ | async"
+                      [isCoordinator]="isCoordinatorOfProject$ | async"
+                      [isFunder]="isFounderOfProject$ | async"
+                      [displayActions]="true"
+                      [displayAlert]="true"
+                      [displayWhenEmpty]="false"
+                      [canShowCreateVersion]="false">
     </ds-item-versions>
 </div>
