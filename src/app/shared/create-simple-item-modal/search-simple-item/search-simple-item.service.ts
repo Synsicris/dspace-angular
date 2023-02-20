@@ -26,6 +26,7 @@ import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vo
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
 import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
+import { of } from 'rxjs/internal/observable/of';
 
 @Injectable()
 export class SearchSimpleItemService {
@@ -75,11 +76,7 @@ export class SearchSimpleItemService {
             const dsoPage: any[] = rd.payload.page
               .filter((result) => hasValue(result))
               .map((searchResult: FacetValue) => {
-                return this.getFacetLabel(searchResult.label, vocabularyName).pipe(
-                  map((label: string) => Object.assign(new FacetValue(), searchResult, {
-                    label: label
-                  }))
-                );
+                return of(searchResult);
               });
             const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<any>;
             return Object.assign(rd, { payload: payload });
@@ -101,14 +98,6 @@ export class SearchSimpleItemService {
       })
     );
 
-  }
-
-  private getFacetLabel(label: string, vocabularyName: string): Observable<string> {
-    const vocabularyOptions = new VocabularyOptions(vocabularyName);
-    return this.vocabularyService.getVocabularyEntryByValue(label, vocabularyOptions).pipe(
-      map((result: VocabularyEntry) => isNull(result) ? label : result.display),
-      catchError((error: Error) => observableOf(label))
-    );
   }
 
   searchAvailableImpactPathwayTasksByStepType(
