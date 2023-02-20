@@ -507,7 +507,27 @@ export class DefaultAppConfig implements AppConfig {
   layout: LayoutConfig = {
     navbar: {
       // If true, show the "Community and Collections" link in the navbar; otherwise, show it in the admin sidebar
-      showCommunityCollection: true,
+      showCommunityCollection: true
+    },
+    search: {
+      filters: {
+        datepicker: ['dateReminder'],
+        discoveryConfig: {
+          'COMMENT_ALL.Person.comment_person_all': {
+            'dateReminder': {
+              filterType: 'range',
+              minValue: {
+                operator: '-',
+                value: { day: 10 }
+              },
+              maxValue: {
+                operator: '+',
+                value: { day: 10 }
+              }
+            }
+          }
+        }
+      }
     }
   };
 

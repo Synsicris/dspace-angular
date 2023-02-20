@@ -56,3 +56,41 @@ export function difference(object: object, base: object) {
   };
   return changes(object, base);
 }
+
+/**
+ * This function flatten an object by taking its nested properties
+ * and using their path as a top level key, and their value as the value of the
+ * newest top level property.
+ *
+ * Example:
+ * ```
+ *   const toFlatten = {
+ *     a: 1,
+ *     custom: {
+ *       nested: {
+ *         object: 'hello'
+ *       }
+ *     },
+ *     another: {
+ *       nested: {
+ *         object: 'awesome'
+ *       }
+ *     }
+ *   };
+ *
+ *   flattenObject(toFlatten); // { a: 1, custom.nested.object: 'hello', another.nested.object: 'awesome' };
+ * ```
+ *
+ * @param obj
+ * @param prefix
+ */
+export const flattenObject = (obj, prefix = '') =>
+  Object.keys(obj).reduce((acc, k) => {
+    const pre = prefix.length ? prefix + '.' : '';
+    if (typeof obj[k] === 'object') {
+      Object.assign(acc, flattenObject(obj[k], pre + k));
+    } else {
+      acc[pre + k] = obj[k];
+    }
+    return acc;
+  }, {});
