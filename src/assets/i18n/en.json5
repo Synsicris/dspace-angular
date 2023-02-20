@@ -5380,6 +5380,10 @@
 
   "search.filters.applied.charts.show.hide": "Show/Hide",
 
+  "search.filters.applied.f.dateReminder.min": "Reminder from",
+
+  "search.filters.applied.f.dateReminder.max": "Reminder to",
+
   "search.filters.filter.author.head": "Author",
 
   "search.filters.filter.author.placeholder": "Author name",
