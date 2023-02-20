@@ -27,7 +27,7 @@
 
 <ng-template #searchContent>
     <div class="row">
-        <div class="col-12 d-flex" *ngIf="!(isXsOrSm$ | async)">
+        <div class="col-12" *ngIf="!(isXsOrSm$ | async)">
             <ng-template *ngTemplateOutlet="searchForm"></ng-template>
             <ng-content select="[additionalSearchOptions]"></ng-content>
         </div>
@@ -125,7 +125,7 @@
     </div>
     <div class="row mb-3 mb-md-1">
         <div class="labels col-sm-9">
-            <ds-search-labels [inPlaceSearch]="inPlaceSearch"></ds-search-labels>
+            <ds-search-labels *ngIf="searchEnabled" [inPlaceSearch]="inPlaceSearch"></ds-search-labels>
         </div>
     </div>
 </ng-template>
