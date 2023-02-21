@@ -16,4 +16,9 @@ export class PieChartComponent extends AbstractChartComponent {
    * flag to show/hide Labels on  Chart.
    */
   showLabels = true;
+
+  /**
+   * Flag to trim or not the labels on the Chart.
+   */
+  trimLabels = true;
 }
