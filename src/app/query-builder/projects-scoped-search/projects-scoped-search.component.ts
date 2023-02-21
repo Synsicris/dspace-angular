@@ -14,6 +14,10 @@ export class ProjectsScopedSearchComponent implements OnInit, OnChanges {
   @Input() query: string;
 
   /**
+   * Custom message if no result
+   */
+  @Input() notFoundMessageKey: string = 'search.results.no-results';
+  /**
    * Configuration name to use for the search
    */
   @Input() configuration = 'default';
