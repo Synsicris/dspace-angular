@@ -1,4 +1,6 @@
 import { Config } from './config.interface';
+import { FilterType } from '../app/shared/search/models/filter-type.model';
+import { MomentInputObject } from 'moment';
 
 export interface UrnConfig extends Config {
   name: string;
@@ -47,9 +49,46 @@ export interface CrisLayoutConfig extends Config {
 
 export interface LayoutConfig extends Config {
   navbar: NavbarConfig;
+  search: SearchLayoutConfig;
 }
 
 export interface SuggestionConfig extends Config {
   source: string;
   collectionId: string;
+}
+
+export interface SearchLayoutConfig {
+  filters: SearchFiltersConfig;
+}
+
+export interface DefaultSearchOperator<T> {
+  operator?: '+' | '-';
+  value: T;
+}
+
+export type DefaultRangeSearchFilterValue = DefaultSearchOperator<MomentInputObject>;
+
+export interface DefaultRangeSearchFilterConfig extends DefaultSearchFilterConfig {
+  filterType: 'range';
+  minValue?: DefaultRangeSearchFilterValue;
+  maxValue?: DefaultRangeSearchFilterValue;
+}
+
+export interface DefaultSearchFilterConfig {
+  filterType: keyof typeof FilterType;
+}
+
+export interface DefaultSearchFiltersConfig<T extends DefaultSearchFilterConfig> {
+  [searchFilterName: string]: T;
+}
+
+export type DefaultSearchFiltersConfigs = DefaultSearchFilterConfig | DefaultRangeSearchFilterConfig;
+
+export interface DiscoveryConfiguration {
+  [discoveryConfigKey: string]: DefaultSearchFiltersConfig<DefaultSearchFiltersConfigs>;
+}
+
+export interface SearchFiltersConfig {
+  datepicker: string[];
+  discoveryConfig?: DiscoveryConfiguration;
 }

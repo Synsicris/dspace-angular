@@ -5380,6 +5380,10 @@
 
   "search.filters.applied.charts.show.hide": "Show/Hide",
 
+  "search.filters.applied.f.dateReminder.min": "Reminder from",
+
+  "search.filters.applied.f.dateReminder.max": "Reminder to",
+
   "search.filters.filter.author.head": "Author",
 
   "search.filters.filter.author.placeholder": "Author name",
@@ -5555,33 +5559,22 @@
   "search.filters.filter.synsicrisRelationCall.head": "Relation call",
 
   "search.filters.filter.synsicrisRelationCall.placeholder": "Relation call",
-
   "search.filters.filter.synsicrisRelationCall.label": "Search relation call",
-
   "search.filters.filter.projectStartDate.head": "Start date",
-
   "search.filters.filter.projectStartDate.placeholder": "Start date",
-
   "search.filters.filter.projectStartDate.label": "Search start date",
-
   "search.filters.filter.projectEndDate.head": "End date",
-
   "search.filters.filter.projectEndDate.placeholder": "End date",
-
   "search.filters.filter.projectEndDate.label": "Search end date",
-
+  "search.filters.filter.dateReminder.head": "Reminder Date",
+  "search.filters.filter.dateReminder.min.label": "Start",
+  "search.filters.filter.dateReminder.max.label": "End",
   "search.filters.filter.synsicrisSubjectNace.head": "Subject nace",
-
   "search.filters.filter.synsicrisSubjectNace.placeholder": "Subject nace",
-
   "search.filters.filter.synsicrisSubjectNace.label": "Search subject nace",
-
   "search.filters.filter.synsicrisSubjectDestatis.head": "Discipline",
-
   "search.filters.filter.synsicrisSubjectDestatis.placeholder": "Discipline",
-
   "search.filters.filter.synsicrisSubjectDestatis.label": "Search Subject destatis",
-
   "search.filters.filter.synsicrisTypeProjectContribution.head": "Project contribution",
 
   "search.filters.filter.synsicrisTypeProjectContribution.placeholder": "Project contribution",
