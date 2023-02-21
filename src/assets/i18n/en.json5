@@ -9101,6 +9101,10 @@
 
   "query-builder.synsicris.accordion.step2.header": "Step 2",
 
+  "query-builder.synsicris.accordion.step1.alert": "Box 1 for helptext",
+
+  "query-builder.synsicris.accordion.step2.alert": "Box 2 for helptext",
+
   "query-builder.synsicris.label.entityType.Person": "Person",
 
   "query-builder.synsicris.label.entityType.Project": "Project",
