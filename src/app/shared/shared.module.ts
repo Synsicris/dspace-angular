@@ -405,6 +405,7 @@ import {
 import { ViewVersionBadgesComponent } from './view-version-badges/view-version-badges.component';
 import { IpwItemMetadataStatusDirective } from './ipw-helpers/ipw-item-metadata-status.directive';
 import { IpwItemMetadataInternalDirective } from './ipw-helpers/ipw-item-metadata-internal.directive';
+import { EntityTypeTranslatePipe } from './utils/entity-type-translate-pipe';
 
 const MODULES = [
   CommonModule,
@@ -459,6 +460,7 @@ const PIPES = [
   ObjNgFor,
   BrowserOnlyPipe,
   MarkdownPipe,
+  EntityTypeTranslatePipe,
 ];
 
 const COMPONENTS = [

@@ -12,7 +12,7 @@
                    [id]="filterId + value"
                    [value]="value"
                    (change)="onChecked($event, facetValue)">
-            <label class="custom-control-label" [for]="filterId + value">{{facetValue.label}}</label>
+            <label class="custom-control-label" [for]="filterId + value">{{facetValue.label | dsEntityTypeTranslate}}</label>
             <span class="badge badge-pill badge-light ml-1">{{facetValue.count}}</span>
           </div>
         </li>

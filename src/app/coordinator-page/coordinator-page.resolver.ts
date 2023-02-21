@@ -56,7 +56,7 @@ export class CoordinatorPageResolver implements Resolve<RemoteData<Item>> {
                           this.router.navigate([getHomePageRoute()]);
                         }
                       })
-                    )
+                    );
                   } else {
                     this.router.navigate([getHomePageRoute()]);
                   }

@@ -330,7 +330,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     );
     this.updateTreeMap(flatNode, node);
     return flatNode;
-  }
+  };
 
   hasChild = (_: number, _nodeData: WorkpacakgeFlatNode) => _nodeData.expandable;
 
@@ -575,7 +575,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   validateResizeNames = (resizeEvent: any) => {
     const eventWidth = resizeEvent.rectangle.width;
     return eventWidth >= this.sidebarNamesMinWidth;
-  }
+  };
 
   buildCalendar() {
     this.dates = [];

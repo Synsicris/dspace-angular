@@ -47,7 +47,7 @@ export abstract class DSOPropertyBreadcrumbResolver<S extends ChildHALResource &
         switchMap(dso => this.mapProperty(dso)),
         switchMap(s => this.resolveByUUID(s?.uuid, fullPath)),
         take(1)
-      )
+      );
   }
 
 }

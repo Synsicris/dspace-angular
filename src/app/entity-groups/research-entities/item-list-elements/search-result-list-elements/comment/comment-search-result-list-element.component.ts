@@ -166,7 +166,7 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
     this.editItemService.searchEditModesById(this.dso.id).pipe(
       getFirstCompletedRemoteData(),
       map((modesRD: RemoteData<PaginatedList<EditItemMode>>) => {
-        return modesRD.hasSucceeded ? modesRD.payload.page : []
+        return modesRD.hasSucceeded ? modesRD.payload.page : [];
       })
     ).subscribe((editModes: EditItemMode[]) => {
       const allowedModes = editModes.filter((mode: EditItemMode) => this.isEditModeAllowed(mode));

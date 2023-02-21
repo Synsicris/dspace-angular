@@ -21,7 +21,7 @@ export class EditItemPageBreadcrumbResolver extends DSOBreadcrumbResolver<Item> 
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BreadcrumbConfig<Item>> {
     let uuid: string = route.params.id;
-    const permissionIdx = uuid.indexOf(':')
+    const permissionIdx = uuid.indexOf(':');
     if (permissionIdx > 0) {
       uuid = uuid.substr(0, permissionIdx);
     }
