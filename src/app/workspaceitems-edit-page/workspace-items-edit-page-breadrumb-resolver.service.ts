@@ -35,7 +35,7 @@ export class WorkspaceItemsEditPageBreadrumbResolver extends DSOPropertyBreadcru
         .pipe(
           map(rd => rd.payload),
           take(1)
-        )
+        );
     }
     return of(dso?.item);
   }

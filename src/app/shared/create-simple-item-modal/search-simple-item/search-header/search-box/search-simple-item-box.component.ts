@@ -46,7 +46,7 @@ export class SearchSimpleItemBoxComponent {
 
   formatter = (x: ImpactPathwayTask) => {
     return (typeof x === 'object') ? x.title : x;
-  }
+  };
 
   search = (text$: Observable<string>) =>
     text$.pipe(
@@ -69,7 +69,7 @@ export class SearchSimpleItemBoxComponent {
       }),
       tap(() => this.searching.next(false)),
       merge(this.hideSearchingWhenUnsubscribed$)
-    )
+    );
 
   onSearchChange(event: any) {
     event.stopImmediatePropagation();

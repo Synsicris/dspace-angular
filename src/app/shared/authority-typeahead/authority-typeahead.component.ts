@@ -79,7 +79,7 @@ export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
 
   formatter = (x: { display: string }) => {
     return (typeof x === 'object') ? x.display : x;
-  }
+  };
 
   search = (text$: Observable<string>) => {
     return text$.pipe(
@@ -108,7 +108,7 @@ export class AuthorityTypeaheadComponent implements OnInit, OnDestroy {
       tap(() => this.changeSearchingStatus(false)),
       merge(this.hideSearchingWhenUnsubscribed$)
     );
-  }
+  };
 
   constructor(private vocabularyService: VocabularyService,
               private cdr: ChangeDetectorRef,

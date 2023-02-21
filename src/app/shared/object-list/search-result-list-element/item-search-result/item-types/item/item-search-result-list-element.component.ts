@@ -65,8 +65,8 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
     const itemType = this.firstMetadataValue('dspace.entity.type');
     if ( !!this.appConfig.displayItemSearchResult && !!this.appConfig.displayItemSearchResult[itemType] ) {
       this.displayConfigurations = this.appConfig.displayItemSearchResult[itemType];
-    } else if ( !!this.appConfig.displayItemSearchResult['default'] ) {
-      this.displayConfigurations = this.appConfig.displayItemSearchResult['default'];
+    } else if ( !!this.appConfig.displayItemSearchResult.default ) {
+      this.displayConfigurations = this.appConfig.displayItemSearchResult.default;
     } else {
       this.displayConfigurations = null;
     }
