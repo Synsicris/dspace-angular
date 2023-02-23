@@ -3554,6 +3554,8 @@
 
   "item-export.process.title": "Bulk export item",
 
+  "item-export-external-metadata.btn.label": "Import metadata",
+
   "journal.listelement.badge": "Journal",
 
   "journal.page.description": "Description",
