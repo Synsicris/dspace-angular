@@ -118,7 +118,7 @@
                         [inPlaceSearch]="inPlaceSearch"
                         [searchPlaceholder]="searchFormPlaceholder | translate">
         </ds-search-form>
-        <div class="ml-auto">
+        <div class="ml-auto row">
             <ng-content select="[additionalSearchFormOptions]"></ng-content>
         </div>
         <ds-item-export-modal-launcher [searchOptions$]="searchOptions$" *ngIf="showExport"></ds-item-export-modal-launcher>

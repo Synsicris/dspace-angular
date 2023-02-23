@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -5,11 +6,12 @@ import { ExternalSourceEntry } from '../../../core/shared/external-source-entry.
 import { MetadataValue } from '../../../core/shared/metadata.models';
 import { Metadata } from '../../../core/shared/metadata.utils';
 import { CollectionListEntry } from '../../../shared/collection-dropdown/collection-dropdown.component';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
 import { SubmissionService } from '../../submission.service';
 import { SubmissionObject } from '../../../core/submission/models/submission-object.model';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { SubmissionImportExternalCollectionComponent } from '../import-external-collection/submission-import-external-collection.component';
+import { BehaviorSubject } from 'rxjs';
 
 /**
  * This component display a preview of an external source item.
@@ -40,6 +42,10 @@ export class SubmissionImportExternalPreviewComponent implements OnInit {
    * The modal for the entry preview
    */
   modalRef: NgbModalRef;
+  /**
+   * A boolean representing if importing is processing
+   */
+  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * Initialize the component variables.
@@ -54,7 +60,8 @@ export class SubmissionImportExternalPreviewComponent implements OnInit {
     private submissionService: SubmissionService,
     private modalService: NgbModal,
     private router: Router,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private translate: TranslateService
   ) { }
 
   /**
@@ -85,11 +92,12 @@ export class SubmissionImportExternalPreviewComponent implements OnInit {
     this.modalRef = this.modalService.open(SubmissionImportExternalCollectionComponent, {
       size: 'lg',
     });
+    this.loading$.next(true);
     this.modalRef.componentInstance.entityType = this.labelPrefix;
     this.modalRef.componentInstance.scope = this.scope;
-    this.closeMetadataModal();
 
     this.modalRef.componentInstance.selectedEvent.pipe(
+      tap(()=> this.modalRef.close()),
       mergeMap((collectionListEntry: CollectionListEntry) => {
         return this.submissionService.createSubmissionFromExternalSource(this.externalSourceEntry._links.self.href, collectionListEntry.collection.id);
       })
@@ -100,11 +108,21 @@ export class SubmissionImportExternalPreviewComponent implements OnInit {
           isValid = true;
           this.router.navigateByUrl('/workspaceitems/' + submissionObjects[0].id + '/edit');
         }
+        this.closeMetadataModal();
       }
       if (!isValid) {
-        this.notificationService.error('submission.import-external.preview.error.import.title', 'submission.import-external.preview.error.import.body');
+        this.notificationService.error(
+          this.translate.instant('submission.import-external.preview.error.import.title'),
+          this.translate.instant( 'submission.import-external.preview.error.import.body')
+          );
       }
-      this.modalRef.close();
+      this.loading$.next(false);
+    }, (error) => {
+      this.notificationService.error(
+        this.translate.instant('submission.import-external.preview.error.import.title'),
+        this.translate.instant('submission.import-external.preview.error.import.body')
+        );
+      this.loading$.next(false);
     });
   }
 }
