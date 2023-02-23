@@ -31,12 +31,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class SearchSimpleItemComponent implements OnInit, OnDestroy {
 
   /**
-   * The vocabulary name to use retrieve search filter labels
-   * @type {string}
-   */
-  @Input() vocabularyName: string;
-
-  /**
    * The list of id to exclude from search results
    * @type {string[]}
    */
@@ -254,7 +248,6 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
   private getFilterEntries(page: number = 1) {
     this.searchTaskService.getAvailableFilterEntriesByStepType(
       this.searchConfiguration,
-      this.vocabularyName,
       this.defaultSearchQuery.value,
       this.defaultSearchFilters,
       page,

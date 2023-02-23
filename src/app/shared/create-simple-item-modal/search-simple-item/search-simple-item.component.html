@@ -8,8 +8,7 @@
           [collapsed]="true"
           [type]="'alert-info'"></ds-alert>
 
-<ds-search-simple-item-header [vocabularyName]="vocabularyName"
-                              [filterBoxList]="filterBoxList$.asObservable()"
+<ds-search-simple-item-header [filterBoxList]="filterBoxList$.asObservable()"
                               [availableTaskList]="availableTaskList$.asObservable()"
                               (filterChange)="onFilterChange($event)"
                               (removeFilter)="onRemoveFilter($event)"
@@ -29,7 +28,6 @@
       <ds-simple-item-box *ngFor="let task of (availableTaskList$ | async)"
                           class="mb-sm-1 mb-lg-4 mr-sm-1 mr-lg-4 task-horizontal selectable-task"
                           [selectedStatus]="isAlreadySelected(task)"
-                          [vocabularyName]="vocabularyName"
                           [data]="task"
                           (deselected)="onTaskDeselected($event)"
                           (selected)="onTaskSelected($event)">

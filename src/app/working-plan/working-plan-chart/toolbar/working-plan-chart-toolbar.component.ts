@@ -101,7 +101,6 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
     modalRef.componentInstance.excludeListId = [];
     modalRef.componentInstance.hasSearch = true;
-    modalRef.componentInstance.vocabularyName = environment.workingPlan.workpackageTypeAuthority;
     modalRef.componentInstance.searchConfiguration = environment.workingPlan.allUnlinkedWorkingPlanObjSearchConfigName;
     modalRef.componentInstance.scope = this.projectCommunityId;
     this.subs.push(

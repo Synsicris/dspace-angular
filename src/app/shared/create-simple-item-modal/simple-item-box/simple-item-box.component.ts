@@ -3,12 +3,11 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { hasValue, isNotEmpty } from '../../empty.util';
 import { SimpleItem } from '../models/simple-item.model';
 import { Metadata } from '../../../core/shared/metadata.utils';
-import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ds-simple-item-box',
@@ -16,15 +15,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './simple-item-box.component.html'
 })
 export class SimpleItemBoxComponent implements OnInit, OnDestroy {
-
-  @Input() public vocabularyName: string;
   @Input() public data: SimpleItem;
   @Input() public selectedStatus: boolean;
 
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public title: string;
-  public vocabularyOptions: VocabularyOptions;
 
   private subs: Subscription[] = [];
 
@@ -44,7 +40,6 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.title = Metadata.firstValue(this.data.metadata, 'dc.title');
-    this.vocabularyOptions = new VocabularyOptions(this.vocabularyName);
 
     this.subs.push(this.selectStatus.pipe(
       distinctUntilChanged())

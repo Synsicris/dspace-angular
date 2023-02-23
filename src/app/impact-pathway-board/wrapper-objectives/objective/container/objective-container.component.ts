@@ -118,10 +118,6 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
       true
     );
     modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
-    modalRef.componentInstance.vocabularyName = this.impactPathwayService.getTaskTypeAuthorityName(
-      this.impactPathwayStep.type,
-      true
-    );
     modalRef.componentInstance.searchConfiguration = this.impactPathwayService.getSearchTaskConfigName(
       this.impactPathwayStep.type,
       true

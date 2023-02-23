@@ -361,7 +361,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.formHeader = this.workingPlanService.getWorkpackageStepFormHeader();
     modalRef.componentInstance.searchMessageInfoKey = this.workingPlanService.getWorkingPlanTaskSearchHeader();
     modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
-    modalRef.componentInstance.vocabularyName = this.workingPlanService.getWorkpackageStepTypeAuthorityName();
     modalRef.componentInstance.searchConfiguration = this.workingPlanService.getWorkpackageStepSearchConfigName();
     modalRef.componentInstance.scope = this.projectCommunityId;
     modalRef.componentInstance.query = this.buildExcludedTasksQuery(flatNode);
