@@ -21,7 +21,7 @@ import { Item } from '../../../core/shared/item.model';
  * @title Tree with nested nodes
  */
 @Component({
-  selector: 'ipw-working-plan-chart-toolbar',
+  selector: 'ds-working-plan-chart-toolbar',
   templateUrl: './working-plan-chart-toolbar.component.html',
   styleUrls: ['./working-plan-chart-toolbar.component.scss']
 })

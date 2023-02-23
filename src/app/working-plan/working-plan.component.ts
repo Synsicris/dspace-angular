@@ -17,7 +17,7 @@ import { Item } from '../core/shared/item.model';
 import { ProjectVersionService } from '../core/project/project-version.service';
 
 @Component({
-  selector: 'ipw-working-plan',
+  selector: 'ds-working-plan',
   templateUrl: './working-plan.component.html',
   styleUrls: ['./working-plan.component.scss'],
 })

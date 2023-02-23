@@ -16,7 +16,7 @@ import { environment } from '../../../../../environments/environment';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'ipw-objective-container',
+  selector: 'ds-objective-container',
   styleUrls: ['../../../shared/drag-and-drop-container.component.scss', './objective-container.component.scss'],
   templateUrl: './objective-container.component.html'
 })

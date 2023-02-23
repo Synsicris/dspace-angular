@@ -1,4 +1,4 @@
-<ipw-collapsable-panel #ipwCollapse class="d-block mb-3"
+<ds-collapsable-panel #ipwCollapse class="d-block mb-3"
                        [sidebarPanelTitle]="getStepTitle()"
                        [startOpen]="!(isCollapsed() | async)"
                        [collapsable]="true">
@@ -28,7 +28,7 @@
                                     [itemId]="questionsBoardStep.id"
                                     [disabled]="compareMode || isVersionOfAnItem"
                                     (itemUpdate)="updateQuestionsBoardStep($event)"></ds-view-simple-item-form>
-          <ipw-editable-textarea *ngIf="!hasCheckbox && questionsBoardStep"
+          <ds-editable-textarea *ngIf="!hasCheckbox && questionsBoardStep"
                                  [editMode]="getEditMode()"
                                  [formConfig]="formConfig$"
                                  [formSectionName]="getSectionName()"
@@ -37,7 +37,7 @@
                                  [fieldTitle]="messagePrefix + '.description.title' | translate"
                                  [content]="questionsBoardStep.description"
                                  [disabled]="compareMode || isVersionOfAnItem"
-                                 (contentChange)="updateQuestionsBoardStep($event)"></ipw-editable-textarea>
+                                 (contentChange)="updateQuestionsBoardStep($event)"></ds-editable-textarea>
         </div>
       </div>
 
@@ -52,4 +52,4 @@
       </div>
     </div>
   </ng-container>
-</ipw-collapsable-panel>
+</ds-collapsable-panel>

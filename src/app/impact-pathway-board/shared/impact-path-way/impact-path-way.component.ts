@@ -21,7 +21,7 @@ import { EditItemDataService } from '../../../core/submission/edititem-data.serv
 import { environment } from '../../../../environments/environment';
 
 @Component({
-  selector: 'ipw-impact-path-way',
+  selector: 'ds-impact-path-way',
   styleUrls: ['./impact-path-way.component.scss'],
   templateUrl: './impact-path-way.component.html'
 })

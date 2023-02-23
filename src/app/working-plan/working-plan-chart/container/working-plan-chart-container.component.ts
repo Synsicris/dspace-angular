@@ -71,7 +71,7 @@ interface WorkpackageEditModes {
  * @title Tree with nested nodes
  */
 @Component({
-  selector: 'ipw-working-plan-chart-container',
+  selector: 'ds-working-plan-chart-container',
   templateUrl: './working-plan-chart-container.component.html',
   styleUrls: ['./working-plan-chart-container.component.scss'],
   providers: [

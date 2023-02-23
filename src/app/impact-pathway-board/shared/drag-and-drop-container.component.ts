@@ -9,7 +9,7 @@ import { hasValue } from '../../shared/empty.util';
 import { ImpactPathwayStep } from '../core/models/impact-pathway-step.model';
 
 @Component({
-  selector: 'ipw-drag-and-drop-container',
+  selector: 'ds-drag-and-drop-container',
   template: ``,
 })
 

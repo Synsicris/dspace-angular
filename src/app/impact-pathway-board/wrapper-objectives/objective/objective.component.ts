@@ -17,7 +17,7 @@ import { EditItemDataService } from '../../../core/submission/edititem-data.serv
 import { environment } from '../../../../environments/environment';
 
 @Component({
-  selector: 'ipw-objective',
+  selector: 'ds-objective',
   styleUrls: ['./objective.component.scss', './../../../shared/comments/comment-list-box/comment-list.component.scss'],
   templateUrl: './objective.component.html'
 })
