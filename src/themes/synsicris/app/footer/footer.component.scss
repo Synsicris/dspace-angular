@@ -1,0 +1,84 @@
+:host {
+
+    footer {
+      background-color: var(--ds-footer-bg);
+      z-index: var(--ds-footer-z-index);
+      border-top: var(--ds-footer-border);
+      padding: var(--ds-footer-padding);
+      text-align:center;
+
+      p {line-height: 1rem;}
+
+      a {
+        color:var(--sy-links-color) !important;
+        font-weight: 700 !important; // make font thicker
+        white-space: nowrap; // prevents breaking links
+      }
+  
+     // 4Science-Logo
+     a.logo-4science {
+      img { height: var(--sy-footer-4science-logo-height); }
+      }
+
+    // DSpaceCris-Logo
+      a.logo-dspacecris {
+        position:relative;
+        img {
+          height: var(--sy-footer-dspacecris-logo-height);
+          margin-right:-0.2rem;
+          position:relative; // Moves the high logo slightly downwards
+          top:0.5rem;
+        }
+      }
+
+      @include media-breakpoint-down(sm){
+        a.logo-dspacecris img { height: 1.6rem; top:0; margin-right:0.4rem;}
+        a.logo-4science img {height:1.2rem;}
+      }
+
+      // not used in Synsicris
+      .top-footer {
+        background-color: var(--ds-top-footer-bg);
+        padding: var(--ds-footer-padding);
+        margin: calc(var(--ds-footer-padding) * -1);
+      }
+  
+      .bottom-footer {
+
+        ul {
+
+          margin-top: -0.5rem; // distance between the two lines
+          @include media-breakpoint-down(sm){ margin-top:1rem;}
+
+          li {
+            display: inline-flex;
+            i.fas {padding-right:0.3rem} //distance after fontawesome-icon
+
+            a {
+              padding: 0 calc(var(--bs-spacer) / 2);
+              color: inherit;
+              padding: 0 0.8rem 0 0.8rem !important; // space between links
+            }
+
+             // divider
+            &:not(:last-child) {
+                &:after {
+                border-right: var(--sy-footer-divider) !important;
+                }
+            }
+  
+            &:not(:last-child) {
+              &:after {
+                content: '';
+                border-right: 1px var(--bs-secondary) solid;
+              } 
+            }
+
+          } // end li
+        } // end ul  
+      } // end .bottom-footer
+    } // end footer
+  } // end :host
+  
+  
+  

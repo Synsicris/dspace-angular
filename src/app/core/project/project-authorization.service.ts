@@ -6,6 +6,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, map, mergeMap, take } from 'rxjs/operators';
 import { Community } from '../shared/community.model';
 import { FeatureID } from '../data/feature-authorization/feature-id';
+import { Item } from '../shared/item.model';
 
 @Injectable()
 export class ProjectAuthorizationService {
@@ -64,4 +65,26 @@ export class ProjectAuthorizationService {
   isFunderOrganizationalManager(): Observable<boolean> {
     return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager);
   }
+
+  /**
+   * Check if user is a Coordinator of project
+   */
+  isCoordinator(item: Item): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, item.self);
+  }
+
+  /**
+   * Check if user is a Funder project manager for any project
+   */
+  isFunderManager(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderProjectManager);
+  }
+
+  /**
+   * Check if user is a Funder for a given project
+   */
+  isFunderProjectManager(item: Item): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, item.self);
+  }
+
 }

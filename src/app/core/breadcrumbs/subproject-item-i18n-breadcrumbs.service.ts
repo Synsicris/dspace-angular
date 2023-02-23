@@ -12,12 +12,14 @@ import { BREADCRUMB_MESSAGE_POSTFIX } from './project-i18n-breadcrumbs.service';
 import { BreadcrumbsProviderService } from './breadcrumbsProviderService';
 import { Item } from '../shared/item.model';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
+import { BREADCRUMB_ENTITY_PREFIX } from './project-item-i18n-breadcrumbs.service';
+import { getDSORoute } from '../../app-routing-paths';
 
 /**
  * Service to calculate DSpaceObject breadcrumbs for a single part of the route including the project path
  */
 @Injectable()
-export class SubprojectItemI18nBreadcrumbsService implements BreadcrumbsProviderService<string>  {
+export class SubprojectItemI18nBreadcrumbsService implements BreadcrumbsProviderService<string> {
 
   constructor(
     protected linkService: LinkService,
@@ -46,25 +48,26 @@ export class SubprojectItemI18nBreadcrumbsService implements BreadcrumbsProvider
       );
       return combineLatest([project$, subproject$]).pipe(
         take(1),
-        map(([project, subproject]: [Item, Item]) => {
-          const breadcrumb = [];
-          let itemUrl;
-          if (project) {
-            itemUrl = getItemPageRoute(project);
-            breadcrumb.push(new Breadcrumb(this.dsoNameService.getName(project), itemUrl));
-          }
-          if (subproject && project?.id !== subproject?.id) {
-            itemUrl = getItemPageRoute(subproject);
-            breadcrumb.push(new Breadcrumb(this.dsoNameService.getName(subproject), itemUrl));
-          }
-          breadcrumb.push(new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url));
-          return breadcrumb;
-        })
+        map(([project, subproject]: [Item, Item]) =>
+          [].concat(
+            project ? this.computeBreadCrumbs(null, project) : [],
+            subproject && project?.id !== subproject?.id ? this.computeBreadCrumbs(project, subproject) : [],
+            new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url)
+          )
+        )
       );
     } else {
       return observableOf([new Breadcrumb(key + BREADCRUMB_MESSAGE_POSTFIX, url)]);
     }
 
+  }
+
+  private computeBreadCrumbs(parent: Item, item: Item): Breadcrumb[] {
+    const entityType = this.dsoNameService.getEntityType(item);
+    return [].concat(
+      entityType && new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, getDSORoute(parent)) || [],
+      new Breadcrumb(this.dsoNameService.getName(item), getItemPageRoute(item))
+    );
   }
 }
 

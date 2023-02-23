@@ -1,0 +1,50 @@
+::ng-deep .comment-box-position div.card-body {
+  overflow-y: auto;
+  overflow-x: clip;
+
+  .add-section {
+    position: sticky;
+    top: 0;
+    background: white;
+  }
+}
+
+.card-header-height {
+  height: 63px;
+}
+
+@media (max-width: 1335px) {
+  .card-header-height {
+    height: 100px;
+  }
+}
+
+@media (max-width: 1097px) {
+  .card-header-height {
+    height: 110px;
+  }
+}
+
+@media (max-width: 869px) {
+  .card-header-height {
+    height: 120px;
+  }
+}
+
+@media (max-width: 870px) {
+  .card-header-height {
+    height: 140px;
+  }
+}
+
+@media (max-width: 775px) {
+  .card-header-height {
+    height: 160px;
+  }
+}
+
+@media (max-width: 774px) {
+  .card-header-height {
+    height: 200px;
+  }
+}

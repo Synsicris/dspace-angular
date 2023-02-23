@@ -58,8 +58,6 @@ export class QuestionsBoardTaskComponent implements OnInit, OnDestroy {
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isRedirectingToEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public taskType$: Observable<string>;
-
   private removing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private subs: Subscription[] = [];
   private canEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -76,8 +74,6 @@ export class QuestionsBoardTaskComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.taskType$ = this.exploitationPlanService.getExploitationPlanTaskType(this.exploitationPlanStepType, this.exploitationPlanTask.type);
-
     const adminEdit$ = this.editItemDataService.checkEditModeByIdAndType(this.exploitationPlanTask.id, environment.projects.projectsEntityAdminEditMode).pipe(
       take(1)
     );

@@ -1,6 +1,10 @@
 <div class="wrapper d-flex align-items-stretch" [ngClass]="{'wrapper-close': !(isSideBarHidden() | async),
                                                             'container': (hasSidebar() | async) }">
-  <nav id="sidebar" *ngIf="(hasSidebar() | async) && !(isSideBarHidden() | async) && showNav" [ngClass]="{'active': !(isSideBarHidden() | async)}">
+<!--  
+  original version, changed in order to get entity classes to style the sidebar individually (rex 221125)
+  <nav id="sidebar" *ngIf="(hasSidebar() | async) && !(isSideBarHidden() | async) && showNav" [ngClass]="{'active': !(isSideBarHidden() | async)}"> 
+    -->
+  <nav id="sidebar" class="{{item.entityType}}" *ngIf="(hasSidebar() | async) && !(isSideBarHidden() | async) && showNav" [ngClass]="{'active': !(isSideBarHidden() | async)}">
     <div>
       <ul class="list-unstyled components mb-5">
         <ng-container *ngIf="!!(activeTab$ |async)">

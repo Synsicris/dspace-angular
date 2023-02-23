@@ -59,6 +59,11 @@ export class CommentCreateComponent implements OnInit {
   @Input() scope: string;
 
   /**
+   * Flag determining whether to show only add icon or the icon with text
+   */
+  @Input() showIconOnly = false;
+
+  /**
    * The condition to show or hide the button
    */
   canCreateComment$: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -125,7 +130,7 @@ export class CommentCreateComponent implements OnInit {
             const projectId = uniqueId.split('_')[0];
             return this.itemService.findById(projectId).pipe(
               getFirstCompletedRemoteData(),
-              switchMap((projectItemRD: RemoteData<Item>) => this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, projectItemRD.payload.self))
+              switchMap((projItemRD: RemoteData<Item>) => this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, projItemRD.payload.self))
             );
           }
         })
@@ -155,10 +160,10 @@ export class CommentCreateComponent implements OnInit {
   /**
    * Open creation comment modal
    */
-  createComment(collectionId: string) {
+  createComment(collectionIdentifier: string) {
     forkJoin({
       entityType: of(this.targetEntityType),
-      collectionId: of(collectionId),
+      collectionId: of(collectionIdentifier),
       formName: of(environment.comments.commentEditFormName),
       formSectionName: of(environment.comments.commentEditFormSection),
       customMetadata: this.getCustomCommentMetadataMap(),

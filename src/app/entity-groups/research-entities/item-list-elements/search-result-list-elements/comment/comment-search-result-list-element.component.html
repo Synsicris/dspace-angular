@@ -29,7 +29,7 @@
       <span class="text-muted">{{'layout.field.label.comment.synsicris.creator' | translate}}:</span>
       <span class="text-muted item-list-date ml-1">{{creator}}</span>
       <ng-container *ngIf="dso.firstMetadataValue('synsicris.date.creation') as creationDate">
-        <span class="text-muted item-list-date">at {{creationDate}}</span>
+        <span class="text-muted item-list-date"> / {{creationDate}}</span>
       </ng-container>
     </div>
 

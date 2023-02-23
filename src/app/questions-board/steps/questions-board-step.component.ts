@@ -1,7 +1,8 @@
+import { getRemoteDataPayload } from './../../core/shared/operators';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { distinctUntilChanged, skip, take } from 'rxjs/operators';
+import { distinctUntilChanged, map, skip, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -13,11 +14,12 @@ import { QuestionsBoardService } from '../core/questions-board.service';
 import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
 import { EditSimpleItemModalComponent } from '../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { QuestionsBoardType } from '../core/models/questions-board-type';
+import { ActivatedRoute, Data } from '@angular/router';
 
 @Component({
   selector: 'ds-questions-board-step',
   templateUrl: './questions-board-step.component.html',
-  styleUrls: ['./questions-board-step.component.scss']
+  styleUrls: ['./questions-board-step.component.scss', './../../shared/comments/comment-list-box/comment-list.component.scss']
 })
 export class QuestionsBoardStepComponent implements OnInit {
 
@@ -35,6 +37,11 @@ export class QuestionsBoardStepComponent implements OnInit {
    * The funding community which the exploitation Plan belong to
    */
   @Input() fundingCommunity: Community;
+
+  /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  @Input() isFunder: boolean;
 
   /**
    * Reference to teh ipwCollapse child component
@@ -58,6 +65,12 @@ export class QuestionsBoardStepComponent implements OnInit {
   formConfig$: Observable<SubmissionFormModel>;
 
   /**
+   * The exploitation plan item
+   * @type {Observable<Item>}
+   */
+  exploitationPlan$: Observable<Item>;
+
+  /**
    * Indicate to show or not checkbox
    */
   hasCheckbox = false;
@@ -66,7 +79,8 @@ export class QuestionsBoardStepComponent implements OnInit {
     protected exploitationPlanService: QuestionsBoardService,
     protected exploitationPlanStateService: QuestionsBoardStateService,
     protected modalService: NgbModal,
-    protected translate: TranslateService
+    protected translate: TranslateService,
+    protected route: ActivatedRoute
   ) {
 
   }
@@ -74,6 +88,10 @@ export class QuestionsBoardStepComponent implements OnInit {
   ngOnInit(): void {
     this.hasCheckbox = this.exploitationPlanStep.type === QuestionsBoardType.Question1;
     this.formConfig$ = this.exploitationPlanService.getExploitationPlanStepFormConfig(this.exploitationPlanStep.type);
+    this.exploitationPlan$ = this.route.data.pipe(
+      map((data: Data) => data.exploitationPlan),
+      getRemoteDataPayload()
+    );
   }
 
   /**

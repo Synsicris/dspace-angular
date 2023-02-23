@@ -1,6 +1,6 @@
-import { Params } from '@angular/router';
+import { Data, Params } from '@angular/router';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 
 export class MockActivatedRoute {
 
@@ -30,5 +30,13 @@ export class MockActivatedRoute {
   // ActivatedRoute.snapshot.params
   get snapshot() {
     return { params: this.testParams, queryParams: this.testParams };
+  }
+
+  // ActivatedRoute.data
+  get data() {
+    const routeData: Data = {
+      'exploitationPlan': {}
+    };
+    return of(routeData);
   }
 }

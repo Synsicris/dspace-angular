@@ -23,6 +23,7 @@ import { CreateSimpleItemModule } from '../shared/create-simple-item-modal/creat
 import { ComcolModule } from '../shared/comcol/comcol.module';
 import { ViewSimpleItemFormModule } from '../shared/view-simple-item-form/view-simple-item-form.module';
 import { EditSimpleItemModalModule } from '../shared/edit-simple-item-modal/edit-simple-item-modal.module';
+import { CommentsModule } from '../shared/comments/comments.module';
 
 const MODULES = [
   CommonModule,
@@ -34,7 +35,8 @@ const MODULES = [
   CreateSimpleItemModule,
   ComcolModule,
   EditSimpleItemModalModule,
-  ViewSimpleItemFormModule
+  ViewSimpleItemFormModule,
+  CommentsModule
 ];
 
 const COMPONENTS = [

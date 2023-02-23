@@ -6,6 +6,7 @@ import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { ImpactPathwayService } from './core/impact-pathway.service';
 import { ImpactPathwayStep } from './core/models/impact-pathway-step.model';
 import { isNotEmpty } from '../shared/empty.util';
+import { Item } from '../core/shared/item.model';
 
 @Component({
   selector: 'ipw-objectives-board',
@@ -18,13 +19,18 @@ export class ObjectivesBoardComponent implements OnInit {
    * The project community's id
    */
   @Input() public projectCommunityId: string;
-  @Input() public impactPathwayStepId: string;
+
+  /**
+   * The impactPathway step's Item
+   */
+  @Input() public impactPathwayStepItem: Item;
 
   /**
    * If the current user is a funder Organizational/Project manager
    */
   @Input() isFunder: boolean;
 
+  public impactPathwayStepId: string;
   public targetImpactPathwayTaskId$: Observable<string>;
 
   private impactPathWayStep$: Observable<ImpactPathwayStep>;
@@ -33,6 +39,7 @@ export class ObjectivesBoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.impactPathwayStepId = this.impactPathwayStepItem.id;
     this.impactPathWayStep$ = this.impactPathwayService.getImpactPathwayStepById(this.impactPathwayStepId);
     this.targetImpactPathwayTaskId$ = this.impactPathwayService.getImpactPathwayTargetTask();
   }

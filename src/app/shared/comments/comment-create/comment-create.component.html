@@ -1,0 +1,18 @@
+<ng-container *ngIf="(canCreateComment$ | async)">
+  <ng-container *ngIf="showIconOnly;else addButtonWithText">
+    <span>
+      <button class="btn btn-link text-decoration-none"
+              title="{{'item-create.modal-launcher.btn' | translate}}"
+              (click)="openDialog(); $event.stopPropagation()">
+        <i class="fas fa-plus-circle fa-2x"></i>
+      </button>
+    </span>
+  </ng-container>
+  <ng-template #addButtonWithText>
+    <button class="btn btn-outline-primary open-modal" title="{{'item-create.modal-launcher.btn' | translate}}"
+      (click)="openDialog(); $event.stopPropagation()">
+      <i class="fas fa-plus-circle"></i>
+      {{'item-create.modal-launcher.btn' | translate}}
+   </button>
+  </ng-template>
+</ng-container>

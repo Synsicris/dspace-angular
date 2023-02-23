@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
-import { catchError, concatMap, filter, first, flatMap, map, scan, switchMap, take } from 'rxjs/operators';
+import { from as observableFrom, Observable, of as observableOf, of } from 'rxjs';
+import { concatMap, filter, first, map, mergeMap, scan, switchMap, take } from 'rxjs/operators';
 
-import { hasValue, isNotEmpty, isNotUndefined, isNull } from '../../empty.util';
+import { hasValue, isNotEmpty, isNotUndefined } from '../../empty.util';
 import { PaginationComponentOptions } from '../../pagination/pagination-component-options.model';
 import { SortOptions } from '../../../core/cache/models/sort-options.model';
 import { PaginatedList } from '../../../core/data/paginated-list.model';
@@ -21,8 +21,6 @@ import { FacetValue } from '../../search/models/facet-value.model';
 import { SimpleItem } from '../models/simple-item.model';
 import { LinkService } from '../../../core/cache/builders/link.service';
 import { followLink } from '../../utils/follow-link-config.model';
-import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
-import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
 import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
 import { SearchConfigurationService } from '../../../core/shared/search/search-configuration.service';
@@ -75,16 +73,12 @@ export class SearchSimpleItemService {
             const dsoPage: any[] = rd.payload.page
               .filter((result) => hasValue(result))
               .map((searchResult: FacetValue) => {
-                return this.getFacetLabel(searchResult.label, vocabularyName).pipe(
-                  map((label: string) => Object.assign(new FacetValue(), searchResult, {
-                    label: label
-                  }))
-                );
+                return of(searchResult);
               });
             const payload = Object.assign(rd.payload, { page: dsoPage }) as PaginatedList<any>;
             return Object.assign(rd, { payload: payload });
           }),
-          flatMap((rd: RemoteData<PaginatedList<Observable<FacetValue>>>) => {
+          mergeMap((rd: RemoteData<PaginatedList<Observable<FacetValue>>>) => {
             if (rd.payload.page.length === 0) {
               return observableOf([]);
             } else {
@@ -101,14 +95,6 @@ export class SearchSimpleItemService {
       })
     );
 
-  }
-
-  private getFacetLabel(label: string, vocabularyName: string): Observable<string> {
-    const vocabularyOptions = new VocabularyOptions(vocabularyName);
-    return this.vocabularyService.getVocabularyEntryByValue(label, vocabularyOptions).pipe(
-      map((result: VocabularyEntry) => isNull(result) ? label : result.display),
-      catchError((error: Error) => observableOf(label))
-    );
   }
 
   searchAvailableImpactPathwayTasksByStepType(

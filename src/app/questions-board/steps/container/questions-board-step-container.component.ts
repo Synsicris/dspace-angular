@@ -133,7 +133,7 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
 
 
   listDropped(event: CdkDragDrop<QuestionsBoardStep>) {
-    // console.log(event);
+    return;
   }
 
 

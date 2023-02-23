@@ -23,6 +23,11 @@ export class WrapperObjectivesComponent implements OnDestroy {
   @Input() public impactPathwayStep: ImpactPathwayStep;
 
   /**
+   * The impactPathway step's Item
+   */
+  @Input() public impactPathwayStepItem: Item;
+
+  /**
    * If the current user is a funder Organizational/Project manager
    */
   @Input() isFunder: boolean;

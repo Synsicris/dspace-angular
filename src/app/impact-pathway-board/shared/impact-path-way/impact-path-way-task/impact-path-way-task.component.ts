@@ -56,8 +56,6 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   public selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isRedirectingToEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public taskHTMLDivId: string;
-  public taskType$: Observable<string>;
-
   private removing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private subs: Subscription[] = [];
   private isTwoWayRelationSelected: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -81,10 +79,6 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.taskHTMLDivId = this.buildHTMLDivId();
-    this.taskType$ = this.impactPathwayService.getImpactPathwayTaskType(
-      this.impactPathwayStepType,
-      this.data.type,
-      this.isObjectivePage);
     this.impactPathwayService.getSelectedTask().pipe(
       filter((task: ImpactPathwayTask) => !this.multiSelectEnabled && isNotEmpty(task) && this.isTaskSelectable()),
       map((task: ImpactPathwayTask) => task.id === this.data.id),

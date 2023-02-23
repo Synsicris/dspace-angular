@@ -1,7 +1,6 @@
-import {
-  CollapsablePanelComponent
-} from './../../impact-pathway-board/shared/collapsable-panel/collapsable-panel.component';
-import { TranslateLoaderMock } from './../../shared/testing/translate-loader.mock';
+import { MockActivatedRoute } from '../../shared/mocks/active-router.mock';
+import { CollapsablePanelComponent } from '../../impact-pathway-board/shared/collapsable-panel/collapsable-panel.component';
+import { TranslateLoaderMock } from '../../shared/testing/translate-loader.mock';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { QuestionsBoardStateService } from '../core/questions-board-state.service';
 import { QuestionsBoardService } from '../core/questions-board.service';
@@ -11,6 +10,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { QuestionsBoardStep } from '../core/models/questions-board-step.model';
 import { ChangeDetectorRef } from '@angular/core';
 import { of as observableOf } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 describe('QuestionsBoardStepComponent', () => {
   let component: QuestionsBoardStepComponent;
@@ -34,6 +34,7 @@ describe('QuestionsBoardStepComponent', () => {
       providers: [
         { provide: QuestionsBoardService, useValue: exploitationPlanService },
         { provide: QuestionsBoardStateService, useValue: exploitationPlanStateService },
+        { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
       ]
     })
       .compileComponents();
