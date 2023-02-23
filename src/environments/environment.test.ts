@@ -3,7 +3,6 @@ import { BuildConfig } from 'src/config/build-config.interface';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { AdvancedAttachmentElementType } from '../config/advanced-attachment-rendering.config';
-import { AppConfig } from '../config/app-config.interface';
 import { DisplayItemMetadataType } from '../config/display-search-result-config.interface';
 
 export const environment: BuildConfig = {
@@ -376,9 +375,24 @@ export const environment: BuildConfig = {
     navbar: {
       // If true, show the "Community and Collections" link in the navbar; otherwise, show it in the admin sidebar
       showCommunityCollection: true,
-      search: {
-        filters: {
-          datepicker: ['filterName1']
+    },
+    search: {
+      filters: {
+        datepicker: ['dateReminder'],
+        discoveryConfig: {
+          'COMMENT_ALL.Person.comment_person_all': {
+            'dateReminder': {
+              filterType: 'range',
+              minValue: {
+                operator: '-',
+                value: { day: 10 }
+              },
+              maxValue: {
+                operator: '+',
+                value: { day: 10 }
+              }
+            }
+          }
         }
       }
     }
@@ -579,6 +593,15 @@ export const environment: BuildConfig = {
     exploitationPlanTaskFormSection: 'exploitation_plan_task_form',
     exploitationPlanEditFormSection: 'exploitation_plan-edit_form',
     exploitationPlanEditMode: 'EXPLOITATIONPLAN',
+  },
+  interimReport: {
+    interimReportRelationMetadata: 'synsicris.relation.interim_report',
+    interimReportStepRelationMetadata: 'interim_report.relation.step',
+    interimReportTaskRelationMetadata: 'interim_report.relation.task',
+    interimReportPartnerMetadata: '',
+    interimReportTaskFormSection: 'interim_report_task_form ',
+    interimReportEditFormSection: 'interim_report-edit_form',
+    interimReportEditMode: 'INTERIMREPORT',
   },
   displayItemSearchResult: {
     Publication: [

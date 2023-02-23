@@ -4,21 +4,21 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/ro
 import { combineLatest, Observable, of as observableOf } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
-import { HasPolicyEditGrantsGuard } from '../core/project/authorization-guards/has-policy-edit-grants.guard';
-import { RemoteData } from '../core/data/remote-data';
-import { Item } from '../core/shared/item.model';
-import { QUESTIONS_BOARD_SERVICE, QuestionsBoardService } from '../questions-board/core/questions-board.service';
-import { AuthorizationDataService } from '../core/data/feature-authorization/authorization-data.service';
-import { ItemDataService } from '../core/data/item-data.service';
-import { isNotEmpty } from '../shared/empty.util';
-import { FeatureID } from '../core/data/feature-authorization/feature-id';
+import { HasPolicyEditGrantsGuard } from '../../core/project/authorization-guards/has-policy-edit-grants.guard';
+import { RemoteData } from '../../core/data/remote-data';
+import { Item } from '../../core/shared/item.model';
+import { QUESTIONS_BOARD_SERVICE, QuestionsBoardService } from './questions-board.service';
+import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
+import { ItemDataService } from '../../core/data/item-data.service';
+import { isNotEmpty } from '../../shared/empty.util';
+import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 
 /**
  * Prevent unauthorized activating and loading of routes when the current authenticated user doesn't have edit grants on
  * the given item
  */
 @Injectable()
-export class ExploitationPlanPageGuard extends HasPolicyEditGrantsGuard {
+export class QuestionsBoardGuard extends HasPolicyEditGrantsGuard {
 
   constructor(
     @Inject(QUESTIONS_BOARD_SERVICE) private questionsBoardService: QuestionsBoardService,

@@ -34,6 +34,7 @@ import { ProjectsConfig } from './projects-config.interface';
 import { ExploitationPlanConfig } from './exploitation-plan.config';
 import { DisplayItemSearchResultConfig } from './display-search-result-config.interface';
 import { CommentConfig } from './comment.config';
+import { InterimReportConfig } from './interim-report.config';
 
 interface AppConfig extends Config {
   ui: UIServerConfig;
@@ -72,6 +73,7 @@ interface AppConfig extends Config {
   workingPlan: WorkingPlanConfig;
   projects: ProjectsConfig;
   exploitationPlan: ExploitationPlanConfig;
+  interimReport: InterimReportConfig;
   displayItemSearchResult?: DisplayItemSearchResultConfig;
   comments: CommentConfig;
 }

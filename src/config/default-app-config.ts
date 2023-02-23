@@ -752,6 +752,16 @@ export class DefaultAppConfig implements AppConfig {
     exploitationPlanEditMode: 'EXPLOITATIONPLAN',
   };
 
+  interimReport = {
+    interimReportRelationMetadata: 'synsicris.relation.interim_report',
+    interimReportStepRelationMetadata: 'interim_report.relation.step',
+    interimReportTaskRelationMetadata: 'interim_report.relation.task',
+    interimReportPartnerMetadata: '',
+    interimReportTaskFormSection: 'interim_report_task_form',
+    interimReportEditFormSection: 'interim_report-edit_form',
+    interimReportEditMode: 'INTERIMREPORT',
+  };
+
   displayItemSearchResult = {
     default: [
       {
