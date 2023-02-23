@@ -244,13 +244,17 @@ export class ProjectVersionService {
       getRemoteDataPayload(),
       mergeMap((targetItem: Item) => {
         const targetChildrenMetadata: MetadataValue[] = targetItem.findMetadataSortedByPlace(metadataName);
-        return from(targetChildrenMetadata).pipe(
-          concatMap((metadata: MetadataValue) => this.itemService.findById(metadata?.authority).pipe(
-            getFirstCompletedRemoteData(),
-            getRemoteDataPayload()
-          )),
-          reduce((acc: any, value: any) => [...acc, value], []),
-        );
+        if (targetChildrenMetadata.length > 0) {
+          return from(targetChildrenMetadata).pipe(
+            concatMap((metadata: MetadataValue) => this.itemService.findById(metadata?.authority).pipe(
+              getFirstCompletedRemoteData(),
+              getRemoteDataPayload()
+            )),
+            reduce((acc: any, value: any) => [...acc, value], []),
+          );
+        } else {
+          return of([]);
+        }
       })
     );
 
@@ -261,13 +265,17 @@ export class ProjectVersionService {
         getRemoteDataPayload(),
         mergeMap((versionedItem: Item) => {
           const versionedChildrenMetadata: MetadataValue[] = versionedItem.findMetadataSortedByPlace(metadataName);
-          return from(versionedChildrenMetadata).pipe(
-            concatMap((metadata: MetadataValue) => this.itemService.findById(metadata?.authority).pipe(
-              getFirstCompletedRemoteData(),
-              getRemoteDataPayload()
-            )),
-            reduce((acc: any, value: any) => [...acc, value], []),
-          );
+          if (versionedChildrenMetadata.length > 0) {
+            return from(versionedChildrenMetadata).pipe(
+              concatMap((metadata: MetadataValue) => this.itemService.findById(metadata?.authority).pipe(
+                getFirstCompletedRemoteData(),
+                getRemoteDataPayload()
+              )),
+              reduce((acc: any, value: any) => [...acc, value], []),
+            );
+          } else {
+            return of([]);
+          }
         })
       );
     }

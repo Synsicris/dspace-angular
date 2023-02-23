@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
-import { BehaviorSubject, forkJoin, Observable, of, of as observableOf } from 'rxjs';
-import { filter, map, switchMapTo } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SubmissionRestService } from '../../../core/submission/submission-rest.service';
@@ -12,8 +12,6 @@ import { AuthorizationDataService } from '../../../core/data/feature-authorizati
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { Item } from '../../../core/shared/item.model';
 import { ProjectVersionService } from '../../../core/project/project-version.service';
-import { Version } from '../../../core/shared/version.model';
-import { FUNDING_ENTITY, PROJECT_ENTITY } from '../../../core/project/project-data.service';
 
 /**
  * This component represents submission form footer bar.
@@ -105,7 +103,7 @@ export class SubmissionFormFooterComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    const hasVersion$ = this.projectVersionService.getVersionsByItemId(this.item.id).pipe(
+/*    const hasVersion$ = this.projectVersionService.getVersionsByItemId(this.item.id).pipe(
       map((versions: Version[]) => versions.length > 0)
     );
 
@@ -125,7 +123,13 @@ export class SubmissionFormFooterComponent implements OnInit, OnChanges {
             )
         )
       )
-      .subscribe(canDelete => this.canDelete$.next(canDelete));
+      .subscribe(canDelete => this.canDelete$.next(canDelete));*/
+
+    const canDelete$ = this.authorizationService.isAuthorized(FeatureID.CanDelete, this.item.self);
+    canDelete$.subscribe((canDelete) => {
+      this.canDelete$.next(canDelete);
+    });
+
   }
 
   /**
