@@ -5,7 +5,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreConfig, StoreModule } from '@ngrx/store';
 
 import { QuestionsBoardComponent } from './questions-board.component';
-import { QuestionsBoardService } from './core/questions-board.service';
 import { QuestionsBoardStateService } from './core/questions-board-state.service';
 import { QuestionsBoardEffects } from './core/questions-board-effects.service';
 import { storeModuleConfig } from '../app.reducer';
@@ -27,7 +26,7 @@ import { CommentsModule } from '../shared/comments/comments.module';
 
 const MODULES = [
   CommonModule,
-  StoreModule.forFeature('exploitationPlan', questionsBoardReducer, storeModuleConfig as StoreConfig<QuestionsBoardState, QuestionsBoardActions>),
+  StoreModule.forFeature('questionsBoard', questionsBoardReducer, storeModuleConfig as StoreConfig<QuestionsBoardState, QuestionsBoardActions>),
   EffectsModule.forFeature([QuestionsBoardEffects]),
   SharedModule,
   ImpactPathwaySharedModule,
@@ -46,7 +45,6 @@ const COMPONENTS = [
   QuestionsBoardTaskComponent
 ];
 const PROVIDERS = [
-  QuestionsBoardService,
   QuestionsBoardStateService,
   ProjectItemService
 ];

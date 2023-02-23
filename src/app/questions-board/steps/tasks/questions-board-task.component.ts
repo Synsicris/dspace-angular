@@ -1,12 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { hasValue } from '../../../shared/empty.util';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
-import { QuestionsBoardService } from '../../core/questions-board.service';
 import { QuestionsBoardStateService } from '../../core/questions-board-state.service';
 import { QuestionsBoardTask } from '../../core/models/questions-board-task.model';
 import { QuestionsBoardStep } from '../../core/models/questions-board-step.model';
@@ -14,24 +13,28 @@ import { environment } from '../../../../environments/environment';
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 import { CompareItemComponent } from '../../../shared/compare-item/compare-item.component';
 import { ItemDetailPageModalComponent } from '../../../item-detail-page-modal/item-detail-page-modal.component';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'ds-questions-board-task',
   styleUrls: ['./questions-board-task.component.scss'],
   templateUrl: './questions-board-task.component.html'
 })
-export class QuestionsBoardTaskComponent implements OnInit, OnDestroy {
+export class QuestionsBoardTaskComponent implements OnInit {
+
+  /**
+   * The prefix to use for the i19n keys
+   */
+  @Input() messagePrefix: string;
 
   /**
    * The project community id which the subproject belong to
    */
   @Input() public projectCommunityId: string;
 
-  @Input() public exploitationPlanId: string;
-  @Input() public exploitationPlanStepId: string;
-  @Input() public exploitationPlanStepType: string;
-  @Input() public exploitationPlanTask: QuestionsBoardTask;
+  @Input() public questionsBoardId: string;
+  @Input() public questionsBoardStepId: string;
+  @Input() public questionsBoardStepType: string;
+  @Input() public questionsBoardTask: QuestionsBoardTask;
   @Input() public selectable = true;
   @Input() public multiSelectEnabled = false;
   @Input() public parentStep: QuestionsBoardStep;
@@ -54,30 +57,31 @@ export class QuestionsBoardTaskComponent implements OnInit, OnDestroy {
    */
   @Input() compareMode = false;
 
-
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   public selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   public isRedirectingToEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   private removing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private subs: Subscription[] = [];
+
   private canEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   ComparedVersionItemStatus = ComparedVersionItemStatus;
 
   constructor(
     private editItemDataService: EditItemDataService,
-    protected exploitationPlanService: QuestionsBoardService,
-    protected exploitationPlanStateService: QuestionsBoardStateService,
+    protected questionsBoardStateService: QuestionsBoardStateService,
     private modalService: NgbModal,
     private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    const adminEdit$ = this.editItemDataService.checkEditModeByIdAndType(this.exploitationPlanTask.id, environment.projects.projectsEntityAdminEditMode).pipe(
+    const adminEdit$ = this.editItemDataService.checkEditModeByIdAndType(this.questionsBoardTask.id, environment.projects.projectsEntityAdminEditMode).pipe(
       take(1)
     );
-    const userEdit$ = this.editItemDataService.checkEditModeByIdAndType(this.exploitationPlanTask.id, environment.projects.projectsEntityEditMode).pipe(
+    const userEdit$ = this.editItemDataService.checkEditModeByIdAndType(this.questionsBoardTask.id, environment.projects.projectsEntityEditMode).pipe(
       take(1)
     );
 
@@ -98,17 +102,13 @@ export class QuestionsBoardTaskComponent implements OnInit, OnDestroy {
 
   public navigateToEditItemPage(): void {
     this.isRedirectingToEdit$.next(true);
-    this.router.navigate(['edit-items', this.exploitationPlanTask.id + ':' + this.projectsEntityEditMode]);
+    this.router.navigate(['edit-items', this.questionsBoardTask.id + ':' + this.projectsEntityEditMode]);
     this.isRedirectingToEdit$.next(false);
   }
 
   public removeTask() {
     this.removing$.next(true);
-    this.exploitationPlanStateService.removeTaskFromStep(this.exploitationPlanId, this.exploitationPlanStepId, this.exploitationPlanTask.id, this.taskPosition);
-  }
-
-  ngOnDestroy(): void {
-    this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
+    this.questionsBoardStateService.removeTaskFromStep(this.questionsBoardId, this.questionsBoardStepId, this.questionsBoardTask.id, this.taskPosition);
   }
 
   canEdit(): Observable<boolean> {
@@ -117,7 +117,7 @@ export class QuestionsBoardTaskComponent implements OnInit, OnDestroy {
 
   openItemModal() {
     const modalRef = this.modalService.open(ItemDetailPageModalComponent, { size: 'xl' });
-    (modalRef.componentInstance as any).uuid = this.exploitationPlanTask.id;
+    (modalRef.componentInstance as any).uuid = this.questionsBoardTask.id;
   }
 
   /**

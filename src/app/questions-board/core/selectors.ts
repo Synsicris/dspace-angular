@@ -38,15 +38,15 @@ function questionsBoardStepCollapsableSelector<T>(key: string, stepId: string, s
 }
 
 /**
- * Returns the exploitationPlan state.
+ * Returns the questions board state.
  * @function _getQuestionsBoardState
  * @param {AppState} state Top level state.
  * @return {QuestionsBoardState}
  */
-const _getQuestionsBoardState = (state: any) => state.exploitationPlan;
+const _getQuestionsBoardState = (state: any) => state.questionsBoard;
 
 /**
- * Returns the exploitation plan state.
+ * Returns the questions board state.
  * @function questionsBoardStateSelector
  * @return {QuestionsBoardState}
  */
@@ -55,7 +55,7 @@ export const questionsBoardStateSelector = createSelector(_getQuestionsBoardStat
 );
 
 /**
- * Returns true if exploitation plan objects are loaded.
+ * Returns true if questions board objects are loaded.
  * @function isQuestionsBoardLoadedSelector
  * @return {boolean}
  */
@@ -73,33 +73,33 @@ export const isQuestionsBoardProcessingSelector = createSelector(_getQuestionsBo
 );
 
 /**
- * Returns the ExploitationPlan object.
+ * Returns the QuestionsBoard object.
  * @function questionsBoardByIDSelector
- * @param {string} exploitationPlanId
+ * @param {string} questionsBoardId
  * @return {QuestionsBoard}
  */
-export function questionsBoardByIDSelector(exploitationPlanId: string): MemoizedSelector<AppState, QuestionsBoard> {
-  return questionsBoardKeySelector<QuestionsBoard>(exploitationPlanId, questionsBoardStateSelector);
+export function questionsBoardByIDSelector(questionsBoardId: string): MemoizedSelector<AppState, QuestionsBoard> {
+  return questionsBoardKeySelector<QuestionsBoard>(questionsBoardId, questionsBoardStateSelector);
 }
 
 /**
- * Returns the ExploitationPlan object.
+ * Returns the QuestionsBoard object.
  * @function questionsBoardByIDSelector
- * @param {string} exploitationPlanId
+ * @param {string} questionsBoardId
  * @return {QuestionsBoard}
  */
-export function questionsBoardStepByIDSelector(exploitationPlanId: string, exploitationPlanStepId: string): MemoizedSelector<AppState, QuestionsBoardStep> {
-  return questionsBoardStepKeySelector<QuestionsBoardStep>(exploitationPlanId, exploitationPlanStepId, questionsBoardStateSelector);
+export function questionsBoardStepByIDSelector(questionsBoardId: string, questionsBoardStepId: string): MemoizedSelector<AppState, QuestionsBoardStep> {
+  return questionsBoardStepKeySelector<QuestionsBoardStep>(questionsBoardId, questionsBoardStepId, questionsBoardStateSelector);
 }
 
 /**
- * Returns the ExploitationPlan object.
+ * Returns the QuestionsBoard object.
  * @function questionsBoardByIDSelector
- * @param {string} exploitationPlanId
+ * @param {string} questionsBoardId
  * @return {QuestionsBoard}
  */
-export function questionsBoardStepCollapsable(exploitationPlanId: string, exploitationPlanStepId: string): MemoizedSelector<AppState, QuestionsBoardStep> {
-  return questionsBoardStepCollapsableSelector<QuestionsBoardStep>(exploitationPlanId, exploitationPlanStepId, questionsBoardStateSelector);
+export function questionsBoardStepCollapsable(questionsBoardId: string, questionsBoardStepId: string): MemoizedSelector<AppState, QuestionsBoardStep> {
+  return questionsBoardStepCollapsableSelector<QuestionsBoardStep>(questionsBoardId, questionsBoardStepId, questionsBoardStateSelector);
 }
 
 

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input } from '@angular/core';
 
 import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,7 +9,7 @@ import { QuestionsBoardStateService } from '../../core/questions-board-state.ser
 import {
   CreateSimpleItemModalComponent
 } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
-import { QuestionsBoardService } from '../../core/questions-board.service';
+import { QUESTIONS_BOARD_SERVICE, QuestionsBoardService } from '../../core/questions-board.service';
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
 import { QuestionsBoardTask } from '../../core/models/questions-board-task.model';
 import { ProjectGroupService } from '../../../core/project/project-group.service';
@@ -22,6 +22,10 @@ import { DragAndDropContainerComponent } from '../../shared/drag-and-drop/drag-a
   templateUrl: './questions-board-step-container.component.html'
 })
 export class QuestionsBoardStepContainerComponent extends DragAndDropContainerComponent {
+  /**
+   * The prefix to use for the i19n keys
+   */
+  @Input() messagePrefix: string;
 
   /**
    * The project community id which the subproject belong to
@@ -29,17 +33,17 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
   @Input() public projectCommunityId: string;
 
   /**
-   * The exploitation plan step object
+   * The question board step object
    */
-  @Input() public exploitationPlanStep: QuestionsBoardStep;
+  @Input() public questionsBoardStep: QuestionsBoardStep;
 
   /**
-   * The exploitation plan step behavior subject
+   * The question board step behavior subject
    */
-  public exploitationPlanStep$: BehaviorSubject<QuestionsBoardStep> = new BehaviorSubject<QuestionsBoardStep>(null);
+  public questionsBoardStep$: BehaviorSubject<QuestionsBoardStep> = new BehaviorSubject<QuestionsBoardStep>(null);
 
   /**
-   * The funding community which the exploitation Plan belong to
+   * The funding community which the question board belong to
    */
   @Input() fundingCommunity: Community;
 
@@ -57,25 +61,25 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
   private processing$: Observable<boolean> = observableOf(false);
 
   constructor(
+    @Inject(QUESTIONS_BOARD_SERVICE) protected questionsBoardService: QuestionsBoardService,
     protected cdr: ChangeDetectorRef,
-    protected exploitationPlanService: QuestionsBoardService,
-    protected exploitationPlanStateService: QuestionsBoardStateService,
+    protected questionsBoardStateService: QuestionsBoardStateService,
     protected modalService: NgbModal,
     protected projectGroupService: ProjectGroupService
   ) {
-    super(exploitationPlanService);
+    super(questionsBoardService);
   }
 
   ngOnInit(): void {
-    this.processing$ = this.exploitationPlanStateService.isProcessing();
+    this.processing$ = this.questionsBoardStateService.isProcessing();
 
-    this.exploitationPlanStateService.getExploitationPlanStep(this.exploitationPlanStep.parentId).subscribe((steps) => {
+    this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardStep.parentId).subscribe((steps) => {
       this.connectedToList = steps.map(step => step.id);
     });
 
-    this.subs.push(this.exploitationPlanStateService.getExploitationPlanStepById(this.exploitationPlanStep.parentId, this.exploitationPlanStep.id)
+    this.subs.push(this.questionsBoardStateService.getQuestionsBoardStepById(this.questionsBoardStep.parentId, this.questionsBoardStep.id)
       .subscribe((step: QuestionsBoardStep) => {
-        this.exploitationPlanStep$.next(step);
+        this.questionsBoardStep$.next(step);
       })
     );
   }
@@ -89,29 +93,28 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
         this.cdr.detectChanges();
       }
     }, () => null);
-    modalRef.componentInstance.formConfig = this.exploitationPlanService.getExploitationPlanTaskFormConfig(this.exploitationPlanStep.type);
-    modalRef.componentInstance.formHeader = this.exploitationPlanService.getExploitationPlanTaskFormHeader(this.exploitationPlanStep.type);
-    modalRef.componentInstance.searchMessageInfoKey = this.exploitationPlanService.getExploitationPlanTaskSearchHeader(this.exploitationPlanStep.type);
-    modalRef.componentInstance.processing = this.exploitationPlanStateService.isProcessing();
-    modalRef.componentInstance.vocabularyName = this.exploitationPlanService.getTaskTypeAuthorityName(this.exploitationPlanStep.type);
-    modalRef.componentInstance.searchConfiguration = this.exploitationPlanService.getSearchTaskConfigName(this.exploitationPlanStep.type);
+    modalRef.componentInstance.formConfig = this.questionsBoardService.getQuestionsBoardTaskFormConfig(this.questionsBoardStep.type);
+    modalRef.componentInstance.formHeader = this.questionsBoardService.getQuestionsBoardStepTaskFormName(this.questionsBoardStep.type);
+    modalRef.componentInstance.searchMessageInfoKey = this.questionsBoardService.getQuestionsBoardStepTaskSearchHeader(this.questionsBoardStep.type);
+    modalRef.componentInstance.processing = this.questionsBoardStateService.isProcessing();
+    modalRef.componentInstance.searchConfiguration = this.questionsBoardService.getSearchTaskConfigName(this.questionsBoardStep.type);
     modalRef.componentInstance.scope = this.projectCommunityId;
     modalRef.componentInstance.startWithSearch = true;
     modalRef.componentInstance.query = this.buildExcludedTasksQuery();
 
     modalRef.componentInstance.createItem.subscribe((item: SimpleItem) => {
-      this.exploitationPlanStateService.dispatchGenerateExploitationPlanTask(
+      this.questionsBoardStateService.dispatchGenerateQuestionsBoardTask(
         this.projectCommunityId,
-        this.exploitationPlanStep.parentId,
-        this.exploitationPlanStep.id,
+        this.questionsBoardStep.parentId,
+        this.questionsBoardStep.id,
         item.type.value,
         item.metadata);
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {
-        this.exploitationPlanStateService.dispatchAddExploitationPlanTaskAction(
-          this.exploitationPlanStep.parentId,
-          this.exploitationPlanStep.id,
+        this.questionsBoardStateService.dispatchAddQuestionsBoardTaskAction(
+          this.questionsBoardStep.parentId,
+          this.questionsBoardStep.id,
           item.id);
       });
     });
@@ -125,7 +128,7 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
     if (event.previousContainer === event.container) {
       const newList = [...event.container.data.tasks];
       moveItemInArray(newList, event.previousIndex, event.currentIndex);
-      this.exploitationPlanStateService.dispatchOrderTasks(this.exploitationPlanStep.parentId, this.exploitationPlanStep.id, newList, event.container.data.tasks);
+      this.questionsBoardStateService.dispatchOrderTasks(this.questionsBoardStep.parentId, this.questionsBoardStep.id, newList, event.container.data.tasks);
     }
     this.isDragging.next(false);
     this.isDropAllowed.next(false);
@@ -138,9 +141,9 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
 
 
   getTasks(): Observable<QuestionsBoardTask[]> {
-    return this.exploitationPlanStateService.getExploitationPlanTasksByParentId(
-      this.exploitationPlanStep.parentId,
-      this.exploitationPlanStep.id
+    return this.questionsBoardStateService.getQuestionsBoardTasksByParentId(
+      this.questionsBoardStep.parentId,
+      this.questionsBoardStep.id
     );
   }
 
@@ -152,8 +155,8 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
     // const subprojectMembersGroup = this.projectGroupService.getProjectMembersGroupNameByCommunity(this.fundingCommunity);
     // let query = `(entityGrants:${ProjectGrantsTypes.Project} OR entityPolicyGroup:${subprojectMembersGroup})`;
     let query = '';
-    if (this.exploitationPlanStep.getTasksIds().length > 0) {
-      const excludedIdsQuery = '-(search.resourceid' + ':(' + this.exploitationPlanStep.getTasksIds().join(' OR ') + '))';
+    if (this.questionsBoardStep.getTasksIds().length > 0) {
+      const excludedIdsQuery = '-(search.resourceid' + ':(' + this.questionsBoardStep.getTasksIds().join(' OR ') + '))';
       query += `${excludedIdsQuery}`;
     }
 

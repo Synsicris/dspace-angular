@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 
 import { of as observableOf } from 'rxjs';
 import { catchError, concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
@@ -37,11 +37,10 @@ import {
   RemoveQuestionsBoardTaskSuccessAction,
   UpdateQuestionsBoardStepAction,
 } from './questions-board.actions';
-import { QuestionsBoardService } from './questions-board.service';
+import { QUESTIONS_BOARD_SERVICE, QuestionsBoardService } from './questions-board.service';
 import { isNotEmpty } from '../../shared/empty.util';
 import { QuestionsBoard } from './models/questions-board.model';
 import { Item } from '../../core/shared/item.model';
-import { environment } from '../../../environments/environment';
 import { ProjectItemService } from '../../core/project/project-item.service';
 import { RemoteData } from '../../core/data/remote-data';
 import { ItemDataService } from '../../core/data/item-data.service';
@@ -62,13 +61,13 @@ export class QuestionsBoardEffects {
     ofType(QuestionsBoardActionTypes.ADD_QUESTIONS_BOARD_TASK),
     concatMap((action: AddQuestionsBoardTaskAction) => {
       return this.itemAuthorityRelationService.addLinkedItemToParent(
-        this.exploitationPlanService.getExploitationPlanEditFormSection(),
-        this.exploitationPlanService.getExploitationPlanEditMode(),
+        this.questionsBoardService.getQuestionsBoardEditFormSection(),
+        this.questionsBoardService.getQuestionsBoardEditMode(),
         action.payload.stepId,
         action.payload.taskId,
-        environment.exploitationPlan.exploitationPlanTaskRelationMetadata).pipe(
+        this.questionsBoardService.getQuestionsBoardRelationTasksMetadata()).pipe(
           map((taskItem: Item) => {
-            return this.exploitationPlanService.initExploitationPlanTask(taskItem, action.payload.stepId);
+            return this.questionsBoardService.initQuestionsBoardTask(taskItem, action.payload.stepId);
           }),
           map((task: QuestionsBoardTask) => {
             return new AddQuestionsBoardTaskSuccessAction(
@@ -103,7 +102,7 @@ export class QuestionsBoardEffects {
     ofType(QuestionsBoardActionTypes.GENERATE_QUESTIONS_BOARD_TASK),
     switchMap((action: GenerateQuestionsBoardTaskAction) => {
       return this.projectItemService.generateEntityItemWithinProject(
-        this.exploitationPlanService.getExploitationPlanTaskFormSection(),
+        this.questionsBoardService.getQuestionsBoardTaskFormSection(),
         action.payload.projectId,
         action.payload.taskType,
         action.payload.metadata).pipe(
@@ -146,12 +145,12 @@ export class QuestionsBoardEffects {
     }));
 
   /**
-   * Initialize Exploitation Plan and dispatch a InitQuestionsBoardSuccessAction or a InitQuestionsBoardErrorAction on error
+   * Initialize questions board and dispatch a InitQuestionsBoardSuccessAction or a InitQuestionsBoardErrorAction on error
    */
   @Effect() init$ = this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.INIT_QUESTIONS_BOARD),
     switchMap((action: InitQuestionsBoardAction) => {
-      return this.exploitationPlanService.initExploitationPlan(action.payload.item).pipe(
+      return this.questionsBoardService.initQuestionsBoard(action.payload.item).pipe(
         map((object: QuestionsBoard) => {
           if (isNotEmpty(object)) {
             return new InitQuestionsBoardSuccessAction(object.id, object);
@@ -169,8 +168,8 @@ export class QuestionsBoardEffects {
     switchMap((action: PatchQuestionsBoardStepMetadataAction) => {
       return this.itemService.updateItemMetadata(
         action.payload.stepId,
-        this.exploitationPlanService.getExploitationPlanEditMode(),
-        this.exploitationPlanService.getExploitationPlanEditFormSection(),
+        this.questionsBoardService.getQuestionsBoardEditMode(),
+        this.questionsBoardService.getQuestionsBoardEditFormSection(),
         action.payload.metadata,
         action.payload.metadataIndex,
         action.payload.value
@@ -206,7 +205,7 @@ export class QuestionsBoardEffects {
     map((action: PatchQuestionsBoardStepMetadataSuccessAction) => {
       return new UpdateQuestionsBoardStepAction(
         action.payload.questionsBoardId,
-        this.exploitationPlanService.updateExploitationPlanStep(action.payload.item, action.payload.oldStep)
+        this.questionsBoardService.updateQuestionsBoardStep(action.payload.item, action.payload.oldStep)
       );
     })
   );
@@ -227,11 +226,11 @@ export class QuestionsBoardEffects {
     ofType(QuestionsBoardActionTypes.REMOVE_QUESTIONS_BOARD_TASK),
     switchMap((action: RemoveQuestionsBoardTaskAction) => {
       return this.itemAuthorityRelationService.removeChildRelationFromParent(
-        this.exploitationPlanService.getExploitationPlanEditFormSection(),
-        this.exploitationPlanService.getExploitationPlanEditMode(),
+        this.questionsBoardService.getQuestionsBoardEditFormSection(),
+        this.questionsBoardService.getQuestionsBoardEditMode(),
         action.payload.parentId,
         action.payload.taskId,
-        environment.exploitationPlan.exploitationPlanTaskRelationMetadata).pipe(
+        this.questionsBoardService.getQuestionsBoardRelationTasksMetadata()).pipe(
           map(() => new RemoveQuestionsBoardTaskSuccessAction(
             action.payload.questionsBoardId,
             action.payload.parentId,
@@ -262,18 +261,18 @@ export class QuestionsBoardEffects {
     );
 
   /**
-   * Order tasks on an ExploitationPlan step
+   * Order tasks on a questions board step
    */
   @Effect() orderSubTasks$ = this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.ORDER_QUESTIONS_BOARD_TASK),
     switchMap((action: OrderQuestionsBoardTasksAction) => {
       const taskIds: string[] = action.payload.currentTasks.map((task: QuestionsBoardTask) => task.id);
       return this.itemAuthorityRelationService.orderRelations(
-        this.exploitationPlanService.getExploitationPlanEditFormSection(),
-        this.exploitationPlanService.getExploitationPlanEditMode(),
+        this.questionsBoardService.getQuestionsBoardEditFormSection(),
+        this.questionsBoardService.getQuestionsBoardEditMode(),
         action.payload.stepId,
         taskIds,
-        environment.exploitationPlan.exploitationPlanTaskRelationMetadata
+         this.questionsBoardService.getQuestionsBoardRelationTasksMetadata()
       ).pipe(
         map(() => new OrderQuestionsBoardTasksSuccessAction()),
         catchError((error: Error) => {
@@ -291,27 +290,27 @@ export class QuestionsBoardEffects {
 
 
   /**
-   * Initialize compare of exploitation plan and copares its children
+   * Initialize compare of questions board and its children
    */
   @Effect() initCompare$ = this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.INIT_COMPARE_QUESTIONS_BOARD),
     withLatestFrom(this.store$),
     switchMap(([action, state]: [InitCompareAction, any]) => {
-      let exploitationPlanId;
+      let questionsBoardId;
       let versionItemId;
       if (action.payload.isVersionOf) {
         versionItemId = action.payload.questionsBoardId;
-        exploitationPlanId = action.payload.compareQuestionsBoardId;
+        questionsBoardId = action.payload.compareQuestionsBoardId;
       } else {
-        exploitationPlanId = action.payload.questionsBoardId;
+        questionsBoardId = action.payload.questionsBoardId;
         versionItemId = action.payload.compareQuestionsBoardId;
       }
       return this.projectVersionService.compareItemChildrenByMetadata(
-        exploitationPlanId,
+        questionsBoardId,
         versionItemId,
-        environment.exploitationPlan.exploitationPlanStepRelationMetadata
+         this.questionsBoardService.getQuestionsBoardRelationStepsMetadata()
       ).pipe(
-        switchMap((compareItemList: ComparedVersionItem[]) => this.exploitationPlanService.initCompareExploitationPlanSteps(compareItemList, action.payload.questionsBoardId)),
+        switchMap((compareItemList: ComparedVersionItem[]) => this.questionsBoardService.initCompareQuestionsBoardSteps(compareItemList, action.payload.questionsBoardId)),
         map((steps: QuestionsBoardStep[]) => new InitCompareSuccessAction(action.payload.questionsBoardId, steps)),
         catchError((error: Error) => {
           if (error) {
@@ -324,7 +323,7 @@ export class QuestionsBoardEffects {
 
   constructor(
     private actions$: Actions,
-    private exploitationPlanService: QuestionsBoardService,
+    @Inject(QUESTIONS_BOARD_SERVICE) private questionsBoardService: QuestionsBoardService,
     private itemAuthorityRelationService: ItemAuthorityRelationService,
     private itemService: ItemDataService,
     private projectItemService: ProjectItemService,

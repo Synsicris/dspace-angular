@@ -22,7 +22,12 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   @Input() isFunder: boolean;
 
   /**
-   * The exploitation-plan/interim-report item
+   * The prefix to use for the i19n keys
+   */
+  @Input() messagePrefix: string;
+
+  /**
+   * The questions board object item
    */
   @Input() questionsBoardObject: Item;
 
@@ -32,7 +37,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   @Input() public projectCommunityId: string;
 
   /**
-   * The funding community which the exploitation Plan belong to
+   * The funding community which the questions board belong to
    */
   @Input() fundingCommunity: Community;
 
@@ -54,7 +59,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
-    protected exploitationPlanStateService: QuestionsBoardStateService,
+    protected questionsBoardStateService: QuestionsBoardStateService,
     protected aroute: ActivatedRoute,
   ) {
   }
@@ -63,7 +68,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
     this.questionsBoardObjectId = this.questionsBoardObject?.id;
 
     this.subs.push(
-      this.exploitationPlanStateService.isCompareModeActive()
+      this.questionsBoardStateService.isCompareModeActive()
         .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
     );
 
@@ -77,12 +82,12 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
 
   }
 
-  getExploitationPlanStep(): Observable<QuestionsBoardStep[]> {
-    return this.exploitationPlanStateService.getExploitationPlanStep(this.questionsBoardObjectId);
+  getQuestionsBoardStep(): Observable<QuestionsBoardStep[]> {
+    return this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardObjectId);
   }
 
   isLoading(): Observable<boolean> {
-    return this.exploitationPlanStateService.isExploitationPlanLoaded().pipe(
+    return this.questionsBoardStateService.isQuestionsBoardLoaded().pipe(
       map((loaded: boolean) => !loaded)
     );
   }
@@ -93,21 +98,21 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    * @param version
    */
   onVersionSelected(version: Item) {
-    this.exploitationPlanStateService.dispatchInitCompare(this.questionsBoardObject?.id, version.id, this.isVersionOfAnItem$.value);
+    this.questionsBoardStateService.dispatchInitCompare(this.questionsBoardObject?.id, version.id, this.isVersionOfAnItem$.value);
   }
 
   /**
    * Dispatch cleaning of comparing mode
    */
   onVersionDeselected() {
-    this.exploitationPlanStateService.dispatchStopCompare(this.questionsBoardObject?.id);
+    this.questionsBoardStateService.dispatchStopCompare(this.questionsBoardObject?.id);
   }
 
   /**
    * When destroy component clear all collapsed values.
    */
   ngOnDestroy() {
-    this.exploitationPlanStateService.dispatchClearCollapsable();
+    this.questionsBoardStateService.dispatchClearCollapsable();
 
     this.subs
       .filter((subscription) => hasValue(subscription))

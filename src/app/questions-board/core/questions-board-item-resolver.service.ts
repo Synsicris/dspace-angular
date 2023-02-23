@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
 import { Item } from '../../core/shared/item.model';
 import { RemoteData } from '../../core/data/remote-data';
-import { QuestionsBoardService } from './questions-board.service';
+import { QUESTIONS_BOARD_SERVICE, QuestionsBoardService } from './questions-board.service';
 
 /**
  * This class represents a resolver that retrieve item that describe the project from synsicris.relation.entity_project metadata
@@ -13,7 +13,7 @@ import { QuestionsBoardService } from './questions-board.service';
 @Injectable()
 export class QuestionsBoardItemResolver implements Resolve<RemoteData<Item>> {
 
-  constructor(private exploitationPlanService: QuestionsBoardService) {
+  constructor(@Inject(QUESTIONS_BOARD_SERVICE) private questionsBoardService: QuestionsBoardService) {
   }
 
   /**
@@ -24,6 +24,6 @@ export class QuestionsBoardItemResolver implements Resolve<RemoteData<Item>> {
    * or an error if something went wrong
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RemoteData<Item>> {
-    return this.exploitationPlanService.getExploitationPlanFromProjectId(route.params.id);
+    return this.questionsBoardService.getQuestionsBoardObjectFromProjectId(route.params.id);
   }
 }

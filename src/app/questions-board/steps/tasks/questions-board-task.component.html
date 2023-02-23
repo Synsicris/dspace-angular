@@ -12,7 +12,7 @@
     <div class="task-detail p-1">
       <div class="task-header d-flex justify-content-between">
         <div class="task-title title-clamp font-weight-bold text-info" (click)="openItemModal()">
-          <p title="{{exploitationPlanTask.title}}">{{exploitationPlanTask.title}}</p>
+          <p title="{{questionsBoardTask.title}}">{{questionsBoardTask.title}}</p>
         </div>
         <span *ngIf="data?.status" class="status-icon">
           <i dsItemMetadataStatus [status]="data.status"></i>
@@ -21,7 +21,7 @@
 
       <div class="task-content p-1 d-flex justify-content-between">
         <div class="task-type type-clamp">
-          <p title="{{exploitationPlanTask.type | dsEntityTypeTranslate}}">{{exploitationPlanTask.type | dsEntityTypeTranslate}} </p>
+          <p title="{{questionsBoardTask.type | dsEntityTypeTranslate}}">{{questionsBoardTask.type | dsEntityTypeTranslate}} </p>
         </div>
         <span class="status-icon" *ngIf="data?.internalStatus">
           <i dsItemMetadataInternal [status]="data.internalStatus"></i>

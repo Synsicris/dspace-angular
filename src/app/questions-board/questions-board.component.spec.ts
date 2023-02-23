@@ -11,8 +11,8 @@ import { TranslateLoaderMock } from '../shared/mocks/translate-loader.mock';
 describe('QuestionsBoardComponent', () => {
   let component: QuestionsBoardComponent;
   let fixture: ComponentFixture<QuestionsBoardComponent>;
-  const exploitationPlanService = jasmine.createSpyObj('exploitationPlanService', ['getExploitationPlanStepFormConfig', 'getExploitationPlanEditMode', 'getExploitationPlanEditFormSection']);
-  const exploitationPlanStateService = jasmine.createSpyObj('exploitationPlanStateService', ['dispatchSetExploitationPlanStepCollapse', 'dispatchUpdateExploitationPlanStep', 'getCollapsable', 'isCompareModeActive', 'isExploitationPlanLoaded', 'getExploitationPlanStep']);
+  const questionsBoardService = jasmine.createSpyObj('questionsBoardService', ['getQuestionsBoardStepFormConfig', 'getQuestionsBoardEditMode', 'getQuestionsBoardEditFormSection']);
+  const questionsBoardStateService = jasmine.createSpyObj('questionsBoardStateService', ['dispatchSetQuestionsBoardStepCollapse', 'dispatchUpdateQuestionsBoardStep', 'getCollapsable', 'isCompareModeActive', 'isQuestionsBoardLoaded', 'getQuestionsBoardStep']);
 
   let aroute;
 
@@ -33,8 +33,8 @@ describe('QuestionsBoardComponent', () => {
         }),
       ],
       providers: [
-        { provide: QuestionsBoardService, useValue: exploitationPlanService },
-        { provide: QuestionsBoardStateService, useValue: exploitationPlanStateService },
+        { provide: QuestionsBoardService, useValue: questionsBoardService },
+        { provide: QuestionsBoardStateService, useValue: questionsBoardStateService },
         { provide: ActivatedRoute, useValue: aroute },
       ]
     })
@@ -44,8 +44,8 @@ describe('QuestionsBoardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(QuestionsBoardComponent);
     component = fixture.componentInstance;
-    exploitationPlanStateService.isCompareModeActive.and.returnValue(of(false));
-    exploitationPlanStateService.isExploitationPlanLoaded.and.returnValue(of(true));
+    questionsBoardStateService.isCompareModeActive.and.returnValue(of(false));
+    questionsBoardStateService.isQuestionsBoardLoaded.and.returnValue(of(true));
     fixture.detectChanges();
   });
 

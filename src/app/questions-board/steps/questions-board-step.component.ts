@@ -1,5 +1,5 @@
 import { getRemoteDataPayload } from './../../core/shared/operators';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, map, skip, take } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { QuestionsBoardStep } from '../core/models/questions-board-step.model';
 import { QuestionsBoardStateService } from '../core/questions-board-state.service';
 import { Community } from '../../core/shared/community.model';
 import { Item } from '../../core/shared/item.model';
-import { QuestionsBoardService } from '../core/questions-board.service';
+import { QUESTIONS_BOARD_SERVICE, QuestionsBoardService } from '../core/questions-board.service';
 import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
 import { EditSimpleItemModalComponent } from '../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { QuestionsBoardType } from '../core/models/questions-board-type';
@@ -29,12 +29,12 @@ export class QuestionsBoardStepComponent implements OnInit {
   @Input() public projectCommunityId: string;
 
   /**
-   * The exploitation plan step object
+   * The questions board step object
    */
-  @Input() public exploitationPlanStep: QuestionsBoardStep;
+  @Input() public questionsBoardStep: QuestionsBoardStep;
 
   /**
-   * The funding community which the exploitation Plan belong to
+   * The funding community which the questions board belong to
    */
   @Input() fundingCommunity: Community;
 
@@ -42,6 +42,11 @@ export class QuestionsBoardStepComponent implements OnInit {
    * If the current user is a funder Organizational/Project manager
    */
   @Input() isFunder: boolean;
+
+  /**
+   * The prefix to use for the i19n keys
+   */
+  @Input() messagePrefix: string;
 
   /**
    * Reference to teh ipwCollapse child component
@@ -65,10 +70,10 @@ export class QuestionsBoardStepComponent implements OnInit {
   formConfig$: Observable<SubmissionFormModel>;
 
   /**
-   * The exploitation plan item
+   * The questions board item
    * @type {Observable<Item>}
    */
-  exploitationPlan$: Observable<Item>;
+  questionsBoard$: Observable<Item>;
 
   /**
    * Indicate to show or not checkbox
@@ -76,8 +81,8 @@ export class QuestionsBoardStepComponent implements OnInit {
   hasCheckbox = false;
 
   constructor(
-    protected exploitationPlanService: QuestionsBoardService,
-    protected exploitationPlanStateService: QuestionsBoardStateService,
+    @Inject(QUESTIONS_BOARD_SERVICE) private questionsBoardService: QuestionsBoardService,
+    protected questionsBoardStateService: QuestionsBoardStateService,
     protected modalService: NgbModal,
     protected translate: TranslateService,
     protected route: ActivatedRoute
@@ -86,10 +91,10 @@ export class QuestionsBoardStepComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.hasCheckbox = this.exploitationPlanStep.type === QuestionsBoardType.Question1;
-    this.formConfig$ = this.exploitationPlanService.getExploitationPlanStepFormConfig(this.exploitationPlanStep.type);
-    this.exploitationPlan$ = this.route.data.pipe(
-      map((data: Data) => data.exploitationPlan),
+    this.hasCheckbox = this.questionsBoardStep.type === QuestionsBoardType.Question1;
+    this.formConfig$ = this.questionsBoardService.getQuestionsBoardStepFormConfig(this.questionsBoardStep.type);
+    this.questionsBoard$ = this.route.data.pipe(
+      map((data: Data) => data.questionsBoard),
       getRemoteDataPayload()
     );
   }
@@ -102,9 +107,9 @@ export class QuestionsBoardStepComponent implements OnInit {
       skip(2),
       distinctUntilChanged()
     ).subscribe((val) => {
-      this.exploitationPlanStateService.dispatchSetExploitationPlanStepCollapse(
-        this.exploitationPlanStep.parentId,
-        this.exploitationPlanStep.id,
+      this.questionsBoardStateService.dispatchSetQuestionsBoardStepCollapse(
+        this.questionsBoardStep.parentId,
+        this.questionsBoardStep.id,
         val
       );
     });
@@ -114,49 +119,49 @@ export class QuestionsBoardStepComponent implements OnInit {
    * Get the edit item mode
    */
   getEditMode(): string {
-    return this.exploitationPlanService.getExploitationPlanEditMode();
+    return this.questionsBoardService.getQuestionsBoardEditMode();
   }
 
   /**
    * Get the path to metadata section to patch
    */
   getSectionName() {
-    return this.exploitationPlanService.getExploitationPlanEditFormSection();
+    return this.questionsBoardService.getQuestionsBoardEditFormSection();
   }
 
   /**
-   * Get exploitation-plan step title
+   * Get questions board step title
    */
   getStepTitle(): string {
-    return this.translate.instant('exploitation-plan.' + this.exploitationPlanStep.type + '.title');
+    return this.translate.instant(this.messagePrefix + '.' + this.questionsBoardStep.type + '.title');
   }
 
   /**
-   * Open dialog box for editing exploitation-plan
+   * Open dialog box for editing questions board
    */
   openEditModal() {
     const modalRef = this.modalService.open(EditSimpleItemModalComponent, { size: 'lg' });
     modalRef.componentInstance.formConfig = this.formConfig$;
-    modalRef.componentInstance.editMode = this.exploitationPlanService.getExploitationPlanEditMode();
-    modalRef.componentInstance.formSectionName = this.exploitationPlanService.getExploitationPlanEditFormSection();
-    modalRef.componentInstance.itemId = this.exploitationPlanStep.id;
+    modalRef.componentInstance.editMode = this.questionsBoardService.getQuestionsBoardEditMode();
+    modalRef.componentInstance.formSectionName = this.questionsBoardService.getQuestionsBoardEditFormSection();
+    modalRef.componentInstance.itemId = this.questionsBoardStep.id;
 
     modalRef.componentInstance.itemUpdate.pipe(take(1))
       .subscribe((item: Item) => {
-        this.updateExploitationPlanStep(item);
+        this.updateQuestionsBoardStep(item);
         modalRef.close();
       });
   }
 
   /**
-   * Update exploitation-plan step object from given item
+   * Update questions board step object from given item
    * @param item
    */
-  updateExploitationPlanStep(item: Item) {
-    this.exploitationPlanStep = this.exploitationPlanService.updateExploitationPlanStep(item, this.exploitationPlanStep);
-    this.exploitationPlanStateService.dispatchUpdateExploitationPlanStep(
-      this.exploitationPlanStep.parentId,
-      this.exploitationPlanStep
+  updateQuestionsBoardStep(item: Item) {
+    this.questionsBoardStep = this.questionsBoardService.updateQuestionsBoardStep(item, this.questionsBoardStep);
+    this.questionsBoardStateService.dispatchUpdateQuestionsBoardStep(
+      this.questionsBoardStep.parentId,
+      this.questionsBoardStep
     );
   }
 
@@ -164,7 +169,7 @@ export class QuestionsBoardStepComponent implements OnInit {
    * Get from selector the previously inserted collapsed value for the specific step
    */
   isCollapsed() {
-    return this.exploitationPlanStateService.getCollapsable(this.exploitationPlanStep.parentId, this.exploitationPlanStep.id);
+    return this.questionsBoardStateService.getCollapsable(this.questionsBoardStep.parentId, this.questionsBoardStep.id);
   }
 
 }

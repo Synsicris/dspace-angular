@@ -3,11 +3,11 @@ import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 import { QuestionsBoardType } from './models/questions-board-type';
 
 @Directive({
-  selector: '[ipwQuestionsBoardIcon]'
+  selector: '[dsQuestionsBoardIcon]'
 })
 export class QuestionsBoardDirective {
 
-  @Input() exploitationPlanType: QuestionsBoardType|string;
+  @Input() questionsBoardType: QuestionsBoardType|string;
 
   constructor(
     private elem: ElementRef,
@@ -23,7 +23,7 @@ export class QuestionsBoardDirective {
 
   private getIconClassByType(): string[] {
     let iconClasses: string[];
-    switch (this.exploitationPlanType) {
+    switch (this.questionsBoardType) {
       case QuestionsBoardType.Question1:
         iconClasses = ['far', 'fa-copyright', 'text-danger'];
         break;

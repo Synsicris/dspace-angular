@@ -1,5 +1,7 @@
 import { MockActivatedRoute } from '../../shared/mocks/active-router.mock';
-import { CollapsablePanelComponent } from '../../impact-pathway-board/shared/collapsable-panel/collapsable-panel.component';
+import {
+  CollapsablePanelComponent
+} from '../../impact-pathway-board/shared/collapsable-panel/collapsable-panel.component';
 import { TranslateLoaderMock } from '../../shared/testing/translate-loader.mock';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { QuestionsBoardStateService } from '../core/questions-board-state.service';
@@ -15,8 +17,8 @@ import { ActivatedRoute } from '@angular/router';
 describe('QuestionsBoardStepComponent', () => {
   let component: QuestionsBoardStepComponent;
   let fixture: ComponentFixture<QuestionsBoardStepComponent>;
-  const exploitationPlanService = jasmine.createSpyObj('exploitationPlanService', ['getExploitationPlanStepFormConfig', 'getExploitationPlanEditMode', 'getExploitationPlanEditFormSection']);
-  const exploitationPlanStateService = jasmine.createSpyObj('exploitationPlanStateService', ['dispatchSetExploitationPlanStepCollapse', 'dispatchUpdateExploitationPlanStep', 'getCollapsable']);
+  const questionsBoardService = jasmine.createSpyObj('questionsBoardService', ['getQuestionsBoardStepFormConfig', 'getQuestionsBoardEditMode', 'getQuestionsBoardEditFormSection']);
+  const questionsBoardStateService = jasmine.createSpyObj('questionsBoardStateService', ['dispatchSetQuestionsBoardStepCollapse', 'dispatchUpdateQuestionsBoardStep', 'getCollapsable']);
   const childComponent = jasmine.createSpyObj('component', ['collapsable']);
 
   beforeEach(async () => {
@@ -32,8 +34,8 @@ describe('QuestionsBoardStepComponent', () => {
         })
       ],
       providers: [
-        { provide: QuestionsBoardService, useValue: exploitationPlanService },
-        { provide: QuestionsBoardStateService, useValue: exploitationPlanStateService },
+        { provide: QuestionsBoardService, useValue: questionsBoardService },
+        { provide: QuestionsBoardStateService, useValue: questionsBoardStateService },
         { provide: ActivatedRoute, useValue: new MockActivatedRoute() },
       ]
     })
@@ -43,7 +45,7 @@ describe('QuestionsBoardStepComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(QuestionsBoardStepComponent);
     component = fixture.componentInstance;
-    component.exploitationPlanStep = Object.assign(new QuestionsBoardStep(), { type: 'step_type_1' });
+    component.questionsBoardStep = Object.assign(new QuestionsBoardStep(), { type: 'step_type_1' });
     component.collapsable = Object.assign(new CollapsablePanelComponent({} as ChangeDetectorRef), {});
     component.collapsable.isCollapsed = () => { return observableOf(true); };
     spyOn(component.collapsable, 'isCollapsed').and.returnValue(true);

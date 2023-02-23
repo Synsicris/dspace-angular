@@ -37,35 +37,35 @@ export class QuestionsBoardStateService {
   constructor(private store: Store<AppState>) {
   }
 
-  dispatchAddExploitationPlanTaskAction(
-    exploitationPlanId: string,
+  dispatchAddQuestionsBoardTaskAction(
+    questionsBoardId: string,
     stepId: string,
     taskId: string
   ) {
     this.store.dispatch(new AddQuestionsBoardTaskAction(
-      exploitationPlanId,
+      questionsBoardId,
       stepId,
       taskId)
     );
   }
 
-  dispatchGenerateExploitationPlanTask(
+  dispatchGenerateQuestionsBoardTask(
     projectId: string,
-    exploitationPlanId: string,
+    questionsBoardId: string,
     stepId: string,
     type: string,
     metadataMap: MetadataMap
   ) {
     this.store.dispatch(new GenerateQuestionsBoardTaskAction(
       projectId,
-      exploitationPlanId,
+      questionsBoardId,
       stepId,
       type,
       metadataMap));
   }
 
-  dispatchPatchStepMetadata(
-    exploitationPlanId: string,
+  dispatchPatchQuestionsBoardStepMetadata(
+    questionsBoardId: string,
     stepId: string,
     step: QuestionsBoardStep,
     metadata: string,
@@ -73,7 +73,7 @@ export class QuestionsBoardStateService {
     value: any
   ) {
     this.store.dispatch(new PatchQuestionsBoardStepMetadataAction(
-      exploitationPlanId,
+      questionsBoardId,
       stepId,
       step,
       metadata,
@@ -82,12 +82,12 @@ export class QuestionsBoardStateService {
     ));
   }
 
-  dispatchUpdateExploitationPlanStep(exploitationPlanId: string, exploitationPlanStep: QuestionsBoardStep) {
-    this.store.dispatch(new UpdateQuestionsBoardStepAction(exploitationPlanId, exploitationPlanStep));
+  dispatchUpdateQuestionsBoardStep(questionsBoardId: string, questionsBoardStep: QuestionsBoardStep) {
+    this.store.dispatch(new UpdateQuestionsBoardStepAction(questionsBoardId, questionsBoardStep));
   }
 
-  dispatchSetExploitationPlanStepCollapse(exploitationPlanId: string, exploitationPlanStepId: string, value: boolean) {
-    this.store.dispatch(new SetQuestionsBoardStepCollapseAction(exploitationPlanId, exploitationPlanStepId, value));
+  dispatchSetQuestionsBoardStepCollapse(questionsBoardId: string, questionsBoardStepId: string, value: boolean) {
+    this.store.dispatch(new SetQuestionsBoardStepCollapseAction(questionsBoardId, questionsBoardStepId, value));
   }
 
   dispatchClearCollapsable() {
@@ -95,50 +95,50 @@ export class QuestionsBoardStateService {
   }
 
   /**
-   * Return array of ExploitationPlanStep
-   * @param exploitationPlanId
+   * Return array of questions board steps
+   * @param questionsBoardId
    */
-  getExploitationPlanStep(exploitationPlanId: string): Observable<QuestionsBoardStep[]> {
+  getQuestionsBoardStep(questionsBoardId: string): Observable<QuestionsBoardStep[]> {
     return this.store.pipe(
-      select(questionsBoardByIDSelector(exploitationPlanId)),
+      select(questionsBoardByIDSelector(questionsBoardId)),
       map((entry: QuestionsBoard) => entry.steps),
       distinctUntilChanged()
     );
   }
 
-  getExploitationPlanTasksByParentId(
-    exploitationPlanId: string,
-    exploitationPlanIdId: string
+  getQuestionsBoardTasksByParentId(
+    questionsBoardId: string,
+    questionsBoardStepId: string
   ): Observable<QuestionsBoardTask[]> {
     return this.store.pipe(
-      select(questionsBoardByIDSelector(exploitationPlanId)),
-      filter((exploitationPlan: QuestionsBoard) => isNotEmpty(exploitationPlan)),
-      map((exploitationPlan: QuestionsBoard) => {
-        return exploitationPlan.getStep(exploitationPlanIdId).tasks;
+      select(questionsBoardByIDSelector(questionsBoardId)),
+      filter((questionsBoard: QuestionsBoard) => isNotEmpty(questionsBoard)),
+      map((questionsBoard: QuestionsBoard) => {
+        return questionsBoard.getStep(questionsBoardStepId).tasks;
       })
     );
   }
 
   /**
-   * Check whether the state for a give exploitation plan has been loaded
-   * @param exploitationPlanId
+   * Check whether the state for a give questions board has been loaded
+   * @param questionsBoardId
    */
-  isExploitationPlanLoadedById(exploitationPlanId: string): Observable<boolean> {
+  isQuestionsBoardLoadedById(questionsBoardId: string): Observable<boolean> {
     const isLoaded$: Observable<boolean> = this.store.pipe(
       select(isQuestionsBoardLoadedSelector)
     );
 
-    const exploitationPlan$: Observable<QuestionsBoard> = this.store.pipe(
-      select(questionsBoardByIDSelector(exploitationPlanId))
+    const questionsBoard$: Observable<QuestionsBoard> = this.store.pipe(
+      select(questionsBoardByIDSelector(questionsBoardId))
     );
 
-    return combineLatestObservable([isLoaded$, exploitationPlan$]).pipe(
-      map(([isLoaded, exploitationPlan]) => isLoaded && isNotEmpty(exploitationPlan)),
+    return combineLatestObservable([isLoaded$, questionsBoard$]).pipe(
+      map(([isLoaded, questionsBoard]) => isLoaded && isNotEmpty(questionsBoard)),
       take(1)
     );
   }
 
-  isExploitationPlanLoaded(): Observable<boolean> {
+  isQuestionsBoardLoaded(): Observable<boolean> {
     return this.store.pipe(
       select(isQuestionsBoardLoadedSelector),
       distinctUntilChanged()
@@ -149,32 +149,32 @@ export class QuestionsBoardStateService {
     return this.store.pipe(select(isQuestionsBoardProcessingSelector));
   }
 
-  removeTaskFromStep(exploitationPlanId: string, parentId: string, taskId: string, taskPosition: number): void {
-    this.store.dispatch(new RemoveQuestionsBoardTaskAction(exploitationPlanId, parentId, taskId, taskPosition));
+  removeTaskFromStep(questionsBoardId: string, parentId: string, taskId: string, taskPosition: number): void {
+    this.store.dispatch(new RemoveQuestionsBoardTaskAction(questionsBoardId, parentId, taskId, taskPosition));
   }
 
-  getExploitationPlanStepById(exploitationPlanId: string, exploitationPlanStepId: string) {
+  getQuestionsBoardStepById(questionsBoardId: string, questionsBoardStepId: string) {
     return this.store.pipe(select(
-      questionsBoardStepByIDSelector(exploitationPlanId, exploitationPlanStepId)
+      questionsBoardStepByIDSelector(questionsBoardId, questionsBoardStepId)
     ),
     );
   }
 
-  getCollapsable(exploitationPlanId: string, exploitationPlanStepId: string) {
+  getCollapsable(questionsBoardId: string, questionsBoardStepId: string) {
     return this.store.pipe(select(
-      questionsBoardStepCollapsable(exploitationPlanId, exploitationPlanStepId)
+      questionsBoardStepCollapsable(questionsBoardId, questionsBoardStepId)
     )
     );
   }
 
   dispatchOrderTasks(
-    exploitationPlanId: string,
+    questionsBoardId: string,
     stepId: string,
     currentTasks: QuestionsBoardTask[],
     previousTasks: QuestionsBoardTask[]
   ) {
     this.store.dispatch(new OrderQuestionsBoardTasksAction(
-      exploitationPlanId,
+      questionsBoardId,
       stepId,
       currentTasks,
       previousTasks
@@ -192,25 +192,25 @@ export class QuestionsBoardStateService {
   /**
    * Dispatch a new InitCompareAction
    *
-   * @param exploitationPlanId
-   *    the exploitation plan's id
-   * @param compareExploitationPlanId
-   *    the exploitation plan's id to compare with
+   * @param questionsBoardId
+   *    the questions board's id
+   * @param compareQuestionsBoardId
+   *    the questions board's id to compare with
    * @param isVersionOf
-   *    whether the exploitation plan's id to compare is a version of item
+   *    whether the questions board's id to compare is a version of item
    */
-  public dispatchInitCompare(exploitationPlanId: string, compareExploitationPlanId: string, isVersionOf: boolean) {
-    this.store.dispatch(new InitCompareAction(exploitationPlanId, compareExploitationPlanId, isVersionOf));
+  public dispatchInitCompare(questionsBoardId: string, compareQuestionsBoardId: string, isVersionOf: boolean) {
+    this.store.dispatch(new InitCompareAction(questionsBoardId, compareQuestionsBoardId, isVersionOf));
   }
 
   /**
    * Dispatch a new StopCompareQuestionsBoardAction
    *
-   * @param exploitationPlanId
-   *    the exploitation plan's id
+   * @param questionsBoardId
+   *    the questions board's id
    */
-  dispatchStopCompare(exploitationPlanId: string) {
-    this.store.dispatch(new StopCompareQuestionsBoardAction(exploitationPlanId));
+  dispatchStopCompare(questionsBoardId: string) {
+    this.store.dispatch(new StopCompareQuestionsBoardAction(questionsBoardId));
   }
 
 

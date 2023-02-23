@@ -2040,6 +2040,14 @@
 
   "event.listelement.badge": "Event",
 
+  "exploitation-plan.edit.item.title": "Edit item",
+
+  "exploitation-plan.remove.item.title": "Unlink item",
+
+  "exploitation-plan.delete.item.title": "Delete item",
+
+  "exploitation-plan.compare": "Comapre with a version",
+
   "exploitation-plan.edit.btn.title": "Edit",
 
   "exploitation-plan.description.title": "Description",

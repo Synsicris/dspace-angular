@@ -3,48 +3,49 @@
                        [startOpen]="!(isCollapsed() | async)"
                        [collapsable]="true">
   <ng-container ngProjectAs="panelIconTitle">
-    <i ipwQuestionsBoardIcon [exploitationPlanType]="exploitationPlanStep?.type"></i>
+    <i dsQuestionsBoardIcon [questionsBoardType]="questionsBoardStep?.type"></i>
   </ng-container>
   <ng-container ngProjectAs="panelContent">
     <div class="d-flex">
-      <div #exploitationSection class="pr-0 w-100">
+      <div #questionsBoardSection class="pr-0 w-100">
         <div class="p-2">
-          <ds-alert [type]="'alert-info'" [content]="'exploitation-plan.' + exploitationPlanStep?.type + '.info.text'"
+          <ds-alert [type]="'alert-info'" [content]="messagePrefix + '.' + questionsBoardStep?.type + '.info.text'"
                     [collapsible]="true"></ds-alert>
           <div class="p-0 m-0 mb-2 bg-light rounded">
-            <ds-questions-board-step-container [exploitationPlanStep]="exploitationPlanStep"
+            <ds-questions-board-step-container [messagePrefix]="messagePrefix"
+                                               [questionsBoardStep]="questionsBoardStep"
                                                [isVersionOfAnItem]="isVersionOfAnItem"
                                                [projectCommunityId]="projectCommunityId"
                                                [fundingCommunity]="fundingCommunity"
                                                [compareMode]="compareMode"></ds-questions-board-step-container>
           </div>
-          <ds-view-simple-item-form *ngIf="hasCheckbox && exploitationPlanStep"
+          <ds-view-simple-item-form *ngIf="hasCheckbox && questionsBoardStep"
                                     [editMode]="getEditMode()"
-                                    [editTitle]="'exploitation-plan.edit.btn.title' | translate"
-                                    [fieldTitle]="'exploitation-plan.description.title' | translate"
+                                    [editTitle]="messagePrefix + '.edit.btn.title' | translate"
+                                    [fieldTitle]="messagePrefix + '.description.title' | translate"
                                     [formConfig]="formConfig$"
                                     [formSectionName]="getSectionName()"
-                                    [itemId]="exploitationPlanStep.id"
+                                    [itemId]="questionsBoardStep.id"
                                     [disabled]="compareMode || isVersionOfAnItem"
-                                    (itemUpdate)="updateExploitationPlanStep($event)"></ds-view-simple-item-form>
-          <ipw-editable-textarea *ngIf="!hasCheckbox && exploitationPlanStep"
+                                    (itemUpdate)="updateQuestionsBoardStep($event)"></ds-view-simple-item-form>
+          <ipw-editable-textarea *ngIf="!hasCheckbox && questionsBoardStep"
                                  [editMode]="getEditMode()"
                                  [formConfig]="formConfig$"
                                  [formSectionName]="getSectionName()"
-                                 [itemId]="exploitationPlanStep.id"
-                                 [editTitle]="'exploitation-plan.edit.btn.title' | translate"
-                                 [fieldTitle]="'exploitation-plan.description.title' | translate"
-                                 [content]="exploitationPlanStep.description"
+                                 [itemId]="questionsBoardStep.id"
+                                 [editTitle]="messagePrefix + '.edit.btn.title' | translate"
+                                 [fieldTitle]="messagePrefix + '.description.title' | translate"
+                                 [content]="questionsBoardStep.description"
                                  [disabled]="compareMode || isVersionOfAnItem"
-                                 (contentChange)="updateExploitationPlanStep($event)"></ipw-editable-textarea>
+                                 (contentChange)="updateQuestionsBoardStep($event)"></ipw-editable-textarea>
         </div>
       </div>
 
       <div *ngIf="isVersionOfAnItem && isFunder && (formConfig$ | async)?.name" class="comment-box pr-2 py-2 comment-box-position"
-           [ngStyle]="{'height.px': exploitationSection.clientHeight}">
+           [ngStyle]="{'height.px': questionsBoardSection.clientHeight}">
         <ds-comment-list
-          [relatedEntityType]="(exploitationPlan$ | async).entityType"
-          [itemUuid]="this.exploitationPlanStep.id"
+          [relatedEntityType]="(questionsBoard$ | async).entityType"
+          [itemUuid]="this.questionsBoardStep.id"
           [projectCommunityId]="projectCommunityId"
           [type]="(formConfig$ | async).name">
         </ds-comment-list>

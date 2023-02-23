@@ -16,14 +16,14 @@ import { QuestionsBoardStep } from './models/questions-board-step.model';
 import { QuestionsBoardTask } from './models/questions-board-task.model';
 
 /**
- * An interface to represent Exploitation Plan object entry
+ * An interface to represent questions board object entry
  */
 export interface QuestionsBoardEntry {
   [questionsBoardId: string]: QuestionsBoard;
 }
 
 /**
- * The Exploitation Plan State
+ * The questions board State
  */
 export interface QuestionsBoardState {
   questionsBoard: QuestionsBoardEntry;
@@ -46,7 +46,7 @@ const initialState: QuestionsBoardState = {
 };
 
 /**
- * The Exploitation Plan Reducer
+ * The questions board Reducer
  *
  * @param state
  *    the current state
@@ -157,14 +157,14 @@ function addQuestionsBoardTaskToQuestionsBoardStep(state: QuestionsBoardState, a
   const newStep = Object.assign(new QuestionsBoardStep(), step, {
     tasks: [...step.tasks, action.payload.task]
   });
-  const newExploitationPlan = Object.assign(new QuestionsBoard(), state.questionsBoard[action.payload.questionsBoardId], {
+  const newQuestionsBoard = Object.assign(new QuestionsBoard(), state.questionsBoard[action.payload.questionsBoardId], {
     steps: newState.questionsBoard[action.payload.questionsBoardId].steps.map((stepEntry, index) => {
       return (index === stepIndex) ? newStep : stepEntry;
     })
   });
   return Object.assign({}, state, {
     questionsBoard: Object.assign({}, state.questionsBoard, {
-      [action.payload.questionsBoardId]: newExploitationPlan
+      [action.payload.questionsBoardId]: newQuestionsBoard
     }),
     processing: false
   });
@@ -209,14 +209,14 @@ function RemoveQuestionsBoardTaskFromQuestionsBoardStep(state: QuestionsBoardSta
     tasks: [...step.tasks]
   });
   newStep.removeTask(action.payload.taskId);
-  const newExploitationPlan = Object.assign(new QuestionsBoard(), state.questionsBoard[action.payload.questionsBoardId], {
+  const newQuestionsBoard = Object.assign(new QuestionsBoard(), state.questionsBoard[action.payload.questionsBoardId], {
     steps: newState.questionsBoard[action.payload.questionsBoardId].steps.map((stepEntry, index) => {
       return (index === stepIndex) ? newStep : stepEntry;
     })
   });
   return Object.assign({}, state, {
     questionsBoard: Object.assign({}, state.questionsBoard, {
-      [action.payload.questionsBoardId]: newExploitationPlan
+      [action.payload.questionsBoardId]: newQuestionsBoard
     }),
     processing: false
   });
@@ -236,14 +236,14 @@ function UpdateQuestionsBoardTask(state: QuestionsBoardState, action: UpdateQues
   const newState = Object.assign({}, state);
   const stepIndex: number = newState.questionsBoard[action.payload.questionsBoardId].getStepIndex(action.payload.questionsBoardStep.id);
 
-  const newExploitationPlan = Object.assign(new QuestionsBoard(), state.questionsBoard[action.payload.questionsBoardId], {
+  const newQuestionsBoard = Object.assign(new QuestionsBoard(), state.questionsBoard[action.payload.questionsBoardId], {
     steps: newState.questionsBoard[action.payload.questionsBoardId].steps.map((stepEntry, index) => {
       return (index === stepIndex) ? action.payload.questionsBoardStep : stepEntry;
     })
   });
   return Object.assign({}, state, {
     questionsBoard: Object.assign({}, state.questionsBoard, {
-      [action.payload.questionsBoardId]: newExploitationPlan
+      [action.payload.questionsBoardId]: newQuestionsBoard
     }),
     processing: false
   });
@@ -263,7 +263,7 @@ function UpdateQuestionsBoardTask(state: QuestionsBoardState, action: UpdateQues
  * @param currentTasks
  *    the questions board task list to order
  * @param previousTasks
- *    the ExploitationPlan previous task list
+ *    the questions board previous task list
  * @return QuestionsBoardState
  *    the new state.
  */
@@ -280,7 +280,7 @@ function setQuestionsBoardTasks(
   const newStep = Object.assign(new QuestionsBoardStep(), step, {
     tasks: [...currentTasks]
   });
-  const newExploitationPlan = Object.assign(new QuestionsBoard(), state[questionsBoardId], {
+  const newQuestionsBoard = Object.assign(new QuestionsBoard(), state[questionsBoardId], {
     id: questionsBoardId,
     steps: newState.questionsBoard[questionsBoardId].steps.map((stepEntry, index) => {
       return (index === stepIndex) ? newStep : stepEntry;
@@ -289,7 +289,7 @@ function setQuestionsBoardTasks(
 
   return Object.assign({}, state, {
     questionsBoard: Object.assign({}, state.questionsBoard, {
-      [questionsBoardId]: newExploitationPlan
+      [questionsBoardId]: newQuestionsBoard
     })
   }) as QuestionsBoardState;
 }
