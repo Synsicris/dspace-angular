@@ -1,8 +1,11 @@
+import { Collection } from './../../../core/shared/collection.model';
+import { PaginatedList } from './../../../core/data/paginated-list.model';
+import { CollectionDataService } from './../../../core/data/collection-data.service';
 import { Item } from '../../../core/shared/item.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -21,7 +24,7 @@ import {
   PROJECTPATNER_ENTITY_METADATA
 } from '../../../core/project/project-data.service';
 import { environment } from '../../../../environments/environment';
-import { ItemDataService } from '../../../core/data/item-data.service';
+import { FindListOptions } from '../../../core/data/find-list-options.model';
 
 @Component({
   selector: 'ds-item-create',
@@ -61,7 +64,7 @@ export class ItemCreateComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private itemService: ItemDataService,
+    private collectionDataService: CollectionDataService,
     private entityTypeService: EntityTypeDataService,
     private modalService: NgbModal,
     private router: Router
@@ -74,12 +77,14 @@ export class ItemCreateComponent implements OnInit {
       this.authService.isAuthenticated(),
       this.entityTypeService.getEntityTypeByLabel(this.targetEntityType).pipe(
         getFirstSucceededRemoteDataPayload()
-      )]
-    ).pipe(
-      map(([isAuthenticated, entityType]) =>
+      ),
+      this.hasOneCollection$
+    ]).pipe(
+      map(([isAuthenticated, entityType, hasOneCollection]) =>
         isAuthenticated &&
         isNotEmpty(entityType) &&
-        this.canCreateProjectPartner(entityType)
+        this.canCreateProjectPartner(entityType) &&
+        hasOneCollection
       ),
       take(1)
     ).subscribe((canShow) => this.canShow$.next(canShow));
@@ -94,6 +99,20 @@ export class ItemCreateComponent implements OnInit {
    */
   isAuthenticated() {
     return this.authService.isAuthenticated();
+  }
+
+  /**
+   * Check if there is at least one collection available for the given entityType and scope
+   */
+  get hasOneCollection$(): Observable<boolean> {
+    const findListOptions = Object.assign({}, new FindListOptions(), {
+      elementsPerPage: 1,
+      currentPage: 1,
+    });
+    return this.collectionDataService.getAuthorizedCollectionByCommunityAndEntityType(this.scope, this.targetEntityType, findListOptions).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((collections: PaginatedList<Collection>) => true)
+    );
   }
 
   openDialog() {
