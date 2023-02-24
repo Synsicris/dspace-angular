@@ -753,9 +753,9 @@ export class DefaultAppConfig implements AppConfig {
   };
 
   interimReport = {
-    interimReportRelationMetadata: 'synsicris.relation.interim_report',
-    interimReportStepRelationMetadata: 'interim_report.relation.step',
-    interimReportTaskRelationMetadata: 'interim_report.relation.task',
+    interimReportRelationMetadata: 'synsicris.relation.interimreport',
+    interimReportStepRelationMetadata: 'interimreport.relation.step',
+    interimReportTaskRelationMetadata: 'interimreport.relation.task',
     interimReportPartnerMetadata: '',
     interimReportTaskFormSection: 'interim_report_task_form',
     interimReportEditFormSection: 'interim_report-edit_form',
