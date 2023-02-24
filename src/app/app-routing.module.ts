@@ -69,7 +69,7 @@ import { StatisticsAdministratorGuard } from './core/data/feature-authorization/
             path: 'community-list',
             loadChildren: () => import('./community-list-page/community-list-page.module')
               .then((m) => m.CommunityListPageModule),
-            canActivate: [EndUserAgreementCurrentUserGuard]
+            canActivate: [EndUserAgreementCurrentUserGuard, SiteAdministratorGuard]
           },
           {
             path: 'id',
