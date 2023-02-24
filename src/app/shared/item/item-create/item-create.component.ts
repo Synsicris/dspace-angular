@@ -1,8 +1,11 @@
+import { Collection } from './../../../core/shared/collection.model';
+import { PaginatedList } from './../../../core/data/paginated-list.model';
+import { CollectionDataService } from './../../../core/data/collection-data.service';
 import { Item } from '../../../core/shared/item.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -21,7 +24,9 @@ import {
   PROJECTPATNER_ENTITY_METADATA
 } from '../../../core/project/project-data.service';
 import { environment } from '../../../../environments/environment';
-import { ItemDataService } from '../../../core/data/item-data.service';
+import { FindListOptions } from '../../../core/data/find-list-options.model';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 
 @Component({
   selector: 'ds-item-create',
@@ -61,7 +66,8 @@ export class ItemCreateComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private itemService: ItemDataService,
+    private authorizationService: AuthorizationDataService,
+    private collectionDataService: CollectionDataService,
     private entityTypeService: EntityTypeDataService,
     private modalService: NgbModal,
     private router: Router
@@ -74,12 +80,16 @@ export class ItemCreateComponent implements OnInit {
       this.authService.isAuthenticated(),
       this.entityTypeService.getEntityTypeByLabel(this.targetEntityType).pipe(
         getFirstSucceededRemoteDataPayload()
-      )]
-    ).pipe(
-      map(([isAuthenticated, entityType]) =>
+      ),
+      this.hasAtLeastOneCollection$,
+      this.checkIsCoordinator(),
+    ]).pipe(
+      map(([isAuthenticated, entityType, hasAtLeastOneCollection, isCoordinator]) =>
         isAuthenticated &&
         isNotEmpty(entityType) &&
-        this.canCreateProjectPartner(entityType)
+        this.canCreateProjectPartner(entityType) &&
+        hasAtLeastOneCollection &&
+        isCoordinator
       ),
       take(1)
     ).subscribe((canShow) => this.canShow$.next(canShow));
@@ -96,6 +106,57 @@ export class ItemCreateComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
 
+  /**
+   * Check if there is at least one collection available for the given entityType and scope
+   */
+  get hasAtLeastOneCollection$(): Observable<boolean> {
+    if (this.isExcluded(this.targetEntityType)) {
+      return of(true);
+    }
+    const findListOptions = Object.assign({}, new FindListOptions(), {
+      elementsPerPage: 1,
+      currentPage: 1,
+    });
+    return this.collectionDataService.getAuthorizedCollectionByCommunityAndEntityType(this.scope, this.targetEntityType, findListOptions).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((collections: PaginatedList<Collection>) => collections?.totalElements === 1)
+    );
+  }
+
+  protected isExcluded(entityType: string) {
+    return entityType === FUNDING_ENTITY;
+  }
+
+  /**
+   * Check if user is coordinator for this project/funding
+   */
+  private checkIsCoordinator(): Observable<boolean> {
+    if (this.targetEntityType === FUNDING_ENTITY) {
+      return combineLatest([
+        this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfFunding, this.item.self, undefined),
+        this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
+      ).pipe(
+        map(([
+               isCoordinatorOfFunding,
+               isAdminstrator]) => isCoordinatorOfFunding || isAdminstrator),
+      );
+    } else {
+      return combineLatest([
+        this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager),
+        this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, this.item.self, undefined),
+        this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.item.self, undefined),
+        this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
+      ).pipe(
+        map(([
+               isFunderOrganizational,
+               isFunderProject,
+               isCoordinatorOfProject,
+               isAdminstrator
+             ]) => isFunderOrganizational || isFunderProject || isCoordinatorOfProject || isAdminstrator),
+      );
+    }
+  }
+
   openDialog() {
     if (this.targetEntityType === FUNDING_ENTITY) {
       this.createSubproject();
@@ -103,6 +164,7 @@ export class ItemCreateComponent implements OnInit {
       this.createEntity();
     }
   }
+
   /**
    * It opens a dialog for selecting a collection.
    */
