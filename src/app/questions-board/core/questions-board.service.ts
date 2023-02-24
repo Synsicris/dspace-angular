@@ -1,4 +1,4 @@
-import { Injectable, InjectionToken } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
 import { concatMap, map, mapTo, mergeMap, reduce, switchMap } from 'rxjs/operators';
@@ -24,13 +24,18 @@ import { SubmissionFormsConfigDataService } from '../../core/config/submission-f
 import { VocabularyService } from '../../core/submission/vocabularies/vocabulary.service';
 import { CollectionDataService } from '../../core/data/collection-data.service';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
+import { QuestionsBoardConfig } from '../../../config/questions-board.config';
+import { environment } from '../../../environments/environment';
 
-export const QUESTIONS_BOARD_SERVICE: InjectionToken<QuestionsBoardService> = new InjectionToken<QuestionsBoardService>('QuestionsBoardService');
+export const QUESTIONS_BOARD_CONFIG: InjectionToken<string> = new InjectionToken<string>('');
 
-@Injectable()
-export abstract class QuestionsBoardService {
-
+@Injectable({
+  providedIn: 'any'
+})
+export class QuestionsBoardService {
+  private questionsBoardConfig: QuestionsBoardConfig;
   constructor(
+    @Inject(QUESTIONS_BOARD_CONFIG) private questionsBoardConfigName: string,
     protected collectionService: CollectionDataService,
     protected formConfigService: SubmissionFormsConfigDataService,
     protected itemAuthorityRelationService: ItemAuthorityRelationService,
@@ -39,68 +44,101 @@ export abstract class QuestionsBoardService {
     private projectVersionService: ProjectVersionService,
     protected vocabularyService: VocabularyService
   ) {
+    this.questionsBoardConfig = Object.assign({}, environment[questionsBoardConfigName]);
+  }
+
+  /**
+   * Method used as workaround to resolve issue whwn the same instance of the service is used
+   * in the QuestionsBoardEffects
+   * @param config
+   */
+  setConfig(config: QuestionsBoardConfig) {
+    this.questionsBoardConfig = Object.assign({}, config);
   }
 
   /**
    * Return the metadata of the relation between project and the question board object
    */
-  abstract getProjectRelationMetadata(): string;
+  getProjectRelationMetadata(): string {
+    return this.questionsBoardConfig.questionsBoardRelationMetadata;
+  }
 
   /**
    * Return the form name used for editing the question board object
    */
-  abstract getQuestionsBoardEditFormSection(): string ;
+  getQuestionsBoardEditFormSection(): string {
+    return `sections/${this.questionsBoardConfig.questionsBoardEditFormSection}`;
+  }
 
   /**
    * Return the edit mode used for editing the question board object
    */
-  abstract getQuestionsBoardEditMode(): string;
+  getQuestionsBoardEditMode(): string {
+    return this.questionsBoardConfig.questionsBoardEditMode;
+  }
 
   /**
    * Return the metadata of the relation between question board object and its steps
    */
-  abstract getQuestionsBoardRelationStepsMetadata(): string;
+  getQuestionsBoardRelationStepsMetadata(): string {
+    return this.questionsBoardConfig.questionsBoardStepRelationMetadata;
+  }
 
   /**
    * Return the metadata of the relation between question board step object and its tasks
    */
-  abstract getQuestionsBoardRelationTasksMetadata(): string;
+  getQuestionsBoardRelationTasksMetadata(): string {
+    return this.questionsBoardConfig.questionsBoardTaskRelationMetadata;
+  }
 
   /**
    * Return the type of the entity that represent the step
    */
-  abstract getQuestionsBoardStepEntityTypeName(): string;
+  getQuestionsBoardStepEntityTypeName(): string{
+    return this.questionsBoardConfig.questionsBoardStepEntityName;
+  }
+
 
   /**
    * Return the form name used for editing the question board step object
    */
-  abstract getQuestionsBoardStepFormName(stepType: string): string;
+  getQuestionsBoardStepFormName(stepType: string): string {
+    return `${this.questionsBoardConfig.questionsBoardFormPrefix}_${stepType}_form`;
+  }
 
   /**
    * Return the form name used for editing the question board task object
    */
-  abstract getQuestionsBoardStepTaskFormName(stepType: string): string;
+  getQuestionsBoardStepTaskFormName(stepType: string): string {
+    return `${this.questionsBoardConfig.questionsBoardFormPrefix}_${stepType}_task_form`;
+  }
 
   /**
    * Return the header label used for searching task functionality
    */
-  abstract getQuestionsBoardStepTaskSearchHeader(stepType: string): string;
+  getQuestionsBoardStepTaskSearchHeader(stepType: string): string {
+    return `${this.questionsBoardConfig.questionsBoardI18nPrefix}.${stepType}.task_search`;
+  }
 
   /**
    * Return the form section name used for editing the question board task object
    */
-  abstract getQuestionsBoardTaskFormSection(): string;
+  getQuestionsBoardTaskFormSection(): string {
+    return this.questionsBoardConfig.questionsBoardTaskFormSection;
+  }
 
   /**
    * Return the search configuration used to search question board tasks
    */
-  abstract getSearchTaskConfigName(stepType: string): string;
+  getSearchTaskConfigName(stepType: string): string {
+    return `${this.questionsBoardConfig.questionsBoardFormPrefix}_${stepType}_task_type`;
+  }
 
-  getQuestionsBoardObjectFromProjectId(projectId): Observable<RemoteData<Item>> {
-    return this.itemService.findById(projectId).pipe(
+  getQuestionsBoardObjectFromProjectId(projectId, relationMetadata): Observable<RemoteData<Item>> {
+    return this.itemService.findById(projectId, false).pipe(
       getFirstSucceededRemoteDataPayload(),
       switchMap((projectItem: Item) => {
-        const metadataValue = Metadata.first(projectItem.metadata, this.getProjectRelationMetadata());
+        const metadataValue = Metadata.first(projectItem.metadata, relationMetadata);
         if (isNotEmpty(metadataValue) && isNotEmpty(metadataValue.authority)) {
           return this.itemService.findById(metadataValue.authority).pipe(
             getFirstCompletedRemoteData()

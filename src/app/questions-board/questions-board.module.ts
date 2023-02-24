@@ -23,6 +23,7 @@ import { ComcolModule } from '../shared/comcol/comcol.module';
 import { ViewSimpleItemFormModule } from '../shared/view-simple-item-form/view-simple-item-form.module';
 import { EditSimpleItemModalModule } from '../shared/edit-simple-item-modal/edit-simple-item-modal.module';
 import { CommentsModule } from '../shared/comments/comments.module';
+import { QuestionsBoardService } from './core/questions-board.service';
 
 const MODULES = [
   CommonModule,
@@ -45,6 +46,7 @@ const COMPONENTS = [
   QuestionsBoardTaskComponent
 ];
 const PROVIDERS = [
+  QuestionsBoardService,
   QuestionsBoardStateService,
   ProjectItemService
 ];

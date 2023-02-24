@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map, take, tap } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 
 import { Item } from '../core/shared/item.model';
 import { Community } from '../core/shared/community.model';
@@ -76,8 +76,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
       this.questionsBoardStateService.isCompareModeActive()
         .subscribe((compareMode: boolean) => this.compareMode.next(compareMode)),
       this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardObjectId).pipe(
-        filter((steps: QuestionsBoardStep[]) => steps?.length > 0),
-        tap(console.log)
+        filter((steps: QuestionsBoardStep[]) => steps?.length > 0)
       ).subscribe((steps: QuestionsBoardStep[]) => {
         this.questionsBoardStep$.next(steps);
       })

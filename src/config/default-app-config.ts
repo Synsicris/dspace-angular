@@ -743,25 +743,29 @@ export class DefaultAppConfig implements AppConfig {
   };
 
   exploitationPlan = {
-    exploitationPlanRelationMetadata: 'synsicris.relation.exploitationplan',
-    exploitationPlanStepEntityName: 'exploitationplanstep',
-    exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
-    exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
-    exploitationPlanPartnerMetadata: '',
-    exploitationPlanTaskFormSection: 'exploitation_plan_task_form',
-    exploitationPlanEditFormSection: 'exploitation_plan-edit_form',
-    exploitationPlanEditMode: 'EXPLOITATIONPLAN',
+    questionsBoardFormPrefix: 'exploitation_plan',
+    questionsBoardI18nPrefix: 'exploitation-plan',
+    questionsBoardRelationMetadata: 'synsicris.relation.exploitationplan',
+    questionsBoardStepEntityName: 'exploitationplanstep',
+    questionsBoardStepRelationMetadata: 'exploitationplan.relation.step',
+    questionsBoardTaskRelationMetadata: 'exploitationplan.relation.task',
+    questionsBoardPartnerMetadata: '',
+    questionsBoardTaskFormSection: 'exploitation_plan_task_form',
+    questionsBoardEditFormSection: 'exploitation_plan-edit_form',
+    questionsBoardEditMode: 'EXPLOITATIONPLAN',
   };
 
   interimReport = {
-    interimReportRelationMetadata: 'synsicris.relation.interimreport',
-    interimReportStepEntityName: 'interim_report_step',
-    interimReportStepRelationMetadata: 'interimreport.relation.step',
-    interimReportTaskRelationMetadata: 'interimreport.relation.task',
-    interimReportPartnerMetadata: '',
-    interimReportTaskFormSection: 'interim_report_task_form',
-    interimReportEditFormSection: 'interim_report-edit_form',
-    interimReportEditMode: 'INTERIMREPORT',
+    questionsBoardFormPrefix: 'interim_report',
+    questionsBoardI18nPrefix: 'interim-report',
+    questionsBoardRelationMetadata: 'synsicris.relation.interimreport',
+    questionsBoardStepEntityName: 'interim_report_step',
+    questionsBoardStepRelationMetadata: 'interimreport.relation.step',
+    questionsBoardTaskRelationMetadata: 'interimreport.relation.task',
+    questionsBoardPartnerMetadata: '',
+    questionsBoardTaskFormSection: 'interim_report_task_form',
+    questionsBoardEditFormSection: 'interim_report-edit_form',
+    questionsBoardEditMode: 'INTERIMREPORT',
   };
 
   displayItemSearchResult = {

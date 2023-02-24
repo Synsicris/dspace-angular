@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 
 import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,7 +9,7 @@ import { QuestionsBoardStateService } from '../../core/questions-board-state.ser
 import {
   CreateSimpleItemModalComponent
 } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
-import { QUESTIONS_BOARD_SERVICE, QuestionsBoardService } from '../../core/questions-board.service';
+import { QuestionsBoardService } from '../../core/questions-board.service';
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
 import { QuestionsBoardTask } from '../../core/models/questions-board-task.model';
 import { ProjectGroupService } from '../../../core/project/project-group.service';
@@ -62,13 +62,13 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
   private processing$: Observable<boolean> = observableOf(false);
 
   constructor(
-    @Inject(QUESTIONS_BOARD_SERVICE) protected questionsBoardService: QuestionsBoardService,
+    protected questionsBoardService: QuestionsBoardService,
     protected cdr: ChangeDetectorRef,
     protected questionsBoardStateService: QuestionsBoardStateService,
     protected modalService: NgbModal,
     protected projectGroupService: ProjectGroupService
   ) {
-    super(questionsBoardService);
+    super();
   }
 
   ngOnInit(): void {

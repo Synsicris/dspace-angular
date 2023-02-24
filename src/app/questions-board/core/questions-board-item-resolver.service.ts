@@ -5,7 +5,9 @@ import { Observable } from 'rxjs';
 
 import { Item } from '../../core/shared/item.model';
 import { RemoteData } from '../../core/data/remote-data';
-import { QUESTIONS_BOARD_SERVICE, QuestionsBoardService } from './questions-board.service';
+import { QUESTIONS_BOARD_CONFIG, QuestionsBoardService } from './questions-board.service';
+import { QuestionsBoardConfig } from '../../../config/questions-board.config';
+import { environment } from '../../../environments/environment';
 
 /**
  * This class represents a resolver that retrieve item that describe the project from synsicris.relation.entity_project metadata
@@ -13,7 +15,12 @@ import { QUESTIONS_BOARD_SERVICE, QuestionsBoardService } from './questions-boar
 @Injectable()
 export class QuestionsBoardItemResolver implements Resolve<RemoteData<Item>> {
 
-  constructor(@Inject(QUESTIONS_BOARD_SERVICE) private questionsBoardService: QuestionsBoardService) {
+  private questionsBoardConfig: QuestionsBoardConfig;
+
+  constructor(
+    @Inject(QUESTIONS_BOARD_CONFIG) private questionsBoardConfigName: string,
+    private questionsBoardService: QuestionsBoardService) {
+    this.questionsBoardConfig = Object.assign({}, environment[questionsBoardConfigName]);
   }
 
   /**
@@ -24,6 +31,6 @@ export class QuestionsBoardItemResolver implements Resolve<RemoteData<Item>> {
    * or an error if something went wrong
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RemoteData<Item>> {
-    return this.questionsBoardService.getQuestionsBoardObjectFromProjectId(route.params.id);
+    return this.questionsBoardService.getQuestionsBoardObjectFromProjectId(route.params.id, this.questionsBoardConfig.questionsBoardRelationMetadata);
   }
 }

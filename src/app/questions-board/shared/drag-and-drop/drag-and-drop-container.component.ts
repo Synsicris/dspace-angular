@@ -1,10 +1,9 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CdkDragDrop, CdkDragEnter, CdkDragExit, CdkDragStart } from '@angular/cdk/drag-drop';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { QuestionsBoardTask } from '../../core/models/questions-board-task.model';
-import { QUESTIONS_BOARD_SERVICE, QuestionsBoardService } from '../../core/questions-board.service';
 import { hasValue } from '../../../shared/empty.util';
 import { QuestionsBoardStep } from '../../core/models/questions-board-step.model';
 
@@ -23,9 +22,6 @@ export abstract class DragAndDropContainerComponent implements OnDestroy {
   public isDropAllowed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   protected subs: Subscription[] = [];
-
-  constructor(@Inject(QUESTIONS_BOARD_SERVICE) protected questionsBoardService: QuestionsBoardService) {
-  }
 
   canDropOnStep(parent: QuestionsBoardStep, task: QuestionsBoardTask) {
     return task.parentId === parent.id;

@@ -1,5 +1,5 @@
-import { getRemoteDataPayload } from './../../core/shared/operators';
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Data } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, map, skip, take } from 'rxjs/operators';
@@ -10,11 +10,11 @@ import { QuestionsBoardStep } from '../core/models/questions-board-step.model';
 import { QuestionsBoardStateService } from '../core/questions-board-state.service';
 import { Community } from '../../core/shared/community.model';
 import { Item } from '../../core/shared/item.model';
-import { QUESTIONS_BOARD_SERVICE, QuestionsBoardService } from '../core/questions-board.service';
+import { QuestionsBoardService } from '../core/questions-board.service';
 import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
 import { EditSimpleItemModalComponent } from '../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { QuestionsBoardType } from '../core/models/questions-board-type';
-import { ActivatedRoute, Data } from '@angular/router';
+import { getRemoteDataPayload } from '../../core/shared/operators';
 
 @Component({
   selector: 'ds-questions-board-step',
@@ -86,7 +86,7 @@ export class QuestionsBoardStepComponent implements OnInit {
   hasCheckbox = false;
 
   constructor(
-    @Inject(QUESTIONS_BOARD_SERVICE) private questionsBoardService: QuestionsBoardService,
+    private questionsBoardService: QuestionsBoardService,
     protected questionsBoardStateService: QuestionsBoardStateService,
     protected modalService: NgbModal,
     protected translate: TranslateService,

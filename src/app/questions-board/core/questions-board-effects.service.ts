@@ -1,9 +1,9 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { of as observableOf } from 'rxjs';
-import { catchError, concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, delay, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -37,7 +37,7 @@ import {
   RemoveQuestionsBoardTaskSuccessAction,
   UpdateQuestionsBoardStepAction,
 } from './questions-board.actions';
-import { QUESTIONS_BOARD_SERVICE, QuestionsBoardService } from './questions-board.service';
+import { QuestionsBoardService } from './questions-board.service';
 import { isNotEmpty } from '../../shared/empty.util';
 import { QuestionsBoard } from './models/questions-board.model';
 import { Item } from '../../core/shared/item.model';
@@ -51,13 +51,15 @@ import { QuestionsBoardStep } from './models/questions-board-step.model';
 /**
  * Provides effect methods for jsonPatch Operations actions
  */
-@Injectable()
+@Injectable({
+  providedIn: 'any'
+})
 export class QuestionsBoardEffects {
 
   /**
    * Add task to a step
    */
-  @Effect() addTask$ = this.actions$.pipe(
+  addTask$ = createEffect(() => this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.ADD_QUESTIONS_BOARD_TASK),
     concatMap((action: AddQuestionsBoardTaskAction) => {
       return this.itemAuthorityRelationService.addLinkedItemToParent(
@@ -81,24 +83,24 @@ export class QuestionsBoardEffects {
             }
             return observableOf(new AddQuestionsBoardTaskErrorAction());
           }));
-    }));
+    })));
 
   /**
    * Show a notification on success
    */
-  @Effect({ dispatch: false }) addTaskSuccess$ = this.actions$.pipe(
+  addTaskSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.ADD_QUESTIONS_BOARD_TASK_SUCCESS),
     tap(() => {
       this.notificationsService.success(null, this.translate.get('exploitation-plan.task.create.success'));
     }),
     tap(() => {
       this.modalService.dismissAll();
-    }));
+    })), { dispatch: false });
 
   /**
    * Generate an impactPathway task and dispatches
    */
-  @Effect() generateTask$ = this.actions$.pipe(
+  generateTask$ = createEffect(() => this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.GENERATE_QUESTIONS_BOARD_TASK),
     switchMap((action: GenerateQuestionsBoardTaskAction) => {
       return this.projectItemService.generateEntityItemWithinProject(
@@ -116,24 +118,24 @@ export class QuestionsBoardEffects {
             }
             return observableOf(new GenerateQuestionsBoardTaskErrorAction());
           }));
-    }));
+    })));
 
   /**
    * Dispatch an AddImpactPathwayTaskAction
    */
-  @Effect() generateTaskSuccess$ = this.actions$.pipe(
+  generateTaskSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.GENERATE_QUESTIONS_BOARD_TASK_SUCCESS),
     map((action: GenerateQuestionsBoardTaskSuccessAction) => {
       return new AddQuestionsBoardTaskAction(
         action.payload.questionsBoardId,
         action.payload.stepId,
         action.payload.item.id);
-    }));
+    })));
 
   /**
    * Show a notification on success
    */
-  @Effect({ dispatch: false }) generateTaskError$ = this.actions$.pipe(
+  generateTaskError$ = createEffect(() => this.actions$.pipe(
     ofType(
       QuestionsBoardActionTypes.ADD_QUESTIONS_BOARD_TASK_ERROR,
       QuestionsBoardActionTypes.GENERATE_QUESTIONS_BOARD_TASK_ERROR),
@@ -142,13 +144,15 @@ export class QuestionsBoardEffects {
     }),
     tap(() => {
       this.modalService.dismissAll();
-    }));
+    })), { dispatch: false });
 
   /**
    * Initialize questions board and dispatch a InitQuestionsBoardSuccessAction or a InitQuestionsBoardErrorAction on error
    */
-  @Effect() init$ = this.actions$.pipe(
+  init$ = createEffect(() => this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.INIT_QUESTIONS_BOARD),
+    tap((action: InitQuestionsBoardAction) => this.questionsBoardService.setConfig(action.payload.config)),
+    delay(200),
     switchMap((action: InitQuestionsBoardAction) => {
       return this.questionsBoardService.initQuestionsBoard(action.payload.item).pipe(
         map((object: QuestionsBoard) => {
@@ -158,12 +162,12 @@ export class QuestionsBoardEffects {
             return new InitQuestionsBoardErrorAction();
           }
         }));
-    }));
+    })));
 
   /**
    * Patch an impactPathway task and dispatch PatchImpactPathwayTaskMetadataSuccessAction
    */
-  @Effect() patchMetadataTask$ = this.actions$.pipe(
+  patchMetadataTask$ = createEffect(() => this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.PATCH_QUESTIONS_BOARD_STEP_METADATA),
     switchMap((action: PatchQuestionsBoardStepMetadataAction) => {
       return this.itemService.updateItemMetadata(
@@ -195,12 +199,12 @@ export class QuestionsBoardEffects {
           }
           return observableOf(new PatchQuestionsBoardStepMetadataErrorAction());
         }));
-    }));
+    })));
 
   /**
    * Update an impactPathway object
    */
-  @Effect() patchMetadataImpactPathwaySuccess$ = this.actions$.pipe(
+  patchMetadataImpactPathwaySuccess$ = createEffect(() => this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.PATCH_QUESTIONS_BOARD_STEP_METADATA_SUCCESS),
     map((action: PatchQuestionsBoardStepMetadataSuccessAction) => {
       return new UpdateQuestionsBoardStepAction(
@@ -208,21 +212,21 @@ export class QuestionsBoardEffects {
         this.questionsBoardService.updateQuestionsBoardStep(action.payload.item, action.payload.oldStep)
       );
     })
-  );
+  ));
 
   /**
    * Show a notification on error
    */
-  @Effect({ dispatch: false }) patchMetadataError$ = this.actions$.pipe(
+  patchMetadataError$ = createEffect(() => this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.PATCH_QUESTIONS_BOARD_STEP_METADATA_ERROR),
     tap(() => {
       this.notificationsService.error(null, this.translate.get('exploitation-plan.patch.metadata.error'));
-    }));
+    })), { dispatch: false });
 
   /**
    * Generate an impactPathway task and dispatches
    */
-  @Effect() removeTask$ = this.actions$.pipe(
+  removeTask$ = createEffect(() =>  this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.REMOVE_QUESTIONS_BOARD_TASK),
     switchMap((action: RemoveQuestionsBoardTaskAction) => {
       return this.itemAuthorityRelationService.removeChildRelationFromParent(
@@ -241,29 +245,29 @@ export class QuestionsBoardEffects {
             }
             return observableOf(new RemoveQuestionsBoardTaskErrorAction());
           }));
-    }));
+    })));
 
   /**
    * Update an impactPathway object
    */
-  @Effect({ dispatch: false }) UpdateImpactPathway$ = this.actions$.pipe(
+  UpdateImpactPathway$ = createEffect(() => this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.UPDATE_QUESTIONS_BOARD_STEP),
     tap(() => this.modalService.dismissAll())
-  );
+  ), { dispatch: false });
 
   /**
    * When the store is rehydrated objects in the state lose the prototypes,
    * so restore them
    */
-  @Effect() normalizeObjectsOnRehydrate = this.actions$
+  normalizeObjectsOnRehydrate = createEffect(() => this.actions$
     .pipe(ofType(StoreActionTypes.REHYDRATE),
       map(() => new NormalizeQuestionsBoardObjectsOnRehydrateAction())
-    );
+    ));
 
   /**
    * Order tasks on a questions board step
    */
-  @Effect() orderSubTasks$ = this.actions$.pipe(
+  orderSubTasks$ = createEffect(() =>  this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.ORDER_QUESTIONS_BOARD_TASK),
     switchMap((action: OrderQuestionsBoardTasksAction) => {
       const taskIds: string[] = action.payload.currentTasks.map((task: QuestionsBoardTask) => task.id);
@@ -286,13 +290,12 @@ export class QuestionsBoardEffects {
         })
       );
     })
-  );
-
+  ));
 
   /**
    * Initialize compare of questions board and its children
    */
-  @Effect() initCompare$ = this.actions$.pipe(
+  initCompare$ = createEffect(() => this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.INIT_COMPARE_QUESTIONS_BOARD),
     withLatestFrom(this.store$),
     switchMap(([action, state]: [InitCompareAction, any]) => {
@@ -318,12 +321,11 @@ export class QuestionsBoardEffects {
           }
           return observableOf(new InitCompareErrorAction());
         }));
-    }));
-
+    })));
 
   constructor(
     private actions$: Actions,
-    @Inject(QUESTIONS_BOARD_SERVICE) private questionsBoardService: QuestionsBoardService,
+    private questionsBoardService: QuestionsBoardService,
     private itemAuthorityRelationService: ItemAuthorityRelationService,
     private itemService: ItemDataService,
     private projectItemService: ProjectItemService,

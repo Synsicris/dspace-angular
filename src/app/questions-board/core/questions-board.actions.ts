@@ -7,6 +7,7 @@ import { QuestionsBoardTask } from './models/questions-board-task.model';
 import { QuestionsBoard } from './models/questions-board.model';
 import { MetadataMap } from '../../core/shared/metadata.models';
 import { QuestionsBoardStep } from './models/questions-board-step.model';
+import { QuestionsBoardConfig } from '../../../config/questions-board.config';
 
 /**
  * For each action type in an action group, make a simple
@@ -180,6 +181,7 @@ export class InitQuestionsBoardAction implements Action {
   type = QuestionsBoardActionTypes.INIT_QUESTIONS_BOARD;
   payload: {
     item: Item;
+    config: QuestionsBoardConfig;
   };
 
   /**
@@ -188,8 +190,8 @@ export class InitQuestionsBoardAction implements Action {
    * @param item
    *    the Item of the questions board
    */
-  constructor(item: Item) {
-    this.payload = { item };
+  constructor(item: Item, config: QuestionsBoardConfig) {
+    this.payload = { item, config };
   }
 }
 

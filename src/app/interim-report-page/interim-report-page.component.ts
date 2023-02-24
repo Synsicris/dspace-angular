@@ -15,6 +15,7 @@ import { AppState } from '../app.reducer';
 import { redirectOn4xx } from '../core/shared/authorized.operators';
 import { getFirstSucceededRemoteDataPayload } from '../core/shared/operators';
 import { InitQuestionsBoardAction } from '../questions-board/core/questions-board.actions';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'ds-interim-report-page',
@@ -83,7 +84,7 @@ export class InterimReportPageComponent implements OnInit {
       )),
       tap(([itemRD, loaded]: [RemoteData<Item>, boolean]) => {
         if (!loaded) {
-          this.store.dispatch(new InitQuestionsBoardAction(itemRD.payload));
+          this.store.dispatch(new InitQuestionsBoardAction(itemRD.payload, environment.interimReport));
         }
       }),
       map(([itemRD, loaded]: [RemoteData<Item>, boolean]) => itemRD)
