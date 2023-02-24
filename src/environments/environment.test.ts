@@ -587,6 +587,7 @@ export const environment: BuildConfig = {
   },
   exploitationPlan: {
     exploitationPlanRelationMetadata: 'synsicris.relation.exploitationplan',
+    exploitationPlanStepEntityName: 'exploitationplanstep',
     exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
     exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
     exploitationPlanPartnerMetadata: '',
@@ -596,6 +597,7 @@ export const environment: BuildConfig = {
   },
   interimReport: {
     interimReportRelationMetadata: 'synsicris.relation.interim_report',
+    interimReportStepEntityName: 'interim_report_step',
     interimReportStepRelationMetadata: 'interim_report.relation.step',
     interimReportTaskRelationMetadata: 'interim_report.relation.task',
     interimReportPartnerMetadata: '',

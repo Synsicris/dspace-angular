@@ -57,7 +57,7 @@
               <div class="row m-0" *ngIf="(formConfig$ | async)?.name">
                 <div class="col-2 p-0" *ngFor="let data of impactPathway.steps | dsGetIpwData">
                   <ds-comment-list
-                    [relatedEntityType]="entityType"
+                    [relatedEntityType]="impactPathwayStepEntityType"
                     [itemUuid]="data.id"
                     [title]="data.title"
                     [projectCommunityId]="projectCommunityId"

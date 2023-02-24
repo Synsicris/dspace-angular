@@ -19,6 +19,7 @@ import { QuestionsBoardStep } from './models/questions-board-step.model';
 import { QuestionsBoardTask } from './models/questions-board-task.model';
 import {
   AddQuestionsBoardTaskAction,
+  ClearQuestionBoardAction,
   ClearQuestionsBoardStepCollapseAction,
   GenerateQuestionsBoardTaskAction,
   InitCompareAction,
@@ -94,6 +95,10 @@ export class QuestionsBoardStateService {
     this.store.dispatch(new ClearQuestionsBoardStepCollapseAction());
   }
 
+  dispatchClearClearQuestionBoard() {
+    this.store.dispatch(new ClearQuestionBoardAction());
+  }
+
   /**
    * Return array of questions board steps
    * @param questionsBoardId
@@ -101,7 +106,7 @@ export class QuestionsBoardStateService {
   getQuestionsBoardStep(questionsBoardId: string): Observable<QuestionsBoardStep[]> {
     return this.store.pipe(
       select(questionsBoardByIDSelector(questionsBoardId)),
-      map((entry: QuestionsBoard) => entry.steps),
+      map((entry: QuestionsBoard) => entry?.steps),
       distinctUntilChanged()
     );
   }

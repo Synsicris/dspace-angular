@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { filter, map, take, tap } from 'rxjs/operators';
 
 import { Item } from '../core/shared/item.model';
 import { Community } from '../core/shared/community.model';
@@ -54,6 +54,11 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   compareMode: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * The list of questions board steps
+   */
+  questionsBoardStep$: BehaviorSubject<QuestionsBoardStep[]> = new BehaviorSubject<[]>([]);
+
+  /**
    * A boolean representing if item is a version of original item
    */
   public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -69,7 +74,13 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
 
     this.subs.push(
       this.questionsBoardStateService.isCompareModeActive()
-        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
+        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode)),
+      this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardObjectId).pipe(
+        filter((steps: QuestionsBoardStep[]) => steps?.length > 0),
+        tap(console.log)
+      ).subscribe((steps: QuestionsBoardStep[]) => {
+        this.questionsBoardStep$.next(steps);
+      })
     );
 
     this.aroute.data.pipe(
@@ -83,7 +94,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   }
 
   getQuestionsBoardStep(): Observable<QuestionsBoardStep[]> {
-    return this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardObjectId);
+    return this.questionsBoardStep$.asObservable();
   }
 
   isLoading(): Observable<boolean> {
@@ -112,7 +123,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    * When destroy component clear all collapsed values.
    */
   ngOnDestroy() {
-    this.questionsBoardStateService.dispatchClearCollapsable();
+    this.questionsBoardStateService.dispatchClearClearQuestionBoard();
 
     this.subs
       .filter((subscription) => hasValue(subscription))

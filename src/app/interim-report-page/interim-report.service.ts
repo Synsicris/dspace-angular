@@ -42,6 +42,13 @@ export class InterimReportService extends QuestionsBoardService {
   }
 
   /**
+   * Return the type of the entity that represent the step
+   */
+  getQuestionsBoardStepEntityTypeName(): string{
+    return environment.interimReport.interimReportStepEntityName;
+  }
+
+  /**
    * Return the form name used for editing the question board step object
    */
   getQuestionsBoardStepFormName(stepType: string): string {

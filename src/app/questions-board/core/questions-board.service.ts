@@ -67,6 +67,11 @@ export abstract class QuestionsBoardService {
   abstract getQuestionsBoardRelationTasksMetadata(): string;
 
   /**
+   * Return the type of the entity that represent the step
+   */
+  abstract getQuestionsBoardStepEntityTypeName(): string;
+
+  /**
    * Return the form name used for editing the question board step object
    */
   abstract getQuestionsBoardStepFormName(stepType: string): string;

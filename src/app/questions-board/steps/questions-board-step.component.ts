@@ -76,6 +76,11 @@ export class QuestionsBoardStepComponent implements OnInit {
   questionsBoard$: Observable<Item>;
 
   /**
+   * The entity type that represent the questions board step
+   */
+  questionBoardEntityType: string;
+
+  /**
    * Indicate to show or not checkbox
    */
   hasCheckbox = false;
@@ -91,6 +96,7 @@ export class QuestionsBoardStepComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.questionBoardEntityType = this.questionsBoardService.getQuestionsBoardStepEntityTypeName();
     this.hasCheckbox = this.questionsBoardStep.type === QuestionsBoardType.Question1;
     this.formConfig$ = this.questionsBoardService.getQuestionsBoardStepFormConfig(this.questionsBoardStep.type);
     this.questionsBoard$ = this.route.data.pipe(

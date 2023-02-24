@@ -41,10 +41,10 @@
         </div>
       </div>
 
-      <div *ngIf="isVersionOfAnItem && isFunder && (formConfig$ | async)?.name" class="comment-box pr-2 py-2 comment-box-position"
+      <div *ngIf="isVersionOfAnItem && isFunder && (formConfig$ | async)?.name && this.questionBoardEntityType" class="comment-box pr-2 py-2 comment-box-position"
            [ngStyle]="{'height.px': questionsBoardSection.clientHeight}">
         <ds-comment-list
-          [relatedEntityType]="(questionsBoard$ | async).entityType"
+          [relatedEntityType]="this.questionBoardEntityType"
           [itemUuid]="this.questionsBoardStep.id"
           [projectCommunityId]="projectCommunityId"
           [type]="(formConfig$ | async).name">

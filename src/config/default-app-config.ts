@@ -744,6 +744,7 @@ export class DefaultAppConfig implements AppConfig {
 
   exploitationPlan = {
     exploitationPlanRelationMetadata: 'synsicris.relation.exploitationplan',
+    exploitationPlanStepEntityName: 'exploitationplanstep',
     exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
     exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
     exploitationPlanPartnerMetadata: '',
@@ -754,6 +755,7 @@ export class DefaultAppConfig implements AppConfig {
 
   interimReport = {
     interimReportRelationMetadata: 'synsicris.relation.interimreport',
+    interimReportStepEntityName: 'interim_report_step',
     interimReportStepRelationMetadata: 'interimreport.relation.step',
     interimReportTaskRelationMetadata: 'interimreport.relation.task',
     interimReportPartnerMetadata: '',

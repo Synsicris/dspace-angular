@@ -58,6 +58,9 @@ const initialState: QuestionsBoardState = {
 export function questionsBoardReducer(state = initialState, action: QuestionsBoardActions): QuestionsBoardState {
   switch (action.type) {
 
+    case QuestionsBoardActionTypes.CLEAR_QUESTIONS_BOARD:
+      return initialState;
+
     case QuestionsBoardActionTypes.ADD_QUESTIONS_BOARD_TASK:
     case QuestionsBoardActionTypes.GENERATE_QUESTIONS_BOARD_TASK:
     case QuestionsBoardActionTypes.INIT_QUESTIONS_BOARD:

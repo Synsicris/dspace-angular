@@ -545,6 +545,13 @@ export class InitCompareErrorAction implements Action {
 }
 
 /**
+ * A ngrx action for clearing state
+ */
+export class ClearQuestionBoardAction implements Action {
+  type = QuestionsBoardActionTypes.CLEAR_QUESTIONS_BOARD;
+}
+
+/**
  * A ngrx action for init success
  */
 export class InitCompareSuccessAction implements Action {
@@ -621,4 +628,5 @@ export type QuestionsBoardActions
   | InitCompareAction
   | InitCompareSuccessAction
   | InitCompareErrorAction
-  | StopCompareQuestionsBoardAction;
+  | StopCompareQuestionsBoardAction
+  | ClearQuestionBoardAction;

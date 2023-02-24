@@ -15,6 +15,7 @@ import { QuestionsBoardTask } from '../../core/models/questions-board-task.model
 import { ProjectGroupService } from '../../../core/project/project-group.service';
 import { Community } from '../../../core/shared/community.model';
 import { DragAndDropContainerComponent } from '../../shared/drag-and-drop/drag-and-drop-container.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'ds-questions-board-step-container',
@@ -73,7 +74,9 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
   ngOnInit(): void {
     this.processing$ = this.questionsBoardStateService.isProcessing();
 
-    this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardStep.parentId).subscribe((steps) => {
+    this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardStep.parentId).pipe(
+      filter((steps: QuestionsBoardStep[]) => steps?.length > 0),
+    ).subscribe((steps: QuestionsBoardStep[]) => {
       this.connectedToList = steps.map(step => step.id);
     });
 
