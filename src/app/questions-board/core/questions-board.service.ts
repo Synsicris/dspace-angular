@@ -96,7 +96,6 @@ export abstract class QuestionsBoardService {
       getFirstSucceededRemoteDataPayload(),
       switchMap((projectItem: Item) => {
         const metadataValue = Metadata.first(projectItem.metadata, this.getProjectRelationMetadata());
-        console.log(this.getProjectRelationMetadata(), metadataValue);
         if (isNotEmpty(metadataValue) && isNotEmpty(metadataValue.authority)) {
           return this.itemService.findById(metadataValue.authority).pipe(
             getFirstCompletedRemoteData()

@@ -9,6 +9,16 @@
           tooltipClass="hint-tooltip"
           container="body"></span>
   </div>
+
+  <div class="d-flex justify-content-start">
+    <button class="btn btn-link open-modal"
+            title="{{'impact-pathway.add.btn' | translate}}"
+            (click)="createTask(); $event.stopPropagation()"
+            [disabled]="compareMode || !(canEditButton$ | async) || isVersionOfAnItem">
+      <i class="fas fa-plus-circle fa-2x text-info"></i>
+    </button>
+  </div>
+
   <div id="{{(impactPathwayStep$ | async)?.id}}"
        class="d-flex p-2 h-100 flex-column"
        cdkDropList
@@ -48,13 +58,5 @@
         <i *ngIf="(isDragging | async) && !(isDropAllowed | async)" class="fas fa-exclamation fa-5x"></i>
       </div>
     </ds-impact-path-way-task>
-  </div>
-  <div class="d-flex justify-content-end">
-    <button class="btn btn-link pr-0 open-modal"
-            title="{{'impact-pathway.add.btn' | translate}}"
-            (click)="createTask(); $event.stopPropagation()"
-            [disabled]="compareMode || !(canEditButton$ | async) || isVersionOfAnItem">
-      <i class="fas fa-plus-circle fa-2x"></i>
-    </button>
   </div>
 </div>
