@@ -36,7 +36,7 @@ export class MockActivatedRoute {
   get data() {
     const routeData: Data = {
       'exploitationPlan': {}
-    }
+    };
     return of(routeData);
   }
 }

@@ -56,7 +56,7 @@ export class TabDataService extends IdentifiableDataService<CrisLayoutTab> {
    * @param useCachedVersionIfAvailable
    * @param linkToFollow
    */
-  findByItem(itemUuid: string, useCachedVersionIfAvailable= true, linkToFollow?: FollowLinkConfig<CrisLayoutTab>): Observable<RemoteData<PaginatedList<CrisLayoutTab>>> {
+  findByItem(itemUuid: string, useCachedVersionIfAvailable = true, linkToFollow?: FollowLinkConfig<CrisLayoutTab>): Observable<RemoteData<PaginatedList<CrisLayoutTab>>> {
     const options = new FindListOptions();
     options.elementsPerPage = 100;
     options.searchParams = [new RequestParam('uuid', itemUuid)];

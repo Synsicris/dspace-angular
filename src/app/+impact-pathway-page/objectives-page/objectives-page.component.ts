@@ -34,7 +34,7 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
   /**
    * The objectives item
    */
-  objectivesItem$: Observable<Item>
+  objectivesItem$: Observable<Item>;
 
   /**
    * The objectives item's id

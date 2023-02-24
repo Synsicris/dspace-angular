@@ -51,7 +51,6 @@ export class ProjectManageVersionComponent implements OnInit {
 
     combineLatest([item$, isCoordinator$, isFunderOfProject$])
       .subscribe(([item, isCoordinator, isFunderOfProject]) => {
-        console.log(item, isCoordinator, isFunderOfProject);
         this.item$.next(item);
         this.isCoordinatorOfProject$.next(isCoordinator);
         this.isFounderOfProject$.next(isFunderOfProject);

@@ -40,7 +40,7 @@ describe('QueryConditionGroupComponent', () => {
 
   beforeEach(async () => {
     builderService = getMockFormBuilderService();
-    const formBuilder = new FormBuilder()
+    const formBuilder = new FormBuilder();
 
     const formGroupDirective = new FormGroupDirective([], []);
     formGroupDirective.form = formBuilder.group({
@@ -118,15 +118,15 @@ describe('QueryConditionGroupComponent', () => {
 
   it('should not show dropdown and show datepicker', () => {
     component.queryGroup.get('0.filter').setValue({
-      "type": {
-          "value": "projectStartDate"
+      'type': {
+          'value': 'projectStartDate'
       },
-      "pageSize": 10,
-      "name": "types",
-      "filterType": "date",
-      "_links": {
-          "self": {
-              "href": "http://localhost:8080/server/api/discover/facets/types"
+      'pageSize': 10,
+      'name': 'types',
+      'filterType': 'date',
+      '_links': {
+          'self': {
+              'href': 'http://localhost:8080/server/api/discover/facets/types'
           }
       }
     });

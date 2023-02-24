@@ -99,7 +99,7 @@ export class EasyOnlineImportComponent implements OnInit {
    */
   public onBeforeUpload = () => {
     this.requestService.setStaleByHrefSubstring(this.projectItem.self);
-  }
+  };
 
   /**
    * Show notification on import success

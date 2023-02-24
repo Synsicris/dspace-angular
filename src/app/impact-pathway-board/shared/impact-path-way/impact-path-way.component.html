@@ -70,7 +70,8 @@
         </ngb-accordion>
       </div>
     </ng-container>
-   <div class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
+  <ds-themed-loading *ngIf="(compareProcessing$ | async)"></ds-themed-loading>
+  <div *ngIf="!(compareProcessing$ | async)" class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
     <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps" ipwStepColor class="vertical-step"
                               [projectCommunityId]="projectCommunityId"
                               [impactPathwayId]="impactPathway.id"

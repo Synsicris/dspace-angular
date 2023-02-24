@@ -30,7 +30,7 @@ export const CONFIG_DATA: InjectionToken<FormFieldModel> = new InjectionToken<Fo
 export const INIT_FORM_VALUES: InjectionToken<any> = new InjectionToken<any>('initFormValues');
 export const PARSER_OPTIONS: InjectionToken<ParserOptions> = new InjectionToken<ParserOptions>('parserOptions');
 export const SECURITY_CONFIG: InjectionToken<any> = new InjectionToken<any>('securityConfig');
-export const REGEX_FIELD_VALIDATOR: RegExp = new RegExp('(\\/?)(.+)\\1([gimsuy]*)', 'i');
+export const REGEX_FIELD_VALIDATOR = new RegExp('(\\/?)(.+)\\1([gimsuy]*)', 'i');
 
 export abstract class FieldParser {
 
