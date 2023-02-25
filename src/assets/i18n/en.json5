@@ -2040,6 +2040,14 @@
 
   "event.listelement.badge": "Event",
 
+  "exploitation-plan.edit.item.title": "Edit item",
+
+  "exploitation-plan.remove.item.title": "Unlink item",
+
+  "exploitation-plan.delete.item.title": "Delete item",
+
+  "exploitation-plan.compare": "Comapre with a version",
+
   "exploitation-plan.edit.btn.title": "Edit",
 
   "exploitation-plan.description.title": "Description",
@@ -2679,6 +2687,57 @@
   "info.feedback.page-label": "Page",
 
   "info.feedback.page_help": "Tha page related to your feedback",
+
+
+  "interim-report.edit.item.title": "Edit item",
+
+  "interim-report.remove.item.title": "Unlink item",
+
+  "interim-report.delete.item.title": "Delete item",
+
+  "interim-report.compare": "Comapre with a version",
+
+  "interim-report.edit.btn.title": "Edit",
+
+  "interim-report.description.title": "Description",
+
+  "interim-report.info.text": "Info text for the interim report",
+
+  "interim-report.page.title": "Interim report",
+
+  "interim-report.breadcrumbs": "Interim report",
+
+  "interim-report.step_type_1.info.text": "Info text for section 1",
+
+  "interim-report.step_type_2.info.text": "Info text for section 2",
+
+  "interim-report.step_type_3.info.text": "Info text for section 3",
+
+  "interim-report.step_type_4.info.text": "Info text for section 4",
+
+  "interim-report.step_type_1.task_search": "Info text search for section 1",
+
+  "interim-report.step_type_2.task_search": "Info text search for section 2",
+
+  "interim-report.step_type_3.task_search": "Info text search for section 3",
+
+  "interim-report.step_type_4.task_search": "Info text search for section 4",
+
+  "interim-report.step_type_1.title": "1. Intellectual property rights",
+
+  "interim-report.step_type_2.title": "2. Economic prospects",
+
+  "interim-report.step_type_3.title": "3. Scientific and technical prospects",
+
+  "interim-report.step_type_4.title": "4. Connectivity",
+
+  "interim-report.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
+
+  "interim-report.task.create.error": "There was an issue when creating the new item, please try again later.",
+
+  "interim-report.task.create.success": "New item has been created successfully.",
+
+
 
   "item.alerts.private": "This item is non-discoverable",
 
@@ -8184,6 +8243,8 @@
   "layout.tab.header.innovation_potential": "Possible solutions / changes / innovations",
 
   "layout.tab.header.idea": "Ideas for the use of project results",
+
+  "layout.tab.header.interimreport": "Interim report",
 
   "layout.tab.header.step": "Works and cooperations after project end",
 

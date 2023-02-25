@@ -1,16 +1,15 @@
-import { CreateItemSubmissionModalComponent } from './../../../shared/create-item-submission-modal/create-item-submission-modal.component';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
-import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'ipw-editable-textarea',
+  selector: 'ds-editable-textarea',
   styleUrls: ['./editable-textarea.component.scss'],
   templateUrl: './editable-textarea.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

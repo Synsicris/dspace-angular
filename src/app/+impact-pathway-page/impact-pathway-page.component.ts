@@ -17,7 +17,7 @@ import { Community } from '../core/shared/community.model';
 import { AuthService } from '../core/auth/auth.service';
 
 @Component({
-  selector: 'ipw-dashboard-page',
+  selector: 'ds-dashboard-page',
   styleUrls: ['./impact-pathway-page.component.scss'],
   templateUrl: './impact-pathway-page.component.html'
 })

@@ -38,7 +38,6 @@ export class SearchSimpleItemService {
 
   getAvailableFilterEntriesByStepType(
     searchConfiguration: string,
-    vocabularyName: string,
     query: string = '',
     filters: SearchFilter[] = [],
     page: number,

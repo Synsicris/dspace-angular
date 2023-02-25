@@ -20,7 +20,7 @@ import { SubmissionScopeType } from '../../../core/submission/submission-scope-t
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import createSpy = jasmine.createSpy;
 
-const submissionServiceStub: SubmissionServiceStub = new SubmissionServiceStub();
+let submissionServiceStub: SubmissionServiceStub = new SubmissionServiceStub();
 
 const submissionId = mockSubmissionId;
 
@@ -31,9 +31,7 @@ describe('SubmissionFormFooterComponent', () => {
   let fixture: ComponentFixture<SubmissionFormFooterComponent>;
   let submissionRestServiceStub: any;
   let scheduler: TestScheduler;
-  let submissionServiceStub: any = new SubmissionServiceStub();
 
-  const submissionId = mockSubmissionId;
   const authorizationService = jasmine.createSpyObj('authorizationService', {
     isAuthorized: createSpy('isAuthorized').and.returnValue(observableOf(true))
   });
@@ -286,7 +284,7 @@ describe('SubmissionFormFooterComponent', () => {
       fixture = TestBed.createComponent(SubmissionFormFooterComponent);
       comp = fixture.componentInstance;
       compAsAny = comp;
-      submissionServiceStub = TestBed.inject(SubmissionService);
+      submissionServiceStub = TestBed.inject(SubmissionService) as any;
       submissionRestServiceStub = TestBed.inject(SubmissionRestService);
       comp.submissionId = submissionId;
       comp.disableDeposit = true;

@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 
 @Component({
-  selector: 'ipw-wrapper-objectives',
+  selector: 'ds-wrapper-objectives',
   styleUrls: ['./wrapper-objectives.component.scss'],
   templateUrl: './wrapper-objectives.component.html'
 })

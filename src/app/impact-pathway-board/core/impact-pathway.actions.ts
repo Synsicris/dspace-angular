@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { Action } from '@ngrx/store';
 
 import { type } from '../../shared/ngrx/type';
@@ -1425,7 +1426,7 @@ export class SetImpactPathwaySubTaskCollapseAction implements Action {
   };
 
   /**
-   * Create a new SetExploitationPlanStepCollapseAction
+   * Create a new SetImpactPathwaySubTaskCollapseAction
    *
    * @param impactPathwayStepId
    *    the impactPathwayStep's id
