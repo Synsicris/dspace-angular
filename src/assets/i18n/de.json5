@@ -5370,6 +5370,10 @@
   // TODO New key - Add a translation
   "item-export.process.title": "Bulk export item",
 
+  // "item-export-external-metadata.btn.label": "Import metadata",
+  // TODO New key - Add a translation
+  "item-export-external-metadata.btn.label": "Import metadata",
+
   // "journal.listelement.badge": "Journal",
   "journal.listelement.badge": "Zeitschrift",
 

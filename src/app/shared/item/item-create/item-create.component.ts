@@ -27,6 +27,7 @@ import { environment } from '../../../../environments/environment';
 import { FindListOptions } from '../../../core/data/find-list-options.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
+import { ItemType } from '../../../core/shared/item-relationships/item-type.model';
 
 @Component({
   selector: 'ds-item-create',
@@ -41,7 +42,7 @@ export class ItemCreateComponent implements OnInit {
   @Input() item: Item;
 
   /**
-   * The entity type which the target entity type is related
+   * The entity type which the target entity type is related to
    */
   @Input() relatedEntityType: string;
   /**
@@ -87,16 +88,24 @@ export class ItemCreateComponent implements OnInit {
       map(([isAuthenticated, entityType, hasAtLeastOneCollection, isCoordinator]) =>
         isAuthenticated &&
         isNotEmpty(entityType) &&
-        this.canCreateProjectPartner(entityType) &&
-        hasAtLeastOneCollection &&
-        isCoordinator
+          (this.canCreateProjectPartner(entityType, hasAtLeastOneCollection) ||
+           this.canCreateAnyProjectEntity(entityType, hasAtLeastOneCollection) ||
+           this.canCreateFunding(entityType, isCoordinator)
+          )
       ),
       take(1)
     ).subscribe((canShow) => this.canShow$.next(canShow));
   }
 
-  protected canCreateProjectPartner(entityType) {
-    return !(this.relatedEntityType === PROJECT_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA);
+  protected canCreateProjectPartner(entityType, hasAtLeastOneCollection) {
+    return this.relatedEntityType === FUNDING_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA && hasAtLeastOneCollection;
+  }
+  protected canCreateFunding(entityType: ItemType, isCoordinator: boolean) {
+    return this.relatedEntityType === PROJECT_ENTITY && entityType.label === FUNDING_ENTITY && isCoordinator;
+  }
+
+  protected canCreateAnyProjectEntity(entityType, hasAtLeastOneCollection) {
+    return entityType.label !== PROJECTPATNER_ENTITY_METADATA && entityType.label !== FUNDING_ENTITY && hasAtLeastOneCollection;
   }
 
   /**
