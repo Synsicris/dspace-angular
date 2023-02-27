@@ -3938,7 +3938,7 @@
   "impact-pathway.task.create.success": "Der neue Eintrag wurde erfolgreich erstellt.",
 
   // "impact-pathway.wrapper.info": "<b>Develop the Impact Pathway of the project</b></br><p>The Impact Pathway supports you in the impact-oriented planning and implementation of the project. Please present the most important objectives, activities and intended impacts of the project in a clear and concise manner by means of key messages. Use arrows to illustrate particularly important and non-linear relationships. While the project is progressing, you can update the Impact Pathway and add any results achieved.</p><p>The columns structure the key messages for impact-oriented planning:</br>In <b>Background</b> important preliminary considerations for the project are presented, such as problem definition, state of knowledge and conditions.</br>The <b>Objectives of research and development</b> describe the scientific/technical work objectives of the project. These objectives can be assigned to work packages and tasks on a second level.</br><b>Interactions with partners and groups of actors. Outputs for dissemination</b> reflect all exchange and transfer activities of the project. In a first step, key messages about the purpose and group of actors of the interactions are formulated. These key messages can be assigned to specific activities on a second level.</br>The intended impacts of the project are structured in two columns:</br>In <b>Application (possibilities)</b> the contributions of the project to the application of the project results are presented.</br><b>Expected societal impacts</b> describe what societal effects are expected when the results of projects are applied.</br>In <b>Contribution to funding programme objectives</b>, the funding programme objectives to which the project contributes are selected.</p><p>In each column, you can use [+] to create unlimited items or search for and select previously created items.</br>Each item has a specific detail page (depending on the section selected) in which further information is usually given. You can switch between the Impact Pathway and the detail page of an item at any time.</br>You can start to create items in any column of the Impact Pathway.</br>Via [Edit] below the columns of the Impact Pathway you can add a description to the overall objectives of the project.</p><p><b>Key questions and tips for developing the Impact Pathway:</b> What impacts do you want to achieve with the project? How would you like to contribute to the development of these impacts?<br>It is recommended, to plan the Impact Pathway for the project in terms of the intended impacts and to develop it together with partners in practice and groups of actors.</br></p>",
-  "impact-pathway.wrapper.info": "<i><b>Erstellen Sie hier einen Überblick zu den Hintergründen, Arbeiten und Wirkungen des Vorhabens.</b></i><br> <i><b>Im Wirkungspfad können Sie Einträge wie an einer Pinnwand anpinnen und so übersichtlich darstellen, um was es in dem Verbund geht.</b></i></br></br><b>Worum es hier geht:</b><br> <ul><li>Mit dem Wirkungspfad beantworten Sie zwei Fragen: „Welche Wirkungen sollen mit dem Vorhaben erreicht werden?“ und „Was wird/wurde getan, um zur Entwicklung dieser Wirkungen beizutragen?“ </li><li>Für die <b>Antragstellung</b> verdeutlichen Sie in den Einträgen insbesondere die Ziele des Verbundes. Die Abbildung des Wirkungspfades und eine kurze Beschreibung ersetzen in der Vorhabenbeschreibung das Kapitel „Gesamtziele des Vorhabens“. </li><li>Im <b>Verlauf des Vorhabens</b> aktualisieren und konkretisieren Sie den Wirkungspfad und ergänzen die Ergebnisse. </li><li>Die <b>6 Säulen</b> gliedern den Wirkungspfad. Je nach Säule können Einträge unterschiedlicher <b>Kategorien</b> (z.B. Rahmenbedingung oder erwartete gesellschaftliche Wirkung) angepinnt werden. Im Wirkungspfad wird jeweils nur die Bezeichnung des Eintrags und die Kategorie angezeigt. Zu jedem Eintrag gehört ein Eingabeformular, in dem weitere, je nach Kategorie unterschiedliche, Informationen abgefragt werden. </li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-ipw-about.php\" target=\"_blank\">Hintergrund zum Wirkungspfad</a></li></ul><b>Arbeitsschritte:</b><br> <ol><li>Nutzen Sie vor der ersten Verwendung diese Hilfen: <br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.php\" target=\"_blank\">Einträge strukturieren - Pinwandprinzip</a> <br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-ipw-help.php\" target=\"_blank\">Tipps und Beispiel zum Wirkungspfad</a></br> </li><li>Sie können in jeder beliebigen Säule des Wirkungspfades beginnen. Alle Einträge lassen sich jederzeit ändern, abpinnen und wieder anpinnen und über <i class=\"fas fa-grip-vertical\"></i> innerhalb einer Säule verschieben. </li><li>Über <i class=\"fas fa-plus-circle\"></i><b> </b>in jeder Säule können Sie beliebig viele Einträge <b>Neu anlegen</b> oder bereits <b>Vorhandene auswählen</b>. </li><li>Ergänzen Sie über <i class=\"fas fa-edit\"></i> weitere Informationen zum Eintrag. </li><li>Die Ziele in Säule 2 und 3 haben eine zweite Ebene, in der Sie die Arbeiten hinzufügen/anpinnen, die zu dem Ziel beitragen. Die zweite Ebene öffnen Sie über <i class=\"far fa-list-alt\"></i>. </li><li>Nutzen Sie die <i class=\"fas fa-long-arrow-alt-right\"></i> nur, wenn Sie besonders wichtige Zusammenhänge zwischen Einträgen hervorheben wollen. </li><li><a></a> Ergänzen Sie <b>unterhalb des Wirkungspfades</b> eine<b> Beschreibung</b> zu den <b>Gesamtzielen</b> des Vorhabens. Dafür müssen Sie die Felder über <i class=\"fas fa-edit\"></i> aktivieren. Dort können Sie auch die Bezeichnung ändern. </li></ol><b>Wichtiger Hinweis:</b><ul><li>In der Mitte Rechts erscheint ein <i class=\"fas fa-info-circle\"></i> wenn es eine Nachricht von Ihren Kolleg:innen zum Eintrag gibt. Öffnen Sie die <b>Detailseite</b> über <i class=\"fas fa-edit\"></i>.",
+  "impact-pathway.wrapper.info": "<i><b>Erstellen Sie hier einen Überblick zu den Hintergründen, Arbeiten und Wirkungen des Vorhabens.</b></i><br> <i><b>Im Wirkungspfad können Sie Einträge wie an einer Pinnwand anpinnen und so übersichtlich darstellen, um was es in dem Verbund geht.</b></i></br></br><b>Worum es hier geht:</b><br> <ul><li>Mit dem Wirkungspfad beantworten Sie zwei Fragen: „Welche Wirkungen sollen mit dem Vorhaben erreicht werden?“ und „Was wird/wurde getan, um zur Entwicklung dieser Wirkungen beizutragen?“ </li><li>Für die <b>Antragstellung</b> verdeutlichen Sie in den Einträgen insbesondere die Ziele des Verbundes. Die Abbildung des Wirkungspfades und eine kurze Beschreibung ersetzen in der Vorhabenbeschreibung das Kapitel „Gesamtziele des Vorhabens“. </li><li>Im <b>Verlauf des Vorhabens</b> aktualisieren und konkretisieren Sie den Wirkungspfad und ergänzen die Ergebnisse. </li><li>Die <b>6 Säulen</b> gliedern den Wirkungspfad. Je nach Säule können Einträge unterschiedlicher <b>Kategorien</b> (z.B. Rahmenbedingung oder erwartete gesellschaftliche Wirkung) angepinnt werden. Im Wirkungspfad wird jeweils nur die Bezeichnung des Eintrags und die Kategorie angezeigt. Zu jedem Eintrag gehört ein Eingabeformular, in dem weitere, je nach Kategorie unterschiedliche, Informationen abgefragt werden. </li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-ipw-about.php\" target=\"_blank\">Hintergrund zum Wirkungspfad</a></li></ul><b>Arbeitsschritte:</b><br> <ol><li>Nutzen Sie vor der ersten Verwendung diese Hilfen: <br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.php\" target=\"_blank\">Einträge strukturieren - Pinwandprinzip</a> <br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-ipw-help.php\" target=\"_blank\">Tipps und Beispiel zum Wirkungspfad</a></br> </li><li>Sie können in jeder beliebigen Säule des Wirkungspfades beginnen. Alle Einträge lassen sich jederzeit ändern, abpinnen und wieder anpinnen und über <i class=\"fas fa-grip-vertical\"></i> innerhalb einer Säule verschieben. </li><li>Über <i class=\"fas fa-plus-circle\"></i><b> </b>in jeder Säule können Sie beliebig viele Einträge <b>Neu anlegen</b> oder bereits <b>Vorhandene auswählen</b>. </li><li>Ergänzen Sie über <i class=\"fas fa-edit\"></i> weitere Informationen zum Eintrag. </li><li>Die Ziele in Säule 2 und 3 haben eine zweite Ebene, in der Sie die Arbeiten hinzufügen/anpinnen, die zu dem Ziel beitragen. Die zweite Ebene öffnen Sie über <i class=\"far fa-list-alt\"></i>. </li><li>Nutzen Sie die <i class=\"fas fa-long-arrow-alt-right\"></i> nur, wenn Sie besonders wichtige Zusammenhänge zwischen Einträgen hervorheben wollen. </li><li><a></a> Ergänzen Sie <b>unterhalb des Wirkungspfades</b> eine<b> Beschreibung</b> zu den <b>Gesamtzielen</b> des Vorhabens. Dafür müssen Sie die Felder über <i class=\"fas fa-edit\"></i> aktivieren. Dort können Sie auch die Bezeichnung ändern. </li></ol><b>Wichtiger Hinweis:</b><ul><li>Auf einer Karte erscheint in der Mitte Rechts ein <i class=\"fas fa-info-circle\"></i> wenn es eine Nachricht von Ihren Kolleg:innen zum Eintrag gibt. Öffnen Sie die <b>Detailseite</b> über <i class=\"fas fa-edit\"></i>.",
 
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   "info.end-user-agreement.accept": "Ich habe die Endnutzer-Vereinbarung gelesen und stimme ihr zu",
@@ -4601,7 +4601,7 @@
   "item.edit.tabs.status.title": "Item bearbeiten -  Status",
 
   // "item.edit.tabs.versionhistory.head": "Version History",
-  "item.edit.tabs.versionhistory.head": "Versionsgeschichte",
+  "item.edit.tabs.versionhistory.head": "Versionsverwaltung",
 
   // "item.edit.tabs.versionhistory.title": "Item Edit - Version History",
   "item.edit.tabs.versionhistory.title": "Item bearbeiten - Versionsgeschichte",
@@ -5173,7 +5173,7 @@
   "item.version.history.table.date": "Datum",
 
   // "item.version.history.table.summary": "Summary",
-  "item.version.history.table.summary": "Zusammenfassung",
+  "item.version.history.table.summary": "Bezeichnung",
 
   // "item.version.history.table.workspaceItem": "Workspace item",
   // TODO New key - Add a translation
@@ -5193,7 +5193,7 @@
 
   // "item.version.history.table.action.editSummary": "Edit summary",
   // TODO New key - Add a translation
-  "item.version.history.table.action.editSummary": "Bezeichnung bearbeiten",
+  "item.version.history.table.action.editSummary": "Bearbeiten",
 
   // "item.version.history.table.action.saveSummary": "Save summary edits",
   // TODO New key - Add a translation
@@ -5224,11 +5224,11 @@
 
   // "item.version.create.modal.text": "Create a new version for this item",
   // TODO New key - Add a translation
-  "item.version.create.modal.text": "Eine neue Version erstellen",
+  "item.version.create.modal.text": "<b>Benennen Sie die Version individuell.</b></br>Zusätzlich wird die Versionsnummer vom System automatisch hochgezählt.</br></br><b>Wichtige Hinweise:</b><ul><li>In der Versionierung wird der <b>aktuelle Bearbeitungsstand als unveränderbare Version „eingefroren“</b>.</li><li>Nach Abschluss der Versionierung können Sie über  <b>Aktion:  <i class=\"fas fa-sync-alt\"></i> Versionen verwalten</b> weitere Einstellungen vornehmen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-versioning.php\" target=_blank\">Informationen zur Versionierung</a></li></ul>",
 
   // "item.version.create.modal.text.startingFrom": "starting from version {{version}}",
   // TODO New key - Add a translation
-  "item.version.create.modal.text.startingFrom": "Starten von Version {{version}}",
+  "item.version.create.modal.text.startingFrom": "starten von Version {{version}}",
 
   // "item.version.create.modal.button.confirm": "Create",
   // TODO New key - Add a translation
@@ -5240,7 +5240,7 @@
 
   // "item.version.create.modal.button.confirm.tooltip": "Create new version",
   // TODO New key - Add a translation
-  "item.version.create.modal.button.confirm.tooltip": "Create new version",
+  "item.version.create.modal.button.confirm.tooltip": "Neue Version erstellen",
 
   // "item.version.create.modal.button.cancel": "Cancel",
   // TODO New key - Add a translation
@@ -5248,7 +5248,7 @@
 
   // "item.version.create.modal.button.cancel.tooltip": "Do not create new version",
   // TODO New key - Add a translation
-  "item.version.create.modal.button.cancel.tooltip": "Do not create new version",
+  "item.version.create.modal.button.cancel.tooltip": "Keine neue Version erstellen",
 
   // "item.version.create.modal.form.summary.label": "Summary",
   // TODO New key - Add a translation
@@ -5268,7 +5268,7 @@
 
   // "item.version.create.notification.inProgress": "A new version cannot be created because there is an inprogress submission in the version history",
   // TODO New key - Add a translation
-  "item.version.create.notification.inProgress": "A new version cannot be created because there is an inprogress submission in the version history",
+  "item.version.create.notification.inProgress": "Eine neue Version kann nicht erstellt werden, da in der Versionsverwaltung eine laufende Übermittlung vorhanden ist",
 
   // "item.version.delete.modal.header": "Delete version",
   // TODO New key - Add a translation
@@ -8739,15 +8739,15 @@
 
   // "search.filters.filter.language.head": "Language",
   // TODO New key - Add a translation
-  "search.filters.filter.language.head": "Language",
+  "search.filters.filter.language.head": "Sprache",
 
   // "search.filters.filter.language.label": "Language",
   // TODO New key - Add a translation
-  "search.filters.filter.language.label": "Language",
+  "search.filters.filter.language.label": "Suche Sprache",
 
   // "search.filters.filter.language.placeholder": "Language",
   // TODO New key - Add a translation
-  "search.filters.filter.language.placeholder": "Language",
+  "search.filters.filter.language.placeholder": "Sprache",
 
   // "search.filters.filter.projectOrgUnits.head": "Organizations",
   // TODO New key - Add a translation
@@ -8841,15 +8841,15 @@
 
   // "search.filters.filter.synsicrisRelationCall.head": "Relation call",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisRelationCall.head": "Relation call",
+  "search.filters.filter.synsicrisRelationCall.head": "Bekanntmachung",
 
   // "search.filters.filter.synsicrisRelationCall.placeholder": "Relation call",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisRelationCall.placeholder": "Relation call",
+  "search.filters.filter.synsicrisRelationCall.placeholder": "Bekanntmachung",
 
   // "search.filters.filter.synsicrisRelationCall.label": "Search relation call",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisRelationCall.label": "Search relation call",
+  "search.filters.filter.synsicrisRelationCall.label": "Suche Bekanntmachung",
 
   // "search.filters.filter.projectStartDate.head": "Start date",
   // TODO New key - Add a translation
@@ -8877,15 +8877,15 @@
 
   // "search.filters.filter.synsicrisSubjectNace.head": "Subject nace",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisSubjectNace.head": "Subject nace",
+  "search.filters.filter.synsicrisSubjectNace.head": "Wirtschaftszweig",
 
   // "search.filters.filter.synsicrisSubjectNace.placeholder": "Subject nace",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisSubjectNace.placeholder": "Subject nace",
+  "search.filters.filter.synsicrisSubjectNace.placeholder": "Wirtschaftszweig",
 
   // "search.filters.filter.synsicrisSubjectNace.label": "Search subject nace",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisSubjectNace.label": "Search subject nace",
+  "search.filters.filter.synsicrisSubjectNace.label": "Suche Wirtschaftszweig",
 
   // "search.filters.filter.synsicrisSubjectDestatis.head": "Subject destatis",
   // TODO New key - Add a translation
@@ -8981,7 +8981,7 @@
 
   // "search.filters.filter.synsicrisrelationpartner.placeholder": "Partner",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationpartner.placeholder": "Partner",
+  "search.filters.filter.synsicrisrelationpartner.placeholder": "Projektpartner",
 
   // "search.filters.filter.synsicrisrelationpartner.label": "Search partner",
   // TODO New key - Add a translation
@@ -9225,11 +9225,11 @@
 
   // "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting\"",
   // TODO Source message changed - Revise the translation
-  "search.results.no-results": "Keine Einträge vorhanden.",
+  "search.results.no-results": "Ihre Suche ergab keine Ergebnisse. Haben Sie Probleme, das zu finden, wonach Sie suchen? Versuchen Sie es mit\"",
 
   // "search.results.no-results-link": "quotes around it (Anführungszeichen)",
   // TODO Source message changed - Revise the translation
-  "search.results.no-results-link": "Anführungszeichen",
+  "search.results.no-results-link": "quotes around it",
 
   // "search.results.empty": "Your search returned no results.",
   "search.results.empty": "Ihre Suche führte zu keinem Ergebnis.",
@@ -12218,10 +12218,10 @@
   "search.filters.entityType.exp_ia_objective": "Ziel für Interaktion und Transfer",
 
   // "layout.box.help-text.Person_h": "missing",
-  "layout.box.help-text.Person_h": "<b>Herzlich Willkommen im SynSICRIS-Monitoring-Tool!</b><br>…<b>machen Sie es sich leicht und lesen Sie bei der ersten Benutzung immer die Hilfe in den blauen Boxen.</b><br><br><b>Sie sehen hier die für Sie zugänglichen Verbünde oder Einzelprojekte aufgelistet.</b><br><br><b>Generelle Infos zum Tool:</b><ul><li> Im SynSICRIS-Monitoring-Tool <b>erfassen Sie Hintergründe, Ziele, Arbeiten, Ergebnisse und Wirkungspotenziale</b> eines Verbundes oder Einzelprojektes. </li><li> Sie erstellen im Tool gemeinsam mit Ihren Partnern die Vorhabenbeschreibung und aktualisieren im Verlauf des Vorhabens die Informationen bis nach Abschluss. </li><li> Das Tool <b>ersetzt Teile der Vorhabensbeschreibung und Berichtsdokumente</b>. Dafür legen Sie einzelne Einträge zu verschiedenen Kategorien an (z.B. Arbeitspakete, erwartete Wirkungen, Veröffentlichungen), die Sie auf „Pinnwänden“ zur Wirkungsplanung, Arbeitsplanung und Verwertungsplanung strukturiert anpinnen können. </li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-objectives.php“target=\"_blank\">Hintergrund des Monitoring-Tools</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-difference.php“target=\"_blank\"> Ziele und Nutzen des Monitoring-Tools </a></li></ul>",
+  "layout.box.help-text.Person_h": "<b>Für Antragstellende/Zuwendungsempfänger:</b></br><b>Herzlich Willkommen im SynSICRIS-Monitoring-Tool!</b><br>…<b>machen Sie es sich leicht und lesen Sie bei der ersten Benutzung immer die Hilfe in den blauen Boxen.</b><br><br><b>Sie sehen hier die für Sie zugänglichen Verbünde oder Einzelprojekte aufgelistet.</b><br><br><b>Generelle Infos zum Tool:</b><ul><li> Im SynSICRIS-Monitoring-Tool <b>erfassen Sie Hintergründe, Ziele, Arbeiten, Ergebnisse und Wirkungspotenziale</b> eines Verbundes oder Einzelprojektes. </li><li> Sie erstellen im Tool gemeinsam mit Ihren Partnern die Vorhabenbeschreibung und aktualisieren im Verlauf des Vorhabens die Informationen bis nach Abschluss. </li><li> Das Tool <b>ersetzt Teile der Vorhabensbeschreibung und Berichtsdokumente</b>. Dafür legen Sie einzelne Einträge zu verschiedenen Kategorien an (z.B. Arbeitspakete, erwartete Wirkungen, Veröffentlichungen), die Sie auf „Pinnwänden“ zur Wirkungsplanung, Arbeitsplanung und Verwertungsplanung strukturiert anpinnen können. </li><li><br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about.php\" target=\"_blank\"> Das Monitoring-Tool </a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-objectives.php\" target=\"_blank\"> Hintergrund des Monitoring-Tools </a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-difference.php\" target=\"_blank\"> Ziele und Nutzen des Monitoring-Tools </a></li></ul>",
 
   // "layout.box.help-text.Person_h_funder": "missing",
-  "layout.box.help-text.Person_h_funder": "<b>Herzlich Willkommen im SynSICRIS-Monitoring-Tool!</b><br>…<b>machen Sie es sich leicht und lesen Sie bei der ersten Benutzung immer die Hilfe in den blauen Boxen.</b><br><br>Als <b>Projektbetreuer:in</b> sehen Sie hier Ihre <b>Verbünde oder Einzelprojekte</b>.<ul><li><b>Neue Vorhaben</b> fügen Sie über <b>Aktion: <i class=\"fas fa-plus-circle\"></i> Neuen Verbund anlegen</b> hinzu. Rufen Sie für weitere Schritte den Verbund über den Link auf.</li><li>Ein <b>Label</b> unterhalb des Titels des Vorhabens zeigt, ob das Projektteam bereits eine <b>Version</b> des Vorhabens mit weiteren Informationen <b>freigegeben</b> hat.</li><li>In <b>Alle Kommentare</b> sehen Sie Ihre Kommentare aus allen Vorhaben.</li></ul></br>Als <b>Programmmanager:in</b> sehen Sie unter Programm- und Förderinformationen die <b>Ihnen zugewiesenen Programme und Bekanntmachungen</b>. Laden Sie über Programme Ihre Mitarbeitenden ein und legen Sie Förderziele an, die den Bekanntmachungen und Programmen zugeordnet werden können.</br></br><b>Wichtige Hinweise:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-objectives.php“ target=\"_blank\">Hintergrund des Monitoring-Tools</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-difference.php“ target=\"_blank\"> Ziele und Nutzen des Monitoring-Tools </a></li></ul>",
+  "layout.box.help-text.Person_h_funder": "<b>Für Mitarbeitende beim Fördermittelgeber:</b></br><b>Herzlich Willkommen im SynSICRIS-Monitoring-Tool!</b><br>…<b>machen Sie es sich leicht und lesen Sie bei der ersten Benutzung immer die Hilfe in den blauen Boxen.</b><br><br>Als <b>Projektbetreuer:in</b> sehen Sie hier Ihre <b>Verbünde oder Einzelprojekte</b>.<ul><li><b>Neue Vorhaben</b> fügen Sie über <b>Aktion: <i class=\"fas fa-plus-circle\"></i> Neuen Verbund anlegen</b> hinzu. Rufen Sie für weitere Schritte den Verbund über den Link auf.</li><li>Ein <b>Label</b> unterhalb des Titels des Vorhabens zeigt, ob das Projektteam bereits eine <b>Version</b> des Vorhabens mit weiteren Informationen <b>freigegeben</b> hat.</li><li>In <b>Alle Kommentare</b> sehen Sie Ihre Kommentare aus allen Vorhaben.</li></ul></br>Als <b>Programmmanager:in</b> sehen Sie unter Programm- und Förderinformationen die <b>Ihnen zugewiesenen Programme und Bekanntmachungen</b>. Laden Sie über Programme Ihre Mitarbeitenden ein und legen Sie Förderziele an, die den Bekanntmachungen und Programmen zugeordnet werden können.</br></br><b>Wichtige Hinweise:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about.php\" target=\"_blank\"> Das Monitoring-Tool </a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-objectives.php\" target=\"_blank\"> Hintergrund des Monitoring-Tools </a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about-difference.php\" target=\"_blank\"> Ziele und Nutzen des Monitoring-Tools </a></li></ul>",
 
   // "layout.box.help-text.Person_details_h": "missing",
   "layout.box.help-text.Person_details_h": "Über <i class=\"fas fa-user-circle\"></i> können Sie Ihr Personenprofil bearbeiten und die Sichtbarkeit festlegen. Außerdem können Sie dort Ihre Anmeldedaten anpassen.",
@@ -12230,10 +12230,10 @@
   "layout.box.help-text.Person_details_h_funder": "Über <i class=\"fas fa-user-circle\"></i> können Sie Ihr Personenprofil bearbeiten und die Sichtbarkeit festlegen. Außerdem können Sie dort Ihre Anmeldedaten anpassen.",
 
   // "layout.box.help-text.default_h_1": "missing",
-  "layout.box.help-text.default_h_1": "<b>Bedienung - Erste Schritte zur Antragstellung - Weiteres Vorgehen im Verlauf des Vorhabens</b></br>Alles, was Sie zur Dateneingabe wissen sollten, finden Sie hier.</br></br>Es gibt eine <b>Hilfe mit Abbildungen</b>. Sie öffnet sich in einem neuen Tab und lässt sich am leichtesten nutzen, wenn Sie sie in ein zweites Browserfenster ziehen und neben das Fenster mit dem Monitoring-Tool legen.<ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about.php\" target=\"_blank\"> Das Monitoring-Tool </a></li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use.php\" target=\"_blank\">Bedienungshinweise kurz und knapp</a></li></ul><b>Erste Schritte:</b><ul><li> Als <b>Koordinator:</b><b>in des Verbundes</b> laden Sie über <b>Aktion: <i class=\"fas fa-toolbox\"></i> Koordinator:innen verwalten</b> die Koordinator:innen der beteiligten (Teil-)Projekte/Zuwendungsempfänger ein. Alle weiteren Personen werden von diesen Koordinator:innen im Arbeitsbereich der jeweiligen (Teil-)Projekte/Zuwendungsempfänger eingeladen. </li><li>Arbeiten Sie anschließend entlang der Reihenfolge in der Navigationsleiste. </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.php\" target=\"_blank\">Schritt-für-Schritt-Anleitung für die Antragstellung</a> </li></ul><b>Weitere Hilfen:</b><ul><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-proj.php\" target=\"_blank\">Verbund und beteiligte Projekte unterscheiden</a> </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.php\" target=\"_blank\"> Aktualisierung im laufenden Vorhaben</a> </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-completion.php\" target=\"_blank\">Abschluß des Vorhabens</a> </li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-update.php\" target=\"_blank\">Aktualisierung nach Abschluß des Vorhabens</a> </li></ul>",
+  "layout.box.help-text.default_h_1": "<b>Bedienung - Erste Schritte zur Antragstellung - Weiteres Vorgehen im Verlauf des Vorhabens</b></br>Alles, was Sie zur Dateneingabe wissen sollten, finden Sie hier.</br></br>Es gibt eine <b>Hilfe mit Abbildungen</b>. Sie öffnet sich in einem neuen Tab und lässt sich am leichtesten nutzen, wenn Sie sie in ein zweites Browserfenster ziehen und neben das Fenster mit dem Monitoring-Tool legen.<ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about.php\" target=\"_blank\"> Das Monitoring-Tool </a></li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use.php\" target=\"_blank\">Bedienungshinweise kurz und knapp</a></li></ul><b>Erste Schritte:</b><ul><li> Als <b>Koordinator:</b><b>in des Verbundes</b> laden Sie über <b>Aktion: <i class=\"fas fa-toolbox\"></i> Koordinator:innen verwalten</b> die Koordinator:innen der beteiligten (Teil-)Projekte/Zuwendungsempfänger ein. Alle weiteren Personen werden von diesen Koordinator:innen im Arbeitsbereich der jeweiligen (Teil-)Projekte/Zuwendungsempfänger eingeladen. </li><li>Arbeiten Sie anschließend entlang der Reihenfolge in der Navigationsleiste. </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.php\" target=\"_blank\">Schritt-für-Schritt-Anleitung für die Antragstellung</a> </li></ul><b>Weitere Hilfen:</b><ul><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-proj.php\" target=\"_blank\">Verbund und beteiligte Projekte unterscheiden</a> </li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-versioning.php\" target=\"_blank\">Informationen zur Versionierung</a></li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.php\" target=\"_blank\"> Aktualisierung im laufenden Vorhaben</a> </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-completion.php\" target=\"_blank\">Abschluß des Vorhabens</a> </li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-update.php\" target=\"_blank\">Aktualisierung nach Abschluß des Vorhabens</a> </li></ul>",
 
   // "layout.box.help-text.default_h_1_funder": "missing",
-  "layout.box.help-text.default_h_1_funder": "Hier finden Sie alle Informationen zum Verbundprojekt. Die Navigationsleiste auf der linken Seite dient zur Orientierung und führt Sie zu den Details des Verbundprojektes und der Teilprojekte.",
+  "layout.box.help-text.default_h_1_funder": "<b>Erste Schritte zur Betreuung von Vorhaben:</b><ul><li>Öffnen Sie über <b><i class=\"fas fa-edit\"></i> Bearbeiten</b> die Verbund-Informationen und vervollständigen die Angaben.</li><li>Anschließend laden Sie über <b>Aktion: <i class=\"fas fa-toolbox\"></i> Koordinator:innen verwalten</b> den/die Verbund-Koordinator:in ein.</li><li>Um eine Version aufzurufen oder zu verwalten, gehen Sie über <b>Aktion: <i class=\"fas fa-sync-alt\"></i> Versionen verwalten</b>.</li></ul><b>Wichtige Hinweise:</b><ul><li>Die linke Navigationsleiste ermöglicht Ihnen erst in einer freigeschalteten Version, in die detaillierten Inhalte des Vorhabens zu navigieren. Vorher haben Sie nur Zugang zu den (von Ihnen editierbaren) Verbundinformationen und den Kommentaren.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-versioning.php\" target=\"_blank\">Informationen zur Versionierung</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-role.php\" target=\"_blank\">Rollen und Rechte verwalten</a></li></ul>",
 
   // "layout.box.help-text.projectpartner_h": "missing",
   "layout.box.help-text.projectpartner_h": "<b>Projektpartner</b>  sind die Organisationseinheit(en), die als Antragssteller in den jeweiligen <b> Projekten</b> mitwirken.</br></br><b>Diese Liste dient nur der Übersicht. Legen Sie die Projektpartner ausschließlich in den jeweiligen Projekten an. </br>Zum Bearbeiten wählen Sie Ihre Organisationseinheit aus.</b>",
@@ -13567,17 +13567,11 @@
   // "layout.field.label.stateofart.dc.description": "Description",
   "layout.field.label.stateofart.dc.description": "Beschreibung",
 
-  // "layout.field.label.stateofart.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.stateofart.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
-
   // "layout.field.label.proj_objective.dc.title": "Title",
   "layout.field.label.proj_objective.dc.title": "Bezeichnung",
 
   // "layout.field.label.proj_objective.dc.description": "Description",
   "layout.field.label.proj_objective.dc.description": "Beschreibung",
-
-  // "layout.field.label.proj_objective.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.proj_objective.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
 
   // "layout.field.label.ia_objective.dc.title": "Title",
   "layout.field.label.ia_objective.dc.title": "Bezeichnung",
@@ -13595,7 +13589,7 @@
   "layout.field.label.workpackage.synsicris.description.requirements": "Voraussetzungen zur Erfüllung des Arbeitspakets",
 
   // "layout.field.label.workpackage.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.workpackage.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
+  "layout.field.label.workpackage.synsicris.type.status": "Status",
 
   // "layout.field.label.task.dc.title": "Title",
   "layout.field.label.task.dc.title": "Bezeichnung",
@@ -13679,7 +13673,7 @@
   "layout.field.label.plan_publication.dc.description": "Beschreibung",
 
   // "layout.field.label.plan_publication.synsicris.type.status": "Status of the information compared to the project application",
-  "layout.field.label.plan_publication.synsicris.type.status": "Status der Information im Vergleich zum Projektantrag",
+  "layout.field.label.plan_publication.synsicris.type.status": "Status",
 
   // "layout.field.label.Publication.dc.identifier.doi": "DOI",
   "layout.field.label.Publication.dc.identifier.doi": "DOI",
@@ -13928,7 +13922,7 @@
   "layout.field.label.innovationpotential.synsicris.level.start": "Reifegrad der Lösung / Innovation zum Projektbeginn (Startwert)",
 
   // "layout.field.label.innovationpotential.synsicris.level.end": "Readinesslevel at project end (target value)",
-  "layout.field.label.innovationpotential.synsicris.level.end": "Reifegrad der Lösung / Innovation zum Projektende (Zieltwert)",
+  "layout.field.label.innovationpotential.synsicris.level.end": "Reifegrad der Lösung / Innovation zum Projektende (Zielwert)",
 
   // "layout.box.header.innovationpotential_status": "Change since proposal submission",
   "layout.box.header.innovationpotential_status": "Veränderung seit der Antragstellung",
@@ -14646,20 +14640,28 @@
 
   // "layout.field.label.comment.synsicris.date.creation": "Creation date",
   "layout.field.label.comment.synsicris.date.creation": "Erstellt am",
+
   // "layout.field.label.comment.synsicris.date.reminder": "Reminder date",
   "layout.field.label.comment.synsicris.date.reminder": "Erinnerung am",
+
   // "layout.field.label.comment.synsicris.creator": "Creation by",
   "layout.field.label.comment.synsicris.creator": "Erstellt von",
+
   // "layout.field.label.comment.synsicris.description": "Description",
   "layout.field.label.comment.synsicris.description": "Beschreibung",
+
   //"layout.field.label.comment.synsicris.related.item": "Related Item",
   "layout.field.label.comment.synsicris.related.item": "Zugehöriger Eintrag",
+
   //"layout.field.label.comment.synsicris.related.project": "Related Project",
   "layout.field.label.comment.synsicris.related.project": "Zugehöriges Vorhaben",
+
   // "search.filters.applied.charts.RELATION.Project.cooperationpartner.title": "missing",
   "search.filters.applied.charts.RELATION.Project.cooperationpartner.title": "Grafik",
+
   // "search.filters.applied.charts.graphcoopparttype.tab": "missing",
   "search.filters.applied.charts.graphcoopparttype.tab": "...nach Art",
+
   // "search.filters.applied.charts.graphcooppartnace.tab": "missing",
   "search.filters.applied.charts.graphcooppartnace.tab": "...nach Wirtschaftszweig",
 
@@ -14789,56 +14791,53 @@
   // "layout.tab.header.details": "My personal profile",
   "layout.tab.header.details": "Mein Personenprofil",
 
-  // "item.version.history.info.alert": "version info",
-  "item.version.history.info.alert": "Hilfetext Übersicht",
-
   // "item.version.visibility.modal.header": "Visibility version",
-  "item.version.visibility.modal.header": "Sichtbarkeit",
+  "item.version.visibility.modal.header": "Freigabe für Fördermittelgeber",
 
   // "item.version.visibility.modal.text": "Do you want to make version {{version}} visible?",
-  "item.version.visibility.modal.text": "Möchten Sie {{version}} sichtbar schalten?",
+  "item.version.visibility.modal.text": "Möchten Sie {{version}} freigeben?",
 
   // "item.version.visibility.modal.official.label": "Set version as official",
-  "item.version.visibility.modal.official.label": "Version als offiziell setzen",
+  "item.version.visibility.modal.official.label": "Version als offiziell kennzeichnen",
 
   // "item.version.visibility.modal.button.confirm": "Visibile",
-  "item.version.visibility.modal.button.confirm": "Sichtbar",
+  "item.version.visibility.modal.button.confirm": "Freigabe",
 
   // "item.version.visibility.modal.button.cancel": "Cancel",
   "item.version.visibility.modal.button.cancel": "Abbrechen",
 
   // "item.version.visibility.modal.button.confirm.tooltip": "Make visible this version",
-  "item.version.visibility.modal.button.confirm.tooltip": "Diese Version sichtbar schalten",
+  "item.version.visibility.modal.button.confirm.tooltip": "Diese Version freigeben",
 
   // "item.version.visibility.modal.button.cancel.tooltip": "Do not visibility this version",
-  "item.version.visibility.modal.button.cancel.tooltip": "Diese Version nicht sichtbar schalten",
+  "item.version.visibility.modal.button.cancel.tooltip": "Diese Version nicht freigeben",
 
   // "item.version.history.official": "Active working project",
   "item.version.history.official": "Aktuelles Vorhaben",
 
   // "item.version.history.table.visibility": "Visibility",
-  "item.version.history.table.visibility": "Sichtbarkeit",
+  "item.version.history.table.visibility": "Für Förderer…",
 
   // "item.version.history.table.setVisibility": "Set as visible",
-  "item.version.history.table.setVisibility": "Sichtbar schalten",
+  "item.version.history.table.setVisibility": "freigeben",
 
   // "item.version.history.table.setNonOfficial": "Mark as non-official",
-  "item.version.history.table.setNonOfficial": "Als nicht-offiziell kennzeichnen",
+  "item.version.history.table.setNonOfficial": "als nicht-offiziell kennzeichnen",
 
   // "item.version.history.table.action.toggleOfficial": "Mark as official",
-  "item.version.history.table.action.toggleOfficial": "Als offiziell kennzeichnen",
+  "item.version.history.table.action.toggleOfficial": "als offiziell kennzeichnen",
 
   // "item.version.history.table.action.toggleNonOfficial": "Mark as non-official",
-  "item.version.history.table.action.toggleNonOfficial": "Als nicht-offiziell kennzeichnen",
+  "item.version.history.table.action.toggleNonOfficial": "als nicht-offiziell kennzeichnen",
 
   // "item.version.history.table.official": "Official",
-  "item.version.history.table.official": "Offiziell",
+  "item.version.history.table.official": "Kennzeichnung",
 
   // "item.version.synsicris.version.official": "Official",
-  "item.version.synsicris.version.official": "Offiziell",
+  "item.version.synsicris.version.official": "offiziell",
 
   // "item.version.synsicris.version.not_official": "Not Official",
-  "item.version.synsicris.version.not_official": "Nicht-offiziell",
+  "item.version.synsicris.version.not_official": "nicht-offiziell",
 
   // "item.version.history.table.error": "An error occurs during the operation",
   "item.version.history.table.error": "Während des Vorgangs ist ein Fehler aufgetreten",
@@ -14856,19 +14855,19 @@
   "item.version.history.title": "Versionsverwaltung",
 
   // "item.version.synsicris.version.invisible": "Not Visible",
-  "item.version.synsicris.version.invisible": "Nicht sichtbar",
+  "item.version.synsicris.version.invisible": "nicht freigegeben",
 
   // "item.version.synsicris.version.visible": "Visible",
-  "item.version.synsicris.version.visible": "Sichtbar",
+  "item.version.synsicris.version.visible": "freigegeben",
 
   // "confirmation-modal.version.official.header": "Version Official Managment",
   "confirmation-modal.version.official.header": "Versionsverwaltung",
 
   // "confirmation-modal.version.official.info.official": "Are you sure you want to make "{{ dsoName }}" version as official?",
-  "confirmation-modal.version.official.info.official": "Sind Sie sicher,  \"{{ dsoName }}\" version offiziell zu  machen?",
+  "confirmation-modal.version.official.info.official": "Sind Sie sicher,  \"{{ dsoName }}\" version offiziell zu machen?",
 
   // "confirmation-modal.version.official.info.not-official": "Are you sure you want to make "{{ dsoName }}" version as non-official?",
-  "confirmation-modal.version.official.info.not-official": "Sind Sie sicher,  \"{{ dsoName }}\" version nicht-offiziell zu  machen?",
+  "confirmation-modal.version.official.info.not-official": "Sind Sie sicher,  \"{{ dsoName }}\" version nicht-offiziell zu machen?",
 
   // "confirmation-modal.version.official.cancel": "Cancel",
   "confirmation-modal.version.official.cancel": "Abbrechen",
@@ -15051,7 +15050,7 @@
   "breadcrumb.entity-type.Project": "<i class=\"fas fa-shekel-sign\"></i> Verbund",
 
   // "breadcrumb.entity-type.Funding": "<i class="fas fa-cubes"></i> Project",
-  "breadcrumb.entity-type.Funding": "<i class=\"fas fa-cubes\"></i> Projekt",
+  "breadcrumb.entity-type.Funding": "<i class=\"fas fa-cubes\"></i> Projekte",
 
   // "breadcrumb.entity-type.impactpathway": "Impact Pathway",
   "breadcrumb.entity-type.impactpathway": "Wirkungspfad",
@@ -15201,7 +15200,7 @@
   "explore.index.synsicrisDuration": "Dauer",
 
   // "explore.index.synsicrisProjectStatus": "Status",
-  "explore.index.synsicrisProjectStatus": "Statuts",
+  "explore.index.synsicrisProjectStatus": "Status",
 
   // "explore.index.oairecerifFundingParent": "Related call",
   "explore.index.oairecerifFundingParent": "Zugehöriges Programm / Fördermaßnahme",
@@ -15225,7 +15224,7 @@
   "explore.index.synsicrisAddressAddresscountry": "Land",
 
   // "explore.index.synsicrisSubjectEnterprise": "missing",
-  "explore.index.synsicrisSubjectEnterprise": "Unternehemsgröße",
+  "explore.index.synsicrisSubjectEnterprise": "Unternehmensgröße",
 
   // "explore.index.synsicrisSubjectPolitical": "Policy level",
   "explore.index.synsicrisSubjectPolitical": "Poltikebene",
@@ -15308,9 +15307,6 @@
   // "layout.box.help-text.fundingobjective_h": "missing",
   "layout.box.help-text.fundingobjective_h": "Hier legen Sie die Förderziele an und ordnen sie der zugehörigen Bekanntmachung und dem Programm zu. (Wenn gewünscht können Sie dort auch Sustainable Development Goals zuordnen).",
 
-  // "item.version.create.modal.info": "Test",
-  "item.version.create.modal.info": "Test",
-
   // "search.filters.entityType.neg_sideeffect": "Possible negative side effects",
   "search.filters.entityType.neg_sideeffect": "Mögliche negative Nebenwirkungen",
 
@@ -15324,7 +15320,7 @@
   "nav.user-profile-menu-and-logout": "Nutzerprofil und Abmelden",
 
   // "layout.box.help-text.programme_h_1": "missing",
-  "layout.box.help-text.programme_h_1": "Über <b>Aktion: PT-Mitarbeitende verwalten</b> können Sie Mitarbeitenden im Programm unterschiedliche Rollen zuweisen. </br></br><b>Wichtige Hinweise:</b><ul><li>Nur der Administrator kann  einer Person die Rolle des/der Programmanager:in eines Programmes zuweisen. werden.</li><li>Wenden Sie sich an den Administrator, wenn Sie als Programmmanager:in einem neuen Programm zugewiesen werden sollen. Die Programme selbst werden aus profi importiert. </li><li>Hier muss der Link auf die externe Hilfeseite zu den Rollen und Rechten für PT-Mitarbeitende eingefügt werden.</li></ul>",
+  "layout.box.help-text.programme_h_1": "Über <b>Aktion: PT-Mitarbeitende verwalten</b> können Sie Mitarbeitenden im Programm unterschiedliche Rollen zuweisen. </br></br><b>Wichtige Hinweise:</b><ul><li>Nur der Administrator kann  einer Person die Rolle des/der Programmanager:in eines Programmes zuweisen.</li><li>Wenden Sie sich an den Administrator, wenn Sie als Programmmanager:in einem neuen Programm zugewiesen werden sollen. Die Programme selbst werden aus profi importiert. </li><li>Hier muss der Link auf die externe Hilfeseite zu den Rollen und Rechten für PT-Mitarbeitende eingefügt werden.</li></ul>",
 
   // "context-menu.actions.show-all-metadata": "<i class="fas fa-ellipsis-v"></i> Show all metadata (technical view)",
   "context-menu.actions.show-all-metadata": "<i class=\"fas fa-ellipsis-v\"></i> Alle Daten(felder) anzeigen",
@@ -15384,13 +15380,13 @@
   "search.filters.filter.synsicrisTypeOrgform.Label": "Suche Organisationsform",
 
   // "search.filters.filter.synsicrisSubjectEnterprise.head": "Size of business",
-  "search.filters.filter.synsicrisSubjectEnterprise.head": "Unternehemsgröße",
+  "search.filters.filter.synsicrisSubjectEnterprise.head": "Unternehmensgröße",
 
   // "search.filters.filter.synsicrisSubjectEnterprise.placeholder": "Size of business",
-  "search.filters.filter.synsicrisSubjectEnterprise.placeholder": "Unternehemsgröße",
+  "search.filters.filter.synsicrisSubjectEnterprise.placeholder": "Unternehmensgröße",
 
   // "search.filters.filter.synsicrisSubjectEnterprise.label": "Search Size of business",
-  "search.filters.filter.synsicrisSubjectEnterprise.label": "Suche Unternehemsgröße",
+  "search.filters.filter.synsicrisSubjectEnterprise.label": "Suche Unternehmensgröße",
 
   // "search.filters.filter.synsicrisSubjectUrbanrural.head": "Locating",
   "search.filters.filter.synsicrisSubjectUrbanrural.head": "Verortung",
@@ -15423,6 +15419,396 @@
   "submission.sections.license.granted-label": "Ich stimme dem Vertrag zu",
 
   // "submission.sections.license.required": "You must accept the license",
-  "submission.sections.license.required": "Sie müssen dem Vertrag zustimmen"
+  "submission.sections.license.required": "Sie müssen dem Vertrag zustimmen",
+
+  // "layout.box.header.open_researchquestion_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.open_researchquestion_internalacc": "Interner Bereich Verbund",
+
+  // "layout.field.label.Project.synsicris.type.internal": "Task",
+  "layout.field.label.Project.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.Project.synsicris.description.internal": "Description",
+  "layout.field.label.Project.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.Funding.synsicris.type.internal": "Task",
+  "layout.field.label.Funding.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.Funding.synsicris.description.internal": "Description",
+  "layout.field.label.Funding.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.projectpartner.synsicris.type.internal": "Task",
+  "layout.field.label.projectpartner.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.projectpartner.synsicris.description.internal": "Description",
+  "layout.field.label.projectpartner.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.cooperationpartner.synsicris.type.internal": "Task",
+  "layout.field.label.cooperationpartner.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.cooperationpartner.synsicris.description.internal": "Description",
+  "layout.field.label.cooperationpartner.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.targetgroup.synsicris.type.internal": "Task",
+  "layout.field.label.targetgroup.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.targetgroup.synsicris.description.internal": "Description",
+  "layout.field.label.targetgroup.synsicris.description.internal": "Beschreibung",
+
+  // "layout.box.header.stateofart_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.stateofart_internalacc": "Interner Bereich Verbund",
+
+  // "layout.field.label.stateofart.synsicris.type.internal": "Task",
+  "layout.field.label.stateofart.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.stateofart.synsicris.description.internal": "Description",
+  "layout.field.label.stateofart.synsicris.description.internal": "Beschreibung",
+
+  // "layout.box.header.proj_objective_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.proj_objective_internalacc": "Interner Bereich Verbund",
+
+  // "layout.field.label.proj_objective.synsicris.type.internal": "Task",
+  "layout.field.label.proj_objective.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.proj_objective.synsicris.description.internal": "Description",
+  "layout.field.label.proj_objective.synsicris.description.internal": "Beschreibung",
+
+  // "layout.box.header.ia_objective_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.ia_objective_internalacc": "Interner Bereich Verbund",
+
+  // "layout.field.label.ia_objective.synsicris.type.internal": "Task",
+  "layout.field.label.ia_objective.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.ia_objective.synsicris.description.internal": "Description",
+  "layout.field.label.ia_objective.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.workpackage.synsicris.type.internal": "Task",
+  "layout.field.label.workpackage.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.workpackage.synsicris.description.internal": "Description",
+  "layout.field.label.workpackage.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.task.synsicris.type.internal": "Task",
+  "layout.field.label.task.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.task.synsicris.description.internal": "Description",
+  "layout.field.label.task.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.task.synsicris.type.status": "Status",
+  "layout.field.label.task.synsicris.type.status": "Status",
+
+  // "layout.field.label.process_event.synsicris.type.internal": "Task",
+  "layout.field.label.process_event.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.process_event.synsicris.description.internal": "Description",
+  "layout.field.label.process_event.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.process_event.synsicris.type.status": "Status",
+  "layout.field.label.process_event.synsicris.type.status": "Status",
+
+  // "layout.field.label.plan_publication.synsicris.type.internal": "Task",
+  "layout.field.label.plan_publication.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.plan_publication.synsicris.description.internal": "Description",
+  "layout.field.label.plan_publication.synsicris.description.internal": "Beschreibung",
+
+  // "layout.box.header.Publication_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.Publication_internalacc": "Interner Bereich Verbund",
+
+  // "layout.field.label.Publication.synsicris.subject.agrovoc": "Key words",
+  "layout.field.label.Publication.synsicris.subject.agrovoc": "Schlagworte (Agrovoc)",
+
+  // "layout.field.label.Publication.synsicris.type.internal": "Task",
+  "layout.field.label.Publication.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.Publication.synsicris.description.internal": "Description",
+  "layout.field.label.Publication.synsicris.description.internal": "Beschreibung",
+
+  // "layout.box.header.Product_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.Product_internalacc": "Interner Bereich Verbund",
+
+  // "layout.field.label.Product.synsicris.type.internal": "Task",
+  "layout.field.label.Product.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.Product.synsicris.description.internal": "Description",
+  "layout.field.label.Product.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.Product.synsicris.subject.agrovoc": "Key words",
+  "layout.field.label.Product.synsicris.subject.agrovoc": "Schlagworte (Agrovoc)",
+
+  // "layout.box.header.research_result_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.research_result_internalacc": "Interner Bereich Verbund",
+
+  // "layout.field.label.research_result.synsicris.type.internal": "Task",
+  "layout.field.label.research_result.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.research_result.synsicris.description.internal": "Description",
+  "layout.field.label.research_result.synsicris.description.internal": "Beschreibung",
+
+  // "layout.box.header.unexpected_result_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.unexpected_result_internalacc": "Interner Bereich Verbund",
+
+  // "layout.field.label.unexpected_result.synsicris.type.internal": "Task",
+  "layout.field.label.unexpected_result.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.unexpected_result.synsicris.description.internal": "Description",
+  "layout.field.label.unexpected_result.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.open_researchquestion.dc.title": "Title",
+  "layout.field.label.open_researchquestion.dc.title": "Bezeichnung",
+
+  // "layout.field.label.open_researchquestion.dc.description": "Description",
+  "layout.field.label.open_researchquestion.dc.description": "Beschreibung",
+
+  // "layout.field.label.open_researchquestion.synsicris.type.evidence": "Evidence type",
+  "layout.field.label.open_researchquestion.synsicris.type.evidence": "Art des Nachweises",
+
+  // "layout.field.label.open_researchquestion.synsicris.type.internal": "Task",
+  "layout.field.label.open_researchquestion.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.open_researchquestion.synsicris.description.internal": "Description",
+  "layout.field.label.open_researchquestion.synsicris.description.internal": "Beschreibung",
+
+  // "layout.box.header.award_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.award_internalacc": "Interner Bereich Verbund",
+
+  // "layout.field.label.award.synsicris.type.internal": "Task",
+  "layout.field.label.award.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.award.synsicris.description.internal": "Description",
+  "layout.field.label.award.synsicris.description.internal": "Beschreibung",
+
+  // "layout.box.header.contribution_fundingprogramme_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.contribution_fundingprogramme_internalacc": "Interner Bereich Verbund",
+
+  // "layout.field.label.contribution_fundingprogramme.synsicris.type.internal": "Task",
+  "layout.field.label.contribution_fundingprogramme.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.contribution_fundingprogramme.synsicris.description.internal": "Description",
+  "layout.field.label.contribution_fundingprogramme.synsicris.description.internal": "Beschreibung",
+
+  // "layout.box.header.application_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.application_internalacc": "Interner Bereich Verbund",
+
+  // "layout.field.label.application.synsicris.type.internal": "Task",
+  "layout.field.label.application.synsicris.type.internal": "Aufgabe",
+
+  // "layout.field.label.application.synsicris.description.internal": "Description",
+  "layout.field.label.application.synsicris.description.internal": "Beschreibung",
+
+  // "layout.field.label.Project.synsicris.subject.agrovoc": "Key words",
+  "layout.field.label.Project.synsicris.subject.agrovoc": "Schlagworte (Agrovoc)",
+
+  // "item.version.create.modal.submitted.header": "Creating new version...",
+  "item.version.create.modal.submitted.header": "Neue Version wird erstellt…",
+
+  // "item.version.create.modal.submitted.text": "The new version is being created. This may take some time if the project has a lot of items.",
+  "item.version.create.modal.submitted.text": "Die neue Version wird gerade erstellt. Dies kann einige Zeit dauern, wenn das Vorhaben sehr viele Einträge enthält.",
+
+  // "item.version.history.info.alert.coordinator": "version info coordinator",
+  "item.version.history.info.alert.coordinator": "Hier verwalten Sie die Versionen zum Vorhaben. Die aktive Instanz (aktueller Bearbeitungsstand im Tool) sowie Versionen, die als „nicht freigegeben“ gekennzeichnet sind, können vom Fördermittelgeber niemals eingesehen werden. </br></br><b>Was ist Versionierung?</b></br>Als Zuwendungsempfänger arbeiten Sie immer in der aktiven Instanz. Mit der Versionierung „frieren“ Sie den aktuellen Stand des Vorhabens als unveränderbare Version „ein“ und können ihn für den Fördermittelgeber zum Lesen freigegeben.</br></b>Vor der Freigabe</b> können Sie die <b>Bezeichnung ändern</b> und die <b>Version löschen</b>.</br><b>Bei der Freigabe</b> kennzeichnen Sie, ob die Version offiziell oder nicht-offiziell ist.</br><b>Offiziell</b> bedeutet, die Version <b>gehört zu einem bestimmten Berichtszeitpunkt</b> (z.B. Antragstellung).</br><b>Nicht-offiziell</b> bedeutet, die Version ist <b>nur für die Aktualisierung der letzten offiziellen Version zur Information für den Fördermittelgeber</b> vorgesehen.</br><b>Nach der Freigabe</b> kann die <b>Bezeichnung</b> und deren <b>Kennzeichnung (offiziell/nicht-offiziell) nicht mehr geändert</b> oder die <b>Version gelöscht</b> werden.</br>Sie können von hier aus in die aktive Instanz zurückkehren oder eine Version aufrufen.</br></br><b>Um die (aktuelle) Version dem Fördermittelgeber freizugeben, klicken Sie unter Aktion <i class=\"fas fa-eye\"></i>.</b></br></br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-versioning.php\" target=\"_blank\">Informationen zur Versionierung</a>",
+
+  // "item.version.history.info.alert.funder": "for funder",
+  "item.version.history.info.alert.funder": "Hier verwalten Sie die Versionen zum Vorhaben.</br></br><b>Was ist Versionierung?</b></br>Zuwendungsempfänger arbeiten immer in der aktiven Instanz und können die Informationen zum Vorhaben zu verschiedenen Zeitpunkten als unveränderbare Version „einfrieren“ und für den Fördermittelgeber zum Lesen freigegeben. Mit der Freigabe wird die Version als offiziell oder nicht-offiziell gekennzeichnet. </br><b>Offiziell</b> bedeutet, die Version <b>gehört zu einem bestimmten Berichtszeitpunkt</b>.</br><b>Nicht-offiziell</b> bedeutet, die Version ist <b>nur für aktuelle Informationszwecke</b> vorgesehen.</br>Zur Vermeidung von „Datenmüll“ sind die drei aktuellsten nicht-offiziellen Versionen im System gespeichert – ältere Versionen werden automatisch gelöscht.</br></br><b>Öffnen Sie die (aktuellste) freigegebene Version, um alle Details zum Vorhaben zu prüfen.</b></br><ul><li><b>Anmerkungen</b> zu Versionen können Sie über <i class=\"fas fa-edit\"></i> hinzufügen. Diese sind für Antragstellende/Zuwendungsempfänger nicht sichtbar.</li><li>Um eine freigegebene Version als <b>offiziell zu kennzeichnen</b>, wählen Sie <i class=\"fas fa-check\"></i>.</li><li>Über <i class=\"fas fa-times\"></i> kann die Version auf <b>nicht-offiziell zurückgesetzt</b> werden. Jetzt kann sie mit <i class=\"fas fa-trash\"></i> auch gelöscht werden. Diese Prozedur kann dann notwendig sein, wenn der Antragstellende/Zuwendungsempfänger eine offizielle Version zur Verfügung gestellt hat, diese aber durch eine korrigierte offizielle Version austauschen möchte.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-versioning.php\" target=_blank\">Informationen zur Versionierung</a></li></ul>",
+
+  // "search.filters.filter.synsicrisTypeEasyimport.label": "Search Executing Organisation (easy-Online)",
+  "search.filters.filter.synsicrisTypeEasyimport.label": "Suche Ausführende Stelle",
+
+  // "search.filters.filter.synsicrisAddressAddresspostcode.head": "Postcode",
+  "search.filters.filter.synsicrisAddressAddresspostcode.head": "Postleitzahl",
+
+  // "search.filters.filter.synsicrisAddressAddresspostcode.placeholder": "Postcode",
+  "search.filters.filter.synsicrisAddressAddresspostcode.placeholder": "Postleitzahl",
+
+  // "search.filters.filter.synsicrisAddressAddresspostcode.label": "Search Postcode",
+  "search.filters.filter.synsicrisAddressAddresspostcode.label": "Suche Postleitzahl",
+
+  // "search.filters.filter.synsicrisAddressAddresscity.head": "City",
+  "search.filters.filter.synsicrisAddressAddresscity.head": "Ort",
+
+  // "search.filters.filter.synsicrisAddressAddresscity.placeholder": "City",
+  "search.filters.filter.synsicrisAddressAddresscity.placeholder": "Ort",
+
+  // "search.filters.filter.synsicrisAddressAddresscity.label": "Search City",
+  "search.filters.filter.synsicrisAddressAddresscity.label": "Suche Ort",
+
+  // "search.filters.filter.organizationAddressAddresscountry.head": "Country/Federal state",
+  "search.filters.filter.organizationAddressAddresscountry.head": "Land/Bundesland",
+
+  // "search.filters.filter.organizationAddressAddresscountry.placeholder": "Country/Federal state",
+  "search.filters.filter.organizationAddressAddresscountry.placeholder": "Land/Bundesland",
+
+  // "search.filters.filter.organizationAddressAddresscountry.label": "Search Country/Federal state",
+  "search.filters.filter.organizationAddressAddresscountry.label": "Suche Land/Bundesland",
+
+  // "search.filters.filter.synsicrisTypeLegalform.label": "Search Legal form",
+  "search.filters.filter.synsicrisTypeLegalform.label": "Suche Rechtsform",
+
+  // "search.filters.filter.synsicrisTypeOrgform.label": "Suche Type of Organisation",
+  "search.filters.filter.synsicrisTypeOrgform.label": "Suche Organisationsform",
+
+  // "search.filters.filter.synsicrisTypeTransform.label": "Search Area of transition",
+  "search.filters.filter.synsicrisTypeTransform.label": "Suche Adressierter Transformationsbereich",
+
+  // "search.filters.filter.synsicrisTypeInfluence.label": "Search Influence on the impact",
+  "search.filters.filter.synsicrisTypeInfluence.label": "Suche Einfluss auf die Wirkung",
+
+  // "search.filters.filter.synsicrisTypeContribution.head": "Type of Contribution",
+  "search.filters.filter.synsicrisTypeContribution.head": "Art der Beteiligung",
+
+  // "search.filters.filter.synsicrisTypeContribution.placeholder": "Type of Contribution",
+  "search.filters.filter.synsicrisTypeContribution.placeholder": "Art der Beteiligung",
+
+  // "search.filters.filter.synsicrisTypeContribution.label": "Search Type of Contribution",
+  "search.filters.filter.synsicrisTypeContribution.label": "Suche Art der Beteiligung",
+
+  // "search.filters.filter.synsicrisSubjectAgrovoc.head": "Keyword (Agrovoc)",
+  "search.filters.filter.synsicrisSubjectAgrovoc.head": "Schlagwort (Agrovoc)",
+
+  // "search.filters.filter.synsicrisSubjectAgrovoc.placeholder": "Keyword (Agrovoc)",
+  "search.filters.filter.synsicrisSubjectAgrovoc.placeholder": "Schlagwort (Agrovoc)",
+
+  // "search.filters.filter.synsicrisSubjectAgrovoc.label": "Suche Keyword (Agrovoc)",
+  "search.filters.filter.synsicrisSubjectAgrovoc.label": "Suche Schlagwort (Agrovoc)",
+
+  // "search.filters.filter.dcAudience.head": "Audience",
+  "search.filters.filter.dcAudience.head": "Zielpublikum",
+
+  // "search.filters.filter.dcAudience.placeholder": "Audience",
+  "search.filters.filter.dcAudience.placeholder": "Zielpublikum",
+
+  // "search.filters.filter.dcAudience.label": "Search Audience",
+  "search.filters.filter.dcAudience.label": "Suche Zielpublikum",
+
+  // "search.filters.filter.synsicrisTypePatentuse.head": "Type of Utilization",
+  "search.filters.filter.synsicrisTypePatentuse.head": "Art der Verwertung",
+
+  // "search.filters.filter.synsicrisTypePatentuse.placeholder": "Type of Utilization",
+  "search.filters.filter.synsicrisTypePatentuse.placeholder": "Art der Verwertung",
+
+  // "search.filters.filter.synsicrisTypePatentuse.label": "Search Type of Utilization",
+  "search.filters.filter.synsicrisTypePatentuse.label": "Suche Art der Verwertung",
+
+  // "search.filters.filter.dctermsDateaccepted.head": "Date of Acceptance",
+  "search.filters.filter.dctermsDateaccepted.head": "Datum der Zulassung",
+
+  // "search.filters.filter.dctermsDateaccepted.placeholder": "Date of Acceptance",
+  "search.filters.filter.dctermsDateaccepted.placeholder": "Datum der Zulassung",
+
+  // "search.filters.filter.dctermsDateaccepted.label": "Suche Date of Acceptance",
+  "search.filters.filter.dctermsDateaccepted.label": "Suche Datum der Zulassung",
+
+  // "search.filters.filter.synsicrisDuration.head": "Duration",
+  "search.filters.filter.synsicrisDuration.head": "Dauer",
+
+  // "search.filters.filter.synsicrisDuration.placeholder": "Duration",
+  "search.filters.filter.synsicrisDuration.placeholder": "Dauer",
+
+  // "search.filters.filter.synsicrisDuration.label": "Search Duration",
+  "search.filters.filter.synsicrisDuration.label": "Suche Dauer",
+
+  // "search.filters.filter.oairecerifFundingParent.head": "Programme",
+  "search.filters.filter.oairecerifFundingParent.head": "Förderprogramm",
+
+  // "search.filters.filter.oairecerifFundingParent.placeholder": "Programme",
+  "search.filters.filter.oairecerifFundingParent.placeholder": "Förderprogramm",
+
+  // "search.filters.filter.oairecerifFundingParent.label": "Search Programme",
+  "search.filters.filter.oairecerifFundingParent.label": "Suche Förderprogramm",
+
+  // "search.filters.filter.synsicrisTitleRegistercourt.head": "Registercourt (City)",
+  "search.filters.filter.synsicrisTitleRegistercourt.head": "Registergericht (Ort)",
+
+  // "search.filters.filter.synsicrisTitleRegistercourt.placeholder": "Registercourt (City)",
+  "search.filters.filter.synsicrisTitleRegistercourt.placeholder": "Registergericht (Ort)",
+
+  // "search.filters.filter.synsicrisTitleRegistercourt.label": "Search Registercourt (City)",
+  "search.filters.filter.synsicrisTitleRegistercourt.label": "Suche Registergericht (Ort)",
+
+  // "search.filters.filter.synsicrisOrgunitsRegistercourt.head": "Registercourt (City)",
+  "search.filters.filter.synsicrisOrgunitsRegistercourt.head": "Registergericht (Ort)",
+
+  // "search.filters.filter.synsicrisOrgunitsRegistercourt.placeholder": "Registercourt (City)",
+  "search.filters.filter.synsicrisOrgunitsRegistercourt.placeholder": "Registergericht (Ort)",
+
+  // "search.filters.filter.synsicrisOrgunitsRegistercourt.label": "Search Registercourt (City)",
+  "search.filters.filter.synsicrisOrgunitsRegistercourt.label": "Suche Registergericht (Ort)",
+
+  // "search.filters.filter.synsicrisCoverageRegionalprimary.head": "Regional localisation/ outreach",
+  "search.filters.filter.synsicrisCoverageRegionalprimary.head": "Region der Anwendung",
+
+  // "search.filters.filter.synsicrisCoverageRegionalprimary.placeholder": "Regional localisation/ outreach",
+  "search.filters.filter.synsicrisCoverageRegionalprimary.placeholder": "Region der Anwendung",
+
+  // "search.filters.filter.synsicrisCoverageRegionalprimary.label": "Search Regional localisation/ outreach",
+  "search.filters.filter.synsicrisCoverageRegionalprimary.label": "Suche Region der Anwendung",
+
+  // "search.filters.filter.synsicrisRelationPartner.head": "Project partner",
+  "search.filters.filter.synsicrisRelationPartner.head": "Projektpartner",
+
+  // "search.filters.filter.synsicrisRelationPartner.label": "Search Project partner",
+  "search.filters.filter.synsicrisRelationPartner.label": "Suche Projektpartner",
+
+  // "search.filters.filter.synsicrisParticipantnumber.head": "Number of participants",
+  "search.filters.filter.synsicrisParticipantnumber.head": "Anzahl Teilnehmende",
+
+  // "search.filters.filter.synsicrisParticipantnumber.placeholder": "Number of participants",
+  "search.filters.filter.synsicrisParticipantnumber.placeholder": "Anzahl Teilnehmende",
+
+  // "search.filters.filter.synsicrisParticipantnumber.label": "Suche Number of participants",
+  "search.filters.filter.synsicrisParticipantnumber.label": "Suche Anzahl Teilnehmende",
+
+  // "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Start date",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Startdatum",
+
+  // "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Start date",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Startdatum",
+
+  // "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Search Start date",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Suche Startdatum",
+
+  // "search.filters.filter.synsicrisOairecerifEventCounty.head": "Country",
+  "search.filters.filter.synsicrisOairecerifEventCounty.head": "Land",
+
+  // "search.filters.filter.synsicrisOairecerifEventCountry.placeholder": "Country",
+  "search.filters.filter.synsicrisOairecerifEventCountry.placeholder": "Land",
+
+  // "search.filters.filter.synsicrisOairecerifEventCounty.label": "Search Country/Federal state",
+  "search.filters.filter.synsicrisOairecerifEventCounty.label": "Suche Land",
+
+  // "search.filters.filter.synsicrisSubjectPolitical.head": "Policy level",
+  "search.filters.filter.synsicrisSubjectPolitical.head": "Politikebene",
+
+  // "search.filters.filter.synsicrisSubjectPolitical.placeholder": "Policy level",
+  "search.filters.filter.synsicrisSubjectPolitical.placeholder": "Politikebene",
+
+  // "search.filters.filter.synsicrisSubjectPolitical.label": "Search Policy level",
+  "search.filters.filter.synsicrisSubjectPolitical.label": "Suche Politikebene",
+
+  // "secondStepSearchProjectItems.search.results.head": "Search Results",
+  "secondStepSearchProjectItems.search.results.head": "Suchergebnisse",
+
+  // "secondStepSearchProjectItemsForAdminAndFunders.search.results.head": "Search Results",
+  "secondStepSearchProjectItemsForAdminAndFunders.search.results.head": "Suchergebnisse",
+
+  // "layout.box.header.Project_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.Project_internalacc": "Interner Bereich Verbund",
+
+  // "layout.box.header.funding_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.funding_internalacc": "Interner Bereich Verbund",
+
+  // "layout.box.header.cooperationpartner_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.cooperationpartner_internalacc": "Interner Bereich Verbund",
+
+  // "layout.box.header.targetgroup_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.targetgroup_internalacc": "Interner Bereich Verbund",
+
+  // "layout.field.label.innovationpotential.synsicris.type.level": "Readinesslevel",
+  "layout.field.label.innovationpotential.synsicris.type.level": "Reifegrad",
+
+  // "version-history.breadcrumbs": "Version History",
+  "version-history.breadcrumbs": "Versionsverwaltung",
+
+  // "comment-list.header": "Comments",
+  "comment-list.header": "Kommentare"
 
 }
