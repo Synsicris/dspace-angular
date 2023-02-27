@@ -88,10 +88,10 @@ export class ItemCreateComponent implements OnInit {
       map(([isAuthenticated, entityType, hasAtLeastOneCollection, isCoordinator]) =>
         isAuthenticated &&
         isNotEmpty(entityType) &&
-          (this.canCreateProjectPartner(entityType, hasAtLeastOneCollection) ||
-           this.canCreateAnyProjectEntity(entityType, hasAtLeastOneCollection) ||
-           this.canCreateFunding(entityType, isCoordinator)
-          )
+        (this.canCreateProjectPartner(entityType, hasAtLeastOneCollection) ||
+          this.canCreateAnyProjectEntity(entityType, hasAtLeastOneCollection) ||
+          this.canCreateFunding(entityType, isCoordinator)
+        )
       ),
       take(1)
     ).subscribe((canShow) => this.canShow$.next(canShow));
@@ -100,6 +100,7 @@ export class ItemCreateComponent implements OnInit {
   protected canCreateProjectPartner(entityType, hasAtLeastOneCollection) {
     return this.relatedEntityType === FUNDING_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA && hasAtLeastOneCollection;
   }
+
   protected canCreateFunding(entityType: ItemType, isCoordinator: boolean) {
     return this.relatedEntityType === PROJECT_ENTITY && entityType.label === FUNDING_ENTITY && isCoordinator;
   }
@@ -140,30 +141,12 @@ export class ItemCreateComponent implements OnInit {
    * Check if user is coordinator for this project/funding
    */
   private checkIsCoordinator(): Observable<boolean> {
-    if (this.targetEntityType === FUNDING_ENTITY) {
-      return combineLatest([
-        this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfFunding, this.item.self, undefined),
-        this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
-      ).pipe(
-        map(([
-               isCoordinatorOfFunding,
-               isAdminstrator]) => isCoordinatorOfFunding || isAdminstrator),
-      );
-    } else {
-      return combineLatest([
-        this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager),
-        this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, this.item.self, undefined),
-        this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.item.self, undefined),
-        this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
-      ).pipe(
-        map(([
-               isFunderOrganizational,
-               isFunderProject,
-               isCoordinatorOfProject,
-               isAdminstrator
-             ]) => isFunderOrganizational || isFunderProject || isCoordinatorOfProject || isAdminstrator),
-      );
-    }
+    return combineLatest([
+      this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.item.self, undefined),
+      this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
+    ).pipe(
+      map(([isCoordinatorOfFunding, isAdminstrator]) => isCoordinatorOfFunding || isAdminstrator),
+    );
   }
 
   openDialog() {
@@ -201,7 +184,11 @@ export class ItemCreateComponent implements OnInit {
    * Open creation sub-project modal
    */
   createSubproject() {
-    const modalRef = this.modalService.open(CreateProjectComponent, { keyboard: false, backdrop: 'static', size: 'lg' });
+    const modalRef = this.modalService.open(CreateProjectComponent, {
+      keyboard: false,
+      backdrop: 'static',
+      size: 'lg'
+    });
     modalRef.componentInstance.isSubproject = true;
     modalRef.componentInstance.parentProjectUUID = this.scope;
   }
