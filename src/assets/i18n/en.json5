@@ -5822,6 +5822,8 @@
 
   "search.results.no-results-link": "quotes around it (Anführungszeichen)",
 
+  "search.results.no-results.custom": "No items are present",
+
   "search.results.empty": "Your search returned no results.",
 
   "search.results.view-result": "View",
@@ -9161,6 +9163,10 @@
   "query-builder.synsicris.accordion.step1.header": "Step 1",
 
   "query-builder.synsicris.accordion.step2.header": "Step 2",
+
+  "query-builder.synsicris.accordion.step1.alert": "Box 1 for helptext",
+
+  "query-builder.synsicris.accordion.step2.alert": "Box 2 for helptext",
 
   "query-builder.synsicris.label.entityType.Person": "Person",
 

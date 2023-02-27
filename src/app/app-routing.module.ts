@@ -68,7 +68,7 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             path: 'community-list',
             loadChildren: () => import('./community-list-page/community-list-page.module')
               .then((m) => m.CommunityListPageModule),
-            canActivate: [EndUserAgreementCurrentUserGuard]
+            canActivate: [EndUserAgreementCurrentUserGuard, SiteAdministratorGuard]
           },
           {
             path: 'id',
@@ -184,12 +184,12 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
               .then((m) => m.MyDSpacePageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
-          {
-            path: 'search',
-            loadChildren: () => import('./search-page/search-page-routing.module')
-              .then((m) => m.SearchPageRoutingModule),
-            canActivate: [EndUserAgreementCurrentUserGuard]
-          },
+//          {
+//            path: 'search',
+//            loadChildren: () => import('./search-page/search-page-routing.module')
+//              .then((m) => m.SearchPageRoutingModule),
+//            canActivate: [EndUserAgreementCurrentUserGuard]
+//          },
           {
             path: 'browse/projects',
             loadChildren: () => import('./browse-by-projects-page/browse-by-projects-page.module')
