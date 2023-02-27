@@ -1,5 +1,4 @@
 import { LayoutBox } from '../../../cris-layout/enums/layout-box.enum';
-import { isEqual } from 'lodash';
 import { SortDirection, SortOptions, } from '../../../core/cache/models/sort-options.model';
 import { PaginationComponentOptions } from '../../pagination/pagination-component-options.model';
 import { PaginatedSearchOptions } from '../../search/models/paginated-search-options.model';
@@ -72,7 +71,6 @@ export class CommentListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.itemService.findById(this.itemUuid).pipe(
       getFirstCompletedRemoteData()
     ).subscribe((itemRD: RemoteData<Item>) => {
@@ -89,28 +87,7 @@ export class CommentListComponent implements OnInit {
    * @readonly
    */
   get getConfiguration() {
-    let configName = `${LayoutBox.COMMENT}.`;
-    if (isEqual(this.type, 'impact_pathway_form')) {
-      configName = configName.concat('impactpathwaystep.comment');
-    } else if (this.type.includes('exploitation_plan_step')) {
-      configName = configName.concat('exploitationplanstep.comment');
-    } else if (isEqual(this.type, 'workingplan')) {
-      configName = configName.concat('workingplan.comment');
-    } else if (isEqual(
-      this.type,
-      'impact_pathway_step_type_2_task_objective_edit_form'
-    )) {
-      configName = configName.concat('proj_objective.proj_objective_comment');
-    } else if (
-      isEqual(
-        this.type,
-        'impact_pathway_step_type_3_task_objective_edit_form'
-      )
-    ) {
-      configName = configName.concat('ia_objective.ia_objective_comment');
-    }
-
-    return configName;
+    return `${LayoutBox.COMMENT}.${this.relatedEntityType}.${this.relatedEntityType}_comment`;
   }
 
   /**

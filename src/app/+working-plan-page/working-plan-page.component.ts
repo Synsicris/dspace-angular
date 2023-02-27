@@ -15,7 +15,7 @@ import { environment } from '../../environments/environment';
 import { ProjectVersionService } from '../core/project/project-version.service';
 
 @Component({
-  selector: 'ipw-working-plan-page',
+  selector: 'ds-working-plan-page',
   templateUrl: './working-plan-page.component.html'
 })
 export class WorkingPlanPageComponent implements OnInit {

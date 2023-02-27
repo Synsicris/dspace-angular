@@ -427,31 +427,26 @@ export class WorkingPlanService {
   }
 
   initCompareWorkpackageStepsFromParentItem(targetWorkpackageId: string, targetItem: Item, versionedWorkpackageId: string): Observable<WorkpackageStep[]> {
-    const relatedTaskMetadata = Metadata.all(targetItem.metadata, environment.workingPlan.workingPlanStepRelationMetadata);
-    if (isEmpty(relatedTaskMetadata) || isEmpty(versionedWorkpackageId)) {
-      return observableOf([]);
-    } else {
-      return this.projectVersionService.compareItemChildrenByMetadata(
-        targetWorkpackageId,
-        versionedWorkpackageId,
-        environment.workingPlan.workingPlanStepRelationMetadata).pipe(
-          mergeMap((compareList: ComparedVersionItem[]) => {
-            return observableFrom(compareList).pipe(
-              concatMap((compareItem: ComparedVersionItem) => observableOf(this.initWorkpackageStepFromCompareItem(
-                compareItem,
-                targetWorkpackageId)
-              )),
-              reduce((acc: any, value: any) => {
-                if (isNotNull(value)) {
-                  return [...acc, value];
-                } else {
-                  return acc;
-                }
-              }, [])
-            );
-          })
+    return this.projectVersionService.compareItemChildrenByMetadata(
+      targetWorkpackageId,
+      versionedWorkpackageId,
+      environment.workingPlan.workingPlanStepRelationMetadata).pipe(
+      mergeMap((compareList: ComparedVersionItem[]) => {
+        return observableFrom(compareList).pipe(
+          concatMap((compareItem: ComparedVersionItem) => observableOf(this.initWorkpackageStepFromCompareItem(
+            compareItem,
+            targetWorkpackageId)
+          )),
+          reduce((acc: any, value: any) => {
+            if (isNotNull(value)) {
+              return [...acc, value];
+            } else {
+              return acc;
+            }
+          }, [])
         );
-    }
+      })
+    );
   }
 
   initWorkingPlan(workpackageListItem: WorkpackageSearchItem[]): Observable<Workpackage[]> {

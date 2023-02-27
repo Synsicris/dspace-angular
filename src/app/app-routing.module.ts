@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, NoPreloading } from '@angular/router';
+import { NoPreloading, RouterModule } from '@angular/router';
 import { AuthBlockingGuard } from './core/auth/auth-blocking.guard';
 
 import { AuthenticatedGuard } from './core/auth/authenticated.guard';
@@ -10,9 +10,9 @@ import {
   ACCESS_CONTROL_MODULE_PATH,
   ADMIN_MODULE_PATH,
   BITSTREAM_MODULE_PATH,
-  ERROR_PAGE,
   BULK_IMPORT_PATH,
   EDIT_ITEM_PATH,
+  ERROR_PAGE,
   FORBIDDEN_PATH,
   FORGOT_PASSWORD_PATH,
   HEALTH_PAGE_PATH,
@@ -44,7 +44,6 @@ import { ServerCheckGuard } from './core/server-check/server-check.guard';
 import { MenuResolver } from './menu.resolver';
 import { ThemedPageErrorComponent } from './page-error/themed-page-error.component';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
-import { StatisticsAdministratorGuard } from './core/data/feature-authorization/feature-authorization-guard/statistics-administrator.guard';
 
 @NgModule({
   imports: [
@@ -69,7 +68,7 @@ import { StatisticsAdministratorGuard } from './core/data/feature-authorization/
             path: 'community-list',
             loadChildren: () => import('./community-list-page/community-list-page.module')
               .then((m) => m.CommunityListPageModule),
-            canActivate: [EndUserAgreementCurrentUserGuard]
+            canActivate: [EndUserAgreementCurrentUserGuard, SiteAdministratorGuard]
           },
           {
             path: 'id',
@@ -150,6 +149,12 @@ import { StatisticsAdministratorGuard } from './core/data/feature-authorization/
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
           {
+            path: 'entities/funding/:id/interimreport',
+            loadChildren: () => import('./interim-report-page/interim-report-page.module')
+              .then((m) => m.InterimReportPageModule),
+            canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
+          },
+          {
             path: ITEM_MODULE_PATH,
             loadChildren: () => import('./item-page/item-page.module')
               .then((m) => m.ItemPageModule),
@@ -179,12 +184,12 @@ import { StatisticsAdministratorGuard } from './core/data/feature-authorization/
               .then((m) => m.MyDSpacePageModule),
             canActivate: [AuthenticatedGuard, EndUserAgreementCurrentUserGuard]
           },
-          {
-            path: 'search',
-            loadChildren: () => import('./search-page/search-page-routing.module')
-              .then((m) => m.SearchPageRoutingModule),
-            canActivate: [EndUserAgreementCurrentUserGuard]
-          },
+//          {
+//            path: 'search',
+//            loadChildren: () => import('./search-page/search-page-routing.module')
+//              .then((m) => m.SearchPageRoutingModule),
+//            canActivate: [EndUserAgreementCurrentUserGuard]
+//          },
           {
             path: 'browse/projects',
             loadChildren: () => import('./browse-by-projects-page/browse-by-projects-page.module')

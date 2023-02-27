@@ -6,7 +6,7 @@ import { Workpackage } from '../core/models/workpackage-step.model';
 import { Item } from '../../core/shared/item.model';
 
 @Component({
-  selector: 'ipw-working-plan-chart',
+  selector: 'ds-working-plan-chart',
   templateUrl: './working-plan-chart.component.html',
   styleUrls: ['./working-plan-chart.component.scss'],
 })

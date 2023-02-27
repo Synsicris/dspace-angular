@@ -79,6 +79,7 @@ export interface ImpactPathwayState {
   links: ImpactPathwayLinks;
   collapsed: any;
   compareMode: boolean;
+  compareProcessing: boolean;
   compareImpactPathwayId: string;
   compareImpactPathwayStepId: string;
 }
@@ -104,6 +105,7 @@ const impactPathwayInitialState: ImpactPathwayState = {
   },
   collapsed: {},
   compareMode: false,
+  compareProcessing: false,
   compareImpactPathwayId: '',
   compareImpactPathwayStepId: ''
 };
@@ -962,7 +964,7 @@ function initCompare(state: ImpactPathwayState, action: InitCompareAction) {
   return Object.assign({}, state, {
     compareImpactPathwayId: action.payload.compareImpactPathwayId,
     compareMode: true,
-    processing: true
+    compareProcessing: true
   });
 }
 
@@ -983,6 +985,7 @@ function stopCompare(state: ImpactPathwayState, action: StopCompareImpactPathway
     objectsBeforeCompare: {},
     compareImpactPathwayId: null,
     compareMode: false,
+    compareProcessing: false,
   });
 }
 
@@ -1002,7 +1005,7 @@ function replaceImpactPathwaySteps(state: ImpactPathwayState, action: InitCompar
   const objects = state.objects;
   const objectsBeforeCompare = Object.assign({}, state.objects);
 
-  return Object.assign({}, state, { processing: false }, {
+  return Object.assign({}, state, { compareProcessing: false }, {
     objects: Object.assign({}, objects, {
       [action.payload.impactPathwayId]: Object.assign(new ImpactPathway(), objects[action.payload.impactPathwayId], { steps: action.payload.steps })
     }),

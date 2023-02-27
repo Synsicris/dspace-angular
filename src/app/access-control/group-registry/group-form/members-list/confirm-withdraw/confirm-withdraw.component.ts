@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EpersonDtoModel } from '../../../../../core/eperson/models/eperson-dto.model';
 
@@ -14,8 +14,9 @@ export class ConfirmWithdrawComponent {
 
   constructor(protected activeModal: NgbActiveModal) { }
 
-  // tslint:disable-next-line:no-empty
-  confirm() { }
+  confirm() {
+    return;
+  }
 
   close() {
     this.activeModal.dismiss();

@@ -2,7 +2,7 @@ import { Directive, ElementRef, Input, Renderer2, RendererStyleFlags2 } from '@a
 import { ImpactPathwayTaskType } from '../../../core/models/impact-pathway-task-type';
 
 @Directive({
-  selector: '[ipwTaskColor]'
+  selector: '[dsTaskColor]'
 })
 export class TaskColorDirective {
 

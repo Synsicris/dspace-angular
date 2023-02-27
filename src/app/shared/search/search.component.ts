@@ -65,6 +65,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Input() configurationList: SearchConfigurationOption[] = [];
 
   /**
+   * Custom message if no result
+   */
+  @Input() notFoundMessageKey: string = 'search.results.no-results';
+
+  /**
    * The current context
    * If empty, 'search' is used
    */

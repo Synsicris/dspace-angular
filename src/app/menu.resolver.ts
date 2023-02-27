@@ -100,23 +100,6 @@ export class MenuResolver implements Resolve<boolean> {
   createPublicMenu$(): Observable<boolean> {
     const menuList: any[] = [];
 
-    /* Communities & Collections tree */
-    const CommunityCollectionMenuItem = {
-      id: `browse_global_communities_and_collections`,
-      active: false,
-      visible: environment.layout.navbar.showCommunityCollection,
-      index: 0,
-      model: {
-        type: MenuItemType.LINK,
-        text: `menu.section.communities_and_collections`,
-        link: `/community-list`
-      } as LinkMenuItemModel
-    };
-
-    if (environment.layout.navbar.showCommunityCollection) {
-      menuList.push(CommunityCollectionMenuItem);
-    }
-
     menuList.push({
       id: 'browse_by_projects',
       active: false,
@@ -130,11 +113,12 @@ export class MenuResolver implements Resolve<boolean> {
     });
 
     // Read the different Browse-By types from config and add them to the browse menu
-    this.sectionDataService.findVisibleSections().pipe(
-      getFirstCompletedRemoteData()
-    ).subscribe( (sectionDefListRD: RemoteData<PaginatedList<Section>>) => {
+    observableCombineLatest(
+      [this.sectionDataService.findVisibleSections().pipe(getFirstCompletedRemoteData()),
+              this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
+      ).subscribe( ([sectionDefListRD, isSiteAdmin]: [ RemoteData<PaginatedList<Section>>, boolean]) => {
       if (sectionDefListRD.hasSucceeded) {
-        sectionDefListRD.payload.page.forEach((section) => {
+          sectionDefListRD.payload.page.forEach((section) => {
           menuList.push({
             id: `explore_${section.id}`,
             active: false,
@@ -145,9 +129,20 @@ export class MenuResolver implements Resolve<boolean> {
               link: `/explore/${section.id}`
             } as LinkMenuItemModel
           });
-
         });
       }
+      menuList.push({
+          id: `browse_global_communities_and_collections`,
+          active: false,
+          visible: isSiteAdmin,
+          index: 0,
+          model: {
+            type: MenuItemType.LINK,
+            text: `menu.section.communities_and_collections`,
+            link: `/community-list`
+        } as LinkMenuItemModel
+      });
+
       menuList.forEach((menuSection) => this.menuService.addSection(MenuID.PUBLIC, Object.assign(menuSection, {
         shouldPersistOnRouteChange: true
       })));

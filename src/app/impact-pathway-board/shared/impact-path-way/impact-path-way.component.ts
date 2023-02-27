@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, map, mergeMap, take } from 'rxjs/operators';
 import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -18,10 +19,9 @@ import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-m
 import { hasValue } from '../../../shared/empty.util';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { environment } from '../../../../environments/environment';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'ipw-impact-path-way',
+  selector: 'ds-impact-path-way',
   styleUrls: ['./impact-path-way.component.scss'],
   templateUrl: './impact-path-way.component.html'
 })
@@ -76,7 +76,8 @@ export class ImpactPathWayComponent implements OnInit {
    */
   public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  public entityType: string;
+  public compareProcessing$: Observable<boolean> = observableOf(false);
+  public impactPathwayStepEntityType: string;
 
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
     private authorizationService: AuthorizationDataService,
@@ -89,6 +90,7 @@ export class ImpactPathWayComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.compareProcessing$ = this.impactPathwayService.isCompareProcessing();
     this.formConfig$ = this.impactPathwayService.getImpactPathwayFormConfig();
     this.impactPathwayService.retrieveObjectItem(this.impactPathway.id).pipe(
       mergeMap((item: Item) => this.authorizationService.isAuthorized(FeatureID.CanDelete, item.self, undefined)),
@@ -115,7 +117,7 @@ export class ImpactPathWayComponent implements OnInit {
       this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
 
-    this.entityType = this.impactPathWayItem.entityType;
+    this.impactPathwayStepEntityType = environment.impactPathway.impactPathwayStepEntity;
   }
 
   ngAfterContentChecked() {

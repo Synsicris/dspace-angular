@@ -57,7 +57,7 @@
               <div class="row m-0" *ngIf="(formConfig$ | async)?.name">
                 <div class="col-2 p-0" *ngFor="let data of impactPathway.steps | dsGetIpwData">
                   <ds-comment-list
-                    [relatedEntityType]="entityType"
+                    [relatedEntityType]="impactPathwayStepEntityType"
                     [itemUuid]="data.id"
                     [title]="data.title"
                     [projectCommunityId]="projectCommunityId"
@@ -70,17 +70,18 @@
         </ngb-accordion>
       </div>
     </ng-container>
-   <div class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
-    <ipw-impact-path-way-step *ngFor="let step of impactPathway.steps" ipwStepColor class="vertical-step"
+  <ds-themed-loading *ngIf="(compareProcessing$ | async)"></ds-themed-loading>
+  <div *ngIf="!(compareProcessing$ | async)" class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
+    <ds-impact-path-way-step *ngFor="let step of impactPathway.steps" dsStepColor class="vertical-step"
                               [projectCommunityId]="projectCommunityId"
                               [impactPathwayId]="impactPathway.id"
                               [impactPathwayStepId]="step.id"
                               [stepType]="step.type"
                               [allImpactPathwayStepIds]="getImpactPathwayStepIds()"
                               [compareMode]="(compareMode | async)"
-                              [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"></ipw-impact-path-way-step>
+                              [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"></ds-impact-path-way-step>
   </div>
-  <ipw-editable-textarea *ngIf="impactPathway"
+  <ds-editable-textarea *ngIf="impactPathway"
                          [editMode]="getEditMode()"
                          [formConfig]="formConfig$"
                          [formSectionName]="getSectionName()"
@@ -90,7 +91,7 @@
                          [content]="impactPathway.description"
                          [disabled]="(compareMode | async) || !(canEditButton$ | async)"
                          (contentChange)="updateImpactPathway($event)">
-  </ipw-editable-textarea>
+  </ds-editable-textarea>
 </div>
 
 <div *ngIf="(loaded | async)">

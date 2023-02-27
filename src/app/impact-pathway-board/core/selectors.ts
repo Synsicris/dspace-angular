@@ -70,6 +70,15 @@ export const isImpactPathwayProcessingSelector = createSelector(_getImpactPathwa
 );
 
 /**
+ * Returns true if the user a operation is processing.
+ * @function isImpactPathwayProcessingSelector
+ * @return {boolean}
+ */
+export const isImpactPathwayCompareProcessingSelector = createSelector(_getImpactPathwayState,
+  (state: ImpactPathwayState) => state.compareProcessing
+);
+
+/**
  * Returns true if the user a delete operation is processing.
  * @function isImpactPathwayRemovingSelector
  * @return {boolean}

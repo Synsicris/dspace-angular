@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { slide } from '../../../shared/animations/slide';
 
 @Component({
-  selector: 'ipw-collapsable-panel',
+  selector: 'ds-collapsable-panel',
   styleUrls: ['./collapsable-panel.component.scss'],
   templateUrl: './collapsable-panel.component.html',
   changeDetection: ChangeDetectionStrategy.Default,

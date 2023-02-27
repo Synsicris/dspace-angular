@@ -126,12 +126,16 @@ export class CommentCreateComponent implements OnInit {
           if (!isVersionOfAnItem) {
             return of(false);
           } else {
-            const uniqueId = projectItemRD.payload.firstMetadataValue(VERSION_UNIQUE_ID);
-            const projectId = uniqueId.split('_')[0];
-            return this.itemService.findById(projectId).pipe(
-              getFirstCompletedRemoteData(),
-              switchMap((projItemRD: RemoteData<Item>) => this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, projItemRD.payload.self))
-            );
+            const uniqueId = projectItemRD?.payload?.firstMetadataValue(VERSION_UNIQUE_ID);
+            if (isEmpty(uniqueId)) {
+              return of(false);
+            } else {
+              const projectId = uniqueId.split('_')[0];
+              return this.itemService.findById(projectId).pipe(
+                getFirstCompletedRemoteData(),
+                switchMap((projItemRD: RemoteData<Item>) => this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, projItemRD.payload.self))
+              );
+            }
           }
         })
       );
