@@ -6136,6 +6136,8 @@
 
   "submission.import-external.back-to-my-dspace": "Back to MyDSpace",
 
+  "submission.import-external.back-to-previous": "Back to previous page",
+
   "submission.import-external.search.placeholder": "Search the external source",
 
   "submission.import-external.search.button": "Search",

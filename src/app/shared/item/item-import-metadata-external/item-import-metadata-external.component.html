@@ -1,3 +1,13 @@
+<button *ngIf="canBeShown$ | async"
+        class="btn btn-outline-primary ml-2 mt-auto"
+        (click)="openPage()"
+        role="button"
+        title="{{ 'mydspace.new-submission-external' | translate }}">
+  <i class="fa fa-file-import" aria-hidden="true"></i>
+  {{'item-export-external-metadata.btn.label' | translate}}
+</button>
+<!--
+
 <div
   class="w-100"
   display="dynamic"
@@ -17,3 +27,4 @@
     {{'item-export-external-metadata.btn.label' | translate}}
   </button>
 </div>
+-->

@@ -15,13 +15,18 @@ import { Context } from '../../core/shared/context.model';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
 import { RouteService } from '../../core/services/route.service';
 import { createSuccessfulRemoteDataObject } from '../../shared/remote-data.utils';
-import { SubmissionImportExternalPreviewComponent } from './import-external-preview/submission-import-external-preview.component';
+import {
+  SubmissionImportExternalPreviewComponent
+} from './import-external-preview/submission-import-external-preview.component';
 import { fadeIn } from '../../shared/animations/fade';
 import { PageInfo } from '../../core/shared/page-info.model';
 import { hasValue, isNotEmpty } from '../../shared/empty.util';
-import { getFinishedRemoteData } from '../../core/shared/operators';
+import { getFinishedRemoteData, getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { NONE_ENTITY_TYPE } from '../../core/shared/item-relationships/item-type.resource-type';
 import { MYDSPACE_ROUTE } from '../../my-dspace-page/my-dspace-page.component';
+import { ProjectDataService } from '../../core/project/project-data.service';
+import { Item } from '../../core/shared/item.model';
+import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 
 /**
  * This component allows to submit a new workspaceitem importing the data from an external source.
@@ -92,6 +97,12 @@ export class SubmissionImportExternalComponent implements OnInit, OnDestroy {
   public mydspaceRoute = MYDSPACE_ROUTE;
 
   /**
+   * represent the project item retrieved by the current scope
+   * @protected
+   */
+  protected projectItem: Item;
+
+  /**
    * The subscription to unsubscribe
    */
   protected subs: Subscription[] = [];
@@ -100,6 +111,7 @@ export class SubmissionImportExternalComponent implements OnInit, OnDestroy {
 
   /**
    * Initialize the component variables.
+   * @param {ProjectDataService} projectService
    * @param {SearchConfigurationService} searchConfigService
    * @param {ExternalSourceDataService} externalService
    * @param {RouteService} routeService
@@ -107,6 +119,7 @@ export class SubmissionImportExternalComponent implements OnInit, OnDestroy {
    * @param {NgbModal} modalService
    */
   constructor(
+    public projectService: ProjectDataService,
     public searchConfigService: SearchConfigurationService,
     private externalService: ExternalSourceDataService,
     private routeService: RouteService,
@@ -141,6 +154,17 @@ export class SubmissionImportExternalComponent implements OnInit, OnDestroy {
       this.selectLabel(entity);
       this.retrieveExternalSources();
     }));
+
+    this.routeService.getQueryParameterValue('scope').pipe(
+      filter((scope: string) => isNotEmpty(scope)),
+      switchMap((scope: string) => {
+        return this.projectService.getEntityItemByCommunityId(scope).pipe(
+          getFirstCompletedRemoteData()
+        );
+      })
+    ).subscribe((itemRD: RemoteData<Item>) => {
+      this.projectItem = itemRD.hasSucceeded ? itemRD.payload : null;
+    });
   }
 
   /**
@@ -173,6 +197,14 @@ export class SubmissionImportExternalComponent implements OnInit, OnDestroy {
     modalComp.externalSourceEntry = entry;
     modalComp.scope = this.routeData.scope;
     modalComp.labelPrefix = this.label;
+  }
+
+  redirectToProjectPage(): void {
+    if (this.projectItem) {
+      this.router.navigate([getItemPageRoute(this.projectItem)]);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   /**
