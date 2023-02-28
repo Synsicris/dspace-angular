@@ -40,6 +40,12 @@ export class IpwItemMetadataStatusDirective implements OnChanges  {
         case ComparedVersionItemStatus.Canceled:
           iconClasses = ['fas', 'fa-ban'];
           break;
+        case ComparedVersionItemStatus.Archieved:
+          iconClasses = ['fas', 'fa-check-circle'];
+          break;
+        case ComparedVersionItemStatus.PartlyArchieved:
+          iconClasses = ['fas', 'fa-hourglass-half'];
+          break;
       }
       iconClasses = iconClasses.concat('text-warning');
     }
