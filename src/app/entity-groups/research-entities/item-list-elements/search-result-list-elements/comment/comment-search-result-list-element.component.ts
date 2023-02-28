@@ -178,7 +178,7 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
    * Filtering the edit modes for comment
    */
   private isEditModeAllowed(mode: EditItemMode) {
-    return mode.name === 'FULL' || mode.name === environment.comments.commentEditMode || mode.name === 'OWNER';
+    return mode.name === 'FULL' || mode.name === environment.comments.commentEditMode;
   }
 
   /**
