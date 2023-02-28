@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h2>{{'submission.import-external.preview.title.' + labelPrefix | translate}}</h2>
-  <button type="button" class="close"
+  <button *ngIf="!(this.loading$ | async)" type="button" class="close"
           (click)="closeMetadataModal()" aria-label="Close">
       <span aria-hidden="true">×</span>
   </button>
@@ -33,10 +33,14 @@
   </div>
 </div>
 <div class="modal-footer">
-  <div class="row"></div>
-  <div class="col-md-12 text-right">
-    <button class="btn btn-success" (click)="import()" role="button">
-      <i class="fa fa-file-import" aria-hidden="true"></i> {{'submission.import-external.preview.button.import' | translate}}
-    </button>
+  <div class="row w-100">
+    <div class="col-md-12 text-right">
+      <button *ngIf="!(this.loading$ | async)" class="btn btn-success" (click)="import()" role="button">
+            <i class="fa fa-file-import" aria-hidden="true"></i> {{'submission.import-external.preview.button.import' | translate}}
+      </button>
+      <button *ngIf="this.loading$ | async"  class="btn btn-outline-success w-25">
+        <ds-themed-loading [showMessage]="false" [spinner]="true"></ds-themed-loading>
+      </button>
+    </div>
   </div>
 </div>

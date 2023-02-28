@@ -3613,6 +3613,8 @@
 
   "item-export.process.title": "Bulk export item",
 
+  "item-export-external-metadata.btn.label": "Import metadata",
+
   "journal.listelement.badge": "Journal",
 
   "journal.page.description": "Description",
@@ -5822,6 +5824,8 @@
 
   "search.results.no-results-link": "quotes around it (Anführungszeichen)",
 
+  "search.results.no-results.custom": "No items are present",
+
   "search.results.empty": "Your search returned no results.",
 
   "search.results.view-result": "View",
@@ -6131,6 +6135,8 @@
   "submission.import-external.page.noentity": "An entity type must be selected in order to use this page. Select it using the 'Import metadata from an external source' button in 'MyDspace' page.",
 
   "submission.import-external.back-to-my-dspace": "Back to MyDSpace",
+
+  "submission.import-external.back-to-previous": "Back to previous page",
 
   "submission.import-external.search.placeholder": "Search the external source",
 
@@ -9161,6 +9167,10 @@
   "query-builder.synsicris.accordion.step1.header": "Step 1",
 
   "query-builder.synsicris.accordion.step2.header": "Step 2",
+
+  "query-builder.synsicris.accordion.step1.alert": "Box 1 for helptext",
+
+  "query-builder.synsicris.accordion.step2.alert": "Box 2 for helptext",
 
   "query-builder.synsicris.label.entityType.Person": "Person",
 

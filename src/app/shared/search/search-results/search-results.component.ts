@@ -80,6 +80,11 @@ export class SearchResultsComponent {
   @Input() disableHeader = false;
 
   /**
+   * Custom message if no result
+   */
+  @Input() notFoundMessageKey: string = 'search.results.no-results';
+
+  /**
    * A boolean representing if result entries are selectable
    */
   @Input() selectable = false;
