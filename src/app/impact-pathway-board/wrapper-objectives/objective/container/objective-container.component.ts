@@ -16,7 +16,7 @@ import { environment } from '../../../../../environments/environment';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'ipw-objective-container',
+  selector: 'ds-objective-container',
   styleUrls: ['../../../shared/drag-and-drop-container.component.scss', './objective-container.component.scss'],
   templateUrl: './objective-container.component.html'
 })
@@ -118,10 +118,6 @@ export class ObjectiveContainerComponent extends DragAndDropContainerComponent {
       true
     );
     modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
-    modalRef.componentInstance.vocabularyName = this.impactPathwayService.getTaskTypeAuthorityName(
-      this.impactPathwayStep.type,
-      true
-    );
     modalRef.componentInstance.searchConfiguration = this.impactPathwayService.getSearchTaskConfigName(
       this.impactPathwayStep.type,
       true

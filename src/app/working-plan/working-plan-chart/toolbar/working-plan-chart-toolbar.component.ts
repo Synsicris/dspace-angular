@@ -21,7 +21,7 @@ import { Item } from '../../../core/shared/item.model';
  * @title Tree with nested nodes
  */
 @Component({
-  selector: 'ipw-working-plan-chart-toolbar',
+  selector: 'ds-working-plan-chart-toolbar',
   templateUrl: './working-plan-chart-toolbar.component.html',
   styleUrls: ['./working-plan-chart-toolbar.component.scss']
 })
@@ -101,7 +101,6 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
     modalRef.componentInstance.excludeListId = [];
     modalRef.componentInstance.hasSearch = true;
-    modalRef.componentInstance.vocabularyName = environment.workingPlan.workpackageTypeAuthority;
     modalRef.componentInstance.searchConfiguration = environment.workingPlan.allUnlinkedWorkingPlanObjSearchConfigName;
     modalRef.componentInstance.scope = this.projectCommunityId;
     this.subs.push(

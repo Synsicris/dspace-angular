@@ -1,7 +1,7 @@
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
-import { CollectionDataService } from './../../core/data/collection-data.service';
-import { EditItemDataService } from './../../core/submission/edititem-data.service';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CollectionDataService } from '../../core/data/collection-data.service';
+import { EditItemDataService } from '../../core/submission/edititem-data.service';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { WorkingPlanChartComponent } from './working-plan-chart.component';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -18,7 +18,7 @@ describe('WorkingPlanChartComponent', () => {
   const eiResult = 'eiResult' as any;
   let translateService: TranslateService;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
 
     editItemDataService = jasmine.createSpyObj('EditItemDataService', {
       findById: eiResult
@@ -28,9 +28,7 @@ describe('WorkingPlanChartComponent', () => {
 
     const collectionDataServiceStub = jasmine.createSpyObj('CollectionDataService', {
       getMappedItems: () => observableOf(emptyList),
-      /* tslint:disable:no-empty */
-      clearMappedItemsRequests: () => { }
-      /* tslint:enable:no-empty */
+      clearMappedItemsRequests: () => null
     });
     TestBed.configureTestingModule({
       declarations: [WorkingPlanChartComponent],

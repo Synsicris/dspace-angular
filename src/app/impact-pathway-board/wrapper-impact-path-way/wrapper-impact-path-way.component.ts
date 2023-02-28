@@ -4,7 +4,7 @@ import { ImpactPathway } from '../core/models/impact-pathway.model';
 import { Item } from '../../core/shared/item.model';
 
 @Component({
-  selector: 'ipw-wrapper-impact-path-way',
+  selector: 'ds-wrapper-impact-path-way',
   styleUrls: ['./wrapper-impact-path-way.component.scss'],
   templateUrl: './wrapper-impact-path-way.component.html'
 })

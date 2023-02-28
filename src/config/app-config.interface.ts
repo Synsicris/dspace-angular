@@ -31,9 +31,9 @@ import { AttachmentRenderingConfig } from './attachment-rendering.config';
 import { ImpactPathwayConfig } from './impact-pathway-config.interface';
 import { WorkingPlanConfig } from './working-plan-config.interface';
 import { ProjectsConfig } from './projects-config.interface';
-import { ExploitationPlanConfig } from './exploitation-plan.config';
 import { DisplayItemSearchResultConfig } from './display-search-result-config.interface';
 import { CommentConfig } from './comment.config';
+import { QuestionsBoardConfig } from './questions-board.config';
 
 interface AppConfig extends Config {
   ui: UIServerConfig;
@@ -71,7 +71,8 @@ interface AppConfig extends Config {
   impactPathway: ImpactPathwayConfig;
   workingPlan: WorkingPlanConfig;
   projects: ProjectsConfig;
-  exploitationPlan: ExploitationPlanConfig;
+  exploitationPlan: QuestionsBoardConfig;
+  interimReport: QuestionsBoardConfig;
   displayItemSearchResult?: DisplayItemSearchResultConfig;
   comments: CommentConfig;
 }

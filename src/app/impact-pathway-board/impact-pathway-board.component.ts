@@ -9,7 +9,7 @@ import { isNotEmpty } from '../shared/empty.util';
 import { Item } from '../core/shared/item.model';
 
 @Component({
-  selector: 'ipw-dashboard',
+  selector: 'ds-impact-pathway-board',
   styleUrls: ['./impact-pathway-board.component.scss'],
   templateUrl: './impact-pathway-board.component.html'
 })

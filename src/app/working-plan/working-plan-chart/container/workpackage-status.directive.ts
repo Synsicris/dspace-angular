@@ -3,7 +3,7 @@ import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } fro
 import { WorkpackageStatusType } from '../../core/models/workpackage-status-type';
 
 @Directive({
-  selector: '[ipwWorkpackageStatusIcon]'
+  selector: '[dsWorkpackageStatusIcon]'
 })
 export class WorkpackageStatusDirective implements OnChanges {
 

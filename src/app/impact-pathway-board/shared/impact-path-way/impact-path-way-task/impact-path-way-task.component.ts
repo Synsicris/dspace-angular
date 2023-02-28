@@ -24,7 +24,7 @@ import { CompareItemComponent } from '../../../../shared/compare-item/compare-it
 import { ComparedVersionItemStatus } from '../../../../core/project/project-version.service';
 
 @Component({
-  selector: 'ipw-impact-path-way-task',
+  selector: 'ds-impact-path-way-task',
   styleUrls: ['./impact-path-way-task.component.scss'],
   templateUrl: './impact-path-way-task.component.html'
 })

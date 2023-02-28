@@ -253,7 +253,7 @@
             <mat-form-field appearance="fill" floatLabel="never" class="mr-05 min-width-small">
               <mat-select [disabled]="(compareMode | async) || isVersionOf" class="text-center" (selectionChange)="updateStepStatus(node, $event)" [(value)]="node.status">
                 <mat-select-trigger>
-                  <span><i ipwWorkpackageStatusIcon [status]="node?.status"></i> {{getStatusTypeLabel(node?.status)}}</span>
+                  <span><i dsWorkpackageStatusIcon [status]="node?.status"></i> {{getStatusTypeLabel(node?.status)}}</span>
                 </mat-select-trigger>
                 <mat-option *ngFor="let statusType of (getStatusValues() | async)" [value]="statusType.value">{{statusType.display}}</mat-option>
               </mat-select>

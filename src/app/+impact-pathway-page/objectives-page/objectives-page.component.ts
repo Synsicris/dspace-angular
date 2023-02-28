@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Observable, Subscription } from 'rxjs';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, mergeMap, take, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
@@ -16,10 +16,9 @@ import { ItemDataService } from '../../core/data/item-data.service';
 import { hasValue } from '../../shared/empty.util';
 import { Community } from '../../core/shared/community.model';
 import { AuthService } from '../../core/auth/auth.service';
-import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 
 @Component({
-  selector: 'ipw-objectives-page',
+  selector: 'ds-objectives-page',
   styleUrls: ['./objectives-page.component.scss'],
   templateUrl: './objectives-page.component.html'
 })

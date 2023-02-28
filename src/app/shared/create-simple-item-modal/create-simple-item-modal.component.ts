@@ -15,12 +15,6 @@ import { SimpleItem } from './models/simple-item.model';
 export class CreateSimpleItemModalComponent implements OnInit {
 
   /**
-   * The vocabulary name to use retrieve search filter labels
-   * @type {string}
-   */
-  @Input() vocabularyName: string;
-
-  /**
    * The list of id to exclude from search results
    * @type {string[]}
    */

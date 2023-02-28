@@ -1,5 +1,5 @@
 import { uniqueId } from 'lodash';
-import { ExploitationPlanType } from '../../../exploitation-plan/core/models/exploitation-plan-type';
+import { QuestionsBoardType } from '../../../questions-board/core/models/questions-board-type';
 import { isEmpty } from '../../../shared/empty.util';
 
 export class ImpactPathwayTaskItem {
@@ -64,21 +64,21 @@ export class ImpactPathwayTaskItem {
     this._note = value;
   }
 
-  private generateRandomExploitationPlanType(index: number): ExploitationPlanType {
-    let type: ExploitationPlanType;
+  private generateRandomExploitationPlanType(index: number): QuestionsBoardType {
+    let type: QuestionsBoardType;
 
     switch (index) {
       case 0:
-        type = ExploitationPlanType.Question1;
+        type = QuestionsBoardType.Question1;
         break;
       case 1:
-        type = ExploitationPlanType.Question2;
+        type = QuestionsBoardType.Question2;
         break;
       case 2:
-        type = ExploitationPlanType.Question3;
+        type = QuestionsBoardType.Question3;
         break;
       case 3:
-        type = ExploitationPlanType.Question4;
+        type = QuestionsBoardType.Question4;
         break;
     }
 
