@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
@@ -88,6 +88,11 @@ export class ProjectMembersPageComponent implements OnInit {
    */
   isFunding: boolean;
 
+  /**
+   * Representing if authorized user is a Funder Project Manager
+   */
+  isFunderPM$: Observable<boolean>;
+
   constructor(
     protected authService: AuthService,
     protected groupService: GroupDataService,
@@ -105,6 +110,7 @@ export class ProjectMembersPageComponent implements OnInit {
       tap((project: Item) => {
         this.entityItem$.next(project);
         this.isFunding = project.entityType !== PROJECT_ENTITY;
+        this.isFunderPM$ = this.projectAuthorizationService.isFunderProjectManager(project);
       }),
       switchMap(() => this.route.data.pipe(
         map((data) => data.projectCommunity as RemoteData<Community>),
