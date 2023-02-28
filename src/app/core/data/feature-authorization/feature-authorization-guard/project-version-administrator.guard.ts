@@ -1,4 +1,4 @@
-import { getFirstSucceededRemoteDataPayload, getRemoteDataPayload } from './../../../shared/operators';
+import { getFirstSucceededRemoteDataPayload } from './../../../shared/operators';
 import { Item } from './../../../shared/item.model';
 import { ItemDataService } from './../../item-data.service';
 import { Injectable } from '@angular/core';
@@ -30,7 +30,7 @@ export class ProjectVersionAdministratorGuard extends SomeFeatureAuthorizationGu
    * Check group management rights
    */
   getFeatureIDs(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FeatureID[]> {
-    return observableOf([FeatureID.isCoordinatorOfProject, FeatureID.isFunderOfProject]);
+    return observableOf([FeatureID.isCoordinatorOfProject, FeatureID.isFunderOfProject, FeatureID.isReaderOfProject]);
   }
 
   getObjectUrl(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<string> {
