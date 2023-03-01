@@ -37,7 +37,7 @@
         </ds-project-members>
       </ng-template>
     </ng-container>
-    <ng-container ngbNavItem="readers" *ngIf="!isFunding && !(this.isFunderPM$ | async)">
+    <ng-container ngbNavItem="readers" *ngIf="!isFunding && !isFunder">
       <a ngbNavLink data-test="readers">{{'project.manage.members.project.readers-group' | translate }}</a>
       <ng-template ngbNavContent>
         <ds-project-members [targetGroup]="(readersGroup$ | async)"
