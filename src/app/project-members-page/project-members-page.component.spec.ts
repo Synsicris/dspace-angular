@@ -29,7 +29,8 @@ describe('ProjectMembersPageComponent', () => {
   const authService = new AuthServiceMock();
   const projectAuthServiceMock = jasmine.createSpyObj('ProjectAuthorizationService', {
     isAdmin: jasmine.createSpy('isAdmin'),
-    isFunderOrganizationalManager: jasmine.createSpy('isFunderOrganizationalManager')
+    isFunderOrganizationalManager: jasmine.createSpy('isFunderOrganizationalManager'),
+    isFunderProjectManager: jasmine.createSpy('isFunderProjectManager')
   });
   const groupServiceMock = jasmine.createSpyObj('GroupDataService', {
     findById: jasmine.createSpy('findById'),
