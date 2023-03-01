@@ -15,7 +15,7 @@ $custom-theme-warn: mat.define-palette(mat.$red-palette);
 
 $custom-theme: mat.define-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
-@include mat.core-theme($custom-theme);
+@include mat.all-component-themes($custom-theme);
 
 button.mat-icon-button:focus, button.mat-raised-button:focus {
   outline: none;
