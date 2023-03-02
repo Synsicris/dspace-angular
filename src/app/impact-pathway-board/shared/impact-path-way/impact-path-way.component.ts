@@ -209,7 +209,7 @@ export class ImpactPathWayComponent implements OnInit {
    * @param version
    */
   onVersionSelected(version: Item) {
-    this.impactPathwayService.dispatchInitCompare(this.impactPathway.id, version.id, this.isVersionOfAnItem$.value);
+    this.impactPathwayService.dispatchInitCompare(this.impactPathway.id, version.id);
   }
 
   /**

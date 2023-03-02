@@ -146,7 +146,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
    * @param version
    */
   onVersionSelected(version: Item) {
-    this.workingPlanStateService.dispatchInitCompare(version.id, this.isVersionOf);
+    this.workingPlanStateService.dispatchInitCompare(version.id);
   }
 
   /**

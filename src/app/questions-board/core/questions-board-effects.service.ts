@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { of as observableOf } from 'rxjs';
-import { catchError, concatMap, delay, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, delay, map, switchMap, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
@@ -297,21 +297,11 @@ export class QuestionsBoardEffects {
    */
   initCompare$ = createEffect(() => this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.INIT_COMPARE_QUESTIONS_BOARD),
-    withLatestFrom(this.store$),
-    switchMap(([action, state]: [InitCompareAction, any]) => {
-      let questionsBoardId;
-      let versionItemId;
-      if (action.payload.isVersionOf) {
-        versionItemId = action.payload.questionsBoardId;
-        questionsBoardId = action.payload.compareQuestionsBoardId;
-      } else {
-        questionsBoardId = action.payload.questionsBoardId;
-        versionItemId = action.payload.compareQuestionsBoardId;
-      }
-      return this.projectVersionService.compareItemChildrenByMetadata(
-        questionsBoardId,
-        versionItemId,
-         this.questionsBoardService.getQuestionsBoardRelationStepsMetadata()
+    switchMap((action: InitCompareAction) =>
+      this.projectVersionService.compareItemChildrenByMetadata(
+        action.payload.questionsBoardId,
+        action.payload.compareQuestionsBoardId,
+        this.questionsBoardService.getQuestionsBoardRelationStepsMetadata()
       ).pipe(
         switchMap((compareItemList: ComparedVersionItem[]) => this.questionsBoardService.initCompareQuestionsBoardSteps(compareItemList, action.payload.questionsBoardId)),
         map((steps: QuestionsBoardStep[]) => new InitCompareSuccessAction(action.payload.questionsBoardId, steps)),
@@ -320,8 +310,8 @@ export class QuestionsBoardEffects {
             this.notificationsService.error(null, this.translate.get('exploitation-plan.compare.error'));
           }
           return observableOf(new InitCompareErrorAction());
-        }));
-    })));
+        }))
+    )));
 
   constructor(
     private actions$: Actions,

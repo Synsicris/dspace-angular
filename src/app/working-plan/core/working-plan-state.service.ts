@@ -93,8 +93,8 @@ export class WorkingPlanStateService {
     this.store.dispatch(new GenerateWorkpackageStepAction(projectId, parentId, workpackageStepType, metadata));
   }
 
-  public dispatchInitCompare(compareWorkingplanId: string, isVersionOf: boolean) {
-    this.store.dispatch(new InitCompareAction(compareWorkingplanId, isVersionOf));
+  public dispatchInitCompare(compareWorkingplanId: string) {
+    this.store.dispatch(new InitCompareAction(compareWorkingplanId));
   }
 
   public dispatchMoveWorkpackage(workpackageId: string, oldIndex: number, newIndex: number): void {

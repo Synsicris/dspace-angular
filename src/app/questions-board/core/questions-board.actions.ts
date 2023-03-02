@@ -521,7 +521,6 @@ export class InitCompareAction implements Action {
   payload: {
     questionsBoardId: string;
     compareQuestionsBoardId: string;
-    isVersionOf: boolean;
   };
 
   /**
@@ -531,11 +530,9 @@ export class InitCompareAction implements Action {
    *    the base questions board's id to compare
    * @param compareQuestionsBoardId
    *    the questions board's id to compare with the current one
-   * @param isVersionOf
-   *    whether the questions board's id to compare is a version of item
    */
-  constructor(questionsBoardId: string, compareQuestionsBoardId: string, isVersionOf: boolean) {
-    this.payload = { questionsBoardId, compareQuestionsBoardId, isVersionOf };
+  constructor(questionsBoardId: string, compareQuestionsBoardId: string) {
+    this.payload = { questionsBoardId, compareQuestionsBoardId };
   }
 }
 
