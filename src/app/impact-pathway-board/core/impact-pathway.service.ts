@@ -519,11 +519,9 @@ export class ImpactPathwayService {
    *    the impact pathway's id
    * @param compareImpactPathwayId
    *    the impact pathway's id to compare with
-   * @param isVersionOf
-   *    whether the impact pathway's id to compare is a version of item
    */
-  public dispatchInitCompare(impactPathwayId: string, compareImpactPathwayId: string, isVersionOf: boolean) {
-    this.store.dispatch(new InitCompareAction(impactPathwayId, compareImpactPathwayId, isVersionOf));
+  public dispatchInitCompare(impactPathwayId: string, compareImpactPathwayId: string) {
+    this.store.dispatch(new InitCompareAction(impactPathwayId, compareImpactPathwayId));
   }
 
 

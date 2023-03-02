@@ -201,11 +201,9 @@ export class QuestionsBoardStateService {
    *    the questions board's id
    * @param compareQuestionsBoardId
    *    the questions board's id to compare with
-   * @param isVersionOf
-   *    whether the questions board's id to compare is a version of item
    */
-  public dispatchInitCompare(questionsBoardId: string, compareQuestionsBoardId: string, isVersionOf: boolean) {
-    this.store.dispatch(new InitCompareAction(questionsBoardId, compareQuestionsBoardId, isVersionOf));
+  public dispatchInitCompare(questionsBoardId: string, compareQuestionsBoardId: string) {
+    this.store.dispatch(new InitCompareAction(questionsBoardId, compareQuestionsBoardId));
   }
 
   /**
