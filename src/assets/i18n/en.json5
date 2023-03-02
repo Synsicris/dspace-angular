@@ -2216,7 +2216,7 @@
 
   "explore.index.itemtype": "Item Type",
 
-  "explore.index.types": "Typ",
+  "explore.index.types": "Type",
 
   "explore.index.language": "Language",
 
@@ -2688,7 +2688,6 @@
 
   "info.feedback.page_help": "Tha page related to your feedback",
 
-
   "interim-report.edit.item.title": "Edit item",
 
   "interim-report.remove.item.title": "Unlink item",
@@ -2723,21 +2722,19 @@
 
   "interim-report.step_type_4.task_search": "Info text search for section 4",
 
-  "interim-report.step_type_1.title": "1. Intellectual property rights",
+  "interim-report.step_type_1.title": "1. Enumeration of the most important scientific and technical results and other significant events",
 
-  "interim-report.step_type_2.title": "2. Economic prospects",
+  "interim-report.step_type_2.title": "2. Comparison of the status of the project with the original (or, with the approval of the funding body, amended) work, time and expenditure planning.",
 
-  "interim-report.step_type_3.title": "3. Scientific and technical prospects",
+  "interim-report.step_type_3.title": "3. Have the prospects for achieving the objectives of the project within the stated expenditure period changed compared to the original application (justification)?",
 
-  "interim-report.step_type_4.title": "4. Connectivity",
+  "interim-report.step_type_4.title": "4. Have any third-party results become known in the meantime that are relevant to the implementation of the project?",
 
   "interim-report.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
 
   "interim-report.task.create.error": "There was an issue when creating the new item, please try again later.",
 
   "interim-report.task.create.success": "New item has been created successfully.",
-
-
 
   "item.alerts.private": "This item is non-discoverable",
 
@@ -4751,9 +4748,9 @@
 
   "project.create.grants.placeholder": "Please select editable grants",
 
-  "project.create.grants.project-option": "Editable by all project members",
+  "project.create.grants.project-option": "A: Open for all members of consortium",
 
-  "project.create.grants.subproject-option": "Editable by only sub-project members",
+  "project.create.grants.subproject-option": "B: Open only for project members",
 
   "project.create.info": "Create a new Joint project",
 
@@ -8443,9 +8440,9 @@
 
   "layout.box.header.exp_societalimpact_m": "Expected societal impact (new)",
 
-  "subproject.create.grants.project-option": "Editable by all project members",
+  "subproject.create.grants.project-option": "A: Open for all members of consortium",
 
-  "subpproject.create.grants.subproject-option": "Editable by only sub-project members",
+  "subpproject.create.grants.subproject-option": "B: Open only for project members",
 
   "submission.sections.upload.form.access-condition.openaccess": "open access",
 
@@ -9179,9 +9176,9 @@
 
   "query-builder.synsicris.accordion.step2.header": "Step 2",
 
-  "query-builder.synsicris.accordion.step1.alert": "Box 1 for helptext",
+  "query-builder.synsicris.accordion.step1.alert": "Help",
 
-  "query-builder.synsicris.accordion.step2.alert": "Box 2 for helptext",
+  "query-builder.synsicris.accordion.step2.alert": "Help",
 
   "query-builder.synsicris.label.entityType.Person": "Person",
 
@@ -10467,6 +10464,14 @@
 
   "layout.box.header.targetgroup_internalacc": "Internal information (only for members of the consortium)",
 
-  "layout.field.label.innovationpotential.synsicris.type.level": "Readinesslevel"
+  "layout.field.label.innovationpotential.synsicris.type.level": "Readinesslevel",
+
+  "working-plan.chart.button.delete": "Delete item",
+
+  "interim-report.step_type_5.info.text": "Info text for section 5",
+
+  "interim-report.step_type_5.task_search": "Info text search for section 5",
+
+  "interim-report.step_type_5.title": "5. Are or will changes in the objectives be necessary?"
 
 }
