@@ -108,7 +108,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    * @param version
    */
   onVersionSelected(version: Item) {
-    this.questionsBoardStateService.dispatchInitCompare(this.questionsBoardObject?.id, version.id, this.isVersionOfAnItem$.value);
+    this.questionsBoardStateService.dispatchInitCompare(this.questionsBoardObject?.id, version.id);
   }
 
   /**

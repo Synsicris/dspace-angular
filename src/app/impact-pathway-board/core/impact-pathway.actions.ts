@@ -1456,7 +1456,6 @@ export class InitCompareAction implements Action {
   payload: {
     impactPathwayId: string;
     compareImpactPathwayId: string;
-    isVersionOf: boolean;
   };
 
   /**
@@ -1466,11 +1465,9 @@ export class InitCompareAction implements Action {
    *    the base impact pathway's id to compare
    *  @param compareImpactPathwayId
    *    the impact pathway's id to compare with the current one
-   * @param isVersionOf
-   *    whether the impact pathway's id to compare is a version of item
    */
-  constructor(impactPathwayId: string, compareImpactPathwayId: string, isVersionOf: boolean) {
-    this.payload = { impactPathwayId, compareImpactPathwayId, isVersionOf };
+  constructor(impactPathwayId: string, compareImpactPathwayId: string) {
+    this.payload = { impactPathwayId, compareImpactPathwayId };
   }
 }
 

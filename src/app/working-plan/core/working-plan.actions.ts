@@ -307,7 +307,6 @@ export class InitCompareAction implements Action {
   type = WorkpackageActionTypes.INIT_COMPARE;
   payload: {
     compareWorkingplanId: string;
-    isVersionOf: boolean;
   };
 
   /**
@@ -315,11 +314,9 @@ export class InitCompareAction implements Action {
    *
    * @param compareWorkingplanId
    *    the working-plan id to compare with the current one
-   * @param isVersionOf
-   *    whether the working-plan id to compare is a version of item
    */
-  constructor(compareWorkingplanId: string, isVersionOf: boolean) {
-    this.payload = { compareWorkingplanId, isVersionOf };
+  constructor(compareWorkingplanId: string) {
+    this.payload = { compareWorkingplanId };
   }
 }
 

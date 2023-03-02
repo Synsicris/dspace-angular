@@ -333,20 +333,10 @@ export class WorkingPlanEffects {
   @Effect() initCompare$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.INIT_COMPARE),
     withLatestFrom(this.store$),
-    switchMap(([action, state]: [InitCompareAction, any]) => {
-      let workingItemId;
-      let versionItemId;
-      if (action.payload.isVersionOf) {
-        workingItemId = action.payload.compareWorkingplanId;
-        versionItemId = state.workingplan.workingplanId;
-      } else {
-        workingItemId = state.workingplan.workingplanId;
-        versionItemId = action.payload.compareWorkingplanId;
-      }
-
-      return this.projectVersionService.compareItemChildrenByMetadata(
-        workingItemId,
-        versionItemId,
+    switchMap(([action, state]: [InitCompareAction, any]) =>
+      this.projectVersionService.compareItemChildrenByMetadata(
+        state.workingplan.workingplanId,
+        action.payload.compareWorkingplanId,
         environment.workingPlan.workingPlanStepRelationMetadata
       ).pipe(
         switchMap((compareItemList: ComparedVersionItem[]) => this.workingPlanService.initCompareWorkingPlan(compareItemList)),
@@ -356,8 +346,8 @@ export class WorkingPlanEffects {
             console.error(error.message);
           }
           return observableOf(new InitCompareErrorAction());
-        }));
-    }));
+        }))
+    ));
 
   /**
    * Add workpackages to workingplan state
