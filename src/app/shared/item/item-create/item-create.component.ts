@@ -1,3 +1,4 @@
+import { getRemoteDataPayload } from './../../../core/shared/operators';
 import { Collection } from './../../../core/shared/collection.model';
 import { PaginatedList } from './../../../core/data/paginated-list.model';
 import { CollectionDataService } from './../../../core/data/collection-data.service';
@@ -21,7 +22,12 @@ import { CreateProjectComponent } from '../../../projects/create-project/create-
 import {
   FUNDING_ENTITY,
   PROJECT_ENTITY,
-  PROJECTPATNER_ENTITY_METADATA
+  PROJECTPATNER_ENTITY_METADATA,
+  PERSON_ENTITY,
+  FUNDING_OBJECTIVE_ENTITY,
+  CALL_ENTITY,
+  ORGANISATION_UNIT_ENTITY,
+  PROGRAMME_ENTITY
 } from '../../../core/project/project-data.service';
 import { environment } from '../../../../environments/environment';
 import { FindListOptions } from '../../../core/data/find-list-options.model';
@@ -84,13 +90,17 @@ export class ItemCreateComponent implements OnInit {
       ),
       this.hasAtLeastOneCollection$,
       this.checkIsCoordinator(),
+      this.isAdministrator(),
+      this.isFunderOrganizationalManager()
     ]).pipe(
-      map(([isAuthenticated, entityType, hasAtLeastOneCollection, isCoordinator]) =>
+      map(([isAuthenticated, entityType, hasAtLeastOneCollection, isCoordinator, isAdministrator, isFunderOrganizationalManager]) =>
         isAuthenticated &&
         isNotEmpty(entityType) &&
         (this.canCreateProjectPartner(entityType, hasAtLeastOneCollection) ||
           this.canCreateAnyProjectEntity(entityType, hasAtLeastOneCollection) ||
-          this.canCreateFunding(entityType, isCoordinator)
+          this.canCreateFunding(entityType, isCoordinator)  ||
+          this.canCreateFundingObjectives(entityType, hasAtLeastOneCollection, isFunderOrganizationalManager) ||
+          this.adminCanCreate(isAdministrator, hasAtLeastOneCollection)
         )
       ),
       take(1)
@@ -103,6 +113,17 @@ export class ItemCreateComponent implements OnInit {
 
   protected canCreateFunding(entityType: ItemType, isCoordinator: boolean) {
     return this.relatedEntityType === PROJECT_ENTITY && entityType.label === FUNDING_ENTITY && isCoordinator;
+  }
+
+  protected canCreateFundingObjectives(entityType: ItemType, hasAtLeastOneCollection: boolean, isFunderOrganizationalManager: boolean) {
+    return isFunderOrganizationalManager &&
+           this.relatedEntityType === PERSON_ENTITY &&
+           entityType.label === FUNDING_OBJECTIVE_ENTITY &&
+           hasAtLeastOneCollection;
+  }
+
+  protected adminCanCreate(isAdministrator: boolean, hasAtLeastOneCollection: boolean) {
+    return  isAdministrator && hasAtLeastOneCollection;
   }
 
   protected canCreateAnyProjectEntity(entityType, hasAtLeastOneCollection) {
@@ -127,14 +148,23 @@ export class ItemCreateComponent implements OnInit {
       elementsPerPage: 1,
       currentPage: 1,
     });
-    return this.collectionDataService.getAuthorizedCollectionByCommunityAndEntityType(this.scope, this.targetEntityType, findListOptions).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      map((collections: PaginatedList<Collection>) => collections?.totalElements === 1)
-    );
+
+    if (this.isSharedEntity(this.targetEntityType)) {
+      return this.canCreateSharedEntity(findListOptions);
+    } else {
+      return this.canCreateProjectEntity(findListOptions);
+    }
   }
 
   protected isExcluded(entityType: string) {
     return entityType === FUNDING_ENTITY;
+  }
+
+  protected isSharedEntity(entityType: string){
+    return entityType === FUNDING_OBJECTIVE_ENTITY ||
+           entityType === CALL_ENTITY ||
+           entityType === ORGANISATION_UNIT_ENTITY ||
+           entityType === PROGRAMME_ENTITY;
   }
 
   /**
@@ -146,6 +176,44 @@ export class ItemCreateComponent implements OnInit {
       this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]
     ).pipe(
       map(([isCoordinatorOfFunding, isAdminstrator]) => isCoordinatorOfFunding || isAdminstrator),
+    );
+  }
+
+  /**
+   * Check if the user is an administrator
+   */
+  private isAdministrator(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(
+      map((isAdminstrator) => isAdminstrator),
+    );
+  }
+
+  /**
+   * Check if the user is an administrator
+   */
+  private isFunderOrganizationalManager(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager).pipe(
+      map((isFunderOrganizationalManager) => isFunderOrganizationalManager),
+    );
+  }
+
+  /**
+   * Checks if the user has permission to create a project entity by having at least one collection based on the scope
+   */
+  private canCreateProjectEntity(findListOptions: FindListOptions) {
+    return this.collectionDataService.getAuthorizedCollectionByCommunityAndEntityType(this.scope, this.targetEntityType, findListOptions).pipe(
+      getRemoteDataPayload(),
+      map((collections: PaginatedList<Collection>) => collections?.totalElements === 1)
+    );
+  }
+
+  /**
+   * Checks if the user has permission to create a shared entity by having at least one collection
+   */
+  private canCreateSharedEntity(findListOptions: FindListOptions): Observable<boolean> {
+    return this.collectionDataService.getAuthorizedCollectionByEntityType('', this.targetEntityType, findListOptions).pipe(
+      getRemoteDataPayload(),
+      map((collections: PaginatedList<Collection>) => collections?.totalElements === 1)
     );
   }
 
