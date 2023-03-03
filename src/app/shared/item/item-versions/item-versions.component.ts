@@ -1,5 +1,5 @@
 
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Item } from '../../../core/shared/item.model';
 import { Version } from '../../../core/shared/version.model';
 import { RemoteData } from '../../../core/data/remote-data';
@@ -218,6 +218,7 @@ export class ItemVersionsComponent implements OnInit {
     protected workspaceItemDataService: WorkspaceitemDataService,
     protected workflowItemDataService: WorkflowItemDataService,
     protected configurationService: ConfigurationDataService,
+    protected cdr: ChangeDetectorRef,
   ) {
   }
 
@@ -324,6 +325,7 @@ export class ItemVersionsComponent implements OnInit {
     activeModal.componentInstance.response.pipe(take(1)).subscribe((ok) => {
       if (ok) {
         version.isLoadingDelete = true;
+        this.cdr.detectChanges();
         versionItem$.pipe(
           getFirstSucceededRemoteDataPayload<Item>(),
           // Retrieve version history
@@ -342,7 +344,8 @@ export class ItemVersionsComponent implements OnInit {
             this.versionHistoryService.getLatestVersionItemFromHistory$(versionHistory).pipe(
               tap(() => {
                 this.getAllVersions(of(versionHistory));
-              version.isLoadingDelete = false;
+                version.isLoadingDelete = false;
+                this.cdr.detectChanges();
             }),
           )
         ])),
@@ -600,6 +603,7 @@ export class ItemVersionsComponent implements OnInit {
       }
       version.isLoadingVisible = false;
       version.isLoadingOfficial = false;
+      this.cdr.detectChanges();
 
     });
   }
@@ -612,16 +616,25 @@ export class ItemVersionsComponent implements OnInit {
   }
 
   /**
+   * Check if any operation is processing on the given version
+   *
+   * @param version
+   */
+  isOperationPending(version): boolean {
+    return this.processingDelete$.value || version.isLoadingDelete || version.isLoadingVisible || version.isLoadingOfficial;
+  }
+
+  /**
    * Button shown only when the versionItem official metadata is true for funder so he can set NonOfficial
    * @param versionItem the version item which metadata belongs to
    */
   setVisible(versionItem: Item, version): void {
-
     const modalRef = this.modalService.open(ItemVersionsVisibilityModalComponent);
     modalRef.componentInstance.version = version;
     modalRef.result.then((result) => {
       if (result) {
         version.isLoadingVisible = true;
+        this.cdr.detectChanges();
         const metadataMap = Object.create({});
         metadataMap['synsicris.version.visible'] = [
           Object.assign(new MetadataValue(), { value: true })
@@ -636,6 +649,7 @@ export class ItemVersionsComponent implements OnInit {
       }
     }, () => {
       version.isLoadingVisible = false;
+      this.cdr.detectChanges();
     });
   }
 
@@ -701,6 +715,7 @@ export class ItemVersionsComponent implements OnInit {
       const resp$ = modalRef.componentInstance.response.pipe(map((confirm: boolean) => {
         if (confirm) {
           version.isLoadingOfficial = true;
+          this.cdr.detectChanges();
           const metadataMap = Object.create({});
           metadataMap['synsicris.version.official'] = [
             Object.assign(new MetadataValue(), { value: value })
@@ -708,6 +723,7 @@ export class ItemVersionsComponent implements OnInit {
           return this.updateItemByMetadata(versionItem, version, metadataMap);
         } else {
           version.isLoadingOfficial = false;
+          this.cdr.detectChanges();
           return null;
         }
       }));
