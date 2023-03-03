@@ -511,9 +511,22 @@ export class DefaultAppConfig implements AppConfig {
     },
     search: {
       filters: {
-        datepicker: ['dateReminder'],
+        datepicker: ['dateReminder', 'dateCreation'],
         discoveryConfig: {
           'COMMENT_ALL.Person.comment_person_all': {
+            'dateReminder': {
+              filterType: 'range',
+              minValue: {
+                operator: '-',
+                value: { day: 10 }
+              },
+              maxValue: {
+                operator: '+',
+                value: { day: 10 }
+              }
+            }
+          },
+          'COMMENT_ALL.Project.comment_project_all': {
             'dateReminder': {
               filterType: 'range',
               minValue: {

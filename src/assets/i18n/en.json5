@@ -5429,25 +5429,17 @@
   "search.filters.applied.charts.grapheventduration.tab": "Event duration",
 
   "search.filters.applied.charts.grapheventparticipant.tab": "Event participant",
-
   "search.filters.applied.charts.RELATION.Project.researchoutputs.title": "Research Output",
-
   "search.filters.applied.charts.no.data.found": "No data found",
-
   "search.filters.applied.charts.show.hide": "Show/Hide",
-
   "search.filters.applied.f.dateReminder.min": "Reminder from",
-
   "search.filters.applied.f.dateReminder.max": "Reminder to",
-
+  "search.filters.applied.f.dateCreation.min": "Creation from",
+  "search.filters.applied.f.dateCreation.max": "Creation to",
   "search.filters.filter.author.head": "Author",
-
   "search.filters.filter.author.placeholder": "Author name",
-
   "search.filters.filter.author.label": "Search author name",
-
   "search.filters.filter.birthDate.head": "Birth Date",
-
   "search.filters.filter.birthDate.placeholder": "Birth Date",
 
   "search.filters.filter.birthDate.min.label": "From",
@@ -5625,25 +5617,24 @@
   "search.filters.filter.projectStartDate.label": "Search start date",
 
   "search.filters.filter.projectEndDate.head": "End date",
-
   "search.filters.filter.projectEndDate.placeholder": "End date",
-
   "search.filters.filter.projectEndDate.label": "Search end date",
-
   "search.filters.filter.dateReminder.head": "Reminder Date",
-
   "search.filters.filter.dateReminder.min.label": "Start",
-
   "search.filters.filter.dateReminder.max.label": "End",
-
+  "search.filters.filter.creator.head": "Creator",
+  "search.filters.filter.creator.label": "Name",
+  "search.filters.filter.creator.placeholder": "Creator Name",
+  "search.filters.filter.commentItem.head": "Item",
+  "search.filters.filter.commentItem.label": "Description",
+  "search.filters.filter.commentItem.placeholder": "Item Description",
+  "search.filters.filter.dateCreation.head": "Create Date",
+  "search.filters.filter.dateCreation.min.label": "Start",
+  "search.filters.filter.dateCreation.max.label": "End",
   "search.filters.filter.synsicrisSubjectNace.head": "Economic sector",
-
   "search.filters.filter.synsicrisSubjectNace.placeholder": "Economic sector",
-
   "search.filters.filter.synsicrisSubjectNace.label": "Search Economic sector",
-
   "search.filters.filter.synsicrisSubjectDestatis.head": "Discipline",
-
   "search.filters.filter.synsicrisSubjectDestatis.placeholder": "Discipline",
 
   "search.filters.filter.synsicrisSubjectDestatis.label": "Search Subject destatis",
