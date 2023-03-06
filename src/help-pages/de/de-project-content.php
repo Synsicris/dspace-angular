@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
 
   <body class="content" id="content">
-  
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-	
+
 	 <?php /* Alte Navigation kann geloescht werden.
 	 <h1>&nbsp;</h1>
 	 <!-- Platzhalter deutsch / englisch für Auswahl anderer Sprache -->
@@ -34,36 +34,22 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n3><a href="de-project-details-pages-gender.php">Geschlechteraspekte</a></n3><br> <!-- Datei fehlt -->
 	  <n3><a href="de-project-details-pages-solution.php">Lösung/Veränderung/Innovation</a></n3> <!-- Datei fehlt -->
 	  */ ?>
-  
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
-  
+
 	<main>
 <h1>Wichtigste Infos zu den Inhalten</h1>
-    <p> Diese Inhalte werden demnächst bereitgestellt</p>
-<!--
-      <h1>Akteursgruppen</h1>
-      <p>Teasertext <strong>gesellschaftlichen Transformation</strong> Text</p>
-		<article>
-		<h1>Überschrift</h1>
-		<p>Text</p>
-		<img src="img/xy.png">
-		<p>Text
-		<ul>
-		<li>Text</li>
-		<li>Text</li></ul>
-		</p>
-		</article>
 
-		<article>
-		<h1>Überschrift nächster Abschnitt</h1>
-		<p>Text</p>
-		</article>
+    <h2>Inhalte im Monitoring-Tool: Kategorisiert erfassen und individuell strukturieren</h2>
+    <p>Im Monitoring-Tool erfassen Sie die Informationen zum Vorhaben in einzelnen Einträgen, die jeweils zu einer bestimmten Kategorie (z.B. Arbeitspaket, Veranstaltung) gehören (<a href="de-project-content-entities.php">Überblick über die Kategorien im SynSICRIS-Monitoring-Tool</a>).</p>
+    <p>Im Arbeitsplan, im Wirkungspfad und im Verwertungsplan können Sie die einzelnen Einträge strukturieren (siehe <a href="de-project-content-structure.php">Inhalte strukturieren</a>).</p>
+    <p>Außerdem bekommen Sie Hinweise zu einzelnen Gruppen von Kategorien, die Ihnen dabei helfen, Informationen in die richtige Kategorie einzuordnen.</p>
 
--->
+
     </main>
 
 
 	<?php include("includes/footer.inc.php"); echo "\n";?>
-    
+
   </body>
 </html>

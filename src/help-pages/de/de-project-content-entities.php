@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
- 
+
   <body class="content" id="content-entities">
-  
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-  
+
 	 <?php /* Alte Navigation kann geloescht werden.
 	 <h1>&nbsp;</h1>
 	 <!-- Platzhalter deutsch / englisch für Auswahl anderer Sprache -->
@@ -36,24 +36,25 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n1><a href="de-project-step.php">Nutzung_im_Projektverlauf</a></n1><br> <!-- geprueft, unterschiedliche Titel -->
 	  <n1><a href="de-project-details.php">Details</a></n1> <!-- Datei fehlt -->
 	  */ ?>
-  
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
-  
+
 	<main>
       <h1>Inhalte - erster Überblick</h1>
 
-		<article>
+		 <!-- 	<article>
 
 		<img src="img/de_project_about_entities_bereiche_nutzen.png">
 
 		</article>
 
 <br>
-
-      <h2>Überblick über die Bereiche im Monitoring-Tool</h2>
+-->
+      <h2>Überblick über die Inhalte im Monitoring-Tool</h2>
 
       <article>
-          <p>Die Bereiche im Monitoring-Tool dienen dazu, verschiedene Fragen zu beantworten. Die folgende Abbildung zeigt beispielhaft Fragen mit Bezug zu den Beiträgen des Projektes zur Wirkung.</p>
+          <p>Die Kategorien im Monitoring-Tool lassen sich in Gruppen zusammenfassen, die dazu dienen, verschiedene Fragen zu beantworten.</p>
+          <p>Die folgende Abbildung zeigt Gruppen von Kategorien und beispielhafte Fragen, die sich mit den Einträgen in den verschiedenen Kategorien beantworten lassen.</p>
 
 </article>
 <br>
@@ -64,6 +65,6 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 
 	<?php include("includes/footer.inc.php"); echo "\n";?>
-    
+
   </body>
 </html>

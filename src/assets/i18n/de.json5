@@ -2258,10 +2258,6 @@
   // TODO New key - Add a translation
   "context-menu.actions.export-item.btn": "<i class=\"fas fa-file-export\"></i> Informationen exportieren",
 
-  // "context-menu.actions.generate-report.btn": "<i class=\"fas fa-file-export\"></i> Generate project report",
-  // TODO New key - Add a translation
-  "context-menu.actions.generate-report.btn": "<i class=\"fas fa-file-export\"></i> Projektbericht erstellen",
-
   // "context-menu.actions.generate-report.success": "The project report has been generated successfully.",
   // TODO New key - Add a translation
   "context-menu.actions.generate-report.success": "The project report has been generated successfully.",
@@ -7565,7 +7561,7 @@
   "subproject.create.name.placeholder": "Organisationsname - Projekt-Akronym und Nr.",
 
   // "subproject.create.info": "Info",
-  "subproject.create.info": "<i><b>1. Benennen Sie Ihr Projekt mit dem Namen oder Akronym Ihrer Organisation und dem Projekt-Akronym sowie der Teilprojekt-Nummer.</br></br>2. Wählen Sie das Zugangsrecht zum Arbeitsbereich des Projektes aus.</i></b></br></br><b>A: Offener Zugang für alle Mitglieder des Verbundes</b><ul><li>Alle Mitglieder des Verbundes können im Arbeitsbereich Ihres Projektes den Verwertungsplan und den Zwischenbericht einsehen und bearbeiten.</li></ul><b>B: Zugang beschränkt auf Mitglieder des Projektes</b><ul><li>Nur Mitglieder Ihres Projektes können im Arbeitsbereich Ihres Projektes den Verwertungsplan und den Zwischenbericht einsehen und bearbeiten.</li></ul></br></br><b>Wichtige Hinweise:</b><ul><li>Wenn Sie im <b>Verbund</b> einen <b>gemeinsamen Verwertungsplan</b> erstellen, wählen Sie für das koordinierende Projekt die Einstellung <b>A: Offener Zugang für alle Mitglieder des Verbundes</b> und erstellen dort den Verwertungsplan.</b></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-permissions.php\" target=\"_blank\">Zugangsrechte einstellen</a></li></ul>",
+  "subproject.create.info": "<i><b>1. Benennen Sie Ihr Projekt mit dem Namen oder Akronym Ihrer Organisation und dem Projekt-Akronym sowie der Teilprojekt-Nummer.</br></br>2. Wählen Sie das Zugangsrecht zum Arbeitsbereich des Projektes aus.</i></b></br></br><b>A: Offener Zugang für alle Mitglieder des Verbundes</b><ul><li>Alle Mitglieder des Verbundes können im Arbeitsbereich Ihres Projektes den Verwertungsplan und den Zwischenbericht einsehen und bearbeiten.</li></ul><b>B: Zugang beschränkt auf Mitglieder des Projektes</b><ul><li>Nur Mitglieder Ihres Projektes können im Arbeitsbereich Ihres Projektes den Verwertungsplan und den Zwischenbericht einsehen und bearbeiten.</li></ul></br><b>Wichtige Hinweise:</b><ul><li>Wenn Sie im <b>Verbund</b> einen <b>gemeinsamen Verwertungsplan</b> erstellen, wählen Sie für das koordinierende Projekt die Einstellung <b>A: Offener Zugang für alle Mitglieder des Verbundes</b> und erstellen dort den Verwertungsplan.</b></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-permissions.php\" target=\"_blank\">Zugangsrechte einstellen</a></li></ul>",
 
   // "project.create.success": "The new project has been generated successfully.",
   // TODO New key - Add a translation
@@ -12449,7 +12445,7 @@
   "layout.box.help-text.comments_all_h": "Hier sehen Sie alle Kommentare der von Ihnen betreuten Verbünde und Einzelprojekte im Überblick. Nutzen Sie die Filterfunktion, um in den Kommentaren zu suchen.",
 
   // "layout.box.help-text.comments_all_h_funder": "missing",
-  "layout.box.help-text.comments_all_h_funder": "Hier sehen Sie alle Kommentare, die von Ihnen oder ggf. weiteren Projektbetreuern zu den verschiedenen Einträgen des Vorhabens vorgenommen wurden. Nutzen Sie die Filterfunktion, um in den Kommentaren zu suchen.</br></br><b>Wichtige Hinweise:</b><ul><li>Für das Erinnerungs-Datum ist ein automatischer Filter gesetzt: Es werden die Kommentare angezeigt, deren Erinnerungs-Datum in einem Zeitraum von +/- 10 Tagen vom heutigen Tag liegt.</li><li>Sie können diesen Filter löschen oder ändern. Wenn die Seite verlassen und anschließend wieder aufrufen, ist der automatische Filter für das Erinnerungs-Datum wieder aktiviert.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li></ul>",
+  "layout.box.help-text.comments_all_h_funder": "Hier sehen Sie alle Kommentare, die von Ihnen oder ggf. weiteren Projektbetreuer:innen zu den verschiedenen Einträgen des Vorhabens vorgenommen wurden. Nutzen Sie die Filterfunktion, um in den Kommentaren zu suchen.</br></br><b>Wichtige Hinweise:</b><ul><li>Für das Erinnerungs-Datum ist ein automatischer Filter gesetzt: Es werden die Kommentare angezeigt, deren Erinnerungs-Datum in einem Zeitraum von +/- 10 Tagen vom heutigen Tag liegt.</li><li>Sie können diesen Filter löschen oder ändern. Wenn die Seite verlassen und anschließend wieder aufrufen, ist der automatische Filter für das Erinnerungs-Datum wieder aktiviert.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li></ul>",
 
   // "researcher.profile.edit": "Edit",
   "researcher.profile.edit": "Bearbeiten",
