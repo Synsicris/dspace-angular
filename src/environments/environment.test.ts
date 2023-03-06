@@ -678,8 +678,12 @@ export const environment: BuildConfig = {
   comments: {
     commentEditFormName: 'comments',
     commentEditFormSection: 'comments',
-    commentEditMode: 'CUSTOM',
+    commentAdminEditMode: 'ADMIN_EDIT',
+    commentEditMode: 'COMMENT',
     commentEntityType: 'comment',
-    commentRelationItemMetadata: 'synsicris.relation.item'
+    commentRelationItemMetadata: 'synsicris.relation.commentItem',
+    commentRelationItemVersionMetadata: 'synsicris.relation.commentItemVersion',
+    commentRelationProjectMetadata: 'synsicris.relation.commentProject',
+    commentRelationProjectVersionMetadata: 'synsicris.relation.commentProjectVersion',
   }
 };
