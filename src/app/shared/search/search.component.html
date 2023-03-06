@@ -17,10 +17,10 @@
 <div *ngIf="!showSidebar && (initialized$ | async)">
     <ng-template *ngTemplateOutlet="searchContent"></ng-template>
 </div>
-
 <ds-page-with-sidebar *ngIf="showSidebar && (initialized$ | async)"
                       [collapseSidebar]="collapseFilters"
                       [id]="'search-page'"
+                      [sideBarWidth]="4"
                       [sidebarContent]="sidebarContent">
     <ng-template *ngTemplateOutlet="searchContent"></ng-template>
 </ds-page-with-sidebar>
