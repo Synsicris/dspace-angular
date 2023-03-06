@@ -32,7 +32,9 @@ export enum ComparedVersionItemStatus {
   Removed = 'removed',
   Equal = 'equal',
   Canceled = 'canceled',
-  Done = 'done'
+  Done = 'done',
+  Archieved = 'archieved',
+  PartlyArchieved = 'partly_archieved',
 }
 
 export interface ComparedVersionItem {
