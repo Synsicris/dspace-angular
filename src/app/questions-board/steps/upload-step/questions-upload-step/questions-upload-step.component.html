@@ -1,6 +1,6 @@
 <ds-collapsable-panel #ipwCollapse class="d-block mb-3"
                        [sidebarPanelTitle]="getStepTitle()"
-                       [startOpen]="!(isCollapsed() | async)"
+                       [startOpen]="false"
                        [collapsable]="true">
   <ng-container ngProjectAs="panelIconTitle">
     <i dsQuestionsBoardIcon [questionsBoardType]="'upload'"></i>

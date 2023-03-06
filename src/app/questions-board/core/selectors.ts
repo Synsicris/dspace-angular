@@ -103,7 +103,7 @@ export function questionsBoardStepCollapsable(questionsBoardId: string, question
   return questionsBoardStepCollapsableSelector<QuestionsBoardStep>(questionsBoardId, questionsBoardStepId, questionsBoardStateSelector);
 }
 
-export function questionsBoardUploadsByBoardIdSelector(boardId: string): MemoizedSelector<AppState, QuestionsBoard> {
+export function questionsBoardUploadsByBoardIdSelector(boardId: string): MemoizedSelector<AppState, any> {
   const sectionDataSelector = questionsBoardByIDSelector(boardId);
   return subStateSelector<AppState, QuestionsBoard>(sectionDataSelector, 'uploads');
 }
