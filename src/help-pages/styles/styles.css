@@ -376,7 +376,8 @@ body.wp #sidebar ul.wp,
 body.ep #sidebar ul.ep,
 body.use #sidebar ul.use,
 body.step #sidebar ul.step,
-body.pages #sidebar ul.pages {
+body.pages #sidebar ul.pages,
+body.funder #sidebar ul.funder {
 	display:block;
 	margin-bottom: 2px;
 	}
@@ -389,7 +390,8 @@ body.wp #sidebar ul.nav1 a#nav-wp span:before,
 body.ep #sidebar ul.nav1 a#nav-ep span:before,
 body.use #sidebar ul.nav1 a#nav-use span:before,
 body.step #sidebar ul.nav1 a#nav-step span:before,
-body.pages #sidebar ul.nav1 a#nav-pages span:before {
+body.pages #sidebar ul.nav1 a#nav-pages span:before,
+body.funder #sidebar ul.nav1 a#nav-funder span:before {
 	font-family: 'FontAwesome';
 	/* content:"\f0d7"; gefuellter Pfeil */
 	content:"\f107";
@@ -449,7 +451,9 @@ body#pages-gender #sidebar #nav-pages-gender,
 body#pages-publication #sidebar #nav-pages-publication,
 body#pages-solution #sidebar #nav-pages-solution,
 
-body#funder #sidebar #nav-funder {
+body#funder #sidebar #nav-funder,
+body#funder-role #sidebar #nav-funder-role,
+body#funder-comment #sidebar #nav-funder-comment {
 	background-color:var(--s-col-nav-active-background);
 	border-left:5px solid var(--s-col-nav-active-border);
 	color: var(--s-col-nav-active-text);

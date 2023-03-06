@@ -62,7 +62,7 @@
     	<ul class="use nav2">
         	<li><a href="de-project-use-items.php" id="nav-use-items"><span>Einträge anlegen</span></a></li>
 						<li><a href="de-project-use-role.php" id="nav-use-role"><span>Rollen und Rechte verwalten</span></a></li>
-						<li><a href="de-project-use-permissions.php" id="nav-use-permissions"><span>Bearbeitungsrechte festlegen</span></a></li>
+						<li><a href="de-project-use-permissions.php" id="nav-use-permissions"><span>Zugangsrechte zum Projekt</span></a></li>
             <li><a href="de-project-use-versioning.php" id="nav-use-versioning"><span>Versionierung</span></a></li>
             <li><a href="de-project-use-export.php" id="nav-use-export"><span>Export und Drucken</span></a></li> <!-- unterschiedliche Titel -->
         </ul>
@@ -87,8 +87,12 @@
         </ul>
     </li>
 
-    <li><a href="de-project-funder.php" id="nav-funder"><span>Förderinformationen</span></a></li>
-
+    <li><a href="de-project-funder.php" id="nav-funder" class="folder"><span>Informationen für den Förderer</span></a>
+			<ul class="funder nav2">
+				<li><a href="de-project-funder-role.php" id="nav-funder-role"><span>Rollen und Rechte verwalten</span></a></li>
+				<li><a href="de-project-funder-comment.php" id="nav-funder-comment"><span>Kommentarfunktion</span></a></li>
+			</ul>
+		</li>
 </ul>
 
 <!-- <div class="arbeitsstand">Stand: 31. Mai 22</div> -->

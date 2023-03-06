@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
 
   <body class="content" id="content-entities-involved">
-  
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-	
+
 	 <?php /* Alte Navigation kann geloescht werden.
 	 <h1>&nbsp;</h1>
 	 <!-- Platzhalter deutsch / englisch für Auswahl anderer Sprache -->
@@ -36,9 +36,9 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n1><a href="de-project-step.php">Nutzung_im_Projektverlauf</a></n1><br> <!-- geprueft, unterschiedliche Titel -->
 	  <n1><a href="de-project-details.php">Details</a></n1> <!-- Datei fehlt -->
 	  */ ?>
-  
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
-  
+
 	<main>
       <h1>Beteiligte</h1>
       <p> <strong>Projektpartner, Unterauftragnehmer, Kooperationspartner und Akteursgruppen</strong> </p>
@@ -52,18 +52,17 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
           <ul>
             <li>Projektpartner in einem Verbundprojekt (siehe <a href="de-project-about-entities-proj.php">Verbundprojekt und Teilprojekt</a>)</li>
-            <li>Unterauftragnehmer</li>
-            <li>Kooperationspartner</li>
+            <li>Kooperationspartner/Auftragnehmer</li>
           </ul>
 
 
           <li><strong>Zusammenarbeit mit Akteursgruppen</strong>
             <ul>
-              <li>Akteursgruppen sind Gruppen von Personen und/oder Organisationen, die im Projekt mitwirken aber nicht
+              <li>Akteursgruppen sind Gruppen von Personen und/oder Organisationen, die im Projekt mitwirken, aber nicht
                 namentlich genannt werden (dies kann dazu dienen, ihre Anonymität zu wahren oder größere Gruppen mit einem geringeren Aufwand zu erfassen)</li>
             </ul>
       </ul>
-      Mit der Erfassung der Beteiligten setzen Sie die Grundlage dafür, zu sehen, welche Disziplinen und Handlungsfelder  in welcher Intensität eingebunden und mit dem Projekt adressiert werden, beispielsweise indem sie:
+      Mit der Erfassung der Beteiligten setzen Sie die Grundlage dafür, zu sehen, welche Disziplinen und Handlungsfelder in welcher Intensität eingebunden und mit dem Projekt adressiert werden, beispielsweise indem die Beteiligten:
         <ul>
           <li>bei der Erarbeitung von Ergebnissen mitwirken</li>
           <li> ihre Sichtweisen und Erfahrungen einbringen</li>
@@ -78,58 +77,28 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
   <article>
     <p>
-        	<img src="img/de_project_about_entities_involved_externe_Beteiligte.png">
-          <br>
+        	<img src="img/de_project_content_entities_involved_Beteiligte_Ueberblick.png">
+
           </p>
+          <br>
 	</article>
 
     <article>
-		<h2>Unterauftragnehmer</h2>
-		<p>
+		<h2>Kooperationspartner/Auftragnehmer</h2>
+		<p>Kooperationspartner und Auftragnehmer haben keine vertragliche Verbindung zum Förderer.</p>
 
-		Unterauftragnehmer übernehmen Arbeiten und Aktivitäten <strong>innerhalb eines Teilprojektes</strong>. Die Zusammenarbeit wird
-    <strong>vertraglich festgehalten</strong> und <strong>durch den jeweiligen Projektpartner aus dem Budget des Teilprojektes entlohnt.</strong></p>
+		<p>Auftragnehmer übernehmen Arbeiten und Aktivitäten als Dienstleister. Die Zusammenarbeit wird <strong>vertraglich festgehalten</strong> und <strong>durch den jeweiligen Zuwendungsempfänger aus dem Budget des (Teil-)Projektes finanziert.</strong></p>
 
-    <p>Im Monitoring-Tool ist es lediglich notwendig jene Unterauftragnehmer zu erfassen, die <strong>maßgeblich an der Erarbeitung von Ergebnissen mitwirken</strong>. Für ausführende Tätigkeiten (z.B. eine Elektrik installieren, eine Analyse durchführen) sind keine Unterauftragnehmer zu erfassen.</p>
+    <p>Im Monitoring-Tool ist es lediglich notwendig jene Auftragnehmer zu erfassen, die <strong>maßgeblich an der Erarbeitung von Ergebnissen mitwirken</strong>. Für ausführende Tätigkeiten (z.B. eine Elektrik installieren, eine Analyse durchführen) sind keine Auftragnehmer zu erfassen.</p>
 </p>
 
-<br>
-
-    	<img src="img/de_project_about_entities_involved_Unterauftragnehmer.png">
-      <br>
-
-		</article>
-
-
-
-  </br>
-
-
-    <article>
-      <br>
-
-    <h2>Kooperationspartner</h2>
-
-    <p>
-
-      Kooperationspartner wirken in der Regel <strong>ohne Vertrag </strong>maßgeblich an der Erarbeitung von Ergebnissen im Projekt mit.</p>
-      <p>Sie bringen ihre Erfahrungen und ihr Wissen in das Projekt ein, ohne als Projektpartner direkt vom Förderer oder indirekt als
-        Unterauftragnehmer in einem Teilprojekt entlohnt zu werden. Das heißt, dass Kooperationspartner normalerweise auf eigene Kosten am Verbundprojekt mitarbeiten.</p>
-      <p>Achtung: Der Übergang zwischen Kooperationspartner und Akteursgruppe ist fließend. Sie nehmen die Einordnung selbst vor,
-        je nachdem was passender ist (Leitfragen zur Unterscheidung finden Sie weiter unten).
-
-    </p>
-
+    Kooperationspartner wirken häufig <strong>ohne Vertrag </strong>maßgeblich an der Erarbeitung von Ergebnissen im Projekt mit, es gibt jedoch auch Kooperationen zur Verwertung und zum Transfer von Ergebnissen. Sie bringen ihre Erfahrungen und ihr Wissen in das Projekt ein, ohne als Projektpartner direkt vom Förderer oder indirekt als Auftragnehmer in einem (Teil-)Projekt finanziert zu werden.</p>
+    <p>Achtung: Der Übergang zwischen Kooperationspartner und Akteursgruppe ist fließend. Sie nehmen die Einordnung selbst vor,
+      je nachdem was passender ist (Leitfragen zur Unterscheidung finden Sie weiter unten).
+        </p>
     <br>
 
-
-    <img src="img/de_project_about_entities_involved_Kooperationspartner.png">
-
-  </br>
-    </article>
-</br>
-    <article>
-      <br>
+    		</article>
 
 
     <h2>Akteursgruppe</h2>
@@ -137,18 +106,13 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
     <p>
 
-      Eine Akteursgruppe ist eine Gruppe von Personen oder Organisationen aus demselben Tätigkeitsbereich.
-      Relevant sind für das Monitoring-Tool jene Akteursgruppen, mit denen das Projekt zusammenarbeitet oder die durch die Projektergebnisse adressiert werden.</p>
-      <p>    Genau wie die Kooperationspartner wirken auch die Akteursgruppen in der Regel <strong>ohne vertragliche Bindung</strong> im Verbundprojekt mit.</p>
-      <p>Anders als bei den Kooperationspartnern wird bei den Akteursgruppen eine Zusammenfassung von Organisationen und Personen zu einer Gruppe vorgenommen.
-          Die Zusammenarbeit mit einer Akteursgruppe ist eher <strong>unverbindlich</strong>, die dahinterstehenden Organisationen möchten eher <strong>anonym</strong> bleiben
-          und <strong>die Zusammensetzung der Gruppe</strong> wechselt gegebenenfalls
-        (Leitfragen zur Unterscheidung finden Sie im folgenden Abschnitt).
+      Eine Akteursgruppe ist eine Gruppe von Personen oder Organisationen aus demselben Tätigkeitsbereich. Erfassen Sie im Monitoring-Tool jene Akteursgruppen, mit denen das Projekt zusammenarbeitet oder die durch die Projektergebnisse adressiert werden.</p>
+      <p>Anders als bei den Kooperationspartnern wird bei den Akteursgruppen eine Zusammenfassung von Organisationen und Personen zu einer Gruppe vorgenommen. Die Zusammenarbeit mit einer Akteursgruppe ist eher <strong>unverbindlich</strong>, die dahinterstehenden Organisationen möchten eher <strong>anonym</strong> bleiben und <strong>die Zusammensetzung der Gruppe</strong> wechselt gegebenenfalls (Leitfragen zur Unterscheidung finden Sie im folgenden Abschnitt).
 
     </p>
     <br>
 
-    <img src="img/de_project_about_entities_involved_Akteursgruppen.png">
+    <img src="img/de_project_content_entities_involved_externe_Beteiligte.png">
     <br>
     </article>
     <br>
@@ -192,6 +156,6 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 
 	<?php include("includes/footer.inc.php"); echo "\n";?>
-    
+
   </body>
 </html>

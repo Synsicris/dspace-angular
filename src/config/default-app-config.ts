@@ -1449,6 +1449,7 @@ export class DefaultAppConfig implements AppConfig {
   comments = {
     commentEditFormName: 'comments',
     commentEditFormSection: 'comments',
+    commentAdminEditMode: 'ADMIN_EDIT',
     commentEditMode: 'COMMENT',
     commentEntityType: 'comment',
     commentRelationItemMetadata: 'synsicris.relation.commentItem',
