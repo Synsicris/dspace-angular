@@ -69,6 +69,9 @@ export const POLICY_GROUP_METADATA = 'cris.policy.group';
 export const POLICY_SHARED_METADATA = 'cris.project.shared';
 export const PROGRAMME_ENTITY = 'programme';
 export const VERSION_UNIQUE_ID = 'synsicris.uniqueid';
+export const FUNDING_OBJECTIVE_ENTITY = 'fundingobjective';
+export const CALL_ENTITY = 'call';
+export const ORGANISATION_UNIT_ENTITY = 'OrgUnit';
 
 export enum ProjectGrantsTypes {
   Project = 'project',

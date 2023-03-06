@@ -15,6 +15,7 @@ import { GroupDataService } from '../core/eperson/group-data.service';
 import { Item } from '../core/shared/item.model';
 import { PROJECT_ENTITY } from '../core/project/project-data.service';
 import { ProjectAuthorizationService } from '../core/project/project-authorization.service';
+import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   selector: 'ds-project-members-page',
@@ -87,6 +88,11 @@ export class ProjectMembersPageComponent implements OnInit {
    * Representing if managing members of a funding
    */
   isFunding: boolean;
+
+  /**
+   * Representing if authorized user is a Funder Project Manager
+   */
+  isFunder: boolean;
 
   constructor(
     protected authService: AuthService,
@@ -181,16 +187,29 @@ export class ProjectMembersPageComponent implements OnInit {
       }
     });
 
-    projectCommunity$.pipe(
-      tap(() => {
-        if (this.isFunding) {
+    const isFunderProject$ = this.route.data.pipe(
+      map((data) => data.projectItem as RemoteData<Item>),
+      redirectOn4xx(this.router, this.authService),
+      getFirstSucceededRemoteDataPayload(),
+      switchMap((project: Item) => {
+        return (project.entityType === PROJECT_ENTITY) ? this.projectAuthorizationService.isFunderProjectManager(project) : of(false);
+      })
+    );
+
+    combineLatest([
+      projectCommunity$,
+      isFunderProject$
+    ]).pipe(
+      tap(([community, isFunder]) => {
+        this.isFunder = isFunder;
+        if (this.isFunding || isFunder) {
           this.readersGroupInit$.next(true);
         }
       }),
-      filter(() => {
-        return !this.isFunding;
+      filter(([community, isFunder]) => {
+        return !this.isFunding && !isFunder;
       }),
-      switchMap((community: Community) => {
+      switchMap(([community, isFunder]: [Community, boolean]) => {
         return this.projectGroupService.getInvitationProjectReadersGroupsByCommunity(community);
       }),
       map((groups: string[]) => groups[0]),
