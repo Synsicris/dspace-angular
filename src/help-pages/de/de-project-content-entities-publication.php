@@ -56,6 +56,17 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
     </ul>
 
   </p>
+
+<p>
+  <img src="img/de_project_content_entities_publication_geplante.png">
+
+</p>
+
+
+<p>
+<img src="img/de_project_content_entities_publication_Unterscheidung.png">
+</p>
+
     </main>
 
 

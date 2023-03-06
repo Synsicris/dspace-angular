@@ -1540,8 +1540,6 @@
 
   "context-menu.actions.export-item.btn": "<i class=\"fas fa-file-export\"></i> Export information",
 
-  "context-menu.actions.generate-report.btn": "<i class=\"fas fa-file-export\"></i> Generate project report",
-
   "context-menu.actions.generate-report.success": "The project report has been generated successfully.",
 
   "context-menu.actions.generate-report.error": "There was an issue when generating the process report, please try again later.",
@@ -4746,7 +4744,7 @@
 
   "project.create.head": "New project",
 
-  "project.create.grants.placeholder": "Please select editable grants",
+  "project.create.grants.placeholder": "Please set the access rights",
 
   "project.create.grants.project-option": "A: Open for all members of consortium",
 
