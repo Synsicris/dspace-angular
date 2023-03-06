@@ -167,7 +167,7 @@ export class QuestionsBoardService {
   initQuestionsBoard(item: Item): Observable<QuestionsBoard> {
     return this.initQuestionsBoardSteps(item.id, item).pipe(
       map((steps: QuestionsBoardStep[]) => {
-        return new QuestionsBoard(item.id, '', steps);
+        return new QuestionsBoard(item.id, '', steps, []);
       })
     );
   }

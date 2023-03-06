@@ -1,3 +1,4 @@
+import { WorkspaceitemSectionUploadFileObject } from './../../core/submission/models/workspaceitem-section-upload-file.model';
 import { Injectable } from '@angular/core';
 
 import { combineLatest as combineLatestObservable, Observable } from 'rxjs';
@@ -12,7 +13,8 @@ import {
   isQuestionsBoardProcessingSelector,
   questionsBoardByIDSelector,
   questionsBoardStepByIDSelector,
-  questionsBoardStepCollapsable
+  questionsBoardStepCollapsable,
+  questionsBoardUploadsByBoardIdSelector
 } from './selectors';
 import { QuestionsBoard } from './models/questions-board.model';
 import { QuestionsBoardStep } from './models/questions-board-step.model';
@@ -28,7 +30,8 @@ import {
   RemoveQuestionsBoardTaskAction,
   SetQuestionsBoardStepCollapseAction,
   StopCompareQuestionsBoardAction,
-  UpdateQuestionsBoardStepAction
+  UpdateQuestionsBoardStepAction,
+  UploadFilesToQuestionBoardAction
 } from './questions-board.actions';
 import { MetadataMap } from '../../core/shared/metadata.models';
 
@@ -216,5 +219,14 @@ export class QuestionsBoardStateService {
     this.store.dispatch(new StopCompareQuestionsBoardAction(questionsBoardId));
   }
 
+  dispatchUploadFilesToQuestionBoard(questionsBoardId: string, uploads: WorkspaceitemSectionUploadFileObject[] ) {
+    this.store.dispatch(new UploadFilesToQuestionBoardAction(questionsBoardId, uploads));
+  }
 
+  getFilesFromQuestionsBoard(questionsBoardId: string){
+    return this.store.pipe(select(
+      questionsBoardUploadsByBoardIdSelector(questionsBoardId)
+    ),
+    );
+  }
 }

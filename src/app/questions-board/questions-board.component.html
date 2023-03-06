@@ -23,4 +23,12 @@
                            [isFunder]="isFunder"
                            [isVersionOfAnItem]="(isVersionOfAnItem$ | async)">
   </ds-questions-board-step>
+  <ds-questions-upload-step [questionsBoardObject]="questionsBoardObject"
+                            [messagePrefix]="messagePrefix"
+                            [projectCommunityId]="projectCommunityId"
+                            [fundingCommunity]="fundingCommunity"
+                            [compareMode]="(compareMode | async)"
+                            [isFunder]="isFunder"
+                            [isVersionOfAnItem]="(isVersionOfAnItem$ | async)">
+  </ds-questions-upload-step>
 </div>

@@ -9,7 +9,8 @@ import {
   RemoveQuestionsBoardTaskSuccessAction,
   SetQuestionsBoardStepCollapseAction,
   StopCompareQuestionsBoardAction,
-  UpdateQuestionsBoardStepAction
+  UpdateQuestionsBoardStepAction,
+  UploadFilesToQuestionBoardAction
 } from './questions-board.actions';
 import { QuestionsBoard } from './models/questions-board.model';
 import { QuestionsBoardStep } from './models/questions-board-step.model';
@@ -135,6 +136,10 @@ export function questionsBoardReducer(state = initialState, action: QuestionsBoa
 
     case QuestionsBoardActionTypes.UPDATE_QUESTIONS_BOARD_STEP: {
       return UpdateQuestionsBoardTask(state, action as UpdateQuestionsBoardStepAction);
+    }
+
+    case QuestionsBoardActionTypes.UPLOAD_FILES_TO_QUESTION_BOARD: {
+      return uploadFilesToQuestionBoard(state, action as UploadFilesToQuestionBoardAction);
     }
 
     default: {
@@ -401,6 +406,20 @@ function replaceQuestionsBoardSteps(state: QuestionsBoardState, action: InitComp
   return Object.assign({}, state, { loaded: true }, {
     questionsBoard: Object.assign({}, questionsBoardEntry, {
       [action.payload.questionsBoardId]: Object.assign(new QuestionsBoard(), questionsBoardEntry[action.payload.questionsBoardId], { steps: action.payload.steps })
+    })
+  });
+}
+
+function uploadFilesToQuestionBoard(state: QuestionsBoardState, action: UploadFilesToQuestionBoardAction): QuestionsBoardState {
+  const questionsBoardEntry = state.questionsBoard;
+  const existingFiles = [...questionsBoardEntry[action.payload.questionsBoardId].uploads];
+  existingFiles.push(...action.payload.files);
+
+  return Object.assign({}, state, { loaded: true }, {
+    questionsBoard: Object.assign({}, questionsBoardEntry, {
+      [action.payload.questionsBoardId]: Object.assign(new QuestionsBoard(), questionsBoardEntry[action.payload.questionsBoardId], {
+        uploads:  existingFiles
+      })
     })
   });
 }

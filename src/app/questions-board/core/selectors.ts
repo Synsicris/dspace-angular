@@ -5,6 +5,7 @@ import { isNotEmpty } from '../../shared/empty.util';
 import { QuestionsBoardState } from './questions-board.reducer';
 import { QuestionsBoard } from './models/questions-board.model';
 import { QuestionsBoardStep } from './models/questions-board-step.model';
+import { subStateSelector } from '../../shared/selector.util';
 
 
 function questionsBoardKeySelector<T>(key: string, selector): MemoizedSelector<AppState, QuestionsBoard> {
@@ -101,6 +102,12 @@ export function questionsBoardStepByIDSelector(questionsBoardId: string, questio
 export function questionsBoardStepCollapsable(questionsBoardId: string, questionsBoardStepId: string): MemoizedSelector<AppState, QuestionsBoardStep> {
   return questionsBoardStepCollapsableSelector<QuestionsBoardStep>(questionsBoardId, questionsBoardStepId, questionsBoardStateSelector);
 }
+
+export function questionsBoardUploadsByBoardIdSelector(boardId: string): MemoizedSelector<AppState, QuestionsBoard> {
+  const sectionDataSelector = questionsBoardByIDSelector(boardId);
+  return subStateSelector<AppState, QuestionsBoard>(sectionDataSelector, 'uploads');
+}
+
 
 
 /**
