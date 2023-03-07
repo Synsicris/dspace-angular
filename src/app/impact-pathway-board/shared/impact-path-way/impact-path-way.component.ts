@@ -206,10 +206,10 @@ export class ImpactPathWayComponent implements OnInit {
   /**
    * Dispatch initialization of comparing mode
    *
-   * @param version
+   * @param selected
    */
-  onVersionSelected(version: Item) {
-    this.impactPathwayService.dispatchInitCompare(this.impactPathway.id, version.id);
+  onVersionSelected(selected: { base: Item, comparing: Item }) {
+    this.impactPathwayService.dispatchInitCompare(selected.base.id, selected.comparing.id);
   }
 
   /**

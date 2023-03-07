@@ -94,10 +94,10 @@ export class WrapperObjectivesComponent implements OnDestroy {
   /**
    * Dispatch initialization of comparing mode
    *
-   * @param version
+   * @param selected
    */
-  onVersionSelected(version: Item) {
-    this.impactPathwayService.initCompareImpactPathwayTask(this.impactPathwayStep.parentId, this.impactPathwayStep.id, version.id);
+  onVersionSelected(selected: { base: Item, comparing: Item }) {
+    this.impactPathwayService.initCompareImpactPathwayTask(this.impactPathwayStep.parentId, selected.base.id, selected.comparing.id);
   }
 
   /**

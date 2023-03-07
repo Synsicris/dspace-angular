@@ -13,6 +13,7 @@
       <ds-item-version-list [currentVersionSelected]="(currentComparingWorkingPlan | async)"
                             [showOnlyVisible]="isFunder"
                             [targetItemId]="workingPlan.id"
+                            [targetItem]="workingPlan"
                             (versionSelected)="onVersionSelected($event)"
                             (versionDeselected)="onVersionDeselected()"></ds-item-version-list>
     </div>

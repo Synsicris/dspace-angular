@@ -105,10 +105,10 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   /**
    * Dispatch initialization of comparing mode
    *
-   * @param version
+   * @param selected
    */
-  onVersionSelected(version: Item) {
-    this.questionsBoardStateService.dispatchInitCompare(this.questionsBoardObject?.id, version.id);
+  onVersionSelected(selected: { base: Item, comparing: Item }) {
+    this.questionsBoardStateService.dispatchInitCompare(selected.base?.id, selected.comparing.id);
   }
 
   /**

@@ -1,4 +1,3 @@
-import { ActivatedRoute } from '@angular/router';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
@@ -68,8 +67,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private modalService: NgbModal,
     private workingPlanService: WorkingPlanService,
-    private workingPlanStateService: WorkingPlanStateService,
-    private aroute: ActivatedRoute,
+    private workingPlanStateService: WorkingPlanStateService
   ) {
   }
 
@@ -143,10 +141,10 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
   /**
    * Dispatch initialization of comparing mode
    *
-   * @param version
+   * @param selected
    */
-  onVersionSelected(version: Item) {
-    this.workingPlanStateService.dispatchInitCompare(version.id);
+  onVersionSelected(selected: { base: Item, comparing: Item, selected: Item }) {
+    this.workingPlanStateService.dispatchInitCompare(selected.base.id, selected.comparing.id, selected.selected.id);
   }
 
   /**

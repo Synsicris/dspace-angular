@@ -26,13 +26,13 @@ import {
 import { MetadataMap, MetadatumViewModel } from '../../core/shared/metadata.models';
 import {
   chartDateViewSelector,
-  comparingVersionSelector,
   getLastAddedNodesListSelector,
   isCompareMode,
   isWorkingPlanInitializingSelector,
   isWorkingPlanLoadedSelector,
   isWorkingPlanMovingSelector,
   isWorkingPlanProcessingSelector,
+  selectedVersionSelector,
   workingPlanStateSelector,
   workpackagesSortOptionSelector,
   workpackageToRemoveSelector
@@ -93,8 +93,8 @@ export class WorkingPlanStateService {
     this.store.dispatch(new GenerateWorkpackageStepAction(projectId, parentId, workpackageStepType, metadata));
   }
 
-  public dispatchInitCompare(compareWorkingplanId: string) {
-    this.store.dispatch(new InitCompareAction(compareWorkingplanId));
+  public dispatchInitCompare(baseWorkingPlanId: string, comparingWorkingPLanId: string, selectedWorkingPlanId: string) {
+    this.store.dispatch(new InitCompareAction(baseWorkingPlanId, comparingWorkingPLanId, selectedWorkingPlanId));
   }
 
   public dispatchMoveWorkpackage(workpackageId: string, oldIndex: number, newIndex: number): void {
@@ -156,7 +156,7 @@ export class WorkingPlanStateService {
    * @return {Observable<string>}
    */
   public getCurrentComparingWorkingPlan(): Observable<string> {
-    return this.store.pipe(select(comparingVersionSelector));
+    return this.store.pipe(select(selectedVersionSelector));
   }
 
   public getWorkpackages(): Observable<Workpackage[]> {

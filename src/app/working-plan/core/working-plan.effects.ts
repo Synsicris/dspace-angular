@@ -332,11 +332,10 @@ export class WorkingPlanEffects {
    */
   @Effect() initCompare$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.INIT_COMPARE),
-    withLatestFrom(this.store$),
-    switchMap(([action, state]: [InitCompareAction, any]) =>
+    switchMap((action: InitCompareAction) =>
       this.projectVersionService.compareItemChildrenByMetadata(
-        state.workingplan.workingplanId,
-        action.payload.compareWorkingplanId,
+        action.payload.baseWorkingPlanId,
+        action.payload.comparingWorkingPLanId,
         environment.workingPlan.workingPlanStepRelationMetadata
       ).pipe(
         switchMap((compareItemList: ComparedVersionItem[]) => this.workingPlanService.initCompareWorkingPlan(compareItemList)),

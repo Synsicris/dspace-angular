@@ -295,18 +295,23 @@ export class ProjectVersionService {
     const unionList = unionWith(targetItemList, versionedItemList, _unionComparator);
     return unionList.map((targetItem) => {
       let versionedItem: Item = null;
-      const versionedItemIndex = findIndex(versionedItemList, (entry) => {
-        return hasVersion(targetItem, entry);
+      let versionedItemIndex = findIndex(itemAddedList, (entry) => {
+        return targetItem.id === entry.id;
       });
-      let status = ComparedVersionItemStatus.Equal;
+      let status = ComparedVersionItemStatus.New;
       if (versionedItemIndex === -1) {
         // item has not a versioned one, so check if is new or old removed
-        const newItemIndex = findIndex(itemAddedList, (entry) => {
+        versionedItemIndex = findIndex(itemRemovedList, (entry) => {
           return targetItem.id === entry.id;
         });
-        status = (newItemIndex === -1) ? ComparedVersionItemStatus.Removed : ComparedVersionItemStatus.New;
-      } else {
+        status = ComparedVersionItemStatus.Removed;
+      }
+      if (versionedItemIndex === -1) {
+        status = ComparedVersionItemStatus.Equal;
         // version exists for this item, so check modified date
+        versionedItemIndex = findIndex(versionedItemList, (entry) => {
+          return hasVersion(targetItem, entry);
+        });
         versionedItem = versionedItemList[versionedItemIndex];
         if (versionedItem.lastModified !== targetItem.lastModified) {
           status = ComparedVersionItemStatus.Changed;

@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { BehaviorSubject } from 'rxjs';
-import { concatMap, filter, map, mergeMap, reduce, tap } from 'rxjs/operators';
+import { BehaviorSubject, of } from 'rxjs';
+import { concatMap, filter, map, mergeMap, reduce, tap, withLatestFrom } from 'rxjs/operators';
 
 import { ProjectVersionService } from '../../core/project/project-version.service';
 import { Item } from '../../core/shared/item.model';
 import { Version } from '../../core/shared/version.model';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../core/shared/operators';
 import { RemoteData } from '../../core/data/remote-data';
 import { isNotNull } from '../empty.util';
 
@@ -38,6 +38,11 @@ export class ItemVersionListComponent implements OnInit {
   @Input() targetItemId: string;
 
   /**
+   * The item id to search versions for
+   */
+  @Input() targetItem: Item;
+
+  /**
    * Class of btn, default sm
    */
   @Input() btnClass = 'btn-sm';
@@ -51,6 +56,7 @@ export class ItemVersionListComponent implements OnInit {
    * The current version selected
    */
   currentVersion: BehaviorSubject<VersionDescription> = new BehaviorSubject<VersionDescription>(null);
+  currentItemVersion: BehaviorSubject<{ item: Item, version?: Version }> = new BehaviorSubject<{ item: Item, version?: Version }>(null);
   activeProjectInstanceVersion: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   /**
@@ -61,7 +67,7 @@ export class ItemVersionListComponent implements OnInit {
   /**
    * An event emitted when a version is selected
    */
-  @Output() versionSelected: EventEmitter<Item> = new EventEmitter<Item>();
+  @Output() versionSelected: EventEmitter<{ base: Item, comparing: Item, selected: Item }> = new EventEmitter<{ base: Item, comparing: Item, selected: Item }>();
 
   /**
    * An event emitted when the current version is removed
@@ -72,6 +78,18 @@ export class ItemVersionListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    of(this.targetItem)
+      .pipe(
+        filter(item => item?.id != null),
+        withLatestFrom(
+          this.projectVersionService.getVersionByItemId(this.targetItem?.id)
+            .pipe(
+              getRemoteDataPayload()
+            )
+        )
+      ).subscribe(
+      ([item, version]) => this.currentItemVersion.next({ item, version })
+    );
     this.projectVersionService.getVersionsByItemId(this.targetItemId)
       .pipe(
         concatMap((versions: Version[]) => versions),
@@ -113,7 +131,17 @@ export class ItemVersionListComponent implements OnInit {
       getFirstCompletedRemoteData()
     ).subscribe((itemRD: RemoteData<Item>) => {
       if (itemRD.hasSucceeded) {
-        this.versionSelected.emit(itemRD.payload);
+        const selected = itemRD.payload;
+        let base = this.currentItemVersion.value?.item;
+        let comparing = itemRD.payload;
+        if (this.currentItemVersion.value?.version != null) {
+          const currentVersionNumber = this.currentItemVersion.value?.version?.version;
+          if (currentVersionNumber < version?.version) {
+            base = selected;
+            comparing = this.currentItemVersion.value?.item;
+          }
+        }
+        this.versionSelected.emit({ base, comparing, selected });
         this.currentVersion.next(this.getVersionDescription(version));
       }
     });
