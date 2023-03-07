@@ -15,6 +15,30 @@ interface VersionDescription {
   date: string;
 }
 
+interface ComparingVersionDescription {
+  base: VersionDescription;
+  comparing: VersionDescription;
+}
+
+export interface VersionSelectedEvent {
+  base: Item;
+  comparing: Item;
+  active: Item;
+  selected: Item;
+}
+
+export interface VersionItemSelectedIds {
+  baseId: string;
+  comparingId: string;
+  activeId: string;
+  selectedId: string;
+}
+
+interface ItemWithVersion {
+  item: Item;
+  version?: Version;
+}
+
 @Component({
   selector: 'ds-item-version-list',
   templateUrl: './item-version-list.component.html',
@@ -25,7 +49,7 @@ export class ItemVersionListComponent implements OnInit {
   /**
    * The id of the current version item selected
    */
-  @Input() currentVersionSelected: string;
+  @Input() currentVersionItemSelected: VersionItemSelectedIds;
 
   /**
    * A boolean representing if to show only visible versions
@@ -55,8 +79,8 @@ export class ItemVersionListComponent implements OnInit {
   /**
    * The current version selected
    */
-  currentVersion: BehaviorSubject<VersionDescription> = new BehaviorSubject<VersionDescription>(null);
-  currentItemVersion: BehaviorSubject<{ item: Item, version?: Version }> = new BehaviorSubject<{ item: Item, version?: Version }>(null);
+  currentVersion: BehaviorSubject<ComparingVersionDescription> = new BehaviorSubject<ComparingVersionDescription>(null);
+  currentItemVersion: BehaviorSubject<ItemWithVersion> = new BehaviorSubject<ItemWithVersion>(null);
   activeProjectInstanceVersion: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   /**
@@ -67,7 +91,7 @@ export class ItemVersionListComponent implements OnInit {
   /**
    * An event emitted when a version is selected
    */
-  @Output() versionSelected: EventEmitter<{ base: Item, comparing: Item, selected: Item }> = new EventEmitter<{ base: Item, comparing: Item, selected: Item }>();
+  @Output() versionSelected: EventEmitter<VersionSelectedEvent> = new EventEmitter<VersionSelectedEvent>();
 
   /**
    * An event emitted when the current version is removed
@@ -88,7 +112,10 @@ export class ItemVersionListComponent implements OnInit {
             )
         )
       ).subscribe(
-      ([item, version]) => this.currentItemVersion.next({ item, version })
+      ([item, version]) => {
+        this.currentItemVersion.next({ item, version });
+        this.updateCurrentVersion(item, version);
+      }
     );
     this.projectVersionService.getVersionsByItemId(this.targetItemId)
       .pipe(
@@ -98,16 +125,14 @@ export class ItemVersionListComponent implements OnInit {
             getFirstCompletedRemoteData(),
             filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded),
             map((itemRD: RemoteData<Item>) => itemRD.payload),
-            filter((item: Item) => {
-              // isFunder
-              if (this.showOnlyVisible) {
-                return this.isVisibleForFunder(item);
-              }
-              return this.isVisible(item);
-            }),
+            // isFunder
+            filter((item: Item) => !this.showOnlyVisible || this.isVisibleForFunder(item)),
             tap((item: Item) => {
-              if (this.currentVersionSelected && item.id === this.currentVersionSelected) {
-                this.currentVersion.next(this.getVersionDescription(version));
+              if (
+                this.currentVersionItemSelected &&
+                (this.currentVersion.value?.comparing == null || this.currentVersion.value?.base == null)
+              ) {
+                this.updateCurrentVersion(item, version);
               }
               if (this.projectVersionService.isActiveWorkingInstance(item)) {
                 this.activeProjectInstanceVersion.next(version.id);
@@ -123,6 +148,27 @@ export class ItemVersionListComponent implements OnInit {
   }
 
   /**
+   * Workaround for workingplan refresh issue
+   *
+   * @param item
+   * @param version
+   * @private
+   */
+  private updateCurrentVersion(item: Item, version: Version) {
+    if (this.currentVersionItemSelected.baseId === item.id) {
+      this.currentVersion.next({
+        ...this.currentVersion.value,
+        base: this.getVersionDescription(version)
+      });
+    } else if (this.currentVersionItemSelected.comparingId === item.id) {
+      this.currentVersion.next({
+        ...this.currentVersion.value,
+        comparing: this.getVersionDescription(version)
+      });
+    }
+  }
+
+  /**
    * Emit an event when a version is selected
    * @param version
    */
@@ -131,18 +177,31 @@ export class ItemVersionListComponent implements OnInit {
       getFirstCompletedRemoteData()
     ).subscribe((itemRD: RemoteData<Item>) => {
       if (itemRD.hasSucceeded) {
-        const selected = itemRD.payload;
-        let base = this.currentItemVersion.value?.item;
-        let comparing = itemRD.payload;
-        if (this.currentItemVersion.value?.version != null) {
+        const selected: ItemWithVersion = { item: itemRD.payload, version: version };
+        const active = this.currentItemVersion.value;
+        let base = this.currentItemVersion.value;
+        let comparing: ItemWithVersion = { item: itemRD.payload, version: version };
+        // both versions, take the greatest as base
+        if (this.currentItemVersion.value?.version?.version !== 1 && version.version !== 1) {
           const currentVersionNumber = this.currentItemVersion.value?.version?.version;
           if (currentVersionNumber < version?.version) {
             base = selected;
-            comparing = this.currentItemVersion.value?.item;
+            comparing = this.currentItemVersion.value;
           }
+        } else if (version?.version === 1) {
+          base = selected;
+          comparing = this.currentItemVersion.value;
         }
-        this.versionSelected.emit({ base, comparing, selected });
-        this.currentVersion.next(this.getVersionDescription(version));
+        this.versionSelected.emit({
+          base: base?.item,
+          comparing: comparing?.item,
+          active: active?.item,
+          selected: selected?.item
+        });
+        this.currentVersion.next({
+          base: this.getVersionDescription(base?.version),
+          comparing: this.getVersionDescription(comparing?.version)
+        });
       }
     });
   }
@@ -164,10 +223,6 @@ export class ItemVersionListComponent implements OnInit {
 
   isActiveInstance(version: Version): boolean {
     return version.id === this.activeProjectInstanceVersion.value;
-  }
-
-  private isVisible(item: Item): boolean {
-    return this.projectVersionService.isActiveWorkingInstance(item) || this.projectVersionService.isVersionVisible(item);
   }
 
   private isVisibleForFunder(item: Item): boolean {

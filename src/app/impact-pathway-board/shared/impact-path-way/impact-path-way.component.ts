@@ -19,6 +19,7 @@ import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-m
 import { hasValue } from '../../../shared/empty.util';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { environment } from '../../../../environments/environment';
+import { VersionSelectedEvent } from '../../../shared/item-version-list/item-version-list.component';
 
 @Component({
   selector: 'ds-impact-path-way',
@@ -208,8 +209,8 @@ export class ImpactPathWayComponent implements OnInit {
    *
    * @param selected
    */
-  onVersionSelected(selected: { base: Item, comparing: Item }) {
-    this.impactPathwayService.dispatchInitCompare(selected.base.id, selected.comparing.id);
+  onVersionSelected(selected: VersionSelectedEvent) {
+    this.impactPathwayService.dispatchInitCompare(selected.base.id, selected.comparing.id, selected.active.id);
   }
 
   /**

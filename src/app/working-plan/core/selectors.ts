@@ -119,7 +119,11 @@ export const isCompareMode = createSelector(_getWorkingPlanState,
  * @return {string}
  */
 export const selectedVersionSelector = createSelector(_getWorkingPlanState,
-  (state: WorkingPlanState) => state.selectedWorkingPlanId || null
+  (state: WorkingPlanState) => state.selectedWorkingplanId || null
+);
+
+export const activeVersionSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.activeWorkingplanId || null
 );
 
 export const baseVersionSelector = createSelector(_getWorkingPlanState,
@@ -128,6 +132,10 @@ export const baseVersionSelector = createSelector(_getWorkingPlanState,
 
 export const comparingVersionSelector = createSelector(_getWorkingPlanState,
   (state: WorkingPlanState) => state.comparingWorkingplanId || null
+);
+
+export const workingPlanIdSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.workingplanId
 );
 
 /**

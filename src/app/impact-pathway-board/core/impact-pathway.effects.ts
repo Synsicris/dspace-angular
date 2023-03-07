@@ -141,12 +141,12 @@ export class ImpactPathwayEffects {
     ofType(ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY),
     switchMap((action: InitCompareAction) =>
       this.projectVersionService.compareItemChildrenByMetadata(
-        action.payload.impactPathwayId,
+        action.payload.baseImpactPathwayId,
         action.payload.compareImpactPathwayId,
         environment.impactPathway.impactPathwayStepRelationMetadata
       ).pipe(
         switchMap((compareItemList: ComparedVersionItem[]) => this.impactPathwayService.initCompareImpactPathwaySteps(compareItemList)),
-        map((steps: ImpactPathwayStep[]) => new InitCompareSuccessAction(action.payload.impactPathwayId, steps)),
+        map((steps: ImpactPathwayStep[]) => new InitCompareSuccessAction(action.payload.activeImpactPathwayId, steps)),
         catchError((error: Error) => {
           if (error) {
             this.notificationsService.error(null, this.translate.get('impact-pathway.compare.error'));

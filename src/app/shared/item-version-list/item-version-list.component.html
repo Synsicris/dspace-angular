@@ -1,8 +1,13 @@
-<a href="#" *ngIf="(currentVersion | async)"
+<span href="#" *ngIf="(currentVersion | async)?.base as base"
+      class="badge badge-primary mr-1">
+  {{('item.version.list.base-text' | translate) + base?.title + ' ' + (base?.date |  date:'medium')}}
+</span>
+<a href="#" *ngIf="(currentVersion | async)?.comparing as comparing"
    class="badge badge-primary mr-1"
    title="{{'item.version.list.remove-text' | translate}}"
    (click)="$event.preventDefault(); $event.stopImmediatePropagation(); onVersionDeselected()">
-  {{('item.version.list.selected-text' | translate) + currentVersion.value.title + ' ' + (currentVersion.value.date |  date:'medium')}} <i class="fas fa-times"></i>
+  {{('item.version.list.comparing-text' | translate) + comparing?.title + ' ' + (comparing?.date |  date:'medium')}} <i
+  class="fas fa-times"></i>
 </a>
 
 <div ngbDropdown class="d-inline-block">

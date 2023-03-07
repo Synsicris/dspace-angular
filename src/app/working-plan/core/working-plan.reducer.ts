@@ -45,7 +45,8 @@ export interface WorkingPlanState {
   workingplanId: string;
   baseWorkingplanId?: string;
   comparingWorkingplanId?: string;
-  selectedWorkingPlanId?: string;
+  selectedWorkingplanId?: string;
+  activeWorkingplanId?: string;
   workpackages: WorkpackageEntries;
   items: string[];
   workpackageToRemove: string;
@@ -547,9 +548,10 @@ function revertWorkpackageStepOrder(state: WorkingPlanState, action: SaveWorkpac
  */
 function initCompare(state: WorkingPlanState, action: InitCompareAction) {
   return Object.assign({}, state, {
-    compareWorkingplanId: action.payload.baseWorkingPlanId,
-    comparingWorkingplanId: action.payload.comparingWorkingPLanId,
-    selectedWorkingplanId: action.payload.selectedWorkingPlanId,
+    baseWorkingplanId: action.payload.baseWorkingplanId,
+    comparingWorkingplanId: action.payload.comparingWorkingplanId,
+    selectedWorkingplanId: action.payload.selectedWorkingplanId,
+    activeWorkingplanId: action.payload.activeWorkingplanId,
     compareMode: true,
     initializing: true,
     loaded: false

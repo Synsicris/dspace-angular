@@ -1454,20 +1454,23 @@ export class ClearImpactPathwaySubtaskCollapseAction implements Action {
 export class InitCompareAction implements Action {
   type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY;
   payload: {
-    impactPathwayId: string;
+    baseImpactPathwayId: string;
     compareImpactPathwayId: string;
+    activeImpactPathwayId: string;
   };
 
   /**
    * Create a new InitCompareAction
    *
-   * @param impactPathwayId
+   * @param baseImpactPathwayId
    *    the base impact pathway's id to compare
-   *  @param compareImpactPathwayId
+   * @param compareImpactPathwayId
    *    the impact pathway's id to compare with the current one
+   * @param activeImpactPathwayId
+   *    the opened impact pathway's
    */
-  constructor(impactPathwayId: string, compareImpactPathwayId: string) {
-    this.payload = { impactPathwayId, compareImpactPathwayId };
+  constructor(baseImpactPathwayId: string, compareImpactPathwayId: string, activeImpactPathwayId: string) {
+    this.payload = { baseImpactPathwayId, compareImpactPathwayId, activeImpactPathwayId };
   }
 }
 
@@ -1507,6 +1510,7 @@ export class InitCompareStepTaskAction implements Action {
     impactPathwayId: string;
     impactPathwayStepId: string;
     compareImpactPathwayStepId: string;
+    activeImpactPathwayStepId: string;
   };
 
   /**
@@ -1518,9 +1522,11 @@ export class InitCompareStepTaskAction implements Action {
    *    the id of impact pathway step that the task belongs to
    * @param compareImpactPathwayStepId
    *    the impact pathway step's id to compare with the current one
+   * @param activeImpactPathwayStepId
+   *    the loaded impact pathway step's id
    */
-  constructor(impactPathwayId: string, impactPathwayStepId: string, compareImpactPathwayStepId: string) {
-    this.payload = { impactPathwayId, impactPathwayStepId, compareImpactPathwayStepId };
+  constructor(impactPathwayId: string, impactPathwayStepId: string, compareImpactPathwayStepId: string, activeImpactPathwayStepId: string) {
+    this.payload = { impactPathwayId, impactPathwayStepId, compareImpactPathwayStepId, activeImpactPathwayStepId };
   }
 }
 

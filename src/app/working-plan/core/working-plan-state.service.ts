@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { select, Store } from '@ngrx/store';
+import { createSelector, select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, startWith } from 'rxjs/operators';
 
@@ -25,7 +25,10 @@ import {
 } from './working-plan.actions';
 import { MetadataMap, MetadatumViewModel } from '../../core/shared/metadata.models';
 import {
+  activeVersionSelector,
+  baseVersionSelector,
   chartDateViewSelector,
+  comparingVersionSelector,
   getLastAddedNodesListSelector,
   isCompareMode,
   isWorkingPlanInitializingSelector,
@@ -33,6 +36,7 @@ import {
   isWorkingPlanMovingSelector,
   isWorkingPlanProcessingSelector,
   selectedVersionSelector,
+  workingPlanIdSelector,
   workingPlanStateSelector,
   workpackagesSortOptionSelector,
   workpackageToRemoveSelector
@@ -51,6 +55,14 @@ export interface WpStepActionPackage {
   workpackageStepId: string;
   workpackageStep: WorkpackageStep;
   metadatumViewList: any[];
+}
+
+export interface WpStateIds {
+  workingplanId: string;
+  baseWorkingplanId?: string;
+  comparingWorkingplanId?: string;
+  selectedWorkingplanId?: string;
+  activeWorkingplanId?: string;
 }
 
 @Injectable()
@@ -93,8 +105,8 @@ export class WorkingPlanStateService {
     this.store.dispatch(new GenerateWorkpackageStepAction(projectId, parentId, workpackageStepType, metadata));
   }
 
-  public dispatchInitCompare(baseWorkingPlanId: string, comparingWorkingPLanId: string, selectedWorkingPlanId: string) {
-    this.store.dispatch(new InitCompareAction(baseWorkingPlanId, comparingWorkingPLanId, selectedWorkingPlanId));
+  public dispatchInitCompare(baseWorkingPlanId: string, comparingWorkingPLanId: string, selectedWorkingPlanId: string, activeWorkingPlanId: string) {
+    this.store.dispatch(new InitCompareAction(baseWorkingPlanId, comparingWorkingPLanId, selectedWorkingPlanId, activeWorkingPlanId));
   }
 
   public dispatchMoveWorkpackage(workpackageId: string, oldIndex: number, newIndex: number): void {
@@ -155,8 +167,23 @@ export class WorkingPlanStateService {
    *
    * @return {Observable<string>}
    */
-  public getCurrentComparingWorkingPlan(): Observable<string> {
-    return this.store.pipe(select(selectedVersionSelector));
+  public getCurrentComparingWorkingPlan(): Observable<WpStateIds> {
+    return this.store.select(
+      createSelector(
+        workingPlanIdSelector,
+        selectedVersionSelector,
+        activeVersionSelector,
+        baseVersionSelector,
+        comparingVersionSelector,
+        (workingplanId, selectedWorkingplanId, activeWorkingplanId, baseWorkingplanId, comparingWorkingplanId) => ({
+          workingplanId,
+          selectedWorkingplanId,
+          activeWorkingplanId,
+          baseWorkingplanId,
+          comparingWorkingplanId
+        })
+      )
+    );
   }
 
   public getWorkpackages(): Observable<Workpackage[]> {

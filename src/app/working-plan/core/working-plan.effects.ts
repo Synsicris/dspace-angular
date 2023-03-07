@@ -334,8 +334,8 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.INIT_COMPARE),
     switchMap((action: InitCompareAction) =>
       this.projectVersionService.compareItemChildrenByMetadata(
-        action.payload.baseWorkingPlanId,
-        action.payload.comparingWorkingPLanId,
+        action.payload.baseWorkingplanId,
+        action.payload.comparingWorkingplanId,
         environment.workingPlan.workingPlanStepRelationMetadata
       ).pipe(
         switchMap((compareItemList: ComparedVersionItem[]) => this.workingPlanService.initCompareWorkingPlan(compareItemList)),

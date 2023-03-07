@@ -15,6 +15,10 @@ import { Workpackage } from '../../core/models/workpackage-step.model';
 import { environment } from '../../../../environments/environment';
 import { hasValue } from '../../../shared/empty.util';
 import { Item } from '../../../core/shared/item.model';
+import {
+  VersionItemSelectedIds,
+  VersionSelectedEvent
+} from '../../../shared/item-version-list/item-version-list.component';
 
 /**
  * @title Tree with nested nodes
@@ -57,7 +61,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
   @Input() public compareMode: Observable<boolean>;
 
   workpackagesCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  currentComparingWorkingPlan: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  currentComparingWorkingPlan: BehaviorSubject<VersionItemSelectedIds> = new BehaviorSubject<VersionItemSelectedIds>(null);
   chartDateView: Observable<ChartDateViewType>;
   ChartDateViewType = ChartDateViewType;
 
@@ -78,8 +82,19 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
         this.workpackagesCount.next(count);
       }),
       this.workingPlanStateService.getCurrentComparingWorkingPlan().pipe(
-      ).subscribe((compareItemId: string) => {
-        this.currentComparingWorkingPlan.next(compareItemId);
+      ).subscribe(({
+                     workingplanId,
+                     selectedWorkingplanId,
+                     activeWorkingplanId,
+                     baseWorkingplanId,
+                     comparingWorkingplanId
+                   }) => {
+        this.currentComparingWorkingPlan.next({
+          baseId: baseWorkingplanId,
+          comparingId: comparingWorkingplanId,
+          selectedId: selectedWorkingplanId,
+          activeId: activeWorkingplanId
+        });
       })
     );
 
@@ -143,8 +158,8 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
    *
    * @param selected
    */
-  onVersionSelected(selected: { base: Item, comparing: Item, selected: Item }) {
-    this.workingPlanStateService.dispatchInitCompare(selected.base.id, selected.comparing.id, selected.selected.id);
+  onVersionSelected(selected: VersionSelectedEvent) {
+    this.workingPlanStateService.dispatchInitCompare(selected.base.id, selected.comparing.id, selected.selected.id, selected.active.id);
   }
 
   /**
