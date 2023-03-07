@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angula
 import { RenderCrisLayoutBoxFor } from '../../../../decorators/cris-layout-box.decorator';
 import { LayoutBox } from '../../../../enums/layout-box.enum';
 import { CrisLayoutRelationBoxComponent } from '../relation/cris-layout-relation-box.component';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, UrlSerializer } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CrisLayoutBox, RelationBoxConfiguration } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
@@ -12,7 +12,7 @@ import { hasValue } from '../../../../../shared/empty.util';
 import { environment } from '../../../../../../environments/environment';
 import { ItemDataService } from '../../../../../core/data/item-data.service';
 import { AuthorizationDataService } from '../../../../../core/data/feature-authorization/authorization-data.service';
-import { map, take, withLatestFrom } from 'rxjs/operators';
+import { map, take, tap, withLatestFrom } from 'rxjs/operators';
 import {
   getDiscoveryConfiguration,
   groupRangeFilters,
@@ -41,6 +41,7 @@ export class CrisLayoutCommentBoxComponent extends CrisLayoutRelationBoxComponen
    * @param router
    * @param location
    * @param translateService
+   * @param serializer
    * @param boxProvider
    * @param itemProvider
    */
@@ -53,6 +54,7 @@ export class CrisLayoutCommentBoxComponent extends CrisLayoutRelationBoxComponen
     protected readonly router: Router,
     private readonly location: Location,
     protected readonly translateService: TranslateService,
+    private readonly serializer: UrlSerializer,
     @Inject('boxProvider') public boxProvider: CrisLayoutBox,
     @Inject('itemProvider') public itemProvider: Item
   ) {
@@ -77,15 +79,33 @@ export class CrisLayoutCommentBoxComponent extends CrisLayoutRelationBoxComponen
             this.getNonFacetQueryParams(queryParams, confParam)
           )
         ),
-        switchMap(params =>
-          from(
-            this.router.navigate(
-              this.location.path()?.split('/'),
+        map(params => ({
+            route: this.router.createUrlTree(
+              [],
+              {
+                queryParams: params,
+                queryParamsHandling: 'merge'
+              }
+            ),
+            location: this.router.createUrlTree(
+              this.location.path()?.split('?')[0].split('/'),
               {
                 queryParams: params,
                 queryParamsHandling: 'merge'
               }
             )
+          })
+        ),
+        switchMap(({ route, location }) =>
+          from(
+            this.router.navigateByUrl(route)
+          ).pipe(
+            tap(() =>
+              this.location.replaceState(
+                this.serializer.serialize(location)
+              )
+            ),
+            take(1)
           )
         ),
         take(1)
