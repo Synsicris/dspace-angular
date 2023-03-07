@@ -348,15 +348,11 @@ export class SubmissionObjectEffects {
   discardSubmission$ = createEffect(() => this.actions$.pipe(
     ofType(SubmissionObjectActionTypes.DISCARD_SUBMISSION),
     switchMap((action: DiscardSubmissionAction) => {
-      return this.impactPathwayService.checkAndRemoveRelations(action.payload.itemId).pipe(
-        mergeMap(() => {
-          const remove$: Observable<any> = action.payload.isEditItem ? this.itemDataService.delete(action.payload.itemId).pipe(getFinishedRemoteData()) :
-            this.submissionService.discardSubmission(action.payload.submissionId);
-          return remove$.pipe(
-            map(() => new DiscardSubmissionSuccessAction(action.payload.submissionId)),
-            catchError(() => observableOf(new DiscardSubmissionErrorAction(action.payload.submissionId)))
-          );
-        })
+      const remove$: Observable<any> = action.payload.isEditItem ? this.itemDataService.delete(action.payload.itemId).pipe(getFinishedRemoteData()) :
+        this.submissionService.discardSubmission(action.payload.submissionId);
+      return remove$.pipe(
+        map(() => new DiscardSubmissionSuccessAction(action.payload.submissionId)),
+        catchError(() => observableOf(new DiscardSubmissionErrorAction(action.payload.submissionId)))
       );
     })));
 
