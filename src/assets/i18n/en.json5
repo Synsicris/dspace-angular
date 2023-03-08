@@ -3555,22 +3555,41 @@
   "item.version.visibility.modal.text": "Do you want to make version {{version}} visible?",
 
   "item.version.visibility.modal.button.confirm": "Visibile",
+
   "item.version.visibility.modal.button.confirm.tooltip": "Make visible this version",
+
   "item.version.visibility.modal.button.cancel": "Cancel",
+
   "item.version.visibility.modal.button.cancel.tooltip": "Do not visibility this version",
+
   "item.version.visibility.modal.official.label": "Set version as official",
+
   "item.version.list.dropdown-text": "Compare with...",
-  "item.version.list.active-option-text": "Active instance : ",
-  "item.version.list.option-text": "Version : ",
+
+  "item.version.list.active-option-text": "Active instance ",
+
+  "item.version.list.option-text": "Version ",
+
   "item.version.list.remove-text": "Remove selection",
+
   "item.version.list.base-text": "Base : ",
+
   "item.version.list.comparing-text": "Compared : ",
+
+  "item.version.list.stop-comparing-text": "Stop comparing ",
+
   "item.version.synsicris.version.invisible": "Not Visible",
+
   "item.version.synsicris.version.visible": "Visible",
+
   "item.version.synsicris.version.official": "Official",
+
   "item.version.synsicris.version.not_official": "Not Official",
+
   "item-export.modal-launcher.single.btn": "Export",
+
   "item-export.modal-launcher.multiple.btn": "Export",
+
   "item-export.alert.single": "Export item",
 
   "item-export.alert.multiple": "Export all items of a particular entity type belonging to the current search.",

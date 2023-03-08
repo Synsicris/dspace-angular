@@ -1,18 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { BehaviorSubject, of } from 'rxjs';
-import { concatMap, filter, map, mergeMap, reduce, tap, withLatestFrom } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { concatMap, filter, map, mergeMap, reduce, tap } from 'rxjs/operators';
 
-import { ProjectVersionService } from '../../core/project/project-version.service';
+import { ProjectVersionService, VersionEntry } from '../../core/project/project-version.service';
 import { Item } from '../../core/shared/item.model';
 import { Version } from '../../core/shared/version.model';
-import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../core/shared/operators';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { RemoteData } from '../../core/data/remote-data';
 import { isNotNull } from '../empty.util';
 
 interface VersionDescription {
   title: string;
   date: string;
+  isActiveInstance: boolean;
 }
 
 interface ComparingVersionDescription {
@@ -86,7 +87,7 @@ export class ItemVersionListComponent implements OnInit {
   /**
    * The list of versioned items available for the given target
    */
-  versionList$: BehaviorSubject<Version[]> = new BehaviorSubject<Version[]>([]);
+  versionList$: BehaviorSubject<VersionEntry[]> = new BehaviorSubject<VersionEntry[]>([]);
 
   /**
    * An event emitted when a version is selected
@@ -102,26 +103,11 @@ export class ItemVersionListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    of(this.targetItem)
-      .pipe(
-        filter(item => item?.id != null),
-        withLatestFrom(
-          this.projectVersionService.getVersionByItemId(this.targetItem?.id)
-            .pipe(
-              getRemoteDataPayload()
-            )
-        )
-      ).subscribe(
-      ([item, version]) => {
-        this.currentItemVersion.next({ item, version });
-        this.updateCurrentVersion(item, version);
-      }
-    );
     this.projectVersionService.getVersionsByItemId(this.targetItemId)
       .pipe(
-        concatMap((versions: Version[]) => versions),
-        mergeMap((version: Version) => {
-          return version.item.pipe(
+        concatMap((versions: VersionEntry[]) => versions),
+        mergeMap((versionEntry: VersionEntry) => {
+          return versionEntry.version.item.pipe(
             getFirstCompletedRemoteData(),
             filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded),
             map((itemRD: RemoteData<Item>) => itemRD.payload),
@@ -132,19 +118,23 @@ export class ItemVersionListComponent implements OnInit {
                 this.currentVersionItemSelected &&
                 (this.currentVersion.value?.comparing == null || this.currentVersion.value?.base == null)
               ) {
-                this.updateCurrentVersion(item, version);
+                this.updateCurrentVersion(item, versionEntry.version);
+              }
+              if (versionEntry.isTargetItem) {
+                this.currentItemVersion.next({ item, version: versionEntry.version });
+                this.updateCurrentVersion(item, versionEntry.version);
               }
               if (this.projectVersionService.isActiveWorkingInstance(item)) {
-                this.activeProjectInstanceVersion.next(version.id);
+                this.activeProjectInstanceVersion.next(versionEntry.version.id);
               }
             }),
-            map(() => version)
+            map(() => versionEntry)
           );
         }),
-        filter((version: Version) => isNotNull(version)),
-        reduce((acc: Version[], value: Version) => [...acc, value], []),
+        filter((version: VersionEntry) => isNotNull(version)),
+        reduce((acc: VersionEntry[], value: VersionEntry) => [...acc, value], []),
       )
-      .subscribe((list: Version[]) => this.versionList$.next(list));
+      .subscribe((list: VersionEntry[]) => this.versionList$.next(list));
   }
 
   /**
@@ -155,15 +145,16 @@ export class ItemVersionListComponent implements OnInit {
    * @private
    */
   private updateCurrentVersion(item: Item, version: Version) {
-    if (this.currentVersionItemSelected.baseId === item.id) {
+    const isActiveInstance = this.projectVersionService.isActiveWorkingInstance(item);
+    if (this.currentVersionItemSelected?.baseId === item.id) {
       this.currentVersion.next({
         ...this.currentVersion.value,
-        base: this.getVersionDescription(version)
+        base: this.getVersionDescription(version, isActiveInstance)
       });
-    } else if (this.currentVersionItemSelected.comparingId === item.id) {
+    } else if (this.currentVersionItemSelected?.comparingId === item.id) {
       this.currentVersion.next({
         ...this.currentVersion.value,
-        comparing: this.getVersionDescription(version)
+        comparing: this.getVersionDescription(version, isActiveInstance)
       });
     }
   }
@@ -192,15 +183,19 @@ export class ItemVersionListComponent implements OnInit {
           base = selected;
           comparing = this.currentItemVersion.value;
         }
+
         this.versionSelected.emit({
           base: base?.item,
           comparing: comparing?.item,
           active: active?.item,
           selected: selected?.item
         });
+
+        const isBaseItemActiveInstance = this.projectVersionService.isActiveWorkingInstance(base?.item);
+        const isComparingItemActiveInstance = this.projectVersionService.isActiveWorkingInstance(comparing?.item);
         this.currentVersion.next({
-          base: this.getVersionDescription(base?.version),
-          comparing: this.getVersionDescription(comparing?.version)
+          base: this.getVersionDescription(base?.version, isBaseItemActiveInstance),
+          comparing: this.getVersionDescription(comparing?.version, isComparingItemActiveInstance)
         });
       }
     });
@@ -214,10 +209,11 @@ export class ItemVersionListComponent implements OnInit {
     this.versionDeselected.emit();
   }
 
-  private getVersionDescription(version: Version): VersionDescription {
+  private getVersionDescription(version: Version, isActiveInstance: boolean): VersionDescription {
     return {
       title: version?.summary || '',
-      date: version?.created?.toString() || ''
+      date: version?.created?.toString() || '',
+      isActiveInstance
     };
   }
 

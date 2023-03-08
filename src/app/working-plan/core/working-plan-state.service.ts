@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { createSelector, select, Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, startWith } from 'rxjs/operators';
 
@@ -25,18 +25,14 @@ import {
 } from './working-plan.actions';
 import { MetadataMap, MetadatumViewModel } from '../../core/shared/metadata.models';
 import {
-  activeVersionSelector,
-  baseVersionSelector,
   chartDateViewSelector,
-  comparingVersionSelector,
+  getCurrentComparingObjectSelector,
   getLastAddedNodesListSelector,
   isCompareMode,
   isWorkingPlanInitializingSelector,
   isWorkingPlanLoadedSelector,
   isWorkingPlanMovingSelector,
   isWorkingPlanProcessingSelector,
-  selectedVersionSelector,
-  workingPlanIdSelector,
   workingPlanStateSelector,
   workpackagesSortOptionSelector,
   workpackageToRemoveSelector
@@ -168,22 +164,7 @@ export class WorkingPlanStateService {
    * @return {Observable<string>}
    */
   public getCurrentComparingWorkingPlan(): Observable<WpStateIds> {
-    return this.store.select(
-      createSelector(
-        workingPlanIdSelector,
-        selectedVersionSelector,
-        activeVersionSelector,
-        baseVersionSelector,
-        comparingVersionSelector,
-        (workingplanId, selectedWorkingplanId, activeWorkingplanId, baseWorkingplanId, comparingWorkingplanId) => ({
-          workingplanId,
-          selectedWorkingplanId,
-          activeWorkingplanId,
-          baseWorkingplanId,
-          comparingWorkingplanId
-        })
-      )
-    );
+    return this.store.select(getCurrentComparingObjectSelector);
   }
 
   public getWorkpackages(): Observable<Workpackage[]> {

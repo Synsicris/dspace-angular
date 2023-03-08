@@ -156,3 +156,19 @@ export function workpackageByIDSelector(workpackageId: string): MemoizedSelector
 export const isWorkingPlanMovingSelector = createSelector(_getWorkingPlanState,
   (state: WorkingPlanState) => state.moving
 );
+
+export const getCurrentComparingObjectSelector =
+  createSelector(
+    workingPlanIdSelector,
+    selectedVersionSelector,
+    activeVersionSelector,
+    baseVersionSelector,
+    comparingVersionSelector,
+    (workingplanId, selectedWorkingplanId, activeWorkingplanId, baseWorkingplanId, comparingWorkingplanId) => ({
+      workingplanId,
+      selectedWorkingplanId,
+      activeWorkingplanId,
+      baseWorkingplanId,
+      comparingWorkingplanId
+    })
+  );
