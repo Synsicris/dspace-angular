@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -17,7 +17,8 @@ import { ItemDetailPageModalComponent } from '../../../item-detail-page-modal/it
 @Component({
   selector: 'ds-questions-board-task',
   styleUrls: ['./questions-board-task.component.scss'],
-  templateUrl: './questions-board-task.component.html'
+  templateUrl: './questions-board-task.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuestionsBoardTaskComponent implements OnInit {
 

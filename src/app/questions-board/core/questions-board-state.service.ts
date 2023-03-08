@@ -111,6 +111,17 @@ export class QuestionsBoardStateService {
     );
   }
 
+  /**
+   * Return array of questions board steps
+   * @param questionsBoardId
+   */
+  getQuestionsBoard(questionsBoardId: string): Observable<QuestionsBoard> {
+    return this.store.pipe(
+      select(questionsBoardByIDSelector(questionsBoardId)),
+      distinctUntilChanged()
+    );
+  }
+
   getQuestionsBoardTasksByParentId(
     questionsBoardId: string,
     questionsBoardStepId: string

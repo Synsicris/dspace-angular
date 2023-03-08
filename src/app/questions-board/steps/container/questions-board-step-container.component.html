@@ -3,28 +3,28 @@
   <div class="d-flex justify-content-start">
     <button class="btn btn-link p-0 open-modal"
             title="{{'impact-pathway.add.btn' | translate}}"
-            [disabled]="compareMode || isVersionOfAnItem"
+            [disabled]="!(canAdd() | async)"
             (click)="openModal(); $event.stopPropagation()">
       <i class="fas fa-plus-circle fa-2x text-info"></i>
     </button>
   </div>
 
-  <div id="{{(questionsBoardStep$ | async).id}}"
+  <div id="{{questionsBoardStep?.id}}"
        class="d-flex p-2 h-100 flex-wrap task-list-horizontal"
        cdkDropList
        cdkDropListOrientation="horizontal"
-       [cdkDropListData]="(questionsBoardStep$ | async)"
+       [cdkDropListData]="questionsBoardStep"
        [cdkDropListConnectedTo]="connectedToList"
        (cdkDropListEntered)="listEnteredToTask($event)"
        (cdkDropListExited)="listExited($event)"
-       >
-    <ds-questions-board-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
+  >
+    <ds-questions-board-task *ngFor="let task of questionsBoardStep?.tasks; let i = index" cdkDrag
                              class="mb-sm-1 mb-lg-4 mb-5 mr-sm-1 mr-lg-4 task-horizontal draggable-task"
                              [cdkDragDisabled]="isVersionOfAnItem || compareMode"
                              [projectCommunityId]="projectCommunityId"
-                             [questionsBoardId]="(questionsBoardStep$ | async).parentId"
-                             [questionsBoardStepId]="(questionsBoardStep$ | async).id"
-                             [questionsBoardStepType]="(questionsBoardStep$ | async).type"
+                             [questionsBoardId]="questionsBoardStep.parentId"
+                             [questionsBoardStepId]="questionsBoardStep.id"
+                             [questionsBoardStepType]="questionsBoardStep.type"
                              [questionsBoardTask]="task"
                              [data]="task"
                              [cdkDragData]="task"

@@ -14,7 +14,7 @@
 <div *ngIf="!(isLoading() | async)">
   <ds-alert [type]="'alert-info'" [content]="messagePrefix + '.info.text'" [collapsible]="true"></ds-alert>
 
-  <ds-questions-board-step *ngFor="let step of (getQuestionsBoardStep() | async)"
+  <ds-questions-board-step *ngFor="let step of (questionsBoardStep$ | async)"
                            [messagePrefix]="messagePrefix"
                            [questionsBoardStep]="step"
                            [projectCommunityId]="projectCommunityId"
