@@ -6,7 +6,7 @@
     </button>
   </div>
   <div class="modal-body modal-body-height">
-    <ul ngbNav #nav="ngbNav" class="nav-pills" [activeId]="startWithSearch ? 'tab-search' : 'tab-create'">
+    <ul ngbNav #nav="ngbNav" class="nav-pills" [activeId]="(startWithSearch$ | async) ? 'tab-search' : 'tab-create'">
       <li ngbNavItem="tab-create">
         <a ngbNavLink>{{'simple-item-modal.create-btn' | translate}}</a>
         <ng-template ngbNavContent>

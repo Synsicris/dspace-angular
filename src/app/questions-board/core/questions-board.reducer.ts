@@ -27,6 +27,7 @@ export interface QuestionsBoardEntry {
  */
 export interface QuestionsBoardState {
   questionsBoard: QuestionsBoardEntry;
+  questionBoardBeforeCompare: QuestionsBoard;
   loaded: boolean;
   processing: boolean;
   moving: boolean;
@@ -37,6 +38,7 @@ export interface QuestionsBoardState {
 
 const initialState: QuestionsBoardState = {
   questionsBoard: null,
+  questionBoardBeforeCompare: null,
   loaded: false,
   processing: false,
   moving: false,
@@ -304,7 +306,7 @@ function setQuestionsBoardTasks(
  *    the current state
  * @param questionsBoardId
  *    the questions board's Id
- * @param stepId
+ * @param questionsBoardStepId
  *    the questions board step's Id
  * @param value
  *    the value of collapsed
@@ -317,7 +319,6 @@ function setQuestionsBoardCollapse(
   questionsBoardStepId: string,
   value: boolean
 ) {
-  const newState = Object.assign({}, state);
   let collapsed = Object.assign({}, state.collapsed);
 
   if (!collapsed[questionsBoardId]) {
@@ -378,7 +379,13 @@ function initCompare(state: QuestionsBoardState, action: InitCompareAction) {
  *    the new state.
  */
 function stopCompare(state: QuestionsBoardState, action: StopCompareQuestionsBoardAction) {
+  const questionBoardBeforeCompare = null;
+  const questionsBoard = Object.assign({}, state.questionsBoard, {
+    [action.payload.id]: Object.assign(new QuestionsBoard(), state.questionBoardBeforeCompare)
+  });
   return Object.assign({}, state, {
+    questionsBoard,
+    questionBoardBeforeCompare,
     compareQuestionsBoardId: null,
     compareMode: false,
   });
@@ -397,11 +404,31 @@ function stopCompare(state: QuestionsBoardState, action: StopCompareQuestionsBoa
 function replaceQuestionsBoardSteps(state: QuestionsBoardState, action: InitCompareSuccessAction) {
 
   const questionsBoardEntry = state.questionsBoard;
+  const questionBoard = state.questionsBoard[action.payload.questionsBoardId];
+  const questionBoardBeforeCompare =
+    Object.assign(
+      new QuestionsBoard(),
+      {
+        ...questionBoard,
+        steps: questionBoard
+          .steps
+          .map(step =>
+            Object.assign(
+              new QuestionsBoardStep(),
+              {
+                ...step,
+                tasks: step.tasks.map(task => Object.assign(new QuestionsBoardTask(), task))
+              }
+            )
+          )
+      }
+    );
 
   return Object.assign({}, state, { loaded: true }, {
     questionsBoard: Object.assign({}, questionsBoardEntry, {
       [action.payload.questionsBoardId]: Object.assign(new QuestionsBoard(), questionsBoardEntry[action.payload.questionsBoardId], { steps: action.payload.steps })
-    })
+    }),
+    questionBoardBeforeCompare
   });
 }
 
