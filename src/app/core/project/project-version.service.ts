@@ -45,7 +45,6 @@ export interface ComparedVersionItem {
 
 export interface VersionEntry {
   version: Version;
-
   isTargetItem: boolean
 }
 
@@ -153,10 +152,6 @@ export class ProjectVersionService {
                             isTargetItem: entry.id === versionRD.payload.id
                           }));
                         })
-/*                        map((list: Version[]) => {
-                          // exclude from the returned list the version regarding the target item itself
-                          return list.filter((entry: Version) => entry.id !== versionRD.payload.id);
-                        })*/
                       );
                     } else {
                       return of([]);
