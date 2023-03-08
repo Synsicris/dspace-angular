@@ -8,8 +8,8 @@ import { BreadcrumbsComponent as BaseComponent } from '../../../../app/breadcrum
   selector: 'ds-breadcrumbs',
   // templateUrl: './breadcrumbs.component.html',
   templateUrl: '../../../../app/breadcrumbs/breadcrumbs.component.html',
-  // styleUrls: ['./breadcrumbs.component.scss']
   styleUrls: ['../../../../app/breadcrumbs/breadcrumbs.component.scss']
+   // styleUrls: ['breadcrumbs.component.scss'],
 })
 export class BreadcrumbsComponent extends BaseComponent {
 }
