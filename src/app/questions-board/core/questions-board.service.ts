@@ -217,7 +217,7 @@ export class QuestionsBoardService {
                   this.getQuestionsBoardEditFormSection(),
                   this.getQuestionsBoardEditMode(),
                   parentItem.id,
-                  task.value,
+                  task.authority,
                   this.getQuestionsBoardRelationTasksMetadata()
                 ).pipe(mapTo(null));
               } else {
