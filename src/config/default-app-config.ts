@@ -730,12 +730,15 @@ export class DefaultAppConfig implements AppConfig {
       'cris.policy.group', 'cris.project.shared', 'dc.date.accessioned', 'dc.date.available', 'dspace.entity.type',
       'synsicris.funder-policy.group', 'synsicris.coordinator-policy.group', 'synsicris.member-policy.group',
       'synsicris.reader-policy.group', 'synsicris.relation.project', 'synsicris.relation.funding',
-      'synsicris.versioning-edit-policy.group', 'synsicris.versioning-read-policy.group','synsicris.uniqueid',
+      'synsicris.versioning-edit-policy.group', 'synsicris.versioning-read-policy.group', 'synsicris.uniqueid',
       'synsicris.relation.workingplan', 'workingplan.link.status', 'workingplan.place', 'workingplan.relation.step',
       'impactpathway.relation.parent', 'impactpathway.relation.step', 'impactpathway.relation.task',
       'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
       'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
-      'synsicris.isLastVersion','synsicris.isLastVersion.visible', 'synsicris.version', 'synsicris.version.visible'
+      'synsicris.isLastVersion', 'synsicris.isLastVersion.visible', 'synsicris.version', 'synsicris.version.visible',
+      "synsicris.versioning-funder-policy.group", "synsicris.versioning-reader-policy.group",
+      "synsicris.versioning-member-policy.group", "synsicris.versioning-coordinator-policy.group"
+
     ],
     projectsBrowse: {
       adminAndFunders: {
