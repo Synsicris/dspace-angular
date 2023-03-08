@@ -201,9 +201,11 @@ export class QuestionsBoardStateService {
    *    the questions board's id
    * @param compareQuestionsBoardId
    *    the questions board's id to compare with
+   * @param activeQuestionBoardId
+   *    the loaded question board's id in the interface
    */
-  public dispatchInitCompare(questionsBoardId: string, compareQuestionsBoardId: string) {
-    this.store.dispatch(new InitCompareAction(questionsBoardId, compareQuestionsBoardId));
+  public dispatchInitCompare(questionsBoardId: string, compareQuestionsBoardId: string, activeQuestionBoardId: string) {
+    this.store.dispatch(new InitCompareAction(questionsBoardId, compareQuestionsBoardId, activeQuestionBoardId));
   }
 
   /**

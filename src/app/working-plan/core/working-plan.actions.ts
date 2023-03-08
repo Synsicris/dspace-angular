@@ -306,17 +306,24 @@ export class AddWorkpackageStepErrorAction implements Action {
 export class InitCompareAction implements Action {
   type = WorkpackageActionTypes.INIT_COMPARE;
   payload: {
-    compareWorkingplanId: string;
+    baseWorkingplanId: string;
+    comparingWorkingplanId: string;
+    selectedWorkingplanId: string;
+    activeWorkingplanId: string;
   };
 
   /**
    * Create a new InitCompareAction
    *
-   * @param compareWorkingplanId
-   *    the working-plan id to compare with the current one
+   * @param baseWorkingPlanId
+   *    the working-plan id that is the base of the compare
+   * @param comparingWorkingPLanId
+   *    the working-plan id that is the one to compare
+   * @param selectedWorkingPlanId
+   *    the working-plan id that is opened by the user
    */
-  constructor(compareWorkingplanId: string) {
-    this.payload = { compareWorkingplanId };
+  constructor(baseWorkingplanId: string, comparingWorkingplanId: string, selectedWorkingplanId: string, activeWorkingplanId: string) {
+    this.payload = { baseWorkingplanId, comparingWorkingplanId, selectedWorkingplanId, activeWorkingplanId };
   }
 }
 

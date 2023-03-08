@@ -115,11 +115,27 @@ export const isCompareMode = createSelector(_getWorkingPlanState,
 
 /**
  * Returns the current working plan selected for comparison.
- * @function comparingVersionSelector
+ * @function selectedVersionSelector
  * @return {string}
  */
+export const selectedVersionSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.selectedWorkingplanId || null
+);
+
+export const activeVersionSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.activeWorkingplanId || null
+);
+
+export const baseVersionSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.baseWorkingplanId || null
+);
+
 export const comparingVersionSelector = createSelector(_getWorkingPlanState,
-  (state: WorkingPlanState) => state.compareWorkingplanId || null
+  (state: WorkingPlanState) => state.comparingWorkingplanId || null
+);
+
+export const workingPlanIdSelector = createSelector(_getWorkingPlanState,
+  (state: WorkingPlanState) => state.workingplanId
 );
 
 /**
@@ -140,3 +156,19 @@ export function workpackageByIDSelector(workpackageId: string): MemoizedSelector
 export const isWorkingPlanMovingSelector = createSelector(_getWorkingPlanState,
   (state: WorkingPlanState) => state.moving
 );
+
+export const getCurrentComparingObjectSelector =
+  createSelector(
+    workingPlanIdSelector,
+    selectedVersionSelector,
+    activeVersionSelector,
+    baseVersionSelector,
+    comparingVersionSelector,
+    (workingplanId, selectedWorkingplanId, activeWorkingplanId, baseWorkingplanId, comparingWorkingplanId) => ({
+      workingplanId,
+      selectedWorkingplanId,
+      activeWorkingplanId,
+      baseWorkingplanId,
+      comparingWorkingplanId
+    })
+  );

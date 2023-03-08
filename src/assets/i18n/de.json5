@@ -5309,27 +5309,24 @@
   // "item.version.list.dropdown-text": "Compare with...",
   // TODO New key - Add a translation
   "item.version.list.dropdown-text": "Vergleich mit…",
-
   // "item.version.list.option-text": "Version : ",
   // TODO New key - Add a translation
   "item.version.list.option-text": "Version : ",
-
   // "item.version.list.remove-text": "Remove selection",
   // TODO New key - Add a translation
   "item.version.list.remove-text": "Remove selection",
-
   // "item.version.list.selected-text": "Version selected : ",
   // TODO New key - Add a translation
-  "item.version.list.selected-text": "Version selected : ",
-
+  "item.version.list.base-text": "Base : ",
+  // "item.version.list.comparing-text": "Compared : ",
+  // TODO New key - Add a translation
+  "item.version.list.comparing-text": "Compared : ",
   // "item-export.modal-launcher.single.btn": "Export",
   // TODO New key - Add a translation
   "item-export.modal-launcher.single.btn": "Export",
-
   // "item-export.modal-launcher.multiple.btn": "Export",
   // TODO New key - Add a translation
   "item-export.modal-launcher.multiple.btn": "Export",
-
   // "item-export.alert.single": "Export item",
   // TODO New key - Add a translation
   "item-export.alert.single": "Export item",

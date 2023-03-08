@@ -9,6 +9,7 @@ import { QuestionsBoardStateService } from './core/questions-board-state.service
 import { QuestionsBoardStep } from './core/models/questions-board-step.model';
 import { hasValue } from '../shared/empty.util';
 import { ActivatedRoute } from '@angular/router';
+import { VersionSelectedEvent } from '../shared/item-version-list/item-version-list.component';
 
 @Component({
   selector: 'ds-questions-board',
@@ -105,10 +106,10 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   /**
    * Dispatch initialization of comparing mode
    *
-   * @param version
+   * @param selected
    */
-  onVersionSelected(version: Item) {
-    this.questionsBoardStateService.dispatchInitCompare(this.questionsBoardObject?.id, version.id);
+  onVersionSelected(selected: VersionSelectedEvent) {
+    this.questionsBoardStateService.dispatchInitCompare(selected.base?.id, selected.comparing.id, selected.active.id);
   }
 
   /**
