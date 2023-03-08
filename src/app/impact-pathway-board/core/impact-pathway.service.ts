@@ -447,6 +447,8 @@ export class ImpactPathwayService {
    *
    * @param compareObj
    *    the compared object
+   * @param parentId
+   *    id of linked parent pathway
    * @param tasks
    *    the tasks or steps related to the object
    */
@@ -472,9 +474,11 @@ export class ImpactPathwayService {
    *    the id of impact pathway step that the task belongs to
    * @param compareImpactPathwayStepId
    *    the impact pathway step's id to compare with the current one
+   * @param activeImpactPathwayStepId
+   *    the loaded impact pathway step's id
    */
-  public initCompareImpactPathwayTask(impactPathwayId: string, impactPathwayStepId: string, compareImpactPathwayStepId: string) {
-    this.store.dispatch(new InitCompareStepTaskAction(impactPathwayId, impactPathwayStepId, compareImpactPathwayStepId));
+  public initCompareImpactPathwayTask(impactPathwayId: string, impactPathwayStepId: string, compareImpactPathwayStepId: string, activeImpactPathwayStepId: string) {
+    this.store.dispatch(new InitCompareStepTaskAction(impactPathwayId, impactPathwayStepId, compareImpactPathwayStepId, activeImpactPathwayStepId));
   }
 
 
@@ -483,6 +487,10 @@ export class ImpactPathwayService {
    *
    * @param impactPathwayId
    *    the impact pathway's id
+   * @param impactPathwayStepId
+   *    the impact pathway's step id
+   * * @param impactPathwayStepTaskId
+   *    the impact pathway's step task id
    */
   dispatchStopCompareImpactPathwayTask(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId: string,) {
     this.store.dispatch(new StopCompareImpactPathwayStepTaskAction(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId));
@@ -515,13 +523,15 @@ export class ImpactPathwayService {
   /**
    * Dispatch a new InitCompareAction
    *
-   * @param impactPathwayId
-   *    the impact pathway's id
+   * @param baseImpactPathwayId
+   *    the base impact pathway's id
    * @param compareImpactPathwayId
    *    the impact pathway's id to compare with
+   * @param activeImpactPathwayId
+   *    the loaded impact pathway's
    */
-  public dispatchInitCompare(impactPathwayId: string, compareImpactPathwayId: string) {
-    this.store.dispatch(new InitCompareAction(impactPathwayId, compareImpactPathwayId));
+  public dispatchInitCompare(baseImpactPathwayId: string, compareImpactPathwayId: string, activeImpactPathwayId: string) {
+    this.store.dispatch(new InitCompareAction(baseImpactPathwayId, compareImpactPathwayId, activeImpactPathwayId));
   }
 
 
@@ -647,8 +657,8 @@ export class ImpactPathwayService {
   getImpactPathwayTasksByStepId(impactPathwayId: string, impactPathwayStepId: string): Observable<ImpactPathwayTask[]> {
     return this.store.pipe(
       select(impactPathwayByIDSelector(impactPathwayId)),
-      filter((impactPathway: ImpactPathway) => isNotEmpty(impactPathway)),
-      map((impactPathway: ImpactPathway) => impactPathway.getStep(impactPathwayStepId).tasks)
+      filter((impactPathway: ImpactPathway) => isNotEmpty(impactPathway) && isNotEmpty(impactPathway.getStep(impactPathwayStepId))),
+      map((impactPathway: ImpactPathway) => impactPathway.getStep(impactPathwayStepId)?.tasks)
     );
   }
 

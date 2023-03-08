@@ -304,7 +304,7 @@ export class QuestionsBoardEffects {
         this.questionsBoardService.getQuestionsBoardRelationStepsMetadata()
       ).pipe(
         switchMap((compareItemList: ComparedVersionItem[]) => this.questionsBoardService.initCompareQuestionsBoardSteps(compareItemList, action.payload.questionsBoardId)),
-        map((steps: QuestionsBoardStep[]) => new InitCompareSuccessAction(action.payload.questionsBoardId, steps)),
+        map((steps: QuestionsBoardStep[]) => new InitCompareSuccessAction(action.payload.activeQuestionBoardId, steps)),
         catchError((error: Error) => {
           if (error) {
             this.notificationsService.error(null, this.translate.get('exploitation-plan.compare.error'));

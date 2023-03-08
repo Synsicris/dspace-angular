@@ -3566,13 +3566,17 @@
 
   "item.version.list.dropdown-text": "Compare with...",
 
-  "item.version.list.active-option-text": "Active instance : ",
+  "item.version.list.active-option-text": "Active instance ",
 
-  "item.version.list.option-text": "Version : ",
+  "item.version.list.option-text": "Version ",
 
   "item.version.list.remove-text": "Remove selection",
 
-  "item.version.list.selected-text": "Version selected : ",
+  "item.version.list.base-text": "Base : ",
+
+  "item.version.list.comparing-text": "Compared : ",
+
+  "item.version.list.stop-comparing-text": "Stop comparing ",
 
   "item.version.synsicris.version.invisible": "Not Visible",
 

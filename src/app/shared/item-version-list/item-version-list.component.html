@@ -1,21 +1,38 @@
-<a href="#" *ngIf="(currentVersion | async)"
-   class="badge badge-primary mr-1"
-   title="{{'item.version.list.remove-text' | translate}}"
-   (click)="$event.preventDefault(); $event.stopImmediatePropagation(); onVersionDeselected()">
-  {{('item.version.list.selected-text' | translate) + currentVersion.value.title + ' ' + (currentVersion.value.date |  date:'medium')}} <i class="fas fa-times"></i>
-</a>
-
-<div ngbDropdown class="d-inline-block">
-  <button class="btn btn-primary {{btnClass}}" id="versionList" ngbDropdownToggle
-          [disabled]="(versionList$ | async)?.length === 0 || disabled" data-test="version-disabled">
-    {{'item.version.list.dropdown-text' | translate}}
-  </button>
-  <div ngbDropdownMenu aria-labelledby="versionList">
-    <button *ngFor="let version of (versionList$ | async); let index = index"
-            class="{{btnClass}}"
-            ngbDropdownItem
-            (click)="onVersionSelected(version)">
-      {{((isActiveInstance(version) ? 'item.version.list.active-option-text' : 'item.version.list.option-text') | translate) + (version.summary || '') + ' ' + (version.created |  date:'medium')}}
+<div class="d-flex justify-content-between align-items-center">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex flex-column mr-1">
+      <span *ngIf="(currentVersion | async)?.base as base"
+            class="badge badge-success mb-1 text-justify">
+        {{('item.version.list.base-text' | translate) + ((base.isActiveInstance ? 'item.version.list.active-option-text' : 'item.version.list.option-text') | translate) + (base?.title || '') + ' ' + (base?.date |  date:'medium')}}
+      </span>
+      <span href="#" *ngIf="(currentVersion | async)?.comparing as comparing"
+            class="badge badge-secondary text-justify">
+        {{('item.version.list.comparing-text' | translate) + ((comparing.isActiveInstance ? 'item.version.list.active-option-text' : 'item.version.list.option-text') | translate) + (comparing?.title || '') + ' ' + (comparing?.date |  date:'medium')}}
+    </span>
+    </div>
+    <div>
+      <button *ngIf="(currentVersion | async)?.comparing as comparing"
+              class="btn btn-sm btn-primary mr-1"
+              title="{{'item.version.list.remove-text' | translate}}"
+              (click)="$event.preventDefault(); $event.stopImmediatePropagation(); onVersionDeselected()">
+        {{('item.version.list.stop-comparing-text' | translate)}} <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <div ngbDropdown class="d-inline-block">
+    <button class="btn btn-primary {{btnClass}}" id="versionList" ngbDropdownToggle
+            [disabled]="(versionList$ | async)?.length === 0 || disabled" data-test="version-disabled">
+      {{'item.version.list.dropdown-text' | translate}}
     </button>
+    <div ngbDropdownMenu aria-labelledby="versionList">
+      <ng-container *ngFor="let versionEntry of (versionList$ | async); let index = index">
+        <button *ngIf="!versionEntry.isTargetItem"
+                class="{{btnClass}}"
+                ngbDropdownItem
+                (click)="onVersionSelected(versionEntry.version)">
+          {{((isActiveInstance(versionEntry.version) ? 'item.version.list.active-option-text' : 'item.version.list.option-text') | translate) + (versionEntry.version.summary || '') + ' ' + (versionEntry.version.created |  date:'medium')}}
+        </button>
+      </ng-container>
+    </div>
   </div>
 </div>
