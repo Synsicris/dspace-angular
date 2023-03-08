@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 
-import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of as observableOf } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -11,16 +11,16 @@ import {
 } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
 import { QuestionsBoardService } from '../../core/questions-board.service';
 import { SimpleItem } from '../../../shared/create-simple-item-modal/models/simple-item.model';
-import { QuestionsBoardTask } from '../../core/models/questions-board-task.model';
 import { ProjectGroupService } from '../../../core/project/project-group.service';
 import { Community } from '../../../core/shared/community.model';
 import { DragAndDropContainerComponent } from '../../shared/drag-and-drop/drag-and-drop-container.component';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'ds-questions-board-step-container',
   styleUrls: ['./questions-board-step-container.component.scss'],
-  templateUrl: './questions-board-step-container.component.html'
+  templateUrl: './questions-board-step-container.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuestionsBoardStepContainerComponent extends DragAndDropContainerComponent {
   /**
@@ -29,19 +29,22 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
   @Input() messagePrefix: string;
 
   /**
+   * The question board step object
+   */
+  _questionsBoardStep: BehaviorSubject<QuestionsBoardStep> = new BehaviorSubject<QuestionsBoardStep>(null);
+  @Input()
+  set questionsBoardStep(questionsBoardStep: QuestionsBoardStep) {
+    this._questionsBoardStep.next(questionsBoardStep);
+  }
+
+  get questionsBoardStep(): QuestionsBoardStep {
+    return this._questionsBoardStep.value;
+  }
+
+  /**
    * The project community id which the subproject belong to
    */
   @Input() public projectCommunityId: string;
-
-  /**
-   * The question board step object
-   */
-  @Input() public questionsBoardStep: QuestionsBoardStep;
-
-  /**
-   * The question board step behavior subject
-   */
-  public questionsBoardStep$: BehaviorSubject<QuestionsBoardStep> = new BehaviorSubject<QuestionsBoardStep>(null);
 
   /**
    * The funding community which the question board belong to
@@ -51,12 +54,30 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
   /**
    * A boolean representing if compare mode is active
    */
-  @Input() compareMode = false;
+  compareMode$ = new BehaviorSubject(false);
+
+  @Input()
+  set compareMode(compareMode: boolean) {
+    this.compareMode$.next(compareMode);
+  }
+
+  get compareMode() {
+    return this.compareMode$.value;
+  }
 
   /**
    * A boolean representing if item is a version of original item
    */
-  @Input() isVersionOfAnItem = false;
+  isVersionOfAnItem$ = new BehaviorSubject(false);
+
+  @Input()
+  set isVersionOfAnItem(isVersionOfAnItem: boolean) {
+    this.isVersionOfAnItem$.next(isVersionOfAnItem);
+  }
+
+  get isVersionOfAnItem() {
+    return this.isVersionOfAnItem$.value;
+  }
 
 
   private processing$: Observable<boolean> = observableOf(false);
@@ -73,29 +94,30 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
 
   ngOnInit(): void {
     this.processing$ = this.questionsBoardStateService.isProcessing();
-
     this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardStep.parentId).pipe(
       filter((steps: QuestionsBoardStep[]) => steps?.length > 0),
     ).subscribe((steps: QuestionsBoardStep[]) => {
       this.connectedToList = steps.map(step => step.id);
     });
+  }
 
-    this.subs.push(this.questionsBoardStateService.getQuestionsBoardStepById(this.questionsBoardStep.parentId, this.questionsBoardStep.id)
-      .subscribe((step: QuestionsBoardStep) => {
-        this.questionsBoardStep$.next(step);
-      })
+  canAdd(): Observable<boolean> {
+    return combineLatest([
+      this.isVersionOfAnItem$.asObservable(),
+      this.compareMode$.asObservable()
+    ]).pipe(
+      map(([isVersionOfAnItem, compareMode]) => !(isVersionOfAnItem || compareMode))
     );
   }
 
   openModal() {
 
-    const modalRef = this.modalService.open(CreateSimpleItemModalComponent, { size: 'lg', keyboard: false, backdrop: 'static' });
+    const modalRef = this.modalService.open(CreateSimpleItemModalComponent, {
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static'
+    });
 
-    modalRef.result.then((result) => {
-      if (result) {
-        this.cdr.detectChanges();
-      }
-    }, () => null);
     modalRef.componentInstance.formConfig = this.questionsBoardService.getQuestionsBoardTaskFormConfig(this.questionsBoardStep.type);
     modalRef.componentInstance.formHeader = this.questionsBoardService.getQuestionsBoardStepTaskFormName(this.questionsBoardStep.type);
     modalRef.componentInstance.searchMessageInfoKey = this.questionsBoardService.getQuestionsBoardStepTaskSearchHeader(this.questionsBoardStep.type);
@@ -140,14 +162,6 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
 
   listDropped(event: CdkDragDrop<QuestionsBoardStep>) {
     return;
-  }
-
-
-  getTasks(): Observable<QuestionsBoardTask[]> {
-    return this.questionsBoardStateService.getQuestionsBoardTasksByParentId(
-      this.questionsBoardStep.parentId,
-      this.questionsBoardStep.id
-    );
   }
 
   isProcessing(): Observable<boolean> {
