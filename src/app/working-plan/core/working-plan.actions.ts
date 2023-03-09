@@ -532,7 +532,7 @@ export class RetrieveAllLinkedWorkingPlanObjectsAction implements Action {
   type = WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS;
   payload: {
     projectId: string;
-    workingplanId: string;
+    workingplan: Item;
     sortOption: string;
     readMode: boolean;
     lastAddedId?: string;
@@ -541,8 +541,8 @@ export class RetrieveAllLinkedWorkingPlanObjectsAction implements Action {
   /**
    * Create a new RetrieveAllLinkedWorkingPlanObjectsAction
    *
-   * @param workingplanId
-   *    the working-plan id
+   * @param workingplan
+   *    the working-plan item
    * @param projectId
    *    the project id
    * @param sortOption
@@ -552,8 +552,8 @@ export class RetrieveAllLinkedWorkingPlanObjectsAction implements Action {
    * @param lastAddedId
    *    the id of the last added element
    */
-  constructor(projectId: string, workingplanId: string, sortOption: string, readMode: boolean, lastAddedId?: string) {
-    this.payload = { projectId, workingplanId, sortOption, readMode, lastAddedId };
+  constructor(projectId: string, workingplan: Item, sortOption: string, readMode: boolean, lastAddedId?: string) {
+    this.payload = { projectId, workingplan, sortOption, readMode, lastAddedId };
   }
 }
 

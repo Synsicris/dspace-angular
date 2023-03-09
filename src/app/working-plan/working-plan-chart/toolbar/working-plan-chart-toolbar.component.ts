@@ -166,6 +166,6 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
    * Dispatch cleaning of comparing mode
    */
   onVersionDeselected() {
-    this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata, this.isVersionOf);
+    this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan, environment.workingPlan.workingPlanPlaceMetadata, this.isVersionOf);
   }
 }
