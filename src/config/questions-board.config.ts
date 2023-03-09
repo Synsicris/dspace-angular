@@ -11,4 +11,5 @@ export interface QuestionsBoardConfig extends Config {
   questionsBoardTaskFormSection: string;
   questionsBoardEditFormSection: string;
   questionsBoardEditMode: string;
+  questionsBoardStepIcon: boolean;
 }
