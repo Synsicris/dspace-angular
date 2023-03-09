@@ -134,6 +134,13 @@ export class QuestionsBoardService {
     return `${this.questionsBoardConfig.questionsBoardFormPrefix}_${stepType}_task_type`;
   }
 
+  /**
+   * Return the icon configuration for the step icon
+   */
+  isQuestionsBoardStepIconVisible(): boolean {
+    return this.questionsBoardConfig.questionsBoardStepIcon;
+  }
+
   getQuestionsBoardObjectFromProjectId(projectId, relationMetadata): Observable<RemoteData<Item>> {
     return this.itemService.findById(projectId, false).pipe(
       getFirstSucceededRemoteDataPayload(),
