@@ -39,6 +39,7 @@ import {
 } from './selectors';
 import { ChartDateViewType, WorkingPlanState, WorkpackageEntries } from './working-plan.reducer';
 import { Workpackage, WorkpackageStep } from './models/workpackage-step.model';
+import { Item } from '../../core/shared/item.model';
 
 export interface WpActionPackage {
   workpackageId: string;
@@ -121,8 +122,8 @@ export class WorkingPlanStateService {
     this.store.dispatch(new RemoveWorkpackageStepAction(workpackageId, workpackageStepId, workspaceItemId));
   }
 
-  public dispatchRetrieveAllWorkpackages(projectId: string, workinplanId: string, sortOption: string, readMode: boolean): void {
-    this.store.dispatch(new RetrieveAllLinkedWorkingPlanObjectsAction(projectId, workinplanId, sortOption, readMode));
+  public dispatchRetrieveAllWorkpackages(projectId: string, workingplan: Item, sortOption: string, readMode: boolean): void {
+    this.store.dispatch(new RetrieveAllLinkedWorkingPlanObjectsAction(projectId, workingplan, sortOption, readMode));
   }
 
   public dispatchUpdateWorkpackageAction(

@@ -460,7 +460,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   updateSort() {
     if (this.sortSelectedValue !== this.sortSelectedOld) {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, this.sortSelectedValue, this.isVersionOf);
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan, this.sortSelectedValue, this.isVersionOf);
     }
   }
 
