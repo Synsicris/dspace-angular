@@ -152,6 +152,13 @@ export class QuestionsBoardStepComponent implements OnInit {
   }
 
   /**
+   * Checks if the icon of the step should be displayed
+   */
+  isIconVisible(): boolean {
+    return this.questionsBoardService.isQuestionsBoardStepIconVisible();
+  }
+
+  /**
    * Open dialog box for editing questions board
    */
   openEditModal() {

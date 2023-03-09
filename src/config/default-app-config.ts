@@ -769,6 +769,7 @@ export class DefaultAppConfig implements AppConfig {
     questionsBoardTaskFormSection: 'exploitation_plan_task_form',
     questionsBoardEditFormSection: 'exploitation_plan-edit_form',
     questionsBoardEditMode: 'EXPLOITATIONPLAN',
+    questionsBoardStepIcon: true
   };
 
   interimReport = {
@@ -782,6 +783,7 @@ export class DefaultAppConfig implements AppConfig {
     questionsBoardTaskFormSection: 'interim_report_task_form',
     questionsBoardEditFormSection: 'interim_report-edit_form',
     questionsBoardEditMode: 'INTERIMREPORT',
+    questionsBoardStepIcon: false
   };
 
   displayItemSearchResult = {

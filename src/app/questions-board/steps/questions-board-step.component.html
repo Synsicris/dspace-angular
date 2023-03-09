@@ -1,7 +1,10 @@
 <ds-collapsable-panel #ipwCollapse class="d-block mb-3"
-                       [sidebarPanelTitle]="getStepTitle()"
-                       [startOpen]="!(isCollapsed() | async)"
-                       [collapsable]="true">
+                      [sidebarPanelTitle]="getStepTitle()"
+                      [startOpen]="!(isCollapsed() | async)"
+                      [collapsable]="true">
+  <ng-container *ngIf="isIconVisible()" ngProjectAs="panelIconTitle">
+    <i dsQuestionsBoardIcon [questionsBoardType]="questionsBoardStep?.type"></i>
+  </ng-container>
   <ng-container ngProjectAs="panelContent">
     <div class="d-flex">
       <div #questionsBoardSection class="pr-0 w-100">
