@@ -72,8 +72,8 @@ export class BrowseByProjectsPageComponent implements OnInit {
 
   ngOnInit(): void {
     const isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
-    const isFunderOrganizationalManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager);
-    const isFunderProjectManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderProjectManager);
+    const isFunderOrganizationalManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManagerOfAnyProject);
+    const isFunderProjectManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderProjectManagerOfAnyProject);
     combineLatest([
       isAdmin$,
       isFunderOrganizationalManager$,

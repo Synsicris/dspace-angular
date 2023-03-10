@@ -20,14 +20,14 @@ import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operato
 import { isNotEmpty } from '../../empty.util';
 import { CreateProjectComponent } from '../../../projects/create-project/create-project.component';
 import {
-  FUNDING_ENTITY,
-  PROJECT_ENTITY,
-  PROJECTPATNER_ENTITY_METADATA,
-  PERSON_ENTITY,
-  FUNDING_OBJECTIVE_ENTITY,
   CALL_ENTITY,
+  FUNDING_ENTITY,
+  FUNDING_OBJECTIVE_ENTITY,
   ORGANISATION_UNIT_ENTITY,
-  PROGRAMME_ENTITY
+  PERSON_ENTITY,
+  PROGRAMME_ENTITY,
+  PROJECT_ENTITY,
+  PROJECTPATNER_ENTITY_METADATA
 } from '../../../core/project/project-data.service';
 import { environment } from '../../../../environments/environment';
 import { FindListOptions } from '../../../core/data/find-list-options.model';
@@ -192,7 +192,7 @@ export class ItemCreateComponent implements OnInit {
    * Check if the user is an administrator
    */
   private isFunderOrganizationalManager(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager).pipe(
+    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManagerOfAnyProject).pipe(
       map((isFunderOrganizationalManager) => isFunderOrganizationalManager),
     );
   }

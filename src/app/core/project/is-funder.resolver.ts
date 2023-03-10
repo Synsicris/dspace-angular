@@ -25,8 +25,8 @@ export class IsFunderResolver implements Resolve<Observable<boolean>> {
    * @returns Observable<<boolean> Emits if item is version of an item
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    const isFunderOrganizationalManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager);
-    const isFunderProjectManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderProjectManager);
+    const isFunderOrganizationalManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManagerOfAnyProject);
+    const isFunderProjectManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderProjectManagerOfAnyProject);
     return combineLatest([
       isFunderOrganizationalManager$,
       isFunderProjectManager$

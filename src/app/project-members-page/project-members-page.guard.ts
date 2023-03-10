@@ -39,7 +39,7 @@ export class ProjectMembersPageGuard implements CanActivate {
       switchMap((projectCommunityRD: RemoteData<Community>) => {
         if (projectCommunityRD.hasSucceeded) {
           return combineLatest([
-            this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager),
+            this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManagerOfAnyProject),
             this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, projectCommunityRD.payload.self, undefined),
             this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, projectCommunityRD.payload.self, undefined),
             this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfFunding, projectCommunityRD.payload.self, undefined),

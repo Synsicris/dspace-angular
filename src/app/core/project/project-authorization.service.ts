@@ -63,7 +63,7 @@ export class ProjectAuthorizationService {
    * Check if user is a funder organizational manager
    */
   isFunderOrganizationalManager(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager);
+    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManagerOfAnyProject);
   }
 
   /**
@@ -77,7 +77,7 @@ export class ProjectAuthorizationService {
    * Check if user is a Funder project manager for any project
    */
   isFunderManager(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.isFunderProjectManager);
+    return this.authorizationService.isAuthorized(FeatureID.isFunderProjectManagerOfAnyProject);
   }
 
   /**
