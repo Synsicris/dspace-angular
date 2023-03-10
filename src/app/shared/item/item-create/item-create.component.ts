@@ -20,14 +20,14 @@ import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operato
 import { isNotEmpty } from '../../empty.util';
 import { CreateProjectComponent } from '../../../projects/create-project/create-project.component';
 import {
-  FUNDING_ENTITY,
-  PROJECT_ENTITY,
-  PROJECTPATNER_ENTITY_METADATA,
-  PERSON_ENTITY,
-  FUNDING_OBJECTIVE_ENTITY,
   CALL_ENTITY,
+  FUNDING_ENTITY,
+  FUNDING_OBJECTIVE_ENTITY,
   ORGANISATION_UNIT_ENTITY,
-  PROGRAMME_ENTITY
+  PERSON_ENTITY,
+  PROGRAMME_ENTITY,
+  PROJECT_ENTITY,
+  PROJECTPATNER_ENTITY_METADATA
 } from '../../../core/project/project-data.service';
 import { environment } from '../../../../environments/environment';
 import { FindListOptions } from '../../../core/data/find-list-options.model';
@@ -96,38 +96,37 @@ export class ItemCreateComponent implements OnInit {
       map(([isAuthenticated, entityType, hasAtLeastOneCollection, isCoordinator, isAdministrator, isFunderOrganizationalManager]) =>
         isAuthenticated &&
         isNotEmpty(entityType) &&
-        (this.canCreateProjectPartner(entityType, hasAtLeastOneCollection) ||
-          this.canCreateAnyProjectEntity(entityType, hasAtLeastOneCollection) ||
+        hasAtLeastOneCollection &&
+        (this.canCreateProjectPartner(entityType) ||
+          this.canCreateAnyProjectEntity(entityType) ||
           this.canCreateFunding(entityType, isCoordinator)  ||
-          this.canCreateFundingObjectives(entityType, hasAtLeastOneCollection, isFunderOrganizationalManager) ||
-          this.adminCanCreate(isAdministrator, hasAtLeastOneCollection)
+          this.canCreateFundingObjectives(entityType, isFunderOrganizationalManager)
         )
       ),
       take(1)
     ).subscribe((canShow) => this.canShow$.next(canShow));
   }
 
-  protected canCreateProjectPartner(entityType, hasAtLeastOneCollection) {
-    return this.relatedEntityType === FUNDING_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA && hasAtLeastOneCollection;
+  protected canCreateProjectPartner(entityType) {
+    return this.relatedEntityType === FUNDING_ENTITY && entityType.label === PROJECTPATNER_ENTITY_METADATA;
   }
 
   protected canCreateFunding(entityType: ItemType, isCoordinator: boolean) {
     return this.relatedEntityType === PROJECT_ENTITY && entityType.label === FUNDING_ENTITY && isCoordinator;
   }
 
-  protected canCreateFundingObjectives(entityType: ItemType, hasAtLeastOneCollection: boolean, isFunderOrganizationalManager: boolean) {
+  protected canCreateFundingObjectives(entityType: ItemType, isFunderOrganizationalManager: boolean) {
     return isFunderOrganizationalManager &&
            this.relatedEntityType === PERSON_ENTITY &&
-           entityType.label === FUNDING_OBJECTIVE_ENTITY &&
-           hasAtLeastOneCollection;
+           entityType.label === FUNDING_OBJECTIVE_ENTITY;
   }
 
-  protected adminCanCreate(isAdministrator: boolean, hasAtLeastOneCollection: boolean) {
-    return  isAdministrator && hasAtLeastOneCollection;
+  protected adminCanCreate(isAdministrator: boolean) {
+    return  isAdministrator;
   }
 
-  protected canCreateAnyProjectEntity(entityType, hasAtLeastOneCollection) {
-    return entityType.label !== PROJECTPATNER_ENTITY_METADATA && entityType.label !== FUNDING_ENTITY && hasAtLeastOneCollection;
+  protected canCreateAnyProjectEntity(entityType) {
+    return entityType.label !== PROJECTPATNER_ENTITY_METADATA && entityType.label !== FUNDING_ENTITY;
   }
 
   /**
