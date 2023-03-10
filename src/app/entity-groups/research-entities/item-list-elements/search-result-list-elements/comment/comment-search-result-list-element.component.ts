@@ -198,8 +198,8 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
     if (!hasValue(metadataValue == null) || !hasValue(metadataValue.value) || !hasValue(metadataValue.authority)) {
       return null;
     }
-    const type = this.getSplittedValue(metadataValue);
-    return getEntityPageRoute(type.itemType, metadataValue.authority);
+    const { itemType } = this.getTypeDescriptionMetadata(metadataValue);
+    return getEntityPageRoute(itemType, metadataValue.authority);
   }
 
   /**
@@ -208,7 +208,7 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
    *
    * @param metadataValue
    */
-  getSplittedValue(metadataValue: MetadataValue): TypeDescriptionMetadata {
+  getTypeDescriptionMetadata(metadataValue: MetadataValue): TypeDescriptionMetadata {
     if (!hasValue(metadataValue?.value)) {
       return null;
     }
@@ -218,22 +218,6 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
       itemType: (splittedValue[0] || '').trim(),
       description: ((splittedValue.length > 1 && splittedValue[1]) || '').trim()
     });
-  }
-
-  /**
-   * Given a {@param metadataValue} with a value of the kind `{itemType} - {description}`.
-   * Translates the `itemType` using the vocabulary and then appends the `description` to it.
-   *
-   * @param metadataValue
-   */
-  getDescriptiveLabel(metadataValue: MetadataValue): string {
-    const splittedValue = this.getSplittedValue(metadataValue);
-    if (splittedValue == null) {
-      return '';
-    }
-    return `${this.translateService.instant(
-      `search.filters.entityType.${splittedValue.itemType}`
-    )} - ${splittedValue.description}`;
   }
 
   /**

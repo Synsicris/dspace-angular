@@ -34,17 +34,22 @@
     </div>
 
     <div *ngIf="dso.firstMetadata(RELATION_PROJECT) as project">
-      <span class="text-muted">
-        {{'layout.field.label.comment.synsicris.related.project' | translate}}: {{getDescriptiveLabel(project)}}
+      <ng-container *ngIf="getTypeDescriptionMetadata(project) as typeDesc">
+        <span class="text-muted">
+        {{'layout.field.label.comment.synsicris.related.project' | translate}}
+          : {{typeDesc.itemType | dsEntityTypeTranslate}} - {{typeDesc.description}}
       </span>
+      </ng-container>
     </div>
 
     <div *ngIf="dso.firstMetadata(RELATION_ITEM_VERSION) as relatedItem">
-      <span class="text-muted">{{'layout.field.label.comment.synsicris.related.item' | translate}}:</span>
-      <a target="_self" rel="noopener noreferrer" class="item-list-title"
-         [routerLink]="[getRelateItemPageRoute(relatedItem)]">
-        {{getDescriptiveLabel(relatedItem)}}
-      </a>
+      <ng-container *ngIf="getTypeDescriptionMetadata(relatedItem) as typeDesc">
+        <span class="text-muted">{{'layout.field.label.comment.synsicris.related.item' | translate}}:</span>
+        <a target="_self" rel="noopener noreferrer" class="item-list-title"
+           [routerLink]="[getRelateItemPageRoute(relatedItem)]">
+          {{typeDesc.itemType | dsEntityTypeTranslate}} - {{typeDesc.description}}
+        </a>
+      </ng-container>
     </div>
 
     <div>
