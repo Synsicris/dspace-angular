@@ -33,27 +33,30 @@
       </ng-container>
     </div>
 
-    <div *ngIf="dso.firstMetadata('synsicris.relation.commentProject') as project">
-      <span class="text-muted">{{'layout.field.label.comment.synsicris.related.project' | translate}}:</span>
-      <a target="_self" rel="noopener noreferrer" class="item-list-title"
-         [routerLink]="[getRelateItemPageRoute(project)]">
-        {{project.value}}
-      </a>
+    <div *ngIf="dso.firstMetadata(RELATION_PROJECT) as project">
+      <ng-container *ngIf="getTypeDescriptionMetadata(project) as typeDesc">
+        <span class="text-muted">
+        {{'layout.field.label.comment.synsicris.related.project' | translate}}
+          : {{typeDesc.itemType | dsEntityTypeTranslate}} - {{typeDesc.description}}
+      </span>
+      </ng-container>
     </div>
 
-    <div *ngIf="dso.firstMetadata('synsicris.relation.commentItem') as relatedItem">
-      <span class="text-muted">{{'layout.field.label.comment.synsicris.related.item' | translate}}:</span>
-      <a target="_self" rel="noopener noreferrer" class="item-list-title"
-         [routerLink]="[getRelateItemPageRoute(relatedItem)]">
-        {{relatedItem.value}}
-      </a>
+    <div *ngIf="dso.firstMetadata(RELATION_ITEM_VERSION) as relatedItem">
+      <ng-container *ngIf="getTypeDescriptionMetadata(relatedItem) as typeDesc">
+        <span class="text-muted">{{'layout.field.label.comment.synsicris.related.item' | translate}}:</span>
+        <a target="_self" rel="noopener noreferrer" class="item-list-title"
+           [routerLink]="[getRelateItemPageRoute(relatedItem)]">
+          {{typeDesc.itemType | dsEntityTypeTranslate}} - {{typeDesc.description}}
+        </a>
+      </ng-container>
     </div>
 
     <div>
       <ds-view-version-badges [item]="dso" [projectRelationMetadata]="RELATION_PROJECT"></ds-view-version-badges>
     </div>
 
-    <div>
+    <div class="space-children-mr">
       <button *ngIf="canEdit() | async" class="btn btn-primary mt-2" (click)="openEditModal()">
         <i class="fa fa-edit"></i>
         {{"comment.search.results.edit" | translate}}
