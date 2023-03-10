@@ -56,7 +56,7 @@
       <ds-view-version-badges [item]="dso" [projectRelationMetadata]="RELATION_PROJECT"></ds-view-version-badges>
     </div>
 
-    <div>
+    <div class="space-children-mr">
       <button *ngIf="canEdit() | async" class="btn btn-primary mt-2" (click)="openEditModal()">
         <i class="fa fa-edit"></i>
         {{"comment.search.results.edit" | translate}}
