@@ -38,6 +38,11 @@ import { getEntityPageRoute } from '../../../../../item-page/item-page-routing-p
 import { MetadataValue } from '../../../../../core/shared/metadata.models';
 import { PaginatedList } from '../../../../../core/data/paginated-list.model';
 
+interface TypeDescriptionMetadata {
+  itemType: string;
+  description: string;
+}
+
 @listableObjectComponent('CommentSearchResult', ViewMode.ListElement)
 @Component({
   selector: 'ds-comment-search-result-list-element',
@@ -50,6 +55,7 @@ import { PaginatedList } from '../../../../../core/data/paginated-list.model';
 export class CommentSearchResultListElementComponent extends ItemSearchResultListElementComponent implements OnInit {
 
   public readonly RELATION_PROJECT = environment.comments.commentRelationProjectVersionMetadata;
+  public readonly RELATION_ITEM_VERSION = environment.comments.commentRelationItemVersionMetadata;
 
   /**
    * List of Edit Modes available on this item
@@ -192,9 +198,42 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
     if (!hasValue(metadataValue == null) || !hasValue(metadataValue.value) || !hasValue(metadataValue.authority)) {
       return null;
     }
+    const type = this.getSplittedValue(metadataValue);
+    return getEntityPageRoute(type.itemType, metadataValue.authority);
+  }
+
+  /**
+   * Returns the `itemType` from {@param metadataValue}
+   * that has its value in format `{itemType} - {description}`.
+   *
+   * @param metadataValue
+   */
+  getSplittedValue(metadataValue: MetadataValue): TypeDescriptionMetadata {
+    if (!hasValue(metadataValue?.value)) {
+      return null;
+    }
     const typeValue = metadataValue.value;
-    const type = (typeValue.split('-')[0] || '').trim();
-    return getEntityPageRoute(type, metadataValue.authority);
+    const splittedValue = typeValue.split('-');
+    return ({
+      itemType: (splittedValue[0] || '').trim(),
+      description: ((splittedValue.length > 1 && splittedValue[1]) || '').trim()
+    });
+  }
+
+  /**
+   * Given a {@param metadataValue} with a value of the kind `{itemType} - {description}`.
+   * Translates the `itemType` using the vocabulary and then appends the `description` to it.
+   *
+   * @param metadataValue
+   */
+  getDescriptiveLabel(metadataValue: MetadataValue): string {
+    const splittedValue = this.getSplittedValue(metadataValue);
+    if (splittedValue == null) {
+      return '';
+    }
+    return `${this.translateService.instant(
+      `search.filters.entityType.${splittedValue.itemType}`
+    )} - ${splittedValue.description}`;
   }
 
   /**
