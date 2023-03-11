@@ -10,9 +10,10 @@
       p {line-height: 1rem;}
 
       a {
-        color:var(--sy-links-color) !important;
+        color:var(--sy-footer-link-text-color) !important;
         font-weight: 700 !important; // make font thicker
         white-space: nowrap; // prevents breaking links
+        font-family:'Nunito-Medium';
       }
   
      // 4Science-Logo

@@ -57,6 +57,46 @@ ds-metric-donuts a {
 }
 
 // from here on rex
+
+/* -----------------------------------------------------------
+MIXINS
+----------------------------------------------------------- */
+@mixin transition($transition-values) {
+	-o-transition: $transition-values; 
+	-ms-transition: $transition-values; 
+	-moz-transition: $transition-values; 
+	-webkit-transition: $transition-values; 
+	transition: $transition-values;
+	}
+
+/* Webfonts
+----------------------------------------------- */
+// https://fonts.google.com/specimen/Nunito+Sans
+/* Nunito Italic */
+@font-face {
+	font-family: 'Nunito-MediumItalic';
+	src: url("../assets/fonts/nunito/Nunito-MediumItalic.ttf") format('truetype');
+	font-weight: 500;
+	font-style: normal;
+	}
+
+/* Nunito Medium */
+@font-face {
+	font-family: 'Nunito-Medium';
+	src: url("../assets/fonts/nunito/Nunito-Medium.ttf") format('truetype');
+	font-weight: 500;
+	font-style: normal;
+	}
+
+@font-face {
+  font-family: 'Nunito-SemiBold';
+  src: url("../assets/fonts/nunito/Nunito-SemiBold.ttf") format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  }
+  
+
+
 /* -----------------------------------------------------------
 BASIC LAYOUT
 ----------------------------------------------------------- */
@@ -289,8 +329,10 @@ header {
     .navbar-nav {
       margin: 0 0.4rem;
       font-size: 0.85rem;
-      /* Icons in header - twice because of differet code */
+      // Icons in header - twice because of differet code
       a:link, a:visited { i.fas, span {color: var(--ds-header-icon-color) !important;} }
+      // Textlinks on the left side near logo
+      &.textlinks-in-header {font-family:'Nunito-Medium';}
     } // end .container .navbar-nav
 
   } // end nav.navbar
