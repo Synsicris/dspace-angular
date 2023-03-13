@@ -29,6 +29,7 @@ export abstract class AbstractChartComponent implements OnInit {
     @Inject('legend') public legend: boolean,
     @Inject('legendTitle') public legendTitle: string,
     @Inject('legendPosition') public legendPosition: string,
+    @Inject('maxLabelLength') public maxLabelLength: number,
     @Inject('select') public select: EventEmitter<string>,
     @Inject('enableScrollToLeft') public enableScrollToLeft: boolean,
     @Inject('enableScrollToRight') public enableScrollToRight: boolean,
