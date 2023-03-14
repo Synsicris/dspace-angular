@@ -911,23 +911,23 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.type',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.Link
           },
           {
             name: 'synsicris.subject.nace',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.Link
           },
           {
             name: 'synsicris.subject.enterprise',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.Link
           },
           {
             name: 'synsicris.subject.political',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.Link
           },
           {
             name: 'synsicris.subject.urbanrural',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.Link
           }
         ]
       },
@@ -987,6 +987,14 @@ export class DefaultAppConfig implements AppConfig {
           }
         ]
       },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      }
     ],
     process_event: [
       {
@@ -1027,10 +1035,6 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.type',
-            type: DisplayItemMetadataType.Text
-          },
-          {
-            name: 'synsicris.relation.targetgroup',
             type: DisplayItemMetadataType.Text
           }
         ]
@@ -1172,7 +1176,7 @@ export class DefaultAppConfig implements AppConfig {
       {
         metadata: [
           {
-            name: 'oairecerif.acronym',
+            name: 'synsicris.type.easyimport',
             type: DisplayItemMetadataType.Text
           }
         ]
@@ -1180,15 +1184,11 @@ export class DefaultAppConfig implements AppConfig {
       {
         metadata: [
           {
-            name: 'dc.type',
+            name: 'synsicris.subject.political',
             type: DisplayItemMetadataType.Text
           },
           {
             name: 'synsicris.subject.destatis',
-            type: DisplayItemMetadataType.Text
-          },
-          {
-            name: 'synsicris.subject.nace',
             type: DisplayItemMetadataType.Text
           }
         ]
@@ -1254,7 +1254,7 @@ export class DefaultAppConfig implements AppConfig {
         ]
       },
     ],
-    patent: [
+    Patent: [
       {
         metadata: [
           {
@@ -1359,7 +1359,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.description.abstract',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.Text,
+            truncatable: true
           }
         ]
       }
@@ -1382,7 +1383,11 @@ export class DefaultAppConfig implements AppConfig {
           {
             name: 'dc.type',
             type: DisplayItemMetadataType.Text
-          },
+          }
+        ]
+      },
+      {
+        metadata: [
           {
             name: 'synsicris.type.contribution',
             type: DisplayItemMetadataType.Text
@@ -1396,7 +1401,7 @@ export class DefaultAppConfig implements AppConfig {
             type: DisplayItemMetadataType.Text
           }
         ]
-      },
+      }
     ],
     comment: [
       {
@@ -1445,6 +1450,188 @@ export class DefaultAppConfig implements AppConfig {
             name: 'dc.description',
             type: DisplayItemMetadataType.Text,
             truncatable: true
+          }
+        ]
+      }
+    ],
+    task: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      }
+    ],
+    milestone: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      }
+    ],
+    stateofart: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      }
+    ],
+    application: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.type',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      }
+    ],
+    unexpected_result: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      }
+    ],
+    contribution_fundingprogramme: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      }
+    ],
+    gender: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      }
+    ],
+    ethic: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      }
+    ],
+    ia_objective: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      }
+    ],
+    proj_objective: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      }
+    ],
+    research_result: [
+      {
+        metadata: [
+          {
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'dc.description',
+            type: DisplayItemMetadataType.Text
           }
         ]
       }
