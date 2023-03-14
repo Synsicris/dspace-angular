@@ -5404,6 +5404,138 @@
 
   "search.filters.applied.charts.graphpubldatetrl.tab": "Visualization Demo RTL",
 
+  "search.filters.applied.charts.graph-dc_language_iso.tab": "Visualization by Language",
+
+  "search.filters.applied.charts.graph-dc_audience.tab": "Visualization by Audience",
+
+  "search.filters.applied.charts.graph-synsicris_type_patentuse.tab": "Visualization by Patentuse",
+
+  "search.filters.applied.charts.graph-synsicris_relation_call.tab": "Visualization by Relation Call",
+
+  "search.filters.applied.charts.graph-synsicris_type_project.tab": "Visualization by Project Type",
+
+  "search.filters.applied.charts.graph-synsicris_duration.tab": "Visualization by Duration",
+
+  "search.filters.applied.charts.graph-oairecerif_project_status.tab": "Visualization by Project Status",
+
+  "search.filters.applied.charts.graph-oairecerif_project_startDate.tab": "Visualization by Project StartDate",
+
+  "search.filters.applied.charts.graph-oairecerif_project_endDate.tab": "Visualization by Project EndDate",
+
+  "search.filters.applied.charts.graph-synsicris_subject_textLP.tab": "Visualization by Text LP",
+
+  "search.filters.applied.charts.graph-synsicris_subject_sort.tab": "Visualization by Subject Sort",
+
+  "search.filters.applied.charts.graph-synsicris_subject_sortprimary.tab": "Visualization by Subject Sortprimary",
+
+  "search.filters.applied.charts.graph-synsicris_subject_prog.tab": "Visualization by Subject Prog",
+
+  "search.filters.applied.charts.graph-synsicris_subject_researchfocus.tab": "Visualization by Researchfocus",
+
+  "search.filters.applied.charts.graph-synsicris_type_research.tab": "Visualization by Research Type",
+
+  "search.filters.applied.charts.graph-synsicris_type_development.tab": "Visualization by Development Type",
+
+  "search.filters.applied.charts.graph-synsicris_subject_countries.tab": "Visualization by Subject Countries",
+
+  "search.filters.applied.charts.graph-synsicris_subject_nace.tab": "Visualization by Nace",
+
+  "search.filters.applied.charts.graph-synsicris_type_finance.tab": "Visualization by Finance",
+
+  "search.filters.applied.charts.graph-synsicris_type_jointproject.tab": "Visualization by Jointproject",
+
+  "search.filters.applied.charts.graph-synsicris_type_application.tab": "Visualization by Application Type",
+
+  "search.filters.applied.charts.graph-synsicris_acronym_fundingParent.tab": "Visualization by Funding Parent",
+
+  "search.filters.applied.charts.graph-synsicris_acronym_call.tab": "Visualization by Acronym Call",
+
+  "search.filters.applied.charts.graph-synsicris_internalid_call.tab": "Visualization by Internalid Call",
+
+  "search.filters.applied.charts.graph-oairecerif_funding_identifier.tab": "Visualization by Funding Identifier",
+
+  "search.filters.applied.charts.graph-oairecerif_amount.tab": "Visualization by Amount",
+
+  "search.filters.applied.charts.graph-synsicris_subject_political.tab": "Visualization by Political Subject",
+
+  "search.filters.applied.charts.graph-synsicris_address_countryclassification.tab": "Visualization by Country Classification",
+
+  "search.filters.applied.charts.graph-synsicris_identifier_municipality.tab": "Visualization by Municipality Identifier",
+
+  "search.filters.applied.charts.graph-organization_address_addressCountry.tab": "Visualization by Address of Country",
+
+  "search.filters.applied.charts.graphprojpartorgform.tab": "Visualization by Orgform",
+
+  "search.filters.applied.charts.graph-synsicris_personleader_gender.tab": "Visualization by Leader Gender",
+
+  "search.filters.applied.charts.graph-synsicris_personadmin_gender.tab": "Visualization by Admin Gender",
+
+  "search.filters.applied.charts.graph-organisation_foundingDate.tab": "Visualization by Founding Date",
+
+  "search.filters.applied.charts.graphgendertype.tab": "Visualization by Gender",
+
+  "search.filters.applied.charts.graphproceventtargetgroup.tab": "Visualization by Targetgroup",
+
+  "search.filters.applied.charts.graph-synsicris_coverage_regionalprimary.tab": "Visualization by Regional Primary",
+
+  "search.filters.applied.charts.graph-synsicris_coverage_regionalsecondary.tab": "Visualization by Regional Secondary",
+
+  "search.filters.applied.charts.graph-synsicris_type_level.tab": "Visualization by Level Type",
+
+  "search.filters.applied.charts.graph-synsicris_level_start.tab": "Visualization by Level Start",
+
+  "search.filters.applied.charts.graph-synsicris_level_end.tab": "Visualization by Level End",
+
+  "search.filters.applied.charts.graph-synsicris_date_referenceyear.tab": "Visualization by Referenceyear",
+
+  "search.filters.applied.charts.graph-synsicris_coverage_regional.tab": "Visualization by Coverage Regional",
+
+  "search.filters.applied.charts.graph-synsicris_type_contribution.tab": "Visualization by Contribution Type",
+
+  "search.filters.applied.charts.graphproceventpartner.tab": "Visualization by Partner",
+
+  "search.filters.applied.charts.graph-synsicris_participantnumber.tab": "Visualization by Participant Number",
+
+  "search.filters.applied.charts.graph-oairecerif_event_country.tab": "Visualization by Event Country",
+
+  "search.filters.applied.charts.graphproceventpurpose.tab": "Visualization by Event Purpose",
+
+  "search.filters.applied.charts.graphproceventtype.tab": "Visualization by Event Type",
+
+  "search.filters.applied.charts.graph-synsicris_relation_fundingobjective.tab": "Visualization by Funding Objective",
+
+  "search.filters.applied.charts.graph-synsicris_type_functions.tab": "Visualization by Type Functions",
+
+  "search.filters.applied.charts.graphphyobjtypeaccess.tab": "Visualization by Type Access",
+
+  "search.filters.applied.charts.graphtargetgroupenterprise.tab": "Visualization by Target Group Enterprise",
+
+  "search.filters.applied.charts.graphtargetgroupurbanrural.tab": "Visualization by Target Group Urbanrural",
+
+  "search.filters.applied.charts.graphexpsocimptransform.tab": "Visualization by Type Transform",
+
+  "search.filters.applied.charts.graphexpsocimpintensity.tab": "Visualization by Intensity",
+
+  "search.filters.applied.charts.graph-synsicris_type_researchquestion.tab": "Visualization by Research Question",
+
+  "search.filters.applied.charts.graphgenderstateofart.tab": "Visualization by Gender State of Art",
+
+  "search.filters.applied.charts.graphgenderprojectdesign.tab": "Visualization by Gender Project Design",
+
+  "search.filters.applied.charts.graphgenderapplication.tab": "Visualization by Gender Application",
+
+  "search.filters.applied.charts.graphgendertypeproject.tab": "Visualization by Gender Type Project",
+
+  "search.filters.applied.charts.graphgenderBalance.tab": "Visualization by Gender Balance",
+
+  "search.filters.applied.charts.graph-dc_subject.tab": "Visualization by Subject",
+
+  "search.filters.applied.charts.graph-synsicris_type_sdg.tab": "Visualization by SDG Type",
+
+  "search.filters.applied.charts.graph-synsicris_relation_programme.tab": "Visualization by Relation Programme",
+
+  "search.filters.applied.charts.graph-synsicris_type_status.tab": "Visualization by Status",
+
   "search.filters.applied.charts.default.title": "Search Output",
 
   "search.filters.applied.charts.RELATION.Funding.basics_comment.title": "Funding comments",
@@ -5465,6 +5597,58 @@
   "search.filters.filter.collapse": "Collapse filter",
 
   "search.filters.filter.creativeDatePublished.head": "Date Published",
+
+  "search.filters.filter.synsicrisOairecerifEventCountry.head": "Event Country",
+
+  "search.filters.filter.synsicrisOairecerifEventCountry.label": "Search Event Country",
+
+  "search.filters.filter.synsicrisCoverageRegionalsecondary.head": "Regional Secondary",
+
+  "search.filters.filter.synsicrisCoverageRegionalsecondary.label": "Search Regional Secondary",
+
+  "search.filters.filter.synsicrisTypeLevel.head": "Type Level",
+
+  "search.filters.filter.synsicrisTypeLevel.label": "Search Type Level",
+
+  "search.filters.filter.synsicrisLevelStart.head": "Level Start",
+
+  "search.filters.filter.synsicrisLevelEnd.head": "Level End",
+
+  "search.filters.filter.synsicrisLevelStart.label": "Search Level Start",
+
+  "search.filters.filter.synsicrisLevelEnd.label": "Search Level End",
+
+  "search.filters.filter.synsicrisDateReferenceyear.head": "Reference Year",
+
+  "search.filters.filter.synsicrisCoverageRegional.head": "Coverage Regional",
+
+  "search.filters.filter.synsicrisType.head": "Type",
+
+  "search.filters.filter.synsicrisDateReferenceyear.label": "Search Reference Year",
+
+  "search.filters.filter.synsicrisCoverageRegional.label": "Search Coverage Regional",
+
+  "search.filters.filter.synsicrisType.label": "Search Type",
+
+  "search.filters.filter.synsicrisRelationFundingobjective.head": "Funding Objective",
+
+  "search.filters.filter.synsicrisTypeAccess.head": "Access Type",
+
+  "search.filters.filter.synsicrisTypeEvidence.head": "Evidence Type",
+
+  "search.filters.filter.synsicrisRelationFundingobjective.label": "Search Funding Objective",
+
+  "search.filters.filter.synsicrisTypeAccess.label": "Search Access Type",
+
+  "search.filters.filter.synsicrisTypeEvidence.label": "Search Evidence Type",
+
+  "search.filters.filter.synsicrisTypeSdg.head": "Sdg Type",
+
+  "search.filters.filter.synsicrisTypeStatus.head": "Status",
+
+  "search.filters.filter.synsicrisTypeSdg.label": "Search Sdg Type",
+
+  "search.filters.filter.synsicrisTypeStatus.label": "Search Status",
 
   "search.filters.filter.creativeDatePublished.placeholder": "Date Published",
 
