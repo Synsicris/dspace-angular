@@ -62,10 +62,10 @@ ds-metric-donuts a {
 MIXINS
 ----------------------------------------------------------- */
 @mixin transition($transition-values) {
-	-o-transition: $transition-values; 
-	-ms-transition: $transition-values; 
-	-moz-transition: $transition-values; 
-	-webkit-transition: $transition-values; 
+	-o-transition: $transition-values;
+	-ms-transition: $transition-values;
+	-moz-transition: $transition-values;
+	-webkit-transition: $transition-values;
 	transition: $transition-values;
 	}
 
@@ -94,7 +94,7 @@ MIXINS
   font-weight: 600;
   font-style: normal;
   }
-  
+
 
 
 /* -----------------------------------------------------------
@@ -104,7 +104,7 @@ BASIC LAYOUT
 .outer-wrapper {
 
   // Content area
-  .inner-wrapper { 
+  .inner-wrapper {
 
     background-color: var(--sy-body-background-color); // basic background color of content area (found --bsbody-bg and --bs-body-color, but they didn't show an effect)
 
@@ -114,11 +114,11 @@ BASIC LAYOUT
       .cris-layout {
 
         /* this tag gets the specific colors for the level
-        Therefore the classes "Person", "Project" and "Funding" were added in 
+        Therefore the classes "Person", "Project" and "Funding" were added in
         src/app/cris-layout/cris-layout-leading/cris-layout-leading.component.html
         with class="{{'existing-css ' + item.entityType}}" */
-      
-        #cris-layout-leading { 
+
+        #cris-layout-leading {
 
           margin-top:1.1rem !important; // covers otherwise breadcrumb
 
@@ -131,7 +131,7 @@ BASIC LAYOUT
             }
           } // end &.Person
 
-          // level 2 (project)    
+          // level 2 (project)
           &.Project {
             background-color:var(--sy-level-project-background-color);
             border-bottom:1px solid var(--sy-level-project-border-color);
@@ -147,21 +147,21 @@ BASIC LAYOUT
             .headerbox {
               i.fas {color:var(--sy-level-funding-icon-color)}
             }
-          }  // end &.Funding  
+          }  // end &.Funding
 
           // box with buttons
           div.container.text-right.context-menu { padding-top:0.4rem; }
 
           /*  221126 rex: can't figure out where the inner padding of the headerbox comes from, especially the padding-bottom is much too high
           lower height of headerbox could be enforced with height:2rem !important; to make the unnecessarily high headerbox narrower, but then the two-line header might be cut off. */
-          .headerbox { 
+          .headerbox {
 
             // 1. headline with Icon
             .headline-workspace {
               font-size:1.2rem;
               font-weight: 600 !important;
             }
-            // 2. headline 
+            // 2. headline
             .h4 {
               margin-bottom:0.8rem !important;
               margin-top:-0.2rem;
@@ -195,12 +195,12 @@ TESTS TO IDENTIFY LAYOUT AREAS (rex)
       border:10px solid blue !important;
       background-color:blue !important;
       display:block !important;
-    
+
       ds-themed-breadcrumbs {     //tag, keine Klasse!
         border:2px solid red !important;
         background-color:red !important;
         display:block !important;
-        
+
         ds-breadcrumbs {     //tag, keine Klasse!
           background-color:pink !important;
           border:5px solid pink !important;
@@ -233,9 +233,9 @@ TESTS TO IDENTIFY LAYOUT AREAS (rex)
       } // end .cris-layout
 
     } // end main.main-content
-     
+
       //&.ng-trigger-slideSidebarPadding { } // probably for the black Admin-Sidebar (to be tested with differet login / einloggen as shared ist am 4.11. nicht möglich)
-      //.ds-themed-header-navbar-wrapper { //border:2px solid orange !important; 
+      //.ds-themed-header-navbar-wrapper { //border:2px solid orange !important;
 
     } // end .inner-wrapper
   } // end .outer-wrapper
@@ -276,9 +276,9 @@ HEADER with horizontal navbar
 ATTENTION
 Styles for the header are defined in src/themes/synsicris/styles/_global-styles.scss
 in order to avoid the same duplication as in the HTML code
-because the navbar with logo exists twice: 
+because the navbar with logo exists twice:
 - <= mediaquery-sm with hamburger-button in header.component.html
-- >= mediaquery md in navbar.component.html 
+- >= mediaquery md in navbar.component.html
 ----------------------------------------------------------- */
 header {
 
@@ -292,21 +292,21 @@ header {
 
    /* from here defined from rex */
 
-  /* Icons in header. Needs to be defined outside nav.navbar, because the code differs in header.component.html 
-  and navbar.component.html. 
+  /* Icons in header. Needs to be defined outside nav.navbar, because the code differs in header.component.html
+  and navbar.component.html.
   provisional contact link until it is integrated by development (rex 221028),
   therefore the style here is only provisionally adapted to the other buttons,
-  margin-right in order to give it the same distance to the following icon even without a dropdown arrow. 
+  margin-right in order to give it the same distance to the following icon even without a dropdown arrow.
   */
-  a.header-contact {      
+  a.header-contact {
     span { display: none; } // make label invisible
     margin-right: 1.2rem;
   }
   // Icos in Header and Hamburger Icon
-  a.navbar-collapsed i.fas, 
+  a.navbar-collapsed i.fas,
   a.navbar-collapsed span,
-  button.navbar-toggler span.fas {     
-    color: var(--ds-header-icon-color) !important;  
+  button.navbar-toggler span.fas {
+    color: var(--ds-header-icon-color) !important;
   }
 
   nav.navbar {
@@ -343,8 +343,8 @@ header {
 
 /* -----------------------------------------------------------
 BREADCRUMB (rex 230210)
-ATTENTION: in src/themes/synsicris/app/breadcrumbs/breadcrumbs.component.scss are already the final stylesheets 
-for breadcrumbs with entity tag according to 
+ATTENTION: in src/themes/synsicris/app/breadcrumbs/breadcrumbs.component.scss are already the final stylesheets
+for breadcrumbs with entity tag according to
 https://github.com/Synsicris/Userinterface1a/issues/52#issuecomment-1241349651 !
 ----------------------------------------------------------- */
 /* */
@@ -381,8 +381,8 @@ ds-breadcrumbs nav.nav-breadcrumb { // complete bar
 
 /* -----------------------------------------------------------
 SIDEBAR (rex 221201)
-Sidebar is noth themeable, and only a few of the existing variables in 
-_theme_css_variable_overrides.scss affect the current design. 
+Sidebar is noth themeable, and only a few of the existing variables in
+_theme_css_variable_overrides.scss affect the current design.
 
 ATTENTION: in case of misrepresentations in the sidebar very often mistakes in the language files are the cause!
 ----------------------------------------------------------- */
@@ -412,7 +412,7 @@ button.menu-toggle {display:none;}
     background-color:var(--sy-cris-layout-sidebar-tab-direct-color) !important;      // Standard light blue for menu items #EFF4F7
     &:hover {background-color:var(--ds-cris-layout-sidebar-tab-color-hover);}
     border-bottom: 2px solid var(--sy-cris-layout-sidebar-tab-border-bottom-color);  // white
-    //border-top:1px solid var(--sy-cris-layout-sidebar-tab-border-top-color);         // light grey
+    //border-top:1px solid var(--sy-cris-layout-sidebar-tab-border-top-color);       // light grey
     position:relative;
 
     // General formatting for links
@@ -420,8 +420,9 @@ button.menu-toggle {display:none;}
       text-decoration:none !important;
       color:var(--sy-cris-layout-sidebar-link-text-color);
       font-weight:400;
+      @include transition(all .2s ease-in-out);
       }
-    
+
     // contains the pop-up group ul second layer
     div.sidebar-collapsible {
 
@@ -430,8 +431,8 @@ button.menu-toggle {display:none;}
       & a.nav-item:first-child {
         background-color:var(--sy-cris-layout-sidebar-tab-expandable-color);        // light gray
         &:hover {background-color:var(--ds-cris-layout-sidebar-tab-color-hover);}   // white
-      } 
-      
+      }
+
       // second level
       ul.sidebar-sub-level-items {
         position:relative;
@@ -442,7 +443,7 @@ button.menu-toggle {display:none;}
           &:hover {background-color:var(--ds-cris-layout-sidebar-tab-color-hover) !important;}
           border-bottom: 2px solid var(--sy-body-background-color); // bright border
           padding-left:0.6rem !important; // by default, 1.5rem padding was left, but this is too much with indented lists
-        
+
         }
         //* Highlight must be defined separately here */
         li.active a.nav-item {
@@ -451,7 +452,7 @@ button.menu-toggle {display:none;}
       } // end ul.sidebar-sub-level-items
 
       /* Fold-out links with arrows
-      arranges the unfolding arrows at the bottom instead of in the middle so that it fits the special solution 
+      arranges the unfolding arrows at the bottom instead of in the middle so that it fits the special solution
       of the subdivided sideba in the Level Project */
       a.nav-item {
         -webkit-box-align:flex-end;
@@ -460,11 +461,11 @@ button.menu-toggle {display:none;}
 
         /* Text labels only of the expandable meu items as well as the contained sub-items, but not of the simple links of the first level!
         The simple links are directly in a and in no span-tag */
-        span.section-header-text {    
-          /* limits the label width, so that it is not pulled into the width by the extraordinary before-box in #sidebar.project 
+        span.section-header-text {
+          /* limits the label width, so that it is not pulled into the width by the extraordinary before-box in #sidebar.project
           is pulled into the width and thus the arrow is not pushed outside the sidebar!!! */
           max-width:calc(var(--ds-cris-layout-sidebar-width) - 4.5rem);
-          
+
           // Folding arrow
           i.fas.fa-chevron-right { }
 
@@ -486,7 +487,7 @@ button.menu-toggle {display:none;}
 /* STYLES FOR LEVEL 2 (Project) WITH SPECIAL SOLUTION FOR SIDEBAR INTERHEAD
 ------------------------------------------------------------------------ */
 &.Project {
-  
+
   // concerns first level lists (.sidebar-section) and second level, therefore outside the li below
   li.active:not(.expanded) {
   border-left:4px solid var(--sy-level-project-border-color);    // Highlight-border-left
@@ -498,20 +499,20 @@ button.menu-toggle {display:none;}
       a.nav-item {
 
         /* .section-header-text#sidebarName-2153 is the id with the list block above it */
-        span.section-header-text {    
+        span.section-header-text {
 
           /* content reads out the content of the alt attribute in the language file:
-          "layout.tab.header.Projectobjectives": "<span class=\"entry-with-space-before-to-divide-sidebar\" alt=\"Listen\">Ziele des Vorhabens</span>",  
+          "layout.tab.header.Projectobjectives": "<span class=\"entry-with-space-before-to-divide-sidebar\" alt=\"Listen\">Ziele des Vorhabens</span>",
           https://www.heise.de/select/ix/2017/3/1487591950470172 */
           .sidebar-interhead {
 
             &:after {
               content: "  "attr(alt)" ";
-              display:block; 
+              display:block;
               width:calc(var(--ds-cris-layout-sidebar-width) + 0.5rem);
               background-color: var(--sy-body-background-color) !important;
               margin:-0.65rem 0 1rem -2rem;     // pulls gap space to the left
-              padding:0.6rem 0 0.6rem 0.5rem;  
+              padding:0.6rem 0 0.6rem 0.5rem;
               font-weight:800;
               font-family:"Nunito", sans-serif;
               color: var(--ds-cris-layout-sidebar-menu-active-color); // dark grey
@@ -519,7 +520,7 @@ button.menu-toggle {display:none;}
 
           } // end .sidebar-interhead
 
-          
+
           // Aufklapppfeil
           i.fas.fa-chevron-right { }
 
@@ -539,6 +540,133 @@ button.menu-toggle {display:none;}
 
 
 } // end #sidebar
+
+
+/* -----------------------------------------------------------
+MODAL WINDOW (rex 230303)
+----------------------------------------------------------- */
+// MODAL WINDOW FOR NEW ENTRYS IN IMPACT PATHWAY AND WORKING PLAN
+// src/app/shared/create-simple-item-modal/create-simple-item-modal.component.html
+.modal-content {
+
+  background-color:var(--sy-modal-content-background);
+  .modal-header {background-color:var(--sy-modal-header-background);}
+  .modal-body {} // also for the background of the modal
+  .modal-footer {} //doesn't exist for new entrys
+  .tab-content {
+    //generically defined in tab-content below
+  }
+
+} // end .modal-content
+
+
+/* -----------------------------------------------------------
+NAV-TABS (rex 230303)
+
+DOCUMENTATION:
+nav-tabs are used in two different ways in HTML code.
+Therefore the tabs here are addressed via nav as well as via ul
+
+1. with nav and a
+in manage project members: src/app/project-members-page/project-members-page.component.html
+
+<nav class="nav-tabs nav">
+  <a class="nav-link nav-item active">Active Tab</a>
+</nav>
+
+2. with ul, li and a
+in create-new-entry-modal: src/app/shared/create-simple-item-modal/create-simple-item-modal.component.html
+in events/diagrams: /src/app/shared/search/search-charts/search-charts.component.html
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active">Active Tab</a>
+  </li>
+</ul>
+----------------------------------------------------------- */
+
+ // Wole list. Only the bottom line is needed
+ ul.nav-tabs,
+ nav.nav-tabs {
+  border:none;
+  border-bottom:1px solid var(--sy-nav-tabs-border-color);
+ }
+
+ // remove original bootstrap formatting
+ ul.nav-tabs li.nav-item {
+  border:none;
+  margin-right:0 !important;
+ }
+
+ ul.nav-tabs li.nav-item a.nav-link,
+ nav.nav-tabs a.nav-item {
+  border:none;
+  border-bottom:3px solid transparent; // invisible border, so that it does not jerk with hover and active
+  margin-right:0.8rem;
+  padding:0.4rem 0.2rem;
+  color:var(--sy-nav-tabs-text-color) !important; // blue links
+  font-family:'Nunito-SemiBold',sans-serif;
+  @include transition(all .3s ease-in-out); // soft hover-animation
+
+  // sequence order of hover und active important because of specifity!
+  &:hover {
+    border-bottom:3px solid var(--sy-nav-tabs-hover-border-color);
+  }
+  &.active, &.active:hover, &.active:focus, &.active:active {  // für alle states, damit nicht auf hover reagiert
+    border-bottom:3px solid var(--sy-nav-tabs-active-border-color) !important; // farbig
+    color:var(--sy-nav-tabs-active-text-color) !important; // farbig
+    background-color:transparent;
+    cursor:auto;
+  }
+ }
+
+ // content accessed via tab navigation
+ .tab-content {
+  background-color:var(--sy-tab-content-background);
+  padding:1.5rem;
+  border:1px solid var(--sy-tab-content-border-color);
+  border-top:none; // otherwise the border-bottom of the tab-ul will be combined with a thick frame
+  margin-top:0 !important; // so that tab-content connects directly to the navigation
+  //.form-group {border:5px solid lime;} container with buttons, but due to lack of classes no more specific design possible, also the hr above buttons
+}
+
+/* First SOLUTION 1 WITH CLASSICAL TABS (will be deleted, when tabs are approved finally)
+ul.nav-tabs {
+
+  //border around the whole list. Only the bottom line is needed.
+  border-color:transparent;
+  border-bottom:1px solid var(--sy-nav-tabs-border-color);
+
+  li.nav-item {
+
+    border-color:var(--sy-nav-tabs-border-color);
+    margin-left:0.3rem; // distance between tabs
+    &:first-child {margin-left:0;} //first tab without margin-left
+
+    a.nav-link {
+
+      color:var(--sy-nav-tabs-text-color) !important;
+      padding-bottom:0.2rem;
+
+      &.active {
+        font-weight:bold !important;
+        color:var(--sy-nav-tabs-active-text-color) !important;
+        border-color:var(--sy-nav-tabs-border-color);
+        border-bottom-color:transparent;
+        background-color:var(--sy-nav-tabs-active-background);
+        padding-bottom:0.5rem;
+      }
+      &:hover {
+        background-color:var(--sy-nav-tabs-hover-background);
+        border:1px solid var(--sy-nav-tabs-border-color);
+      }
+    }
+
+  } // end .nav-item
+
+} // end .nav-tabs
+
+*/
 
 
 /* -----------------------------------------------------------
