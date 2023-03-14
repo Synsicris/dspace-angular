@@ -7782,7 +7782,11 @@
 
   "working-plan.chart.button.expandAll": "Expand all",
 
+  "working-plan.chart.button.expand": "Expand node",
+
   "working-plan.chart.button.collapseAll": "Collapse all",
+
+  "working-plan.chart.button.collapse": "Collapse node",
 
   "working-plan.chart.button.add": "Add",
 
