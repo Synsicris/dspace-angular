@@ -47,23 +47,23 @@
         <div class="pr-1 space-children-mr">
 
           <!-- button "-angle-double-down" to expand all lines -->
-          <button type="button" class="btn btn-link btn-xs"
+          <button *ngIf="!isTreeExpanded" type="button" class="btn btn-link btn-xs"
                   title="{{'working-plan.chart.button.expandAll' | translate}}"
-                  (click)="treeControl.expandAll()">
+                  (click)="expandAll()">
             <i class="fas fa-angle-double-down"></i>
           </button>
 
           <!-- button "-angle-double-up" to collapse all lines -->
-          <button type="button" class="btn btn-link btn-xs"
+          <button  *ngIf="isTreeExpanded" type="button" class="btn btn-link btn-xs"
                   title="{{'working-plan.chart.button.collapseAll' | translate}}"
-                  (click)="treeControl.collapseAll()">
+                  (click)="collapseAll()">
             <i class="fas fa-angle-double-up"></i>
           </button>
 
           <!-- toggle-button "-angle-double-right" to expand the time-column vertically,  toggles with button angle-double-left further down in this code -->
           <!-- .......................................................................................................................................... -->
-          <button type="button" class="btn btn-link btn-xs mr-2{{(this.sidebarResponsibleStatus)?' d-none':''}}" 
-                  (click)="sidebarStatusToggle()" 
+          <button type="button" class="btn btn-link btn-xs mr-2{{(this.sidebarResponsibleStatus)?' d-none':''}}"
+                  (click)="sidebarStatusToggle()"
                   title="{{'working-plan.chart.column.expand' | translate}}">
             <i class="fas fa-angle-double-right"></i>
           </button>
