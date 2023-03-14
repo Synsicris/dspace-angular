@@ -71,7 +71,7 @@ interface WorkpackageEditModes {
  * @title Tree with nested nodes
  */
 @Component({
-  selector: 'ipw-working-plan-chart-container',
+  selector: 'ds-working-plan-chart-container',
   templateUrl: './working-plan-chart-container.component.html',
   styleUrls: ['./working-plan-chart-container.component.scss'],
   providers: [
@@ -330,7 +330,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     );
     this.updateTreeMap(flatNode, node);
     return flatNode;
-  }
+  };
 
   hasChild = (_: number, _nodeData: WorkpacakgeFlatNode) => _nodeData.expandable;
 
@@ -361,7 +361,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.formHeader = this.workingPlanService.getWorkpackageStepFormHeader();
     modalRef.componentInstance.searchMessageInfoKey = this.workingPlanService.getWorkingPlanTaskSearchHeader();
     modalRef.componentInstance.processing = this.workingPlanStateService.isProcessing();
-    modalRef.componentInstance.vocabularyName = this.workingPlanService.getWorkpackageStepTypeAuthorityName();
     modalRef.componentInstance.searchConfiguration = this.workingPlanService.getWorkpackageStepSearchConfigName();
     modalRef.componentInstance.scope = this.projectCommunityId;
     modalRef.componentInstance.query = this.buildExcludedTasksQuery(flatNode);
@@ -461,7 +460,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   updateSort() {
     if (this.sortSelectedValue !== this.sortSelectedOld) {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, this.sortSelectedValue, this.isVersionOf);
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan, this.sortSelectedValue, this.isVersionOf);
     }
   }
 
@@ -575,7 +574,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   validateResizeNames = (resizeEvent: any) => {
     const eventWidth = resizeEvent.rectangle.width;
     return eventWidth >= this.sidebarNamesMinWidth;
-  }
+  };
 
   buildCalendar() {
     this.dates = [];

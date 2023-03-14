@@ -18,11 +18,9 @@ export interface WorkpackageChartDate {
   year: string;
 }
 
-export interface Workpackage extends WorkpackageTreeObject {
-}
+export type Workpackage = WorkpackageTreeObject;
 
-export interface WorkpackageStep extends WorkpackageTreeObject {
-}
+export type WorkpackageStep = WorkpackageTreeObject;
 
 export interface WorkpackageTreeObject {
   id: string;

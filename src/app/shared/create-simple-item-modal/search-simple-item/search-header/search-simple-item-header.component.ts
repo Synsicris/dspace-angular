@@ -15,11 +15,6 @@ import { SimpleItem } from '../../models/simple-item.model';
 export class SearchSimpleItemHeaderComponent {
 
   /**
-   * The vocabulary name used for authority filter
-   */
-  @Input() vocabularyName: string;
-
-  /**
    * Emits the currently active filters
    */
   @Input() filterBoxList: Observable<FilterBox[]>;

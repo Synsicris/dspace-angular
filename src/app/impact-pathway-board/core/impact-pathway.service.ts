@@ -48,6 +48,7 @@ import {
   impactPathwayStateSelector,
   impactPathwaySubTaskCollapsable,
   isCompareMode,
+  isImpactPathwayCompareProcessingSelector,
   isImpactPathwayLoadedSelector,
   isImpactPathwayProcessingSelector,
   isImpactPathwayRemovingSelector
@@ -366,31 +367,26 @@ export class ImpactPathwayService {
    *    the impact pathway's step compared item with
    */
   initCompareImpactPathwayTasksFromStep(targetImpactPathwayStepId: string, targetItem: Item, versionedImpactPathwayStepId: string): Observable<ImpactPathwayStep[]> {
-    const relatedTaskMetadata = Metadata.all(targetItem.metadata, environment.impactPathway.impactPathwayTaskRelationMetadata);
-    if (isEmpty(relatedTaskMetadata) || isEmpty(versionedImpactPathwayStepId)) {
-      return observableOf([]);
-    } else {
-      return this.projectVersionService.compareItemChildrenByMetadata(
-        targetImpactPathwayStepId,
-        versionedImpactPathwayStepId,
-        environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
-          mergeMap((compareList: ComparedVersionItem[]) => {
-            return observableFrom(compareList).pipe(
-              concatMap((compareItem: ComparedVersionItem) => observableOf(this.initImpactPathwayTaskFromCompareItem(
-                compareItem,
-                targetImpactPathwayStepId)
-              )),
-              reduce((acc: any, value: any) => {
-                if (isNotNull(value)) {
-                  return [...acc, value];
-                } else {
-                  return acc;
-                }
-              }, [])
-            );
-          })
+    return this.projectVersionService.compareItemChildrenByMetadata(
+      targetImpactPathwayStepId,
+      versionedImpactPathwayStepId,
+      environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
+      mergeMap((compareList: ComparedVersionItem[]) => {
+        return observableFrom(compareList).pipe(
+          concatMap((compareItem: ComparedVersionItem) => observableOf(this.initImpactPathwayTaskFromCompareItem(
+            compareItem,
+            targetImpactPathwayStepId)
+          )),
+          reduce((acc: any, value: any) => {
+            if (isNotNull(value)) {
+              return [...acc, value];
+            } else {
+              return acc;
+            }
+          }, [])
         );
-    }
+      })
+    );
   }
 
   /**
@@ -404,32 +400,26 @@ export class ImpactPathwayService {
    *    the impact pathway's step compared item with
    */
   initCompareImpactPathwayTasksFromTask(targetImpactPathwayTaskId: string, targetItem: Item, versionedImpactPathwayTaskId: string): Observable<ImpactPathwayTask[]> {
-    const relatedTaskMetadata = Metadata.all(targetItem.metadata, environment.impactPathway.impactPathwayTaskRelationMetadata);
-    // if (isEmpty(relatedTaskMetadata) || isEmpty(versionedImpactPathwayTaskId)) {
-    if (isEmpty(relatedTaskMetadata)) {
-      return observableOf([]);
-    } else {
-      return this.projectVersionService.compareItemChildrenByMetadata(
-        targetImpactPathwayTaskId,
-        versionedImpactPathwayTaskId,
-        environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
-        mergeMap((compareList: ComparedVersionItem[]) => {
-          return observableFrom(compareList).pipe(
-            concatMap((compareItem: ComparedVersionItem) => observableOf(this.initImpactPathwayTaskFromCompareItem(
-              compareItem,
-              targetImpactPathwayTaskId)
-            )),
-            reduce((acc: any, value: any) => {
-              if (isNotNull(value)) {
-                return [...acc, value];
-              } else {
-                return acc;
-              }
-            }, [])
-          );
-        })
-      );
-    }
+    return this.projectVersionService.compareItemChildrenByMetadata(
+      targetImpactPathwayTaskId,
+      versionedImpactPathwayTaskId,
+      environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
+      mergeMap((compareList: ComparedVersionItem[]) => {
+        return observableFrom(compareList).pipe(
+          concatMap((compareItem: ComparedVersionItem) => observableOf(this.initImpactPathwayTaskFromCompareItem(
+            compareItem,
+            targetImpactPathwayTaskId)
+          )),
+          reduce((acc: any, value: any) => {
+            if (isNotNull(value)) {
+              return [...acc, value];
+            } else {
+              return acc;
+            }
+          }, [])
+        );
+      })
+    );
   }
 
   /**
@@ -457,6 +447,8 @@ export class ImpactPathwayService {
    *
    * @param compareObj
    *    the compared object
+   * @param parentId
+   *    id of linked parent pathway
    * @param tasks
    *    the tasks or steps related to the object
    */
@@ -482,9 +474,11 @@ export class ImpactPathwayService {
    *    the id of impact pathway step that the task belongs to
    * @param compareImpactPathwayStepId
    *    the impact pathway step's id to compare with the current one
+   * @param activeImpactPathwayStepId
+   *    the loaded impact pathway step's id
    */
-  public initCompareImpactPathwayTask(impactPathwayId: string, impactPathwayStepId: string, compareImpactPathwayStepId: string) {
-    this.store.dispatch(new InitCompareStepTaskAction(impactPathwayId, impactPathwayStepId, compareImpactPathwayStepId));
+  public initCompareImpactPathwayTask(impactPathwayId: string, impactPathwayStepId: string, compareImpactPathwayStepId: string, activeImpactPathwayStepId: string) {
+    this.store.dispatch(new InitCompareStepTaskAction(impactPathwayId, impactPathwayStepId, compareImpactPathwayStepId, activeImpactPathwayStepId));
   }
 
 
@@ -493,6 +487,10 @@ export class ImpactPathwayService {
    *
    * @param impactPathwayId
    *    the impact pathway's id
+   * @param impactPathwayStepId
+   *    the impact pathway's step id
+   * * @param impactPathwayStepTaskId
+   *    the impact pathway's step task id
    */
   dispatchStopCompareImpactPathwayTask(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId: string,) {
     this.store.dispatch(new StopCompareImpactPathwayStepTaskAction(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId));
@@ -525,15 +523,15 @@ export class ImpactPathwayService {
   /**
    * Dispatch a new InitCompareAction
    *
-   * @param impactPathwayId
-   *    the impact pathway's id
+   * @param baseImpactPathwayId
+   *    the base impact pathway's id
    * @param compareImpactPathwayId
    *    the impact pathway's id to compare with
-   * @param isVersionOf
-   *    whether the impact pathway's id to compare is a version of item
+   * @param activeImpactPathwayId
+   *    the loaded impact pathway's
    */
-  public dispatchInitCompare(impactPathwayId: string, compareImpactPathwayId: string, isVersionOf: boolean) {
-    this.store.dispatch(new InitCompareAction(impactPathwayId, compareImpactPathwayId, isVersionOf));
+  public dispatchInitCompare(baseImpactPathwayId: string, compareImpactPathwayId: string, activeImpactPathwayId: string) {
+    this.store.dispatch(new InitCompareAction(baseImpactPathwayId, compareImpactPathwayId, activeImpactPathwayId));
   }
 
 
@@ -659,8 +657,8 @@ export class ImpactPathwayService {
   getImpactPathwayTasksByStepId(impactPathwayId: string, impactPathwayStepId: string): Observable<ImpactPathwayTask[]> {
     return this.store.pipe(
       select(impactPathwayByIDSelector(impactPathwayId)),
-      filter((impactPathway: ImpactPathway) => isNotEmpty(impactPathway)),
-      map((impactPathway: ImpactPathway) => impactPathway.getStep(impactPathwayStepId).tasks)
+      filter((impactPathway: ImpactPathway) => isNotEmpty(impactPathway) && isNotEmpty(impactPathway.getStep(impactPathwayStepId))),
+      map((impactPathway: ImpactPathway) => impactPathway.getStep(impactPathwayStepId)?.tasks)
     );
   }
 
@@ -862,6 +860,10 @@ export class ImpactPathwayService {
 
   isProcessing(): Observable<boolean> {
     return this.store.pipe(select(isImpactPathwayProcessingSelector));
+  }
+
+  isCompareProcessing(): Observable<boolean> {
+    return this.store.pipe(select(isImpactPathwayCompareProcessingSelector));
   }
 
   isRemoving(): Observable<boolean> {

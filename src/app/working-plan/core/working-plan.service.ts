@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 
-import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
+import { combineLatest, from as observableFrom, Observable, of as observableOf } from 'rxjs';
 import {
   catchError,
   concatMap,
@@ -69,6 +69,7 @@ import { ProjectDataService } from '../../core/project/project-data.service';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
 import { SearchManager } from '../../core/browse/search-manager';
+import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 
 export const moment = extendMoment(Moment);
 
@@ -109,6 +110,7 @@ export class WorkingPlanService {
     private searchService: SearchService,
     private workingPlanStateService: WorkingPlanStateService,
     private searchManager: SearchManager,
+    @Inject(APP_CONFIG) public appConfig: AppConfig
   ) {
     this.searchService.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
   }
@@ -427,31 +429,26 @@ export class WorkingPlanService {
   }
 
   initCompareWorkpackageStepsFromParentItem(targetWorkpackageId: string, targetItem: Item, versionedWorkpackageId: string): Observable<WorkpackageStep[]> {
-    const relatedTaskMetadata = Metadata.all(targetItem.metadata, environment.workingPlan.workingPlanStepRelationMetadata);
-    if (isEmpty(relatedTaskMetadata) || isEmpty(versionedWorkpackageId)) {
-      return observableOf([]);
-    } else {
-      return this.projectVersionService.compareItemChildrenByMetadata(
-        targetWorkpackageId,
-        versionedWorkpackageId,
-        environment.workingPlan.workingPlanStepRelationMetadata).pipe(
-          mergeMap((compareList: ComparedVersionItem[]) => {
-            return observableFrom(compareList).pipe(
-              concatMap((compareItem: ComparedVersionItem) => observableOf(this.initWorkpackageStepFromCompareItem(
-                compareItem,
-                targetWorkpackageId)
-              )),
-              reduce((acc: any, value: any) => {
-                if (isNotNull(value)) {
-                  return [...acc, value];
-                } else {
-                  return acc;
-                }
-              }, [])
-            );
-          })
+    return this.projectVersionService.compareItemChildrenByMetadata(
+      targetWorkpackageId,
+      versionedWorkpackageId,
+      environment.workingPlan.workingPlanStepRelationMetadata).pipe(
+      mergeMap((compareList: ComparedVersionItem[]) => {
+        return observableFrom(compareList).pipe(
+          concatMap((compareItem: ComparedVersionItem) => observableOf(this.initWorkpackageStepFromCompareItem(
+            compareItem,
+            targetWorkpackageId)
+          )),
+          reduce((acc: any, value: any) => {
+            if (isNotNull(value)) {
+              return [...acc, value];
+            } else {
+              return acc;
+            }
+          }, [])
         );
-    }
+      })
+    );
   }
 
   initWorkingPlan(workpackageListItem: WorkpackageSearchItem[]): Observable<Workpackage[]> {
@@ -762,6 +759,25 @@ export class WorkingPlanService {
     return this.updateMetadataItem(workpackageId, metadataList);
   }
 
+
+  getWorkingplanStepRelationItems(workingplan: Item): Observable<WorkpackageSearchItem[]> {
+    return combineLatest(
+      this.getWorkingplanStepRelationAuthorities(workingplan)
+        .map(uuid =>
+          this.itemService.findById(uuid)
+            .pipe(
+              getFirstSucceededRemoteDataPayload(),
+              map(item => ({ id: item.uuid, item }))
+            )
+        )
+    );
+  }
+
+  getWorkingplanStepRelationAuthorities(workingplan: Item): string[] {
+    return workingplan.allMetadata(this.appConfig.workingPlan.workingPlanStepRelationMetadata)
+      .filter(value => value?.authority != null)
+      .map(({ authority }) => authority);
+  }
 
   getItemsFromWorkpackages(wkItems): string[] {
     const items = [];

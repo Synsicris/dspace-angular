@@ -3,7 +3,6 @@ import { BuildConfig } from 'src/config/build-config.interface';
 import { RestRequestMethod } from '../app/core/data/rest-request-method';
 import { NotificationAnimationsType } from '../app/shared/notifications/models/notification-animations-type';
 import { AdvancedAttachmentElementType } from '../config/advanced-attachment-rendering.config';
-import { AppConfig } from '../config/app-config.interface';
 import { DisplayItemMetadataType } from '../config/display-search-result-config.interface';
 
 export const environment: BuildConfig = {
@@ -376,9 +375,24 @@ export const environment: BuildConfig = {
     navbar: {
       // If true, show the "Community and Collections" link in the navbar; otherwise, show it in the admin sidebar
       showCommunityCollection: true,
-      search: {
-        filters: {
-          datepicker: ['filterName1']
+    },
+    search: {
+      filters: {
+        datepicker: ['dateReminder'],
+        discoveryConfig: {
+          'COMMENT_ALL.Person.comment_person_all': {
+            'dateReminder': {
+              filterType: 'range',
+              minValue: {
+                operator: '-',
+                value: { day: 10 }
+              },
+              maxValue: {
+                operator: '+',
+                value: { day: 10 }
+              }
+            }
+          }
         }
       }
     }
@@ -572,13 +586,28 @@ export const environment: BuildConfig = {
     workingPlanLinkMetadata: 'workingplan.link.status'
   },
   exploitationPlan: {
-    exploitationPlanRelationMetadata: 'synsicris.relation.exploitationplan',
-    exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
-    exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
-    exploitationPlanPartnerMetadata: '',
-    exploitationPlanTaskFormSection: 'exploitation_plan_task_form',
-    exploitationPlanEditFormSection: 'exploitation_plan-edit_form',
-    exploitationPlanEditMode: 'EXPLOITATIONPLAN',
+    questionsBoardFormPrefix: 'exploitation_plan',
+    questionsBoardI18nPrefix: 'exploitation-plan',
+    questionsBoardRelationMetadata: 'synsicris.relation.exploitationplan',
+    questionsBoardStepEntityName: 'exploitationplanstep',
+    questionsBoardStepRelationMetadata: 'exploitationplan.relation.step',
+    questionsBoardTaskRelationMetadata: 'exploitationplan.relation.task',
+    questionsBoardPartnerMetadata: '',
+    questionsBoardTaskFormSection: 'exploitation_plan_task_form',
+    questionsBoardEditFormSection: 'exploitation_plan-edit_form',
+    questionsBoardEditMode: 'EXPLOITATIONPLAN',
+  },
+  interimReport: {
+    questionsBoardFormPrefix: 'interim_report',
+    questionsBoardI18nPrefix: 'interim-report',
+    questionsBoardRelationMetadata: 'synsicris.relation.interimreport',
+    questionsBoardStepEntityName: 'interim_report_step',
+    questionsBoardStepRelationMetadata: 'interimreport.relation.step',
+    questionsBoardTaskRelationMetadata: 'interimreport.relation.task',
+    questionsBoardPartnerMetadata: '',
+    questionsBoardTaskFormSection: 'interim_report_task_form',
+    questionsBoardEditFormSection: 'interim_report-edit_form',
+    questionsBoardEditMode: 'INTERIMREPORT',
   },
   displayItemSearchResult: {
     Publication: [
@@ -649,8 +678,12 @@ export const environment: BuildConfig = {
   comments: {
     commentEditFormName: 'comments',
     commentEditFormSection: 'comments',
-    commentEditMode: 'CUSTOM',
+    commentAdminEditMode: 'ADMIN_EDIT',
+    commentEditMode: 'COMMENT',
     commentEntityType: 'comment',
-    commentRelationItemMetadata: 'synsicris.relation.item'
+    commentRelationItemMetadata: 'synsicris.relation.commentItem',
+    commentRelationItemVersionMetadata: 'synsicris.relation.commentItemVersion',
+    commentRelationProjectMetadata: 'synsicris.relation.commentProject',
+    commentRelationProjectVersionMetadata: 'synsicris.relation.commentProjectVersion',
   }
 };

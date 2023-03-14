@@ -15,7 +15,7 @@ import { environment } from '../../environments/environment';
 import { ProjectVersionService } from '../core/project/project-version.service';
 
 @Component({
-  selector: 'ipw-working-plan-page',
+  selector: 'ds-working-plan-page',
   templateUrl: './working-plan-page.component.html'
 })
 export class WorkingPlanPageComponent implements OnInit {
@@ -91,7 +91,7 @@ export class WorkingPlanPageComponent implements OnInit {
           tap(([itemRD, loaded]: [RemoteData<Item>, boolean]) => {
             if (!loaded) {
               this.isVersionOf = this.projectVersionService.isVersionOfAnItem(itemRD.payload);
-              this.workingPlanStateService.dispatchRetrieveAllWorkpackages(projectID, itemRD.payload.uuid, environment.workingPlan.workingPlanPlaceMetadata, this.isVersionOf);
+              this.workingPlanStateService.dispatchRetrieveAllWorkpackages(projectID, itemRD.payload, environment.workingPlan.workingPlanPlaceMetadata, this.isVersionOf);
             }
           }),
           map(([itemRD, loaded]: [RemoteData<Item>, boolean]) => itemRD)

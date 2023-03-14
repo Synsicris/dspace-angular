@@ -10,9 +10,10 @@ import { environment } from '../../../environments/environment';
 import { ImpactPathwayService } from '../core/impact-pathway.service';
 import { BehaviorSubject } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
+import { VersionSelectedEvent } from '../../shared/item-version-list/item-version-list.component';
 
 @Component({
-  selector: 'ipw-wrapper-objectives',
+  selector: 'ds-wrapper-objectives',
   styleUrls: ['./wrapper-objectives.component.scss'],
   templateUrl: './wrapper-objectives.component.html'
 })
@@ -94,10 +95,10 @@ export class WrapperObjectivesComponent implements OnDestroy {
   /**
    * Dispatch initialization of comparing mode
    *
-   * @param version
+   * @param selected
    */
-  onVersionSelected(version: Item) {
-    this.impactPathwayService.initCompareImpactPathwayTask(this.impactPathwayStep.parentId, this.impactPathwayStep.id, version.id);
+  onVersionSelected(selected: VersionSelectedEvent) {
+    this.impactPathwayService.initCompareImpactPathwayTask(this.impactPathwayStep.parentId, selected.base.id, selected.comparing.id, selected.active.id);
   }
 
   /**

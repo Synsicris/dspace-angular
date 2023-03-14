@@ -20,4 +20,9 @@
                   [targetEntityType]="getTargetEntity()"
                   [scope]="projectScope?.uuid"
                   (refresh)="refresh()"></ds-item-create>
+
+  <ds-item-import-metadata-external
+                  additionalSearchFormOptions
+                  [targetEntityType]="getTargetEntity()"
+                  [scope]="projectScope?.uuid"></ds-item-import-metadata-external>
 </ds-configuration-search-page>

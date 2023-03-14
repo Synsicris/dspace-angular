@@ -53,6 +53,12 @@ export class ChartComponent implements OnInit {
   legendPosition: string;
 
   /**
+   * Set legend position.
+   */
+  @Input()
+  maxLabelLength = 10;
+
+  /**
    * The chart type selection
    */
   @Input() type: ChartType = ChartType.BAR;
@@ -128,6 +134,7 @@ export class ChartComponent implements OnInit {
           useFactory: () => this.legendPosition,
           deps: [],
         },
+        { provide: 'maxLabelLength', useFactory: () => this.maxLabelLength, deps: [] },
         { provide: 'select', useFactory: () => this.select, deps: [] },
         { provide: 'enableScrollToLeft', useFactory: () => this.enableScrollToLeft, deps: [] },
         { provide: 'enableScrollToRight', useFactory: () => this.enableScrollToRight, deps: [] },

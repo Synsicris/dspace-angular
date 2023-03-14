@@ -1,1 +1,4 @@
-<h1 *ngIf="name">{{ name }}</h1>
+<div class="d-flex flex-column">
+  <h1 *ngIf="name">{{ name }}</h1>
+  <ng-content></ng-content>
+</div>

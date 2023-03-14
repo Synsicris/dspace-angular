@@ -43,7 +43,10 @@ export interface WorkpackageEntries {
  */
 export interface WorkingPlanState {
   workingplanId: string;
-  compareWorkingplanId?: string;
+  baseWorkingplanId?: string;
+  comparingWorkingplanId?: string;
+  selectedWorkingplanId?: string;
+  activeWorkingplanId?: string;
   workpackages: WorkpackageEntries;
   items: string[];
   workpackageToRemove: string;
@@ -102,7 +105,7 @@ export function workingPlanReducer(state = workpackageInitialState, action: Work
     case WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS: {
       const lastAddedNodes = (action.payload.lastAddedId) ? [action.payload.lastAddedId] : [];
       return Object.assign({}, workpackageInitialState, {
-        workingplanId: action.payload.workingplanId,
+        workingplanId: action.payload.workingplan.uuid,
         processing: true,
         lastAddedNodes: lastAddedNodes
       });
@@ -545,7 +548,10 @@ function revertWorkpackageStepOrder(state: WorkingPlanState, action: SaveWorkpac
  */
 function initCompare(state: WorkingPlanState, action: InitCompareAction) {
   return Object.assign({}, state, {
-    compareWorkingplanId: action.payload.compareWorkingplanId,
+    baseWorkingplanId: action.payload.baseWorkingplanId,
+    comparingWorkingplanId: action.payload.comparingWorkingplanId,
+    selectedWorkingplanId: action.payload.selectedWorkingplanId,
+    activeWorkingplanId: action.payload.activeWorkingplanId,
     compareMode: true,
     initializing: true,
     loaded: false

@@ -405,6 +405,8 @@ import {
 import { ViewVersionBadgesComponent } from './view-version-badges/view-version-badges.component';
 import { IpwItemMetadataStatusDirective } from './ipw-helpers/ipw-item-metadata-status.directive';
 import { IpwItemMetadataInternalDirective } from './ipw-helpers/ipw-item-metadata-internal.directive';
+import { EntityTypeTranslatePipe } from './utils/entity-type-translate-pipe';
+import { ItemImportMetadataExternalComponent } from './item/item-import-metadata-external/item-import-metadata-external.component';
 
 const MODULES = [
   CommonModule,
@@ -459,6 +461,7 @@ const PIPES = [
   ObjNgFor,
   BrowserOnlyPipe,
   MarkdownPipe,
+  EntityTypeTranslatePipe,
 ];
 
 const COMPONENTS = [
@@ -725,7 +728,8 @@ const SHARED_ITEM_PAGE_COMPONENTS = [
   MetadataRepresentationListComponent,
   RelatedItemsComponent,
   DsoPageOrcidButtonComponent,
-  ItemCreateComponent
+  ItemCreateComponent,
+  ItemImportMetadataExternalComponent
 ];
 
 const PROVIDERS = [

@@ -1,0 +1,55 @@
+<ds-collapsable-panel #ipwCollapse class="d-block mb-3"
+                      [sidebarPanelTitle]="getStepTitle()"
+                      [startOpen]="!(isCollapsed() | async)"
+                      [collapsable]="true">
+  <ng-container *ngIf="isIconVisible()" ngProjectAs="panelIconTitle">
+    <i dsQuestionsBoardIcon [questionsBoardType]="questionsBoardStep?.type"></i>
+  </ng-container>
+  <ng-container ngProjectAs="panelContent">
+    <div class="d-flex">
+      <div #questionsBoardSection class="pr-0 w-100">
+        <div class="p-2">
+          <ds-alert [type]="'alert-info'" [content]="messagePrefix + '.' + questionsBoardStep?.type + '.info.text'"
+                    [collapsible]="true"></ds-alert>
+          <div class="p-0 m-0 mb-2 bg-light rounded">
+            <ds-questions-board-step-container [messagePrefix]="messagePrefix"
+                                               [questionsBoardStep]="questionsBoardStep"
+                                               [isVersionOfAnItem]="isVersionOfAnItem"
+                                               [projectCommunityId]="projectCommunityId"
+                                               [fundingCommunity]="fundingCommunity"
+                                               [compareMode]="compareMode"></ds-questions-board-step-container>
+          </div>
+          <ds-view-simple-item-form *ngIf="hasCheckbox && questionsBoardStep"
+                                    [editMode]="getEditMode()"
+                                    [editTitle]="messagePrefix + '.edit.btn.title' | translate"
+                                    [fieldTitle]="messagePrefix + '.description.title' | translate"
+                                    [formConfig]="formConfig$"
+                                    [formSectionName]="getSectionName()"
+                                    [itemId]="questionsBoardStep.id"
+                                    [disabled]="compareMode || isVersionOfAnItem"
+                                    (itemUpdate)="updateQuestionsBoardStep($event)"></ds-view-simple-item-form>
+          <ds-editable-textarea *ngIf="!hasCheckbox && questionsBoardStep"
+                                 [editMode]="getEditMode()"
+                                 [formConfig]="formConfig$"
+                                 [formSectionName]="getSectionName()"
+                                 [itemId]="questionsBoardStep.id"
+                                 [editTitle]="messagePrefix + '.edit.btn.title' | translate"
+                                 [fieldTitle]="messagePrefix + '.description.title' | translate"
+                                 [content]="questionsBoardStep.description"
+                                 [disabled]="compareMode || isVersionOfAnItem"
+                                 (contentChange)="updateQuestionsBoardStep($event)"></ds-editable-textarea>
+        </div>
+      </div>
+
+      <div *ngIf="isVersionOfAnItem && isFunder && (formConfig$ | async)?.name && this.questionBoardEntityType" class="comment-box pr-2 py-2 comment-box-position"
+           [ngStyle]="{'height.px': questionsBoardSection.clientHeight}">
+        <ds-comment-list
+          [relatedEntityType]="this.questionBoardEntityType"
+          [itemUuid]="this.questionsBoardStep.id"
+          [projectCommunityId]="projectCommunityId"
+          [type]="(formConfig$ | async).name">
+        </ds-comment-list>
+      </div>
+    </div>
+  </ng-container>
+</ds-collapsable-panel>

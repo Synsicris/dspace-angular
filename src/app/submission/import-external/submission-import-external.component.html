@@ -50,9 +50,9 @@
   <div class="row">
     <div class="col-md-12">
       <hr>
-      <a class="btn btn-outline-secondary" [routerLink]="[mydspaceRoute]" role="button">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i> {{'submission.import-external.back-to-my-dspace' | translate}}
-      </a>
+      <button class="btn btn-outline-secondary" (click)="redirectToProjectPage()" role="button">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i> {{'submission.import-external.back-to-previous' | translate}}
+      </button>
     </div>
   </div>
 </div>

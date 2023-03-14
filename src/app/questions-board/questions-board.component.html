@@ -1,0 +1,28 @@
+<div class="border-bottom mb-4 pb-2 d-flex justify-content-between align-items-center">
+  <ds-comcol-page-header [name]="(messagePrefix + '.page.title' | translate )">
+    <ds-view-version-badges *ngIf="questionsBoardObject && (isVersionOfAnItem$ | async)" [item]="questionsBoardObject"></ds-view-version-badges>
+  </ds-comcol-page-header>
+  <ds-item-version-list *ngIf="questionsBoardObject"
+                        [btnClass]="'btn-md'"
+                        [showOnlyVisible]="isFunder"
+                        [targetItemId]="questionsBoardObjectId"
+                        [targetItem]="questionsBoardObject"
+                        (versionSelected)="onVersionSelected($event)"
+                        (versionDeselected)="onVersionDeselected()" >
+  </ds-item-version-list>
+
+</div>
+<ds-loading *ngIf="(isLoading() | async)"></ds-loading>
+<div *ngIf="!(isLoading() | async)">
+  <ds-alert [type]="'alert-info'" [content]="messagePrefix + '.info.text'" [collapsible]="true"></ds-alert>
+
+  <ds-questions-board-step *ngFor="let step of (questionsBoardStep$ | async)"
+                           [messagePrefix]="messagePrefix"
+                           [questionsBoardStep]="step"
+                           [projectCommunityId]="projectCommunityId"
+                           [fundingCommunity]="fundingCommunity"
+                           [compareMode]="(compareMode | async)"
+                           [isFunder]="isFunder"
+                           [isVersionOfAnItem]="(isVersionOfAnItem$ | async)">
+  </ds-questions-board-step>
+</div>

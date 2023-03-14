@@ -25,7 +25,7 @@ import { PaginatedList } from '../../../../core/data/paginated-list.model';
 import { EditItemDataService } from '../../../../core/submission/edititem-data.service';
 
 @Component({
-  selector: 'ipw-impact-path-way-step',
+  selector: 'ds-impact-path-way-step',
   styleUrls: ['./impact-path-way-step.component.scss', '../../drag-and-drop-container.component.scss'],
   templateUrl: './impact-path-way-step.component.html',
   animations: [
@@ -147,10 +147,6 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
         false
       );
       modalRef.componentInstance.processing = this.impactPathwayService.isProcessing();
-      modalRef.componentInstance.vocabularyName = this.impactPathwayService.getTaskTypeAuthorityName(
-        impactPathwayStep.type,
-        false
-      );
       modalRef.componentInstance.searchConfiguration = this.impactPathwayService.getSearchTaskConfigName(
         impactPathwayStep.type,
         false

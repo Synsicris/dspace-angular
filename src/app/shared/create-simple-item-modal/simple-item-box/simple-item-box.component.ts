@@ -1,16 +1,13 @@
 import { ItemDetailPageModalComponent } from '../../../item-detail-page-modal/item-detail-page-modal.component';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
-import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
-import { catchError, distinctUntilChanged, map } from 'rxjs/operators';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { hasValue, isNotEmpty, isNull } from '../../empty.util';
+import { hasValue, isNotEmpty } from '../../empty.util';
 import { SimpleItem } from '../models/simple-item.model';
 import { Metadata } from '../../../core/shared/metadata.utils';
-import { VocabularyOptions } from '../../../core/submission/vocabularies/models/vocabulary-options.model';
-import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
-import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ds-simple-item-box',
@@ -18,16 +15,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './simple-item-box.component.html'
 })
 export class SimpleItemBoxComponent implements OnInit, OnDestroy {
-
-  @Input() public vocabularyName: string;
   @Input() public data: SimpleItem;
   @Input() public selectedStatus: boolean;
 
   public hasFocus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public selectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public title: string;
-  public type$: Observable<string>;
-  public vocabularyOptions: VocabularyOptions;
 
   private subs: Subscription[] = [];
 
@@ -35,8 +28,7 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
   @Output() public deselected: EventEmitter<SimpleItem> = new EventEmitter();
 
   constructor(
-    private modalService: NgbModal,
-    private vocabularyService: VocabularyService) {
+    private modalService: NgbModal) {
 
   }
 
@@ -48,8 +40,6 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.title = Metadata.firstValue(this.data.metadata, 'dc.title');
-    this.vocabularyOptions = new VocabularyOptions(this.vocabularyName);
-    this.type$ = this.getItemType();
 
     this.subs.push(this.selectStatus.pipe(
       distinctUntilChanged())
@@ -75,21 +65,6 @@ export class SimpleItemBoxComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.filter((sub) => hasValue(sub)).forEach((sub) => sub.unsubscribe());
-  }
-
-  getItemType(): Observable<string> {
-    const itemType = this.data.type.value;
-
-    return this.vocabularyService.getVocabularyEntryByValue(itemType, this.vocabularyOptions).pipe(
-      map((result: VocabularyEntry) => {
-        if (isNull(result)) {
-          throw new Error(`No task type found for ${itemType}`);
-        }
-
-        return result.display;
-      }),
-      catchError((error: Error) => observableOf(''))
-    );
   }
 
   openItemModal() {

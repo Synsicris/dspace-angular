@@ -139,32 +139,21 @@ export class ImpactPathwayEffects {
    */
   @Effect() initCompare$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY),
-    withLatestFrom(this.store$),
-    switchMap(([action, state]: [InitCompareAction, any]) => {
-      let impactPathwayId;
-      let versionItemId;
-      if (action.payload.isVersionOf) {
-        versionItemId = action.payload.impactPathwayId;
-        impactPathwayId = action.payload.compareImpactPathwayId;
-      } else {
-        impactPathwayId = action.payload.impactPathwayId;
-        versionItemId = action.payload.compareImpactPathwayId;
-      }
-
-      return this.projectVersionService.compareItemChildrenByMetadata(
-        impactPathwayId,
-        versionItemId,
+    switchMap((action: InitCompareAction) =>
+      this.projectVersionService.compareItemChildrenByMetadata(
+        action.payload.baseImpactPathwayId,
+        action.payload.compareImpactPathwayId,
         environment.impactPathway.impactPathwayStepRelationMetadata
       ).pipe(
         switchMap((compareItemList: ComparedVersionItem[]) => this.impactPathwayService.initCompareImpactPathwaySteps(compareItemList)),
-        map((steps: ImpactPathwayStep[]) => new InitCompareSuccessAction(action.payload.impactPathwayId, steps)),
+        map((steps: ImpactPathwayStep[]) => new InitCompareSuccessAction(action.payload.activeImpactPathwayId, steps)),
         catchError((error: Error) => {
           if (error) {
             this.notificationsService.error(null, this.translate.get('impact-pathway.compare.error'));
           }
           return observableOf(new InitCompareErrorAction());
-        }));
-    }));
+        }))
+    ));
 
 
   /**

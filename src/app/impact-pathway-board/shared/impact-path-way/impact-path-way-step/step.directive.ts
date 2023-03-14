@@ -2,7 +2,7 @@ import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 import { ImpactPathwayStepType } from '../../../core/models/impact-pathway-step-type';
 
 @Directive({
-  selector: '[ipwStepColor]'
+  selector: '[dsStepColor]'
 })
 export class StepColorDirective {
 

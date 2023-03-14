@@ -511,9 +511,22 @@ export class DefaultAppConfig implements AppConfig {
     },
     search: {
       filters: {
-        datepicker: ['dateReminder'],
+        datepicker: ['dateReminder', 'dateCreation'],
         discoveryConfig: {
           'COMMENT_ALL.Person.comment_person_all': {
+            'dateReminder': {
+              filterType: 'range',
+              minValue: {
+                operator: '-',
+                value: { day: 10 }
+              },
+              maxValue: {
+                operator: '+',
+                value: { day: 10 }
+              }
+            }
+          },
+          'COMMENT_ALL.Project.comment_project_all': {
             'dateReminder': {
               filterType: 'range',
               minValue: {
@@ -717,12 +730,15 @@ export class DefaultAppConfig implements AppConfig {
       'cris.policy.group', 'cris.project.shared', 'dc.date.accessioned', 'dc.date.available', 'dspace.entity.type',
       'synsicris.funder-policy.group', 'synsicris.coordinator-policy.group', 'synsicris.member-policy.group',
       'synsicris.reader-policy.group', 'synsicris.relation.project', 'synsicris.relation.funding',
-      'synsicris.versioning-edit-policy.group', 'synsicris.versioning-read-policy.group','synsicris.uniqueid',
+      'synsicris.versioning-edit-policy.group', 'synsicris.versioning-read-policy.group', 'synsicris.uniqueid',
       'synsicris.relation.workingplan', 'workingplan.link.status', 'workingplan.place', 'workingplan.relation.step',
       'impactpathway.relation.parent', 'impactpathway.relation.step', 'impactpathway.relation.task',
       'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
       'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
-      'synsicris.isLastVersion','synsicris.isLastVersion.visible', 'synsicris.version', 'synsicris.version.visible'
+      'synsicris.isLastVersion', 'synsicris.isLastVersion.visible', 'synsicris.version', 'synsicris.version.visible',
+      "synsicris.versioning-funder-policy.group", "synsicris.versioning-reader-policy.group",
+      "synsicris.versioning-member-policy.group", "synsicris.versioning-coordinator-policy.group"
+
     ],
     projectsBrowse: {
       adminAndFunders: {
@@ -743,13 +759,31 @@ export class DefaultAppConfig implements AppConfig {
   };
 
   exploitationPlan = {
-    exploitationPlanRelationMetadata: 'synsicris.relation.exploitationplan',
-    exploitationPlanStepRelationMetadata: 'exploitationplan.relation.step',
-    exploitationPlanTaskRelationMetadata: 'exploitationplan.relation.task',
-    exploitationPlanPartnerMetadata: '',
-    exploitationPlanTaskFormSection: 'exploitation_plan_task_form',
-    exploitationPlanEditFormSection: 'exploitation_plan-edit_form',
-    exploitationPlanEditMode: 'EXPLOITATIONPLAN',
+    questionsBoardFormPrefix: 'exploitation_plan',
+    questionsBoardI18nPrefix: 'exploitation-plan',
+    questionsBoardRelationMetadata: 'synsicris.relation.exploitationplan',
+    questionsBoardStepEntityName: 'exploitationplanstep',
+    questionsBoardStepRelationMetadata: 'exploitationplan.relation.step',
+    questionsBoardTaskRelationMetadata: 'exploitationplan.relation.task',
+    questionsBoardPartnerMetadata: '',
+    questionsBoardTaskFormSection: 'exploitation_plan_task_form',
+    questionsBoardEditFormSection: 'exploitation_plan-edit_form',
+    questionsBoardEditMode: 'EXPLOITATIONPLAN',
+    questionsBoardStepIcon: true
+  };
+
+  interimReport = {
+    questionsBoardFormPrefix: 'interim_report',
+    questionsBoardI18nPrefix: 'interim-report',
+    questionsBoardRelationMetadata: 'synsicris.relation.interimreport',
+    questionsBoardStepEntityName: 'interim_report_step',
+    questionsBoardStepRelationMetadata: 'interimreport.relation.step',
+    questionsBoardTaskRelationMetadata: 'interimreport.relation.task',
+    questionsBoardPartnerMetadata: '',
+    questionsBoardTaskFormSection: 'interim_report_task_form',
+    questionsBoardEditFormSection: 'interim_report-edit_form',
+    questionsBoardEditMode: 'INTERIMREPORT',
+    questionsBoardStepIcon: false
   };
 
   displayItemSearchResult = {
@@ -1420,7 +1454,8 @@ export class DefaultAppConfig implements AppConfig {
   comments = {
     commentEditFormName: 'comments',
     commentEditFormSection: 'comments',
-    commentEditMode: 'CUSTOM',
+    commentAdminEditMode: 'ADMIN_EDIT',
+    commentEditMode: 'COMMENT',
     commentEntityType: 'comment',
     commentRelationItemMetadata: 'synsicris.relation.commentItem',
     commentRelationItemVersionMetadata: 'synsicris.relation.commentItemVersion',

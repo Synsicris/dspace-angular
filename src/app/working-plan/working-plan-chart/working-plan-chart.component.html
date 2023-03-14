@@ -1,9 +1,8 @@
 <div *ngIf="workpackages" class="container-fluid p-0" fxLayout="column">
   <div class="border-bottom mb-4 pb-2 d-flex justify-content-between align-items-center">
-    <ds-comcol-page-header
-      [name]="'working-plan.page.title' | translate">
+    <ds-comcol-page-header [name]="'working-plan.page.title' | translate">
+      <ds-view-version-badges *ngIf="workingPlan && isVersionOf" [item]="workingPlan"></ds-view-version-badges>
     </ds-comcol-page-header>
-    <ds-view-version-badges *ngIf="workingPlan && isVersionOf" [item]="workingPlan"></ds-view-version-badges>
   </div>
   <ds-alert [type]="'alert-info'" [content]="'working-plan.chart.page.description'" [collapsible]="true" [collapsed]="true"></ds-alert>
   <ng-container *ngIf="isVersionOf && isFunder">
@@ -40,17 +39,17 @@
     </ngb-accordion>
   </ng-container>
 
-  <ipw-working-plan-chart-toolbar [compareMode]="compareMode"
+  <ds-working-plan-chart-toolbar [compareMode]="compareMode"
                                   [isFunder]="isFunder"
                                   [isVersionOf]="isVersionOf"
                                   [projectCommunityId]="projectCommunityId"
                                   [workpackages]="workpackages"
-                                  [workingPlan]="workingPlan"></ipw-working-plan-chart-toolbar>
-  <ipw-working-plan-chart-container [compareMode]="compareMode"
+                                  [workingPlan]="workingPlan"></ds-working-plan-chart-toolbar>
+  <ds-working-plan-chart-container [compareMode]="compareMode"
                                     [isVersionOf]="isVersionOf"
                                     [projectCommunityId]="projectCommunityId"
                                     [milestoneCollectionId]="milestoneCollectionId"
                                     [workPackageCollectionId]="workPackageCollectionId"
                                     [workpackages]="workpackages"
-                                    [workingPlan]="workingPlan"></ipw-working-plan-chart-container>
+                                    [workingPlan]="workingPlan"></ds-working-plan-chart-container>
 </div>

@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { Action } from '@ngrx/store';
 
 import { type } from '../../shared/ngrx/type';
@@ -1425,7 +1426,7 @@ export class SetImpactPathwaySubTaskCollapseAction implements Action {
   };
 
   /**
-   * Create a new SetExploitationPlanStepCollapseAction
+   * Create a new SetImpactPathwaySubTaskCollapseAction
    *
    * @param impactPathwayStepId
    *    the impactPathwayStep's id
@@ -1453,23 +1454,23 @@ export class ClearImpactPathwaySubtaskCollapseAction implements Action {
 export class InitCompareAction implements Action {
   type = ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY;
   payload: {
-    impactPathwayId: string;
+    baseImpactPathwayId: string;
     compareImpactPathwayId: string;
-    isVersionOf: boolean;
+    activeImpactPathwayId: string;
   };
 
   /**
    * Create a new InitCompareAction
    *
-   * @param impactPathwayId
+   * @param baseImpactPathwayId
    *    the base impact pathway's id to compare
-   *  @param compareImpactPathwayId
+   * @param compareImpactPathwayId
    *    the impact pathway's id to compare with the current one
-   * @param isVersionOf
-   *    whether the impact pathway's id to compare is a version of item
+   * @param activeImpactPathwayId
+   *    the opened impact pathway's
    */
-  constructor(impactPathwayId: string, compareImpactPathwayId: string, isVersionOf: boolean) {
-    this.payload = { impactPathwayId, compareImpactPathwayId, isVersionOf };
+  constructor(baseImpactPathwayId: string, compareImpactPathwayId: string, activeImpactPathwayId: string) {
+    this.payload = { baseImpactPathwayId, compareImpactPathwayId, activeImpactPathwayId };
   }
 }
 
@@ -1509,6 +1510,7 @@ export class InitCompareStepTaskAction implements Action {
     impactPathwayId: string;
     impactPathwayStepId: string;
     compareImpactPathwayStepId: string;
+    activeImpactPathwayStepId: string;
   };
 
   /**
@@ -1520,9 +1522,11 @@ export class InitCompareStepTaskAction implements Action {
    *    the id of impact pathway step that the task belongs to
    * @param compareImpactPathwayStepId
    *    the impact pathway step's id to compare with the current one
+   * @param activeImpactPathwayStepId
+   *    the loaded impact pathway step's id
    */
-  constructor(impactPathwayId: string, impactPathwayStepId: string, compareImpactPathwayStepId: string) {
-    this.payload = { impactPathwayId, impactPathwayStepId, compareImpactPathwayStepId };
+  constructor(impactPathwayId: string, impactPathwayStepId: string, compareImpactPathwayStepId: string, activeImpactPathwayStepId: string) {
+    this.payload = { impactPathwayId, impactPathwayStepId, compareImpactPathwayStepId, activeImpactPathwayStepId };
   }
 }
 

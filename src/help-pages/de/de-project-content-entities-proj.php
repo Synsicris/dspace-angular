@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
- 
+
   <body class="content" id="content-entities-proj">
-  
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-	
+
 	 <?php /* Alte Navigation kann geloescht werden.
 	 <h1>&nbsp;</h1>
 	 <!-- Platzhalter deutsch / englisch für Auswahl anderer Sprache -->
@@ -36,30 +36,35 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n1><a href="de-project-step.php">Nutzung_im_Projektverlauf</a></n1><br> <!-- geprueft, unterschiedliche Titel -->
 	  <n1><a href="de-project-details.php">Details</a></n1> <!-- Datei fehlt -->
 	  */ ?>
-  
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
-  
+
 	<main>
-      <h1>Verbundprojekt und Teilprojekt</h1>
+      <h1>Verbundprojekt und (Teil-)Projekt</h1>
 
 		<article>
-		<h2>Verbundprojekt und Teilprojekt unterscheiden</h2>
+		<h2>Unterscheidung Verbundprojekt und Zuwendungsempfänger / (Teil-)Projekt</h2>
 		<p>
 
-          Verbundprojekte bestehen aus mehreren Teilprojekten, d.h. mehrere Organisationen arbeiten zusammen, um ein bestimmtes Forschungsthema zu bearbeiten. Dabei hat jede Organisation ein eigenes Teilprojekt.	<p>
-          	<p>Wenn nur eine Organisation am Forschungsthema arbeitet, ist dies im Monitoring-Tool als ein Verbundprojekt mit nur einem Teilprojekt zu erfassen.
-
-
-  	<p>
+          In Verbünden/Verbundprojekten arbeiten mehrere Zuwendungsempfänger / Organisationen / (Teil-)Projekte zusammen, um ein Forschungsthema zu bearbeiten.</p>
+          	<p>Wenn nur eine Organisation an einem Forschungsthema arbeitet (Einzelprojekt), ist dies im SynSICRIS-Monitoring-Tool als ein Verbund mit nur einem Zuwendungsempfänger / (Teil-)Projekt zu erfassen.</p>
 
 <br>
 
-		<img src="img/de_project_about_entities_proj_Verbundstruktur_1.png">
+  	<p>Für den Verbund und jeden einzelnen Zuwendungsempfänger gibt es separate Arbeitsbereiche:
+      <ul>
+        <li>Im Arbeitsbereich des Verbundes arbeiten alle Beteiligten inhaltlich zusammen</li>
+        <li>Der Arbeitsbereich des Zuwendungsempfängers / (Teil-)Projektes kann als offen eingestellt oder im Zugang beschränkt werden (siehe <a href="de-project-use-permissions.php">Zugangsrechte zum Projekt</a>)</li>
+
+</p>
+<br>
+
+		<img src="img/de_project_content_entities_proj_Verbundstruktur.png">
     <br>
 	</p>
 
   <p>
-    <img src="img/de_project_about_entities_proj_Verbundstruktur_2.png">
+    <img src="img/de_project_content_entities_proj_verbund_erklaert.png">
 <br>
 
 		</p>
@@ -68,21 +73,24 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 		</article>
 
 		<article>
-		<h2>Jedes Teilprojekt hat einen eigenen easy-Online Antrag</h2>
+		<h2>Easy-Online wird von jedem Zuwendungsempfänger / (Teil-)Projekt genutzt</h2>
     <ul>
-      <li>Jedes Teilprojekt erstellt einen eigenen <strong>Antrag in easy-Online </strong> und bekommt ein eigenes
-        <strong>Förderkennzeichen</strong> sowie einen eigenen <strong>Zuwendungsbescheid </strong>vom Förderer. Dieser Zuwendungsbescheid ist die
-        <strong>vertragliche Vereinbarung</strong> zwischen dem Förderer und einer einzelnen Organisation.</li>
-      <li>Der easy-Online Antrag deckt die finanziell-rechtliche Seite des Antrags auf Förderung des Forschungsprojekts ab. Das Monitoring-Tool ersetzt Teile der Vorhabensbeschreibung des Förderantrags.</li>
-      <li>Jedes Teilprojekt importiert Informationen aus dem eigenen easy-Online Antrag in das Monitoring-Tool.</li>
-      <li>Wenn an einem Teilprojekt wiederum mehrere Organisationseinheiten derselben Organisation
-        mitwirken (z.B. eine Universität mit mehreren Fachgebieten, die am Projekt finanziert
-         mitarbeiten), sind diese Organisationseinheiten zusätzlich als Projektpartner einzutragen. Durch diese detaillierte Erfassung wird im
-         Monitoring-Tool deutlich, welche Disziplinen zusammenarbeiten.</li>
-
+      <li>Jedes Organisation innerhalb des Verbundes stellt für ihr (Teil-)Projekt einen eigenen <strong>easy-Online-Antrag</strong>. Dieser deckt die finanziell-rechtliche Seite des Antrags ab.</li>
+      <li>Bei einer Förderung erhält jedes (Teil-)Projekt ein eigenes <strong>Förderkennzeichen</strong> und einen eigenen <strong>Zuwendungsbescheid</strong>. Dieser ist die vertragliche Vereinbarung zwischen dem Fördermittelgeber und der einzelnen Organisation (=Zuwendungsempfänger).</li>
+      <li>Im SynSICRIS-Monitoring-Tool wird die <strong>Vorhabensbeschreibung des Verbundes</strong> erstellt.</li>
+      <li>Die <strong>Daten</strong> zur antragstellenden Organisation und zu den (Teil-)Projekten können über die easy-online-xml Datei in das <strong>SynSICRIS-Monitoring-Tool importiert</strong> werden.</li>
     </ul>
-		<p></p>
 
+    <br>
+
+    <img src="img/de_project_content_entities_proj_Forschungsfoerderer.png">
+
+      <br>
+
+    <ul>
+      <li>Koordinatior:innen des (Teil-)Projektes können die Informationen aus dem eigenen easy-Online-Antrag importieren (importiert werden Basisdaten zur Organisation und zum (Teil-)Projekt, nicht das Budget, dieses wird später aus easy-Online importiert)</li>
+      <li><strong>Wichtig:</strong> wenn in einem (Teil-)Projekt mehrere Organisationseinheiten derselben Organisation mitwirken (z.B. eine Universität mit mehreren Fachgebieten, die am Projekt finanziert mitarbeiten), sind diese zusätzlich als Projektpartner einzutragen. Dadurch wird im SynSICRIS-Monitoring-Tool deutlich, welche Disziplinen zusammenarbeiten.</li>
+    </ul>
     <br>
 
     <img src="img/de_project_about_entities_proj_Import_von_Informationen.png">
@@ -94,6 +102,6 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 
 	<?php include("includes/footer.inc.php"); echo "\n";?>
-    
+
   </body>
 </html>

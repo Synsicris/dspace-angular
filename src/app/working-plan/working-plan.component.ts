@@ -17,7 +17,7 @@ import { Item } from '../core/shared/item.model';
 import { ProjectVersionService } from '../core/project/project-version.service';
 
 @Component({
-  selector: 'ipw-working-plan',
+  selector: 'ds-working-plan',
   templateUrl: './working-plan.component.html',
   styleUrls: ['./working-plan.component.scss'],
 })
@@ -75,7 +75,7 @@ export class WorkingPlanComponent implements OnInit, OnDestroy {
     this.workingPlanStateService.isWorkingPlanLoaded().pipe(
       take(1)
     ).subscribe(() => {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata, this.isVersionOf);
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan, environment.workingPlan.workingPlanPlaceMetadata, this.isVersionOf);
     });
   }
 

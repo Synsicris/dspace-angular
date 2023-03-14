@@ -1,10 +1,10 @@
 <ds-loading class="container-fluid" *ngIf="(isLoading() | async)" message="Loading..."></ds-loading>
 <div *ngIf="!(isLoading() | async) && (getImpactPathway() | async)" class="container-fluid d-flex align-items-stretch mt-3 mb-3">
-  <ipw-wrapper-impact-path-way class="wrapper"
+  <ds-wrapper-impact-path-way class="wrapper"
                                [projectCommunityId]="projectCommunityId"
                                [projectItemId]="projectItemId"
                                [impactPathWay]="(getImpactPathway() | async)"
                                [impactPathWayId]="impactPathwayId"
                                [impactPathWayItem]="impactPathWayItem"
-                               [isFunder]="isFunder"></ipw-wrapper-impact-path-way>
+                               [isFunder]="isFunder"></ds-wrapper-impact-path-way>
 </div>

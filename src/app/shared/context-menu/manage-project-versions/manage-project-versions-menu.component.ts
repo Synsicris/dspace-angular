@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
 import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model';
@@ -10,11 +10,11 @@ import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
-import { PROJECT_ENTITY, ProjectDataService } from '../../../core/project/project-data.service';
+import { PROJECT_ENTITY } from '../../../core/project/project-data.service';
 import { getItemPageRoute } from '../../../item-page/item-page-routing-paths';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { ProjectVersionService } from '../../../core/project/project-version.service';
-import { map, tap } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 /**
  * This component renders a context menu option that provides to send invitation to a project.
@@ -35,17 +35,23 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
    */
   public isFounderOfProject$: Observable<boolean>;
   /**
+   * A boolean representing if user is reader of the current project
+   */
+  public isReaderOfProject$: Observable<boolean>;
+  /**
    * A boolean representing if user is coordinator or founder for the current project
    */
   public mainVersion: Item;
   /**
    * A boolean representing if user is coordinator or founder for the current project
    */
-  public hasVersions$: Observable<boolean>;
+  public hasVersions$: Observable<boolean> = of(false);
   /**
    * A boolean representing if the context object is a version
    */
-  public isVersionOf: boolean;
+  public isVersionOf: boolean = false;
+
+  public isAuthorized$: Observable<boolean>;
 
   /**
    * Initialize instance variables
@@ -83,6 +89,16 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
 
     this.isCoordinatorOfProject$ = this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self);
     this.isFounderOfProject$ = this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, this.contextMenuObject.self);
+    this.isReaderOfProject$ = this.authorizationService.isAuthorized(FeatureID.isReaderOfProject, this.contextMenuObject.self);
+    this.isAuthorized$ =
+      forkJoin([
+        this.isCoordinatorOfProject$.pipe(take(1)),
+        this.isFounderOfProject$.pipe(take(1)),
+        this.isReaderOfProject$.pipe(take(1))
+      ])
+        .pipe(
+          map(([coordinator, funder, reader]) => coordinator || funder || reader)
+        );
   }
 
   /**

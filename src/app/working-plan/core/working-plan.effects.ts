@@ -305,16 +305,21 @@ export class WorkingPlanEffects {
   @Effect() retrieveAllWorkpackages$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.RETRIEVE_ALL_LINKED_WORKINGPLAN_OBJECTS),
     switchMap((action: RetrieveAllLinkedWorkingPlanObjectsAction) => {
-      return this.workingPlanService.searchForLinkedWorkingPlanObjects(action.payload.projectId, action.payload.sortOption).pipe(
+      let linkedItems = this.workingPlanService.searchForLinkedWorkingPlanObjects(action.payload.projectId, action.payload.sortOption);
+      // use only linked fields
+      if (action.payload.readMode) {
+        linkedItems = this.workingPlanService.getWorkingplanStepRelationItems(action.payload.workingplan);
+      }
+      return linkedItems.pipe(
         switchMap((items: WorkpackageSearchItem[]) => {
           const itemIds = this.workingPlanService.getItemsFromWorkpackages(items);
           if (isEmpty(itemIds)) {
-            return observableOf(new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption, action.payload.readMode));
+            return observableOf(new InitWorkingplanAction(action.payload.workingplan.uuid, items, action.payload.sortOption, action.payload.readMode));
           } else {
             return this.authorizationDataService.searchByObjects([FeatureID.isItemEditable], itemIds, 'core.item').pipe(
               getFirstSucceededRemoteListPayload(),
               map(() => {
-                return new InitWorkingplanAction(action.payload.workingplanId, items, action.payload.sortOption, action.payload.readMode);
+                return new InitWorkingplanAction(action.payload.workingplan.uuid, items, action.payload.sortOption, action.payload.readMode);
               }),
               catchError((error: Error) => {
                 if (error) {
@@ -332,21 +337,10 @@ export class WorkingPlanEffects {
    */
   @Effect() initCompare$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.INIT_COMPARE),
-    withLatestFrom(this.store$),
-    switchMap(([action, state]: [InitCompareAction, any]) => {
-      let workingItemId;
-      let versionItemId;
-      if (action.payload.isVersionOf) {
-        workingItemId = action.payload.compareWorkingplanId;
-        versionItemId = state.workingplan.workingplanId;
-      } else {
-        workingItemId = state.workingplan.workingplanId;
-        versionItemId = action.payload.compareWorkingplanId;
-      }
-
-      return this.projectVersionService.compareItemChildrenByMetadata(
-        workingItemId,
-        versionItemId,
+    switchMap((action: InitCompareAction) =>
+      this.projectVersionService.compareItemChildrenByMetadata(
+        action.payload.baseWorkingplanId,
+        action.payload.comparingWorkingplanId,
         environment.workingPlan.workingPlanStepRelationMetadata
       ).pipe(
         switchMap((compareItemList: ComparedVersionItem[]) => this.workingPlanService.initCompareWorkingPlan(compareItemList)),
@@ -356,8 +350,8 @@ export class WorkingPlanEffects {
             console.error(error.message);
           }
           return observableOf(new InitCompareErrorAction());
-        }));
-    }));
+        }))
+    ));
 
   /**
    * Add workpackages to workingplan state

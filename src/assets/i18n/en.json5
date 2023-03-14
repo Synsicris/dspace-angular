@@ -824,7 +824,7 @@
 
   "breadcrumb.entity-type.Project": "<i class=\"fas fa-shekel-sign\"></i> Consortium",
 
-  "breadcrumb.entity-type.Funding": "<i class=\"fas fa-cubes\"></i> Project",
+  "breadcrumb.entity-type.Funding": "<i class=\"fas fa-cubes\"></i> Projects",
 
   "breadcrumb.entity-type.OrgUnit": "OrgUnit",
 
@@ -1540,8 +1540,6 @@
 
   "context-menu.actions.export-item.btn": "<i class=\"fas fa-file-export\"></i> Export information",
 
-  "context-menu.actions.generate-report.btn": "<i class=\"fas fa-file-export\"></i> Generate project report",
-
   "context-menu.actions.generate-report.success": "The project report has been generated successfully.",
 
   "context-menu.actions.generate-report.error": "There was an issue when generating the process report, please try again later.",
@@ -2040,6 +2038,14 @@
 
   "event.listelement.badge": "Event",
 
+  "exploitation-plan.edit.item.title": "Edit item",
+
+  "exploitation-plan.remove.item.title": "Unlink item",
+
+  "exploitation-plan.delete.item.title": "Delete item",
+
+  "exploitation-plan.compare": "Comapre with a version",
+
   "exploitation-plan.edit.btn.title": "Edit",
 
   "exploitation-plan.description.title": "Description",
@@ -2208,7 +2214,7 @@
 
   "explore.index.itemtype": "Item Type",
 
-  "explore.index.types": "Typ",
+  "explore.index.types": "Type",
 
   "explore.index.language": "Language",
 
@@ -2628,7 +2634,7 @@
 
   "impact-pathway.wrapper.info": "<b>Develop the Impact Pathway of the project</b></br><p>The Impact Pathway supports you in the impact-oriented planning and implementation of the project. Please present the most important objectives, activities and intended impacts of the project in a clear and concise manner by means of key messages. Use arrows to illustrate particularly important and non-linear relationships. While the project is progressing, you can update the Impact Pathway and add any results achieved.</p><p>The columns structure the key messages for impact-oriented planning:</br>In <b>Background</b> important preliminary considerations for the project are presented, such as problem definition, state of knowledge and conditions.</br>The <b>Objectives of research and development</b> describe the scientific/technical work objectives of the project. These objectives can be assigned to work packages and tasks on a second level.</br><b>Interactions with partners and groups of actors. Outputs for dissemination</b> reflect all exchange and transfer activities of the project. In a first step, key messages about the purpose and group of actors of the interactions are formulated. These key messages can be assigned to specific activities on a second level.</br>The intended impacts of the project are structured in two columns:</br>In <b>Application (possibilities)</b> the contributions of the project to the application of the project results are presented.</br><b>Expected societal impacts</b> describe what societal effects are expected when the results of projects are applied.</br>In <b>Contribution to funding programme objectives</b>, the funding programme objectives to which the project contributes are selected.</p><p>In each column, you can use [+] to create unlimited items or search for and select previously created items.</br>Each item has a specific detail page (depending on the section selected) in which further information is usually given. You can switch between the Impact Pathway and the detail page of an item at any time.</br>You can start to create items in any column of the Impact Pathway.</br>Via [Edit] below the columns of the Impact Pathway you can add a description to the overall objectives of the project.</p><p><b>Key questions and tips for developing the Impact Pathway:</b> What impacts do you want to achieve with the project? How would you like to contribute to the development of these impacts?<br>It is recommended, to plan the Impact Pathway for the project in terms of the intended impacts and to develop it together with partners in practice and groups of actors.</br></p>",
 
-  "comment-list.header":"Comments",
+  "comment-list.header": "Comments",
 
   "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
 
@@ -2679,6 +2685,54 @@
   "info.feedback.page-label": "Page",
 
   "info.feedback.page_help": "Tha page related to your feedback",
+
+  "interim-report.edit.item.title": "Edit item",
+
+  "interim-report.remove.item.title": "Unlink item",
+
+  "interim-report.delete.item.title": "Delete item",
+
+  "interim-report.compare": "Comapre with a version",
+
+  "interim-report.edit.btn.title": "Edit",
+
+  "interim-report.description.title": "Description",
+
+  "interim-report.info.text": "Info text for the interim report",
+
+  "interim-report.page.title": "Interim report",
+
+  "interim-report.breadcrumbs": "Interim report",
+
+  "interim-report.step_type_1.info.text": "Info text for section 1",
+
+  "interim-report.step_type_2.info.text": "Info text for section 2",
+
+  "interim-report.step_type_3.info.text": "Info text for section 3",
+
+  "interim-report.step_type_4.info.text": "Info text for section 4",
+
+  "interim-report.step_type_1.task_search": "Info text search for section 1",
+
+  "interim-report.step_type_2.task_search": "Info text search for section 2",
+
+  "interim-report.step_type_3.task_search": "Info text search for section 3",
+
+  "interim-report.step_type_4.task_search": "Info text search for section 4",
+
+  "interim-report.step_type_1.title": "1. Enumeration of the most important scientific and technical results and other significant events",
+
+  "interim-report.step_type_2.title": "2. Comparison of the status of the project with the original (or, with the approval of the funding body, amended) work, time and expenditure planning.",
+
+  "interim-report.step_type_3.title": "3. Have the prospects for achieving the objectives of the project within the stated expenditure period changed compared to the original application (justification)?",
+
+  "interim-report.step_type_4.title": "4. Have any third-party results become known in the meantime that are relevant to the implementation of the project?",
+
+  "interim-report.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
+
+  "interim-report.task.create.error": "There was an issue when creating the new item, please try again later.",
+
+  "interim-report.task.create.success": "New item has been created successfully.",
 
   "item.alerts.private": "This item is non-discoverable",
 
@@ -3378,11 +3432,9 @@
 
   "item.version.history.selected.alert": "You are currently viewing version {{version}} of the item.",
 
-  "item.version.history.info.alert": "version info",
+  "item.version.history.info.alert.funder": "for funder",
 
-  "item.version.history.info.alert.funder": "Is Funder",
-
-  "item.version.history.info.alert.coordinator": "Is Coordinator",
+  "item.version.history.info.alert.coordinator": "version info coordinator",
 
   "item.version.history.official": "Active working project",
 
@@ -3404,11 +3456,11 @@
 
   "item.version.history.table.action.editWorkspaceItem": "Edit workspace item",
 
-  "item.version.history.table.action.editSummary": "Edit summary",
+  "item.version.history.table.action.editSummary": "Edit",
 
-  "item.version.history.table.action.saveSummary": "Save summary edits",
+  "item.version.history.table.action.saveSummary": "Save edits",
 
-  "item.version.history.table.action.discardSummary": "Discard summary edits",
+  "item.version.history.table.action.discardSummary": "Discard edits",
 
   "item.version.history.table.action.newVersion": "Create new version from this one",
 
@@ -3420,7 +3472,7 @@
 
   "item.version.history.table.action.toggleNonOfficial": "Mark as non-official",
 
-  "item.version.history.table.visibility": "Visibility",
+  "item.version.history.table.visibility": "For Funder…",
 
   "item.version.history.table.official": "Official",
 
@@ -3450,7 +3502,7 @@
 
   "item.version.create.modal.header": "New version",
 
-  "item.version.create.modal.text": "Create a new version for this item",
+  "item.version.create.modal.text": "modal window",
 
   "item.version.create.modal.text.startingFrom": "starting from version {{version}}",
 
@@ -3514,13 +3566,17 @@
 
   "item.version.list.dropdown-text": "Compare with...",
 
-  "item.version.list.active-option-text": "Active instance : ",
+  "item.version.list.active-option-text": "Active instance",
 
-  "item.version.list.option-text": "Version : ",
+  "item.version.list.option-text": "Version",
 
   "item.version.list.remove-text": "Remove selection",
 
-  "item.version.list.selected-text": "Version selected : ",
+  "item.version.list.base-text": "Base : ",
+
+  "item.version.list.comparing-text": "Compared : ",
+
+  "item.version.list.stop-comparing-text": "Stop comparing",
 
   "item.version.synsicris.version.invisible": "Not Visible",
 
@@ -3553,6 +3609,8 @@
   "item-export.form.btn.cancel": "Cancel",
 
   "item-export.process.title": "Bulk export item",
+
+  "item-export-external-metadata.btn.label": "Import metadata",
 
   "journal.listelement.badge": "Journal",
 
@@ -4690,11 +4748,11 @@
 
   "project.create.head": "New project",
 
-  "project.create.grants.placeholder": "Please select editable grants",
+  "project.create.grants.placeholder": "Please set the access rights",
 
-  "project.create.grants.project-option": "Editable by all project members",
+  "project.create.grants.project-option": "A: Open for all members of consortium",
 
-  "project.create.grants.subproject-option": "Editable by only sub-project members",
+  "project.create.grants.subproject-option": "B: Open only for project members",
 
   "project.create.info": "Create a new Joint project",
 
@@ -5384,6 +5442,10 @@
 
   "search.filters.applied.f.dateReminder.max": "Reminder to",
 
+  "search.filters.applied.f.dateCreation.min": "Creation from",
+
+  "search.filters.applied.f.dateCreation.max": "Creation to",
+
   "search.filters.filter.author.head": "Author",
 
   "search.filters.filter.author.placeholder": "Author name",
@@ -5500,7 +5562,7 @@
 
   "search.filters.filter.language.head": "Language",
 
-  "search.filters.filter.language.label": "Language",
+  "search.filters.filter.language.label": "Search Language",
 
   "search.filters.filter.language.placeholder": "Language",
 
@@ -5556,25 +5618,60 @@
 
   "search.filters.filter.fundingParent.label": "Search funding",
 
-  "search.filters.filter.synsicrisRelationCall.head": "Relation call",
+  "search.filters.filter.synsicrisRelationCall.head": "Call",
 
-  "search.filters.filter.synsicrisRelationCall.placeholder": "Relation call",
-  "search.filters.filter.synsicrisRelationCall.label": "Search relation call",
+  "search.filters.filter.synsicrisRelationCall.placeholder": "Call",
+
+  "search.filters.filter.synsicrisRelationCall.label": "Suche Call",
+
   "search.filters.filter.projectStartDate.head": "Start date",
+
   "search.filters.filter.projectStartDate.placeholder": "Start date",
+
   "search.filters.filter.projectStartDate.label": "Search start date",
+
   "search.filters.filter.projectEndDate.head": "End date",
+
   "search.filters.filter.projectEndDate.placeholder": "End date",
+
   "search.filters.filter.projectEndDate.label": "Search end date",
+
   "search.filters.filter.dateReminder.head": "Reminder Date",
+
   "search.filters.filter.dateReminder.min.label": "Start",
+
   "search.filters.filter.dateReminder.max.label": "End",
-  "search.filters.filter.synsicrisSubjectNace.head": "Subject nace",
-  "search.filters.filter.synsicrisSubjectNace.placeholder": "Subject nace",
-  "search.filters.filter.synsicrisSubjectNace.label": "Search subject nace",
+
+  "search.filters.filter.creator.head": "Creator",
+
+  "search.filters.filter.creator.label": "Name",
+
+  "search.filters.filter.creator.placeholder": "Creator Name",
+
+  "search.filters.filter.commentItem.head": "Item",
+
+  "search.filters.filter.commentItem.label": "Description",
+
+  "search.filters.filter.commentItem.placeholder": "Item Description",
+
+  "search.filters.filter.dateCreation.head": "Create Date",
+
+  "search.filters.filter.dateCreation.min.label": "Start",
+
+  "search.filters.filter.dateCreation.max.label": "End",
+
+  "search.filters.filter.synsicrisSubjectNace.head": "Economic sector",
+
+  "search.filters.filter.synsicrisSubjectNace.placeholder": "Economic sector",
+
+  "search.filters.filter.synsicrisSubjectNace.label": "Search Economic sector",
+
   "search.filters.filter.synsicrisSubjectDestatis.head": "Discipline",
+
   "search.filters.filter.synsicrisSubjectDestatis.placeholder": "Discipline",
+
   "search.filters.filter.synsicrisSubjectDestatis.label": "Search Subject destatis",
+
   "search.filters.filter.synsicrisTypeProjectContribution.head": "Project contribution",
 
   "search.filters.filter.synsicrisTypeProjectContribution.placeholder": "Project contribution",
@@ -5619,7 +5716,7 @@
 
   "search.filters.filter.synsicrisrelationpartner.head": "Partner",
 
-  "search.filters.filter.synsicrisrelationpartner.placeholder": "Partner",
+  "search.filters.filter.synsicrisrelationpartner.placeholder": "Project partner",
 
   "search.filters.filter.synsicrisrelationpartner.label": "Search partner",
 
@@ -5761,7 +5858,9 @@
 
   "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting\"",
 
-  "search.results.no-results-link": "quotes around it (Anführungszeichen)",
+  "search.results.no-results-link": "quotes around it",
+
+  "search.results.no-results.custom": "No items are present",
 
   "search.results.empty": "Your search returned no results.",
 
@@ -6072,6 +6171,8 @@
   "submission.import-external.page.noentity": "An entity type must be selected in order to use this page. Select it using the 'Import metadata from an external source' button in 'MyDspace' page.",
 
   "submission.import-external.back-to-my-dspace": "Back to MyDSpace",
+
+  "submission.import-external.back-to-previous": "Back to previous page",
 
   "submission.import-external.search.placeholder": "Search the external source",
 
@@ -8185,6 +8286,8 @@
 
   "layout.tab.header.idea": "Ideas for the use of project results",
 
+  "layout.tab.header.interimreport": "Interim report",
+
   "layout.tab.header.step": "Works and cooperations after project end",
 
   "layout.tab.header.application": "Application of a solution / change / innovation",
@@ -8361,9 +8464,9 @@
 
   "layout.box.header.exp_societalimpact_m": "Expected societal impact (new)",
 
-  "subproject.create.grants.project-option": "Editable by all project members",
+  "subproject.create.grants.project-option": "A: Open for all members of consortium",
 
-  "subpproject.create.grants.subproject-option": "Editable by only sub-project members",
+  "subpproject.create.grants.subproject-option": "B: Open only for project members",
 
   "submission.sections.upload.form.access-condition.openaccess": "open access",
 
@@ -8645,13 +8748,9 @@
 
   "layout.field.label.stateofart.dc.description": "Description",
 
-  "layout.field.label.stateofart.synsicris.type.status": "Status of the information compared to the project application",
-
   "layout.field.label.proj_objective.dc.title": "Title",
 
   "layout.field.label.proj_objective.dc.description": "Description",
-
-  "layout.field.label.proj_objective.synsicris.type.status": "Status of the information compared to the project application",
 
   "layout.field.label.ia_objective.dc.title": "Title",
 
@@ -8663,7 +8762,7 @@
 
   "layout.field.label.workpackage.synsicris.description.requirements": "Requirements for the fulfilment of the work package",
 
-  "layout.field.label.workpackage.synsicris.type.status": "Status of the information compared to the project application",
+  "layout.field.label.workpackage.synsicris.type.status": "Status",
 
   "layout.field.label.task.dc.title": "Title",
 
@@ -8717,7 +8816,7 @@
 
   "layout.field.label.plan_publication.dc.description": "Description",
 
-  "layout.field.label.plan_publication.synsicris.type.status": "Status of the information compared to the project application",
+  "layout.field.label.plan_publication.synsicris.type.status": "Status",
 
   "layout.field.label.Publication.dc.contributor.author": "Author(s)",
 
@@ -9100,6 +9199,10 @@
   "query-builder.synsicris.accordion.step1.header": "Step 1",
 
   "query-builder.synsicris.accordion.step2.header": "Step 2",
+
+  "query-builder.synsicris.accordion.step1.alert": "Help",
+
+  "query-builder.synsicris.accordion.step2.alert": "Help",
 
   "query-builder.synsicris.label.entityType.Person": "Person",
 
@@ -10063,7 +10166,7 @@
 
   "project.manage.members.funding.members-group-help": "Help Project members",
 
-  "item.version.create.modal.info": "Test",
+  "item.version.create.modal.info": "to be deltetd",
 
   "search.filters.entityType.neg_sideeffect": "Possible negative side effects",
 
@@ -10137,6 +10240,264 @@
 
   "search.filters.filter.synsicrisTypeInfluence.placeholder": "Influence on the impact",
 
-  "search.filters.filter.synsicrisTypeInfluence.Label": "Search Influence on the impact"
+  "search.filters.filter.synsicrisTypeInfluence.Label": "Search Influence on the impact",
+
+  "layout.box.header.open_researchquestion_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.Project.synsicris.type.internal": "Task",
+
+  "layout.field.label.Project.synsicris.description.internal": "Description",
+
+  "layout.field.label.Funding.synsicris.type.internal": "Task",
+
+  "layout.field.label.Funding.synsicris.description.internal": "Description",
+
+  "layout.field.label.projectpartner.synsicris.type.internal": "Task",
+
+  "layout.field.label.projectpartner.synsicris.description.internal": "Description",
+
+  "layout.field.label.cooperationpartner.synsicris.type.internal": "Task",
+
+  "layout.field.label.cooperationpartner.synsicris.description.internal": "Description",
+
+  "layout.field.label.targetgroup.synsicris.type.internal": "Task",
+
+  "layout.field.label.targetgroup.synsicris.description.internal": "Description",
+
+  "layout.box.header.stateofart_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.stateofart.synsicris.type.internal": "Task",
+
+  "layout.field.label.stateofart.synsicris.description.internal": "Description",
+
+  "layout.box.header.proj_objective_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.proj_objective.synsicris.type.internal": "Task",
+
+  "layout.field.label.proj_objective.synsicris.description.internal": "Description",
+
+  "layout.box.header.ia_objective_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.ia_objective.synsicris.type.internal": "Task",
+
+  "layout.field.label.ia_objective.synsicris.description.internal": "Description",
+
+  "layout.field.label.workpackage.synsicris.type.internal": "Task",
+
+  "layout.field.label.workpackage.synsicris.description.internal": "Description",
+
+  "layout.field.label.task.synsicris.type.internal": "Task",
+
+  "layout.field.label.task.synsicris.description.internal": "Description",
+
+  "layout.field.label.task.synsicris.type.status": "Status",
+
+  "layout.field.label.process_event.synsicris.type.internal": "Task",
+
+  "layout.field.label.process_event.synsicris.description.internal": "Description",
+
+  "layout.field.label.process_event.synsicris.type.status": "Status",
+
+  "layout.field.label.plan_publication.synsicris.type.internal": "Task",
+
+  "layout.field.label.plan_publication.synsicris.description.internal": "Description",
+
+  "layout.box.header.Publication_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.Publication.synsicris.subject.agrovoc": "Key words",
+
+  "layout.field.label.Publication.synsicris.type.internal": "Task",
+
+  "layout.field.label.Publication.synsicris.description.internal": "Description",
+
+  "layout.box.header.Product_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.Product.synsicris.type.internal": "Task",
+
+  "layout.field.label.Product.synsicris.description.internal": "Description",
+
+  "layout.field.label.Product.synsicris.subject.agrovoc": "Key words",
+
+  "layout.box.header.research_result_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.research_result.synsicris.type.internal": "Task",
+
+  "layout.field.label.research_result.synsicris.description.internal": "Description",
+
+  "layout.box.header.unexpected_result_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.unexpected_result.synsicris.type.internal": "Task",
+
+  "layout.field.label.unexpected_result.synsicris.description.internal": "Description",
+
+  "layout.field.label.open_researchquestion.dc.title": "Title",
+
+  "layout.field.label.open_researchquestion.dc.description": "Description",
+
+  "layout.field.label.open_researchquestion.synsicris.type.evidence": "Evidence type",
+
+  "layout.field.label.open_researchquestion.synsicris.type.internal": "Task",
+
+  "layout.field.label.open_researchquestion.synsicris.description.internal": "Description",
+
+  "layout.box.header.award_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.award.synsicris.type.internal": "Task",
+
+  "layout.field.label.award.synsicris.description.internal": "Description",
+
+  "layout.box.header.contribution_fundingprogramme_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.contribution_fundingprogramme.synsicris.type.internal": "Task",
+
+  "layout.field.label.contribution_fundingprogramme.synsicris.description.internal": "Description",
+
+  "layout.box.header.application_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.application.synsicris.type.internal": "Task",
+
+  "layout.field.label.application.synsicris.description.internal": "Description",
+
+  "layout.field.label.Project.synsicris.subject.agrovoc": "Key words",
+
+  "search.filters.filter.synsicrisTypeEasyimport.label": "Search Executing Organisation (easy-Online)",
+
+  "search.filters.filter.synsicrisAddressAddresspostcode.head": "Postcode",
+
+  "search.filters.filter.synsicrisAddressAddresspostcode.placeholder": "Postcode",
+
+  "search.filters.filter.synsicrisAddressAddresspostcode.label": "Search Postcode",
+
+  "search.filters.filter.synsicrisAddressAddresscity.head": "City",
+
+  "search.filters.filter.synsicrisAddressAddresscity.placeholder": "City",
+
+  "search.filters.filter.synsicrisAddressAddresscity.label": "Search City",
+
+  "search.filters.filter.organizationAddressAddresscountry.head": "Country/Federal state",
+
+  "search.filters.filter.organizationAddressAddresscountry.placeholder": "Country/Federal state",
+
+  "search.filters.filter.organizationAddressAddresscountry.label": "Search Country/Federal state",
+
+  "search.filters.filter.synsicrisTypeLegalform.label": "Search Legal form",
+
+  "search.filters.filter.synsicrisTypeOrgform.label": "Suche Type of Organisation",
+
+  "search.filters.filter.synsicrisTypeTransform.label": "Search Area of transition",
+
+  "search.filters.filter.synsicrisTypeInfluence.label": "Search Influence on the impact",
+
+  "search.filters.filter.synsicrisTypeContribution.head": "Type of Contribution",
+
+  "search.filters.filter.synsicrisTypeContribution.placeholder": "Type of Contribution",
+
+  "search.filters.filter.synsicrisTypeContribution.label": "Search Type of Contribution",
+
+  "search.filters.filter.synsicrisSubjectAgrovoc.head": "Keyword (Agrovoc)",
+
+  "search.filters.filter.synsicrisSubjectAgrovoc.placeholder": "Keyword (Agrovoc)",
+
+  "search.filters.filter.synsicrisSubjectAgrovoc.label": "Suche Keyword (Agrovoc)",
+
+  "search.filters.filter.dcAudience.head": "Audience",
+
+  "search.filters.filter.dcAudience.placeholder": "Audience",
+
+  "search.filters.filter.dcAudience.label": "Search Audience",
+
+  "search.filters.filter.synsicrisTypePatentuse.head": "Type of Utilization",
+
+  "search.filters.filter.synsicrisTypePatentuse.placeholder": "Type of Utilization",
+
+  "search.filters.filter.synsicrisTypePatentuse.label": "Search Type of Utilization",
+
+  "search.filters.filter.dctermsDateaccepted.head": "Date of Acceptance",
+
+  "search.filters.filter.dctermsDateaccepted.placeholder": "Date of Acceptance",
+
+  "search.filters.filter.dctermsDateaccepted.label": "Suche Date of Acceptance",
+
+  "search.filters.filter.synsicrisDuration.head": "Duration",
+
+  "search.filters.filter.synsicrisDuration.placeholder": "Duration",
+
+  "search.filters.filter.synsicrisDuration.label": "Search Duration",
+
+  "search.filters.filter.oairecerifFundingParent.head": "Programme",
+
+  "search.filters.filter.oairecerifFundingParent.placeholder": "Programme",
+
+  "search.filters.filter.oairecerifFundingParent.label": "Search Programme",
+
+  "search.filters.filter.synsicrisTitleRegistercourt.head": "Registercourt (City)",
+
+  "search.filters.filter.synsicrisTitleRegistercourt.placeholder": "Registercourt (City)",
+
+  "search.filters.filter.synsicrisTitleRegistercourt.label": "Search Registercourt (City)",
+
+  "search.filters.filter.synsicrisOrgunitsRegistercourt.head": "Registercourt (City)",
+
+  "search.filters.filter.synsicrisOrgunitsRegistercourt.placeholder": "Registercourt (City)",
+
+  "search.filters.filter.synsicrisOrgunitsRegistercourt.label": "Search Registercourt (City)",
+
+  "search.filters.filter.synsicrisCoverageRegionalprimary.head": "Regional localisation/ outreach",
+
+  "search.filters.filter.synsicrisCoverageRegionalprimary.placeholder": "Regional localisation/ outreach",
+
+  "search.filters.filter.synsicrisCoverageRegionalprimary.label": "Search Regional localisation/ outreach",
+
+  "search.filters.filter.synsicrisRelationPartner.head": "Project partner",
+
+  "search.filters.filter.synsicrisRelationPartner.label": "Search Project partner",
+
+  "search.filters.filter.synsicrisParticipantnumber.head": "Number of participants",
+
+  "search.filters.filter.synsicrisParticipantnumber.placeholder": "Number of participants",
+
+  "search.filters.filter.synsicrisParticipantnumber.label": "Suche Number of participants",
+
+  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Start date",
+
+  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Start date",
+
+  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Search Start date",
+
+  "search.filters.filter.synsicrisOairecerifEventCounty.head": "Country",
+
+  "search.filters.filter.synsicrisOairecerifEventCountry.placeholder": "Country",
+
+  "search.filters.filter.synsicrisOairecerifEventCounty.label": "Search Country/Federal state",
+
+  "search.filters.filter.synsicrisSubjectPolitical.head": "Policy level",
+
+  "search.filters.filter.synsicrisSubjectPolitical.placeholder": "Policy level",
+
+  "search.filters.filter.synsicrisSubjectPolitical.label": "Search Policy level",
+
+  "secondStepSearchProjectItems.search.results.head": "Search Results",
+
+  "secondStepSearchProjectItemsForAdminAndFunders.search.results.head": "Search Results",
+
+  "layout.box.header.Project_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.box.header.funding_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.box.header.cooperationpartner_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.box.header.targetgroup_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.innovationpotential.synsicris.type.level": "Readinesslevel",
+
+  "working-plan.chart.button.delete": "Delete item",
+
+  "interim-report.step_type_5.info.text": "Info text for section 5",
+
+  "interim-report.step_type_5.task_search": "Info text search for section 5",
+
+  "interim-report.step_type_5.title": "5. Are or will changes in the objectives be necessary?",
+
+  "search.filters.filter.synsicrisOairecerifEventCountry.label": "Search Country/Federal state"
 
 }

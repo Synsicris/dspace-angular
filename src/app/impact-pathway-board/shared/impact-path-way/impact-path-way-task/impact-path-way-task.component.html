@@ -26,7 +26,7 @@
       <div class="task-content p-1 d-flex justify-content-between"
            [class.task-overlay-hide]="(canShowRelationCheckBox() | async)">
         <div class="task-type type-clamp">
-          <p title="{{taskType$ | async}}">{{taskType$ | async}}</p>
+          <p title="{{data.type | dsEntityTypeTranslate}}">{{data.type | dsEntityTypeTranslate}}</p>
         </div>
         <span class="status-icon" *ngIf="data?.internalStatus">
           <i dsItemMetadataInternal [status]="data.internalStatus"></i>

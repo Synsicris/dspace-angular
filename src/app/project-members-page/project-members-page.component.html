@@ -1,8 +1,6 @@
-<!-- Tab-Navigation "manage project members" -->
 <ds-loading *ngIf="!(allGroupsInit$ | async)"></ds-loading>
-
+<!-- Tab-Navigation "manage project members" -->
 <div *ngIf="allGroupsInit$ | async" class="container">
-
   <nav ngbNav #nav="ngbNav" class="nav-tabs" [activeId]="activeId">
     <ng-container ngbNavItem="funders" *ngIf="(fundersGroup$ | async)">
       <a ngbNavLink data-test="funders">{{'project.manage.members.project.funders-group' | translate }}</a>
@@ -16,7 +14,6 @@
         </ds-project-members>
       </ng-template>
     </ng-container>
-
     <ng-container ngbNavItem="coordinators">
       <a ngbNavLink data-test="coordinators">{{(isFunding ? 'project.manage.members.funding.coordinators-group' : 'project.manage.members.project.coordinators-group') | translate }}</a>
       <ng-template ngbNavContent>
@@ -29,7 +26,6 @@
         </ds-project-members>
       </ng-template>
     </ng-container>
-
     <ng-container ngbNavItem="members" *ngIf="isFunding">
       <a ngbNavLink data-test="members">{{(isFunding ? 'project.manage.members.funding.members-group' : 'project.manage.members.project.members-group') | translate }}</a>
       <ng-template ngbNavContent>
@@ -42,8 +38,7 @@
         </ds-project-members>
       </ng-template>
     </ng-container>
-
-    <ng-container ngbNavItem="readers" *ngIf="!isFunding">
+    <ng-container ngbNavItem="readers" *ngIf="!isFunding && !isFunder">
       <a ngbNavLink data-test="readers">{{'project.manage.members.project.readers-group' | translate }}</a>
       <ng-template ngbNavContent>
         <ds-project-members [targetGroup]="(readersGroup$ | async)"
@@ -55,7 +50,6 @@
         </ds-project-members>
       </ng-template>
     </ng-container>
-
   </nav>
 
   <div [ngbNavOutlet]="nav" class="mt-5"></div>

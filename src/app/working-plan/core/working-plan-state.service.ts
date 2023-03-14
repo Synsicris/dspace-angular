@@ -26,7 +26,7 @@ import {
 import { MetadataMap, MetadatumViewModel } from '../../core/shared/metadata.models';
 import {
   chartDateViewSelector,
-  comparingVersionSelector,
+  getCurrentComparingObjectSelector,
   getLastAddedNodesListSelector,
   isCompareMode,
   isWorkingPlanInitializingSelector,
@@ -39,6 +39,7 @@ import {
 } from './selectors';
 import { ChartDateViewType, WorkingPlanState, WorkpackageEntries } from './working-plan.reducer';
 import { Workpackage, WorkpackageStep } from './models/workpackage-step.model';
+import { Item } from '../../core/shared/item.model';
 
 export interface WpActionPackage {
   workpackageId: string;
@@ -51,6 +52,14 @@ export interface WpStepActionPackage {
   workpackageStepId: string;
   workpackageStep: WorkpackageStep;
   metadatumViewList: any[];
+}
+
+export interface WpStateIds {
+  workingplanId: string;
+  baseWorkingplanId?: string;
+  comparingWorkingplanId?: string;
+  selectedWorkingplanId?: string;
+  activeWorkingplanId?: string;
 }
 
 @Injectable()
@@ -93,8 +102,8 @@ export class WorkingPlanStateService {
     this.store.dispatch(new GenerateWorkpackageStepAction(projectId, parentId, workpackageStepType, metadata));
   }
 
-  public dispatchInitCompare(compareWorkingplanId: string, isVersionOf: boolean) {
-    this.store.dispatch(new InitCompareAction(compareWorkingplanId, isVersionOf));
+  public dispatchInitCompare(baseWorkingPlanId: string, comparingWorkingPLanId: string, selectedWorkingPlanId: string, activeWorkingPlanId: string) {
+    this.store.dispatch(new InitCompareAction(baseWorkingPlanId, comparingWorkingPLanId, selectedWorkingPlanId, activeWorkingPlanId));
   }
 
   public dispatchMoveWorkpackage(workpackageId: string, oldIndex: number, newIndex: number): void {
@@ -113,8 +122,8 @@ export class WorkingPlanStateService {
     this.store.dispatch(new RemoveWorkpackageStepAction(workpackageId, workpackageStepId, workspaceItemId));
   }
 
-  public dispatchRetrieveAllWorkpackages(projectId: string, workinplanId: string, sortOption: string, readMode: boolean): void {
-    this.store.dispatch(new RetrieveAllLinkedWorkingPlanObjectsAction(projectId, workinplanId, sortOption, readMode));
+  public dispatchRetrieveAllWorkpackages(projectId: string, workingplan: Item, sortOption: string, readMode: boolean): void {
+    this.store.dispatch(new RetrieveAllLinkedWorkingPlanObjectsAction(projectId, workingplan, sortOption, readMode));
   }
 
   public dispatchUpdateWorkpackageAction(
@@ -155,8 +164,8 @@ export class WorkingPlanStateService {
    *
    * @return {Observable<string>}
    */
-  public getCurrentComparingWorkingPlan(): Observable<string> {
-    return this.store.pipe(select(comparingVersionSelector));
+  public getCurrentComparingWorkingPlan(): Observable<WpStateIds> {
+    return this.store.select(getCurrentComparingObjectSelector);
   }
 
   public getWorkpackages(): Observable<Workpackage[]> {

@@ -7,7 +7,7 @@
   </div>
   <div class="modal-body modal-body-height">
     <!-- rex 230301 changed nav-pills to nav-tabs -->
-    <ul ngbNav #nav="ngbNav" class="nav-tabs" [activeId]="startWithSearch ? 'tab-search' : 'tab-create'">
+    <ul ngbNav #nav="ngbNav" class="nav-tabs" [activeId]="(startWithSearch$ | async) ? 'tab-search' : 'tab-create'">
       <li ngbNavItem="tab-create">
         <a ngbNavLink>{{'simple-item-modal.create-btn' | translate}}</a>
         <ng-template ngbNavContent>
@@ -25,8 +25,7 @@
         <a ngbNavLink>{{'simple-item-modal.search-btn' | translate}}</a>
         <ng-template ngbNavContent>
           <div class="mt-3">
-            <ds-search-simple-item [vocabularyName]="vocabularyName"
-                                   [processing]="processing"
+            <ds-search-simple-item [processing]="processing"
                                    [excludeListId]="excludeListId"
                                    [excludeFilterName]="excludeFilterName"
                                    [query]="query"
