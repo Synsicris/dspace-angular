@@ -1206,7 +1206,7 @@ export class DefaultAppConfig implements AppConfig {
       {
         metadata: [
           {
-            name: 'oairecerif.funding.identifier',
+            name: 'synsicris.title',
             type: DisplayItemMetadataType.Text
           }
         ]
@@ -1214,7 +1214,7 @@ export class DefaultAppConfig implements AppConfig {
       {
         metadata: [
           {
-            name: 'oairecerif.amount',
+            name: 'synsicris.title.alternative',
             type: DisplayItemMetadataType.Text
           }
         ]
@@ -1232,27 +1232,11 @@ export class DefaultAppConfig implements AppConfig {
       {
         metadata: [
           {
-            name: 'crispj.partnerou',
+            name: 'dc.title.alternative',
             type: DisplayItemMetadataType.Text
           }
         ]
-      },
-      {
-        metadata: [
-          {
-            name: 'oairecerif.internalid',
-            type: DisplayItemMetadataType.Text
-          }
-        ]
-      },
-      {
-        metadata: [
-          {
-            name: 'synsicris.title',
-            type: DisplayItemMetadataType.Text
-          }
-        ]
-      },
+      }
     ],
     Patent: [
       {
