@@ -17,6 +17,11 @@ import { SubmissionFormModel } from '../../../core/config/models/config-submissi
 export class EditableTextareaComponent {
 
   /**
+   * A boolean representing if compare mode is enabled
+   */
+  @Input() compareMode: boolean;
+
+  /**
    * The item edit mode
    */
   @Input() editMode: string;
@@ -51,6 +56,11 @@ export class EditableTextareaComponent {
    * The current value of the field
    */
   @Input() public content: string;
+
+  /**
+   * The value to compare with the current one
+   */
+  @Input() public contentToCompare: string;
 
   /**
    * The textarea rows number

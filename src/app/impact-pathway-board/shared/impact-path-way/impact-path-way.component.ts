@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Inject, Input, OnInit, ViewChild } from '
 import { ActivatedRoute } from '@angular/router';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
-import { filter, map, mergeMap, take } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../core/models/impact-pathway.model';
@@ -16,10 +16,13 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
 import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
-import { hasValue } from '../../../shared/empty.util';
+import { hasValue, isNotEmpty } from '../../../shared/empty.util';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { environment } from '../../../../environments/environment';
 import { VersionSelectedEvent } from '../../../shared/item-version-list/item-version-list.component';
+import { ItemDataService } from '../../../core/data/item-data.service';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import { RemoteData } from '../../../core/data/remote-data';
 
 @Component({
   selector: 'ds-impact-path-way',
@@ -63,6 +66,11 @@ export class ImpactPathWayComponent implements OnInit {
   private subs: Subscription[] = [];
 
   /**
+   * The compare item object
+   */
+  compareItem: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
+
+  /**
    * A boolean representing if compare mode is active
    */
   compareMode: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -85,6 +93,7 @@ export class ImpactPathWayComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private impactPathwayService: ImpactPathwayService,
     private impactPathwayLinksService: ImpactPathwayLinksService,
+    private itemService: ItemDataService,
     private modalService: NgbModal,
     protected aroute: ActivatedRoute,
     protected editItemDataService: EditItemDataService) {
@@ -100,7 +109,24 @@ export class ImpactPathWayComponent implements OnInit {
 
     this.subs.push(
       this.impactPathwayService.isCompareModeActive()
-        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
+        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode)),
+      this.impactPathwayService.getCompareImpactPathwayId().pipe(
+        switchMap((id: string) => {
+          if (isNotEmpty(id)) {
+            return this.itemService.findById(id).pipe(
+              getFirstCompletedRemoteData(),
+              map((itemRD: RemoteData<Item>) => {
+                return itemRD.hasSucceeded ? itemRD.payload : null;
+              })
+            );
+          } else {
+            return observableOf(null);
+          }
+        })
+      ).subscribe((item: Item) => {
+        console.log('compare item: ', item);
+        this.compareItem.next(item);
+      })
     );
 
     this.editItemDataService.checkEditModeByIdAndType(this.impactPathway.id, environment.impactPathway.impactPathwaysEditMode).pipe(
@@ -226,4 +252,7 @@ export class ImpactPathWayComponent implements OnInit {
       .forEach((subscription) => subscription.unsubscribe());
   }
 
+  getCompareItemDescription(item: Item): string {
+    return item?.firstMetadataValue('dc.description');
+  }
 }

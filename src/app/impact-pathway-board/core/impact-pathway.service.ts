@@ -43,6 +43,7 @@ import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocab
 import { MetadataMap, MetadataValue } from '../../core/shared/metadata.models';
 import { Metadata } from '../../core/shared/metadata.utils';
 import {
+  compareImpactPathwayId,
   impactPathwayByIDSelector,
   impactPathwayObjectsSelector,
   impactPathwayStateSelector,
@@ -540,6 +541,13 @@ export class ImpactPathwayService {
    */
   public isCompareModeActive() {
     return this.store.pipe(select(isCompareMode));
+  }
+
+  /**
+   * Check compareMode is true
+   */
+  public getCompareImpactPathwayId(): Observable<string> {
+    return this.store.pipe(select(compareImpactPathwayId));
   }
 
   getCreateTaskFormConfigName(stepType: string, isObjectivePage: boolean): string {
