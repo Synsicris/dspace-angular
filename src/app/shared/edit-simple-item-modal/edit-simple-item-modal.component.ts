@@ -131,6 +131,7 @@ export class EditSimpleItemModalComponent implements OnInit {
         );
       })
     ).subscribe((item: Item) => {
+      this.formService.removeForm(this.formId);
       this.itemUpdate.emit(item);
     })
     );
