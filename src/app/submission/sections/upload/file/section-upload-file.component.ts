@@ -1,6 +1,7 @@
+import { QuestionsBoardStateService } from './../../../../questions-board/core/questions-board-state.service';
 import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { DynamicFormControlModel, } from '@ng-dynamic-forms/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -97,6 +98,8 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
    */
   @Input() submissionId: string;
 
+  @Input() questionBoardId: string;
+
   /**
    * The [[SubmissionSectionUploadFileEditComponent]] reference
    * @type {SubmissionSectionUploadFileEditComponent}
@@ -173,6 +176,7 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
     private operationsService: SubmissionJsonPatchOperationsService,
     private submissionService: SubmissionService,
     private uploadService: SectionUploadService,
+    private questionsBoardStateService: QuestionsBoardStateService,
   ) {
     this.readMode = true;
   }
@@ -183,9 +187,16 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
   ngOnChanges() {
     if (this.availableAccessConditionOptions) {
       // Retrieve file state
+      let fileState$: Observable<any>;
+      if (hasValue(this.submissionId)) {
+         fileState$ = this.uploadService
+        .getFileData(this.submissionId, this.sectionId, this.fileId);
+      } else if (hasValue(this.questionBoardId)) {
+        fileState$ = this.questionsBoardStateService.getFilesFromQuestionsBoard(this.questionBoardId);
+      }
+
       this.subscriptions.push(
-        this.uploadService
-          .getFileData(this.submissionId, this.sectionId, this.fileId).pipe(
+        fileState$.pipe(
             filter((bitstream) => isNotUndefined(bitstream)))
           .subscribe((bitstream) => {
               this.fileData = bitstream;
@@ -262,14 +273,19 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
   }
 
   protected loadFormMetadata() {
-    this.configMetadataForm.rows.forEach((row) => {
-      row.fields.forEach((field) => {
-        field.selectableMetadata.forEach((metadatum) => {
-          this.formMetadata.push(metadatum.metadata);
+    if ( hasValue(this.configMetadataForm) ) {
+      this.configMetadataForm.rows.forEach((row) => {
+        row.fields.forEach((field) => {
+          field.selectableMetadata.forEach((metadatum) => {
+            this.formMetadata.push(metadatum.metadata);
+          });
         });
-      });
+      }
+      );
+    } else {
+      // TODO: get values when configMetadataForm has no value
+      this.formMetadata.push('dc.title', 'dc.description', 'dc.type');
     }
-    );
   }
 
   /**

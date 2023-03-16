@@ -1,4 +1,10 @@
+import { ItemDataService } from './../../../../core/data/item-data.service';
+import { Collection } from './../../../../core/shared/collection.model';
+import { followLink } from './../../../../shared/utils/follow-link-config.model';
+import { WorkspaceitemSectionUploadObject } from './../../../../core/submission/models/workspaceitem-section-upload.model';
 import { RemoteData } from './../../../../core/data/remote-data';
+import { EditItem } from './../../../../core/submission/models/edititem.model';
+import { EditItemDataService } from './../../../../core/submission/edititem-data.service';
 import { QuestionsBoardStateService } from './../../../core/questions-board-state.service';
 import { NotificationsService } from './../../../../shared/notifications/notifications.service';
 import { SubmissionService } from './../../../../submission/submission.service';
@@ -7,14 +13,12 @@ import { RestRequestMethod } from './../../../../core/data/rest-request-method';
 import { UploaderOptions } from './../../../../shared/uploader/uploader-options.model';
 import { Community } from './../../../../core/shared/community.model';
 import { Item } from './../../../../core/shared/item.model';
-import { followLink } from './../../../../shared/utils/follow-link-config.model';
 import { getFirstSucceededRemoteData } from './../../../../core/shared/operators';
 import { SubmissionUploadFilesComponent } from './../../../../submission/form/submission-upload-files/submission-upload-files.component';
 import { SubmissionUploadsConfigDataService } from './../../../../core/config/submission-uploads-config-data.service';
 import { SectionsService } from './../../../../submission/sections/sections.service';
 import { CollectionDataService } from './../../../../core/data/collection-data.service';
 import { SectionUploadService } from './../../../../submission/sections/upload/section-upload.service';
-import { SubmissionFormsModel } from './../../../../core/config/models/config-submission-forms.model';
 import { AccessConditionOption } from './../../../../core/config/models/config-access-condition-option.model';
 import {
   BehaviorSubject,
@@ -40,7 +44,7 @@ import { HALEndpointService } from './../../../../core/shared/hal-endpoint.servi
 import { isNotEmpty, isNotUndefined } from './../../../../shared/empty.util';
 import { EasyOnlineImportService } from './../../../../core/easy-online-import/easy-online-import.service';
 import { TranslateService } from '@ngx-translate/core';
-import { SubmissionUploadsModel } from './../../../../core/config/models/config-submission-uploads.model';
+import { WorkspaceitemSectionUploadFileObject } from './../../../../core/submission/models/workspaceitem-section-upload-file.model';
 
 @Component({
   selector: 'ds-questions-upload-step',
@@ -92,12 +96,6 @@ export class QuestionsUploadStepComponent implements OnInit {
    * @type {number}
    */
   public collectionPolicyType: number;
-
-  /**
-   * The configuration for the bitstream's metadata form
-   */
-  // TODO: to be changed
-  public configMetadataForm$: Observable<SubmissionFormsModel>;
 
   /**
    * List of available access conditions that could be set to files
@@ -181,7 +179,9 @@ export class QuestionsUploadStepComponent implements OnInit {
    */
   initializedUploaderOptions = new BehaviorSubject(false);
 
-  uploadedFilesURL: string;
+  collectionId: string;
+
+  configEditItem: EditItem;
 
   constructor(
     private bitstreamService: SectionUploadService,
@@ -195,94 +195,73 @@ export class QuestionsUploadStepComponent implements OnInit {
     private notificationsService: NotificationsService,
     private questionsBoardStateService: QuestionsBoardStateService,
     private translate: TranslateService,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {}
+    private changeDetectorRef: ChangeDetectorRef,
+    private editItemDataService: EditItemDataService,
+    private requestService: ItemDataService
+
+  ) { }
 
   ngOnInit(): void {
-    // debugger
-    // this.questionsBoardStateService.dispatchUploadFilesToQuestionBoard(this.questionsBoardObject.uuid, [
-    //   {
-    //     uuid: 'string',
-    //     metadata: {} as WorkspaceitemSectionFormObject,
-    //     sizeBytes: 2,
-    //     checkSum: null,
-    //     url: 'string',
-    //     thumbnail: 'string',
-    //   } as any
-    // ]);
-
     const uploadFilesOptions$: Observable<string> = this.halService
       .getEndpoint(this.submissionService.getSubmissionObjectLinkName())
       .pipe(
         filter((href: string) => isNotEmpty(href)),
         distinctUntilChanged(),
-        tap((endpointURL: string) => {
+        map((endpointURL: string) => {
+          const fullURL = endpointURL.concat(
+            `/${this.questionsBoardObject.uuid
+            }:${this.questionsBoardService.getQuestionsBoardEditMode()}`
+          );
           this.uploadFilesOptions = Object.assign(new UploaderOptions(), {
-            url: endpointURL.concat(
-              `/${
-                this.questionsBoardObject.uuid
-              }:${this.questionsBoardService.getQuestionsBoardEditMode()}`
-            ),
+            url: fullURL,
             method: RestRequestMethod.POST,
             authToken: this.authService.buildAuthHeader(),
           });
           this.initializedUploaderOptions.next(true);
+          return fullURL;
         })
       );
 
-    const config$ = uploadFilesOptions$.pipe(
+    uploadFilesOptions$.pipe(
       switchMap((endpointURL: string) => {
-        return this.uploadsConfigService
-          .findByHref(endpointURL, true, false, followLink('metadata'))
+        return this.editItemDataService.findByHref(endpointURL, true, false, followLink('collection'))
           .pipe(
             getFirstSucceededRemoteData(),
-            map((config) => config.payload)
           );
       })
-    );
+    ).subscribe((config: RemoteData<EditItem>) => {
+      this.configEditItem = config.payload;
+      const fileList: WorkspaceitemSectionUploadFileObject[] = (config.payload.sections.upload as WorkspaceitemSectionUploadObject).files;
+      this.fileList = [];
+      this.fileIndexes = [];
+      this.fileNames = [];
+      this.changeDetectorRef.detectChanges();
+      if (isNotUndefined(fileList) && fileList.length > 0) {
+        fileList.forEach((file) => {
+          this.fileList.push(file);
+          this.fileIndexes.push(file.uuid);
+          this.fileNames.push(this.getFileName(file));
+        });
+      }
+      this.questionsBoardStateService.dispatchUploadFilesToQuestionBoard(this.questionsBoardObject.uuid, this.fileList);
+      this.changeDetectorRef.detectChanges();
+      console.log(config.payload, 'EditItem ');
+    });
+
+    // const config$ = this.uploadsConfigService.findByHref('http://localhost:8080/server/api/config/submissionuploads/upload', true, false, followLink('metadata')).pipe(
+    //   getFirstSucceededRemoteData(),
+    //   map((config) => config.payload)).subscribe((res)=>{
+    //     console.log(res, 'asdfasf');
+
+    //   });
 
     // retrieve configuration for the bitstream's metadata form
-    this.configMetadataForm$ = config$.pipe(
-      switchMap((config: SubmissionUploadsModel) =>
-        config.metadata.pipe(
-          getFirstSucceededRemoteData(),
-          map(
-            (remoteData: RemoteData<SubmissionFormsModel>) => remoteData.payload
-          )
-        )
-      )
-    );
-
-    // retrieve submission's bitstreams from state
-    combineLatest([
-      this.configMetadataForm$,
-      this.getUploadedFileList(),
-    ])
-      .pipe(
-        filter(
-          ([configMetadataForm, fileList]: [SubmissionFormsModel, any[]]) => {
-            return isNotEmpty(configMetadataForm) && isNotUndefined(fileList);
-          }
-        ),
-        distinctUntilChanged()
-      )
-      .subscribe(
-        ([configMetadataForm, fileList]: [SubmissionFormsModel, any[]]) => {
-          this.fileList = [];
-          this.fileIndexes = [];
-          this.fileNames = [];
-          this.changeDetectorRef.detectChanges();
-          if (isNotUndefined(fileList) && fileList.length > 0) {
-            fileList.forEach((file) => {
-              this.fileList.push(file);
-              this.fileIndexes.push(file.uuid);
-              this.fileNames.push(this.getFileName(configMetadataForm, file));
-            });
-          }
-
-          this.changeDetectorRef.detectChanges();
-        }
-      );
+    // this.configMetadataForm$ = config$.pipe(
+    //   switchMap((config: SubmissionUploadsModel) =>
+    //     config.metadata.pipe(
+    //       getFirstSucceededRemoteData(),
+    //       map((remoteData: RemoteData<SubmissionFormsModel>) => remoteData.payload)
+    //     )
   }
 
   /**
@@ -294,11 +273,11 @@ export class QuestionsUploadStepComponent implements OnInit {
    *    the file metadata
    */
   private getFileName(
-    configMetadataForm: SubmissionFormsModel,
     fileData: any
   ): string {
-    const metadataName: string =
-      configMetadataForm.rows[0].fields[0].selectableMetadata[0].metadata;
+    // TODO: get metadata name form config
+    const metadataName = 'dc.title';
+    //   configMetadataForm.rows[0].fields[0].selectableMetadata[0].metadata;
     let title: string;
     if (
       isNotEmpty(fileData.metadata) &&
@@ -319,7 +298,8 @@ export class QuestionsUploadStepComponent implements OnInit {
   }
 
   onCompleteItem(event) {
-    console.log(event);
+    console.log(event, 'onCompleteItem');
+    // TODO: hint:event include sections (returns all uploaded files)
   }
 
   /**
@@ -338,6 +318,15 @@ export class QuestionsUploadStepComponent implements OnInit {
   getStepTitle(): string {
     return this.translate.instant(
       this.messagePrefix + '.' + 'upload-step' + '.title'
+    );
+  }
+
+  getCollection(): Observable<string> {
+    return (this.configEditItem?.collection as Observable<RemoteData<Collection>>).pipe(
+      getFirstSucceededRemoteData(),
+      map((value: RemoteData<Collection>) => {
+        return value.payload.uuid;
+      })
     );
   }
 }

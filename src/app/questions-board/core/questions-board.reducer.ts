@@ -410,6 +410,8 @@ function replaceQuestionsBoardSteps(state: QuestionsBoardState, action: InitComp
   });
 }
 
+// ------ Upload file functions ------ //
+
 function uploadFilesToQuestionBoard(state: QuestionsBoardState, action: UploadFilesToQuestionBoardAction): QuestionsBoardState {
   const questionsBoardEntry = state.questionsBoard;
   const existingFiles = [...questionsBoardEntry[action.payload.questionsBoardId].uploads];
@@ -423,4 +425,115 @@ function uploadFilesToQuestionBoard(state: QuestionsBoardState, action: UploadFi
     })
   });
 }
+
+/**
+ * Set a new file.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    a NewUploadedFileAction action
+ * @return SubmissionObjectState
+ *    the new state, with the new file.
+ */
+// function newFile(state: SubmissionObjectState, action: NewUploadedFileAction): SubmissionObjectState {
+//   const filesData = state[ action.payload.submissionId ].sections[ action.payload.sectionId ].data as WorkspaceitemSectionUploadObject;
+//   let newData;
+//   if (isUndefined(filesData.files)) {
+//     newData = {
+//       files: [action.payload.data]
+//     };
+//   } else {
+//     newData = filesData;
+//     newData.files.push(action.payload.data);
+//   }
+
+//   return Object.assign({}, state, {
+//     [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
+//       sections: Object.assign({}, state[ action.payload.submissionId ].sections, {
+//         [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ].sections [ action.payload.sectionId ], {
+//           enabled: true,
+//           data: newData
+//         })
+//       })
+//     })
+//   });
+// }
+
+/**
+ * Edit a file.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an EditFileDataAction action
+ * @return SubmissionObjectState
+ *    the new state, with the edited file.
+ */
+// function editFileData(state: SubmissionObjectState, action: EditFileDataAction): SubmissionObjectState {
+//   const filesData = state[ action.payload.submissionId ].sections[ action.payload.sectionId ].data as WorkspaceitemSectionUploadObject;
+//   if (hasValue(filesData.files)) {
+//     const fileIndex = findKey(
+//       filesData.files,
+//       { uuid: action.payload.fileId });
+//     if (isNotNull(fileIndex)) {
+//       const newData = Array.from(filesData.files);
+//       newData[fileIndex] = action.payload.data;
+//       return Object.assign({}, state, {
+//         [ action.payload.submissionId ]: Object.assign({}, state[ action.payload.submissionId ], {
+//           activeSection: state[ action.payload.submissionId ].activeSection,
+//           sections: Object.assign({}, state[ action.payload.submissionId ].sections,
+//             Object.assign({}, {
+//               [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ].sections [ action.payload.sectionId ], {
+//                 data: Object.assign({}, state[ action.payload.submissionId ].sections[ action.payload.sectionId ].data, {
+//                   files: newData
+//                 })
+//               })
+//             })
+//           ),
+//           isLoading: state[ action.payload.submissionId ].isLoading,
+//           savePending: state[ action.payload.submissionId ].savePending,
+//         })
+//       });
+//     }
+//   }
+//   return state;
+// }
+
+/**
+ * Delete a file.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    a DeleteUploadedFileAction action
+ * @return SubmissionObjectState
+ *    the new state, with the file removed.
+ */
+// function deleteFile(state: SubmissionObjectState, action: DeleteUploadedFileAction): SubmissionObjectState {
+//   const filesData = state[ action.payload.submissionId ].sections[ action.payload.sectionId ].data as WorkspaceitemSectionUploadObject;
+//   if (hasValue(filesData.files)) {
+//     const fileIndex: any = findKey(
+//       filesData.files,
+//       {uuid: action.payload.fileId});
+//     if (isNotNull(fileIndex)) {
+//       const newData = Array.from(filesData.files);
+//       newData.splice(fileIndex, 1);
+//       return Object.assign({}, state, {
+//         [ action.payload.submissionId ]: Object.assign({}, state[action.payload.submissionId], {
+//           sections: Object.assign({}, state[action.payload.submissionId].sections,
+//             Object.assign({}, {
+//               [ action.payload.sectionId ]: Object.assign({}, state[ action.payload.submissionId ].sections[ action.payload.sectionId ], {
+//                 data: Object.assign({}, state[ action.payload.submissionId ].sections[ action.payload.sectionId ].data, {
+//                   files: newData
+//                 })
+//               })
+//             })
+//           )
+//         })
+//       });
+//     }
+//   }
+//   return state;
+// }
 

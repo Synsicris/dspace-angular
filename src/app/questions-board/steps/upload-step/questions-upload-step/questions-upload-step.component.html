@@ -47,15 +47,14 @@
         <ds-submission-upload-section-file
                                           [singleAccessCondition]="singleAccessCondition"
                                           [availableAccessConditionOptions]="availableAccessConditionOptions"
-                                          [collectionId]=""
+                                          [collectionId]="(getCollection() | async)"
                                           [collectionPolicyType]="collectionPolicyType"
-                                          [configMetadataForm]="(configMetadataForm$ | async)"
                                           [fileId]="fileIndexes[fileList.indexOf(fileEntry)]"
                                           [fileIndex]="fileList.indexOf(fileEntry)"
                                           [fileName]="fileNames[fileList.indexOf(fileEntry)]"
-                                          [readOnly]=""
-                                          [sectionId]=""
-                                          [submissionId]=""></ds-submission-upload-section-file>
+                                          [readOnly]="false"
+                                          [sectionId]="'upload'"
+                                          [questionBoardId]="questionsBoardObject.uuid"></ds-submission-upload-section-file>
         <div class="row">
           <div class="col-md-12">
             <hr/>
