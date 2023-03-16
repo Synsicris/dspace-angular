@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
@@ -63,6 +64,11 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    */
   public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  /**
+   * Flag to check the display of upload step
+   */
+  public showUploadStep = false;
+
   constructor(
     protected questionsBoardStateService: QuestionsBoardStateService,
     protected aroute: ActivatedRoute,
@@ -71,7 +77,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.questionsBoardObjectId = this.questionsBoardObject?.id;
-
+    this.showUploadStep = isEqual(this.questionsBoardObject.entityType , 'interim_report');
     this.subs.push(
       this.questionsBoardStateService.isCompareModeActive()
         .subscribe((compareMode: boolean) => this.compareMode.next(compareMode)),

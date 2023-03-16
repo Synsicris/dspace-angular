@@ -13,7 +13,6 @@
 <ds-loading *ngIf="(isLoading() | async)"></ds-loading>
 <div *ngIf="!(isLoading() | async)">
   <ds-alert [type]="'alert-info'" [content]="messagePrefix + '.info.text'" [collapsible]="true"></ds-alert>
-
   <ds-questions-board-step *ngFor="let step of (getQuestionsBoardStep() | async)"
                            [messagePrefix]="messagePrefix"
                            [questionsBoardStep]="step"
@@ -23,12 +22,14 @@
                            [isFunder]="isFunder"
                            [isVersionOfAnItem]="(isVersionOfAnItem$ | async)">
   </ds-questions-board-step>
-  <ds-questions-upload-step [questionsBoardObject]="questionsBoardObject"
-                            [messagePrefix]="messagePrefix"
-                            [projectCommunityId]="projectCommunityId"
-                            [fundingCommunity]="fundingCommunity"
-                            [compareMode]="(compareMode | async)"
-                            [isFunder]="isFunder"
-                            [isVersionOfAnItem]="(isVersionOfAnItem$ | async)">
-  </ds-questions-upload-step>
+  <ng-container *ngIf="showUploadStep">
+    <ds-questions-upload-step [questionsBoardObject]="questionsBoardObject"
+                              [messagePrefix]="messagePrefix"
+                              [projectCommunityId]="projectCommunityId"
+                              [fundingCommunity]="fundingCommunity"
+                              [compareMode]="(compareMode | async)"
+                              [isFunder]="isFunder"
+                              [isVersionOfAnItem]="(isVersionOfAnItem$ | async)">
+    </ds-questions-upload-step>
+  </ng-container>
 </div>
