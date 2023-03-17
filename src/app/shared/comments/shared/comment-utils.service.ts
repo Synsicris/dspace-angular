@@ -296,6 +296,7 @@ export class CommentUtilsService {
             );
       // related to exploitationPlan Steps
       // we must return the name of the linked funding and the label 'Exploitationplan'
+      case environment.interimReport.questionsBoardStepEntityName:
       case environment.exploitationPlan.questionsBoardStepEntityName:
         return (relatedItem) => this.itemService.findById(relatedItem.firstMetadata(FUNDING_RELATION_METADATA)?.authority)
           .pipe(

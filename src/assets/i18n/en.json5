@@ -6002,14 +6002,17 @@
   "search.filters.entityType.exploitationplanstep.step_type_2": "ExploitationPlan",
   "search.filters.entityType.exploitationplanstep.step_type_3": "ExploitationPlan",
   "search.filters.entityType.exploitationplanstep.step_type_4": "ExploitationPlan",
+  "search.filters.entityType.interim_report": "Iterim Report",
+  "search.filters.entityType.interim_report_step.step_type_1": "Iterim Report",
+  "search.filters.entityType.interim_report_step.step_type_2": "Iterim Report",
+  "search.filters.entityType.interim_report_step.step_type_3": "Iterim Report",
+  "search.filters.entityType.interim_report_step.step_type_4": "Iterim Report",
   "search.filters.has_content_in_original_bundle.true": "Yes",
   "search.filters.has_content_in_original_bundle.false": "No",
   "search.filters.discoverable.true": "No",
   "search.filters.discoverable.false": "Yes",
   "search.filters.namedresourcetype.Workspace": "Workspace",
-
   "search.filters.namedresourcetype.Archived": "Archived",
-
   "search.filters.withdrawn.true": "Yes",
 
   "search.filters.withdrawn.false": "No",
