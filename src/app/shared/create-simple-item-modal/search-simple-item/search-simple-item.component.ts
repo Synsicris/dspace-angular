@@ -320,6 +320,7 @@ export class SearchSimpleItemComponent implements OnInit, OnDestroy {
     newFilterList[filterIndex] = filterUpdate;
 
     this.filterBoxList$.next(newFilterList);
+    this.paginationService.resetPage(this.paginationOptions.id);
     this.buildSearchQuery([...this.getSearchFiltersFromFilterBoxes(this.filterBoxList$.value)]);
   }
 
