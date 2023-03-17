@@ -87,4 +87,16 @@ export class ProjectAuthorizationService {
     return this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, item.self);
   }
 
+  isFunderOrganizationalManagerOfProgramme(projectItem: Item) {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManagerOfProgramme, projectItem.self);
+  }
+
+  isFunderProjectOfProgramme(projectItem: Item) {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderProjectOfProgramme, projectItem.self);
+  }
+
+  isFunderReaderOfProgramme(projectItem: Item) {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderReaderOfProgramme, projectItem.self);
+  }
+
 }

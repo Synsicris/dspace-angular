@@ -4,7 +4,13 @@
       <ds-view-version-badges *ngIf="workingPlan && isVersionOf" [item]="workingPlan"></ds-view-version-badges>
     </ds-comcol-page-header>
   </div>
-  <ds-alert [type]="'alert-info'" [content]="'working-plan.chart.page.description'" [collapsible]="true" [collapsed]="true"></ds-alert>
+  <ds-alert-role
+    [type]="'alert-info'"
+    [content]="'working-plan.chart.page.description'"
+    [collapsible]="true"
+    [collapsed]="true"
+    [alertRoles]="funderRoles"
+  ></ds-alert-role>
   <ng-container *ngIf="isVersionOf && isFunder">
     <ds-working-plan-comments [projectCommunityId]="projectCommunityId"
                               [showAccordionPanelToggle]="showAccordionPanelToggle"
@@ -12,9 +18,9 @@
   </ng-container>
 
   <ds-working-plan-chart-toolbar [compareMode]="compareMode"
-                                  [isFunder]="isFunder"
-                                  [isVersionOf]="isVersionOf"
-                                  [projectCommunityId]="projectCommunityId"
+                                 [isFunder]="isFunder"
+                                 [isVersionOf]="isVersionOf"
+                                 [projectCommunityId]="projectCommunityId"
                                   [workpackages]="workpackages"
                                   [workingPlan]="workingPlan"></ds-working-plan-chart-toolbar>
   <ds-working-plan-chart-container [compareMode]="compareMode"

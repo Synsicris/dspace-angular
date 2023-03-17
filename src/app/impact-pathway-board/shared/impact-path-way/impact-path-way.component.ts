@@ -20,6 +20,8 @@ import { hasValue } from '../../../shared/empty.util';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { environment } from '../../../../environments/environment';
 import { VersionSelectedEvent } from '../../../shared/item-version-list/item-version-list.component';
+import { administratorRole, AlertRole, getProgrammeRoles } from '../../../shared/alert/alert-role/alert-role';
+import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
 
 @Component({
   selector: 'ds-impact-path-way',
@@ -79,15 +81,18 @@ export class ImpactPathWayComponent implements OnInit {
 
   public compareProcessing$: Observable<boolean> = observableOf(false);
   public impactPathwayStepEntityType: string;
+  public funderRoles: AlertRole[];
+  public dismissRole: AlertRole;
 
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
-    private authorizationService: AuthorizationDataService,
-    private cdr: ChangeDetectorRef,
-    private impactPathwayService: ImpactPathwayService,
-    private impactPathwayLinksService: ImpactPathwayLinksService,
-    private modalService: NgbModal,
-    protected aroute: ActivatedRoute,
-    protected editItemDataService: EditItemDataService) {
+              private authorizationService: AuthorizationDataService,
+              private projectAuthorizationService: ProjectAuthorizationService,
+              private cdr: ChangeDetectorRef,
+              private impactPathwayService: ImpactPathwayService,
+              private impactPathwayLinksService: ImpactPathwayLinksService,
+              private modalService: NgbModal,
+              protected aroute: ActivatedRoute,
+              protected editItemDataService: EditItemDataService) {
   }
 
   ngOnInit() {
@@ -119,6 +124,8 @@ export class ImpactPathWayComponent implements OnInit {
     });
 
     this.impactPathwayStepEntityType = environment.impactPathway.impactPathwayStepEntity;
+    this.funderRoles = getProgrammeRoles(this.impactPathWayItem, this.projectAuthorizationService);
+    this.dismissRole = administratorRole(this.projectAuthorizationService);
   }
 
   ngAfterContentChecked() {
