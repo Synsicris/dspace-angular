@@ -107,6 +107,11 @@ button.btn:focus {
   border-radius: .2rem;
 }
 
+// distance edit to delete button (230317 red)
+ds-working-plan-chart-item-edit-button {
+  margin-right:1rem;
+}
+
 // Document wide tree-node adjustment
 .mat-tree-node {
   min-height: 100px;
