@@ -1632,6 +1632,7 @@ export class DefaultAppConfig implements AppConfig {
     commentRelationItemVersionMetadata: 'synsicris.relation.commentItemVersion',
     commentRelationProjectMetadata: 'synsicris.relation.commentProject',
     commentRelationProjectVersionMetadata: 'synsicris.relation.commentProjectVersion',
+    commentRelationBoardMetadata: 'synsicris.relation.commentBoard',
   };
 
 }

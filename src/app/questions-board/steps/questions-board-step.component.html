@@ -44,6 +44,7 @@
       <div *ngIf="isVersionOfAnItem && isFunder && (formConfig$ | async)?.name && this.questionBoardEntityType" class="comment-box pr-2 py-2 comment-box-position"
            [ngStyle]="{'height.px': questionsBoardSection.clientHeight}">
         <ds-comment-list
+          [relatedBoard]="questionsBoard$ | async"
           [relatedEntityType]="this.questionBoardEntityType"
           [itemUuid]="this.questionsBoardStep.id"
           [projectCommunityId]="projectCommunityId"

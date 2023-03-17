@@ -6007,29 +6007,34 @@
   "search.filters.entityType.targetgroups": "Target group",
 
   "search.filters.entityType.tasks": "Task",
-
   "search.filters.entityType.unexpected_results": "Unexpected result or problem",
-
   "search.filters.entityType.workpackages": "Work package",
-
   "search.filters.entityType.JournalIssue": "Journal Issue",
-
   "search.filters.entityType.JournalVolume": "Journal Volume",
-
   "search.filters.entityType.OrgUnit": "Organisation unit",
-
+  "search.filters.entityType.workingplan": "WorkingPlan",
+  "search.filters.entityType.impactpathway.step_type_1": "ImpactPathway Background",
+  "search.filters.entityType.impactpathway.step_type_2": "ImpactPathway Research and development",
+  "search.filters.entityType.impactpathway.step_type_3": "ImpactPathway Interactions and transfer",
+  "search.filters.entityType.impactpathway.step_type_4": "ImpactPathway Application (opportunities)",
+  "search.filters.entityType.impactpathway.step_type_5": "ImpactPathway Expected Societal Impact",
+  "search.filters.entityType.impactpathway.step_type_6": "ImpactPathway Contribution to funding programme objectives",
+  "search.filters.entityType.exploitationplanstep": "ExploitationPlan",
+  "search.filters.entityType.exploitationplanstep.step_type_1": "ExploitationPlan",
+  "search.filters.entityType.exploitationplanstep.step_type_2": "ExploitationPlan",
+  "search.filters.entityType.exploitationplanstep.step_type_3": "ExploitationPlan",
+  "search.filters.entityType.exploitationplanstep.step_type_4": "ExploitationPlan",
+  "search.filters.entityType.interim_report": "Iterim Report",
+  "search.filters.entityType.interim_report_step.step_type_1": "Iterim Report",
+  "search.filters.entityType.interim_report_step.step_type_2": "Iterim Report",
+  "search.filters.entityType.interim_report_step.step_type_3": "Iterim Report",
+  "search.filters.entityType.interim_report_step.step_type_4": "Iterim Report",
   "search.filters.has_content_in_original_bundle.true": "Yes",
-
   "search.filters.has_content_in_original_bundle.false": "No",
-
   "search.filters.discoverable.true": "No",
-
   "search.filters.discoverable.false": "Yes",
-
   "search.filters.namedresourcetype.Workspace": "Workspace",
-
   "search.filters.namedresourcetype.Archived": "Archived",
-
   "search.filters.withdrawn.true": "Yes",
 
   "search.filters.withdrawn.false": "No",
@@ -9801,25 +9806,16 @@
   "layout.field.label.Project.synsicris.type.project": "Type of project",
 
   "submission.sections.submit.progressbar.describe.neg_sideffect": "#1 Possible negative side effect",
-
   "neg_sideffect.listelement.badge": "Negative side effect",
-
   "open_researchquestion.listelement.badge": "Open research questions",
-
   "search.filters.entityType.neg_sideffect": "Possible negative side effects",
-
   "search.filters.entityType.open_researchquestion": "Open research questions",
-
   "search.filters.entityType.exp_ia_objective": "Target for interaction and transfer",
-
+  "search.filters.entityType.exploitationplan": "ExploitationPlan",
   "layout.tab.header.open_researchquestions": "Open research questions",
-
   "layout.tab.header.neg_sideffect": "Possible negative side effects",
-
   "layout.box.header.open_researchquestions_comment": "Comments - Open research questions",
-
   "layout.box.header.neg_sideffect_comment": "Commets - Possible negative side effect",
-
   "layout.box.header.open_researchquestions": "Open research questions",
 
   "layout.box.header.open_researchquestions_m": "Open research questions",
