@@ -5536,6 +5536,28 @@
 
   "search.filters.applied.charts.graph-synsicris_type_status.tab": "Visualization by Status",
 
+  "search.filters.applied.charts.graph-fundingobjective-synsicris_type_sdg.tab": "Visualization by SDG Type",
+
+  "search.filters.applied.charts.graph-fundingobjective-synsicris_relation_programme.tab": "Visualization by Relation Programme",
+
+  "search.filters.applied.charts.graph-fundingobjective-synsicris_relation_call.tab": "Visualization by Relation Call",
+
+  "search.filters.filter.synsicrisRelationProgramme.head": "Relation Programme",
+
+  "search.filters.applied.charts.graphtargetgrouptype.tab": "Visualization by Target Group Type",
+
+  "search.filters.applied.charts.graphtargetgroupnace.tab": "Visualization by Target Group Nace",
+
+  "search.filters.applied.charts.graphtargetgrouppolitical.tab": "Visualization by Target Group Political",
+
+  "search.filters.applied.charts.graphcoopparttype.tab": "Visualization by Cooperation Partner Type",
+
+  "search.filters.applied.charts.graphcooppartnace.tab": "Visualization by Cooperation Partner Nace",
+
+  "search.filters.applied.charts.graphcooppartdestatis.tab": "Visualization by Cooperation Partner Destatis",
+
+  "search.filters.applied.charts.graphcooppartaddressCountry.tab": "Visualization by Cooperation Partner Address Country",
+
   "search.filters.applied.charts.default.title": "Search Output",
 
   "search.filters.applied.charts.RELATION.Funding.basics_comment.title": "Funding comments",
