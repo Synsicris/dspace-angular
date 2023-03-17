@@ -47,7 +47,7 @@
         <span class="text-muted">{{'layout.field.label.comment.synsicris.related.item' | translate}}:</span>
         <span class="btn btn-link d-inline p-0 m-0" style="cursor: pointer"
               (click)="navigateToRelatedItem(relatedItem, dso.firstMetadata(RELATION_BOARD_OBJECT))">
-          {{typeDesc.itemType | dsEntityTypeTranslate}} {{typeDesc.description ? ' - ' + typeDesc.description : ''}}
+          {{typeDesc.itemType | dsEntityTypeTranslate}}{{typeDesc.itemType ? ' - ' : ''}}{{typeDesc.description ? typeDesc.description : ''}}
         </span>
       </ng-container>
     </div>

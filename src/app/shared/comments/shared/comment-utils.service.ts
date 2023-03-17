@@ -103,7 +103,7 @@ export class CommentUtilsService {
           .pipe(
             getFirstCompletedRemoteData(),
             map(({ payload }) => this.getFundingEntityURL(payload, 'interimreport'))
-          )
+          );
       case EXPLOITATIONPLAN_ENTITY:
         return this.itemService.findById(questionBoard.firstMetadata(FUNDING_RELATION_METADATA)?.authority)
           .pipe(
@@ -127,6 +127,7 @@ export class CommentUtilsService {
               )
             );
         }
+        break;
       default:
         return of(getEntityPageRoute(questionBoard.entityType, questionBoard.uuid));
     }
@@ -155,10 +156,14 @@ export class CommentUtilsService {
       return null;
     }
     const typeValue = metadataValue.value;
-    const splittedValue = typeValue.split('-');
+    const splittedValue = typeValue.split('-', 1);
+    const index = typeValue.indexOf('-');
+    const itemType = typeValue.substring(0, index);
+    const description = typeValue.substring(index + 1);
+
     return {
-      itemType: (splittedValue[0] || '').trim(),
-      description: isNotEmpty(splittedValue[1]) && isNotEmpty(splittedValue[1].trim()) ? splittedValue[1].trim() : null
+      itemType: (itemType || '').trim(),
+      description: isNotEmpty(description) && isNotEmpty(description.trim()) ? description.trim() : null
     };
   }
 
@@ -188,22 +193,22 @@ export class CommentUtilsService {
       metadataMap$ =
         metadataMap$
           .pipe(
-            map(([metadataMap, item]) =>
+            map(([metadataMap, relItem]) =>
               [
                 Object.assign({}, metadataMap, {
                   ...this.generateRelationMetadata(environment.comments.commentRelationBoardMetadata, relatedBoardItem.entityType, relatedBoardItem)
                 }),
-                item
+                relItem
               ]
             )
           );
     }
     return metadataMap$
       .pipe(
-        switchMap(([metadataMap, item]) =>
+        switchMap(([metadataMap, relItem]) =>
           forkJoin([
-            this.generateOriginalRelationMetadata(environment.comments.commentRelationProjectMetadata, item),
-            this.generateVersionMetadata(environment.comments.commentRelationProjectVersionMetadata, item)
+            this.generateOriginalRelationMetadata(environment.comments.commentRelationProjectMetadata, relItem),
+            this.generateVersionMetadata(environment.comments.commentRelationProjectVersionMetadata, relItem)
           ]).pipe(
             map(([relationMD, versionMD]) =>
               Object.assign({}, metadataMap, {
@@ -284,7 +289,7 @@ export class CommentUtilsService {
         return (relatedItem) => of(`${relatedItem.entityType}`);
       case environment.impactPathway.impactPathwayStepEntity:
         return (relatedItem) =>
-          this.itemService.findById(relatedItem.firstMetadata(environment.impactPathway.impactPathwayParentRelationMetadata)?.authority)
+          this.itemService.findById(relatedItem.firstMetadata(environment.impactPathway.impactPathwayParentRelationMetadata)?.value)
             .pipe(
               getFirstCompletedRemoteData(),
               map(ipw => `${ipw.payload.entityType}.${this.dsoNameService.getName(relatedItem)} - ${this.dsoNameService.getName(ipw.payload)} `)

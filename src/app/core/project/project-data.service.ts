@@ -72,7 +72,7 @@ export const VERSION_UNIQUE_ID = 'synsicris.uniqueid';
 export const FUNDING_OBJECTIVE_ENTITY = 'fundingobjective';
 export const CALL_ENTITY = 'call';
 export const ORGANISATION_UNIT_ENTITY = 'OrgUnit';
-export const INTERIM_REPORT_ENTITY = 'interimreport';
+export const INTERIM_REPORT_ENTITY = 'interim_report';
 export const EXPLOITATIONPLAN_ENTITY = 'exploitationplan';
 export const WORKINGPLAN_ENTITY = 'workingplan';
 
