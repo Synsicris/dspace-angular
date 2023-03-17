@@ -6,8 +6,8 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class EntityTypeTranslatePipe extends TranslatePipe implements PipeTransform {
 
-  transform(value: string): string {
-    let translatedValue = super.transform('search.filters.entityType.' + value);
+  transform(value: string, prefix = 'search.filters.entityType'): string {
+    let translatedValue = super.transform(`${prefix}.${value}`);
     if (translatedValue != null) {
       return translatedValue as string;
     }

@@ -37,7 +37,7 @@
       <ng-container *ngIf="getTypeDescriptionMetadata(project) as typeDesc">
         <span class="text-muted">
         {{'layout.field.label.comment.synsicris.related.project' | translate}}
-          : {{typeDesc.itemType | dsEntityTypeTranslate}} - {{typeDesc.description}}
+          : {{typeDesc.itemType}} {{typeDesc.description ? ' - ' + typeDesc.description : ''}}
       </span>
       </ng-container>
     </div>
@@ -45,10 +45,10 @@
     <div *ngIf="dso.firstMetadata(RELATION_ITEM_VERSION) as relatedItem">
       <ng-container *ngIf="getTypeDescriptionMetadata(relatedItem) as typeDesc">
         <span class="text-muted">{{'layout.field.label.comment.synsicris.related.item' | translate}}:</span>
-        <a target="_self" rel="noopener noreferrer" class="item-list-title"
-           [routerLink]="[getRelateItemPageRoute(relatedItem)]">
-          {{typeDesc.itemType | dsEntityTypeTranslate}} - {{typeDesc.description}}
-        </a>
+        <span class="btn btn-link d-inline p-0 m-0" style="cursor: pointer"
+              (click)="navigateToRelatedItem(relatedItem, dso.firstMetadata(RELATION_BOARD_OBJECT))">
+          {{typeDesc.itemType | dsEntityTypeTranslate}} {{typeDesc.description ? ' - ' + typeDesc.description : ''}}
+        </span>
       </ng-container>
     </div>
 

@@ -685,5 +685,6 @@ export const environment: BuildConfig = {
     commentRelationItemVersionMetadata: 'synsicris.relation.commentItemVersion',
     commentRelationProjectMetadata: 'synsicris.relation.commentProject',
     commentRelationProjectVersionMetadata: 'synsicris.relation.commentProjectVersion',
+    commentRelationBoardMetadata: 'synsicris.relation.commentBoard',
   }
 };

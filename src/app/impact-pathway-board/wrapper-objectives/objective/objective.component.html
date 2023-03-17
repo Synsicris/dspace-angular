@@ -32,6 +32,7 @@
       </div>
       <div *ngIf="isVersionOfAnItem && isFunder && (formConfig$ | async)?.name" class="comment-box" [ngStyle]="{'height.px': taskSection.clientHeight}">
         <ds-comment-list
+          [relatedBoard]="impactPathWayStepItem$ | async"
           [relatedEntityType]="impactPathwayTask.type"
           [itemUuid]="impactPathwayTask.id"
           [projectCommunityId]="projectCommunityId"
