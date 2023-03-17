@@ -11,7 +11,9 @@ import { CoreModule } from '../core/core.module';
 import { WorkingPlanComponent } from './working-plan.component';
 import { WorkingPlanChartComponent } from './working-plan-chart/working-plan-chart.component';
 import { WorkingPlanChartToolbarComponent } from './working-plan-chart/toolbar/working-plan-chart-toolbar.component';
-import { WorkingPlanChartContainerComponent } from './working-plan-chart/container/working-plan-chart-container.component';
+import {
+  WorkingPlanChartContainerComponent
+} from './working-plan-chart/container/working-plan-chart-container.component';
 import { MyDSpacePageModule } from '../my-dspace-page/my-dspace-page.module';
 import { WorkpackageStatusDirective } from './working-plan-chart/container/workpackage-status.directive';
 import { storeModuleConfig } from '../app.reducer';
@@ -24,11 +26,18 @@ import { ProjectItemService } from '../core/project/project-item.service';
 import { CreateSimpleItemModule } from '../shared/create-simple-item-modal/create-simple-item.module';
 import { ComcolModule } from '../shared/comcol/comcol.module';
 import { EditSimpleItemModalModule } from '../shared/edit-simple-item-modal/edit-simple-item-modal.module';
-import { WorkingPlanChartDatesComponent } from './working-plan-chart/container/working-plan-chart-dates/working-plan-chart-dates.component';
-import { WorkingPlanChartItemEditButtonComponent } from './working-plan-chart/container/working-plan-chart-item-edit-button/working-plan-chart-item-edit-button.component';
-import { WorkingPlanChartItemDeleteButtonComponent } from './working-plan-chart/container/working-plan-chart-item-delete-button/working-plan-chart-item-delete-button.component';
+import {
+  WorkingPlanChartDatesComponent
+} from './working-plan-chart/container/working-plan-chart-dates/working-plan-chart-dates.component';
+import {
+  WorkingPlanChartItemEditButtonComponent
+} from './working-plan-chart/container/working-plan-chart-item-edit-button/working-plan-chart-item-edit-button.component';
+import {
+  WorkingPlanChartItemDeleteButtonComponent
+} from './working-plan-chart/container/working-plan-chart-item-delete-button/working-plan-chart-item-delete-button.component';
 import { ItemDetailPageModalModule } from '../item-detail-page-modal/item-detail-page-modal.module';
 import { SectionsService } from '../submission/sections/sections.service';
+import { WorkingPlanCommentsComponent } from './working-plan-chart/comments/working-plan-comments.component';
 
 const MODULES = [
   CommonModule,
@@ -52,7 +61,8 @@ const COMPONENTS = [
   WorkingPlanChartDatesComponent,
   WorkingPlanChartToolbarComponent,
   WorkingPlanChartItemEditButtonComponent,
-  WorkingPlanChartItemDeleteButtonComponent
+  WorkingPlanChartItemDeleteButtonComponent,
+  WorkingPlanCommentsComponent
 ];
 
 const DIRECTIVES = [
