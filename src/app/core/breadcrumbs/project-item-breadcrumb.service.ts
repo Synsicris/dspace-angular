@@ -54,7 +54,7 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
     let projectCrumbs$ = observableOf([]);
     let crumbs$ = observableOf([]);
     let parentUrl = null;
-    if (entityType !== FUNDING_ENTITY && hasValue(relatedFunding?.authority)) {
+    if (entityType !== FUNDING_ENTITY && entityType !== PROJECT_ENTITY && hasValue(relatedFunding?.authority)) {
       fundingCrumbs$ =
         this.getNestedBreadcrumb(
           this.projectService.getFundingItemByItemId(key.uuid), key, parentUrl, entityType, label, url

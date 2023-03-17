@@ -1,11 +1,16 @@
 <ds-loading *ngIf="isProcessingWorkpackage() | async"></ds-loading>
 <div *ngIf="!(isProcessingWorkpackage() | async) && (workpackages | async)?.length > 0" fxLayout="column">
   <div class="sidenav-container" fxFlex fxLayout="row">
+
     <!-- steps -->
+    <!-- header of first column -->
     <div class="sidenav chart-column names" [ngStyle]="sidebarNamesStyle" fxLayout="column">
+
       <div class="sidenav-header d-flex justify-content-between">
         <div>
           <div ngbDropdown #sortByDrop="ngbDropdown" class="d-inline-block" (openChange)="resetSortDropdown($event)">
+
+            <!-- Dropdown for sorting in the header of the first column -->
             <button [disabled]="(compareMode | async)" class="btn btn-outline-info btn-xs mr-2" id="sortBy" ngbDropdownToggle>{{'working-plan.chart.column.sortBy' | translate}} {{'working-plan.chart.column.sortBy.option.' + (sortSelected$ | async) | translate}}</button>
             <div ngbDropdownMenu class="block-change-start-date font-size-07 p-2" aria-labelledby="sortBy">
               <button type="button" class="close" data-dismiss="alert" attr.aria-label="{{'working-plan.chart.column.changeStartDateClose' | translate}}" (click)="sortByDrop.close()">
@@ -38,20 +43,35 @@
             </div>
           </div>
         </div>
+
         <div class="pr-1 space-children-mr">
-          <button type="button" class="btn btn-primary btn-xs"
+
+          <!-- button "-angle-double-down" to expand all lines -->
+          <button *ngIf="!isTreeExpanded" type="button" class="btn btn-link btn-xs"
                   title="{{'working-plan.chart.button.expandAll' | translate}}"
-                  (click)="treeControl.expandAll()">
+                  (click)="expandAll()">
             <i class="fas fa-angle-double-down"></i>
           </button>
-          <button type="button" class="btn btn-primary btn-xs"
+
+          <!-- button "-angle-double-up" to collapse all lines -->
+          <button  *ngIf="isTreeExpanded" type="button" class="btn btn-link btn-xs"
                   title="{{'working-plan.chart.button.collapseAll' | translate}}"
-                  (click)="treeControl.collapseAll()">
+                  (click)="collapseAll()">
             <i class="fas fa-angle-double-up"></i>
           </button>
-          <button type="button" class="btn btn-primary btn-xs mr-2{{(this.sidebarResponsibleStatus)?' d-none':''}}" (click)="sidebarStatusToggle()" title="{{'working-plan.chart.column.expand' | translate}}"><i class="fas fa-angle-double-right"></i></button>
+
+          <!-- toggle-button "-angle-double-right" to expand the time-column vertically,  toggles with button angle-double-left further down in this code -->
+          <!-- .......................................................................................................................................... -->
+          <button type="button" class="btn btn-link btn-xs mr-2{{(this.sidebarResponsibleStatus)?' d-none':''}}"
+                  (click)="sidebarStatusToggle()"
+                  title="{{'working-plan.chart.column.expand' | translate}}">
+            <i class="fas fa-angle-double-right"></i>
+          </button>
+
         </div>
+
       </div>
+
       <mat-tree cdkDropList
         [cdkDropListData]="dataSource"
         (cdkDropListDropped)="drop($event)"
@@ -83,13 +103,23 @@
             <i *ngIf="(isDragging | async) && (isDropAllowed | async)" class="mt-2 ml-2 fas fa-check fa-4x"></i>
             <i *ngIf="(isDragging | async) && !(isDropAllowed | async)" class="mt-3 ml-4 fas fa-exclamation fa-4x"></i>
           </div>
-          <div [class.root-node-style]="node.level === 0">
+
+          <!-- in this div is also included the accordion function (rex 230310) -->
+          <div [class.root-node-style]="node.level === 0" class="d-flex flex-column justify-content-between">
+            <!-- button "grip-vertical" -->
             <button mat-icon-button matTreeNodeToggle
                     [disabled]="(compareMode | async) || isVersionOf || !dragAndDropIsActive || (isMoving() | async)" cdkDragHandle
                     class="btn btn-xs btn-link p-0 text-primary button-move" title="Drag & Drop">
               <i class="fas fa-grip-vertical{{(!dragAndDropIsActive || (isMoving() | async))?' opacity-50':''}}"></i>
             </button>
+            <button *ngIf="treeControl.isExpandable(node)" mat-icon-button matTreeNodeToggle
+                    class="btn btn-xs btn-link p-0 text-primary"
+                    title="{{ (treeControl.isExpanded(node) ? 'working-plan.chart.button.collapse' : 'working-plan.chart.button.expand') | translate}}">
+              <i *ngIf="treeControl.isExpanded(node)" class="fas fa-angle-double-right"></i>
+              <i *ngIf="!treeControl.isExpanded(node)" class="fas fa-angle-double-down"></i>
+            </button>
           </div>
+
           <div class="mat-form-field auto-width mt-1{{node.level === 0?' pl-2':''}}">
             <p class="block-ellipsis">
               <span (click)="openItemModal(node); $event.stopImmediatePropagation();">{{node.name}}</span>
@@ -98,6 +128,8 @@
             <span
               class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
             <br>
+
+            <!-- Button "Add" -->
             <button *ngIf="canAddChildStep(node)" data-test="add-child-step"
                     class="btn btn-xs btn-link p-0"
                     title="{{'working-plan.chart.button.add' | translate}}"
@@ -105,21 +137,36 @@
                     (click)="addChildStep(node); $event.stopImmediatePropagation();">
               <i class="fas fa-plus-circle"></i>
             </button>
+
           </div>
+
           <div class="mr-05 d-flex flex-column justify-content-between">
+
+
             <div class="d-flex justify-content-end">
+
               <span>
                 <i dsItemMetadataStatus [status]="node?.status"></i>
               </span>
+
+            <!-- original position 1 of button "unlink", now moved down to position 2 (rex 230310) -->
+            <!--
               <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end" data-test="remove-step"
                       title="{{'working-plan.chart.button.remove' | translate}}"
                       [class.ml-1]="node.level !== 0"
                       [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf"
                       (click)="deleteStep(node); $event.stopPropagation()">
-                <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-unlink'></i></span>
-                <span *ngIf="(isProcessingWorkpackageRemove(node) | async)"><i class='fas fa-circle-notch fa-spin'></i></span>
+                <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)">
+                  <i class='fas fa-unlink'></i>
+                </span>
+                <span *ngIf="(isProcessingWorkpackageRemove(node) | async)">
+                  <i class='fas fa-circle-notch fa-spin'></i>
+                </span>
               </button>
+              -->
+
             </div>
+
 
             <div class="d-flex justify-content-end">
               <span class="pr-1">
@@ -128,6 +175,8 @@
             </div>
 
             <div class="d-flex">
+
+              <!-- button "not equal" -->
               <button *ngIf="(compareMode | async) && node.compareStatus === ComparedVersionItemStatus.Changed"
                       mat-icon-button
                       class="btn btn-xs btn-link p-0 text-primary"
@@ -136,30 +185,59 @@
                       (click)="openCompareModal(node); $event.stopImmediatePropagation();">
                 <i class="fas fa-not-equal"></i>
               </button>
+
+              <!-- new position 2 of button "unlink" with status-span,
+                to make it appear in a row with Edit and Delete,
+                removed from position 1 (rex 230310)  -->
+              <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end" data-test="remove-step"
+                      title="{{'working-plan.chart.button.remove' | translate}}"
+                      [class.ml-1]="node.level !== 0"
+                      [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf"
+                      (click)="deleteStep(node); $event.stopPropagation()">
+                <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)">
+                  <i class='fas fa-thumbtack'></i>
+                </span>
+                <span *ngIf="(isProcessingWorkpackageRemove(node) | async)">
+                  <i class='fas fa-circle-notch fa-spin'></i>
+                </span>
+              </button>
+               <!-- end of new position of button "unlink" -->
+
+              <!-- button "edit" -->
               <ds-working-plan-chart-item-edit-button
                 [compareMode]="compareMode"
                 [isVersionOfAnItem]="isVersionOf"
                 [node]="node"
               ></ds-working-plan-chart-item-edit-button>
+
+              <!-- button "delete" -->
               <ds-working-plan-chart-item-delete-button
                 [compareMode]="compareMode"
                 [isVersionOfAnItem]="isVersionOf"
                 [node]="node"
               ></ds-working-plan-chart-item-delete-button>
+
             </div>
+
           </div>
         </mat-tree-node>
       </mat-tree>
     </div>
     <!-- dates, organisations and statuses -->
     <div class="sidenav chart-column responsible{{(this.sidebarResponsibleStatus)?'':' d-none'}}" [ngStyle]="sidebarResponsibleStyle" fxLayout="column">
+
+      <!-- header of second column (time period) -->
       <div class="sidenav-header">
+
         <div class="float-left">
           <div ngbDropdown #changeAllStartDatesDrop="ngbDropdown" class="d-inline-block">
+
+            <!-- Dropdown for sort by time period in the header of the second column -->
             <button class="btn btn-outline-secondary btn-xs mr-2 ml-2" id="changeAllStartDate" ngbDropdownToggle
                     [disabled]="(compareMode | async) || isVersionOf">
               {{'working-plan.chart.column.changeStartDate' | translate}}
             </button>
+
             <div ngbDropdownMenu class="block-change-start-date font-size-07 p-2" aria-labelledby="changeAllStartDate">
               <button type="button" class="close" data-dismiss="alert" attr.aria-label="{{'working-plan.chart.column.changeStartDateClose' | translate}}"
                       (click)="changeAllStartDatesDrop.close()">
@@ -201,10 +279,18 @@
             </div>
           </div>
         </div>
+
         <div class="float-right">
-          <button type="button" class="btn btn-primary btn-xs mr-2{{(this.sidebarResponsibleStatus)?'':' d-none'}}" (click)="sidebarStatusToggle()" title="{{'working-plan.chart.column.collapse' | translate}}"><i class="fas fa-angle-double-left"></i></button>
+
+          <!-- toggle-button "angle-double-left" to collapse the "Period" column, toggles with button angle-double-right further up in this code -->
+          <!-- ................................................................................................................................. -->
+          <button type="button" class="btn btn-link btn-xs mr-2{{(this.sidebarResponsibleStatus)?'':' d-none'}}" (click)="sidebarStatusToggle()" title="{{'working-plan.chart.column.collapse' | translate}}">
+            <i class="fas fa-angle-double-left"></i>
+          </button>
         </div>
-      </div>
+
+      </div> <!-- end sidenav-header -->
+
       <mat-tree class="tree pt-0" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarResponsibleStyle">
         <mat-tree-node *matTreeNodeDef="let node" class="tree-node-customization"
                        [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"

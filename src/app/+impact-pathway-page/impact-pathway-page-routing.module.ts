@@ -50,6 +50,7 @@ import { IsFunderResolver } from '../core/project/is-funder.resolver';
               isFunder: IsFunderResolver,
               objectivesItem: ProjectObjectivesItemResolver,
               projectCommunity: ProjectCommunityByItemResolver,
+              breadcrumb: ProjectItemBreadcrumbResolver
             },
           },
         ]

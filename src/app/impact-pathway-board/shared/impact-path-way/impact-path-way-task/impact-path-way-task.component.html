@@ -1,3 +1,4 @@
+<!-- complete IP-Task-Card -->
 <div class="task-container d-flex" id="{{taskHTMLDivId}}"
      [class.task-focus]="(selectable && selectStatus.value) || (hasFocus$ | async)"
      [class.bg-gradient-light]="!compareMode && isDisabled()"
@@ -5,6 +6,8 @@
      [class.alert-danger]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed"
      [class.task-disabled]="!compareMode && isDisabled()"
      (click)="setFocus($event)">
+
+  <!-- left column with grip-icon -->
   <div class="task-left-bar">
     <button class="btn btn-xs btn-link p-0 text-primary  align-self-start" title="Drag & Drop"
             [class.button-move]="!isVersionOfAnItem"
@@ -12,28 +15,38 @@
       <i class="fas fa-grip-vertical"></i>
     </button>
   </div>
+
+  <!-- card without the left grip-column -->
   <div class="task-right-bar">
     <div class="task-detail p-1">
       <div class="task-header pr-1 d-flex justify-content-between">
+        
         <div class="task-title title-clamp font-weight-bold text-info" (click)="openItemModal()">
+          <!-- title text -->
           <p title="{{data.title}}">{{data.title}}</p>
         </div>
+
+        <!-- column with status-icon -->
         <span *ngIf="data?.status" class="status-icon">
           <i dsItemMetadataStatus [status]="data.status"></i>
         </span>
+
       </div>
 
+      <!-- Entity-Label with tooltip-info-icon -->
       <div class="task-content p-1 d-flex justify-content-between"
            [class.task-overlay-hide]="(canShowRelationCheckBox() | async)">
         <div class="task-type type-clamp">
           <p title="{{data.type | dsEntityTypeTranslate}}">{{data.type | dsEntityTypeTranslate}}</p>
         </div>
+        <!-- tooltip-icon -->
         <span class="status-icon" *ngIf="data?.internalStatus">
           <i dsItemMetadataInternal [status]="data.internalStatus"></i>
         </span>
       </div>
-
     </div>
+
+    <!-- Card Footer with icon-buttons -->
     <div class="task-actions" [class.task-overlay-hide]="(canShowRelationCheckBox() | async)">
       <button *ngIf="(canShowRelationButton(true) | async)" class="btn btn-lg btn-link p-0 flex-shrink-1"
               title="{{'impact-pathway.create.bidirectional-link' | translate}}"
@@ -110,6 +123,7 @@
         </span>
       </button>
     </div>
+
     <div *ngIf="(canShowRelationCheckBox() | async)" class="task-overlay position-absolute d-flex align-items-center p-1">
       <div>
         <mat-checkbox id="taskConnect{{taskHTMLDivId}}" color="primary" [checked]="isTaskPartOfRelation() | async" [labelPosition]="'before'"
