@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
 
  <body class="use" id="use-items">
- 
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-	
+
 	 <?php /* Alte Navigation kann geloescht werden.
 	 <h1>&nbsp;</h1>
 	 <!-- Platzhalter deutsch / englisch für Auswahl anderer Sprache -->
@@ -31,9 +31,9 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n1><a href="de-project-step.php">Nutzung_im_Projektverlauf</a></n1><br> <!-- geprueft, unterschiedliche Titel -->
 	  <n1><a href="de-project-details.php">Details</a></n1> <!-- Datei fehlt -->
 	  */ ?>
-  
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
-  
+
 	<main>
       <h1>Einträge anlegen</h1>
 
@@ -46,7 +46,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
       oder Veranstaltung, legen Sie weitere Einträge an.
 
         <ol>
-            <li>Impact Pathway oder Arbeitsplan</li>
+            <li>Wirkungspfad oder Arbeitsplan</li>
                 <ul>
                       <li>Bester Weg, um inhaltliche Einträge anzulegen.</li>
                       <li>Hier erhalten Sie weiterführende Hilfe dazu, welche Inhalte in welchem Bereich eingetragen werden.</li>
@@ -56,7 +56,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
             <li>Listenansicht</li>
                 <ul>
-                      <li>Bester Weg, um Teilprojekte und Beteiligte anzulegen.</li>
+                      <li>Bester Weg, um (Teil-)Projekte und Beteiligte anzulegen.</li>
                       <li>Sie sehen alle bereits eingetragenen Daten eines Bereiches, können sie auswählen und editieren.</li>
                       <li>Sie können einen neuen Eintrag in diesem Bereich anlegen.</li>
                 </ul>
