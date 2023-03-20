@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
- 
+
   <body class="content" id="content-entities-impact">
-  
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-	
+
 	 <?php /* Alte Navigation kann geloescht werden.
 	 <h1>&nbsp;</h1>
 	 <!-- Platzhalter deutsch / englisch für Auswahl anderer Sprache -->
@@ -36,15 +36,15 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n1><a href="de-project-step.php">Nutzung_im_Projektverlauf</a></n1><br> <!-- geprueft, unterschiedliche Titel -->
 	  <n1><a href="de-project-details.php">Details</a></n1> <!-- Datei fehlt -->
 	  */ ?>
-  
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
-  
+
 	<main>
       <h1>Gesellschaftliche Wirkungen</h1>
 
 		<article>
 		<h2>Wirkungen unterscheiden</h2>
-		<p>Die Einträge in Säule 4, 5 und 6 des Impact Pathway stehen inhaltlich im Zusammenhang.
+		<p>Die Einträge in Säule 4, 5 und 6 des Wirkungspfads stehen inhaltlich im Zusammenhang.
     Anhand der folgenden Abbildung können Sie leichter zwischen den Säulen unterscheiden.
 </p>
 
@@ -58,6 +58,6 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 
 	<?php include("includes/footer.inc.php"); echo "\n";?>
-    
+
   </body>
 </html>

@@ -36,15 +36,15 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
   <main>
 
 
-        <h1>Zugangsrechte zum Projekt</h1>
+        <h1>Zugangsrechte zum (Teil-)Projekt</h1>
 
   		<article>
-  		<h2>Bearbeitungsrechte beim Anlegen eines Projektes festlegen</h1>
-  		<p>Wenn Sie ein Teilprojekt anlegen, können Sie zwischen zwei Optionen von Zugangsrechten auswählen.
+  		<h2>Bearbeitungsrechte beim Anlegen eines (Teil-)Projektes festlegen</h1>
+  		<p>Wenn Sie ein (Teil-)Projekt anlegen, können Sie zwischen zwei Optionen von Zugangsrechten auswählen.
           <ul>
-            <li>Option A - <strong>Offener Zugang für alle Mitglieder des Verbundes:</strong><br>Alle Mitglieder des Verbundes können im Arbeitsbereich Ihres Projektes den Verwertungsplan und den Zwischenbericht einsehen und bearbeiten.</li>
+            <li>Option A - <strong>Offener Zugang für alle Mitglieder des Verbundes:</strong><br>Alle Mitglieder des Verbundes können im Arbeitsbereich Ihres (Teil-)Projektes den Verwertungsplan und den Zwischenbericht einsehen und bearbeiten.</li>
             <br>
-            <li>Option B - <strong>Zugang  nur für Mitglieder des Projektes:</strong><br>Nur Mitglieder des Projektes können im Arbeitsbereich Ihres Projektes den Verwertungsplan und Zwischenbericht einsehen und bearbeiten sowie Aktionen durchführen.</li>
+            <li>Option B - <strong>Zugang  nur für Mitglieder des (Teil-)Projektes:</strong><br>Nur Mitglieder des (Teil-)Projektes können im Arbeitsbereich Ihres (Teil-)Projektes den Verwertungsplan und Zwischenbericht einsehen und bearbeiten sowie Aktionen durchführen.</li>
           </ul>
 
       </p>
@@ -54,7 +54,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
       <p>Wichtig:
           <ul>
             <li>Einträge und deren Inhalte sind für alle Mitglieder des Verbundes <strong>sichtbar und editierbar</strong>, unabhängig davon, ob Option A oder B gewählt wurde.</li>
-            <li>Aktionen, wie Projektmitarbeitende verwalten, easy-online-Import durchführen, etc., sind immer nur für Mitglieder des Projektes mit der entsprechenden Rolle möglich. D.h. die Einstellung der Zugangsrechte ist unabhängig davon.</li>
+            <li>Aktionen, wie Projektmitarbeitende verwalten, easy-online-Import durchführen, etc., sind immer nur für Mitglieder des (Teil-)Projektes mit der entsprechenden Rolle möglich. D.h. die Einstellung der Zugangsrechte ist unabhängig davon.</li>
           </ul>
 
       </p>

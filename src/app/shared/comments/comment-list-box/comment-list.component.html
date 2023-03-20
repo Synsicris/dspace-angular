@@ -8,6 +8,7 @@
   <div class="card-body p-0 overflow-auto">
     <div class="d-flex justify-content-end add-section">
       <ds-comment-create
+        [relatedBoard]="relatedBoard"
         [itemId]="itemUuid"
         [relatedEntityType]="relatedEntityType"
         [targetEntityType]="'comment'"

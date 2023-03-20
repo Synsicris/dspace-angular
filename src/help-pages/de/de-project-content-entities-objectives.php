@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
 
   <body class="content" id="content-entities-objectives">
-  
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-	
+
 	 <?php /* Alte Navigation kann geloescht werden.
 	 <h1>&nbsp;</h1>
 	 <!-- Platzhalter deutsch / englisch für Auswahl anderer Sprache -->
@@ -36,22 +36,22 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n1><a href="de-project-step.php">Nutzung_im_Projektverlauf</a></n1><br> <!-- geprueft, unterschiedliche Titel -->
 	  <n1><a href="de-project-details.php">Details</a></n1> <!-- Datei fehlt -->
 	  */ ?>
-  
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
-  
+
 	<main>
       <h1>Ziele</h1>
 		<article>
 
       <h2>Wie werden die Projektziele im Monitoring-Tool dargestellt?</h2>
-      <p>In Ihrer Vorhabensbeschreibung gibt es die Abschnitte <em>Gesamtziele des Projektes</em> und <em>wissenschaftlich-technische Arbeitsziele</em>. Im Monitoring-Tool geben Sie diese Ziele in Ihren Impact Pathway ein, unterteilt in Projektziele im engeren Sinne (Säule 2 und 3) und Ziele im Sinne von intendierten Wirkungen (Säule 4 und 5).
+      <p>In Ihrer Vorhabensbeschreibung gibt es die Abschnitte <em>Gesamtziele des Projektes</em> und <em>wissenschaftlich-technische Arbeitsziele</em>. Im Monitoring-Tool geben Sie diese Ziele in Ihren Wirkungspfad ein, unterteilt in Projektziele im engeren Sinne (Säule 2 und 3) und Ziele im Sinne von intendierten Wirkungen (Säule 4 und 5).
 
     </p>
     <p><strong>Projektziele im engeren Sinne:</strong></p>
       <ul>
-        <li>In Säule 2 sind die klassischen wissenschaftlich-technischen Arbeitsziele des Projekts eingetragen.</li>
+        <li>In Säule 2 sind die klassischen wissenschaftlich-technischen Arbeitsziele des (Teil-)Projekts eingetragen.</li>
         <li>In Säule 3 werden alle Ziele im Bereich Interaktion und Transfer hervorgehoben, unabhängig davon, ob sie Teil des Forschungsprozesses sind (wie in der transdisziplinären Forschung) oder ob sie als nachgelagert zum Forschungsprozess angesehen werden.</li>
-        <li>Wichtig ist in Säule 2 und 3, dass Sie zwischen den Zielen und den Maßnahmen/Arbeiten im Projekt unterscheiden, die zum Erreichen dieser Ziele umgesetzt werden. Die Ziele werden auf der ersten Ebene des Impact Pathway erfasst. Die Maßnahmen/Arbeiten tragen Sie zu jedem einzelnen Ziel in der zweiten Ebene des Impact Pathway ein (siehe <a href="de-project-about-structure.php">Inhalte strukturieren</a>).</li>
+        <li>Wichtig ist in Säule 2 und 3, dass Sie zwischen den Zielen und den Maßnahmen/Arbeiten im (Teil-)Projekt unterscheiden, die zum Erreichen dieser Ziele umgesetzt werden. Die Ziele werden auf der ersten Ebene des Wirkungspfads erfasst. Die Maßnahmen/Arbeiten tragen Sie zu jedem einzelnen Ziel in der zweiten Ebene des Wirkungspfads ein (siehe <a href="de-project-content-structure.php">Inhalte strukturieren</a>).</li>
 
 
       </ul>
@@ -59,7 +59,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
       <p><strong>Ziele im Sinne von intendierten Wirkungen:</strong></p>
         <ul>
           <li>In Säule 4 verdeutlichen Sie die Ziele in Bezug auf die mögliche Nutzung der Ergebnisse in Form einer Lösung, Veränderung oder Innovation sowie weitere Bereiche, in denen Sie Ihre Zielsetzung in Bezug auf die Anwendung verdeutlichen können, z.B. dass eine Ausgründung oder Patentanmeldung beabsichtigt ist.</li>
-          <li>In Säule 5 verdeutlichen Sie die Ziele des Projektes in Bezug auf die erwartete gesellschaftliche Wirkung des Projektes. Also das, was sich für die Gesellschaft positiv verändert, wenn Projektergebnisse genutzt werden.</li>
+          <li>In Säule 5 verdeutlichen Sie die Ziele des (Teil-)Projektes in Bezug auf die erwartete gesellschaftliche Wirkung des (Teil-)Projektes. Also das, was sich für die Gesellschaft positiv verändert, wenn Projektergebnisse genutzt werden.</li>
         </ul>
 
 
@@ -85,7 +85,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
         <ul>
           <li>Welche Ziele werden durch die Zusammenarbeit der Partner angestrebt?</li>
           <li>Was soll im Austausch mit anderen Akteuren herausgefunden werden?</li>
-          <li>Welche Anforderungen oder Erfahrungen von Akteuren sollen in das Projekt integriert werden?</li>
+          <li>Welche Anforderungen oder Erfahrungen von Akteuren sollen in das (Teil-)Projekt integriert werden?</li>
           <li>Was soll im Transfer erreicht werden? Welche „Outputs“ werden für den Wissenstransfer erstellt?</li>
         </ul>
 
@@ -99,6 +99,6 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 
 	<?php include("includes/footer.inc.php"); echo "\n";?>
-    
+
   </body>
 </html>
