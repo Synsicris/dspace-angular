@@ -23,6 +23,7 @@ import { URLCombiner } from '../../../core/url-combiner/url-combiner';
 import {
   TypeDescriptionMetadata
 } from '../../../entity-groups/research-entities/item-list-elements/search-result-list-elements/comment/comment-search-result-list-element.component';
+import { Metadata } from '../../../core/shared/metadata.utils';
 
 @Injectable({
   providedIn: 'root'
@@ -288,12 +289,17 @@ export class CommentUtilsService {
       case 'workingplan':
         return (relatedItem) => of(`${relatedItem.entityType}`);
       case environment.impactPathway.impactPathwayStepEntity:
-        return (relatedItem) =>
-          this.itemService.findById(relatedItem.firstMetadata(environment.impactPathway.impactPathwayParentRelationMetadata)?.value)
+        return (relatedItem) => {
+          const metadata = relatedItem.firstMetadata(environment.impactPathway.impactPathwayParentRelationMetadata);
+          // IMPORTANT: this is a fallback strategy for older impact-pathway where the authority was not saved properly
+          const ipwId = Metadata.hasValidItemAuthority(metadata?.authority) ? metadata.authority : metadata.value;
+          return this.itemService.findById(ipwId)
             .pipe(
               getFirstCompletedRemoteData(),
               map(ipw => `${ipw.payload.entityType}.${this.dsoNameService.getName(relatedItem)} - ${this.dsoNameService.getName(ipw.payload)} `)
             );
+        };
+        break;
       // related to exploitationPlan Steps
       // we must return the name of the linked funding and the label 'Exploitationplan'
       case environment.interimReport.questionsBoardStepEntityName:
