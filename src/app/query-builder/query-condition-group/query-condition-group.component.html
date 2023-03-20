@@ -6,10 +6,11 @@
     <!-- container with complete filter group and button -->
     <div class="row">
 
-      <!-- col-md-3 first container with one selector - added  px-2 -->
-      <div class="col-md-4 px-2">
+      <!-- FIRST COL: with one select-value-selector
+      ........................................... -->
+      <div class="col-md-4 pl-3 pr-2">
 
-        <!-- Dropdown-Selector "Select Value" -->
+        <!-- First Dropdown-Selector "Select Value" -->
         <ng-select
           #firstSelect
           formControlName="defaultFilter"
@@ -36,7 +37,10 @@
       <!-- end first column col-md-3 -->
 
 
-      <!-- col-md-9 second column with two selectors and add-filter-button -->
+      <!-- SECOND COL: with (two selectors) or (selector + datepicker) and add-filter-button
+      .................................................................................. -->
+
+      <!-- the 3 following div's are congruent -->
       <div class="col-md-8">
 
         <div
@@ -51,7 +55,8 @@
           
           <div class="w-100 d-flex" [formGroupName]="i">
 
-            <!-- Dropdown-Selector "Select Filter" -->
+            <!-- COL-3 -->
+            <!-- Second Dropdown-Selector "Select Filter" -->
             <ng-select
               formControlName="filter"
               class="col-md-3 px-0 mr-2"
@@ -72,7 +77,7 @@
               </ng-option>
             </ng-select>
 
-            <!-- Range popup DatePicket --><!-- not visible -->
+            <!-- Range popup DatePicket -->
             <div class="form-group-calendar hidden">
               <div class="input-group">
                 <input name="datepicker"
@@ -99,8 +104,9 @@
               </div>
             </div>
 
-            <!-- date picker, appears, when a date is selected as filter. Therefore the following selector "Select Value" disappears, 
-              added px-0 to reduce space -->
+            <!-- COL-5 -->
+            <!-- date picker, appears, when a date is selected as filter. 
+              Therefore the following selector "Select Value" disappears -->
             <div class="d-flex col-md-5 px-0" *ngIf="queryGroup.get(i + '.filter')?.value?.filterType === 'date'"
                  data-test="query-condition-date">
               <div class="input-group col-md-5 px-0 mr-1">
@@ -128,13 +134,16 @@
               </div>
             </div>
 
-            <!-- Dropdown-Selector "Select Value" -->
+            <!-- COL-5 -->
+            <!-- Third Dropdown-Selector "Select Value"
+            mr-auto causes the following buttons to be on the right margin
+            (didn't find, what the previous used class mr-select means - 230317 rex) -->
             <ng-select
               #select
               data-test="query-condition-select"
               formControlName="value"
               *ngIf="queryGroup.get(i + '.filter')?.value?.filterType !== 'date'"
-              class="col-md-3 px-0 mr-select pr-2"
+              class="col-md-5 px-0 mr-auto"
               [virtualScroll]="true"
               [clearable]="false"
               [loading]="isValueListLoading && select.isOpen"
@@ -161,6 +170,7 @@
               </ng-option>
             </ng-select>
 
+            <!-- COL-3 -->
             <!-- Button "Add Filter" -->
             <div class="col-md-3 text-center px-0" *ngIf="isLast">
               <button
@@ -181,6 +191,7 @@
               <span>AND</span>
             </div>
 
+            <!-- COL-1 -->
             <!-- container for delete-buttons, keeps place but stays empty till the delete button appears -->
             <div class="col-md-1 px-0 text-center ml-auto"
                  [class.mr-n1] = "queryGroup.get(i + '.filter')?.value?.filterType !== 'date'">
