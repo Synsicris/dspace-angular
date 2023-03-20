@@ -20,6 +20,11 @@ import { RemoteData } from '../../../core/data/remote-data';
 export class CommentListComponent implements OnInit {
 
   /**
+   * The board in which this comment is visualized: ImpactPathway, ExploitationPlan, InterimReport or their steps
+   */
+  @Input() relatedBoard: Item;
+
+  /**
    * The project community's id
    */
   @Input() projectCommunityId: string;

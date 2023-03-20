@@ -12,9 +12,10 @@ import { ImpactPathwayService } from '../../core/impact-pathway.service';
 import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
-import { getRemoteDataPayload } from '../../../core/shared/operators';
+import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../../core/shared/operators';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { environment } from '../../../../environments/environment';
+import { ItemDataService } from '../../../core/data/item-data.service';
 
 @Component({
   selector: 'ds-objective',
@@ -60,10 +61,13 @@ export class ObjectiveComponent implements OnInit {
   @Input() isVersionOfAnItem = false;
 
   objectiveItem$: Observable<Item>;
+  impactPathWayItem$: Observable<Item>;
+  impactPathWayStepItem$: Observable<Item>;
 
   constructor(
     private impactPathwayService: ImpactPathwayService,
     private modalService: NgbModal,
+    private itemService: ItemDataService,
     protected editItemDataService: EditItemDataService,
     protected route: ActivatedRoute
   ) {
@@ -77,10 +81,22 @@ export class ObjectiveComponent implements OnInit {
       this.canEditButton$.next(canEdit);
     });
     this.objectiveItem$ = this.route.data.pipe(
-      map((data: Data) => data.objectivesItem ),
+      map((data: Data) => data.objectivesItem),
       take(1),
       getRemoteDataPayload()
     );
+    this.impactPathWayItem$ =
+      this.itemService.findById(this.impactPathwayStep.parentId)
+        .pipe(
+          getFirstCompletedRemoteData(),
+          map(rd => rd.payload)
+        );
+    this.impactPathWayStepItem$ =
+      this.itemService.findById(this.impactPathwayStep.id)
+        .pipe(
+          getFirstCompletedRemoteData(),
+          map(rd => rd.payload)
+        );
   }
 
   /**

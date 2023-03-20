@@ -56,7 +56,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 <article>
   <h2>Wozu dient die Kommentarfunktion?</h2>
 
-    <p>Die Kommentarfunktion können Sie beispielsweise nutzen, um Vermerke vorzubereiten oder sich selbst Erinnerungen an bestimmte Tätigkeiten in Bezug auf das Projekt zu setzen. Außerdem erleichtern die Kommentare die Übergabe des Projektes an andere Projektbetreuer.</p>
+    <p>Die Kommentarfunktion können Sie beispielsweise nutzen, um Vermerke vorzubereiten oder sich selbst Erinnerungen an bestimmte Tätigkeiten in Bezug auf das (Teil-)Projekt zu setzen. Außerdem erleichtern die Kommentare die Übergabe des (Teil-)Projektes an andere Projektbetreuer.</p>
 </article>
 
     </main>

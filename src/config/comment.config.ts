@@ -10,5 +10,6 @@ export interface CommentConfig extends Config {
   commentRelationItemVersionMetadata?: string;
   commentRelationProjectMetadata?: string;
   commentRelationProjectVersionMetadata?: string;
+  commentRelationBoardMetadata?: string;
 }
 
