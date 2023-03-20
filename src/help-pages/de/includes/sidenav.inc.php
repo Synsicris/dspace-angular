@@ -28,7 +28,7 @@
             -->
             </li>
             <!-- 7 Punkte aus der dritten Ebene  vorerst in die zweite Ebene verlegt-->
-            <li><a href="de-project-content-entities-proj.php" id="nav-content-entities-proj"><span>Verbundprojekt und Teilprojekt</span></a></li>
+            <li><a href="de-project-content-entities-proj.php" id="nav-content-entities-proj"><span>Verbundprojekt und (Teil-)Projekt</span></a></li>
             <li><a href="de-project-content-entities-involved.php" id="nav-content-entities-involved"><span>Beteiligte</span></a></li>
             <li><a href="de-project-content-entities-objectives.php" id="nav-content-entities-objectives"><span>Ziele</span></a></li>
             <li><a href="de-project-content-entities-events.php" id="nav-content-entities-events"><span>Interaktion</span></a></li>
@@ -38,7 +38,7 @@
         </ul>
     </li>
 
-    <li><a href="de-project-ipw.php" id="nav-ipw" class="folder"><span>Impact Pathway</span></a>
+    <li><a href="de-project-ipw.php" id="nav-ipw" class="folder"><span>Wirkungspfad</span></a>
     	<ul class="ipw nav2">
         	<li><a href="de-project-ipw-about.php" id="nav-ipw-about"><span>Hintergrund</span></a></li>
             <li><a href="de-project-ipw-help.php" id="nav-ipw-help"><span>Hilfe und Beispiel</span></a></li>

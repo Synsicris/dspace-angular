@@ -40,8 +40,8 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 		<p>Im Monitoring-Tool können Sie die Einträge für drei verschiedene Zwecke strukturieren:
       <ol>
         <li>Der <strong>Wirkungspfad</strong> stellt Zusammenhänge zwischen Zielen, Arbeiten und beabsichtigten Wirkungen her.</li>
-        <li>Der <strong>Arbeitsplan </strong>strukturiert die Arbeiten des Projektes in Arbeitspakete und erlaubt es, Zeiträume und Verantwortlichkeiten festzulegen.</li>
-        <li>Der <strong>Verwertungsplan </strong>wird von jedem Teilprojekt separat durchgeführt.</li>
+        <li>Der <strong>Arbeitsplan </strong>strukturiert die Arbeiten des (Teil-)Projektes in Arbeitspakete und erlaubt es, Zeiträume und Verantwortlichkeiten festzulegen.</li>
+        <li>Der <strong>Verwertungsplan </strong>wird von jedem (Teil-)projekt separat durchgeführt.</li>
       </ol>
 
 
@@ -134,7 +134,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 <article>
 <h2>Einträge mehrfach anpinnen: Drei zusammenhängende Strukturierungsoberflächen</h2>
-  
+
   </article>
 
 
