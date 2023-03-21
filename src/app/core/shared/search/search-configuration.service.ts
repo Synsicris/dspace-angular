@@ -515,9 +515,11 @@ export class SearchConfigurationService implements OnDestroy {
    * @param {link}   link the link to use for the request
    * @param {string} scope UUID of the object for which config the filter config is requested, when no scope is provided the configuration for the whole repository is loaded
    * @param {string} configurationName the name of the configuration
+   * @param useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                    no valid cached version. Defaults to true
    * @returns {Observable<RemoteData<SearchFilterConfig[]>>} The found filter configuration
    */
-  private getFilterConfigByLink(link: string, scope?: string, configurationName?: string): Observable<RemoteData<SearchFilterConfig[]>> {
+  private getFilterConfigByLink(link: string, scope?: string, configurationName?: string, useCachedVersionIfAvailable = true): Observable<RemoteData<SearchFilterConfig[]>> {
     const href$ = this.halService.getEndpoint(link).pipe(
       map((url: string) => {
         const args: string[] = [];
@@ -545,7 +547,7 @@ export class SearchConfigurationService implements OnDestroy {
           return FacetConfigResponseParsingService;
         }
       });
-      this.requestService.send(request, true);
+      this.requestService.send(request, useCachedVersionIfAvailable);
     });
 
     return this.rdb.buildFromHref(href$).pipe(
@@ -579,10 +581,12 @@ export class SearchConfigurationService implements OnDestroy {
    * Request the filter configuration for a given scope or the whole repository
    * @param {string} scope UUID of the object for which config the filter config is requested, when no scope is provided the configuration for the whole repository is loaded
    * @param {string} configurationName the name of the configuration
+   * @param {string} useCachedVersionIfAvailable If this is true, the request will only be sent if there's
+   *                                             no valid cached version. Defaults to true
    * @returns {Observable<RemoteData<SearchFilterConfig[]>>} The found filter configuration
    */
-  getConfig(scope?: string, configurationName?: string): Observable<RemoteData<SearchFilterConfig[]>> {
-    return this.getFilterConfigByLink(this.facetLinkPathPrefix, scope, configurationName);
+  getConfig(scope?: string, configurationName?: string, useCachedVersionIfAvailable = true): Observable<RemoteData<SearchFilterConfig[]>> {
+    return this.getFilterConfigByLink(this.facetLinkPathPrefix, scope, configurationName, useCachedVersionIfAvailable);
   }
 
   /**
