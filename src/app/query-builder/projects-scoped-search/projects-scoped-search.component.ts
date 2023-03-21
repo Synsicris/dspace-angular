@@ -16,7 +16,7 @@ export class ProjectsScopedSearchComponent implements OnInit, OnChanges {
   /**
    * Custom message if no result
    */
-  @Input() notFoundMessageKey: string = 'search.results.no-results.custom';
+  @Input() notFoundMessageKey = 'search.results.no-results.custom';
   /**
    * Configuration name to use for the search
    */
@@ -27,14 +27,16 @@ export class ProjectsScopedSearchComponent implements OnInit, OnChanges {
    */
   @ViewChildren('searchPage') searchPage: QueryList<any>;
 
+  forcedEmbeddedKeys: Map<string, string[]>;
   ngOnInit(): void {
+    this.forcedEmbeddedKeys = new Map([[this.configuration, ['metrics, version']]]);
     this.buildQuery(this.query);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.query && !changes.query.isFirstChange()) {
       this.buildQuery(changes.query.currentValue);
-      this.searchPage.first.refresh();
+      this.searchPage.first.triggerFreshSearch(this.query);
     }
   }
 

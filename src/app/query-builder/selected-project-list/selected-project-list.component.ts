@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { SearchService } from '../../core/shared/search/search.service';
 import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
-import { toDSpaceObjectListRD } from '../../core/shared/operators';
+import { getFirstCompletedRemoteData, toDSpaceObjectListRD } from '../../core/shared/operators';
 import { RemoteData } from '../../core/data/remote-data';
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { Item } from '../../core/shared/item.model';
@@ -32,7 +32,9 @@ export class SelectedProjectListComponent implements OnInit, OnChanges {
 
   paginationConfig: PaginationComponentOptions;
 
-  resultListRD$: Observable<RemoteData<PaginatedList<Item>>>;
+  processing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  resultListRD$: BehaviorSubject<RemoteData<PaginatedList<Item>>> = new BehaviorSubject<RemoteData<PaginatedList<Item>>>(null);
 
   sortConfig: SortOptions;
 
@@ -54,7 +56,7 @@ export class SelectedProjectListComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.query && !changes.query.isFirstChange()) {
       this.buildQuery(changes.query.currentValue);
-      this.getResults();
+      this.getResults(false);
     }
 
   }
@@ -69,11 +71,12 @@ export class SelectedProjectListComponent implements OnInit, OnChanges {
 
   }
 
-  getResults() {
+  getResults(useCachedVersionIfAvailable = true) {
+    this.processing$.next(true);
     const currentPagination$ = this.paginationService.getCurrentPagination(this.paginationConfig.id, this.paginationConfig);
     const currentSort$ = this.paginationService.getCurrentSort(this.paginationConfig.id, this.sortConfig);
 
-    this.resultListRD$ = combineLatest([currentPagination$, currentSort$]).pipe(
+    combineLatest([currentPagination$, currentSort$]).pipe(
       switchMap(([currentPagination, currentSort]) => this.searchService.search(
         new PaginatedSearchOptions({
           configuration: this.configuration,
@@ -81,10 +84,16 @@ export class SelectedProjectListComponent implements OnInit, OnChanges {
           pagination: currentPagination,
           sort: currentSort,
           forcedEmbeddedKeys: ['metrics']
-        }), null, false)
-        .pipe(toDSpaceObjectListRD()) as Observable<RemoteData<PaginatedList<Item>>>
+        }), null, useCachedVersionIfAvailable)
+        .pipe(
+          toDSpaceObjectListRD(),
+          getFirstCompletedRemoteData()
+        ) as Observable<RemoteData<PaginatedList<Item>>>
       )
-    );
+    ).subscribe((result: RemoteData<PaginatedList<Item>>) => {
+      this.resultListRD$.next(result);
+      this.processing$.next(false);
+    });
   }
 
   private buildQuery(query) {
