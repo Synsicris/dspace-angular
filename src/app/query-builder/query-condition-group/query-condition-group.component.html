@@ -1,7 +1,16 @@
+<!-- container filter group with padding-y -->
 <div class="container query-group-container">
+  
   <form [formGroup]="formGroup" *ngIf="formGroup">
+
+    <!-- container with complete filter group and button -->
     <div class="row">
-      <div class="col-md-3">
+
+      <!-- FIRST COL: with one select-value-selector
+      ........................................... -->
+      <div class="col-md-4 pl-3 pr-2">
+
+        <!-- First Dropdown-Selector "Select Value" -->
         <ng-select
           #firstSelect
           formControlName="defaultFilter"
@@ -14,17 +23,26 @@
           "
           (change)="onDefaultValueSelect($event)"
           (scrollToEnd)="getSearchFilterConfigs()"
-        >
+        > 
+        <!-- Dropdown Menu "Select Value" -->
           <ng-option
             *ngFor="let value of firstDefaultValues"
             [value]="value"
             [disabled]="value.disable"
           >
-            {{ 'query-builder.synsicris.label.' + firstDefaultFilter + '.' + value.label | translate | titlecase }}
+            {{ 'query-builder.synsicris.label.' + firstDefaultFilter + '.' + value.label | translate | titlecase }}       
           </ng-option>
         </ng-select>
       </div>
-      <div class="col-md-9">
+      <!-- end first column col-md-3 -->
+
+
+      <!-- SECOND COL: with (two selectors) or (selector + datepicker) and add-filter-button
+      .................................................................................. -->
+
+      <!-- the 3 following div's are congruent -->
+      <div class="col-md-8">
+
         <div
           formArrayName="queryGroup"
           class="row mb-3"
@@ -34,11 +52,14 @@
             let isLast = last
           "
         >
-          <!-- FormGroup -->
+          
           <div class="w-100 d-flex" [formGroupName]="i">
+
+            <!-- COL-3 -->
+            <!-- Second Dropdown-Selector "Select Filter" -->
             <ng-select
               formControlName="filter"
-              class="col-md-3 px-0 mr-1"
+              class="col-md-3 px-0 mr-2"
               [virtualScroll]="true"
               [clearable]="false"
               [loading]="isFilterListLoading"
@@ -47,6 +68,7 @@
               "
               (change)="onFilterSelect($event, i)"
             >
+              <!-- Dropdown Menu "Select Filter"  -->
               <ng-option
                 *ngFor="let filter of secondColumnFilters"
                 [value]="filter"
@@ -81,7 +103,11 @@
                 </ng-template>
               </div>
             </div>
-            <div class="d-flex col-md-5" *ngIf="queryGroup.get(i + '.filter')?.value?.filterType === 'date'"
+
+            <!-- COL-5 -->
+            <!-- date picker, appears, when a date is selected as filter. 
+              Therefore the following selector "Select Value" disappears -->
+            <div class="d-flex col-md-5 px-0" *ngIf="queryGroup.get(i + '.filter')?.value?.filterType === 'date'"
                  data-test="query-condition-date">
               <div class="input-group col-md-5 px-0 mr-1">
                 <input #dpFromDate
@@ -108,12 +134,16 @@
               </div>
             </div>
 
+            <!-- COL-5 -->
+            <!-- Third Dropdown-Selector "Select Value"
+            mr-auto causes the following buttons to be on the right margin
+            (didn't find, what the previous used class mr-select means - 230317 rex) -->
             <ng-select
               #select
               data-test="query-condition-select"
               formControlName="value"
               *ngIf="queryGroup.get(i + '.filter')?.value?.filterType !== 'date'"
-              class="col-md-3 px-0 mr-select ml-3"
+              class="col-md-5 px-0 mr-auto"
               [virtualScroll]="true"
               [clearable]="false"
               [loading]="isValueListLoading && select.isOpen"
@@ -128,6 +158,7 @@
                 onValuesScroll(queryGroup.get(i + '.filter')?.value.name, i)
               "
             >
+              <!-- Dropdown Menu "Select Value"  -->
               <ng-option
                 *ngFor="
                   let value of filterFacetValues(i)
@@ -139,7 +170,9 @@
               </ng-option>
             </ng-select>
 
-            <div class="col-md-3 text-center ml-auto" *ngIf="isLast">
+            <!-- COL-3 -->
+            <!-- Button "Add Filter" -->
+            <div class="col-md-3 text-center px-0" *ngIf="isLast">
               <button
                 [disabled]="!queryGroup.get(i + '.value')?.value"
                 id="addButton"
@@ -153,24 +186,33 @@
                 }}
               </button>
             </div>
-            <div class="col-md-3 p-0 text-center ml-auto" *ngIf="!isLast">
+
+            <div class="col-md-3 px-0 text-center ml-auto" *ngIf="!isLast">
               <span>AND</span>
             </div>
 
-            <div class="col-md-1 p-0 text-center ml-auto"
+            <!-- COL-1 -->
+            <!-- container for delete-buttons, keeps place but stays empty till the delete button appears -->
+            <div class="col-md-1 px-0 text-center ml-auto"
                  [class.mr-n1] = "queryGroup.get(i + '.filter')?.value?.filterType !== 'date'">
+
+              <!-- button delete-filter-row -->
               <button *ngIf="queryGroup.length > 1"
                 id="deleteButton"
                 type="button"
-                class="btn btn-danger"
+                class="btn text-danger btn-link"
                 (click)="deleteCondition(i, queryGroup.get(i + '.value'))"
               >
                 <i aria-hidden="true" class="fa fa-trash"></i>
               </button>
+
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
+
+          </div><!-- end div class="w-100 d-flex" -->
+        </div><!-- end formArrayGroup -->
+      </div><!-- end second column col-md-9 -->
+
+    </div><!-- end container with complete filter group and button -->
   </form>
-</div>
+</div><!-- end container with padding-top and -bottom -->

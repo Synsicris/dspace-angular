@@ -186,23 +186,6 @@
                 <i class="fas fa-not-equal"></i>
               </button>
 
-              <!-- new position 2 of button "unlink" with status-span,
-                to make it appear in a row with Edit and Delete,
-                removed from position 1 (rex 230310)  -->
-              <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end" data-test="remove-step"
-                      title="{{'working-plan.chart.button.remove' | translate}}"
-                      [class.ml-1]="node.level !== 0"
-                      [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf"
-                      (click)="deleteStep(node); $event.stopPropagation()">
-                <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)">
-                  <i class='fas fa-thumbtack'></i>
-                </span>
-                <span *ngIf="(isProcessingWorkpackageRemove(node) | async)">
-                  <i class='fas fa-circle-notch fa-spin'></i>
-                </span>
-              </button>
-               <!-- end of new position of button "unlink" -->
-
               <!-- button "edit" -->
               <ds-working-plan-chart-item-edit-button
                 [compareMode]="compareMode"
@@ -216,6 +199,23 @@
                 [isVersionOfAnItem]="isVersionOf"
                 [node]="node"
               ></ds-working-plan-chart-item-delete-button>
+
+              <!-- new position 2 of button "unlink" with status-span,
+              to make it appear in a row with Edit and Delete,
+              removed from position 1 (rex 230310)  -->
+              <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end" data-test="remove-step"
+                title="{{'working-plan.chart.button.remove' | translate}}"
+                [class.ml-1]="node.level !== 0"
+                [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf"
+                (click)="deleteStep(node); $event.stopPropagation()">
+                <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)">
+                  <i class='fas fa-thumbtack'></i>
+                </span>
+                <span *ngIf="(isProcessingWorkpackageRemove(node) | async)">
+                  <i class='fas fa-circle-notch fa-spin'></i>
+                </span>
+              </button>
+              <!-- end of new position of button "unlink" -->
 
             </div>
 

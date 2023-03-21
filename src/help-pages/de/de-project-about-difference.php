@@ -40,10 +40,10 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
         <ul>
               <li>Statt Fließtext in einem Textdokument zu einem bestimmten Gliederungspunkt
                 der Vorhabensbeschreibung zu schreiben, zerlegen Sie <strong>die Informationen zum
-                Projekt in einzelne Einträge</strong>. Jeder Eintrag gehört zu einer bestimmten Kategorie
+                (Teil-)Projekt in einzelne Einträge</strong>. Jeder Eintrag gehört zu einer bestimmten Kategorie
                 (z.B. Arbeitspaket oder Veranstaltung).</li>
               <li>Über die Einträge in den verschiedenen Kategorien stellen Sie <strong> Hintergründe,
-                Ziele, Arbeiten, Ergebnisse und Wirkungen des Projektes </strong>dar. </li>
+                Ziele, Arbeiten, Ergebnisse und Wirkungen des (Teil-)Projektes </strong>dar. </li>
               <li>Jeder Eintrag hat eine Bezeichnung und ein Beschreibungsfeld und je nach
                 Kategorie eines Eintrags werden weitere Informationen erfragt. </li>
               <li>Im Tool finden Sie einen Arbeitsplan, den Wirkungspfad
@@ -82,9 +82,9 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
                 <li>Für den Fördermittelgeber wird eine Version mit Leserechten erstellt. </li>
                 <li>Das Projektkonsortium arbeitet in seiner Version weiter und aktualisiert die Angaben kontinuierlich. Die Aktualisierung wird durch Schnittstellen unterstützt, aus denen Projektdaten (profi des Fördermittelgebers), Publikationsdaten und Patentinformationen importiert werden können.</li>
                 <li>Für Zwischenberichte oder zu anderen gewünschten Zeitpunkten kann dem Fördermittelgeber wieder eine aktuelle Version mit Leserechten erstellt werden.</li>
-                <li>Die Versionen können miteinander verglichen werden, um Veränderungen im Projekt zu darzustellen.</li>
-                <li>Projektkonsortien und die beteiligten Forschenden haben damit jederzeit die Dokumentation und den Nachweis der Projektarbeit sowie möglicher Wirkungen des Projektes in verschiedenen Darstellungsformen verfügbar.</li>
-                <li>Fördermittelgeber erhalten eine Dokumentation zum Projekt, die sich für die Projektbetreuung, wirkungsorientierte Förderprozesse und weitere Aufgaben vielfältig nutzen lässt.</li>
+                <li>Die Versionen können miteinander verglichen werden, um Veränderungen im (Teil-)Projekt zu darzustellen.</li>
+                <li>Projektkonsortien und die beteiligten Forschenden haben damit jederzeit die Dokumentation und den Nachweis der Projektarbeit sowie möglicher Wirkungen des (Teil-)Projektes in verschiedenen Darstellungsformen verfügbar.</li>
+                <li>Fördermittelgeber erhalten eine Dokumentation zum (Teil-)Projekt, die sich für die Projektbetreuung, wirkungsorientierte Förderprozesse und weitere Aufgaben vielfältig nutzen lässt.</li>
             </ul>
 
         <h3> Programmsteuerung und –evaluierung </h3>

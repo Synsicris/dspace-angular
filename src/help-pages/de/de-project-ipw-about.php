@@ -37,7 +37,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
   <main>
 
 
-      <h1>Impact Pathway - Hintergrund</h1>
+      <h1>Wirkungspfad - Hintergrund</h1>
 
 		<article>
 		<p>Das Entwickeln von Wirkungspfaden wird methodisch in der Wirkungsplanung eingesetzt. Wirkungspfade stammen aus der Entwicklungszusammenarbeit und finden zunehmend Anwendung in Forschung und Evaluierung.</p>
