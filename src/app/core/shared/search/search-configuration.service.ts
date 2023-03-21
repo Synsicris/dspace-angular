@@ -600,6 +600,24 @@ export class SearchConfigurationService implements OnDestroy {
   }
 
   /**
+   * Update SearchOptions object using the given one
+   *
+   * @param options
+   */
+  updateSearchOptions(options: SearchOptions) {
+    this.searchOptions.next(options);
+  }
+
+  /**
+   * Update PaginatedSearchOptions object using the given one
+   *
+   * @param options
+   */
+  updatePaginatedSearchOptions(options: PaginatedSearchOptions) {
+    this.paginatedSearchOptions.next(options);
+  }
+
+  /**
    * @returns {Observable<Params>} Emits the current view mode as a partial SearchOptions object
    */
   private getViewModePart(defaultViewMode: ViewMode): Observable<any> {
