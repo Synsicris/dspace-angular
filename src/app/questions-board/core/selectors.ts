@@ -108,8 +108,6 @@ export function questionsBoardUploadsByBoardIdSelector(boardId: string): Memoize
   return subStateSelector<AppState, QuestionsBoard>(sectionDataSelector, 'uploads');
 }
 
-
-
 /**
  * Returns true if compare mose id active.
  * @function isCompareMode

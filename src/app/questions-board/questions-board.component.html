@@ -25,11 +25,14 @@
   <ng-container *ngIf="showUploadStep">
     <ds-questions-upload-step [questionsBoardObject]="questionsBoardObject"
                               [messagePrefix]="messagePrefix"
-                              [projectCommunityId]="projectCommunityId"
-                              [fundingCommunity]="fundingCommunity"
-                              [compareMode]="(compareMode | async)"
-                              [isFunder]="isFunder"
-                              [isVersionOfAnItem]="(isVersionOfAnItem$ | async)">
+                             >
     </ds-questions-upload-step>
+
+    <!--
+    [projectCommunityId]="projectCommunityId"
+    [fundingCommunity]="fundingCommunity"
+    [compareMode]="(compareMode | async)"
+    [isFunder]="isFunder"
+    [isVersionOfAnItem]="(isVersionOfAnItem$ | async)" -->
   </ng-container>
 </div>

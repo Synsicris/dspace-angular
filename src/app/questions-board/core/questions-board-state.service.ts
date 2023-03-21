@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import { WorkspaceitemSectionUploadFileObject } from './../../core/submission/models/workspaceitem-section-upload-file.model';
 import { Injectable } from '@angular/core';
 
@@ -226,7 +227,14 @@ export class QuestionsBoardStateService {
   getFilesFromQuestionsBoard(questionsBoardId: string){
     return this.store.pipe(select(
       questionsBoardUploadsByBoardIdSelector(questionsBoardId)
+    ));
+  }
+
+  getUploadedFileFromQuestionsBoard(questionsBoardId: string, fileId: string){
+    return this.store.pipe(select(
+      questionsBoardUploadsByBoardIdSelector(questionsBoardId)
     ),
+      map((uploads: WorkspaceitemSectionUploadFileObject[]) => uploads.find(x => isEqual(x.uuid, fileId)))
     );
   }
 }

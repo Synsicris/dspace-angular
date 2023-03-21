@@ -1,7 +1,7 @@
 import { QuestionsBoardStateService } from './../../../../questions-board/core/questions-board-state.service';
 import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 
-import { BehaviorSubject, Subscription, Observable } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { DynamicFormControlModel, } from '@ng-dynamic-forms/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +19,7 @@ import { SubmissionJsonPatchOperationsService } from '../../../../core/submissio
 import { SubmissionSectionUploadFileEditComponent } from './edit/section-upload-file-edit.component';
 import { Bitstream } from '../../../../core/shared/bitstream.model';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
+import { QuestionsBoardService } from '../../../../questions-board/core/questions-board.service';
 
 /**
  * This component represents a single bitstream contained in the submission
@@ -177,6 +178,7 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
     private submissionService: SubmissionService,
     private uploadService: SectionUploadService,
     private questionsBoardStateService: QuestionsBoardStateService,
+    private questionsBoardService: QuestionsBoardService,
   ) {
     this.readMode = true;
   }
@@ -187,22 +189,26 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
   ngOnChanges() {
     if (this.availableAccessConditionOptions) {
       // Retrieve file state
-      let fileState$: Observable<any>;
       if (hasValue(this.submissionId)) {
-         fileState$ = this.uploadService
-        .getFileData(this.submissionId, this.sectionId, this.fileId);
-      } else if (hasValue(this.questionBoardId)) {
-        fileState$ = this.questionsBoardStateService.getFilesFromQuestionsBoard(this.questionBoardId);
-      }
-
-      this.subscriptions.push(
-        fileState$.pipe(
-            filter((bitstream) => isNotUndefined(bitstream)))
-          .subscribe((bitstream) => {
+        this.subscriptions.push(
+          this.uploadService
+            .getFileData(this.submissionId, this.sectionId, this.fileId).pipe(
+              filter((bitstream) => isNotUndefined(bitstream)))
+            .subscribe((bitstream) => {
               this.fileData = bitstream;
             }
-          )
-      );
+            )
+        );
+      } else if (hasValue(this.questionBoardId)) {
+        this.subscriptions.push(
+          this.questionsBoardStateService.getUploadedFileFromQuestionsBoard(this.questionBoardId, this.fileId).pipe(
+            filter((bitstream) => isNotUndefined(bitstream)))
+            .subscribe((bitstream) => {
+              this.fileData = bitstream;
+            }
+            )
+        );
+      }
     }
   }
 
@@ -273,19 +279,14 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
   }
 
   protected loadFormMetadata() {
-    if ( hasValue(this.configMetadataForm) ) {
-      this.configMetadataForm.rows.forEach((row) => {
-        row.fields.forEach((field) => {
-          field.selectableMetadata.forEach((metadatum) => {
-            this.formMetadata.push(metadatum.metadata);
-          });
+    this.configMetadataForm.rows.forEach((row) => {
+      row.fields.forEach((field) => {
+        field.selectableMetadata.forEach((metadatum) => {
+          this.formMetadata.push(metadatum.metadata);
         });
-      }
-      );
-    } else {
-      // TODO: get values when configMetadataForm has no value
-      this.formMetadata.push('dc.title', 'dc.description', 'dc.type');
+      });
     }
+    );
   }
 
   /**
@@ -293,9 +294,10 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
    */
   protected deleteFile() {
     this.operationsBuilder.remove(this.pathCombiner.getPath());
+    const elementId = this.submissionId ?? `${this.questionBoardId}:${this.questionsBoardService.getQuestionsBoardEditMode()}`;
     this.subscriptions.push(this.operationsService.jsonPatchByResourceID(
       this.submissionService.getSubmissionObjectLinkName(),
-      this.submissionId,
+      elementId,
       this.pathCombiner.rootElement,
       this.pathCombiner.subRootElement)
       .subscribe(() => {

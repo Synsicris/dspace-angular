@@ -1,3 +1,4 @@
+
 <ds-collapsable-panel #ipwCollapse class="d-block mb-3"
                        [sidebarPanelTitle]="getStepTitle()"
                        [startOpen]="false"
@@ -6,61 +7,64 @@
     <i dsQuestionsBoardIcon [questionsBoardType]="'upload'"></i>
   </ng-container>
   <ng-container ngProjectAs="panelContent">
-    <ds-alert [content]="'submission.sections.upload.info'"
-              [dismissible]="true"
-              [type]="AlertTypeEnum.Info"></ds-alert>
+    <div class="container py-2">
+      <ds-alert [content]="'submission.sections.upload.info'"
+                [dismissible]="true"
+                [type]="AlertTypeEnum.Info"></ds-alert>
 
-    <ds-uploader *ngIf="initializedUploaderOptions | async"
-                        [dropMsg]="dropMsg"
-                        [dropOverDocumentMsg]="dropOverDocumentMsg"
-                        [enableDragOverDocument]="true"
-                        [uploadFilesOptions]="uploadFilesOptions"
-                        (onCompleteItem)="onCompleteItem($event)"
-                        (onUploadError)="onUploadError()"></ds-uploader>
+      <ds-uploader *ngIf="initializedUploaderOptions | async"
+                          [dropMsg]="dropMsg"
+                          [dropOverDocumentMsg]="dropOverDocumentMsg"
+                          [enableDragOverDocument]="true"
+                          [uploadFilesOptions]="uploadFilesOptions"
+                          (onCompleteItem)="onCompleteItem($event)"
+                          (onUploadError)="onUploadError()"></ds-uploader>
 
-    <ng-container *ngIf="fileList.length == 0">
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="text-center"><span class="text-muted">{{'submission.sections.upload.no-file-uploaded' | translate}}</span></h3>
-        </div>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="fileList.length > 0">
-
-      <div *ngIf="collectionDefaultAccessConditions.length > 0" class="row">
-        <div class="col-sm-12" >
-          <ds-alert [type]="AlertTypeEnum.Warning">
-            <ng-container *ngIf="collectionPolicyType === 1">
-              {{ 'submission.sections.upload.header.policy.default.nolist' | translate:{ "collectionName": collectionName } }}
-            </ng-container>
-            <ng-container *ngIf="collectionPolicyType === 2">
-              {{ 'submission.sections.upload.header.policy.default.withlist' | translate:{ "collectionName": collectionName } }}
-            </ng-container>
-            <span class="clearfix"></span>
-            <ds-submission-section-upload-access-conditions [accessConditions]="collectionDefaultAccessConditions"></ds-submission-section-upload-access-conditions>
-          </ds-alert>
-        </div>
-      </div>
-
-      <ng-container *ngFor="let fileEntry of fileList">
-        <ds-submission-upload-section-file
-                                          [singleAccessCondition]="singleAccessCondition"
-                                          [availableAccessConditionOptions]="availableAccessConditionOptions"
-                                          [collectionId]="(getCollection() | async)"
-                                          [collectionPolicyType]="collectionPolicyType"
-                                          [fileId]="fileIndexes[fileList.indexOf(fileEntry)]"
-                                          [fileIndex]="fileList.indexOf(fileEntry)"
-                                          [fileName]="fileNames[fileList.indexOf(fileEntry)]"
-                                          [readOnly]="false"
-                                          [sectionId]="'upload'"
-                                          [questionBoardId]="questionsBoardObject.uuid"></ds-submission-upload-section-file>
+      <ng-container *ngIf="fileList.length == 0">
         <div class="row">
           <div class="col-md-12">
-            <hr/>
+            <h3 class="text-center"><span class="text-muted">{{'submission.sections.upload.no-file-uploaded' | translate}}</span></h3>
           </div>
         </div>
       </ng-container>
-    </ng-container>
+
+      <ng-container *ngIf="fileList.length > 0">
+        <div *ngIf="collectionDefaultAccessConditions.length > 0" class="row">
+          <div class="col-sm-12" >
+            <ds-alert [type]="AlertTypeEnum.Warning">
+              <ng-container *ngIf="collectionPolicyType === 1">
+                {{ 'submission.sections.upload.header.policy.default.nolist' | translate:{ "collectionName": collectionName } }}
+              </ng-container>
+              <ng-container *ngIf="collectionPolicyType === 2">
+                {{ 'submission.sections.upload.header.policy.default.withlist' | translate:{ "collectionName": collectionName } }}
+              </ng-container>
+              <span class="clearfix"></span>
+              <ds-submission-section-upload-access-conditions [accessConditions]="collectionDefaultAccessConditions"></ds-submission-section-upload-access-conditions>
+            </ds-alert>
+          </div>
+        </div>
+
+        <ng-container *ngFor="let fileEntry of fileList">
+          <ds-submission-upload-section-file
+                                            [singleAccessCondition]="singleAccessCondition"
+                                            [availableAccessConditionOptions]="availableAccessConditionOptions"
+                                            [collectionId]="(getCollection() | async)"
+                                            [configMetadataForm]="(configMetadataForm$ | async)"
+                                            [collectionPolicyType]="collectionPolicyType"
+                                            [fileId]="fileIndexes[fileList.indexOf(fileEntry)]"
+                                            [fileIndex]="fileList.indexOf(fileEntry)"
+                                            [fileName]="fileNames[fileList.indexOf(fileEntry)]"
+                                            [readOnly]="false"
+                                            [sectionId]="sectionType"
+                                            [questionBoardId]="questionsBoardObject.id"></ds-submission-upload-section-file>
+          <div class="row">
+            <div class="col-md-12">
+              <hr/>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
   </ng-container>
 </ds-collapsable-panel>
+

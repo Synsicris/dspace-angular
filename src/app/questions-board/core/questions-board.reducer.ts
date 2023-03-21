@@ -414,13 +414,11 @@ function replaceQuestionsBoardSteps(state: QuestionsBoardState, action: InitComp
 
 function uploadFilesToQuestionBoard(state: QuestionsBoardState, action: UploadFilesToQuestionBoardAction): QuestionsBoardState {
   const questionsBoardEntry = state.questionsBoard;
-  const existingFiles = [...questionsBoardEntry[action.payload.questionsBoardId].uploads];
-  existingFiles.push(...action.payload.files);
 
   return Object.assign({}, state, { loaded: true }, {
     questionsBoard: Object.assign({}, questionsBoardEntry, {
       [action.payload.questionsBoardId]: Object.assign(new QuestionsBoard(), questionsBoardEntry[action.payload.questionsBoardId], {
-        uploads:  existingFiles
+        uploads:[...action.payload.files]
       })
     })
   });
