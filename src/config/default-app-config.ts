@@ -1382,7 +1382,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.description',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.Text,
+            truncatable: true
           }
         ]
       }

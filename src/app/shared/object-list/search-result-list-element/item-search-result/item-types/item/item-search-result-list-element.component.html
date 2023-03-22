@@ -37,7 +37,7 @@
             </ng-container>
           </div>
         </div>
-        <ds-truncatable [id]="dso.id" *ngIf="displayConfigurations === null && object !== undefined && object !== null">
+        <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
           <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
              rel="noopener noreferrer"
              [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out"
