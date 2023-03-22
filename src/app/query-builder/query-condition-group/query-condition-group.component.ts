@@ -610,6 +610,7 @@ export class QueryConditionGroupComponent implements OnInit {
                 authorityQuery = `${fieldWithLanguage}_keyword:"${valueWithAuthority}"` +
                   ` OR ${field}_keyword:"${valueWithAuthority}"` +
                   ` OR ${fieldWithLanguage}_authority:"${authorityValue}"` +
+                  ` OR ${field}_authority:"${authorityValue}"` +
                   ` OR ${field}_keyword:"${authorityValue}" OR `;
               }
 
