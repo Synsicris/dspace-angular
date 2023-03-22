@@ -435,6 +435,7 @@ export class QueryConditionGroupComponent implements OnInit {
   onValuesScroll(searchFilter: string, idx: number) {
     const options: SearchOptions = new SearchOptions({
       configuration: this.configurationName,
+      query: encodeURIComponent(this.searchOptQuery),
     });
 
     this.getFacetValues(
