@@ -8485,11 +8485,11 @@
 
   // "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.graphitemtype.tab": "Darstellung nach Typ",
+  "search.filters.applied.charts.graphitemtype.tab": "Typ",
 
   // "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.graphpubldate.tab": "Darstellung nach Datum",
+  "search.filters.applied.charts.graphpubldate.tab": "Datum",
 
   // "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR",
   // TODO New key - Add a translation
@@ -16058,6 +16058,78 @@
   "layout.field.label.innovationpotential.synsicris.coverage.regionalprimary": "Primärer Einsatzbereich",
 
   // "layout.field.label.innovationpotential.synsicris.coverage.regionalsecondary": "Later dissemination",
-  "layout.field.label.innovationpotential.synsicris.coverage.regionalsecondary": "Spätere Verbreitung"
+  "layout.field.label.innovationpotential.synsicris.coverage.regionalsecondary": "Spätere Verbreitung",
+
+  // "search.filters.applied.charts.secondStepSearchProjectItemsForAdminAndFunders.title": "Search graphs",
+  "search.filters.applied.charts.secondStepSearchProjectItemsForAdminAndFunders.title": "Diagramm",
+
+  // "search.filters.filter.synsicrisOairecerifEventStartdate.min.label": "Start",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.min.label": "Start",
+
+  // "search.filters.filter.synsicrisOairecerifEventStartdate.max.label": "End",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.max.label": "Ende",
+
+  // "search.filters.filter.synsicrisCoverageRegionalsecondary.head": "Regional Secondary",
+  "search.filters.filter.synsicrisCoverageRegionalsecondary.head": "Region der Verbreitung",
+
+  // "search.filters.filter.synsicrisCoverageRegionalsecondary.placeholder": "Regional Secondary",
+  "search.filters.filter.synsicrisCoverageRegionalsecondary.placeholder": "Region der Verbreitung",
+
+  // "search.filters.filter.synsicrisCoverageRegionalsecondary.label": "Search Regional Secondary",
+  "search.filters.filter.synsicrisCoverageRegionalsecondary.label": "Suche Region der Verbreitung",
+
+  // "search.filters.filter.synsicrisTypeLevel.head": "Type Level",
+  "search.filters.filter.synsicrisTypeLevel.head": "Art des Readiness-Level",
+
+  // "search.filters.filter.synsicrisTypeLevel.placeholder": "Type Level",
+  "search.filters.filter.synsicrisTypeLevel.placeholder": "Art des Readiness-Level",
+
+  // "search.filters.filter.synsicrisTypeLevel.label": "Search Type Level",
+  "search.filters.filter.synsicrisTypeLevel.label": "Suche Art des Readiness-Level",
+
+  // "search.filters.filter.synsicrisTypeEvidence.head": "Evidence Type",
+  "search.filters.filter.synsicrisTypeEvidence.head": "Art des Nachweises",
+
+  // "search.filters.filter.synsicrisTypeEvidence.placeholder": "Evidence Type",
+  "search.filters.filter.synsicrisTypeEvidence.placeholder": "Art des Nachweises",
+
+  // "search.filters.filter.synsicrisTypeEvidence.label": "Search Evidence Type",
+  "search.filters.filter.synsicrisTypeEvidence.label": "Suche Art des Nachweises",
+
+  // "search.filters.filter.synsicrisType.head": "Access Type",
+  "search.filters.filter.synsicrisType.head": "Zugänglichkeit",
+
+  // "search.filters.filter.synsicrisType.placeholder": "Access Type",
+  "search.filters.filter.synsicrisType.placeholder": "Zugänglichkeit",
+
+  // "search.filters.filter.synsicrisType.label": "Search Access Type",
+  "search.filters.filter.synsicrisType.label": "Suche Zugänglichkeit",
+
+  // "search.filters.filter.synsicrisRelationFundingobjective.head": "Funding Objective",
+  "search.filters.filter.synsicrisRelationFundingobjective.head": "Förderziel",
+
+  // "search.filters.filter.synsicrisRelationFundingobjective.placeholder": "Funding Objective",
+  "search.filters.filter.synsicrisRelationFundingobjective.placeholder": "Förderziel",
+
+  // "search.filters.filter.synsicrisRelationFundingobjective.label": "Search Funding Objective",
+  "search.filters.filter.synsicrisRelationFundingobjective.label": "Suche Förderziel",
+
+  // "search.filters.filter.synsicrisLevelStart.head": "Level Start",
+  "search.filters.filter.synsicrisLevelStart.head": "Readiness-Level zum Start",
+
+  // "search.filters.filter.synsicrisLevelStart.placeholder": "Level Start",
+  "search.filters.filter.synsicrisLevelStart.placeholder": "Readiness-Level zum Start",
+
+  // "search.filters.filter.synsicrisLevelStart.label": "Search Level Start",
+  "search.filters.filter.synsicrisLevelStart.label": "Suche Readiness-Level zum Start",
+
+  // "search.filters.filter.synsicrisLevelEnd.head": "Level End",
+  "search.filters.filter.synsicrisLevelEnd.head": "Readiness-Level zum Ende",
+
+  // "search.filters.filter.synsicrisLevelEnd.placeholder": "Level End",
+  "search.filters.filter.synsicrisLevelEnd.placeholder": "Readiness-Level zum Ende",
+
+  // "search.filters.filter.synsicrisLevelEnd.label": "Search Level End",
+  "search.filters.filter.synsicrisLevelEnd.label": "Suche Readiness-Level zum Ende"
 
 }
