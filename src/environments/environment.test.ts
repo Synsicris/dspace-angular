@@ -596,6 +596,7 @@ export const environment: BuildConfig = {
     questionsBoardTaskFormSection: 'exploitation_plan_task_form',
     questionsBoardEditFormSection: 'exploitation_plan-edit_form',
     questionsBoardEditMode: 'EXPLOITATIONPLAN',
+    questionsBoardStepIcon: true
   },
   interimReport: {
     questionsBoardFormPrefix: 'interim_report',
@@ -608,6 +609,7 @@ export const environment: BuildConfig = {
     questionsBoardTaskFormSection: 'interim_report_task_form',
     questionsBoardEditFormSection: 'interim_report-edit_form',
     questionsBoardEditMode: 'INTERIMREPORT',
+    questionsBoardStepIcon: false
   },
   displayItemSearchResult: {
     Publication: [
@@ -678,8 +680,13 @@ export const environment: BuildConfig = {
   comments: {
     commentEditFormName: 'comments',
     commentEditFormSection: 'comments',
-    commentEditMode: 'CUSTOM',
+    commentAdminEditMode: 'ADMIN_EDIT',
+    commentEditMode: 'COMMENT',
     commentEntityType: 'comment',
-    commentRelationItemMetadata: 'synsicris.relation.item'
+    commentRelationItemMetadata: 'synsicris.relation.commentItem',
+    commentRelationItemVersionMetadata: 'synsicris.relation.commentItemVersion',
+    commentRelationProjectMetadata: 'synsicris.relation.commentProject',
+    commentRelationProjectVersionMetadata: 'synsicris.relation.commentProjectVersion',
+    commentRelationBoardMetadata: 'synsicris.relation.commentBoard',
   }
 };

@@ -1,5 +1,4 @@
-import { isEqual } from 'lodash';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -10,11 +9,14 @@ import { QuestionsBoardStateService } from './core/questions-board-state.service
 import { QuestionsBoardStep } from './core/models/questions-board-step.model';
 import { hasValue } from '../shared/empty.util';
 import { ActivatedRoute } from '@angular/router';
+import { VersionSelectedEvent } from '../shared/item-version-list/item-version-list.component';
+import { isEqual } from 'lodash';
 
 @Component({
   selector: 'ds-questions-board',
   templateUrl: './questions-board.component.html',
-  styleUrls: ['./questions-board.component.scss']
+  styleUrls: ['./questions-board.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuestionsBoardComponent implements OnInit, OnDestroy {
   /**
@@ -57,7 +59,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   /**
    * The list of questions board steps
    */
-  questionsBoardStep$: BehaviorSubject<QuestionsBoardStep[]> = new BehaviorSubject<[]>([]);
+  questionsBoardStep$: Observable<QuestionsBoardStep[]>;
 
   /**
    * A boolean representing if item is a version of original item
@@ -78,14 +80,10 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.questionsBoardObjectId = this.questionsBoardObject?.id;
     this.showUploadStep = isEqual(this.questionsBoardObject.entityType , 'interim_report');
+    this.questionsBoardStep$ = this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardObjectId);
     this.subs.push(
       this.questionsBoardStateService.isCompareModeActive()
-        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode)),
-      this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardObjectId).pipe(
-        filter((steps: QuestionsBoardStep[]) => steps?.length > 0)
-      ).subscribe((steps: QuestionsBoardStep[]) => {
-        this.questionsBoardStep$.next(steps);
-      })
+        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
     );
 
     this.aroute.data.pipe(
@@ -98,10 +96,6 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
 
   }
 
-  getQuestionsBoardStep(): Observable<QuestionsBoardStep[]> {
-    return this.questionsBoardStep$.asObservable();
-  }
-
   isLoading(): Observable<boolean> {
     return this.questionsBoardStateService.isQuestionsBoardLoaded().pipe(
       map((loaded: boolean) => !loaded)
@@ -111,10 +105,10 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   /**
    * Dispatch initialization of comparing mode
    *
-   * @param version
+   * @param selected
    */
-  onVersionSelected(version: Item) {
-    this.questionsBoardStateService.dispatchInitCompare(this.questionsBoardObject?.id, version.id);
+  onVersionSelected(selected: VersionSelectedEvent) {
+    this.questionsBoardStateService.dispatchInitCompare(selected.base?.id, selected.comparing.id, selected.active.id);
   }
 
   /**

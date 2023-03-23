@@ -32,13 +32,20 @@ export enum ComparedVersionItemStatus {
   Removed = 'removed',
   Equal = 'equal',
   Canceled = 'canceled',
-  Done = 'done'
+  Done = 'done',
+  Archieved = 'archieved',
+  PartlyArchieved = 'partly_archieved',
 }
 
 export interface ComparedVersionItem {
   item: Item;
   versionItem?: Item;
   status: ComparedVersionItemStatus;
+}
+
+export interface VersionEntry {
+  version: Version;
+  isTargetItem: boolean
 }
 
 @Injectable({
@@ -100,11 +107,15 @@ export class ProjectVersionService {
   }
 
   public getVersionByItemId(itemId: string, useCachedVersionIfAvailable = true, reRequestOnStale = true): Observable<RemoteData<Version>> {
-    return this.itemService.findById(itemId, useCachedVersionIfAvailable, reRequestOnStale, followLink('version')).pipe(
+    return this.itemService.findById(itemId, useCachedVersionIfAvailable, reRequestOnStale, followLink('version', {
+      useCachedVersionIfAvailable: false
+    })).pipe(
       getFirstCompletedRemoteData(),
       switchMap((itemRD) => {
         if (itemRD.hasSucceeded) {
-          return itemRD.payload.version;
+          return itemRD.payload.version.pipe(
+            getFirstCompletedRemoteData()
+          );
         } else {
           return createFailedRemoteDataObject$<Version>(null);
         }
@@ -118,7 +129,7 @@ export class ProjectVersionService {
    * @param itemId  The item for which to search the versions available
    * @param options the FindListOptions
    */
-  public getVersionsByItemId(itemId: string, options?: PaginatedSearchOptions): Observable<Version[]> {
+  public getVersionsByItemId(itemId: string, options?: PaginatedSearchOptions): Observable<VersionEntry[]> {
     return this.itemService.findById(itemId, true, true, followLink('version')).pipe(
       getFirstCompletedRemoteData(),
       switchMap((itemRD: RemoteData<Item>) => {
@@ -136,8 +147,10 @@ export class ProjectVersionService {
                           return listRD.hasSucceeded ? listRD.payload.page : [];
                         }),
                         map((list: Version[]) => {
-                          // exclude from the returned list the version regarding the target item itself
-                          return list.filter((entry: Version) => entry.id !== versionRD.payload.id);
+                          return list.map((entry: Version) => ({
+                            version: entry,
+                            isTargetItem: entry.id === versionRD.payload.id
+                          }));
                         })
                       );
                     } else {
@@ -293,18 +306,23 @@ export class ProjectVersionService {
     const unionList = unionWith(targetItemList, versionedItemList, _unionComparator);
     return unionList.map((targetItem) => {
       let versionedItem: Item = null;
-      const versionedItemIndex = findIndex(versionedItemList, (entry) => {
-        return hasVersion(targetItem, entry);
+      let versionedItemIndex = findIndex(itemAddedList, (entry) => {
+        return targetItem.id === entry.id;
       });
-      let status = ComparedVersionItemStatus.Equal;
+      let status = ComparedVersionItemStatus.New;
       if (versionedItemIndex === -1) {
         // item has not a versioned one, so check if is new or old removed
-        const newItemIndex = findIndex(itemAddedList, (entry) => {
+        versionedItemIndex = findIndex(itemRemovedList, (entry) => {
           return targetItem.id === entry.id;
         });
-        status = (newItemIndex === -1) ? ComparedVersionItemStatus.Removed : ComparedVersionItemStatus.New;
-      } else {
+        status = ComparedVersionItemStatus.Removed;
+      }
+      if (versionedItemIndex === -1) {
+        status = ComparedVersionItemStatus.Equal;
         // version exists for this item, so check modified date
+        versionedItemIndex = findIndex(versionedItemList, (entry) => {
+          return hasVersion(targetItem, entry);
+        });
         versionedItem = versionedItemList[versionedItemIndex];
         if (versionedItem.lastModified !== targetItem.lastModified) {
           status = ComparedVersionItemStatus.Changed;

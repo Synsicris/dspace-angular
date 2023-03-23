@@ -38,27 +38,15 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 		<article>
 		<h2>Einträge strukturieren</h2>
 		<p>Im Monitoring-Tool können Sie die Einträge für drei verschiedene Zwecke strukturieren:
-      <ul>
-        <li>Der <strong>Impact Pathway</strong> visualisiert die Wirkungsplanung.</li>
-        <li>Der <strong>Arbeitsplan </strong>strukturiert die Arbeiten des Projektes in Arbeitspakete und erlaubt es,
-          Zeiträume und Verantwortlichkeiten festzulegen.</li>
-        <li>Der <strong>Verwertungsplan </strong>wird von jedem Teilprojekt separat durchgeführt. Dabei können alle
-          <strong>Einträge aus dem Impact Pathway und aus dem Arbeitsplan</strong> verwendet werden. Wenn das Teilprojekt
-          als geschützter Bereich angelegt wurde, können dort im Verwertungsplan weitere Einträge angelegt
-          werden, die von Mitgliedern anderer Teilprojekte nicht bearbeitet werden können.</li>
-      </ul>
-      Wie die drei Strukturierungsmöglichkeiten/-oberflächen zusammenhängen, zeigt die folgende Abbildung.
+      <ol>
+        <li>Der <strong>Wirkungspfad</strong> stellt Zusammenhänge zwischen Zielen, Arbeiten und beabsichtigten Wirkungen her.</li>
+        <li>Der <strong>Arbeitsplan </strong>strukturiert die Arbeiten des (Teil-)Projektes in Arbeitspakete und erlaubt es, Zeiträume und Verantwortlichkeiten festzulegen.</li>
+        <li>Der <strong>Verwertungsplan </strong>wird von jedem (Teil-)projekt separat durchgeführt.</li>
+      </ol>
+
 
     </p>
-
-  </article>
-
-</br>
-
-<article>
-		<img src="img/de_project_about_structure_zusammenwirken.png">
-
-		</article>
+</article>
 
 <br>
 
@@ -126,6 +114,8 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 </article>
 
+<br>
+
 <article>
 <h2>Einträge anordnen</h2>
 
@@ -138,6 +128,23 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
     </ul>
 
   </p>
+  </article>
+
+<br>
+
+<article>
+<h2>Einträge mehrfach anpinnen: Drei zusammenhängende Strukturierungsoberflächen</h2>
+
+  </article>
+
+
+
+<article>
+    <img src="img/de_project_content_structure_Fokus.png">
+
+    </article>
+  </p>
+
 
     </main>
 

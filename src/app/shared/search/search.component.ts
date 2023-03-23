@@ -20,7 +20,7 @@ import { DSpaceObject } from '../../core/shared/dspace-object.model';
 import { pushInOut } from '../animations/push';
 import { HostWindowService } from '../host-window.service';
 import { SidebarService } from '../sidebar/sidebar.service';
-import { hasValue } from '../empty.util';
+import { hasValue, isNotUndefined } from '../empty.util';
 import { RouteService } from '../../core/services/route.service';
 import { SEARCH_CONFIG_SERVICE } from '../../my-dspace-page/my-dspace-page.component';
 import { PaginatedSearchOptions } from './models/paginated-search-options.model';
@@ -67,7 +67,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   /**
    * Custom message if no result
    */
-  @Input() notFoundMessageKey: string = 'search.results.no-results';
+  @Input() notFoundMessageKey = 'search.results.no-results';
 
   /**
    * The current context
@@ -481,10 +481,10 @@ export class SearchComponent implements OnInit, OnDestroy {
    * @param searchOptions
    * @private
    */
-  private retrieveFilters(searchOptions: PaginatedSearchOptions) {
+  private retrieveFilters(searchOptions: PaginatedSearchOptions, useCachedVersionIfAvailable?: boolean) {
     this.filtersRD$.next(null);
     this.chartFiltersRD$.next(null);
-    this.searchConfigService.getConfig(searchOptions.scope, searchOptions.configuration).pipe(
+    this.searchConfigService.getConfig(searchOptions.scope, searchOptions.configuration, useCachedVersionIfAvailable).pipe(
       getFirstCompletedRemoteData(),
     ).subscribe((filtersRD: RemoteData<SearchFilterConfig[]>) => {
       const filtersPayload = filtersRD.payload.filter((entry: SearchFilterConfig) =>
@@ -525,7 +525,7 @@ export class SearchComponent implements OnInit, OnDestroy {
    *                                    no valid cached version. Defaults to true
    * @private
    */
-  private retrieveSearchResults(searchOptions: PaginatedSearchOptions, useCachedVersionIfAvailable?: boolean,) {
+  private retrieveSearchResults(searchOptions: PaginatedSearchOptions, useCachedVersionIfAvailable?: boolean) {
     this.resultsRD$.next(null);
     this.lastSearchOptions = searchOptions;
 
@@ -587,7 +587,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Refreshes the list of search results using the latest serachOptions
+   * Refreshes the list of search results using the latest search Options
    */
   refresh(): void {
     this.retrieveSearchResults(this.lastSearchOptions, false);
@@ -600,5 +600,20 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.sidebarService.toggle();
   }
 
+  /**
+   * Trigger a new search by updating search options
+   */
+  triggerFreshSearch(fixedFilterQuery?: string): void {
+    let searchOptions;
+    if (isNotUndefined(fixedFilterQuery)) {
+      this.routeService.setParameter('fixedFilterQuery', this.fixedFilterQuery);
+      searchOptions = Object.assign(new PaginatedSearchOptions({}), this.lastSearchOptions, {
+        fixedFilter: fixedFilterQuery
+      });
+    }
+
+    this.searchConfigService.updatePaginatedSearchOptions(searchOptions);
+    this.searchConfigService.updateSearchOptions(searchOptions);
+  }
 
 }

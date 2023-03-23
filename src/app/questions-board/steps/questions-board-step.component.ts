@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, skip, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,7 +19,8 @@ import { getRemoteDataPayload } from '../../core/shared/operators';
 @Component({
   selector: 'ds-questions-board-step',
   templateUrl: './questions-board-step.component.html',
-  styleUrls: ['./questions-board-step.component.scss', './../../shared/comments/comment-list-box/comment-list.component.scss']
+  styleUrls: ['./questions-board-step.component.scss', './../../shared/comments/comment-list-box/comment-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuestionsBoardStepComponent implements OnInit {
 
@@ -31,7 +32,15 @@ export class QuestionsBoardStepComponent implements OnInit {
   /**
    * The questions board step object
    */
-  @Input() public questionsBoardStep: QuestionsBoardStep;
+  _questionsBoardStep: BehaviorSubject<QuestionsBoardStep> = new BehaviorSubject<QuestionsBoardStep>(null);
+  @Input()
+  set questionsBoardStep(questionsBoardStep: QuestionsBoardStep) {
+    this._questionsBoardStep.next(questionsBoardStep);
+  }
+
+  get questionsBoardStep(): QuestionsBoardStep {
+    return this._questionsBoardStep.value;
+  }
 
   /**
    * The funding community which the questions board belong to
@@ -143,6 +152,13 @@ export class QuestionsBoardStepComponent implements OnInit {
   }
 
   /**
+   * Checks if the icon of the step should be displayed
+   */
+  isIconVisible(): boolean {
+    return this.questionsBoardService.isQuestionsBoardStepIconVisible();
+  }
+
+  /**
    * Open dialog box for editing questions board
    */
   openEditModal() {
@@ -164,10 +180,10 @@ export class QuestionsBoardStepComponent implements OnInit {
    * @param item
    */
   updateQuestionsBoardStep(item: Item) {
-    this.questionsBoardStep = this.questionsBoardService.updateQuestionsBoardStep(item, this.questionsBoardStep);
+    const updatedQuestionsBoardStep = this.questionsBoardService.updateQuestionsBoardStep(item, this.questionsBoardStep);
     this.questionsBoardStateService.dispatchUpdateQuestionsBoardStep(
-      this.questionsBoardStep.parentId,
-      this.questionsBoardStep
+      updatedQuestionsBoardStep.parentId,
+      updatedQuestionsBoardStep
     );
   }
 

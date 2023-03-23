@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicFormControlModel } from '@ng-dynamic-forms/core';
@@ -69,7 +69,7 @@ export class CreateSimpleItemComponent implements OnInit, OnDestroy {
   /**
    * The form model
    */
-  public formModel: DynamicFormControlModel[];
+  public formModel$ = new BehaviorSubject<DynamicFormControlModel[]>([]);
 
   /**
    * A boolean that indicate if to display form's submit and cancel buttons
@@ -80,6 +80,8 @@ export class CreateSimpleItemComponent implements OnInit, OnDestroy {
    * The i18n key of the info message to display
    */
   public messageInfoKey;
+
+  private subscription = new Subscription();
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -114,39 +116,49 @@ export class CreateSimpleItemComponent implements OnInit, OnDestroy {
    * Retrieve form configuration and build form model
    */
   private initFormModel() {
-    this.formConfig
-      .subscribe((formConfig: SubmissionFormModel) => {
-        this.formModel = this.formBuilderService.modelFromConfiguration(
-          null,
-          formConfig,
-          this.authorityScope || '',
-          null,
-          SubmissionScopeType.WorkspaceItem
-        );
-        this.formBuilderService.addFormModel(this.formId, this.formModel);
-      });
+    this.subscription.add(
+      this.formConfig
+        .pipe(
+          map(formConfig =>
+            this.formBuilderService.modelFromConfiguration(
+              null,
+              formConfig,
+              this.authorityScope || '',
+              null,
+              SubmissionScopeType.WorkspaceItem
+            )
+          )
+        )
+        .subscribe((formModel: DynamicFormControlModel[]) => this.formModel$.next(formModel))
+    );
+    this.subscription.add(
+      this.formModel$
+        .subscribe(formModel => this.formBuilderService.addFormModel(this.formId, formModel))
+    );
   }
 
   /**
    * Create a new SimpleItem object and emit an event containing it
    */
   public createTask(data: Observable<any>): void {
-    data.pipe(first()).subscribe((formData) => {
+    this.subscription.add(
+      data.pipe(first()).subscribe((formData) => {
 
-      const type = (formData['dspace.entity.type']) ? formData['dspace.entity.type'][0] : null;
-      const metadataMap = {};
-      Object.keys(formData).forEach((metadataName) => {
-        metadataMap[metadataName] = formData[metadataName].map((formValue: FormFieldMetadataValueObject) => ({
-          language: formValue.language,
-          value: (isNgbDateStruct(formValue.value)) ? dateToISOFormat(formValue.value) : formValue.value,
-          place: formValue.place,
-          authority: formValue.authority,
-          confidence: formValue.confidence
-        }));
-      });
+        const type = (formData['dspace.entity.type']) ? formData['dspace.entity.type'][0] : null;
+        const metadataMap = {};
+        Object.keys(formData).forEach((metadataName) => {
+          metadataMap[metadataName] = formData[metadataName].map((formValue: FormFieldMetadataValueObject) => ({
+            language: formValue.language,
+            value: (isNgbDateStruct(formValue.value)) ? dateToISOFormat(formValue.value) : formValue.value,
+            place: formValue.place,
+            authority: formValue.authority,
+            confidence: formValue.confidence
+          }));
+        });
 
-      this.createItem.emit({ type: type, metadata: metadataMap });
-    });
+        this.createItem.emit({ type: type, metadata: metadataMap });
+      })
+    );
   }
 
   /**
@@ -154,7 +166,8 @@ export class CreateSimpleItemComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     this.formId = null;
-    this.formModel = null;
+    this.formModel$.complete();
     this.formBuilderService.removeFormModel(this.formId);
+    this.subscription.unsubscribe();
   }
 }

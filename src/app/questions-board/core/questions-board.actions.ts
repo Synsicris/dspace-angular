@@ -523,6 +523,7 @@ export class InitCompareAction implements Action {
   payload: {
     questionsBoardId: string;
     compareQuestionsBoardId: string;
+    activeQuestionBoardId: string;
   };
 
   /**
@@ -532,9 +533,11 @@ export class InitCompareAction implements Action {
    *    the base questions board's id to compare
    * @param compareQuestionsBoardId
    *    the questions board's id to compare with the current one
+   * @param activeQuestionBoardId
+   *    the loaded question board's id in the interface
    */
-  constructor(questionsBoardId: string, compareQuestionsBoardId: string) {
-    this.payload = { questionsBoardId, compareQuestionsBoardId };
+  constructor(questionsBoardId: string, compareQuestionsBoardId: string, activeQuestionBoardId: string) {
+    this.payload = { questionsBoardId, compareQuestionsBoardId, activeQuestionBoardId };
   }
 }
 

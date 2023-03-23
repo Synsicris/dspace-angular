@@ -36,41 +36,35 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
   <main>
 
 
-        <h1>Bearbeitungsrechte festlegen</h1>
+        <h1>Zugangsrechte zum (Teil-)Projekt</h1>
 
   		<article>
-  		<h2>Bearbeitungsrechte beim Anlegen eines Teilprojektes festlegen</h1>
-  		<p>Wenn Sie ein Teilprojekt anlegen, können Sie zwischen zwei Optionen von Bearbeitungsrechten auswählen. Diese Bearbeitungsrechte gelten für Inhalte, die von den Mitgliedern Ihres Teilprojektes angelegt wurden:
+  		<h2>Bearbeitungsrechte beim Anlegen eines (Teil-)Projektes festlegen</h1>
+  		<p>Wenn Sie ein (Teil-)Projekt anlegen, können Sie zwischen zwei Optionen von Zugangsrechten auswählen.
           <ul>
-            <li><strong>Option A:</strong> unbeschränkte Bearbeitungsrechte für <strong>alle Mitglieder</strong> des Verbundprojektes</li>
-            <li><strong>Option B:</strong> Bearbeitungsrechte <strong>beschränkt auf Mitglieder des Verbundes</strong></li>
+            <li>Option A - <strong>Offener Zugang für alle Mitglieder des Verbundes:</strong><br>Alle Mitglieder des Verbundes können im Arbeitsbereich Ihres (Teil-)Projektes den Verwertungsplan und den Zwischenbericht einsehen und bearbeiten.</li>
+            <br>
+            <li>Option B - <strong>Zugang  nur für Mitglieder des (Teil-)Projektes:</strong><br>Nur Mitglieder des (Teil-)Projektes können im Arbeitsbereich Ihres (Teil-)Projektes den Verwertungsplan und Zwischenbericht einsehen und bearbeiten sowie Aktionen durchführen.</li>
           </ul>
 
       </p>
 
       <br>
 
-      <p>Die gewählten Bearbeitungsrechte wirken sich auf zwei Aspekte aus:
+      <p>Wichtig:
           <ul>
-            <li>Wer (A oder B) in Ihre Teilprojekt-Seite navigieren, dort Aktionen durchführen und den Verwertungsplan einsehen darf</li>
-            <li>Wer (A oder B) Einträge von Mitgliedern Ihres Teilprojektes bearbeiten darf</li>
+            <li>Einträge und deren Inhalte sind für alle Mitglieder des Verbundes <strong>sichtbar und editierbar</strong>, unabhängig davon, ob Option A oder B gewählt wurde.</li>
+            <li>Aktionen, wie Projektmitarbeitende verwalten, easy-online-Import durchführen, etc., sind immer nur für Mitglieder des (Teil-)Projektes mit der entsprechenden Rolle möglich. D.h. die Einstellung der Zugangsrechte ist unabhängig davon.</li>
           </ul>
 
       </p>
 
-      <br>
 
-      <p><strong>Wichtig:</strong>
-
-          Einträge und deren Inhalte sind für alle Mitglieder des Verbundprojektes <strong>sichtbar</strong>, unabhängig davon, ob Option A oder B gewählt wurde.
-
-
-      </p>
   </article>
   <br>
 
       <article>
-      <img src="img/de_project_use_permissions_Zugriff_Projekt.png">
+      <img src="img/de_project_use_permission_Zugriff.png">
 
       </article>
       <br>

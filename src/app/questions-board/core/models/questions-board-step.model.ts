@@ -27,9 +27,7 @@ export class QuestionsBoardStep {
   }
 
   getTasksIds(): string[] {
-    const tasksIds: string[] = this.tasks.map((task) => task.id);
-
-    return tasksIds;
+    return this.tasks.map((task) => task.id);
   }
 
   getTaskIndex(taskId: string): number {

@@ -1,4 +1,3 @@
-import { ActivatedRoute } from '@angular/router';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
@@ -16,6 +15,10 @@ import { Workpackage } from '../../core/models/workpackage-step.model';
 import { environment } from '../../../../environments/environment';
 import { hasValue } from '../../../shared/empty.util';
 import { Item } from '../../../core/shared/item.model';
+import {
+  VersionItemSelectedIds,
+  VersionSelectedEvent
+} from '../../../shared/item-version-list/item-version-list.component';
 
 /**
  * @title Tree with nested nodes
@@ -58,7 +61,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
   @Input() public compareMode: Observable<boolean>;
 
   workpackagesCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  currentComparingWorkingPlan: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  currentComparingWorkingPlan: BehaviorSubject<VersionItemSelectedIds> = new BehaviorSubject<VersionItemSelectedIds>(null);
   chartDateView: Observable<ChartDateViewType>;
   ChartDateViewType = ChartDateViewType;
 
@@ -68,8 +71,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private modalService: NgbModal,
     private workingPlanService: WorkingPlanService,
-    private workingPlanStateService: WorkingPlanStateService,
-    private aroute: ActivatedRoute,
+    private workingPlanStateService: WorkingPlanStateService
   ) {
   }
 
@@ -80,8 +82,19 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
         this.workpackagesCount.next(count);
       }),
       this.workingPlanStateService.getCurrentComparingWorkingPlan().pipe(
-      ).subscribe((compareItemId: string) => {
-        this.currentComparingWorkingPlan.next(compareItemId);
+      ).subscribe(({
+                     workingplanId,
+                     selectedWorkingplanId,
+                     activeWorkingplanId,
+                     baseWorkingplanId,
+                     comparingWorkingplanId
+                   }) => {
+        this.currentComparingWorkingPlan.next({
+          baseId: baseWorkingplanId,
+          comparingId: comparingWorkingplanId,
+          selectedId: selectedWorkingplanId,
+          activeId: activeWorkingplanId
+        });
       })
     );
 
@@ -143,16 +156,16 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
   /**
    * Dispatch initialization of comparing mode
    *
-   * @param version
+   * @param selected
    */
-  onVersionSelected(version: Item) {
-    this.workingPlanStateService.dispatchInitCompare(version.id);
+  onVersionSelected(selected: VersionSelectedEvent) {
+    this.workingPlanStateService.dispatchInitCompare(selected.base.id, selected.comparing.id, selected.selected.id, selected.active.id);
   }
 
   /**
    * Dispatch cleaning of comparing mode
    */
   onVersionDeselected() {
-    this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, environment.workingPlan.workingPlanPlaceMetadata, this.isVersionOf);
+    this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan, environment.workingPlan.workingPlanPlaceMetadata, this.isVersionOf);
   }
 }

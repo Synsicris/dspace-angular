@@ -7,6 +7,8 @@ import { Item } from '../../../../core/shared/item.model';
 import { getItemPageRoute } from '../../../../item-page/item-page-routing-paths';
 import { BehaviorSubject } from 'rxjs';
 import { isNotNull } from '../../../../shared/empty.util';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
+import { take } from 'rxjs/operators';
 
 /**
  * This component render the sidebar of the tabs layout
@@ -114,7 +116,12 @@ export abstract class CrisLayoutTabsComponent {
       if (tab.shortname === 'workingplan' || tab.shortname === 'exploitationplans' || tab.shortname === 'interimreport') {
         this.router.navigateByUrl(getItemPageRoute(this.item) + '/' + tab.shortname);
       } else {
-        this.location.replaceState(getItemPageRoute(this.item) + '/' + tab.shortname);
+        fromPromise(
+          this.router.navigate([], { queryParams: {}, replaceUrl: true, relativeTo: this.route })
+        ).pipe(
+          take(1)
+        ).subscribe(
+          () => this.location.replaceState(getItemPageRoute(this.item) + '/' + tab.shortname));
       }
     }
   }

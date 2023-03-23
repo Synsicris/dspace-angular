@@ -1,33 +1,15 @@
 /* -----------------------------------------------------------
-revised rex (230210)
------------------------------------------------------------ */
-/* these two webfonts are pvorisorily included directly, 
-because I haven't found a way to include them only via font-family. */
-
+revised rex (230224), not yet activated!
+----------------------------------------------------------- *
 /* Webfonts
 ----------------------------------------------- */
 /* Nunito Italic */
 @font-face {
 	font-family: 'Nunito-MediumItalic';
-	src: url("../../../../help-pages/styles/fonts/nunito/Nunito-MediumItalic.ttf") format('truetype');
+	src: url("../../assets//fonts/nunito/Nunito-MediumItalic.ttf") format('truetype');
 	font-weight: 500;
 	font-style: normal;
 	}
-
-/* As long as the inclusion of icons via the language file does not work, they are included here via CSS. 
-In case it will work, the icons and the fontawesome webfont in this file can be removed.*/
-
- @font-face {
-	font-family: 'Font Awesome 5 Free';
-	src: url('../../../../help-pages/styles/fonts/fontawesome/fontawesome-webfont.eot?v=4.3.0');
-	src: url('../../../../help-pages/styles/fonts/fontawesome/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'),
-	url('../../../../help-pages/styles/fonts/fontawesome/fontawesome-webfont.woff2?v=4.3.0') format('woff2'),
-	url('../../../../help-pages/styles/fonts/fontawesome/fontawesome-webfont.woff?v=4.3.0') format('woff'),
-	url('../../../../help-pages/styles/fonts/fontawesome/fontawesome-webfont.ttf?v=4.3.0') format('truetype'),
-	url('../../../../help-pages/styles/fonts/fontawesome/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
-	font-weight: normal;
-	font-style: normal
-}
 
 // complete bar
 nav.nav-breadcrumb {   
@@ -47,10 +29,6 @@ ol.breadcrumb {
   background-color: transparent; // Breadcrumb-Links had a background-color, that is not needed
 }
 
-li.breadcrumb-item {
-  display: flex;
-}
-
 .breadcrumb-item-limiter {
   display: inline-block;
   max-width: var(--ds-breadcrumb-max-length); //truncating too long words
@@ -67,63 +45,50 @@ li.breadcrumb-item {
 
 li.breadcrumb-item {
 
-  a:link, a:hover, a:focus, a:visited, a.active {
+  display: flex;
 
-    color: var(--ds-breadcrumb-link-color) !important;
+  div.breadcrumb-item-limiter a {   // spezifischer div.breadcrumb-item-limiter notwendig, damit Links ansprechen
+
+    color: var(--ds-breadcrumb-link-color);
     padding:2px 0 4px 0;
 
     /* Entity-tags appear on the left side of a breadcrumb link and contain the name of the entity type.
     For project and subproject they also contain an icon and they are designed in the color scheme 
     of these layers. Entity-tags are set invisible basically.
-    Only the ones you explicitly choose below (the selection here is not final) will be displayed
-
-    */
-    & span {display:none;}
-
-    &[href*="/entities/project/"] span,         // Verbundprojekt (Icon "shekel-sign")
-    &[href*="/entities/funding/"] span,         // Teilprojekt (Icon "cube")
-    &[href*="/entities/impactpathway"] span,    // Impact Pathway
-    &[href*="/entities/targetgroup"] span       // Akteursgruppe
+    Only the ones you explicitly choose below (the selection here is not final) will be displayed */
+    
+    // Generelle Gestaltung der Tags zu einer Auswahl von a-Links anhand der URL
+    &[href*="Funding"],                          // Teilprojekt (Icon "cube")
+    &[href*="projectpartner"],                   // Verwertungsplan
+    &[href*="exploitationplans"],                // Arbeitsplan
+    &[href*="exploitationplans"]                 // Arbeitsplan
     { 														
       border:1px solid var(--sy-breadcrumb-tag-border-color);
       padding:0 8px 0 8px;
-      margin:0 6px 0 0;
+      //margin:0 6px 0 0;
       background-color:var(--sy-breadcrumb-tag-background);
       border-radius:10px 0 0 10px;
-      color:var(--sy-breadcrumb-tag-color);
-      // font-style:italic; looks ugly
+      color:var(--sy-breadcrumb-tag-color) !important;  // without important it gets the link color defined above
       font-family:'Nunito-MediumItalic';
-      display:inline-block;
+      display:inline-block;   
+      } // end a[href Selection of links to be designed as tag
 
-      &:before {						
-        font-family: 'Font Awesome 5 Free';
-        position:absolute;
-        display:inline-block;
-        margin-left:-1rem; 
-        } // end span:before for fontawesome icon
-       
-      } // end span
+    // Design of individual tags
 
-    // Tag Verbundprojekt
-    &[href*="/entities/project/"] span { 									
-      padding-left:1.6rem;	
-      &:before {
-        content:"\f20b"; // Icon "shekel-sign"
-        color:var(--sy-level-project-icon-color);
-        }
+    // Tag Consortium
+    &[href*="/entities/project/"] { 									
+      color:var(--sy-level-project-icon-color);
       }
 
-    // Tag Teilprojekt
-    &[href*="/entities/funding/"] span { 											
-      padding-left:1.7rem;
-      &:before { 
-        content:"\f1b2"; // Icon "cube"
-        margin-left:-1.2rem; 
-        color:var(--sy-level-funding-icon-color);
-        }
+    // Tag Project
+    &[href*="Funding"] { 											
+      border-color:var(--sy-level-funding-border-color) !important;
+      i.fas {color:var(--sy-level-funding-icon-color) !important;}
+      //i:before {border:20px solid red !important;}
+      color:var(--sy-level-funding-icon-color) !important;
       }
 
-    } // end a:link, a:hover, a:focus, a:visited
+    } // end a links
 
    /* the last item in the breadcrumb must be a link too in order to be able to read the URL via CSS to recognize the entity, but is styled like as a non-link. */
   &.active a {
@@ -132,4 +97,4 @@ li.breadcrumb-item {
     cursor:default;
   }
 
-}
+} // end li.breadcrumb-item

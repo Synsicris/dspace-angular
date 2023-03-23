@@ -88,9 +88,8 @@
       </button>
     </div>
   </div>
-  <div *ngIf="isFormValid === false" class="row justify-content-center mb-1">
-    <span class="text-muted">{{
-      "query-builder.synsicris.message.label.validation" | translate
-    }}</span>
-  </div>
+  <ds-alert *ngIf="isFormValid === false"
+            type="alert-warning"
+            [content]="'query-builder.synsicris.message.label.validation'">
+  </ds-alert>
 

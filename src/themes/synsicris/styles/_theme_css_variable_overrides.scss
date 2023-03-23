@@ -69,9 +69,14 @@
   --sy-footer-4science-logo-height:     1.6rem;
   --sy-footer-dspacecris-logo-height:   3rem;
   --ds-footer-bg:                       var(--sy-color-gray-100);
-  --ds-footer-border:                   1px solid var(--sy-color-gray-68);  // border-top
+  //--ds-footer-border:                 1px solid var(--sy-color-gray-68);  // border-top
+
+   /* --------------------------------------------------------------- */
+
+    /* --------------------------------------------------------------- */
   --ds-footer-padding:                  0.4rem 0 1.4rem 0 !important;
   --sy-footer-divider:                  2px solid var(--sy-color-gray-85);
+  --sy-footer-link-text-color:          var(--sy-color-blue-29);            // darker blue instead of middle lik blue var(--sy-links-color), because its better readable
   
 
   /* ----------------- TOOLTIP ---------------------------- */
@@ -154,4 +159,24 @@
   --ds-cris-layout-sidebar-entry-width:                   400px !important;
   */ 
 
+  // ----------------- MODAL ---------------------------- 
+  --sy-modal-content-background:            var(--sy-color-gray-96);
+  --sy-modal-header-background:             var(--sy-color-gray-100);
+
+ // ----------------- TABS ---------------------------- 
+  /* bs-variables generated new as sy-variables, because the SCSS bootstrap variables cannot be overridden neither in src/styles/_bootstrap_variables_mapping.scss nor here in CSS 
+  and otherwise color variables would have to be defined in parallel in different places, leading to inconsistencies. */
+
+  // ---------- tab-row
+  --sy-tab-content-background:              var(--sy-color-gray-100);
+  --sy-tab-content-border-color:            var(--sy-color-gray-85);
+  // ---------- single tabs default
+  --sy-nav-tabs-text-color:                 var(--sy-links-color); 
+  --sy-nav-tabs-border-color:               var(--sy-color-gray-85); 
+  // ---------- single tabs hover
+  --sy-nav-tabs-hover-border-color:        var(--sy-links-color);
+  // ---------- single tabs active
+  --sy-nav-tabs-active-background:          transparent;
+  --sy-nav-tabs-active-text-color:          var(--sy-color-bluegray-31);
+  --sy-nav-tabs-active-border-color:        var(--sy-color-bluegray-31);
 }

@@ -1,43 +1,16 @@
 <div *ngIf="workpackages" class="container-fluid p-0" fxLayout="column">
   <div class="border-bottom mb-4 pb-2 d-flex justify-content-between align-items-center">
-    <ds-comcol-page-header
-      [name]="'working-plan.page.title' | translate">
+    <ds-comcol-page-header [name]="'working-plan.page.title' | translate">
+      <ds-view-version-badges *ngIf="workingPlan && isVersionOf" [item]="workingPlan"></ds-view-version-badges>
     </ds-comcol-page-header>
-    <ds-view-version-badges *ngIf="workingPlan && isVersionOf" [item]="workingPlan"></ds-view-version-badges>
   </div>
   <ds-alert [type]="'alert-info'" [content]="'working-plan.chart.page.description'" [collapsible]="true" [collapsed]="true"></ds-alert>
   <ng-container *ngIf="isVersionOf && isFunder">
-    <ngb-accordion
-      #accordionRef
-      [destroyOnHide]="false"
-      [closeOthers]="false"
-      [activeIds]="activeIds"
-      >
-      <ngb-panel id="panel-0">
-        <ng-template ngbPanelHeader let-opened="opened">
-          <span> {{'comment-list.header' | translate}} </span>
-          <div class="d-inline-block float-right" *ngIf="showAccordionPanelToggle">
-            <button ngbPanelToggle class="btn btn-outline-light">
-              <i *ngIf="opened" class="fa fa-chevron-up text-dark"></i>
-              <i *ngIf="!opened" class="fa fa-chevron-down text-dark"></i>
-            </button>
-          </div>
-        </ng-template>
-        <ng-template ngbPanelContent>
-          <div class="row m-0">
-            <div class="col-12 p-0">
-              <ds-comment-list
-                [relatedEntityType]="workingPlan.entityType"
-                [itemUuid]="workingPlan.uuid"
-                [showCardHeader]="false"
-                [projectCommunityId]="projectCommunityId"
-                [type]="workingPlan.entityType">
-            </ds-comment-list>
-            </div>
-          </div>
-        </ng-template>
-      </ngb-panel>
-    </ngb-accordion>
+    <ds-working-plan-comments
+      [projectCommunityId]="projectCommunityId"
+      [showAccordionPanelToggle]="showAccordionPanelToggle"
+      [workingPlan]="workingPlan"
+    ></ds-working-plan-comments>
   </ng-container>
 
   <ds-working-plan-chart-toolbar [compareMode]="compareMode"

@@ -107,6 +107,11 @@ button.btn:focus {
   border-radius: .2rem;
 }
 
+// distance edit to delete button (230317 red)
+ds-working-plan-chart-item-edit-button {
+  margin-right:1rem;
+}
+
 // Document wide tree-node adjustment
 .mat-tree-node {
   min-height: 100px;
@@ -128,6 +133,7 @@ $highlightBorderColor: #FF9800;
 .root-node-style {
   background-color: #e9ecef;
   border-right: 1px solid $borderColor;
+  cursor:pointer;
 }
 
 .calendar-head-border {
@@ -172,7 +178,7 @@ $highlightBorderColor: #FF9800;
   min-height: 8px !important;
 }
 
-// sidenav
+// entire columns both first and second
 .sidenav {
   width: 400px;
   height: fit-content;
@@ -198,7 +204,7 @@ $highlightBorderColor: #FF9800;
   min-height: $nodeHeight;
   border-width: 0 0px 4px 0;
   border-color: $borderColor;
-  border-style: solid;
+  border-style: solid; 
 }
 
 // tree node height for sidebar
@@ -209,11 +215,19 @@ $highlightBorderColor: #FF9800;
 
 /** names */
 
+/* complete first column, 
+added "important" so that the expand-icon also still fits inside 
+since this measure was probably overwritten again at another place and thus did not work (230311 rex) */
 .names {
-  width: 25rem;
+  //width: 25rem; // original CSS, causes the expand arrow for the time column to disappeared
+  min-width: 25rem !important;
 }
+
+// both columns: first and second
 .sidenav.chart-column {
   background-color: #FFFFFF;
+
+  // header of first column, enlarged 
   mat-tree.tree {
     padding-top: 14px; // align the lines of input and table
   }

@@ -91,7 +91,7 @@ export class WorkingPlanPageComponent implements OnInit {
           tap(([itemRD, loaded]: [RemoteData<Item>, boolean]) => {
             if (!loaded) {
               this.isVersionOf = this.projectVersionService.isVersionOfAnItem(itemRD.payload);
-              this.workingPlanStateService.dispatchRetrieveAllWorkpackages(projectID, itemRD.payload.uuid, environment.workingPlan.workingPlanPlaceMetadata, this.isVersionOf);
+              this.workingPlanStateService.dispatchRetrieveAllWorkpackages(projectID, itemRD.payload, environment.workingPlan.workingPlanPlaceMetadata, this.isVersionOf);
             }
           }),
           map(([itemRD, loaded]: [RemoteData<Item>, boolean]) => itemRD)

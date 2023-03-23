@@ -135,6 +135,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   datesMonth: string[] = []; // all months in chart
   datesQuarter: string[] = []; // all quarters in chart
   datesYear: string[] = []; // all years in chart
+  isTreeExpanded = true;
   workpackageVocabularyOptions: VocabularyOptions;
   milestoneVocabularyOptions: VocabularyOptions;
   /**
@@ -288,6 +289,21 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     this.sortOptions$ = this.workingPlanService.getWorkpackageSortOptions();
   }
 
+  /**
+   * Collapse all tree nodes
+   */
+  collapseAll(): void {
+    this.isTreeExpanded = false;
+    this.treeControl.collapseAll();
+  }
+
+  /**
+   * Expand all tree nodes
+   */
+  expandAll(): void {
+    this.isTreeExpanded = true;
+    this.treeControl.expandAll();
+  }
   /**
    * Set the responsible column status (used to expand and collapse the column).
    */
@@ -460,7 +476,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   updateSort() {
     if (this.sortSelectedValue !== this.sortSelectedOld) {
-      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan.uuid, this.sortSelectedValue, this.isVersionOf);
+      this.workingPlanStateService.dispatchRetrieveAllWorkpackages(this.projectCommunityId, this.workingPlan, this.sortSelectedValue, this.isVersionOf);
     }
   }
 

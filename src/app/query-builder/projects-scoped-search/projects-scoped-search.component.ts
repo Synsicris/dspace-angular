@@ -16,7 +16,7 @@ export class ProjectsScopedSearchComponent implements OnInit, OnChanges {
   /**
    * Custom message if no result
    */
-  @Input() notFoundMessageKey: string = 'search.results.no-results.custom';
+  @Input() notFoundMessageKey = 'search.results.no-results.custom';
   /**
    * Configuration name to use for the search
    */
@@ -27,21 +27,30 @@ export class ProjectsScopedSearchComponent implements OnInit, OnChanges {
    */
   @ViewChildren('searchPage') searchPage: QueryList<any>;
 
+  forcedEmbeddedKeys: Map<string, string[]>;
   ngOnInit(): void {
+    this.forcedEmbeddedKeys = new Map([[this.configuration, ['metrics, version']]]);
     this.buildQuery(this.query);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.query && !changes.query.isFirstChange()) {
       this.buildQuery(changes.query.currentValue);
-      this.searchPage.first.refresh();
+      this.searchPage.first.triggerFreshSearch(this.query);
     }
   }
 
   private buildQuery(query) {
     if (query) {
-      this.query = `query={!join from=search.resourceid to=${PROJECT_RELATION_SOLR}}` +
-        `{!join from=${PROJECT_RELATION_SOLR} to=search.resourceid}(${query})`;
+      if (query.includes('entityType:"Project"')) {
+        // if the query condition rely on the Project entity than make the join on search.resourceid
+        this.query = `query={!join from=search.resourceid to=${PROJECT_RELATION_SOLR}}` +
+          `{!join from=search.resourceid to=search.resourceid}(${query})`;
+      } else {
+        // if the query condition rely on any entity different from the Project than make the join on synsicris.relation.project
+        this.query = `query={!join from=search.resourceid to=${PROJECT_RELATION_SOLR}}` +
+          `{!join from=${PROJECT_RELATION_SOLR} to=search.resourceid}(${query})`;
+      }
     } else {
       this.query = '';
     }

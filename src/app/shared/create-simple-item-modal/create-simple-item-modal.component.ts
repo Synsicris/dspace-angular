@@ -1,8 +1,8 @@
+import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
 import { SimpleItem } from './models/simple-item.model';
@@ -83,7 +83,16 @@ export class CreateSimpleItemModalComponent implements OnInit {
    * A boolean representing if start with search tab active
    * @type {boolean}
    */
-  @Input() startWithSearch = false;
+  startWithSearch$ = new BehaviorSubject<boolean>(false);
+
+  @Input()
+  set startWithSearch(startWithSearch: boolean) {
+    this.startWithSearch$.next(startWithSearch);
+  }
+
+  get startWithSearch(): boolean {
+    return this.startWithSearch$.value;
+  }
 
   /**
    * EventEmitter that will emit a SimpleItem object created
@@ -95,7 +104,7 @@ export class CreateSimpleItemModalComponent implements OnInit {
    */
   @Output() addItems: EventEmitter<SimpleItem[]> = new EventEmitter<SimpleItem[]>();
 
-  constructor(public activeModal: NgbActiveModal, private route: ActivatedRoute, private router: Router) {
+  constructor(public activeModal: NgbActiveModal, private readonly location: Location) {
   }
 
   ngOnInit(): void {
@@ -111,8 +120,6 @@ export class CreateSimpleItemModalComponent implements OnInit {
   }
 
   private removeParamFromUrl() {
-    const queryParams = {};
-
-    this.router.navigate([], { queryParams, replaceUrl: true, relativeTo: this.route });
+    this.location.go(this.location.path().split('?')[0]);
   }
 }

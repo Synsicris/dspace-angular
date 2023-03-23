@@ -34,9 +34,15 @@ import { ConfirmationModalComponent } from '../../../../../shared/confirmation-m
 import { hasValue, isNotEmpty } from '../../../../../shared/empty.util';
 import { Item } from '../../../../../core/shared/item.model';
 import { APP_CONFIG, AppConfig } from '../../../../../../config/app-config.interface';
-import { getEntityPageRoute } from '../../../../../item-page/item-page-routing-paths';
 import { MetadataValue } from '../../../../../core/shared/metadata.models';
 import { PaginatedList } from '../../../../../core/data/paginated-list.model';
+import { Router } from '@angular/router';
+import { CommentUtilsService } from '../../../../../shared/comments/shared/comment-utils.service';
+
+export interface TypeDescriptionMetadata {
+  itemType: string;
+  description: string;
+}
 
 @listableObjectComponent('CommentSearchResult', ViewMode.ListElement)
 @Component({
@@ -50,6 +56,8 @@ import { PaginatedList } from '../../../../../core/data/paginated-list.model';
 export class CommentSearchResultListElementComponent extends ItemSearchResultListElementComponent implements OnInit {
 
   public readonly RELATION_PROJECT = environment.comments.commentRelationProjectVersionMetadata;
+  public readonly RELATION_ITEM_VERSION = environment.comments.commentRelationItemVersionMetadata;
+  public readonly RELATION_BOARD_OBJECT = environment.comments.commentRelationBoardMetadata;
 
   /**
    * List of Edit Modes available on this item
@@ -77,6 +85,8 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
     private translateService: TranslateService,
     private editItemService: EditItemDataService,
     private modalService: NgbModal,
+    private router: Router,
+    private readonly commentService: CommentUtilsService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig
   ) {
     super(truncatableService, dsoNameService, appConfig);
@@ -178,23 +188,22 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
    * Filtering the edit modes for comment
    */
   private isEditModeAllowed(mode: EditItemMode) {
-    return mode.name === 'FULL' || mode.name === environment.comments.commentEditMode || mode.name === 'OWNER';
+    return mode.name === 'FULL' || mode.name === environment.comments.commentAdminEditMode || mode.name === environment.comments.commentEditMode;
   }
 
   /**
-   * Returns the route to the related item page.
-   * We are assuming that {@see MetadataValue#value} is made with this format:
-   * `{itemType} - {description}`.
+   * Returns the `itemType` from {@param metadataValue}
+   * that has its value in format `{itemType} - {description}`
    *
    * @param metadataValue
    */
-  getRelateItemPageRoute(metadataValue: MetadataValue) {
-    if (!hasValue(metadataValue == null) || !hasValue(metadataValue.value) || !hasValue(metadataValue.authority)) {
-      return null;
-    }
-    const typeValue = metadataValue.value;
-    const type = (typeValue.split('-')[0] || '').trim();
-    return getEntityPageRoute(type, metadataValue.authority);
+  getTypeDescriptionMetadata(metadataValue: MetadataValue): TypeDescriptionMetadata {
+    return this.commentService.splitMetadataValue(metadataValue);
+  }
+
+  navigateToRelatedItem(relatedItemMD: MetadataValue, questionBoard?: MetadataValue) {
+    this.commentService.getRelatedItemURL(relatedItemMD, questionBoard)
+      .subscribe(url => this.router.navigateByUrl(url));
   }
 
   /**

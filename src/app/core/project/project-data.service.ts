@@ -72,6 +72,9 @@ export const VERSION_UNIQUE_ID = 'synsicris.uniqueid';
 export const FUNDING_OBJECTIVE_ENTITY = 'fundingobjective';
 export const CALL_ENTITY = 'call';
 export const ORGANISATION_UNIT_ENTITY = 'OrgUnit';
+export const INTERIM_REPORT_ENTITY = 'interim_report';
+export const EXPLOITATIONPLAN_ENTITY = 'exploitationplan';
+export const WORKINGPLAN_ENTITY = 'workingplan';
 
 export enum ProjectGrantsTypes {
   Project = 'project',
@@ -345,26 +348,34 @@ export class ProjectDataService extends CommunityDataService {
       getFirstCompletedRemoteData(),
       mergeMap((itemRD: RemoteData<Item>) => {
         if (itemRD.hasSucceeded) {
-          if (itemRD.payload.entityType === PROJECT_ENTITY || (itemRD.payload.entityType === FUNDING_ENTITY && relationMetadata === FUNDING_RELATION_METADATA)) {
-            return this.itemService.findById(itemId, true, true, ...linksToFollow);
-          } else {
-            const metadataValue = Metadata.first(itemRD.payload.metadata, relationMetadata);
-            if (isNotEmpty(metadataValue) && isNotEmpty(metadataValue.authority)) {
-              return this.itemService.findById(
-                metadataValue.authority,
-                true,
-                true,
-                ...linksToFollow
-              );
-            } else {
-              return createFailedRemoteDataObject$<Item>();
-            }
-          }
+          return this.getProjectItem(itemRD.payload, relationMetadata, linksToFollow);
         } else {
           return createFailedRemoteDataObject$<Item>();
         }
       })
     );
+  }
+
+  getRelatedProjectByItem(item: Item, relationMetadata = PROJECT_RELATION_METADATA): Observable<RemoteData<Item>> {
+    return this.getProjectItem(item, relationMetadata);
+  }
+
+  protected getProjectItem(item: Item, relationMetadata: string, linksToFollow: FollowLinkConfig<Item>[] = []): Observable<RemoteData<Item>> {
+    if (item?.entityType === PROJECT_ENTITY || (item?.entityType === FUNDING_ENTITY && relationMetadata === FUNDING_RELATION_METADATA)) {
+      return this.itemService.findById(item.id, true, true, ...linksToFollow);
+    } else {
+      const metadataValue = Metadata.first(item?.metadata, relationMetadata);
+      if (isNotEmpty(metadataValue) && isNotEmpty(metadataValue.authority)) {
+        return this.itemService.findById(
+          metadataValue.authority,
+          true,
+          true,
+          ...linksToFollow
+        );
+      } else {
+        return createFailedRemoteDataObject$<Item>();
+      }
+    }
   }
 
   /**
