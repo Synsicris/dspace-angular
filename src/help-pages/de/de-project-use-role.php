@@ -37,6 +37,23 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	<main>
       <h1>Rollen und Rechte verwalten</h1>
 
+    <article>
+
+      <img src="img/de_project_use_role_Rechte-und_Rollenmanagement1.png">
+
+    </article>
+
+    <br>
+
+
+    <article>
+
+      <img src="img/de_project_use_role_Rechte-und_Rollenmanagement2.png">
+
+    </article>
+
+        <br>
+        
 		<article>
       Es gibt vier Rollen, die mit unterschiedlich weitreichenden Rechten verbunden sind:
 

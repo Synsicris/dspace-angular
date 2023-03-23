@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
- 
+
   <body class="pages" id="pages-solution">
-  
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-	
+
 	 <?php /* Alte Navigation kann geloescht werden.
 	 <h1>&nbsp;</h1>
 	 <!-- Platzhalter deutsch / englisch für Auswahl anderer Sprache -->
@@ -34,9 +34,9 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n3><a href="de-project-details-pages-gender.php">Geschlechteraspekte</a></n3><br> <!-- Datei fehlt -->
 	  <n3><strong>Lösung/Veränderung/Innovation</strong></n3>
 	  */ ?>
-  
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
-  
+
 	<main>
 
 
@@ -69,7 +69,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
     <h1>Technology Readiness Level und Solution Readiness Level - Hintergründe und Unterschiede</h1>
 
     <p>
-      Die Technology Readiness Level wurden ursprünglich für die Technologiebewertung in der Raumfahrt entwickelt und sind bereits langjährig standardisiert (DIN ISO 16290:2016-09). Die Grundlage für die hier gezeigten Stufen ist die TRL-Definition der NASA <a href="http://esto.nasa.gov/files/trl_definitions.pdf">http://esto.nasa.gov/files/trl_definitions.pdf</a>
+      Die Technology Readiness Level wurden ursprünglich für die Technologiebewertung in der Raumfahrt entwickelt und sind bereits langjährig standardisiert (DIN ISO 16290:2016-09). Die Grundlage für die hier gezeigten Stufen ist die <a href="http://esto.nasa.gov/files/trl_definitions.pdf">TRL-Definition der NASA</a>
     </p>
 
     <img src="img/de_project_details_pages_solution_TRL.png">
@@ -80,7 +80,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
     </p>
 
     <p>
-      Die Grundlage für die hier gezeigten Solution Readiness Level sind die Arbeiten von Schön et al. 2020. Die dort entwickelten Solution Readiness Level wurden für die Einschätzung der Anwendungsreife von nachhaltigen Systemlösungen im Kontext transdisziplinärer Forschungsprojekte ausgerichtet. Sie nehmen die Einordnung anhand der Akteurskonstellation, der Aktivitäten im Projekt und dem Gegenstand der Arbeiten vor.
+      Die Grundlage für die hier gezeigten Solution Readiness Level sind die Arbeiten von Schön et al. 2020. Die dort entwickelten Solution Readiness Level wurden für die Einschätzung der Anwendungsreife von nachhaltigen Systemlösungen im Kontext transdisziplinärer Forschungsprojekte ausgerichtet. Sie nehmen die Einordnung anhand der Akteurskonstellation, der Aktivitäten im (Teil-)Projekt und dem Gegenstand der Arbeiten vor.
     </p>
 
     <p>
@@ -96,10 +96,8 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
     <p>
       Schön, S./Eismann, C./Wendt-Schwarzburg, H./Kuhn, D.: Transdisziplinäres Innovationsmanagement. Nachhaltigkeitsprojekte wirksam umsetzen. Bielefeld 2020. <strong>Kapitel 2: 2 Anwendungsreife: Wie reif soll unsere Lösung werden?</strong>
-    </p>
 
-    <p>
-      Kostenloser Download: <a href="https://www.wbv.de/openaccess/themenbereiche/erwachsenenbildung/shop/detail/name/_/0/1/6004698w/facet/6004698w///////nb/0/category/1663.html">https://www.wbv.de/openaccess/themenbereiche</a>
+    <a href="https://www.wbv.de/openaccess/themenbereiche/erwachsenenbildung/shop/detail/name/_/0/1/6004698w/facet/6004698w///////nb/0/category/1663.html">(Kostenloser Download)</a>
 
     </p>
 
@@ -112,6 +110,6 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 
 	<?php include("includes/footer.inc.php"); echo "\n";?>
-    
+
   </body>
 </html>

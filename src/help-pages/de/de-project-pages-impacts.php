@@ -56,8 +56,9 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
   <p>Die Transformationsbereiche stammen aus der Green Deal Roadmap der Europäischen Kommission. Diese sind thematisch identisch mit den sechs Transformationsbereichen der DNS, jedoch feiner aufgegliedert.</p>
   <p>Als Kernelemente der Nachhaltigkeit wurden Aktivitäten oder Themengebiete herausgearbeitet, durch die zu einer nachhaltigen Entwicklung in den Transformationsbereichen beigetragen wird.</p>
 
-<embed src="oth/SDGs-Kernelemente_Tabelle_Hilfeseite.pdf" type="application/pdf" width="100%" height="100%" />
-
+  <p>
+  In <a href="oth/Tabelle_SDG_Kernelemente.pdf" target="_blank">dieser Tabelle</a> finden sie <strong>inhaltliche Erläuterungen</strong> der Kernelemente im Monitoring-Tool sowie der zugehörigen SDGs.
+  </p>
     </main>
 
 

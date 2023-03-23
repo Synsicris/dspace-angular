@@ -6,9 +6,11 @@
   </div>
   <ds-alert [type]="'alert-info'" [content]="'working-plan.chart.page.description'" [collapsible]="true" [collapsed]="true"></ds-alert>
   <ng-container *ngIf="isVersionOf && isFunder">
-    <ds-working-plan-comments [projectCommunityId]="projectCommunityId"
-                              [showAccordionPanelToggle]="showAccordionPanelToggle"
-                              [workingPlan]="workingPlan"></ds-working-plan-comments>
+    <ds-working-plan-comments
+      [projectCommunityId]="projectCommunityId"
+      [showAccordionPanelToggle]="showAccordionPanelToggle"
+      [workingPlan]="workingPlan"
+    ></ds-working-plan-comments>
   </ng-container>
 
   <ds-working-plan-chart-toolbar [compareMode]="compareMode"

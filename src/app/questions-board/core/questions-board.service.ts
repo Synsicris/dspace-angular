@@ -348,29 +348,14 @@ export class QuestionsBoardService {
 
 
   updateQuestionsBoardStep(newQuestionsBoardStepItem: Item, oldQuestionsBoardStep: QuestionsBoardStep): QuestionsBoardStep {
-    const description = Object.assign('', newQuestionsBoardStepItem.firstMetadataValue('dc.description'));
+    const description = newQuestionsBoardStepItem.firstMetadataValue('dc.description');
 
     return new QuestionsBoardStep(
-      Object.assign('', oldQuestionsBoardStep.parentId),
-      Object.assign('', oldQuestionsBoardStep.id),
-      Object.assign('', oldQuestionsBoardStep.type),
-      Object.assign('', description),
-      Object.assign([],
-        oldQuestionsBoardStep.tasks
-          .map(task =>
-            new QuestionsBoardTask(
-              Object.assign('', task.id),
-              Object.assign('', task.type),
-              Object.assign('', task.parentId),
-              Object.assign('', task.title),
-              Object.assign('', task.compareId),
-              Object.assign({}, task.compareStatus),
-              Object.assign('', task.description),
-              Object.assign('', task.status),
-              Object.assign('', task.internalStatus),
-            )
-          )
-      )
+      oldQuestionsBoardStep.parentId,
+      oldQuestionsBoardStep.id,
+      oldQuestionsBoardStep.type,
+      description,
+      [...oldQuestionsBoardStep.tasks]
     );
   }
 }

@@ -2022,7 +2022,7 @@
 
   "error.validation.license.notgranted": "You must grant this license to complete your submission. If you are unable to grant this license at this time you may save your work and return later or remove the submission.",
 
-  "error.validation.pattern": "This input is restricted by the current pattern: {{ pattern }}.",
+  "error.validation.pattern": "This input is restricted by the pattern",
 
   "error.validation.filerequired": "The file upload is mandatory",
 
@@ -5536,6 +5536,28 @@
 
   "search.filters.applied.charts.graph-synsicris_type_status.tab": "Visualization by Status",
 
+  "search.filters.applied.charts.graph-fundingobjective-synsicris_type_sdg.tab": "Visualization by SDG Type",
+
+  "search.filters.applied.charts.graph-fundingobjective-synsicris_relation_programme.tab": "Visualization by Relation Programme",
+
+  "search.filters.applied.charts.graph-fundingobjective-synsicris_relation_call.tab": "Visualization by Relation Call",
+
+  "search.filters.filter.synsicrisRelationProgramme.head": "Relation Programme",
+
+  "search.filters.applied.charts.graphtargetgrouptype.tab": "Visualization by Target Group Type",
+
+  "search.filters.applied.charts.graphtargetgroupnace.tab": "Visualization by Target Group Nace",
+
+  "search.filters.applied.charts.graphtargetgrouppolitical.tab": "Visualization by Target Group Political",
+
+  "search.filters.applied.charts.graphcoopparttype.tab": "Visualization by Cooperation Partner Type",
+
+  "search.filters.applied.charts.graphcooppartnace.tab": "Visualization by Cooperation Partner Nace",
+
+  "search.filters.applied.charts.graphcooppartdestatis.tab": "Visualization by Cooperation Partner Destatis",
+
+  "search.filters.applied.charts.graphcooppartaddressCountry.tab": "Visualization by Cooperation Partner Address Country",
+
   "search.filters.applied.charts.default.title": "Search Output",
 
   "search.filters.applied.charts.RELATION.Funding.basics_comment.title": "Funding comments",
@@ -5600,9 +5622,9 @@
 
   "search.filters.filter.creativeDatePublished.head": "Date Published",
 
-  "search.filters.filter.synsicrisOairecerifEventCountry.head": "Event Country",
+  "search.filters.filter.synsicrisOairecerifEventCountry.head": "Country",
 
-  "search.filters.filter.synsicrisOairecerifEventCountry.label": "Search Event Country",
+  "search.filters.filter.synsicrisOairecerifEventCountry.label": "Search Country/Federal state",
 
   "search.filters.filter.synsicrisCoverageRegionalsecondary.head": "Regional Secondary",
 
@@ -5624,13 +5646,13 @@
 
   "search.filters.filter.synsicrisCoverageRegional.head": "Coverage Regional",
 
-  "search.filters.filter.synsicrisType.head": "Type",
+  "search.filters.filter.synsicrisType.head": "Access Type",
 
   "search.filters.filter.synsicrisDateReferenceyear.label": "Search Reference Year",
 
   "search.filters.filter.synsicrisCoverageRegional.label": "Search Coverage Regional",
 
-  "search.filters.filter.synsicrisType.label": "Search Type",
+  "search.filters.filter.synsicrisType.label": "Search Access Type",
 
   "search.filters.filter.synsicrisRelationFundingobjective.head": "Funding Objective",
 
@@ -5902,7 +5924,7 @@
 
   "search.filters.filter.synsicrisrelationpartner.head": "Partner",
 
-  "search.filters.filter.synsicrisrelationpartner.placeholder": "Project partner",
+  "search.filters.filter.synsicrisrelationpartner.placeholder": "Partner",
 
   "search.filters.filter.synsicrisrelationpartner.label": "Search partner",
 
@@ -5995,6 +6017,40 @@
   "search.filters.entityType.JournalVolume": "Journal Volume",
 
   "search.filters.entityType.OrgUnit": "Organisation unit",
+
+  "search.filters.entityType.workingplan": "Working plan",
+
+  "search.filters.entityType.impactpathway.step_type_1": "ImpactPathway Background",
+
+  "search.filters.entityType.impactpathway.step_type_2": "ImpactPathway Research and development",
+
+  "search.filters.entityType.impactpathway.step_type_3": "ImpactPathway Interactions and transfer",
+
+  "search.filters.entityType.impactpathway.step_type_4": "ImpactPathway Application (opportunities)",
+
+  "search.filters.entityType.impactpathway.step_type_5": "ImpactPathway Expected Societal Impact",
+
+  "search.filters.entityType.impactpathway.step_type_6": "ImpactPathway Contribution to funding programme objectives",
+
+  "search.filters.entityType.exploitationplanstep": "ExploitationPlan",
+
+  "search.filters.entityType.exploitationplanstep.step_type_1": "ExploitationPlan",
+
+  "search.filters.entityType.exploitationplanstep.step_type_2": "ExploitationPlan",
+
+  "search.filters.entityType.exploitationplanstep.step_type_3": "ExploitationPlan",
+
+  "search.filters.entityType.exploitationplanstep.step_type_4": "ExploitationPlan",
+
+  "search.filters.entityType.interim_report": "Iterim Report",
+
+  "search.filters.entityType.interim_report_step.step_type_1": "Iterim Report",
+
+  "search.filters.entityType.interim_report_step.step_type_2": "Iterim Report",
+
+  "search.filters.entityType.interim_report_step.step_type_3": "Iterim Report",
+
+  "search.filters.entityType.interim_report_step.step_type_4": "Iterim Report",
 
   "search.filters.has_content_in_original_bundle.true": "Yes",
 
@@ -8432,7 +8488,7 @@
 
   "layout.tab.header.gender": "Gender reflection",
 
-  "layout.tab.header.Background": "<span class=\"entry-with-space-before-to-divide-sidebar\" alt=\"Lists\"></span><span class=\"entry-with-space-before-label\">Background</span>",
+  "layout.tab.header.Background": "<span class=\"sidebar-interhead\" alt=\"Lists\"></span>Background",
 
   "layout.tab.header.condition": "External conditions",
 
@@ -9790,6 +9846,8 @@
 
   "search.filters.entityType.exp_ia_objective": "Target for interaction and transfer",
 
+  "search.filters.entityType.exploitationplan": "ExploitationPlan",
+
   "layout.tab.header.open_researchquestions": "Open research questions",
 
   "layout.tab.header.neg_sideffect": "Possible negative side effects",
@@ -10688,6 +10746,90 @@
 
   "interim-report.step_type_5.title": "5. Are or will changes in the objectives be necessary?",
 
-  "search.filters.filter.synsicrisOairecerifEventCountry.label": "Search Country/Federal state"
+  "layout.box.header.workpackage_status": "Change since proposal submission",
+
+  "search.filters.filter.synsicrisAddressAddressPostcodePostbox.label": "Search Postcode",
+
+  "search.filters.filter.synsicrisAddressAddressPostcodePostbox.head": "Postcode",
+
+  "search.filters.filter.synsicrisAddressAddressPostcodePostbox.placeholder": "Postcode",
+
+  "search.filters.filter.synsicrisAddressAddresscountry.head": "Country/Federal state",
+
+  "search.filters.filter.synsicrisAddressAddresscountry.placeholder": "Country/Federal state",
+
+  "search.filters.filter.synsicrisAddressAddresscountry.label": "Search Country/Federal state",
+
+  "search.filters.filter.synsicrisRelationpartner.placeholder": "Project partner",
+
+  "submission.sections.submit.progressbar.interim_report_step_type_1_task_form.info": "help",
+
+  "submission.sections.submit.progressbar.interim_report_step_type_2_task_form.info": "help",
+
+  "submission.sections.submit.progressbar.interim_report_step_type_3_task_form.info": "help",
+
+  "submission.sections.submit.progressbar.interim_report_step_type_4_task_form.info": "help",
+
+  "submission.sections.submit.progressbar.interim_report_step_type_5_task_form.info": "help",
+
+  "search.filters.filter.synsicrisDateReminder.head": "Date for Reminder",
+
+  "search.filters.filter.synsicrisDateReminder.placeholder": "Date for Reminder",
+
+  "search.filters.filter.synsicrisDateReminder.label": "Search Date for Reminder",
+
+  "search.filters.filter.synsicrisDateCreation.head": "Written at",
+
+  "search.filters.filter.synsicrisDateCreation.placeholder": "Written at",
+
+  "search.filters.filter.synsicrisDateCreation.label": "Search Written at",
+
+  "search.filters.filter.synsicrisDateCreator.head": "Written by",
+
+  "search.filters.filter.synsicrisDateCreator.placeholder": "Written by",
+
+  "search.filters.filter.synsicrisDateCreator.label": "Search",
+
+  "search.filters.filter.synsicrisRelationItem.head": "Related Item",
+
+  "search.filters.filter.synsicrisRelationItem.placeholder": "Relatied Item",
+
+  "search.filters.filter.synsicrisRelationItem.label": "Search Related Item",
+
+  "search.filters.applied.charts.graph-event-oairecerif_event_country.tab": "Country",
+
+  "layout.field.label.cooperationpartner.synsicris.type.cooperation": "Type of cooperation",
+
+  "layout.field.label.cooperationpartner.dc.type": "Sector",
+
+  "layout.field.label.cooperationpartner.synsicris.cooperation.startDate": "Start",
+
+  "layout.field.label.cooperationpartner.synsicris.cooperation.endDate": "End",
+
+  "layout.field.label.cooperationpartner.synsicris.description.contribution": "Contribution",
+
+  "layout.field.label.Patent.dc.publisher": "Publisher",
+
+  "layout.field.label.innovationpotential.synsicris.coverage.regionalprimary": "Primary field of application",
+
+  "layout.field.label.innovationpotential.synsicris.coverage.regionalsecondary": "Later dissemination",
+
+  "search.filters.filter.synsicrisOairecerifEventStartdate.min.label": "Start",
+
+  "search.filters.filter.synsicrisOairecerifEventStartdate.max.label": "End",
+
+  "search.filters.filter.synsicrisCoverageRegionalsecondary.placeholder": "Regional Secondary",
+
+  "search.filters.filter.synsicrisTypeLevel.placeholder": "Type Level",
+
+  "search.filters.filter.synsicrisTypeEvidence.placeholder": "Evidence Type",
+
+  "search.filters.filter.synsicrisType.placeholder": "Access Type",
+
+  "search.filters.filter.synsicrisRelationFundingobjective.placeholder": "Funding Objective",
+
+  "search.filters.filter.synsicrisLevelStart.placeholder": "Level Start",
+
+  "search.filters.filter.synsicrisLevelEnd.placeholder": "Level End"
 
 }
