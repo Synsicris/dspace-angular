@@ -7314,6 +7314,8 @@
 
   "submission.sections.upload.delete.submit": "Delete",
 
+  "submission.sections.upload.delete.submit.error.message": "Error occurred while deleting the file",
+
   "submission.sections.upload.download.title": "Download bitstream",
 
   "submission.sections.upload.drop-message": "Drop files to attach them to the item",

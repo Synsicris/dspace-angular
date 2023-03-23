@@ -61,6 +61,8 @@ import { Subscription } from 'rxjs';
 import { DynamicFormControlCondition } from '@ng-dynamic-forms/core/lib/model/misc/dynamic-form-control-relation.model';
 import { DynamicDateControlValue } from '@ng-dynamic-forms/core/lib/model/dynamic-date-control.model';
 import { DynamicSelectModelConfig } from '@ng-dynamic-forms/core/lib/model/select/dynamic-select.model';
+import { QuestionsBoardService } from '../../../../../questions-board/core/questions-board.service';
+import { QuestionsBoardStateService } from './../../../../../questions-board/core/questions-board-state.service';
 
 /**
  * This component represents the edit form for bitstream
@@ -146,6 +148,11 @@ export class SubmissionSectionUploadFileEditComponent implements OnInit {
   public submissionId: string;
 
   /**
+   * The questions board id
+   */
+  public questionBoardId: string;
+
+  /**
    * The list of all available metadata
    */
   formMetadata: string[] = [];
@@ -191,6 +198,8 @@ export class SubmissionSectionUploadFileEditComponent implements OnInit {
     private operationsBuilder: JsonPatchOperationsBuilder,
     private operationsService: SubmissionJsonPatchOperationsService,
     private uploadService: SectionUploadService,
+    private questionsBoardStateService: QuestionsBoardStateService,
+    private questionsBoardService: QuestionsBoardService,
     private translate: TranslateService
   ) {
   }
@@ -303,8 +312,9 @@ export class SubmissionSectionUploadFileEditComponent implements OnInit {
     });
     const formModel: DynamicFormControlModel[] = [];
     const metadataGroupModelConfig = Object.assign({}, BITSTREAM_METADATA_FORM_GROUP_CONFIG);
+    const elementId = this.submissionId ?? this.questionBoardId;
     metadataGroupModelConfig.group = this.formBuilderService.modelFromConfiguration(
-      this.submissionId,
+      elementId,
       configForm,
       this.collectionId,
       this.fileData.metadata,
@@ -455,9 +465,10 @@ export class SubmissionSectionUploadFileEditComponent implements OnInit {
         }
 
         // dispatch a PATCH request to save metadata
+        const elementId = this.submissionId ?? `${this.questionBoardId}:${this.questionsBoardService.getQuestionsBoardEditMode()}`;
         return this.operationsService.jsonPatchByResourceID(
           this.submissionService.getSubmissionObjectLinkName(),
-          this.submissionId,
+          elementId,
           this.pathCombiner.rootElement,
           this.pathCombiner.subRootElement);
       })
@@ -466,14 +477,27 @@ export class SubmissionSectionUploadFileEditComponent implements OnInit {
         const uploadSection = (result[0].sections[this.sectionId] as WorkspaceitemSectionUploadObject);
         Object.keys(uploadSection.files)
           .filter((key) => uploadSection.files[key].uuid === this.fileId)
-          .forEach((key) => this.uploadService.updateFileData(
-            this.submissionId, this.sectionId, this.fileId, uploadSection.files[key])
+          .forEach((key) =>
+            this.updateFileState(uploadSection.files[key])
           );
       }
       this.isSaving = false;
-      this.activeModal.close();
+      this.activeModal.close(hasValue(this.questionBoardId));
     });
     this.subscriptions.push(saveBitstreamDataSubscription);
+  }
+
+  /**
+   * Update file state based on the given file data and the current element id
+   * @param data the file data to update
+   */
+  private updateFileState(data: WorkspaceitemSectionUploadFileObject) {
+    if (hasValue(this.submissionId)) {
+      this.uploadService.updateFileData(
+        this.submissionId, this.sectionId, this.fileId, data);
+    } else if (hasValue(this.questionBoardId)) {
+      this.questionsBoardStateService.updateFileData(this.questionBoardId, this.fileId, data);
+    }
   }
 
   private createAccessConditionGroupModel(accessConditionTypeModelConfig: DynamicSelectModelConfig<any>,

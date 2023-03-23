@@ -1,7 +1,7 @@
 import { POLICY_DEFAULT_NO_LIST, POLICY_DEFAULT_WITH_LIST } from './../../../../submission/sections/upload/section-upload.component';
 import { SubmissionUploadsModel } from './../../../../core/config/models/config-submission-uploads.model';
 import { SectionsType } from './../../../../submission/sections/sections-type';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
 import { SubmissionDefinitionsModel } from './../../../../core/config/models/config-submission-definitions.model';
 import { RequestParam } from './../../../../core/cache/models/request-param.model';
 import { Collection } from './../../../../core/shared/collection.model';
@@ -22,9 +22,7 @@ import {
   getFirstSucceededRemoteDataPayload,
   getRemoteDataPayload,
 } from './../../../../core/shared/operators';
-import { SubmissionUploadFilesComponent } from './../../../../submission/form/submission-upload-files/submission-upload-files.component';
 import { SubmissionUploadsConfigDataService } from './../../../../core/config/submission-uploads-config-data.service';
-import { SectionsService } from './../../../../submission/sections/sections.service';
 import { AccessConditionOption } from './../../../../core/config/models/config-access-condition-option.model';
 import {
   BehaviorSubject,
@@ -41,19 +39,16 @@ import {
   Component,
   Input,
   OnInit,
-  ViewChild,
 } from '@angular/core';
-import { Subscription } from './../../../../shared/subscriptions/models/subscription.model';
 import { QuestionsBoardService } from './../../../../questions-board/core/questions-board.service';
 import { HALEndpointService } from './../../../../core/shared/hal-endpoint.service';
-import { isNotEmpty, isNotUndefined } from './../../../../shared/empty.util';
+import { hasValue, isNotEmpty, isNotUndefined } from './../../../../shared/empty.util';
 import { EasyOnlineImportService } from './../../../../core/easy-online-import/easy-online-import.service';
 import { TranslateService } from '@ngx-translate/core';
 import { WorkspaceitemSectionUploadFileObject } from './../../../../core/submission/models/workspaceitem-section-upload-file.model';
 import { SubmissionSectionModel } from './../../../../core/config/models/config-submission-section.model';
-import { SubmissionSectionsModel } from './../../../../core/config/models/config-submission-sections.model';
-import { BaseDataService } from './../../../../core/data/base/base-data.service';
 import { SubmissionFormsModel } from './../../../../core/config/models/config-submission-forms.model';
+import { isUndefined } from 'lodash';
 
 @Component({
   selector: 'ds-questions-upload-step',
@@ -129,17 +124,9 @@ export class QuestionsUploadStepComponent implements OnInit {
   public singleAccessCondition: boolean;
 
   /**
-   * Is the upload required
-   * @type {boolean}
+   * The questions board object item
+   * @type {Item}
    */
-  public required$ = new BehaviorSubject<boolean>(true);
-
-  /**
-   * Array to track all subscriptions and unsubscribe them onDestroy
-   * @type {Array}
-   */
-  protected subs: Subscription[] = [];
-
   @Input() questionsBoardObject: Item;
 
   /**
@@ -148,27 +135,51 @@ export class QuestionsUploadStepComponent implements OnInit {
   @Input() messagePrefix: string;
 
   /**
-   * Reference to teh ipwCollapse child component
+   * If the current user is a funder Organizational/Project manager,
+   * in order not to display uploader when the user isFunder
    */
-  @ViewChild('ipwCollapse') collapsable;
+  @Input() isFunder: boolean;
 
+  /**
+   * The uploader section configuration
+   * @type {UploaderOptions}
+   */
   public uploadFilesOptions: UploaderOptions = new UploaderOptions();
 
+  /**
+   * The configuration for the bitstream's metadata form
+   * @type {Observable<SubmissionFormsModel>}
+   */
   public configMetadataForm$: Observable<SubmissionFormsModel>;
 
   /**
    * Observable keeping track whether or not the uploader has finished initializing
    * Used to start rendering the uploader component
    */
-  initializedUploaderOptions = new BehaviorSubject(false);
+  public initializedUploaderOptions = new BehaviorSubject(false);
 
-  collectionId: string;
+  /**
+   * The edit item object
+   * @type {EditItem}
+   */
+  public configEditItem: EditItem;
 
-  configEditItem: EditItem;
+  /**
+   * The section type
+   * @type {string}
+   */
+  public sectionType: string = SectionsType.Upload;
 
-  sectionType: string = SectionsType.Upload;
+  /**
+   * The configuration for the bitstream's metadata form
+   * @type {SubmissionFormsModel}
+   */
+  public configMetadataForm: SubmissionFormsModel;
 
-  configMetadataForm: SubmissionFormsModel;
+  /**
+   * Flag to indicate if the upload is in progress
+   */
+  public isLoading = false;
 
   constructor(
     private authService: AuthService,
@@ -181,10 +192,10 @@ export class QuestionsUploadStepComponent implements OnInit {
     private translate: TranslateService,
     private changeDetectorRef: ChangeDetectorRef,
     private editItemDataService: EditItemDataService,
-    private sectionsService: SectionsService,
   ) { }
 
   ngOnInit(): void {
+    // Get the rest endpoint for the upload files options
     const uploadFilesOptions$: Observable<string> = this.halService
       .getEndpoint(this.submissionService.getSubmissionObjectLinkName())
       .pipe(
@@ -206,6 +217,7 @@ export class QuestionsUploadStepComponent implements OnInit {
         })
       );
 
+    // Get the edit item object
     const editItem$: Observable<EditItem> = uploadFilesOptions$.pipe(
       switchMap((endpointURL: string) => {
         const searchParams: RequestParam[] = [
@@ -215,27 +227,36 @@ export class QuestionsUploadStepComponent implements OnInit {
         // retrieve submission's section list
         return this.editItemDataService.findByHref(href, true, false, followLink('collection'), followLink('submissionDefinition'))
           .pipe(
-            getFirstSucceededRemoteDataPayload(),
+            tap((value: RemoteData<EditItem>) => {
+              this.isLoading = value.isLoading;
+            }),
+            getFirstSucceededRemoteDataPayload()
           );
       })
     );
 
+    // Get the configuration for the bitstream's metadata form
     const submissionConfig$: Observable<SubmissionUploadsModel> = editItem$.pipe(
       mergeMap((value: EditItem) => {
         return (value.submissionDefinition as Observable<RemoteData<SubmissionDefinitionsModel>>).pipe(
           getRemoteDataPayload(),
           mergeMap((model: SubmissionDefinitionsModel) => {
+            // retrieve submission's section steps configuration links
             return this.uploadsConfigService.findByHref(model._links.sections.href).pipe(
               getFirstSucceededRemoteDataPayload(),
               mergeMap((config: any) => {
                 let res = config._links;
                 const uploadLink = (res as any).page?.find(x => x.href.includes(this.sectionType));
-
+                if (isUndefined(uploadLink.href)) {
+                  console.warn('Upload configuration is missing');
+                }
+                // retrieve submission's section model
                 return this.uploadsConfigService.findByHref(uploadLink.href, true, false).pipe(
                   getFirstSucceededRemoteData(),
                   mergeMap((c) => {
                     const payload = (c.payload as any);
                     const section: SubmissionSectionModel = { ...payload };
+                    // retrieve submission's upload configuration
                     const config$ = this.uploadsConfigService.findByHref(section._links.config.href, true, false, followLink('metadata')).pipe(
                       getFirstSucceededRemoteDataPayload(),
                       map((submissionConfig: SubmissionUploadsModel) => submissionConfig)
@@ -259,37 +280,13 @@ export class QuestionsUploadStepComponent implements OnInit {
         )
       ));
 
-    // retrieve submission's section list
-    // const submissionSections = this.submissionService.getSubmissionObject(this.questionsBoardObject.id).pipe(
-    //   map((submission: SubmissionObjectEntry) => submission.isLoading),
-    //   map((isLoading: boolean) => isLoading),
-    //   distinctUntilChanged(),
-    //   switchMap((isLoading: boolean) => {
-    //     if (!isLoading) {
-    //       return this.getUploadedFileList();
-    //     } else {
-    //       return of([]);
-    //     }
-    //   }));
-    // const isAvailable$ = this.sectionsService.isSectionTypeAvailable(this.questionsBoardObject.id, SectionsType.Upload);
-    // const isReadOnly$ = this.sectionsService.isSectionReadOnlyByType(
-    //   this.questionsBoardObject.id,
-    //   SectionsType.Upload,
-    //   this.submissionService.getSubmissionScope()
-    // );
-
-    // const uploadEnabled$ = combineLatest([isAvailable$, isReadOnly$]).pipe(
-    //   map(([isAvailable, isReadOnly]: [boolean, boolean]) => isAvailable && !isReadOnly)
-    // );
-
     combineLatest([editItem$, submissionConfig$, this.configMetadataForm$])
       .subscribe(([editItem, submissionConfig, configMetadataForm]: [EditItem, SubmissionUploadsModel, SubmissionFormsModel]) => {
         this.configEditItem = editItem;
         const fileList: WorkspaceitemSectionUploadFileObject[] = (editItem.sections.upload as WorkspaceitemSectionUploadObject).files;
-        // this.initializedUploaderOptions.next(true);
         this.prepareFiles(fileList, configMetadataForm);
+        this.questionsBoardStateService.dispatchUploadFilesToQuestionBoard(this.questionsBoardObject.id, this.fileList);
         this.configMetadataForm = configMetadataForm;
-        this.required$.next(submissionConfig.required);
         this.availableAccessConditionOptions = isNotEmpty(submissionConfig.accessConditionOptions) ? submissionConfig.accessConditionOptions : [];
         this.singleAccessCondition = submissionConfig?.singleAccessCondition || false;
         this.collectionPolicyType = this.availableAccessConditionOptions.length > 0
@@ -297,10 +294,14 @@ export class QuestionsUploadStepComponent implements OnInit {
           : POLICY_DEFAULT_NO_LIST;
         this.changeDetectorRef.detectChanges();
       });
-
   }
 
-  private prepareFiles(fileList: WorkspaceitemSectionUploadFileObject[], configMetadataForm: SubmissionFormsModel){
+  /**
+   * Perpare the files to be displayed
+   * @param fileList The list of files to prepare to be displayed
+   * @param configMetadataForm The configuration for the bitstream's metadata form
+   */
+  private prepareFiles(fileList: WorkspaceitemSectionUploadFileObject[], configMetadataForm: SubmissionFormsModel) {
     this.fileList = [];
     this.fileIndexes = [];
     this.fileNames = [];
@@ -312,7 +313,6 @@ export class QuestionsUploadStepComponent implements OnInit {
         this.fileNames.push(this.getFileName(configMetadataForm, file));
       });
     }
-    this.questionsBoardStateService.dispatchUploadFilesToQuestionBoard(this.questionsBoardObject.id, this.fileList);
   }
 
   /**
@@ -341,16 +341,43 @@ export class QuestionsUploadStepComponent implements OnInit {
     return title;
   }
 
+  /**
+   *  Returns the list of files uploaded to the question board
+   */
   private getUploadedFileList() {
     return this.questionsBoardStateService.getFilesFromQuestionsBoard(
       this.questionsBoardObject.id
     );
   }
 
+  /**
+   * Takes all the uploaded files from the upload component
+   * and dispatches them to the question board in the store
+   * @param event The event emitted by the upload component
+   */
   onCompleteItem(event) {
-    const fileList: WorkspaceitemSectionUploadFileObject[] = (event.sections.upload as WorkspaceitemSectionUploadObject).files;
-    this.prepareFiles(fileList, this.configMetadataForm);
-    this.questionsBoardStateService.dispatchUploadFilesToQuestionBoard(this.questionsBoardObject.id, fileList);
+    const fileList: WorkspaceitemSectionUploadFileObject[] = (event.sections?.upload as WorkspaceitemSectionUploadObject)?.files;
+    if (isNotUndefined(this.fileList)) {
+      this.prepareFiles(fileList, this.configMetadataForm);
+      this.questionsBoardStateService.dispatchUploadFilesToQuestionBoard(this.questionsBoardObject.id, fileList);
+    }
+  }
+
+  /**
+   * On Edit / Delete file event get the list of files from the store and prepare them to be displayed
+   * @param event The event emitted by the submission upload component/ flag to check if the event is fired
+   */
+  onFileEventChanges(event: boolean) {
+    if (event) {
+    this.getUploadedFileList().pipe(
+        filter((fileList) =>
+          isNotUndefined(fileList) && hasValue(this.configMetadataForm)
+        ),
+        distinctUntilChanged()
+      ).subscribe((fileList) => {
+        this.prepareFiles(fileList, this.configMetadataForm);
+      });
+    }
   }
 
   /**
@@ -366,13 +393,17 @@ export class QuestionsUploadStepComponent implements OnInit {
   /**
    * Get questions board step title
    */
-  getStepTitle(): string {
+  public getStepTitle(): string {
     return this.translate.instant(
       this.messagePrefix + '.' + 'upload-step' + '.title'
     );
   }
 
-  getCollection(): Observable<string> {
+  /**
+   * Return the collection uuid from the edit item
+   * @returns The collection uuid
+   */
+  public getCollection(): Observable<string> {
     return (this.configEditItem?.collection as Observable<RemoteData<Collection>>).pipe(
       getFirstSucceededRemoteData(),
       map((value: RemoteData<Collection>) => {
@@ -380,19 +411,4 @@ export class QuestionsUploadStepComponent implements OnInit {
       })
     );
   }
-
-  protected getSectionStatus(): Observable<boolean> {
-    // TODO: required ??
-    // if not mandatory, always true
-    // if mandatory, at least one file is required
-   return combineLatest([
-      this.required$,
-      this.getUploadedFileList()
-    ]).pipe(
-      map(([required,fileList]) => {
-        return (!required || (isNotUndefined(fileList) && fileList.length > 0));
-      } )
-    );
-  }
-
 }

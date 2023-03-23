@@ -24,6 +24,8 @@ import {
   AddQuestionsBoardTaskAction,
   ClearQuestionBoardAction,
   ClearQuestionsBoardStepCollapseAction,
+  DeleteUploadedFileFromQuestionsboardAction,
+  EditUploadedFileDataAction,
   GenerateQuestionsBoardTaskAction,
   InitCompareAction,
   OrderQuestionsBoardTasksAction,
@@ -233,21 +235,60 @@ export class QuestionsBoardStateService {
     this.store.dispatch(new StopCompareQuestionsBoardAction(questionsBoardId));
   }
 
+  /**
+   * Dispatch a new UploadFilesToQuestionBoardAction
+   * @param questionsBoardId The questions board's id
+   * @param uploads The uploads to add to the questions board
+   */
   dispatchUploadFilesToQuestionBoard(questionsBoardId: string, uploads: WorkspaceitemSectionUploadFileObject[] ) {
     this.store.dispatch(new UploadFilesToQuestionBoardAction(questionsBoardId, uploads));
   }
 
-  getFilesFromQuestionsBoard(questionsBoardId: string){
+  /**
+   * Retrieve the list of uploaded files for the given questions board
+   * @param questionsBoardId The questions board's id
+   * @returns the list of uploaded files for the given questions board
+   */
+  getFilesFromQuestionsBoard(questionsBoardId: string) {
     return this.store.pipe(select(
       questionsBoardUploadsByBoardIdSelector(questionsBoardId)
     ));
   }
 
-  getUploadedFileFromQuestionsBoard(questionsBoardId: string, fileId: string){
+  /**
+   * Retrieve the file's data for the given file id
+   * @param questionsBoardId the questions board's id
+   * @param fileId the file's id
+   * @returns the file's data for the given file id
+   */
+  getUploadedFileFromQuestionsBoard(questionsBoardId: string, fileId: string): Observable<WorkspaceitemSectionUploadFileObject> {
     return this.store.pipe(select(
       questionsBoardUploadsByBoardIdSelector(questionsBoardId)
     ),
       map((uploads: WorkspaceitemSectionUploadFileObject[]) => uploads.find(x => isEqual(x.uuid, fileId)))
+    );
+  }
+
+  /**
+   * Remove the given file from the given questions board
+   * @param questionsBoardId The questions board's id
+   * @param fileUUID the file's uuid
+   */
+  public removeUploadedFile(questionsBoardId: string, fileUUID: string) {
+    this.store.dispatch(
+      new DeleteUploadedFileFromQuestionsboardAction(questionsBoardId, fileUUID)
+    );
+  }
+
+  /**
+   * This method updates the data of the given file for the given questions board
+   * @param questionsBoardId The questions board's id
+   * @param fileUUID The file's uuid
+   * @param data The updated data of the file
+   */
+  public updateFileData(questionsBoardId: string, fileUUID: string, data: WorkspaceitemSectionUploadFileObject) {
+    this.store.dispatch(
+      new EditUploadedFileDataAction(questionsBoardId, fileUUID, data)
     );
   }
 }

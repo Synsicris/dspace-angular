@@ -8,19 +8,22 @@
   </ng-container>
   <ng-container ngProjectAs="panelContent">
     <div class="container py-2">
-      <ds-alert [content]="'submission.sections.upload.info'"
-                [dismissible]="true"
-                [type]="AlertTypeEnum.Info"></ds-alert>
 
-      <ds-uploader *ngIf="initializedUploaderOptions | async"
-                          [dropMsg]="dropMsg"
-                          [dropOverDocumentMsg]="dropOverDocumentMsg"
-                          [enableDragOverDocument]="true"
-                          [uploadFilesOptions]="uploadFilesOptions"
-                          (onCompleteItem)="onCompleteItem($event)"
-                          (onUploadError)="onUploadError()"></ds-uploader>
+      <ng-container *ngIf="!isFunder">
+        <ds-alert [content]="'submission.sections.upload.info'"
+        [dismissible]="true"
+        [type]="AlertTypeEnum.Info"></ds-alert>
 
-      <ng-container *ngIf="fileList.length == 0">
+        <ds-uploader *ngIf="(initializedUploaderOptions | async)"
+                      [dropMsg]="dropMsg"
+                      [dropOverDocumentMsg]="dropOverDocumentMsg"
+                      [enableDragOverDocument]="true"
+                      [uploadFilesOptions]="uploadFilesOptions"
+                      (onCompleteItem)="onCompleteItem($event)"
+                      (onUploadError)="onUploadError()"></ds-uploader>
+      </ng-container>
+
+      <ng-container *ngIf="fileList.length == 0 && !isLoading">
         <div class="row">
           <div class="col-md-12">
             <h3 class="text-center"><span class="text-muted">{{'submission.sections.upload.no-file-uploaded' | translate}}</span></h3>
@@ -28,7 +31,10 @@
         </div>
       </ng-container>
 
+      <ds-themed-loading *ngIf="isLoading"></ds-themed-loading>
+
       <ng-container *ngIf="fileList.length > 0">
+
         <div *ngIf="collectionDefaultAccessConditions.length > 0" class="row">
           <div class="col-sm-12" >
             <ds-alert [type]="AlertTypeEnum.Warning">
@@ -56,7 +62,11 @@
                                             [fileName]="fileNames[fileList.indexOf(fileEntry)]"
                                             [readOnly]="false"
                                             [sectionId]="sectionType"
-                                            [questionBoardId]="questionsBoardObject.id"></ds-submission-upload-section-file>
+                                            [questionBoardId]="questionsBoardObject.id"
+                                            [disableActions]="isFunder"
+                                            (deleteUploadedFile)="onFileEventChanges($event)"
+                                            (editUploadedFile)="onFileEventChanges($event)"
+                                            ></ds-submission-upload-section-file>
           <div class="row">
             <div class="col-md-12">
               <hr/>
