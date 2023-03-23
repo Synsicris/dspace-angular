@@ -96,9 +96,16 @@ export class SelectedProjectListComponent implements OnInit, OnChanges {
     });
   }
 
-  private buildQuery(query) {
+  private buildQuery(query: string) {
     if (query) {
-      this.query = `{!join from=${PROJECT_RELATION_SOLR} to=search.resourceid}${query}`;
+      if (query.includes('entityType:"Project"')) {
+        // if the query condition rely on the Project entity than make the join on search.resourceid
+
+        this.query = `{!join from=search.resourceid to=search.resourceid}${query}`;
+      } else {
+        // if the query condition rely on any entity different from the Project than make the join on synsicris.relation.project
+        this.query = `{!join from=${PROJECT_RELATION_SOLR} to=search.resourceid}${query}`;
+      }
     } else {
       this.query = '';
     }
