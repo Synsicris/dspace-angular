@@ -23,11 +23,12 @@
           <div *ngFor="let config of displayConfigurations">
             <ng-container *ngFor="let metadataConf of config.metadata">
             <span *ngIf="dso.hasMetadata(metadataConf.name)">
-              <ds-truncatable-part *ngIf="metadataConf.truncatable;else showSimpleTemplate" [id]="dso.id" [minLines]="1">
-                <ng-container *ngTemplateOutlet="metadataConfTemplate;context:{metadataConf:metadataConf}">
-                </ng-container>
-              </ds-truncatable-part>
-
+              <ds-truncatable [id]="dso.id">
+                 <ds-truncatable-part *ngIf="metadataConf.truncatable;else showSimpleTemplate" [id]="dso.id" [minLines]="1">
+                   <ng-container *ngTemplateOutlet="metadataConfTemplate;context:{metadataConf:metadataConf}">
+                   </ng-container>
+                 </ds-truncatable-part>
+              </ds-truncatable>
               <ng-template #showSimpleTemplate>
                 <ng-container *ngTemplateOutlet="metadataConfTemplate;context:{metadataConf:metadataConf}">
                 </ng-container>
@@ -37,7 +38,7 @@
             </ng-container>
           </div>
         </div>
-        <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
+        <ds-truncatable [id]="dso.id" *ngIf="displayConfigurations === null && object !== undefined && object !== null">
           <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
              rel="noopener noreferrer"
              [routerLink]="[itemPageRoute]" class="lead item-list-title dont-break-out"
