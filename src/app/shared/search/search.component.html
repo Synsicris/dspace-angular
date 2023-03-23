@@ -100,7 +100,7 @@
 </ng-template>
 
 <ng-template #searchForm>
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between search-form-container">
       <div *ngIf="!(isXsOrSm$ | async) && showFilterToggle && showSidebar && ((isSidebarCollapsedXL$ | async)
                     || (!(isSidebarCollapsedXL$ | async) && showViewModes))">
             <button class="btn btn-outline-secondary mr-3"
