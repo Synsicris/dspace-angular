@@ -130,7 +130,7 @@ export const isCompareMode = createSelector(_getImpactPathwayState,
  * @function compareImpactPathwayId
  * @return {string}
  */
-export const compareImpactPathwayId = createSelector(_getImpactPathwayState,
+export const compareImpactPathwayIdSelector = createSelector(_getImpactPathwayState,
   (state: ImpactPathwayState) => state.compareImpactPathwayId || null
 );
 

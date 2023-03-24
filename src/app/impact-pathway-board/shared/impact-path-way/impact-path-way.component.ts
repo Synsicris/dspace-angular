@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
@@ -29,7 +29,7 @@ import { RemoteData } from '../../../core/data/remote-data';
   styleUrls: ['./impact-path-way.component.scss'],
   templateUrl: './impact-path-way.component.html'
 })
-export class ImpactPathWayComponent implements OnInit {
+export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDestroy {
   /**
    * If the current user is a funder Organizational/Project manager
    */
@@ -68,7 +68,7 @@ export class ImpactPathWayComponent implements OnInit {
   /**
    * The compare item object
    */
-  compareItem: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
+  compareItem$: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
 
   /**
    * A boolean representing if compare mode is active
@@ -124,8 +124,8 @@ export class ImpactPathWayComponent implements OnInit {
           }
         })
       ).subscribe((item: Item) => {
-        console.log('compare item: ', item);
-        this.compareItem.next(item);
+
+        this.compareItem$.next(item);
       })
     );
 

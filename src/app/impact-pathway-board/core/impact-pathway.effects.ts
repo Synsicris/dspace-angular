@@ -169,7 +169,9 @@ export class ImpactPathwayEffects {
         environment.impactPathway.impactPathwayTaskRelationMetadata
       ).pipe(
         switchMap((compareItemList: ComparedVersionItem[]) => this.impactPathwayService.initCompareImpactPathwayStepTasks(action.payload.impactPathwayStepId, compareItemList)),
-        map((tasks: ImpactPathwayTask[]) => new InitCompareStepTaskSuccessAction(action.payload.impactPathwayId, action.payload.impactPathwayStepId, tasks)),
+        map((tasks: ImpactPathwayTask[]) => {
+          return new InitCompareStepTaskSuccessAction(action.payload.impactPathwayId, action.payload.impactPathwayStepId, action.payload.compareImpactPathwayStepId, tasks);
+        }),
         catchError((error: Error) => {
           if (error) {
             this.notificationsService.error(null, this.translate.get('impact-pathway.compare.error'));

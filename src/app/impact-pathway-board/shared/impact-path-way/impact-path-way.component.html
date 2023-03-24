@@ -89,11 +89,11 @@
                         [formConfig]="formConfig$"
                         [formSectionName]="getSectionName()"
                         [itemId]="impactPathway.id"
+                        [compareItemId]="(compareItem$ | async)?.id"
                         [editTitle]="'impact-pathway.edit.title' | translate"
                         [fieldTitle]="'impact-pathway.description' | translate"
                         [content]="impactPathway.description"
-                        [contentToCompare]="getCompareItemDescription(compareItem.value)"
-                        [disabled]="(compareMode | async) || !(canEditButton$ | async)"
+                        [disabled]="!(canEditButton$ | async)"
                         (contentChange)="updateImpactPathway($event)">
   </ds-editable-textarea>
 </div>

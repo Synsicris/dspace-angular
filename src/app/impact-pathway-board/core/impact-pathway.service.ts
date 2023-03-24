@@ -43,7 +43,7 @@ import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocab
 import { MetadataMap, MetadataValue } from '../../core/shared/metadata.models';
 import { Metadata } from '../../core/shared/metadata.utils';
 import {
-  compareImpactPathwayId,
+  compareImpactPathwayIdSelector,
   impactPathwayByIDSelector,
   impactPathwayObjectsSelector,
   impactPathwayStateSelector,
@@ -455,6 +455,7 @@ export class ImpactPathwayService {
    */
   public initImpactPathwayTaskFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, tasks: ImpactPathwayTask[] = []): ImpactPathwayTask {
     const type = compareObj.item.firstMetadataValue('dspace.entity.type');
+    const description = compareObj.item.firstMetadataValue('dc.description');
     return Object.assign(new ImpactPathwayTask(), {
       id: compareObj.item.id,
       compareId: compareObj.versionItem?.id,
@@ -463,6 +464,7 @@ export class ImpactPathwayService {
       title: compareObj.item.name,
       type: type,
       tasks: tasks,
+      description: description
     });
   }
 
@@ -490,10 +492,10 @@ export class ImpactPathwayService {
    *    the impact pathway's id
    * @param impactPathwayStepId
    *    the impact pathway's step id
-   * * @param impactPathwayStepTaskId
+   * @param impactPathwayStepTaskId
    *    the impact pathway's step task id
    */
-  dispatchStopCompareImpactPathwayTask(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId: string,) {
+  dispatchStopCompareImpactPathwayTask(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId: string) {
     this.store.dispatch(new StopCompareImpactPathwayStepTaskAction(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId));
   }
 
@@ -547,7 +549,7 @@ export class ImpactPathwayService {
    * Check compareMode is true
    */
   public getCompareImpactPathwayId(): Observable<string> {
-    return this.store.pipe(select(compareImpactPathwayId));
+    return this.store.pipe(select(compareImpactPathwayIdSelector));
   }
 
   getCreateTaskFormConfigName(stepType: string, isObjectivePage: boolean): string {
@@ -961,7 +963,7 @@ export class ImpactPathwayService {
       select(impactPathwayByIDSelector(impactPathwayId))
     );
 
-    return combineLatestObservable(isLoaded$, impactPathWay$).pipe(
+    return combineLatestObservable([isLoaded$, impactPathWay$]).pipe(
       map(([isLoaded, impactPathway]) => isLoaded && isNotEmpty(impactPathway)),
       take(1)
     );

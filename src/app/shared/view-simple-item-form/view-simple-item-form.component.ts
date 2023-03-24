@@ -14,6 +14,7 @@ import { SubmissionScopeType } from '../../core/submission/submission-scope-type
 import { EditSimpleItemModalComponent } from '../edit-simple-item-modal/edit-simple-item-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { take } from 'rxjs/operators';
+import { CompareItemComponent } from '../compare-item/compare-item.component';
 
 @Component({
   selector: 'ds-view-simple-item-form',
@@ -21,6 +22,11 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./view-simple-item-form.component.scss']
 })
 export class ViewSimpleItemFormComponent implements OnInit {
+
+  /**
+   * A boolean representing if compare mode is enabled
+   */
+  @Input() compareMode: boolean;
 
   /**
    * The item edit mode
@@ -52,6 +58,11 @@ export class ViewSimpleItemFormComponent implements OnInit {
    * The item's id related to the edit form
    */
   @Input() itemId: string;
+
+  /**
+   * The item's id to compare to
+   */
+  @Input() public compareItemId: string;
 
   /**
    * The form id
@@ -93,6 +104,15 @@ export class ViewSimpleItemFormComponent implements OnInit {
   ngOnInit(): void {
     this.formId = this.formService.getUniqueId('view-simple-item');
     this.initFormModel();
+  }
+
+  /**
+   * Open a modal for item metadata comparison
+   */
+  openCompareModal() {
+    const modalRef = this.modalService.open(CompareItemComponent, { size: 'xl' });
+    (modalRef.componentInstance as CompareItemComponent).baseItemId = this.itemId;
+    (modalRef.componentInstance as CompareItemComponent).versionedItemId = this.compareItemId;
   }
 
   openEditModal() {
