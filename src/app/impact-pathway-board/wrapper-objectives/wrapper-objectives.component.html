@@ -26,11 +26,11 @@
             [type]="'alert-info'"></ds-alert>
   <ng-container *ngFor="let task of getObjectivesTasks()">
     <ds-objective [projectCommunityId]="projectCommunityId"
-                   [impactPathwayStep]="impactPathwayStep"
-                   [impactPathwayTask]="task"
-                   [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"
-                   [isFunder]="isFunder"
-                   [targetImpactPathwayTaskId]="targetImpactPathwayTaskId"></ds-objective>
+                  [impactPathwayStep]="impactPathwayStep"
+                  [impactPathwayTask]="task"
+                  [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"
+                  [isFunder]="isFunder"
+                  [targetImpactPathwayTaskId]="targetImpactPathwayTaskId"></ds-objective>
   </ng-container>
 
 </div>

@@ -1,13 +1,13 @@
 import { ActivatedRoute, Data } from '@angular/router';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, skip, take } from 'rxjs/operators';
 import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathwayTask } from '../../core/models/impact-pathway-task.model';
 import { ImpactPathwayStep } from '../../core/models/impact-pathway-step.model';
-import { isEmpty } from '../../../shared/empty.util';
+import { hasValue, isEmpty } from '../../../shared/empty.util';
 import { ImpactPathwayService } from '../../core/impact-pathway.service';
 import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { Item } from '../../../core/shared/item.model';
@@ -22,7 +22,7 @@ import { ItemDataService } from '../../../core/data/item-data.service';
   styleUrls: ['./objective.component.scss', './../../../shared/comments/comment-list-box/comment-list.component.scss'],
   templateUrl: './objective.component.html'
 })
-export class ObjectiveComponent implements OnInit {
+export class ObjectiveComponent implements AfterViewInit, OnInit, OnDestroy {
 
   /**
    * The project community's id
@@ -35,18 +35,46 @@ export class ObjectiveComponent implements OnInit {
    * If the current user is a funder Organizational/Project manager
    */
   @Input() isFunder: boolean;
+  /**
+   * A boolean representing if item is a version of original item
+   */
+  @Input() isVersionOfAnItem = false;
 
   @Input() public targetImpactPathwayTaskId: string;
+
+  /**
+   * A boolean representing if edit/add buttons are active
+   */
+  canEditButton$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * A boolean representing if compare mode is active
+   */
+  compareMode$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * The form config
    * @type {Observable<SubmissionFormModel>}
    */
   formConfig$: Observable<SubmissionFormModel>;
+
   /**
-   * A boolean representing if edit/add buttons are active
+   * The objective object item
+   * @type {Observable<SubmissionFormModel>}
    */
-  canEditButton$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  objectiveItem$: Observable<Item>;
+
+  /**
+   * The impact-pathway item
+   * @type {Observable<SubmissionFormModel>}
+   */
+  impactPathWayItem$: Observable<Item>;
+
+  /**
+   * The impact-pathway step item
+   * @type {Observable<SubmissionFormModel>}
+   */
+  impactPathWayStepItem$: Observable<Item>;
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
 
@@ -56,13 +84,9 @@ export class ObjectiveComponent implements OnInit {
   @ViewChild('ipwCollapse') collapsable;
 
   /**
-   * A boolean representing if item is a version of original item
+   * Array to track all subscriptions and unsubscribe them onDestroy
    */
-  @Input() isVersionOfAnItem = false;
-
-  objectiveItem$: Observable<Item>;
-  impactPathWayItem$: Observable<Item>;
-  impactPathWayStepItem$: Observable<Item>;
+  private subs: Subscription[] = [];
 
   constructor(
     private impactPathwayService: ImpactPathwayService,
@@ -97,6 +121,11 @@ export class ObjectiveComponent implements OnInit {
           getFirstCompletedRemoteData(),
           map(rd => rd.payload)
         );
+
+    this.subs.push(
+      this.impactPathwayService.isCompareModeActive()
+        .subscribe((compareMode: boolean) => this.compareMode$.next(compareMode))
+    );
   }
 
   /**
@@ -186,5 +215,11 @@ export class ObjectiveComponent implements OnInit {
       this.impactPathwayTask.id,
       this.impactPathwayTask
     );
+  }
+
+  ngOnDestroy(): void {
+    this.subs
+      .filter((subscription) => hasValue(subscription))
+      .forEach((subscription) => subscription.unsubscribe());
   }
 }
