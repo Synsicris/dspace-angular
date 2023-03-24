@@ -1,5 +1,5 @@
 <!-- Content of Tabs "manage project members" -->
-<ds-alert [content]="helpMessageLabel | translate"></ds-alert>
+<ds-alert [content]="helpMessageLabel | translate" [collapsible]="true"></ds-alert>
 <ds-members-list *ngIf="groupBeingEdited | async"
                  [messagePrefix]="messagePrefix + '.members-list'"
                  [overrideAdmin]="isFunderOrganizationalManager$ | async"

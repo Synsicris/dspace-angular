@@ -15,7 +15,7 @@
         </div>
       </ng-template>
       <ng-template ngbPanelContent>
-        <ds-alert [content]="'query-builder.synsicris.accordion.step1.alert'">
+        <ds-alert [collapsible]="true" [collapsed]="true" [content]="'query-builder.synsicris.accordion.step1.alert'">
         </ds-alert>
         <div class="btn-group btn-group-toggle mb-4">
           <label class="btn-outline-info" ngbButtonLabel>
@@ -52,7 +52,7 @@
         </div>
       </ng-template>
       <ng-template ngbPanelContent>
-        <ds-alert [content]="'query-builder.synsicris.accordion.step2.alert'">
+        <ds-alert [collapsible]="true" [collapsed]="true" [content]="'query-builder.synsicris.accordion.step2.alert'">
         </ds-alert>
         <ds-projects-scoped-search [configuration]="projectItemsConfigurationName"
                                    [query]="searchQuery"></ds-projects-scoped-search>

@@ -1382,7 +1382,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.description',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.Text,
+            truncatable: true
           }
         ]
       }
@@ -1632,6 +1633,7 @@ export class DefaultAppConfig implements AppConfig {
     commentRelationItemVersionMetadata: 'synsicris.relation.commentItemVersion',
     commentRelationProjectMetadata: 'synsicris.relation.commentProject',
     commentRelationProjectVersionMetadata: 'synsicris.relation.commentProjectVersion',
+    commentRelationBoardMetadata: 'synsicris.relation.commentBoard',
   };
 
 }

@@ -33,28 +33,18 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
 
 	<main>
-    
-    <p> Diese Inhalte werden demnächst bereitgestellt</p>
-<!--
-      <h1>Projektabschluss</h1>
-      <p>Teasertext <strong>gesellschaftlichen Transformation</strong> Text</p>
-		<article>
-		<h1>Überschrift</h1>
-		<p>Text</p>
-		<img src="img/xy.png">
-		<p>Text
-		<ul>
-		<li>Text</li>
-		<li>Text</li></ul>
-		</p>
-		</article>
+
+
+
+      <h1>Rollen und Rechte verwalten</h1>
 
 		<article>
-		<h1>Überschrift nächster Abschnitt</h1>
-		<p>Text</p>
+
+		<img src="img/de_project_funder_role_RechteRollenmanagement.png">
+
 		</article>
 
-  -->
+
     </main>
 
 
