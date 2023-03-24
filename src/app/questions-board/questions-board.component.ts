@@ -44,6 +44,11 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    */
   @Input() fundingCommunity: Community;
 
+  /**
+   * Flag to check the display of upload step
+   */
+  @Input() showUploadStep = false;
+
   public questionsBoardObjectId: string;
 
   /**
@@ -66,11 +71,6 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    */
   public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  /**
-   * Flag to check the display of upload step
-   */
-  public showUploadStep = false;
-
   constructor(
     protected questionsBoardStateService: QuestionsBoardStateService,
     protected aroute: ActivatedRoute,
@@ -79,7 +79,6 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.questionsBoardObjectId = this.questionsBoardObject?.id;
-    this.showUploadStep = isEqual(this.questionsBoardObject.entityType , 'interim_report');
     this.questionsBoardStep$ = this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardObjectId);
     this.subs.push(
       this.questionsBoardStateService.isCompareModeActive()

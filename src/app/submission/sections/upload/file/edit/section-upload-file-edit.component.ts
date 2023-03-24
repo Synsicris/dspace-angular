@@ -486,6 +486,8 @@ export class SubmissionSectionUploadFileEditComponent implements OnInit {
           );
       }
       this.isSaving = false;
+      // close modal with true if the questionBoard file has been saved
+      // in order to refresh the file list
       this.activeModal.close(hasValue(this.questionBoardId));
     });
     this.subscriptions.push(saveBitstreamDataSubscription);

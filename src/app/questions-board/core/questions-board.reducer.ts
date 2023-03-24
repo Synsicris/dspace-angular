@@ -487,20 +487,18 @@ function editFileData(state: QuestionsBoardState, action: EditUploadedFileDataAc
     const fileIndex: number = filesData.findIndex(x=> isEqual(x.uuid, action.payload.fileUUID));
     if (fileIndex > -1) {
       const newData = Array.from(filesData);
-
       newData[fileIndex] = action.payload.data;
-      console.log(newData[fileIndex], 'newData[fileIndex]');
-      const newState = Object.assign({}, state, { loaded: true }, {
+     return Object.assign({}, state, { loaded: true }, {
         questionsBoard: Object.assign({}, state.questionsBoard, {
-          [action.payload.questionsBoardId]: Object.assign(new QuestionsBoard(), questionBoard[action.payload.questionsBoardId], {
+          [action.payload.questionsBoardId]: Object.assign(new QuestionsBoard(),{
+            ...questionBoard,
             uploads: [...newData]
           })
         })
       });
-
-      return newState;
     }
   }
+
   return state;
 }
 
@@ -524,9 +522,10 @@ function deleteFile(state: QuestionsBoardState, action:  DeleteUploadedFileFromQ
       let newData = Array.from(filesData);
       newData.splice(fileIndex, 1);
 
-      return Object.assign({}, state, { loaded: true }, {
+     return Object.assign({}, state, { loaded: true }, {
         questionsBoard: Object.assign({}, state.questionsBoard, {
-          [action.payload.questionsBoardId]: Object.assign(new QuestionsBoard(), questionBoard[action.payload.questionsBoardId], {
+          [action.payload.questionsBoardId]: Object.assign(new QuestionsBoard(),{
+            ...questionBoard,
             uploads: [...newData]
           })
         })

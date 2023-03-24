@@ -4,7 +4,7 @@
                        [startOpen]="false"
                        [collapsable]="true">
   <ng-container ngProjectAs="panelIconTitle">
-    <i dsQuestionsBoardIcon [questionsBoardType]="'upload'"></i>
+    <i dsQuestionsBoardIcon [questionsBoardType]="sectionType"></i>
   </ng-container>
   <ng-container ngProjectAs="panelContent">
     <div class="container py-2">
@@ -60,7 +60,6 @@
                                             [fileId]="fileIndexes[fileList.indexOf(fileEntry)]"
                                             [fileIndex]="fileList.indexOf(fileEntry)"
                                             [fileName]="fileNames[fileList.indexOf(fileEntry)]"
-                                            [readOnly]="false"
                                             [sectionId]="sectionType"
                                             [questionBoardId]="questionsBoardObject.id"
                                             [disableActions]="isFunder"

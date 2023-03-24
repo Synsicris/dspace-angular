@@ -236,14 +236,15 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
         );
       }
     }
+
+    this.formId = this.formService.getUniqueId(this.fileId);
+    this.pathCombiner = new JsonPatchOperationPathCombiner('sections', this.sectionId, 'files', this.fileIndex);
   }
 
   /**
    * Initialize instance variables
    */
   ngOnInit() {
-    this.formId = this.formService.getUniqueId(this.fileId);
-    this.pathCombiner = new JsonPatchOperationPathCombiner('sections', this.sectionId, 'files', this.fileIndex);
     this.loadFormMetadata();
   }
 
