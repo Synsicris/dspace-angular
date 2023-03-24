@@ -102,8 +102,8 @@ export class CompareItemComponent implements OnInit {
    */
   getMetaDataKeys(items: Item[]) {
     const excludedMetadata = !!environment.projects.excludeComparisonMetadata ? environment.projects.excludeComparisonMetadata : [];
-    const baseItemMetadataList = Object.keys(items[0].metadata).filter((metadata) => excludedMetadata.indexOf(metadata) === -1);
-    const versionedItemMetadataList = Object.keys(items[1].metadata).filter((metadata) => excludedMetadata.indexOf(metadata) === -1);
+    const baseItemMetadataList = !!items[0] ? Object.keys(items[0].metadata).filter((metadata) => excludedMetadata.indexOf(metadata) === -1) : [];
+    const versionedItemMetadataList = !!items[1] ? Object.keys(items[1].metadata).filter((metadata) => excludedMetadata.indexOf(metadata) === -1) : [];
 
     const metadataAddedList = differenceWith(baseItemMetadataList, versionedItemMetadataList);
     const metadataRemovedList = differenceWith(versionedItemMetadataList, baseItemMetadataList);

@@ -13,25 +13,29 @@
       <div #taskSection class="pr-0 w-100">
         <div class="d-flex align-items-stretch p-0 m-0 bg-step-green">
           <ds-objective-container class="horizontal-step h-100 horizontal-content"
-                                   [canEditButton]="canEditButton$ | async"
-                                   [impactPathwayStep]="impactPathwayStep"
-                                   [impactPathwayTask]="impactPathwayTask"
-                                   [isVersionOfAnItem]="isVersionOfAnItem"
-                                   [projectCommunityId]="projectCommunityId"></ds-objective-container>
+                                  [canEditButton]="canEditButton$ | async"
+                                  [compareMode]="(compareMode$ |async)"
+                                  [impactPathwayStep]="impactPathwayStep"
+                                  [impactPathwayTask]="impactPathwayTask"
+                                  [isVersionOfAnItem]="isVersionOfAnItem"
+                                  [projectCommunityId]="projectCommunityId"></ds-objective-container>
         </div>
         <ds-editable-textarea *ngIf="impactPathwayTask"
-                               [editMode]="getEditMode()"
-                               [formConfig]="formConfig$"
-                               [formSectionName]="getSectionName()"
-                               [itemId]="impactPathwayTask.id"
-                               [editTitle]="'impact-pathway.objectives.edit.btn.title' | translate"
-                               [fieldTitle]="'impact-pathway.objectives.description.title' | translate"
-                               [content]="impactPathwayTask.description"
-                               [disabled]="!(canEditButton$ | async) || isVersionOfAnItem"
-                               (contentChange)="updateImpactPathwayTask($event)"></ds-editable-textarea>
+                              [compareMode]="(compareMode$ |async)"
+                              [editMode]="getEditMode()"
+                              [formConfig]="formConfig$"
+                              [formSectionName]="getSectionName()"
+                              [itemId]="impactPathwayTask.id"
+                              [compareItemId]="impactPathwayTask.compareId"
+                              [editTitle]="'impact-pathway.objectives.edit.btn.title' | translate"
+                              [fieldTitle]="'impact-pathway.objectives.description.title' | translate"
+                              [content]="impactPathwayTask.description"
+                              [disabled]="!(canEditButton$ | async) || isVersionOfAnItem"
+                              (contentChange)="updateImpactPathwayTask($event)"></ds-editable-textarea>
       </div>
       <div *ngIf="isVersionOfAnItem && isFunder && (formConfig$ | async)?.name" class="comment-box" [ngStyle]="{'height.px': taskSection.clientHeight}">
         <ds-comment-list
+          [relatedBoard]="impactPathWayStepItem$ | async"
           [relatedEntityType]="impactPathwayTask.type"
           [itemUuid]="impactPathwayTask.id"
           [projectCommunityId]="projectCommunityId"

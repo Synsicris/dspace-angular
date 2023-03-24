@@ -103,6 +103,7 @@ export class BrowseByProjectsPageComponent implements OnInit {
       case CollapsibleTabs.All:
         this.searchSelected = false;
         this.searchAll = true;
+        this.searchQuery = '';
         break;
 
       case CollapsibleTabs.Query:

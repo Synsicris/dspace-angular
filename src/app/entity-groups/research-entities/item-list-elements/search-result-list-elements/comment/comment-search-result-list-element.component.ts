@@ -34,11 +34,12 @@ import { ConfirmationModalComponent } from '../../../../../shared/confirmation-m
 import { hasValue, isNotEmpty } from '../../../../../shared/empty.util';
 import { Item } from '../../../../../core/shared/item.model';
 import { APP_CONFIG, AppConfig } from '../../../../../../config/app-config.interface';
-import { getEntityPageRoute } from '../../../../../item-page/item-page-routing-paths';
 import { MetadataValue } from '../../../../../core/shared/metadata.models';
 import { PaginatedList } from '../../../../../core/data/paginated-list.model';
+import { Router } from '@angular/router';
+import { CommentUtilsService } from '../../../../../shared/comments/shared/comment-utils.service';
 
-interface TypeDescriptionMetadata {
+export interface TypeDescriptionMetadata {
   itemType: string;
   description: string;
 }
@@ -56,6 +57,7 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
 
   public readonly RELATION_PROJECT = environment.comments.commentRelationProjectVersionMetadata;
   public readonly RELATION_ITEM_VERSION = environment.comments.commentRelationItemVersionMetadata;
+  public readonly RELATION_BOARD_OBJECT = environment.comments.commentRelationBoardMetadata;
 
   /**
    * List of Edit Modes available on this item
@@ -83,6 +85,8 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
     private translateService: TranslateService,
     private editItemService: EditItemDataService,
     private modalService: NgbModal,
+    private router: Router,
+    private readonly commentService: CommentUtilsService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig
   ) {
     super(truncatableService, dsoNameService, appConfig);
@@ -188,36 +192,18 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
   }
 
   /**
-   * Returns the route to the related item page.
-   * We are assuming that {@see MetadataValue#value} is made with this format:
-   * `{itemType} - {description}`.
-   *
-   * @param metadataValue
-   */
-  getRelateItemPageRoute(metadataValue: MetadataValue) {
-    if (!hasValue(metadataValue == null) || !hasValue(metadataValue.value) || !hasValue(metadataValue.authority)) {
-      return null;
-    }
-    const { itemType } = this.getTypeDescriptionMetadata(metadataValue);
-    return getEntityPageRoute(itemType, metadataValue.authority);
-  }
-
-  /**
    * Returns the `itemType` from {@param metadataValue}
-   * that has its value in format `{itemType} - {description}`.
+   * that has its value in format `{itemType} - {description}`
    *
    * @param metadataValue
    */
   getTypeDescriptionMetadata(metadataValue: MetadataValue): TypeDescriptionMetadata {
-    if (!hasValue(metadataValue?.value)) {
-      return null;
-    }
-    const typeValue = metadataValue.value;
-    const splittedValue = typeValue.split('-');
-    return ({
-      itemType: (splittedValue[0] || '').trim(),
-      description: ((splittedValue.length > 1 && splittedValue[1]) || '').trim()
-    });
+    return this.commentService.splitMetadataValue(metadataValue);
+  }
+
+  navigateToRelatedItem(relatedItemMD: MetadataValue, questionBoard?: MetadataValue) {
+    this.commentService.getRelatedItemURL(relatedItemMD, questionBoard)
+      .subscribe(url => this.router.navigateByUrl(url));
   }
 
   /**

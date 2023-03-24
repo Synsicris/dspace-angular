@@ -1545,6 +1545,7 @@ export class InitCompareStepTaskSuccessAction implements Action {
   payload: {
     impactPathwayId: string;
     impactPathwayStepId: string;
+    compareImpactPathwayStepId: string;
     tasks: ImpactPathwayTask[];
   };
 
@@ -1555,11 +1556,13 @@ export class InitCompareStepTaskSuccessAction implements Action {
    *    the id of impact pathway that the tasks belong to
    * @param impactPathwayStepId
    *    the id of impact pathway step that the tasks belong to
+   * @param compareImpactPathwayStepId
+   *    the id of comparing impact pathway step that the tasks belong to
    * @param tasks
    *    the list of tasks objects
    */
-  constructor(impactPathwayId: string, impactPathwayStepId: string, tasks: ImpactPathwayTask[]) {
-    this.payload = { impactPathwayId, impactPathwayStepId, tasks };
+  constructor(impactPathwayId: string, impactPathwayStepId: string, compareImpactPathwayStepId: string, tasks: ImpactPathwayTask[]) {
+    this.payload = { impactPathwayId, impactPathwayStepId, compareImpactPathwayStepId, tasks };
   }
 }
 

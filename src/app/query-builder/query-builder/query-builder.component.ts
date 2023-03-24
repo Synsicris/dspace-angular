@@ -196,6 +196,6 @@ export class QueryBuilderComponent {
         }),
       ]),
     });
-    this.onQueryCompose.emit(null);
+    this.onQueryCompose.emit('');
   }
 }

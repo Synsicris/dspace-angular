@@ -37,10 +37,10 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
   <main>
 
 
-        <h1>Impact Pathway</h1>
+        <h1>Wirkungspfad</h1>
 
   		<article>
-        <p>Wirkungspfade visualisieren und strukturieren die <strong>Zusammenhänge von Inputs, Outputs und Outcomes sowie die beabsichtigten Wirkungen</strong> eines Projekts mit Karten und Pfeilen an einer Pinnwand oder digital über Textfelder.</p>  
+        <p>Wirkungspfade visualisieren und strukturieren die <strong>Zusammenhänge von Inputs, Outputs und Outcomes sowie die beabsichtigten Wirkungen</strong> eines (Teil-)Projekts mit Karten und Pfeilen an einer Pinnwand oder digital über Textfelder.</p>  
 
 
   		<img src="img/de_project_ipw_zentrales_element.png">

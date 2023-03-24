@@ -62,6 +62,7 @@
               <div class="row m-0" *ngIf="(formConfig$ | async)?.name">
                 <div class="col-2 p-0" *ngFor="let data of impactPathway.steps | dsGetIpwData">
                   <ds-comment-list
+                    [relatedBoard]="impactPathWayItem"
                     [relatedEntityType]="impactPathwayStepEntityType"
                     [itemUuid]="data.id"
                     [title]="data.title"
@@ -86,16 +87,18 @@
                               [compareMode]="(compareMode | async)"
                               [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"></ds-impact-path-way-step>
   </div>
-  <ds-editable-textarea *ngIf="impactPathway"
-                         [editMode]="getEditMode()"
-                         [formConfig]="formConfig$"
-                         [formSectionName]="getSectionName()"
-                         [itemId]="impactPathway.id"
-                         [editTitle]="'impact-pathway.edit.title' | translate"
-                         [fieldTitle]="'impact-pathway.description' | translate"
-                         [content]="impactPathway.description"
-                         [disabled]="(compareMode | async) || !(canEditButton$ | async)"
-                         (contentChange)="updateImpactPathway($event)">
+  <ds-editable-textarea *ngIf="!(compareProcessing$ | async) && impactPathway"
+                        [compareMode]="(compareMode | async)"
+                        [editMode]="getEditMode()"
+                        [formConfig]="formConfig$"
+                        [formSectionName]="getSectionName()"
+                        [itemId]="impactPathway.id"
+                        [compareItemId]="(compareItem$ | async)?.id"
+                        [editTitle]="'impact-pathway.edit.title' | translate"
+                        [fieldTitle]="'impact-pathway.description' | translate"
+                        [content]="impactPathway.description"
+                        [disabled]="!(canEditButton$ | async)"
+                        (contentChange)="updateImpactPathway($event)">
   </ds-editable-textarea>
 </div>
 

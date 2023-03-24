@@ -736,8 +736,8 @@ export class DefaultAppConfig implements AppConfig {
       'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
       'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
       'synsicris.isLastVersion', 'synsicris.isLastVersion.visible', 'synsicris.version', 'synsicris.version.visible',
-      "synsicris.versioning-funder-policy.group", "synsicris.versioning-reader-policy.group",
-      "synsicris.versioning-member-policy.group", "synsicris.versioning-coordinator-policy.group"
+      'synsicris.versioning-funder-policy.group', 'synsicris.versioning-reader-policy.group',
+      'synsicris.versioning-member-policy.group', 'synsicris.versioning-coordinator-policy.group', 'dc.identifier.uri'
 
     ],
     projectsBrowse: {
@@ -1382,7 +1382,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.description',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.Text,
+            truncatable: true
           }
         ]
       }
@@ -1632,6 +1633,7 @@ export class DefaultAppConfig implements AppConfig {
     commentRelationItemVersionMetadata: 'synsicris.relation.commentItemVersion',
     commentRelationProjectMetadata: 'synsicris.relation.commentProject',
     commentRelationProjectVersionMetadata: 'synsicris.relation.commentProjectVersion',
+    commentRelationBoardMetadata: 'synsicris.relation.commentBoard',
   };
 
 }

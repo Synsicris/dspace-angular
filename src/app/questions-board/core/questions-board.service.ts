@@ -179,10 +179,10 @@ export class QuestionsBoardService {
     );
   }
 
-  initQuestionsBoardStep(parentId: string, stepItem: Item, tasks: QuestionsBoardTask[]): QuestionsBoardStep {
+  initQuestionsBoardStep(parentId: string, stepItem: Item, tasks: QuestionsBoardTask[], compareId?: string): QuestionsBoardStep {
     const description = stepItem.firstMetadataValue('dc.description');
 
-    return new QuestionsBoardStep(parentId, stepItem.id, stepItem.name, description, tasks);
+    return new QuestionsBoardStep(parentId, stepItem.id, compareId, stepItem.name, description, tasks);
   }
 
   initQuestionsBoardSteps(questionsBoardObjectId: string, parentItem: Item): Observable<QuestionsBoardStep[]> {
@@ -311,11 +311,14 @@ export class QuestionsBoardService {
    */
   public initQuestionsBoardStepFromCompareItem(compareObj: ComparedVersionItem, parentId, tasks: QuestionsBoardStep[] | QuestionsBoardTask[] = []): QuestionsBoardStep {
     const type = compareObj.item.firstMetadataValue('dc.title');
+    const description = compareObj.item.firstMetadataValue('dc.description');
     return Object.assign(new QuestionsBoardStep(), {
       id: compareObj.item.id,
+      compareId: compareObj.versionItem.id,
       parentId: parentId,
       type: type,
       tasks: tasks,
+      description: description
     });
   }
 
@@ -348,29 +351,15 @@ export class QuestionsBoardService {
 
 
   updateQuestionsBoardStep(newQuestionsBoardStepItem: Item, oldQuestionsBoardStep: QuestionsBoardStep): QuestionsBoardStep {
-    const description = Object.assign('', newQuestionsBoardStepItem.firstMetadataValue('dc.description'));
+    const description = newQuestionsBoardStepItem.firstMetadataValue('dc.description');
 
     return new QuestionsBoardStep(
-      Object.assign('', oldQuestionsBoardStep.parentId),
-      Object.assign('', oldQuestionsBoardStep.id),
-      Object.assign('', oldQuestionsBoardStep.type),
-      Object.assign('', description),
-      Object.assign([],
-        oldQuestionsBoardStep.tasks
-          .map(task =>
-            new QuestionsBoardTask(
-              Object.assign('', task.id),
-              Object.assign('', task.type),
-              Object.assign('', task.parentId),
-              Object.assign('', task.title),
-              Object.assign('', task.compareId),
-              Object.assign({}, task.compareStatus),
-              Object.assign('', task.description),
-              Object.assign('', task.status),
-              Object.assign('', task.internalStatus),
-            )
-          )
-      )
+      oldQuestionsBoardStep.parentId,
+      oldQuestionsBoardStep.id,
+      null,
+      oldQuestionsBoardStep.type,
+      description,
+      [...oldQuestionsBoardStep.tasks]
     );
   }
 }

@@ -24,30 +24,35 @@
                                                [compareMode]="compareMode"></ds-questions-board-step-container>
           </div>
           <ds-view-simple-item-form *ngIf="hasCheckbox && questionsBoardStep"
+                                    [compareMode]="compareMode"
                                     [editMode]="getEditMode()"
                                     [editTitle]="messagePrefix + '.edit.btn.title' | translate"
                                     [fieldTitle]="messagePrefix + '.description.title' | translate"
                                     [formConfig]="formConfig$"
                                     [formSectionName]="getSectionName()"
                                     [itemId]="questionsBoardStep.id"
+                                    [compareItemId]="questionsBoardStep.compareId"
                                     [disabled]="compareMode || isVersionOfAnItem"
                                     (itemUpdate)="updateQuestionsBoardStep($event)"></ds-view-simple-item-form>
           <ds-editable-textarea *ngIf="!hasCheckbox && questionsBoardStep"
-                                 [editMode]="getEditMode()"
-                                 [formConfig]="formConfig$"
-                                 [formSectionName]="getSectionName()"
-                                 [itemId]="questionsBoardStep.id"
-                                 [editTitle]="messagePrefix + '.edit.btn.title' | translate"
-                                 [fieldTitle]="messagePrefix + '.description.title' | translate"
-                                 [content]="questionsBoardStep.description"
-                                 [disabled]="compareMode || isVersionOfAnItem"
-                                 (contentChange)="updateQuestionsBoardStep($event)"></ds-editable-textarea>
+                                [compareMode]="compareMode"
+                                [editMode]="getEditMode()"
+                                [formConfig]="formConfig$"
+                                [formSectionName]="getSectionName()"
+                                [itemId]="questionsBoardStep.id"
+                                [compareItemId]="questionsBoardStep.compareId"
+                                [editTitle]="messagePrefix + '.edit.btn.title' | translate"
+                                [fieldTitle]="messagePrefix + '.description.title' | translate"
+                                [content]="questionsBoardStep.description"
+                                [disabled]="compareMode || isVersionOfAnItem"
+                                (contentChange)="updateQuestionsBoardStep($event)"></ds-editable-textarea>
         </div>
       </div>
 
       <div *ngIf="isVersionOfAnItem && isFunder && (formConfig$ | async)?.name && this.questionBoardEntityType" class="comment-box pr-2 py-2 comment-box-position"
            [ngStyle]="{'height.px': questionsBoardSection.clientHeight}">
         <ds-comment-list
+          [relatedBoard]="questionsBoard$ | async"
           [relatedEntityType]="this.questionBoardEntityType"
           [itemUuid]="this.questionsBoardStep.id"
           [projectCommunityId]="projectCommunityId"

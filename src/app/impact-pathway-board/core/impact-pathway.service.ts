@@ -43,6 +43,7 @@ import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocab
 import { MetadataMap, MetadataValue } from '../../core/shared/metadata.models';
 import { Metadata } from '../../core/shared/metadata.utils';
 import {
+  compareImpactPathwayIdSelector,
   impactPathwayByIDSelector,
   impactPathwayObjectsSelector,
   impactPathwayStateSelector,
@@ -454,6 +455,7 @@ export class ImpactPathwayService {
    */
   public initImpactPathwayTaskFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, tasks: ImpactPathwayTask[] = []): ImpactPathwayTask {
     const type = compareObj.item.firstMetadataValue('dspace.entity.type');
+    const description = compareObj.item.firstMetadataValue('dc.description');
     return Object.assign(new ImpactPathwayTask(), {
       id: compareObj.item.id,
       compareId: compareObj.versionItem?.id,
@@ -462,6 +464,7 @@ export class ImpactPathwayService {
       title: compareObj.item.name,
       type: type,
       tasks: tasks,
+      description: description
     });
   }
 
@@ -489,10 +492,10 @@ export class ImpactPathwayService {
    *    the impact pathway's id
    * @param impactPathwayStepId
    *    the impact pathway's step id
-   * * @param impactPathwayStepTaskId
+   * @param impactPathwayStepTaskId
    *    the impact pathway's step task id
    */
-  dispatchStopCompareImpactPathwayTask(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId: string,) {
+  dispatchStopCompareImpactPathwayTask(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId: string) {
     this.store.dispatch(new StopCompareImpactPathwayStepTaskAction(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId));
   }
 
@@ -540,6 +543,13 @@ export class ImpactPathwayService {
    */
   public isCompareModeActive() {
     return this.store.pipe(select(isCompareMode));
+  }
+
+  /**
+   * Check compareMode is true
+   */
+  public getCompareImpactPathwayId(): Observable<string> {
+    return this.store.pipe(select(compareImpactPathwayIdSelector));
   }
 
   getCreateTaskFormConfigName(stepType: string, isObjectivePage: boolean): string {
@@ -953,7 +963,7 @@ export class ImpactPathwayService {
       select(impactPathwayByIDSelector(impactPathwayId))
     );
 
-    return combineLatestObservable(isLoaded$, impactPathWay$).pipe(
+    return combineLatestObservable([isLoaded$, impactPathWay$]).pipe(
       map(([isLoaded, impactPathway]) => isLoaded && isNotEmpty(impactPathway)),
       take(1)
     );
@@ -967,7 +977,7 @@ export class ImpactPathwayService {
     this.router.navigate(['items', projectItemId]);
   }
 
-  private createImpactPathwaySteps(projectId: string, impactPathwayId: string): Observable<Item[]> {
+  private createImpactPathwaySteps(projectId: string, impactPathwayId: string, impactPathwayName: string): Observable<Item[]> {
     const vocabularyOptions: VocabularyOptions = new VocabularyOptions(
       environment.impactPathway.impactPathwayStepTypeAuthority
     );
@@ -982,6 +992,7 @@ export class ImpactPathwayService {
       concatMap((stepType: VocabularyEntry) => this.createImpactPathwayStepItem(
         projectId,
         impactPathwayId,
+        impactPathwayName,
         stepType.value,
         stepType.display
       )),
@@ -989,7 +1000,7 @@ export class ImpactPathwayService {
     );
   }
 
-  private createImpactPathwayStepWorkspaceItem(projectId: string, impactPathwayId: string, impactPathwayStepType: string, impactPathwayStepName: string): Observable<SubmissionObject> {
+  private createImpactPathwayStepWorkspaceItem(projectId: string, impactPathwayId: string, impactPathwayName: string, impactPathwayStepType: string, impactPathwayStepName: string): Observable<SubmissionObject> {
     const submission$ = this.getCollectionIdByProjectAndEntity(projectId, environment.impactPathway.impactPathwayStepEntity).pipe(
       mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, environment.impactPathway.impactPathwayStepEntity)),
       mergeMap((submission: SubmissionObject) =>
@@ -997,7 +1008,7 @@ export class ImpactPathwayService {
       ));
 
     return combineLatestObservable([submission$, this.getImpactPathwayStepsFormSection()]).pipe(
-      tap(([submission, sectionName]) => this.addPatchOperationForImpactPathwayStep(impactPathwayId, sectionName, impactPathwayStepType, impactPathwayStepName)),
+      tap(([submission, sectionName]) => this.addPatchOperationForImpactPathwayStep(impactPathwayId, impactPathwayName, sectionName, impactPathwayStepType, impactPathwayStepName)),
       delay(100),
       mergeMap(([submission, sectionName]) => this.executeSubmissionPatch(submission.id, sectionName))
     );
@@ -1006,10 +1017,11 @@ export class ImpactPathwayService {
   private createImpactPathwayStepItem(
     projectId: string,
     impactPathwayId: string,
+    impactPathwayName: string,
     impactPathwayStepType: string,
     impactPathwayStepName: string): Observable<Item> {
 
-    return this.createImpactPathwayStepWorkspaceItem(projectId, impactPathwayId, impactPathwayStepType, impactPathwayStepName).pipe(
+    return this.createImpactPathwayStepWorkspaceItem(projectId, impactPathwayId, impactPathwayName, impactPathwayStepType, impactPathwayStepName).pipe(
       mergeMap((submission: SubmissionObject) => this.depositWorkspaceItem(submission)),
       getFirstSucceededRemoteDataPayload()
     );
@@ -1025,7 +1037,7 @@ export class ImpactPathwayService {
         return [submission, (submission.item as Item).id];
       }));
     return forkJoin([submission$.pipe(
-      mergeMap(([submission, parentId]: [SubmissionObject, string]) => this.createImpactPathwaySteps(projectId, parentId).pipe(
+      mergeMap(([submission, parentId]: [SubmissionObject, string]) => this.createImpactPathwaySteps(projectId, parentId, impactPathwayName).pipe(
         map((steps) => {
           return [submission, steps];
         })
@@ -1064,6 +1076,7 @@ export class ImpactPathwayService {
 
   private addPatchOperationForImpactPathwayStep(
     impactPathwayId: string,
+    impactPathwayName: string,
     sectionName: string,
     impactPathwayStepType: string,
     impactPathwayStepName: string
@@ -1084,7 +1097,7 @@ export class ImpactPathwayService {
     );
 
     const parent = {
-      value: impactPathwayId,
+      value: impactPathwayName,
       authority: impactPathwayId,
       place: 0,
       confidence: 600

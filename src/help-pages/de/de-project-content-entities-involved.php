@@ -45,24 +45,23 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
       </br>
 		<article>
 		<h2>Wer ist beteiligt?</h2>
-		<p>Das Erfassen der Beteiligten soll zeigen, welche Disziplinen und Handlungsfelder in ihrem Projekt zusammenarbeiten und in welcher Intensität sie in das Projekt eingebunden sind. Die Zusammenarbeit kann auf verschiedenen Wegen stattfinden:
+		<p>Das Erfassen der Beteiligten soll zeigen, welche Disziplinen und Handlungsfelder in ihrem (Teil-)Projekt zusammenarbeiten und in welcher Intensität sie in das (Teil-)Projekt eingebunden sind. Die Zusammenarbeit kann auf verschiedenen Wegen stattfinden:
 
       <ul>
         <li><strong>Zusammenarbeit mit einzelnen Organisationen</strong> (darin sind auch Betriebe und andere Solo-Selbständige eingeschlossen), z.B.
 
           <ul>
-            <li>Projektpartner in einem Verbundprojekt (siehe <a href="de-project-about-entities-proj.php">Verbundprojekt und Teilprojekt</a>)</li>
+            <li>Projektpartner in einem Verbundprojekt (siehe <a href="de-project-content-entities-proj.php">Verbundprojekt und (Teil-)Projekt</a>)</li>
             <li>Kooperationspartner/Auftragnehmer</li>
           </ul>
 
 
           <li><strong>Zusammenarbeit mit Akteursgruppen</strong>
             <ul>
-              <li>Akteursgruppen sind Gruppen von Personen und/oder Organisationen, die im Projekt mitwirken, aber nicht
-                namentlich genannt werden (dies kann dazu dienen, ihre Anonymität zu wahren oder größere Gruppen mit einem geringeren Aufwand zu erfassen)</li>
+              <li>Akteursgruppen sind Gruppen von Personen und/oder Organisationen, die im (Teil-)Projekt mitwirken, aber nicht namentlich genannt werden (dies kann dazu dienen, ihre Anonymität zu wahren oder größere Gruppen mit einem geringeren Aufwand zu erfassen)</li>
             </ul>
       </ul>
-      Mit der Erfassung der Beteiligten setzen Sie die Grundlage dafür, zu sehen, welche Disziplinen und Handlungsfelder in welcher Intensität eingebunden und mit dem Projekt adressiert werden, beispielsweise indem die Beteiligten:
+      Mit der Erfassung der Beteiligten setzen Sie die Grundlage dafür, zu sehen, welche Disziplinen und Handlungsfelder in welcher Intensität eingebunden und mit dem (Teil-)Projekt adressiert werden, beispielsweise indem die Beteiligten:
         <ul>
           <li>bei der Erarbeitung von Ergebnissen mitwirken</li>
           <li> ihre Sichtweisen und Erfahrungen einbringen</li>
@@ -92,7 +91,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
     <p>Im Monitoring-Tool ist es lediglich notwendig jene Auftragnehmer zu erfassen, die <strong>maßgeblich an der Erarbeitung von Ergebnissen mitwirken</strong>. Für ausführende Tätigkeiten (z.B. eine Elektrik installieren, eine Analyse durchführen) sind keine Auftragnehmer zu erfassen.</p>
 </p>
 
-    Kooperationspartner wirken häufig <strong>ohne Vertrag </strong>maßgeblich an der Erarbeitung von Ergebnissen im Projekt mit, es gibt jedoch auch Kooperationen zur Verwertung und zum Transfer von Ergebnissen. Sie bringen ihre Erfahrungen und ihr Wissen in das Projekt ein, ohne als Projektpartner direkt vom Förderer oder indirekt als Auftragnehmer in einem (Teil-)Projekt finanziert zu werden.</p>
+    Kooperationspartner wirken häufig <strong>ohne Vertrag </strong>maßgeblich an der Erarbeitung von Ergebnissen im (Teil-)Projekt mit, es gibt jedoch auch Kooperationen zur Verwertung und zum Transfer von Ergebnissen. Sie bringen ihre Erfahrungen und ihr Wissen in das (Teil-)Projekt ein, ohne als Projektpartner direkt vom Förderer oder indirekt als Auftragnehmer in einem (Teil-)Projekt finanziert zu werden.</p>
     <p>Achtung: Der Übergang zwischen Kooperationspartner und Akteursgruppe ist fließend. Sie nehmen die Einordnung selbst vor,
       je nachdem was passender ist (Leitfragen zur Unterscheidung finden Sie weiter unten).
         </p>
@@ -106,7 +105,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
     <p>
 
-      Eine Akteursgruppe ist eine Gruppe von Personen oder Organisationen aus demselben Tätigkeitsbereich. Erfassen Sie im Monitoring-Tool jene Akteursgruppen, mit denen das Projekt zusammenarbeitet oder die durch die Projektergebnisse adressiert werden.</p>
+      Eine Akteursgruppe ist eine Gruppe von Personen oder Organisationen aus demselben Tätigkeitsbereich. Erfassen Sie im Monitoring-Tool jene Akteursgruppen, mit denen das (Teil-)Projekt zusammenarbeitet oder die durch die Projektergebnisse adressiert werden.</p>
       <p>Anders als bei den Kooperationspartnern wird bei den Akteursgruppen eine Zusammenfassung von Organisationen und Personen zu einer Gruppe vorgenommen. Die Zusammenarbeit mit einer Akteursgruppe ist eher <strong>unverbindlich</strong>, die dahinterstehenden Organisationen möchten eher <strong>anonym</strong> bleiben und <strong>die Zusammensetzung der Gruppe</strong> wechselt gegebenenfalls (Leitfragen zur Unterscheidung finden Sie im folgenden Abschnitt).
 
     </p>
@@ -122,7 +121,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 
     <p>
-      Der Übergang zwischen Kooperationspartner und Akteursgruppe ist fließend. Folgende Leitfragen geben eine Hilfestellung, um die beteiligten Organisationen im Projekt passend einzuordnen:
+      Der Übergang zwischen Kooperationspartner und Akteursgruppe ist fließend. Folgende Leitfragen geben eine Hilfestellung, um die beteiligten Organisationen im (Teil-)Projekt passend einzuordnen:
 
       <ol>
         <li>Möchte die Organisation für den Förderer <strong>sichtbar werden</strong> oder <strong>anonym</strong> bleiben? </li>
