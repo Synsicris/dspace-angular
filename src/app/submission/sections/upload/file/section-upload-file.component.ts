@@ -21,7 +21,6 @@ import { SubmissionJsonPatchOperationsService } from '../../../../core/submissio
 import { SubmissionSectionUploadFileEditComponent } from './edit/section-upload-file-edit.component';
 import { Bitstream } from '../../../../core/shared/bitstream.model';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
-import { QuestionsBoardService } from '../../../../questions-board/core/questions-board.service';
 
 /**
  * This component represents a single bitstream contained in the submission
@@ -113,6 +112,12 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
   @Input() disableActions = false;
 
   /**
+   * The questionsBoard edit mode (suffix)
+   * @type {string}
+   */
+  @Input() questionsBoardEditMode: string;
+
+  /**
    * The [[SubmissionSectionUploadFileEditComponent]] reference
    * @type {SubmissionSectionUploadFileEditComponent}
    */
@@ -199,7 +204,6 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
     private submissionService: SubmissionService,
     private uploadService: SectionUploadService,
     private questionsBoardStateService: QuestionsBoardStateService,
-    private questionsBoardService: QuestionsBoardService,
     private notificationsService: NotificationsService,
     private translate: TranslateService,
   ) {
@@ -219,8 +223,7 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
               filter((bitstream) => isNotUndefined(bitstream)))
             .subscribe((bitstream) => {
               this.fileData = bitstream;
-            }
-            )
+            })
         );
       } else if (hasValue(this.questionBoardId)) {
         this.subscriptions.push(
@@ -291,7 +294,7 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
     activeModal.componentInstance.pathCombiner = this.pathCombiner;
     activeModal.componentInstance.submissionId = this.submissionId;
     activeModal.componentInstance.questionBoardId = this.questionBoardId;
-    activeModal.componentInstance.singleAccessCondition = this.singleAccessCondition;
+    activeModal.componentInstance.questionsBoardEditMode = this.questionsBoardEditMode;
 
     this.subscriptions.push(
       activeModal.closed.subscribe((updateFinishedQB: boolean) => {
@@ -325,7 +328,7 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
    */
   protected deleteFile() {
     this.operationsBuilder.remove(this.pathCombiner.getPath());
-    const elementId = this.submissionId ?? `${this.questionBoardId}:${this.questionsBoardService.getQuestionsBoardEditMode()}`;
+    const elementId = this.submissionId ?? `${this.questionBoardId}:${this.questionsBoardEditMode}`;
     this.subscriptions.push(this.operationsService.jsonPatchByResourceID(
       this.submissionService.getSubmissionObjectLinkName(),
       elementId,

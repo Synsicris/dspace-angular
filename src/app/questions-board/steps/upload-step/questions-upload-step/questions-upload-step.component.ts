@@ -181,6 +181,12 @@ export class QuestionsUploadStepComponent implements OnInit {
    */
   public isLoading = false;
 
+  /**
+   * The current edit mode
+   * @type {string}
+   */
+  public questionsBoardEditMode: string;
+
   constructor(
     private authService: AuthService,
     private halService: HALEndpointService,
@@ -192,7 +198,9 @@ export class QuestionsUploadStepComponent implements OnInit {
     private translate: TranslateService,
     private changeDetectorRef: ChangeDetectorRef,
     private editItemDataService: EditItemDataService,
-  ) { }
+  ) {
+    this.questionsBoardEditMode = this.questionsBoardService.getQuestionsBoardEditMode();
+   }
 
   ngOnInit(): void {
     // Get the rest endpoint for the upload files options
@@ -333,7 +341,7 @@ export class QuestionsUploadStepComponent implements OnInit {
       isNotEmpty(fileData.metadata) &&
       isNotEmpty(fileData.metadata[metadataName])
     ) {
-      title = fileData.metadata[metadataName][0].display;
+      title = fileData.metadata[metadataName][0].value;
     } else {
       title = fileData.uuid;
     }

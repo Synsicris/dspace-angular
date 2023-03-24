@@ -61,7 +61,6 @@ import { Subscription } from 'rxjs';
 import { DynamicFormControlCondition } from '@ng-dynamic-forms/core/lib/model/misc/dynamic-form-control-relation.model';
 import { DynamicDateControlValue } from '@ng-dynamic-forms/core/lib/model/dynamic-date-control.model';
 import { DynamicSelectModelConfig } from '@ng-dynamic-forms/core/lib/model/select/dynamic-select.model';
-import { QuestionsBoardService } from '../../../../../questions-board/core/questions-board.service';
 import { QuestionsBoardStateService } from './../../../../../questions-board/core/questions-board-state.service';
 
 /**
@@ -153,6 +152,12 @@ export class SubmissionSectionUploadFileEditComponent implements OnInit {
   public questionBoardId: string;
 
   /**
+   * The questions board edit mode (suffix)
+   * @type {string}
+   */
+  public questionsBoardEditMode: string;
+
+  /**
    * The list of all available metadata
    */
   formMetadata: string[] = [];
@@ -199,7 +204,6 @@ export class SubmissionSectionUploadFileEditComponent implements OnInit {
     private operationsService: SubmissionJsonPatchOperationsService,
     private uploadService: SectionUploadService,
     private questionsBoardStateService: QuestionsBoardStateService,
-    private questionsBoardService: QuestionsBoardService,
     private translate: TranslateService
   ) {
   }
@@ -465,7 +469,7 @@ export class SubmissionSectionUploadFileEditComponent implements OnInit {
         }
 
         // dispatch a PATCH request to save metadata
-        const elementId = this.submissionId ?? `${this.questionBoardId}:${this.questionsBoardService.getQuestionsBoardEditMode()}`;
+        const elementId = this.submissionId ?? `${this.questionBoardId}:${this.questionsBoardEditMode}`;
         return this.operationsService.jsonPatchByResourceID(
           this.submissionService.getSubmissionObjectLinkName(),
           elementId,
