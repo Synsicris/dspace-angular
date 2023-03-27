@@ -83,6 +83,7 @@ export interface ImpactPathwayState {
   processing: boolean;
   removing: boolean;
   targetTaskId: string;
+  targetTaskIdBeforeCompare: string;
   links: ImpactPathwayLinks;
   collapsed: any;
   compareMode: boolean;
@@ -98,6 +99,7 @@ const impactPathwayInitialState: ImpactPathwayState = {
   processing: false,
   removing: false,
   targetTaskId: '',
+  targetTaskIdBeforeCompare: '',
   links: {
     showLinks: true,
     editing: false,
@@ -1115,6 +1117,8 @@ function stopCompareStepTask(state: ImpactPathwayState, action: StopCompareImpac
     objectsBeforeCompare: {},
     compareImpactPathwayId: null,
     compareMode: false,
+    targetTaskId: state.targetTaskIdBeforeCompare,
+    targetTaskIdBeforeCompare: ''
   });
 }
 
@@ -1131,8 +1135,18 @@ function stopCompareStepTask(state: ImpactPathwayState, action: StopCompareImpac
 function replaceImpactPathwayTaskSubtasks(state: ImpactPathwayState, action: InitCompareStepTaskSuccessAction) {
   const objectsBeforeCompare = Object.assign({}, state.objects);
   const newState = Object.assign({}, state);
-  const { step, stepIndex } =
+  let { step, stepIndex } =
     extractStoreElements(newState, action.payload.impactPathwayId, action.payload.impactPathwayStepId, null);
+  let targetTaskId = newState.targetTaskId;
+  let targetTaskIdBeforeCompare = newState.targetTaskId;
+  // if the step is not found it means we're comparing a version with the active instance, so they are switched
+  if (stepIndex === -1) {
+    stepIndex = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.compareImpactPathwayStepId);
+    step = newState.objects[action.payload.impactPathwayId].getStep(action.payload.compareImpactPathwayStepId);
+    const targetTaskIndex = findIndex(action.payload.tasks, {compareId: newState.targetTaskId});
+    targetTaskId = action.payload.tasks[targetTaskIndex].id;
+  }
+
   const newStep = Object.assign(new ImpactPathwayStep(), step, {
     tasks: [...action.payload.tasks]
   });
@@ -1145,7 +1159,9 @@ function replaceImpactPathwayTaskSubtasks(state: ImpactPathwayState, action: Ini
     objects: Object.assign({}, state.objects, {
       [action.payload.impactPathwayId]: newImpactPathway
     }),
-    objectsBeforeCompare
+    objectsBeforeCompare,
+    targetTaskId,
+    targetTaskIdBeforeCompare
   });
 }
 

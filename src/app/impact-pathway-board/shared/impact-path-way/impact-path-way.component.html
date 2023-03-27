@@ -88,11 +88,12 @@
     ></ds-impact-path-way-step>
   </div>
   <ds-editable-textarea
-    *ngIf="impactPathway"
+    *ngIf="!(compareProcessing$ | async) && impactPathway"
     [editMode]="getEditMode()"
     [formConfig]="formConfig$"
     [formSectionName]="getSectionName()"
     [itemId]="impactPathway.id"
+    [compareItemId]="(compareItem$ | async)?.id"
     [editTitle]="'impact-pathway.edit.title' | translate"
     [fieldTitle]="'impact-pathway.description' | translate"
     [content]="impactPathway.description"

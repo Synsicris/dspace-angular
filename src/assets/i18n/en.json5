@@ -5646,13 +5646,13 @@
 
   "search.filters.filter.synsicrisCoverageRegional.head": "Coverage Regional",
 
-  "search.filters.filter.synsicrisType.head": "Type",
+  "search.filters.filter.synsicrisType.head": "Access Type",
 
   "search.filters.filter.synsicrisDateReferenceyear.label": "Search Reference Year",
 
   "search.filters.filter.synsicrisCoverageRegional.label": "Search Coverage Regional",
 
-  "search.filters.filter.synsicrisType.label": "Search Type",
+  "search.filters.filter.synsicrisType.label": "Search Access Type",
 
   "search.filters.filter.synsicrisRelationFundingobjective.head": "Funding Objective",
 
@@ -10812,6 +10812,24 @@
 
   "layout.field.label.innovationpotential.synsicris.coverage.regionalprimary": "Primary field of application",
 
-  "layout.field.label.innovationpotential.synsicris.coverage.regionalsecondary": "Later dissemination"
+  "layout.field.label.innovationpotential.synsicris.coverage.regionalsecondary": "Later dissemination",
+
+  "search.filters.filter.synsicrisOairecerifEventStartdate.min.label": "Start",
+
+  "search.filters.filter.synsicrisOairecerifEventStartdate.max.label": "End",
+
+  "search.filters.filter.synsicrisCoverageRegionalsecondary.placeholder": "Regional Secondary",
+
+  "search.filters.filter.synsicrisTypeLevel.placeholder": "Type Level",
+
+  "search.filters.filter.synsicrisTypeEvidence.placeholder": "Evidence Type",
+
+  "search.filters.filter.synsicrisType.placeholder": "Access Type",
+
+  "search.filters.filter.synsicrisRelationFundingobjective.placeholder": "Funding Objective",
+
+  "search.filters.filter.synsicrisLevelStart.placeholder": "Level Start",
+
+  "search.filters.filter.synsicrisLevelEnd.placeholder": "Level End"
 
 }
