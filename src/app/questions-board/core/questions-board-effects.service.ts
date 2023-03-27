@@ -47,6 +47,7 @@ import { ItemDataService } from '../../core/data/item-data.service';
 import { QuestionsBoardTask } from './models/questions-board-task.model';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 import { QuestionsBoardStep } from './models/questions-board-step.model';
+import { MetadataValue } from '../../core/shared/metadata.models';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -270,13 +271,17 @@ export class QuestionsBoardEffects {
   orderSubTasks$ = createEffect(() =>  this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.ORDER_QUESTIONS_BOARD_TASK),
     switchMap((action: OrderQuestionsBoardTasksAction) => {
-      const taskIds: string[] = action.payload.currentTasks.map((task: QuestionsBoardTask) => task.id);
+      const tasks: Pick<MetadataValue, 'authority' | 'value'>[] =
+        action.payload.currentTasks.map((task: QuestionsBoardTask) => ({
+          authority: task.id,
+          value: task.description
+        }));
       return this.itemAuthorityRelationService.orderRelations(
         this.questionsBoardService.getQuestionsBoardEditFormSection(),
         this.questionsBoardService.getQuestionsBoardEditMode(),
         action.payload.stepId,
-        taskIds,
-         this.questionsBoardService.getQuestionsBoardRelationTasksMetadata()
+        tasks,
+        this.questionsBoardService.getQuestionsBoardRelationTasksMetadata()
       ).pipe(
         map(() => new OrderQuestionsBoardTasksSuccessAction()),
         catchError((error: Error) => {

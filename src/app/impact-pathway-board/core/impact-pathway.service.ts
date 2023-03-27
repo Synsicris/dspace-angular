@@ -793,12 +793,12 @@ export class ImpactPathwayService {
       );
   }
 
-  orderTasks(parentTasksId: string, taskIds: string[]): Observable<Item> {
+  orderTasks(parentTasksId: string, tasks: Pick<MetadataValue, 'authority' | 'value'>[]): Observable<Item> {
     return this.itemAuthorityRelationService.orderRelations(
       this.getImpactPathwaysEditFormSection(),
       this.getImpactPathwaysEditMode(),
       parentTasksId,
-      taskIds,
+      tasks,
       environment.impactPathway.impactPathwayTaskRelationMetadata
     );
   }
