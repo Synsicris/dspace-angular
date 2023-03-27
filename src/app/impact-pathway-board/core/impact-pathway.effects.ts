@@ -270,7 +270,7 @@ export class ImpactPathwayEffects {
             if (error) {
               console.error(error.message);
             }
-            return observableOf(new AddImpactPathwayTaskErrorAction());
+            return observableOf(new AddImpactPathwayTaskErrorAction(action.payload.impactPathwayId, action.payload.stepId));
           }));
     }));
 
@@ -351,7 +351,7 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new AddImpactPathwayTaskErrorAction());
+          return observableOf(new AddImpactPathwayTaskErrorAction(action.payload.impactPathwayId, action.payload.stepId));
         }));
     }));
 
@@ -462,7 +462,12 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new RemoveImpactPathwayTaskErrorAction());
+          return observableOf(
+            new RemoveImpactPathwayTaskErrorAction(
+              action.payload.impactPathwayId,
+              action.payload.parentId
+            )
+          );
         }));
     }));
 
@@ -488,7 +493,12 @@ export class ImpactPathwayEffects {
           if (error) {
             console.error(error.message);
           }
-          return observableOf(new RemoveImpactPathwayTaskErrorAction());
+          return observableOf(
+            new RemoveImpactPathwayTaskErrorAction(
+              action.payload.impactPathwayId,
+              action.payload.stepId
+            )
+          );
         }));
     }));
 
@@ -533,7 +543,7 @@ export class ImpactPathwayEffects {
     switchMap((action: OrderImpactPathwayTasksAction) => {
       const taskIds: string[] = action.payload.currentTasks.map((task: ImpactPathwayTask) => task.id);
       return this.impactPathwayService.orderTasks(action.payload.stepId, taskIds).pipe(
-        map(() => new OrderImpactPathwayTasksSuccessAction()),
+        map(() => new OrderImpactPathwayTasksSuccessAction(action.payload.impactPathwayId, action.payload.stepId)),
         catchError((error: Error) => {
           console.error(error.message);
           return observableOf(new OrderImpactPathwayTasksErrorAction(

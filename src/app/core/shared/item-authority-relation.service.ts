@@ -55,7 +55,7 @@ export class ItemAuthorityRelationService {
       getFirstSucceededRemoteDataPayload()
     );
     return combineLatest([parentItem$, linkedItem$]).pipe(
-      tap(([parentItem, linkedItem]: [Item, Item]) => this.addRelationPatch(patchPath, parentItem, linkedItem.name, linkedItemId, relationMetadataName)),
+      tap(([parentItem, linkedItem]: [Item, Item]) => this.addRelationPatch(patchPath, parentItem, linkedItemId, linkedItemId, relationMetadataName)),
       delay(100),
       mergeMap(([parentItem, linkedItem]: [Item, Item]) => this.executeEditItemPatch(parentItem.id, editMode, patchPath).pipe(
         mapTo(linkedItem)
