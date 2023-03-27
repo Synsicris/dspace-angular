@@ -1,4 +1,13 @@
-import { AfterContentChecked, ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
@@ -60,7 +69,6 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
   canDeleteImpactPathway$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   canShowRelations: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   loaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  infoShowed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   /**
    * Array to track all subscriptions and unsubscribe them onDestroy
@@ -185,13 +193,6 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
         }
       }
     );
-  }
-
-  /**
-   * Toggles info panel
-   */
-  toggleInfoPanel() {
-    this.infoShowed.next(!this.infoShowed.value);
   }
 
   /**

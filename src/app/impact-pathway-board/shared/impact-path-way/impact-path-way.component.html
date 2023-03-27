@@ -34,8 +34,7 @@
 </div>
 
 <div>
-  <ds-alert-role *ngIf="infoShowed | async"
-                 [type]="'alert-info'"
+  <ds-alert-role [type]="'alert-info'"
                  [collapsible]="true"
                  [content]="'impact-pathway.wrapper.info'"
                  [alertRoles]="funderRoles"
