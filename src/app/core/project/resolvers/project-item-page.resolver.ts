@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { RemoteData } from '../data/remote-data';
-import { ItemDataService } from '../data/item-data.service';
-import { Item } from '../shared/item.model';
-import { followLink, FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
-import { getFirstCompletedRemoteData } from '../shared/operators';
+import { RemoteData } from '../../data/remote-data';
+import { ItemDataService } from '../../data/item-data.service';
+import { Item } from '../../shared/item.model';
+import { followLink, FollowLinkConfig } from '../../../shared/utils/follow-link-config.model';
+import { getFirstCompletedRemoteData } from '../../shared/operators';
 import { Store } from '@ngrx/store';
-import { ResolvedAction } from '../resolving/resolver.actions';
+import { ResolvedAction } from '../../resolving/resolver.actions';
 
 /**
  * The self links defined in this list are expected to be requested somewhere in the near future

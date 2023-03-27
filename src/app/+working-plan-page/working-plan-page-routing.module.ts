@@ -4,12 +4,14 @@ import { RouterModule } from '@angular/router';
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
 import { WorkingPlanPageComponent } from './working-plan-page.component';
 import { WorkingPlanItemResolver } from '../working-plan/core/working-plan-item.resolver';
-import { ProjectItemPageResolver } from '../core/project/project-item-page.resolver';
-import { ProjectCommunityByProjectItemResolver } from '../core/project/project-community-by-project-item.resolver';
+import { ProjectItemPageResolver } from '../core/project/resolvers/project-item-page.resolver';
+import {
+  ProjectCommunityByProjectItemResolver
+} from '../core/project/resolvers/project-community-by-project-item.resolver';
 import { ProjectItemI18nBreadcrumbResolver } from '../core/breadcrumbs/project-item-i18n-breadcrumb.resolver';
 import { ProjectItemI18nBreadcrumbsService } from '../core/breadcrumbs/project-item-i18n-breadcrumbs.service';
-import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.resolver';
-import { IsFunderResolver } from '../core/project/is-funder.resolver';
+import { VersionOfAnItemResolver } from '../core/project/resolvers/version-of-an-item.resolver';
+import { IsFunderResolver } from '../core/project/resolvers/is-funder.resolver';
 
 @NgModule({
   imports: [

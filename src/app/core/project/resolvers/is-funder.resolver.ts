@@ -4,8 +4,8 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 import { combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
-import { FeatureID } from '../data/feature-authorization/feature-id';
+import { AuthorizationDataService } from '../../data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../data/feature-authorization/feature-id';
 
 /**
  * This class represents a resolver that check if user is a funder Organizational/Project manager

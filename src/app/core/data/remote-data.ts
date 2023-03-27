@@ -113,6 +113,10 @@ export class RemoteData<T> {
     return isStale(this.state);
   }
 
+  get hasContent(): boolean {
+    return !this.hasNoContent;
+  }
+
   get hasNoContent(): boolean {
     return this.statusCode === 204;
   }
