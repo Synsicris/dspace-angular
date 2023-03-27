@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { SingleFeatureAuthorizationGuard } from './single-feature-authorization.guard';
 import { AuthorizationDataService } from '../authorization-data.service';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
@@ -23,6 +22,6 @@ export class GroupAdministratorGuard extends SomeFeatureAuthorizationGuard {
    * Check group management rights
    */
   getFeatureIDs(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FeatureID[]> {
-    return observableOf([FeatureID.CanManageGroups, FeatureID.isFunderOrganizationalManager]);
+    return observableOf([FeatureID.CanManageGroups, FeatureID.isFunderOrganizationalManagerOfAnyProject]);
   }
 }

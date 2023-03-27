@@ -191,7 +191,7 @@ export class ItemCreateComponent implements OnInit {
    * Check if the user is an administrator
    */
   private isFunderOrganizationalManager(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager).pipe(
+    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManagerOfAnyProject).pipe(
       map((isFunderOrganizationalManager) => isFunderOrganizationalManager),
     );
   }

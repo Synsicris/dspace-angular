@@ -60,7 +60,7 @@ export class InterimReportPageComponent implements OnInit {
   ngOnInit(): void {
 
     this.isFunder$ = this.route.data.pipe(
-      map((data) => data.isFunder as boolean)
+      map((data) => (data.isFunderOrganizationalManger || data.isFunderProject || data.isFunderReader) as boolean)
     );
 
     this.fundingCommunity$ = this.route.data.pipe(

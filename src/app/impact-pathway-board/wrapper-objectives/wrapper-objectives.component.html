@@ -19,11 +19,13 @@
       </button>
     </div>
   </div>
-  <ds-alert *ngIf="hasInfoMessage()" class="bg-light"
-            [dismissible]="false"
-            [collapsible]="true"
-            [content]="getInfoMessage()"
-            [type]="'alert-info'"></ds-alert>
+  <ds-alert-role *ngIf="hasInfoMessage()" class="bg-light"
+                 [dismissible]="false"
+                 [collapsible]="true"
+                 [content]="getContentKey()"
+                 [type]="'alert-info'"
+                 [alertRoles]="funderRoles"
+  ></ds-alert-role>
   <ng-container *ngFor="let task of getObjectivesTasks()">
     <ds-objective [projectCommunityId]="projectCommunityId"
                   [impactPathwayStep]="impactPathwayStep"

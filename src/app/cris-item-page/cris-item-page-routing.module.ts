@@ -8,9 +8,9 @@ import { MenuItemType } from '../shared/menu/menu-item-type.model';
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { ProjectItemBreadcrumbResolver } from '../core/breadcrumbs/project-item-breadcrumb.resolver';
 import { ProjectItemBreadcrumbService } from '../core/breadcrumbs/project-item-breadcrumb.service';
-import { ProjectCommunityByItemResolver } from '../core/project/project-community-by-item.resolver';
-import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.resolver';
-import { FundingCommunityByItemResolver } from '../core/project/funding-community-by-item.resolver';
+import { ProjectCommunityByItemResolver } from '../core/project/resolvers/project-community-by-item.resolver';
+import { VersionOfAnItemResolver } from '../core/project/resolvers/version-of-an-item.resolver';
+import { FundingCommunityByItemResolver } from '../core/project/resolvers/funding-community-by-item.resolver';
 
 const routes: Routes = [
   {

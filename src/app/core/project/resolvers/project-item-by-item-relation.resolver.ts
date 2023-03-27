@@ -3,10 +3,10 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 
 import { Observable } from 'rxjs';
 
-import { RemoteData } from '../data/remote-data';
-import { Item } from '../shared/item.model';
-import { ProjectDataService } from './project-data.service';
-import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+import { RemoteData } from '../../data/remote-data';
+import { Item } from '../../shared/item.model';
+import { ProjectDataService } from '../project-data.service';
+import { FollowLinkConfig } from '../../../shared/utils/follow-link-config.model';
 
 /**
  * This class represents a resolver that retrieve item that describe the project from synsicris.relation.project metadata

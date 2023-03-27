@@ -3,9 +3,9 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 
 import { Observable } from 'rxjs';
 
-import { RemoteData } from '../data/remote-data';
-import { Item } from '../shared/item.model';
-import { ProjectDataService } from './project-data.service';
+import { RemoteData } from '../../data/remote-data';
+import { Item } from '../../shared/item.model';
+import { ProjectDataService } from '../project-data.service';
 
 /**
  * This class represents a resolver that retrieve item that describe the project from synsicris.relation.entity_project metadata

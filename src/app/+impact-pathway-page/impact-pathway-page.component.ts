@@ -67,7 +67,7 @@ export class ImpactPathwayPageComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     this.isFunder$ = this.route.data.pipe(
-      map((data) => data.isFunder as boolean)
+      map((data) => (data.isFunderOrganizationalManger || data.isFunderProject || data.isFunderReader) as boolean)
     );
 
     const impactPathWayItem$ = this.route.data.pipe(

@@ -1,4 +1,13 @@
-import { AfterContentChecked, ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
@@ -23,6 +32,8 @@ import { VersionSelectedEvent } from '../../../shared/item-version-list/item-ver
 import { ItemDataService } from '../../../core/data/item-data.service';
 import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { RemoteData } from '../../../core/data/remote-data';
+import { administratorRole, AlertRole, getProgrammeRoles } from '../../../shared/alert/alert-role/alert-role';
+import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
 
 @Component({
   selector: 'ds-impact-path-way',
@@ -58,7 +69,6 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
   canDeleteImpactPathway$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   canShowRelations: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   loaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  infoShowed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   /**
    * Array to track all subscriptions and unsubscribe them onDestroy
@@ -87,16 +97,19 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
 
   public compareProcessing$: Observable<boolean> = observableOf(false);
   public impactPathwayStepEntityType: string;
+  public funderRoles: AlertRole[];
+  public dismissRole: AlertRole;
 
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
-    private authorizationService: AuthorizationDataService,
-    private cdr: ChangeDetectorRef,
-    private impactPathwayService: ImpactPathwayService,
-    private impactPathwayLinksService: ImpactPathwayLinksService,
-    private itemService: ItemDataService,
-    private modalService: NgbModal,
-    protected aroute: ActivatedRoute,
-    protected editItemDataService: EditItemDataService) {
+              private authorizationService: AuthorizationDataService,
+              private projectAuthorizationService: ProjectAuthorizationService,
+              private cdr: ChangeDetectorRef,
+              private impactPathwayService: ImpactPathwayService,
+              private impactPathwayLinksService: ImpactPathwayLinksService,
+              private itemService: ItemDataService,
+              private modalService: NgbModal,
+              protected aroute: ActivatedRoute,
+              protected editItemDataService: EditItemDataService) {
   }
 
   ngOnInit() {
@@ -145,6 +158,8 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
     });
 
     this.impactPathwayStepEntityType = environment.impactPathway.impactPathwayStepEntity;
+    this.funderRoles = getProgrammeRoles(this.impactPathWayItem, this.projectAuthorizationService);
+    this.dismissRole = administratorRole(this.projectAuthorizationService);
   }
 
   ngAfterContentChecked() {
@@ -178,13 +193,6 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
         }
       }
     );
-  }
-
-  /**
-   * Toggles info panel
-   */
-  toggleInfoPanel() {
-    this.infoShowed.next(!this.infoShowed.value);
   }
 
   /**

@@ -10,6 +10,8 @@ import { QuestionsBoardStep } from './core/models/questions-board-step.model';
 import { hasValue } from '../shared/empty.util';
 import { ActivatedRoute } from '@angular/router';
 import { VersionSelectedEvent } from '../shared/item-version-list/item-version-list.component';
+import { AlertRole, getProgrammeRoles } from '../shared/alert/alert-role/alert-role';
+import { ProjectAuthorizationService } from '../core/project/project-authorization.service';
 
 @Component({
   selector: 'ds-questions-board',
@@ -24,7 +26,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   @Input() isFunder: boolean;
 
   /**
-   * The prefix to use for the i19n keys
+   * The prefix to use for the i18n keys
    */
   @Input() messagePrefix: string;
 
@@ -64,10 +66,12 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    * A boolean representing if item is a version of original item
    */
   public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public funderRoles: AlertRole[];
 
   constructor(
     protected questionsBoardStateService: QuestionsBoardStateService,
     protected aroute: ActivatedRoute,
+    private projectAuthorizationService: ProjectAuthorizationService
   ) {
   }
 
@@ -87,6 +91,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
       this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
 
+    this.funderRoles = getProgrammeRoles(this.questionsBoardObject, this.projectAuthorizationService);
   }
 
   isLoading(): Observable<boolean> {
