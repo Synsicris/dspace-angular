@@ -62,7 +62,7 @@ export class WorkingPlanPageComponent implements OnInit {
 
 
     const isFunder$ = this.route.data.pipe(
-      map((data) => data.isFunder as boolean)
+      map((data) => (data.isFunderOrganizationalManger || data.isFunderProject || data.isFunderReader) as boolean)
     );
 
     const projectItemId$ = this.route.data.pipe(
