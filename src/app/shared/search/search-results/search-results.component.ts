@@ -82,7 +82,7 @@ export class SearchResultsComponent {
   /**
    * Custom message if no result
    */
-  @Input() notFoundMessageKey: string = 'search.results.no-results';
+  @Input() notFoundMessageKey = 'search.results.no-results';
 
   /**
    * A boolean representing if result entries are selectable

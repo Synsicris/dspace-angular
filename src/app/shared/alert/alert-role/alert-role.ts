@@ -11,7 +11,7 @@ export const defaultRole = {
   isAuthorized() {
     return of(true);
   }
-}
+};
 
 export interface AlertRole {
   feature: FeatureID;
@@ -45,7 +45,7 @@ export function getDefaultRoles(authorizationService: ProjectAuthorizationServic
       mapContentKey: defaultContentKeyMapper,
       isAuthorized: () => authorizationService.isFunderOrganizationalManager()
     }
-  ]
+  ];
 }
 
 export function getProjectRoles(projectItem: Item, authorizationService: ProjectAuthorizationService): AlertRole[] {
@@ -62,7 +62,7 @@ export function getProjectRoles(projectItem: Item, authorizationService: Project
       item: projectItem,
       isAuthorized: () => authorizationService.isCoordinator(projectItem)
     }
-  ]
+  ];
 }
 
 export function getProgrammeRoles(projectItem: Item, authorizationService: ProjectAuthorizationService): AlertRole[] {
@@ -77,7 +77,7 @@ export function getProgrammeRoles(projectItem: Item, authorizationService: Proje
       feature: FeatureID.isFunderProjectOfProgramme,
       mapContentKey: suffixContentKeyMapper('funder-project'),
       item: projectItem,
-      isAuthorized: () => authorizationService.isFunderProjectOfProgramme(projectItem)
+      isAuthorized: () => authorizationService.isFunderProjectManager(projectItem)
     },
     {
       feature: FeatureID.isFunderReaderOfProgramme,
@@ -85,5 +85,5 @@ export function getProgrammeRoles(projectItem: Item, authorizationService: Proje
       item: projectItem,
       isAuthorized: () => authorizationService.isFunderReaderOfProgramme(projectItem)
     }
-  ]
+  ];
 }
