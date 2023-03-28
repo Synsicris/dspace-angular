@@ -111,7 +111,6 @@ export class ItemVersionListComponent implements OnInit {
             getFirstCompletedRemoteData(),
             filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded),
             map((itemRD: RemoteData<Item>) => itemRD.payload),
-            // isFunder
             filter((item: Item) => !this.showOnlyVisible || this.isVisibleForFunder(item)),
             tap((item: Item) => {
               if (
@@ -220,7 +219,6 @@ export class ItemVersionListComponent implements OnInit {
   isActiveInstance(version: Version): boolean {
     return version.id === this.activeProjectInstanceVersion.value;
   }
-
   private isVisibleForFunder(item: Item): boolean {
     return !this.projectVersionService.isActiveWorkingInstance(item) &&
       this.projectVersionService.isVersionVisible(item);
