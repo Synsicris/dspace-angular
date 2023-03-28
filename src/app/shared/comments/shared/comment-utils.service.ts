@@ -157,7 +157,6 @@ export class CommentUtilsService {
       return null;
     }
     const typeValue = metadataValue.value;
-    const splittedValue = typeValue.split('-', 1);
     const index = typeValue.indexOf('-');
     const itemType = typeValue.substring(0, index);
     const description = typeValue.substring(index + 1);
@@ -190,7 +189,7 @@ export class CommentUtilsService {
             )
           );
     }
-    if (relatedBoardItem != null) {
+    if (hasValue(relatedBoardItem?.id?.trim())) {
       metadataMap$ =
         metadataMap$
           .pipe(
@@ -304,11 +303,12 @@ export class CommentUtilsService {
       // we must return the name of the linked funding and the label 'Exploitationplan'
       case environment.interimReport.questionsBoardStepEntityName:
       case environment.exploitationPlan.questionsBoardStepEntityName:
-        return (relatedItem) => this.itemService.findById(relatedItem.firstMetadata(FUNDING_RELATION_METADATA)?.authority)
-          .pipe(
-            getFirstCompletedRemoteData(),
-            map(funding => `${relatedItem.entityType}.${this.dsoNameService.getName(relatedItem)} - ${this.dsoNameService.getName(funding?.payload)}`)
-          );
+        return (relatedItem) =>
+          this.itemService.findById(relatedItem.firstMetadata(FUNDING_RELATION_METADATA)?.authority)
+            .pipe(
+              getFirstCompletedRemoteData(),
+              map(funding => `${relatedItem.entityType}.${this.dsoNameService.getName(relatedItem)} - ${this.dsoNameService.getName(funding?.payload)}`)
+            );
       default:
         return this.defaultMetadataRelationMapper;
     }
