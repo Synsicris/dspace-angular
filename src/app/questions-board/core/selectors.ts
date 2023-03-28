@@ -117,3 +117,12 @@ export const isCompareMode = createSelector(_getQuestionsBoardState,
   (state: QuestionsBoardState) => state.compareMode || false
 );
 
+/**
+ * Returns the id of the questions board to compare.
+ * @function isCompareMode
+ * @return {boolean}
+ */
+export const questionsBoardCompareIdSelector = createSelector(_getQuestionsBoardState,
+  (state: QuestionsBoardState) => state.compareQuestionsBoardId
+);
+

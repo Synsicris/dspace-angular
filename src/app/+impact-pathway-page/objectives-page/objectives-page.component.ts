@@ -65,7 +65,7 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     this.isFunder$ = this.route.data.pipe(
-      map((data) => data.isFunder as boolean)
+      map((data) => (data.isFunderOrganizationalManger || data.isFunderProject || data.isFunderReader) as boolean)
     );
 
     const targetItemId$ = this.route.queryParams.pipe(

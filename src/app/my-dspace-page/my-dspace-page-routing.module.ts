@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MyDSpaceGuard } from './my-dspace.guard';
 import { ThemedMyDSpacePageComponent } from './themed-my-dspace-page.component';
-import { ProjectCommunityResolver } from '../core/project/project-community.resolver';
+import { ProjectCommunityResolver } from '../core/project/resolvers/project-community.resolver';
 import { ProjectI18nBreadcrumbResolver } from '../core/breadcrumbs/project-i18n-breadcrumb.resolver';
 import { ProjectI18nBreadcrumbsService } from '../core/breadcrumbs/project-i18n-breadcrumbs.service';
 

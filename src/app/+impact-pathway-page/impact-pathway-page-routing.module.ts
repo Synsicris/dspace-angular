@@ -3,15 +3,22 @@ import { RouterModule } from '@angular/router';
 
 import { ImpactPathwayPageComponent } from './impact-pathway-page.component';
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
-import { ProjectItemPageResolver } from '../core/project/project-item-page.resolver';
-import { ProjectCommunityByItemResolver } from '../core/project/project-community-by-item.resolver';
+import { ProjectItemPageResolver } from '../core/project/resolvers/project-item-page.resolver';
+import { ProjectCommunityByItemResolver } from '../core/project/resolvers/project-community-by-item.resolver';
 import { ObjectivesPageComponent } from './objectives-page/objectives-page.component';
-import { ProjectObjectivesItemResolver } from '../core/project/project-objectives-item.resolver';
+import { ProjectObjectivesItemResolver } from '../core/project/resolvers/project-objectives-item.resolver';
 import { ProjectItemBreadcrumbResolver } from '../core/breadcrumbs/project-item-breadcrumb.resolver';
 import { ProjectItemBreadcrumbService } from '../core/breadcrumbs/project-item-breadcrumb.service';
-import { ProjectItemByItemRelationResolver } from '../core/project/project-item-by-item-relation.resolver';
-import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.resolver';
-import { IsFunderResolver } from '../core/project/is-funder.resolver';
+import { ProjectItemByItemRelationResolver } from '../core/project/resolvers/project-item-by-item-relation.resolver';
+import { VersionOfAnItemResolver } from '../core/project/resolvers/version-of-an-item.resolver';
+import {
+  FunderProjectManagerByProjectResolver
+} from '../core/project/resolvers/funder-project-manager-by-project.resolver';
+import {
+  FunderOrganizationalManagerByProjectResolver
+} from '../core/project/resolvers/funder-organizational-manager-by-project.resolver';
+import { FunderReaderByProjectResolver } from '../core/project/resolvers/funder-reader-by-project.resolver';
+import { ProjectDataService } from '../core/project/project-data.service';
 
 @NgModule({
   imports: [
@@ -30,7 +37,9 @@ import { IsFunderResolver } from '../core/project/is-funder.resolver';
             },
             resolve: {
               impactPathwayItem: ProjectItemPageResolver,
-              isFunder: IsFunderResolver,
+              isFunderOrganizationalManger: FunderOrganizationalManagerByProjectResolver,
+              isFunderProject: FunderProjectManagerByProjectResolver,
+              isFunderReader: FunderReaderByProjectResolver,
               projectCommunity: ProjectCommunityByItemResolver,
               isVersionOfAnItem: VersionOfAnItemResolver,
               breadcrumb: ProjectItemBreadcrumbResolver
@@ -47,7 +56,9 @@ import { IsFunderResolver } from '../core/project/is-funder.resolver';
             resolve: {
               impactPathwayItem: ProjectItemPageResolver,
               isVersionOfAnItem: VersionOfAnItemResolver,
-              isFunder: IsFunderResolver,
+              isFunderOrganizationalManger: FunderOrganizationalManagerByProjectResolver,
+              isFunderProject: FunderProjectManagerByProjectResolver,
+              isFunderReader: FunderReaderByProjectResolver,
               objectivesItem: ProjectObjectivesItemResolver,
               projectCommunity: ProjectCommunityByItemResolver,
               breadcrumb: ProjectItemBreadcrumbResolver
@@ -58,7 +69,10 @@ import { IsFunderResolver } from '../core/project/is-funder.resolver';
     ])
   ],
   providers: [
-    IsFunderResolver,
+    FunderOrganizationalManagerByProjectResolver,
+    FunderProjectManagerByProjectResolver,
+    FunderReaderByProjectResolver,
+    ProjectDataService,
     ProjectItemByItemRelationResolver,
     ProjectItemPageResolver,
     ProjectItemBreadcrumbResolver,

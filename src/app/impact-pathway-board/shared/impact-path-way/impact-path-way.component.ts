@@ -1,8 +1,17 @@
-import { ChangeDetectorRef, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
-import { filter, map, mergeMap, take } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../core/models/impact-pathway.model';
@@ -16,17 +25,22 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
 import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
-import { hasValue } from '../../../shared/empty.util';
+import { hasValue, isNotEmpty } from '../../../shared/empty.util';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { environment } from '../../../../environments/environment';
 import { VersionSelectedEvent } from '../../../shared/item-version-list/item-version-list.component';
+import { ItemDataService } from '../../../core/data/item-data.service';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import { RemoteData } from '../../../core/data/remote-data';
+import { administratorRole, AlertRole, getProgrammeRoles } from '../../../shared/alert/alert-role/alert-role';
+import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
 
 @Component({
   selector: 'ds-impact-path-way',
   styleUrls: ['./impact-path-way.component.scss'],
   templateUrl: './impact-path-way.component.html'
 })
-export class ImpactPathWayComponent implements OnInit {
+export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDestroy {
   /**
    * If the current user is a funder Organizational/Project manager
    */
@@ -55,12 +69,16 @@ export class ImpactPathWayComponent implements OnInit {
   canDeleteImpactPathway$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   canShowRelations: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   loaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  infoShowed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   /**
    * Array to track all subscriptions and unsubscribe them onDestroy
    */
   private subs: Subscription[] = [];
+
+  /**
+   * The compare item object
+   */
+  compareItem$: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
 
   /**
    * A boolean representing if compare mode is active
@@ -79,15 +97,19 @@ export class ImpactPathWayComponent implements OnInit {
 
   public compareProcessing$: Observable<boolean> = observableOf(false);
   public impactPathwayStepEntityType: string;
+  public funderRoles: AlertRole[];
+  public dismissRole: AlertRole;
 
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
-    private authorizationService: AuthorizationDataService,
-    private cdr: ChangeDetectorRef,
-    private impactPathwayService: ImpactPathwayService,
-    private impactPathwayLinksService: ImpactPathwayLinksService,
-    private modalService: NgbModal,
-    protected aroute: ActivatedRoute,
-    protected editItemDataService: EditItemDataService) {
+              private authorizationService: AuthorizationDataService,
+              private projectAuthorizationService: ProjectAuthorizationService,
+              private cdr: ChangeDetectorRef,
+              private impactPathwayService: ImpactPathwayService,
+              private impactPathwayLinksService: ImpactPathwayLinksService,
+              private itemService: ItemDataService,
+              private modalService: NgbModal,
+              protected aroute: ActivatedRoute,
+              protected editItemDataService: EditItemDataService) {
   }
 
   ngOnInit() {
@@ -100,7 +122,24 @@ export class ImpactPathWayComponent implements OnInit {
 
     this.subs.push(
       this.impactPathwayService.isCompareModeActive()
-        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
+        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode)),
+      this.impactPathwayService.getCompareImpactPathwayId().pipe(
+        switchMap((id: string) => {
+          if (isNotEmpty(id)) {
+            return this.itemService.findById(id).pipe(
+              getFirstCompletedRemoteData(),
+              map((itemRD: RemoteData<Item>) => {
+                return itemRD.hasSucceeded ? itemRD.payload : null;
+              })
+            );
+          } else {
+            return observableOf(null);
+          }
+        })
+      ).subscribe((item: Item) => {
+
+        this.compareItem$.next(item);
+      })
     );
 
     this.editItemDataService.checkEditModeByIdAndType(this.impactPathway.id, environment.impactPathway.impactPathwaysEditMode).pipe(
@@ -119,6 +158,8 @@ export class ImpactPathWayComponent implements OnInit {
     });
 
     this.impactPathwayStepEntityType = environment.impactPathway.impactPathwayStepEntity;
+    this.funderRoles = getProgrammeRoles(this.impactPathWayItem, this.projectAuthorizationService);
+    this.dismissRole = administratorRole(this.projectAuthorizationService);
   }
 
   ngAfterContentChecked() {
@@ -152,13 +193,6 @@ export class ImpactPathWayComponent implements OnInit {
         }
       }
     );
-  }
-
-  /**
-   * Toggles info panel
-   */
-  toggleInfoPanel() {
-    this.infoShowed.next(!this.infoShowed.value);
   }
 
   /**
@@ -226,4 +260,7 @@ export class ImpactPathWayComponent implements OnInit {
       .forEach((subscription) => subscription.unsubscribe());
   }
 
+  getCompareItemDescription(item: Item): string {
+    return item?.firstMetadataValue('dc.description');
+  }
 }

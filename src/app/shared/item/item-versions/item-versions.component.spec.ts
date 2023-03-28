@@ -1,10 +1,7 @@
 import { ItemVersionsComponent } from './item-versions.component';
-import {
-  ComponentFixture, TestBed, waitForAsync
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { VarDirective } from '../../utils/var.directive';
 import { TranslateModule } from '@ngx-translate/core';
-import { RouterTestingModule } from '@angular/router/testing';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Item } from '../../../core/shared/item.model';
 import { Version } from '../../../core/shared/version.model';
@@ -451,7 +448,7 @@ describe('ItemVersionsComponent', () => {
 
     beforeEach(() => {
       component.isCoordinator = true;
-      component.isFunder = false;
+      component.isProjectFunder = false;
       component.canShowCreateVersion = true;
       component.displayActions = true;
       versionHistoryServiceSpy.getVersions.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([version1, version2, version3, version4])));
@@ -500,7 +497,7 @@ describe('ItemVersionsComponent', () => {
 
       beforeEach(() => {
         component.isCoordinator = true;
-        component.isFunder = false;
+        component.isProjectFunder = false;
         component.canShowCreateVersion = true;
 
         modalService = (component as any).modalService;
@@ -575,7 +572,7 @@ describe('ItemVersionsComponent', () => {
     describe('when isFounder is true', () => {
       beforeEach(() => {
         component.isCoordinator = false;
-        component.isFunder = true;
+        component.isProjectFunder = true;
         versionHistoryServiceSpy.getVersions.and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList([version1, version2, version3, version4])));
 
         modalService = (component as any).modalService;

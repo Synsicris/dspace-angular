@@ -9,8 +9,12 @@
     <div class="d-flex">
       <div #questionsBoardSection class="pr-0 w-100">
         <div class="p-2">
-          <ds-alert [type]="'alert-info'" [content]="messagePrefix + '.' + questionsBoardStep?.type + '.info.text'"
-                    [collapsible]="true"></ds-alert>
+          <ds-alert-role
+            [type]="'alert-info'"
+            [content]="messagePrefix + '.' + questionsBoardStep?.type + '.info.text'"
+            [collapsible]="true"
+            [dismissRoles]="funderRoles$ | async"
+          ></ds-alert-role>
           <div class="p-0 m-0 mb-2 bg-light rounded">
             <ds-questions-board-step-container [messagePrefix]="messagePrefix"
                                                [questionsBoardStep]="questionsBoardStep"
@@ -20,24 +24,28 @@
                                                [compareMode]="compareMode"></ds-questions-board-step-container>
           </div>
           <ds-view-simple-item-form *ngIf="hasCheckbox && questionsBoardStep"
+                                    [compareMode]="compareMode"
                                     [editMode]="getEditMode()"
                                     [editTitle]="messagePrefix + '.edit.btn.title' | translate"
                                     [fieldTitle]="messagePrefix + '.description.title' | translate"
                                     [formConfig]="formConfig$"
                                     [formSectionName]="getSectionName()"
                                     [itemId]="questionsBoardStep.id"
+                                    [compareItemId]="questionsBoardStep.compareId"
                                     [disabled]="compareMode || isVersionOfAnItem"
                                     (itemUpdate)="updateQuestionsBoardStep($event)"></ds-view-simple-item-form>
           <ds-editable-textarea *ngIf="!hasCheckbox && questionsBoardStep"
-                                 [editMode]="getEditMode()"
-                                 [formConfig]="formConfig$"
-                                 [formSectionName]="getSectionName()"
-                                 [itemId]="questionsBoardStep.id"
-                                 [editTitle]="messagePrefix + '.edit.btn.title' | translate"
-                                 [fieldTitle]="messagePrefix + '.description.title' | translate"
-                                 [content]="questionsBoardStep.description"
-                                 [disabled]="compareMode || isVersionOfAnItem"
-                                 (contentChange)="updateQuestionsBoardStep($event)"></ds-editable-textarea>
+                                [compareMode]="compareMode"
+                                [editMode]="getEditMode()"
+                                [formConfig]="formConfig$"
+                                [formSectionName]="getSectionName()"
+                                [itemId]="questionsBoardStep.id"
+                                [compareItemId]="questionsBoardStep.compareId"
+                                [editTitle]="messagePrefix + '.edit.btn.title' | translate"
+                                [fieldTitle]="messagePrefix + '.description.title' | translate"
+                                [content]="questionsBoardStep.description"
+                                [disabled]="compareMode || isVersionOfAnItem"
+                                (contentChange)="updateQuestionsBoardStep($event)"></ds-editable-textarea>
         </div>
       </div>
 

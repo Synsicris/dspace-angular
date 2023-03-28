@@ -4,8 +4,8 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 import { combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
-import { FeatureID } from '../data/feature-authorization/feature-id';
+import { AuthorizationDataService } from '../../data/feature-authorization/authorization-data.service';
+import { FeatureID } from '../../data/feature-authorization/feature-id';
 
 /**
  * This class represents a resolver that check if user is a funder Organizational/Project manager
@@ -25,8 +25,8 @@ export class IsFunderResolver implements Resolve<Observable<boolean>> {
    * @returns Observable<<boolean> Emits if item is version of an item
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    const isFunderOrganizationalManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager);
-    const isFunderProjectManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderProjectManager);
+    const isFunderOrganizationalManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManagerOfAnyProject);
+    const isFunderProjectManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderProjectManagerOfAnyProject);
     return combineLatest([
       isFunderOrganizationalManager$,
       isFunderProjectManager$

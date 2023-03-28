@@ -125,3 +125,21 @@ export const isCompareMode = createSelector(_getImpactPathwayState,
   (state: ImpactPathwayState) => state.compareMode || false
 );
 
+/**
+ * Returns the compare ImpactPathway Id.
+ * @function compareImpactPathwayId
+ * @return {string}
+ */
+export const compareImpactPathwayIdSelector = createSelector(_getImpactPathwayState,
+  (state: ImpactPathwayState) => state.compareImpactPathwayId || null
+);
+
+/**
+ * Returns the compare ImpactPathway step Id.
+ * @function compareImpactPathwayStepId
+ * @return {string}
+ */
+export const compareImpactPathwayStepId = createSelector(_getImpactPathwayState,
+  (state: ImpactPathwayState) => state.compareImpactPathwayStepId || null
+);
+

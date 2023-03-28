@@ -34,18 +34,21 @@
 </div>
 
 <div>
-  <ds-alert *ngIf="infoShowed | async" [type]="'alert-info'" [collapsible]="true"
-    [content]="'impact-pathway.wrapper.info'"></ds-alert>
-    <ng-container *ngIf="(isVersionOfAnItem$ | async) && isFunder">
-      <div class="mb-3">
-        <ngb-accordion
-          #accordionRef
-          [destroyOnHide]="false"
-          [closeOthers]="false"
-          activeIds=""
-        >
-          <ngb-panel id="panel-0">
-            <ng-template ngbPanelHeader let-opened="opened">
+  <ds-alert-role [type]="'alert-info'"
+                 [collapsible]="true"
+                 [content]="'impact-pathway.wrapper.info'"
+                 [alertRoles]="funderRoles"
+  ></ds-alert-role>
+  <ng-container *ngIf="(isVersionOfAnItem$ | async) && isFunder">
+    <div class="mb-3">
+      <ngb-accordion
+        #accordionRef
+        [destroyOnHide]="false"
+        [closeOthers]="false"
+        activeIds=""
+      >
+        <ngb-panel id="panel-0">
+          <ng-template ngbPanelHeader let-opened="opened">
               <span> {{'comment-list.header' | translate}} </span>
               <div class="d-inline-block float-right">
                 <button ngbPanelToggle class="btn btn-outline-light">
@@ -83,16 +86,18 @@
                               [compareMode]="(compareMode | async)"
                               [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"></ds-impact-path-way-step>
   </div>
-  <ds-editable-textarea *ngIf="impactPathway"
-                         [editMode]="getEditMode()"
-                         [formConfig]="formConfig$"
-                         [formSectionName]="getSectionName()"
-                         [itemId]="impactPathway.id"
-                         [editTitle]="'impact-pathway.edit.title' | translate"
-                         [fieldTitle]="'impact-pathway.description' | translate"
-                         [content]="impactPathway.description"
-                         [disabled]="(compareMode | async) || !(canEditButton$ | async)"
-                         (contentChange)="updateImpactPathway($event)">
+  <ds-editable-textarea *ngIf="!(compareProcessing$ | async) && impactPathway"
+                        [compareMode]="(compareMode | async)"
+                        [editMode]="getEditMode()"
+                        [formConfig]="formConfig$"
+                        [formSectionName]="getSectionName()"
+                        [itemId]="impactPathway.id"
+                        [compareItemId]="(compareItem$ | async)?.id"
+                        [editTitle]="'impact-pathway.edit.title' | translate"
+                        [fieldTitle]="'impact-pathway.description' | translate"
+                        [content]="impactPathway.description"
+                        [disabled]="!(canEditButton$ | async)"
+                        (contentChange)="updateImpactPathway($event)">
   </ds-editable-textarea>
 </div>
 

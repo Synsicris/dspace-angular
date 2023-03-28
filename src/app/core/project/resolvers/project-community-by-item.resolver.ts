@@ -3,10 +3,10 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 
 import { Observable } from 'rxjs';
 
-import { RemoteData } from '../data/remote-data';
-import { Community } from '../shared/community.model';
-import { getFirstCompletedRemoteData } from '../shared/operators';
-import { ProjectDataService } from './project-data.service';
+import { RemoteData } from '../../data/remote-data';
+import { Community } from '../../shared/community.model';
+import { getFirstCompletedRemoteData } from '../../shared/operators';
+import { ProjectDataService } from '../project-data.service';
 
 /**
  * This class represents a resolver that requests a specific project community by item id before the route is activated

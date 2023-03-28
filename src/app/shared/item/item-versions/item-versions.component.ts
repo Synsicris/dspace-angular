@@ -1,4 +1,3 @@
-
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Item } from '../../../core/shared/item.model';
 import { Version } from '../../../core/shared/version.model';
@@ -93,9 +92,14 @@ export class ItemVersionsComponent implements OnInit {
   @Input() isCoordinator = false;
 
   /**
+   * Whether user is funder organizational manager or reader
+   */
+  @Input() isFunderManagerOrReader = false;
+
+  /**
    * Whether user is funder
    */
-  @Input() isFunder = false;
+  @Input() isProjectFunder = false;
 
   /**
    * Whether user is founder
@@ -703,7 +707,7 @@ export class ItemVersionsComponent implements OnInit {
     const value = versionItem.firstMetadataValue('synsicris.version.official') !== 'true';
     const info = versionItem.firstMetadataValue('synsicris.version.official') === 'true' ? 'not-official' : 'official';
 
-    if (this.isFunder) {
+    if (this.isProjectFunder) {
       const modalRef = this.modalService.open(ConfirmationModalComponent);
       modalRef.componentInstance.dso = versionItem;
       modalRef.componentInstance.headerLabel = 'confirmation-modal.version.official.header';

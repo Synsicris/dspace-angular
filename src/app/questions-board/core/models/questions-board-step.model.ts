@@ -1,15 +1,18 @@
 import { findIndex, remove } from 'lodash';
 
 import { QuestionsBoardTask } from './questions-board-task.model';
+import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 
 export class QuestionsBoardStep {
 
   constructor(
     public parentId?: string,
     public id?: string,
+    public compareId?: string,
     public type?: string,
     public description?: string,
-    public tasks: QuestionsBoardTask[] = []) {
+    public tasks: QuestionsBoardTask[] = [],
+    public compareStatus?: ComparedVersionItemStatus) {
   }
 
   hasTask(taskId: string) {

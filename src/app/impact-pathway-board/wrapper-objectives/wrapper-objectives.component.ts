@@ -11,6 +11,8 @@ import { ImpactPathwayService } from '../core/impact-pathway.service';
 import { BehaviorSubject } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { VersionSelectedEvent } from '../../shared/item-version-list/item-version-list.component';
+import { AlertRole, getProgrammeRoles } from '../../shared/alert/alert-role/alert-role';
+import { ProjectAuthorizationService } from '../../core/project/project-authorization.service';
 
 @Component({
   selector: 'ds-wrapper-objectives',
@@ -46,13 +48,16 @@ export class WrapperObjectivesComponent implements OnDestroy {
    * A boolean representing if item is a version of original item
    */
   public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public funderRoles: AlertRole[];
 
   constructor(
     private objectivesService: ObjectiveService,
     private router: Router,
     private impactPathwayService: ImpactPathwayService,
     protected aroute: ActivatedRoute,
-    private translate: TranslateService) {
+    private translate: TranslateService,
+    private projectAuthorizationService: ProjectAuthorizationService
+  ) {
   }
 
   ngOnInit(): void {
@@ -66,6 +71,7 @@ export class WrapperObjectivesComponent implements OnDestroy {
     ).subscribe((isVersionOfAnItem: boolean) => {
       this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
+    this.funderRoles = getProgrammeRoles(this.impactPathwayStepItem, this.projectAuthorizationService);
   }
 
   getObjectivesTasks() {
@@ -82,7 +88,11 @@ export class WrapperObjectivesComponent implements OnDestroy {
   }
 
   getInfoMessage(): string {
-    return this.translate.instant('impact-pathway.objectives.' + this.impactPathwayStep.type + '.info.panel');
+    return this.translate.instant(this.getContentKey());
+  }
+
+  getContentKey(): string {
+    return 'impact-pathway.objectives.' + this.impactPathwayStep.type + '.info.panel';
   }
 
   /**
