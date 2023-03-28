@@ -187,6 +187,12 @@ export class QuestionsUploadStepComponent implements OnInit {
    */
   public questionsBoardEditMode: string;
 
+  /**
+   * The name of the upload configuration coming from the submission config
+   * @type {string}
+   */
+  public uploadConfigId: string;
+
   constructor(
     private authService: AuthService,
     private halService: HALEndpointService,
@@ -263,6 +269,8 @@ export class QuestionsUploadStepComponent implements OnInit {
                   getFirstSucceededRemoteData(),
                   mergeMap((c) => {
                     const payload = (c.payload as any);
+                    // set the upload configuration id (section-id) to be used in the upload path
+                    this.uploadConfigId = payload.id;
                     const section: SubmissionSectionModel = { ...payload };
                     // retrieve submission's upload configuration
                     const config$ = this.uploadsConfigService.findByHref(section._links.config.href, true, false, followLink('metadata')).pipe(
@@ -291,7 +299,7 @@ export class QuestionsUploadStepComponent implements OnInit {
     combineLatest([editItem$, submissionConfig$, this.configMetadataForm$])
       .subscribe(([editItem, submissionConfig, configMetadataForm]: [EditItem, SubmissionUploadsModel, SubmissionFormsModel]) => {
         this.configEditItem = editItem;
-        const fileList: WorkspaceitemSectionUploadFileObject[] = (editItem.sections.upload as WorkspaceitemSectionUploadObject).files;
+        const fileList: WorkspaceitemSectionUploadFileObject[] = (editItem.sections[this.uploadConfigId] as WorkspaceitemSectionUploadObject)?.files || [];
         this.prepareFiles(fileList, configMetadataForm);
         this.questionsBoardStateService.dispatchUploadFilesToQuestionBoard(this.questionsBoardObject.id, this.fileList);
         this.configMetadataForm = configMetadataForm;
@@ -364,7 +372,7 @@ export class QuestionsUploadStepComponent implements OnInit {
    * @param event The event emitted by the upload component
    */
   onCompleteItem(event) {
-    const fileList: WorkspaceitemSectionUploadFileObject[] = (event.sections?.upload as WorkspaceitemSectionUploadObject)?.files;
+    const fileList: WorkspaceitemSectionUploadFileObject[] = (event.sections[this.uploadConfigId] as WorkspaceitemSectionUploadObject)?.files;
     if (isNotUndefined(this.fileList)) {
       this.prepareFiles(fileList, this.configMetadataForm);
       this.questionsBoardStateService.dispatchUploadFilesToQuestionBoard(this.questionsBoardObject.id, fileList);
