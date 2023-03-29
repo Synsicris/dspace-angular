@@ -1,10 +1,11 @@
+import { WorkspaceitemSectionUploadFileObject } from './../../../core/submission/models/workspaceitem-section-upload-file.model';
 import { findIndex } from 'lodash';
 
 import { QuestionsBoardStep } from './questions-board-step.model';
 
 export class QuestionsBoard {
 
-  constructor(public id?: string, public partner?: string, public steps?: QuestionsBoardStep[]) {
+  constructor(public id?: string, public partner?: string, public steps?: QuestionsBoardStep[], public uploads?: WorkspaceitemSectionUploadFileObject[]) {
 
   }
 

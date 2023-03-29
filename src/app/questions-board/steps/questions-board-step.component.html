@@ -9,8 +9,12 @@
     <div class="d-flex">
       <div #questionsBoardSection class="pr-0 w-100">
         <div class="p-2">
-          <ds-alert [type]="'alert-info'" [content]="messagePrefix + '.' + questionsBoardStep?.type + '.info.text'"
-                    [collapsible]="true"></ds-alert>
+          <ds-alert-role
+            [type]="'alert-info'"
+            [content]="messagePrefix + '.' + questionsBoardStep?.type + '.info.text'"
+            [collapsible]="true"
+            [dismissRoles]="funderRoles$ | async"
+          ></ds-alert-role>
           <div class="p-0 m-0 mb-2 bg-light rounded">
             <ds-questions-board-step-container [messagePrefix]="messagePrefix"
                                                [questionsBoardStep]="questionsBoardStep"

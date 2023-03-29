@@ -28,7 +28,7 @@ export class ThemedSearchResultsComponent extends ThemedComponent<SearchResultsC
   /**
    * Custom message if no result
    */
-  @Input() notFoundMessageKey: string = 'search.results.no-results';
+  @Input() notFoundMessageKey = 'search.results.no-results';
 
   @Input() searchResultNotice: string = null;
 

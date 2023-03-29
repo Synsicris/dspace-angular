@@ -3,12 +3,12 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ItemDataService } from '../data/item-data.service';
+import { ItemDataService } from '../../data/item-data.service';
 
-import { RemoteData } from '../data/remote-data';
-import { Item } from '../shared/item.model';
-import { getFirstCompletedRemoteData, getFirstSucceededRemoteData } from '../shared/operators';
-import { ProjectVersionService } from './project-version.service';
+import { RemoteData } from '../../data/remote-data';
+import { Item } from '../../shared/item.model';
+import { getFirstCompletedRemoteData } from '../../shared/operators';
+import { ProjectVersionService } from '../project-version.service';
 
 /**
  * This class represents a resolver that requests a specific project boolean by item id before the route is activated

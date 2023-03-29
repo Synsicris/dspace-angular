@@ -111,7 +111,6 @@ export class ItemVersionListComponent implements OnInit {
             getFirstCompletedRemoteData(),
             filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded),
             map((itemRD: RemoteData<Item>) => itemRD.payload),
-            // isFunder
             filter((item: Item) => !this.showOnlyVisible || this.isVisibleForFunder(item)),
             tap((item: Item) => {
               if (

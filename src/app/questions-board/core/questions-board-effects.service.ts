@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { of as observableOf } from 'rxjs';
-import { catchError, concatMap, delay, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, concatMap, delay, map, switchMap, take, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
@@ -36,6 +36,7 @@ import {
   RemoveQuestionsBoardTaskErrorAction,
   RemoveQuestionsBoardTaskSuccessAction,
   UpdateQuestionsBoardStepAction,
+  UploadFilesToQuestionBoardAction,
 } from './questions-board.actions';
 import { QuestionsBoardService } from './questions-board.service';
 import { isNotEmpty } from '../../shared/empty.util';
@@ -317,6 +318,17 @@ export class QuestionsBoardEffects {
           return observableOf(new InitCompareErrorAction());
         }))
     )));
+
+  addUploadStepToQuestionBoard$ = createEffect(() => this.actions$.pipe(
+    ofType(QuestionsBoardActionTypes.UPLOAD_FILES_TO_QUESTION_BOARD),
+    take(1),
+    map((action: UploadFilesToQuestionBoardAction) =>
+       new UploadFilesToQuestionBoardAction(
+        action.payload.questionsBoardId,
+        action.payload.files
+      )
+    )
+  ));
 
   constructor(
     private actions$: Actions,

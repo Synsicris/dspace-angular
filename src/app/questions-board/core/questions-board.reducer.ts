@@ -1,5 +1,9 @@
+import { isEqual } from 'lodash';
+import { WorkspaceitemSectionUploadFileObject } from './../../core/submission/models/workspaceitem-section-upload-file.model';
 import {
   AddQuestionsBoardTaskSuccessAction,
+  DeleteUploadedFileFromQuestionsboardAction,
+  EditUploadedFileDataAction,
   InitCompareAction,
   InitCompareSuccessAction,
   InitQuestionsBoardSuccessAction,
@@ -9,11 +13,13 @@ import {
   RemoveQuestionsBoardTaskSuccessAction,
   SetQuestionsBoardStepCollapseAction,
   StopCompareQuestionsBoardAction,
-  UpdateQuestionsBoardStepAction
+  UpdateQuestionsBoardStepAction,
+  UploadFilesToQuestionBoardAction
 } from './questions-board.actions';
 import { QuestionsBoard } from './models/questions-board.model';
 import { QuestionsBoardStep } from './models/questions-board-step.model';
 import { QuestionsBoardTask } from './models/questions-board-task.model';
+import { hasValue, isNotEmpty } from '../../shared/empty.util';
 
 /**
  * An interface to represent questions board object entry
@@ -137,6 +143,18 @@ export function questionsBoardReducer(state = initialState, action: QuestionsBoa
 
     case QuestionsBoardActionTypes.UPDATE_QUESTIONS_BOARD_STEP: {
       return UpdateQuestionsBoardTask(state, action as UpdateQuestionsBoardStepAction);
+    }
+
+    case QuestionsBoardActionTypes.UPLOAD_FILES_TO_QUESTION_BOARD: {
+      return uploadFilesToQuestionBoard(state, action as UploadFilesToQuestionBoardAction);
+    }
+
+    case QuestionsBoardActionTypes.EDIT_FILE_DATA_OF_QUESTION_BOARD: {
+       return editFileData(state, action as EditUploadedFileDataAction);
+    }
+
+    case QuestionsBoardActionTypes.DELETE_UPLOADED_FILE_FROM_QUESTION_BOARD: {
+      return deleteFile(state, action as DeleteUploadedFileFromQuestionsboardAction);
     }
 
     default: {
@@ -430,5 +448,91 @@ function replaceQuestionsBoardSteps(state: QuestionsBoardState, action: InitComp
     }),
     questionBoardBeforeCompare
   });
+}
+
+// ------ Upload file functions ------ //
+
+/**
+ * Upload files to a question board.
+ * @param state the current state
+ * @param action an UploadFilesToQuestionBoardAction action
+ * @returns QuestionsBoardState, the new state, with the uploaded files.
+ */
+function uploadFilesToQuestionBoard(state: QuestionsBoardState, action: UploadFilesToQuestionBoardAction): QuestionsBoardState {
+  const questionsBoardEntry = state.questionsBoard;
+
+  return Object.assign({}, state, { loaded: true }, {
+    questionsBoard: Object.assign({}, questionsBoardEntry, {
+      [action.payload.questionsBoardId]: Object.assign(new QuestionsBoard(), questionsBoardEntry[action.payload.questionsBoardId], {
+        uploads: action.payload?.files ? [...action.payload.files] : []
+      })
+    })
+  });
+}
+
+/**
+ * Edit a file.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    an EditUploadedFileDataAction action
+ * @return QuestionsBoardState
+ *    the new state, with the edited file.
+ */
+function editFileData(state: QuestionsBoardState, action: EditUploadedFileDataAction): QuestionsBoardState {
+  const questionBoard = state.questionsBoard[action.payload.questionsBoardId];
+  const filesData = questionBoard.uploads as WorkspaceitemSectionUploadFileObject[];
+  if (hasValue(filesData)) {
+    const fileIndex: number = filesData.findIndex(x=> isEqual(x.uuid, action.payload.fileUUID));
+    if (fileIndex > -1) {
+      const newData = Array.from(filesData);
+      newData[fileIndex] = action.payload.data;
+     return Object.assign({}, state, { loaded: true }, {
+        questionsBoard: Object.assign({}, state.questionsBoard, {
+          [action.payload.questionsBoardId]: Object.assign(new QuestionsBoard(),{
+            ...questionBoard,
+            uploads: [...newData]
+          })
+        })
+      });
+    }
+  }
+
+  return state;
+}
+
+/**
+ * Delete a file.
+ *
+ * @param state
+ *    the current state
+ * @param action
+ *    a DeleteUploadedFileFromQuestionsboardAction action
+ * @return QuestionsBoardState
+ *    the new state, with the file removed.
+ */
+function deleteFile(state: QuestionsBoardState, action:  DeleteUploadedFileFromQuestionsboardAction): QuestionsBoardState {
+  const questionBoard = state.questionsBoard[action.payload.questionsBoardId];
+  const filesData = questionBoard.uploads as WorkspaceitemSectionUploadFileObject[];
+
+  if (isNotEmpty(filesData)) {
+    const fileIndex: number = filesData.findIndex(x=> isEqual(x.uuid, action.payload.fileUUID));
+    if (fileIndex > -1) {
+      let newData = Array.from(filesData);
+      newData.splice(fileIndex, 1);
+
+     return Object.assign({}, state, { loaded: true }, {
+        questionsBoard: Object.assign({}, state.questionsBoard, {
+          [action.payload.questionsBoardId]: Object.assign(new QuestionsBoard(),{
+            ...questionBoard,
+            uploads: [...newData]
+          })
+        })
+      });
+    }
+  }
+
+  return state;
 }
 

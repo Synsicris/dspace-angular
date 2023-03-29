@@ -49,7 +49,7 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
   /**
    * A boolean representing if the context object is a version
    */
-  public isVersionOf: boolean = false;
+  public isVersionOf = false;
 
   public isAuthorized$: Observable<boolean>;
 

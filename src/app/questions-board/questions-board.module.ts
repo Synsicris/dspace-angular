@@ -24,6 +24,8 @@ import { ViewSimpleItemFormModule } from '../shared/view-simple-item-form/view-s
 import { EditSimpleItemModalModule } from '../shared/edit-simple-item-modal/edit-simple-item-modal.module';
 import { CommentsModule } from '../shared/comments/comments.module';
 import { QuestionsBoardService } from './core/questions-board.service';
+import { QuestionsUploadStepComponent } from './steps/upload-step/questions-upload-step/questions-upload-step.component';
+import { SubmissionModule } from '../submission/submission.module';
 
 const MODULES = [
   CommonModule,
@@ -36,14 +38,16 @@ const MODULES = [
   ComcolModule,
   EditSimpleItemModalModule,
   ViewSimpleItemFormModule,
-  CommentsModule
+  CommentsModule,
+  SubmissionModule
 ];
 
 const COMPONENTS = [
   QuestionsBoardComponent,
   QuestionsBoardStepComponent,
   QuestionsBoardStepContainerComponent,
-  QuestionsBoardTaskComponent
+  QuestionsBoardTaskComponent,
+  QuestionsUploadStepComponent
 ];
 const PROVIDERS = [
   QuestionsBoardService,

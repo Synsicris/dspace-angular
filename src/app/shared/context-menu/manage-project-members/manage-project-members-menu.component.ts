@@ -122,7 +122,7 @@ export class ManageProjectMembersMenuComponent extends ContextMenuEntryComponent
       );
     } else {
       return combineLatest([
-        this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager),
+        this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManagerOfAnyProject),
         this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, this.contextMenuObject.self, undefined),
         this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self, undefined),
         this.authorizationService.isAuthorized(FeatureID.AdministratorOf)]

@@ -15886,6 +15886,10 @@
   // "interim-report.step_type_5.title": "5. Are or will changes in the objectives be necessary?",
   "interim-report.step_type_5.title": "5. Sind oder werden Änderungen in der Zielsetzung notwendig?",
 
+  // "interim-report.upload-step.title": "6. Upload files",
+  // TODO: New key - Add a translation
+  "interim-report.upload-step.title": "6. Upload files",
+
   // "interim-report.patch.metadata.error": "There was an issue when saving metadata, please try again later.",
   "interim-report.patch.metadata.error": "Beim Speichern ist ein Problem aufgetreten. Bitte versuchen Sie es später noch einmal.",
 

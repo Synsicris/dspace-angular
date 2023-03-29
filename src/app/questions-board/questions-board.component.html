@@ -14,7 +14,12 @@
 </div>
 <ds-loading *ngIf="(isLoading() | async)"></ds-loading>
 <div *ngIf="!(isLoading() | async)">
-  <ds-alert [type]="'alert-info'" [content]="messagePrefix + '.info.text'" [collapsible]="true"></ds-alert>
+  <ds-alert-role
+    [type]="'alert-info'"
+    [content]="messagePrefix + '.info.text'"
+    [collapsible]="true"
+    [alertRoles]="funderRoles"
+  ></ds-alert-role>
 
   <ds-questions-board-step *ngFor="let step of (questionsBoardStep$ | async)"
                            [messagePrefix]="messagePrefix"
@@ -25,4 +30,10 @@
                            [isFunder]="isFunder"
                            [isVersionOfAnItem]="(isVersionOfAnItem$ | async)">
   </ds-questions-board-step>
+  <ng-container *ngIf="showUploadStep">
+    <ds-questions-upload-step [questionsBoardObject]="questionsBoardObject"
+                              [messagePrefix]="messagePrefix"
+                              [isFunder]="isFunder">
+    </ds-questions-upload-step>
+  </ng-container>
 </div>

@@ -5,14 +5,23 @@ import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
 import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end-user-agreement-current-user.guard';
 import { QuestionsBoardGuard } from '../questions-board/core/questions-board-guard.service';
 import { QuestionsBoardItemResolver } from '../questions-board/core/questions-board-item-resolver.service';
-import { ProjectCommunityByItemResolver } from '../core/project/project-community-by-item.resolver';
-import { ProjectCommunityByProjectItemResolver } from '../core/project/project-community-by-project-item.resolver';
-import { IsFunderResolver } from '../core/project/is-funder.resolver';
-import { VersionOfAnItemResolver } from '../core/project/version-of-an-item.resolver';
+import { ProjectCommunityByItemResolver } from '../core/project/resolvers/project-community-by-item.resolver';
+import {
+  ProjectCommunityByProjectItemResolver
+} from '../core/project/resolvers/project-community-by-project-item.resolver';
+import { VersionOfAnItemResolver } from '../core/project/resolvers/version-of-an-item.resolver';
 import { SubprojectItemI18nBreadcrumbResolver } from '../core/breadcrumbs/subproject-item-i18n-breadcrumb.resolver';
 import { HasPolicyEditGrantsGuard } from '../core/project/authorization-guards/has-policy-edit-grants.guard';
 import { SubprojectItemI18nBreadcrumbsService } from '../core/breadcrumbs/subproject-item-i18n-breadcrumbs.service';
 import { InterimReportPageComponent } from './interim-report-page.component';
+import {
+  FunderOrganizationalManagerByProjectResolver
+} from '../core/project/resolvers/funder-organizational-manager-by-project.resolver';
+import {
+  FunderProjectManagerByProjectResolver
+} from '../core/project/resolvers/funder-project-manager-by-project.resolver';
+import { FunderReaderByProjectResolver } from '../core/project/resolvers/funder-reader-by-project.resolver';
+import { ProjectDataService } from '../core/project/project-data.service';
 
 @NgModule({
   imports: [
@@ -31,7 +40,9 @@ import { InterimReportPageComponent } from './interim-report-page.component';
           questionsBoard: QuestionsBoardItemResolver,
           projectCommunity: ProjectCommunityByItemResolver,
           fundingCommunity: ProjectCommunityByProjectItemResolver,
-          isFunder: IsFunderResolver,
+          isFunderOrganizationalManger: FunderOrganizationalManagerByProjectResolver,
+          isFunderProject: FunderProjectManagerByProjectResolver,
+          isFunderReader: FunderReaderByProjectResolver,
           isVersionOfAnItem: VersionOfAnItemResolver,
           breadcrumb: SubprojectItemI18nBreadcrumbResolver
         }
@@ -42,7 +53,10 @@ import { InterimReportPageComponent } from './interim-report-page.component';
     QuestionsBoardGuard,
     HasPolicyEditGrantsGuard,
     QuestionsBoardItemResolver,
-    IsFunderResolver,
+    FunderOrganizationalManagerByProjectResolver,
+    FunderProjectManagerByProjectResolver,
+    FunderReaderByProjectResolver,
+    ProjectDataService,
     ProjectCommunityByItemResolver,
     ProjectCommunityByProjectItemResolver,
     SubprojectItemI18nBreadcrumbResolver,

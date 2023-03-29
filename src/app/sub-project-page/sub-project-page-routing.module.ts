@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AuthenticatedGuard } from '../core/auth/authenticated.guard';
-import { ProjectCommunityResolver } from '../core/project/project-community.resolver';
+import { ProjectCommunityResolver } from '../core/project/resolvers/project-community.resolver';
 import { SubProjectPageComponent } from './sub-project-page.component';
 import { SubProjectBreadcrumbResolver } from '../core/breadcrumbs/subproject-breadcrumb.resolver';
 import { SubprojectBreadcrumbsService } from '../core/breadcrumbs/subproject-breadcrumbs.service';
 import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end-user-agreement-current-user.guard';
-import { SubprojectCommunityResolver } from '../core/project/subproject-community.resolver';
+import { SubprojectCommunityResolver } from '../core/project/resolvers/subproject-community.resolver';
 
 @NgModule({
   imports: [
