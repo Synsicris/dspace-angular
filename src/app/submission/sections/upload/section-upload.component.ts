@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component, Inject } from '@angular/core';
+import { WorkspaceitemSectionUploadFileObject } from './../../../core/submission/models/workspaceitem-section-upload-file.model';
+import { ChangeDetectorRef, Component, Inject, ViewChildren, QueryList, OnChanges, HostListener } from '@angular/core';
 
-import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
+import { distinctUntilChanged, filter, map, mergeMap, switchMap, take, tap, finalize } from 'rxjs/operators';
 
 import { SectionModelComponent } from '../models/section.model';
 import { hasValue, isNotEmpty, isNotUndefined, isUndefined } from '../../../shared/empty.util';
@@ -27,6 +28,7 @@ import { followLink } from '../../../shared/utils/follow-link-config.model';
 import { getFirstSucceededRemoteData } from '../../../core/shared/operators';
 import { SubmissionVisibility } from '../../utils/visibility.util';
 import { SubmissionUploadFilesComponent } from '../../form/submission-upload-files/submission-upload-files.component';
+import { SubmissionSectionUploadFileComponent } from './file/section-upload-file.component';
 
 export const POLICY_DEFAULT_NO_LIST = 1; // Banner1
 export const POLICY_DEFAULT_WITH_LIST = 2; // Banner2
@@ -123,6 +125,10 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
    * @type {Array}
    */
   protected subs: Subscription[] = [];
+
+  @ViewChildren(SubmissionSectionUploadFileComponent) fileEntryRef: QueryList<SubmissionSectionUploadFileComponent> ;
+
+  editBitstreamModalOpenedOnce$ =  new BehaviorSubject<boolean>(false);
 
   /**
    * Initialize instance variables
@@ -294,6 +300,48 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
       take(1)
     ).subscribe((submissionUploaderRef: SubmissionUploadFilesComponent) => {
       submissionUploaderRef?.uploader?.browseBtn?.nativeElement.click();
+      this.openBitstreamEditModal(submissionUploaderRef);
+    });
+  }
+
+  /**
+   * Open bitstream edit modal after file upload is completed
+   * If there is only one file, open the edit modal
+   * If there are multiple files, open the edit modal only for the last uploaded file
+   * @param submissionUploaderRef
+   */
+  private openBitstreamEditModal(submissionUploaderRef: SubmissionUploadFilesComponent) {
+    combineLatest([
+      submissionUploaderRef?.uploader?.onCompleteItem.pipe(
+        take(1),
+        distinctUntilChanged(),
+      ),
+      this.editBitstreamModalOpenedOnce$])
+      .pipe(
+        finalize(() => this.editBitstreamModalOpenedOnce$.next(true)),
+      )
+      .subscribe(([completeItems, isOpened]: [any, boolean]) => {
+        if (!isOpened && hasValue(completeItems) && isNotEmpty(completeItems)) {
+          const fileEntries = this.fileEntryRef.toArray();
+          if (isNotEmpty(fileEntries)) {
+            const items: WorkspaceitemSectionUploadFileObject[] = completeItems.sections.upload.files;
+            const lastUploadedFile: WorkspaceitemSectionUploadFileObject = items[items.length - 1];
+            const sectionIdx = fileEntries.findIndex(fileCmp => lastUploadedFile.uuid === fileCmp.fileId);
+            if (sectionIdx > -1) {
+              const elementToEdit: SubmissionSectionUploadFileComponent = fileEntries[sectionIdx];
+              elementToEdit.editBitstreamData();
+            }
+          }
+        }
+      });
+  }
+
+  @HostListener('window:dragover', ['$event'])
+  onDragAndDropFile() {
+    this.submissionUploaderRef.pipe(
+      take(1)
+    ).subscribe((submissionUploaderRef: SubmissionUploadFilesComponent) => {
+      this.openBitstreamEditModal(submissionUploaderRef);
     });
   }
 }
