@@ -275,7 +275,7 @@ export class QuestionsBoardEffects {
       const tasks: Pick<MetadataValue, 'authority' | 'value'>[] =
         action.payload.currentTasks.map((task: QuestionsBoardTask) => ({
           authority: task.id,
-          value: task.description
+          value: task.title
         }));
       return this.itemAuthorityRelationService.orderRelations(
         this.questionsBoardService.getQuestionsBoardEditFormSection(),
