@@ -30,4 +30,10 @@
                            [isFunder]="isFunder"
                            [isVersionOfAnItem]="(isVersionOfAnItem$ | async)">
   </ds-questions-board-step>
+  <ng-container *ngIf="showUploadStep">
+    <ds-questions-upload-step [questionsBoardObject]="questionsBoardObject"
+                              [messagePrefix]="messagePrefix"
+                              [isFunder]="isFunder">
+    </ds-questions-upload-step>
+  </ng-container>
 </div>

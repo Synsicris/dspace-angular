@@ -8,6 +8,7 @@ import { QuestionsBoard } from './models/questions-board.model';
 import { MetadataMap } from '../../core/shared/metadata.models';
 import { QuestionsBoardStep } from './models/questions-board-step.model';
 import { QuestionsBoardConfig } from '../../../config/questions-board.config';
+import { WorkspaceitemSectionUploadFileObject } from './../../core/submission/models/workspaceitem-section-upload-file.model';
 
 /**
  * For each action type in an action group, make a simple
@@ -46,6 +47,9 @@ export const QuestionsBoardActionTypes = {
   INIT_COMPARE_QUESTIONS_BOARD_SUCCESS: type('dspace/questionsboard/INIT_COMPARE_QUESTIONS_BOARD_SUCCESS'),
   INIT_COMPARE_QUESTIONS_BOARD_ERROR: type('dspace/questionsboard/INIT_COMPARE_QUESTIONS_BOARD_ERROR'),
   STOP_COMPARE_QUESTIONS_BOARD: type('dspace/questionsboard/STOP_COMPARE_QUESTIONS_BOARD'),
+  UPLOAD_FILES_TO_QUESTION_BOARD: type('dspace/questionsboard/UPLOAD_FILES_TO_QUESTION_BOARD'),
+  DELETE_UPLOADED_FILE_FROM_QUESTION_BOARD: type('dspace/questionsboard/DELETE_UPLOADED_FILE_FROM_QUESTION_BOARD'),
+  EDIT_FILE_DATA_OF_QUESTION_BOARD: type('dspace/questionsboard/EDIT_FILE_DATA_OF_QUESTION_BOARD'),
 };
 
 /* tslint:disable:max-classes-per-file */
@@ -597,6 +601,68 @@ export class StopCompareQuestionsBoardAction implements Action {
   }
 }
 
+/**
+ * Uplaod file action
+ */
+export class UploadFilesToQuestionBoardAction implements Action {
+  type =  QuestionsBoardActionTypes.UPLOAD_FILES_TO_QUESTION_BOARD;
+
+  payload: {
+    questionsBoardId: string;
+    files: WorkspaceitemSectionUploadFileObject[];
+  };
+
+  /**
+   * Create a new UploadFilesToQuestionBoardAction
+   *
+   * @param questionsBoardId
+   *    the questionsBoard's ID
+   * @param files
+   *    the files to upload
+   */
+  constructor(questionsBoardId: string, files: WorkspaceitemSectionUploadFileObject[]) {
+    this.payload = { questionsBoardId, files };
+  }
+}
+
+export class DeleteUploadedFileFromQuestionsboardAction implements Action {
+  type =  QuestionsBoardActionTypes.DELETE_UPLOADED_FILE_FROM_QUESTION_BOARD;
+
+  payload: {
+    questionsBoardId: string;
+    fileUUID: string;
+  };
+
+  /**
+   * Create a new DeleteUploadedFileFromQuestionsboardAction
+   * @param questionsBoardId the questionsBoard's ID
+   * @param fileUUID the file's UUID
+   */
+  constructor(questionsBoardId: string, fileUUID: string) {
+    this.payload = { questionsBoardId, fileUUID };
+  }
+}
+
+export class EditUploadedFileDataAction implements Action {
+  type =  QuestionsBoardActionTypes.EDIT_FILE_DATA_OF_QUESTION_BOARD;
+
+  payload: {
+    questionsBoardId: string;
+    fileUUID: string;
+    data: WorkspaceitemSectionUploadFileObject;
+  };
+
+  /**
+   * Create a new EditUploadedFileDataAction
+   * @param questionsBoardId the questionsBoard's ID
+   * @param fileUUID the file's UUID
+   * @param data the new data to set
+   */
+  constructor(questionsBoardId: string, fileUUID: string, data: WorkspaceitemSectionUploadFileObject) {
+    this.payload = { questionsBoardId, fileUUID, data };
+  }
+}
+
 /* tslint:enable:max-classes-per-file */
 
 /**
@@ -631,4 +697,7 @@ export type QuestionsBoardActions
   | InitCompareSuccessAction
   | InitCompareErrorAction
   | StopCompareQuestionsBoardAction
-  | ClearQuestionBoardAction;
+  | ClearQuestionBoardAction
+  | UploadFilesToQuestionBoardAction
+  | EditUploadedFileDataAction
+  | DeleteUploadedFileFromQuestionsboardAction;

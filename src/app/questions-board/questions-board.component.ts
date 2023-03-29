@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@a
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
+import { isEqual } from 'lodash';
 
 import { Item } from '../core/shared/item.model';
 import { Community } from '../core/shared/community.model';
@@ -44,6 +45,11 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    * The funding community which the questions board belong to
    */
   @Input() fundingCommunity: Community;
+
+  /**
+   * Flag to check the display of upload step
+   */
+  @Input() showUploadStep = false;
 
   public questionsBoardObjectId: string;
 
