@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -27,7 +27,7 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
   styleUrls: ['./section-upload-file.component.scss'],
   templateUrl: './section-upload-file.component.html',
 })
-export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
+export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, OnDestroy {
 
   /**
    * The list of available access condition
@@ -153,6 +153,11 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
   protected formMetadata: string[] = [];
 
   /**
+   * Event emitted when the modal is closed
+   */
+  @Output() modalClosed = new EventEmitter();
+
+  /**
    * Initialize instance variables
    *
    * @param {ChangeDetectorRef} cdr
@@ -251,6 +256,16 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
     activeModal.componentInstance.pathCombiner = this.pathCombiner;
     activeModal.componentInstance.submissionId = this.submissionId;
     activeModal.componentInstance.singleAccessCondition = this.singleAccessCondition;
+
+    // Emit event when modal is closed on save
+    activeModal.closed.subscribe(() => {
+      this.modalClosed.emit();
+    });
+
+    // Emit event when modal is closed on cancel or close
+    activeModal.dismissed.subscribe(() => {
+      this.modalClosed.emit();
+    });
   }
 
   ngOnDestroy(): void {
