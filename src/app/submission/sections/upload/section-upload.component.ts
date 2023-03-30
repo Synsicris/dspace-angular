@@ -159,16 +159,16 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
    * @param {SubmissionUploadFilesComponent} injectedSubmissionUploaderRef
    */
   constructor(private bitstreamService: SectionUploadService,
-    private changeDetectorRef: ChangeDetectorRef,
-    private collectionDataService: CollectionDataService,
-    private groupService: GroupDataService,
-    private resourcePolicyService: ResourcePolicyDataService,
-    protected sectionService: SectionsService,
-    private submissionService: SubmissionService,
-    private uploadsConfigService: SubmissionUploadsConfigDataService,
-    @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
-    @Inject('submissionIdProvider') public injectedSubmissionId: string,
-    @Inject('submissionUploaderRefProvider') public injectedSubmissionUploaderRef: Observable<SubmissionUploadFilesComponent>) {
+              private changeDetectorRef: ChangeDetectorRef,
+              private collectionDataService: CollectionDataService,
+              private groupService: GroupDataService,
+              private resourcePolicyService: ResourcePolicyDataService,
+              protected sectionService: SectionsService,
+              private submissionService: SubmissionService,
+              private uploadsConfigService: SubmissionUploadsConfigDataService,
+              @Inject('sectionDataProvider') public injectedSectionData: SectionDataObject,
+              @Inject('submissionIdProvider') public injectedSubmissionId: string,
+              @Inject('submissionUploaderRefProvider') public injectedSubmissionUploaderRef: Observable<SubmissionUploadFilesComponent>) {
     super(undefined, injectedSectionData, injectedSubmissionId, injectedSubmissionUploaderRef);
       this.initEditBitstreamListeners();
   }
@@ -226,24 +226,24 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
       // retrieve submission's bitstreams from state
       observableCombineLatest(this.configMetadataForm$,
         this.bitstreamService.getUploadedFileList(this.submissionId, this.sectionData.id)).pipe(
-          filter(([configMetadataForm, fileList]: [SubmissionFormsModel, any[]]) => {
-            return isNotEmpty(configMetadataForm) && isNotUndefined(fileList);
-          }),
-          distinctUntilChanged())
+        filter(([configMetadataForm, fileList]: [SubmissionFormsModel, any[]]) => {
+          return isNotEmpty(configMetadataForm) && isNotUndefined(fileList);
+        }),
+        distinctUntilChanged())
         .subscribe(([configMetadataForm, fileList]: [SubmissionFormsModel, any[]]) => {
-          this.fileList = [];
-          this.fileIndexes = [];
-          this.fileNames = [];
-          this.changeDetectorRef.detectChanges();
-          if (isNotUndefined(fileList) && fileList.length > 0) {
-            fileList.forEach((file) => {
-              this.fileList.push(file);
-              this.fileIndexes.push(file.uuid);
-              this.fileNames.push(this.getFileName(configMetadataForm, file));
-            });
-          }
+            this.fileList = [];
+            this.fileIndexes = [];
+            this.fileNames = [];
+            this.changeDetectorRef.detectChanges();
+            if (isNotUndefined(fileList) && fileList.length > 0) {
+              fileList.forEach((file) => {
+                this.fileList.push(file);
+                this.fileIndexes.push(file.uuid);
+                this.fileNames.push(this.getFileName(configMetadataForm, file));
+              });
+            }
 
-          this.changeDetectorRef.detectChanges();
+            this.changeDetectorRef.detectChanges();
         }
         )
     );
