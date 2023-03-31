@@ -1,6 +1,8 @@
 import { isEqual } from 'lodash';
-import { WorkspaceitemSectionUploadFileObject } from './../../../core/submission/models/workspaceitem-section-upload-file.model';
-import { ChangeDetectorRef, Component, Inject, ViewChildren, QueryList } from '@angular/core';
+import {
+  WorkspaceitemSectionUploadFileObject
+} from './../../../core/submission/models/workspaceitem-section-upload-file.model';
+import { ChangeDetectorRef, Component, Inject, QueryList, ViewChildren } from '@angular/core';
 
 import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
@@ -199,19 +201,19 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
         filter((rd: RemoteData<Collection>) => isNotUndefined((rd.payload))),
         tap((collectionRemoteData: RemoteData<Collection>) => this.collectionName = collectionRemoteData.payload.name),
         // TODO review this part when https://github.com/DSpace/dspace-angular/issues/575 is resolved
-        /*        mergeMap((collectionRemoteData: RemoteData<Collection>) => {
-                  return this.resourcePolicyService.findByHref(
-                    (collectionRemoteData.payload as any)._links.defaultAccessConditions.href
-                  );
-                }),
-                filter((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) =>
-                  defaultAccessConditionsRemoteData.hasSucceeded),
-                tap((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) => {
-                  if (isNotEmpty(defaultAccessConditionsRemoteData.payload)) {
-                    this.collectionDefaultAccessConditions = Array.isArray(defaultAccessConditionsRemoteData.payload)
-                      ? defaultAccessConditionsRemoteData.payload : [defaultAccessConditionsRemoteData.payload];
-                  }
-                }),*/
+/*        mergeMap((collectionRemoteData: RemoteData<Collection>) => {
+          return this.resourcePolicyService.findByHref(
+            (collectionRemoteData.payload as any)._links.defaultAccessConditions.href
+          );
+        }),
+        filter((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) =>
+          defaultAccessConditionsRemoteData.hasSucceeded),
+        tap((defaultAccessConditionsRemoteData: RemoteData<ResourcePolicy>) => {
+          if (isNotEmpty(defaultAccessConditionsRemoteData.payload)) {
+            this.collectionDefaultAccessConditions = Array.isArray(defaultAccessConditionsRemoteData.payload)
+              ? defaultAccessConditionsRemoteData.payload : [defaultAccessConditionsRemoteData.payload];
+          }
+        }),*/
         mergeMap(() => config$),
       ).subscribe((config: SubmissionUploadsModel) => {
         this.required$.next(config.required);
@@ -244,7 +246,7 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
             }
 
             this.changeDetectorRef.detectChanges();
-        }
+          }
         )
     );
   }
@@ -306,8 +308,6 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
 
   /**
    * Open file browse dialog
-   *
-   * @param submissionUploaderRef$
    */
   browse() {
       this.submissionUploader?.uploader?.browseBtn?.nativeElement.click();
@@ -319,28 +319,35 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
    * If there are multiple files, open the edit modal only for the last uploaded file (the one that triggered the event)
    */
   private initEditBitstreamListeners() {
-    this.submissionUploaderRef.subscribe((submissionUploader: SubmissionUploadFilesComponent) => {
-      this.submissionUploader = submissionUploader;
-      this.submissionUploader?.uploader?.onCompleteItem.subscribe((completeItems) => {
-        if (hasValue(completeItems) && isNotEmpty(completeItems) && !this.editBitstreamModalOpenedOnce) {
-          const fileEntries = this.fileEntryRef.toArray();
-          if (isNotEmpty(fileEntries)) {
-            const items: WorkspaceitemSectionUploadFileObject[] = completeItems.sections.upload.files;
-            const lastUploadedFile: WorkspaceitemSectionUploadFileObject = items[items.length - 1];
-            const sectionIdx = fileEntries.findIndex(fileCmp => isEqual(lastUploadedFile.uuid, fileCmp.fileId));
-            if (sectionIdx > -1) {
-              const elementToEdit: SubmissionSectionUploadFileComponent = fileEntries[sectionIdx];
-              // subscribe to modal close event to reset the flag
-              elementToEdit.modalClosed.subscribe(() => {
-                this.editBitstreamModalOpenedOnce = false;
-              });
-              // open the modal
-              elementToEdit.editBitstreamData();
-              this.editBitstreamModalOpenedOnce = true;
-            }
-          }
-        }
-      });
-    });
+    this.subs.push(
+      this.submissionUploaderRef.pipe(
+        filter((submissionUploader: SubmissionUploadFilesComponent) => isNotUndefined(submissionUploader?.uploader)),
+        switchMap((submissionUploader: SubmissionUploadFilesComponent) => {
+          this.submissionUploader = submissionUploader;
+          return this.submissionUploader?.uploader?.onCompleteItem.pipe(
+            map((completeItems) => {
+              if (hasValue(completeItems) && isNotEmpty(completeItems) && !this.editBitstreamModalOpenedOnce) {
+                const fileEntries = this.fileEntryRef.toArray();
+                if (isNotEmpty(fileEntries)) {
+                  const items: WorkspaceitemSectionUploadFileObject[] = completeItems.sections.upload.files;
+                  const lastUploadedFile: WorkspaceitemSectionUploadFileObject = items[items.length - 1];
+                  const sectionIdx = fileEntries.findIndex(fileCmp => isEqual(lastUploadedFile.uuid, fileCmp.fileId));
+                  if (sectionIdx > -1) {
+                    const elementToEdit: SubmissionSectionUploadFileComponent = fileEntries[sectionIdx];
+                    // subscribe to modal close event to reset the flag
+                    elementToEdit.modalClosed.subscribe(() => {
+                      this.editBitstreamModalOpenedOnce = false;
+                    });
+                    // open the modal
+                    elementToEdit.editBitstreamData();
+                    this.editBitstreamModalOpenedOnce = true;
+                  }
+                }
+              }
+            })
+          );
+        })
+      ).subscribe()
+    );
   }
 }
