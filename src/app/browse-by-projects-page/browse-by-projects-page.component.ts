@@ -74,20 +74,22 @@ export class BrowseByProjectsPageComponent implements OnInit {
     const isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
     const isFunderOrganizationalManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManagerOfAnyProject);
     const isFunderProjectManager$ = this.authorizationService.isAuthorized(FeatureID.isFunderProjectManagerOfAnyProject);
+    const isFunderReaderOfAnyProject$ = this.authorizationService.isAuthorized(FeatureID.isFunderReaderOfAnyProject);
     combineLatest([
       isAdmin$,
       isFunderOrganizationalManager$,
-      isFunderProjectManager$
+      isFunderProjectManager$,
+      isFunderReaderOfAnyProject$
     ]).pipe(
       take(1)
-    ).subscribe(([isAdmin, isFunderOrganizationalManager, isFunderProjectManager]) => {
-      if (isAdmin || isFunderOrganizationalManager || isFunderProjectManager) {
+    ).subscribe(([isAdmin, isFunderOrganizationalManager, isFunderProjectManager, isFunderReaderOfAnyProject]) => {
+      if (isAdmin || isFunderOrganizationalManager || isFunderProjectManager || isFunderReaderOfAnyProject) {
         this.queryBuilderConfigurationName = environment.projects.projectsBrowse.adminAndFunders.firstStepSearchQueryConfigurationName;
-        this.projectsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.firstStepSearchAllProjectConfigurationName;
+        this.projectsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.firstStepSearchBrowseAllProjectConfigurationName;
         this.projectItemsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.secondSearchProjectItemsConfigurationName;
       } else {
         this.queryBuilderConfigurationName = environment.projects.projectsBrowse.members.firstStepSearchQueryConfigurationName;
-        this.projectsConfigurationName = environment.projects.projectsBrowse.members.firstStepSearchAllProjectConfigurationName;
+        this.projectsConfigurationName = environment.projects.projectsBrowse.members.firstStepSearchBrowseAllProjectConfigurationName;
         this.projectItemsConfigurationName = environment.projects.projectsBrowse.members.secondSearchProjectItemsConfigurationName;
       }
 

@@ -524,12 +524,12 @@ export const environment: BuildConfig = {
     projectsBrowse: {
       adminAndFunders: {
         firstStepSearchQueryConfigurationName: 'firstStepSearchProjectsForAdminAndFunders',
-        firstStepSearchAllProjectConfigurationName: 'firstStepSearchAllProjectForAdminAndFunders',
+        firstStepSearchBrowseAllProjectConfigurationName: 'firstStepSearchAllProjectForAdminAndFunders',
         secondSearchProjectItemsConfigurationName: 'secondStepSearchProjectItemsForAdminAndFunders',
       },
       members: {
         firstStepSearchQueryConfigurationName: 'firstStepSearchProjectsForMembers',
-        firstStepSearchAllProjectConfigurationName: 'firstStepSearchAllProjectForMembers',
+        firstStepSearchBrowseAllProjectConfigurationName: 'firstStepSearchAllProjectForMembers',
         secondSearchProjectItemsConfigurationName: 'secondStepSearchProjectItems',
       },
       entityTypeFilterName: 'entityType'
