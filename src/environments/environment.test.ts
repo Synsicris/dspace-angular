@@ -560,7 +560,7 @@ export const environment: BuildConfig = {
     projObjectiveEntity: 'proj_objective',
     iaObjectiveEntity: 'ia_objective',
     impactPathwaysSearchConfigName: 'allImpactPathways',
-    contributionFundingprogrammeEntity: 'contribution_fundingprogrammment accordion in IPW and WP needs standard design of accordions #643.pdfme'
+    contributionFundingprogrammeEntity: 'contribution_fundingprogramme'
   },
   workingPlan: {
     workingPlanRelationMetadata: 'synsicris.relation.workingplan',
