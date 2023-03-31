@@ -27,6 +27,7 @@ export class WrapperImpactPathWayComponent {
   @Input() impactPathWayItem: Item;
   @Input() public impactPathWay: ImpactPathway;
   @Input() public impactPathWayId: string;
+  @Input() public isProcessing: boolean;
 
   public activeIds: string[];
 

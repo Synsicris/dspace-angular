@@ -40,6 +40,7 @@ export class ImpactPathwayBoardComponent implements OnInit {
   @Input() public impactPathwayId: string;
 
   private impactPathWay$: BehaviorSubject<ImpactPathway> = new BehaviorSubject<ImpactPathway>(null);
+  public isProcessing$: Observable<boolean>;
 
   constructor(private impactPathwayService: ImpactPathwayService) {
   }
@@ -53,6 +54,7 @@ export class ImpactPathwayBoardComponent implements OnInit {
     ).subscribe(([ipw, loading]: [ImpactPathway, boolean]) => {
       this.impactPathWay$.next(ipw);
     });
+    this.isProcessing$ = this.impactPathwayService.isProcessing();
   }
 
   getImpactPathway(): Observable<ImpactPathway> {

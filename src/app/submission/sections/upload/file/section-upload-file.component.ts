@@ -1,12 +1,11 @@
-import { TranslateService } from '@ngx-translate/core';
-import { NotificationsService } from './../../../../shared/notifications/notifications.service';
-import { QuestionsBoardStateService } from './../../../../questions-board/core/questions-board-state.service';
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { DynamicFormControlModel, } from '@ng-dynamic-forms/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
+import { TranslateService } from '@ngx-translate/core';
 
 import { SectionUploadService } from '../section-upload.service';
 import { hasValue, isNotUndefined } from '../../../../shared/empty.util';
@@ -20,7 +19,8 @@ import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service
 import { SubmissionJsonPatchOperationsService } from '../../../../core/submission/submission-json-patch-operations.service';
 import { SubmissionSectionUploadFileEditComponent } from './edit/section-upload-file-edit.component';
 import { Bitstream } from '../../../../core/shared/bitstream.model';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
+import { NotificationsService } from '../../../../shared/notifications/notifications.service';
+import { QuestionsBoardStateService } from '../../../../questions-board/core/questions-board-state.service';
 
 /**
  * This component represents a single bitstream contained in the submission
@@ -30,7 +30,7 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
   styleUrls: ['./section-upload-file.component.scss'],
   templateUrl: './section-upload-file.component.html',
 })
-export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
+export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, OnDestroy {
 
   /**
    * The list of available access condition
@@ -183,6 +183,11 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
   protected formMetadata: string[] = [];
 
   /**
+   * Event emitted when the modal is closed
+   */
+  @Output() modalClosed = new EventEmitter();
+
+  /**
    * Initialize instance variables
    *
    * @param {ChangeDetectorRef} cdr
@@ -296,6 +301,7 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
     activeModal.componentInstance.submissionId = this.submissionId;
     activeModal.componentInstance.questionBoardId = this.questionBoardId;
     activeModal.componentInstance.questionsBoardEditMode = this.questionsBoardEditMode;
+    activeModal.componentInstance.singleAccessCondition = this.singleAccessCondition;
 
     this.subscriptions.push(
       activeModal.closed.subscribe((updateFinishedQB: boolean) => {
@@ -303,6 +309,16 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit {
           this.editUploadedFile.emit(true);
         }
       }));
+
+    // Emit event when modal is closed on save
+    activeModal.closed.subscribe(() => {
+      this.modalClosed.emit();
+    });
+
+    // Emit event when modal is closed on cancel or close
+    activeModal.dismissed.subscribe(() => {
+      this.modalClosed.emit();
+    });
   }
 
   ngOnDestroy(): void {
