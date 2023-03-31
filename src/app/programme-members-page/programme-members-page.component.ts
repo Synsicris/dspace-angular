@@ -37,34 +37,34 @@ export class ProgrammeMembersPageComponent implements OnInit {
   public entityItem$: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
 
   /**
-   * The programme funder managers group
+   * The programme funder organizational managers group
    */
-  public managersGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
+  public programmeFunderOrganizationalManagersGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
 
   /**
    * A boolean representing if coordinators group is initialized
    */
-  public managersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public programmeFunderOrganizationalManagersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
-   * The programme funder members group
+   * The programme funder readers group
    */
-  public membersGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
+  public programmeReadersGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
 
   /**
    * A boolean representing if members group is initialized
    */
-  public membersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public programmeReadersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
-   * The programme project funders group
+   * The programme funders project managers group
    */
-  public projectFundersGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
+  public programmeFunderProjectManagersGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
 
   /**
    * A boolean representing if project funders group is initialized
    */
-  public projectFundersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public programmeFunderProjectManagersGroupInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     protected authService: AuthService,
@@ -88,7 +88,7 @@ export class ProgrammeMembersPageComponent implements OnInit {
     this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(
       tap((isAdmin) => {
         if (!isAdmin) {
-          this.managersGroupInit$.next(true);
+          this.programmeFunderOrganizationalManagersGroupInit$.next(true);
         }
       }),
       filter((isAdmin) => isAdmin),
@@ -100,8 +100,8 @@ export class ProgrammeMembersPageComponent implements OnInit {
     ).subscribe((groupRD: RemoteData<Group>) => {
       if (groupRD.hasSucceeded) {
         this.activeId = 'managers';
-        this.managersGroup$.next(groupRD.payload);
-        this.managersGroupInit$.next(true);
+        this.programmeFunderOrganizationalManagersGroup$.next(groupRD.payload);
+        this.programmeFunderOrganizationalManagersGroupInit$.next(true);
       }
     });
 
@@ -112,27 +112,27 @@ export class ProgrammeMembersPageComponent implements OnInit {
       getFirstCompletedRemoteData()
     ).subscribe((groupRD: RemoteData<Group>) => {
       if (groupRD.hasSucceeded) {
-        this.projectFundersGroup$.next(groupRD.payload);
-        this.membersGroupInit$.next(true);
+        this.programmeFunderProjectManagersGroup$.next(groupRD.payload);
+        this.programmeFunderProjectManagersGroupInit$.next(true);
       }
     });
 
     item$.pipe(
-      switchMap((item: Item) => this.projectGroupService.getProgrammeMembersGroupUUIDByItem(item)),
+      switchMap((item: Item) => this.projectGroupService.getProgrammeReadersGroupUUIDByItem(item)),
       map((groups: string[]) => groups[0]),
       switchMap((groupID) => this.groupService.findById(groupID)),
       getFirstCompletedRemoteData()
     ).subscribe((groupRD: RemoteData<Group>) => {
       if (groupRD.hasSucceeded) {
-        this.membersGroup$.next(groupRD.payload);
-        this.projectFundersGroupInit$.next(true);
+        this.programmeReadersGroup$.next(groupRD.payload);
+        this.programmeReadersGroupInit$.next(true);
       }
     });
 
     combineLatest([
-      this.managersGroupInit$.asObservable(),
-      this.projectFundersGroupInit$.asObservable(),
-      this.membersGroupInit$.asObservable()
+      this.programmeFunderOrganizationalManagersGroupInit$.asObservable(),
+      this.programmeFunderProjectManagersGroupInit$.asObservable(),
+      this.programmeReadersGroupInit$.asObservable()
     ]).pipe(
       map(([managersInit, fundersInit, membersInit]) => {
         return managersInit && fundersInit && membersInit;

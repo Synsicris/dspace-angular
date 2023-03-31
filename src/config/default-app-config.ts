@@ -743,12 +743,12 @@ export class DefaultAppConfig implements AppConfig {
     projectsBrowse: {
       adminAndFunders: {
         firstStepSearchQueryConfigurationName: 'firstStepSearchProjectsForAdminAndFunders',
-        firstStepSearchAllProjectConfigurationName: 'firstStepSearchAllProjectForAdminAndFunders',
+        firstStepSearchBrowseAllProjectConfigurationName: 'firstStepSearchBrowseAllProjectForAdminAndFunders',
         secondSearchProjectItemsConfigurationName: 'secondStepSearchProjectItemsForAdminAndFunders',
       },
       members: {
         firstStepSearchQueryConfigurationName: 'firstStepSearchProjectsForMembers',
-        firstStepSearchAllProjectConfigurationName: 'firstStepSearchAllProjectForMembers',
+        firstStepSearchBrowseAllProjectConfigurationName: 'firstStepSearchBrowseAllProjectForMembers',
         secondSearchProjectItemsConfigurationName: 'secondStepSearchProjectItems',
       },
       entityTypeFilterName: 'entityType'

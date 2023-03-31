@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
-import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
+import { BehaviorSubject, concatAll, concatMap, Observable, of as observableOf } from 'rxjs';
 import { find, map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -163,14 +163,21 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
           item.type.value,
           item.metadata);
       });
-      modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
-        items.forEach((item) => {
-          this.impactPathwayService.dispatchAddImpactPathwayTaskAction(
-            impactPathwayStep.parentId,
-            impactPathwayStep.id,
-            item.id);
+      (modalRef.componentInstance.addItems as EventEmitter<SimpleItem[]>)
+        .pipe(
+          take(1),
+          concatAll(),
+          concatMap(item => {
+            this.impactPathwayService.dispatchAddImpactPathwayTaskAction(
+              impactPathwayStep.parentId,
+              impactPathwayStep.id,
+              item.id
+            );
+            return this.impactPathwayService.getImpactPathwayTaskById(impactPathwayStep.parentId, impactPathwayStep.id, item.id).pipe(take(1));
+          })
+        )
+        .subscribe((task: ImpactPathwayTask) => {
         });
-      });
     });
   }
 
