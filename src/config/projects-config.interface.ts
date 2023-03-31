@@ -2,7 +2,7 @@ import { Config } from './config.interface';
 
 export interface ProjectBrowseDiscoveryConfig {
   firstStepSearchQueryConfigurationName: string;
-  firstStepSearchAllProjectConfigurationName: string;
+  firstStepSearchBrowseAllProjectConfigurationName: string;
   secondSearchProjectItemsConfigurationName: string;
 }
 

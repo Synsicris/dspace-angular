@@ -4,6 +4,8 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { DynamicFormControlModel, } from '@ng-dynamic-forms/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
+import { TranslateService } from '@ngx-translate/core';
 
 import { SectionUploadService } from '../section-upload.service';
 import { hasValue, isNotUndefined } from '../../../../shared/empty.util';
@@ -17,7 +19,8 @@ import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service
 import { SubmissionJsonPatchOperationsService } from '../../../../core/submission/submission-json-patch-operations.service';
 import { SubmissionSectionUploadFileEditComponent } from './edit/section-upload-file-edit.component';
 import { Bitstream } from '../../../../core/shared/bitstream.model';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
+import { NotificationsService } from '../../../../shared/notifications/notifications.service';
+import { QuestionsBoardStateService } from '../../../../questions-board/core/questions-board-state.service';
 
 /**
  * This component represents a single bitstream contained in the submission
@@ -98,12 +101,39 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
   @Input() submissionId: string;
 
   /**
+   * The questionsBoard id
+   * @type {string}
+   */
+  @Input() questionBoardId: string;
+
+  /**
+   * Flag to enable/disable action buttons (delete & edit)
+   */
+  @Input() disableActions = false;
+
+  /**
+   * The questionsBoard edit mode (suffix)
+   * @type {string}
+   */
+  @Input() questionsBoardEditMode: string;
+
+  /**
    * The [[SubmissionSectionUploadFileEditComponent]] reference
    * @type {SubmissionSectionUploadFileEditComponent}
    */
   @ViewChild(SubmissionSectionUploadFileEditComponent) fileEditComp: SubmissionSectionUploadFileEditComponent;
 
+  /**
+   * Event emitted when a bitstream is deleted
+   * @type {EventEmitter<boolean>}
+   */
+  @Output() deleteUploadedFile: EventEmitter<boolean> = new EventEmitter(false);
 
+  /**
+   * Event emitted when a bitstream is edited
+   * @type {EventEmitter<boolean>}
+   */
+  @Output() editUploadedFile: EventEmitter<boolean> = new EventEmitter(false);
   /**
    * The bitstream's metadata data
    * @type {WorkspaceitemSectionUploadFileObject}
@@ -178,6 +208,9 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
     private operationsService: SubmissionJsonPatchOperationsService,
     private submissionService: SubmissionService,
     private uploadService: SectionUploadService,
+    private questionsBoardStateService: QuestionsBoardStateService,
+    private notificationsService: NotificationsService,
+    private translate: TranslateService,
   ) {
     this.readMode = true;
   }
@@ -188,24 +221,35 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
   ngOnChanges() {
     if (this.availableAccessConditionOptions) {
       // Retrieve file state
-      this.subscriptions.push(
-        this.uploadService
-          .getFileData(this.submissionId, this.sectionId, this.fileId).pipe(
+      if (hasValue(this.submissionId)) {
+        this.subscriptions.push(
+          this.uploadService
+            .getFileData(this.submissionId, this.sectionId, this.fileId).pipe(
+              filter((bitstream) => isNotUndefined(bitstream)))
+            .subscribe((bitstream) => {
+              this.fileData = bitstream;
+            })
+        );
+      } else if (hasValue(this.questionBoardId)) {
+        this.subscriptions.push(
+          this.questionsBoardStateService.getUploadedFileFromQuestionsBoard(this.questionBoardId, this.fileId).pipe(
             filter((bitstream) => isNotUndefined(bitstream)))
-          .subscribe((bitstream) => {
+            .subscribe((bitstream) => {
               this.fileData = bitstream;
             }
-          )
-      );
+            )
+        );
+      }
     }
+
+    this.formId = this.formService.getUniqueId(this.fileId);
+    this.pathCombiner = new JsonPatchOperationPathCombiner('sections', this.sectionId, 'files', this.fileIndex);
   }
 
   /**
    * Initialize instance variables
    */
   ngOnInit() {
-    this.formId = this.formService.getUniqueId(this.fileId);
-    this.pathCombiner = new JsonPatchOperationPathCombiner('sections', this.sectionId, 'files', this.fileIndex);
     this.loadFormMetadata();
   }
 
@@ -255,7 +299,16 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
     activeModal.componentInstance.formMetadata = this.formMetadata;
     activeModal.componentInstance.pathCombiner = this.pathCombiner;
     activeModal.componentInstance.submissionId = this.submissionId;
+    activeModal.componentInstance.questionBoardId = this.questionBoardId;
+    activeModal.componentInstance.questionsBoardEditMode = this.questionsBoardEditMode;
     activeModal.componentInstance.singleAccessCondition = this.singleAccessCondition;
+
+    this.subscriptions.push(
+      activeModal.closed.subscribe((updateFinishedQB: boolean) => {
+        if (updateFinishedQB) {
+          this.editUploadedFile.emit(true);
+        }
+      }));
 
     // Emit event when modal is closed on save
     activeModal.closed.subscribe(() => {
@@ -292,15 +345,29 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
    */
   protected deleteFile() {
     this.operationsBuilder.remove(this.pathCombiner.getPath());
+    const elementId = this.submissionId ?? `${this.questionBoardId}:${this.questionsBoardEditMode}`;
     this.subscriptions.push(this.operationsService.jsonPatchByResourceID(
       this.submissionService.getSubmissionObjectLinkName(),
-      this.submissionId,
+      elementId,
       this.pathCombiner.rootElement,
       this.pathCombiner.subRootElement)
-      .subscribe(() => {
-        this.uploadService.removeUploadedFile(this.submissionId, this.sectionId, this.fileId);
-        this.processingDelete$.next(false);
-      }));
-  }
+      .subscribe({
+        next: () => {
+        if (isNotUndefined(this.submissionId)) {
+          this.uploadService.removeUploadedFile(this.submissionId, this.sectionId, this.fileId);
+        }
 
+        if (isNotUndefined(this.questionBoardId)) {
+          this.questionsBoardStateService.removeUploadedFile(this.questionBoardId, this.fileId);
+          this.deleteUploadedFile.emit(true);
+        }
+        this.processingDelete$.next(false);
+      },
+      error: ()=> {
+        this.processingDelete$.next(false);
+        this.notificationsService.error(
+          null,
+          this.translate.get('submission.sections.upload.delete.submit.error.message'));
+      }}));
+  }
 }

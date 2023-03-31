@@ -45,7 +45,7 @@
 
   <div *ngIf="dso.firstMetadata(RELATION_ITEM_VERSION) as relatedItem">
     <ng-container *ngIf="getTypeDescriptionMetadata(relatedItem) as typeDesc">
-      <span class="text-muted">{{'layout.field.label.comment.synsicris.related.item' | translate}}:</span>
+        <span class="text-muted">{{'layout.field.label.comment.synsicris.related.item' | translate}}:</span>
       <span class="btn btn-link d-inline p-0 m-0" style="cursor: pointer"
             (click)="navigateToRelatedItem(relatedItem, dso.firstMetadata(RELATION_BOARD_OBJECT))">
           {{typeDesc.itemType | dsEntityTypeTranslate}}{{typeDesc.itemType ? ' - ' : ''}}{{typeDesc.description ? typeDesc.description : ''}}

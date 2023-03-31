@@ -219,6 +219,7 @@ export class ItemVersionListComponent implements OnInit {
   isActiveInstance(version: Version): boolean {
     return version.id === this.activeProjectInstanceVersion.value;
   }
+
   private isVisibleForFunder(item: Item): boolean {
     return !this.projectVersionService.isActiveWorkingInstance(item) &&
       this.projectVersionService.isVersionVisible(item);

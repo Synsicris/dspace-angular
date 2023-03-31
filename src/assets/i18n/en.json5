@@ -6468,6 +6468,8 @@
 
   "submission.general.save-later.edit-item": "Save and return",
 
+  "submission.import-external.help-message": "Help",
+
   "submission.import-external.page.title": "Import metadata from an external source",
 
   "submission.import-external.title": "Import metadata from an external source",
@@ -7403,6 +7405,8 @@
   "submission.sections.upload.delete.confirm.title": "Delete bitstream",
 
   "submission.sections.upload.delete.submit": "Delete",
+
+  "submission.sections.upload.delete.submit.error.message": "Error occurred while deleting the file",
 
   "submission.sections.upload.download.title": "Download bitstream",
 
@@ -10922,6 +10926,93 @@
 
   "search.filters.filter.synsicrisLevelStart.placeholder": "Level Start",
 
-  "search.filters.filter.synsicrisLevelEnd.placeholder": "Level End"
+  "search.filters.filter.synsicrisLevelEnd.placeholder": "Level End",
 
+  "interim-report.upload-step.title": "6. Upload files",
+
+  "layout.box.header.workpackage_status": "Change since proposal submission",
+
+  "search.filters.filter.synsicrisAddressAddressPostcodePostbox.label": "Search Postcode",
+
+  "search.filters.filter.synsicrisAddressAddressPostcodePostbox.head": "Postcode",
+
+  "search.filters.filter.synsicrisAddressAddressPostcodePostbox.placeholder": "Postcode",
+
+  "search.filters.filter.synsicrisAddressAddresscountry.head": "Country/Federal state",
+
+  "search.filters.filter.synsicrisAddressAddresscountry.placeholder": "Country/Federal state",
+
+  "search.filters.filter.synsicrisAddressAddresscountry.label": "Search Country/Federal state",
+
+  "search.filters.filter.synsicrisRelationpartner.placeholder": "Project partner",
+
+  "submission.sections.submit.progressbar.interim_report_step_type_1_task_form.info": "help",
+
+  "submission.sections.submit.progressbar.interim_report_step_type_2_task_form.info": "help",
+
+  "submission.sections.submit.progressbar.interim_report_step_type_3_task_form.info": "help",
+
+  "submission.sections.submit.progressbar.interim_report_step_type_4_task_form.info": "help",
+
+  "submission.sections.submit.progressbar.interim_report_step_type_5_task_form.info": "help",
+
+  "search.filters.filter.synsicrisDateReminder.head": "Date for Reminder",
+
+  "search.filters.filter.synsicrisDateReminder.placeholder": "Date for Reminder",
+
+  "search.filters.filter.synsicrisDateReminder.label": "Search Date for Reminder",
+
+  "search.filters.filter.synsicrisDateCreation.head": "Written at",
+
+  "search.filters.filter.synsicrisDateCreation.placeholder": "Written at",
+
+  "search.filters.filter.synsicrisDateCreation.label": "Search Written at",
+
+  "search.filters.filter.synsicrisDateCreator.head": "Written by",
+
+  "search.filters.filter.synsicrisDateCreator.placeholder": "Written by",
+
+  "search.filters.filter.synsicrisDateCreator.label": "Search",
+
+  "search.filters.filter.synsicrisRelationItem.head": "Related Item",
+
+  "search.filters.filter.synsicrisRelationItem.placeholder": "Relatied Item",
+
+  "search.filters.filter.synsicrisRelationItem.label": "Search Related Item",
+
+  "search.filters.applied.charts.graph-event-oairecerif_event_country.tab": "Country",
+
+  "layout.field.label.cooperationpartner.synsicris.type.cooperation": "Type of cooperation",
+
+  "layout.field.label.cooperationpartner.dc.type": "Sector",
+
+  "layout.field.label.cooperationpartner.synsicris.cooperation.startDate": "Start",
+
+  "layout.field.label.cooperationpartner.synsicris.cooperation.endDate": "End",
+
+  "layout.field.label.cooperationpartner.synsicris.description.contribution": "Contribution",
+
+  "layout.field.label.Patent.dc.publisher": "Publisher",
+
+  "layout.field.label.innovationpotential.synsicris.coverage.regionalprimary": "Primary field of application",
+
+  "layout.field.label.innovationpotential.synsicris.coverage.regionalsecondary": "Later dissemination",
+
+  "search.filters.filter.synsicrisOairecerifEventStartdate.min.label": "Start",
+
+  "search.filters.filter.synsicrisOairecerifEventStartdate.max.label": "End",
+
+  "search.filters.filter.synsicrisCoverageRegionalsecondary.placeholder": "Regional Secondary",
+
+  "search.filters.filter.synsicrisTypeLevel.placeholder": "Type Level",
+
+  "search.filters.filter.synsicrisTypeEvidence.placeholder": "Evidence Type",
+
+  "search.filters.filter.synsicrisType.placeholder": "Access Type",
+
+  "search.filters.filter.synsicrisRelationFundingobjective.placeholder": "Funding Objective",
+
+  "search.filters.filter.synsicrisLevelStart.placeholder": "Level Start",
+
+  "search.filters.filter.synsicrisLevelEnd.placeholder": "Level End"
 }

@@ -19,6 +19,7 @@ import { MetadataValue } from './metadata.models';
 import { JsonPatchOperationPathCombiner } from '../json-patch/builder/json-patch-operation-path-combiner';
 import { isEmpty, isNotEmpty } from '../../shared/empty.util';
 import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
+import { DSONameService } from '../breadcrumbs/dso-name.service';
 
 @Injectable()
 export class ItemAuthorityRelationService {
@@ -27,6 +28,7 @@ export class ItemAuthorityRelationService {
     private itemService: ItemDataService,
     private itemJsonPatchOperationsService: ItemJsonPatchOperationsService,
     private operationsBuilder: JsonPatchOperationsBuilder,
+    private dsoNameService: DSONameService
   ) {
 
   }
@@ -55,7 +57,7 @@ export class ItemAuthorityRelationService {
       getFirstSucceededRemoteDataPayload()
     );
     return combineLatest([parentItem$, linkedItem$]).pipe(
-      tap(([parentItem, linkedItem]: [Item, Item]) => this.addRelationPatch(patchPath, parentItem, linkedItem.name, linkedItemId, relationMetadataName)),
+      tap(([parentItem, linkedItem]: [Item, Item]) => this.addRelationPatch(patchPath, parentItem, this.dsoNameService.getName(linkedItem), linkedItemId, relationMetadataName)),
       delay(100),
       mergeMap(([parentItem, linkedItem]: [Item, Item]) => this.executeEditItemPatch(parentItem.id, editMode, patchPath).pipe(
         mapTo(linkedItem)
@@ -276,19 +278,19 @@ export class ItemAuthorityRelationService {
    * @param patchPath            The path to metadata section to patch
    * @param editMode                   The item edit mode
    * @param parentItemId         The parent item id from which selecting child items
-   * @param linkedItemIds        The list of item id in the new order
+   * @param linkedItems        The list of item metadata with authority and value
    * @param relationMetadataName The metadata that contains authority from parent to child
    */
   orderRelations(
     patchPath: string,
     editMode: string,
     parentItemId: string,
-    linkedItemIds: string[],
+    linkedItems: Pick<MetadataValue, 'authority' | 'value'>[],
     relationMetadataName: string
   ): Observable<Item> {
     return this.itemService.findById(parentItemId).pipe(
       getFirstSucceededRemoteDataPayload(),
-      tap((childItem: Item) => this.replaceAllRelationsPatch(patchPath, childItem, linkedItemIds, relationMetadataName)),
+      tap((childItem: Item) => this.replaceAllRelationsPatch(patchPath, childItem, linkedItems, relationMetadataName)),
       delay(100),
       mergeMap((taskItem: Item) => this.executeEditItemPatch(taskItem.id, editMode, patchPath))
     );
@@ -336,18 +338,18 @@ export class ItemAuthorityRelationService {
       true);
   }
 
-  private replaceAllRelationsPatch(patchPath: string, targetItem: Item, relatedItemIds: string[], relation: string): void {
+  private replaceAllRelationsPatch(patchPath: string, targetItem: Item, relatedItems: Pick<MetadataValue, 'authority' | 'value'>[], relation: string): void {
     const stepTasks: MetadataValue[] = targetItem.findMetadataSortedByPlace(relation);
     const pathCombiner = new JsonPatchOperationPathCombiner(patchPath);
-    relatedItemIds.forEach((relatedItemId: string, index: number) => {
+    relatedItems.forEach(({ value, authority }, index: number) => {
       const path = pathCombiner.getPath([relation, index.toString()]);
-      const value = {
-        value: relatedItemId,
-        authority: relatedItemId,
+      const replaceBody = {
+        value,
+        authority,
         place: stepTasks.length,
         confidence: 600
       };
-      this.operationsBuilder.replace(path, value, true);
+      this.operationsBuilder.replace(path, replaceBody, true);
     });
   }
 

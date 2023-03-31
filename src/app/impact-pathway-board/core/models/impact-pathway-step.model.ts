@@ -9,8 +9,9 @@ export class ImpactPathwayStep {
     public type?: string,
     public title?: string,
     public tasks: ImpactPathwayTask[] = [],
-    public connectedSteps: string[] = []) {
-
+    public connectedSteps: string[] = [],
+    public processing: boolean = false
+  ) {
   }
 
   hasDetail() {

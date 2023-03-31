@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { of as observableOf } from 'rxjs';
-import { catchError, concatMap, delay, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, concatMap, delay, map, switchMap, take, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
@@ -36,6 +36,7 @@ import {
   RemoveQuestionsBoardTaskErrorAction,
   RemoveQuestionsBoardTaskSuccessAction,
   UpdateQuestionsBoardStepAction,
+  UploadFilesToQuestionBoardAction,
 } from './questions-board.actions';
 import { QuestionsBoardService } from './questions-board.service';
 import { isNotEmpty } from '../../shared/empty.util';
@@ -47,6 +48,7 @@ import { ItemDataService } from '../../core/data/item-data.service';
 import { QuestionsBoardTask } from './models/questions-board-task.model';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 import { QuestionsBoardStep } from './models/questions-board-step.model';
+import { MetadataValue } from '../../core/shared/metadata.models';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -270,13 +272,17 @@ export class QuestionsBoardEffects {
   orderSubTasks$ = createEffect(() =>  this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.ORDER_QUESTIONS_BOARD_TASK),
     switchMap((action: OrderQuestionsBoardTasksAction) => {
-      const taskIds: string[] = action.payload.currentTasks.map((task: QuestionsBoardTask) => task.id);
+      const tasks: Pick<MetadataValue, 'authority' | 'value'>[] =
+        action.payload.currentTasks.map((task: QuestionsBoardTask) => ({
+          authority: task.id,
+          value: task.title
+        }));
       return this.itemAuthorityRelationService.orderRelations(
         this.questionsBoardService.getQuestionsBoardEditFormSection(),
         this.questionsBoardService.getQuestionsBoardEditMode(),
         action.payload.stepId,
-        taskIds,
-         this.questionsBoardService.getQuestionsBoardRelationTasksMetadata()
+        tasks,
+        this.questionsBoardService.getQuestionsBoardRelationTasksMetadata()
       ).pipe(
         map(() => new OrderQuestionsBoardTasksSuccessAction()),
         catchError((error: Error) => {
@@ -312,6 +318,17 @@ export class QuestionsBoardEffects {
           return observableOf(new InitCompareErrorAction());
         }))
     )));
+
+  addUploadStepToQuestionBoard$ = createEffect(() => this.actions$.pipe(
+    ofType(QuestionsBoardActionTypes.UPLOAD_FILES_TO_QUESTION_BOARD),
+    take(1),
+    map((action: UploadFilesToQuestionBoardAction) =>
+       new UploadFilesToQuestionBoardAction(
+        action.payload.questionsBoardId,
+        action.payload.files
+      )
+    )
+  ));
 
   constructor(
     private actions$: Actions,
