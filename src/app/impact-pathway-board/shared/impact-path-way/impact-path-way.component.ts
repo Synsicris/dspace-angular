@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, map, mergeMap, switchMap, take } from 'rxjs/operators';
-import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordion, NgbModal, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../core/models/impact-pathway.model';
 import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
@@ -103,6 +103,11 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
   public isProcessingRemove$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public disableDelete$ = new BehaviorSubject<boolean>(false);
   public disableEdit$ = new BehaviorSubject<boolean>(false);
+
+  /**
+   * The flag to indicate if the comment accordion is open
+   */
+  public isCommentAccordionOpen = false;
 
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
               private authorizationService: AuthorizationDataService,
@@ -283,5 +288,13 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
 
   getCompareItemDescription(item: Item): string {
     return item?.firstMetadataValue('dc.description');
+  }
+
+  /**
+   * Change the flag isCommentAccordionOpen when the accordion state changes
+   * @param event NgbPanelChangeEvent
+   */
+  changeAccordionState(event: NgbPanelChangeEvent) {
+    this.isCommentAccordionOpen = event.nextState;
   }
 }

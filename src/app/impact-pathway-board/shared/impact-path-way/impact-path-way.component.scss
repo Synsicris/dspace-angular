@@ -61,4 +61,9 @@
   #panel-0 > div.card-body {
     padding: 0 !important;
   }
+
+  .card-header button {
+    box-shadow: none !important;
+    width: 100%;
+  }
 }
