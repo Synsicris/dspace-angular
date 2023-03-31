@@ -83,11 +83,11 @@ export class BrowseByProjectsPageComponent implements OnInit {
     ).subscribe(([isAdmin, isFunderOrganizationalManager, isFunderProjectManager]) => {
       if (isAdmin || isFunderOrganizationalManager || isFunderProjectManager) {
         this.queryBuilderConfigurationName = environment.projects.projectsBrowse.adminAndFunders.firstStepSearchQueryConfigurationName;
-        this.projectsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.firstStepSearchAllProjectConfigurationName;
+        this.projectsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.firstStepSearchBrowseAllProjectConfigurationName;
         this.projectItemsConfigurationName = environment.projects.projectsBrowse.adminAndFunders.secondSearchProjectItemsConfigurationName;
       } else {
         this.queryBuilderConfigurationName = environment.projects.projectsBrowse.members.firstStepSearchQueryConfigurationName;
-        this.projectsConfigurationName = environment.projects.projectsBrowse.members.firstStepSearchAllProjectConfigurationName;
+        this.projectsConfigurationName = environment.projects.projectsBrowse.members.firstStepSearchBrowseAllProjectConfigurationName;
         this.projectItemsConfigurationName = environment.projects.projectsBrowse.members.secondSearchProjectItemsConfigurationName;
       }
 
