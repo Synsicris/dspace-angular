@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -62,6 +62,7 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
    * The impact-pathway item
    */
   @Input() impactPathWayItem: Item;
+  @Input() isProcessing: boolean;
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
 
@@ -99,6 +100,9 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
   public impactPathwayStepEntityType: string;
   public funderRoles: AlertRole[];
   public dismissRole: AlertRole;
+  public isProcessingRemove$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public disableDelete$ = new BehaviorSubject<boolean>(false);
+  public disableEdit$ = new BehaviorSubject<boolean>(false);
 
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
               private authorizationService: AuthorizationDataService,
@@ -140,6 +144,23 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
 
         this.compareItem$.next(item);
       })
+    );
+    this.subs.push(
+      this.impactPathwayService.isRemoving().subscribe(val => this.isProcessingRemove$.next(val))
+    );
+
+    this.subs.push(
+      combineLatest([this.isProcessingRemove$, this.compareMode, this.isVersionOfAnItem$])
+        .subscribe(([isProcessing, isComparing, isVersion]) =>
+          this.disableDelete$.next(isProcessing || isComparing || isVersion)
+        )
+    );
+
+    this.subs.push(
+      combineLatest([this.isProcessingRemove$, this.compareMode, this.isVersionOfAnItem$, this.canEditButton$])
+        .subscribe(([isProcessing, isComparing, isVersion, canEdit]) =>
+          this.disableEdit$.next(isProcessing || isComparing || isVersion || !canEdit)
+        )
     );
 
     this.editItemDataService.checkEditModeByIdAndType(this.impactPathway.id, environment.impactPathway.impactPathwaysEditMode).pipe(

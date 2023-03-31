@@ -672,6 +672,15 @@ export class ImpactPathwayService {
     );
   }
 
+  getImpactPathwayTaskById(impactPathwayId: string, impactPathwayStepId: string, taskId: string): Observable<ImpactPathwayTask> {
+    return this.store.pipe(
+      select(impactPathwayByIDSelector(impactPathwayId)),
+      filter((impactPathway: ImpactPathway) => isNotEmpty(impactPathway) && isNotEmpty(impactPathway.getStep(impactPathwayStepId))),
+      mergeMap((impactPathway: ImpactPathway) => impactPathway.getStep(impactPathwayStepId)?.tasks),
+      filter((task: ImpactPathwayTask) => taskId === task?.id)
+    );
+  }
+
   getImpactPathwayTaskType(stepType: string, taskType: string, isObjective: boolean): Observable<string> {
     const name = isObjective ? `impactpathway_${stepType}_task_objective_type` : `impactpathway_${stepType}_task_type`;
     const vocabularyOptions: VocabularyOptions = new VocabularyOptions(name);
@@ -784,12 +793,12 @@ export class ImpactPathwayService {
       );
   }
 
-  orderTasks(parentTasksId: string, taskIds: string[]): Observable<Item> {
+  orderTasks(parentTasksId: string, tasks: Pick<MetadataValue, 'authority' | 'value'>[]): Observable<Item> {
     return this.itemAuthorityRelationService.orderRelations(
       this.getImpactPathwaysEditFormSection(),
       this.getImpactPathwaysEditMode(),
       parentTasksId,
-      taskIds,
+      tasks,
       environment.impactPathway.impactPathwayTaskRelationMetadata
     );
   }

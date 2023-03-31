@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { BehaviorSubject, from, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, from, Observable, Subscription } from 'rxjs';
 import { mergeMap, reduce, take } from 'rxjs/operators';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -165,7 +165,7 @@ export class ProgrammeMembersComponent implements OnInit {
     } else if (this.isFundersGroup) {
       groups$ = this.projectGroupService.getInvitationProgrammeProjectFundersGroupByItem(this.relatedItem);
     } else {
-      groups$ = of([this.targetGroup.uuid]);
+      groups$ = this.projectGroupService.getInvitationProgrammeReadersGroupByItem(this.relatedItem);
     }
 
     return groups$;
