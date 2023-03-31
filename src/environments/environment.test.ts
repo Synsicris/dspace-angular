@@ -569,7 +569,7 @@ export const environment: BuildConfig = {
     workingPlanEditMode: 'WORKINGPLAN',
     workingPlanEditFormSection: 'working_plan-edit_form',
     workingPlanStepStatusMetadata: 'synsicris.type.status',
-    workingPlanStepResponsibleMetadata: 'synsicris.relation.partner-wp',
+    workingPlanStepResponsibleMetadata: 'synsicris.relation.partnerwp',
     workingPlanStepResponsibleAuthority: 'PartnerWPAuthority',
     workingPlanStepRelationMetadata: 'workingplan.relation.step',
     workingPlanStepDateStartMetadata: 'dc.date.start',
