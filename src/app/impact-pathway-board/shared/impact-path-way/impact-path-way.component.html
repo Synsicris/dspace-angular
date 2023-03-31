@@ -46,35 +46,36 @@
         [destroyOnHide]="false"
         [closeOthers]="false"
         activeIds=""
+        (panelChange)="changeAccordionState($event)"
       >
         <ngb-panel id="panel-0">
-          <ng-template ngbPanelHeader let-opened="opened">
-              <span> {{'comment-list.header' | translate}} </span>
-              <div class="d-inline-block float-right">
-                <button ngbPanelToggle class="btn btn-outline-light">
-                  <i *ngIf="opened" class="fa fa-chevron-up text-dark"></i>
-                  <i *ngIf="!opened" class="fa fa-chevron-down text-dark"></i>
-                </button>
+          <ng-template ngbPanelTitle>
+            <div class="d-flex justify-content-between">
+              <span class="float-left text-justify" tabindex="0"> {{'comment-list.header' | translate}}</span>
+              <a class="close" tabindex="0" role="button">
+                <span *ngIf="isCommentAccordionOpen" class="fas fa-chevron-up fa-fw"></span>
+                <span *ngIf="!isCommentAccordionOpen" class="fas fa-chevron-down fa-fw"></span>
+              </a>
+           </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="row m-0" *ngIf="(formConfig$ | async)?.name">
+              <div class="col-2 p-0" *ngFor="let data of impactPathway.steps | dsGetIpwData">
+                <ds-comment-list
+                  [relatedBoard]="impactPathWayItem"
+                  [relatedEntityType]="impactPathwayStepEntityType"
+                  [itemUuid]="data.id"
+                  [title]="data.title"
+                  [projectCommunityId]="projectCommunityId"
+                  [type]="(formConfig$ | async).name">
+                </ds-comment-list>
               </div>
-            </ng-template>
-            <ng-template ngbPanelContent>
-              <div class="row m-0" *ngIf="(formConfig$ | async)?.name">
-                <div class="col-2 p-0" *ngFor="let data of impactPathway.steps | dsGetIpwData">
-                  <ds-comment-list
-                    [relatedBoard]="impactPathWayItem"
-                    [relatedEntityType]="impactPathwayStepEntityType"
-                    [itemUuid]="data.id"
-                    [title]="data.title"
-                    [projectCommunityId]="projectCommunityId"
-                    [type]="(formConfig$ | async).name">
-                 </ds-comment-list>
-                </div>
-              </div>
-            </ng-template>
-          </ngb-panel>
-        </ngb-accordion>
-      </div>
-    </ng-container>
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+  </ng-container>
   <ds-themed-loading *ngIf="(compareProcessing$ | async)"></ds-themed-loading>
   <div *ngIf="!(compareProcessing$ | async)" class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
     <ds-impact-path-way-step *ngFor="let step of impactPathway.steps" dsStepColor class="vertical-step"
