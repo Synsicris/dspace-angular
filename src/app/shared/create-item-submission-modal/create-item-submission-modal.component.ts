@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { BehaviorSubject, combineLatest, Observable, of as observableOf } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
+import { delay, map, switchMap, take } from 'rxjs/operators';
 import { DynamicFormControlModel } from '@ng-dynamic-forms/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -187,7 +187,11 @@ export class CreateItemSubmissionModalComponent implements OnInit {
    * start depositWorkspaceItem and close modal if successful
    */
   handleDepositWorkspace(submissionObject: SubmissionObject) {
-    this.projectItemService.depositWorkspaceItem(submissionObject).pipe(take(1)).subscribe(() => {
+    this.projectItemService.depositWorkspaceItem(submissionObject).pipe(
+      take(1),
+      // this is required for refreshing properly the list of the relation box
+      delay(100)
+    ).subscribe(() => {
       this.notificationsService.success(null, this.translate.get('item.submission.create.successfully'));
       this.createItemEvent.emit();
       this.closeModal();
