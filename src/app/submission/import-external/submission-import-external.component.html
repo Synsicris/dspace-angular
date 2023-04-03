@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-12">
       <h2 id="header" class="pb-2">{{'submission.import-external.title' + ((label) ? '.' + label : '') | translate}}</h2>
+      <ds-alert [type]="'alert-info'" [content]="'submission.import-external.help-message'"></ds-alert>
       <ds-submission-import-external-searchbar
         *ngIf="reload$.value.entity"
         [initExternalSourceData]="reload$.value"

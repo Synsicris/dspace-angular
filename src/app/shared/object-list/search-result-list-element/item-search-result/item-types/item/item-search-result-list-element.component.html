@@ -24,7 +24,7 @@
             <ng-container *ngFor="let metadataConf of config.metadata">
             <span *ngIf="dso.hasMetadata(metadataConf.name)">
               <ds-truncatable *ngIf="metadataConf.truncatable;else showSimpleTemplate" [id]="dso.id">
-                 <ds-truncatable-part [id]="dso.id" [minLines]="1">
+                 <ds-truncatable-part [id]="dso.id" [minLines]="3">
                    <ng-container *ngTemplateOutlet="metadataConfTemplate;context:{metadataConf:metadataConf}">
                    </ng-container>
                  </ds-truncatable-part>
