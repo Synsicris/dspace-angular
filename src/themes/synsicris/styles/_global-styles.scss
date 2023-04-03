@@ -368,9 +368,6 @@ ds-breadcrumbs nav.nav-breadcrumb { // complete bar
         color: var(--ds-breadcrumb-link-color) !important;
       }
 
-      & + .breadcrumb-item::before {
-        content: quote("/") !important;
-      }
     } // end li.breadcrumb-item
 
   } // end ol.breadcrumb
