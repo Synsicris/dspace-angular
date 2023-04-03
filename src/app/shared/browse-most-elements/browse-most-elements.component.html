@@ -12,7 +12,8 @@
                                              [object]="object"
                                              [showMetrics]="showMetrics"
                                              [showThumbnails]="showThumbnails"
-                                             [viewMode]="paginatedSearchOptions.view"></ds-listable-object-component-loader>
+                                             [viewMode]="paginatedSearchOptions.view"
+                                             (customEvent)="customEvent.emit($event)"></ds-listable-object-component-loader>
       </li>
     </ul>
     <div *ngIf="(searchResults$ | async)?.hasFailed">
