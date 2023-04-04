@@ -66,7 +66,17 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
         );
     } else {
       crumbs$ = observableOf(
-        [].concat(entityType && [new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, null)] || [])
+        [].concat(
+          entityType != null ?
+            [
+              new Breadcrumb(
+                BREADCRUMB_ENTITY_PREFIX + entityType,
+                null,
+                { [entityType]: true, separator: true }
+              ),
+            ] :
+            []
+        )
           .concat([new Breadcrumb(label, url)])
       );
     }
@@ -98,7 +108,15 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
           return this.getBreadcrumbs(parent, parentUrl).pipe(
             map((breadcrumbs: Breadcrumb[]) => {
               return breadcrumbs.concat(
-                entityType && [new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, `${parentUrl}/${entityType}`)] || [],
+                entityType != null ?
+                  [
+                    new Breadcrumb(
+                      BREADCRUMB_ENTITY_PREFIX + entityType,
+                      `${parentUrl}/${entityType}`,
+                      { [entityType]: true, separator: true }
+                    )
+                  ]
+                  : [],
                 new Breadcrumb(label, url)
               );
             })
