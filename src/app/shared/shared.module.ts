@@ -418,6 +418,9 @@ import {
   ItemImportMetadataExternalComponent
 } from './item/item-import-metadata-external/item-import-metadata-external.component';
 import { AlertRoleComponent } from './alert/alert-role/alert-role.component';
+import {
+  MetadataValuePairComponent
+} from './object-list/search-result-list-element/item-search-result/item-types/metadata/metadata-value-pair/metadata-value-pair.component';
 
 const MODULES = [
   CommonModule,
@@ -741,7 +744,8 @@ const SHARED_ITEM_PAGE_COMPONENTS = [
   RelatedItemsComponent,
   DsoPageOrcidButtonComponent,
   ItemCreateComponent,
-  ItemImportMetadataExternalComponent
+  ItemImportMetadataExternalComponent,
+  MetadataValuePairComponent
 ];
 
 const PROVIDERS = [
