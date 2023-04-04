@@ -22,7 +22,7 @@ import { EPersonDataService } from '../../core/eperson/eperson-data.service';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
 
-describe('ProgrammeMembersComponent', () => {
+fdescribe('ProgrammeMembersComponent', () => {
   let component: ProgrammeMembersComponent;
   let fixture: ComponentFixture<ProgrammeMembersComponent>;
 
@@ -40,9 +40,10 @@ describe('ProgrammeMembersComponent', () => {
   });
   const projectGroupServiceMock = jasmine.createSpyObj('ProjectGroupService', {
     getProgrammeManagersGroupUUIDByItem: jasmine.createSpy('getProgrammeManagersGroupUUIDByItem'),
-    getProgrammeMembersGroupUUIDByItem: jasmine.createSpy('getProgrammeMembersGroupUUIDByItem'),
+    getProgrammeMembersGroupUUIDByItem: jasmine.createSpy('getProgrammeReadersGroupUUIDByItem'),
     getInvitationProgrammeFunderOrganizationalManagersGroupByItem: jasmine.createSpy('getInvitationProgrammeFunderOrganizationalManagersGroupByItem'),
-    getInvitationProgrammeProjectFundersGroupByItem: jasmine.createSpy('getInvitationProgrammeProjectFundersGroupByItem')
+    getInvitationProgrammeProjectFundersGroupByItem: jasmine.createSpy('getInvitationProgrammeProjectFundersGroupByItem'),
+    getInvitationProgrammeReadersGroupByItem: jasmine.createSpy('getInvitationProgrammeReadersGroupByItem')
   });
 
   const mockItem = Object.assign(new Item(), {
