@@ -128,4 +128,10 @@ export class CommentListComponent implements OnInit {
     }
     return scopeId;
   }
+
+  onCustomEvent($event: any) {
+    if ($event === 'comment-delete') {
+      this.refresh();
+    }
+  }
 }
