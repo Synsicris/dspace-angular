@@ -2,8 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MetadataValue } from '../../../../../../../core/shared/metadata.models';
 import { VocabularyService } from '../../../../../../../core/submission/vocabularies/vocabulary.service';
 import {
+  getFirstCompletedRemoteData,
   getFirstSucceededRemoteDataPayload,
-  getPaginatedListPayload
+  getPaginatedListPayload,
+  getRemoteDataPayload
 } from '../../../../../../../core/shared/operators';
 import { map, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -29,12 +31,24 @@ export class MetadataValuePairComponent implements OnInit {
 
     const authority = this.metadataValue.authority ? this.metadataValue.authority.split(':') : undefined;
     const isControlledVocabulary = authority?.length > 1 && authority[0] === this.vocabularyName;
-    const metadataValue = isControlledVocabulary ? authority[1] : this.metadataValue.value;
 
-    this.value$ = this.vocabularyService.getPublicVocabularyEntryByValue(this.vocabularyName, metadataValue).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      getPaginatedListPayload(),
-      map((res) => res[0]?.display ?? this.metadataValue.value),
+    let vocabularyEntry$ =
+      this.vocabularyService.getPublicVocabularyEntryByValue(this.vocabularyName, this.metadataValue.value)
+        .pipe(
+          getFirstCompletedRemoteData(),
+          getRemoteDataPayload(),
+          getPaginatedListPayload(),
+          map((res) => res[0])
+        );
+    if (!!isControlledVocabulary) {
+      vocabularyEntry$ =
+        this.vocabularyService.findEntryDetailById(this.metadataValue.authority, this.vocabularyName).pipe(
+          getFirstSucceededRemoteDataPayload()
+        );
+    }
+
+    this.value$ = vocabularyEntry$.pipe(
+      map((res) => res?.display ?? this.metadataValue.value),
       take(1)
     );
   }

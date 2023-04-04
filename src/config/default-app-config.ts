@@ -917,7 +917,8 @@ export class DefaultAppConfig implements AppConfig {
           },
           {
             name: 'synsicris.subject.nace',
-            type: DisplayItemMetadataType.Link
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'nace'
           },
           {
             name: 'synsicris.subject.enterprise',
