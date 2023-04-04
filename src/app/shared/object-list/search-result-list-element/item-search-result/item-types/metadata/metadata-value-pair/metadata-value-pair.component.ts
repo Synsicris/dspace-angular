@@ -32,7 +32,10 @@ export class MetadataValuePairComponent implements OnInit {
     const authority = this.metadataValue.authority ? this.metadataValue.authority.split(':') : undefined;
     const isControlledVocabulary = authority?.length > 1 && authority[0] === this.vocabularyName;
 
-    let vocabularyEntry$ =
+    let vocabularyEntry$ = isControlledVocabulary ?
+      this.vocabularyService.findEntryDetailById(this.metadataValue.authority, this.vocabularyName).pipe(
+        getFirstSucceededRemoteDataPayload()
+      ) :
       this.vocabularyService.getPublicVocabularyEntryByValue(this.vocabularyName, this.metadataValue.value)
         .pipe(
           getFirstCompletedRemoteData(),
@@ -40,12 +43,6 @@ export class MetadataValuePairComponent implements OnInit {
           getPaginatedListPayload(),
           map((res) => res[0])
         );
-    if (!!isControlledVocabulary) {
-      vocabularyEntry$ =
-        this.vocabularyService.findEntryDetailById(this.metadataValue.authority, this.vocabularyName).pipe(
-          getFirstSucceededRemoteDataPayload()
-        );
-    }
 
     this.value$ = vocabularyEntry$.pipe(
       map((res) => res?.display ?? this.metadataValue.value),
