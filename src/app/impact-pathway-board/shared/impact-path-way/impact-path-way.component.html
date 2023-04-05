@@ -1,136 +1,138 @@
-<div class="border-bottom mb-4 pb-2 d-flex justify-content-between align-items-center">
-  <ds-comcol-page-header [name]="impactPathway.title">
-    <ds-view-version-badges *ngIf="impactPathWayItem && (isVersionOfAnItem$ | async)" [item]="impactPathWayItem"></ds-view-version-badges>
-  </ds-comcol-page-header>
-  <div class="d-flex space-children-mr">
-    <ds-item-version-list [btnClass]="'btn-md'"
-                          [showOnlyVisible]="isFunder"
-                          [targetItemId]="impactPathway.id"
-                          [targetItem]="impactPathWayItem"
-                          (versionSelected)="onVersionSelected($event)"
-                          (versionDeselected)="onVersionDeselected()">
-    </ds-item-version-list>
-    <button *ngIf="(canDeleteImpactPathway$ | async)" class="btn btn-danger" title="{{'impact-pathway.remove.title' | translate}}"
-            [disabled]="disableDelete$ | async"
-            (click)="$event.preventDefault(); confirmRemove(content); $event.stopPropagation()">
-      <span *ngIf="!(isProcessingRemove$ | async)">
-        <i class="far fa-trash-alt"></i> {{'impact-pathway.remove.title' | translate}}
-      </span>
-      <span *ngIf="(isProcessingRemove$ | async)">
-        <i class="fas fa-circle-notch fa-spin"> {{'impact-pathway.remove.processing' | translate}}</i>
-      </span>
-    </button>
-    <button class="btn btn-primary" title="{{'impact-pathway.edit.title' | translate}}"
-            [disabled]="disableEdit$ | async"
-            (click)="$event.preventDefault(); openEditModal(); $event.stopPropagation()">
-      <span *ngIf="!(isProcessingRemove$ | async)">
-        <i class="far fa-edit"></i> {{'impact-pathway.edit.title' | translate}}
-      </span>
-      <span *ngIf="(isProcessingRemove$ | async)">
-        <i class="fas fa-circle-notch fa-spin"> {{'impact-pathway.remove.processing' | translate}}</i>
-      </span>
-    </button>
+<div id="ipw">
+  <div class="border-bottom mb-4 pb-2 d-flex justify-content-between align-items-center">
+    <ds-comcol-page-header [name]="impactPathway.title">
+      <ds-view-version-badges *ngIf="impactPathWayItem && (isVersionOfAnItem$ | async)" [item]="impactPathWayItem"></ds-view-version-badges>
+    </ds-comcol-page-header>
+    <div class="d-flex space-children-mr">
+      <ds-item-version-list [btnClass]="'btn-md'"
+                            [showOnlyVisible]="isFunder"
+                            [targetItemId]="impactPathway.id"
+                            [targetItem]="impactPathWayItem"
+                            (versionSelected)="onVersionSelected($event)"
+                            (versionDeselected)="onVersionDeselected()">
+      </ds-item-version-list>
+      <button *ngIf="(canDeleteImpactPathway$ | async)" class="btn btn-danger" title="{{'impact-pathway.remove.title' | translate}}"
+              [disabled]="disableDelete$ | async"
+              (click)="$event.preventDefault(); confirmRemove(content); $event.stopPropagation()">
+        <span *ngIf="!(isProcessingRemove$ | async)">
+          <i class="far fa-trash-alt"></i> {{'impact-pathway.remove.title' | translate}}
+        </span>
+        <span *ngIf="(isProcessingRemove$ | async)">
+          <i class="fas fa-circle-notch fa-spin"> {{'impact-pathway.remove.processing' | translate}}</i>
+        </span>
+      </button>
+      <button class="btn btn-primary" title="{{'impact-pathway.edit.title' | translate}}"
+              [disabled]="disableEdit$ | async"
+              (click)="$event.preventDefault(); openEditModal(); $event.stopPropagation()">
+        <span *ngIf="!(isProcessingRemove$ | async)">
+          <i class="far fa-edit"></i> {{'impact-pathway.edit.title' | translate}}
+        </span>
+        <span *ngIf="(isProcessingRemove$ | async)">
+          <i class="fas fa-circle-notch fa-spin"> {{'impact-pathway.remove.processing' | translate}}</i>
+        </span>
+      </button>
+    </div>
   </div>
-</div>
 
-<div>
-  <ds-alert-role [type]="'alert-info'"
-                 [collapsible]="true"
-                 [content]="'impact-pathway.wrapper.info'"
-                 [alertRoles]="funderRoles"
-  ></ds-alert-role>
-  <ng-container *ngIf="(isVersionOfAnItem$ | async) && isFunder">
-    <div class="mb-3">
-      <ngb-accordion
-        #accordionRef
-        [destroyOnHide]="false"
-        [closeOthers]="false"
-        activeIds=""
-        (panelChange)="changeAccordionState($event)"
-      >
-        <ngb-panel id="panel-0">
-          <ng-template ngbPanelTitle>
-            <div class="d-flex justify-content-between">
-              <span class="float-left text-justify" tabindex="0"> {{'comment-list.header' | translate}}</span>
-              <a class="close" tabindex="0" role="button">
-                <span *ngIf="isCommentAccordionOpen" class="fas fa-chevron-up fa-fw"></span>
-                <span *ngIf="!isCommentAccordionOpen" class="fas fa-chevron-down fa-fw"></span>
-              </a>
-              </div>
-            </ng-template>
-            <ng-template ngbPanelContent>
-              <div class="row m-0" *ngIf="(formConfig$ | async)?.name">
-                <div class="col-2 p-0" *ngFor="let data of impactPathway.steps | dsGetIpwData">
-                  <ds-comment-list
-                    [relatedBoard]="impactPathWayItem"
-                    [relatedEntityType]="impactPathwayStepEntityType"
-                    [itemUuid]="data.id"
-                    [title]="data.title"
-                    [projectCommunityId]="projectCommunityId"
-                    [type]="(formConfig$ | async).name">
-                  </ds-comment-list>
+  <div>
+    <ds-alert-role [type]="'alert-info'"
+                  [collapsible]="true"
+                  [content]="'impact-pathway.wrapper.info'"
+                  [alertRoles]="funderRoles"
+    ></ds-alert-role>
+    <ng-container *ngIf="(isVersionOfAnItem$ | async) && isFunder">
+      <div class="mb-3">
+        <ngb-accordion
+          #accordionRef
+          [destroyOnHide]="false"
+          [closeOthers]="false"
+          activeIds=""
+          (panelChange)="changeAccordionState($event)"
+        >
+          <ngb-panel id="panel-0">
+            <ng-template ngbPanelTitle>
+              <div class="d-flex justify-content-between">
+                <span class="float-left text-justify" tabindex="0"> {{'comment-list.header' | translate}}</span>
+                <a class="close" tabindex="0" role="button">
+                  <span *ngIf="isCommentAccordionOpen" class="fas fa-chevron-up fa-fw"></span>
+                  <span *ngIf="!isCommentAccordionOpen" class="fas fa-chevron-down fa-fw"></span>
+                </a>
                 </div>
-              </div>
-            </ng-template>
-          </ngb-panel>
-        </ngb-accordion>
-      </div>
-    </ng-container>
-  <ds-themed-loading *ngIf="(compareProcessing$ | async)"></ds-themed-loading>
-  <div *ngIf="!((compareProcessing$ | async))" class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
-    <ds-impact-path-way-step
-      *ngFor="let step of impactPathway.steps"
-      [ngClass]="{'step-disabled': step.processing}"
-      dsStepColor class="vertical-step"
-      [projectCommunityId]="projectCommunityId"
-      [impactPathwayId]="impactPathway.id"
-      [impactPathwayStepId]="step.id"
-      [stepType]="step.type"
-      [allImpactPathwayStepIds]="getImpactPathwayStepIds()"
-      [compareMode]="(compareMode | async)"
-      [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"
-    ></ds-impact-path-way-step>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <div class="row m-0" *ngIf="(formConfig$ | async)?.name">
+                  <div class="col-2 p-0" *ngFor="let data of impactPathway.steps | dsGetIpwData">
+                    <ds-comment-list
+                      [relatedBoard]="impactPathWayItem"
+                      [relatedEntityType]="impactPathwayStepEntityType"
+                      [itemUuid]="data.id"
+                      [title]="data.title"
+                      [projectCommunityId]="projectCommunityId"
+                      [type]="(formConfig$ | async).name">
+                    </ds-comment-list>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
+        </div>
+      </ng-container>
+    <ds-themed-loading *ngIf="(compareProcessing$ | async)"></ds-themed-loading>
+    <div *ngIf="!((compareProcessing$ | async))" class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
+      <ds-impact-path-way-step
+        *ngFor="let step of impactPathway.steps"
+        [ngClass]="{'step-disabled': step.processing}"
+        dsStepColor class="vertical-step"
+        [projectCommunityId]="projectCommunityId"
+        [impactPathwayId]="impactPathway.id"
+        [impactPathwayStepId]="step.id"
+        [stepType]="step.type"
+        [allImpactPathwayStepIds]="getImpactPathwayStepIds()"
+        [compareMode]="(compareMode | async)"
+        [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"
+      ></ds-impact-path-way-step>
+    </div>
+    <ds-editable-textarea
+      *ngIf="!(compareProcessing$ | async) && impactPathway"
+      [editMode]="getEditMode()"
+      [formConfig]="formConfig$"
+      [formSectionName]="getSectionName()"
+      [itemId]="impactPathway.id"
+      [compareItemId]="(compareItem$ | async)?.id"
+      [editTitle]="'impact-pathway.edit.title' | translate"
+      [fieldTitle]="'impact-pathway.description' | translate"
+      [content]="impactPathway.description"
+      [disabled]="(compareMode | async) || !(canEditButton$ | async)"
+      (contentChange)="updateImpactPathway($event)"
+    ></ds-editable-textarea>
   </div>
-  <ds-editable-textarea
-    *ngIf="!(compareProcessing$ | async) && impactPathway"
-    [editMode]="getEditMode()"
-    [formConfig]="formConfig$"
-    [formSectionName]="getSectionName()"
-    [itemId]="impactPathway.id"
-    [compareItemId]="(compareItem$ | async)?.id"
-    [editTitle]="'impact-pathway.edit.title' | translate"
-    [fieldTitle]="'impact-pathway.description' | translate"
-    [content]="impactPathway.description"
-    [disabled]="(compareMode | async) || !(canEditButton$ | async)"
-    (contentChange)="updateImpactPathway($event)"
-  ></ds-editable-textarea>
-</div>
 
-<div *ngIf="(loaded | async)">
-  <ngx-domarrow *ngFor="let relation of (getRelations() | async)"
-                [from]="'#' + relation.from"
-                [to]="'#' + relation.to"
-                [head]="relation.twoWay"
-                [tail]="true"
-                [onlyVisible]="true" color="red"></ngx-domarrow>
-</div>
+  <div *ngIf="(loaded | async)">
+    <ngx-domarrow *ngFor="let relation of (getRelations() | async)"
+                  [from]="'#' + relation.from"
+                  [to]="'#' + relation.to"
+                  [head]="relation.twoWay"
+                  [tail]="true"
+                  [onlyVisible]="true" color="red"></ngx-domarrow>
+  </div>
 
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title text-danger">{{'impact-pathway.remove.confirm.title' | translate}}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('cancel')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>{{'impact-pathway.remove.confirm.info' | translate}}</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" title="{{'impact-pathway.remove.confirm.cancel' | translate}}" (click)="c('cancel')">
-      {{'impact-pathway.remove.confirm.cancel' | translate}}
-    </button>
-    <button type="button" class="btn btn-danger" title="{{'impact-pathway.remove.confirm.submit' | translate}}" (click)="c('ok')">
-      {{'impact-pathway.remove.confirm.submit' | translate}}
-    </button>
-  </div>
-</ng-template>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title text-danger">{{'impact-pathway.remove.confirm.title' | translate}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('cancel')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>{{'impact-pathway.remove.confirm.info' | translate}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" title="{{'impact-pathway.remove.confirm.cancel' | translate}}" (click)="c('cancel')">
+        {{'impact-pathway.remove.confirm.cancel' | translate}}
+      </button>
+      <button type="button" class="btn btn-danger" title="{{'impact-pathway.remove.confirm.submit' | translate}}" (click)="c('ok')">
+        {{'impact-pathway.remove.confirm.submit' | translate}}
+      </button>
+    </div>
+  </ng-template>
+</div>

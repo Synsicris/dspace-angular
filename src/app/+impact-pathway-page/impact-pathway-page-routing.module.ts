@@ -19,13 +19,14 @@ import {
 } from '../core/project/resolvers/funder-organizational-manager-by-project.resolver';
 import { FunderReaderByProjectResolver } from '../core/project/resolvers/funder-reader-by-project.resolver';
 import { ProjectDataService } from '../core/project/project-data.service';
+import { PrintStyleApplier } from '../core/shared/print-style-applier';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
       {
         path: ':id',
-        canActivate: [AuthenticatedGuard],
+        canActivate: [AuthenticatedGuard, PrintStyleApplier],
         children: [
           {
             path: '',
@@ -79,7 +80,8 @@ import { ProjectDataService } from '../core/project/project-data.service';
     ProjectItemBreadcrumbService,
     ProjectCommunityByItemResolver,
     ProjectObjectivesItemResolver,
-    VersionOfAnItemResolver
+    VersionOfAnItemResolver,
+    PrintStyleApplier
   ]
 })
 export class ImpactPathwayPageRoutingModule {
