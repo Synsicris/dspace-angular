@@ -4,30 +4,19 @@ import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
 import { hasValue } from '../../shared/empty.util';
 
 /**
- * Load the print.css file when the user navigates to a page with the view=print query parameter
+ * This class is used to add a class to the body tag when the user is in print mode.
+ * Print mode is activated by adding the query parameter 'view=print' to the url.
  */
 @Injectable()
 export class PrintStyleApplier implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean {
 
     if (hasValue(route.queryParams.view) && isEqual(route.queryParams.view, 'print')) {
-      this.loadPrintCSS();
+      document.getElementsByTagName('body')[0].classList.add('print-mode');
+    } else {
+      document.getElementsByTagName('body')[0].classList.remove('print-mode');
     }
 
     return true;
-  }
-
-  /**
-   * Append the print.css file to the head of the document
-   */
-  loadPrintCSS() {
-    let fileRef;
-    fileRef = document.createElement('link');
-    fileRef.setAttribute('rel', 'stylesheet');
-    fileRef.setAttribute('type', 'text/css');
-    fileRef.setAttribute('href', '/assets/styles/print.css');
-    if (typeof fileRef !== 'undefined') {
-      document.getElementsByTagName('head')[0].appendChild(fileRef);
-    }
   }
 }

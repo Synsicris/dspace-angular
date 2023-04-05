@@ -26,11 +26,12 @@ import { PrintStyleApplier } from '../core/shared/print-style-applier';
     RouterModule.forChild([
       {
         path: ':id',
-        canActivate: [AuthenticatedGuard, PrintStyleApplier],
+        canActivate: [AuthenticatedGuard],
         children: [
           {
             path: '',
             component: ImpactPathwayPageComponent,
+            canActivate: [PrintStyleApplier],
             data: {
               title: 'impact-pathway.edit.page.title',
               breadcrumbKey: 'impact-pathway',

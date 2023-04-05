@@ -1,0 +1,28 @@
+/* TODO: Remove comment when styles need to be applied only on print command  */
+/* @media print { */
+
+/* --------------------------- General rules --------------------------- */
+
+ds-footer,
+ds-alert-role,
+ds-themed-breadcrumbs,
+button:not(.sidebar-panel-toggle),
+nav ds-link-menu-item,
+nav ds-auth-nav-menu,
+nav .navbar-nav a,
+.dropdown-toggle,
+span[tooltipclass] {
+  display: none !important;
+}
+
+p {
+  font-size: 12pt !important; /* recommanded */
+}
+
+a {
+  text-decoration: none !important;
+}
+
+/* --------------------------------------------------------------------- */
+
+/* } @media print close*/
