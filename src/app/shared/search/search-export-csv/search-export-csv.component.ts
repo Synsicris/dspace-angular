@@ -56,7 +56,7 @@ export class SearchExportCsvComponent implements OnInit {
     const isAuthorized$ = this.authorizationDataService.isAuthorized(FeatureID.AdministratorOf);
 
     this.shouldShowButton$ = observableCombineLatest([scriptExists$, isAuthorized$]).pipe(
-      map(([scriptExists, isAuthorized]: [boolean, boolean]) => scriptExists && isAuthorized)
+      map(([scriptExists, isAuthorized]: [boolean, boolean]) => scriptExists)
     );
   }
 
