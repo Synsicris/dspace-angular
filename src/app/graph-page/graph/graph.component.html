@@ -1,0 +1,23 @@
+<div class="row justify-content-center">
+  <ds-alert
+    *ngIf="showNotificationAlert"
+    [type]="AlertTypeEnum.Error"
+    [content]="notificationErrorText | translate"
+  ></ds-alert>
+</div>
+<div class="graph-container d-flex" #graphContainer>
+  <ng-container *ngIf="(results$ | async)?.length > 0">
+    <ng-container *ngIf="renderingControl">
+      <ds-chart
+        [results]="results$"
+        [view]="view"
+        [type]="chartType"
+        [animations]="true"
+      ></ds-chart>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="(results$ | async)?.length == 0">
+    <h2>{{ "graph-page.chart-no-data" | translate }}</h2>
+  </ng-container>
+</div>

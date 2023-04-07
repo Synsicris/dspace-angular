@@ -1,0 +1,4 @@
+.graph-container {
+  height: calc(100vh - 225px); // the height of the page minus the height of the header and footer
+  overflow: auto;
+}
