@@ -19,12 +19,13 @@ import {
 } from '../core/project/resolvers/funder-project-manager-by-project.resolver';
 import { FunderReaderByProjectResolver } from '../core/project/resolvers/funder-reader-by-project.resolver';
 import { ProjectDataService } from '../core/project/project-data.service';
+import { PrintStyleApplier } from '../core/shared/print-style-applier';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
       {
-        canActivate: [AuthenticatedGuard],
+        canActivate: [AuthenticatedGuard, PrintStyleApplier],
         path: '',
         component: WorkingPlanPageComponent,
         pathMatch: 'full',
@@ -52,7 +53,8 @@ import { ProjectDataService } from '../core/project/project-data.service';
     ProjectCommunityByProjectItemResolver,
     ProjectItemPageResolver,
     WorkingPlanItemResolver,
-    VersionOfAnItemResolver
+    VersionOfAnItemResolver,
+    PrintStyleApplier
   ]
 })
 export class WorkingPlanPageRoutingModule {

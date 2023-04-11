@@ -1,11 +1,11 @@
 <nav [ngClass]="{'open': !(menuCollapsed | async)}" [@slideMobileNav]="!(windowService.isXsOrSm() | async) ? 'default' : ((menuCollapsed | async) ? 'collapsed' : 'expanded')"
-  class="navbar navbar-expand-sm navbar-light p-0 navbar-container" role="navigation" [attr.aria-label]="'nav.main.description' | translate">
-  
+  class="navbar navbar-expand-sm navbar-light p-0 navbar-container d-print-block" role="navigation" [attr.aria-label]="'nav.main.description' | translate">
+
   <div class="container h-100">
-   
+
     <a class="navbar-brand my-2" routerLink="/home">
       <!-- DSpace-Logo replaced by Synsicris logo (rex 221028) -->
-      <!-- <img src="assets/images/dspace-cris-logo.png" [attr.alt]="'menu.header.image.logo' | translate" /> -->  
+      <!-- <img src="assets/images/dspace-cris-logo.png" [attr.alt]="'menu.header.image.logo' | translate" /> -->
       <span class="synsicris-logo">
         Syn<span><span>si</span>cris</span>
       </span>
