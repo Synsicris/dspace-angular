@@ -133,7 +133,7 @@ export class CommentSearchResultListElementComponent extends ItemSearchResultLis
           this.itemDataService.delete(this.dso.id).pipe(getFirstCompletedRemoteData()).subscribe((restResponse: RemoteData<NoContent>) => {
             if (restResponse.hasSucceeded) {
               this.notificationsService.success(this.translateService.get('confirmation-modal.delete-comment.success'));
-              this.customEvent.emit(true);
+              this.customEvent.emit('comment-delete');
             } else {
               this.notificationsService.error('confirmation-modal.delete-comment.error');
             }

@@ -164,6 +164,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Input() showCharts = false;
 
   /**
+   * A boolean representing if show csv export button
+   */
+  @Input() showCsvExport = false;
+
+  /**
    * A boolean representing if show export button
    */
   @Input() showExport = true;

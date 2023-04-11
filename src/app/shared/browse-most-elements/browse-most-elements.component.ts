@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -60,6 +60,11 @@ export class BrowseMostElementsComponent implements OnInit {
    * A boolean representing if result list is loading
    */
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
+  /**
+   * Emit custom event for listable object custom actions.
+   */
+  @Output() customEvent = new EventEmitter<any>();
 
   constructor(private searchService: SearchService) {
   }

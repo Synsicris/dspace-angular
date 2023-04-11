@@ -1,5 +1,7 @@
 <div [class]="field.styleValue">
-    <span class="text-value">
-      {{ value$ | async }}
-    </span>
+  <ds-metadata-value-pair
+    [metadataValue]="metadataValue"
+    [vocabularyName]="renderingSubType"
+  >
+  </ds-metadata-value-pair>
 </div>
