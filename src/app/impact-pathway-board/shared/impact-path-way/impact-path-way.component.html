@@ -5,7 +5,7 @@
     </ds-comcol-page-header>
     <div class="d-flex space-children-mr">
       <ds-item-version-list [btnClass]="'btn-md'"
-                            [showOnlyVisible]="isFunder"
+                            [showOnlyVisible]="hasAnyFunderRole"
                             [targetItemId]="impactPathway.id"
                             [targetItem]="impactPathWayItem"
                             (versionSelected)="onVersionSelected($event)"
@@ -40,7 +40,7 @@
                   [content]="'impact-pathway.wrapper.info'"
                   [alertRoles]="funderRoles"
     ></ds-alert-role>
-    <ng-container *ngIf="(isVersionOfAnItem$ | async) && isFunder">
+    <ng-container *ngIf="(isVersionOfAnItem$ | async) && isFunderProject">
       <div class="mb-3">
         <ngb-accordion
           #accordionRef

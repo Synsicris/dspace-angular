@@ -11,7 +11,7 @@
     <span fxFlex></span>
     <div *ngIf="(workpackages | async)?.length > 0" class="btn-group btn-group-sm mr-2">
       <ds-item-version-list [currentVersionItemSelected]="(currentComparingWorkingPlan | async)"
-                            [showOnlyVisible]="isFunder"
+                            [showOnlyVisible]="hasAnyFunderRole"
                             [targetItemId]="workingPlan.id"
                             [targetItem]="workingPlan"
                             (versionSelected)="onVersionSelected($event)"

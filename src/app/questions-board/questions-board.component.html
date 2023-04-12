@@ -4,7 +4,7 @@
   </ds-comcol-page-header>
   <ds-item-version-list *ngIf="questionsBoardObject"
                         [btnClass]="'btn-md'"
-                        [showOnlyVisible]="isFunder"
+                        [showOnlyVisible]="hasAnyFunderRole"
                         [targetItemId]="questionsBoardObjectId"
                         [targetItem]="questionsBoardObject"
                         (versionSelected)="onVersionSelected($event)"
@@ -27,13 +27,13 @@
                            [projectCommunityId]="projectCommunityId"
                            [fundingCommunity]="fundingCommunity"
                            [compareMode]="(compareMode | async)"
-                           [isFunder]="isFunder"
+                           [isFunderProject]="isFunderProject"
                            [isVersionOfAnItem]="(isVersionOfAnItem$ | async)">
   </ds-questions-board-step>
   <ng-container *ngIf="showUploadStep">
     <ds-questions-upload-step [questionsBoardObject]="questionsBoardObject"
                               [messagePrefix]="messagePrefix"
-                              [isFunder]="isFunder">
+                              [hasAnyFunderRole]="hasAnyFunderRole">
     </ds-questions-upload-step>
   </ng-container>
 </div>

@@ -24,7 +24,12 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   /**
    * If the current user is a funder Organizational/Project manager
    */
-  @Input() isFunder: boolean;
+  @Input() hasAnyFunderRole: boolean;
+
+  /**
+   * If the current user is a funder project manager
+   */
+  @Input() isFunderProject: boolean;
 
   /**
    * The prefix to use for the i18n keys

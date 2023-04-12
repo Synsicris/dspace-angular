@@ -25,7 +25,12 @@ export class WorkingPlanPageComponent implements OnInit {
   /**
    * If the current user is a funder Organizational/Project manager
    */
-  isFunder: boolean;
+  hasAnyFunderRole: boolean;
+
+  /**
+   * If the current user is a funder project manager
+   */
+  isFunderProject: boolean;
 
   /**
    * If the working-plan given is a version item
@@ -61,8 +66,12 @@ export class WorkingPlanPageComponent implements OnInit {
   ngOnInit(): void {
 
 
-    const isFunder$ = this.route.data.pipe(
+    const hasAnyFunderRole$ = this.route.data.pipe(
       map((data) => (data.isFunderOrganizationalManger || data.isFunderProject || data.isFunderReader) as boolean)
+    );
+
+    const isFunderProject$ = this.route.data.pipe(
+      map((data) => data.isFunderProject as boolean)
     );
 
     const projectItemId$ = this.route.data.pipe(
@@ -99,12 +108,13 @@ export class WorkingPlanPageComponent implements OnInit {
       })
     );
 
-    combineLatest([projectItemId$, projectCommunityId$, workingPlanRD$, isFunder$]).pipe(take(1))
-      .subscribe(([projectItemId, projectCommunityId, workingPlanRD, isFunder]) => {
+    combineLatest([projectItemId$, projectCommunityId$, workingPlanRD$, hasAnyFunderRole$, isFunderProject$]).pipe(take(1))
+      .subscribe(([projectItemId, projectCommunityId, workingPlanRD, hasAnyFunderRole, isFunderProject]) => {
         this.projectItemId = projectItemId;
         this.projectCommunityId = projectCommunityId;
         this.workingPlanRD = workingPlanRD;
-        this.isFunder = isFunder;
+        this.hasAnyFunderRole = hasAnyFunderRole;
+        this.isFunderProject = isFunderProject;
         this.initialized.next(true);
       });
   }

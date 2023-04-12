@@ -50,9 +50,9 @@ export class QuestionsBoardStepComponent implements OnInit {
   @Input() fundingCommunity: Community;
 
   /**
-   * If the current user is a funder Organizational/Project manager
+   * If the current user is a funder project manager
    */
-  @Input() isFunder: boolean;
+  @Input() isFunderProject: boolean;
 
   /**
    * The prefix to use for the i19n keys

@@ -9,7 +9,7 @@
   <ng-container ngProjectAs="panelContent">
     <div class="container py-2">
 
-      <ng-container *ngIf="!isFunder">
+      <ng-container *ngIf="!hasAnyFunderRole">
         <ds-alert [content]="'submission.sections.upload.info'"
         [dismissible]="true"
         [type]="AlertTypeEnum.Info"></ds-alert>
@@ -62,7 +62,7 @@
                                             [fileName]="fileNames[fileList.indexOf(fileEntry)]"
                                             [sectionId]="uploadConfigId"
                                             [questionBoardId]="questionsBoardObject.id"
-                                            [disableActions]="isFunder"
+                                            [disableActions]="hasAnyFunderRole"
                                             [questionsBoardEditMode]="questionsBoardEditMode"
                                             (deleteUploadedFile)="onFileEventChanges($event)"
                                             (editUploadedFile)="onFileEventChanges($event)"
