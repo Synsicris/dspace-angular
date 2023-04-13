@@ -456,6 +456,8 @@ export class ImpactPathwayService {
   public initImpactPathwayTaskFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, tasks: ImpactPathwayTask[] = []): ImpactPathwayTask {
     const type = compareObj.item.firstMetadataValue('dspace.entity.type');
     const description = compareObj.item.firstMetadataValue('dc.description');
+    const status = compareObj.item.firstMetadataValue('synsicris.type.status');
+    const internalStatus = compareObj.item.firstMetadataValue('synsicris.type.internal');
     return Object.assign(new ImpactPathwayTask(), {
       id: compareObj.item.id,
       compareId: compareObj.versionItem?.id,
@@ -464,7 +466,9 @@ export class ImpactPathwayService {
       title: compareObj.item.name,
       type: type,
       tasks: tasks,
-      description: description
+      description: description,
+      status: status,
+      internalStatus: internalStatus
     });
   }
 
