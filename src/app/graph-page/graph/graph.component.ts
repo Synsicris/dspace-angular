@@ -104,6 +104,10 @@ export class GraphComponent implements OnInit {
    */
   public renderingControl = true;
 
+  public filterType: string;
+
+  public isLastPage$ = of(true);
+
   constructor(
     private aroute: ActivatedRoute,
     private router: Router,
@@ -191,7 +195,8 @@ export class GraphComponent implements OnInit {
             : null),
         tap((filter) => {
           if (isNotNull(filter)) {
-            this.chartType = this.chartTypeFromFilterType(filter.filterType);
+            this.filterType = filter.filterType;
+            this.chartType = this.getChartType(filter.filterType);
           }
         })
       );
@@ -206,21 +211,6 @@ export class GraphComponent implements OnInit {
       value: count,
       extra,
     }));
-  }
-
-  /**
-   * Get the chart type from the filter type.
-   * If the filter type doesn't start with 'chart.', the chart type is null
-   * and the notification alert is shown
-   */
-  private chartTypeFromFilterType(filterType: string): ChartType {
-    const isChartType = filterType.startsWith('chart.');
-    this.showNotificationAlert = !isChartType;
-    if (isChartType) {
-      const type = filterType.split('.').pop()?.toUpperCase();
-      return type ? ChartType[type] : null;
-    }
-    return null;
   }
 
   /**
@@ -249,5 +239,44 @@ export class GraphComponent implements OnInit {
       this.renderingControl = true;
       this.chd.detectChanges();
     });
+  }
+
+  /**
+   * Get the chart type from the filter type.
+   * If the filter type doesn't start with 'chart.'
+   * a warning notification alert is shown
+   */
+  getChartType(filterType): ChartType {
+    const isChartType = filterType.startsWith('chart.');
+    this.showNotificationAlert = !isChartType;
+
+    switch (filterType) {
+      case 'chart.bar':
+        return ChartType.BAR;
+      case 'chart.pie':
+        return ChartType.PIE;
+      case 'chart.line':
+        return ChartType.LINE;
+      case 'chart.bar.horizontal':
+        return ChartType.BAR_HORIZONTAL;
+      case 'chart.bar.right-to-left':
+        return ChartType.BAR;
+      case 'chart.bar.left-to-right':
+        return ChartType.BAR;
+      case 'chart.reverse-bar.horizontal':
+        return ChartType.BAR_HORIZONTAL;
+      case 'chart.reverse-bar':
+        return ChartType.BAR;
+      default:
+        return null;
+    }
+  }
+
+  enableScrollToLeft(filterType) {
+    return (isEqual(filterType, 'chart.bar.right-to-left'));
+  }
+
+  enableScrollToRight(filterType) {
+    return (isEqual(filterType, 'chart.bar.left-to-right'));
   }
 }

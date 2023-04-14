@@ -13,10 +13,12 @@
         [view]="view"
         [type]="chartType"
         [animations]="true"
+        [enableScrollToLeft]="enableScrollToLeft(filterType)"
+        [enableScrollToRight]="enableScrollToRight(filterType)"
+        [isLastPage]="isLastPage$"
       ></ds-chart>
     </ng-container>
   </ng-container>
-
   <ng-container *ngIf="(results$ | async)?.length == 0">
     <h2>{{ "graph-page.chart-no-data" | translate }}</h2>
   </ng-container>
