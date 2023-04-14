@@ -12,11 +12,6 @@
                             (versionSelected)="onVersionSelected($event)"
                             (versionDeselected)="onVersionDeselected()">
       </ds-item-version-list>
-      <button class='btn btn-primary'
-              title="{{'impact-pathway.objectives.back-btn' | translate}}"
-              (click)="back()">
-        {{'impact-pathway.objectives.back-btn' | translate}}
-      </button>
     </div>
   </div>
   <ds-alert-role *ngIf="hasInfoMessage()" class="bg-light"

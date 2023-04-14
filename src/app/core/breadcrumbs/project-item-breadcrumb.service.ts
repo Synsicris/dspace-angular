@@ -45,13 +45,19 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
    * @param key The key (a DSpaceObject) used to resolve the breadcrumb
    * @param url The url to use as a link for this breadcrumb
    */
-  getBreadcrumbs(key: ChildHALResource & DSpaceObject, url: string): Observable<Breadcrumb[]> {
+  getBreadcrumbs(key: ChildHALResource & DSpaceObject, url: string, parentId?: string): Observable<Breadcrumb[]> {
     const label = this.dsoNameService.getName(key);
-    const entityType: string = this.dsoNameService.getEntityType(key);
+    let entityType: string;
+
+    if (!hasValue(parentId)) {
+       entityType = this.dsoNameService.getEntityType(key);
+    }
+
     const relatedProject = Metadata.first(key.metadata, PROJECT_RELATION_METADATA);
     const relatedFunding = Metadata.first(key.metadata, FUNDING_RELATION_METADATA);
     let fundingCrumbs$ = observableOf([]);
     let projectCrumbs$ = observableOf([]);
+    let parentItem$ = observableOf([]);
     let crumbs$ = observableOf([]);
     let parentUrl = null;
     if (entityType !== FUNDING_ENTITY && entityType !== PROJECT_ENTITY && hasValue(relatedFunding?.authority)) {
@@ -60,10 +66,16 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
           this.projectService.getFundingItemByItemId(key.uuid), key, parentUrl, entityType, label, url
         );
     } else if (entityType !== PROJECT_ENTITY && hasValue(relatedProject?.authority)) {
-      projectCrumbs$ =
-        this.getNestedBreadcrumb(
-          this.projectService.getProjectItemByItemId(key.uuid), key, parentUrl, entityType, label, url
-        );
+        if (hasValue(parentId)) {
+          parentItem$ = this.getNestedBreadcrumb(
+            this.projectService.findItemById(parentId), key, parentUrl, entityType, label, url, parentId
+          );
+        } else {
+          projectCrumbs$ =
+          this.getNestedBreadcrumb(
+            this.projectService.getProjectItemByItemId(key.uuid), key, parentUrl, entityType, label, url
+          );
+        }
     } else {
       crumbs$ = observableOf(
         [].concat(
@@ -84,10 +96,11 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
     return combineLatest([
       crumbs$,
       fundingCrumbs$,
-      projectCrumbs$
+      projectCrumbs$,
+      parentItem$
     ]).pipe(
       take(1),
-      map(([crumb, fundingCrumb, projectCrumb]) => [].concat(...projectCrumb, ...fundingCrumb, ...crumb))
+      map(([crumb, fundingCrumb, projectCrumb, parentItem]) => [].concat(...projectCrumb, ...fundingCrumb, ...crumb, ...parentItem))
     );
   }
 
@@ -97,7 +110,8 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
     parentUrl: string,
     entityType: string,
     label: string,
-    url: string
+    url: string,
+    parentId?: string
   ): Observable<Breadcrumb[]> {
     return remoteItem$.pipe(
       getFirstCompletedRemoteData(),
@@ -107,6 +121,7 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
           parentUrl = getDSORoute(parent);
           return this.getBreadcrumbs(parent, parentUrl).pipe(
             map((breadcrumbs: Breadcrumb[]) => {
+              const breadcrumbItem = parentId ? new Breadcrumb(label, url, { separator: true }) : new Breadcrumb(label, url) ;
               return breadcrumbs.concat(
                 entityType != null ?
                   [
@@ -117,7 +132,7 @@ export class ProjectItemBreadcrumbService extends DSOBreadcrumbsService {
                     )
                   ]
                   : [],
-                new Breadcrumb(label, url)
+                  breadcrumbItem
               );
             })
           );
