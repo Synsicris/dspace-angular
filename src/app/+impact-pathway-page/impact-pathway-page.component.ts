@@ -41,7 +41,13 @@ export class ImpactPathwayPageComponent implements OnInit, OnDestroy {
   /**
    * If the current user is a funder Organizational/Project manager
    */
-  isFunder$: Observable<boolean>;
+  hasAnyFunderRole$: Observable<boolean>;
+
+  /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  isFunderProject$: Observable<boolean>;
+
 
   /**
    * The project community's id
@@ -66,8 +72,12 @@ export class ImpactPathwayPageComponent implements OnInit, OnDestroy {
    * Initialize instance variables
    */
   ngOnInit(): void {
-    this.isFunder$ = this.route.data.pipe(
+    this.hasAnyFunderRole$ = this.route.data.pipe(
       map((data) => (data.isFunderOrganizationalManger || data.isFunderProject || data.isFunderReader) as boolean)
+    );
+
+    this.isFunderProject$ = this.route.data.pipe(
+      map((data) => data.isFunderProject as boolean)
     );
 
     const impactPathWayItem$ = this.route.data.pipe(

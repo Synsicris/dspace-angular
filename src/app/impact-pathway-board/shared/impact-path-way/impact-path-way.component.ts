@@ -44,7 +44,12 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
   /**
    * If the current user is a funder Organizational/Project manager
    */
-  @Input() isFunder: boolean;
+  @Input() hasAnyFunderRole: boolean;
+
+  /**
+   * If the current user is a funder project manager
+   */
+  @Input() isFunderProject: boolean;
 
   /**
    * The project community's id

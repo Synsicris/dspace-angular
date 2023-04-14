@@ -6,7 +6,7 @@
     </ds-comcol-page-header>
     <div class="d-flex space-children-mr">
       <ds-item-version-list [btnClass]="'btn-md'"
-                            [showOnlyVisible]="isFunder"
+                            [showOnlyVisible]="hasAnyFunderRole"
                             [targetItemId]="impactPathwayStep.id"
                             [targetItem]="impactPathwayStepItem"
                             (versionSelected)="onVersionSelected($event)"
@@ -31,7 +31,7 @@
                   [impactPathwayStep]="impactPathwayStep"
                   [impactPathwayTask]="task"
                   [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"
-                  [isFunder]="isFunder"
+                  [isFunderProject]="isFunderProject"
                   [targetImpactPathwayTaskId]="targetImpactPathwayTaskId"></ds-objective>
   </ng-container>
 

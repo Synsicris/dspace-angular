@@ -1,5 +1,6 @@
 <ds-impact-pathway-board *ngIf="(impactPathWayItem$ | async)"
-               [isFunder]="(isFunder$ | async)"
+               [hasAnyFunderRole]="(hasAnyFunderRole$ | async)"
+               [isFunderProject]="(isFunderProject$ | async)"
                [projectCommunityId]="(projectCommunityId$ | async)"
                [projectItemId]="(projectItemId$ | async)"
                [impactPathwayId]="(impactPathwayId$ | async)"
