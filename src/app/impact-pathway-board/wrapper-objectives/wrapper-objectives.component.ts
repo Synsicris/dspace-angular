@@ -1,18 +1,19 @@
-import { Item } from './../../core/shared/item.model';
 import { Component, Input, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { BehaviorSubject } from 'rxjs';
+import { filter, map, take } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 import { ObjectiveService } from '../core/objective.service';
 import { ImpactPathwayStep } from '../core/models/impact-pathway-step.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { isNotEmpty } from '../../shared/empty.util';
 import { environment } from '../../../environments/environment';
 import { ImpactPathwayService } from '../core/impact-pathway.service';
-import { BehaviorSubject } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
 import { VersionSelectedEvent } from '../../shared/item-version-list/item-version-list.component';
 import { AlertRole, getProgrammeRoles } from '../../shared/alert/alert-role/alert-role';
 import { ProjectAuthorizationService } from '../../core/project/project-authorization.service';
+import { Item } from '../../core/shared/item.model';
 
 @Component({
   selector: 'ds-wrapper-objectives',
@@ -52,7 +53,6 @@ export class WrapperObjectivesComponent implements OnDestroy {
 
   constructor(
     private objectivesService: ObjectiveService,
-    private router: Router,
     private impactPathwayService: ImpactPathwayService,
     protected aroute: ActivatedRoute,
     private translate: TranslateService,
@@ -77,10 +77,6 @@ export class WrapperObjectivesComponent implements OnDestroy {
   getObjectivesTasks() {
     return this.impactPathwayStep.tasks.filter((task) => (task.type === environment.impactPathway.projObjectiveEntity ||
       task.type === environment.impactPathway.iaObjectiveEntity));
-  }
-
-  back() {
-    this.router.navigate(['entities', 'impactpathway', this.impactPathwayStep.parentId]);
   }
 
   hasInfoMessage(): boolean {
