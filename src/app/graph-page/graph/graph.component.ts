@@ -1,3 +1,4 @@
+import { SearchFilter } from './../../shared/search/models/search-filter.model';
 import { PaginatedSearchOptions } from './../../shared/search/models/paginated-search-options.model';
 import { AlertType } from './../../shared/alert/aletr-type';
 import { ChartType } from './../../charts/models/chart-type';
@@ -79,7 +80,7 @@ export class GraphComponent implements OnInit {
    * The query filter to get facet values for the search configuration
    * @type {string}
    */
-  private queryFilterParams: string;
+  private queryFilterParams: SearchFilter[];
 
   /**
    * The notification error i18n key
@@ -164,7 +165,7 @@ export class GraphComponent implements OnInit {
     const searchOptions = new PaginatedSearchOptions({
       configuration: this.configuration,
       scope: this.scope,
-      query: this.queryFilterParams,
+      filters: this.queryFilterParams,
     });
     return this.searchService
       .getFacetValuesFor(filterConfig, 1, searchOptions)
@@ -225,14 +226,13 @@ export class GraphComponent implements OnInit {
   /**
    * Method to create the query filter params string
    */
-  private filterQueryParams(queryParams: Params): string {
+  private filterQueryParams(queryParams: Params): SearchFilter[] {
     const params = Object.entries(queryParams)
       .filter(
         ([key, value]) =>
           hasValue(value) && !this.defaultQueryParams.includes(key)
       )
-      .map(([key, value]) => `${key}=${value}`)
-      .join('&');
+      .map(([key, value]) => new SearchFilter(key, [value]));
 
     return params;
   }
