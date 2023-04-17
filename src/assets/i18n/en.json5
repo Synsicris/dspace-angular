@@ -2036,6 +2036,8 @@
 
   "error.validation.fundingInvestigatorOrLeadOrganizationRequired": "At least one investigator or one lead organization is required",
 
+  "error.validation.notRepeatable": "This field is not repeatable, enter only one value!",
+
   "event.listelement.badge": "Event",
 
   "exploitation-plan.edit.item.title": "Edit item",
