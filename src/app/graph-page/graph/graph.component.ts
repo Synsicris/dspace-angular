@@ -1,8 +1,10 @@
+import { ChartData } from './../../charts/models/chart-data';
+import { PaginationComponentOptions } from './../../shared/pagination/pagination-component-options.model';
 import { SearchFilter } from './../../shared/search/models/search-filter.model';
 import { PaginatedSearchOptions } from './../../shared/search/models/paginated-search-options.model';
 import { AlertType } from './../../shared/alert/aletr-type';
 import { ChartType } from './../../charts/models/chart-type';
-import { mergeMap, tap } from 'rxjs/operators';
+import { mergeMap, switchMap, tap } from 'rxjs/operators';
 import { FacetValues } from './../../shared/search/models/facet-values.model';
 import { ChartSeries } from './../../charts/models/chart-series';
 import { RemoteData } from './../../core/data/remote-data';
@@ -20,7 +22,7 @@ import {
   HostListener,
   ChangeDetectorRef,
 } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { hasValue, isNotNull } from '../../shared/empty.util';
 import { FacetValue } from '../../shared/search/models/facet-value.model';
 
@@ -58,7 +60,7 @@ export class GraphComponent implements OnInit {
    * The chart data
    * @type {Observable<ChartSeries[]>}
    */
-  public results$: Observable<ChartSeries[]>;
+  public results$: Observable<ChartSeries[] | ChartData[]>;
 
   /**
    * The graph container element reference
@@ -106,7 +108,14 @@ export class GraphComponent implements OnInit {
 
   public filterType: string;
 
-  public isLastPage$ = of(true);
+  public isLastPage$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+
+  getAllElementsGraphTypes = [
+    'chart.bar.right-to-left',
+    'chart.bar.left-to-right',
+  ];
+
+  public pageNr = 1;
 
   constructor(
     private aroute: ActivatedRoute,
@@ -146,6 +155,13 @@ export class GraphComponent implements OnInit {
    * to pass to the chart component
    */
   ngOnInit(): void {
+    this.calculateResults();
+  }
+
+  /**
+   * Get the chart data from the facet values,
+   */
+  private calculateResults() {
     const facetValues$: Observable<FacetValue[]> = this.getFilterConfig(
       this.filterName
     ).pipe(
@@ -163,20 +179,46 @@ export class GraphComponent implements OnInit {
 
   /**
    * Get facet values for the search configuration,
-   * setting the configuration, scope and query filter params
+   * setting the configuration, scope and query filter params.
+   * If the filter type is one of the getAllElementsGraphTypes,
+   * the pageSize is set to the total number of elements.
+   * @param filterConfig The search filter configuration
    */
   getFacetValues(filterConfig: SearchFilterConfig): Observable<FacetValue[]> {
     const searchOptions = new PaginatedSearchOptions({
       configuration: this.configuration,
       scope: this.scope,
       filters: this.queryFilterParams,
+      pagination: Object.assign(new PaginationComponentOptions(), {
+        currentPage: this.pageNr,
+      }),
     });
+
     return this.searchService
-      .getFacetValuesFor(filterConfig, 1, searchOptions)
+      .getFacetValuesFor(filterConfig, this.pageNr, searchOptions)
       .pipe(
         getFirstCompletedRemoteData(),
+        switchMap((rd: RemoteData<FacetValues>) => {
+          if (
+            this.getAllElementsGraphTypes.includes(this.filterType) &&
+            hasValue(rd.payload && +rd.payload.more > 0)
+          ) {
+            filterConfig.pageSize = rd.payload.pageInfo.elementsPerPage + +rd.payload.more ?? filterConfig.pageSize;
+            return this.searchService
+              .getFacetValuesFor(filterConfig, this.pageNr, searchOptions)
+              .pipe(
+                tap(() => {
+                  this.chd.detectChanges();
+                })
+              );
+          } else {
+            return of(rd);
+          }
+        }),
         map((rd: RemoteData<FacetValues>) => {
-          return rd.payload.page;
+          if (rd.payload) {
+            return rd.payload.page;
+          }
         })
       );
   }
@@ -186,31 +228,57 @@ export class GraphComponent implements OnInit {
    */
   private getFilterConfig(filterName: string): Observable<SearchFilterConfig> {
     return isNull(filterName)
-    ? of(null)
-    : this.searchConfigService.getConfig(this.scope, this.configuration).pipe(
-        getFirstCompletedRemoteData(),
-        map((config: RemoteData<SearchFilterConfig[]>) =>
-         config.hasSucceeded && hasValue(config.payload)
-            ? config.payload.find((f) => isEqual(f.name, filterName))
-            : null),
-        tap((filter) => {
-          if (isNotNull(filter)) {
-            this.filterType = filter.filterType;
-            this.chartType = this.getChartType(filter.filterType);
-          }
-        })
-      );
+      ? of(null)
+      : this.searchConfigService.getConfig(this.scope, this.configuration).pipe(
+          getFirstCompletedRemoteData(),
+          map((config: RemoteData<SearchFilterConfig[]>) =>
+            config.hasSucceeded && hasValue(config.payload)
+              ? config.payload.find((f) => isEqual(f.name, filterName))
+              : null
+          ),
+          tap((filter) => {
+            if (isNotNull(filter)) {
+              this.filterType = filter.filterType;
+              this.chartType = this.getChartType(filter.filterType);
+            }
+          })
+        );
   }
 
   /**
    * Get the chart data from the facet values
+   * If the filter type is a chart.line, the chart data is returned as a ChartData array,
+   * otherwise the chart data is returned as a ChartSeries array.
+   * @param facetValues The facet values
+   * @returns The chart data
    */
-  getChartValues(facetValues: FacetValue[]): ChartSeries[] {
-    return facetValues.map(({ value, count, ...extra }) => ({
-      name: value,
-      value: count,
-      extra,
-    }));
+  getChartValues(facetValues: FacetValue[]): ChartSeries[] | ChartData[] {
+    if (facetValues?.length > 0) {
+      if (this.filterType.includes('reverse')) {
+        facetValues.map(({ value, count, ...extra }) => ({
+          name: count.toString(),
+          value: Number(value),
+          extra,
+        }));
+      } else if (this.filterType !== 'chart.line') {
+        return facetValues.map(({ value, count, ...extra }) => ({
+          name: value,
+          value: count,
+          extra,
+        }));
+      } else {
+        return [
+          {
+            name: this.filterName,
+            series: facetValues.map(({ value, count, ...extra }) => ({
+              name: value,
+              value: count,
+              extra,
+            })),
+          },
+        ];
+      }
+    }
   }
 
   /**
@@ -273,10 +341,10 @@ export class GraphComponent implements OnInit {
   }
 
   enableScrollToLeft(filterType) {
-    return (isEqual(filterType, 'chart.bar.right-to-left'));
+    return isEqual(filterType, 'chart.bar.right-to-left');
   }
 
   enableScrollToRight(filterType) {
-    return (isEqual(filterType, 'chart.bar.left-to-right'));
+    return isEqual(filterType, 'chart.bar.left-to-right');
   }
 }
