@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { DSpaceObject } from '../shared/dspace-object.model';
 import { ChildHALResource } from '../shared/child-hal-resource.model';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
-import { hasValue } from '../../shared/empty.util';
+import { hasValue, isNotEmpty } from '../../shared/empty.util';
 import { IdentifiableDataService } from '../data/base/identifiable-data.service';
 
 /**
@@ -31,18 +31,26 @@ export abstract class DSOBreadcrumbResolver<T extends ChildHALResource & DSpaceO
    * @returns BreadcrumbConfig object
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BreadcrumbConfig<T>> {
+    if (hasValue(route.routeConfig) && isNotEmpty(route.routeConfig.path) && hasValue(route.params.objId)) {
+      // If the route has a path and an objId param, we're on a page that has a parent object
+      const uuid = route.params.objId;
+      return this.resolveByUUID(uuid, state.url, route.params.id);
+    }
+
     const uuid = route.params.id;
     return this.resolveByUUID(uuid, state.url);
   }
 
-  protected resolveByUUID(uuid: string, fullPath: string): Observable<BreadcrumbConfig<T> | undefined> {
+  protected resolveByUUID(uuid: string, fullPath: string, parentId?: string): Observable<BreadcrumbConfig<T> | undefined> {
     return this.dataService.findById(uuid, true, false, ...this.followLinks).pipe(
       getFirstCompletedRemoteData(),
       getRemoteDataPayload(),
       map((object: T) => {
         if (hasValue(object)) {
           const url = fullPath.substr(0, fullPath.indexOf(uuid)) + uuid;
-          return { provider: this.breadcrumbService, key: object, url: url };
+          return hasValue(parentId)
+          ? { provider: this.breadcrumbService, key: object, url: '', parentId: parentId }
+          : { provider: this.breadcrumbService, key: object, url: url };
         } else {
           return undefined;
         }

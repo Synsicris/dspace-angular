@@ -32,9 +32,10 @@ export class ObjectiveComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input() public impactPathwayTask: ImpactPathwayTask;
 
   /**
-   * If the current user is a funder Organizational/Project manager
+   * If the current user is a funder project manager
    */
-  @Input() isFunder: boolean;
+  @Input() isFunderProject: boolean;
+
   /**
    * A boolean representing if item is a version of original item
    */

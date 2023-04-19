@@ -19,6 +19,7 @@ import {
 } from '../core/project/resolvers/funder-organizational-manager-by-project.resolver';
 import { FunderReaderByProjectResolver } from '../core/project/resolvers/funder-reader-by-project.resolver';
 import { ProjectDataService } from '../core/project/project-data.service';
+import { PrintStyleApplier } from '../core/shared/print-style-applier';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { ProjectDataService } from '../core/project/project-data.service';
           {
             path: '',
             component: ImpactPathwayPageComponent,
+            canActivate: [PrintStyleApplier],
             data: {
               title: 'impact-pathway.edit.page.title',
               breadcrumbKey: 'impact-pathway',
@@ -79,7 +81,8 @@ import { ProjectDataService } from '../core/project/project-data.service';
     ProjectItemBreadcrumbService,
     ProjectCommunityByItemResolver,
     ProjectObjectivesItemResolver,
-    VersionOfAnItemResolver
+    VersionOfAnItemResolver,
+    PrintStyleApplier
   ]
 })
 export class ImpactPathwayPageRoutingModule {

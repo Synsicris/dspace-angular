@@ -138,7 +138,7 @@ export class QuestionsUploadStepComponent implements OnInit {
    * If the current user is a funder Organizational/Project manager,
    * in order not to display uploader when the user isFunder
    */
-  @Input() isFunder: boolean;
+  @Input() hasAnyFunderRole: boolean;
 
   /**
    * The uploader section configuration

@@ -1,4 +1,5 @@
 <ds-objectives-board *ngIf="(objectivesItem$ | async) && (projectCommunityId$ | async)"
-                      [isFunder]="(isFunder$ | async)"
+                      [hasAnyFunderRole]="(hasAnyFunderRole$ | async)"
+                      [isFunderProject]="(isFunderProject$ | async)"
                       [projectCommunityId]="(projectCommunityId$ | async)"
                       [impactPathwayStepItem]="(objectivesItem$ | async)"></ds-objectives-board>

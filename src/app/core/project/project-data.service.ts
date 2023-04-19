@@ -378,6 +378,19 @@ export class ProjectDataService extends CommunityDataService {
     }
   }
 
+  findItemById(uuid: string, linksToFollow: FollowLinkConfig<Item>[] = []): Observable<RemoteData<Item>> {
+    return this.itemService.findById(uuid, true, true, ...linksToFollow ).pipe(
+      getFirstCompletedRemoteData(),
+      map((data) => {
+        if (data.hasSucceeded) {
+          return data;
+        } else {
+          throw new Error('Item does not exist');
+        }
+      })
+    );
+  }
+
   /**
    * Get the first project template available
    *

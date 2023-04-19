@@ -33,7 +33,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
   /**
    * If the current user is a funder Organizational/Project manager
    */
-  @Input() isFunder: boolean;
+  @Input() hasAnyFunderRole: boolean;
 
   /**
    * If the working-plan given is a version item

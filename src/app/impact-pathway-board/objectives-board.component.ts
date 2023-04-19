@@ -28,7 +28,12 @@ export class ObjectivesBoardComponent implements OnInit {
   /**
    * If the current user is a funder Organizational/Project manager
    */
-  @Input() isFunder: boolean;
+  @Input() hasAnyFunderRole: boolean;
+
+  /**
+   * If the current user is a funder project manager
+   */
+  @Input() isFunderProject: boolean;
 
   public impactPathwayStepId: string;
   public targetImpactPathwayTaskId$: Observable<string>;
