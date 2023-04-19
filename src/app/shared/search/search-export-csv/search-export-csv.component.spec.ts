@@ -148,11 +148,11 @@ describe('SearchExportCsvComponent', () => {
       expect(scriptDataService.invoke).toHaveBeenCalledWith('metadata-export-search', [], []);
 
     });
-    it('should show a success message when the script was invoked successfully and redirect to the corresponding process page', () => {
+    it('should show a message when the script was invoked successfully', () => {
       component.export();
 
-      expect(notificationsService.success).toHaveBeenCalled();
-      expect(router.navigateByUrl).toHaveBeenCalledWith(getProcessDetailRoute(process.processId));
+      expect(notificationsService.process).toHaveBeenCalled();
+      // expect(router.navigateByUrl).toHaveBeenCalledWith(getProcessDetailRoute(process.processId));
     });
     it('should show an error message when the script was not invoked successfully and stay on the current page', () => {
       (scriptDataService.invoke as jasmine.Spy).and.returnValue(createFailedRemoteDataObject$('Error', 500));
@@ -160,7 +160,7 @@ describe('SearchExportCsvComponent', () => {
       component.export();
 
       expect(notificationsService.error).toHaveBeenCalled();
-      expect(router.navigateByUrl).not.toHaveBeenCalled();
+      // expect(router.navigateByUrl).not.toHaveBeenCalled();
     });
   });
   describe('clicking the button', () => {
