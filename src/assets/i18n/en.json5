@@ -4606,6 +4606,12 @@
 
   "process.new.notification.process.files": "Output Files: ",
 
+  "process.new.notification.process.see-results": "See the results",
+
+  "process.new.notification.process.create-version": "Create Version",
+
+  "process.new.notification.process.create-failed": "Creating version has failed",
+
   "process.new.header": "Create a new process",
 
   "process.new.title": "Create a new process",

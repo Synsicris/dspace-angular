@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 export interface IProcessNotification extends INotification {
   processId: string;
   checkTime: number;
+  url?: string;
 }
 
 export class ProcessNotification implements IProcessNotification {
@@ -47,6 +48,11 @@ export class ProcessNotification implements IProcessNotification {
   public processId: string;
 
   /**
+   * Url to redirect to when the notification is clicked.
+   */
+  public url: string;
+
+  /**
    * Time interval that the notification will be rechecked.
    */
   public checkTime: number;
@@ -57,7 +63,8 @@ export class ProcessNotification implements IProcessNotification {
               checkTime: number,
               title?: Observable<string> | string,
               options?: NotificationOptions,
-              html?: boolean) {
+              html?: boolean,
+              url?: string) {
     this.id = id;
     this.type = type;
     this.title = title;
@@ -68,6 +75,7 @@ export class ProcessNotification implements IProcessNotification {
     this.html = html;
     this.processId = processId;
     this.checkTime = checkTime;
+    this.url = url;
   }
 
 }
