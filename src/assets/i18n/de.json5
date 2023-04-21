@@ -8535,7 +8535,7 @@
 
   // "search.filters.applied.charts.grapheventpartner.tab": "Event partner",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.grapheventpartner.tab": "Darstellung nach Projektpartner",
+  "search.filters.applied.charts.grapheventpartner.tab": "beteiligte Projektpartner",
 
   // "search.filters.applied.charts.grapheventtarget.tab": "Event target",
   // TODO New key - Add a translation
@@ -8955,7 +8955,7 @@
 
   // "search.filters.filter.types.head": "Type",
   // TODO New key - Add a translation
-  "search.filters.filter.types.head": "Typ",
+  "search.filters.filter.types.head": "Art",
 
   // "search.filters.filter.synsicristypeprojectcontribution.head": "Project contribution",
   // TODO New key - Add a translation
@@ -9043,11 +9043,11 @@
 
   // "search.filters.filter.types.label": "Search Type",
   // TODO New key - Add a translation
-  "search.filters.filter.types.label": "Suche Typ",
+  "search.filters.filter.types.label": "Suche Art",
 
   // "search.filters.filter.types.placeholder": "Type",
   // TODO New key - Add a translation
-  "search.filters.filter.types.placeholder": "Typ",
+  "search.filters.filter.types.placeholder": "Art",
 
   // "search.filters.entityType.contribution_fundingprogramme": "Contribution to funding programme objectives",
   "search.filters.entityType.contribution_fundingprogramme": "Beitrag zu förderpolitischen Zielen",
@@ -9274,7 +9274,7 @@
 
   // "search.sidebar.show.hide.charts.tooltip": "Show/Hide charts",
   // TODO New key - Add a translation
-  "search.sidebar.show.hide.charts.tooltip": "Grafiken ein-/ausblenden",
+  "search.sidebar.show.hide.charts.tooltip": "Diagramm ein-/ausblenden",
 
   // "search.view-switch.show-detail": "Show detail",
   "search.view-switch.show-detail": "Detailanzeige",
@@ -11101,7 +11101,7 @@
   "submission.sections.submit.progressbar.describe.gender_reflection": "#1 Fragen der Geschlechtergerechtigkeit reflektieren",
 
   // "submission.sections.submit.progressbar.describe.gender_reflection.info": "missing",
-  "submission.sections.submit.progressbar.describe.gender_reflection.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br><b>Reflektieren Sie bitte hier, inwieweit das Projekt Geschlechteraspekte berücksichtigt. Ergänzen Sie Ihr „ja“ oder „nein“ bei den folgenden Fragen bitte jeweils mit einer kurzen Erläuterung.</br></br></b> <b>Wichtiger Hinweis:</b><ul><li> Wo Fragen der Geschlechtergerechtigkeit im Projekt relevant sind, ist nicht immer gleich offensichtlich. Reflektieren Sie daher bitte jede Frage und berücksichtigen Sie die Hinweise hinter den <i class=\"fas fa-question-circle\"></i>, um auch nicht direkt offensichtliche Aspekte zu identifizieren.</ul></li><b>Tipps:</b> <ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-pages-gender.html\" target=\"_blank\">Weitere Hilfe</a></ul></li>",
+  "submission.sections.submit.progressbar.describe.gender_reflection.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br><b>Reflektieren Sie bitte hier, inwieweit das Projekt Geschlechteraspekte berücksichtigt. Ergänzen Sie Ihr „ja“ oder „nein“ bei den folgenden Fragen bitte jeweils mit einer kurzen Erläuterung.</br></br></b> <b>Wichtiger Hinweis:</b><ul><li> Wo Fragen der Geschlechtergerechtigkeit im Projekt relevant sind, ist nicht immer gleich offensichtlich. Reflektieren Sie daher bitte jede Frage und berücksichtigen Sie die Hinweise hinter den <i class=\"fas fa-question-circle\"></i>, um auch nicht direkt offensichtliche Aspekte zu identifizieren.</ul></li><b>Tipps:</b> <ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-pages-gender.php\"target=\"_blank\">Hintergrund zur Geschlechtergerechtigkeit</a></ul></li>",
 
   // "submission.sections.submit.progressbar.describe.gender": "#1 Key message on the reflection of the gender aspects within the project",
   "submission.sections.submit.progressbar.describe.gender": "#1 Kernaussage zur Reflexion der Geschlechteraspekte formulieren",
@@ -14666,7 +14666,7 @@
   "search.filters.applied.charts.RELATION.Project.cooperationpartner.title": "Diagramm",
 
   // "search.filters.applied.charts.graphcoopparttype.tab": "missing",
-  "search.filters.applied.charts.graphcoopparttype.tab": "Art",
+  "search.filters.applied.charts.graphcoopparttype.tab": "Art der Kooperation",
 
   // "search.filters.applied.charts.graphcooppartnace.tab": "missing",
   "search.filters.applied.charts.graphcooppartnace.tab": "Wirtschaftszweig",
@@ -14717,7 +14717,7 @@
   "search.filters.applied.charts.graphtargetgrouppolitical.tab": "Politikebene",
 
   // "search.filters.applied.charts.graphtargetgroupurbanrural.tab": "missing",
-  "search.filters.applied.charts.graphtargetgroupurbanrural.tab": "Standort",
+  "search.filters.applied.charts.graphtargetgroupurbanrural.tab": "Verortung",
 
   // "search.filters.applied.charts.RELATION.Project.condition.title": "missing",
   "search.filters.applied.charts.RELATION.Project.condition.title": "Diagramm",
@@ -14732,7 +14732,7 @@
   "search.filters.applied.charts.graphproceventpartner.tab": "beteiligte Partner",
 
   // "search.filters.applied.charts.graphproceventtargetgroup.tab": "missing",
-  "search.filters.applied.charts.graphproceventtargetgroup.tab": "beteiligte Akteursgruppen",
+  "search.filters.applied.charts.graphproceventtargetgroup.tab": "beteiligte Akteursgruppe(n)",
 
   // "search.filters.applied.charts.graphproceventpurpose.tab": "missing",
   "search.filters.applied.charts.graphproceventpurpose.tab": "Zweck",
@@ -14744,7 +14744,7 @@
   "search.filters.applied.charts.RELATION.Project.physical_object.title": "Diagramm",
 
   // "search.filters.applied.charts.graphphyobjtype.tab": "missing",
-  "search.filters.applied.charts.graphphyobjtype.tab": "Typ",
+  "search.filters.applied.charts.graphphyobjtype.tab": "Art",
 
   // "search.filters.applied.charts.graphphyobjtypeaccess.tab": "missing",
   "search.filters.applied.charts.graphphyobjtypeaccess.tab": "Zugänglichkeit",
@@ -16011,10 +16011,10 @@
   "search.filters.applied.charts.COMMENT_ALL.Person.comment_person_all.title": "Diagramm",
 
   // "search.filters.filter.synsicrisTypeFunctions.label": "missing",
-  "search.filters.filter.synsicrisTypeFunctions.label": "Tätigkeitsbereich",
+  "search.filters.filter.synsicrisTypeFunctions.label": "Suche Verwendungsmöglichkeiten",
 
   // "search.filters.filter.synsicrisTypeFunctions.head": "missing",
-  "search.filters.filter.synsicrisTypeFunctions.head": "Suche Tätigkeitsbereich",
+  "search.filters.filter.synsicrisTypeFunctions.head": "Verwendungsmöglichkeiten",
 
   // "search.filters.applied.charts.RELATION.Project.Funding.title": "missing",
   "search.filters.applied.charts.RELATION.Project.Funding.title": "Diagramm",
@@ -16041,7 +16041,7 @@
   "search.filters.applied.charts.graphUnexpectedResultType.tab": "Art",
 
   // "search.filters.applied.charts.graph-application-synsicris_coverage_regional.tab": "missing",
-  "search.filters.applied.charts.graph-application-synsicris_coverage_regional.tab": "Verbreitung",
+  "search.filters.applied.charts.graph-application-synsicris_coverage_regional.tab": "Region der Anwendung",
 
   // "search.filters.applied.charts.secondStepSearchProjectItems.title": "missing",
   "search.filters.applied.charts.secondStepSearchProjectItems.title": "Diagramm",
@@ -16140,6 +16140,351 @@
   "search.filters.filter.synsicrisLevelEnd.placeholder": "Readiness-Level zum Ende",
 
   // "search.filters.filter.synsicrisLevelEnd.label": "Search Level End",
-  "search.filters.filter.synsicrisLevelEnd.label": "Suche Readiness-Level zum Ende"
+  "search.filters.filter.synsicrisLevelEnd.label": "Suche Readiness-Level zum Ende",
+
+  // "impact-pathway.wrapper.info.funder-project": "Help funder project mananger",
+  "impact-pathway.wrapper.info.funder-project": "Der <b>Wirkungspfad</b> gibt einen <b>Überblick zu den Hintergründen, Arbeiten und Wirkungen</b> des Vorhabens.</br>In übersichtlicher Form wird dargestellt, um was es in dem Verbund geht.</br></br><b><i>Zur Prüfung des Vorhabens sichten Sie alle Einträge im Wirkungspfad. Rufen Sie dafür auch die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</i></b></br></br><b>Arbeitsweise:</b><ul><li>Im <b>Kommentar-Bereich</b> können Sie über <i class=\"fas fa-plus-circle\"></i> zu jeder Säule Kommentare hinzufügen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li><li>Wenn mehrere Versionen vorliegen, können Sie den aktuellen Stand über <b>Vergleich mit</b> einer älteren Version vergleichen. Dabei werden <b>gelöschte Einträge</b> (rot) bzw. <b>hinzugefügte Einträge</b> (grün) farblich hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die <b>Detailinformationen zu einem Eintrag</b> in beiden Versionen <b>vergleichen</b>.</li></ul></br></br><b>Worum es hier geht:</b><ul><li>Mit dem Wirkungspfad werden zwei Fragen beantwortet: „Welche Wirkungen sollen mit dem Vorhaben erreicht werden?“ und „Was wird/wurde getan, um zur Entwicklung dieser Wirkungen beizutragen?“ </li><li>Für die <b>Antragstellung</b> werden in den Einträgen insbesondere die Ziele des Verbundes verdeutlicht. Die Abbildung des Wirkungspfades und eine kurze Beschreibung ersetzen in der Vorhabenbeschreibung das Kapitel „Gesamtziele des Vorhabens“. </li><li>Im <b>Verlauf des Vorhabens</b> wird der Wirkungspfad aktualisiert und konkretisiert, sowie um die Ergebnisse ergänzt. </li><li>Die <b>6 Säulen</b> gliedern den Wirkungspfad. Je nach Säule können Einträge unterschiedlicher <b>Kategorien</b> (z.B. Rahmenbedingung oder erwartete gesellschaftliche Wirkung) angepinnt werden. Im Wirkungspfad wird jeweils nur die Bezeichnung des Eintrags und die Kategorie angezeigt.</li></ul>",
+
+  // "impact-pathway.wrapper.info.funder-manager": "Help funder organisational manager",
+  "impact-pathway.wrapper.info.funder-manager": "Der <b>Wirkungspfad</b> gibt einen <b>Überblick zu den Hintergründen, Arbeiten und Wirkungen</b> des Vorhabens.</br></br>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit</b> einer älteren Version vergleichen.</br></br><b>Worum es hier geht:</b><br> <ul><li>Mit dem Wirkungspfad werden zwei Fragen beantwortet: „Welche Wirkungen sollen mit dem Vorhaben erreicht werden?“ und „Was wird/wurde getan, um zur Entwicklung dieser Wirkungen beizutragen?“ </li><li>Für die <b>Antragstellung</b> werden in den Einträgen insbesondere die Ziele des Verbundes verdeutlicht. Die Abbildung des Wirkungspfades und eine kurze Beschreibung ersetzen in der Vorhabenbeschreibung das Kapitel „Gesamtziele des Vorhabens“. </li><li>Im <b>Verlauf des Vorhabens</b> wird der Wirkungspfad aktualisiert und konkretisiert, sowie um die Ergebnisse ergänzt. </li><li>Die <b>6 Säulen</b> gliedern den Wirkungspfad. Je nach Säule können Einträge unterschiedlicher <b>Kategorien</b> (z.B. Rahmenbedingung oder erwartete gesellschaftliche Wirkung) angepinnt werden. Im Wirkungspfad wird jeweils nur die Bezeichnung des Eintrags und die Kategorie angezeigt.</li></ul>",
+
+  // "impact-pathway.wrapper.info.funder-reader": "Help funder reader",
+  "impact-pathway.wrapper.info.funder-reader": "Der <b>Wirkungspfad</b> gibt einen <b>Überblick zu den Hintergründen, Arbeiten und Wirkungen</b> des Vorhabens.</br></br>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit</b> einer älteren Version vergleichen.</br></br><b>Worum es hier geht:</b><br> <ul><li>Mit dem Wirkungspfad werden zwei Fragen beantwortet: „Welche Wirkungen sollen mit dem Vorhaben erreicht werden?“ und „Was wird/wurde getan, um zur Entwicklung dieser Wirkungen beizutragen?“ </li><li>Für die <b>Antragstellung</b> werden in den Einträgen insbesondere die Ziele des Verbundes verdeutlicht. Die Abbildung des Wirkungspfades und eine kurze Beschreibung ersetzen in der Vorhabenbeschreibung das Kapitel „Gesamtziele des Vorhabens“. </li><li>Im <b>Verlauf des Vorhabens</b> wird der Wirkungspfad aktualisiert und konkretisiert, sowie um die Ergebnisse ergänzt. </li><li>Die <b>6 Säulen</b> gliedern den Wirkungspfad. Je nach Säule können Einträge unterschiedlicher <b>Kategorien</b> (z.B. Rahmenbedingung oder erwartete gesellschaftliche Wirkung) angepinnt werden. Im Wirkungspfad wird jeweils nur die Bezeichnung des Eintrags und die Kategorie angezeigt.</li></ul>",
+
+  // "impact-pathway.objectives.step_type_2.info.panel.funder-project": "Help funder project mananger",
+  "impact-pathway.objectives.step_type_2.info.panel.funder-project": "Hier sind die <b>wichtigsten Arbeiten</b> des Verbundes dargestellt, die zu den jeweiligen Zielen beitragen.</br></br><b><i>Zur Prüfung des Vorhabens sichten Sie alle Einträge. Rufen Sie dafür auch die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</i></b></br>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit</b> einer älteren Version vergleichen.</br></br><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li>></ul>",
+
+  // "impact-pathway.objectives.step_type_2.info.panel.funder-manager": "Help funder organisational manager",
+  "impact-pathway.objectives.step_type_2.info.panel.funder-manager": "Hier sind die <b>wichtigsten Arbeiten</b> des Verbundes dargestellt, die zu den jeweiligen Zielen beitragen.</br></br>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit</b> einer älteren Version vergleichen.</br></br><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li>></ul>",
+
+  // "impact-pathway.objectives.step_type_2.info.panel.funder-reader": "Help funder reader",
+  "impact-pathway.objectives.step_type_2.info.panel.funder-reader": "Hier sind die wichtigsten Arbeiten des Verbundes dargestellt, die zu den jeweiligen Zielen beitragen.</br></br>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit</b> einer älteren Version vergleichen.</br></br><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li>></ul>",
+
+  // "impact-pathway.objectives.step_type_3.info.panel.funder-project": "Help funder project mananger",
+  "impact-pathway.objectives.step_type_3.info.panel.funder-project": "Hier sind die Einträge zu den Arbeiten dargestellt, mit denen das jeweilige Ziel für Interaktion und Transfer erreicht werden soll.</br></br><b><i>Zur Prüfung des Vorhabens sichten Sie alle Einträge. Rufen Sie dafür auch die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</i></b></br>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit</b> einer älteren Version vergleichen.</br></br><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li>></ul>",
+
+  // "impact-pathway.objectives.step_type_3.info.panel.funder-manager": "Help funder organisational manager",
+  "impact-pathway.objectives.step_type_3.info.panel.funder-manager": "Hier sind die Einträge zu den Arbeiten dargestellt, mit denen das jeweilige Ziel für Interaktion und Transfer erreicht werden soll.</br></br>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit</b> einer älteren Version vergleichen.</br></br><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li>></ul>",
+
+  // "impact-pathway.objectives.step_type_3.info.panel.funder-reader": "Help funder reader",
+  "impact-pathway.objectives.step_type_3.info.panel.funder-reader": "Hier sind die Einträge zu den Arbeiten dargestellt, mit denen das jeweilige Ziel für Interaktion und Transfer erreicht werden soll.</br></br>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit</b> einer älteren Version vergleichen.</br></br><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li>></ul>",
+
+  // "working-plan.chart.page.description.funder-project": "Help funder project mananger",
+  "working-plan.chart.page.description.funder-project": "Der Arbeitsplan enthält alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes.</br></br><b><i>Zur Prüfung des Vorhabens sichten Sie alle Einträge im Arbeitsplan. Rufen Sie dafür auch die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</b></i></br></br><b>Arbeitsweise:</b><ul><li>Im <b>Kommentar-Bereich</b> können Sie über <i class=\"fas fa-plus-circle\"></i> Kommentare hinzufügen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li><li>Wenn mehrere Versionen vorliegen, können Sie den aktuellen Stand über <b>Vergleich mit</b> einer älteren Version vergleichen. Dabei werden <b>gelöschte Einträge</b> (rot) bzw. <b>hinzugefügte Einträge</b> (grün) farblich hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die <b>Detailinformationen zu einem Eintrag</b> in beiden Versionen <b>vergleichen</b>.</li></ul>",
+
+  // "working-plan.chart.page.description.funder-manager": "Help funder organisational manager",
+  "working-plan.chart.page.description.funder-manager": "Der Arbeitsplan enthält alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes.</br>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit</b> einer älteren Version vergleichen.",
+
+  // "working-plan.chart.page.description.funder-reader": "Help funder reader",
+  "working-plan.chart.page.description.funder-reader": "Der Arbeitsplan enthält alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes.</br>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit</b> einer älteren Version vergleichen.",
+
+  // "exploitation-plan.info.text.funder-project": "Help funder project mananger",
+  "exploitation-plan.info.text.funder-project": "Hier Info für funder project mananger",
+
+  // "exploitation-plan.info.text.funder-manager": "Help funder organisational manager",
+  "exploitation-plan.info.text.funder-manager": "Hier Info für funder organisational manager",
+
+  // "exploitation-plan.info.text.funder-reader": "Help funder reader",
+  "exploitation-plan.info.text.funder-reader": "Hier Info für funder reader",
+
+  // "exploitation-plan.step_type_1.info.text.funder-project": "Help funder project mananger",
+  "exploitation-plan.step_type_1.info.text.funder-project": "Hier Info für funder project mananger",
+
+  // "exploitation-plan.step_type_1.info.text.funder-manager": "Help funder organisational manager",
+  "exploitation-plan.step_type_1.info.text.funder-manager": "Hier Info für funder organisational manager",
+
+  // "exploitation-plan.step_type_1.info.text.funder-reader": "Help funder reader",
+  "exploitation-plan.step_type_1.info.text.funder-reader": "Hier Info für funder reader",
+
+  // "exploitation-plan.step_type_2.info.text.funder-project": "Help funder project mananger",
+  "exploitation-plan.step_type_2.info.text.funder-project": "Hier Info für funder project mananger",
+
+  // "exploitation-plan.step_type_2.info.text.funder-manager": "Help funder organisational manager",
+  "exploitation-plan.step_type_2.info.text.funder-manager": "Hier Info für funder organisational manager",
+
+  // "exploitation-plan.step_type_2.info.text.funder-reader": "Help funder reader",
+  "exploitation-plan.step_type_2.info.text.funder-reader": "Hier Info für funder reader",
+
+  // "exploitation-plan.step_type_3.info.text.funder-project": "Help funder project mananger",
+  "exploitation-plan.step_type_3.info.text.funder-project": "Hier Info für funder project mananger",
+
+  // "exploitation-plan.step_type_3.info.text.funder-manager": "Help funder organisational manager",
+  "exploitation-plan.step_type_3.info.text.funder-manager": "Hier Info für funder organisational manager",
+
+  // "exploitation-plan.step_type_3.info.text.funder-reader": "Help funder reader",
+  "exploitation-plan.step_type_3.info.text.funder-reader": "Hier Info für funder reader",
+
+  // "exploitation-plan.step_type_4.info.text.funder-project": "Help funder project mananger",
+  "exploitation-plan.step_type_4.info.text.funder-project": "Hier Info für funder project mananger",
+
+  // "exploitation-plan.step_type_4.info.text.funder-manager": "Help funder organisational manager",
+  "exploitation-plan.step_type_4.info.text.funder-manager": "Hier Info für funder organisational manager",
+
+  // "exploitation-plan.step_type_4.info.text.funder-reader": "Help funder reader",
+  "exploitation-plan.step_type_4.info.text.funder-reader": "Hier Info für funder reader",
+
+  // "search.filters.applied.charts.graph-synsicris_internalid_call.tab": "profi-ID Call",
+  "search.filters.applied.charts.graph-synsicris_internalid_call.tab": "profi-ID Förderbereich",
+
+  // "search.filters.applied.charts.graphethicstype.tab": "Type",
+  "search.filters.applied.charts.graphethicstype.tab": "Art",
+
+  // "search.filters.applied.charts.graph-dc_audience.tab": "Audience",
+  "search.filters.applied.charts.graph-dc_audience.tab": "Zielgruppe",
+
+  // "search.filters.applied.charts.graph-dc_language_iso.tab": "Language",
+  "search.filters.applied.charts.graph-dc_language_iso.tab": "Sprache",
+
+  // "search.filters.applied.charts.graph-synsicris_type_patentuse.tab": "Patent use",
+  "search.filters.applied.charts.graph-synsicris_type_patentuse.tab": "Art der Nutzung Patent/Gebrauchsmuster",
+
+  // "search.filters.applied.charts.graph-synsicris_relation_call.tab": "Call/funding area",
+  "search.filters.applied.charts.graph-synsicris_relation_call.tab": "Förderbereich/Bekanntmachung",
+
+  // "search.filters.applied.charts.graph-synsicris_type_project.tab": "Type project",
+  "search.filters.applied.charts.graph-synsicris_type_project.tab": "Art des Vorhabens",
+
+  // "search.filters.applied.charts.graph-synsicris_duration.tab": "Duration",
+  "search.filters.applied.charts.graph-synsicris_duration.tab": "Dauer",
+
+  // "search.filters.applied.charts.graph-oairecerif_project_status.tab": "Project Status",
+  "search.filters.applied.charts.graph-oairecerif_project_status.tab": "Status",
+
+  // "search.filters.applied.charts.graph-oairecerif_project_startDate.tab": "Start date",
+  "search.filters.applied.charts.graph-oairecerif_project_startDate.tab": "Startdatum",
+
+  // "search.filters.applied.charts.graph-oairecerif_project_endDate.tab": "End date",
+  "search.filters.applied.charts.graph-oairecerif_project_endDate.tab": "Enddatum",
+
+  // "search.filters.applied.charts.graph-synsicris_subject_textLP.tab": "LP text",
+  "search.filters.applied.charts.graph-synsicris_subject_textLP.tab": "Leistungsplansystematik",
+
+  // "search.filters.applied.charts.graph-synsicris_subject_sort.tab": "Keywords all Sorter",
+  "search.filters.applied.charts.graph-synsicris_subject_sort.tab": "Schlagworte alle Sorter",
+
+  // "search.filters.applied.charts.graph-synsicris_subject_sortprimary.tab": "Keyword Primary-Sorter",
+  "search.filters.applied.charts.graph-synsicris_subject_sortprimary.tab": "Schlagwort Primärsorter",
+
+  // "search.filters.applied.charts.graph-synsicris_subject_prog.tab": "Programme classification",
+  "search.filters.applied.charts.graph-synsicris_subject_prog.tab": "Programmklassifikation",
+
+  // "search.filters.applied.charts.graph-synsicris_subject_researchfocus.tab": "Researchfocus",
+  "search.filters.applied.charts.graph-synsicris_subject_researchfocus.tab": "Forschungsschwerpunkt",
+
+  // "search.filters.applied.charts.graph-synsicris_type_research.tab": "Type of Research",
+  "search.filters.applied.charts.graph-synsicris_type_research.tab": "Art der Forschung",
+
+  // "search.filters.applied.charts.graph-synsicris_type_development.tab": "Relevance for development cooperation",
+  "search.filters.applied.charts.graph-synsicris_type_development.tab": "Relevanz für Entwicklungszusammenarbeit (ODA-Relevanz)",
+
+  // "search.filters.applied.charts.graph-synsicris_subject_countries.tab": "Relevant countries for development cooperation",
+  "search.filters.applied.charts.graph-synsicris_subject_countries.tab": "Relevante Länder Entwicklungszusammenarbeit",
+
+  // "search.filters.applied.charts.graph-synsicris_subject_nace.tab": "Economic sector",
+  "search.filters.applied.charts.graph-synsicris_subject_nace.tab": "Wirtschaftszweig",
+
+  // "search.filters.applied.charts.graph-synsicris_type_finance.tab": "Basis of the information about the expected impact",
+  "search.filters.applied.charts.graph-synsicris_type_finance.tab": "Fachliche Grundlage der Information zum erwarteten gesellschaftlichen Impact",
+
+  // "search.filters.applied.charts.graph-synsicris_type_jointproject.tab": "Type of Consortium",
+  "search.filters.applied.charts.graph-synsicris_type_jointproject.tab": "Art des Verbundes",
+
+  // "search.filters.applied.charts.graph-synsicris_type_application.tab": "Type of Application",
+  "search.filters.applied.charts.graph-synsicris_type_application.tab": "Art des Antrags",
+
+  // "search.filters.applied.charts.graph-synsicris_acronym_fundingParent.tab": "Acronym funding programme",
+  "search.filters.applied.charts.graph-synsicris_acronym_fundingParent.tab": "Akronym Fördermaßnahme / Förderprogramm",
+
+  // "search.filters.applied.charts.graph-synsicris_acronym_call.tab": "Acronym Call",
+  "search.filters.applied.charts.graph-synsicris_acronym_call.tab": "Akronym Förderbereich",
+
+  // "search.filters.applied.charts.graph-oairecerif_funding_identifier.tab": "funding identifier of the project",
+  "search.filters.applied.charts.graph-oairecerif_funding_identifier.tab": "Förderkennzeichen des Vorhabens",
+
+  // "search.filters.applied.charts.graph-oairecerif_amount.tab": "Grant total",
+  "search.filters.applied.charts.graph-oairecerif_amount.tab": "Zuwendung gesamt",
+
+  // "search.filters.applied.charts.graph-synsicris_subject_political.tab": "Policy level of the organisation",
+  "search.filters.applied.charts.graph-synsicris_subject_political.tab": "Politikebene(n) der Organisationseinheit",
+
+  // "search.filters.applied.charts.graph-synsicris_address_countryclassification.tab": "profi - national category",
+  "search.filters.applied.charts.graph-synsicris_address_countryclassification.tab": "profi - Landeskennung",
+
+  // "search.filters.applied.charts.graph-synsicris_identifier_municipality.tab": "Municipality identifier",
+  "search.filters.applied.charts.graph-synsicris_identifier_municipality.tab": "Gemeindekennung",
+
+  // "search.filters.applied.charts.graph-organization_address_addressCountry.tab": "Country / Federal State",
+  "search.filters.applied.charts.graph-organization_address_addressCountry.tab": "Land / Bundesland",
+
+  // "search.filters.applied.charts.graph-synsicris_personleader_gender.tab": "Gender",
+  "search.filters.applied.charts.graph-synsicris_personleader_gender.tab": "Geschlecht (Koordination/Administration)",
+
+  // "search.filters.applied.charts.graph-synsicris_personadmin_gender.tab": "Gender",
+  "search.filters.applied.charts.graph-synsicris_personadmin_gender.tab": "Geschlecht (Leitung des Verbundes)",
+
+  // "search.filters.applied.charts.graph-organisation_foundingDate.tab": "Established",
+  "search.filters.applied.charts.graph-organisation_foundingDate.tab": "Gründungsjahr",
+
+  // "search.filters.applied.charts.graphgendertype.tab": "What is this?",
+  "search.filters.applied.charts.graphgendertype.tab": "Was ist das? (gendertype)",
+
+  // "search.filters.applied.charts.graph-synsicris_coverage_regionalprimary.tab": "Primary field of application",
+  "search.filters.applied.charts.graph-synsicris_coverage_regionalprimary.tab": "Primärer Einsatzbereich",
+
+  // "search.filters.applied.charts.graph-synsicris_coverage_regionalsecondary.tab": "Later dissemination",
+  "search.filters.applied.charts.graph-synsicris_coverage_regionalsecondary.tab": "Spätere Verbreitung",
+
+  // "search.filters.applied.charts.graph-synsicris_type_level.tab": "Type of Readinesslevel",
+  "search.filters.applied.charts.graph-synsicris_type_level.tab": "Art des Readiness-Level",
+
+  // "search.filters.applied.charts.graph-synsicris_level_start.tab": "Readinesslevel at start",
+  "search.filters.applied.charts.graph-synsicris_level_start.tab": "Readiness-Level am Start",
+
+  // "search.filters.applied.charts.graph-synsicris_level_end.tab": "Readinesslevel intended to reach at the end",
+  "search.filters.applied.charts.graph-synsicris_level_end.tab": "Readiness-Level am Ende",
+
+  // "search.filters.applied.charts.graph-synsicris_date_referenceyear.tab": "Reference year",
+  "search.filters.applied.charts.graph-synsicris_date_referenceyear.tab": "Referenzjahr",
+
+  // "search.filters.applied.charts.graph-synsicris_coverage_regional.tab": "Regional localisation / outreach",
+  "search.filters.applied.charts.graph-synsicris_coverage_regional.tab": "Region der Anwendung",
+
+  // "search.filters.applied.charts.graph-synsicris_type_contribution.tab": "Nature of the project's participation in the event",
+  "search.filters.applied.charts.graph-synsicris_type_contribution.tab": "Art der Beteiligung an einer Veranstaltung",
+
+  // "search.filters.applied.charts.graph-synsicris_participantnumber.tab": "Number of participants",
+  "search.filters.applied.charts.graph-synsicris_participantnumber.tab": "Anzahl Teilnehmende an einer Veranstaltung",
+
+  // "search.filters.applied.charts.graph-oairecerif_event_country.tab": "Country",
+  "search.filters.applied.charts.graph-oairecerif_event_country.tab": "Land",
+
+  // "search.filters.applied.charts.graph-synsicris_relation_fundingobjective.tab": "Funding policy objective",
+  "search.filters.applied.charts.graph-synsicris_relation_fundingobjective.tab": "Förderziel",
+
+  // "search.filters.applied.charts.graph-synsicris_type_functions.tab": "Usage options (multiple selection possible)",
+  "search.filters.applied.charts.graph-synsicris_type_functions.tab": "Verwendungsmöglichkeiten",
+
+  // "search.filters.applied.charts.graph-synsicris_type_researchquestion.tab": "Gender aspects in the research question",
+  "search.filters.applied.charts.graph-synsicris_type_researchquestion.tab": "Geschlechterbezug in der Problemstellung",
+
+  // "search.filters.applied.charts.graphgenderstateofart.tab": "missing",
+  "search.filters.applied.charts.graphgenderstateofart.tab": "hier muss ein Fehler vorliegen? (genderstateofart)",
+
+  // "search.filters.applied.charts.graphgenderprojectdesign.tab": "missing",
+  "search.filters.applied.charts.graphgenderprojectdesign.tab": "hier muss ein Fehler vorliegen? (genderprojectdesign)",
+
+  // "search.filters.applied.charts.graphgenderapplication.tab": "missing",
+  "search.filters.applied.charts.graphgenderapplication.tab": "hier muss ein Fehler vorliegen? (genderapplication)",
+
+  // "search.filters.applied.charts.graphgendertypeproject.tab": "missing",
+  "search.filters.applied.charts.graphgendertypeproject.tab": "hier muss ein Fehler vorliegen? (gendertypeproject)",
+
+  // "search.filters.applied.charts.graphgenderBalance.tab": "missing",
+  "search.filters.applied.charts.graphgenderBalance.tab": "Geschlechterverhältnis",
+
+  // "search.filters.applied.charts.graph-dc_subject.tab": "Kexwords",
+  "search.filters.applied.charts.graph-dc_subject.tab": "Schlagworte (Agrovoc)",
+
+  // "search.filters.applied.charts.graph-synsicris_type_sdg.tab": "Related SDG",
+  "search.filters.applied.charts.graph-synsicris_type_sdg.tab": "Zugehöriges Ziel für nachhaltige Entwicklung (SDG)",
+
+  // "search.filters.applied.charts.graph-synsicris_relation_programme.tab": "Related Prohramme",
+  "search.filters.applied.charts.graph-synsicris_relation_programme.tab": "Zugehörige Fördermaßnahme / Programm",
+
+  // "search.filters.applied.charts.graph-synsicris_type_status.tab": "Status",
+  "search.filters.applied.charts.graph-synsicris_type_status.tab": "Status",
+
+  // "explore.index.dcAudience": "Audience",
+  "explore.index.dcAudience": "Zielgruppe",
+
+  // "search.filters.filter.synsicrisDateReferenceyear.head": "Reference Year",
+  "search.filters.filter.synsicrisDateReferenceyear.head": "Referenzjahr",
+
+  // "search.filters.filter.synsicrisDateReferenceyear.placeholder": "Reference Year",
+  "search.filters.filter.synsicrisDateReferenceyear.placeholder": "Referenzjahr",
+
+  // "search.filters.filter.synsicrisDateReferenceyear.label": "Search Reference Year",
+  "search.filters.filter.synsicrisDateReferenceyear.label": "Suche Referenzjahr",
+
+  // "interim-report.info.text.funder-project": "Help funder project mananger",
+  "interim-report.info.text.funder-project": "Hier Info für funder project mananger",
+
+  // "interim-report.info.text.funder-manager": "Help funder organisational manager",
+  "interim-report.info.text.funder-manager": "Hier Info für funder organisational mananger",
+
+  // "interim-report.info.text.funder-reader": "Help funder reader",
+  "interim-report.info.text.funder-reader": "Hier Info für funder reader",
+
+  // "interim-report.step_type_1.info.text.funder-project": "Help funder project mananger",
+  "interim-report.step_type_1.info.text.funder-project": "Hier Info für funder project mananger",
+
+  // "interim-report.step_type_1.info.text.funder-manager": "Help funder organisational manager",
+  "interim-report.step_type_1.info.text.funder-manager": "Hier Info für funder organisational mananger",
+
+  // "interim-report.step_type_1.info.text.funder-reader": "Help funder reader",
+  "interim-report.step_type_1.info.text.funder-reader": "Hier Info für funder reader",
+
+  // "interim-report.step_type_2.info.text.funder-project": "Help funder project mananger",
+  "interim-report.step_type_2.info.text.funder-project": "Hier Info für funder project mananger",
+
+  // "interim-report.step_type_2.info.text.funder-manager": "Help funder organisational manager",
+  "interim-report.step_type_2.info.text.funder-manager": "Hier Info für funder organisational mananger",
+
+  // "interim-report.step_type_2.info.text.funder-reader": "Help funder reader",
+  "interim-report.step_type_2.info.text.funder-reader": "Hier Info für funder reader",
+
+  // "interim-report.step_type_3.info.text.funder-project": "Help funder project mananger",
+  "interim-report.step_type_3.info.text.funder-project": "Hier Info für funder project mananger",
+
+  // "interim-report.step_type_3.info.text.funder-manager": "Help funder organisational manager",
+  "interim-report.step_type_3.info.text.funder-manager": "Hier Info für funder organisational mananger",
+
+  // "interim-report.step_type_3.info.text.funder-reader": "Help funder reader",
+  "interim-report.step_type_3.info.text.funder-reader": "Hier Info für funder reader",
+
+  // "interim-report.step_type_4.info.text.funder-project": "Help funder project mananger",
+  "interim-report.step_type_4.info.text.funder-project": "Hier Info für funder project mananger",
+
+  // "interim-report.step_type_4.info.text.funder-manager": "Help funder organisational manager",
+  "interim-report.step_type_4.info.text.funder-manager": "Hier Info für funder organisational mananger",
+
+  // "interim-report.step_type_4.info.text.funder-reader": "Help funder reader",
+  "interim-report.step_type_4.info.text.funder-reader": "Hier Info für funder reader",
+
+  // "interim-report.step_type_5.info.text.funder-project": "Help funder project mananger",
+  "interim-report.step_type_5.info.text.funder-project": "Hier Info für funder project mananger",
+
+  // "interim-report.step_type_5.info.text.funder-manager": "Help funder organisational manager",
+  "interim-report.step_type_5.info.text.funder-manager": "Hier Info für funder organisational mananger",
+
+  // "interim-report.step_type_5.info.text.funder-reader": "Help funder reader",
+  "interim-report.step_type_5.info.text.funder-reader": "Hier Info für funder reader",
+
+  // "search.filters.filter.synsicrisTypeFunctions.placeholder": "Possible uses",
+  "search.filters.filter.synsicrisTypeFunctions.placeholder": "Verwendungsmöglichkeiten",
+
+  // "search.filters.filter.synsicrisTypeAccess.head": "Access Type",
+  "search.filters.filter.synsicrisTypeAccess.head": "Zugänglichkeit",
+
+  // "search.filters.filter.synsicrisTypeAccess.placeholder": "Access Type",
+  "search.filters.filter.synsicrisTypeAccess.placeholder": "Zugänglichkeit",
+
+  // "search.filters.filter.synsicrisTypeAccess.label": "Search Access Type",
+  "search.filters.filter.synsicrisTypeAccess.label": "Suche Zugänglichkeit",
+
+  // "search.filters.filter.synsicrisTypeStatus.label": "Search Status",
+  "search.filters.filter.synsicrisTypeStatus.label": "Suche Status",
+
+  // "search.filters.filter.synsicrisDateFilled.head": "Year of filling",
+  "search.filters.filter.synsicrisDateFilled.head": "Jahr der Anmeldung",
+
+  // "search.filters.filter.synsicrisDateFilled.placeholder": "Year of filling",
+  "search.filters.filter.synsicrisDateFilled.placeholder": "Jahr der Anmeldung",
+
+  // "search.filters.filter.synsicrisDateFilled.label": "Search Year of filling",
+  "search.filters.filter.synsicrisDateFilled.label": "Suche Jahr der Anmeldung",
+
+  // "submission.import-external.help-message": "Help Import",
+  "submission.import-external.help-message": "Hilfe Import"
 
 }
