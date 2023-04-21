@@ -11018,5 +11018,9 @@
 
   "search.filters.filter.synsicrisLevelStart.placeholder": "Level Start",
 
-  "search.filters.filter.synsicrisLevelEnd.placeholder": "Level End"
+  "search.filters.filter.synsicrisLevelEnd.placeholder": "Level End",
+
+  "graph-page.warining.no-chart-type": "Check filter name, this chart type does not exist.",
+
+  "graph-page.chart-no-data": "No data found",
 }
