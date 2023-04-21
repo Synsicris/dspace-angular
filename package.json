@@ -97,7 +97,7 @@
     "@nguniversal/express-engine": "^13.0.2",
     "@ngx-translate/core": "^13.0.0",
     "@nicky-lenaers/ngx-scroll-to": "^9.0.0",
-    "@swimlane/ngx-charts": "^16.0.0",
+    "@swimlane/ngx-charts": "^20.1.2",
     "@types/grecaptcha": "^3.0.4",
     "angular-idle-preload": "3.0.0",
     "angular-resizable-element": "^3.3.4",
