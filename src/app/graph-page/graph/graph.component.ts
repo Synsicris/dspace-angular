@@ -1,7 +1,10 @@
+import { ChartData } from './../../charts/models/chart-data';
+import { PaginationComponentOptions } from './../../shared/pagination/pagination-component-options.model';
+import { SearchFilter } from './../../shared/search/models/search-filter.model';
 import { PaginatedSearchOptions } from './../../shared/search/models/paginated-search-options.model';
 import { AlertType } from './../../shared/alert/aletr-type';
 import { ChartType } from './../../charts/models/chart-type';
-import { mergeMap, tap } from 'rxjs/operators';
+import { mergeMap, switchMap, tap } from 'rxjs/operators';
 import { FacetValues } from './../../shared/search/models/facet-values.model';
 import { ChartSeries } from './../../charts/models/chart-series';
 import { RemoteData } from './../../core/data/remote-data';
@@ -19,7 +22,7 @@ import {
   HostListener,
   ChangeDetectorRef,
 } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { hasValue, isNotNull } from '../../shared/empty.util';
 import { FacetValue } from '../../shared/search/models/facet-value.model';
 
@@ -57,7 +60,7 @@ export class GraphComponent implements OnInit {
    * The chart data
    * @type {Observable<ChartSeries[]>}
    */
-  public results$: Observable<ChartSeries[]>;
+  public results$: Observable<ChartSeries[] | ChartData[]>;
 
   /**
    * The graph container element reference
@@ -79,7 +82,7 @@ export class GraphComponent implements OnInit {
    * The query filter to get facet values for the search configuration
    * @type {string}
    */
-  private queryFilterParams: string;
+  private queryFilterParams: SearchFilter[];
 
   /**
    * The notification error i18n key
@@ -102,6 +105,17 @@ export class GraphComponent implements OnInit {
    * used to provide chart responsiveness
    */
   public renderingControl = true;
+
+  public filterType: string;
+
+  public isLastPage$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+
+  getAllElementsGraphTypes = [
+    'chart.bar.right-to-left',
+    'chart.bar.left-to-right',
+  ];
+
+  public pageNr = 1;
 
   constructor(
     private aroute: ActivatedRoute,
@@ -141,6 +155,13 @@ export class GraphComponent implements OnInit {
    * to pass to the chart component
    */
   ngOnInit(): void {
+    this.calculateResults();
+  }
+
+  /**
+   * Get the chart data from the facet values,
+   */
+  private calculateResults() {
     const facetValues$: Observable<FacetValue[]> = this.getFilterConfig(
       this.filterName
     ).pipe(
@@ -158,20 +179,46 @@ export class GraphComponent implements OnInit {
 
   /**
    * Get facet values for the search configuration,
-   * setting the configuration, scope and query filter params
+   * setting the configuration, scope and query filter params.
+   * If the filter type is one of the getAllElementsGraphTypes,
+   * the pageSize is set to the total number of elements.
+   * @param filterConfig The search filter configuration
    */
   getFacetValues(filterConfig: SearchFilterConfig): Observable<FacetValue[]> {
     const searchOptions = new PaginatedSearchOptions({
       configuration: this.configuration,
       scope: this.scope,
-      query: this.queryFilterParams,
+      filters: this.queryFilterParams,
+      pagination: Object.assign(new PaginationComponentOptions(), {
+        currentPage: this.pageNr,
+      }),
     });
+
     return this.searchService
-      .getFacetValuesFor(filterConfig, 1, searchOptions)
+      .getFacetValuesFor(filterConfig, this.pageNr, searchOptions)
       .pipe(
         getFirstCompletedRemoteData(),
+        switchMap((rd: RemoteData<FacetValues>) => {
+          if (
+            this.getAllElementsGraphTypes.includes(this.filterType) &&
+            hasValue(rd.payload && +rd.payload.more > 0)
+          ) {
+            filterConfig.pageSize = rd.payload.pageInfo.elementsPerPage + +rd.payload.more ?? filterConfig.pageSize;
+            return this.searchService
+              .getFacetValuesFor(filterConfig, this.pageNr, searchOptions)
+              .pipe(
+                tap(() => {
+                  this.chd.detectChanges();
+                })
+              );
+          } else {
+            return of(rd);
+          }
+        }),
         map((rd: RemoteData<FacetValues>) => {
-          return rd.payload.page;
+          if (rd.payload) {
+            return rd.payload.page;
+          }
         })
       );
   }
@@ -181,58 +228,69 @@ export class GraphComponent implements OnInit {
    */
   private getFilterConfig(filterName: string): Observable<SearchFilterConfig> {
     return isNull(filterName)
-    ? of(null)
-    : this.searchConfigService.getConfig(this.scope, this.configuration).pipe(
-        getFirstCompletedRemoteData(),
-        map((config: RemoteData<SearchFilterConfig[]>) =>
-         config.hasSucceeded && hasValue(config.payload)
-            ? config.payload.find((f) => isEqual(f.name, filterName))
-            : null),
-        tap((filter) => {
-          if (isNotNull(filter)) {
-            this.chartType = this.chartTypeFromFilterType(filter.filterType);
-          }
-        })
-      );
+      ? of(null)
+      : this.searchConfigService.getConfig(this.scope, this.configuration).pipe(
+          getFirstCompletedRemoteData(),
+          map((config: RemoteData<SearchFilterConfig[]>) =>
+            config.hasSucceeded && hasValue(config.payload)
+              ? config.payload.find((f) => isEqual(f.name, filterName))
+              : null
+          ),
+          tap((filter) => {
+            if (isNotNull(filter)) {
+              this.filterType = filter.filterType;
+              this.chartType = this.getChartType(filter.filterType);
+            }
+          })
+        );
   }
 
   /**
    * Get the chart data from the facet values
+   * If the filter type is a chart.line, the chart data is returned as a ChartData array,
+   * otherwise the chart data is returned as a ChartSeries array.
+   * @param facetValues The facet values
+   * @returns The chart data
    */
-  getChartValues(facetValues: FacetValue[]): ChartSeries[] {
-    return facetValues.map(({ value, count, ...extra }) => ({
-      name: value,
-      value: count,
-      extra,
-    }));
-  }
-
-  /**
-   * Get the chart type from the filter type.
-   * If the filter type doesn't start with 'chart.', the chart type is null
-   * and the notification alert is shown
-   */
-  private chartTypeFromFilterType(filterType: string): ChartType {
-    const isChartType = filterType.startsWith('chart.');
-    this.showNotificationAlert = !isChartType;
-    if (isChartType) {
-      const type = filterType.split('.').pop()?.toUpperCase();
-      return type ? ChartType[type] : null;
+  getChartValues(facetValues: FacetValue[]): ChartSeries[] | ChartData[] {
+    if (facetValues?.length > 0) {
+      if (this.filterType.includes('reverse')) {
+        facetValues.map(({ value, count, ...extra }) => ({
+          name: count.toString(),
+          value: Number(value),
+          extra,
+        }));
+      } else if (this.filterType !== 'chart.line') {
+        return facetValues.map(({ value, count, ...extra }) => ({
+          name: value,
+          value: count,
+          extra,
+        }));
+      } else {
+        return [
+          {
+            name: this.filterName,
+            series: facetValues.map(({ value, count, ...extra }) => ({
+              name: value,
+              value: count,
+              extra,
+            })),
+          },
+        ];
+      }
     }
-    return null;
   }
 
   /**
    * Method to create the query filter params string
    */
-  private filterQueryParams(queryParams: Params): string {
+  private filterQueryParams(queryParams: Params): SearchFilter[] {
     const params = Object.entries(queryParams)
       .filter(
         ([key, value]) =>
           hasValue(value) && !this.defaultQueryParams.includes(key)
       )
-      .map(([key, value]) => `${key}=${value}`)
-      .join('&');
+      .map(([key, value]) => new SearchFilter(key, [value]));
 
     return params;
   }
@@ -249,5 +307,44 @@ export class GraphComponent implements OnInit {
       this.renderingControl = true;
       this.chd.detectChanges();
     });
+  }
+
+  /**
+   * Get the chart type from the filter type.
+   * If the filter type doesn't start with 'chart.'
+   * a warning notification alert is shown
+   */
+  getChartType(filterType): ChartType {
+    const isChartType = filterType.startsWith('chart.');
+    this.showNotificationAlert = !isChartType;
+
+    switch (filterType) {
+      case 'chart.bar':
+        return ChartType.BAR;
+      case 'chart.pie':
+        return ChartType.PIE;
+      case 'chart.line':
+        return ChartType.LINE;
+      case 'chart.bar.horizontal':
+        return ChartType.BAR_HORIZONTAL;
+      case 'chart.bar.right-to-left':
+        return ChartType.BAR;
+      case 'chart.bar.left-to-right':
+        return ChartType.BAR;
+      case 'chart.reverse-bar.horizontal':
+        return ChartType.BAR_HORIZONTAL;
+      case 'chart.reverse-bar':
+        return ChartType.BAR;
+      default:
+        return null;
+    }
+  }
+
+  enableScrollToLeft(filterType) {
+    return isEqual(filterType, 'chart.bar.right-to-left');
+  }
+
+  enableScrollToRight(filterType) {
+    return isEqual(filterType, 'chart.bar.left-to-right');
   }
 }

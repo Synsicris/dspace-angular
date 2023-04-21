@@ -6,17 +6,12 @@
     </ds-comcol-page-header>
     <div class="d-flex space-children-mr">
       <ds-item-version-list [btnClass]="'btn-md'"
-                            [showOnlyVisible]="isFunder"
+                            [showOnlyVisible]="hasAnyFunderRole"
                             [targetItemId]="impactPathwayStep.id"
                             [targetItem]="impactPathwayStepItem"
                             (versionSelected)="onVersionSelected($event)"
                             (versionDeselected)="onVersionDeselected()">
       </ds-item-version-list>
-      <button class='btn btn-primary'
-              title="{{'impact-pathway.objectives.back-btn' | translate}}"
-              (click)="back()">
-        {{'impact-pathway.objectives.back-btn' | translate}}
-      </button>
     </div>
   </div>
   <ds-alert-role *ngIf="hasInfoMessage()" class="bg-light"
@@ -31,7 +26,7 @@
                   [impactPathwayStep]="impactPathwayStep"
                   [impactPathwayTask]="task"
                   [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"
-                  [isFunder]="isFunder"
+                  [isFunderProject]="isFunderProject"
                   [targetImpactPathwayTaskId]="targetImpactPathwayTaskId"></ds-objective>
   </ng-container>
 

@@ -11,7 +11,7 @@
     [collapsed]="true"
     [alertRoles]="funderRoles"
   ></ds-alert-role>
-  <ng-container *ngIf="isVersionOf && isFunder">
+  <ng-container *ngIf="isVersionOf && isFunderProject">
     <ds-working-plan-comments
       [projectCommunityId]="projectCommunityId"
       [showAccordionPanelToggle]="showAccordionPanelToggle"
@@ -20,7 +20,7 @@
   </ng-container>
 
   <ds-working-plan-chart-toolbar [compareMode]="compareMode"
-                                 [isFunder]="isFunder"
+                                 [hasAnyFunderRole]="hasAnyFunderRole"
                                  [isVersionOf]="isVersionOf"
                                  [projectCommunityId]="projectCommunityId"
                                   [workpackages]="workpackages"
