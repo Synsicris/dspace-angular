@@ -9,7 +9,7 @@
     <button *ngIf="(tokenAlreadyExists | async)" class="btn btn-danger float-right" data-test="revokeBtn" (click)="revokeToken()">
       <i class="fas fa-trash-alt"></i> {{'profile.card.access-token.delete' | translate}}
     </button>
-    <button class="btn btn-primary float-right mr-2" (click)="generateToken()" data-test="createBtn">
+    <button class="btn btn-primary float-right mr-2 mb-3" (click)="generateToken()" data-test="createBtn">
       <i class="fas fa-key"></i> {{'profile.card.access-token.create' | translate}}
     </button>
   </div>
@@ -22,7 +22,7 @@
     <div class="input-group-prepend">
       <span class="input-group-text"><i class="fas fa-check text-success"></i></span>
     </div>
-    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" value="{{generatedToken | async}}" readonly data-test="tokenInput">
+    <input type="text" class="form-control" value="{{generatedToken | async}}" readonly data-test="tokenInput">
     <div class="input-group-append">
       <button class="input-group-text btn btn-link btn-sm" (click)="copyTokenToClipboard()" title="{{'profile.card.access-token.copy' | translate}}">
         <i class="far fa-copy"></i>

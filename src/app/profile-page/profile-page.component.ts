@@ -18,7 +18,6 @@ import { AuthorizationDataService } from '../core/data/feature-authorization/aut
 import { FeatureID } from '../core/data/feature-authorization/feature-id';
 import { ConfigurationDataService } from '../core/data/configuration-data.service';
 import { ConfigurationProperty } from '../core/shared/configuration-property.model';
-import { AuthStatus } from '../core/auth/models/auth-status.model';
 
 @Component({
   selector: 'ds-profile-page',
@@ -91,6 +90,8 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
   isResearcherProfileEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  isAdmin$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(private authService: AuthService,
               private notificationsService: NotificationsService,
               private translate: TranslateService,
@@ -107,6 +108,11 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
       getRemoteDataPayload(),
       tap((user: EPerson) => this.currentUser = user)
     );
+
+    this.authorizationService.isAuthorized(FeatureID.AdministratorOf).subscribe((isAdmin: boolean) => {
+      this.isAdmin$.next(isAdmin);
+    });
+
     if (this.showGroups) {
       this.groupsRD$ = this.user$.pipe(switchMap((user: EPerson) => user.groups));
       this.canChangePassword$ = this.user$.pipe(switchMap((user: EPerson) => this.authorizationService.isAuthorized(FeatureID.CanChangePassword, user._links.self.href)));
