@@ -20,7 +20,7 @@ import { AlertType } from '../alert/aletr-type';
   templateUrl: '../theme-support/themed.component.html',
 })
 export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
-  protected inAndOutputNames: (keyof SearchComponent & keyof this)[] = ['configurationList', 'notFoundMessageKey', 'context', 'configuration', 'fixedFilterQuery', 'forcedEmbeddedKeys', 'useCachedVersionIfAvailable', 'collapseCharts', 'collapseFilters', 'inPlaceSearch', 'linkType', 'paginationId', 'projection', 'searchEnabled', 'sideBarWidth', 'searchFormPlaceholder', 'selectable', 'selectionConfig', 'showCharts', 'showCsvExport', 'showExport', 'showSidebar', 'showViewModes', 'useUniquePageId', 'viewModeList', 'showScopeSelector', 'showFilterToggle', 'showChartsToggle', 'resultFound', 'deselectObject', 'selectObject', 'customEvent', 'trackStatistics', 'searchResultNotice', 'searchResultNoticeType', 'showSearchResultNotice'];
+  protected inAndOutputNames: (keyof SearchComponent & keyof this)[] = ['configurationList', 'notFoundMessageKey', 'context', 'configuration', 'fixedFilterQuery', 'forcedEmbeddedKeys', 'useCachedVersionIfAvailable', 'collapseCharts', 'collapseFilters', 'inPlaceSearch', 'linkType', 'paginationId', 'projection', 'searchEnabled', 'sideBarWidth', 'searchFormPlaceholder', 'selectable', 'selectionConfig', 'showCharts', 'showCsvExport', 'showExport', 'showSidebar', 'showViewModes', 'useUniquePageId', 'viewModeList', 'showScopeSelector', 'showFilterToggle', 'showChartsToggle', 'resultFound', 'deselectObject', 'selectObject', 'customEvent', 'trackStatistics', 'useLabelsForExport', 'searchResultNotice', 'searchResultNoticeType', 'showSearchResultNotice'];
 
   @Input() configurationList: SearchConfigurationOption[] = [];
 
@@ -88,6 +88,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
   @Input() showSearchResultNotice = false;
 
   @Input() trackStatistics = false;
+
+  @Input() useLabelsForExport = false;
 
   @Output() resultFound: EventEmitter<SearchObjects<DSpaceObject>> = new EventEmitter<SearchObjects<DSpaceObject>>();
 
