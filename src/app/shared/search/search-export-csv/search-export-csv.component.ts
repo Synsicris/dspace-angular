@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { combineLatest as observableCombineLatest, Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, combineLatest as observableCombineLatest, Observable } from 'rxjs';
 import { ScriptDataService } from '../../../core/data/processes/script-data.service';
 import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { map } from 'rxjs/operators';
@@ -26,6 +26,11 @@ export class SearchExportCsvComponent implements OnInit {
    * The current configuration of the search
    */
   @Input() searchConfig: PaginatedSearchOptions;
+
+  /**
+   * Whether to export with labels instead of metadata name or not
+   */
+  @Input() useLabelsForExport = false;
 
   /**
    * Observable used to determine whether the button should be shown
@@ -78,6 +83,9 @@ export class SearchExportCsvComponent implements OnInit {
       }
       if (isNotEmpty(this.searchConfig.configuration)) {
         parameters.push({name: '-c', value: this.searchConfig.configuration});
+      }
+      if (this.useLabelsForExport) {
+        parameters.push({name: '-l', value: 'true'});
       }
       if (isNotEmpty(this.searchConfig.filters)) {
         this.searchConfig.filters.forEach((filter) => {

@@ -189,6 +189,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Input() showViewModes = true;
 
   /**
+   * Whether to export with labels instead of metadata name or not
+   */
+  @Input() useLabelsForExport = false;
+
+  /**
    * List of available view mode
    */
   @Input() useUniquePageId: false;
