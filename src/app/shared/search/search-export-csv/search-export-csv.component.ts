@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { combineLatest as observableCombineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest as observableCombineLatest, Observable } from 'rxjs';
 import { ScriptDataService } from '../../../core/data/processes/script-data.service';
 import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { map } from 'rxjs/operators';
@@ -8,10 +8,8 @@ import { AuthorizationDataService } from '../../../core/data/feature-authorizati
 import { hasValue, isNotEmpty } from '../../empty.util';
 import { RemoteData } from '../../../core/data/remote-data';
 import { Process } from '../../../process-page/processes/process.model';
-import { getProcessDetailRoute } from '../../../process-page/process-page-routing.paths';
 import { NotificationsService } from '../../notifications/notifications.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Router } from '@angular/router';
 import { PaginatedSearchOptions } from '../models/paginated-search-options.model';
 
 @Component({
@@ -30,6 +28,11 @@ export class SearchExportCsvComponent implements OnInit {
   @Input() searchConfig: PaginatedSearchOptions;
 
   /**
+   * Whether to export with labels instead of metadata name or not
+   */
+  @Input() useLabelsForExport = false;
+
+  /**
    * Observable used to determine whether the button should be shown
    */
   shouldShowButton$: Observable<boolean>;
@@ -39,11 +42,16 @@ export class SearchExportCsvComponent implements OnInit {
    */
   tooltipMsg = 'metadata-export-search.tooltip';
 
+  /**
+   * The flag to indicate whether the button is disabled
+   */
+  isDisabled$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
   constructor(private scriptDataService: ScriptDataService,
               private authorizationDataService: AuthorizationDataService,
               private notificationsService: NotificationsService,
               private translateService: TranslateService,
-              private router: Router
+              private translate: TranslateService,
   ) {
   }
 
@@ -64,6 +72,7 @@ export class SearchExportCsvComponent implements OnInit {
    * Start the export of the items based on the current search configuration
    */
   export() {
+    this.isDisabled$.next(true);
     const parameters = [];
     if (hasValue(this.searchConfig)) {
       if (isNotEmpty(this.searchConfig.query)) {
@@ -74,6 +83,9 @@ export class SearchExportCsvComponent implements OnInit {
       }
       if (isNotEmpty(this.searchConfig.configuration)) {
         parameters.push({name: '-c', value: this.searchConfig.configuration});
+      }
+      if (this.useLabelsForExport) {
+        parameters.push({name: '-l', value: 'true'});
       }
       if (isNotEmpty(this.searchConfig.filters)) {
         this.searchConfig.filters.forEach((filter) => {
@@ -100,11 +112,12 @@ export class SearchExportCsvComponent implements OnInit {
       getFirstCompletedRemoteData()
     ).subscribe((rd: RemoteData<Process>) => {
       if (rd.hasSucceeded) {
-        this.notificationsService.success(this.translateService.get('metadata-export-search.submit.success'));
-        this.router.navigateByUrl(getProcessDetailRoute(rd.payload.processId));
+        const title = this.translate.get('item-export.process.title');
+        this.notificationsService.process(rd.payload.processId, 5000, title);
       } else {
         this.notificationsService.error(this.translateService.get('metadata-export-search.submit.error'));
       }
+      this.isDisabled$.next(false);
     });
   }
 }

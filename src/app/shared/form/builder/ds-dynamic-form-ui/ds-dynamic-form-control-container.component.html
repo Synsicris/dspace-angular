@@ -31,7 +31,7 @@
       -->
   </label>
   <ng-container *ngTemplateOutlet="startTemplate?.templateRef; context: { $implicit: model };"></ng-container>
-  <!--    Should be *ngIf instead of class d-none, but that breaks the #componentViewContainer reference-->
+    <!-- Should be *ngIf instead of class d-none, but that breaks the #componentViewContainer reference-->
     <div [ngClass]="{'form-row': model.hasLanguages || isRelationship || model.hasSecurityToggle,
                      'd-none': value?.isVirtual && (model.hasSelectableMetadata || context?.index > 0)}">
     <div [ngClass]="getClass('grid', 'control')">
@@ -40,11 +40,14 @@
             <div *ngIf="(model.type !== 'GROUP') && !(model.repeatable) && (model.isModelOfInnerForm === false) && !asBootstrapFormGroup && (!showErrorMessages || errorMessages.length === 0)"
                  class="clearfix w-100 mb-4"></div>
       </div>
-            <!-- In case of repeatable fields show empty space for all elements except the first -->
-      <div *ngIf="(context?.index !== null && (!showErrorMessages || errorMessages.length === 0)) || (!hasHint && !showErrorMessages)"
+      <!-- In case of repeatable fields show empty space for all elements except the first -->
+      <!-- In case of not repeatable field with multiple values show empty space for all elements except the last -->
+      <div *ngIf="(context?.index !== null && (!showErrorMessages || errorMessages.length === 0)) || (!hasHint && !showErrorMessages) ||
+                  (!model.hideErrorMessages && showErrorMessages && !(!(model?.isModelOfNotRepeatableGroup) || model?.isModelOfNotRepeatableGroup && context?.index === context?.context?.groups?.length - 1))"
            class="clearfix w-100 mb-2"></div>
 
-      <div *ngIf="!model.hideErrorMessages && showErrorMessages" [id]="id + '_errors'"
+      <!-- In case of not repeatable field with multiple values show error message for the last element only -->
+      <div *ngIf="!model.hideErrorMessages && showErrorMessages && (!(model?.isModelOfNotRepeatableGroup) || model?.isModelOfNotRepeatableGroup && context?.index === context?.context?.groups?.length - 1)" [id]="id + '_errors'"
            [ngClass]="[getClass('element', 'errors'), getClass('grid', 'errors')]">
         <small *ngFor="let message of errorMessages" class="invalid-feedback d-block">{{ message | translate: model.validators }}</small>
             </div>

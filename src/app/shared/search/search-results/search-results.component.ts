@@ -69,6 +69,11 @@ export class SearchResultsComponent {
   @Input() sortConfig: SortOptions;
 
   /**
+   * Whether to export with labels instead of metadata name or not
+   */
+  @Input() useLabelsForExport = false;
+
+  /**
    * The current view-mode of the list
    */
   @Input() viewMode: ViewMode;
