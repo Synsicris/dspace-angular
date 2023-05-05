@@ -1,3 +1,6 @@
+/* ***********************************************
+Definition for Status-Icon for impact pathway card
+*********************************************** */
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { InternalItemStatus } from './../../core/submission/edititem-data.service';
 
@@ -33,6 +36,8 @@ export class IpwItemMetadataInternalDirective implements OnChanges {
         case InternalItemStatus.Edit:
         case InternalItemStatus.Exchange:
           iconClasses = ['fas', 'fa-info-circle', 'text-warning'];
+          // New Icon to be added, when Fontawesome is updated (rex 230425)
+          //iconClasses = ['fas', 'fa-comment-exclamation', 'text-warning']; 
           break;
       }
     }

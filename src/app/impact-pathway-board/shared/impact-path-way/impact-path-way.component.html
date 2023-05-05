@@ -1,8 +1,32 @@
-<div class="border-bottom mb-4 pb-2 d-flex justify-content-between align-items-center">
+<!-- -----------------------------------------------------------
+Definition of the entire page content of the impact pathway page 
+------------------------------------------------------------ -->
+
+<!-- Row with Name of Impact Pathway and buttons -->
+<!-- <div class="border-bottom mb-4 pb-2 d-flex justify-content-between align-items-center"> -->
+<div class="border-bottom mb-4 pb-2 d-flex">
+
+  <!-- title -->
   <ds-comcol-page-header [name]="impactPathway.title">
     <ds-view-version-badges *ngIf="impactPathWayItem && (isVersionOfAnItem$ | async)" [item]="impactPathWayItem"></ds-view-version-badges>
   </ds-comcol-page-header>
+
+  <!-- edit-headline-button -->
+  <button class="btn btn-link btn-sm ml-2 mr-auto align-self-start" title="{{'impact-pathway.edit.title' | translate}}"
+            [disabled]="(isProcessingRemove() | async) || (compareMode | async) || !(canEditButton$ | async) || (isVersionOfAnItem$| async)"
+            (click)="$event.preventDefault(); openEditModal(); $event.stopPropagation()">
+      <span *ngIf="!(isProcessingRemove() | async)">
+        <i class="fas fa-pen"></i> <!-- {{'impact-pathway.edit.title' | translate}} -->
+      </span>
+      <span *ngIf="(isProcessingRemove() | async)">
+        <i class="fas fa-circle-notch fa-spin"> {{'impact-pathway.remove.processing' | translate}}</i>
+      </span>
+    </button>
+
+  <!-- row with buttons on the right side -->
   <div class="d-flex space-children-mr">
+
+    <!-- dropdown-selector to compare versions -->
     <ds-item-version-list [btnClass]="'btn-md'"
                           [showOnlyVisible]="isFunder"
                           [targetItemId]="impactPathway.id"
@@ -10,16 +34,21 @@
                           (versionSelected)="onVersionSelected($event)"
                           (versionDeselected)="onVersionDeselected()">
     </ds-item-version-list>
-    <button *ngIf="(canDeleteImpactPathway$ | async)" class="btn btn-danger" title="{{'impact-pathway.remove.title' | translate}}"
+
+    <!-- Button "delete Impact Pathway" btn btn-primary btn-sm align-self-start  -->
+    <button *ngIf="(canDeleteImpactPathway$ | async)" class="btn btn-outline-danger align-self-start" title="{{'impact-pathway.remove.title' | translate}}"
             [disabled]="(isProcessingRemove() | async) || (compareMode | async) || (isVersionOfAnItem$| async)"
             (click)="$event.preventDefault(); confirmRemove(content); $event.stopPropagation()">
       <span *ngIf="!(isProcessingRemove() | async)">
-        <i class="far fa-trash-alt"></i> {{'impact-pathway.remove.title' | translate}}
+        <i class="fas fa-trash-alt"></i> {{'impact-pathway.remove.title' | translate}}
       </span>
       <span *ngIf="(isProcessingRemove() | async)">
         <i class="fas fa-circle-notch fa-spin"> {{'impact-pathway.remove.processing' | translate}}</i>
       </span>
     </button>
+
+    <!-- Button "edit title and description" -->
+    <!--
     <button class="btn btn-primary" title="{{'impact-pathway.edit.title' | translate}}"
             [disabled]="(isProcessingRemove() | async) || (compareMode | async) || !(canEditButton$ | async) || (isVersionOfAnItem$| async)"
             (click)="$event.preventDefault(); openEditModal(); $event.stopPropagation()">
@@ -30,21 +59,30 @@
         <i class="fas fa-circle-notch fa-spin"> {{'impact-pathway.remove.processing' | translate}}</i>
       </span>
     </button>
+    -->
+
   </div>
 </div>
 
+<!-- total area with helptext-accordeon, IP-columns and textfield "Description" below -->
 <div>
+
+  <!-- helptext -->
   <ds-alert *ngIf="infoShowed | async" [type]="'alert-info'" [collapsible]="true"
     [content]="'impact-pathway.wrapper.info'"></ds-alert>
+
     <ng-container *ngIf="(isVersionOfAnItem$ | async) && isFunder">
       <div class="mb-3">
+
         <ngb-accordion
           #accordionRef
           [destroyOnHide]="false"
           [closeOthers]="false"
           activeIds=""
         >
+        
           <ngb-panel id="panel-0">
+
             <ng-template ngbPanelHeader let-opened="opened">
               <span> {{'comment-list.header' | translate}} </span>
               <div class="d-inline-block float-right">
@@ -54,6 +92,7 @@
                 </button>
               </div>
             </ng-template>
+
             <ng-template ngbPanelContent>
               <div class="row m-0" *ngIf="(formConfig$ | async)?.name">
                 <div class="col-2 p-0" *ngFor="let data of impactPathway.steps | dsGetIpwData">
@@ -68,12 +107,28 @@
                 </div>
               </div>
             </ng-template>
+
           </ngb-panel>
+
         </ngb-accordion>
+
       </div>
     </ng-container>
+    <!-- end of helptext -->
+
   <ds-themed-loading *ngIf="(compareProcessing$ | async)"></ds-themed-loading>
+
+  <!-- Jump Marker to the description textfield -->
+  <div class="d-flex flex-row-reverse mt-0 pt-0 mb-2">
+    <button (click)="scroll(textfieldDescription)" class="btn btn-link"> 
+      <i class="fas fa-arrow-down"></i> {{"impact-pathway.description.jumpMarker" | translate}}
+    </button>
+  </div>
+
   <div *ngIf="!(compareProcessing$ | async)" class="d-flex align-items-stretch p-0 m-0 mb-3 vertical-content border">
+
+    <!-- Impact Pathway Columns in repetition, defined in 
+    src/app/impact-pathway-board/shared/impact-path-way/impact-path-way-step/impact-path-way-step.component.html -->
     <ds-impact-path-way-step *ngFor="let step of impactPathway.steps" dsStepColor class="vertical-step"
                               [projectCommunityId]="projectCommunityId"
                               [impactPathwayId]="impactPathway.id"
@@ -83,6 +138,11 @@
                               [compareMode]="(compareMode | async)"
                               [isVersionOfAnItem]="(isVersionOfAnItem$ | async)"></ds-impact-path-way-step>
   </div>
+
+  <hr />
+  
+  <!-- area with textarea for "description", headline and edit-button -->
+  <div #textfieldDescription></div><!-- target for jump marker -->
   <ds-editable-textarea *ngIf="impactPathway"
                          [editMode]="getEditMode()"
                          [formConfig]="formConfig$"
@@ -94,17 +154,21 @@
                          [disabled]="(compareMode | async) || !(canEditButton$ | async)"
                          (contentChange)="updateImpactPathway($event)">
   </ds-editable-textarea>
+
 </div>
 
+<!-- function creation of impact pathway arrows -->
 <div *ngIf="(loaded | async)">
   <ngx-domarrow *ngFor="let relation of (getRelations() | async)"
                 [from]="'#' + relation.from"
                 [to]="'#' + relation.to"
                 [head]="relation.twoWay"
                 [tail]="true"
-                [onlyVisible]="true" color="red"></ngx-domarrow>
+                [onlyVisible]="true" color="blueviolet" class="arrow">
+              </ngx-domarrow>
 </div>
 
+<!-- modal window, that appears with the button "delete impact pathway" -->
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title text-danger">{{'impact-pathway.remove.confirm.title' | translate}}</h4>

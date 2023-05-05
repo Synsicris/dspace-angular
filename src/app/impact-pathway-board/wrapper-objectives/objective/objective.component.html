@@ -1,16 +1,33 @@
+<!-- --------------------------------------------------------
+Single Accordeon on Impact Pathway Level 2 of columns 2 and 3 
+--------------------------------------------------------- -->
 <ds-collapsable-panel #ipwCollapse class="d-block mb-3"
                        [sidebarPanelTitle]="impactPathwayTask.title"
                        [startOpen]="!(isCollapsed() | async) || isOpen()">
-  <ng-container ngProjectAs="panelIconStatus">
-    <button class="btn btn-lg btn-link flex-shrink-1 align-self-center text-primary"
+   
+   <!-- ng-content contains additional contents that are filled into accordeon-header in 
+        <ng-content select="panelIconStatus"></ng-content> 
+        in src/app/impact-pathway-board/shared/collapsable-panel/collapsable-panel.component.html -->                    
+   <ng-container ngProjectAs="panelIconStatus">
+    <!-- edit-button -->
+    <button class="btn btn-sm btn-link flex-shrink-1 align-self-center text-primary"
             [disabled]="!(canEditButton$ | async) || isVersionOfAnItem"
             [title]="'impact-pathway.objectives.edit.btn.title' | translate">
-      <span (click)="openEditModal(); $event.stopImmediatePropagation()"><i class="fas fa-edit"></i></span>
+      <span (click)="openEditModal(); $event.stopImmediatePropagation()">
+        <!-- smaller pen-icon (230429 rex) -->
+        <!-- <i class="fas fa-edit"></i> -->
+        <i class="fas fa-pen"></i>
+      </span>
     </button>
   </ng-container>
+
   <ng-container ngProjectAs="panelContent">
     <div class="d-flex">
+
+      <!-- pinboard with description area -->
       <div #taskSection class="pr-0 w-100">
+
+        <!-- pinboard for cards inside the Accordeon -->
         <div class="d-flex align-items-stretch p-0 m-0 bg-step-green">
           <ds-objective-container class="horizontal-step h-100 horizontal-content"
                                    [canEditButton]="canEditButton$ | async"
@@ -19,6 +36,8 @@
                                    [isVersionOfAnItem]="isVersionOfAnItem"
                                    [projectCommunityId]="projectCommunityId"></ds-objective-container>
         </div>
+
+         <!-- textarea with button and headline -->
         <ds-editable-textarea *ngIf="impactPathwayTask"
                                [editMode]="getEditMode()"
                                [formConfig]="formConfig$"
@@ -29,7 +48,11 @@
                                [content]="impactPathwayTask.description"
                                [disabled]="!(canEditButton$ | async) || isVersionOfAnItem"
                                (contentChange)="updateImpactPathwayTask($event)"></ds-editable-textarea>
-      </div>
+
+      </div><!-- end pinboard with description area -->
+
+      <!-- comment-box on the right side of accordeon
+      can made visible by removing '*ngIf="isVersionOfAnItem && isFunder && (formConfig$ | async)?.name"' -->  
       <div *ngIf="isVersionOfAnItem && isFunder && (formConfig$ | async)?.name" class="comment-box" [ngStyle]="{'height.px': taskSection.clientHeight}">
         <ds-comment-list
           [relatedBoard]="impactPathWayStepItem$ | async"
@@ -39,6 +62,8 @@
           [type]="(formConfig$ | async).name">
         </ds-comment-list>
       </div>
+
     </div>
   </ng-container>
+
 </ds-collapsable-panel>

@@ -1,0 +1,85 @@
+/* ----------------------------------------------------------------------------
+PRINT STYLES
+an !important is necessary in many places to overwrite the standard styles
+Maybe a more elegant, generic solution can be found for it
+---------------------------------------------------------------------------- */
+
+@media print {
+
+  /* navbar is hidden by default in bootstrap
+  see https://getbootstrap.com/docs/4.0/components/navbar/
+  don't find the bootstrap print file
+  so it has to become visible, and the navigation-contents that are not needed
+  have to be hidden afterwards */
+  header ds-themed-navbar .navbar {  
+    display:block !important;       // make navbar with logo visible
+    border-bottom:none !important;  // hides the border
+    padding-bottom:0 !important;
+    float:left;                     // makes Logo left-alighed
+    .navbar-nav {display:none;}     // hide navigation elements
+    a.navbar-brand {
+      text-decoration:none;         // hide border-bottom of branding-link
+    }
+  }
+
+  .outer-wrapper .inner-wrapper {
+    background-color:transparent !important; // hide layout background colors
+  }
+
+  #sidebar,                             // Navigation Sidebar
+  footer,                               // footer
+  .alert-info,                          // help-text
+  button.btn,                           // buttons
+  span[tooltipclass]                    // tooltip-selectors
+
+    { display:none !important; }
+
+  textarea {
+    border:none !important;
+    padding:0 !important;
+    background-color:transparent !important; 
+  }
+
+  ds-breadcrumbs nav.nav-breadcrumb {
+    float:left;
+    a {text-decoration:none !important;}
+    li.breadcrumb-item.active {display:none;} 
+  }
+
+  #impact-pathway {
+
+    div.border-bottom {border-bottom:none !important;}
+
+    .arrow { display:none; }  // hide arrows
+
+    .vertical-step {    // columns
+
+      &.bg-step-1, &.bg-step-2, &.bg-step-3, &.bg-step-4, &.bg-step-5, &.bg-step-6 {
+        background-color:var(--sy-color-gray-95) !important;
+        border:1px solid var(--sy-color-gray-36) !important;
+      }
+      &:nth-child(2), &:nth-child(4), &:nth-child(6) {margin-left: 12px !important;}
+      &:nth-child(2), &:nth-child(4) {border-right:none !important;}
+      &:nth-child(3), &:nth-child(5) {
+        border-left: 2px dotted var(--sy-color-gray-68) !important;
+      }
+
+      // headlines of columns with tooltip-icons
+      .title-content {
+        .title-clamp { -webkit-line-clamp: 10; } // disables the truncation
+      }
+
+      .task-container {   // cards
+        border:1px solid var(--sy-color-gray-36);
+        margin-bottom:10px !important;
+        box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        div.task-header {margin-bottom:5px !important;}
+        .task-left-bar, .task-actions { display:none; }
+        .type-clamp, .title-clamp { -webkit-line-clamp: 10; } // disables the truncation
+      }
+
+    } // end .vertical-step - column
+
+  } // end #impact-pathway
+
+} // end @media print

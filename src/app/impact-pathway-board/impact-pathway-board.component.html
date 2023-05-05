@@ -1,6 +1,11 @@
+<!-- ---------------------------------------------------------
+Parent container with the id "impact-pathway" to be able 
+to address the whole impact pathway with styles / print styles
+---------------------------------------------------------- -->
 <ds-loading class="container-fluid" *ngIf="(isLoading() | async)" message="Loading..."></ds-loading>
 <div *ngIf="!(isLoading() | async) && (getImpactPathway() | async)" class="container-fluid d-flex align-items-stretch mt-3 mb-3">
-  <ds-wrapper-impact-path-way class="wrapper"
+  <!-- added 'id="impact-pathway" to be able to address the complete page content of impact pathway via css (230323 rex) -->
+  <ds-wrapper-impact-path-way class="wrapper" id="impact-pathway"
                                [projectCommunityId]="projectCommunityId"
                                [projectItemId]="projectItemId"
                                [impactPathWay]="(getImpactPathway() | async)"

@@ -1,3 +1,6 @@
+/* ******************************************************************
+Here, the CSS classes of the six columns are defined in a switch loop
+****************************************************************** */
 import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 import { ImpactPathwayStepType } from '../../../core/models/impact-pathway-step-type';
 
@@ -18,6 +21,9 @@ export class StepColorDirective {
     this.renderer.addClass(this.elem.nativeElement, this.getColorByType());
   }
 
+  /* changed on 230425 so that the class names are no longer color-related and 
+    all six columns can be designed independently. (rex 230425) */
+  /*
   private getColorByType(): string {
     let color: string;
     switch (this.stepType) {
@@ -33,7 +39,29 @@ export class StepColorDirective {
       case ImpactPathwayStepType.Type5:
         color = 'bg-step-orange';
         break;
+ */
 
+  private getColorByType(): string {
+    let color: string;
+    switch (this.stepType) {
+      case ImpactPathwayStepType.Type1:
+        color = 'bg-step-1';
+        break;
+      case ImpactPathwayStepType.Type2:
+        color = 'bg-step-2';
+        break;
+      case ImpactPathwayStepType.Type3:
+        color = 'bg-step-3';
+        break;
+      case ImpactPathwayStepType.Type4:
+        color = 'bg-step-4';
+        break;
+      case ImpactPathwayStepType.Type5:
+        color = 'bg-step-5';
+        break;
+      case ImpactPathwayStepType.Type6:
+        color = 'bg-step-6';
+        break;
     }
     return `${color}`;
   }

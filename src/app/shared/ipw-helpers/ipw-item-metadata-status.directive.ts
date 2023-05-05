@@ -1,3 +1,6 @@
+/* *******************************************************
+Definition for various Status-Icon for impact pathway card
+******************************************************* */
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { ComparedVersionItemStatus } from 'src/app/core/project/project-version.service';
 
@@ -24,6 +27,7 @@ export class IpwItemMetadataStatusDirective implements OnChanges  {
     }
   }
 
+  // Variants of status-icons in Impact Pathway
   private getIconClassByStatus(): string[] {
     let iconClasses = [];
     if (this.status) {

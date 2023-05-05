@@ -1,12 +1,27 @@
-<div class="d-flex flex-column p-2 bg-light rounded">
-  <div class="d-flex justify-content-between">
-    <h5>{{fieldTitle}}</h5>
-    <button class="btn btn-primary btn-sm" [disabled]="disabled" (click)="$event.preventDefault();  $event.stopPropagation(); openEditModal();">
-      <span>
-        <i class="far fa-edit"></i> {{editTitle}}
-      </span>
-    </button>
-  </div>
-  <div class="clearfix"></div>
-  <textarea #textarea class="mt-2 form-control rounded-0 editor" rows="{{rows}}" title="{{fieldTitle}}" disabled="true" [value]="content || ''"></textarea>
+<!-- ------------------------------------------------------------
+Textarea for description of the project under the impact path way 
+incl. headline and button, also used on second level
+------------------------------------------------------------- -->
+<!-- <div class="d-flex flex-column p-2 bg-light rounded impact-pathway-editable-textfield"> removed background-color (230504 rex) -->
+<div class="d-flex flex-column p-2 rounded impact-pathway-editable-textfield">
+
+    <div class="d-flex">
+
+      <h5 class="mr-3 pt-1 align-self-start">{{fieldTitle}}</h5>
+
+      <button class="btn btn-outline-primary btn-sm align-self-start" [disabled]="disabled" (click)="$event.preventDefault();  $event.stopPropagation(); openEditModal();">
+        <span>
+          <i class="fas fa-pen"></i> <!-- {{editTitle}} --> {{'impact-pathway.edit.description' | translate}}
+        </span>
+      </button>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+    <!-- added a placeholder(230428 rex)
+    Unfortunately I haven't found a solution to also style the placeholder to visually distinguish it from the normal input text,
+    see src/themes/synsicris/styles/synsicris-optimizations/impact_pathway_editable_textarea.scss -->
+    <textarea #textarea class="mt-2 form-control rounded-0 editor" placeholder="{{'editableTextfield.placeholder' | translate}}" rows="{{rows}}" title="{{fieldTitle}}" disabled="true" [value]="content || ''"></textarea>
+
 </div>

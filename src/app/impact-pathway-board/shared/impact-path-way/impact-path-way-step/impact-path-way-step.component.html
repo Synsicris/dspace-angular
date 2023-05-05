@@ -1,3 +1,8 @@
+<!-- ---------------------------------------
+Definition of a single impact pathway column 
+---------------------------------------- -->
+
+<!-- complete column -->
 <div class="h-100 d-flex flex-column vertical-step"
      [class.drop-denied]="(isDragging | async) && !(isDropAllowed | async)">
   <div class="p-1 m-2 font-weight-bold d-flex justify-content-between title-content" title="{{getStepTitle() | async}}">
@@ -10,6 +15,7 @@
           container="body"></span>
   </div>
 
+  <!-- Button to add a new card -->
   <div class="d-flex justify-content-start">
     <button class="btn btn-link open-modal"
             title="{{'impact-pathway.add.btn' | translate}}"
@@ -19,6 +25,7 @@
     </button>
   </div>
 
+   <!-- inner container, that contains all cards and reaches to the column bottom -->
   <div id="{{(impactPathwayStep$ | async)?.id}}"
        class="d-flex p-2 h-100 flex-column"
        cdkDropList
@@ -29,6 +36,8 @@
        (cdkDropListEntered)="listEnteredToStep($event)"
        (cdkDropListExited)="listExited($event)"
        (cdkDropListDropped)="listDropped($event)">
+
+    <!-- src/app/impact-pathway-board/shared/impact-path-way/impact-path-way-task/impact-path-way-task.component.html -->
     <ds-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
                               class="mb-sm-1 mb-lg-4"
                               [cdkDragDisabled]="isVersionOfAnItem || compareMode"
@@ -49,6 +58,8 @@
                               (cdkDragEntered)="dragEnteredToStep($event)"
                               (cdkDragExited)="dragExited($event)"
                               (selected)="onTaskSelected($event)">
+
+      <!-- ? -->
       <div class="task-placeholder d-flex justify-content-center align-items-center mb-sm-1 mb-lg-4"
            [ngClass]="{
                 'task-preview-allowed': (isDragging | async) && (isDropAllowed | async),
@@ -57,6 +68,7 @@
         <i *ngIf="(isDragging | async) && (isDropAllowed | async)" class="fas fa-check fa-5x"></i>
         <i *ngIf="(isDragging | async) && !(isDropAllowed | async)" class="fas fa-exclamation fa-5x"></i>
       </div>
+
     </ds-impact-path-way-task>
   </div>
 </div>

@@ -1,0 +1,141 @@
+/* -----------------------------------------------------------
+IMPACT PATHWAY (rex 230323)
+arrows are defined in src/app/impact-pathway-board/shared/impact-path-way/impact-path-way.component.html
+with hardcoded color
+----------------------------------------------------------- */
+/* contains the whole page content of impact pathway including headlines, buttons, help text and description field 
+(defined in src/app/impact-pathway-board/impact-pathway-board.component.html) */
+#impact-pathway {
+
+  h1 {}                                 // headline
+  .alert-info {}                        // help-text
+
+  // +-button
+  button.btn-link.open-modal i { 
+      font-size:1.3rem !important;
+  }
+
+  // complete area with 6 IP-Columns
+  div.vertical-content {
+
+    /* Column (designed in src/app/impact-pathway-board/shared/impact-path-way/impact-path-way.component.scss)
+    single columns are defined in src/app/impact-pathway-board/shared/impact-path-way/impact-path-way-step */
+    .vertical-step { 
+
+      padding:0 0.3rem;
+      min-width:14rem;
+
+      /* class-names are defined in
+      src/app/impact-pathway-board/shared/impact-pathway/impact-pathway-step/step.directive.ts, 
+      Counting childs doesn't work for background-color same as it does with borders */
+
+      /* BACKGROUND COLORS ARE WORK IN PROGRESS! (230504 rex)
+
+      /* GREEN GRADIENT
+      -------------- */
+       &.bg-step-1 {
+        background-color:#E5E8E3;
+      }
+      &.bg-step-2,
+      &.bg-step-3 {
+        background-color:#DFE3CF;
+      }
+      &.bg-step-4,
+      &.bg-step-5 {
+        background-color:#D0E5BA;
+      }
+      &.bg-step-6 {
+        background-color:#CCF1A9;
+      }
+
+      /* GREY-LIGHT-TURQUOISE
+      -------------------- */
+      &.bg-step-1 {
+        background-color:rgb(244, 245, 244);
+      }
+      &.bg-step-2,
+      &.bg-step-3 {
+        background-color:rgb(230, 239, 239);
+      }
+      &.bg-step-4,
+      &.bg-step-5 {
+        background-color:rgb(218, 231, 231);
+      }
+      &.bg-step-6 {
+        background-color:rgb(244, 245, 244);
+      }
+     
+      /* ORIGINAL COLORS
+      --------------- */
+      &.bg-step-1 {
+        background-color:var(--sy-color-gray-90);
+      }
+      &.bg-step-2,
+      &.bg-step-3 {
+        background-color:var(--sy-color-green-85);
+      }
+      &.bg-step-4,
+      &.bg-step-5 {
+        background-color:var(--sy-color-orange-90);
+      }
+      &.bg-step-6 {
+        background-color:var(--sy-color-gray-90);
+      }
+
+      
+      
+      // Borders between colums
+      &:nth-child(2), &:nth-child(4), &:nth-child(6) {
+        border-left: 7px solid var(--sy-color-gray-100); // wider border between columns
+      }
+      //border betweeen second and third column
+      &:nth-child(3) {
+        border-left: 3px dotted var(--sy-color-gray-100); // dotted border between columns
+      }
+      // border between forth and fifth column
+      &:nth-child(5) {
+        border-left: 3px dotted var(--sy-color-gray-100); // dotted border between columns
+      }
+  
+      // headlines of columns with tooltip-icons
+      .title-content {
+        .title-clamp { } // truncated titles
+      }
+
+      // card (defined in src/app/impact-pathway-board/shared/impact-path-way/impact-path-way-task/impact-path-way-task.component.html)
+      .task-container {
+        // CSS for Task-Card in Synsicris in src/themes/synsicris/styles/synsicris-optimizations/impact_pathway_card.scss
+      } // end .task-container
+
+    } // end .vertical-step
+
+  } // end div.vertical-content
+
+
+  /* complete arrow, contains head and line, cannot be colored by external styles
+  color is defined in src/app/impact-pathway-board/shared/impact-path-way/impact-path-way.component.html 
+  in olor="blueviolet" class="arrow" */
+  .arrow {
+
+    div.line {
+      /* line has an inline style with a background-color based on the defined color
+      cannot be colored via CSS because of the absolute position contained in the gradient 
+      background: linear-gradient(to right, transparent 11px, blueviolet 11px, blueviolet 36.2395px, transparent 36.2395px, transparent 100%);" */
+      //border:1px solid orange; // with it only the lines can be colored, arrow-heads disappear
+      box-shadow:0 0 3px 2px rgba(255,255,255,0.7); // white glow behind arrows
+      
+      div.arrow.arrow-fw.head {
+        /* colors downward arrowheads, but not all of them
+        inline-styles: border-right-color: blueviolet; top: -5px; */
+      }
+
+      div.arrow.arrow-bw.tail {
+        /* colors arrowheads pointing upwards or to the right
+        inline-styles: border-left-color: blueviolet; top: -5px; */
+      }
+
+    } // end div.line
+  } // end .arrow 
+
+  
+} // end #impact-pathway

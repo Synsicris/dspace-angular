@@ -12,31 +12,43 @@
 
   /* ----------------- BASIC COLOUR PALETTE ---------------------------- */
 
-  --sy-color-blue-13:      rgb(5, 44, 59);        // #052C3B hsl(197,84,13)   $blue-dark tooltip text
-  --sy-color-blue-29:      rgb(18,100,132);       // #126484 hsl(197,76,29)   sidebar links
-  --sy-color-blue-33:      rgb(0, 121, 168);      // #0087A8 hsl(192,100,33)  links in breadcrumb
-  --sy-color-blue-94:      rgb(228, 247, 253);    // #E4F7FD hsl(194,86,94)   tooltip bg of bubble and arrow (bright blue)
-  --sy-color-blue-95:      rgb(239,244,247);      // #EFF4F7 hsl(203,33,95)   direct linktabs in sidebar bg
+  
+  --sy-color-blue-13:         rgb(5, 44, 59);        // #052C3B hsl(197,84,13)   $blue-dark tooltip text
+  --sy-color-blue-29:         rgb(18,100,132);       // #126484 hsl(197,76,29)   sidebar links
+  --sy-color-blue-33:         rgb(0, 121, 168);      // #0087A8 hsl(192,100,33)  links in breadcrumb
+  --sy-color-blue-43:         rgb(0, 146, 219);      // #0092DB hsl(200,100,43)  glow
+  --sy-color-blue-94:         rgb(228, 247, 253);    // #E4F7FD hsl(194,86,94)   tooltip bg of bubble and arrow (bright blue)
+  --sy-color-blue-95:         rgb(239,244,247);      // #EFF4F7 hsl(203,33,95)   direct linktabs in sidebar bg
 
-  --sy-color-bluegray-31:  rgb(72,79,86);         // #484F56 hsl(210,9,31)    sidebar text colour of the active item
- 
-  --sy-color-gray-36:      rgb(91,91,91);         // #5B5B5B hsl(0,0,36)      synsicris-logo gray
-  --sy-color-grey-48:      rgb(115,123,132);      // #737B84 hsl(212,7,48)    tooltip shadow
-  --sy-color-gray-68:      rgb(161,175,184);      // #A1AFB8 hsl(202,14,68)   level 1 (person) headerbox and breadcrumb-tags icon and border, horizontal borders of footer, breadcrumb, header
-  --sy-color-gray-85:      rgb(216, 217, 218);    // #D8D9DA hsl(210,3,85)    footer dividers between textgroups
-  --sy-color-gray-90:      rgb(230,230,230);      // #E6E6E6 hsl(60,0,90)     sidebar borders of tabs
-  --sy-color-gray-95:      rgb(244,245,246);      // #F1F2F4 hsl(210,10,95)   level 1 (person) headerbox bg, sidebar expandible tabs bg
-  --sy-color-gray-96:      rgb(251,251,251);      // #F4F5F6 hsl(210,11,96)   basic background color of content area
-  --sy-color-gray-98:      rgb(248,249,250);      // #F8F9FA hsl(210,17,98)   dropdown menu bg - TO BE CHECKED, IF NECCESSARY (no access to the specific forms actually 221209)
-  --sy-color-gray-100:     rgb(255,255,255);      // #fff hsl(0,0,100)        bg footer, active and hover sidebar item
+  --sy-color-bluegray-31:     rgb(72,79,86);         // #484F56 hsl(210,9,31)    sidebar text colour of the active item
+
+  --sy-color-blueviolet-53:   rgb(138,43,226);       // #8A2BE2 hsl(271,76,53)   Checkbox and Arrows in Impact Pathway
+  --sy-color-blueviolet-95:   rgb(241,239,248);      // #F1EFF8 hsl(253,39,95)   Background Layers for Arrow Function in Impact Pathway
+
+  --sy-color-gray-0:          rgb(0,0,0);            // #000000 hsl(0,0,0)       black
+  --sy-color-gray-36:         rgb(91,91,91);         // #5B5B5B hsl(0,0,36)      synsicris-logo gray
+  --sy-color-grey-48:         rgb(115,123,132);      // #737B84 hsl(212,7,48)    tooltip shadow
+  --sy-color-gray-68:         rgb(161,175,184);      // #A1AFB8 hsl(202,14,68)   level 1 (person) headerbox and breadcrumb-tags icon and border, horizontal borders of footer, breadcrumb, header
+  --sy-color-gray-85:         rgb(216, 217, 218);    // #D8D9DA hsl(210,3,85)    footer dividers between textgroups
+  --sy-color-gray-90:         rgb(230,230,230);      // #E6E6E6 hsl(60,0,90)     sidebar borders of tabs
+  --sy-color-gray-95:         rgb(244,245,246);      // #F1F2F4 hsl(210,10,95)   level 1 (person) headerbox bg, sidebar expandible tabs bg
+  --sy-color-gray-96:         rgb(251,251,251);      // #F4F5F6 hsl(210,11,96)   basic background color of content area
+  --sy-color-gray-98:         rgb(248,249,250);      // #F8F9FA hsl(210,17,98)   dropdown menu bg - TO BE CHECKED, IF NECCESSARY (no access to the specific forms actually 221209)
+  --sy-color-gray-100:        rgb(255,255,255);      // #fff hsl(0,0,100)        bg footer, active and hover sidebar item
   
-  --sy-color-green-49:     rgb(117,200,52);       // #75C834 hsl(94.59,49)    level 2 (project) headerbox and breadcrumb-tags icon and border
-  --sy-color-green-97:     rgb(247,252,243);      // #F7FCF3 hsl(93,60,97)    level 2 (project) headerbox bg
+  --sy-color-green-30:        rgb(38,153,0);         // #1C9900 hsl(109,100,30)   Ursprungsfarbe IP Säule nicht transparent
+  --sy-color-green-49:        rgb(117,200,52);       // #75C834 hsl(94.59,49)    level 2 (project) headerbox and breadcrumb-tags icon and border
+  --sy-color-green-85:        rgb(207,232,201);      // #CFE8C9 hsl(109,40,85)    IP Säule
+  --sy-color-green-97:        rgb(247,252,243);      // #F7FCF3 hsl(93,60,97)    level 2 (project) headerbox bg
  
-  --sy-color-magenta-42:   rgb(199,15,92);        // #C70F5C hsl(335,86,42)   ci magenta uni kassel, synsicris-logo magenta
-  
-  --sy-color-yellow-46:    rgb(234,183,2);        // #EAB702 hsl(47,98,46)    level 3 (funding) headerbox and breadcrumb-tags icon and border
-  --sy-color-yellow-98:    rgb(255,253,245);      // #FFFDF5 hsl(48,100,98)   level 3 (funding) headerbox bg
+  --sy-color-magenta-42:      rgb(199,15,92);        // #C70F5C hsl(335,86,42)   ci magenta uni kassel, synsicris-logo magenta
+  --sy-color-magenta-50:      rgb(255,2,171);        // #C70F5C hsl(320,100,50)  Glow Chackbox activated Impact Pathway Arrow-Function
+
+  --sy-color-orange-60:       rgb(255,153,51);        // #FF9933 hsl(30,100,60)  ursprüngliche Säulenfarbe ohne Transparenz
+  --sy-color-orange-90:       rgb(250,229,209);       // #FF9933 hsl(30,80,90)   IP Säule
+
+  --sy-color-yellow-46:       rgb(234,183,2);        // #EAB702 hsl(47,98,46)    level 3 (funding) headerbox and breadcrumb-tags icon and border
+  --sy-color-yellow-98:       rgb(255,253,245);      // #FFFDF5 hsl(48,100,98)   level 3 (funding) headerbox bg
 
    /* ----------------- COLORS FOR RECURRING LAYOUT ELEMENTS ---------------------------- */
   
