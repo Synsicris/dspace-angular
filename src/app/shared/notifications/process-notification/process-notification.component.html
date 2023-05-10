@@ -48,7 +48,8 @@
         </ds-file-download-link>
       </div>
 
+      <div class="pl-1 dont-break-out" *ngIf="(finished | async) && hasUrl && notification?.url">
+        <a class="text-u" [routerLink]="notification?.url">{{ 'process.new.notification.process.see-results' | translate }}</a>
+      </div>
   </div>
-
-
 </div>

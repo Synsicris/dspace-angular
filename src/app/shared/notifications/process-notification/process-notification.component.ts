@@ -21,7 +21,7 @@ import { fromLeftEnter, fromLeftInState, fromLeftLeave, fromLeftOutState } from 
 import { fromTopEnter, fromTopInState, fromTopLeave, fromTopOutState } from '../../animations/fromTop';
 import { fadeInEnter, fadeInState, fadeOutLeave, fadeOutState } from '../../animations/fade';
 import { NotificationAnimationsStatus } from '../models/notification-animations-type';
-import { isNotEmpty } from '../../empty.util';
+import { hasValue, isNotEmpty } from '../../empty.util';
 import { IProcessNotification } from '../models/process-notification.model';
 import { ProcessDataService } from '../../../core/data/processes/process-data.service';
 import { Process } from '../../../process-page/processes/process.model';
@@ -101,6 +101,11 @@ export class ProcessNotificationComponent implements OnInit, OnDestroy {
    */
   public notificationType = 'alert-info';
 
+  /**
+   * Flag to check if the notification has an url.
+   */
+  public hasUrl = false;
+
   constructor(private notificationService: NotificationsService,
               private domSanitizer: DomSanitizer,
               protected processService: ProcessDataService,
@@ -117,6 +122,10 @@ export class ProcessNotificationComponent implements OnInit, OnDestroy {
     this.initCheckProcess();
     this.html = this.notification.html;
     this.contentType(this.notification.title, 'title');
+
+    if (hasValue(this.notification?.url)) {
+      this.hasUrl = true;
+    }
   }
 
   /**

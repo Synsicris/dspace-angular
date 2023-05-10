@@ -6,15 +6,10 @@ import {
 import { getFirstCompletedRemoteData } from '../../../../core/shared/operators';
 import { RemoteData } from '../../../../core/data/remote-data';
 import { Version } from '../../../../core/shared/version.model';
-import { switchMap } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VersionHistoryDataService } from '../../../../core/data/version-history-data.service';
-import { TranslateService } from '@ngx-translate/core';
 import { VersionDataService } from '../../../../core/data/version-data.service';
-import { ItemVersionsSharedService } from '../../../../shared/item/item-versions/item-versions-shared.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { WorkspaceitemDataService } from '../../../../core/submission/workspaceitem-data.service';
-import { SearchService } from '../../../../core/shared/search/search.service';
+import { ActivatedRoute } from '@angular/router';
 import { ItemDataService } from '../../../../core/data/item-data.service';
 import { RouteService } from '../../../../core/services/route.service';
 
@@ -28,12 +23,7 @@ export class VersionedItemComponent extends ItemComponent {
   constructor(
     private modalService: NgbModal,
     private versionHistoryService: VersionHistoryDataService,
-    private translateService: TranslateService,
     private versionService: VersionDataService,
-    private itemVersionShared: ItemVersionsSharedService,
-    private router: Router,
-    private workspaceItemDataService: WorkspaceitemDataService,
-    private searchService: SearchService,
     private itemService: ItemDataService,
     protected activatedRoute: ActivatedRoute,
     protected routeService: RouteService
@@ -57,22 +47,15 @@ export class VersionedItemComponent extends ItemComponent {
       // if res.hasNoContent then the item is unversioned
       activeModal.componentInstance.firstVersion = res.hasNoContent;
       activeModal.componentInstance.versionNumber = (res.hasNoContent ? undefined : res.payload.version);
+      activeModal.componentInstance.itemId = this.object.uuid;
+      activeModal.componentInstance.url = `entities/project/${this.activatedRoute.snapshot.params.id}/manageversions`;
     });
 
     // On createVersionEvent emitted create new version and notify
-    activeModal.componentInstance.createVersionEvent.pipe(
-      switchMap((summary: string) => this.versionHistoryService.createVersion(item._links.self.href, summary)),
-      getFirstCompletedRemoteData(),
-    ).subscribe((res: RemoteData<Version>) => {
-      // show success/failure notification
-      this.itemVersionShared.notifyCreateNewVersion(res);
+    activeModal.componentInstance.createVersionEvent.subscribe(() => {
       this.itemService.invalidateItemCache(item.uuid);
       this.versionHistoryService.invalidateAllVersionHistoryCache();
       this.modalService.dismissAll();
-      activeModal.close();
-      if (res.hasSucceeded) {
-        this.router.navigate(['..', 'manageversions'], { relativeTo: this.activatedRoute });
-      }
     });
 
   }
