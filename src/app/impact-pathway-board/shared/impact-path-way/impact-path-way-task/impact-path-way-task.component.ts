@@ -46,6 +46,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   @Input() public taskPosition: number;
   @Input() public isObjectivePage: boolean;
   @Input() public compareMode: boolean;
+  @Input() public showArrows = true;
 
   /**
    * A boolean representing if item is a version of original item
