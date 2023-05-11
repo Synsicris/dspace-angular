@@ -1,8 +1,10 @@
+import { DirectiveAttributes } from './ipw-item-metadata-directive-interface';
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { InternalItemStatus } from './../../core/submission/edititem-data.service';
+import { hasValue } from '../empty.util';
 
 @Directive({
-  selector: '[dsItemMetadataInternal]'
+  selector: '[dsIPWItemMetadataInternal]'
 })
 export class IpwItemMetadataInternalDirective implements OnChanges {
 
@@ -13,29 +15,44 @@ export class IpwItemMetadataInternalDirective implements OnChanges {
   constructor(
     private elem: ElementRef,
     private renderer: Renderer2) {
-    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.status.isFirstChange() || (changes.status.previousValue !== changes.status.currentValue)) {
-      this.getIconClassByInternalValue().forEach((className: string) => {
-        this.renderer.addClass(this.elem.nativeElement, className);
-      });
+      const attributes = this.getIconClassByInternalValue();
+      if (hasValue(attributes)) {
+        attributes.classNames.forEach((value: string) => {
+          this.renderer.addClass(this.elem.nativeElement, value);
+        });
+        this.renderer.setAttribute(this.elem.nativeElement, 'title', attributes.title);
+      }
     }
   }
 
-  private getIconClassByInternalValue(): string[] {
-    let iconClasses = [];
+  private getIconClassByInternalValue(): DirectiveAttributes {
+    let attributes: DirectiveAttributes;
     if (this.status) {
       switch (this.status) {
         case InternalItemStatus.Done:
-          iconClasses = [];
+          attributes = {
+            classNames: [],
+            title: '(title) staus: done'
+          };
           break;
         case InternalItemStatus.Edit:
+          attributes = {
+            classNames: [],
+            title: '(title) staus: edit'
+          };
+          break;
         case InternalItemStatus.Exchange:
-          iconClasses = ['fas', 'fa-info-circle', 'text-warning'];
+          attributes = {
+            classNames: ['fas', 'fa-info-circle', 'text-warning'],
+            title: '(title) staus: exchange'
+          };
           break;
       }
     }
-    return iconClasses;
+    return attributes;
   }
 }

@@ -20,7 +20,7 @@
   <div class="task-right-bar">
     <div class="task-detail p-1">
       <div class="task-header pr-1 d-flex justify-content-between">
-        
+
         <div class="task-title title-clamp font-weight-bold text-info" (click)="openItemModal()">
           <!-- title text -->
           <p title="{{data.title}}">{{data.title}}</p>
@@ -28,7 +28,7 @@
 
         <!-- column with status-icon -->
         <span *ngIf="data?.status" class="status-icon">
-          <i dsItemMetadataStatus [status]="data.status"></i>
+          <i dsIPWItemMetadataStatus [status]="data.status"></i>
         </span>
 
       </div>
@@ -41,7 +41,7 @@
         </div>
         <!-- tooltip-icon -->
         <span class="status-icon" *ngIf="data?.internalStatus">
-          <i dsItemMetadataInternal [status]="data.internalStatus"></i>
+          <i dsIPWItemMetadataInternal [status]="data.internalStatus"></i>
         </span>
       </div>
     </div>
