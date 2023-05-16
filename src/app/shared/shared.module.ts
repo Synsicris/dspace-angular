@@ -421,8 +421,6 @@ import { AlertRoleComponent } from './alert/alert-role/alert-role.component';
 import {
   MetadataValuePairComponent
 } from './object-list/search-result-list-element/item-search-result/item-types/metadata/metadata-value-pair/metadata-value-pair.component';
-import { ItemMetadataStatusDirective } from './directives/item-metadata-status.directive';
-import { ItemMetadataInternalDirective } from './directives/item-metadata-internal.directive';
 
 const MODULES = [
   CommonModule,
@@ -779,8 +777,6 @@ const DIRECTIVES = [
   TaskColorDirective,
   IpwItemMetadataStatusDirective,
   IpwItemMetadataInternalDirective,
-  ItemMetadataStatusDirective,
-  ItemMetadataInternalDirective,
 ];
 
 @NgModule({

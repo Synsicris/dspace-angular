@@ -1,12 +1,11 @@
-import { DirectiveAttributes } from './ipw-item-metadata-directive-interface';
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
-import { InternalItemStatus } from './../../core/submission/edititem-data.service';
-import { hasValue } from '../empty.util';
+import { InternalItemStatus } from 'src/app/core/submission/edititem-data.service';
+import { hasValue } from 'src/app/shared/empty.util';
 
 @Directive({
-  selector: '[dsIPWItemMetadataInternal]'
+  selector: '[dsWPItemMetadataInternal]'
 })
-export class IpwItemMetadataInternalDirective implements OnChanges {
+export class WpItemMetadataInternalDirective implements OnChanges {
 
   @Input() status: string;
 
@@ -29,6 +28,10 @@ export class IpwItemMetadataInternalDirective implements OnChanges {
     }
   }
 
+  /**
+   * Get the icon class and title for item internal status for working plan
+   * @returns DirectiveAttributes
+   */
   private getIconClassByInternalValue(): DirectiveAttributes {
     let attributes: DirectiveAttributes;
     if (this.status) {
@@ -36,23 +39,22 @@ export class IpwItemMetadataInternalDirective implements OnChanges {
         case InternalItemStatus.Done:
           attributes = {
             classNames: [],
-            title: '(title)IPW staus: done'
-          };
-          break;
-        case InternalItemStatus.Edit:
-          attributes = {
-            classNames: [],
-            title: '(title)IPW staus: edit'
+            title: '(title) staus: done'
           };
           break;
         case InternalItemStatus.Exchange:
           attributes = {
             classNames: ['fas', 'fa-info-circle', 'text-warning'],
-            title: '(title)IPW staus: exchange'
+            title: '(title) staus: exchange'
           };
           break;
       }
     }
     return attributes;
   }
+}
+
+export interface DirectiveAttributes {
+  classNames: string[];
+  title: string;
 }
