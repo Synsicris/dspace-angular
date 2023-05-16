@@ -12,7 +12,7 @@
     <ng-template #breadcrumb let-text="text" let-url="url">
         <li class="breadcrumb-item">
             <div class="breadcrumb-item-limiter">
-                <a [routerLink]="url" class="text-truncate">
+                <a [routerLink]="url" class="text-truncate" dsShowTitleForTruncatedText>
                     <span>xx</span>{{text | translate}}
                 </a>
             </div>
@@ -22,10 +22,10 @@
     <ng-template #activeBreadcrumb let-text="text" let-url="url">
         <li class="breadcrumb-item active" aria-current="page">
             <div class="breadcrumb-item-limiter">
-                <a [routerLink]="url" class="text-truncate">
+                <a [routerLink]="url" class="text-truncate" dsShowTitleForTruncatedText>
                     <span>xx</span>{{text | translate}}
                 </a>
             </div>
         </li>
-    </ng-template> 
+    </ng-template>
 </ng-container>
