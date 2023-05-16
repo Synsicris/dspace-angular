@@ -3,10 +3,7 @@ form {
     &:before {
         pointer-events: none; // prevent the icon from ‘catching‘ the click
         position: absolute;
-        // font-weight: 900;
-        // font-family: "Font Awesome 5 Free";
-        // content: "\f0d7";
-        // New Simplified Version 6 CSS
+        // Fontawesome 6 `sort-down` icon CSS
         font: var(--fa-font-solid);
         content: "\f0dd";
         top: 7px;
