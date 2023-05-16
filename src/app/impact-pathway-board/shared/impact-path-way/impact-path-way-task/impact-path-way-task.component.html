@@ -20,7 +20,7 @@
   <div class="task-right-bar">
     <div class="task-detail p-1">
       <div class="task-header pr-1 d-flex justify-content-between">
-        
+
         <div class="task-title title-clamp font-weight-bold text-info" (click)="openItemModal()">
           <!-- title text -->
           <p title="{{data.title}}">{{data.title}}</p>
@@ -48,7 +48,7 @@
 
     <!-- Card Footer with icon-buttons -->
     <div class="task-actions" [class.task-overlay-hide]="(canShowRelationCheckBox() | async)">
-      <button *ngIf="(canShowRelationButton(true) | async)" class="btn btn-lg btn-link p-0 flex-shrink-1"
+      <button *ngIf="(canShowRelationButton(true) | async) && showArrows" class="btn btn-lg btn-link p-0 flex-shrink-1"
               title="{{'impact-pathway.create.bidirectional-link' | translate}}"
               [disabled]="(canHideRelationButtons(true) | async) || compareMode || isVersionOfAnItem"
               (click)="setEditRelations(true); $event.stopPropagation()">
@@ -64,7 +64,7 @@
           <i class='far fa-save'></i>
         </span>
       </button>
-      <button *ngIf="(canShowRelationButton(false) | async)" class="btn btn-lg btn-link p-0 flex-shrink-1"
+      <button *ngIf="(canShowRelationButton(false) | async) && showArrows" class="btn btn-lg btn-link p-0 flex-shrink-1"
               title="{{'impact-pathway.create.outcome-link' | translate}}"
               [disabled]="(canHideRelationButtons(false) | async) || compareMode || isVersionOfAnItem"
               (click)="setEditRelations(false); $event.stopPropagation()">
