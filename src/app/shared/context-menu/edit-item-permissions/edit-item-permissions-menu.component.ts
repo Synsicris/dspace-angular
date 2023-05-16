@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, switchMap } from 'rxjs';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { Item } from '../../../core/shared/item.model';
@@ -15,7 +15,8 @@ import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-
 import { isNotEmpty } from '../../empty.util';
 import { FUNDING_ENTITY } from '../../../core/project/project-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { filter, map, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 
 
 /**
@@ -50,6 +51,12 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
   private canShow$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
+   * An observable to check if the current user is an admin
+   * @private
+   */
+  private isAdmin$: Observable<boolean>;
+
+  /**
    * Initialize instance variables
    *
    * @param {DSpaceObject} injectedContextMenuObject
@@ -72,16 +79,16 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
 
     if ((this.contextMenuObject as Item).entityType === FUNDING_ENTITY) {
       const isVersionOfAnItem$ = this.aroute.data.pipe(
-        map((data) => data.isVersionOfAnItem),
-        filter((isVersionOfAnItem) => isVersionOfAnItem === true),
+        map((data) => data.isVersionOfAnItem === true),
         take(1)
       );
 
       const canEdit$ = this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.contextMenuObject.self, undefined);
+      this.isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(take(1));
 
-      combineLatest([isVersionOfAnItem$, canEdit$])
-        .subscribe(([isVersionOfAnItem, canEdit]: [boolean, boolean]) => {
-          this.canShow$.next(!isVersionOfAnItem && canEdit);
+      combineLatest([isVersionOfAnItem$, canEdit$, this.isAdmin$])
+        .subscribe(([isVersionOfAnItem, canEdit, isAdmin]: [boolean, boolean, boolean]) => {
+          this.canShow$.next(!isVersionOfAnItem && (canEdit || isAdmin));
         });
     }
   }
@@ -97,15 +104,20 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
    * Open edit grants modal
    */
   openEditGrantsModal() {
-    const modRef = this.modalService.open(EditItemGrantsModalComponent);
-    modRef.componentInstance.item = this.contextMenuObject;
-
-    modRef.result.then((item: Item) => {
+    this.isAdmin$
+      .pipe(
+        switchMap(isAdmin => {
+          const modRef = this.modalService.open(EditItemGrantsModalComponent);
+          modRef.componentInstance.item = this.contextMenuObject;
+          modRef.componentInstance.editMode = isAdmin ? 'ADMIN_EDIT_GRANTS' : 'EDIT_GRANTS';
+          return fromPromise(modRef.result);
+        }),
+        take(1)
+      ).subscribe(item => {
       if (isNotEmpty(item)) {
         this.contextMenuObject = item;
       }
     });
-
   }
 
 }

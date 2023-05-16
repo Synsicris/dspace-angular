@@ -51,6 +51,11 @@ export class EditItemGrantsModalComponent implements OnInit {
     { id: 'funding', name: 'project.create.grants.subproject-option' }
   ];
 
+  /**
+   * EditMode to use that has been configured for the current user
+   */
+  public editMode: string;
+
   public processing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
@@ -127,7 +132,7 @@ export class EditItemGrantsModalComponent implements OnInit {
     // TODO
     this.itemService.updateItemMetadata(
       this.item.uuid,
-      'EDIT_GRANTS',
+      this.editMode,
       'sections/edit_grants',
       'cris.project.shared',
       0,
