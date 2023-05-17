@@ -36,6 +36,7 @@ import { ComparedVersionItemStatus } from '../../../core/project/project-version
 import { CompareItemComponent } from '../../../shared/compare-item/compare-item.component';
 import { ActivatedRoute } from '@angular/router';
 import { ItemDetailPageModalComponent } from 'src/app/item-detail-page-modal/item-detail-page-modal.component';
+import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 
 export const MY_FORMATS = {
   parse: {
@@ -219,6 +220,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     private workingPlanService: WorkingPlanService,
     private workingPlanStateService: WorkingPlanStateService,
     private aroute: ActivatedRoute,
+    private scrollToService: ScrollToService,
   ) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
       this._isExpandable, this._getChildren);
@@ -391,6 +393,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       if (flatNode.type === 'milestone') {
         this.milestonesMap.set(flatNode.id, flatNode.dates.end.full);
       }
+      // scroll to the newly added node
+      this.scrollToNewlyAddedNode();
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {
@@ -399,6 +403,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
           item.id,
           item.workspaceItemId);
       });
+      setTimeout(() => {
+        this.scrollToNewlyAddedNode();
+      }, 100);
     });
   }
 
@@ -765,6 +772,24 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         return nodeIdArray.indexOf(nodeId) > -1;
       })
     );
+  }
+
+  /**
+   * Scroll to the last added node.
+   */
+  scrollToNewlyAddedNode() {
+    const sub = this.workingPlanService.getLastAddedNodesList()
+    .subscribe((nodeIdArray: string[])=> {
+      if (nodeIdArray.length > 0) {
+        const config: ScrollToConfigOptions = {
+          target: nodeIdArray[0],
+          offset: -100,
+        };
+
+        this.scrollToService.scrollTo(config);
+      }
+      sub.unsubscribe();
+    });
   }
 
   ngOnDestroy(): void {
