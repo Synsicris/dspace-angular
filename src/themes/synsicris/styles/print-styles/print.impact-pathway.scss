@@ -44,14 +44,10 @@ a {
 
 /* set width in cm when working with print styles */
 #ipw {
-  width: 35cm !important; /* fits the page in A4 format, also including the arrows */
+  width: 35cm !important;/* fits the page in A4 format, also including the arrows */
 }
 
 #ipw ngx-domarrow .line {
-  z-index: 10 !important;
-  position: fixed !important;
   /* alternative solution to show the line, since the backgroud color is removed by print command */
   border-bottom: 2px solid red !important;
 }
-
-

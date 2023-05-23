@@ -1,0 +1,22 @@
+
+#ipw {
+  .arrow-container {
+    position: absolute !important;
+    // top/left values depend on the height from the header
+    // and the elements above the impact pathway that are hidden in the print mode
+    top: -7cm !important;
+    left: -5.5cm !important;
+  }
+}
+
+// override the styles when printing from the browser
+// when .print-mode is present (view=print parameter is present in the URL)
+.print-mode #ipw {
+  padding-top: 0 !important;
+
+  .arrow-container {
+    position: absolute !important;
+    top: 0 !important;
+    left: -50px !important;
+  }
+}
