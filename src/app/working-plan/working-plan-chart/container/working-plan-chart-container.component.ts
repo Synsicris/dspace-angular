@@ -5,7 +5,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map, take, withLatestFrom } from 'rxjs/operators';
 import { ResizeEvent } from 'angular-resizable-element';
 import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -393,8 +393,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       if (flatNode.type === 'milestone') {
         this.milestonesMap.set(flatNode.id, flatNode.dates.end.full);
       }
-      // scroll to the newly added node
-      this.scrollToNewlyAddedNode();
     });
     modalRef.componentInstance.addItems.subscribe((items: SimpleItem[]) => {
       items.forEach((item) => {
@@ -403,10 +401,10 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
           item.id,
           item.workspaceItemId);
       });
-      setTimeout(() => {
-        this.scrollToNewlyAddedNode();
-      }, 100);
     });
+
+    // scroll to the newly added node
+    this.scrollToNewlyAddedNode(modalRef.dismissed);
   }
 
   deleteStep(flatNode: WorkpacakgeFlatNode) {
@@ -775,21 +773,17 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Scroll to the last added node.
+   * Scrolls to the last added node, after {@param closed} emits a non-false value.
    */
-  scrollToNewlyAddedNode() {
-    const sub = this.workingPlanService.getLastAddedNodesList()
-    .subscribe((nodeIdArray: string[])=> {
-      if (nodeIdArray.length > 0) {
-        const config: ScrollToConfigOptions = {
-          target: nodeIdArray[0],
-          offset: -100,
-        };
-
-        this.scrollToService.scrollTo(config);
-      }
-      sub.unsubscribe();
-    });
+  scrollToNewlyAddedNode(closed: Observable<any>) {
+    closed.pipe(
+      filter(val => val !== false),
+      withLatestFrom(this.workingPlanService.getLastAddedNodesList()),
+      take(1),
+      map(([, nodeIds]) => nodeIds),
+      map(([nodeId,]) => ({ target: nodeId, offset: -100, }) as ScrollToConfigOptions)
+    )
+      .subscribe((config: ScrollToConfigOptions) => this.scrollToService.scrollTo(config));
   }
 
   ngOnDestroy(): void {
