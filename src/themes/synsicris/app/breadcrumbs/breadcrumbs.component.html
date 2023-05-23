@@ -1,31 +1,37 @@
 <ng-container *ngVar="(breadcrumbs$ | async) as breadcrumbs">
-    <nav *ngIf="(showBreadcrumbs$ | async)" aria-label="breadcrumb" class="nav-breadcrumb">
-        <ol class="breadcrumb" [class.container-fluid]="showBreadcrumbsFluid" [class.container]="!showBreadcrumbsFluid">
-            <ng-container
-                    *ngTemplateOutlet="breadcrumbs?.length > 0 ? breadcrumb : activeBreadcrumb; context: {text: 'home.breadcrumbs', url: '/'}"></ng-container>
-            <ng-container *ngFor="let bc of breadcrumbs; let last = last;">
-                <ng-container *ngTemplateOutlet="!last ? breadcrumb : activeBreadcrumb; context: bc"></ng-container>
-            </ng-container>
-        </ol>
-    </nav>
 
-    <ng-template #breadcrumb let-text="text" let-url="url">
-        <li class="breadcrumb-item">
-            <div class="breadcrumb-item-limiter">
-                <a [routerLink]="url" class="text-truncate">
-                    <span>xx</span>{{text | translate}}
-                </a>
-            </div>
-        </li>
-    </ng-template>
+  <nav *ngIf="(showBreadcrumbs$ | async)" aria-label="breadcrumb" class="nav-breadcrumb">
+    <ol class="breadcrumb" [class.container-fluid]="showBreadcrumbsFluid" [class.container]="!showBreadcrumbsFluid">
 
-    <ng-template #activeBreadcrumb let-text="text" let-url="url">
-        <li class="breadcrumb-item active" aria-current="page">
-            <div class="breadcrumb-item-limiter">
-                <a [routerLink]="url" class="text-truncate">
-                    <span>xx</span>{{text | translate}}
-                </a>
-            </div>
-        </li>
-    </ng-template> 
+      <!-- Startsite -->
+      <ng-container
+        *ngTemplateOutlet="breadcrumbs?.length > 0 ? breadcrumb : activeBreadcrumb; context: {text: 'home.breadcrumbs', url: '/'}">
+      </ng-container>
+
+      <!-- Sites after Startsite -->
+      <ng-container *ngFor="let bc of breadcrumbs; let last = last;">
+        <ng-container *ngTemplateOutlet="!last ? breadcrumb : activeBreadcrumb; context: bc"></ng-container>
+      </ng-container>
+
+    </ol>
+  </nav>
+
+  <!-- Links -->
+  <ng-template #breadcrumb let-text="text" let-url="url" let-cssClass="cssClass">
+    <li class="breadcrumb-item" [ngClass]="cssClass">
+      <div class="breadcrumb-item-limiter">
+        <a class="text-truncate" dsShowTitleForTruncatedText [routerLink]="url" [innerHTML]="text | translate"></a>
+      </div>
+    </li>
+  </ng-template>
+
+  <!--- last, active Site -->
+  <ng-template #activeBreadcrumb let-text="text" let-cssClass="cssClass">
+    <li class="breadcrumb-item active" [ngClass]="cssClass" aria-current="page">
+      <div class="breadcrumb-item-limiter">
+        <span class="text-truncate" dsShowTitleForTruncatedText [innerHTML]="text | translate"></span>
+      </div>
+    </li>
+  </ng-template>
+
 </ng-container>
