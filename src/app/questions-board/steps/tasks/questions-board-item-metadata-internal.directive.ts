@@ -1,6 +1,8 @@
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { InternalItemStatus } from '../../../core/submission/edititem-data.service';
-import { hasValue } from '../../../shared/empty.util';
+import { isExploitationPlan, QuestionBoardEntityType } from '../../core/models/questions-board-entity-type.model';
+import { addClassesAndTitle } from '../../../shared/utils/renderer-utils';
+import { DirectiveAttributes } from '../../../shared/utils/directive-attributes.interface';
 
 @Directive({
   selector: '[dsQBItemMetadataInternal]'
@@ -15,7 +17,7 @@ export class QbItemMetadataInternalDirective implements OnChanges {
   /**
    * The type of the entity (exploitationplan or interimreport)
    */
-  @Input() entityType: string;
+  @Input() entityType: QuestionBoardEntityType;
 
   InternalItemStatus = InternalItemStatus;
 
@@ -26,13 +28,8 @@ export class QbItemMetadataInternalDirective implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.status.isFirstChange() || (changes.status.previousValue !== changes.status.currentValue)) {
-      const attributes = this.entityType.includes('exploitationplan') ? this.getIconClassByInternalValueForEP() : this.getIconClassByInternalValueForIR();
-      if (hasValue(attributes)) {
-        attributes.classNames.forEach((value: string) => {
-          this.renderer.addClass(this.elem.nativeElement, value);
-        });
-        this.renderer.setAttribute(this.elem.nativeElement, 'title', attributes.title);
-      }
+      const attributes = isExploitationPlan(this.entityType) ? this.getIconClassByInternalValueForEP() : this.getIconClassByInternalValueForIR();
+      addClassesAndTitle(this.renderer, this.elem, attributes);
     }
   }
 
@@ -85,9 +82,4 @@ export class QbItemMetadataInternalDirective implements OnChanges {
     }
     return attributes;
   }
-}
-
-export interface DirectiveAttributes {
-  classNames: string[];
-  title: string;
 }

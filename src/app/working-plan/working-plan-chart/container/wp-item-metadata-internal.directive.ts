@@ -1,6 +1,7 @@
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { InternalItemStatus } from 'src/app/core/submission/edititem-data.service';
-import { hasValue } from 'src/app/shared/empty.util';
+import { DirectiveAttributes } from '../../../shared/utils/directive-attributes.interface';
+import { addClassesAndTitle } from '../../../shared/utils/renderer-utils';
 
 @Directive({
   selector: '[dsWPItemMetadataInternal]'
@@ -18,13 +19,7 @@ export class WpItemMetadataInternalDirective implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.status.isFirstChange() || (changes.status.previousValue !== changes.status.currentValue)) {
-      const attributes = this.getIconClassByInternalValue();
-      if (hasValue(attributes)) {
-        attributes.classNames.forEach((value: string) => {
-          this.renderer.addClass(this.elem.nativeElement, value);
-        });
-        this.renderer.setAttribute(this.elem.nativeElement, 'title', attributes.title);
-      }
+      addClassesAndTitle(this.renderer, this.elem, this.getIconClassByInternalValue());
     }
   }
 
@@ -52,9 +47,4 @@ export class WpItemMetadataInternalDirective implements OnChanges {
     }
     return attributes;
   }
-}
-
-export interface DirectiveAttributes {
-  classNames: string[];
-  title: string;
 }
