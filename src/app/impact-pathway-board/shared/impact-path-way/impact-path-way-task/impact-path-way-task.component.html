@@ -28,7 +28,7 @@
 
         <!-- column with status-icon -->
         <span *ngIf="data?.status" class="status-icon">
-          <i dsItemMetadataStatus [status]="data.status"></i>
+          <i dsIPWItemMetadataStatus [status]="data.status"></i>
         </span>
 
       </div>
@@ -41,7 +41,7 @@
         </div>
         <!-- tooltip-icon -->
         <span class="status-icon" *ngIf="data?.internalStatus">
-          <i dsItemMetadataInternal [status]="data.internalStatus"></i>
+          <i dsIPWItemMetadataInternal [status]="data.internalStatus"></i>
         </span>
       </div>
     </div>

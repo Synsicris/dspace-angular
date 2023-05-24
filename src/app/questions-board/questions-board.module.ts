@@ -26,6 +26,8 @@ import { CommentsModule } from '../shared/comments/comments.module';
 import { QuestionsBoardService } from './core/questions-board.service';
 import { QuestionsUploadStepComponent } from './steps/upload-step/questions-upload-step/questions-upload-step.component';
 import { SubmissionModule } from '../submission/submission.module';
+import { QbItemMetadataInternalDirective } from './steps/tasks/questions-board-item-metadata-internal.directive';
+import { QbItemMetadataStatusDirective } from './steps/tasks/questions-board-item-metadata-status.directive';
 
 const MODULES = [
   CommonModule,
@@ -58,7 +60,9 @@ const PROVIDERS = [
 const ENTRY_COMPONENTS = [];
 
 const DIRECTIVES = [
-  QuestionsBoardDirective
+  QuestionsBoardDirective,
+  QbItemMetadataStatusDirective,
+  QbItemMetadataInternalDirective
 ];
 
 @NgModule({

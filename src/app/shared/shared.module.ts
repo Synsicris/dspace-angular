@@ -776,7 +776,7 @@ const DIRECTIVES = [
   EntityIconDirective,
   TaskColorDirective,
   IpwItemMetadataStatusDirective,
-  IpwItemMetadataInternalDirective
+  IpwItemMetadataInternalDirective,
 ];
 
 @NgModule({
