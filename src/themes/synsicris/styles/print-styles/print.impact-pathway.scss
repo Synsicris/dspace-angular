@@ -4,6 +4,7 @@
 
 ds-footer,
 ds-alert-role,
+ds-loading,
 ds-themed-breadcrumbs,
 button:not(.sidebar-panel-toggle),
 nav ds-link-menu-item,
@@ -50,4 +51,10 @@ a {
 #ipw ngx-domarrow .line {
   /* alternative solution to show the line, since the backgroud color is removed by print command */
   border-bottom: 2px solid red !important;
+}
+
+#ipw ds-impact-path-way-task {
+  // important to set a margin to avoid changing the position of the task
+  // and the length of the arrow
+  margin-bottom: 1em !important;
 }

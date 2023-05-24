@@ -1,5 +1,6 @@
 import {
   AfterContentChecked,
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   Inject,
@@ -8,9 +9,9 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of as observableOf, of, Subscription } from 'rxjs';
 import { filter, map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { NgbAccordion, NgbModal, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
@@ -34,13 +35,15 @@ import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { RemoteData } from '../../../core/data/remote-data';
 import { administratorRole, AlertRole, getProgrammeRoles } from '../../../shared/alert/alert-role/alert-role';
 import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
+import { Location } from '@angular/common';
+import { isEqual } from 'lodash';
 
 @Component({
   selector: 'ds-impact-path-way',
   styleUrls: ['./impact-path-way.component.scss'],
   templateUrl: './impact-path-way.component.html'
 })
-export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDestroy {
+export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDestroy, AfterViewInit {
   /**
    * If the current user is a funder Organizational/Project manager
    */
@@ -123,6 +126,8 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
               private itemService: ItemDataService,
               private modalService: NgbModal,
               protected aroute: ActivatedRoute,
+              private router: Router,
+              private location: Location,
               protected editItemDataService: EditItemDataService) {
   }
 
@@ -199,6 +204,18 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
       this.loaded.next(true);
     }
 
+  }
+
+  ngAfterViewInit(): void {
+    if (isEqual(this.aroute.snapshot.queryParams.print, 'true')) {
+        window.onafterprint = () => {
+          this.aroute.queryParams.subscribe((params) => {
+            location.reload(); // Reload the page
+          });
+          this.location.back();
+        };
+        window.print();
+    }
   }
 
   getRelations(): Observable<ImpactPathwayLink[]> {
@@ -301,5 +318,13 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
    */
   changeAccordionState(event: NgbPanelChangeEvent) {
     this.isCommentAccordionOpen = event.nextState;
+  }
+
+  onPrint() {
+    this.aroute.queryParams.subscribe((params) => {
+      location.reload(); // Reload the page
+    });
+    this.router.navigate([this.router.url], { queryParams: { view: 'print' , print: true}});
+
   }
 }
