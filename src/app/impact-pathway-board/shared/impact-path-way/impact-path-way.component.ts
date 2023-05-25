@@ -207,14 +207,14 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
   }
 
   ngAfterViewInit(): void {
-    if (isEqual(this.aroute.snapshot.queryParams.print, 'true')) {
-        window.onafterprint = () => {
+    if (isEqual(this.aroute.snapshot.queryParams.print, 'true') && this._window.nativeWindow) {
+      this._window.nativeWindow.onafterprint = () => {
           this.aroute.queryParams.subscribe((params) => {
             location.reload(); // Reload the page
           });
           this.location.back();
         };
-        window.print();
+        this._window.nativeWindow.print();
     }
   }
 
