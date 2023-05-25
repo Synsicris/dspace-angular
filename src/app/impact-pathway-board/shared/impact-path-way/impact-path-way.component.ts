@@ -208,6 +208,8 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
 
   ngAfterViewInit(): void {
     if (isEqual(this.aroute.snapshot.queryParams.print, 'true') && this._window.nativeWindow) {
+      // if the print query param is true, print the page
+      // and reload the page after printing to go back to the normal view
       this._window.nativeWindow.onafterprint = () => {
           this.aroute.queryParams.subscribe((params) => {
             location.reload(); // Reload the page
@@ -320,6 +322,11 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
     this.isCommentAccordionOpen = event.nextState;
   }
 
+  /**
+   * On print button click
+   * add query param to url
+   * and reload the page to upload print styles
+   */
   onPrint() {
     this.aroute.queryParams.subscribe((params) => {
       location.reload(); // Reload the page
