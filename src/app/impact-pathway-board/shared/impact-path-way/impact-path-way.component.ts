@@ -358,6 +358,11 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
     this.isCommentAccordionOpen = event.nextState;
   }
 
+  /**
+   * On print button click
+   * add query param to url
+   * and reload the page to upload print styles
+   */
   onPrint() {
     this.router.navigate([], { queryParams: { view: 'print', print: true } });
   }
