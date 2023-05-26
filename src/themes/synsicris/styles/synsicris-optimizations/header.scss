@@ -56,11 +56,21 @@ header {
 	  /* Elements in header on the right side of the Synsicris-Logo, space between menu items and make them smaller */
 	  .navbar-nav {
 		margin: 0 0.4rem;
-		font-size: 0.85rem;
+		//font-size: 0.85rem;
+		font-size:1rem;
 		// Icons in header - twice because of differet code
 		a:link, a:visited { i.fas, span {color: var(--ds-header-icon-color) !important;} }
 		// Textlinks on the left side near logo
-		&.textlinks-in-header {font-family:'Nunito-Medium';}
+		&.textlinks-in-header {
+			font-family:'Nunito-Medium';
+		}
+		// icon for search in all entries
+		a[href="/browse/projects"]:before { 
+			font-family: 'Fontawesome';
+			content:"\f002";
+			display:inline-block;
+			margin-right:0.3rem;
+		}
 	  } // end .container .navbar-nav
   
 	} // end nav.navbar
