@@ -1,6 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, Observable, switchMap } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { Item } from '../../../core/shared/item.model';
@@ -14,9 +17,6 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 import { isNotEmpty } from '../../empty.util';
 import { FUNDING_ENTITY } from '../../../core/project/project-data.service';
-import { ActivatedRoute } from '@angular/router';
-import { map, take } from 'rxjs/operators';
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 
 
 /**
@@ -86,9 +86,9 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
       const canEdit$ = this.authorizationService.isAuthorized(FeatureID.CanEditItemGrants, this.contextMenuObject.self, undefined);
       this.isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(take(1));
 
-      combineLatest([isVersionOfAnItem$, canEdit$, this.isAdmin$])
-        .subscribe(([isVersionOfAnItem, canEdit, isAdmin]: [boolean, boolean, boolean]) => {
-          this.canShow$.next(!isVersionOfAnItem && (canEdit || isAdmin));
+      combineLatest([isVersionOfAnItem$, canEdit$])
+        .subscribe(([isVersionOfAnItem, canEdit]: [boolean, boolean]) => {
+          this.canShow$.next(!isVersionOfAnItem && canEdit);
         });
     }
   }
