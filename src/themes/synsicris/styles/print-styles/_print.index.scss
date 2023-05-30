@@ -16,4 +16,7 @@
   @import './print.impact-pathway.scss';
   @import './print.interim-report.scss';
   @import './print.working-plan.scss';
+
+  // The following stylesheets are applied only on print command.
+  @import './print.working-plan.media-print.scss';
 }

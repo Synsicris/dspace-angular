@@ -27,3 +27,7 @@ a {
 ds-working-plan-chart button {
   display: none !important;
 }
+
+.flex-fill .calendar-inner-cell[date-inside=true] {
+  background-color: #89b34d !important;
+}
