@@ -31,9 +31,6 @@
           <i class="fas fa-circle-notch fa-spin"> {{'impact-pathway.remove.processing' | translate}}</i>
         </span>
       </button>
-      <button class="btn btn-sm btn-primary" (click)="onPrint()">
-        <i class="fa-solid fa-print"></i>
-      </button>
     </div>
   </div>
 
@@ -110,7 +107,7 @@
     ></ds-editable-textarea>
   </div>
 
-  <div class="d-print-none" *ngIf="loadedArrows | async">
+  <ng-container *ngIf="loadedArrows | async">
     <ng-container *ngFor="let relation of (getRelations() | async)">
       <ngx-domarrow class="position-arrow"
                     [from]="'#' + relation.from"
@@ -119,20 +116,7 @@
                     [tail]="true"
                     [onlyVisible]="true" color="red"></ngx-domarrow>
     </ng-container>
-  </div>
-
-  <div class="d-print-block d-none" *ngIf="loadedArrows | async">
-    <div class="arrow-container">
-      <ng-container *ngFor="let relation of (getRelations() | async)">
-        <ngx-domarrow class="d-print-br"
-                      [from]="'#' + relation.from"
-                      [to]="'#' + relation.to"
-                      [head]="relation.twoWay"
-                      [tail]="true"
-                      [onlyVisible]="true" color="red"></ngx-domarrow>
-      </ng-container>
-    </div>
-  </div>
+  </ng-container>
 
   <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">

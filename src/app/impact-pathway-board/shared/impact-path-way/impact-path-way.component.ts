@@ -211,18 +211,19 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
           filter(isPrinting => isPrinting === true),
           this.reloadArrows()
         )
-        .subscribe(() => window.print())
+        .subscribe(() => this._window.nativeWindow.print())
     );
 
     this.subs.push(
-      fromEvent(window, 'beforeprint')
+      fromEvent(this._window.nativeWindow, 'beforeprint')
         .subscribe((event: Event) => {
           event.preventDefault();
           event.stopImmediatePropagation();
           this.onPrint();
         }),
-      fromEvent(window, 'afterprint')
+      fromEvent(this._window.nativeWindow, 'afterprint')
         .pipe(
+          delay(100),
           withLatestFrom(this.isPrinting$),
           filter(([, isPrinting]) => isPrinting === true),
           switchMap(() => fromPromise(this.router.navigate([], { queryParams: { view: 'default' } }))),

@@ -10,13 +10,10 @@
 }
 
 // Apply the print styles only when the print command is executed (ctrl+p) or from the browser.
-// NOTE: The queue of the styles is important.
+// NOTE: The order of the stylesheets is important. The stylesheets are applied in the order they are imported.
 @media print {
   @import './print.exploitation-plan.scss';
   @import './print.impact-pathway.scss';
   @import './print.interim-report.scss';
   @import './print.working-plan.scss';
-
-  // The print-cmd should be imported last, because it overrides the styles from the other files.
-  @import './print-cmd.impact-pathway.scss';
 }
