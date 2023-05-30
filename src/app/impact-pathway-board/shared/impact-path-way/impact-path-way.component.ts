@@ -215,6 +215,12 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
     );
 
     this.subs.push(
+      fromEvent(window, 'beforeprint')
+        .subscribe((event: Event) => {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          this.onPrint();
+        }),
       fromEvent(window, 'afterprint')
         .pipe(
           withLatestFrom(this.isPrinting$),
