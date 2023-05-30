@@ -280,7 +280,7 @@ function addWorkpackageStep(state: WorkingPlanState, action: AddWorkpackageStepS
       [action.payload.parentId]: newWorpackage
     }),
     processing: false,
-    lastAddedNodes: [...state.lastAddedNodes, action.payload.workpackageStep.id]
+    lastAddedNodes: [action.payload.workpackageStep.id]
   });
 }
 

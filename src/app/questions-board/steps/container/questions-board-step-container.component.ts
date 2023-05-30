@@ -52,6 +52,11 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
   @Input() fundingCommunity: Community;
 
   /**
+   * Questions board type (interim report or explanation plan)
+   */
+  @Input() questionEntityType: string;
+
+  /**
    * A boolean representing if compare mode is active
    */
   compareMode$ = new BehaviorSubject(false);

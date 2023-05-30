@@ -38,6 +38,8 @@ import {
 import { ItemDetailPageModalModule } from '../item-detail-page-modal/item-detail-page-modal.module';
 import { SectionsService } from '../submission/sections/sections.service';
 import { WorkingPlanCommentsComponent } from './working-plan-chart/comments/working-plan-comments.component';
+import { WpItemMetadataStatusDirective } from './working-plan-chart/container/wp-item-metadata-status.directive';
+import { WpItemMetadataInternalDirective } from './working-plan-chart/container/wp-item-metadata-internal.directive';
 
 const MODULES = [
   CommonModule,
@@ -66,7 +68,9 @@ const COMPONENTS = [
 ];
 
 const DIRECTIVES = [
-  WorkpackageStatusDirective
+  WorkpackageStatusDirective,
+  WpItemMetadataStatusDirective,
+  WpItemMetadataInternalDirective
 ];
 
 const ENTRY_COMPONENTS = [

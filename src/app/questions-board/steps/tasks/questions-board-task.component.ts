@@ -43,6 +43,7 @@ export class QuestionsBoardTaskComponent implements OnInit {
   @Input() public taskPosition: number;
   @Input() public isObjectivePage: boolean;
   @Input() public data: QuestionsBoardTask;
+  @Input() public questionEntityType: string;
   /**
    * The edit mode to use
    */
