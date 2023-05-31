@@ -47,3 +47,11 @@ MIXINS
 	font-weight: 700;
 	font-style: normal;
 	}
+
+  // Fontawesome from assets-folder in Synsicris - to be update, when the general Fontawesome will be updatet!
+  @font-face {
+		font-family: 'Fontawesome';
+		src: url("../assets/fonts/fontawesome/fontawesome-webfont.ttf") format('truetype');
+		font-weight: 200;
+		font-style: normal;
+	}
