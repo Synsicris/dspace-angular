@@ -106,7 +106,7 @@ describe('ItemDataService', () => {
   }
 
   describe('composition', () => {
-    const initService = () => new ItemDataService(null, null, null, null, null, null, null, null);
+    const initService = () => new ItemDataService(null, null, null, null, null, null, null, null, null, null);
     testCreateDataImplementation(initService);
     testPatchDataImplementation(initService);
     testDeleteDataImplementation(initService);

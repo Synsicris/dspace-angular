@@ -1,5 +1,5 @@
 <!-- ------------------------------------------------------------
-Textarea for description of the project under the impact path way 
+Textarea for description of the project under the impact path way
 incl. headline and button, also used on second level
 ------------------------------------------------------------- -->
 <!-- <div class="d-flex flex-column p-2 bg-light rounded impact-pathway-editable-textfield"> removed background-color (230504 rex) -->
@@ -8,13 +8,17 @@ incl. headline and button, also used on second level
     <div class="d-flex">
 
       <h5 class="mr-3 pt-1 align-self-start">{{fieldTitle}}</h5>
-
-      <button class="btn btn-outline-primary btn-sm align-self-start" [disabled]="disabled" (click)="$event.preventDefault();  $event.stopPropagation(); openEditModal();">
-        <span>
-          <i class="fas fa-pen"></i> <!-- {{editTitle}} --> {{'impact-pathway.edit.description' | translate}}
-        </span>
-      </button>
-
+      <div>
+        <button *ngIf="compareMode" class="btn btn-lg btn-link p-0 flex-shrink-1 mr-2"
+                title="{{'impact-pathway.compare' | translate}}" (click)="openCompareModal()">
+          <i class="fas fa-not-equal"></i>
+        </button>
+        <button class="btn btn-outline-primary btn-sm align-self-start" [disabled]="disabled" (click)="$event.preventDefault();  $event.stopPropagation(); openEditModal();">
+          <span>
+            <i class="far fa-edit"></i> {{editTitle}}
+          </span>
+        </button>
+      </div>
     </div>
 
     <div class="clearfix"></div>
@@ -22,6 +26,6 @@ incl. headline and button, also used on second level
     <!-- added a placeholder(230428 rex)
     Unfortunately I haven't found a solution to also style the placeholder to visually distinguish it from the normal input text,
     see src/themes/synsicris/styles/synsicris-optimizations/impact_pathway_editable_textarea.scss -->
-    <textarea #textarea class="mt-2 form-control rounded-0 editor" placeholder="{{'editableTextfield.placeholder' | translate}}" rows="{{rows}}" title="{{fieldTitle}}" disabled="true" [value]="content || ''"></textarea>
+    <textarea #textarea class="mt-2 form-control rounded-0 editor" placeholder="{{editPlaceholder}}" rows="{{rows}}" title="{{fieldTitle}}" disabled="true" [value]="content || ''"></textarea>
 
 </div>

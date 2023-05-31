@@ -5,7 +5,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map, take, withLatestFrom } from 'rxjs/operators';
 import { ResizeEvent } from 'angular-resizable-element';
 import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -36,6 +36,7 @@ import { ComparedVersionItemStatus } from '../../../core/project/project-version
 import { CompareItemComponent } from '../../../shared/compare-item/compare-item.component';
 import { ActivatedRoute } from '@angular/router';
 import { ItemDetailPageModalComponent } from 'src/app/item-detail-page-modal/item-detail-page-modal.component';
+import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 
 export const MY_FORMATS = {
   parse: {
@@ -219,6 +220,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     private workingPlanService: WorkingPlanService,
     private workingPlanStateService: WorkingPlanStateService,
     private aroute: ActivatedRoute,
+    private scrollToService: ScrollToService,
   ) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
       this._isExpandable, this._getChildren);
@@ -400,6 +402,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
           item.workspaceItemId);
       });
     });
+
+    // scroll to the newly added node
+    this.scrollToNewlyAddedNode(modalRef.dismissed);
   }
 
   deleteStep(flatNode: WorkpacakgeFlatNode) {
@@ -765,6 +770,20 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         return nodeIdArray.indexOf(nodeId) > -1;
       })
     );
+  }
+
+  /**
+   * Scrolls to the last added node, after {@param closed} emits a non-false value.
+   */
+  scrollToNewlyAddedNode(closed: Observable<any>) {
+    closed.pipe(
+      filter(val => val !== false),
+      withLatestFrom(this.workingPlanService.getLastAddedNodesList()),
+      take(1),
+      map(([, nodeIds]) => nodeIds),
+      map(([nodeId,]) => ({ target: nodeId, offset: -100, }) as ScrollToConfigOptions)
+    )
+      .subscribe((config: ScrollToConfigOptions) => this.scrollToService.scrollTo(config));
   }
 
   ngOnDestroy(): void {

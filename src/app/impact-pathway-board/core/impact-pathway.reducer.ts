@@ -3,6 +3,8 @@ import { difference, findIndex } from 'lodash';
 import { ImpactPathway } from './models/impact-pathway.model';
 import {
   AddImpactPathwaySubTaskSuccessAction,
+  AddImpactPathwayTaskAction,
+  AddImpactPathwayTaskErrorAction,
   AddImpactPathwayTaskLinkAction,
   AddImpactPathwayTaskLinksAction,
   AddImpactPathwayTaskSuccessAction,
@@ -20,8 +22,13 @@ import {
   OrderImpactPathwaySubTasksErrorAction,
   OrderImpactPathwayTasksAction,
   OrderImpactPathwayTasksErrorAction,
+  OrderImpactPathwayTasksSuccessAction,
+  RemoveImpactPathwaySubTaskAction,
+  RemoveImpactPathwaySubTaskErrorAction,
   RemoveImpactPathwaySubTaskSuccessAction,
   RemoveImpactPathwaySuccessAction,
+  RemoveImpactPathwayTaskAction,
+  RemoveImpactPathwayTaskErrorAction,
   RemoveImpactPathwayTaskLinkAction,
   RemoveImpactPathwayTaskSuccessAction,
   SetImpactPathwaySubTaskCollapseAction,
@@ -76,6 +83,7 @@ export interface ImpactPathwayState {
   processing: boolean;
   removing: boolean;
   targetTaskId: string;
+  targetTaskIdBeforeCompare: string;
   links: ImpactPathwayLinks;
   collapsed: any;
   compareMode: boolean;
@@ -91,6 +99,7 @@ const impactPathwayInitialState: ImpactPathwayState = {
   processing: false,
   removing: false,
   targetTaskId: '',
+  targetTaskIdBeforeCompare: '',
   links: {
     showLinks: true,
     editing: false,
@@ -134,14 +143,49 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
       });
     }
 
-    case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK:
+    case ImpactPathwayActionTypes.SAVE_IMPACT_PATHWAY_TASK_LINKS:
     case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK:
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK:
-    case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUB_TASK:
-    case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK: {
+    case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUB_TASK: {
       return Object.assign({}, state, {
         processing: true
       });
+    }
+
+    case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK: {
+      return setImpactPathwayStepStatus(
+        state,
+        (action as RemoveImpactPathwayTaskAction).payload.impactPathwayId,
+        (action as RemoveImpactPathwayTaskAction).payload.parentId,
+        true
+      );
+    }
+
+    case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_ERROR: {
+      return setImpactPathwayStepStatus(
+        state,
+        (action as RemoveImpactPathwayTaskErrorAction).payload.impactPathwayId,
+        (action as RemoveImpactPathwayTaskErrorAction).payload.parentId,
+        false
+      );
+    }
+
+    case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK: {
+      return setImpactPathwayStepStatus(
+        state,
+        (action as AddImpactPathwayTaskAction).payload.impactPathwayId,
+        (action as AddImpactPathwayTaskAction).payload.stepId,
+        true
+      );
+    }
+
+    case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_ERROR: {
+      return setImpactPathwayStepStatus(
+        state,
+        (action as AddImpactPathwayTaskErrorAction).payload.impactPathwayId,
+        (action as AddImpactPathwayTaskErrorAction).payload.stepId,
+        false
+      );
     }
 
     case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY: {
@@ -161,14 +205,13 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
       });
     }
 
-    case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_ERROR:
+    case ImpactPathwayActionTypes.SAVE_IMPACT_PATHWAY_TASK_LINKS_ERROR:
     case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK_ERROR:
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_ERROR:
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_SUCCESS:
     case ImpactPathwayActionTypes.GENERATE_IMPACT_PATHWAY_TASK_ERROR:
     case ImpactPathwayActionTypes.INIT_IMPACT_PATHWAY_ERROR:
-    case ImpactPathwayActionTypes.MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS:
-    case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_ERROR: {
+    case ImpactPathwayActionTypes.MOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: {
       return Object.assign({}, state, {
         processing: false
       });
@@ -207,7 +250,7 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
     }
 
     case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_SUCCESS: {
-      return addImpactPathwayTaskToImpactPathwayStep(state, action as AddImpactPathwayTaskSuccessAction);
+      return addImpactPathwayTaskToImpactPathwayStep(state, action as AddImpactPathwayTaskSuccessAction, false);
     }
 
     case ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK_SUCCESS: {
@@ -241,7 +284,8 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
         state,
         (action as OrderImpactPathwayTasksAction).payload.impactPathwayId,
         (action as OrderImpactPathwayTasksAction).payload.stepId,
-        (action as OrderImpactPathwayTasksAction).payload.currentTasks
+        (action as OrderImpactPathwayTasksAction).payload.currentTasks,
+        true
       );
     }
 
@@ -250,7 +294,17 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
         state,
         (action as OrderImpactPathwayTasksErrorAction).payload.impactPathwayId,
         (action as OrderImpactPathwayTasksErrorAction).payload.stepId,
-        (action as OrderImpactPathwayTasksErrorAction).payload.previousTasks
+        (action as OrderImpactPathwayTasksErrorAction).payload.previousTasks,
+        false
+      );
+    }
+
+    case ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_TASKS_SUCCESS: {
+      return setImpactPathwayStepStatus(
+        state,
+        (action as OrderImpactPathwayTasksSuccessAction).payload.impactPathwayId,
+        (action as OrderImpactPathwayTasksSuccessAction).payload.stepId,
+        false
       );
     }
 
@@ -335,6 +389,7 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
           toSave: [],
           toDelete: []
         }),
+        processing: false
       });
     }
 
@@ -347,11 +402,33 @@ export function impactPathwayReducer(state = impactPathwayInitialState, action: 
     }
 
     case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_SUCCESS: {
-      return RemoveImpactPathwayTaskFromImpactPathwayStep(state, action as RemoveImpactPathwayTaskSuccessAction);
+      return RemoveImpactPathwayTaskFromImpactPathwayStep(state, action as RemoveImpactPathwayTaskSuccessAction, false);
+    }
+
+    case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUB_TASK: {
+      return setImpactPathwayStepStatus(
+        state,
+        (action as RemoveImpactPathwaySubTaskAction).payload.impactPathwayId,
+        (action as RemoveImpactPathwaySubTaskAction).payload.stepId,
+        true
+      );
     }
 
     case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: {
-      return RemoveImpactPathwaySubTaskFromImpactPathwayTask(state, action as RemoveImpactPathwaySubTaskSuccessAction);
+      return RemoveImpactPathwaySubTaskFromImpactPathwayTask(
+        state,
+        action as RemoveImpactPathwaySubTaskSuccessAction,
+        false
+      );
+    }
+
+    case ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUB_TASK_ERROR: {
+      return setImpactPathwayStepStatus(
+        state,
+        (action as RemoveImpactPathwaySubTaskErrorAction).payload.impactPathwayId,
+        (action as RemoveImpactPathwaySubTaskErrorAction).payload.stepId,
+        false
+      );
     }
 
     case ImpactPathwayActionTypes.UPDATE_IMPACT_PATHWAY: {
@@ -436,24 +513,14 @@ function removeImpactPathway(state: ImpactPathwayState, action: RemoveImpactPath
  * @return ImpactPathwayState
  *    the new state.
  */
-function addImpactPathwayTaskToImpactPathwayStep(state: ImpactPathwayState, action: AddImpactPathwayTaskSuccessAction): ImpactPathwayState {
-  const newState = Object.assign({}, state);
-  const step: ImpactPathwayStep = newState.objects[action.payload.impactPathwayId].getStep(action.payload.stepId);
-  const stepIndex: number = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.stepId);
+function addImpactPathwayTaskToImpactPathwayStep(state: ImpactPathwayState, action: AddImpactPathwayTaskSuccessAction, processing: boolean = false): ImpactPathwayState {
+  const newState = setImpactPathwayStepStatus(state, action.payload.impactPathwayId, action.payload.stepId, processing);
+  const { step, stepIndex } =
+    extractStoreElements(newState, action.payload.impactPathwayId, action.payload.stepId, null);
   const newStep = Object.assign(new ImpactPathwayStep(), step, {
     tasks: [...step.tasks, action.payload.task]
   });
-  const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[action.payload.impactPathwayId], {
-    steps: newState.objects[action.payload.impactPathwayId].steps.map((stepEntry, index) => {
-      return (index === stepIndex) ? newStep : stepEntry;
-    })
-  });
-  return Object.assign({}, state, {
-    objects: Object.assign({}, state.objects, {
-      [action.payload.impactPathwayId]: newImpactPathway
-    }),
-    processing: false
-  });
+  return mapIPWState(state, newState, action.payload.impactPathwayId, stepIndex, newStep);
 }
 
 function normalizeImpactPathwayObjectsOnRehydrate(state: ImpactPathwayState) {
@@ -483,6 +550,50 @@ function normalizeImpactPathwayObjectsOnRehydrate(state: ImpactPathwayState) {
   }
 }
 
+function extractStoreElements(newState: ImpactPathwayState, impactPathwayId: string, stepId: string, parentTaskId: string | null) {
+  const step: ImpactPathwayStep = newState.objects[impactPathwayId].getStep(stepId);
+  const stepIndex: number = newState.objects[impactPathwayId].getStepIndex(stepId);
+  let parentTask: ImpactPathwayTask = null;
+  let parentTaskIndex: number = null;
+  if (parentTaskId != null) {
+    parentTask = step.getTask(parentTaskId);
+    parentTaskIndex = step.getTaskIndex(parentTaskId);
+  }
+  return { step, stepIndex, parentTask, parentTaskIndex };
+}
+
+function mapStepState(state: ImpactPathwayState, newState: ImpactPathwayState, impactPathwayId: string, stepIndex: number, newStep: ImpactPathwayStep) {
+  return Object.assign(new ImpactPathway(), state.objects[impactPathwayId], {
+    steps: newState.objects[impactPathwayId].steps.map((stepEntry, index) => {
+      return (index === stepIndex) ? newStep : stepEntry;
+    })
+  });
+}
+
+function mapIPWState(state: ImpactPathwayState, newState: ImpactPathwayState, impactPathwayId: string, stepIndex: number, newStep: ImpactPathwayStep, processing: boolean = false) {
+  const newImpactPathway = mapStepState(state, newState, impactPathwayId, stepIndex, newStep);
+  return Object.assign({}, state, {
+    objects: Object.assign({}, state.objects, {
+      [impactPathwayId]: newImpactPathway
+    }),
+    processing
+  });
+}
+
+function addTasks(state: ImpactPathwayState, newState: ImpactPathwayState, step: ImpactPathwayStep, parentTaskIndex: number, newTask: ImpactPathwayTask, impactPathwayId: string, stepIndex: number) {
+  const newTaskList = step.tasks.slice(0);
+  newTaskList[parentTaskIndex] = newTask;
+
+  const newStep = Object.assign(new ImpactPathwayStep(), step, {
+    tasks: newTaskList
+  });
+  return Object.assign(new ImpactPathway(), state.objects[impactPathwayId], {
+    steps: newState.objects[impactPathwayId].steps.map((stepEntry, index) => {
+      return (index === stepIndex) ? newStep : stepEntry;
+    })
+  });
+}
+
 /**
  * Init an impact pathway sub-task to parent.
  *
@@ -494,30 +605,17 @@ function normalizeImpactPathwayObjectsOnRehydrate(state: ImpactPathwayState) {
  *    the new state.
  */
 function addImpactPathwaySubTaskToImpactPathwayTask(state: ImpactPathwayState, action: AddImpactPathwaySubTaskSuccessAction): ImpactPathwayState {
-  const newState = Object.assign({}, state);
-  const step: ImpactPathwayStep = newState.objects[action.payload.impactPathwayId].getStep(action.payload.stepId);
-  const stepIndex: number = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.stepId);
-  const parentTask: ImpactPathwayTask = step.getTask(action.payload.parentTaskId);
-  const parentTaskIndex: number = step.getTaskIndex(action.payload.parentTaskId);
+  const newState = setImpactPathwayStepStatus(state, action.payload.impactPathwayId, action.payload.stepId, false);
+  const { step, stepIndex, parentTask, parentTaskIndex } =
+    extractStoreElements(newState, action.payload.impactPathwayId, action.payload.stepId, action.payload.parentTaskId);
   const newTask = Object.assign(new ImpactPathwayTask(), parentTask, {
     tasks: [...parentTask.tasks, action.payload.task]
   });
-  const newTaskList = step.tasks.slice(0);
-  newTaskList[parentTaskIndex] = newTask;
-
-  const newStep = Object.assign(new ImpactPathwayStep(), step, {
-    tasks: newTaskList
-  });
-  const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[action.payload.impactPathwayId], {
-    steps: newState.objects[action.payload.impactPathwayId].steps.map((stepEntry, index) => {
-      return (index === stepIndex) ? newStep : stepEntry;
-    })
-  });
+  const newImpactPathway = addTasks(state, newState, step, parentTaskIndex, newTask, action.payload.impactPathwayId, stepIndex);
   return Object.assign({}, state, {
     objects: Object.assign({}, state.objects, {
       [action.payload.impactPathwayId]: newImpactPathway
-    }),
-    processing: false
+    })
   });
 }
 
@@ -531,25 +629,15 @@ function addImpactPathwaySubTaskToImpactPathwayTask(state: ImpactPathwayState, a
  * @return ImpactPathwayState
  *    the new state.
  */
-function RemoveImpactPathwayTaskFromImpactPathwayStep(state: ImpactPathwayState, action: RemoveImpactPathwayTaskSuccessAction): ImpactPathwayState {
-  const newState = Object.assign({}, state);
-  const step: ImpactPathwayStep = newState.objects[action.payload.impactPathwayId].getStep(action.payload.parentId);
-  const stepIndex: number = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.parentId);
+function RemoveImpactPathwayTaskFromImpactPathwayStep(state: ImpactPathwayState, action: RemoveImpactPathwayTaskSuccessAction, processing: boolean): ImpactPathwayState {
+  const newState = setImpactPathwayStepStatus(state, action.payload.impactPathwayId, action.payload.parentId, processing);
+  const { step, stepIndex } =
+    extractStoreElements(newState, action.payload.impactPathwayId, action.payload.parentId, null);
   const newStep = Object.assign(new ImpactPathwayStep(), step, {
     tasks: [...step.tasks]
   });
   newStep.removeTask(action.payload.taskId);
-  const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[action.payload.impactPathwayId], {
-    steps: newState.objects[action.payload.impactPathwayId].steps.map((stepEntry, index) => {
-      return (index === stepIndex) ? newStep : stepEntry;
-    })
-  });
-  return Object.assign({}, state, {
-    objects: Object.assign({}, state.objects, {
-      [action.payload.impactPathwayId]: newImpactPathway
-    }),
-    processing: false
-  });
+  return mapIPWState(state, newState, action.payload.impactPathwayId, stepIndex, newStep);
 }
 
 /**
@@ -562,27 +650,15 @@ function RemoveImpactPathwayTaskFromImpactPathwayStep(state: ImpactPathwayState,
  * @return ImpactPathwayState
  *    the new state.
  */
-function RemoveImpactPathwaySubTaskFromImpactPathwayTask(state: ImpactPathwayState, action: RemoveImpactPathwaySubTaskSuccessAction): ImpactPathwayState {
-  const newState = Object.assign({}, state);
-  const step: ImpactPathwayStep = newState.objects[action.payload.impactPathwayId].getStep(action.payload.stepId);
-  const stepIndex: number = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.stepId);
-  const parentTask: ImpactPathwayTask = step.getTask(action.payload.parentTaskId);
-  const parentTaskIndex: number = step.getTaskIndex(action.payload.parentTaskId);
+function RemoveImpactPathwaySubTaskFromImpactPathwayTask(state: ImpactPathwayState, action: RemoveImpactPathwaySubTaskSuccessAction, processing: boolean): ImpactPathwayState {
+  const newState = setImpactPathwayStepStatus(state, action.payload.impactPathwayId, action.payload.stepId, processing);
+  const { step, stepIndex, parentTask, parentTaskIndex } =
+    extractStoreElements(newState, action.payload.impactPathwayId, action.payload.stepId, action.payload.parentTaskId);
   const newTask = Object.assign(new ImpactPathwayTask(), parentTask, {
     tasks: [...parentTask.tasks]
   });
   newTask.removeSubTask(action.payload.taskId);
-  const newTaskList = step.tasks.slice(0);
-  newTaskList[parentTaskIndex] = newTask;
-
-  const newStep = Object.assign(new ImpactPathwayStep(), step, {
-    tasks: newTaskList
-  });
-  const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[action.payload.impactPathwayId], {
-    steps: newState.objects[action.payload.impactPathwayId].steps.map((stepEntry, index) => {
-      return (index === stepIndex) ? newStep : stepEntry;
-    })
-  });
+  const newImpactPathway = addTasks(state, newState, step, parentTaskIndex, newTask, action.payload.impactPathwayId, stepIndex);
   return Object.assign({}, state, {
     objects: Object.assign({}, state.objects, {
       [action.payload.impactPathwayId]: newImpactPathway
@@ -622,23 +698,13 @@ function replaceImpactPathway(state: ImpactPathwayState, action: UpdateImpactPat
  */
 function replaceImpactPathwayTask(state: ImpactPathwayState, action: UpdateImpactPathwayTaskAction): ImpactPathwayState {
   const newState = Object.assign({}, state);
-  const step: ImpactPathwayStep = newState.objects[action.payload.impactPathwayId].getStep(action.payload.stepId);
-  const stepIndex: number = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.stepId);
+  const { step, stepIndex } =
+    extractStoreElements(newState, action.payload.impactPathwayId, action.payload.stepId, null);
   const newStep = Object.assign(new ImpactPathwayStep(), step, {
     tasks: [...step.tasks]
   });
   newStep.replaceTask(action.payload.taskId, action.payload.task);
-  const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[action.payload.impactPathwayId], {
-    steps: newState.objects[action.payload.impactPathwayId].steps.map((stepEntry, index) => {
-      return (index === stepIndex) ? newStep : stepEntry;
-    })
-  });
-  return Object.assign({}, state, {
-    objects: Object.assign({}, state.objects, {
-      [action.payload.impactPathwayId]: newImpactPathway
-    }),
-    processing: false
-  });
+  return mapIPWState(state, newState, action.payload.impactPathwayId, stepIndex, newStep);
 }
 
 /**
@@ -653,10 +719,8 @@ function replaceImpactPathwayTask(state: ImpactPathwayState, action: UpdateImpac
  */
 function replaceImpactPathwaySubTask(state: ImpactPathwayState, action: UpdateImpactPathwaySubTaskAction): ImpactPathwayState {
   const newState = Object.assign({}, state);
-  const step: ImpactPathwayStep = newState.objects[action.payload.impactPathwayId].getStep(action.payload.stepId);
-  const stepIndex: number = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.stepId);
-  const parentTask: ImpactPathwayTask = step.getTask(action.payload.parentTaskId);
-  const parentTaskIndex: number = step.getTaskIndex(action.payload.parentTaskId);
+  const { step, stepIndex, parentTask, parentTaskIndex } =
+    extractStoreElements(newState, action.payload.impactPathwayId, action.payload.stepId, action.payload.parentTaskId);
   const newTask = Object.assign(new ImpactPathwayTask(), parentTask, {
     tasks: [...parentTask.tasks]
   });
@@ -667,17 +731,7 @@ function replaceImpactPathwaySubTask(state: ImpactPathwayState, action: UpdateIm
   const newStep = Object.assign(new ImpactPathwayStep(), step, {
     tasks: newTaskList
   });
-  const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[action.payload.impactPathwayId], {
-    steps: newState.objects[action.payload.impactPathwayId].steps.map((stepEntry, index) => {
-      return (index === stepIndex) ? newStep : stepEntry;
-    })
-  });
-  return Object.assign({}, state, {
-    objects: Object.assign({}, state.objects, {
-      [action.payload.impactPathwayId]: newImpactPathway
-    }),
-    processing: false
-  });
+  return mapIPWState(state, newState, action.payload.impactPathwayId, stepIndex, newStep);
 }
 
 /**
@@ -711,10 +765,8 @@ function moveImpactPathwaySubTask(
 ): ImpactPathwayState {
 
   const newState = Object.assign({}, state);
-  const step: ImpactPathwayStep = newState.objects[impactPathwayId].getStep(stepId);
-  const stepIndex: number = newState.objects[impactPathwayId].getStepIndex(stepId);
-  const parentTask: ImpactPathwayTask = step.getTask(previousParentTaskId);
-  const parentTaskIndex: number = step.getTaskIndex(previousParentTaskId);
+  const { step, stepIndex, parentTask, parentTaskIndex } =
+    extractStoreElements(newState, impactPathwayId, stepId, previousParentTaskId);
   const taskToMove: ImpactPathwayTask = parentTask.getSubTask(taskId);
   const newParentTask = Object.assign(new ImpactPathwayTask(), parentTask, {
     tasks: [...parentTask.tasks]
@@ -735,17 +787,7 @@ function moveImpactPathwaySubTask(
   const newStep = Object.assign(new ImpactPathwayStep(), step, {
     tasks: newTaskList
   });
-  const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[impactPathwayId], {
-    steps: newState.objects[impactPathwayId].steps.map((stepEntry, index) => {
-      return (index === stepIndex) ? newStep : stepEntry;
-    })
-  });
-  return Object.assign({}, state, {
-    objects: Object.assign({}, state.objects, {
-      [impactPathwayId]: newImpactPathway
-    }),
-    processing: processing
-  });
+  return mapIPWState(state, newState, impactPathwayId, stepIndex, newStep);
 }
 
 /**
@@ -759,6 +801,8 @@ function moveImpactPathwaySubTask(
  *    the impactPathway step's Id
  * @param previousParentTasks
  *    the impactPathway task list to revert
+ * @param processing
+ *    the processing status of the step
  * @return ImpactPathwayState
  *    the new state.
  */
@@ -767,12 +811,36 @@ function setImpactPathwayTasks(
   impactPathwayId: string,
   stepId: string,
   previousParentTasks: ImpactPathwayTask[],
+  processing: boolean
 ) {
-  const newState = Object.assign({}, state);
-  const step: ImpactPathwayStep = newState.objects[impactPathwayId].getStep(stepId);
-  const stepIndex: number = newState.objects[impactPathwayId].getStepIndex(stepId);
+  const newState = setImpactPathwayStepStatus(state, impactPathwayId, stepId, processing);
+  const { step, stepIndex } =
+    extractStoreElements(newState, impactPathwayId, stepId, null);
   const newStep = Object.assign(new ImpactPathwayStep(), step, {
     tasks: [...previousParentTasks]
+  });
+  return mapIPWState(state, newState, impactPathwayId, stepIndex, newStep);
+}
+
+/**
+ *
+ * @param state
+ * @param impactPathwayId
+ * @param stepId
+ * @param processing
+ */
+function setImpactPathwayStepStatus(
+  state: ImpactPathwayState,
+  impactPathwayId: string,
+  stepId: string,
+  processing: boolean
+) {
+  const newState = Object.assign({}, state);
+  const { step, stepIndex } =
+    extractStoreElements(newState, impactPathwayId, stepId, null);
+  const newStep = Object.assign(new ImpactPathwayStep(), step, {
+    tasks: [...step.tasks],
+    processing
   });
   const newImpactPathway = Object.assign(new ImpactPathway(), state.objects[impactPathwayId], {
     steps: newState.objects[impactPathwayId].steps.map((stepEntry, index) => {
@@ -782,7 +850,8 @@ function setImpactPathwayTasks(
   return Object.assign({}, state, {
     objects: Object.assign({}, state.objects, {
       [impactPathwayId]: newImpactPathway
-    })
+    }),
+    processing
   });
 }
 
@@ -810,10 +879,8 @@ function setImpactPathwaySubTasks(
   previousParentTasks: ImpactPathwayTask[],
 ) {
   const newState = Object.assign({}, state);
-  const step: ImpactPathwayStep = newState.objects[impactPathwayId].getStep(stepId);
-  const stepIndex: number = newState.objects[impactPathwayId].getStepIndex(stepId);
-  const parentTask: ImpactPathwayTask = step.getTask(parentTaskId);
-  const parentTaskIndex: number = step.getTaskIndex(parentTaskId);
+  const { step, stepIndex, parentTask, parentTaskIndex } =
+    extractStoreElements(newState, impactPathwayId, stepId, parentTaskId);
 
   const newParentTask = Object.assign(new ImpactPathwayTask(), parentTask, {
     tasks: [...previousParentTasks]
@@ -1050,6 +1117,8 @@ function stopCompareStepTask(state: ImpactPathwayState, action: StopCompareImpac
     objectsBeforeCompare: {},
     compareImpactPathwayId: null,
     compareMode: false,
+    targetTaskId: state.targetTaskIdBeforeCompare,
+    targetTaskIdBeforeCompare: ''
   });
 }
 
@@ -1066,8 +1135,18 @@ function stopCompareStepTask(state: ImpactPathwayState, action: StopCompareImpac
 function replaceImpactPathwayTaskSubtasks(state: ImpactPathwayState, action: InitCompareStepTaskSuccessAction) {
   const objectsBeforeCompare = Object.assign({}, state.objects);
   const newState = Object.assign({}, state);
-  const step: ImpactPathwayStep = newState.objects[action.payload.impactPathwayId].getStep(action.payload.impactPathwayStepId);
-  const stepIndex: number = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.impactPathwayStepId);
+  let { step, stepIndex } =
+    extractStoreElements(newState, action.payload.impactPathwayId, action.payload.impactPathwayStepId, null);
+  let targetTaskId = newState.targetTaskId;
+  let targetTaskIdBeforeCompare = newState.targetTaskId;
+  // if the step is not found it means we're comparing a version with the active instance, so they are switched
+  if (stepIndex === -1) {
+    stepIndex = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.compareImpactPathwayStepId);
+    step = newState.objects[action.payload.impactPathwayId].getStep(action.payload.compareImpactPathwayStepId);
+    const targetTaskIndex = findIndex(action.payload.tasks, {compareId: newState.targetTaskId});
+    targetTaskId = action.payload.tasks[targetTaskIndex].id;
+  }
+
   const newStep = Object.assign(new ImpactPathwayStep(), step, {
     tasks: [...action.payload.tasks]
   });
@@ -1080,7 +1159,9 @@ function replaceImpactPathwayTaskSubtasks(state: ImpactPathwayState, action: Ini
     objects: Object.assign({}, state.objects, {
       [action.payload.impactPathwayId]: newImpactPathway
     }),
-    objectsBeforeCompare
+    objectsBeforeCompare,
+    targetTaskId,
+    targetTaskIdBeforeCompare
   });
 }
 

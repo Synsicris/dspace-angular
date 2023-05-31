@@ -17,9 +17,9 @@ header {
 	  justify-content: center;
 	  height: 100%;
 	}
-  
+
 	 /* from here defined from rex */
-  
+
 	/* Icons in header. Needs to be defined outside nav.navbar, because the code differs in header.component.html
 	and navbar.component.html.
 	provisional contact link until it is integrated by development (rex 221028),
@@ -36,11 +36,11 @@ header {
 	button.navbar-toggler span.fas {
 	  color: var(--ds-header-icon-color) !important;
 	}
-  
+
 	nav.navbar {
-  
+
 	  border-bottom: 1px var(--ds-header-navbar-border-bottom-color) solid !important; // replaces green line
-  
+
 	  /* SYNSICRIS LOGO */
 	  .navbar-brand .synsicris-logo {
 		font-weight: 600;
@@ -52,27 +52,20 @@ header {
 		  span { color: var(--sy-synsicris-logo-color-magenta); }
 		}
 	  } // end .navbar-brand
-  
+
 	  /* Elements in header on the right side of the Synsicris-Logo, space between menu items and make them smaller */
 	  .navbar-nav {
-		margin: 0 0.4rem;
-		//font-size: 0.85rem;
-		font-size:1rem;
-		// Icons in header - twice because of differet code
-		a:link, a:visited { i.fas, span {color: var(--ds-header-icon-color) !important;} }
-		// Textlinks on the left side near logo
-		&.textlinks-in-header {
-			font-family:'Nunito-Medium';
-		}
-		// icon for search in all entries
-		a[href="/browse/projects"]:before { 
-			font-family: 'Fontawesome';
-			content:"\f002";
-			display:inline-block;
-			margin-right:0.3rem;
-		}
+      margin: 0 0.4rem;
+      //font-size: 0.85rem;
+      font-size:1rem;
+      // Icons in header - twice because of differet code
+      a:link, a:visited { i.fas, span {color: var(--ds-header-icon-color) !important;} }
+      // Textlinks on the left side near logo
+      &.textlinks-in-header {
+        font-family:'Nunito-Medium';
+      }
 	  } // end .container .navbar-nav
-  
+
 	} // end nav.navbar
-  
+
   } // end header

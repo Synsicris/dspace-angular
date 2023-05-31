@@ -1,7 +1,8 @@
 <ds-loading class="container-fluid" *ngIf="(isLoading() | async)"></ds-loading>
-<div *ngIf="!(isLoading() | async)" class="container-fluid" fxLayout="column">
+<div *ngIf="!(isLoading() | async) && (loadedPage | async)" class="container-fluid wp-container" fxLayout="column">
   <ds-working-plan-chart [compareMode]="compareMode.asObservable()"
-                          [isFunder]="isFunder"
+                          [hasAnyFunderRole]="hasAnyFunderRole"
+                          [isFunderProject]="isFunderProject"
                           [isVersionOf]="isVersionOf"
                           [projectCommunityId]="projectCommunityId"
                           [milestoneCollectionId]="milestoneCollectionId"

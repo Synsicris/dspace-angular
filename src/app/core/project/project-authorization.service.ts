@@ -1,19 +1,32 @@
 import { Injectable } from '@angular/core';
 import { AuthorizationDataService } from '../data/feature-authorization/authorization-data.service';
 import { ConfigurationDataService } from '../data/configuration-data.service';
-import { ProjectDataService } from './project-data.service';
+import {
+  CALL_ENTITY,
+  FUNDING_ENTITY,
+  FUNDING_OBJECTIVE_ENTITY,
+  ORGANISATION_UNIT_ENTITY, PROGRAMME_ENTITY,
+  ProjectDataService
+} from './project-data.service';
 import { combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, map, mergeMap, take } from 'rxjs/operators';
 import { Community } from '../shared/community.model';
 import { FeatureID } from '../data/feature-authorization/feature-id';
 import { Item } from '../shared/item.model';
+import { of } from 'rxjs';
+import { FindListOptions } from '../data/find-list-options.model';
+import { getRemoteDataPayload } from '../shared/operators';
+import { PaginatedList } from '../data/paginated-list.model';
+import { Collection } from '../shared/collection.model';
+import { CollectionDataService } from '../data/collection-data.service';
 
 @Injectable()
 export class ProjectAuthorizationService {
   constructor(
     protected authorizationService: AuthorizationDataService,
     protected configurationService: ConfigurationDataService,
-    protected projectDataService: ProjectDataService) {
+    protected projectDataService: ProjectDataService,
+    private collectionDataService: CollectionDataService) {
   }
 
   /**
@@ -63,7 +76,7 @@ export class ProjectAuthorizationService {
    * Check if user is a funder organizational manager
    */
   isFunderOrganizationalManager(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManager);
+    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManagerOfAnyProject);
   }
 
   /**
@@ -77,7 +90,7 @@ export class ProjectAuthorizationService {
    * Check if user is a Funder project manager for any project
    */
   isFunderManager(): Observable<boolean> {
-    return this.authorizationService.isAuthorized(FeatureID.isFunderProjectManager);
+    return this.authorizationService.isAuthorized(FeatureID.isFunderProjectManagerOfAnyProject);
   }
 
   /**
@@ -85,6 +98,64 @@ export class ProjectAuthorizationService {
    */
   isFunderProjectManager(item: Item): Observable<boolean> {
     return this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, item.self);
+  }
+
+  isFunderOrganizationalManagerOfProgramme(projectItem: Item) {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManagerOfProgramme, projectItem.self);
+  }
+
+  isFunderProjectOfProgramme(projectItem: Item) {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderProjectOfProgramme, projectItem.self);
+  }
+
+  isFunderReaderOfProgramme(projectItem: Item) {
+    return this.authorizationService.isAuthorized(FeatureID.isFunderReaderOfProgramme, projectItem.self);
+  }
+
+  /**
+   * Check if there is at least one collection available for the given entityType and scope
+   */
+  hasAtLeastOneCollection(scope: string, targetEntityType: string): Observable<boolean> {
+    if (targetEntityType === FUNDING_ENTITY) {
+      return of(true);
+    }
+    const findListOptions = Object.assign({}, new FindListOptions(), {
+      elementsPerPage: 1,
+      currentPage: 1,
+    });
+
+    if (this.isSharedEntity(targetEntityType)) {
+      return this.canCreateSharedEntity(findListOptions, targetEntityType);
+    } else {
+      return this.canCreateProjectEntity(findListOptions, scope, targetEntityType);
+    }
+  }
+
+  protected isSharedEntity(entityType: string){
+    return entityType === FUNDING_OBJECTIVE_ENTITY ||
+           entityType === CALL_ENTITY ||
+           entityType === ORGANISATION_UNIT_ENTITY ||
+           entityType === PROGRAMME_ENTITY;
+  }
+
+  /**
+   * Checks if the user has permission to create a shared entity by having at least one collection
+   */
+  private canCreateSharedEntity(findListOptions: FindListOptions, targetEntityType: string): Observable<boolean> {
+    return this.collectionDataService.getAuthorizedCollectionByEntityType('', targetEntityType, findListOptions).pipe(
+      getRemoteDataPayload(),
+      map((collections: PaginatedList<Collection>) => collections?.totalElements === 1)
+    );
+  }
+
+  /**
+   * Checks if the user has permission to create a project entity by having at least one collection based on the scope
+   */
+  private canCreateProjectEntity(findListOptions: FindListOptions, scope: string, targetEntityType: string) {
+    return this.collectionDataService.getAuthorizedCollectionByCommunityAndEntityType(scope, targetEntityType, findListOptions).pipe(
+      getRemoteDataPayload(),
+      map((collections: PaginatedList<Collection>) => collections?.totalElements === 1)
+    );
   }
 
 }

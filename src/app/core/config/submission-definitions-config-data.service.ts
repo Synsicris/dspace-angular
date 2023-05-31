@@ -10,7 +10,7 @@ import { RemoteDataBuildService } from '../cache/builders/remote-data-build.serv
 import { ObjectCacheService } from '../cache/object-cache.service';
 import { ConfigObject } from './models/config.model';
 import { dataService } from '../data/base/data-service.decorator';
-import { SUBMISSION_DEFINITION_TYPE } from './models/config-type';
+import { SUBMISSION_DEFINITIONS_TYPE, SUBMISSION_DEFINITION_TYPE } from './models/config-type';
 import { RemoteData } from '../data/remote-data';
 import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { FindListOptions } from '../data/find-list-options.model';
@@ -18,6 +18,7 @@ import { PaginatedList } from '../data/paginated-list.model';
 
 @Injectable()
 @dataService(SUBMISSION_DEFINITION_TYPE)
+@dataService(SUBMISSION_DEFINITIONS_TYPE)
 export class SubmissionDefinitionsConfigDataService extends ConfigDataService {
   constructor(
     protected requestService: RequestService,

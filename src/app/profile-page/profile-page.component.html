@@ -31,6 +31,29 @@
 
     </div>
 
+    <div class="mb-4" *ngIf="(isAdmin$ | async)">
+      <ngb-accordion #accordionRefAccToken [activeIds]="activeIds">
+        <ngb-panel id="profile-card-access-token">
+          <ng-template ngbPanelTitle>
+            <span class="float-left">{{'profile.card.access-token' | translate}}</span>
+            <div class="d-inline-block float-right">
+              <a class="close" role="button"
+                 [attr.aria-label]="(accordionRefAccToken.isExpanded('profile-card-access-token') ? 'cris-layout.toggle.aria.close' : 'cris-layout.toggle.aria.open') | translate: {sectionHeader: 'profile.card.identify' | translate}"
+                 [title]="(accordionRefAccToken.isExpanded('profile-card-access-token') ? 'cris-layout.toggle.close' : 'cris-layout.toggle.open') | translate">
+                <span *ngIf="accordionRefAccToken.isExpanded('profile-card-access-token')"
+                      class="fas fa-chevron-up fa-fw"></span>
+                <span *ngIf="!accordionRefAccToken.isExpanded('profile-card-access-token')"
+                      class="fas fa-chevron-down fa-fw"></span>
+              </a>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <ds-profile-page-access-token *ngIf="user" [user]="user"></ds-profile-page-access-token>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+
     <div class="mb-4" >
       <ngb-accordion #accordionRefIdentify [activeIds]="activeIds">
         <ngb-panel id="profile-card-identify">

@@ -23,11 +23,12 @@
           <div *ngFor="let config of displayConfigurations">
             <ng-container *ngFor="let metadataConf of config.metadata">
             <span *ngIf="dso.hasMetadata(metadataConf.name)">
-              <ds-truncatable-part *ngIf="metadataConf.truncatable;else showSimpleTemplate" [id]="dso.id" [minLines]="1">
-                <ng-container *ngTemplateOutlet="metadataConfTemplate;context:{metadataConf:metadataConf}">
-                </ng-container>
-              </ds-truncatable-part>
-
+              <ds-truncatable *ngIf="metadataConf.truncatable;else showSimpleTemplate" [id]="dso.id">
+                 <ds-truncatable-part [id]="dso.id" [minLines]="3">
+                   <ng-container *ngTemplateOutlet="metadataConfTemplate;context:{metadataConf:metadataConf}">
+                   </ng-container>
+                 </ds-truncatable-part>
+              </ds-truncatable>
               <ng-template #showSimpleTemplate>
                 <ng-container *ngTemplateOutlet="metadataConfTemplate;context:{metadataConf:metadataConf}">
                 </ng-container>
@@ -97,13 +98,27 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="DisplayItemMetadataType.Text">
-            <span class="text-muted item-list-authors" *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;" >
+            <span class="text-muted item-list-authors"
+                  *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;">
         {{metadata.value}}<span *ngIf="!last">; </span>
       </span>
     </ng-container>
 
     <ng-container *ngSwitchCase="DisplayItemMetadataType.Date">
-      <span class="text-muted">(<span class="text-muted item-list-date" *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;" >{{metadata.value}}<span *ngIf="!last">; </span></span>)</span>
+      <span class="text-muted">(<span class="text-muted item-list-date"
+                                      *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;">{{metadata.value}}
+        <span *ngIf="!last">; </span></span>)</span>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="DisplayItemMetadataType.ValuePair">
+      <ng-container *ngFor="let metadata of dso.allMetadata([metadataConf.name]); let last=last;">
+        <ds-metadata-value-pair
+          [metadataValue]="metadata"
+          [vocabularyName]="metadataConf.vocabularyName"
+        >
+        </ds-metadata-value-pair>
+        <span *ngIf="!last">;</span>
+      </ng-container>
     </ng-container>
 
   </ng-container>

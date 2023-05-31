@@ -340,6 +340,10 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             loadChildren: () => import('./invitation/invitation.module')
               .then((m) => m.InvitationModule)
           },
+          { path: 'graph-page',
+            loadChildren: () => import('./graph-page/graph.module')
+              .then(m => m.GraphModule)
+          },
           { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
         ]
       }

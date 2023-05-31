@@ -4,13 +4,15 @@ export enum DisplayItemMetadataType {
   Title = 'title',
   Text = 'text',
   Link = 'link',
-  Date = 'date'
+  Date = 'date',
+  ValuePair = 'valuepair'
 }
 
 export interface Metadata {
   name: string;
   type: DisplayItemMetadataType;
   truncatable?: boolean;
+  vocabularyName?: string;
 }
 
 export interface ResultViewConfig {

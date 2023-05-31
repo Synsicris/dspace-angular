@@ -15,7 +15,7 @@
           <p title="{{questionsBoardTask.title}}">{{questionsBoardTask.title}}</p>
         </div>
         <span *ngIf="data?.status" class="status-icon">
-          <i dsItemMetadataStatus [status]="data.status"></i>
+          <i dsQBItemMetadataStatus [status]="data.status" [entityType]="questionEntityType"></i>
         </span>
       </div>
 
@@ -23,8 +23,9 @@
         <div class="task-type type-clamp">
           <p title="{{questionsBoardTask.type | dsEntityTypeTranslate}}">{{questionsBoardTask.type | dsEntityTypeTranslate}} </p>
         </div>
+
         <span class="status-icon" *ngIf="data?.internalStatus">
-          <i dsItemMetadataInternal [status]="data.internalStatus"></i>
+          <i dsQBItemMetadataInternal [status]="data.internalStatus" [entityType]="questionEntityType"></i>
         </span>
       </div>
 

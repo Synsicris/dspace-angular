@@ -703,7 +703,7 @@ export class DefaultAppConfig implements AppConfig {
     workingPlanEditMode: 'WORKINGPLAN',
     workingPlanEditFormSection: 'working_plan-edit_form',
     workingPlanStepStatusMetadata: 'synsicris.type.status',
-    workingPlanStepResponsibleMetadata: 'synsicris.relation.partner-wp',
+    workingPlanStepResponsibleMetadata: 'synsicris.relation.partnerwp',
     workingPlanStepResponsibleAuthority: 'PartnerWPAuthority',
     workingPlanStepRelationMetadata: 'workingplan.relation.step',
     workingPlanStepDateStartMetadata: 'dc.date.start',
@@ -736,19 +736,19 @@ export class DefaultAppConfig implements AppConfig {
       'impactpathway.outcome.link', 'impactpathway.bidirectional.link', 'impactpathway.entity.map',
       'synsicris.relation.exploitationplan', 'exploitationplan.relation.step', 'exploitationplan.relation.task',
       'synsicris.isLastVersion', 'synsicris.isLastVersion.visible', 'synsicris.version', 'synsicris.version.visible',
-      "synsicris.versioning-funder-policy.group", "synsicris.versioning-reader-policy.group",
-      "synsicris.versioning-member-policy.group", "synsicris.versioning-coordinator-policy.group"
+      'synsicris.versioning-funder-policy.group', 'synsicris.versioning-reader-policy.group',
+      'synsicris.versioning-member-policy.group', 'synsicris.versioning-coordinator-policy.group', 'dc.identifier.uri'
 
     ],
     projectsBrowse: {
       adminAndFunders: {
         firstStepSearchQueryConfigurationName: 'firstStepSearchProjectsForAdminAndFunders',
-        firstStepSearchAllProjectConfigurationName: 'firstStepSearchAllProjectForAdminAndFunders',
+        firstStepSearchBrowseAllProjectConfigurationName: 'firstStepSearchBrowseAllProjectForAdminAndFunders',
         secondSearchProjectItemsConfigurationName: 'secondStepSearchProjectItemsForAdminAndFunders',
       },
       members: {
         firstStepSearchQueryConfigurationName: 'firstStepSearchProjectsForMembers',
-        firstStepSearchAllProjectConfigurationName: 'firstStepSearchAllProjectForMembers',
+        firstStepSearchBrowseAllProjectConfigurationName: 'firstStepSearchBrowseAllProjectForMembers',
         secondSearchProjectItemsConfigurationName: 'secondStepSearchProjectItems',
       },
       entityTypeFilterName: 'entityType'
@@ -852,7 +852,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'synsicris.type.influence',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'influence_conditions'
           }
         ]
       },
@@ -911,23 +912,28 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.type',
-            type: DisplayItemMetadataType.Link
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'targetgroup_type'
           },
           {
             name: 'synsicris.subject.nace',
-            type: DisplayItemMetadataType.Link
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'nace'
           },
           {
             name: 'synsicris.subject.enterprise',
-            type: DisplayItemMetadataType.Link
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'enterprise_size'
           },
           {
             name: 'synsicris.subject.political',
-            type: DisplayItemMetadataType.Link
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'political_level'
           },
           {
             name: 'synsicris.subject.urbanrural',
-            type: DisplayItemMetadataType.Link
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'targetgroup_urban_rural'
           }
         ]
       },
@@ -945,7 +951,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.type',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'physicalobjects_type'
           }
         ]
       },
@@ -953,7 +960,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'synsicris.type.functions',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'physicalobjects_function'
           }
         ]
       },
@@ -1009,7 +1017,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'synsicris.type.purpose',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'event_purpose'
           }
         ]
       },
@@ -1079,7 +1088,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.type',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'nextsteps'
           },
           {
             name: 'synsicris.date',
@@ -1113,7 +1123,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.type',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'spinoff_type'
           },
           {
             name: 'synsicris.subject.nace',
@@ -1151,7 +1162,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.type',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'sector_type'
           },
           {
             name: 'synsicris.subject.destatis',
@@ -1185,7 +1197,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'synsicris.subject.political',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'political_level'
           },
           {
             name: 'synsicris.subject.destatis',
@@ -1263,11 +1276,13 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.type',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'patent_type'
           },
           {
             name: 'synsicris.type.patentuse',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'patent_use'
           }
         ]
       },
@@ -1366,7 +1381,8 @@ export class DefaultAppConfig implements AppConfig {
           },
           {
             name: 'dc.type',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'event_type'
           }
         ]
       },
@@ -1374,7 +1390,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'synsicris.type.contribution',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.ValuePair,
+            vocabularyName: 'project_contribution'
           }
         ]
       },
@@ -1382,7 +1399,8 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.description',
-            type: DisplayItemMetadataType.Text
+            type: DisplayItemMetadataType.Text,
+            truncatable: true
           }
         ]
       }

@@ -35,7 +35,7 @@ describe('ProgrammeMembersPageComponent', () => {
   const projectGroupServiceMock = jasmine.createSpyObj('ProjectGroupService', {
     getProgrammeManagersGroupUUIDByItem: jasmine.createSpy('getProgrammeManagersGroupUUIDByItem'),
     getProgrammeProjectFundersGroupUUIDByItem: jasmine.createSpy('getProgrammeProjectFundersGroupUUIDByItem'),
-    getProgrammeMembersGroupUUIDByItem: jasmine.createSpy('getProgrammeMembersGroupUUIDByItem')
+    getProgrammeMembersGroupUUIDByItem: jasmine.createSpy('getProgrammeReadersGroupUUIDByItem')
   });
 
   const mockItem = Object.assign(new Item(), {
@@ -113,7 +113,7 @@ describe('ProgrammeMembersPageComponent', () => {
       authorizationServiceMock.isAuthorized.and.returnValue(of(true));
       projectGroupServiceMock.getProgrammeManagersGroupUUIDByItem.and.returnValue(of(['gruop1uuid']));
       projectGroupServiceMock.getProgrammeProjectFundersGroupUUIDByItem.and.returnValue(of(['gruop2uuid']));
-      projectGroupServiceMock.getProgrammeMembersGroupUUIDByItem.and.returnValue(of(['gruop3uuid']));
+      projectGroupServiceMock.getProgrammeReadersGroupUUIDByItem.and.returnValue(of(['gruop3uuid']));
       groupServiceMock.findById.and.returnValues(mockGroupManagersRD, mockGroupFundersRD, mockGroupMembersRD);
       fixture.detectChanges();
     });
@@ -141,7 +141,7 @@ describe('ProgrammeMembersPageComponent', () => {
       authorizationServiceMock.isAuthorized.and.returnValue(of(false));
       projectGroupServiceMock.getProgrammeManagersGroupUUIDByItem.and.returnValue(of(['gruop1uuid']));
       projectGroupServiceMock.getProgrammeProjectFundersGroupUUIDByItem.and.returnValue(of(['gruop2uuid']));
-      projectGroupServiceMock.getProgrammeMembersGroupUUIDByItem.and.returnValue(of(['gruop3uuid']));
+      projectGroupServiceMock.getProgrammeReadersGroupUUIDByItem.and.returnValue(of(['gruop3uuid']));
       groupServiceMock.findById.and.returnValues(mockGroupFundersRD, mockGroupMembersRD);
       fixture.detectChanges();
     });

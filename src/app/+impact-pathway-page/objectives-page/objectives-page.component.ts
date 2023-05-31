@@ -28,7 +28,16 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
    * The item's id
    */
   id: number;
-  isFunder$: Observable<boolean>;
+
+  /**
+   * If the current user is a funder Organizational/Project manager
+   */
+  hasAnyFunderRole$: Observable<boolean>;
+
+  /**
+   * If the current user is a funder project manager
+   */
+  isFunderProject$: Observable<boolean>;
 
   /**
    * The objectives item
@@ -64,8 +73,12 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
    * Initialize instance variables
    */
   ngOnInit(): void {
-    this.isFunder$ = this.route.data.pipe(
-      map((data) => data.isFunder as boolean)
+    this.hasAnyFunderRole$ = this.route.data.pipe(
+      map((data) => (data.isFunderOrganizationalManger || data.isFunderProject || data.isFunderReader) as boolean)
+    );
+
+    this.isFunderProject$ = this.route.data.pipe(
+      map((data) => (data.isFunderProject) as boolean)
     );
 
     const targetItemId$ = this.route.queryParams.pipe(

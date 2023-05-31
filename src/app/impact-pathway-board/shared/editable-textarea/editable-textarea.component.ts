@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
+import { CompareItemComponent } from '../../../shared/compare-item/compare-item.component';
 
 @Component({
   selector: 'ds-editable-textarea',
@@ -17,9 +18,19 @@ import { SubmissionFormModel } from '../../../core/config/models/config-submissi
 export class EditableTextareaComponent {
 
   /**
+   * A boolean representing if compare mode is enabled
+   */
+  @Input() compareMode: boolean;
+
+  /**
    * The item edit mode
    */
   @Input() editMode: string;
+
+  /**
+   * The label to use as textarea placeholder
+   */
+  @Input() public editPlaceholder: string;
 
   /**
    * The label to use as edit button's title
@@ -41,6 +52,11 @@ export class EditableTextareaComponent {
    * The item's id related to the edit form
    */
   @Input() public itemId: string;
+
+  /**
+   * The item's id to compare to
+   */
+  @Input() public compareItemId: string;
 
   /**
    * The label to use as field title
@@ -69,6 +85,15 @@ export class EditableTextareaComponent {
   @ViewChild('textarea', { static: false }) textarea: ElementRef;
 
   constructor(private modalService: NgbModal) {
+  }
+
+  /**
+   * Open a modal for item metadata comparison
+   */
+  openCompareModal() {
+    const modalRef = this.modalService.open(CompareItemComponent, { size: 'xl' });
+    (modalRef.componentInstance as CompareItemComponent).baseItemId = this.itemId;
+    (modalRef.componentInstance as CompareItemComponent).versionedItemId = this.compareItemId;
   }
 
   /**

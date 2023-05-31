@@ -5,8 +5,9 @@
    [title]="item.text | translate"
    [routerLink]="getRouterLink()"
    [queryParams]="item.queryParams"
+   [innerHTML]="item.text | translate"
    (click)="$event.stopPropagation()"
    (keyup.space)="navigate($event)"
    (keyup.enter)="navigate($event)"
    href="javascript:void(0);"
->{{item.text | translate}}</a>
+></a>

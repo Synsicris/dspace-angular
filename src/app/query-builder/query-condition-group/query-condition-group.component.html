@@ -1,6 +1,6 @@
 <!-- container filter group with padding-y -->
 <div class="container query-group-container">
-  
+
   <form [formGroup]="formGroup" *ngIf="formGroup">
 
     <!-- container with complete filter group and button -->
@@ -23,14 +23,16 @@
           "
           (change)="onDefaultValueSelect($event)"
           (scrollToEnd)="getSearchFilterConfigs()"
-        > 
+        >
         <!-- Dropdown Menu "Select Value" -->
           <ng-option
             *ngFor="let value of firstDefaultValues"
             [value]="value"
             [disabled]="value.disable"
           >
-            {{ 'query-builder.synsicris.label.' + firstDefaultFilter + '.' + value.label | translate | titlecase }}       
+            <span [title]="'query-builder.synsicris.label.' + firstDefaultFilter + '.' + value.label | translate | titlecase">
+              {{ 'query-builder.synsicris.label.' + firstDefaultFilter + '.' + value.label | translate | titlecase }}
+            </span>
           </ng-option>
         </ng-select>
       </div>
@@ -52,7 +54,7 @@
             let isLast = last
           "
         >
-          
+
           <div class="w-100 d-flex" [formGroupName]="i">
 
             <!-- COL-3 -->
@@ -73,7 +75,7 @@
                 *ngFor="let filter of secondColumnFilters"
                 [value]="filter"
               >
-                {{ "explore.index." + filter.name | translate }}
+                <span [title]="'explore.index.' + filter.name | translate">{{ "explore.index." + filter.name | translate }}</span>
               </ng-option>
             </ng-select>
 
@@ -105,7 +107,7 @@
             </div>
 
             <!-- COL-5 -->
-            <!-- date picker, appears, when a date is selected as filter. 
+            <!-- date picker, appears, when a date is selected as filter.
               Therefore the following selector "Select Value" disappears -->
             <div class="d-flex col-md-5 px-0" *ngIf="queryGroup.get(i + '.filter')?.value?.filterType === 'date'"
                  data-test="query-condition-date">
@@ -166,7 +168,7 @@
                 [value]="value"
                 [disabled]="value.disable"
               >
-                {{ value.label | titlecase }}
+                <span [title]="value.label | titlecase">{{ value.label | titlecase }}</span>
               </ng-option>
             </ng-select>
 

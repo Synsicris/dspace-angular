@@ -1,9 +1,26 @@
-import { ChangeDetectorRef, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
-import { filter, map, mergeMap, take } from 'rxjs/operators';
-import { NgbAccordion, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  BehaviorSubject,
+  combineLatest,
+  fromEvent,
+  Observable,
+  of as observableOf,
+  OperatorFunction,
+  Subscription
+} from 'rxjs';
+import { delay, filter, map, mergeMap, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
+import { NgbAccordion, NgbModal, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../core/models/impact-pathway.model';
 import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
@@ -16,21 +33,33 @@ import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
 import { EditSimpleItemModalComponent } from '../../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
-import { hasValue } from '../../../shared/empty.util';
+import { hasValue, isNotEmpty } from '../../../shared/empty.util';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
 import { environment } from '../../../../environments/environment';
 import { VersionSelectedEvent } from '../../../shared/item-version-list/item-version-list.component';
+import { ItemDataService } from '../../../core/data/item-data.service';
+import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
+import { RemoteData } from '../../../core/data/remote-data';
+import { administratorRole, AlertRole, getProgrammeRoles } from '../../../shared/alert/alert-role/alert-role';
+import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
+import { isEqual } from 'lodash';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 
 @Component({
   selector: 'ds-impact-path-way',
   styleUrls: ['./impact-path-way.component.scss'],
   templateUrl: './impact-path-way.component.html'
 })
-export class ImpactPathWayComponent implements OnInit {
+export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDestroy {
   /**
    * If the current user is a funder Organizational/Project manager
    */
-  @Input() isFunder: boolean;
+  @Input() hasAnyFunderRole: boolean;
+
+  /**
+   * If the current user is a funder project manager
+   */
+  @Input() isFunderProject: boolean;
 
   /**
    * The project community's id
@@ -48,19 +77,25 @@ export class ImpactPathWayComponent implements OnInit {
    * The impact-pathway item
    */
   @Input() impactPathWayItem: Item;
+  @Input() isProcessing: boolean;
 
   @ViewChild('accordionRef', { static: false }) wrapper: NgbAccordion;
 
   formConfig$: Observable<SubmissionFormModel>;
   canDeleteImpactPathway$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   canShowRelations: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  loaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  infoShowed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  loadedArrows: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isPrinting$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * Array to track all subscriptions and unsubscribe them onDestroy
    */
   private subs: Subscription[] = [];
+
+  /**
+   * The compare item object
+   */
+  compareItem$: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
 
   /**
    * A boolean representing if compare mode is active
@@ -79,15 +114,28 @@ export class ImpactPathWayComponent implements OnInit {
 
   public compareProcessing$: Observable<boolean> = observableOf(false);
   public impactPathwayStepEntityType: string;
+  public funderRoles: AlertRole[];
+  public dismissRole: AlertRole;
+  public isProcessingRemove$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public disableDelete$ = new BehaviorSubject<boolean>(false);
+  public disableEdit$ = new BehaviorSubject<boolean>(false);
+
+  /**
+   * The flag to indicate if the comment accordion is open
+   */
+  public isCommentAccordionOpen = false;
 
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
-    private authorizationService: AuthorizationDataService,
-    private cdr: ChangeDetectorRef,
-    private impactPathwayService: ImpactPathwayService,
-    private impactPathwayLinksService: ImpactPathwayLinksService,
-    private modalService: NgbModal,
-    protected aroute: ActivatedRoute,
-    protected editItemDataService: EditItemDataService) {
+              private authorizationService: AuthorizationDataService,
+              private projectAuthorizationService: ProjectAuthorizationService,
+              private cdr: ChangeDetectorRef,
+              private impactPathwayService: ImpactPathwayService,
+              private impactPathwayLinksService: ImpactPathwayLinksService,
+              private itemService: ItemDataService,
+              private modalService: NgbModal,
+              protected aroute: ActivatedRoute,
+              private router: Router,
+              protected editItemDataService: EditItemDataService) {
   }
 
   ngOnInit() {
@@ -100,7 +148,41 @@ export class ImpactPathWayComponent implements OnInit {
 
     this.subs.push(
       this.impactPathwayService.isCompareModeActive()
-        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode))
+        .subscribe((compareMode: boolean) => this.compareMode.next(compareMode)),
+      this.impactPathwayService.getCompareImpactPathwayId().pipe(
+        switchMap((id: string) => {
+          if (isNotEmpty(id)) {
+            return this.itemService.findById(id).pipe(
+              getFirstCompletedRemoteData(),
+              map((itemRD: RemoteData<Item>) => {
+                return itemRD.hasSucceeded ? itemRD.payload : null;
+              })
+            );
+          } else {
+            return observableOf(null);
+          }
+        })
+      ).subscribe((item: Item) => {
+
+        this.compareItem$.next(item);
+      })
+    );
+    this.subs.push(
+      this.impactPathwayService.isRemoving().subscribe(val => this.isProcessingRemove$.next(val))
+    );
+
+    this.subs.push(
+      combineLatest([this.isProcessingRemove$, this.compareMode, this.isVersionOfAnItem$])
+        .subscribe(([isProcessing, isComparing, isVersion]) =>
+          this.disableDelete$.next(isProcessing || isComparing || isVersion)
+        )
+    );
+
+    this.subs.push(
+      combineLatest([this.isProcessingRemove$, this.compareMode, this.isVersionOfAnItem$, this.canEditButton$])
+        .subscribe(([isProcessing, isComparing, isVersion, canEdit]) =>
+          this.disableEdit$.next(isProcessing || isComparing || isVersion || !canEdit)
+        )
     );
 
     this.editItemDataService.checkEditModeByIdAndType(this.impactPathway.id, environment.impactPathway.impactPathwaysEditMode).pipe(
@@ -108,7 +190,6 @@ export class ImpactPathWayComponent implements OnInit {
     ).subscribe((canEdit: boolean) => {
       this.canEditButton$.next(canEdit);
     });
-
 
     this.aroute.data.pipe(
       map((data) => data.isVersionOfAnItem),
@@ -118,15 +199,68 @@ export class ImpactPathWayComponent implements OnInit {
       this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
 
+    const params$ =
+      this.aroute.queryParams
+        .pipe(
+          filter(params => isNotEmpty(params))
+        );
+
+    this.subs.push(
+      this.isPrinting$
+        .pipe(
+          filter(isPrinting => isPrinting === true),
+          this.reloadArrows()
+        )
+        .subscribe(() => this._window.nativeWindow.print())
+    );
+
+    this.subs.push(
+      fromEvent(this._window.nativeWindow, 'beforeprint')
+        .subscribe((event: Event) => {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          this.onPrint();
+        }),
+      fromEvent(this._window.nativeWindow, 'afterprint')
+        .pipe(
+          delay(100),
+          withLatestFrom(this.isPrinting$),
+          filter(([, isPrinting]) => isPrinting === true),
+          switchMap(() => fromPromise(this.router.navigate([], { queryParams: { view: 'default' } }))),
+          this.reloadArrows()
+        ).subscribe(() => this.isPrinting$.next(false))
+    );
+
+    this.subs.push(
+      params$
+        .pipe(
+          map(params => params?.print),
+          filter(printParam => isEqual(printParam, 'true') && this._window.nativeWindow)
+        )
+        .subscribe(() => this.isPrinting$.next(true))
+    );
+
     this.impactPathwayStepEntityType = environment.impactPathway.impactPathwayStepEntity;
+    this.funderRoles = getProgrammeRoles(this.impactPathWayItem, this.projectAuthorizationService);
+    this.dismissRole = administratorRole(this.projectAuthorizationService);
   }
 
   ngAfterContentChecked() {
     if (this._window.nativeWindow) {
       this.cdr.detectChanges();
-      this.loaded.next(true);
+      this.loadedArrows.next(true);
     }
 
+  }
+
+  reloadArrows(): OperatorFunction<any, any> {
+    return source =>
+      source.pipe(
+        tap(() => this.loadedArrows.next(false)),
+        delay(1),
+        tap(() => this.loadedArrows.next(true)),
+        delay(1),
+      );
   }
 
   getRelations(): Observable<ImpactPathwayLink[]> {
@@ -152,13 +286,6 @@ export class ImpactPathWayComponent implements OnInit {
         }
       }
     );
-  }
-
-  /**
-   * Toggles info panel
-   */
-  toggleInfoPanel() {
-    this.infoShowed.next(!this.infoShowed.value);
   }
 
   /**
@@ -232,4 +359,24 @@ export class ImpactPathWayComponent implements OnInit {
     el.scrollIntoView({behavior: 'smooth'});
 }
 
+  getCompareItemDescription(item: Item): string {
+    return item?.firstMetadataValue('dc.description');
+  }
+
+  /**
+   * Change the flag isCommentAccordionOpen when the accordion state changes
+   * @param event NgbPanelChangeEvent
+   */
+  changeAccordionState(event: NgbPanelChangeEvent) {
+    this.isCommentAccordionOpen = event.nextState;
+  }
+
+  /**
+   * On print button click
+   * add query param to url
+   * and reload the page to upload print styles
+   */
+  onPrint() {
+    this.router.navigate([], { queryParams: { view: 'print', print: true } });
+  }
 }

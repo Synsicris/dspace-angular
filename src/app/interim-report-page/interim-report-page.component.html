@@ -1,7 +1,9 @@
 <div class="container">
-  <ds-questions-board [isFunder]="(isFunder$ | async)"
+  <ds-questions-board [hasAnyFunderRole]="(hasAnyFunderRole$ | async)"
+                      [isFunderProject]="(isFunderProject$ | async)"
                       [fundingCommunity]="(fundingCommunity$ | async)"
                       [messagePrefix]="'interim-report'"
                       [projectCommunityId]="(projectCommunityId$ | async)"
-                      [questionsBoardObject]="(interimReportRD$ | async)?.payload"></ds-questions-board>
+                      [questionsBoardObject]="(interimReportRD$ | async)?.payload"
+                      [showUploadStep]="true"></ds-questions-board>
 </div>

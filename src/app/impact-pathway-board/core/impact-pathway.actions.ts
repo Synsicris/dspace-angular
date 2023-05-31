@@ -56,6 +56,7 @@ export const ImpactPathwayActionTypes = {
   REMOVE_IMPACT_PATHWAY_TASK_SUCCESS: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_SUCCESS'),
   REMOVE_IMPACT_PATHWAY_SUB_TASK: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_SUB_TASK'),
   REMOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_SUB_TASK_SUCCESS'),
+  REMOVE_IMPACT_PATHWAY_SUB_TASK_ERROR: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_SUB_TASK_ERROR'),
   REMOVE_IMPACT_PATHWAY_TASK_ERROR: type('dspace/impactpathway/REMOVE_IMPACT_PATHWAY_TASK_ERROR'),
   PATCH_IMPACT_PATHWAY_METADATA: type('dspace/impactpathway/PATCH_IMPACT_PATHWAY_METADATA'),
   PATCH_IMPACT_PATHWAY_METADATA_SUCCESS: type('dspace/impactpathway/PATCH_IMPACT_PATHWAY_METADATA_SUCCESS'),
@@ -419,6 +420,22 @@ export class AddImpactPathwayTaskSuccessAction implements Action {
  */
 export class AddImpactPathwayTaskErrorAction implements Action {
   type = ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK_ERROR;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+  };
+
+  /**
+   * Create a new AddImpactPathwayTaskErrorAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id to whom to add task
+   */
+  constructor(impactPathwayId: string, stepId: string) {
+    this.payload = { impactPathwayId, stepId };
+  }
 }
 
 /**
@@ -609,6 +626,22 @@ export class OrderImpactPathwayTasksAction implements Action {
  */
 export class OrderImpactPathwayTasksSuccessAction implements Action {
   type = ImpactPathwayActionTypes.ORDER_IMPACT_PATHWAY_TASKS_SUCCESS;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+  };
+
+  /**
+   *
+   * @param impactPathwayId
+   * @param stepId
+   */
+  constructor(
+    impactPathwayId: string,
+    stepId: string
+  ) {
+    this.payload = { impactPathwayId, stepId };
+  }
 }
 
 /**
@@ -886,6 +919,24 @@ export class RemoveImpactPathwayTaskSuccessAction implements Action {
  */
 export class RemoveImpactPathwayTaskErrorAction implements Action {
   type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_TASK_ERROR;
+  payload: {
+    impactPathwayId: string;
+    parentId: string;
+  };
+
+  /**
+   * Create a new RemoveImpactPathwayTaskSuccessAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param parentId
+   *    the impact pathway task's parent id from where to remove task
+   * @param taskId
+   *    the Item id of the impact pathway task to remove
+   */
+  constructor(impactPathwayId: string, parentId: string) {
+    this.payload = { impactPathwayId, parentId };
+  }
 }
 
 /**
@@ -934,6 +985,35 @@ export class RemoveImpactPathwaySubTaskSuccessAction implements Action {
 
   /**
    * Create a new RemoveImpactPathwaySubTaskSuccessAction
+   *
+   * @param impactPathwayId
+   *    the impact pathway's id
+   * @param stepId
+   *    the impact pathway step's id
+   * @param parentTaskId
+   *    the impact pathway task's parent id from where to remove task
+   * @param taskId
+   *    the Item id of the impact pathway task to remove
+   */
+  constructor(impactPathwayId: string, stepId: string, parentTaskId: string, taskId: string) {
+    this.payload = { impactPathwayId, stepId, parentTaskId, taskId };
+  }
+}
+
+/**
+ * A ngrx action for remove error
+ */
+export class RemoveImpactPathwaySubTaskErrorAction implements Action {
+  type = ImpactPathwayActionTypes.REMOVE_IMPACT_PATHWAY_SUB_TASK_ERROR;
+  payload: {
+    impactPathwayId: string;
+    stepId: string;
+    parentTaskId: string;
+    taskId: string;
+  };
+
+  /**
+   * Create a new RemoveImpactPathwaySubTaskErrorAction
    *
    * @param impactPathwayId
    *    the impact pathway's id
@@ -1545,6 +1625,7 @@ export class InitCompareStepTaskSuccessAction implements Action {
   payload: {
     impactPathwayId: string;
     impactPathwayStepId: string;
+    compareImpactPathwayStepId: string;
     tasks: ImpactPathwayTask[];
   };
 
@@ -1555,11 +1636,13 @@ export class InitCompareStepTaskSuccessAction implements Action {
    *    the id of impact pathway that the tasks belong to
    * @param impactPathwayStepId
    *    the id of impact pathway step that the tasks belong to
+   * @param compareImpactPathwayStepId
+   *    the id of comparing impact pathway step that the tasks belong to
    * @param tasks
    *    the list of tasks objects
    */
-  constructor(impactPathwayId: string, impactPathwayStepId: string, tasks: ImpactPathwayTask[]) {
-    this.payload = { impactPathwayId, impactPathwayStepId, tasks };
+  constructor(impactPathwayId: string, impactPathwayStepId: string, compareImpactPathwayStepId: string, tasks: ImpactPathwayTask[]) {
+    this.payload = { impactPathwayId, impactPathwayStepId, compareImpactPathwayStepId, tasks };
   }
 }
 
@@ -1643,6 +1726,7 @@ export type ImpactPathwayActions
   | RemoveImpactPathwayStepSuccessAction
   | RemoveImpactPathwaySubTaskAction
   | RemoveImpactPathwaySubTaskSuccessAction
+  | RemoveImpactPathwaySubTaskErrorAction
   | RemoveImpactPathwayTaskAction
   | RemoveImpactPathwayTaskErrorAction
   | RemoveImpactPathwayTaskSuccessAction

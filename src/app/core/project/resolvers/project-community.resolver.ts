@@ -3,20 +3,20 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 
 import { Observable } from 'rxjs';
 
-import { RemoteData } from '../data/remote-data';
-import { Community } from '../shared/community.model';
-import { getFirstCompletedRemoteData } from '../shared/operators';
-import { ProjectDataService } from './project-data.service';
+import { RemoteData } from '../../data/remote-data';
+import { Community } from '../../shared/community.model';
+import { CommunityDataService } from '../../data/community-data.service';
+import { getFirstCompletedRemoteData } from '../../shared/operators';
 
 /**
- * This class represents a resolver that requests a specific project community by project item id before the route is activated
+ * This class represents a resolver that requests a specific project community by community id before the route is activated
  */
 @Injectable()
-export class ProjectCommunityByProjectItemResolver implements Resolve<RemoteData<Community>> {
+export class ProjectCommunityResolver implements Resolve<RemoteData<Community>> {
 
-  routeParam = 'id';
+  routeParam = 'projectId';
 
-  constructor(private projectService: ProjectDataService) {
+  constructor(private communityService: CommunityDataService) {
   }
 
   /**
@@ -27,7 +27,7 @@ export class ProjectCommunityByProjectItemResolver implements Resolve<RemoteData
    * or an error if something went wrong
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RemoteData<Community>> {
-    return this.projectService.getProjectCommunityByProjectItemId(
+    return this.communityService.findById(
       route.params[this.routeParam]
     ).pipe(
       getFirstCompletedRemoteData()

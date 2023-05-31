@@ -135,19 +135,19 @@ import {
   CreateCommunityParentSelectorComponent
 } from './dso-selector/modal-wrappers/create-community-parent-selector/create-community-parent-selector.component';
 import {
-    ThemedCreateCommunityParentSelectorComponent
+  ThemedCreateCommunityParentSelectorComponent
 } from './dso-selector/modal-wrappers/create-community-parent-selector/themed-create-community-parent-selector.component';
 import {
   CreateItemParentSelectorComponent
 } from './dso-selector/modal-wrappers/create-item-parent-selector/create-item-parent-selector.component';
 import {
-    ThemedCreateItemParentSelectorComponent
+  ThemedCreateItemParentSelectorComponent
 } from './dso-selector/modal-wrappers/create-item-parent-selector/themed-create-item-parent-selector.component';
 import {
   CreateCollectionParentSelectorComponent
 } from './dso-selector/modal-wrappers/create-collection-parent-selector/create-collection-parent-selector.component';
 import {
-    ThemedCreateCollectionParentSelectorComponent
+  ThemedCreateCollectionParentSelectorComponent
 } from './dso-selector/modal-wrappers/create-collection-parent-selector/themed-create-collection-parent-selector.component';
 import {
   CommunitySearchResultListElementComponent
@@ -159,19 +159,19 @@ import {
   EditItemSelectorComponent
 } from './dso-selector/modal-wrappers/edit-item-selector/edit-item-selector.component';
 import {
-    ThemedEditItemSelectorComponent
+  ThemedEditItemSelectorComponent
 } from './dso-selector/modal-wrappers/edit-item-selector/themed-edit-item-selector.component';
 import {
   EditCommunitySelectorComponent
 } from './dso-selector/modal-wrappers/edit-community-selector/edit-community-selector.component';
 import {
-    ThemedEditCommunitySelectorComponent
+  ThemedEditCommunitySelectorComponent
 } from './dso-selector/modal-wrappers/edit-community-selector/themed-edit-community-selector.component';
 import {
   EditCollectionSelectorComponent
 } from './dso-selector/modal-wrappers/edit-collection-selector/edit-collection-selector.component';
 import {
-    ThemedEditCollectionSelectorComponent
+  ThemedEditCollectionSelectorComponent
 } from './dso-selector/modal-wrappers/edit-collection-selector/themed-edit-collection-selector.component';
 import {
   ItemListPreviewComponent
@@ -324,8 +324,12 @@ import {
   SearchChartFilterComponent
 } from './search/search-charts/search-chart/search-chart-filter/search-chart-filter.component';
 import { VocabularyExternalSourceComponent } from './vocabulary-external-source/vocabulary-external-source.component';
-import { BulkImportSelectorComponent } from './dso-selector/modal-wrappers/bulk-import-collection-selector/bulk-import-collection-selector.component';
-import { AdministeredCollectionSelectorComponent } from './dso-selector/dso-selector/administered-collection-selector/administered-collection-selector.component';
+import {
+  BulkImportSelectorComponent
+} from './dso-selector/modal-wrappers/bulk-import-collection-selector/bulk-import-collection-selector.component';
+import {
+  AdministeredCollectionSelectorComponent
+} from './dso-selector/dso-selector/administered-collection-selector/administered-collection-selector.component';
 import { RelationshipsListComponent } from './object-list/relationships-list/relationships-list.component';
 import {
   RelationshipsItemsActionsComponent
@@ -348,9 +352,13 @@ import {
 import { DsSelectComponent } from './ds-select/ds-select.component';
 import { LogInOidcComponent } from './log-in/methods/oidc/log-in-oidc.component';
 import { LogInOrcidComponent } from './log-in/methods/orcid/log-in-orcid.component';
-import { ClaimItemSelectorComponent } from './dso-selector/modal-wrappers/claim-item-selector/claim-item-selector.component';
+import {
+  ClaimItemSelectorComponent
+} from './dso-selector/modal-wrappers/claim-item-selector/claim-item-selector.component';
 import { BrowseMostElementsComponent } from './browse-most-elements/browse-most-elements.component';
-import { EditMetadataSecurityComponent } from '../item-page/edit-item-page/edit-metadata-security/edit-metadata-security.component';
+import {
+  EditMetadataSecurityComponent
+} from '../item-page/edit-item-page/edit-metadata-security/edit-metadata-security.component';
 import { MetadataLinkViewComponent } from './metadata-link-view/metadata-link-view.component';
 import {
   ExportExcelSelectorComponent
@@ -406,7 +414,13 @@ import { ViewVersionBadgesComponent } from './view-version-badges/view-version-b
 import { IpwItemMetadataStatusDirective } from './ipw-helpers/ipw-item-metadata-status.directive';
 import { IpwItemMetadataInternalDirective } from './ipw-helpers/ipw-item-metadata-internal.directive';
 import { EntityTypeTranslatePipe } from './utils/entity-type-translate-pipe';
-import { ItemImportMetadataExternalComponent } from './item/item-import-metadata-external/item-import-metadata-external.component';
+import {
+  ItemImportMetadataExternalComponent
+} from './item/item-import-metadata-external/item-import-metadata-external.component';
+import { AlertRoleComponent } from './alert/alert-role/alert-role.component';
+import {
+  MetadataValuePairComponent
+} from './object-list/search-result-list-element/item-search-result/item-types/metadata/metadata-value-pair/metadata-value-pair.component';
 
 const MODULES = [
   CommonModule,
@@ -467,6 +481,7 @@ const PIPES = [
 const COMPONENTS = [
   // put shared components here
   AlertComponent,
+  AlertRoleComponent,
   AuthNavMenuComponent,
   ThemedAuthNavMenuComponent,
   UserMenuComponent,
@@ -729,7 +744,8 @@ const SHARED_ITEM_PAGE_COMPONENTS = [
   RelatedItemsComponent,
   DsoPageOrcidButtonComponent,
   ItemCreateComponent,
-  ItemImportMetadataExternalComponent
+  ItemImportMetadataExternalComponent,
+  MetadataValuePairComponent
 ];
 
 const PROVIDERS = [
@@ -760,7 +776,7 @@ const DIRECTIVES = [
   EntityIconDirective,
   TaskColorDirective,
   IpwItemMetadataStatusDirective,
-  IpwItemMetadataInternalDirective
+  IpwItemMetadataInternalDirective,
 ];
 
 @NgModule({

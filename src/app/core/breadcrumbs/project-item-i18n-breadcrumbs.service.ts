@@ -48,15 +48,18 @@ export class ProjectItemI18nBreadcrumbsService implements BreadcrumbsProviderSer
         map((object: Item) => {
           const itemUrl = getItemPageRoute(object);
           const entityType: string = this.dsoNameService.getEntityType(object);
-          return (entityType && [new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType)] || [])
+          return (entityType && [new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, null, {
+            [entityType]: true,
+            separator: true
+          })] || [])
             .concat([
               new Breadcrumb(this.dsoNameService.getName(object), itemUrl),
-              new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url)
+              new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url, { separator: true })
             ]);
         })
       );
     } else {
-      return observableOf([new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url)]);
+      return observableOf([new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url, { separator: true })]);
     }
 
   }

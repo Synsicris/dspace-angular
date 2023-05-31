@@ -59,12 +59,16 @@ export class BreadcrumbsService {
       hasValue(data) && hasValue(data.breadcrumb) &&
       hasValue(routeConfig) && hasValue(routeConfig.resolve) && hasValue(routeConfig.resolve.breadcrumb)
     ) {
-      const { provider, key, url } = data.breadcrumb;
+      const { provider, key, url, parentId } = data.breadcrumb;
       if (!last) {
         return combineLatest(provider.getBreadcrumbs(key, url), this.resolveBreadcrumbs(route.firstChild))
           .pipe(map((crumbs) => [].concat.apply([], crumbs)));
       } else {
-        return provider.getBreadcrumbs(key, url);
+        if (parentId) {
+          return provider.getBreadcrumbs(key, url, parentId);
+        } else {
+          return provider.getBreadcrumbs(key, url);
+        }
       }
     }
     return !last ? this.resolveBreadcrumbs(route.firstChild) : observableOf([]);

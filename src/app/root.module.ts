@@ -40,6 +40,7 @@ import {
 import { FooterModule } from './footer/footer.module';
 import { SocialModule } from './social/social.module';
 import { ExploreModule } from './shared/explore/explore.module';
+import { ShowTitleForTruncatedTextDirective } from './breadcrumbs/breadcrumb/show-title-for-truncated-text.directive';
 
 const IMPORTS = [
   CommonModule,
@@ -78,7 +79,8 @@ const DECLARATIONS = [
   ThemedPageInternalServerErrorComponent,
   PageInternalServerErrorComponent,
   ThemedPageErrorComponent,
-  PageErrorComponent
+  PageErrorComponent,
+  ShowTitleForTruncatedTextDirective
 ];
 
 const EXPORTS = [

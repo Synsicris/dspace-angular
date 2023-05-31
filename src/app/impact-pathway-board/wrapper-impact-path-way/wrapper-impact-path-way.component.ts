@@ -12,7 +12,13 @@ export class WrapperImpactPathWayComponent {
   /**
    * If the current user is a funder Organizational/Project manager
    */
-  @Input() isFunder: boolean;
+  @Input() hasAnyFunderRole: boolean;
+
+  /**
+   * If the current user is a funder project manager
+   */
+  @Input() isFunderProject: boolean;
+
   /**
    * The project community's id
    */
@@ -27,6 +33,7 @@ export class WrapperImpactPathWayComponent {
   @Input() impactPathWayItem: Item;
   @Input() public impactPathWay: ImpactPathway;
   @Input() public impactPathWayId: string;
+  @Input() public isProcessing: boolean;
 
   public activeIds: string[];
 

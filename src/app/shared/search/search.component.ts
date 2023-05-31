@@ -164,6 +164,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Input() showCharts = false;
 
   /**
+   * A boolean representing if show csv export button
+   */
+  @Input() showCsvExport = false;
+
+  /**
    * A boolean representing if show export button
    */
   @Input() showExport = true;
@@ -182,6 +187,11 @@ export class SearchComponent implements OnInit, OnDestroy {
    * Whether to show the view mode switch
    */
   @Input() showViewModes = true;
+
+  /**
+   * Whether to export with labels instead of metadata name or not
+   */
+  @Input() useLabelsForExport = false;
 
   /**
    * List of available view mode

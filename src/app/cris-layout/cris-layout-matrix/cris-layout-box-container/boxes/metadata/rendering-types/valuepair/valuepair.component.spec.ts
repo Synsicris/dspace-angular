@@ -6,10 +6,11 @@ import { TranslateLoaderMock } from '../../../../../../../shared/mocks/translate
 import { VocabularyService } from '../../../../../../../core/submission/vocabularies/vocabulary.service';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { EMPTY, of } from 'rxjs';
-import {AuthService} from '../../../../../../../core/auth/auth.service';
-import {AuthServiceStub} from '../../../../../../../shared/testing/auth-service.stub';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { DsDatePipe } from '../../../../../../pipes/ds-date.pipe';
+import {
+  MetadataValuePairComponent
+} from '../../../../../../../shared/object-list/search-result-list-element/item-search-result/item-types/metadata/metadata-value-pair/metadata-value-pair.component';
 
 const METADATA_KEY_1 = 'person.knowsLanguage';
 const METADATA_KEY_2 = 'dc.type';
@@ -23,7 +24,6 @@ describe('ValuepairComponent', () => {
   let fixture: ComponentFixture<ValuepairComponent>;
 
   let vocabularyService: VocabularyService;
-  const authService = new AuthServiceStub();
 
   const allMetadata = (key: string) => {
     switch (key) {
@@ -97,10 +97,9 @@ describe('ValuepairComponent', () => {
             }
           }),
         ],
-        declarations: [ValuepairComponent, DsDatePipe],
+        declarations: [ValuepairComponent, MetadataValuePairComponent, DsDatePipe],
         providers: [
           { provide: VocabularyService, useValue: vocabularyServiceSpy },
-          { provide: AuthService, useValue: authService },
           { provide: 'fieldProvider', useValue: testField1 },
           { provide: 'itemProvider', useValue: testItem1 },
           { provide: 'metadataValueProvider', useValue: { value: 'it', authority: null } },
@@ -144,13 +143,12 @@ describe('ValuepairComponent', () => {
             }
           }),
         ],
-        declarations: [ValuepairComponent, DsDatePipe],
+        declarations: [ValuepairComponent, MetadataValuePairComponent, DsDatePipe],
         providers: [
           { provide: VocabularyService, useValue: vocabularyServiceSpy },
-          { provide: AuthService, useValue: authService },
           { provide: 'fieldProvider', useValue: testField2 },
           { provide: 'itemProvider', useValue: testItem2 },
-          { provide: 'metadataValueProvider', useValue: {value: undefined, authority: VOCABULARY_NAME_2 + ':asd' } },
+          { provide: 'metadataValueProvider', useValue: { value: undefined, authority: VOCABULARY_NAME_2 + ':asd' } },
           { provide: 'renderingSubTypeProvider', useValue: VOCABULARY_NAME_2 },
         ],
       }).compileComponents();

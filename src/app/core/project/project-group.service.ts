@@ -54,7 +54,7 @@ export class ProjectGroupService {
     return this.getGroupsByQuery(query);
   }
 
-  getProgrammeMembersGroupNameByItem(project: Item): string {
+  getProgrammeReadersGroupNameByItem(project: Item): string {
     return PROGRAMME_MEMBERS_GROUP_TEMPLATE.replace('%s', project.uuid);
   }
 
@@ -62,8 +62,8 @@ export class ProjectGroupService {
     return PROGRAMME_PROJECT_FUNDERS_GROUP_TEMPLATE.replace('%s', project.uuid);
   }
 
-  getProgrammeMembersGroupUUIDByItem(programme: Item): Observable<string[]> {
-    const query = this.getProgrammeMembersGroupNameByItem(programme);
+  getProgrammeReadersGroupUUIDByItem(programme: Item): Observable<string[]> {
+    const query = this.getProgrammeReadersGroupNameByItem(programme);
     return this.getGroupsByQuery(query);
   }
 
@@ -195,6 +195,15 @@ export class ProjectGroupService {
     );
   }
 
+  getInvitationProgrammeReadersGroupByItem(programme: Item): Observable<string[]> {
+    const funderReadersGroupId$ = this.getFunderReadersGroupId();
+    const programmeReadersGroupId$ = this.getProgrammeReadersGroupUUIDByItem(programme);
+
+    return combineLatest([funderReadersGroupId$, programmeReadersGroupId$]).pipe(
+      map(([funderReaderGroup, programmeReaderGroup]) => [funderReaderGroup, ...programmeReaderGroup])
+    );
+  }
+
   getFunderOrganizationalManagersGroupId(): Observable<string> {
     return this.configService.findByPropertyName('funder-organisational-managers.group').pipe(
       getFirstSucceededRemoteDataPayload(),
@@ -204,6 +213,13 @@ export class ProjectGroupService {
 
   getFunderProjectManagersGroupId(): Observable<string> {
     return this.configService.findByPropertyName('funders-project-managers.group').pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((configProperty: ConfigurationProperty) => configProperty?.values?.length > 0 ? configProperty.values[0] : null)
+    );
+  }
+
+  getFunderReadersGroupId(): Observable<string> {
+    return this.configService.findByPropertyName('funders-readers.group').pipe(
       getFirstSucceededRemoteDataPayload(),
       map((configProperty: ConfigurationProperty) => configProperty?.values?.length > 0 ? configProperty.values[0] : null)
     );

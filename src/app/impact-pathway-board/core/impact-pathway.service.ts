@@ -43,6 +43,7 @@ import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocab
 import { MetadataMap, MetadataValue } from '../../core/shared/metadata.models';
 import { Metadata } from '../../core/shared/metadata.utils';
 import {
+  compareImpactPathwayIdSelector,
   impactPathwayByIDSelector,
   impactPathwayObjectsSelector,
   impactPathwayStateSelector,
@@ -454,6 +455,9 @@ export class ImpactPathwayService {
    */
   public initImpactPathwayTaskFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, tasks: ImpactPathwayTask[] = []): ImpactPathwayTask {
     const type = compareObj.item.firstMetadataValue('dspace.entity.type');
+    const description = compareObj.item.firstMetadataValue('dc.description');
+    const status = compareObj.item.firstMetadataValue('synsicris.type.status');
+    const internalStatus = compareObj.item.firstMetadataValue('synsicris.type.internal');
     return Object.assign(new ImpactPathwayTask(), {
       id: compareObj.item.id,
       compareId: compareObj.versionItem?.id,
@@ -462,6 +466,9 @@ export class ImpactPathwayService {
       title: compareObj.item.name,
       type: type,
       tasks: tasks,
+      description: description,
+      status: status,
+      internalStatus: internalStatus
     });
   }
 
@@ -489,10 +496,10 @@ export class ImpactPathwayService {
    *    the impact pathway's id
    * @param impactPathwayStepId
    *    the impact pathway's step id
-   * * @param impactPathwayStepTaskId
+   * @param impactPathwayStepTaskId
    *    the impact pathway's step task id
    */
-  dispatchStopCompareImpactPathwayTask(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId: string,) {
+  dispatchStopCompareImpactPathwayTask(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId: string) {
     this.store.dispatch(new StopCompareImpactPathwayStepTaskAction(impactPathwayId, impactPathwayStepId, impactPathwayStepTaskId));
   }
 
@@ -540,6 +547,13 @@ export class ImpactPathwayService {
    */
   public isCompareModeActive() {
     return this.store.pipe(select(isCompareMode));
+  }
+
+  /**
+   * Check compareMode is true
+   */
+  public getCompareImpactPathwayId(): Observable<string> {
+    return this.store.pipe(select(compareImpactPathwayIdSelector));
   }
 
   getCreateTaskFormConfigName(stepType: string, isObjectivePage: boolean): string {
@@ -662,6 +676,15 @@ export class ImpactPathwayService {
     );
   }
 
+  getImpactPathwayTaskById(impactPathwayId: string, impactPathwayStepId: string, taskId: string): Observable<ImpactPathwayTask> {
+    return this.store.pipe(
+      select(impactPathwayByIDSelector(impactPathwayId)),
+      filter((impactPathway: ImpactPathway) => isNotEmpty(impactPathway) && isNotEmpty(impactPathway.getStep(impactPathwayStepId))),
+      mergeMap((impactPathway: ImpactPathway) => impactPathway.getStep(impactPathwayStepId)?.tasks),
+      filter((task: ImpactPathwayTask) => taskId === task?.id)
+    );
+  }
+
   getImpactPathwayTaskType(stepType: string, taskType: string, isObjective: boolean): Observable<string> {
     const name = isObjective ? `impactpathway_${stepType}_task_objective_type` : `impactpathway_${stepType}_task_type`;
     const vocabularyOptions: VocabularyOptions = new VocabularyOptions(name);
@@ -774,12 +797,12 @@ export class ImpactPathwayService {
       );
   }
 
-  orderTasks(parentTasksId: string, taskIds: string[]): Observable<Item> {
+  orderTasks(parentTasksId: string, tasks: Pick<MetadataValue, 'authority' | 'value'>[]): Observable<Item> {
     return this.itemAuthorityRelationService.orderRelations(
       this.getImpactPathwaysEditFormSection(),
       this.getImpactPathwaysEditMode(),
       parentTasksId,
-      taskIds,
+      tasks,
       environment.impactPathway.impactPathwayTaskRelationMetadata
     );
   }
@@ -953,7 +976,7 @@ export class ImpactPathwayService {
       select(impactPathwayByIDSelector(impactPathwayId))
     );
 
-    return combineLatestObservable(isLoaded$, impactPathWay$).pipe(
+    return combineLatestObservable([isLoaded$, impactPathWay$]).pipe(
       map(([isLoaded, impactPathway]) => isLoaded && isNotEmpty(impactPathway)),
       take(1)
     );

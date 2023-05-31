@@ -2,6 +2,7 @@
    [ngClass]="{'disabled': !hasLink }"
    [attr.aria-disabled]="!hasLink"
    [href]="href"
+   [innerHTML]="item.text | translate"
    [title]="item.text | translate"
    (click)="$event.stopPropagation()"
->{{item.text | translate}}</a>
+></a>

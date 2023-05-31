@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@a
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
+import { isEqual } from 'lodash';
 
 import { Item } from '../core/shared/item.model';
 import { Community } from '../core/shared/community.model';
@@ -10,6 +11,8 @@ import { QuestionsBoardStep } from './core/models/questions-board-step.model';
 import { hasValue } from '../shared/empty.util';
 import { ActivatedRoute } from '@angular/router';
 import { VersionSelectedEvent } from '../shared/item-version-list/item-version-list.component';
+import { AlertRole, getProgrammeRoles } from '../shared/alert/alert-role/alert-role';
+import { ProjectAuthorizationService } from '../core/project/project-authorization.service';
 
 @Component({
   selector: 'ds-questions-board',
@@ -21,10 +24,15 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   /**
    * If the current user is a funder Organizational/Project manager
    */
-  @Input() isFunder: boolean;
+  @Input() hasAnyFunderRole: boolean;
 
   /**
-   * The prefix to use for the i19n keys
+   * If the current user is a funder project manager
+   */
+  @Input() isFunderProject: boolean;
+
+  /**
+   * The prefix to use for the i18n keys
    */
   @Input() messagePrefix: string;
 
@@ -42,6 +50,11 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    * The funding community which the questions board belong to
    */
   @Input() fundingCommunity: Community;
+
+  /**
+   * Flag to check the display of upload step
+   */
+  @Input() showUploadStep = false;
 
   public questionsBoardObjectId: string;
 
@@ -64,10 +77,12 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    * A boolean representing if item is a version of original item
    */
   public isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public funderRoles: AlertRole[];
 
   constructor(
     protected questionsBoardStateService: QuestionsBoardStateService,
     protected aroute: ActivatedRoute,
+    private projectAuthorizationService: ProjectAuthorizationService
   ) {
   }
 
@@ -87,6 +102,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
       this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
 
+    this.funderRoles = getProgrammeRoles(this.questionsBoardObject, this.projectAuthorizationService);
   }
 
   isLoading(): Observable<boolean> {

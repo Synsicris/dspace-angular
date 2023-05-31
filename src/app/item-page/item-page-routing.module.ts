@@ -21,7 +21,7 @@ import { CrisItemPageTabResolver } from '../item-page/cris-item-page-tab.resolve
 import { REQUEST_COPY_MODULE_PATH } from '../app-routing-paths';
 import { OrcidPageComponent } from './orcid-page/orcid-page.component';
 import { OrcidPageGuard } from './orcid-page/orcid-page.guard';
-import { ProjectCommunityByItemResolver } from '../core/project/project-community-by-item.resolver';
+import { ProjectCommunityByItemResolver } from '../core/project/resolvers/project-community-by-item.resolver';
 import { ProjectItemBreadcrumbResolver } from '../core/breadcrumbs/project-item-breadcrumb.resolver';
 
 @NgModule({

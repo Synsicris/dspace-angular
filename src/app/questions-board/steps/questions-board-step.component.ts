@@ -15,6 +15,8 @@ import { SubmissionFormModel } from '../../core/config/models/config-submission-
 import { EditSimpleItemModalComponent } from '../../shared/edit-simple-item-modal/edit-simple-item-modal.component';
 import { QuestionsBoardType } from '../core/models/questions-board-type';
 import { getRemoteDataPayload } from '../../core/shared/operators';
+import { AlertRole, getProgrammeRoles } from '../../shared/alert/alert-role/alert-role';
+import { ProjectAuthorizationService } from '../../core/project/project-authorization.service';
 
 @Component({
   selector: 'ds-questions-board-step',
@@ -48,9 +50,9 @@ export class QuestionsBoardStepComponent implements OnInit {
   @Input() fundingCommunity: Community;
 
   /**
-   * If the current user is a funder Organizational/Project manager
+   * If the current user is a funder project manager
    */
-  @Input() isFunder: boolean;
+  @Input() isFunderProject: boolean;
 
   /**
    * The prefix to use for the i19n keys
@@ -94,12 +96,15 @@ export class QuestionsBoardStepComponent implements OnInit {
    */
   hasCheckbox = false;
 
+  funderRoles$: Observable<AlertRole[]>;
+
   constructor(
     private questionsBoardService: QuestionsBoardService,
     protected questionsBoardStateService: QuestionsBoardStateService,
     protected modalService: NgbModal,
     protected translate: TranslateService,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    private projectAuthorizationService: ProjectAuthorizationService
   ) {
 
   }
@@ -112,6 +117,11 @@ export class QuestionsBoardStepComponent implements OnInit {
       map((data: Data) => data.questionsBoard),
       getRemoteDataPayload()
     );
+    this.funderRoles$ =
+      this.questionsBoard$
+        .pipe(
+          map(item => getProgrammeRoles(item, this.projectAuthorizationService))
+        );
   }
 
   /**

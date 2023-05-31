@@ -5,6 +5,8 @@ import { uniqueId } from 'lodash';
 
 import { AlertType } from './aletr-type';
 import { fadeOutLeave, fadeOutState } from '../animations/fade';
+import { BehaviorSubject } from 'rxjs';
+import { debounceTime, take } from 'rxjs/operators';
 
 /**
  * This component allow to create div that uses the Bootstrap's Alerts component.
@@ -24,7 +26,16 @@ export class AlertComponent implements OnInit {
   /**
    * The alert content
    */
-  @Input() content: string;
+  content$ = new BehaviorSubject<string>(null);
+
+  @Input()
+  set content(content: string) {
+    this.content$.next(content);
+  }
+
+  get content(): string | null {
+    return this.content$.value;
+  }
 
   /**
    * A boolean representing if alert is collapsible
@@ -59,12 +70,12 @@ export class AlertComponent implements OnInit {
   /**
    * The initial animation name
    */
-  public animate = 'fadeIn';
+  public animate$ = new BehaviorSubject<string>('fadeIn');
 
   /**
    * A boolean representing if alert is dismissed or not
    */
-  public isDismissed = false;
+  public isDismissed$ = new BehaviorSubject<boolean>(false);
 
   /**
    * A boolean representing if alert is collapsed or not
@@ -94,14 +105,15 @@ export class AlertComponent implements OnInit {
    */
   dismiss() {
     if (this.dismissible) {
-      this.animate = 'fadeOut';
-      this.cdr.detectChanges();
-      setTimeout(() => {
-        this.isDismissed = true;
+      this.animate$
+        .pipe(
+          debounceTime(200),
+          take(1)
+        ).subscribe(() => {
+        this.isDismissed$.next(true);
         this.close.emit();
-        this.cdr.detectChanges();
-      }, 300);
-
+      });
+      this.animate$.next('fadeOut');
     }
   }
 

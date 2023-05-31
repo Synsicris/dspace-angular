@@ -30,7 +30,16 @@ li.breadcrumb-item.active {
   color: var(--ds-breadcrumb-link-active-color) !important;
 }
 
-.breadcrumb-item+ .breadcrumb-item::before {
-  display: block;
-  content: quote("•") !important;
+li.breadcrumb-item {
+  & + .breadcrumb-item::before {
+    content: quote("");
+  }
+
+  & + .breadcrumb-item.separator::before {
+    content: quote("/");
+  }
+
+  &.Project {
+    color: var(--ds-breadcrumb-link-project-color);
+  }
 }

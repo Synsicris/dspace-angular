@@ -5,6 +5,7 @@ import { isNotEmpty } from '../../shared/empty.util';
 import { QuestionsBoardState } from './questions-board.reducer';
 import { QuestionsBoard } from './models/questions-board.model';
 import { QuestionsBoardStep } from './models/questions-board-step.model';
+import { subStateSelector } from '../../shared/selector.util';
 
 
 function questionsBoardKeySelector<T>(key: string, selector): MemoizedSelector<AppState, QuestionsBoard> {
@@ -102,6 +103,10 @@ export function questionsBoardStepCollapsable(questionsBoardId: string, question
   return questionsBoardStepCollapsableSelector<QuestionsBoardStep>(questionsBoardId, questionsBoardStepId, questionsBoardStateSelector);
 }
 
+export function questionsBoardUploadsByBoardIdSelector(boardId: string): MemoizedSelector<AppState, any> {
+  const sectionDataSelector = questionsBoardByIDSelector(boardId);
+  return subStateSelector<AppState, QuestionsBoard>(sectionDataSelector, 'uploads');
+}
 
 /**
  * Returns true if compare mose id active.
@@ -110,5 +115,14 @@ export function questionsBoardStepCollapsable(questionsBoardId: string, question
  */
 export const isCompareMode = createSelector(_getQuestionsBoardState,
   (state: QuestionsBoardState) => state.compareMode || false
+);
+
+/**
+ * Returns the id of the questions board to compare.
+ * @function isCompareMode
+ * @return {boolean}
+ */
+export const questionsBoardCompareIdSelector = createSelector(_getQuestionsBoardState,
+  (state: QuestionsBoardState) => state.compareQuestionsBoardId
 );
 

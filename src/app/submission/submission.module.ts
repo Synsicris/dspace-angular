@@ -1,3 +1,4 @@
+import { QuestionsBoardStateService } from './../questions-board/core/questions-board-state.service';
 import { NgModule } from '@angular/core';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
@@ -135,7 +136,8 @@ const DECLARATIONS = [
     SubmissionUploadsConfigDataService,
     SubmissionAccessesConfigDataService,
     SectionAccessesService,
-    DetectDuplicateService
+    DetectDuplicateService,
+    QuestionsBoardStateService
   ]
 })
 

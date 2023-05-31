@@ -106,8 +106,8 @@ HELP-TEXT
 
 /* -----------------------------------------------------------
 BUTTONS (rex 230324)
- must first be verified more systematically throughout the application, because it leads to misrepresentations 
-in the working plan, for example, as if the base rem values were different there, 
+ must first be verified more systematically throughout the application, because it leads to misrepresentations
+in the working plan, for example, as if the base rem values were different there,
 although rem actually refers to the font size in the body, i.e. it should be independent of individual components.
 
 therefore defined for impact pathway only for the time being - generalize later!
@@ -125,6 +125,6 @@ button.btn-link {
   // hover-Effect for icon-Buttons,
   &:hover {
     //background-color:var(--sy-color-blue-94);
-    
+
   }
 }

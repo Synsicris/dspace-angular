@@ -19,7 +19,7 @@ export class FunderOrganizationalGuard extends SingleFeatureAuthorizationGuard {
   }
 
   getFeatureID(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FeatureID> {
-    return observableOf(FeatureID.isFunderOrganizationalManager);
+    return observableOf(FeatureID.isFunderOrganizationalManagerOfAnyProject);
   }
 
 }

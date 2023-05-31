@@ -59,9 +59,19 @@ export class SearchResultsComponent {
   @Input() searchConfig: PaginatedSearchOptions;
 
   /**
+   * A boolean representing if show csv export button
+   */
+  @Input() showCsvExport = false;
+
+  /**
    * The current sorting configuration of the search
    */
   @Input() sortConfig: SortOptions;
+
+  /**
+   * Whether to export with labels instead of metadata name or not
+   */
+  @Input() useLabelsForExport = false;
 
   /**
    * The current view-mode of the list
@@ -82,7 +92,7 @@ export class SearchResultsComponent {
   /**
    * Custom message if no result
    */
-  @Input() notFoundMessageKey: string = 'search.results.no-results';
+  @Input() notFoundMessageKey = 'search.results.no-results';
 
   /**
    * A boolean representing if result entries are selectable

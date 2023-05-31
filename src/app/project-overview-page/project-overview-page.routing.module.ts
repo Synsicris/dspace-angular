@@ -12,7 +12,7 @@ import { CommunityPageResolver } from '../community-page/community-page.resolver
 import { ProjectCollectionBreadcrumbResolver } from '../core/breadcrumbs/project-collection-breadcrumb.resolver';
 import { ProjectDsoBreadcrumbsService } from '../core/breadcrumbs/project-dso-breadcrumbs.service';
 import { ProjectBreadcrumbResolver } from '../core/breadcrumbs/project-breadcrumb.resolver';
-import { ProjectCommunityResolver } from '../core/project/project-community.resolver';
+import { ProjectCommunityResolver } from '../core/project/resolvers/project-community.resolver';
 import { EndUserAgreementCurrentUserGuard } from '../core/end-user-agreement/end-user-agreement-current-user.guard';
 
 @NgModule({

@@ -52,12 +52,12 @@ export class SubprojectItemI18nBreadcrumbsService implements BreadcrumbsProvider
           [].concat(
             project ? this.computeBreadCrumbs(null, project) : [],
             subproject && project?.id !== subproject?.id ? this.computeBreadCrumbs(project, subproject) : [],
-            new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url)
+            new Breadcrumb(i18nKey + BREADCRUMB_MESSAGE_POSTFIX, url, { separator: true })
           )
         )
       );
     } else {
-      return observableOf([new Breadcrumb(key + BREADCRUMB_MESSAGE_POSTFIX, url)]);
+      return observableOf([new Breadcrumb(key + BREADCRUMB_MESSAGE_POSTFIX, url, { separator: true })]);
     }
 
   }
@@ -65,7 +65,10 @@ export class SubprojectItemI18nBreadcrumbsService implements BreadcrumbsProvider
   private computeBreadCrumbs(parent: Item, item: Item): Breadcrumb[] {
     const entityType = this.dsoNameService.getEntityType(item);
     return [].concat(
-      entityType && new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, getDSORoute(parent)) || [],
+      entityType && new Breadcrumb(BREADCRUMB_ENTITY_PREFIX + entityType, getDSORoute(parent), {
+        [entityType]: true,
+        separator: true
+      }) || [],
       new Breadcrumb(this.dsoNameService.getName(item), getItemPageRoute(item))
     );
   }

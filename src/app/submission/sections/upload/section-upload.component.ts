@@ -1,7 +1,11 @@
-import { ChangeDetectorRef, Component, Inject } from '@angular/core';
+import { isEqual } from 'lodash';
+import {
+  WorkspaceitemSectionUploadFileObject
+} from './../../../core/submission/models/workspaceitem-section-upload-file.model';
+import { ChangeDetectorRef, Component, Inject, QueryList, ViewChildren } from '@angular/core';
 
 import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 import { SectionModelComponent } from '../models/section.model';
 import { hasValue, isNotEmpty, isNotUndefined, isUndefined } from '../../../shared/empty.util';
@@ -27,6 +31,7 @@ import { followLink } from '../../../shared/utils/follow-link-config.model';
 import { getFirstSucceededRemoteData } from '../../../core/shared/operators';
 import { SubmissionVisibility } from '../../utils/visibility.util';
 import { SubmissionUploadFilesComponent } from '../../form/submission-upload-files/submission-upload-files.component';
+import { SubmissionSectionUploadFileComponent } from './file/section-upload-file.component';
 
 export const POLICY_DEFAULT_NO_LIST = 1; // Banner1
 export const POLICY_DEFAULT_WITH_LIST = 2; // Banner2
@@ -125,6 +130,22 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
   protected subs: Subscription[] = [];
 
   /**
+   * The list of upload files components in this section
+   */
+  @ViewChildren(SubmissionSectionUploadFileComponent) fileEntryRef: QueryList<SubmissionSectionUploadFileComponent>;
+
+  /**
+   * Flag to indicate if the edit bitstream modal has been opened once
+   */
+  editBitstreamModalOpenedOnce = false;
+
+  /**
+   * The reference to the submission uploader component
+   * @type {SubmissionUploadFilesComponent}
+   */
+  submissionUploader: SubmissionUploadFilesComponent;
+
+  /**
    * Initialize instance variables
    *
    * @param {SectionUploadService} bitstreamService
@@ -151,6 +172,7 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
               @Inject('submissionIdProvider') public injectedSubmissionId: string,
               @Inject('submissionUploaderRefProvider') public injectedSubmissionUploaderRef: Observable<SubmissionUploadFilesComponent>) {
     super(undefined, injectedSectionData, injectedSubmissionId, injectedSubmissionUploaderRef);
+      this.initEditBitstreamListeners();
   }
 
   /**
@@ -286,14 +308,46 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
 
   /**
    * Open file browse dialog
-   *
-   * @param submissionUploaderRef$
    */
-  browse(submissionUploaderRef$: Observable<SubmissionUploadFilesComponent>) {
-    submissionUploaderRef$.pipe(
-      take(1)
-    ).subscribe((submissionUploaderRef: SubmissionUploadFilesComponent) => {
-      submissionUploaderRef?.uploader?.browseBtn?.nativeElement.click();
-    });
+  browse() {
+      this.submissionUploader?.uploader?.browseBtn?.nativeElement.click();
+  }
+
+  /**
+   * Initialize the listeners for the edit bitstream modal and open it when a file is uploaded
+   * If there is only one file, open the edit modal
+   * If there are multiple files, open the edit modal only for the last uploaded file (the one that triggered the event)
+   */
+  private initEditBitstreamListeners() {
+    this.subs.push(
+      this.submissionUploaderRef.pipe(
+        filter((submissionUploader: SubmissionUploadFilesComponent) => isNotUndefined(submissionUploader?.uploader)),
+        switchMap((submissionUploader: SubmissionUploadFilesComponent) => {
+          this.submissionUploader = submissionUploader;
+          return this.submissionUploader?.uploader?.onCompleteItem.pipe(
+            map((completeItems) => {
+              if (hasValue(completeItems) && isNotEmpty(completeItems) && !this.editBitstreamModalOpenedOnce) {
+                const fileEntries = this.fileEntryRef.toArray();
+                if (isNotEmpty(fileEntries)) {
+                  const items: WorkspaceitemSectionUploadFileObject[] = completeItems.sections.upload.files;
+                  const lastUploadedFile: WorkspaceitemSectionUploadFileObject = items[items.length - 1];
+                  const sectionIdx = fileEntries.findIndex(fileCmp => isEqual(lastUploadedFile.uuid, fileCmp.fileId));
+                  if (sectionIdx > -1) {
+                    const elementToEdit: SubmissionSectionUploadFileComponent = fileEntries[sectionIdx];
+                    // subscribe to modal close event to reset the flag
+                    elementToEdit.modalClosed.subscribe(() => {
+                      this.editBitstreamModalOpenedOnce = false;
+                    });
+                    // open the modal
+                    elementToEdit.editBitstreamData();
+                    this.editBitstreamModalOpenedOnce = true;
+                  }
+                }
+              }
+            })
+          );
+        })
+      ).subscribe()
+    );
   }
 }

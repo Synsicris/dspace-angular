@@ -25,7 +25,7 @@
        (cdkDropListDropped)="listDropped($event)">
     <ds-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
                               class="mb-sm-1 mb-lg-4 mb-5 mr-sm-1 ml-lg-2 mr-lg-2 task-horizontal draggable-task"
-                              [cdkDragDisabled]="isVersionOfAnItem || (compareMode | async)"
+                              [cdkDragDisabled]="isVersionOfAnItem || compareMode"
                               [projectCommunityId]="projectCommunityId"
                               [impactPathwayId]="impactPathwayStep.parentId"
                               [impactPathwayStepId]="impactPathwayStep.id"
@@ -35,7 +35,8 @@
                               [taskPosition]="i"
                               [isObjectivePage]="true"
                               [isVersionOfAnItem]="isVersionOfAnItem"
-                              [compareMode]="(compareMode | async)"
+                              [compareMode]="compareMode"
+                              [showArrows]="false"
                               (cdkDragStarted)="dragStarted($event)"
                               (cdkDragDropped)="drop($event)"
                               (cdkDragEntered)="dragEnteredToStep($event)"
