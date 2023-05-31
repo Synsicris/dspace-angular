@@ -1,0 +1,161 @@
+/* -----------------------------------------------------------
+SIDEBAR (rex 221201)
+Sidebar is noth themeable, and only a few of the existing variables in
+_theme_css_variable_overrides.scss affect the current design.
+
+ATTENTION: in case of misrepresentations in the sidebar very often mistakes in the language files are the cause!
+----------------------------------------------------------- */
+
+// Hide sidebar collapse button
+button.menu-toggle {display:none;}
+
+#sidebar {
+
+  /* Basic Styles Sidebar
+  --------------------- */
+  // Distance sidebar top and bottom
+  margin:0.9rem auto;
+  // similar border-radius as helptext-box
+  border-radius:5px;
+
+  // Top finish Sidebar
+  & ul:first-child ds-cris-layout-sidebar-item:first-child li {
+    border-top:1px solid var(--sy-cris-layout-sidebar-first-child-border-top-color); // Grey border as with fold-out elements #DFDFDF
+  }
+
+  /* basic styles of all lists of all areas
+  -------------------------------------- */
+  // all list elements - both direct links and with another expandable ul level
+  li.sidebar-section {
+
+    background-color:var(--sy-cris-layout-sidebar-tab-direct-color) !important;      // Standard light blue for menu items #EFF4F7
+    &:hover {background-color:var(--ds-cris-layout-sidebar-tab-color-hover);}
+    border-bottom: 2px solid var(--sy-cris-layout-sidebar-tab-border-bottom-color);  // white
+    //border-top:1px solid var(--sy-cris-layout-sidebar-tab-border-top-color);       // light grey
+    position:relative;
+
+    // General formatting for links
+    a.nav-item, a span.section-header-text {
+      text-decoration:none !important;
+      color:var(--sy-cris-layout-sidebar-link-text-color);
+      font-weight:400;
+      @include transition(all .2s ease-in-out);
+      }
+
+    // contains the pop-up group ul second layer
+    div.sidebar-collapsible {
+
+      background-color:var(--sy-body-background-color); // otherwise the background remains visible behind the li of the second layer.
+      // Background of the pop-up menu items only, not the items underneath.
+      & a.nav-item:first-child {
+        background-color:var(--sy-cris-layout-sidebar-tab-expandable-color);        // light gray
+        &:hover {background-color:var(--ds-cris-layout-sidebar-tab-color-hover);}   // white
+      }
+
+      // second level
+      ul.sidebar-sub-level-items {
+        position:relative;
+        margin-top:0.15rem; // Distance from fold-out link
+        left:0.5rem;  // Indentation of the entire second level
+        li a.nav-item {
+          background-color:var(--sy-cris-layout-sidebar-tab-direct-color) !important; // Standard light blue of the direct link-tabs
+          &:hover {background-color:var(--ds-cris-layout-sidebar-tab-color-hover) !important;}
+          border-bottom: 2px solid var(--sy-body-background-color); // bright border
+          padding-left:0.6rem !important; // by default, 1.5rem padding was left, but this is too much with indented lists
+
+        }
+        //* Highlight must be defined separately here */
+        li.active a.nav-item {
+          background-color:var(--ds-cris-layout-sidebar-menu-active-background) !important;
+        }
+      } // end ul.sidebar-sub-level-items
+
+      /* Fold-out links with arrows
+      arranges the unfolding arrows at the bottom instead of in the middle so that it fits the special solution
+      of the subdivided sideba in the Level Project */
+      a.nav-item {
+        -webkit-box-align:flex-end;
+        box-align:flex-end;
+        align-items:flex-end;
+
+        /* Text labels only of the expandable meu items as well as the contained sub-items, but not of the simple links of the first level!
+        The simple links are directly in a and in no span-tag */
+        span.section-header-text {
+          /* limits the label width, so that it is not pulled into the width by the extraordinary before-box in #sidebar.project
+          is pulled into the width and thus the arrow is not pushed outside the sidebar!!! */
+          max-width:calc(var(--ds-cris-layout-sidebar-width) - 4.5rem);
+
+          // Folding arrow
+          i.fas.fa-chevron-right { }
+
+        } //end span.section-header-text
+      } // end a.a.nav-item
+    } // end div.sidebar-collapsable
+  } // end li.sidebar-section
+
+
+/* STYLES FOR LEVEL 1 (Person)
+--------------------------- */
+&.Person {
+  // level-hightlight-border
+  li.active:not(.expanded) {
+  border-left:4px solid var(--sy-level-person-border-color) !important;
+  }
+} // end &.Person
+
+/* STYLES FOR LEVEL 2 (Project) WITH SPECIAL SOLUTION FOR SIDEBAR INTERHEAD
+------------------------------------------------------------------------ */
+&.Project {
+
+  // concerns first level lists (.sidebar-section) and second level, therefore outside the li below
+  li.active:not(.expanded) {
+  border-left:4px solid var(--sy-level-project-border-color);    // Highlight-border-left
+  //span.section-header-text { margin-left:-20px; }              // Compensation jerking due to highlight border
+  }
+
+  li.sidebar-section {
+    div.sidebar-collapsible {
+      a.nav-item {
+
+        /* .section-header-text#sidebarName-2153 is the id with the list block above it */
+        span.section-header-text {
+
+          /* content reads out the content of the alt attribute in the language file:
+          "layout.tab.header.Projectobjectives": "<span class=\"entry-with-space-before-to-divide-sidebar\" alt=\"Listen\">Ziele des Vorhabens</span>",
+          https://www.heise.de/select/ix/2017/3/1487591950470172 */
+          .sidebar-interhead {
+
+            &:after {
+              content: "  "attr(alt)" ";
+              display:block;
+              width:calc(var(--ds-cris-layout-sidebar-width) + 0.5rem);
+              background-color: var(--sy-body-background-color) !important;
+              margin:-0.65rem 0 1rem -2rem;     // pulls gap space to the left
+              padding:0.6rem 0 0.6rem 0.5rem;
+              font-weight:800;
+              font-family:"Nunito", sans-serif;
+              color: var(--ds-cris-layout-sidebar-menu-active-color); // dark grey
+            } // end &:after
+
+          } // end .sidebar-interhead
+
+
+          // Aufklapppfeil
+          i.fas.fa-chevron-right { }
+
+        } //end span.section-header-text
+      } // end a.a.nav-item
+    } // end div.sidebar-collapsable
+  } // end li.sidebar-section
+} // end &.Project
+
+
+/* STYLES FOR LEVEL 3 (Funding)
+---------------------------- */
+&.Funding {
+  // level-hightlight-border
+  li.active:not(.expanded) {border-left:4px solid var(--sy-level-funding-border-color) !important;}
+  } // end &.Funding
+
+
+} // end #sidebar

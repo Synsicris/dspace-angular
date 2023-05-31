@@ -1,0 +1,35 @@
+/* -----------------------------------------------------------
+BREADCRUMB (rex 230210)
+ATTENTION: in src/themes/synsicris/app/breadcrumbs/breadcrumbs.component.scss are already the final stylesheets
+for breadcrumbs with entity tag according to
+https://github.com/Synsicris/Userinterface1a/issues/52#issuecomment-1241349651 !
+----------------------------------------------------------- */
+/* */
+ds-breadcrumbs nav.nav-breadcrumb { // complete bar
+
+  //display:none !important;
+
+  // WORKAROUND WITH BOX-SHADOW, BECAUSE BORDER-BOTTOM DOESN'T WORK
+  // because ol.breadcrumb moves inside v.nav.breadcrumb as soon as a border is used.
+  // Therefore border-top for breadcrumb bar IS in navbar.component.scss in nav.navbar,
+  // and border-bottom here as shadow
+  box-shadow: 0 1px 0 var(--ds-header-navbar-border-bottom-color);
+
+  ol.breadcrumb {
+
+    background-color: transparent; // Breadcrumb-Links had a background-color, that is not needed
+
+    li.breadcrumb-item {
+
+      a:link, a:hover, a:focus, a:visited {
+        color: var(--ds-breadcrumb-link-color) !important;
+      }
+
+      & + .breadcrumb-item::before {
+        content: quote("/") !important;
+      }
+    } // end li.breadcrumb-item
+
+  } // end ol.breadcrumb
+
+} // end ds-breadcrumbs nav.nav-breadcrumb

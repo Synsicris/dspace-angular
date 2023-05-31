@@ -352,6 +352,12 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
       .filter((subscription) => hasValue(subscription))
       .forEach((subscription) => subscription.unsubscribe());
   }
+  /**
+   * Jump Marker to scroll down to the description field (230429 rex)
+   */
+  scroll(el: HTMLElement) {
+    el.scrollIntoView({behavior: 'smooth'});
+}
 
   getCompareItemDescription(item: Item): string {
     return item?.firstMetadataValue('dc.description');
