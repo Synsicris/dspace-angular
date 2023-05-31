@@ -17,6 +17,7 @@ import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { EditItemGrantsModalComponent } from '../../edit-item-grants-modal/edit-item-grants-modal.component';
 import { isNotEmpty } from '../../empty.util';
 import { FUNDING_ENTITY } from '../../../core/project/project-data.service';
+import { environment } from '../../../../environments/environment';
 
 
 /**
@@ -109,7 +110,7 @@ export class EditItemPermissionsMenuComponent extends ContextMenuEntryComponent 
         switchMap(isAdmin => {
           const modRef = this.modalService.open(EditItemGrantsModalComponent);
           modRef.componentInstance.item = this.contextMenuObject;
-          modRef.componentInstance.editMode = isAdmin ? 'ADMIN_EDIT_GRANTS' : 'EDIT_GRANTS';
+          modRef.componentInstance.editMode = isAdmin ? environment.projects.projectEditGrantsAdminMode : environment.projects.projectEditGrantsMode;
           return fromPromise(modRef.result);
         }),
         take(1)

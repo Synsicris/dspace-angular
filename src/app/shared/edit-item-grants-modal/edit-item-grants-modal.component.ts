@@ -83,7 +83,7 @@ export class EditItemGrantsModalComponent implements OnInit {
    * Initialize the component, setting up creation form
    */
   ngOnInit(): void {
-    this.currentItemGrantsValue = Metadata.firstValue(this.item.metadata, 'cris.project.shared');
+    this.currentItemGrantsValue = Metadata.firstValue(this.item.metadata, environment.projects.projectEditGrantsMetadata);
     this.vocabulary.getVocabularyEntries(
       new VocabularyOptions(environment.projects.projectsGrantsOptionsVocabularyName),
       new PageInfo()
@@ -133,8 +133,8 @@ export class EditItemGrantsModalComponent implements OnInit {
     this.itemService.updateItemMetadata(
       this.item.uuid,
       this.editMode,
-      'sections/edit_grants',
-      'cris.project.shared',
+      `sections/${environment.projects.projectEditGrantsForm}`,
+      environment.projects.projectEditGrantsMetadata,
       0,
       projectGrants
     ).subscribe({

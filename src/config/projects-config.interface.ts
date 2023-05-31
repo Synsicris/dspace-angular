@@ -18,6 +18,10 @@ export interface ProjectsConfig extends Config {
   projectsEntityAdminEditMode: string;
   projectsEntityFunderEditMode: string;
   projectVersionUniqueIdMetadata: string;
+  projectEditGrantsForm: string;
+  projectEditGrantsAdminMode: string;
+  projectEditGrantsMode: string;
+  projectEditGrantsMetadata: string;
   excludeComparisonMetadata: string[];
   projectsBrowse: ProjectsBrowseConfig;
   versioningEditMode: string;

@@ -521,6 +521,10 @@ export const environment: BuildConfig = {
     projectsEntityFunderEditMode: 'FUNDER_EDIT',
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
     excludeComparisonMetadata: ['dspace.entity.type'],
+    projectEditGrantsForm: 'edit_grants',
+    projectEditGrantsMetadata: 'cris.project.shared',
+    projectEditGrantsAdminMode: 'ADMIN_EDIT_GRANTS',
+    projectEditGrantsMode: 'EDIT_GRANTS',
     projectsBrowse: {
       adminAndFunders: {
         firstStepSearchQueryConfigurationName: 'firstStepSearchProjectsForAdminAndFunders',
