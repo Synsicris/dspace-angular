@@ -3904,7 +3904,7 @@
 
   "menu.section.browse_community_by_title": "By Title",
 
-  "menu.section.browse_by_projects": "Browse by projects",
+  "menu.section.browse_by_projects": "Browse by Consortia",
 
   "menu.section.explore_infrastructure": "Infrastructure",
 
@@ -5498,9 +5498,9 @@
 
   "search.filters.applied.charts.chart.pie.itemtype_filter.tab": "Item Type",
 
-  "search.filters.applied.charts.graphitemtype.tab": "Visualization by Type",
+  "search.filters.applied.charts.graphitemtype.tab": "Type",
 
-  "search.filters.applied.charts.graphpubldate.tab": "Visualization by Date",
+  "search.filters.applied.charts.graphpubldate.tab": "Date",
 
   "search.filters.applied.charts.graphpubldateltr.tab": "Visualization Demo LTR",
 
@@ -5574,8 +5574,6 @@
 
   "search.filters.applied.charts.graph-organisation_foundingDate.tab": "Established",
 
-  "search.filters.applied.charts.graphgendertype.tab": "What is this? (gendertype)",
-
   "search.filters.applied.charts.graphproceventtargetgroup.tab": "involved Stakeholder groups",
 
   "search.filters.applied.charts.graph-synsicris_coverage_regionalprimary.tab": "Primary field of application",
@@ -5620,13 +5618,13 @@
 
   "search.filters.applied.charts.graph-synsicris_type_researchquestion.tab": "Gender aspects in the research question",
 
-  "search.filters.applied.charts.graphgenderstateofart.tab": "Here is an error (genderstateofart)",
+  "search.filters.applied.charts.graphgenderstateofart.tab": "Gender relevance in the state of research",
 
-  "search.filters.applied.charts.graphgenderprojectdesign.tab": "Here is an error (genderprojectdesign)",
+  "search.filters.applied.charts.graphgenderprojectdesign.tab": "Gender relevance in the project design",
 
-  "search.filters.applied.charts.graphgenderapplication.tab": "Here is an error (genderapplication)",
+  "search.filters.applied.charts.graphgenderapplication.tab": "Gender differences in terms of application and impacts",
 
-  "search.filters.applied.charts.graphgendertypeproject.tab": "Here is an error (gendertypeproject)",
+  "search.filters.applied.charts.graphgendertypeproject.tab": "Measures to promote gender equality",
 
   "search.filters.applied.charts.graphgenderBalance.tab": "Gender balance",
 
@@ -7696,9 +7694,9 @@
 
   "view.version.badges.date": "Date",
 
-  "view.version.badges.official": "Official",
+  "view.version.badges.official": "officiel",
 
-  "view.version.badges.nonOfficial": "Non Official",
+  "view.version.badges.nonOfficial": "non-official",
 
   "view.version.badges.noSummary": "No Summary",
 
@@ -11035,4 +11033,121 @@
   "graph-page.warining.no-chart-type": "Check filter name, this chart type does not exist.",
 
   "graph-page.chart-no-data": "No data found",
+
+  "layout.tab.header.milestone": "Milestones",
+
+  "layout.box.header.milestone": "Milestones",
+
+  "layout.box.header.milestone_m": "Milestone",
+
+  "layout.box.header.milestone_comment": "Comments - Milestone",
+
+  "layout.box.header.milestone_status": "Change since proposal submission",
+
+  "layout.box.header.milestone_internalacc": "Internal Information (only members of consortium)",
+
+  "layout.box.help-text.milestone_h": "Help Milestone",
+
+  "layout.box.help-text.milestone_h_funder": "Help Milestone funder",
+
+  "layout.field.label.milestone.dc.title": "Title",
+
+  "layout.field.label.milestone.dc.description": "Description",
+
+  "layout.field.label.milestone.dc.date.end": "End date",
+
+  "layout.field.label.milestone.synsicris.type.internal": "Task",
+
+  "layout.field.label.milestone.synsicris.description.internal": "Description",
+
+  "layout.field.label.milestone.synsicris.type.status": "Status",
+
+  "layout.box.header.funding_import_funder": "Subproject - Information from Import",
+
+  "layout.field.label.funding_import_funder.synsicris.lastmodified.profi.date": "Last modified (profi)",
+
+  "layout.field.label.funding_import_funder.synsicris.parentprojectid": "ID of the joint project",
+
+  "layout.field.label.funding_import_funder.synsicris.subject.prog": "Programme classification funding body",
+
+  "layout.field.label.funding_import_funder.synsicris.subject.researchfocus": "Researchfocus",
+
+  "layout.field.label.funding_import_funder.synsicris.type.research": "Type of Research",
+
+  "layout.field.label.funding_import_funder.synsicris.type.project": "Type of Project",
+
+  "layout.field.label.funding_import_funder.synsicris.subject.histLP": "LP-code",
+
+  "layout.field.label.funding_import_funder.synsicris.subject.textLP": "LP-text",
+
+  "layout.field.label.funding_import_funder.oairecerif.funder": "Funder (ministry)",
+
+  "layout.field.label.funding_import_funder.synsicris.funder.unit": "Funder Department (ministry)",
+
+  "layout.field.label.funding_import_funder.synsicris.fundingagency": "Funding body",
+
+  "layout.field.label.funding_import_funder.synsicris.fundingagency.unit": "Funding body department",
+
+  "layout.field.label.funding_import_funder.synsicris.subject.sort": "Keywords all Sorter",
+
+  "layout.field.label.funding_import_funder.synsicris.description.sort": "Individual Keywords",
+
+  "layout.field.label.funding_import_funder.synsicris.type.jointproject": "Type of Consortium",
+
+  "layout.field.label.funding_import_funder.synsicris.type.application": "Type of Application",
+
+  "layout.field.label.funding_import_funder.synsicris.type.formtype": "Type of Form",
+
+  "layout.field.label.funding_import_funder.synsicris.type.development": "Relevance for development cooperation",
+
+  "layout.field.label.funding_import_funder.synsicris.subject.countries": "Relevant countries for development cooperation",
+
+  "layout.field.label.funding_import_funder.synsicris.subject.nace": "Potential application",
+
+  "layout.field.label.funding_import_funder.synsicris.fundingagency.detail": "Funding body (detail)",
+
+  "layout.field.label.funding_import_funder.synsicris.subject.sortprimary": "Keyword Primary-Sorter",
+
+  "layout.box.header.Project_funder": "Consortium - Information from Import",
+
+  "layout.field.label.Project_funder.synsicris.subject.funderlabel1": "Project label transfer",
+
+  "layout.field.label.Project_funder.synsicris.subject.funderlabel2": "Projekt label Placeholder",
+
+  "layout.field.label.Project_funder.synsicris.subject.funderlabel3": "Projekt label other Placeholder",
+
+  "layout.field.label.Project_funder.synsicris.type.sdg": "Related SDG",
+
+  "layout.field.label.Project_funder.synsicris.type.influence": "Contribution of the project to the SDG",
+
+  "layout.field.label.Project_funder.synsicris.description.influence": "Explanation",
+
+  "layout.field.label.projectpartner_funder.synsicris.lastmodified.profi": "Latest modified from profi",
+
+  "layout.field.label.projectpartner_funder.synsicris.identifier.municipality": "Municipality identifier",
+
+  "layout.field.label.projectpartner_funder.synsicris.address.countryclassification": "profi - national category",
+
+  "layout.field.label.projectpartner_funder.synsicris.internalid.name": "Internal-name-id profi",
+
+  "layout.field.label.projectpartner_funder.synsicris.internalid.address": "Internal-adress-id profi",
+
+  "layout.field.label.projectpartner_funder.synsicris.internalid.nameparentOrganization": "Internal-name-id profi of parent organisation",
+
+  "layout.field.label.projectpartner_funder.synsicris.type.recipient": "profi recipient stats",
+
+  "layout.field.label.cooperationpartner_funder.synsicris.address.countryclassification": "profi - national category",
+
+  "layout.field.label.cooperationpartner_funder.synsicris.internalid.name": "Internal-name-id profi",
+
+  "layout.field.label.cooperationpartner_funder.synsicris.internalid.address": "Internal-adress-id profi",
+
+  "search.filters.applied.charts.RELATION.Person.fundingobjective.title": "Graph",
+
+  "search.filters.filter.targetGroupsTypes.head": "Type of Targetgroup(s)",
+
+  "search.filters.filter.targetGroupsTypes.placeholder": "Type of Targetgroup(s)",
+
+  "search.filters.filter.targetGroupsTypes.label": "Search Type of Targetgroup(s)"
+
 }
