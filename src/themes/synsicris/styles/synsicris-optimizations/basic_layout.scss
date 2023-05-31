@@ -1,0 +1,151 @@
+/* -----------------------------------------------------------
+BASIC LAYOUT
+----------------------------------------------------------- */
+h1 {
+	font-size:1.8rem;
+	font-family: 'Nunito-SemiBold';
+}
+
+.outer-wrapper {
+
+	// Content area
+	.inner-wrapper {
+  
+	  background-color: var(--sy-body-background-color); // basic background color of content area (found --bsbody-bg and --bs-body-color, but they didn't show an effect)
+  
+	  main.main-content {
+		padding-top:0 !important;
+  
+		.cris-layout {
+  
+		  /* this tag gets the specific colors for the level
+		  Therefore the classes "Person", "Project" and "Funding" were added in
+		  src/app/cris-layout/cris-layout-leading/cris-layout-leading.component.html
+		  with class="{{'existing-css ' + item.entityType}}" */
+  
+		  #cris-layout-leading {
+  
+			margin-top:1.1rem !important; // covers otherwise breadcrumb
+  
+			// level 1 (person)
+			&.Person {
+			  background-color:var(--sy-level-person-background-color);
+			  border-bottom:1px solid var(--sy-level-person-border-color);
+			  .headerbox {
+				i.fas {color:var(--sy-level-person-icon-color)}
+			  }
+			} // end &.Person
+  
+			// level 2 (project)
+			&.Project {
+			  background-color:var(--sy-level-project-background-color);
+			  border-bottom:1px solid var(--sy-level-project-border-color);
+			  .headerbox {
+				i.fas {color:var(--sy-level-project-icon-color)}
+			  }
+			} // end &.Project
+  
+			// level 3 (funding)
+			&.Funding {
+			  background-color:var(--sy-level-funding-background-color);
+			  border-bottom:1px solid var(--sy-level-funding-border-color);
+			  .headerbox {
+				i.fas {color:var(--sy-level-funding-icon-color)}
+			  }
+			}  // end &.Funding
+  
+			// box with buttons
+			div.container.text-right.context-menu { padding-top:0.4rem; }
+  
+			/*  221126 rex: can't figure out where the inner padding of the headerbox comes from, especially the padding-bottom is much too high
+			lower height of headerbox could be enforced with height:2rem !important; to make the unnecessarily high headerbox narrower, but then the two-line header might be cut off. */
+			.headerbox {
+  
+			  // 1. headline with Icon
+			  .headline-workspace {
+				font-size:1.2rem;
+				font-weight: 600 !important;
+			  }
+			  // 2. headline
+			  .h4 {
+				margin-bottom:0.8rem !important;
+				margin-top:-0.2rem;
+				font-size:1.6rem !important;
+			  }
+  
+			} // end headerbox ...
+  
+		  } // end #cris-layout-leading
+		} // end .cris-layout
+	  } // end main.main-content
+  
+	} // end .inner-wrapper
+  } // end .outer-wrapper
+  
+  
+  
+  /* -----------------------------------------------------------
+  TESTS TO IDENTIFY LAYOUT AREAS (rex)
+  ----------------------------------------------------------- */
+  /*
+  .outer-wrapper {
+	//border:2px solid red !important;
+  
+	.inner-wrapper {
+	  //border:2px solid blue !important;
+  
+	  // box unter header, seltsamerweise nicht mit border-top
+	  // wird vo beadcrumb ueberschnitte
+	  main.main-content {           //tag, keine Klasse!
+		border:10px solid blue !important;
+		background-color:blue !important;
+		display:block !important;
+  
+		ds-themed-breadcrumbs {     //tag, keine Klasse!
+		  border:2px solid red !important;
+		  background-color:red !important;
+		  display:block !important;
+  
+		  ds-breadcrumbs {     //tag, keine Klasse!
+			background-color:pink !important;
+			border:5px solid pink !important;
+		  } // end ds-breadcrumbs
+  
+		} // end ds-themed-breadcrumbs
+  
+		// gesamter Inhalt unterhalb breadcrumb
+		.cris-layout {
+		  border:5px solid yellow !important;
+		  display:block;
+  
+		  // xxx
+		  .ds-cris-layout-leading {
+			border:5px solid lime !important;
+			display:block !important;
+		  }
+  
+		  // box um headerbox
+		  #cris-layout-leading {
+			border:5px solid orange !important;
+			display:block;
+  
+			.headerbox_level_1,
+			.headerbox_level_2,
+			.headerbox_level_3 { border:5px solid violet !important; }
+  
+		  } // ed #cris-layout-leading
+  
+		} // end .cris-layout
+  
+	  } // end main.main-content
+  
+		//&.ng-trigger-slideSidebarPadding { } // probably for the black Admin-Sidebar (to be tested with differet login / einloggen as shared ist am 4.11. nicht möglich)
+		//.ds-themed-header-navbar-wrapper { //border:2px solid orange !important;
+  
+	  } // end .inner-wrapper
+	} // end .outer-wrapper
+  
+	.notifications-wrapper { } // for notification with fixed position top-right and bottom-right
+   */
+  
+  

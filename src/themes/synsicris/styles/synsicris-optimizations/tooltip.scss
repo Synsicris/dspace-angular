@@ -1,0 +1,20 @@
+/* -----------------------------------------------------------
+TOOLTIP (rex 221021)
+----------------------------------------------------------- */
+
+.hint-tooltip .tooltip-inner {
+  max-width: 32rem; // somewhere (not clear, where) the width is defined with max-width:200px, so overwritten here
+  padding: 1.2rem;
+  text-align: left;
+  box-shadow: 0 5px 15px var(--ds-tooltip-boxshadow-color); // shadow behind tooltip
+  background-color: var(--ds-tooltip-inner-background-color);
+  color: var(--ds-tooltip-inner-color);
+}
+
+/* arrow gets same color as the bubble background */
+.bs-tooltip-top .arrow::before,
+.bs-tooltip-right .arrow::before,
+.bs-tooltip-left .arrow::before,
+.bs-tooltip-bottom .arrow::before {
+  border-top-color: var(--ds-tooltip-inner-background-color);
+}

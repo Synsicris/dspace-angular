@@ -1,3 +1,4 @@
+//see also src/themes/synsicris/styles/synsicris-optimizations/impact_pathway.scss
 @import '../../../../styles/variables';
 
 .step-disabled {
@@ -37,6 +38,7 @@
   flex-basis: 0 !important;
 }
 
+/* columns backgrounds defined in src/themes/synsicris/styles/synsicris-optimizations/impact_pathway.scss
 .bg-step-green {
   background-color: rgba(38, 153, 0, 0.2);
 }
@@ -48,6 +50,7 @@
 .bg-step-grey {
   background-color: rgba(191, 191, 191, 0.2);
 }
+*/
 
 :host ::ng-deep div.line {
   z-index: 1;
