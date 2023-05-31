@@ -32,6 +32,7 @@ import { PrintStyleApplier } from '../core/shared/print-style-applier';
             path: '',
             component: ImpactPathwayPageComponent,
             canActivate: [PrintStyleApplier],
+            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
             data: {
               title: 'impact-pathway.edit.page.title',
               breadcrumbKey: 'impact-pathway',
