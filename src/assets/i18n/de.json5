@@ -5685,7 +5685,7 @@
 
   // "menu.section.browse_by_projects": "Browse by projects",
   // TODO New key - Add a translation
-  "menu.section.browse_by_projects": "Suche in allen Einträgen",
+  "menu.section.browse_by_projects": "<i class=\"fa-solid fa-magnifying-glass\"></i> Suche in allen Einträgen",
 
   // "menu.section.explore_infrastructure": "Infrastructure",
   // TODO New key - Add a translation

@@ -3914,7 +3914,7 @@
 
   "menu.section.browse_community_by_title": "By Title",
 
-  "menu.section.browse_by_projects": "Browse by Consortia",
+  "menu.section.browse_by_projects": "<i class=\"fa-solid fa-magnifying-glass\"></i> Browse by Consortia",
 
   "menu.section.explore_infrastructure": "Infrastructure",
 
