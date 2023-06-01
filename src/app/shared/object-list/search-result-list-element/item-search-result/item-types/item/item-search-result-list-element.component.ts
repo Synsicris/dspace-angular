@@ -36,6 +36,11 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   @Input() showMetrics = true;
 
   /**
+   * Whether or not to show the item actions
+   */
+  @Input() showItemActions = true;
+
+  /**
    * Display configurations for the item search result
    */
   displayConfigurations: ResultViewConfig[];
@@ -50,7 +55,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   /**
    * A boolean representing if to show item actions
    */
-  showItemActions: boolean;
+  showItemAction: boolean;
 
   public constructor(protected truncatableService: TruncatableService, protected dsoNameService: DSONameService, @Inject(APP_CONFIG) protected appConfig: AppConfig) {
     super(truncatableService, dsoNameService, appConfig);
@@ -60,7 +65,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
     super.ngOnInit();
     this.showThumbnails = this.showThumbnails ?? this.appConfig.browseBy.showThumbnails;
     this.itemPageRoute = getItemPageRoute(this.dso);
-    this.showItemActions = this.dso.entityType !== PROJECT_ENTITY && this.dso.entityType !== FUNDING_ENTITY;
+    this.showItemAction = this.showItemActions ?? (this.dso.entityType !== PROJECT_ENTITY && this.dso.entityType !== FUNDING_ENTITY);
 
     const itemType = this.firstMetadataValue('dspace.entity.type');
     if ( !!this.appConfig.displayItemSearchResult && !!this.appConfig.displayItemSearchResult[itemType] ) {
