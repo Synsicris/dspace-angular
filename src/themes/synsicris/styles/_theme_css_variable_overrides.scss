@@ -27,7 +27,8 @@
 
   --sy-color-gray-0:          rgb(0,0,0);            // #000000 hsl(0,0,0)       black
   --sy-color-gray-36:         rgb(91,91,91);         // #5B5B5B hsl(0,0,36)      synsicris-logo gray
-  --sy-color-grey-48:         rgb(115,123,132);      // #737B84 hsl(212,7,48)    tooltip shadow
+  --sy-color-gray-48:         rgb(115,123,132);      // #737B84 hsl(212,7,48)    tooltip shadow
+  --sy-color-gray-64:         rgb(157,163,170);       // #9DA3AA hsl(212,7,64)   breadcrumb divider
   --sy-color-gray-68:         rgb(161,175,184);      // #A1AFB8 hsl(202,14,68)   level 1 (person) headerbox and breadcrumb-tags icon and border, horizontal borders of footer, breadcrumb, header
   --sy-color-gray-85:         rgb(216, 217, 218);    // #D8D9DA hsl(210,3,85)    footer dividers between textgroups
   --sy-color-gray-90:         rgb(230,230,230);      // #E6E6E6 hsl(60,0,90)     sidebar borders of tabs
@@ -47,6 +48,7 @@
   --sy-color-orange-60:       rgb(255,153,51);        // #FF9933 hsl(30,100,60)  ursprüngliche Säulenfarbe ohne Transparenz
   --sy-color-orange-90:       rgb(250,229,209);       // #FF9933 hsl(30,80,90)   IP Säule
 
+  --sy-color-yellow-35:       rgb(181,141,0 );        // #B58D00 hsl(47,100,35)   minimum dark yellow for minimum contrast for accessibility for large text and graphics
   --sy-color-yellow-46:       rgb(234,183,2);        // #EAB702 hsl(47,98,46)    level 3 (funding) headerbox and breadcrumb-tags icon and border
   --sy-color-yellow-98:       rgb(255,253,245);      // #FFFDF5 hsl(48,100,98)   level 3 (funding) headerbox bg
 
@@ -94,7 +96,7 @@
   /* ----------------- TOOLTIP ---------------------------- */
   --ds-tooltip-inner-background-color:  var(--sy-color-blue-94);  // tooltip bg of bubble and arrow (bright blue)
   --ds-tooltip-inner-color:             var(--sy-color-blue-13);  // text color (dark blue)
-  --ds-tooltip-boxshadow-color:         var(--sy-color-grey-48);  // shadow
+  --ds-tooltip-boxshadow-color:         var(--sy-color-gray-48);  // shadow
 
 
   /* ----------------- DROPDOWN ---------------------------- */
@@ -113,10 +115,21 @@
   --ds-breadcrumb-link-color:           var(--sy-color-blue-29);
   --ds-breadcrumb-link-active-color:    var(--sy-color-bluegray-31);
   --ds-breadcrumb-max-length:           200px;
-  --sy-breadcrumb-divider-color:        var(--sy-color-gray-68);
+
+  --sy-breadcrumb-divider-color:        var(--sy-color-gray-64);
   --sy-breadcrumb-tag-background:       var(--sy-color-gray-100);
   --sy-breadcrumb-tag-border-color:     var(--sy-color-gray-90);
-  --sy-breadcrumb-tag-color:            var(--sy-color-grey-48);
+  --sy-breadcrumb-tag-color:            var(--sy-color-gray-48);
+
+  // entity-tag-colors level 1 (project)
+  --sy-breadcrumb-link-project-color:   var(--sy-color-green-30);
+  --sy-breadcrumb-icon-project-color:   var(--sy-color-green-30);
+  --sy-breadcrumb-border-project-color:   var(--sy-color-green-49);
+
+  // entity-tag-colors level 2 (funding)
+  --sy-breadcrumb-link-funding-color:   var(--sy-color-yellow-35);
+  --sy-breadcrumb-icon-funding-color:   var(--sy-color-yellow-46);
+  --sy-breadcrumb-border-funding-color:   var(--sy-color-yellow-46);
 
   /* ----------------- HEADER ---------------------------- */
   --ds-header-navbar-border-top-color:    transparent;              // border-top is not needed in header
@@ -146,7 +159,7 @@
   ---------------------- */
   --sy-cris-layout-sidebar-link-text-color:         var(--sy-color-blue-29);     // darker blue instead of middle lik blue var(--sy-links-color), because its better readable
   --sy-cris-layout-sidebar-link-text-color:         rgb(18,100,132);  
-  --ds-cris-layout-sidebar-menu-active-color:       var(--sy-color-bluegray-31); // dark bluegrey text colour of the active item - both the link itself and the expandable item above it
+  --ds-cris-layout-sidebar-menu-active-color:       var(--sy-color-bluegray-31); // dark bluegray text colour of the active item - both the link itself and the expandable item above it
 
   /* sidebar borders
   ------------------ */

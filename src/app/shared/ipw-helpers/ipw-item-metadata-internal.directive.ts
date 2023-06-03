@@ -41,7 +41,9 @@ export class IpwItemMetadataInternalDirective implements OnChanges {
           break;
         case InternalItemStatus.Exchange:
           attributes = {
-            classNames: ['fas', 'fa-info-circle', 'text-warning'],
+            //classNames: ['fa-regular', 'fa-comment-exclamation', 'text-warning'], // Plus-Version needed changed icon for "new comment" to bubble (rex 230602)
+            //classNames: ['fa-regular', 'fa-comment', 'text-warning'], // bubble without exclamation mark Version 6.4.0
+            classNames: ['fas', 'fa-comment', 'text-warning'], // bubble without exclamation mark Version 5.15.4
             title: '(title)IPW staus: exchange'
           };
           break;
