@@ -2,6 +2,7 @@ import { DirectiveAttributes } from './ipw-item-metadata-directive-interface';
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { InternalItemStatus } from './../../core/submission/edititem-data.service';
 import { hasValue } from '../empty.util';
+import { TranslateService } from '@ngx-translate/core';
 
 @Directive({
   selector: '[dsIPWItemMetadataInternal]'
@@ -14,7 +15,9 @@ export class IpwItemMetadataInternalDirective implements OnChanges {
 
   constructor(
     private elem: ElementRef,
-    private renderer: Renderer2) {
+    private renderer: Renderer2,
+    private translate: TranslateService
+    ) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -36,19 +39,19 @@ export class IpwItemMetadataInternalDirective implements OnChanges {
         case InternalItemStatus.Done:
           attributes = {
             classNames: [],
-            title: '(title)IPW staus: done'
+            title: this.translate.instant('impact-pathway.metadata-internal.icon.title.status.done')
           };
           break;
         case InternalItemStatus.Edit:
           attributes = {
             classNames: [],
-            title: '(title)IPW staus: edit'
+            title: this.translate.instant('impact-pathway.metadata-internal.icon.title.status.edit')
           };
           break;
         case InternalItemStatus.Exchange:
           attributes = {
             classNames: ['fas', 'fa-info-circle', 'text-warning'],
-            title: '(title)IPW staus: exchange'
+            title: this.translate.instant('impact-pathway.metadata-internal.icon.title.status.exchange')
           };
           break;
       }

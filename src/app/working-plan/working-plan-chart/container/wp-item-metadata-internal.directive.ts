@@ -1,4 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { InternalItemStatus } from 'src/app/core/submission/edititem-data.service';
 import { hasValue } from 'src/app/shared/empty.util';
 
@@ -13,7 +14,9 @@ export class WpItemMetadataInternalDirective implements OnChanges {
 
   constructor(
     private elem: ElementRef,
-    private renderer: Renderer2) {
+    private renderer: Renderer2,
+    private translate: TranslateService
+    ) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,13 +42,13 @@ export class WpItemMetadataInternalDirective implements OnChanges {
         case InternalItemStatus.Done:
           attributes = {
             classNames: [],
-            title: '(title) staus: done'
+            title: this.translate.instant('working-plan.item.metadata-internal.icon.title.status.done')
           };
           break;
         case InternalItemStatus.Exchange:
           attributes = {
             classNames: ['fas', 'fa-info-circle', 'text-warning'],
-            title: '(title) staus: exchange'
+            title: this.translate.instant('working-plan.item.metadata-internal.icon.title.status.exchange')
           };
           break;
       }

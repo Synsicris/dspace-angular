@@ -16497,6 +16497,139 @@
   "search.filters.filter.synsicrisDateFilled.label": "Suche Jahr der Anmeldung",
 
   // "submission.import-external.help-message": "Help Import",
-  "submission.import-external.help-message": "Hilfe Import"
+  "submission.import-external.help-message": "Hilfe Import",
+
+  // "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Exchange",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Exchange",
+
+  // "questions-board.exploitation-plan.metadata-internal.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-internal.icon.title.status.done": "Done",
+
+  // "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Exchange",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-internal.icon.title.status.exchange": "Exchange",
+
+  // "questions-board.interim-report.metadata-internal.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-internal.icon.title.status.done": "Done",
+
+  // "questions-board.exploitation-plan.metadata-status.icon.title.status.new": "New",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.new": "New",
+
+  // "questions-board.exploitation-plan.metadata-status.icon.title.status.changed": "Changed",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.changed": "Changed",
+
+  // "questions-board.exploitation-plan.metadata-status.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.done": "Done",
+
+  // "questions-board.exploitation-plan.metadata-status.icon.title.status.canceled": "Canceled",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.canceled": "Canceled",
+
+  // "questions-board.exploitation-plan.metadata-status.icon.title.status.archieved": "Archieved",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.archieved": "Archieved",
+
+  // "questions-board.exploitation-plan.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+
+  // "questions-board.interim-report.metadata-status.icon.title.status.new": "New",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-status.icon.title.status.new": "New",
+
+  // "questions-board.interim-report.metadata-status.icon.title.status.changed": "Changed",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-status.icon.title.status.changed": "Changed",
+
+  // "questions-board.interim-report.metadata-status.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-status.icon.title.status.done": "Done",
+
+  // "questions-board.interim-report.metadata-status.icon.title.status.canceled": "Canceled",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-status.icon.title.status.canceled": "Canceled",
+
+  // "questions-board.interim-report.metadata-status.icon.title.status.archieved": "Archieved",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-status.icon.title.status.archieved": "Archieved",
+
+  // "questions-board.interim-report.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+
+  // "impact-pathway.metadata-internal.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-internal.icon.title.status.done": "Done",
+
+  // "impact-pathway.metadata-internal.icon.title.status.edit": "Edit",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-internal.icon.title.status.edit": "Edit",
+
+  // "impact-pathway.metadata-internal.icon.title.status.exchange": "Exchange",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-internal.icon.title.status.exchange": "Exchange",
+
+  // "impact-pathway.metadata-status.icon.title.status.new": "New",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-status.icon.title.status.new": "New",
+
+  // "impact-pathway.metadata-status.icon.title.status.changed": "Changed",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-status.icon.title.status.changed": "Changed",
+
+  // "impact-pathway.metadata-status.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-status.icon.title.status.done": "Done",
+
+  // "impact-pathway.metadata-status.icon.title.status.canceled": "Canceled",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-status.icon.title.status.canceled": "Canceled",
+
+  // "impact-pathway.metadata-status.icon.title.status.archieved": "Archieved",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-status.icon.title.status.archieved": "Archieved",
+
+  // "impact-pathway.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+
+  // "working-plan.item.metadata-internal.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "working-plan.item.metadata-internal.icon.title.status.done": "Done",
+
+  // "working-plan.item.metadata-internal.icon.title.status.exchange": "Exchange",
+  // TODO New key - Add a translation
+  "working-plan.item.metadata-internal.icon.title.status.exchange": "Exchange",
+
+  // "working-plan.metadata-status.icon.title.status.new": "New",
+  // TODO New key - Add a translation
+  "working-plan.metadata-status.icon.title.status.new": "New",
+
+  // "working-plan.metadata-status.icon.title.status.changed": "Changed",
+  // TODO New key - Add a translation
+  "working-plan.metadata-status.icon.title.status.changed": "Changed",
+
+  // "working-plan.metadata-status.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "working-plan.metadata-status.icon.title.status.done": "Done",
+
+  // "working-plan.metadata-status.icon.title.status.canceled": "Canceled",
+  // TODO New key - Add a translation
+  "working-plan.metadata-status.icon.title.status.canceled": "Canceled",
+
+  // "working-plan.metadata-status.icon.title.status.archieved": "Archieved",
+  // TODO New key - Add a translation
+  "working-plan.metadata-status.icon.title.status.archieved": "Archieved",
+
+  // "working-plan.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+  // TODO New key - Add a translation
+  "working-plan.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+
 
 }
