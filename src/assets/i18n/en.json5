@@ -9650,6 +9650,8 @@
 
   "query-builder.synsicris.label.entityType.open_researchquestion": "Open research questions",
 
+  "query-builder.synsicris.introduction.alert": "Help",
+
   "layout.tab.header.Projekttraeger": "Programme and Funding information",
 
   "submission.sections.submit.progressbar.describe.events_internal": "Internal section (only for consortium)",
