@@ -1,0 +1,13 @@
+.wp-container {
+  width: 100vw !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding-top: 0 !important;
+  scale: 0.4 !important;
+
+  .sidenav-content.calendar, ds-working-plan-chart-dates {
+    width: 100vw !important;
+    overflow: visible !important;
+  }
+}

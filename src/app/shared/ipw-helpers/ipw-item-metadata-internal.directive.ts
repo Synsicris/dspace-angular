@@ -1,8 +1,8 @@
-import { DirectiveAttributes } from './ipw-item-metadata-directive-interface';
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { InternalItemStatus } from './../../core/submission/edititem-data.service';
-import { hasValue } from '../empty.util';
 import { TranslateService } from '@ngx-translate/core';
+import { addClassesAndTitle } from '../utils/renderer-utils';
+import { DirectiveAttributes } from '../utils/directive-attributes.interface';
 
 @Directive({
   selector: '[dsIPWItemMetadataInternal]'
@@ -22,13 +22,7 @@ export class IpwItemMetadataInternalDirective implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.status.isFirstChange() || (changes.status.previousValue !== changes.status.currentValue)) {
-      const attributes = this.getIconClassByInternalValue();
-      if (hasValue(attributes)) {
-        attributes.classNames.forEach((value: string) => {
-          this.renderer.addClass(this.elem.nativeElement, value);
-        });
-        this.renderer.setAttribute(this.elem.nativeElement, 'title', attributes.title);
-      }
+      addClassesAndTitle(this.renderer, this.elem, this.getIconClassByInternalValue());
     }
   }
 

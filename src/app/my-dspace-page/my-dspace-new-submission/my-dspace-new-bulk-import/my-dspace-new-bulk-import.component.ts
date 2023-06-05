@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   BulkImportSelectorComponent
@@ -21,6 +21,11 @@ import { Observable, of as observableOf, Subscription } from 'rxjs';
   templateUrl: './my-dspace-new-bulk-import.component.html'
 })
 export class MyDSpaceNewBulkImportComponent {
+
+  /**
+   * Flag to indicate if the import button should be disabled
+   */
+  @Input() disableImport = false;
 
   /**
    * Used to verify if there are one or more entities available

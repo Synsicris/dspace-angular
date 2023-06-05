@@ -2,11 +2,13 @@ import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } fro
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 import { hasValue } from '../../../shared/empty.util';
 import { TranslateService } from '@ngx-translate/core';
+import { DirectiveAttributes } from '../../../shared/utils/directive-attributes.interface';
+import { addClassesAndTitle } from '../../../shared/utils/renderer-utils';
 
 @Directive({
   selector: '[dsWPItemMetadataStatus]'
 })
-export class WpItemMetadataStatusDirective implements OnChanges  {
+export class WpItemMetadataStatusDirective implements OnChanges {
 
   @Input() status: string;
 
@@ -21,13 +23,7 @@ export class WpItemMetadataStatusDirective implements OnChanges  {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.status.isFirstChange() || (changes.status.previousValue !== changes.status.currentValue)) {
-      const attributes = this.getIconClassByStatus();
-      if (hasValue(attributes)) {
-        attributes.classNames.forEach((className: string) => {
-          this.renderer.addClass(this.elem.nativeElement, className);
-        });
-        this.renderer.setAttribute(this.elem.nativeElement, 'title', attributes.title);
-      }
+      addClassesAndTitle(this.renderer, this.elem, this.getIconClassByStatus());
     }
   }
 
@@ -83,9 +79,4 @@ export class WpItemMetadataStatusDirective implements OnChanges  {
     }
     return attributes;
   }
-}
-
-export interface DirectiveAttributes {
-  classNames: string[];
-  title: string;
 }

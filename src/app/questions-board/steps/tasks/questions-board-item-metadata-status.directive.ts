@@ -2,12 +2,15 @@ import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } fro
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 import { hasValue } from '../../../shared/empty.util';
 import { TranslateService } from '@ngx-translate/core';
+import { isExploitationPlan, QuestionBoardEntityType } from '../../core/models/questions-board-entity-type.model';
+import { addClassesAndTitle } from '../../../shared/utils/renderer-utils';
+import { DirectiveAttributes } from '../../../shared/utils/directive-attributes.interface';
 
 
 @Directive({
   selector: '[dsQBItemMetadataStatus]'
 })
-export class QbItemMetadataStatusDirective implements OnChanges  {
+export class QbItemMetadataStatusDirective implements OnChanges {
 
   /**
    * The status of the item
@@ -17,7 +20,7 @@ export class QbItemMetadataStatusDirective implements OnChanges  {
   /**
    * The type of the entity (exploitationplan or interimreport)
    */
-  @Input() entityType: string;
+  @Input() entityType: QuestionBoardEntityType;
 
   ComparedVersionItemStatus = ComparedVersionItemStatus;
 
@@ -30,13 +33,8 @@ export class QbItemMetadataStatusDirective implements OnChanges  {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.status.isFirstChange() || (changes.status.previousValue !== changes.status.currentValue)) {
-      const attributes = this.entityType.includes('exploitationplan') ? this.getIconClassByStatusForEP() : this.getIconClassByStatusForIR();
-      if (hasValue(attributes)) {
-        attributes.classNames.forEach((className: string) => {
-          this.renderer.addClass(this.elem.nativeElement, className);
-        });
-        this.renderer.setAttribute(this.elem.nativeElement, 'title', attributes.title);
-      }
+      const attributes = isExploitationPlan(this.entityType) ? this.getIconClassByStatusForEP() : this.getIconClassByStatusForIR();
+      addClassesAndTitle(this.renderer, this.elem, attributes);
     }
   }
 
@@ -145,9 +143,4 @@ export class QbItemMetadataStatusDirective implements OnChanges  {
     }
     return attributes;
   }
-}
-
-export interface DirectiveAttributes {
-  classNames: string[];
-  title: string;
 }

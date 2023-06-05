@@ -97,6 +97,11 @@ export class ListableObjectComponentLoaderComponent implements OnInit, OnChanges
   @Input() customData: any;
 
   /**
+   * Whether or not to show the item actions
+   */
+  @Input() showItemActions = true;
+
+  /**
    * Directive hook used to place the dynamic child component
    */
   @ViewChild(ListableObjectDirective, { static: true }) listableObjectDirective: ListableObjectDirective;
@@ -150,6 +155,7 @@ export class ListableObjectComponentLoaderComponent implements OnInit, OnChanges
     'listID',
     'showLabel',
     'showMetrics',
+    'showItemActions',
     'showThumbnails',
     'context',
     'viewMode',

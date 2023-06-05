@@ -188,6 +188,7 @@ export class QueryBuilderComponent {
    * Reset the form
    */
   resetForm() {
+    this.isFormValid = true;
     this.searchForm = new FormGroup({
       queryArray: new FormArray([
         new FormGroup({

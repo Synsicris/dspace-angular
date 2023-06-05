@@ -1,13 +1,14 @@
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { ComparedVersionItemStatus } from 'src/app/core/project/project-version.service';
-import { DirectiveAttributes } from './ipw-item-metadata-directive-interface';
 import { hasValue } from '../empty.util';
 import { TranslateService } from '@ngx-translate/core';
+import { DirectiveAttributes } from '../utils/directive-attributes.interface';
+import { addClassesAndTitle } from '../utils/renderer-utils';
 
 @Directive({
   selector: '[dsIPWItemMetadataStatus]'
 })
-export class IpwItemMetadataStatusDirective implements OnChanges  {
+export class IpwItemMetadataStatusDirective implements OnChanges {
 
   @Input() status: string;
 
@@ -22,13 +23,7 @@ export class IpwItemMetadataStatusDirective implements OnChanges  {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.status.isFirstChange() || (changes.status.previousValue !== changes.status.currentValue)) {
-      const attributes = this.getIconClassByStatus();
-      if (hasValue(attributes)) {
-        attributes.classNames.forEach((className: string) => {
-          this.renderer.addClass(this.elem.nativeElement, className);
-        });
-        this.renderer.setAttribute(this.elem.nativeElement, 'title', attributes.title);
-      }
+      addClassesAndTitle(this.renderer, this.elem, this.getIconClassByStatus());
     }
   }
 

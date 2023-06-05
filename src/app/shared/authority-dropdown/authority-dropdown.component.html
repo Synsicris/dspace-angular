@@ -11,6 +11,7 @@
            [readonly]="readOnly"
            [disabled]="readOnly"
            [value]="(currentValue | async)"
+           [title]="hasValue(currentValue | async) ? (currentValue | async) : ''"
            (blur)="onBlur($event)"
            (click)="$event.stopPropagation(); openDropdown(sdRef);"
            (focus)="onFocus($event)"

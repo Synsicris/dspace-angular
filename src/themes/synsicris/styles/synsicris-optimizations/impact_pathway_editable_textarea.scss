@@ -1,0 +1,33 @@
+/* -----------------------------------------------------------
+TEXTAREA BENEATH IMPACT PATHWAY (rex 230428)
+----------------------------------------------------------- */
+/* Background of the text field set transparent, 
+because it is actually not a normal text field, but can only be edited via the edit-button. */
+ds-editable-textarea {
+  textarea {
+    background-color:transparent !important; 
+  }
+}
+
+button {
+  white-space: nowrap; // prevents line break in buttons
+}
+
+/* DOESN'T WORK because of DOM structure of Angular
+https://css-tricks.com/almanac/selectors/p/placeholder/
+Unfortunately I haven't found a solution to also style the placeholder to visually distinguish it from the normal input text
+In Angular, the pseudo-selector ::placeholder does not work because it is not part of the DOM structure. 
+In Angular, pseudo-selectors exist only as attributes that are bound to an element. 
+Therefore, it seems not to be possible to specifically style the placeholder text in Angular.
+*/
+ds-editable-textarea textarea {
+  &::placeholder,
+  &::-webkit-input-placeholder,  // Chrome/Opera/Safari
+  &::-moz-placeholder,           // Firefox 19+
+  &:-ms-input-placeholder,       // IE 10+
+  &:-moz-placeholder             // Firefox 18-
+    {
+      opacity:1 !important; // because the placeholder has an opacity-value in Firefox default
+      font-family:"Nunito-MediumItalic", italic !important;
+    }
+}
