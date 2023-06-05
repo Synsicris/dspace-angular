@@ -31,7 +31,7 @@ import { DsDynamicVocabularyComponent } from '../form/builder/ds-dynamic-form-ui
 import { FormBuilderService } from '../form/builder/form-builder.service';
 import { SubmissionService } from '../../submission/submission.service';
 import { DsDynamicInputModel } from '../form/builder/ds-dynamic-form-ui/models/ds-dynamic-input.model';
-import { isEmpty } from '../empty.util';
+import { hasValue, isEmpty } from '../empty.util';
 
 @Component({
   selector: 'ds-authority-dropdown',
@@ -82,6 +82,12 @@ export class AuthorityDropdownComponent extends DsDynamicVocabularyComponent imp
    * The subscription to be utilized on destroy to remove filterTextChange subscription
    */
   subSearch: Subscription;
+
+  /**
+   * Check if the current value is valid
+   * used in the template
+   */
+  hasValue = hasValue;
 
   constructor(private cdr: ChangeDetectorRef,
               protected vocabularyService: VocabularyService,
