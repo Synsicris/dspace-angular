@@ -62,6 +62,11 @@ export class AbstractListableElementComponent<T extends ListableObject> {
   @Input() viewMode: ViewMode;
 
   /**
+   * Whether or not to show the item actions
+   */
+  @Input() showItemActions = true;
+
+  /**
    * Emit when the object has been reloaded.
    */
   @Output() reloadedObject = new EventEmitter<DSpaceObject>();

@@ -1,6 +1,7 @@
   <div class="add" *ngIf="!(moreThanOne$ | async)">
     <button class="btn btn-md btn-outline-primary ml-2" type="button"
         attr.aria-label="{{'mydspace.new-bulk-import' | translate}}"
+        [disabled]="disableImport"
         title="{{'mydspace.new-bulk-import' | translate}}"
         (click)="openDialog(singleEntity)">
         <i class="fa fa-file-upload" aria-hidden="true"></i>
@@ -13,6 +14,7 @@
     <button class="btn btn-md btn-outline-primary ml-2" id="dropdownSubmission" ngbDropdownToggle
             type="button" [disabled]="!(initialized$|async)"
             attr.aria-label="{{'mydspace.new-bulk-import' | translate}}"
+            [disabled]="disableImport"
             title="{{'mydspace.new-bulk-import' | translate}}">
       <i class="fa fa-file-upload" aria-hidden="true"></i>
       {{'mydspace.import' | translate}}
