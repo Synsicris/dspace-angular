@@ -829,7 +829,7 @@ export class DefaultAppConfig implements AppConfig {
             type: DisplayItemMetadataType.Text
           }
         ]
-      },
+      }
     ],
     condition: [
       {
@@ -1002,6 +1002,22 @@ export class DefaultAppConfig implements AppConfig {
             type: DisplayItemMetadataType.Text
           }
         ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.relation.person',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.relation.partner',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
       }
     ],
     process_event: [
@@ -1052,6 +1068,14 @@ export class DefaultAppConfig implements AppConfig {
         metadata: [
           {
             name: 'dc.description',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.relation.targetgroup',
             type: DisplayItemMetadataType.Text
           }
         ]
@@ -1196,6 +1220,14 @@ export class DefaultAppConfig implements AppConfig {
       {
         metadata: [
           {
+            name: 'synsicris.subject.nace',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
             name: 'synsicris.subject.political',
             type: DisplayItemMetadataType.ValuePair,
             vocabularyName: 'political_level'
@@ -1211,16 +1243,16 @@ export class DefaultAppConfig implements AppConfig {
       {
         metadata: [
           {
-            name: 'dc.title',
-            type: DisplayItemMetadataType.Title
+            name: 'synsicris.title',
+            type: DisplayItemMetadataType.Text
           }
         ]
       },
       {
         metadata: [
           {
-            name: 'synsicris.title',
-            type: DisplayItemMetadataType.Text
+            name: 'dc.title',
+            type: DisplayItemMetadataType.Title
           }
         ]
       },
@@ -1570,6 +1602,40 @@ export class DefaultAppConfig implements AppConfig {
           {
             name: 'dc.title',
             type: DisplayItemMetadataType.Title
+          }
+        ]
+      }
+    ],
+    multiple_involved: [
+      {
+        metadata: [
+          {
+            name: 'dc.type',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.subject.nace',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.subject.enterprise',
+            type: DisplayItemMetadataType.Text
+          }
+        ]
+      },
+      {
+        metadata: [
+          {
+            name: 'synsicris.subject.political',
+            type: DisplayItemMetadataType.Text
           }
         ]
       }
