@@ -1263,7 +1263,7 @@ export class DefaultAppConfig implements AppConfig {
             type: DisplayItemMetadataType.Text
           }
         ]
-      },
+      }
     ],
     project: [
       {

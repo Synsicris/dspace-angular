@@ -10960,6 +10960,8 @@
 
   "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_political.tab": "Subject Political",
 
+  "search.filters.applied.charts.graph-synsicris_subject_destatis.tab": "Subject Destatis",
+
   "layout.field.label.cooperationpartner.synsicris.type.cooperation": "Type of cooperation",
 
   "layout.field.label.cooperationpartner.dc.type": "Sector",
