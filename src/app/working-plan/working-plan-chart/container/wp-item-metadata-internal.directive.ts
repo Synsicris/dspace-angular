@@ -39,7 +39,7 @@ export class WpItemMetadataInternalDirective implements OnChanges {
           break;
         case InternalItemStatus.Exchange:
           attributes = {
-            classNames: ['fas', 'fa-info-circle', 'text-warning'],
+            classNames: ['fas', 'fa-comment', 'text-warning'], // changed icon (rex 230602)
             title: '(title) staus: exchange'
           };
           break;

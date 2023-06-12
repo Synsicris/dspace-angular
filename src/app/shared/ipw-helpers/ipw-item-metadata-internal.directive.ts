@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
-import { InternalItemStatus } from './../../core/submission/edititem-data.service';
+import { InternalItemStatus } from '../../core/submission/edititem-data.service';
 import { addClassesAndTitle } from '../utils/renderer-utils';
 import { DirectiveAttributes } from '../utils/directive-attributes.interface';
 
@@ -41,7 +41,7 @@ export class IpwItemMetadataInternalDirective implements OnChanges {
           break;
         case InternalItemStatus.Exchange:
           attributes = {
-            classNames: ['fas', 'fa-info-circle', 'text-warning'],
+            classNames: ['fas', 'fa-comment', 'text-warning'], // bubble without exclamation mark Version 5.15.4
             title: '(title)IPW staus: exchange'
           };
           break;

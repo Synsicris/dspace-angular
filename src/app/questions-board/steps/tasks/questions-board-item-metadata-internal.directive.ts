@@ -49,7 +49,8 @@ export class QbItemMetadataInternalDirective implements OnChanges {
           break;
         case InternalItemStatus.Exchange:
           attributes = {
-            classNames: ['fas', 'fa-info-circle', 'text-warning'],
+            //classNames: ['fas', 'fa-info-circle', 'text-warning'],
+            classNames: ['fas', 'fa-comment', 'text-warning'], // changed icon (rex 230602)
             title: '(title)EP staus: exchange'
           };
           break;
@@ -74,7 +75,8 @@ export class QbItemMetadataInternalDirective implements OnChanges {
           break;
         case InternalItemStatus.Exchange:
           attributes = {
-            classNames: ['fas', 'fa-info-circle', 'text-warning'],
+            //classNames: ['fas', 'fa-info-circle', 'text-warning'],
+            classNames: ['fas', 'fa-comment', 'text-warning'], // changed icon (rex 230602)
             title: '(title)IR staus: exchange'
           };
           break;

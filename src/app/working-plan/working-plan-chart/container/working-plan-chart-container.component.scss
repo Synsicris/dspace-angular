@@ -335,8 +335,12 @@ since this measure was probably overwritten again at another place and thus did 
 }
 
 // Background color for new added nodes
+// changed 230603 rex (provisional until the new color concept)
 .calendar-title-cell-now-added {
-  background-color: $recentGrey;
+  //background-color: $recentGrey;
+  background-color:#F1FF9E;
+  border-top:1px solid black;
+  border-bottom:1px solid black;
 }
 
 .cursor-pointer {
