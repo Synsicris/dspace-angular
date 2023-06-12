@@ -10980,6 +10980,78 @@
 
   "search.filters.applied.charts.graph-event-oairecerif_event_country.tab": "Country",
 
+  "search.filters.applied.charts.graph-proc-even-synsicris_relation_targetgroup.tab": "Search Stakeholder group",
+
+  "search.filters.applied.charts.graph-proc-event-dc_type_targetgroup.tab": "Type of Targetgroup(s)",
+
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_nace.tab": "Subject Nace",
+
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_political.tab": "Subject Political",
+
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_enterprise.tab": "Subject Enterprise",
+
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_urbanrural.tab": "Subject Urbanrural",
+
+  "search.filters.applied.charts.graph-proc-event-synsicris_type_purpose.tab": "Type Purpose",
+
+  "search.filters.applied.charts.graph-event-type_target_group.tab": "Type of Targetgroup(s)",
+
+  "search.filters.applied.charts.graph-event-synsicris_subject_nace.tab": "Subject Nace",
+
+  "search.filters.applied.charts.graph-event-synsicris_subject_enterprise.tab": "Subject Enterprise",
+
+  "search.filters.applied.charts.graph-event-synsicris_subject_urbanrural.tab": "Subject Urbanrural",
+
+  "search.filters.applied.charts.graph-event-synsicris_type_contribution.tab": "Type Contribution",
+
+  "search.filters.applied.charts.RELATION.Project.Product.title": "Graph",
+
+  "search.filters.applied.charts.RELATION.Project.neg_sideeffect.title": "Graph",
+
+  "search.filters.applied.charts.graph-product-dc_subject.tab": "Research Data Subject",
+
+  "search.filters.applied.charts.graph-inn-pot-synsicris_relation_targetgroup.tab": "Type of Targetgroup(s)",
+
+  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_transform.tab": "Type of Transform",
+
+  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.tab": "Intensity",
+
+  "search.filters.applied.charts.graphprojpart_synsicris_subject_political.tab": "Subject Political",
+
+  "search.filters.applied.charts.graph-multiple-entities-dc_type.tab": "Type",
+
+  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_nace.tab": "Subject Nace",
+
+  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_enterprise.tab": "Subject Enterprise",
+
+  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_political.tab": "Subject Political",
+
+  "search.filters.applied.charts.graph-synsicris_subject_destatis.tab": "Subject Destatis",
+
+  "search.filters.filter.synsicrisDcContributorAuthor.head": "Contributor(s)",
+
+  "search.filters.filter.synsicrisDcContributorAuthor.label": "Search by contributor",
+
+  "search.filters.applied.charts.graph-synsicris_address_addressCountry.tab": "Country",
+
+  "search.filters.applied.charts.graph-proc-event-dc_type.tab": "Type of ProcEvent",
+
+  "search.filters.filter.synsicrisTypeIntensity.head": "Intensity",
+
+  "search.filters.filter.synsicrisTypeIntensity.label": "Search intensity",
+
+  "search.filters.filter.synsicrisOairecerifAuthorAffiliation.head": "Author Affiliation",
+
+  "search.filters.filter.synsicrisOairecerifAuthorAffiliation.label": "Search affiliation",
+
+  "search.filters.filter.synsicrisDcSubject.head": "Subject",
+
+  "search.filters.filter.synsicrisDcSubject.label": "Search by subject",
+
+  "search.filters.filter.filter-synsicris_type_visiblity.head": "Visiblity type",
+
+  "search.filters.filter.filter-synsicris_type_visiblity.label": "Search visiblity type",
+
   "layout.field.label.cooperationpartner.synsicris.type.cooperation": "Type of cooperation",
 
   "layout.field.label.cooperationpartner.dc.type": "Sector",
