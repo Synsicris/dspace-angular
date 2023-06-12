@@ -5380,6 +5380,10 @@
   // TODO New key - Add a translation
   "item-export-external-metadata.btn.label": "Daten importieren",
 
+  // "item-export.update-screenshots.label": "Update screenshots",
+  // TODO New key - Add a translation
+  "item-export.update-screenshots.label": "Update screenshots",
+
   // "journal.listelement.badge": "Journal",
   "journal.listelement.badge": "Zeitschrift",
 

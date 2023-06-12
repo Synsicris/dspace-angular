@@ -158,6 +158,11 @@ export class ItemExportComponent implements OnInit, OnDestroy {
     if (this.showListSelection) {
       formGroup.addControl('selectionMode', new FormControl(this.exportSelectionMode.value, [Validators.required]));
     }
+
+    if (this.isProjectEntityType) {
+      formGroup.addControl('screenshot', new FormControl(false));
+    }
+
     return formGroup;
   }
 
@@ -174,6 +179,10 @@ export class ItemExportComponent implements OnInit, OnDestroy {
   onCollectionSelect(collection) {
     this.bulkImportXlsEntityTypeCollectionUUID = collection.uuid;
     this.selectCollection = true;
+  }
+
+  get isProjectEntityType(): boolean {
+    return this.item.entityType === 'Project';
   }
 
 
@@ -204,7 +213,8 @@ export class ItemExportComponent implements OnInit, OnDestroy {
             this.searchOptions,
             this.itemType ? this.exportForm.controls.entityType.value : this.exportForm.value.entityType,
             this.exportForm.value.format,
-            list
+            list,
+            this.exportForm.value.screenshot
           ))
         ).pipe(take(1)).subscribe((processId) => {
           const title = this.translate.get('item-export.process.title');
