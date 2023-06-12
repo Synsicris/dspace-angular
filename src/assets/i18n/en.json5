@@ -10962,6 +10962,30 @@
 
   "search.filters.applied.charts.graph-synsicris_subject_destatis.tab": "Subject Destatis",
 
+  "search.filters.filter.synsicrisDcContributorAuthor.head": "Contributor(s)",
+
+  "search.filters.filter.synsicrisDcContributorAuthor.label": "Search by contributor",
+
+  "search.filters.applied.charts.graph-synsicris_address_addressCountry.tab": "Country",
+
+  "search.filters.applied.charts.graph-proc-event-dc_type.tab": "Type of ProcEvent",
+
+  "search.filters.filter.synsicrisTypeIntensity.head": "Intensity",
+
+  "search.filters.filter.synsicrisTypeIntensity.label": "Search intensity",
+
+  "search.filters.filter.synsicrisOairecerifAuthorAffiliation.head": "Author Affiliation",
+
+  "search.filters.filter.synsicrisOairecerifAuthorAffiliation.label": "Search affiliation",
+
+  "search.filters.filter.synsicrisDcSubject.head": "Subject",
+
+  "search.filters.filter.synsicrisDcSubject.label": "Search by subject",
+
+  "search.filters.filter.filter-synsicris_type_visiblity.head": "Visiblity type",
+
+  "search.filters.filter.filter-synsicris_type_visiblity.label": "Search visiblity type",
+
   "layout.field.label.cooperationpartner.synsicris.type.cooperation": "Type of cooperation",
 
   "layout.field.label.cooperationpartner.dc.type": "Sector",
