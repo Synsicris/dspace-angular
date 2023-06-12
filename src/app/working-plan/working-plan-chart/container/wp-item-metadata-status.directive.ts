@@ -1,6 +1,7 @@
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 import { hasValue } from '../../../shared/empty.util';
+import { TranslateService } from '@ngx-translate/core';
 import { DirectiveAttributes } from '../../../shared/utils/directive-attributes.interface';
 import { addClassesAndTitle } from '../../../shared/utils/renderer-utils';
 
@@ -15,7 +16,8 @@ export class WpItemMetadataStatusDirective implements OnChanges {
 
   constructor(
     private elem: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private translate: TranslateService
   ) {
   }
 
@@ -36,37 +38,37 @@ export class WpItemMetadataStatusDirective implements OnChanges {
         case ComparedVersionItemStatus.New:
           attributes = {
             classNames: ['far', 'fa-plus-square'],
-            title: '(title) staus: New'
+            title: this.translate.instant('working-plan.metadata-status.icon.title.status.new')
           };
           break;
         case ComparedVersionItemStatus.Changed:
           attributes = {
             classNames: ['fas', 'fa-redo-alt'],
-            title: '(title) staus: Changed'
+            title: this.translate.instant('working-plan.metadata-status.icon.title.status.changed')
           };
           break;
         case ComparedVersionItemStatus.Done:
           attributes = {
             classNames: ['far', 'fa-check-circle'],
-            title: '(title) staus: Done'
+            title: this.translate.instant('working-plan.metadata-status.icon.title.status.done')
           };
           break;
         case ComparedVersionItemStatus.Canceled:
           attributes = {
             classNames: ['fas', 'fa-ban'],
-            title: '(title) staus: Canceled'
+            title: this.translate.instant('working-plan.metadata-status.icon.title.status.canceled')
           };
           break;
         case ComparedVersionItemStatus.Archieved:
           attributes = {
             classNames: ['fas', 'fa-check-circle'],
-            title: '(title) staus: Archieved'
+            title: this.translate.instant('working-plan.metadata-status.icon.title.status.archieved')
           };
           break;
         case ComparedVersionItemStatus.PartlyArchieved:
           attributes = {
             classNames: ['fas', 'fa-hourglass-half'],
-            title: '(title) staus: PartlyArchieved'
+            title: this.translate.instant('working-plan.metadata-status.icon.title.status.partly-archieved')
           };
           break;
       }
