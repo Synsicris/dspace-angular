@@ -1,8 +1,5 @@
 /* -----------------------------------------------------------
-BREADCRUMB (rex 230210)
-ATTENTION: in src/themes/synsicris/app/breadcrumbs/breadcrumbs.component.scss are already the final stylesheets
-for breadcrumbs with entity tag according to
-https://github.com/Synsicris/Userinterface1a/issues/52#issuecomment-1241349651 !
+BREADCRUMB (rex 230601)
 ----------------------------------------------------------- */
 /* */
 ds-breadcrumbs nav.nav-breadcrumb { // complete bar
@@ -16,20 +13,83 @@ ds-breadcrumbs nav.nav-breadcrumb { // complete bar
   box-shadow: 0 1px 0 var(--ds-header-navbar-border-bottom-color);
 
   ol.breadcrumb {
-
+    border-radius: 0;
+    margin-top: calc(-1 * var(--ds-content-spacing));
+    padding-bottom: var(--ds-content-spacing / 3);
+    padding-top: var(--ds-content-spacing / 3);
     background-color: transparent; // Breadcrumb-Links had a background-color, that is not needed
+  }
+  
+  .breadcrumb-item-limiter {
+    display: inline-block;
+    max-width: var(--ds-breadcrumb-max-length); //truncating too long words
+    > * {
+      max-width: 100%;
+      display: block;
+    }
+  }
+  
+  li.breadcrumb-item {
+  
+    display: flex;
+    //border:1px solid lime;
+  
+    /* so that all links appear in one line, entity tags without padding in li, 
+    because the link itself has a padding top */
+    padding:4px 8px 4px 0;
+    &.separator {
+      padding-top:1px;
+      padding-right:0; // Distance between entity tag and record title
+    }
+  
+    /* "/" between levels: to disable the "/", which is probably defined elsewhere, 
+    and only put a slash in front of the Entity-Tags .separator */
+    &::before {
+     content: quote("");
+    }
+    &.separator::before {
+      // as divider fontawesome chevron-right instead of >, because i looks much more better
+      font-family: 'Fontawesome';
+      font-size:0.7rem;
+			content:"\f054";
+      //content:"\f105";
+      /* deprecated:
+      content: quote(">") !important; // replaced "/" */
+      font-weight:bold;
+      color:var(--sy-breadcrumb-divider-color) !important;
+      padding-top:7px; // so that the ">" appears in the same line with the links
+    }
 
-    li.breadcrumb-item {
+    &.Project, &.active {
+      color: var(--ds-breadcrumb-link-active-color) !important;
+    }
 
-      a:link, a:hover, a:focus, a:visited {
-        color: var(--ds-breadcrumb-link-color) !important;
-      }
+    //seltsames Phaenomen, dass die aktiven Links ohne Tag davor nach oben rutschen, unterscheiden sich nur durch diese ng-reflect-ng-class="[object Object]
+    &.active[ng-reflect-ng-class="[object Object]"] span {padding-top:3px !important;}
 
-      & + .breadcrumb-item::before {
-        content: quote("/") !important;
-      }
-    } // end li.breadcrumb-item
-
-  } // end ol.breadcrumb
+    // Design of (links inside) Tag (= Entity-Name in Tag-Style)
+    &.separator a {
+      border:1px solid var(--sy-breadcrumb-tag-border-color);
+      padding:2px 8px 2px 8px;
+      background-color:var(--sy-breadcrumb-tag-background);
+      border-radius:10px 0 0 10px;
+      //font-family:'Nunito-MediumItalic';
+      font-family:'Nunito-Medium';
+    }
+  
+    // Colors entity-tag first level "Project" = Verbund
+    &.Project.separator a {
+      i.fas {color: var(--sy-breadcrumb-link-project-color) !important;} // without "!important! it gets the link color}
+      border-color: var(--sy-breadcrumb-border-project-color);
+    }
+  
+    // Colors entity-tag second level "Funding" = Projekt
+    &.Funding.separator a {
+      i.fas {color: var(--sy-breadcrumb-link-funding-color) !important;} // without "!important! it gets the link color}
+      border-color: var(--sy-breadcrumb-border-funding-color);
+    }
+  
+  
+  } // end li.breadcrumb-item
 
 } // end ds-breadcrumbs nav.nav-breadcrumb

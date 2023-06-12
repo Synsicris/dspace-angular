@@ -2572,7 +2572,7 @@
 
   "impact-pathway.add.btn": "Add item",
 
-  "impact-pathway.breadcrumbs": "Impact pathway",
+  "impact-pathway.breadcrumbs": "Impact Pathway",
 
   "impact-pathway.description": "Description",
 
@@ -2584,17 +2584,17 @@
 
   "impact-pathway.create.bidirectional-link": "Create bidirectional arrow",
 
-  "impact-pathway.create.btn": "Create impact pathway",
+  "impact-pathway.create.btn": "Create Impact Pathway",
 
-  "impact-pathway.create.error": "There was an issue when generating the impact pathway, please try again later.",
+  "impact-pathway.create.error": "There was an issue when generating the Impact Pathway, please try again later.",
 
-  "impact-pathway.create.head": "New impact pathway",
+  "impact-pathway.create.head": "New Impact Pathway",
 
   "impact-pathway.create.outcome-link": "Create arrow",
 
-  "impact-pathway.create.placeholder": "Enter the name of the new impact pathway.",
+  "impact-pathway.create.placeholder": "Enter the name of the new Impact Pathway.",
 
-  "impact-pathway.create.success": "The impact pathway has been generated successfully.",
+  "impact-pathway.create.success": "The Impact Pathway has been generated successfully.",
 
   "impact-pathway.description.jump-marker": "To the description of the overall goals of the project",
 
@@ -2654,7 +2654,7 @@
 
   "impact-pathway.remove.title": "Delete Impact Pathway",
 
-  "impact-pathway.remove.success": "The impact pathway has been deleted successfully.",
+  "impact-pathway.remove.success": "The Impact Pathway has been deleted successfully.",
 
   "impact-pathway.save.link.title": "Save",
 
@@ -3290,7 +3290,7 @@
 
   "item.page.context-menu.options": "Options",
 
-  "item.page.context-menu.options.edit-impact-pathway.btn": "Edit impact pathway",
+  "item.page.context-menu.options.edit-impact-pathway.btn": "Edit Impact Pathway",
 
   "item.page.date": "Date",
 
@@ -3592,7 +3592,7 @@
 
   "item.version.history.table.clickToOpen": "Click here to open",
 
-  "item.version.history.table.activeVersion": "Active Instance",
+  "item.version.history.table.activeVersion": "Active Instance*",
 
   "item.version.history.table.notes": "Notes",
 
@@ -3816,7 +3816,7 @@
 
   "loading.objects": "Loading…",
 
-  "loading.recent-submissions": "Loading recent submissions…",
+  "loading.recent-submissions": "Loading recent submissions...",
 
   "loading.search-results": "Loading search results...",
 
@@ -5144,9 +5144,9 @@
 
   "project-overview.page.content.working-plan": "Working plan",
 
-  "project-overview.page.impact-pathways": "Impact pathways",
+  "project-overview.page.impact-pathways": "Impact Pathways",
 
-  "project-overview.page.new-impact-pathway": "Create new impact pathway",
+  "project-overview.page.new-impact-pathway": "Create new Impact Pathway",
 
   "project-overview.page.subproject.card.title": "Your Funding",
 
@@ -5526,7 +5526,7 @@
 
   "search.filters.applied.charts.graph-synsicris_type_project.tab": "Type project",
 
-  "search.filters.applied.charts.graph-synsicris_duration.tab": "Duration",
+  "search.filters.applied.charts.graph-synsicris_duration.tab": "Duration (hours)",
 
   "search.filters.applied.charts.graph-oairecerif_project_status.tab": "Project Status",
 
@@ -5692,7 +5692,7 @@
 
   "search.filters.applied.charts.grapheventdate.tab": "Event date",
 
-  "search.filters.applied.charts.grapheventduration.tab": "Event duration",
+  "search.filters.applied.charts.grapheventduration.tab": "Event duration (hours)",
 
   "search.filters.applied.charts.grapheventparticipant.tab": "Event participant",
 
@@ -5702,7 +5702,7 @@
 
   "search.filters.applied.charts.no.data.found": "No data found",
 
-  "search.filters.applied.charts.show.hide": "Show/Hide",
+  "search.filters.applied.charts.show.hide": "Show/Hide Graph",
 
   "search.filters.applied.f.dateReminder.min": "Reminder from",
 
@@ -6300,7 +6300,7 @@
 
   "search.sidebar.settings.title": "Settings",
 
-  "search.sidebar.show.hide": "Show/Hide",
+  "search.sidebar.show.hide": "Show/Hide Filter",
 
   "search.sidebar.show.hide.filters.tooltip": "Show/Hide filters sidebar",
 
@@ -8218,7 +8218,7 @@
 
   "working-plan.chart.button.edit": "Edit item",
 
-  "working-plan.chart.column.dates": "Dates",
+  "working-plan.chart.column.dates": "Data",
 
   "working-plan.chart.column.dates.start": "Start date",
 
@@ -8304,7 +8304,7 @@
 
   "working-plan.chart.toolbar.date-view.year": "Year",
 
-  "working-plan.chart.toolbar.no-workpackages": "There were no workpackages to show",
+  "working-plan.chart.toolbar.no-workpackages": "There were no Workpackages to show",
 
   "working-plan.search.header": "Search help-box",
 
@@ -8956,7 +8956,7 @@
 
   "layout.field.label.parentproject.oairecerif.amount.currency": "Currency",
 
-  "layout.field.label.Project.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-shekel-sign\"> Workspace Consortium:",
+  "layout.field.label.Project.dc.title": "<span class=\"headline-workspace\"><i class=\"fas fa-shekel-sign\"></i> Workspace Consortium:",
 
   "layout.field.label.Project.oairecerif.acronym": "Acronym",
 
@@ -9624,7 +9624,7 @@
 
   "query-builder.synsicris.label.search-selected": "Search in selected projects",
 
-  "query-builder.synsicris.project.browse.head": "Projects list:",
+  "query-builder.synsicris.project.browse.head": "Projects list: ",
 
   "query-builder.synsicris.project.browse.empty": "No results",
 
@@ -11226,6 +11226,30 @@
 
   "search.filters.filter.targetGroupsTypes.placeholder": "Type of Targetgroup(s)",
 
-  "search.filters.filter.targetGroupsTypes.label": "Search Type of Targetgroup(s)"
+  "search.filters.filter.targetGroupsTypes.label": "Search Type of Targetgroup(s)",
+
+  "tree.description.sdg": "Selection Sustainable Development Goal (SDG)",
+
+  "layout.box.help-text.default_h_1": "help",
+
+  "layout.box.help-text.default_h_1_funder": "help funder",
+
+  "layout.box.header.ethic_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.ethic.synsicris.type.internal": "Task",
+
+  "layout.field.label.ethic.synsicris.description.internal": "Description",
+
+  "layout.box.header.gender_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.gender.synsicris.type.internal": "Task",
+
+  "layout.field.label.gender.synsicris.description.internal": "Description",
+
+  "layout.box.header.condition_internalacc": "Internal information (only for members of the consortium)",
+
+  "layout.field.label.condition.synsicris.type.internal": "Task",
+
+  "layout.field.label.condition.synsicris.description.internal": "Description"
 
 }

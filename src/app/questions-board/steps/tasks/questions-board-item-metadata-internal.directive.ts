@@ -51,8 +51,8 @@ export class QbItemMetadataInternalDirective implements OnChanges {
           break;
         case InternalItemStatus.Exchange:
           attributes = {
-            classNames: ['fas', 'fa-info-circle', 'text-warning'],
-            title: this.translate.instant('questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange')
+            classNames: ['fas', 'fa-comment', 'text-warning'], // changed icon (rex 230602)
+            title: this.translate.instant('questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange'),
           };
           break;
       }
@@ -76,7 +76,7 @@ export class QbItemMetadataInternalDirective implements OnChanges {
           break;
         case InternalItemStatus.Exchange:
           attributes = {
-            classNames: ['fas', 'fa-info-circle', 'text-warning'],
+            classNames: ['fas', 'fa-comment', 'text-warning'], // changed icon (rex 230602)
             title: this.translate.instant('questions-board.interim-report.metadata-internal.icon.title.status.exchange')
           };
           break;
