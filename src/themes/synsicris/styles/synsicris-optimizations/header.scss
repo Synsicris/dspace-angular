@@ -64,13 +64,6 @@ header {
       &.textlinks-in-header {
         font-family:'Nunito-Medium';
       }
-	  // icon for search in all entries
-	  a[href="/browse/projects"]:before { 
-		font-family: 'Fontawesome';
-		content:"\f002";
-		display:inline-block;
-		margin-right:0.2rem;
-		}
 	  } // end .container .navbar-nav
 
 	} // end nav.navbar
