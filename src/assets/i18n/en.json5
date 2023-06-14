@@ -3678,9 +3678,9 @@
 
   "item.version.list.remove-text": "Remove selection",
 
-  "item.version.list.base-text": "Base : ",
+  "item.version.list.base-text": "Base :",
 
-  "item.version.list.comparing-text": "Compared : ",
+  "item.version.list.comparing-text": "Compared :",
 
   "item.version.list.stop-comparing-text": "Stop comparing",
 
@@ -3816,7 +3816,7 @@
 
   "loading.objects": "Loading…",
 
-  "loading.recent-submissions": "Loading recent submissions...",
+  "loading.recent-submissions": "Loading recent submissions…",
 
   "loading.search-results": "Loading search results...",
 
@@ -4616,7 +4616,7 @@
 
   "process.new.notification.process.processing": "Processing...",
 
-  "process.new.notification.process.files": "Output Files: ",
+  "process.new.notification.process.files": "Output Files",
 
   "process.new.notification.process.see-results": "See the results",
 
@@ -5646,13 +5646,13 @@
 
   "search.filters.applied.charts.graph-synsicris_type_status.tab": "Status",
 
-  "search.filters.applied.charts.graph-fundingobjective-synsicris_type_sdg.tab": "Visualization by SDG Type",
+  "search.filters.applied.charts.graph-fundingobjective-synsicris_type_sdg.tab": "Related SDG",
 
   "search.filters.applied.charts.graph-fundingobjective-synsicris_relation_programme.tab": "Visualization by Relation Programme",
 
   "search.filters.applied.charts.graph-fundingobjective-synsicris_relation_call.tab": "Visualization by Relation Call",
 
-  "search.filters.filter.synsicrisRelationProgramme.head": "Relation Programme",
+  "search.filters.filter.synsicrisRelationProgramme.head": "Programme",
 
   "search.filters.applied.charts.graphtargetgrouptype.tab": "Type",
 
@@ -5776,11 +5776,11 @@
 
   "search.filters.filter.synsicrisTypeEvidence.label": "Search Evidence Type",
 
-  "search.filters.filter.synsicrisTypeSdg.head": "Sdg Type",
+  "search.filters.filter.synsicrisTypeSdg.head": "Sustainable development goal (SDG)",
 
   "search.filters.filter.synsicrisTypeStatus.head": "Status",
 
-  "search.filters.filter.synsicrisTypeSdg.label": "Search Sdg Type",
+  "search.filters.filter.synsicrisTypeSdg.label": "Search Sustainable development goal (SDG)",
 
   "search.filters.filter.synsicrisTypeStatus.label": "Search Status",
 
@@ -6038,11 +6038,11 @@
 
   "search.filters.filter.synsicrisrelationpartner.label": "Search partner",
 
-  "search.filters.filter.synsicrisrelationtargetgroup.head": "Search Stakeholder group",
+  "search.filters.filter.synsicrisrelationtargetgroup.head": "Stakeholder group",
 
   "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Stakeholder group",
 
-  "search.filters.filter.synsicrisrelationtargetgroup.label": "Search target group",
+  "search.filters.filter.synsicrisrelationtargetgroup.label": "Search Stakeholder group",
 
   "search.filters.filter.oairecerifeventcountry.head": "Event country",
 
@@ -7292,7 +7292,7 @@
 
   "submission.sections.submit.progressbar.describe.patents": "#1 Patent or utility patent",
 
-  "submission.sections.submit.progressbar.describe.patents.info": "Please document here the industrial property rights as well as their planned exploitation. This information is internally available to the funding agency and becomes public when the property right is granted by the patent office. Income from the exploitation are documented under “Application success for business innovations”.",
+  "submission.sections.submit.progressbar.describe.patents.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Enter those information at the time of application and update in the course of the project as needed.</br></br><i><b>Enter here a planned patent or utility patent and the form of its planned application</b></i></br></br><b>Important notice:</b><ul><li>This information is <b>only accessible to the funder.</b></li><li>Enter a <b>preliminary description</b> and update the description as soon as the application has been filed with the patent office (copy the description from the application form at the patent office).</li><li>If the patent or utility patent is being used, please note in the category <b>application of a solution / change / innovation</b>.</ul></li>",
 
   "submission.sections.submit.progressbar.describe.patents_result": "#2 Information from application at the Patent Office",
 
@@ -7340,7 +7340,7 @@
 
   "submission.sections.submit.progressbar.describe.spinoffs": "#1 Spin-off (incl. association)",
 
-  "submission.sections.submit.progressbar.describe.spinoffs.info": "Please document here if project results are to be exploited by a participating organisation/ person by founding a company or association.",
+  "submission.sections.submit.progressbar.describe.spinoffs.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Enter those information at the time of application and upate during the course of the project as needed.</br></br><b><i>Please enter here the planned spinn-off.</b></i></br>With this information you clarify the utilization of results and the practical orientation of the project.</br></br><b>Upload files:</b><ul><li>Insert <b>accompanying documents</b> such as proofs of registration, received funding or economic efficiency.</li></ul>",
 
   "submission.sections.submit.progressbar.describe.spinoffs_result": "#2 Details of spin-off carried out",
 
@@ -7564,9 +7564,9 @@
 
   "submission.sections.accesses.form.from-label": "Grant access from",
 
-  "submission.sections.accesses.form.from-hint": "Select the date from which the related access condition is applied",
+  "submission.sections.accesses.form.from-hint": "Select the date from which the related access condition is applied.",
 
-  "submission.sections.accesses.form.from-placeholder": "From",
+  "submission.sections.accesses.form.from-placeholder": "from",
 
   "submission.sections.accesses.form.group-label": "Group",
 
@@ -7574,9 +7574,9 @@
 
   "submission.sections.accesses.form.until-label": "Grant access until",
 
-  "submission.sections.accesses.form.until-hint": "Select the date until which the related access condition is applied",
+  "submission.sections.accesses.form.until-hint": "Select the date until which the related access condition is applied.",
 
-  "submission.sections.accesses.form.until-placeholder": "Until",
+  "submission.sections.accesses.form.until-placeholder": "until",
 
   "submission.sections.license.granted-label": "I confirm the license above",
 
@@ -9624,7 +9624,7 @@
 
   "query-builder.synsicris.label.search-selected": "Search in selected projects",
 
-  "query-builder.synsicris.project.browse.head": "Projects list: ",
+  "query-builder.synsicris.project.browse.head": "Projects list:",
 
   "query-builder.synsicris.project.browse.empty": "No results",
 
@@ -10424,7 +10424,7 @@
 
   "explore.index.synsicrisTypePatentuse": "Type of use",
 
-  "explore.index.synsicrisDuration": "Duration",
+  "explore.index.synsicrisDuration": "Duration (months)",
 
   "explore.index.synsicrisProjectStatus": "Status",
 
@@ -10854,11 +10854,11 @@
 
   "search.filters.filter.dctermsDateaccepted.label": "Suche Date of Acceptance",
 
-  "search.filters.filter.synsicrisDuration.head": "Duration",
+  "search.filters.filter.synsicrisDuration.head": "Duration (hours)",
 
-  "search.filters.filter.synsicrisDuration.placeholder": "Duration",
+  "search.filters.filter.synsicrisDuration.placeholder": "Duration (hours)",
 
-  "search.filters.filter.synsicrisDuration.label": "Search Duration",
+  "search.filters.filter.synsicrisDuration.label": "Search Duration (hours)",
 
   "search.filters.filter.oairecerifFundingParent.head": "Programme",
 
@@ -10980,77 +10980,77 @@
 
   "search.filters.applied.charts.graph-event-oairecerif_event_country.tab": "Country",
 
-  "search.filters.applied.charts.graph-proc-even-synsicris_relation_targetgroup.tab": "Search Stakeholder group",
+  "search.filters.applied.charts.graph-proc-even-synsicris_relation_targetgroup.tab": "Stakeholder group",
 
-  "search.filters.applied.charts.graph-proc-event-dc_type_targetgroup.tab": "Type of Targetgroup(s)",
+  "search.filters.applied.charts.graph-proc-event-dc_type_targetgroup.tab": "Type of Stakeholder group",
 
-  "search.filters.applied.charts.graph-proc-event-synsicris_subject_nace.tab": "Subject Nace",
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_nace.tab": "Economic sector",
 
-  "search.filters.applied.charts.graph-proc-event-synsicris_subject_political.tab": "Subject Political",
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_political.tab": "Policy level",
 
-  "search.filters.applied.charts.graph-proc-event-synsicris_subject_enterprise.tab": "Subject Enterprise",
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_enterprise.tab": "Company size",
 
-  "search.filters.applied.charts.graph-proc-event-synsicris_subject_urbanrural.tab": "Subject Urbanrural",
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_urbanrural.tab": "Locating",
 
-  "search.filters.applied.charts.graph-proc-event-synsicris_type_purpose.tab": "Type Purpose",
+  "search.filters.applied.charts.graph-proc-event-synsicris_type_purpose.tab": "Purpose",
 
-  "search.filters.applied.charts.graph-event-type_target_group.tab": "Type of Targetgroup(s)",
+  "search.filters.applied.charts.graph-event-type_target_group.tab": "Type of Stakeholder group",
 
-  "search.filters.applied.charts.graph-event-synsicris_subject_nace.tab": "Subject Nace",
+  "search.filters.applied.charts.graph-event-synsicris_subject_nace.tab": "Economic sector",
 
-  "search.filters.applied.charts.graph-event-synsicris_subject_enterprise.tab": "Subject Enterprise",
+  "search.filters.applied.charts.graph-event-synsicris_subject_enterprise.tab": "Size of business",
 
-  "search.filters.applied.charts.graph-event-synsicris_subject_urbanrural.tab": "Subject Urbanrural",
+  "search.filters.applied.charts.graph-event-synsicris_subject_urbanrural.tab": "Locating",
 
-  "search.filters.applied.charts.graph-event-synsicris_type_contribution.tab": "Type Contribution",
+  "search.filters.applied.charts.graph-event-synsicris_type_contribution.tab": "Type of Contribution",
 
   "search.filters.applied.charts.RELATION.Project.Product.title": "Graph",
 
   "search.filters.applied.charts.RELATION.Project.neg_sideeffect.title": "Graph",
 
-  "search.filters.applied.charts.graph-product-dc_subject.tab": "Research Data Subject",
+  "search.filters.applied.charts.graph-product-dc_subject.tab": "Keyword",
 
-  "search.filters.applied.charts.graph-inn-pot-synsicris_relation_targetgroup.tab": "Type of Targetgroup(s)",
+  "search.filters.applied.charts.graph-inn-pot-synsicris_relation_targetgroup.tab": "Stakeholder group(s)",
 
-  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_transform.tab": "Type of Transform",
+  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_transform.tab": "Area of transition",
 
-  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.tab": "Intensity",
+  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.tab": "Influence on the impact",
 
-  "search.filters.applied.charts.graphprojpart_synsicris_subject_political.tab": "Subject Political",
+  "search.filters.applied.charts.graphprojpart_synsicris_subject_political.tab": "Policy level",
 
   "search.filters.applied.charts.graph-multiple-entities-dc_type.tab": "Type",
 
-  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_nace.tab": "Subject Nace",
+  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_nace.tab": "Economic sector",
 
-  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_enterprise.tab": "Subject Enterprise",
+  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_enterprise.tab": "Company size",
 
-  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_political.tab": "Subject Political",
+  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_political.tab": "Policy level",
 
-  "search.filters.applied.charts.graph-synsicris_subject_destatis.tab": "Subject Destatis",
+  "search.filters.applied.charts.graph-synsicris_subject_destatis.tab": "Discipline",
 
-  "search.filters.filter.synsicrisDcContributorAuthor.head": "Contributor(s)",
+  "search.filters.filter.synsicrisDcContributorAuthor.head": "Author",
 
-  "search.filters.filter.synsicrisDcContributorAuthor.label": "Search by contributor",
+  "search.filters.filter.synsicrisDcContributorAuthor.label": "Search Author",
 
-  "search.filters.applied.charts.graph-synsicris_address_addressCountry.tab": "Country",
+  "search.filters.applied.charts.graph-synsicris_address_addressCountry.tab": "Country/Federal state",
 
-  "search.filters.applied.charts.graph-proc-event-dc_type.tab": "Type of ProcEvent",
+  "search.filters.applied.charts.graph-proc-event-dc_type.tab": "Type of Cooperation / Participation / Exchange process",
 
-  "search.filters.filter.synsicrisTypeIntensity.head": "Intensity",
+  "search.filters.filter.synsicrisTypeIntensity.head": "Intensity/duration of cooperation",
 
-  "search.filters.filter.synsicrisTypeIntensity.label": "Search intensity",
+  "search.filters.filter.synsicrisTypeIntensity.label": "Search Intensity/duration of cooperation",
 
   "search.filters.filter.synsicrisOairecerifAuthorAffiliation.head": "Author Affiliation",
 
   "search.filters.filter.synsicrisOairecerifAuthorAffiliation.label": "Search affiliation",
 
-  "search.filters.filter.synsicrisDcSubject.head": "Subject",
+  "search.filters.filter.synsicrisDcSubject.head": "Keyword",
 
-  "search.filters.filter.synsicrisDcSubject.label": "Search by subject",
+  "search.filters.filter.synsicrisDcSubject.label": "Search Keyword",
 
-  "search.filters.filter.filter-synsicris_type_visiblity.head": "Visiblity type",
+  "search.filters.filter.filter-synsicris_type_visiblity.head": "Public visibility",
 
-  "search.filters.filter.filter-synsicris_type_visiblity.label": "Search visiblity type",
+  "search.filters.filter.filter-synsicris_type_visiblity.label": "Search Public visibility",
 
   "layout.field.label.cooperationpartner.synsicris.type.cooperation": "Type of cooperation",
 
@@ -11322,6 +11322,16 @@
 
   "layout.field.label.condition.synsicris.type.internal": "Task",
 
-  "layout.field.label.condition.synsicris.description.internal": "Description"
+  "layout.field.label.condition.synsicris.description.internal": "Description",
+
+  "submission.sections.submit.progressbar.describe.spinoffs_result.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Enter this information in the course of the project and update if needed for reports.</br></br><b><i>Please complete the information from the application as well as further details.</b></i>",
+
+  "search.filters.filter.synsicrisTypeSdg.placeholder": "Sustainable development goal (SDG)",
+
+  "search.filters.filter.synsicrisRelationProgramme.placeholder": "Programme",
+
+  "search.filters.filter.synsicrisRelationProgramme.label": "Search Programme",
+
+  "ubmission.sections.accesses.form.date-required-until": "Grant access until date is required."
 
 }
