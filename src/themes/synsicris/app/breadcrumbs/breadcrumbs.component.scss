@@ -1,3 +1,9 @@
+/* 
+Styles are in src/themes/synsicris/styles/synsicris-optimizations/breadcrumb.scss
+the color assignments only for the icons do not work in app/breadcrumb
+*/
+
+/*
 .nav-breadcrumb {
   background-color: var(--ds-breadcrumb-bg);
 }
@@ -34,12 +40,7 @@ li.breadcrumb-item {
   & + .breadcrumb-item::before {
     content: quote("");
   }
-
-  & + .breadcrumb-item.separator::before {
-    content: quote("/");
-  }
-
-  &.Project {
-    color: var(--ds-breadcrumb-link-project-color);
-  }
 }
+
+ */
+

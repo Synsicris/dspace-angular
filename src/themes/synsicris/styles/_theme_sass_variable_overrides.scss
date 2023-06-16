@@ -31,7 +31,8 @@ $gray-dark: #43515f !default; // dark gray for primary
 $gray-bright: #F8F9FA !default; // bright gray for components
 
 $theme-colors: (
-  primary: $gray-dark
+  //primary: $gray-dark
+  primary: $cyan
 );
 
 $body-color: $gray-800 !default; // Bootstrap $gray-800

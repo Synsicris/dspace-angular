@@ -1,9 +1,22 @@
 // class: .print-mode
 // The class is used to override the styles of the elements in the print mode.
 // This class is added to the body tag in the following files:
+// The class is added to the body tag only when the view=print parameter is present in the URL.
 .print-mode {
   @import './print.exploitation-plan.scss';
   @import './print.impact-pathway.scss';
   @import './print.interim-report.scss';
   @import './print.working-plan.scss';
+}
+
+// Apply the print styles only when the print command is executed (ctrl+p) or from the browser.
+// NOTE: The order of the stylesheets is important. The stylesheets are applied in the order they are imported.
+@media print {
+  @import './print.exploitation-plan.scss';
+  @import './print.impact-pathway.scss';
+  @import './print.interim-report.scss';
+  @import './print.working-plan.scss';
+
+  // The following stylesheets are applied only on print command.
+  @import './print.working-plan.media-print.scss';
 }

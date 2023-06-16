@@ -28,6 +28,11 @@ export class EditableTextareaComponent {
   @Input() editMode: string;
 
   /**
+   * The label to use as textarea placeholder
+   */
+  @Input() public editPlaceholder: string;
+
+  /**
    * The label to use as edit button's title
    */
   @Input() public editTitle: string;

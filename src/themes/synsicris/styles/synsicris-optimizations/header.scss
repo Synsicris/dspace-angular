@@ -1,0 +1,71 @@
+/* -----------------------------------------------------------
+HEADER with horizontal navbar
+
+ATTENTION
+Styles for the header are defined in src/themes/synsicris/styles/_global-styles.scss
+in order to avoid the same duplication as in the HTML code
+because the navbar with logo exists twice:
+- <= mediaquery-sm with hamburger-button in header.component.html
+- >= mediaquery md in navbar.component.html
+----------------------------------------------------------- */
+header {
+
+	li > .navbar-section,
+	li > .expandable-navbar-section {
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  height: 100%;
+	}
+
+	 /* from here defined from rex */
+
+	/* Icons in header. Needs to be defined outside nav.navbar, because the code differs in header.component.html
+	and navbar.component.html.
+	provisional contact link until it is integrated by development (rex 221028),
+	therefore the style here is only provisionally adapted to the other buttons,
+	margin-right in order to give it the same distance to the following icon even without a dropdown arrow.
+	*/
+	a.header-contact {
+	  span { display: none; } // make label invisible
+	  margin-right: 1.2rem;
+	}
+	// Icos in Header and Hamburger Icon
+	a.navbar-collapsed i.fas,
+	a.navbar-collapsed span,
+	button.navbar-toggler span.fas {
+	  color: var(--ds-header-icon-color) !important;
+	}
+
+	nav.navbar {
+
+	  border-bottom: 1px var(--ds-header-navbar-border-bottom-color) solid !important; // replaces green line
+
+	  /* SYNSICRIS LOGO */
+	  .navbar-brand .synsicris-logo {
+		font-weight: 600;
+		font-size: 1.8rem;
+		letter-spacing: .01rem;
+		color: var(--sy-synsicris-logo-color-gray);
+		span {
+		  text-transform: uppercase;
+		  span { color: var(--sy-synsicris-logo-color-magenta); }
+		}
+	  } // end .navbar-brand
+
+	  /* Elements in header on the right side of the Synsicris-Logo, space between menu items and make them smaller */
+	  .navbar-nav {
+      margin: 0 0.4rem;
+      //font-size: 0.85rem;
+      font-size:1rem;
+      // Icons in header - twice because of differet code
+      a:link, a:visited { i.fas, span {color: var(--ds-header-icon-color) !important;} }
+      // Textlinks on the left side near logo
+      &.textlinks-in-header {
+        font-family:'Nunito-Medium';
+      }
+	  } // end .container .navbar-nav
+
+	} // end nav.navbar
+
+  } // end header

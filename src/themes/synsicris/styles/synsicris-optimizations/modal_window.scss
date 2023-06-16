@@ -1,0 +1,16 @@
+/* -----------------------------------------------------------
+MODAL WINDOW (rex 230303)
+----------------------------------------------------------- */
+// MODAL WINDOW FOR NEW ENTRYS IN IMPACT PATHWAY AND WORKING PLAN
+// src/app/shared/create-simple-item-modal/create-simple-item-modal.component.html
+.modal-content {
+
+  background-color:var(--sy-modal-content-background);
+  .modal-header {background-color:var(--sy-modal-header-background);}
+  .modal-body {} // also for the background of the modal
+  .modal-footer {} //doesn't exist for new entrys
+  .tab-content {
+    //generically defined in tab-content below
+  }
+
+} // end .modal-content
