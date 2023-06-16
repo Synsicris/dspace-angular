@@ -1,6 +1,7 @@
 <div class="container">
   <ds-questions-board [hasAnyFunderRole]="(hasAnyFunderRole$ | async)"
                       [isFunderProject]="(isFunderProject$ | async)"
+                      [isProjectReader]="(isProjectReader$ | async)"
                       [fundingCommunity]="(fundingCommunity$ | async)"
                       [messagePrefix]="'interim-report'"
                       [projectCommunityId]="(projectCommunityId$ | async)"

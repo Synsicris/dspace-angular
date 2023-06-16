@@ -20,7 +20,7 @@
   >
     <ds-questions-board-task *ngFor="let task of questionsBoardStep?.tasks; let i = index" cdkDrag
                              class="mb-sm-1 mb-lg-4 mb-5 mr-sm-1 mr-lg-4 task-horizontal draggable-task"
-                             [cdkDragDisabled]="isVersionOfAnItem || compareMode"
+                             [cdkDragDisabled]="isProjectReader || isVersionOfAnItem || compareMode"
                              [projectCommunityId]="projectCommunityId"
                              [questionsBoardId]="questionsBoardStep.parentId"
                              [questionsBoardStepId]="questionsBoardStep.id"
@@ -31,6 +31,7 @@
                              [taskPosition]="i"
                              [compareMode]="compareMode"
                              [isVersionOf]="isVersionOfAnItem"
+                             [isProjectReader]="isProjectReader"
                              [questionEntityType]="questionEntityType"
                              [messagePrefix]="messagePrefix"
                              (cdkDragStarted)="dragStarted($event)"
