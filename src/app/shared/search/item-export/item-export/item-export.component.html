@@ -31,7 +31,7 @@
         </div>
 
         <!-- Update screenshots -->
-        <div class="form-check" *ngIf="isProjectEntityType">
+        <div class="form-check" *ngIf="canUpdateScreenshots">
           <input class="form-check-input" type="checkbox" formControlName="screenshot" id="screenshot">
           <label class="form-check-label" for="screenshot">
             {{ 'item-export.update-screenshots.label' | translate}}

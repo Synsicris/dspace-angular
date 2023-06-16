@@ -19,6 +19,7 @@ import { of } from 'rxjs/internal/observable/of';
 import { SelectableListState } from '../../../object-list/selectable-list/selectable-list.reducer';
 import { SearchResult } from '../../models/search-result.model';
 import { MYDSPACE_ROUTE } from '../../../../my-dspace-page/my-dspace-page.component';
+import { ProjectVersionService } from '../../../../core/project/project-version.service';
 
 export enum ExportSelectionMode {
   All = 'all',
@@ -84,7 +85,8 @@ export class ItemExportComponent implements OnInit, OnDestroy {
     protected notificationsService: NotificationsService,
     protected translate: TranslateService,
     public activeModal: NgbActiveModal,
-    private selectableListService: SelectableListService,) {
+    private selectableListService: SelectableListService,
+    private projectVersion: ProjectVersionService) {
   }
 
   ngOnInit() {
@@ -159,7 +161,7 @@ export class ItemExportComponent implements OnInit, OnDestroy {
       formGroup.addControl('selectionMode', new FormControl(this.exportSelectionMode.value, [Validators.required]));
     }
 
-    if (this.isProjectEntityType) {
+    if (this.canUpdateScreenshots) {
       formGroup.addControl('screenshot', new FormControl(false));
     }
 
@@ -183,6 +185,10 @@ export class ItemExportComponent implements OnInit, OnDestroy {
 
   get isProjectEntityType(): boolean {
     return this.item.entityType === 'Project';
+  }
+
+  get canUpdateScreenshots(): boolean {
+    return this.isProjectEntityType && !this.projectVersion.isVersionOfAnItem(this.item);
   }
 
 
