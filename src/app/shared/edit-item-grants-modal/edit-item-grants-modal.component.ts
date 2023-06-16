@@ -51,6 +51,11 @@ export class EditItemGrantsModalComponent implements OnInit {
     { id: 'funding', name: 'project.create.grants.subproject-option' }
   ];
 
+  /**
+   * EditMode to use that has been configured for the current user
+   */
+  public editMode: string;
+
   public processing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
@@ -78,7 +83,7 @@ export class EditItemGrantsModalComponent implements OnInit {
    * Initialize the component, setting up creation form
    */
   ngOnInit(): void {
-    this.currentItemGrantsValue = Metadata.firstValue(this.item.metadata, 'cris.project.shared');
+    this.currentItemGrantsValue = Metadata.firstValue(this.item.metadata, environment.projects.projectEditGrantsMetadata);
     this.vocabulary.getVocabularyEntries(
       new VocabularyOptions(environment.projects.projectsGrantsOptionsVocabularyName),
       new PageInfo()
@@ -127,9 +132,9 @@ export class EditItemGrantsModalComponent implements OnInit {
     // TODO
     this.itemService.updateItemMetadata(
       this.item.uuid,
-      'EDIT_GRANTS',
-      'sections/edit_grants',
-      'cris.project.shared',
+      this.editMode,
+      `sections/${environment.projects.projectEditGrantsForm}`,
+      environment.projects.projectEditGrantsMetadata,
       0,
       projectGrants
     ).subscribe({
