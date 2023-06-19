@@ -5,15 +5,15 @@ import {
   CALL_ENTITY,
   FUNDING_ENTITY,
   FUNDING_OBJECTIVE_ENTITY,
-  ORGANISATION_UNIT_ENTITY, PROGRAMME_ENTITY,
+  ORGANISATION_UNIT_ENTITY,
+  PROGRAMME_ENTITY,
   ProjectDataService
 } from './project-data.service';
-import { combineLatest, Observable } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { distinctUntilChanged, map, mergeMap, take } from 'rxjs/operators';
 import { Community } from '../shared/community.model';
 import { FeatureID } from '../data/feature-authorization/feature-id';
 import { Item } from '../shared/item.model';
-import { of } from 'rxjs';
 import { FindListOptions } from '../data/find-list-options.model';
 import { getRemoteDataPayload } from '../shared/operators';
 import { PaginatedList } from '../data/paginated-list.model';
@@ -110,6 +110,10 @@ export class ProjectAuthorizationService {
 
   isFunderReaderOfProgramme(projectItem: Item) {
     return this.authorizationService.isAuthorized(FeatureID.isFunderReaderOfProgramme, projectItem.self);
+  }
+
+  isProjectReader(projectItem: Item) {
+    return this.authorizationService.isAuthorized(FeatureID.isReaderOfProject, projectItem.self);
   }
 
   /**

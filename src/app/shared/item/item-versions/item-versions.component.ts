@@ -102,6 +102,11 @@ export class ItemVersionsComponent implements OnInit {
   @Input() isProjectFunder = false;
 
   /**
+   * Whether user is project reaer
+   */
+  @Input() isProjectReader = false;
+
+  /**
    * Whether user is founder
    */
   @Input() canShowCreateVersion = false;

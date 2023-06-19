@@ -1,5 +1,5 @@
 <!-- ---------------------------------------
-Definition of a single impact pathway column 
+Definition of a single impact pathway column
 ---------------------------------------- -->
 
 <!-- complete column -->
@@ -39,25 +39,25 @@ Definition of a single impact pathway column
 
     <!-- src/app/impact-pathway-board/shared/impact-path-way/impact-path-way-task/impact-path-way-task.component.html -->
     <ds-impact-path-way-task *ngFor="let task of (getTasks() | async); let i = index" cdkDrag
-                              class="mb-sm-1 mb-lg-4"
-                              [cdkDragDisabled]="isVersionOfAnItem || compareMode"
-                              [projectCommunityId]="projectCommunityId"
-                              [impactPathwayId]="(impactPathwayStep$ | async)?.parentId"
-                              [impactPathwayStepId]="(impactPathwayStep$ | async)?.id"
-                              [impactPathwayStepType]="(impactPathwayStep$ | async)?.type"
-                              [isVersionOfAnItem]="isVersionOfAnItem"
-                              [data]="task"
-                              [selectable]="false"
-                              [stepHasDetail]="(impactPathwayStep$ | async)?.hasDetail()"
-                              [taskPosition]="i"
-                              [isObjectivePage]="false"
-                              [cdkDragData]="task"
-                              [compareMode]="compareMode"
-                              (cdkDragStarted)="dragStarted($event)"
-                              (cdkDragDropped)="drop($event)"
-                              (cdkDragEntered)="dragEnteredToStep($event)"
-                              (cdkDragExited)="dragExited($event)"
-                              (selected)="onTaskSelected($event)">
+                             class="mb-sm-1 mb-lg-4"
+                             [cdkDragDisabled]="isVersionOfAnItem || compareMode || !(canEditButton$ | async)"
+                             [projectCommunityId]="projectCommunityId"
+                             [impactPathwayId]="(impactPathwayStep$ | async)?.parentId"
+                             [impactPathwayStepId]="(impactPathwayStep$ | async)?.id"
+                             [impactPathwayStepType]="(impactPathwayStep$ | async)?.type"
+                             [isVersionOfAnItem]="isVersionOfAnItem"
+                             [data]="task"
+                             [selectable]="false"
+                             [stepHasDetail]="(impactPathwayStep$ | async)?.hasDetail()"
+                             [taskPosition]="i"
+                             [isObjectivePage]="false"
+                             [cdkDragData]="task"
+                             [compareMode]="compareMode"
+                             (cdkDragStarted)="dragStarted($event)"
+                             (cdkDragDropped)="drop($event)"
+                             (cdkDragEntered)="dragEnteredToStep($event)"
+                             (cdkDragExited)="dragExited($event)"
+                             (selected)="onTaskSelected($event)">
 
       <!-- ? -->
       <div class="task-placeholder d-flex justify-content-center align-items-center mb-sm-1 mb-lg-4"
