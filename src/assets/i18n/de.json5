@@ -3521,7 +3521,7 @@
 
   // "form.copy": "Copy",
   // TODO New key - Add a translation
-  "form.copy": "Copy",
+  "form.copy": "Dublizieren",
 
   // "form.discard": "Discard",
   "form.discard": "Verwerfen",
@@ -5140,7 +5140,7 @@
 
   // "item.submission.create": "Create Item",
   // TODO New key - Add a translation
-  "item.submission.create": "Create Item",
+  "item.submission.create": "Kommentar anlegen",
 
   // "item.submission.create.successfully": "Item Created successfully",
   // TODO New key - Add a translation
@@ -5286,7 +5286,7 @@
 
   // "item.version.delete.modal.button.confirm.tooltip": "Delete this version",
   // TODO New key - Add a translation
-  "item.version.delete.modal.button.confirm.tooltip": "Delete this version",
+  "item.version.delete.modal.button.confirm.tooltip": "Diese Version löschen",
 
   // "item.version.delete.modal.button.cancel": "Cancel",
   // TODO New key - Add a translation
@@ -5294,7 +5294,7 @@
 
   // "item.version.delete.modal.button.cancel.tooltip": "Do not delete this version",
   // TODO New key - Add a translation
-  "item.version.delete.modal.button.cancel.tooltip": "Do not delete this version",
+  "item.version.delete.modal.button.cancel.tooltip": "Löschen dieser Version abbrechen",
 
   // "item.version.delete.notification.success": "Version number {{version}} has been deleted",
   // TODO New key - Add a translation
@@ -5322,15 +5322,15 @@
 
   // "item.version.list.remove-text": "Remove selection",
   // TODO New key - Add a translation
-  "item.version.list.remove-text": "Remove selection",
+  "item.version.list.remove-text": "Vergleich beenden",
 
   // "item.version.list.selected-text": "Version selected : ",
   // TODO New key - Add a translation
-  "item.version.list.base-text": "Base : ",
+  "item.version.list.base-text": "Ausgangs-",
 
   // "item.version.list.comparing-text": "Compared : ",
   // TODO New key - Add a translation
-  "item.version.list.comparing-text": "Compared : ",
+  "item.version.list.comparing-text": "Vergleichs-",
 
   // "item-export.modal-launcher.single.btn": "Export",
   // TODO New key - Add a translation
@@ -7258,11 +7258,11 @@
 
   // "process.new.notification.process.processing": "Processing...",
   // TODO New key - Add a translation
-  "process.new.notification.process.processing": "Processing...",
+  "process.new.notification.process.processing": "Verarbeitung läuft…",
 
   // "process.new.notification.process.files": "Output Files: ",
   // TODO New key - Add a translation
-  "process.new.notification.process.files": "Output Files: ",
+  "process.new.notification.process.files": "Ausgabe-Dateien:",
 
   // "process.new.notification.process.see-results": "See the results",
   // TODO New key - Add a translation
@@ -9007,7 +9007,7 @@
 
   // "search.filters.filter.synsicrisrelationtargetgroup.head": "Search Stakeholder group",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationtargetgroup.head": "Suche Akteursgruppe",
+  "search.filters.filter.synsicrisrelationtargetgroup.head": "Akteursgruppe",
 
   // "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Stakeholder group",
   // TODO New key - Add a translation
@@ -9015,7 +9015,7 @@
 
   // "search.filters.filter.synsicrisrelationtargetgroup.label": "Search target group",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationtargetgroup.label": "Search target group",
+  "search.filters.filter.synsicrisrelationtargetgroup.label": "Suche Akteursgruppe",
 
   // "search.filters.filter.oairecerifeventcountry.head": "Event country",
   // TODO New key - Add a translation
@@ -11233,19 +11233,19 @@
 
   // "submission.sections.accesses.form.access-condition-label": "Access condition type",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.access-condition-label": "Access condition type",
+  "submission.sections.accesses.form.access-condition-label": "Zugriffbedingung",
 
   // "submission.sections.accesses.form.access-condition-hint": "Select an access condition to apply on the item once it is deposited",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.access-condition-hint": "Select an access condition to apply on the item once it is deposited",
+  "submission.sections.accesses.form.access-condition-hint": "Wählen Sie eine Zugriffsbedingung aus, die auf die Datei angewendet werden soll, sobald sie hinterlegt ist",
 
   // "submission.sections.accesses.form.date-required": "Date is required.",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.date-required": "Date is required.",
+  "submission.sections.accesses.form.date-required": "Datumsangabe erforderlich",
 
   // "submission.sections.accesses.form.date-required-from": "Grant access from date is required.",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.date-required-from": "Grant access from date is required.",
+  "submission.sections.accesses.form.date-required-from": "Zugriff ab Datum ist erforderlich",
 
   // "submission.sections.accesses.form.date-required-until": "Grant access until date is required.",
   // TODO New key - Add a translation
@@ -11253,15 +11253,15 @@
 
   // "submission.sections.accesses.form.from-label": "Grant access from",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.from-label": "Grant access from",
+  "submission.sections.accesses.form.from-label": "Zugriff gewähren ab",
 
   // "submission.sections.accesses.form.from-hint": "Select the date from which the related access condition is applied",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.from-hint": "Select the date from which the related access condition is applied",
+  "submission.sections.accesses.form.from-hint": "Wählen Sie das Datum, ab dem die entsprechende Zugriffsbedingung gilt.",
 
   // "submission.sections.accesses.form.from-placeholder": "From",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.from-placeholder": "From",
+  "submission.sections.accesses.form.from-placeholder": "ab",
 
   // "submission.sections.accesses.form.group-label": "Group",
   // TODO New key - Add a translation
@@ -11273,15 +11273,15 @@
 
   // "submission.sections.accesses.form.until-label": "Grant access until",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.until-label": "Grant access until",
+  "submission.sections.accesses.form.until-label": "Zugriff gewähren bis",
 
   // "submission.sections.accesses.form.until-hint": "Select the date until which the related access condition is applied",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.until-hint": "Select the date until which the related access condition is applied",
+  "submission.sections.accesses.form.until-hint": "Wählen Sie das Datum, bis zu dem die entsprechende Zugriffsbedingung gilt.",
 
   // "submission.sections.accesses.form.until-placeholder": "Until",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.until-placeholder": "Until",
+  "submission.sections.accesses.form.until-placeholder": "bis",
 
   // "submission.submit.breadcrumbs": "New submission",
   // TODO New key - Add a translation
@@ -12011,7 +12011,7 @@
   "tree.description.destatis": "Auswahl Disziplin / Fachgebiet",
 
   // "vocabulary-treeview.tree.description.destatis": "missing",
-  "vocabulary-treeview.tree.description.destatis": "<i>Wählen Sie das Ziel für nachhaltige Entwicklung bitte so spezifisch wie möglich aus. </br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
+  "vocabulary-treeview.tree.description.destatis": "<i>Wählen Sie das Fachgebiet bitte so spezifisch wie möglich aus. </br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
 
   // "submission.sections.submit.progressbar.exploitation_plan_step_type_1_task_form.info": "missing",
   "submission.sections.submit.progressbar.exploitation_plan_step_type_1_task_form.info": "<b><i>Legen Sie hier erst dann neue Einträge an, nachdem Sie unter „Vorhandene auswählen“ überprüft haben, ob die passenden Einträge bereits vorhanden sind.</i></b></br></br><b>Bereiche:</b><ul><li>Besonders relevant sind die Einträge zu <b>Patent oder Gebrauchsmuster</b>.</li><li>Wenn bereits Lizenzeinnahmen oder Erlöse aus dem Verkauf erzielt werden, wird dies in <b>Anwendung</b> erfasst.</li><li></b>Schutzrechtsanmeldungen Anderer</b>, die einer Verwertung durch die Antragsteller entgegenstehen, sind in <b>Rahmenbedingung</b> zu erfassen.</li><li>Einträge aus <b>weiterenKategorien</b> können ebenfalls relevant sein, wenn sie direkt mit der Anmeldung des Schutzrechtes im Zusammenhang stehen.</li></ul>",
@@ -14458,7 +14458,7 @@
 
   // "query-builder.synsicris.project.browse.head": "Projects list: ",
   // TODO New key - Add a translation
-  "query-builder.synsicris.project.browse.head": "Liste der Verbünde: ",
+  "query-builder.synsicris.project.browse.head": "Liste der Verbünde:",
 
   // "query-builder.synsicris.project.browse.empty": "No results",
   // TODO New key - Add a translation
@@ -15215,7 +15215,7 @@
   "explore.index.synsicrisTypePatentuse": "Art der Verwertung",
 
   // "explore.index.synsicrisDuration": "Duration",
-  "explore.index.synsicrisDuration": "Dauer",
+  "explore.index.synsicrisDuration": "Dauer (Monate)",
 
   // "explore.index.synsicrisProjectStatus": "Status",
   "explore.index.synsicrisProjectStatus": "Status",
@@ -15716,13 +15716,13 @@
   "search.filters.filter.dctermsDateaccepted.label": "Suche Datum der Zulassung",
 
   // "search.filters.filter.synsicrisDuration.head": "Duration",
-  "search.filters.filter.synsicrisDuration.head": "Dauer",
+  "search.filters.filter.synsicrisDuration.head": "Dauer (Stunden)",
 
   // "search.filters.filter.synsicrisDuration.placeholder": "Duration",
-  "search.filters.filter.synsicrisDuration.placeholder": "Dauer",
+  "search.filters.filter.synsicrisDuration.placeholder": "Dauer (Stunden)",
 
   // "search.filters.filter.synsicrisDuration.label": "Search Duration",
-  "search.filters.filter.synsicrisDuration.label": "Suche Dauer",
+  "search.filters.filter.synsicrisDuration.label": "Suche Dauer (Stunden)",
 
   // "search.filters.filter.oairecerifFundingParent.head": "Programme",
   "search.filters.filter.oairecerifFundingParent.head": "Förderprogramm",
@@ -15833,7 +15833,7 @@
   "query-builder.synsicris.accordion.step1.alert": "Diese 2-Schritt Suche bietet Ihnen vielfältige Such- und Filterfunktionen. </br>In <b>Schritt 1</b> legen Sie fest, ob Sie <b>in allen Einträgen</b> suchen <b>oder</b> die Gruppe der Vorhaben in denen gesucht wird <b>eingrenzen</b> möchten.</br>In <b>Schritt 2</b> können Sie filtern und/oder die Freitextsuche verwenden.</br></br><b>Schritt 1:</b></br>Für die <b>Eingrenzung</b> können Sie Filter aus allen Kategorien verwenden. Wenn Sie innerhalb einer Kategorie weitere Filter verwenden, grenzt sich die Suche immer weiter ein (da die einzelnen Filter mit AND verbunden sind).</br>Wenn Sie mit einer <b>weiteren Kategorie</b> filtern möchten, legen Sie eine <b>neue Filtergruppe</b> an. Diese kann wahlweise mit der vorhergehenden Filtergruppe über AND (= weitere Eingrenzung) oder OR (= Erweiterung) verknüpft werden. Als Suchergebnis werden Ihnen die Vorhaben angezeigt, die die Suchbedingungen erfüllen.</br></br><b>Wichtige Hinweise zum Filter:</b><ul><li>Filter und Merkmale werden nur angezeigt, wenn Daten dazu vorhanden sind.</li><li>AND = weitere Eingrenzung der Suche/ Filterung, da Merkmal aus dem ersten UND aus allen weiteren Filtern erfüllt sein müssen.</li><li>OR = Erweiterung der Suche/Filterung, da Merkmale aus der ersten ODER der zweiten Filtergruppe erfüllt sein müssen.</li></ul>",
 
   // "query-builder.synsicris.accordion.step2.alert": "Help",
-  "query-builder.synsicris.accordion.step2.alert": "<b>Schritt 2:</b></br>In der <b>Freitextsuche</b> können einfache Suchoperatoren eingesetzt werden (s.u.).Die <b>Filter</b> sind hier alle mit <b>AND</b> verknüpft und <b>reagieren sofort</b> nach der Eingabe. D.h. durch die Wahl der Filter grenzen Sie das Suchergebnis immer weiter ein. Die <b>Reihenfolge</b>, in der Sie die Filter setzen, <b>beeinflusst</b> daher das <b>Suchergebnis</b>.</br>Der wichtigste Filter ist die <b>Kategorie</b> des Eintrags.</br>Das Suchergebnis wird in Diagrammen dargestellt, die Sie über <b><i class=\"fas fa-chart-line\"></i> Anzeigen/Verbergen</b> anzeigen und verbergen können.</br></br><b>Suchoperatoren in der Freitextsuche:</b><ul><li>Wenn Sie nach Teilen von Worten suchen, verwenden Sie * als Platzhalter. Z.B. Weizen*</li><li>Wenn Sie nach bestimmten Ausdrücken aus mehreren Worten suchen möchten, setzten Sie sie in „Anführungszeichen“. Z.B. „Universität Musterstadt“</li><li>Um Begriffe auszuschließen verwenden sie – z.B. Weizen -Mehl</li><li>Weitere Suchoperatoren finden Sie unter <a href=\"https://www.solrtutorial.com/solr-query-syntax.html\">SolrTutorial</a></li></ul>",
+  "query-builder.synsicris.accordion.step2.alert": "<b>Schritt 2:</b></br>In der <b>Freitextsuche</b> können einfache Suchoperatoren eingesetzt werden (s.u.). Die <b>Filter</b> sind hier alle mit <b>AND</b> verknüpft und <b>reagieren sofort</b> nach der Eingabe. D.h. durch die Wahl der Filter grenzen Sie das Suchergebnis immer weiter ein. Die <b>Reihenfolge</b>, in der Sie die Filter setzen, <b>beeinflusst</b> daher das <b>Suchergebnis</b>.</br>Der wichtigste Filter ist die <b>Kategorie</b> des Eintrags.</br>Das Suchergebnis wird in Diagrammen dargestellt, die Sie über <b><i class=\"fas fa-chart-line\"></i> Anzeigen/Verbergen</b> anzeigen und verbergen können.</br></br><b>Suchoperatoren in der Freitextsuche:</b><ul><li>Wenn Sie nach Teilen von Worten suchen, verwenden Sie * als Platzhalter. Z.B. Weizen*</li><li>Wenn Sie nach bestimmten Ausdrücken aus mehreren Worten suchen möchten, setzten Sie sie in „Anführungszeichen“. Z.B. „Universität Musterstadt“</li><li>Um Begriffe auszuschließen verwenden sie – z.B. Weizen -Mehl</li><li>Weitere Suchoperatoren finden Sie unter <a href=\"https://www.solrtutorial.com/solr-query-syntax.html\">SolrTutorial</a></li></ul>",
 
   // "working-plan.chart.button.delete": "Delete item",
   "working-plan.chart.button.delete": "Eintrag löschen",
@@ -16812,6 +16812,144 @@
   "view.version.badges.nonOfficial": "nicht-offiziell",
 
   // "tree.description.sdg": "Selection Sustainable Development Goal (SDG)",
-  "tree.description.sdg": "Auswahl Ziel für nachhaltige Entwicklung (SDG)"
+  "tree.description.sdg": "Auswahl Ziel für nachhaltige Entwicklung (SDG)",
+
+  // "vocabulary-treeview.tree.description.sdg": "missing",
+  "vocabulary-treeview.tree.description.sdg": "<i>Wählen Sie das Ziel für nachhaltige Entwicklung bitte so spezifisch wie möglich aus. </br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
+
+  // "search.filters.applied.charts.graph-fundingobjective-synsicris_type_sdg.tab": "Related SDG",
+  "search.filters.applied.charts.graph-fundingobjective-synsicris_type_sdg.tab": "Ziel für nachhaltige Entwicklung (SDG)",
+
+  // "search.filters.filter.synsicrisTypeSdg.head": "Sustainable development goal (SDG)",
+  "search.filters.filter.synsicrisTypeSdg.head": "Ziel für nachhaltige Entwicklung (SDG)",
+
+  // "search.filters.filter.synsicrisTypeSdg.placeholder": "Sustainable development goal (SDG)",
+  "search.filters.filter.synsicrisTypeSdg.placeholder": "Ziel für nachhaltige Entwicklung (SDG)",
+
+  // "search.filters.filter.synsicrisTypeSdg.label": "Search Sustainable development goal (SDG)",
+  "search.filters.filter.synsicrisTypeSdg.label": "Suche Ziel für nachhaltige Entwicklung (SDG)",
+
+  // "search.filters.filter.synsicrisRelationProgramme.head": "Programme",
+  "search.filters.filter.synsicrisRelationProgramme.head": "Förderprogramm",
+
+  // "search.filters.filter.synsicrisRelationProgramme.placeholder": "Programme",
+  "search.filters.filter.synsicrisRelationProgramme.placeholder": "Förderprogramm",
+
+  // "search.filters.filter.synsicrisRelationProgramme.label": "Search Programme",
+  "search.filters.filter.synsicrisRelationProgramme.label": "Suche Förderprogramm",
+
+  // "item.version.list.stop-comparing-text": "Stop comparing",
+  "item.version.list.stop-comparing-text": "Vergleich beenden",
+
+  // "metadata-export-search.tooltip": "Export search results as CSV",
+  "metadata-export-search.tooltip": "Suchergebnisse als CSV exportieren",
+
+  // "impact-pathway.description.jump-marker": "To the description of the overall goals of the project",
+  "impact-pathway.description.jump-marker": "Zur Beschreibung der Gesamtziele des Vorhabens",
+
+  // "ubmission.sections.accesses.form.date-required-until": "Grant access until date is required.",
+  "ubmission.sections.accesses.form.date-required-until": "Zugriff gewähren bis Datum ist erforderlich",
+
+  // "search.filters.applied.charts.graph-proc-even-synsicris_relation_targetgroup.tab": "Stakeholder group",
+  "search.filters.applied.charts.graph-proc-even-synsicris_relation_targetgroup.tab": "Akteursgruppe",
+
+  // "search.filters.applied.charts.graph-proc-event-dc_type_targetgroup.tab": "Type of Stakeholder group",
+  "search.filters.applied.charts.graph-proc-event-dc_type_targetgroup.tab": "Art der Akteursgruppe",
+
+  // "search.filters.applied.charts.graph-proc-event-synsicris_subject_nace.tab": "Economic sector",
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_nace.tab": "Wirtschaftszweig",
+
+  // "search.filters.applied.charts.graph-proc-event-synsicris_subject_political.tab": "Policy level",
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_political.tab": "Politikebene",
+
+  // "search.filters.applied.charts.graph-proc-event-synsicris_subject_enterprise.tab": "Company size",
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_enterprise.tab": "Unternehmensgröße",
+
+  // "search.filters.applied.charts.graph-proc-event-synsicris_subject_urbanrural.tab": "Locating",
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_urbanrural.tab": "Verortung",
+
+  // "search.filters.applied.charts.graph-proc-event-synsicris_type_purpose.tab": "Purpose",
+  "search.filters.applied.charts.graph-proc-event-synsicris_type_purpose.tab": "Ziel",
+
+  // "search.filters.applied.charts.graph-event-type_target_group.tab": "Type of Stakeholder group",
+  "search.filters.applied.charts.graph-event-type_target_group.tab": "Art der Akteursgruppe",
+
+  // "search.filters.applied.charts.graph-event-synsicris_subject_nace.tab": "Economic sector",
+  "search.filters.applied.charts.graph-event-synsicris_subject_nace.tab": "Wirtschaftszweig",
+
+  // "search.filters.applied.charts.graph-event-synsicris_subject_enterprise.tab": "Size of business",
+  "search.filters.applied.charts.graph-event-synsicris_subject_enterprise.tab": "Unternehmensgröße",
+
+  // "search.filters.applied.charts.graph-event-synsicris_subject_urbanrural.tab": "Locating",
+  "search.filters.applied.charts.graph-event-synsicris_subject_urbanrural.tab": "Verortung",
+
+  // "search.filters.applied.charts.graph-event-synsicris_type_contribution.tab": "Type of Contribution",
+  "search.filters.applied.charts.graph-event-synsicris_type_contribution.tab": "Art der Beteiligung",
+
+  // "search.filters.applied.charts.RELATION.Project.Product.title": "Graph",
+  "search.filters.applied.charts.RELATION.Project.Product.title": "Diagramm",
+
+  // "search.filters.applied.charts.RELATION.Project.neg_sideeffect.title": "Graph",
+  "search.filters.applied.charts.RELATION.Project.neg_sideeffect.title": "Diagramm",
+
+  // "search.filters.applied.charts.graph-product-dc_subject.tab": "Keyword",
+  "search.filters.applied.charts.graph-product-dc_subject.tab": "Schlagwort",
+
+  // "search.filters.applied.charts.graph-inn-pot-synsicris_relation_targetgroup.tab": "Stakeholder group(s)",
+  "search.filters.applied.charts.graph-inn-pot-synsicris_relation_targetgroup.tab": "Akteursgruppe(n)",
+
+  // "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_transform.tab": "Area of transition",
+  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_transform.tab": "Adressierter Transformationsbereich",
+
+  // "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.tab": "Influence on the impact",
+  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.tab": "Einfluss auf die Wirkung",
+
+  // "search.filters.applied.charts.graphprojpart_synsicris_subject_political.tab": "Policy level",
+  "search.filters.applied.charts.graphprojpart_synsicris_subject_political.tab": "Politikebene",
+
+  // "search.filters.applied.charts.graph-multiple-entities-dc_type.tab": "Type",
+  "search.filters.applied.charts.graph-multiple-entities-dc_type.tab": "Art",
+
+  // "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_nace.tab": "Economic sector",
+  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_nace.tab": "Wirtschaftszweig",
+
+  // "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_enterprise.tab": "Company size",
+  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_enterprise.tab": "Unternehmensgröße",
+
+  // "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_political.tab": "Policy level",
+  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_political.tab": "Politikebene",
+
+  // "search.filters.applied.charts.graph-synsicris_subject_destatis.tab": "Discipline",
+  "search.filters.applied.charts.graph-synsicris_subject_destatis.tab": "Disziplin / Fachgebiet",
+
+  // "search.filters.filter.synsicrisDcContributorAuthor.head": "Author",
+  "search.filters.filter.synsicrisDcContributorAuthor.head": "Autor:in",
+
+  // "search.filters.filter.synsicrisDcContributorAuthor.label": "Search Author",
+  "search.filters.filter.synsicrisDcContributorAuthor.label": "Suche Autor:in",
+
+  // "search.filters.applied.charts.graph-synsicris_address_addressCountry.tab": "Country/Federal state",
+  "search.filters.applied.charts.graph-synsicris_address_addressCountry.tab": "Land/Bundesland",
+
+  // "search.filters.applied.charts.graph-proc-event-dc_type.tab": "Type of Cooperation / Participation / Exchange process",
+  "search.filters.applied.charts.graph-proc-event-dc_type.tab": "Art der Kooperation / Partizipation / Austauschprozess",
+
+  // "search.filters.filter.synsicrisTypeIntensity.head": "Intensity/duration of cooperation",
+  "search.filters.filter.synsicrisTypeIntensity.head": "Intensität/Dauer der Zusammenarbeit",
+
+  // "search.filters.filter.synsicrisTypeIntensity.label": "Search Intensity/duration of cooperation",
+  "search.filters.filter.synsicrisTypeIntensity.label": "Sucje Intensität/Dauer der Zusammenarbeit",
+
+  // "search.filters.filter.synsicrisDcSubject.head": "Keyword",
+  "search.filters.filter.synsicrisDcSubject.head": "Schlagwort",
+
+  // "search.filters.filter.synsicrisDcSubject.label": "Search Keyword",
+  "search.filters.filter.synsicrisDcSubject.label": "Suche Schlagwort (Agrovoc)",
+
+  // "search.filters.filter.filter-synsicris_type_visiblity.head": "Public visibility",
+  "search.filters.filter.filter-synsicris_type_visiblity.head": "öffentliche Sichtbarkeit",
+
+  // "search.filters.filter.filter-synsicris_type_visiblity.label": "Search Public visibility",
+  "search.filters.filter.filter-synsicris_type_visiblity.label": "Suche öffentliche Sichtbarkeit"
 
 }
