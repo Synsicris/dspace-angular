@@ -5860,7 +5860,7 @@
 
   "search.filters.filter.itemtype.placeholder": "Type",
 
-  "search.filters.filter.itemtype.label": "Search type",
+  "search.filters.filter.itemtype.label": "Search Type",
 
   "search.filters.filter.investigators.head": "Researcher",
 
@@ -6200,7 +6200,7 @@
 
   "impact-pathway.metadata-status.icon.title.status.archieved": "Archieved",
 
-  "impact-pathway.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+  "impact-pathway.metadata-status.icon.title.status.partly-archieved": "Partly archieved",
 
   "working-plan.item.metadata-internal.icon.title.status.done": "Done",
 
@@ -6216,7 +6216,7 @@
 
   "working-plan.metadata-status.icon.title.status.archieved": "Archieved",
 
-  "working-plan.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+  "working-plan.metadata-status.icon.title.status.partly-archieved": "Partly archieved",
 
   "search.filters.entityType.interim_report": "Iterim Report",
 
@@ -7114,7 +7114,7 @@
 
   "submission.sections.submit.progressbar.describe.cooperation_events_date": "Dates of personal meetings or other central activities",
 
-  "submission.sections.submit.progressbar.describe.funding": "#1 Subproject",
+  "submission.sections.submit.progressbar.describe.funding": "#1 Add information on the project",
 
   "submission.sections.submit.progressbar.describe.journal": "Journal basic information",
 
@@ -7166,13 +7166,13 @@
 
   "submission.sections.submit.progressbar.describe.ethics_use.info": "Project results can touch the limits of what is ethically acceptable in society. Please comment on whether your findings may affect ethical acceptance or have the potential for abuse.",
 
-  "submission.sections.submit.progressbar.describe.events": "#1 Event",
+  "submission.sections.submit.progressbar.describe.events": "#1 Describe event",
 
   "submission.sections.submit.progressbar.describe.events.info": "Events include events carried out by the project as well as participation in third-party events (e.g. individual workshops, lectures, trade fairs). Interactions such as an interview or a test can also be recorded.<p><i>Please record an event or interaction here. Describe your planning in the application and update and add your information during the project progress.</i></p>Events that are part of a long-term process of cooperation, participation or collaboration, enter under \"Process of cooperation, participation and collaboration\". Please register contributions to scientific conferences for which a conference contribution has been made as publication.</br>It is advisable to collect the project and cooperation partners as well as the relevant stakeholder groups in the project before describing an event.",
 
-  "submission.sections.submit.progressbar.describe.events_result": "#2 Documentation of the event for reporting purposes",
+  "submission.sections.submit.progressbar.describe.events_result": "#2 Enter event data",
 
-  "submission.sections.submit.progressbar.describe.events_result.info": "<i>Please provide here details of the event.</i></br>It is advisable to make these entries directly before or after the respective event.</br>You can do uploads to provide informations to the sponsor about the individual events, and, if necessary, to publish it.",
+  "submission.sections.submit.progressbar.describe.events_result.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Enter this information in the course of the project and update if needed for reports.</br></br><i><b>Please enter event data to prove them for the funding institution.</i></b></br></br><b>Important note:</b><ul><li>Total duration refers to the duration of the event in hours. For multi-day events please sum the duration of the single days.</li></ul><b>Upload files:</b><ul><li>Add <b>accompanying documents to the event</b> (e.g. programm plan if available) in this section.</li></ul>",
 
   "submission.sections.submit.progressbar.describe.gender_personal": "Gender mainstreaming in the project team",
 
@@ -7302,17 +7302,17 @@
 
   "submission.sections.submit.progressbar.describe.persons.info": "This section contains personal information that allows you to use the system and provides contact details for the funding agency.",
 
-  "submission.sections.submit.progressbar.describe.physical_objects": "#1 Object / material for knowledge transfer and subsequent use in research and teaching",
+  "submission.sections.submit.progressbar.describe.physical_objects": "#1 Describe object / material",
 
-  "submission.sections.submit.progressbar.describe.physical_objects.info": "<i>Please record here if objects or materials are created in the project that serve the transfer of knowledge or can be used by third parties for research or teaching.</i></br>Do not record any kind of publication (e.g. text, image, sound or software) here. In case of trial and demonstration sites that can be visited, please use the \"Events\" section.",
+  "submission.sections.submit.progressbar.describe.physical_objects.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Enter those information at the time of application and update in the course of the project for reports as needed.</br></br><i><b>Please enter an item, object or materials that may be further used by third parties.</b></i></br></br><b>Important note:</b><ul><li>Any type of text, image and sound documents as well as software is to be included in the category <b>publication</b>.</li><li>Experimental and demonstration sites for site visits are to be entered in the categrory <b>event</b> .</li></ul>",
 
-  "submission.sections.submit.progressbar.describe.physical_objects_result": "#1 Use and accessibilityl for third parties",
+  "submission.sections.submit.progressbar.describe.physical_objects_result": "#1 Specify use and accessibility for third parties",
 
-  "submission.sections.submit.progressbar.describe.physical_objects_result.info": "<i>Please add here in which form the object can be used by third parties and whom interested parties can contact.</i></br>With the information on the possible uses, you contribute to the subsequent use of your project work.",
+  "submission.sections.submit.progressbar.describe.physical_objects_result.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Enter those information at the time of application and update in the course of the project for reports as needed.</br></br><i><b>Please select the use for which the object may be used by third parties and provide a contact for inquiries.</i></b>",
 
   "submission.sections.submit.progressbar.describe.proj_objectives": "#1 Project objective",
 
-  "submission.sections.submit.progressbar.describe.projects": "#1 Describe Consortium",
+  "submission.sections.submit.progressbar.describe.projects": "#1 Describe consortium",
 
   "submission.sections.submit.progressbar.describe.projects.info": "For proposal preparation: Please give your project partners with the funding access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
 
@@ -7346,7 +7346,7 @@
 
   "submission.sections.submit.progressbar.describe.spinoffs_result_funding": "#2 Details of spin-off funding",
 
-  "submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "Please document any subsidies received for the spin-off here.",
+  "submission.sections.submit.progressbar.describe.spinoffs_result_funding.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Enter this information in the course of the project and update if needed for reports.</br></br><b><i>If the spin-off received funding or non-financial support, please complete the information below.</b></i>",
 
   "submission.sections.submit.progressbar.describe.spinoffs_result_performance_development": "Survey on success and economic development",
 
@@ -8210,7 +8210,7 @@
 
   "working-plan.chart.button.collapse": "Collapse node",
 
-  "working-plan.chart.button.add": "Add",
+  "working-plan.chart.button.add": "Add item",
 
   "working-plan.chart.button.compare": "Show difference",
 
@@ -8454,9 +8454,9 @@
 
   "vocabulary-treeview.tree.description.register-court": "Please select the city of the registry court.",
 
-  "submission.sections.submit.progressbar.describe.spinoffs_result_performance": "#2 Survey on success and economic development",
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance": "#2 Describe key activities and economic development (if information is available)",
 
-  "submission.sections.submit.progressbar.describe.spinoffs_result_performance.info": "This section can be used for surveys.",
+  "submission.sections.submit.progressbar.describe.spinoffs_result_performance.info": "<i class=\"fas fa-exclamation-triangle\"></i> #2 - Enter this information in the course of the project and update if needed for reports.</br></br><b><i>Please describe key activities and economic development for companies. Previous economic development may be illustrated with a time series.  Please add multiple reference years.</b></i></br></br><b>Important notice:</b><ul><li>No information is required here for associations.</li><li>For other types of companies, you can use the information to prove to the sponsor that the project results have been applied successfully.</li></ul>",
 
   "working-plan.chart.column.steps": "Steps",
 
@@ -9818,11 +9818,11 @@
 
   "layout.field.label.Event.synsicris.description.internal": "Notes",
 
-  "submission.sections.submit.progressbar.describe.projects_calc": "#1 Summarised information from Projects",
+  "submission.sections.submit.progressbar.describe.projects_calc": "#1 Summarised information from projects",
 
   "submission.sections.submit.progressbar.describe.funding.info": "For proposal preparation: Please give your project partners with the subprojects access to the system. After project approval:  Describe the project with keywords, including all relevant aspects from the research question to the exploitation of results. This will increase the project's visibility and promote transfer, as the project can easily be found by researchers, practitioners and other interested parties. Please upload a logo of the project, if available, to support the public presentation of the project.",
 
-  "submission.sections.submit.progressbar.describe.funding_import": "#1 Project overview",
+  "submission.sections.submit.progressbar.describe.funding_import": "#1 Imiportet information of the project",
 
   "submission.sections.submit.progressbar.describe.funding_import.info": "This information is generated from the corresponding subprojects. During the proposal preparation phase, the information comes from the easy-online imports of the subprojects. During the project phase, the information is regularly updated from profi.",
 
@@ -10894,11 +10894,11 @@
 
   "search.filters.filter.synsicrisParticipantnumber.label": "Suche Number of participants",
 
-  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Start date",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Date",
 
-  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Start date",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Date",
 
-  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Search Start date",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Search Date",
 
   "search.filters.filter.synsicrisOairecerifEventCounty.head": "Country",
 
@@ -11036,9 +11036,9 @@
 
   "search.filters.applied.charts.graph-proc-event-dc_type.tab": "Type of Cooperation / Participation / Exchange process",
 
-  "search.filters.filter.synsicrisTypeIntensity.head": "Intensity/duration of cooperation",
+  "search.filters.filter.synsicrisTypeIntensity.head": "Intensity of impact",
 
-  "search.filters.filter.synsicrisTypeIntensity.label": "Search Intensity/duration of cooperation",
+  "search.filters.filter.synsicrisTypeIntensity.label": "Search Intensity of impact",
 
   "search.filters.filter.synsicrisOairecerifAuthorAffiliation.head": "Author Affiliation",
 
@@ -11174,11 +11174,11 @@
 
   "search.filters.applied.charts.graphprojpartpersadminGender.tab": "Gender (Lead Consortium)",
 
-  "search.filters.filter.synsicrisDateFilled.head": "Year of filling",
+  "search.filters.filter.synsicrisDateFilled.head": "Year",
 
-  "search.filters.filter.synsicrisDateFilled.placeholder": "Year of filling",
+  "search.filters.filter.synsicrisDateFilled.placeholder": "Year",
 
-  "search.filters.filter.synsicrisDateFilled.label": "Search Year of filling",
+  "search.filters.filter.synsicrisDateFilled.label": "Search Year",
 
   "graph-page.warining.no-chart-type": "Check filter name, this chart type does not exist.",
 
@@ -11332,6 +11332,22 @@
 
   "search.filters.filter.synsicrisRelationProgramme.label": "Search Programme",
 
-  "ubmission.sections.accesses.form.date-required-until": "Grant access until date is required."
+  "ubmission.sections.accesses.form.date-required-until": "Grant access until date is required.",
+
+  "submission.form.physical_objects.info": "<b>Worum es hier geht:</b><ul><li>Beschreiben Sie hier Gegenstände bzw. physische Objekte, wie z. B. Ausstellungsstücke, Anschauungsmaterialien von Pflanzen und Tieren, konservierte Überreste, Bodenprofile etc., die auch nach Ende des Vorhabens für den Wissenstransfer oder für Forschung und Lehre weiterverwendet werden können.</li></ul>",
+
+  "submission.form.physical_objects-edit.info": "<b>What this is about:</b><ul><li>Describe items or physical objects, such as exhibits, illustrative materials of plants and animals, preserved remains, soil profiles, etc., that may be used for knowledge transfer or research and education after the project ends.</li></ul>",
+
+  "submission.form.events.info": "<b>For distinction:</b><ul><li><b>conference papers</b> are to be entered only under <b>publications</b>. An additional entry in events is not necessary.</li><li><b>Events</b>, which are part of an ongoing exchange with the same participants and recurring meetings/events, are to be entered in the category <b>cooperation / participation / exchange process</b>. Select the category that suits best. Please don't enter an <b>event</b> twice.</li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-events.php\" target=\"_blank\">Distinguish between events and cooperation / participation / exchange process</a></li></ul>",
+
+  "submission.form.events-edit.info": "<b>For distinction:</b><ul><li><b>conference papers</b> are to be entered only under <b>publications</b>. An additional entry in events is not necessary.</li><li><b>Events</b>, which are part of an ongoing exchange with the same participants and recurring meetings/events, are to be entered in the category <b>cooperation / participation / exchange process</b>. Select the category that suits best. Please don't enter an <b>event</b> twice.</li> <li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-events.php\" target=\"_blank\">Distinguish between events and cooperation / participation / exchange process</a></li></ul>",
+
+  "search.filters.applied.f.synsicrisDateFilled.min": "Start",
+
+  "search.filters.applied.f.synsicrisDateFilled.max": "End",
+
+  "search.filters.filter.synsicrisDateFilled.min.label": "Start",
+
+  "search.filters.filter.synsicrisDateFilled.max.label": "End"
 
 }

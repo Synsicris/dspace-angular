@@ -3628,7 +3628,7 @@
 
   // "form.scrollable-input.search": "Search",
   // TODO New key - Add a translation
-  "form.scrollable-input.search": "Search",
+  "form.scrollable-input.search": "Suche",
 
   // "form.search-help": "Click here to look for an existing correspondence",
   "form.search-help": "Klicken Sie hier, um eine Übereinstimmung zu suchen",
@@ -6241,7 +6241,7 @@
   "mydspace.new-submission-external-short": "Importieren von Metadaten",
 
   // "mydspace.results.head": "Your submissions",
-  "mydspace.results.head": "Ihre Veröffentlichungen",
+  "mydspace.results.head": "Ihre Einträge",
 
   // "mydspace.results.no-abstract": "No Abstract",
   "mydspace.results.no-abstract": "Keine Zusammenfassung",
@@ -8429,7 +8429,7 @@
 
   // "search.filters.applied.f.language": "Language",
   // TODO New key - Add a translation
-  "search.filters.applied.f.language": "Language",
+  "search.filters.applied.f.language": "Sprache",
 
   // "search.filters.applied.f.namedresourcetype": "Status",
   "search.filters.applied.f.namedresourcetype": "Status",
@@ -8721,11 +8721,11 @@
   "search.filters.filter.itemtype.head": "Typ",
 
   // "search.filters.filter.itemtype.placeholder": "Type",
-  "search.filters.filter.itemtype.placeholder": "Kategorie",
+  "search.filters.filter.itemtype.placeholder": "Art",
 
   // "search.filters.filter.itemtype.label": "Search type",
   // TODO New key - Add a translation
-  "search.filters.filter.itemtype.label": "Search type",
+  "search.filters.filter.itemtype.label": "Suche Art",
 
   // "search.filters.filter.investigators.head": "Researcher",
   // TODO New key - Add a translation
@@ -9195,7 +9195,7 @@
 
   // "search.filters.search.submit": "Submit",
   // TODO New key - Add a translation
-  "search.filters.search.submit": "Submit",
+  "search.filters.search.submit": "Los",
 
   // "search.form.search": "Search",
   "search.form.search": "Suche",
@@ -11489,7 +11489,7 @@
   "virtual-metadata.delete-relationship.modal-head": "Wählen Sie die Items aus, deren virtuelle Metadaten Sie als echte Metadaten speichern möchten.",
 
   // "workspace.search.results.head": "Your submissions",
-  "workspace.search.results.head": "Ihre Veröffentlichungen",
+  "workspace.search.results.head": "Ihre Einträge",
 
   // "workflowAdmin.search.results.head": "Administer Workflow",
   "workflowAdmin.search.results.head": "Workflow verwalten",
@@ -11633,7 +11633,7 @@
   "working-plan.breadcrumbs": "Arbeitsplan",
 
   // "working-plan.chart.button.add": "Add",
-  "working-plan.chart.button.add": "Hinzufügen",
+  "working-plan.chart.button.add": "Eintrag hinzufügen",
 
   // "working-plan.chart.column.dates": "Dates",
   "working-plan.chart.column.dates": "Daten",
@@ -11768,7 +11768,7 @@
   "working-plan.chart.column.sortBy.option.dc.date.end": "Enddatum",
 
   // "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class="fas fa-plus-circle"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class="fas fa-plus-circle"></i> button in the work package to assign new or existing work.</p></b></i>",",
-  "working-plan.chart.page.description": "Der Arbeitsplan enthält alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes.</br></br><b><i>Erstellen Sie hier den Arbeitsplan mit Arbeitspaketen und den dazugehörigen Arbeiten sowie Meilensteinen und legen Sie Zeiträume und Verantwortlichkeiten fest.</br>Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> oberhalb des Arbeitsplans fügen Sie neue Arbeitspakete und Meilensteine hinzu. Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> im Arbeitspaket ordnen Sie neue oder vorhandene Arbeiten hinzu.</i></b></br></br><b>Wichtige Hinweise:</b><ul><li><b>Arbeitspakete</b>, die bereits im Wirkungspfad oder anderer Stelle angelegt wurden, werden <b>hier direkt angezeigt</b>.</li><li><b>Meilensteine</b> können auf <b>Ebene von Arbeitspaketen</b> und auf <b>Ebene von Arbeiten</b> angelegt werden.</li><li>Über <i class=\"fas fa-thumbtack\"></i> können <b>Einträge</b> aus dem Arbeitsplan <b>entfernt</b> werden. Diese können über <i class=\"fas fa-plus-circle\"></i> wieder <b>hinzugefügt</b> werden.</li><li>Über <i class=\"fas fa-edit\"></i> wird die <b>Detailseite eines Eintrags</b> aufgerufen.</li><li>Wird <i class=\"fas fa-info-circle\"></i> auf einer Karte angezeigt, gibt es eine Nachricht von Ihren Kolleg:innen auf der Detailseite des Eintrags. Öffnen Sie die Detailseite über <i class=\"fas fa-edit\"></i>.</li></ul><b>Darstellungsmöglichkeiten:</b><ul><li>Mit <i class=\"fas fa-grip-vertical\"></i> können <b>Einträge verschoben</b> und damit individuell angeordnet werden.</li><li>Über <b>Sortiert nach</b> können Einträge unterhalb der Arbeitspakete nach verschiedenen Merkmalen sortiert weden. Die Sortierung lässt sich jederzeit wieder auf die <b>indivduelle Anordnung zurücksetzen</b>.</li><li>Über <b>Monat</b>, <b>Quartal</b> und <b>Jahr</b> kann die Darstellung der Zeitachse angepasst werden.</li></ul>Im <b>Verlauf des Vorhabens</b> ist die Arbeitsplanung regelmäßig zu aktualisieren, z. B. für den Zwischenbericht oder genehmigte Änderungsanträge:<ul><li>Über <b>Status</b> können Veränderungen im Arbeitsplan gekennzeichnet werden, die im Verlauf des Vorhabens eingetreten sind.</li><li>Über <b>Zeitraum verschieben</b> kann das Startdatum für alle Einträge angepasst, wenn der Beginn von der Antragstellung abweicht.</li><li>Über <b>Vergleich mit...</b> läßt sich der aktuelle Stand mit einer Version (z. B. der Antragsversion) vergleichen.</li></ul><b>Tipps:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.php\" target=\"_blank\">Einträge strukturieren - Pinwandprinzip</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-wp-help.php\" target=\"_blank\">Tipps und Beispiel zum Arbeitsplan</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-versioning.php\"target=\"_blank\">Informationen zur Versionierung</a></li></ul>",
+  "working-plan.chart.page.description": "Der Arbeitsplan enthält alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes.</br></br><b><i>Erstellen Sie hier den Arbeitsplan mit Arbeitspaketen und den dazugehörigen Arbeiten sowie Meilensteinen und legen Sie Zeiträume und Verantwortlichkeiten fest.</br>Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> oberhalb des Arbeitsplans fügen Sie neue Arbeitspakete und Meilensteine hinzu. Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> im Arbeitspaket ordnen Sie neue oder vorhandene Arbeiten hinzu.</i></b></br></br><b>Wichtige Hinweise:</b><ul><li><b>Arbeitspakete</b>, die bereits im Wirkungspfad oder anderer Stelle angelegt wurden, werden <b>hier direkt angezeigt</b>.</li><li><b>Meilensteine</b> können auf <b>Ebene von Arbeitspaketen</b> und auf <b>Ebene von Arbeiten</b> angelegt werden.</li><li>Über <i class=\"fas fa-thumbtack\"></i> können <b>Einträge</b> aus dem Arbeitsplan <b>entfernt</b> werden. Diese können über <i class=\"fas fa-plus-circle\"></i> wieder <b>hinzugefügt</b> werden.</li><li>Über <i class=\"fas fa-edit\"></i> wird die <b>Detailseite eines Eintrags</b> aufgerufen.</li><li>Wird <i class=\"fas fa-info-circle\"></i> auf einer Karte angezeigt, gibt es eine Nachricht von Ihren Kolleg:innen auf der Detailseite des Eintrags. Öffnen Sie die Detailseite über <i class=\"fas fa-edit\"></i>.</li></ul><b>Darstellungsmöglichkeiten:</b><ul><li>Mit <i class=\"fas fa-grip-vertical\"></i> können <b>Einträge verschoben</b> und damit individuell angeordnet werden.</li><li>Über <b>Sortiert nach</b> können Einträge unterhalb der Arbeitspakete nach verschiedenen Merkmalen sortiert weden. Die Sortierung lässt sich jederzeit wieder auf die <b>indivduelle Anordnung zurücksetzen</b>.</li><li>Über <b>Monat</b>, <b>Quartal</b> und <b>Jahr</b> kann die Darstellung der Zeitachse angepasst werden.</li></ul>Im <b>Verlauf des Vorhabens</b> ist die Arbeitsplanung regelmäßig zu aktualisieren, z. B. für den Zwischenbericht oder genehmigte Änderungsanträge:<ul><li>Über <b>Status</b> können Veränderungen im Arbeitsplan gekennzeichnet werden, die im Verlauf des Vorhabens eingetreten sind.</li><li>Über <b>Zeitraum verschieben</b> kann das Startdatum für alle Einträge angepasst, wenn der Beginn von der Antragstellung abweicht.</li><li>Über <b>Vergleich mit...</b> läßt sich der aktuelle Stand mit einer Version (z. B. der Antragsversion) vergleichen.</li></ul><b>Tipps:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.php\" target=\"_blank\">Einträge strukturieren - Pinwandprinzip</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-wp-help.php\" target=\"_blank\">Tipps und Beispiel zum Arbeitsplan</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.php\"target=\"_blank\"> Aktualisierung im laufenden Vorhaben</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-versioning.php\"target=\"_blank\">Informationen zur Versionierung</a></li></ul>",
 
   // "submission.sections.submit.progressbar.working_plan_form.info": "missing",
   "submission.sections.submit.progressbar.working_plan_form.info": "<b><i> Legen Sie ein neues Arbeitspaket oder einen neuen Meilenstein an.</i></br><b>Kategorien:</b><ul><li><b>Arbeitspakete</b> dienen der Gliederung von Aufgaben im Arbeitsplan. Auf der Detailseite können im Verlauf des Vorhabens für Berichte auch Änderungen erläutert werden.</li><li><b>Meilensteine</b> sind überprüfbare Zeitpunkte im Verlauf des Vorhabens, die in Verbindung zu Arbeiten oder Entscheidungen stehen.</li></ul>",
@@ -15776,13 +15776,13 @@
   "search.filters.filter.synsicrisParticipantnumber.label": "Suche Anzahl Teilnehmende",
 
   // "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Start date",
-  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Startdatum",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Datum",
 
   // "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Start date",
-  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Startdatum",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Datum",
 
   // "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Search Start date",
-  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Suche Startdatum",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Suche Datum",
 
   // "search.filters.filter.synsicrisOairecerifEventCounty.head": "Country",
   "search.filters.filter.synsicrisOairecerifEventCounty.head": "Land",
@@ -16485,52 +16485,52 @@
   "search.filters.filter.synsicrisTypeStatus.label": "Suche Status",
 
   // "search.filters.filter.synsicrisDateFilled.head": "Year of filling",
-  "search.filters.filter.synsicrisDateFilled.head": "Jahr der Anmeldung",
+  "search.filters.filter.synsicrisDateFilled.head": "Jahr",
 
   // "search.filters.filter.synsicrisDateFilled.placeholder": "Year of filling",
-  "search.filters.filter.synsicrisDateFilled.placeholder": "Jahr der Anmeldung",
+  "search.filters.filter.synsicrisDateFilled.placeholder": "Jahr",
 
   // "search.filters.filter.synsicrisDateFilled.label": "Search Year of filling",
-  "search.filters.filter.synsicrisDateFilled.label": "Suche Jahr der Anmeldung",
+  "search.filters.filter.synsicrisDateFilled.label": "Suche Jahr",
 
   // "submission.import-external.help-message": "Help Import",
   "submission.import-external.help-message": "Hilfe Import",
 
   // "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Exchange",
   // TODO New key - Add a translation
-  "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Exchange",
+  "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Nachricht (intern)",
 
   // "questions-board.exploitation-plan.metadata-internal.icon.title.status.done": "Done",
   // TODO New key - Add a translation
-  "questions-board.exploitation-plan.metadata-internal.icon.title.status.done": "Done",
+  "questions-board.exploitation-plan.metadata-internal.icon.title.status.done": "Erledigt",
 
   // "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Exchange",
   // TODO New key - Add a translation
-  "questions-board.interim-report.metadata-internal.icon.title.status.exchange": "Exchange",
+  "questions-board.interim-report.metadata-internal.icon.title.status.exchange": "Nachricht (intern)",
 
   // "questions-board.interim-report.metadata-internal.icon.title.status.done": "Done",
   // TODO New key - Add a translation
-  "questions-board.interim-report.metadata-internal.icon.title.status.done": "Done",
+  "questions-board.interim-report.metadata-internal.icon.title.status.done": "Erledigt",
 
   // "questions-board.exploitation-plan.metadata-status.icon.title.status.new": "New",
   // TODO New key - Add a translation
-  "questions-board.exploitation-plan.metadata-status.icon.title.status.new": "New",
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.new": "Neu",
 
   // "questions-board.exploitation-plan.metadata-status.icon.title.status.changed": "Changed",
   // TODO New key - Add a translation
-  "questions-board.exploitation-plan.metadata-status.icon.title.status.changed": "Changed",
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.changed": "Geändert",
 
   // "questions-board.exploitation-plan.metadata-status.icon.title.status.done": "Done",
   // TODO New key - Add a translation
-  "questions-board.exploitation-plan.metadata-status.icon.title.status.done": "Done",
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.done": "Erledigt",
 
   // "questions-board.exploitation-plan.metadata-status.icon.title.status.canceled": "Canceled",
   // TODO New key - Add a translation
-  "questions-board.exploitation-plan.metadata-status.icon.title.status.canceled": "Canceled",
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.canceled": "Gestrichen",
 
   // "questions-board.exploitation-plan.metadata-status.icon.title.status.archieved": "Archieved",
   // TODO New key - Add a translation
-  "questions-board.exploitation-plan.metadata-status.icon.title.status.archieved": "Archieved",
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.archieved": "Erreicht",
 
   // "questions-board.exploitation-plan.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
   // TODO New key - Add a translation
@@ -16570,63 +16570,63 @@
 
   // "impact-pathway.metadata-internal.icon.title.status.exchange": "Exchange",
   // TODO New key - Add a translation
-  "impact-pathway.metadata-internal.icon.title.status.exchange": "Exchange",
+  "impact-pathway.metadata-internal.icon.title.status.exchange": "Nachricht (intern)",
 
   // "impact-pathway.metadata-status.icon.title.status.new": "New",
   // TODO New key - Add a translation
-  "impact-pathway.metadata-status.icon.title.status.new": "New",
+  "impact-pathway.metadata-status.icon.title.status.new": "Neu",
 
   // "impact-pathway.metadata-status.icon.title.status.changed": "Changed",
   // TODO New key - Add a translation
-  "impact-pathway.metadata-status.icon.title.status.changed": "Changed",
+  "impact-pathway.metadata-status.icon.title.status.changed": "Geändert",
 
   // "impact-pathway.metadata-status.icon.title.status.done": "Done",
   // TODO New key - Add a translation
-  "impact-pathway.metadata-status.icon.title.status.done": "Done",
+  "impact-pathway.metadata-status.icon.title.status.done": "Erledigt",
 
   // "impact-pathway.metadata-status.icon.title.status.canceled": "Canceled",
   // TODO New key - Add a translation
-  "impact-pathway.metadata-status.icon.title.status.canceled": "Canceled",
+  "impact-pathway.metadata-status.icon.title.status.canceled": "Gestrichen",
 
   // "impact-pathway.metadata-status.icon.title.status.archieved": "Archieved",
   // TODO New key - Add a translation
-  "impact-pathway.metadata-status.icon.title.status.archieved": "Archieved",
+  "impact-pathway.metadata-status.icon.title.status.archieved": "Erreicht",
 
   // "impact-pathway.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
   // TODO New key - Add a translation
-  "impact-pathway.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+  "impact-pathway.metadata-status.icon.title.status.partly-archieved": "Teilweise erreicht",
 
   // "working-plan.item.metadata-internal.icon.title.status.done": "Done",
   // TODO New key - Add a translation
-  "working-plan.item.metadata-internal.icon.title.status.done": "Done",
+  "working-plan.item.metadata-internal.icon.title.status.done": "Erledigt",
 
   // "working-plan.item.metadata-internal.icon.title.status.exchange": "Exchange",
   // TODO New key - Add a translation
-  "working-plan.item.metadata-internal.icon.title.status.exchange": "Exchange",
+  "working-plan.item.metadata-internal.icon.title.status.exchange": "Nachricht (intern)",
 
   // "working-plan.metadata-status.icon.title.status.new": "New",
   // TODO New key - Add a translation
-  "working-plan.metadata-status.icon.title.status.new": "New",
+  "working-plan.metadata-status.icon.title.status.new": "Neu",
 
   // "working-plan.metadata-status.icon.title.status.changed": "Changed",
   // TODO New key - Add a translation
-  "working-plan.metadata-status.icon.title.status.changed": "Changed",
+  "working-plan.metadata-status.icon.title.status.changed": "Geändert",
 
   // "working-plan.metadata-status.icon.title.status.done": "Done",
   // TODO New key - Add a translation
-  "working-plan.metadata-status.icon.title.status.done": "Done",
+  "working-plan.metadata-status.icon.title.status.done": "Erledigt",
 
   // "working-plan.metadata-status.icon.title.status.canceled": "Canceled",
   // TODO New key - Add a translation
-  "working-plan.metadata-status.icon.title.status.canceled": "Canceled",
+  "working-plan.metadata-status.icon.title.status.canceled": "Gestrichen",
 
   // "working-plan.metadata-status.icon.title.status.archieved": "Archieved",
   // TODO New key - Add a translation
-  "working-plan.metadata-status.icon.title.status.archieved": "Archieved",
+  "working-plan.metadata-status.icon.title.status.archieved": "Erreicht",
 
   // "working-plan.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
   // TODO New key - Add a translation
-  "working-plan.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+  "working-plan.metadata-status.icon.title.status.partly-archieved": "Teilweise erreicht",
 
   // "layout.tab.header.milestone": "Milestones",
   "layout.tab.header.milestone": "Meilensteine",
@@ -16935,10 +16935,10 @@
   "search.filters.applied.charts.graph-proc-event-dc_type.tab": "Art der Kooperation / Partizipation / Austauschprozess",
 
   // "search.filters.filter.synsicrisTypeIntensity.head": "Intensity/duration of cooperation",
-  "search.filters.filter.synsicrisTypeIntensity.head": "Intensität/Dauer der Zusammenarbeit",
+  "search.filters.filter.synsicrisTypeIntensity.head": "Wirkungsintensität",
 
   // "search.filters.filter.synsicrisTypeIntensity.label": "Search Intensity/duration of cooperation",
-  "search.filters.filter.synsicrisTypeIntensity.label": "Sucje Intensität/Dauer der Zusammenarbeit",
+  "search.filters.filter.synsicrisTypeIntensity.label": "Suche Wirkungsintensität",
 
   // "search.filters.filter.synsicrisDcSubject.head": "Keyword",
   "search.filters.filter.synsicrisDcSubject.head": "Schlagwort",
@@ -16950,6 +16950,18 @@
   "search.filters.filter.filter-synsicris_type_visiblity.head": "öffentliche Sichtbarkeit",
 
   // "search.filters.filter.filter-synsicris_type_visiblity.label": "Search Public visibility",
-  "search.filters.filter.filter-synsicris_type_visiblity.label": "Suche öffentliche Sichtbarkeit"
+  "search.filters.filter.filter-synsicris_type_visiblity.label": "Suche öffentliche Sichtbarkeit",
+
+  // "search.filters.applied.f.synsicrisDateFilled.min": "Start",
+  "search.filters.applied.f.synsicrisDateFilled.min": "Start",
+
+  // "search.filters.applied.f.synsicrisDateFilled.max": "End",
+  "search.filters.applied.f.synsicrisDateFilled.max": "Ende",
+
+  // "search.filters.filter.synsicrisDateFilled.min.label": "Start",
+  "search.filters.filter.synsicrisDateFilled.min.label": "Start",
+
+  // "search.filters.filter.synsicrisDateFilled.max.label": "End",
+  "search.filters.filter.synsicrisDateFilled.max.label": "Ende"
 
 }
