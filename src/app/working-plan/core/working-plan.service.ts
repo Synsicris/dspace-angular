@@ -70,6 +70,8 @@ import { ComparedVersionItem, ProjectVersionService } from '../../core/project/p
 import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
 import { SearchManager } from '../../core/browse/search-manager';
 import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
+import { FindListOptions } from '../../core/data/find-list-options.model';
+import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
 export const moment = extendMoment(Moment);
 
@@ -110,9 +112,44 @@ export class WorkingPlanService {
     private searchService: SearchService,
     private workingPlanStateService: WorkingPlanStateService,
     private searchManager: SearchManager,
+    private collectionDataService: CollectionDataService,
     @Inject(APP_CONFIG) public appConfig: AppConfig
   ) {
     this.searchService.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
+  }
+
+  public canCreateWorkingPlan(projectCommunityId: string): Observable<boolean> {
+    const findListOptions = Object.assign({}, new FindListOptions(), {
+      elementsPerPage: 1,
+      currentPage: 1,
+    });
+    return forkJoin([
+      this.canCreateWorkpackage(projectCommunityId),
+      this.canCreateMilestone(projectCommunityId)
+    ]).pipe(
+      map(([canAddWp, canAddMilestones]) => canAddWp && canAddMilestones)
+    );
+  }
+
+  public canCreateWorkpackage(projectCommunityId: string): Observable<boolean> {
+    return this.canCreateEntity(projectCommunityId, environment.workingPlan.workpackageEntityName);
+  }
+
+  public canCreateMilestone(projectCommunityId: string): Observable<boolean> {
+    return this.canCreateEntity(projectCommunityId, environment.workingPlan.milestoneEntityName);
+  }
+
+  private canCreateEntity(projectCommunityId: string, entityType: string) {
+    const findListOptions = Object.assign({}, new FindListOptions(), {
+      elementsPerPage: 1,
+      currentPage: 1,
+    });
+    return this.collectionDataService.getAuthorizedCollectionByCommunityAndEntityType(projectCommunityId, entityType, findListOptions)
+      .pipe(
+        getRemoteDataPayload(),
+        map(response => response?.totalElements === 1),
+        take(1)
+      );
   }
 
   generateWorkpackageItem(projectId: string, type: string, metadata: MetadataMap, place: string): Observable<Item> {

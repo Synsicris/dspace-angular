@@ -12,8 +12,8 @@ Complete impact pathway Task-Card
   <!-- left column with grip-icon -->
   <div class="task-left-bar">
     <button class="btn btn-xs btn-link p-0 text-primary align-self-start" title="Drag & Drop"
-            [class.button-move]="!isVersionOfAnItem"
-            [disabled]="isVersionOfAnItem || compareMode">
+            [class.button-move]="!isVersionOfAnItem && (canEdit() | async)"
+            [disabled]="isVersionOfAnItem || compareMode || !(canEdit() | async)">
       <i class="fas fa-grip-vertical"></i>
     </button>
   </div>
@@ -71,7 +71,7 @@ Complete impact pathway Task-Card
         <button *ngIf="(canShowRelationButton(true) | async) && showArrows"
                 class="btn btn-lg btn-link p-0 flex-shrink-1"
                 title="{{'impact-pathway.create.bidirectional-link' | translate}}"
-                [disabled]="(canHideRelationButtons(true) | async) || compareMode || isVersionOfAnItem"
+                [disabled]="(canHideRelationButtons(true) | async) || compareMode || isVersionOfAnItem || !(canEdit() | async)"
                 (click)="setEditRelations(true); $event.stopPropagation()">
           <span class="span-icon-container">
             <i class="fas fa-light fa-arrows-alt-h"></i>
@@ -82,7 +82,7 @@ Complete impact pathway Task-Card
         <button *ngIf="(canShowRelationButton(false) | async) && showArrows"
                 class="btn btn-lg btn-link p-0 flex-shrink-1"
                 title="{{'impact-pathway.create.outcome-link' | translate}}"
-                [disabled]="(canHideRelationButtons(false) | async) || compareMode || isVersionOfAnItem"
+                [disabled]="(canHideRelationButtons(false) | async) || compareMode || isVersionOfAnItem || !(canEdit() | async)"
                 (click)="setEditRelations(false); $event.stopPropagation()">
           <span class="span-icon-container">
             <i class="fas fa-long-arrow-alt-right"></i>
@@ -96,7 +96,7 @@ Complete impact pathway Task-Card
           <button *ngIf="(isEditingRelationOnTask(true) | async)"
                   class="btn btn-secondary py-0 px-2 flex-shrink-1 ml-auto flex-grow-1" style="width:100%;"
                   title="{{'impact-pathway.save.link.title' | translate}}"
-                  [disabled]="(canHideRelationButtons(true) | async) || compareMode || isVersionOfAnItem"
+                  [disabled]="(canHideRelationButtons(true) | async) || compareMode || isVersionOfAnItem || !(canEdit() | async)"
                   (click)="saveRelations(); $event.stopPropagation()">
           <span class="span-icon-container">
             <i class='far fa-save'></i>&nbsp;{{'impact-pathway.checkbox.savebutton' | translate}}
@@ -133,7 +133,7 @@ Complete impact pathway Task-Card
         <!-- unpin -->
         <button *ngIf="data.hasParent()" class="btn btn-lg btn-link p-0 text-danger"
                 title="{{'impact-pathway.remove.item.title' | translate}}"
-                [disabled]="(isEditingRelation() | async) || compareMode || isVersionOfAnItem"
+                [disabled]="(isEditingRelation() | async) || compareMode || isVersionOfAnItem || !(canEdit() | async)"
                 (click)="removeTask(); $event.stopPropagation()">
           <span *ngIf="!(isProcessingRemove() | async)" class="span-icon-container">
             <i class="fas fa-thumbtack"></i>

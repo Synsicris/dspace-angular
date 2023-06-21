@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@a
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import { isEqual } from 'lodash';
 
 import { Item } from '../core/shared/item.model';
 import { Community } from '../core/shared/community.model';
@@ -30,6 +29,11 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    * If the current user is a funder project manager
    */
   @Input() isFunderProject: boolean;
+
+  /**
+   * If the current user is project reader
+   */
+  @Input() isProjectReader: boolean;
 
   /**
    * The prefix to use for the i18n keys

@@ -210,6 +210,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   ComparedVersionItemStatus = ComparedVersionItemStatus;
 
+  canAdd$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   private chartStatusTypeList$: BehaviorSubject<VocabularyEntry[]> = new BehaviorSubject<VocabularyEntry[]>([]);
   private subs: Subscription[] = [];
 
@@ -287,7 +289,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         });
       }
     });
-
+    this.workingPlanService.canCreateWorkpackage(this.projectCommunityId)
+      .pipe(take(1))
+      .subscribe(canAdd => this.canAdd$.next(canAdd));
     this.sortOptions$ = this.workingPlanService.getWorkpackageSortOptions();
   }
 
