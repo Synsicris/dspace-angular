@@ -726,6 +726,10 @@ export class DefaultAppConfig implements AppConfig {
     projectsEntityEditMode: 'CUSTOM',
     projectsEntityFunderEditMode: 'FUNDER_EDIT',
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
+    projectEditGrantsForm: 'edit_grants',
+    projectEditGrantsMetadata: 'cris.project.shared',
+    projectEditGrantsAdminMode: 'ADMIN_EDIT_GRANTS',
+    projectEditGrantsMode: 'EDIT_GRANTS',
     excludeComparisonMetadata: [
       'cris.policy.group', 'cris.project.shared', 'dc.date.accessioned', 'dc.date.available', 'dspace.entity.type',
       'synsicris.funder-policy.group', 'synsicris.coordinator-policy.group', 'synsicris.member-policy.group',
