@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import {
@@ -60,6 +60,7 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
    */
   @Input() public compareMode: Observable<boolean>;
 
+  canAdd$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   workpackagesCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   currentComparingWorkingPlan: BehaviorSubject<VersionItemSelectedIds> = new BehaviorSubject<VersionItemSelectedIds>(null);
   chartDateView: Observable<ChartDateViewType>;
@@ -97,7 +98,11 @@ export class WorkingPlanChartToolbarComponent implements OnInit, OnDestroy {
         });
       })
     );
-
+    this.workingPlanService.canCreateWorkingPlan(this.projectCommunityId)
+      .pipe(
+        take(1)
+      )
+      .subscribe(canAdd => this.canAdd$.next(canAdd));
   }
 
   createWorkpackage() {

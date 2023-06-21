@@ -30,7 +30,7 @@
       </ul>
     </nav>
     <button class="btn btn-link btn-lg p-0 m-0 h3 text-decoration-none text-left" role="button"
-            [disabled]="isVersionOf"
+            [disabled]="!(canAddButton$ | async) || isVersionOf"
             (click)="createImpactPathway()">
       <i class="fas fa-plus-circle"></i>
       <span class="text-dark"> {{'project-overview.page.content.new-impact-pathway' | translate}}</span>

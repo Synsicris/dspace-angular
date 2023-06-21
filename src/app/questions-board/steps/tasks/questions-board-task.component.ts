@@ -55,6 +55,11 @@ export class QuestionsBoardTaskComponent implements OnInit {
   @Input() isVersionOf: boolean;
 
   /**
+   * If the user is a project reader
+   */
+  @Input() isProjectReader: boolean;
+
+  /**
    * A boolean representing if compare mode is active
    */
   @Input() compareMode = false;

@@ -37,6 +37,11 @@ export class ProjectManageVersionComponent implements OnInit {
    */
   public isFounderManagerOrReaderOfProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
 
+  /**
+   * A boolean representing if user is reader of the current project
+   */
+  public isProjectReader$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+
   constructor(
     protected authorizationService: ProjectAuthorizationService,
     protected router: ActivatedRoute) {
@@ -62,12 +67,17 @@ export class ProjectManageVersionComponent implements OnInit {
       switchMap((item: Item) => this.authorizationService.isFunderReaderOfProgramme(item))
     );
 
-    combineLatest([item$, isCoordinator$, isFunderOfProject$, isFunderManagerOfProject$, isFunderReaderOfProject$])
-      .subscribe(([item, isCoordinator, isFunderOfProject, isFunderManagerOfProject, isFunderReaderOfProject]) => {
+    const isProjectReader$ = item$.pipe(
+      switchMap((item: Item) => this.authorizationService.isProjectReader(item))
+    );
+
+    combineLatest([item$, isCoordinator$, isFunderOfProject$, isFunderManagerOfProject$, isFunderReaderOfProject$, isProjectReader$])
+      .subscribe(([item, isCoordinator, isFunderOfProject, isFunderManagerOfProject, isFunderReaderOfProject, isProjectReader]) => {
         this.item$.next(item);
         this.isCoordinatorOfProject$.next(isCoordinator);
         this.isFounderOfProject$.next(isFunderOfProject);
         this.isFounderManagerOrReaderOfProject$.next(isFunderManagerOfProject || isFunderReaderOfProject);
+        this.isProjectReader$.next(isProjectReader);
       });
   }
 

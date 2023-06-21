@@ -89,7 +89,8 @@ import { ErrorResponse } from '../../core/cache/response.models';
 import {
   getFinishedRemoteData,
   getFirstSucceededRemoteDataPayload,
-  getFirstSucceededRemoteListPayload
+  getFirstSucceededRemoteListPayload,
+  getRemoteDataPayload
 } from '../../core/shared/operators';
 import { ItemAuthorityRelationService } from '../../core/shared/item-authority-relation.service';
 import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
@@ -106,6 +107,7 @@ import { SearchService } from '../../core/shared/search/search.service';
 import { NoContent } from '../../core/shared/NoContent.model';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
+import { FindListOptions } from '../../core/data/find-list-options.model';
 
 @Injectable()
 export class ImpactPathwayService {
@@ -128,6 +130,7 @@ export class ImpactPathwayService {
     private searchService: SearchService,
     private submissionService: SubmissionService,
     private projectVersionService: ProjectVersionService,
+    private collectionDataService: CollectionDataService,
     private store: Store<AppState>
   ) {
   }
@@ -1037,6 +1040,17 @@ export class ImpactPathwayService {
     return this.createImpactPathwayStepWorkspaceItem(projectId, impactPathwayId, impactPathwayName, impactPathwayStepType, impactPathwayStepName).pipe(
       mergeMap((submission: SubmissionObject) => this.depositWorkspaceItem(submission)),
       getFirstSucceededRemoteDataPayload()
+    );
+  }
+
+  public canCreateImpactPathwayItem(projectCommunityId: string): Observable<boolean> {
+    const findListOptions = Object.assign({}, new FindListOptions(), {
+      elementsPerPage: 1,
+      currentPage: 1,
+    });
+    return this.collectionDataService.getAuthorizedCollectionByCommunityAndEntityType(projectCommunityId, environment.impactPathway.impactPathwayEntity, findListOptions).pipe(
+      getRemoteDataPayload(),
+      map((collections: PaginatedList<Collection>) => collections?.totalElements === 1)
     );
   }
 

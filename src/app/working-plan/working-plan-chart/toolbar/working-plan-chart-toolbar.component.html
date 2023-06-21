@@ -3,7 +3,7 @@
     <span>
       <button class="btn btn-link text-decoration-none"
               title="{{'working-plan.chart.toolbar.add-btn' | translate}}"
-              [disabled]="(compareMode | async) || isVersionOf"
+              [disabled]="!(canAdd$ | async) || (compareMode | async) || isVersionOf"
               (click)="createWorkpackage()">
         <i class="fas fa-plus-circle fa-2x"></i>
       </button>

@@ -28,12 +28,14 @@
                            [fundingCommunity]="fundingCommunity"
                            [compareMode]="(compareMode | async)"
                            [isFunderProject]="isFunderProject"
+                           [isProjectReader]="isProjectReader"
                            [isVersionOfAnItem]="(isVersionOfAnItem$ | async)">
   </ds-questions-board-step>
   <ng-container *ngIf="showUploadStep">
     <ds-questions-upload-step [questionsBoardObject]="questionsBoardObject"
                               [messagePrefix]="messagePrefix"
-                              [hasAnyFunderRole]="hasAnyFunderRole">
+                              [hasAnyFunderRole]="hasAnyFunderRole"
+                              [isProjectReader]="isProjectReader">
     </ds-questions-upload-step>
   </ng-container>
 </div>
