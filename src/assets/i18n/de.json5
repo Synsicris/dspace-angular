@@ -3277,7 +3277,7 @@
 
   // "explore.index.itemtype": "Item Type",
   // TODO New key - Add a translation
-  "explore.index.itemtype": "Item Type",
+  "explore.index.itemtype": "Art",
 
   // "explore.index.types": "Types",
   // TODO New key - Add a translation
@@ -8633,7 +8633,7 @@
   "search.filters.filter.creativeWorkPublisher.label": "Search publisher",
 
   // "search.filters.filter.dateIssued.head": "Date",
-  "search.filters.filter.dateIssued.head": "Datum",
+  "search.filters.filter.dateIssued.head": "Datum der Veröffentlichung",
 
   // "search.filters.filter.dateIssued.max.placeholder": "Maximum Date",
   // TODO Source message changed - Revise the translation
@@ -13787,7 +13787,7 @@
   "layout.field.label.Product.dc.title": "Titel",
 
   // "layout.field.label.Product.dc.type": "Type",
-  "layout.field.label.Product.dc.type": "Typ",
+  "layout.field.label.Product.dc.type": "Art",
 
   // "layout.field.label.Product.dc.identifier": "Identifier",
   "layout.field.label.Product.dc.identifier": "Identifier",
@@ -15776,13 +15776,13 @@
   "search.filters.filter.synsicrisParticipantnumber.label": "Suche Anzahl Teilnehmende",
 
   // "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Start date",
-  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Datum",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Startdatum",
 
   // "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Start date",
-  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Datum",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Startdatum",
 
   // "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Search Start date",
-  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Suche Datum",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Suche Startdatum",
 
   // "search.filters.filter.synsicrisOairecerifEventCounty.head": "Country",
   "search.filters.filter.synsicrisOairecerifEventCounty.head": "Land",
@@ -16119,13 +16119,13 @@
   "search.filters.filter.synsicrisTypeEvidence.label": "Suche Art des Nachweises",
 
   // "search.filters.filter.synsicrisType.head": "Access Type",
-  "search.filters.filter.synsicrisType.head": "Zugänglichkeit",
+  "search.filters.filter.synsicrisType.head": "Art",
 
   // "search.filters.filter.synsicrisType.placeholder": "Access Type",
-  "search.filters.filter.synsicrisType.placeholder": "Zugänglichkeit",
+  "search.filters.filter.synsicrisType.placeholder": "Art",
 
   // "search.filters.filter.synsicrisType.label": "Search Access Type",
-  "search.filters.filter.synsicrisType.label": "Suche Zugänglichkeit",
+  "search.filters.filter.synsicrisType.label": "Suche Art",
 
   // "search.filters.filter.synsicrisRelationFundingobjective.head": "Funding Objective",
   "search.filters.filter.synsicrisRelationFundingobjective.head": "Förderziel",
@@ -16962,6 +16962,18 @@
   "search.filters.filter.synsicrisDateFilled.min.label": "Start",
 
   // "search.filters.filter.synsicrisDateFilled.max.label": "End",
-  "search.filters.filter.synsicrisDateFilled.max.label": "Ende"
+  "search.filters.filter.synsicrisDateFilled.max.label": "Ende",
+
+  // "search.filters.filter.synsicrisCoverageRegional.head": "Regional localisation/outreach",
+  "search.filters.filter.synsicrisCoverageRegional.head": "Region der Anwendung",
+
+  // "search.filters.filter.synsicrisCoverageRegional.label": "Search Regional localisation/outreach",
+  "search.filters.filter.synsicrisCoverageRegional.label": "Suche Region der Anwendung",
+
+  // "search.filters.filter.dctermsDateaccepted.min.label": "Start",
+  "search.filters.filter.dctermsDateaccepted.min.label": "Start",
+
+  // "search.filters.filter.dctermsDateaccepted.max.label": "End",
+  "search.filters.filter.dctermsDateaccepted.max.label": "Ende"
 
 }

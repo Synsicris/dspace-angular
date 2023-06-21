@@ -5754,15 +5754,15 @@
 
   "search.filters.filter.synsicrisDateReferenceyear.head": "Reference Year",
 
-  "search.filters.filter.synsicrisCoverageRegional.head": "Coverage Regional",
+  "search.filters.filter.synsicrisCoverageRegional.head": "Regional localisation/outreach",
 
-  "search.filters.filter.synsicrisType.head": "Access Type",
+  "search.filters.filter.synsicrisType.head": "Type",
 
   "search.filters.filter.synsicrisDateReferenceyear.label": "Search Reference Year",
 
-  "search.filters.filter.synsicrisCoverageRegional.label": "Search Coverage Regional",
+  "search.filters.filter.synsicrisCoverageRegional.label": "Search Regional localisation/outreach",
 
-  "search.filters.filter.synsicrisType.label": "Search Access Type",
+  "search.filters.filter.synsicrisType.label": "Search Type",
 
   "search.filters.filter.synsicrisRelationFundingobjective.head": "Funding Objective",
 
@@ -5806,7 +5806,7 @@
 
   "search.filters.filter.creativeWorkPublisher.label": "Search publisher",
 
-  "search.filters.filter.dateIssued.head": "Date",
+  "search.filters.filter.dateIssued.head": "Date issued",
 
   "search.filters.filter.dateIssued.max.placeholder": "Maximum Date",
 
@@ -10414,7 +10414,7 @@
 
   "explore.index.synsicrisTypePurpose": "Purpose",
 
-  "explore.index.synsicrisrelationtargetgroup": "Targetgroup",
+  "explore.index.synsicrisrelationtargetgroup": "Stakeholder group",
 
   "explore.index.synsicrisTypeContribution": "Type of participation of the consortium",
 
@@ -10446,7 +10446,7 @@
 
   "explore.index.synsicrisTypeTransform": "Area of transition",
 
-  "explore.index.synsicrisTypeInfluence": "Identification of  influence",
+  "explore.index.synsicrisTypeInfluence": "Identification of influence",
 
   "explore.index.synsicrisTypeIntensity": "Intensity of impact",
 
@@ -10894,11 +10894,11 @@
 
   "search.filters.filter.synsicrisParticipantnumber.label": "Suche Number of participants",
 
-  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Date",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Start date",
 
-  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Date",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Start date",
 
-  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Search Date",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Search Start date",
 
   "search.filters.filter.synsicrisOairecerifEventCounty.head": "Country",
 
@@ -11078,7 +11078,7 @@
 
   "search.filters.filter.synsicrisTypeEvidence.placeholder": "Evidence Type",
 
-  "search.filters.filter.synsicrisType.placeholder": "Access Type",
+  "search.filters.filter.synsicrisType.placeholder": "Type",
 
   "search.filters.filter.synsicrisRelationFundingobjective.placeholder": "Funding Objective",
 
@@ -11348,6 +11348,10 @@
 
   "search.filters.filter.synsicrisDateFilled.min.label": "Start",
 
-  "search.filters.filter.synsicrisDateFilled.max.label": "End"
+  "search.filters.filter.synsicrisDateFilled.max.label": "End",
+
+  "search.filters.filter.dctermsDateaccepted.min.label": "Start",
+
+  "search.filters.filter.dctermsDateaccepted.max.label": "End"
 
 }
