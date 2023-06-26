@@ -4618,9 +4618,9 @@
 
   "process.new.notification.process.files": "Output Files",
 
-  "process.new.notification.process.see-results": "See the results",
+  "process.new.notification.process.see-results": "To version history",
 
-  "process.new.notification.process.create-version": "Create Version",
+  "process.new.notification.process.create-version": "Creating version has failed",
 
   "process.new.notification.process.create-failed": "Creating version has failed",
 
@@ -7648,15 +7648,15 @@
 
   "submission.workflow.generic.edit-help": "Select this option to change the item's metadata.",
 
-  "submission.workflow.generic.edit-grants": "Edit permissions",
+  "submission.workflow.generic.edit-grants": "Edit permission",
 
   "submission.workflow.generic.edit-grants-help": "Select this option to change the item's editable options.",
 
   "submission.workflow.generic.edit-grants.error": "There was an issue when chancing the item permissions, please try again later.",
 
-  "submission.workflow.generic.edit-grants.head": "Change item edit permissions",
+  "submission.workflow.generic.edit-grants.head": "Change edit permission",
 
-  "submission.workflow.generic.edit-grants.label": "Please select editable permissions",
+  "submission.workflow.generic.edit-grants.label": "Please select editable permission",
 
   "submission.workflow.generic.edit-grants.success": "Operations successful",
 
@@ -9632,9 +9632,9 @@
 
   "query-builder.synsicris.accordion.step2.header": "Step 2",
 
-  "query-builder.synsicris.accordion.step1.alert": "Help",
+  "query-builder.synsicris.accordion.step1.alert": "Help step 1",
 
-  "query-builder.synsicris.accordion.step2.alert": "Help",
+  "query-builder.synsicris.accordion.step2.alert": "Help step 2",
 
   "query-builder.synsicris.label.entityType.Person": "Person",
 
